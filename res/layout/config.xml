@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#e5e5e5"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical" >
+        
+    <LinearLayout
+        android:id="@+id/layoutDatadir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+        <TextView
+            android:id="@+id/viewDatadir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data dir" />
+
+        <EditText
+            android:id="@+id/textDatadir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutSavedir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/viewSavedir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save dir" />
+
+        <EditText
+            android:id="@+id/textSavedir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutLocale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/viewLocale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Locale" />
+
+        <Spinner
+            android:id="@+id/spinnerLocale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:entries="@array/locales"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/viewSound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable Sound" />
+
+        <ToggleButton
+            android:id="@+id/toggleSound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sound" />
+    </LinearLayout>
+
+        <LinearLayout
+        android:id="@+id/layoutAutosave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+        <TextView
+            android:id="@+id/viewAutosave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable Autosave when quiting" />
+
+        <ToggleButton
+            android:id="@+id/toggleAutosave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Autosave" />
+    </LinearLayout>
+    
+        <LinearLayout
+        android:id="@+id/layoutStartblank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+        <TextView
+            android:id="@+id/viewStartblank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable Startblank when starting" />
+
+        <ToggleButton
+            android:id="@+id/toggleStartblank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Startblank" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/layoutSaveover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/viewSaveover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save Approach" />
+        
+		<RadioGroup
+			android:id="@+id/groupSaveover"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content" 
+        	android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/radioAsk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Ask" />
+
+        <RadioButton
+            android:id="@+id/radioYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Replace" />
+
+        <RadioButton
+            android:id="@+id/radioNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New" />
+    	</RadioGroup>
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>

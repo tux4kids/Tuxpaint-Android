@@ -1,0 +1,1312 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-18 08:32-0700\n"
+"PO-Revision-Date: 2011-10-07 15:05+0530\n"
+"Last-Translator: Hidam Dolen <dolenhi@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Response to Black (0, 0, 0) color selected
+#: ../colors.h:86
+msgid "Black!"
+msgstr "অমুবা!"
+
+#. Response to Dark grey (128, 128, 128) color selected
+#: ../colors.h:89
+msgid "Dark grey! Some people spell it “dark gray”."
+msgstr "Dark grey! মী খরদি মসি “dark gray” হায়না বানান ই."
+
+#. Response to Light grey (192, 192, 192) color selected
+#: ../colors.h:92
+msgid "Light grey! Some people spell it “light gray”."
+msgstr "Light grey! মী খরদি মসি “light gray” হায়না বানান ই."
+
+#. Response to White (255, 255, 255) color selected
+#: ../colors.h:95
+msgid "White!"
+msgstr "অঙৌবা!"
+
+#. Response to Red (255, 0, 0) color selected
+#: ../colors.h:98
+msgid "Red!"
+msgstr "অঙাংবা!"
+
+#. Response to Orange (255, 128, 0) color selected
+#: ../colors.h:101
+msgid "Orange!"
+msgstr "কোমলা মচু!"
+
+#. Response to Yellow (255, 255, 0) color selected
+#: ../colors.h:104
+msgid "Yellow!"
+msgstr "হঙ্গাম্পাল মচু!"
+
+#. Response to Light green (160, 228, 128) color selected
+#: ../colors.h:107
+msgid "Light green!"
+msgstr "শংবান্নবা!"
+
+#. Response to Dark green (33, 148, 70) color selected
+#: ../colors.h:110
+msgid "Dark green!"
+msgstr "শংত্রিক শংবা!"
+
+#. Response to "Sky" blue (138, 168, 205) color selected
+#: ../colors.h:113
+msgid "Sky blue!"
+msgstr "অতিয়া মচু!"
+
+#. Response to Blue (50, 100, 255) color selected
+#: ../colors.h:116
+msgid "Blue!"
+msgstr "হিগোক!"
+
+#. Response to Lavender (186, 157, 255) color selected
+#: ../colors.h:119
+msgid "Lavender!"
+msgstr "লেভন্দর!"
+
+#. Response to Purple (128, 0, 128) color selected
+#: ../colors.h:122
+msgid "Purple!"
+msgstr "মংগ্রা মচু!"
+
+#. Response to Pink (255, 165, 211) color selected
+#: ../colors.h:125
+msgid "Pink!"
+msgstr "লৈ মচু!"
+
+#. Response to Brown (128, 80, 0) color selected
+#: ../colors.h:128
+msgid "Brown!"
+msgstr "অৱাওবা মচু!"
+
+#. Response to Tan (226, 189, 166) color selected
+#: ../colors.h:131
+msgid "Tan!"
+msgstr "অৱাওবা নাপু মচু!"
+
+#. Response to Beige (247, 228, 219) color selected
+#: ../colors.h:134
+msgid "Beige!"
+msgstr "ৱাওরপ তৌবা মচু!"
+
+#. First, the blacklist. We list font families that can crash Tux Paint
+#. via bugs in the SDL_ttf library. We also test fonts to be sure that
+#. they have both uppercase and lowercase letters. Note that we do not
+#. test for "Aa", because it is OK if uppercase and lowercase are the
+#. same (but not nice -- such fonts get a low score later).
+#.
+#. Most locales leave the blacklist strings alone: "QX" and "qx"
+#. (it is less destructive to use the scoring strings instead)
+#.
+#. Locales that absolutely require all fonts to have some
+#. extra characters should use "QX..." and "qx...", where "..."
+#. are some characters you absolutely require in all fonts.
+#.
+#. Locales with absolutely NO use for ASCII may use "..." and "...",
+#. where "..." are some characters you absolutely require in
+#. all fonts. This would be the case for a locale in which it is
+#. impossible for a user to type ASCII letters.
+#.
+#. Most translators should use scoring instead.
+#: ../dirwalk.c:164
+msgid "qx"
+msgstr "qx"
+
+#: ../dirwalk.c:164
+msgid "QX"
+msgstr "QX"
+
+#. TODO: weight specification
+#. Now we score fonts to ensure that the best ones will be placed at
+#. the top of the list. The user will see them first. This sorting is
+#. especially important for users who have scroll buttons disabled.
+#. Translators should do whatever is needed to put crummy fonts last.
+#. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
+#: ../dirwalk.c:191
+msgid "oO"
+msgstr "oO"
+
+#. common punctuation (e.g., '?', '!', '.', ',', etc.)
+#: ../dirwalk.c:194
+msgid ",.?!"
+msgstr ",.?!"
+
+#. uncommon punctuation (e.g., '@', '#', '*', etc.)
+#: ../dirwalk.c:197
+msgid "`\\%_@$~#{<(^&*"
+msgstr "`\\%_@$~#{<(^&*"
+
+#. digits (e.g., '0', '1' and '7')
+#: ../dirwalk.c:200
+msgid "017"
+msgstr "017"
+
+#. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
+#: ../dirwalk.c:203
+msgid "O0"
+msgstr "O0"
+
+#. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
+#: ../dirwalk.c:206
+msgid "1Il|"
+msgstr "1Il|"
+
+#: ../dirwalk.c:210
+msgid "<1>spare-1a"
+msgstr "<1>spare-1a"
+
+#: ../dirwalk.c:211
+msgid "<1>spare-1b"
+msgstr "<1>spare-1b"
+
+#: ../dirwalk.c:212
+msgid "<9>spare-9a"
+msgstr "<9>spare-9a"
+
+#: ../dirwalk.c:213
+msgid "<9>spare-9b"
+msgstr "<9>spare-9b"
+
+#. Congratulations #1
+#: ../great.h:37
+msgid "Great!"
+msgstr "অফাওবনি!"
+
+#. Congratulations #2
+#: ../great.h:40
+msgid "Cool!"
+msgstr "ইং ইং লাওই!"
+
+#. Congratulations #3
+#: ../great.h:43
+msgid "Keep it up!"
+msgstr "ফগৎহল্লু!"
+
+#. Congratulations #4
+#: ../great.h:46
+msgid "Good job!"
+msgstr "অফবা থবক্নি!"
+
+#. Input Method: English mode
+#: ../im.c:75
+msgid "English"
+msgstr "ইংলিশ"
+
+#. Input Method: Japanese Romanized Hiragana mode
+#: ../im.c:78
+msgid "Hiragana"
+msgstr "হিরাগানা"
+
+#. Input Method: Japanese Romanized Katakana mode
+#: ../im.c:81
+msgid "Katakana"
+msgstr "কাতাকানা"
+
+#. Input Method: Korean Hangul 2-Bul mode
+#: ../im.c:84
+msgid "Hangul"
+msgstr "হেঙ্গুল"
+
+#. Input Method: Thai mode
+#: ../im.c:87
+msgid "Thai"
+msgstr "থাই"
+
+#. Input Method: Traditional Chinese mode
+#: ../im.c:90
+msgid "ZH_TW"
+msgstr "ZH_TW"
+
+#. Square shape tool (4 equally-lengthed sides at right angles)
+#: ../shapes.h:171
+#: ../shapes.h:172
+msgid "Square"
+msgstr "স্কায়র"
+
+#. Rectangle shape tool (4 sides at right angles)
+#: ../shapes.h:175
+#: ../shapes.h:176
+msgid "Rectangle"
+msgstr "রেক্তেঙ্গল"
+
+#. Circle shape tool (X radius and Y radius are the same)
+#: ../shapes.h:179
+#: ../shapes.h:180
+msgid "Circle"
+msgstr "সার্কল"
+
+#. Ellipse shape tool (X radius and Y radius may differ)
+#: ../shapes.h:183
+#: ../shapes.h:184
+msgid "Ellipse"
+msgstr "ইলিপ্স"
+
+#. Triangle shape tool (3 sides)
+#: ../shapes.h:187
+#: ../shapes.h:188
+msgid "Triangle"
+msgstr "ত্রাইঙ্গল"
+
+#. Pentagone shape tool (5 sides)
+#: ../shapes.h:191
+#: ../shapes.h:192
+msgid "Pentagon"
+msgstr "পেন্তাগোন"
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:195
+#: ../shapes.h:196
+msgid "Rhombus"
+msgstr "রোম্বস"
+
+#. Octagon shape tool (8 sides)
+#: ../shapes.h:199
+#: ../shapes.h:200
+msgid "Octagon"
+msgstr "ওক্তাগোন"
+
+#. Description of a square
+#: ../shapes.h:208
+#: ../shapes.h:209
+msgid "A square is a rectangle with four equal sides."
+msgstr "স্কায়র অমসি মায়কৈ মরিমক শাংবা মান্নবা রেক্তেঙ্গল অমনি."
+
+#. Description of a rectangle
+#: ../shapes.h:212
+#: ../shapes.h:213
+msgid "A rectangle has four sides and four right angles."
+msgstr "রেক্তেঙ্গল অমগী মায়কৈ মরি অমসুং রাইত এঙ্গল মরি লৈ."
+
+#: ../shapes.h:217
+#: ../shapes.h:219
+msgid "A circle is a curve where all points have the same distance from the center."
+msgstr "সার্কল অমসি অকোনবা অমনি মফম অসিগী পোইন্ত খুদিংমক ময়াইদগী লাপ্পা চপ মান্নৈ."
+
+#. Description of an ellipse
+#: ../shapes.h:222
+#: ../shapes.h:223
+msgid "An ellipse is a stretched circle."
+msgstr "ইলিপ্স অসি মায়কৈ অনীদা শাংদোকপা সার্কলনি."
+
+#. Description of a triangle
+#: ../shapes.h:226
+#: ../shapes.h:227
+msgid "A triangle has three sides."
+msgstr "ত্রাইএঙ্গল অমগী মায়কৈ অহুম লৈ."
+
+#. Description of a pentagon
+#: ../shapes.h:230
+#: ../shapes.h:231
+msgid "A pentagon has five sides."
+msgstr "পেন্তাগোন অমগী মায়কৈ মঙা লৈ."
+
+#: ../shapes.h:235
+#: ../shapes.h:237
+msgid "A rhombus has four equal sides, and opposite sides are parallel."
+msgstr "রোম্বস অমগী শাংবা মান্নবা মায়কৈ মরি লৈ অমসুং মায়োক্নবা মায়কৈশিং পেরেলেল ওই."
+
+#: ../shapes.h:241
+#: ../shapes.h:243
+msgid "An octagon has eight equal sides."
+msgstr "ওক্তাগোন অমগী শাংবা মান্নবা মায়কৈ নিপাল লৈ."
+
+#. Title of tool selector (buttons down the left)
+#: ../titles.h:56
+msgid "Tools"
+msgstr "তুলস"
+
+#. Title of color palette (buttons across the bottom)
+#: ../titles.h:59
+msgid "Colors"
+msgstr "মচুশিং"
+
+#. Title of brush selector (buttons down the right for paint and line tools)
+#: ../titles.h:62
+msgid "Brushes"
+msgstr "ব্রশশিং"
+
+#. Title of eraser selector (buttons down the right for eraser tool)
+#: ../titles.h:65
+msgid "Erasers"
+msgstr "ইরেজরস"
+
+#. Title of stamp selector (buttons down the right for stamps tool)
+#: ../titles.h:68
+msgid "Stamps"
+msgstr "স্তাম্পস"
+
+#. Title of shape selector (buttons down the right for shapes tool)
+#. Shape creation tool (square, circle, etc.)
+#: ../titles.h:71
+#: ../tools.h:71
+msgid "Shapes"
+msgstr "মওং ‍(শেপ)"
+
+#. Title of font selector (buttons down the right for text and label tools)
+#: ../titles.h:74
+msgid "Letters"
+msgstr "ময়েক"
+
+#. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
+#. "Magic" effects tools (blur, flip image, etc.)
+#: ../titles.h:77
+#: ../tools.h:83
+msgid "Magic"
+msgstr "মেজিক"
+
+#. Freehand painting tool
+#: ../tools.h:62
+msgid "Paint"
+msgstr "পেইন্ত"
+
+#. Stamp tool (aka Rubber Stamps)
+#: ../tools.h:65
+msgid "Stamp"
+msgstr "স্তাম্প"
+
+#. Line drawing tool
+#: ../tools.h:68
+msgid "Lines"
+msgstr "লাইনশিং"
+
+#. Text tool
+#: ../tools.h:74
+msgid "Text"
+msgstr "তেক্স"
+
+#. Label tool
+#: ../tools.h:77
+msgid "Label"
+msgstr "লেবেল"
+
+#. Undo last action
+#: ../tools.h:86
+msgid "Undo"
+msgstr "তৌখিবদু তোকও (অনদু তৌরো)"
+
+#. Redo undone action
+#: ../tools.h:89
+msgid "Redo"
+msgstr "অমুক হন্না তৌরো"
+
+#. Eraser tool
+#: ../tools.h:92
+msgid "Eraser"
+msgstr "ইরেজর"
+
+#. Start a new picture
+#: ../tools.h:95
+msgid "New"
+msgstr "অনৌবা"
+
+#. Open a saved picture
+#. buttons for the file open dialog
+#. Open dialog: 'Open' button, to load the selected picture
+#: ../tools.h:98
+#: ../tuxpaint.c:7762
+msgid "Open"
+msgstr "হাংদোকপা"
+
+#. Save the current picture
+#: ../tools.h:101
+msgid "Save"
+msgstr "সেভ তৌবা"
+
+#. Print the current picture
+#: ../tools.h:104
+msgid "Print"
+msgstr "নমথোকউ"
+
+#. Quit/exit Tux Paint application
+#: ../tools.h:107
+msgid "Quit"
+msgstr "থাদোকউ"
+
+#. Paint tool instructions
+#: ../tools.h:115
+msgid "Pick a color and a brush shape to draw with."
+msgstr "য়েক্ননবা মচু অমসুং ব্রশ শেপ অমা খল্লো."
+
+#. Stamp tool instructions
+#: ../tools.h:118
+msgid "Pick a picture to stamp around your drawing."
+msgstr "অদোমগী দ্রোইংদা লাই অমা স্তাম্প তৌনবা খল্লো."
+
+#. Line tool instructions
+#: ../tools.h:121
+msgid "Click to start drawing a line. Let go to complete it."
+msgstr "লৈই অমা চিংবা হৌনবা ক্লিক তৌরো. মসি মপুং ফাহল্লু."
+
+#. Shape tool instructions
+#: ../tools.h:124
+msgid "Pick a shape. Click to pick the center, drag, then let go when it is the size you want. Move around to rotate it, and click to draw it."
+msgstr "শেপ অমা খল্লো. ময়াইদু খন্নবা ক্লিক তৌরো, চিংঙো অদুগা অদোম্না পাম্বা মচাও-মরাক অদু ওইবা মতমদা থবক তৌহল্লো. মসি কোয়না লৈনবা চৎলো, অদুগা মসি য়েক্নবা ক্লিক তৌরো."
+
+#. Text tool instructions
+#: ../tools.h:127
+msgid "Choose a style of text. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text."
+msgstr "তেক্সকী স্তাইল অমা খল্লো. অদোমগী দ্রোইংদা ক্লিক তৌরো অদুগা তাইপ তৌবা হৌবা য়ারগনি. তেক্স অসি মপুং ফানবা [Enter] নত্রগা [Tab] নম্মো."
+
+#. Label tool instructions
+#: ../tools.h:130
+msgid "Choose a style of text. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text. By using the selector button and clicking an exist label, you can move it, edit it and change its text style."
+msgstr "তেক্সকী স্তাইল অমা খল্লো. অদোমগী দ্রোইংদা ক্লিক তৌরো অদুগা তাইপ তৌবা হৌবা য়ারগনি. তেক্স অসি মপুং ফানবা [Enter] নত্রগা [Tab] নম্মো. সেলেক্তর বতন শিজিন্নদুনা অমসুং লৈরিবা লেবেলদা ক্লিক তৌদুনা মসি মফম হোংদোকপা, শেমদোকপা অমসুং মসিগী তেক্স স্তাইল হোংদোকপা য়াগনি."
+
+#. Magic tool instruction
+#: ../tools.h:136
+msgid "Pick a magical effect to use on your drawing!"
+msgstr "অদোমগী দ্রোইংদা মেজিকেল ওইবা মহৈ অমা শিজিন্ননবা খল্লো."
+
+#. Response to 'undo' action
+#: ../tools.h:139
+msgid "Undo!"
+msgstr "তৌখিবদু তোকও (অনদু তৌরো)!"
+
+#. Response to 'redo' action
+#: ../tools.h:142
+msgid "Redo!"
+msgstr "অমুক হন্না তৌরো!"
+
+#. Eraser tool
+#: ../tools.h:145
+msgid "Eraser!"
+msgstr "ইরেজর!"
+
+#. Response to 'start a new image' action
+#: ../tools.h:148
+msgid "Pick a color or picture with which to start a new drawing."
+msgstr "অনৌবা দ্রোইং অমা হৌনবা মচু নত্রগা লাই অমা খল্লো."
+
+#. Response to 'open' action (while file dialog is being constructed)
+#: ../tools.h:151
+msgid "Open…"
+msgstr "হাংদোকই..."
+
+#. Response to 'save' action
+#: ../tools.h:154
+msgid "Your image has been saved!"
+msgstr "অদোমগী ইমেজ সেভ তৌরে!"
+
+#. Response to 'print' action (while printing, or print dialog is being used)
+#: ../tools.h:157
+msgid "Printing…"
+msgstr "নমথোক্লি..."
+
+#. Response to 'quit' (exit) action
+#: ../tools.h:160
+msgid "Bye bye!"
+msgstr "কাইনরসি!"
+
+#. Instruction while using Line tool (after click, before release)
+#: ../tools.h:164
+msgid "Let go of the button to complete the line."
+msgstr "লৈই অসি মপুং ফানবা বতন অসি থবক পাংথোকহল্লো."
+
+#. Instruction while using Shape tool (after first click, before release)
+#: ../tools.h:167
+msgid "Hold the button to stretch the shape."
+msgstr "মওং ‍(শেপ) অসি তিংথোক্নবা বতন অসি নমদুনা থম্মো."
+
+#. Instruction while finishing Shape tool (after release, during rotation step before second click)
+#: ../tools.h:170
+msgid "Move the mouse to rotate the shape. Click to draw it."
+msgstr "মওং ‍(শেপ) অসি কোয়না লৈনবা মাউস অসি লেংঙো."
+
+#. Notification that 'New' action was aborted (current image would have been lost)
+#: ../tools.h:173
+msgid "OK then… Let’s keep drawing this one!"
+msgstr "মদু য়ারে... অদুগা মসি য়েকখিসি!"
+
+#. Prompt to confirm user wishes to quit
+#: ../tuxpaint.c:1918
+msgid "Do you really want to quit?"
+msgstr "অদোম তশেংনা থাদোকপা পামলব্রা?"
+
+#. Quit prompt positive response (quit)
+#: ../tuxpaint.c:1921
+msgid "Yes, I’m done!"
+msgstr "হোয়, ঐ তৌরে!"
+
+#. Quit prompt negative response (don't quit)
+#: ../tuxpaint.c:1924
+#: ../tuxpaint.c:1951
+msgid "No, take me back!"
+msgstr "নত্তে, ঐবু হান্নগী মফমদা পুবীরো!"
+
+#. Current picture is not saved; user is quitting
+#: ../tuxpaint.c:1928
+msgid "If you quit, you’ll lose your picture! Save it?"
+msgstr "অদোম্না থাদোক্লবদি, অদোমগী লাই মাংখ্রগনি! মসি সেভ তৌগদ্রা?"
+
+#: ../tuxpaint.c:1929
+#: ../tuxpaint.c:1934
+msgid "Yes, save it!"
+msgstr "হোয়, মসি সেভ তৌরো!"
+
+#: ../tuxpaint.c:1930
+#: ../tuxpaint.c:1935
+msgid "No, don’t bother saving!"
+msgstr "নত্তে, সেভ তৌবগীদমক করিসু খল্লুনু!"
+
+#. Current picture is not saved; user is opening another picture
+#: ../tuxpaint.c:1933
+msgid "Save your picture first?"
+msgstr "অদোমগী লাইদু হান্না সেভ তৌগদ্রা?"
+
+#. Error opening picture
+#: ../tuxpaint.c:1938
+msgid "Can’t open that picture!"
+msgstr "লাই অদু হাংদোকপা ঙমদে!"
+
+#. Generic dialog dismissal
+#: ../tuxpaint.c:1941
+#: ../tuxpaint.c:1946
+#: ../tuxpaint.c:1955
+#: ../tuxpaint.c:1962
+#: ../tuxpaint.c:1971
+msgid "OK"
+msgstr "য়ারে"
+
+#. Notification that 'Open' dialog has nothing to show
+#: ../tuxpaint.c:1945
+msgid "There are no saved files!"
+msgstr "সেভ তৌবা ফাইল অমত্তা লৈতে!"
+
+#. Verification of print action
+#: ../tuxpaint.c:1949
+msgid "Print your picture now?"
+msgstr "অদোমগী লাই হৌজিক নমথোক্কদ্রা?"
+
+#: ../tuxpaint.c:1950
+msgid "Yes, print it!"
+msgstr "হোয়, মসি নমথোকউ!"
+
+#. Confirmation of successful (we hope) printing
+#: ../tuxpaint.c:1954
+msgid "Your picture has been printed!"
+msgstr "অদোমগী লাইদু নমথোক্লে!"
+
+#. We got an error printing
+#: ../tuxpaint.c:1958
+msgid "Sorry! Your picture could not be printed!"
+msgstr "ঙাকপিগনি! অদোমগী লাই অদু নমথোকপা য়াররোই!"
+
+#. Notification that it's too soon to print again (--printdelay option is in effect)
+#: ../tuxpaint.c:1961
+msgid "You can’t print yet!"
+msgstr "অদোম্না হৌজিকসু নমথোকপা য়ারোই!"
+
+#. Prompt to confirm erasing a picture in the Open dialog
+#: ../tuxpaint.c:1965
+msgid "Erase this picture?"
+msgstr "লাই অসি মুত্থৎকদ্রা?"
+
+#: ../tuxpaint.c:1966
+msgid "Yes, erase it!"
+msgstr "হোয়, মসি মুত্থৎপিরো!"
+
+#: ../tuxpaint.c:1967
+msgid "No, don’t erase it!"
+msgstr "নত্তে, মসি মুত্থৎপিগনু!"
+
+#. Reminder that Mouse Button 1 is the button to use in Tux Paint
+#: ../tuxpaint.c:1970
+msgid "Remember to use the left mouse button!"
+msgstr "ওইথংবা মাউসকী বতন শিজিন্নবা নিংশিংনবিয়ু!"
+
+#. Sound has been muted (silenced) via keyboard shortcut
+#: ../tuxpaint.c:2567
+msgid "Sound muted."
+msgstr "খোনজেল থোক্ত্রে."
+
+#. Sound has been unmuted (unsilenced) via keyboard shortcut
+#: ../tuxpaint.c:2572
+msgid "Sound unmuted."
+msgstr "খোনজেল থোকএ."
+
+#. Wait while Text tool finishes loading fonts
+#: ../tuxpaint.c:3355
+msgid "Please wait…"
+msgstr "ঙাইহাক্তং ঙাইবিয়ু..."
+
+#. Open dialog: 'Erase' button, to erase/deleted the selected picture
+#: ../tuxpaint.c:7765
+msgid "Erase"
+msgstr "মুত্থৎলো"
+
+#. Open dialog: 'Slides' button, to switch to slide show mode
+#: ../tuxpaint.c:7768
+msgid "Slides"
+msgstr "স্লাইদশিং"
+
+#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
+#: ../tuxpaint.c:7771
+msgid "Back"
+msgstr "মতুং"
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7774
+msgid "Next"
+msgstr "মথং"
+
+#. Slideshow: 'Play' button, to begin a slideshow sequence
+#: ../tuxpaint.c:7777
+msgid "Play"
+msgstr "প্লে"
+
+#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
+#: ../tuxpaint.c:8485
+msgid "Aa"
+msgstr "Aa"
+
+#. Admittedly stupid way of determining which keys can be used for
+#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
+#: ../tuxpaint.c:11730
+msgid "Yes"
+msgstr "হোয়"
+
+#: ../tuxpaint.c:11734
+msgid "No"
+msgstr "নত্তে"
+
+#. Prompt to ask whether user wishes to save over old version of their file
+#: ../tuxpaint.c:12730
+msgid "Replace the picture with your changes?"
+msgstr "লাই অদু অদোমগী অহোংবা অদুনা মহুৎ শিন্দোক্কদ্রা?"
+
+#. Positive response to saving over old version
+#. (like a 'File:Save' action in other applications)
+#: ../tuxpaint.c:12734
+msgid "Yes, replace the old one!"
+msgstr "হোয়, অরিবা অদু মহুৎ শিন্দোকউ!"
+
+#. Negative response to saving over old version (saves a new image)
+#. (like a 'File:Save As...' action in other applications)
+#: ../tuxpaint.c:12738
+msgid "No, save a new file!"
+msgstr "নত্তে, অনৌবা ফাইল অমা সেভ তৌরো!"
+
+#: ../tuxpaint.c:13963
+msgid "Choose the picture you want, then click “Open”."
+msgstr "অদোম্না পাম্বা লাই অদু খল্লো, অদুগা “হাংদোকপা” ক্লিক তৌরো."
+
+#. Let user choose images:
+#. Instructions for Slideshow file dialog (FIXME: Make a #define)
+#: ../tuxpaint.c:14976
+#: ../tuxpaint.c:15290
+msgid "Choose the pictures you want, then click “Play”."
+msgstr "অদোম্না পাম্বা লাইদু খল্লো, অদুগা “প্লে” ক্লিক তৌরো."
+
+#: ../tuxpaint.c:21524
+msgid "Pick a color."
+msgstr "মচু অমা খল্লো."
+
+#: ../tuxpaint.desktop.in.h:1
+msgid "A drawing program for children."
+msgstr "অঙাংগী দ্রোইং প্রোগ্রাম অমা."
+
+#: ../tuxpaint.desktop.in.h:2
+msgid "Drawing program"
+msgstr "দ্রোইং প্রোগ্রাম"
+
+#: ../tuxpaint.desktop.in.h:3
+msgid "Tux Paint"
+msgstr "তক্স পেইন্ত"
+
+#: ../../magic/src/alien.c:64
+msgid "Color Shift"
+msgstr "মচু হোংদোকপা"
+
+#: ../../magic/src/alien.c:67
+msgid "Click and move the mouse to change the colors in parts of your picture."
+msgstr "অদোমগী লাইগী শরুক্তা মচু ওন্থোক্নবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/alien.c:68
+msgid "Click to change the colors in your entire picture."
+msgstr "অদোমগী লাই অপুম্বগী মচু হোংদোক্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/blind.c:92
+msgid "Blind"
+msgstr "ব্লাইন্দ"
+
+#: ../../magic/src/blind.c:97
+msgid "Click towards the edge of your picture to pull window blinds over it. Move perpendicularly to open or close the blinds."
+msgstr "ৱিন্দো মসিদা ব্লাইন্দ ওইনবা অদোমগী লাইগী মপান্দা ক্লিক তৌরো. ব্লাইন্দ অসি হাংদোক্নবা অমসুং খুমজিন্নবা পার্পেন্দিকুলার ওইনা  লেংঙো."
+
+#: ../../magic/src/blocks_chalk_drip.c:132
+msgid "Blocks"
+msgstr "ব্লোকস"
+
+#: ../../magic/src/blocks_chalk_drip.c:134
+msgid "Chalk"
+msgstr "চোক"
+
+#: ../../magic/src/blocks_chalk_drip.c:136
+msgid "Drip"
+msgstr "দ্রিপ"
+
+#: ../../magic/src/blocks_chalk_drip.c:146
+msgid "Click and move the mouse around to make the picture blocky."
+msgstr "লাই অদু ব্লোক মওংদা শেম্নবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#: ../../magic/src/blocks_chalk_drip.c:149
+msgid "Click and move the mouse around to turn the picture into a chalk drawing."
+msgstr "লাই অদু চোক দ্রোইং অমদা ওন্থোক্নবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#: ../../magic/src/blocks_chalk_drip.c:152
+msgid "Click and move the mouse around to make the picture drip."
+msgstr "পিকচর দ্রিপ ওইহন্নবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#: ../../magic/src/blur.c:57
+msgid "Blur"
+msgstr "ময়েক শেংদবা"
+
+#: ../../magic/src/blur.c:60
+msgid "Click and move the mouse around to blur the image."
+msgstr "ইমেজ অদু ময়েক শেংহন্দনবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#: ../../magic/src/blur.c:61
+msgid "Click to blur the entire image."
+msgstr "অপুনবা ইমেজ অদু ময়েক শেংহন্দনবা ক্লিক তৌরো."
+
+#. Both are named "Bricks", at the moment:
+#: ../../magic/src/bricks.c:104
+msgid "Bricks"
+msgstr "ব্রিকশিং"
+
+#: ../../magic/src/bricks.c:111
+msgid "Click and move to draw large bricks."
+msgstr "অচৌবা ব্রিকশিং য়েক্নবা ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/bricks.c:113
+msgid "Click and move to draw small bricks."
+msgstr "অপিকপা ব্রিকশিং য়েক্নবা ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/calligraphy.c:108
+msgid "Calligraphy"
+msgstr "কেলিগ্রাফি"
+
+#: ../../magic/src/calligraphy.c:115
+msgid "Click and move the mouse around to draw in calligraphy."
+msgstr "কেলিগ্রাফি ওইনা য়েক্নবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#: ../../magic/src/cartoon.c:80
+msgid "Cartoon"
+msgstr "কারতুন"
+
+#: ../../magic/src/cartoon.c:87
+msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgstr "লাই অদু কার্তুন অমা ওন্থোক্নবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#: ../../magic/src/confetti.c:63
+msgid "Confetti"
+msgstr "কনফেতি"
+
+#: ../../magic/src/confetti.c:65
+msgid "Click to throw confetti!"
+msgstr "কনফেতি চাইথনবা ক্লিক তৌরো!"
+
+#: ../../magic/src/distortion.c:121
+msgid "Distortion"
+msgstr "ফিবম কায়বা"
+
+#: ../../magic/src/distortion.c:129
+msgid "Click and drag the mouse to cause distortion in your picture."
+msgstr "অদোমগী লাইদু ফিবম কায়বা ওইহন্নবা মাউস ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/emboss.c:76
+msgid "Emboss"
+msgstr "এম্বোস"
+
+#: ../../magic/src/emboss.c:82
+msgid "Click and drag the mouse to emboss the picture."
+msgstr "লাই অদু এম্বোস তৌনবা মাউস ক্লিক তৌরো অদুগা চিংঙো."
+
+#: ../../magic/src/fade_darken.c:119
+msgid "Lighten"
+msgstr "ঙান্থোকহল্লো"
+
+#: ../../magic/src/fade_darken.c:121
+msgid "Darken"
+msgstr "মমশিলহল্লো"
+
+#: ../../magic/src/fade_darken.c:132
+msgid "Click and move the mouse to lighten parts of your picture."
+msgstr "অদোমগী লাইগী শরুক অদু ঙান্থোকহন্নবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/fade_darken.c:134
+msgid "Click to lighten your entire picture."
+msgstr "অদোমগী লাই অপুম্বদু ঙান্থোকহন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/fade_darken.c:139
+msgid "Click and move the mouse to darken parts of your picture."
+msgstr "অদোমগী লাইগী শরুক অদু মমশিনহন্নবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/fade_darken.c:141
+msgid "Click to darken your entire picture."
+msgstr "অদোমগী লাই অপুম্বদু মমশিলহন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/fill.c:87
+msgid "Fill"
+msgstr "মেনশিল্লো"
+
+#: ../../magic/src/fill.c:94
+msgid "Click in the picture to fill that area with color."
+msgstr "মফম অদু মচু অমনা মেনশিন্নবা লাই অদুদা ক্লিক তৌরো."
+
+#: ../../magic/src/fisheye.c:78
+msgid "Fisheye"
+msgstr "ফিশআই"
+
+#. Needs better name
+#: ../../magic/src/fisheye.c:80
+msgid "Click on part of your picture to create a fisheye effect."
+msgstr "ফিশআইগী মওং ওইহন্নবা অদোমগী লাই অদুগী শরুক্তা ক্লিক তৌরো."
+
+#: ../../magic/src/flower.c:124
+msgid "Flower"
+msgstr "লৈ"
+
+#: ../../magic/src/flower.c:130
+msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
+msgstr "লৈখোক অমা য়েক্নবা ক্লিক তৌরো অদুগা চিংঙো. লৈ অদু য়েকপা লোইশিলহল্লো."
+
+#: ../../magic/src/foam.c:104
+msgid "Foam"
+msgstr "কোঙ্গোল"
+
+#: ../../magic/src/foam.c:110
+msgid "Click and drag the mouse to cover an area with foamy bubbles."
+msgstr "মফম অদু কোঙ্গোলশিংনা কুপশিন্নবা মাউস ক্লিক তৌরো অদুগা চিংঙো."
+
+#: ../../magic/src/fold.c:84
+msgid "Fold"
+msgstr "ফোল্দ"
+
+#: ../../magic/src/fold.c:86
+msgid "Choose a background color and click to turn the corner of the page over."
+msgstr "বেকগ্রাউন্দ মচু খল্লো অমসুং লামায়গী চুথেক্কী মচিনদু ওন্থোক্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/glasstile.c:83
+msgid "Glass Tile"
+msgstr "গ্লাস তাইল"
+
+#: ../../magic/src/glasstile.c:90
+msgid "Click and drag the mouse to put glass tile over your picture."
+msgstr "অদোমগী লাইদা গ্লাস তাইল হাপচিন্নবা মাউস ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/glasstile.c:92
+msgid "Click to cover your entire picture in glass tiles."
+msgstr "অদোমগী লাই পুম্বা গ্লাস তাইলনা কুপশিন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/grass.c:92
+msgid "Grass"
+msgstr "নাপী"
+
+#: ../../magic/src/grass.c:98
+msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgstr "নাপী য়েক্নবা ক্লিক তৌরো অদুগা চৎলো. অমোৎপা অদু কাউগনু!"
+
+#: ../../magic/src/kalidescope.c:90
+msgid "Symmetric Left/Right"
+msgstr "সিমেত্রিক ওই/য়েৎ"
+
+#: ../../magic/src/kalidescope.c:92
+msgid "Symmetric Up/Down"
+msgstr "সিমেত্রিক মথক/মখা"
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:94
+msgid "Kaleidoscope"
+msgstr "কেলাইদোস্কোপ"
+
+#: ../../magic/src/kalidescope.c:102
+msgid "Click and drag the mouse to draw with two brushes that are symmetric across the left and right of your picture."
+msgstr "অদোমগী লাইদা ওই অমসুং য়েৎতা সিমেত্রিক ওইবা ব্রশ অনীনা য়েক্নবা মাউস ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/kalidescope.c:104
+msgid "Click and drag the mouse to draw with two brushes that are symmetric across the top and bottom of your picture."
+msgstr "অদোমগী লাইদা মথক অমসুং মখাদা সিমেত্রিক ওইবা ব্রশ অনীনা য়েক্নবা মাউস ক্লিক তৌরো অমসুং চিংঙো."
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:106
+msgid "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgstr "সিমেত্রিক ব্রশেস (কেলাইদোস্কোপ অমা) য়েক্নবা মাউস ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/light.c:84
+msgid "Light"
+msgstr "মঙাল"
+
+#: ../../magic/src/light.c:90
+msgid "Click and drag to draw a beam of light on your picture."
+msgstr "অদোমগী লাইদা মঙালগী মশেক য়েক্নবা ক্লিক তৌরো অদুগা চিংঙো."
+
+#: ../../magic/src/metalpaint.c:77
+msgid "Metal Paint"
+msgstr "মেতেল পেইন্ত"
+
+#: ../../magic/src/metalpaint.c:83
+msgid "Click and drag the mouse to paint with a metallic color."
+msgstr "মেতালিক মচুনা য়েকশিন্নবা মাউস ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/mirror_flip.c:94
+msgid "Mirror"
+msgstr "মিরর"
+
+#: ../../magic/src/mirror_flip.c:96
+msgid "Flip"
+msgstr "ফ্লিপ"
+
+#: ../../magic/src/mirror_flip.c:106
+msgid "Click to make a mirror image."
+msgstr "মিরর ইমেজ অমা শেম্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/mirror_flip.c:109
+msgid "Click to flip the picture upside-down."
+msgstr "লাই অদু মথক-মখা ওন্থোক্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/mosaic.c:75
+msgid "Mosaic"
+msgstr "মোজেক"
+
+#: ../../magic/src/mosaic.c:78
+msgid "Click and move the mouse to add a mosaic effect to parts of your picture."
+msgstr "অদোমগী লাইগী শরুক্তা মোজেক্কী মওং হাপচিন্নবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/mosaic.c:79
+msgid "Click to add a mosaic effect to your entire picture."
+msgstr "অদোমগী লাই অপুম্বদা মোজেক্কী মওং হাপচিন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/mosaic_shaped.c:134
+msgid "Square Mosaic"
+msgstr "স্কায়র মোজেক"
+
+#: ../../magic/src/mosaic_shaped.c:135
+msgid "Hexagon Mosaic"
+msgstr "হেক্সাগোন মোজেক"
+
+#: ../../magic/src/mosaic_shaped.c:136
+msgid "Irregular Mosaic"
+msgstr "মওং নাইদবা মোজেক"
+
+#: ../../magic/src/mosaic_shaped.c:141
+msgid "Click and move the mouse to add a square mosaic to parts of your picture."
+msgstr "অদোমগী লাইগী শরুক্তা স্কায়র মোজেক্কী মওং হাপচিন্নবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/mosaic_shaped.c:142
+msgid "Click to add a square mosaic to your entire picture."
+msgstr "অদোমগী লাই অপুম্বদা স্কায়র মোজেক হাপচিন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/mosaic_shaped.c:144
+msgid "Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+msgstr "অদোমগী লাইগী শরুক্তা হেক্সাগোনেল মোজেক হাপচিন্নবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/mosaic_shaped.c:145
+msgid "Click to add a hexagonal mosaic to your entire picture."
+msgstr "অদোমগী লাই অপুম্বদু হেক্সাগোনেল মোজেক হাপচিন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/mosaic_shaped.c:147
+msgid "Click and move the mouse to add an irregular mosaic to parts of your picture."
+msgstr "অদোমগী লাইগী শরুক্তা মওং নাইদবা মোজেক অমা হাপচিন্নবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/mosaic_shaped.c:148
+msgid "Click to add an irregular mosaic to your entire picture."
+msgstr "অদোমগী লাই অপুম্বদু মওং নাইদবা মোজেক অমা হাপচিন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/negative.c:72
+msgid "Negative"
+msgstr "নেগেতিভ"
+
+#: ../../magic/src/negative.c:80
+msgid "Click and move the mouse around to make your painting negative."
+msgstr "অদোমগী পেইন্তিং নেগেতিভ ওইনা শেম্নবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#: ../../magic/src/negative.c:83
+msgid "Click to turn your painting into its negative."
+msgstr "অদোমগী পেইন্তিং অসি নেগেতিভ ওন্থোক্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/noise.c:63
+msgid "Noise"
+msgstr "অরাংবা খোনজেল "
+
+#: ../../magic/src/noise.c:66
+msgid "Click and move the mouse to add noise to parts of your picture."
+msgstr "অদোমগী লাইগী শরুক্তা খোনজেল হাপচিন্নবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/noise.c:67
+msgid "Click to add noise to your entire picture."
+msgstr "অদোমগী লাই অপুম্বদা অরাংবা খোনজেল হাপচিন্নবা ক্লিক তৌরো"
+
+#: ../../magic/src/perspective.c:145
+msgid "Perspective"
+msgstr "পর্সপেক্তিভ"
+
+#: ../../magic/src/perspective.c:146
+msgid "Zoom"
+msgstr "জুম"
+
+#: ../../magic/src/perspective.c:151
+msgid "Click on the corners and drag where you want to stretch the picture."
+msgstr "চুথেক্তা ক্লিক তৌরো অদুগা অদোম্না লাই অদু শাংদোকপা পাম্বা মফমদা চিংঙো."
+
+#: ../../magic/src/perspective.c:154
+msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr "লাই অদু জুম ইন তৌনবা ক্লিক তৌরো অদুগা চিংখৎলো নত্রগা জুম আউত তৌনবা চিংথরো."
+
+#: ../../magic/src/puzzle.c:79
+msgid "Puzzle"
+msgstr "পজল"
+
+#: ../../magic/src/puzzle.c:86
+msgid "Click the part of your picture where would you like a puzzle."
+msgstr "অদোমগী লাইগী পজল শেম্বা পাম্বা শরুক্তা ক্লিক তৌরো"
+
+#: ../../magic/src/puzzle.c:87
+msgid "Click to make a puzzle in fullscreen mode."
+msgstr "মপুংফাবা স্ক্রীন মোদতা পজল শেম্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/rails.c:101
+msgid "Rails"
+msgstr "রেলস"
+
+#: ../../magic/src/rails.c:103
+msgid "Click and drag to draw train track rails on your picture."
+msgstr "অদোমগী লাইদা ত্রেইন ত্রেক রেল য়েক্নবা ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/rainbow.c:107
+msgid "Rainbow"
+msgstr "চুমথাং"
+
+#: ../../magic/src/rainbow.c:114
+msgid "You can draw in rainbow colors!"
+msgstr "অদোম্না চুমথাংগী মচুদা য়েকপা য়াগনি!"
+
+#: ../../magic/src/rain.c:65
+msgid "Rain"
+msgstr "নোং"
+
+#: ../../magic/src/rain.c:68
+msgid "Click to place a rain drop onto your picture."
+msgstr "অদোমগী লাইদা নোংগী মরিক অমা য়াওহন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/rain.c:69
+msgid "Click to cover your picture with rain drops."
+msgstr "অদোমগী লাইদা নোংগী মরিকশিংনা কুপশিন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/realrainbow.c:86
+msgid "Real Rainbow"
+msgstr "অশেংবা চুমথাং"
+
+#: ../../magic/src/realrainbow.c:88
+msgid "ROYGBIV Rainbow"
+msgstr "ROYGBIV চুমথাং"
+
+#: ../../magic/src/realrainbow.c:93
+msgid "Click where you want your rainbow to start, drag to where you want it to end, and then let go to draw a rainbow."
+msgstr "অদোম্না চুমথাংগী অহৌবা ওইবা পাম্বা অদুদা ক্লিক তৌরো, অদুগা লোইশিনবা পাম্বা মফমদা চিংঙো, অদুগা চুমথাং অমা য়েকহল্লো."
+
+#: ../../magic/src/ripples.c:81
+msgid "Ripples"
+msgstr "ঈথক"
+
+#: ../../magic/src/ripples.c:87
+msgid "Click to make ripples appear over your picture."
+msgstr "অদোমগী লাইগী মথক্তা ঈথক শেম্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/rosette.c:93
+msgid "Rosette"
+msgstr "রোজেত"
+
+#: ../../magic/src/rosette.c:93
+msgid "Picasso"
+msgstr "পিকাসো"
+
+#: ../../magic/src/rosette.c:98
+msgid "Click and start drawing your rosette."
+msgstr "অদোমগী রোজেত ক্লিক তৌরো অমসুং য়েকপা হৌরো."
+
+#: ../../magic/src/rosette.c:100
+msgid "You can draw just like Picasso!"
+msgstr "অদোম্না পিকাসোগুম্না য়েকপা য়াই!"
+
+#: ../../magic/src/sharpen.c:73
+msgid "Edges"
+msgstr "চিদাইশিং"
+
+#: ../../magic/src/sharpen.c:74
+msgid "Sharpen"
+msgstr "লংহনবা (হেন্না ময়েক শেংহনবা)"
+
+#: ../../magic/src/sharpen.c:75
+msgid "Silhouette"
+msgstr "সিলুয়েত"
+
+#: ../../magic/src/sharpen.c:78
+msgid "Click and move the mouse to trace edges in parts of your picture."
+msgstr "অদোমগী লাইগী শরুক্তা চিদাইশিং থিনবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/sharpen.c:79
+msgid "Click to trace edges in your entire picture."
+msgstr "অদোমগী লাই অপুম্বদা চিদাইশিং থিদোক্নবা ক্লিক তৌরো"
+
+#: ../../magic/src/sharpen.c:80
+msgid "Click and move the mouse to sharpen parts of your picture."
+msgstr "অদোমগী লাইগী শরুকশিং হেন্না ময়েক শেংহন্নবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/sharpen.c:81
+msgid "Click to sharpen the entire picture."
+msgstr "অদোমগী লাই অপুম্বদু হেন্না ময়েক শেংহন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/sharpen.c:82
+msgid "Click and move the mouse to create a black and white silhouette."
+msgstr "অমুবা অমসুং অঙৌবা সিলুয়েত শেম্নবা মাউস ক্লিক তৌরো অদুগা চৎলো."
+
+#: ../../magic/src/sharpen.c:83
+msgid "Click to create a black and white silhouette of your entire picture."
+msgstr "অদোমগী লাই অপুম্বা অমুবা অমসুং অঙৌবা সিলুয়েত শেম্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/shift.c:104
+msgid "Shift"
+msgstr "মফম হোংদোকপা"
+
+#: ../../magic/src/shift.c:110
+msgid "Click and drag to shift your picture around on the canvas."
+msgstr "অদোমগী লাই কেনভাসতা মফম হোংদোক্নবা ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/smudge.c:83
+msgid "Smudge"
+msgstr "স্মদজ"
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:85
+msgid "Wet Paint"
+msgstr "ৱেত পেইন্ত"
+
+#: ../../magic/src/smudge.c:92
+msgid "Click and move the mouse around to smudge the picture."
+msgstr "লাই অসি স্মদজ তৌনবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:94
+msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgstr "ৱেত, স্মদজ পেইন্তনা য়েক্নবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#: ../../magic/src/snow.c:68
+msgid "Snow Ball"
+msgstr "স্নো বোল"
+
+#: ../../magic/src/snow.c:69
+msgid "Snow Flake"
+msgstr "স্নো ফ্লেক"
+
+#: ../../magic/src/snow.c:72
+msgid "Click to add snow balls to your picture."
+msgstr "অদোমগী লাইদা স্নো বোল হাপচিন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/snow.c:73
+msgid "Click to add snow flakes to your picture."
+msgstr "অদোমগী লাইদা স্নো ফ্লেক্স হাপচিন্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/string.c:120
+msgid "String edges"
+msgstr "স্ত্রিং এদজশিং"
+
+#: ../../magic/src/string.c:123
+msgid "String corner"
+msgstr "স্ত্রিং কোর্নর"
+
+#: ../../magic/src/string.c:126
+msgid "String 'V'"
+msgstr "স্ত্রিং 'V'"
+
+#: ../../magic/src/string.c:134
+msgid "Click and drag to draw string art. Drag top-bottom to draw less or more lines, left or right to make a bigger hole."
+msgstr "স্ত্রিং আর্ত য়েক্নবা ক্লিক তৌরো অমসুং চিংঙো. লৈই য়ামদনা নত্রগা য়াম্না য়েক্নবা মথক-মখা চিংঙো, হেন্না চাওবা মখুল শেম্নবা ওই নত্রগা য়েৎ চিংঙো."
+
+#: ../../magic/src/string.c:137
+msgid "Click and drag to draw arrows made of string art."
+msgstr "স্ত্রিং আর্তনা শেম্বা তেনজৈশিং য়েক্নবা ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/string.c:140
+msgid "Draw string art arrows with free angles."
+msgstr "ফ্রী ওইবা এঙ্গলদা স্ত্রিং আর্ত তেনজৈশিং য়েকউ."
+
+#: ../../magic/src/tint.c:71
+msgid "Tint"
+msgstr "তিন্ত"
+
+#: ../../magic/src/tint.c:72
+msgid "Color & White"
+msgstr "মচু অমসুং অঙৌবা"
+
+#: ../../magic/src/tint.c:75
+msgid "Click and move the mouse around to change the color of parts of your picture."
+msgstr "অদোমগী লাইগী শরুক্তা মচু ওন্থোক্নবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#: ../../magic/src/tint.c:76
+msgid "Click to change the color of your entire picture."
+msgstr "অদোমগী লাই অপুম্বগী মচু হোংদোক্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/tint.c:77
+msgid "Click and move the mouse around to turn parts of your picture into white and a color you choose."
+msgstr "অদোমগী লাইগী শরুক অঙৌবা অমসুং অদোম্না খনবা মচুদা ওন্থোক্নবা মাউস ক্লিক তৌরো অদুগা কোয়না চৎলো."
+
+#: ../../magic/src/tint.c:78
+msgid "Click to turn your entire picture into white and a color you choose."
+msgstr "অদোমগী লাই অপুম্বদু অঙৌবা অমসুং অদোম্না খনবা মচুদা ওন্থোক্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/toothpaste.c:65
+msgid "Toothpaste"
+msgstr "তুথপেস্ত"
+
+#: ../../magic/src/toothpaste.c:68
+msgid "Click and drag to squirt toothpaste onto your picture."
+msgstr "অদোমগী লাইদা তুথপেস্ত মেত্থোক্নবা ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/tornado.c:127
+msgid "Tornado"
+msgstr "তোর্নাদো"
+
+#: ../../magic/src/tornado.c:133
+msgid "Click and drag to draw a tornado funnel on your picture."
+msgstr "অদোমগী লাইদা তোর্নাদো ফনেল অমা য়েক্নবা ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/tv.c:74
+msgid "TV"
+msgstr "TV"
+
+#: ../../magic/src/tv.c:79
+msgid "Click and drag to make parts of your picture look like they are on television."
+msgstr "অদোমগী লাইগী শরুকশিং তেলিভিজনদা উবা মান্না শেম্নবা ক্লিক তৌরো অমসুং চিংঙো."
+
+#: ../../magic/src/tv.c:82
+msgid "Click to make your picture look like it's on television."
+msgstr "অদোমগী লাই অদু তেলিভিজনদা উবা মান্না শেম্নবা ক্লিক তৌরো."
+
+#: ../../magic/src/waves.c:80
+msgid "Waves"
+msgstr "ৱেভস"
+
+#: ../../magic/src/waves.c:81
+msgid "Wavelets"
+msgstr "ৱেভলেতস"
+
+#: ../../magic/src/waves.c:88
+msgid "Click to make the picture horizontally wavy. Click toward the top for shorter waves, the bottom for taller waves, the left for small waves, and the right for long waves."
+msgstr "লাই অদু মফৈ ওইনা ৱেভ মওংদা শেম্নবা ক্লিক তৌরো. অনেম্বা ৱেভ ওইনবা মথক্তা, অৱাংবা ৱেভ ওইনবা মখাদা, অপিকপা ৱেভ ওইনবা ওইদা, অমসুং অশাংবা ৱেভ ওইনবা য়েত্তা ক্লিক তৌরো."
+
+#: ../../magic/src/waves.c:89
+msgid "Click to make the picture vertically wavy. Click toward the top for shorter waves, the bottom for taller waves, the left for small waves, and the right for long waves."
+msgstr "লাই অদু ময়ুং ওইনা ৱেভ মওংদা শেম্নবা ক্লিক তৌরো. অনেম্বা ৱেভ ওইনবা মথক্তা, অৱাংবা ৱেভ ওইনবা মখাদা, অপিকপা ৱেভ ওইনবা ওইদা, অমসুং অশাংবা ৱেভ ওইনবা য়েত্তা ক্লিক তৌরো."
+

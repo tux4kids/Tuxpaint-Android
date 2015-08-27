@@ -1,0 +1,1361 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-17 15:55-0700\n"
+"PO-Revision-Date: 2010-09-04 17:25+0200\n"
+"Last-Translator: Fasokan <konate20032001@yahoo.fr>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: bm\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 2.1.5\n"
+
+#. Response to Black (0, 0, 0) color selected
+#: ../colors.h:86
+msgid "Black!"
+msgstr "Finman!"
+
+#. Response to Dark grey (128, 128, 128) color selected
+#: ../colors.h:89
+msgid "Dark grey! Some people spell it “dark gray”."
+msgstr "Bukurijɛ!"
+
+#. Response to Light grey (192, 192, 192) color selected
+#: ../colors.h:92
+msgid "Light grey! Some people spell it “light gray”."
+msgstr "Bukurijɛ walawala!"
+
+#. Response to White (255, 255, 255) color selected
+#: ../colors.h:95
+msgid "White!"
+msgstr "Jɛman!"
+
+#. Response to Red (255, 0, 0) color selected
+#: ../colors.h:98
+msgid "Red!"
+msgstr "Bilenman!"
+
+#. Response to Orange (255, 128, 0) color selected
+#: ../colors.h:101
+msgid "Orange!"
+msgstr "Woroji!"
+
+#. Response to Yellow (255, 255, 0) color selected
+#: ../colors.h:104
+msgid "Yellow!"
+msgstr "Nɛrɛmugu!"
+
+#. Response to Light green (160, 228, 128) color selected
+#: ../colors.h:107
+msgid "Light green!"
+msgstr "Binkɛnɛ walawala!"
+
+#. Response to Dark green (33, 148, 70) color selected
+#: ../colors.h:110
+msgid "Dark green!"
+msgstr "Binkɛnɛ mɔnimɔni!"
+
+#. Response to "Sky" blue (138, 168, 205) color selected
+#: ../colors.h:113
+msgid "Sky blue!"
+msgstr "Kabanɔgɔlaman!"
+
+#. Response to Blue (50, 100, 255) color selected
+#: ../colors.h:116
+msgid "Blue!"
+msgstr "bula!"
+
+#. Response to Lavender (186, 157, 255) color selected
+#: ../colors.h:119
+msgid "Lavender!"
+msgstr "Lawandi!"
+
+#. Response to Purple (128, 0, 128) color selected
+#: ../colors.h:122
+msgid "Purple!"
+msgstr "wiyolɛ!"
+
+#. Response to Pink (255, 165, 211) color selected
+#: ../colors.h:125
+msgid "Pink!"
+msgstr "Rozi!"
+
+#. Response to Brown (128, 80, 0) color selected
+#: ../colors.h:128
+msgid "Brown!"
+msgstr "Kɔlɔboro!"
+
+#. Response to Tan (226, 189, 166) color selected
+#: ../colors.h:131
+msgid "Tan!"
+msgstr "Fugafuga!"
+
+#. Response to Beige (247, 228, 219) color selected
+#: ../colors.h:134
+msgid "Beige!"
+msgstr "Bukurilaman!"
+
+#. First, the blacklist. We list font families that can crash Tux Paint
+#. via bugs in the SDL_ttf library. We also test fonts to be sure that
+#. they have both uppercase and lowercase letters. Note that we do not
+#. test for "Aa", because it is OK if uppercase and lowercase are the
+#. same (but not nice -- such fonts get a low score later).
+#.
+#. Most locales leave the blacklist strings alone: "QX" and "qx"
+#. (it is less destructive to use the scoring strings instead)
+#.
+#. Locales that absolutely require all fonts to have some
+#. extra characters should use "QX..." and "qx...", where "..."
+#. are some characters you absolutely require in all fonts.
+#.
+#. Locales with absolutely NO use for ASCII may use "..." and "...",
+#. where "..." are some characters you absolutely require in
+#. all fonts. This would be the case for a locale in which it is
+#. impossible for a user to type ASCII letters.
+#.
+#. Most translators should use scoring instead.
+#: ../dirwalk.c:164
+msgid "qx"
+msgstr "qx"
+
+#: ../dirwalk.c:164
+msgid "QX"
+msgstr "Qx"
+
+#. TODO: weight specification
+#. Now we score fonts to ensure that the best ones will be placed at
+#. the top of the list. The user will see them first. This sorting is
+#. especially important for users who have scroll buttons disabled.
+#. Translators should do whatever is needed to put crummy fonts last.
+#. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
+#: ../dirwalk.c:191
+msgid "oO"
+msgstr "oO"
+
+#. common punctuation (e.g., '?', '!', '.', ',', etc.)
+#: ../dirwalk.c:194
+msgid ",.?!"
+msgstr ",.?!"
+
+#. uncommon punctuation (e.g., '@', '#', '*', etc.)
+#: ../dirwalk.c:197
+msgid "`\\%_@$~#{<(^&*"
+msgstr "`\\%_@$~#{<(^&*"
+
+#. digits (e.g., '0', '1' and '7')
+#: ../dirwalk.c:200
+msgid "017"
+msgstr "017"
+
+#. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
+#: ../dirwalk.c:203
+msgid "O0"
+msgstr "O0"
+
+#. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
+#: ../dirwalk.c:206
+msgid "1Il|"
+msgstr "1Il|"
+
+#: ../dirwalk.c:210
+msgid "<1>spare-1a"
+msgstr "<1>kunfalen-1a"
+
+#: ../dirwalk.c:211
+msgid "<1>spare-1b"
+msgstr "<1>kunfalen-1b"
+
+#: ../dirwalk.c:212
+msgid "<9>spare-9a"
+msgstr "<9>kunfalen-9a"
+
+#: ../dirwalk.c:213
+msgid "<9>spare-9b"
+msgstr "<9>kunfalen-9b"
+
+#. Congratulations #1
+#: ../great.h:37
+msgid "Great!"
+msgstr "A ɲɛna!"
+
+#. Congratulations #2
+#: ../great.h:40
+msgid "Cool!"
+msgstr "A ɲɛna kosɛbɛ!"
+
+#. Congratulations #3
+#: ../great.h:43
+msgid "Keep it up!"
+msgstr "Tɛmɛ n’a ye!"
+
+#. Congratulations #4
+#: ../great.h:46
+msgid "Good job!"
+msgstr "Baara ɲuman!"
+
+#. Input Method: English mode
+#: ../im.c:75
+msgid "English"
+msgstr "Angilɛ!"
+
+#. Input Method: Japanese Romanized Hiragana mode
+#: ../im.c:78
+msgid "Hiragana"
+msgstr "Hiragana (Zapɔnɛ)"
+
+#. Input Method: Japanese Romanized Katakana mode
+#: ../im.c:81
+msgid "Katakana"
+msgstr "Katakana (Tayilandi)"
+
+#. Input Method: Korean Hangul 2-Bul mode
+#: ../im.c:84
+msgid "Hangul"
+msgstr "Hangulu"
+
+#. Input Method: Thai mode
+#: ../im.c:87
+msgid "Thai"
+msgstr "Tayilandikan"
+
+#. Input Method: Traditional Chinese mode
+#: ../im.c:90
+msgid "ZH_TW"
+msgstr "Tayiwani mandereni"
+
+#. Square shape tool (4 equally-lengthed sides at right angles)
+#: ../shapes.h:171 ../shapes.h:172
+msgid "Square"
+msgstr "Kare"
+
+#. Rectangle shape tool (4 sides at right angles)
+#: ../shapes.h:175 ../shapes.h:176
+msgid "Rectangle"
+msgstr "Rɛkitangili"
+
+#. Circle shape tool (X radius and Y radius are the same)
+#: ../shapes.h:179 ../shapes.h:180
+msgid "Circle"
+msgstr "Koori"
+
+#. Ellipse shape tool (X radius and Y radius may differ)
+#: ../shapes.h:183 ../shapes.h:184
+msgid "Ellipse"
+msgstr "Elipisi "
+
+#. Triangle shape tool (3 sides)
+#: ../shapes.h:187 ../shapes.h:188
+msgid "Triangle"
+msgstr "Tiriyangili"
+
+#. Pentagone shape tool (5 sides)
+#: ../shapes.h:191 ../shapes.h:192
+msgid "Pentagon"
+msgstr "Pɛntagoni "
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:195 ../shapes.h:196
+msgid "Rhombus"
+msgstr "Lozanzi"
+
+#. Octagon shape tool (8 sides)
+#: ../shapes.h:199 ../shapes.h:200
+msgid "Octagon"
+msgstr "Ɔkutagoni"
+
+#. Description of a square
+#: ../shapes.h:208 ../shapes.h:209
+msgid "A square is a rectangle with four equal sides."
+msgstr "Kare ye rɛkitangili ye, min kɛrɛ naani bɛɛ ye hakɛ kelen ye."
+
+#. Description of a rectangle
+#: ../shapes.h:212 ../shapes.h:213
+msgid "A rectangle has four sides and four right angles."
+msgstr "Kɛrɛ naani bɛ rɛkitangili la ani dogodogonin tilennen naani."
+
+#: ../shapes.h:217 ../shapes.h:219
+msgid ""
+"A circle is a curve where all points have the same distance from the center."
+msgstr "Koori ye ci kurulen ye min ɛrɛyɔn bɛɛ janya ye hakɛ kelen ye."
+
+#. Description of an ellipse
+#: ../shapes.h:222 ../shapes.h:223
+msgid "An ellipse is a stretched circle."
+msgstr "Elipisi ye koori samanen ye"
+
+#. Description of a triangle
+#: ../shapes.h:226 ../shapes.h:227
+msgid "A triangle has three sides."
+msgstr "Kɛrɛ saba bɛ tiriyangili la."
+
+#. Description of a pentagon
+#: ../shapes.h:230 ../shapes.h:231
+msgid "A pentagon has five sides."
+msgstr "Kɛrɛ duuru bɛ pɛntagoni na"
+
+#: ../shapes.h:235 ../shapes.h:237
+msgid "A rhombus has four equal sides, and opposite sides are parallel."
+msgstr ""
+"Kɛrɛ nani bɛ lozanzi la, kɛrɛ minnu ye sina ye, olu bɛ taa ɲɔgɔn kɛrɛfɛ, u "
+"tɛ maga ɲɔgɔn na fiyɛw"
+
+#: ../shapes.h:241 ../shapes.h:243
+msgid "An octagon has eight equal sides."
+msgstr "Ɔkutagɔni kɛrɛ ye segin ye, u bɛɛ janya ye hakɛ kelen ye."
+
+#. Title of tool selector (buttons down the left)
+#: ../titles.h:56
+msgid "Tools"
+msgstr "Minɛnw"
+
+#. Title of color palette (buttons across the bottom)
+#: ../titles.h:59
+msgid "Colors"
+msgstr " ɲɛw "
+
+#. Title of brush selector (buttons down the right for paint and line tools)
+#: ../titles.h:62
+msgid "Brushes"
+msgstr "bɔrɔsiw "
+
+#. Title of eraser selector (buttons down the right for eraser tool)
+#: ../titles.h:65
+msgid "Erasers"
+msgstr "Jɔsililan"
+
+#. Title of stamp selector (buttons down the right for stamps tool)
+#: ../titles.h:68
+msgid "Stamps"
+msgstr "Tanpɔnw"
+
+#. Title of shape selector (buttons down the right for shapes tool)
+#. Shape creation tool (square, circle, etc.)
+#: ../titles.h:71 ../tools.h:71
+msgid "Shapes"
+msgstr "Cogoyaw"
+
+#. Title of font selector (buttons down the right for text and label tools)
+#: ../titles.h:74
+msgid "Letters"
+msgstr "Siginidenw"
+
+#. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
+#. "Magic" effects tools (blur, flip image, etc.)
+#: ../titles.h:77 ../tools.h:83
+msgid "Magic"
+msgstr "Kabako"
+
+#. Freehand painting tool
+#: ../tools.h:62
+msgid "Paint"
+msgstr "Pɛntiri kɛ"
+
+#. Stamp tool (aka Rubber Stamps)
+#: ../tools.h:65
+msgid "Stamp"
+msgstr "Tanpɔn"
+
+#. Line drawing tool
+#: ../tools.h:68
+msgid "Lines"
+msgstr "Cisiraw"
+
+#. Text tool
+#: ../tools.h:74
+msgid "Text"
+msgstr "Sɛbɛnni"
+
+#. Label tool
+#: ../tools.h:77
+msgid "Label"
+msgstr "Tamasiyɛn"
+
+#. Undo last action
+#: ../tools.h:86
+msgid "Undo"
+msgstr "Kɔfɛ"
+
+#. Redo undone action
+#: ../tools.h:89
+msgid "Redo"
+msgstr "ɲɛfɛ"
+
+#. Eraser tool
+#: ../tools.h:92
+msgid "Eraser"
+msgstr "Jɔsililan"
+
+#. Start a new picture
+#: ../tools.h:95
+msgid "New"
+msgstr "Kura"
+
+#. Open a saved picture
+#. buttons for the file open dialog
+#. Open dialog: 'Open' button, to load the selected picture
+#: ../tools.h:98 ../tuxpaint.c:7762
+msgid "Open"
+msgstr "A dayɛlɛ"
+
+#. Save the current picture
+#: ../tools.h:101
+msgid "Save"
+msgstr "A mara"
+
+#. Print the current picture
+#: ../tools.h:104
+msgid "Print"
+msgstr "A papiyema bɔ"
+
+#. Quit/exit Tux Paint application
+#: ../tools.h:107
+msgid "Quit"
+msgstr "Bɔ"
+
+#. Paint tool instructions
+#: ../tools.h:115
+msgid "Pick a color and a brush shape to draw with."
+msgstr "I sagolaɲɛ ni bɔrɔsi dɔ ta ka ɲɛgɛn kɛ."
+
+#. Stamp tool instructions
+#: ../tools.h:118
+msgid "Pick a picture to stamp around your drawing."
+msgstr "Ja dɔ ta k'o don i ka ɲɛgɛn na."
+
+#. Line tool instructions
+#: ../tools.h:121
+msgid "Click to start drawing a line. Let go to complete it."
+msgstr "Kilike i ka ɲɛgɛn dɔ daminɛ, tɛmɛ n'a ye k'a laban. "
+
+#. Shape tool instructions
+#: ../tools.h:124
+msgid ""
+"Pick a shape. Click to pick the center, drag, then let go when it is the "
+"size you want. Move around to rotate it, and click to draw it."
+msgstr ""
+"Cogoya dɔ suganti. Kilike a cɛmancɛ la, a bilayɔrɔ n'a janya hakɛ suganti "
+"k'i digilen to, a munumunu, a cɛɛnɛ i ka ɲɛgɛn kɛ. "
+
+#. Text tool instructions
+#: ../tools.h:127
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text."
+msgstr ""
+"Sɛbɛnni suguya dɔ suganti. Kilike i ka ɲɛgɛn kan i ka sɛbɛnni daminɛ. "
+"[Entrer] walima [Tab] digi n'i tilala."
+
+#. Label tool instructions
+#: ../tools.h:130
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text. By using the selector button "
+"and clicking an exist label, you can move it, edit it and change its text "
+"style."
+msgstr ""
+"Sɛbɛnni suguya dɔ suganti. Kilike i ka ɲɛgɛn kan i ka sɛbɛnni daminɛ. "
+"[Entrer] walima [Tab] digi n'i tilala. N'i kilikera selɛkisiyɔn butɔn kan "
+"ani sɛbɛnni kɔrɔlen dɔ, i bɛ se k'a labɔ a nɔ na, k'a sɛbɛn kura ye ani k'a "
+"cogoya yɛlɛma."
+
+#. Magic tool instruction
+#: ../tools.h:136
+msgid "Pick a magical effect to use on your drawing!"
+msgstr "Kabako ɲɛgɛnyɛlɛmanan dɔ suganti ka k'i ka ɲɛgɛn na. "
+
+#. Response to 'undo' action
+#: ../tools.h:139
+msgid "Undo!"
+msgstr "Kɔfɛ!"
+
+#. Response to 'redo' action
+#: ../tools.h:142
+msgid "Redo!"
+msgstr "ɲɛfɛ!"
+
+#. Eraser tool
+#: ../tools.h:145
+msgid "Eraser!"
+msgstr "Jɔsililan!"
+
+#. Response to 'start a new image' action
+#: ../tools.h:148
+msgid "Pick a color or picture with which to start a new drawing."
+msgstr "ɲɛ walima ja dɔ suganti i ka ɲɛgɛn kura dɔ daminɛ."
+
+#. Response to 'open' action (while file dialog is being constructed)
+#: ../tools.h:151
+msgid "Open…"
+msgstr "A dayɛlɛ"
+
+#. Response to 'save' action
+#: ../tools.h:154
+msgid "Your image has been saved!"
+msgstr "I ka ja marala!"
+
+#. Response to 'print' action (while printing, or print dialog is being used)
+#: ../tools.h:157
+msgid "Printing…"
+msgstr "A papiyema bɛ ka bɔ…"
+
+#. Response to 'quit' (exit) action
+#: ../tools.h:160
+msgid "Bye bye!"
+msgstr "K’an bɛn! "
+
+#. Instruction while using Line tool (after click, before release)
+#: ../tools.h:164
+msgid "Let go of the button to complete the line."
+msgstr "Butɔn digi, ka ci tɔ ka laban."
+
+#. Instruction while using Shape tool (after first click, before release)
+#: ../tools.h:167
+msgid "Hold the button to stretch the shape."
+msgstr "Butɔn digilen to, i, ka ja sama ka yɛlɛ k'a mɔɔnɔ bɔ."
+
+#. Instruction while finishing Shape tool (after release, during rotation step before second click)
+#: ../tools.h:170
+msgid "Move the mouse to rotate the shape. Click to draw it."
+msgstr "ɲinɛnin sama, k'a munumunu ka ɲɛgɛn kɛ."
+
+#. Notification that 'New' action was aborted (current image would have been lost)
+#: ../tools.h:173
+msgid "OK then… Let’s keep drawing this one!"
+msgstr "A ɲɛna! An ka taa nin ɲɛgɛn in fɛ!"
+
+#. Prompt to confirm user wishes to quit
+#: ../tuxpaint.c:1918
+msgid "Do you really want to quit?"
+msgstr "I bɛ fɛ ka bɔ tiɲɛ yɛrɛ la?"
+
+#. Quit prompt positive response (quit)
+#: ../tuxpaint.c:1921
+msgid "Yes, I’m done!"
+msgstr "Ɔwɔ, n tilala!"
+
+#. Quit prompt negative response (don't quit)
+#: ../tuxpaint.c:1924 ../tuxpaint.c:1951
+msgid "No, take me back!"
+msgstr "Ayi, n lasgin kɔfɛ!"
+
+#. Current picture is not saved; user is quitting
+#: ../tuxpaint.c:1928
+msgid "If you quit, you’ll lose your picture! Save it?"
+msgstr "N'i bɔra, i ka ja bɛ tunun. K'a mara?"
+
+#: ../tuxpaint.c:1929 ../tuxpaint.c:1934
+msgid "Yes, save it!"
+msgstr "Ɔwɔ, a mara!"
+
+#: ../tuxpaint.c:1930 ../tuxpaint.c:1935
+msgid "No, don’t bother saving!"
+msgstr "Ayi, kan'a mara!"
+
+#. Current picture is not saved; user is opening another picture
+#: ../tuxpaint.c:1933
+msgid "Save your picture first?"
+msgstr "K'ia ka ja mara fɔlɔ?"
+
+#. Error opening picture
+#: ../tuxpaint.c:1938
+msgid "Can’t open that picture!"
+msgstr "N ma se ka nin ja in dayɛlɛ!"
+
+#. Generic dialog dismissal
+#: ../tuxpaint.c:1941 ../tuxpaint.c:1946 ../tuxpaint.c:1955 ../tuxpaint.c:1962
+#: ../tuxpaint.c:1971
+msgid "OK"
+msgstr "N sɔnna"
+
+#. Notification that 'Open' dialog has nothing to show
+#: ../tuxpaint.c:1945
+msgid "There are no saved files!"
+msgstr "Fisiye foyi maralen tɛ yan!"
+
+#. Verification of print action
+#: ../tuxpaint.c:1949
+msgid "Print your picture now?"
+msgstr "K'i ka ja papiyema bɔ sisan?"
+
+#: ../tuxpaint.c:1950
+msgid "Yes, print it!"
+msgstr "Ɔwɔ, a papiyema bɔ!"
+
+#. Confirmation of successful (we hope) printing
+#: ../tuxpaint.c:1954
+msgid "Your picture has been printed!"
+msgstr "I ka ja papiyema bɔra!"
+
+#. We got an error printing
+#: ../tuxpaint.c:1958
+msgid "Sorry! Your picture could not be printed!"
+msgstr "Hakɛto! I ka ja papiyema ma se ka bɔ!"
+
+#. Notification that it's too soon to print again (--printdelay option is in effect)
+#: ../tuxpaint.c:1961
+msgid "You can’t print yet!"
+msgstr "I tɛ se ka ja papiyema bɔ fɔlɔ!"
+
+#. Prompt to confirm erasing a picture in the Open dialog
+#: ../tuxpaint.c:1965
+msgid "Erase this picture?"
+msgstr "Ka nin ja in jɔsi?"
+
+#: ../tuxpaint.c:1966
+msgid "Yes, erase it!"
+msgstr "Ɔwɔ, a jɔsi!"
+
+#: ../tuxpaint.c:1967
+msgid "No, don’t erase it!"
+msgstr "Ayi, kan'a jɔsi!"
+
+#. Reminder that Mouse Button 1 is the button to use in Tux Paint
+#: ../tuxpaint.c:1970
+msgid "Remember to use the left mouse button!"
+msgstr "Kana ɲinɛ ka baara kɛ nin ɲinɛnin numanyanfanfɛ kɛrɛ ye!"
+
+#. Sound has been muted (silenced) via keyboard shortcut
+#: ../tuxpaint.c:2567
+msgid "Sound muted."
+msgstr "Mankan datugura."
+
+#. Sound has been unmuted (unsilenced) via keyboard shortcut
+#: ../tuxpaint.c:2572
+msgid "Sound unmuted."
+msgstr "Mankan dayɛlɛla."
+
+#. Wait while Text tool finishes loading fonts
+#: ../tuxpaint.c:3355
+msgid "Please wait…"
+msgstr "Hakɛto i k'a kɔnɔ..."
+
+#. Open dialog: 'Erase' button, to erase/deleted the selected picture
+#: ../tuxpaint.c:7765
+msgid "Erase"
+msgstr "A jɔsi"
+
+#. Open dialog: 'Slides' button, to switch to slide show mode
+#: ../tuxpaint.c:7768
+msgid "Slides"
+msgstr "Jaw tɛmɛ tɛmɛ ɲɔgɔn kɔ"
+
+#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
+#: ../tuxpaint.c:7771
+msgid "Back"
+msgstr "Seginkɔ"
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7774
+msgid "Next"
+msgstr "ɲɛfɛta"
+
+#. Slideshow: 'Play' button, to begin a slideshow sequence
+#: ../tuxpaint.c:7777
+msgid "Play"
+msgstr "A bil'a la"
+
+#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
+#: ../tuxpaint.c:8485
+msgid "Aa"
+msgstr "Aa"
+
+#. Admittedly stupid way of determining which keys can be used for
+#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
+#: ../tuxpaint.c:11730
+msgid "Yes"
+msgstr "Ɔwɔ"
+
+#: ../tuxpaint.c:11734
+msgid "No"
+msgstr "Ayi"
+
+#. Prompt to ask whether user wishes to save over old version of their file
+#: ../tuxpaint.c:12730
+msgid "Replace the picture with your changes?"
+msgstr "Ka ja mara n'i ka yɛlɛmaw tali ye ba la wa?"
+
+#. Positive response to saving over old version
+#. (like a 'File:Save' action in other applications)
+#: ../tuxpaint.c:12734
+msgid "Yes, replace the old one!"
+msgstr "Ɔwɔ, kɔrɔlen yɛlɛma!"
+
+#. Negative response to saving over old version (saves a new image)
+#. (like a 'File:Save As...' action in other applications)
+#: ../tuxpaint.c:12738
+msgid "No, save a new file!"
+msgstr "Ayi, kura mara!"
+
+#: ../tuxpaint.c:13963
+msgid "Choose the picture you want, then click “Open”."
+msgstr "I sagolaja suganti, ka kilike \"a dayɛlɛ\" kan."
+
+#. Let user choose images:
+#. Instructions for Slideshow file dialog (FIXME: Make a #define)
+#: ../tuxpaint.c:14976 ../tuxpaint.c:15290
+msgid "Choose the pictures you want, then click “Play”."
+msgstr "I sagola jaw suganti, kilike i k'a bil'a la. "
+
+#: ../tuxpaint.c:21524
+msgid "Pick a color."
+msgstr "ɲɛ dɔ suganti."
+
+#: ../tuxpaint.desktop.in.h:1
+msgid "A drawing program for children."
+msgstr "Demisɛnw ka ɲɛgɛn taabolo dɔ."
+
+#: ../tuxpaint.desktop.in.h:2
+msgid "Drawing program"
+msgstr "ɲɛgɛn taabolo. "
+
+#: ../tuxpaint.desktop.in.h:3
+msgid "Tux Paint"
+msgstr "Pɛntiri Tukisi ."
+
+#: ../../magic/src/alien.c:64
+msgid "Color Shift"
+msgstr "ɲɛw yɛlɛmani"
+
+#: ../../magic/src/alien.c:67
+msgid "Click and move the mouse to change the colors in parts of your picture."
+msgstr "Kilike i ka ɲinɛnin cɛɛnɛ walasa ka ja fan dɔw ɲɛ yɛlɛma."
+
+#: ../../magic/src/alien.c:68
+msgid "Click to change the colors in your entire picture."
+msgstr "Kilike walasa ka ja fan bɛɛ ɲɛ yɛlɛma."
+
+#: ../../magic/src/blind.c:92
+msgid "Blind"
+msgstr "Kɛnɛ lankolon"
+
+#: ../../magic/src/blind.c:97
+msgid ""
+"Click towards the edge of your picture to pull window blinds over it. Move "
+"perpendicularly to open or close the blinds."
+msgstr "Kilike i ka ja dawolo dɔ kan walasa ka kɛnɛ lankolon dɔ sɔrɔ."
+
+#: ../../magic/src/blocks_chalk_drip.c:132
+msgid "Blocks"
+msgstr "Kurukuruw "
+
+#: ../../magic/src/blocks_chalk_drip.c:134
+msgid "Chalk"
+msgstr "Lakɛrɛ"
+
+#: ../../magic/src/blocks_chalk_drip.c:136
+msgid "Drip"
+msgstr "Toni"
+
+#: ../../magic/src/blocks_chalk_drip.c:146
+msgid "Click and move the mouse around to make the picture blocky."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja yɛlɛma k’a kɛ kurukuru misɛnniw ye"
+
+#: ../../magic/src/blocks_chalk_drip.c:149
+msgid ""
+"Click and move the mouse around to turn the picture into a chalk drawing."
+msgstr ""
+"Kilike, i ka ɲinɛnin cɛɛnɛ ka ja yɛlɛma k’a kɛ i ko a ɲɛgɛnna ni lakɛrɛ ye."
+
+#: ../../magic/src/blocks_chalk_drip.c:152
+msgid "Click and move the mouse around to make the picture drip."
+msgstr "Kilike, i ka ja yɛlɛma k’a kɛ I ko nɔgɔlan bɔnnen b’a kan."
+
+#: ../../magic/src/blur.c:57
+msgid "Blur"
+msgstr "ɲɛ malasali"
+
+#: ../../magic/src/blur.c:60
+msgid "Click and move the mouse around to blur the image."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ɲɛgɛn kɛ ni tɛgɛ tilennenya ye"
+
+#: ../../magic/src/blur.c:61
+msgid "Click to blur the entire image."
+msgstr "Kilike i ka ɲinɛnin cɛɛnɛ walasa ka ja fan bɛɛ ɲɛ malasa."
+
+#. Both are named "Bricks", at the moment:
+#: ../../magic/src/bricks.c:104
+msgid "Bricks"
+msgstr "Birikidenw"
+
+#: ../../magic/src/bricks.c:111
+msgid "Click and move to draw large bricks."
+msgstr "Kilike i ka ɲinɛnin cɛɛnɛ ka birikiden kunba dɔw ɲɛgɛn."
+
+#: ../../magic/src/bricks.c:113
+msgid "Click and move to draw small bricks."
+msgstr "Kilike i ka ɲinɛnin cɛɛnɛ ka biriden misɛnnin dɔw ɲɛgɛn. "
+
+#: ../../magic/src/calligraphy.c:108
+msgid "Calligraphy"
+msgstr "Tɛgɛtilennenya"
+
+#: ../../magic/src/calligraphy.c:115
+msgid "Click and move the mouse around to draw in calligraphy."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ɲɛgɛn kɛ ni tɛgɛtilennenya ya."
+
+#: ../../magic/src/cartoon.c:80
+msgid "Cartoon"
+msgstr "Wɔkulɔnin"
+
+#: ../../magic/src/cartoon.c:87
+msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgstr ""
+"Kilike, i ka ɲinɛnin munumunu walasa i ka ja ka yɛlɛma ka kɛ wɔkulɔnin ye."
+
+#: ../../magic/src/confetti.c:63
+msgid "Confetti"
+msgstr "Kɔnfeti (papiye ɲɛgɛnnen mɔlɔnkɔtɔlen)"
+
+#: ../../magic/src/confetti.c:65
+msgid "Click to throw confetti!"
+msgstr "Kilike, i ka kɔnfɛtiw fili!"
+
+#: ../../magic/src/distortion.c:121
+msgid "Distortion"
+msgstr "Ja cogoya yɛlɛmali."
+
+#: ../../magic/src/distortion.c:129
+msgid "Click and drag the mouse to cause distortion in your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka cogoya dɔw yɛlɛma i ka ja la. "
+
+#: ../../magic/src/emboss.c:76
+msgid "Emboss"
+msgstr "ɲɛ sankɔrɔtali"
+
+#: ../../magic/src/emboss.c:82
+msgid "Click and drag the mouse to emboss the picture."
+msgstr "Kilike, I ka ɲinɛnin cɛɛnɛ walasa ka ja ɲɛ sankɔrɔta."
+
+#: ../../magic/src/fade_darken.c:119
+msgid "Lighten"
+msgstr "Lajɛyali"
+
+#: ../../magic/src/fade_darken.c:121
+msgid "Darken"
+msgstr "Ladibili"
+
+#: ../../magic/src/fade_darken.c:132
+msgid "Click and move the mouse to lighten parts of your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ walasa ka ja fan dɔw lajɛya."
+
+#: ../../magic/src/fade_darken.c:134
+msgid "Click to lighten your entire picture."
+msgstr "Kilike, i ka ja fan bɛɛ ɲɛ lajɛya."
+
+#: ../../magic/src/fade_darken.c:139
+msgid "Click and move the mouse to darken parts of your picture."
+msgstr "Kilike, ka ɲinɛnin cɛɛnɛ walasa ka ja fan dɔ ɲɛ ladibi."
+
+#: ../../magic/src/fade_darken.c:141
+msgid "Click to darken your entire picture."
+msgstr "Kilike, i ka ja fan bɛɛ ɲɛ ladibi. "
+
+#: ../../magic/src/fill.c:87
+msgid "Fill"
+msgstr "Lafali"
+
+#: ../../magic/src/fill.c:94
+msgid "Click in the picture to fill that area with color."
+msgstr "Kilike ja kan, i k'i ka yɔrɔ sugantilen lafa ni ɲɛ dɔ ye. "
+
+#: ../../magic/src/fisheye.c:78
+msgid "Fisheye"
+msgstr "Jɛgɛ ɲɛ"
+
+#. Needs better name
+#: ../../magic/src/fisheye.c:80
+msgid "Click on part of your picture to create a fisheye effect."
+msgstr "Ja fan dɔ suganti, i k'o yɛlɛma k'o kɛ i ko jɛgɛ ɲɛ. "
+
+#: ../../magic/src/flower.c:124
+msgid "Flower"
+msgstr "Fulɔri"
+
+#: ../../magic/src/flower.c:130
+msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
+msgstr ""
+"Kilike, i ka ɲinɛnin cɛɛnɛ ka fulɔri dɔ ɲɛgɛn. Taa a fɛ, ka ɲɛgɛn laban. "
+
+#: ../../magic/src/foam.c:104
+msgid "Foam"
+msgstr "Kangaji"
+
+#: ../../magic/src/foam.c:110
+msgid "Click and drag the mouse to cover an area with foamy bubbles."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ walasa ka ja fan dɔw lafa ni kangaji ye."
+
+#: ../../magic/src/fold.c:84
+msgid "Fold"
+msgstr "Kuruli"
+
+#: ../../magic/src/fold.c:86
+msgid ""
+"Choose a background color and click to turn the corner of the page over."
+msgstr "ɲɛ dɔ suganti, ka kilike dogodogonin dɔ kan, walasa k’a kuru."
+
+#: ../../magic/src/glasstile.c:83
+msgid "Glass Tile"
+msgstr "Wɛɛrɛ karo"
+
+#: ../../magic/src/glasstile.c:90
+msgid "Click and drag the mouse to put glass tile over your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka wɛɛrɛ karo ɲɔgɔn kɛ ja fan dɔw la."
+
+#: ../../magic/src/glasstile.c:92
+msgid "Click to cover your entire picture in glass tiles."
+msgstr "Kilike, i ka wɛɛrɛ karo ɲɔgɔn kɛ ja fan bɛɛ la. "
+
+#: ../../magic/src/grass.c:92
+msgid "Grass"
+msgstr "Bin"
+
+#: ../../magic/src/grass.c:98
+msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgstr "Kilike, i ka bin ja ɲɛgɛn. Kana ɲinɛ bɔgɔ kɔ!"
+
+#: ../../magic/src/kalidescope.c:90
+msgid "Symmetric Left/Right"
+msgstr "simetiriki Kinin/Numan"
+
+#: ../../magic/src/kalidescope.c:92
+msgid "Symmetric Up/Down"
+msgstr "Simetiriki Sanfɛ/Duguma"
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:94
+msgid "Kaleidoscope"
+msgstr "Kaleyidosikɔpu "
+
+#: ../../magic/src/kalidescope.c:102
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the left and right of your picture."
+msgstr ""
+"Kilike, i ka ɲinɛnin cɛɛnɛ ka ɲɛgɛn kɛ ni bɔrɔsi fila ye, bɔrɔsi minnu ye "
+"simetiriki ye i ka ja ɲɛgɛnta kinin n’a numan fɛ. "
+
+#: ../../magic/src/kalidescope.c:104
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the top and bottom of your picture."
+msgstr ""
+"Kilike, i ka ɲinɛnin cɛɛnɛ ka ɲɛgɛn kɛ ni bɔrɔsi fila ye, bɔrɔsi minnu ye "
+"simetiriki ye i ka ja ɲɛgɛnta sanfɛ n’a duguma"
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:106
+msgid ""
+"Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgstr ""
+"Kilike, i ka ɲinɛnin cɛɛnɛ ka ɲɛgɛn kɛ ni bɔrɔsi fila ye minnu ye simetiriki "
+"ye (i n'a fɔ kaleyidosikɔpu)."
+
+#: ../../magic/src/light.c:84
+msgid "Light"
+msgstr "Yelen"
+
+#: ../../magic/src/light.c:90
+msgid "Click and drag to draw a beam of light on your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka yelen ɛrɛyɔn ɲɛgɛn."
+
+#: ../../magic/src/metalpaint.c:77
+msgid "Metal Paint"
+msgstr "Nɛgɛji"
+
+#: ../../magic/src/metalpaint.c:83
+msgid "Click and drag the mouse to paint with a metallic color."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ i ka pɛntiri kɛ ni nɛgɛji ye."
+
+#: ../../magic/src/mirror_flip.c:94
+msgid "Mirror"
+msgstr "Dungare"
+
+#: ../../magic/src/mirror_flip.c:96
+msgid "Flip"
+msgstr "Turukunkanni"
+
+#: ../../magic/src/mirror_flip.c:106
+msgid "Click to make a mirror image."
+msgstr "Kilike, i ka ja filɛ i ko a bɛ ka bɔ dungare la. "
+
+#: ../../magic/src/mirror_flip.c:109
+msgid "Click to flip the picture upside-down."
+msgstr "Kilike, i ka ja yɛlɛma yɛlɛma sanfɛla ni dugumana cɛ."
+
+#: ../../magic/src/mosaic.c:75
+msgid "Mosaic"
+msgstr "Mozayiki"
+
+#: ../../magic/src/mosaic.c:78
+msgid ""
+"Click and move the mouse to add a mosaic effect to parts of your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan dɔw kɛ mozayiki ye."
+
+#: ../../magic/src/mosaic.c:79
+msgid "Click to add a mosaic effect to your entire picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan bɛɛ kɛ mozayiki ye."
+
+#: ../../magic/src/mosaic_shaped.c:134
+msgid "Square Mosaic"
+msgstr "Kare mozayiki"
+
+#: ../../magic/src/mosaic_shaped.c:135
+msgid "Hexagon Mosaic"
+msgstr "Ɛkizagoni mozayiki"
+
+#: ../../magic/src/mosaic_shaped.c:136
+msgid "Irregular Mosaic"
+msgstr "Mozayiki cogoya caman"
+
+#: ../../magic/src/mosaic_shaped.c:141
+msgid ""
+"Click and move the mouse to add a square mosaic to parts of your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan dɔw kɛ kare mozayikiman ye."
+
+#: ../../magic/src/mosaic_shaped.c:142
+msgid "Click to add a square mosaic to your entire picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan bɛɛ kɛ mozayiki ye."
+
+#: ../../magic/src/mosaic_shaped.c:144
+msgid ""
+"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+msgstr ""
+"Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan dɔw kɛ mozaki ye ani karo ɛkizakoniw."
+
+#: ../../magic/src/mosaic_shaped.c:145
+msgid "Click to add a hexagonal mosaic to your entire picture."
+msgstr "Kilike, i ka ja fan bɛɛ kɛ mozayiki ye ani karo ɛkizagoniw."
+
+#: ../../magic/src/mosaic_shaped.c:147
+msgid ""
+"Click and move the mouse to add an irregular mosaic to parts of your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan dɔw kɛ mozayiki cogoya caman ye."
+
+#: ../../magic/src/mosaic_shaped.c:148
+msgid "Click to add an irregular mosaic to your entire picture."
+msgstr "Kilike, i ka ja fan bɛɛ kɛ mozayiki cogoya caman ye."
+
+#: ../../magic/src/negative.c:72
+msgid "Negative"
+msgstr "Negatifu"
+
+#: ../../magic/src/negative.c:80
+msgid "Click and move the mouse around to make your painting negative."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan dɔw kɛ negatifu ye."
+
+#: ../../magic/src/negative.c:83
+msgid "Click to turn your painting into its negative."
+msgstr "Kilike, i ka ja fan bɛɛ kɛ negatifu ye."
+
+#: ../../magic/src/noise.c:63
+msgid "Noise"
+msgstr "Parasitiw "
+
+#: ../../magic/src/noise.c:66
+msgid "Click and move the mouse to add noise to parts of your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ka ja fan dɔw kɛ parasitiw ye."
+
+#: ../../magic/src/noise.c:67
+msgid "Click to add noise to your entire picture."
+msgstr "Kilike, i ka ja fan bɛɛ kɛ parasitiw ye."
+
+#: ../../magic/src/perspective.c:145
+msgid "Perspective"
+msgstr "Pɛrisipɛkitiwu"
+
+#: ../../magic/src/perspective.c:146
+msgid "Zoom"
+msgstr "Bonyali ni dɔgɔyali"
+
+#: ../../magic/src/perspective.c:151
+msgid "Click on the corners and drag where you want to stretch the picture."
+msgstr "Kilike dogodogonin dɔ kan, ka ɲinɛnin cɛɛnɛ ka ja kɛ pɛrisipɛkitiwu ye."
+
+#: ../../magic/src/perspective.c:154
+msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr ""
+"Kilike, i ka ɲinɛnin cɛɛnɛ ka taa duguma walasa ka ja dɔgɔya, walima ka taa "
+"sanfɛ walasa ka ja bonya. "
+
+#: ../../magic/src/puzzle.c:79
+msgid "Puzzle"
+msgstr "Pizɔli"
+
+#: ../../magic/src/puzzle.c:86
+msgid "Click the part of your picture where would you like a puzzle."
+msgstr "I bɛ fɛ ka ja fan min kɛ pizɔli ye, kilike o yɔrɔ kan."
+
+#: ../../magic/src/puzzle.c:87
+msgid "Click to make a puzzle in fullscreen mode."
+msgstr "Kilike ja kan walasa a bɛ ka kɛ pizɔli ye."
+
+#: ../../magic/src/rails.c:101
+msgid "Rails"
+msgstr "Arayew"
+
+#: ../../magic/src/rails.c:103
+msgid "Click and drag to draw train track rails on your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ walasa ka arayew ɲɛgɛn i ka ja kan."
+
+#: ../../magic/src/rainbow.c:107
+msgid "Rainbow"
+msgstr "Ala ka murujan"
+
+#: ../../magic/src/rainbow.c:114
+msgid "You can draw in rainbow colors!"
+msgstr "I bɛ se ka ɲɛgɛn kɛ ni Ala ka murujan ɲɛw ye."
+
+#: ../../magic/src/rain.c:65
+msgid "Rain"
+msgstr "Sanji"
+
+#: ../../magic/src/rain.c:68
+msgid "Click to place a rain drop onto your picture."
+msgstr "Kilike, i ka sanji toni toni dɔ kɛ i ka ja kan."
+
+#: ../../magic/src/rain.c:69
+msgid "Click to cover your picture with rain drops."
+msgstr "Kilike, i ka ja fan bɛɛ kɛ sanji toni toni ye."
+
+#: ../../magic/src/realrainbow.c:86
+msgid "Real Rainbow"
+msgstr "Ala ka murujan yɛrɛ."
+
+#: ../../magic/src/realrainbow.c:88
+msgid "ROYGBIV Rainbow"
+msgstr "Ala ka murujan lakika."
+
+#: ../../magic/src/realrainbow.c:93
+msgid ""
+"Click where you want your rainbow to start, drag to where you want it to "
+"end, and then let go to draw a rainbow."
+msgstr ""
+"I bɛ fɛ Ala ka murujan ka daminɛ yɔrɔ min na ja kan, kilike o yɔrɔ kan, "
+"kalanin sama ka se fɔ i ɲɛnayɔrɔ la, i k'i kilikelen bɔ butɔn kan."
+
+#: ../../magic/src/ripples.c:81
+msgid "Ripples"
+msgstr "Jila kooriw "
+
+#: ../../magic/src/ripples.c:87
+msgid "Click to make ripples appear over your picture."
+msgstr "Kilike, i ka jila kooriw kɛ ja kan."
+
+#: ../../magic/src/rosette.c:93
+msgid "Rosette"
+msgstr "Rozasi"
+
+#: ../../magic/src/rosette.c:93
+msgid "Picasso"
+msgstr "Pikaso"
+
+#: ../../magic/src/rosette.c:98
+msgid "Click and start drawing your rosette."
+msgstr "Kilike, i k'i ka rozasi ɲɛgɛnni daminɛ."
+
+#: ../../magic/src/rosette.c:100
+msgid "You can draw just like Picasso!"
+msgstr "I bɛ se ka ɲɛgɛn kɛ i ko pikaso b'a kɛ cogo min na."
+
+#: ../../magic/src/sharpen.c:73
+msgid "Edges"
+msgstr "Dawolow"
+
+#: ../../magic/src/sharpen.c:74
+msgid "Sharpen"
+msgstr "Manuguyali"
+
+#: ../../magic/src/sharpen.c:75
+msgid "Silhouette"
+msgstr "Ja cogoya"
+
+#: ../../magic/src/sharpen.c:78
+msgid "Click and move the mouse to trace edges in parts of your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ walasa ka ja dafɛla dɔw ye."
+
+#: ../../magic/src/sharpen.c:79
+msgid "Click to trace edges in your entire picture."
+msgstr "Kilike walasa ka ja fan bɛɛ lajɛ."
+
+#: ../../magic/src/sharpen.c:80
+msgid "Click and move the mouse to sharpen parts of your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan dɔw misɛnya."
+
+#: ../../magic/src/sharpen.c:81
+msgid "Click to sharpen the entire picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan bɛɛ misɛnya."
+
+#: ../../magic/src/sharpen.c:82
+msgid "Click and move the mouse to create a black and white silhouette."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ i ka ja fan dɔw kɛ finman ni jɛman ye."
+
+#: ../../magic/src/sharpen.c:83
+msgid "Click to create a black and white silhouette of your entire picture."
+msgstr "Kilike i ka ja fan bɛɛ kɛ finman ni jɛman ye."
+
+#: ../../magic/src/shift.c:104
+msgid "Shift"
+msgstr "Ja bɔli a nɔ na"
+
+#: ../../magic/src/shift.c:110
+msgid "Click and drag to shift your picture around on the canvas."
+msgstr "Kilike, i ka ja bɔ a nɔ na kadiri kɔnɔ."
+
+#: ../../magic/src/smudge.c:83
+msgid "Smudge"
+msgstr "Bagandajilaman"
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:85
+msgid "Wet Paint"
+msgstr "Pɛntiri kɛnɛ"
+
+#: ../../magic/src/smudge.c:92
+msgid "Click and move the mouse around to smudge the picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja kɛ i ko a kɛnɛ don."
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:94
+msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja kɛ i ko a ɲiginnen n’a nɔgɔlen don. "
+
+#: ../../magic/src/snow.c:68
+msgid "Snow Ball"
+msgstr "Sanbɛlɛnin"
+
+#: ../../magic/src/snow.c:69
+msgid "Snow Flake"
+msgstr "Sanbɛlɛninkulu"
+
+#: ../../magic/src/snow.c:72
+msgid "Click to add snow balls to your picture."
+msgstr "Kilike I ka sanbɛlɛnin ɲɛgɛn k’i ka ja la."
+
+#: ../../magic/src/snow.c:73
+msgid "Click to add snow flakes to your picture."
+msgstr "Kilike, i ka sanbɛlɛninkulu k’i ka ja la."
+
+#: ../../magic/src/string.c:120
+msgid "String edges"
+msgstr "Fisɛliw (3)"
+
+#: ../../magic/src/string.c:123
+msgid "String corner"
+msgstr "Fisɛliw (2)"
+
+#: ../../magic/src/string.c:126
+msgid "String 'V'"
+msgstr "Fisɛliw (1)"
+
+#: ../../magic/src/string.c:134
+msgid ""
+"Click and drag to draw string art. Drag top-bottom to draw less or more "
+"lines, left or right to make a bigger hole."
+msgstr ""
+"Kilike, i ka ɲinɛnin cɛɛnɛ ka ciw kɛ. A samani o samani ka taa sanfɛ, dɔ bɛ "
+"fara ciw kan. N'i y'a sama ka taa kininfɛ walima numanfɛ, dɔ bɛ fara cɛmancɛ "
+"dingɛ bonya kan. "
+
+#: ../../magic/src/string.c:137
+msgid "Click and drag to draw arrows made of string art."
+msgstr "Kilike, i ka ɲinɛnin layaala ya ka dogodogonin tilennenw ci."
+
+#: ../../magic/src/string.c:140
+msgid "Draw string art arrows with free angles."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka kalakisɛw ci."
+
+#: ../../magic/src/tint.c:71
+msgid "Tint"
+msgstr "ɲɛw"
+
+#: ../../magic/src/tint.c:72
+msgid "Color & White"
+msgstr "ɲɛ dɔ + jɛman na"
+
+#: ../../magic/src/tint.c:75
+msgid ""
+"Click and move the mouse around to change the color of parts of your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan dɔw yɛlɛma."
+
+#: ../../magic/src/tint.c:76
+msgid "Click to change the color of your entire picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka ɲɛ kɛ ja fan bɛɛ la. "
+
+#: ../../magic/src/tint.c:77
+msgid ""
+"Click and move the mouse around to turn parts of your picture into white and "
+"a color you choose."
+msgstr ""
+"Kilike, i ka ɲinɛnin cɛɛnɛ ka ja fan dɔw kɛ jɛman ye, ka fan dɔw kɛ ɲɛ wɛrɛ "
+"ye."
+
+#: ../../magic/src/tint.c:78
+msgid "Click to turn your entire picture into white and a color you choose."
+msgstr "Kilike, i ka ja fan bɛɛ kɛ jɛman n'i sagola ɲɛ wɛrɛ ye."
+
+#: ../../magic/src/toothpaste.c:65
+msgid "Toothpaste"
+msgstr "Dako safunɛ"
+
+#: ../../magic/src/toothpaste.c:68
+msgid "Click and drag to squirt toothpaste onto your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka dako safunɛ seri seri ja kan. "
+
+#: ../../magic/src/tornado.c:127
+msgid "Tornado"
+msgstr "Fununfunun"
+
+#: ../../magic/src/tornado.c:133
+msgid "Click and drag to draw a tornado funnel on your picture."
+msgstr "Kilike, i ka ɲinɛnin cɛɛnɛ ka fununfunu ɲɛgɛn i ka ja kan."
+
+#: ../../magic/src/tv.c:74
+msgid "TV"
+msgstr "Telewisɔn"
+
+#: ../../magic/src/tv.c:79
+msgid ""
+"Click and drag to make parts of your picture look like they are on "
+"television."
+msgstr ""
+"Kilike i ka ɲinɛnin cɛɛnɛ k'i ka ja fan dɔw kɛ i ko u bɛ ka bɔ telewisɔn na. "
+""
+
+#: ../../magic/src/tv.c:82
+msgid "Click to make your picture look like it's on television."
+msgstr "Kilike, i k'a kɛ i ko i ka ja bɛ ka bɔ telewisɔn na. "
+
+#: ../../magic/src/waves.c:80
+msgid "Waves"
+msgstr "Jijɔdingɛ"
+
+#: ../../magic/src/waves.c:81
+msgid "Wavelets"
+msgstr "Jijɔdingɛ misɛnniw"
+
+#: ../../magic/src/waves.c:88
+msgid ""
+"Click to make the picture horizontally wavy. Click toward the top for "
+"shorter waves, the bottom for taller waves, the left for small waves, and "
+"the right for long waves."
+msgstr ""
+"Kilike i ka jijɔdingɛ dɔ kɛ i ka ja jɔjan fɛ. Kilike sanfɛ i ka jijɔdingɛ "
+"surunmanninw kɛ, i ka kilike duguma ka jijɔdingɛ jamanjaw kɛ. Kilike numanfɛ "
+"ka ka dɔ bɔ anpilitidi la, kilike kininfɛ ka dɔ fara anpilitidi kan.  "
+
+#: ../../magic/src/waves.c:89
+msgid ""
+"Click to make the picture vertically wavy. Click toward the top for shorter "
+"waves, the bottom for taller waves, the left for small waves, and the right "
+"for long waves."
+msgstr ""
+"Kilike i ka jijɔdingɛ dɔ kɛ i ka ja jɔsurun fɛ.  Kilike sanfɛ i ka jijɔdingɛ "
+"surunmanninw kɛ, i ka kilike duguma ka jijɔdingɛ jamanjaw kɛ. Kilike "
+"numanfɛ ka ka dɔ bɔ anpilitidi la, kilike kininfɛ ka dɔ fara anpilitidi kan. "
+" "

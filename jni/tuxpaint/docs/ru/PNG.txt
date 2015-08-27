@@ -1,0 +1,147 @@
+Использование формата PNG в Tux Paint
+
+Tux Paint - Простая программа рисования для детей.
+
+Copyright 2005 by Bill Kendrick and others
+bill@newbreedsoftware.com
+http://www.newbreedsoftware.com/tuxpaint/
+
+27 июня 2002 - 9 марта 2005
+$Id: PNG.txt,v 1.1 2007/08/12 19:15:15 wkendrick Exp $
+
+
+О PNG
+----------
+  PNG - это графический формат, чьё название расшифровывается как Portable Network Graphic (Переносимая сетевая графика). 
+  Это открытый стандарт, не защищённый патентами (в отличие от GIF). Это формат с высоким уровнем компрессии данных
+  (но без потери качества, в отличие от JPEG, - потеря качества позволяет делать файл меньше размером,
+  но приводит к потере части данных при сохранении),
+  с поддержкой 24-битного цвета (16,7 миллионов цветов), а также
+  "альфа-канала" - т.е. каждый пиксел может иметь различную степень
+  прозрачности.
+
+  Для получения дополнительной информации, посетите:  http://www.libpng.org/
+
+  Эти особенности (открытость, отсутствие потери качества, компрессия данных, поддержка прозрачности)
+  привели к выбору данного формата для Tux Paint.  (Поддержка PNG в Tux Paint
+  обеспечивается открытой библиотекой SDL_Image, а в неё взята
+  из библиотеки libPNG.)
+
+  Поддержка большого количества цветов позволяет использовать в TuxPaint фотореалистичные
+  штампы, а прозрачность позволяет создавать кисти высокого
+  качества.
+
+
+Как создать PNG
+----------------
+  Ниже приведён очень сжатый список способов создания PNG и
+  конвертации существующих изображений в PNG.
+
+
+  Пользователям Linux/Unix
+  ----------------
+    GIMP
+    --------
+      Наилучший инструмент создания рисунков PNG для использования в Tux Paint это
+      GIMP (GNU Image Manipulation Program) - высококачественная
+      открытая программа интерактивного рисования и редактирования фотографий.
+
+      Вероятно, она уже установлена в Вашей системе Linux. Если нет, она
+      наверняка доступна на инсталляционном диске или на
+      сайте, с которого Вы скачали дистрибутив. В противном случае:
+
+        http://www.gimp.org/
+
+
+    Krita
+    -----
+      Krita - приложение для рисования и редактирования изображения, входящее в KOffice.
+
+        http://koffice.kde.org/krita/
+
+
+    NetPBM
+    ------
+      NetPBM - это коллекция открытых утилит командной строки, конвертирующих
+      в и из различных форматов, включая GIF, TIFF, BMP, PNG и многие другие.
+
+      ПРИМЕЧАНИЕ: Форматы NetPBM (Portable Bitmap: PBM,
+      Portable Greymap: PGM, Portable Pixmap: PPM, и общий
+      Portable Any Map: PNM) не поддерживают альфа-канал, так что любая
+      информация о прозрачности (например, из файла GIF) будет потеряна! Используйте GIMP!
+
+      Вероятно, они уже установлены в Вашей системе Linux. Если нет, они
+      наверняка доступны на инсталляционном диске или на
+      сайте, с которого Вы скачали дистрибутив. В противном случае:
+
+        http://netpbm.sourceforge.net/
+
+
+    cjpeg/djpeg
+    -----------
+      "cjpeg" и "djpeg" - программы командной строки, конвертирующие между
+      форматом NetPBM Portable Any Map (PNM) и JPEG.
+
+      Вероятно, они уже установлены в Вашей системе Linux (под Debian они доступны в пакете "libjpeg-progs").
+      Если нет, они наверняка доступны на инсталляционном диске или на
+      сайте, с которого Вы скачали дистрибутив. В противном случае:
+
+        ftp://ftp.uu.net/graphics/jpeg/
+
+
+  Пользователям Windows
+  -------------
+    The Gimp
+      http://www.gimp.org/~tml/gimp/win32/
+
+    Canvas (Deneba)
+      http://www.deneba.com/products/canvas8/default2.html
+
+    CorelDRAW (Corel)
+      http://www.corel.com/
+
+    Fireworks (Macromedia)
+      http://macromedia.com/software/fireworks/
+      
+    Illustrator (Adobe)
+      http://www.adobe.com/products/illustrator/main.html
+
+    Paint Shop Pro (Jasc)
+      http://www.jasc.com/products/psp/
+    
+    Photoshop (Adobe)
+      http://www.adobe.com/products/photoshop/main.html
+
+    PIXresizer (Bluefive software)
+      http://bluefive.pair.com/pixresizer.htm
+
+
+  Пользователям Macintosh
+  ---------------
+    Canvas (Deneba)
+      http://www.deneba.com/products/canvas8/default2.html
+
+    CorelDRAW (Corel)
+      http://www.corel.com/
+
+    Fireworks (Macromedia)
+      http://macromedia.com/software/fireworks/
+
+    GraphicConverter (Lemke Software)
+      http://www.lemkesoft.de/us_gcabout.html
+
+    Illustrator (Adobe)
+      http://www.adobe.com/products/illustrator/main.html
+      
+    Photoshop (Adobe)
+      http://www.adobe.com/products/photoshop/main.html
+
+
+Дополнительная информация
+----------
+  На веб-сайте libPNG приведён список графических редакторов и конверторов,
+  поддерживающих формат PNG:
+
+    http://www.libpng.org/pub/png/pngaped.html
+    http://www.libpng.org/pub/png/pngapcv.html
+

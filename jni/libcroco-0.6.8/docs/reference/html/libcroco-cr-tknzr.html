@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-tknzr</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-term.html" title="cr-term">
+<link rel="next" href="libcroco-cr-token.html" title="cr-token">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-term.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-token.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-tknzr.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-tknzr.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-tknzr"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-tknzr.top_of_page"></a>cr-tknzr</span></h2>
+<p>cr-tknzr</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-tknzr.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr">CRTknzr</a>;
+                    <a class="link" href="libcroco-cr-tknzr.html#CRTknzrPriv" title="CRTknzrPriv">CRTknzrPriv</a>;
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-consume-chars" title="cr_tknzr_consume_chars ()">cr_tknzr_consume_chars</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> a_char</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> *a_nb_char</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-destroy" title="cr_tknzr_destroy ()">cr_tknzr_destroy</a>                    (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-get-cur-byte-addr" title="cr_tknzr_get_cur_byte_addr ()">cr_tknzr_get_cur_byte_addr</a>          (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> **a_addr</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-get-cur-pos" title="cr_tknzr_get_cur_pos ()">cr_tknzr_get_cur_pos</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInputPos" title="struct CRInputPos"><span class="type">CRInputPos</span></a> *a_pos</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-get-input" title="cr_tknzr_get_input ()">cr_tknzr_get_input</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> **a_input</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="returnvalue">glong</span></a>               <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-get-nb-bytes-left" title="cr_tknzr_get_nb_bytes_left ()">cr_tknzr_get_nb_bytes_left</a>          (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-get-next-token" title="cr_tknzr_get_next_token ()">cr_tknzr_get_next_token</a>             (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-token.html#CRToken" title="struct CRToken"><span class="type">CRToken</span></a> **a_tk</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-get-parsing-location" title="cr_tknzr_get_parsing_location ()">cr_tknzr_get_parsing_location</a>       (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_loc</code></em>);
+<a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="returnvalue">CRTknzr</span></a> *           <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-new" title="cr_tknzr_new ()">cr_tknzr_new</a>                        (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_input</code></em>);
+<a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="returnvalue">CRTknzr</span></a> *           <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-new-from-buf" title="cr_tknzr_new_from_buf ()">cr_tknzr_new_from_buf</a>               (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_free_at_destroy</code></em>);
+<a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="returnvalue">CRTknzr</span></a> *           <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-new-from-uri" title="cr_tknzr_new_from_uri ()">cr_tknzr_new_from_uri</a>               (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_file_uri</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-parse-token" title="cr_tknzr_parse_token ()">cr_tknzr_parse_token</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRTokenType</span> a_type</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRTokenExtraType</span> a_et</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> a_res</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> a_extra_res</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-peek-byte" title="cr_tknzr_peek_byte ()">cr_tknzr_peek_byte</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_offset</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_byte</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a>              <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-peek-byte2" title="cr_tknzr_peek_byte2 ()">cr_tknzr_peek_byte2</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_offset</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_eof</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-peek-char" title="cr_tknzr_peek_char ()">cr_tknzr_peek_char</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> *a_char</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-read-byte" title="cr_tknzr_read_byte ()">cr_tknzr_read_byte</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_byte</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-read-char" title="cr_tknzr_read_char ()">cr_tknzr_read_char</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> *a_char</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-ref" title="cr_tknzr_ref ()">cr_tknzr_ref</a>                        (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-seek-index" title="cr_tknzr_seek_index ()">cr_tknzr_seek_index</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRSeekPos</span> a_origin</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> a_pos</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-set-cur-pos" title="cr_tknzr_set_cur_pos ()">cr_tknzr_set_cur_pos</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInputPos" title="struct CRInputPos"><span class="type">CRInputPos</span></a> *a_pos</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-set-input" title="cr_tknzr_set_input ()">cr_tknzr_set_input</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_input</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-unget-token" title="cr_tknzr_unget_token ()">cr_tknzr_unget_token</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-token.html#CRToken" title="struct CRToken"><span class="type">CRToken</span></a> *a_token</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libcroco-cr-tknzr.html#cr-tknzr-unref" title="cr_tknzr_unref ()">cr_tknzr_unref</a>                      (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-tknzr.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-tknzr.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRTknzr"></a><h3>struct CRTknzr</h3>
+<pre class="programlisting">struct CRTknzr {
+        /*the private data of the tokenizer.*/
+        CRTknzrPriv *priv ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CRTknzrPriv"></a><h3>CRTknzrPriv</h3>
+<pre class="programlisting">typedef struct _CRTknzrPriv CRTknzrPriv;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-consume-chars"></a><h3>cr_tknzr_consume_chars ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_consume_chars              (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> a_char</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> *a_nb_char</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-destroy"></a><h3>cr_tknzr_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_tknzr_destroy                    (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-get-cur-byte-addr"></a><h3>cr_tknzr_get_cur_byte_addr ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_get_cur_byte_addr          (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> **a_addr</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-get-cur-pos"></a><h3>cr_tknzr_get_cur_pos ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_get_cur_pos                (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInputPos" title="struct CRInputPos"><span class="type">CRInputPos</span></a> *a_pos</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-get-input"></a><h3>cr_tknzr_get_input ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_get_input                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> **a_input</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-get-nb-bytes-left"></a><h3>cr_tknzr_get_nb_bytes_left ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="returnvalue">glong</span></a>               cr_tknzr_get_nb_bytes_left          (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-get-next-token"></a><h3>cr_tknzr_get_next_token ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_get_next_token             (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-token.html#CRToken" title="struct CRToken"><span class="type">CRToken</span></a> **a_tk</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-get-parsing-location"></a><h3>cr_tknzr_get_parsing_location ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_get_parsing_location       (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_loc</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-new"></a><h3>cr_tknzr_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="returnvalue">CRTknzr</span></a> *           cr_tknzr_new                        (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_input</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-new-from-buf"></a><h3>cr_tknzr_new_from_buf ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="returnvalue">CRTknzr</span></a> *           cr_tknzr_new_from_buf               (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_free_at_destroy</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-new-from-uri"></a><h3>cr_tknzr_new_from_uri ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="returnvalue">CRTknzr</span></a> *           cr_tknzr_new_from_uri               (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_file_uri</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-parse-token"></a><h3>cr_tknzr_parse_token ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_parse_token                (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRTokenType</span> a_type</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRTokenExtraType</span> a_et</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> a_res</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> a_extra_res</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-peek-byte"></a><h3>cr_tknzr_peek_byte ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_peek_byte                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_offset</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_byte</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-peek-byte2"></a><h3>cr_tknzr_peek_byte2 ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a>              cr_tknzr_peek_byte2                 (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_offset</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_eof</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-peek-char"></a><h3>cr_tknzr_peek_char ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_peek_char                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> *a_char</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-read-byte"></a><h3>cr_tknzr_read_byte ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_read_byte                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_byte</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-read-char"></a><h3>cr_tknzr_read_char ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_read_char                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> *a_char</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-ref"></a><h3>cr_tknzr_ref ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_tknzr_ref                        (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-seek-index"></a><h3>cr_tknzr_seek_index ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_seek_index                 (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRSeekPos</span> a_origin</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> a_pos</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-set-cur-pos"></a><h3>cr_tknzr_set_cur_pos ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_set_cur_pos                (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInputPos" title="struct CRInputPos"><span class="type">CRInputPos</span></a> *a_pos</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-set-input"></a><h3>cr_tknzr_set_input ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_set_input                  (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_input</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-unget-token"></a><h3>cr_tknzr_unget_token ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_tknzr_unget_token                (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-token.html#CRToken" title="struct CRToken"><span class="type">CRToken</span></a> *a_token</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-tknzr-unref"></a><h3>cr_tknzr_unref ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cr_tknzr_unref                      (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-attr-sel</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-additional-sel.html" title="cr-additional-sel">
+<link rel="next" href="libcroco-cr-cascade.html" title="cr-cascade">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-additional-sel.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-cascade.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-attr-sel.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-attr-sel.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-attr-sel"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-attr-sel.top_of_page"></a>cr-attr-sel</span></h2>
+<p>cr-attr-sel</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-attr-sel.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel">CRAttrSel</a>;
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-attr-sel.html#cr-attr-sel-append-attr-sel" title="cr_attr_sel_append_attr_sel ()">cr_attr_sel_append_attr_sel</a>         (<em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> *a_attr_sel</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-attr-sel.html#cr-attr-sel-destroy" title="cr_attr_sel_destroy ()">cr_attr_sel_destroy</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> *a_this</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-attr-sel.html#cr-attr-sel-dump" title="cr_attr_sel_dump ()">cr_attr_sel_dump</a>                    (<em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">FILE</span> *a_fp</code></em>);
+<a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="returnvalue">CRAttrSel</span></a> *         <a class="link" href="libcroco-cr-attr-sel.html#cr-attr-sel-new" title="cr_attr_sel_new ()">cr_attr_sel_new</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-attr-sel.html#cr-attr-sel-prepend-attr-sel" title="cr_attr_sel_prepend_attr_sel ()">cr_attr_sel_prepend_attr_sel</a>        (<em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> *a_attr_sel</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            <a class="link" href="libcroco-cr-attr-sel.html#cr-attr-sel-to-string" title="cr_attr_sel_to_string ()">cr_attr_sel_to_string</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> const *a_this</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-attr-sel.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-attr-sel.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRAttrSel"></a><h3>struct CRAttrSel</h3>
+<pre class="programlisting">struct CRAttrSel {
+        CRString             *name ;
+        CRString             *value ;
+        enum AttrMatchWay  match_way ;
+        CRAttrSel          *next ;
+        CRAttrSel          *prev ;
+        CRParsingLocation location ;
+};
+</pre>
+<p>
+<a class="link" href="libcroco-cr-additional-sel.html#CRAdditionalSel" title="struct CRAdditionalSel"><span class="type">CRAdditionalSel</span></a> abstracts an attribute selector.
+Attributes selectors are described in the css2 spec [5.8].
+There are more generally used in the css2 selectors described in
+css2 spec [5] .
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-attr-sel-append-attr-sel"></a><h3>cr_attr_sel_append_attr_sel ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_attr_sel_append_attr_sel         (<em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> *a_attr_sel</code></em>);</pre>
+<p>
+Appends an attribute selector to the current list of
+attribute selectors represented by a_this.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the this pointer of the current instance of  <a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_attr_sel</code></em> :</span></p></td>
+<td>selector to append.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-attr-sel-destroy"></a><h3>cr_attr_sel_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_attr_sel_destroy                 (<em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> *a_this</code></em>);</pre>
+<p>
+Destroys the current instance of <a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a>.
+Frees all the fields if they are non null.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current
+instance of <a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a>.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-attr-sel-dump"></a><h3>cr_attr_sel_dump ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_attr_sel_dump                    (<em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">FILE</span> *a_fp</code></em>);</pre>
+<p>
+Dumps the current instance of <a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> to a file.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of
+<a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_fp</code></em> :</span></p></td>
+<td>the destination file.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-attr-sel-new"></a><h3>cr_attr_sel_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="returnvalue">CRAttrSel</span></a> *         cr_attr_sel_new                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-attr-sel-prepend-attr-sel"></a><h3>cr_attr_sel_prepend_attr_sel ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_attr_sel_prepend_attr_sel        (<em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> *a_attr_sel</code></em>);</pre>
+<p>
+Prepends an attribute selector to the list of
+attributes selector represented by a_this.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance *of <a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_attr_sel</code></em> :</span></p></td>
+<td>the attribute selector to append.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-attr-sel-to-string"></a><h3>cr_attr_sel_to_string ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            cr_attr_sel_to_string               (<em class="parameter"><code><a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a> const *a_this</code></em>);</pre>
+<p>
+Serializes an attribute selector into a string
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-attr-sel.html#CRAttrSel" title="struct CRAttrSel"><span class="type">CRAttrSel</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the serialized attribute selector.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

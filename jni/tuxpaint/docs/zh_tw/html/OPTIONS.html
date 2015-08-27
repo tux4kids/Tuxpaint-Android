@@ -1,0 +1,1578 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>Tux Paint README</title>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#FF0000"
+alink="#FF00FF">
+
+<center>
+<h1>Tux&nbsp;Paint<br>
+
+version
+
+0.9.18
+
+</h1>
+<h2>選項</h2>
+
+<p>Copyright 2002-2007 by Bill Kendrick and others<br>
+New Breed Software</p>
+
+<p><a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a><br>
+<a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a><br>
+翻譯：黃敏松 &lt;<a href="mailto:songhuang.tw@gmail.com">songhuang.tw@gmail.com</a>&gt;</p>
+
+<p>10 月 26 日, 2007</p>
+</center>
+
+<hr size=2 noshade>
+
+<h1>Tux Paint Config.</h1>
+<blockquote>
+  <p>從 Tux&nbsp;Paint 版本 0.9.14 開始我們提供一個圖形介面的工具，
+  可以來改變 Tux Paint 的設定。但是如果你沒有安裝或使用這個工具，
+  或者想要更了解有哪些選項可以使用，請繼續看下去。</p>
+</blockquote>
+
+<hr size=2 noshade>
+
+<h1>規劃檔</h1>
+<blockquote>
+  <p>你可以為 Tux&nbsp;Paint 建立一個在每次執行時都會去讀取的簡單的規劃檔。</p>
+
+  <p>這個檔案是純文字檔，裡面放的是你想要開啟的選項：</p>
+
+  <h2>Linux, Unix 和麥金塔 OS X 的使用者</h2>
+  <blockquote>
+    <p>這個檔案必須放在你的家目錄中，名為 "<code><b>.tuxpaintrc</b></code>"。
+    (就是在 "<code>~/.tuxpaintrc</code>" 或 "<code>$HOME/.tuxpaintrc</code>")</p>
+
+    <h3>系統層級的規劃檔</h3>
+    <blockquote>
+      <p>在這個檔案被讀取之前，一個系統層級的規劃檔會先被讀取
+      (預設中這裡沒有任何的設定)。他的路徑是：</p>
+
+      <blockquote>
+        <code>/etc/tuxpaint/tuxpaint.conf</code>
+      </blockquote>
+	
+      <p>你可以用命令列參數指定不要同時讀取這個檔案，預設是沒有的
+      (這可以使你的 "<code>.tuxpaintrc</code>" 和命令列參數失效)：</p>
+
+      <blockquote>
+        <code>--nosysconfig</code>
+      </blockquote>
+    <blockquote>
+  </blockquote>
+
+  <h2>Windows 的使用者</h2>
+  <blockquote>
+    <p>這個檔案必須放在 Tux&nbsp;Paint 的目錄中，名為 "<code><b>tuxpaint.cfg</b></code>"。</p>
+	
+    <p>你可以使用記事本(NotePad)或是 WordPad 來建立這個檔案，儲存時要確定選用純文字格式，
+    還有副檔名要確定不是使用 ".txt" ... </p>
+  </blockquote>
+</blockquote>
+
+<hr size=2 noshade>
+
+<h1>有效的選項</h1>
+<blockquote>
+  <p>以下的設定可以在規劃檔中來作設定。
+  (命令列的參數可以推翻這些設定，請見後面 "<a href="#command_line"><i>命令列的參數</i></a>" 的敘述)</p>
+
+  <dl>
+  <dt><code><b>fullscreen=yes</b></code></dt>
+  <dd>
+    使用全螢幕模式。
+  </dd>
+  
+  <dt><code><b>fullscreen=native</b></code></dt>
+  <dd>
+    使用全螢幕模式，不同的是會依照螢幕目前的解析度呈現(視作業系統的設定)。
+  </dd>
+
+  <dt><code><b>windowsize=<i>SIZE</i></b></code></dt>
+  <dd>
+    <p>執行程式於不同的大小(視窗模式)或不同的解析度(全螢幕模式)，相對於預設的(通常是 800x600)。</p>
+    <p>這個 <i>SIZE</i> 的值要用圖素，以 '寬x高' 的格式呈現。這個值最小的寬是 640，最小的高是 480。</p>
+
+    <p>例如：
+    <ul>
+    <li>640x480
+    <li>1024x768
+    <li>768x1024
+    <li>1600x1200
+    </ul>
+    </p>
+  </dd>
+
+  <dt><code><b>orient=portrait</b></code></dt>
+  <dd>
+    <p>將 Tux&nbsp;Paint 的寬/高參數對換，可以用在像 tablet&nbsp;PC 旋轉螢幕成照片展視的時候。</p>
+  </dd>
+
+  <dt><code><b>native=yes</b></code></dt>
+  <dd>
+    <p>當你執行 <i>Tux&nbsp;Paint</i> 在全螢幕模式時，這會依照作業系統目前的螢幕解析度來呈現。
+       (不管 "<code>windowsize</code>" 的參數值)</p>
+  </dd>
+  
+  <dt><code><b>nosound=yes</b></code></dt>
+  <dd>
+    關閉音效。
+  </dd>
+  
+  <dt><code><b>noquit=yes</b></code></dt>
+  <dd>
+    <p>取消螢幕上「離開」的按鍵並預防用 <b>[Escape]</b> 鍵來離開 <i>Tux&nbsp;Paint</i>。</p>
+    
+    <p>使用 <b>[Alt]</b>&nbsp;+&nbsp;<b>[F4]</b> 組合鍵或按下視窗右上角的關閉按鈕
+    (如果你不是在全螢幕模式) 一樣可以離開 <i>Tux&nbsp;Paint</i>。</p>
+
+    <p>你也可以使用這個組合鍵來離開：
+    <b>[Shift]</b>&nbsp;+&nbsp;<b>[Control]</b>&nbsp;+&nbsp;<b>[Escape]</b>。</p>
+  </dd>
+  
+  <dt><code><b>noprint=yes</b></code></dt>
+  <dd>
+    關閉列印功能。
+  </dd>
+  
+  <dt><code><b>printdelay=<i>SECONDS</i></b></code></dt>
+  <dd>
+    限制列印的間隔時間，每次列印後需間隔 <i>SECONDS</i> 秒後才能再列印。
+  </dd>
+
+  <dt><code><b>printcommand=<i>COMMAND</i></b></code></dt>
+  <dd>
+    <p><i>(只限於 Linux 和 Unix )</i></p>
+
+    <p>當「列印」按鈕被按下時，使用 <i>COMMAND</i> 這個指令來列印 PostScript 格式的檔案。
+    如果這個參數沒有專程設定的話，預設的指令是：</p>
+
+    <blockquote>
+      <code>lpr</code>
+    </blockquote>
+    
+    <p>這是將 PNG 轉換成 NetPBM (可移植到任何圖像的格式)，再轉換成 PostScript 格式，
+    然後 "<code>lpr</code>" 命令把他送到印表機去列印。</p>
+    
+    <p><b>Note:</b> <i>Tux&nbsp;Paint</i> 0.9.15 之前的版本傳送 PNG 格式的資料給列印的指令
+    ( 預設是給 "<code>pngtopnm&nbsp;|&nbsp;pnmtops&nbsp;|&nbsp;lpr</code>")。</p>
+    
+    <p>如果你在 0.9.15 之前的版本設定了替代的 <code><b>printcommand</b></code> 的話，
+    你要將他改回來。</p>
+  </dd>
+
+  <dt><code><b>altprintcommand=<i>COMMAND</i></b></code></dt>
+  <dd>
+    <p><i>(只限於 Linux 和 Unix)</i></p>
+
+    <p>當「列印」鈕被按下的同時 <b>[Alt]</b> 鍵也被按著，就會使用 <i>COMMAND</i>
+    這個指令來列印 PostScript 格式的檔案。(這主要被用來提供列印交談框，在 Windows
+    和 Mac OS X 按下<b>[Alt]</b>+「列印」鈕是一樣的效果。)</p>
+    
+    <p>如果這個參數沒有特別設定的話，預設的指令是 KDE 的圖形列印交談框：</p>
+
+    <blockquote>
+      <code>kprinter</code>
+    </blockquote>
+  </dd>
+  
+  <dt><code><b>printcfg=yes</b></code></dt>
+  <dd>
+    <p><i>(只限於 Windows 和 Max OS X)</i></p>
+  
+    <p>Tux&nbsp;Paint 會在列印時使用印表機的規劃檔。當按下 <b>[Alt]</b> 鍵同時按下「列印」按鈕時，
+    Tux&nbsp;Paint 會先開啟印表機的設定視窗。</p>
+    
+    <p>(註：這只能在 Tux&nbsp;Paint 不是使用全螢幕模式時有作用。)
+    在設定視窗中的任何變動都會儲存在 "<code>userdata/print.cfg</code>" 檔案中，
+    當 "printcfg" 選項被設定時都會被重複使用。</p>
+  </dd>
+    
+  <dt><code><b>altprint=always</b></code></dt>
+  <dd>
+    <p>這會使得 Tux&nbsp;Paint 在「列印」鈕被按下時，總是呼叫出列印交談框
+    (或者在 Linux/Unix 會執行 "altprintcommand")。換句話說，這就像同時按下「列印」鈕及
+    <b>[Alt]</b> 鍵，除了你不用每次都要按著 <b>[Alt]</b> 鍵。</p>
+  </dd>
+  
+  <dt><code><b>altprint=never</b></code></dt>
+  <dd>
+    <p>這會防止 Tux&nbsp;Paint 在按下「列印」鈕時 <i>總是</i> 呼叫出列印交談框。
+    換句話說，這會使得 <b>[Alt]</b> 在「列印」鈕被按下時失去作用。</p>
+  </dd>
+  
+  <dt><code><b>altprint=mod</b></code></dt>
+  <dd>
+    <p>這是正常預設的狀況。當同時按下「列印」鈕及 <b>[Alt]</b> 鍵時，
+    Tux&nbsp;Paint 會呼叫出列印交談框(或者在 Linux/Unix 會執行 "altprintcommand")。
+    只按下「列印」鈕不按著 <b>[Alt]</b> 的話就只會列印而不會呼叫出交談框。</p>
+  </dd>
+ 
+  <dt><code><b>papersize=<i>PAPERSIZE</i></b></code></dt>
+  <dd>
+    <p><i>(這裡指的是使用 Tux&nbsp;Paint 的作業平台裡的 PostScript 產生器
+       &mdash; 而不是 Windows, Mac OS X 或是 BeOS.)</i></p>
+
+    <p>告訴 Tux&nbsp;Paint 說 PostScript 將會使用哪一種的紙張，
+       如果沒有指定的話， Tux&nbsp;Paint 會先檢查你的 <code>$PAPER</code> 環境變數，
+       然後是 <code>/etc/papersize</code> 檔案，最後是使用函式庫 'libpaper' 預設的紙張。</p>
+
+    <p>有效的紙張尺寸包括：
+       letter, legal, tabloid, executive, note, statement,
+       a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,
+       b0, b1, b2 b3, b4,
+       10x14, 11x17,
+       halfletter, halfexecutive, halfnote,
+       folio, quarto, ledger,
+       archA, archB, archC, archD, archE,
+       flsa, flse,
+       csheet, dsheet, esheet.
+    </p>
+  </dd>
+
+  <dt><code><b>nolockfile=yes</b></code></dt>
+  <dd>
+    <p>Tux&nbsp;Paint 預設會使用 'lockfile' 來預防在三十秒內被重覆啟動。
+       ( 這是用來防止意外的重覆啟動，例如在一個點一下就啟動的圖示上點二下，
+         或者是一個不耐煩的動作重覆點擊圖示 )</p>
+
+    <p>要讓 Tux&nbsp;Paint 忽略 lockfile，容許他在三十秒內重覆啟動的話，
+       就要在規劃檔裡啟用這個參數設定，或是在命令列執行 Tux&nbsp;Paint 時使用
+       '<code>--nolockfile</code>' 參數。</p>
+
+    <p>對 Linux 和 Unix 而言，lockfile 預設是儲存在 "<code>~/.tuxpaint/</code>"，
+       對 Windows 則是在 "<code>userdata\</code>"。</p>
+  </dd>
+
+  <dt><code><b>simpleshapes=yes</b></code></dt>
+  <dd>
+    關閉形狀工具的旋轉步驟。只需要點選中心位置，拖拉至適當大小然後放開滑鼠按鍵，
+    就可以畫出一個形狀來。
+  </dd>
+  
+  <dt><code><b>uppercase=yes</b></code></dt>
+  <dd>
+    所有的英文字母都會變成大寫(例如："Brush" 會變成 "BRUSH")。
+    (這只適用在英文的訊息上。)
+  </dd>
+
+  <dt><code><b>grab=yes</b></code></dt>
+  <dd>
+    <p>Tux&nbsp;Paint 會試著佔住滑鼠及鍵盤，所以滑鼠游標會被鎖在
+    Tux&nbsp;Paint 的視窗中，大部份的鍵盤輸入也都直接導向他。</p>
+  
+    <p>這可以用在使 <b>[Alt]-[Tab]</b> 視窗切換的系統動作失效，
+    和使 <b>[Ctrl]-[Escape]</b> 失效等。特別是在全螢幕模式時非常有幫助。</p>
+  </dd>
+  
+  <dt><code><b>noshortcuts=yes</b></code></dt>
+  <dd>
+    <p>這會使鍵盤的快捷鍵失效 (例如：<b>[Ctrl]-[S]</b> 存檔，
+    <b>[Ctrl]-[N]</b> 開新圖，等等。)。</p>
+  
+    <p>這可以減少不是那麼熟悉鍵盤操作的小朋友，輸入了不是預期中的命令。</p>
+  </dd>
+  
+  <dt><code><b>nowheelmouse=yes</b></code></dt>
+  <dd>
+    這可以取消滑鼠上滾輪的功能。
+    (正常來講滾輪可以捲動右邊的選擇目錄。)
+  </dd>
+
+  <dt><code><b>nobuttondistinction=yes</b></code></dt>
+  <dd>
+    <p>在 Tux&nbsp;Paint 0.9.15 之前的版本，滑鼠的中鍵及右鍵都可以用來按。
+    在 0.9.15 這個版本，變成 <i>只有</i> 滑鼠左鍵有作用，這樣就可以訓練小朋友不要使用錯誤的鼠鍵。</p>
+
+    <p>不過對於一些區分二鍵或三鍵滑鼠有困難的小朋友，可以使用這個參數來恢復到舊版的功能。</p>
+  </dd>
+
+  <dt><code><b>nofancycursors=yes</b></code></dt>
+  <dd>
+    <p>這會使 Tux&nbsp;Paint 花俏的滑鼠游標失效，而使用系統正常的游標。</p>
+  
+    <p>在某些環境中花俏的游標會有些問題，可以用這個選項來避開這個問題。</p>
+  </dd>
+  
+  <dt><code><b>hidecursor=yes</b></code></dt>
+  <dd>
+    <p>這會在 Tux&nbsp;Paint 中完全的隱藏滑鼠的游標。</p>
+
+    <p>這用在像平板電腦的觸控螢幕上會很有用。</p>
+  </dd>
+
+  <dt><code><b>nooutlines=yes</b></code></dt>
+  <dd>
+    <p>這個模式可以簡化<b>劃線</b>，<b>形狀</b>，<b>圖章</b>和<b>橡皮擦</b>
+    工具的外框線及彈性線。</p>
+  
+    <p>這對於在很慢的電腦上執行 Tux&nbsp;Paint 或是在遠端的 X-Window
+    顯示上很有幫助。</p>
+  </dd>
+  
+  <dt><code><b>sysfonts=yes</b></code></dt>
+  <dd>
+    <p>這個參數會讓 Tux Paint 試著去載入作業系統的字型檔 (用在 <b>字母</b> 工具上)。
+    正常來講 Tux Paint 只會載入 Tux Paint 包裝在一起的字型。</p>
+  </dd>
+
+  <dt><code><b>nostamps=yes</b></code></dt>
+  <dd>
+    <p>這個選項是告訴 Tux&nbsp;Paint 不要載入任何的圖章圖樣，
+    用來關閉<b>橡皮圖章</b>工具用的。</p>
+  
+    <p>這可以加快 Tux&nbsp;Paint 第一次載入時的速度，也可以減少記憶體的使用量，
+    當然這也會造成沒有圖章可以使用的情況。</p>
+  </dd>
+  
+  <dt><code><b>nostampcontrols=yes</b></code></dt>
+  <dd>
+    有些圖章圖樣可以上下左右翻轉，或可改變大小。這個選項會關閉這些控制，
+    而且只會提供基本的圖章。
+  </dd>
+  
+  <dt><code><b>mirrorstamps=yes</b></code></dt>
+  <dd>
+    <p>有些圖章是可以左右相反的，這個選項會讓這些圖章預設就是相反的。</p>
+  
+    <p>這可以幫助喜歡「由右至左」更甚於「由左至右」的人。</p>
+  </dd>
+  
+  <dt><code><b>stampsize=SIZE</b></code></dt>
+  <dd>
+    <p>使用這個選項可以強制 Tux&nbsp;Paint 設定所有圖章的起始大小，
+       <code>SIZE</code> 的值必須介於 0 到 10 之間。這個值會關係到圖章本身的大小，
+       以及 Tux&nbsp;Paint 目前畫布的大小所影響。</p>
+
+    <p>指定為 "<code>default</code>" 的話，就是讓 Tux&nbsp;Paint 來決定。
+       (這是標準的模式)</p>
+  </dd>
+
+  <dt><code><b>keyboard=yes</b></code></dt>
+  <dd>
+    <p>這會允許使用鍵盤的方向鍵來控制滑鼠的游標。
+    (例如：用在沒有滑鼠的環境中。)</p>
+    
+    <p>方向鍵可以移動滑鼠的游標，空格鍵就像是滑鼠的按鍵。</p>
+  </dd>
+
+  <dt><code><b>savedir=<i>DIRECTORY</i></b></code></dt>
+  <dd>
+    <p>這可以改變 Tux&nbsp;Paint 儲存和開啟圖形時的目錄。</p>
+
+    <p>如果你沒有修改他，預設路徑是：
+       <ul>
+         <li>Linux &amp; Unix &mdash; 在你的家目錄(就是 "<code>~</code>"
+             或 "<code>$HOME</code>")中的隱藏目錄 "<code>.tuxpaint</code>"。<br>
+             Example: "<code>/home/<i>username</i>/.tuxpaint/saved/</code>"<br>
+         <br>
+         <li>Windows &mdash; 在你的 "<code>Application&nbsp;Data</code>" 目錄中的
+             "<code>TuxPaint</code>" 目錄裡。<br>
+             Example: "<code>C:\Documents&nbsp;and&nbsp;Settings\<i>Username</i>\Application&nbsp;Data\TuxPaint\saved\</code>"<br>
+         <br>
+         <li>Mac OS X &mdash; 在你的 "<code>Application&nbsp;Support</code>" 目錄中的
+             "<code>TuxPaint</code>" 目錄裡。<br>
+             Example: "<code>/Users/<i>Username</i>/Library/Application&nbsp;Support/TuxPaint/saved/</code>"<br>
+       </ul>
+    </p>
+
+    <p><b>註：</b> 當指定一個 Windows 的磁碟裝置時 (如："<code>H:\</code>")，
+       你也必須指定一個子目錄。</p>
+
+    <p><b>註：</b> 在早於版本 0.9.18 之前， Tux&nbsp;Paint 同樣使用 "<code>savedir</code>"
+       用來搜尋個人的資料檔案(筆劃，圖章，起始底稿和字型)。從版本 0.9.18 開始，這些會獨立開來
+       (請見底下的 "<code>datadir</code>" 選項)。</p>
+
+    <p><b>例如：</b> <code>savedir=Z:\tuxpaint\</code></p>
+  </dd>
+
+  <dt><code><b>datadir=<i>DIRECTORY</i></b></code></dt>
+  <dd>
+    <p>這個選項用來改變 Tux&nbsp;Paint 尋找個人資料檔案(目前使用者的筆劃，圖章，起始底稿和字型檔)</p>
+
+    <p>Tux&nbsp;Paint 會搜尋資料目錄底下的子目錄名稱為 "<code>brushes</code>", "<code>stamps</code>", "<code>starters</code>"
+       和 "<code>fonts</code>"。</p>
+
+    <p>如果你沒有改變他，預設的路徑是：
+       <ul>
+         <li>Linux &amp; Unix &mdash; 在你的家目錄(就是 "<code>~</code>"
+             或 "<code>$HOME</code>")中的隱藏目錄 "<code>.tuxpaint</code>"。<br>
+             Example: "<code>/home/<i>username</i>/.tuxpaint/brushes/</code>"<br>
+         <br>
+
+         <li>Windows &mdash; 在你的 "<code>Application&nbsp;Data</code>" 目錄中的
+             "<code>TuxPaint</code>" 目錄裡。<br>>
+             Example: "<code>C:\Documents&nbsp;and&nbsp;Settings\<i>Username</i>\Application&nbsp;Data\TuxPaint\brushes\</code>"<br>
+         <br>
+
+         <li>Mac OS X &mdash; 在你的 "<code>Application&nbsp;Support</code>" 目錄中的
+             "<code>TuxPaint</code>" 目錄裡。<br>
+             Example: "<code>/Users/<i>Username</i>/Library/Application&nbsp;Support/TuxPaint/brushes/</code>"<br>
+       </ul>
+    </p>
+
+    <p><b>註：</b> 在早於版本 0.9.18 之前， Tux&nbsp;Paint 同樣使用 "<code>savedir</code>"
+       用來搜尋個人的資料檔案(筆劃，圖章，起始底稿和字型)。從版本 0.9.18 開始，這些會獨立開來。</p>
+
+    <p><b>註：</b> 當指定一個 Windows 的磁碟裝置時 (如："<code>H:\</code>")，
+       你也必須指定一個子目錄。</p>
+
+    <p><b>Example:</b> <code>datadir=/home/johnny/tuxpaint-data/</code></p>
+  </dd>
+
+  <dt><code><b>saveover=yes</b></code></dt>
+  <dd>
+    這會關閉在儲存時出現「 <i>儲存這張圖畫覆蓋掉舊的版本？</i> 」的提示。
+    使用這個選項，舊的版本會自動的被新的版本所覆蓋。
+  </dd>
+
+  <dt><code><b>saveover=new</b></code></dt>
+  <dd>
+    這也會關閉在儲存時出現「 <i>儲存這張圖畫覆蓋掉舊的版本？</i> 」的提示。
+    使用這個選項，永遠會另存一張新圖，而不會覆蓋掉舊的版本。
+  </dd>
+
+  <dt><code><b>saveover=ask</b></code></dt>
+  <dd>
+    <p><i>(這個選項已經是多餘的了，因為這已經是預設值了。)</i></p>
+    當要儲存一張已經存過檔的圖畫時，你會先被訊問是否要覆蓋掉舊的版本。
+  </dd>
+
+  <dt><code><b>nosave=yes</b></code></dt>
+  <dd>
+    這會關閉 Tux Paint 的存檔功能(也會使得「儲存」的按鍵失效)。
+    這可以用在只是開啟來玩的情況，或是測試的環境。
+  </dd>
+
+  <dt><code><b>autosave=yes</b></code></dt>
+  <dd>
+    這會避免 Tux&nbsp;Paint 在離開時問你要不要存檔，他預設你要存檔。
+  </dd>
+
+  <dt><code><b>startblank=yes</b></code</dt>
+  <dd>
+    這會讓 Tux&nbsp;Paint 在啟動時顯示空白的畫布，而不是載入最後編輯的圖畫。
+  </dd>
+
+  <dt><code><b>colorfile=<i>FILENAME</i></b></code></dt>
+  <dd>
+    <p>你可以建立一個描述你想要的顏色的純文字檔，並把設定在 <code>colorfile</code>
+       的選項中來改變 Tux&nbsp;Paint 的預設調色盤。</p>
+
+    <p>這個檔案必須要一行指定一個顏色，這個顏色是使用紅、綠、藍的值所組成的，
+       每個值是介於 0 到 255 (明亮度)。(更多的資訊請參考 Wikipedia's
+       "<a href="http://en.wikipedia.org/wiki/Rgb">RGB color model</a>"
+       文件。)</p>
+
+    <p>顏色必須寫成三個十進位的數字 (如： "<code>255&nbsp;68&nbsp;136</code>")，
+       或是三個連在一起的三或六長度的十六進位數字 (如： "<code>#ff4488</code>" 或 "<code>#F48</code>")。</p>
+
+    <p>在顏色的後面(同一行)你要輸入一句說明文字，Tux 會在顏色被點選時顯示這句文字。
+       (例如： "<code>#FFF&nbsp;雪白</code>")</p>
+
+    <p>你可以將目前 Tux&nbsp;Paint 預設的顏色當作範例，檔案在：
+       "<a href="../default_colors.txt"><code>default_colors.txt</code></a>"。</p>
+    
+    <p>註：你必須用空白隔開十進位的數字，並且在十六進位的數字前放一個指示碼
+       ("<code>#</code>")。長度為三的十六進位數字，每一個數字代表二個相同的數字，所以
+       "<code>#FFF</code>" 就等同於 "<code>#FFFFFF</code>"，而不是 "<code>#F0F0F0</code>"。</p>
+  </dd>
+
+  <dt><code><b>lang=<i>LANGUAGE</i></b></code></dt>
+  <dd>
+    <p>可以選擇一個已經支援的語文版本來啟動 Tux&nbsp;Paint，
+    目前包括有：</p>
+
+    <blockquote>
+    <table border=1 cellspacing=0 cellpadding=4
+    summary="Possible values for 'lang' language setting">
+    <tr>
+      <td><code>english</code></td>
+      <td><code>美式英文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>afrikaans</code></td>
+      <td><code>南非荷蘭文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>albanian</code></td>
+      <td>阿爾巴尼亞文</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>basque</code></td>
+      <td><code>巴斯克文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>belarusian</code></td>
+      <td><code>白俄羅斯文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>bokmal</code></td>
+      <td><code>挪威文 (巴克摩)</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>brazilian-portuguese</code></td>
+      <td><code>巴西葡萄牙文</code></td>
+      <td><code>巴西</code></td>
+    </tr>
+    <tr>
+      <td><code>breton</code></td>
+      <td><code>布列塔尼文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>british-english</code></td>
+      <td><code>英文 (英國)</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>bulgarian</code></td>
+      <td><code>保加利亞文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>catalan</code></td>
+      <td><code>加泰隆尼亞文</code></td>
+      <td>西班牙</td>
+    </tr>
+    <tr>
+      <td><code>chinese</code></td>
+      <td><code>簡體中文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>croatian</code></td>
+      <td><code>克羅埃西亞文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>czech</code></td>
+      <td><code>捷克文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>danish</code></td>
+      <td><code>丹麥文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>dutch</code></td>
+      <td><code>荷蘭文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>esperanto</code></td>
+      <td>世界語</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>estonian</code></td>
+      <td>愛沙尼亞文</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>finnish</code></td>
+      <td><code>芬蘭文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>french</code></td>
+      <td><code>法文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>gaelic</code></td>
+      <td><code>蓋爾文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>galician</code></td>
+      <td><code>加里西亞文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>georgian</code></td>
+      <td><code>喬治亞文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>german</code></td>
+      <td><code>德文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>greek</code></td>
+      <td><code>希臘文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>gronings</code></td>
+      <td><code>荷蘭方言</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>gujarati</code></td>
+      <td><code>古吉拉特文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>hebrew</code></td>
+      <td><code>希伯來文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>hindi</code></td>
+      <td><code>北印度文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>hungarian</code></td>
+      <td><code>匈牙利文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>icelandic</code></td>
+      <td><code>冰島文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>indonesian</code></td>
+      <td><code>印尼文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>italian</code></td>
+      <td><code>義大利文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>japanese</code></td>
+      <td><code>日文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>kinyarwanda</code></td>
+      <td>基尼亞安達文</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>klingon</code></td>
+      <td><code>克林貢文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>korean</code></td>
+      <td><code>韓文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>latvian</code></td>
+      <td><code>拉脫維亞文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>lithuanian</code></td>
+      <td><code>立陶宛文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>malay</code></td>
+      <td><code>馬來文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>mexican-spanish</code></td>
+      <td><code>墨西哥的西班牙文</code></td>
+      <td><code>&nbsp;</code></td>
+    </tr>
+    <tr>
+      <td><code>ndebele</code></td>
+      <td><code>恩德貝勒文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>norwegian</code></td>
+      <td><code>挪威文 (耐諾斯克)</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>ojibway</code></td>
+      <td><code>奧傑布瓦文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>polish</code></td>
+      <td><code>波蘭文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>portuguese</code></td>
+      <td><code>葡萄牙文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>romanian</code></td>
+      <td><code>羅馬尼亞文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>russian</code></td>
+      <td><code>俄文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>serbian</code></td>
+      <td><code>塞爾維亞文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>southafrican-english</code></td>
+      <td><code>南非英文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>spanish</code></td>
+      <td><code>西班牙文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>slovak</code></td>
+      <td><code>斯洛伐克文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>slovenian</code></td>
+      <td><code>斯洛維尼亞文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>swahili</code></td>
+      <td>斯華西里文</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>swedish</code></td>
+      <td><code>瑞典文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>tamil</code></td>
+      <td><code>坦米爾文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>telugu</code></td>
+      <td><code>泰盧固文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>thai</code></td>
+      <td>泰文</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>traditional-chinese</code></td>
+      <td><code>繁體中文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>turkish</code></td>
+      <td><code>土耳其文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>twi</code></td>
+      <td><code>多威文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>ukrainian</code></td>
+      <td>烏克蘭文</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>vietnamese</code></td>
+      <td><code>越南文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>walloon</code></td>
+      <td><code>華隆文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>welsh</code></td>
+      <td><code>威爾斯文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>wolof</code></td>
+      <td><code>塞內加爾烏洛夫文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><code>xhosa</code></td>
+      <td><code>科薩文</code></td>
+      <td>&nbsp;</td>
+    </tr>
+    </table>
+    </blockquote>
+  </dd>
+  </dl>
+</blockquote>
+
+<hr size=1 noshade>
+
+<h1>使用 <code>.tuxpaintrc</code> 覆蓋系統規劃檔的選項設定</h1>
+<blockquote>
+  <p><i>(For Linux and Unix users)</i></p>
+  
+  <p>你可以在你自已的 "<code>~/.tuxpaintrc</code>" 檔案中設定覆蓋掉在
+  "<code>/etc/tuxpaint/tuxpaint.config</code>" 系統規劃檔中設定的選項。</p>
+
+  <p>像 "<code>noprint</code>" 及 "<code>grab</code>" 這類訊問是或否的選項，
+  你可以直接在你的 "<code>~/.tuxpaintrc</code>" 中設定他們為 'no'，像這樣子：</p>
+
+  <blockquote><code>
+    noprint=no<br>
+    uppercase=no
+  </code></blockquote>
+
+  <p>你也可以使用稍後會提到的命令列的參數來設定，像這樣子：</p>
+
+  <blockquote><code>
+    print=yes<br>
+    mixedcase=yes
+  </code></blockquote>
+</blockquote>
+ 
+<hr size=1 noshade>
+
+<h1><a name="command_line">命令列參數</a></h1>
+<blockquote>
+  當你啟動 Tux&nbsp;Paint 時可以使用命令列來下達參數。
+  
+  <blockquote>
+  <dl>
+    <dt><code><b>
+    --fullscreen<br>
+    --<i>WIDTH</i>x<i>HEIGHT</i><br>
+    --orient=portrait<br>
+    --native<br>
+    --startblank<br>
+    --nosound<br>
+    --noquit<br>
+    --noprint<br>
+    --printdelay=<i>SECONDS</i><br>
+    --printcfg<br>
+    --altprintnever<br>
+    --altprintalways<br>
+    --papersize=<i>PAPERSIZE</i><br>
+    --nolockfile<br>
+    --simpleshapes<br>
+    --uppercase<br>
+    --grab<br>
+    --noshortcuts<br>
+    --nowheelmouse<br>
+    --nobuttondistinction<br>
+    --nofancycursors<br>
+    --hidecursor<br>
+    --nooutlines<br>
+    --nostamps<br>
+    --nostampcontrols<br>
+    --sysfonts<br>
+    --mirrorstamps<br>
+    --stampsize=<i>SIZE</i><br>
+    --keyboard<br>
+    --savedir&nbsp;<i>DIRECTORY</i><br>
+    --datadir&nbsp;<i>DIRECTORY</i><br>
+    --saveover<br>
+    --saveovernew<br>
+    --nosave<br>
+    --autosave<br>
+    --lang&nbsp;<i>LANGUAGE</i><br>
+    --colorfile&nbsp;<i>FILE</i><br>
+    </b></code></dt>
+    <dd>
+      以上是開啟或相對應規劃檔的選項。
+      <hr size=1 noshade width=50%>
+    </dd>
+
+    <dt><code><b>
+    --windowed<br>
+    --800x600<br>
+    --orient=landscape<br>
+    --sound<br>
+    --quit<br>
+    --print<br>
+    --printdelay=0<br>
+    --noprintcfg<br>
+    --altprintmod<br>
+    --lockfile<br>
+    --complexshapes<br>
+    --mixedcase<br>
+    --dontgrab<br>
+    --shortcuts<br>
+    --wheelmouse<br>
+    --buttondistinction<br>
+    --fancycursors<br>
+    --showcursor<br>
+    --outlines<br>
+    --stamps<br>
+    --stampcontrols<br>
+    --nosysfonts<br>
+    --dontmirrorstamps<br>
+    --stampsize=default<br>
+    --mouse<br>
+    --saveoverask<br>
+    --save<br>
+    --noautosave<br>
+    </b></code></dt>
+    <dd>
+      這些選項可以用來覆蓋規劃檔中的設定。
+      (如果規劃檔中沒有設定的話，就不需要覆蓋選項。)
+      <hr size=1 noshade width=50%>
+    </dd>
+
+
+    <dt><code><b><a name="locale">--locale LOCALE</a></b></code></dt>
+    <dd>
+      <p>執行某一個 Tux&nbsp;Paint 支援的語文版本。locale 字串(如："<code>de_DE</code>" 是德文)
+      請見稍後 "<i><a href="#different_language">選擇不同的語文</a></i>" 這一個章節。</p>
+
+      <p>(如果你的 locale 已經使用系統變數 "<code>$LANG</code>" 來指定，
+      就不需要這個參數了。Tux&nbsp;Paint 已經可以讀取系統的環境變數。)</p>
+    </dd>
+
+    <dt><code><b>--nosysconfig</b></code></dt>
+    <dd>
+      <p>在 Linux 和 Unix 平台，可以取消讀取這個
+      "<code>/etc/tuxpaint/tuxpaint.conf</code>" 系統層級的規劃檔。</p>
+
+      <p>只有當你自已的規劃檔 "<code>~/.tuxpaintrc</code>" 存在時可以這樣作。</p>
+    </dd>
+  </dl>
+  </blockquote>
+
+  <hr size=1 noshade>
+ 
+  <h2>命令列的訊息參數</h2>
+  <blockquote>
+    <p>以下的參數會顯示一些訊息到螢幕上。當你使用這些參數後
+    Tux&nbsp;Paint 並不會真的啟動。</p>
+
+    <blockquote>
+    <dl>
+      <dt><code><b>--version</b></code><br>
+          <code><b>--verbose-version</b></code></dt>
+      <dd>
+        顯示你所執行的 Tux&nbsp;Paint 版本編號及日期。
+        <b>--verbose-version</b> 會顯示出你在編譯時所指定的任何相關的參數
+        (請參閱 INSTALL.txt 和 FAQ.txt)。
+      </dd>
+	  
+      <dt><code><b>--copying</b></code></dt>
+      <dd>
+        顯示出關於複製 Tux&nbsp;Paint 的簡短授權訊息。
+      </dd>
+
+      <dt><code><b>--usage</b></code></dt>
+      <dd>
+        顯示出有效的命令列參數清單。
+      </dd>
+
+      <dt><code><b>--help</b></code></dt>
+	<dd>
+        顯示出簡短的 Tux&nbsp;Paint 使用說明。
+	</dd>
+
+      <dt><code><b>--lang help</b></code></dt>
+      <dd>
+        顯示出 Tux Paint 有效的語文版本的清單。
+      </dd>
+    </dl>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<hr size=1 noshade>
+ 
+
+<h1><a name="different_language">選擇不同的語文</a></h1>
+<blockquote>
+  <p>Tux&nbsp;Paint 已經翻譯成許多種的語文，你可以在命令列使用 "<code>--lang</code>" 
+  參數來要設定使用語文譯本 (如： "<code>--lang&nbsp;spanish</code>")。或是在規劃檔中設定
+  "<code>lang=</code>" 的選項 (如： "<code>lang=spanish</code>")。</p>
+
+  <p>Tux&nbsp;Paint 也可以知道你系統目前的 locale 設定
+  (你可以用命令列參數 "<code>--locale</code>" 來覆蓋過系統的設定。)</p>
+
+  <h2>已經支援的語文</h2>
+
+  <blockquote><table border=1 cellspacing=0 cellpadding=2
+  summary="Locale 的設定值和語文的描述。">
+  <tr>
+    <th>Locale 代碼</th>
+    <th>語文<br>
+        (名稱)</th>
+    <th>語文<br>
+        (英文名稱)</th>
+    <th>輸入方式<br>
+        切換的組合鍵</th>
+  </tr>
+  <tr>
+    <td><code>C</code></td>
+    <td>英文</td>
+    <td>English</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>af_ZA</code></td>
+    <td>南非荷蘭語</td>
+    <td>Afrikaans</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>be_BY</code></td>
+    <td>白俄羅斯文</td>
+    <td>Belarusian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>bg_BG</code></td>
+    <td>保加利亞文</td>
+    <td>Bulgarian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>bo_CN</code> (*)</td>
+    <td>西藏文</td>
+    <td>Tibetan</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>br_FR</code></td>
+    <td>布列塔尼文</td>
+    <td>Breton</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>ca_ES</code></td>
+    <td>加泰隆尼亞文</td>
+    <td>Catalan</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>cs_CZ</code></td>
+    <td>捷克文</td>
+    <td>Czech</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>cy_GB</code></td>
+    <td>威爾斯文</td>
+    <td>Welsh</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>da_DK</code></td>
+    <td>丹麥文</td>
+    <td>Danish</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>de_DE</code></td>
+    <td>德文</td>
+    <td>German</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>et_EE</code></td>
+    <td>愛沙尼亞文</td>
+    <td>Estonian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>el_GR</code> (*)</td>
+    <td>希臘文</td>
+    <td>Greek</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>en_GB</code></td>
+    <td>英文 (英國)</td>
+    <td>British English</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>en_ZA</code></td>
+    <td>南非英文</td>
+    <td>South African English</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>eo</code></td>
+    <td>世界文</td>
+    <td>Esperanto</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>es_ES</code></td>
+    <td>西班牙文</td>
+    <td>Spanish</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>es_MX</code></td>
+    <td>墨西哥西班牙文</td>
+    <td>Mexican Spanish</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>eu_ES</code></td>
+    <td>巴斯克文</td>
+    <td>Basque</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>fi_FI</code></td>
+    <td>芬蘭文</td>
+    <td>Finnish</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>fr_FR</code></td>
+    <td>法文</td>
+    <td>French</td>
+    <td>&nbsp;</td>
+  </tr>
+   <tr>
+    <td><code>ga_IE</code></td>
+    <td>蓋爾文</td>
+    <td>Gaelic</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>gl_ES</code></td>
+    <td>加里西亞文</td>
+    <td>Galician</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>gos_NL</code></td>
+    <td>荷蘭方言</td>
+    <td>Gronings</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>gu_IN</code></td>
+    <td>古吉拉特文</td>
+    <td>Gujarati</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>he_IL</code> (*)</td>
+    <td>希伯來文</td>
+    <td>Hebrew</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>hi_IN</code> (*)</td>
+    <td>北印度文</td>
+    <td>Hindi</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>hu_HU</code></td>
+    <td>匈牙利文</td>
+    <td>Hungarian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>hu_HU</code></td>
+    <td>匈牙利文</td>
+    <td>Hungarian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>id_ID</code></td>
+    <td>印尼文</td>
+    <td>Indonesian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>is_IS</code></td>
+    <td>冰島文</td>
+    <td>Icelandic</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>it_IT</code></td>
+    <td>義大利文</td>
+    <td>Italian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>ja_JP</code> (*)</td>
+    <td>日文</td>
+    <td>Japanese</td>
+    <td>right [Alt]</td>
+  </tr>
+  <tr>
+    <td><code>ka_GE</code></td>
+    <td>喬治亞文</td>
+    <td>Georgian</td>
+    <td>&nbsp;</td>
+  </tr>
+    <tr>
+    <td><code>ko_KR</code> (*)</td>
+    <td>韓文</td>
+    <td>Korean</td>
+    <td>right [Alt] or left [Alt]</td>
+  </tr>
+  <tr>
+    <td><code>lt_LT</code></td>
+    <td>立陶宛文</td>
+    <td>Lithuanian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>lv_LV</code></td>
+    <td>拉脫維亞文</td>
+    <td>Latvian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>ms_MY</code></td>
+    <td>馬來文</td>
+    <td>Malay</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>nb_NO</code></td>
+    <td>挪威文 (巴克摩)</td>
+    <td>Norwegian Bokm&aring;l</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>nl_NL</code></td>
+    <td>荷蘭文</td>
+    <td>Dutch</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>nn_NO</code></td>
+    <td>挪威文 (耐諾斯克)</td>
+    <td>Norwegian Nynorsk</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>nr_ZA</code></td>
+    <td>恩德貝勒文</td>
+    <td>Ndebele</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>oj_CA</code></td>
+    <td>奧傑布瓦文</td>
+    <td>Ojibway</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>pl_PL</code></td>
+    <td>波蘭文</td>
+    <td>Polish</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>pt_BR</code></td>
+    <td>巴西葡萄牙文</td>
+    <td>Brazilian Portuguese</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>pt_PT</code></td>
+    <td>葡萄牙文</td>
+    <td>Portuguese</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>ro_RO</code></td>
+    <td>羅馬尼亞文</td>
+    <td>Romanian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>ru_RU</code></td>
+    <td>俄文</td>
+    <td>Russian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>rw_RW</code></td>
+    <td>基尼亞安達文</td>
+    <td>Kinyarwanda</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>sk_SK</code></td>
+    <td>斯洛伐克文</td>
+    <td>Slovak</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>sl_SI</code></td>
+    <td>斯洛維尼亞文</td>
+    <td>Slovenian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>sq_AL</code></td>
+    <td>阿爾巴尼亞文</td>
+    <td>Albanian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>sr_YU</code></td>
+    <td>塞爾維亞文</td>
+    <td>Serbian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>sv_SE</code></td>
+    <td>瑞典文</td>
+    <td>Swedish</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>sw_TZ</code></td>
+    <td>斯瓦希里文</td>
+    <td>Swahili</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>ta_IN</code> (*)</td>
+    <td>坦米爾文</td>
+    <td>Tamil</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>te_IN</code> (*)</td>
+    <td>泰盧固文</td>
+    <td>Telugu</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>th_TH</code> (*)</td>
+    <td>泰文</td>
+    <td>Thai</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>tlh</code></td>
+    <td>克林貢文</td>
+    <td>Klingon</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>tr_TR</code></td>
+    <td>土耳其文</td>
+    <td>Turkish</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>twi_GH</code></td>
+    <td>多威文</td>
+    <td>Twi</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>uk_UA</code></td>
+    <td>烏克蘭文</td>
+    <td>Ukrainian</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>vi_VN</code></td>
+    <td>越南文</td>
+    <td>Vietnamese</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>wa_BE</code></td>
+    <td>華隆文</td>
+    <td>Walloon</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>wo_SN</code></td>
+    <td>塞內加爾烏洛夫文</td>
+    <td>Wolof</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>xh_ZA</code></td>
+    <td>科薩文</td>
+    <td>Xhosa</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>zh_CN</code> (*)</td>
+    <td>簡體中文</td>
+    <td>Chinese (Simplified)</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><code>zh_TW</code> (*)</td>
+    <td>繁體中文</td>
+    <td>Chinese (Traditional)</td>
+    <td>right [Alt] or left [Alt]</td>
+  </tr>
+  </table>
+
+  <p><b>(*)</b> - 表示這些語文不是使用拉丁字集，需要安裝自已的字型檔。
+  請參閱稍後 <a href="#special_fonts"><b>特殊字型</b></a> 的章節。</p>
+
+  <p><i>註：</i> Tux Paint 的<b>文字</b>工具提供部份地區可替換的文字輸入方式。
+     在使用<b>文字</b>工具時可以使用組合鍵來切換輸入的方式。</p>
+
+  <p><i>註：</i> 使用<b>繁體中文</b>輸入時，可以用左邊或右邊的 [ALT]鍵來切換，
+     在右邊的字型圖示選擇時，要選二個字母看起來離很遠的，或是大寫的 A 很靠左邊的通常就是可以顯示中文的字型，
+     輸入時是用注音的組合鍵來拼出一個字，然後再加上數字。例如：「中」的組合鍵是
+     <b>5j/</b> 再加上數字 1 就變成了 <b>5j/1</b>。數字可能到二位數以上，
+     看這個音的字有幾個而定，愈常用的字數字愈小。</p>
+  </blockquote>
+
+  <h2>設定你系統的 Locale</h2>
+  <blockquote>
+    <p>改變你的 locale 設定會對你的環境影響非常的大。</p>
+  
+    <p>你可以使用命令列參數 ("<code>--lang</code>" 和 "<code>--locale</code>")
+    來選擇語文版本，Tux&nbsp;Paint 也會依循你系統環境對 locale 的設定。</p>
+
+    <p>如果你尚未設定你系統環境的 locale 的話，以下是一個簡短的說明：</p>
+  
+    <h3>Linux/Unix 的使用者</h3>
+    <blockquote>
+      <p>首先確定你要使用的 locale 已經寫入 "<code>/etc/locale.gen</code>" 
+      之中，並使用 root 身份執行過 "<code>locale-gen</code>" 。</p>
+
+     <p><i>註：Debian 的使用者可以輕易的用 "<code>dpkg-reconfigure&nbsp;locales</code>"
+     來完成。</i></p>
+
+     <p>接下來在啟動 Tux&nbsp;Paint 之前先設定 "<code>$LANG</code>"
+     環境變數成你的 locale 。(如果你希望所有可以轉換語文的程式都能發生作用，
+     你應該將這個動作寫入到你登入時會使用到的命令檔，如 <code>~/.profile</code>,
+     <code>~/.bashrc</code>, <code>~/.cshrc</code>, 等等。)</p>
+
+
+      <p>例如在 Bourne Shell (BASH) 中：</p>
+    
+      <blockquote><code>
+        export&nbsp;LANG=zh_TW.UTF-8&nbsp;;&nbsp;\<br>
+        tuxpaint
+      </code></blockquote>
+    
+    
+      <p>在 C Shell (TCSH) 中：</p>
+    
+      <blockquote><code>
+        setenv&nbsp;LANG&nbsp;zh_TW.UTF-8&nbsp;;&nbsp;\<br>
+        tuxpaint
+      </code></blockquote>
+    </blockquote>
+    
+    <hr size=1 noshade>
+    
+    <h3>Windows 的使用者</h3>
+    <blockquote>
+      <p>Tux&nbsp;Paint 可以辨識出目前的 locale 並選用適當的檔案。
+      所以這個章節是給想要測試不同語文版本的人。</p>
+    
+      <p>最簡單的方式是在捷徑中使用 '<code>--lang</code>' 來切換 (請見 "INSTALL.txt")。
+      也可以開啟一個 MSDOS 視窗，使用這樣的命令來指定 locale ：</p>
+    
+      <blockquote><code>
+        set LANG=zh_TW
+      </code></blockquote>
+    
+      <p>這樣會設定這個 DOS 視窗的語文，直到視窗被關掉。</p>
+    
+      <p>一勞永逸的方式是使用 "<b>sysedit</b>" 編輯你電腦的 '<code>autoexec.bat</code>' 檔案：</p>
+    
+      <h4>Windows 95/98</h4>
+      <ol>
+      <li>點擊「開始」功能表，選擇「執行...」。
+      <li>輸入 "sysedit" 到 '開啟:' 欄位中(有沒有加上雙引號都沒關係).
+      <li>點擊「確定」。
+      <li>在系統設定編輯器中選定 AUTOEXEC.BAT 視窗。
+      <li>加入以下的設定到檔案的最後面：
+    
+        <blockquote><code>	    
+          set LANG=zh_TW
+        </code></blockquote>
+          
+      <li>關閉系統設定編輯器，回答要儲存目前的變更。
+      <li>重新啟動你的電腦。
+      </ol>
+    
+      <blockquote>
+        要對<b>整部電腦</b>和<b>所有程式</b>都有效的話，
+        也可以使用控制台裡的「地區選項」來設定：
+      </blockquote>
+    
+      <ol>
+      <li>點擊「開始」功能表，選擇「設定」->「控制台」。
+      <li>雙擊「區域設定」或「地區選項」的球形圖示。
+      <li>由下拉表單中選擇一個「語言(地區)」的選項。
+      <li>點擊「確定」按鈕。
+      <li>重新啟動你的電腦。
+      </ol>
+    
+    </blockquote>
+  </blockquote>
+ 
+  <h3><a name="special_fonts">特殊字型</a></h3>
+  <blockquote>
+    <p>某些語文需要安裝特殊字型檔。這些非常大的字型檔(TrueType format, TTF)可以在 Tux&nbsp;Paint
+    網站下載，他們是獨立的檔案。(請見前面「<a href="#different_language">選擇不同的語文</a>」一節中的表格。)</p>
+ 
+    <p><b>註：</b> 從版本 0.9.18 開始， Tux&nbsp;Paint 使用 "SDL_Pango" 函式庫將文字呈現在使用者介面，
+    而不是直接使用 "SDL_ttf"。除非你複製一份不支援 Pango 的 Tux&nbsp;Paint，否則特殊字型將<b><i>不再需要</i></b>。</p>
+
+    <p>當執行需要特殊字型的語文版本時，Tux&nbsp;Paint 會試著由系統的 "<code><b>fonts</b></code>"
+    目錄中載入字型 ("<code><b>locale</b></code>" 的子目錄)。字型檔的名稱相對於 'locale'
+    代碼的前二個字母(例如："ko" 是韓文，"ja" 是日文，"zh_tw" 是繁體中文)。</p>
+    
+    <p>舉例來說，在 Linux 或 Unix 上，當 Tux&nbsp;Paint 要顯示韓文的訊息
+    (如：使用參數 "<code>--lang&nbsp;korean</code>")，Tux&nbsp;Paint 將會載入這個字型檔：</p>
+    
+    <blockquote>
+      <p><code>/usr/share/tuxpaint/fonts/locale/<b>ko.ttf</b></code></p>
+    </blockquote>
+    
+    <p>你可以由 Tux&nbsp;Paint 的網站下載支援語文的字型檔，
+    <a href="http://www.tuxpaint.org/">
+    http://www.tuxpaint.org/</a>.
+    (請見「下載」連結中最後的「字型檔」這一個部份。)</p>
+    
+    <P>在 Linux 和 Unix 上你可以使用 <code>Makefile</code> 來將字型檔安裝到適當的路徑去。</p>
+  </blockquote>
+  
+</blockquote>
+
+<hr noshade>
+
+</body></html>
+

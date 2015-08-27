@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi" xmlns:dx="http://tempuri.org/2003/01/dx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/wix/2003/01/wi
+C:\bin\wix-binaries\doc\wix.xsd">
+	<Product UpgradeCode="40250581-AE04-4D70-9479-F612935D2643" Name="SDL_Pango Development" Id="0123F718-DC3D-4DE6-8C1F-61E734B9BF00" Version="@VERSION@" Manufacturer="NAKAMURA Ken'ichi" Language="1033">
+		<Package Id="????????-????-????-????-????????????" Manufacturer="NAKAMURA Ken'ichi" InstallerVersion="200" Platforms="Intel" Languages="1033" Compressed="yes" SummaryCodepage="437"/>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Merge Id="SDL_PangoModule" Language="1033" DiskId="1" src="SDL_Pango-@VERSION@.msm"/>
+			<Component Id="C__4B3D7A33985D4D6ABB6938C76FCBD6E6" Guid="AF801100-9645-1133-D005-B308AE53C53B">
+				<File Id="_4B3D7A33985D4D6ABB6938C76FCBD6E6" Name="COPYING.TXT" LongName="COPYING.txt" Vital="yes" KeyPath="yes" DiskId="1" src="COPYING.txt"/>
+				<Shortcut Id="_8152DCDC0F7E4025A6FF7776F7A39771" Directory="sdlpangoDir" Name="COPYING" LongName="COPYING" Target="DefaultFeature" Show="normal" WorkingDirectory="TARGETDIR"/>
+			</Component>
+			<Component Id="C__746C69616E6711D38E0D00C04F6837D0" Guid="0123F718-DC3D-4DE6-8C1F-61E734B9BF00" KeyPath="yes">
+				<RemoveFolder Directory="sdlpangoDir" On="uninstall" Id="_AADD5153459E4D76B343383470596CE8"/>
+			</Component>
+			<Directory Id="_15B623F5EFFB411EB090E7861C7069B8" Name="IMPORT~1" LongName="import_lib">
+				<Component Id="C__26EF0AFD9A66426D86135DCA541C8281" Guid="C37A50FB-E5E3-7154-2052-2751F23CFFED">
+					<File Id="_26EF0AFD9A66426D86135DCA541C8281" Name="SDL_PA~1.LIB" LongName="SDL_Pango.lib" src="..\VisualC2003\Release\SDL_Pango.lib" Vital="yes" KeyPath="yes" DiskId="1"/>
+				</Component>
+			</Directory>
+			<Directory Id="mergemoduleDir" Name="MERGE" LongName="Merge Module">
+				<Component Id="mergemoduleComponent" Guid="D7352D6B-701E-48B0-A284-56E0176F368E">
+					<File Id="sdlpangomsm" Name="SDL_PA~1.MSM" LongName="SDL_Pango-@VERSION@.msm" src="SDL_Pango-@VERSION@.msm" Vital="yes" KeyPath="yes" DiskId="1"/>
+				</Component>
+			</Directory>
+			<Directory Id="_2AEA1A91A4884196A867E55A56BF16DD" Name="DOC" LongName="doc">
+				<Component Id="C__27E569C697724D7E89B6E6E829FB00E0" Guid="17A141B0-3F08-0498-0780-3AD20682C609">
+					<File Id="_27E569C697724D7E89B6E6E829FB00E0" Name="_S_D_L~1.HTM" LongName="_s_d_l___pango_8h.html" src="..\docs\html\_s_d_l___pango_8h.html" Vital="yes" KeyPath="yes" DiskId="1"/>
+				</Component>
+				<Component Id="C__29568363AA8342D788C6B454D87ED371" Guid="2B8E77B3-9303-0C50-1AD6-5B6B0FCD8360">
+					<File Id="_29568363AA8342D788C6B454D87ED371" Name="FILES~1.HTM" LongName="files.html" src="..\docs\html\files.html" Vital="yes" KeyPath="yes" DiskId="1"/>
+				</Component>
+				<Component Id="C__30679035537D40568B26E35964116252" Guid="523A55B7-7CCB-1570-49A0-06C544B828B2">
+					<File Id="_30679035537D40568B26E35964116252" Name="INDEX~1.HTM" LongName="index.html" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\index.html"/>
+					<Shortcut Id="_6AEC65B45C5C4CB3A296F27610858DEB" Directory="sdlpangoDir" Name="INTROD~1" LongName="Introduction and API" Target="DefaultFeature" Show="normal" WorkingDirectory="_2AEA1A91A4884196A867E55A56BF16DD"/>
+				</Component>
+				<Component Id="C__3B556FFDC7BC46D0B99935C31F7ED4A7" Guid="2456BE1F-4551-D9D6-08A3-47C41A3F2A71">
+					<File Id="_3B556FFDC7BC46D0B99935C31F7ED4A7" Name="DOXYGEN.PNG" LongName="doxygen.png" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\doxygen.png"/>
+				</Component>
+				<Component Id="C__3E2F6200BE3D4B87AE754EE0FA89F99F" Guid="E3AAA3B6-7DC8-E55E-801D-E0B6DD5FCA4F">
+					<File Id="_3E2F6200BE3D4B87AE754EE0FA89F99F" Name="STRUCT~1.HTM" LongName="struct___s_d_l_pango___matrix.html" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\struct___s_d_l_pango___matrix.html"/>
+				</Component>
+				<Component Id="C__59D7FDF302F040A997EED06BAC07B9CD" Guid="F2C1001E-8AFB-383D-1DB9-F8735F436BD5">
+					<File Id="_59D7FDF302F040A997EED06BAC07B9CD" Name="ANNOTA~1.HTM" LongName="annotated.html" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\annotated.html"/>
+				</Component>
+				<Component Id="C__69EC83464D00455D95D8029DF901095E" Guid="B555C3EE-3948-97B8-7B96-01448C65B556">
+					<File Id="_69EC83464D00455D95D8029DF901095E" Name="GLOBAL~1.HTM" LongName="globals.html" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\globals.html"/>
+				</Component>
+				<Component Id="C__9CE4AFB0363045D4B602577FB9856CD3" Guid="412DD470-AAC0-0F4B-629F-2B8B42652A36">
+					<File Id="_9CE4AFB0363045D4B602577FB9856CD3" Name="GLOBAL~2.HTM" LongName="globals_eval.html" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\globals_eval.html"/>
+				</Component>
+				<Component Id="C__A458AA6BFFD547CDAA0D452F2252D152" Guid="B0F04F66-B353-BA9E-ECBC-F8A649DFD236">
+					<File Id="_A458AA6BFFD547CDAA0D452F2252D152" Name="GLOBAL~3.HTM" LongName="globals_enum.html" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\globals_enum.html"/>
+				</Component>
+				<Component Id="C__BB7B61DEDD2D48D7BB9C537D2709B68F" Guid="05BD68CF-76A8-2B76-BDAE-7EAE10784E21">
+					<File Id="_BB7B61DEDD2D48D7BB9C537D2709B68F" Name="_S_D_L~2.HTM" LongName="_s_d_l___pango_8c.html" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\_s_d_l___pango_8c.html"/>
+				</Component>
+				<Component Id="C__CF7E8ED5A6C04726B5139947EB838354" Guid="FEE2E9AF-03D4-63E7-0120-F65F714DF72C">
+					<File Id="_CF7E8ED5A6C04726B5139947EB838354" Name="GLOBAL~4.HTM" LongName="globals_vars.html" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\globals_vars.html"/>
+				</Component>
+				<Component Id="C__E556FAF7BF7C477AA0FF832ADD3965E8" Guid="AB73E4E9-6498-AE79-16A6-60A1DE70E955">
+					<File Id="_E556FAF7BF7C477AA0FF832ADD3965E8" Name="GLOBAL~5.HTM" LongName="globals_type.html" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\globals_type.html"/>
+				</Component>
+				<Component Id="C__E6BF91B2C66545C3B1FBD01864388F29" Guid="FBEBCF90-B5EE-6CDC-7FBE-04DAB65B090E">
+					<File Id="_E6BF91B2C66545C3B1FBD01864388F29" Name="GLOBAL~6.HTM" LongName="globals_func.html" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\globals_func.html"/>
+				</Component>
+				<Component Id="C__E7F3A04A78584FCAAB75504E19322AE4" Guid="31E165F2-F0B3-5358-70C2-A11FFDBBF479">
+					<File Id="_E7F3A04A78584FCAAB75504E19322AE4" Name="DOXYGEN.CSS" LongName="doxygen.css" Vital="yes" KeyPath="yes" DiskId="1" src="..\docs\html\doxygen.css"/>
+				</Component>
+			</Directory>
+			<Directory Id="_1AD1F2E1E10F4C359B90E541D15B528D" Name="SAMPLE" LongName="sample">
+				<Component Id="C__4DC2601B8F484C118FB6C0EAAFB92C5D" Guid="4B9C4204-3D88-9B15-F9F5-285A836C0B05">
+					<File Id="_4DC2601B8F484C118FB6C0EAAFB92C5D" Name="TESTBE~1.C" LongName="testbench.c" Vital="yes" KeyPath="yes" DiskId="1" src="..\test\testbench.c"/>
+					<Shortcut Id="_6471769DEED3497089B23D37C0B41830" Directory="sdlpangoDir" Name="SAMPLE~1" LongName="Sample source" Target="DefaultFeature" Show="normal" WorkingDirectory="_1AD1F2E1E10F4C359B90E541D15B528D"/>
+				</Component>
+			</Directory>
+			<Directory Id="_D38F5990D2D3400AABDA332F00330B51" Name="INCLUDE" LongName="include">
+				<Component Id="C__8FEDBCF7874546CE811EB0086627B3CD" Guid="7DDFBB03-F1BC-F912-D778-C529D77C3004">
+					<File Id="_8FEDBCF7874546CE811EB0086627B3CD" Name="SDL_PA~1.H" LongName="SDL_Pango.h" Vital="yes" KeyPath="yes" DiskId="1" src="..\src\SDL_Pango.h"/>
+				</Component>
+			</Directory>
+			<Directory Id="ProgramMenuFolder" Name=".">
+				<Directory Id="sdlpangoDir" Name="SDL_PA~1" LongName="SDL_Pango Development"/>
+			</Directory>
+		</Directory>
+		<Feature Id="DefaultFeature" Level="1" ConfigurableDirectory="TARGETDIR">
+			<MergeRef Id="SDL_PangoModule"/>
+			<ComponentRef Id="C__26EF0AFD9A66426D86135DCA541C8281"/>
+			<ComponentRef Id="C__27E569C697724D7E89B6E6E829FB00E0"/>
+			<ComponentRef Id="C__29568363AA8342D788C6B454D87ED371"/>
+			<ComponentRef Id="C__30679035537D40568B26E35964116252"/>
+			<ComponentRef Id="C__3B556FFDC7BC46D0B99935C31F7ED4A7"/>
+			<ComponentRef Id="C__3E2F6200BE3D4B87AE754EE0FA89F99F"/>
+			<ComponentRef Id="C__4B3D7A33985D4D6ABB6938C76FCBD6E6"/>
+			<ComponentRef Id="C__4DC2601B8F484C118FB6C0EAAFB92C5D"/>
+			<ComponentRef Id="C__59D7FDF302F040A997EED06BAC07B9CD"/>
+			<ComponentRef Id="C__69EC83464D00455D95D8029DF901095E"/>
+			<ComponentRef Id="C__8FEDBCF7874546CE811EB0086627B3CD"/>
+			<ComponentRef Id="C__9CE4AFB0363045D4B602577FB9856CD3"/>
+			<ComponentRef Id="C__A458AA6BFFD547CDAA0D452F2252D152"/>
+			<ComponentRef Id="C__BB7B61DEDD2D48D7BB9C537D2709B68F"/>
+			<ComponentRef Id="C__CF7E8ED5A6C04726B5139947EB838354"/>
+			<ComponentRef Id="C__E556FAF7BF7C477AA0FF832ADD3965E8"/>
+			<ComponentRef Id="C__E6BF91B2C66545C3B1FBD01864388F29"/>
+			<ComponentRef Id="C__E7F3A04A78584FCAAB75504E19322AE4"/>
+			<ComponentRef Id="C__746C69616E6711D38E0D00C04F6837D0"/>
+			<ComponentRef Id="mergemoduleComponent"/>
+		</Feature>
+		<Upgrade Id="40250581-AE04-4D70-9479-F612935D2643">
+			<UpgradeVersion Minimum="0.1.1" Property="NEWERPRODUCTFOUND" OnlyDetect="yes" IncludeMinimum="yes"/>
+		</Upgrade>
+		<Media Id="1" EmbedCab="yes" Cabinet="_06A27C15B46F6084DF1F556CABCDA574"/>
+		<FragmentRef Id="UIFragment"/>
+	</Product>
+</Wix>

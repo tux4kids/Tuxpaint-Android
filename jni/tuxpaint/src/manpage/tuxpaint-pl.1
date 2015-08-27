@@ -1,0 +1,424 @@
+.\" tuxpaint.1 - 2003.03.10
+.TH TUXPAINT 1 "10 Mar 2003" "0.9.11" "Tux Paint"
+.SH NAZWA
+tuxpaint -- Program do rysowania dla m³odszych dzieci.
+
+.SH SK£ADNIA
+.B tuxpaint
+[\-\-help \-\-version \-\-usage \-\-copying]
+
+.TP 9
+.B tuxpaint
+[\-\-fullscreen]
+[\-\-800x600]
+[\-\-nosound]
+[\-\-noquit]
+[\-\-noprint]
+[\-\-printdelay=\fISEKUND\fP]
+[\-\-printcfg]
+[\-\-simpleshapes]
+[\-\-uppercase]
+[\-\-grab]
+[\-\-nowheelmouse]
+[\-\-nofancycursors]
+[\-\-nooutlines]
+[\-\-keyboard]
+[\-\-savedir \fIKATALOG\fP]
+[\-\-saveover]
+[\-\-saveovernew]
+
+.TP 9
+.B tuxpaint
+[\-\-windowed]
+[\-\-640x480]
+[\-\-sound]
+[\-\-quit]
+[\-\-print]
+[\-\-printdelay=0]
+[\-\-noprintcfg]
+[\-\-complexshapes]
+[\-\-mixedcase]
+[\-\-dontgrab]
+[\-\-wheelmouse]
+[\-\-mouse]
+[\-\-outlines]
+[\-\-fancycursors]
+[\-\-saveoverask]
+
+.TP 9
+.B tuxpaint
+[\-\-locale \fILOCALE\fP]
+
+.TP 9
+.B tuxpaint
+[\-\-lang \fIJÊZYK\fP]
+
+.TP 9
+.B tuxpaint
+[\-\-nosysconfig]
+
+.SH OPIS
+.PP
+\fITux Paint\fP to program do rysowania dla m³odszych dzieci.  Powinien byæ 
+³atwy do u¿ywania i zabawny.  Posiada prosty interfejs, obszar do rysowania ma
+sta³y rozmiar, a do wykonanych wcze¶niej obrazków mamy dostêp poprzez 
+przegl±darkê miniatur (tzn. bez potrzeby bezpo¶redniego korzystania z systemu 
+plików).
+
+W przeciwieñstwie do popularnych programów do rysowania, takich jak "\fIThe GIMP\fP", 
+\fITux Paint\fP zawiera bardzo ograniczony zestaw narzêdzi. Jednak¿e, jego interfejs
+jest o wiele prostszy, a program zosta³ wyposa¿ony z my¶l± o dzieciach w s³u¿±ce 
+zabawie dodatki, takie jak efekty d¿wiêkowe.
+
+.SH OPCJE - WY¦WIETLANIE INFORMACJI
+.TP 8
+.B \-\-help
+Wy¶wietl krótk±, pomocn± informacjê o programie \fITux Paint\fP.
+.TP 8
+.B \-\-version
+Podaj informacjê o wersji programu.
+.TP 8
+.B \-\-usage
+Wy¶wietl listê wszystkich opcji mo¿liwych do u¿ycia w wierszu poleceñ.
+.TP 8
+.B \-\-copying
+Poka¿ licencjê (GNU GPL) zgodnie z któr± opublikowano \fITux Paint\fPa.
+
+.SH OPCJE - INTERFEJS
+.l
+\fItuxpaint\fP rozpoznaje nastêpuj±ce opcje, zmieniaj±ce cechy interfejsu.
+Opcji tych mo¿na u¿ywaæ wraz z, zamiast lub aby zmieniæ opcje podane w plikach
+konfiguracyjnych. (Zobacz poni¿ej.)
+.TP 8
+.B \-\-fullscreen \-\-windowed
+Uruchom \fITux Paint\fPa w trybie pe³noekranowym lub w oknie (domy¶lnie).
+
+.TP 8
+.B \-\-800x600 \-\-640x480
+Uruchom \fITux Paint\fPa w rozdzielczo¶ci 800x600 (EKSPERYMENTALNIE) lub
+w rozdzielczo¶ci 640x480 (domy¶lnie).
+
+.TP 8
+.B \-\-nosound \-\-sound
+Wy³±cz lub w³±cz (domy¶lnie) d¼wiêk.
+
+.TP 8
+.B \-\-noquit \-\-quit
+Wy³±cz lub w³±cz (domy¶lnie) przycisk \fIZakoñcz\fP, widoczny na ekranie.
+
+.TP 8
+.B \-\-noprint \-\-print
+Wy³±cz lub w³±cz (domy¶lnie) polecenie \fIWydrukuj\fP w \fITux Paint\fP.
+
+.TP 8
+.B \-\-printdelay=\fISEKUND\fP \-\-printdelay=0
+Pozwoli drukowaæ (poleceniem \fIWydrukuj\fP) tylko raz na ka¿de \fISEKUND\fP
+sekund.  Warto¶æ domy¶lna to 0 (bez ograniczeñ).
+
+.TP 8
+.B \-\-printcfg \-\-noprintcfg
+(Tylko Windows.)  W³±cz lub wy³±cz ³adowanie i zapisywanie ustawieñ drukarki.
+Domy¶lnie, \fITux Paint\fP bêdzie drukowa³ na drukarkê domy¶ln± z domy¶lnymi
+ustawieniami.  Naci¶niêcie \fI[ALT]\fP podczas klikniêcia na przycisk \fIWydrukuj\fP
+spowoduje wy¶wietlenie okienka dialogowego drukarki Windows (o ile nie jeste¶ 
+w trybie pe³noekranowym.)  Je¶li u¿yto \-\-printcfg, to podczas uruchamiania 
+\fITux Paint\fPa zostan± za³adowane poprzednie ustawienia, a zmiany w ustawieniach
+zostan± zapisane do u¿ycia nastêpnym razem.
+
+.TP 8
+.B \-\-simpleshapes \-\-complexshapes
+Wy³±cz lub w³±cz (domy¶lnie) etap \fIobracania\fP podczas u¿ywania narzêdzia
+\fIKszta³ty\fP w \fITux Paint\fP.  Kiedy pominiemy ten etap, figur nie mo¿na
+obracaæ; jednak¿e, interfejs jest wówczas prostszy (kliknij, przeci±gnij, pu¶æ), 
+co mo¿e byæ pomocne dla m³odszych lub niepe³nosprawnych dzieci.
+
+.TP 8
+.B \-\-uppercase \-\-mixedcase
+W trybie \fI\-\-uppercase\fP, wszystkie okienka i narzêdzie \fITekst\fP bêd± 
+wy¶wietlaæ teksty pisane wielkimi literami.  Jest to u¿yteczne dla dzieci, 
+które nie znaj± jeszcze dobrze ma³ych liter. Tryb domy¶lny to u¿ywanie ró¿nych
+liter (ang. \fImixed case\fP).
+
+.TP 8
+.B \-\-grab \-\-nograb
+Przechwyæ myszkê i wprowadzanie z klawiatury (je¶li to mo¿liwe), tak by u¿ywanie
+myszki by³o ograniczone do obszaru okna \fITux Paint\fPa.  Domy¶lnie nie ma
+przechwytywania.
+
+.TP 8
+.B \-\-nowheelmouse \-\-wheelmouse
+Domy¶lnie, kó³ko myszki jest wykorzystywane do przewijania \fIpalety przycisków\fP
+po prawej stronie ekranu.  Tê w³a¶ciwo¶æ programu mo¿na zmieniæ, tak by zupe³nie ignorowa³
+kó³ko - s³u¿y do tego opcja \fI\-\-nowheelmouse\fP.
+Opcja ta jest przydatna, je¶li dziecko nie radzi sobie dobrze z myszk±.
+Domy¶lnie program wykorzystuje kó³ko.
+
+.TP 8
+.B \-\-nofancycursors \-\-fancycursors
+Wy³±cz lub w³±cz (domy¶lnie) 'ozdobne' kszta³ty wska¼nika myszki w programie 
+\fITux Paint\fP.  Wprawdzie ozdobne kszta³ty s± wiêksze i zmieniaj± siê zale¿nie od kontekstu,
+w niektórych systemach nie s± one wy¶wietlane poprawnie i mog± pozostawiaæ '¶lady'
+na ekranie.
+
+.TP 8
+.B \-\-keyboard \-\-mouse
+Opcja \fIkeyboard\fP umo¿liwia sterowanie wska¼nikiem myszki w \fITux Paint\fP 
+przy pomocy klawiatury.  \fIKlawisze ze strza³kami\fP przesuwaj± wska¼nik.
+\fISpacja\fP dzia³a jak przycisk myszki.
+
+.TP 8
+.B \-\-nooutlines \-\-outlines
+W trybie \fInooutlines\fP, podczas u¿ywania
+narzêdzi \fILinie\fP, \fIKszta³ty\fP, \fIPieczêcie\fP i \fIGumka\fP
+wy¶wietlane s± znacznie uproszczone zarysy obiektów.
+(Mo¿e to byæ pomocna opcja, gdy \fITux Paint\fP jest uruchamiany na wolniejszych
+komputerach lub obraz wy¶wietlany jest na zdalnym X-terminalu.)
+
+.TP 8
+.B \-\-savedir \fIKATALOG\fP
+Podaj, gdzie \fITux Paint\fP powinien zapisywaæ pliki.  Domy¶lnie, w Linuksie 
+i Uniksie jest to katalog "~/.tuxpaint/saved", a w Windows katalog "userdata\\".
+
+.TP 8
+.B \-\-saveover \-\-saveovernew \-\-saveoverask
+Je¶li, podczas zapisywania obrazka, ma zostaæ nadpisana starsza wersja pliku,
+\fITux Paint\fP domy¶lnie bêdzie prosi³ o potwierdzenie: mo¿na albo nadpisaæ
+(ang. \fIsave over\fP) stary plik, albo utworzyæ (ang. \fIcreate\fP) nowy plik.
+Wy¶wietlanie okna z pytaniem o potwierdzenie mo¿na wy³±czyæ podaj±c
+albo \fI\-\-saveover\fP (i wtedy zawsze bêd± nadpisywane starsze wersje obrazków)
+albo \fI\-\-saveovernew\fP (wtedy zawsze zapisywany bêdzie nowy plik).
+Domy¶lnie program prosi o potwierdzenie przy zapisie (\fI\-\-saveoverask\fP).
+
+.SH OPCJE - JÊZYK
+.l
+Ró¿ne czê¶ci \fITux Paint\fPa zosta³y przet³umaczone na liczne jêzyki.
+\fITux Paint\fP bêdzie stara³ siê jak najbardziej respektowaæ Twoje ustawienie 
+\fIlocale\fP (tzn. zmienn± ¶rodowiskow± \fILANG\fP), je¶li to tylko mo¿liwe.
+Mo¿esz równie¿ wybraæ okre¶lony jêzyk przy pomocy odpowiedniej opcji 
+podanej w wierszu poleceñ lub w pliku konfiguracyjnym.
+
+.TP 8
+.B \-\-locale \fILOCALE\fP
+Podaj jêzyk, którego nale¿y u¿yæ, nazwê \fIlocale\fP (która ma zwykle postaæ
+\fIjêzyk\fP[_\fIterytorium\fP][.\fIstrona kodowa\fP][@\fImodyfikator\fP],
+gdzie \fIjêzyk\fP to kod jêzyka zgodny ze standardem ISO 639,
+\fIterytorium\fP to kod pañstwa zgodny z ISO 3166, a
+\fIstrona kodowa\fP to oznaczenie zbioru znaków lub sposobu kodowania znaków, takie
+jak ISO-8859-1 lub UTF-8.)
+.PP
+.RS
+Na przyk³ad, \fIpl_PL\fP dla polskiego, \fIde_DE@euro\fP dla niemieckiego lub
+\fIpt_BR\fP dla brazylijskiego wariantu jêzyka portugalskiego.
+.RE
+
+.TP 8
+.B \-\-lang \fIJÊZYK\fP
+Podaj jêzyk, jakiego chcesz u¿ywaæ. Trzeba podaæ nazwê jezyka rozpoznawan± przez
+przez \fITux Paint\fP.  Wybierz jedn± z nazw jêzyków wymienionych poni¿ej:
+.PP
+.RS
+.PD 0
+.TP 2
+-
+english | american-english
+.TP 2
+-
+bokmal
+.TP 2
+-
+brazilian-portuguese | portuges-brazilian | brazilian
+.TP 2
+-
+british | british-english
+.TP 2
+-
+catalan | catala
+.TP 2
+-
+czech | cesky
+.TP 2
+-
+chinese
+.TP 2
+-
+danish | dansk
+.TP 2
+-
+dutch
+.TP 2
+-
+finnish | suomi
+.TP 2
+-
+french | francais
+.TP 2
+-
+german | dutch
+.TP 2
+-
+greek
+.TP 2
+-
+hungarian | magyar
+.TP 2
+-
+icelandic | islenska
+.TP 2
+-
+indonesian | bahasa-indonesia
+.TP 2
+-
+italian | italiano
+.TP 2
+-
+japanese
+.TP 2
+-
+korean
+.TP 2
+-
+lithuanian | lietuviu
+.TP 2
+-
+norwegian | nynorsk
+.TP 2
+-
+polish | polski
+.TP 2
+-
+portuguese | portugues
+.TP 2
+-
+romanian
+.TP 2
+-
+spanish | espanol
+.TP 2
+-
+swedish | svenska
+.TP 2
+-
+turkish
+.RE
+.PD
+
+.SH OPCJE - RÓ¯NE
+.TP 8
+.B \-\-nosysconfig
+Z t± opcj±, \fITux Paint\fP nie bêdzie próbowa³ czytaæ 
+ogólnosystemowego pliku konfiguracyjnego (zwykle jest to \fI/etc/tuxpaint/tuxpaint.conf\fP).
+
+.SH ¦RODOWISKO
+.l
+Chocia¿ \fITux Paint\fP mo¿e po¶rednio odwo³ywaæ siê do wielu zmiennych systemowych
+(np. poprzez \fISDL(3)\fP), bezpo¶rednio wykorzystuje tylko nastêpuj±ce zmienne:
+.PP
+.TP 8
+.B HOME
+aby okre¶liæ, gdzie jest miejsce plików zapisywanych i otwieranych poleceniami
+\fIZapisz\fP i \fIOtwórz\fP w programie \fITux Paint\fP, aby znale¼æ po³o¿enie obecnie
+malowanego obrazka podczas wychodzenia z programu \fITux Paint\fP i ponownego uruchamiania
+go oraz aby znale¼æ plik konfiguracyjny u¿ytkownika.
+
+.TP 8
+.B LANG
+aby rozpoznaæ jêzyk, którego ma u¿ywaæ, je¶li \fIsetlocale(3)\fP odwo³uje siê do 'LC_MESSAGES'.
+
+.SH PLIKI
+.TP 8
+.B /etc/tuxpaint/tuxpaint.conf
+Ogólnosystemowy plik konfiguracyjny.  Jest czytany w pierwszej kolejno¶ci
+(chyba ¿e w wierszu poleceñ podano opcjê \fI\-\-nosysconfig\fP).
+.RS
+.PP
+(Tworzony podczas instalacji.)
+.RE
+.TP 8
+.B $HOME/.tuxpaintrc
+Plik konfiguracyjny u¿ytkownika.  Mona go u¿yæ do wybierania opcji domy¶lnych
+(zamiast podawania ich za ka¿dym razem w wierszu poleceñ), i/lub do nadpisywania
+ustawieñ zawartych w ogólnosystemowym pliku konfiguracyjnym.
+.RS
+.PP
+(Nie jest tworzony ani modyfikowany automatycznie; trzeba go utworzyæ rêcznie.)
+.RE
+.TP 8
+.B $HOME/.tuxpaint/saved/
+Katalog zapisanych wcze¶niej obrazków (i miniatur).  Tylko pliki znajduj±ce siê w tym
+katalogu bêd± dostêpne po wydaniu polecenia \fIOpen\fP w programie 
+\fITux Paint\fP.  (Zobacz \fItuxpaint-import(1)\fP.)
+.RS
+.PP
+(Tworzony podczas u¿ycia polecenia \fIZapisz\fP.)
+.RE
+.TP 8
+.B $HOME/.tuxpaint/current_id.txt
+Informacja o obrazku, który by³ zmieniany gdy ostatnio zakoñczono dzia³anie \fITux Paint\fPa.
+(Obrazek ten jest automatycznie ³adowany, gdy nastêpnym razem uruchomimy \fITux Paint\fP.)
+.RS
+.PP
+(Tworzony, gdy \fITux Paint\fP \fIZakoñcz\fPy dzia³anie.)
+.RE
+
+.SH COPYRIGHT
+Ten program jest wolno dostêpny; mo¿na go rozpowszechniaæ i/lub zmieniaæ
+zgodnie z warunkami Licencji Publicznej GNU (GPL) opublikowanej przez
+Free Software Foundation; albo wersji 2 tej¿e Licencji, albo
+(wed³ug Twojego uznania) dowolnej pó¼niejszej wersji.
+
+.SH INNE INFORMACJE
+Najwa¿niejszym miejscem z informacjami o programie \fITux Paint\fP jest jego
+strona domowa http://www.newbreedsoftware.com/tuxpaint/.
+
+.SH AUTORZY
+Bill Kendrick.  <bill@newbreedsoftware.com>
+
+Z ³atkami, poprawkami, rozszerzeniami, t³umaczeniami, dokumentacj± i pomoc±
+w innej postaci ze strony wielu osób, w¶ród których s± (ale to nie wszyscy):
+
+Daniel Andersson,
+Ben Armstrong,
+Denis Bodor,
+Herman Bruyninckx,
+Laurentiu Buzdugan,
+Pere Pujal Carabantes,
+Jacques Chion,
+Ricardo Cruz,
+Doruk Fisek,
+Fabian Franz,
+Gabriel Gazzan,
+The Greek Linux i18n Team,
+Robert Glowczynski,
+Sam "Criswell" Hart,
+Tedi Heriyanto,
+Pjetur G. Hjaltason,
+Karl Ove Hufthammer,
+Rasmus Erik Voel Jensen,
+Wang Jian,
+Kazuhiko,
+Mark Kim,
+Thomas Klausner,
+Marcin 'Shard' Konicki,
+Arkadiusz Lipiec,
+Martin,
+Marco Milanesi,
+Primoz Peterlin,
+Milan Plzik,
+John Popplewell,
+Geert Stams,
+Peter Sterba,
+Tarmo Toikkanen,
+TOYAMA Shin-ichi,
+Daniel Jose Viana,
+Charles Vidal
+i
+Damian Yerrick.
+
+.SH "ZOBACZ TAK¯E"
+.BR tuxpaint-import (1),
+.BR xpaint (1),
+.BR gpaint (1),
+.BR gimp (1)
+.PP
+I dokumentacjê w katalogu /usr/[local/]share/doc/tuxpaint/.
+

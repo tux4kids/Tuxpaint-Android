@@ -1,0 +1,33 @@
+XSLTP = xsltproc
+CANDLE = candle
+LIGHT = light
+SHAVE = shave.xslt
+
+.SUFFIXES : .msi .msm .wixobj .wxs .xml
+.PHONY : all clean merge_module dev_vc testbench
+
+%.wxs : %.xml
+	$(XSLTP) $(SHAVE) $< > $@
+
+%.wixobj : %.wxs
+	$(CANDLE) $^
+
+all : merge_module testbench dev_vc
+
+merge_module : SDL2_Pango-@VERSION@.msm
+
+dev_vc : merge_module SDL2_Pango_Develop_VC2003-@VERSION@.msi
+
+testbench : merge_module SDL2_Pango_testbench-@VERSION@.msi
+
+SDL2_Pango-@VERSION@.msm : merge_module.wixobj
+	$(LIGHT) -b $(LIGHT_PATH) $^ -out $@
+
+SDL2_Pango_testbench-@VERSION@.msi : testbench.wixobj ui.wixobj
+	$(LIGHT) -b $(LIGHT_PATH) $^ -out $@
+
+SDL2_Pango_Develop_VC2003-@VERSION@.msi : dev.wixobj ui.wixobj
+	$(LIGHT) -b $(LIGHT_PATH) $^ -out $@
+
+clean:
+	rm -f *.wxs *.wixobj *.msm *.msi

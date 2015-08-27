@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-parsing-location</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-parser.html" title="cr-parser">
+<link rel="next" href="libcroco-cr-prop-list.html" title="cr-prop-list">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-parser.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-prop-list.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-parsing-location.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-parsing-location.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-parsing-location"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-parsing-location.top_of_page"></a>cr-parsing-location</span></h2>
+<p>cr-parsing-location</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-parsing-location.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation">CRParsingLocation</a>;
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parsing-location.html#cr-parsing-location-copy" title="cr_parsing_location_copy ()">cr_parsing_location_copy</a>            (<em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_to</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> const *a_from</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-parsing-location.html#cr-parsing-location-destroy" title="cr_parsing_location_destroy ()">cr_parsing_location_destroy</a>         (<em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_this</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-parsing-location.html#cr-parsing-location-dump" title="cr_parsing_location_dump ()">cr_parsing_location_dump</a>            (<em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRParsingLocationSerialisationMask</span> a_mask</code></em>,
+                                                         <em class="parameter"><code><span class="type">FILE</span> *a_fp</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parsing-location.html#cr-parsing-location-init" title="cr_parsing_location_init ()">cr_parsing_location_init</a>            (<em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_this</code></em>);
+<a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="returnvalue">CRParsingLocation</span></a> * <a class="link" href="libcroco-cr-parsing-location.html#cr-parsing-location-new" title="cr_parsing_location_new ()">cr_parsing_location_new</a>             (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="libcroco-cr-parsing-location.html#cr-parsing-location-to-string" title="cr_parsing_location_to_string ()">cr_parsing_location_to_string</a>       (<em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRParsingLocationSerialisationMask</span> a_mask</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-parsing-location.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-parsing-location.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRParsingLocation"></a><h3>struct CRParsingLocation</h3>
+<pre class="programlisting">struct CRParsingLocation {
+	guint line ;
+	guint column ;
+	guint byte_offset ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parsing-location-copy"></a><h3>cr_parsing_location_copy ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parsing_location_copy            (<em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_to</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> const *a_from</code></em>);</pre>
+<p>
+Copies an instance of CRParsingLocation into another one.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_to</code></em> :</span></p></td>
+<td>the destination of the copy.
+Must be allocated by the caller.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_from</code></em> :</span></p></td>
+<td>the source of the copy.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parsing-location-destroy"></a><h3>cr_parsing_location_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_parsing_location_destroy         (<em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_this</code></em>);</pre>
+<p>
+Destroys the current instance of <a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a>. Must
+have been allocated with <a class="link" href="libcroco-cr-parsing-location.html#cr-parsing-location-new" title="cr_parsing_location_new ()"><code class="function">cr_parsing_location_new()</code></a>.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parsing-location-dump"></a><h3>cr_parsing_location_dump ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_parsing_location_dump            (<em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRParsingLocationSerialisationMask</span> a_mask</code></em>,
+                                                         <em class="parameter"><code><span class="type">FILE</span> *a_fp</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>current instance of <a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_mask</code></em> :</span></p></td>
+<td>the serialization mask.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_fp</code></em> :</span></p></td>
+<td>the file pointer to dump the parsing location to.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parsing-location-init"></a><h3>cr_parsing_location_init ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parsing_location_init            (<em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_this</code></em>);</pre>
+<p>
+Initializes the an instance of <span class="type">CRparsingLocation</span>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parsing-location-new"></a><h3>cr_parsing_location_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="returnvalue">CRParsingLocation</span></a> * cr_parsing_location_new             (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly instanciated <a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a>.
+Must be freed by <a class="link" href="libcroco-cr-parsing-location.html#cr-parsing-location-destroy" title="cr_parsing_location_destroy ()"><code class="function">cr_parsing_location_destroy()</code></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parsing-location-to-string"></a><h3>cr_parsing_location_to_string ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             cr_parsing_location_to_string       (<em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRParsingLocationSerialisationMask</span> a_mask</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_mask</code></em> :</span></p></td>
+<td>a bitmap that defines which parts of the
+parsing location are to be serialized (line, column or byte offset)</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the serialized string or NULL in case of an error.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

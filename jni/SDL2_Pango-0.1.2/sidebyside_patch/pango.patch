@@ -1,0 +1,17 @@
+Index: pango/pango-utils.c
+===================================================================
+--- pango/pango-utils.c	(revision 97)
++++ pango/pango-utils.c	(revision 98)
+@@ -46,8 +46,12 @@
+ #define STRICT
+ #include <windows.h>
+ 
++#ifdef SIDEBYSIDE
++#define g_getenv(x) NULL
+ #endif
+ 
++#endif
++
+ struct PangoAlias
+ {
+   char *alias;

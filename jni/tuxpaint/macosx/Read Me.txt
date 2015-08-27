@@ -1,0 +1,157 @@
+Tux Paint Xcode 2.4 Project
+notes by Martin Fuhrer <mfuhrer@alumni.ucalgary.ca>
+
+This Tux Paint project file is located in a folder titled "macosx", which should in turn be placed in the root folder of the Tux Paint source code distribution. The project will then be able to access all the source code files.  You will require at least Mac OS X 10.4 and XCode 2.4 to build this project.
+
+This XCode project has been configured under the assumption that you have certain libraries and files installed in particular locations under Mac OS X.  This documentation indicates what you must install, and where these items go.  Some of the libraries can be installed via the MacPorts <www.macports.org> or Fink <fink.sourceforge.net> package managers.  At the time of writing, MacPorts can install one additional required library (SDL Pango) that is not available in Fink, so I have written this document with MacPorts in mind.  Several libraries are either misconfigured (with regards to building Tux Paint) or unavailable in MacPorts and Fink, and need to be configured, compiled, and installed manually.  You will also need to create the following "sandbox" directory where you will build and store these libraries: /Users/Shared/tuxpaint
+
+If all this configuration and compilation sounds daunting, you may also download precompiled versions of the libraries from the Tux Paint ftp server.
+
+
+-- SDL --
+
+You must have the following frameworks installed in /Library/Frameworks:
+
+SDL.framework
+SDL_image.framework
+SDL_mixer.framework
+SDL_ttf.framework
+
+You can obtain the frameworks from the SDL website <www.libsdl.org>  These frameworks contain both header files and libraries, and are copied into the Frameworks directory of the Tux Paint application bundle.
+
+
+-- Installing Precompiled Libraries --
+
+Universal, pre-compiled versions of all required libraries and header files, excluding SDL, are available for download here:
+ftp://ftp.tuxpaint.org/unix/x/tuxpaint/source/libs/macosx/
+
+After unzipping the package, you will have a folder named "tuxpaint" which should be placed in /Users/Shared.  You may now skip the following steps and begin building Tux Paint right away.
+
+
+-- Installing Libraries via MacPorts --
+
+The following libraries can be installed via MacPorts.  
+
+Library                         Install location
+                                
+GNU Internationalization:       /opt/local/lib/libintl.a
+PNG:                            /opt/local/lib/libpng.a
+XML Parser:                     /opt/local/lib/libexpat.a
+Freetype:                       /opt/local/lib/libfreetype.a
+Cairo Vector Graphics:          /opt/local/lib/libcairo.a
+SDL Pango:                      /opt/local/lib/libSDL_Pango.o
+
+The following MacPorts command will install all these libraries in one shot:
+% sudo port install libsdl_pango
+
+Copy all the static libraries listed above into the /Users/Shared/tuxpaint/lib directory, where the XCode project will find them.  By keeping the static libraries in a separate directory, we will ensure that Tux Paint will not link against other dynamic libraries in /opt/local/lib (a problematic scenario if you wish to distribute your compiled version of Tux Paint to friends who most likely don't have these dynamic libraries installed).  These libraries will be statically linked into the Tux Paint binary.
+
+
+-- Installing Libraries Manually --
+
+The following libraries require manual compilation and installation.
+
+Library                         Install location
+
+XML Font Configuration:         /Users/Shared/tuxpaint/lib/libfontconfig.a
+GLib:                           /Users/Shared/tuxpaint/lib/libglib-2.0.a
+                                /Users/Shared/tuxpaint/lib/libgobject-2.0.a
+                                /Users/Shared/tuxpaint/lib/libgmodule-2.0.a
+Pango:                          /Users/Shared/tuxpaint/lib/libpango-1.0.a
+                                /Users/Shared/tuxpaint/lib/libpangoft2-1.0.a
+SVG Scalable Vector Graphics:   /Users/Shared/tuxpaint/lib/libsvg.a
+SVG Cairo:                      /Users/Shared/tuxpaint/lib/libsvg-cairo.a
+                                
+We will compile our libraries inside the "src" directory:  /Users/Shared/tuxpaint/src
+and install the libraries in the "lib" directory: /Users/Shared/tuxpaint/lib
+
+XML Font Configuration:
+
+This library will already have been built and installed by MacPorts, but will not have been properly configured for Tux Paint.  We need to reconfigure and build Fontconfig as follows:
+
+% cd /Users/Shared/tuxpaint/src 
+% cp /opt/local/var/macports/distfiles/fontconfig/fontconfig*.tar.gz .
+% tar xzf fontconfig*.tar.gz
+% cd fontconfig*
+% sudo port deactivate fontconfig
+% ./configure --prefix=/Users/Shared/tuxpaint --enable-static --disable-shared --disable-docs --with-confdir="/Library/Application Support/TuxPaint/fontconfig/fonts" --with-cache-dir="/Library/Application Support/TuxPaint/fontconfig/cache" CPPFLAGS=-I/opt/local/include LDFLAGS=-L/opt/local/lib
+% sudo make install
+% sudo port activate fontconfig
+
+GLib:
+
+MacPorts only installs the dynamic libraries for GLib.  We need to reconfigure and build GLib with static libraries enabled as follows:
+
+% cd /Users/Shared/tuxpaint/src
+% cp /opt/local/var/macports/distfiles/glib/glib*.tar.gz .
+% tar xzf glib*.tar.gz
+% cd glib*
+% sudo port deactivate glib2
+% ./configure --prefix=/Users/Shared/tuxpaint --enable-static CPPFLAGS=-I/opt/local/include LDFLAGS=-L/opt/local/lib
+% sudo make install
+% sudo port activate glib2
+
+Pango:
+
+MacPorts only installs the dynamic libraries for Pango.  We need to reconfigure and build Pango with static libraries enabled as follows:
+
+% cd /Users/Shared/tuxpaint/src
+% cp /opt/local/var/macports/distfiles/pango/pango*.tar.bz2 .
+% tar xvjf pango*.tar
+% cd pango*
+% sudo port deactivate pango
+% ./configure --prefix=/Users/Shared/tuxpaint --enable-static CPPFLAGS=-I/opt/local/include LDFLAGS=-L/opt/local/lib --with-included-modules=yes --with-dynamic-modules=no --disable-shared
+//EP pas de "make" ?
+% sudo make install
+% sudo find . -name "*.a" -exec cp {} /Users/Shared/tuxpaint/lib/ \;
+% sudo port activate pango
+
+SVG Scalable Vector Graphics:
+
+Neither MacPorts nor Fink build and install the SVG library.  You can retrieve sources from CVS via:
+http://webcvs.cairographics.org/libsvg/
+
+Assuming you place the sources in /Users/Shared/tuxpaint/src/libsvg, you can configure and build SVG as follows:
+
+% cd /Users/Shared/tuxpaint/src/libsvg
+% ./autogen.sh
+% ./configure --prefix=/Users/Shared/tuxpaint LIBSVG_CFLAGS=-I/usr/include LIBSVG_LIBS=-L/usr/lib --disable-shared
+//EP pas de "make" ?
+% make install
+
+SVG Cairo:
+
+Neither MacPorts nor Fink build and install the SVG Cairo library.  You can retrieve sources from CVS via:
+http://webcvs.cairographics.org/libsvg-cairo/
+
+Assuming you place the sources in /Users/Shared/tuxpaint/src/libsvg-cairo, you can configure and build SVG Cairo as follows:
+
+% cd /Users/Shared/tuxpaint/src/libsvg-cairo
+% ./autogen.sh
+% ./configure --prefix=/Users/Shared/tuxpaint LIBSVG_CAIRO_CFLAGS=-I/Users/Shared/tuxpaint/include LIBSVG_CAIRO_LIBS=-L/Users/Shared/tuxpaint/lib --disable-shared
+% make install
+
+ 
+-- Universal and Cross Development --
+
+Tux Paint can be built for PowerPC, Intel, or both (as a universal binary).  Since Tux Paint depends on a number of libraries, these libraries must also be built for the same platform(s) for which you wish to build Tux Paint.  The latest versions of the SDL frameworks are universal binary and work fine regardless what platform(s) you want to build for.  On the other hand, the libraries installed via MacPorts are built only for the platform you are currently using (MacPorts offers a universal build option via the +universal variant, but this does not work for all libraries).  If you want to build a universal binary of Tux Paint, you will need to manually compile these libraries as universal binaries (see http://developer.apple.com/documentation/Porting/Conceptual/PortingUnix/compiling/chapter_4_section_3.html for further information) and update the library paths (click on a library in Archives and choose File > Get Info).
+
+To set the target platform for your build:
+1) Choose Project > Edit Active Target 'Tux Paint'
+2) Click the Build tab.
+3) Set Configuration to "All Configurations" and Collection to "Customized Settings"
+4) Select the "Architectures" setting and click the Edit button.
+5) Select PowerPC, Intel, or both.
+
+In order to allow the Tux Paint application to run on older versions of Mac OS X, it is necessary to compile and link against an older version of the Mac OS X SDK (eg. Mac OS X 10.2.8) using an older version of gcc (eg. gcc 3.3).  Various versions of the Mac OS X SDKs and gcc can be installed from the XCode Installation DVD or disk image.  Note that any libraries Tux Paint links against (eg. libraries installed by MacPorts) should also be compiled and linked against the same SDK, using the same version of gcc.  Universal binary and Intel applications must be compiled using at least gcc 4.0 and the Mac OS X 10.4(u) SDK.
+
+To set the desired Mac OS X SDK:
+1) Choose Project > Edit Project Settings
+2) Click on the General tab.
+2) Choose the desired SDK from the "Cross-Develop Using Target SDK" menu.
+
+To set the desired compiler version:
+1) Choose Project > Edit Active Target 'Tux Paint'
+2) Click on the Rules tab.
+3) Set the desired associations between file types (eg. C++ source files) and the compiler version (eg. GCC 3.3).
+

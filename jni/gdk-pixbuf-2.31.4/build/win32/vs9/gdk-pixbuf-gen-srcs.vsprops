@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="gdk-pixbufgensrcsprops"
+	InheritedPropertySheets=".\gdk-pixbuf-build-defines.vsprops"
+	>
+	<UserMacro
+		Name="GenConfigH"
+		Value="copy ..\..\..\config.h.win32 ..\..\..\config.h"
+	/>
+	<UserMacro
+		Name="GenerateGdkPixbufDef"
+		Value="echo EXPORTS &gt; $(DefDir)\gdk-pixbuf.def &amp;&amp; cl /EP -DG_OS_WIN32 -DINCLUDE_VARIABLES -DALL_FILES -DG_GNUC_CONST= -DG_GNUC_NULL_TERMINATED= ..\..\..\gdk-pixbuf\gdk-pixbuf.symbols &gt;&gt;$(DefDir)\gdk-pixbuf.def"
+	/>
+</VisualStudioPropertySheet>

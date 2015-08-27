@@ -1,0 +1,4570 @@
+CHANGES.txt for Tux Paint
+
+Tux Paint - A simple drawing program for children.
+
+Copyright (c) 2002-2015 by Bill Kendrick and others
+bill@newbreedsoftware.com
+http://www.tuxpaint.org/
+
+$Id: CHANGES.txt,v 1.836 2015/04/02 22:49:04 perepujal Exp $
+
+201x.xxx.x (0.9.23)
+
+  * New shapes
+    ----------
+    * Stars
+      Pere Pujal i Carabantes
+
+  * New locales
+    -----------
+
+    * Bengali
+      Provided by chandrakant dhutadmal
+
+    * Bodo
+      Provided by chandrakant dhutadmal
+
+    * Dogri
+      Provided by chandrakant dhutadmal
+
+    * Kashmiri (Devanagari)
+    * Kashmiri (Perso-Arabic)
+      Provided by chandrakant dhutadmal
+
+    * Sindhi (Devanagari)
+    * Sindhi (Perso-Arabic)
+      Provided by chandrakant dhutadmal
+
+    * Urdu
+      Provided by chandrakant dhutadmal
+
+
+  * Localization Updates:
+    ---------------------
+    * Estonian translation
+      "Sven Ollino" <sven.ollino@gmail.com>
+
+    * Galician translation
+      Miguel Bouzada
+
+    * Scottish translation
+      Fòram na Gàidhlig
+
+    * Thai translation
+      Nudjaree <poonim_p@hotmail.com>
+
+
+2014.August.5 (0.9.22)
+
+  * New Tools:
+    ----------
+    * Label - A tool to add text to a drawing, which can be modified or
+      moved later.
+      By Arunodai Reddy Vudem (GSOC 2008)
+      With modifications and integration by
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+  * New Magic Tools:
+    ----------------
+    * Blinds - Close window blinds over your picture.
+      Pattern - Draws a tiled pattern around the picture.
+      Perspective - Change the image's perspective.
+      Mosaic Hexagon, Mosaic irregular, Mosaic square - Glass mosaic effects.
+      Tiles - Draws a symettric pattern around the picture.
+      Zoom - Zoom the image in or out.
+      By Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * Puzzle - Slide parts of your picture around like a sliding puzzle.
+      By Adam 'foo-script' Rakowski <foo-script@o2.pl>
+      with modifications by Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * ROYGBIV Rainbow - Draw a rainbow arc using solid colors of
+      Red, Orange, Yellow, Green, Blue, Indigo and Violet.
+
+    * Symmetry Left/Right, Symmetry Up/Down - Paint with relfective symmetry
+      across the horizontal or vertical center of the image.
+      (Like Kaleidoscope, but only one mirrored brush, either left/right
+      or up/down.)
+
+    * Wet Paint - Draws a light coat of paint, and smudges at the same time.
+      (Based on Smudge tool.  Requested by gallery artist Angela.)
+
+    * Xor Colors - Colors based on the position drawn on the picture.
+      Lukasz Dmitrowski <lukasz.dmitrowski@gmail.com>
+
+  * Build System Improvements:
+    --------------------------
+    * Variety of tweaks to help Tux Paint cross-compile for Windows under Linux
+      Volker Grabsch <vog@notjusthosting.com>
+
+    * Added support for building under Haiku OS
+      Scott McCreary <scottmc@users.sourceforge.net>
+
+    * Integrated OpenCandy-powered recommendation service
+      into Windows installation scripts (InnoSetup), as an option.
+      <http://www.opencandy.com/>
+
+      Note: "tuxpaint.iss" still builds standard, OpenCandy-less
+      Tux Paint installer; "tuxpaint-opencandy.iss", along with a file
+      with secret key info (not included in CVS, of course!), build
+      an OpenCandy-enabled version.  The OC account is currently
+      maintained by Bill Kendrick <nbs@sonic.net>, lead developer.
+
+      For more info, see http://www.tuxpaint.org/docs/opencandy/
+
+    * Using $LDFLAGS when linking Magic tool plugins and Tux Paint binary.
+      Volkov Peter <volkov_peter@users.sourceforge.net> (SF.Net Bug #3389067)
+
+  * Collection of Mac OS X Updates:
+    -------------------------------
+    Produced by Eric Poncet <http://www.linguasoft.com/>
+    Commissioned by Harvey Ginter <harveyginter@gmail.com>
+
+    * Fix OS X 10.9 issue of current directory set by Finder
+      to something else than folder where app bundle resides.
+
+    * Customization support for Mac OS X (automatic, under XCode)
+      and Windows (manual).
+
+    * Some Mac OS X build / project changes & updates.
+
+    * Adjustments to Mac OS X fontconfig config file, to avoid warnings
+      and make things more robust.
+
+    * Updates to some #include's to catch up with newer library revisions.
+
+    * Tweaks to pixel read/write on Apple.
+
+    * Introduction of 'intprt_t' casting to avoid warnings on x64.
+
+    * Some additional debugging output.
+
+    * Logging stderr & stdout to /tmp/tuxpaint.log
+
+  * Accessibility Improvements:
+    ---------------------------
+    * Added a mouse accessibility mode to avoid the need to drag the mouse.
+      ("--mouse-accessibility")
+      by Ankit Choudary <ankit.goaldecided@gmail.com> (GSOC 2010)
+      with integration and fixes by
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * Added an option to display an on-screen keyboard when using the
+      'Text' and 'Label' tools.  ("--onscreen-keyboard") [Experimental!]
+      by Ankit Choudary <ankit.goaldecided@gmail.com> (GSOC 2010) with 
+      integration and fixes by Pere Pujal i Carabantes <perepujal@gmail.com>
+      and some code borrowed from xorg (keysymdef.h and en_US.UTF-8_COMPOSE
+      Authors?) 
+      and xterm file keysym2ucs.c (function keysym2unicode   
+      Markus G. Kuhn <mkuhn@acm.org>, University of Cambridge, April 2001
+      Special thanks to Richard Verhoeven <river@win.tue.nl>
+      Public domain.
+
+    * Keyboard can be used to move and click mouse ("--keyboard" option).
+      [Experimental!]
+      by Ankit Choudary <ankit.goaldecided@gmail.com> (GSOC 2010)
+      * See documentation in OPTIONS for how to use it.
+
+    * Joystick can be used to drive Tux Paint
+      by Ankit Choudary <ankit.goaldecided@gmail.com> (GSOC 2010)
+      with integration and fixes by Pere Pujal i Carabantes
+
+      * Use --joystick-dev to choose joystick (otherwise
+        uses the first joystick found on the system).
+        * Use '--joystick-dev list' to list available joysticks.
+      * Uses any of the buttons found in the joystick, no need for
+        configuration.  (--joystick-buttons-ignore can be used to
+        ignore buttons.)
+      * The hat of the joystick moves one pixel at a time, useful to
+        carefully place the pointer.
+      * The ball of the joystick should also trigger pointer
+        motion.
+      * The responsivity of the joystick can be configured via command
+        line or config files:
+	* --joystick-slownes sets a delay at each axis motion event.
+	    Allowed values from 0 to 500, defaults to 15.
+	* --joystick-threshold sets the minimum value of axis motion to
+	  begin move the pointer.
+	    Allowed values from 0 to 32766, defaults to 3200.
+	* --joystick_maxsteps sets the maximum number of pixels that
+	  the pointer will move at a time.
+	    Allowed values from 1 to 7, defaults to 7.
+      * Joystick buttons can be assigned used to activate certain commands
+        in Tux Paint (--joystick-btn-COMMAND options)
+
+  * Magic Tool Improvememnts:
+    -------------------------
+    * Magic tools can register themselves as paint with one click
+      (versus click/drag/release): MODE_ONECLICK.  (e.g., "Ripples")
+      Utilized by mouse-accessibility feature.
+
+    * Magic tools can register themsevles as paint-with-a-preview:
+      MODE_PAINT_WITH_PREVIEW.  (e.g., "Flower")
+      Utilized by mouse-accessibility feature.
+
+  * Other Improvements:
+    -------------------
+    * Random brushes avoid repeating the same frame twice.
+
+    * Showing a warning when using save-related options when "nosave" is set.
+      (SourceForge Bug #3327493)
+
+    * Quicker prompt window pop-up animation.
+
+    * Left/Right Stamp navigation buttons are purple, like the other (up/down)
+      scroll buttons found in Tux Paint.
+      (SourceForge Bug #2918289)
+
+    * Slightly improved mouse motion handling when Tux Paint is very busy
+      drawing or previewing.  (e.g., when drawing a circle, you could often
+      end up with a "D" shape... now, you get more of a regular polygon shape
+      if Tux Paint is taking too long to draw.  It skips some motion events,
+      rather than ignoring all motion events after the first 1/4th second.)
+
+    * Deleting files from Tux Paint's 'Open' dialog now moves them to
+      the user's Trash folder.
+      FIXME: Only on freedesktop.org systems (e.g., Linux)
+      (SourceForge.net Feature #3101084)
+
+    * Tux Paint (in windowed mode) now only centers itself if
+      no specific positioning has been provided via
+      the SDL_VIDEO_WINDOW_POS environment variable.
+      (SourceForge Bug #3138446)
+
+    * Creating thumbnails for the starters we provide.
+      (Speeds up 'New' dialog appearance.)
+      (SourceForge Bug #1417849)
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * On systems where Pango is used for UI text rendering, Tux Paint now
+      spawns a temporary thread during start-up (at the splash screen) to
+      allow "fontconfig" to generate its font cache in the background,
+      while showing the "please wait" animation, and responding to the US.
+      (Fontconfig takes a long time to generate its cache the first time
+      you run a Pango- and hence fontconfig-enabled application
+      (Tux Paint, Gimp, Inkscape, etc.), or after adding lots of new fonts
+      to your system).
+      SF.net Bug #2944951
+
+    * Thumbnailing (of UI elements, stamps, saved images, etc.) is now
+      gamma-corrected. See:
+      http://www.4p8.com/eric.brasseur/gamma.html
+
+    * Template images are now supported.  Similar to Starters, they are
+      pre-drawn pictures to begin a new drawing with, accessed via the
+      "New" dialog.  The "Eraser" tool will erase back to the original
+      picture (rather than a solid color).
+
+      Unlike Starters, they do not involve an immutable "layer" above the
+      drawing.  They may be drawn over in their entirety.
+
+    * After switching into, or out of, a magic tool, the canvas is updated.
+
+    * Starter images can be in SVG (Scalable Vector Graphics) format.
+      (Avoids loading PNG if SVG with the same name exists.)
+
+    * Removed white artifacts from some Starters, and reduced file size
+      of some Starters.
+
+    * When scaling/smearing a picture or Starter, to fit the current canvas
+      size, it was not drawing on the far right or bottom edges, causing
+      Fill tool to 'spill'.  (Example: fill one of the puzzle pieces on the
+      right or bottom of the 5x5 jigsaw Starter, and all pieces on the right
+      and bottom would get filled, too.)
+
+    * Starter images can be in KPX (Kid Pix Template) format.
+      (These appear to simply be JPEG with 60 byte's worth of Mac OS
+      resource fork header at the beginning.)
+      (Thanks to Sarah Curry for sharing some example templates to test.)
+
+    * When a default size was not specified, SVG-based Stamps would default
+      to the largest, which was canvas-sized.  Now defaulting to a more
+      reasonable size.  (And users can click the maximum size choice to get
+      the largest, canvas-sized rendition.)
+      (SF.net bug #2836471)
+
+    * Widened dialog windows, to help avoid word-wrap and overlap problems
+      with some prompts, in some locales.
+      (SF.net bug #2834461)
+
+    * Shape Tool now locks rotation into 15 or 5 degree steps, when the
+      radius of the shape is very small or small, respectively.
+      (SF.net bug #2837177)
+
+    * Shape Tool tries to avoid glitches where lines connect, when shape is
+      rotated.  (Rotation of fixed-aspect shapes like Square and Octagon
+      stays within the angle of the corners. i.e., rotating a square 140 deg.
+      actually only rotates it 30 deg., since it looks identical,
+      sans glitches.)
+      (SF.net bug #2837177)
+
+    * Created a BASH tab-completion file for Tux Paint, so that
+      command-line options are easier to discover (without necessarily
+      needing to consult the man page, 'Options' documentation, or --usage
+      output).
+
+    * Text (and Label) tool doesn't flicker when typing or erasing text.
+
+    * Creation of thumbnails for personal starters and templates.
+
+    * Major rewrite of configuration and locale-setting code.
+      Albert Cahalan <albert@users.sourceforge.net>,
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Packaging all the metadata in the PNG file. Before a draw based
+      on a starter would have need 3 files: the draw, the starter and the
+      .dat file, whith the addition of the Labels tool this increased to
+      5 files. Now all this stuff is packed in customs chunks inside the
+      PNG file.
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * No longer directly accessing PNG structure members directly, now using
+      png_set_IHDR().
+      Thomas Klausner, SF.net Bug #3386433
+
+    * Adapted the interface to play nice too on touchscreen devices.
+
+    * Optimised PNG files using TruePNG and PNGZopfli, for smaller file sizes.
+
+ * New Starters:
+   -------------
+    * Elephant
+    * Hat
+    * Old Soviet Car
+    * Skull 
+    * Bald Eagle
+    * Car 2
+    * Desert Tortoise
+    * Gecko
+    * Manatee
+    * Pansy
+    * Stained Glass
+    * Woodpecker
+    * Frame - Filmstrip
+    * Frame - Flowers
+    * Frame - Picture
+    * Frame - Screen
+    * Frame - Television
+    * Frame - Gold
+    * Frame - heart
+    * Frame - hearts
+    * Fish Icon
+    * Mosaic
+      From Open Clip Art, curated by 
+      Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Frame - neon
+      Made in inkscape and the gimp by Caroline Ford.
+
+  * New Templates
+    -------------
+    * Burnt bark
+    * Cliff
+    * Corn maze
+    * Jellyfish
+    * Lighthouse
+    * Mossy bark
+    * Mossy log
+    * Mudstone
+    * Ocean splash
+    * Ocean waves
+    * Redwoods above
+    * Rocks
+    * Sheep
+    * Spider's web
+    * Sun behind clouds
+    * Sun behind leaves
+    * Trees above
+    * Trees at dusk
+    * Wool mill machine
+      Photographed by Bill Kendrick <bill@newbreedsoftware.com>
+
+  * New Brushes
+    ---------
+    * Another flower brush
+      Made out of some open clipart by C Ford.
+
+    * Inksplat
+      Based on 'Splatter Brushes' for GIMP
+      By 'Flyhorn' at deviantART
+      http://browse.deviantart.com/art/Splatter-brushes-340519966
+
+  * New Locales:
+    ------------
+    * Acholi translation
+      Achuma George Patrick <chanchumgpa@gmail.com>
+      Opio June Bryan
+      Ogwal Kenneth Awio
+
+    * Akan translation
+      Derrick Frimpong <flexyflame2006@yahoo.com>
+
+    * Amharic translation
+      Solomon Gizaw <solohavi@yahoo.com>
+      http://pootle.locamotion.org/am/tuxpaint/
+
+    * Aragones translation
+      Juan Pablo Martinez Cortes <jpmart@unizar.es>
+
+    * Armenian translation
+      Anush MKRTCHYAN 
+      Jasmine Udea
+
+    * Assamese translation
+      Anand Kulkarni <kulkarni1016@yahoo.co.in>
+
+    * Bambara translation
+      Fasokan <konate20032001@yahoo.fr>
+
+    * Bosnian translation
+      Samir Ribić
+
+    * Kiga translation
+      Florence Tushabe <tushabe@cit.mak.ac.ug>
+
+    * Fula translation
+      Ibraahiima SAAR <ibrahima.sarr@pulaagu.com>,
+      Fula Localization Project, http://www.pulaar-fulfulde.org/
+
+    * Inuktitut
+      Harvey Ginter <harveyginter@gmail.com>
+
+    * Kannada translation
+      Savitha <savithasprasad@yahoo.com>
+      Provided by Vrundesh Waghmare <vrundesh.waghmare@gmail.com>
+
+    * Konkani (Devaganari and Roman)
+      Rahul Borade <rahulborade01@gmail.com>
+
+    * Luganda translation
+      James Olweny <sjolweny85@yahoo.co.uk>
+
+    * Luxembourgish translation
+      Ren� Brandenburger <rene@brandenburger.lu>
+
+    * Maithili
+      U.Sudhakar <sudhakaru@cdac.in>
+      sk <sk>
+      Provided by Praveen Dewangan <pdvg.cdac@gmail.com>
+
+    * Malayalam translation
+      Students of Vocational Higher Secondary School Irimpanam
+      http://vhssirimpanam.org
+      - rimal <rimalmathew@gmail.com>
+      - Abhijith P.K
+      - Appu Ajith
+      - Vishnu Ajith
+      - Harish Vijay
+      - Mathew K.Vaidyan
+      - Manu C.Kauma
+      - Sreejith P.M
+      - Nithin M
+      - Sidharth K.Bhattathiri
+      - Thomas Peter
+      - Dona C.D
+      - Anjitha venugopal
+      - Athira Venugopal
+      - Shelmi P.R
+      - Revathi Sukumaran
+      - Salu P.SAmitha Appukuttan
+      - Geegu Varghese
+      - Ashna Manoharan
+      - sreelakshmi
+      - jithu
+      - Abhinav Thomas
+      - Abhitha Thomas
+      - Sajith P.V
+      - Vishnu Vinod
+      - Senthis
+      - Vimal <vimaljoseph@gmail.com>
+      - Sameer <sameer.thahir@gmail.com>
+      - Sanal <sanalmadatheth@gmail.com>
+      - Sooraj <soorajkenoth@gmail.com> 
+      - V Sasi Kumar <sasi.fsf@gmail.com> 
+      Updated by Sonith Kumar <sonith.kumar153@gmail.com>
+      Reviewed by Haris Ibrahim K. V. <blucalvin@gmail.com>
+
+    * Manipuri (Bengali and Metei Mayek)
+      Hidam Dolen <dolenhi@gmail.com>
+      Provided by rahul dabre <rahulvdabre@yahoo.com>
+
+    * Marathi translation
+      Santosh Jankiram Kshetre <quicklearning@rediffmail.com>
+
+    * Nepali translation
+      Khagen Sharma <khagen.sharma@gmail.com>
+      Provided by Neha Aphale <aphaleneha@gmail.com>
+
+    * Northern Sotho translation
+      Pheledi Mathibela <pheledi@mosekolatranslation.co.za>
+
+    * Odia translation
+      Kaniska Padhi <kaniska2008@gmail.com>
+
+    * Punjabi translation
+      Arshpreet Singh <arsh840@gmail.com>
+
+    * Persian translation
+      Farinaz Hedayat <farinaz.hedayat@gmail.com>
+
+    * Sanskrit translation
+      Babita Shinde <babitagaikwad@gmail.com>
+
+    * Santali translation (Devaganari)
+      Chandrakant Dhutadmal <cpdhutadmal@yahoo.com>
+      Ganesh Murmu <g_murmu_in@yahoo.com>
+
+    * Santali translation (Ol-Chiki)
+      Chandrakant Dhutadmal <cpdhutadmal@yahoo.com>
+      Ganesh Murmu <g_murmu_in@yahoo.com>
+
+    * Serbian translation (latin)
+      Ivana Rakic <reci.ne.silvesteru@gmail.com>
+
+    * Sinhala
+      Menik Prasantha <manikprasantha@gmail.com>
+
+    * Sundanese
+      kumincir <ia.adnan@gmail.com>
+
+    * Valencian
+      Pilar Embid Giner <embid_mar@gva.es>
+
+    * Venetian language
+      Fabio Lazarin, El Galep�n <mistro@elgalepin.com>
+
+    * Zulu
+      sipho <sipho@translate.org.za>
+
+  * Localization Updates:
+    ---------------------
+    * Albanian translation.
+      Canonical Ubuntu Launchpad contributors
+
+    * Basque translation
+      Ander Elortondo <ander.elor@gmail.com>
+
+    * Belarusian translation
+      Alexander Geroimenko <a.geroimenko@gmail.com>
+
+    * Brazilian Portuguese translation
+      Frederico Goncalves Guimaraes <frederico@teia.bio.br>
+
+    * British English
+      Robert Readman <robert_readman@hotmail.com>
+
+    * Bulgarian
+      Stefani Stoyanova
+
+    * Chinese (Traditional) translation
+      Song Huang <songhuang@users.sourceforge.net>
+
+    * Czech translation
+      Zdeněk Chalupský <chalzd@gmail.com>
+
+    * Danish translation
+      Joe Dalton <joedalton2@yahoo.dk>
+
+    * Dutch translation
+      Freek de Kruijf <f.de.kruijf@hetnet.nl>
+
+    * Finnish translation
+      Olli <ollinpostit@gmail.com>
+      Tarmo Toikkanen <tarmo.toikkanen@iki.fi>
+
+    * German translation
+      Stephanie Schilling <stephanieschilling@online.de>
+
+    * Greek translation
+      Kiriaki SERAFEIM <pse04178@rhodes.aegean.gr>
+
+    * Gujarati translation
+      Kartik Mistry <kartik.mistry@gmail.com>
+
+    * Hindi translation
+      aki <akash.nawani@gmail.com>
+      Ashish Arora <ashish.arora13@gmail.com>
+
+    * Hungarian translation
+      Nagy Akos <nagy.akos@codespring.ro>
+
+    * Italian translation
+      Flavio "Iron Bishop" Pastore <ironbishop@fsfe.org>
+
+    * Latvian
+      Raivis Strogonovs <raivucis@gmail.com>
+
+    * Malay translation
+      Muhammad Najmi Ahmad Zabidi <najmi.zabidi@gmail.com>
+
+    * Norwegian Bokmål translation
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Norwegian Nynorsk translation
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Romanian translation
+      Hodorog Andrei <tocitox@gmail.com>
+
+    * Russian translation
+      Nikolay Parukhin <parukhin@gmail.com>
+      Sergei Popov <skein@rambler.ru>
+
+    * Polish translation
+      Piotr Kwiliński <euvcp@hotmail.com>
+
+    * Portuguese now using plain "pt" locale (vs. always specifying "_PT")
+
+    * Portuguese translation
+      Sergio Marques <smarquespt@gmail.com>
+
+    * Scottish Gaelic translation
+      Michael Bauer <fios@akerbeltz.org>
+
+    * Scottish Gaelic translation for Inno Setup
+      Foram na Gaidhlig <fios@foramnagaidhlig.net>
+
+    * Serbian translations (cyrillic)
+      Ivana Rakic <reci.ne.silvesteru@gmail.com>
+
+    * Slovak translation
+      Jaroslav Rynik <jrynik@yahoo.co.uk>
+
+    * Songhay translation
+      Abdoul Cisse <abdoulseydou@hotmail.com>
+      Mohomodou Houssouba  <mh@bollag-areal.ch>
+
+    * Spanish (Spain) translation
+      Teresa Orive <teresa.g.orive@gmail.com>
+
+    * Swedish translation
+      Henrik Holst <henrik.holst@millistream.com>
+
+    * Swahili translation
+      Emanuel Feruzi <emanuel.feruzi@trilabs.co.tz>
+
+    * Telugu tranlation
+      saikumar <ramukiashc@gmail.com> as a task in GCI
+
+    * Turkish
+      Enes Burhan KURAN <asd@gmail.com>
+
+    * Vietnamese translation
+      Clytie Siddall <clytie@riverland.net.au>
+
+    * Zapoteco
+      Rodrigo Perez Ramirez and Indigenas Sin Fronteras <isf_mx@yahoo.com>
+
+  * Bug Fixes
+    ---------
+    * Starter and template filenames with non-lowercase extensions (e.g. .JPG)
+      would fail to load.
+      SF.net Bug #191
+
+    * If a non-SVG starter or template with the same name as an SVG one
+      existed, it would be loaded instead of the SVG (despite a thumbnail
+      of the SVG appearing in the file selector).
+      SF.net Bug #191
+
+    * Image on right of dialogs would get scaled/cut-off even if there was
+      room for them.
+
+    * When using 'print delay' option, it would not allow printing the
+      first time until the delay had passed.
+
+    * Fixed error reporting when make_directory() fails.
+      (Fixes spurious 
+      SF.net Bug #2765872)
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Buffersize for holding Starter and image filenames was way too low.
+      (Could crash with Starter images with very long filenames.)
+
+    * Shape tool would only resize a shape if you dragged down or right,
+      not up or left.
+      (SF.net Bug #2834320)
+
+    * tuxpaint-import tool uses BASHisms, so changed shebang to #!/bin/bash
+      (instead of #!/bin/sh).
+
+    * Added some missing examples to the default tuxpaint.conf file.
+      (Thanks to Aapo Rantalainen <aapo.rantalainen@gmail.com>)
+
+    * Default stamp size, in some situations, was very large
+      (due to some rules that allowed stamps to be, at maximum,
+      up to 2x width of the canvas, OR 2x height of the canvas, as long
+      as it wasn't larger than the canvas in the other dimension).
+      The stamp sizing buttons were unable to re-select that size.
+      The sizing button bug has been fixed, the rule has been adjusted to
+      allow a maximum overscan of 1.5x width-or-height, and if the maximum
+      size causes overscan, then a smaller size is used for the default
+      when the stamp is first used.
+      (SF.net Bug #1668235)
+
+    * Shapes tool now draws at mouse release to help painting with
+      touchscreen devices.
+      (SF.net Feature request #3008811)
+
+    * Shapes tool would left their preview on the canvas if you leave it 
+      or change the shape before finishing to draw it.
+      (SF.net Bug #1057311)
+
+    * Example for 'savedir' in tuxpaint.conf suggested you needed /saved
+      at the end, which is not true.  Added note explaining that actual
+      image files go under 'saved' subdirectory.
+      (Thanks to Marco Menardi)
+
+    * Saved images woose path contains non-ascii chars can now be opened on Windows.
+      Fixes http://sourceforge.net/p/tuxpaint/bugs/188/
+
+    * Ignoring ".pfb" (PostScript 'Printer Font Binary') fonts, to
+      avoid crashes.
+
+2009.June.28 (0.9.21)
+  * New Starters:
+    -------------
+    * Silver Frame
+      Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Jigsaw 3x3 & 5x5
+      Andrew 'akanewbie' Corcoran <akanewbie@gmail.com>
+
+  * New Magic Tools:
+    ----------------
+    * + Blur (entire image mode) - Blurs entire image
+      + Color Shift - Modifies the colors in the image.
+      + Sharpen - Sharpens entire image
+      + Edges - Traces the edges of the image, over a white background.
+      + Silhouette - Creates an outline of the image, over a black background.
+      + Color and White - Turns image pure color & white (no grey or color).
+      + Snow Ball - Places random snow balls over the image.
+      + Snow Flake - Places random snow flakes over the image.
+      + Noise - Adds random noise to the image.
+      + Mosaic - Gives the image a mosaic effect.
+      + Rain - Adds rain drops to the image.
+      + Toothpaste - Squirts "toothpaste" on to the image.
+      By Andrew 'akanewbie' Corcoran <akanewbie@gmail.com>
+      (Part of Tux4Kids' participation in Google Summer of Code 2008)
+
+    * + Confetti - Paints random confetti bits on the canvas.
+      + TV - Adds television (CRT) interlacing lines over the image.
+      + Rosette - Paints at 3 points on the screen, in a rosette shape.
+      + Picasso - Paints at 3 points, in a "Picasso" art style.
+      + Wavelets - Waves that go up and down.
+      By Adam 'foo-script' Rakowski <foo-script@o2.pl>
+      (Part of Tux4Kids' participation in Google Summer of Code 2008)
+
+    * + Rails - Draws train tracks / rails over the image.
+      + Fisheye - Warps part of the picture, as though seen through a fisheye.
+      + Fold - Folds the corners of the image up, like a piece of paper.
+      By Adam 'foo-script' Rakowski <foo-script@o2.pl> (GSOC 2008),
+      with modifications by Bill Kendrick
+      and Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * Real Rainbow - Draw an arc-shaped, photorealistic rainbow.
+      By Bill Kendrick
+      with math help from Jeff Newmiller <jdnewmil@dcn.davis.ca.us>
+      Rainbow colors/alpha based on photo from
+      http://www.flickr.com/photos/nicholas_t/281820290/
+      photo by Flickr user "Nicholas_T"
+      Creative Commons Attribution 2.0 Generic
+      http://creativecommons.org/licenses/by/2.0/deed.en
+
+    * String Edges - Draw string-like patters around the picture.
+      String Corner - Draw aligned string-like patterns.
+      String 'V' - Draw free-form string-like patterns.
+      Tornado (based on Flowers) - Draws a tornado effect onto the picture.
+      By Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * Icons for some new Magic Tools
+      (Color and White, Fisheye, Mosaic, Picasso, Silhouette, TV and Wavelet)
+      Donelle Cory <8bitonion@gmail.com>
+      http://www.8bitonion.com/portfolio
+
+  * Magic Tool Improvememnts:
+    --------------------------
+    * Added "_switchin()" and "_switchout()" functions to Magic tool API,
+      to tell Magic tools when they are selected or deselected, or when
+      their mode changes..
+
+    * Added "_modes()" function to Magic tool API, so Magic tool plugins
+      can tell Tux Paint what modes it accepts, 'paint' or 'fullscreen'.
+
+    * "_click()" function is now given a 'mode' value, corresponding to the
+      mode the current tool is in.
+
+    * "_get_description()" function is now given a 'mode' value, and is
+      called once for each mode a particular tool claims to support.
+      (e.g., "which=0,mode=MODE_PAINT", then "which=1,mode=MODE_PAINT",
+      then "which=1,mode=MODE_FULLSCREEN")
+
+    * "Paint" and "Fullscreen" control buttons added to Magic tool
+      selector UI.  Can be disabled with "--nomagiccontrols".
+
+    * "Negative", "Tint", "Glass Tile", "Darken" and "Lighten" tools
+      can all now affect the entire image.
+
+  * System-Related Improvements:
+    ----------------------------
+    * 'savedir' and 'datadir' paths given in configuration files
+      (e.g., ~/.tuxpaintrc) now have any environment variables and tildes
+      (e.g., "~" for $HOME, or "~username" for 'username's home directory)
+      expanded.
+      NOTE: Environment variable expansion via 'wordexp()' -- currently
+      Linux-only.
+      NOTE: 'printcommand' and 'altprintcommand' options not currently parsed
+      for env. vars.
+
+    * On systems that use postscript_print (Linux and other Unix-likes),
+      errors when attempting to issue a print command (e.g., trying to use
+      "lpr", but that command is not available) should appear in Tux Paint.
+      (SourceForge bug #2205528)
+
+  * Build System Improvements:
+    --------------------------
+    * Adhering to Debian & FreeDesktop.org standards regarding .desktop file.
+
+  * Documentation Improvements:
+    ---------------------------
+    * Corrected location of config files for Mac OS X in OPTIONS docs.
+
+    * HTML documentation files for the various Magic tools are now
+      generated using a PHP script.  Tool details are stored in a PHP array
+      (which is easier-to-edit than individual HTML files).
+
+  * Other Improvements:
+    -------------------
+    * Starter images no longer need to be created with alpha transparency.
+      Any solid white will be removed automatically by Tux Paint.
+
+    * White always appears as the first color in the "New" dialog,
+      regardless of its position (or even existence) in the color palette.
+
+    * Text tool uses FriBidi to determine when right-to-left characters have
+      been typed (e.g., Hebrew) so that they are drawn in the right direction.
+      (Mixing RtoL and LtoR works (e.g., Hebrew with numerals))
+
+    * Updated to the latest version (2.27) of DejaVu Sans Regular for UI font.
+
+    * Only loads locale-specific fonts (e.g., Tibetan's "bo.ttf", which is
+      unusable with any language _except_ Tibetan) when Tux Paint is running
+      in that locale.  (Use "--alllocalefonts" command-line option
+      or "alllocalefonts=yes" config. file option, to load all of those fonts,
+      regardless of locale setting -- the old behavior.)
+
+    * Font scoring system improved, so that fonts that support the current
+      locale (based on special translation strings -- many of which have been
+      submitted or improved) 'bubble up' to the top of the Fonts list when
+      using the Text tool.
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org> and
+      Bill Kendrick <bill@newbreedsoftware.com>
+      with help from:
+      Albert Cahalan <albert@users.sourceforge.net>,
+      Frank Weng <franklin@goodhorse.idv.tw>
+      and various translators.
+
+  * New localizations:
+    ------------------
+    * Shuswap (Secwepemct�n) translation
+      Neskie Manuel <neskiem@gmail.com>
+
+    * Songhay translation
+      Abdoul Cisse <abdoulseydou@hotmail.com>
+      Mohomodou Houssouba <mh@bollag-areal.ch>
+
+  * Localization Updates:
+    ---------------------
+    * Afrikaans translation
+      Petri Jooste <petri.jooste@nwu.ac.za>
+
+    * Arabic translation
+      Tilo <Drfortilo@gmail.com>
+
+    * Asturian
+      Xandru Armesto <alarmes@wanadoo.es>
+
+    * Basque translation
+      Juan Irigoien <juanirigoien@gmail.com>
+
+    * Brazilian Portuguese translation
+      Frederico Goncalves Guimaraes <frederico@teia.bio.br>
+
+    * Catalan translation
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * Chinese (Simplified) translation
+      Huang Zuzhen <zuzhenhuang@vip.sina.com>
+
+    * Chinese (Traditional) translation
+      Frank Weng <franklin@goodhorse.idv.tw>
+      Song Huang <songhuang@users.sourceforge.net>
+
+    * Danish translation
+      Joe Dalton <joedalton2@yahoo.dk>
+
+    * Dutch translation
+      Bert Saal <bertsaal@gmail.com>
+
+    * Estonian translation
+      Henrik Pihl <henrik@saarlane.ee>
+
+    * French translation
+      Jacques Chion <Jacques.Chion@wanadoo.fr>
+
+    * Georgian translation
+      Gia Shervashidze <giasher@gmail.com>
+
+    * Gujarati translation
+      Kartik Mistry <kartik.mistry@gmail.com>
+
+    * Greek translation
+      Serafeim Kyriaki <pse04178@rhodes.aegean.gr>
+
+    * Hebrew translation
+      Jorge Mariano <mjminfo@mjminformatique.com>
+      Guy Hed <guy.hed@weizmann.ac.il>
+
+    * Hungarian
+      Gabor Kelemen <kelemeng@gnome.hu>
+
+    * Irish Gaelic
+      Kevin Patrick Scannell <kscanne@gmail.com>
+
+    * Italian translation
+      Simona Riva <simona.riva@tiscali.it>
+
+    * Kurdish translation
+      Amed �eko Jiyan <amedcj@gmail.com>
+
+    * Portuguese translation
+      Sergio Marques <smarquespt@gmail.com>
+
+    * Romanian translation
+      Sorin Paliga <sorin.paliga@gmail.com>
+
+    * Russian translation
+      Nikolay Parukhin <parukhin@gmail.com>
+
+    * Slovak translation
+      Jaroslav Rynik <jrynik@yahoo.co.uk>
+
+    * Slovenian translation
+      Matej Urban <matej.urban@gmail.com>
+
+    * Spanish translation
+      Gabriel Gazzan <gabcorreo@gmail.com>
+
+    * Swedish translation
+      Daniel Nylander <po@danielnylander.se>
+
+    * Tamil translation
+      Ravishankar Ayyakkannu <ravishankar.ayyakkannu@gmail.com>
+
+    * Ukranian translation
+      Serhij Dubyk <serhijdubyk@gmail.com>
+
+    * Zapotec (Miahuatlan dialect) name and locale code correction
+
+  * Bug Fixes
+    ---------
+    * Was inadvertently calling "magic_switchin()" on Quit. Fixed.
+      Dan Shields <d4ndeveloper@gmail.com>
+
+    * [Ctrl]+[P] keyboard shortcut for printing was not complying with
+      option to disable printing capability (e.g., "--noprint")! Fixed.
+
+    * Preventing Tux Paint from dropping out of Fullscreen mode when
+      pressing either left or right [Windows] keys
+      Note: Works on Windows XP, 2000 and Vista only.
+      (If Tux Paint is deliberately switched to the background,
+      e.g. using [Alt]+[Tab], the [Windows] keys function as normal until
+      Tux Paint is the active application again.)
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Directional brushes used to always begin with middle image;
+      now this only happens if you click and release, with dragging.
+      Jason Ward <nyad55@gmail.com>
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * Corrected bug in postscript printing: images scaled up onto a large
+      canvas printed small, compared to when they're printed at the size
+      they were drawn.
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+      Thomas Kalka <thomas.kalka@googlemail.com>
+
+    * Corrected 'oval' brush shape so that colors came out right.
+      (Thanks to Andrei Skoogarev)
+
+    * Improved support for localized Stamp sound effects (e.g., "en_GB" for
+      British English now works; only "en" would have worked before).
+
+    * Fixed minor bug that caused Tux Paint to crash when loading
+      many fonts (i.e., with the 'sysfonts' option).
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org> and
+      Albert Cahalan <albert@users.sf.net>
+
+    * 'tuxpaint-import' script didn't support files with spaces. Fixed.
+      James Le Cuirot <jerseychewi@users.sourceforge.net>
+
+    * Fixed display bugs and icon positioning in pop-up dialogs when
+      using right-to-left languages (like Hebrew or Arabic).
+
+
+2008.June.26 (0.9.20)
+  * New translations:
+    -----------------
+    * Asturian
+      Xandru Armesto <alarmes@wanadoo.es>
+      Mikel Gonz�lez <mikelisimu@yahoo.es>
+
+  * Localization Updates:
+    ---------------------
+    * Afrikaans translation
+      Samuel Murray (Groenkloof) <samuel@translate.org.za>
+
+    * German translation
+      Burkhard L�ck <lueck@hube-lueck.de>
+
+    * Greek translation:
+      Yannis Papatzikos <papatzikos@yahoo.gr>
+
+    * Khmer
+      Khoem Sokhem <khoemsokhem@khmeros.info>
+      Auk Piseth <piseth_dv@khmeros.info>
+
+    * Lithuanian translation
+      Alesis Novik <alesisnov@gmail.com>
+
+    * Slovakian translation
+      Peter Tuh�rsky <tuharsky@misbb.sk>
+
+    * Spanish translation
+      Gabriel Gazzan <ggabriel@internet.com.uy>
+
+    * Swedish
+      Robin Rosenberg <robin.rosenberg@dewire.com>
+
+    * Ukranian translation
+      Serhij Dubyk <serhijdubyk@gmail.com>
+
+    * Ukranian documentation
+      - EXTENDING.txt
+      - FAQ.txt
+      - INSTALL.txt
+      - OPTIONS.txt
+      - PNG.txt
+      - README.txt
+      Serhij Dubyk <serhijdubyk@gmail.com>
+
+    * Vietnamese font removed, until a suitable replacement is found
+      (licensing issue)
+
+    * Using proper case in PO filenames (e.g., zh_TW.po instead of zh_tw.po)
+      to solve MO installation problem caused by Makefile simplification.
+
+  * Build System Improvements
+    -------------------------
+    * RPM spec updates:
+      + Plugin .so files were missing.
+      + Separated devel packages in RPM spec.
+      + Added dependency on SDL_Pango.
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Placing Tux Paint launcher icon ("tuxpaint.desktop") in
+      'applications', rather than 'gnome/apps/Graphics', per Freedesktop.org
+      standards.
+      (SourceForge Bug #1932808, via Ubuntu)
+
+    * Added "Categories" back to the 'tuxpaint.desktop' file
+      ("Education," and "Art").  NOTE: You need to edit 'tuxpaint.desktop.in',
+      otherwise changes will be overwritten the next time 'tuxpaint.desktop'
+      is generated!
+      (SourceForge Bug #1932808, via Ubuntu)
+
+    * Numerous Makefile improvements:
+      + Automated i18n creation; merged back to Makefile, removed Makefile-i18n
+      + Support for generic targets; removed beos- & most win32-related targets;
+        use of "ARCH_" variables
+      + Automated Magic plugin creation; merged back to Makefile,
+        removed magic/Makefile
+      + Other misc. updates and efficiency improvements
+      + Automatic testing for SVG, SDL_Pango, SDL_Mixer and libpng vs libpng12
+        libraries; 'oldsvg' and 'nosvg' targets removed; new means for building
+	without sound, etc.
+      Albert Cahalan <albert@users.sf.net>
+
+    * Made sure Makefile works with NetBSD again.
+      Thomas Klausner <tk@giga.or.at>
+
+    * Makefile edited so that Tux Paint can be installed in the absence
+      of gettext in the system.
+      Arunodai Vudem <arunvudem@gmail.com>
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Making Magic Tool source throw fewer compiler warnings.
+
+    * Removed "_APPLE_10_2_8_"-related #include work-arounds, since 10.2.8
+      support is unlikely right now. (With Martin F's blessings)
+
+    * Removed "OLD_UPPERCASE_CODE"-based work-arounds, since no longer
+      necessary. (With Luc S's blessings on BeOS.)
+
+  * Documentation Improvements:
+    ---------------------------
+    * Mentioned that canvas size can be changed in README (so it's not
+      just hidden in OPTIONS).
+
+    * Starters section of EXTENDING documentation updated ("New" vs "Open",
+      other clean-up, and now directs people to README for determining
+      image sizes.)
+
+    * Moved "Starters" from the 'Open' section to 'New', in README.
+
+    * Other minor README improvements.  Added Table of Contents to README.
+
+  * Bug Fixes
+    ---------
+    * Legacy Tux Paint images (prior to Tux Paint supporting different
+      colored backgrounds) would end up with arbitrary Eraser colors.
+      Forcing it to always use white, which was the only background color
+      in early versions of Tux Paint.
+
+    * Brushes with large spacing wouldn't be spaced properly when drawn
+      from bottom-to-top using the line tool.  Fixed.
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * Fixed bug when zooming stamps in video depth other than 32bpp.
+      (Float to int casting; also removes compiler errors.)
+
+    * getpixel/putpixel function passed to Magic tools now pays attention
+      to the incoming surface, rather than always using the canvas surface,
+      to determine bitdepth.  (Fixes bug where some Magic tools, e.g., Grass,
+      didn't work right on video depths other than 32bpp.)
+
+    * "Ojibwe" is the proper spelling of the language, accepting that as
+      a "--lang" option, too.
+
+    * The variables not declared as extern in SDL_Pango.h have been 
+      renamed in dirwalk.c and fonts.c. SDL_Pango.h no longer needs to be
+      shipped along with tuxpaint code. Inclusion error message has been added
+      for missing libpaper.
+      Arunodai Vudem <arunvudem@gmail.com>
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * "Uppercase only" option support for builds that use Pango to render text.
+      (Note: Needs help in some/many? locales.)
+
+    * Fixed issues where some strings not appearing under 'nopango'
+      (at least on older Fedora CORE and RedHat).
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+* New Starters:
+    -------------
+    * Spirograph
+    * Jigsaw
+      Caroline Ford <caroline.ford.work@googlemail.com>
+
+
+2008.February.25 (0.9.19)
+  * New Localizations:
+    ------------------
+    * Australian English
+      Chris Goerner, Canonical Ltd, and Rosetta Contributors
+      via Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Azerbaijani
+      Jamil Farzana <jamil.farzana@gmail.com>
+
+    * Canadian English
+      Matthew Lange, Canonical Ltd, and Rosetta Contributors
+      via Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Khmer
+      Khoem Sokhem <khoemsokhem@khmeros.info>
+
+    * Macedonian
+      Kliment Simoncev and fleka, Canonical Ltd, and Rosetta Contributors
+      via Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Occitan
+      Yannig MARCHEGAY (Kokoyaya), Canonical Ltd, and Rosetta Contributors
+      via Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Zapoteco
+      Rodrigo Perez Ramirez and Indigenas Sin Fronteras <isf_mx@yahoo.com>
+
+  * Localization Updates:
+    ---------------------
+    * British English translation
+      Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Chinese (Simplified) README and FAQ documentation
+      HackerGene <hackergene@gmail.com>
+      http://tuxpaint.cn/
+
+    * Danish translation
+      Joe Hansen <joedalton2@yahoo.dk>
+      Gruppen for Lokalisering af Frit Programmel til Dansk
+      <http://dansk-gruppen.dk>
+
+    * Esperanto translation
+      Edmund GRIMLEY EVANS <edmundo@rano.org>
+
+    * Faroese translation
+      Lis G�the � J�kupsstovu <morshus@gmail.com>
+
+    * Finnish translation
+      Jorma Karvonen <karvjorm@users.sf.net>
+
+    * French translation
+      Jacques Chion <Jacques.Chion@wanadoo.fr>
+
+    * Gujarati translation
+      Kartik Mistry <kartik.mistry@gmail.com>
+
+    * Russian translation
+      Sergei Popov <skein@rambler.ru>
+
+    * Attempted to add a vertical nudge value for tool button labels, based
+      on locale.  (Specifically, to prevent Khmer text from overlapping icons.)
+      Locale-related code needs some bugfixing before this works right, though.
+
+  * System-Related Improvements:
+    ----------------------------
+    * Added "--allowscreensaver" option, which prevents Tux Paint from disabling
+      the screensaver or monitor power management while running.
+      (Requires SDL 1.2.12; can also be done by setting the
+      SDL_VIDEO_ALLOW_SCREENSAVER environment variable to '1' before running
+      Tux Paint.)
+
+    * Removed unfinished, unused record and playback code.
+
+    * Added authorization code to permit Fontconfig files to be installed
+      on first launch from a non-admin account on Mac OS X.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+    * Fixed possible lockups in fullscreen mode when attempting to print on
+      Mac OS X.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+    * Skipping "AppleMyungjo.ttf" when loading fonts on Mac OS X to avoid
+      TTF lib. crash.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+  * Documentation Improvements:
+    ---------------------------
+    * Brought documentation on Tux Paint canvas size up-to-date, for
+      importing photos/etc.
+
+  * Build System Improvements
+    -------------------------
+    * Brought BeOS building up-to-date.
+      Begasus <Begasus@skynet.be>
+
+    * Sugar (One Laptop per Child XO-1) improvements.
+      Albert Cahalan <albert@users.sf.net>
+
+    * Magic plug-ins built with "-fpic" by default.
+
+    * Mac OS X XCode project brought up to date.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+      With assistance from:
+      Carlo Gandolfi <www.freesmug.org>
+      Douglas Barbieri <doug@dooglio.net>
+
+  * Other improvements:
+    -------------------
+    * Recreated "Tux Paint" title art using Inkscape (traced original bitmap).
+
+    * Larger "Tux Paint" title art displayed on larger screens.
+
+
+  * Bug Fixes
+    ---------
+    * Added authorization code to permit Fontconfig files
+      to be installed on first launch from a non-admin account on Mac OS X.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+    * Fixed possible lockups in fullscreen mode when attempting to print
+      on Mac OS X.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+    * Corrected bug where Shift and Kaleidoscope magic tools would crash
+      when sound was disabled.
+
+    * Corrected issues that prevented building Tux Paint without sound
+      support (extraneous SDL_mixer library calls).
+
+    * Preventing crash when starter images could not be loaded
+      (when trying to flip or mirror them).
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Fixed bug on Windows that caused image's metadata file to become corrupt
+      after 40 flips or mirrors, which in turn caused a crash on startup.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Fixed bug that prevented rendering of some locales on Mac OS X
+      (e.g. Arabic)
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+
+2007.November.17 (0.9.18)
+  * Interface Improvements:
+    -----------------------
+    * Improved 'New' and 'Open' interface:
+      + 'Open' dialog no longer includes 'Starter' images
+      + 'New' now brings up a selection dialog showing 'Starter' images
+        and color choices
+      + New images can be given solid background colors
+        (which the 'Eraser' tool erases to)
+
+    * Sped up prompt animations, and made them 'fly' from their sources
+      (e.g., quit confirmation flies from Quit button), when possible.
+
+    * Center image of directional brushes shown.
+      (SourceForge.net Bug #1658697)
+
+    * Windows shows printer configuration dialog even when in fullscreen mode.
+      If no 'print.cfg' file is found, the dialog is shown.
+      Clicking "Cancel" in the printer config. dialog cancels Tux Paint's
+      print attempt.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Tool Improvements:
+    ------------------
+    * Added a 'color picker' entry to the color palette; allows choosing
+      from over 50,000 colors.  Used by drawing and Magic tools, as well
+      as the new 'New' dialog.
+
+    * Added an Octagon shape to the 'Shapes' tool.
+
+    * Stamps can now be pre-flipped and/or pre-mirrored-and-flipped now
+      (in addition to pre-mirrored).
+      Use "_flip.png"/"_flip.svg" and "_mirror_flip.png"/"_mirror_flip.png",
+      respectively.
+
+    * Any current text being written in the Text tool is applied to the
+      picture if 'Print' is clicked.
+      (Useful if kids are told to add their name to a picture when they're
+      done, right before printing, but they forget to hit [Enter].)
+
+    * All stamps can be forced to start at a particular size
+      (on a scale of 0-10, corresponding to their minimum and maximum size,
+      which depends on the size of the stamp, and the size of the canvas).
+      Use the "--stampsize=..." command-line option or "stampsize=..." config.
+      file setting.  Use "default" to allow Tux Paint to decide (its standard
+      behavior).
+
+  * Documentation Improvements:
+    ---------------------------
+    * Improved --usage output.
+
+    * Added support for "--papersize help" to list papersizes available
+      via libpaper.
+
+  * System-Related Improvements:
+    ----------------------------
+    * Added an API for developing Magic tools as plug-ins.
+      ('.so' shared objects under Linux, '.dll' libraries under Windows, etc.)
+      Plugins must provide a number of functions that Tux Paint calls,
+      and Tux Paint provides a structure ("magic_api") that includes info.
+      (e.g., the running Tux Paint's version number) and pointers to
+      useful functions (e.g., getpixel(), putpixel(), etc.)
+
+    * Magic plugin development can be done outside of Tux Paint base
+      source-code by using new "tp-magic-config" shell script to query
+      for C compiler flags (which points to where "tp_magic_api.h" header
+      file is installed) and directories Tux Paint uses (where plugin '.so'
+      files should be stored, and where Tux Paint's global data files and
+      documentation go).
+
+    * Magic plugin development docs created.  On Linux/Unix, installed into
+      /usr/[local/]share/docs/tuxpaint-dev/ by default.  (HTML and plaintext.)
+
+    * tp-magic-config man page created.
+
+    * Ported existing magic tools to the new Magic tool plug-in system:
+      (Blur, Fill, Lighten, Darken, Mirror, Flip, Rainbow, Blocks, Chalk,
+      Grass, Negative, Tint, Smudge, Drip, Cartoon, Brick (large & small))
+
+    * Some Magic tools that apply an affect once per click-and-drag no
+      longer recalculate the effect on pixels that have already been
+      affected (until mouse button is released and clicked again).
+      Improves performance, especially where heavy math is used.
+
+    * Magic tool documentation now split into separate files, and referenced
+      (as a directory) from README, so that users can find docs to any
+      additional tools (ones not included by default with Tux Paint) that are
+      installed.
+
+    * Began adding support for using SDL_Pango, a wrapper to Pango,
+      a library for layout and rendering of text, with an emphasis on
+      internationalization.  (The hope is to improve support for languages
+      that SDL_ttf doesn't support well; e.g., Arabic and Telegu.)
+
+      TTF_Font structs and some functions were replaced by a new
+      TuxPaint_Font struct and function, which wraps around either TTF_Font
+      or both a TTF_Font and a SDLPango_Context, depending on whether
+      SDL_Pango is being used, and how the font was loaded.
+
+      Can be disabled (will use older SDL_ttf-based code only) by building with
+      "make nopango".  Note: A modified SDL_Pango.h header file is included
+      with Tux Paint, to work around a compile issue with SDL_Pango 0.1.2's.
+
+    * Print configuration is now saved between Tux Paint sessions on Mac OS X.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+    * Saved-files directory and data directory (brushes, starters, etc.) can
+      now be different.  Use "--datadir" option to override default data
+      directory, similar to "--savedir" has been for overriding save directory.
+
+    * Windows installation (Innosetup .iss file) more silent, to help it
+      work with WPKG software deployment tool.  [SourceForge Bug #1787000]
+
+    * Lockfile can be disabled via options file ("nolockfile=yes") now, too.
+
+  * New Brushes
+    -----------
+    * Sparkles (based on old Magic Tool)
+
+  * New Starters:
+    -------------
+    * Canada map
+      Ed Monty <edmonty@gmail.com>
+
+    * Japan map
+      Ed Monty <edmonty@gmail.com>
+
+  * New Magic tools:
+    ----------------
+    * Calligraphy
+    * Distortion
+    * Emboss
+    * Flower
+    * Foam
+    * Glass Tile
+    * Kaleidoscope
+    * Light
+    * Metal Paint
+    * Ripples
+    * Shift
+    * Waves
+   
+    (Flower and Calligraphy utilize Bezier curve example code from
+    Wikipedia.org)
+    (Glass Tile, Emboss, Flower, Light and Ripples sounds based on sounds
+    from KDE 3.5.7; http://www.kde.org/ )
+    (Metal Paint sound based on sound from Engima;
+    http://www.nongnu.org/enigma/ )
+    (Waves sound based on sound from Super Tux;
+    http://supertux.berlios.de/ )
+    (Kaleidoscope sound based on water in a bathtub, by
+    Caroline Ford <caroline.ford.work@googlemail.com>, GFDL)
+    (Shift sound based on London Underground train, by
+    Caroline Ford <caroline.ford.work@googlemail.com>, GFDL)
+
+  * New Localizations:
+    ------------------
+    * Esperanto translation
+      Edmund GRIMLEY EVANS <edmundo@rano.org>
+
+    * Traditional Chinese input method
+      Song Huang <songhuang@users.sourceforge.net>
+
+    * Ojibway translation
+      Ed Montgomery <edm@rocketmail.com>
+
+    * Thai input method
+      Ed Montgomery <edm@rocketmail.com>
+
+    * Wolof translation
+      Haby Diallo <haby42@yahoo.fr>
+
+  * Localization Updates:
+    ---------------------
+    * Afrikaans translation
+      Petri Jooste <petri.jooste@nwu.ac.za>
+
+    * Brazilian Portuguese
+      Frederico Goncalves Guimaraes <frederico@teia.bio.br>
+
+    * British English translation
+      Caroline Ford <caroline.ford.work@googlemail.com>
+      Karl Ove Hufthammer <huftis@users.sourceforge.net>
+
+    * Catalan translation
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * Chinese (Simplified) README documentation
+      HackerGene <hackergene@gmail.com>
+      http://tuxpaint.cn/
+
+    * Chinese (Traditional) README documentation
+      Song Huang <songhuang@users.sourceforge.net>
+
+    * Chinese (Traditional) OPTIONS documentation
+      Song Huang <songhuang@users.sourceforge.net>
+
+    * Dutch translation
+      Freek de Kruijf <f.de.kruijf@hetnet.nl>
+
+    * French translation
+      Jacques Chion <Jacques.Chion@wanadoo.fr>
+
+    * German translation
+      Burkhard L�ck <lueck@hube-lueck.de>
+
+    * Gujarati translation
+      Kartik Mistry <kartik.mistry@gmail.com>
+
+    * Hungarian
+      Gabor Kelemen <kelemeng@gnome.hu>
+
+    * Italian translation
+      Flavio "Iron Bishop" Pastore <ironbishop@fsfe.org>
+
+    * Japanese translation
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Mexican Spanish translation
+      Ignacio Tike <itike0100@gmail.com>
+
+    * Norwegian Nynorsk translation
+      Karl Ove Hufthammer <huftis@users.sourceforge.net>
+
+    * Norwegian Bokm�l translation
+      Karl Ove Hufthammer <huftis@users.sourceforge.net>
+
+    * Polish translation
+      Andrzej M. Krzysztofowicz <ankry@mif.pg.gda.pl>
+
+    * Russian EXTENDING, INSTALL, PNG and FAQ documentation
+      Sergei Popov <skein@rambler.ru>
+
+    * South African English translation
+      Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Slovenian translation
+      Matej Urban <matej.urban@gmail.com>
+
+    * Spanish translation
+      Gabriel Gazzan <ggabriel@internet.com.uy>
+
+    * Swedish
+      Robin Rosenberg <robin.rosenberg@dewire.com>
+
+    * Vietnamese translation
+      Clytie Siddall <clytie@riverland.net.au>
+
+    * Walloon translation
+      Pablo Saratxaga <pablo@walon.org>
+
+    * Improved comments near gettext() calls in the source code, to provide
+      useful descriptions of each string in the POT (translation template).
+
+  * Build System Improvements
+    -------------------------
+    * Removed old Microsoft Visual Studio C++ files (in 'visualc')
+
+    * Created a new "win32" folder with things from 'visualc' that are still
+      being used ('libdocs', 'resource.h', 'resources.rc' and 'tuxpaint.iss')
+
+    * Windows build updates for building Tux Paint with Pango-support.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Created a separate "win9x" target (for Windows95, Windows98 & WindowsME)
+      which will have reduced functionality compared to more modern Windowses.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Bug Fixes
+    ---------
+    * PostScript scale and translation values were being localized
+      (so, e.g., "N.M" would be "N,M") due to use of printf().  Fixed.
+
+    * Windows printing now attempts to use default printer if
+      a "print.cfg" file does not exist.  (Fixes bug where Tux Paint would
+      not print until after you've issued an [Alt]+'Print' at least once.
+      SourceForge Bug #1748705.)
+
+    * Fixed the scaling problem when printing on Windows.
+      The image is scaled to fit whilst preserving the aspect ratio.
+      It is centered horizontally and vertically aligned at the top of the page.
+        (On Win9x/ME I'm getting a slight problem with the left and right
+        margins when printing to our samba/cups shared printer which is making
+        the Epson Stylus Color 860 emulate a post-script printer (I think).
+        If I print to a file and use the HP LaserJet 6P/6MP PostScript driver
+        it looks OK. I'm hoping it is a driver problem on my system.)
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Prevented crash when clicking 'Open' or 'Erase' button in Open dialog
+      after clicking an empty file slot.
+      (SourceForge Bug #1787005)
+      Thanks to Tomasz Gloc for reporting and investigating this one.
+
+    * Fixed installer 'groupname' bug and missing icon on 'Tux Paint on
+      the web' shortcut (on Windows XP).
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+
+2007.July.1 (0.9.17)
+
+  * Interface Improvements:
+    -----------------------
+    * Mouse cursor can be hidden (e.g., using "--hidecursor"), useful on
+      touchscreen devices like tablet PCs or the Nokia Mameo devices.
+      (Addresses SourceForge RFE #1673344)
+
+    * Added an "autosave" option that assumes you wish to save the current
+      picture during Quit.  (Additionally, after saving during Quit or Open,
+      it no longer shows 'success' pop-up that must be dismissed.)
+      (Addresses SourceForge RFE #1680500)
+
+    * Screen size can be rotated using the "--orient=portrait" command-line
+      option or "orient=portait" configuration file setting.  This swaps
+      the width and height values used for window or screen size.
+      (e.g., "tuxpaint --fullscreen --1024x786 --orient=portrait" will
+      run Tux Paint in 768x1024 mode.)  Useful for tablet PCs.
+      Note: override previously-set option with "--orient=landscape" or
+      "orient=landscape".
+
+    * Stamp sound effects and stamp descriptive sounds can be re-played
+      using small buttons that appear over Tux, at the lower lefthand corner.
+      (They disappear/reappear when sound is muted/unmuted via [Alt]+[S].)
+
+    * "Open" dialog lists saved drawings first, then local starter images,
+      then system-wide starter images, rather than the other way around.
+      (Since there are now so many more starters.)
+
+    * All compile-time options now listed in version output, using a new
+      "--verbose-version" (or "-vv") command-line argument.
+
+
+  * Tool Improvements:
+    ------------------
+    * Input Method Framework, with implementations of Korean (Hangul 2-Bul)
+      and Japanese (Romanized Hiragana and Romanized Katakana) input methods.
+      (Should be extensible to other languages.)
+      (Addresses SourceForge Bug #1070414)
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Stamps now supports SVG vector-based graphics!
+      (Only SVG versions of stamps are loaded, when both PNG and SVG
+      variations are found.)
+
+      * By default, uses librsvg-2 and libcairo2 (requires glib & much more).
+      * Use "make oldsvg" to build with libsvg and libcairo1 (older libs).
+      * Use "make nosvg" to completely disable SVG support.
+
+    * Stamps now shown in groups.  Use previous & next buttons to
+      cycle through stamp categories.
+      (Addresses SourceForge Feature Request #1070394)
+
+    * Bilinear interpolation (smoothing) is done to small bitmap (PNG)
+      stamps when they are scaled up.
+      (Based on example code by Christian Graus:
+      http://www.codeproject.com/cs/media/imageprocessing4.asp )
+
+    * New Brushes:
+      Caroline Ford <caroline.ford.work@googlemail.com>
+      + Blob
+      + Chisle
+      + Cut-out square in diamond
+      + Cut-out star in circle
+      + Diamond
+      + Five-petal flower (large and small)
+      + Six-petal flower (large and small)
+      + Heart
+      + Hexagon
+      + Lozenge
+      + Oval
+      + Pentagon
+      + Sphere
+      + Spiral
+      + Splat
+      + Star
+      + Triangle (up and down)
+      + Arrows (directional)
+      + Triangles (directional)
+
+    * New Starter Images:
+      + 10x10 grid
+      + 20x20 grid
+
+      From Wikipedia, prepared for Tux Paint by:
+      Caroline Ford <caroline.ford.work@googlemail.com>
+      + World maps
+      + United States of America map
+      + Maps from Wikipedia
+
+      + Caracassone, France
+        Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+  
+
+  * System-related improvements:
+    ----------------------------
+    * When running in fullscreen mode, you may now ask Tux Paint to display
+      at the screen's (more precisely, the operating system's) current
+      resolution.  Either use both "fullscreen=yes" and "native=yes" in the
+      config file, or "--fullscreen --native" on the command-line.
+
+    * Split PostScript printing code (for Linux/Unix/etc.) into its own
+      source file.  (Mac OS X, Windows and BeOS all had their own.)
+
+    * PostScript printing code rewritten, based on NetPBM's 'pnmtops' tool
+      by Jef Poskanzer.
+
+    * PostScript printing now uses libprint to determine papersize, and
+      scale and position image accordingly.  (No longer depending on printer
+      to figure out its own paper size; not the recommended method.)
+      Thanks to Henry House <hajhouse@houseag.com>
+
+    * "--papersize" option added to allow PostScript printing code to
+      use a different size than libpaper reports as the user's or system's
+      default.
+
+  * Documentation Improvements:
+    ---------------------------
+    * Discussed SVG Stamps in "Extending Tux Paint."
+
+    * Created an "SVG.txt" document, covering SVG software.
+      Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Mentioned descriptive sounds (e.g., "stamp_desc_ll.ogg") in "Extending..."
+
+    * Listing new www.tuxpaint.org website URL.
+
+    * Expanded MinGW/MSYS GCC compilation instructions for building Win32.
+
+    * Example tuxpaint.conf has been updated to include newer options.
+
+    * Briefly documented translation (gettext PO catalogs) in "Extending..."
+
+    * Briefly documented alternative input methods (IM character map files)
+      in "Extending..."
+
+    * Cleaned up FAQ a little.  Added info on "Where are my pictures?"
+    
+  * Bug Fixes:
+    ----------
+    * Tux the Penguin sound effects were not working; fixed.
+
+    * Text tool's text would be applied to canvas when clicking any tool
+      buttons.  Fixed so that it is not applied when tool changes aren't
+      happening (e.g., Print, Quit, Open, Save).
+
+    * Text tool's text would disappear until you click or type,
+      after a dialog has been dismissed.  Fixed.
+      (Addresses SourceForge.net Bug #1698855)
+
+    * No longer disabling screensaver (if the system's libSDL supports
+      it via "SDL_ALLOWSCREENSAVER" environment variable).
+
+    * "use_print_config" option defaults to 'yes' on Windows, again.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Reordered font-loading to happen after locale switch occurs, to
+      pick up font-organizing string translations (e.g., "Aa", "qx", etc.).
+      Attempting to help address issue of Latin-only fonts being available
+      in non-Latin locales -- seemed to help with Norwegian.
+
+    * Fixed inability to type into Mac OS X print dialog.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+    * Fixed Mac OS X endian issue that caused Intel-based Macs to print
+      with the wrong colors.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+    * Added automatic scaling and orientation of images when printing on
+      Mac OS X.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+    * Added "New", "Open", "Save", "Print", "Page Setup", "Undo" and "Redo"
+      items to Tux Paint menu on Mac OS X.
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+    * Using standard Mac OS X arrow cursor, rather than custom Tux Paint
+      cursor (for UI consistency on OS X).
+      Martin Fuhrer <mfuhrer@users.sourceforge.net>
+
+  * Compiling, porting and packaging updates:
+    -----------------------------------------
+    * Tweaks to allow it to run on the One Laptop Per Child (OLPC) "XO".
+      Albert Cahalan <albert@users.sf.net>
+
+    * Updates for improved Nokia 770 and N800 (Maemo) Internet tablet support
+      (added icon to task manager when Home button is pressed,
+      hid on-screen mouse cursor, disabled Print and Text tools)
+      Alessandro Pasotti <apasotti@gmail.com>
+
+    * Added more Nokia Maemo-specific files to the "hildon" folder
+      (DEBIAN package files, updated .desktop and Tux Paint configuration
+      files, D-BUS service file), to make packaging a Tux Paint .deb for
+      Nokia 770 and N800 devices easier.  (Note: Makefile needs updating
+      and/or a compile-and-package script needs to be created.)
+      Alessandro Pasotti <apasotti@gmail.com>
+
+    * Lockfile (that prevents multiple launches) is now stored
+      in the user's local temporary directory on Windows
+      (usually 'C:\Documents and Settings\{username}\Local Settings\Temp').
+      This allows multiple users on different desktops to use a shared
+      save directory on a network drive, without having to disable the
+      lockfile feature, or wait for the lockfile to expire.
+      (Addresses SourceForge Feature Request #1681125)
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Localization build, install and uninstall targets moved into
+      a separate "Makefile-i18n", to reduce clutter in main Makefile.
+
+  * New Translations:
+    -----------------
+    * Latvian
+      Raivis Strogonovs <raivucis@gmail.com>
+
+    * Telugu -- includes "te.ttf" font
+      Pavithran Shakamuri <pavithran.s@gmail.com>
+
+    * Twi
+      Joana Portia Antwi-Danso <portnass2003@yahoo.com>
+      Samuel Sarpong <srnsam@yahoo.com>
+
+  * Translation Updates:
+    --------------------
+    * Arabic
+      Khaled Hosny <khaledhosny@eglug.org>
+
+    * Basque
+      Juan Irigoien <juanirigoien@gmail.com>
+
+    * Brazilian Portuguese
+      Adorilson Bezerra de Araujo <adorilson@gmail.com>
+    
+    * British English
+      Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Bulgarian
+      Yavor Doganov <yavor@doganov.org>
+
+    * Chinese (Traditional)
+      Wei-Lun Chao <chaoweilun@gmail.com>
+
+    * Czech
+      tropikhajma <tropikhajma@seznam.cz>
+      Vaclav Cermak <vaclav.cermak@gmail.com>
+
+    * Danish
+      Mikkel Kirkgaard Nielsen <translation@mikini.dk>
+
+    * Dutch
+      Freek de Kruijf <f.de.kruijf@hetnet.nl>
+
+    * Faroese
+      Lis G�the � J�kupsstovu <morshus@gmail.com>
+
+    * Gujarati
+      Kartik Mistry <kartik.mistry@gmail.com>
+
+    * Irish Gaelic
+      Kevin Patrick Scannell <kscanne@gmail.com>
+    
+    * Japanese
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Lithuanian
+      Gintaras Gostautas <gintaras@nes.lt>
+
+    * Portuguese
+      Helder Correia <helder.pereira.correia@gmail.com>
+
+    * Polish
+      Andrzej M. Krzysztofowicz <ankry@mif.pg.gda.pl>
+      Michal Terbert <michaeel@skrzynka.pl>
+
+    * Russian
+      Sergei Popov <skein@rambler.ru>
+
+    * Russian README & OPTIONS documentation
+      Sergei Popov <skein@rambler.ru>
+
+    * Spanish
+      Gabriel Gazzan <ggabriel@internet.com.uy>
+
+    * Swedish
+      Daniel Nylander <po@danielnylander.se>
+
+    * Thai
+      Ouychai Chaita <ae.freeman@gmail.com>
+
+    * Vietnamese
+      Clytie Siddall <clytie@riverland.net.au>
+
+
+2006.October.19 (0.9.16)
+
+  * Interface improvements:
+    -----------------------
+    * New slideshow tool! ("Slides", available in "Open" dialog.)
+      Select each image to play, in the order you want them, and use the
+      sliding scale to adjust speed, then click "Play" to begin the show.
+
+      + The "Next" button and [Space], [Enter] and [Right Arrow] keys
+        advance to the next slide manually.  (Clicking anywhere in the image
+        advances, as well.)
+      + The [Left Arrow] key goes to the previous slide.
+      + The "Back" button and [Escape] ends playback.
+
+      Note: Use slowest (leftmost) speed setting to disable automatic
+      slide advancement.
+
+    * Modified "Text" tool so that it correctly handles the 16-bit unicode
+      characters that SDL sends.
+      (The text buffer is held internally as an array of wchar_t, and
+      makes uses of various wide-character functions.  It is converted
+      back into 16-bit unicode characters to satisfy SDL_ttf.  Tested on
+      Windows and Linux.)
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * tuxpaint-import shell script now examines Tux Paint's configuration
+      file (first in /usr/local/etc/tuxpaint, then /etc/tuxpaint, then $HOME)
+      for the window size settings and saved-file directory options
+      (rather than assuming a 640x480 screen and images saved in
+      $HOME/.tuxpaint/saved/).
+
+      Discovered (or assumed) window size and directory settings are shown
+      when tuxpaint-import is first run (even with no arguments).
+
+    * "startblank" option added, to cause Tux Paint to always start with
+      a blank canvas (rather than loading the most-recently-edited image).
+
+    * In windowed mode, Tux Paint tries to open its window in the center
+      of the screen (if supported by the OS or window manager).
+
+    * Improved some dialog text, including labels for "Yes/No" buttons.
+      (Thanks to Vashti for suggestions.)
+
+    * Sound effects take advantage of stereo.  (e.g., paint brush sounds come
+      more from the left speaker when painting on the left.)
+
+    * Stamp sound effects may be in either OGG or WAV format.
+
+    * Stamps may now include a second sound effect, used as a spoken
+      description.
+      (stampname_desc.ogg or .wav and localized stampname_desc_ll.ogg or .wav)
+
+    * The color palette may now be overridden by creating a text file
+      containing color descriptions, and using the "colorfile" option.
+
+    * Default colors are duplicated, as an example, in docs/default_colors.txt.
+
+  * Tool improvements:
+    ------------------------
+    * Magic Sparkles can now be different colors.
+
+    * Magic Negative, Fade, Darken, Tint and Cartoon all now apply with a
+      circular shape, rather than a square.
+
+    * Magic Grass has a sound effect.
+    
+    * Round erasers added.
+
+    * Brushes may be animated.  (Implements RFE #1522694)
+      (Create an image (W*N) x H in size (where N is number of frames),
+      then create a ".dat" file for the brush, containing the line "frames=N".
+
+    * Animated brushes can be randomized.  Use "random" in its ".dat" file.
+
+    * Brushes can include directional variations.  (Implements RFE #1522694)
+      (Create an image (W*3) x (H*3) in size, then create a ".dat" file
+      for the brush, containing the line: "directional".  Each of the 9
+      sectors corresponds to 8 different directions, and center.)
+
+    * Brushes can include spacing information.
+      (Create a ".dat" file for the brush, containing the line "spacing=N".
+
+  * New Brushes:
+    ------------
+    * Vines (animated)
+
+    * Angle Lines (directional)
+
+    * Squirrel (animated, directional)
+    
+    * Kuro Neko ("Black Cat") (animated, directional)
+      (Based on the cat from 'xneko' by Masayuki Koba)
+
+  * New Starter Images:
+    -------------------
+    * Shipwreck
+      Jim Trice <jimtrice@linuxmail.org>
+
+    * Tux the farmer
+      Jim Trice <jimtrice@linuxmail.org>
+
+    * Street
+      Pere Pujal Carabantes <ppujal@airtel.net>
+
+    * Chess board
+      (From XBoard: http://tim-mann.org/xboard.html )
+
+    * Nagasaki
+      Jim Trice <jimtrice@linuxmail.org>
+
+  * New Translations:
+    -----------------
+    * Arabic -- includes "ar.ttf" font
+      Khalid Al Holan <alholan@gmail.com>
+
+    * Faroese
+      Lis G�the � J�kupsstovu <morshus@gmail.com>
+
+    * Gujarati -- includes "gu.ttf" font
+      Kartik Mistry <kartik.mistry@gmail.com>
+
+    * Ndebele
+      Vincent Mahlangu <vmahlangu@parliament.gov.za>
+
+    * Scottish Gaelic
+      Niall Tracey <internationiall@hotmail.com>
+
+    * South African English
+
+    * Tagalog
+      RICKY LONTOC <gb_515_deme@hotmail.com>
+      Technical assistance by Ed Montgomery <edmontgomery@hotmail.com>
+
+    * Tibetan -- includes "bo.ttf" font
+      Dawa Dolma
+      Technical assistance by Ed Montgomery <edmontgomery@hotmail.com>
+
+    * Venda
+      Shumani Mercy Nehulaudzi <nevhulaudzi@saps.org.za>
+
+    * Xhosa
+      Dwayne Bailey <dwayne@translate.org.za>
+
+  * Translation Updates:
+    --------------------
+    * Using DejaVu Sans Condensed as default UI font now.
+      http://dejavu.sourceforge.net/
+
+    * Making sure default UI font is used for untranslated strings.
+      (Hindi font, for example, didn't seem to have roman characters.)
+
+    * Brazilian Portuguese
+      Fred Ulisses Maranhao <fred_maranhao@yahoo.com.br>
+    
+    * Catalan
+      Pere Pujal Carabantes <ppujal@airtel.net>
+
+    * Chinese (Traditional)
+      Wei-Lun Chao <chaoweilun@pcmail.com.tw>
+
+    * Finnish
+      Niko Lewman <niko.lewman@edu.hel.fi>
+    
+    * French
+      Jacques Chion <Jacques.Chion@wanadoo.fr>
+    
+    * Galician
+      Leandro Regueiro <leandro.regueiro@gmail.com>
+
+    * German
+      Burkhard L�ck <lueck@hube-lueck.de>
+
+    * Greek
+      Sokratis Sofianopoulos <sokratis.sofianopoulos@gmail.com>
+
+    * Hungarian
+      Gabor Kelemen <kelemeng@gnome.hu>
+
+    * Italian
+      Flavio "Iron Bishop" Pastore <ironbishop@fsfe.org>
+
+    * Italian AUTHORS and INSTALL documentation updates
+      Flavio "Iron Bishop" Pastore <ironbishop@fsfe.org>
+
+    * Japanese
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Japanese font shipped in Tux Paint now includes common educational Kanji
+
+    * Korean
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Polish documentation
+      Pawel Polak <sf_paul@users.sourceforge.net>
+
+    * Serbian
+      Aleksandar Jelenak <jelenak@verizon.net>
+
+    * Swedish
+      Daniel Nylander <po@danielnylander.se>
+      Robin Rosenberg <robin.rosenberg@dewire.com>
+
+    * Spanish
+      Pablo Pita <pablo.pita@kdemail.net>
+      Gabriel Gazz�n <ggabriel@internet.com.uy>
+
+    * Thai
+      Ouychai Chaita <ae.freeman@gmail.com>
+
+    * Turkish
+      Doruk Fisek <dfisek@fisek.com.tr>
+
+    * Vietnamese
+      Clytie Siddall <clytie@riverland.net.au>
+
+    * Replaced old Vietnamese font (questionable license)
+      with Bitstream Vera-based "Verajja" font, by Bhikku Pesala.
+      http://www.aimwell.org/Fonts/fonts.html
+
+    * Including a scaled down version of the Japanese TrueType font (ja.ttf),
+      that includes only the characters uses by Tux Paint.
+      For info, see: fonts/locale/ja_docs/
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+  * Documentation Improvements:
+    ---------------------------
+    * Moved "Extending Tux Paint" into its own separate document.
+
+    * Created an Advanced Stamps HOWTO (documenting how to create
+      stamp PNGs that scale well without edge fringing).
+      Albert Cahalan <albert@users.sf.net>
+
+  * Compiling, porting and packaging updates:
+    -----------------------------------------
+    * Ran source code through "indent -nbfda -npcs -npsl -bli0".
+
+    * "DESTDIR" patch is no longer needed.
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      
+    * Split parts of "tuxpaint.c" into separate source files:
+      + "compiler.h": Compiler-version-specific definitions.
+      + "cursor.c/h": XBM bitmap cursor #includes and functions.
+      + "debug.h": Defines whether debugging printf() calls should be enabled.
+      + "dirwalk.c/h": Callback functions for recursive directory traversal.
+      + "fonts.c/h": Font loading/grouping/discarding variables and functions.
+      + "floodfill.c/h": 'Fill' tool's flood-fill routine.
+      + "get_fname.c/h": Functions for constructing preferred file paths.
+      + "i18n.c/h": Language-related variables, enums, arrays and functions.
+      + "pixles.c/h": 'getpixel' and 'putpixel' functions & function pointers.
+      + "playsound.c/h": Sound-playing function.
+      + "progressbar.c/h": Animated progress bar function.
+      + "rgblinear.c/h": RGB-to-linear float and binary data, and functions.
+
+    * Made sure GPL notice was included in all other source files.
+
+    * Added script to create "locale" during Build process in Xcode on
+      Mac OS X.
+
+    * Made some Xcode project settings work better with 'default, out of
+      the box' OS X 10.4, Fink and XCode 2.1.
+
+    * Factor out general CFLAGS to facilitate packaging.  Compress man page -9.
+      Ben Armstrong <synrg@sanctuary.nslug.ns.ca>
+
+    * Building with "-ffloat-store" in CFLAGS (instead of "-ffast-math")
+      to allow stamp tinting code to work properly.
+      Thanks to: Albert Cahalan <albert@users.sf.net>
+
+    * Silencing any errors when running kde- or gnome-config during install.
+
+    * Implemented strcasestr() for systems which don't have it.
+
+  * Bug Fixes:
+    ----------
+    * Was not looking in personal folder for starters
+      (e.g., "~/.tuxpaint/starters/" on Linux).  Fixed.  Adds a new boolean
+      to the save image's ".dat" file, denoting whether the starter is from
+      the personal folder (1) or not (0, or no data, as in prev. version).
+
+    * Tux Paint's scalable icon (tuxpaint-icon.svg) caused Gnome panel to
+      go wild (due to "libarts" bug?).  Changed a vector value which apparently
+      fixes it (and caused no noticable changes to the icon).
+    
+    * Added GetSystemFontDir() and amended WIN32 code so that the system fonts
+      option work correctly on Windows.
+
+    * Properly handles a variety of PNG formats when loading Starter images
+      and turning them into thumbnails.  (Tested with indexed PNGs, and
+      PNGs where RGB colors were stored, even where pixels were
+      fully transparent.)
+
+    * Clicking between the rightmost color and the edge of Tux Paint's display
+      would crash Tux Paint.  (Fixes DBTS #352556)
+
+    * Bottom of grass would initially be clipped due to incorrect canvas
+      updating.  Fixed.
+
+    * Improved handling of scroll button state to prevent it from getting
+      into an infinite loop.  (Fixes bug #1396706)
+
+    * Spaces in filenames were not working in 'tuxpaint-import.sh'.
+      (Fixes bug #1527884)
+      James Le Cuirot
+
+    * Was always using the first brush when drawing shapes.
+      Now forcing it to always use "round_03.png", since brushes are
+      sorted alphabetically, and some new brushes appear before round ones!
+
+
+2005.November.26 (0.9.15b)
+
+  * Bug Workaround:
+    ---------------
+    * Japanese TrueType Font did not like being rendered at 16pt, so
+      reverted to larger, 18pt size.
+      (Other fonts were fine.  I suspect it is a SDL_ttf or FreeType bug.)
+
+  * Documentation update:
+    ---------------------
+    * "Thick" and "Thin" magic tools were removed, so removed mention
+      of them from README documentation.
+
+    * Source files and documentation files tagged with CVS Id tags
+      for easier version tracking.
+      Mark K. Kim <mkkim214@gmail.com>
+
+  * Locale update:
+    --------------
+    * Georgian font is only ~50KB, so added to main Tux Paint archive.
+
+
+2005.November.25 (0.9.15)
+
+  * Speed improvements:
+    -------------------
+    * Splash screen appears earlier, along with the version info and cursor.
+      Albert Cahalan <albert@users.sf.net>
+
+    * Normal start-up time greatly reduced by splitting out font loading
+      into a separate process. You only wait if you want the text tool.
+      Albert Cahalan <albert@users.sf.net>
+
+    * added eat_startup_events in an attempt to make early escape possible
+      (perhaps the user started Tux Paint by mistake, or the system is
+      swapping itself to death) TODO: use do_quit if fully started
+      Albert Cahalan <albert@users.sf.net>
+
+    * Normal start-up time greatly reduced by avoiding most stamp work.
+      Stamp data is loaded as needed. (TODO: add pre-fetch process)
+      Albert Cahalan <albert@users.sf.net>
+
+    * Memory usage down by not keeping stamps in memory. Tux Paint's
+      size dropped by about 100 MB. :-)
+      Albert Cahalan <albert@users.sf.net>
+
+  * Stamp tool improvements:
+    ------------------------
+    * Greatly improved stamp outlining (to avoid empty rows or columns
+      and other artifacts) by using a thick stippled pattern.
+      Albert Cahalan <albert@users.sf.net>
+
+    * Stamp tinting code changed.  Stamp ".dat" files may include
+      "tinter=anyhue", "tinter=narrow", "tinter=normal" or "tinter=vector",
+      describing how the contents of the stamp should be tinted. (See README)
+      Albert Cahalan <albert@users.sf.net>
+
+    * Added "scale" keyword (in stamp ".dat" files) for high-resolution stamp
+      images.  (Allows stamps to be made larger without losing quality.)
+      Albert Cahalan <albert@users.sf.net>
+
+    * More range for stamp sizes. Can't hang off edge in both dimensions.
+      Albert Cahalan <albert@users.sf.net>
+ 
+  * New Magic tools:
+    ----------------
+    * "Smudge" (pushes the colors around like wet paint)
+    * "Grass" (makes grass, the painless way)
+    * "Bricks" (makes bricks, the painless way)
+      Albert Cahalan <albert@users.sf.net>
+  
+    * "Darken" (opposite of "Fade"),
+    * "Tint" (changes colors of parts of the picture), and
+    * "Cartoon" (makes parts of the picture look like a cartoon or comic)
+      Bill Kendrick <bill@newbreedsoftware.com>
+  
+  * Magic tool improvements:
+    ------------------------
+    * Magic blur effect now gamma-aware, circular, and modifying all points
+      within the brush instead of just 25% of them.
+      Albert Cahalan <albert@users.sf.net>
+  
+    * Magic blocks effect now gamma-aware and using all 16 (not just 4)
+      source pixels.
+      Albert Cahalan <albert@users.sf.net>
+
+  * Text tool improvements:
+    -----------------------
+    * Attempts to pick up the system's fonts, too!
+      (Disable loading system fonts with "--nosysfonts" or "nosysfonts=yes".)
+      Albert Cahalan <albert@users.sf.net>
+
+    * Italic, bold and sizes are now controlled with separate buttons
+      (similar to flip, mirror and sizes for Stamps).
+      Albert Cahalan <albert@users.sf.net>
+
+    * [Tab] key can be used to begin a new text entry to the right of the
+      current one (e.g., for writing a sentence with each word in a different
+      color).
+
+    * A typewriter-style bell rings when the text gets close to the edge of
+      the canvas.
+
+  * Improved support for varying image sizes:
+    -----------------------------------------
+    * Somewhat better treatment of wrong-sized images when loading them.
+      It works well for typical kid drawings, as long as objects don't
+      touch the edge of the screen. (the earth and sky -- and anything
+      else at the edge -- get extended to fill the space) This could be
+      better done with wavelets I think, or some vector-based notion of
+      what lies at the edge of the screen. Starters, as usual, need work.
+      Albert Cahalan <albert@users.sf.net>
+
+    * Fixed display corruption in 'Open' dialog when saved images are
+      from a larger display size.
+      Albert Cahalan <albert@users.sf.net>
+
+  * System-related improvements:
+    ----------------------------
+    * Added larger screen size support:
+      1024x768, 1280x1024, 1400x1050, 1600x1200
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Arbitrary window sizes allowed (--XXXXxYYYY); useful for more modern
+      displays (e.g., Mac monitors)
+      Albert Cahalan <albert@users.sf.net>
+  
+    * Now defaults to 800x600 screen size.  Welcome to the future. ;^)
+
+    * Switched from using 16bpp display surfaces to 32bpp, to reduce
+      discoloration. ("#define" options exist at the top of src/tuxpaint.c
+      to choose which you want.)
+      Albert Cahalan <albert@users.sourceforge.net>
+
+    * Now uses "AUDIO_S16SYS" when initializing audio system
+      (on Linux/Mac/BeOS); helps sound under Linux on Mac hardware.
+      Albert Cahalan <albert@users.sourceforge.net>
+
+    * Made sure user directory existed before trying to create lockfile
+      (it might not be there the very first time we run Tux Paint).
+    
+  * Interface improvements:
+    -----------------------
+    * Made UI fonts a little smaller.  Adjusted position of icons and text
+      in tool buttons.
+
+    * Stamp scaling is now controlled by a set of mini "slider"-like buttons.
+      The "Shrink" and "Grow" buttons didn't give any feedback as to what
+      the current size was.
+
+    * "New" always available.
+      (Prepping for when "New" will give options for background colors, etc.)
+
+    * Middle and right mouse buttons no longer do anything.
+      (No reason to teach kids that all the buttons do the same thing!)
+
+      Note: This can be disabled (resulting in the old-style support for
+      all three buttons meaning the same thing) by setting the
+      "--nobuttondistinction" option.
+
+    * If middle or right mouse buttons are clicked too much, a pop-up
+      appears explaining to click the left button, and includes a small
+      picture of a mouse with the left button being 'clicked.'
+
+    * Thumbnail of selected image now shown on "Erase this image?"
+      confirmation pop-up.
+
+    * Printer icons on "Print now?" and "You can't print yet" pop-ups.
+
+    * Icons shown in "Save Over?" and "Save [before opening]" pop-ups.
+
+    * Improved 'rubber band line' and stamp outline colors ("XOR" code)
+      to make such lines easier to see on certain colors.
+    
+    * The "noquit" option now prevents the [Escape] key from quitting
+      Tux Paint.  ([Alt]+[F4] and the window close button still work.)
+
+    * Tux Paint can now be quit with [Shift]+[Control]+[Escape], as well.
+      (Useful for when "noquit" and "fullscreen" are set, and the
+      [Alt]+[F4] combination is not possible.)
+
+    * Gave Tux the Penguin a voice (e.g., during prompts)
+      Voice: Daniel 'TuxthePenguin' Alston <supertuxfansite@gmail.com>
+
+    * Sound effects can be muted/unmuted while the program is running
+      by pressing the [Alt]+[S] keys.  (Note: does not enable sounds if
+      "nosound" is set in configuration file or via command-line.)
+
+    * Scroll wheel can be used to scroll through thumbnails in Open dialog.
+
+  * Printing improvements:
+    ----------------------
+    * Now printing directly via Postscript.
+      (So print command can change from "pngtopnm | pnmtops | lpr" to
+      simply "lpr").
+      Albert Cahalan <albert@users.sf.net>
+    
+    * Holding [Alt] while clicking 'Print' on Unix/Linux can now bring up
+      a print dialog. (Defaults to KDE's 'kprinter'.)  Can be altered
+      via 'altprintcommand' in ~/.tuxpaintrc.
+
+    * Printer dialog (and 'altprintcommand') can be forced to come up
+      all the time (not just when [Alt] is held) via a new
+      "--altprintalways" command-line option (and "altprint=always" config.
+      file option).
+
+    * Similarly, printer dialog can be prevented ([Alt] key has no effect)
+      via a new "--altprintnever" option (and "altprint=never").
+      (Default (where [Alt] must be held to show dialog) is "altprintmod".)
+
+  * New Starter Images:
+    -------------------
+    * Rocket
+
+  * Other improvements:
+    -------------------
+    * Added beige and tan colors.  Changed "Lime" to "Neon Green."
+      Renamed "Fuschia" to "Magenta."  Tweaked some color values.
+      Moved grey/silver next to black/white.
+      Albert Cahalan <albert@users.sourceforge.net>
+ 
+    * getpixel function now considers edges as extending to infinity
+      (to improve Magic tools like 'Blur')
+      Albert Cahalan <albert@users.sf.net>
+
+    * getpixel and putpixel functions split into four, one for each
+      color depth (1, 2, 3 or 4 bytes per pixel), to reduce BPP tests
+      when reading or drawing pixels.
+
+    * drawtext_callback() prototype forces useless arg.; voided it
+      Albert Cahalan <albert@users.sf.net>
+
+    * Simplified strip_trailing_whitespace() function; now O(n)
+      Albert Cahalan <albert@users.sf.net>
+
+    * Increased maximum number of stamps that can be loaded at once from
+      256 to 512.
+      Albert Cahalan <albert@users.sourceforge.net>
+
+    * Splash screen scales to different window sizes.
+
+  * Bug fixes:
+    -------------------
+    * tuxpaint-import shell script created temporary files with predictable
+      names in "/tmp", leaving it open to symlink attacks.  Now creating
+      temp. files in Tux Paint's default save directory.
+      Ben Armstrong <synrg@sanctuary.nslug.ns.ca>
+
+    * Untranslated text in right-to-left languages (e.g., Hebrew) are no
+      longer displayed backwards.
+
+    * [Alt] to bring up print dialog had to be held while hitting 'Ok' to
+      confirm print.  This was a bug!  Fixed!
+
+    * Lockfile now cleared upon exit, allowing Tux Paint to be re-launched
+      immediately.
+      
+    * Hotspot for 'tiny' crosshair mouse pointer shape is now
+      correct in 16x16 size (used on Mac OS X).
+
+    * Delete thumbnails from ".thumbs" subdirectory.
+      Marcin 'Shard' Konicki <shard at beosjournal.org>
+
+    * tuxpaint-import.sh now uses single brackets when testing for "--help".
+      (Apparently, the "[[...]]" version didn't work some places.)
+      Jeff Smith <whydoubt@yahoo.com>
+
+    * Failed to install default locale fonts.  Fixed.
+      kyjo44 <kyjo44@users.sourceforge.net>
+
+    * Scroll wheel motion was being perceived as clicks in Open dialog. Fixed.
+
+    * Thumbnail cursor could fall of screen when scrolling in Open dialog.
+      Fixed.
+
+  * Compiling, porting and packaging updates:
+    -----------------------------------------
+    * Added support for system and user configuration files on Windows.
+      (The system 'tuxpaint.cfg' file is in the same directory as the
+      executable, the user 'tuxpaint.cfg' file is in the 'savedir'
+      location, e.g. 'C:\Documents and Settings\username\Application
+      Data\TuxPaint'.)
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * There's no longer a need to remove CVS-related things in 'tuxpaint.spec'.
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Added "test-option.sh" shell script, which can be used in Makefile
+      for basic compiler option tests
+      (e.g., is "-Wdeclaration-after-statement" available?)
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Created 'release' Makefile target, which generates a .tar.gz
+      (sans CVS-related files) based on the clean source directory.
+
+    * Moved "VER_VERSION" to Makefile (where 'release' can pick it up),
+      and made "VER_DATE" a dynamically-generated Makefile variable.
+
+    * Added additional Windows-only search paths for stamps, fonts and brushes.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Created Makefile to convert HTML documentation into plaintext using Links
+      (I can never remember the precise options!)
+
+    * *_PREFIX variables in Makefile no longer need trailing '/'.
+
+    * Added "Categories" to the 'tuxpaint.desktop' file
+      ("Education," "RasterGraphics," "Graphics" and "Art").
+      
+    * Added 'win32' target to Makefile, for use on Windows with MinGW/MSYS.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Now links with 'shlwapi.dll' so that it works on Windows 98.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Added GetDefaultSaveDir(suffix) which fetches the default
+      "Application Data" path for the current user from the Windows registry,
+      appends the suffix, creates the subdirectory if it doesn't exist,
+      then returns a string from the heap.  This path is the new default
+      "savedir" location on Windows. Tested on 98/2K/XP.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Switching from NSIS to InnoSetup 5 installer generator for Windows.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Added a Windows registry entry 'Install_Dir' in either
+      HKCU\Software\TuxPaint or HKLM... depending on whether the user is
+      restricted (or doing a current user-only install) or is installing
+      for all users.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Added ability to detect previous install directory entries in the
+      Windows registry.  Searches for entry in HKLM and HKCU sections.
+      John Popplewell <john@johnnypops.demon.co.uk>
+    
+    * BeOS code updates.
+      Marcin 'Shard' Konicki <shard at beosjournal.org>
+
+    * Updated BeOS Makefile.
+      Marcin 'Shard' Konicki <shard at beosjournal.org>
+
+    * Added BeOS resource file (src/tuxpaint.rsrc)
+      Marcin 'Shard' Konicki <shard at beosjournal.org>
+  
+    * Replaced all instances of absolute paths with macro counterparts in
+      "tuxpaint.spec" file.
+      Richard June <rjune[AT]lumensoftware.com>
+    
+    * Reset buildroot in "tuxpaint.spec" to incorporate username of the
+      builder.
+      Richard June <rjune[AT]lumensoftware.com>
+    
+    * Added "PKG_ROOT" variable to Makefile, and "tuxpaint.spec" file,
+      for Tux Paint RPM building ease.
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Fixed to compile on old GLIBC system (such as RedHat-6.2)
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Fixes to RPM spec file
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+  
+    * Enabled more compiler warnings, and updated code to prevent them.
+      Albert Cahalan <albert@users.sf.net>
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Gave up on 'HQ4X' scaler and scanline polygon filling, for the
+      time being.  (i.e., removed unused code.)
+
+  * Documentation updates:
+    ----------------------
+    * Removed TODO.txt file and moved all bugs
+      and feature requests to the SourceForge
+      tracker: http://sourceforge.net/tracker/?group_id=66938
+
+    * Converted Frequently Asked Questions (FAQ) to HTML.
+
+    * Mentioned Tux Paint Config. tool in FAQ.
+
+    * French documentation created.
+      J�r�me Chantreau <plovemax@hotmail.com>
+
+  * New translations:
+    -----------------
+    * Albanian
+      Ilir Rugova <ilirrugova@gmx.de>
+      Laurent Dhima <laurenti@alblinux.net>
+
+    * Estonian
+      Henrik Pihl <henrik@saarlane.ee>
+
+    * Gaelic
+      Kevin Patrick Scannell <scannell@SLU.EDU>
+
+    * Galician
+      Leandro Regueiro <unho@gulo.org>
+
+    * Gronings
+      J.F.M. Lange <jfm.lange@hky.de>
+
+    * Kinyarwanda
+      Steve Murphy <murf@e-tools.com>
+
+      (Initial rough translation based on translations from the following:
+      Philibert Ndandali <ndandali@yahoo.fr>, 2005.
+      Viateur MUGENZI <muvia1@yahoo.fr>, 2005.
+      Noëlla Mupole <s24211045@tuks.co.za>, 2005.
+      Carole Karema <karemacarole@hotmail.com>, 2005.
+      JEAN BAPTISTE NGENDAHAYO <ngenda_denis@yahoo.co.uk>, 2005.
+      Augustin KIBERWA <akiberwa@yahoo.co.uk>, 2005.
+      Donatien NSENGIYUMVA <ndonatienuk@yahoo.co.uk>, 2005.
+      Antoine Bigirimana <antoine@e-tools.com>, 2005.)
+
+    * Mexican Spanish
+      Ignacio Tike <ignaciotike@spymac.com>
+      Daniel Illingworth <webmaster@intermagen.net>
+      Luis C. Su�rez M. <luiscsuarez@gmail.com>
+
+    * Swahili
+      Martin Benjamin <martin.benjamin@yale.edu>
+      Alberto Escudero-Pascual <aep@it46.se>
+      Kamusi Project at Yale University
+      Open Swahili Localization Project at the University of Dar es Salaam
+
+    * Thai
+      Ouychai Chaita <ae.freeman@gmail.com>
+
+    * Ukranian
+      Serhij Dubyk <dubyk@ukr.net>
+
+
+  * Translation updates:
+    --------------------
+    * Afrikaans
+      Petri Jooste <rkwjpj@puk.ac.za>
+
+    * Bulgarian
+      Yavor Doganov <yavor@doganov.org>
+
+    * Chinese (Traditional) documentation
+      Song Huang <Song@ossacc.org>
+
+    * Czech
+      Lucie Burianova <Lucie.Burianova@global-dtp.com>
+
+    * Dutch
+      Geert Stams <geertstams@wanadoo.nl>
+      Michael de Rooij <micr@zeelandnet.nl>
+    
+    * French
+      Jacques Chion <Jacques.Chion@wanadoo.fr>
+  
+    * German
+      Patrick <nc-spechtpa3 [At] netcologne DOT de>
+      Burkhard L�ck <lueck@hube-lueck.de>
+
+    * Greek
+      The Greek Linux i18n Team <i18ngr@lists.hellug.gr>
+      
+    * Hebrew
+      Dovix <dovix2003@yahoo.com>
+      Leor Bleier <leor972@gmail.com>
+    
+    * Indonesian
+      Tedi Heriyanto <tedi_h@gmx.net>
+      
+    * Japanese
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Korean
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Lithuanian
+      Gintaras Go?tautas <gintaras@nes.lt>
+
+    * Norwegian Bokmal
+      Klaus Ade Johnstad <klaus@skolelinux.no>
+
+    * Polish documentation
+      Tomasz 'karave' Tarach <karave@poczta.onet.pl>
+
+    * Portuguese (Portugal)
+      Ricardo Cruz <rpmcruz@clix.pt>
+      Helder Correia <helder.pereira.correia@gmail.com>
+
+    * Russian
+      Eugene Zelenko <greendeath@mail.ru>
+
+    * Spanish and Spanish documentation.
+      Gabriel Gazz�n <ggabriel@internet.com.uy>
+    
+    * Swedish
+      Magnus Dahl <magnus.dahl@bredband.net>
+      Tomas Sk�re <tomas@nocrew.org>
+    
+    * Vietnamese
+      Clytie Siddall <clytie@riverland.net.au>
+
+    * Added "create_pot_file.sh" help script to "src/po/", for easier
+      regeneration of "tuxpaint.pot" (gettext catalog template)
+
+    * Created Python script to generate a scaled down version of the
+      Chinese (Traditional) TrueType font (zh_tw.ttf), that includes only
+      the characters uses by Tux Paint.  (Reduces TTF file size from ~13MB
+      to ~600KB!)  For info, see: fonts/locale/zh_tw_docs/
+      First draft: Edward Lee <Edward.bbs@bbs.sayya.org>
+      Song Huang <Song@ossacc.org>
+
+
+
+2004.September.28 (0.9.14)
+  * New Features:
+    -------------
+    * Added support for immutable "starter" images, which are installed
+      globally with Tux Paint, and provide a starting canvas for images.
+
+      A PNG file with alpha is continuously drawn over whatever changes are
+      made to the current drawing.  For example, a black outline of a cartoon
+      character could be made, to simulate a coloring book.
+      (See 'jetplane.png')
+
+      A second PNG file can be supplied which will be drawn on the normal
+      part of the canvas (where a new picture would normally be all-white),
+      allowing for simulated depth.  Drawing and magic tools all mutilate the
+      background, as it's part of the normal canvas.  However, when editing
+      a picture based on a 'starter' with a background layer, the eraser will
+      bring back the background image.  In a sense, it's like having a photo
+      on the bottom, a clear sheet to draw on in the middle, and a clear sheet
+      with some more photo (which you can't draw on) on top.
+      (See 'reef.png' and 'reef-back.jpg')
+  
+    * Added lockfile support, to prevent Tux Paint from being launched more
+      than once every 30 seconds.  (Disable with "--nolockfile" command-line
+      argument.)  Thanks to Darci Lindgren for suggestion the feature, and
+      Mark K. Kim for suggesting it be time-based.
+    
+      (Lockfile is "lockfile.dat" in "~/.tuxpaint/" on Linux/Unix, and
+      "userdata\" on Windows.)
+
+    * Added "--nosave" option (suggested by Adam Moore).
+
+  * Updated Features:
+    -----------------
+    * Added some more brushes.
+      Jeremie Zimmermann <txptdv@tofz.org>
+
+    * Multiple sizes of erasers are present.
+      (Compile-time #defines can be used to determine how many sizes are
+      available, and their minimum and (approx.) maximum sizes.)
+      Note: Erasers are still square.  Sorry!
+
+    * Fixed tinting of low-saturation stamps.
+      Addded 'notintgray' option.
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Made sure shape tool never made a tiny shape.
+      (Should hint users that they should click-and-drag.)
+
+    * Made some colors more unique, so that they affected stamps better.
+      (e.g., purple and magenta used to look the same when used to tint a stamp)
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Made current image the selected image on Open screen, if applicable.
+
+    * Now prompts to confirm before printing.
+
+
+  * New translations:
+    -----------------
+    * Afrikaans translation created.
+      Petri Jooste <rkwjpj@puk.ac.za>
+
+    * Belarusian translation created.
+      Eugene Zelenko <greendeath@mail.ru>
+
+    * Breton translation created.
+      Korvigellou An Drouizig (Philippe) <drouizig@drouizig.org>
+
+    * Bulgarian translation created.
+      Martin Zhekov <mjekov@bginfo.net>
+
+    * Croatian translation created.
+      Nedjeljko Jedvaj <jedvaj.nedeljko@lexunit.com>
+
+    * Georgian translation created.
+      Gia Shervashidze <giasher@telenet.ge>
+
+    * Hindi translation created.
+      Ankit Malik <greatestankit@yahoo.co.in>
+
+    * Italian documentation translation.
+      Flavio Pastor <flavio.pastore@zonaitalia.it>
+
+    * Klingon (Romanized) translation started.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Korean README.txt documentation added, in both EUC-KR and UTF-8 formats.
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Serbian translation created.
+      Aleksandar Jelenak <jelenak@netlinkplus.net>
+
+    * Slovenian translation created.
+      Urska Colner <urska.colner@agenda.si>,
+      Ines Kovacevic <ines@agenda.si>,
+      Matej Urban <matej.urban@gmail.com>
+
+    * Traditional Chinese translation created.
+      Song Huang <Song@ossacc.org>
+
+    * Vietnamese translation created.  (Simple version)
+      Le Quang Phan <lqphan@hn.vnn.vn>
+
+    * Welsh translation created.
+      Kevin Donnelly <kevin@dotmon.com>
+
+  * Updated translations:
+    ---------------------
+    * Updated Basque translation.
+      Juan Irigoien <juanirigoien@irakasle.net>
+
+    * Updated Brazilian Portuguese translation.
+      Daniel Jose Viana <danjovic@vespanet.com.br>
+      Silvio Faria <sirofa2003@yahoo.com.br>
+    
+    * Updated Breton translation.
+      Korvigellou An Drouizig (Philippe) <drouizig@drouizig.org>
+  
+    * Updated British English translation.
+      Gareth Owen <gowen72@yahoo.com>
+
+    * Updated Catalan translation.
+      Pere Pujal Carabantes <ppujal@airtel.net>
+    
+    * Updated Danish translation.
+      Mogens J�ger <mogensjaeger@get2net.dk>
+
+    * Updated Dutch translation.
+      Geert Stams <geertstams@wanadoo.nl>
+
+    * Updated Finnish translation.
+      Tarmo Toikkanen <tarmo.toikkanen@iki.fi>
+
+    * Updated French translation.
+      Jacques Chion <Jacques.Chion@wanadoo.fr>
+
+    * Updated German translation.
+      Roland Illig <roland.illig@gmx.de>
+
+    * Updated Hungarian translation.
+      T�r�k G�bor <gabo@linuxportal.hu>
+
+    * Updated Icelandic translation.
+      Pjetur G. Hjaltason <pjetur@pjetur.net>
+
+    * Updated Indonesian translation.
+      Tedi Heriyanto <tedi_h@gmx.net>
+  
+    * Updated Italian translation.
+      Flavio Pastor <flavio.pastore@zonaitalia.it>
+
+    * Updated Japanese translation.
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Updated Korean translation.
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Updated Malay translation.
+      Muhammad Najmi Ahmad Zabidi <mnajem@linuxmail.org>
+
+    * Updated Norwegian Bokmal translation.
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Updated Norwegian Nynorsk translation.
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Updated Portuguese (Portugal) translation.
+      Ricardo Cruz <rick2@aeiu.pt>
+
+    * Updated Simplified Chinese translation.
+      Wang Jian <lark@linux.net.cn>
+
+    * Updated Slovakian translation.
+      Andrej Kacian <andrej@kacian.sk>
+    
+    * Updated Spanish translation.
+      Gabriel Gazz�n <ggabriel@internet.com.uy>
+
+    * Updated Tamil translation.
+      Muguntharaj <mugunth@thamizha.com>
+
+    * Updated Turkish translation.
+      Doruk Fisek <dfisek@fisek.com.tr>
+
+    * Updated Walloon language translation.
+      Pablo Saratxaga <pablo@walon.org>
+
+  * Localization clean-ups:
+    -----------------------
+    * Removed all non-UTF-8 related character handling code,
+      including HTML character entity reference support.
+      (All stamps are now in UTF-8, with scripts to convert
+      to and from PO files.)
+      Karl Ove Hufthammer <karl@huftis.org>
+    
+    * Updated punctuation in many text strings.
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Added "--lang simplified-chinese" option (same as "--lang chinese").
+      Simplified also now looks for "zh_cn.ttf" font, as "zh.ttf"
+      was too ambiguous.  (For backwards-compatibility, it checks for
+      "zh.ttf" if "zh_cn.ttf" is missing, though.)
+      Bill Kendrick <bill@newbreedsoftware.com>,
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Cleaned up translation and font code. 
+      Karl Ove Hufthammer <karl@huftis.org>
+  
+    * Language option now sets "LANGUAGE" environment variable
+      (along with LC_ALL and LANG).
+
+    * Initial work to get proper uppercase support in languages other
+      than English.
+
+    * Added reference to "--lang help" to documentation.
+
+  * Documentation updates:
+    ----------------------
+    * README (docs/html/README.html and docs/README.txt) has been pared down
+      and made more friendly.  Mention of other doc. files are now hyperlinked.
+
+    * Documentation regarding configuration file and command-line options
+      have been moved into a separate OPTIONS document (docs/html/OPTIONS.html
+      and docs/OPTIONS.txt), since Tux Paint Config. now exists to simplify
+      changing settings.
+
+  * Porting and packaging updates:
+    ------------------------------
+    * Added startup display mode and resolution options to the Windows 
+      installer.
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Visual Studio build system included in CVS and source release
+      ('visualc' folder)
+      John Popplewell <john@johnnypops.demon.co.uk>
+
+    * Updated Makefile for easier install.
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Cleaned up desktop entry file.
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Made sure KDE icon directories exist before trying to copy files to them.
+
+    * Created 16x16 mouse pointer shapes; use "MOUSEDIR" and "CURSOR_SHAPES"
+      Makefile variables to use them.
+
+  
+  * Application icon updates:
+    -------------------------
+    * SVG (Scalable Vector Graphics) icon created.
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Added 22x22, 64x64, 96x96, 128x128 and 192x192 icons, based on SVG icon.
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Improved Windows icon, based on SVG icon.
+      Karl Ove Hufthammer <karl@huftis.org>
+
+  * Bug fixes:
+    ----------
+    * Fixed "--noprint=yes" not working under Windows and BeOS.
+      Thanks to Adam Moore for pointing out this bug!
+      Bill Kendrick & Mark K. Kim
+
+    * Fixed crash bug when translated text ends in a space.
+      Mark K. Kim & John Popplewell
+  
+    * Fixed security issue with permissions to Tux Paint docs directory.
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Fixed 'savedir' bug.  (Was dropping filenames)
+
+    * Removed redundant '--wheelmouse...' listing from "--usage" output.
+
+    * Fixed crash bug when switching from different tools with scrolling
+      collections, and then scrolling.
+      Thanks to Kevin Jarrett for the report, and John Popplewell for a
+      replicable way of crashing it.
+
+  * Misc. Updates:
+    --------------
+    * Keywords ("Title" and "Software") now written into PNGs.
+
+    * Changed default UI font to "FreeSans.ttf"
+ 
+
+2003.Dec.23 (0.9.13)
+  * Translated into Basque (eu_ES)
+    Juan Irigoien <juanirigoien@irakasle.net>
+
+  * Translated into Norwegian Bokmal (nb_NO)
+    Dag H. Loras <dag.loraas@operamail.com>
+
+  * Translated into Tamil (ta_IN)  [buggy]
+    Mugunth <mugunth@thamizha.com>
+
+  * Updated Icelandic translation.
+    Pjetur G. Hjaltason <pjetur@pjetur.net>
+
+  * Made sure options were in the same order in various places in man page
+    and documentation.  Made sure all options and languages were listed.
+
+  * Added stamp controls to mirror, flip and resize stamps before placing
+    them.  Some stamps can be set to not be mirror-, flip- or resize-able.
+    (Place "noflip" and/or "nomirror" in the stamps' ".dat"
+    option files.)  Stamps can have alternative mirror-images (e.g., to
+    show a shape the opposite direction, but not have backwards text on it).
+    Create "filename_mirror.png" image files.
+
+  * Incorproated high quality filtering code from HiEnd3D,
+    http://www.hiend3d.com/hq3x.html
+    by Maxim Stepin <maxim@hiend3d.com>
+
+  * Added "--nostampcontrols", "--mirrorstamps" and their opposite options,
+    to disable stamp controls, and default to mirrored stamp shapes,
+    (or not), respectively.
+
+  * Fixed incorrect tag in HTML documentation.  (Bad results in IE)
+
+  * Fixed typo regarding "savedir" in README.
+
+  * 'printcfg' options not displayed in usage, except on Win32.
+
+  * Moved available language listing to its own usage, shown when
+    "--lang" called incorrectly, or as "--lang list" or "--lang help".
+    (Suggested by Ben Armstrong)
+
+  * Reorganized usage display
+    (Suggested by Ben Armstrong)
+
+  * If the top-left-most file is deleted in the Open screen, it now
+    scrolls up one line (so that the cursor isn't off the top of the
+    screen!)
+
+  * Cleaned up font aliasing blurriness and JPEG noise in title image.
+
+  * Updated copyright date in title image.
+ 
+  * Cursor doesn't change to 'hand' shape over color buttons when colors
+    aren't available (e.g., Magic tool, most Stamps, etc.)
+
+  * Cursor doesn't change to 'hand' shape over selector buttons when
+    they aren't available.
+
+  * Added "--noshortcuts" option, to disable keyboard shortcuts
+    (e.g., [Ctrl]+[S] for Save, etc.)
+
+  * Created missing locale-specific documentation directories.
+    (Unfortunately, most are still empty!)
+
+  * Added more copies of the GPL: Swedish, Romanian, Polish, Lithuanean,
+    Korean, Japanese, Indonesian, Hebrew, Greek, Danish, Czech, Chinese
+    and Catalan.
+
+  * Fixed locale typos in source ("cs" not "cz" for Czech, and "sv" not "se"
+    for Swedish).
+
+  * Updated default configuration file to include examples of some newer
+    options.
+
+  * White/grey in tintable stamps don't get tinted now.
+
+  * Stamps in homedir are now loaded before system-wide stamps.
+  
+  * "--lang=XXX" can be used on the command-line, along with "--lang XXX"
+
+  * Moved Tux penguin stamps from Stamps package to core Tux Paint package,
+    so that Stamp tool works out-of-the-box.
+
+
+2003.Aug.18 (0.9.12)
+  * Replaced "efont-serif" fonts with those from the 'ttf-freefont' package,
+    for better support of ISO8859-13 symbols (e.g., for Lithuanian).
+    Fonts copyright the Free Software Foundation.
+    Thanks to Mantas Kriauciunas <monte@mail.lt> for the tip.
+
+  * Made main event loop ignore motion events if the loop has spun too long.
+    (Fixes problems where shape or stamp tools take forver to 'catch up' with
+    the mouse; especially noticable on slow machines over remote X display.)
+
+  * Walloon translation.
+    Pablo Saratxaga <pablo@walon.org>
+  
+  * Translated to Russian
+    Dmitriy Ivanov <ace22b@myrealbox.com>
+
+  * Translated to Malay
+    Muhammad Najmi Ahmad Zabidi <md_najmi@yahoo.com>
+
+  * French translation update.
+    Jacques Chion <Jacques.Chion@wanadoo.fr>
+
+  * Chinese translation update.
+    Wang Jian <lark@linux.net.cn>
+  
+  * If gnome-config is not found, it doesn't necessarily mean Gnome isn't being
+    used!  Makefile will now fall-back and assume $GNOME_PREFIX should be /usr,
+    so that the launcher icon gets installed into the Gnome menu.
+  
+  * Added some "#error" directives to give verbose output regarding missing
+    library header files.  (Typical cause of this symptom is forgetting to
+    install dev. packages; e.g., installed "SDL.rpm", but not "SDL-dev.rpm")
+
+  * Fixed Mac OS X #include typo.
+    Darrell Walisser <walisser@mac.com>
+
+  * Fixed bug where non-translated stamp description text would get drawn
+    right-to-left after the kudos text (e.g., "Great!") goes away.
+    Thanks to Itai <Itais@newmail.net>
+  
+  * Added call to close iconv when quitting.
+    John Popplewell <john@johnnypops.demon.co.uk>
+    Darrell Walisser <walisser@mac.com>
+
+  * Removed static "MAX_FILES" limit; now mallocs space for file info.
+    structures.  (Should fix large stack crash on OS X, which is good.)
+
+  * Fixed bug where translated text would revert to English in 'uppercase' mode.
+
+  * Fixed UTF-8 related bug where Lithuanian wouldn't display if using
+    'TTF_RenderText...', but Spanish wouldn't display if using
+    'TTF_RenderUTF8...'.  Thanks to Mantas Kriauciunas, Robert Glowczynski,
+    John Popplewell and Karl Ove Hufthammer.
+
+  * Simplified CFLAGS variable in Makefile.
+    Ben Armstrong <synrg@sanctuary.nslug.ns.ca>
+
+  * Fixed bug where ".thumbs" dir wouldn't get generated if it wasn't there
+    and you went to the 'Open' dialog.
+  
+  * Fixed prompt bug for larger window sizes
+    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+
+2003.Jun.17 (0.9.11)
+  * Windows bugfixes.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Mac OS X print update.  Get to a print dialog by holding Alt/Option when
+    clicking "Print."  (Similar to how Windows handles it.)
+    Darrell Walisser <walisser@mac.com>
+
+  * Hebrew translation!
+    Dovix <dovix2003@yahoo.com>
+    Koby <kobybo@hotmail.com>
+
+  * Right-to-left language support (for Hebrew, for example).
+
+  * Updated Korean translations.
+    Mark K. Kim <mkkim214@gmail.com>
+
+  * UTF-8 support in the Text Tool!
+    Robert Glowczynski <robertg@software.com.pl>,
+    Mantas Kriauciunas <monte@mail.lt>
+
+  * Added 'The Gimp' to docs/PNG.txt
+    Mantas Kriauciunas <monte@mail.lt>
+
+  * Set $OUTPUT_CHARSET for Japanese locale, to fix Win32 issue.
+    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+  * Lithuanian translation.
+    Mantas Kriauciunas <monte@mail.lt>,
+    Rita Verbauskaite <verba@centras.lt>
+
+  * Fixed bug that would cause some translated stamp sounds to not load.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Added Dutch translation of (older version of) HTML documentation.
+    (docs/html/README-nl.html; docs/nl/README.txt)
+    Geert Stams <geert-csg@wanadoo.nl>
+
+  * Updated Polish translations.
+    Robert Glowczynski <robertg@software.com.pl>
+
+  * Added Polish version of manpage.
+    Robert Glowczynski <robertg@software.com.pl>
+
+  * Restructured manpage sources (created "src/manpage/")
+
+  * Fixed a few typos in the manpage.
+    Robert Glowczynski <robertg@software.com.pl>
+
+  * Fixed UTF-8 word-wrapping bug when there were no spaces
+    (e.g., in some Japanese strings)
+  
+  * When a locale requiring its own font can't be used because the font
+    is missing, Tux Paint STILL didn't work right.  Fixed.  (Set $LC_ALL=C)
+
+  * Added a set of square brushes (similar to the various round ones).
+
+  * Added "--nostamps" option to disable stamp tool.
+    (When it's not needed, they just take time to load, and RAM to store.)
+
+  * Added missing "--nosysconfig" to "--help" usage output.
+
+  * Increased MAX_FILES from 256 to 2048.  Users with more than 128 images
+    saved were unable to load the newest images!  (Hopefully 1024 saved
+    files is sufficient.)
+
+  * Thumbnails now saved to a ".thumbs" subdirectory under "saved".
+    (Old thumbnails will still be loaded, if found.  Currently, the old
+    thumbnails will still be saved in the old location, not under .thumbs)
+    Ben Armstrong's suggestion.
+
+  * Updated tuxpaint-import to create .thumbs subdirectory, and put new
+    thumbnails there.
+
+  * Moved "tuxpaint-import.1" from src/ to src/manpage/.
+
+  * "Thick" and "Thin" Magic Tools made 'stronger.'
+
+
+2003.February.22 (0.9.10)
+  * UTF-8 stamp descriptions word-wrap around spaces.
+
+  * Portuguese (from Portugal) translation.
+    Ricardo Cruz <rick2@aeiu.pt>
+
+  * Support for more HTML escape codes in description files.
+    [ Not yet working ]
+
+  * Czech .po file renamed to the correct "cs.po".
+  
+  * ALT+F4 accepted as alternative to [Escape] (to quit)
+    by Tux Paint's main loop.  Windows wasn't rending a 'Close Window'
+    event on that key combo, like it should (I think).
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Windows printing changes:
+    + Now uses a default printer configuration.
+    + No pop-up dialog appears unless [ALT] is held while hitting "Print"
+      button in the toolbox.
+    + Can be told to save any changes to printer configuration (so it's
+      used as default configuration from now on) by sending the
+      "--printcfg" command-line option.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Fancy cursors automatically disabled when in fullscreen mode in Windows.
+    (A bug in SDL causes the larger cursors to leave trails on the screen.)
+
+  * BeOS version will chdir to where Tux Paint is, if launched from a GUI
+    (e.g., OpenTracker)
+    Marcin 'Shard' Konicki <shard at beosjournal.org>
+
+  * Included new "src/Makefile.beos"
+    Marcin 'Shard' Konicki <shard at beosjournal.org>
+
+
+2003.February.1 (0.9.9)
+  * Translated into Slovak!
+    Milan Plzik <mmp@golem.gymzv.sk>
+
+  * Updated Norwegian Nynorsk translation.
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Added Japanese translation to Tux Paint icon (tuxpaint.desktop)
+    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+  * Moved Makefile.beos into src/, to keep root directory less cluttered.
+
+  * Incorporated "tuxpaint.nsi" in src/
+    (A configuration file for creating an installer program for
+    Windows, using Nullsoft's Scriptable Install System
+    <http://www.nullsoft.com/free/nsis/>)
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Alphabetized locale generation/installation in Makefile
+    (partly for nicer looking output during compilation, but mostly for
+    easier maintenance)
+
+  * When a locale requiring its own font can't be used because the font
+    is missing, Tux Paint now CORRECTLY switches back to default
+    ($LANG=C, which for Tux Paint is 'American English')
+
+  * Removed some debugging output that shouldn't have been kept in.
+
+  * Locale-detection code made more robust.  (Check LC_MESSAGES, not LC_ALL)
+    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+  * Added support for some useful HTML escape sequences in stamp descriptions
+    (e.g., "&acute;" for "�" ("a" with "'" over it))
+    Append ".esc" to the locale code (e.g., "fr.esc=...") in the ".txt"
+    description files.
+
+  * Wrote "docs/ESCAPES.txt", which covers valid escape sequences.
+
+  * Made 800x600 mode available at runtime, rather than just at compile-time
+    (available "--800x600" command-line option and "800x600=yes" in conf. file;
+    overridden by "--640x480" option, or "800x600=no" or "640x480=yes" in conf.)
+    NOTE: STILL EXPERIMENTAL!  640x480 mode is still default!
+  
+  * Fixed 'Magic Tool' selector redraw bug in 800x600 mode.
+
+
+2003.January.27 (0.9.8)
+  * Updated Makefile to include "beos" and "beos-install" targets.
+    (Apparently doesn't work yet.)
+    Based on BeOS Makefile by Marcin 'Shard' Konicki <shard at beosjournal.org>
+
+  * Included Makefile.beos for BeOS.
+    (Needs updating to match newer upstream Makefile)
+    Marcin 'Shard' Konicki <shard at beosjournal.org>
+
+  * Added some translations to Tux Paint's icon's comment in tuxpaint.desktop.
+
+  * Updated default tuxpaint.conf to mention all of the newest options.
+
+  * Fixed tuxpaint.desktop's icon so that it works right under Gnome.
+
+  * Fixed crash that could happen when picking an unavailable spot in the
+    selector on the right.
+
+  * Fixed Japanese locale detection.
+    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+  * Stamp description translations can be encoded using UTF-8.
+    Append ".utf8" to the locale code (e.g., "fr.utf8=...")
+
+  * Removed stamp descriptions from Japanese translation file
+    (src/po/ja.po).  (Will be placed as UTF-8 encoded text in next
+    Tux Paint stamps package release.)
+
+
+2003.January.26 (0.9.7)
+  * Translated to Japanese!
+    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+  * Fixed translation bugs with some save-related prompts.
+
+  * Polish available as "--lang polski" as well.
+
+  * Disabled fancy cursors by default in BeOS.  (Support is buggy in SDL.)
+    Marcin 'Shard' Konicki <shard at beosjournal.org>
+
+  * BeOS updates.
+    Marcin 'Shard' Konicki <shard at beosjournal.org>
+
+
+2003.January.22 (0.9.6)
+  * Save directory can be specified ("--savedir")
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * BeOS printing support!  (Makefile needs updating)
+    Marcin 'Shard' Konicki <shard at beosjournal.org>
+
+  * tuxpaint-import now creates the '~/.tuxpaint/saved' directory,
+    if it doesn't exist
+
+  * Initial support for arbitrary window sizes.  (#define SVGA for 800x600)
+    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+  * Added a few new colors, renamed some old ones.
+    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+  * Fixed text tool bug when hitting [Enter]/[Return] past bottom of canvas
+
+  * Gnome and KDE install targets won't kill make process
+
+  * Indonesian available as "--lang bahasa-indonesia" as well.
+
+
+2003.January.13 (0.9.5)
+  * Romanian translation!
+    Laurentiu Buzdugan <buzdugan@voyager.net>
+  
+  * Greek translation!
+    The Greek Linux i18n Team <i18ngr@lists.hellug.gr>
+
+  * Polish translation!
+    Arkadiusz Lipiec <A.Lipiec@elka.pw.edu.pl>
+
+  * French translation update.
+    Jacques Chion <Jacques.Chion@wanadoo.fr>
+
+  * Cleaned up Makefile some.
+    Made output less verbose during compile & install.
+
+
+2003.January.8  (0.9.4)
+  * Indonesian translation!
+    Tedi Heriyanto <tedi_h@gmx.net>
+
+  * Changed sparkles so they look less like blobs.
+    (Thanks to Dave Nelson for the suggestion.)
+
+  * Added a mode that uses XORs ("rubber-band lines") much less:  --nooutlines
+    It should help for very slow machines and using Tux Paint remotely
+    over a networked X display.
+
+  * The 'Circle' shape no longer switches into rotation mode
+    (since it never affected the shape!)
+
+
+2003.January.6  (0.9.3)
+  * Chinese translation!
+    Wang Jian <lark@linux.net.cn>
+
+  * Fixed bug when testing for printer availability under Windows.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Screen now refreshes when switching back to fullscreen Tux Paint.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Spanish translation update.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Lots of Spanish documentation updates.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * FAQ categorized
+
+
+2002.December.10  (0.9.2)
+  * Translated INSTALL.txt, FAQ.txt and PNG.txt documentation to Dutch.
+    Geert Stams <geert-csg@wanadoo.nl>
+
+  * Updated AUTHORS.txt
+
+  * Updated Norwegian documentation (docs/nn/INSTALLERING.txt)
+    Karl Ove Hufthammer <karl@huftis.org>
+  
+  * Added initial attempt at keyboard control support
+    (for mouseless environments): "--keyboard"
+
+  * UTF-8 support working.
+
+  * Korean translation completed!
+    Mark K. Kim <mkkim214@gmail.com>
+
+  * Fixed errors in 'uninstall' target in Makefile
+
+
+2002.November.16  (0.9.1)
+  * Updated man page.
+
+  * Translated to Catalan.
+    Pere Pujal Carabantes <ppujal@airtel.net>
+
+  * Added some missing "gettext_noop()" wrappers to some strings.
+  
+  * Stamp sound effects played when clicked, even if stamp is already selected.
+
+  * Added more translated documentation directories, with dummy docs.
+
+  * Simplified documentation installation target in Makefile
+    (and fixed permissions to something more sensible).
+
+
+2002.November.12  (0.9.0)
+  * Fixed endian issue which caused stamp icons and saved-file thumbnails to
+    have messed up colors!  (Tested on Mac laptop running Mac OS X.)
+
+  * Added FAQ item regarding fullscreen not being in 640x480 under Linux.
+    (Partially based on libSDL's Linux FAQ:
+    http://www.libsdl.org/faq.php?action=listentries&category=3#34 )
+
+  * Added notice about downloading libraries and '-dev' packages under
+    compiling/Linux section of INSTALL.txt.
+
+  * Rearranged INSTALL.txt some.
+
+  * Converted titlescreen image from JPEG to PNG
+    (so libJPEG would no longer be required).
+
+  * Updated PNG software list (PNG.txt)
+
+  * Added version number and release date to title screen.
+
+  * Fixed strange undo/redo access bug (redo available after open).
+
+  * Uses "Library/Preferences/tuxpaint" instead of hidden ".tuxpaint"
+    directory under Mac OS X.
+    Darrell Walisser <walisser@mac.com>
+
+
+2002.November.3
+  * HTML documentation cleaned up (no warnings or errors from HTML Tidy!)
+
+  * Updated Norwegian translation of INSTALL.txt (INSTALLERING.txt)
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Translated to Hungarian.
+    T�r�k G�bor <gabo@linuxmania.hu>
+
+  * Partly translated to Korean.  PO file in an unusable charset, though...
+    Mark K. Kim <mkkim214@gmail.com>
+
+  * Supports locale-specific fonts for languages that need Unicode.
+    e.g., Korean will use "ko.ttf", if found, for translated strings.
+
+  * Updated Spanish translation.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Updated French translation.
+    Jacques Chion <Jacques.Chion@wanadoo.fr>
+
+
+2002.October.26
+  * Updated German translation.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Updated Brazilian Portuguese translation.
+    Daniel Jose Viana <danjovic@vespanet.com.br>
+
+  * Updated Icelandic translation.
+    Pjetur G. Hjaltason <pjetur@pjetur.net>
+
+  * Updated French translation.
+    Jacques Chion <Jacques.Chion@wanadoo.fr>
+
+  * Translated to Czech.
+    Peter Sterba <sterba@sterba.com>
+    Martin <barin@email.cz>
+
+  * Fixed KDE_ICON_PREFIX setting (needed '--expandvars' arg. to kde-config)
+    Pjetur G. Hjaltason <pjetur@pjetur.net>
+
+  * Updated KDE launcher install to place .desktop file where kde-config says to.
+
+  * Updated Gnome launcher install to use `gnome-config --prefix`
+
+  * Now using Links (instead of Lynx) to convert HTML README to text.
+
+
+2002.October.20
+  * Updated INSTALL.txt documentation.
+
+  * Updated README.txt documentation.
+
+  * Created HTML version of README documentation, with screenshots!
+
+  * Updated Icelandic translations.
+    Pjetur G. Hjaltason <pjetur@pjetur.net>
+
+  * Updated Norwegian translations.
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Installs pt_br documentation now.
+
+  * Created British English (en_GB) translation.  (i.e., "color" is "colour")
+
+
+2002.October.19
+  * Windows printing updates (src/win_print.c):
+    - Correct aspect ratio (e.g., circles are now circular). 
+    - Image now centered on the page horizontally
+    - Printouts work in high-quality mode
+    - Looks good on John's Epson Stylus Color 860
+    - Fixes for possible crashing bugs
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Updated Norwegian translations.
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Made toolbox, color selector, and object selector titles translatable.
+
+  * Replaced SGML man pages with hand-written nroff.
+
+  * Extensive man page updates.
+
+
+2002.October.6
+  * Windows printing support!
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Updated Shape tool's tips.
+    (Thanks to Tarmo for pointing this out.)
+
+  * Fixed 'Great!' sayings (src/great.h) to be wrapped in gettext_noop()
+    Fabian Franz <FabianFranz@gmx.de>
+  
+  * Fixed forgotten endian issue with stamps (seen on Sparq & PowerPC)
+    Thanks to Fabian's keen eyes.
+
+  * Finnish updates.
+    Tarmo Toikkanen <tarmo.toikkanen@iki.fi>
+
+  * Updated Brazilian Portuguese translation.
+    Daniel Jose Viana <danjovic@vespanet.com.br>
+
+  * Updated Norwegian translations.
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Updated Icelandic translations.
+    Pjetur G. Hjaltason <pjetur@pjetur.net>
+
+  * Updated Spanish translation.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+  
+  * Updated / added more Brazilian Portuguese documentation.
+    Daniel Jose Viana <danjovic@vespanet.com.br>
+
+  * Removed 'Rubber Stamps' section from 'docs/AUTHORS.txt'
+    (since Stamps package has its own 'docs/CONTRIBUTORS.txt' document now)
+
+  * Dealt with warning with call to TTF_SizeUNICODE
+
+
+2002.September.29
+  * Updated Norwegian documentation.
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Updated German translation.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Fixed problem where some locales wouldn't get translated stamps.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Various sayings can be used instead of just 'Great!'.  See 'src/great.h'
+
+  * Fixes for Win32
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Text tool checks width of character in font, rather than relying on
+    'isprint()' - this SHOULD help unicode characters work in the Text tool.
+    Thanks to Jon Atkins <jcatki@jonatkins.org>
+
+  * Updated Spanish translation.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Increased scrollbar repeat speed.
+
+
+2002.September.28
+  * Translated to Brazilian Portuguese ('pt_BR').
+    (Get with "--lang brazilian", "--lang brazilian-portuguese" or
+    "--lang portugues-brazilian")
+    Daniel Jose Viana <danjovic@vespanet.com.br>
+
+  * Fixed 'get_fname()' so that it won't return a directory name with
+    a trailing slash (if no filename was given).  Some 'mkdir()'s don't
+    like trailing slashes.
+    Thomas Klausner <wiz@danbala.ifoer.tuwien.ac.at>
+
+  * "lang=" setting is now recognized in configuration files.
+
+  * Default configuration file now exists (Unix/Linux).
+    Installed as /etc/tuxpaint/tuxpaint.conf.
+    (Unless 'PREFIX' is not '/usr' or '/usr/local', then it's
+    installed into $(PREFIX)/etc/tuxpaint/tuxpaint.conf.
+    Overridable by setting CONFDIR Makefile variable)
+    Read before "~/.tuxpaintrc".
+    Reading it can be disabled with "--nosysconfig" on command-line.
+
+  * Added support for "OPTION=no" in config file, as well as
+    "UNOPTION=yes" (like command-line args. use), so that "~/.tuxpaintrc"
+    can override any settings in new system config.
+    (e.g., "noprint=no" or "print=yes" will override a "noprint=yes")
+
+  * Updated INSTALL.txt and README.txt for Windows users.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Updated Spanish documentation.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Added warnings about untranslated strings ("NOTRANS: ...") to
+    debugging output.  ("#define DEBUG")  (Useful for translators.)
+
+  * Added option to disable 'fancy' mouse pointers:  --nofancycursors
+    (since fullscreen under Windows and non-X-Window targets under Linux
+    currently have problems due to an SDL library bug)
+
+  * Changed 'tuxpaint-import's usage message to reflect that it can import
+    multiple files at a time, and that it has a "--help" option.
+
+  * Updated 'tuxpaint-import's help message to describe what the program does.
+
+
+2002.September.25
+  * Translated to Danish.
+    Rasmus Erik Voel Jensen <i18n@solsort.dk>
+
+  * Norwegian updates.
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Updated Karl's e-mail address in docs.
+
+
+2002.September.24
+  * Norwegian translation of INSTALL.txt
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Updated Icelandic translations.
+    Pjetur G. Hjaltason <pjetur@pjetur.net>
+
+  * Fixed bug where German translation of stamps wouldn't be used.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * 'Great!' text appears when you use stamps, etc., again.
+    Replaced with the old tip text (e.g., stamp description, 
+    instructions, etc.) after a moment.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Prompt and label font is smaller when in "--uppercase" mode.
+
+  * "Open", "Erase" and "Back" buttons in 'Open' dialog are now translatable.
+    (Still need to translate selector titles (e.g., "Tools", "Colors", etc.))
+
+
+2002.September.23
+  * Replaced key-repeat code with simple SDL-based key repeat.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Fixed toolbar bug when using 'Save' via [Ctrl]-[S] shortcut.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Shortcut keys for "Yes" and "No" prompts are now based on the
+    first character of the translated versions of those words.
+    (e.g., in Spanish, [S] for "Si", and [N] for "No".
+    In German, [J] for "Ja", and [N] for "Nein".)
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Added URLs to Windows and Mac software in PNG.txt.
+
+  * README updated.
+
+  * Some documentation translated to German.  (See "docs/de/")
+    (Using Google.com Language Tools)
+
+  * Placeholders created for some other translated documentation.
+
+  * Translated documentation gets installed now.
+
+  * 'Print' tool disabled when picture is blank
+    (Simply mimicks 'New' tool)
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Mouse wheel now scrolls selector (e.g., list of stamps, brushes, etc.)
+    (Non-wheel mouse users can try it with mouse buttons 2 and 3 under
+    X-Window by running:   xmodmap -e "pointer = 1 4 5"  )
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Mouse wheel can be disabled with "nowheelmouse=yes" in config., or
+    "--nowheelmouse" on commandline.
+
+
+2002.September.22
+  * Updated Spanish documentation.  (Added translation of PNG.txt)
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Updated Norwegian translations.
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Free mouse pointer shapes on exit.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Ignore $HOME env. variable under Windows (not used there normally,
+    but could be - e.g., if the user happens to use CVS)
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+
+2002.September.21
+  * Selector scroll buttons 'repeat' if mouse is held down on them.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Rotate mode of shape tool has its own mouse pointer shape.
+
+  * Rotate mode of shape tool warps mouse to '0 degree' rotation spot.
+
+  * Increased threshold of Magic 'Fill' tool.
+
+  * Created "tuxpaint-import" shell script which will take an arbitrary
+    image file (JPEG, GIF, PNG, etc.) and make a copy available to Tux Paint
+    (by converting it to an appropriately-sized and -shaped PNG file and
+    placing it in "~/.tuxpaint/saved/").  Only works under Linux and Unix...
+
+  * Fixed bug where trying to type a Control character in the 'Text' tool
+    would crash Tux Paint.
+
+  * Some updates to man page (tuxpaint.sgml).  Ugh!  Help me!
+
+  * Rearranged and reprioritized TODO.txt some more.
+
+  * Blinking cursor in text tool moves right now.
+
+  * Keys repeat in text tool.
+
+  * Fixed bug where 'Fill' could recurse infinitely and crash Tux Paint.
+
+
+2002.September.20
+  * Updated AUTHORS.txt
+
+  * Updated README.txt (regarding brushes, stamps, fonts).
+
+  * Added a flood fill ("bucket fill") Magic tool.
+    Based on http://www.wikipedia.org/wiki/Flood_fill/C_example
+    by Damian Yerrick - http://www.wikipedia.org/wiki/Damian_Yerrick
+
+  * Flood fill can be faster and lower quality.
+    #define LOW_QUALITY_FLOOD_FILL, and only exact pixel matches will be
+    checked for.
+
+  * Thumbnails in 'Open' dialog can be double-clicked to open them.
+
+  * Brushes, stamps and fonts can be stored in the user's
+    tuxpaint directory.  ("~/.tuxpaint/" under Linux and Unix,
+    "userdata" under Windows.)  They go under "brushes", "stamps" and "fonts"
+    subdirectories, respectively.
+
+
+2002.September.19
+  * Updated Spanish documentation.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Updated INSTALL.txt with steps that Installer EXE goes through.
+
+  * Icelandic translation.
+    Pjetur G. Hjaltason <pjetur@pjetur.net>
+
+  * Color selector and current tool's selector greyed out in 'Open' dialog.
+    (Good solution for now...)
+
+  * Font and color changes while typing text are reflected by the preview.
+  
+  * Background of text preview is dark grey if the rendered text color is light.
+
+  * [Enter] key moves text cursor down one line and starts a new line of text.
+
+  * Undo/Redo works better with text tool.
+
+  * Text tool rendering is clipped to canvas area (no more overwriting
+    Tux Paint's widgets)
+
+  * Text tool cursor height corresponds to current font's general height.
+
+  * Clicking a new position while entering text moves the current text,
+    rather than rendering it and starting a new line.
+
+  * Text tool allows broader range of characters
+    (e.g., uppercase, punctuation, etc.) thanks to
+    'event.key.keysym.unicode' values.
+
+
+2002.September.15
+  * "Save over the older version...?" prompt can be disabled.
+    "--saveover" (or "saveover=yes") will always save over the existing file.
+    "--saveovernew" (or "saveover=new") will always save a new file.
+    "--saveoverask" (or "saveover=ask") will prompt (the old, and default mode)
+    (Karl Ove Hufthammer's suggestion)
+    
+  * Added option to have Tux Paint grab all keyboard and mouse input.
+    This should keep the mouse inside Tux Paint's window and override
+    things like [Alt]-[Tab] window cycling and [Alt]-[Enter] fullscreen
+    toggling.
+
+  * Context-sensitive mouse pointer shapes!
+
+  * Fixed some indentation anomolies in tuxpaint.c
+
+  * Increased audio buffer even more (2Kbytes) under Windows, for better sound.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Cleaned up memory leaks from 'uppercase()' calls.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Cleaned up loaded fonts when quitting.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Mouse buttons 2 and 3 supported again.  (Wheel still not used.)
+    Partly because kids may get frustrated using 2- and 3-button mice.
+    Partly due to a lefthand/righthand bug in SDL for Windows in fullscreen.
+    (Thanks to John Popplewell.)
+
+
+2002.September.14
+  * Fixed bug where tool tip would revert to English.
+    (Thanks to Karl Ove Hufthammer and John Popplewell)
+
+  * Fixed README.txt regarding Norwegian.
+
+  * Update Spanish translation.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Stamp description no longer replaced with "Great!" when stamp drawn.
+    (Thanks to Karl Ove Hufthammer for the suggestion.)
+
+  * "Your picture has been saved" prompt when saving-on-quit is now
+    translated properly.
+
+  * Added "--uppercase" option, which renders all text strings entirely
+    in uppercase (for children who haven't learned lowercase letters yet).
+    (Or use "uppercase=yes" in config. file.  "--mixedcase" to override config.)
+
+  * Created an Frequently Asked Questions document: FAQ.txt.
+
+  * More compile-time options reported (if set) in "--version" output.
+
+  * Only mouse button 1 (left-click) is used now.  All other buttons ignored.
+    (Avoids problems with mouse wheels causing 'hyper clicking.')
+    (Perhaps it should be buttons 1 through 3?)
+
+
+2002.September.12
+  * Translated to Swedish.
+    Daniel Andersson <daniel@septum.org>
+
+  * More work on the text tool.
+    (Now activated by default, but still not perfect; see TODO.txt)
+
+  * Fonts loaded from 'data/fonts/' directory.  Font selector added!
+
+
+2002.September.11
+  * Updated Spanish translations.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+  
+  * Updated Norwegian translations.
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Fixed horrible sounding audio in Win32.
+    John Popplewell <john@johnnypops.demon.co.uk>
+    Thanks to: Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Removed "Loading" image.
+
+  * Fixed bug where "New" tool would be disabled if 'Open' was cancelled.
+
+  * Ctrl-N does the same as pushing the 'New' button.
+
+  * Added keyboard shortcuts to README.txt.
+
+  * Reorganized and (kinda) prioritized TODO.txt.
+
+  * Created 16x16, 32x32 and 48x48 icons for KDE.  Install them into
+    wherever "kde-config --install icon" says is good, if 'kde-config' exists.
+
+  * Started working on text tool.  (#define ENABLE_TEXT_TOOL to try it out.
+    Warning: It's unusable!)
+
+
+2002.September.8
+  * Fixed bug in Win32 'opendir'
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * "docbook-to-man" is now optional.  (Without it, man page won't be built.)
+    Thanks to Mike Simons for bash tips.
+
+  * Updated Norwegian translations.
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Moved list of stamp ideas from TODO.txt into stamp package's own to-do list.
+
+  * Print tool enabled!  (Linux/Unix only; requires NetPBM tools)
+  
+  * Print tool can be disabled with "--noprint" on command-line, or
+    "noprint=yes" in config. file (can be re-enabled with "--print" on
+    command line).
+
+  * Printing can be restricted to only one print every N seconds, with
+    "--printdelay=SECONDS" on command-line, or "printdelay=SECONDS" in
+    config. file.  ("--printdelay=0" will disable the restriction).
+    Thanks to Koyote on #ucd for the idea.
+
+  * Print command can be set (default is "lpr") with "printcommand=COMMAND"
+    in config. file.
+
+  * 'fopen' opens PNG for write in binary mode ("wb"; for Win32)
+
+  * Thumbnails are now saved (making Open dialog much faster!)
+    (Existing saved images without thumbnails are given thumbnails the first
+    time 'Open' is clicked, too!)
+
+  * Files in 'Open' dialog are sorted by filename (aka time/date created).
+    This gets around new files ending up in 'holes' in the directory structure
+    where files had been deleted.
+
+  * Added an alpha-blended shadow behind pop-up prompts.
+    (Can be disabled by #define'ing "NO_PROMPT_SHADOWS" in src/tuxpaint.c)
+
+  * Increased number of files Tux Paint can deal with from 128 to 256.
+
+  * Approx. doubled number of undo buffers.
+
+  * Added progress bar to Save operation.
+
+
+2002.September.6
+  * Fixed translation problems in Makefile (installed italian into dutch,
+    didn't uninstall some of the new ones)
+    (Thanks to Ben Armstrong)
+
+  * Updated Dutch translation (after testing on some children).
+    Herman Bruyninckx <Herman.Bruyninckx@mech.kuleuven.ac.be>
+
+  * Updated Norwegian translation (for some new strings).
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Fixed misspelling of "occurred" in errors and warnings.
+    (Thanks to Andries Brouwer for noticing)
+
+  * Reset tool tip after Open dialog goes away.
+
+  * do_save() returns whether there was success, so now if there wasn't,
+    Tux Paint doesn't think the picture was saved, and won't quit if
+    you save-on-quit and it failed.
+
+  * A prompt shows up confirming save-on-quit.
+
+  * Fixed problem with CTRL commands not being noticed.
+
+  * Attempted installation skeleton for Japanese translation.
+    (Nothing translated yet)
+
+  * Changed default font to a Sans Serif font.
+    From the Free UCS Outline Fonts:
+    http://www.freesoftware.fsf.org/freefont/
+
+  * Removed all rubber-stamps.  They're now available as a separate download.
+    (tuxpaint-stamps...)
+
+  * 'loadarbitrary()' won't abort if it can't find any stamps.
+
+  * Brushes tested to make sure they aren't larger than 40x40.
+
+
+2002.August.23
+  * Support for SDL's upcoming "WMCLASS" support.
+
+  * Italian translation (it_IT@euro)
+    Marco Milanesi <kpanic@pavia.linux.it>
+
+  * Dutch translation (nl_BE@euro)
+    Herman Bruyninckx <Herman.Bruyninckx@mech.kuleuven.ac.be>
+
+  * Added missing Norwegian trans. install (Makefile) and docs. (README.txt)
+
+  * Norwegian available with "--lang norsk" as well.
+
+  * More and updated German translations (especially stamp translations).
+    Ingo Blechschmidt <iblech@web.de>
+
+  * Fixed nickel stamp (was 'colorable', so came out a solid circle).
+
+  * Renamed US Coin stamps so that they're ordered by value.
+
+  * Added Italian, Turkish and Dutch versions of the GPL.
+
+  * Made cursor in 'Open' dialog look nicer.
+
+  * Made a few of the flower stamps tintable.
+
+  * Support for legacy saved files (BMP format).
+    (Only issue is when you 'Save over', it actually makes a new file,
+    since it will be ".png", not ".bmp")
+
+  * Added details on "*PREFIX" variables in Makefile to "INSTALL.txt"
+    (Spanish version of that file currently has this section in English.)
+
+  * Added animated progress bar ('candy cane' or 'barbershop pole', since
+    determining percentage of progress is quite difficult!).  Displayed
+    when first starting up, as well as when creating thumbnails for the
+    'Open' screen...
+
+
+2002.August.19
+  * Translated into Norwegian Nynorsk ("NN")
+    Karl Ove Hufthammer <karl@huftis.org>
+
+  * Finnish translation updated.
+    Tarmo Toikkanen <tarmo.toikkanen@iki.fi>
+
+  * Updated German translation of some planet stamps.
+    Ingo Blechschmidt <iblech@web.de>
+
+
+2002.August.19
+  * Now saves in PNG format, instead of BMP.  (Huge disk space savings!)
+    (Uses libPNG to save.  Note: Previously-saved BMPs can't be loaded.
+    Sorry!  They must be converted to PNG.)
+
+  * If 'current' image didn't exist, it won't ask if you wish to replace it
+    when you go to save.
+  
+  * Added US coins, flowers and flags to rubber stamps.
+    (c) Justin Zeigler 2002 Administered by The Project Impresarios of GOVIA.
+    http://govia.osef.org/
+
+  * Tool buttons disabled when 'Open' dialog is displayed.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Stamps can be colored using the color picker.
+    (Certain stamps can have this enabled.  For example, right now, the
+    mathematical and musical stamps do.)  The stamp really becomes a kind
+    of limited brush.  Create a "STAMP.dat" file for the stamp, and stick
+    the word "colorable" in it.)
+    (Thanks to Fabian Franz for the suggestion.)
+
+  * Stamps can be tinted using the color picker.
+    (Certain stamps can have this enabled.)  The stamp's brightness and
+    saturation are kept, but the hue of the currently-picked color is used.
+    Create a "STAMP.dat" file for the stamp, and stick the word
+    "tintable" in it.)
+
+  * LOCALE_PREFIX, the location where translation files (".mo") should be
+    installed, is now based on PREFIX in Makefile.  Source has been
+    updated with a 'bindtextdomain()' (which was used under Win32),
+    which lets 'gettext()' find the translations, regardless of where
+    they are.  (e.g., you can install as a non-root user now)
+
+  * Updated Spanish translations of stamp descriptions.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Selector sound effect doesn't get played when a stamp is selected
+    which has its own sound effect.
+
+
+2002.August.12
+  * Removed rainbow magic tool's ending sound effect altogether.
+
+  * Rubber stamp outlines now based on shape of the stamp.
+    (Simple rectangle outlines available by #define'ing
+    "LOW_QUALITY_STAMP_OUTLINE" at the top of src/tuxpaint.c)
+    (Thanks to Ben Armstrong for the idea.)
+
+  * Rubber stamps can have their own sound effects (STAMP.wav)
+    (.e.g, "pict.wav" is the sound for the stamp "pict.png")
+
+  * Rubber stamps can have localized sound effects (STAMP_LOCALE.wav)
+    (e.g., "pict_fr.wav" and "pict_es.wav")
+
+  * Rubber stamps directory moved out of "data/images/" and into just "data/"
+
+  * Brush directory moved out of "data/images" and into just "data/"
+
+  * Moved "Rainbow" and "Sparkles" magic tool buttons to the top of the
+    list, since they actually DRAW things.  (So if a child goes to the
+    "Magic" tool while the picture is still blank, they can at least draw
+    without having to pick a specific magic tool.)
+
+  * Fixed bug where tall and narrow stamps' thumbnails would be aligned wrong
+    in their buttons on the selector.
+
+  * Surface locking and unlocking moved to outside loops/etc.,
+    rather than being WITHIN putpixel() and getpixel() functions!
+    (i.e., locking occurs far less frequently, so some things, like XOR lines,
+    should be sped up a little)
+
+  * Animated filled shapes.  (On slower machines, it takes quite a while,
+    so you can't tell if it's doing anything!)
+
+  * Added Turkish translation.  (Buggy - charset needs fixing.)
+    Doruk Fisek <dfisek@fisek.com.tr>
+
+  * Resampled and trimmed some sound files (to make them smaller).
+
+    
+2002.August.9
+  * Translated button labels to German.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Translated button labels to Spanish.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Translated button labels to French.
+    Jacques Chion <Jacques.Chion@wanadoo.fr>
+
+  * Button label font size larger, and scaled horizontally (may squish
+    aspect ratio!) to fit within the buttons. (Makes things more readable.)
+
+  * Check LANG env. variable if LC_ALL contains "LC_MESSAGES"
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Disabled warnings about description-less stamp images.
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Translated documentation directories created (docs/es, docs/fr, etc.)
+
+  * Documentation (AUTHORS.txt, INSTALL.txt) translated to Spanish.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Spanish, French and German versions of GPL (COPYING.txt) included.
+
+  * Stamp images divded into "photo" and "cartoon" subdirectories,
+    reorganized some.
+
+  * More space images added (from NASA and NSSDC public domain photo
+    gallery).  Planets renamed #_name.png, so that they sort in the
+    correct order.
+
+  * List of stamp ideas added to TODO.txt
+
+  * Previous tool re-selected if you go to Quit and then decide not to.
+
+  * Fixed bug where Redo and Undo wouldn't make Save available if you've
+    just saved...
+
+  * Fixed bug opening tuxpaint.cfg under Windows.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Fixed minor font opening/closing bugs
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Disabled sound effect wait when finishing a rainbow magic tool draw.
+    (Should interrupt now, instead?)
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Translated more stamp descriptions into German, French and Spanish
+    (Using Google.com's language tool.)
+
+  * Added mathematic stamps (numbers, operators)
+
+  * Added musical stamps (clefs, notes, rests, keys)
+
+
+2002.August.4
+  * Added "Thick" and "Thin" magical effects.
+
+  * Reorganized some magical effects in the selector menu.
+
+  * Text removed from button icons, and can now be translated using gettext!
+
+  * Filled shapes enabled.  (Using lame radius-based fill, rather than
+    scanline fill.  Couldn't get scanline fill to work yet, though.)
+
+  * Renamed 'slash' brushes so they sort more nicely in the brush selector.
+
+  * Gave magical effects their own sound effects.
+
+  * Used a better 'harp' intro sound effect.
+
+
+2002.August.2
+  * Fixed command-line argument parsing bug.
+    Ben Armstrong <synrg@sanctuary.nslug.ns.ca>
+
+  * Fixed broken Spanish translation .po file.
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Made "wait_for_sfx()" less CPU-intensive and hopefully better on Win32(?)
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Made sure "LC_MESSAGES" dirs created by "install" in Makefile
+    Ben Armstrong <synrg@sanctuary.nslug.ns.ca>
+
+  * Added "uninstall" target to Makefile
+
+  * Changed font to "efont.ttf", a completely free, GPL'd font.
+    (See: http://openlab.ring.gr.jp/efont/serif/)
+
+  * Added info to INSTALL.txt on making a TuxPaint shortcut under Windows,
+    and using it to alter command-line options.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Added info to README.txt on ways to change language settings under
+    Windows.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Win32 updates for LOCALE-related stuff.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Reduced font size (some text was overlapping or going off the screen).
+    (Needs more testing)
+
+  * Updated AUTHORS.txt some.
+
+
+2002.July.31
+  * Fixed memory deallocation bug in "Open" dialog function.
+
+  * Translated to Finnish
+    Tarmo Toikkanen <tarmo.toikkanen@iki.fi>
+
+  * Update Spanish translation
+    Gabriel Gazzan <ggabriel@internet.com.uy>
+
+  * Switched from using #define'd strings for translations to using "gettext"
+    and ".po" files (see src/po/)
+    Fabian Franz <FabianFranz@gmx.de>
+    (Thanks to Andreas Best <a_best@web.de> for help getting locales working)
+
+  * Added "--locale" option to override current locale at runtime
+    (e.g. "--locale de_DE@euro")
+
+  * Added "--lang" option to override current locale at runtime,
+    using human-readable language names.
+    (e.g. "--locale german" or "--locale deutsch")
+
+  * Stamp descriptions now support multiple languages.
+    (Each description MUST be on one line - multiple lines no longer supported!)
+
+    Lines beginning with "xx=" (where "xx" is a locale abbreviation,
+    e.g. "de" for German or "es" for Spanish) provide text for their
+    respective locales.
+
+  * Added details about stamp multilingual support to "README.txt".
+
+  * Added more requirements to the "INSTALL.txt" documentation.
+
+  * Supports a "~/.tuxpaintrc" file which contains default options
+    (e.g. "fullscreen=yes")
+
+  * Command-line options to disable some options
+    (e.g., "--windowed" to override a "fullscreen=yes" in .tuxpaintrc)
+
+
+2002.July.24
+  * Fixed a bug where Ctrl-Z and Ctrl-R would do Undo and Redo even if you
+    shouldn't be able to.
+
+  * Undo and Redo disable shape tool if it's active.
+    (Really, Undo should only become available AFTER the shape has been
+    rotated and drawn...)
+
+
+2002.July.23
+  * Added more (and updated some) French translations.
+    Jacques Chion <Jacques.Chion@wanadoo.fr>
+
+  * Added first German translations
+    Fabian Franz <FabianFranz@gmx.de>
+
+  * Fixed word-wrap issue with prompt button labels.
+
+  * Multiple lines now read properly in stamp description (.txt) files.
+
+  * Makefile changes (PREFIX and icon/launcher pathes)
+    to suit the Filesystem Heirarchy Standard
+    ( http://www.debian.org/doc/packaging-manuals/fhs/ )
+    Ben Armstrong <synrg@sanctuary.nslug.ns.ca>
+
+
+2002.July.19
+  * Installs man page into /usr/share/man by default now.
+
+  * Man page now gzipped when installed.
+
+  * No longer installs "INSTALL.txt" when installing documents.
+
+  * Install target split up (install-bin, install-data, etc.) in Makefile
+    Ben Armstrong <synrg@sanctuary.nslug.ns.ca>
+
+  * Added initial help display ("--help")
+
+  * Installs PNG icon (for use by GNOME, KDE, etc.)
+    Installs into /usr/share/pixmaps/
+
+  * Installs launcher into GNOME and KDE menus (under "Graphics")
+
+  * Created 32x32, 24 color (based on "cmap.xpm") XPM icon.
+    Installs into /usr/X11R6/include/X11/pixmaps/
+
+  * Added descriptive comments to Makefile
+
+  * Fixed SDL surface manipulation calls (now locks/unlocks, etc.)
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Added option for simple Shape tool (no rotation mode)
+    (--simpleshapes)
+
+  * Version info. shows whether or not
+    LOW_QUALITY_THUMBNAILS, LOW_QUALITY_COLOR_SELECTOR
+    and NOSOUND ("make nosound") were set at compile-time.
+    (Along with version number, version date, and LANG setting.)
+
+  * Title/credits screen now dismisses itself after 5 seconds.
+
+  * Added Sparkle and Fade "Magic" tools.
+
+  * Added accelerator keys:  Ctrl-Z and Ctrl-R for Undo and Redo.
+    Ctrl-S and Ctrl-O for Save and Open.
+
+  * Fixed "Open" dialog cursor movement bug when scrolling up.
+
+  * Added key controls for "Open" dialog:  Arrows to move.
+    Space or Enter to open.  Escape to go back.  Ctrl-D to Delete.
+
+  * Added key controls for pop-up prompts.  Y or Enter to accept.
+    N or Escape to cancel.
+
+
+2002.July.18
+  * Replaced perror() with internal win32_perror() under WIN32.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Chalk doesn't grab black around the edges.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Added version, usage, and copying displays (--version, --usage, --copying)
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Added fullscreen and quiet modes (--fullscreen, --nosound)
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Chalk and Blur don't grab black from the edges anymore.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Added option to disable "Quit" button (--noquit)
+
+  * Man page updated.
+
+  * Man page now gets installed.
+
+
+2002.July.17
+  * Added Flip, Mirror, Rainbow and Chalk "Magic" tools.
+
+  * Shape's and Magic's tools' tips now appear when they are selected.
+
+  * "New" tool wasn't available after opening a saved picture.  Fixed.
+
+  * Animated prompt window's appearance and dismissal.
+
+  * Now prompts to save a changed image before opening.
+
+  * Save's "camera shutter" sound effect now plays completely before quitting.
+
+  * "Open" screen now has a cursor (select image, then click "Open" to load)
+
+  * "Open" screen can now delete pictures (select image, then click "Erase")
+
+  * Changes to "clean" Makefile target
+    Ben Armstrong <synrg@sanctuary.nslug.ns.ca>
+
+  * Initial man page (docbook SGML, from Debian package of Tux Paint)
+    Ben Armstrong <synrg@sanctuary.nslug.ns.ca>
+
+  * More memory freeing cleanups.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+
+2002.July.07
+  * Added the shape tool and began work on filled shapes. (Currently disabled)
+    (Fill algo. based on text in "Computer Graphics: C Version,"
+    (c) Prentice Hall 1997 by Donald Hearn and M. Pauline Baker)
+
+  * Added Save command.
+
+  * Added Open command.
+
+  * "Current" image (opened on launch) now referred-to by ID
+    (current_id.txt), not saved as its own image (current.bmp).
+
+  * More memory freeing cleanups.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+
+2002.July.03
+  * Added French language support  (#define LANG_FR)
+    Most translation by:  Charles Vidal <vidalc@club-internet.fr>
+    Some thanks to Babelfish.
+
+  * Added Spanish language suppirt  (#define LANG_ES)
+    Translation thanks to Babelfish.
+
+  * Changed UI font to "chicago.ttf", since it supports international chars.
+
+  * Now strips (converts to spaces) newlines in rubber stamp .txt files
+    (mainly to avoid the "end of line" glyph in the new Chicago font).
+
+  * Explicitly free up memory at exit
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+
+2002.July.02
+  * Fixed bug in get_fname() under Windows.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Moved word-wrap text code from draw_tux_text() into its own
+    function: wordwrap_text()
+
+  * Added Yes/No prompt function: do_prompt()
+
+  * Prompts before "New" (erase current image) and "Quit" actions.
+
+
+2002.June.30
+  * Incorporated 32x32 icon for Win32.
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Added "nosound" Makefile target (to build without sound or SDL_mixer)
+
+  * Auto-saves current image (to "$HOME/.tuxpaint/current.bmp") when you
+    quit.  Auto-loads it when you start back up (if it's available).
+    (Creates "$HOME/.tuxpaint/" directory if it doesn't exist.)
+    (Under Windows, it is simply in the "userdata/" folder in Tux Paint's
+    folder.)
+
+  * Data file installation moved to /usr/local/lib/tuxpaint/ by default.
+    (Mike Simons)
+
+  * Documentation now installed into /usr/local/share/doc/tuxpaint/.
+
+  * Created first "Magic" tools: "Blur," "Blocks" and "Negative."
+
+  * Color-picker disabled when not applicable.
+
+
+2002.June.27 [unreleased]
+  * Moved source into src/, documentation into docs/ and object files to obj/
+
+  * Added "Copyright" to documentation and source files.
+
+  * Added True Type font (TTF) support, using SDL_ttf library.
+
+  * Added word-wrap support to the "Tip text"
+
+  * Incorporated stuff for Windows builds (win_dirent.c/h, some #defines).
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Cast surface->pixels more in get/putpixel() calls
+    John Popplewell <john@johnnypops.demon.co.uk>
+
+  * Created "INSTALL.txt" documentation on compiling and installing
+
+  * Created "PNG.txt" documentation on creating PNG images
+
+  * Extensive updates and fleshing-out of README.txt
+
+
+2002.June.17a
+  * Made new title screen.  (Better picture, plus credits.)
+
+  * Title screen says "Loading" while loading data.
+
+  * Title screen remains until keypress or mouse click.
+
+  * Created "install" target in Makefile
+
+  * Created "AUTHORS.txt"
+
+  * Included "COPYING.txt" (GNU GPL v.2), as the software is GPL.
+
+
+2002.June.17
+  * Lightened grey around outside of selected (dark) tool/selector buttons.
+
+  * Selector has a different sound, now.  (No longer same as toolbar buttons)
+
+  * Made see-through brush more transparent.
+
+  * Replaced most calls to SDL_Flip() with calls to SDL_UpdateRect().
+
+  * Thumbnails rendering made high-quality.  (Can be disabled by
+    #define LOW_QUALITY_THUMBNAILS)
+
+  * Stamp and brush files are sorted alphabetically by filename now.
+
+  * Color selector buttons look like other interface buttons.
+    (Can be made simple again by #define LOW_QUALITY_COLOR_SELECTOR)
+
+  * "Tip text" and cartoon tux added for tools, colors and, if available,
+    stamps.  (Store respective ".txt" files in data/images/stamps/)
+
+
+2002.June.16
+  * Initial release.
+    Supports brushes, stamps, lines, eraser, sound effects.
+

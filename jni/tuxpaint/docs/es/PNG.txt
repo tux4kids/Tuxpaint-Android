@@ -1,0 +1,148 @@
+PNG.txt del Tux Paint
+
+Tux Paint - Un programa de dibujo simple para niños.
+
+Copyright 2002 por Bill Kendrick
+bill@newbreedsoftware.com
+http://www.newbreedsoftware.com/tuxpaint/
+
+27 de Junio de 2002 - 7 de Noviembre de 2002
+
+
+Acerca de las PNGs
+------------------
+  PNG es el formato de imágenes "Portable Network Graphic".  Es un
+  estándar abierto, no gravado por ninguna patente (como el GIF).
+  Es un formato altamente comprimido (aunque sin provocar "pérdidas" 
+  como el JPEG - la pérdida de calidad permite a los archivos ser más
+  pequeños, pero introduce 'errores' en la imagen al ser guardada),
+  también soporta color de 24 bits (16,7 millones de colores) así como
+  un completo "canal alfa" - esto es, cada pixel puede tener un grado
+  variable de trasparencia.
+
+  Por más información, visitar:  http://www.libpng.org/
+
+  Estas características (apertura, sin pérdidas, compresión,
+  transparencia/alfa) lo hacen la mejor elección para el TuxPaint.
+  (El soporte para el formato PNG del Tux Paint es provisto por la
+  biblioteca de Código Abierto SDL_Image, la cual a su vez lo obtiene
+  de la biblioteca libPNG.)
+
+  Su soporte de gran cantidad de colores permite la utilización de
+  "sellos de goma" con imágenes de calidad fotográfica en Tux Paint
+  y la tranparencia por alfa permite obtener "pinceles" de alta calidad.
+
+
+Cómo Hacer PNGs
+---------------
+  La siguiente es una muy breve lista de algunas formas de crear PNGs o
+  convertir imágenes existentes a PNG.
+
+
+  Usuarios de Linux/Unix
+  ----------------------
+    The GIMP
+    --------
+      La mejor herramienta con qué crear imágenes PNG para usar en Tux Paint
+      es el "GNU Image Manipulation Program" (o simplemente "el GIMP"), un
+      programa intercativo de dibujo y edición fotográfica de alta calidad
+      de Código Abierto.
+
+      Probablemente ya esté instalado en tu sistema Linux.  Si no fuera así,
+      es casi seguro que esté para instalar en el CD de instalación o en el
+      sitio de descargas de tu distribución.  O de lo contrario en:
+
+        http://www.gimp.org/
+
+
+    Krita
+    -----
+      Krita es una aplicación de pintura y edición de imágenes para KOffice.
+
+        http://koffice.kde.org/krita/
+
+
+   NetPBM
+    ------
+      Las herramientas Portable Bitmap (conocidas en conjunto como "NetPBM")
+      son una colección herramientas de línea-de-comandos de Código Abierto
+      que convierten a y desde varios formatos, incluyendo: GIF, TIFF, BMP,
+      PNG y muchos más.
+
+      NOTA: Los formatos de NetPBM (Portable Bitmap: PBM,
+      Portable Greymap: PGM, Portable Pixmap: PPM y el abarcalo todo
+      Portable Any Map: PNM) no soportan alfa, ¡por lo tanto cualquier
+      información de transparencia (p.ej.: de una GIF) se perderá!
+      ¡Mejor usa The GIMP!
+
+      Probablemente ya esté instalado en tu sistema Linux.  Si no fuera así,
+      es casi seguro que esté para instalar en el CD de instalación o en el
+      sitio de descargas de tu distribución.  O de lo contrario en:
+
+        http://netpbm.sourceforge.net/
+
+
+    cjpeg/djpeg
+    -----------
+      Los programas de línea-de-comando "cjpeg" y "djpeg" convierten entre
+      el formato Portable Any Map (PNM) de NetPBM y JPEGs.
+
+      Probablemente ya esté instalado en tu sistema Linux.
+      (En Debian, está disponible en el paquete "libjpeg-progs".)
+      Si no fuera así, es casi seguro que esté para instalar en el CD
+      de instalación o en el sitio de descargas de tu distribución.
+      O de lo contrario en:
+
+        ftp://ftp.uu.net/graphics/jpeg/
+
+
+  Usuarios de Windows
+  -------------------
+    Canvas (Deneba)
+      http://www.deneba.com/products/canvas8/default2.html
+
+    CorelDRAW (Corel)
+      http://www.corel.com/
+
+    Fireworks (Macromedia)
+      http://macromedia.com/software/fireworks/
+      
+    Illustrator (Adobe)
+      http://www.adobe.com/products/illustrator/main.html
+      
+    Paint Shop Pro (Jasc)
+      http://www.jasc.com/products/psp/
+      
+    Photoshop (Adobe)
+      http://www.adobe.com/products/photoshop/main.html
+
+
+  Usuarios de Macintosh
+  ---------------------
+    Canvas (Deneba)
+      http://www.deneba.com/products/canvas8/default2.html
+
+    CorelDRAW (Corel)
+      http://www.corel.com/
+
+    Fireworks (Macromedia)
+      http://macromedia.com/software/fireworks/
+
+    GraphicConverter (Lemke Software)
+      http://www.lemkesoft.de/us_gcabout.html
+
+    Illustrator (Adobe)
+      http://www.adobe.com/products/illustrator/main.html
+      
+    Photoshop (Adobe)
+      http://www.adobe.com/products/photoshop/main.html
+
+
+Más Información
+---------------
+  En el sitio libPNG hay una lista de editores y conversores de imagen que
+  soportan el formato PNG:
+
+    http://www.libpng.org/pub/png/pngaped.html
+    http://www.libpng.org/pub/png/pngapcv.html
+

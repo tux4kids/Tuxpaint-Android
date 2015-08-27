@@ -1,0 +1,99 @@
+/* config.h.in.  Handwritten for Windows compilation with MSVC.  */
+
+/*
+ * This file is part of The Croco Library
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of version 2.1 of the
+ * GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the
+ * GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
+ *
+ * Author: Fan, Chun-wei
+ * See COPYRIGHTS file for copyright information.
+ */
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+/*#undef HAVE_DLFCN_H*/
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#ifndef _MSC_VER
+#define HAVE_INTTYPES_H 1
+#endif
+
+/* Define to 1 if you have the <memory.h> header file. */
+#define HAVE_MEMORY_H 1
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#if (!defined(_MSC_VER) || (_MSC_VER >= 1600))
+#define HAVE_STDINT_H 1
+#endif
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#define HAVE_STDLIB_H 1
+
+/* Define to 1 if you have the <strings.h> header file. */
+#ifndef _MSC_VER
+#define HAVE_STRINGS_H 1
+#endif
+
+/* Define to 1 if you have the <string.h> header file. */
+#define HAVE_STRING_H 1
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#define HAVE_SYS_STAT_H 1
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#define HAVE_SYS_TYPES_H 1
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#ifndef _MSC_VER
+#define HAVE_UNISTD_H 1
+#endif
+
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#define LT_OBJDIR ".libs/"
+
+/* Name of package */
+#define PACKAGE "libcroco"
+
+/* Define to the address where bug reports for this package should be sent. */
+#define PACKAGE_BUGREPORT "http://bugzilla.gnome.org/enter_bug.cgi?product=libcroco"
+
+/* Define to the full name of this package. */
+#define PACKAGE_NAME "libcroco"
+
+/* Define to the full name and version of this package. */
+#define PACKAGE_STRING "libcroco @LIBCROCO_VERSION@"
+
+/* Define to the one symbol short name of this package. */
+#define PACKAGE_TARNAME "libcroco"
+
+/* Define to the home page for this package. */
+#define PACKAGE_URL ""
+
+/* Define to the version of this package. */
+#define PACKAGE_VERSION "@LIBCROCO_VERSION@"
+
+/* Define to 1 if the C compiler supports function prototypes. */
+#define PROTOTYPES 1
+
+/* Define to 1 if you have the ANSI C header files. */
+#define STDC_HEADERS 1
+
+/* Version number of package */
+#define VERSION "@LIBCROCO_VERSION@"
+
+/* Define like PROTOTYPES; this can be used by system headers. */
+#define __PROTOTYPES 1

@@ -1,0 +1,288 @@
+INSTALLERING.txt for Tux Paint
+
+Tux Paint - eit enkelt teikneprogram for dei yngste.
+
+Copyright 2002 Bill Kendrick
+bill@newbreedsoftware.com
+http://www.newbreedsoftware.com/tuxpaint/
+
+27. juli 2002 - 5. november 2002
+
+
+SYSTEMKRAV
+----------
+  Windows
+  -------
+    Windows-versjonen av Tux Paint inneheld alle dei nødvendige
+    bibliotekfilene (i «.DLL»-format), så du treng ikkje lasta
+    ned noko meir.
+
+  libSDL
+  ------
+    Tux Paint brukar «Simple DirectMedia Layer Library» (libSDL),
+    som er eit multimedieprogrammeringsbibliotek tilgjengeleg som
+    open kjeldekode under «GNU Lesser General Public License» (LGPL).
+
+    Tux Paint treng òg fleire SDL-hjelpebibliotek:
+    SDL_Image (for grafikk), SDL_TTF (for skriftstøtte) og
+    SDL_Mixer (valfritt - for lydeffektar).
+
+    Linux/Unix
+    ----------
+      Kjeldekoden og RPM- og Debian-pakkar av SDL-biblioteka er tilgjengeleg.
+      Du kan lasta ned alle filene frå:
+
+        libSDL:      http://www.libsdl.org/
+        SDL_Image:   http://www.libsdl.org/projects/SDL_image/
+        SDL_TTF:     http://www.libsdl.org/projects/SDL_ttf/
+        SDL_Mixer:   http://www.libsdl.org/projects/SDL_mixer/ (valfritt)
+
+      Dei følgjer òg ofte med Linux-distribusjonar (enten på
+      installasjons-CD-en eller gjennom pakkehandteringsprogramvare,
+      som «apt-get» i Debian).
+
+      Merk: Sørg for å installera «-devel»-utgåvene av pakkane du installerer,
+      i tillegg til standardutgåvene. Installer for eksempel både
+      «SDL-1.2.4.rpm» og «SDL-1.2.4-devel.rpm».
+
+  Andre bibliotek
+  ---------------
+    Tux Paint brukar òg fleire andre frie LGPL-baserte bibliotek.
+    Dei er vanlegvis allereie installert under Linux, eller enkelet
+    tilgjengeleg frå distribusjonen du brukar.
+
+    libPNG
+    ------
+      Tux Paint brukar PNG-formatet («Portable Network Graphics») for
+      grafikkfiler. libPNG må vera installert for at SDL_image skal
+      fungera.
+
+        http://www.libpng.org/pub/png/libpng.html
+
+    FreeType2
+    ---------
+      Tux Paint brukar skrifter i TTF-format («TrueType») for å
+      skriva tekst.
+      SDL_ttf treng FreeType2-biblioteket.
+
+        http://www.freetype.org/
+
+    gettext
+    -------
+      Tux Paint brukar lokaleinnstillingane saman med gettext-biblioteket
+      for å visa brukargrensesnittet på fleire språk. Du må ha gettext-
+      biblioteket installert.
+
+        http://www.gnu.org/software/gettext/
+
+    NetPBM-verktøya (valfritt)
+    --------------------------
+      NetPBM-verktøya blir brukt for utskrift under Linux og Unix.
+      (Tux Paint lagar eit PNG-bilete, som så blir konvertert til
+      PostScript-format ved hjelp av kommandolinjeprogramma pngtopnm
+      og pnmtops.)
+
+        http://netpbm.sourceforge.net/
+
+
+Kompilering og installering
+---------------------------
+  Då Tux Paint er gjeven ut under «GNU General Public License» (GPL)
+  (sjå «COPYING.txt» for meir informasjon), følgjer kjeldekoden med.
+
+  Windows
+  -------
+    Kompilering
+    -----------
+      Tux Paint kjem ferdigkompliert for Windows, så du slepp å kompilera
+      programmet på eiga hand. [Det vil komma informasjon om kompilering
+      på Windows her - med tid og stunder. I mellomtida får du prøva å
+      klara deg på sjølv.]
+
+    Installering
+    ------------
+      Køyr installasjonsfila («.exe»-fila) og følg instruksjonane.
+
+      Først må du godta lisensen. (Det er «GNU General Public License» (GPL),
+      som òg er tilgjengeleg i «COPYING.txt».)
+
+      Du blir så spurt om du vil installera snarvegar til Tux Paint i
+      Start-menyen og på skrivebordet. (Dette blir gjort som standard.)
+
+      Så må du velja kor du vil leggja Tux Paint. Standardmappa er grei,
+      så lenge du har nok diskplass.
+
+      Til slutt trykkjer du berre på «Install» for å installera programmet!
+
+      Endra på innstillingane frå snarvegen
+      -------------------------------------
+      Høgreklikk på Tux Paint-snarvegen, og vel «Egenskapar» nedst frå
+      menyen som dukkar opp.
+
+      Sørg for at «Snarvei»-fanen er valt i dialogvindauget, sjå på
+      «Målmappe»-feltet. Her skal det stå noko liknande:
+
+          C:\Programfiler\TuxPaint\TuxPaint.exe
+
+      Du kan no leggja til kommandolinjeval som blir tatt i
+      bruk når du brukar ikonet.
+
+      Eksempel: Viss du vil køyra programmet i fullskjerm, med enkle
+      figurar (utan rotasjon) og på nynorsk, legg du til vala for dette
+      etter «TuxPaint.exe»:
+
+          C:\Programfiler\TuxPaint\TuxPaint.exe -f -s --lang nynorsk
+
+      (Sjå «LESMEG.txt» for ei oversikt over kommandolinjevala du kan bruka.)
+
+      Viss du skrive noko galt, eller all teksten forsvinn, kan du angra
+      med «Ctrl + Z», eller bruka «Escape»-tasten til å lukka dialogvindauget
+      utan å lagra endringane (med mindre du har trykt på «Bruk»-knappen!)
+
+      Når du er ferdig, trykkjer du «OK».
+
+      Viss noko går galt
+      ------------------
+      Viss ingenting skjer når du brukar snarvegen, er det sannsynlegvis
+      fordi nokre av kommandolinjevala er feil. Opna eit Utforsker-vindauge
+      som før, og leit etter ei fil som heiter «stderr.txt» i mappa der
+      Tux Paint-programmet ligg.
+
+      Denne fila inneheld informasjon om kva som gjekk galt. Vanlegvis
+      er berre store bokstavar når du skulle brukt små, eller ein
+      manglande bindestrek («-»).
+
+
+  Linux/Unix
+  ----------
+    Kompilering
+    -----------
+      Merk: Tux Paint støttar ikkje autoconf/automake, så det finst
+      ingen «./configure»-skript du kan køyra. Men kompileringa skal
+      uansett gå lett, så lenge alle dei nødvendige tilleggsbiblioteka
+      er installerte.
+
+      Skriv følgjande frå kommandolinja for kompilera programmet:
+
+        $ make
+
+    Slå av lydstøtta ved kompilering
+    --------------------------------
+      Viss du ikkje har noko lydkort, eller føretrekkjer å bruka programmet
+      utan lyd (og utan SDL-mixer-biblioteket), kan du køyra «make» med
+      målet «nosound»:
+
+        $ make nosound
+
+
+    Ved feil
+    --------
+      Viss du opplever feil ved kompileringa, bør du sjekka at du har alle
+      dei nødvendige tilleggsbiblioteka installert. Om du brukar ferdigpakka
+      versjonar av biblioteka (som RPM-filer under RedHat og DEB-filer
+      under Debian), må du sørgja for å ha tilhørande «-dev»- eller «-devel»-
+      pakkar òg. Elles kan du ikkje kompilera Tux Paint (eller andre program)
+      frå kjeldekoden.
+
+
+    Installering
+    ------------
+      Viss ingen feil har oppstått, kan du no installera programmet på
+      systemet. Som standard må dette gjerast som rotbrukar («superuser»).
+      Byt til rotbrukar med kommandoen:
+
+        $ su
+
+      Skriv så inn passordet. Du er no rotbrukar (med ledeteksten «#»). Du
+      kan så skriva følgjande for å installera programmet og datafilene:
+
+        # make install
+
+      Til slutt bør du bytta tilbake til vanleg brukar:
+
+        # exit
+
+
+      Merk: Som standard blir køyrefila «tuxpaint» lagt i katalogen
+      «/usr/local/bin/». Datafilene (bilete, lydeffektar og liknande)
+      blir lagt i katalogen «/usr/local/share/tuxpaint/».
+
+
+      Velja filplassering
+      -------------------
+        Du kan velja kor filene skal leggjast ved å bruka «PREFIX»-
+        variablane i «Makefile». «PREFIX» er grunnkatalogen som alle
+        filene blir lagt under, og er som standard «/usr/local».
+
+        Andre variablar
+        ---------------
+          BIN_PREFIX
+            Katalogen til køyrefila «tuxpaint».
+            (Standard: «$(PREFIX)/bin», altså «/usr/local/bin»)
+
+          DATA_PREFIX
+            Katalogen til datafilene (lydeffektar, grafikk, penslar,
+            stempel og skrifter).
+            (Standard: «$(PREFIX)/share/tuxpaint»)
+
+          DOC_PREFIX
+            Katalogen til dokumentasjonskatalogen («docs»-katalogen).
+            (Standard: «$(PREFIX)/share/doc/tuxpaint»)
+
+          MAN_PREFIX
+            Katalogen til «man»-sida for Tux Paint.
+            (Standard: «$(PREFIX)/share/man»)
+
+          ICON_PREFIX                      $(PREFIX)/share/pixmaps
+          X11_ICON_PREFIX                  $(PREFIX)/X11R6/include/X11/pixmaps
+          GNOME_PREFIX                     $(PREFIX)/share/gnome/apps/Graphics
+          KDE_PREFIX                       $(PREFIX)/share/applnk/Graphics
+            Katalogen til ikona og programstartarane (for GNOME og KDE).
+
+          LOCALE_PREFIX
+            Katalogen til omsetjingsfilene for Tux Paint.
+            (Standard: «$(PREFIX)/share/locale/»)
+            (Filene blir lagt i eigne katalogar for kvart lokale, i
+            «LC_MESSAGES» under lokalekatalogane, som «nn» for
+            nynorskomsetjinga.)
+
+
+Avinstallering
+--------------
+  Windows
+  -------
+    Viss du installerte snarvegane i Start-menyen (standard), går du berre
+    til «TuxPaint»-mappa og vel «Uninstall». Det dukkar opp eit dialogvindauge
+    som ber deg stadfesta at du vil avinstallera Tux Paint. Viss du er sikker
+    på at du vil fjerna programmet, trykkjer du på «Uninstall»-knappen.
+
+    Når avinstalleringa er fullført, trykkjer du på «Close»-knappen.
+
+    Du kan òg bruka oppføringa «TuxPaint (remove only)» i «Legg til / fjern
+    programmer» i «Kontrollpanel».
+
+    Merk: Då teikningar blir lagra i same mappe som Tux Paint-programmet er
+    installert i, blir ikkje denne mappa og «userdata»-undermappa fjerna.
+
+
+  Linux
+  -----
+    Du kan bruka eit «Makefile»-mål i kjeldefilkatalogen (der du
+    kompilerte Tux Paint) til å avinstallera programmet.
+    Som standard må du gjera dette som rotbrukar («superuser»).
+    (Sjå installasjonshjelpen ovanfor for meir informasjon.)
+
+    Byt til rotbrukar med kommandoen:
+
+      $ su
+
+    Skriv så inn passordet for rotbrukaren. Du skal no vera logga
+    inn som rotbrukar (med ledeteksten «#»). For å avinstallera
+    programmet med datafilene (standardstempla blir òg fjerna viss
+    dei finst), skriv du:
+
+      # make uninstall
+
+    Til slutt bør du logga ut og tilbake til vanleg brukar:
+
+      # exit

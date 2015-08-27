@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi" xmlns:dx="http://tempuri.org/2003/01/dx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/wix/2003/01/wi
+C:\bin\wix-binaries\doc\wix.xsd">
+	<Product Language="1033" Id="09E121A6-5EE4-47F0-9458-6D56E8AC56FE" Version="@VERSION@" Name="SDL_Pango testbench" Manufacturer="NAKAMURA Ken'ichi" UpgradeCode="F4219209-E0FD-415C-936B-F57E5801F2BA">
+		<Package Id="????????-????-????-????-????????????" Description="SDL_Pango testbench" Comments="A sample of MSI file which use SDL_Pango-@VERSION@.msm" Manufacturer="NAKAMURA Ken'ichi" InstallerVersion="200" Languages="1033" Compressed="yes"/>
+		<Media Id="1" Cabinet="product.cab" EmbedCab="yes"/>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Component Id="testbenchComponent" Guid="4C0EACD9-D08B-4559-A920-E057E5E5BE39">
+				<File Id="testbenchexe" Name="testbenc.exe" LongName="testbench.exe" DiskId="1" src="..\VisualC2003\testbench\Release\testbench.exe" Vital="yes" KeyPath="yes"/>
+				<File Id="markuptxt" Name="markup.txt" LongName="markup.txt" src="..\test\markup.txt" DiskId="1"/>
+				<Shortcut Id="testbenchshortcut" Directory="ProgramMenuFolder" Name="testbenc" Target="testbenchFeature" LongName="SDL_Pango testbench" Arguments="markup.txt" Show="normal" WorkingDirectory="TARGETDIR" Icon="stubico"/>
+			</Component>
+			<Component Id="SDLComponent" Guid="B1D6563D-FAB4-4A0B-ABC2-C4EE24FE433C">
+				<File Id="sdldll" Name="sdl.dll" LongName="SDL.dll" src="SDL.dll" DiskId="1"/>
+			</Component>
+			<Merge Id="SDL_PangoModule" Language="1033" DiskId="1" src="SDL_Pango-@VERSION@.msm"/>
+			<Merge Id="VC2003Module" Language="1033" DiskId="1" src="C:\Program Files\Common Files\Merge Modules\VC_User_CRT71_RTL_X86_---.msm"/>
+			<Directory Id="ProgramMenuFolder" Name="."/>
+		</Directory>
+		<Feature Id="testbenchFeature" Level="1" ConfigurableDirectory="TARGETDIR">
+			<ComponentRef Id="testbenchComponent"/>
+			<ComponentRef Id="SDLComponent"/>
+			<MergeRef Id="SDL_PangoModule"/>
+			<MergeRef Id="VC2003Module"/>
+		</Feature>
+		<FragmentRef Id="UIFragment"/>
+		<Icon Id="stubico" src="bitmap\stub.ico"/>
+	</Product>
+</Wix>

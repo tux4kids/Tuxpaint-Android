@@ -1,0 +1,1102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-input</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-fonts.html" title="cr-fonts">
+<link rel="next" href="libcroco-cr-num.html" title="cr-num">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-fonts.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-num.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-input.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-input.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-input"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-input.top_of_page"></a>cr-input</span></h2>
+<p>cr-input</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-input.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput">CRInput</a>;
+struct              <a class="link" href="libcroco-cr-input.html#CRInputPos" title="struct CRInputPos">CRInputPos</a>;
+                    <a class="link" href="libcroco-cr-input.html#CRInputPriv" title="CRInputPriv">CRInputPriv</a>;
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-consume-char" title="cr_input_consume_char ()">cr_input_consume_char</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> a_char</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-consume-chars" title="cr_input_consume_chars ()">cr_input_consume_chars</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> a_char</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> *a_nb_char</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-consume-white-spaces" title="cr_input_consume_white_spaces ()">cr_input_consume_white_spaces</a>       (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> *a_nb_chars</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-input.html#cr-input-destroy" title="cr_input_destroy ()">cr_input_destroy</a>                    (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-end-of-input" title="cr_input_end_of_input ()">cr_input_end_of_input</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_end_of_input</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            <a class="link" href="libcroco-cr-input.html#cr-input-get-byte-addr" title="cr_input_get_byte_addr ()">cr_input_get_byte_addr</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_offset</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-get-column-num" title="cr_input_get_column_num ()">cr_input_get_column_num</a>             (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> *a_col</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-get-cur-byte-addr" title="cr_input_get_cur_byte_addr ()">cr_input_get_cur_byte_addr</a>          (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> **a_offset</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-get-cur-index" title="cr_input_get_cur_index ()">cr_input_get_cur_index</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> *a_index</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-get-cur-pos" title="cr_input_get_cur_pos ()">cr_input_get_cur_pos</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInputPos" title="struct CRInputPos"><span class="type">CRInputPos</span></a> *a_pos</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-get-end-of-file" title="cr_input_get_end_of_file ()">cr_input_get_end_of_file</a>            (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_eof</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-get-end-of-line" title="cr_input_get_end_of_line ()">cr_input_get_end_of_line</a>            (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_eol</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-get-line-num" title="cr_input_get_line_num ()">cr_input_get_line_num</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> *a_line_num</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="returnvalue">glong</span></a>               <a class="link" href="libcroco-cr-input.html#cr-input-get-nb-bytes-left" title="cr_input_get_nb_bytes_left ()">cr_input_get_nb_bytes_left</a>          (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-get-parsing-location" title="cr_input_get_parsing_location ()">cr_input_get_parsing_location</a>       (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_loc</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-increment-col-num" title="cr_input_increment_col_num ()">cr_input_increment_col_num</a>          (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> a_increment</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-increment-line-num" title="cr_input_increment_line_num ()">cr_input_increment_line_num</a>         (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> a_increment</code></em>);
+<a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="returnvalue">CRInput</span></a> *           <a class="link" href="libcroco-cr-input.html#cr-input-new-from-buf" title="cr_input_new_from_buf ()">cr_input_new_from_buf</a>               (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_free_buf</code></em>);
+<a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="returnvalue">CRInput</span></a> *           <a class="link" href="libcroco-cr-input.html#cr-input-new-from-uri" title="cr_input_new_from_uri ()">cr_input_new_from_uri</a>               (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *a_file_uri</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-peek-byte" title="cr_input_peek_byte ()">cr_input_peek_byte</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRSeekPos</span> a_origin</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_offset</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_byte</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a>              <a class="link" href="libcroco-cr-input.html#cr-input-peek-byte2" title="cr_input_peek_byte2 ()">cr_input_peek_byte2</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_offset</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_eof</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-peek-char" title="cr_input_peek_char ()">cr_input_peek_char</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> *a_char</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-read-byte" title="cr_input_read_byte ()">cr_input_read_byte</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_byte</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-read-char" title="cr_input_read_char ()">cr_input_read_char</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> *a_char</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-input.html#cr-input-ref" title="cr_input_ref ()">cr_input_ref</a>                        (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-seek-index" title="cr_input_seek_index ()">cr_input_seek_index</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRSeekPos</span> a_origin</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> a_pos</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-set-column-num" title="cr_input_set_column_num ()">cr_input_set_column_num</a>             (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> a_col</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-set-cur-index" title="cr_input_set_cur_index ()">cr_input_set_cur_index</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> a_index</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-set-cur-pos" title="cr_input_set_cur_pos ()">cr_input_set_cur_pos</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInputPos" title="struct CRInputPos"><span class="type">CRInputPos</span></a> const *a_pos</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-set-end-of-file" title="cr_input_set_end_of_file ()">cr_input_set_end_of_file</a>            (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_eof</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-set-end-of-line" title="cr_input_set_end_of_line ()">cr_input_set_end_of_line</a>            (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_eol</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-input.html#cr-input-set-line-num" title="cr_input_set_line_num ()">cr_input_set_line_num</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> a_line_num</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libcroco-cr-input.html#cr-input-unref" title="cr_input_unref ()">cr_input_unref</a>                      (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-input.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-input.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRInput"></a><h3>struct CRInput</h3>
+<pre class="programlisting">struct CRInput {
+        CRInputPriv *priv ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CRInputPos"></a><h3>struct CRInputPos</h3>
+<pre class="programlisting">struct CRInputPos {
+        glong line ;
+        glong col ;
+        gboolean end_of_file ;
+        gboolean end_of_line ;
+        glong next_byte_index ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CRInputPriv"></a><h3>CRInputPriv</h3>
+<pre class="programlisting">typedef struct _CRInputPriv CRInputPriv;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-consume-char"></a><h3>cr_input_consume_char ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_consume_char               (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> a_char</code></em>);</pre>
+<p>
+Consumes the next character of the input stream if
+and only if that character equals a_char.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the this pointer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_char</code></em> :</span></p></td>
+<td>the character to consume. If set to zero,
+consumes any character.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, CR_PARSING_ERROR if
+next char is different from a_char, an other error code otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-consume-chars"></a><h3>cr_input_consume_chars ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_consume_chars              (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> a_char</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> *a_nb_char</code></em>);</pre>
+<p>
+Consumes up to a_nb_char occurences of the next contiguous characters 
+which equal a_char. Note that the next character of the input stream
+*MUST* equal a_char to trigger the consumption, or else, the error
+code CR_PARSING_ERROR is returned.
+If the number of contiguous characters that equals a_char is less than
+a_nb_char, then this function consumes all the characters it can consume.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the this pointer of the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_char</code></em> :</span></p></td>
+<td>the character to consume.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_nb_char</code></em> :</span></p></td>
+<td>in/out parameter. The number of characters to consume.
+If set to a negative value, the function will consume all the occurences
+of a_char found.
+After return, if the return value equals CR_OK, this variable contains
+the number of characters actually consumed.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK if at least one character has been consumed, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-consume-white-spaces"></a><h3>cr_input_consume_white_spaces ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_consume_white_spaces       (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> *a_nb_chars</code></em>);</pre>
+<p>
+Same as <a class="link" href="libcroco-cr-input.html#cr-input-consume-chars" title="cr_input_consume_chars ()"><code class="function">cr_input_consume_chars()</code></a> but this one consumes white
+spaces.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_nb_chars</code></em> :</span></p></td>
+<td>in/out parameter. The number of white spaces to
+consume. After return, holds the number of white spaces actually consumed.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-destroy"></a><h3>cr_input_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_input_destroy                    (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>);</pre>
+<p>
+The destructor of the <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> class.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-end-of-input"></a><h3>cr_input_end_of_input ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_end_of_input               (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_end_of_input</code></em>);</pre>
+<p>
+Tests wether the current instance of
+<a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> has reached its input buffer.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_end_of_input</code></em> :</span></p></td>
+<td>out parameter. Is set to TRUE if
+the current instance has reached the end of its input buffer,
+FALSE otherwise.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.
+Note that all the out parameters of this method are valid if
+and only if this method returns CR_OK.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-get-byte-addr"></a><h3>cr_input_get_byte_addr ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            cr_input_get_byte_addr              (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_offset</code></em>);</pre>
+<p>
+Gets the memory address of the byte located at a given offset
+in the input stream.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_offset</code></em> :</span></p></td>
+<td>the offset of the byte in the input stream starting
+from the beginning of the stream.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the address, otherwise NULL if an error occured.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-get-column-num"></a><h3>cr_input_get_column_num ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_get_column_num             (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> *a_col</code></em>);</pre>
+<p>
+Getter of the current column number.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_col</code></em> :</span></p></td>
+<td>out parameter</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-get-cur-byte-addr"></a><h3>cr_input_get_cur_byte_addr ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_get_cur_byte_addr          (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> **a_offset</code></em>);</pre>
+<p>
+Gets the address of the current character pointer.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current input stream</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_offset</code></em> :</span></p></td>
+<td>out parameter. The returned address.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-get-cur-index"></a><h3>cr_input_get_cur_index ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_get_cur_index              (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> *a_index</code></em>);</pre>
+<p>
+Getter of the next byte index. 
+It actually returns the index of the
+next byte to be read.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of
+<a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_index</code></em> :</span></p></td>
+<td>out parameter. The returned index.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-get-cur-pos"></a><h3>cr_input_get_cur_pos ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_get_cur_pos                (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInputPos" title="struct CRInputPos"><span class="type">CRInputPos</span></a> *a_pos</code></em>);</pre>
+<p>
+Gets the position of the "current byte index" which
+is basically the position of the last returned byte in the
+input stream.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_pos</code></em> :</span></p></td>
+<td>out parameter. The returned position.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion. Otherwise,
+CR_BAD_PARAMETER_ERROR if at least one of the arguments is invalid.
+CR_START_OF_INPUT if no call to either <a class="link" href="libcroco-cr-input.html#cr-input-read-byte" title="cr_input_read_byte ()"><code class="function">cr_input_read_byte()</code></a>
+or <a class="link" href="libcroco-cr-input.html#cr-input-seek-index" title="cr_input_seek_index ()"><code class="function">cr_input_seek_index()</code></a> have been issued before calling
+<a class="link" href="libcroco-cr-input.html#cr-input-get-cur-pos" title="cr_input_get_cur_pos ()"><code class="function">cr_input_get_cur_pos()</code></a>
+Note that the out parameters of this function are valid if and only if this
+function returns CR_OK.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-get-end-of-file"></a><h3>cr_input_get_end_of_file ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_get_end_of_file            (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_eof</code></em>);</pre>
+<p>
+Gets the end of file flag.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_eof</code></em> :</span></p></td>
+<td>out parameter the place to put the end of
+file flag.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-get-end-of-line"></a><h3>cr_input_get_end_of_line ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_get_end_of_line            (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_eol</code></em>);</pre>
+<p>
+Gets the end of line flag of the current input.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_eol</code></em> :</span></p></td>
+<td>out parameter. The place to put
+the returned flag</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-get-line-num"></a><h3>cr_input_get_line_num ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_get_line_num               (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> *a_line_num</code></em>);</pre>
+<p>
+Getter of the current line number.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_line_num</code></em> :</span></p></td>
+<td>the returned line number.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-get-nb-bytes-left"></a><h3>cr_input_get_nb_bytes_left ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="returnvalue">glong</span></a>               cr_input_get_nb_bytes_left          (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the number of bytes left in the input stream
+before the end, -1 in case of error.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-get-parsing-location"></a><h3>cr_input_get_parsing_location ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_get_parsing_location       (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_loc</code></em>);</pre>
+<p>
+Gets the current parsing location.
+The Parsing location is a public datastructure that
+represents the current line/column/byte offset/ in the input
+stream.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_loc</code></em> :</span></p></td>
+<td>the set parsing location.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error
+code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-increment-col-num"></a><h3>cr_input_increment_col_num ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_increment_col_num          (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> a_increment</code></em>);</pre>
+<p>
+Increments the current column number.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_increment</code></em> :</span></p></td>
+<td>the increment to add to the column number.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-increment-line-num"></a><h3>cr_input_increment_line_num ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_increment_line_num         (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> a_increment</code></em>);</pre>
+<p>
+Increments the current line number.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_increment</code></em> :</span></p></td>
+<td>the increment to add to the line number.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-new-from-buf"></a><h3>cr_input_new_from_buf ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="returnvalue">CRInput</span></a> *           cr_input_new_from_buf               (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_free_buf</code></em>);</pre>
+<p>
+Creates a new input stream from a memory buffer.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_buf</code></em> :</span></p></td>
+<td>the memory buffer to create the input stream from.
+The <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> keeps this pointer so user should not free it !.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_len</code></em> :</span></p></td>
+<td>the size of the input buffer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the buffer's encoding.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_free_buf</code></em> :</span></p></td>
+<td>if set to TRUE, this a_buf will be freed
+at the destruction of this instance. If set to false, it is up
+to the caller to free it.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly built instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-new-from-uri"></a><h3>cr_input_new_from_uri ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="returnvalue">CRInput</span></a> *           cr_input_new_from_uri               (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *a_file_uri</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);</pre>
+<p>
+Creates a new input stream from
+a file.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_file_uri</code></em> :</span></p></td>
+<td>the file to create *the input stream from.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the encoding of the file *to create the input from.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly created input stream if
+this method could read the file and create it,
+NULL otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-peek-byte"></a><h3>cr_input_peek_byte ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_peek_byte                  (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRSeekPos</span> a_origin</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_offset</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_byte</code></em>);</pre>
+<p>
+Gets a byte from the input stream,
+starting from the current position in the input stream.
+Unlike <code class="function">cr_input_peek_next_byte()</code> this method
+does not update the state of the current input stream.
+Subsequent calls to cr_input_peek_byte with the same arguments
+will return the same byte.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_origin</code></em> :</span></p></td>
+<td>the origin to consider in the calculation
+of the position of the byte to peek.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_offset</code></em> :</span></p></td>
+<td>the offset of the byte to peek, starting from
+the origin specified by a_origin.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_byte</code></em> :</span></p></td>
+<td>out parameter the peeked byte.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion or,
+CR_BAD_PARAM_ERROR if at least one of the parameters is invalid;
+CR_OUT_OF_BOUNDS_ERROR if the indexed byte is out of bounds.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-peek-byte2"></a><h3>cr_input_peek_byte2 ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a>              cr_input_peek_byte2                 (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_offset</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_eof</code></em>);</pre>
+<p>
+Same as <a class="link" href="libcroco-cr-input.html#cr-input-peek-byte" title="cr_input_peek_byte ()"><code class="function">cr_input_peek_byte()</code></a> but with a simplified
+interface.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current byte input stream.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_offset</code></em> :</span></p></td>
+<td>the offset of the byte to peek, starting
+from the current input position pointer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_eof</code></em> :</span></p></td>
+<td>out parameter. Is set to true is we reach end of
+stream. If set to NULL by the caller, this parameter is not taken
+in account.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the read byte or 0 if something bad happened.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-peek-char"></a><h3>cr_input_peek_char ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_peek_char                  (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> *a_char</code></em>);</pre>
+<p>
+Same as <a class="link" href="libcroco-cr-input.html#cr-input-read-char" title="cr_input_read_char ()"><code class="function">cr_input_read_char()</code></a> but does not update the
+internal state of the input stream. The next call
+to <a class="link" href="libcroco-cr-input.html#cr-input-peek-char" title="cr_input_peek_char ()"><code class="function">cr_input_peek_char()</code></a> or <a class="link" href="libcroco-cr-input.html#cr-input-read-char" title="cr_input_read_char ()"><code class="function">cr_input_read_char()</code></a> will thus
+return the same character as the current one.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_char</code></em> :</span></p></td>
+<td>out parameter. The returned character.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-read-byte"></a><h3>cr_input_read_byte ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_read_byte                  (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_byte</code></em>);</pre>
+<p>
+Gets the next byte of the input.
+Updates the state of the input so that
+the next invocation of this method  returns
+the next coming byte.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_byte</code></em> :</span></p></td>
+<td>out parameter the returned byte.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code
+otherwise. All the out parameters of this method are valid if
+and only if this method returns CR_OK.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-read-char"></a><h3>cr_input_read_char ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_read_char                  (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> *a_char</code></em>);</pre>
+<p>
+Reads an unicode character from the current instance of
+<a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of CRInput.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_char</code></em> :</span></p></td>
+<td>out parameter. The read character.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-ref"></a><h3>cr_input_ref ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_input_ref                        (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>);</pre>
+<p>
+Increments the reference count of the current
+instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-seek-index"></a><h3>cr_input_seek_index ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_seek_index                 (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRSeekPos</span> a_origin</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> a_pos</code></em>);</pre>
+<p>
+Sets the "current byte index" of the current instance
+of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>. Next call to <code class="function">cr_input_get_byte()</code> will return
+the byte next after the new "current byte index".
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_origin</code></em> :</span></p></td>
+<td>the origin to consider during the calculation
+of the absolute position of the new "current byte index".</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_pos</code></em> :</span></p></td>
+<td>the relative offset of the new "current byte index."
+This offset is relative to the origin a_origin.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion otherwise returns
+CR_BAD_PARAM_ERROR if at least one of the parameters is not valid
+or CR_OUT_BOUNDS_ERROR in case of error.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-set-column-num"></a><h3>cr_input_set_column_num ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_set_column_num             (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> a_col</code></em>);</pre>
+<p>
+Setter of the current column number.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_col</code></em> :</span></p></td>
+<td>the new column number.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-set-cur-index"></a><h3>cr_input_set_cur_index ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_set_cur_index              (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> a_index</code></em>);</pre>
+<p>
+Setter of the next byte index.
+It sets the index of the next byte to be read.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance
+of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> .</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_index</code></em> :</span></p></td>
+<td>the new index to set.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-set-cur-pos"></a><h3>cr_input_set_cur_pos ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_set_cur_pos                (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInputPos" title="struct CRInputPos"><span class="type">CRInputPos</span></a> const *a_pos</code></em>);</pre>
+<p>
+Sets the current position in the input stream.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of
+<a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_pos</code></em> :</span></p></td>
+<td>the new position.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-set-end-of-file"></a><h3>cr_input_set_end_of_file ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_set_end_of_file            (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_eof</code></em>);</pre>
+<p>
+Sets the end of file flag.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_eof</code></em> :</span></p></td>
+<td>the new end of file flag.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-set-end-of-line"></a><h3>cr_input_set_end_of_line ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_set_end_of_line            (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_eol</code></em>);</pre>
+<p>
+Sets the end of line flag.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_eol</code></em> :</span></p></td>
+<td>the new end of line flag.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-set-line-num"></a><h3>cr_input_set_line_num ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_input_set_line_num               (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"><span class="type">glong</span></a> a_line_num</code></em>);</pre>
+<p>
+Setter of the current line number.
+</p>
+<p>
+Return CR_OK upon successful completion, an error code otherwise.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_line_num</code></em> :</span></p></td>
+<td>the new line number.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-input-unref"></a><h3>cr_input_unref ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cr_input_unref                      (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_this</code></em>);</pre>
+<p>
+Decrements the reference count of this instance
+of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>. If the reference count goes down to
+zero, this instance is destroyed.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>TRUE if the instance of <a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> got destroyed, false otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

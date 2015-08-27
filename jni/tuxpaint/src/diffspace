@@ -1,0 +1,13 @@
+@@ -2680,7 +2692,11 @@ static void mainloop(void)
+         update_screen_rect(&r_tools);
+       }
+     }
+-       else
++    else if(event.type == SDL_TEXTINPUT ||
++           (  event.type == SDL_KEYDOWN &&
++              (  event.key.keysym.sym == SDLK_BACKSPACE ||
++                 event.key.keysym.sym == SDLK_RETURN  ||
++                 event.key.keysym.sym == SDLK_TAB)))
+        {
+          /* Handle key in text tool: */
+ 

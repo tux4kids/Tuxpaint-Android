@@ -1,0 +1,1043 @@
+GELESEN_MIR.txt für Tux Paint
+[ Übersetzt, "GOOGLE.COM" Sprachwerkzeuge verwendend. ]
+
+
+Tux Paint - ein einfaches zeichnendes Programm für Kinder.  
+
+Copyright 2002 durch Bill Kendrick
+bill@newbreedsoftware.com
+http://www.newbreedsoftware.com/tuxpaint/
+
+Juni 14, 2002 - September 23, 2002
+
+Über:
+-----
+  Tux Paint ist ein zeichnendes Programm für junge Kinder.
+  (Sagen, 3-10 Jahre alt.)  Sie wird hauptsächlich entwickelt,
+  um eine educational-/edutainmentnotwendigkeit am geöffneten
+  Betriebssystem Quell"Linux" zu füllen, aber ist- mit vielen anderen
+  Plattformen, einschließlich Windows, MacOS, BeOS, anderer Unixvarianten,
+  usw. kompatibel.  
+
+
+Lizenz:
+-------
+  Tux Paint ein geöffnetes Quellprojekt, freigegeben unter der
+  GNU-Öffentlichkeit Lizenz (GPL).  Er ist frei und das ' Quellenprogramm '
+  hinter dem Programm ist vorhanden.  (dieses läßt andere Eigenschaften
+  addieren, Wanzen zu reparieren, und Teile des Programms in ihrem eigenen
+  GPL'd zu benutzen öffnen Sie Quell-Software.)
+
+  Sehen Sie KOPIE.txt für das Ganztext der GPL-Lizenz.  
+
+Zielsetzungen:
+--------------
+  Einfach und Spaß
+  ----------------
+    Tux Paint wird bedeutet, um ein einfaches zeichnendes Programm für junge
+    Kinder zu sein.  Es wird nicht da ein universelles zeichnendes Werkzeug
+    bedeutet.  Zu verwenden WIRD bedeutet, um Spaß und einfach zu sein.
+    Stichhaltige Effekte und eine Karikaturbuchstabenhilfe informieren den
+    Benutzer was weitergeht, und halten sie unterhalten.  Es gibt auch
+    extra-large Karikatur-Artmäusezeigerformen.  
+
+  Dehnbarkeit
+  -----------
+    Tux Paint ist ausdehnbar.  Bürsten und "Gummistempel" Formen können
+    innen fallengelassen werden und ausgezogen werden.  Z.B. kann ein Lehrer
+    in eine Ansammlung Tierformen fallen und ihre Kursteilnehmer bitten, ein
+    Oekosystem zu zeichnen.  Jede Form kann einen Ton, der gespielt wird,
+    und Texttatsachen haben, die angezeigt werden, wenn das Kind die Form
+    vorwählt.  
+
+  Beweglichkeit
+  -------------
+    Tux Paint ist unter verschiedenen Computerplattformen beweglich:
+    Windows, Macintosh, Linux, usw..  Die Schnittstelle schaut dasselbe
+    unter ihnen alle.  Tux Paint läuft passend gut auf ältere Systeme
+    (wie ein Pentium 133) und kann errichtet werden, um auf langsame
+    Systeme besser zu laufen.  
+
+  Einfachheit
+  -----------
+    Es gibt keinen direkten Zugriff zu den zugrundeliegenden Verwicklungen
+    des Computers.  Das gegenwärtige Bild wird gehalten, wenn das Programm
+    beendigt, und wieder erscheint, wenn es wiederbegonnen wird.
+    Das Speichern von Bildern erfordert keine Notwendigkeit, Dateinamen
+    zu verursachen oder die Tastatur zu benutzen.  Das Öffnen eines Bildes
+    wird getan, indem man es von einer Ansammlung thumbnails vorwählt.  
+
+  Andere Unterlagen
+  -----------------
+    Andere Unterlagen, die mit Tux Paint umfaßt werden (in den "docs"
+    folder/directory) umfassen:  
+
+    AUTHORS.txt         - Liste der Autoren und der Mitwirkenden
+    CHANGES.txt         - Zusammenfassung von geändert zwischen Freigaben
+    KOPIE.txt           - kopierenlizenz (der GPL)
+    ANBRINGEN.txt       - Anweisungen für compiling/installing, wenn anwendbares
+    PNG.txt             - Anmerkungen über das Verursachen der
+                          PNG-Formatbilder für Gebrauch in Tux malen Sie
+    GELESEN_MIR.txt     - (diese Akte)
+    TODO.txt            - eine Liste der schwebenden Eigenschaften oder
+                          des Wanzenbenötigens geregelt
+
+
+Verwenden Der Tux Paint
+-----------------------
+  Gebäude Tux Paint
+  ------------------
+    Um Tux Paint von der Quelle zu kompilieren, beziehen Sie bitte sich auf
+    ANBRINGEN.txt.  
+
+  Laden Tux Paint
+  ---------------
+    Linux-/UnixcBenutzer
+    --------------------
+      Lassen Sie den folgenden Befehl an einer Oberteilaufforderung laufen
+      (z.B., "$"):
+
+        $ tuxpaint
+
+      Es ist auch möglich, eine Abschußrampe knöpfen zu lassen oder Ikone
+      (z.B. in GNOME oder in KDE).  Sehen Sie Unterlagen Ihres desktop Klimas
+      für Details...
+
+      Wenn irgendwelche Störungen auftreten, werden sie auf dem Anschluß
+      angezeigt ("stderr").  
+
+    WindowscBenutzer
+    ----------------
+      Einfach Doppeltklicken die "tuxpaint.exe-" Ikone im heft Tux Paint.
+
+      Wenn irgendwelche Störungen auftreten, werden sie in einer Akte
+      gespeichert, die "stderr.txt" im heft Tux Paint genannt wird.  
+
+      Sehen Sie "ANBRINGEN.txt" für Details über das Bilden eine
+      ' Kürzung' Ikone zur Tux Paint, die Sie leicht Befehl-Linienwahlen
+      einstellen läßt.  
+
+      Um Tux laufen zu lassen malen Sie und stellen Sie Befehl-Linienwahlen
+      direkt, Sie muß "tuxpaint.exe" von einem sofortigen Fenster MSDOS
+      laufen lassen zur Verfügung.  (sehen Sie "ANBRINGEN.txt" für Details.)
+
+    MacintoshcBenutzer
+    ------------------
+      Einfach Doppeltklicken die Farben"Ikone" Tux im Farbenheft Tux.
+
+      [ wie man Comamndlinienwahlen unter MacOS herausgibt?
+        Wahl-doppelt-Klicken?  ]
+
+
+  Wahlen
+  ------
+    KonfigurationscAkte
+    -------------------
+      Sie können eine einfache Konfigurationsakte für Tux Paint herstellen, 
+      der sie jede Zeit liest, die, Sie sie oben beginnen.  
+
+      Die Akte ist einfach eine normale Textakte, welche die Wahlen enthält,
+      die Sie ermöglicht wünschen:  
+
+        fullscreen=yes
+        --------------
+	  Lassen Sie das Programm im Modus des vollen Schirmes,
+	  anstatt in einem Fenster laufen.  
+
+        nosound=yes
+        -----------
+	  Sperren Sie stichhaltige Effekte.
+
+        noquit=yes
+        ----------
+	  Sperren Sie die "beendigte" Taste des Aufschirmes.
+	  (das Betätigen des "Schlüssel Entweichens" oder das Anklicken der
+	  Fensterendentaste arbeitet noch.)
+
+        noprint=yes
+        -----------
+	  Sperren Sie die druckeneigenschaft.  
+
+        printdelay=SEKUNDEN
+        -------------------
+	  Schränken Sie den Druck ein, damit der Druck nur einmal auftreten
+	  kann jedes SEKUNDEN-Sekunden.  
+
+        printcommand=BEFEHLSFOLGE 
+        -------------------------
+	  Verwenden Sie den BefehlscBefehl, eine PNG-Akte zu drucken.
+	  Wenn er nicht eingestellt wird, ist der Rückstellungsbefehl:  
+
+            pngtopnm | pnmtops | lpr
+
+          Welchen Bekehrten das PNG zu einem NetPBM ' bewegliches anymap ',
+	  dann das in eine Postskriptumakte umwandelt und schließlich das zum
+	  Drucker schickt mit dem "lpr" Befehl.  
+
+        simpleshapes=yes
+        ----------------
+	  Sperren Sie Umdrehungsmodus im Formwerkzeug.
+	  Klicken Sie, schleppen Sie, Freigabe ist alle, die erforderlich ist,
+	  eine Form zu zeichnen.  
+
+        uppercase=yes
+        -------------
+          Aller Text wird nur in Versalien übertragen (z.B., "Bürste" ist
+	  "BÜRSTE").  Nützlich für Kinder, die lesen können, aber wer nur
+	  Versalienbuchstaben bis jetzt erlernt haben.  
+
+        grab=yes
+        --------
+	  Tux Paint versucht, die Maus ' zu ergreifen ' und Tastatur,
+	  damit die Maus zum Fenster der Tux Paint begrenzt wird, und fast
+	  alle Tastatureingabe wird direkt zu ihm geführt.  Dieses ist
+	  nützlich, Betriebssystemtätigkeiten zu sperren, die den Benutzer
+	  aus dem einen Kreislauf durchmachenden Fenster der Tux Paint
+	  herausbekommen konnten [ Alt]-[Tab ], [ Ctrl]-[Escape ], usw..
+	  Besonders nützlich fullscreen innen Modus.  
+
+	nowheelmouse=yes
+	----------------
+	  Dieses sperrt Unterstützung für das Rad auf Mäusen, die es haben.
+	  (Normalerweise, scroll das Rad das Wählmenü auf dem Recht.)
+
+        saveover=yes
+        ------------
+	  Dieses sperrt die "außer über der alten Version...?"
+	  Aufforderung, wenn es eine vorhandene Akte speichert.
+	  Mit dieser Wahl wird die ältere Version immer durch die neue
+	  Version, automatisch ersetzt.  
+
+        saveover=new
+        ------------
+	  Dieses sperrt auch die "außer über der alten Version...?"
+	  Aufforderung, wenn es eine vorhandene Akte speichert.
+	  Diese Wahl jedoch speichert immer eine neue Akte, anstatt
+	  überschreibt die ältere Version.  
+
+        saveover=ask
+        ------------
+	  (diese Wahl ist überflüssig, da dieses die Rückstellung. ist.)
+	  Wenn man ein bestehendes Zeichnen speichert, werden Sie zuerst
+	  gefragt, ob man über der älteren Version oder nicht speichert.  
+
+
+      Benutzer Linux
+      --------------
+        Die Akte, die Sie herstellen sollten, wird ".tuxpaintrc" genannt
+	und sie sollte in Ihr Hauptverzeichnis gelegt werden.
+	(a.k.a. "~/.tuxpaintrc" oder "$$HOME/.tuxpaintrc")
+
+      WindowscBenutzer
+      ----------------
+        Die Akte, die Sie herstellen sollten, wird "tuxpaint.cfg" genannt
+	und sie sollte in Heft der Tux Paint gelegt werden.
+
+    Befehl-LiniencWahlen
+    --------------------
+      Wahlen können auf der Befehl-Linie auch herausgegeben werden,
+      wenn Sie Tux Paint beginnen.  
+
+        --fullscreen
+        --nosound
+        --noquit
+        --noprint
+        --printdelay=SEKUNDEN
+        --simpleshapes
+        --uppercase
+        --grab
+	--nowheelmouse
+        --saveover
+        --saveovernew
+        -------------
+	  Diese ermöglichen den Wahlen, die oben beschrieben werden.  
+
+        --windowed
+        --sound
+        --quit
+        --print
+        --printdelay=0
+        --complexshapes
+        --mixedcase
+        --dontgrab
+	--wheelmouse
+        --saveoverask
+        -------------
+	  Diese Wahlen können verwendet werden, um irgendwelche
+	  Einstellungen überzulaufen, die in der Konfigurationsakte
+	  gebildet werden.  (wenn die Wahl nicht in die Konfigurationsakte
+	  eingestellt wird, ist keine überlaufende Wahl. notwendig),  
+
+
+        --lang sprache 
+        --------------
+	  Lassen Sie Tux Paint in einer der gestützten Sprachen laufen.
+	  Die Wahlen, die umfassen vorhanden sind z.Z.:  
+
+          english
+          bokmal
+	  dutch
+	  finnish    suomi
+          french     francais
+          german     deutsch
+	  italian    italiano
+	  norwegian  nynorsk
+	  spanish    espanol
+	  swedish    svenska
+	  turkish
+
+
+        --locale locale
+        ---------------
+	  Lassen Sie Tux Paint in einer der Stützsprachen laufen.
+	  Sehen Sie "eine andere Sprache unten beschließen" für die
+	  localezeichenketten (z.B., "de_DE@euro" für Deutschen) um zu
+	  verwenden.  
+
+          (wenn Ihr locale bereits eingestellt wird, z.B. mit der "LANG-"
+	  Klimavariable, ist diese Wahl nicht, seit Tux Paint ehrt Einstellung
+	  Ihres Klimas notwendig, wenn möglich.)  
+
+  Befehl-LiniencInfo.  Wahlen
+  ---------------------------
+    Die folgenden Wahlen zeigen etwas informativen Text auf dem Schirm an.
+    Tux Paint nicht wirklich beginnt oben und läuft danach, jedoch.
+
+      --version
+      ---------
+        Zeigen Sie die Versionsnummer und das Datum der Kopie der Tux Paint an,
+	die Sie laufen lassen.  
+
+      --copying
+      ---------
+        Zeigen Sie kurze Lizenzinformationen über die Kopie der Tux Paint.  
+
+      --usage
+      -------
+        Zeigen Sie die Liste der vorhandenen Befehl-Linienwahlen an.  
+
+      --help
+      ------
+        Anzeigenschriftsatzhilfe auf dem Verwenden der Tux Paint.  
+
+
+  Wählen einer anderen Sprache
+  ----------------------------
+    Tux Paint ist in eine Anzahl von Sprachen übersetzt worden.
+    um die Übersetzungen zugänglich zu machen, können Sie die "--lang"
+    Wahl auf der Befehl-Linie verwenden, um die Sprache (z.B. "--lang spanish")
+    einzustellen.  
+
+    Tux Paint ehrt auch gegenwärtiges locale Ihres Klimas.  (Sie können sie
+    auf der Befehl-Linie mit der "--locale" Wahl überlaufen (sehen Sie oben))
+
+    Die folgenden wird gestützt:
+
+      de_DE@euro - Deutsch         / German
+      es_ES@euro - Espanol         / Spanish
+      fi_FI@euro - Suomi           / Finnish
+      fr_FR@euro - Francais        / French
+      is_IS      - Islenska        / Icelandic
+      it_IT@euro - Italiano        / Italian
+      nb_NO      - Norsk (bokmal)  / Norwegian Bokmal
+      nn_NO      - Norsk (nynorsk) / Norwegian Nynorsk
+      nl_NL@euro -                   Dutch
+      sv_SE@euro - Svenska         / Swedish
+      tr_TR@euro -                   Turkish
+      
+
+    Einstellung Von Locale Ihres Klimas
+    -----------------------------------
+      Das Ändern Ihres locale beeinflußt viel Ihres Klimas.  
+
+      Wie oben angeführt zusammen mit dem Lassen Sie die Sprache an der
+      Laufzeit mit Befehl-Linienwahlen wählen ("--lang" und "--locale"),
+      ehrt Tux Paint das globale locale, das in Ihr Klima einstellt.  
+
+      Wenn Sie nicht bereits locale Ihres Klimas eingestellt haben, erklären
+      der folgende Wille kurz, wie:  
+
+      Linux-/UnixcBenutzer
+      --------------------
+        Zuerst seien Sie sicher, daß das locale, das Sie benutzen möchten,
+	ermöglicht wird, indem man Akten "/etc/locale.gen" auf Ihrem System
+	redigiert und dann das Programm "locale-gen" als Wurzel laufen läßt.
+
+        Anmerkung:  Benutzer Debian können in der LageSEIN, den Befehl
+	einfach laufen zu lassen "dpkg-reconfigure locales".  
+
+        Dann bevor Sie Tux Paint laufen lassen, stellen Sie Ihre "LANG-"
+	Klimavariable bis eins der locales ein, die oben verzeichnet werden.
+	(wenn Sie alle Programme wünschen, die übersetzt werden können, um
+	zu sein, können Sie möchten das folgende in Ihren LOGON-Index legen;
+	z.B. ~/.profile, ~/.bashrc, ~/.cshrc, usw..)  
+
+
+        Z.B. in einem Bourne-Shell (wie HEFTIGER SCHLAG):  
+
+          export LANG=es_ES@euro;  tuxpaint
+
+
+        Und in einem c-Oberteil (wie TCSH):
+
+          setenv LANG es_ES@euro;  tuxpaint
+
+
+      WindowscBenutzer
+      ----------------
+        Recoginse TuxPaint Willensdas gegenwärtige locale und benutzen die
+	passenden Akten durch Rückstellung.  So ist dieser Abschnitt nur für
+	die Leute, die unterschiedliche Sprachen versuchen.  
+
+        Die einfachste Sache zum Tun ist, den '--lang' Schalter in der
+	Kürzung zu benutzen (sehen Sie "ANBRINGEN.txt").  Jedoch indem man
+	ein sofortiges Fenster MSDOS verwendet, ist es auch möglich, einen
+	Befehl so herauszugeben:  
+
+          set LANG=es_ES@euro
+
+        ...das die Sprache für die Lebenszeit dieses DOS-Fensters einstellt.
+
+        Für dauerhafteres etwas, versuchen Sie, 'autoexec.bat' Akte Ihres
+	Computers mit Windows "sysedit" Werkzeug zu redigieren:
+
+        Windows 95/98:
+	--------------
+	  1) klicken an die 'Anfangs' ('Start') Taste und
+	     wählen 'Durchlauf...' ('Run')
+	  2) schreiben "sysedit" in 'sich öffnen:' ('Open') Kasten
+	     (mit oder ohne Anführungsstriche).
+	  3) Klicken 'OKAY' ('OK').
+	  4) lokalisieren das AUTOEXEC.BAT-Fenster im
+	     Anlagenkonfigurationsherausgeber.
+	  5) fügen das folgende an der Unterseite der Akte hinzu:
+	     set LANG=es_ES@euro
+	  6) der Anlagenkonfigurationsherausgeber ein und ja antworten,
+	     um die Änderungen zu speichern.
+	  7) beginnen Ihre Maschine wieder.  
+
+        um die GESAMTE MASCHINE und ALLE ANWENDUNGEN zu beeinflussen, ist
+	es möglich, die verkleidung "der regionalen Einstellungen"
+	("Regional Settings") zu benutzen Steuer:  
+
+          1) klicken an die 'Anfangs' ('Start') Taste und wählen
+	     'Verkleidung Settings|Control' ('Settings|Control Panel') vor.
+	  2) doppelt klicken Sie an die Kugel "der regionalen Einstellungen"
+	     ("Regional Settings").
+	  3) wählen ein language/region vom Tropfen verzeichnen unten vor.
+	  4) Klicken 'OKAY'. ('OK')
+	  5) beginnen Ihre Maschine wieder, wenn es aufgefordert wird.  
+
+
+  TitelcSchirm
+  ------------
+    Wenn erste Lasten der Tux Paint, ein title-/creditsschirm erscheinen.
+
+    Sobald Laden komplett ist, betätigen Sie einen Schlüssel oder klicken
+    Sie an die Maus, um fortzufahren.  
+
+
+  HauptcSchirm
+  ------------
+    Der Hauptschirm ist in die folgenden Abschnitte unterteilt:
+
+    Linke Seite:  Toolbar
+    ---------------------
+      Das toolbar enthält die zeichnenden und redigierenden Kontrollen.  
+
+
+    Mitte:  Zeichnendes Segeltuch
+    -----------------------------
+      Das größte Teil des Schirmes, in der Mitte, ist das zeichnende
+      Segeltuch.  Dieses ist offensichtlich wo Sie zeichnen!  
+
+
+    Rechte Seite:  Vorwahl
+    ----------------------
+      Abhängig von dem gegenwärtigen Werkzeug zeigt der Vorwahl
+      unterschiedliche Sachen.  z.B. wenn die Farbenbürste vorgewählt wird,
+      er zeigt die verschiedenen vorhandenen Bürsten.  Wenn der Gummistempel
+      vorgewählt wird, zeigt er die unterschiedlichen Formen, die Sie
+      verwenden können.  
+
+
+    Niedriger:  Farben
+    ------------------
+      Eine Palette der vorhandenen Farben werden nahe dem unteren
+      Bildschirmrand gezeigt.
+
+
+    Unterseite:  HilfencBereich
+    ---------------------------
+      Am unteren Bildschirmrand, stellt Tux, der Penguin Linux, Spitzen und
+      andere Informationen zur Verfügung, während Sie zeichnen.  
+
+
+  Vorhandene Werkzeuge
+  --------------------
+    Zeichnende Werkzeuge
+    --------------------
+      Malen Sie Bürste
+      ----------------
+        Das Farbenbürstenwerkzeug läßt Sie freihändig zeichnen mit den
+	verschiedenen Bürsten (gewählt im Vorwahl auf dem Recht) und den
+	Farben (gewählt in der Farbenpalette in Richtung zur Unterseite).
+
+        Wenn Sie die Maustaste nach unten halten und die Maus verschieben,
+	zeichnet sie, wie Sie umziehen.
+
+        Während Sie zeichnen, wird ein Ton gespielt.  Das grösser die Bürste,
+	das niedriger der Taktabstand.  
+
+      Stempel (Gummistempel)
+      ----------------------
+        ist das Stempelwerkzeug wie ein Gummistempel oder Aufkleber.  Es läßt
+	Sie vor-gezeichnete Bilder (wie eine Abbildung eines Pferds oder ein
+	Baum oder der Mond) in Ihrer Abbildung kleben.  
+
+        Da Sie die Maus herum verschieben, folgt eine rechteckige umreiß der
+	Maus und zeigt, wohin der Stempel gesetzt wird.  
+
+        unterschiedliche Stempel können unterschiedliche stichhaltige Effekte
+	haben.  
+
+      Linien
+      ------
+        Dieses Werkzeug läßt Sie gerade Geraden mit den verschiedenen
+	Bürsten und den Farben zeichnen, die Sie normalerweise mit der
+	Farbenbürste verwenden.  
+
+        Klicken Sie die Maus an und halten Sie sie, um den Ausgangspunkt der
+	Linie zu wählen.  Da Sie die Maus herum verschieben, zeigt eine dünne
+	'Gummi-Band' Linie, wohin die Linie gezeichnet wird.  
+
+        Gelassen gehen Sie von der Maus, die Linie durchzuführen.  Ein
+	"Sproing!",  Ton spielt.  
+
+      Formen
+      ------
+        Dieses Werkzeug läßt Sie etwas einfache gefüllte und ungefüllte
+	Formen zeichnen.  
+
+        Wählen Sie eine Form vom Vorwahl auf dem Recht vor (Kreis, Quadrat,
+	Oval, etc.).  
+
+        Im Segeltuch klicken Sie die Maus und halten Sie sie, um auszudehnen
+	die Form heraus von, wo Sie klickten.  Etwas Formen können Anteil
+	(z.B., Viereck und Oval), andere ändern können nicht (z.B., Quadrat
+	und Kreis).  
+
+        Gelassen gehen Sie von der Maus, wenn Sie erfolgtes Ausdehnen sind.  
+
+        Normaler Modus
+        --------------
+          Jetzt können Sie die Maus um das Segeltuch verschieben,
+          um die Form zu drehen.
+
+          Klicken Sie die Maustaste wieder und die Form wird in die
+	  gegenwärtige Farbe gezeichnet.  
+
+        Einfacher FormcModus
+        --------------------
+	  Wenn einfache Formen ermöglicht werden ("--simpleshapes" Wahl),
+	  wird die Form auf das Segeltuch gezeichnet, wenn Sie von der
+	  Maustaste gehen lassen.  (es gibt keinen Umdrehungsschritt.),  
+
+
+      Text
+      ----
+        Wählen Sie einen Schriftkegel und eine Farbe.  Klicken Sie an
+	den Schirm und ein Cursor erscheint.  Arttext und -er stellen
+	oben auf dem Schirm dar.  
+
+        Drücken Sie [Enter], oder [Return] und der Text wird auf die
+	Abbildung gezeichnet und der Cursor bewegt nach unten eine Linie.  
+
+        Klicken anderwohin in der Abbildung und im Text bewegt dort.  
+
+
+      Magie (spezielle Effekte)
+      -------------------------
+        ist das magische Werkzeug wirklich ein Satz Spezialwerkzeuge.
+	Wählen Sie einen der "magischen" Effekte vom Vorwahl auf dem Recht,
+	vor und dann klicken Sie und schleppen Sie um die Abbildung, um den
+	Effekt anzuwenden.  
+
+        Spiegel
+        -------
+	  Wenn Sie die Maus in Ihrer Abbildung mit dem magischen vorgewählten
+	  Effekt "des Spiegels" anklicken, wird das gesamte Bild aufgehoben
+	  und macht ihn zu ein Spiegelbild.  
+
+        Leichter Schlag
+        ---------------
+	  Ähnlich "Spiegel.",  Klicken und das gesamte Bild werden
+	  upside-down gedreht.
+
+        Unschärfe
+        ---------
+	  Dieses bildet die Abbildung flockig, wohin Sie die Maus schleppen.
+
+        Blöcke
+        ------
+	  Dieses bildet die Abbildung das blocky Schauen ("pixelated"), wohin
+	  Sie die Maus schleppen.  
+
+        Negativ
+        -------
+	  Dieses kehrt die Farben um, wohin Sie die Maus schleppen.
+	  (z.B., Weiß wird und umgekehrt. schwarz),  
+
+        Verblassen Sie
+        --------------
+	  Dieses verbläßt die Farben, wohin Sie die Maus schleppen.  (tun
+	  Sie es zum gleichen Punkt viele Male, und er wird schließlich. weiß)
+
+        Regenbogen
+        ----------
+	  Dieses ist der Farbenbürste ähnlich, aber, da Sie die Maus herum
+	  verschieben, läuft es alle Farben im Regenbogen durch.  
+
+        Funkelt
+        -------
+	  Dieses zeichnet das Glühen gelb funkelt auf der Abbildung.  
+
+        Kreide
+        ------
+	  Dieses läßt Teile von der Abbildung (wo Sie die Maus verschieben),
+	  wie eine Kreidezeichnung aussehen.  
+
+        Tropfenfänger
+        -------------
+	  Dieses läßt die Farbe "tropfen", wohin Sie die Maus verschieben.
+
+        Dick
+        ----
+	  Dieses bildet die dunkleren Farben in der Abbildung werden dick,
+	  wohin Sie die Maus schleppen.  
+
+        Dünn
+        ----
+	  Ähnlich "dick,", ausgenommen dunkle Farben dünner werden
+	  (helle Farben werden dick).
+
+        Fülle
+        -----
+	  Dieses überschwemmt die Abbildung mit einer Farbe.  Es läßt Sie
+	  schnell Teile der Abbildung füllen, als ob es ein Farbtonbuch war.
+
+
+      Radiergummi
+      -----------
+        Dieses Werkzeug ist der Farbenbürste ähnlich.  Wohin Sie (oder Klicken
+	und Gegenkraft) klicken, wird die Abbildung zum Weiß gelöscht.
+
+        Da Sie die Maus herum verschieben, folgt eine sehr große quadratische
+	umreiß dem Zeiger und zeigt, was Teil der Abbildung zum Weiß gelöscht
+	wird.  
+
+        Während Sie löschen, wird ein "quietschender sauberer"
+	eraser-/wipington gespielt.  
+
+
+    Andere Kontrollen
+    -----------------
+      Undo
+      ----
+        Das Anklicken dieses Werkzeugs undo die letzte zeichnende Tätigkeit.
+	Sie können undo mehr als einmal.  
+
+        Anmerkung:  Sie können [Control]-[Z] auf der Tastatur auch sich
+	betätigen.  
+
+      Machen Sie nochmals
+      -------------------
+        Dieses Werkzeug anklickend, macht die zeichnende Tätigkeit nochmals,
+	die Sie gerade "undid.",  So lang, wie Sie nicht wieder zeichnen,
+	können Sie so viele Male nochmals machen, Sie "undone.",  
+
+        Anmerkung:  Sie können [Control]-[R] auf der Tastatur auch sich
+	betätigen.  
+
+      Neu
+      ---
+        Das Anklicken der "neuen" Taste beginnt eine neue Zeichnung.
+	Sie werden zuerst gefragt, ob Sie wirklich dies tun möchten.
+
+        Anmerkung:  Sie können [ Control]-[N ] auf dem ke auch sich
+	betätigenyboard.
+
+      Geöffnet
+      --------
+        Dieses zeigt Ihnen eine Liste von allen Abbildungen, die Sie
+	gespeichert haben.  Wenn es mehr gibt, als auf dem Schirm passen
+	kann, verwenden Sie "herauf" und "unten" Pfeile an der Oberseite
+	und an der Unterseite der Liste scroll durch die Liste der Abbildungen.
+
+        Klicken Sie eine Abbildung an, um sie vorzuwählen, dann...,  
+
+          * Klicken Sie das Grüne "öffnen" Taste am untereren Linke der
+	    Liste, um die vorgewählte Abbildung zu laden an.  
+
+            Wechselweise können Sie Doppeltklicken die Ikone der
+	    Abbildung (innerhalb 1 zweiten) es laden.  
+
+          * Klicken Sie das Braun "löschen" (Abfalldosen) Taste am
+	    niedrigeren Recht der Liste, die vorgewählte Abbildung zu
+	    löschen an.  (Sie werden gebeten zu bestätigen.)
+
+          * Oder klicken Sie die "rückseitige" Pfeiltaste des Rotes am
+	    niedrigeren Recht der Liste zu annullieren und der Rückkehr
+	    zur Abbildung, die Sie zeichneten.
+
+        Wenn beschließen Sie, eine Abbildung zu öffnen und Ihre gegenwärtige
+	Zeichnung nicht gespeichert worden ist, werden Sie aufgefordert, ob
+	Sie sie speichern möchten oder nicht.  (sehen Sie "außer," unten.)
+
+        Anmerkung:  Sie können [Control]-[O] auf der Tastatur auch sich
+	betätigen, um zu erhalten 'öffnen' Dialog.
+
+      Außer
+      -----
+        Dieses speichert Ihre gegenwärtige Abbildung.
+	
+	Wenn Sie es nicht vor gespeichert haben, verursacht es eine neue
+	Eintragung in der Liste der gespeicherten Bilder.  (d.h., es stellt
+        eine neue Akte her)
+
+        Anmerkung:  Sie nicht fragt Sie nichts (z.B., für einen Dateinamen).
+	Sie speichert einfach die Abbildung und spielt einen stichhaltigen
+	Effekt "des Kamerablendenverschlusses".  
+
+        Wenn Sie die Abbildung vor gespeichert HABEN oder dieses eine
+	Abbildung ist, die Sie gerade mit dem "geöffneten" Befehl luden,
+	werden Sie zuerst, ob Sie über der alten Version speichern möchten,
+	oder verursachen eine neue Eintragung gefragt (eine neue Akte).
+
+        Anmerkung:  Sie können [Control]-[S] auf der Tastatur auch sich
+	betätigen.  
+
+      Druck
+      -----
+        [ Anmerkung:  Der Druck arbeitet nur unter Linux und Unix im Augenblick
+	  und erfordert die Werkzeuge NetPBM.  Sehen Sie docs/ANBRINGEN.txt ]
+
+
+        Klicken Sie diese Taste an und Ihre Abbildung wird gedruckt!  
+
+
+        SperrencDruck
+        -------------
+	  Wenn der "noprint" Wahl eingestellt wurde (entweder "noprint=yes"
+	  in der Konfigurationsakte mit der Tux Paint oder im Verwenden
+	  "--noprint" auf der Befehl-Linie), ist die" Druck"Taste untauglich.  
+
+        Sehen Sie den "Wahl" Abschnitt oben.  
+
+
+        Einschränkender Druck
+        ---------------------
+	  Wenn die "printdelay" Wahl verwendet wurde (entweder mit
+	  "printdelay=SEKUNDEN" in der Konfigurationsakte oder im
+	  Verwenden von "--printdelay=SEKUNDEN" auf der Befehl-Linie),
+	  können Sie nur einmal drucken jedes SEKUNDEN-Sekunden.  
+
+          Z.B. wenn "printdelay=60", Sie nur eine Minute einmal drucken kann.  
+
+          Sehen Sie den "Wahl" Abschnitt oben.
+
+        Andere DruckencWahlen
+        ---------------------
+	  Der Befehl, der verwendet wird, um zu drucken, ist wirklich ein
+	  Satz Befehle, die ein PNG in ein Postskriptum umwandeln und es
+	  zum Drucker schicken:  
+
+            pngtopnm | pnmtops | lpr
+
+          Dieser Befehl kann durch die Einstellung des "printcommand" Wertes
+	  in der Konfigurationsakte der Tux Paint geändert werden.  
+
+          Sehen Sie den "Wahl" Abschnitt oben.
+
+
+      Beendigen Sie
+      -------------
+        Den "beendigte" Taste, das Farbenfenster Tux schließend oder drückend
+	"Escape" Schlüssel, anklickend beendigt Tux Paint.
+
+        ANMERKUNG:  Der "beendigte" Taste kann untauglich sein (mit der
+	"--noquit" Befehl-Linienwahl), aber "Escape" Schlüssel wird ruhige
+	Arbeit.  
+
+        Sie werden zuerst aufgefordert, ob Sie wirklich beendigen möchten.
+
+        Wenn Sie beschließen zu beendigen und Sie nicht die gegenwärtige
+	Abbildung gespeichert haben, werden Sie zuerst wenn Wunsch gebeten,
+	ihn zu speichern.  Wenn es nicht ein neues Bild ist, werden Sie dann,
+	wenn Sie über der alten Version speichern möchten, oder verursachen
+	eine neue Eintragung gefragt.  (sehen Sie "außer" oben.)
+
+        ANMERKUNG:  Wenn das Bild gespeichert wird, wird es automatisch neu
+	geladen, naechstes Mal wenn Sie Tux Paint laufen lassen!  
+
+
+Laden anderer Abbildungen in Tux Paint
+--------------------------------------
+  Da geöffneter 'Dialog der Tux Paint' nur Abbildungen anzeigt, die Sie
+  mit Tux Paint verursachten, was, wenn Sie irgendeine andere Abbildung oder
+  Fotographie in Tux Paint laden möchten, um zu redigieren?  
+
+  um so zu tun, müssen Sie einfach die Abbildung in eine Bildakte PNG
+  (bewegliche Netzgraphik - 'Portable Network Graphic') umwandeln und
+  legen sie in gespeichertes "Verzeichnis der Tux Paint".
+  ("~/.tuxpaint/saved/"unter Linux und Unix, "userdata\saved\" unter Windows.)
+  
+  Das Verwenden 'tuxpaint-import'
+  -------------------------------
+    können Benutzer Linux und Unix verwenden "tuxpaint-import" Oberteilindex,
+    der angebracht erhält, wann Sie Tux Paint anbringen.  Sie benutzt einige
+    Werkzeuge NetPBM, um das Bild ("anytopnm") umzuwandeln, die Größe neu
+    bestimmt es, damit sie in Segeltuch der Tux Paint ("pnmscale") paßt,
+    und umwandelt es in ein PNG ("pnmtopng").  
+
+    Sie benutzt auch "Datum", um die aktuelle Uhrzeit und das Datum zu 
+    erhalten, das der filenaming Farbengebrauch VersammlungTux für
+    gespeicherte Akten ist.  (erinnern Sie sich, werden Sie nie um einen
+    'Dateinamen' gebeten, wenn Sie gehen, Abbildungen zu speichern oder zu
+    öffnen!)
+
+    um zu verwenden 'tuxpaint-import' Sie, lassen Sie einfach den
+    Befehl von einer Befehl-Linienaufforderung laufen und stellen Sie ihn
+    das name(s) des file(s) zur Verfügung, das Sie umwandeln möchten.  
+
+    Sie werden in Ihre Farbe 'saved' Verzeichnis Tux umgewandelt und gelegt.
+    (Anmerkung:  Wenn Sie dies für einen anderen Benutzer tun - z.B.
+    Ihr Kind, müssen Sie überprüfen, den Befehl unter ihr Konto laufen zu
+    lassen.)
+
+    Beispiel:  
+
+      $ tuxpaint-import grandma.jpg
+      grandma.jpg -> /home/username/.tuxpaint/saved/20020921123456.png
+      jpegtopnm:  SCHREIBEN Einer PPMCAkte
+
+      Die erste Linie ("tuxpaint-import grandma.jpg"), ist der Befehl zu
+      laufen.  Die folgenden zwei Linien werden vom Programm ausgegeben,
+      während es funktioniert.  
+
+
+      Jetzt können Sie Tux Paint laden, und eine Version dieser ursprünglichen
+      Abbildung ist unter 'öffnen' Dialog vorhanden.  Gerades Doppeltklicken
+      seine Ikone!  
+
+
+  Sie manuell tun
+  ---------------
+    Windowsbenutzermuß tut z.Z. die Umwandlung manuell.
+
+    Laden Sie ein Graphikprogramm, das zum Laden Ihrer Abbildung und zum
+    Speichern einer PNG-Formatakte fähig ist.  (sehen Sie "PNG.txt" für
+    eine Liste der vorgeschlagenen Software.)
+
+    Verringern Sie die Größe des Bildes auf nicht weit als 448 Pixeln herüber
+    und nicht höher als 376 hohe Pixel.  (z.B., ist maximale Größe
+    448 x 376 Pixel)
+
+    Außer der Abbildung im PNG-Format.  Es wird IN HOHEM GRADE, daß Sie den
+    Dateinamen mit dem Tagesdatum nennen und Zeit festsetzen, seit dem das
+    ist der Farbengebrauch VersammlungTux empfohlen:
+
+      YYYYMMDDhhmmss
+
+    z.B.:  
+
+      20020921130500 - für September 21, 2002, 1:05:00pm
+
+    Legen Sie diese PNG-Akte in Ihre Farbe 'gespeichertes' Verzeichnis Tux.
+    (sehen Sie oben.),  
+
+    Unter Windows ist dieses im "userdata" Heft.
+
+
+Verlängernde Tux Paint
+----------------------
+  Wenn Sie Sachen wie Bürsten und die Gummistempel hinzufügen oder ändern,
+  die möchten von Tux Paint benutzt werden, können Sie sie ziemlich leicht
+  tun, indem Sie einfach Akten auf Ihrer Festplatte setzen oder entfernen.
+
+  Anmerkung:  Sie müssen Tux Paint für die Änderungen am Nehmeneffekt
+  wiederbeginnen.  
+
+
+  Wo Akten Gehen
+  --------------
+    StandardcAkten
+    --------------
+      Tux Paint sucht nach seinen verschiedenen Dateien in seinem
+      Datenverzeichnis.
+
+      Linux und Unix
+      --------------
+        Wo dieses Verzeichnis geht, hängt von ab, was Wert für "DATA_PREFIX"
+	eingestellt wurde, als Tux Paint errichtet wurde.
+	Sehen Sie ANBRINGEN.txt für Details.  
+
+        Durch Rückstellung obwohl, das Verzeichnis ist:  
+
+      Windows
+      -------
+        Wo dieses Verzeichnis geht, hängt von ab, was Heft Sie dem Installateur
+	erklärten, einzusetzen Tux Paint.
+
+        [ was die Rückstellung ist?  ]
+
+
+    Persönliche Akten
+    -----------------
+      Sie können Bürsten, Stempel und Schriftkegel in Ihrem eigenen
+      Verzeichnis auch herstellen, damit Tux Paint findet.  
+
+      Linux und Unix
+      --------------
+        Ihr persönliches Farbenverzeichnis Tux ist "~/.tuxpaint/".
+
+        Das heißt, wenn Ihr Hauptverzeichnis "/home/karl" ist, dann Ihr
+	Farbenverzeichnis Tux ist "/home/karl/.tuxpaint/".
+
+        Vergessen Sie die Periode (".") nicht vor dem Wort 'tuxpaint'!  
+
+      Windows
+      -------
+        Ihr persönliches Farbenverzeichnis Tux wird "userdata" genannt.  
+
+        [ wo es jetzt ist?  ]
+
+
+      um Bürsten zu addieren, stellen Stempel und Schriftkegel,
+      Unterverzeichnisse unter Ihren persönliches genannten "Bürsten" der
+      Tux Paint Verzeichnis, "Stempel" und "Schriftkegel", beziehungsweise her.  
+
+      (zum Beispiel, wenn Sie eine Bürste herstellten, die "flower.png"
+      genannt wurde, Sie würden es in "~/.tuxpaint/brushes/" unter Linux
+      oder Unix. setzen),  
+
+  Bürsten ("Brushes")
+  -------------------
+    Die Bürsten, die für das Zeichnen mit den Bürsten- und Linienwerkzeugen
+    in der Tux Paint benutzt werden, sind einfach greyscale PNG-Bilder.
+
+    Das Alpha (Transparent) des PNG-Bildes wird benutzt, um die Form der
+    Bürste festzustellen, die bedeutet, daß die Form sein kann 'anti-aliased'
+    und sogar teilweis-transparent!  
+
+    Bürstenbilder sollten sein nicht weit als 40 Pixel herüber und nicht höher
+    als 40 hohe Pixel.  
+
+    Gerade legen Sie sie in "brushes" Verzeichnis.  
+
+  Stempel ("Stamps")
+  ------------------
+    Alle stempeln-in Verbindung stehenden Akten gehen in "stamps" Verzeichnis.
+    Es ist nützlich, Unterverzeichnisse und Vor-Unterverzeichnisse dort
+    herzustellen, um die Stempel zu organisieren.  (zum Beispiel, können Sie
+    ein "feiertag" Heft mit "halloween" und "weihnachts" subfolders haben.)
+
+    Bilder
+    ------
+      Gummistempel in der Tux Paint können eine Anzahl von unterschiedlichen
+      Akten bestehen.  Die eine Akte, die angefordert wird, ist
+      selbstverständlich die Abbildung selbst.  
+
+      Die Stempel, die von Tux Paint benutzt werden, sind PNG-Abbildungen.
+      Sie können Vollfarbe oder greyscale sein.  Das Alpha (Transparent) des
+      PNG wird benutzt, um die tatsächliche Form der Abbildung (anders stempeln
+      Sie ein großes Viereck auf Ihren Zeichnungen) festzustellen.
+
+      Das PNGs kann jede mögliche Größe sein, aber in der Praxis, ist
+      100 Pixel weit durch 100 hohe Pixel (100x100) für Tux Paint ziemlich
+      groß.  
+
+
+    BeschreibungscText
+    ------------------
+      Text ("TXT") ordnet mit dem gleichen Namen wie das PNG ein.
+      (z.B., "picture.png"'s-Beschreibung wird in "picture.txt" im gleichen
+      Verzeichnis. gespeichert),  
+
+      Zeichnet den Beginn mit "xx=" (wo "xx" eine der gestützten Sprachen ist;
+      z.B. "de" für Deutschen, "fr" für Franzosen, usw..)  wird unter den
+      verschiedenen gestützten locales verwendet.  
+
+      Wenn keine Übersetzung für das locale des Benutzers vorhanden ist,
+      wird die Rückstellungszeichenkette (die erste Linie, die auf englisch
+      sein sollte), benutzt.  
+
+
+    Stichhaltige Effekte
+    --------------------
+      WAVE Sie ("WAV") Akten mit dem gleichen Namen wie das PNG wellenartig.
+      (z.B., stichhaltiger Effekt "picture.png"'s ist der Ton "picture.wav"
+      im gleichen Verzeichnis.)
+
+      Für Töne für unterschiedliche locales (z.B., wenn der Ton jemand ist,
+      der ein Wort sagt, und Sie wünschen übersetzte Versionen des Wortes
+      sagten), stellen Sie auch WAV-Akten mit dem Aufkleber der locales im
+      Dateinamen, in der Form her:  "STAMP_LOCALE.wav."
+      
+      stichhaltiger Effekt "picture.png"'s, wenn Tux Paint in spanischen
+      Modus gelaufen wird, würde "picture_es.wav" sein.  Im französischen
+      Modus "picture_fr.wav".  Und so weiter.
+
+      Wenn kein beschränkter stichhaltiger Effekt geladen werden kann,
+      versucht Tux Paint, die stichhaltige Akte 'der Rückstellung' zu laden.
+      (z.B., "picture.wav")
+
+
+    StempelcWahlen
+    --------------
+      Neben einer graphischen Form, einer Textbeschreibung und einem
+      stichhaltigen Effekt können Stempel andere Attribute auch gegeben
+      werden.  um dies zu tun, müssen Sie eine '.dat' für den Stempel
+      herstellen.  
+
+      Eine Stempeldatei ist einfach eine Textakte, welche die Wahlen enthält.
+
+      Die Akte hat den gleichen Namen wie das PNG-Bild, aber eine ".dat"
+      Verlängerung.  (z.B., "picture.png"'s-Datei ist die Textakte
+      "picture.dat" im gleichen Verzeichnis.)
+
+      Farbige Stempel
+      ---------------
+        Stempel können gebildet werden, um 'colorable' oder 'tintable' zu
+	sein entweder.
+
+        Colorable
+        ---------
+	  Stempel "Colorable", die sie ganz wie Bürsten - Sie Auswahl der
+	  Stempel zum Erhalten der Form bearbeiten und wählen dann die Farbe
+	  aus Sie sie sein wünschen.  (Symbolstempel, wie die mathematischen
+	  und musikalischen, sind ein Beispiel.)
+
+          Nichts über das ursprüngliche Bild wird ausgenommen das Transparent
+	  verwendet ("Alpha"Führung).  Die Farbe des Stempels kommt aus Körper.
+
+          Fügen Sie das "colorable" Wort der Datei des Stempels hinzu.  
+
+        Abgetönt ("Tintable")
+        ---------------------
+	  "tönte" Stempel sind die ähnliche "colorable" ab, ausgenommen die
+	  Details des ursprünglichen Bildes gehalten werden.  (es techically
+	  zu setzen, wird das ursprüngliche Bild verwendet, aber seine Farbe
+	  wird geändert, gegründet auf der gegenwärtig-vorgewählten Farbe.)
+
+          Fügen Sie das "tintable" Wort der Datei des Stempels hinzu.  
+
+
+  Schriftkegel
+  ------------
+    Die Schriftkegel, die von Tux Paint benutzt werden, sind Schriftkegel
+    TrueType (TTF).  
+
+    Legen Sie sie einfach in das "Schriftkegel" Verzeichnis.  Tux Paint
+    lädt den Schriftkegel und liefert vier unterschiedliche Größen im
+    'Schriftkegelvorwahl', wenn sie 'Text' Werkzeug verwendet.

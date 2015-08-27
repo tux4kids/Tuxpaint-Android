@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="gdk-pixbufbuilddefinesprops"
+	OutputDirectory="$(SolutionDir)$(ConfigurationName)\$(PlatformName)\bin"
+	IntermediateDirectory="$(SolutionDir)$(ConfigurationName)\$(PlatformName)\obj\$(ProjectName)\"
+	InheritedPropertySheets=".\gdk-pixbuf-version-paths.vsprops"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="..\..\..;..\..\..\gdk-pixbuf;..\math-compat;$(GlibEtcInstallRoot)\include\glib-2.0;$(GlibEtcInstallRoot)\lib\glib-2.0\include;$(GlibEtcInstallRoot)\include"
+		PreprocessorDefinitions="HAVE_CONFIG_H;G_DISABLE_SINGLE_INCLUDES;GDK_PIXBUF_DISABLE_SINGLE_INCLUDES"
+		ForcedIncludeFiles="msvc_recommended_pragmas.h"
+		AdditionalOptions="/MP"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="gio-2.0.lib gmodule-2.0.lib gobject-2.0.lib glib-2.0.lib intl.lib libpng16.lib zlib1.lib"
+		AdditionalLibraryDirectories="$(GlibEtcInstallRoot)\lib"
+		IgnoreDefaultLibraryNames="LIBCMTD.lib;LIBCMT.lib"
+	/>
+	<UserMacro
+		Name="GdkPixbufBinaryVersion"
+		Value="2.10.0"
+	/>
+	<UserMacro
+		Name="GDIP_MACROS"
+		Value="INCLUDE_gdiplus"
+	/>
+	<UserMacro
+		Name="NOGDIP_MACROS"
+		Value="JAS_WIN_MSVC_BUILD;INCLUDE_bmp;INCLUDE_gif;INCLUDE_ico;INCLUDE_jasper;INCLUDE_jpeg;INCLUDE_tiff;"
+	/>
+	<UserMacro
+		Name="MODULAR_MACROS"
+		Value="INCLUDE_ani;INCLUDE_pcx;INCLUDE_tga;INCLUDE_xbm;INCLUDE_png;INCLUDE_qtif;INCLUDE_pnm;INCLUDE_icns;INCLUDE_ras;INCLUDE_wbmp;INCLUDE_xpm"
+	/>
+	<UserMacro
+		Name="GdkPixbufDummyPrefix"
+		Value="/dummy"
+	/>
+	<UserMacro
+		Name="GdkPixbufPrefixDefine"
+		Value="GDK_PIXBUF_PREFIX=&quot;\&quot;$(GdkPixbufDummyPrefix)\&quot;&quot;"
+	/>
+	<UserMacro
+		Name="GdkPixbufLibdirDefine"
+		Value="PIXBUF_LIBDIR=&quot;\&quot;$(GdkPixbufDummyPrefix)/lib/gdk-pixbuf-$(ApiVersion)/$(GdkPixbufBinaryVersion)/loaders\&quot;&quot;"
+	/>
+	<UserMacro
+		Name="GdkPixbufBinVerDefine"
+		Value="GDK_PIXBUF_BINARY_VERSION=&quot;\&quot;$(GdkPixbufBinaryVersion)\&quot;&quot;"
+	/>
+	<UserMacro
+		Name="GdkPixbufDefines"
+		Value="HAVE_CONFIG_H;GDK_PIXBUF_COMPILATION;GDK_PIXBUF_ENABLE_BACKEND;DLL_EXPORT;GDK_PIXBUF_RELOCATABLE;$(GdkPixbufBinVerDefine);$(GdkPixbufPrefixDefine);$(MODULAR_MACROS)"
+	/>
+	<UserMacro
+		Name="GdipLibs"
+		Value="gdiplus.lib"
+	/>
+	<UserMacro
+		Name="ImagingLibs"
+		Value="jpeg.lib libjasper.lib libtiff_i.lib"
+	/>
+</VisualStudioPropertySheet>

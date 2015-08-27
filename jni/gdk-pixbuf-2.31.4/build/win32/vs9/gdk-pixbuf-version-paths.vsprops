@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="gdk-pixbufversionpathsprops"
+	>
+	<UserMacro
+		Name="VSVer"
+		Value="9"
+	/>
+	<UserMacro
+		Name="GlibEtcInstallRoot"
+		Value="..\..\..\..\vs$(VSVer)\$(PlatformName)"
+	/>
+	<UserMacro
+		Name="DefDir"
+		Value="$(SolutionDir)\$(ConfigurationName)\$(PlatformName)\obj\$(ProjectName)"
+	/>
+	<UserMacro
+		Name="CopyDir"
+		Value="$(GlibEtcInstallRoot)"
+	/>
+	<UserMacro
+		Name="ApiVersion"
+		Value="2.0"
+	/>
+	<UserMacro
+		Name="GdkPixbufLibtoolCompatibleDllPrefix"
+		Value="lib"
+	/>
+	<UserMacro
+		Name="GdkPixbufLibtoolCompatibleDllSuffix"
+		Value="-$(ApiVersion)-0"
+	/>
+	<UserMacro
+		Name="GdkPixbufSeparateVSDllPrefix"
+		Value=""
+	/>
+	<UserMacro
+		Name="GdkPixbufSeparateVSDllSuffix"
+		Value="-2-vs$(VSVer)"
+	/>
+	<!-- Change these two to GdkPixbufLibtoolCompatibleDllPrefix and
+	GdkPixbufLibtoolCompatibleDllSuffix if that is what you want -->
+	<UserMacro
+		Name="GdkPixbufDllPrefix"
+		Value="$(GdkPixbufSeparateVSDllPrefix)"
+	/>
+	<UserMacro
+		Name="GdkPixbufDllSuffix"
+		Value="$(GdkPixbufSeparateVSDllSuffix)"
+	/>
+</VisualStudioPropertySheet>

@@ -1,0 +1,1956 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>Tux Paint README - Italiano</title>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#FF0000"
+alink="#FF00FF" style="font-family: sans-serif; text-align: justify">
+
+<center>
+<h1><img src="../../html/images/tuxpaint-title.png" width=220 height=219
+alt="Tux&nbsp;Paint"><br>
+
+0.9.14
+
+</h1>
+<h3>Un semplice programma di disegno per bambini</h3>
+
+<p>Copyright 2004 by Bill Kendrick<br>
+New Breed Software</p>
+
+<p><a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a><br>
+<a href="http://www.newbreedsoftware.com/tuxpaint/">http://www.newbreedsoftware.com/tuxpaint/</a></p>
+
+<p>14 giugno 2002 - 14 aprile 2004</p>
+
+<p><br/>Traduzione a cura di <a href="mailto:flavio.pastore_AT_zonaitalia.it">Flavio <i>"Iron Bishop"</i> Pastore</a><br/>
+23 Aprile 2004</p>
+
+</center>
+
+<hr size=2 noshade>
+
+
+<a name="indice"></a><h1>Indice:</h1>
+
+<ul>
+<li><a href="#intro">Introduzione</a></li>
+<li><a href="#licenza">Licenza d'uso</a></li>
+<li><a href="#desc">Descrizione</a></li>
+<li><a href="#docs">Documentazione Aggiuntiva</a></li>
+<li><a href="#utilizzo">Usare Tux Paint</a></li>
+<ul>
+	<li><a href="#compilare">Compilare Tux Paint</a></li>
+	<li><a href="#aprire">Aprire Tux Paint</a></li>
+	<li><a href="#opzioni">Opzioni</a></li>
+		<ul>
+			<li><a href="#opzionilinea">Opzioni da linea di comando</a></li>
+			<li><a href="#opzionidesc">Opzioni descrittive da linea di comando</a></li>
+			<li><a href="#linguadiff">Scegliere una lingua differente</a></li>
+			<li><a href="#linguasys">Specificare la lingua di sistema</a></li>
+			<li><a href="#caratterispe">Caratteri speciali</a></li>
+		</ul>
+	<li><a href="#splashscreen">Schermata Iniziale</a></li>
+	<li><a href="#principale">Schermata principale</a></li>
+	<li><a href="#strumenti">Strumenti</a></li>
+		<ul>
+			<li><a href="#strdis">Strumenti di disegno</a></li>
+			<ul>
+				<li><a href="#pennello">Pennello</a></li>
+				<li><a href="#timbro">Timbro</a></li>
+				<li><a href="#linea">Linea</a></li>
+				<li><a href="#forma">Forma</a></li>
+				<li><a href="#testo">Testo</a></li>
+				<li><a href="#magia">Magia</a></li>
+				<li><a href="#gomma">Gomma</a></li>
+			</ul>
+			<li><a href="#comandi">Comandi</a></li>
+			<ul>
+				<li><a href="#annulla">Annulla</a></li>
+				<li><a href="#ripeti">Ripeti</a></li>
+				<li><a href="#nuovo">Nuovo</a></li>
+				<li><a href="#apri">Apri</a></li>
+				<li><a href="#salva">Salva</a></li>
+				<li><a href="#stampa">Stampa</a></li>
+				<li><a href="#esci">Esci</a></li>
+			</ul>	
+		</ul>
+	</ul>
+	<li><a href="#caricareimm">Caricare altre immagini in Tux Paint</a></li> 
+	<ul>
+		<li><a href="#caricareconprg">Usare 'tuxpaint-import'</a></li>
+		<li><a href="#caricareamano">Procedura manuale</a></li>
+	</ul>
+	<li><a href="#estendere">Estendere Tux Paint</a></li>
+	<ul>
+		<li><a href="#estfile">Dove vanno i file</a></li>
+		<li><a href="#estpennelli">Pennelli</a></li>
+		<li><a href="#esttimbri">Timbri</a></li>
+		<ul>
+			<li><a href="#esttimbriimmagine">Immagine</a></li>
+			<li><a href="#esttimbritesto">Testo descrittivo</a></li>
+			<li><a href="#esttimbrisuono">Effetto sonoro</a></li>
+			<li><a href="#esttimbriopzioni">Opzioni</a></li>
+			<li><a href="#esttimbrispecchio">Immagini pre-specchiate</a></li>
+		</ul>
+		<li><a href="#estcaratteri">Caratteri</a></li>
+
+	</ul>
+
+<li><a href="#informazioni">Altre informazioni</a></li>
+</ul>
+
+<h2></h2>
+
+<hr size=2 noshade>
+
+<a name="intro"></a><h1>Introduzione:</h1>
+<blockquote>
+  <p>"Tux&nbsp;Paint" &egrave; un programma di disegno per bambini. Mette a disposizione un'interfaccia semplice e una tela di dimensioni fisse; permette di accedere alle immagini precedentemente salvate attraverso piccole anteprime (nascondendo la struttura del file-system).</p>
+
+  <p>A differenza di programmi di disegno famosi come "The&nbsp;GIMP", ha un insieme di strumenti assai limitato. D'altro canto mette a disposizione un'interfaccia semplice, dove trovano spazio particolari come gli effetti sonori, espressamente dedicati ai bambini.</p>
+</blockquote>
+
+<hr size=2 noshade>
+
+
+<a name="licenza"></a><h1>Licenza d'uso:</h1>
+<blockquote>
+  <p>Tux&nbsp;Paint &egrave; un progetto Open Source, Software Libero rilasciato sotto GNU General Public License (GPL). Il codice sorgente del programma &egrave; disponibile (questo permette a chiunque di aggiungere funzioni, correggere errori e usare parti di codice nei propri programmi sotto GPL).</p>
+
+  <p>Si veda il file <code>docs/COPYING.txt</code> per il testo completo della GNU GPL e il file <code>docs/it/COPYING.it.txt</code> per la traduzione non ufficiale in italiano.</p>
+</blockquote>
+
+<hr size=2 noshade>
+
+
+<a name="desc"></a><h1>Descrizione:</h1>
+<blockquote>
+<dl>
+  <dt><b>Facile e divertente</b></dt>
+  <dd>
+    Tux&nbsp;Paint &egrave; pensato per essere un semplice programma di disegno per bambini, non uno strumento di disegno professionale. &egrave; pensato per essere diventente e facile da usare. Gli effetti sonori e un "aiutante disegnato" permettono all'utente di sapere cosa succede in ogni istante, limitando noia e ripetitivit&agrave;. Ci sono anche puntatori del mouse dalla forma grande e fumettosa.
+  </dd>
+
+  <dt><b>Estensibilit&agrave;</b></dt>
+  <dd>
+    Tux&nbsp;Paint &egrave; estensibile. Pennelli e timbri possono essere inseriti ed tolti dall'interfaccia. Ad esempio, un insegnante pu&ograve; inserire nel programma un insieme di forme di animali e chiedere agli studenti di disegnare un ecosistema. Ad ogni forma pu&ograve; essere assegnato un suono e un testo.
+  </dd>
+
+  <dt><b>Portabilit&agrave;</b></dt>
+  <dd>
+    Tux&nbsp;Paint pu&ograve; essere usato su molti sistemi operativi: Windows, GNU Linux, ecc. L'interfaccia rimane la stessa in ogni piattaforma. Tux&nbsp;Paint funziona bene anche su sistemi datati (come Pentium 133) e pu&ograve; essere compilato appositamente per sistemi lenti.
+  </dd>
+
+  <dt><b>Semplicit&agrave;</b></dt>
+  <dd>
+    Non c'&egrave; accesso diretto alla struttura dei dati sul computer. L'immagine corrente viene salvata quando si esce e riappare quando si riapre il programma. Per salvare una immagine non c'&egrave; bisogno di specificare un nome o usare la tastiera. Per recuperare una immagine basta selezionare la sua anteprima dall'elenco. Non si pu&ograve; accedere ad altri file oltre a quelli specificati dal programma.
+  </dd>
+</dl>
+</blockquote>
+
+<hr size=2 noshade>
+
+
+<a name="docs"></a><h1>Documentazione Aggiuntiva</h1>
+<blockquote>
+Documentazione inclusa in Tux&nbsp;Paint (nella cartella "<code>docs/it/</code>"):
+
+  <ul>
+  <li><code>AUTHORS.it.txt</code><br>
+    Lista degli autori e dei partecipanti allo sviluppo
+  
+  <li><code>CHANGES.it.txt</code><br>
+    Riassunto delle modifiche tra una versione e l'altra
+
+  <li><code>COPYING.it.txt</code><br>
+    Licenza GNU General Public License (traduzione)
+
+  <li><code>INSTALL.it.txt</code><br>
+    Istruzioni sull'installazione e sulla compilazione, dove applicabili
+    
+  <li><code>PNG.it.txt</code><br>
+    Note sulla creazione di immagini in formato PNG per l'uso in Tux&nbsp;Paint
+
+  <li><code>README.it.txt</code><br>
+    (questo file)
+    
+  <li><code>TODO.it.txt</code><br>
+    Una lista di funzioni ancora da inserire o errori ancora da correggere
+  </ul>
+</blockquote>
+
+<hr size=2 noshade>
+
+<a name="utilizzo"></a><h1>Usare Tux&nbsp;Paint</h1>
+<blockquote>
+
+  <a name="compilare"></a><h2>Compilare Tux&nbsp;Paint</h2>
+  <blockquote>
+    Per compilare Tux&nbsp;Paint dal codice sorgente, fare riferimento al file <code>INSTALL.it.txt</code>.
+  </blockquote>
+
+  <hr size=1 noshade>
+
+  <a name="aprire"></a><h2>Aprire Tux&nbsp;Paint</h2>
+  <blockquote>
+    <h3>Utenti GNU Linux/Unix</h3>
+    <blockquote>
+      <p>Usare il seguente comando al prompt della shell (es: "$"):</p>
+
+      <blockquote>
+        <code>$ tuxpaint</code>
+      </blockquote>
+
+      <p>&egrave; anche possibile creare un'icona di lancio (in GNOME o KDE su GNU Linux), fate riferimento alla documentazione del vostro Desktop...</p>
+
+      <p>In caso di errori, verranno visualizzati nel terminale (su "stderr").</p>
+    </blockquote>
+
+    <hr size=1 noshade>
+
+
+    <h3>Utenti Windows</h3>
+    <blockquote>
+      <table border=0 cellspacing=0 cellpadding=4 bgcolor="#AAAAFF"
+      align=right summary=""><tr><td align=center>
+        <img src="../../html/images/icon-win32.png" width=32 height=32 alt="[Icon]"><br>
+	Tux&nbsp;Paint
+      </td></tr></table>
+      
+      <p>Fare doppio-click sull'icona "Tux&nbsp;Paint" nel desktop (che &egrave; stata creata dal programma di installazione) o fare doppio click sul file "<code>tuxpaint.exe</code>" nella cartella Tux&nbsp;Paint.</p>
+
+      <p>In caso di errori, verranno salvati in un file chiamato "<code>stderr.txt</code>" nella cartella Tux&nbsp;Paint.</p>
+
+      <p>Fare riferimento al file "<code>INSTALL.it.txt</code>" per dettagli su come personalizzare l'icona di collegamento di Tux&nbsp;Paint, per selezionare le opzioni el programma (da linea di comando).</p>
+
+      <p>Per far partire Tux&nbsp;Paint e avere a disposizione direttamente le opzioni di linea di comando, avrete bisogno di usare il comando "<code>tuxpaint.exe</code>" da un prompt MSDOS o dalla finestra "Start" -> "Esegui" (fare riferimento al file "<code>INSTALL.it.txt</code>" per dettagli).</p>
+
+    </blockquote>
+
+      <br clear=all>
+
+    <hr size=1 noshade><p>
+
+    <h3>Utenti Mac OS X</h3>
+    <blockquote>
+      Semplicemente, fare doppio click sull'icona di "Tux&nbsp;Paint".<p>
+
+  </blockquote>
+
+  <hr size=1 noshade>
+
+
+  <a name="opzioni"></a><h2>Opzioni</h2>
+  <blockquote>
+    <h3>File di configurazione</h3>
+    <blockquote>
+      <p>Potete creare un semplice file di configurazione per Tux&nbsp;Paint, che sar&agrave; usato dal programma ad ogni avvio.</p>
+
+      <p>Il file &egrave; un semplice file di testo contenente le opzioni che volete attivare:</p>
+
+      <h4>Utenti GNU Linux</h4>
+      <blockquote>
+        <p>Il file da creare &egrave; chiamato "<code><b>.tuxpaintrc</b></code>" e deve essere messo nella cartella home (anche detta "<code>~/.tuxpaintrc</code>" oppure	"<code>$HOME/.tuxpaintrc</code>")</p>
+
+	<p>Quando questo file non viene creato, il programma legge un altro file (inizialmente, questa configurazione non ha opzioni attive) situato in:</p>
+
+        <blockquote>
+          <code>/etc/tuxpaint/tuxpaint.conf</code>
+        </blockquote>
+	
+	<p>Potete disabilitare del tutto la lettura di questo file, lasciando le opzioni cos&igrave; come sono inizialmente (che possono essere in seguito sovrascritte dal vostro file "<code>.tuxpaintrc</code>" e/o da argomenti di linea di comando) usando questa opzione nella riga di comando:</p>
+
+        <blockquote>
+	  <code>--nosysconfig</code>
+        </blockquote>
+      </blockquote>
+
+
+      <h4>Utenti Windows</h4>
+      <blockquote>
+        <p>Il file  da creare &egrave; chiamato "<code><b>tuxpaint.cfg</b></code>" e deve essere messo nella cartella di Tux&nbsp;Paint.</p>
+	
+	<p>Potete usare NotePad o WordPad per creare questo file. Assicuratevi di salvarlo in formato solo testo, assicuratevi che il nome del file non abbia ".txt" al fondo...</p>
+      </blockquote>
+
+
+      <h4>Opzioni disponibili</h4>
+      <blockquote>
+        <p>Nel file di configurazione possono essere specificate le seguenti opzioni (gli argomenti dati da linea di comando sovrascriveranno questi, come spiegato nella sezione <a href="#opzionilinea">Opzioni da linea di comando</a>).</p>
+
+	<dl>
+	<dt><code><b>fullscreen=yes</b></code></dt>
+	<dd>
+	  Mostra il programma a tutto schermo, invece che in una finestra.
+	</dd>
+
+	<dt><code><b>800x600=yes</b></code></dt>
+	<dd>
+	  Mostra il programma nella risoluzione 800x600 (SPERIMENTALE), invece che nella risoluzione solita 640x480.
+	</dd>
+
+	<dt><code><b>nosound=yes</b></code></dt>
+	<dd>
+	  Disabilita gli effetti sonori.
+	</dd>
+
+	<dt><code><b>noquit=yes</b></code></dt>
+	<dd>
+	  Disabilita il pulsante "Esci" sullo schermo (premere il pulsante <b>[Escape]</b> o chiudere la finestra funziona ancora).</dd>
+	
+	<dt><code><b>noprint=yes</b></code></dt>
+	<dd>
+	  Disabilita la funzione di stampa.
+	</dd>
+
+	<dt><code><b>printdelay=<i>SECONDI</i></b></code></dt>
+	<dd>
+	  Limita la stampa in modo tale che possa essere usata solo una volta ogni SECONDI secondi.
+	</dd>
+
+	<dt><code><b>printcommand=<i>COMANDO</i></b></code></dt>
+	<dd>
+	  <p><i>(Solo per GNU Linux e Unix)</i></p>
+
+	  <p>Usa il comando <i>COMANDO</i> per stampare un file PNG. Se non definito, il comando &egrave;:</p>
+
+          <blockquote>
+	    <code>pngtopnm | pnmtops | lpr</code>
+	  </blockquote>
+	  
+	  <p>Converte PNG a NetPBM 'portable&nbsp;anymap', poi lo converte in PostScript, infine lo manda alla stampante, usando il comando "<code>lpr</code>".</p>
+	</dd>
+
+	<dt><code><b>printcfg=yes</b></code></td>
+	<dd>
+	  <p><i>(Solo per Windows)</i></p>
+
+	  <p>Tux&nbsp;Paint al momento di  stampare user&agrave; un file di configurazione predefinito. Premendo il tasto <b>[ALT]</b> mentre si cicka sul pulsante "Stampa" si pu&ograve; far apparire la finestra di configurazione della stampa di Windows.</p>
+	  
+	  <p>(Nota: questo funziona solo quando il programma non viene aperto in modalit&agrave; a tutto schermo. Tutte le modifiche di configurazione fatte in questa finestra verranno salvate nel file "<code>userdata/print.cfg</code>" e usate ad ogni stampa successiva, finch&egrave; l'opzione "printcfg" rimane attiva.</p>
+	</dd>
+	
+	<dt><code><b>simpleshapes=yes</b></code></dt>
+	<dd>
+	  Disabilita la rotazione nello strumento "Forma". Clickare, trascinare e rilasciare sar&agrave; sufficiente per disegnare una forma.
+        </dd>
+	
+	<dt><code><b>uppercase=yes</b></code></dt>
+	<dd>
+	  Tutti caratteri verranno visualizzati maiuscoli (ad esempio, "Pippo" diventer&agrave; "PIPPO"). Utile per bambini che sanno leggere, ma che per il momento hanno imparato solo le maiuscole.
+	</dd>
+
+	<dt><code><b>grab=yes</b></code></dt>
+	<dd>
+	  <p>Tux&nbsp;Paint prover&agrave; a 'limitare' mouse e tastiera, in modo che il mouse possa muoversi solo all'interno della finestra di Tux&nbsp;Paint e gli imput di tastiera vengano passati direttamente al programma.</p>
+
+          <p>Utile per disabilitare azioni verso il sistema operativo che potrebbero far uscire l'utente dal programma, come i comandi <b>[Alt]-[Tab]</b>, <b>[Ctrl]-[Escape]</b>, ecc. Utile specialmente nella modalit&agrave; a tutto schermo.</p>
+	</dd>
+
+	<dt><code><b>noshortcuts=yes</b></code></dt>
+	<dd>
+	  <p>Disabilita le scorciatoie da tastiera (ad esempio: <b>[Ctrl]-[S]</b> per Salva, <b>[Ctrl]-[N]</b> per Nuovo, ecc).</p>
+	  <p>&Egrave; utile per prevenire l'uso di comandi indesiderati da parte dei bambini che non hanno dimestichezza con la tastiera.</p> 
+	</dd>
+
+	
+	<dt><code><b>nowheelmouse=yes</b></code></dt>
+	<dd>
+	  Disabilita il supporto della "rotellina" per i mouse che la possiedono (normalmente, la rotellina fa scorrere la selezione nel men&ugrave; di destra).
+	</dd>
+
+	<dt><code><b>nofancycursors=yes</b></code></dt>
+	<dd>
+	  <p>Disabilita il puntatore del mouse di Tux Paint e utilizza quello predefinito dal sistema operativo.</p>
+	  <p>In alcuni sistemi pu&ograve; succedere che il puntatore dia problemi. In tal caso, usare questa opzione.</p> 
+	</dd>
+
+	<dt><code><b>nooutlines=yes</b></code></dt>
+	<dd>
+	  <p>Questa modalit&agrave; offre contorni pi&ugrave; semplici per gli strumenti <b>Linea</b>, <b>Forma</b>, <b>Stampiglia</b> e <b>Cancella</b>.</p>
+
+	  <p>Questo pu&ograve; aiutare l'esecuzione di Tux&nbsp;Paint su computer obsoleti, oppure quando viene mostrato in uno schermo X-Window remoto.</p>
+	</dd>
+
+	<dt><code><b>nostamps=yes</b></code></dt>
+	<dd>
+	  <p>Fa in modo che il programma non carichi le immagini degli stampi, disabilitando di conseguenza lo strumento <b>Stampiglia</b>.</p>
+
+	  <p>Questo velocizza l'apertura di Tux&nbsp;Paint e riduce l'uso di memoria durante l'esecuzione.</p>
+	</dd>
+
+	<dt><code><b>nostampcontrols=yes</b></code></dt>
+	<dd>
+		Alcune immagini usate con lo strumento <b>Timbro</b> possono essere specchiate, capovolte, o essere ingrandite e rimpicciolite. Questa opzione disabilita queste possibilit&agrave;.
+	</dd>
+
+	<dt><code><b>mirrorstamps=yes</b></code></dt>
+	<dd>
+	  <p>Stabilisce che tutti i timbri che possono essere specchiati vengano specchiati automaticamente.</p>
+	  <p>Pu&ograve; essere utile a chi preferisce un orientamento destra-verso-sinistra piuttosto che sinistra-verso-destra.</p> 
+	</dd>
+	
+	<dt><code><b>keyboard=yes</b></code></dt>
+	<dd>
+	  <p>Permette di usare la tastiera per controllare il mouse (utile ad esempio per sistemi senza mouse).</p>
+	  
+	  <p>I tasti <b>[Freccia]</b> muovono il puntatore. Il tasto <b>[Spazio]</b> funge da pulsante del mouse.</p>
+	</dd>
+
+	<dt><code><b>savedir&nbsp;<i>CARTELLA</i></b></code></dt>
+	<dd>
+	  <p>Specifica quale cartella usare per salvare le immagini create con Tux&nbsp;Paint. Le cartelle predefinite sono "<code>~/.tuxpaint/saved/</code>" su GNU Linux e Unix, "<code>userdata\</code>" su Windows.</p>
+
+	  <p>Questo pu&ograve; essere utile in un laboratorio con Tux&nbsp;Paint installato su un server e i bambini lo usano da workstation. Potete configurare <code>savedir</code> per essere una cartella nella loro cartella principale (ad esempio, "<code>H:\tuxpaint\</code>")</p>
+
+	  <p><b>Nota:</b> quando si specifica una unit&agrave; di Windows (ad esempio,"<code>H:\</code>"), bisogna anche specificare una sottocartella.</p>
+	  <p><b>Esempio:</b> "<code>savedir=Z:\tuxpaint\</code>"</p>
+
+	</dd>
+	
+	<dt><code><b>saveover=yes</b></code></dt>
+	<dd>
+	  Disabilita la domanda "<i>Sovrascrivere la vecchia versione...?</i>" quando si salva un file gi&agrave; esistente. Con questa opzione attivata, la vecchia versione viene sempre rimpiazzata, automaticamente.
+	</dd>
+	
+	<dt><code><b>saveover=new</b></code></dt>
+	<dd>
+	 Anche questa opzione disabilita la domanda "<i>Sovrascrivere la vecchia versione...?</i>". In questo csao per&ograve;, viene automaticamente creato un nuovo file e la vecchia versione rimane salvata.
+	</dd>
+	
+	<dt><code><b>saveover=ask</b></code></dt>
+	<dd>
+	  <p><i>(Opzione superflua, in quanto corrisponde al comportamento predefinito.)</i></p>
+
+	  Salvando un disegno gi&agrave; esistente, verr&agrave; chiesto se sovrascrivere la vecchia versione o creare un nuovo file.
+	</dd>
+	
+	<dt><code><b>lang=<i>LINGUA</i></b></code></dt>
+	<dd>
+          <p>Permette di usare Tux&nbsp;Paint in uno dei linguaggi supportati. Le possibili scelte di <i>LINGUA</i> sono:</p>
+
+ 	  <blockquote>
+<table border="1" cellspacing="0" cellpadding="4" summary="Possible values for 'lang' language setting">
+	  <tbody><tr>
+	    <td><code>english</code></td>
+
+	    <td><code>american-english</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>afrikaans</code></td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+
+	  <tr>
+	    <td><code>basque</code></td>
+	    <td><code>euskara</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>bokmal</code></td>
+
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>brazilian-portuguese</code></td>
+	    <td><code>portuges-brazilian</code></td>
+	    <td><code>brazilian</code></td>
+
+	  </tr>
+	  <tr>
+	    <td><code>breton</code></td>
+	    <td><code>brezhoneg</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>british-english</code></td>
+
+	    <td><code>british</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>catalan</code></td>
+	    <td><code>catala</code></td>
+	    <td>&nbsp;</td>
+
+	  </tr>
+	  <tr>
+	    <td><code>chinese</code></td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>czech</code></td>
+
+	    <td><code>cesky</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>danish</code></td>
+	    <td><code>dansk</code></td>
+	    <td>&nbsp;</td>
+
+	  </tr>
+	  <tr>
+	    <td><code>dutch</code></td>
+	    <td><code>nederlands</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>finnish</code></td>
+
+	    <td><code>suomi</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>french</code></td>
+	    <td><code>francais</code></td>
+	    <td>&nbsp;</td>
+
+	  </tr>
+	  <tr>
+	    <td><code>german</code></td>
+	    <td><code>deutsch</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>greek</code></td>
+
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>hebrew</code></td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+
+	  <tr>
+	    <td><code>hungarian</code></td>
+	    <td><code>magyar</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>icelandic</code></td>
+
+	    <td><code>islenska</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>indonesian</code></td>
+	    <td><code>bahasa-indonesia</code></td>
+	    <td>&nbsp;</td>
+
+	  </tr>
+	  <tr>
+	    <td><code>italian</code></td>
+	    <td><code>italiano</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>japanese</code></td>
+
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>korean</code></td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+
+	  <tr>
+	    <td><code>lithuanian</code></td>
+	    <td><code>lietuviu</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>malay</code></td>
+
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>norwegian</code></td>
+	    <td><code>nynorsk</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+
+	  <tr>
+	    <td><code>polish</code></td>
+	    <td><code>polski</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>portuguese</code></td>
+
+	    <td><code>portugues</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>romanian</code></td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+
+	  <tr>
+	    <td><code>russian</code></td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>serbian</code></td>
+	    <td>&nbsp;</td>
+
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>spanish</code></td>
+	    <td><code>espanol</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+
+	    <td><code>slovak</code></td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>slovenian</code></td>
+	    <td><code>slovensko</code></td>
+
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>swedish</code></td>
+	    <td><code>svenska</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+
+	    <td><code>tamil</code></td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>vietnamese</code></td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+
+	  </tr>
+	  <tr>
+	    <td><code>turkish</code></td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <td><code>walloon</code></td>
+
+	    <td><code>walon</code></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  </tbody></table>	  </blockquote>
+	</dd>
+      </dl>
+      </blockquote>
+
+      <hr size=1 noshade>
+
+      <h4>Sovrascrivere la configurazione predefinita. Opzioni mediante l'uso di <code>.tuxpaintrc</code></h4>
+      <blockquote>
+        <p>Se qualcuna delle opzioni descritte sono definite nel file "<code>/etc/tuxpaint/tuxpaint.config</code>", &egrave; possibile sovrascriverle nel proprio file "<code>~/.tuxpaintrc</code>".</p>
+
+	<p>Per le opzioni vero/falso come "<code>noprint</code>" e "<code>grab</code>", si pu&ograve; specificare semplicemente  'no' nel proprio "<code>~/.tuxpaintrc</code>":</p>
+	
+        <blockquote><code>
+	  noprint=no<br>
+	  uppercase=no
+	</code></blockquote>
+	
+	<p>Oppure, si possono usare opzioni simili agli argomenti di linea di comando descritti in seguito. Ad esempio:</p>
+
+        <blockquote><code>
+	  print=yes<br>
+	  mixedcase=yes
+	</code></blockquote>
+      </blockquote>
+    </blockquote>
+	  
+    <hr size=1 noshade>
+
+    <a name="opzionilinea"></a><h3>Opzioni da linea di comando</h3>
+    <blockquote>
+      Le preferenze possono essere specificate anche nella linea di comando al momento di avviare Tux&nbsp;Paint.
+
+      <blockquote>
+      <dl>
+        <dt><code><b>
+--fullscreen<br>
+--800x600<br>
+--nosound<br>
+--noquit<br>
+--noprint<br>
+--printdelay=SECONDI<br>
+--printcfg<br>
+--simpleshapes<br>
+--uppercase<br>
+--grab<br>
+--noshortcuts<br>
+--nowheelmouse<br>
+--nofancycursors<br>
+--nooutlines<br>
+--nostamps<br>
+--nostampcontrols<br>
+--mirrorstamps<br>
+--keyboard<br>
+--savedir CARTELLA<br>
+--saveover<br>
+--saveovernew<br>
+--lang LINGUA<br>
+        </b></code></dt>
+        <dd>
+          Queste attivano o corrispondono alle opzioni del file di configurazione descritte sopra.
+	</dd>
+
+        <dt><code><b>
+ --windowed<br>
+--640x480<br>
+--sound<br>
+--quit<br>
+--print<br>
+--printdelay=0<br>
+--noprintcfgv
+--complexshapes<br>
+--mixedcase<br>
+--dontgrab<br>
+--shortcuts<br>
+--wheelmouse<br>
+--fancycursors<br>
+--outlines<br>
+--stamps<br>
+--stampcontrols<br>
+--dontmirrorstamps<br>
+--mouse<br>
+--saveoverask<br>
+	</b></code></dt>
+	<dd>
+          Queste possono essere usate per sovrascrivere quelle definite nel file di configurazione (se l'opzione non &egrave; definita nel file, non &egrave; necessario sovrascriverla).
+	</dd>
+
+
+        <dt><code><b>--locale locale</b></code></dt>
+	<dd>
+          <p>Utilizza Run Tux&nbsp;Paint in uno dei linguaggi supportati. Si veda la sezione "<i><a href="#linguadiff">Scegliere una lingua differente</a></i>".</p>
+	
+	  <p>(Se la localit&agrave; &egrave; gi&agrave; definita, ad esempio con una variabile d'ambiente "<code>$LANG</code>", questa opzione non &egrave; necessaria, dato che Tux&nbsp;Paint segue i settaggi dell'ambiente, se possibile)</p>
+	</dd>
+
+        <dt><code><b>--nosysconfig</b></code></dt>
+        <dd>
+	  <p>Su GNU Linux e Unix, questa opzione evita la lettura del file "<code>/etc/tuxpaint/tuxpaint.conf</code>".</p>
+
+	  <p>Se esiste, verr&agrave; usato solo il file di configurazione "<code>~/.tuxpaintrc</code>".</p>
+	</dd>
+      </dl>
+      </blockquote>
+    </blockquote>
+
+    <hr size=1 noshade>
+ 
+
+    <a name="opzionidesc"></a><h3>Opzioni descrittive da linea di comando</h3>
+    <blockquote>
+      <p>Le opzioni seguenti visualizzano del testo informativo sullo schermo. Il programma vero e proprio non viene avviato.</p>
+
+      <blockquote>
+      <dl>
+        <dt><code><b>--version</b></code></dt>
+	<dd>
+          Mostra il numero della versione e la data relativi al programma che si sta usando. Visualizza anche, se presenti, le opzioni specificate durante la compilazione (Si veda <code>INSTALL.it.txt</code> e <code>FAQ.it.txt</code>).
+	</dd>
+	  
+        <dt><code><b>--copying</b></code></dt>
+	<dd>
+          Mostra un introduzione ai termini della licenza di distribuzione di Tux&nbsp;Paint.
+	</dd>
+
+        <dt><code><b>--usage</b></code></dt>
+        <dd>
+	  Mostra la lista di argomenti disponibili da linea di comando.
+	</dd>
+
+        <dt><code><b>--help</b></code></dt>
+	<dd>
+          Mostra un testo di aiuto sull'uso di Tux&nbsp;Paint.
+	</dd>
+      </dl>
+      </blockquote>
+    </blockquote>
+  
+    <hr size=1 noshade>
+ 
+
+    <a name="linguadiff"></a><h3>Scegliere una lingua differente</h3>
+    <blockquote>
+      <p>Tux&nbsp;Paint &egrave; stato tradotto in molte lingue. Per accedere alle traduzioni si pu&ograve; usare l'argomento "<code>--lang</code>" da linea di comando (ad esempio "<code>--lang&nbsp;italian</code>") oppure specificare l'opzione  "<code>lang=</code>" nel file di configurazione (ad esempio, "<code>lang=italian</code>").</p>
+
+      <p>Tux&nbsp;Paint inoltre segue i settaggi del sistema operativo, se &egrave; gi&agrave; settata una variabile d'ambiente relativa alla lingua il programma verr&agrave; inizialmente visualizzato in quella lingua. (&egrave; possibile sovrascrivere questo comportamento usando l'argomento "<code>--locale</code>" da riga di comando (vedi sopra)).</p>
+    
+      <p>Di seguito l'elenco delle lingue supportate:</p>
+
+      <blockquote<table border=1 cellspacing=0 cellpadding=2
+      summary="Locale values and the languages they represent.">
+      <tr>
+        <th>Codice Locale</th>
+
+	<th>Lingua<br>
+            (nome originale)</th>
+	<th>Lingua<br>
+            (nome inglese)</th>
+      </tr>
+      <tr>
+        <td><code>C</code></td>
+
+	<td>&nbsp;</td>
+	<td>English</td>
+      </tr>
+      <tr>
+        <td><code>ca_ES</code></td>
+	<td>Catalan</td>
+	<td>Catal&agrave;</td>
+
+      </tr>
+      <tr>
+        <td><code>cs_CZ</code></td>
+	<td>Cesky</td>
+	<td>Czech</td>
+      </tr>
+      <tr>
+
+        <td><code>da_DK</code></td>
+	<td>Dansk</td>
+	<td>Danish</td>
+      </tr>
+      <tr>
+	<td><code>de_DE@euro</code></td>
+	<td>Deutsch</td>
+
+	<td>German</td>
+      </tr>
+      <tr>
+        <td><code>el_GR.UTF8</code> (*)</td>
+	<td>&nbsp;</td>
+	<td>Greek</td>
+
+      </tr>
+      <tr>
+        <td><code>en_GB</code></td>
+	<td>&nbsp;</td>
+	<td>British English</td>
+      </tr>
+      <tr>
+        <td><code>es_ES@euro</code></td>
+
+	<td>Espa&ntilde;ol</td>
+	<td>Spanish</td>
+      </tr>
+      <tr>
+        <td><code>fi_FI@euro</code></td>
+	<td>Suomi</td>
+
+	<td>Finnish</td>
+      </tr>
+      <tr>
+        <td><code>fr_FR@euro</code></td>
+	<td>Fran&ccedil;ais</td>
+	<td>French</td>
+
+      </tr>
+      <tr>
+        <td><code>he_IL</code> (*)</td>
+	<td>&nbsp;</td>
+	<td>Hebrew</td>
+      </tr>
+      <tr>
+
+        <td><code>hu_HU</code></td>
+	<td>Magyar</td>
+	<td>Hungarian</td>
+      </tr>
+      <tr>
+        <td><code>id_ID</code></td>
+	<td>Bahasa Indonesia</td>
+
+	<td>Indonesian</td>
+      </tr>
+      <tr>
+        <td><code>is_IS</code></td>
+	<td>&Iacute;slenska</td>
+	<td>Icelandic</td>
+      </tr>
+
+      <tr>
+        <td><code>it_IT@euro</code></td>
+	<td>Italiano</td>
+	<td>Italian</td>
+      </tr>
+      <tr>
+        <td><code>ja_JP.UTF-8</code> (*)</td>
+
+	<td>&nbsp;</td>
+	<td>Japanese</td>
+      </tr>
+      <tr>
+        <td><code>ko_KR.UTF-8</code> (*)</td>
+	<td>&nbsp;</td>
+	<td>Korean</td>
+
+      </tr>
+      <tr>
+        <td><code>lt_LT.UTF-8</code></td>
+	<td>Lietuviu</td>
+	<td>Lithuanian</td>
+      </tr>
+      <tr>
+
+        <td><code>ms_MY</code></td>
+	<td>&nbsp;</td>
+	<td>Malay</td>
+      </tr>
+      <tr>
+        <td><code>nn_NO</code></td>
+	<td>Norsk (nynorsk)</td>
+
+	<td>Norwegian Nynorsk</td>
+      </tr>
+      <tr>
+        <td><code>nl_NL@euro</code></td>
+	<td>&nbsp;</td>
+	<td>Dutch</td>
+      </tr>
+
+      <tr>
+        <td><code>pl_PL</code></td>
+	<td>Polski</td>
+	<td>Polish</td>
+      </tr>
+      <tr>
+        <td><code>pt_BR</code></td>
+
+	<td>Portug&ecirc;s Brazileiro</td>
+	<td>Brazilian Portuguese</td>
+      </tr>
+      <tr>
+        <td><code>pt_PT</code></td>
+	<td>Portug&ecirc;s</td>
+
+	<td>Portuguese</td>
+      </tr>
+      <tr>
+        <td><code>ro_RO</code></td>
+	<td>&nbsp;</td>
+	<td>Romanian</td>
+      </tr>
+
+      <tr>
+        <td><code>ru_RU</code></td>
+	<td>&nbsp;</td>
+	<td>Russian</td>
+      </tr>
+      <tr>
+        <td><code>sk_SK</code></td>
+
+	<td>Slovak</td>
+	<td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><code>sv_SE@euro</code></td>
+	<td>Svenska</td>
+	<td>Swedish</td>
+
+      </tr>
+      <tr>
+        <td><code>tr_TR@euro</code></td>
+	<td>&nbsp;</td>
+	<td>Turkish</td>
+      </tr>
+      <tr>
+        <td><code>wa_BE@euro</code></td>
+
+	<td>&nbsp;</td>
+	<td>Walloon</td>
+      </tr>
+      <tr>
+        <td><code>zh_CN</code> (*)</td>
+	<td>&nbsp;</td>
+	<td>Chinese (Simplified)</td>
+
+      </tr>
+      </table>
+
+      <b>(*)</b> - Questi linguaggi richiedono il loro set di caratteri, in quanto non sono rappresentabili con un set "latino" come gli altri. Si veda la sezione <i><a href="#caratterispe">Caratteri Speciali</a></i>, di seguito.<p>
+  
+      </blockquote>
+  
+      <a name="linguasys"></a><h4>Specificare la lingua di sistema</h4>
+      <blockquote>
+        <p>Modificare la lingua locale avr&agrave; molti effetti sul sistema.</p>
+      
+        <p>Come anticipato, oltre a permettere la scelta della lingua tramite argomenti da linea di comando ("<code>--lang</code>" e "<code>--locale</code>"), Tux&nbsp;Paint segue le preferenze di lingua del sistema.</p>
+
+        <p>Se non si &egrave; gi&agrave; specificata la variabile di lingua nel sistema, la sezione seguente spiega come fare:</p>
+      
+        <h5>Utenti GNU Linux/Unix</h5>
+	<blockquote>
+          <p>Per prima cosa, assicurarsi che la lingua che si desidera usare sia attivata aprendo il file "<code>/etc/locale.gen</code>" e aprire il programma "<code>locale-gen</code>" da root.</p>
+	
+	  <p><i>Nota: gli utenti Debian potrebbero essere in grado di usare semplicemente il programma "<code>dpkg-reconfigure&nbsp;locales</code>".</i></p>
+	
+          <p>Prima di aprire Tux&nbsp;Paint, definite la variabile locale "<code>$LANG</code>" con uno dei valori scritti sopra. (se volete che tutti i programmi che possono essere visualizzati nella lingua scelta vengano tradotti, potete inserire il comando seguente nello script di login del sistema, ad esempio <code>~/.profile</code>, <code>~/.bashrc</code>, <code>~/.cshrc</code>, ecc.)</p>
+
+
+          <p>Ad esempio, in una Bourne Shell (come BASH):</p>
+
+          <blockquote><code>
+            export&nbsp;LANG=it_IT@euro&nbsp;;&nbsp;\<br>
+            tuxpaint
+	  </code></blockquote>
+
+
+          <p>And in una C Shell (come TCSH):</p>
+
+          <blockquote><code>
+	    setenv&nbsp;LANG&nbsp;it_IT@euro&nbsp;;&nbsp;\<br>
+            tuxpaint
+	  </code></blockquote>
+        </blockquote>
+
+        <hr size=1 noshade>
+
+        <h5>Utenti Windows</h5>
+	<blockquote>
+          <p>Tux&nbsp;Paint riconosce e utilizza automaticamente la lingua locale del sistema, quindi questa sezione &egrave; dedicata a chi intende provare lingue differenti.</p>
+
+	  <p>La cosa pi&ugrave; semplice da fare &egrave; usare l'argomento '<code>--lang</code>' nel collegamento (si veda "INSTALL.it.txt"). In ogni caso, usando una finestra prompt di MSDOS, &egrave; anche possibile usare un comando come questo:</p>
+
+	  <blockquote><code>
+	    set LANG=es_ES@euro
+	  </code></blockquote>
+
+	  <p>...che modificher&agrave; la lingua di sistema solo finch&egrave; quella finestra di DOS rimarr&agrave; aperta.</p>
+
+	  <p>Per qualcosa di pi&ugrave; duraturo, si pu&ograve; aprire il file '<code>autoexec.bat</code>'  usando il programma "<b>sysedit</b>":</p>
+
+          <h6>Windows 95/98</h6>
+	  <ol>
+	  <li>Fare click su 'Start', selezionare 'Esegui...'.
+	  <li>Scrivere "sysedit" nel box 'Apri:' (con o senza le virgolette).
+	  <li>Fare click su 'OK'.
+	  <li>Trovate la finestra del file AUTOEXEC.BAT nel System Configuration editor.
+	  <li>Aggiungere al file, in fondo, quanto segue:
+
+	    <blockquote><code>	    
+	      set LANG=es_ES@euro
+	    </code></blockquote>
+	      
+	  <li>Chiudere System Configuration Editor, rispondendo Si alla richiesta di salvataggio delle modifiche.
+	  <li>Riavviare il computer.
+	  </ol>
+
+          <blockquote>
+            Per far si che il cambiamento si ripercuota su <b>tutto il sistema</b> e su <b>tutte le applicazioni</b> &egrave; possibile usare il pannello di controllo "Opzioni Internazionali":
+          </blockquote>
+
+          <ol>
+	  <li>Fare click su 'Start' button, selezionare 'Pannello di Controllo'.
+	  <li>Fare doppio click su "Opzioni Internazionali".
+	  <li>Selezionare una lingua dalla lista.
+	  <li>Fare click su 'OK'.
+	  <li>Riavviare il computer quando richiesto.
+          </ol>
+
+	</blockquote>
+      </blockquote>
+
+      <a name="caratterispe"><h4>Caratteri speciali</h4>
+      <blockquote>
+        Alcune lingue necessitano caratteri speciali. Servono quindi file di caratteri (in formato TrueType (TTF)), che sono troppo grandi per essere inseriti nell'installazione di Tux&nbsp;Paint e sono disponibili separatamente. (si veda la tabella sopra, alla voce "<i><a href="#linguadiff">Scegliere una lingua differente</a></i>")<p>
+
+	Quando si avvia Tux&nbsp;Paint in una lingua che necessita di un apposito file di caratteri, Tux&nbsp;Paint cerca di caricare il file dalla cartella "<code><b>fonts</b></code>" (in una sottocartella "<code><b>locale</b></code>"). Il nome del file corrisponde per le prime due lettere al codice 'locale' della lingua. (ad esempio, "ko" per il Coreano, "ja" per il Giapponese).<p>
+	
+	Ad esempio, su GNU Linux o Unix, quando Tux&nbsp;Paint viene eseguito in Coreano (ad esempio con l'opzione "<code>--lang&nbsp;korean</code>"), Tux&nbsp;Paint cerca di caricare il seguente file::<p>
+
+	<blockquote>
+	  <code>/usr/share/tuxpaint/fonts/locale/<b>ko.ttf</b></code>
+	</blockquote><p>
+
+	&egrave; possibile scaricare i file dei caratteri per le lingue supportate dal sito di Tux&nbsp;Paint <a href="http://www.newbreedsoftware.com/tuxpaint/">http://www.newbreedsoftware.com/tuxpaint/</a>.	(Guardare nella sezione 'Fonts' sotto 'Download.')<p>
+
+	Su Unix e GNU Linux, &egrave; possibile usare il <code>Makefile</code> disponibile con il file carattere per installare il carattere nella posizione appropriata.<p>
+      </blockquote>
+      
+    </blockquote>
+  </blockquote>
+
+  <hr size=1 noshade>
+
+
+  <a name="splashscreen"></a><h2>Schermata iniziale</h2>
+  <blockquote>
+    <p>Quando Tux&nbsp;Paint viene aperto, appare un'immagine con il nome del programma e alcune informazioni sugli autori.</p>
+
+    <center><img src="../../html/images/tuxpaint-title.jpg" width=324 height=254
+    alt="[Title Screenshot]"></center>
+
+    <p>Quando il caricamento &egrave; completato, fare click oppure premere un tasto per continuare (l'immagine scomparir&agrave; da s&egrave; dopo 30 secondi).</p>
+  </blockquote>
+ 
+  <hr size=1 noshade>
+
+
+  <a name="principale"><h2>Schermata principale</h2>
+  <blockquote>
+    La schermata principale &egrave; divisa nelle seguenti sezioni:
+
+    <dl>
+    <dt>Lato sinistro: Barra degli Strumenti (Toolbar)</dt>
+    <dd>
+      <p>Contiene gli strumenti per disegnare e per gestire i file.</p>
+
+      <center><img src="../../html/images/tools.jpg" width=324 height=254
+      alt="[Tools: Paint, Stamp, Lines, Shapes, Text, Magic, Undo, Redo,
+      Eraser, New, Open, Save, Print, Quit]"></center>
+    </dd>
+
+    <dt>In mezzo: spazio per disegnare (Drawing Canvas)</dt>
+    <dd>
+      <p>&egrave; la parte pi&ugrave; grande dello schermo. &egrave;, ovviamente, il posto in cui si disegna!</p>
+
+      <center><img src="../../html/images/canvas.jpg" width=324 height=254
+      alt="[(Canvas)]"></center>
+    </dd>
+
+
+    <dt>Lato destro: Selezione (Selector)</dt>
+    <dd>
+      <p>A seconda dello strumento corrente, la Selezione mostra cose differenti. Ad esempio, quando viene selezionato il Pennello, mostra i diversi tipi di pennelli disponibili. Quando viene selezionato il Timbro, mostra le diverse forme a disposizione.</p>
+
+      <center><img src="../../html/images/selector.jpg" width=324 height=254
+      alt="[Selectors - Brushes, Letters, Shapes, Stamps]"></center>
+    </dd>
+
+
+    <dt>In basso: Colori (Colors)</dt>
+    <dd>
+      <p>La tavolozza dei colori disponibili.</p>
+
+      <center><img src="../../html/images/colors.jpg" width=324 height=254
+      alt="[Colors - Black, White, Red, Pink, Orange, Yellow, Green, Cyan,
+      Blue, Purple, Brown, Grey]"></center>
+    </dd>
+
+
+    <dt>In basso: Area di aiuto (Help Area)</dt>
+    <dd>
+      <p>Tux, il pinguino mascotte di Linux, mostra simpatiche infrormazioni durante l'uso degli strumenti.</p>
+
+      <center><img src="../../html/images/tips.jpg" width=324 height=254
+      alt="(For example: 'Pick a shape. Click to pick the center, drag, then
+      let go when it is the size you want.  Move around to rotate it, and
+      click to draw it.)"></center>
+    </dd>
+    </dl>
+  </blockquote>
+
+  <hr size=1 noshade>
+
+
+  <a name="strumenti"></a><h2>Strumenti</h2>
+  <blockquote>
+<a name="strdis"></a>
+    <h3>Strumenti di disegno</h3>
+    <blockquote>
+      <dl>
+<a name="pennello"></a>
+      <dt><b>Pennello</b></dt>
+      <dd>
+        <img src="../../html/images/tool_paint.png" width=48 height=48 alt="" align=right>
+
+	<p>Il Pennello permette di disegnare a mano libera, utilizzando vari tipi di pennelli (da scegliere dalla Selezione sulla destra) e i colori della tavolozza (in basso).</p>
+
+        <p>Fare click e muovere il mouse per disegnare.</p>
+
+        <p>Mentre si disegna, viene eseguito un suono. Pi&ugrave; grande &egrave; il pennello, pi&ugrave; profondo &egrave; il suono.</p>
+
+        <br clear=all>
+
+        <center><img src="../../html/images/ex_paint.png" width=120 height=95
+        alt=""></center>
+
+        <hr size=1>
+      </dd>
+
+<a name="timbro"></a>
+      <dt><b>Timbro</b></dt>
+      <dd>
+        <img src="../../html/images/tool_stamp.png" width=48 height=48 alt="" align=right>
+
+        <p>Il Timbro &egrave; simile a degli adesivi. Permette di incollare disegni pronti o immagini fotografiche all'interno del proprio disegno.</p>
+
+        <p>Quando si muove il mouse, una linea lo segue evidenziando le proporizioni del disegno sullo spazio per disegnare.</p>
+
+        <p>Ad ogni timbro pu&ograve; essere associato un suono. Alcuni timbri possono essere colorati o cambiare colore.</p>
+
+<p>Ogni Timbro pu&ograve; essere modificato in altezza e larghezza, e molti Timbri possono essere capovolti o specchiati, usando i comandi in basso a destra sullo schermo.</p>
+
+<p>NOTA: Se &egrave; stato attivata l'opzione "<code>nostampcontrols</code>", Tux Paint non mostrer&agrave; i comandi Specchia, Capovolgi e Ingrandisci dei Timbri. Vedi sezione "<i><a href="#opzioni">Opzioni</a></i>".</p>
+
+        <br clear=all>
+
+        <center><img src="../../html/images/ex_stamps.png" width=182 height=156
+        alt=""></center>
+
+        <hr size=1>
+      </dd>
+
+<a name="linea"></a>
+      <dt><b>Linea</b></dt>
+      <dd>
+        <img src="../../html/images/tool_lines.png" width=48 height=48 alt="" align=right>
+
+        <p>Questo strumento permette di disegnare linee dritte di diverso spessore e colore..</p>
+
+        <p>Fare click e temere premuto per scegliere il punto di partenza della linea. Muovendo il mouse, si crea una riga sottile per evidenziare il modo in cui la linea sar&agrave; disegnata.</p>
+
+        <p>Lasciare il tasto del mouse per completare la linea. Si udir&agrave; un suono.</p>
+
+        <br clear=all>
+
+        <center><img src="../../html/images/ex_lines.png" width=76 height=103
+        alt=""></center>
+
+        <hr size=1>
+      </dd>
+
+<a name="forma"></a>
+      <dt><b>Forma</b></dt>
+      <dd>
+        <img src="../../html/images/tool_shapes.png" width=48 height=48 alt=""
+        align=right>
+
+        <p>Questo strumento permette di disegnare alcune semplici forme, perimetrali e piene.</p>
+
+	<p>Puoi selezionare una forma dal men&ugrave; di destra.</p>
+
+	<p>Fare click e tenere premuto per ingrandire la forma. Alcune forme (ad esempio il rettangolo e l'ovale) possono cambiare proporzioni, altre (ad esempio il quadrato e il cerchio) invece no.</p>
+
+	<p>Lasciare il tasto del mouse per selezionare la grandezza della forma.</p>
+
+        <dl>
+	  <dt>Modo "normale":</dt>
+          <dd>
+            <p>Ora, muovere il mouse per ruotare la forma.</p>
+
+	    <p>Facendo nuovamente click col mouse, la forma verr&agrave; disegnata nel colore selezionato.</p>
+	  </dd>
+
+          <dt>Modo "forme semplici":</dt>
+	  <dd>
+            Se questa modalit&agrave; &egrave; stata attivata (ad esempio con l'argomento da riga di comando "<code>--simpleshapes</code>") la forma verr&agrave; disegnata immediatamente, senza essere ruotata.
+	  </dd>
+	</dl>
+
+        <br clear=all>
+
+        <center><img src="../../html/images/ex_shapes.png" width=177 height=104
+        alt=""></center>
+
+        <hr size=1>
+      </dd>
+
+<a name="testo"></a>
+      <dt><b>Testo</b></dt>
+      <dd>
+        <img src="../../html/images/tool_text.png" width=48 height=48 alt="" align=right>
+
+        <p>Selezionare un carattere (dalle "Lettere" disponibili sulla destra) e un colore (dalla tavolozza in basso). Fare click sull'area di disegno per far apparire il cursore. Ora si pu&ograve; scrivere un testo con la tastiera.</p>
+	
+	<p>Premere <b>[Invio]</b> o <b>[Enter]</b> per disegnare il testo sul disegno. Il cursore si sposter&agrave; sulla riga sottostante.</p>
+	
+	<p>Fare click da un'altra parte nel disegno e il testo appena scritto verr&agrave; spostato in quel punto, dove &egrave; possibile modificarlo.</p>
+
+        <br clear=all>
+
+        <center><img src="../../html/images/ex_text.png" width=139 height=69
+        alt=""></center>
+
+        <hr size=1>
+      </dd>
+
+<a name="magia"></a>
+      <dt><b>Magia (Effetti speciali)</b></dt>
+      <dd>
+        <img src="../../html/images/tool_magic.png" width=48 height=48 alt="" align=right>
+
+        <p>Lo strumento "Magia" non &egrave; altro che un insieme di altri strumenti. Puoi selezionare l'effetto sulla destra e poi fare click sul disegno per applicare l'effetto.</p>
+
+        <br clear=all>
+
+        <dl>
+	<dt><b>Arcobaleno</b></dt>
+	<dd>
+	  &Egrave; simile al Pennello, ma quando si muove il mouse, cambia tutti i colori dell'arcobaleno.
+	</dd>
+
+	<dt><b>Scintille</b></dt>
+	<dd>
+	  Questo strumento disegna scintille gialle sul disegno.
+	</dd>
+
+	<dt><b>Specchia</b></dt>
+	<dd>
+	  Quando si fa click sul disegno, all'immagine viene applicata una simmetria ad asse verticale.
+	</dd>
+	  
+	<dt><b>Capovolgi</b></dt>
+	<dd>
+	  &Egrave; simile a "Specchia", ma applica una simmetria ad asse orizzontale.
+	</dd>
+	  
+	<dt><b>Sfuma</b></dt>
+	<dd>
+	  Questo strumento permette di sfumare il disegno.
+	</dd>
+
+	<dt><b>Blocchi</b></dt>
+	<dd>
+	  Facendo click col mouse e trascinandolo, si rende l'immagine "pixellata", mischiando i pixel di quell'area.
+	</dd>
+
+	<dt><b>Negativo</b></dt>
+	<dd>
+	  Permette di invertire i colori (ad esempio il bianco diventa nero, e viceversa).
+	</dd>
+
+	<dt><b>Scolora</b></dt>
+	<dd>
+	  Permette di scolorire un'area del disegno (usando lo strumento molte volte nello stesso punto, questo diventer&agrave; bianco).
+	</dd>
+	
+	<dt><b>Gesso</b></dt>
+	<dd>
+	  Permette di modificare il disegno facendolo assomigliare ad un disegno fatto con il gesso.
+	</dd>
+	
+	<dt><b>Gocciola</b></dt>
+	<dd>
+	  Questo strumento fa "gocciolare" i colori del disegno.
+	</dd>
+	 
+        <dt><b>Pesante</b></dt>
+	<dd>
+	  Fa prevalere il colore pi&ugrave; scuro.
+	</dd>
+
+	<dt><b>Leggero</b></dt>
+	<dd>
+	  Fa prevalere il colore pi&ugrave; chiaro.
+	</dd>
+	
+	<dt><b>Riempi</b></dt>
+	<dd>
+	  Campisce un'area con il colore selezionato. Permette di riempire velocemente ampie aree del disegno, come se fosse un album da colorare.
+	</dd>
+	</dl>
+
+        <hr size=1>
+      </dd>
+	
+<a name="gomma"></a>	
+      <dt><b>Gomma</b></dt>
+      <dd>
+        <img src="../../html/images/tool_eraser.png" width=48 height=48 alt=""
+        align=right>
+
+        <p>Questo strumento permette di cancellare porzioni di disegno. Basta fare click in un punto per farlo tornare bianco.</p>
+
+        <p>Mentre si muove il mouse, il puntatore &egrave; seguito da una grande linea quadrata, che mostra quale parte del disegno verr&agrave; cancellata facendo click.</p>
+
+        <p>Quando si cancella, viene eseguito un suono.</p>
+
+	<br clear=all>
+      </dd>
+      </dl>
+    </blockquote>
+
+    <hr size=1 noshade>
+
+<a name="comandi"></a>
+    <h3>Comandi</h3>
+
+    <blockquote>
+      <dl><dt><a name="annulla"></a><b>Annulla</b></dt><dd>
+        <img src="../../html/images/tool_undo.png" width="48" height="48" alt="" align="right">
+
+        <p>Facendo click su questro comando &egrave; possibile annullare l'ultima azione compiuta. &Egrave; anche possibile annullare pi&ugrave; di una volta!</p>
+	
+	<p>Nota: premere <b>[Control]-[Z]</b> sulla tastiera avr&agrave; lo stesso effetto.</p>
+
+	
+        <br clear="all">
+
+        <hr size="1">
+      </dd><dt><a name="ripeti"></a><b>Ripeti</b></dt><dd>
+        <img src="../../html/images/tool_redo.png" width="48" height="48" alt="" align="right">
+
+        <p>Facendo click su questo comando &egrave; possibile ripristinare le modifiche appena cancellate con lo strumento "Annulla".</p>
+
+        <p>Finch&egrave; non si disegna nuovamente, &egrave; possibile "ripetere" tante volte quante si &egrave; "annullato"!</p>
+
+	
+	<p>Nota: premere <b>[Control]-[R]</b> sulla tastiera avr&agrave; lo stesso effetto.</p>
+	
+        <br clear="all">
+
+        <hr size="1">
+      </dd><dt><a name="nuovo"></a><b>Nuovo</b></dt><dd>
+        <img src="../../html/images/tool_new.png" width="48" height="48" alt="" align="right">
+
+        <p>Fare click sul pulsante "Nuovo" per iniziare un nuovo disegno. Prima di cancellare quello corrente, verr&agrave; chiesta una conferma.</p>
+
+	<p>Nota: premere <b>[Control]-[N]</b> sulla tastiera avr&agrave; lo stesso effetto.</p>
+	
+        <br clear="all">
+
+        <hr size="1">
+      </dd><dt><a name="apri"></a><b>Apri</b></dt><dd>
+
+        <img src="../../html/images/tool_open.png" width="48" height="48" alt="" align="right">
+
+        <p>Questo comando mostra l'elenco dei disegni salvati. Nel caso ce ne siano pi&ugrave; di quanti possano essere contenuti in una schermata, usare le freccie "Su" e "Gi&ugrave;" per scorrere la lista.</p>
+
+        <br clear="all">
+
+        <center><img src="../../html/images/open_dialog.jpg" width="194" height="152" alt=""></center>
+
+	<p>Fare click su un disegno per selezionarlo, dopodich&egrave;...</p>
+
+        <blockquote>
+        <ul>
+        <li>
+            <img src="../../html/images/open_open.png" width="48" height="48" alt="" align="right">
+
+            <p>Fare click sul pulsante verde "Apri" per caricare il disegno selezionato.</p>
+
+	    <p>(In alternativa, &egrave; possibile fare doppio click su un disegno per caricarlo.)</p>
+
+            <br clear="all">
+
+	</li><li>
+            <img src="../../html/images/open_erase.png" width="48" height="48" alt="" align="right">
+
+            <p>Fare click sul pulsante marrone "Cancella" (il bidone della spazzatura) per cancellare il disegno selezionato (verr&agrave; chiesta una conferma).</p>
+
+            <br clear="all">
+
+	</li><li>
+
+            <img src="../../html/images/open_back.png" width="48" height="48" alt="" align="right">
+
+            <p>Fare click sul pulsante rosso "Indietro" per tornare al disegno corrente.</p>
+
+            <br clear="all">
+        </li></ul>
+        </blockquote>
+
+	<p>Se si sceglie di caricare un disegno senza aver salvato quello corrente, verr&agrave; chiesto se si lo si vuole salvare. (Vedi "<i><a href="#salva">Salva</a></i>")</p>
+
+	
+	<p>Nota: premere <b>[Control]-[O]</b> sulla tastiera avr&agrave; lo stesso effetto.</p>
+	
+        <br clear="all">
+
+        <hr size="1">
+      </dd><dt><b><a name="salva">Salva</a></b></dt><dd>
+        <img src="../../html/images/tool_save.png" width="48" height="48" alt="" align="right">
+
+        <p>Salva il disegno corrente.</p>
+	
+	<p>Se non era mai stato salvato prima, sar&agrave; aggiunto un elemento alla lista dei disegni salvati (ovvero: verr&agrave; creato un nuovo file).</p>
+
+	<p>Nota:non viene chiesto nulla (nemmeno un nome da dare al file). Semplicemente, il disegno viene salvato e viene eseguito un suono.</p>
+
+	<p>Se il disegno &egrave; gi&agrave; stato salvato in precedenza, o se il disegno &egrave; stato caricato con il comando "Apri", verr&agrave; prima chiesto se sovrascrivere la vecchia versione o creare un nuovo disegno (un nuovo file).</p>
+
+        <center><img src="../../html/images/saveover.png" width="177" height="110" alt=""></center>
+
+	<p>(NOTA: se l'opzione "<code>saveover</code>" o
+        "<code>saveovernew</code>" &egrave; attiva, non verr&agrave; chiesto nulla prima di sovrascrivere. Si veda la sezione "<a href="#opzioni"><i>Opzioni</i></a>")</p>
+	
+	<p>Nota: premere <b>[Control]-[S]</b> sulla tastiera avr&agrave; lo stesso effetto.</p>
+	
+        <br clear="all">
+
+        <hr size="1">
+      </dd><dt><a name="stampa"></a><b>Stampa</b></dt><dd>
+        <img src="../../html/images/tool_print.png" width="48" height="48" alt="" align="right">
+
+        <p>Facendo click su questo pulsante per stampare il disegno!</p>
+
+        <dl><dt>Disabilitare la stampa</dt><dd>
+	  <p>Se &egrave; stata attivata l'opzione "noprint" (attraverso l'uso di "<code>noprint=yes</code>" nel file di configurazione di Tux&nbsp;Paint o usando l'argomento da riga di comando "<code>--noprint</code>"), il pulsante "Stampa" sar&agrave; disabilitato.</p>
+
+	  <p>Si veda la sezione "<a href="#opzioni"><i>Opzioni</i></a>".</p>
+
+	</dd><dt>Limitare la stampa</dt><dd>
+	  <p>Se &egrave; stata attivata l'opzione "printdelay" (attraverso l'uso di "<code>printdelay=<i>SECONDI</i></code>" nel file di configurazione o usando l'argomento da riga di comando "<code>--printdelay=<i>SECONDI</i></code>"), &egrave; possibile stampare solo ogni <i>SECONDI</i> secondi.</p>
+
+	  <p>Ad esempio, usando "<code>printdelay=60</code>", sar&agrave; possibile stampare solo una volta ogni minuto.</p>
+
+	  <p>Si veda la sezione "<a href="#opzioni"><i>Opzioni</i></a>".</p>
+	</dd><dt>Comandi di stampa</dt><dd>
+
+	  <p><i>(solo per GNU Linux e Unix)</i></p>
+
+	  <p>Il comando usato per stampare &egrave; in realt&agrave; una lista di comandi che convertono una immagine PNG in un file PostScript e lo mandano alla stampante:</p>
+
+          <blockquote><code>
+	    pngtopnm | pnmtops | lpr
+	  </code></blockquote>
+
+	  <p>Questo comando pu&ograve; essere modificato usando l'opzione "printcommand" nel file di configurazione di Tux&nbsp;Paint.</p>
+
+	  <p>Si veda la sezione "<a href="#opzioni"><i>Opzioni</i></a>".</p>
+
+	</dd><dt>Opzioni di stampa</dt><dd>
+	  <p><i>(solo per Windows)</i></p>
+
+	  <p>Inizialmente Tux&nbsp;Paint utilizza la stampante prefedinita e opzioni standard quando viene usato il pulsante "Stampa".</p>
+
+	  <p>Comunque, se si preme il tasto <b>[ALT]</b> mentre si fa click sul pulsante, se non si &egrave; in modalit&agrave; tutto schermo, appare una finestra di dialogo di stampa di Windows, dove &egrave; possibile modificare le opzioni di stampa.</p>
+
+	  <p>&Egrave; possibile far apparire questa finestra di dialogo ad ogni stampa con l'opzione "printcfg", usando l'argomento da riga di comando "<code>--printcfg</code>" o "<code>printcfg=yes</code>" nel file di configurazione di Tux&nbsp;Paint ("<code>tuxpaint.cfg</code>").</p>
+
+	  <p>Se l'opzione "printcfg" &egrave; attiva, le opzioni di stampa saranno caricate dal file "<code>userdata/print.cfg</code>". Ogni cambiamento verr&agrave; salvato nello stesso file.</p>
+	  
+	  <p>Si veda la sezione "<a href="#opzioni"><i>Opzioni</i></a>".</p>
+	</dd></dl>
+        <br clear="all">
+
+        <hr size="1">
+
+      </dd><dt><a name="esci"></a><b>Esci</b></dt><dd>
+        <img src="../../html/images/tool_quit.png" width="48" height="48" alt="" align="right">
+
+        <p>Facendo click sul pulsante "Esci" chiudendo la finestra di Tux&nbsp;Paint o premendo il tasto "Escape" sulla tastiera, Tux&nbsp;Paint verr&agrave; terminato.</p>
+
+	<p>(NOTA: il pulsante "Esci" pu&ograve; essere disabilitato (ad esempio con l'argomento da riga di comando "<code>--noquit</code>"), ma il tasto <b>[Escape]</b> funzioner&agrave; ancora. Si veda la sezione "<a href="#opzioni"><i>Opzioni</i></a>")</p>
+	
+        <p>Verr&agrave; chiesta una conferma della volont&agrave; di terminare il programma.</p>
+
+        <p>Se si sceglie di uscire, e non si &egrave; ancora salvato il disegno, verr&agrave; chiesto se si desidera salvarlo. Se non &egrave; una nuova immagine verr&agrave; chiesto se si vuole sovrascrivere la vecchia versione o creare un nuovo file (Si veda "<a href="#salva">Salva</a>").</p>
+        
+	<p>NOTA: Se l'immagine viene salvata, verr&agrave; ricaricata automaticamente al prossimo avvio di Tux&nbsp;Paint!</p>
+
+	
+        <br clear="all">
+      </dd></dl>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<hr size="2" noshade="noshade">
+
+<a name="caricareimm"></a>
+<h1>Caricare altre immagini in Tux&nbsp;Paint</h1>
+<blockquote>
+
+  <p>Dato che la finestra "Apri" di Tux&nbsp;Paint mostra solo le immagini create con Tux&nbsp;Paint, cosa succederebbe se si volessero caricare altre immagini e disegni per modificarle con Tux&nbsp;Paint?</p>
+
+  <p>Per farlo, &egrave; sufficiente convertire l'immagine in formato PNG (Portable Network Graphic) e inserirla nella cartella dei file salvati di Tux&nbsp;Paint ("<code>~/.tuxpaint/saved/</code>" su GNU Linux e Unix, "<code>userdata\saved\</code>" su Windows, "<code>Library/Preferences/tuxpaint/saved/</code>" su Mac&nbsp;OS&nbsp;X).</p>
+
+  
+<a name="caricareconprg"></a>
+  <h2>Usare '<code>tuxpaint-import</code>'</h2>
+  <blockquote>
+    <p>Gli utenti GNU Linux e Unix possono usare lo script di shell "<code><b>tuxpaint-import</b></code>" che viene installato insieme a Tux&nbsp;Paint. Utilizza alcuni strumenti NetPBM per convertire l'immagine ("<code>anytopnm</code>"), scalarla in modo che possa essere contenuta nell'area di disegno di Tux&nbsp;Paint ("<code>pnmscale</code>") e riconvertirla in PNG ("<code>pnmtopng</code>").</p>
+
+    <p>Utilizza anche il comando "<code>date</code>" per prelevare data e ora correnti, che costituiscono il formato convenzionale che Tux&nbsp;Paint utilizza per i nomi dei file salvati (infatti non viene mai chiesto all'utente di scegliere un nome di file quando Salva o Apre un disegno!)</p>
+
+    <p>Per usare '<code>tuxpaint-import</code>', &egrave; sufficiente dare il comando da un propt di linea di comando e inserire il nome del (o dei) file da convertire.</p>
+
+    <p>Verranno convertiti e inseriti nella cartella appropriata (Nota: se si sta eseguendo il comando per conto di un utente diverso - ad esempio il proprio figlio - &egrave; necessario accertarsi di stare usando il suo account).</p>
+
+    <p>Esempio:</p>
+
+    <blockquote><code>
+      $ <b>tuxpaint-import grandma.jpg</b><br>
+      grandma.jpg -&gt; /home/username/.tuxpaint/saved/20020921123456.png<br>
+      jpegtopnm: WRITING A PPM FILE
+    </code></blockquote>
+
+    <p>La prima riga ("<code>tuxpaint-import&nbsp;grandma.jpg</code>") &egrave; il comando da dare. Le altre due sono l'output del programma mentre lavora.</p>
+    
+    <p>Adesso &egrave; possibile far partire Tux&nbsp;Paint, e una versione di quell'immagine sar&agrave; disponibile all'interno della finestra "Apri". Per aprirla basta fare doppio click sulla sua icona!</p>
+  </blockquote>
+
+<a name="caricareamano"></a>
+  <h2>Procedura manuale</h2>
+
+  <blockquote>
+    <p>Gli utenti Windows, Mac OS X e BeOS attualmente devono effettuare la conversione a mano.</p>
+
+    <p>Aprire un programma di grafica che sia in grado di gestire sia le immagini che volete inserire sia immagini in formato PNG (si veda il file "PNG.it.txt" per una lista di software suggeriti e per altre informazioni).</p>
+
+    <p>Ridurre l'immagine ad una larghezza che non superi i 448&nbsp;pixel e un'altezza che non superi i 376&nbsp;pixel (la grandezza massima deve essere di 448&nbsp;x&nbsp;376 pixel).</p>
+
+    <p>Salvare l'immagine in formato PNG. &Egrave; <b>fortemente</b> consigliato usare un nome di file composto da data e ora corrente, dato che questa &egrave; la convenzione usata da Tux&nbsp;Paint:</p>
+
+    <blockquote>
+      <code><b>AAAAMMGGOOmmss</b>.png</code>
+    </blockquote>
+
+    <ul>
+    <li>AAAA = Anno</li>
+    <li>MM = Mese (01-12)</li>
+    <li>GG = Giorno (01-31)</li>
+    <li>OO = Ora, in formato 24-ore (00-23)</li>
+    <li>mm = Minuti (00-59)</li>
+    <li>ss = Secondi (00-59)</li>
+    </ul>
+
+    <p>esempio:</p>
+
+    <blockquote>
+
+      <code>20020921130500</code> = 21 settembre 2002, 13:05:00
+    </blockquote>
+
+    <p>Inserire l'immagine PNG nella cartella dei file salvati di Tux&nbsp;Paint. Su Windows, si trova nella cartella "<code>userdata</code>". Su Mac OS X, nella cartella "<code>Library/Preferences/tuxpaint/</code>" all'interno della cartella home.</p>
+
+  </blockquote>
+</blockquote>
+
+<hr size="2" noshade="noshade">
+
+<a name="estendere"></a>
+<h1>Estendere Tux&nbsp;Paint</h1>
+<blockquote>
+  <p>Se si desidera cambiare cose come i Pennelli e i Timbri usati da Tux&nbsp;Paint, &egrave; possibile farlo in modo abbastanza semplice aggiungendo o togliendo file dal vostro disco fisso.</p>
+  
+  <p>Nota: &egrave; necessario riavviare Tux&nbsp;Paint perch&eacute; le modifiche abbiano effetto.</p>
+
+<a name="estfile"></a>
+  <h2>Dove vanno i file</h2>
+  <blockquote>
+    <h3>File Standard</h3>
+    <blockquote>
+      <p>Tux&nbsp;Paint cerca i suoi numerosi file di funzionamento nella cartella "data".</p>
+
+      <h4>GNU Linux e Unix</h4>
+
+      <blockquote>
+        <p>La locazione di questa cartella dipende dal valore settato per la variabile "<code>DATA_PREFIX</code>" al momento della compilazione. Si veda INSTALL.it.txt per maggiori informazioni.</p>
+
+        <p>In ogni caso, la locazione predefinita di questa cartella &egrave;:</p>
+
+        <blockquote><code>
+          /usr/local/share/tuxpaint/
+        </code></blockquote>
+
+	
+	<p>Nel caso si sia installato un pacchetto, la locazione sar&agrave; pi&ugrave; probabilmente:</p>
+
+        <blockquote><code>
+	  /usr/share/tuxpaint/
+        </code></blockquote>
+	
+      </blockquote>
+
+
+      <h4>Windows</h4>
+      <blockquote>
+
+        <p>Tux&nbsp;Paint cerca una cartella "data" nella stessa cartella in cui si trova l'eseguibile. Questa &egrave; la cartella che &egrave; stata usata al momento dell'installazione, ad esempio:</p>
+
+        <blockquote><code>
+	  C:\Programmi\TuxPaint\data
+        </code></blockquote>
+	
+      </blockquote>
+
+
+      <h4>Mac OS X</h4>
+
+      <blockquote>
+        <p>Tux&nbsp;Paint salva i file nella cartella "Libraries" del vostro account, sotto "Preferences", ad esempio:</p>
+
+	<blockquote><code>
+	  /Users/Joe/Library/Preferences/
+	</code></blockquote>
+
+      </blockquote>
+      
+    </blockquote>
+
+    <hr size="1" noshade="noshade">
+    
+
+    <h3>File personali</h3>
+    <blockquote>
+      <p>&Egrave; anche possibile creare pennelli, timbri e caratteri nella propria cartella personale per permettere a Tux&nbsp;Paint di trovarli.</p>
+
+      <h4>GNU Linux e Unix</h4>
+      <blockquote>
+
+        <p>La propria cartella personale di Tux&nbsp;Paint &egrave; "<code>~/.tuxpaint/</code>".</p>
+	
+	<p>Quindi, se la vostra cartella home &egrave; "<code>/home/pippo</code>", allora la cartella di Tux&nbsp;Paint &egrave; "<code>/home/pippo/.tuxpaint/</code>".</p>
+	
+	<p>Non dimenticare il punto ("<code>.</code>") prima del "<code>tuxpaint</code>"!</p>
+
+      </blockquote>
+      
+
+      <h4>Windows</h4>
+      <blockquote>
+        <p>La propria cartella personale di Tux&nbsp;Paint &egrave; chiamata "userdata" e si trova nella stessa cartella dell'eseguibile, ad esempio:</p>
+	
+        <blockquote><code>
+	  C:\Programmi\TuxPaint\userdata
+        </code></blockquote>
+
+	
+      </blockquote>
+
+    
+      <p>Per aggiungere pennelli, timbri e caratteri, creare una sottocartella all'interno della propria cartela di Tux&nbsp;Paint, rispettivamente di nome "<code><b>brushes</b></code>", "<code><b>stamps</b></code>" e "<code><b>fonts</b></code>".</p>
+
+      <p>(Ad esempio, se si crea un pennello di nome "<code>flower.png</code>", su GNU Linux o Unix andr&agrave; messo nella cartella "<code>~/.tuxpaint/brushes/</code>".)</p>
+
+    </blockquote>
+  </blockquote>
+
+  <hr size="1" noshade="noshade">
+
+<a name="estpennelli"></a>
+  <h2>Pennelli</h2>
+  <blockquote>
+    <p>I pennelli usati per disegnare con gli strumenti "Pennello" e "Linea" in Tux Paint sono semplici immagini PNG in scala di grigi.</p>
+
+    <img src="../../html/images/brush_edit.png" width="123" height="147" alt="" align="right">
+
+    <p>L'alpha (trasparenza) dell'immagine PNG viene usata per determinare la forma del pennello, questo significa che la forma pu&ograve; avere un effetto "anti-alising" e perfino essere parzialmente trasparente!</p>
+
+    <p>Le immagini dei pennelli non devono superare i 40&nbsp;pixel di larghezza e i 40&nbsp;pixel di altezza (quindi la grandezza massima deve essere 40&nbsp;x&nbsp;40 pixel).</p>
+
+    <p>Vanno semplicemente inserite nella cartella "<code><b>brushes</b></code>".</p>
+
+    <p>Nota: se i nuovi pennelli risultano essere quadrati o rettangoli pieni, &egrave; perch&eacute; hai dimenticato di usare la trasparenza alpha! Vedi il file di documentazione PNG.it.txt per maggiori informazioni su questo.</p>
+    
+    <br clear="all">
+  </blockquote>
+
+  <hr size="1" noshade="noshade">
+
+<a name="esttimbri"></a>
+  <h2>Timbri</h2>
+  <blockquote>
+
+    <p>Tutte le informazioni relative ai Timbri vanno nella cartella "<code><b>stamps</b></code>". &Egrave; utile creare sottocartelle per organizzare i timbri (ad esempio, &egrave; possibile avere una cartella "<code>festivit&agrave;</code>" che contiene le sottocartelle "<code>natale</code>" e "<code>pasqua</code>").</p>
+
+<a name="esttimbriimmagine"></a>
+    <h3>Immagine</h3>
+    <blockquote>
+
+      <p>I timbri possono essere composti da alcuni file separati. L'unico obbligatorio, ovviamente, &egrave; l'immagine del timbro.</p>
+
+      <img src="../../html/images/stamp_edit.png" width="128" height="147" alt="" align="right">
+   
+      <p>I timbri usati da Tux&nbsp;Paint sono immagini PNG. Possono essere a colori o in scala di grigi. L'alpha (trasparenza) del file PNG &egrave; usato per determinare i contorni dell'immagine (altrimenti verrebbero dei grossi rettangoli sul disegno).</p>
+
+      <p>La grandezza dei timbri non ha limiti, ma in pratica un'immagine larga 100&nbsp;pixel e alta 100&nbsp;pixel (100&nbsp;x&nbsp;100 pixel) &egrave; gi&agrave; grande per Tux&nbsp;Paint.</p>
+
+      <p>Nota: se i nuovi timbri hanno un contorno quadrato o rettangolare di un colore fisso (ad esempio, bianco o nero) &egrave; perch&eacute; hai dimenticato di usare la trasparenza alpha! Vedi il file di documentazione PNG.it.txt per maggiori informazioni su questo.</p>
+
+      <br clear="all">
+    </blockquote>
+
+    <hr size="1" noshade="noshade">
+
+<a name="esttimbritesto"></a>
+    <h3>Testo descrittivo</h3>
+    <blockquote>
+
+      <p>Un file di testo (".TXT") con lo stesso nome dell'immagine PNG (ad esempio, la descrizione di "<code>picture.png</code>" &egrave; contenuta nel file "<code>picture.txt</code>" nella stessa cartella).</p>
+      
+      <p>La prima riga del file sar&agrave; usata come testo descrittivo predefinito del timbro.</p>
+
+      <h4>Supporto multilingue</h4>
+      <blockquote>
+	<p>Al file possono essere aggiunte altre righe per rendere disponibili le traduzioni della descrizione, in modo tale che vengano mostrate quando Tux Paint viene usato in un'altra lingua (come Francese o Spagnolo).</p>
+
+        <p>Ci sono tre modi per inserire le traduzioni delle descrizioni di un timbro in un file "<code>.txt</code>".  In ciascun caso, l'inizio della riga deve corrispondere al Codice Locale della lingua in questione (ad esempio, "<code>de</code>" per tedesco, "<code>fr</code>" per francese).</p>
+
+	<ul>
+	<li><p>Le righe che iniziano con "<code><b>xx</b>=</code>" (dove "<code>xx</code>" &egrave; un Codice Locale) vengono considerate ASCII semplice. Di conseguenza, ogni carattere speciale presente nella riga verr&agrave; interpretato letteralmente.</p>
+
+	  
+	  <p>Per esempio, "<code>es=¡Niños!</code>", verr&agrave; reso letteralmente come "¡Niños!"</p>
+	
+	</li><li><p>Le righe che iniziano con "<code><b>xx</b>.esc=</code>" possono contenere sequenze di escape che permettono di creare descrizioni usando caratteri ASCII speciali (come "á" e "þ") senza bisogno di scervellarsi per capire come ottenere simili caratteri con qualsiasi editor si stia usando.</p>
+
+	  <p>Le sequenze di escape sono identiche a quelle usate in HTML per mostrare i caratteri ASCII compresi tra 161 e 255. Una sequenza comincia con "<code>&amp;</code>" (e commerciale), e finisce con "<code>;</code>" (punto e virgola). Si veda il file ESCAPES.it.txt per la lista delle sequenze di escape supportate.</p>
+
+	  <p>Ad esempio, "<code>es.esc=&amp;iexcl;Ni&amp;ntilde;os!</code>" diventa "¡Niños!"</p>
+
+	  <p><b>Nota:</b> come in HTML, se si desidera scrivere la "e commerciale" ("&amp;") nelle descrizioni che usano il metodo "<code><b>xx</b>.esc</code>", &egrave; necessario utilizzare la sua sequenza di escape: "<code>&amp;amp;</code>".</p><p>
+
+	
+	</p></li><li><p>Le righe che iniziano con "<code><b>xx</b>.utf8=</code>" possono essere usate per usare testo in formato UTF-8 all'interno delle traduzioni delle descrizioni. In questo caso &egrave; necessario usare un editor in grado di salvare file in formato UTF-8.</p>
+	</li></ul><p>
+
+        </p><p>Se non ci sono traduzioni disponibili per la lingua con cui si sta usando Tux&nbsp;Paint, viene visualizzata la riga predefinita (ovvero la prima, che solitamente &egrave; in inglese).</p>
+     </blockquote>
+
+      <h4>Utenti Windows</h4>
+
+      <blockquote>
+        <p>Usare NotePad o WordPad per modificare/creare questi file. Assicurarsi di salvarli in testo semplice, e che il loro nome termini con l'estensione "<code>.txt</code>"...</p>
+      </blockquote>
+    </blockquote>
+
+    <hr size="1" noshade="noshade">
+
+<a name="esttimbrisuono"></a>
+    <h3>Effetto sonoro</h3>
+
+    <blockquote>
+      <p>Un file in formato WAVE (".WAV") con lo stesso nome del file PNG che costituisce l'immagine del timbro. (ad esempio, il suono associato a "<code>picture.png</code>" &egrave; il file "<code>picture.wav</code>" che si trova nella stessa cartella).</p>
+      
+      <h4>Supporto multilingue</h4>
+      <blockquote>
+        <p>Per suoni in differenti lingue (ad esempio, se &egrave; il suono di qualcuno che pronuncia una parola, e si vuole tradurre il significato della parola detta), bisogna usare un file WAVE con il Codice Locale nel nome del file, nella forma: "<code><b>TIMBRO_CODICE</b>.wav</code>"</p>
+
+	
+        <p>Il suono associato al timbro "<code>picture.png</code>", quando Tux&nbsp;Paint viene usato in lingua spagnola, sarebbe "<code>picture_es.wav</code>". In francese sarebbe "<code>picture_fr.wav</code>".  E cos&igrave; via...</p>
+
+        <p>Se non &egrave; presente un file relativo alla lingua in uso, Tux&nbsp;Paint user&agrave; quello predefinito (ad esempio, "<code>picture.wav</code>").</p>
+
+      </blockquote>
+    </blockquote>
+
+    <hr size="1" noshade="noshade">
+
+<a name="esttimbriopzioni"></a>
+    <h3>Opzioni dei timbri</h3>
+    <blockquote>
+      <p>Oltre che una forma grafica, una descrizione testuale e un effetto sonoro, un timbro pu&ograve; avere anche altre propriet&agrave;. Per usarle, bisogna creare il "data file" del timbro.</p>
+
+      
+      <p>Un data file &egrave; semplicemente un file di testo contenente le opzioni.</p>
+      
+      <p>Il file ha lo stesso nome dell'immagine PNG e l'estensione "<code>.dat</code>" (ad esempio il data file relativo al timbro "<code>picture.png</code>" &egrave; il file "<code>picture.dat</code>" contenuto nella stessa cartella).</p>
+
+      <h4>Timbri colorati</h4>
+      <blockquote>
+
+        <p>I timbri possono essere "a colori" o "a tinta".</p>
+      
+        <h5>A colori</h5>
+	<blockquote>
+          <p>I timbri "a colori" sono simili ai pennelli - si sceglie il timbro desiderato e si seleziona il colore con cui lo si vuole disegnare (i timbri dei simboli, come i segni matematici e musicali, ne sono un esempio).</p>
+
+          <p>Dell'immagine originale non viene usato altro che la trasparenza (il canale "alpha"). Il colore dei timbri risulta senza sfumature.</p>
+
+          <center><img src="../../html/images/ex_colorable.png" width="74" height="92" alt=""></center>
+
+        
+	  <p>Aggiungere la parola "<code><b>colorable</b></code>" al data file del timbro.</p>
+	</blockquote>
+
+        <h5>A tinta</h5>
+	<blockquote>
+          <p>I timbri "a tinta" sono simili a quelli "a colori", ma vengono mantenuti i dettagli dell'immagine originale (tecnicamente, viene usata l'immagine originale, ma la tonalit&agrave; viene cambiata in base al colore selezionato).</p>
+
+          <center><img src="../../html/images/ex_tintable.png" width="151" height="78" alt=""></center>
+
+          <p>Aggiungere la parola "<code><b>tintable</b></code>" al data file del timbro.</p>
+	</blockquote>
+      </blockquote>
+
+      <h4>Timbri non modificabili</h4>
+      <blockquote>
+
+        <p>Normalmente un timbro pu&ograve; essere capovolto, specchiato, o entrambe le cose. Queste modifiche vengono fatte usando i pulsanti sotto la "selezione", in basso a destra nella schermata di Tux&nbsp;Paint.</p>
+
+	<p>A volte non ha senso permettere che un timbro venga capovolto o specchiato, ad esempio con i timbri di numeri e lettere. Altre volte i timbri sono simmetrici, quindi capovolgere o specchiare il timbro non serve.</p>
+
+	<p>Per fare in modo che un timbro non possa essere capovolto, aggiungere la parola "<code><b>noflip</b></code>" al data file del timbro.</p>
+
+	<p>Per fare in modo che un timbro non possa essere specchiato, aggiungere la parola "<code><b>nomirror</b></code>" al data file del timbro.</p>
+
+      </blockquote>
+
+
+      <h4>Utenti Windows</h4>
+      <blockquote>
+	<p>Usare NotePad o WordPad per modificare/creare questi file. Assicurarsi di salvarli in testo semplice, e che il loro nome termini con l'estensione "<code>.dat</code>" e non con "<code>.txt</code>"...</p>
+      </blockquote>
+
+    </blockquote>
+
+<a name="esttimbrispecchio"></a>
+    <h3>Immagini pre-specchiate</h3>
+    <blockquote>
+      <p>In alcuni casi, pu&ograve; essere utile creare una versione specchiata del timbro. Ad esempio, pensando ad un camion dei pomperi con la scritta "<i>Vigili del fuoco</i>" sulla fiancata, probabilmente non si desidera che la scritta appaia al contrario quando il timbro viene specchiato!</p>
+
+      <p>Per creare un'immagine specchiata che Tux&nbsp;Paint usi al posto di specchiare direttamente il timbro, basta creare una seconda immagine "<code>.png</code>" con lo stesso nome, ma che termini con "<code><b>_mirror</b></code>" prima dell'estensione.</p>
+
+      
+      <p>Ad esempio, per il timbro "<code><b>CamionVdF.png</b></code>" si crei un file chiamato "<code><b>CamionVdF_mirror.png</b></code>", che verr&agrave; usato quando il timbro viene specchiato (evitando l'uso dell'immagine "<code>CamionVdF.png</code>" al contrario).</p>
+    </blockquote>
+    
+  </blockquote>
+  
+  <hr size="1" noshade="noshade">
+
+<a name="estcaratteri"></a>
+  <h2>Caratteri</h2>
+  <blockquote>
+    <img src="../../html/images/fontsizes.png" width="48" height="48" alt="" align="right">
+
+    <p>I caratteri usati da Tux&nbsp;Paint sono TrueType&nbsp;Fonts (TTF).</p>
+    
+    <p>&Egrave; sufficiente inserire i file nella cartella "<code><b>fonts</b></code>" perch&eacute; Tux&nbsp;Paint li carichi e permetta di utilizzarli con lo strumento "Testo", mettendoli a disposizione in quattro grandezze selezionabili dal men&ugrave; sulla destra.</p>
+
+    <br clear="all">
+  </blockquote>
+</blockquote>
+
+<hr size="2" noshade="noshade">
+
+<a name="informazioni"></a>
+<h1>Altre Informazioni</h1>
+<blockquote>
+  <p>Per maggiori inormazioni, si vedano gli altri file di documentazione allegati a Tux&nbsp;Paint.</p>
+
+  <p>Se si desidera aiuto, &egrave; possibile contattare liberamente New Breed Software:</p>
+
+  <blockquote>
+    <a href="http://www.newbreedsoftware.com/">http://www.newbreedsoftware.com/</a>
+  </blockquote>
+
+  <p>&Egrave; anche possibile partecipare alle numerose mailing list di Tux&nbsp;Paint:</p>
+
+  <blockquote>
+    <a href="http://www.newbreedsoftware.com/tuxpaint/lists/">http://www.newbreedsoftware.com/tuxpaint/lists/</a>
+  </blockquote>
+  
+</blockquote>
+
+</body></html>

@@ -1,0 +1,27 @@
+These files are about merge module.
+
+Prepare WiX (http://sourceforge.net/projects/wix)
+and libXSLT.
+I use libXSLT in cygwin.
+
+run ./configure at parent directory.
+It makes Makefile from Makefile.in.
+
+You should set LIGHT_PATH environment variable for
+prefix of Pango-related binaries (i.e., C:\msys\1.0\local).
+SDL.dll must be placed on current directory.
+SDL_Pango.dll must be placed on ..\VisualC2003\Release.
+And 'make merge_module'.
+
+If you want to make sample MSI file, you should place
+testbench.exe on ..\VisualC2003\testbench\Release. 
+C:\Program Files\Common Files\Merge Modules\VC_User_CRT71_RTL_X86_---.msm
+should be there.
+And 'make testbench'.
+
+If you want to make development library MSI file, 
+SDL_Pango.lib must be placed on ..\VisualC2003\Release.
+And 'make dev_vc'.
+
+ - NAKAMURA Ken'ichi
+ 

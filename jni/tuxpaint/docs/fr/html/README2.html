@@ -1,0 +1,1158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+  
+
+
+  
+  <title>Brosses-tampons</title>
+  <link rel="stylesheet" type="text/css" href="images/bordure/bordure.css">
+</head>
+
+
+<body>
+
+
+<div id="conteneurhaut">
+<div id="a1"></div>
+
+
+<div id="b"></div>
+
+
+<div id="c">brosses,
+tampons...</div>
+
+
+<div id="d"></div>
+
+
+<div id="e"></div>
+
+
+</div>
+
+
+<div id="f">
+<div id="h"><br>
+
+
+<br>
+
+
+<h1>Comment
+cr&eacute;er des brosses, des tampons, des polices et des
+images "starter"?</h1>
+
+
+Si vous voulez ajouter ou changer des choses telles que les brosses et
+les tampons utilis&eacute;s par Tux Paint, &nbsp;vous pouvez le
+faire
+simplement en ajoutant ou en enlevant des fichiers sur votre disque dur.<br>
+
+
+<br>
+
+
+<br>
+
+
+NB : vous devrez red&eacute;marrer Tux Paint pour que les
+changements prennent effet.
+<a name="haut"></a>
+<ol start="1">
+
+
+  <li><a href="#r%E9pertoire">Les
+r&eacute;pertoires o&ugrave; Tux Paint range les
+diff&eacute;rents &eacute;l&eacute;ments</a><br>
+
+
+  </li>
+
+
+  <li><a href="#brosses">Comment cr&eacute;er
+des brosses?</a></li>
+
+
+  <li><a href="#tampons">Comment cr&eacute;er
+des tampons?</a></li>
+
+
+  <li><a href="#starter">Comment cr&eacute;er
+des Images "starter"?</a></li>
+
+
+  <li><a href="#polices">Comment ajouter des polices?</a></li>
+
+
+  <li><a href="#importer">Importer des images pour
+les ouvrir dans Tux Paint.</a></li>
+
+
+</ol>
+
+
+<br>
+
+
+<h2><a name="r&eacute;pertoire"></a>1. Les
+r&eacute;pertoire o&ugrave; Tux Paint range les
+diff&eacute;rents &eacute;l&eacute;ments.</h2>
+
+
+<h3>Les fichiers standards</h3>
+
+
+<br>
+
+
+Tux Paint regarde dans<span style="font-weight: bold; text-decoration: underline;"> ses </span>r&eacute;pertoires
+de donn&eacute;es pour trouver ses fichiers de configuration.<br>
+
+
+<br>
+
+
+<h4>Linux et Unix</h4>
+
+
+O&ugrave; ces r&eacute;pertoires sont install&eacute;s
+d&eacute;pend de
+la valeur d&eacute;finie pour "DATA_PREFIX" quand Tux Paint est
+construite. Pour plus de d&eacute;tail voir INSTALL.txt.<br>
+
+
+<br>
+
+
+Par d&eacute;faut le r&eacute;pertoire est :<br>
+
+
+<span style="font-style: italic;">&nbsp;/usr/local/share/tuxpaint/</span><br>
+
+
+<br>
+
+
+Si vous l'avez install&eacute; &agrave; partir d'un package il
+est plus s&ucirc;rement :&nbsp;<br>
+
+
+&nbsp;<span style="font-style: italic;">/usr/share/tuxpaint/</span><br>
+
+
+<h4>Mac OS X</h4>
+
+
+Tux&nbsp;Paint range ces fichiers dans le r&eacute;pertoire :<br>
+
+
+&nbsp;<span style="font-style: italic;">/Users/Joe/Library/Application
+Support/tuxpaint/ </span>et non pas dans &nbsp;<span style="font-style: italic;">/Users/Joe/Library/preferences/ </span>comme
+indiqu&eacute; dans le texte en anglais. Attention aux fichiers
+cach&eacute;s (par exemple &nbsp;<span style="font-style: italic;">/Users/Joe/Library/Application
+Support/tuxpaint/saved/.thumbnail/ </span>)<br>
+
+
+<br>
+
+
+<h4>&nbsp;Windows</h4>
+
+
+<br>
+
+
+Tux&nbsp;Paint regarde dans un r&eacute;pertoire
+nomm&eacute; 'data'
+situ&eacute; dans le m&ecirc;me r&eacute;pertoire que le
+programme
+ex&eacute;cutable. Ces le r&eacute;pertoire qui est
+cr&eacute;&eacute;
+lors de l'installation :&nbsp;<br>
+
+
+&nbsp;C:\Program&nbsp;Files\TuxPaint\data<br>
+
+
+<br>
+
+
+<h3>Fichiers personnels</h3>
+
+
+Vous pouvez aussi cr&eacute;er des brosses, des tampons, des
+polices et
+des images 'starter' dans votre propre r&eacute;pertoire
+o&ugrave; Tux
+Paint les trouvera.<br>
+
+
+<br>
+
+
+<h4>Linux et Unix</h4>
+
+
+Votre r&eacute;pertoire Tux Paint personnel est&nbsp;
+"~/.tuxpaint/".<br>
+
+
+<br>
+
+
+C'est &agrave; dire que si votre r&eacute;pertoire home
+est&nbsp;"/home/karl", alors votre r&eacute;pertoire
+Tux&nbsp;Paint est
+"/home/karl/.tuxpaint/".<br>
+
+
+<br>
+
+
+Ne pas oublier le point (".") avant&nbsp;'tuxpaint'!<br>
+
+
+<h4>Mac OS X</h4>
+
+
+Dans la version anglaise rien est dit concernant Mac OS X. J'ai d'abord
+cru qu'il fallait faire comme pour linux, apr&egrave;s tout OS X
+est un
+syst&egrave;me UNIX; mais ce n'est pas le cas. En fait on peut
+cr&eacute;er les dossiers <span style="font-style: italic;">brushes</span>,
+<span style="font-style: italic;">stamps</span>, <span style="font-style: italic;">fonts</span> et <span style="font-style: italic;">starters</span> dans le
+dossier &nbsp;<span style="font-style: italic;">/Users/Joe/Library/Application
+Support/tuxpaint/ </span>et cela fonctionne.<br>
+
+
+<h4>Windows</h4>
+
+
+Votre r&eacute;pertoire Tux Paint personnel se nomme "<span style="font-style: italic;">userdata</span>" et
+il
+est dans le m&ecirc;me r&eacute;pertoire que
+l'ex&eacute;cutable :<br>
+
+
+&nbsp;C:\Program&nbsp;Files\TuxPaint\userdata<br>
+
+
+<br>
+
+
+<br>
+
+<!--
+&nbsp;&nbsp;&nbsp; <a href="#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a>
+<br>
+-->
+
+<h2><a name="brosses"></a>2. Comment
+cr&eacute;er des brosses?</h2>
+
+
+<br>
+
+
+Pour cr&eacute;er des brosses : il faut d'abord cr&eacute;er un
+dossier
+<span style="font-style: italic;">brushes</span>,
+s'il n'existe pas, dans votre r&eacute;pertoire personnel de Tux
+Paint.<br>
+
+
+Les brosses utilis&eacute;es pour l'outil dessin et l'outil ligne
+dans Tux Paint sont de simple images PNG en niveau de gris.<br>
+
+
+La couche alpha (transparence) de l'image PNG est utilis&eacute;e
+pour
+d&eacute;terminer la forme de la brosse, ce qui signifie que la
+forme
+peut-&ecirc;tre anti-alias&eacute;e et m&ecirc;me
+partiellement
+transparente. (L'anti-aliasing est une technique qui rend les bord
+d'une figure l&eacute;g&egrave;rement floue pour qu'on ait pas
+l'impression de voir une forme pixellis&eacute;e).<br>
+
+
+Les images de brosses ne doivent pas &ecirc;tre plus grande que 40
+pixel par 40.<br>
+
+
+<br>
+
+
+Une fois l'image PNG de la brosse cr&eacute;e il n'y a plus
+qu'&agrave; la sauvegarder dans le dossier <span style="font-style: italic;">brushes</span>. <br>
+
+
+<br>
+
+
+NB : Si votre nouvelle brosse appara&icirc;t comme un rectangle (ou un
+carr&eacute;) plein, c'est parce que vous avez oubli&eacute;
+d'utiliser
+la transparence! Voir la documentation&nbsp;<a href="PNG.html">Qu'est
+qu'un PNG? Et comment en cr&eacute;er un?</a> pour plus
+d'informations et de conseils.<br>
+
+
+&nbsp;<br>
+
+
+<br>
+
+<!--
+&nbsp;&nbsp;&nbsp; <a href="Brosses-tampons.html#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><br>
+-->
+
+<h2><a name="tampons"></a>3. Comment
+cr&eacute;er des tampons?</h2>
+
+
+<br>
+
+
+Ils se rangent dans le r&eacute;pertoire <span style="font-style: italic;">stamps</span>, s'il
+n'existe pas, dans votre r&eacute;pertoire personnel de Tux Paint.<br>
+
+
+On peut cr&eacute;er des sous-dossiers dans son dossier <span style="font-style: italic;">stamps</span> (par exemple
+<span style="font-style: italic;">/stamps/vacances/</span>
+et <span style="font-style: italic;">/stamps/animaux/</span>
+- ceux qui utilisent l'OS du cot&eacute; obscur remplacent les /
+par des \.-).<br>
+
+
+<br>
+
+
+Un tampon, c'est une image au format PNG qui doit consid&eacute;rer
+les
+pixels blancs comme transparents (en fait c'est l'alpha qui
+d&eacute;termine la transparence, c'est &agrave; dire que
+chaque pixel de l'image est plus ou moins transparent en fonction de la
+valeur alpha qui lui est allou&eacute;e. Chaque point est plus ou
+moins
+transparent et laisse donc plus ou moins voir l'arri&egrave;re
+plan.)<br>
+
+
+<br>
+
+
+<div style="text-align: center;"><img style="border: 2px solid ; width: 600px; height: 100px;" alt="tete_chien" src="images/tete_de_chien.png"></div>
+
+
+<div style="text-align: center; font-style: italic;"><small>Pour
+des raisons d&eacute;monstratives, le blanc appara&icirc;t en
+jaune dans le dessin ci-dessus.<br>
+
+
+exemple 1 : seuls les contours de la t&ecirc;te sont
+marqu&eacute; dans le dessin et on peut colorier autour et dedans<br>
+
+
+exemple 2 : toute la t&ecirc;te est marqu&eacute;e, mais
+le&nbsp;tour du chien c'est transparent.<br>
+
+
+exemple 3 : la transparence du dessin n'a pas &eacute;t&eacute;
+conserv&eacute;e le tampon est rectangulaire avec une
+t&ecirc;te de
+chien au milieu.<br>
+
+
+</small></div>
+
+
+<br>
+
+
+Comment fait-on une image au format PNG? Personnellement j'utilise un
+logiciel open source de dessin qui s'appelle le GIMP (voir&nbsp;<a href="PNG.html">Qu'est qu'un PNG? Et comment en
+cr&eacute;er un?</a>) ou photoshop element. D'autres
+logiciels sont capables de
+cr&eacute;er des images png. Le format se choisit au moment de
+l'enregistrement.<br>
+
+
+La taille de l'image ne doit pas d&eacute;passer 100 pixels sur 100
+(d&eacute;j&agrave; une grosse image pour Tux Paint : mais
+attention &ccedil;&agrave;
+veut dire que les d&eacute;tails du dessin peuvent ne pas passer
+donc
+prendre un dessin de base assez simple)<br>
+
+
+Attention de bien enregistrer l'alpha en transparent. et attention dans
+le choix du nom : pas de caract&egrave;res sp&eacute;ciaux ni
+accentu&eacute;s (Ils sont souvent responsables de
+probl&egrave;mes.)<br>
+
+
+<br>
+
+
+Consid&eacute;rons maintenant que l'image
+tetechien.png. a &eacute;t&eacute; cr&eacute;&eacute;e
+et qu'elle a &eacute;t&eacute; plac&eacute;e dans <span style="font-style: italic;">/stamps/animaux/</span><br>
+
+
+On peut faire un texte d'explication qui appara&icirc;tra dans le bas de la
+fen&ecirc;tre de Tux Paint :<br>
+
+
+ouvrir un &eacute;diteur de texte (par ex Text Edit sur Mac OS X,
+Kedit sur Linux, word pad sur Windows)<br>
+
+
+premi&egrave;re ligne description en anglais :"en .utf8= head of
+dog"<br>
+
+
+deuxi&egrave;me ligne description en fran&ccedil;ais "fr .utf8=
+t&ecirc;te de chien"<br>
+
+
+(Si on veut mettre une description en espagnol 3&deg; ligne :" es
+.utf8= cabeza de perro")<br>
+
+
+On sauvegarde au format UTF8 (Param&eacute;trez Text Edit pour
+qu'il
+cr&eacute;er de nouveaux documents au format simple text et choisir
+l'encodage UTF8 lors de l'enregistrement, sous Windows choisissez Plain
+text (ou simple texte)) avec l'extension
+.txt (<span style="font-style: italic;">tetechien.txt</span>)
+dans le dossier <span style="font-style: italic;">/stamps/animaux/</span><br>
+
+
+<br>
+
+
+On peut peux aussi associer un son &agrave; son image. <br>
+
+
+On cr&eacute;er un son au format .WAV (AIFF sur Mac OS X dont on
+modifie l'extension .aif ou .aiff en .wav) nomm&eacute; <span style="font-style: italic;">tetechien.wav</span> dans
+le dossier&nbsp; <span style="font-style: italic;">/stamps/animaux/</span>.
+Si ce son est un mot, on
+peut cr&eacute;er toute une suite de traduction : <br>
+
+
+par exemple <br>
+
+
+<ul>
+
+
+  <li>dog.wav,
+"son=dog"; </li>
+
+
+  <li>dog_fr.wav, "son=chien"; </li>
+
+
+  <li>dog_es.wav, "son=perro".</li>
+
+
+</ul>
+
+
+<br>
+
+
+On peut donner des instructions au logiciel pour qu'il g&egrave;re
+d'une certaine mani&egrave;re le tampon. Pour cela il faut ouvrir
+un
+&eacute;diteur de texte&nbsp;et taper les instructions
+suivantes :<br>
+
+
+<span style="font-weight: bold;">
+colorable</span> = si on &eacute;crit cette instruction le
+logiciel permettra
+&agrave; l'utilisateur de choisir la couleur au moment de
+l'utilisation
+(comme pour les pinceaux)<br>
+
+
+<span style="font-weight: bold;">
+tintable</span> = si on &eacute;crit cette instruction
+l'image d'origine
+sera teint&eacute;e par la couleur choisie par l'utilisateur;
+Seules
+les zones &agrave; plus de 25 % de saturations seront
+teint&eacute;es.<br>
+
+
+On peut si on veut rendre les gris non "teintables" en tapant <span style="font-weight: bold;">notintgray</span>.<br>
+
+
+<span style="font-weight: bold;">
+noflip</span> =&nbsp;emp&ecirc;che la
+possibilit&eacute; de retourner le tampon.<br>
+
+
+<span style="font-weight: bold;">
+nomirror</span> = emp&ecirc;che la possibilit&eacute; de
+mettre l'image du tampon en miroir.<br>
+
+
+On sauvegardes en UTF8 mais avec l'extension
+.dat (<span style="font-style: italic;">tetechien.da</span>t)
+dans le dossier /<span style="font-style: italic;">stamps/animaux/
+</span><br>
+
+
+Un exemple de texte de param&eacute;trage pour ma t&ecirc;te de chien :<br>
+
+
+&nbsp;&nbsp;&nbsp; colorable<br>
+
+
+&nbsp;&nbsp;&nbsp; noflip<br>
+
+
+<br>
+
+
+Enfin on peut cr&eacute;er une image miroir
+pr&eacute;-enregistr&eacute;e : par exemple si on a un camion
+de
+pompiers avec &eacute;crit service incendie, si on le laisse se
+mettre
+en miroir dans le logiciel normalement, on va avoir les mots
+&eacute;crit en miroir; on peut alors cr&eacute;er l'image
+miroir avec
+les mots bien &eacute;crits que tu nomme image_mirror.png dans le
+m&ecirc;me dossier que image.png.<br>
+
+
+<br>
+
+<!--
+&nbsp;&nbsp;&nbsp; <a href="Brosses-tampons.html#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><br>
+-->
+
+<h2><a name="starter"></a>4. Comment
+cr&eacute;er des images "starter".</h2>
+
+
+Il faut cr&eacute;er un r&eacute;pertoire <span style="font-style: italic;">/starters/</span>, s'il
+n'existe pas, dans votre r&eacute;pertoire personnel de Tux Paint.<br>
+
+
+Les images de d&eacute;part ('starter') apparaissent dans le
+dialogue
+d'ouverture de document, &agrave; cot&eacute; des images que
+vous avez
+cr&eacute;&eacute;s. Elles ont des boutons verts au lieu de
+bleu
+derri&egrave;re.<br>
+
+
+<br>
+
+
+Contrairement &agrave; vos images sauvegard&eacute;es, quand
+vous
+s&eacute;lectionner et ouvrez un 'starter', en
+r&eacute;alit&eacute;
+vous cr&eacute;ez une nouvelle image. Au lieu d'&ecirc;tre
+blanche,
+cependant, la nouvelle image contient le contenu du 'starter'. De plus
+quand vous &eacute;ditez votre nouvelle image, le contenu du
+'starter'
+original l'affecte.<br>
+
+
+<br>
+
+
+<h3>Style livre de coloriage </h3>
+
+
+<br>
+
+
+Le mode de 'starter' le plus basique ressemble &agrave; une image
+d'un
+livre &agrave; colorier. C'est une forme
+d&eacute;limit&eacute;e par
+des lignes &agrave; laquelle on peut ajouter des d&eacute;tails
+et des
+couleurs. Dans Tux Paint, quand vous dessinez, tapez du texte, utilisez
+les tampons, les lignes du dessins restent au-dessus de ce que vous
+dessinez. Vous pouvez effacer ce que vous rajoutez mais pas les lignes
+du 'starter'.<br>
+
+
+<br>
+
+
+Pour cr&eacute;er une telle image, dessinez simplement une forme en
+ligne dans un programme de dessin, rendez le reste transparent (ce qui
+deviendra blanc dans Tux Paint), et sauvegardez au format PNG dans le
+dossier <span style="font-style: italic;">/starters/.</span><br>
+
+
+<br>
+
+
+<h3>Style sc&egrave;ne</h3>
+
+
+<br>
+
+
+A cot&eacute; du style livre de coloriage, vous pouvez aussi
+procurer
+comme 'starter', un avant plan et un arri&egrave;re plan
+s&eacute;par&eacute; de l'image. Le principe est le
+m&ecirc;me : on ne
+peut pas l'effacer, lui appliquer les effet magiques. On ne peut pas
+dessiner sur l'avant plan.<br>
+
+
+<br>
+
+
+Quand la gomme est appliqu&eacute;e &agrave; ce type d'image,
+au lieu
+de r&eacute;v&eacute;ler du blanc elle
+r&eacute;v&egrave;le l'image
+d'arri&egrave;re plan.<br>
+
+
+<br>
+
+
+En cr&eacute;ant &agrave; la fois un avant plan et un
+arri&egrave;re
+plan, on peut cr&eacute;er un 'starter' simulant un effet de
+perspective. Imaginez un arri&egrave;re plan
+repr&eacute;sentant
+l'oc&eacute;an et un avant plan qui repr&eacute;sente un
+r&eacute;cif.
+On peut ensuite dessiner ou tamponner des poissons dans l'image : ils
+appara&icirc;tront dans l'oc&eacute;an mais jamais en avant du
+r&eacute;cif.<br>
+
+
+<br>
+
+
+Pour cr&eacute;er ce genre de starter, il faut cr&eacute;er un
+avant
+plan (avec transparence alpha) comme d&eacute;crit
+pr&eacute;c&eacute;demment, et le sauvegarder au format PNG
+dans le
+dossier <span style="font-style: italic;">/starters/</span>.
+Ensuite
+cr&eacute;ez une autre image sans transparence et la sauvegarder
+avec
+le m&ecirc;me nom mais avec le suffixe "-back" ( Par exemple le
+r&eacute;cif du premier plan s'appelle reef.png et
+l'oc&eacute;an de
+l'arri&egrave;re plan reef-back.png.)<br>
+
+
+<br>
+
+
+Le 'starter' doit avoir la m&ecirc;me taille de canevas que Tux
+Paint.
+Par d&eacute;faut c'est le mode 640x480, c'est &agrave; dire
+448x376
+pixels. (Si vous utilisez le mode 800x600, cela doit &ecirc;tre
+608x496
+pixels.)<br>
+
+
+<br>
+
+
+Les 'starter' apparaissent avec un&nbsp; bouton vert au
+d&eacute;but de la liste dans le dialogue d'ouverture.<br>
+
+
+<br>
+
+
+NB : Les 'starter' ne peuvent pas &ecirc;tre sauv&eacute;s
+comme tels
+&agrave; partir de Tux Paint car charger un starter, c'est vraiment
+comme cr&eacute;er une nouvelle image. (Au lieu d'&ecirc;tre
+blanche,
+elle a quelque chose &agrave; l'int&eacute;rieur. La commande
+'sauvegarde' ne fait que cr&eacute;er une nouvelle image, tout
+comme si
+la commande 'nouvelle' avait &eacute;t&eacute;
+utilis&eacute;e.) <br>
+
+
+<br>
+
+
+NB : Les 'starter' sont "attach&eacute;s" aux images
+sauvegard&eacute;es, via un petit fichier texte qui a le
+m&ecirc;me nom
+que le dessin sauvegard&eacute;, mais au format .dat. Cela permet
+au
+premier plan et &agrave; l'arri&egrave;re plan, s'ils existent,
+de
+continuer d'affecter le dessin apr&egrave;s que Tux Paint ait
+&eacute;t&eacute; quitt&eacute;, ou qu'une autre image ait
+&eacute;t&eacute; charg&eacute;e ou
+d&eacute;marr&eacute;e. (En
+d'autres mots, si vous construisez un dessin &agrave; partir d'un
+'starter', il sera toujours affect&eacute; par celui-ci.)<br>
+
+
+<br>
+
+<!--
+&nbsp;&nbsp;&nbsp;&nbsp; <a href="Brosses-tampons.html#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><br>
+-->
+
+<h2><a name="polices"></a>5. Comment ajouter
+des polices?</h2>
+
+
+<br>
+
+
+Il faut l&agrave; encore cr&eacute;er un dossier <span style="font-style: italic;">fonts</span>, s'il
+n'existe pas, dans votre r&eacute;pertoire personnel de Tux Paint.<br>
+
+
+Mettre dans ce dossier des polices de format TrueType. (Voir avec un
+gestionnaire de polices pour voir quel type de police on utilise). La
+police sera alors prise en charge dans Tux Paint,&nbsp; avec 4
+tailles
+diff&eacute;rente propos&eacute;es.<br>
+
+
+<br>
+
+<!--
+&nbsp;&nbsp;&nbsp; <a href="Brosses-tampons.html#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><a href="Brosses-tampons.html#haut"><br>
+-->
+
+</a>
+<h2><a name="importer"></a>6. Importer des
+images pour les ouvrir dans Tux Paint.</h2>
+
+
+<br>
+
+
+Comme le dialogue d'ouverture de Tux Paint ne nous montre que les
+dessins cr&eacute;&eacute;s par lui-m&ecirc;me, comment
+faire si vous
+voulez charger une autre image ou photographie dans Tux Paint pour
+l'&eacute;diter?<br>
+
+
+<br>
+
+
+Pour faire cela, vous devez convertir l'image en PNG ( voir <a href="PNG.html">Qu'est qu'un PNG? Et comment en
+cr&eacute;er un?</a> ), et la placer dans le
+r&eacute;pertoire saved de Tux Paint (<span style="font-style: italic;">~/.tuxpaint/saved/</span>
+sous linux et UNIX, <span style="font-style: italic;">userdata\saved\
+</span>sous windows <span style="font-style: italic;">~/Library/Application
+Support/tuxpaint/saved/ </span>sous Mac OS X -et pas dans <span style="font-style: italic;">preferences</span>
+comme indiqu&eacute; dans la version anglaise-) Il faut aussi
+pr&eacute;voir une ic&ocirc;ne pour appara&icirc;tre dans le menu ouverture qui
+sera dans le r&eacute;pertoire &nbsp;<span style="font-style: italic;">~/.tuxpaint/saved/.thumb</span>
+sous linux et UNIX,&nbsp;<span style="font-style: italic;"></span><span style="font-style: italic;">~/Library/Application
+Support/tuxpaint/saved/.thumb </span>sous Mac OS X, et je ne
+sais pas pour windows peut-&ecirc;tre <span style="font-style: italic;">userdata\saved\thumb </span>tout
+simplement.<br>
+
+
+<br>
+
+
+<h3>Utiliser 'tuxpaint-import'</h3>
+
+
+<br>
+
+
+Les utilisateurs de Linux et d'UNIX peuvent utiliser le
+'tuxpaint-import', un script shell qui s'installe quand vous installez
+Tux Paint. Il utilise quelques outils NetPBM pour convertir
+l'image&nbsp; ("anytopnm"),&nbsp; pour la retailler afin
+qu'elle entre
+dans le canevas de Tux Paint&nbsp; ("pnmscale"), et la convertie en
+PNG&nbsp; ("pnmtopng"). Il cr&eacute;e en m&ecirc;me temps
+une ic&ocirc;ne
+pour afficher dans le menu ouverture.<br>
+
+
+<br>
+
+
+Il utilise aussi la commande date pour renommer l'image avec les
+conventions de Tux Paint qui nomme ses fichiers images
+sauvegard&eacute;s en fonction de la date, de l'heure...
+(Souvenez-vous
+que vous ne demandez jamais un nom de fichier pour ouvrir ou
+sauvegarder une image!)<br>
+
+
+<br>
+
+
+Pour utiliser 'tuxpaint-import', lancez la commande &agrave; partir
+d'un shell et donnez lui le nom du fichier que vous voulez convertir.<br>
+
+
+<br>
+
+
+Il sera alors convertit et plac&eacute; dans votre
+r&eacute;pertoire <span style="font-style: italic;">saved</span>.
+(NB : Si vous fa&icirc;tes cela pour un utilisateur
+diff&eacute;rent -
+par exemple votre enfant, il faut ex&eacute;cuter la commande dans
+sa
+session.)<br>
+
+
+<br>
+
+
+Exemple:<br>
+
+
+&nbsp;$ tuxpaint-import grandma.jpg<br>
+
+
+&nbsp;grandma.jpg -&gt;
+/home/username/.tuxpaint/saved/20020921123456.png<br>
+
+
+&nbsp;jpegtopnm: WRITING A PPM FILE<br>
+
+
+<br>
+
+
+La premi&egrave;re ligne ("tuxpaint-import&nbsp;grandma.jpg")
+est la
+commande &agrave; lancer. Les deux lignes suivantes sont les
+sorties
+('output') pendant que le script s'ex&eacute;cute.<br>
+
+
+<br>
+
+
+Apr&egrave;s le red&eacute;marrage de Tux Paint, l'image est
+alors
+disponible dans le dialogue d'ouverture. Il ne reste plus
+qu'&agrave;
+cliquer dessus l'ic&ocirc;ne.<br>
+
+
+<br>
+
+
+Pour les utilisateurs de Mac OS X contrairement &agrave; ce qui est
+dit
+dans la version anglaise, on peut aussi utiliser un script shell.
+Peut-&ecirc;tre le script Tuxpaint-import est adaptable
+&agrave; Mac OS
+X, mais personnellement j'en ai r&eacute;cris un autre.<br>
+
+
+Pr&eacute; requis : il faut installer les outils NetPBM
+(&agrave; l'aide
+de fink et finkcommander par exemple) et il faut cr&eacute;er un
+r&eacute;pertoire <span style="font-style: italic;">~/.tmp<br>
+
+
+<br>
+
+
+</span>Voici donc le script que j'ai &eacute;crit<span style="font-style: italic;"><br>
+
+
+<br>
+
+
+</span>
+<div style="margin-left: 40px;"><small><span style="font-family: Courier New;">#!/bin/bash</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#
+creation d'une variable date </span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+DATE=`date '+%Y%m%d%H%M%S'`</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#
+creation d'une variable de travail</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+FICHIER_IMAGE=$1</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#creation
+et d&eacute;placement dans un fichier de travail</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+cp $FICHIER_IMAGE $HOME/.tmp/</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#creation
+d'une image pour Thumbnail</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+cp $HOME/.tmp/$FICHIER_IMAGE $HOME/.tmp/$FICHIER_IMAGE-t</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#creation
+de l'image au format png qui sera chargeable dans tux paint</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+anytopnm $HOME/.tmp/$FICHIER_IMAGE | pnmscale --xysize 448 376 |
+pnmtopng&nbsp; &gt; $HOME/.tmp/$FICHIER_IMAGE.png</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#
+renommer en utilisant la variable date l'image png car le fichier doit</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#
+avoir le format suivant yyyymmddhhmmss.png</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+mv $HOME/.tmp/$FICHIER_IMAGE.png $HOME/.tmp/$DATE.png</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#creation
+de l'image du dialogue d'ouverture</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+anytopnm $HOME/.tmp/$FICHIER_IMAGE-t | pnmscale --xysize 92 56 |
+pnmtopng &gt; $HOME/.tmp/$FICHIER_IMAGE-t.png</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#
+renommer en utilisant la variable date l'image png car le fichier doit</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#
+avoir le format suivant yyyymmddhhmmss-t.png</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+mv $HOME/.tmp/$FICHIER_IMAGE-t.png $HOME/.tmp/$DATE-t.png</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">#
+faire le menage </span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+rm $HOME/.tmp/$FICHIER_IMAGE</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+rm $HOME/.tmp/$FICHIER_IMAGE-t</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+mv $HOME/.tmp/$DATE.png $HOME/Library/Application\
+support/TuxPaint/saved/</span></small><br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">&nbsp;
+mv $HOME/.tmp/$DATE-t.png $HOME/Library/Application\
+support/TuxPaint/saved/.thumb</span></small><br style="font-family: Courier New;">
+
+
+<br style="font-family: Courier New;">
+
+
+<small><span style="font-family: Courier New;">exit 0</span></small><span style="font-style: italic;"></span><br>
+
+
+<span style="font-style: italic;"></span></div>
+
+
+<span style="font-style: italic;"><br>
+
+
+</span>Ce script s'utilise comme 'tuxpaint -import'<span style="font-style: italic;"><br>
+
+
+</span>
+<h3>Le faire Manuellement</h3>
+
+
+<br>
+
+
+Les utilisateurs de Windows et de BeOS doivent actuellement faire la
+conversion manuellement.<br>
+
+
+<br>
+
+
+Lancez un programme qui est capable d'ouvrir votre image et de la
+convertir au format PNG. (Voir <a href="PNG.html">Qu'est
+qu'un PNG? Et comment en cr&eacute;er un?</a> Pour avoir
+quelques suggestions concernant les programmes capables de faire cela.)<br>
+
+
+<br>
+
+
+Ouvrez l'image et r&eacute;duisez sa taille &agrave; une taille
+inf&eacute;rieure ou &eacute;gale &agrave; 448X376 pixels.<br>
+
+
+<br>
+
+
+Sauvegardez l'image au format PNG. Il est fortement
+recommand&eacute;
+de nommer le fichier en utilisant la date et l'heure courante, puisque
+par convention Tux Paint utilise :<br>
+
+
+AAAAMMJJhhmmss.png <br>
+
+
+&nbsp;&nbsp;&nbsp; &bull;
+&nbsp;&nbsp;&nbsp; AAAA = Ann&eacute;e<br>
+
+
+&nbsp;&nbsp;&nbsp; &bull;
+&nbsp;&nbsp;&nbsp; &nbsp;MM = Mois (01-12)<br>
+
+
+&nbsp;&nbsp;&nbsp; &bull;
+&nbsp;&nbsp;&nbsp; &nbsp;JJ = Jour (01-31)<br>
+
+
+&nbsp;&nbsp;&nbsp; &bull;
+&nbsp;&nbsp;&nbsp; &nbsp;HH = Heure, au format 24h
+(00-23)<br>
+
+
+&nbsp;&nbsp;&nbsp; &bull;
+&nbsp;&nbsp;&nbsp; &nbsp;mm = Minute (00-59)<br>
+
+
+&nbsp;&nbsp;&nbsp; &bull;
+&nbsp;&nbsp;&nbsp; &nbsp;ss = Second (00-59)<br>
+
+
+<br>
+
+
+&nbsp;i.e. :<br>
+
+
+20020921130500 -&nbsp;pour le 21 Septembre 2002 13h05m00<br>
+
+
+<br>
+
+
+Sauvegardez le PNG dans le dossier 'saved' de Tux Paint. (Voir plus
+haut)<br>
+
+
+<br>
+
+<!--
+&nbsp;&nbsp;&nbsp; <a href="Brosses-tampons.html#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><a href="Brosses-tampons.html#haut"><br>
+-->
+
+</a>
+</div>
+
+
+</div>
+
+
+<div id="conteneurbas">
+<div id="i"></div>
+
+
+<div id="k"></div>
+
+
+</div>
+
+
+</body>
+</html>

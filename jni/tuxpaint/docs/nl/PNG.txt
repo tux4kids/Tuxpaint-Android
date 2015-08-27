@@ -1,0 +1,142 @@
+PNG.txt voor Tux Paint
+
+Tux Paint - Een tekenprogramma voor kinderen.
+
+Copyright 2002 by Bill Kendrick
+bill@newbreedsoftware.com
+http://www.newbreedsoftware.com/tuxpaint/
+
+27 Juni 2002 - 7 november 2002
+
+(Nederlands: Geert <geert-csg@wanadoo.nl>, 19 november 2002)
+
+
+Over PNG's
+----------
+  PNG is het Portable Network Graphic formaat.  Het is een open standaard,
+  niet belast door patenten (zoals het GIF formaat).  Het is een formaat
+  met een hoge compressie waarbij het geen afbreuk doet aan de kwaliteit (zoals
+  het JPEG formaat wel doet.)  Het PNG formaat ondersteunt een 24-bit
+  kleurdiepte (16.7 miljoen kleuren) maar ook een "alpha kanaal" - D.w.z. dat
+  elke pixel een variabele graad van transparantie kan hebben.
+
+  Voor meer informatie kijkt u op:  http://www.libpng.org/
+
+  De bovengenoemde functies (open standaard,  kwaliteitsbehoud, compressie en
+  transparantie / alpha) maken dit formaat tot de beste keus voor Tux Paint.
+  (Tux Paint ondersteunt het PNG formaat door het Open Source SDL_Image library,
+  welk op zijn beurt weer ondersteund wordt door de libPNG library.)
+
+  Ondersteuning voor de vele kleuren maakt fotokwaliteit "stempels" mogelijk.
+  De alpha transparantie laat hoge kwaliteit kwasten toe.
+
+
+Introductie tot het maken van PNG's files.
+------------------------------------------
+ Het volgende is een korte introductie tot het maken van PNG files
+  en hoe bestaande afbeeldingen omgezet kunnen worden naar het PNG formaat.
+
+
+  Linux/Unix gebruikers
+  ---------------------
+    De GIMP
+    -------
+      Het beste gereedschap om PNG afbeeldingen te maken voor gebruik in
+      Tux Paint is het GNU Image Manipulation Program ("De GIMP").
+      Het Open Source alternatief voor afbeelding en fotobewerking.
+      (Ook beschikbaar voor Windows)
+
+      Hoogstwaarschijnlijk is het al op uw systeem aanwezig, anders is het
+      beschikbaar op CD zo niet dan van de download site van uw distributie.
+      Of van:
+
+        http://www.gimp.org/
+
+
+    Krita
+    -----
+      Krita is een teken- en afbeeldings bewerkingsprogramma voor KOffice.
+
+        http://koffice.kde.org/krita/
+
+
+    NetPBM
+    ------
+      De Portable Bitmap tools (samen bekend als "NetPBM") is een
+      verzameling van Open Source commando-regel gereedschappen welke
+      omzetten van en naar andere formaten. GIF, TIFF, BMP, PNG, en vele andere.
+
+      NB: Het NetPBM formaat (Portable Bitmap: PBM,
+      Portable Greymap: PGM, Portable Pixmap: PPM, en het Portable Any Map: PNM)
+      ondersteunen geen alpha kanalen. Dus elke vorm van transparantie gaat
+      verloren.  Gebruik daarom de GIMP!
+
+      Hoogstwaarschijnlijk is NetBPM al op uw systeem aanwezig, anders is het
+      beschikbaar op CD of van de download site van uw distributie. Of van:
+
+        http://netpbm.sourceforge.net/
+
+
+    cjpeg/djpeg
+    -----------
+      De "cjpeg" en "djpeg" commando-regel programma's converteren tussen
+      het NetPBM Portable Any Map (PNM) formaat en het JPEG formaat.
+
+      Het is waarschijnlijk al aanwezig op uw systeem.
+      (Bij de Debian distributie is het beschikbaar in het pakket
+      "libjpeg-progs".)  Zo niet is het beschikbaar op uw installatie CD of
+      als download van de distributie website.  Anders:
+
+        ftp://ftp.uu.net/graphics/jpeg/
+
+
+  Windows gebruikers
+  ------------------
+    Canvas (Deneba)
+      http://www.deneba.com/products/canvas8/default2.html
+
+    CorelDRAW (Corel)
+      http://www.corel.com/
+
+    Fireworks (Macromedia)
+      http://macromedia.com/software/fireworks/
+
+    Illustrator (Adobe)
+      http://www.adobe.com/products/illustrator/main.html
+
+    Paint Shop Pro (Jasc)
+      http://www.jasc.com/products/psp/
+
+    Photoshop (Adobe)
+      http://www.adobe.com/products/photoshop/main.html
+
+
+  Macintosh gebruikers
+  --------------------
+    Canvas (Deneba)
+      http://www.deneba.com/products/canvas8/default2.html
+
+    CorelDRAW (Corel)
+      http://www.corel.com/
+
+    Fireworks (Macromedia)
+      http://macromedia.com/software/fireworks/
+
+    GraphicConverter (Lemke Software)
+      http://www.lemkesoft.de/us_gcabout.html
+
+    Illustrator (Adobe)
+      http://www.adobe.com/products/illustrator/main.html
+
+    Photoshop (Adobe)
+      http://www.adobe.com/products/photoshop/main.html
+
+
+Meer Info.
+----------
+  De libPNG website geeft een lijst van editors en omzetters die
+  het PNG formaat ondersteunen:
+
+    http://www.libpng.org/pub/png/pngaped.html
+    http://www.libpng.org/pub/png/pngapcv.html
+

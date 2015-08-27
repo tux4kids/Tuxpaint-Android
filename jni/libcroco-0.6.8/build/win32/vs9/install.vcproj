@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="big5"?>
+<!--
+This file is part of The Croco Library
+This program is free software; you can redistribute it and/or
+modify it under the terms of version 2.1 of the GNU Lesser General Public
+License as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+USA
+
+Author: Fan, Chun-wei
+See COPYRIGHTS file for copyright information.
+-->
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="install"
+	ProjectGUID="{00702787-1566-484D-991F-3E7E459BB909}"
+	RootNamespace="install"
+	TargetFrameworkVersion="196613"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+		<Platform
+			Name="x64"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="$(GlibEtcInstallRoot)"
+			ConfigurationType="10"
+			InheritedPropertySheets=".\libcroco.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="$(LibCrocoDoInstall)"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="$(GlibEtcInstallRoot)"
+			InheritedPropertySheets=".\libcroco.vsprops"
+			ConfigurationType="10"
+			CharacterSet="2"
+			DeleteExtensionsOnClean=""
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+				CommandLine="$(LibCrocoDoInstall)"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(GlibEtcInstallRoot)"
+			ConfigurationType="10"
+			InheritedPropertySheets=".\libcroco.vsprops"
+			CharacterSet="2"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="$(LibCrocoDoInstall)"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="$(GlibEtcInstallRoot)"
+			InheritedPropertySheets=".\libcroco.vsprops"
+			ConfigurationType="10"
+			CharacterSet="2"
+			WholeProgramOptimization="1"
+			DeleteExtensionsOnClean=""
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+				CommandLine="$(LibCrocoDoInstall)"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

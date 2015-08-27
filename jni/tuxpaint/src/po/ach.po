@@ -1,0 +1,1437 @@
+# Acholi translation tuxpaint.
+# Copyright (C) 2010-2014
+# This file is distributed under the same license as the tuxpaint package.
+# George Patrick <chanchumgpa@gmail.com>, 2010. (inactive)
+# Please consider updating this translation.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxpaint\n"
+"Report-Msgid-Bugs-To: tuxpaint-i18n@lists.sourceforge.net\n"
+"POT-Creation-Date: 2014-06-03 21:03+0200\n"
+"PO-Revision-Date: 2010-12-09 09:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ach\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. Response to Black (0, 0, 0) color selected
+#: ../colors.h:86
+msgid "Black!"
+msgstr "Col!"
+
+#. Response to Dark grey (128, 128, 128) color selected
+#: ../colors.h:89
+msgid "Dark grey! Some people spell it “dark gray”."
+msgstr "Ocido buruburu atika! Jo mukene gi coyo ni '' ocido yitoyito atika''."
+
+#. Response to Light grey (192, 192, 192) color selected
+#: ../colors.h:92
+msgid "Light grey! Some people spell it “light gray”."
+msgstr "Ocido buruburu! Jo mukene gi coyo ni '' ocido yitoyito''."
+
+#. Response to White (255, 255, 255) color selected
+#: ../colors.h:95
+msgid "White!"
+msgstr "Tar!"
+
+#. Response to Red (255, 0, 0) color selected
+#: ../colors.h:98
+msgid "Red!"
+msgstr "Kwar!"
+
+#. Response to Orange (255, 128, 0) color selected
+#: ../colors.h:101
+msgid "Orange!"
+msgstr "Oreny!"
+
+#. Response to Yellow (255, 255, 0) color selected
+#: ../colors.h:104
+msgid "Yellow!"
+msgstr "Yelo!"
+
+#. Response to Light green (160, 228, 128) color selected
+#: ../colors.h:107
+msgid "Light green!"
+msgstr "Alumalum!"
+
+#. Response to Dark green (33, 148, 70) color selected
+#: ../colors.h:110
+msgid "Dark green!"
+msgstr "Cido ma lalum!"
+
+#. Response to "Sky" blue (138, 168, 205) color selected
+#: ../colors.h:113
+msgid "Sky blue!"
+msgstr "Bululu calo pol!"
+
+#. Response to Blue (50, 100, 255) color selected
+#: ../colors.h:116
+msgid "Blue!"
+msgstr "Bululu!"
+
+#. Response to Lavender (186, 157, 255) color selected
+#: ../colors.h:119
+msgid "Lavender!"
+msgstr "Macalo papul!"
+
+#. Response to Purple (128, 0, 128) color selected
+#: ../colors.h:122
+msgid "Purple!"
+msgstr "Papul!"
+
+#. Response to Pink (255, 165, 211) color selected
+#: ../colors.h:125
+msgid "Pink!"
+msgstr "Pinki!"
+
+#. Response to Brown (128, 80, 0) color selected
+#: ../colors.h:128
+msgid "Brown!"
+msgstr "Lobolobo"
+
+#. Response to Tan (226, 189, 166) color selected
+#: ../colors.h:131
+msgid "Tan!"
+msgstr "Apuapua!"
+
+#. Response to Beige (247, 228, 219) color selected
+#: ../colors.h:134
+msgid "Beige!"
+msgstr "Okwor-okwor!"
+
+#. First, the blacklist. We list font families that can crash Tux Paint
+#. via bugs in the SDL_ttf library. We also test fonts to be sure that
+#. they have both uppercase and lowercase letters. Note that we do not
+#. test for "Aa", because it is OK if uppercase and lowercase are the
+#. same (but not nice -- such fonts get a low score later).
+#.
+#. Most locales leave the blacklist strings alone: "QX" and "qx"
+#. (it is less destructive to use the scoring strings instead)
+#.
+#. Locales that absolutely require all fonts to have some
+#. extra characters should use "QX..." and "qx...", where "..."
+#. are some characters you absolutely require in all fonts.
+#.
+#. Locales with absolutely NO use for ASCII may use "..." and "...",
+#. where "..." are some characters you absolutely require in
+#. all fonts. This would be the case for a locale in which it is
+#. impossible for a user to type ASCII letters.
+#.
+#. Most translators should use scoring instead.
+#: ../dirwalk.c:168
+msgid "qx"
+msgstr "qx"
+
+#: ../dirwalk.c:168
+msgid "QX"
+msgstr "QX"
+
+#. TODO: weight specification
+#. Now we score fonts to ensure that the best ones will be placed at
+#. the top of the list. The user will see them first. This sorting is
+#. especially important for users who have scroll buttons disabled.
+#. Translators should do whatever is needed to put crummy fonts last.
+#. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
+#: ../dirwalk.c:195
+msgid "oO"
+msgstr "oO"
+
+#. common punctuation (e.g., '?', '!', '.', ',', etc.)
+#: ../dirwalk.c:198
+msgid ",.?!"
+msgstr ",.?!"
+
+#. uncommon punctuation (e.g., '@', '#', '*', etc.)
+#: ../dirwalk.c:201
+msgid "`\\%_@$~#{<(^&*"
+msgstr "`\\%_@$~#{<(^&*"
+
+#. digits (e.g., '0', '1' and '7')
+#: ../dirwalk.c:204
+msgid "017"
+msgstr "017"
+
+#. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
+#: ../dirwalk.c:207
+msgid "O0"
+msgstr "O0"
+
+#. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
+#: ../dirwalk.c:210
+msgid "1Il|"
+msgstr "1II|"
+
+#: ../dirwalk.c:214
+msgid "<1>spare-1a"
+msgstr "<1>cipea-1a"
+
+#: ../dirwalk.c:215
+msgid "<1>spare-1b"
+msgstr "<1>cipea-1b"
+
+#: ../dirwalk.c:216
+msgid "<9>spare-9a"
+msgstr "<9>cipea-9a"
+
+#: ../dirwalk.c:217
+msgid "<9>spare-9b"
+msgstr "<9>cipea-9b"
+
+#. Congratulations #1
+#: ../great.h:37
+msgid "Great!"
+msgstr "Ber atika!"
+
+#. Congratulations #2
+#: ../great.h:40
+msgid "Cool!"
+msgstr "Leng!"
+
+#. Congratulations #3
+#: ../great.h:43
+msgid "Keep it up!"
+msgstr "Mede kwede anyim!"
+
+#. Congratulations #4
+#: ../great.h:46
+msgid "Good job!"
+msgstr "Tic maber!"
+
+#. Input Method: English mode
+#: ../im.c:75
+msgid "English"
+msgstr "Leb munu"
+
+#. Input Method: Japanese Romanized Hiragana mode
+#: ../im.c:78
+msgid "Hiragana"
+msgstr "Hiragana"
+
+#. Input Method: Japanese Romanized Katakana mode
+#: ../im.c:81
+msgid "Katakana"
+msgstr "Katakana"
+
+#. Input Method: Korean Hangul 2-Bul mode
+#: ../im.c:84
+msgid "Hangul"
+msgstr "Hangul"
+
+#. Input Method: Thai mode
+#: ../im.c:87
+msgid "Thai"
+msgstr "Thai"
+
+#. Input Method: Traditional Chinese mode
+#: ../im.c:90
+msgid "ZH_TW"
+msgstr "ZH_TW"
+
+#. Square shape tool (4 equally-lengthed sides at right angles)
+#: ../shapes.h:171 ../shapes.h:172
+msgid "Square"
+msgstr "Lagwic angwen marom ducu"
+
+#. Rectangle shape tool (4 sides at right angles)
+#: ../shapes.h:175 ../shapes.h:176
+msgid "Rectangle"
+msgstr "Lagwic angwen me aryo ma opime romrom"
+
+#. Circle shape tool (X radius and Y radius are the same)
+#: ../shapes.h:179 ../shapes.h:180
+msgid "Circle"
+msgstr "Lawala"
+
+#. Ellipse shape tool (X radius and Y radius may differ)
+#: ../shapes.h:183 ../shapes.h:184
+msgid "Ellipse"
+msgstr "Lawala ma kidiyo tungcel"
+
+#. Triangle shape tool (3 sides)
+#: ../shapes.h:187 ../shapes.h:188
+msgid "Triangle"
+msgstr "Lagwic adek"
+
+#. Pentagone shape tool (5 sides)
+#: ../shapes.h:191 ../shapes.h:192
+msgid "Pentagon"
+msgstr "Lagwic abic maromrom"
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:195 ../shapes.h:196
+msgid "Rhombus"
+msgstr "Lagwic angwen marom ento tye ogotogot"
+
+#. Octagon shape tool (8 sides)
+#: ../shapes.h:199 ../shapes.h:200
+msgid "Octagon"
+msgstr "Lagwic aboro maromrom"
+
+#. Description of a square
+#: ../shapes.h:208 ../shapes.h:209
+msgid "A square is a rectangle with four equal sides."
+msgstr "Cikwea obedo lagwic angwen ma romrom."
+
+#. Description of a rectangle
+#: ../shapes.h:212 ../shapes.h:213
+msgid "A rectangle has four sides and four right angles."
+msgstr "Rectangle tye ki lake angwen ki gwic angwen."
+
+#: ../shapes.h:217 ../shapes.h:219
+msgid ""
+"A circle is a curve where all points have the same distance from the center."
+msgstr "Circle obedo lawala ma aa ki kamoo keken ki ibute oo icwinye romaroma"
+
+#. Description of an ellipse
+#: ../shapes.h:222 ../shapes.h:223
+msgid "An ellipse is a stretched circle."
+msgstr "Ellipse obedo lawala ma kitelo bute"
+
+#. Description of a triangle
+#: ../shapes.h:226 ../shapes.h:227
+msgid "A triangle has three sides."
+msgstr "Triangle tye ki gwic adek"
+
+#. Description of a pentagon
+#: ../shapes.h:230 ../shapes.h:231
+msgid "A pentagon has five sides."
+msgstr "Pentagon tye ki gwic abic"
+
+#: ../shapes.h:235 ../shapes.h:237
+msgid "A rhombus has four equal sides, and opposite sides are parallel."
+msgstr "Rhombus tye ki bute angwen marom, kun aryo ki iye otere maromaroma"
+
+#: ../shapes.h:241 ../shapes.h:243
+msgid "An octagon has eight equal sides."
+msgstr "Octagon tye ki bute aboro marom aroma"
+
+#. Title of tool selector (buttons down the left)
+#: ../titles.h:56
+msgid "Tools"
+msgstr "Jami tic"
+
+#. Title of color palette (buttons across the bottom)
+#: ../titles.h:59
+msgid "Colors"
+msgstr "Rangi"
+
+#. Title of brush selector (buttons down the right for paint and line tools)
+#: ../titles.h:62
+msgid "Brushes"
+msgstr "Lajwac"
+
+#. Title of eraser selector (buttons down the right for eraser tool)
+#: ../titles.h:65
+msgid "Erasers"
+msgstr "Laduny"
+
+#. Title of stamp selector (buttons down the right for stamps tool)
+#: ../titles.h:68
+msgid "Stamps"
+msgstr "Ladong alama"
+
+#. Title of shape selector (buttons down the right for shapes tool)
+#. Shape creation tool (square, circle, etc.)
+#: ../titles.h:71 ../tools.h:71
+msgid "Shapes"
+msgstr "Kite"
+
+#. Title of font selector (buttons down the right for text and label tools)
+#: ../titles.h:74
+msgid "Letters"
+msgstr "Nukuta"
+
+#. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
+#. "Magic" effects tools (blur, flip image, etc.)
+#: ../titles.h:77 ../tools.h:83
+msgid "Magic"
+msgstr "Tangu"
+
+#. Freehand painting tool
+#: ../tools.h:62
+msgid "Paint"
+msgstr "Ling"
+
+#. Stamp tool (aka Rubber Stamps)
+#: ../tools.h:65
+msgid "Stamp"
+msgstr "Dong alama"
+
+#. Line drawing tool
+#: ../tools.h:68
+msgid "Lines"
+msgstr "Rek"
+
+#. Text tool
+#: ../tools.h:74
+msgid "Text"
+msgstr "Coc"
+
+#. Label tool
+#: ../tools.h:77
+msgid "Label"
+msgstr "Lanyut"
+
+#. Undo last action
+#: ../tools.h:86
+msgid "Undo"
+msgstr "Dwok kit macon"
+
+#. Redo undone action
+#: ../tools.h:89
+msgid "Redo"
+msgstr "Dwok dok kit ma onongo itimo kwede"
+
+#. Eraser tool
+#: ../tools.h:92
+msgid "Eraser"
+msgstr "Lajwa"
+
+#. Start a new picture
+#: ../tools.h:95
+msgid "New"
+msgstr "Nyen"
+
+#. Open a saved picture
+#. buttons for the file open dialog
+#. Open dialog: 'Open' button, to load the selected picture
+#: ../tools.h:98 ../tuxpaint.c:7631
+msgid "Open"
+msgstr "Yabi"
+
+#. Save the current picture
+#: ../tools.h:101
+msgid "Save"
+msgstr "Gwok maber"
+
+#. Print the current picture
+#: ../tools.h:104
+msgid "Print"
+msgstr "Go i karatac"
+
+#. Quit/exit Tux Paint application
+#: ../tools.h:107
+msgid "Quit"
+msgstr "Wek woko"
+
+#. Paint tool instructions
+#: ../tools.h:115
+msgid "Pick a color and a brush shape to draw with."
+msgstr "Kwany rangi ki kit pa lajwac cite igo kwede."
+
+#. Stamp tool instructions
+#: ../tools.h:118
+msgid "Pick a picture to stamp around your drawing."
+msgstr "Kwany cal ma omyero idi iteng cal megi ma igoyo."
+
+#. Line tool instructions
+#: ../tools.h:121
+msgid "Click to start drawing a line. Let go to complete it."
+msgstr "Dii me cako goyo rek. Wek wot ka tyeko goyo ne."
+
+#. Shape tool instructions
+#: ../tools.h:124
+msgid ""
+"Pick a shape. Click to pick the center, drag, then let go when it is the "
+"size you want. Move around to rotate it, and click to draw it."
+msgstr ""
+"Kwany kite. Di me yero dyere,ywaa, ci wek ywayo ka oo i kit ma imito. Ywa "
+"calo lawala ka imito wiro ne, ci i di me goyo cal man."
+
+#. Text tool instructions
+#: ../tools.h:127
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text."
+msgstr ""
+"Yer kit coc mo keken.Di kum cal megi ci dong iromo cako goyo coc. Di Enter "
+"onyo Tab me tyeko coc megi."
+
+#. Label tool instructions
+#: ../tools.h:130
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text. By using the selector button "
+"and clicking an exist label, you can move it, edit it and change its text "
+"style."
+msgstr ""
+"Yer kit coc mo keken.Di kum cal megi ci dong iromo dong cako goyo coc.Di "
+"(Donyi) onyo Tab me tyeko coc megi.Ka itiyo ki layer jami kun idiyo coc ma "
+"dong tye,iromo diro kakare, loko ne kit ma imito kun bene iloko wa kit coc "
+"ne. "
+
+#. Magic tool instruction
+#: ../tools.h:136
+msgid "Pick a magical effect to use on your drawing!"
+msgstr "Yer wek otime calo tangu tangu ikum cal megi!"
+
+#. Response to 'undo' action
+#: ../tools.h:139
+msgid "Undo!"
+msgstr "Dwok kit macon!"
+
+#. Response to 'redo' action
+#: ../tools.h:142
+msgid "Redo!"
+msgstr "Dwok kit ma onwongo itimo kede ni!"
+
+#. Eraser tool
+#: ../tools.h:145
+msgid "Eraser!"
+msgstr "Lajwa!"
+
+#. Response to 'start a new image' action
+#: ../tools.h:148
+msgid "Pick a color or picture with which to start a new drawing."
+msgstr "Kwany rangi onyo cal ma omyero icak ki goc manyen."
+
+#. Response to 'open' action (while file dialog is being constructed)
+#: ../tools.h:151
+msgid "Open…"
+msgstr "Yab..."
+
+#. Response to 'save' action
+#: ../tools.h:154
+msgid "Your image has been saved!"
+msgstr "Cal megi ki tyeko gwoko woko!"
+
+#. Response to 'print' action (while printing, or print dialog is being used)
+#: ../tools.h:157
+msgid "Printing…"
+msgstr "Tye ka goyo coc i karatac..."
+
+#. Response to 'quit' (exit) action
+#: ../tools.h:160
+msgid "Bye bye!"
+msgstr "Dong maber ba!"
+
+#. Instruction while using Line tool (after click, before release)
+#: ../tools.h:164
+msgid "Let go of the button to complete the line."
+msgstr "Wek citi ikum ladic me tyeko  rek."
+
+#. Instruction while using Shape tool (after first click, before release)
+#: ../tools.h:167
+msgid "Hold the button to stretch the shape."
+msgstr "Mak ladic me telo onyo nyayo kit cal megi."
+
+#. Instruction while finishing Shape tool (after release, during rotation step before second click)
+#: ../tools.h:170
+msgid "Move the mouse to rotate the shape. Click to draw it."
+msgstr "Dir oyo me wiro cal mamegi.Dii me goyo ne."
+
+#. Notification that 'New' action was aborted (current image would have been lost)
+#: ../tools.h:173
+msgid "OK then… Let’s keep drawing this one!"
+msgstr "Kakare...Wamede ki goyo cal eni ni!"
+
+#. Prompt to confirm user wishes to quit
+#: ../tuxpaint.c:2053
+msgid "Do you really want to quit?"
+msgstr "Adaa imito aao?"
+
+#. Quit prompt positive response (quit)
+#: ../tuxpaint.c:2056
+msgid "Yes, I’m done!"
+msgstr "Eyo,dong atyeko oo!"
+
+#. Quit prompt negative response (don't quit)
+#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
+msgid "No, take me back!"
+msgstr "Ku, dwoka dok cen!"
+
+#. Current picture is not saved; user is quitting
+#: ../tuxpaint.c:2063
+msgid "If you quit, you’ll lose your picture! Save it?"
+msgstr "Ka i aao, ibino rwenyo cal mamegi woko! Imito gwoko ne?"
+
+#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
+msgid "Yes, save it!"
+msgstr "Eyo, gwoki!"
+
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+msgid "No, don’t bother saving!"
+msgstr "Ku, pe iyele me gwoko ne!"
+
+#. Current picture is not saved; user is opening another picture
+#: ../tuxpaint.c:2068
+msgid "Save your picture first?"
+msgstr "Kong ki gwok cali maenini?"
+
+#. Error opening picture
+#: ../tuxpaint.c:2073
+msgid "Can’t open that picture!"
+msgstr "Yabo cal eno ni oloya woko!"
+
+#. Generic dialog dismissal
+#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
+#: ../tuxpaint.c:2106
+msgid "OK"
+msgstr "Aya do."
+
+#. Notification that 'Open' dialog has nothing to show
+#: ../tuxpaint.c:2080
+msgid "There are no saved files!"
+msgstr "Pe tye fayil mo keken ma onongo kigwoko."
+
+#. Verification of print action
+#: ../tuxpaint.c:2084
+msgid "Print your picture now?"
+msgstr "Ki go cal mamegi ni dong ikaratac?"
+
+#: ../tuxpaint.c:2085
+msgid "Yes, print it!"
+msgstr "Eyo, go ne!"
+
+#. Confirmation of successful (we hope) printing
+#: ../tuxpaint.c:2089
+msgid "Your picture has been printed!"
+msgstr "Kityeko dong goyo cal mamegi woko! "
+
+#. We got an error printing
+#: ../tuxpaint.c:2093
+msgid "Sorry! Your picture could not be printed!"
+msgstr "Tim wa kica! Pe wa goyo cal mamegi!"
+
+#. Notification that it's too soon to print again (--printdelay option is in effect)
+#: ../tuxpaint.c:2096
+msgid "You can’t print yet!"
+msgstr "Pwod pe iromo goyo cal mamegi"
+
+#. Prompt to confirm erasing a picture in the Open dialog
+#: ../tuxpaint.c:2100
+msgid "Erase this picture?"
+msgstr "Duny cal eni woko?"
+
+#: ../tuxpaint.c:2101
+msgid "Yes, erase it!"
+msgstr "Eyo,duny oo!"
+
+#: ../tuxpaint.c:2102
+msgid "No, don’t erase it!"
+msgstr "Ku, pe iduny!"
+
+#. Reminder that Mouse Button 1 is the button to use in Tux Paint
+#: ../tuxpaint.c:2105
+msgid "Remember to use the left mouse button!"
+msgstr "Po me tic ki mapeca tung acam me oyo/ladic!"
+
+#. Sound has been muted (silenced) via keyboard shortcut
+#: ../tuxpaint.c:2313
+msgid "Sound muted."
+msgstr "Dwon kineko oo weng."
+
+#. Sound has been unmuted (unsilenced) via keyboard shortcut
+#: ../tuxpaint.c:2318
+msgid "Sound unmuted."
+msgstr "Dwon kiyabu."
+
+#. Wait while Text tool finishes loading fonts
+#: ../tuxpaint.c:3065
+msgid "Please wait…"
+msgstr "Tim ber ikur..."
+
+#. Open dialog: 'Erase' button, to erase/deleted the selected picture
+#: ../tuxpaint.c:7634
+msgid "Erase"
+msgstr "Duny"
+
+#. Open dialog: 'Slides' button, to switch to slide show mode
+#: ../tuxpaint.c:7637
+msgid "Slides"
+msgstr "cale macer malube aluba "
+
+#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
+#: ../tuxpaint.c:7640
+msgid "Back"
+msgstr "Cen"
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7643
+msgid "Next"
+msgstr "Mede anyim"
+
+#. Slideshow: 'Play' button, to begin a slideshow sequence
+#: ../tuxpaint.c:7646
+msgid "Play"
+msgstr "Tuki"
+
+#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
+#: ../tuxpaint.c:8355
+msgid "Aa"
+msgstr "Aa"
+
+#. Admittedly stupid way of determining which keys can be used for
+#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
+#: ../tuxpaint.c:11664
+msgid "Yes"
+msgstr "Eyo"
+
+#: ../tuxpaint.c:11668
+msgid "No"
+msgstr "Ku"
+
+#. Prompt to ask whether user wishes to save over old version of their file
+#: ../tuxpaint.c:12710
+msgid "Replace the picture with your changes?"
+msgstr "Kilok cal malube ki alokaloka itici manyeni?"
+
+#. Positive response to saving over old version
+#. (like a 'File:Save' action in other applications)
+#: ../tuxpaint.c:12714
+msgid "Yes, replace the old one!"
+msgstr "Eyo,lok kun ileyo maconi oo!"
+
+#. Negative response to saving over old version (saves a new image)
+#. (like a 'File:Save As...' action in other applications)
+#: ../tuxpaint.c:12718
+msgid "No, save a new file!"
+msgstr "Ku, gwok fayil manyen!"
+
+#: ../tuxpaint.c:13963
+msgid "Choose the picture you want, then click “Open”."
+msgstr "Yer cal ma imito, ci idi \"Yabi\""
+
+#. Let user choose images:
+#. Instructions for Slideshow file dialog (FIXME: Make a #define)
+#: ../tuxpaint.c:14994 ../tuxpaint.c:15322
+msgid "Choose the pictures you want, then click “Play”."
+msgstr "Yer cal ma imito, ci idi \"Tuki\"."
+
+#: ../tuxpaint.c:22344
+msgid "Pick a color."
+msgstr "Kwany rangi."
+
+#: ../tuxpaint.desktop.in.h:1
+msgid "Tux Paint"
+msgstr "Tux Paint"
+
+#: ../tuxpaint.desktop.in.h:2
+msgid "Drawing program"
+msgstr "Purugram me goc"
+
+#: ../tuxpaint.desktop.in.h:3
+msgid "A drawing program for children."
+msgstr "Purugram me goyo cal pa lutino."
+
+#: ../../magic/src/alien.c:64
+msgid "Color Shift"
+msgstr "Diro rangi"
+
+#: ../../magic/src/alien.c:67
+msgid "Click and move the mouse to change the colors in parts of your picture."
+msgstr "Dii ci iywa ladic ne wek olok rangi idul kom cal mamegi."
+
+#: ../../magic/src/alien.c:68
+msgid "Click to change the colors in your entire picture."
+msgstr "Dii wek olok rangi ikom cal mamegi weng."
+
+#: ../../magic/src/blind.c:117
+msgid "Blind"
+msgstr "Too wang"
+
+#: ../../magic/src/blind.c:122
+msgid ""
+"Click towards the edge of your picture to pull window blinds over it. Move "
+"perpendicularly to open or close the blinds."
+msgstr ""
+"Dii macok ki lak cal ma megi wek iywa ci iwum ki dirica ma latowang ikume."
+"Ywa atira ci oyab onyo lor towang."
+
+#: ../../magic/src/blocks_chalk_drip.c:136
+msgid "Blocks"
+msgstr "Bulok"
+
+#: ../../magic/src/blocks_chalk_drip.c:138
+msgid "Chalk"
+msgstr "Coka"
+
+#: ../../magic/src/blocks_chalk_drip.c:140
+msgid "Drip"
+msgstr "Ton"
+
+#: ../../magic/src/blocks_chalk_drip.c:150
+msgid "Click and move the mouse around to make the picture blocky."
+msgstr "Dii ci iywa ladic iyi akina ne wek omi cal gubed calo bulok."
+
+#: ../../magic/src/blocks_chalk_drip.c:153
+msgid ""
+"Click and move the mouse around to turn the picture into a chalk drawing."
+msgstr "Dii ci iywa ladic iyi akina ne wek ilok cal kun dwoko ne igoc ma coka."
+
+#: ../../magic/src/blocks_chalk_drip.c:156
+msgid "Click and move the mouse around to make the picture drip."
+msgstr "Dii ci iywa ladic iyi akina ne wek omi ton pa cal."
+
+#: ../../magic/src/blur.c:80
+msgid "Blur"
+msgstr "Ma laribiribi."
+
+#: ../../magic/src/blur.c:83
+msgid "Click and move the mouse around to blur the image."
+msgstr "Dii ci iywa ladic iyi akina ne wek omi cal bed laribiribi."
+
+#: ../../magic/src/blur.c:84
+msgid "Click to blur the entire image."
+msgstr "Dii wek omi cal weng obed ma laribiribi."
+
+#. Both are named "Bricks", at the moment:
+#: ../../magic/src/bricks.c:124
+msgid "Bricks"
+msgstr "Matapwali"
+
+#: ../../magic/src/bricks.c:131
+msgid "Click and move to draw large bricks."
+msgstr "Dii ci idir wek ogo cal matapwali ma dit odoco."
+
+#: ../../magic/src/bricks.c:133
+msgid "Click and move to draw small bricks."
+msgstr "Dii ci idir wek igo cal matapwali ma tino."
+
+#: ../../magic/src/calligraphy.c:127
+msgid "Calligraphy"
+msgstr "Coc  ma mwonya"
+
+#: ../../magic/src/calligraphy.c:134
+msgid "Click and move the mouse around to draw in calligraphy."
+msgstr "Dii ci idir ladic iyi akina ne wek igo iyi coc ma mwonya."
+
+#: ../../magic/src/cartoon.c:106
+msgid "Cartoon"
+msgstr "Katuun"
+
+#: ../../magic/src/cartoon.c:113
+msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgstr "Dii ci idir iyi akina ne wek owir cal dwok tung kum katuun."
+
+#: ../../magic/src/confetti.c:85
+msgid "Confetti"
+msgstr "Kwone cale ma giyiko ma mile"
+
+#: ../../magic/src/confetti.c:87
+msgid "Click to throw confetti!"
+msgstr "Dii ci iba cal ma gigoyo ma mile!"
+
+#: ../../magic/src/distortion.c:142
+msgid "Distortion"
+msgstr "Rucurucu"
+
+#: ../../magic/src/distortion.c:150
+msgid "Click and drag the mouse to cause distortion in your picture."
+msgstr "Dii ci iywa ladic wek omi cal mamegi rucere odoco."
+
+#: ../../magic/src/emboss.c:103
+msgid "Emboss"
+msgstr "Ling"
+
+#: ../../magic/src/emboss.c:109
+msgid "Click and drag the mouse to emboss the picture."
+msgstr "Dii ci iywa ladic wek iling  cal."
+
+#: ../../magic/src/fade_darken.c:121
+msgid "Lighten"
+msgstr "Cwinyi"
+
+#: ../../magic/src/fade_darken.c:123
+msgid "Darken"
+msgstr "Cidi"
+
+#: ../../magic/src/fade_darken.c:134
+msgid "Click and move the mouse to lighten parts of your picture."
+msgstr "Dii ci idir ladic wek icwiny dul kom pa cal mamegi."
+
+#: ../../magic/src/fade_darken.c:136
+msgid "Click to lighten your entire picture."
+msgstr "Dii wek icwiny cal mamegi weng."
+
+#: ../../magic/src/fade_darken.c:141
+msgid "Click and move the mouse to darken parts of your picture."
+msgstr "Dii ci idir ladic wek icid dul kom cal mamegi."
+
+#: ../../magic/src/fade_darken.c:143
+msgid "Click to darken your entire picture."
+msgstr "Dii wek icid woko cal mamegi weng."
+
+#: ../../magic/src/fill.c:108
+msgid "Fill"
+msgstr "Pik"
+
+#: ../../magic/src/fill.c:115
+msgid "Click in the picture to fill that area with color."
+msgstr "Dii yi cal meno wek gupik ka ma orumu en ki rangi."
+
+#: ../../magic/src/fisheye.c:104
+msgid "Fisheye"
+msgstr "Lawangrec"
+
+#. Needs better name
+#: ../../magic/src/fisheye.c:106
+msgid "Click on part of your picture to create a fisheye effect."
+msgstr "Dii ki dul kom cal ma megi wek'oket ma calo lawangrec."
+
+#: ../../magic/src/flower.c:150
+msgid "Flower"
+msgstr "Ature"
+
+#: ../../magic/src/flower.c:156
+msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
+msgstr "Dii ci iywa ka gono yat pa lature. Wek otyek ka gono lature."
+
+#: ../../magic/src/foam.c:121
+msgid "Foam"
+msgstr "Bwoyo"
+
+#: ../../magic/src/foam.c:127
+msgid "Click and drag the mouse to cover an area with foamy bubbles."
+msgstr "Dii ci iywa ladic wek owum kakare ki bwoyo ma otwak."
+
+#: ../../magic/src/fold.c:105
+msgid "Fold"
+msgstr "Dol"
+
+#: ../../magic/src/fold.c:107
+msgid ""
+"Choose a background color and click to turn the corner of the page over."
+msgstr ""
+"Yer rangi pa ka maneno calu bor ki dii wek owir  gwic pa pot katatac iwiye. "
+
+#: ../../magic/src/fretwork.c:176
+msgid "Fretwork"
+msgstr ""
+
+#: ../../magic/src/fretwork.c:180
+#, fuzzy
+#| msgid "Click and drag to draw arrows made of string art."
+msgid "Click and drag to draw repetitive patterns. "
+msgstr "Dii ki iywa wek igoo latero ma gitiyo ki cale me toltol."
+
+#: ../../magic/src/fretwork.c:182
+#, fuzzy
+#| msgid "Click to cover your picture with rain drops."
+msgid "Click to surround your picture with repetitive patterns."
+msgstr "Dii wek iwum cal mamegi ki ton pa kot."
+
+#: ../../magic/src/glasstile.c:107
+msgid "Glass Tile"
+msgstr "Matangula lum"
+
+#: ../../magic/src/glasstile.c:114
+msgid "Click and drag the mouse to put glass tile over your picture."
+msgstr "Dii ci iywa ladic wek oket matangula lum iwi cal mamegi."
+
+#: ../../magic/src/glasstile.c:116
+msgid "Click to cover your entire picture in glass tiles."
+msgstr "Dii wek iwum cal mamegi weng icanduk pa matangula lum."
+
+#: ../../magic/src/grass.c:112
+msgid "Grass"
+msgstr "Lum"
+
+#: ../../magic/src/grass.c:118
+msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgstr "Dii ci idir wek ogo lum. Kur wii wil ki cilo!"
+
+#: ../../magic/src/halftone.c:34
+msgid "Halftone"
+msgstr ""
+
+#: ../../magic/src/halftone.c:38
+#, fuzzy
+#| msgid "Click to turn your painting into its negative."
+msgid "Click and drag to turn your drawing into a newspaper."
+msgstr "Dii wek olok wir mamegi dwoko ne nioo imarac."
+
+#: ../../magic/src/kalidescope.c:120
+msgid "Symmetric Left/Right"
+msgstr "Nucu mo ma romrom ki mukene ki caji ma Lacam/Lacuc"
+
+#: ../../magic/src/kalidescope.c:122
+msgid "Symmetric Up/Down"
+msgstr "Nucu mo ma romrom ki mukene ki caji ma Lamal/Piny"
+
+#: ../../magic/src/kalidescope.c:124
+msgid "Pattern"
+msgstr ""
+
+#: ../../magic/src/kalidescope.c:126
+msgid "Tiles"
+msgstr ""
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:128
+msgid "Kaleidoscope"
+msgstr "Dol matye ki ebukutu ma i kio"
+
+#: ../../magic/src/kalidescope.c:136
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the left and right of your picture."
+msgstr ""
+"Dii ci iywa ladic wek ogo ki lajwac aryo ma tye ki nucu mo maromrom arii ma "
+"lacam ki tung lacuc pa cal mamegi."
+
+#: ../../magic/src/kalidescope.c:138
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the top and bottom of your picture."
+msgstr ""
+"Dii ci iywa ladic wek ogo ki lajwac aryo ma tye ki nucu mo ma romrom arii "
+"itung ku wie ci piny pa cal mamegi."
+
+#: ../../magic/src/kalidescope.c:140
+#, fuzzy
+#| msgid "Click and drag the mouse to emboss the picture."
+msgid "Click and drag the mouse to draw a pattern across the picture."
+msgstr "Dii ci iywa ladic wek iling  cal."
+
+#: ../../magic/src/kalidescope.c:142
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse to draw with two brushes that are symmetric "
+#| "across the left and right of your picture."
+msgid ""
+"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"picture."
+msgstr ""
+"Dii ci iywa ladic wek ogo ki lajwac aryo ma tye ki nucu mo maromrom arii ma "
+"lacam ki tung lacuc pa cal mamegi."
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:144
+msgid ""
+"Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgstr ""
+"Dii ci iywa ladic wek ogo ki lajwac ma nucu ne romrom ki mukene "
+"(akaleidoscope)."
+
+#: ../../magic/src/light.c:107
+msgid "Light"
+msgstr "Cwiny"
+
+#: ../../magic/src/light.c:113
+msgid "Click and drag to draw a beam of light on your picture."
+msgstr "Dii ci iywa wek ogo layin acara pa lero okom cal mamegi."
+
+#: ../../magic/src/metalpaint.c:101
+msgid "Metal Paint"
+msgstr "Dawa me nyonyo"
+
+#: ../../magic/src/metalpaint.c:107
+msgid "Click and drag the mouse to paint with a metallic color."
+msgstr "Dii ci iywa ladic wek oling ki rangi me nyonyo."
+
+#: ../../magic/src/mirror_flip.c:117
+msgid "Mirror"
+msgstr "Kio"
+
+#: ../../magic/src/mirror_flip.c:119
+msgid "Flip"
+msgstr "Lok me oyoto"
+
+#: ../../magic/src/mirror_flip.c:130
+msgid "Click to make a mirror image."
+msgstr "Dii wek iyik cal kio."
+
+#: ../../magic/src/mirror_flip.c:133
+msgid "Click to flip the picture upside-down."
+msgstr "Dii wek ilok cal laculawic."
+
+#: ../../magic/src/mosaic.c:100
+msgid "Mosaic"
+msgstr "Cal ma kiketo kacel ki gwenge ma olinge(Mosaic)"
+
+#: ../../magic/src/mosaic.c:103
+msgid ""
+"Click and move the mouse to add a mosaic effect to parts of your picture."
+msgstr "Dii wek idir ladic ka ibimedo teko pa mojaik ikom dul kom cal mamegi."
+
+#: ../../magic/src/mosaic.c:104
+msgid "Click to add a mosaic effect to your entire picture."
+msgstr ""
+"Dii wek imed teko pa cal ma kiketo kacel ki gwenge ikom cal mamegi weng."
+
+#: ../../magic/src/mosaic_shaped.c:142
+msgid "Square Mosaic"
+msgstr "Cal ma kiketo kacel ki gwenge ma twoke angwen rorom"
+
+#: ../../magic/src/mosaic_shaped.c:143
+msgid "Hexagon Mosaic"
+msgstr "Cal ma kiketo kacel ki gwenge ma olinge ma twoke tye abicel"
+
+#: ../../magic/src/mosaic_shaped.c:144
+msgid "Irregular Mosaic"
+msgstr "Cal ma kiketo kacel ki gwenge ma olinge ma pe ki twoke "
+
+#: ../../magic/src/mosaic_shaped.c:149
+msgid ""
+"Click and move the mouse to add a square mosaic to parts of your picture."
+msgstr ""
+"Dii ci idir ladic wek omed cal ma kiketo ki gwenge ma olinge  ma twoke "
+"angwen rorom ikom dul cal mamegi weng."
+
+#: ../../magic/src/mosaic_shaped.c:150
+msgid "Click to add a square mosaic to your entire picture."
+msgstr ""
+"Dii wek omed cal ma kiketo kacel ki gwenge ma olinge ma twoke angwen ikom "
+"cal mamegi weng."
+
+#: ../../magic/src/mosaic_shaped.c:152
+msgid ""
+"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+msgstr ""
+"Dii ki idir ladic wek omed cal ma kiketo kacel ki gwenge ma olinge ma twoke "
+"abicel marom ikom cal mamegi."
+
+#: ../../magic/src/mosaic_shaped.c:153
+msgid "Click to add a hexagonal mosaic to your entire picture."
+msgstr ""
+"Dii wek imed cal ma kiketo kacel ki gwenge ma olinge ma twoke abicel marom "
+"ikom cal mamegi weng."
+
+#: ../../magic/src/mosaic_shaped.c:155
+msgid ""
+"Click and move the mouse to add an irregular mosaic to parts of your picture."
+msgstr ""
+"Dii ki idir ladic wek imed cal ma kiketo kacel ki gwenge ma olinge ma twoke "
+"tye ataata  idul kom cal mamegi."
+
+#: ../../magic/src/mosaic_shaped.c:156
+msgid "Click to add an irregular mosaic to your entire picture."
+msgstr ""
+"Dii wek imed cal ma kiketo kacel ki gwenge ma olinge ma twoke tye ataata "
+"idul kum cal mamegi weng."
+
+#: ../../magic/src/negative.c:98
+msgid "Negative"
+msgstr "Olutuke"
+
+#: ../../magic/src/negative.c:106
+msgid "Click and move the mouse around to make your painting negative."
+msgstr "Dii ki idir ladic akina ne wek omi wir mamegi obed marac."
+
+#: ../../magic/src/negative.c:109
+msgid "Click to turn your painting into its negative."
+msgstr "Dii wek olok wir mamegi dwoko ne nioo imarac."
+
+#: ../../magic/src/noise.c:63
+msgid "Noise"
+msgstr "Dange"
+
+#: ../../magic/src/noise.c:66
+msgid "Click and move the mouse to add noise to parts of your picture."
+msgstr "Dii ki idir ladic wek imed dange idul ikom cal mamegi."
+
+#: ../../magic/src/noise.c:67
+msgid "Click to add noise to your entire picture."
+msgstr "Dii wek omed dange ikom cal mamegi weng."
+
+#: ../../magic/src/perspective.c:145
+msgid "Perspective"
+msgstr "Malube kwede"
+
+#: ../../magic/src/perspective.c:146
+msgid "Zoom"
+msgstr "Nyaa "
+
+#: ../../magic/src/perspective.c:151
+msgid "Click on the corners and drag where you want to stretch the picture."
+msgstr "Dii ikom itwoketwoke ite ywayo kama imito ryeyone cal mamegi."
+
+#: ../../magic/src/perspective.c:154
+msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr "Dii ki iywa lamal wek onya onyo ywa lapiny wek irid cal woko."
+
+#: ../../magic/src/puzzle.c:105
+msgid "Puzzle"
+msgstr "Laruc wic"
+
+#: ../../magic/src/puzzle.c:112
+msgid "Click the part of your picture where would you like a puzzle."
+msgstr "Dii dul ikom cal mamegi ka ma imaro laruc wic iye."
+
+#: ../../magic/src/puzzle.c:113
+msgid "Click to make a puzzle in fullscreen mode."
+msgstr "Dii wek iyik laruc wic malac iwang kompiuta."
+
+#: ../../magic/src/rails.c:131
+msgid "Rails"
+msgstr "Tyen-gar"
+
+#: ../../magic/src/rails.c:133
+msgid "Click and drag to draw train track rails on your picture."
+msgstr "Dii ki iywa wek igo yoo tyen gar ikom cal mamegi."
+
+#: ../../magic/src/rainbow.c:139
+msgid "Rainbow"
+msgstr "Itoloka"
+
+#: ../../magic/src/rainbow.c:146
+msgid "You can draw in rainbow colors!"
+msgstr "Itwero goyo ki rangi pa itoloka!"
+
+#: ../../magic/src/rain.c:65
+msgid "Rain"
+msgstr "Kot"
+
+#: ../../magic/src/rain.c:68
+msgid "Click to place a rain drop onto your picture."
+msgstr "Dii wek olee ton pa kot ikom cal mamegi."
+
+#: ../../magic/src/rain.c:69
+msgid "Click to cover your picture with rain drops."
+msgstr "Dii wek iwum cal mamegi ki ton pa kot."
+
+#: ../../magic/src/realrainbow.c:110
+msgid "Real Rainbow"
+msgstr "Itolaka kikome"
+
+#: ../../magic/src/realrainbow.c:112
+msgid "ROYGBIV Rainbow"
+msgstr "ROYGBIV Itolaka"
+
+#: ../../magic/src/realrainbow.c:117
+msgid ""
+"Click where you want your rainbow to start, drag to where you want it to "
+"end, and then let go to draw a rainbow."
+msgstr ""
+"Dii kan ma imito ni itoloka mamegi ocake iye, ywa nioo kan ma imito ni en "
+"ogik iye, ki mii ociti ka gono itolaka."
+
+#: ../../magic/src/ripples.c:106
+msgid "Ripples"
+msgstr "Twagere pa pii"
+
+#: ../../magic/src/ripples.c:112
+msgid "Click to make ripples appear over your picture."
+msgstr "Dii wek imii twage pa pii onyute iwi cal mamegi."
+
+#: ../../magic/src/rosette.c:116
+msgid "Rosette"
+msgstr "Rosette"
+
+#: ../../magic/src/rosette.c:116
+msgid "Picasso"
+msgstr "Picasso"
+
+#: ../../magic/src/rosette.c:121
+msgid "Click and start drawing your rosette."
+msgstr "Dii ki icak goyo rosette mamegi."
+
+#: ../../magic/src/rosette.c:123
+msgid "You can draw just like Picasso!"
+msgstr "Itwero goyo macalo Picasso kikome!"
+
+#: ../../magic/src/sharpen.c:73
+msgid "Edges"
+msgstr "Teng "
+
+#: ../../magic/src/sharpen.c:74
+msgid "Sharpen"
+msgstr "Paki"
+
+#: ../../magic/src/sharpen.c:75
+msgid "Silhouette"
+msgstr "Silhoutte"
+
+#: ../../magic/src/sharpen.c:78
+msgid "Click and move the mouse to trace edges in parts of your picture."
+msgstr "Dii ki idir ladic wek okwed teng idul kom cal mamegi."
+
+#: ../../magic/src/sharpen.c:79
+msgid "Click to trace edges in your entire picture."
+msgstr "Dii wek okwed teng ical mamegi weng."
+
+#: ../../magic/src/sharpen.c:80
+msgid "Click and move the mouse to sharpen parts of your picture."
+msgstr "Dii ki idir ladic ne  wek opak dul kom cal mamegi."
+
+#: ../../magic/src/sharpen.c:81
+msgid "Click to sharpen the entire picture."
+msgstr "Dii wek ipak cal mamegi weng."
+
+#: ../../magic/src/sharpen.c:82
+msgid "Click and move the mouse to create a black and white silhouette."
+msgstr "Dii ki idir ladic wek oyik silhoutte matye macol ki  matar."
+
+#: ../../magic/src/sharpen.c:83
+msgid "Click to create a black and white silhouette of your entire picture."
+msgstr "Dii wek iyik silhoutte manen macol kwede matar ikom cal mamegi weng."
+
+#: ../../magic/src/shift.c:109
+msgid "Shift"
+msgstr "Kobi"
+
+#: ../../magic/src/shift.c:115
+msgid "Click and drag to shift your picture around on the canvas."
+msgstr "Dii ki  iywa me kobo cal mamegi  iyi akina kum canvas."
+
+#: ../../magic/src/smudge.c:106
+msgid "Smudge"
+msgstr "Lililo"
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:108
+msgid "Wet Paint"
+msgstr "Rangi madyaka"
+
+#: ../../magic/src/smudge.c:115
+msgid "Click and move the mouse around to smudge the picture."
+msgstr "Dii ki idir ladic akina ne wek ilil cal."
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:117
+msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgstr "Dii ki idir ladic iyi akina ne wek igo kwede madyak. dawa ma dyakdyak."
+
+#: ../../magic/src/snow.c:68
+msgid "Snow Ball"
+msgstr "Odilo me Akuna"
+
+#: ../../magic/src/snow.c:69
+msgid "Snow Flake"
+msgstr "Pii mumake mapoto ki malo"
+
+#: ../../magic/src/snow.c:72
+msgid "Click to add snow balls to your picture."
+msgstr "Dii wek  imed odilo akuna ikum cal mamegi. "
+
+#: ../../magic/src/snow.c:73
+msgid "Click to add snow flakes to your picture."
+msgstr "Dii wek imed pii mumake mapoto ki malo ikom cal mamegi."
+
+#: ../../magic/src/string.c:123
+msgid "String edges"
+msgstr "Teng tol weng ma gikubu"
+
+#: ../../magic/src/string.c:126
+msgid "String corner"
+msgstr "Gwic tol  ma gikubu"
+
+#: ../../magic/src/string.c:129
+msgid "String 'V'"
+msgstr "Tol \"V\""
+
+#: ../../magic/src/string.c:137
+msgid ""
+"Click and drag to draw string art. Drag top-bottom to draw less or more "
+"lines, left or right to make a bigger hole."
+msgstr ""
+"Dii ki iywa wek igoo cale ki toltol. Ywa imalu-ki piny wek i goo rye manok "
+"onyo layin mapol, tung lacam onyo tung acuc wek oket i bur ma dit."
+
+#: ../../magic/src/string.c:140
+msgid "Click and drag to draw arrows made of string art."
+msgstr "Dii ki iywa wek igoo latero ma gitiyo ki cale me toltol."
+
+#: ../../magic/src/string.c:143
+msgid "Draw string art arrows with free angles."
+msgstr "Goo lacim cal toltol kwede akina gi tye mere ataa."
+
+#: ../../magic/src/tint.c:71
+msgid "Tint"
+msgstr "Rangi ma gi rubu matar."
+
+#: ../../magic/src/tint.c:72
+msgid "Color & White"
+msgstr "Rangi & Matar"
+
+#: ../../magic/src/tint.c:75
+msgid ""
+"Click and move the mouse around to change the color of parts of your picture."
+msgstr "Dii ki idir ladic i akinakina ne wek olok rangi pa dul kom cal mamegi."
+
+#: ../../magic/src/tint.c:76
+msgid "Click to change the color of your entire picture."
+msgstr "Dii wek ilok rangi pa cal mamegi weng."
+
+#: ../../magic/src/tint.c:77
+msgid ""
+"Click and move the mouse around to turn parts of your picture into white and "
+"a color you choose."
+msgstr ""
+"Dii ki idir ladic i akinakina ne wek olok dul kom cal mamegi idwok matar "
+"kwede rangi ma iyero ne."
+
+#: ../../magic/src/tint.c:78
+msgid "Click to turn your entire picture into white and a color you choose."
+msgstr "Dii wek ilok kum cal mamegi weng odok matar ki rangi  ma yin iyero."
+
+#: ../../magic/src/toothpaste.c:65
+msgid "Toothpaste"
+msgstr "Yat lajwa lak"
+
+#: ../../magic/src/toothpaste.c:68
+msgid "Click and drag to squirt toothpaste onto your picture."
+msgstr "Dii ki iywa wek ibibio yat lajwa lak ikom cal ma megi."
+
+#: ../../magic/src/tornado.c:157
+msgid "Tornado"
+msgstr "Yamo ajuru"
+
+#: ../../magic/src/tornado.c:163
+msgid "Click and drag to draw a tornado funnel on your picture."
+msgstr "Dii ki iywa wek ogo cal lapik yamo ajuru ikum cal ma megi."
+
+#: ../../magic/src/tv.c:100
+msgid "TV"
+msgstr "TV"
+
+#: ../../magic/src/tv.c:105
+msgid ""
+"Click and drag to make parts of your picture look like they are on "
+"television."
+msgstr ""
+"Dii ci iywa wek omi dul kom cal ma megi onen calo ma gutye itelevision."
+
+#: ../../magic/src/tv.c:108
+msgid "Click to make your picture look like it's on television."
+msgstr "Dii wek omi cal ma megi nen ma calo tye itelevision."
+
+#: ../../magic/src/waves.c:103
+msgid "Waves"
+msgstr "Yamu ma tago pii"
+
+#: ../../magic/src/waves.c:104
+msgid "Wavelets"
+msgstr "Yamu ma tago manok"
+
+#: ../../magic/src/waves.c:111
+msgid ""
+"Click to make the picture horizontally wavy. Click toward the top for "
+"shorter waves, the bottom for taller waves, the left for small waves, and "
+"the right for long waves."
+msgstr ""
+"Dii wek omi cal tage abutu. Dii macok ki wie pi tage macek, dol tere me tage "
+"maboco, lacam pi tage manok, ki tung lacuc pi tage mabor."
+
+#: ../../magic/src/waves.c:112
+msgid ""
+"Click to make the picture vertically wavy. Click toward the top for shorter "
+"waves, the bottom for taller waves, the left for small waves, and the right "
+"for long waves."
+msgstr ""
+"Dii wek omi cal tage atir. Dii macok ki wiye pi tage macek, dol tere pi tage "
+"maboco, lacam pi tage manok, ki tung lacuc pi tage mabor."
+
+#: ../../magic/src/xor.c:95
+#, fuzzy
+#| msgid "Colors"
+msgid "Xor Colors"
+msgstr "Rangi"
+
+#: ../../magic/src/xor.c:101
+#, fuzzy
+#| msgid "Click and drag to draw arrows made of string art."
+msgid "Click and drag to draw a XOR effect"
+msgstr "Dii ki iywa wek igoo latero ma gitiyo ki cale me toltol."
+
+#: ../../magic/src/xor.c:103
+#, fuzzy
+#| msgid "Click to add a mosaic effect to your entire picture."
+msgid "Click to draw a XOR effect on the whole picture"
+msgstr ""
+"Dii wek imed teko pa cal ma kiketo kacel ki gwenge ikom cal mamegi weng."

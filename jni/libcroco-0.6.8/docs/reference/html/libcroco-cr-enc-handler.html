@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-enc-handler</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-doc-handler.html" title="cr-doc-handler">
+<link rel="next" href="libcroco-cr-fonts.html" title="cr-fonts">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-doc-handler.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-fonts.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-enc-handler.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-enc-handler.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-enc-handler"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-enc-handler.top_of_page"></a>cr-enc-handler</span></h2>
+<p>cr-enc-handler</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-enc-handler.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a class="link" href="libcroco-cr-enc-handler.html#CREncHandler" title="CREncHandler">CREncHandler</a>;
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-enc-handler.html#cr-enc-handler-convert-input" title="cr_enc_handler_convert_input ()">cr_enc_handler_convert_input</a>        (<em class="parameter"><code><a class="link" href="libcroco-cr-enc-handler.html#CREncHandler" title="CREncHandler"><span class="type">CREncHandler</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_in</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> *a_in_len</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> **a_out</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> *a_out_len</code></em>);
+<a class="link" href="libcroco-cr-enc-handler.html#CREncHandler" title="CREncHandler"><span class="returnvalue">CREncHandler</span></a> *      <a class="link" href="libcroco-cr-enc-handler.html#cr-enc-handler-get-instance" title="cr_enc_handler_get_instance ()">cr_enc_handler_get_instance</a>         (<em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-enc-handler.html#cr-enc-handler-resolve-enc-alias" title="cr_enc_handler_resolve_enc_alias ()">cr_enc_handler_resolve_enc_alias</a>    (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_alias_name</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> *a_enc</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-enc-handler.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-enc-handler.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CREncHandler"></a><h3>CREncHandler</h3>
+<pre class="programlisting">typedef struct _CREncHandler CREncHandler;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-enc-handler-convert-input"></a><h3>cr_enc_handler_convert_input ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_enc_handler_convert_input        (<em class="parameter"><code><a class="link" href="libcroco-cr-enc-handler.html#CREncHandler" title="CREncHandler"><span class="type">CREncHandler</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_in</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> *a_in_len</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> **a_out</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> *a_out_len</code></em>);</pre>
+<p>
+Converts a raw input buffer into an utf8 buffer.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-enc-handler.html#CREncHandler" title="CREncHandler"><span class="type">CREncHandler</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_in</code></em> :</span></p></td>
+<td>the input buffer to convert.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_in_len</code></em> :</span></p></td>
+<td>in/out parameter. The len of the input
+buffer to convert. After return, contains the number of
+bytes actually consumed.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_out</code></em> :</span></p></td>
+<td>output parameter. The converted output buffer.
+Must be freed by the buffer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_out_len</code></em> :</span></p></td>
+<td>output parameter. The length of the output buffer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-enc-handler-get-instance"></a><h3>cr_enc_handler_get_instance ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-enc-handler.html#CREncHandler" title="CREncHandler"><span class="returnvalue">CREncHandler</span></a> *      cr_enc_handler_get_instance         (<em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);</pre>
+<p>
+Gets the instance of encoding handler.
+This function implements a singleton pattern.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the encoding of the Handler.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the instance of <a class="link" href="libcroco-cr-enc-handler.html#CREncHandler" title="CREncHandler"><span class="type">CREncHandler</span></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-enc-handler-resolve-enc-alias"></a><h3>cr_enc_handler_resolve_enc_alias ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_enc_handler_resolve_enc_alias    (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_alias_name</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> *a_enc</code></em>);</pre>
+<p>
+Given an encoding name (called an alias name)
+the function returns the matching encoding type.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_alias_name</code></em> :</span></p></td>
+<td>the encoding name.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>output param. The returned encoding type
+or 0 if the alias is not supported.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

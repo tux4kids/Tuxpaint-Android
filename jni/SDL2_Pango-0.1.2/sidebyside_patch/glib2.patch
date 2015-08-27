@@ -1,0 +1,29 @@
+Index: glib/gwin32.c
+===================================================================
+--- glib/gwin32.c	(revision 100)
++++ glib/gwin32.c	(revision 101)
+@@ -1223,6 +1223,7 @@
+ 	  return g_strdup (result);
+ 	}
+       
++#ifndef SIDEBYSIDE
+       key = g_strconcat ("Software\\", package, NULL);
+       
+       nbytes = 0;
+@@ -1245,7 +1246,7 @@
+ 
+       if (reg_key != NULL)
+ 	RegCloseKey (reg_key);
+-      
++
+       g_free (key);
+ 
+       if (result)
+@@ -1254,6 +1255,7 @@
+ 	  G_UNLOCK (package_dirs);
+ 	  return g_strdup (result);
+ 	}
++#endif
+       G_UNLOCK (package_dirs);
+     }
+ 

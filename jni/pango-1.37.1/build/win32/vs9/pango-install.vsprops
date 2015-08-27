@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+ ProjectType="Visual C++"
+ Version="8.00"
+ Name="pangoinstallprops"
+ InheritedPropertySheets=".\pango-install-bin.vsprops"
+ >
+ <UserMacro
+  Name="PangoInstallHeadersData"
+  Value="
+mkdir $(CopyDir)\include\pango-$(ApiVersion)\pango&#x0D;&#x0A;
+copy ..\..\..\pango\pango.h $(CopyDir)\include\pango-1.0\pango\pango.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-attributes.h $(CopyDir)\include\pango-1.0\pango\pango-attributes.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-bidi-type.h $(CopyDir)\include\pango-1.0\pango\pango-bidi-type.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-break.h $(CopyDir)\include\pango-1.0\pango\pango-break.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-context.h $(CopyDir)\include\pango-1.0\pango\pango-context.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-coverage.h $(CopyDir)\include\pango-1.0\pango\pango-coverage.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-engine.h $(CopyDir)\include\pango-1.0\pango\pango-engine.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-font.h $(CopyDir)\include\pango-1.0\pango\pango-font.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-fontmap.h $(CopyDir)\include\pango-1.0\pango\pango-fontmap.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-fontset.h $(CopyDir)\include\pango-1.0\pango\pango-fontset.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-glyph.h $(CopyDir)\include\pango-1.0\pango\pango-glyph.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-glyph-item.h $(CopyDir)\include\pango-1.0\pango\pango-glyph-item.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-gravity.h $(CopyDir)\include\pango-1.0\pango\pango-gravity.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-item.h $(CopyDir)\include\pango-1.0\pango\pango-item.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-language.h $(CopyDir)\include\pango-1.0\pango\pango-language.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-layout.h $(CopyDir)\include\pango-1.0\pango\pango-layout.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-matrix.h $(CopyDir)\include\pango-1.0\pango\pango-matrix.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-modules.h $(CopyDir)\include\pango-1.0\pango\pango-modules.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-renderer.h $(CopyDir)\include\pango-1.0\pango\pango-renderer.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-script.h $(CopyDir)\include\pango-1.0\pango\pango-script.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-tabs.h $(CopyDir)\include\pango-1.0\pango\pango-tabs.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-types.h $(CopyDir)\include\pango-1.0\pango\pango-types.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-utils.h $(CopyDir)\include\pango-1.0\pango\pango-utils.h&#x0D;&#x0A;
+copy ..\..\..\pango\pangocairo.h $(CopyDir)\include\pango-1.0\pango\pangocairo.h&#x0D;&#x0A;
+copy ..\..\..\pango\pangowin32.h $(CopyDir)\include\pango-1.0\pango\pangowin32.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-features.h $(CopyDir)\include\pango-1.0\pango\pango-features.h&#x0D;&#x0A;
+copy ..\..\..\pango\pango-enum-types.h $(CopyDir)\include\pango-1.0\pango\pango-enum-types.h&#x0D;&#x0A;
+if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; goto END&#x0D;&#x0A;
+if &quot;$(ConfigurationName)&quot; == &quot;Debug&quot; goto END&#x0D;&#x0A;
+copy ..\..\..\pango\pangofc-decoder.h $(CopyDir)\include\pango-$(ApiVersion)\pango&#x0D;&#x0A;
+copy ..\..\..\pango\pangofc-font.h $(CopyDir)\include\pango-$(ApiVersion)\pango&#x0D;&#x0A;
+copy ..\..\..\pango\pangofc-fontmap.h $(CopyDir)\include\pango-$(ApiVersion)\pango&#x0D;&#x0A;
+copy ..\..\..\pango\pango-ot.h $(CopyDir)\include\pango-$(ApiVersion)\pango&#x0D;&#x0A;
+copy ..\..\..\pango\pangoft2.h $(CopyDir)\include\pango-$(ApiVersion)\pango&#x0D;&#x0A;
+:END&#x0D;&#x0A;
+"
+ />
+</VisualStudioPropertySheet>

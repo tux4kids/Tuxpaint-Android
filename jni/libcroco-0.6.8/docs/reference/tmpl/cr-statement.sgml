@@ -1,0 +1,621 @@
+<!-- ##### SECTION Title ##### -->
+cr-statement
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### STRUCT CRAtCharsetRule ##### -->
+<para>
+
+</para>
+
+@charset: 
+
+<!-- ##### STRUCT CRAtFontFaceRule ##### -->
+<para>
+
+</para>
+
+@decl_list: 
+
+<!-- ##### STRUCT CRAtImportRule ##### -->
+<para>
+
+</para>
+
+@url: 
+@media_list: 
+@sheet: 
+
+<!-- ##### STRUCT CRAtMediaRule ##### -->
+<para>
+
+</para>
+
+@media_list: 
+@rulesets: 
+
+<!-- ##### STRUCT CRAtPageRule ##### -->
+<para>
+
+</para>
+
+@decl_list: 
+@name: 
+@pseudo: 
+
+<!-- ##### STRUCT CRRuleSet ##### -->
+<para>
+
+</para>
+
+@sel_list: 
+@decl_list: 
+@parent_media_rule: 
+
+<!-- ##### STRUCT CRStatement ##### -->
+<para>
+
+</para>
+
+@type: 
+@specificity: 
+@parent_sheet: 
+@next: 
+@prev: 
+@location: 
+@app_data: 
+@croco_data: 
+
+<!-- ##### STRUCT CRStyleSheet ##### -->
+<para>
+
+</para>
+
+@statements: 
+@origin: 
+@parent_import_rule: 
+@croco_data: 
+@app_data: 
+@ref_count: 
+
+<!-- ##### FUNCTION cr_statement_append ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_new: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_charset_rule_get_charset ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_charset: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_charset_rule_parse_from_buf ##### -->
+<para>
+
+</para>
+
+@a_buf: 
+@a_encoding: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_charset_rule_set_charset ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_charset: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_font_face_rule_add_decl ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_prop: 
+@a_value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_font_face_rule_get_decls ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_decls: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_font_face_rule_set_decls ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_decls: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_import_rule_get_imported_sheet ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_sheet: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_import_rule_get_url ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_url: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_import_rule_parse_from_buf ##### -->
+<para>
+
+</para>
+
+@a_buf: 
+@a_encoding: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_import_rule_set_imported_sheet ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_sheet: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_import_rule_set_url ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_url: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_media_get_from_list ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@itemnr: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_media_nr_rules ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_media_rule_parse_from_buf ##### -->
+<para>
+
+</para>
+
+@a_buf: 
+@a_enc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_page_rule_get_declarations ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_decl_list: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_page_rule_get_sel ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_sel: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_page_rule_parse_from_buf ##### -->
+<para>
+
+</para>
+
+@a_buf: 
+@a_encoding: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_page_rule_set_declarations ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_decl_list: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_at_page_rule_set_sel ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_sel: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_destroy ##### -->
+<para>
+
+</para>
+
+@a_this: 
+
+
+<!-- ##### FUNCTION cr_statement_does_buf_parses_against_core ##### -->
+<para>
+
+</para>
+
+@a_buf: 
+@a_encoding: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_dump ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_fp: 
+@a_indent: 
+
+
+<!-- ##### FUNCTION cr_statement_dump_charset ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_fp: 
+@a_indent: 
+
+
+<!-- ##### FUNCTION cr_statement_dump_font_face_rule ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_fp: 
+@a_indent: 
+
+
+<!-- ##### FUNCTION cr_statement_dump_import_rule ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_fp: 
+@a_indent: 
+
+
+<!-- ##### FUNCTION cr_statement_dump_media_rule ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_fp: 
+@a_indent: 
+
+
+<!-- ##### FUNCTION cr_statement_dump_page ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_fp: 
+@a_indent: 
+
+
+<!-- ##### FUNCTION cr_statement_dump_ruleset ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_fp: 
+@a_indent: 
+
+
+<!-- ##### FUNCTION cr_statement_font_face_rule_parse_from_buf ##### -->
+<para>
+
+</para>
+
+@a_buf: 
+@a_encoding: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_get_from_list ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@itemnr: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_get_parent_sheet ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_sheet: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_list_to_string ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_indent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_new_at_charset_rule ##### -->
+<para>
+
+</para>
+
+@a_sheet: 
+@a_charset: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_new_at_font_face_rule ##### -->
+<para>
+
+</para>
+
+@a_sheet: 
+@a_font_decls: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_new_at_import_rule ##### -->
+<para>
+
+</para>
+
+@a_container_sheet: 
+@a_url: 
+@a_media_list: 
+@a_imported_sheet: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_new_at_media_rule ##### -->
+<para>
+
+</para>
+
+@a_sheet: 
+@a_ruleset: 
+@a_media: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_new_at_page_rule ##### -->
+<para>
+
+</para>
+
+@a_sheet: 
+@a_decl_list: 
+@a_name: 
+@a_pseudo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_new_ruleset ##### -->
+<para>
+
+</para>
+
+@a_sheet: 
+@a_sel_list: 
+@a_decl_list: 
+@a_media_rule: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_nr_rules ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_parse_from_buf ##### -->
+<para>
+
+</para>
+
+@a_buf: 
+@a_encoding: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_prepend ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_new: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_ruleset_append_decl ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_decl: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_ruleset_append_decl2 ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_prop: 
+@a_value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_ruleset_get_declarations ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_decl_list: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_ruleset_get_sel_list ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_list: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_ruleset_parse_from_buf ##### -->
+<para>
+
+</para>
+
+@a_buf: 
+@a_enc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_ruleset_set_decl_list ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_list: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_ruleset_set_sel_list ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_sel_list: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_set_parent_sheet ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_sheet: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_to_string ##### -->
+<para>
+
+</para>
+
+@a_this: 
+@a_indent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION cr_statement_unlink ##### -->
+<para>
+
+</para>
+
+@a_stmt: 
+@Returns: 
+
+

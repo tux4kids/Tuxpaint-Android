@@ -1,0 +1,1610 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# FIRST AUTHOR Amed Çeko Jiyan <amedcj@gmail.com>, YEAR., 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: ku\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-26 17:43+0900\n"
+"PO-Revision-Date: 2009-05-25 12:52+0300\n"
+"Last-Translator: \n"
+"Language-Team: en_US <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Response to Black (0, 0, 0) color selected
+#: ../colors.h:86
+msgid "Black!"
+msgstr "Reş"
+
+#. Response to Dark grey (128, 128, 128) color selected
+#: ../colors.h:89
+msgid "Dark grey! Some people spell it “dark gray”."
+msgstr "Griya tarî!"
+
+#. Response to Light grey (192, 192, 192) color selected
+#: ../colors.h:92
+msgid "Light grey! Some people spell it “light gray”."
+msgstr "Griya vekirî"
+
+#. Response to White (255, 255, 255) color selected
+#: ../colors.h:95
+msgid "White!"
+msgstr "Spî"
+
+#. Response to Red (255, 0, 0) color selected
+#: ../colors.h:98
+msgid "Red!"
+msgstr "Sor"
+
+#. Response to Orange (255, 128, 0) color selected
+#: ../colors.h:101
+msgid "Orange!"
+msgstr "Porteqalî"
+
+#. Response to Yellow (255, 255, 0) color selected
+#: ../colors.h:104
+msgid "Yellow!"
+msgstr "Zer"
+
+#. Response to Light green (160, 228, 128) color selected
+#: ../colors.h:107
+msgid "Light green!"
+msgstr "Keska vekirî"
+
+#. Response to Dark green (33, 148, 70) color selected
+#: ../colors.h:110
+msgid "Dark green!"
+msgstr "Keska tarî"
+
+#. Response to "Sky" blue (138, 168, 205) color selected
+#: ../colors.h:113
+msgid "Sky blue!"
+msgstr "Şîna ezmên!"
+
+#. Response to Blue (50, 100, 255) color selected
+#: ../colors.h:116
+msgid "Blue!"
+msgstr "Şîn!"
+
+#. Response to Lavender (186, 157, 255) color selected
+#: ../colors.h:119
+msgid "Lavender!"
+msgstr "Lewante!"
+
+#. Response to Purple (128, 0, 128) color selected
+#: ../colors.h:122
+msgid "Purple!"
+msgstr "Mor!"
+
+#. Response to Pink (255, 165, 211) color selected
+#: ../colors.h:125
+msgid "Pink!"
+msgstr "Pembe!"
+
+#. Response to Brown (128, 80, 0) color selected
+#: ../colors.h:128
+msgid "Brown!"
+msgstr "Qehweyî!"
+
+#. Response to Tan (226, 189, 166) color selected
+#: ../colors.h:131
+msgid "Tan!"
+msgstr "Qemer!"
+
+#. Response to Beige (247, 228, 219) color selected
+#: ../colors.h:134
+msgid "Beige!"
+msgstr "Bej!"
+
+#. First, the blacklist. We list font families that can crash Tux Paint
+#. via bugs in the SDL_ttf library. We also test fonts to be sure that
+#. they have both uppercase and lowercase letters. Note that we do not
+#. test for "Aa", because it is OK if uppercase and lowercase are the
+#. same (but not nice -- such fonts get a low score later).
+#.
+#. Most locales leave the blacklist strings alone: "QX" and "qx"
+#. (it is less destructive to use the scoring strings instead)
+#.
+#. Locales that absolutely require all fonts to have some
+#. extra characters should use "QX..." and "qx...", where "..."
+#. are some characters you absolutely require in all fonts.
+#.
+#. Locales with absolutely NO use for ASCII may use "..." and "...",
+#. where "..." are some characters you absolutely require in
+#. all fonts. This would be the case for a locale in which it is
+#. impossible for a user to type ASCII letters.
+#.
+#. Most translators should use scoring instead.
+#: ../dirwalk.c:164
+msgid "qx"
+msgstr "qx"
+
+#: ../dirwalk.c:164
+msgid "QX"
+msgstr "QX"
+
+#. TODO: weight specification
+#. Now we score fonts to ensure that the best ones will be placed at
+#. the top of the list. The user will see them first. This sorting is
+#. especially important for users who have scroll buttons disabled.
+#. Translators should do whatever is needed to put crummy fonts last.
+#. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
+#: ../dirwalk.c:191
+msgid "oO"
+msgstr "oO"
+
+#. common punctuation (e.g., '?', '!', '.', ',', etc.)
+#: ../dirwalk.c:194
+msgid ",.?!"
+msgstr ",.?!"
+
+#. uncommon punctuation (e.g., '@', '#', '*', etc.)
+#: ../dirwalk.c:197
+#, fuzzy
+#| msgid "`\\%_@$~#{}<>^&*"
+msgid "`\\%_@$~#{<(^&*"
+msgstr "`\\%_@$~#{}<>^&*"
+
+#. digits (e.g., '0', '1' and '7')
+#: ../dirwalk.c:200
+msgid "017"
+msgstr "017"
+
+#. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
+#: ../dirwalk.c:203
+msgid "O0"
+msgstr "O0"
+
+#. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
+#: ../dirwalk.c:206
+msgid "1Il|"
+msgstr "1Il|"
+
+#: ../dirwalk.c:210
+msgid "<1>spare-1a"
+msgstr ""
+
+#: ../dirwalk.c:211
+msgid "<1>spare-1b"
+msgstr ""
+
+#: ../dirwalk.c:212
+msgid "<9>spare-9a"
+msgstr ""
+
+#: ../dirwalk.c:213
+msgid "<9>spare-9b"
+msgstr ""
+
+#. Congratulations #1
+#: ../great.h:37
+msgid "Great!"
+msgstr "Zor baş!"
+
+#. Congratulations #2
+#: ../great.h:40
+msgid "Cool!"
+msgstr "Xweşik!"
+
+#. Congratulations #3
+#: ../great.h:43
+msgid "Keep it up!"
+msgstr "Vexwîne!"
+
+#. Congratulations #4
+#: ../great.h:46
+msgid "Good job!"
+msgstr "Te karekî xweş kir!"
+
+#. Input Method: English mode
+#: ../im.c:75
+msgid "English"
+msgstr "Înglîzî"
+
+#. Input Method: Japanese Romanized Hiragana mode
+#: ../im.c:78
+msgid "Hiragana"
+msgstr "Hîragana"
+
+#. Input Method: Japanese Romanized Katakana mode
+#: ../im.c:81
+msgid "Katakana"
+msgstr "Katakana"
+
+#. Input Method: Korean Hangul 2-Bul mode
+#: ../im.c:84
+msgid "Hangul"
+msgstr "Hangul"
+
+#. Input Method: Thai mode
+#: ../im.c:87
+msgid "Thai"
+msgstr "Taî"
+
+#. Input Method: Traditional Chinese mode
+#: ../im.c:90
+msgid "ZH_TW"
+msgstr "ZH_TW"
+
+#. Square shape tool (4 equally-lengthed sides at right angles)
+#: ../shapes.h:171 ../shapes.h:172
+msgid "Square"
+msgstr "Çargoşe"
+
+#. Rectangle shape tool (4 sides at right angles)
+#: ../shapes.h:175 ../shapes.h:176
+msgid "Rectangle"
+msgstr "Lakêşe"
+
+#. Circle shape tool (X radius and Y radius are the same)
+#: ../shapes.h:179 ../shapes.h:180
+msgid "Circle"
+msgstr "Çember"
+
+#. Ellipse shape tool (X radius and Y radius may differ)
+#: ../shapes.h:183 ../shapes.h:184
+msgid "Ellipse"
+msgstr "Elîps"
+
+#. Triangle shape tool (3 sides)
+#: ../shapes.h:187 ../shapes.h:188
+msgid "Triangle"
+msgstr "sêgoşe"
+
+#. Pentagone shape tool (5 sides)
+#: ../shapes.h:191 ../shapes.h:192
+msgid "Pentagon"
+msgstr "Pêncgoşe"
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:195 ../shapes.h:196
+msgid "Rhombus"
+msgstr "Sêgoşeya hevsan"
+
+#. Octagon shape tool (8 sides)
+#: ../shapes.h:199 ../shapes.h:200
+#, fuzzy
+msgid "Octagon"
+msgstr "Pêncgoşe"
+
+#. Description of a square
+#: ../shapes.h:208 ../shapes.h:209
+msgid "A square is a rectangle with four equal sides."
+msgstr "Çar goşeyên çargoşeyan hene."
+
+#. Description of a rectangle
+#: ../shapes.h:212 ../shapes.h:213
+msgid "A rectangle has four sides and four right angles."
+msgstr "Çar goşe û çar kenarên çargoşeyan hene."
+
+#: ../shapes.h:217 ../shapes.h:219
+#, fuzzy
+msgid ""
+"A circle is a curve where all points have the same distance from the center."
+msgstr "Çember ji xalên ku dûrbûna wan a ji navendê wekhev e pêk tê."
+
+#. Description of an ellipse
+#: ../shapes.h:222 ../shapes.h:223
+msgid "An ellipse is a stretched circle."
+msgstr "Elîps çemberên vezeliyayî ne."
+
+#. Description of a triangle
+#: ../shapes.h:226 ../shapes.h:227
+msgid "A triangle has three sides."
+msgstr "Sê kenarên sêgoşeyan hene."
+
+#. Description of a pentagon
+#: ../shapes.h:230 ../shapes.h:231
+msgid "A pentagon has five sides."
+msgstr "Pênc kenarên pêncgoşeyan hene."
+
+#: ../shapes.h:235 ../shapes.h:237
+msgid "A rhombus has four equal sides, and opposite sides are parallel."
+msgstr "Çar kenarên paraler û hevseng ên çargoşeyên hevseng hene."
+
+#: ../shapes.h:241 ../shapes.h:243
+#, fuzzy
+msgid "An octagon has eight equal sides."
+msgstr "Pênc kenarên pêncgoşeyan hene."
+
+#. Title of tool selector (buttons down the left)
+#: ../titles.h:56
+msgid "Tools"
+msgstr "Amûr"
+
+#. Title of color palette (buttons across the bottom)
+#: ../titles.h:59
+msgid "Colors"
+msgstr "Reng"
+
+#. Title of brush selector (buttons down the right for paint and line tools)
+#: ../titles.h:62
+msgid "Brushes"
+msgstr "Firçe"
+
+#. Title of eraser selector (buttons down the right for eraser tool)
+#: ../titles.h:65
+msgid "Erasers"
+msgstr "Jêbir"
+
+#. Title of stamp selector (buttons down the right for stamps tool)
+#: ../titles.h:68
+msgid "Stamps"
+msgstr "Demxe"
+
+#. Title of shape selector (buttons down the right for shapes tool)
+#. Shape creation tool (square, circle, etc.)
+#: ../titles.h:71 ../tools.h:71
+msgid "Shapes"
+msgstr "Şikl"
+
+#. Title of font selector (buttons down the right for text and label tools)
+#: ../titles.h:74
+msgid "Letters"
+msgstr "Tîp"
+
+#. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
+#. "Magic" effects tools (blur, flip image, etc.)
+#: ../titles.h:77 ../tools.h:83
+msgid "Magic"
+msgstr "Sêr"
+
+#. Freehand painting tool
+#: ../tools.h:62
+msgid "Paint"
+msgstr "Boyax"
+
+#. Stamp tool (aka Rubber Stamps)
+#: ../tools.h:65
+msgid "Stamp"
+msgstr "Damxe"
+
+#. Line drawing tool
+#: ../tools.h:68
+msgid "Lines"
+msgstr "Xêz"
+
+#. Text tool
+#: ../tools.h:74
+msgid "Text"
+msgstr "Nivîs"
+
+#. Label tool
+#: ../tools.h:77
+msgid "Label"
+msgstr ""
+
+#. Undo last action
+#: ../tools.h:86
+msgid "Undo"
+msgstr "Rake"
+
+#. Redo undone action
+#: ../tools.h:89
+msgid "Redo"
+msgstr "Bîne"
+
+#. Eraser tool
+#: ../tools.h:92
+msgid "Eraser"
+msgstr "Jêbir"
+
+#. Start a new picture
+#: ../tools.h:95
+msgid "New"
+msgstr "Nû"
+
+#. Open a saved picture
+#. buttons for the file open dialog
+#. Open dialog: 'Open' button, to load the selected picture
+#: ../tools.h:98 ../tuxpaint.c:7605
+msgid "Open"
+msgstr "Veke"
+
+#. Save the current picture
+#: ../tools.h:101
+msgid "Save"
+msgstr "Tomar bike"
+
+#. Print the current picture
+#: ../tools.h:104
+msgid "Print"
+msgstr "Çap bike"
+
+#. Quit/exit Tux Paint application
+#: ../tools.h:107
+msgid "Quit"
+msgstr "Derkeve"
+
+#. Paint tool instructions
+#: ../tools.h:115
+msgid "Pick a color and a brush shape to draw with."
+msgstr "Ji bo bikaranînê reng û firçeyekê hilbijêre."
+
+#. Stamp tool instructions
+#: ../tools.h:118
+msgid "Pick a picture to stamp around your drawing."
+msgstr "Ji bo ku li wêneyê xwe zêde bikî demxeyekê hilbijêre."
+
+#. Line tool instructions
+#: ../tools.h:121
+msgid "Click to start drawing a line. Let go to complete it."
+msgstr "Ji bo ku dest bi xêzkirinê bikî \"Det pê bike\" bitikîne. De biqedîne."
+
+#. Shape tool instructions
+#: ../tools.h:124
+msgid ""
+"Pick a shape. Click to pick the center, drag, then let go when it is the "
+"size you want. Move around to rotate it, and click to draw it."
+msgstr ""
+"Şiklekê hilbijêre. Navendê hilbijêre, bikişîne û dema ku mezinahî bibe wekî "
+"tu dixwazî, berde. Ji bo guherandina berê wê li dorê bigerîne û ji bo "
+"xêzkirinê bitikîne."
+
+#. Text tool instructions
+#: ../tools.h:127
+#, fuzzy
+#| msgid ""
+#| "Choose a style of text. Click on your drawing and you can start typing."
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text."
+msgstr ""
+"Cureyekê nivîsê hilbijêre. Li ser wêneyê bitikîne û dest bi nivîsandinê bike."
+
+#. Label tool instructions
+#: ../tools.h:130
+#, fuzzy
+#| msgid ""
+#| "Choose a style of text. Click on your drawing and you can start typing."
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text. By using the selector button "
+"and clicking an exist label, you can move it, edit it and change its text "
+"style."
+msgstr ""
+"Cureyekê nivîsê hilbijêre. Li ser wêneyê bitikîne û dest bi nivîsandinê bike."
+
+#. Magic tool instruction
+#: ../tools.h:136
+msgid "Pick a magical effect to use on your drawing!"
+msgstr "Ji bo bikaranînê efekteke sêrê hilbijêre!"
+
+#. Response to 'undo' action
+#: ../tools.h:139
+msgid "Undo!"
+msgstr "Rake!"
+
+#. Response to 'redo' action
+#: ../tools.h:142
+msgid "Redo!"
+msgstr "Bîne!"
+
+#. Eraser tool
+#: ../tools.h:145
+msgid "Eraser!"
+msgstr "Jêbir!"
+
+#. Response to 'start a new image' action
+#: ../tools.h:148
+#, fuzzy
+msgid "Pick a color or picture with which to start a new drawing."
+msgstr "Ji bo ku li wêneyê xwe zêde bikî demxeyekê hilbijêre."
+
+#. Response to 'open' action (while file dialog is being constructed)
+#: ../tools.h:151
+msgid "Open…"
+msgstr "Veke..."
+
+#. Response to 'save' action
+#: ../tools.h:154
+msgid "Your image has been saved!"
+msgstr "Xebata te hat tomarkirin!"
+
+#. Response to 'print' action (while printing, or print dialog is being used)
+#: ../tools.h:157
+msgid "Printing…"
+msgstr "Tê çapkirin..."
+
+#. Response to 'quit' (exit) action
+#: ../tools.h:160
+msgid "Bye bye!"
+msgstr "Oxir be!"
+
+#. Instruction while using Line tool (after click, before release)
+#: ../tools.h:164
+msgid "Let go of the button to complete the line."
+msgstr "Ji bo qedandina xêzê here dawî."
+
+#. Instruction while using Shape tool (after first click, before release)
+#: ../tools.h:167
+msgid "Hold the button to stretch the shape."
+msgstr "Ji bo vezelandina şiklê bi bişkojkê bigire."
+
+#. Instruction while finishing Shape tool (after release, during rotation step before second click)
+#: ../tools.h:170
+msgid "Move the mouse to rotate the shape. Click to draw it."
+msgstr ""
+"Ji bo guherandina berê şiklê mişkî bikar bîne. Ji bo xêzkirinê bitikîne."
+
+#. Notification that 'New' action was aborted (current image would have been lost)
+#: ../tools.h:173
+msgid "OK then… Let’s keep drawing this one!"
+msgstr "Temam, nexwe vê xêzkirinê tomar bike!"
+
+#. Prompt to confirm user wishes to quit
+#: ../tuxpaint.c:2040
+msgid "Do you really want to quit?"
+msgstr "Ji dil dixwazî derkevî?"
+
+#. Quit prompt positive response (quit)
+#: ../tuxpaint.c:2043
+msgid "Yes, I’m done!"
+msgstr "Erê, min qedand!"
+
+#. Quit prompt negative response (don't quit)
+#: ../tuxpaint.c:2046 ../tuxpaint.c:2073
+msgid "No, take me back!"
+msgstr "Na, min bi şûnde bibe!"
+
+#. Current picture is not saved; user is quitting
+#: ../tuxpaint.c:2050
+msgid "If you quit, you’ll lose your picture! Save it?"
+msgstr "Heke derkevî tu yê wêneyê xwe winda bikî! Dixwazî vêga tomar bikî?"
+
+#: ../tuxpaint.c:2051 ../tuxpaint.c:2056
+msgid "Yes, save it!"
+msgstr "Erê tomar bike!"
+
+#: ../tuxpaint.c:2052 ../tuxpaint.c:2057
+#, fuzzy
+#| msgid "No, don't bother saving!"
+msgid "No, don’t bother saving!"
+msgstr "Na, xwe bi tomarkirinê aciz neke!"
+
+#. Current picture is not saved; user is opening another picture
+#: ../tuxpaint.c:2055
+msgid "Save your picture first?"
+msgstr "Pêşî wêneyê xwe tomar bikî?"
+
+#. Error opening picture
+#: ../tuxpaint.c:2060
+msgid "Can’t open that picture!"
+msgstr "Ev wêne nayê vekirin!"
+
+#. Generic dialog dismissal
+#: ../tuxpaint.c:2063 ../tuxpaint.c:2068 ../tuxpaint.c:2077 ../tuxpaint.c:2084
+#: ../tuxpaint.c:2093
+msgid "OK"
+msgstr "Temam"
+
+#. Notification that 'Open' dialog has nothing to show
+#: ../tuxpaint.c:2067
+msgid "There are no saved files!"
+msgstr "Tu dosye nehat tomarkirin!"
+
+#. Verification of print action
+#: ../tuxpaint.c:2071
+msgid "Print your picture now?"
+msgstr "Dixwazî wêneyê vêga çap bikî?"
+
+#: ../tuxpaint.c:2072
+msgid "Yes, print it!"
+msgstr "Erê, çap bike!"
+
+#. Confirmation of successful (we hope) printing
+#: ../tuxpaint.c:2076
+msgid "Your picture has been printed!"
+msgstr "Wêneyê te hat çapkirin!"
+
+#. We got an error printing
+#: ../tuxpaint.c:2080
+#, fuzzy
+#| msgid "Your picture has been printed!"
+msgid "Sorry! Your picture could not be printed!"
+msgstr "Wêneyê te hat çapkirin!"
+
+#. Notification that it's too soon to print again (--printdelay option is in effect)
+#: ../tuxpaint.c:2083
+msgid "You can’t print yet!"
+msgstr "Hê nikarî çap bikî!"
+
+#. Prompt to confirm erasing a picture in the Open dialog
+#: ../tuxpaint.c:2087
+msgid "Erase this picture?"
+msgstr "Vê wêneyê jê bibî?"
+
+#: ../tuxpaint.c:2088
+msgid "Yes, erase it!"
+msgstr "Erê, jê bibe!"
+
+#: ../tuxpaint.c:2089
+#, fuzzy
+#| msgid "No, don't erase it!"
+msgid "No, don’t erase it!"
+msgstr "Na, jê nebe!"
+
+#. Reminder that Mouse Button 1 is the button to use in Tux Paint
+#: ../tuxpaint.c:2092
+msgid "Remember to use the left mouse button!"
+msgstr "Bibîr bîne ku tu yê bişkojka çepê ya mişkî bikar bînî!"
+
+#. Sound has been muted (silenced) via keyboard shortcut
+#: ../tuxpaint.c:2300
+msgid "Sound muted."
+msgstr "Bêdeng"
+
+#. Sound has been unmuted (unsilenced) via keyboard shortcut
+#: ../tuxpaint.c:2305
+msgid "Sound unmuted."
+msgstr "Bideng"
+
+#. Wait while Text tool finishes loading fonts
+#: ../tuxpaint.c:3052
+msgid "Please wait…"
+msgstr "Ji kerema xwe re li bendê bimîne..."
+
+#. Open dialog: 'Erase' button, to erase/deleted the selected picture
+#: ../tuxpaint.c:7608
+msgid "Erase"
+msgstr "Jê bibe"
+
+#. Open dialog: 'Slides' button, to switch to slide show mode
+#: ../tuxpaint.c:7611
+msgid "Slides"
+msgstr "Slayd"
+
+#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
+#: ../tuxpaint.c:7614
+msgid "Back"
+msgstr "Paş"
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7617
+#, fuzzy
+msgid "Next"
+msgstr "Nivîs"
+
+#. Slideshow: 'Play' button, to begin a slideshow sequence
+#: ../tuxpaint.c:7620
+msgid "Play"
+msgstr "Bilîzîne"
+
+#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
+#: ../tuxpaint.c:8328
+msgid "Aa"
+msgstr "Aa"
+
+#. Admittedly stupid way of determining which keys can be used for
+#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
+#: ../tuxpaint.c:11586
+msgid "Yes"
+msgstr "Erê"
+
+#: ../tuxpaint.c:11590
+msgid "No"
+msgstr "Na"
+
+#. Prompt to ask whether user wishes to save over old version of their file
+#: ../tuxpaint.c:12608
+msgid "Replace the picture with your changes?"
+msgstr "Wêneyê bi guherandinên xwe biguherînî?"
+
+#. Positive response to saving over old version
+#. (like a 'File:Save' action in other applications)
+#: ../tuxpaint.c:12612
+msgid "Yes, replace the old one!"
+msgstr "Erê, li ser ya kevin binivîse!"
+
+#. Negative response to saving over old version (saves a new image)
+#. (like a 'File:Save As...' action in other applications)
+#: ../tuxpaint.c:12616
+msgid "No, save a new file!"
+msgstr "Na, dosyeyeke nû tomar bike!"
+
+#: ../tuxpaint.c:13861
+msgid "Choose the picture you want, then click “Open”."
+msgstr "Ji bo vekirina wêneyê ku dixwazî \"Veke\" Bitikîne."
+
+#. Let user choose images:
+#. Instructions for Slideshow file dialog (FIXME: Make a #define)
+#: ../tuxpaint.c:14892 ../tuxpaint.c:15220
+#, fuzzy
+msgid "Choose the pictures you want, then click “Play”."
+msgstr "Ji bo vekirina wêneyê ku dixwazî \"Veke\" Bitikîne."
+
+#: ../tuxpaint.c:22159
+msgid "Pick a color."
+msgstr "Rengekî hilbijêre"
+
+#: ../tuxpaint.desktop.in.h:1
+msgid "A drawing program for children."
+msgstr "Bernameyeke xêzkirinê ji bo zarokan."
+
+#: ../tuxpaint.desktop.in.h:2
+msgid "Drawing program"
+msgstr "Bernameya Xêzkirinê"
+
+#: ../tuxpaint.desktop.in.h:3
+msgid "Tux Paint"
+msgstr "Tux Paint"
+
+#: ../../magic/src/alien.c:64
+msgid "Color Shift"
+msgstr "Guherandina Rengan"
+
+#: ../../magic/src/alien.c:67
+#, fuzzy
+msgid "Click and move the mouse to change the colors in parts of your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/alien.c:68
+#, fuzzy
+msgid "Click to change the colors in your entire picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/blind.c:117
+msgid "Blind"
+msgstr ""
+
+#: ../../magic/src/blind.c:122
+msgid ""
+"Click towards the edge of your picture to pull window blinds over it. Move "
+"perpendicularly to open or close the blinds."
+msgstr ""
+
+#: ../../magic/src/blocks_chalk_drip.c:136
+msgid "Blocks"
+msgstr "Blok"
+
+#: ../../magic/src/blocks_chalk_drip.c:138
+msgid "Chalk"
+msgstr "Tebeşîr"
+
+#: ../../magic/src/blocks_chalk_drip.c:140
+msgid "Drip"
+msgstr "Dilop"
+
+#: ../../magic/src/blocks_chalk_drip.c:150
+msgid "Click and move the mouse around to make the picture blocky."
+msgstr "Ji bo ku wêneyê bikî topiklî bitikîne û mişkî bigerîne."
+
+#: ../../magic/src/blocks_chalk_drip.c:153
+msgid ""
+"Click and move the mouse around to turn the picture into a chalk drawing."
+msgstr ""
+"Ji bo ku wêne wekî xêzkirineke bi tebeşîrê xuya bibe, bitikîne û mi,şkî li "
+"dorê bigerîne bigerîne."
+
+#: ../../magic/src/blocks_chalk_drip.c:156
+msgid "Click and move the mouse around to make the picture drip."
+msgstr "Ji bo ku wêneyê bidilop bikî bi tikîne û mişkî li dorê bigerîne."
+
+#: ../../magic/src/blur.c:80
+msgid "Blur"
+msgstr "ne zelal"
+
+#: ../../magic/src/blur.c:83
+#, fuzzy
+msgid "Click and move the mouse around to blur the image."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/blur.c:84
+#, fuzzy
+msgid "Click to blur the entire image."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#. Both are named "Bricks", at the moment:
+#: ../../magic/src/bricks.c:124
+msgid "Bricks"
+msgstr "Blok"
+
+#: ../../magic/src/bricks.c:131
+msgid "Click and move to draw large bricks."
+msgstr "Ji bo blokên mezin ên xêzkirinê bitikîne û mişkî bigerîne."
+
+#: ../../magic/src/bricks.c:133
+msgid "Click and move to draw small bricks."
+msgstr "Ji bo blokên biçûk ên xêzkirinê bitikîne û mişkî bigerîne."
+
+#: ../../magic/src/calligraphy.c:127
+msgid "Calligraphy"
+msgstr "Destxet"
+
+#: ../../magic/src/calligraphy.c:134
+#, fuzzy
+msgid "Click and move the mouse around to draw in calligraphy."
+msgstr "Ji bo ku wêneyê bikî negatîf bitikîne û mişkî bigerîne."
+
+#: ../../magic/src/cartoon.c:106
+msgid "Cartoon"
+msgstr "Karton"
+
+#: ../../magic/src/cartoon.c:113
+msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgstr ""
+"Ji bo ku wêneyê çêkî wêneyekî kartok bitikîne û mişkî li dorê bigerîne."
+
+#: ../../magic/src/confetti.c:85
+msgid "Confetti"
+msgstr "Konfetî"
+
+#: ../../magic/src/confetti.c:87
+msgid "Click to throw confetti!"
+msgstr "Ji bo dakirina konfetiyê bitikîne"
+
+#: ../../magic/src/distortion.c:142
+msgid "Distortion"
+msgstr "Bêşêwe bike"
+
+#: ../../magic/src/distortion.c:150
+#, fuzzy
+msgid "Click and drag the mouse to cause distortion in your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/emboss.c:103
+msgid "Emboss"
+msgstr "Binepixîne"
+
+#: ../../magic/src/emboss.c:109
+#, fuzzy
+msgid "Click and drag the mouse to emboss the picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/fade_darken.c:121
+msgid "Lighten"
+msgstr "Ronî"
+
+#: ../../magic/src/fade_darken.c:123
+msgid "Darken"
+msgstr "Tarî"
+
+#: ../../magic/src/fade_darken.c:134
+msgid "Click and move the mouse to lighten parts of your picture."
+msgstr "Mişkî bitikîne û li parçeyên ronî yên wêneyî bigerîne."
+
+#: ../../magic/src/fade_darken.c:136
+msgid "Click to lighten your entire picture."
+msgstr "Ji bo ronîkirina wêneyê têketiyêyî, bitikîne."
+
+#: ../../magic/src/fade_darken.c:141
+#, fuzzy
+msgid "Click and move the mouse to darken parts of your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/fade_darken.c:143
+msgid "Click to darken your entire picture."
+msgstr "Ji bo tarîkirina wêneyê têketiyêyî, bitikîne."
+
+#: ../../magic/src/fill.c:108
+msgid "Fill"
+msgstr "Tije bike"
+
+#: ../../magic/src/fill.c:115
+msgid "Click in the picture to fill that area with color."
+msgstr "Ji bo ku vê derê bi rengekî tije bikî, li ser wêneyê bitikîne."
+
+#: ../../magic/src/fisheye.c:104
+msgid "Fisheye"
+msgstr "Çavê Masî"
+
+#. Needs better name
+#: ../../magic/src/fisheye.c:106
+#, fuzzy
+msgid "Click on part of your picture to create a fisheye effect."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/flower.c:150
+msgid "Flower"
+msgstr "Kulîlk"
+
+#: ../../magic/src/flower.c:156
+msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
+msgstr "Ji bo xêzkirina kulîlkê pê bigire û bikişîne. De bila kulîk biqede."
+
+#: ../../magic/src/foam.c:121
+msgid "Foam"
+msgstr "Kef"
+
+#: ../../magic/src/foam.c:127
+#, fuzzy
+msgid "Click and drag the mouse to cover an area with foamy bubbles."
+msgstr "Ji bo ku vê derê bi rengekî tije bikî, li ser wêneyê bitikîne."
+
+#: ../../magic/src/fold.c:105
+msgid "Fold"
+msgstr "Hişk"
+
+#: ../../magic/src/fold.c:107
+msgid ""
+"Choose a background color and click to turn the corner of the page over."
+msgstr "Rûerdekê hilbijêre û ji bo vegere quncikê dawiya rûpelê bitikîne."
+
+#: ../../magic/src/fretwork.c:176
+msgid "Fretwork"
+msgstr ""
+
+#: ../../magic/src/fretwork.c:180
+#, fuzzy
+msgid "Click and drag to draw repetitive patterns. "
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/fretwork.c:182
+#, fuzzy
+msgid "Click to surround your picture with repetitive patterns."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/glasstile.c:107
+msgid "Glass Tile"
+msgstr "Cama Çînî"
+
+#: ../../magic/src/glasstile.c:114
+#, fuzzy
+msgid "Click and drag the mouse to put glass tile over your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/glasstile.c:116
+msgid "Click to cover your entire picture in glass tiles."
+msgstr "Ji bo wêneyê têketiyêyî bi şûşeyê rapêçî, bitikîne."
+
+#: ../../magic/src/grass.c:112
+msgid "Grass"
+msgstr "Jê bibe"
+
+#: ../../magic/src/grass.c:118
+msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgstr "Li serwêneyê bitikîne û mişkî bigerîne. Heriyê ji bîr neke!"
+
+#: ../../magic/src/halftone.c:34
+msgid "Halftone"
+msgstr ""
+
+#: ../../magic/src/halftone.c:38
+#, fuzzy
+msgid "Click and drag to turn your drawing into a newspaper."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/kalidescope.c:120
+msgid "Symmetric Left/Right"
+msgstr ""
+
+#: ../../magic/src/kalidescope.c:122
+msgid "Symmetric Up/Down"
+msgstr ""
+
+#: ../../magic/src/kalidescope.c:124
+msgid "Pattern"
+msgstr ""
+
+#: ../../magic/src/kalidescope.c:126
+msgid "Tiles"
+msgstr ""
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:128
+msgid "Kaleidoscope"
+msgstr "Guherbar"
+
+#: ../../magic/src/kalidescope.c:136
+#, fuzzy
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the left and right of your picture."
+msgstr "Ji bo tarîkirina rengan bitikîne û mişkî bigerîne."
+
+#: ../../magic/src/kalidescope.c:138
+#, fuzzy
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the top and bottom of your picture."
+msgstr "Ji bo tarîkirina rengan bitikîne û mişkî bigerîne."
+
+#: ../../magic/src/kalidescope.c:140
+#, fuzzy
+msgid "Click and drag the mouse to draw a pattern across the picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/kalidescope.c:142
+#, fuzzy
+msgid ""
+"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"picture."
+msgstr "Ji bo tarîkirina rengan bitikîne û mişkî bigerîne."
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:144
+#, fuzzy
+msgid ""
+"Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgstr "Ji bo tarîkirina rengan bitikîne û mişkî bigerîne."
+
+#: ../../magic/src/light.c:107
+#, fuzzy
+msgid "Light"
+msgstr "Ronî"
+
+#: ../../magic/src/light.c:113
+#, fuzzy
+msgid "Click and drag to draw a beam of light on your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/metalpaint.c:101
+msgid "Metal Paint"
+msgstr "Boyax"
+
+#: ../../magic/src/metalpaint.c:107
+#, fuzzy
+msgid "Click and drag the mouse to paint with a metallic color."
+msgstr "Ji bo tarîkirina rengan bitikîne û mişkî bigerîne."
+
+#: ../../magic/src/mirror_flip.c:117
+msgid "Mirror"
+msgstr "Neynik"
+
+#: ../../magic/src/mirror_flip.c:119
+msgid "Flip"
+msgstr "Teqle"
+
+#: ../../magic/src/mirror_flip.c:130
+msgid "Click to make a mirror image."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/mirror_flip.c:133
+msgid "Click to flip the picture upside-down."
+msgstr "Ji bo ku wêneyê berevajî bikî bitikîne."
+
+#: ../../magic/src/mosaic.c:100
+#, fuzzy
+msgid "Mosaic"
+msgstr "Sêr"
+
+#: ../../magic/src/mosaic.c:103
+#, fuzzy
+msgid ""
+"Click and move the mouse to add a mosaic effect to parts of your picture."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/mosaic.c:104
+#, fuzzy
+msgid "Click to add a mosaic effect to your entire picture."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/mosaic_shaped.c:142
+#, fuzzy
+#| msgid "Square"
+msgid "Square Mosaic"
+msgstr "Çargoşe"
+
+#: ../../magic/src/mosaic_shaped.c:143
+#, fuzzy
+msgid "Hexagon Mosaic"
+msgstr "Sêr"
+
+#: ../../magic/src/mosaic_shaped.c:144
+msgid "Irregular Mosaic"
+msgstr ""
+
+#: ../../magic/src/mosaic_shaped.c:149
+#, fuzzy
+msgid ""
+"Click and move the mouse to add a square mosaic to parts of your picture."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/mosaic_shaped.c:150
+#, fuzzy
+msgid "Click to add a square mosaic to your entire picture."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/mosaic_shaped.c:152
+#, fuzzy
+msgid ""
+"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/mosaic_shaped.c:153
+#, fuzzy
+msgid "Click to add a hexagonal mosaic to your entire picture."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/mosaic_shaped.c:155
+#, fuzzy
+msgid ""
+"Click and move the mouse to add an irregular mosaic to parts of your picture."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/mosaic_shaped.c:156
+#, fuzzy
+msgid "Click to add an irregular mosaic to your entire picture."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/negative.c:98
+msgid "Negative"
+msgstr "Negatîf"
+
+#: ../../magic/src/negative.c:106
+#, fuzzy
+#| msgid "Click and move the mouse around to draw a negative."
+msgid "Click and move the mouse around to make your painting negative."
+msgstr "Ji bo ku wêneyê bikî negatîf bitikîne û mişkî bigerîne."
+
+#: ../../magic/src/negative.c:109
+#, fuzzy
+msgid "Click to turn your painting into its negative."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/noise.c:63
+msgid "Noise"
+msgstr "Xirecir"
+
+#: ../../magic/src/noise.c:66
+#, fuzzy
+msgid "Click and move the mouse to add noise to parts of your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/noise.c:67
+msgid "Click to add noise to your entire picture."
+msgstr "Ji bo deng li wêneyê têketitêyî zêde bikî bitikîne."
+
+#: ../../magic/src/perspective.c:145
+msgid "Perspective"
+msgstr ""
+
+#: ../../magic/src/perspective.c:146
+msgid "Zoom"
+msgstr ""
+
+#: ../../magic/src/perspective.c:151
+#, fuzzy
+msgid "Click on the corners and drag where you want to stretch the picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/perspective.c:154
+#, fuzzy
+msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/puzzle.c:105
+#, fuzzy
+msgid "Puzzle"
+msgstr "Mor!"
+
+#: ../../magic/src/puzzle.c:112
+#, fuzzy
+msgid "Click the part of your picture where would you like a puzzle."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/puzzle.c:113
+#, fuzzy
+msgid "Click to make a puzzle in fullscreen mode."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/rails.c:131
+msgid "Rails"
+msgstr "Rayên"
+
+#: ../../magic/src/rails.c:133
+#, fuzzy
+msgid "Click and drag to draw train track rails on your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/rain.c:65
+#, fuzzy
+msgid "Rain"
+msgstr "Keskesor"
+
+#: ../../magic/src/rain.c:68
+#, fuzzy
+msgid "Click to place a rain drop onto your picture."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/rain.c:69
+#, fuzzy
+msgid "Click to cover your picture with rain drops."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/rainbow.c:139
+msgid "Rainbow"
+msgstr "Keskesor"
+
+#: ../../magic/src/rainbow.c:146
+msgid "You can draw in rainbow colors!"
+msgstr "Dikarî bi rengên keskesorê xêz bikî!"
+
+#: ../../magic/src/realrainbow.c:110
+#, fuzzy
+#| msgid "Rainbow"
+msgid "Real Rainbow"
+msgstr "Keskesor"
+
+#: ../../magic/src/realrainbow.c:112
+#, fuzzy
+#| msgid "Rainbow"
+msgid "ROYGBIV Rainbow"
+msgstr "Keskesor"
+
+#: ../../magic/src/realrainbow.c:117
+msgid ""
+"Click where you want your rainbow to start, drag to where you want it to "
+"end, and then let go to draw a rainbow."
+msgstr ""
+"Ciyê ku dixwazî keskesor lê dest pê bike bitikîne û heta ciyê dixwazî lê "
+"biqede bikişîne û paşê keskesorekê xêz bike."
+
+#: ../../magic/src/ripples.c:106
+msgid "Ripples"
+msgstr "Pêlên gilover"
+
+#: ../../magic/src/ripples.c:112
+#, fuzzy
+msgid "Click to make ripples appear over your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/rosette.c:116
+msgid "Rosette"
+msgstr "Rozet"
+
+#: ../../magic/src/rosette.c:116
+msgid "Picasso"
+msgstr "Picasso"
+
+#: ../../magic/src/rosette.c:121
+#, fuzzy
+msgid "Click and start drawing your rosette."
+msgstr "Ji bo ku dest bi xêzkirinê bikî \"Det pê bike\" bitikîne. De biqedîne."
+
+#: ../../magic/src/rosette.c:123
+msgid "You can draw just like Picasso!"
+msgstr "Dikarî bi rengên keskesorê xêz bikî!"
+
+#: ../../magic/src/sharpen.c:73
+msgid "Edges"
+msgstr "Kenar"
+
+#: ../../magic/src/sharpen.c:74
+#, fuzzy
+msgid "Sharpen"
+msgstr "Şikl"
+
+#: ../../magic/src/sharpen.c:75
+msgid "Silhouette"
+msgstr "Sîluet"
+
+#: ../../magic/src/sharpen.c:78
+#, fuzzy
+msgid "Click and move the mouse to trace edges in parts of your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/sharpen.c:79
+#, fuzzy
+msgid "Click to trace edges in your entire picture."
+msgstr "Ji bo guherandina rengê wêneyê bitikîne mişkî li dorê bigerîne."
+
+#: ../../magic/src/sharpen.c:80
+#, fuzzy
+msgid "Click and move the mouse to sharpen parts of your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/sharpen.c:81
+#, fuzzy
+msgid "Click to sharpen the entire picture."
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#: ../../magic/src/sharpen.c:82
+#, fuzzy
+msgid "Click and move the mouse to create a black and white silhouette."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/sharpen.c:83
+#, fuzzy
+msgid "Click to create a black and white silhouette of your entire picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/shift.c:109
+msgid "Shift"
+msgstr "Guherandin"
+
+#: ../../magic/src/shift.c:115
+#, fuzzy
+msgid "Click and drag to shift your picture around on the canvas."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/smudge.c:106
+msgid "Smudge"
+msgstr "Şîlo"
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:108
+#, fuzzy
+#| msgid "Metal Paint"
+msgid "Wet Paint"
+msgstr "Boyax"
+
+#: ../../magic/src/smudge.c:115
+msgid "Click and move the mouse around to smudge the picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:117
+#, fuzzy
+msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/snow.c:68
+msgid "Snow Ball"
+msgstr "Topa berfê"
+
+#: ../../magic/src/snow.c:69
+msgid "Snow Flake"
+msgstr "Qalikê berfî"
+
+#: ../../magic/src/snow.c:72
+#, fuzzy
+msgid "Click to add snow balls to your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/snow.c:73
+#, fuzzy
+msgid "Click to add snow flakes to your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/string.c:123
+msgid "String edges"
+msgstr "Kenarên rêzikan"
+
+#: ../../magic/src/string.c:126
+msgid "String corner"
+msgstr "Quncikên rêzikan"
+
+#: ../../magic/src/string.c:129
+msgid "String 'V'"
+msgstr "'V'ya quncikan"
+
+#: ../../magic/src/string.c:137
+#, fuzzy
+#| msgid ""
+#| "Click and drag to draw string art. Drag top-bottom to draw less or more "
+#| "lines, to the center to approach the lines to center."
+msgid ""
+"Click and drag to draw string art. Drag top-bottom to draw less or more "
+"lines, left or right to make a bigger hole."
+msgstr ""
+"Ji bo xêzkirina rêzikeke hunerî bitikîne û bikişîne. Ji bo xêzkirina "
+"hindiktir an jî zêdetir rêzikan bişkojka jorê bikişîne, ji bo bê navendê "
+"bikişîne navendê."
+
+#: ../../magic/src/string.c:140
+#, fuzzy
+msgid "Click and drag to draw arrows made of string art."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/string.c:143
+msgid "Draw string art arrows with free angles."
+msgstr ""
+
+#: ../../magic/src/tint.c:71
+msgid "Tint"
+msgstr "Berê"
+
+#: ../../magic/src/tint.c:72
+msgid "Color & White"
+msgstr "Reng & Spî"
+
+#: ../../magic/src/tint.c:75
+#, fuzzy
+msgid ""
+"Click and move the mouse around to change the color of parts of your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/tint.c:76
+#, fuzzy
+msgid "Click to change the color of your entire picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/tint.c:77
+#, fuzzy
+msgid ""
+"Click and move the mouse around to turn parts of your picture into white and "
+"a color you choose."
+msgstr ""
+"Ji bo ku wêneyê çêkî wêneyekî kartok bitikîne û mişkî li dorê bigerîne."
+
+#: ../../magic/src/tint.c:78
+#, fuzzy
+msgid "Click to turn your entire picture into white and a color you choose."
+msgstr ""
+"Ji bo ku wêneyê çêkî wêneyekî kartok bitikîne û mişkî li dorê bigerîne."
+
+#: ../../magic/src/toothpaste.c:65
+msgid "Toothpaste"
+msgstr "Macûna diranan"
+
+#: ../../magic/src/toothpaste.c:68
+#, fuzzy
+msgid "Click and drag to squirt toothpaste onto your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/tornado.c:157
+msgid "Tornado"
+msgstr ""
+
+#: ../../magic/src/tornado.c:163
+#, fuzzy
+msgid "Click and drag to draw a tornado funnel on your picture."
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/tv.c:100
+msgid "TV"
+msgstr "TV"
+
+#: ../../magic/src/tv.c:105
+#, fuzzy
+msgid ""
+"Click and drag to make parts of your picture look like they are on "
+"television."
+msgstr "Ji bo guherandina rengê wêneyê bitikîne mişkî li dorê bigerîne."
+
+#: ../../magic/src/tv.c:108
+#, fuzzy
+msgid "Click to make your picture look like it's on television."
+msgstr "Ji bo guherandina rengê wêneyê bitikîne mişkî li dorê bigerîne."
+
+#: ../../magic/src/waves.c:103
+#, fuzzy
+msgid "Waves"
+msgstr "Tomar bike"
+
+#: ../../magic/src/waves.c:104
+#, fuzzy
+msgid "Wavelets"
+msgstr "Tomar bike"
+
+#: ../../magic/src/waves.c:111
+msgid ""
+"Click to make the picture horizontally wavy. Click toward the top for "
+"shorter waves, the bottom for taller waves, the left for small waves, and "
+"the right for long waves."
+msgstr ""
+
+#: ../../magic/src/waves.c:112
+msgid ""
+"Click to make the picture vertically wavy. Click toward the top for shorter "
+"waves, the bottom for taller waves, the left for small waves, and the right "
+"for long waves."
+msgstr ""
+
+#: ../../magic/src/xor.c:95
+#, fuzzy
+#| msgid "Colors"
+msgid "Xor Colors"
+msgstr "Reng"
+
+#: ../../magic/src/xor.c:101
+#, fuzzy
+msgid "Click and drag to draw a XOR effect"
+msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#: ../../magic/src/xor.c:103
+#, fuzzy
+msgid "Click to draw a XOR effect on the whole picture"
+msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#, fuzzy
+#~ msgid ""
+#~ "Click and drag to draw the blind, move left or right to open or close."
+#~ msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#, fuzzy
+#~ msgid "Mosaic square"
+#~ msgstr "Sêr"
+
+#, fuzzy
+#~ msgid "Mosaic hexagon"
+#~ msgstr "Sêr"
+
+#, fuzzy
+#~ msgid ""
+#~ "Click and move the mouse to add a mosaic squared effect to parts of your "
+#~ "picture."
+#~ msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#, fuzzy
+#~ msgid "Click to add a mosaic squared effect to your entire picture."
+#~ msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#, fuzzy
+#~ msgid ""
+#~ "Click and move the mouse to add a mosaic hexagonal effect to parts of "
+#~ "your picture."
+#~ msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#, fuzzy
+#~ msgid "Click to add a mosaic hexagonal effect to your entire picture."
+#~ msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#~ msgid "qy"
+#~ msgstr "qy"
+
+#~ msgid "QY"
+#~ msgstr "QY"
+
+#, fuzzy
+#~| msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
+#~ msgid ""
+#~ "Click and drag to draw a tornado stalk. Let go to finish the tornado."
+#~ msgstr "Ji bo xêzkirina kulîlkê pê bigire û bikişîne. De bila kulîk biqede."
+
+#, fuzzy
+#~ msgid ""
+#~ "Click and move the mouse to give parts of your picture an \"alien\" "
+#~ "appearance."
+#~ msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#, fuzzy
+#~ msgid "Click to give your entire picture an \"alien\" appearance."
+#~ msgstr "Ji bo guherandina rengê wêneyê bitikîne mişkî li dorê bigerîne."
+
+#, fuzzy
+#~ msgid "Click and move the mouse to add noise to the image."
+#~ msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#, fuzzy
+#~ msgid "Click to add noise to the entire image."
+#~ msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#, fuzzy
+#~ msgid "Click and move the mouse to trace the edges of objects in the image."
+#~ msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#, fuzzy
+#~ msgid "Click and move the mouse to sharpen the image."
+#~ msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#, fuzzy
+#~ msgid "Click to add snow to the entire image."
+#~ msgstr "Ji bo çêkirina îmaja neynikê bitikîne."
+
+#, fuzzy
+#~ msgid ""
+#~ "Click and move the mouse around to turn the image into pure color and "
+#~ "white regions."
+#~ msgstr ""
+#~ "Ji bo ku wêneyê çêkî wêneyekî kartok bitikîne û mişkî li dorê bigerîne."
+
+#, fuzzy
+#~ msgid "Click and move the mouse around convert the image to greyscale."
+#~ msgstr "Mişkî li dora reşahiya wêneyê bitikîne û rake."
+
+#, fuzzy
+#~ msgid "Click to change the entire picture’s color."
+#~ msgstr "Ji bo guherandina rengê wêneyê bitikîne mişkî li dorê bigerîne."
+
+#, fuzzy
+#~ msgid "Blur All"
+#~ msgstr "ne zelal"
+
+#~ msgid "Click and move to fade the colors."
+#~ msgstr "Ji bo birina zindîbûna rengan bitikîne û mişkî bigerîne."
+
+#~ msgid "Click and move to darken the colors."
+#~ msgstr "Ji bo tarîkirina rengan bitikîne û mişkî bigerîne."
+
+#~ msgid "Sparkles"
+#~ msgstr "Çirûsk"
+
+#~ msgid "You now have a blank sheet to draw on!"
+#~ msgstr "Vêga ji bo xêzkirinê rûpeleke te ya vala heye!"
+
+#~ msgid "Start a new picture?"
+#~ msgstr "Dest bi wêneyekî nû bikî?"
+
+#~ msgid "Yes, let's start fresh!"
+#~ msgstr "Erê, dest bi nûkirinê bike!"
+
+#~ msgid "Click and move to draw sparkles."
+#~ msgstr "Ji bo Biriqandina xêzkirinê, bitikîne û rake."

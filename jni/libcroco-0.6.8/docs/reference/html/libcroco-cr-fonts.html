@@ -1,0 +1,670 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-fonts</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-enc-handler.html" title="cr-enc-handler">
+<link rel="next" href="libcroco-cr-input.html" title="cr-input">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-enc-handler.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-input.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-fonts.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-fonts.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-fonts"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-fonts.top_of_page"></a>cr-fonts</span></h2>
+<p>cr-fonts</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-fonts.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily">CRFontFamily</a>;
+struct              <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize">CRFontSize</a>;
+struct              <a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust">CRFontSizeAdjust</a>;
+<a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="returnvalue">CRFontFamily</span></a> *      <a class="link" href="libcroco-cr-fonts.html#cr-font-family-append" title="cr_font_family_append ()">cr_font_family_append</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_family_to_append</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-fonts.html#cr-font-family-destroy" title="cr_font_family_destroy ()">cr_font_family_destroy</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_this</code></em>);
+<a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="returnvalue">CRFontFamily</span></a> *      <a class="link" href="libcroco-cr-fonts.html#cr-font-family-new" title="cr_font_family_new ()">cr_font_family_new</a>                  (<em class="parameter"><code><span class="type">enum CRFontFamilyType</span> a_type</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_name</code></em>);
+<a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="returnvalue">CRFontFamily</span></a> *      <a class="link" href="libcroco-cr-fonts.html#cr-font-family-prepend" title="cr_font_family_prepend ()">cr_font_family_prepend</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_family_to_prepend</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-fonts.html#cr-font-family-set-name" title="cr_font_family_set_name ()">cr_font_family_set_name</a>             (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_name</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            <a class="link" href="libcroco-cr-fonts.html#cr-font-family-to-string" title="cr_font_family_to_string ()">cr_font_family_to_string</a>            (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_walk_font_family_list</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-fonts.html#cr-font-size-adjust-destroy" title="cr_font_size_adjust_destroy ()">cr_font_size_adjust_destroy</a>         (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust"><span class="type">CRFontSizeAdjust</span></a> *a_this</code></em>);
+<a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust"><span class="returnvalue">CRFontSizeAdjust</span></a> *  <a class="link" href="libcroco-cr-fonts.html#cr-font-size-adjust-new" title="cr_font_size_adjust_new ()">cr_font_size_adjust_new</a>             (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="libcroco-cr-fonts.html#cr-font-size-adjust-to-string" title="cr_font_size_adjust_to_string ()">cr_font_size_adjust_to_string</a>       (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust"><span class="type">CRFontSizeAdjust</span></a> const *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-fonts.html#cr-font-size-clear" title="cr_font_size_clear ()">cr_font_size_clear</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-fonts.html#cr-font-size-copy" title="cr_font_size_copy ()">cr_font_size_copy</a>                   (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_dst</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> const *a_src</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-fonts.html#cr-font-size-destroy" title="cr_font_size_destroy ()">cr_font_size_destroy</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_font_size</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-fonts.html#cr-font-size-get-larger-predefined-font-size" title="cr_font_size_get_larger_predefined_font_size ()">cr_font_size_get_larger_predefined_font_size</a>
+                                                        (<em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> a_font_size</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> *a_larger_size</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-fonts.html#cr-font-size-get-smaller-predefined-font-size" title="cr_font_size_get_smaller_predefined_font_size ()">cr_font_size_get_smaller_predefined_font_size</a>
+                                                        (<em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> a_font_size</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> *a_smaller_size</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libcroco-cr-fonts.html#cr-font-size-is-predefined-absolute-font-size" title="cr_font_size_is_predefined_absolute_font_size ()">cr_font_size_is_predefined_absolute_font_size</a>
+                                                        (<em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> a_font_size</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libcroco-cr-fonts.html#cr-font-size-is-set-to-inherit" title="cr_font_size_is_set_to_inherit ()">cr_font_size_is_set_to_inherit</a>      (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> const *a_this</code></em>);
+<a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="returnvalue">CRFontSize</span></a> *        <a class="link" href="libcroco-cr-fonts.html#cr-font-size-new" title="cr_font_size_new ()">cr_font_size_new</a>                    (<em class="parameter"><code><span class="type">void</span></code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-fonts.html#cr-font-size-set-absolute-font-size" title="cr_font_size_set_absolute_font_size ()">cr_font_size_set_absolute_font_size</a> (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRNumType</span> a_num_type</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> a_value</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-fonts.html#cr-font-size-set-predefined-absolute-font-size" title="cr_font_size_set_predefined_absolute_font_size ()">cr_font_size_set_predefined_absolute_font_size</a>
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> a_predefined</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-fonts.html#cr-font-size-set-relative-font-size" title="cr_font_size_set_relative_font_size ()">cr_font_size_set_relative_font_size</a> (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRRelativeFontSize</span> a_relative</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-fonts.html#cr-font-size-set-to-inherit" title="cr_font_size_set_to_inherit ()">cr_font_size_set_to_inherit</a>         (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_this</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="libcroco-cr-fonts.html#cr-font-size-to-string" title="cr_font_size_to_string ()">cr_font_size_to_string</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> const *a_this</code></em>);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="libcroco-cr-fonts.html#cr-font-stretch-to-string" title="cr_font_stretch_to_string ()">cr_font_stretch_to_string</a>           (<em class="parameter"><code><span class="type">enum CRFontStretch</span> a_code</code></em>);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="libcroco-cr-fonts.html#cr-font-style-to-string" title="cr_font_style_to_string ()">cr_font_style_to_string</a>             (<em class="parameter"><code><span class="type">enum CRFontStyle</span> a_code</code></em>);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="libcroco-cr-fonts.html#cr-font-variant-to-string" title="cr_font_variant_to_string ()">cr_font_variant_to_string</a>           (<em class="parameter"><code><span class="type">enum CRFontVariant</span> a_code</code></em>);
+enum <span class="returnvalue">CRFontWeight</span>   <a class="link" href="libcroco-cr-fonts.html#cr-font-weight-get-bolder" title="cr_font_weight_get_bolder ()">cr_font_weight_get_bolder</a>           (<em class="parameter"><code><span class="type">enum CRFontWeight</span> a_weight</code></em>);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="libcroco-cr-fonts.html#cr-font-weight-to-string" title="cr_font_weight_to_string ()">cr_font_weight_to_string</a>            (<em class="parameter"><code><span class="type">enum CRFontWeight</span> a_code</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-fonts.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-fonts.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRFontFamily"></a><h3>struct CRFontFamily</h3>
+<pre class="programlisting">struct CRFontFamily {
+	enum CRFontFamilyType type ;
+
+	/*
+	 *The name of the font family, in case
+	 *it is non generic.
+	 *Is set only if the type is FONT_FAMILY_NON_GENERIC.
+	 */
+	guchar *name ;
+
+	CRFontFamily *next ;
+	CRFontFamily *prev ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CRFontSize"></a><h3>struct CRFontSize</h3>
+<pre class="programlisting">struct CRFontSize {
+        enum CRFontSizeType type ;
+        union  {
+                enum CRPredefinedAbsoluteFontSize predefined ;
+                enum CRRelativeFontSize relative ;
+                CRNum absolute ;
+        } value;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CRFontSizeAdjust"></a><h3>struct CRFontSizeAdjust</h3>
+<pre class="programlisting">struct CRFontSizeAdjust {
+        enum CRFontSizeAdjustType type ;
+        CRNum *num ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-family-append"></a><h3>cr_font_family_append ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="returnvalue">CRFontFamily</span></a> *      cr_font_family_append               (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_family_to_append</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_family_to_append</code></em> :</span></p></td>
+<td>the font family to append to the list</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new font family list.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-family-destroy"></a><h3>cr_font_family_destroy ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_font_family_destroy              (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_this</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon sucessful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-family-new"></a><h3>cr_font_family_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="returnvalue">CRFontFamily</span></a> *      cr_font_family_new                  (<em class="parameter"><code><span class="type">enum CRFontFamilyType</span> a_type</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_name</code></em>);</pre>
+<p>
+create a font family.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_type</code></em> :</span></p></td>
+<td>the type of font family to create.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_name</code></em> :</span></p></td>
+<td>the name of the font family.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly built font family.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-family-prepend"></a><h3>cr_font_family_prepend ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="returnvalue">CRFontFamily</span></a> *      cr_font_family_prepend              (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_family_to_prepend</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance <a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_family_to_prepend</code></em> :</span></p></td>
+<td>the font family to prepend to the list.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the font family list.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-family-set-name"></a><h3>cr_font_family_set_name ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_font_family_set_name             (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_name</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_name</code></em> :</span></p></td>
+<td>the new name</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon sucessful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-family-to-string"></a><h3>cr_font_family_to_string ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            cr_font_family_to_string            (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_walk_font_family_list</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontFamily" title="struct CRFontFamily"><span class="type">CRFontFamily</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_walk_font_family_list</code></em> :</span></p></td>
+<td>wether the serialize the entire list.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the seriliazed font family. The caller has to free it using
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-adjust-destroy"></a><h3>cr_font_size_adjust_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_font_size_adjust_destroy         (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust"><span class="type">CRFontSizeAdjust</span></a> *a_this</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust"><span class="type">CRFontSizeAdjust</span></a>.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-adjust-new"></a><h3>cr_font_size_adjust_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust"><span class="returnvalue">CRFontSizeAdjust</span></a> *  cr_font_size_adjust_new             (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a newly built instance of <a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust"><span class="type">CRFontSizeAdjust</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-adjust-to-string"></a><h3>cr_font_size_adjust_to_string ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             cr_font_size_adjust_to_string       (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust"><span class="type">CRFontSizeAdjust</span></a> const *a_this</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the instance of <a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust"><span class="type">CRFontSizeAdjust</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the serialized form of <a class="link" href="libcroco-cr-fonts.html#CRFontSizeAdjust" title="struct CRFontSizeAdjust"><span class="type">CRFontSizeAdjust</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-clear"></a><h3>cr_font_size_clear ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_font_size_clear                  (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_this</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-copy"></a><h3>cr_font_size_copy ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_font_size_copy                   (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_dst</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> const *a_src</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_dst</code></em> :</span></p></td>
+<td>the destination <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> (where to copy to).</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_src</code></em> :</span></p></td>
+<td>the source <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> (where to copy from).</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-destroy"></a><h3>cr_font_size_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_font_size_destroy                (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_font_size</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_font_size</code></em> :</span></p></td>
+<td>the font size to destroy</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-get-larger-predefined-font-size"></a><h3>cr_font_size_get_larger_predefined_font_size ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_font_size_get_larger_predefined_font_size
+                                                        (<em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> a_font_size</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> *a_larger_size</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_font_size</code></em> :</span></p></td>
+<td>the font size to consider.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_larger_size</code></em> :</span></p></td>
+<td>out parameter. the font size considered larger than
+<em class="parameter"><code>a_font_size</code></em>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-get-smaller-predefined-font-size"></a><h3>cr_font_size_get_smaller_predefined_font_size ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_font_size_get_smaller_predefined_font_size
+                                                        (<em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> a_font_size</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> *a_smaller_size</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-is-predefined-absolute-font-size"></a><h3>cr_font_size_is_predefined_absolute_font_size ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cr_font_size_is_predefined_absolute_font_size
+                                                        (<em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> a_font_size</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_font_size</code></em> :</span></p></td>
+<td>the font size to consider.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>TRUE if the instance is an predefined absolute font size, FALSE
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-is-set-to-inherit"></a><h3>cr_font_size_is_set_to_inherit ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cr_font_size_is_set_to_inherit      (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> const *a_this</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>TRUE if the current instance is set to 'inherit'.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-new"></a><h3>cr_font_size_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="returnvalue">CRFontSize</span></a> *        cr_font_size_new                    (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly created font size.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-set-absolute-font-size"></a><h3>cr_font_size_set_absolute_font_size ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_font_size_set_absolute_font_size (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRNumType</span> a_num_type</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> a_value</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_num_type</code></em> :</span></p></td>
+<td>the type of number to set.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_value</code></em> :</span></p></td>
+<td>the actual value to set.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-set-predefined-absolute-font-size"></a><h3>cr_font_size_set_predefined_absolute_font_size ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_font_size_set_predefined_absolute_font_size
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPredefinedAbsoluteFontSize</span> a_predefined</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_predefined</code></em> :</span></p></td>
+<td>what to set.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon sucessful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-set-relative-font-size"></a><h3>cr_font_size_set_relative_font_size ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_font_size_set_relative_font_size (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRRelativeFontSize</span> a_relative</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_relative</code></em> :</span></p></td>
+<td>the new relative font size</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-set-to-inherit"></a><h3>cr_font_size_set_to_inherit ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_font_size_set_to_inherit         (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> *a_this</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-size-to-string"></a><h3>cr_font_size_to_string ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             cr_font_size_to_string              (<em class="parameter"><code><a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a> const *a_this</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the serialized form of <a class="link" href="libcroco-cr-fonts.html#CRFontSize" title="struct CRFontSize"><span class="type">CRFontSize</span></a>. The returned string
+has to bee freed using <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-stretch-to-string"></a><h3>cr_font_stretch_to_string ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       cr_font_stretch_to_string           (<em class="parameter"><code><span class="type">enum CRFontStretch</span> a_code</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_code</code></em> :</span></p></td>
+<td>the instance of <span class="type">CRFontStretch</span> to consider.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the serialized form of <span class="type">CRFontStretch</span>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-style-to-string"></a><h3>cr_font_style_to_string ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       cr_font_style_to_string             (<em class="parameter"><code><span class="type">enum CRFontStyle</span> a_code</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_code</code></em> :</span></p></td>
+<td>the current instance of <span class="type">CRFontStyle</span> .</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the serialized <span class="type">CRFontStyle</span>. The caller must free the returned
+string using <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-variant-to-string"></a><h3>cr_font_variant_to_string ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       cr_font_variant_to_string           (<em class="parameter"><code><span class="type">enum CRFontVariant</span> a_code</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_code</code></em> :</span></p></td>
+<td>the current instance of <span class="type">CRFontVariant</span>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the serialized form of <span class="type">CRFontVariant</span>. The caller has
+to free the returned string using <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-weight-get-bolder"></a><h3>cr_font_weight_get_bolder ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRFontWeight</span>   cr_font_weight_get_bolder           (<em class="parameter"><code><span class="type">enum CRFontWeight</span> a_weight</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_weight</code></em> :</span></p></td>
+<td>the <span class="type">CRFontWeight</span> to consider.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a font weight bolder than <em class="parameter"><code>a_weight</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-font-weight-to-string"></a><h3>cr_font_weight_to_string ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       cr_font_weight_to_string            (<em class="parameter"><code><span class="type">enum CRFontWeight</span> a_code</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_code</code></em> :</span></p></td>
+<td>the font weight to consider.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the serialized form of <span class="type">CRFontWeight</span>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

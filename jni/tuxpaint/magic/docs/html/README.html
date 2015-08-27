@@ -1,0 +1,1344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>Creating Tux Paint Magic Tool Plugins</title>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#FF0000"
+alink="#FF00FF">
+
+<center>
+<h1>Creating Tux Paint Magic Tool Plugins</h1>
+
+<p>Copyright 2007-2008 by Bill Kendrick and others<br>
+New Breed Software</p>
+
+<p><a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a><br>
+<a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a></p>
+
+<p>July 5, 2007 - July 19, 2008</p>
+</center>
+
+<hr size=2 noshade>
+
+<h2>Overview</h2>
+
+<blockquote>
+
+<p>Beginning with version 0.9.18, Tux&nbsp;Paint's 'Magic' tools were converted
+from routines that lived within the application itself, to a set of 'plugins'
+that are loaded when Tux&nbsp;Paint starts up.</p>
+
+<p>This division allows more rapid development of 'Magic' tools, and allows
+programmers to create and test new tools without needing to integrate them
+within the main Tux&nbsp;Paint source code.  (Users of more professional
+graphics tools, such as The&nbsp;GIMP, should be familiar with this plugin
+concept.)</p>
+
+</blockquote>
+
+<hr size=1 noshade>
+
+<h2>Table of Contents</h2>
+
+<ul>
+<li><a href="#prereqs">Prequisites</a>
+<li><a href="#interfaces">Interfaces</a>
+  <ul>
+  <li><a href="#magic_plugin_funcs">'Magic' tool plugin functions</a>
+    <ul>
+    <li><a href="#common_args">Common arguments to plugin functions</a>
+    <li><a href="#toolfuncs">Required Plugin Functions</a>
+      <ul>
+      <li><a href="#housekeeping">Plugin "housekeeping" functions</a>
+      <li><a href="#eventfuncs">Plugin event functions</a>
+      </ul>
+    </ul>
+  <li><a href="#tpfuncs">Tux Paint Functions and Data</a>
+    <ul>
+    <li><a href="#pixel_manip">Pixel Manipulations</a>
+    <li><a href="#helper_funcs">Helper Functions</a>
+    <li><a href="#informational">Informational</a>
+    <li><a href="#syscalls">Tux Paint System Calls</a>
+    <li><a href="#color_convs">Color Conversions</a>
+    </ul>
+  <li><a href="#macros">Helper Macros in "tp_magic_api.h"</a>
+  <li><a href="#consts">Constant Definitions in "tp_magic_api.h"</a>
+  </ul>
+<li><a href="#compiling">Compiling</a>
+  <ul>
+  <li><a href="#compiling-linux">Linux and other Unix-like Platforms</a>
+  <li><a href="#compiling-windows">Windows</a>
+  <li><a href="#compiling-osx">Mac OS X</a>
+  </ul>
+<li><a href="#installing">Installing</a>
+  <ul>
+  <li><a href="#installing-linux">Linux and other Unix-like Platforms</a>
+  <li><a href="#installing-windows">Windows</a>
+  <li><a href="#installing-osx">Mac OS X</a>
+  </ul>
+<li><a href="#multiple">Creating plugins with multiple effects</a>
+<li><a href="#examples">Example Code</a>
+<li><a href="#help">Getting Help</a>
+<li><a href="#glossary">Glossary</a>
+</ul>
+
+
+<hr size=1 noshade>
+
+<h2><a name="prereqs">Prerequisites</a></h2>
+
+<blockquote>
+
+<p>Tux Paint is written in the
+<a href="http://en.wikipedia.org/wiki/C_(programming_language)">C programming
+language</a>, and uses the
+Simple&nbsp;DirectMedia&nbsp;Layer library ('libSDL', or simply 'SDL';
+available from <a href="http://www.libsdl.org/">http://www.libsdl.org/</a>).
+Therefore, for the moment at least, one must understand the C language and
+how to compile C-based programs.  Familiarity with the SDL API is highly
+recommended, but some basic SDL concepts will be covered in this document.</p>
+
+</blockquote>
+
+<hr size=1 noshade>
+
+<h2><a name="interfaces">Interfaces</a></h2>
+
+<blockquote>
+
+<p>Those who create 'Magic' tool plugins for Tux&nbsp;Paint must provide
+some interfaces (C functions) that Tux&nbsp;Paint may invoke.</p>
+
+<p>Tux Paint utilizes SDL's "SDL_LoadObject()" and "SDL_LoadFunction()"
+routines to load plugins (shared objects files; e.g., "<code>.so</code>"
+files on Linux or "<code>.dll</code>" files on Windows) and find the
+functions within.</p>
+
+<p>In turn, Tux Paint provides a number of helper functions that the
+plugin may (or sometimes is required to) use.  This is exposed as a C
+structure (or "<code>struct</code>") which contains pointers to functions
+and other data inside Tux&nbsp;Paint.  A pointer to this structure gets
+passed along to the plugin's functions as an argument when Tux&nbsp;Paint
+invokes them.</p>
+
+<p>Plugins should <code>#include</code> the C header file
+"<code>tp_magic_api.h</code>", which exposes the 'Magic' tool plugin API.
+Also, when you run the C compiler to build a plugin, you should use the
+command-line tool "<code>tp-magic-config</code>" to get the appropriate
+compiler flags (such as where the compiler can find the Tux&nbsp;Paint
+plugin header file, as well as SDL's header files) for building a plugin.
+(See "<a href="#compiling">Compiling</a>", below.)</p>
+
+<p>The C header file and command-line tool mentioned above are included
+with Tux&nbsp;Paint &mdash; or in some cases, as part of a "Tux&nbsp;Paint
+'Magic' Tool Plugin Development package".</p>
+
+<h3><a name="magic_plugin_funcs">'Magic' tool plugin functions</a></h3>
+
+<blockquote>
+
+<p>'Magic' tool plugins <i>must</i> contain the functions listed below.
+<b>Note:</b> To avoid 'namespace' collisions, each function's name must
+start with the shared object's filename (e.g., "blur.so" or "blur.dll"
+would have functions whose names begin with "<code>blur_</code>").  <i>This
+includes private functions</i> (ones not used by Tux&nbsp;Paint directly),
+unless you declare those as '<code>static</code>'.</p>
+
+<h4><a name="common_args">Common arguments to plugin functions:</a></h4>
+
+Here is a description of arguments that many of your plugin's functions
+will need to accept.
+
+<ul>
+<li><code><b>magic_api * api</b></code><br>
+  Pointer to a C structure containing pointers to Tux&nbsp;Paint functions and
+  other data that the plugin can (and sometimes should) use.
+  The contents of this struct are <a href="#tpfuncs">described below</a>.<br>
+  <br>
+  Note: The <code>magic_api</code> struct is defined in the C header file
+  "<code>tp_magic_api.h</code>", which you should include at the top of your
+  plugin's C source file:
+  <blockquote><code>
+    #include "tp_magic_api.h"
+  </code></blockquote>
+
+<li><code><b>int which</b></code><br>
+  An index the plugin should use to differentiate different 'Magic' tools,
+  if the plugin provides more than one.  (If not, "which" will always be 0.)
+  See <a href="#multiple">"Creating plugins with multiple effects"</a>,
+  below.<br>
+  <br>
+
+<li><code><b>SDL_Surface * snapshot</b></code><br>
+  A snapshot of the previous Tux&nbsp;Paint canvas, taken when the the
+  mouse was first clicked to activate the current magic tool.  If you don't
+  continuously affect the image during one hold of the mouse button,
+  you should base your effects off the contents of this canvas.
+  (That is, read from "<code>snapshot</code>" and write to
+  "<code>canvas</code>", below.)<br>
+  <br>
+
+<li><code><b>SDL_Surface * canvas</b></code><br>
+  The current Tux&nbsp;Paint drawing canvas.  Your magical effects should end
+  up here!<br>
+  <br>
+
+<li><code><b>SDL_Rect * update_rect</b></code><br>
+  A pointer to an SDL 'rectangle' structure that you use to tell Tux&nbsp;Paint
+  what part of the canvas has been updated.  If your effect affects a
+  32x32 area centered around the mouse pointer, you would fill the SDL_Rect
+  as follows:
+  <blockquote><code>
+    update_rect-&gt;x = x - 16;<br>
+    update_rect-&gt;y = y - 16;<br>
+    update_rect-&gt;w = 32;<br>
+    update_rect-&gt;h = 32;
+  </code></blockquote>
+  Or, if your effect changes the entire canvas (e.g., flips it upside-down),
+  you'd fill it as follows:
+  <blockquote><code>
+    update_rect-&gt;x = 0;<br>
+    update_rect-&gt;y = 0;<br>
+    update_rect-&gt;w = canvas-&gt;w;<br>
+    update_rect-&gt;h = canvas-&gt;h;
+  </code></blockquote>
+  Note: "<code>update_rect</code>" is a C pointer
+  (an "<code>SDL_Rect&nbsp;*</code>" rather than just an
+  "<code>SDL_Rect</code>") because you need to fill in its contents.
+  Because it is a pointer, you access its elements via
+  "<code>-&gt;</code>" (arrow) rather than "<code>.</code>" (dot).
+</ul>
+
+<h4><a name="toolfuncs">Required Plugin Functions:</a></h4>
+
+<blockquote>
+
+<p>Your plugin is required to contain, at the least, all of the
+following functions.</p>
+
+<p><b>Note:</b> Remember, your plugin's function names must be
+preceded by your plugin's filename.  That is, if your plugin is called
+"<code>zoom.so</code>" (on Linux) or "<code>zoom.dll</code>" (on Windows),
+then the names of your functions must begin with "<code><b>zoom_</b></code>"
+(e.g., "<code>zoom_get_name(...)</code>").</p>
+
+<h5><a name="housekeeping">Plugin "housekeeping" functions:</a></h5>
+
+<ul>
+<li><code><b>Uint32 api_version(void)</b></code><br>
+  The plugin should return an integer value representing the version of
+  the Tux&nbsp;Paint 'Magic' tool plugin API the plugin was built against.
+  The safest thing to do is return the value of
+  <code>TP_MAGIC_API_VERSION</code>, which is defined in
+  "<code>tp_magic_api.h</code>".  If Tux&nbsp;Paint deems your plugin to
+  be compatible, it will go ahead and use it.<br>
+  <br>
+  <b>Note:</b> Called once by Tux&nbsp;Paint, at startup. It is called
+  first.<br>
+  <br>
+
+<li><code><b>int init(magic_api&nbsp;*&nbsp;api)</b></code><br>
+  The plugin should do any initialization here.
+  Return '1' if initialization was successful,
+  or '0' if not (and Tux&nbsp;Paint will not present any 'Magic' tools
+  from the plugin).<br>
+  <br>
+  <b>Note:</b> Called once by Tux&nbsp;Paint, at startup. It is called
+  first.  It is called after "<code>api_version()</code>", if
+  Tux&nbsp;Paint believes your plugin to be compatible.<br>
+  <br>
+
+<li><code><b>int get_tool_count(magic_api&nbsp;*&nbsp;api)</b></code><br>
+  This should return the number of Magic tools this plugin provides to
+  Tux Paint.<br>
+  <br>
+  <b>Note:</b> Called once by Tux&nbsp;Paint, at startup.  It is called
+  after your "<code>init()</code>", if it succeeded.<br>
+  <br>
+
+<li><code><b>char * get_name(magic_api&nbsp;*&nbsp;api,
+  int&nbsp;which)</b></code><br>
+  This should return a string containing the name of a magic tool.
+  This will appear on the button in the 'Magic' selector within
+  Tux&nbsp;Paint.<br>
+  <br>
+  Tux Paint will <code>free()</code> the string upon exit, so you should
+  wrap it in a C <code>strdup()</code> call.<br>
+  <br>
+  <b>Note:</b> Called once for each Magic tool your plugin claims to
+  contain (by your "<code>get_tool_count()</code>").<br>
+  <br>
+
+<li><code><b>SDL_Surface * get_icon(magic_api&nbsp;*&nbsp;api,
+  int&nbsp;which)</b></code><br>
+  This should return an SDL_Surface containing the icon representing
+  the tool.  (A greyscale image with alpha, no larger than 40x40.)
+  This will appear on the button in the 'Magic' selector within
+  Tux&nbsp;Paint.<br>
+  <br>
+  Tux Paint will free ("<code>SDL_FreeSurface()</code>") the surface upon
+  exit.<br>
+  <br>
+  <b>Note:</b> Called once for each Magic tool your plugin claims to
+  contain (by your "<code>get_tool_count()</code>").<br>
+  <br>
+
+<li><code><b>char * get_description(magic_api&nbsp;*&nbsp;api,
+  int&nbsp;which, int&nbsp;mode)</b></code><br>
+  This should return a string containing the description of how to
+  use a particular magic tool.
+  This will appear as a help tip, explained by Tux the Penguin, within
+  Tux&nbsp;Paint.<br>
+  <br>
+  Tux Paint will <code>free()</code> the string upon exit, so you should
+  wrap it in a C <code>strdup()</code> call.<br>
+  <br>
+  <b>Note:</b> For each Magic tool your plugin claims to
+  contain (reported by your "<code>get_tool_count()</code>" function),
+  this function will be called for each mode the tool claims to support
+  (reported by your "<code>modes()</code>" function).<br>
+  <br>
+  In other words, if your plugin contains two tools, one which works in
+  paint mode only, and the other that works in both paint mode and
+  full-image mode, your plugin's "<code>get_description()</code>" will be
+  called three times.<br>
+  <br>
+
+<li><code><b>int requires_colors(magic_api&nbsp;*&nbsp;api,
+  int&nbsp;which)</b></code><br>
+  Return a '1' if the 'Magic' tool accepts colors (the 'Colors' palette in
+  Tux&nbsp;Paint will be available), or '0' if not.<br>
+  <br>
+  <b>Note:</b> Called once for each Magic tool your plugin claims to
+  contain (by your "<code>get_tool_count()</code>").<br>
+  <br>
+
+<li><code><b>int modes(magic_api&nbsp;*&nbsp;api,
+  int&nbsp;which)</b></code><br>
+  This lets you tell Tux&nbsp;Paint what modes your tool can be used in
+  (either as a tool the user can paint with, or a tool that affects
+  the entire drawing at once)<br>
+  <br>
+  You must return a value that's some combination of one or more of
+  available modes:
+  <ul>
+  <li><code>MODE_PAINT</code>
+  <li><code>MODE_FULLSCREEN</code>
+  </ul>
+  e.g., if your tool is only one that the user can paint with,
+  return "<code>MODE_PAINT</code>".  If the user can do both,
+  return "<code>MODE_PAINT&nbsp;|&nbsp;MODE_FULLSCREEN</code>"
+  to tell Tux&nbsp;Paint it can do both.<br>
+  <br>
+  <b>Note:</b> Called once for each Magic tool your plugin claims to
+  contain (by your "<code>get_tool_count()</code>").<br>
+  <br>
+  <i>Note: Added to Tux&nbsp;Paint 0.9.21; Magic API version
+  '0x00000002'</i><br>
+  <br>
+
+<li><code><b>void shutdown(magic_api&nbsp;*&nbsp;api)</b></code><br>
+  The plugin should do any cleanup here.  If you allocated any memory
+  or used SDL_Mixer to load any sounds during <code>init()</code>,
+  for example, you should <code>free()</code> the allocated memory
+  and <code>Mix_FreeChunk()</code> the sounds here.<br>
+  <br>
+  <b>Note:</b> This function is called once, when Tux&nbsp;Paint exits.<br>
+  <br>
+
+</ul>
+
+<h5><a name="eventfuncs">Plugin event functions:</a></h5>
+
+<ul>
+<li><code><b>void switchin(magic_api&nbsp;*&nbsp;api,
+  int&nbsp;which, int&nbsp;mode,
+  SDL_Surface&nbsp;*&nbsp;snapshot, SDL_Surface&nbsp;*&nbsp;canvas)
+  </b></code><br>
+  <code><b>void switchout(magic_api&nbsp;*&nbsp;api,
+  int&nbsp;which, int&nbsp;mode,
+  SDL_Surface&nbsp;*&nbsp;snapshot, SDL_Surface&nbsp;*&nbsp;canvas)
+  </b></code><br>
+  <code>switchin()</code> is called whenever one of the plugin's Magic
+  tools becomes active, and <code>switchout()</code> is called whenever
+  one becomes inactive.  This can be because the user just clicked a
+  specific Magic tool (the current one is switched-out, and a new one
+  is switched-in).<br>
+  <br>
+  It can also happen when user leaves/returns
+  from the selection of "Magic" tools when doing some other activity
+  (i.e., using a different tool, such as "Text" or "Brush", activating
+  a momentary tool, such as "Undo" and "Redo", or returning from a
+  dialog &mdash; possibly with a new picture when it switches back
+  &mdash; such as "Open", "New" or "Quit").  In this case, the same
+  Magic tool is first 'switched-out', and then 'switched-back-in', usually
+  moments later.<br>
+  <br>
+  Finally, it can also happen when the user changes the 'mode' of a tool
+  (i.e., from paint mode to full-image mode).  First
+  <code>switchout()</code> is called for the old mode, then
+  <code>switchin()</code> is called for the new mode.<br>
+  <br>
+  These functions allow users to interact in complicated was with Magic
+  tools (for example, a tool that lets the user draw <i>multiple</i>
+  freehand strokes, and then uses that as input such as handwriting &mdash;
+  normally, the user could click somewhere in the canvas to tell the
+  Magic tool they are 'finished', but if they switch to another tool, the
+  Magic tool may want to undo any temporary changes to the canvas).<br>
+  <br>
+  These functions could also be used to streamline certain effects;
+  a behind-the-scenes copy of the entire canvas could be altered in some
+  way when the user first switches to the canvas, and then pieces of that
+  copy could be drawn on the canvas when they draw with the Magic tool.
+  <br>
+  <i>Note: Added to Tux&nbsp;Paint 0.9.21; Magic API version
+  '0x00000002'</i><br>
+  <br>
+
+<li><code><b>void set_color(magic_api&nbsp;*&nbsp;api,
+  Uint8&nbsp;r, Uint8&nbsp;g, Uint8&nbsp;g)
+  </b></code><br>
+  Tux&nbsp;Paint will call this function to inform the plugin of the
+  RGB values of the currently-selected color in Tux&nbsp;Paint's
+  'Colors' palette.  (It will be called whenever one of the plugin's
+  Magic tools that accept colors becomes active, and whenever the user
+  picks a new color while such a tool is currently active.)<br>
+  <br>
+
+<li><code><b>void click(magic_api&nbsp;*&nbsp;api, int&nbsp;which,
+  int&nbsp;mode,
+  SDL_Surface&nbsp;*&nbsp;snapshot, SDL_Surface&nbsp;*&nbsp;canvas,
+  int&nbsp;x, int&nbsp;y, SDL_Rect&nbsp;*&nbsp;update_rect)
+  </b></code><br>
+  The plugin should apply the appropriate 'Magic' tool on the
+  '<code>canvas</code>' surface.  The (x,y) coordinates are where the
+  mouse was (within the canvas) when the mouse button was clicked, and
+  you are told which 'mode' your tool is in (i.e.,
+  '<code>MODE_PAINT</code>' or '<code>MODE_FULLSCREEN</code>).<br>
+  <br>
+  The plugin should report back what part of the canvas was affected, by
+  filling in the (x,y) and (w,h) elements of '<code>update_rect</code>'.<br>
+  <br>
+  The contents of the drawing canvas immediately prior to the mouse button
+  click is stored within the '<code>snapshot</code>' canvas.<br>
+  <br>
+
+<li><code><b>void drag(magic_api&nbsp;*&nbsp;api, int&nbsp;which,
+  SDL_Surface&nbsp;*&nbsp;snapshot, SDL_Surface&nbsp;*&nbsp;canvas,
+  int&nbsp;ox, int&nbsp;oy, int&nbsp;x, int&nbsp;y,
+  SDL_Rect&nbsp;*&nbsp;update_rect)</b></code><br>
+  The plugin should apply the appropriate 'Magic' tool on the
+  '<code>canvas</code>'
+  surface.  The (ox,oy) and (x,y) coordinates are the location of the mouse
+  at the beginning and end of the stroke.<br>
+  <br>
+  Typically, plugins that let the user "draw" effects onto the canvas
+  utilize Tux&nbsp;Paint's "<code>line()</code>" 'Magic' tool plugin
+  helper function to calculate the points of the line between (ox,oy)
+  and (x,y), and call another function within the plugin to apply the effect
+  at each point.
+  (See "<a href="#tpfuncs">Tux&nbsp;Paint Functions and Data</a>," below).<br>
+  <br>
+  The plugin should report back what part of the canvas was affected, by
+  filling in the (x,y) and (w,h) elements of '<code>update_rect</code>'.<br>
+  <br>
+  Note: The contents of the drawing canvas immediately prior to the mouse
+  button click remains as it was (when the plugin's "<code>click()</code>"
+  function was called), and is still available in the '<code>snapshot</code>'
+  canvas.<br>
+  <br>
+
+<li><code><b>void release(magic_api&nbsp;*&nbsp;api, int&nbsp;which,
+  SDL_Surface&nbsp;*&nbsp;snapshot, SDL_Surface&nbsp;*&nbsp;canvas,
+  int&nbsp;x, int&nbsp;y, SDL_Rect&nbsp;*&nbsp;update_rect)</b></code><br>
+  The plugin should apply the appropriate 'Magic' tool on the
+  '<code>canvas</code>'
+  surface.  The (x,y) coordinates are where the mouse was (within the canvas)
+  when the mouse button was released.<br>
+  <br>
+  The plugin should report back what part of the canvas was affected, by
+  filling in the (x,y) and (w,h) elements of 'update_rect'.<br>
+  <br>
+  <b>Note:</b> The contents of the drawing canvas immediately prior to the mouse
+  button click remains as it was (when the plugin's "<code>click()</code>"
+  function was called), and is still available in the 'snapshot' canvas.<br>
+  <br>
+</ul>
+
+</blockquote>
+
+</blockquote>
+
+<h3><a name="tpfuncs">Tux Paint Functions and Data</a></h3>
+
+<blockquote>
+
+<p>Tux&nbsp;Paint provides a number of helper functions that plugins may
+access via the "<code>magic_api</code>" structure, sent to all of the
+plugin's functions.
+(See "<a href="#toolfuncs">Required Plugin Functions</a>," above.)</p>
+
+<h4><a name="pixel_manip">Pixel Manipulations</a></h4>
+
+<blockquote>
+
+<ul>
+<li><code><b>Uint32 getpixel(SDL_Surface&nbsp;*&nbsp;surf,
+  int&nbsp;x, int&nbsp;y)</b></code><br>
+  Retreives the pixel value from the (x,y) coordinates of an SDL_Surface.
+  (You can use SDL's "SDL_GetRGB()" function to convert the Uint32 'pixel'
+  to a set of Uint8 RGB values.)<br>
+  <br>
+
+<li><code><b>void putpixel(SDL_Surface&nbsp;*&nbsp;surf, int&nbsp;x, int&nbsp;y,
+  Uint32&nbsp;pixel)</b></code><br>
+  Sets the pixel value at position (x,y) of an SDL_Surface.
+  (You can use SDL's "SDL_MapRGB()" function to convert a set of Uint8
+  RGB values to a Uint32 'pixel' value appropriate to the destination
+  surface.)<br>
+  <br>
+
+<li><code><b>SDL_Surface * scale(SDL_Surface&nbsp;*&nbsp;surf,
+  int&nbsp;w, int&nbsp;h, int&nbsp;keep_aspect)</b></code><br>
+  This accepts an existing SDL surface and creates a new one scaled to an
+  arbitrary size.  (The original surface remains untouched.)<br>
+  <br>
+  The "<code>keep_aspect</code>" flag can be set to '1' to force the new
+  surface to stay the same shape (aspect&nbsp;ratio) as the original, meaning
+  it may not be the same width and height you requested.  (Check the
+  "<code>-&gt;w</code>" and "<code>-&gt;h</code>" elements of the output
+  "SDL_Surface&nbsp;*" to determine the <i>actual</i> size.)<br>
+  <br>
+</ul>
+
+</blockquote>
+
+<h4><a name="helper_funcs">Helper Functions</a></h4>
+
+<blockquote>
+
+<ul> 
+<li><code><b>int in_circle(int&nbsp;x, int&nbsp;y,
+  int&nbsp;radius)</b></code><br>
+  Returns '1' if the (x,y) location is within a circle of a particular
+  radius (centered around the origin: (0,0)).  Returns '0' otherwise.
+  Useful to create 'Magic' tools that affect the canvas with a circular
+  brush shape.<br>
+  <br>
+
+<li><code><b>void line(void&nbsp;*&nbsp;api, int&nbsp;which,
+  SDL_Surface&nbsp;* canvas, SDL_Surface&nbsp;*&nbsp;snapshot,
+  int&nbsp;x1, int&nbsp;y1,
+  int&nbsp;x2, int&nbsp;y2, int&nbsp;step, FUNC&nbsp;callback)</b></code><br>
+  This function calculates all points on a line between the coordinates
+  (x1,y1) and (x2,y2).  Every 'step' iterations, it calls the 'callback'
+  function.<br>
+  <br>
+  It sends the 'callback' function the (x,y) coordinates on the line,
+  Tux&nbsp;Paint's "<code>magic_api</code>" struct (as a
+  "<code>void&nbsp;*</code>" pointer which you need to send to it),
+  a 'which' value, represening which of the plugin's 'Magic' tool is
+  being used, and the current and snapshot canvases.<br>
+  <br>
+  Example prototype of a callback function that may be sent to
+  Tux&nbsp;Paint's "<code>line()</code>" 'Magic' tool plugin helper function:
+  <blockquote><code>
+    void exampleCallBack(void&nbsp;*&nbsp;ptr_to_api, int&nbsp;which_tool,
+    SDL_Surface&nbsp;*&nbsp;canvas, SDL_Surface&nbsp;*&nbsp;snapshot,
+    int&nbsp;x, int&nbsp;y);
+  </code></blockquote>
+  <br>
+  Example use of the "<code>line()</code>" helper (e.g., within a plugin's
+  <code>draw()</code> function):
+  <blockquote><code>
+    api-&gt;line((void&nbsp;*)&nbsp;api, which, canvas, snapshot, ox,&nbsp;oy,
+      x,&nbsp;y, 1, exampleCallBack);
+  </code></blockquote>
+  <br>
+
+<li><code><b>Uint8 touched(int&nbsp;x, int&nbsp;y)</b></code><br>
+  This function allows you to avoid re-processing the same pixels multiple
+  times when the user drags the mouse across an area of the canvas, thus
+  increasing Tux&nbsp;Paint's response time, especially with math-heavy
+  effects.<br>
+  <br>
+  If your effect's "<code>click()</code>", "<code>drag()</code>" and/or
+  "<code>release()</code>" functions take the contents of the
+  source surface ("<code>snapshot</code>") and always create the same
+  results in the desintation surface ("<code>canvas</code>"), you should
+  wrap the effect in a call to "<code>api-&gt;touched()</code>".<br>
+  <br>
+  This function simply returns whether or not it had already been called for
+  the same (x,y) coordinates, since the user first clicked the mouse.
+  In other words, the first time you call it for a particular (x,y) coordinate,
+  it returns '0'.  Future calls will return '1' until the user releases
+  the mouse button.<br>
+  <br>
+  <b>Note:</b> Magic effects that continuously affect the destination
+  surface ("<code>canvas</code>") (ignoring the "<code>snapshot</code>
+  surface) have no reason to use this function.  The "Blur" and "Smudge"
+  tools that ship with Tux&nbsp;Paint are examples of such effects.<br>
+  <br>
+</ul>
+
+</blockquote>
+
+<h4><a name="informational">Informational</a></h4>
+
+<blockquote>
+
+<ul>
+<li><code><b>char * tp_version</b></code><br>
+  A string containing the version of Tux&nbsp;Paint that's running
+  (e.g., "0.9.18").<br>
+  <br>
+
+<li><code><b>int canvas_w</b></code>
+  Returns the width of the drawing canvas.<br>
+  <br>
+
+<li><code><b>int canvas_h</b></code>
+  Returns the height of the drawing canvas.<br>
+  <br>
+
+<li><code><b>int button_down(void)</b></code><br>
+  A '1' is returned if the mouse button is down; '0' otherwise.<br>
+  <br>
+
+<li><code><b>char * data_directory</b></code><br>
+  This string contains the directory where Tux&nbsp;Paint's data files are
+  stored.  For example, on Linux, this may be
+  "<code>/usr/share/tuxpaint/</code>".<br>
+  <br>
+  Magic tools should include an icon (see "<code>get_icon()</code>", above)
+  and are encouraged to include sound effects, it's useful for plugins to
+  know where such things are located.<br>
+  <br>
+  When compiling and installing a plugin, the "<code>tp-magic-config</code>"
+  command-line tool should be used to determine where such data should be
+  placed for the installed version of Tux&nbsp;Paint to find them.
+  (See "<a href="#installing">Installing</a>," below.)<br>
+  <br>
+  <b>Note:</b> If your plugin is installed locally (e.g., in your
+  "<code>~/.tuxpaint/plugins/</code>" directory), rather than globally
+  (system-wide), the "<code>data_directory</code>" value will be different.
+  (e.g., "<code>/home/<i>username</i>/.tuxpaint/plugins/data/</code>").<br>
+  <br>
+
+</ul>
+
+</blockquote>
+
+<h4><a name="syscalls">Tux Paint System Calls</a></h4>
+
+<blockquote>
+<ul>
+<li><code><b>void update_progress_bar(void)</b></code><br>
+  Asks Tux&nbsp;Paint to animate and draw one frame of its progress bar
+  (at the bottom of the screen).  Useful for routines that may take a
+  long time, to provide feedback to the user that Tux&nbsp;Paint has not
+  crashed or frozen.<br>
+  <br>
+
+<li><code><b>void playsound(Mix_Chunk&nbsp;*&nbsp;snd, int&nbsp;pan,
+  int&nbsp;dist)</b></code><br>
+  This function plays a sound (one loaded by the SDL helper library
+  "SDL_mixer").  It uses SDL_mixer's "<code>Mix_SetPanning()</code>" to set
+  the volume of the sound on the left and right speakers, based on the
+  '<code>pan</code>' and '<code>dist</code>' values sent to it.<br>
+  <br>
+  A '<code>pan</code>' of 128 causes the sound to be played at equal volume
+  on the left and right speakers.  A '<code>pan</code>' of 0 causes it to be
+  played completely on the left, and 255 completely on the right.<br>
+  <br>
+  The '<code>dist</code>' value affects overall volume.  255 is loudest,
+  and 0 is silent.<br>
+  <br>
+  The '<code>pan</code>' and '<code>dist</code>' values can be used to
+  simulate location and distance of the 'Magic' tool effect.<br>
+  <br>
+
+<li><code><b>void stopsound(void)</b></code><br>
+  This function stops playing a sound played by <code>playsound()</code>.
+  It is useful to silence effects when the user stops using the tool
+  (in your '<code>release</code>' function).
+  <br>
+
+<li><a name="special_notify">
+  <code><b>void special_notify(int&nbsp;flag)</b></code>
+  </a><br>
+  This function notifies Tux&nbsp;Paint of special events.  Various values
+  defined in "<code>tp_magic_api.h</code>" can be 'or'ed together
+  (using C's boolean 'or': "<code>|</code>") and sent to this function.
+  <ul>
+  <li><code>SPECIAL_FLIP</code> &mdash; The contents of the canvas has been
+    flipped vertically.<br>
+    <br>
+    If a 'Starter' image was used as the basis of this image, it should be
+    flipped too, and a record of the flip should be stored as part of
+    Tux&nbsp;Paint's undo buffer stack.  Additionally, the fact that the
+    starter has been flipped (or unflipped) should be recorded on disk
+    when the current drawing is saved.<br>
+    <br>
+  <li><code>SPECIAL_MIRROR</code> &mdash; Similar to <code>SPECIAL_FLIP</code>,
+    but for magic tools that mirror the contents of the canvas horizontally.
+  </ul>
+  <br>
+</ul>
+</blockquote>
+
+<h4><a name="color_convs">Color Conversions</a></h4>
+
+<blockquote>
+<ul>
+  <li><code><b>float sRGB_to_linear(Uint8&nbsp;srbg)</b></code><br>
+    Converts an 8-bit sRGB value (one between 0 and 255) to a linear
+    floating point value (between 0.0 and 1.0).<br>
+    <br>
+    <b>See also:</b>
+    <a href="http://en.wikipedia.org/wiki/SRGB">sRGB article at Wikipedia</a>.
+    <br>
+    <br>
+
+  <li><code><b>uint8 linear_to_sRGB(float&nbsp;linear)</b></code><br>
+    Converts a linear floating point value (one between 0.0 and 1.0) to
+    an 8-bit sRGB value (between 0 and 255).<br>
+    <br>
+
+  <li><code><b>void&nbsp;rgbtohsv(Uint8&nbsp;r, Uint8&nbsp;g, Uint8&nbsp;b,
+  float&nbsp;*&nbsp;h, float&nbsp;*&nbsp;s, float&nbsp;*&nbsp;v)</b></code><br>
+    Converts 8-bit sRGB values (between 0 and 255) to floating-point
+    HSV (Hue, Saturation and Value) values (Hue between 0.0 and 360.0,
+    and Saturation and Value between 0.0 and 1.0).<br>
+    <br>
+    <b>See also:</b>
+    <a href="http://en.wikipedia.org/wiki/HSV_color_space">HSV Color Space
+    article at Wikipedia</a>.<br>
+    <br>
+
+  <li><code><b>void hsvtorgb(float h, float s, float v,
+    Uint8 * r, Uint8 * g, Uint8 * b)</b></code><br>
+    Converts floating-point HSV (Hue, Saturation and Value) values
+    (Hue between 0.0 and 360.0, and Saturation and Value between 0.0 and 1.0)
+    to 8-bit sRGB values (between 0 and 255).<br>
+    <br>
+  </ul>
+
+</blockquote>
+</blockquote>
+
+<h3><a name="macros">Helper Macros in "<code>tp_magic_api.h</code>":</a></h3>
+
+<blockquote>
+<p>Along with the "<code>magic_api</code>" C structure containing functions
+and data described above, the <code>tp_magic_api.h</code> C header file
+also contains some helper macros that you may use.</p>
+
+<ul>
+<li><code><b>min(x,&nbsp;y)</b></code><br>
+  The minimum of 'x' and 'y'.  (That is, if 'x' is less than or
+  equal to 'y', then the value of 'x' will be used.  If 'y' is less than 'x',
+  it will be used.)<br>
+  <br>
+
+<li><code><b>max(x,&nbsp;y)</b></code><br>
+  The maximum of 'x' and 'y'.  The opposite of <code>min()</code>.<br>
+  <br>
+
+<li><code><b>clamp(lo,&nbsp;value,&nbsp;hi)</b></code><br>
+  A value, clamped to be no smaller than 'lo', and no higher than 'hi'.
+  (That is, if 'value' is less than 'lo', then 'lo' will be used;
+  if 'value' is greater than 'hi', then 'hi' will be used;
+  otherwise, 'value' will be used.)<br>
+  <br>
+  <b>Example:</b> <code>red = clamp(0, n, 255);</code><br>
+  Tries to set 'red' to be the value of 'n', but without allowing it to
+  become less than 0 or greater than 255.<br>
+  <br>
+  <b>Note:</b> This macro is simply a <code>#define</code> of:
+  "<code>(min(max(value,lo),hi))</code>".<br>
+  <br>
+</ul>
+
+</blockquote>
+
+<h3><a name="consts">Constant Defintions in "<code>tp_magic_api.h</code>":</a></h3>
+
+<blockquote>
+<p>The following is a summary of constant values that are set
+(via&nbsp;"<code>#define</code>") within the 'Magic' tool API header file.</p>
+
+<ul>
+<li><code><b>TP_MAGIC_API_VERSION</b></code><br>
+  This integer value represents which version of the Tux&nbsp;Paint 'Magic'
+  tool API the header corresponds to.<br>
+  <br>
+  It should be referenced by your magic tool's "<code>api_version()</code>"
+  function, to inform the running copy of Tux&nbsp;Paint whether or not your
+  plugin is compatible.<br>
+  <br>
+  <b>Note:</b> This version number does not correspond to Tux&nbsp;Paint's
+  own release number (e.g., "0.9.18").  The API will not change every time
+  a new version of Tux&nbsp;Paint is released, which means plugins compiled
+  for earlier versions of Tux&nbsp;Paint will often run under newer
+  versions.<br>
+  <br>
+
+<li><code><b>SPECIAL_MIRROR<br>
+  SPECIAL_FLIP</b></code><br>
+  These are flags for Tux&nbsp;Paint's "<code>special_notify()</code>"
+  helper function.  They are described <a href="#special_notify">above</a>.<br>
+  <br>
+
+</ul>
+
+</blockquote>
+
+</blockquote>
+
+<hr size=1 noshade>
+
+<h2><a name="compiling">Compiling</a></h2>
+
+<blockquote>
+
+  <h3><a name="compiling-linux">Linux and other Unix-like Platforms</a></h3>
+
+  <blockquote>
+
+  <p>Use the C compiler's "<code>-shared</code>" command-line option to generate
+  a shared object file ("<code>.so</code>") based on your 'Magic' tool
+  plugin's C source code.</p>
+
+  <p>Use the "<code>tp-magic-config&nbsp;--cflags</code>" command,
+  supplied as part of Tux&nbsp;Paint &mdash; or in some cases, as part of a
+  "Tux Paint 'Magic' Tool Plugin Development package" &mdash;
+  to provide additional command-line flags to your C compiler that will help
+  it build your plugin.</p>
+
+  <h4>Command-Line Example</h4>
+
+  <blockquote>
+
+  <p>As a stand-alone command, using the GNU C Compiler and BASH shell,
+  for example:</p>
+
+  <blockquote>
+    <p><code>
+      $ gcc -shared `tp-magic-config --cflags` my_plugin.c -o my_plugin.so
+    </code></p>
+  </blockquote>
+
+  <p><a name="grave"><b>Note:</b></a>
+  The characters around the "<code>tp-magic-config</code>"
+  command are a grave/backtick/backquote
+  ("<code><b><font size=+1>`</font></b></code>"), and
+  not an apostrophe/single-quote ("<code><b><font size=+1>'</font></b></code>").
+  They tell the shell to execute the command within (in this case,
+  "<code>tp-magic-config&nbsp;...</code>"), and use its output
+  as an argument to the command being executed (in this case,
+  "<code>gcc&nbsp;...</code>").</p>
+
+  </blockquote>
+
+  <h4>Makefile Example</h4>
+
+  <blockquote>
+
+  <p>A snippet from a Makefile to compile a Tux&nbsp;Paint "Magic" tool
+  plugin might look like this:</p>
+
+  <blockquote><table border=1 cellspacing=0 cellpadding=4><tr><td>
+    <p><code>
+      CFLAGS=-Wall -O2 $(shell tp-magic-config --cflags)<br>
+      <br>
+      my_plugin.so:  my_plugin.c<br>
+      &nbsp;&nbsp;&nbsp;gcc -shared $(CFLAGS) -o my_plugin.so my_plugin.c
+    </code></p>
+  </td></tr></table></blockquote>
+
+  <p>The first line sets up Makefile variable ("<code>CFLAGS</code>") that
+  contains flags for the compiler. "<code>-Wall</code>" asks for all compiler
+  warnings to be shown.  "<code>-O2</code>" asks for level 2 optimization.
+  "<code>($shell&nbsp;tp-magic-config&nbsp;--cflags)</code>" runs
+  "<code>tp-magic-config</code>" to retrieve additional compiler flags that
+  "Magic" tool plugins require.  (The "<code>$(shell&nbsp;...)</code>"
+  directive is similar to the <a href="#grave"><b><font size=+1>`</font></b>
+  ("grave")</a> character in the BASH shell examples, above.)</p>
+
+  <p>The next line defines a Makefile target, "<code>my_plugin.so</code>",
+  and states that it <i>depends&nbsp;on</i> the C source file
+  "<code>my_plugin.c</code>".  (Any time the C file changes, "<code>make</code>"
+  will know to recompile it and produce an updated "<code>.so</code>" file.
+  If the C file hadn't changed, it won't bother recompiling.)</p>
+
+  <p>The last line defines the command "<code>make</code>" should
+  run when it determines that it needs to (re)compile the "<code>.so</code>"
+  file.  Here, we're using "<code>gcc</code>", with "<code>-shared</code> and
+  "<code>$(CFLAGS)</code>" command-line arguments, like above.
+  "<code>-o&nbsp;my_plugin.so</code>" tells the C compiler that the output file
+  should be "<code>my_plugin.so</code>".  The last argument is the C file to
+  compile, in this case "<code>my_plugin.c</code>".</p>
+
+  <p><b>Note:</b> Commands listed below a Makefile target should be
+  intented using a single <b>tab</b> character.</p>
+
+  </blockquote>
+
+  <h4>Advanced Makefile</h4>
+
+  <blockquote>
+
+  <p>An even more generalized Makefile might look like this:</p>
+
+  <blockquote><table border=1 cellspacing=0 cellpadding=4><tr><td>
+    <p><code>
+      CFLAGS=-Wall -O2 $(shell tp-magic-config --cflags)<br>
+      <br>
+      my_plugin_1.so:  my_plugin_1.c<br>
+      &nbsp;&nbsp;&nbsp;$(CC) -shared $(CFLAGS) -o $@ $&lt;<br>
+      <br>
+      my_plugin_2.so:  my_plugin_2.c<br>
+      &nbsp;&nbsp;&nbsp;$(CC) -shared $(CFLAGS) -o $@ $&lt;
+    </code></p>
+  </td></tr></table></blockquote>
+
+  <p>As before, there are lines that define the command "<code>make</code>"
+  should run when it determines that it needs to (re)compile the
+  "<code>.so</code>" file(s).  However, more general terms are used...</p>
+
+  <p>"<code>$(CC)</code>" gets expanded to your default C compiler (e.g.,
+  "<code>gcc</code>").  "<code>-shared</code> and "<code>$(CFLAGS)</code>"
+  are command-line arguments to the compiler, like above.
+  "<code>-o&nbsp;$@</code>" tells the C compiler what the output file
+  should be; "<code>make</code>" replaces "<code>$@</code>" with the name
+  of the target, in this case "<code>my_plugin_1.so</code>" or
+  "<code>my_plugin_2.so</code>". And finally,
+  the last argument is the C file to compile; "<code>make</code>" replaces
+  it with the target's dependency, in this case
+  "<code>my_plugin_1.c</code>" or "<code>my_plugin_2.c</code>".</p>
+
+  </blockquote>
+
+  </blockquote>
+
+  <h3><a name="compiling-windows">Windows</a></h3>
+
+  <blockquote>
+  <p>TBD</p>
+  </blockquote>
+
+  <h3><a name="compiling-osx">Mac OS X</a></h3>
+
+  <blockquote>
+  <p>TBD</p>
+  </blockquote>
+
+</blockquote>
+
+<hr size=1 noshade>
+
+<h2><a name="installing">Installing</a></h2>
+
+<blockquote>
+
+  <h3><a name="installing-linux">Linux and other Unix-like Platforms</a></h3>
+
+  <blockquote>
+  <p>Use the "<code>tp-magic-config</code>" command-line tool, supplied as
+  part of Tux&nbsp;Paint &mdash; or in some cases, as part of a "Tux
+  Paint 'Magic' Tool Plugin Development package" &mdash; to determine
+  where your plugins' files should go.</p>
+
+  <h4>Shared Object</h4>
+
+  <blockquote>
+
+  <p>Use "<code>tp-magic-config&nbsp;--pluginprefix</code>"
+  to determine where the plugin shared&nbsp;object ("<code>.so</code>")
+  files should be installed.  The value returned by this command will be
+  the global location where the installed copy of Tux&nbsp;Paint looks
+  for plugins (e.g., "<code>/usr/lib/tuxpaint/plugins</code>").</p>
+
+  <p>Alternatively, you may use
+  "<code>tp-magic-config&nbsp;--localpluginprefix</code>" to find out where
+  Tux&nbsp;Paint expects to find local plugins for the current user (e.g.,
+  "<code>/home/<i>username</i>/.tuxpaint/plugins</code>").</p>
+
+  <p>As stand-alone commands, using the BASH shell, for example:</p>
+
+  <blockquote>
+    <p><code>
+      # cp my_plugin.so `tp-magic-config --pluginprefix`<br>
+      # chmod 644 `tp-magic-config --pluginprefix`/my_plugin.so<br>
+    </code></p>
+  </blockquote>
+
+  <p><b>Note:</b> See the <a href="#grave">note above regarding the
+  "<font size=+1><b>`</b></font>" (grave) character</a>.</p>
+
+  </blockquote>
+
+  <h4>Documentation</h4>
+
+  <blockquote>
+  <p>Use the "<code>tp-magic-config&nbsp;--plugindocprefix</code>"
+  command to determine where documentation for your "Magic" tools should go.
+  The value returned by this command will be the location where the
+  documentation to the installed copy of Tux&nbsp;Paint is stored.
+  The main documentation includes a link to a folder where "Magic" tools'
+  documentation is expected to be installed</p>
+  (e.g., "<code>/usr/share/doc/tuxpaint/magic-docs</code>").</p>
+
+  <p><b>Note:</b> It's best to include both HTML and plain-text versions
+  of your documentation.  An "<code>html</code>" subdirectory exists within
+  the "<code>magic-docs</code>" directory, and is where the HTML versions
+  should go.</p>
+
+  <p>As stand-alone commands, using the BASH shell, for example:</p>
+
+  <blockquote>
+    <p><code>
+      # cp my_plugin.html `tp-magic-config --plugindocprefix`/html<br>
+      # cp my_plugin.txt `tp-magic-config --plugindocprefix`
+    </code></p>
+  </blockquote>
+
+  <p><b>Note:</b> See the <a href="#grave">note above regarding the
+  "<font size=+1><b>`</b></font>" (grave) character</a>.</p>
+
+  <p><b>Note:</b> Currently, there is no "<code>--localplugindocprefix</code>"
+  option.</p>
+
+  </blockquote>
+
+  <h4>Icons, Sounds and other Data Files</h4>
+
+  <blockquote>
+
+  <p>Use the "<code>tp-magic-config&nbsp;--dataprefix</code>"
+  command, supplied as part of Tux&nbsp;Paint, to determine where data files
+  (PNG icon, Ogg&nbsp;Vorbis sound effects, etc.) should be installed.
+  The value returned by this command will be the same as the value of the
+  "<code>data_directory</code>" string stored within the
+  "<code>magic_api</code>" structure that your plugin's functions receive
+  (e.g., "<code>/usr/share/tuxpaint/</code>").</p>
+
+  <p>For locally-installed plugins (for the current user only), use
+  "<code>tp-magic-config&nbsp;--localdataprefix</code>".  It will return the
+  value of "<code>data_directory</code>" string that locally-installed
+  plugins will see within their "<code>magic_api</code>" structure
+  (e.g., "<code>/home/<i>username</i>/.tuxpaint/plugins/data/</code>").</p>
+
+  <p><b>Note:</b> Tux&nbsp;Paint's default Magic tool plugins install their
+  data within "<code>magic</code>" subdirectories of Tux&nbsp;Paint's
+  "<code>images</code>" and "<code>sounds</code>" data directories (e.g.,
+  "<code>/usr/share/tuxpaint/images/magic/</code>").  You are encouraged to
+  do the same.</p>
+
+  <p>As stand-alone commands, using the BASH shell, for example:</p>
+
+  <blockquote>
+    <p><code>
+      # cp my_plugin_icon.png `tp-magic-config --dataprefix`/images/magic/<br>
+      # chmod 644 `tp-magic-config --dataprefix`/images/magic/my_plugin_icon.png
+    </code></p>
+  </blockquote>
+
+  <p><b>Note:</b> See the <a href="#grave">note above regarding the
+  "<font size=+1><b>`</b></font>" (grave) character</a>.</p>
+
+  </blockquote>
+
+  <h4>Putting it Together in a Makefile</h4>
+
+  <blockquote>
+
+  <p>A snippet from a more generalized Makefile might look like this:</p>
+
+  <blockquote><table border=1 cellspacing=0 cellpadding=4><tr><td>
+    <p><code>
+      PLUGINPREFIX=$(shell tp-magic-config --pluginprefix)<br>
+      PLUGINDOCPREFIX=$(shell tp-magic-config --plugindocprefix)<br>
+      DATAPREFIX=$(shell tp-magic-config --dataprefix)<br>
+      <br>
+      install:<br>
+      &nbsp;&nbsp;&nbsp;#<br>
+      &nbsp;&nbsp;&nbsp;# Install plugin<br>
+      &nbsp;&nbsp;&nbsp;mkdir -p $(PLUGINPREFIX)<br>
+      &nbsp;&nbsp;&nbsp;cp *.so $(PLUGINPREFIX)/<br>
+      &nbsp;&nbsp;&nbsp;chmod 644 $(PLUGINPREFIX)/*.so<br>
+      &nbsp;&nbsp;&nbsp;#<br>
+      &nbsp;&nbsp;&nbsp;# Install icons<br>
+      &nbsp;&nbsp;&nbsp;mkdir -p $(DATAPREFIX)/images/magic<br>
+      &nbsp;&nbsp;&nbsp;cp icons/*.png $(DATAPREFIX)/images/magic/<br>
+      &nbsp;&nbsp;&nbsp;chmod 644 $(DATAPREFIX)/images/magic/*.png<br>
+      &nbsp;&nbsp;&nbsp;#<br>
+      &nbsp;&nbsp;&nbsp;# Install sound effects<br>
+      &nbsp;&nbsp;&nbsp;mkdir -p $(DATAPREFIX)/sounds/magic<br>
+      &nbsp;&nbsp;&nbsp;cp sounds/*.ogg $(DATAPREFIX)/sounds/magic/<br>
+      &nbsp;&nbsp;&nbsp;chmod 644 $(DATAPREFIX)/sounds/magic/*.ogg<br>
+      &nbsp;&nbsp;&nbsp;#<br>
+      &nbsp;&nbsp;&nbsp;# Install docs<br>
+      &nbsp;&nbsp;&nbsp;mkdir -p $(PLUGINDOCPREFIX)/html<br>
+      &nbsp;&nbsp;&nbsp;cp docs/*.html $(PLUGINDOCPREFIX)/html/<br>
+      &nbsp;&nbsp;&nbsp;cp docs/*.txt $(PLUGINDOCPREFIX)/<br>
+      &nbsp;&nbsp;&nbsp;chmod 644 $(PLUGINDOCPREFIX)/html/*.html<br>
+      &nbsp;&nbsp;&nbsp;chmod 644 $(PLUGINDOCPREFIX)/*.txt<br>
+    </code></p>
+  </td></tr></table></blockquote>
+
+  <p>The first three lines set up Makefile variables that contain the
+  paths returned by the "<code>tp-magic-config</code>" command-line tool.
+  (The "<code>$(shell&nbsp;...)</code>" directive is similar to the
+  <a href="#grave"><b><font size=+1>`</font></b> ("grave")</a> character
+  in the BASH shell examples, above.)</p>
+
+  <p>Below that is an "<code>install</code>" target in the Makefile.
+  (Invoked by, for example, "<code>$&nbsp;sudo&nbsp;make&nbsp;install</code>"
+  or "<code>#&nbsp;make&nbsp;install</code>".)</p>
+
+  <p>The "<code>install</code>" target uses "<code>mkdir&nbsp;-p</code>" to
+  make sure that the plugin directory exists, then uses "<code>cp</code>" to
+  copy all plugin ("<code>.so</code>") files into it, and invokes
+  "<code>chmod</code>" to make sure they are readable.</p>
+
+  <p>It then does a similar series of commands to install icon files
+  ("<code>.png</code>"&nbsp;images) and sound effects
+  ("<code>.ogg</code>"&nbsp;files) into subdirectories within Tux&nbsp;Paint's
+  data directory, and to install documentation
+  ("<code>.html</code>" and "<code>.txt</code>" files) within Tux&nbsp;Paint's
+  documentation directory.</p>
+
+  <p><b>Note:</b> The above Makefile example assumes the user will have
+  priveleges to install Tux&nbsp;Paint plugins system-wide.</p>
+
+  </blockquote>
+  </blockquote>
+
+  <h3><a name="installing-windows">Windows</a></h3>
+
+  <blockquote>
+  <p>TBD</p>
+  </blockquote>
+
+  <h3><a name="installing-osx">Mac OS X</a></h3>
+
+  <blockquote>
+  <p>TBD</p>
+  </blockquote>
+
+</blockquote>
+
+<hr size=1 noshade>
+
+<h2><a name="multiple">Creating plugins with multiple effects</a></h2>
+
+<blockquote>
+<p>Plugins for Tux&nbsp;Paint may contain more than one effect.  If you have
+multiple effects that are similar, it may make sense to place them in one
+plugin file, to reduce overhead and share code.</p>
+
+<p>These following suggestions can help you create plugins that contain multiple
+effects:</p>
+
+<ul>
+<li>Use a C "<code>enum</code>" to enumerate the effects, and count them.<br>
+  <blockquote><code>
+    enum {<br>
+    &nbsp;&nbsp;ONE_TOOL,<br>
+    &nbsp;&nbsp;ANOTHER_TOOL,<br>
+    &nbsp;&nbsp;AND_YET_ANOTHER_TOOL,<br>
+    &nbsp;&nbsp;NUM_TOOLS };
+  </code></blockquote>
+
+<li>Return the value of "<code>NUM_TOOLS</code>" when
+  "<code>get_tool_count()</code>" is called, and compare "<code>which</code>"
+  values sent to other functions with the other enumerated values.<br>
+  <br>
+
+<li>Create arrays of "<code>NUM_TOOLS</code>" length to contain effect-specific
+  data.<br>
+  <blockquote><code>
+    char * my_plugin_snd_filenames[NUM_TOOLS] = {<br>
+    &nbsp;&nbsp;"one.ogg", "another.ogg", "yet_another.ogg" };<br>
+    Mix_Chunk * my_plugin_snds[NUM_TOOLS];
+  </code></blockquote>
+
+<li>Use a C "<code>for</code>"-loop to load or create the
+  effect-specific data (such as loading sound effects during your
+  "<code>init()</code>").<br>
+  <blockquote><code>
+    int i;<br>
+    char fname[1024];<br>
+    <br>
+    for (i = 0; i &lt; NUM_TOOLS; i++)<br>
+    {<br>
+    &nbsp;&nbsp;/* Becomes, for example, "/usr/share/tuxpaint/sounds/magic/one.ogg" */<br>
+    &nbsp;&nbsp;<br>
+    &nbsp;&nbsp;snprintf(fname, sizeof(fname), "%s/sounds/magic/%s",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;api->data_prefix, my_plugin_snd_filenames[i];<br>
+    <br>
+    &nbsp;&nbsp;my_plugin_snds[i] = Mix_LoadWAV(fname);<br>
+    }
+  </code></blockquote>
+
+<li>Similarly, do the same to free them later (such as freeing
+  sound effects during your "<code>shutdown()</code>").<br>
+  <blockquote><code>
+    int i;<br>
+    <br>
+    for (i = 0; i &lt; NUM_TOOLS; i++)<br>
+    &nbsp;&nbsp;Mix_FreeChunk(my_plugin_snds[i]);
+  </code></blockquote>
+
+<li>Use "<code>which</code>" values sent to your functions as an
+  index into those arrays (e.g., for playing the appropriate sound effect
+  for a tool).<br>
+  <br>
+
+</ul>
+
+<p><b>Note:</b> Even if your plugin currently contains only one effect,
+it may be useful to follow the steps above so that you can add a new
+variation of an effect with little effort.  ("<code>NUM_TOOLS</code>" will
+simply be '1', your arrays will be of length '1', etc.)</p>
+
+</blockquote>
+
+<hr size=1 noshade>
+
+<h2><a name="examples">Example Code</a></h2>
+
+<blockquote>
+  <p>The C source file
+  "<a href="../tp_magic_example.c"><code>tp_magic_example.c</code></a>" contains
+  a complete example of a plugin with multiple simple effects.</p>
+</blockquote>
+
+<hr size=1 noshade>
+
+<h2><a name="help">Getting Help</a></h2>
+
+<blockquote>
+
+<p>For more information, check the Tux&nbsp;Paint website:
+<a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>,
+and the Simple&nbsp;DirectMedia&nbsp;Layer&nbsp;library website:
+<a href="http://www.libsdl.org/">http://www.libsdl.org/</a>.</p>
+
+<p>Additionally, other Tux&nbsp;Paint developers and users can be found on the
+"<code>tuxpaint-devel</code>" and "<code>tuxpaint-users</code>"
+mailing lists:
+<a href="http://www.tuxpaint.org/lists/">http://www.tuxpaint.org/lists/</a>.</p>
+
+</blockquote>
+
+<hr size=1 noshade>
+
+<h2><a name="glossary">Glossary</a></h2>
+
+<ul>
+<li><b>alpha:</b> See "RGBA"
+<li><b>&amp;:</b> See "ampersand"
+<li><b>ampersand:</b> "<code>&amp;</code>". A symbol in C that allows you to refer to the memory address of a variable; that is, a pointer. (For example, consider "<code>int&nbsp;i;</code>". Later, "<code>&amp;i</code>" refers to the memory where "<code>i</code>" is stored, not the value of "<code>i</code>" itself; it is a 'pointer to "<code>i</code>"'.)
+<li><b>API:</b> Application Programming Interface. <i>TBD</i>
+<li><b>argument:</b> A value sent to a function.
+<li><b>arrow:</b> "<code>-&gt;</code>". A symbol in C that references an element within a pointer to a struct.
+<li><b>backquote:</b> See "grave."
+<li><b>backtick:</b> See "grave."
+<li><b>bit:</b> "Binary digit." Bits are the basic storage unit in a computer's memory, disk, networking, etc. They represent either 0 or 1. (Compared to a decimal digit, which can be anything between 0 and 9.) Just as a series of decimal digits can represent a larger number (e.g., "1" and "5" is fifteen (15)), so can bits (e.g., "1" and "0", is two). In decimal, we go from right to left: ones place, tens place, hundreds place, thousands place, etc. In binary, it is: ones place, twos place, fours place, eights place, etc. (See also "byte.")
+<li><b>blue:</b> See "RGBA"
+<li><b>boolean 'or':</b> A mathematical operation that results in a true value if either operand is true. ("1&nbsp;|&nbsp;0", "0&nbsp;|&nbsp;1" and "1&nbsp;|&nbsp;1" all result in "1". "0&nbsp;|&nbsp;0" results in "0".)
+<li><b>|:</b> See "boolean 'or'"
+<li><b>.:</b> See "dot"
+<li><b>`:</b> See "grave."
+<li><b>*:</b> See "star"
+<li><b>byte:</b> A unit of memory made up of 8 bits. As a signed value, it can represent -128 through 127. As an unsigned value, it can represent 0 through 255. As a series of bits, for example, the byte "00001100" represents the decimal value 12.
+<li><b>callback:</b> <i>TBD</i>
+<li><b>C enumeration:</b> A construct in C that allows you to label numeric values (usually starting at 0 and incrementing by one). (e.g., "<code>enum { ONE, TWO, THREE };</code>"
+<li><b>C function:</b> <i>TBD</i>
+<li><b>C header file:</b> <i>TBD</i>
+<li><b>channel:</b> <i>TBD</i>
+<li><b>click:</b> The action of pressing a button on a mouse.
+<li><b>coordinates:</b> A set of numbers corresponding to a physical position; for example, in a two-dimensional (2D) image, "X" and "Y" coordinates specify the position across (left-to-right) and down the image, respectively. In SDL, the coordinates (0,0) is the top-leftmost pixel of a surface.
+<li><b>C pointer:</b> A variable that contains the location of a piece of memory; usually used to 'point' to another variable. Since C functions can only return one value as a result, pointers are often sent to functions to allow the function to change the values of multiple variables. (For example, Tux&nbsp;Paint's "<code>rgbtohsv()</code>" and "<code>hsvtorgb()</code>".)
+<li><b>C structure:</b> A construct in C that allows you to declare a new variable 'type' which may contain other types within. For example, SDL's "<code>SDL_Rect</code>" contains four integer values, the coordinates of the rectangle (X,Y), and its dimensions (width and height).
+<li><b>#define:</b> A C statement that defines a substitution that can occur later in the code. Generally used for constant values (e.g., "<code>#define&nbsp;RADIUS&nbsp;16</code>"; all instances of "<code>RADIUS</code>" will be replaced with "<code>16</code>"), but can also be used to create macros. Typically placed within C header files.
+<li><b>dimensions:</b> The size of an object, in terms of its width (left to right) and height (top to bottom).
+<li><b>.dll:</b> See "Shared Object"
+<li><b>dot:</b> "<code>.</code>". A symbol in C that references an element within a struct.
+<li><b>drag:</b> The action of moving a mouse while the button remains held.
+<li><b>element:</b> A variable stored within a C structure. (Example: "<code>w</code>" and "<code>h</code>" elements of SDL_Surface store the surface's width and height, respectively.)
+<li><b>enum:</b> See "C enumeration"
+<li><b>float:</b> See "floating point"
+<li><b>floating point:</b> <i>TBD</i>
+<li><b>format:</b> An <code>SDL_Surface</code> element (a pointer to an <code>SDL_PixelFormat</code> structure) that contains information about a surface; for example, the number of bits used to represent each pixel). (See also the "<code>SDL_PixelFormat(3)</code> <i>man&nbsp;page</i>)
+<li><b>free():</b> A C function that frees (deallocates) memory allocated by other C functions (such as "<code>strdup()</code>").
+<li><b>function:</b> See "C function"
+<li><b>gcc:</b> The GNU C compiler, a portable Open&nbsp;Source compiler. (See also the "<code>gcc(1)</code>" <i>man&nbsp;page</i>)
+<li><b>GNU C Compiler:</b> See "gcc"
+<li><b>grave:</b> The "<code><font size=+1>`</font></code>" character; used by the BASH shell to use the output of a command as the command-line arguments to another.
+<li><b>green:</b> See "RGBA"
+<li><b>-&gt;:</b> See "arrow"
+<li><b>.h:</b> See "C header file"
+<li><b>header:</b> See "C header file"
+<li><b>header file:</b> See "C header file"
+<li><b>HSV:</b> Hue, Saturation and Value. <i>TBD</i>
+<li><b>hue:</b> See "HSV"
+<li><b>IMG_Load():</b> An SDL_image function that loads an image file (e.g., a PNG) and returns it as an "<code>SDL_Surface&nbsp;*</code>".
+<li><b>#include:</b> A C statement that asks the compiler to read the contents of another file (usually a header file).
+<li><b>int:</b> See "integer"
+<li><b>integer:</b> <i>TBD</i>
+<li><b>libSDL:</b> See "Simple DirectMedia Layer"
+<li><b>linear:</b> <i>TBD</i>
+<li><b>macro:</b> A C construct that looks similar to a C function, but is simply a #define that is expanded 'inline'. For example, if you declared the macro "<code>#define ADD(A,B) ((A)+(B))</code>", and then used it with "<code>c = ADD(1,2);</code>", that line of code would literally expand to "<code>c = ((1) + (2));</code>", or more simply, "<code>c = 1 + 2;</code>".
+<li><b>magic_api:</b> A C structure that is passed along to a plugin's functions that exposes data and functions within the running copy of Tux&nbsp;Paint.
+<li><b>make:</b> A utility that automatically determines which pieces of a larger program need to be recompiled, and issues the commands to recompile them. (See also "Makefile")
+<li><b>Makefile:</b> A text file used by the "make" utility; it describes the relationships among files in your program, and the commands for updating each file. (For example, to compile a human-readable source-code file into a computer-readable executable program file.)
+<li><b>Magic tool</b>: One of a number of effects or drawing tools in Tux&nbsp;Paint, made available via the "Magic" tool button.
+<li><b>Mix_Chunk&nbsp;*:</b> (A pointer to) a C structure defined by SDL_mixer that contains a sound.
+<li><b>Mix_FreeChunk():</b> An SDL_mixer function that frees (deallocates) memory allocated for an SDL_mixer sound 'chunk' ("<code>Mix_Chunk&nbsp;*</code>").
+<li><b>Mix_LoadWAV():</b> An SDL_mixer function that loads a sound file (WAV, Ogg&nbsp;Vorbis, etc.) and returns it as a "<code>Mix_Chunk&nbsp;*</code>".
+<li><b>namespace:</b> <i>TBD</i>
+<li><b>OGG</b>: See "Ogg Vorbis"
+<li><b>Ogg&nbsp;Vorbis:</b> <i>TBD</i> (See also: "WAV")
+<li><b>Plugin</b>: <i>TBD</i>
+<li><b>PNG:</b> Portable Network Graphics. An extensible file format for the lossless, portable, well-compressed storage of raster images. It's the file format Tux&nbsp;Paint uses to save images, and for its brushes and stamps. It's an easy way to store 32bpp RGBA images (24bpp true color with full 8bpp alpha transparency), excellent for use in graphics programs like Tux&nbsp;Paint. (See also the "<code>png(5)</code> <i>man&nbsp;page</i>)
+<li><b>pointer:</b> See "C pointer"
+<li><b>red:</b> See "RGBA"
+<li><b>release:</b> The action of releasing a button on a mouse.
+<li><b>RGBA:</b> "Red, Green, Blue, Alpha." <i>TBD</i>
+<li><b>RGB:</b> See "RBGA"
+<li><b>saturation:</b> See "HSV"
+<li><b>SDL:</b> See "Simple DirectMedia Layer"
+<li><b>SDL_FreeSurface():</b> An libSDL function that frees (deallocates) memory allocated for an SDL surface ("<code>SDL_Surface&nbsp;*</code>"). (See also the "<code>SDL_FreeSurface(3)</code>" <i>man&nbsp;page</i>)
+<li><b>SDL_GetRGB():</b> A libSDL function that, given a <code>Uint32</code> pixel value (e.g., one returned from the Tux&nbsp;Paint's Magic tool API helper function "<code>getpixel()</code>"), the format of the surface the pixel was taken from, and pointers to three <code>Uint8</code> variables, will place the Red, Green and Blue (RGB) values of the pixel into the three <code>Uint8</code> variables. (Example: "<code>SDL_GetRGB(getpixel(surf,&nbsp;x,&nbsp;y), surf-&gt;format, &amp;r, &amp;g, &amp;b);</code>".) (See also the "<code>SDL_GetRGB(3)</code>" <i>man&nbsp;page</i>)
+<li><b>SDL_MapRGB():</b> A libSDL function that, given the format of a surface and <code>Uint8</code> values representing Red, Green and Blue values for a pixel, returns a <code>Uint32</code> pixel value that can be placed in the surface (e.g., using Tux&nbsp;Paint's Magic tool API helper function "<code>putpixel()</code>"). (Example: "<code>putpixel(surf, x, y, SDL_MapRGB(surf-&gt;format, r, g, b));</code>".) (See also the "<code>SDL_MapRGB(3)</code>" <i>man&nbsp;page</i>)
+<li><b>SDL_image:</b> A library on top of libSDL that can load various kinds of image files (e.g., PNG) and return them as an "<code>SDL_Surface&nbsp;*</code>".
+<li><b>SDL_mixer:</b> A library on top of libSDL that can load various kinds of sound files (WAV, Ogg&nbsp;Vorbis, etc.) and play back multiple sounds at once (mix them).
+<li><b>SDL_Rect:</b> A C structure defined by libSDL that represents a rectangular area. It contains elements representing the coordinates of the top left corner of the rectange (x,y) and the dimensions of the rectangle (w,h). (See also the "<code>SDL_Rect(3)</code>" <i>man&nbsp;page</i>)
+<li><b>SDL_Surface&nbsp;*:</b> (A pointer to) a C structure defined by libSDL that contains a drawing surface. (See also the "<code>SDL_Surface(3)</code>" <i>man&nbsp;page</i>)
+<li><b>Shared Object:</b> A piece of code that's compiled separately from the main application, and loaded dynamically, at runtime.
+<li><b>Simple DirectMedia Layer:</b> A programming library that allows programs portable low level access to a video framebuffer, audio output, mouse, and keyboard. (See also: <a href="http://www.libsdl.org/">http://www.libsdl.org/</a>)
+<li><b>snprintf():</b> A C function, related to "printf()", which takes a 'format' string and one or more additional arguments, and puts them together. "snprintf()" takes the resulting output and stores it into a string, making sure not to go beyond the string's buffer size (which must also be supplied). For example, assume a string "char&nbsp;str[20];" has been declared; "snprintf(str, 20, "Name: %s, Age: %d", "Bill", "32");" will store "Name: Bill, Age: 32" into 'str'. (See also the "<code>snprintf(3)</code>" <i>man&nbsp;page</i>)
+<li><b>.so:</b> See "Shared Object"
+<li><b>sRBG:</b> See "RGBA"
+<li><b>star:</b> "<code>*</code>". A symbol in C that, when used in the declaration of variables (e.g., arguments to a function), denotes that the variable is a pointer. (For example, "<code>int&nbsp;*&nbsp;p;</code>" means that "<code>p</code>" is a <i>pointer</i> to an integer.) When used next to a pointer, it 'dereferences' the variable. (For example, later "<code>*p&nbsp;=&nbsp;50;</code>" assigns the value of 50 to the memory that "<code>p</code>" points to; it does not change the value of "<code>p</code>", which is still a pointer to an integer. In essence, it changed the integer that's being pointed to.)
+<li><b>strdup():</b> A C function that allocates enough memory to store a copy of a string, copies the string to it, and returns a "<code>char&nbsp;*</code>" pointer to the new copy. (See also the "<code>strdup(3)</code>" <i>man&nbsp;page</i>)
+<li><b>struct:</b> See "C structure"
+<li><b>The GIMP</b>: An Open&nbsp;Source image manipulation and paint program.
+<li><b>tp_magic_api.h:</b> A header file that defines Tux&nbsp;Paint's Magic tool API.  Plugins must '#include' it.
+<li><b>tp-magic-config:</b> A command-line program that provides information about the installed version of Tux&nbsp;Paint to plugin developers (such as what C compiler flags they should compile with, and where plugin shared objects and data files should be installed). (See also the "<code>tp-magic-config(3)</code>" <i>man&nbsp;page</i>.)
+<li><b>Uint32:</b> A 32-bit, unsigned integer (defined by libSDL). In other words, four bytes that can represent 0 through 4294967295. (Typically used to hold enough information to store three or four bytes representing a pixel's color; i.e., RBGA value).
+<li><b>Uint8:</b> An 8-bit, unsigned integer (defined by libSDL). In other words, a byte that can represent 0 through 255.
+<li><b>unsigned:</b> In C, a variable that can store a numeric value can be declared as either "signed" (the default), or "unsigned". In the former case, one bit of the value is used to denote the sign of the value (either positive or negative). In the latter case, the value can only be positive, but benefits from one extra bit of storage for the number. A signed byte (8 bits), for example, can represent any number between -128 and 127. An unsigned byte can go up to 255, but it cannot go below 0. For the purposes of graphics in SDL, unsigned values should be used for RGB values, since each channel (red, green and blue) may be between 0 (off) and 255 (brightest).
+<li><b>value:</b> See "HSV"
+<li><b>variable:</b> A construct in computer programming that contains a value which can be referenced again later by referring to the variable's name, and typically changed later. For example, a variable to hold someone's age could be declared as an integer: "int&nbsp;a;". It can be examined later: "if (a&nbsp;&gt;=&nbsp;18) { /* they are an adult */ } else { /* they are not an adult */ }".
+<li><b>WAV:</b> <i>TBD</i> (See also "Ogg Vorbis")
+<li><b>(w,h):</b> See "Dimensions"
+<li><b>(x,y):</b> See "Coordinates"
+</ul>
+
+</body></html>
+

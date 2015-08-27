@@ -1,0 +1,1489 @@
+# Greek translation tuxpaint.
+# Copyright (C) 2014 the tuxpaint team.
+# This file is distributed under the same license as the tuxpaint package.
+# Κυριακή Σεραφείμ <pse04178@rhodes.aegean.gr>, 2009. (inactive)
+# Yannis Kaskamanidis <kiolalis@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxpaint\n"
+"Report-Msgid-Bugs-To: tuxpaint-i18n@lists.sourceforge.net\n"
+"POT-Creation-Date: 2014-06-03 21:03+0200\n"
+"PO-Revision-Date: 2014-07-14 19:47+0200\n"
+"Last-Translator: Yannis Kaskamanidis <kiolalis@gmail.com>\n"
+"Language-Team: \n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Bookmarks: 130,170,-1,-1,-1,-1,-1,-1,-1,-1\n"
+"X-Generator: Poedit 1.6.6\n"
+
+#. Response to Black (0, 0, 0) color selected
+#: ../colors.h:86
+msgid "Black!"
+msgstr "Μαύρο!"
+
+#. Response to Dark grey (128, 128, 128) color selected
+#: ../colors.h:89
+msgid "Dark grey! Some people spell it “dark gray”."
+msgstr "Σκούρο γκρίζο!"
+
+#. Response to Light grey (192, 192, 192) color selected
+#: ../colors.h:92
+msgid "Light grey! Some people spell it “light gray”."
+msgstr "Ανοιχτό γκρίζο!"
+
+#. Response to White (255, 255, 255) color selected
+#: ../colors.h:95
+msgid "White!"
+msgstr "Άσπρο!"
+
+#. Response to Red (255, 0, 0) color selected
+#: ../colors.h:98
+msgid "Red!"
+msgstr "Κόκκινο!"
+
+#. Response to Orange (255, 128, 0) color selected
+#: ../colors.h:101
+msgid "Orange!"
+msgstr "Πορτοκαλί!"
+
+#. Response to Yellow (255, 255, 0) color selected
+#: ../colors.h:104
+msgid "Yellow!"
+msgstr "Κίτρινο!"
+
+#. Response to Light green (160, 228, 128) color selected
+#: ../colors.h:107
+msgid "Light green!"
+msgstr "Ανοιχτό πράσινο!"
+
+#. Response to Dark green (33, 148, 70) color selected
+#: ../colors.h:110
+msgid "Dark green!"
+msgstr "Σκούρο πράσινο!"
+
+#. Response to "Sky" blue (138, 168, 205) color selected
+#: ../colors.h:113
+msgid "Sky blue!"
+msgstr " Μπλέ του ουρανού!"
+
+#. Response to Blue (50, 100, 255) color selected
+#: ../colors.h:116
+msgid "Blue!"
+msgstr "Μπλε!"
+
+#. Response to Lavender (186, 157, 255) color selected
+#: ../colors.h:119
+msgid "Lavender!"
+msgstr "Λεβάντα!"
+
+#. Response to Purple (128, 0, 128) color selected
+#: ../colors.h:122
+msgid "Purple!"
+msgstr "Μωβ!"
+
+#. Response to Pink (255, 165, 211) color selected
+#: ../colors.h:125
+msgid "Pink!"
+msgstr "Ροζ!"
+
+#. Response to Brown (128, 80, 0) color selected
+#: ../colors.h:128
+msgid "Brown!"
+msgstr "Καφέ!"
+
+#. Response to Tan (226, 189, 166) color selected
+#: ../colors.h:131
+msgid "Tan!"
+msgstr "Γαλάζιο!"
+
+#. Response to Beige (247, 228, 219) color selected
+#: ../colors.h:134
+msgid "Beige!"
+msgstr "Μπέζ!"
+
+#. First, the blacklist. We list font families that can crash Tux Paint
+#. via bugs in the SDL_ttf library. We also test fonts to be sure that
+#. they have both uppercase and lowercase letters. Note that we do not
+#. test for "Aa", because it is OK if uppercase and lowercase are the
+#. same (but not nice -- such fonts get a low score later).
+#.
+#. Most locales leave the blacklist strings alone: "QX" and "qx"
+#. (it is less destructive to use the scoring strings instead)
+#.
+#. Locales that absolutely require all fonts to have some
+#. extra characters should use "QX..." and "qx...", where "..."
+#. are some characters you absolutely require in all fonts.
+#.
+#. Locales with absolutely NO use for ASCII may use "..." and "...",
+#. where "..." are some characters you absolutely require in
+#. all fonts. This would be the case for a locale in which it is
+#. impossible for a user to type ASCII letters.
+#.
+#. Most translators should use scoring instead.
+#: ../dirwalk.c:168
+msgid "qx"
+msgstr "qx"
+
+#: ../dirwalk.c:168
+msgid "QX"
+msgstr "QX"
+
+#. TODO: weight specification
+#. Now we score fonts to ensure that the best ones will be placed at
+#. the top of the list. The user will see them first. This sorting is
+#. especially important for users who have scroll buttons disabled.
+#. Translators should do whatever is needed to put crummy fonts last.
+#. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
+#: ../dirwalk.c:195
+msgid "oO"
+msgstr "οΟ"
+
+#. common punctuation (e.g., '?', '!', '.', ',', etc.)
+#: ../dirwalk.c:198
+msgid ",.?!"
+msgstr ",.?!"
+
+#. uncommon punctuation (e.g., '@', '#', '*', etc.)
+#: ../dirwalk.c:201
+msgid "`\\%_@$~#{<(^&*"
+msgstr "`\\%_@$~#{}<>^&*"
+
+#. digits (e.g., '0', '1' and '7')
+#: ../dirwalk.c:204
+msgid "017"
+msgstr "017"
+
+#. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
+#: ../dirwalk.c:207
+msgid "O0"
+msgstr "O0"
+
+#. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
+#: ../dirwalk.c:210
+msgid "1Il|"
+msgstr "1Il|"
+
+#: ../dirwalk.c:214
+msgid "<1>spare-1a"
+msgstr "<1>τετράγωνο-1a"
+
+#: ../dirwalk.c:215
+msgid "<1>spare-1b"
+msgstr "<1>τετράγωνο-1b"
+
+#: ../dirwalk.c:216
+msgid "<9>spare-9a"
+msgstr "<9>τετράγωνο-9a"
+
+#: ../dirwalk.c:217
+msgid "<9>spare-9b"
+msgstr "<9>τετράγωνο-9b"
+
+#. Congratulations #1
+#: ../great.h:37
+msgid "Great!"
+msgstr "Μπράβο!"
+
+#. Congratulations #2
+#: ../great.h:40
+msgid "Cool!"
+msgstr "Ωραία!"
+
+#. Congratulations #3
+#: ../great.h:43
+msgid "Keep it up!"
+msgstr "Καλά πας, συνέχισε!"
+
+#. Congratulations #4
+#: ../great.h:46
+msgid "Good job!"
+msgstr "Συγχαρητήρια!"
+
+#. Input Method: English mode
+#: ../im.c:75
+msgid "English"
+msgstr "Αγγλικά"
+
+#. Input Method: Japanese Romanized Hiragana mode
+#: ../im.c:78
+msgid "Hiragana"
+msgstr "Πίνακας ιδεογραμμάτων Hiragana."
+
+#. Input Method: Japanese Romanized Katakana mode
+#: ../im.c:81
+msgid "Katakana"
+msgstr "Πίνακας ιδεογραμμάτων Katakana."
+
+#. Input Method: Korean Hangul 2-Bul mode
+#: ../im.c:84
+msgid "Hangul"
+msgstr "Κορεατικό αλφάβητο (Hangul)."
+
+#. Input Method: Thai mode
+#: ../im.c:87
+msgid "Thai"
+msgstr "Ταϋλανδέζικα"
+
+#. Input Method: Traditional Chinese mode
+#: ../im.c:90
+msgid "ZH_TW"
+msgstr "Κινέζικα"
+
+#. Square shape tool (4 equally-lengthed sides at right angles)
+#: ../shapes.h:171 ../shapes.h:172
+msgid "Square"
+msgstr "Τετράγωνο"
+
+#. Rectangle shape tool (4 sides at right angles)
+#: ../shapes.h:175 ../shapes.h:176
+msgid "Rectangle"
+msgstr "Ορθογώνιο"
+
+#. Circle shape tool (X radius and Y radius are the same)
+#: ../shapes.h:179 ../shapes.h:180
+msgid "Circle"
+msgstr "Κύκλος"
+
+#. Ellipse shape tool (X radius and Y radius may differ)
+#: ../shapes.h:183 ../shapes.h:184
+msgid "Ellipse"
+msgstr "Έλλειψη"
+
+#. Triangle shape tool (3 sides)
+#: ../shapes.h:187 ../shapes.h:188
+msgid "Triangle"
+msgstr "Τρίγωνο"
+
+#. Pentagone shape tool (5 sides)
+#: ../shapes.h:191 ../shapes.h:192
+msgid "Pentagon"
+msgstr "Πεντάγωνο"
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:195 ../shapes.h:196
+msgid "Rhombus"
+msgstr "Ρόμβος"
+
+#. Octagon shape tool (8 sides)
+#: ../shapes.h:199 ../shapes.h:200
+msgid "Octagon"
+msgstr "Οκτάγωνο"
+
+#. Description of a square
+#: ../shapes.h:208 ../shapes.h:209
+msgid "A square is a rectangle with four equal sides."
+msgstr "Το τετράγωνο είναι ορθογώνιο με τις τέσσερις πλευρές ίσες."
+
+#. Description of a rectangle
+#: ../shapes.h:212 ../shapes.h:213
+msgid "A rectangle has four sides and four right angles."
+msgstr ""
+"Το ορθογώνιο παραλληλόγραμμο έχει τέσσερις πλευρές και τέσσερις ορθές γωνίες."
+
+#: ../shapes.h:217 ../shapes.h:219
+msgid ""
+"A circle is a curve where all points have the same distance from the center."
+msgstr ""
+"Ο κύκλος είναι μια καμπύλη γραμμή της οποίας όλα τα σημεία απέχουν το ίδιο "
+"από το κέντρο."
+
+#. Description of an ellipse
+#: ../shapes.h:222 ../shapes.h:223
+msgid "An ellipse is a stretched circle."
+msgstr "Η έλλειψη είναι ένας τεντωμένος κύκλος."
+
+#. Description of a triangle
+#: ../shapes.h:226 ../shapes.h:227
+msgid "A triangle has three sides."
+msgstr "Το τρίγωνο έχει τρεις πλευρές."
+
+#. Description of a pentagon
+#: ../shapes.h:230 ../shapes.h:231
+msgid "A pentagon has five sides."
+msgstr "Το πεντάγωνο έχει πέντε πλευρές."
+
+#: ../shapes.h:235 ../shapes.h:237
+msgid "A rhombus has four equal sides, and opposite sides are parallel."
+msgstr ""
+"Ένας ρόμβος έχει τέσσερις ίσες πλευρές και οι απέναντι πλευρές είναι "
+"παράλληλες."
+
+#: ../shapes.h:241 ../shapes.h:243
+msgid "An octagon has eight equal sides."
+msgstr "Ένα κανονικό οκτάγωνο έχει οκτώ ίσες πλευρές."
+
+#. Title of tool selector (buttons down the left)
+#: ../titles.h:56
+msgid "Tools"
+msgstr "Εργαλεία"
+
+#. Title of color palette (buttons across the bottom)
+#: ../titles.h:59
+msgid "Colors"
+msgstr "Χρώματα"
+
+#. Title of brush selector (buttons down the right for paint and line tools)
+#: ../titles.h:62
+msgid "Brushes"
+msgstr "Πινέλα"
+
+#. Title of eraser selector (buttons down the right for eraser tool)
+#: ../titles.h:65
+msgid "Erasers"
+msgstr "Σβηστήρες"
+
+#. Title of stamp selector (buttons down the right for stamps tool)
+#: ../titles.h:68
+msgid "Stamps"
+msgstr "Σφραγίδες"
+
+#. Title of shape selector (buttons down the right for shapes tool)
+#. Shape creation tool (square, circle, etc.)
+#: ../titles.h:71 ../tools.h:71
+msgid "Shapes"
+msgstr "Σχήματα"
+
+#. Title of font selector (buttons down the right for text and label tools)
+#: ../titles.h:74
+msgid "Letters"
+msgstr "Γράμματα"
+
+#. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
+#. "Magic" effects tools (blur, flip image, etc.)
+#: ../titles.h:77 ../tools.h:83
+msgid "Magic"
+msgstr "Μαγικά"
+
+#. Freehand painting tool
+#: ../tools.h:62
+msgid "Paint"
+msgstr "Πινέλο"
+
+#. Stamp tool (aka Rubber Stamps)
+#: ../tools.h:65
+msgid "Stamp"
+msgstr "Σφραγίδα"
+
+#. Line drawing tool
+#: ../tools.h:68
+msgid "Lines"
+msgstr "Γραμμές"
+
+#. Text tool
+#: ../tools.h:74
+msgid "Text"
+msgstr "Κείμενο"
+
+#. Label tool
+#: ../tools.h:77
+msgid "Label"
+msgstr "Ετικέτα"
+
+#. Undo last action
+#: ../tools.h:86
+msgid "Undo"
+msgstr "Αναίρεση"
+
+#. Redo undone action
+#: ../tools.h:89
+msgid "Redo"
+msgstr "Ακύρωση"
+
+#. Eraser tool
+#: ../tools.h:92
+msgid "Eraser"
+msgstr "Σβήστρα"
+
+#. Start a new picture
+#: ../tools.h:95
+msgid "New"
+msgstr "Νέο"
+
+#. Open a saved picture
+#. buttons for the file open dialog
+#. Open dialog: 'Open' button, to load the selected picture
+#: ../tools.h:98 ../tuxpaint.c:7631
+msgid "Open"
+msgstr "Άνοιγμα"
+
+#. Save the current picture
+#: ../tools.h:101
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#. Print the current picture
+#: ../tools.h:104
+msgid "Print"
+msgstr "Εκτύπωση"
+
+#. Quit/exit Tux Paint application
+#: ../tools.h:107
+msgid "Quit"
+msgstr "Έξοδος"
+
+#. Paint tool instructions
+#: ../tools.h:115
+msgid "Pick a color and a brush shape to draw with."
+msgstr "Διάλεξε  χρώμα και μορφή πινέλου για να ζωγραφίσεις."
+
+#. Stamp tool instructions
+#: ../tools.h:118
+msgid "Pick a picture to stamp around your drawing."
+msgstr ""
+"Διάλεξε μία στάμπα για να την τοποθετήσεις σε διάφορα σημεία του σχεδίου σου."
+
+#. Line tool instructions
+#: ../tools.h:121
+msgid "Click to start drawing a line. Let go to complete it."
+msgstr ""
+"Κάνε κλικ για να αρχίσεις να ζωγραφίζεις μία γραμμή. Άφησε το πλήκτρο του "
+"ποντικιού όταν έχεις ολοκληρώσει τη γραμμή."
+
+#. Shape tool instructions
+#: ../tools.h:124
+msgid ""
+"Pick a shape. Click to pick the center, drag, then let go when it is the "
+"size you want. Move around to rotate it, and click to draw it."
+msgstr ""
+"Διάλεξε ένα σχήμα. Κάνε κλικ για να επιλέξεις το κέντρου του, σύρε το με το "
+"ποντίκι και άφησε το πλήκτρο όταν το σχήμα έχει το μέγεθος που θέλεις. "
+"Κίνησε το ποντίκι γύρω για να περιστρέψεις το σχήμα και κάνε κλικ για να "
+"ζωγραφιστεί."
+
+#. Text tool instructions
+#: ../tools.h:127
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text."
+msgstr ""
+"Διάλεξε στυλ κειμένου. Κάνε κλικ στη ζωγραφιά σου και άρχισε να γράφεις. "
+"Πάτησε [Enter] ή [Tab] για να ολοκληρώσεις το κείμενο."
+
+#. Label tool instructions
+#: ../tools.h:130
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text. By using the selector button "
+"and clicking an exist label, you can move it, edit it and change its text "
+"style."
+msgstr ""
+"Διάλεξε στυλ κειμένου. Κάνε κλικ στη ζωγραφιά σου και άρχισε να γράφεις. "
+"Πάτησε [Enter] ή [Tab] για να ολοκληρώσεις το κείμενο. Χρησιμοποιώντας το "
+"πλήκτρο επιλογής και κάνοντας κλικ σε μια υπάρχουσα ετικέτα, μπορείς να τη "
+"μετακινήσεις, να την επεξεργαστείς ή να αλλάξεις το στυλ κειμένου."
+
+#. Magic tool instruction
+#: ../tools.h:136
+msgid "Pick a magical effect to use on your drawing!"
+msgstr "Διάλεξε ένα μαγικό εφφέ για να χρησιμοποιήσεις στο σχέδιό σου!"
+
+#. Response to 'undo' action
+#: ../tools.h:139
+msgid "Undo!"
+msgstr "Αναίρεση!"
+
+#. Response to 'redo' action
+#: ../tools.h:142
+msgid "Redo!"
+msgstr "Επανάληψη!"
+
+#. Eraser tool
+#: ../tools.h:145
+msgid "Eraser!"
+msgstr "Σβηστήρα!"
+
+#. Response to 'start a new image' action
+#: ../tools.h:148
+msgid "Pick a color or picture with which to start a new drawing."
+msgstr "Διάλεξε ένα χρώμα ή μία εικόνα για να ξεκινήσεις ένα νέο σχέδιο."
+
+#. Response to 'open' action (while file dialog is being constructed)
+#: ../tools.h:151
+msgid "Open…"
+msgstr "Άνοιγμα…"
+
+#. Response to 'save' action
+#: ../tools.h:154
+msgid "Your image has been saved!"
+msgstr "Η εικόνα σου αποθηκεύθηκε!"
+
+#. Response to 'print' action (while printing, or print dialog is being used)
+#: ../tools.h:157
+msgid "Printing…"
+msgstr "Εκτύπωση…"
+
+#. Response to 'quit' (exit) action
+#: ../tools.h:160
+msgid "Bye bye!"
+msgstr "Γειά χαρά!"
+
+#. Instruction while using Line tool (after click, before release)
+#: ../tools.h:164
+msgid "Let go of the button to complete the line."
+msgstr "Άφησε το πλήκτρο του ποντικιού για να ολοκληρωθεί η γραμμή."
+
+#. Instruction while using Shape tool (after first click, before release)
+#: ../tools.h:167
+msgid "Hold the button to stretch the shape."
+msgstr "Κράτησε πατημένο το πλήκτρο του ποντικιού για να τεντώσεις το σχήμα."
+
+#. Instruction while finishing Shape tool (after release, during rotation step before second click)
+#: ../tools.h:170
+msgid "Move the mouse to rotate the shape. Click to draw it."
+msgstr ""
+"Κίνησε το ποντίκι για να περιστρέψεις το σχήμα. Κάνε κλικ για να σχεδιαστεί."
+
+#. Notification that 'New' action was aborted (current image would have been lost)
+#: ../tools.h:173
+msgid "OK then… Let’s keep drawing this one!"
+msgstr "Εντάξει λοιπόν… Ας συνεχίσουμε τη σχεδίαση του ίδιου!"
+
+#. Prompt to confirm user wishes to quit
+#: ../tuxpaint.c:2053
+msgid "Do you really want to quit?"
+msgstr "Σίγουρα θέλεις να βγεις από το πρόγραμμα;"
+
+#. Quit prompt positive response (quit)
+#: ../tuxpaint.c:2056
+msgid "Yes, I’m done!"
+msgstr "Ναι, τελείωσα!"
+
+#. Quit prompt negative response (don't quit)
+#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
+msgid "No, take me back!"
+msgstr "Όχι δεν έχω τελειώσει ακόμα!"
+
+#. Current picture is not saved; user is quitting
+#: ../tuxpaint.c:2063
+msgid "If you quit, you’ll lose your picture! Save it?"
+msgstr "Αν βγεις από το πρόγραμμα, θα χαθεί η εικόνα σου! Να αποθηκευτεί;"
+
+#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
+msgid "Yes, save it!"
+msgstr "Ναι, αποθήκευσέ την!"
+
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+msgid "No, don’t bother saving!"
+msgstr "Όχι, μην ασχοληθείς με την αποθήκευση!"
+
+#. Current picture is not saved; user is opening another picture
+#: ../tuxpaint.c:2068
+msgid "Save your picture first?"
+msgstr "Να αποθηκευτεί η εικόνα σου πρώτα;"
+
+#. Error opening picture
+#: ../tuxpaint.c:2073
+msgid "Can’t open that picture!"
+msgstr "Δεν μπορώ να ανοίξω αυτή τη ζωγραφιά!"
+
+#. Generic dialog dismissal
+#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
+#: ../tuxpaint.c:2106
+msgid "OK"
+msgstr "Εντάξει"
+
+#. Notification that 'Open' dialog has nothing to show
+#: ../tuxpaint.c:2080
+msgid "There are no saved files!"
+msgstr "Δεν υπάρχουν αποθηκευμένα αρχεία!"
+
+#. Verification of print action
+#: ../tuxpaint.c:2084
+msgid "Print your picture now?"
+msgstr "Να εκτυπώσω τη ζωγραφιά σου;"
+
+#: ../tuxpaint.c:2085
+msgid "Yes, print it!"
+msgstr "Ναι, εκτύπωσέ την!"
+
+#. Confirmation of successful (we hope) printing
+#: ../tuxpaint.c:2089
+msgid "Your picture has been printed!"
+msgstr "Η εικόνα σου εκτυπώθηκε!"
+
+#. We got an error printing
+#: ../tuxpaint.c:2093
+msgid "Sorry! Your picture could not be printed!"
+msgstr "Λυπάμαι! Δεν ήταν δυνατή η εκτύπωση της ζωγραφιάς σου!"
+
+#. Notification that it's too soon to print again (--printdelay option is in effect)
+#: ../tuxpaint.c:2096
+msgid "You can’t print yet!"
+msgstr "Δεν μπορείς να εκτυπώσεις ακόμη!"
+
+#. Prompt to confirm erasing a picture in the Open dialog
+#: ../tuxpaint.c:2100
+msgid "Erase this picture?"
+msgstr "Να διαγραψω αυτήν την εικόνα;"
+
+#: ../tuxpaint.c:2101
+msgid "Yes, erase it!"
+msgstr "Ναι, διάγραψέ την!"
+
+#: ../tuxpaint.c:2102
+msgid "No, don’t erase it!"
+msgstr "Όχι, μην τη διαγράφεις!"
+
+#. Reminder that Mouse Button 1 is the button to use in Tux Paint
+#: ../tuxpaint.c:2105
+msgid "Remember to use the left mouse button!"
+msgstr "Προσοχή, πρέπει να χρησιμοποιείς το αριστερό πλήκτρο του ποντικιού!"
+
+#. Sound has been muted (silenced) via keyboard shortcut
+#: ../tuxpaint.c:2313
+msgid "Sound muted."
+msgstr "Χωρίς ήχο."
+
+#. Sound has been unmuted (unsilenced) via keyboard shortcut
+#: ../tuxpaint.c:2318
+msgid "Sound unmuted."
+msgstr "Με ήχο."
+
+#. Wait while Text tool finishes loading fonts
+#: ../tuxpaint.c:3065
+msgid "Please wait…"
+msgstr "Παρακαλώ περιμένετε..."
+
+#. Open dialog: 'Erase' button, to erase/deleted the selected picture
+#: ../tuxpaint.c:7634
+msgid "Erase"
+msgstr "Διαγραφή"
+
+#. Open dialog: 'Slides' button, to switch to slide show mode
+#: ../tuxpaint.c:7637
+msgid "Slides"
+msgstr "Προβολή διαφανειών."
+
+#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
+#: ../tuxpaint.c:7640
+msgid "Back"
+msgstr "Προηγούμενο"
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7643
+msgid "Next"
+msgstr "Επόμενο"
+
+#. Slideshow: 'Play' button, to begin a slideshow sequence
+#: ../tuxpaint.c:7646
+msgid "Play"
+msgstr "Αναπαραγωγή"
+
+#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
+#: ../tuxpaint.c:8355
+msgid "Aa"
+msgstr "Αα"
+
+#. Admittedly stupid way of determining which keys can be used for
+#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
+#: ../tuxpaint.c:11664
+msgid "Yes"
+msgstr "Ναι"
+
+#: ../tuxpaint.c:11668
+msgid "No"
+msgstr "Όχι"
+
+#. Prompt to ask whether user wishes to save over old version of their file
+#: ../tuxpaint.c:12710
+msgid "Replace the picture with your changes?"
+msgstr "Να αντικαταστήσω τη ζωγραφιά με τις αλλαγές που έκανες;"
+
+#. Positive response to saving over old version
+#. (like a 'File:Save' action in other applications)
+#: ../tuxpaint.c:12714
+msgid "Yes, replace the old one!"
+msgstr "Ναι, αντικατάστησε την παλιά ζωγραφιά!"
+
+#. Negative response to saving over old version (saves a new image)
+#. (like a 'File:Save As...' action in other applications)
+#: ../tuxpaint.c:12718
+msgid "No, save a new file!"
+msgstr "Όχι, κάνε αποθήκευση σε νέο αρχείο!"
+
+#: ../tuxpaint.c:13963
+msgid "Choose the picture you want, then click “Open”."
+msgstr "Διάλεξε τη ζωγραφιά που θέλεις και μετά πάτησε 'Άνοιγμα'."
+
+#. Let user choose images:
+#. Instructions for Slideshow file dialog (FIXME: Make a #define)
+#: ../tuxpaint.c:14994 ../tuxpaint.c:15322
+msgid "Choose the pictures you want, then click “Play”."
+msgstr "Διάλεξε τη ζωγραφιά που θέλεις και μετά πάτησε 'Αναπαραγωγή'."
+
+#: ../tuxpaint.c:22344
+msgid "Pick a color."
+msgstr "Δάλεξε ένα χρώμα."
+
+#: ../tuxpaint.desktop.in.h:1
+msgid "Tux Paint"
+msgstr "Tux Paint"
+
+#: ../tuxpaint.desktop.in.h:2
+msgid "Drawing program"
+msgstr "Πρόγραμμα ζωγραφικής"
+
+#: ../tuxpaint.desktop.in.h:3
+msgid "A drawing program for children."
+msgstr "Ένα πρόγραμμα ζωγραφικής για παιδιά."
+
+#: ../../magic/src/alien.c:64
+msgid "Color Shift"
+msgstr "Αλλαγή χρώματος"
+
+#: ../../magic/src/alien.c:67
+msgid "Click and move the mouse to change the colors in parts of your picture."
+msgstr ""
+"Κάνε κλικ και κίνησε το ποντίκι για να αλλάξεις τα χρώματα σε τμήματα της "
+"ζωγραφιάς σου."
+
+#: ../../magic/src/alien.c:68
+msgid "Click to change the colors in your entire picture."
+msgstr "Κάνε κλικ για να αλλάξεις τα χρώματα σε ολόκληρη τη ζωγραφιά σου."
+
+#: ../../magic/src/blind.c:117
+msgid "Blind"
+msgstr "Θάμπωμα"
+
+#: ../../magic/src/blind.c:122
+msgid ""
+"Click towards the edge of your picture to pull window blinds over it. Move "
+"perpendicularly to open or close the blinds."
+msgstr ""
+"Κάντε κλικ στα όρια της εικόνας για να την καλύψετε με το σκίαστρο. "
+"Μετακινήστε κάθετα για να ανοίξετε ή να κλείσετε τα σκίαστρα."
+
+#: ../../magic/src/blocks_chalk_drip.c:136
+msgid "Blocks"
+msgstr "Κομμάτια"
+
+#: ../../magic/src/blocks_chalk_drip.c:138
+msgid "Chalk"
+msgstr "Κιμωλία"
+
+#: ../../magic/src/blocks_chalk_drip.c:140
+msgid "Drip"
+msgstr "Στάξιμο"
+
+#: ../../magic/src/blocks_chalk_drip.c:150
+msgid "Click and move the mouse around to make the picture blocky."
+msgstr "Κάνε κλικ και κίνησε το ποντίκι για να κάνεις τη ζωγραφιά κομματάκια."
+
+#: ../../magic/src/blocks_chalk_drip.c:153
+msgid ""
+"Click and move the mouse around to turn the picture into a chalk drawing."
+msgstr ""
+"Κάνε κλικ και κίνησε το ποντίκι για να μετατρέψεις τη ζωγραφιά σε σχέδιο με "
+"κιμωλία."
+
+#: ../../magic/src/blocks_chalk_drip.c:156
+msgid "Click and move the mouse around to make the picture drip."
+msgstr ""
+"Κάνε κλικ και κίνησε το ποντίκι γύρω για να κάνεις τη ζωγραφιά να στάζει."
+
+#: ../../magic/src/blur.c:80
+msgid "Blur"
+msgstr "Θόλωμα"
+
+#: ../../magic/src/blur.c:83
+msgid "Click and move the mouse around to blur the image."
+msgstr "Κάνε κλικ και σύρε το ποντίκι για να θαμπώσεις τη ζωγραφιά."
+
+#: ../../magic/src/blur.c:84
+msgid "Click to blur the entire image."
+msgstr "Κάνε κλικ για να θολώσεις ολόκληρη τη ζωγραφιά."
+
+#. Both are named "Bricks", at the moment:
+#: ../../magic/src/bricks.c:124
+msgid "Bricks"
+msgstr "Τούβλα"
+
+#: ../../magic/src/bricks.c:131
+msgid "Click and move to draw large bricks."
+msgstr "Κάνε κλικ και κίνησε το ποντίκι για να ζωγραφίσεις μεγάλα τούβλα."
+
+#: ../../magic/src/bricks.c:133
+msgid "Click and move to draw small bricks."
+msgstr "Κάνε κλικ και και κίνησε το ποντίκι για να ζωγραφίσεις μικρά τούβλα."
+
+#: ../../magic/src/calligraphy.c:127
+msgid "Calligraphy"
+msgstr "Καλλιγραφία"
+
+#: ../../magic/src/calligraphy.c:134
+msgid "Click and move the mouse around to draw in calligraphy."
+msgstr "Κάνε κλικ και κίνησε το ποντίκι για να σχεδιάσεις καλλιγραφικά."
+
+#: ../../magic/src/cartoon.c:106
+msgid "Cartoon"
+msgstr "Σκίτσο"
+
+#: ../../magic/src/cartoon.c:113
+msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgstr ""
+"Κάνε κλικ και κίνησε το ποντίκι γύρω για να κάνεις τη ζωγραφιά να μοιάζει με "
+"καρτούν."
+
+#: ../../magic/src/confetti.c:85
+msgid "Confetti"
+msgstr "Χαρτοπόλεμος"
+
+#: ../../magic/src/confetti.c:87
+msgid "Click to throw confetti!"
+msgstr "Κάνε κλικ για να πετάξεις χαρτοπόλεμο!"
+
+#: ../../magic/src/distortion.c:142
+msgid "Distortion"
+msgstr "Παραμόρφωση"
+
+#: ../../magic/src/distortion.c:150
+msgid "Click and drag the mouse to cause distortion in your picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να κάνεις τη ζωγραφια σου να παραμορφωθεί "
+"σου."
+
+#: ../../magic/src/emboss.c:103
+msgid "Emboss"
+msgstr "Ανάγλυφο"
+
+#: ../../magic/src/emboss.c:109
+msgid "Click and drag the mouse to emboss the picture."
+msgstr "Κάνε κλικ και σύρε το ποντίκι για να κάνεις την εικόνα ανάγλυφη."
+
+#: ../../magic/src/fade_darken.c:121
+msgid "Lighten"
+msgstr "Φωτίζω"
+
+#: ../../magic/src/fade_darken.c:123
+msgid "Darken"
+msgstr "Σκουραίνω"
+
+#: ../../magic/src/fade_darken.c:134
+msgid "Click and move the mouse to lighten parts of your picture."
+msgstr ""
+"Κάνε κλικ και κίνησε το ποντίκι για να φωτίσεις σημεία από τη ζωγραφιά σου."
+
+#: ../../magic/src/fade_darken.c:136
+msgid "Click to lighten your entire picture."
+msgstr "Κάνε κλικ για να φωτίσεις ολόκληρη τη ζωγραφιά σου."
+
+#: ../../magic/src/fade_darken.c:141
+msgid "Click and move the mouse to darken parts of your picture."
+msgstr ""
+"Κάνε κλικ και μετακίνησε το ποντίκι για να σκουρήνεις τμήματα της ζωγραφιάς "
+"σου."
+
+#: ../../magic/src/fade_darken.c:143
+msgid "Click to darken your entire picture."
+msgstr "Κάνε κλικ για να σκουρήνεις ολόκληρη τη ζωγραφιά σου."
+
+#: ../../magic/src/fill.c:108
+msgid "Fill"
+msgstr "Γέμισμα"
+
+#: ../../magic/src/fill.c:115
+msgid "Click in the picture to fill that area with color."
+msgstr "Κάνε κλικ στη ζωγραφιά για να γεμίσεις μια περιοχή με χρώμα."
+
+#: ../../magic/src/fisheye.c:104
+msgid "Fisheye"
+msgstr "Φακός"
+
+#. Needs better name
+#: ../../magic/src/fisheye.c:106
+msgid "Click on part of your picture to create a fisheye effect."
+msgstr "Κάνε κλικ σε ένα τμήμα της εικόνας σου για να δημιουργήσεις εφέ φακού."
+
+#: ../../magic/src/flower.c:150
+msgid "Flower"
+msgstr "Λουλούδι"
+
+#: ../../magic/src/flower.c:156
+msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις ένα λουλούδι με κοτσάνι. "
+"Άφησε το πλήκτρο του ποντικιού για να ολοκληρωθεί το λουλούδι."
+
+#: ../../magic/src/foam.c:121
+msgid "Foam"
+msgstr "Αφρός"
+
+#: ../../magic/src/foam.c:127
+msgid "Click and drag the mouse to cover an area with foamy bubbles."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να καλύψεις την περιοχή με φούσκες αφρού."
+
+#: ../../magic/src/fold.c:105
+msgid "Fold"
+msgstr "Δίπλωμα"
+
+#: ../../magic/src/fold.c:107
+msgid ""
+"Choose a background color and click to turn the corner of the page over."
+msgstr ""
+"Διάλεξε χρώμα για το φόντο και κάνε κλικ για να γυρίσεις τη γωνία της "
+"σελίδας."
+
+#: ../../magic/src/fretwork.c:176
+msgid "Fretwork"
+msgstr "Ανάγλυφο"
+
+#: ../../magic/src/fretwork.c:180
+msgid "Click and drag to draw repetitive patterns. "
+msgstr "Κάνε κλικ και σύρε για να σχεδιάσεις επαναλαμβανόμενα μοτίβα."
+
+#: ../../magic/src/fretwork.c:182
+msgid "Click to surround your picture with repetitive patterns."
+msgstr ""
+"Κάνε κλικ για να περιστοιχίσεις τη ζωγραφιά σου με επαναλαμβανόμενα μοτίβα."
+
+#: ../../magic/src/glasstile.c:107
+msgid "Glass Tile"
+msgstr "Υαλότουβλο"
+
+#: ../../magic/src/glasstile.c:114
+msgid "Click and drag the mouse to put glass tile over your picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να τοποθετήσεις υαλότουβλα στη ζωγραφιά "
+"σου."
+
+#: ../../magic/src/glasstile.c:116
+msgid "Click to cover your entire picture in glass tiles."
+msgstr "Κάνε κλικ για να καλύψεις ολόκληρη τη ζωγραφιά σου με υαλότουβλα."
+
+#: ../../magic/src/grass.c:112
+msgid "Grass"
+msgstr "Γρασίδι"
+
+#: ../../magic/src/grass.c:118
+msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgstr ""
+"Κάνε κλικ και κίνησε το ποντίκι για να ζωγραφίσεις το γρασίδι. Μην ξεχάσεις "
+"τη λάσπη!"
+
+#: ../../magic/src/halftone.c:34
+msgid "Halftone"
+msgstr "Διαβαθμίσεις του γκρι"
+
+#: ../../magic/src/halftone.c:38
+msgid "Click and drag to turn your drawing into a newspaper."
+msgstr "Κάνε κλικ και σύρε για να μετατρέψεις τη ζωγραφιά σου σε εφημερίδα."
+
+#: ../../magic/src/kalidescope.c:120
+msgid "Symmetric Left/Right"
+msgstr "Συμμετρικό Αριστερά/Δεξιά"
+
+#: ../../magic/src/kalidescope.c:122
+msgid "Symmetric Up/Down"
+msgstr "Συμμετρικό Πάνω/Κάτω"
+
+#: ../../magic/src/kalidescope.c:124
+msgid "Pattern"
+msgstr "Πρότυπο"
+
+#: ../../magic/src/kalidescope.c:126
+msgid "Tiles"
+msgstr "Πλακίδια"
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:128
+msgid "Kaleidoscope"
+msgstr "Καλειδοσκόπιο"
+
+#: ../../magic/src/kalidescope.c:136
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the left and right of your picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις με δύο πινέλα που είναι "
+"συμμετρικά κατά μήκος της αριστερής και δεξιάς πλευράς της εικόνας σου."
+
+#: ../../magic/src/kalidescope.c:138
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the top and bottom of your picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις με δύο πινέλα που είναι "
+"συμμετρικά κατά μήκος του επάνω και κάτω μέρους της εικόνας σου."
+
+#: ../../magic/src/kalidescope.c:140
+msgid "Click and drag the mouse to draw a pattern across the picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις ένα μοτίβο κατά μήκος της "
+"εικόνας σου."
+
+#: ../../magic/src/kalidescope.c:142
+msgid ""
+"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις ένα συμμετρικό μοτίβο κατά "
+"μήκος της εικόνας σου."
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:144
+msgid ""
+"Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις με συμμετρικές βούρτσες "
+"(καλειδοσκόπιο)."
+
+#: ../../magic/src/light.c:107
+msgid "Light"
+msgstr "Φως"
+
+#: ../../magic/src/light.c:113
+msgid "Click and drag to draw a beam of light on your picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να βάλεις μια δέσμη φωτός στην εικόνα σου."
+
+#: ../../magic/src/metalpaint.c:101
+msgid "Metal Paint"
+msgstr "Μεταλλική μπογιά"
+
+#: ../../magic/src/metalpaint.c:107
+msgid "Click and drag the mouse to paint with a metallic color."
+msgstr "Κάνε κλικ και σύρε το ποντίκι για να βάψεις με μεταλλικό χρώμα."
+
+#: ../../magic/src/mirror_flip.c:117
+msgid "Mirror"
+msgstr "Καθρέφτης"
+
+#: ../../magic/src/mirror_flip.c:119
+msgid "Flip"
+msgstr "Άνω-Κάτω"
+
+#: ../../magic/src/mirror_flip.c:130
+msgid "Click to make a mirror image."
+msgstr "Κάνε κλικ για να φτιάξεις μια ζωγραφιά-είδωλο."
+
+#: ../../magic/src/mirror_flip.c:133
+msgid "Click to flip the picture upside-down."
+msgstr "Κάνε κλικ για να γυρίσεις τη ζωγραφιά άνω-κάτω."
+
+#: ../../magic/src/mosaic.c:100
+msgid "Mosaic"
+msgstr "Μωσαϊκό"
+
+#: ../../magic/src/mosaic.c:103
+msgid ""
+"Click and move the mouse to add a mosaic effect to parts of your picture."
+msgstr ""
+"Κάνε κλικ και μετακίνησε το ποντίκι για να προσθέσεις εφέ μωσαϊκού σε "
+"τμήματα της ζωγραφιάς σου."
+
+#: ../../magic/src/mosaic.c:104
+msgid "Click to add a mosaic effect to your entire picture."
+msgstr "Κάνε κλικ για να προσθέσεις εφέ μωσαϊκού σε ολόκληρη τη ζωγραφιά σου."
+
+#: ../../magic/src/mosaic_shaped.c:142
+msgid "Square Mosaic"
+msgstr "Τετραγωνικό μωσαϊκό"
+
+#: ../../magic/src/mosaic_shaped.c:143
+msgid "Hexagon Mosaic"
+msgstr "Εξαγωνικό μωσαϊκό"
+
+#: ../../magic/src/mosaic_shaped.c:144
+msgid "Irregular Mosaic"
+msgstr "Ακανόνιστο μωσαϊκό."
+
+#: ../../magic/src/mosaic_shaped.c:149
+msgid ""
+"Click and move the mouse to add a square mosaic to parts of your picture."
+msgstr ""
+"Κάνε κλικ και μετακίνησε το ποντίκι για να προσθέσεις τετραγωνικό μωσαϊκό σε "
+"τμήματα της ζωγραφιάς σου."
+
+#: ../../magic/src/mosaic_shaped.c:150
+msgid "Click to add a square mosaic to your entire picture."
+msgstr ""
+"Κάνε κλικ για να προσθέσεις τετραγωνικό μωσαϊκό σε ολόκληρη τη ζωγραφιά σου."
+
+#: ../../magic/src/mosaic_shaped.c:152
+msgid ""
+"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+msgstr ""
+"Κάνε κλικ και μετακίνησε το ποντίκι για να προσθέσεις εξαγωνικό μωσαϊκό σε "
+"τμήματα της ζωγραφιάς σου."
+
+#: ../../magic/src/mosaic_shaped.c:153
+msgid "Click to add a hexagonal mosaic to your entire picture."
+msgstr ""
+"Κάνε κλικ για να προσθέσεις εξαγωνικό μωσαϊκό σε ολόκληρη τη ζωγραφιά σου."
+
+#: ../../magic/src/mosaic_shaped.c:155
+msgid ""
+"Click and move the mouse to add an irregular mosaic to parts of your picture."
+msgstr ""
+"Κάνε κλικ και μετακίνησε το ποντίκι για να προσθέσεις ακανόνιστο μωσαϊκό σε "
+"τμήματα της ζωγραφιάς σου."
+
+#: ../../magic/src/mosaic_shaped.c:156
+msgid "Click to add an irregular mosaic to your entire picture."
+msgstr ""
+"Κάνε κλικ για να προσθέσεις ακανόνιστο μωσαϊκό σε ολόκληρη τη ζωγραφιά σου."
+
+#: ../../magic/src/negative.c:98
+msgid "Negative"
+msgstr "Αρνητικό"
+
+#: ../../magic/src/negative.c:106
+msgid "Click and move the mouse around to make your painting negative."
+msgstr ""
+"Κάνε κλικ και κίνησε το ποντίκι για να κάνεις τη ζωγραφιά να μοιάζει με "
+"αρνητικό."
+
+#: ../../magic/src/negative.c:109
+msgid "Click to turn your painting into its negative."
+msgstr "Κάνε κλικ για να μετατρέψεις τη ζωγραφιά σου σε αρνητικό."
+
+#: ../../magic/src/noise.c:63
+msgid "Noise"
+msgstr "Παράσιτα"
+
+#: ../../magic/src/noise.c:66
+msgid "Click and move the mouse to add noise to parts of your picture."
+msgstr ""
+"Κάνε κλικ και κίνησε το ποντίκι για να προσθέσεις παράσιτα σε τμήματα της "
+"ζωγραφιάς σου."
+
+#: ../../magic/src/noise.c:67
+msgid "Click to add noise to your entire picture."
+msgstr "Κάνε κλικ για να προσθέσεις παράσιτα σε ολόκληρη τη ζωραφιά σου. "
+
+#: ../../magic/src/perspective.c:145
+msgid "Perspective"
+msgstr "Προοπτική"
+
+#: ../../magic/src/perspective.c:146
+msgid "Zoom"
+msgstr "Εστίαση"
+
+#: ../../magic/src/perspective.c:151
+msgid "Click on the corners and drag where you want to stretch the picture."
+msgstr ""
+"Κάνε κλικ στις γωνίες και σύρε το ποντίκι για να επεκτήνεις τη ζωγραφιά. "
+
+#: ../../magic/src/perspective.c:154
+msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να εστιάσεις ή να απομακρυνθείς από τη "
+"ζωγραφιά σου."
+
+#: ../../magic/src/puzzle.c:105
+msgid "Puzzle"
+msgstr "Σπαζοκεφαλιά"
+
+#: ../../magic/src/puzzle.c:112
+msgid "Click the part of your picture where would you like a puzzle."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να μετακινήσεις την εικόνα πάνω στον καμβά."
+
+#: ../../magic/src/puzzle.c:113
+msgid "Click to make a puzzle in fullscreen mode."
+msgstr ""
+"Κάνε κλικ για να φτιάξεις μια σπαζοκεφαλιά σε λειτουργία πλήρους οθόνης."
+
+#: ../../magic/src/rails.c:131
+msgid "Rails"
+msgstr "Ράγες τρένου"
+
+#: ../../magic/src/rails.c:133
+msgid "Click and drag to draw train track rails on your picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις ράγες διαδρομής τρένων στη "
+"ζωγραφιά σου."
+
+#: ../../magic/src/rainbow.c:139
+msgid "Rainbow"
+msgstr "Ουράνιο Τόξο"
+
+#: ../../magic/src/rainbow.c:146
+msgid "You can draw in rainbow colors!"
+msgstr "Μπορείς να ζωγραφίσεις με τα χρώματα του ουράνιου τόξου!"
+
+#: ../../magic/src/rain.c:65
+msgid "Rain"
+msgstr "Βροχή"
+
+#: ../../magic/src/rain.c:68
+msgid "Click to place a rain drop onto your picture."
+msgstr "Κάνε κλικ για να τοποθετήσεις μία σταγόνα βροχής στη ζωγραφιά σου."
+
+#: ../../magic/src/rain.c:69
+msgid "Click to cover your picture with rain drops."
+msgstr "Κάνε κλικ για να καλύψεις τη ζωγραφιά σου με σταγόνες βροχής."
+
+#: ../../magic/src/realrainbow.c:110
+msgid "Real Rainbow"
+msgstr "Ουράνιο Τόξο"
+
+#: ../../magic/src/realrainbow.c:112
+msgid "ROYGBIV Rainbow"
+msgstr "ROYGBIV Ουράνιο τόξο"
+
+#: ../../magic/src/realrainbow.c:117
+msgid ""
+"Click where you want your rainbow to start, drag to where you want it to "
+"end, and then let go to draw a rainbow."
+msgstr ""
+"Κάνε κλικ εκεί που θέλεις να ξεκινήσει το ουράνιο τόξο, σύρε το όπου θέλεις "
+"να τελειώσει και μετά ζωγράφισε το ουράνιο τόξο."
+
+#: ../../magic/src/ripples.c:106
+msgid "Ripples"
+msgstr "Κυματάκια"
+
+#: ../../magic/src/ripples.c:112
+msgid "Click to make ripples appear over your picture."
+msgstr "Κάνε κλικ για να εμφανιστούν κυματάκια στη ζωγραφιά σου."
+
+#: ../../magic/src/rosette.c:116
+msgid "Rosette"
+msgstr "Κονκάρδα"
+
+#: ../../magic/src/rosette.c:116
+msgid "Picasso"
+msgstr "Πικάσο"
+
+#: ../../magic/src/rosette.c:121
+msgid "Click and start drawing your rosette."
+msgstr "Κάνε κλικ και ξεκίνα να ζωγραφίζεις μία κονκάρδα."
+
+#: ../../magic/src/rosette.c:123
+msgid "You can draw just like Picasso!"
+msgstr "Μπορείς να ζωγραφίσεις ακριβώς όπως ο Πικάσσο!"
+
+#: ../../magic/src/sharpen.c:73
+msgid "Edges"
+msgstr "Άκρες"
+
+#: ../../magic/src/sharpen.c:74
+msgid "Sharpen"
+msgstr "Όξυνση"
+
+#: ../../magic/src/sharpen.c:75
+msgid "Silhouette"
+msgstr "Περίγραμμα"
+
+#: ../../magic/src/sharpen.c:78
+msgid "Click and move the mouse to trace edges in parts of your picture."
+msgstr ""
+"Κάνε κλικ και μετακίνησε το ποντίκι για να επισημάνεις τις άκρες σε τμήματα "
+"της ζωγραφιάς σου."
+
+#: ../../magic/src/sharpen.c:79
+msgid "Click to trace edges in your entire picture."
+msgstr "Κάνε κλικ για να επισημάνεις τις άκρες σε ολόκληρη τη ζωγραφιά σου."
+
+#: ../../magic/src/sharpen.c:80
+msgid "Click and move the mouse to sharpen parts of your picture."
+msgstr ""
+"Κάνε κλικ και κίνησε το ποντίκι για να οξύνεις τμήματα της ζωγραφιάς σου. "
+
+#: ../../magic/src/sharpen.c:81
+msgid "Click to sharpen the entire picture."
+msgstr "Κάνε κλικ για να οξύνεις ολόκληρη τη ζωγραφιά σου."
+
+#: ../../magic/src/sharpen.c:82
+msgid "Click and move the mouse to create a black and white silhouette."
+msgstr ""
+"Κάνε κλικ και μετακίνησε το ποντίκι για να δημιουργήσεις ασπρόμαυρο "
+"περίγραμμα. "
+
+#: ../../magic/src/sharpen.c:83
+msgid "Click to create a black and white silhouette of your entire picture."
+msgstr ""
+"Κάνε κλικ για να δημιουργήσεις  ασπρόμαυρο περίγραμμα ολόκληρης της "
+"ζωγραφιάς σου."
+
+#: ../../magic/src/shift.c:109
+msgid "Shift"
+msgstr "Μετατόπιση"
+
+#: ../../magic/src/shift.c:115
+msgid "Click and drag to shift your picture around on the canvas."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να μετατοπίσεις τη ζωγραφιά σου  πάνω στον "
+"καμβά."
+
+#: ../../magic/src/smudge.c:106
+msgid "Smudge"
+msgstr "Μουτζούρα"
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:108
+msgid "Wet Paint"
+msgstr "Υγρή μπογιά"
+
+#: ../../magic/src/smudge.c:115
+msgid "Click and move the mouse around to smudge the picture."
+msgstr "Κάνε κλικ και κίνησε το ποντίκι γύρω για να μουτζουρώσεις τη ζωγραφιά."
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:117
+msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις μια υγρή και μουντζούρικη "
+"ζωγραφιά."
+
+#: ../../magic/src/snow.c:68
+msgid "Snow Ball"
+msgstr "Χιονόμπαλα"
+
+#: ../../magic/src/snow.c:69
+msgid "Snow Flake"
+msgstr "Νιφάδα χιονιού"
+
+#: ../../magic/src/snow.c:72
+msgid "Click to add snow balls to your picture."
+msgstr "Κάνε κλικ για να προσθέσεις μπάλες χιονιού στη ζωγραφιά σου."
+
+#: ../../magic/src/snow.c:73
+msgid "Click to add snow flakes to your picture."
+msgstr "Κάνε κλικ για να προσθέσεις νιφάδες χιονιού στη ζωγραφιά σου."
+
+#: ../../magic/src/string.c:123
+msgid "String edges"
+msgstr "Άκρες καμπυλωτών γραμμών"
+
+#: ../../magic/src/string.c:126
+msgid "String corner"
+msgstr "Γωνίες καμπυλωτών γραμμών"
+
+#: ../../magic/src/string.c:129
+msgid "String 'V'"
+msgstr "Καμπύλες Γραμμές 'V'"
+
+#: ../../magic/src/string.c:137
+msgid ""
+"Click and drag to draw string art. Drag top-bottom to draw less or more "
+"lines, left or right to make a bigger hole."
+msgstr ""
+"Κάνε κλικ και σύρε για να σχεδιάσεις σύμφωνα με τη τέχνη των καμπυλωτών "
+"γραμμών. Σύρε το πάνω κουμπί για να σχεδιάσεις λιγότερες ή περισσότερες "
+"γραμμές, δεξιά και αριστερά για να φτιάξεις μεγαλύτερη τρύπα."
+
+#: ../../magic/src/string.c:140
+msgid "Click and drag to draw arrows made of string art."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις βέλη με καμπύλες γραμμές."
+
+#: ../../magic/src/string.c:143
+msgid "Draw string art arrows with free angles."
+msgstr "Σχεδίασε καμπυλες γραμμές με ελεύθερους αγγέλους."
+
+#: ../../magic/src/tint.c:71
+msgid "Tint"
+msgstr "Απόχρωση"
+
+#: ../../magic/src/tint.c:72
+msgid "Color & White"
+msgstr "Χρώμα και άσπρο"
+
+#: ../../magic/src/tint.c:75
+msgid ""
+"Click and move the mouse around to change the color of parts of your picture."
+msgstr ""
+"Κάνε κλικ και κίνησε το ποντίκι για να αλλάξεις το χρώμα σε τμήματα της "
+"ζωγραφιάς σου."
+
+#: ../../magic/src/tint.c:76
+msgid "Click to change the color of your entire picture."
+msgstr "Κάνε κλικ για να αλλάξεις το χρώμα σε ολόκληρη την εικόνα."
+
+#: ../../magic/src/tint.c:77
+msgid ""
+"Click and move the mouse around to turn parts of your picture into white and "
+"a color you choose."
+msgstr ""
+"Κάνε κλικ και μετακίνησε το ποντίκι για να μετατρέψεις τμήματα  της "
+"ζωγραφιάς σου σε άσπρο και σε ένα χρώμα που επέλεξες."
+
+#: ../../magic/src/tint.c:78
+msgid "Click to turn your entire picture into white and a color you choose."
+msgstr ""
+"Κάνε κλικ για να μετατρέψεις τη ζωγραφιά σου σε άσπρη και σε ένα χρώμα της "
+"επιλογής σου."
+
+#: ../../magic/src/toothpaste.c:65
+msgid "Toothpaste"
+msgstr "Οδοντόπαστα"
+
+#: ../../magic/src/toothpaste.c:68
+msgid "Click and drag to squirt toothpaste onto your picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να εκτοξεύσεις οδοντόκρεμα στη ζωγραφιά "
+"σου."
+
+#: ../../magic/src/tornado.c:157
+msgid "Tornado"
+msgstr "Ανεβοστρόβιλος"
+
+#: ../../magic/src/tornado.c:163
+msgid "Click and drag to draw a tornado funnel on your picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις ανεμοστρόβιλους στη ζωγραφιά "
+"σου."
+
+#: ../../magic/src/tv.c:100
+msgid "TV"
+msgstr "Τηλεόραση"
+
+#: ../../magic/src/tv.c:105
+msgid ""
+"Click and drag to make parts of your picture look like they are on "
+"television."
+msgstr ""
+"Κάνε κλικ για να κάνεις τη ζωγραφιά σου να μοιάζει σαν να είναι στην "
+"τηλεόραση."
+
+#: ../../magic/src/tv.c:108
+msgid "Click to make your picture look like it's on television."
+msgstr ""
+"Κάνε κλικ για να κάνεις τη ζωγραφιά σου να μοιάζει σαν να είναι στην "
+"τηλεόραση."
+
+#: ../../magic/src/waves.c:103
+msgid "Waves"
+msgstr "Κύματα"
+
+#: ../../magic/src/waves.c:104
+msgid "Wavelets"
+msgstr "Κυματάκια"
+
+#: ../../magic/src/waves.c:111
+msgid ""
+"Click to make the picture horizontally wavy. Click toward the top for "
+"shorter waves, the bottom for taller waves, the left for small waves, and "
+"the right for long waves."
+msgstr ""
+"Κάνε κλικ για να κάνεις την εικόνα οριζόντια κυματιστή. Κάνε κλικ προς την "
+"κορυφή για κοντύτερα κύματα, προς τη βάση για ψηλότερα, προς τα αριστερά για "
+"μικρά κύματα και προς στα δεξια κύματα μεγάλου μήκους. "
+
+#: ../../magic/src/waves.c:112
+msgid ""
+"Click to make the picture vertically wavy. Click toward the top for shorter "
+"waves, the bottom for taller waves, the left for small waves, and the right "
+"for long waves."
+msgstr ""
+"Κάνε κλικ για να κάνεις τη ζωγραφιά κατακόρυφα κυματιστή. Κάνε κλικ προς την "
+"κορυφή για κοντύτερα κύματα, προς τη βάση για ψηλότερα κύματα,  προς τα "
+"αριστερά για μικρά κύματα και προς τα δεξια για κύματα μεγάλου μήκους. "
+
+#: ../../magic/src/xor.c:95
+msgid "Xor Colors"
+msgstr "Xor Χρώματα"
+
+#: ../../magic/src/xor.c:101
+msgid "Click and drag to draw a XOR effect"
+msgstr "Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις XOR εφέ."
+
+#: ../../magic/src/xor.c:103
+msgid "Click to draw a XOR effect on the whole picture"
+msgstr "Κάνε κλικ για να σχεδιάσεις ένα XOR εφέ σε ολόκληρη τη ζωγραφιά σου."

@@ -1,0 +1,295 @@
+INSTALL.txt dla Tux Paint 
+
+Paint Tux - prosty program do rysowania dla dzieci.
+
+Prawo autorskie Bill Kendrick 2002
+bill@newbreedsoftware.com 
+http://www.newbreedsoftware.com/tuxpaint/ 
+
+27 czerwiec 2002 - 5 listopad 2002 
+
+
+Wymagania:
+------------- 
+  U¿ytkownicy systemu Windows:
+  -------------- 
+    Wersja Tux Paint dla systemu Windows jest spakowana z koniecznym
+    zestawem prekompilowanych bibliotek (w formie plików ".DLL"), wiêc dodatkowe 
+    pobieranie innych plików jest niepotrzebne.
+    
+  libSDL 
+  ------ 
+    Paint Tux wymaga Simple Library Layer DirectMedia (libSDL), biblioteki
+    Open Source u¿ywanej podczas programowania multimediów dostêpnej na licencji 
+    GNU Lesser General Public License (LGPL).
+
+    Wraz z libSDL, Tux Paint zale¿y od kilku innych pomocniczych bibliotek SDL:
+    SDL_Image (dla plików grafiki), SDL_TTF (dla czcionek TTF)
+    i opcjonalnie, SDL_Mixer (dla efektów dŸwiêkowych).
+
+    Uzytkownicy Linuksa / Uniksa:
+    ----------------- 
+      Biblioteki SDL s¹ dostêpne zarówno jako kod Ÿród³owy, jak i pakiety RPM lub Deb 
+      dla ró¿nych dystrybucji Linuksa. Mo¿na je pobraæ z:
+
+        libSDL:      http://www.libsdl.org/ 
+        SDL_Image:   http://www.libsdl.org/projects/SDL_image/ 
+        SDL_TTF:     http://www.libsdl.org/projects/SDL_ttf/ 
+        SDL_Mixer:   http://www.libsdl.org/projects/SDL_mixer/   [OPCJONALNIE]
+
+      S¹ one równie¿ dostêpne wraz z Twoj¹ dystrybucj¹ Linux 
+      (np. na instalacyjnych CD lub dostêpne przez program do update'u 
+      oprogramowania taki jak np. "apt-get").
+
+      ZAUWA¯: Kiedy instalujesz program z pakietów, zainstaluj RÓWNIE¯
+      wersje "-devel" pakietów.  (Na przyk³ad, zainstaluj oba pakiety 
+      "SDL -1.2.4. rpm" i "SDL -1.2.4 - devel.rpm")
+
+  Inne biblioteki:
+  ---------------- 
+    Tux Paint korzysta te¿ z kilku innych 
+    darmowych, bibliotek LGPL. Pod Linuksem, tak jak SDL, powinny 
+    albo ju¿ byæ zainstalowane, albo gotowe do instalacji 
+    jako czêœæ Twojej dystrybucji Linuksa.
+    
+    libPNG 
+    ------ 
+      Tux Paint u¿ywa PNG (Portable Graphics Network) - formatu dla jego 
+      plików danych. SDL_image bêdzie wymaga³ zainstalowanej biblioteki libPNG.
+
+        http://www.libpng.org/pub/png/libpng.html 
+
+    FreeType2 
+    --------- 
+      Tux Paint u¿ywa TTF (True Type Font) - czcionek do rysowania tekstu.
+      SDL_ttf bêdzie wymaga³ biblioteki FreeType2.
+
+        http://www.freetype.org/ 
+
+    gettext 
+    ------- 
+      Tux Paint u¿ywa ustawieñ regionalnych Twojego systemu wraz z 
+      bibliotek¹ "gettext", by wspieraæ ró¿ne jêzyki (np. hiszpañski).
+      Bêdziesz potrzebowa³ zainstalowanej biblioteki gettext.
+
+        http://www.gnu.org/software/gettext/ 
+
+    Tools NetPBM  [OPCJONALNIE]
+    ------------------------ 
+      Pod Linuksem i Uniksem, narzêdzia NetPBM s¹ aktualnie 
+      u¿yte do drukowania.  ( PNG jest generowany przez TuxPaint i konwertowany 
+      do PostScript u¿ywaj¹c narzêdzi NetPBM 'pngtopnm' i 'pnmtops'.)
+
+        http://netpbm.sourceforge.net/ 
+	
+
+Kompilowanie i instalacja:
+--------------------------- 
+  Tux Paint jest udostêpniony pod licencj¹ GNU General Public License (GPL)
+  (zobacz "COPYING.txt" dla szczegó³ów) i dlatego 'kod Ÿród³owy'
+  programu jest zawarty razem z nim.
+
+  U¿ytkownicy systemu Windows:
+  -------------- 
+    Kompilacja:
+    ---------- 
+      Tux Paint dla systemu Windows jest ju¿ skompilowany, wiêc ¿adna kompilacja nie jest 
+      konieczna.  [Ostatecznie, informacja o przekompilowywaniu dla Windows 
+      bêdzie umieszczony tutaj.  Tymczasem, jesteœ skazany tylko na siebie.  Przepraszam!]
+
+    Instalator:
+    ---------- 
+      Kliknij podwójnie na instalator Tux Paint (plik wykonywalny .EXE) i 
+      wykonuj polecenia instalatora.
+
+      Najpierw bêdziesz poproszony o zgodê co do licencji.
+      (Jest to licencja GNU General Public License (GPL), która jest te¿ 
+      dostêpna w "COPYING.txt".)
+
+      Nastêpnie bêdziesz spytany, czy chcesz zainstalowaæ skróty 
+      do Tux Paint w Twoim Menu Start Windows i na Twoim Pulpicie Windows.
+      (Obie opcje s¹ ustawione domyœlnie.)
+
+      Potem bêdziesz spytany, gdzie ¿yczysz sobie zainstalowaæ Tux Paint.
+      Domyœlne miejsce powinno byæ odpowiednie, o ile dostêpna bêdzie odpowiednia iloœæ przestrzeni dyskowej.
+      Je¿eli nie, wybierz inne miejsce.
+
+      W tym momencie, mo¿esz klikn¹æ Install, by zainstalowaæ Tux Paint!
+
+    Zmiana Ustawieñ przy u¿yciu Skrótu:
+    ----------------------------------------- 
+      Aby zmieniæ ustawienia programu, kliknij prawym klawiszem myszy na skrót TuxPaint 
+      i wybierz 'W³aœciwoœci' (na dole).
+       
+      Upewnij siê, czy jest wybrana zak³adka Skrót w oknie, które 
+      siê ukaza³o i sprawdŸ pole 'Element docelowy'.  Powinieneœ zobaczyæ 
+      coœ podobnego do tego:
+
+        "C:\Program Files\TuxPaint\TuxPaint.exe"
+
+      Mo¿esz teraz dodaæ opcje wiersza poleceñ, które bêd¹ wykonane kiedy 
+      klikniesz podwójnie na ikonê.
+       
+      Na przyk³ad, aby ustawiæ uruchomianie gry w trybie pe³noekranowym,
+      z prostymi kszta³tami (bez opcji rotacji) i w jêzyku francuskim,
+      dodaj opcje (po 'TuxPaint.exe'), takie jak:
+
+        "C:\Program Files\TuxPaint\TuxPaint.exe" -f -s --lang french 
+
+      (Zobacz plik "README.txt", gdzie znajduje siê pe³na lista opcji wiersza poleceñ.)
+       
+      Je¿eli pomylisz siê albo wszystko zniknie, u¿yj kombinacji klawiszy Ctrl-Z, aby cofn¹æ lub
+      naciœnij klawisz [ESC] i okno zamknie siê bez ¿adnych zmian 
+      (chyba, ¿e nacisn¹³eœ przycisk "Zastosuj"!).
+       
+      Kiedy skoñczysz, kliknij "OK".
+
+    Je¿eli coœ pójdzie nie tak 
+    ----------------------- 
+      Je¿eli, kiedy podwójnie klikasz na skrót, by uruchomiæ grê,
+      nic siê nie dzieje, to jest prawdopodobne, ¿e niektóre z tych opcji wiersza 
+      poleceñ s¹ niew³aœciwe. Otwórz Eksploratora jak przedtem i poszukaj pliku 
+      nazwanego 'stderr.txt' w folderze TuxPaint.
+	
+      Plik ten zawiera opis co by³o nieprawid³owe. Zwykle jest to 
+      spowodowane przez niepoprawn¹ wielkoœæ litery (du¿a litera 'Z' zamiast 
+      ma³ej 'z') albo brak (lub dodatkowy) znak '-' (minus, pozioma kreska).
+  
+  
+  U¿ytkownicy Linuksa / Uniksa:
+  ----------------- 
+    Kompilacja:
+    ---------- 
+      Zauwa¿: Aktualnie, Tux Paint nie u¿ywa autoconf/automake, tak wiêc
+      nie ma ¿adnego skryptu "./configure".  (Przykro mi!)  Kompilacja powiniena byæ 
+      prosta - zak³adaj¹c, ¿e wszystko co Tux Paint potrzebuje jest zainstalowane.
+
+      Aby skompilowaæ program ze Ÿród³a, po prostu uruchom nastêpuj¹ce polecenie
+      z poziomu shell'a (np. "$"):
+
+        $ make
+
+    Wy³¹czanie dŸwiêku na czas kompilacji:
+    -------------------------------- 
+      Alternatywnie, je¿eli nie masz karty dŸwiêkowej lub wolisz skompilowaæ 
+      program bez wsparcia dŸwiêku (do tego SDL_mixer nie musi byæ 
+      zainstalowany), mo¿esz uruchomiæ polecenie "make" z "nosound":
+
+        $ make nosound 
+
+
+    Je¿eli otrzymasz b³êdy:
+    ------------------ 
+      Je¿eli otrzymujesz jakieœ b³êdy podczas kompilacji - upewnij siê, ¿e masz zainstalowane
+      odpowiednie biblioteki (zobacz powy¿ej). Je¿eli u¿ywasz spakowanych 
+      wersji bibliotek (np. RPM w systemie RedHat albo DEB w systemie Debian),
+      upewnij siê, czy masz równie¿ odpowiednie pakiety "-dev" lub "-devel",
+      inaczej nie bêdziesz w stanie skompilowaæ Tux Paint (i innych programów)
+      ze Ÿród³a!
+
+
+    Instalowanie:
+    ----------- 
+      Zak³adaj¹c, ¿e ¿adne b³êdy krytyczne nie wyst¹pi³y, mo¿esz teraz zainstalowaæ program, 
+      po to aby móg³ byæ uruchamiany przez u¿ytkowników. Domyœlnie, to musi 
+      zostaæ zrobione przez u¿ytkownika "root" ('superuser'). Prze³¹cz siê na u¿ytkownika "root" 
+      pisz¹c polecenie:
+
+        $ su 
+
+      Wpisz  has³o u¿ytkownika "root".  Powinieneœ teraz byæ u¿ytkownikiem "root"
+      (ze znakiem "#").  Aby zainstalowaæ program i jego pliki danych, napisz:
+
+        # make install
+
+      Na koñcu mo¿esz prze³¹czyæ siê z powrotem do Twojego regularnego u¿ytkownika przez wyjœcie
+      z trybu superu¿ytkownika:
+
+        # exit
+
+
+      ZAUWA¯: Domyœlnie, wykonywalny program "tuxpaint" jest 
+      umieszczony w katalogu "/usr/local/bin/". Pliki danych (obrazy, dŸwiêki, itd.)
+      s¹ umieszczone w katalogu "/usr/local/share/tuxpaint/".
+
+
+      Zmiana miejsca zapisu plików
+      ------------------------ 
+        Mo¿esz zmieniæ miejsce zapisu plików u¿ywaj¹c zmiennej 'prefix'
+        w pliku Makefile. "PREFIX" wskazuje, gdzie wszystkie inne 
+        pliki bêd¹ zapisane, domyœlnie jest ustawione na katalog "/usr/local".
+
+        Inne zmienne to:
+          BIN_PREFIX 
+	    Gdzie binaria "tuxpaint" bêd¹ zainstalowane.
+	    (Ustawione domyœlnie na "$(PREFIX)/bin" - np. "/usr/local/bin")
+	  
+	  DATA_PREFIX 
+	    Gdzie pliki danych (dŸwiêk, grafika, pêdzle, piecz¹tki, czcionki)
+ 	    bêd¹ zapisane i gdzie Tux Paint bêdzie ich szuka³ kiedy bêdzie uruchomiony.
+	    (Ustwawione na "$(PREFIX)/share/tuxpaint")
+	
+	  DOC_PREFIX 
+	    Gdzie pliki dokumentacji ( katalog "docs") bêd¹ zapisane.
+	    (Ustawione na "$(PREFIX)/share/doc/tuxpaint")
+	
+	  MAN_PREFIX 
+	    Gdzie pliki pomocy (manual) Tux Paint bêd¹ zapisane.
+	    (Ustawione na "$(PREFIX)/share/man")
+	
+	  ICON_PREFIX                      $(PREFIX)/share/pixmaps 
+	  X11_ICON_PREFIX                  $(PREFI)/X11R6/include/X11/pixmaps 
+	  GNOME_PREFIX                     $(PREFIX)/share/gnome/apps/Graphics 
+	  KDE_PREFIX                       $(PREFIX)/share/applnk/Graphics 
+	    Gdzie ikony i odpalacze (dla GNOME i KDE) bêd¹ zapisane.
+	
+	  LOCALE_PREFIX 
+	    Gdzie pliki z t³umaczeniem dla Tux Paint bêd¹ zapisane i gdzie 
+	    Tux Paint bêdzie ich szuka³.
+	    (Ustawione na "$(PREFIX)/share/locale/")
+	    (Ostateczne miejsce pliku z t³umaczeniem bêdzie 
+	    w katalogu odpowiednim dla jêzyka (np. "es" dla jêzyka hiszpañskiego),
+	    w podkatalogu "LC_MESSAGES".)
+	
+	
+Odinstalowywanie Tux Paint:
+----------------------- 
+  System Windows 
+  ------- 
+    U¿ywaj¹c programu odinstalowuj¹cego
+    --------------------- 
+      Je¿eli zainstalowa³eœ skróty w Menu Start (domyœlnie), przejdŸ do 
+      folderu TuxPaint i wybierz "Uninstall". Pojawi siê okienko z potwierdzeniem,
+      czy napewno chcesz odinstalowaæ Tux Paint, je¿eli jesteœ pewny 
+      ¿e chcesz trwale usun¹æ Tux Paint, kliknij na przycisk Uninstall. 
+
+      Kiedy wszystko siê skoñczy, kliknij na przycisk zamkniêcia.
+
+      Jest równie¿ mo¿liwe, by u¿yæ wpisu "TuxPaint (remove only)" w 
+      Panelu Sterowania w sekcji Dodaj/Usuñ programy.
+
+      ZAUWA¯: z powodu obrazków, które s¹ tworzone i zapisywane wewn¹trz folderu Tux Paint,
+      ten folder i folder 'userdata' wewn¹trz niego NIE BÊDZIE usuniêty.
+
+
+  Linux 
+  ----- 
+    W katalogu, gdzie znajduj¹ siê Ÿród³a Tux Paint (gdzie kompilowa³eœ Tux Paint),
+    mo¿esz u¿yæ 'Makefile', by go odinstalowaæ.
+    Domyœlnie, musi to zostaæ zrobione przez u¿ytkownika "root" (superu¿ytkownik).
+    (Zobacz instrukcje instalacji dla dalszych informacji.)
+
+    Prze³¹cz siê na u¿ytkownika "root" przez wpisanie polecenia:
+
+      $ su 
+
+    Wpisz has³o u¿ytkownika "root". Powinieneœ teraz byæ u¿ytkownikiem "root".
+    Aby odinstalowaæ program i jego pliki danych 
+    (domyœlna gumka, piecz¹tka i obrazy, je¿eli jakieœ s¹, te¿ bêd¹ usuniête), napisz:
+
+      # make uninstall 
+
+    W koñcu, mo¿esz prze³¹czyæ z powrotem do Twojego regularnego u¿ytkownika przez wyjœcie
+    z trybu superu¿ytkownika:
+
+      # exit

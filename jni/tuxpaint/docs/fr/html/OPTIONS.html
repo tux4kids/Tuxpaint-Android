@@ -1,0 +1,4039 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+  
+
+
+  
+  
+  
+  <title>Options de configuration de Tux Paint</title>
+  <link rel="stylesheet" type="text/css" href="images/bordure/bordure.css">
+</head>
+
+
+<body>
+
+
+
+<div id="conteneurhaut">
+<div id="a1"></div>
+
+
+
+<div id="b"></div>
+
+
+
+<div id="c">Options de Tux Paint</div>
+
+
+
+<div id="d"></div>
+
+
+
+<div id="e"></div>
+
+
+
+</div>
+
+
+
+<div id="f">
+<div id="h"><a name="haut"></a>Avec la
+version 0.9.14, un outil graphique vous permet de modifier les
+comportements de Tux Paint (Ha Bon! O&ugrave;
+&ccedil;&agrave;?
+personnellement, je ne l'ai pas trouv&eacute;. Il ne doit pas
+&ecirc;tre dans
+le package de Mac OS X.) Toutefois si vous ne l'avez pas
+install&eacute;
+ou si vous voulez comprendre un peu plus comment
+&ccedil;&agrave;
+marche, vous devez continuer &agrave; lire ce qui suit.<br>
+
+
+
+<ol>
+
+
+
+  <li><a href="#config">Fichier de configuration</a></li>
+
+
+
+</ol>
+
+
+
+<ol style="list-style-type: upper-alpha; margin-left: 40px;">
+
+
+
+  <li><span style="font-weight: bold;"></span><a href="#conf_A">Utilisateurs de Linux, d'Unix et de
+Mac&nbsp;OS&nbsp;X</a></li>
+
+
+
+  <li><a href="#config_B">Fichier de Configuration
+Syst&egrave;me (Linux et UNIX)</a></li>
+
+
+
+  <li><a href="#Config_C">Utilisateurs de Windows</a></li>
+
+
+
+  <li><a href="#Config_D">Options disponibles</a></li>
+
+
+
+</ol>
+
+
+
+<ol start="2">
+
+
+
+  <li><a href="#tuxrc">Outrepasser la configuration
+syst&egrave;me en utilisant .tuxpaintrc.</a></li>
+
+
+
+  <li><a href="#lignes1">Les options en ligne de
+commande</a></li>
+
+
+
+  <li><a href="#lignes2">Les Options d'information
+en ligne de commande.</a></li>
+
+
+
+  <li><a href="#lang-diff">Choisir un langage
+diff&eacute;rent.</a></li>
+
+
+
+  <li><a href="#locale">Param&eacute;trer la
+localisation de votre environnement.</a></li>
+
+
+
+</ol>
+
+
+
+<ol style="list-style-type: upper-alpha; margin-left: 40px;">
+
+
+
+  <li><a href="#locale_A">Utilisateurs de Linux/Unix.</a></li>
+
+
+
+  <li><span style="font-weight: bold;"></span><a href="#locale_B">Utilisateurs de Windows.</a></li>
+
+
+
+</ol>
+
+
+
+<ol start="7">
+
+
+
+  <li><a href="#Polices">Polices
+Sp&eacute;ciales.</a></li>
+
+
+
+</ol>
+
+
+
+<br>
+
+
+
+<h2><a name="config"></a>Fichier de
+configuration</h2>
+
+
+
+Vous pouvez cr&eacute;er un simple fichier de configuration pour
+Tux
+Paint, qui est lu &agrave; chaque d&eacute;marrage du programme.<br>
+
+
+
+Ce fichier est un fichier au format texte contenant les options que
+vous voulez permettre.&nbsp;<br>
+
+
+
+<h3><a name="conf_A"></a>Utilisateurs de
+Linux, d'Unix et de Mac&nbsp;OS&nbsp;X</h3>
+
+
+
+Le fichier que vous devez cr&eacute;er s'appelle "<span style="font-style: italic;">.tuxpaintrc</span>"&nbsp;
+Et il doit &ecirc;tre plac&eacute; &agrave; la racine de
+votre r&eacute;pertoire personnel.&nbsp; (C'est &agrave;
+dire "<span style="font-style: italic;">~/.tuxpaintrc</span>"
+ou&nbsp; "<span style="font-style: italic;">$HOME/.tuxpaintrc</span>")<br>
+
+
+
+<h3><a name="config_B"></a>Fichier de
+Configuration Syst&egrave;me (Linux et UNIX)</h3>
+
+
+
+Avant que ce fichier ne soit lu, un fichier de configuration
+syst&egrave;me est lu. (Par d&eacute;faut cette configuration
+ne permet
+pas de r&eacute;glages.) Il est localis&eacute; &agrave; :<br>
+
+
+
+<span style="font-style: italic;">
+/etc/tuxpaint/tuxpaint.conf </span><br>
+
+
+
+<br>
+
+
+
+Vous pouvez emp&ecirc;cher le programme de lire ce fichier,
+abandonnant les r&eacute;glages par d&eacute;faut (qui peuvent
+&ecirc;tre outrepass&eacute;s par votre fichier et/ou par un
+argument
+en ligne de commande.) en utilisant l'option de ligne de commande :<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--nosysconfig </span><br>
+
+
+
+<h3><a name="Config_C"></a>Utilisateurs de
+Windows</h3>
+
+
+
+Le fichier que vous devez cr&eacute;er s'appelle "<span style="font-style: italic;">tuxpaint.cfg" </span>et
+il doit &ecirc;tre placer dans le dossier de Tux Paint.<span style="font-style: italic;"></span><br style="font-style: italic;">
+
+
+
+<br>
+
+
+
+Vous pouvez utiliser NotePad ou WordPad pour cr&eacute;er ce
+fichier.
+Soyez sur de le sauvegarder au format plain text et v&eacute;rifier
+qu'il n'a pas l'extension
+".<span style="font-style: italic;">txt</span>"
+&agrave; la fin...<br>
+
+<br>
+
+
+<!--
+&nbsp;&nbsp;&nbsp; <a href="Options_TuxPaint.html#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><br>
+-->
+
+
+<h3><a name="Config_D"></a>Options disponibles</h3>
+
+
+
+Les r&eacute;glages suivants peuvent &ecirc;tre inscrits dans
+le
+fichier de configuration. (Les lignes de commandes les outrepasseront.
+Voir le chapitre options de ligne de commande ci-dessous.) (Ne pas
+tenir compte du di&egrave;se # qui n'est l&agrave; que pour la
+pr&eacute;sentation, si vous le laissez alors la commande n'est pas
+prise en compte. On peut donc utiliser cette subtilit&eacute; pour
+d&eacute;sactiver une option sans effacer la ligne : cela s'appelle
+commenter le ligne.)<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#fullscreen=yes</span><br>
+
+
+
+Le programme d&eacute;marre en plein &eacute;cran au lieu d'une
+fen&ecirc;tre.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#800x600=yes</span><br>
+
+
+
+D&eacute;marre le programme avec une r&eacute;solution de
+800x600&nbsp;
+(EXPERIMENTAL), plut&ocirc;t que la plus petite
+r&eacute;solution&nbsp;de&nbsp; 640x480.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#nosound=yes</span><br>
+
+
+
+D&eacute;sactive les effets sonores.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#noquit=yes</span><br>
+
+
+
+D&eacute;sactive le bouton quitte du s&eacute;lecteur de
+gauche.
+(appuyer sur escape ou cliquer sur le bouton de fermeture de la
+fen&ecirc;tre continu de fonctionner.)&nbsp;<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#noprint=yes</span><br>
+
+
+
+D&eacute;sactive la fonction d'impression.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#printdelay=SECONDS</span><br>
+
+
+
+L'impression ne peut avoir lieu qu'une fois toutes les SECONDS secondes.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#printcommand=COMMAND</span>
+(Linux et Unix uniquement)<br>
+
+
+
+Utiliser la commande COMMAND pour imprimer un fichier PNG.&nbsp; La
+commande par d&eacute;faut est&nbsp;<span style="font-family: Courier New,Courier,monospace;">pngtopnm
+| pnmtops | lpr </span>qui
+convertie le PNG en un NetPBM 'portable&nbsp;anymap',&nbsp;
+ensuite le
+converti en un fichier postscript, et finalement l'envoie &agrave;
+l'imprimante via la commande "<span style="font-family: Courier New,Courier,monospace;">lpr</span>"<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#printcfg=yes</span>
+(Windows uniquement)<br>
+
+
+
+Tux Paint utilisera une configuration d'imprimante pour imprimer.
+Appuyez sur la touche [ALT] pendant que vous cliquez sur le bouton
+'Print' dans Tux Paint pour forcer l'apparition d'une boite de dialogue
+pour l'impression.<br>
+
+
+
+(NB : Cela ne fonctionne pas quand Tux Paint est en mode plein
+&eacute;cran.) Tout changement de configuration fait dans cette
+boite
+de dialogue sera sauvegard&eacute; dans le fichier "<span style="font-style: italic;">userdata/print.cfg</span>",
+et utilis&eacute; de nouveau, tant que l'option "<span style="font-family: Courier New,Courier,monospace;">printcfg</span>"
+sera activ&eacute;e.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#simpleshapes=yes</span><br>
+
+
+
+Supprime l'&eacute;tape de rotation des formes
+g&eacute;om&eacute;triques ('Shape'). Cliquer-glisser et
+rel&acirc;cher,
+c'est tout ce que vous avez besoin de faire pour cr&eacute;er une
+nouvelle forme g&eacute;om&eacute;trique.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+#uppercase=yes</span><br>
+
+
+
+Tout le texte tap&eacute; sera en majuscule (par exemple "Brosse"
+sera
+"BROSSE"). Utile pour les enfants qui n'ont encore&nbsp; appris que
+les
+majuscules.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+#grab=yes</span><br>
+
+
+
+Tux Paint essaiera de 'capturer' la souris et le clavier, afin qu'ils
+restent confin&eacute;s dans sa fen&ecirc;tre.<br>
+
+
+
+Ceci est particuli&egrave;rement utile pour d&eacute;sactiver
+les
+actions sur l'OS qui peuvent sortir du programme&nbsp;
+l'utilisateur
+de&nbsp;Tux&nbsp;Paint ([Alt]-[Tab] -ou [pomme]-[&lt;] sur
+Mac OS X-
+pour passer d'une fen&ecirc;tre &agrave; l'autre,
+[Ctrl]-[Escape], etc.) Cette option est tr&egrave;s utile en mode
+plein
+&eacute;cran.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#noshortcuts=yes</span><br>
+
+
+
+Cela d&eacute;connecte les raccourcis claviers tels que [Ctrl]-[S]
+pour
+sauvegarder, [Ctrl]-[N] pour cr&eacute;er une nouvelle image, etc.<br>
+
+
+
+C'est utile pour emp&ecirc;cher les commandes non
+d&eacute;sir&eacute;es d'&ecirc;tre activ&eacute;es par
+des enfants qui
+ne sont pas habitu&eacute;s au clavier.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#nowheelmouse=yes</span><br>
+
+
+
+Cela d&eacute;connecte le support de la molette des souris qui en
+ont
+une. (Normalement, la molette d&eacute;roule dans le
+s&eacute;lecteur
+de droite.)<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+#nofancycursors=yes</span><br>
+
+
+
+Ceci d&eacute;connecte le pointeur fantaisie dans
+Tux&nbsp;Paint,&nbsp; et utilise le pointeur normal de votre
+environnement.<br>
+
+
+
+Dans certains environnement, le pointeur fantaisie pose
+probl&egrave;me : utilisez alors cette option.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#nooutlines=yes</span><br>
+
+
+
+Dans ce mode, sont affich&eacute;s des silhouettes et des ruban
+&eacute;lastiques plus simples quand vous utilisez les outils
+Lignes,
+formes, Tampons et Gomme.<br>
+
+
+
+Cela peut &ecirc;tre utile sur les ordinateurs vraiment lent, ou
+lors d'affichage sur un X-Window simple.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#nostamps=yes</span><br>
+
+
+
+Cette option dit &agrave; Tux&nbsp;Paint de ne pas charger de
+tampons,
+ce qui rend indisponible l'outil Tampon. Ceci peut
+acc&eacute;l&eacute;r&eacute; Tux Paint lors du premier
+lancement, et
+r&eacute;duire la m&eacute;moire allou&eacute;e au
+programme pendant
+qu'il fonctionne. Bien s&ucirc;r aucun tampon ne sera
+disponible.&nbsp;<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#nostampcontrols=yes</span><br>
+
+
+
+Certaines images de l'outil Tampon peuvent &ecirc;tre
+retourn&eacute;es
+verticalement ou comme dans un miroir et leur taille peut
+&ecirc;tre
+modifi&eacute;e. Cette option d&eacute;connecte ces
+contr&ocirc;les, et
+ne laisse que les tampons basiques.&nbsp;<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+#mirrorstamps=yes</span><br>
+
+
+
+Pour les tampons qui peuvent &ecirc;tre retourn&eacute;s comme
+dans un
+miroir, cette option r&egrave;gle ces tampons sous leur forme
+miroir
+par d&eacute;faut. Ce peut &ecirc;tre pratique pour les gens
+qui
+pr&eacute;f&egrave;rent les choses de droite &agrave;
+gauche te non de
+gauche &agrave; droite. (perso sur un dessin je ne vois pas
+l'int&eacute;r&ecirc;t de cette option.)<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#keyboard=yes</span><br>
+
+
+
+Ceci permet d'utiliser les fl&egrave;ches du clavier pour
+contr&ocirc;ler le pointeur de la souris. (par exemple pour les
+environnements sans souris.)<br>
+
+
+
+Les fl&egrave;ches bougent le pointeur. La touche espace agit comme
+le bouton de souris.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#savedir=DIRECTORY</span><br>
+
+
+
+Utilisez cette option pour modifier le r&eacute;pertoire
+o&ugrave; Tux Paint sauvegarde les images; par d&eacute;faut
+c'est <span style="font-style: italic;">~/.tuxpaint/saved/</span>
+sous Linux et UNIX, <span style="font-style: italic;">~/Library/Application
+Support/tuxpaint/saved</span> sous Mac OS X, et&nbsp;<span style="font-style: italic;">userdata\saved</span> sous
+Windows.<br>
+
+
+
+Ceci peut &ecirc;tre utile lors d'utilisation sur un
+r&eacute;seau
+Windows, o&ugrave; Tux Paint est install&eacute; sur le
+serveur, et les
+enfants l'utilisent sur leur poste client. Vous pouvez
+r&eacute;gler le
+r&eacute;pertoire de sauvegarde pour qu'il soit dans leur propre
+r&eacute;pertoire et non sur le serveur (par exemple "<span style="font-style: italic;">H:\tuxpaint\</span>".)<br>
+
+
+
+NB : quand vous sp&eacute;cifier une partition Windows (par exemple
+<span style="font-style: italic;">H:\</span>), vous
+devez aussi sp&eacute;cifier un sous-r&eacute;pertoire.<br>
+
+
+
+Exemple: savedir=Z:<span style="font-style: italic;">\tuxpaint\</span><br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#saveover=yes</span><br>
+
+
+
+Ceci emp&ecirc;che l'apparition de la fen&ecirc;tre
+"Sauvegarder en
+&eacute;crasant l'ancienne version..?" ("Save over the old
+version...?") quand vous sauvegardez un fichier
+d&eacute;j&agrave;
+existant. Avec cette option, l'ancienne version est automatiquement
+&eacute;cras&eacute;e.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+#saveover=new</span><br>
+
+
+
+Celle-ci d&eacute;connecte la m&ecirc;me fen&ecirc;tre
+de&nbsp;dialogue, toutefois le fichier est sauvegard&eacute; en
+conservant l'ancienne version.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+#saveover=ask</span><br>
+
+
+
+(Cette fonction est redondante puisque c'est celle par
+d&eacute;faut)<br>
+
+
+
+Lorsque vous sauvegardez un dessin existant, il vous est d'abord
+demand&eacute; si vous voulez sauvegarder sur l'ancienne version ou
+non.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">#nosave=yes</span><br>
+
+
+
+Celle-ci retire la capacit&eacute; d'enregistrer des fichiers de
+Tux&nbsp;Paint (et dans le m&ecirc;me temps
+d&eacute;connecte le bouton
+de sauve garde ('Save') du s&eacute;lecteur de gauche. Elle peut
+&ecirc;tre utilis&eacute;e d'en les situation o&ugrave; le
+programme
+est utilis&eacute; seulement pour le fun ou dans un environnement
+test.<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+#lang=LANGUAGE</span><br>
+
+
+
+D&eacute;marre Tux Paint dans un des langages support&eacute;s.
+Les choix possibles de langages ('<span style="font-family: Courier New,Courier,monospace;">LANGUAGE</span>')
+sont (pour le moment)<br>
+
+
+
+<table style="text-align: left; width: 80%;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+  <tbody>
+
+
+
+    <tr>
+
+
+
+      <td>english</td>
+
+
+
+      <td style="width: 294px;">american-english</td>
+
+
+
+      <td style="width: 100px;">&nbsp;</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>afrikaans</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>basque</td>
+
+
+
+      <td style="width: 294px;">euskara</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>belarusian</td>
+
+
+
+      <td style="width: 294px;">bielaruskaja</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>bokmal</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>brazilian-portuguese</td>
+
+
+
+      <td style="width: 294px;">portuges-brazilian</td>
+
+
+
+      <td style="width: 100px;">brazilian</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>breton</td>
+
+
+
+      <td style="width: 294px;">brezhoneg</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>british-english</td>
+
+
+
+      <td style="width: 294px;">british</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>bulgarian</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>catalan<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">catala</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>chinese<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">simplified-chinese</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>croatian<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">hrvatski</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>czech<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">cesky</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>danish<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">dansk</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>dutch<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">nederlands</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>finnish<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">suomi</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>french<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">francais</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>german<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">deutsch</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>greek</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>hebrew</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>hindi</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>hungarian<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">magyar</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>icelandic<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">islenska</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>indonesian<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">bahasa-indonesia</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>italian<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">italiano</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>japanese</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>klingon<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">tlhIngan</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>korean</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>lithuanian<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">lietuviu</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>malay</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>norwegian<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">nynorsk</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>polish<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">polski</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>portuguese<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">portugues</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>romanian</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>russian</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>serbian</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>spanish<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">espanol</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>slovak</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>slovenian<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">slovensko</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>swedish<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">svenska</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>tamil</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>traditional-chinese</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>turkish</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>vietnamese</td>
+
+
+
+      <td style="width: 294px;"></td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>walloon<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">walon</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td>welsh<br>
+
+
+
+      </td>
+
+
+
+      <td style="width: 294px;">cymraeg</td>
+
+
+
+      <td style="width: 100px;"></td>
+
+
+
+    </tr>
+
+
+
+  
+  
+  </tbody>
+</table>
+
+
+
+<br>
+
+
+<!--
+&nbsp;&nbsp;&nbsp; <a href="#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><br>
+-->
+
+
+<h2><a name="tuxrc"></a>Outrepasser la
+configuration syst&egrave;me en utilisant .tuxpaintrc.</h2>
+
+
+
+(Pour les utilisateurs de Linux et d'Unix)<br>
+
+
+
+<br>
+
+
+
+Si chacune des options pr&eacute;c&eacute;dentes peut
+&ecirc;tre r&eacute;gl&eacute;e dans
+<span style="font-style: italic;">"/etc/tuxpaint/tuxpaint.config</span>",
+Vous pouvez les outrepasser avec votre propre fichier&nbsp;"<span style="font-style: italic;">~/.tuxpaintrc</span>".<br>
+
+
+
+<br>
+
+
+
+Pour les options vrai ou faux, telles que <span style="font-family: Courier New,Courier,monospace;">noprint</span>
+et <span style="font-family: Courier New,Courier,monospace;">grab</span>,
+vous pouvez simplement dire, dans le fichier "<span style="font-style: italic;">~/.tuxpaintrc</span>",
+qu'elle sont &eacute;gales &agrave;&nbsp;non&nbsp;:<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+noprint=no</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">uppercase=no</span><br>
+
+
+
+<br>
+
+
+
+Vous pouvez aussi utiliser des options similaire aux options de lignes
+de commande comme d&eacute;crite ci-dessous, par exemple:&nbsp;<br>
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">print=yes</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+mixedcase=yes<br>
+<br>
+</span>
+
+<!--
+&nbsp;&nbsp;&nbsp; <a href="#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><br>
+-->
+
+
+<h2><a name="lignes1"></a>Les options en ligne
+de commande</h2>
+
+
+
+Les options peuvent aussi &ecirc;tre pass&eacute;es en ligne
+commande lorsqu'on d&eacute;marre Tux Paint.<br>
+
+
+
+<div style="margin-left: 40px;"><span style="font-family: Courier New,Courier,monospace;">--fullscreen</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--800x600</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--nosound</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--noquit</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--noprint</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--printdelay=SECONDS</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--printcfg</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--simpleshapes</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--uppercase</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--grab</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--noshortcuts</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--nowheelmouse</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--nofancycursors</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--nooutlines</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--nostamps</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--nostampcontrols</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--mirrorstamps</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--keyboard</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--savedir&nbsp;DIRECTORY</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--saveover</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--saveovernew</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--nosave</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--lang&nbsp;LANGUAGE</span><br>
+
+
+
+</div>
+
+
+
+Celles-ci permettent ou correspondent aux options du fichier de
+configuration d&eacute;crit plus haut.<br>
+
+
+
+<br>
+
+
+
+<div style="margin-left: 40px;"><span style="font-family: Courier New,Courier,monospace;">--windowed</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--640x480</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--sound</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--quit</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--print</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--printdelay=0</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--noprintcfg</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--complexshapes</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--mixedcase</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--dontgrab</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--shortcuts</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--wheelmouse</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">--fancycursors</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--outlines</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--stamps</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--stampcontrols</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--dontmirrorstamps</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--mouse</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--saveoverask</span><br style="font-family: Courier New,Courier,monospace;">
+
+
+
+<span style="font-family: Courier New,Courier,monospace;">
+--save</span><br>
+
+
+
+</div>
+
+
+
+Ces options peuvent &ecirc;tre utilis&eacute;es pour
+outrepasser
+n'importe quel r&eacute;glage effectu&eacute; dans le fichier
+de
+configuration. (Si l'option n'est pas r&eacute;gl&eacute;e dans
+le
+fichier de configuration, aucune option "outrepassante" n'est
+n&eacute;cessaire.) <br>
+
+
+
+<br>
+
+
+
+<div style="margin-left: 40px;"><span style="font-family: Courier New,Courier,monospace;">--locale
+locale</span><br>
+
+
+
+</div>
+
+
+
+D&eacute;marre&nbsp;Tux&nbsp;Paint dans un des langage
+support&eacute;.
+Voir la section choisir un langage diff&eacute;rent ci-dessous pour
+la
+commande <span style="font-family: Courier New,Courier,monospace;">locale</span>
+&agrave; utiliser (Par exemple : "de_DE@euro" pour l'allemand).<br>
+
+
+
+Si votre localisation (langage) a d&eacute;j&agrave;
+&eacute;t&eacute;
+s&eacute;lectionn&eacute;, par exemple dans votre variable
+d'environnement $LANG, cette option n'est pas n&eacute;cessaire
+puisque
+Tux Paint essaye si possible de respecter vos r&eacute;glages
+d'environnement.<br>
+
+
+
+<br>
+
+
+
+<div style="margin-left: 40px;"><span style="font-family: Courier New,Courier,monospace;">--nosysconfig</span><br>
+
+
+
+</div>
+
+
+
+Sous Linux et UNIX, celle-ci emp&ecirc;che la lecture du fichier de
+configuration syst&egrave;me "<span style="font-style: italic;">/etc/tuxpaint/tuxpaint.conf</span>".<br>
+
+
+
+Seul votre propre fichier de configuration, "<span style="font-style: italic;">~/.tuxpaintrc</span>",
+sera lu, s'il existe.&nbsp;<br>
+
+
+
+<br>
+
+
+
+<div style="margin-left: 40px;"><span style="font-family: Courier New,Courier,monospace;">--nolockfile</span><br>
+
+
+
+</div>
+
+
+
+Par d&eacute;faut, Tux&nbsp;Paint utilise ce qui est connu
+comme un
+'fichier de blocage' ('lockfile') pour l'emp&ecirc;cher
+d'&ecirc;tre
+lancer plus d'une fois toutes les 30 secondes. (Ceci est utile pour
+&eacute;viter de lancer de multiples copies, par exemple lorsqu'on
+clique deux fois sur un lanceur simple clic, ou si on clique
+impatiemment plusieurs fois sur l'ic&ocirc;ne.)<br>
+
+
+
+Pour permettre &agrave; Tux&nbsp;Paint d'ignorer le 'fichier de
+blocage', l'autorisant &agrave; &ecirc;tre lanc&eacute;
+m&ecirc;me
+s'il a d&eacute;j&agrave; &eacute;t&eacute;
+lanc&eacute; dans les 30
+secondes pr&eacute;c&eacute;dentes, il faut
+d&eacute;marrer&nbsp;
+Tux&nbsp;Paint avec l'option '<span style="font-family: Courier New,Courier,monospace;">--nolockfile</span>'
+dans la ligne de commande.<br>
+
+
+
+Par d&eacute;faut, le 'fichier de blocage' est rang&eacute;
+dans "<span style="font-style: italic;">~/.tuxpaint/</span>"
+sous Linux et Unix,&nbsp; et "<span style="font-style: italic;">userdata\</span>"
+sous Windows.<br>
+
+
+<!--
+&nbsp;&nbsp;&nbsp; <a href="Brosses-tampons.html#haut"><img src="images/boutons_du_site/bouton_chrome_haut.png" alt="haut" style="border: 0px solid ; width: 200px; height: 100px;"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><br>
+-->
+
+
+<h2><a name="lignes2"></a>Les Options
+d'information en ligne de commande.</h2>
+
+
+
+Les options suivantes affichent un certain nombre de textes informatifs
+&nbsp;sur l'&eacute;cran.&nbsp;&nbsp;
+Tux&nbsp;Paint ne d&eacute;marre
+pas r&eacute;ellement. <br>
+
+
+
+<br>
+
+
+
+<div style="margin-left: 40px;"><span style="font-family: Courier New,Courier,monospace;">
+--version</span><br>
+
+
+
+</div>
+
+
+
+Affiche le num&eacute;ro de version et la date de la copie de Tux
+Paint
+que vous avez. Elle affiche aussi si n&eacute;cessaire, les options
+de
+compilation que vous avez fourni &agrave; l'installation. (Voir
+INSTALL.txt et FAQ.txt).<br>
+
+
+
+<br>
+
+
+
+<div style="margin-left: 40px;"><span style="font-family: Courier New,Courier,monospace;">
+--copying</span><br>
+
+
+
+</div>
+
+
+
+&nbsp;Montre une courte information sur la licence pour copier
+Tux&nbsp;Paint.<br>
+
+
+
+<br>
+
+
+
+<div style="margin-left: 40px;">
+&nbsp;<span style="font-family: Courier New,Courier,monospace;">--usage</span><br>
+
+
+
+</div>
+
+
+
+&nbsp;Affiche la liste des options de ligne de commande.<br>
+
+
+
+<br>
+
+
+
+<div style="margin-left: 40px;">
+&nbsp;<span style="font-family: Courier New,Courier,monospace;">--help</span><br>
+
+
+
+</div>
+
+
+
+&nbsp;Affiche une aide courte sur l'utilisation de Tux Paint.<br>
+
+
+
+<br>
+
+
+
+<div style="margin-left: 40px;">
+&nbsp;<span style="font-family: Courier New,Courier,monospace;">--lang
+help</span><br>
+
+
+
+</div>
+
+
+
+&nbsp;Montre la liste des langages disponibles dans
+Tux&nbsp;Paint.<br>
+
+
+
+<br>
+
+
+<!--
+<a href="Options_TuxPaint.html#haut"> </a><a href="Brosses-tampons.html#haut"><img src="images/boutons_du_site/bouton_chrome_haut.png" alt="haut" style="border: 0px solid ; width: 200px; height: 100px;"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a>
+-->
+<h2><a name="lang-diff"></a>Choisir un langage
+diff&eacute;rent.</h2>
+
+
+
+Tux&nbsp;Paint a &eacute;t&eacute; traduit dans de nombreux
+langages;
+Pour acc&eacute;der aux traductions, vous pouvez utiliser l'option "<span style="font-family: Courier New,Courier,monospace;">--lang</span>"&nbsp;
+dans la ligne de commande pour r&eacute;gler le langage (par
+exemple
+"<span style="font-family: Courier New,Courier,monospace;">--lang&nbsp;spanish</span>")&nbsp;
+ou utiliser le r&eacute;glage "<span style="font-family: Courier New,Courier,monospace;">lang=</span>"
+dans le fichier de configuration.&nbsp;<br>
+
+
+
+<br>
+
+
+
+Tux&nbsp;Paint respecte aussi la localisation de votre
+environnement.
+(Vous pouvez l'outrepasser en utilisant l'option de ligne de commande "<span style="font-family: Courier New,Courier,monospace;">--locale</span>";
+Voir ci-dessus.)<br>
+
+
+
+<br>
+
+
+
+Utilisez l'option "<span style="font-family: Courier New,Courier,monospace;">--lang&nbsp;help</span>"
+pour lister les langues disponibles :<br>
+
+
+
+<br>
+
+
+
+<table style="text-align: left; width: 80%;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+  <tbody>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">Locale Code<br>
+
+
+
+      <br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Langage<br>
+
+
+
+&nbsp;(nom natif)</td>
+
+
+
+      <td align="center" valign="middle">Langage<br>
+
+
+
+&nbsp;(nom Anglais)</td>
+
+
+
+      <td align="center" valign="middle">Langage<br>
+
+
+
+(nom fran&ccedil;ais)</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">C<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">English</td>
+
+
+
+      <td align="center" valign="middle">Anglais
+am&eacute;ricain</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">af_ZA<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Afrikaans</td>
+
+
+
+      <td align="center" valign="middle">Afrikaner</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">be_BY<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Bielaruskaja</td>
+
+
+
+      <td align="center" valign="middle">Belarusian</td>
+
+
+
+      <td align="center" valign="middle">bielorusse</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">bg_BG<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Bulgarian</td>
+
+
+
+      <td align="center" valign="middle">Bulgare</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">br_FR<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Brezhoneg</td>
+
+
+
+      <td align="center" valign="middle">Breton</td>
+
+
+
+      <td align="center" valign="middle">Breton</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">ca_ES<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Catal&agrave;</td>
+
+
+
+      <td align="center" valign="middle">Catalan</td>
+
+
+
+      <td align="center" valign="middle">Catalan</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">cs_CZ<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Cesky</td>
+
+
+
+      <td align="center" valign="middle">Czech</td>
+
+
+
+      <td align="center" valign="middle">Tch&egrave;que</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">cy_GB<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Cymraeg</td>
+
+
+
+      <td align="center" valign="middle">Welsh</td>
+
+
+
+      <td align="center" valign="middle">Galois</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">da_DK<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Dansk</td>
+
+
+
+      <td align="center" valign="middle">Danish</td>
+
+
+
+      <td align="center" valign="middle">Danois</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">de_DE@euro<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Deutsch</td>
+
+
+
+      <td align="center" valign="middle">German</td>
+
+
+
+      <td align="center" valign="middle">Allemand</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">el_GR.UTF8
+(*)<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Greek</td>
+
+
+
+      <td align="center" valign="middle">Grec</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">en_GB&nbsp;<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">British
+English</td>
+
+
+
+      <td align="center" valign="middle">Anglais</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">es_ES@euro</td>
+
+
+
+      <td align="center" valign="middle">Espa&ntilde;ol</td>
+
+
+
+      <td align="center" valign="middle">Spain</td>
+
+
+
+      <td align="center" valign="middle">Espagnol</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">eu_ES<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Euskara</td>
+
+
+
+      <td align="center" valign="middle">Basque</td>
+
+
+
+      <td align="center" valign="middle">Basque</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">fi_FI@euro<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Suomi</td>
+
+
+
+      <td align="center" valign="middle">Finnish</td>
+
+
+
+      <td align="center" valign="middle">Finnois</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">fr_FR@euro<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">French</td>
+
+
+
+      <td align="center" valign="middle">Fran&ccedil;ais</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">he_IL (*)<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Hebrew</td>
+
+
+
+      <td align="center" valign="middle">H&eacute;breu</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">hi_IN (*)<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Hindi</td>
+
+
+
+      <td align="center" valign="middle">Hindi</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">hr_HR<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Hrvatski</td>
+
+
+
+      <td align="center" valign="middle">Croatian</td>
+
+
+
+      <td align="center" valign="middle">Croate</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">hu_HU<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Magyar</td>
+
+
+
+      <td align="center" valign="middle">Hungarian</td>
+
+
+
+      <td align="center" valign="middle">Hongrois</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">id_ID<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Bahasa
+Indonesia</td>
+
+
+
+      <td align="center" valign="middle">Indonesian</td>
+
+
+
+      <td align="center" valign="middle">Indon&eacute;sien</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">is_IS<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">&Iacute;slenska</td>
+
+
+
+      <td align="center" valign="middle">Icelandic</td>
+
+
+
+      <td align="center" valign="middle">Islandais</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">it_IT@euro<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Italiano</td>
+
+
+
+      <td align="center" valign="middle">Italian</td>
+
+
+
+      <td align="center" valign="middle">Italien</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">ja_JP.UTF-8
+(*)<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Japanese</td>
+
+
+
+      <td align="center" valign="middle">Japonais</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">ko_KR.UTF-8
+(*)<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">&nbsp;Korean</td>
+
+
+
+      <td align="center" valign="middle">Cor&eacute;en</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">lt_LT.UTF-8<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Lietuviu</td>
+
+
+
+      <td align="center" valign="middle">Lithuanian</td>
+
+
+
+      <td align="center" valign="middle">Lituanien</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">ms_MY<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Malay</td>
+
+
+
+      <td align="center" valign="middle">Malais</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">nb_NO<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Norsk
+(bokm&aring;l)</td>
+
+
+
+      <td align="center" valign="middle">Norwegian
+Bokm&aring;l</td>
+
+
+
+      <td align="center" valign="middle">Norv&eacute;gien
+"livresque"</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">nn_NO<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Norsk
+(nynorsk)</td>
+
+
+
+      <td align="center" valign="middle">Norwegian
+Nynorsk</td>
+
+
+
+      <td align="center" valign="middle">N&eacute;o-norv&eacute;gien</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">nl_NL@euro<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Dutch</td>
+
+
+
+      <td align="center" valign="middle">Hollandais</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">pl_PL<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Polski</td>
+
+
+
+      <td align="center" valign="middle">Polish</td>
+
+
+
+      <td align="center" valign="middle">Polonais</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">pt_BR<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Portug&ecirc;s
+Brazileiro</td>
+
+
+
+      <td align="center" valign="middle">Brazilian
+Portuguese</td>
+
+
+
+      <td align="center" valign="middle">Portugais
+br&eacute;silien</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">pt_PT<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Portug&ecirc;s</td>
+
+
+
+      <td align="center" valign="middle">Portuguese</td>
+
+
+
+      <td align="center" valign="middle">Portugais</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">ro_RO<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Romanian</td>
+
+
+
+      <td align="center" valign="middle">Roumain</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">ru_RU<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Russian</td>
+
+
+
+      <td align="center" valign="middle">Russe</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">sk_SK<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Slovak</td>
+
+
+
+      <td align="center" valign="middle">Slovaque</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">sl_SI<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Slovenian</td>
+
+
+
+      <td align="center" valign="middle">Slov&eacute;nien</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">sr_YU<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Serbian</td>
+
+
+
+      <td align="center" valign="middle">Serbe</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">sv_SE@euro<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">Svenska</td>
+
+
+
+      <td align="center" valign="middle">Swedish</td>
+
+
+
+      <td align="center" valign="middle">Su&eacute;dois</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">ta_IN (*)<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Tamil</td>
+
+
+
+      <td align="center" valign="middle">Tamoul</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">tlh (*)<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle">tlhIngan</td>
+
+
+
+      <td align="center" valign="middle">Klingon</td>
+
+
+
+      <td align="center" valign="middle">l&agrave;
+je s&egrave;che</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">tr_TR@euro<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Turkish</td>
+
+
+
+      <td align="center" valign="middle">Turc</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">vi_VN<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Vietnamese</td>
+
+
+
+      <td align="center" valign="middle">Vietnamien</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">wa_BE@euro<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Walloon</td>
+
+
+
+      <td align="center" valign="middle">Wallon</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">zh_CN (*)<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Chinese
+(Simplified)</td>
+
+
+
+      <td align="center" valign="middle">Chinois
+simplifi&eacute;</td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+      <td align="center" valign="middle">zh_TW (*)<br>
+
+
+
+      </td>
+
+
+
+      <td align="center" valign="middle"></td>
+
+
+
+      <td align="center" valign="middle">Chinese
+(Traditional)</td>
+
+
+
+      <td align="center" valign="middle">Chinois
+traditionnel</td>
+
+
+
+    </tr>
+
+
+
+  
+  
+  </tbody>
+</table>
+
+
+
+<br>
+
+
+
+(*) - Ces langages requi&egrave;rent leurs propres polices, car
+elles
+n'utilisent pas le jeu de caract&egrave;res latin comme les autres.
+Voir la section "Polices sp&eacute;ciales" plus loin. <br>
+
+
+<!--
+&nbsp;&nbsp;&nbsp; <a href="#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><br>
+-->
+
+
+<h2><a name="locale"></a>Param&eacute;trer
+la localisation de votre environnement.</h2>
+
+
+
+Changer votre localisation affectera une bonne partie de votre
+environnement.<br>
+
+
+
+<br>
+
+
+
+Comme expliqu&eacute; plus haut, tant que vous n'avez pas
+param&eacute;tr&eacute; votre langage avec les lignes de
+commandes (ou
+le fichier de configuration), Tux Paint respecte le r&eacute;glage
+de
+localisation de votre environnement.&nbsp;<br>
+
+
+
+<br>
+
+
+
+Si vous n'avez pas d&eacute;j&agrave;
+r&eacute;gl&eacute; votre
+localisation de votre environnement, la suite vous explique
+bri&egrave;vement comment faire.<br>
+
+
+
+<span style="font-weight: bold;"><br>
+
+
+
+</span>
+<h3><a name="locale_A"></a>Utilisateurs de
+Linux/Unix.</h3>
+
+
+
+Premi&egrave;rement soyez s&ucirc;r que la localisation que
+vous voulez est permise en &eacute;ditant le fichier&nbsp; "<span style="font-style: italic;">/etc/locale.gen</span>"
+sur votre syst&egrave;me et ensuite lancez le programme "<span style="font-family: Courier New,Courier,monospace;">locale-gen</span>"
+en mode root.<br>
+
+
+
+<br>
+
+
+
+NB : Les utilisateurs de Debian pourront simplement lancer la commande "<span style="font-family: Courier New,Courier,monospace;">dpkg-reconfigure&nbsp;locales</span>".<br>
+
+
+
+<br>
+
+
+
+Ensuite avant de lancer Tux Paint, r&eacute;glez votre variable
+d'environnement "$LANG" dans une des localisation list&eacute;es
+plus
+haut. (Si vous voulez que tous les programmes soient traduits, vous
+pouvez vouloir placer ce qui suit dans votre script de connection : par
+exemple&nbsp; <span style="font-style: italic;">~/.profile,&nbsp;
+~/.bashrc,
+~/.cshrc,</span> etc.)<br>
+
+
+
+<br>
+
+
+
+Par exemple, dans un Bourne Shell (Tel que BASH):<br>
+
+
+
+&nbsp;export&nbsp;LANG=es_ES@euro&nbsp;;&nbsp;\<br>
+
+
+
+&nbsp;tuxpaint<br>
+
+
+
+<br>
+
+
+
+Et dans un C Shell (comme TCSH):<br>
+
+
+
+&nbsp;setenv&nbsp;LANG&nbsp;es_ES@euro&nbsp;;&nbsp;\<br>
+
+
+
+&nbsp;tuxpaint<br>
+
+
+
+<br>
+
+
+
+<h3><a name="locale_B"></a>Utilisateurs de
+Windows.</h3>
+
+
+
+Tux&nbsp;Paint va reconna&icirc;tre la localisation courante et
+utiliser les fichiers appropri&eacute;s par d&eacute;faut. Donc
+cette
+section concerne &nbsp;uniquement les personnes utilisant plusieurs
+langages.<br>
+
+
+
+<br>
+
+
+
+La chose la plus simple a faire est d'utiliser le convertisseur '<span style="font-family: Courier New,Courier,monospace;">--lang</span>'&nbsp;
+dans le raccourcis (Voir "INSTALL.txt"). Toutefois, en utilisant une
+fen&ecirc;tre &eacute;mulant MSDOS, il est aussi possible de
+donner la
+commande comme suit :&nbsp;<br>
+
+
+
+&nbsp;<span style="font-family: Courier New,Courier,monospace;">set
+LANG=es_ES@euro</span><br>
+
+
+
+<br>
+
+
+
+&nbsp;...Ce qui r&eacute;glera ce langage pendant la
+dur&eacute;e de vie de cette fen&ecirc;tre MSDOS.<br>
+
+
+
+<br>
+
+
+
+Pour quelque chose de plus permanent, essayez d'&eacute;diter votre
+fichier '<span style="font-style: italic;">autoexec.bat' </span>en
+utilisant l'outil "sysedit" de windows: <br>
+
+
+
+<br>
+
+
+
+<h4>Windows 95/98</h4>
+
+
+
+&nbsp;&nbsp; &nbsp;1. &nbsp;&nbsp;&nbsp;
+&nbsp;Cliquez sur le bouton 'start' et s&eacute;lectionnez 'run'<br>
+
+
+
+&nbsp;&nbsp; &nbsp;2. &nbsp;&nbsp;&nbsp;
+&nbsp;Tapez "sysedit" dans la fen&ecirc;tre 'Open:' (avec ou
+sans les guillemets).<br>
+
+
+
+&nbsp;&nbsp; &nbsp;3. &nbsp;&nbsp;&nbsp;
+&nbsp;Cliquez sur 'OK'.<br>
+
+
+
+&nbsp;&nbsp; &nbsp;4. &nbsp;&nbsp;&nbsp;
+&nbsp;Localisez la
+fen&ecirc;tre AUTOEXEC.BAT dans l'&eacute;diteur de
+configuration
+syst&egrave;me (System Configuration&nbsp; Editor).<br>
+
+
+
+&nbsp;&nbsp; &nbsp;5. &nbsp;&nbsp;&nbsp;
+&nbsp;Ajoutez ce qui suit en bas de la file :&nbsp;<br>
+
+
+
+&nbsp;set LANG=es_ES@euro<br>
+
+
+
+&nbsp;&nbsp; &nbsp;6. &nbsp;&nbsp;&nbsp;
+&nbsp;Fermez l'&eacute;diteur
+de configuration syst&egrave;me, r&eacute;pondez oui lorsqu'il
+demande
+si vous voulez conserver les changement.<br>
+
+
+
+&nbsp;&nbsp; &nbsp;7. &nbsp;&nbsp;&nbsp;
+&nbsp; Red&eacute;marrer votre machine.<br>
+
+
+
+&nbsp;Pour affecter la machine enti&egrave;re, et toutes les
+applications, il est possible d'utiliser le tableau de
+contr&ocirc;le
+des "r&eacute;glages de r&eacute;gions" :<br>
+
+
+
+&nbsp;&nbsp; &nbsp;1. &nbsp;&nbsp;&nbsp;
+&nbsp;Cliquez sur le
+bouton&nbsp;'Start', et s&eacute;lectionnez
+'Settings&nbsp;|&nbsp;Control&nbsp;Panel'.<br>
+
+
+
+&nbsp;&nbsp; &nbsp;2. &nbsp;&nbsp;&nbsp;
+&nbsp;Double-cliquez sur le globe de "r&eacute;glage de
+r&eacute;gion".<br>
+
+
+
+&nbsp;&nbsp; &nbsp;3. &nbsp;&nbsp;&nbsp;
+&nbsp;S&eacute;lectionnez un
+langage ou une r&eacute;gion dans le menu d&eacute;roulant.<br>
+
+
+
+&nbsp;&nbsp; &nbsp;4. &nbsp;&nbsp;&nbsp;
+&nbsp;Cliquez sur 'OK'.<br>
+
+
+
+&nbsp;&nbsp; &nbsp;5. &nbsp;&nbsp;&nbsp;
+&nbsp;Red&eacute;marrez votre ordinateur lorsqu'il
+vous le demande.<br>
+
+
+
+<br>
+
+
+<!--
+<a href="Options_TuxPaint.html#haut"> </a><a href="#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><br>
+-->
+
+
+<h2><a name="Polices"></a>Polices
+Sp&eacute;ciales.</h2>
+
+
+
+Certains langages requi&egrave;rent que certaines polices
+sp&eacute;ciales soient install&eacute;es. Ces fichiers de
+polices (qui
+sont au format True Type (TTF)), sont trop gros pour &ecirc;tre
+inclus
+dans le t&eacute;l&eacute;chargement de Tux&nbsp;Paint, et
+sont
+disponibles s&eacute;par&eacute;ment. (Voir la table ci-dessus
+dans la
+section <a href="#lang-diff">choisir un langage
+diff&eacute;rent</a>.) &nbsp;<br>
+
+
+
+<br>
+
+
+
+Quand vous d&eacute;marrez Tux&nbsp;Paint dans un langage qui
+requi&egrave;re ces propres fonts,&nbsp;Tux&nbsp;Paint va
+essayer de
+charger les polices &agrave; partir de son r&eacute;pertoire
+syst&egrave;me (dans un sous-r&eacute;pertoire "locale"). Le
+nom du
+fichier correspond au deux premi&egrave;res lettres du code
+'locale'
+pour ce langage (Par exemple :&nbsp;"ko" for
+Korean, "ja" for Japanese,&nbsp; "zh" for Chinese).<br>
+
+
+
+<br>
+
+
+
+Par exemple, sous linux, quand&nbsp;Tux&nbsp;Paint est
+d&eacute;marr&eacute; en cor&eacute;en (i.e., avec l'option
+"<span style="font-family: Courier New,Courier,monospace;">--lang&nbsp;korean</span>"),&nbsp;Tux&nbsp;Paint
+va tenter de charg&eacute; le fichier de police suivant :&nbsp;<br>
+
+
+
+<br>
+
+
+
+<span style="font-style: italic;">
+/usr/share/tuxpaint/fonts/locale/ko.ttf </span><br style="font-style: italic;">
+
+
+
+<br>
+
+
+
+Vous pouvez t&eacute;l&eacute;charger les polices pour les
+langages support&eacute;s sur le site de Tux Paint, <a href="http://www.newbreedsoftware.com/tuxpaint/">http://www.newbreedsoftware.com/tuxpaint/</a>.&nbsp;
+(Regardez dans la section 'Fonts'&nbsp;sous 'Download.')<br>
+
+
+
+<br>
+
+
+
+Sous Linux et Unix, vous pouvez utiliser le Makefile qui vient avec les
+polices pour installer les polices au bon endroit.<br>
+
+
+
+<br>
+
+
+<!--
+<a href="Options_TuxPaint.html#haut"> </a><a href="#haut"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="haut" src="images/boutons_du_site/bouton_chrome_haut.png"></a>&nbsp;&nbsp;<a href="tuxpaint-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Retour" src="images/boutons_du_site/bouton_chrome_retour.png"></a><a href="JerandKa-index.html"><img style="border: 0px solid ; width: 200px; height: 100px;" alt="Acceuil" src="images/boutons_du_site/bouton_chrome_acceuil.png"></a><br>
+-->
+
+
+<br>
+
+
+
+Traduction fa&icirc;te le 30/09/2005 de <br>
+
+
+
+<div style="margin-left: 80px;">
+&nbsp;<span style="font-family: Helvetica;">version&nbsp;
+0.9.14</span><br style="font-family: Helvetica;">
+
+
+
+<br style="font-family: Helvetica;">
+
+
+
+<span style="font-family: Helvetica;">&nbsp;Options
+Documentation</span><br style="font-family: Helvetica;">
+
+
+
+<br style="font-family: Helvetica;">
+
+
+
+<span style="font-family: Helvetica;">Copyright 2004 by
+Bill Kendrick</span><br style="font-family: Helvetica;">
+
+
+
+<span style="font-family: Helvetica;">&nbsp;New Breed
+Software</span><br style="font-family: Helvetica;">
+
+
+
+<br style="font-family: Helvetica;">
+
+
+
+<a href="mailto:bill@newbreedsoftware.com"><span style="font-family: Helvetica;">bill@newbreedsoftware.com</span></a><br style="font-family: Helvetica;">
+
+
+
+<a href="http://www.newbreedsoftware.com/tuxpaint/"><span style="font-family: Helvetica;">http://www.newbreedsoftware.com/tuxpaint/</span></a><br style="font-family: Helvetica;">
+
+
+
+<br style="font-family: Helvetica;">
+
+
+
+<span style="font-family: Helvetica;">September 24, 2004</span></div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+<div id="conteneurbas">
+<div id="i"></div>
+
+
+
+<div id="k"></div>
+
+
+
+</div>
+
+
+
+</body>
+</html>

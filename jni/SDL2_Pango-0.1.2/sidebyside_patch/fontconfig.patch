@@ -1,0 +1,122 @@
+Index: src/fccfg.c
+===================================================================
+--- src/fccfg.c	(revision 92)
++++ src/fccfg.c	(revision 99)
+@@ -28,7 +28,10 @@
+ #define STRICT
+ #include <windows.h>
+ #undef STRICT
++#ifdef SIDEBYSIDE
++#define getenv(x) NULL
+ #endif
++#endif
+ 
+ #if defined (_WIN32) && !defined (R_OK)
+ #define R_OK 4
+@@ -77,14 +80,14 @@
+     {
+ 	/* If no home, use the temp folder. */
+ 	FcChar8	    dummy[1];
+-	int	    templen = GetTempPath (1, dummy);
++	int	    templen = GetTempPathA (1, dummy);
+ 	FcChar8     *temp = malloc (templen + 1);
+ 
+ 	if (temp)
+ 	{
+ 	    FcChar8 *cache_dir;
+ 
+-	    GetTempPath (templen + 1, temp);
++	    GetTempPathA (templen + 1, temp);
+ 	    cache_dir = FcStrPlus (temp, FC_USER_CACHE_FILE);
+ 	    free (temp);
+ 	    if (!FcConfigSetCache (config, cache_dir))
+@@ -1585,6 +1588,9 @@
+         char *home = getenv ("HOME");
+ 
+ #ifdef _WIN32
++#ifdef SIDEBYSIDE
++	return FONTCONFIG_PATH;
++#endif
+ 	if (home == NULL)
+ 	    home = getenv ("USERPROFILE");
+ #endif
+Index: src/fcxml.c
+===================================================================
+--- src/fcxml.c	(revision 92)
++++ src/fcxml.c	(revision 99)
+@@ -1704,9 +1704,17 @@
+ 	    break;
+ 	}
+ #ifdef _WIN32
+-	if (strcmp (data, "WINDOWSFONTDIR") == 0)
++	if (strcmp (data, "WINDOWSFONTDIR") == 0 || strcmp (data, "BINDIR") == 0)
+ 	{
+ 	    int rc;
++	    enum dirtype_e {WINDOWSFONTDIR, BINDIR};
++	    enum dirtype_e dirtoken;
++
++	    if (strcmp (data, "WINDOWSFONTDIR") == 0)
++		dirtoken = WINDOWSFONTDIR;
++	    else if (strcmp (data, "BINDIR") == 0)
++		dirtoken = BINDIR;
++
+ 	    FcStrFree (data);
+ 	    data = malloc (1000);
+ 	    if (!data)
+@@ -1715,16 +1723,35 @@
+ 		break;
+ 	    }
+ 	    FcMemAlloc (FC_MEM_STRING, 1000);
+-	    rc = GetWindowsDirectory (data, 800);
+-	    if (rc == 0 || rc > 800)
++	    if (dirtoken == BINDIR)
+ 	    {
+-		FcConfigMessage (parse, FcSevereError, "GetWindowsDirectory failed");
+-		FcStrFree (data);
+-		break;
++		FcChar8 *p;
++		rc = GetModuleFileName (NULL, data, 800);
++		if (rc == 0 || rc > 800)
++		{
++		    FcConfigMessage (parse, FcSevereError, "GetModuleFileName failed");
++		    FcStrFree (data);
++		    break;
++		}
++		p = strrchr (data, '\\');
++		if (p)
++		    *p = '\0';
++		else
++		    data[0] = '\0';
+ 	    }
+-	    if (data [strlen (data) - 1] != '\\')
+-		strcat (data, "\\");
+-	    strcat (data, "fonts");
++	    else    /* WINDOWSFONTDIR */
++	    {
++		rc = GetWindowsDirectory (data, 800);
++		if (rc == 0 || rc > 800)
++		{
++		    FcConfigMessage (parse, FcSevereError, "GetWindowsDirectory failed");
++		    FcStrFree (data);
++		    break;
++		}
++		if (data [strlen (data) - 1] != '\\')
++		    strcat (data, "\\");
++		strcat (data, "fonts");
++	    }
+ 	}
+ #endif
+ 	if (!FcStrUsesHome (data) || FcConfigHome ())
+Index: Makefile.am
+===================================================================
+--- Makefile.am	(revision 92)
++++ Makefile.am	(revision 99)
+@@ -40,7 +40,7 @@
+ config_DATA=fonts.conf fonts.dtd
+ 
+ install-data-local:
+-	$(mkinstalldirs) $(DESTDIR)/$(configdir)
++	$(mkinstalldirs) $(DESTDIR)$(configdir)
+ 	if [ -f $(DESTDIR)$(configdir)/local.conf ]; then \
+ 	  echo "not overwriting existing $(DESTDIR)$(configdir)/local.conf"; \
+ 	else if [ -f $(srcdir)/local.conf ]; then \

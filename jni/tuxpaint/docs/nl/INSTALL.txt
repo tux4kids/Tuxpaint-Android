@@ -1,0 +1,294 @@
+INSTALL.txt voor Tux Paint
+
+Tux Paint - Een tekenprogramma voor kinderen.
+
+Copyright 2002, Bill Kendrick
+bill@newbreedsoftware.com
+http://www.newbreedsoftware.com/tuxpaint/
+
+27 Juni 2002 - 5 november 2002
+
+(Nederlands: Geert <geert-csg@wanadoo.nl>, 20 november 2002)
+
+
+Nodig:
+------
+  Windows gebruikers:
+  -------------------
+    De Windows versie van Tux Paint wordt geleverd als een executable file.
+    Hierin zitten alle libraries (in ".DLL" vorm).
+
+  libSDL
+  ------
+    Tux Paint benodigt de Simple DirectMedia Layer Library (libSDL),
+    een Open Source multimedia programming library beschikbaar onder de
+    GNU Lesser General Public License (LGPL).
+
+    Samen met libSDL heeft Tux Paint een aantal andere 'hulp' libraries nodig:
+    SDL_Image (voor grafische files), SDL_TTF (voor True Type Fonts
+    ondersteuning) en optioneel de SDL_Mixer (voor geluidseffecten).
+
+    Linux/Unix gebruikers:
+    ----------------------
+      De SDL libraries zijn beschikbaar als source-code, of als RPM of als
+      Debian pakket voor de verschillende Linux distributies.  Ze zijn als
+      download beschikbaar van:
+
+        libSDL:      http://www.libsdl.org/
+        SDL_Image:   http://www.libsdl.org/projects/SDL_image/
+        SDL_TTF:     http://www.libsdl.org/projects/SDL_ttf/
+        SDL_Mixer:   http://www.libsdl.org/projects/SDL_mixer/   [OPTIONEEL]
+
+      Meestal zijn ze echter gewoon beschikbaar op uw Linux distributie
+      CD, of via pakket onderhoud managers als het Debian "apt-get").
+
+      NB: Installeer ook "-devel" versies van de pakketten.(Dus beide pakketten
+      "SDL-1.2.4.rpm" EN  "SDL-1.2.4-devel.rpm")
+
+  Andere Libraries:
+  -----------------
+    Tux Paint maakt ook nog gebruik van een aantal andere LGPL libraries.
+    Onder Linux moeten deze geïnstalleerd worden. Ze zullen meestal al op uw
+    systeem aanwezig zijn of zijn beschikbaar op de CD van uw Linux distributie.
+
+    libPNG
+    ------
+      Tux Paint gebruikt het PNG (Portable Network Graphics) formaat voor de
+      data files.  SDL_image heeft hiervoor libPNG nodig.
+
+        http://www.libpng.org/pub/png/libpng.html
+
+    FreeType2
+    ---------
+      Tux Paint gebruikt de TTF (True Type Font) fonts voor tekst.
+      SDL_ttf heeft hiervoor de FreeType2 library nodig.
+
+        http://www.freetype.org/
+
+    gettext
+    -------
+      Tux Paint gebruikt uw locale settings van uw systeem samen met de 
+      "gettext" library om de verschillende talen te ondersteunen (bijvoorbeeld
+      Spaans).  Hiervoor moet u de gettext library installeren.
+
+        http://www.gnu.org/software/gettext/
+
+    NetPBM Tools  [OPTIONEEL]
+    ------------------------
+      Onder Linux en Unix worden de NetPBM gereedschappen veel gebruikt om te
+      printen (Een PNG file wordt gegenereerd door TuxPaint en weer
+      geconverteerd naar een PostScript formaat door gebruik te maken van de
+      'pngtopnm' and 'pnmtops' NetPBM commando-regel gereedschappen.)
+
+        http://netpbm.sourceforge.net/
+
+
+Compileren en Installatie:
+--------------------------
+  Tux Paint wordt uitgegeven onder de GNU General Public License (GPL)
+  (zie "COPYING.txt" voor meer details), daarom is de 'source code' van het
+  programma bijgevoegd.
+
+  Windows gebruikers:
+  -------------------
+    Compileren:
+    -----------
+      Tux Paint wordt geleverd als een voor-gecompileerd pakket voor Windows.
+      [Eventuele informatie over het hercompileren voor Windows zal
+      in de toekomst hier verschijnen. Tot die tijd moet u het op eigen kracht 
+      doen.]
+
+    Installeren:
+    ------------
+      Dubbel-klik op het Tux Paint installatie programma (.EXE file) en
+      volg de instructies.
+
+      Eerst wordt u gevraagd om in te stemmen met de GPL licentie.
+      (Deze kunt u terugvinden als de General Public License (GPL), zie
+      hiervoor de "COPYING.txt".)
+
+      Het programma vraagt u of snelkoppelingen in het Windows Start Menu en op
+      de desktop naar Tux Paint wilt. Beide opties zijn standaard aangevinkt.
+
+      Vervolgens wordt u gevraagd op welke plaats u Tux Paint wilt installeren.
+      Indien er voldoende plaats aanwezig is zou de standaard map goed moeten
+      zijn. Is dit niet het geval, kiest u dan een andere plaats.
+
+      Na deze vraag hoeft u alleen nog maar op 'installeren' te klikken.
+      Tux Paint doet de rest!
+
+    Het veranderen van de eigenschappen van de snelkoppeling.
+    ---------------------------------------------------------
+      Om de programma instellingen te veranderen klikt u met de rechter 
+      muis-toets op de TuxPaint snelkoppeling en kiest u 'Eigenschappen'
+      uit het menu.
+
+      Controleer of de 'snelkoppeling' tab is geselecteerd en bekijk het doel
+      van de snelkoppeling. Hier staat bijvoorbeeld:
+      
+        "C:\Program Files\TuxPaint\TuxPaint.exe"
+
+      U kunt nu commando-regel opties toevoegen, welke uitgevoerd worden
+      als u op het icoontje klikt.
+
+      Om bijvoorbeeld Tux Paint in de 'fullscreen' mode te laten starten,
+      met eenvoudige vormen ( geen roteer optie) en in het Nederlands voegt
+      u de volgende opties toe:
+
+        "C:\Program Files\TuxPaint\TuxPaint.exe" -f -s --lang dutch
+
+      (Zie de "README.txt" voor een volledige lijst van commando-regel opties.)
+
+      Maakt u een fout of, nog erger, als het venster verdwijnt dan drukt u
+      Ctrl-Z of [ESC] om zaken ongedaan te maken. Het venster zal zich dan
+      sluiten zonder dat de veranderingen uitgevoerd werden. (Niet op de
+      "Apply" knop drukken!).
+
+      Bent u klaar dan klikt u op "OK."
+
+    Als er iets fout gaat
+    ---------------------
+      Als u op het icoontje klikt om TuxPaint te starten en er gebeurt niets
+      dan zijn de commando-regel opties waarschijnlijk fout. Bekijk dan met een
+      eenvoudige tekstverwerker (Notepad o.i.d.) de file 'stderr.txt' in de 
+      TuxPaint map.
+            
+      Deze file bevat een omschrijving van wat er fout is gegaan. In de meeste
+      gevallen zal dit iets zijn in de stijl van een hoofdletter waar er geen
+      hoort, een letter vergeten, een streepje teveel of te weinig etc.
+
+
+  Linux/Unix Gebruikers:
+  ----------------------
+    Compileren:
+    -----------
+      NB: Op dit moment ondersteunt Tux Paint niet autoconf/automake dus is er
+      geen "./configure" script.  (Sorry!)  Compileren zou echter eenvoudig
+      moeten zijn, vooropgesteld dat TuxPaint al de nodige libraries kan vinden.
+
+      Om het programma van de source-code te compileren typt u eenvoudig
+      het volgende commando:
+
+        $ make
+
+    Het geluid uitschakelen bij het compileren:
+    -------------------------------------------
+      Heeft u geen geluidskaart of wilt u het programma gebruiken zonder geluid
+      dan heeft het geen zin om de geluidsondersteuning te installeren.
+      De SDL_mixer hoeft dan ook niet aanwezig te zijn op uw systeem.
+      U kunt dan make als volgt uitvoeren:
+
+        $ make nosound
+
+
+    U krijgt foutmeldingen:
+    -----------------------
+      Krijgt u foutmeldingen tijdens het compileren controleer dan of alle
+      genoemde libraries op uw systeem aanwezig zijn. Gebruikt u
+      voor-gecompileerde pakketten zoals de RPM's bij RedHat en de DEBs bij
+      Debian installeer dan ook de corresponderende  "-dev" of "-devel"
+      pakketten. Anders kunt u Tux Paint (en andere programma's) niet
+      compileren.
+
+    Installeren:
+    ------------
+      Vooropgesteld dat er geen fouten zijn opgetreden bij het compileren, kunt 
+      u nu Tux Paint installeren. Onder Linux moet dit gebeuren door de 'root'
+      gebruiker (superuser).  U kunt naar "root" overschakelen door:
+
+        $ su te typen
+
+      Geef het "root" password en u bent ingelogd als hoofdgebruiker
+      (met een prompt die eruit ziet als "#").  Om het programma te installeren
+      typt u:
+
+        # make install
+
+      Bent u klaar dan kunt u de 'superuser' mode verlaten door:
+
+        # exit te typen.
+
+
+      NB: Standaard plaatst TuxPaint de  "tuxpaint", executable in 
+      "/usr/local/bin/".  De data files (afbeeldingen, geluiden etc.)
+      komen in "/usr/local/share/tuxpaint/".
+
+
+      Waar gaan de bestanden naar toe
+      -------------------------------
+        U kunt met de 'PREFIX' variabele in de Makefile instellen waar de
+	bestanden naar toe gaan.  "PREFIX" is de basis waar alle bestanden
+	naartoe gaan.  Standaard ingesteld op "/usr/local".
+
+        Andere variabelen zijn:
+          BIN_PREFIX
+	    Waar het bestand "tuxpaint" terecht komt.
+	    (Standaard is "$(PREFIX)/bin" bijvoorbeeld: "/usr/local/bin")
+
+	  DATA_PREFIX
+	    Waar de data files (geluid, afbeeldingen, borstels, stempels etc.)
+	    terecht komen en waar TuxPaint bij het opstarten zal zoeken.
+	    (Standaard ingesteld op "$(PREFIX)/share/tuxpaint")
+
+	  DOC_PREFIX
+	    Waar de documentatie files geplaatst worden (de "docs" directory).
+	    (Standaard "$(PREFIX)/share/doc/tuxpaint")
+
+	  MAN_PREFIX
+	    Waar de 'man pages' terecht komen. (De standaard is:
+	    "$(PREFIX)/share/man")
+
+	  ICON_PREFIX                      $(PREFIX)/share/pixmaps
+	  X11_ICON_PREFIX                  $(PREFIX)/X11R6/include/X11/pixmaps
+	  GNOME_PREFIX                     $(PREFIX)/share/gnome/apps/Graphics
+	  KDE_PREFIX                       $(PREFIX)/share/applnk/Graphics
+	    Waar de iconen voor KDE en GNOME terecht komen.
+
+	  LOCALE_PREFIX
+	    Waar de vertaalde pagina's van Tux Paint naar toe gaan.
+	    (Standaard ingesteld op "$(PREFIX)/share/locale/")
+	    (Uiteindelijk komen deze bestanden in de  locale's directory 
+	    (bijvoorbeeld, "es" voor Spaans), binnen de "LC_MESSAGES"
+	    subdirectory.)
+
+
+Tux Paint verwijderen:
+----------------------
+  Windows
+  -------
+    Gebruik makend van de Uninstaller
+    ---------------------------------
+      Als u de snelkoppeling in het Start Menu geïnstalleerd heeft dan kunt u
+      "Uninstall" kiezen in de Tuxpaint folder. Er opent zich een venster
+      waarin u om bevestiging gevraagd wordt. Weet u het zeker, klik dan op
+      de 'Uninstall' knop.
+
+      Wanneer de bestanden verwijderd zijn klikt u eenvoudig op de 'sluiten'
+      knop.
+
+      U kunt TuxPaint ook verwijderen in het de 'software' afdeling van het
+      configuratie scherm.
+
+      NB: Omdat de afbeeldingen gemaakt met Tux Paint opgeslagen worden in de
+      map 'userdata' wordt deze map niet verwijderd.
+
+
+  Linux
+  -----
+    In de source file directory van TuxPaint (de map waarin u Tux Paint
+    compileerde), kunt u de 'Makefile' gebruiken om Tux Paint te verwijderen.
+    Standaard kan dit alleen gebeuren door de  "root" gebruiker ('superuser').
+    (Zie ook de installatieprocedure voor meer informatie.)
+
+    U schakelt over naar "root" door het volgende commando te typen:
+
+      $ su
+
+    Geef vervolgens het "root" password op. De prompt is een  "#").
+    Om alle standaard bestanden te verwijderen typt u:
+
+      # make uninstall
+
+    Na deze actie wordt u weer gewone gebruiker door het commando:
+
+      # exit

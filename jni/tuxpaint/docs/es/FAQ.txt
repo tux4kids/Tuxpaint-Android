@@ -1,0 +1,452 @@
+FAQ.txt del Tux Paint
+
+Tux Paint - Un programa de dibujo simple para niños.
+
+Copyright 2002 por Bill Kendrick
+bill@newbreedsoftware.com
+http://www.newbreedsoftware.com/tuxpaint/
+
+14 de Setiembre de 2002 - 28 de Setiembre de 2002
+
+
+Preguntas Más Frecuentes:
+-------------------------
+  ¿Por qué no puedo tener una Goma de diferentes tamaños o utilizar las formas
+  ----------------------------------------------------------------------------
+  de los pinceles?
+  ----------------
+    La Goma de Borrar está pensada para borrar rápidamente grandes partes de
+    la imagen.
+
+    Notar que simplemente deja partes de la imagen en blanco.  Es posible
+    obtener el resultado deseado (los diferentes tamaños y/o formas)
+    simplemente utilizando la herramienta "Pintar" pintando con el color
+    blanco! :^)
+
+
+  ¡Todo el texto está en Mayúsculas!
+  --------------------------------
+    La opción "uppercase" (mayúsculas) está activada.
+
+    Si se está ejecutando Tux Paint desde una línea de comandos, hay que
+    asegurarse de no incluir la opción "--uppercase".
+
+    Si se está ejecutando Tux Paint mediante doble clic en un ícono, verificar
+    propiedades del ícono para comprobar que "--uppercase" no esté siendo
+    incluido como argumento de línea de comandos.
+
+    Si "--uppercase" no estuviera siendo incluido en la línea de comandos,
+    verificar el archivo de configuración del Tux Paint ("~/.tuxpaintrc" bajo
+    Linux y Unix, "tuxpaint.cfg" bajo Windows) buscando una línea que
+    contenga: "uppercase=yes".
+
+    Bien remover esa línea o simplemente ejecutar Tux Paint con el argumento
+    "--mixedcase" en la línea de comandos, lo que pasará por alto la
+    preferencia de mayúsculas.
+
+
+  ¡Aparece el mensaje "¡No puedes imprimir aún!" al intentar imprimir!
+  ----------------------------------------------------------------
+    La opción de retardo de impresión (print delay) está activada.  Sólo es
+    posible imprimir una vez cada X segundos.
+
+    Si se está ejecutando Tux Paint desde una línea de comandos, asegurarse de
+    no estar incluyendo la opción "--printdelay=...".
+
+    Si se está ejecutando Tux Paint mediante doble clic en un ícono, verificar
+    las propiedades del ícono para comprobar que "--printdelay=..." no esté
+    siendo incluido como argumento de línea de comandos.
+
+    Si la opción "--printdelay=..." no estuviera siendo incluida en la línea de
+    comandos, verificar el archivo de configuración del Tux Paint
+    ("~/.tuxpaintrc" bajo Linux y Unix, "tuxpaint.cfg" bajo Windows) buscando
+    una línea que contenga:  "printdelay=...".
+
+    Bien remover esa línea, fijar el valor de retardo a 0 (sin retardo) o
+    disminuir el retardo al valor preferido.  (Ver LEEME.txt).
+    O simplemente ejecutar Tux Paint con el argumento "--printdelay=0" en la
+    línea de comandos, lo que pasará por alto la preferencia establecida en el
+    archivo de configuración, permitiendo una impresión ilimitada.  (No será
+    necesario esperar entre cada impresión.)
+
+
+  ¡Simplemente no puedo imprimir!  ¡El botón está desactivado!
+  ------------------------------------------------------------
+    La opción "no print" ha sido activada.
+
+    Si se está ejecutando Tux Paint desde una línea de comandos, asegurarse de
+    no estar incluyendo la opción "--noprint".
+
+    Si se está ejecutando Tux Paint mediante doble clic en un ícono, verificar
+    las propiedades del ícono para comprobar que "--noprint" no esté siendo
+    incluido como argumento.
+
+    Si la opción "--noprint" no estuviera siendo incluida en la línea de
+    comandos, verificar el archivo de configuración del Tux Paint
+    ("~/.tuxpaintrc" bajo Linux y Unix, "tuxpaint.cfg" bajo Windows) buscando
+    una línea que contenga: "noprint=yes".
+
+    Bien remover esa línea, o simplemente ejecutar Tux Paint con el argumento
+    "--print" en la línea de comandos, lo que pasará por alto la preferencia
+    establecida en el archivo de configuración.
+
+
+  Al ejecutar Tux Paint a pantalla completa, ¡si salgo con ALT-TAB, al volver
+  ---------------------------------------------------------------------------
+  la ventana queda negra!
+  -----------------------
+    Este es aparentemente un error en la biblioteca SDL.  Lo sentimos.
+
+
+  Al ejecutar Tux Paint a pantalla completa, tiene bordes grandes alrededor
+  -------------------------------------------------------------------------
+    Usuarios de Linux - El servidor X-Window probablemente no esté fijado
+    con la habilidad de cambiar a la resolución requerida: 640 x 480.
+    (Esto se efectúa manualmente bajo el servidor XFree86 presionando
+    [Ctrl]-[Alt]-['+' del teclado numérico] y -['-' del teclado numérico].)
+
+    Para que esto funcione, el monitor debe soportar esa resolución y se
+    necesitará tenerlo listado en la configuración del servidor X.
+
+    Verificar la sub-sección "Display" de la sección "Screen" del archivo de
+    configuración de XFree86 (normalmente en "/etc/X11/XF86Config-4" o en
+    "/etc/X11/XF86Config", dependiendo de la versión de XFree86 que se esté
+    utilizando: 3.x o 4.x respectivamente).
+
+    Agregar "640x480" en la línea "Modes" apropiada.  (p.ej.: en la subsección
+    "Display" que contiene la profundidad de color de 16 bits ("Depth 16"),
+    que es lo que el Tux Paint intentará utilizar.)
+
+    p.ej.:
+
+      Modes "1280x1024" "1024x768" "800x600" "640x480"
+
+    Notar que algunas distribuciones de Linux tienen herramientas que pueden
+    realizar estos cambios más facilmente.  Los usuarios de Debian pueden
+    ejecutar el comando "dpkg-reconfigure xserver-xfree86" como root, por
+    ejemplo.
+    
+
+  ¡No hay sonido!
+  ---------------
+    Primero, verificar lo obvio:
+
+      * Asegurarse de estar usando una computadora con tarjeta de sonido. ;^)
+      * ¿Están conectados y encendidos los parlantes?
+      * ¿Está alto el volumen de los parlantes?
+      * ¿Está alto el volumen del mezclador del Sistema Operativo?
+      * ¿Hay otros programas corriendo que utilicen sonido?  (Pueden estar
+        'bloqueando' al Tux Paint)
+
+    Si el sonido parece estar funcionando (y ningún otro programa estuviera
+    "bloqueando" el dispositivo de sonido), entonces: o Tux Paint se está
+    ejecutando con la opción "no sound" o fue compilado con el soporte para
+    sonido desabilitado por completo.
+
+    Para verificar si el soporte para sonido de Tux Paint estaba habilitado al
+    ser compilado, ejecutar Tux Paint desde una línea de comando, de esta
+    forma:
+
+      tuxpaint --version
+
+    Si, entre otras informaciones, apareciera "Sound disabled", entonces la
+    versión del Tux Paint que está siendo ejecutada tiene deshabilitado el
+    sonido. Recompilar Tux Paint y asegurarse no incluir el target "nosound".
+    (no ejecutar "make nosound")  ¡Asegurarse que la biblioteca SDL_mixer esté
+    disponible!
+
+    Si Tux Paint no estuviera compilado sin soporte para sonido, asegurarse de
+    no estar ejecutándolo con la opción "--nosound" como argumento en la línea
+    de comandos.
+
+    Si no fuera ese el caso, entonces verificar el archivo de configuración
+    ("~/.tuxpaintrc" bajo Linux y Unix, y "tuxpaint.cfg" bajo Windows) buscando
+    una línea que incluya: "nosound=yes".
+
+    Bien remover dicha línea o simplemente ejecutar Tux Paint con el argumento
+    de línea de comandos: "--sound", el cual pasará por alto las preferencias
+    del archivo de configuración.
+
+
+  Los efectos de sonido suenan extraños
+  -------------------------------------
+    Esto puede tener que ver con la forma en que fueron inicializadas SDL y
+    SDL_mixer. (El tamaño de bufer escogido.)
+
+    Por favor envíennos correo-e con los detalles de la computadora utilizada.
+    (Sistema operativo y versión, tarjeta de sonido, qué versión de Tux Paint
+    se está corriendo (ejecutar "tuxpaint --version" para verificar) y cosas
+    por el estilo.)
+
+
+  Las miniaturas del Selector de Sellos se ven mal
+  ------------------------------------------------
+    Probablemente Tux Paint haya sido compilado con el código de miniaturas
+    más rápido y de menor calidad habilitado.  Ejecutar el comando:
+    "tuxpaint --version" desde una línea de comando. Si entre los otros
+    mensajes aparece el texto:
+    "Low Quality Thumbnails enabled", entonces esto es lo que está sucediendo.
+
+    Recompilar Tux Paint desde el código fuente. Asegurarse de remover o
+    comentar cualquier línea que diga:
+    
+      #define LOW_QUALITY_THUMBNAILS
+
+    en el archivo "tuxpaint.c" en el directorio "src".
+
+
+  La herramienta mágica "Rellenar" da malos resultados
+  ----------------------------------------------------
+    Probablemente Tux Paint esté comparando colores exactos de pixel al
+    rellenar. Esto es más rápido, pero se ve peor. Ejecutar el comando
+    "tuxpaint --version" desde una línea de comandos, se verá, entre otras
+    informaciones: "Low Quality Flood Fill enabled".
+
+    Para cambiar esto, se deberá recompilar Tux Paint desde el código fuente.
+    Asegurarse de remover o comentar cualquier línea que diga:
+
+      #define LOW_QUALITY_FLOOD_FILL
+
+    en el archivo "tuxpaint.c" en el directorio "src".
+
+
+  Las imágenes del diálogo 'Abrir' se ven mal
+  -------------------------------------------
+    Es probable que "Low Quality Thumbnails" esté abilitado.
+    Ver: "Las miniaturas del Selector de Sellos se ven mal", arriba.
+
+
+  ¡Los botones de selección de colores son unos cuadrados horribles en vez de
+  ---------------------------------------------------------------------------
+  lindos botones!
+  ---------------
+    Probablemente Tux Paint fue compilado con los botones de selección de
+    color lindos deshabilitados.  Ejecutar el comando:  "tuxpaint --version"
+    desde una línea de comandos.  Si, entre otra información, se ve el texto:
+    "Low Quality Color Selector enabled", entonces es eso lo que sucede.
+
+    Recompilar Tux Paint desde su código fuente.  Asegurarse de remover o
+    comentar cualquier línea que diga:
+    
+      #define LOW_QUALITY_COLOR_SELECTOR
+
+    en el archivo "tuxpaint.c" en el directorio "src".
+
+
+  Tux Paint sige ejecutándose a Pantalla Completa - ¡lo quiero en una ventana!
+  ----------------------------------------------------------------------------
+    La opción "fullscreen" está activa.
+
+    Si Tux Paint se está ejecutando desde una línea de comandos, asegurarse
+    de no estar pasándole la opción "--fullscreen".
+
+    Si se está ejecutando mediante doble clic en un ícono, verificar las
+    propiedades del ícono para ver si "--fullscreen" aparece listado como un
+    argumento.
+
+    Si "--fullscreen" no se encuentra en la línea de comandos, verificar el
+    archivo de configuración del Tux Paint ("~/.tuxpaintrc" bajo Linux y Unix,
+    "tuxpaint.cfg" bajo Windows) buscando una línea que contenga:
+    "fullscreen=yes".
+
+    Bien remover esa línea o simplemente ejecutar Tux Paint desde una línea
+    de comando con el argumento: "--windowed", lo que pasará por alto las
+    preferencias establecidas en el archivo de configuración.
+
+
+  Tux Paint sigue escribiendo extraños mensajes en la pantalla / en un archivo
+  ----------------------------------------------------------------------------
+  de texto
+  --------
+    Unos cuantos mensajes es normal, pero si Tux Paint se torna extremadamente
+    verborrágico (como listar el nombre de cada imagen de sellos que encuentre
+    al cargarla), entonces probablemente haya sido compilado con la salida de
+    depuración activada.
+
+    Recompilar Tux Paint desde su código fuente.  Asegurarse de remover o
+    comentar cualquier línea que diga:
+    
+      #define DEBUG
+
+    en el archivo "tuxpaint.c" en el directorio "src".
+
+
+  Los bordes de los Sellos siempre son rectángulos
+  ------------------------------------------------
+    Tux Paint fue compilado utilizando bordes de sellos de baja calidad (pero
+    más rápidos).
+
+    Recompilar Tux Paint desde su código fuente.  Asegurarse de remover o comentar
+    cualquier línea que diga:
+    
+      #define LOW_QUALITY_STAMP_OUTLINE
+
+    en el archivo "tuxpaint.c" en el directorio "src".
+
+
+  ¡Tux Paint está en un idioma extraño!
+  -------------------------------------
+    Asegurarse que la localización de la computadora sea la correcta.
+    Ver "Tux Paint no se cambia a mi idioma", abajo.
+
+
+  Tux Paint no se cambia a mi idioma
+  ----------------------------------
+    Usuarios de Linux y Unix: Asegurarse que la localización esté disponible
+    ------------------------------------------------------------------------
+      Asegurarse que la localización deseada esté disponible. Verificar el
+      archivo "/etc/locale.gen".  Ver LEEME.txt para una lista de las
+      localizaciones que Tux Paint usa (especialmente al utilizar la opción
+      "--lang").
+
+      Nota: Los usuarios de Debian pueden simplemente ejecutar
+      "dpkg-reconfigure locales" si las localizaciones están siendo
+      administradas con dpkg.
+      
+    Si se está utilizando la opción de línea de comandos "--lang"
+    -------------------------------------------------------------
+      Intentar usar la opción de línea de comandos "--locale" o las
+      preferencias de localización del sistema operativo (p.ej: la variable
+      de entorno "$LANG") y por favor enviarnos un correo-e acerca del problema.
+      
+    Si se está utilizando la opción de línea de comandos "--locale"
+    ---------------------------------------------------------------
+      Si esto no funciona, por favor enviarnos correo-e acerca del problema.
+    
+    Si se está utilizando la localización del Sistema Operativo
+    -----------------------------------------------------------
+      Si esto no funciona, por favor enviarnos correo-e acerca del problema.
+
+
+  ¡Tux Paint siempre guarda sobre la imagen anterior!
+  ---------------------------------------------------
+    La opción "save over" está habilitada.  (Esto deshabilita la consulta que
+    aparece al hacer clic en 'Guardar'.)
+
+    Si se está ejecutando Tux Paint desde una línea de comandos, asegurarse de
+    no estar incluyendo la opción "--saveover".
+
+    Si se está ejecutando Tux Paint mediante doble clic en un ícono, verificar
+    las propiedades del ícono para comprobar que el argumento "--saveover" no
+    aparezca listado.
+
+    Si "--saveover" no está en la línea de comandos, verificar el archivo de
+    configuración del Tux Paint ("~/.tuxpaintrc" bajo Linux y Unix,
+    "tuxpaint.cfg" bajo Windows) buscando una línea que diga:  "saveover=yes".
+
+    Bien remover esa línea o simplemente ejecutar Tux Paint con el argumento
+    de línea de comandos: "--saveoverask", lo que pasará por alto las
+    preferencias establecidas en el archivo de configuración.
+
+    También ver "¡Tux Paint siempre guarda una nueva imagen!", abajo.
+
+
+  ¡Tux Paint siempre guarda una nueva imagen!
+  -------------------------------------------
+    La opción "never save over" está habilitada.  (Esto deshabilita la consulta
+    que aparecería al hacer clic en 'Guardar'.)
+
+    Si Tux Paint está siendo ejecutado desde una línea de comandos, asegurarse
+    de no ester incluyendo la opción "--saveovernew".
+
+    Si se está ejecutando Tux Paint mediante doble clic en un ícono, verificar
+    las propiedades del ícono para verificar que "--saveovernew" no esté
+    siendo listado como argumento.
+
+    Si "--saveovernew" no estuviera en la línea de comandos, verificar el
+    archivo de configuración del Tux Paint ("~/.tuxpaintrc" bajo Linux y Unix,
+    "tuxpaint.cfg" bajo Windows) buscando una línea que diga: "saveover=new".
+
+    Bien remover esa línea o simplemente ejecutar Tux Paint con el argumento
+    de línea de comandos: "--saveoverask", el cual pasará por alto las
+    preferencias establecidas en el archivo de configuración.
+
+    También ver "¡Tux Paint siempre guarda sobre la imagen anterior!", arriba.
+
+
+  ¡Tux Paint está usando opciones que nunca especifiqué!
+  ------------------------------------------------------
+    Por defecto, Tux Paint busca opciones primero en los archivos de
+    configuración.
+
+    Unix y Linux
+    ------------
+      Bajo Unix y Linux, examina primero el archivo de configuración para
+      todo el sistema, ubicado aquí:
+
+        /etc/tuxpaint/tuxpaint.conf
+
+      Luego examina el archivo de configuración personal del usuario:
+      
+        ~/.tuxpaintrc
+
+      Finalmente, cualquier opción enviada como argumento en la línea de
+      comandos es utilizada.
+
+    Windows
+    -------
+      Bajo Windows, Tux Paint primero examina el archivo de configuración:
+
+        tuxpaint.cfg
+
+      Luego, cualquier opción enviada como argumento en la línea de comandos
+      es utilizada.
+
+
+    Esto significa que si hay algo fijado en un archivo de configuración que
+    no se desea, se necesitará cambiar el archivo de configuración (si
+    eso fuera posible) o bien sobreescribir dicha opción mediante la línea de
+    comandos.
+
+    Por ejemplo, si "/etc/tuxpaint/tuxpaint.conf" incluye una opción para
+    deshabilitar el sonido:
+
+      nosound=yes
+
+    Es posible volver a habilitarlo agregando esta opción en el archivo de
+    configuración personal ".tuxpainrc":
+
+      sound=yes
+
+    O utilizando este argumento en la línea de comandos:
+
+      --sound
+
+
+    Los usuarios de Linux y Unix también pueden deshabilitar el archivo de
+    configuración para todo el sistema mediante el siguiente argumento de la
+    línea de comandos:
+
+      --nosysconfig
+
+    Entonces Tux Paint sólo utilizará el archivo "~/.tuxpaintrc" y los
+    argumentos de línea de comandos para determinar qué opciones se usarán.
+
+
+  El puntero del ratón deja una estela!
+  -------------------------------------
+    Bajo Windows a pantalla completa y en Linux a pantalla completa fuera de
+    X-Window, la biblioteca SDL presenta un error que hace que el puntero del
+    ratón deje una estela de 'basura' en la pantalla.
+
+    Hasta se corrija esto, no usarlo a pantalla completa o bien deshabilitar
+    las decoraciones del puntero con la opción de configuración:
+
+      nofancycursors=yes
+
+    o usando el argumento de línea de comandos:
+
+      --nofancycursors
+
+
+Ayuda / Contáctanos
+-------------------
+  Por cualquier pregunta que no esté respondida aquí, por favor escribir
+  (en inglés) a:
+
+    bill@newbreedsoftware.com
+
+  o enviar un mensaje a nuestra lista de correo:
+
+    http://www.newbreedsoftware.com/tuxpaint/lists/
+

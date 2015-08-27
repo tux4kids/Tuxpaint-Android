@@ -1,0 +1,296 @@
+%struct-type
+%language=ANSI-C
+%7bit
+%readonly-tables
+%define initializer-suffix ,0
+
+%{
+
+#include <string.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <stdint.h>
+#include "../src/parse.h"
+#include "../src/debug.h"
+
+const char PARSE_YES[] = "yes";
+const char PARSE_NO[]  = "no";
+const char PARSE_CLOBBER[]  = ":-(";  // for painful lang/locale priority situation
+
+struct cfg
+{
+  const char *name;
+  void (*val)(void);
+};
+
+#define MULTIVAL   0x00000000
+#define POS        0x00000001
+#define NEG        0x00000002
+#define BOOLMASK   (POS|NEG)
+#define BITS       2 // if this grows past 2, must shift the offset
+#define FLAGMASK   ((1<<BITS)-1)
+
+#define MULTI(x)   (void*)(offsetof(struct cfginfo,x)|MULTIVAL)
+#define POSBOOL(x) (void*)(offsetof(struct cfginfo,x)|POS)
+#define NEGBOOL(x) (void*)(offsetof(struct cfginfo,x)|NEG)
+#define IMM(x)     imm_##x
+
+static void imm_version(void)
+{
+  show_version(0);
+}
+
+static void imm_verbose_version(void)
+{
+  show_version(1);
+}
+
+static void imm_usage(void)
+{
+  show_usage(0);
+}
+
+static void imm_help(void)
+{
+  show_version(0);
+  show_usage(0);
+}
+
+static void imm_copying(void)
+{
+  show_version(0);
+  printf("\n"
+         "This program is free software; you can redistribute it\n"
+         "and/or modify it under the terms of the GNU General Public\n"
+         "License as published by the Free Software Foundation;\n"
+         "either version 2 of the License, or (at your option) any\n"
+         "later version.\n"
+         "\n"
+         "This program is distributed in the hope that it will be\n"
+         "useful and entertaining, but WITHOUT ANY WARRANTY; without\n"
+         "even the implied warranty of MERCHANTABILITY or FITNESS\n"
+         "FOR A PARTICULAR PURPOSE.  See the GNU General Public\n"
+         "License for more details.\n"
+         "\n"
+         "You should have received a copy of the GNU General Public\n"
+         "License along with this program; if not, write to the Free\n"
+         "Software Foundation, Inc., 59 Temple Place, Suite 330,\n"
+         "Boston, MA  02111-1307  USA\n" "\n");
+}
+
+// We get this from gperf:
+//__inline static             unsigned int hash (register const char *str, register unsigned int len)
+//__inline __attribute__((__gnu_inline__)) const struct cfg *in_word_set (register const char *str, register unsigned int len);
+//
+// We use sed (see Makefile) to make those functions static.
+
+%}
+
+struct cfg
+
+%%
+alllocalefonts,      POSBOOL(all_locale_fonts)
+allowscreensaver,    NEGBOOL(disable_screensaver)
+altprint,            MULTI(alt_print_command_default)
+altprintalways,      MULTI(alt_print_command_default)
+altprintcommand,     MULTI(altprintcommand)
+altprintmod,         MULTI(alt_print_command_default)
+altprintnever,       MULTI(alt_print_command_default)
+autosave,            POSBOOL(autosave_on_quit)
+buttondistinction,   NEGBOOL(no_button_distinction)
+colorfile,           MULTI(colorfile)
+complexshapes,       NEGBOOL(simple_shapes)
+copying,             IMM(copying)
+currentlocalefont,   NEGBOOL(all_locale_fonts)
+datadir,             MULTI(datadir)
+disablescreensaver,  POSBOOL(disable_screensaver)
+dontgrab,            NEGBOOL(grab_input)
+dontmirrorstamps,    NEGBOOL(mirrorstamps)
+fancycursors,        NEGBOOL(no_fancy_cursors)
+fullscreen,          MULTI(parsertmp_fullscreen_native)
+grab,                POSBOOL(grab_input)
+help,                IMM(help)
+hidecursor,          POSBOOL(hide_cursor)
+keyboard,            POSBOOL(keymouse)
+label,               NEGBOOL(disable_label)
+lang,                MULTI(parsertmp_lang)
+locale,              MULTI(parsertmp_locale)
+lockfile,            POSBOOL(ok_to_use_lockfile)
+magiccontrols,       NEGBOOL(disable_magic_controls)
+mirrorstamps,        POSBOOL(mirrorstamps)
+mixedcase,           NEGBOOL(only_uppercase)
+mouse,               NEGBOOL(keymouse)
+native,              POSBOOL(native_screensize)
+orient,              MULTI(rotate_orientation)
+outlines,            NEGBOOL(dont_do_xor)
+papersize,           MULTI(papersize)
+print,               NEGBOOL(disable_print)
+printcfg,            POSBOOL(use_print_config)
+printcommand,        MULTI(printcommand)
+printdelay,          MULTI(print_delay)
+quit,                NEGBOOL(disable_quit)
+save,                NEGBOOL(disable_save)
+savedir,             MULTI(savedir)
+saveover,            POSBOOL(_promptless_save_over)
+saveoverask,         POSBOOL(_promptless_save_over_ask)
+saveovernew,         POSBOOL(_promptless_save_over_new)
+shortcuts,           NEGBOOL(noshortcuts)
+showcursor,          NEGBOOL(hide_cursor)
+simpleshapes,        POSBOOL(simple_shapes)
+sound,               POSBOOL(use_sound)
+stampcontrols,       NEGBOOL(disable_stamp_controls)
+stamps,              NEGBOOL(dont_load_stamps)
+stampsize,           MULTI(stamp_size_override)
+startblank,          POSBOOL(start_blank)
+startlast,           NEGBOOL(start_blank)
+sysconfig,           POSBOOL(parsertmp_sysconfig)
+sysfonts,            NEGBOOL(no_system_fonts)
+uppercase,           POSBOOL(only_uppercase)
+usage,               IMM(usage)
+verbose-version,     IMM(verbose_version)
+version,             IMM(version)
+wheelmouse,          POSBOOL(wheely)
+windowed,            NEGBOOL(fullscreen)
+windowsize,          MULTI(parsertmp_windowsize)
+mouse-accessibility, POSBOOL(mouseaccessibility)
+onscreen-keyboard,   POSBOOL(onscreen_keyboard)
+onscreen-keyboard-layout,         MULTI(onscreen_keyboard_layout)
+onscreen-keyboard-disable-change, POSBOOL(onscreen_keyboard_disable_change)
+joystick-dev,        MULTI(joystick_dev)
+joystick-slowness,   MULTI(joystick_slowness)
+joystick-threshold,  MULTI(joystick_lowthreshold)
+joystick-maxsteps,   MULTI(joystick_maxsteps)
+joystick-hat-slowness, MULTI(joystick_hat_slowness)
+joystick-hat-timeout,  MULTI(joystick_hat_timeout)
+joystick-btn-escape,   MULTI(joystick_button_escape)
+joystick-btn-brush,    MULTI(joystick_button_selectbrushtool)
+joystick-btn-stamp,    MULTI(joystick_button_selectstamptool)
+joystick-btn-lines,    MULTI(joystick_button_selectlinestool)
+joystick-btn-shapes,   MULTI(joystick_button_selectshapestool)
+joystick-btn-text,     MULTI(joystick_button_selecttexttool)
+joystick-btn-label,    MULTI(joystick_button_selectlabeltool)
+joystick-btn-magic,    MULTI(joystick_button_selectmagictool)
+joystick-btn-undo,     MULTI(joystick_button_undo)
+joystick-btn-redo,     MULTI(joystick_button_redo)
+joystick-btn-eraser,   MULTI(joystick_button_selecterasertool)
+joystick-btn-new,      MULTI(joystick_button_new)
+joystick-btn-open,     MULTI(joystick_button_open)
+joystick-btn-save,     MULTI(joystick_button_save)
+joystick-btn-pgsetup,  MULTI(joystick_button_pagesetup)
+joystick-btn-print,    MULTI(joystick_button_print)
+joystick-buttons-ignore,    MULTI(joystick_buttons_ignore)
+%%
+
+void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const char *opt, const char *restrict src)
+{
+  int noflag;
+  uintptr_t uintptr;
+  unsigned flags;
+  unsigned offset;
+  char *dupecheck;
+  const struct cfg *cfg;
+  
+#ifdef DEBUG
+  printf("parsing %s: <%s> <%s>\n", src, str, opt);
+#endif
+
+  if(isdigit(*str))
+  {
+    if(opt && !strcmp(opt,"no"))
+        str = "640x480";
+    opt = str;
+    str = "windowsize";
+  }
+
+  if (!strcmp(str, "saveover"))
+  {
+    if (!strcmp(opt, "new")) {
+      str = "saveovernew";
+      opt = "yes";
+    } else if (!strcmp(opt, "ask")) {
+      str = "saveoverask";
+      opt = "yes";
+    } else if (strcmp(opt, "yes")) {
+      if(src)
+        printf("Option '%s' in config file '%s' is yes/ask/new only, but got '%s'\n",str,src,opt);
+      else
+        printf("Command line option '--%s' is yes/ask/new only, but got '%s'\n",str,opt);
+      exit(51);
+    }
+  }
+
+  noflag = 2*(str[0]=='n' && str[1]=='o' && str[2]);
+  cfg = in_word_set(str+noflag, strlen(str+noflag));
+
+  uintptr = cfg ? (uintptr_t)cfg->val : 0;
+  flags = (uintptr<CFGINFO_MAXOFFSET) ? (uintptr & FLAGMASK) : 0;
+
+  if(!cfg || (!(flags & BOOLMASK) && noflag) )
+  {
+    if(src)
+      printf("Unknown option '%s' in config file '%s'\n",str,src);
+    else
+      printf("Unknown command line option '--%s'\n",str);
+    exit(47);
+  }
+
+  if(unlikely(uintptr >= CFGINFO_MAXOFFSET))
+  {
+    if(src)
+    {
+      // immediate options are only for the command line
+      printf("Unknown option '%s' in config file '%s'\n",str,src);
+      exit(49);
+    }
+    if(opt)
+    {
+      printf("Command line option '--%s' doesn't take a value.\n",str);
+      exit(50);
+    }
+    cfg->val();
+    exit(0);
+  }
+
+  if(flags & BOOLMASK)
+  {
+    int flip = !!noflag ^ !!(flags & NEG);
+    if(!opt)
+      opt = flip ? PARSE_NO : PARSE_YES;
+    else if(!strcmp("yes",opt))
+      opt = flip ? PARSE_NO : PARSE_YES;
+    else if(!strcmp("no",opt))
+      opt = flip ? PARSE_YES : PARSE_NO;
+    else
+    {
+      if(src)
+        printf("Option '%s' in config file '%s' is yes/no only, but got '%s'\n",str,src,opt);
+      else
+        printf("Command line option '--%s' is yes/no only, but got '%s'\n",str,opt);
+      exit(51);
+    }
+  }
+  else if(!opt || !*opt)
+  {
+      if(src)
+        printf("Option '%s' in config file '%s' needs a value\n",str,src);
+      else
+        printf("Command line option '--%s' needs a value\n",str);
+      exit(52);
+  }
+
+  offset = uintptr &~ FLAGMASK;
+
+  memcpy(&dupecheck, offset+(char*)tmpcfg, sizeof(char*));
+  if(dupecheck)
+  {
+    if(src)
+      printf("Option '%s' in config file '%s' sets '%s' again.\n",str,src,cfg->name);
+    else
+      printf("Command line option '--%s' sets '%s' again.\n",str,cfg->name);
+    exit(53);
+  }
+
+  memcpy(offset+(char*)tmpcfg, &opt, sizeof(char*));
+}

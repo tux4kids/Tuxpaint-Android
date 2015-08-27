@@ -1,0 +1,913 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-parser</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-om-parser.html" title="cr-om-parser">
+<link rel="next" href="libcroco-cr-parsing-location.html" title="cr-parsing-location">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-om-parser.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-parsing-location.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-parser.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-parser.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-parser"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-parser.top_of_page"></a>cr-parser</span></h2>
+<p>cr-parser</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-parser.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser">CRParser</a>;
+                    <a class="link" href="libcroco-cr-parser.html#CRParserPriv" title="CRParserPriv">CRParserPriv</a>;
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-parser.html#cr-parser-destroy" title="cr_parser_destroy ()">cr_parser_destroy</a>                   (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-get-parsing-location" title="cr_parser_get_parsing_location ()">cr_parser_get_parsing_location</a>      (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_loc</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-get-sac-handler" title="cr_parser_get_sac_handler ()">cr_parser_get_sac_handler</a>           (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-doc-handler.html#CRDocHandler" title="struct CRDocHandler"><span class="type">CRDocHandler</span></a> **a_handler</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-get-tknzr" title="cr_parser_get_tknzr ()">cr_parser_get_tknzr</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> **a_tknzr</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-get-use-core-grammar" title="cr_parser_get_use_core_grammar ()">cr_parser_get_use_core_grammar</a>      (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_use_core_grammar</code></em>);
+<a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="returnvalue">CRParser</span></a> *          <a class="link" href="libcroco-cr-parser.html#cr-parser-new" title="cr_parser_new ()">cr_parser_new</a>                       (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_tknzr</code></em>);
+<a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="returnvalue">CRParser</span></a> *          <a class="link" href="libcroco-cr-parser.html#cr-parser-new-from-buf" title="cr_parser_new_from_buf ()">cr_parser_new_from_buf</a>              (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_free_buf</code></em>);
+<a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="returnvalue">CRParser</span></a> *          <a class="link" href="libcroco-cr-parser.html#cr-parser-new-from-file" title="cr_parser_new_from_file ()">cr_parser_new_from_file</a>             (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_file_uri</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);
+<a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="returnvalue">CRParser</span></a> *          <a class="link" href="libcroco-cr-parser.html#cr-parser-new-from-input" title="cr_parser_new_from_input ()">cr_parser_new_from_input</a>            (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_input</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse" title="cr_parser_parse ()">cr_parser_parse</a>                     (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-buf" title="cr_parser_parse_buf ()">cr_parser_parse_buf</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-charset" title="cr_parser_parse_charset ()">cr_parser_parse_charset</a>             (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> **a_value</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_charset_sym_location</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-declaration" title="cr_parser_parse_declaration ()">cr_parser_parse_declaration</a>         (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> **a_property</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-term.html#CRTerm" title="struct CRTerm"><span class="type">CRTerm</span></a> **a_expr</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_important</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-expr" title="cr_parser_parse_expr ()">cr_parser_parse_expr</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-term.html#CRTerm" title="struct CRTerm"><span class="type">CRTerm</span></a> **a_expr</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-file" title="cr_parser_parse_file ()">cr_parser_parse_file</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_file_uri</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-font-face" title="cr_parser_parse_font_face ()">cr_parser_parse_font_face</a>           (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-import" title="cr_parser_parse_import ()">cr_parser_parse_import</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> **a_media_list</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> **a_import_string</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_location</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-media" title="cr_parser_parse_media ()">cr_parser_parse_media</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-page" title="cr_parser_parse_page ()">cr_parser_parse_page</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-prio" title="cr_parser_parse_prio ()">cr_parser_parse_prio</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> **a_prio</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-ruleset" title="cr_parser_parse_ruleset ()">cr_parser_parse_ruleset</a>             (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-statement-core" title="cr_parser_parse_statement_core ()">cr_parser_parse_statement_core</a>      (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-parse-term" title="cr_parser_parse_term ()">cr_parser_parse_term</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-term.html#CRTerm" title="struct CRTerm"><span class="type">CRTerm</span></a> **a_term</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-set-default-sac-handler" title="cr_parser_set_default_sac_handler ()">cr_parser_set_default_sac_handler</a>   (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-set-sac-handler" title="cr_parser_set_sac_handler ()">cr_parser_set_sac_handler</a>           (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-doc-handler.html#CRDocHandler" title="struct CRDocHandler"><span class="type">CRDocHandler</span></a> *a_handler</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-set-tknzr" title="cr_parser_set_tknzr ()">cr_parser_set_tknzr</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_tknzr</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-set-use-core-grammar" title="cr_parser_set_use_core_grammar ()">cr_parser_set_use_core_grammar</a>      (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_use_core_grammar</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-parser.html#cr-parser-try-to-skip-spaces-and-comments" title="cr_parser_try_to_skip_spaces_and_comments ()">cr_parser_try_to_skip_spaces_and_comments</a>
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-parser.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-parser.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRParser"></a><h3>struct CRParser</h3>
+<pre class="programlisting">struct CRParser {
+        CRParserPriv *priv ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CRParserPriv"></a><h3>CRParserPriv</h3>
+<pre class="programlisting">typedef struct _CRParserPriv CRParserPriv;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-destroy"></a><h3>cr_parser_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_parser_destroy                   (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);</pre>
+<p>
+Destroys the current instance
+of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> to
+destroy.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-get-parsing-location"></a><h3>cr_parser_get_parsing_location ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_get_parsing_location      (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_loc</code></em>);</pre>
+<p>
+Gets the current parsing location.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_loc</code></em> :</span></p></td>
+<td>the parsing location to get.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-get-sac-handler"></a><h3>cr_parser_get_sac_handler ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_get_sac_handler           (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-doc-handler.html#CRDocHandler" title="struct CRDocHandler"><span class="type">CRDocHandler</span></a> **a_handler</code></em>);</pre>
+<p>
+Gets the SAC document handler.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of
+<a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_handler</code></em> :</span></p></td>
+<td>out parameter. The returned handler.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-get-tknzr"></a><h3>cr_parser_get_tknzr ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_get_tknzr                 (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> **a_tknzr</code></em>);</pre>
+<p>
+Getter of the parser's underlying tokenizer
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_tknzr</code></em> :</span></p></td>
+<td>out parameter. The returned tokenizer</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code
+otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-get-use-core-grammar"></a><h3>cr_parser_get_use_core_grammar ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_get_use_core_grammar      (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_use_core_grammar</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_use_core_grammar</code></em> :</span></p></td>
+<td>wether to use the core grammar or not.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-new"></a><h3>cr_parser_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="returnvalue">CRParser</span></a> *          cr_parser_new                       (<em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_tknzr</code></em>);</pre>
+<p>
+Creates a new parser to parse data
+coming the input stream given in parameter.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_tknzr</code></em> :</span></p></td>
+<td>the tokenizer to use for the parsing.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly created instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>,
+or NULL if an error occured.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-new-from-buf"></a><h3>cr_parser_new_from_buf ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="returnvalue">CRParser</span></a> *          cr_parser_new_from_buf              (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_free_buf</code></em>);</pre>
+<p>
+Instanciates a new parser from a memory buffer.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_buf</code></em> :</span></p></td>
+<td>the buffer to parse.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_len</code></em> :</span></p></td>
+<td>the length of the data in the buffer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the encoding of the input buffer a_buf.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_free_buf</code></em> :</span></p></td>
+<td>if set to TRUE, a_buf will be freed
+during the destruction of the newly built instance
+of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>. If set to FALSE, it is up to the caller to
+eventually free it.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly built parser, or NULL if an error arises.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-new-from-file"></a><h3>cr_parser_new_from_file ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="returnvalue">CRParser</span></a> *          cr_parser_new_from_file             (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_file_uri</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_file_uri</code></em> :</span></p></td>
+<td>the uri of the file to parse.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the file encoding to use.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly built parser.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-new-from-input"></a><h3>cr_parser_new_from_input ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="returnvalue">CRParser</span></a> *          cr_parser_new_from_input            (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_input</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_input</code></em> :</span></p></td>
+<td>the parser input stream to use.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a newly built parser input.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse"></a><h3>cr_parser_parse ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse                     (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);</pre>
+<p>
+Parses the data that comes from the
+input previously associated to the current instance of
+<a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-buf"></a><h3>cr_parser_parse_buf ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_buf                 (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);</pre>
+<p>
+Parses a stylesheet from a buffer
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <span class="type">CRparser</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_buf</code></em> :</span></p></td>
+<td>the input buffer</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_len</code></em> :</span></p></td>
+<td>the length of the input buffer</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the encoding of the buffer</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-charset"></a><h3>cr_parser_parse_charset ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_charset             (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> **a_value</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_charset_sym_location</code></em>);</pre>
+<p>
+Parses a charset declaration as defined implictly by the css2 spec in
+appendix D.1:
+charset ::= CHARSET_SYM S* STRING S* ';'
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_value</code></em> :</span></p></td>
+<td>out parameter. The actual parsed value of the charset
+declararation. Note that for safety check reasons, *a_value must be
+set to NULL.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_charset_sym_location</code></em> :</span></p></td>
+<td>the parsing location of the charset rule</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-declaration"></a><h3>cr_parser_parse_declaration ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_declaration         (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> **a_property</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-term.html#CRTerm" title="struct CRTerm"><span class="type">CRTerm</span></a> **a_expr</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_important</code></em>);</pre>
+<p>
+TODO: return the parsed priority, so that
+upper layers can take benefit from it.
+Parses a "declaration" as defined by the css2 spec in appendix D.1:
+declaration ::= [property ':' S* expr prio?]?
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_property</code></em> :</span></p></td>
+<td>the successfully parsed property. The caller
+*must* free the returned pointer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_expr</code></em> :</span></p></td>
+<td>the expression that represents the attribute value.
+The caller *must* free the returned pointer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-expr"></a><h3>cr_parser_parse_expr ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_expr                (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-term.html#CRTerm" title="struct CRTerm"><span class="type">CRTerm</span></a> **a_expr</code></em>);</pre>
+<p>
+Parses an expression as defined by the css2 spec in appendix
+D.1:
+expr: term [ operator term ]*
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_expr</code></em> :</span></p></td>
+<td>out parameter. the parsed expression.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-file"></a><h3>cr_parser_parse_file ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_file                (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_file_uri</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>);</pre>
+<p>
+Parses a the given in parameter.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>a pointer to the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_file_uri</code></em> :</span></p></td>
+<td>the uri to the file to load. For the time being,</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the encoding of the file to parse.
+only local files are supported.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-font-face"></a><h3>cr_parser_parse_font_face ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_font_face           (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);</pre>
+<p>
+Parses the "@font-face" rule specified in the css1 spec in
+appendix D.1:
+</p>
+<p>
+font_face ::= FONT_FACE_SYM S* 
+'{' S* declaration [ ';' S* declaration ]* '}' S*
+</p>
+<p>
+This function will call SAC handlers whenever it is necessary.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-import"></a><h3>cr_parser_parse_import ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_import              (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> **a_media_list</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> **a_import_string</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-parsing-location.html#CRParsingLocation" title="struct CRParsingLocation"><span class="type">CRParsingLocation</span></a> *a_location</code></em>);</pre>
+<p>
+Parses an 'import' declaration as defined in the css2 spec
+in appendix D.1:
+</p>
+<p>
+import ::=
+@import [STRING|URI] S* [ medium [ ',' S* medium]* ]? ';' S*
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance
+of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_media_list</code></em> :</span></p></td>
+<td>out parameter. A linked list of
+<a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a>
+Each CRString is a string that contains
+a 'medium' declaration part of the successfully
+parsed 'import' declaration.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_import_string</code></em> :</span></p></td>
+<td>out parameter.
+A string that contains the 'import
+string". The import string can be either an uri (if it starts with
+the substring "uri(") or a any other css2 string. Note that
+*a_import_string must be initially set to NULL or else, this function
+will return CR_BAD_PARAM_ERROR.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_location</code></em> :</span></p></td>
+<td>the location (line, column) where the import has been parsed</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon sucessfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-media"></a><h3>cr_parser_parse_media ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_media               (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);</pre>
+<p>
+Parses a 'media' declaration as specified in the css2 spec at
+appendix D.1:
+</p>
+<p>
+media ::= @media S* medium [ ',' S* medium ]* '{' S* ruleset* '}' S*
+</p>
+<p>
+Note that this function calls the required sac handlers during the parsing
+to notify media productions. See <a class="link" href="libcroco-cr-doc-handler.html#CRDocHandler" title="struct CRDocHandler"><span class="type">CRDocHandler</span></a> to know the callback called
+during @media parsing.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-page"></a><h3>cr_parser_parse_page ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_page                (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);</pre>
+<p>
+Parses '@page' rule as specified in the css2 spec in appendix D.1:
+page ::= PAGE_SYM S* IDENT? pseudo_page? S* 
+'{' S* declaration [ ';' S* declaration ]* '}' S*
+</p>
+<p>
+This function also calls the relevant SAC handlers whenever it
+encounters a construction that must 
+be reported to the calling application.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-prio"></a><h3>cr_parser_parse_prio ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_prio                (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> **a_prio</code></em>);</pre>
+<p>
+Parses a declaration priority as defined by
+the css2 grammar in appendix C:
+prio: IMPORTANT_SYM S*
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_prio</code></em> :</span></p></td>
+<td>a string representing the priority.
+Today, only "!important" is returned as only this
+priority is defined by css2.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-ruleset"></a><h3>cr_parser_parse_ruleset ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_ruleset             (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);</pre>
+<p>
+Parses a "ruleset" as defined in the css2 spec at appendix D.1.
+ruleset ::= selector [ ',' S* selector ]* 
+'{' S* declaration? [ ';' S* declaration? ]* '}' S*;
+</p>
+<p>
+This methods calls the the SAC handler on the relevant SAC handler
+callbacks whenever it encounters some specific constructions.
+See the documentation of <a class="link" href="libcroco-cr-doc-handler.html#CRDocHandler" title="struct CRDocHandler"><span class="type">CRDocHandler</span></a> (the SAC handler) to know
+when which SAC handler is called.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-statement-core"></a><h3>cr_parser_parse_statement_core ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_statement_core      (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);</pre>
+<p>
+Parses a statement as defined by the css core grammar in
+chapter 4.1 of the css2 spec.
+statement   : ruleset | at-rule;
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-parse-term"></a><h3>cr_parser_parse_term ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_parse_term                (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-term.html#CRTerm" title="struct CRTerm"><span class="type">CRTerm</span></a> **a_term</code></em>);</pre>
+<p>
+Parses a "term" as defined in the css2 spec, appendix D.1:
+term ::= unary_operator? [NUMBER S* | PERCENTAGE S* | LENGTH S* | 
+EMS S* | EXS S* | ANGLE S* | TIME S* | FREQ S* | function ] |
+STRING S* | IDENT S* | URI S* | RGB S* | UNICODERANGE S* | hexcolor
+</p>
+<p>
+TODO: handle parsing of 'RGB'
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_term</code></em> :</span></p></td>
+<td>out parameter. The successfully parsed term.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-set-default-sac-handler"></a><h3>cr_parser_set_default_sac_handler ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_set_default_sac_handler   (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);</pre>
+<p>
+Sets the SAC handler associated to the current instance
+of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> to the default SAC handler.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>a pointer to the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-set-sac-handler"></a><h3>cr_parser_set_sac_handler ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_set_sac_handler           (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-doc-handler.html#CRDocHandler" title="struct CRDocHandler"><span class="type">CRDocHandler</span></a> *a_handler</code></em>);</pre>
+<p>
+Sets a SAC document handler to the parser.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the "this pointer" of the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_handler</code></em> :</span></p></td>
+<td>the handler to set.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-set-tknzr"></a><h3>cr_parser_set_tknzr ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_set_tknzr                 (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-tknzr.html#CRTknzr" title="struct CRTknzr"><span class="type">CRTknzr</span></a> *a_tknzr</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>;</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_tknzr</code></em> :</span></p></td>
+<td>the new tokenizer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-set-use-core-grammar"></a><h3>cr_parser_set_use_core_grammar ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_set_use_core_grammar      (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_use_core_grammar</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_use_core_grammar</code></em> :</span></p></td>
+<td>where to parse against the css core grammar.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-parser-try-to-skip-spaces-and-comments"></a><h3>cr_parser_try_to_skip_spaces_and_comments ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_parser_try_to_skip_spaces_and_comments
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a> *a_this</code></em>);</pre>
+<p>
+Same as <code class="function">cr_parser_try_to_skip_spaces()</code> but this one skips
+spaces and comments.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-parser.html#CRParser" title="struct CRParser"><span class="type">CRParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

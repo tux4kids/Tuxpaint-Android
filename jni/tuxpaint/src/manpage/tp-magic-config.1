@@ -1,0 +1,134 @@
+.\" tp-magic-config - 2007.08.07
+.TH TP-MAGIC-CONFIG 1 "07 August 2007" "2007.08.07" "tp-magic-config"
+.SH NAME
+tp-magic-config -- Helps creating 'Magic' tool plugins for Tux Paint(1)
+
+.SH SYNOPSYS
+.TP 16
+.B tp-magic-config [\-\-apiversion | \-\-version | \-\-cflags | \-\-pluginprefix | \-\-plugindocprefix | \-\-dataprefix | \-\-localpluginprefix | \-\-localdataprefix]
+
+.SH DESCRIPTION
+\fItp-magic-config\fP is a simple shell script that responds with various
+pieces of information about the currently-installed version of
+\fITux Paint\fP(1) that are useful when building 'Magic' tool plugins.
+
+.SH OPTIONS
+.TP 8
+.B \-\-apiversion
+Outputs the version of the \fITux Paint\fP 'Magic' tool plugin API that the
+installed copy of \fITux Paint\fP supports. (For API compatibility testing.)
+.TP 8
+.B \-\-version
+Outputs the version of \fITux Paint\fP that \fItp-magic-config\fP
+corresponds to.
+.TP 8
+.B \-\-cflags
+Outputs the compiler flags that \fITux Paint\fP 'Magic' tool plugins should
+be compiled with. (For example, a "\-I" include path option that tells the
+compiler where it can find the plugin API header file, "tp_magic_config.h",
+that plugins must #include.)
+.TP 8
+.B \-\-pluginprefix
+Outputs the system directory where the installed copy of \fITux Paint\fP expects
+to find 'Magic' tool plugins (".so" shared objects).
+(e.g., "/usr/share/tuxpaint/plugins")
+.TP 8
+.B \-\-localpluginprefix
+Outputs the user directory where the installed copy of \fITux Paint\fP expects
+to find 'Magic' tool plugins (".so" shared objects).
+(e.g., "/home/username/.tuxpaint/plugins")
+.TP 8
+.B \-\-plugindocprefix
+Outputs the directory where the installed copy of \fITux Paint\fP expects
+to find documentation for 'Magic' tool plugins (".html" and ".txt" files).
+\fITux Paint's\fP main documentation includes a link to this directory
+under the section on "Magic" tools.
+.TP 8
+.B \-\-dataprefix
+Outputs the system directory where the installed copy of \fITux Paint\fP keeps
+its global data files (e.g., "/usr/share/tuxpaint/"). This is the same value
+that plugins installed system-wide will receive in the "data_directory" string
+within the "magic_api" structure sent to the plugins' functions.
+.TP 8
+.B \-\-localdataprefix
+Outputs the user directory where the installed copy of \fITux Paint\fP
+expects plugins to install their local data files.
+(e.g., "/home/username/.tuxpaint/plugins/data"). This is the same value
+that plugins installed locally will receive in the "data_directory" string
+within the "magic_api" structure sent to the plugins' functions.
+
+.SH SYSTEM-WIDE SHELL EXAMPLES
+$ gcc -shared `tp-magic-config --cflags` my_plugin.c -o my_plugin.so
+.br
+# cp my_plugin.so `tp-magic-config \-\-pluginprefix`
+.br
+# cp my_plugin_icon.png `tp-magic-config \-\-dataprefix`/images/magic
+.br
+# cp my_plugin.html `tp-magic-config \-\-plugindocrefix`/html
+.br
+# cp my_plugin.txt `tp-magic-config \-\-plugindocrefix`
+
+.SH LOCAL SHELL EXAMPLES
+$ gcc -shared `tp-magic-config --cflags` my_plugin.c -o my_plugin.so
+.br
+$ mkdir -p `tp-magic-config \-\-localpluginprefix`
+.br
+$ cp my_plugin.so `tp-magic-config \-\-localpluginprefix`
+.br
+$ mkdir -p `tp-magic-config \-\-localdataprefix`/images/magic
+.br
+$ cp my_plugin_icon.png `tp-magic-config \-\-localdataprefix`/images/magic
+
+.SH SYSTEM-WIDE MAKEFILE EXAMPLE
+MAGIC_CFLAGS=$(shell tp-magic-config --cflags)
+.br
+MAGIC_PREFIX=$(shell tp-magic-config --pluginprefix)
+.br
+MAGIC_DOC_PREFIX=$(shell tp-magic-config --plugindocprefix)
+.br
+DATA_PREFIX=$(shell tp-magic-config --dataprefix)
+.PP
+all: my_plugin.so
+.PP
+my_plugin.so: my_plugin.c
+.PP	$(CC) -shared $(MAGIC_CFLAGS) my_plugin.c -o my_plugin.so
+.PP
+install: install-so install-data install-docs
+.PP
+install-so:
+.br
+	mkdir -p $(MAGIC_PREFIX)
+.br
+	cp my_plugin.so $(MAGIC_PREFIX)/
+.br
+	chmod 644 $(MAGIC_PREFIX)/my_plugin.so
+.PP
+install-data:
+.br
+	mkdir -p $(DATA_PREFIX)
+.br
+	cp icons/my_plugin_icon.png $(DATA_PREFIX)/images/magic/
+.br
+	chmod 644 $(DATA_PREFIX)/images/magic/my_plugin_icon.png
+.PP
+install-docs:
+.br
+	mkdir -p $(MAGIC_DOC_PREFIX)
+.br
+	cp docs/my_plugin.html $(MAGIC_DOC_PREFIX)/html/
+.br
+	chmod 644 $(MAGIC_DOC_PREFIX)/html/my_plugin.html
+.br
+	cp docs/my_plugin.txt $(MAGIC_DOC_PREFIX)/
+.br
+	chmod 644 $(MAGIC_DOC_PREFIX)/my_plugin.txt
+
+.SH AUTHOR
+Bill Kendrick.  <bill@newbreedsoftware.com>
+
+
+.SH "SEE ALSO"
+.BR tuxpaint (1),
+.PP
+And documentation within /usr/[local/]share/doc/tuxpaint/.
+

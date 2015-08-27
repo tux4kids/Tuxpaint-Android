@@ -1,0 +1,43 @@
+The Pango backends written for Win32 is pangowin32. Pangowin32 uses
+the Win32 GDI font API. GTK+ 2.8 and later on Win32 however actually
+uses the pangocairo backend (which then uses only small parts of
+pangowin32). Much of the GDI font API calls are in cairo.
+
+The pangoft2 backend was originally written with Win32 in mind, but
+its main use nowadays is on other platforms than Win32.
+
+There are three ways to build Pango for Win32:
+
+1) Use gcc (mingw), libtool, make, like on Unix.
+
+If building from git, run the autogen.sh script that runs aclocal,
+automake, autoconf and configure to build makefiles etc. This is what
+tml@novell.com uses. Pass the same switches to autogen.sh that you
+would pass to the configure script.
+
+If building from a tarball, just running the configure script and then
+make should be enough. But, as always, you need to understand what is
+happening and follow the progress in case manual intervention is
+needed.
+
+tml ran the configure script like this when building binaries for
+Pango 1.10.0:
+
+PATH=/devel/dist/glib-2.8.0/bin:$PATH ACLOCAL_FLAGS="-I /devel/dist/glib-2.8.0/share/aclocal" PKG_CONFIG_PATH=/devel/dist/glib-2.8.0/lib/pkgconfig:$PKG_CONFIG_PATH CC='gcc -mtune=pentium3' CPPFLAGS='-I/opt/gnu/include' LDFLAGS='-L/opt/gnu/lib' CFLAGS=-O ./configure --disable-gtk-doc  --without-x --prefix=c:/devel/target/pango-1.10.0
+
+2) Use Visual Studio 2008/2010 (Express or above). Use the solution file
+in build/win32/vs9 or build/win32/vs10. See the README.txt there for more
+information, or see the following GNOME Live! page for a more detailed
+description of building Pango and its dependencies with Visual Studio:
+
+https://live.gnome.org/GTK%2B/Win32/MSVCCompilationOfGTKStack
+
+3) Use MSVC and nmake. Use the makefile.msc makefiles. These makefiles
+are supported by Hans Breuer. They requires manual editing. You need
+to have the source code to some suitable version of glib in a sibling
+directory. Ask Hans for advice.
+
+Please note that approaches 2 and 3 (involving building with MSVC) will
+build Pango modules directly into the main Pango, PangoWin32 and
+(if applicable) PangoFT2 DLLs-the GCC builds will build each Pango module
+as a seperate DLL.

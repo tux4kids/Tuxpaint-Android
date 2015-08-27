@@ -1,0 +1,990 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>Tux Paint README</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#FF0000"
+alink="#FF00FF">
+
+<center>
+<h1><img src="../../html/images/tuxpaint-title.png" width=220 height=219
+alt="Tux&nbsp;Paint"><br>
+
+version
+
+0.9.21
+
+</h1>
+<h3>兒童專用的簡易繪圖軟體</h3>
+
+<p>Copyright 2002-2009 by Bill Kendrick and others<br>
+<a href="http://www.newbreedsoftware.com/">New Breed Software &amp;
+<a href="http://tux4kids.alioth.debian.org/">Tux4Kids</a></p>
+
+<p><a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a><br>
+<a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a><br>
+翻譯：黃敏松 &lt;<a href="mailto:songhuang.tw@gmail.com">songhuang.tw@gmail.com</a>&gt;</p>
+
+<p> 6 月 14 日, 2002 - 4 月 28 日 2009</p>
+
+</center>
+
+<hr size=2 noshade>
+
+<table border=2 cellspacing=0 cellpadding=2>
+<tr><th>Table of Contents</th></tr>
+<tr><td>
+<ul>
+<li><a href="#about">簡介</a>
+<li><a href="#using">使用 Tux&nbsp;Paint</a>
+<li><a href="#loading_into">Loading Other Pictures into Tux&nbsp;Paint</a>
+<li><a href="#further">Further Reading</a>
+<li><a href="#help">How to Get Help</a>
+</ul>
+</td></tr>
+</table>
+
+<hr size=2 noshade>
+
+<h1><a name="about">簡介</a></h1>
+<blockquote>
+
+  <h2>什麼是 'Tux&nbsp;Paint?'</h2>
+  <blockquote>
+    <p>"Tux&nbsp;Paint" 是專為年幼的兒童(三歲及以上)設計的繪圖程式，他提供容易使用的介面，
+    有趣的音效，及鼓勵並帶領兒童使用這個軟體的卡通造型的吉祥物。
+    他提供一張空白的圖紙和許多的繪圖工具，可以幫助你的小孩啟發創造力。</p>
+  </blockquote>
+
+  <h2>授權：</h2>
+  <blockquote>
+    <p>Tux&nbsp;Paint 是一個開放源碼的專案，以 GNU 通用公共授權(GPL)釋出的自由軟體。
+    他是自由的，而且也可以取得程式的源碼 (允許其他人加上新的功能，更正程式的錯誤，
+    及使用部份的程式在他們自已的 GPL 的軟體上)。</p>
+
+    <p>GNU 通用公共授權的全文請見 COPYING.txt 。</p>
+  </blockquote>
+
+  <h2>目標：</h2>
+  <blockquote>
+  <dl>
+    <dt><b>容易和有趣</b></dt>
+    <dd>
+      Tux&nbsp;Paint 是一個給年幼兒童用的簡易繪圖程式。他並不是一個一般用途的繪圖程式，
+      他特點是在於有趣和容易使用。音效和卡通人物協助使用者了解現在要作什麼，
+      也讓他們保持歡樂。還有一個超大的卡通造型的滑鼠游標。
+    </dd>
+  
+    <dt><b>擴充性</b></dt>
+    <dd>
+      Tux&nbsp;Paint 是可擴充的。筆刷及橡皮圖章的形狀可以加上及抽掉的。
+      例如老師可以加上一組動物的圖章，讓他的學生們來畫動物的生態。
+      每一個形狀可以在被畫的時候發出他們專屬的聲音，
+      也可以在小朋友選擇一個形狀時顯示出文字的說明。
+    </dd>
+  
+    <dt><b>移植性</b></dt>
+    <dd>
+      Tux&nbsp;Paint 移植到許多不同的平台上，像是 Windows, Macintosh, Linux 等，
+      他們的使用介面看起來都是一樣的。Tux&nbsp;Paint 可以在舊的機器上跑的不錯
+      (像是 Pentium 133)。也可以為比較慢的系統建造一個跑起來還不錯的程式。
+    </dd>
+  
+    <dt><b>簡易的</b></dt>
+    <dd>
+      他並不需要直接碰觸到電腦底層複雜的事情，離開程式的時候當下的圖形會保留住，
+      當啟動程式時會再出現。儲存圖形時不需要檔案名稱或是使用到鍵盤。
+      開啟圖形時是由一堆縮圖中挑選打開的。讀取電腦上的其他檔案是被禁止的。
+    </dd>
+  </dl>
+  </blockquote>
+
+</blockquote>
+
+<hr size=2 noshade>
+
+<!-- h2>其他文件</h2>
+<blockquote>
+  Tux&nbsp;Paint 的其他文件 (在 "<code>docs</code>" 目錄中) 包括：
+
+  <ul>
+  <li>AUTHORS.txt<br>
+    作者及貢獻者的名單。
+  
+  <li>CHANGES.txt<br>
+    版本差異的摘要。
+
+  <li>COPYING.txt<br>
+    授權聲明 (GPL)
+
+  <li>INSTALL.txt<br>
+    教導編輯和安裝的方式
+    
+  <li>PNG.txt<br>
+    說明如何使用 Tux&nbsp;Paint 建立 PNG 的格式
+
+  <li>README.txt<br>
+    (本文)
+    
+  <li>TODO.txt<br>
+    預計的功能或待修的程式臭虫
+  </ul>
+</blockquote>
+
+<hr size=2 noshade //-->
+
+
+<h1><a name="using">使用 Tux&nbsp;Paint</a></h1>
+<blockquote>
+
+  <!-- h2>建構 Tux&nbsp;Paint</h2>
+  <blockquote>
+    由源碼編譯 Tux&nbsp;Paint 請參考 INSTALL.txt 。
+  </blockquote>
+
+  <hr size=1 noshade //-->
+
+  <h2>載入 Tux&nbsp;Paint</h2>
+  <blockquote>
+    <h3>Linux/Unix 的使用者</h3>
+    <blockquote>
+    
+      <p>Tux Paint 會建立一個啟動的圖示在你的 GNOME 或 KDE 的"圖形"目錄選單之中。</p>
+      
+      <p>另一個方式，你可以在 shell 的提示符號(如： "$")後面輸入這個指令：</p>
+
+      <blockquote>
+        <code>$ tuxpaint</code>
+      </blockquote>
+
+      <p>如果有任何的錯誤發生，錯誤訊息會顯示在終端機上(標準錯誤輸出介面)。</p>
+    </blockquote>
+
+    <hr size=1 noshade>
+
+    <h3>Windows 的使用者</h3>
+    <blockquote>
+      <table border=0 cellspacing=0 cellpadding=4 bgcolor="#AAAAFF"
+      align=right summary=""><tr><td align=center>
+        <img src="../../html/images/icon-win32.png" width=32 height=32 alt="[Icon]"><br>
+	Tux&nbsp;Paint
+      </td></tr></table>
+      
+      <p>如果你是使用安裝程式安裝 Tux Paint 的話，在安裝過程中會詢問你要將捷徑放在開始功能表的哪裡，
+      還有桌面的捷徑。如果你同意建立了捷徑，你就可以直接由開始功能表中的 'Tux&nbsp;Paint' 目錄裡啟動
+      Tux&nbsp;Paint (如：在 Windows XP 的"所有程式"裡)，或是雙擊桌面上 "Tux&nbsp;Paint" 的圖示。</p>
+      
+      <p>如果你是下載安裝 Tux Paint 的 ZIP 壓縮檔，或是你是由安裝程式安裝的，但選擇不建立捷徑的話，
+      你必須要到 'Tux Paint' 的目錄中雙擊 <code>tuxpaint.exe</code> 的圖示。</p>
+      
+      <p>'Tux Paint' 的安裝程式預設會將 Tux Paint 的目錄放在 "<code>C:\Program&nbsp;Files\>/code>" 裡，
+      你可以在安裝程式執行過程裡來改變他。</p>
+      
+      <p>如果你使用下載的 ZIP 壓縮檔，就看你解開壓縮檔時要將 Tux Paint 的目錄放到哪裡去。</p>
+
+      <br clear=all>
+    </blockquote>
+
+    <h3>麥金塔 OS X 的使用者</h3>
+    <blockquote>
+      只要雙擊 "Tux&nbsp;Paint" 的圖示。<p>
+    </blockquote>
+  </blockquote>
+
+  <hr size=1 noshade>
+
+  <h2>啟始畫面</h2>
+  <blockquote>
+    <p>當一開始啟動 Tux&nbsp;Paint 時會出現一個啟始畫面。</p>
+
+    <p align=center><img src="../../html/images/tuxpaint-title.jpg" width=324 height=254
+    alt="[啟始畫面]"></p>
+
+    <p>當啟動完成後按下任一鍵或滑鼠鍵就可以繼續。
+    (或者等 30 秒後這個啟始畫面也會自動關閉。)</p>
+  </blockquote>
+ 
+  <hr size=1 noshade>
+
+  <h2>主畫面</h2>
+  <blockquote>
+    主畫面可以分成以下幾個部份：
+
+    <dl>
+    <dt>左邊：工具列</dt>
+    <dd>
+      <p>工具列中包含了繪圖及編輯的工具。</p>
+
+      <p align=center><img src="../../html/images/tools.jpg" width=324 height=254
+      alt="[工具：繪圖，圖章，線，形狀，字母，魔術，回復，重作，橡皮擦，新圖，開啟，儲存，列印，離開]"></p>
+    </dd>
+
+    <dt>中間：圖紙</dt>
+    <dd>
+      <p>這個在螢幕中間最大範圍的就是圖紙，這就是你畫圖的地方了。</p>
+
+      <p align=center><img src="../../html/images/canvas.jpg" width=324 height=254
+      alt="[(圖紙)]"></p>
+
+      <p><b>備註:</b> 圖紙的尺寸就是 Tux&nbsp;Paint 的大小。你可以使用 <i>Tux&nbsp;Paint&nbsp;Config</i> 設定工具或是其他的方式來變更 Tux&nbsp;Paint 的大小。詳細內容請見 <a href="OPTIONS.html">OPTIONS</a> 文件。</p>
+    </dd>
+
+
+    <dt>右邊：選項</dt>
+    <dd>
+      <p>依照目前的工具會顯示出不同的選項。例如當左邊選「繪圖」工具時，
+      右邊就會出現好幾種不同的筆刷。當左邊選「圖章」工具時，
+      右邊就會出現可以使用的圖樣來。</p>
+
+      <p align=center><img src="../../html/images/selector.jpg" width=324 height=254
+      alt="[選項 - 筆刷，字母，形狀，圖章]"></p>
+    </dd>
+
+
+    <dt>下邊：顏色</dt>
+    <dd>
+      <p>一個十五種顏色的調色板在接近螢幕底部的地方。</p>
+
+      <p align=center><img src="../../html/images/colors.jpg" width=324 height=254
+      alt="[顏色 - 黑，白，紅，粉紅，橙，黃，淡黃綠，綠，青綠，藍，紫，淡紫，棕，灰，銀]"></p>
+    </dd>
+
+
+    <dt>底部：說明區域</dt>
+    <dd>
+      <p>當你在畫畫時，在螢幕的最底部，Linux 的企鵝 - Tux 會提供提示和訊息。</p>
+
+      <p align=center><img src="../../html/images/tips.jpg" width=324 height=254
+      alt="(如： '挑選一個形狀。點一下形狀的中心位置，然後拖拉他到你要的大小。環繞著移動來旋轉他，然後點一下把他畫下來。')"></p>
+    </dd>
+    </dl>
+  </blockquote>
+
+  <hr size=1 noshade>
+
+
+  <h2>可用的工具</h2>
+  <blockquote>
+    <h3>繪圖工具</h3>
+    <blockquote>
+      <dl>
+      <dt><b>繪圖(刷子)</b></dt>
+      <dd>
+        <img src="../../html/images/tool_paint.png" width=48 height=48 alt="" align=right>
+
+	<p>這個刷子繪圖工具讓你畫徒手畫，可以使用不同的筆刷(在右邊選項部份選擇)
+	和顏色(在底下的調色板來選擇顏色)。</p>
+
+        <p>如果你持續按住滑鼠按鍵，然後移動滑鼠，就會畫在移動的路徑上。</p>
+
+        <p>當你在畫的同時會有聲音出來，愈大的筆刷聲音愈低沉。</p>
+
+        <br clear=all>
+
+        <p align=center><img src="../../html/images/ex_paint.png" width=120 height=95
+        alt=""></p>
+
+        <hr size=1>
+      </dd>
+
+
+      <dt><b>圖章 (橡皮圖章)</b></dt>
+      <dd>
+        <img src="../../html/images/tool_stamp.png" width=48 height=48 alt="" align=right>
+
+        <p>圖章工具就像是橡皮圖章，或是貼海報，可以讓你印上預先畫好的圖形，
+        或是現實的照片在圖紙上。(像是一張馬的圖形，或是一顆樹，或是月亮。)</p>
+
+        <p>當你在圖紙上移動滑鼠時會看到有一個框線跟著滑鼠移動，顯示出圖章會印在什麼地方，以及他有多大。</p>
+
+	<p align=center><img src="../../html/images/ex_stamps.png" width=182 height=156
+		alt=""></p>
+
+	<img src="../../html/images/tool_stamp_categories.png" width=96 height=48 alt=""
+	     align=right>
+	<p>圖章的種類有好幾種 (例如：動物的，行星的，外太空的，汽車的，人的，等等)，
+	   可以使用左右方向鍵來瀏覽。</p>
+
+	<p>有的圖章可以有顏色或著色, 如果圖紙下方的調色盤可使用的話，你就可以在蓋圖章前先點選調色盤來改變圖章的色彩。</p>
+	
+	<p>圖章可以放大縮小，很多圖章還可以上下左右翻轉，都在右下方來控制。</p>
+
+	<p align=center>
+	  <img src="../../html/images/tool_stamp_controls.png" width=96 height=96 alt="">
+	</p>
+
+	<img src="../../html/images/tool_sfx.png" width=48 height=24 alt="" align=right>
+	<p>不同的圖章可以有不同的音效和講解，在左下角的按鈕(靠近 Linux 的企鵝 Tux 的地方)可以讓你
+	   重覆目前圖章的音效和講解。</p>
+
+	<p>(註：如果設定了 "<code>nostampcontrols</code>" 選項的話，Tux&nbsp;Paint
+	就不會顯示出左右鏡射，上下翻轉，放大和縮小的控制鈕。請見「<a href="OPTIONS.html">選項</a>」文件。)</p>
+
+        <hr size=1>
+      </dd>
+
+
+      <dt><b>畫線</b></dt>
+      <dd>
+        <img src="../../html/images/tool_lines.png" width=48 height=48 alt="" align=right>
+
+        <p>這個工具可以使用不同的筆刷和顏色來幫助你畫出真正的直線。</p>
+
+        <p>按下滑鼠鍵不要放開，按下的那個點就是直線的起點，然後移動你的滑鼠，
+        可以看到一條彈性的線隨著滑鼠移動，顯示出線將會畫在什麼地方。</p>
+
+        <p>放開滑鼠鍵就畫下一條直線了，而且會聽到一個彈起來的聲音。</p>
+
+        <br clear=all>
+
+        <p align=center><img src="../../html/images/ex_lines.png" width=76 height=103
+        alt=""></p>
+
+        <hr size=1>
+      </dd>
+
+
+      <dt><b>形狀</b></dt>
+      <dd>
+        <img src="../../html/images/tool_shapes.png" width=48 height=48 alt=""
+        align=right>
+
+        <p>這個工具可以讓你畫出一些簡單的填滿或者是中空的形狀來。</p>
+
+	<p>在右邊的選取列中選擇一個形狀(圓形，正方形，橢圓形等)。</p>
+
+	<p>在圖紙上按下滑鼠鍵不要放開，移動滑鼠把這個形狀展開來。
+	有些形狀可以改變長寬比例(如：長方形，橢圓形)，
+	有些不行(如：正方形，圓形)。</p>
+
+	<p>當你展開到想要的大小時，就放開滑鼠。</p>
+
+        <dl>
+	  <dt>正常模式</dt>
+          <dd>
+            <p>現在你可以將滑鼠在圖紙上轉圈圈來旋轉形狀的角度。</p>
+
+	    <p>再按一下滑鼠鍵就會用目前選定的顏色將形狀畫下來。</p>
+	  </dd>
+
+          <dt>簡單模式</dt>
+	  <dd>
+            如果設定了形狀的簡單模式(如：使用了 "<code>--simpleshapes</code>" 啟動參數)，
+            只要一放開滑鼠鍵就會把形狀畫出來了(不會有旋轉的步驟)。
+	  </dd>
+	</dl>
+
+        <br clear=all>
+
+        <p align=center><img src="../../html/images/ex_shapes.png" width=177 height=104
+        alt=""></p>
+
+        <hr size=1>
+      </dd>
+
+
+      <dt><b>字母</b></dt>
+      <dd>
+        <img src="../../html/images/tool_text.png" width=48 height=48 alt="" align=right>
+
+        <p>選擇一種字型(由右邊選擇列來選)和顏色(由底部調色板來選)，在圖紙上點一下，
+        就會看到一個游標在閃爍。輸入英文字母就會看到出現在畫面上。</p>
+	
+	<p>按下 <b>[Enter]</b> 鍵後英文字母就會畫到圖紙上，而游標會跳到下一行。</p>
+	
+	<p>另一個方式是，按下 <b>[Tab]</b> 鍵後文字就會畫到圖紙上，而游標則移到文字的右邊，
+	   而不是跳到下一行。(這可以用在同一行字有不同的顏色、文字、字型和大小，例如：
+	   <code>就像</code> <font color="#880000"><i><b>這樣</b></i></font>。)</p>
+
+	<p>當一行輸入到一半時滑鼠在其他圖面上點一下，整行文字就會移過去。
+	而你可以繼續輸入。</p>
+
+        <p align=center><img src="../../html/images/ex_text.png" width=139 height=69
+        alt=""></p>
+
+	<dl>
+	  <dt><b>各國文字輸入</b></dt>
+	  <dd>
+	    <p>Tux Paint 可以輸入不同語言的文字。大部份的拉丁文 (<i>A</i>-<i>Z</i>,
+	       <i>&ntilde;</i>, <i>&egrave;</i>, 等等.) 可以直接輸入。
+	       部份語言輸入前需要將 Tux&nbsp;Paint 切換到不同的輸入模式，而且部份文字必須使用組合鍵來輸入。</p>
+
+	    <p>當 Tux Paint 的地區設定為某一種語言時，就可以提供不同的輸入模式，
+	        同一個按鍵會在一般模組 (英文字母) 和特定地區模式中循環。</p>
+
+	    <p>目前有效輸入方式的地區支援，以及按鍵是切換式的或是循環式的方式，列示如下。
+	       <b>註</b> 很多的字型檔是不包括所有語言的所有文字的，所以有時候你需要改變字型來看你試著輸入的文字。
+	       <ul>
+	         <li>日文 &mdash; Romanized Hiragana and Romanized Katakana
+	             &mdash; <b>right&nbsp;[Alt]</b>
+	         <li>韓文 &mdash; Hangul 2-Bul
+	             &mdash; <b>right&nbsp;[Alt]</b> or <b>left&nbsp;[Alt]</b>
+	         <li>繁體中文 &mdash; Traditional Chinese
+	             &mdash; <b>right&nbsp;[Alt]</b> or <b>left&nbsp;[Alt]</b>
+                 <li>泰文
+                     &mdash; <b>right&nbsp;[Alt]</b>
+	       </ul>
+	    </p>
+	  </dd>
+	</dl>
+
+        <hr size=1>
+      </dd>
+
+
+      <dt><b>魔術 (特殊效果)</b></dt>
+      <dd>
+        <img src="../../html/images/tool_magic.png" width=48 height=48 alt="" align=right>
+
+	<p>魔術工具包含了一組特殊工具。在右邊選擇一種魔術效果，然後依照不同的工具，
+	   有些要按著在圖畫上來施展他，有些呢只要按一下就行了。</p>
+
+        <p>如果這個工具是用按著在圖畫上來施展的話，繪圖按鈕會出現在右邊的魔術工具清單裡。如果這個工具是按一下就會對整張圖畫產生效果的話，會有一個全圖的按鈕出現在右邊。</p>
+
+	<br clear=all>
+
+	<p>請看 "<a href="../../../magic-docs/html/index.html">每一個魔術工具的簡介</a>" (在 magic-docs 目錄裡)。</p>
+      
+        <hr size=1>
+      </dd>
+	
+	
+      <dt><b>橡皮擦</b></dt>
+      <dd>
+        <img src="../../html/images/tool_eraser.png" width=48 height=48 alt=""
+        align=right>
+
+        <p>這個用法和繪圖一樣，只要按著滑鼠鍵(或者同時拖動)的地方，圖案就會被擦掉。(可能會變白色或是背景圖案，要看圖畫而定。)</p>
+        
+        <p>有幾種的橡皮擦尺寸以及圓形或是方形可供選擇。</p>
+
+        <p>當你移動滑鼠時就會看到一個蠻大的正方形隨著滑鼠的游標移動，
+        顯示出將會把什麼地方擦成白色的。</p>
+
+        <p>當你在擦東西時會聽到橡皮擦在來回推擦的聲音。</p>
+
+	<br clear=all>
+      </dd>
+      </dl>
+    </blockquote>
+
+    <hr size=1 noshade>
+
+
+    <h3>其他的控制</h3>
+    <blockquote>
+      <dl>
+      <dt><b>回復</b></dt>
+      <dd>
+        <img src="../../html/images/tool_undo.png" width=48 height=48 alt="" align=right>
+
+        <p>按下這個工具將會回復上一個動作，你可以回復不只一次的動作。</p>
+	
+	<p>註：你也可以使用 <b>[Control]-[Z]</b> 的組合鍵來作回復。</p>
+	
+        <br clear=all>
+
+        <hr size=1>
+      </dd>
+
+
+      <dt><b>重作</b></dt>
+      <dd>
+        <img src="../../html/images/tool_redo.png" width=48 height=48 alt="" align=right>
+
+        <p>當你按下「回復」回復了一個動作之後，
+        你可以使用「重作」來再作一次那個被回復了的動作。</p>
+
+        <p>你可以重作很多次，和你回復一樣，而不用真的要重畫那些被回復了的部份。</p>
+	
+	<p>註：你也可以使用 <b>[Control]-[R]</b> 的組合鍵來重作。</p>
+	
+        <br clear=all>
+
+        <hr size=1>
+      </dd>
+
+
+      <dt><b>新圖</b></dt>
+      <dd>
+        <img src="../../html/images/tool_new.png" width=48 height=48 alt="" align=right>
+
+	<p>按下新圖按鈕將會開啟一張新的圖紙，一個交談框會跳出來讓你選擇是要使用背景色圖紙，或是一個啟始圖案來開啟新的圖畫。
+	
+	你會先被訊問到底要怎麼作。</p>
+
+	<p>註：你也可以使用 <b>[Control]-[N]</b> 的組合鍵來開啟一張新圖。</p>
+	
+        <b>起始圖形</b>
+
+	<blockquote>
+	  <p>起始圖形可以像是一頁的著色簿(黑白線條的圖形，可以填色上去)，
+	     或是像立體的圖片一樣，你可以畫些東西在裡面。</p>
+
+	  <p>如果你是載入一張起始圖形來作畫時，當按下「儲存」時他會儲成一張新圖
+	  (他不會覆蓋掉原始的「起始圖形」，所以你可以再一次的使用他)。</p>
+	</blockquote>
+	
+	<br clear=all>
+
+        <hr size=1>
+      </dd>
+
+
+      <dt><b>開啟</b></dt>
+      <dd>
+        <img src="../../html/images/tool_open.png" width=48 height=48 alt="" align=right>
+
+        <p>這會將你所存的所有圖畫列出來，如果圖畫多到一個畫面放不下的話，
+        可以使用畫面上的上下按鈕來捲動所有的圖畫。</p>
+
+        <br clear=all>
+
+        <p align=center><img src="../../html/images/open_dialog.jpg" width=194 height=152
+        alt=""></p>
+
+	<p>選一張圖畫點他一下，然後 ...</p>
+
+        <blockquote>
+        <ul>
+        <li>
+            <img src="../../html/images/open_open.png" width=48 height=48 alt=""
+            align=right>
+
+            <p>按下左下角綠色的「開啟」鈕，來載入選擇的圖畫。</p>
+
+	    <p>(也可以直接在圖畫上快速的點二下就可以開啟他。)</p>
+
+            <br clear=all>
+
+	<li>
+            <img src="../../html/images/open_erase.png" width=48 height=48 alt=""
+            align=right>
+
+            <p>按下右下角棕色的「刪除」鈕(垃圾桶)就會刪掉所選擇的圖畫。
+            (會問你是否確定要刪除。)</p>
+
+            <br clear=all>
+
+        <li>
+            <img src="images/open_slides.png" width=48 height=48 alt=""
+            align=right>
+
+            <p>按下左下角藍色的「幻燈片」鈕就會進入幻燈片模式，
+            詳細用法請參見 "<a href="#slides">幻燈片</a>"。</p>
+
+            <br clear=all>
+
+	<li>
+            <img src="../../html/images/open_back.png" width=48 height=48 alt=""
+            align=right>
+
+            <p>或是按下右下角紅色箭頭的「回復」鈕，就會離開回到正在畫的圖畫。</p>
+
+            <br clear=all>
+        </ul>
+        </blockquote>
+
+
+	<p>如果選擇開啟一張圖畫，而目前正在畫的圖還沒有儲存，
+	就會被訊問是否要存檔。(請見下面的「儲存」。)</p>
+	
+	<p>註：你也可以使用 <b>[Control]-[O]</b> 的組合鍵來使用「開啟」的操作。</p>
+	
+        <br clear=all>
+
+        <hr size=1>
+      </dd>
+
+
+      <dt><b>儲存</b></dt>
+      <dd>
+        <img src="../../html/images/tool_save.png" width=48 height=48 alt="" align=right>
+
+        <p>這會儲存你目前的圖畫。</p>
+	
+	<p>如果你之前沒有儲存過這張圖，就會儲存成一張新的圖。
+	(也就是說會建立一個新檔案。)</p>
+
+	<p>註：這個動作不會問你任何的問題(譬如說檔名)，他就是直接儲存了這張圖，
+	而且會聽到按下快門的聲音。</p>
+
+	<p>如果這張圖已經存過檔了，或者是這張圖是用「開啟」圖畫的方式打開的，
+	而且已經修改過了，那麼在儲存時就會先問你是否要覆蓋掉舊的版本，
+	或是儲存一個新的檔案。</p>
+
+        <p align=center><img src="../../html/images/saveover.png" width=177 height=110
+        alt=""></p>
+
+	<p>(註：如果 "<code>saveover</code>" 或是 "<code>saveovernew</code>" 選項被設定了，
+	那麼儲存時就不會問這個問題了。請參閱「<a href="OPTIONS.html"><i>選項</i></a>」文件的說明。)</p>
+	
+	<p>註：你也可以使用 <b>[Control]-[S]</b> 組合鍵來儲存。</p>
+	
+        <br clear=all>
+
+        <hr size=1>
+      </dd>
+
+
+      <dt><b>列印</b></dt>
+      <dd>
+        <img src="../../html/images/tool_print.png" width=48 height=48 alt="" align=right>
+
+        <p>按下這個按鈕就會將你的圖畫列印出來!</p>
+
+	<p>在大部份的平台上，你也可以按住 <b>[Alt]</b> 鍵 (在 Macs 上叫作<b>[Option]</b>) 再點擊「列印」鈕來呼叫出列印的交談框。
+	不過如果你是執行全螢幕模式的話就不能這麼作。請見後面說明。</p>
+
+        <dl>
+	<dt>關閉列印功能</dt>
+	<dd>
+	  <p>如果不要列印的選項被設定的話 (可以在 Tux&nbsp;Paint 的規劃檔裡設定
+	  "<code>noprint=yes</code>" ，或是使用 "<code>--noprint</code>" 
+	  命令列的啟動參數)，「列印」按鈕就會失效。</p>
+
+	  <p>請參閱「<a href="OPTIONS.html"><i>選項</i></a>」文件的說明。</p>
+	</dd>
+	  
+        
+	<dt>限制列印功能</dt>
+	<dd>
+	  <p>如果延遲列印的選項被設定的話 (可以在 Tux&nbsp;Paint 的規劃檔裡設定
+	  "<code>printdelay=<i>SECONDS</i></code>" ，或是使用 "<code>--printdelay=<i>SECONDS</i></code>" 
+	  命令列的啟動參數)，你只能間隔每 <i>SECONDS</i> 秒才能再列印。</p>
+
+	  <p>例如設定了 "<code>printdelay=60</code>" 的話，你就要間隔一分鐘後才能再列印。</p>
+
+	  <p>請參閱「<a href="OPTIONS.html"><i>選項</i></a>」文件的說明。</p>
+	</dd>
+
+	
+	<dt>列印命令</dt>
+	<dd>
+	  <p><i>(只限於 Linux 和 Unix )</i></p>
+
+	  <p><i>Tux&nbsp;Paint</i> 的列印是將圖檔轉換成 PostScript
+	  格式之後再將他傳給外部的程式。預設的程式是：</p>
+
+          <blockquote><code>
+	    lpr
+	  </code></blockquote>
+
+	  <p>這組命令可以在 Tux&nbsp;Paint 的規劃檔裡用 "printcommand" 的設定來改變他。</p>
+
+	  <p>當不是執行全螢幕模式時，按住 <b>[Alt]</b> 鍵再按下 'Print' 鍵，這時另一個程式會啟動。
+	  這個程式預設是 KDE 的圖形列印交談框：</p>
+
+          <blockquote><code>
+	    kprinter
+	  </code></blockquote>
+
+	  <p>這組命令可以在 Tux&nbsp;Paint 的規劃檔裡用 "altprintcommand" 的設定來改變他。</p>
+
+	  <p>其他關於列印命令的資訊請參閱「<a href="OPTIONS.html"><i>選項</i></a>」文件的說明。</p>
+	</dd>
+
+
+	<dt>印表機設定</dt>
+	<dd>
+	  <p><i>(Windows 和 Mac&nbsp;OS&nbsp;X)</i></p>
+
+	  <p>預設的情況下，按下「列印」按鈕後 Tux&nbsp;Paint 直接用預設的印表機設定值，
+	  將圖畫由預設印機機列印出來。</p>
+
+	  <p>但是當你按住 <b>[Alt]</b> 鍵(或是  <b>[Option]</b> )才去點列印鈕時，只要不是在全螢幕的模式下，
+	  印表機設定的對話框就會跳出來，你可以修改印表機的設定。</p>
+
+	  <p>你可以使用 "<code>--printcfg</code>" 啟動參數，或是在 Tux&nbsp;Paint
+	  的規劃檔裡設定 "<code>printcfg=yes</code>" 的選項來儲存 Tux&nbsp;Paint 的印表機規劃檔
+	  ("<code>tuxpaint.cfg</code>")。</p>
+
+	  <p>如果設定了 "printcfg" 選項的話，印表機的設定會由你個人目錄裡的 "<code>print.cfg</code>"
+	  設定檔來讀取，任何的修改也會存到那個檔案裡。</p>
+	  
+	  <p>請參閱「<a href="OPTIONS.html"><i>選項</i></a>」文件的說明。</p>
+	</dd>
+
+	<dt>列印交談框的選項</dt>
+	<dd>
+	  <p>當按下 <b>[Alt]</b> 鍵 (或 <b>[Option]</b>) 同時按下「列印」按鈕時， Tux&nbsp;Paint 預設只會叫出列印交談框。
+	  ( 或是在 Linux/Unix 執行 "altprintcommand" ，例如用 "kprinter" 取代 "lpr" )</p>
+
+	  <p>不過這個行為可以被改變，你可以在命令列使用 "<code>--altprintalways</code>" 或是在
+	  Tux&nbsp;Paint 的規劃檔裡用 "<code>altprint=always</code>" 讓列印交談框總是會出現。
+	  或者你也可以使用 "<code>--altprintnever</code>" 或 "<code>altprint=never</code>"
+	  讓 <b>[Alt]</b>  (或 <b>[Option]</b>) 永遠不會發生作用。</p>
+	  
+	  <p>請參閱「<a href="OPTIONS.html"><i>選項</i></a>」文件的說明。</p>
+	</dd>
+	
+	</dl>
+        <br clear=all>
+
+        <hr size=1>
+      </dd>
+
+      <dt><a name="slides"><b>幻燈片(在「開啟」之下)</b></a></dt>
+      <dd>
+        <img src="images/open_slides.png" width=48 height=48 alt=""
+        align=right>
+
+         <p>「幻燈片」鈕是在「開啟」交談框中，他會顯示出一份你儲存檔案的清單，
+         就像是「開啟」交談框。</p>
+
+         <p>一一點選你想要顯示在幻燈片模式中呈現的圖畫，每個圖畫上會出現一個序號，
+         讓你知道他們顯示的順序。</p>
+
+         <p>你可以點選一個已選擇的圖畫來取消選擇，讓他不會出現在你的幻燈片中。</p>
+
+         <p>在左下角的撥放速度(「撥放」的下面)可以讓你調整撥放的速度，由慢到快，
+         將他調到最左邊的話會取消自動撥放 - 你就必須要按一下鍵盤或滑鼠才會跳到下一張圖畫。</p>
+
+	 <p><b>注意：</b> 最慢速的設定就不會自動跳到下一張幻燈片了，
+	 當你要跳到下一張時要手動切換。</p>
+
+	 <p>當你準備好了，按下「撥放」鈕開始撥放幻燈片。(注意：如果你沒有點選任何一張圖畫的話，
+         所有的圖畫都會被撥放。)</p>
+
+         <p>在撥放的期間，按下空格鍵，Enter 鍵或 Return 鍵，或向右的方向鍵，或是按下左下方的
+         「下一張」都會跳到下一張圖畫。按下向左的方向鍵則會跳回上一張圖畫。</p>
+
+         <p>按下「Esc」鍵，或是右下角的「返回」鈕，就會停止幻燈片的撥放回到選擇幻燈片的畫面。</p>
+
+         <p>按下「返回」鈕就會回「開啟」交談框。</p>
+
+        <br clear=all>
+      </dd>
+
+      <dt><b>離開</b></dt>
+      <dd>
+        <img src="../../html/images/tool_quit.png" width=48 height=48 alt="" align=right>
+
+        <p>按下「離開」按鈕或是 <b>[Escape]</b> 按鍵就會關閉 Tux&nbsp;Paint 。</p>
+	
+        <p>你會先被訊問是否確定要離開。</p>
+
+        <p>如果你確定要離開而且你目前的圖畫還沒有存檔的話，
+        你將會被訊問是否要儲存。如果這不是一張新的圖畫，你還會被訊問是否要覆蓋舊的版本，
+        或是另存新檔。(請參閱前面「儲存」一節的說明。)</p>
+        
+	<p>註：當你將圖畫儲存之後，下一次你再開啟 Tux&nbsp;Paint 的時候，預設就會開啟這張圖。</p>
+	
+	<p><b>註:</b>「離開」按鈕和 <b>[Escape]</b> 鍵可以被關閉。(例如在 <i>Tux&nbsp;Paint 設定程式</i>
+	裡選取 "Disable&nbsp;'Quit'&nbsp;Button" ，或是在啟動 <i>Tux&nbsp;Paint</i> 時使用
+	"<code>--noquit</code>" 命令列參數)</p>
+	
+	<p>在這個情況下可以使用 <i>Tux&nbsp;Paint</i> 視窗右上方「關閉視窗」的叉叉按鈕(如果不是在全螢幕模式)，
+	或是使用 <b>[Alt]</b>&nbsp;+&nbsp;<b>[F4]</b> 組合鍵或許可以離開。</p>
+
+	<p>如果以上二種方式都行不通時，可以試試 <b>[Shift]</b>&nbsp;+&nbsp;<b>[Control]</b>&nbsp;+&nbsp;
+	<b>[Escape]</b> 組合鍵。(請參閱「<a href="OPTIONS.html"><i>選項</i></a>」文件的說明。)</p>
+	
+        <br clear=all>
+      </dd>
+      <dt><b>靜音</b></dt>
+      <dd>
+        <p>這時候在螢幕上並沒有控制鈕可以按的，只能在程式執行時用<b>[Alt]</b>&nbsp;+&nbsp;<b>[S]</b>，來關閉和開啟音效(靜音和非靜音)。</p>
+
+	<p>請注意當音效是被完全關閉時(例如在<i>Tux&nbsp;Paint&nbsp;Config</i> 設定工具裡沒有開啟音效，或是使用 "<code>--nosound</code>" 命令列參數來啟動<i>Tux&nbsp;Paint</i>)，用<b>[Alt]</b>&nbsp;+&nbsp;<b>[S]</b>組合鍵是沒有效果的。(當家長或老師希望關閉音效時，這組合鍵就不能用來開啟音效了。)</p>
+      </dd>
+    </dl>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<hr size=2 noshade>
+
+
+<h1><a name="loading_into">載入其他的圖畫到 Tux&nbsp;Paint</a></h1>
+<blockquote>
+  <p>當使用 Tux&nbsp;Paint 的開啟圖畫功能時，只會顯示出你用 Tux&nbsp;Paint 所畫的圖，
+  如果你想載入其他的圖形或照片到 Tux&nbsp;Paint 裡來編輯的話該怎麼作呢？</p>
+
+  <p>要這麼作的話，你只需要將圖形轉成 PNG 的格式，然後把這圖形放到 Tux&nbsp;Paint
+  的儲存目錄 ：</p>
+  
+  <dl>
+  <dt>Windows Vista</dt>
+  <dd>放到使用者的 "<code>AppData</code>" 目錄：
+    例如：<code>"C:\Users\<i>(user&nbsp;name)</i>\AppData\Roaming\TuxPaint\saved\</code>"</dd>
+
+  <dt>Windows 95, 98, ME, 2000, XP</dt>
+  <dd>放到使用者的 "<code>Application&nbsp;Data</code>" 目錄：
+    例如：<code>"C:\Documents and Settings\<i>(user&nbsp;name)</i>\Application
+    Data\TuxPaint\saved\</code>"</dd>
+  
+  <dt>Mac OS X</dt>
+  <dd>放到使用者的 "<code>Library</code>" 目錄：
+    <code>"/Users/<i>(user&nbsp;name)</i>/Library/Application Support/Tux&nbsp;Paint/saved/</code>"</dd>
+  
+  <dt>Linux/Unix</dt>
+  <dd>放到一個隱藏的 "<code>.tuxpaint</code>" 目錄，這個目錄位於使用者的家目錄：
+    "<code>$(HOME)/.tuxpaint/saved/</code>"</dd>
+  </dl> 
+
+  <p><b>備註:</b> 你可以從這個目錄來複製圖畫，或是用其他的程式來開啟圖畫。</p>
+
+  <h3>使用 '<code>tuxpaint-import</code>'</h3>
+  <blockquote>
+    <p>Linux 和 Unix 的使用者可以使用 "<code><b>tuxpaint-import</b></code>"
+    這支 shell script ，他使用一些 NetPBM 的工具來轉換圖檔格式 ("<code>anytopnm</code>")，
+    改變圖形的大小使其符合 Tux&nbsp;Paint 的圖紙 ("<code>pnmscale</code>")，
+    再將圖檔轉換成 PNG 格式 ("<code>pnmtopng</code>")。</p>
+
+    <p>這也會用 "<code>date</code>" 指令來取得目前的時間和日期，
+    作為 Tux&nbsp;Paint 儲存時的檔名之用。(記得嗎，當你在儲存或是開啟圖畫時，
+    都不需要知道圖檔的名稱的。)</p>
+
+    <p>使用 '<code>tuxpaint-import</code>' 時只要在命令列打上這個指令，
+    並且給他你想要轉換的檔案的檔名。</p>
+
+    <p>這樣就會將圖檔轉好並放在 Tux&nbsp;Paint 的儲存目錄中。
+    (註：如果你想要幫其他的使用者轉換圖檔的話，例如你的小孩，
+    那麼在執行指令之前請先確認你是用這個使用者的帳號執行。)</p>
+
+    <p>範例：</p>
+
+    <blockquote><code>
+      $ <b>tuxpaint-import grandma.jpg</b><br>
+      grandma.jpg -&gt; /home/username/.tuxpaint/saved/20020921123456.png<br>
+      jpegtopnm: WRITING A PPM FILE
+    </code></blockquote>
+
+    <p>範例的第一行 ("<code>tuxpaint-import&nbsp;grandma.jpg</code>") 是執行的指令，
+    接下來的二行是程式執行時的輸出訊息。</p>
+    
+    <p>現在你可以載入 Tux&nbsp;Paint ，在「開啟」的一堆縮圖中可以看到轉換後的圖形，
+    雙擊這個縮圖就可以開啟。</p>
+  </blockquote>
+
+
+  <h2>手工處理</h2>
+  <blockquote>
+    <p>Windows, 麥金塔 OS X 及 BeOS 的使用者目前要手動的來轉換。</p>
+
+    <p>開啟一個可以讀取你要轉換的圖檔格式，及寫入 PNG 格式的圖形處理程式。
+    (請參閱 "<a href="../PNG.txt">PNG.txt</a>" 文件，有一些建議的軟體及參考。)</p>
+
+    <p>縮減圖形的尺寸讓他不要寬於 448 像素，不要高於 376 像素。
+    (換句話說，最大的尺寸就是 448x376 像素。)</p>
+
+    <p>當 Tux Paint 開啟一張與圖紙尺寸不符合的圖檔時，他會縮放(有時會裁去
+       邊緣)圖畫以符合圖紙。</p>
+
+       <p>要避免圖檔被拉伸或裁邊，你可以重新設定 Tux&nbsp;Paint 圖紙的尺寸，
+          這個尺寸就視 Tux&nbsp;Paint 視窗的大小。如果是全螢幕模式的話，
+          就必須調整解析度。(<b>注意:</b> 預設的解析度是 800x600.)
+          詳見「計算圖檔的尺寸」</p>
+
+    <p>用 PNG 格式來儲存圖形，強烈的建議你，圖檔的名稱使用目前的日期及時間，
+    Tux&nbsp;Paint 使用的規則是：</p>
+
+    <blockquote>
+      <code><b>YYYYMMDDhhmmss</b>.png</code>
+    </blockquote>
+
+    <ul>
+    <li>YYYY = 西元年份
+    <li>MM = 月 (01-12)
+    <li>DD = 日 (01-31)
+    <li>HH = 二十四小時制 (00-23)
+    <li>mm = 分 (00-59)
+    <li>ss = 秒 (00-59)
+    </ul>
+
+    <p>範例：</p>
+
+    <blockquote>
+      <code>20020921130500</code> - 2002 年 9 月 21 日 下午 1:05:00
+    </blockquote>
+
+    <p>將這個 PNG 檔放到你 Tux&nbsp;Paint 的儲存目錄中。
+    (請參閱前面的說明。)</p>
+
+    <h3>計算圖檔的尺寸</h3>
+    <blockquote>
+      <p>Tux&nbsp;Paint 的圖紙寬度就是視窗的寬度 (例如 640, 800 或是 1024
+         像素) 減去 192。</p>
+
+      <p>計算 Tux&nbsp;Paint 的圖紙高度需要幾個步驟:
+      <ol>
+      <li>取得視窗的高度 (例如 480, 600 或是 768 像素) 然後減去 144
+      <li>取得第一個步驟的結果除以 48
+      <li>取得第二個步驟結果的整數值 (例如 9.5 就取 9)
+      <li>取得第三個步驟的結果乘上 48
+      <li>最後，取得第四個步驟的結果加上 40
+      </ol></p>
+
+      <p><b>範例:</b> Tux&nbsp;Paint 執行全螢幕模式於 1440x900.
+      <ul>
+      <li>圖紙寬度就是 1440&nbsp;-&nbsp;192 等於 1248.
+      <li>圖紙高度的計算如下:
+        <ol>
+        <li>900&nbsp;-&nbsp;144 等於 756
+        <li>756&nbsp;/&nbsp;48 等於 15.75
+        <li>15.75 取整數值等於 15
+        <li>15&nbsp;*&nbsp;48 等於 720
+        <li>720&nbsp;+&nbsp;40 等於 760
+        </ol>
+      </ul>
+      所以當視窗是 1440x900 時 Tux&nbsp;Paint 的圖紙是 1248x760.</p>
+  </blockquote>
+</blockquote>
+
+<hr size=2 noshade>
+
+<h1><a name="further">其他文件</a></h1>
+<blockquote>
+  Tux Paint 其他的文件包括：(在 "<code>docs</code>" 目錄裡)
+  
+  <ul>
+  <li><a href="../../../magic/docs/html/">魔術工具文件</a><br>
+    每一個目前所安裝的魔術工具的文件
+
+  <li><a href="../AUTHORS.txt">AUTHORS.txt</a><br>
+    作者及貢獻者的名單
+  
+  <li><a href="../CHANGES.txt">CHANGES.txt</a><br>
+    版本間修改的摘要
+
+  <li><a href="../COPYING.txt">COPYING.txt</a><br>
+    授權書 (The GNU General Public License)
+
+  <li><a href="../INSTALL.txt">INSTALL.txt</a><br>
+    介紹如何編譯及安裝
+
+  <li><a href="EXTENDING.html">EXTENDING.html</a><br>
+    詳細的說明如何建立筆刷，圖章和起始圖案，以及新增字型來擴充 Tuxpaint。
+    
+  <li><a href="OPTIONS.html">OPTIONS.html</a><br>
+    詳細介紹命令列及規劃檔的選項，給不想或不能用 Tux Paint Config 的人
+    
+  <li><a href="../PNG.txt">PNG.txt</a><br>
+    說明如何建立給 Tux Paint 使用的 PNG 格式的圖檔
+    
+  <li><a href="../SVG.txt">SVG.txt</a><br>
+    說明如何建立給 Tux Paint 使用的 SVG 格式的向量圖
+
+  </ul>
+</blockquote>
+
+<hr size=2 noshade>
+
+<h1><a name="help">如何取得協助</a></h1>
+<blockquote>
+  <p>如果你需要協助的話，請不用拘束的來聯繫 New Breed Software ：</p>
+
+  <blockquote>
+    <a href="http://www.newbreedsoftware.com/">http://www.newbreedsoftware.com/</a>
+  </blockquote>
+
+  <p>你或許也想加入幾個 Tux&nbsp;Paint 的郵件論譠：</p>
+
+  <blockquote>
+    <a href="http://www.tuxpaint.org/lists/">http://www.tuxpaint.org/lists/</a>
+  </blockquote>
+</blockquote>
+
+</body></html>
+

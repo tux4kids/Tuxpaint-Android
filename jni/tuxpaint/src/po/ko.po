@@ -1,0 +1,1396 @@
+# Tux Paint Korean messages
+# Copyright (C) 2003-2014 Mark K. Kim
+# Translation: Mark K. Kim <mkkim214@gmail.com>, 2003-2014.
+# This file is distributed under the same license as the Tux Paint program.
+# 이 파일의 라이센스는 Tux Paint의 라이센스와 같습니다.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxpaint\n"
+"Report-Msgid-Bugs-To: tuxpaint-i18n@lists.sourceforge.net\n"
+"POT-Creation-Date: 2014-06-03 21:03+0200\n"
+"PO-Revision-Date: 2014-06-08 20:28-0400\n"
+"Last-Translator: Mark K. Kim <mkkim214@gmail.com>\n"
+"Language-Team: N/A\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Response to Black (0, 0, 0) color selected
+#: ../colors.h:86
+msgid "Black!"
+msgstr "검정색!"
+
+#. Response to Dark grey (128, 128, 128) color selected
+#: ../colors.h:89
+msgid "Dark grey! Some people spell it “dark gray”."
+msgstr "어두운 회색!"
+
+#. Response to Light grey (192, 192, 192) color selected
+#: ../colors.h:92
+msgid "Light grey! Some people spell it “light gray”."
+msgstr "밝은 회색!"
+
+#. Response to White (255, 255, 255) color selected
+#: ../colors.h:95
+msgid "White!"
+msgstr "흰색!"
+
+#. Response to Red (255, 0, 0) color selected
+#: ../colors.h:98
+msgid "Red!"
+msgstr "빨간색!"
+
+#. Response to Orange (255, 128, 0) color selected
+#: ../colors.h:101
+msgid "Orange!"
+msgstr "오렌지색!"
+
+#. Response to Yellow (255, 255, 0) color selected
+#: ../colors.h:104
+msgid "Yellow!"
+msgstr "노란색!"
+
+#. Response to Light green (160, 228, 128) color selected
+#: ../colors.h:107
+msgid "Light green!"
+msgstr "연두색!"
+
+#. Response to Dark green (33, 148, 70) color selected
+#: ../colors.h:110
+msgid "Dark green!"
+msgstr "청녹색!"
+
+#. Response to "Sky" blue (138, 168, 205) color selected
+#: ../colors.h:113
+msgid "Sky blue!"
+msgstr "하늘색!"
+
+#. Response to Blue (50, 100, 255) color selected
+#: ../colors.h:116
+msgid "Blue!"
+msgstr "파란색!"
+
+#. Response to Lavender (186, 157, 255) color selected
+#: ../colors.h:119
+msgid "Lavender!"
+msgstr "엷은 자주색!"
+
+#. Response to Purple (128, 0, 128) color selected
+#: ../colors.h:122
+msgid "Purple!"
+msgstr "자주색!"
+
+#. Response to Pink (255, 165, 211) color selected
+#: ../colors.h:125
+msgid "Pink!"
+msgstr "핑크색!"
+
+#. Response to Brown (128, 80, 0) color selected
+#: ../colors.h:128
+msgid "Brown!"
+msgstr "갈색!"
+
+#. Response to Tan (226, 189, 166) color selected
+#: ../colors.h:131
+msgid "Tan!"
+msgstr "살색!"
+
+#. Response to Beige (247, 228, 219) color selected
+#: ../colors.h:134
+msgid "Beige!"
+msgstr "낙타색!"
+
+#. First, the blacklist. We list font families that can crash Tux Paint
+#. via bugs in the SDL_ttf library. We also test fonts to be sure that
+#. they have both uppercase and lowercase letters. Note that we do not
+#. test for "Aa", because it is OK if uppercase and lowercase are the
+#. same (but not nice -- such fonts get a low score later).
+#.
+#. Most locales leave the blacklist strings alone: "QX" and "qx"
+#. (it is less destructive to use the scoring strings instead)
+#.
+#. Locales that absolutely require all fonts to have some
+#. extra characters should use "QX..." and "qx...", where "..."
+#. are some characters you absolutely require in all fonts.
+#.
+#. Locales with absolutely NO use for ASCII may use "..." and "...",
+#. where "..." are some characters you absolutely require in
+#. all fonts. This would be the case for a locale in which it is
+#. impossible for a user to type ASCII letters.
+#.
+#. Most translators should use scoring instead.
+#: ../dirwalk.c:168
+msgid "qx"
+msgstr "ㄱㅎ"
+
+#: ../dirwalk.c:168
+msgid "QX"
+msgstr "ㄲㅍ"
+
+#. TODO: weight specification
+#. Now we score fonts to ensure that the best ones will be placed at
+#. the top of the list. The user will see them first. This sorting is
+#. especially important for users who have scroll buttons disabled.
+#. Translators should do whatever is needed to put crummy fonts last.
+#. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
+#: ../dirwalk.c:195
+msgid "oO"
+msgstr "ㄱㄴ"
+
+#. common punctuation (e.g., '?', '!', '.', ',', etc.)
+#: ../dirwalk.c:198
+msgid ",.?!"
+msgstr ",.?!"
+
+#. uncommon punctuation (e.g., '@', '#', '*', etc.)
+#: ../dirwalk.c:201
+msgid "`\\%_@$~#{<(^&*"
+msgstr "`\\%_@$~#{<(^&*"
+
+#. digits (e.g., '0', '1' and '7')
+#: ../dirwalk.c:204
+msgid "017"
+msgstr "017"
+
+#. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
+#: ../dirwalk.c:207
+msgid "O0"
+msgstr "O0ㅇ"
+
+#. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
+#: ../dirwalk.c:210
+msgid "1Il|"
+msgstr "1Il|ㅣ"
+
+#: ../dirwalk.c:214
+msgid "<1>spare-1a"
+msgstr "<1>spare-1a"
+
+#: ../dirwalk.c:215
+msgid "<1>spare-1b"
+msgstr "<1>spare-1b"
+
+#: ../dirwalk.c:216
+msgid "<9>spare-9a"
+msgstr "<9>spare-9a"
+
+#: ../dirwalk.c:217
+msgid "<9>spare-9b"
+msgstr "<9>spare-9b"
+
+#. Congratulations #1
+#: ../great.h:37
+msgid "Great!"
+msgstr "잘했어요~!!"
+
+#. Congratulations #2
+#: ../great.h:40
+msgid "Cool!"
+msgstr "와~!"
+
+#. Congratulations #3
+#: ../great.h:43
+msgid "Keep it up!"
+msgstr "계속 잘 해보세요~!"
+
+#. Congratulations #4
+#: ../great.h:46
+msgid "Good job!"
+msgstr "잘했어요!"
+
+#. Input Method: English mode
+#: ../im.c:75
+msgid "English"
+msgstr "영어"
+
+#. Input Method: Japanese Romanized Hiragana mode
+#: ../im.c:78
+msgid "Hiragana"
+msgstr "히라가나"
+
+#. Input Method: Japanese Romanized Katakana mode
+#: ../im.c:81
+msgid "Katakana"
+msgstr "카타카나"
+
+#. Input Method: Korean Hangul 2-Bul mode
+#: ../im.c:84
+msgid "Hangul"
+msgstr "한글"
+
+#. Input Method: Thai mode
+#: ../im.c:87
+msgid "Thai"
+msgstr "타이어"
+
+#. Input Method: Traditional Chinese mode
+#: ../im.c:90
+msgid "ZH_TW"
+msgstr "중국어"
+
+#. Square shape tool (4 equally-lengthed sides at right angles)
+#: ../shapes.h:171 ../shapes.h:172
+msgid "Square"
+msgstr "정사각형"
+
+#. Rectangle shape tool (4 sides at right angles)
+#: ../shapes.h:175 ../shapes.h:176
+msgid "Rectangle"
+msgstr "사각형"
+
+#. Circle shape tool (X radius and Y radius are the same)
+#: ../shapes.h:179 ../shapes.h:180
+msgid "Circle"
+msgstr "원"
+
+#. Ellipse shape tool (X radius and Y radius may differ)
+#: ../shapes.h:183 ../shapes.h:184
+msgid "Ellipse"
+msgstr "타원"
+
+#. Triangle shape tool (3 sides)
+#: ../shapes.h:187 ../shapes.h:188
+msgid "Triangle"
+msgstr "삼각형"
+
+#. Pentagone shape tool (5 sides)
+#: ../shapes.h:191 ../shapes.h:192
+msgid "Pentagon"
+msgstr "5각형"
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:195 ../shapes.h:196
+msgid "Rhombus"
+msgstr "마름모꼴"
+
+#. Octagon shape tool (8 sides)
+#: ../shapes.h:199 ../shapes.h:200
+msgid "Octagon"
+msgstr "5각형"
+
+#. Description of a square
+#: ../shapes.h:208 ../shapes.h:209
+msgid "A square is a rectangle with four equal sides."
+msgstr "'정사각형'은 4개의 면이 다 똑같은 길이 입니다."
+
+#. Description of a rectangle
+#: ../shapes.h:212 ../shapes.h:213
+msgid "A rectangle has four sides and four right angles."
+msgstr "4개의 면이 있는 '사각형' 모양 입니다."
+
+#: ../shapes.h:217 ../shapes.h:219
+msgid ""
+"A circle is a curve where all points have the same distance from the center."
+msgstr "해같이 둥그런 '동그라미' 모양 입니다."
+
+#. Description of an ellipse
+#: ../shapes.h:222 ../shapes.h:223
+msgid "An ellipse is a stretched circle."
+msgstr "타원은 달걀같이 찌그러진 원형을 말합니다."
+
+#. Description of a triangle
+#: ../shapes.h:226 ../shapes.h:227
+msgid "A triangle has three sides."
+msgstr "3개의 면이 있는 모양이 '삼각형' 입니다."
+
+#. Description of a pentagon
+#: ../shapes.h:230 ../shapes.h:231
+msgid "A pentagon has five sides."
+msgstr "5개의 면이 있는 모양이 '5각형' 입니다."
+
+#: ../shapes.h:235 ../shapes.h:237
+msgid "A rhombus has four equal sides, and opposite sides are parallel."
+msgstr "마름모꼴은 사면의 길이가 같고, 반대의 두면이 평행선인 형을 말합니다."
+
+#: ../shapes.h:241 ../shapes.h:243
+msgid "An octagon has eight equal sides."
+msgstr "5개의 면이 있는 모양이 '5각형' 입니다."
+
+#. Title of tool selector (buttons down the left)
+#: ../titles.h:56
+msgid "Tools"
+msgstr "도구"
+
+#. Title of color palette (buttons across the bottom)
+#: ../titles.h:59
+msgid "Colors"
+msgstr "색"
+
+#. Title of brush selector (buttons down the right for paint and line tools)
+#: ../titles.h:62
+msgid "Brushes"
+msgstr "붓"
+
+#. Title of eraser selector (buttons down the right for eraser tool)
+#: ../titles.h:65
+msgid "Erasers"
+msgstr "지우개"
+
+#. Title of stamp selector (buttons down the right for stamps tool)
+#: ../titles.h:68
+msgid "Stamps"
+msgstr "도장"
+
+#. Title of shape selector (buttons down the right for shapes tool)
+#. Shape creation tool (square, circle, etc.)
+#: ../titles.h:71 ../tools.h:71
+msgid "Shapes"
+msgstr "모양"
+
+#. Title of font selector (buttons down the right for text and label tools)
+#: ../titles.h:74
+msgid "Letters"
+msgstr "글"
+
+#. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
+#. "Magic" effects tools (blur, flip image, etc.)
+#: ../titles.h:77 ../tools.h:83
+msgid "Magic"
+msgstr "효과"
+
+#. Freehand painting tool
+#: ../tools.h:62
+msgid "Paint"
+msgstr "물감"
+
+#. Stamp tool (aka Rubber Stamps)
+#: ../tools.h:65
+msgid "Stamp"
+msgstr "도장"
+
+#. Line drawing tool
+#: ../tools.h:68
+msgid "Lines"
+msgstr "줄"
+
+#. Text tool
+#: ../tools.h:74
+msgid "Text"
+msgstr "글"
+
+#. Label tool
+#: ../tools.h:77
+msgid "Label"
+msgstr "라벨"
+
+#. Undo last action
+#: ../tools.h:86
+msgid "Undo"
+msgstr "전으로"
+
+#. Redo undone action
+#: ../tools.h:89
+msgid "Redo"
+msgstr "다시"
+
+#. Eraser tool
+#: ../tools.h:92
+msgid "Eraser"
+msgstr "지우개"
+
+#. Start a new picture
+#: ../tools.h:95
+msgid "New"
+msgstr "새 그림"
+
+#. Open a saved picture
+#. buttons for the file open dialog
+#. Open dialog: 'Open' button, to load the selected picture
+#: ../tools.h:98 ../tuxpaint.c:7631
+msgid "Open"
+msgstr "열기"
+
+#. Save the current picture
+#: ../tools.h:101
+msgid "Save"
+msgstr "저장"
+
+#. Print the current picture
+#: ../tools.h:104
+msgid "Print"
+msgstr "인쇄"
+
+#. Quit/exit Tux Paint application
+#: ../tools.h:107
+msgid "Quit"
+msgstr "끝"
+
+#. Paint tool instructions
+#: ../tools.h:115
+msgid "Pick a color and a brush shape to draw with."
+msgstr "그림 그릴 색과 붓의 모양을 고르세요."
+
+#. Stamp tool instructions
+#: ../tools.h:118
+msgid "Pick a picture to stamp around your drawing."
+msgstr "도장 그림을 고르세요."
+
+#. Line tool instructions
+#: ../tools.h:121
+msgid "Click to start drawing a line. Let go to complete it."
+msgstr ""
+"마우스의 버튼을 누르는 곳이 줄의 시작점 입니다. 버튼을 놓는곳이 종료점 입니"
+"다."
+
+#. Shape tool instructions
+#: ../tools.h:124
+msgid ""
+"Pick a shape. Click to pick the center, drag, then let go when it is the "
+"size you want. Move around to rotate it, and click to draw it."
+msgstr ""
+"(1) 모양을 고르세요.  (2) 중심지를 정하고 마우스 버튼을 누르세요.  (3) 크기"
+"를 잡고 버튼을 놓으세요.  (4) 모양을 돌린후 마우스 버튼을 누르세요."
+
+#. Text tool instructions
+#: ../tools.h:127
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text."
+msgstr "글체를 고른 후, 그림을 누르고 원하는 글을 키보드로 치세요. "
+"글을 친 후 엔터, 아니면 탭 을 누르시면 글이 완료가 됩니다."
+
+#. Label tool instructions
+#: ../tools.h:130
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text. By using the selector button "
+"and clicking an exist label, you can move it, edit it and change its text "
+"style."
+msgstr "글체를 고른 후, 그림을 누르고 원하는 글을 키보드로 치세요. "
+"글을 친 후 엔터, 아니면 탭 을 누르시면 글이 완료가 됩니다. 셀렉터 버튼으로 "
+"있는 라벨을 누르시면 있는 라벨을 움직이거나 글을 바꾸실 수 있습니다."
+
+#. Magic tool instruction
+#: ../tools.h:136
+msgid "Pick a magical effect to use on your drawing!"
+msgstr "어떤 효과를 사용 할까요?"
+
+#. Response to 'undo' action
+#: ../tools.h:139
+msgid "Undo!"
+msgstr "전 상태로!"
+
+#. Response to 'redo' action
+#: ../tools.h:142
+msgid "Redo!"
+msgstr "다시 상태로!"
+
+#. Eraser tool
+#: ../tools.h:145
+msgid "Eraser!"
+msgstr "지우개!"
+
+#. Response to 'start a new image' action
+#: ../tools.h:148
+msgid "Pick a color or picture with which to start a new drawing."
+msgstr "도장 그림을 고르세요."
+
+#. Response to 'open' action (while file dialog is being constructed)
+#: ../tools.h:151
+msgid "Open…"
+msgstr "그림 열기..."
+
+#. Response to 'save' action
+#: ../tools.h:154
+msgid "Your image has been saved!"
+msgstr "그림을 저장 했습니다!"
+
+#. Response to 'print' action (while printing, or print dialog is being used)
+#: ../tools.h:157
+msgid "Printing…"
+msgstr "인쇄 중..."
+
+#. Response to 'quit' (exit) action
+#: ../tools.h:160
+msgid "Bye bye!"
+msgstr "안녕!"
+
+#. Instruction while using Line tool (after click, before release)
+#: ../tools.h:164
+msgid "Let go of the button to complete the line."
+msgstr "마우스를 놓으면 줄이 완성돼요."
+
+#. Instruction while using Shape tool (after first click, before release)
+#: ../tools.h:167
+msgid "Hold the button to stretch the shape."
+msgstr "마우스를 누르고 옮기면 모양이 늘려져요."
+
+#. Instruction while finishing Shape tool (after release, during rotation step before second click)
+#: ../tools.h:170
+msgid "Move the mouse to rotate the shape. Click to draw it."
+msgstr "마우스를 옮기면 모양이 돌려져요. 마우스를 누르면 그림이 만들어 져요."
+
+#. Notification that 'New' action was aborted (current image would have been lost)
+#: ../tools.h:173
+msgid "OK then… Let’s keep drawing this one!"
+msgstr "그럼, 계속 그림을 그리세요!"
+
+#. Prompt to confirm user wishes to quit
+#: ../tuxpaint.c:2053
+msgid "Do you really want to quit?"
+msgstr "프로그램을 끝 마칠까요?"
+
+#. Quit prompt positive response (quit)
+#: ../tuxpaint.c:2056
+msgid "Yes, I’m done!"
+msgstr "네, 끝마쳐요!"
+
+#. Quit prompt negative response (don't quit)
+#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
+msgid "No, take me back!"
+msgstr "아니요, 전 화면으로 돌아가요!"
+
+#. Current picture is not saved; user is quitting
+#: ../tuxpaint.c:2063
+msgid "If you quit, you’ll lose your picture! Save it?"
+msgstr "그림을 저장않하고 종료 하면 그림이 없어져요! 저장할까요?"
+
+#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
+msgid "Yes, save it!"
+msgstr "네, 저장하세요!"
+
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+msgid "No, don’t bother saving!"
+msgstr "아니요, 저장하지 마세요!"
+
+#. Current picture is not saved; user is opening another picture
+#: ../tuxpaint.c:2068
+msgid "Save your picture first?"
+msgstr "먼저, 그림을 저장할까요?"
+
+#. Error opening picture
+#: ../tuxpaint.c:2073
+msgid "Can’t open that picture!"
+msgstr "그 그림은 열지 못합니다!"
+
+#. Generic dialog dismissal
+#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
+#: ../tuxpaint.c:2106
+msgid "OK"
+msgstr "네"
+
+#. Notification that 'Open' dialog has nothing to show
+#: ../tuxpaint.c:2080
+msgid "There are no saved files!"
+msgstr "저장된 파일이 없네요!"
+
+#. Verification of print action
+#: ../tuxpaint.c:2084
+msgid "Print your picture now?"
+msgstr "그림을 인쇄 할까요?"
+
+#: ../tuxpaint.c:2085
+msgid "Yes, print it!"
+msgstr "네, 인쇄하세요!"
+
+#. Confirmation of successful (we hope) printing
+#: ../tuxpaint.c:2089
+msgid "Your picture has been printed!"
+msgstr "그림을 인쇄 했습니다!"
+
+#. We got an error printing
+#: ../tuxpaint.c:2093
+msgid "Sorry! Your picture could not be printed!"
+msgstr "어쩌죠? 인쇄하지 못했네요..."
+
+#. Notification that it's too soon to print again (--printdelay option is in effect)
+#: ../tuxpaint.c:2096
+msgid "You can’t print yet!"
+msgstr "아직 인쇄 하지 못합니다!"
+
+#. Prompt to confirm erasing a picture in the Open dialog
+#: ../tuxpaint.c:2100
+msgid "Erase this picture?"
+msgstr "이 그림을 지울까요?"
+
+#: ../tuxpaint.c:2101
+msgid "Yes, erase it!"
+msgstr "네, 지우세요!"
+
+#: ../tuxpaint.c:2102
+msgid "No, don’t erase it!"
+msgstr "아니요, 지우지 마세요!"
+
+#. Reminder that Mouse Button 1 is the button to use in Tux Paint
+#: ../tuxpaint.c:2105
+msgid "Remember to use the left mouse button!"
+msgstr "왼쪽 마우스버튼을 사용하는걸 잊지 마세요!"
+
+#. Sound has been muted (silenced) via keyboard shortcut
+#: ../tuxpaint.c:2313
+msgid "Sound muted."
+msgstr "음향제거"
+
+#. Sound has been unmuted (unsilenced) via keyboard shortcut
+#: ../tuxpaint.c:2318
+msgid "Sound unmuted."
+msgstr "음향복구"
+
+#. Wait while Text tool finishes loading fonts
+#: ../tuxpaint.c:3065
+msgid "Please wait…"
+msgstr "잠깐만 기다려 주세요..."
+
+#. Open dialog: 'Erase' button, to erase/deleted the selected picture
+#: ../tuxpaint.c:7634
+msgid "Erase"
+msgstr "지우기"
+
+#. Open dialog: 'Slides' button, to switch to slide show mode
+#: ../tuxpaint.c:7637
+msgid "Slides"
+msgstr "슬라이드"
+
+#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
+#: ../tuxpaint.c:7640
+msgid "Back"
+msgstr "되 돌아가기"
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7643
+msgid "Next"
+msgstr "다음"
+
+#. Slideshow: 'Play' button, to begin a slideshow sequence
+#: ../tuxpaint.c:7646
+msgid "Play"
+msgstr "시작"
+
+#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
+#: ../tuxpaint.c:8355
+msgid "Aa"
+msgstr "A가"
+
+#. Admittedly stupid way of determining which keys can be used for
+#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
+#: ../tuxpaint.c:11664
+msgid "Yes"
+msgstr "네"
+
+#: ../tuxpaint.c:11668
+msgid "No"
+msgstr "아니요"
+
+#. Prompt to ask whether user wishes to save over old version of their file
+#: ../tuxpaint.c:12710
+msgid "Replace the picture with your changes?"
+msgstr "전그림에 덮어쓸까요? 전그림은 없어집니다."
+
+#. Positive response to saving over old version
+#. (like a 'File:Save' action in other applications)
+#: ../tuxpaint.c:12714
+msgid "Yes, replace the old one!"
+msgstr "네, 전그림을 덮어쓰세요!"
+
+#. Negative response to saving over old version (saves a new image)
+#. (like a 'File:Save As...' action in other applications)
+#: ../tuxpaint.c:12718
+msgid "No, save a new file!"
+msgstr "아니요, 새로운 파일로 저장하죠"
+
+#: ../tuxpaint.c:13963
+msgid "Choose the picture you want, then click “Open”."
+msgstr "원하는 그림을 고른후 「열기」버튼을 눌러주세요."
+
+#. Let user choose images:
+#. Instructions for Slideshow file dialog (FIXME: Make a #define)
+#: ../tuxpaint.c:14994 ../tuxpaint.c:15322
+msgid "Choose the pictures you want, then click “Play”."
+msgstr "원하는 그림을 고른후 「시작」버튼을 눌러주세요."
+
+#: ../tuxpaint.c:22344
+msgid "Pick a color."
+msgstr "색을 고르세요"
+
+#: ../tuxpaint.desktop.in.h:1
+msgid "Tux Paint"
+msgstr "턱스페인트"
+
+#: ../tuxpaint.desktop.in.h:2
+msgid "Drawing program"
+msgstr "미술 프로그램"
+
+#: ../tuxpaint.desktop.in.h:3
+msgid "A drawing program for children."
+msgstr "어린이를 위한 미술 프로그램"
+
+#: ../../magic/src/alien.c:64
+msgid "Color Shift"
+msgstr "칼라 쉬프트"
+
+#: ../../magic/src/alien.c:67
+msgid "Click and move the mouse to change the colors in parts of your picture."
+msgstr "마우스를 누르면 그림의 색갈을 바꿀 수 있어요."
+
+#: ../../magic/src/alien.c:68
+msgid "Click to change the colors in your entire picture."
+msgstr "마우스를 누르면 그림의 전채 색갈을 바꿀 수 있어요."
+
+#: ../../magic/src/blind.c:117
+msgid "Blind"
+msgstr "블라인드"
+
+#: ../../magic/src/blind.c:122
+msgid ""
+"Click towards the edge of your picture to pull window blinds over it. Move "
+"perpendicularly to open or close the blinds."
+msgstr "블라인드를 치려면 그림의 가장자리로 가세요. 직각으로 가면 "
+"블라인드가 열리거나 닫힙니다."
+
+#: ../../magic/src/blocks_chalk_drip.c:136
+msgid "Blocks"
+msgstr "네모나게"
+
+#: ../../magic/src/blocks_chalk_drip.c:138
+msgid "Chalk"
+msgstr "분필"
+
+#: ../../magic/src/blocks_chalk_drip.c:140
+msgid "Drip"
+msgstr "흘리게"
+
+#: ../../magic/src/blocks_chalk_drip.c:150
+msgid "Click and move the mouse around to make the picture blocky."
+msgstr "마우스를 누르면 그림이 네모나게 되어요."
+
+#: ../../magic/src/blocks_chalk_drip.c:153
+msgid ""
+"Click and move the mouse around to turn the picture into a chalk drawing."
+msgstr "마우스를 누르면 그림이 분필로 만든 것 같이 되어요."
+
+#: ../../magic/src/blocks_chalk_drip.c:156
+msgid "Click and move the mouse around to make the picture drip."
+msgstr "마우스를 누르면 그림이 흐르는 것 같이 되어요."
+
+#: ../../magic/src/blur.c:80
+msgid "Blur"
+msgstr "흐리게"
+
+#: ../../magic/src/blur.c:83
+msgid "Click and move the mouse around to blur the image."
+msgstr "마우스를 누르면 그림을 흐리게 만들 수 있어요."
+
+#: ../../magic/src/blur.c:84
+msgid "Click to blur the entire image."
+msgstr "마우스를 누르면 그림이 흐려져요."
+
+#. Both are named "Bricks", at the moment:
+#: ../../magic/src/bricks.c:124
+msgid "Bricks"
+msgstr "벽돌"
+
+#: ../../magic/src/bricks.c:131
+msgid "Click and move to draw large bricks."
+msgstr "마우스를 누르면 큰 벽돌이 그려져요!"
+
+#: ../../magic/src/bricks.c:133
+msgid "Click and move to draw small bricks."
+msgstr "마우스를 누르면 작은 벽돌이 그려져요!"
+
+#: ../../magic/src/calligraphy.c:127
+msgid "Calligraphy"
+msgstr "서예"
+
+#: ../../magic/src/calligraphy.c:134
+msgid "Click and move the mouse around to draw in calligraphy."
+msgstr "마우스를 누르고 움직이면 서에식으로 그름을 그릴수 있어요."
+
+#: ../../magic/src/cartoon.c:106
+msgid "Cartoon"
+msgstr "만화"
+
+#: ../../magic/src/cartoon.c:113
+msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgstr "마우스를 누르면 그림이 만화 같이 변화돼요."
+
+#: ../../magic/src/confetti.c:85
+msgid "Confetti"
+msgstr "종이조각"
+
+#: ../../magic/src/confetti.c:87
+msgid "Click to throw confetti!"
+msgstr "종이조각들을 뿌려보세요!"
+
+#: ../../magic/src/distortion.c:142
+msgid "Distortion"
+msgstr "찌그리기"
+
+#: ../../magic/src/distortion.c:150
+msgid "Click and drag the mouse to cause distortion in your picture."
+msgstr "마우스를 누르면 그림을 찌그를 수 있어요."
+
+#: ../../magic/src/emboss.c:103
+msgid "Emboss"
+msgstr "양각"
+
+#: ../../magic/src/emboss.c:109
+msgid "Click and drag the mouse to emboss the picture."
+msgstr "마우스를 누르면 그림을 약각 시킬 수 있어요."
+
+#: ../../magic/src/fade_darken.c:121
+msgid "Lighten"
+msgstr "사라지게"
+
+#: ../../magic/src/fade_darken.c:123
+msgid "Darken"
+msgstr "어둡게"
+
+#: ../../magic/src/fade_darken.c:134
+msgid "Click and move the mouse to lighten parts of your picture."
+msgstr "마우스를 누르면 그림을 밝게 만들 수 있어요."
+
+#: ../../magic/src/fade_darken.c:136
+msgid "Click to lighten your entire picture."
+msgstr "마우스를 누르면 그림의 전채가 밝게 변화돼요."
+
+#: ../../magic/src/fade_darken.c:141
+msgid "Click and move the mouse to darken parts of your picture."
+msgstr "마우스를 누르면 그림을 어둡게 만들 수 있어요."
+
+#: ../../magic/src/fade_darken.c:143
+msgid "Click to darken your entire picture."
+msgstr "마우스를 누르면 그림의 전채가 어둡게 변화돼요."
+
+#: ../../magic/src/fill.c:108
+msgid "Fill"
+msgstr "물통"
+
+#: ../../magic/src/fill.c:115
+msgid "Click in the picture to fill that area with color."
+msgstr "마우스를 누르면 물통을 엎을 수 있어요!"
+
+#: ../../magic/src/fisheye.c:104
+msgid "Fisheye"
+msgstr "오목"
+
+#. Needs better name
+#: ../../magic/src/fisheye.c:106
+msgid "Click on part of your picture to create a fisheye effect."
+msgstr "마우스를 누르면 그림을 오목변화 할수 있어요."
+
+#: ../../magic/src/flower.c:150
+msgid "Flower"
+msgstr "꽃"
+
+#: ../../magic/src/flower.c:156
+msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
+msgstr ""
+"마우스를 누르고 움직이면 꽃의 줄기를 그릴 수 있어요. 마우스늘 놓으면 꽃의 얼"
+"굴이 생겨요."
+
+#: ../../magic/src/foam.c:121
+msgid "Foam"
+msgstr "폼"
+
+#: ../../magic/src/foam.c:127
+msgid "Click and drag the mouse to cover an area with foamy bubbles."
+msgstr "그림을 방울로 덮으세요."
+
+#: ../../magic/src/fold.c:105
+msgid "Fold"
+msgstr "졉기"
+
+#: ../../magic/src/fold.c:107
+msgid ""
+"Choose a background color and click to turn the corner of the page over."
+msgstr "배경의 색을 고른 후 퍼이지의 모퉁이를 클릭하면 다음 페이지로 넘어가요."
+
+#: ../../magic/src/fretwork.c:176
+msgid "Fretwork"
+msgstr "뇌문"
+
+#: ../../magic/src/fretwork.c:180
+msgid "Click and drag to draw repetitive patterns. "
+msgstr "마우스를 누르고 움직이면 무늬를 그릴 수 있습니다."
+
+#: ../../magic/src/fretwork.c:182
+msgid "Click to surround your picture with repetitive patterns."
+msgstr "마우스를 누르면 그림이 무늬로 둘러 쌓아 져요."
+
+#: ../../magic/src/glasstile.c:107
+msgid "Glass Tile"
+msgstr "유리 타일"
+
+#: ../../magic/src/glasstile.c:114
+msgid "Click and drag the mouse to put glass tile over your picture."
+msgstr "마우스를 누르면 그림에 유리타일이 깔려요."
+
+#: ../../magic/src/glasstile.c:116
+msgid "Click to cover your entire picture in glass tiles."
+msgstr "마우스를 누르면 그림 전채가 유리타일로 깔려요."
+
+#: ../../magic/src/grass.c:112
+msgid "Grass"
+msgstr "풀"
+
+#: ../../magic/src/grass.c:118
+msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgstr "마우스를 누르면 풀이 그려져요. 땅도 그리는 것 잊지 마세요!"
+
+#: ../../magic/src/halftone.c:34
+msgid "Halftone"
+msgstr "망점"
+
+#: ../../magic/src/halftone.c:38
+msgid "Click and drag to turn your drawing into a newspaper."
+msgstr "마우스를 누르면 그림이 신문지 같이 됩니다."
+
+#: ../../magic/src/kalidescope.c:120
+msgid "Symmetric Left/Right"
+msgstr "가로 대칭"
+
+#: ../../magic/src/kalidescope.c:122
+msgid "Symmetric Up/Down"
+msgstr "세로 대칭"
+
+#: ../../magic/src/kalidescope.c:124
+msgid "Pattern"
+msgstr "무늬"
+
+#: ../../magic/src/kalidescope.c:126
+msgid "Tiles"
+msgstr "타일"
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:128
+msgid "Kaleidoscope"
+msgstr "만화경"
+
+#: ../../magic/src/kalidescope.c:136
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the left and right of your picture."
+msgstr "마우스를 누르면 붓으로 그린 그림이 가로 양면으로 그려져요."
+
+#: ../../magic/src/kalidescope.c:138
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the top and bottom of your picture."
+msgstr "마우스를 누르면 붓으로 그린 그림이 세로 양면으로 그려져요."
+
+#: ../../magic/src/kalidescope.c:140
+msgid "Click and drag the mouse to draw a pattern across the picture."
+msgstr "마우스를 누르면 무늬로 그림을 기릴 수 있어요."
+
+#: ../../magic/src/kalidescope.c:142
+msgid ""
+"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"picture."
+msgstr "마우스를 누르면 무늬의 붓으로 그린 그림이 양면으로 그려져요."
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:144
+msgid ""
+"Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgstr "만화경 붓 으로 그림을 그려보세요."
+
+#: ../../magic/src/light.c:107
+msgid "Light"
+msgstr "밝게"
+
+#: ../../magic/src/light.c:113
+msgid "Click and drag to draw a beam of light on your picture."
+msgstr "마우스를 누르면 그림을 밝게 만들 수 있어요."
+
+#: ../../magic/src/metalpaint.c:101
+msgid "Metal Paint"
+msgstr "쇠물감"
+
+#: ../../magic/src/metalpaint.c:107
+msgid "Click and drag the mouse to paint with a metallic color."
+msgstr "마우스를 누르면 그림을 쇠물감으로 그릴 수 있어요."
+
+#: ../../magic/src/mirror_flip.c:117
+msgid "Mirror"
+msgstr "거울"
+
+#: ../../magic/src/mirror_flip.c:119
+msgid "Flip"
+msgstr "뒤집기"
+
+#: ../../magic/src/mirror_flip.c:130
+msgid "Click to make a mirror image."
+msgstr "마우스를 누르면 그림이 뒤집어져요."
+
+#: ../../magic/src/mirror_flip.c:133
+msgid "Click to flip the picture upside-down."
+msgstr "마우스를 누르면 그림이 엎어져요."
+
+#: ../../magic/src/mosaic.c:100
+msgid "Mosaic"
+msgstr "모자이크"
+
+#: ../../magic/src/mosaic.c:103
+msgid ""
+"Click and move the mouse to add a mosaic effect to parts of your picture."
+msgstr "마우스를 누르면 그림을 모자이크로 만들 수 있어요."
+
+#: ../../magic/src/mosaic.c:104
+msgid "Click to add a mosaic effect to your entire picture."
+msgstr "마우스를 누르면 그림을 모자이크로 덮을 수 있어요."
+
+#: ../../magic/src/mosaic_shaped.c:142
+msgid "Square Mosaic"
+msgstr "정사각형 모자이크"
+
+#: ../../magic/src/mosaic_shaped.c:143
+msgid "Hexagon Mosaic"
+msgstr "6각형 모자이크"
+
+#: ../../magic/src/mosaic_shaped.c:144
+msgid "Irregular Mosaic"
+msgstr "고르지 못한 모자이크"
+
+#: ../../magic/src/mosaic_shaped.c:149
+msgid ""
+"Click and move the mouse to add a square mosaic to parts of your picture."
+msgstr "마우스를 누르면 그림의 부분을 정사각형 모자이크로 만들 수 있어요."
+
+#: ../../magic/src/mosaic_shaped.c:150
+msgid "Click to add a square mosaic to your entire picture."
+msgstr "마우스를 누르면 그림을 정사각형 모자이크로 만들 수 있어요."
+
+#: ../../magic/src/mosaic_shaped.c:152
+msgid ""
+"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+msgstr "마우스를 누르면 그림의 부분을 6각형 모자이크로 만들 수 있어요."
+
+#: ../../magic/src/mosaic_shaped.c:153
+msgid "Click to add a hexagonal mosaic to your entire picture."
+msgstr "마우스를 누르면 그림을 6각형 모자이크로 만들 수 있어요."
+
+#: ../../magic/src/mosaic_shaped.c:155
+msgid ""
+"Click and move the mouse to add an irregular mosaic to parts of your picture."
+msgstr "마우스를 누르면 그림의 부분을 고르지 못한 모자이크로 만들 수 있어요."
+
+#: ../../magic/src/mosaic_shaped.c:156
+msgid "Click to add an irregular mosaic to your entire picture."
+msgstr "마우스를 누르면 그림을 고르지 못한 모자이크로 만들 수 있어요."
+
+#: ../../magic/src/negative.c:98
+msgid "Negative"
+msgstr "음화"
+
+#: ../../magic/src/negative.c:106
+msgid "Click and move the mouse around to make your painting negative."
+msgstr "마우스를 누르면 그림의 색이 뒤집어져요."
+
+#: ../../magic/src/negative.c:109
+msgid "Click to turn your painting into its negative."
+msgstr "마우스를 누르면 그림이 뒤집어져요."
+
+#: ../../magic/src/noise.c:63
+msgid "Noise"
+msgstr "잡음"
+
+#: ../../magic/src/noise.c:66
+msgid "Click and move the mouse to add noise to parts of your picture."
+msgstr "마우스를 누르에 잡음을 그리세요."
+
+#: ../../magic/src/noise.c:67
+msgid "Click to add noise to your entire picture."
+msgstr "마우스를 누르면 전채 그림이 잡음화 됍니다."
+
+#: ../../magic/src/perspective.c:145
+msgid "Perspective"
+msgstr "투시도"
+
+#: ../../magic/src/perspective.c:146
+msgid "Zoom"
+msgstr "확대"
+
+#: ../../magic/src/perspective.c:151
+msgid "Click on the corners and drag where you want to stretch the picture."
+msgstr "마우스를 누르면 그림을 늘릴 수 있어요."
+
+#: ../../magic/src/perspective.c:154
+msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr "마우스를 누르면 그림을 확대 하거나 축소 할 수 있습니다."
+
+#: ../../magic/src/puzzle.c:105
+msgid "Puzzle"
+msgstr "퍼즐"
+
+#: ../../magic/src/puzzle.c:112
+msgid "Click the part of your picture where would you like a puzzle."
+msgstr "마우스를 누르면 그림을 퍼즐로 만들 수 있어요."
+
+#: ../../magic/src/puzzle.c:113
+msgid "Click to make a puzzle in fullscreen mode."
+msgstr "마우스를 누르면 퍼즐을 화면 전체에 깔립니다."
+
+#: ../../magic/src/rails.c:131
+msgid "Rails"
+msgstr "레일"
+
+#: ../../magic/src/rails.c:133
+msgid "Click and drag to draw train track rails on your picture."
+msgstr "마우스를 누르면 레일을 그릴 수 있어요."
+
+#: ../../magic/src/rainbow.c:139
+msgid "Rainbow"
+msgstr "무지개"
+
+#: ../../magic/src/rainbow.c:146
+msgid "You can draw in rainbow colors!"
+msgstr "여러가지의 색으로 그림을 그려 보세요."
+
+#: ../../magic/src/rain.c:65
+msgid "Rain"
+msgstr "비"
+
+#: ../../magic/src/rain.c:68
+msgid "Click to place a rain drop onto your picture."
+msgstr "마우스를 누르면 비를 그릴 수 있어요."
+
+#: ../../magic/src/rain.c:69
+msgid "Click to cover your picture with rain drops."
+msgstr "마우스를 누르면 그림에 비를 그릴 수 있어요."
+
+#: ../../magic/src/realrainbow.c:110
+msgid "Real Rainbow"
+msgstr "무지개"
+
+#: ../../magic/src/realrainbow.c:112
+msgid "ROYGBIV Rainbow"
+msgstr "빨주노초파남보 무지개"
+
+#: ../../magic/src/realrainbow.c:117
+msgid ""
+"Click where you want your rainbow to start, drag to where you want it to "
+"end, and then let go to draw a rainbow."
+msgstr ""
+"무지개를 시작하고 싶은곳에 마우스를 눌르고 무지개를 끝내고 싶은곳에 마우스를 "
+"놓으세요."
+
+#: ../../magic/src/ripples.c:106
+msgid "Ripples"
+msgstr "물결"
+
+#: ../../magic/src/ripples.c:112
+msgid "Click to make ripples appear over your picture."
+msgstr "마우스를 누르면 그림에 몰결을 만드세요."
+
+#: ../../magic/src/rosette.c:116
+msgid "Rosette"
+msgstr "로제트"
+
+#: ../../magic/src/rosette.c:116
+msgid "Picasso"
+msgstr "피카소"
+
+#: ../../magic/src/rosette.c:121
+msgid "Click and start drawing your rosette."
+msgstr ""
+"마우스의 버튼을 누르는 곳이 줄의 시작점 입니다. 버튼을 놓는곳이 종료점 입니"
+"다."
+
+#: ../../magic/src/rosette.c:123
+msgid "You can draw just like Picasso!"
+msgstr "피카소 같은 그림을 그려보세요!"
+
+#: ../../magic/src/sharpen.c:73
+msgid "Edges"
+msgstr "가장자리"
+
+#: ../../magic/src/sharpen.c:74
+msgid "Sharpen"
+msgstr "진하게"
+
+#: ../../magic/src/sharpen.c:75
+msgid "Silhouette"
+msgstr "실루엣"
+
+#: ../../magic/src/sharpen.c:78
+msgid "Click and move the mouse to trace edges in parts of your picture."
+msgstr "마우스를 누르면 그림의 가장자리가 진해져요."
+
+#: ../../magic/src/sharpen.c:79
+msgid "Click to trace edges in your entire picture."
+msgstr "마우스를 누르면 그림이 전채 가장자리가 진해져요."
+
+#: ../../magic/src/sharpen.c:80
+msgid "Click and move the mouse to sharpen parts of your picture."
+msgstr "마우스를 누르면 그림이 진해져요."
+
+#: ../../magic/src/sharpen.c:81
+msgid "Click to sharpen the entire picture."
+msgstr "마우스를 누르면 그림이 전채가 진해져요."
+
+#: ../../magic/src/sharpen.c:82
+msgid "Click and move the mouse to create a black and white silhouette."
+msgstr "마우스를 누르면 그림이 흑백의 실구엣이 됩니다."
+
+#: ../../magic/src/sharpen.c:83
+msgid "Click to create a black and white silhouette of your entire picture."
+msgstr "마우스를 누르면 그림이 전채가 흑백의 실구엣이 됩니다."
+
+#: ../../magic/src/shift.c:109
+msgid "Shift"
+msgstr "움직이기"
+
+#: ../../magic/src/shift.c:115
+msgid "Click and drag to shift your picture around on the canvas."
+msgstr "마우스를 누르고 움직이면 그림을 움직일 수 있어요."
+
+#: ../../magic/src/smudge.c:106
+msgid "Smudge"
+msgstr "번지게"
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:108
+msgid "Wet Paint"
+msgstr "젖은 물감"
+
+#: ../../magic/src/smudge.c:115
+msgid "Click and move the mouse around to smudge the picture."
+msgstr "마우스를 누르면 그림을 번지게 만들 수 있어요."
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:117
+msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgstr "마우스를 누르면 그림을 젖은 얼룩한 봇으로 그릴 수 있어요."
+
+#: ../../magic/src/snow.c:68
+msgid "Snow Ball"
+msgstr "눈덩이"
+
+#: ../../magic/src/snow.c:69
+msgid "Snow Flake"
+msgstr "눈"
+
+#: ../../magic/src/snow.c:72
+msgid "Click to add snow balls to your picture."
+msgstr "눈덩이를 그려보세요."
+
+#: ../../magic/src/snow.c:73
+msgid "Click to add snow flakes to your picture."
+msgstr "눈을 그려보세요."
+
+#: ../../magic/src/string.c:123
+msgid "String edges"
+msgstr "줄 가장지라"
+
+#: ../../magic/src/string.c:126
+msgid "String corner"
+msgstr "줄 모퉁이"
+
+#: ../../magic/src/string.c:129
+msgid "String 'V'"
+msgstr "줄 'V'"
+
+#: ../../magic/src/string.c:137
+msgid ""
+"Click and drag to draw string art. Drag top-bottom to draw less or more "
+"lines, left or right to make a bigger hole."
+msgstr "줄그림을 그리세요. 세로 로 마우스를 움직이면 줄이 많아지거나 작아지고, "
+"가로 로 마우스를 움직이면 구멍이 더 커집니다."
+
+#: ../../magic/src/string.c:140
+msgid "Click and drag to draw arrows made of string art."
+msgstr "마우스를 누르면 화살 을 그릴 수 있어요."
+
+#: ../../magic/src/string.c:143
+msgid "Draw string art arrows with free angles."
+msgstr "자유의 각도를 갖은 화살 을 그릴 수 있어요."
+
+#: ../../magic/src/tint.c:71
+msgid "Tint"
+msgstr "배합"
+
+#: ../../magic/src/tint.c:72
+msgid "Color & White"
+msgstr "색과 흰색"
+
+#: ../../magic/src/tint.c:75
+msgid ""
+"Click and move the mouse around to change the color of parts of your picture."
+msgstr "마우스를 누르면 그림의 색을 바꿀 수 있어요."
+
+#: ../../magic/src/tint.c:76
+msgid "Click to change the color of your entire picture."
+msgstr "마우스를 누르면 그림의 전채 색을 바꿀 수 있어요."
+
+#: ../../magic/src/tint.c:77
+msgid ""
+"Click and move the mouse around to turn parts of your picture into white and "
+"a color you choose."
+msgstr "마우스를 누르면 그림의 색을 바꿀 수 있어요."
+
+#: ../../magic/src/tint.c:78
+msgid "Click to turn your entire picture into white and a color you choose."
+msgstr "마우스를 누르면 그림의 전채 색을 바꿀 수 있어요."
+
+#: ../../magic/src/toothpaste.c:65
+msgid "Toothpaste"
+msgstr "치약"
+
+#: ../../magic/src/toothpaste.c:68
+msgid "Click and drag to squirt toothpaste onto your picture."
+msgstr "마우스를 누르면 치약을 뿌릴수 있어요."
+
+#: ../../magic/src/tornado.c:157
+msgid "Tornado"
+msgstr "회오리바람"
+
+#: ../../magic/src/tornado.c:163
+msgid "Click and drag to draw a tornado funnel on your picture."
+msgstr "마우스를 누르면 깔때기 회오리바람 을 그릴 수 있어요."
+
+#: ../../magic/src/tv.c:100
+msgid "TV"
+msgstr "텔레비젼"
+
+#: ../../magic/src/tv.c:105
+msgid ""
+"Click and drag to make parts of your picture look like they are on "
+"television."
+msgstr "마우스를 누르면 그림의 부분이 텔레비젼에 나온 것 같이돼요."
+
+#: ../../magic/src/tv.c:108
+msgid "Click to make your picture look like it's on television."
+msgstr "마우스를 누르면 그림이 텔레비젼에 나온 것 같이돼요."
+
+#: ../../magic/src/waves.c:103
+msgid "Waves"
+msgstr "물결"
+
+#: ../../magic/src/waves.c:104
+msgid "Wavelets"
+msgstr "잔물결"
+
+#: ../../magic/src/waves.c:111
+msgid ""
+"Click to make the picture horizontally wavy. Click toward the top for "
+"shorter waves, the bottom for taller waves, the left for small waves, and "
+"the right for long waves."
+msgstr ""
+"그림을 양옆으로 물결화 하세요.  그림의 위쪽을 누르면 짧은 물결이 되고, 밑을 "
+"누르면 큰물결이 생깁니다.  그림의 왼쪽을 누르면 작은 물결이 되고, 오른쪽을 누"
+"르면 긴물결이 생깁니다."
+
+#: ../../magic/src/waves.c:112
+msgid ""
+"Click to make the picture vertically wavy. Click toward the top for shorter "
+"waves, the bottom for taller waves, the left for small waves, and the right "
+"for long waves."
+msgstr ""
+"그림을 위아래로 물결화 하세요.  그림의 위쪽을 누르면 짧은 물결이 되고, 밑을 "
+"누르면 큰물결이 생깁니다.  그림의 왼쪽을 누르면 작은 물결이 되고, 오른쪽을 누"
+"르면 긴물결이 생깁니다."
+
+#: ../../magic/src/xor.c:95
+msgid "Xor Colors"
+msgstr "배타적 논리합"
+
+#: ../../magic/src/xor.c:101
+msgid "Click and drag to draw a XOR effect"
+msgstr "마우스를 누르면 그림이 배타적 노리합의 색이 됩니다."
+
+#: ../../magic/src/xor.c:103
+msgid "Click to draw a XOR effect on the whole picture"
+msgstr "마우스를 누르면 그림 전채가 배타적 노리합의 색이 됩니다."
+

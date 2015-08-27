@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-stylesheet</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-style.html" title="cr-style">
+<link rel="next" href="libcroco-cr-term.html" title="cr-term">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-style.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-term.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-stylesheet.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-stylesheet.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-stylesheet"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-stylesheet.top_of_page"></a>cr-stylesheet</span></h2>
+<p>cr-stylesheet</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-stylesheet.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet">CRStyleSheet</a>;
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-destroy" title="cr_stylesheet_destroy ()">cr_stylesheet_destroy</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_this</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-dump" title="cr_stylesheet_dump ()">cr_stylesheet_dump</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">FILE</span> *a_fp</code></em>);
+<a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="returnvalue">CRStyleSheet</span></a> *      <a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-new" title="cr_stylesheet_new ()">cr_stylesheet_new</a>                   (<em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRStatement" title="CRStatement"><span class="type">CRStatement</span></a> *a_stmts</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-nr-rules" title="cr_stylesheet_nr_rules ()">cr_stylesheet_nr_rules</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> const *a_this</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-ref" title="cr_stylesheet_ref ()">cr_stylesheet_ref</a>                   (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_this</code></em>);
+<a class="link" href="libcroco-cr-declaration.html#CRStatement" title="CRStatement"><span class="returnvalue">CRStatement</span></a> *       <a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-statement-get-from-list" title="cr_stylesheet_statement_get_from_list ()">cr_stylesheet_statement_get_from_list</a>
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">int</span> itemnr</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-to-string" title="cr_stylesheet_to_string ()">cr_stylesheet_to_string</a>             (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> const *a_this</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-unref" title="cr_stylesheet_unref ()">cr_stylesheet_unref</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_this</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-stylesheet.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-stylesheet.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRStyleSheet"></a><h3>CRStyleSheet</h3>
+<pre class="programlisting">typedef struct {
+	/**The css statements list*/
+	CRStatement *statements ;
+
+        enum CRStyleOrigin origin ;
+
+        /*the parent import rule, if any.*/
+        CRStatement *parent_import_rule ;
+
+	/**custom data used by libcroco*/
+	gpointer croco_data ;
+
+	/**
+	 *custom application data pointer
+	 *Can be used by applications.
+	 */
+	gpointer app_data ;
+
+	/**
+	 *the reference count of this insance
+	 *Please, don't never ever modify it
+	 *directly. Use cr_stylesheet_ref()
+	 *and cr_stylesheet_unref() instead.
+	 */
+	gulong ref_count ;
+} CRStyleSheet;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-stylesheet-destroy"></a><h3>cr_stylesheet_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_stylesheet_destroy               (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-stylesheet-dump"></a><h3>cr_stylesheet_dump ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_stylesheet_dump                  (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">FILE</span> *a_fp</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-stylesheet-new"></a><h3>cr_stylesheet_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="returnvalue">CRStyleSheet</span></a> *      cr_stylesheet_new                   (<em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRStatement" title="CRStatement"><span class="type">CRStatement</span></a> *a_stmts</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-stylesheet-nr-rules"></a><h3>cr_stylesheet_nr_rules ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                cr_stylesheet_nr_rules              (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> const *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-stylesheet-ref"></a><h3>cr_stylesheet_ref ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_stylesheet_ref                   (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-stylesheet-statement-get-from-list"></a><h3>cr_stylesheet_statement_get_from_list ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-declaration.html#CRStatement" title="CRStatement"><span class="returnvalue">CRStatement</span></a> *       cr_stylesheet_statement_get_from_list
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">int</span> itemnr</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-stylesheet-to-string"></a><h3>cr_stylesheet_to_string ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             cr_stylesheet_to_string             (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> const *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-stylesheet-unref"></a><h3>cr_stylesheet_unref ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cr_stylesheet_unref                 (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

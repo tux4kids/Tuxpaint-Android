@@ -1,0 +1,164 @@
+   A propos des PNG
+
+A propos des PNG
+
+       PNG est le format Portable Network Graphic .  c'est un standard
+   ouvert, non couvert par une licence (contrairement au GIFs) (En fait c'est
+   sous licence GPL -global public licence, qui garantie `a tous l'acces
+   libre `a ce format).  c'est un format hautement compresse (mais qui n'a
+   pas de perte contrairement au jpeg, les pertes permettant une compression
+   meilleure mais peuvent introduire des erreurs dans l'image lors de la
+   sauvegarde) et qui supporte les couleurs en 24 bit ( 16,7 million de
+   couleurs) ainsi qu'une couche alpha - ce qui veux dire que chaque pixel `a
+   un degre variable de transparence-.
+
+       Pour plus d'information, visitez  http://www.libpng.org/ (en anglais :
+   peut etre des liens vers des sites franc,ais pas verifie)
+
+       Ces caracteristiques (open source, pertes reduites, compression,
+   transparence/alpha) font que le format PNG est le meilleur choix pour
+   Tuxpaint  (Tuxpaint supporte le format PNG grace `a la librairie open
+   source SDL_Image qui provient de la librairie libPNG.)
+
+       Le support des nombreuses couleurs permet d'utiliser des tampons de
+   qualite "photo" dans Tux Paint et la transparence permet des brosses de
+   grande qualite. Attention `a bien conserver la transparence lors des
+   enregistrements.
+
+Comment creer des PNGs
+
+     Ce qui suit est un tres bref descriptif des logiciel capables de creer
+   des PNG pour les trois OS grand public :
+     * Linux
+     * Windows
+     * Mac OS X
+
+    Utilisateurs de Linux/Unix
+
+     
+
+        Le GIMP    
+
+       Le meilleur outil pour creer des images PNG pour utiliser avec Tux
+   Paint, c'est le programme de manipulation d'image GNU (GIMP = GNU Image
+   Manipulation Program) un programme de dessin et de retouche photo open
+   source de grande qualite.
+       Il est probablement dej`a installe avec votre distribution linux,
+   sinon il doit etre sur les CD d'installation ou sur le site de votre
+   distribution. Autrement vous pouvez le trouver sur le site 
+   http://www.gimp.org/
+
+        Krita  
+
+         Krita est une application de dessin et de retouche photo pour
+   KOffice : http://koffice.kde.org/krita/
+
+        NetPBM  
+
+       Les outils Portable Bitmap  (connus collectivement comme  "NetPBM")
+   sont une collection d'outil ligne de commande open source qui
+   convertissent en provenance et vers de nombreux formats, tels que GIF,
+   TIFF, BMP, PNG, et beaucoup d'autres.
+       NB : les formats netPBM (Portable Bitmap : PBM, Portable Greymap: PGM,
+   Portable Pixmap: PPM, et le catch-all Portable Any Map: PNM) ne supportent
+   pas les couches alpha, donc toute information de transparence (i.e. comme
+   dans un GIF ou un PNG) sera perdue! Utilisez le GIMP!
+
+       Ils sont probablement dej`a installes avec votre distribution linux.
+   Sinon ils sont tres certainement disponibles sur vos CD d'installation ou
+   sur le site de la distribution. Autrement sur le
+   site http://netpbm.sourceforge.net/
+
+        cjpeg/djpeg
+
+       Les programmes en ligne de commande "cjpeg" et "djpeg" convertissent
+   entre les formats NetPBM Portable Any Map (PNM) et les JPEG.
+
+       Ils sont probablement dej`a installes avec votre distribution linux.
+   (Sous Debian, ils sont disponibles dans le package 'libjpeg-progs") Sinon
+   ils sont tres certainement disponibles sur vos CD d'installation ou sur le
+   site de la distribution. Autrement sur le site
+   ftp://ftp.uu.net/graphics/jpeg/
+
+  Utilisateurs de Windows
+
+          The Gimp
+
+         http://www.gimp.org/~tml/gimp/win32/
+
+        Canvas (Deneba)
+
+         http://www.deneba.com/products/canvas8/default2.html
+
+        CorelDRAW (Corel)
+
+         http://www.corel.com/
+
+        Fireworks (Macromedia)
+
+         http://macromedia.com/software/fireworks/
+
+        Illustrator (Adobe)
+
+         http://www.adobe.com/products/illustrator/main.html
+
+        Paint Shop Pro (Jasc)
+
+         http://www.jasc.com/products/psp/
+
+        Photoshop (Adobe)
+
+         http://www.adobe.com/products/photoshop/main.html
+
+  Utilisateurs de Macintosh
+
+        The Gimp     
+
+       http://www.gimp.org/~tml/gimp/win32/
+
+        Canvas (Deneba)
+
+         http://www.deneba.com/products/canvas8/default2.html
+
+        CorelDRAW (Corel)
+
+         http://www.corel.com/
+
+        Fireworks (Macromedia)
+
+         http://macromedia.com/software/fireworks/     
+
+        Illustrator (Adobe)
+
+         http://www.adobe.com/products/illustrator/main.html
+
+        Photoshop (Adobe)    
+
+         http://www.adobe.com/products/photoshop/main.html
+
+        Graphic Converter
+
+         http://www.lemkesoft.de/us_gcabout.html
+
+         NetPBM  
+
+       Les outils Portable Bitmap  (connus collectivement comme  "NetPBM")
+   sont une collection d'outil ligne de commande open source qui
+   convertissent en provenance et vers de nombreux formats, tels que GIF,
+   TIFF, BMP, PNG, et beaucoup d'autres.
+       NB : les formats netPBM (Portable Bitmap : PBM, Portable Greymap: PGM,
+   Portable Pixmap: PPM, et le catch-all Portable Any Map: PNM) ne supportent
+   pas les couches alpha, donc toute information de transparence (i.e. comme
+   dans un GIF ou un PNG) sera perdue! Utilisez le GIMP!
+
+       Vous pouvez l'installer en utilisant fink via fink commander :
+   http://finkcommander.sourceforge.net/ . Autrement sur le
+   site http://netpbm.sourceforge.net/
+
+   Plus d'informations.
+   --------------------
+     le site web libPNG liste les editeurs et convertisseurs d'image qui
+   supportent le format PNG
+
+       http://www.libpng.org/pub/png/pngaped.html
+       http://www.libpng.org/pub/png/pngapcv.html

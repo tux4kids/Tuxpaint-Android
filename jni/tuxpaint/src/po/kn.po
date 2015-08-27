@@ -1,0 +1,1500 @@
+# Tuxpaint Kannada translation.
+# Copyright (C) 2011-2014
+# This file is distributed under the same license as the tuxpaint package.
+# Savitha <savithasprasad@yahoo.com>, 2011, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxpaint\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-03 21:03+0200\n"
+"PO-Revision-Date: 2014-06-08 23:43+0630\n"
+"Last-Translator: Savitha <savithasprasad@yahoo.com>\n"
+"Language-Team: Kannada <kde-i18n-doc@kde.org>\n"
+"Language: kn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Response to Black (0, 0, 0) color selected
+#: ../colors.h:86
+msgid "Black!"
+msgstr "ಕಪ್ಪು!"
+
+#. Response to Dark grey (128, 128, 128) color selected
+#: ../colors.h:89
+msgid "Dark grey! Some people spell it “dark gray”."
+msgstr "ಕಡು ಬೂದು! ಕೆಲವರು ಇದನ್ನು \"ಕಡು ಮಬ್ಬು\" ಎಂದೂ ಸಹ ಕರೆಯುತ್ತಾರೆ."
+
+#. Response to Light grey (192, 192, 192) color selected
+#: ../colors.h:92
+msgid "Light grey! Some people spell it “light gray”."
+msgstr "ತಿಳಿ ಬೂದು! ಕೆಲವರು ಇದನ್ನು \"ತಿಳಿ ಮಬ್ಬು\" ಎಂದೂ ಸಹ ಕರೆಯುತ್ತಾರೆ."
+
+#. Response to White (255, 255, 255) color selected
+#: ../colors.h:95
+msgid "White!"
+msgstr "ಬಿಳಿ!"
+
+#. Response to Red (255, 0, 0) color selected
+#: ../colors.h:98
+msgid "Red!"
+msgstr "ಕೆಂಪು!"
+
+#. Response to Orange (255, 128, 0) color selected
+#: ../colors.h:101
+msgid "Orange!"
+msgstr "ಕಿತ್ತಳೆ!"
+
+#. Response to Yellow (255, 255, 0) color selected
+#: ../colors.h:104
+msgid "Yellow!"
+msgstr "ಹಳದಿ!"
+
+#. Response to Light green (160, 228, 128) color selected
+#: ../colors.h:107
+msgid "Light green!"
+msgstr "ತಿಳಿ ಹಸಿರು!"
+
+#. Response to Dark green (33, 148, 70) color selected
+#: ../colors.h:110
+msgid "Dark green!"
+msgstr "ಕಡು ಹಸಿರು!"
+
+#. Response to "Sky" blue (138, 168, 205) color selected
+#: ../colors.h:113
+msgid "Sky blue!"
+msgstr "ಆಕಾಶ ನೀಲಿ!"
+
+#. Response to Blue (50, 100, 255) color selected
+#: ../colors.h:116
+msgid "Blue!"
+msgstr "ನೀಲಿ!"
+
+#. Response to Lavender (186, 157, 255) color selected
+#: ../colors.h:119
+msgid "Lavender!"
+msgstr "ಲ್ಯಾವೆಂಡರ್!"
+
+#. Response to Purple (128, 0, 128) color selected
+#: ../colors.h:122
+msgid "Purple!"
+msgstr "ನೇರಳೆ!"
+
+#. Response to Pink (255, 165, 211) color selected
+#: ../colors.h:125
+msgid "Pink!"
+msgstr "ಗುಲಾಬಿ!"
+
+#. Response to Brown (128, 80, 0) color selected
+#: ../colors.h:128
+msgid "Brown!"
+msgstr "ಕಂದು!"
+
+#. Response to Tan (226, 189, 166) color selected
+#: ../colors.h:131
+msgid "Tan!"
+msgstr "ಕಂದುಹಳದಿ!"
+
+#. Response to Beige (247, 228, 219) color selected
+#: ../colors.h:134
+msgid "Beige!"
+msgstr "ಉಣ್ಣೆ!"
+
+#. First, the blacklist. We list font families that can crash Tux Paint
+#. via bugs in the SDL_ttf library. We also test fonts to be sure that
+#. they have both uppercase and lowercase letters. Note that we do not
+#. test for "Aa", because it is OK if uppercase and lowercase are the
+#. same (but not nice -- such fonts get a low score later).
+#.
+#. Most locales leave the blacklist strings alone: "QX" and "qx"
+#. (it is less destructive to use the scoring strings instead)
+#.
+#. Locales that absolutely require all fonts to have some
+#. extra characters should use "QX..." and "qx...", where "..."
+#. are some characters you absolutely require in all fonts.
+#.
+#. Locales with absolutely NO use for ASCII may use "..." and "...",
+#. where "..." are some characters you absolutely require in
+#. all fonts. This would be the case for a locale in which it is
+#. impossible for a user to type ASCII letters.
+#.
+#. Most translators should use scoring instead.
+#: ../dirwalk.c:168
+msgid "qx"
+msgstr "qx"
+
+#: ../dirwalk.c:168
+msgid "QX"
+msgstr "QX"
+
+#. TODO: weight specification
+#. Now we score fonts to ensure that the best ones will be placed at
+#. the top of the list. The user will see them first. This sorting is
+#. especially important for users who have scroll buttons disabled.
+#. Translators should do whatever is needed to put crummy fonts last.
+#. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
+#: ../dirwalk.c:195
+msgid "oO"
+msgstr "oO"
+
+#. common punctuation (e.g., '?', '!', '.', ',', etc.)
+#: ../dirwalk.c:198
+msgid ",.?!"
+msgstr ",.?!"
+
+#. uncommon punctuation (e.g., '@', '#', '*', etc.)
+#: ../dirwalk.c:201
+msgid "`\\%_@$~#{<(^&*"
+msgstr "`\\%_@$~#{<(^&*"
+
+#. digits (e.g., '0', '1' and '7')
+#: ../dirwalk.c:204
+msgid "017"
+msgstr "೦೧೭"
+
+#. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
+#: ../dirwalk.c:207
+msgid "O0"
+msgstr "O೦"
+
+#. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
+#: ../dirwalk.c:210
+msgid "1Il|"
+msgstr "1Il|"
+
+#: ../dirwalk.c:214
+msgid "<1>spare-1a"
+msgstr "<1>ಸ್ಪೇರ್-1a"
+
+#: ../dirwalk.c:215
+msgid "<1>spare-1b"
+msgstr "<1>ಸ್ಪೇರ್-1b"
+
+#: ../dirwalk.c:216
+msgid "<9>spare-9a"
+msgstr "<9>ಸ್ಪೇರ್-9a"
+
+#: ../dirwalk.c:217
+msgid "<9>spare-9b"
+msgstr "<9>ಸ್ಪೇರ್-9b"
+
+#. Congratulations #1
+#: ../great.h:37
+msgid "Great!"
+msgstr "ಅದ್ಭುತ!"
+
+#. Congratulations #2
+#: ../great.h:40
+msgid "Cool!"
+msgstr "ಉತ್ತಮ!"
+
+#. Congratulations #3
+#: ../great.h:43
+msgid "Keep it up!"
+msgstr "ಹಾಗೆ ಮುಂದುವರೆಸು!"
+
+#. Congratulations #4
+#: ../great.h:46
+msgid "Good job!"
+msgstr "ಒಳ್ಳೆಯ ಕೆಲಸ!"
+
+#. Input Method: English mode
+#: ../im.c:75
+msgid "English"
+msgstr "ಇಂಗ್ಲೀಷ್"
+
+#. Input Method: Japanese Romanized Hiragana mode
+#: ../im.c:78
+msgid "Hiragana"
+msgstr "ಹಿರಗಾನ"
+
+#. Input Method: Japanese Romanized Katakana mode
+#: ../im.c:81
+msgid "Katakana"
+msgstr "ಕಟಕಾನ"
+
+#. Input Method: Korean Hangul 2-Bul mode
+#: ../im.c:84
+msgid "Hangul"
+msgstr "ಹಂಗುಲ್"
+
+#. Input Method: Thai mode
+#: ../im.c:87
+msgid "Thai"
+msgstr "ಥಾಯ್"
+
+#. Input Method: Traditional Chinese mode
+#: ../im.c:90
+msgid "ZH_TW"
+msgstr "ZH_TW"
+
+#. Square shape tool (4 equally-lengthed sides at right angles)
+#: ../shapes.h:171 ../shapes.h:172
+msgid "Square"
+msgstr "ಚೌಕ"
+
+#. Rectangle shape tool (4 sides at right angles)
+#: ../shapes.h:175 ../shapes.h:176
+msgid "Rectangle"
+msgstr "ಆಯತ"
+
+#. Circle shape tool (X radius and Y radius are the same)
+#: ../shapes.h:179 ../shapes.h:180
+msgid "Circle"
+msgstr "ವೃತ್ತ"
+
+#. Ellipse shape tool (X radius and Y radius may differ)
+#: ../shapes.h:183 ../shapes.h:184
+msgid "Ellipse"
+msgstr "ದೀರ್ಘವೃತ್ತ"
+
+#. Triangle shape tool (3 sides)
+#: ../shapes.h:187 ../shapes.h:188
+msgid "Triangle"
+msgstr "ತ್ರಿಕೋನ"
+
+#. Pentagone shape tool (5 sides)
+#: ../shapes.h:191 ../shapes.h:192
+msgid "Pentagon"
+msgstr "ಪಂಚಭುಜಾಕೃತಿ"
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:195 ../shapes.h:196
+msgid "Rhombus"
+msgstr "ರೋಂಬಸ್"
+
+#. Octagon shape tool (8 sides)
+#: ../shapes.h:199 ../shapes.h:200
+msgid "Octagon"
+msgstr "ಅಷ್ಟಭುಜಾಕೃತಿ"
+
+#. Description of a square
+#: ../shapes.h:208 ../shapes.h:209
+msgid "A square is a rectangle with four equal sides."
+msgstr "ಚೌಕ ಎನ್ನುವುದು ಸಮನಾದ ನಾಲ್ಕು ಬದಿಗಳನ್ನು ಹೊಂದಿರುವ ಆಯತವಾಗಿರುತ್ತದೆ."
+
+#. Description of a rectangle
+#: ../shapes.h:212 ../shapes.h:213
+msgid "A rectangle has four sides and four right angles."
+msgstr "ಒಂದು ಆಯತವು ನಾಲ್ಕು ಬದಿಗಳು ಹಾಗು ನಾಲ್ಕು ಲಂಬ ಕೋನಗಳನ್ನು ಹೊಂದಿರುತ್ತದೆ."
+
+#: ../shapes.h:217 ../shapes.h:219
+msgid ""
+"A circle is a curve where all points have the same distance from the center."
+msgstr ""
+"ಒಂದು ವೃತ್ತವು ಅದರ ಕೇಂದ್ರದಿಂದ ಸಮನಾದ ದೂರದಲ್ಲಿರುವ ಬಿಂದುಗಳನ್ನು ಹೊಂದಿರುವ ವಕ್ರ "
+"ರೇಖೆಯಿಂದ "
+"ಆಗಿರುತ್ತದೆ."
+
+#. Description of an ellipse
+#: ../shapes.h:222 ../shapes.h:223
+msgid "An ellipse is a stretched circle."
+msgstr "ಹಿಗ್ಗಿಸಲಾದ ವೃತ್ತಕ್ಕೆ ದೀರ್ಘವೃತ್ತ ಎನ್ನಲಾಗುತ್ತದೆ."
+
+#. Description of a triangle
+#: ../shapes.h:226 ../shapes.h:227
+msgid "A triangle has three sides."
+msgstr "ಒಂದು ತ್ರಿಕೋನವು ಮೂರು ಬದಿಗಳನ್ನು ಹೊಂದಿರುತ್ತದೆ."
+
+#. Description of a pentagon
+#: ../shapes.h:230 ../shapes.h:231
+msgid "A pentagon has five sides."
+msgstr "ಒಂದು ಪಂಚಭುಜಾಕೃತಿಯು ಐದು ಬದಿಗಳನ್ನು ಹೊಂದಿರುತ್ತದೆ."
+
+#: ../shapes.h:235 ../shapes.h:237
+msgid "A rhombus has four equal sides, and opposite sides are parallel."
+msgstr ""
+"ರೋಂಬಸ್ ನಾಲ್ಕು ಬದಿಗಳನ್ನು ಹೊಂದಿರುತ್ತದೆ, ಹಾಗು ವಿರುದ್ಧ ಬದಿಗಳು ಸಮಾನಾಂತರವಾಗಿರುತ್ತದೆ."
+
+#: ../shapes.h:241 ../shapes.h:243
+msgid "An octagon has eight equal sides."
+msgstr "ಒಂದು ಅಷ್ಟಭುಜಾಕೃತಿಯು ಐದು ಸಮನಾದ ಬದಿಗಳನ್ನು ಹೊಂದಿರುತ್ತದೆ."
+
+#. Title of tool selector (buttons down the left)
+#: ../titles.h:56
+msgid "Tools"
+msgstr "ಸಲಕರಣೆಗಳು"
+
+#. Title of color palette (buttons across the bottom)
+#: ../titles.h:59
+msgid "Colors"
+msgstr "ಬಣ್ಣಗಳು"
+
+#. Title of brush selector (buttons down the right for paint and line tools)
+#: ../titles.h:62
+msgid "Brushes"
+msgstr "ಕುಂಚಗಳು"
+
+#. Title of eraser selector (buttons down the right for eraser tool)
+#: ../titles.h:65
+msgid "Erasers"
+msgstr "ಅಳಿಸುವವು"
+
+#. Title of stamp selector (buttons down the right for stamps tool)
+#: ../titles.h:68
+msgid "Stamps"
+msgstr "ಮುದ್ರೆಗಳು"
+
+#. Title of shape selector (buttons down the right for shapes tool)
+#. Shape creation tool (square, circle, etc.)
+#: ../titles.h:71 ../tools.h:71
+msgid "Shapes"
+msgstr "ಆಕೃತಿಗಳು"
+
+#. Title of font selector (buttons down the right for text and label tools)
+#: ../titles.h:74
+msgid "Letters"
+msgstr "ಅಕ್ಷರಗಳು"
+
+#. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
+#. "Magic" effects tools (blur, flip image, etc.)
+#: ../titles.h:77 ../tools.h:83
+msgid "Magic"
+msgstr "ಮ್ಯಾಜಿಕ್"
+
+#. Freehand painting tool
+#: ../tools.h:62
+msgid "Paint"
+msgstr "ಪೇಂಟ್"
+
+#. Stamp tool (aka Rubber Stamps)
+#: ../tools.h:65
+msgid "Stamp"
+msgstr "ಮುದ್ರೆ"
+
+#. Line drawing tool
+#: ../tools.h:68
+msgid "Lines"
+msgstr "ರೇಖೆಗಳು"
+
+#. Text tool
+#: ../tools.h:74
+msgid "Text"
+msgstr "ಪಠ್ಯ"
+
+#. Label tool
+#: ../tools.h:77
+msgid "Label"
+msgstr "ಗುರುತುಪಟ್ಟಿ"
+
+#. Undo last action
+#: ../tools.h:86
+msgid "Undo"
+msgstr "ರದ್ದುಮಾಡು"
+
+#. Redo undone action
+#: ../tools.h:89
+msgid "Redo"
+msgstr "ಪುನಃಮಾಡು"
+
+#. Eraser tool
+#: ../tools.h:92
+msgid "Eraser"
+msgstr "ಅಳಿಸುವುದು"
+
+#. Start a new picture
+#: ../tools.h:95
+msgid "New"
+msgstr "ಹೊಸ"
+
+#. Open a saved picture
+#. buttons for the file open dialog
+#. Open dialog: 'Open' button, to load the selected picture
+#: ../tools.h:98 ../tuxpaint.c:7631
+msgid "Open"
+msgstr "ತೆರೆ"
+
+#. Save the current picture
+#: ../tools.h:101
+msgid "Save"
+msgstr "ಉಳಿಸಿ"
+
+#. Print the current picture
+#: ../tools.h:104
+msgid "Print"
+msgstr "ಮುದ್ರಣ"
+
+#. Quit/exit Tux Paint application
+#: ../tools.h:107
+msgid "Quit"
+msgstr "ನಿರ್ಗಮಿಸಿ"
+
+#. Paint tool instructions
+#: ../tools.h:115
+msgid "Pick a color and a brush shape to draw with."
+msgstr "ಚಿತ್ರಿಸಲು ಒಂದು ಬಣ್ಣ ಹಾಗು ಒಂದು ಕುಂಚದ ಆಕೃತಿಯನ್ನು ಆರಿಸಿ."
+
+#. Stamp tool instructions
+#: ../tools.h:118
+msgid "Pick a picture to stamp around your drawing."
+msgstr "ನಿಮ್ಮ ಚಿತ್ರರಚನೆಯಲ್ಲಿ ಮುದ್ರೆಯೊತ್ತಲು ಒಂದು ಚಿತ್ರವನ್ನು ಆರಿಸಿ."
+
+#. Line tool instructions
+#: ../tools.h:121
+msgid "Click to start drawing a line. Let go to complete it."
+msgstr "ರೇಖೆಯನ್ನು ಬರೆಯುವುದನ್ನು ಆರಂಭಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ. ಪೂರ್ಣಗೊಳ್ಳಲು ಬಿಡಿ."
+
+#. Shape tool instructions
+#: ../tools.h:124
+msgid ""
+"Pick a shape. Click to pick the center, drag, then let go when it is the "
+"size you want. Move around to rotate it, and click to draw it."
+msgstr ""
+"ಒಂದು ಆಕೃತಿಯನ್ನು ಆರಿಸಿ. ಕೇಂದ್ರವನ್ನು ಆರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ, ಎಳೆಯಿರಿ, ನಿಮಗೆ ಬೇಕಾದ "
+"ಗಾತ್ರವು ದೊರೆತ ನಂತರ ಬಿಡಿ. ಅದನ್ನು ತಿರುಗಿಸಲು ಸುತ್ತಲೂ ತಿರುಗಿಸಿ, ಹಾಗು ಚಿತ್ರಿಸಲು "
+"ಕ್ಲಿಕ್ "
+"ಮಾಡಿ."
+
+#. Text tool instructions
+#: ../tools.h:127
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text."
+msgstr ""
+"ಪಠ್ಯದ ಶೈಲಿಯನ್ನು ಆರಿಸಿ. ನಿಮ್ಮ ಚಿತ್ರರಚನೆಯ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ನೀವು ಟೈಪ್ ಮಾಡಲು "
+"ಆರಂಭಿಸಬಹುದು. ಪಠ್ಯವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು [ಎಂಟರ್] ಅಥವ [ಟ್ಯಾಬ್] ಅನ್ನು ಒತ್ತಿ."
+
+#. Label tool instructions
+#: ../tools.h:130
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text. By using the selector button "
+"and clicking an exist label, you can move it, edit it and change its text "
+"style."
+msgstr ""
+"ಪಠ್ಯದ ಶೈಲಿಯನ್ನು ಆರಿಸಿ. ನಿಮ್ಮ ಚಿತ್ರರಚನೆಯ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ನೀವು ಟೈಪ್ ಮಾಡಲು "
+"ಆರಂಭಿಸಬಹುದು. ಪಠ್ಯವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು [ಎಂಟರ್] ಅಥವ [ಟ್ಯಾಬ್] ಅನ್ನು ಒತ್ತಿ. ಆಯ್ಕೆಯ "
+"ಗುಂಡಿಯನ್ನು ಆರಿಸುವ ಮೂಲಕ ಹಾಗು ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಗುರುತುಪಟ್ಟಿಯನ್ನು ಕ್ಲಿಕ್ ಮಾಡುವ "
+"ಮೂಲಕ, "
+"ನೀವದನ್ನು ಸ್ಥಳಾಂತರಿಸಬಹುದು, ಅದನ್ನು ಪರಿಷ್ಕರಿಸಬಹುದು ಹಾಗು ಅದರ ಪಠ್ಯದ ಶೈಲಿಯನ್ನು "
+"ಬದಲಾಯಿಸಬಹುದು."
+
+#. Magic tool instruction
+#: ../tools.h:136
+msgid "Pick a magical effect to use on your drawing!"
+msgstr "ನಿಮ್ಮ ಚಿತ್ರರಚನೆಯಲ್ಲಿ ಬಳಸಲು ಒಂದು ಮಾಂತ್ರಿಕ ಪರಿಣಾಮವನ್ನು ಆರಿಸಿ!"
+
+#. Response to 'undo' action
+#: ../tools.h:139
+msgid "Undo!"
+msgstr "ರದ್ದುಮಾಡು!"
+
+#. Response to 'redo' action
+#: ../tools.h:142
+msgid "Redo!"
+msgstr "ಪುನಃಮಾಡು!"
+
+#. Eraser tool
+#: ../tools.h:145
+msgid "Eraser!"
+msgstr "ಅಳಿಸುವುದು!"
+
+#. Response to 'start a new image' action
+#: ../tools.h:148
+msgid "Pick a color or picture with which to start a new drawing."
+msgstr "ಒಂದು ಹೊಸ ಚಿತ್ರರಚನೆಯೊಂದಿಗೆ ಬಳಸಬೇಕಿರುವ ಬಣ್ಣವನ್ನು ಅಥವ ಚಿತ್ರವನ್ನು ಆರಿಸಿ."
+
+#. Response to 'open' action (while file dialog is being constructed)
+#: ../tools.h:151
+msgid "Open…"
+msgstr "ತೆರೆಯಿರಿ…"
+
+#. Response to 'save' action
+#: ../tools.h:154
+msgid "Your image has been saved!"
+msgstr "ಚಿತ್ರವನ್ನು ಉಳಿಸಲಾಗಿದೆ!"
+
+#. Response to 'print' action (while printing, or print dialog is being used)
+#: ../tools.h:157
+msgid "Printing…"
+msgstr "ಮುದ್ರಿಸಲಾಗುತ್ತಿದೆ..."
+
+#. Response to 'quit' (exit) action
+#: ../tools.h:160
+msgid "Bye bye!"
+msgstr "ಹೋಗಿಬನ್ನಿ!"
+
+#. Instruction while using Line tool (after click, before release)
+#: ../tools.h:164
+msgid "Let go of the button to complete the line."
+msgstr "ರೇಖೆಯು ಪೂರ್ಣಗೊಳ್ಳಲು ಗುಂಡಿಯನ್ನು ಬಿಡಿ."
+
+#. Instruction while using Shape tool (after first click, before release)
+#: ../tools.h:167
+msgid "Hold the button to stretch the shape."
+msgstr "ಆಕೃತಿಯನ್ನು ಹಿಗ್ಗಿಸಲು ಗುಂಡಿಯನ್ನು ಒತ್ತಿ ಹಿಡಿಯಿರಿ."
+
+#. Instruction while finishing Shape tool (after release, during rotation step before second click)
+#: ../tools.h:170
+msgid "Move the mouse to rotate the shape. Click to draw it."
+msgstr "ಆಕೃತಿಯನ್ನು ತಿರುಗಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಜರುಗಿಸಿ. ಚಿತ್ರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#. Notification that 'New' action was aborted (current image would have been lost)
+#: ../tools.h:173
+msgid "OK then… Let’s keep drawing this one!"
+msgstr "ಸರಿ ಹಾಗಿದ್ದರೆ... ಇದನ್ನು ಚಿತ್ರಿಸುವುದನ್ನು ಮುಂದುವರೆಸೋಣ!"
+
+#. Prompt to confirm user wishes to quit
+#: ../tuxpaint.c:2053
+msgid "Do you really want to quit?"
+msgstr "ನೀವು ನಿಜವಾಗಿಯೂ ನಿರ್ಗಮಿಸಲು ಇಚ್ಛಿಸುವಿರಾ?"
+
+#. Quit prompt positive response (quit)
+#: ../tuxpaint.c:2056
+msgid "Yes, I’m done!"
+msgstr "ಹೌದು, ನಾನು ಮುಗಿಸಿದ್ದೇನೆ!"
+
+#. Quit prompt negative response (don't quit)
+#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
+msgid "No, take me back!"
+msgstr "ಇಲ್ಲ, ನನ್ನನ್ನು ಹಿಂದಕ್ಕೆ ಕೊಂಡೊಯ್ಯಿ!"
+
+#. Current picture is not saved; user is quitting
+#: ../tuxpaint.c:2063
+msgid "If you quit, you’ll lose your picture! Save it?"
+msgstr ""
+"ನೀವು ನಿರ್ಗಮಿಸಿದಲ್ಲಿ, ನೀವು ರಚಿಸಿದ ಚಿತ್ರವು ಇಲ್ಲವಾಗುತ್ತದೆ! ನೀವದನ್ನು "
+"ಉಳಿಸಿಲಿಚ್ಛಿಸುತ್ತೀರಾ? "
+
+#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
+msgid "Yes, save it!"
+msgstr "ಹೌದು, ಅದನ್ನು ಉಳಿಸು!"
+
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+msgid "No, don’t bother saving!"
+msgstr "ಇಲ್ಲ, ಉಳಿಸುವ ಅಗತ್ಯವಿಲ್ಲ!"
+
+#. Current picture is not saved; user is opening another picture
+#: ../tuxpaint.c:2068
+msgid "Save your picture first?"
+msgstr "ನೀವು ರಚಿಸಿದ ಚಿತ್ರವನ್ನು ಮೊದಲು ಉಳಿಸಬೇಕೆ?"
+
+#. Error opening picture
+#: ../tuxpaint.c:2073
+msgid "Can’t open that picture!"
+msgstr "ಆ ಚಿತ್ರವನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ!"
+
+#. Generic dialog dismissal
+#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
+#: ../tuxpaint.c:2106
+msgid "OK"
+msgstr "ಸರಿ"
+
+#. Notification that 'Open' dialog has nothing to show
+#: ../tuxpaint.c:2080
+msgid "There are no saved files!"
+msgstr "ಯಾವುದೆ ಉಳಿಸಲಾದ ಕಡತಗಳಿಲ್ಲ!"
+
+#. Verification of print action
+#: ../tuxpaint.c:2084
+msgid "Print your picture now?"
+msgstr "ನೀವು ರಚಿಸಿದ ಚಿತ್ರವನ್ನು ಈಗಲೆ ಮುದ್ರಿಸಬೇಕೆ?"
+
+#: ../tuxpaint.c:2085
+msgid "Yes, print it!"
+msgstr "ಹೌದು, ಮುದ್ರಿಸು!"
+
+#. Confirmation of successful (we hope) printing
+#: ../tuxpaint.c:2089
+msgid "Your picture has been printed!"
+msgstr "ನೀವು ರಚಿಸಿದ ಚಿತ್ರವನ್ನು ಮುದ್ರಿಸಲಾಗಿದೆ!"
+
+#. We got an error printing
+#: ../tuxpaint.c:2093
+msgid "Sorry! Your picture could not be printed!"
+msgstr "ಕ್ಷಮಿಸಿ! ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಮುದ್ರಿಸಲಾಗಿಲ್ಲ!"
+
+#. Notification that it's too soon to print again (--printdelay option is in effect)
+#: ../tuxpaint.c:2096
+msgid "You can’t print yet!"
+msgstr "ನೀವು ಇಷ್ಟು ಬೇಗ ಮುದ್ರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ!"
+
+#. Prompt to confirm erasing a picture in the Open dialog
+#: ../tuxpaint.c:2100
+msgid "Erase this picture?"
+msgstr "ಈ ಚಿತ್ರವನ್ನು ಅಳಿಸಬೇಕೆ?"
+
+#: ../tuxpaint.c:2101
+msgid "Yes, erase it!"
+msgstr "ಹೌದು, ಅದನ್ನು ಅಳಿಸು!"
+
+#: ../tuxpaint.c:2102
+msgid "No, don’t erase it!"
+msgstr "ಇಲ್ಲ, ಅದನ್ನು ಅಳಿಸಬೇಡ!"
+
+#. Reminder that Mouse Button 1 is the button to use in Tux Paint
+#: ../tuxpaint.c:2105
+msgid "Remember to use the left mouse button!"
+msgstr "ಮೌಸ್‌ನ ಎಡ ಒತ್ತುಗುಂಡಿಯನ್ನು ಬಳಸಲು ಮರೆಯದಿರಿ!"
+
+#. Sound has been muted (silenced) via keyboard shortcut
+#: ../tuxpaint.c:2313
+msgid "Sound muted."
+msgstr "ಧ್ವನಿಯನ್ನು ಮೂಕಗೊಳಿಸಲಾಗಿದೆ."
+
+#. Sound has been unmuted (unsilenced) via keyboard shortcut
+#: ../tuxpaint.c:2318
+msgid "Sound unmuted."
+msgstr "ಧ್ವನಿಯನ್ನು ಮೂಕಗೊಳಿಸಲಾಗಿಲ್ಲ."
+
+#. Wait while Text tool finishes loading fonts
+#: ../tuxpaint.c:3065
+msgid "Please wait…"
+msgstr "ದಯವಿಟ್ಟು ಕಾಯಿರಿ..."
+
+#. Open dialog: 'Erase' button, to erase/deleted the selected picture
+#: ../tuxpaint.c:7634
+msgid "Erase"
+msgstr "ಅಳಿಸಿ"
+
+#. Open dialog: 'Slides' button, to switch to slide show mode
+#: ../tuxpaint.c:7637
+msgid "Slides"
+msgstr "ಸ್ಲೈಡ್‌ಗಳು"
+
+#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
+#: ../tuxpaint.c:7640
+msgid "Back"
+msgstr "ಹಿಂದಕ್ಕೆ"
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7643
+msgid "Next"
+msgstr "ಮುಂದಕ್ಕೆ"
+
+#. Slideshow: 'Play' button, to begin a slideshow sequence
+#: ../tuxpaint.c:7646
+msgid "Play"
+msgstr "ಪ್ಲೇ"
+
+#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
+#: ../tuxpaint.c:8355
+msgid "Aa"
+msgstr "Aa"
+
+#. Admittedly stupid way of determining which keys can be used for
+#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
+#: ../tuxpaint.c:11664
+msgid "Yes"
+msgstr "ಹೌದು"
+
+#: ../tuxpaint.c:11668
+msgid "No"
+msgstr "ಇಲ್ಲ"
+
+#. Prompt to ask whether user wishes to save over old version of their file
+#: ../tuxpaint.c:12710
+msgid "Replace the picture with your changes?"
+msgstr "ಚಿತ್ರವನ್ನು ನೀವು ಮಾಡಲಾದ ಬದಲಾವಣೆಗಳಿಂದ ಬದಲಾಯಿಸಬೇಕೆ?"
+
+#. Positive response to saving over old version
+#. (like a 'File:Save' action in other applications)
+#: ../tuxpaint.c:12714
+msgid "Yes, replace the old one!"
+msgstr "ಹೌದು, ಹಳೆಯದನ್ನು ಬದಲಾಯಿಸು!"
+
+#. Negative response to saving over old version (saves a new image)
+#. (like a 'File:Save As...' action in other applications)
+#: ../tuxpaint.c:12718
+msgid "No, save a new file!"
+msgstr "ಬೇಡ, ಒಂದು ಹೊಸ ಕಡತವಾಗಿ ಉಳಿಸು!"
+
+#: ../tuxpaint.c:13963
+msgid "Choose the picture you want, then click “Open”."
+msgstr "ನೀವು ಬಯಸುವ ಚಿತ್ರವನ್ನು ಆರಿಸಿ, ನಂತರ \"ತೆರೆಯಿರಿ\" ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#. Let user choose images:
+#. Instructions for Slideshow file dialog (FIXME: Make a #define)
+#: ../tuxpaint.c:14994 ../tuxpaint.c:15322
+msgid "Choose the pictures you want, then click “Play”."
+msgstr "ನೀವು ಬಯಸುವ ಚಿತ್ರವನ್ನು ಆರಿಸಿ, ನಂತರ \"ಪ್ಲೇ\" ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../tuxpaint.c:22344
+msgid "Pick a color."
+msgstr "ಒಂದು ಬಣ್ಣವನ್ನು ಆರಿಸಿ."
+
+#: ../tuxpaint.desktop.in.h:1
+msgid "Tux Paint"
+msgstr "ಟಕ್ಸ್ ಪೇಂಟ್"
+
+#: ../tuxpaint.desktop.in.h:2
+msgid "Drawing program"
+msgstr "ಚಿತ್ರರಚನೆಯ ತಂತ್ರಾಂಶ"
+
+#: ../tuxpaint.desktop.in.h:3
+msgid "A drawing program for children."
+msgstr "ಮಕ್ಕಳಿಗಾಗಿನ ಚಿತ್ರರಚನೆಯ ತಂತ್ರಾಂಶ."
+
+#: ../../magic/src/alien.c:64
+msgid "Color Shift"
+msgstr "ಬಣ್ಣ ಸ್ಥಳಾಂತರ"
+
+#: ../../magic/src/alien.c:67
+msgid "Click and move the mouse to change the colors in parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳನ್ನು ಬಣ್ಣಗಳನ್ನು ಬದಲಾಯಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು "
+"ಜರುಗಿಸಿ."
+
+#: ../../magic/src/alien.c:68
+msgid "Click to change the colors in your entire picture."
+msgstr "ಸಂಪೂರ್ಣ ಚಿತ್ರದ ಬಣ್ಣಗಳನ್ನು ಬದಲಾಯಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/blind.c:117
+msgid "Blind"
+msgstr "ಬ್ಲೈಂಡ್"
+
+#: ../../magic/src/blind.c:122
+msgid ""
+"Click towards the edge of your picture to pull window blinds over it. Move "
+"perpendicularly to open or close the blinds."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಮೇಲೆ ಬ್ಲೈಂಡ್‌ಗಳನ್ನು ಎಳೆಯಲು ಚಿತ್ರದ ಅಂಚಿನತ್ತ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ. "
+"ಬ್ಲೈಂಡ್‌ಗಳನ್ನು "
+"ತೆರೆಯಲು ಹಾಗು ಮುಚ್ಚಲು ಲಂಬವಾಗಿ ಸ್ಥಳಾಂತರಿಸಿ."
+
+#: ../../magic/src/blocks_chalk_drip.c:136
+msgid "Blocks"
+msgstr "ಖಂಡಗಳು"
+
+#: ../../magic/src/blocks_chalk_drip.c:138
+msgid "Chalk"
+msgstr "ಸೀಮೆಸುಣ್ಣ"
+
+#: ../../magic/src/blocks_chalk_drip.c:140
+msgid "Drip"
+msgstr "ತೊಟ್ಟಿಕ್ಕು"
+
+#: ../../magic/src/blocks_chalk_drip.c:150
+msgid "Click and move the mouse around to make the picture blocky."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಖಂಡವಾಗಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಮೌಸ್‌ ಅನ್ನು ಸುತ್ತಲೂ ಜರುಗಿಸಿ."
+
+#: ../../magic/src/blocks_chalk_drip.c:153
+msgid ""
+"Click and move the mouse around to turn the picture into a chalk drawing."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಸೀಮೆಸುಣ್ಣದಲ್ಲಿ ರಚಿಸಲಾಗಿರುವಂತೆ ಬದಲಾಯಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ "
+"ಮಾಡಿ ಹಾಗು "
+"ಸುತ್ತಲೂ ಜರುಗಿಸಿ."
+
+#: ../../magic/src/blocks_chalk_drip.c:156
+msgid "Click and move the mouse around to make the picture drip."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರವು ತೊಟ್ಟಿಕ್ಕುವಂತೆ ಮಾಡಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಸುತ್ತಲೂ "
+"ಜರುಗಿಸಿ."
+
+#: ../../magic/src/blur.c:80
+msgid "Blur"
+msgstr "ಮಬ್ಬು"
+
+#: ../../magic/src/blur.c:83
+msgid "Click and move the mouse around to blur the image."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಮಬ್ಬುಗೊಳಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಸುತ್ತಲೂ ಜರುಗಿಸಿ."
+
+#: ../../magic/src/blur.c:84
+msgid "Click to blur the entire image."
+msgstr "ಸಂಪೂರ್ಣ ಚಿತ್ರವನ್ನು ಮಬ್ಬಾಗಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#. Both are named "Bricks", at the moment:
+#: ../../magic/src/bricks.c:124
+msgid "Bricks"
+msgstr "ಇಟ್ಟಿಗೆಗಳು"
+
+#: ../../magic/src/bricks.c:131
+msgid "Click and move to draw large bricks."
+msgstr "ದೊಡ್ಡದಾದ ಇಟ್ಟಿಗೆಗಳನ್ನು ರಚಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಜರುಗಿಸಿ."
+
+#: ../../magic/src/bricks.c:133
+msgid "Click and move to draw small bricks."
+msgstr "ದೊಡ್ಡದಾದ ಇಟ್ಟಿಗೆಗಳನ್ನು ರಚಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಜರುಗಿಸಿ."
+
+#: ../../magic/src/calligraphy.c:127
+msgid "Calligraphy"
+msgstr "ಕ್ಯಾಲಿಗ್ರಾಫಿ"
+
+#: ../../magic/src/calligraphy.c:134
+msgid "Click and move the mouse around to draw in calligraphy."
+msgstr ""
+"ಕ್ಯಾಲಿಗ್ರಾಫಿಯಲ್ಲಿ ಚಿತ್ರಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಸುತ್ತಲೂ ಜರುಗಿಸಿ."
+
+#: ../../magic/src/cartoon.c:106
+msgid "Cartoon"
+msgstr "ಕಾರ್ಟೂನ್"
+
+#: ../../magic/src/cartoon.c:113
+msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಕಾರ್ಟೂನಿನಂತೆ ಬದಲಾಯಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಸುತ್ತಲೂ "
+"ಜರುಗಿಸಿ."
+
+#: ../../magic/src/confetti.c:85
+msgid "Confetti"
+msgstr "ಬಣ್ಣದ ಕಾಗದಚೂರುಗಳು"
+
+#: ../../magic/src/confetti.c:87
+msgid "Click to throw confetti!"
+msgstr "ಬಣ್ಣದ ಕಾಗದದ ಚೂರುಗಳನ್ನು ಎಸೆಯಲು ಕ್ಲಿಕ್ ಮಾಡಿ!"
+
+#: ../../magic/src/distortion.c:142
+msgid "Distortion"
+msgstr "ವಿರೂಪ"
+
+#: ../../magic/src/distortion.c:150
+msgid "Click and drag the mouse to cause distortion in your picture."
+msgstr "ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ವಿರೂಪಗೊಳಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/emboss.c:103
+msgid "Emboss"
+msgstr "ಉಬ್ಬುಚಿತ್ರ"
+
+#: ../../magic/src/emboss.c:109
+msgid "Click and drag the mouse to emboss the picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಉಬ್ಬುಚಿತ್ರವಾಗಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/fade_darken.c:121
+msgid "Lighten"
+msgstr "ತಿಳಿಯಾಗಿಸಿ"
+
+#: ../../magic/src/fade_darken.c:123
+msgid "Darken"
+msgstr "ಗಾಢವಾಗಿಸಿ"
+
+#: ../../magic/src/fade_darken.c:134
+msgid "Click and move the mouse to lighten parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳನ್ನು ತಿಳಿಯಾಗಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಜರುಗಿಸಿ."
+
+#: ../../magic/src/fade_darken.c:136
+msgid "Click to lighten your entire picture."
+msgstr "ಸಂಪೂರ್ಣ ಚಿತ್ರದ ಬಣ್ಣವನ್ನು ತಿಳಿಯಾಗಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/fade_darken.c:141
+msgid "Click and move the mouse to darken parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳನ್ನು ಗಾಢವಾಗಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಜರುಗಿಸಿ."
+
+#: ../../magic/src/fade_darken.c:143
+msgid "Click to darken your entire picture."
+msgstr "ಸಂಪೂರ್ಣ ಚಿತ್ರದ ಬಣ್ಣವನ್ನು ಗಾಢವಾಗಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/fill.c:108
+msgid "Fill"
+msgstr "ತುಂಬಿಸಿ"
+
+#: ../../magic/src/fill.c:115
+msgid "Click in the picture to fill that area with color."
+msgstr "ಚಿತ್ರದ ಆ ಜಾಗದಲ್ಲಿ ಬಣ್ಣವನ್ನು ತುಂಬಿಸಲು ಅಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/fisheye.c:104
+msgid "Fisheye"
+msgstr "ಮೀನಕಣ್ಣು"
+
+#. Needs better name
+#: ../../magic/src/fisheye.c:106
+msgid "Click on part of your picture to create a fisheye effect."
+msgstr "ನಿಮ್ಮ ಚಿತ್ರದ ಒಂದು ಭಾಗದಲ್ಲಿ ಮೀನಿನಕಣ್ಣಿನ ಪರಿಣಾಮವನ್ನು ರಚಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/flower.c:150
+msgid "Flower"
+msgstr "ಹೂವು"
+
+#: ../../magic/src/flower.c:156
+msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದಲ್ಲಿ ಒಂದು ಹೂವಿನ ದಂಟನ್ನು ಚಿತ್ರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ. ಹೂವು "
+"ಪೂರ್ಣಗೊಳ್ಳಲು ಬಿಡಿ."
+
+#: ../../magic/src/foam.c:121
+msgid "Foam"
+msgstr "ನೊರೆ"
+
+#: ../../magic/src/foam.c:127
+msgid "Click and drag the mouse to cover an area with foamy bubbles."
+msgstr ""
+"ಒಂದು ಜಾಗವು ನೊರೆಯ ಗುಳ್ಳೆಗಳಿಂದಾಗಿರುವಂತೆ ಮಾಡಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು "
+"ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/fold.c:105
+msgid "Fold"
+msgstr "ಮಡಚಿ"
+
+#: ../../magic/src/fold.c:107
+msgid ""
+"Choose a background color and click to turn the corner of the page over."
+msgstr ""
+"ಹಿನ್ನಲೆ ಬಣ್ಣವನ್ನು ಆರಿಸಿ ಹಾಗು ಪುಟದ ಮೂಲೆಯನ್ನು ಮೇಲಕ್ಕೆ ಮಗುಚಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/fretwork.c:176
+msgid "Fretwork"
+msgstr "ಕೆತ್ತನೆಯ ಕೆಲಸ"
+
+#: ../../magic/src/fretwork.c:180
+#| msgid "Click and drag to draw arrows made of string art."
+msgid "Click and drag to draw repetitive patterns. "
+msgstr "ಪುನರಾವರ್ತಿತ ವಿನ್ಯಾಸಗಳನ್ನು ರಚಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/fretwork.c:182
+#| msgid "Click to cover your picture with rain drops."
+msgid "Click to surround your picture with repetitive patterns."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಸುತ್ತಮುತ್ತಲು ಪುನರಾವರ್ತಿತ ವಿನ್ಯಾಸಗಳಿಂದ ಆವರಿಸಿದಂತೆ ಮಾಡಲು ಕ್ಲಿಕ್ "
+"ಮಾಡಿ."
+
+#: ../../magic/src/glasstile.c:107
+msgid "Glass Tile"
+msgstr "ಗಾಜಿನ ಹಾಸುಬಿಲ್ಲೆ"
+
+#: ../../magic/src/glasstile.c:114
+msgid "Click and drag the mouse to put glass tile over your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದಲ್ಲಿ ಗಾಜಿನ ಹಾಸುಬಿಲ್ಲೆಗಳನ್ನು ಹೊಂದಿರುವಂತೆ ಮಾಡಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ "
+"ಮಾಡಿ ಹಾಗು "
+"ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/glasstile.c:116
+msgid "Click to cover your entire picture in glass tiles."
+msgstr "ಸಂಪೂರ್ಣ ಚಿತ್ರದಲ್ಲಿ ಗಾಜಿನ ಹಾಸುಬಿಲ್ಲೆಗಳಿಂದ ಆವರಿಸುವಂತೆ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/grass.c:112
+msgid "Grass"
+msgstr "ಹುಲ್ಲು"
+
+#: ../../magic/src/grass.c:118
+msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgstr "ಹುಲ್ಲನ್ನು ಚಿತ್ರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಸ್ಥಳಾಂತರಿಸಿ. ಕೆಸರನ್ನು ಮರೆಯದಿರಿ!"
+
+#: ../../magic/src/halftone.c:34
+msgid "Halftone"
+msgstr "ಹಾಫ್‌ಟೋನ್"
+
+#: ../../magic/src/halftone.c:38
+#| msgid "Click to turn your painting into its negative."
+msgid "Click and drag to turn your drawing into a newspaper."
+msgstr ""
+"ನಿಮ್ಮ ಪೇಂಟಿಂಗ್ ಅನ್ನು ಒಂದು ದಿನಪತ್ರಿಕೆಯಲ್ಲಿ ಬದಲಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/kalidescope.c:120
+msgid "Symmetric Left/Right"
+msgstr "ಸಮರೂಪದ ಎಡ/ಬಲ"
+
+#: ../../magic/src/kalidescope.c:122
+msgid "Symmetric Up/Down"
+msgstr "ಸಮರೂಪದ ಮೇಲೆ/ಕೆಳಗೆ"
+
+#: ../../magic/src/kalidescope.c:124
+msgid "Pattern"
+msgstr "ವಿನ್ಯಾಸ"
+
+#: ../../magic/src/kalidescope.c:126
+msgid "Tiles"
+msgstr "ಟೈಲ್‌ಗಳು"
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:128
+msgid "Kaleidoscope"
+msgstr "ಚಿತ್ರದರ್ಶಕ"
+
+#: ../../magic/src/kalidescope.c:136
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the left and right of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಎಡ ಹಾಗು ಬಲಭಾಗಗಳೆರಡಲ್ಲಿಯೂ ಸಹ ಏಕರೂಪವಾಗಿರುವ ಎರಡು ಕುಂಚಗಳೊಂದಿಗೆ "
+"ಚಿತ್ರರಚಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/kalidescope.c:138
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the top and bottom of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಮೇಲೆ ಹಾಗು ಕೆಳಭಾಗಗಳೆರಡಲ್ಲಿಯೂ ಸಹ ಏಕರೂಪವಾಗಿರುವ ಎರಡು ಕುಂಚಗಳೊಂದಿಗೆ "
+"ಚಿತ್ರರಚಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/kalidescope.c:140
+#| msgid "Click and drag the mouse to emboss the picture."
+msgid "Click and drag the mouse to draw a pattern across the picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರಕ್ಕೆ ಅಡ್ಡವಾಗಿ ವಿನ್ಯಾಸವನ್ನು ರಚಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು "
+"ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/kalidescope.c:142
+#| msgid ""
+#| "Click and drag the mouse to draw with two brushes that are symmetric "
+#| "across the left and right of your picture."
+msgid ""
+"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರಕ್ಕೆ ಅಡ್ಡವಾಗಿ ವಿನ್ಯಾಸದ ಜೊತೆಗೆ ಅದರ ಅನುರೂಪತೆಯನ್ನು ರಚಿಸಲು ಮೌಸ್‌ ಅನ್ನು "
+"ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:144
+msgid ""
+"Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgstr ""
+"ಏಕರೂಪವಾಗಿರುವ ಎರಡು ಕುಂಚಗಳೊಂದಿಗೆ ಚಿತ್ರರಚಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು "
+"ಎಳೆಯಿರಿ "
+"(ಚಿತ್ರದರ್ಶಕ)."
+
+#: ../../magic/src/light.c:107
+msgid "Light"
+msgstr "ಬೆಳಕು"
+
+#: ../../magic/src/light.c:113
+msgid "Click and drag to draw a beam of light on your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದಲ್ಲಿ ಒಂದು ಬೆಳಕಿನ ಕಿರಣವನ್ನು ಚಿತ್ರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/metalpaint.c:101
+msgid "Metal Paint"
+msgstr "ಲೋಹದ ಪೇಂಟ್"
+
+#: ../../magic/src/metalpaint.c:107
+msgid "Click and drag the mouse to paint with a metallic color."
+msgstr "ಲೋಹದ ಬಣ್ಣದೊಂದಿಗೆ ಪೇಂಟ್‌ ಮಾಡಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/mirror_flip.c:117
+msgid "Mirror"
+msgstr "ಪ್ರತಿರೂಪ"
+
+#: ../../magic/src/mirror_flip.c:119
+msgid "Flip"
+msgstr "ತಿರುಗಿಸಿ"
+
+#: ../../magic/src/mirror_flip.c:130
+msgid "Click to make a mirror image."
+msgstr "ಒಂದು ಪ್ರತಿರೂಪ ಚಿತ್ರವನ್ನು ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/mirror_flip.c:133
+msgid "Click to flip the picture upside-down."
+msgstr "ಚಿತ್ರವನ್ನು ತಲೆಕೆಳಗಾಗುವಂತೆ ತಿರುಗಿಸಲು ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/mosaic.c:100
+msgid "Mosaic"
+msgstr "ಮೊಸಾಯಿಕ್"
+
+#: ../../magic/src/mosaic.c:103
+msgid ""
+"Click and move the mouse to add a mosaic effect to parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳಿಗೆ ಮೊಸಾಯಿಕ್ ಪರಿಣಾಮವನ್ನು ಸೇರಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ "
+"ಹಾಗು "
+"ಜರುಗಿಸಿ."
+
+#: ../../magic/src/mosaic.c:104
+msgid "Click to add a mosaic effect to your entire picture."
+msgstr "ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಚಿತ್ರಕ್ಕೆ ಮೊಸಾಯಿಕ್ ಪರಿಣಾಮವನ್ನು ಸೇರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/mosaic_shaped.c:142
+msgid "Square Mosaic"
+msgstr "ಚೌಕ ಮೊಸಾಯಿಕ್"
+
+#: ../../magic/src/mosaic_shaped.c:143
+msgid "Hexagon Mosaic"
+msgstr "ಷಢ್ಭುಜಾಕೃತಿ ಮೊಸಾಯಿಕ್"
+
+#: ../../magic/src/mosaic_shaped.c:144
+msgid "Irregular Mosaic"
+msgstr "ಅನಿಯಮಿತ ಮೊಸಾಯಿಕ್"
+
+#: ../../magic/src/mosaic_shaped.c:149
+msgid ""
+"Click and move the mouse to add a square mosaic to parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳಿಗೆ ಚೌಕ ಮೊಸಾಯಿಕ್ ಅನ್ನು ಸೇರಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು "
+"ಜರುಗಿಸಿ."
+
+#: ../../magic/src/mosaic_shaped.c:150
+msgid "Click to add a square mosaic to your entire picture."
+msgstr "ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಚಿತ್ರಕ್ಕೆ ಚೌಕ ಮೊಸಾಯಿಕ್ ಅನ್ನು ಸೇರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/mosaic_shaped.c:152
+msgid ""
+"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳಿಗೆ ಷಡ್ಭುಜಾಕೃತಿ ಮೊಸಾಯಿಕ್ ಅನ್ನು ಸೇರಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ "
+"ಮಾಡಿ ಹಾಗು "
+"ಜರುಗಿಸಿ."
+
+#: ../../magic/src/mosaic_shaped.c:153
+msgid "Click to add a hexagonal mosaic to your entire picture."
+msgstr ""
+"ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಚಿತ್ರಕ್ಕೆ ಷಡ್ಭುಜಾಕೃತಿ ಮೊಸಾಯಿಕ್ ಅನ್ನು ಸೇರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/mosaic_shaped.c:155
+msgid ""
+"Click and move the mouse to add an irregular mosaic to parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳಿಗೆ ಅನಿಯಮಿತ ಮೊಸಾಯಿಕ್ ಅನ್ನು ಸೇರಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ "
+"ಹಾಗು "
+"ಜರುಗಿಸಿ."
+
+#: ../../magic/src/mosaic_shaped.c:156
+msgid "Click to add an irregular mosaic to your entire picture."
+msgstr "ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಚಿತ್ರಕ್ಕೆ ಅನಿಯಮಿತ ಮೊಸಾಯಿಕ್ ಅನ್ನು ಸೇರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/negative.c:98
+msgid "Negative"
+msgstr "ನೆಗೆಟೀವ್"
+
+#: ../../magic/src/negative.c:106
+msgid "Click and move the mouse around to make your painting negative."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ನೆಗೆಟೀವ್ ಮಾಡಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಸುತ್ತಲೂ ಜರುಗಿಸಿ."
+
+#: ../../magic/src/negative.c:109
+msgid "Click to turn your painting into its negative."
+msgstr "ನಿಮ್ಮ ಪೇಂಟಿಂಗ್ ಅನ್ನು ಅದರ ನೆಗೆಟೀವ್ ಆಗಿ ಬದಲಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/noise.c:63
+msgid "Noise"
+msgstr "ನಾಯ್ಸ್‍"
+
+#: ../../magic/src/noise.c:66
+msgid "Click and move the mouse to add noise to parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳಿಗೆ ನಾಯ್ಸನ್ನು ಸೇರಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಜರುಗಿಸಿ."
+
+#: ../../magic/src/noise.c:67
+msgid "Click to add noise to your entire picture."
+msgstr "ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಚಿತ್ರಕ್ಕೆ ನಾಯ್ಸನ್ನು ಸೇರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/perspective.c:145
+msgid "Perspective"
+msgstr "ಯಥಾದೃಷ್ಟಿ"
+
+#: ../../magic/src/perspective.c:146
+msgid "Zoom"
+msgstr "ಗಾತ್ರಬದಲಿಸಿ"
+
+#: ../../magic/src/perspective.c:151
+msgid "Click on the corners and drag where you want to stretch the picture."
+msgstr ""
+"ಚಿತ್ರದ ಅಂಚಿನಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ನೀವು ಎಲ್ಲಿ ಹಿಗ್ಗಿಸಲು ಬಯಸುವಿರೊ ಅಲ್ಲಿ ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/perspective.c:154
+msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr ""
+"ಕ್ಲಿಕ್‌ ಮಾಡಿ ಹಾಗು ಚಿತ್ರದ ನೋಟದ ಗಾತ್ರವನ್ನು ಹಿಗ್ಗಿಸಲು ಮೇಲಕ್ಕೆ ಎಳೆಯಿರಿ ಅಥವ "
+"ಗಾತ್ರವನ್ನು "
+"ಕುಗ್ಗಿಸಲು ಕೆಳಕ್ಕೆ ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/puzzle.c:105
+msgid "Puzzle"
+msgstr "ಪಜ಼ಲ್"
+
+#: ../../magic/src/puzzle.c:112
+msgid "Click the part of your picture where would you like a puzzle."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಯಾವ ಭಾಗದಲ್ಲಿ ಪಜ಼ಲ್ ಅನ್ನು ಹೊಂದಲು ಬಯಸುತ್ತೀರೊ ಅಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/puzzle.c:113
+msgid "Click to make a puzzle in fullscreen mode."
+msgstr "ಒಂದು ಪಜ಼ಲ್ ಅನ್ನು ಪೂರ್ಣತೆರೆಯ ವಿಧಾನಕ್ಕೆ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/rails.c:131
+msgid "Rails"
+msgstr "ಹಳಿಗಳು"
+
+#: ../../magic/src/rails.c:133
+msgid "Click and drag to draw train track rails on your picture."
+msgstr "ನಿಮ್ಮ ಚಿತ್ರದಲ್ಲಿ ರೈಲಿನ ಹಳಿಗಳನ್ನು ಚಿತ್ರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/rainbow.c:139
+msgid "Rainbow"
+msgstr "ಕಾಮನಬಿಲ್ಲು"
+
+#: ../../magic/src/rainbow.c:146
+msgid "You can draw in rainbow colors!"
+msgstr "ನೀವು ಕಾಮನಬಿಲ್ಲಿನ ಬಣ್ಣಗಳಲ್ಲಿ ಚಿತ್ರಿಸಬಹುದು!"
+
+#: ../../magic/src/rain.c:65
+msgid "Rain"
+msgstr "ಮಳೆ"
+
+#: ../../magic/src/rain.c:68
+msgid "Click to place a rain drop onto your picture."
+msgstr "ನಿಮ್ಮ ಚಿತ್ರದ ಮೇಲೆ ಮಳೆಯ ಹನಿಯನ್ನು ಇರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/rain.c:69
+msgid "Click to cover your picture with rain drops."
+msgstr "ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಮಳೆಯ ಹನಿಗಳಿಂದ ಆವರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/realrainbow.c:110
+msgid "Real Rainbow"
+msgstr "ನಿಜವಾದ ಕಾಮನಬಿಲ್ಲು"
+
+#: ../../magic/src/realrainbow.c:112
+msgid "ROYGBIV Rainbow"
+msgstr "ROYGBIV ಕಾಮನಬಿಲ್ಲು"
+
+#: ../../magic/src/realrainbow.c:117
+msgid ""
+"Click where you want your rainbow to start, drag to where you want it to "
+"end, and then let go to draw a rainbow."
+msgstr ""
+"ನೀವು ಎಲ್ಲಿ ಕಾಮನಬಿಲ್ಲಿನ ಪರಿಣಾಮವನ್ನು ಆರಂಭಿಸಲು ಬಯಸುವಿರೊ ಅಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ, ನೀವು "
+"ಎಲ್ಲಿ "
+"ಅಂತ್ಯಗೊಳಿಸಲು ಬಯಸುವಿರೊ ಅಲ್ಲಿಗೆ ಎಳೆಯಿರಿ, ಹಾಗು ನಂತರ ಕಾಮನಬಿಲ್ಲು ಮೂಡಲು ಬಿಡಿ."
+
+#: ../../magic/src/ripples.c:106
+msgid "Ripples"
+msgstr "ಕಿರುದೆರೆಗಳು"
+
+#: ../../magic/src/ripples.c:112
+msgid "Click to make ripples appear over your picture."
+msgstr "ನಿಮ್ಮ ಚಿತ್ರದಲ್ಲಿ ಕಿರುದೆರೆಗಳು ಕಾಣಿಸುವಂತೆ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/rosette.c:116
+msgid "Rosette"
+msgstr "ರೋಸೆಟ್"
+
+#: ../../magic/src/rosette.c:116
+msgid "Picasso"
+msgstr "ಪಿಕಾಸೊ"
+
+#: ../../magic/src/rosette.c:121
+msgid "Click and start drawing your rosette."
+msgstr "ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ನಿಮ್ಮ ರೋಸೆಟ್ ಅನ್ನು ರಚಿಸುವುದನ್ನು ಆರಂಭಿಸಿ."
+
+#: ../../magic/src/rosette.c:123
+msgid "You can draw just like Picasso!"
+msgstr "ನೀವೂ ಸಹ ಪಿಕಾಸೊದಂತೆ ಚಿತ್ರಿಸಬಹುದು!"
+
+#: ../../magic/src/sharpen.c:73
+msgid "Edges"
+msgstr "ಅಂಚುಗಳು"
+
+#: ../../magic/src/sharpen.c:74
+msgid "Sharpen"
+msgstr "ಮೊನಚುಗೊಳಿಸಿ"
+
+#: ../../magic/src/sharpen.c:75
+msgid "Silhouette"
+msgstr "ಛಾಯಚಿತ್ರ"
+
+#: ../../magic/src/sharpen.c:78
+msgid "Click and move the mouse to trace edges in parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳನ್ನು ಟ್ರೇಸ್‌ ಮಾಡಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಜರುಗಿಸಿ."
+
+#: ../../magic/src/sharpen.c:79
+msgid "Click to trace edges in your entire picture."
+msgstr "ಸಂಪೂರ್ಣ ಚಿತ್ರದಲ್ಲಿನ ಅಂಚುಗಳನ್ನು ಟ್ರೇಸ್‌ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/sharpen.c:80
+msgid "Click and move the mouse to sharpen parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳನ್ನು ಮೊನಚುಗೊಳಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಜರುಗಿಸಿ."
+
+#: ../../magic/src/sharpen.c:81
+msgid "Click to sharpen the entire picture."
+msgstr "ಸಂಪೂರ್ಣ ಚಿತ್ರವನ್ನು ಮೊನಚುಗೊಳಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/sharpen.c:82
+msgid "Click and move the mouse to create a black and white silhouette."
+msgstr "ಒಂದು ಕಪ್ಪು ಹಾಗು ಬಿಳುಪಿನ ಛಾಯಾಚಿತ್ರವನ್ನು ರಚಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/sharpen.c:83
+msgid "Click to create a black and white silhouette of your entire picture."
+msgstr ""
+"ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಚಿತ್ರದ ಒಂದು ಕಪ್ಪು ಹಾಗು ಬಿಳುಪಿನ ಛಾಯಾಚಿತ್ರವನ್ನು ರಚಿಸಲು ಕ್ಲಿಕ್ "
+"ಮಾಡಿ."
+
+#: ../../magic/src/shift.c:109
+msgid "Shift"
+msgstr "ಜರುಗಿಸಿ"
+
+#: ../../magic/src/shift.c:115
+msgid "Click and drag to shift your picture around on the canvas."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಕ್ಯಾನ್‌ವಾಸಿನ ಸುತ್ತಲೂ ಸ್ಥಳಾಂತರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/smudge.c:106
+msgid "Smudge"
+msgstr "ಚಿತ್ತು ಮಾಡಿ"
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:108
+msgid "Wet Paint"
+msgstr "ಒದ್ದೆ ಪೇಂಟ್"
+
+#: ../../magic/src/smudge.c:115
+msgid "Click and move the mouse around to smudge the picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಚಿತ್ತು ಮಾಡಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಸುತ್ತಲೂ ಜರುಗಿಸಿ."
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:117
+msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgstr ""
+"ಒದ್ದೆಯಾದ, ಚಿತ್ತಾದ ಪೇಂಟಿನಿಂದ ಚಿತ್ರಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಸುತ್ತಲೂ "
+"ಜರುಗಿಸಿ."
+
+#: ../../magic/src/snow.c:68
+msgid "Snow Ball"
+msgstr "ಮಂಜಿನ ಚೆಂಡು"
+
+#: ../../magic/src/snow.c:69
+msgid "Snow Flake"
+msgstr "ಹಿಮದ ಚೂರು"
+
+#: ../../magic/src/snow.c:72
+msgid "Click to add snow balls to your picture."
+msgstr "ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಚಿತ್ರಕ್ಕೆ ಹಿಮದ ಉಂಡೆಗಳನ್ನು ಸೇರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/snow.c:73
+msgid "Click to add snow flakes to your picture."
+msgstr "ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಚಿತ್ರಕ್ಕೆ ಹಿಮದ ಚೂರುಗಳನ್ನು ಸೇರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/string.c:123
+msgid "String edges"
+msgstr "ದಾರದ ಅಂಚುಗಳು"
+
+#: ../../magic/src/string.c:126
+msgid "String corner"
+msgstr "ದಾರದ ಮೂಲೆ"
+
+#: ../../magic/src/string.c:129
+msgid "String 'V'"
+msgstr "'V' ರೂಪದ ದಾರ"
+
+#: ../../magic/src/string.c:137
+msgid ""
+"Click and drag to draw string art. Drag top-bottom to draw less or more "
+"lines, left or right to make a bigger hole."
+msgstr ""
+"ದಾರದ ಕಲೆಯನ್ನು ರಚಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಎಳೆಯಿರಿ. ಕಡಿಮೆ ಅಥವ ಹೆಚ್ಚು ರೇಖೆಗಳನ್ನು ಎಳೆಯಲು "
+"ಮೇಲೆ-"
+"ಕೆಳಗೆ, ದೊಡ್ಡ ರಂಧ್ರವನ್ನು ಮಾಡಲು ಎಡ ಅಥವ ಬಲಕ್ಕೆ ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/string.c:140
+msgid "Click and drag to draw arrows made of string art."
+msgstr "ದಾರದ ಕಲೆಯಿಂದ ಮಾಡಲಾದ ಬಾಣಗಳನ್ನು ರಚಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/string.c:143
+msgid "Draw string art arrows with free angles."
+msgstr "ಮುಕ್ತ ಕೋನಗಳೊಂದಿಗೆ ದಾರದ ಕಲೆಯ ಬಾಣಗಳನ್ನು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/tint.c:71
+msgid "Tint"
+msgstr "ತಿಳಿಬಣ್ಣ"
+
+#: ../../magic/src/tint.c:72
+msgid "Color & White"
+msgstr "ಬಣ್ಣ ಹಾಗು ಬಿಳಿ"
+
+#: ../../magic/src/tint.c:75
+msgid ""
+"Click and move the mouse around to change the color of parts of your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳ ಬಣ್ಣವನ್ನು ಬದಲಾಯಿಸಲು ಮೌಸ್‌ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಸುತ್ತಲೂ "
+"ಜರುಗಿಸಿ."
+
+#: ../../magic/src/tint.c:76
+msgid "Click to change the color of your entire picture."
+msgstr "ಸಂಪೂರ್ಣ ಚಿತ್ರದ ಬಣ್ಣವನ್ನು ಬದಲಾಯಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/tint.c:77
+msgid ""
+"Click and move the mouse around to turn parts of your picture into white and "
+"a color you choose."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗಗಳನ್ನು ಬಿಳಿ ಹಾಗು ನೀವು ಆರಿಸುವ ಒಂದು ಬಣ್ಣಕ್ಕೆ ಬದಲಾಯಿಸಲು ಮೌಸ್‌ "
+"ಅನ್ನು ಕ್ಲಿಕ್ "
+"ಮಾಡಿ ಹಾಗು ಸುತ್ತಲೂ ಜರುಗಿಸಿ."
+
+#: ../../magic/src/tint.c:78
+msgid "Click to turn your entire picture into white and a color you choose."
+msgstr ""
+"ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಚಿತ್ರವನ್ನು ಬಿಳಿ ಹಾಗು ನೀವು ಆರಿಸುವ ಒಂದು ಬಣ್ಣಕ್ಕೆ ಬದಲಾಯಿಸಲು ಕ್ಲಿಕ್ "
+"ಮಾಡಿ."
+
+#: ../../magic/src/toothpaste.c:65
+msgid "Toothpaste"
+msgstr "ಟೂತ್‌ಪೇಸ್ಟ್‍"
+
+#: ../../magic/src/toothpaste.c:68
+msgid "Click and drag to squirt toothpaste onto your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರಕ್ಕೆ ಟೂತ್‌ಪೇಸ್ಟ್‍ ಚಿಮ್ಮಿದಂತೆ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/tornado.c:157
+msgid "Tornado"
+msgstr "ಸುಂಟರಗಾಳಿ"
+
+#: ../../magic/src/tornado.c:163
+msgid "Click and drag to draw a tornado funnel on your picture."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದಲ್ಲಿ ಒಂದು ಸುಂಟರಗಾಳಿಯ ಆಲಿಕೆಯನ್ನು ಚಿತ್ರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು "
+"ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/tv.c:100
+msgid "TV"
+msgstr "ಟಿವಿ"
+
+#: ../../magic/src/tv.c:105
+msgid ""
+"Click and drag to make parts of your picture look like they are on "
+"television."
+msgstr ""
+"ನಿಮ್ಮ ಚಿತ್ರದ ಭಾಗವು ದೂರದರ್ಶನದಲ್ಲಿರುವ ರೀತಿಯಲ್ಲಿ ಕಾಣಿಸುವಂತೆ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ "
+"ಹಾಗು "
+"ಎಳೆಯಿರಿ."
+
+#: ../../magic/src/tv.c:108
+msgid "Click to make your picture look like it's on television."
+msgstr "ನಿಮ್ಮ ಚಿತ್ರವು ದೂರದರ್ಶನದಲ್ಲಿರುವ ರೀತಿಯಲ್ಲಿ ಕಾಣಿಸುವಂತೆ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/waves.c:103
+msgid "Waves"
+msgstr "ಅಲೆಗಳು"
+
+#: ../../magic/src/waves.c:104
+msgid "Wavelets"
+msgstr "ಸಣ್ಣಅಲೆಗಳು"
+
+#: ../../magic/src/waves.c:111
+msgid ""
+"Click to make the picture horizontally wavy. Click toward the top for "
+"shorter waves, the bottom for taller waves, the left for small waves, and "
+"the right for long waves."
+msgstr ""
+"ಚಿತ್ರವನ್ನು ಸಮತಲವಾಗಿರುವ ಅಲೆಗಳನ್ನು ಹೊಂದಿರುವಂತೆ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ. ಗಿಡ್ಡನೆಯ "
+"ಅಲೆಗಳಿಗಾಗಿ ಮೇಲಿನತ್ತ, ಎತ್ತರದ ಅಲೆಗಳಿಗಾಗಿ ಕೆಳಗಿನತ್ತ, ಚಿಕ್ಕದಾದ ಅಲೆಗಳಿಗಾಗಿ "
+"ಎಡಗಡೆಯತ್ತ, "
+"ಹಾಗು ಉದ್ದನೆಯ ಅಲೆಗಳಿಗಾಗಿ ಬಲಗಡೆಯತ್ತ ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/waves.c:112
+msgid ""
+"Click to make the picture vertically wavy. Click toward the top for shorter "
+"waves, the bottom for taller waves, the left for small waves, and the right "
+"for long waves."
+msgstr ""
+"ಚಿತ್ರವನ್ನು ಲಂಬವಾಗಿರುವ ಅಲೆಗಳನ್ನು ಹೊಂದಿರುವಂತೆ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ. ಗಿಡ್ಡನೆಯ "
+"ಅಲೆಗಳಿಗಾಗಿ "
+"ಮೇಲಿನತ್ತ, ಎತ್ತರದ ಅಲೆಗಳಿಗಾಗಿ ಕೆಳಗಿನತ್ತ, ಚಿಕ್ಕದಾದ ಅಲೆಗಳಿಗಾಗಿ ಎಡಗಡೆಯತ್ತ, ಹಾಗು "
+"ಉದ್ದನೆಯ "
+"ಅಲೆಗಳಿಗಾಗಿ ಬಲಗಡೆಯತ್ತ ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../../magic/src/xor.c:95
+#| msgid "Colors"
+msgid "Xor Colors"
+msgstr "Xor ಬಣ್ಣಗಳು"
+
+#: ../../magic/src/xor.c:101
+#| msgid "Click and drag to draw arrows made of string art."
+msgid "Click and drag to draw a XOR effect"
+msgstr "XOR ಪರಿಣಾಮವನ್ನು ರಚಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ ಹಾಗು ಎಳೆಯಿರಿ"
+
+#: ../../magic/src/xor.c:103
+#| msgid "Click to add a mosaic effect to your entire picture."
+msgid "Click to draw a XOR effect on the whole picture"
+msgstr "ಸಂಪೂರ್ಣ ಚಿತ್ರದಲ್ಲಿ XOR ಪರಿಣಾಮವನ್ನು ರಚಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ."
+

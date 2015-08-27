@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-sel-eng</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-rgb.html" title="cr-rgb">
+<link rel="next" href="libcroco-cr-selector.html" title="cr-selector">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-rgb.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-selector.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-sel-eng.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-sel-eng.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-sel-eng"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-sel-eng.top_of_page"></a>cr-sel-eng</span></h2>
+<p>cr-sel-eng</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-sel-eng.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (<a class="link" href="libcroco-cr-sel-eng.html#CRPseudoClassSelectorHandler" title="CRPseudoClassSelectorHandler ()">*CRPseudoClassSelectorHandler</a>)     (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-additional-sel.html#CRAdditionalSel" title="struct CRAdditionalSel"><span class="type">CRAdditionalSel</span></a> *a_add_sel</code></em>,
+                                                         <em class="parameter"><code><span class="type">xmlNode</span> *a_node</code></em>);
+struct              <a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng">CRSelEng</a>;
+                    <a class="link" href="libcroco-cr-sel-eng.html#CRSelEngPriv" title="CRSelEngPriv">CRSelEngPriv</a>;
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-sel-eng.html#cr-sel-eng-destroy" title="cr_sel_eng_destroy ()">cr_sel_eng_destroy</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-sel-eng.html#cr-sel-eng-get-matched-properties-from-cascade" title="cr_sel_eng_get_matched_properties_from_cascade ()">cr_sel_eng_get_matched_properties_from_cascade</a>
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_cascade</code></em>,
+                                                         <em class="parameter"><code><span class="type">xmlNode</span> *a_node</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> **a_props</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-sel-eng.html#cr-sel-eng-get-matched-rulesets" title="cr_sel_eng_get_matched_rulesets ()">cr_sel_eng_get_matched_rulesets</a>     (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_sheet</code></em>,
+                                                         <em class="parameter"><code><span class="type">xmlNode</span> *a_node</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRStatement" title="CRStatement"><span class="type">CRStatement</span></a> ***a_rulesets</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> *a_len</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-sel-eng.html#cr-sel-eng-get-matched-style" title="cr_sel_eng_get_matched_style ()">cr_sel_eng_get_matched_style</a>        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_cascade</code></em>,
+                                                         <em class="parameter"><code><span class="type">xmlNode</span> *a_node</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-style.html#CRStyle" title="struct CRStyle"><span class="type">CRStyle</span></a> *a_parent_style</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-style.html#CRStyle" title="struct CRStyle"><span class="type">CRStyle</span></a> **a_style</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_set_props_to_initial_values</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-sel-eng.html#cr-sel-eng-get-pseudo-class-selector-handler" title="cr_sel_eng_get_pseudo_class_selector_handler ()">cr_sel_eng_get_pseudo_class_selector_handler</a>
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_pseudo_class_sel_name</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPseudoType</span> a_pseudo_class_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRPseudoClassSelectorHandler" title="CRPseudoClassSelectorHandler ()"><span class="type">CRPseudoClassSelectorHandler</span></a> *a_handler</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-sel-eng.html#cr-sel-eng-matches-node" title="cr_sel_eng_matches_node ()">cr_sel_eng_matches_node</a>             (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_sel</code></em>,
+                                                         <em class="parameter"><code><span class="type">xmlNode</span> *a_node</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_result</code></em>);
+<a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="returnvalue">CRSelEng</span></a> *          <a class="link" href="libcroco-cr-sel-eng.html#cr-sel-eng-new" title="cr_sel_eng_new ()">cr_sel_eng_new</a>                      (<em class="parameter"><code><span class="type">void</span></code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-sel-eng.html#cr-sel-eng-register-pseudo-class-sel-handler" title="cr_sel_eng_register_pseudo_class_sel_handler ()">cr_sel_eng_register_pseudo_class_sel_handler</a>
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_pseudo_class_sel_name</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPseudoType</span> a_pseudo_class_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRPseudoClassSelectorHandler" title="CRPseudoClassSelectorHandler ()"><span class="type">CRPseudoClassSelectorHandler</span></a> a_handler</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-sel-eng.html#cr-sel-eng-unregister-all-pseudo-class-sel-handlers" title="cr_sel_eng_unregister_all_pseudo_class_sel_handlers ()">cr_sel_eng_unregister_all_pseudo_class_sel_handlers</a>
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-sel-eng.html#cr-sel-eng-unregister-pseudo-class-sel-handler" title="cr_sel_eng_unregister_pseudo_class_sel_handler ()">cr_sel_eng_unregister_pseudo_class_sel_handler</a>
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_pseudo_class_sel_name</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPseudoType</span> a_pseudo_class_type</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-sel-eng.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-sel-eng.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRPseudoClassSelectorHandler"></a><h3>CRPseudoClassSelectorHandler ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (*CRPseudoClassSelectorHandler)     (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-additional-sel.html#CRAdditionalSel" title="struct CRAdditionalSel"><span class="type">CRAdditionalSel</span></a> *a_add_sel</code></em>,
+                                                         <em class="parameter"><code><span class="type">xmlNode</span> *a_node</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CRSelEng"></a><h3>struct CRSelEng</h3>
+<pre class="programlisting">struct CRSelEng {
+	CRSelEngPriv *priv ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CRSelEngPriv"></a><h3>CRSelEngPriv</h3>
+<pre class="programlisting">typedef struct _CRSelEngPriv CRSelEngPriv;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-sel-eng-destroy"></a><h3>cr_sel_eng_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_sel_eng_destroy                  (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>);</pre>
+<p>
+The destructor of <a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of the selection engine.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-sel-eng-get-matched-properties-from-cascade"></a><h3>cr_sel_eng_get_matched_properties_from_cascade ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_sel_eng_get_matched_properties_from_cascade
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_cascade</code></em>,
+                                                         <em class="parameter"><code><span class="type">xmlNode</span> *a_node</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> **a_props</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-sel-eng-get-matched-rulesets"></a><h3>cr_sel_eng_get_matched_rulesets ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_sel_eng_get_matched_rulesets     (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_sheet</code></em>,
+                                                         <em class="parameter"><code><span class="type">xmlNode</span> *a_node</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRStatement" title="CRStatement"><span class="type">CRStatement</span></a> ***a_rulesets</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> *a_len</code></em>);</pre>
+<p>
+Returns an array of pointers to selectors that matches
+the xml node given in parameter.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of the selection engine.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_sheet</code></em> :</span></p></td>
+<td>the stylesheet that holds the selectors.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_node</code></em> :</span></p></td>
+<td>the xml node to consider during the walk thru
+the stylesheet.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_rulesets</code></em> :</span></p></td>
+<td>out parameter. A pointer to an array of
+rulesets statement pointers. *a_rulesets is allocated by
+this function and must be freed by the caller. However, the caller
+must not alter the rulesets statements pointer because they
+point to statements that are still in the css stylesheet.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_len</code></em> :</span></p></td>
+<td>the length of *a_ruleset.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon sucessfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-sel-eng-get-matched-style"></a><h3>cr_sel_eng_get_matched_style ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_sel_eng_get_matched_style        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_cascade</code></em>,
+                                                         <em class="parameter"><code><span class="type">xmlNode</span> *a_node</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-style.html#CRStyle" title="struct CRStyle"><span class="type">CRStyle</span></a> *a_parent_style</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-style.html#CRStyle" title="struct CRStyle"><span class="type">CRStyle</span></a> **a_style</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> a_set_props_to_initial_values</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-sel-eng-get-pseudo-class-selector-handler"></a><h3>cr_sel_eng_get_pseudo_class_selector_handler ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_sel_eng_get_pseudo_class_selector_handler
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_pseudo_class_sel_name</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPseudoType</span> a_pseudo_class_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRPseudoClassSelectorHandler" title="CRPseudoClassSelectorHandler ()"><span class="type">CRPseudoClassSelectorHandler</span></a> *a_handler</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-sel-eng-matches-node"></a><h3>cr_sel_eng_matches_node ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_sel_eng_matches_node             (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_sel</code></em>,
+                                                         <em class="parameter"><code><span class="type">xmlNode</span> *a_node</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> *a_result</code></em>);</pre>
+<p>
+Evaluates a chained list of simple selectors (known as a css2 selector).
+Says wheter if this selector matches the xml node given in parameter or
+not.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the selection engine.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_sel</code></em> :</span></p></td>
+<td>the simple selector against which the xml node
+is going to be matched.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_node</code></em> :</span></p></td>
+<td>the node against which the selector is going to be matched.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_result</code></em> :</span></p></td>
+<td>out parameter. The result of the match. Is set to
+TRUE if the selector matches the node, FALSE otherwise. This value
+is considered if and only if this functions returns CR_OK.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the CR_OK if the selection ran correctly, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-sel-eng-new"></a><h3>cr_sel_eng_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="returnvalue">CRSelEng</span></a> *          cr_sel_eng_new                      (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly built instance of <a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> of
+NULL if an error occurs.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-sel-eng-register-pseudo-class-sel-handler"></a><h3>cr_sel_eng_register_pseudo_class_sel_handler ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_sel_eng_register_pseudo_class_sel_handler
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_pseudo_class_sel_name</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPseudoType</span> a_pseudo_class_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRPseudoClassSelectorHandler" title="CRPseudoClassSelectorHandler ()"><span class="type">CRPseudoClassSelectorHandler</span></a> a_handler</code></em>);</pre>
+<p>
+Adds a new handler entry in the handlers entry table.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_pseudo_class_sel_name</code></em> :</span></p></td>
+<td>the name of the pseudo class selector.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_pseudo_class_type</code></em> :</span></p></td>
+<td>the type of the pseudo class selector.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_handler</code></em> :</span></p></td>
+<td>the actual handler or callback to be called during
+the selector evaluation process.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK, upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-sel-eng-unregister-all-pseudo-class-sel-handlers"></a><h3>cr_sel_eng_unregister_all_pseudo_class_sel_handlers ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_sel_eng_unregister_all_pseudo_class_sel_handlers
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>);</pre>
+<p>
+Unregisters all the pseudo class sel handlers
+and frees all the associated allocated datastructures.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> .</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-sel-eng-unregister-pseudo-class-sel-handler"></a><h3>cr_sel_eng_unregister_pseudo_class_sel_handler ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_sel_eng_unregister_pseudo_class_sel_handler
+                                                        (<em class="parameter"><code><a class="link" href="libcroco-cr-sel-eng.html#CRSelEng" title="struct CRSelEng"><span class="type">CRSelEng</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_pseudo_class_sel_name</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRPseudoType</span> a_pseudo_class_type</code></em>);</pre>
+<p>
+</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

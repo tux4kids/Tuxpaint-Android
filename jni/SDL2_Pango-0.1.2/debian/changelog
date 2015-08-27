@@ -1,0 +1,81 @@
+sdlpango (0.1.2-6) unstable; urgency=low
+
+  * Really append -Wl,--as-needed to LDFLAGS instead of overwriting the
+    hardening flags. Thanks to Simon Ruderich for spotting this.
+    Closes: #661009.
+  * Use copyright-format 1.0.
+  * Bump Standards-Version to 3.9.3, no changes needed.
+
+ -- Felix Geyer <debfx-pkg@fobos.de>  Fri, 24 Feb 2012 12:45:16 +0100
+
+sdlpango (0.1.2-5) unstable; urgency=low
+
+  * Switch to source format 3.0 (quilt).
+  * Convert debian/rules from cdbs to dh(1).
+  * Add myself as uploader.
+  * Set DM-Upload-Allowed.
+  * Switch to debhelper compat level v9.
+    - Convert to multiarch.
+    - Exports hardening build flags.
+  * Run dh-autoreconf and remove rebootstrap.patch.
+  * Append -Wl,--as-needed to LDFLAGS.
+  * Bump Standards-Version to 3.9.2, no further changes needed.
+  * Pass --fail-missing to dh_install.
+
+ -- Felix Geyer <debfx-pkg@fobos.de>  Tue, 21 Feb 2012 19:01:38 +0100
+
+sdlpango (0.1.2-4) unstable; urgency=low
+
+  * debian/control:
+    + bump Standards-Version to 3.7.3
+  * debian/patches/am_maintainer_mode.patch:
+    + Use the AM_MAINTAINER_MODE.
+  * debian/patches/rebootstrap.patch:
+    + Rebootstrap to support GNU/kFreeBSD.
+  * debian/patches/autotools.patch:
+    + Remove, superseded by the previous patch.
+
+ -- Aurelien Jarno <aurel32@debian.org>  Fri, 21 Dec 2007 21:59:48 +0100
+
+sdlpango (0.1.2-3) unstable; urgency=low
+
+  * debian/control:
+    + Set DEB_QUILT_PATCHDIR_LINK to avoid build failures.
+    + Set the SDL team as the maintainer.
+
+  * debian/patches/blit_overflow.patch:
+    + Fix a blit overflow if rect->x or rect->y < 0 (Closes: #439855).
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Mon, 08 Oct 2007 19:50:42 +0000
+
+sdlpango (0.1.2-2) unstable; urgency=low
+
+  [ Aurelien Jarno ]
+  * debian/control:
+    + Make the package binNMU safe.
+
+  [ Josselin Mouette ]
+  * Install the API documentation in the development package.
+  * Thanks to Jens Seidel for the numerous useful bug reports.
+  * matrix_declarations.patch: move the matrix declarations to the .c
+    file instead of the header. Closes: #437517.
+  * Switch to quilt for patch management.
+    + Refresh patches.
+    + Incidentally fix line encoding mess. Closes: #437518.
+  * api_additions.patch: define SDL_PANGO_HAS_GC_EXTENSIONS to provide a
+    macro that can be easily tested against. Closes: #437865.
+  * sans-serif.patch: use sans-serif instead of the deprecated Sans
+    alias. Closes: #439933.
+  * fillrect_crash.patch: fix crash when SDLPango_Draw is called with an
+    empty string. Closes: #439071.
+  * autotools.patch: update config.sub and config.guess.
+
+ -- Josselin Mouette <joss@debian.org>  Tue, 18 Sep 2007 16:36:11 +0200
+
+sdlpango (0.1.2-1) unstable; urgency=low
+
+  * Initial release (closes: #389648).
+  * api_additions.patch: patch from Guillaume Cottenceau to add some 
+    missing functions.
+
+ -- Josselin Mouette <joss@debian.org>  Thu, 28 Sep 2006 23:50:02 +0200

@@ -1,0 +1,1436 @@
+# Translation of tuxpaint to Sinhala.
+# Copyright (C) 2014 The Tuxpaint Team.
+# This file is distributed under the same license as the tuxpaint package.
+# Menik Prasantha <manikprasantha@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxpaint\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-26 17:43+0900\n"
+"PO-Revision-Date: 2010-05-14 11:37-0000\n"
+"Last-Translator: Menik Prasantha <manikprasantha@gmail.com>\n"
+"Language-Team: none\n"
+"Language: si\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Response to Black (0, 0, 0) color selected
+#: ../colors.h:86
+msgid "Black!"
+msgstr "කළු පැහැය!"
+
+#. Response to Dark grey (128, 128, 128) color selected
+#: ../colors.h:89
+msgid "Dark grey! Some people spell it â€œdark grayâ€."
+msgstr "තද අළු පැහැය!"
+
+#. Response to Light grey (192, 192, 192) color selected
+#: ../colors.h:92
+msgid "Light grey! Some people spell it â€œlight grayâ€."
+msgstr "ළා අළු පැහැය!"
+
+#. Response to White (255, 255, 255) color selected
+#: ../colors.h:95
+msgid "White!"
+msgstr "සුදු පැහැය!"
+
+#. Response to Red (255, 0, 0) color selected
+#: ../colors.h:98
+msgid "Red!"
+msgstr "රතු පැහැය!"
+
+#. Response to Orange (255, 128, 0) color selected
+#: ../colors.h:101
+msgid "Orange!"
+msgstr "තැඹිළි පැහැය!"
+
+#. Response to Yellow (255, 255, 0) color selected
+#: ../colors.h:104
+msgid "Yellow!"
+msgstr "කහ පැහැය!"
+
+#. Response to Light green (160, 228, 128) color selected
+#: ../colors.h:107
+msgid "Light green!"
+msgstr "ළා කොළ පැහැය!"
+
+#. Response to Dark green (33, 148, 70) color selected
+#: ../colors.h:110
+msgid "Dark green!"
+msgstr "තද කොළ පැහැය!"
+
+#. Response to "Sky" blue (138, 168, 205) color selected
+#: ../colors.h:113
+msgid "Sky blue!"
+msgstr "ළා නිල් පැහැය!"
+
+#. Response to Blue (50, 100, 255) color selected
+#: ../colors.h:116
+msgid "Blue!"
+msgstr "නිල් පැහැය!"
+
+#. Response to Lavender (186, 157, 255) color selected
+#: ../colors.h:119
+msgid "Lavender!"
+msgstr "ළා දම් පැහැය!"
+
+#. Response to Purple (128, 0, 128) color selected
+#: ../colors.h:122
+msgid "Purple!"
+msgstr "දම් පැහැය!"
+
+#. Response to Pink (255, 165, 211) color selected
+#: ../colors.h:125
+msgid "Pink!"
+msgstr "රෝස පැහැය!"
+
+#. Response to Brown (128, 80, 0) color selected
+#: ../colors.h:128
+msgid "Brown!"
+msgstr "දුඹුරු පැහැය!"
+
+#. Response to Tan (226, 189, 166) color selected
+#: ../colors.h:131
+msgid "Tan!"
+msgstr "ළා දුඹුරු පැහැය!"
+
+#. Response to Beige (247, 228, 219) color selected
+#: ../colors.h:134
+msgid "Beige!"
+msgstr "වැලි දුඹුරු පැහැය!"
+
+#. First, the blacklist. We list font families that can crash Tux Paint
+#. via bugs in the SDL_ttf library. We also test fonts to be sure that
+#. they have both uppercase and lowercase letters. Note that we do not
+#. test for "Aa", because it is OK if uppercase and lowercase are the
+#. same (but not nice -- such fonts get a low score later).
+#.
+#. Most locales leave the blacklist strings alone: "QX" and "qx"
+#. (it is less destructive to use the scoring strings instead)
+#.
+#. Locales that absolutely require all fonts to have some
+#. extra characters should use "QX..." and "qx...", where "..."
+#. are some characters you absolutely require in all fonts.
+#.
+#. Locales with absolutely NO use for ASCII may use "..." and "...",
+#. where "..." are some characters you absolutely require in
+#. all fonts. This would be the case for a locale in which it is
+#. impossible for a user to type ASCII letters.
+#.
+#. Most translators should use scoring instead.
+#: ../dirwalk.c:164
+msgid "qx"
+msgstr "qx"
+
+#: ../dirwalk.c:164
+msgid "QX"
+msgstr "QX"
+
+#. TODO: weight specification
+#. Now we score fonts to ensure that the best ones will be placed at
+#. the top of the list. The user will see them first. This sorting is
+#. especially important for users who have scroll buttons disabled.
+#. Translators should do whatever is needed to put crummy fonts last.
+#. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
+#: ../dirwalk.c:191
+msgid "oO"
+msgstr "oO"
+
+#. common punctuation (e.g., '?', '!', '.', ',', etc.)
+#: ../dirwalk.c:194
+msgid ",.?!"
+msgstr ",.?!"
+
+#. uncommon punctuation (e.g., '@', '#', '*', etc.)
+#: ../dirwalk.c:197
+msgid "`\\%_@$~#{<(^&*"
+msgstr "`\\%_@$~#{<(^&*"
+
+#. digits (e.g., '0', '1' and '7')
+#: ../dirwalk.c:200
+msgid "017"
+msgstr "017"
+
+#. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
+#: ../dirwalk.c:203
+msgid "O0"
+msgstr "O0"
+
+#. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
+#: ../dirwalk.c:206
+msgid "1Il|"
+msgstr "1Il|"
+
+#: ../dirwalk.c:210
+msgid "<1>spare-1a"
+msgstr "<1>spare-1a"
+
+#: ../dirwalk.c:211
+msgid "<1>spare-1b"
+msgstr "<1>spare-1b"
+
+#: ../dirwalk.c:212
+msgid "<9>spare-9a"
+msgstr "<9>spare-9a"
+
+#: ../dirwalk.c:213
+msgid "<9>spare-9b"
+msgstr "<9>spare-9b"
+
+#. Congratulations #1
+#: ../great.h:37
+msgid "Great!"
+msgstr "විශිෂ්ටයි!"
+
+#. Congratulations #2
+#: ../great.h:40
+msgid "Cool!"
+msgstr "නියමයි!"
+
+#. Congratulations #3
+#: ../great.h:43
+msgid "Keep it up!"
+msgstr "දිගටම කරගෙන යන්න!"
+
+#. Congratulations #4
+#: ../great.h:46
+msgid "Good job!"
+msgstr "විශිෂ්ට කාර්යයක්!"
+
+#. Input Method: English mode
+#: ../im.c:75
+msgid "English"
+msgstr "ඉංග්‍රීසි"
+
+#. Input Method: Japanese Romanized Hiragana mode
+#: ../im.c:78
+msgid "Hiragana"
+msgstr "හිරගන"
+
+#. Input Method: Japanese Romanized Katakana mode
+#: ../im.c:81
+msgid "Katakana"
+msgstr "කටකන"
+
+#. Input Method: Korean Hangul 2-Bul mode
+#: ../im.c:84
+msgid "Hangul"
+msgstr "හන්ගුල්"
+
+#. Input Method: Thai mode
+#: ../im.c:87
+msgid "Thai"
+msgstr "තායි"
+
+#. Input Method: Traditional Chinese mode
+#: ../im.c:90
+msgid "ZH_TW"
+msgstr "ZH_TW"
+
+#. Square shape tool (4 equally-lengthed sides at right angles)
+#: ../shapes.h:171 ../shapes.h:172
+msgid "Square"
+msgstr "සමචතුරස්‍රය"
+
+#. Rectangle shape tool (4 sides at right angles)
+#: ../shapes.h:175 ../shapes.h:176
+msgid "Rectangle"
+msgstr "සෘජුකෝණාස්‍රය"
+
+#. Circle shape tool (X radius and Y radius are the same)
+#: ../shapes.h:179 ../shapes.h:180
+msgid "Circle"
+msgstr "වෘත්තය"
+
+#. Ellipse shape tool (X radius and Y radius may differ)
+#: ../shapes.h:183 ../shapes.h:184
+msgid "Ellipse"
+msgstr "ඉලිප්සය"
+
+#. Triangle shape tool (3 sides)
+#: ../shapes.h:187 ../shapes.h:188
+msgid "Triangle"
+msgstr "ත්‍රිකෝණය"
+
+#. Pentagone shape tool (5 sides)
+#: ../shapes.h:191 ../shapes.h:192
+msgid "Pentagon"
+msgstr "පංචාස්‍රය"
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:195 ../shapes.h:196
+msgid "Rhombus"
+msgstr "රොම්බසය"
+
+#. Octagon shape tool (8 sides)
+#: ../shapes.h:199 ../shapes.h:200
+msgid "Octagon"
+msgstr "අෂ්ටාස්‍රය"
+
+#. Description of a square
+#: ../shapes.h:208 ../shapes.h:209
+msgid "A square is a rectangle with four equal sides."
+msgstr "සමචතුරස්‍රය යනු පාද සතරම සමාන සෘජුකෝණාස්‍රයකි."
+
+#. Description of a rectangle
+#: ../shapes.h:212 ../shapes.h:213
+msgid "A rectangle has four sides and four right angles."
+msgstr "සෘජුකෝණාස්‍රයට සතර පැත්තක් හා සෘජුකෝණ සතරක් තිබේ."
+
+#: ../shapes.h:217 ../shapes.h:219
+msgid ""
+"A circle is a curve where all points have the same distance from the center."
+msgstr ""
+"වෘත්තයක් යනු මධ්‍යයේ සිට සළකුණු කරනු ලබන ඕනෑම ස්ථානයක් සම දුරින් පිහිටන්නා වූ වක්‍රයකි."
+
+#. Description of an ellipse
+#: ../shapes.h:222 ../shapes.h:223
+msgid "An ellipse is a stretched circle."
+msgstr "ඉලිප්සයක් යනු එක් පැත්තකට අදිනු ලැබූ වෘත්තයකි."
+
+#. Description of a triangle
+#: ../shapes.h:226 ../shapes.h:227
+msgid "A triangle has three sides."
+msgstr "ත්‍රිකෝණයකට තුන් පැත්තතක් තිබේ."
+
+#. Description of a pentagon
+#: ../shapes.h:230 ../shapes.h:231
+msgid "A pentagon has five sides."
+msgstr "පංචාස්‍රයකට පාද පහක් තිබේ."
+
+#: ../shapes.h:235 ../shapes.h:237
+msgid "A rhombus has four equal sides, and opposite sides are parallel."
+msgstr "රොම්බසයේ පාද සතරම සමාන වන අතර සම්මුඛ පාද සමාන්තර වේ."
+
+#: ../shapes.h:241 ../shapes.h:243
+msgid "An octagon has eight equal sides."
+msgstr "අෂ්ටාස්‍රයකට සමාන පාද අටක් තිබේ."
+
+#. Title of tool selector (buttons down the left)
+#: ../titles.h:56
+msgid "Tools"
+msgstr "මෙවලම්"
+
+#. Title of color palette (buttons across the bottom)
+#: ../titles.h:59
+msgid "Colors"
+msgstr "වර්ණ"
+
+#. Title of brush selector (buttons down the right for paint and line tools)
+#: ../titles.h:62
+msgid "Brushes"
+msgstr "පින්සල්"
+
+#. Title of eraser selector (buttons down the right for eraser tool)
+#: ../titles.h:65
+msgid "Erasers"
+msgstr "මකන"
+
+#. Title of stamp selector (buttons down the right for stamps tool)
+#: ../titles.h:68
+msgid "Stamps"
+msgstr "මුද්‍රා"
+
+#. Title of shape selector (buttons down the right for shapes tool)
+#. Shape creation tool (square, circle, etc.)
+#: ../titles.h:71 ../tools.h:71
+msgid "Shapes"
+msgstr "හැඩතල"
+
+#. Title of font selector (buttons down the right for text and label tools)
+#: ../titles.h:74
+msgid "Letters"
+msgstr "අක්ෂර"
+
+#. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
+#. "Magic" effects tools (blur, flip image, etc.)
+#: ../titles.h:77 ../tools.h:83
+msgid "Magic"
+msgstr "මැජික්"
+
+#. Freehand painting tool
+#: ../tools.h:62
+msgid "Paint"
+msgstr "වර්ණක"
+
+#. Stamp tool (aka Rubber Stamps)
+#: ../tools.h:65
+msgid "Stamp"
+msgstr "රබර් මුද්‍රාව"
+
+#. Line drawing tool
+#: ../tools.h:68
+msgid "Lines"
+msgstr "රේඛා"
+
+#. Text tool
+#: ../tools.h:74
+msgid "Text"
+msgstr "වගන්තිය"
+
+#. Label tool
+#: ../tools.h:77
+msgid "Label"
+msgstr "ලේබලය"
+
+#. Undo last action
+#: ../tools.h:86
+msgid "Undo"
+msgstr "පසු පියවරට යන්න"
+
+#. Redo undone action
+#: ../tools.h:89
+msgid "Redo"
+msgstr "ඉදිරි පියවරට යන්න"
+
+#. Eraser tool
+#: ../tools.h:92
+msgid "Eraser"
+msgstr "මකනය"
+
+#. Start a new picture
+#: ../tools.h:95
+msgid "New"
+msgstr "නව ඇරඹුමක්"
+
+#. Open a saved picture
+#. buttons for the file open dialog
+#. Open dialog: 'Open' button, to load the selected picture
+#: ../tools.h:98 ../tuxpaint.c:7605
+msgid "Open"
+msgstr "විවෘත කරන්න"
+
+#. Save the current picture
+#: ../tools.h:101
+msgid "Save"
+msgstr "සුරකින්න"
+
+#. Print the current picture
+#: ../tools.h:104
+msgid "Print"
+msgstr "මුද්‍රණය කරන්න"
+
+#. Quit/exit Tux Paint application
+#: ../tools.h:107
+msgid "Quit"
+msgstr "ඉවත් වන්න"
+
+#. Paint tool instructions
+#: ../tools.h:115
+msgid "Pick a color and a brush shape to draw with."
+msgstr "ඇඳීම සඳහා වර්ණයක් හා පින්සලක් තෝරාගන්න."
+
+#. Stamp tool instructions
+#: ../tools.h:118
+msgid "Pick a picture to stamp around your drawing."
+msgstr "ඔබේ චිත්‍රය වටා මුද්‍රා තැබීම සඳහා පින්තූරයක් තෝරාගන්න."
+
+#. Line tool instructions
+#: ../tools.h:121
+msgid "Click to start drawing a line. Let go to complete it."
+msgstr "රේඛාවක් ඇඳීම සඳහා මෙය තෝරාගෙන එය සම්පූර්ණ කරන්න."
+
+#. Shape tool instructions
+#: ../tools.h:124
+msgid ""
+"Pick a shape. Click to pick the center, drag, then let go when it is the "
+"size you want. Move around to rotate it, and click to draw it."
+msgstr ""
+"හැඩතලයක් තෝරාගන්න. එය මැද ක්ලික් කර ඔබට අවශ්‍ය ප්‍රමාණයට ඇදගෙන යන්න. "
+"එය කරකැවීමට එහා මෙහා ගෙනයන්න, ඇඳීම සඳහා ක්ලික් කරන්න."
+
+#. Text tool instructions
+#: ../tools.h:127
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text."
+msgstr ""
+"සුදුසු වගන්ති ශෛලිය තෝරාගන්න. ඔබේ චිත්‍රය මත ක්ලික් කර ටයිප් කරගෙන යන්න. "
+"වගන්තිය අවසාන කිරීමට [Enter] හෝ [Tab] ඔබන්න."
+
+#. Label tool instructions
+#: ../tools.h:130
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text. By using the selector button "
+"and clicking an exist label, you can move it, edit it and change its text "
+"style."
+msgstr ""
+"සුදුසු වගන්ති ශෛලිය තෝරාගන්න. ඔබේ චිත්‍රය මත ක්ලික් කර ටයිප් කරගෙන යන්න. "
+"වගන්තිය අවසාන කිරීමට [Enter] හෝ [Tab] ඔබන්න. තෝරනය බොත්තමෙන් "
+"හා පවතින ලේබලය ක්ලික් කිරීමෙන්,ඔබට එය එහා මෙහා ගෙනයන්නටත්, සංස්කරණය කිරීමට හා එහි වගන්ති ශෛලිය වෙනස් කිරීමත් කළ හැකිය."
+
+#. Magic tool instruction
+#: ../tools.h:136
+msgid "Pick a magical effect to use on your drawing!"
+msgstr "ඔබේ චිත්‍රයේ භාවිතා කිරීමට මැජික් ඵලයක් තෝරාගන්න!"
+
+#. Response to 'undo' action
+#: ../tools.h:139
+msgid "Undo!"
+msgstr "පසු පියවරට යන්න!"
+
+#. Response to 'redo' action
+#: ../tools.h:142
+msgid "Redo!"
+msgstr "ඉදිරි පියවරට යන්න!"
+
+#. Eraser tool
+#: ../tools.h:145
+msgid "Eraser!"
+msgstr "මකනය!"
+
+#. Response to 'start a new image' action
+#: ../tools.h:148
+msgid "Pick a color or picture with which to start a new drawing."
+msgstr "නව චිත්‍රයක් ආරම්භ කිරීම සඳහා වර්ණයක් හෝ පින්තූරයක් තෝරාගන්න."
+
+#. Response to 'open' action (while file dialog is being constructed)
+#: ../tools.h:151
+msgid "Openâ€¦"
+msgstr "විවෘත කරන්නâ€¦"
+
+#. Response to 'save' action
+#: ../tools.h:154
+msgid "Your image has been saved!"
+msgstr "ඔබගේ පින්තූරය සුරැකිනි!"
+
+#. Response to 'print' action (while printing, or print dialog is being used)
+#: ../tools.h:157
+msgid "Printingâ€¦"
+msgstr "මුද්‍රණය වෙමින් පවතී"
+
+#. Response to 'quit' (exit) action
+#: ../tools.h:160
+msgid "Bye bye!"
+msgstr "සුභ දවසක්	!"
+
+#. Instruction while using Line tool (after click, before release)
+#: ../tools.h:164
+msgid "Let go of the button to complete the line."
+msgstr "රේඛාව සම්පූර්ණ කිරීමට බොත්තම අතහරින්න."
+
+#. Instruction while using Shape tool (after first click, before release)
+#: ../tools.h:167
+msgid "Hold the button to stretch the shape."
+msgstr "හැඩය පැතිරීම සඳහා බොත්තම තදකර සිටින්න."
+
+#. Instruction while finishing Shape tool (after release, during rotation step before second click)
+#: ../tools.h:170
+msgid "Move the mouse to rotate the shape. Click to draw it."
+msgstr "හැඩය භ්‍රමණය කිරීමට මූසිකය චලනය කරන්න. ඇඳීමට මූසික ක්ලිකය කරන්න."
+
+#. Notification that 'New' action was aborted (current image would have been lost)
+#: ../tools.h:173
+msgid "OK thenâ€¦ Letâ€™s keep drawing this one!"
+msgstr "Oඔව් එසේ නම් නැවතත් මෙය අඳිමු!"
+
+#. Prompt to confirm user wishes to quit
+#: ../tuxpaint.c:2040
+msgid "Do you really want to quit?"
+msgstr "ඔබට ඇත්තටම ඉවත්වීමට අවශ්‍යද ?"
+
+#. Quit prompt positive response (quit)
+#: ../tuxpaint.c:2043
+msgid "Yes, Iâ€™m done!"
+msgstr "ඔව්, Iâ€™m ස්ථිර කරන ලදී! "
+
+#. Quit prompt negative response (don't quit)
+#: ../tuxpaint.c:2046 ../tuxpaint.c:2073
+msgid "No, take me back!"
+msgstr "නැහැ.  නැවත මාව කැඳවන්න!"
+
+#. Current picture is not saved; user is quitting
+#: ../tuxpaint.c:2050
+msgid "If you quit, youâ€™ll lose your picture! Save it?"
+msgstr "ඔබ ඉවත් වුවොත්, ඔබගේ පින්තූරය අහිමි වේ! සුරැකීමට අවශ්‍යද ?â€™"
+
+#: ../tuxpaint.c:2051 ../tuxpaint.c:2056
+msgid "Yes, save it!"
+msgstr "ඔව්, සුරකින්න.!"
+
+#: ../tuxpaint.c:2052 ../tuxpaint.c:2057
+msgid "No, donâ€™t bother saving!"
+msgstr "නැහැ, සුරැකීමට බධා කිරීමෙන් වළකින්න!"
+
+#. Current picture is not saved; user is opening another picture
+#: ../tuxpaint.c:2055
+msgid "Save your picture first?"
+msgstr "ප්‍රථමයෙන් ඔබගේ පින්තූරය සුරකින්නද?"
+
+#. Error opening picture
+#: ../tuxpaint.c:2060
+msgid "Canâ€™t open that picture!"
+msgstr "එම පින්තූරය විවෘත කිරීමට නොහැක !"
+
+#. Generic dialog dismissal
+#: ../tuxpaint.c:2063 ../tuxpaint.c:2068 ../tuxpaint.c:2077 ../tuxpaint.c:2084
+#: ../tuxpaint.c:2093
+msgid "OK"
+msgstr "හරි"
+
+#. Notification that 'Open' dialog has nothing to show
+#: ../tuxpaint.c:2067
+msgid "There are no saved files!"
+msgstr "සුරකින ලද ගොනු නොමැත!"
+
+#. Verification of print action
+#: ../tuxpaint.c:2071
+msgid "Print your picture now?"
+msgstr "ඔබගේ පින්තූරය දැන් මුද්‍රණය කරන්නද?"
+
+#: ../tuxpaint.c:2072
+msgid "Yes, print it!"
+msgstr "ඔව්, මුද්‍රණය කරන්න!"
+
+#. Confirmation of successful (we hope) printing
+#: ../tuxpaint.c:2076
+msgid "Your picture has been printed!"
+msgstr "ඔබගේ පින්තූරය මුද්‍රණය කරන ලදී!"
+
+#. We got an error printing
+#: ../tuxpaint.c:2080
+msgid "Sorry! Your picture could not be printed!"
+msgstr "සමාවන්න! ඔබගේ පින්තූරය මුද්‍රණය කිරීමට නොහැක!"
+
+#. Notification that it's too soon to print again (--printdelay option is in effect)
+#: ../tuxpaint.c:2083
+msgid "You canâ€™t print yet!"
+msgstr "ඔබට තවම මුද්‍රණය කිරීමට නොහැක!"
+
+#. Prompt to confirm erasing a picture in the Open dialog
+#: ../tuxpaint.c:2087
+msgid "Erase this picture?"
+msgstr "මෙම පින්තූරය මකන්නද?"
+
+#: ../tuxpaint.c:2088
+msgid "Yes, erase it!"
+msgstr "ඔව්, මකන්න!"
+
+#: ../tuxpaint.c:2089
+msgid "No, donâ€™t erase it!"
+msgstr "නැහැ, මකන්න එපා!"
+
+#. Reminder that Mouse Button 1 is the button to use in Tux Paint
+#: ../tuxpaint.c:2092
+msgid "Remember to use the left mouse button!"
+msgstr "වාම මූසික බොත්තම භාවිතා කිරීමට මතක තබා ගන්න!"
+
+#. Sound has been muted (silenced) via keyboard shortcut
+#: ../tuxpaint.c:2300
+msgid "Sound muted."
+msgstr "ශබ්දය ඉවත් කරන ලදී."
+
+#. Sound has been unmuted (unsilenced) via keyboard shortcut
+#: ../tuxpaint.c:2305
+msgid "Sound unmuted."
+msgstr "ශබ්දය නැවත ඇති කරන ලදී."
+
+#. Wait while Text tool finishes loading fonts
+#: ../tuxpaint.c:3052
+msgid "Please waitâ€¦"
+msgstr "කරුණාකර රැඳී සිටින්න!"
+
+#. Open dialog: 'Erase' button, to erase/deleted the selected picture
+#: ../tuxpaint.c:7608
+msgid "Erase"
+msgstr "මකන්න"
+
+#. Open dialog: 'Slides' button, to switch to slide show mode
+#: ../tuxpaint.c:7611
+msgid "Slides"
+msgstr "ස්ලයිඩ"
+
+#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
+#: ../tuxpaint.c:7614
+msgid "Back"
+msgstr "ආපසු"
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7617
+msgid "Next"
+msgstr "ඉදිරියට"
+
+#. Slideshow: 'Play' button, to begin a slideshow sequence
+#: ../tuxpaint.c:7620
+msgid "Play"
+msgstr "ක්‍රියා කරවන්න"
+
+#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
+#: ../tuxpaint.c:8328
+msgid "Aa"
+msgstr "අකුරු"
+
+#. Admittedly stupid way of determining which keys can be used for
+#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
+#: ../tuxpaint.c:11586
+msgid "Yes"
+msgstr "ඔව් "
+
+#: ../tuxpaint.c:11590
+msgid "No"
+msgstr "නැහැ"
+
+#. Prompt to ask whether user wishes to save over old version of their file
+#: ../tuxpaint.c:12608
+msgid "Replace the picture with your changes?"
+msgstr "ඔබගේ වෙනස් කිරීම් සමඟින් පින්තූරය ප්‍රතිස්ථාපනය කරන්නද?"
+
+#. Positive response to saving over old version
+#. (like a 'File:Save' action in other applications)
+#: ../tuxpaint.c:12612
+msgid "Yes, replace the old one!"
+msgstr "ඔව්, පරණ පින්තූරය ප්‍රතිස්ථාපනය කරන්න!"
+
+#. Negative response to saving over old version (saves a new image)
+#. (like a 'File:Save As...' action in other applications)
+#: ../tuxpaint.c:12616
+msgid "No, save a new file!"
+msgstr "නැහැ, අලුත් ගොනුවක් සුරකින්න!"
+
+#: ../tuxpaint.c:13861
+msgid "Choose the picture you want, then click â€œOpenâ€."
+msgstr "ඔබට අවශ්‍ය පින්තූරය තොරන්න, ඉන්පසු විවෘත කිරීම මත මූසික ක්ලිකය කරන්න."
+
+#. Let user choose images:
+#. Instructions for Slideshow file dialog (FIXME: Make a #define)
+#: ../tuxpaint.c:14892 ../tuxpaint.c:15220
+msgid "Choose the pictures you want, then click â€œPlayâ€."
+msgstr "ඔබට අවශ්‍ය පින්තූර තොරන්න, ඉන්පසු ක්‍රියා කරවන්න මත මූසික ක්ලිකය කරන්න."
+
+#: ../tuxpaint.c:22159
+msgid "Pick a color."
+msgstr "පාටක් තෝරන්න."
+
+#: ../tuxpaint.desktop.in.h:1
+msgid "A drawing program for children."
+msgstr "ළමයින් සඳහා ඇඳීමේ වැඩසටහන."
+
+#: ../tuxpaint.desktop.in.h:2
+msgid "Drawing program"
+msgstr "ඇඳීමේ වැඩසටහන"
+
+#: ../tuxpaint.desktop.in.h:3
+msgid "Tux Paint"
+msgstr "Tux Paint"
+
+#: ../../magic/src/alien.c:64
+msgid "Color Shift"
+msgstr "පාට මාරු කරන්න"
+
+#: ../../magic/src/alien.c:67
+msgid "Click and move the mouse to change the colors in parts of your picture."
+msgstr ""
+"ඔබේ පින්තූරයේ කොටස් වල පාට මාරු කිරීමට මූසික ක්ලිකය කර චලනය කරන්න."
+
+#: ../../magic/src/alien.c:68
+msgid "Click to change the colors in your entire picture."
+msgstr "මුලු පින්තූරයේ පාට මාරු කිරීමට මූසික ක්ලිකය කරන්න."
+
+#: ../../magic/src/blind.c:117
+msgid "Blind"
+msgstr "වැස්ම"
+
+#: ../../magic/src/blind.c:122
+msgid ""
+"Click towards the edge of your picture to pull window blinds over it. Move "
+"perpendicularly to open or close the blinds."
+msgstr ""
+"පින්තූරයේ මායිම දක්වා ජනේලයේ වැස්ම වැටීමට සලස්වන්න."
+"වැස්ම ඇරීමට හෝ වැසීමට ලම්භකව එහා මෙහා ගෙන යන්න."
+
+#: ../../magic/src/blocks_chalk_drip.c:136
+msgid "Blocks"
+msgstr "අච්චු"
+
+#: ../../magic/src/blocks_chalk_drip.c:138
+msgid "Chalk"
+msgstr "පාට කූරු"
+
+#: ../../magic/src/blocks_chalk_drip.c:140
+msgid "Drip"
+msgstr "ස්‍රාවය"
+
+#: ../../magic/src/blocks_chalk_drip.c:150
+msgid "Click and move the mouse around to make the picture blocky."
+msgstr "පින්තූරය ඒකඝන කිරීමට මවුසය ක්ලික් කර එහා මෙහා ගෙන යන්න."
+
+#: ../../magic/src/blocks_chalk_drip.c:153
+msgid ""
+"Click and move the mouse around to turn the picture into a chalk drawing."
+msgstr ""
+"පින්තූරය පාට කූරු මගින් ඇඳීම සඳහා මූසික ක්ලිකය කර එය චලනය කරන්න."
+
+#: ../../magic/src/blocks_chalk_drip.c:156
+msgid "Click and move the mouse around to make the picture drip."
+msgstr "පින්තූරයේ බින්දු වශයෙන් වැටීම පෙන්වීමට මවුසය ක්ලික් කර එහා මෙහා ගෙන යන්න."
+
+#: ../../magic/src/blur.c:80
+msgid "Blur"
+msgstr "බොඳ කරන්න"
+
+#: ../../magic/src/blur.c:83
+msgid "Click and move the mouse around to blur the image."
+msgstr "පින්තූරය බොඳ කිරීමට මූසික ක්ලිකය කර එහා මෙහා චලනය කරන්න."
+
+#: ../../magic/src/blur.c:84
+msgid "Click to blur the entire image."
+msgstr "මුලු පින්තූරයම අඳුරු කිරීමට මූසික ක්ලිකය කරන්න."
+
+#. Both are named "Bricks", at the moment:
+#: ../../magic/src/bricks.c:124
+msgid "Bricks"
+msgstr "ගඩොල්"
+
+#: ../../magic/src/bricks.c:131
+msgid "Click and move to draw large bricks."
+msgstr "විශාල ගඩොල් ඇඳීමට මූසික ක්ලිකය කර චලනය කරන්න."
+
+#: ../../magic/src/bricks.c:133
+msgid "Click and move to draw small bricks."
+msgstr "කුඩා ගඩොල් ඇඳීමට මූසික ක්ලිකය කර චලනය කරන්න."
+
+#: ../../magic/src/calligraphy.c:127
+msgid "Calligraphy"
+msgstr "විචිත්‍ර අක්ෂර කලාව"
+
+#: ../../magic/src/calligraphy.c:134
+msgid "Click and move the mouse around to draw in calligraphy."
+msgstr "විචිත්‍ර අක්ෂර කලාවෙන් ඇඳීමට මූසික ක්ලිකය කර එහා මෙහා චලනය කරන්න."
+
+#: ../../magic/src/cartoon.c:106
+msgid "Cartoon"
+msgstr "කාටූනය"
+
+#: ../../magic/src/cartoon.c:113
+msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgstr "පින්තූරය කාටූනයක් බවට පත්කිරීමට මූසික ක්ලිකය කර එහා මෙහා චලනය කරන්න."
+
+#: ../../magic/src/confetti.c:85
+msgid "Confetti"
+msgstr "මංගල මල්පෙති"
+
+#: ../../magic/src/confetti.c:87
+msgid "Click to throw confetti!"
+msgstr "මංගල මල්පෙති විසි කිරීමට මූසික ක්ලිකය කරන්න!"
+
+#: ../../magic/src/distortion.c:142
+msgid "Distortion"
+msgstr "විකෘතිය"
+
+#: ../../magic/src/distortion.c:150
+msgid "Click and drag the mouse to cause distortion in your picture."
+msgstr "ඔබේ පින්තූරයේ විකෘතියක් ඇතිකිරීමට මූසික ක්ලිකය කර අදින්න."
+
+#: ../../magic/src/emboss.c:103
+msgid "Emboss"
+msgstr "කැටයම් මතුකර පෙන්වීම"
+
+#: ../../magic/src/emboss.c:109
+msgid "Click and drag the mouse to emboss the picture."
+msgstr "පින්තූරය කැටයම් ලෙස මතුකර පෙන්වීමට මූසික ක්ලිකය කර අදින්න."
+
+#: ../../magic/src/fade_darken.c:121
+msgid "Lighten"
+msgstr "එළිය කරන්න"
+
+#: ../../magic/src/fade_darken.c:123
+msgid "Darken"
+msgstr "අඳුරු කරන්න"
+
+#: ../../magic/src/fade_darken.c:134
+msgid "Click and move the mouse to lighten parts of your picture."
+msgstr "ඔබේ පින්තූරයේ කොටස් එළිය කිරීමට මූසික ක්ලිකය කර චලනය කරන්න."
+
+#: ../../magic/src/fade_darken.c:136
+msgid "Click to lighten your entire picture."
+msgstr "ඔබේ පින්තූරයම එළිය කිරීමට මූසික ක්ලිකය කරන්න."
+
+#: ../../magic/src/fade_darken.c:141
+msgid "Click and move the mouse to darken parts of your picture."
+msgstr "ඔබේ පින්තූරයේ කොටස් අඳුරු කිරීමට මූසික ක්ලිකය කර චලනය කරන්න."
+
+#: ../../magic/src/fade_darken.c:143
+msgid "Click to darken your entire picture."
+msgstr "ඔබේ පින්තූරයම අඳුරු කිරීමට මූසික ක්ලිකය කරන්න."
+
+#: ../../magic/src/fill.c:108
+msgid "Fill"
+msgstr "පුරවන්න"
+
+#: ../../magic/src/fill.c:115
+msgid "Click in the picture to fill that area with color."
+msgstr "පින්තූරයේ ප්‍රදේශ පාට කිරීමට එම ප්‍රදේශය තුල මූසික ක්ලිකය කරන්න."
+
+#: ../../magic/src/fisheye.c:104
+msgid "Fisheye"
+msgstr "මාලු ඇස"
+
+#. Needs better name
+#: ../../magic/src/fisheye.c:106
+msgid "Click on part of your picture to create a fisheye effect."
+msgstr "මාලු ඇස බලපෑම ඇති කිරීමට ඔබගේ පින්තූරයේ කොටස් මත මූසික ක්ලිකය කරන්න."
+
+#: ../../magic/src/flower.c:150
+msgid "Flower"
+msgstr "මල"
+
+#: ../../magic/src/flower.c:156
+msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
+msgstr "මල් නටුව ඇඳීමට මූසික ක්ලිකය කර අදින්න. මල සම්පූර්ණ වීමට ඉඩහරින්න."
+
+#: ../../magic/src/foam.c:121
+msgid "Foam"
+msgstr "පෙණ"
+
+#: ../../magic/src/foam.c:127
+msgid "Click and drag the mouse to cover an area with foamy bubbles."
+msgstr "පෙණ සහිත බුබුළු මගින් ප්‍රදේශය ආවරණය කිරීමට මූසික ක්ලිකය කර අදින්න."
+
+#: ../../magic/src/fold.c:105
+msgid "Fold"
+msgstr "නැම්ම"
+
+#: ../../magic/src/fold.c:107
+msgid ""
+"Choose a background color and click to turn the corner of the page over."
+msgstr ""
+"පිටුවේ කොන හැරවීමට ක්ලික් කර පසුබිම් වර්ණයක් තෝරාගන්න."
+
+#: ../../magic/src/fretwork.c:176
+msgid "Fretwork"
+msgstr "කැටයම්"
+
+#: ../../magic/src/fretwork.c:180
+#, fuzzy
+#| msgid "Click and drag to draw string art aligned to the edges."
+msgid "Click and drag to draw repetitive patterns. "
+msgstr "මායිම් සඳහා මෝස්තරයක් එක් කිරීමට ක්ලික් කර ඇද ගෙන යන්න."
+
+#: ../../magic/src/fretwork.c:182
+#, fuzzy
+#| msgid "Click to cover your picture with rain drops."
+msgid "Click to surround your picture with repetitive patterns."
+msgstr "ඔබගේ පින්තූරය වැසි බින්දු මගින් ආවරනය කිරීමට මූසික ක්ලිකය කරන්න."
+
+#: ../../magic/src/glasstile.c:107
+msgid "Glass Tile"
+msgstr "වීදුරු ගඩොළු"
+
+#: ../../magic/src/glasstile.c:114
+msgid "Click and drag the mouse to put glass tile over your picture."
+msgstr "ඔබගේ පින්තූරය පුරාවට වීදුරු ගඩොළු යෙදීමට මූසික ක්ලිකය කර අදින්න."
+
+#: ../../magic/src/glasstile.c:116
+msgid "Click to cover your entire picture in glass tiles."
+msgstr "ඔබගේ පින්තූරය වීදුරු ගඩොළු වලින් ආවරණය කිරීමට මූසික ක්ලිකය කරන්න."
+
+#: ../../magic/src/grass.c:112
+msgid "Grass"
+msgstr "තණකොළ"
+
+#: ../../magic/src/grass.c:118
+msgid "Click and move to draw grass. Donâ€™t forget the dirt!"
+msgstr "තණකොළ ඇඳීමට මූසික ක්ලිකය කර චලනය කරන්න. Donâ€™t forget the dirt!"
+
+#: ../../magic/src/halftone.c:34
+msgid "Halftone"
+msgstr ""
+
+#: ../../magic/src/halftone.c:38
+#, fuzzy
+#| msgid "Click to turn your painting into its negative."
+msgid "Click and drag to turn your drawing into a newspaper."
+msgstr "ඔබගේ පින්තූරය අනුඡායාවක් බවට හැරවීමට මූසික ක්ලිකය කරන්න."
+
+#: ../../magic/src/kalidescope.c:120
+msgid "Symmetric Left/Right"
+msgstr "සමමිතික වම/දකුණ"
+
+#: ../../magic/src/kalidescope.c:122
+msgid "Symmetric Up/Down"
+msgstr "සමමිතික ඉහළ පහළ"
+
+#: ../../magic/src/kalidescope.c:124
+msgid "Pattern"
+msgstr "රටාව"
+
+#: ../../magic/src/kalidescope.c:126
+msgid "Tiles"
+msgstr "ගඩොළු"
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:128
+msgid "Kaleidoscope"
+msgstr "බහුරූපේක්ෂය"
+
+#: ../../magic/src/kalidescope.c:136
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the left and right of your picture."
+msgstr ""
+"සමමිතික බුරුසු ( බහුරූපේක්ෂය ) මගින් ඇඳීමට මූසික ක්ලිකය කර අදින්න."
+
+#: ../../magic/src/kalidescope.c:138
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the top and bottom of your picture."
+msgstr ""
+"සමමිතික බුරුසු ( බහුරූපේක්ෂය ) මගින් ඇඳීමට මූසික ක්ලිකය කර අදින්න."
+
+#: ../../magic/src/kalidescope.c:140
+#, fuzzy
+#| msgid "Click and drag the mouse to emboss the picture."
+msgid "Click and drag the mouse to draw a pattern across the picture."
+msgstr "පින්තූරය කැටයම් ලෙස මතුකර පෙන්වීමට මූසික ක්ලිකය කර අදින්න."
+
+#: ../../magic/src/kalidescope.c:142
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgid ""
+"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"picture."
+msgstr ""
+"මුසිකය තද කරමින් ඇදගෙන යාමෙන් සමමිතික බුරුසු ඇදිම(කෙලිය්දොස්කප්) ."
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:144
+msgid ""
+"Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgstr ""
+"මුසිකය තද කරමින් ඇදගෙන යාමෙන් සමමිතික බුරුසු ඇදිම(කෙලිය්දොස්කප්). "
+
+#: ../../magic/src/light.c:107
+msgid "Light"
+msgstr "ආලෝකය"
+
+#: ../../magic/src/light.c:113
+msgid "Click and drag to draw a beam of light on your picture."
+msgstr "ඔබේ පින්තුරයේ ප්‍රකාශ ආලෝක දණ්ඩක් ඇදිමට තද කරගෙන එහා මෙහා ගෙනයන්න."
+
+#: ../../magic/src/metalpaint.c:101
+msgid "Metal Paint"
+msgstr "ලෝහ පාට"
+
+#: ../../magic/src/metalpaint.c:107
+msgid "Click and drag the mouse to paint with a metallic color."
+msgstr "චිත්‍රය ලෝහමය වර්ණ ගැන්වීමට මුසිකය තද කරගෙන එහා මෙහා ගෙන යන්න."
+
+#: ../../magic/src/mirror_flip.c:117
+msgid "Mirror"
+msgstr "කඩපත"
+
+#: ../../magic/src/mirror_flip.c:119
+msgid "Flip"
+msgstr "විසි කිරීම"
+
+#: ../../magic/src/mirror_flip.c:130
+msgid "Click to make a mirror image."
+msgstr "කැඩපත් දර්ශනයක් ලබාගැනීමට තද කරන්න."
+
+#: ../../magic/src/mirror_flip.c:133
+msgid "Click to flip the picture upside-down."
+msgstr "පින්තුරය ඉහල-පහල විසි කිරීමට තද කරන්න."
+
+#: ../../magic/src/mosaic.c:100
+msgid "Mosaic"
+msgstr "විචිත්‍ර හැඩතල"
+
+#: ../../magic/src/mosaic.c:103
+msgid ""
+"Click and move the mouse to add a mosaic effect to parts of your picture."
+msgstr ""
+"ඔබගේ පින්තුරයේ කොටසකට විචිත්‍ර පෙනුමක් එක්කිරීමට මුසිකය තද කරගෙන එහම මෙහා ගෙනයන්න."
+
+#: ../../magic/src/mosaic.c:104
+msgid "Click to add a mosaic effect to your entire picture."
+msgstr "ඔබගේ සම්පුර්ණ පින්තුරයට විචිත්‍ර පෙනුමක් එකතු කිරීමට තද කරන්න."
+
+#: ../../magic/src/mosaic_shaped.c:142
+msgid "Square Mosaic"
+msgstr "හතරැස් හැඩ"
+
+#: ../../magic/src/mosaic_shaped.c:143
+msgid "Hexagon Mosaic"
+msgstr "සයකොන් හැඩ"
+
+#: ../../magic/src/mosaic_shaped.c:144
+msgid "Irregular Mosaic"
+msgstr "අවිදිමත් හැඩ"
+
+#: ../../magic/src/mosaic_shaped.c:149
+msgid ""
+"Click and move the mouse to add a square mosaic to parts of your picture."
+msgstr ""
+"ඔබගේ පින්තුරයේ කොටසක විචිත්‍ර හතරැස් හැඩයක් එකතු කිරීමය තද කරගෙන මුසිකය එහා මෙහා ගෙන යන්න."
+
+#: ../../magic/src/mosaic_shaped.c:150
+msgid "Click to add a square mosaic to your entire picture."
+msgstr "ඔබගේ මුලු පින්තුරයට විචිත්‍ර හතරැස් හැඩයක් එකතු කිරීමට තද කරන්න."
+
+#: ../../magic/src/mosaic_shaped.c:152
+msgid ""
+"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+msgstr ""
+"ඔබගේ පින්තුරයේ කොටසක මුලු හයක් විචිත්‍ර කිරීමට තද කරමින් එහා මෙහා ගෙනයන්න."
+
+#: ../../magic/src/mosaic_shaped.c:153
+msgid "Click to add a hexagonal mosaic to your entire picture."
+msgstr "විචිත්‍ර මුලු හයක් ලබාගැනීමට තද කරන්න."
+
+#: ../../magic/src/mosaic_shaped.c:155
+msgid ""
+"Click and move the mouse to add an irregular mosaic to parts of your picture."
+msgstr ""
+"ඔබේ පින්තුරයේ කොටසක් අවිදිමත් විදියට දැක්වීමට තද කරමින් එහා මෙහා ගෙන යන්න."
+
+#: ../../magic/src/mosaic_shaped.c:156
+msgid "Click to add an irregular mosaic to your entire picture."
+msgstr "ඔබගේ මුලු පින්තුරයම අවිදිමත් විදියට දැක්වීමට තද කරන්න."
+
+#: ../../magic/src/negative.c:98
+msgid "Negative"
+msgstr "ජායාරුප පිටපත"
+
+#: ../../magic/src/negative.c:106
+msgid "Click and move the mouse around to make your painting negative."
+msgstr "ඔබේ පින්තුරයේ කොටසක් ජායාරුපයක පිටපතක් ලෙස දැක්වීමට තද කරමින් එහා මෙහා ගෙන යන්න."
+
+#: ../../magic/src/negative.c:109
+msgid "Click to turn your painting into its negative."
+msgstr "ඔබේ පින්තුරය ජායාරුපයක පිටපතක් ලෙස දැක්වීමට තද කරන්න."
+
+#: ../../magic/src/noise.c:63
+msgid "Noise"
+msgstr "ශබ්දය"
+
+#: ../../magic/src/noise.c:66
+msgid "Click and move the mouse to add noise to parts of your picture."
+msgstr "ඔබේ පින්තුරයේ කොටසකට ශබ්දය එකතු කිරීමට එබීම සහ එහා මෙහා ගෙනයාම."
+
+#: ../../magic/src/noise.c:67
+msgid "Click to add noise to your entire picture."
+msgstr "ඔබේ පින්තුරය ශබ්දය එකතු කිරීමට තද කරන්න."
+
+#: ../../magic/src/perspective.c:145
+msgid "Perspective"
+msgstr "පෙනෙන දර්ශනය"
+
+#: ../../magic/src/perspective.c:146
+msgid "Zoom"
+msgstr "විශාල හෝ කුඩා කිරීම"
+
+#: ../../magic/src/perspective.c:151
+msgid "Click on the corners and drag where you want to stretch the picture."
+msgstr "පින්තුරය දික් කිරීමට මායිම් මත තද කිරීමෙන් සහ ඇදගෙන යාමෙන් කල හැක."
+
+#: ../../magic/src/perspective.c:154
+msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr "ඉහලට ඇදගෙන යාමෙන් පින්තුරය විශාල කිරීම හෝ පහලට ඇදගෙන යාමෙන් පින්තුරය කුඩා කිරීම."
+
+#: ../../magic/src/puzzle.c:105
+msgid "Puzzle"
+msgstr "ප්‍රහේලිකාව"
+
+#: ../../magic/src/puzzle.c:112
+msgid "Click the part of your picture where would you like a puzzle."
+msgstr "ඔබේ පින්තුරයේ කොටසක ප්‍රහේලිකාව ඇතුලත් විය යුතු ස්ථානයේ තද කරන්න."
+
+#: ../../magic/src/puzzle.c:113
+msgid "Click to make a puzzle in fullscreen mode."
+msgstr "ප්‍රහේලිකාව සම්පුර්ණ තිරයේ පෙනීමට තද කරන්න."
+
+#: ../../magic/src/rails.c:131
+msgid "Rails"
+msgstr "රේල් පීලි"
+
+#: ../../magic/src/rails.c:133
+msgid "Click and drag to draw train track rails on your picture."
+msgstr "එබීමෙන් සහ ඇදගෙන යාමෙන් ඔබේ පින්තුරයට රේල් පිලි පාරක් ඇදිය හැක."
+
+#: ../../magic/src/rain.c:65
+msgid "Rain"
+msgstr "වැස්ස"
+
+#: ../../magic/src/rain.c:68
+msgid "Click to place a rain drop onto your picture."
+msgstr "ඔබගේ පින්තුරයේ වැහි බින්දු එකතු කලයුතු ස්ථානය මත තද කරන්න."
+
+#: ../../magic/src/rain.c:69
+msgid "Click to cover your picture with rain drops."
+msgstr "ඔබගේ පින්තුරය වැහි බින්දු වලින් ආවරණය කිරීමට තද කරන්න."
+
+#: ../../magic/src/rainbow.c:139
+msgid "Rainbow"
+msgstr "දේදුන්න"
+
+#: ../../magic/src/rainbow.c:146
+msgid "You can draw in rainbow colors!"
+msgstr "ඔබට දැන් දේදුන්නේ පාටවලින් ඇදිය හැක!"
+
+#: ../../magic/src/realrainbow.c:110
+msgid "Real Rainbow"
+msgstr "නියම දේදුන්න"
+
+#: ../../magic/src/realrainbow.c:112
+msgid "ROYGBIV Rainbow"
+msgstr "රතුතැබිලිකහකොලනිල්ඉන්දිගෝදම් දේදුන්න"
+
+#: ../../magic/src/realrainbow.c:117
+msgid ""
+"Click where you want your rainbow to start, drag to where you want it to "
+"end, and then let go to draw a rainbow."
+msgstr ""
+"දේදුන්න පටන් ගන්න ස්ථානය මත තද කරන්න, අවසාන වන ස්ථානයට ඇදගෙන යන්න, "
+"පසුව දේදුන්න අදින්න."
+
+#: ../../magic/src/ripples.c:106
+msgid "Ripples"
+msgstr "කුඩා රැලි"
+
+#: ../../magic/src/ripples.c:112
+msgid "Click to make ripples appear over your picture."
+msgstr "ඔබගේ පින්තුරයට කුඩා රැලි එකතු කිරීමට තද කරන්න."
+
+#: ../../magic/src/rosette.c:116
+msgid "Rosette"
+msgstr "රෝස"
+
+#: ../../magic/src/rosette.c:116
+msgid "Picasso"
+msgstr "පිකාසෝ"
+
+#: ../../magic/src/rosette.c:121
+msgid "Click and start drawing your rosette."
+msgstr "රෝස ඇදීමට ආරම්භ කිරීමට තද කරන්න."
+
+#: ../../magic/src/rosette.c:123
+msgid "You can draw just like Picasso!"
+msgstr "ඔබට පිකාසෝ වගේ ඇදිය හැක."
+
+#: ../../magic/src/sharpen.c:73
+msgid "Edges"
+msgstr "මායිම්"
+
+#: ../../magic/src/sharpen.c:74
+msgid "Sharpen"
+msgstr "මුවහත"
+
+#: ../../magic/src/sharpen.c:75
+msgid "Silhouette"
+msgstr "සේයාව"
+
+#: ../../magic/src/sharpen.c:78
+msgid "Click and move the mouse to trace edges in parts of your picture."
+msgstr "මුසිකය තද කිරීමෙන් සහ එහා මෙහා ගෙනයාමෙන් පින්තුරයේ කොටසක මායිම ලකුණු කර හැක."
+
+#: ../../magic/src/sharpen.c:79
+msgid "Click to trace edges in your entire picture."
+msgstr "මුලු පින්තුරයේම මායිම ලකුණු කර ගැනීමට තද කරන්න."
+
+#: ../../magic/src/sharpen.c:80
+msgid "Click and move the mouse to sharpen parts of your picture."
+msgstr "මුසිකය තද කිරීමෙන් සහ එහා මෙහා ගෙනයාමෙන් පින්තුරයේ කොටසක් මුවහත් කල හැක."
+
+#: ../../magic/src/sharpen.c:81
+msgid "Click to sharpen the entire picture."
+msgstr "මුලු පින්තුරයම මුවහත් කිරීමට තද කරන්න."
+
+#: ../../magic/src/sharpen.c:82
+msgid "Click and move the mouse to create a black and white silhouette."
+msgstr "මුසිකය තද කිරීමෙන් සහ එහා මෙහා ගෙනයාමෙන් කළු සහ සුදු සේයාවක් නිර්මාණය වේ."
+
+#: ../../magic/src/sharpen.c:83
+msgid "Click to create a black and white silhouette of your entire picture."
+msgstr "තද කිරීමෙන් ඔබගේ පින්තුරයට කළු සහ සුදු සේයාවක් නිර්මාණය කර හැක."
+
+#: ../../magic/src/shift.c:109
+msgid "Shift"
+msgstr "මාරු කිරීම"
+
+#: ../../magic/src/shift.c:115
+msgid "Click and drag to shift your picture around on the canvas."
+msgstr "එබීමෙන් සහ ඇදගෙන යාමෙන් ඔබගේ පින්තුරය කැන්වස් ඒක තුල එහා මෙහා කල හැක."
+
+#: ../../magic/src/smudge.c:106
+msgid "Smudge"
+msgstr "පැල්ලම"
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:108
+msgid "Wet Paint"
+msgstr "තෙත පාට"
+
+#: ../../magic/src/smudge.c:115
+msgid "Click and move the mouse around to smudge the picture."
+msgstr "මුසිකය තද කිරීමෙන් සහ එහා මෙහා ගෙනයාමෙන්  පින්තුරයට පැල්ලම් එකතු කර හැක."
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:117
+msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgstr "තෙත, පැල්ලම් පින්තුරයට එකතු කිරීමට මුසිකය තද කිරීමෙන් සහ එහා මෙහා ගෙනයාමෙන් කල හැක."
+
+#: ../../magic/src/snow.c:68
+msgid "Snow Ball"
+msgstr "හිම බෝල"
+
+#: ../../magic/src/snow.c:69
+msgid "Snow Flake"
+msgstr "හිම පතුරු"
+
+#: ../../magic/src/snow.c:72
+msgid "Click to add snow balls to your picture."
+msgstr "හිම බෝල ඔබගේ පින්තුරයට එකතු කිරීමට තද කරන්න."
+
+#: ../../magic/src/snow.c:73
+msgid "Click to add snow flakes to your picture."
+msgstr "හිම පතුරු ඔබගේ පින්තුරයට එකතු කිරීමට තද කරන්න."
+
+#: ../../magic/src/string.c:123
+msgid "String edges"
+msgstr "අකුරු ගැට්ට"
+
+#: ../../magic/src/string.c:126
+msgid "String corner"
+msgstr "අකුරු මුල්ල"
+
+#: ../../magic/src/string.c:129
+msgid "String 'V'"
+msgstr "අකුරු  'වී'"
+
+#: ../../magic/src/string.c:137
+msgid ""
+"Click and drag to draw string art. Drag top-bottom to draw less or more "
+"lines, left or right to make a bigger hole."
+msgstr ""
+"එබීමෙන් සහ ඇදගෙන යාමෙන් අකුරු ඇදිය හැක. ඉහල-පහල ඇදගෙන යාමෙන් ඇදිය හැකිය අඩු හෝ වැඩි "
+"පේලි, දකුණට හෝ වමට ගෙනයාමෙන් විශාල හිලක් ඇදේ."
+
+#: ../../magic/src/string.c:140
+msgid "Click and drag to draw arrows made of string art."
+msgstr "එබීමෙන් සහ ඇදගෙන යාමෙන් අකුරු වල ඉරි ඇදිය හැක."
+
+#: ../../magic/src/string.c:143
+msgid "Draw string art arrows with free angles."
+msgstr "අකුරු නිදහස් ආකාරයෙන් ඇදීම."
+
+#: ../../magic/src/tint.c:71
+msgid "Tint"
+msgstr "අඩු වර්ණ"
+
+#: ../../magic/src/tint.c:72
+msgid "Color & White"
+msgstr "වර්ණ  & සුදු"
+
+#: ../../magic/src/tint.c:75
+msgid ""
+"Click and move the mouse around to change the color of parts of your picture."
+msgstr ""
+"එබීමෙන් සහ එහා මෙහා මුසිකය ගෙනයාමෙන් කොටසක් වර්ණ ගැන්විය හැක ඔබේ  "
+"පින්තුරයේ."
+
+#: ../../magic/src/tint.c:76
+msgid "Click to change the color of your entire picture."
+msgstr "සම්පුර්ණ පින්තුරයේ වර්ණය වෙනස් කිරීමට තද කරන්න."
+
+#: ../../magic/src/tint.c:77
+msgid ""
+"Click and move the mouse around to turn parts of your picture into white and "
+"a color you choose."
+msgstr ""
+"එබීමෙන් සහ එහා මෙහා මුසිකය ගෙනයාමෙන් ඔබේ පින්තුරය කොටසක් සුදු සහ "
+"ඔබ තෝරාගත් වර්ණය ගැන්විය හැක."
+
+#: ../../magic/src/tint.c:78
+msgid "Click to turn your entire picture into white and a color you choose."
+msgstr "එබීමෙන් ඔබගේ පින්තුරය සුදු සහ ඔබ තෝරා ගත් වර්ණ ගැන්විය හැක."
+
+#: ../../magic/src/toothpaste.c:65
+msgid "Toothpaste"
+msgstr "දන්තාලේප"
+
+#: ../../magic/src/toothpaste.c:68
+msgid "Click and drag to squirt toothpaste onto your picture."
+msgstr "තද කිරීමෙන් සහ ඇදගෙන යාමෙන් බොරු  දන්තාලේප පාටක් ඔබගේ පින්තුරයට එකතු කර හැක."
+
+#: ../../magic/src/tornado.c:157
+msgid "Tornado"
+msgstr "ටොනාඩෝ"
+
+#: ../../magic/src/tornado.c:163
+msgid "Click and drag to draw a tornado funnel on your picture."
+msgstr "ඔබගේ පින්තුරයට ටොනාඩෝ දුමක් එකතු කිරීමට ඔබන්න."
+
+#: ../../magic/src/tv.c:100
+msgid "TV"
+msgstr "ටීවී"
+
+#: ../../magic/src/tv.c:105
+msgid ""
+"Click and drag to make parts of your picture look like they are on "
+"television."
+msgstr ""
+"එබීමෙන් ඔබගේ පින්තුරයේ කොටසක්  පෙනෙන ආකාරය"
+"රුපවහිනයේ."
+
+#: ../../magic/src/tv.c:108
+msgid "Click to make your picture look like it's on television."
+msgstr "රුපවාහිනියේ ඔබගේ පින්තුරය පෙනෙන ආකාරය ලබාගැනීමට තද කරන්න."
+
+#: ../../magic/src/waves.c:103
+msgid "Waves"
+msgstr "රැලි"
+
+#: ../../magic/src/waves.c:104
+msgid "Wavelets"
+msgstr "කුඩා දිය රැලි"
+
+#: ../../magic/src/waves.c:111
+msgid ""
+"Click to make the picture horizontally wavy. Click toward the top for "
+"shorter waves, the bottom for taller waves, the left for small waves, and "
+"the right for long waves."
+msgstr ""
+"එබීමෙන් පින්තුරයේ තිරස් අතට රැලි එක්කර හැක.තව දුරට තද කිරීමෙන් කෙටි  "
+"රැලි, උස රැලි, කුඩා රැලි වමට, සහ දකුණට "
+"විශාල රැලි."
+
+#: ../../magic/src/waves.c:112
+msgid ""
+"Click to make the picture vertically wavy. Click toward the top for shorter "
+"waves, the bottom for taller waves, the left for small waves, and the right "
+"for long waves."
+msgstr ""
+"එබීමෙන් පින්තුරයේ සිරස් අතට රැලි එක්කර හැක.තව දුරට තද කිරීමෙන් කෙටි  "
+"රැලි, උස රැලි, කුඩා රැලි වමට, සහ දකුණට "
+"විශාල රැලි."
+
+#: ../../magic/src/xor.c:95
+#, fuzzy
+#| msgid "Colors"
+msgid "Xor Colors"
+msgstr "වර්ණ"
+
+#: ../../magic/src/xor.c:101
+#, fuzzy
+#| msgid "Click and drag to draw arrows made of string art."
+msgid "Click and drag to draw a XOR effect"
+msgstr "තද කිරීමෙන් සහ ඇගෙනයාමෙන් අකුරු හැඩ ලබාගත හැක."
+
+#: ../../magic/src/xor.c:103
+#, fuzzy
+#| msgid "Click to add a mosaic effect to your entire picture."
+msgid "Click to draw a XOR effect on the whole picture"
+msgstr "විචිත්‍ර ෂාඩාශ්‍ර පෙනුමක් මුලු පින්තුරයට එකතු කිරීමට තද කරන්න."
+
+

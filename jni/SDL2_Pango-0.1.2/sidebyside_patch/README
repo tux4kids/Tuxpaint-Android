@@ -1,0 +1,15 @@
+Side-by-side installation is essential part of 
+game software distribution.
+To apart from system singleton value (environment
+variable, registry, and absolute path), I made patches
+to Glib2, Pango, and fontconfig.
+
+Glib2 : version 2.4.6
+Pango : version 1.6.0
+fontconfig : to CVS current (2004/09/09)
+
+Apartment is not perfect. Some basic environment variables
+take effects yet, like TEMP, LC_ALL, and LC_MESSAGES.
+
+ - NAKAMURA Ken'ichi
+ 

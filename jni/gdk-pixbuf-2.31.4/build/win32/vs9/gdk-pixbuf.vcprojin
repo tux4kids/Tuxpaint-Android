@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="big5"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="gdk-pixbuf"
+	ProjectGUID="{01ADE22D-F6EC-4D09-8FE1-B9A97DEC2BA3}"
+	RootNamespace="gdk-pixbuf"
+	Keyword="Win32Proj"
+	TargetFrameworkVersion="131072"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+		<Platform
+			Name="x64"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug_GDI+|Win32"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\gdk-pixbuf-gen-srcs.vsprops"
+			OutputDirectory="Debug\$(PlatformName)\bin"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=""
+				Optimization="0"
+				AdditionalIncludeDirectories=""
+				PreprocessorDefinitions="_DEBUG;$(GdkPixbufDefines);$(GDIP_MACROS)"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="4"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(GdipLibs)"
+				OutputFile="$(OutDir)\$(GdkPixbufDllPrefix)gdk_pixbuf$(GdkPixbufDllSuffix).dll"
+				LinkIncremental="2"
+				ModuleDefinitionFile="$(IntDir)\gdk-pixbuf.def"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="$(OutDir)\gdk_pixbuf-$(ApiVersion).lib"
+				TargetMachine="1"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release_GDI+|Win32"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\gdk-pixbuf-gen-srcs.vsprops"
+			OutputDirectory="Release\$(PlatformName)\bin"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=""
+				Optimization="3"
+				AdditionalIncludeDirectories=""
+				PreprocessorDefinitions="$(GdkPixbufDefines);$(GDIP_MACROS)"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(GdipLibs)"
+				OutputFile="$(OutDir)\$(GdkPixbufDllPrefix)gdk_pixbuf$(GdkPixbufDllSuffix).dll"
+				LinkIncremental="1"
+				ModuleDefinitionFile="$(IntDir)\gdk-pixbuf.def"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="$(OutDir)\gdk_pixbuf-$(ApiVersion).lib"
+				TargetMachine="1"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug_GDI+|x64"
+			InheritedPropertySheets=".\gdk-pixbuf-gen-srcs.vsprops"
+			OutputDirectory="Debug\$(PlatformName)\bin"
+			ConfigurationType="2"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories=""
+				PreprocessorDefinitions="_DEBUG;$(GdkPixbufDefines);$(GDIP_MACROS)"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(GdipLibs)"
+				OutputFile="$(OutDir)\$(GdkPixbufDllPrefix)gdk_pixbuf$(GdkPixbufDllSuffix).dll"
+				LinkIncremental="2"
+				ModuleDefinitionFile="$(IntDir)\gdk-pixbuf.def"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				ImportLibrary="$(OutDir)\gdk_pixbuf-$(ApiVersion).lib"
+				TargetMachine="17"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release_GDI+|x64"
+			InheritedPropertySheets=".\gdk-pixbuf-gen-srcs.vsprops"
+			OutputDirectory="Release\$(PlatformName)\bin"
+			ConfigurationType="2"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				PreprocessorDefinitions="$(GdkPixbufDefines);$(GDIP_MACROS)"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(GdipLibs)"
+				OutputFile="$(OutDir)\$(GdkPixbufDllPrefix)gdk_pixbuf$(GdkPixbufDllSuffix).dll"
+				LinkIncremental="2"
+				ModuleDefinitionFile="$(IntDir)\gdk-pixbuf.def"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="$(OutDir)\gdk_pixbuf-$(ApiVersion).lib"
+				TargetMachine="17"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug\$(PlatformName)\bin"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\gdk-pixbuf-gen-srcs.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalOptions=""
+				AdditionalIncludeDirectories=""
+				PreprocessorDefinitions="$(GdkPixbufDefines);$(NOGDIP_MACROS)"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="4"
+
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(ImagingLibs)"
+				OutputFile="$(OutDir)\$(GdkPixbufDllPrefix)gdk_pixbuf$(GdkPixbufDllSuffix).dll"
+				LinkIncremental="2"
+				ModuleDefinitionFile="$(IntDir)\gdk-pixbuf.def"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="$(OutDir)\gdk_pixbuf-$(ApiVersion).lib"
+				TargetMachine="1"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release\$(PlatformName)\bin"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\gdk-pixbuf-gen-srcs.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=""
+				Optimization="3"
+				AdditionalIncludeDirectories=""
+				PreprocessorDefinitions="$(GdkPixbufDefines);$(NOGDIP_MACROS)"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(ImagingLibs)"
+				OutputFile="$(OutDir)\$(GdkPixbufDllPrefix)gdk_pixbuf$(GdkPixbufDllSuffix).dll"
+				LinkIncremental="1"
+				ModuleDefinitionFile="$(IntDir)\gdk-pixbuf.def"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="$(OutDir)\gdk_pixbuf-$(ApiVersion).lib"
+				TargetMachine="1"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="Debug\$(PlatformName)\bin"
+			InheritedPropertySheets=".\gdk-pixbuf-gen-srcs.vsprops"
+			ConfigurationType="2"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories=""
+				PreprocessorDefinitions="_DEBUG;$(GdkPixbufDefines);$(NOGDIP_MACROS)"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(ImagingLibs)"
+				OutputFile="$(OutDir)\$(GdkPixbufDllPrefix)gdk_pixbuf$(GdkPixbufDllSuffix).dll"
+				LinkIncremental="2"
+				ModuleDefinitionFile="$(IntDir)\gdk-pixbuf.def"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				ImportLibrary="$(OutDir)\gdk_pixbuf-$(ApiVersion).lib"
+				TargetMachine="17"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="Release\$(PlatformName)\bin"
+			InheritedPropertySheets=".\gdk-pixbuf-gen-srcs.vsprops"
+			ConfigurationType="2"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				PreprocessorDefinitions="$(GdkPixbufDefines);$(NOGDIP_MACROS)"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(ImagingLibs)"
+				OutputFile="$(OutDir)\$(GdkPixbufDllPrefix)gdk_pixbuf$(GdkPixbufDllSuffix).dll"
+				LinkIncremental="2"
+				ModuleDefinitionFile="$(IntDir)\gdk-pixbuf.def"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="$(OutDir)\gdk_pixbuf-$(ApiVersion).lib"
+				TargetMachine="17"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
+#include "libgdkpixbuf.sourcefiles"
+			<File RelativePath="..\..\..\gdk-pixbuf\io-ani-animation.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-ani.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-gif-animation.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-icns.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-pcx.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-pixdata.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-png.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-pnm.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-qtif.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-ras.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-tga.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-wbmp.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-xbm.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\io-xpm.c" />
+			<File RelativePath="..\..\..\gdk-pixbuf\pixops\pixops.c" />
+			<Filter	Name="Native" >
+				<File RelativePath="..\..\..\gdk-pixbuf\io-gdip-animation.c" >
+					<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-gdip-bmp.c" >
+					<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-gdip-emf.c" >
+					<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-gdip-gif.c" >
+					<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-gdip-ico.c" >
+					<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-gdip-jpeg.c" >
+					<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-gdip-tiff.c" >
+					<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-gdip-utils.c" >
+					<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-gdip-wmf.c" >
+					<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+			</Filter>
+			<Filter Name="Non-Native" >
+				<File RelativePath="..\..\..\gdk-pixbuf\io-bmp.c" >
+					<FileConfiguration Name="Debug_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-gif.c" >
+					<FileConfiguration Name="Debug_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-ico.c" >
+					<FileConfiguration Name="Debug_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-jasper.c" >
+					<FileConfiguration Name="Debug_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-jpeg.c" >
+					<FileConfiguration Name="Debug_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+				<File RelativePath="..\..\..\gdk-pixbuf\io-tiff.c" >
+					<FileConfiguration Name="Debug_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|Win32" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Debug_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+					<FileConfiguration Name="Release_GDI+|x64" ExcludedFromBuild="true" ><Tool Name="VCCLCompilerTool" /></FileConfiguration>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
+			<File RelativePath="..\..\..\config.h.win32">
+				<FileConfiguration Name="Debug_GDI+|Win32">
+					<Tool Name="VCCustomBuildTool"
+						Description="Copying config.h from config.h.win32..."
+						CommandLine="$(GenConfigH)"
+						Outputs="..\..\..\config.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Debug|Win32">
+					<Tool Name="VCCustomBuildTool"
+						Description="Copying config.h from config.h.win32..."
+						CommandLine="$(GenConfigH)"
+						Outputs="..\..\..\config.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Release_GDI+|Win32">
+					<Tool Name="VCCustomBuildTool"
+						Description="Copying config.h from config.h.win32..."
+						CommandLine="$(GenConfigH)"
+						Outputs="..\..\..\config.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Release|Win32">
+					<Tool Name="VCCustomBuildTool"
+						Description="Copying config.h from config.h.win32..."
+						CommandLine="$(GenConfigH)"
+						Outputs="..\..\..\config.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Debug_GDI+|x64">
+					<Tool Name="VCCustomBuildTool"
+						Description="Copying config.h from config.h.win32..."
+						CommandLine="$(GenConfigH)"
+						Outputs="..\..\..\config.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Debug|x64">
+					<Tool Name="VCCustomBuildTool"
+						Description="Copying config.h from config.h.win32..."
+						CommandLine="$(GenConfigH)"
+						Outputs="..\..\..\config.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Release_GDI+|x64">
+					<Tool Name="VCCustomBuildTool"
+						Description="Copying config.h from config.h.win32..."
+						CommandLine="$(GenConfigH)"
+						Outputs="..\..\..\config.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Release|x64">
+					<Tool Name="VCCustomBuildTool"
+						Description="Copying config.h from config.h.win32..."
+						CommandLine="$(GenConfigH)"
+						Outputs="..\..\..\config.h"
+					/>
+				</FileConfiguration>
+			</File>
+			<File RelativePath="..\..\..\gdk-pixbuf\gdk-pixbuf.symbols">
+				<FileConfiguration Name="Debug_GDI+|Win32">
+					<Tool Name="VCCustomBuildTool"
+						Description="Generating gdk-pixbuf.def..."
+						CommandLine="$(GenerateGdkPixbufDef)"
+						Outputs="$(IntDir)\gdk-pixbuf.def"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Debug|Win32">
+					<Tool Name="VCCustomBuildTool"
+						Description="Generating gdk-pixbuf.def..."
+						CommandLine="$(GenerateGdkPixbufDef)"
+						Outputs="$(IntDir)\gdk-pixbuf.def"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Release_GDI+|Win32">
+					<Tool Name="VCCustomBuildTool"
+						Description="Generating gdk-pixbuf.def..."
+						CommandLine="$(GenerateGdkPixbufDef)"
+						Outputs="$(IntDir)\gdk-pixbuf.def"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Release|Win32">
+					<Tool Name="VCCustomBuildTool"
+						Description="Generating gdk-pixbuf.def..."
+						CommandLine="$(GenerateGdkPixbufDef)"
+						Outputs="$(IntDir)\gdk-pixbuf.def"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Debug_GDI+|x64">
+					<Tool Name="VCCustomBuildTool"
+						Description="Generating gdk-pixbuf.def..."
+						CommandLine="$(GenerateGdkPixbufDef)"
+						Outputs="$(IntDir)\gdk-pixbuf.def"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Debug|x64">
+					<Tool Name="VCCustomBuildTool"
+						Description="Generating gdk-pixbuf.def..."
+						CommandLine="$(GenerateGdkPixbufDef)"
+						Outputs="$(IntDir)\gdk-pixbuf.def"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Release_GDI+|x64">
+					<Tool Name="VCCustomBuildTool"
+						Description="Generating gdk-pixbuf.def..."
+						CommandLine="$(GenerateGdkPixbufDef)"
+						Outputs="$(IntDir)\gdk-pixbuf.def"
+					/>
+				</FileConfiguration>
+				<FileConfiguration Name="Release|x64">
+					<Tool Name="VCCustomBuildTool"
+						Description="Generating gdk-pixbuf.def..."
+						CommandLine="$(GenerateGdkPixbufDef)"
+						Outputs="$(IntDir)\gdk-pixbuf.def"
+					/>
+				</FileConfiguration>
+			</File>
+			<File RelativePath="..\..\..\gdk-pixbuf\gdk_pixbuf.rc" />
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

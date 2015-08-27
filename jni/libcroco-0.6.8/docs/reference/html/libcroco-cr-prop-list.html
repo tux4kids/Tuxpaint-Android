@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-prop-list</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-parsing-location.html" title="cr-parsing-location">
+<link rel="next" href="libcroco-cr-pseudo.html" title="cr-pseudo">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-parsing-location.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-pseudo.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-prop-list.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-prop-list.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-prop-list"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-prop-list.top_of_page"></a>cr-prop-list</span></h2>
+<p>cr-prop-list</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-prop-list.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList">CRPropList</a>;
+                    <a class="link" href="libcroco-cr-prop-list.html#CRPropListPriv" title="CRPropListPriv">CRPropListPriv</a>;
+<a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-append" title="cr_prop_list_append ()">cr_prop_list_append</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_to_append</code></em>);
+<a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-append2" title="cr_prop_list_append2 ()">cr_prop_list_append2</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> *a_prop</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRDeclaration" title="struct CRDeclaration"><span class="type">CRDeclaration</span></a> *a_decl</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-destroy" title="cr_prop_list_destroy ()">cr_prop_list_destroy</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-get-decl" title="cr_prop_list_get_decl ()">cr_prop_list_get_decl</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRDeclaration" title="struct CRDeclaration"><span class="type">CRDeclaration</span></a> **a_decl</code></em>);
+<a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-get-next" title="cr_prop_list_get_next ()">cr_prop_list_get_next</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>);
+<a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-get-prev" title="cr_prop_list_get_prev ()">cr_prop_list_get_prev</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-get-prop" title="cr_prop_list_get_prop ()">cr_prop_list_get_prop</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> **a_prop</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-lookup-prop" title="cr_prop_list_lookup_prop ()">cr_prop_list_lookup_prop</a>            (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> *a_prop</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> **a_pair</code></em>);
+<a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-prepend" title="cr_prop_list_prepend ()">cr_prop_list_prepend</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_to_append</code></em>);
+<a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-prepend2" title="cr_prop_list_prepend2 ()">cr_prop_list_prepend2</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> *a_prop</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRDeclaration" title="struct CRDeclaration"><span class="type">CRDeclaration</span></a> *a_decl</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-set-decl" title="cr_prop_list_set_decl ()">cr_prop_list_set_decl</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRDeclaration" title="struct CRDeclaration"><span class="type">CRDeclaration</span></a> *a_decl</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-set-prop" title="cr_prop_list_set_prop ()">cr_prop_list_set_prop</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> *a_prop</code></em>);
+<a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        <a class="link" href="libcroco-cr-prop-list.html#cr-prop-list-unlink" title="cr_prop_list_unlink ()">cr_prop_list_unlink</a>                 (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_pair</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-prop-list.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-prop-list.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRPropList"></a><h3>struct CRPropList</h3>
+<pre class="programlisting">struct CRPropList {
+	CRPropListPriv * priv;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CRPropListPriv"></a><h3>CRPropListPriv</h3>
+<pre class="programlisting">typedef struct _CRPropListPriv CRPropListPriv;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-append"></a><h3>cr_prop_list_append ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        cr_prop_list_append                 (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_to_append</code></em>);</pre>
+<p>
+Appends a property list to the current one.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_to_append</code></em> :</span></p></td>
+<td>the property list to append</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the resulting prop list, or NULL if an error
+occured</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-append2"></a><h3>cr_prop_list_append2 ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        cr_prop_list_append2                (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> *a_prop</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRDeclaration" title="struct CRDeclaration"><span class="type">CRDeclaration</span></a> *a_decl</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_prop</code></em> :</span></p></td>
+<td>the property to consider</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_decl</code></em> :</span></p></td>
+<td>the declaration to consider</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the resulting property list, or NULL in case
+of an error.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-destroy"></a><h3>cr_prop_list_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_prop_list_destroy                (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-get-decl"></a><h3>cr_prop_list_get_decl ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_prop_list_get_decl               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRDeclaration" title="struct CRDeclaration"><span class="type">CRDeclaration</span></a> **a_decl</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_decl</code></em> :</span></p></td>
+<td>out parameter. The property value</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-get-next"></a><h3>cr_prop_list_get_next ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        cr_prop_list_get_next               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>);</pre>
+<p>
+Gets the next prop/decl pair in the list
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of CRPropList</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the next prop/declaration pair of the list,
+or NULL if we reached end of list (or if an error occurs)</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-get-prev"></a><h3>cr_prop_list_get_prev ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        cr_prop_list_get_prev               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>);</pre>
+<p>
+Gets the previous prop/decl pair in the list
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of CRPropList</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the previous prop/declaration pair of the list,
+or NULL if we reached end of list (or if an error occurs)</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-get-prop"></a><h3>cr_prop_list_get_prop ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_prop_list_get_prop               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> **a_prop</code></em>);</pre>
+<p>
+Getter of the property associated to the current instance
+of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_prop</code></em> :</span></p></td>
+<td>out parameter. The returned property</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-lookup-prop"></a><h3>cr_prop_list_lookup_prop ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_prop_list_lookup_prop            (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> *a_prop</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> **a_pair</code></em>);</pre>
+<p>
+Lookup a given property/declaration pair
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_prop</code></em> :</span></p></td>
+<td>the property to lookup</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK if a prop/decl pair has been found,
+CR_VALUE_NOT_FOUND_ERROR if not, or an error code if something
+bad happens.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-prepend"></a><h3>cr_prop_list_prepend ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        cr_prop_list_prepend                (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_to_append</code></em>);</pre>
+<p>
+Prepends a list to the current list
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new properties list.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-prepend2"></a><h3>cr_prop_list_prepend2 ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        cr_prop_list_prepend2               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> *a_prop</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRDeclaration" title="struct CRDeclaration"><span class="type">CRDeclaration</span></a> *a_decl</code></em>);</pre>
+<p>
+Prepends a propertie to a list of properties
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_decl</code></em> :</span></p></td>
+<td>the property value to append.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new property list.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-set-decl"></a><h3>cr_prop_list_set_decl ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_prop_list_set_decl               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-declaration.html#CRDeclaration" title="struct CRDeclaration"><span class="type">CRDeclaration</span></a> *a_decl</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_decl</code></em> :</span></p></td>
+<td>the new property value.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-set-prop"></a><h3>cr_prop_list_set_prop ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_prop_list_set_prop               (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> *a_prop</code></em>);</pre>
+<p>
+Sets the property of a CRPropList
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_prop</code></em> :</span></p></td>
+<td>the property to set</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-prop-list-unlink"></a><h3>cr_prop_list_unlink ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="returnvalue">CRPropList</span></a> *        cr_prop_list_unlink                 (<em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-prop-list.html#CRPropList" title="struct CRPropList"><span class="type">CRPropList</span></a> *a_pair</code></em>);</pre>
+<p>
+Unlinks a prop/decl pair from the list
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current list of prop/decl pairs</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_pair</code></em> :</span></p></td>
+<td>the prop/decl pair to unlink.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new list or NULL in case of an error.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

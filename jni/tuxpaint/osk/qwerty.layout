@@ -1,0 +1,14 @@
+# You can put any keymaps you want,
+# they will be read from the beggining of the file
+# and in case of overlaps, the later ones will overwrite
+# the first ones.
+#
+# At this moment, only the first h_layout will be read.
+
+layout qwerty.h_layout
+keymap us-intl-altgr-dead-keys.keymap
+dead_keys_map	 dead_keys.map
+composemap en_US.UTF-8_Compose
+keysymdefs keysymdef.h
+keyboardlist qwerty.layout default.layout
+# 

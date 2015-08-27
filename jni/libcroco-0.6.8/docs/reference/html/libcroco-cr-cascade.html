@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-cascade</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-attr-sel.html" title="cr-attr-sel">
+<link rel="next" href="libcroco-cr-declaration.html" title="cr-declaration">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-attr-sel.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-declaration.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-cascade.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-cascade.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-cascade"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-cascade.top_of_page"></a>cr-cascade</span></h2>
+<p>cr-cascade</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-cascade.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade">CRCascade</a>;
+                    <a class="link" href="libcroco-cr-cascade.html#CRCascadePriv" title="CRCascadePriv">CRCascadePriv</a>;
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-cascade.html#cr-cascade-destroy" title="cr_cascade_destroy ()">cr_cascade_destroy</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_this</code></em>);
+<a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="returnvalue">CRStyleSheet</span></a> *      <a class="link" href="libcroco-cr-cascade.html#cr-cascade-get-sheet" title="cr_cascade_get_sheet ()">cr_cascade_get_sheet</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRStyleOrigin</span> a_origin</code></em>);
+<a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="returnvalue">CRCascade</span></a> *         <a class="link" href="libcroco-cr-cascade.html#cr-cascade-new" title="cr_cascade_new ()">cr_cascade_new</a>                      (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_author_sheet</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_user_sheet</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_ua_sheet</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-cascade.html#cr-cascade-ref" title="cr_cascade_ref ()">cr_cascade_ref</a>                      (<em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-cascade.html#cr-cascade-set-sheet" title="cr_cascade_set_sheet ()">cr_cascade_set_sheet</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_sheet</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRStyleOrigin</span> a_origin</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-cascade.html#cr-cascade-unref" title="cr_cascade_unref ()">cr_cascade_unref</a>                    (<em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_this</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-cascade.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-cascade.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRCascade"></a><h3>struct CRCascade</h3>
+<pre class="programlisting">struct CRCascade {
+	CRCascadePriv *priv ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CRCascadePriv"></a><h3>CRCascadePriv</h3>
+<pre class="programlisting">typedef struct _CRCascadePriv CRCascadePriv;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-cascade-destroy"></a><h3>cr_cascade_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_cascade_destroy                  (<em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_this</code></em>);</pre>
+<p>
+Destructor of <a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-cascade-get-sheet"></a><h3>cr_cascade_get_sheet ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="returnvalue">CRStyleSheet</span></a> *      cr_cascade_get_sheet                (<em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRStyleOrigin</span> a_origin</code></em>);</pre>
+<p>
+Gets a sheet, part of the cascade.
+Note that the returned stylesheet
+is refcounted so if the caller wants
+to manage it's lifecycle, it must use
+<a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-ref" title="cr_stylesheet_ref ()"><code class="function">cr_stylesheet_ref()</code></a>/<a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-unref" title="cr_stylesheet_unref ()"><code class="function">cr_stylesheet_unref()</code></a> instead
+of the <a class="link" href="libcroco-cr-stylesheet.html#cr-stylesheet-destroy" title="cr_stylesheet_destroy ()"><code class="function">cr_stylesheet_destroy()</code></a> method.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_origin</code></em> :</span></p></td>
+<td>the origin of the style sheet as
+defined in the css2 spec in chapter 6.4.
+Gets a given origin sheet.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the style sheet, or NULL if it does not
+exist.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-cascade-new"></a><h3>cr_cascade_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="returnvalue">CRCascade</span></a> *         cr_cascade_new                      (<em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_author_sheet</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_user_sheet</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_ua_sheet</code></em>);</pre>
+<p>
+Constructor of the <a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> class.
+Note that all three parameters of this
+method are ref counted and their refcount is increased.
+Their refcount will be decreased at the destruction of
+the instance of <a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a>.
+So the caller should not call their destructor. The caller
+should call their ref/unref method instead if it wants
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_author_sheet</code></em> :</span></p></td>
+<td>the author origin style sheet.  May be NULL.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_user_sheet</code></em> :</span></p></td>
+<td>the user origin style sheet.  May be NULL.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_ua_sheet</code></em> :</span></p></td>
+<td>the user agent origin style sheet.  May be NULL.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly built instance of CRCascade or NULL if
+an error arose during constrution.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-cascade-ref"></a><h3>cr_cascade_ref ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_cascade_ref                      (<em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_this</code></em>);</pre>
+<p>
+Increases the reference counter of the current instance
+of <a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-cascade-set-sheet"></a><h3>cr_cascade_set_sheet ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_cascade_set_sheet                (<em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> *a_sheet</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CRStyleOrigin</span> a_origin</code></em>);</pre>
+<p>
+Sets a stylesheet in the cascade
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_sheet</code></em> :</span></p></td>
+<td>the stylesheet to set.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_origin</code></em> :</span></p></td>
+<td>the origin of the stylesheet.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error
+code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-cascade-unref"></a><h3>cr_cascade_unref ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_cascade_unref                    (<em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> *a_this</code></em>);</pre>
+<p>
+Decrements the reference counter associated
+to this instance of <a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a>. If the reference
+counter reaches zero, the instance is destroyed 
+using <a class="link" href="libcroco-cr-cascade.html#cr-cascade-destroy" title="cr_cascade_destroy ()"><code class="function">cr_cascade_destroy()</code></a>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of
+<a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a>.</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

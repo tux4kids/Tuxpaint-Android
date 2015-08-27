@@ -1,0 +1,330 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>Tux Paint Frequently Asked Questions</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body alink="#ff00ff" bgcolor="#ffffff" link="#0000ff" text="#000000" vlink="#ff0000">
+<center>
+<h1><img width="220" height="219" src="../../html/images/tuxpaint-title.png" alt="Tux&nbsp;Paint" /><br />
+version  0.9.19  <br />
+Frequently Asked Questions</h1>
+<p>Copyright 2002-2007 by Bill Kendrick and others<br />
+New Breed Software</p>
+<p>翻译:易明晶 <a href="mailto:hackergene@gmail.com">hackergene@gmail.com</a></p>
+<p><a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a><br />
+<a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a></p>
+<p>September 14, 2002 - November 27, 2007</p>
+</center>
+<h2>与绘画相关</h2>
+<ul>
+    <li><em>我加入了字体后只显示方块</em>
+    <p>您使用的这个字体可能编码错误。例如，如果您是使用自定义编码的，您可以尝试通过 FontForge   (<a href="http://fontforge.sourceforge.net/">http://fontforge.sourceforge.net/</a>) 的运行将其编码为   ISO-8859 格式.  (如果您需要特殊的字体，请给我们发送.)</p>
+    </li>
+    <li><em>橡皮图章变成了灰色，而无法使用!</em>
+    <p>这说明Tux&nbsp;Paint没有找到任何图章,或者此时不能加在图章.</p>
+    <p>如果您安装了 Tux&nbsp;Paint, 但未安装独立的可选的&quot;图章&quot; 集, 那么请您退出Tux&nbsp;Paint然后安装它.   安装后即可使用。</p>
+    <p>如果您不想安装默认的图章集，您完全可以自己创建它。 参看 <a href="http://www.tuxpaint.org/docs/html/EXTENDING.html">EXTENDING   TUX PAINT documentation</a> 获得更多信息以创建图章。图章的格式包括 PNG, SVG图片格式 ,   TXT文本格式 , Ogg , MP3&nbsp; WAV 声音文件,   and DAT 文本数据文件.</p>
+    <p>最后, 如果您安装了图章，并且想加载他们，请确认 &quot;nostamps&quot; 选项未被选中.   (Tux Paint命令行下没有 &quot;<code>--nostamps</code>&quot; 选项, 配置文件中没有 &quot;<code>nostamps=yes</code>&quot; .)</p>
+    <p>如果被选中, 请更改或移去命令行中的 &quot;<code>--stamps</code>&quot;选项或者在配置文件中更改为   &quot;<code>nostamps=no</code>&quot; .</p>
+    <ul>
+        <li><em>&quot;Fill&quot; 魔法工具效果不好</em>
+        <p>Tux&nbsp;Paint是在填充颜色时进行精确的像素对比。这个速度很快，但效果不好。在命令行下运行   &quot;<code>tuxpaint&nbsp;--version</code>&quot; 您将会看到, 输出:   &quot;Low Quality Flood Fill enabled（低质量填充被激活）&quot;.</p>
+        <p>如果要对此进行更改，你需要重新编译源码。请确定移除或者注释掉下段:</p>
+        <blockquote>
+        <p><code>         #define LOW_QUALITY_FLOOD_FILL   </code></p>
+        <p>in the &quot;tuxpaint.c&quot; file in the &quot;src&quot; directory.</p>
+        </blockquote></li>
+        <li>
+        <p>图章的边框总是显示的方形</p>
+        <p>Tux&nbsp;Paint 由低质量而高速度的图章边框构成.</p>
+        <p>重新编译源码.  请确定移除或者注释掉下段:</p>
+        <blockquote>
+        <p><code>           #define LOW_QUALITY_STAMP_OUTLINE   </code></p>
+        </blockquote>
+        <p>in the &quot;tuxpaint.c&quot; file in the &quot;src&quot; directory.</p>
+        </li>
+    </ul>
+    </li>
+</ul>
+<h2>界面问题</h2>
+<ul>
+    <li><em>在图章选择器里，图章缩略图显示效果不好。</em>
+    <p>Tux&nbsp;Paint 由低质量但是快速的所略图源码编译而成. 在命令行运行:   &quot;<code>tuxpaint&nbsp;--version</code>&quot; . 如果在输出中, 您看到:   &quot;Low Quality Thumbnails enabled&quot;, 那么这就是问题所在.</p>
+    <p>重新编译源码.  请确定移除或者注释掉下段:</p>
+    <blockquote>
+    <p><code>             #define LOW_QUALITY_THUMBNAILS   </code></p>
+    </blockquote>
+    <p>in the &quot;tuxpaint.c&quot; file in the &quot;src&quot; directory.</p>
+    </li>
+    <li><em>在'打开' 对话框中，图片显示效果不好</em>
+    <p>可能是您激活了&quot;Low Quality Thumbnails&quot; .   查看上面的&quot;在图章选择器里，图章所略图显示效果不好&quot;.</p>
+    </li>
+    <li><em>颜色拾取器的按键是方形的，不好看。</em>
+    <p>Tux&nbsp;Paint 是在禁止漂亮的颜色拾取器按钮默认下编译的. 在命令行运行:   &quot;<code>tuxpaint&nbsp;--version</code>&quot; . 如果看到:   &quot;Low Quality Color Selector enabled&quot;, 那么这就是原因所在.</p>
+    <p>重新编译源码. 请确定移除或者注释掉下段:</p>
+    <blockquote>
+    <p><code>         #define LOW_QUALITY_COLOR_SELECTOR   </code></p>
+    </blockquote>
+    <p>in the &quot;tuxpaint.c&quot; file in the &quot;src&quot; directory.</p>
+    </li>
+    <li><em>所有的输入都是大写!</em>
+    <p>开启了&quot;uppercase&quot; 选项.</p>
+    <p>如果您是在命令行下运行 Tux&nbsp;Paint , 请确定没有加上 &quot;<code>--uppercase</code>&quot; 选项参数.</p>
+    <p>如果您是通过双击按钮来运行Tux Paint, 查看是否加上 &quot;<code>--uppercase</code>&quot; 选项参数.</p>
+    <p>如果命令行下没有加上&quot;<code>--uppercase</code>&quot;参数, 检查配置文件 (Linux 和 Unix下 &quot;~/.tuxpaintrc&quot;文件 ,   Windows下 &quot;tuxpaint.cfg&quot;文件) 是否存在:   &quot;<code>uppercase=yes</code>&quot;.</p>
+    <p>移除那一行, 或者在命令行下运行 Tux&nbsp;Paint 时加上: &quot;<code>--mixedcase</code>&quot;参数, 它将会失大写失效。</p>
+    <p>或者使用 Tux&nbsp;Paint&nbsp;Config配置文件. 或者确定   &quot;Show Uppercase Text Only&quot; (under &quot;Languages&quot;)<span style="font-style: italic;">没有被选中.</span></p>
+    </li>
+    <li><em>Tux&nbsp;Paint 语言!</em>
+    <p>请确定您的本地设置正确. 查看下面的 &quot;Tux&nbsp;Paint 不能更改语言&quot;.</p>
+    </li>
+    <li><em>Tux&nbsp;Paint不能更改语言</em>
+    <ul>
+        <li><i>Linux and Unix users: 确定 locale 文件可用</i></li>
+        <p>确定locale文件可用. 检查     &quot;/etc/locale.gen&quot; file. 查看     <a href="http://www.tuxpaint.org/docs/html/OPTIONS.html">OPTIONS documentation</a> (特别是 &quot;<code>--lang</code>&quot; 选项参数).</p>
+        <p>注意: Debian 用户如果使用&quot;dpkg&quot;管理locales文件的话，可以十分简便地运行 &quot;<code>dpkg-reconfigure locales</code>&quot; .</p>
+        <ul>
+            <li>如果在命令行下使用&quot;<code>--lang</code>&quot;参数
+            <p>可以使用&quot;<code>--locale</code>&quot; 选项参数, 或者您的操作系统的locale设置 (如.,&nbsp; &quot;<code>$LANG</code>&quot; 环境变量), 也可以将您的问题通过邮件发送给我们.</p>
+            </li>
+            <li>如果在命令行下使用&quot;<code>--locale</code>&quot;参数
+            <p>如果不起作用,请将您的问题通过邮件发送给我们</p>
+            </li>
+            <li>如果您尝试使用您操作系统的 locale文件
+            <p>如果不起作用，请将您的问题通过邮件发送给我们.</p>
+            </li>
+            <li>确定您有必须的字体文件
+            <p>一些翻译需要其自身的字体文件, 例如, 本地安装，相应的需要中文中文或者韩语的字体文件.</p>
+            <p>locale对应的字体文件可以在       Tux&nbsp;Paint 网站上下载:</p>
+            <blockquote>
+            <p><a href="http://www.tuxpaint.org/download/fonts/">http://www.tuxpaint,org/download/fonts/</a></p>
+            </blockquote></li>
+        </ul>
+    </ul>
+    </li>
+</ul>
+<h2>打印</h2>
+<ul>
+    <li><em>Tux&nbsp;Paint不打印,提示错误,或者打印混乱         (Unix/Linux)</em>
+    <p>Tux&nbsp;Paint 是依靠创建图片的页面描述然后将其发送给外部命令. 默认情况下, 这个命令是 &quot;lpr&quot; 打印工具.</p>
+    <p>如果程序不可用(例如, 您正在使用 CUPS, 普通的操作系统, 并没有安装 &quot;cups-lpr&quot; ), 您需要在Tux Paint配置文件中特别的使用   &quot;printcommand&quot; 选项 .   (查看 <a href="http://www.tuxpaint.org/docs/html/OPTIONS.html">OPTIONS documentation</a>.)</p>
+    <p><i>注意:</i> Tux&nbsp;Paint 0.9.15版本 和其他版本不同,他的打印命令是&quot;pngtopnm&nbsp;|&nbsp;pnmtops&nbsp;|&nbsp;lpr&quot;.</p>
+    <p>如果您在Tux Paint 0.9.15中优先使用&quot;printcommand&quot; 选项, 您需要返回并修改它以访问页面描述.</p>
+    </li>
+    <li><em>当打印时，出现提示信息 &quot;当前无法打印!&quot; !</em>
+    <p>&quot;print delay（打印延时）&quot; 选项被打开. 您只能在某个时间段内打印一次.</p>
+    <p>如果您从命令行运行 Tux&nbsp;Paint , 请确定没有选中 &quot;<code>--printdelay=...</code>&quot; 选项参数.</p>
+    <p>如果您是通过双击图标来运行 Tux&nbsp;Paint , 检查在命令框内是否有 &quot;<code>--printdelay=...</code>&quot; .</p>
+    <p>如果命令行中没有&quot;<code>--printdelay=...</code>&quot; , 检查 Tux&nbsp;Paint's 配置文件 (Linux Unix系统 &quot;~/.tuxpaintrc&quot; , Windows系统 &quot;tuxpaint.cfg&quot;) 是否有:   &quot;<code>printdelay=...</code>&quot;.</p>
+    <p>移除它或者将其值设置为 0 (非延迟), 或者降低到你需要的延时时间.  (参看   <a href="http://www.tuxpaint.org/docs/html/OPTIONS.html">OPTIONS documentation</a>).</p>
+    <p>或者, 您可以简单的通过加上参数:   &quot;<code>--printdelay=0</code>&quot;来运行Tux Paint,以此消除配置文件配置并准许无限制的打印.</p>
+    <p>或者使用Tux Paint配置文件. 在   &quot;Print Delay&quot; 后设置为 &quot;0&nbsp;seconds.&quot;</p>
+    </li>
+    <li><em>打印图标灰色不可用!</em>
+    <p>&nbsp;&quot;no print&quot; 选项被选中.</p>
+    <p>如果您是通过命令行运行Tux Paint, 确定您没有加入 &quot;<code>--noprint</code>&quot; 参数.</p>
+    <p>如果您是通过双击图标来运行Tux&nbsp;Paint, 检查命令框内没有 &quot;<code>--noprint</code>&quot; .</p>
+    <p>如果命令行内没有&quot;<code>--noprint</code>&quot; , 检查配置文件 (Linux Unix系统&quot;~/.tuxpaintrc&quot; , Windows系统&quot;tuxpaint.cfg&quot; ) 是否有:  &quot;<code>noprint=yes</code>&quot;.</p>
+    <p>移除它,或者加入: &quot;<code>--print</code>&quot;参数,这将消除配置文件的配置.</p>
+    <p>或者使用Tux&nbsp;Paint&nbsp;Config. 然后确定   &quot;Allow Printing&quot;选项存在</p>
+    </li>
+</ul>
+<h2>保存</h2>
+<ul>
+    <li><em>我的图片都存在哪了?</em>
+    <p>除非你要求 Tux&nbsp;Paint 储存到一个指定的位置   (使用 'savedir' 选项), Tux&nbsp;Paint 都将在你本地驱动器中储存在一个标准的位置:</p>
+    <ul>
+        <li>Windows<br />
+        在用户的&quot;应用程序&quot; 文件夹:<br />
+        如., <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\saved</code></li>
+        <li>Mac OS X<br />
+        在用户的&quot;Application&nbsp;Support&quot; 文件夹r:<br />
+        如., <code>/Users/<i>Username</i>/Library/Applicaton Support/TuxPaint/saved/</code></li>
+        <li>Linux / Unix<br />
+        在用户<code>$HOME</code> 分区,&nbsp; &quot;.tuxpaint&quot; 隐藏文件夹:<br />
+        如., <code>/home/<i>username</i>/.tuxpaint/saved/</code></li>
+    </ul>
+    <p>T图片将被储存为 PNG 位图格式, 这个格式是当今最流行以至于容易被读取</p>
+    </li>
+    <li><em>Tux&nbsp;Paint总是覆盖我的旧图片!</em>
+    <p>&nbsp;激活了&quot;覆盖&quot; 选项.</p>
+    <p>如果您通过命令运行Tux Paint, 请确定没有加上 &quot;<code>--saveover</code>&quot; 选项参数.</p>
+    <p>如果您是通过双击图标来运行Tux Paint, 请检查命令框内是否存在 &quot;<code>--saveover</code>&quot; 参数.</p>
+    <p>如果在命令行下没有&quot;<code>--saveover</code>&quot; 参数, 请检查   Tux&nbsp;Paint配置文件 (Linux Unix系统&quot;~/.tuxpaintrc&quot; , Windows &quot;tuxpaint.cfg&quot; ) 是否显示:  &quot;<code>saveover=yes</code>&quot;参数.</p>
+    <p>移除它, 或者通过简单的加上参数: &quot;<code>--saveoverask</code>&quot;, 这将消除配置文件的配置.</p>
+    <p>或者使用Tux&nbsp;Paint&nbsp;Config. 然后确定   &quot;Ask Before Overwriting&quot; 存在 .</p>
+    </li>
+    <li><em>Tux&nbsp;Paint总是存储为新图片!</em>
+    <p>&quot;never save over&quot; 选项被激活.</p>
+    <p>如果您通过命令运行Tux Paint, 请确定没有加上 &quot;<code>--saveovernew</code>&quot; 参数.</p>
+    <p>如果您是通过双击图标来运行Tux Paint, 请检查命令框内是否存在 &quot;<code>--saveovernew</code>&quot; 参数.</p>
+    <p>如果在命令行下没有 &quot;<code>--saveovernew</code>&quot;&nbsp; 请检查   Tux&nbsp;Paint配置文件 (Linux Unix系统&quot;~/.tuxpaintrc&quot; , Windows &quot;tuxpaint.cfg&quot; ) 是否显示:  &quot;<code>saveover=new</code>&quot;.</p>
+    <p>移除它, 或者通过简单的加上参数: &quot;<code>--saveoverask</code>&quot;, 这将消除配置文件的配置.</p>
+    或者使用Tux&nbsp;Paint&nbsp;Config. 然后确定   &quot;Ask Before Overwriting&quot; 存在 .</li>
+</ul>
+<h2>声音问题</h2>
+<ul>
+    <li><em>没有声音!</em>
+    <ul>
+        <li><em>首先, 检查最常见的问题:</em>
+        <ul>
+            <li>扬声器开关是否打开以及电源是否连接?</li>
+            <li>扬声器声音是否打开?</li>
+            <li>操作系统的混音控制器(&quot;mixer&quot;)是否打开声音?&quot;</li>
+            <li>您是否确定您的机器安装了声卡?</li>
+            <li>是否有其他程序使用了该声音?  (即是否其他程序禁止了 Tux&nbsp;Paint 访问声音设备)</li>
+            <li>(Unix/Linux) 您是否正在使用某个声音系统, 诸如 aRts, ESD 或       GStreamer? 如果是, 请在运行Tux Paint前设置 &quot;SDL_AUDIODRIVER&quot; 环境变量 (如.,       &quot;<code>export&nbsp;SDL_AUDIODRIVER=arts</code>&quot;). 或者,  通过系统另一线路运行 Tux&nbsp;Paint (如., 运行 &quot;<code>artsdsp&nbsp;tuxpaint</code>&quot; 或       &quot;<code>esddsp&nbsp;tuxpaint</code>&quot;, 取代 &quot;<code>tuxpaint</code>&quot;).</li>
+        </ul>
+        </li>
+        <li><em>Tux Paint是否被禁音?</em>
+        <p>如果可以通过别的方法让声音工作(您必须确认没有其他程序禁止Tux Paint访问声音设备), 那么很可能是 Tux&nbsp;Paint 选中了 &quot;no&nbsp;sound&quot; 选项.</p>
+        <p>确定您在命令行运行 Tux&nbsp;Paint 没有加上&quot;<code>--nosound</code>&quot; 选项参数.     (查看 <a href="http://www.tuxpaint.org/docs/html/OPTIONS.html">OPTIONS</a> documentation )</p>
+        <p>如果在命令行下没有, 请检查     (Linux Unix系统&quot;/etc/tuxpaint/tuxpaint.conf&quot; 和 &quot;~/.tuxpaintrc&quot; , Windows系统 &quot;tuxpaint.cfg&quot; ) 是否有:     &quot;<code>nosound=yes</code>&quot;.</p>
+        <p>移除它, 或者通过简单的加上参数: &quot;<code>--sound</code>&quot;, 这将消除配置文件的配置.</p>
+        <p>或者使用Tux&nbsp;Paint&nbsp;Config. 确定&nbsp; &quot;Enable Sound Effects&quot; 存在,然后点击 &quot;Apply&quot;.</p>
+        </li>
+        <li><em>声音被临时禁用了吗?</em>
+        <p>如果声音在Tux&nbsp;Paint里被激活, 可以使用     <b>[Alt]</b>&nbsp;+&nbsp;<b>[S]</b> 组合键禁用和激活声音.  当没有声音时，尝试按下组合键来看看声音是否可以正常工作T.</p>
+        </li>
+        <li><em>Tux Paint安装时是否没有启用声音支持?</em>
+        <p>Tux Paint在编译事或许没有启用声音支持.     测试在编译时是否使用了声音支持, 您可以在命令行下运行 Tux&nbsp;Paint:</p>
+        <blockquote>
+        <p><code>           tuxpaint --version     </code></p>
+        </blockquote>
+        <p>如果您看到 &quot;Sound disabled&quot;, 那么您运行的 Tux&nbsp;Paint 的声音被禁用了. 重新编译     Tux&nbsp;Paint,并且不要使用 &quot;nosound&quot; 参数.&nbsp; 请确保 SDL_mixer 库文件和它的开发头文件可用 !</p>
+        </li>
+    </ul>
+    </li>
+    <li><em>Tux Paint 太吵了! 我可以将声音关闭?</em>
+    <p>当然了,有很多方法可以禁用 Tux Paint 的声音:</p>
+    <ul>
+        <li>按下<b>[Alt]</b>&nbsp;+&nbsp;<b>[S]</b>组合键在启用声音与禁用声音间切换.</li>
+        <li>运行Tux&nbsp;Paint的 &quot;no&nbsp;sound&quot; 参数:
+        <ul>
+            <li>使用Tux&nbsp;Paint&nbsp;Config配置文件禁用 &quot;Enable Sound Effects&quot; 选项.</li>
+            <li>编辑Tux&nbsp;Paint配置文件 (查看       <a href="http://www.tuxpaint.org/docs/html/OPTIONS.html">OPTIONS</a> 更多细节) 加上一行 &quot;<code>nosound=yes</code>&quot;.</li>
+            <li>在命令行或者桌面图标上加上&quot;<code>tuxpaint&nbsp;--nosound</code>&quot;.</li>
+            <li>禁用声音支持，重新编译Tux&nbsp;Paint.       (查看 <a href="http://www.tuxpaint.org/docs/INSTALL.txt">INSTALL.txt</a>.)</li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><em>音效听起来很怪</em>
+    <p>这个问题或许和启动的 SDL and SDL_mixer 模块有关.   (取决于缓存大小.)</p>
+    <p>请将您的计算机系统细节通过邮件发送给我们.</p>
+    </li>
+</ul>
+<h2>全屏模式问题</h2>
+<ul>
+    <li><em>当我运行全屏模式和按下时, ALT-TAB 时, 黑屏!</em>
+    <p>这很显然是SDL 库的问题.</p>
+    </li>
+    <li><em>当我运行 Tux&nbsp;Paint全屏模式时,他周围有一个大边框.</em>
+    <p>Linux 用户 - 您的 X-Window 服务没有设置为可转换为: 800&times;600.</p>
+    <p>为了解决这个问题, 您的监视器必须支持该分辨率, 而且您并许将其列在您的 X server 配置文件中.</p>
+    <p>点击&quot;Display&quot; 通过您的   XFree86 或r X.org 配置文件 (如 &quot;/etc/X11/XF86Config-4&quot; 或   &quot;/etc/X11/XF86Config&quot;).</p>
+    <p>在合适的&quot;Modes&quot;行中加入&quot;800x600&quot; . 如:</p>
+    <p>&nbsp;</p>
+    <blockquote>
+    <p><code>         Modes &quot;1280x1024&quot; &quot;1024x768&quot; &quot;800x600&quot; &quot;640x480&quot;   </code></p>
+    </blockquote>
+    <p>有些Linux发行提供了相应的工具.  如Debian 用户可以用root运行   &quot;dpkg-reconfigure xserver-xfree86&quot; .</p>
+    </li>
+    <li><em>Tux&nbsp;Paint 一直以全屏模式运行 - 我想要它以窗体形式运行!</em>
+    <p>设定了&quot;fullscreen&quot; .</p>
+    <p>如果您是从命令行运行Tux&nbsp;Paint, 请确定您没有加上 &quot;<code>--fullscreen</code>&quot;选项参数.</p>
+    <p>如果您是通过双击图标来运行Tux&nbsp;Paint, 请检查命令框内是否有 &quot;<code>--fullscreen</code>&quot; 参数.</p>
+    <p>如果命令行下没有, 请检查 Tux&nbsp;Paint的配置文件 (Linux Unix系统&quot;~/.tuxpaintrc&quot; , Windows &quot;tuxpaint.cfg&quot; ) 是否显示:   &quot;<code>fullscreen=yes</code>&quot;.</p>
+    <p>移除它, 或者通过简单的加上参数: &quot;<code>--windowed</code>&quot;, 这将消除配置文件的配置.</p>
+    <p>或者使用Tux&nbsp;Paint&nbsp;Config. 然后确定使用了   &quot;Fullscreen&quot; .</p>
+    </li>
+</ul>
+<h2>其他问题</h2>
+<ul>
+    <li><em>Tux&nbsp;Paint不能运行</em>
+    <p>如果Tux&nbsp;Paint中止后提示:   &quot;You're already running a copy of Tux&nbsp;Paint!&quot;, 这表明它已经在30秒前运行了.   (在 Unix/Linux中, 如果用户是从命令行运行 Tux&nbsp;Paint 那么该消息会在终端中显示.在Windows中, 该消息会显示在一个命名为 &quot;<code>stdout.txt</code>&quot; 的文件,并放在和<code>TuxPaint.exe<span style="font-family: Arial,Verdana,sans-serif;">文件的同意文件夹内</span></code> (如., in   <code>C:\Program&nbsp;Files\TuxPaint</code>).</p>
+    <p>封锁文件(Linux/Unix&quot;~/.tuxpaint/lockfile.dat&quot;,   Windows &quot;userdata\lockfile.dat&quot; )让Tux&nbsp;Paint一次不能多次运行 .</p>
+    <p>即使该封锁文件存在, 它也包含了Tux&nbsp;Paint上次运行的时间(&quot;time&quot;). 如果大于30秒, Tux&nbsp;Paint将运行很顺利,   并且以现在的时间去更新封锁文件.</p>
+    <p>如果多用户正在使用储存文件的路径   (如 一个网络共享驱动器), 那么您需要禁用此功能.</p>
+    <p>禁用封锁文件, 在命令行中加入 &quot;<code>--nolockfile</code>&quot; 参数.</p>
+    </li>
+    <li><em>Tux&nbsp;Paint无法退出</em>
+    <p>设置了&quot;noquit&quot; 选项. 禁用了Tux&nbsp;Paint的工具栏中的&quot;Quit&quot;按钮. (显示灰色), 防止 Tux&nbsp;Paint 从失误按住 <b>[Escape]</b>键导致退出.</p>
+    <p>如果Tux&nbsp;Paint 不是全屏模式, 只需点击窗体上的关闭按钮即可.</p>
+    <p>如果Tux&nbsp;Paint 是全屏模式, 可通过键盘上的   <b>[Shift] + [Control] + [Escape]</b> 来退出 Tux&nbsp;Paint.</p>
+    <p>(提示: 不论是否设定 &quot;noquit&quot; , 您总可以使用   <b>[Alt] + [F4]</b> 组合键来退出 Tux&nbsp;Paint.)</p>
+    </li>
+    <li><em>不能激活 &quot;noquit&quot; 模式!</em>
+    <p>如果您是通过命令行运行Tux Paint, 请确认您没有使用 &quot;<code>--noquit</code>&quot; 参数.</p>
+    <p>如果您是通过双击图标运行Tux&nbsp;Paint,请检查命令框里是否含有 &quot;<code>--noquit</code>&quot; 参数.</p>
+    <p>如果没有&quot;<code>--noquit</code>&quot; 参数, 请查看配置文件 (Linux/Unix系统&quot;~/.tuxpaintrc&quot; ,Windows    &quot;tuxpaint.cfg&quot;) 是否含有:   &quot;<code>noquit=yes</code>&quot;.</p>
+    <p>移除它, 或者通过简单的加上参数: &quot;<code>--quit</code>&quot;, 这将消除配置文件的配置.</p>
+    <p>&nbsp;或者使用Tux&nbsp;Paint&nbsp;Config. 然后确定使用了   &quot;Disable Quit Button 和 [Escape] Key&quot; .</p>
+    </li>
+    <li><em>Tux&nbsp;Paint 不断向显示向屏幕输出奇怪信息</em>
+    <p>少量的信息属于正常,但如果Tux&nbsp;Paint过度冗余, 那么它就会随着调试编译显示信息.</p>
+    <p>从源码重新编译. 移除或者注释掉下段:</p>
+    <blockquote>
+    <p><code>             #define DEBUG   </code></p>
+    </blockquote>
+    <p>in the &quot;tuxpaint.c&quot; file in the &quot;src&quot; directory.</p>
+    </li>
+    <li><em>Tux&nbsp;Paint使用我未指定的选项功能!</em>
+    <p>默认情况下, Tux&nbsp;Paint首先参照配置文件.</p>
+    <ul>
+        <li><i>Unix and Linux</i>
+        <p>在 Unix 和 Linux下, 它首先检查系统范围内的配置文件, 路径为:</p>
+        <blockquote>
+        <p><code>           /etc/tuxpaint/tuxpaint.conf     </code></p>
+        </blockquote>
+        <p>然后检查用户个人配置:</p>
+        <blockquote>
+        <p><code>           ~/.tuxpaintrc     </code></p>
+        </blockquote>
+        <p>最后,使用命令行下的选项.</p>
+        </li>
+        <li><i>Windows</i>
+        <p>&nbsp;Windows下, Tux&nbsp;Paint 首先检查配置文件:</p>
+        <blockquote>
+        <p><code>           tuxpaint.cfg     </code></p>
+        </blockquote>
+        <p>&nbsp;</p>
+        <p>然后, 使用命令行下的选项.</p>
+        </li>
+    </ul>
+    <p>这就是说如果配置文件里有一些选项你并不想启用,那么您需要修改配置文件,或者运行时在命令行中加入参数控制.</p>
+    <p>例如, 如果 &quot;/etc/tuxpaint/tuxpaint.conf&quot; 包含了一个禁用音效选项:</p>
+    <blockquote>
+    <p><code>         nosound=yes   </code></p>
+    </blockquote>
+    <p>&nbsp;</p>
+    <p>您可以在&quot;.tuxpainrc&quot; 文件中加上:</p>
+    <blockquote>
+    <p><code>         sound=yes   </code></p>
+    </blockquote>
+    <p>&nbsp;</p>
+    <p>或者在命令行使用参数:</p>
+    <blockquote>
+    <p><code>         --sound   </code></p>
+    </blockquote>
+    <p>&nbsp;</p>
+    <p>Linux 和 Unix 用户 可以使用命令行参数控制全局配置:</p>
+    <blockquote>
+    <p><code>         --nosysconfig   </code></p>
+    </blockquote>
+    <p>&nbsp;</p>
+    <p>Tux&nbsp;Paint 将仅仅查看 &quot;~/.tuxpaintrc&quot; 文件和命令行以决定哪个选项应该被启用.</p>
+    </li>
+</ul>
+<h2>帮助/联系</h2>
+<p>任何问题请联系Tux Paint开发团队!</p>
+<blockquote>
+<p><a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a></p>
+</blockquote>
+<p>或者加入我们的邮件列表:</p>
+<blockquote>
+<p><a href="http://www.tuxpaint.org/lists/">http://www.tuxpaint.org/lists/</a></p>
+</blockquote>
+<p>此外我们推荐您登陆Tux Paint中文官方以获得最直接的中文信息:<p>
+<blockquote>
+<p><a href="http://tuxpaint.cn">http://tuxpaint.cn</a></p>
+</blockquote>
+</body></html>

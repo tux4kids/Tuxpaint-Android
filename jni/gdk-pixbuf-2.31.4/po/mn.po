@@ -1,0 +1,1395 @@
+# translation of mn.po to Mongolian
+# translation of gtk+.HEAD.po to Mongolian
+# translation of gtk+.mn.po to Mongolian
+# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) 2003 OpenMN team
+# SukhOchir <sukhochir@csms.edu.mn>
+# Sanlig Badral <badral@openmn.org>, 2003, 2004.
+# Sanlig Badral <Badral@openmn.org>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mn\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gdk-"
+"pixbuf\n"
+"POT-Creation-Date: 2015-05-11 15:49-0400\n"
+"PO-Revision-Date: 2004-03-17 17:16+0100\n"
+"Last-Translator: Sanlig Badral <badral@openmn.org>\n"
+"Language-Team: Mongolian <openmn-gnome@lists.sf.net>\n"
+"Language: mn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# gdk-pixbuf/gdk-pixbuf-animation.c:144 gdk-pixbuf/gdk-pixbuf-io.c:581
+#: gdk-pixbuf/gdk-pixbuf-animation.c:158 gdk-pixbuf/gdk-pixbuf-io.c:1101
+#: gdk-pixbuf/gdk-pixbuf-io.c:1357
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "\"%s\" файл нээгдсэнгүй: %s"
+
+# gdk-pixbuf/gdk-pixbuf-animation.c:155 gdk-pixbuf/gdk-pixbuf-io.c:591
+#: gdk-pixbuf/gdk-pixbuf-animation.c:171 gdk-pixbuf/gdk-pixbuf-io.c:986
+#, c-format
+msgid "Image file '%s' contains no data"
+msgstr "\"%s\" зургийн файл өгөгдөл агуулаагүй"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:210
+#, c-format
+msgid ""
+"Failed to load animation '%s': reason not known, probably a corrupt "
+"animation file"
+msgstr ""
+"Хөдөлгөөнт зураг \"%s\" ачаалагдсангүй: Шалтгаан нь тодорхойгүй, магадгүй "
+"хөдөлгөөнт зурагийн файл эвдэрсэн бололтой"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:278 gdk-pixbuf/gdk-pixbuf-io.c:1137
+#: gdk-pixbuf/gdk-pixbuf-io.c:1409
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"\"%s\" зураг ачаалагдсангүй: Шалтгаан нь тодорхойгүй, магадгүй зураг "
+"эвдэрхий бололтой"
+
+#: gdk-pixbuf/gdk-pixbuf.c:161
+msgid "Number of Channels"
+msgstr ""
+
+# gdk-pixbuf/io-xpm.c:1267
+#: gdk-pixbuf/gdk-pixbuf.c:162
+#, fuzzy
+msgid "The number of samples per pixel"
+msgstr "XPM тэмдэгтүүдийн цэг бүрийн дугаар буруу "
+
+#: gdk-pixbuf/gdk-pixbuf.c:171
+msgid "Colorspace"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:172
+msgid "The colorspace in which the samples are interpreted"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:180
+msgid "Has Alpha"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:181
+msgid "Whether the pixbuf has an alpha channel"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:194
+msgid "Bits per Sample"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:195
+msgid "The number of bits per sample"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:204
+msgid "Width"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:205
+msgid "The number of columns of the pixbuf"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:214
+msgid "Height"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:215
+msgid "The number of rows of the pixbuf"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:231
+msgid "Rowstride"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:232
+msgid ""
+"The number of bytes between the start of a row and the start of the next row"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:241
+msgid "Pixels"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:242
+msgid "A pointer to the pixel data of the pixbuf"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:256
+msgid "Pixel Bytes"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:257
+msgid "Readonly pixel data"
+msgstr ""
+
+# gdk-pixbuf/gdk-pixbuf-io.c:354
+#: gdk-pixbuf/gdk-pixbuf-io.c:798
+#, c-format
+msgid "Unable to load image-loading module: %s: %s"
+msgstr "Зураг ачаалагч модулийг ачаалах боломжгүй байна: %s: %s"
+
+# gdk-pixbuf/gdk-pixbuf-io.c:373
+#: gdk-pixbuf/gdk-pixbuf-io.c:813
+#, fuzzy, c-format
+msgid ""
+"Image-loading module %s does not export the proper interface; perhaps it's "
+"from a different gdk-pixbuf version?"
+msgstr ""
+"Зураг ачаалагч модул \"%s\" зөв интерфейсийг гаргаж чадахгүй байна.Магад энэ "
+"нь ялгаатай GTK хувилбараас байж болох юм."
+
+# gdk-pixbuf/gdk-pixbuf-io.c:490 gdk-pixbuf/gdk-pixbuf-io.c:516
+#: gdk-pixbuf/gdk-pixbuf-io.c:822 gdk-pixbuf/gdk-pixbuf-io.c:873
+#, c-format
+msgid "Image type '%s' is not supported"
+msgstr "Зургийн \"%s\" төрөл дэмжигдээгүй"
+
+# gdk-pixbuf/gdk-pixbuf-io.c:538
+#: gdk-pixbuf/gdk-pixbuf-io.c:958
+#, c-format
+msgid "Couldn't recognize the image file format for file '%s'"
+msgstr "\"%s\" файлын зургийн төрөл танигдахгүй байна"
+
+# gdk-pixbuf/gdk-pixbuf-io.c:544
+#: gdk-pixbuf/gdk-pixbuf-io.c:966
+msgid "Unrecognized image file format"
+msgstr "Зургийн файлын төрөл танигдсангүй"
+
+# gdk-pixbuf/gdk-pixbuf-io.c:647
+#: gdk-pixbuf/gdk-pixbuf-io.c:1148
+#, c-format
+msgid "Failed to load image '%s': %s"
+msgstr "\"%s\" зураг ачаалагдсангүй: %s"
+
+# gdk-pixbuf/io-jpeg.c:125
+#: gdk-pixbuf/gdk-pixbuf-io.c:2175 gdk-pixbuf/io-gdip-utils.c:838
+#, c-format
+msgid "Error writing to image file: %s"
+msgstr "Зургийн файл руу бичиж байхад алдаа (%s)"
+
+# gdk-pixbuf/gdk-pixbuf-io.c:752
+#: gdk-pixbuf/gdk-pixbuf-io.c:2217 gdk-pixbuf/gdk-pixbuf-io.c:2338
+#, c-format
+msgid "This build of gdk-pixbuf does not support saving the image format: %s"
+msgstr ""
+"\"gdk-pixbuf\"-ийн энэ байгуулалт нь: %s зургийн төрлийг хадгалахад "
+"тохирохгүй байна"
+
+# gdk-pixbuf/io-xbm.c:293
+#: gdk-pixbuf/gdk-pixbuf-io.c:2248
+msgid "Insufficient memory to save image to callback"
+msgstr "callback руу зураг хадгалах хангалттай санах ой алга"
+
+# gdk-pixbuf/io-tiff.c:273
+#: gdk-pixbuf/gdk-pixbuf-io.c:2261
+msgid "Failed to open temporary file"
+msgstr "Түр зуурын файл нээгдсэнгүй "
+
+# gdk-pixbuf/io-xbm.c:427
+#: gdk-pixbuf/gdk-pixbuf-io.c:2284
+msgid "Failed to read from temporary file"
+msgstr "Түр зуурын файлаас уншигдсангүй"
+
+# gdk-pixbuf/gdk-pixbuf-io.c:859
+#: gdk-pixbuf/gdk-pixbuf-io.c:2534
+#, c-format
+msgid "Failed to open '%s' for writing: %s"
+msgstr "\"%s\" бичихээр нээхэд онгойсонгүй: %s"
+
+# gdk-pixbuf/gdk-pixbuf-io.c:880
+#: gdk-pixbuf/gdk-pixbuf-io.c:2560
+#, c-format
+msgid ""
+"Failed to close '%s' while writing image, all data may not have been saved: "
+"%s"
+msgstr ""
+"Зургийн \"%s\" файлд бичилт хийгээд хаах гэтэл хаагдсангүй, бүх өгөгдөл "
+"хадгалагдаагүй байж болно: %s"
+
+# gdk-pixbuf/io-xbm.c:293
+#: gdk-pixbuf/gdk-pixbuf-io.c:2781 gdk-pixbuf/gdk-pixbuf-io.c:2833
+msgid "Insufficient memory to save image into a buffer"
+msgstr "Буфер рүү зураг хадгалах хангалттай санах ой алга"
+
+# gdk-pixbuf/io-jpeg.c:125
+#: gdk-pixbuf/gdk-pixbuf-io.c:2879
+#, fuzzy
+msgid "Error writing to image stream"
+msgstr "Зургийн файл руу бичиж байхад алдаа (%s)"
+
+# gdk-pixbuf/gdk-pixbuf-loader.c:273 gdk-pixbuf/gdk-pixbuf-loader.c:374
+#: gdk-pixbuf/gdk-pixbuf-loader.c:382
+#, fuzzy, c-format
+msgid ""
+"Internal error: Image loader module '%s' failed to complete an operation, "
+"but didn't give a reason for the failure"
+msgstr ""
+"Дотоод алдаа: Зураг ачаалагч модул \"%s\" зураг ачаалж эхлэхэд бүтэлгүйтлээ, "
+"харин нурсан шалгааныг өгсөнгүй"
+
+# gdk-pixbuf/gdk-pixbuf-loader.c:250
+#: gdk-pixbuf/gdk-pixbuf-loader.c:424
+#, c-format
+msgid "Incremental loading of image type '%s' is not supported"
+msgstr "Зургийн \"%s\" төрлийг нэмэгдүүлэн ачаалах боломжгүй"
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:161
+msgid "Loop"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:162
+msgid "Whether the animation should loop when it reaches the end"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixdata.c:163
+msgid "Image header corrupt"
+msgstr "Зургийн толгой эвдэрсэн"
+
+# gdk-pixbuf/gdk-pixdata.c:151
+#: gdk-pixbuf/gdk-pixdata.c:168
+msgid "Image format unknown"
+msgstr "Зургийн тодорхойгүй төрөл"
+
+# gdk-pixbuf/gdk-pixdata.c:156 gdk-pixbuf/gdk-pixdata.c:457
+#: gdk-pixbuf/gdk-pixdata.c:173 gdk-pixbuf/gdk-pixdata.c:511
+msgid "Image pixel data corrupt"
+msgstr "Зургийн цэгэн өгөгдөл эвдэрсэн"
+
+# gdk-pixbuf/gdk-pixdata.c:403
+#: gdk-pixbuf/gdk-pixdata.c:455
+#, c-format
+msgid "failed to allocate image buffer of %u byte"
+msgid_plural "failed to allocate image buffer of %u bytes"
+msgstr[0] "Зургийн %u байтын буфер байрлуулж чадсангүй"
+msgstr[1] "Зургийн %u байтын буфер байрлуулж чадсангүй"
+
+#: gdk-pixbuf/io-ani.c:242
+msgid "Unexpected icon chunk in animation"
+msgstr "Хөдөлгөөнт зурганд санамсаргүй дүрс"
+
+# gdk-pixbuf/io-ico.c:303
+#: gdk-pixbuf/io-ani.c:340 gdk-pixbuf/io-ani.c:398 gdk-pixbuf/io-ani.c:424
+#: gdk-pixbuf/io-ani.c:447 gdk-pixbuf/io-ani.c:474 gdk-pixbuf/io-ani.c:561
+msgid "Invalid header in animation"
+msgstr "Хөдөлгөөнт зургийн толгой хэсэг хүчингүй"
+
+# gdk-pixbuf/io-ico.c:262 gdk-pixbuf/io-ico.c:318 gdk-pixbuf/io-ico.c:381
+# gdk-pixbuf/io-ico.c:443 gdk-pixbuf/io-ico.c:460
+#: gdk-pixbuf/io-ani.c:350 gdk-pixbuf/io-ani.c:372 gdk-pixbuf/io-ani.c:456
+#: gdk-pixbuf/io-ani.c:483 gdk-pixbuf/io-ani.c:534 gdk-pixbuf/io-ani.c:606
+msgid "Not enough memory to load animation"
+msgstr "Хөдөлгөөнт зураг ачаалахад санах ой хүрэлцэхгүй байна"
+
+#: gdk-pixbuf/io-ani.c:390 gdk-pixbuf/io-ani.c:416 gdk-pixbuf/io-ani.c:435
+msgid "Malformed chunk in animation"
+msgstr "Хөдөлгөөнт зурагт кадр дутуу байна"
+
+# gdk-pixbuf/io-gif.c:1437
+#: gdk-pixbuf/io-ani.c:628
+#, fuzzy
+msgid "ANI image was truncated or incomplete."
+msgstr "GIF зураг тасархай эсвэл дутуу болсон"
+
+#: gdk-pixbuf/io-ani.c:669
+msgctxt "image format"
+msgid "Windows animated cursor"
+msgstr ""
+
+# gdk-pixbuf/io-bmp.c:300 gdk-pixbuf/io-bmp.c:323 gdk-pixbuf/io-bmp.c:382
+#: gdk-pixbuf/io-bmp.c:227 gdk-pixbuf/io-bmp.c:264 gdk-pixbuf/io-bmp.c:358
+#: gdk-pixbuf/io-bmp.c:381 gdk-pixbuf/io-bmp.c:484
+msgid "BMP image has bogus header data"
+msgstr "BMP зургийн толгой өгөгдөл худал байна"
+
+# gdk-pixbuf/io-bmp.c:249 gdk-pixbuf/io-bmp.c:349
+#: gdk-pixbuf/io-bmp.c:238 gdk-pixbuf/io-bmp.c:421
+msgid "Not enough memory to load bitmap image"
+msgstr "Bitmap зураг ачаалахад санах ой хүрэлцэхгүй байна"
+
+# gdk-pixbuf/io-bmp.c:275
+#: gdk-pixbuf/io-bmp.c:316
+msgid "BMP image has unsupported header size"
+msgstr "BMP зургийн толгойн хэмжээ тодорхойгүй"
+
+#: gdk-pixbuf/io-bmp.c:345
+msgid "Topdown BMP images cannot be compressed"
+msgstr ""
+
+# gdk-pixbuf/io-pnm.c:716
+#: gdk-pixbuf/io-bmp.c:705 gdk-pixbuf/io-png.c:530 gdk-pixbuf/io-pnm.c:705
+msgid "Premature end-of-file encountered"
+msgstr "Файлын төгсгөл хэт эрт олдлоо"
+
+# gdk-pixbuf/io-jpeg.c:345 gdk-pixbuf/io-jpeg.c:538 gdk-pixbuf/io-jpeg.c:710
+#: gdk-pixbuf/io-bmp.c:1317
+#, fuzzy
+msgid "Couldn't allocate memory for saving BMP file"
+msgstr "JPEG төрлийн файлыг санах ойд байрлуулж чадсангүй"
+
+# gtk/gtkfilesel.c:3854
+#: gdk-pixbuf/io-bmp.c:1358
+#, fuzzy
+msgid "Couldn't write to BMP file"
+msgstr "Файлын нэр өөрчлөгдсөнгүй"
+
+#: gdk-pixbuf/io-bmp.c:1411 gdk-pixbuf/io-gdip-bmp.c:83
+msgctxt "image format"
+msgid "BMP"
+msgstr ""
+
+#: gdk-pixbuf/io-gdip-emf.c:60
+msgctxt "image format"
+msgid "EMF"
+msgstr ""
+
+#: gdk-pixbuf/io-gdip-gif.c:81 gdk-pixbuf/io-gif.c:1719
+msgctxt "image format"
+msgid "GIF"
+msgstr ""
+
+#: gdk-pixbuf/io-gdip-ico.c:60 gdk-pixbuf/io-ico.c:1268
+msgctxt "image format"
+msgid "Windows icon"
+msgstr ""
+
+# gdk-pixbuf/io-jpeg.c:664
+#: gdk-pixbuf/io-gdip-jpeg.c:54 gdk-pixbuf/io-jpeg.c:1297
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value '%s' could not be "
+"parsed."
+msgstr ""
+"0 ба 100 -ийн хоорондох утгыг авбал JPEG чанартай; \"%s\" гэсэн утгыг задлан "
+"ялгал хийж чадсангүй"
+
+# gdk-pixbuf/io-jpeg.c:679
+#: gdk-pixbuf/io-gdip-jpeg.c:69 gdk-pixbuf/io-jpeg.c:1313
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value '%d' is not allowed."
+msgstr ""
+"JPEG төрөл нь 0 ба 100 -ийн хоорондох утгыг авбал сайн; \"%d\" утга бол "
+"зөвшөөрөгдөөгүй."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:137 gdk-pixbuf/io-jpeg.c:1575
+msgctxt "image format"
+msgid "JPEG"
+msgstr ""
+
+#: gdk-pixbuf/io-gdip-tiff.c:83 gdk-pixbuf/io-tiff.c:1018
+msgctxt "image format"
+msgid "TIFF"
+msgstr ""
+
+# gdk-pixbuf/io-tga.c:903
+#: gdk-pixbuf/io-gdip-utils.c:155
+#, fuzzy, c-format
+msgid "Could not allocate memory: %s"
+msgstr "Файлын толгойг санах ойд ачаалж чадахгүй байна"
+
+# gtk/gtkfilesel.c:1369
+#: gdk-pixbuf/io-gdip-utils.c:180 gdk-pixbuf/io-gdip-utils.c:294
+#: gdk-pixbuf/io-gdip-utils.c:334
+#, fuzzy, c-format
+msgid "Could not create stream: %s"
+msgstr "\"%s\" хавтас үүсгэхэд алдлаа: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:194
+#, fuzzy, c-format
+msgid "Could not seek stream: %s"
+msgstr ""
+"%s-г тэмдэглэж чадсангүй:\n"
+"%s"
+
+# gtk/gtkfilesel.c:1369
+#: gdk-pixbuf/io-gdip-utils.c:206
+#, fuzzy, c-format
+msgid "Could not read from stream: %s"
+msgstr "\"%s\" хавтас үүсгэхэд алдлаа: %s"
+
+# gtk/gtkfilesel.c:3854
+#: gdk-pixbuf/io-gdip-utils.c:618
+#, fuzzy
+msgid "Couldn't load bitmap"
+msgstr "Файлын нэр өөрчлөгдсөнгүй"
+
+# gtk/gtkfilesel.c:3854
+#: gdk-pixbuf/io-gdip-utils.c:774
+#, fuzzy
+msgid "Couldn't load metafile"
+msgstr "Файлын нэр өөрчлөгдсөнгүй"
+
+# gdk-pixbuf/io-tga.c:1308 gdk-pixbuf/io-tga.c:1337
+#: gdk-pixbuf/io-gdip-utils.c:879
+#, fuzzy
+msgid "Unsupported image format for GDI+"
+msgstr "RAS зургийн өөрчлөлт тодорхойлогдоогүй"
+
+# gdk-pixbuf/io-wbmp.c:366
+#: gdk-pixbuf/io-gdip-utils.c:886
+#, fuzzy
+msgid "Couldn't save"
+msgstr "Хадгалж чадсангүй"
+
+#: gdk-pixbuf/io-gdip-wmf.c:59
+msgctxt "image format"
+msgid "WMF"
+msgstr ""
+
+# gdk-pixbuf/io-gif.c:218
+#: gdk-pixbuf/io-gif.c:220
+#, c-format
+msgid "Failure reading GIF: %s"
+msgstr "GIF төрлийн файл уншигдахгүй байна: %s"
+
+# gdk-pixbuf/io-gif.c:460 gdk-pixbuf/io-gif.c:1382 gdk-pixbuf/io-gif.c:1542
+#: gdk-pixbuf/io-gif.c:494 gdk-pixbuf/io-gif.c:1501 gdk-pixbuf/io-gif.c:1668
+msgid "GIF file was missing some data (perhaps it was truncated somehow?)"
+msgstr ""
+"GIF төрлийн файлын зарим өгөгдөл алдагдсан байна (магадгүй тасарсан байх?)"
+
+# gdk-pixbuf/io-gif.c:469
+#: gdk-pixbuf/io-gif.c:503
+#, c-format
+msgid "Internal error in the GIF loader (%s)"
+msgstr "GIF зураг ачаалагчийн дотоод алдаа (%s)"
+
+#: gdk-pixbuf/io-gif.c:577
+msgid "Stack overflow"
+msgstr "Стек дүүрлээ"
+
+# gdk-pixbuf/io-gif.c:592
+#: gdk-pixbuf/io-gif.c:637
+#, fuzzy
+msgid "GIF image loader cannot understand this image."
+msgstr "GIF зураг ачаалагч уг зургийг ойлгож чадахгүй байна"
+
+# gdk-pixbuf/io-gif.c:621
+#: gdk-pixbuf/io-gif.c:666
+msgid "Bad code encountered"
+msgstr "Буруу код тааралдлаа"
+
+# gdk-pixbuf/io-gif.c:630
+#: gdk-pixbuf/io-gif.c:676
+msgid "Circular table entry in GIF file"
+msgstr "GIF зургийн файлын заавар хүснэгтийн бичлэг"
+
+# gdk-pixbuf/io-gif.c:762 gdk-pixbuf/io-gif.c:1370 gdk-pixbuf/io-gif.c:1415
+# gdk-pixbuf/io-gif.c:1530
+#: gdk-pixbuf/io-gif.c:864 gdk-pixbuf/io-gif.c:1487 gdk-pixbuf/io-gif.c:1540
+#: gdk-pixbuf/io-gif.c:1656
+msgid "Not enough memory to load GIF file"
+msgstr "GIF зургийн файл ачаалахад санах ой хүрэлцэхгүй байна"
+
+# gdk-pixbuf/io-gif.c:762 gdk-pixbuf/io-gif.c:1370 gdk-pixbuf/io-gif.c:1415
+# gdk-pixbuf/io-gif.c:1530
+#: gdk-pixbuf/io-gif.c:958
+#, fuzzy
+msgid "Not enough memory to composite a frame in GIF file"
+msgstr "GIF зургийн файл ачаалахад санах ой хүрэлцэхгүй байна"
+
+# gdk-pixbuf/io-gif.c:1009
+#: gdk-pixbuf/io-gif.c:1130
+msgid "GIF image is corrupt (incorrect LZW compression)"
+msgstr "GIF зураг бол гэмтсэн (буруу LZW алгоритмын шахалт)"
+
+# gdk-pixbuf/io-gif.c:1059
+#: gdk-pixbuf/io-gif.c:1180
+msgid "File does not appear to be a GIF file"
+msgstr "GIF зургийн файл гэж санагдахгүй байна"
+
+# gdk-pixbuf/io-gif.c:1071
+#: gdk-pixbuf/io-gif.c:1192
+#, c-format
+msgid "Version %s of the GIF file format is not supported"
+msgstr "GIF зургийн файлын төрөлийн %s хувилбар тодорхойгүй"
+
+# gdk-pixbuf/io-wbmp.c:278
+#: gdk-pixbuf/io-gif.c:1239
+#, fuzzy
+msgid "Resulting GIF image has zero size"
+msgstr "Зурагын өргөн '' 0 '' болжээ"
+
+# gdk-pixbuf/io-gif.c:1208
+#: gdk-pixbuf/io-gif.c:1318
+msgid ""
+"GIF image has no global colormap, and a frame inside it has no local "
+"colormap."
+msgstr ""
+"GIF төрөлд гадаад бус өнгөний дүрслэл байдаг, ба кадр дотор дотоод өнгөний "
+"дүрслэлтэй."
+
+# gdk-pixbuf/io-gif.c:1437
+#: gdk-pixbuf/io-gif.c:1563
+msgid "GIF image was truncated or incomplete."
+msgstr "GIF зураг тасархай эсвэл дутуу болсон"
+
+# gdk-pixbuf/io-png.c:734
+#: gdk-pixbuf/io-icns.c:358
+#, fuzzy, c-format
+msgid "Error reading ICNS image: %s"
+msgstr "PNG зургийн файлыг уншихад ноцтой алдаа %s "
+
+#: gdk-pixbuf/io-icns.c:375 gdk-pixbuf/io-icns.c:452
+#, fuzzy
+msgid "Could not decode ICNS file"
+msgstr ""
+"%s-г тэмдэглэж чадсангүй:\n"
+"%s"
+
+#: gdk-pixbuf/io-icns.c:511
+msgctxt "image format"
+msgid "MacOS X icon"
+msgstr ""
+
+# gdk-pixbuf/io-ico.c:303
+#: gdk-pixbuf/io-ico.c:226 gdk-pixbuf/io-ico.c:240 gdk-pixbuf/io-ico.c:291
+#: gdk-pixbuf/io-ico.c:302 gdk-pixbuf/io-ico.c:386
+msgid "Invalid header in icon"
+msgstr "Дүрсний толгой нь буруу"
+
+# gdk-pixbuf/io-ico.c:262 gdk-pixbuf/io-ico.c:318 gdk-pixbuf/io-ico.c:381
+# gdk-pixbuf/io-ico.c:443 gdk-pixbuf/io-ico.c:460
+#: gdk-pixbuf/io-ico.c:255 gdk-pixbuf/io-ico.c:312 gdk-pixbuf/io-ico.c:396
+#: gdk-pixbuf/io-ico.c:449 gdk-pixbuf/io-ico.c:479
+msgid "Not enough memory to load icon"
+msgstr "Дүрс ачаалахад санах ой хүрэлцэхгүй байна"
+
+# gdk-pixbuf/io-ico.c:395
+#: gdk-pixbuf/io-ico.c:338
+msgid "Compressed icons are not supported"
+msgstr "Шахагдсан дүрлэл дэмжигдээгүй"
+
+# gdk-pixbuf/io-ico.c:428
+#: gdk-pixbuf/io-ico.c:434
+msgid "Unsupported icon type"
+msgstr "Дэмжигдээгүй дүрлэлийн төрөл"
+
+# gdk-pixbuf/io-ico.c:499
+#: gdk-pixbuf/io-ico.c:528
+msgid "Not enough memory to load ICO file"
+msgstr "ICO файл ачаалахад санах ой хүрэлцэхгүй байна"
+
+#: gdk-pixbuf/io-ico.c:993
+msgid "Image too large to be saved as ICO"
+msgstr "ICO-р хадгалахад зураг хэтэрхий том"
+
+#: gdk-pixbuf/io-ico.c:1004
+msgid "Cursor hotspot outside image"
+msgstr "Түүчээний-Hotspot зургийн гадна"
+
+#: gdk-pixbuf/io-ico.c:1027
+#, c-format
+msgid "Unsupported depth for ICO file: %d"
+msgstr "ICO файлын өнгөний гүн дэмжигдээгүй: %d"
+
+# gdk-pixbuf/io-tga.c:903
+#: gdk-pixbuf/io-jasper.c:73
+#, fuzzy
+msgid "Couldn't allocate memory for stream"
+msgstr "Файлын толгойг санах ойд ачаалж чадахгүй байна"
+
+# gtk/gtkfilesel.c:3854
+#: gdk-pixbuf/io-jasper.c:103
+#, fuzzy
+msgid "Couldn't decode image"
+msgstr "Файлын нэр өөрчлөгдсөнгүй"
+
+# gdk-pixbuf/io-png.c:136
+#: gdk-pixbuf/io-jasper.c:121
+#, fuzzy
+msgid "Transformed JPEG2000 has zero width or height"
+msgstr "Хөрвөсөн PNG тэг өргөн ба өндөртэй болов."
+
+# gdk-pixbuf/gdk-pixbuf-io.c:490 gdk-pixbuf/gdk-pixbuf-io.c:516
+#: gdk-pixbuf/io-jasper.c:135
+#, fuzzy
+msgid "Image type currently not supported"
+msgstr "Зургийн \"%s\" төрөл дэмжигдээгүй"
+
+# gdk-pixbuf/io-jpeg.c:345 gdk-pixbuf/io-jpeg.c:538 gdk-pixbuf/io-jpeg.c:710
+#: gdk-pixbuf/io-jasper.c:147 gdk-pixbuf/io-jasper.c:155
+#, fuzzy
+msgid "Couldn't allocate memory for color profile"
+msgstr "JPEG төрлийн файлыг санах ойд байрлуулж чадсангүй"
+
+# gdk-pixbuf/io-tiff.c:178 gdk-pixbuf/io-tiff.c:194 gdk-pixbuf/io-tiff.c:485
+#: gdk-pixbuf/io-jasper.c:181
+#, fuzzy
+msgid "Insufficient memory to open JPEG 2000 file"
+msgstr "TIFF төрлийн файлыг ачаалахад санах хүрэхгүй байна"
+
+# gdk-pixbuf/io-tga.c:178
+#: gdk-pixbuf/io-jasper.c:260
+#, fuzzy
+msgid "Couldn't allocate memory to buffer image data"
+msgstr "Мөрийн өгөгдөлд зориулсан санах ой гаргаж чадахгүй б/а"
+
+#: gdk-pixbuf/io-jasper.c:304
+msgctxt "image format"
+msgid "JPEG 2000"
+msgstr ""
+
+# gdk-pixbuf/io-jpeg.c:125
+#: gdk-pixbuf/io-jpeg.c:124
+#, c-format
+msgid "Error interpreting JPEG image file (%s)"
+msgstr "JPEG зургийн файлыг тасарч байхад алдаа (%s)"
+
+# gdk-pixbuf/io-jpeg.c:234
+#: gdk-pixbuf/io-jpeg.c:600
+msgid ""
+"Insufficient memory to load image, try exiting some applications to free "
+"memory"
+msgstr ""
+"Зургийг ачаалахад санах ой хүрэхгүй, зарим программаа санах ойгоос чөлөөлөх "
+"гэж оролдоно уу "
+
+# gdk-pixbuf/io-ico.c:428
+#: gdk-pixbuf/io-jpeg.c:669 gdk-pixbuf/io-jpeg.c:882
+#, c-format
+msgid "Unsupported JPEG color space (%s)"
+msgstr "JPEG төрлийн өнгөний орон зай дэмжигдээгүй (%s)"
+
+# gdk-pixbuf/io-jpeg.c:345 gdk-pixbuf/io-jpeg.c:538 gdk-pixbuf/io-jpeg.c:710
+#: gdk-pixbuf/io-jpeg.c:781 gdk-pixbuf/io-jpeg.c:1062
+#: gdk-pixbuf/io-jpeg.c:1398 gdk-pixbuf/io-jpeg.c:1408
+msgid "Couldn't allocate memory for loading JPEG file"
+msgstr "JPEG төрлийн файлыг санах ойд байрлуулж чадсангүй"
+
+# gdk-pixbuf/io-png.c:136
+#: gdk-pixbuf/io-jpeg.c:1036
+#, fuzzy
+msgid "Transformed JPEG has zero width or height."
+msgstr "Хөрвөсөн PNG тэг өргөн ба өндөртэй болов."
+
+# gdk-pixbuf/io-jpeg.c:679
+#: gdk-pixbuf/io-jpeg.c:1334
+#, fuzzy, c-format
+msgid ""
+"JPEG x-dpi must be a value between 1 and 65535; value '%s' is not allowed."
+msgstr ""
+"JPEG төрөл нь 0 ба 100 -ийн хоорондох утгыг авбал сайн; \"%d\" утга бол "
+"зөвшөөрөгдөөгүй."
+
+# gdk-pixbuf/io-jpeg.c:679
+#: gdk-pixbuf/io-jpeg.c:1355
+#, fuzzy, c-format
+msgid ""
+"JPEG y-dpi must be a value between 1 and 65535; value '%s' is not allowed."
+msgstr ""
+"JPEG төрөл нь 0 ба 100 -ийн хоорондох утгыг авбал сайн; \"%d\" утга бол "
+"зөвшөөрөгдөөгүй."
+
+#: gdk-pixbuf/io-jpeg.c:1369
+#, c-format
+msgid "Color profile has invalid length '%u'."
+msgstr ""
+
+# gdk-pixbuf/io-tga.c:903
+#: gdk-pixbuf/io-pcx.c:184
+msgid "Couldn't allocate memory for header"
+msgstr "Файлын толгойг санах ойд ачаалж чадахгүй байна"
+
+# gdk-pixbuf/io-tga.c:793
+#: gdk-pixbuf/io-pcx.c:199 gdk-pixbuf/io-pcx.c:557
+msgid "Couldn't allocate memory for context buffer"
+msgstr "Контекст буферт санах ой гаргаж чадахгүй байна"
+
+# gdk-pixbuf/io-wbmp.c:296
+#: gdk-pixbuf/io-pcx.c:598
+msgid "Image has invalid width and/or height"
+msgstr "Зураг хүчингүй өргөн ба/эсвэл өндөртэй"
+
+# gdk-pixbuf/io-bmp.c:275
+#: gdk-pixbuf/io-pcx.c:610 gdk-pixbuf/io-pcx.c:671
+msgid "Image has unsupported bpp"
+msgstr "Зураг дэмжигдээгүй bpp-тэй"
+
+# gdk-pixbuf/io-bmp.c:275
+#: gdk-pixbuf/io-pcx.c:615 gdk-pixbuf/io-pcx.c:623
+#, c-format
+msgid "Image has unsupported number of %d-bit planes"
+msgstr "Зураг дэмжигдээгүй %d-бит-нийлүүр тоотой б/а"
+
+# gdk-pixbuf/io-tga.c:305
+#: gdk-pixbuf/io-pcx.c:639
+msgid "Couldn't create new pixbuf"
+msgstr "Шинэ pixbuf -ийг байрлуулж чадсангүй"
+
+# gdk-pixbuf/io-tga.c:178
+#: gdk-pixbuf/io-pcx.c:647
+msgid "Couldn't allocate memory for line data"
+msgstr "Мөрийн өгөгдөлд зориулсан санах ой гаргаж чадахгүй б/а"
+
+# gdk-pixbuf/io-tga.c:903
+#: gdk-pixbuf/io-pcx.c:654
+#, fuzzy
+msgid "Couldn't allocate memory for PCX image"
+msgstr "Файлын толгойг санах ойд ачаалж чадахгүй байна"
+
+#: gdk-pixbuf/io-pcx.c:701
+msgid "Didn't get all lines of PCX image"
+msgstr "PCX-зургийн бүх мөрүүд дуудагдах боломжгүй"
+
+#: gdk-pixbuf/io-pcx.c:708
+msgid "No palette found at end of PCX data"
+msgstr "PCX өгөгдлийн төгсгөлд нийлүүр алга"
+
+#: gdk-pixbuf/io-pcx.c:753
+msgctxt "image format"
+msgid "PCX"
+msgstr ""
+
+# gdk-pixbuf/io-png.c:136
+#: gdk-pixbuf/io-pixdata.c:146
+#, fuzzy
+msgid "Transformed pixbuf has zero width or height."
+msgstr "Хөрвөсөн PNG тэг өргөн ба өндөртэй болов."
+
+# gdk-pixbuf/gdk-pixdata.c:151
+#: gdk-pixbuf/io-pixdata.c:184
+#, fuzzy
+msgctxt "image format"
+msgid "GdkPixdata"
+msgstr "GIF зургийн төрөл"
+
+# gdk-pixbuf/io-png.c:55
+#: gdk-pixbuf/io-png.c:54
+msgid "Bits per channel of PNG image is invalid."
+msgstr "PNG зургийн суваг тус бүрийн битүүд хүчингүй байна."
+
+# gdk-pixbuf/io-png.c:136
+#: gdk-pixbuf/io-png.c:135 gdk-pixbuf/io-png.c:670
+msgid "Transformed PNG has zero width or height."
+msgstr "Хөрвөсөн PNG тэг өргөн ба өндөртэй болов."
+
+#: gdk-pixbuf/io-png.c:143
+msgid "Bits per channel of transformed PNG is not 8."
+msgstr "Хөрвөсөн PNG зургийн суваг тус бүрийн битүүд 8 биш байна"
+
+# gdk-pixbuf/io-png.c:153
+#: gdk-pixbuf/io-png.c:152
+msgid "Transformed PNG not RGB or RGBA."
+msgstr "Хөрвөсөн PNG RGB эсвэл RGBA төрлийнх биш."
+
+#: gdk-pixbuf/io-png.c:161
+msgid "Transformed PNG has unsupported number of channels, must be 3 or 4."
+msgstr "Хөрвөсөн PNG сувгуудын тоо хүчингүй,3 эсвэл 4 байх ёстой."
+
+# gdk-pixbuf/io-png.c:183
+#: gdk-pixbuf/io-png.c:182
+#, c-format
+msgid "Fatal error in PNG image file: %s"
+msgstr "PNG зургийн файлд хүнд алдаа : %s"
+
+# gdk-pixbuf/io-png.c:310
+#: gdk-pixbuf/io-png.c:319
+msgid "Insufficient memory to load PNG file"
+msgstr "PNG зургийн файлыг ачаалахад санах ой хүрэхгүй байна"
+
+# gdk-pixbuf/io-png.c:634
+#: gdk-pixbuf/io-png.c:685
+#, fuzzy, c-format
+msgid ""
+"Insufficient memory to store a %lu by %lu image; try exiting some "
+"applications to reduce memory usage"
+msgstr ""
+"%ld нөөц %ld зурагаар хадгалахад санах хүрэхгүй байна. Санах ойн хэрэглээг "
+"багасгахын тулд ашиглаж байгаа зарим программаа хаах хэрэгтэй."
+
+# gdk-pixbuf/io-png.c:685
+#: gdk-pixbuf/io-png.c:760
+msgid "Fatal error reading PNG image file"
+msgstr "PNG зургийн файлыг уншихад ноцтой алдаа"
+
+# gdk-pixbuf/io-png.c:734
+#: gdk-pixbuf/io-png.c:809
+#, c-format
+msgid "Fatal error reading PNG image file: %s"
+msgstr "PNG зургийн файлыг уншихад ноцтой алдаа %s "
+
+# gdk-pixbuf/io-png.c:800
+#: gdk-pixbuf/io-png.c:901
+msgid ""
+"Keys for PNG text chunks must have at least 1 and at most 79 characters."
+msgstr ""
+"PNG хэсэг текстийн түлхүүр нь 1 ба 79 хүртэл тэмдэгтүүдээр байвал зүгээр."
+
+# gdk-pixbuf/io-png.c:808
+#: gdk-pixbuf/io-png.c:910
+msgid "Keys for PNG text chunks must be ASCII characters."
+msgstr ""
+"PNG хэсэг текстэд түлхүүр нь ASCII тэмдэгтүүд байвал зүгээр набора ASCII."
+
+#: gdk-pixbuf/io-png.c:924 gdk-pixbuf/io-tiff.c:796
+#, c-format
+msgid "Color profile has invalid length %d."
+msgstr ""
+
+# gdk-pixbuf/io-jpeg.c:664
+#: gdk-pixbuf/io-png.c:937
+#, fuzzy, c-format
+msgid ""
+"PNG compression level must be a value between 0 and 9; value '%s' could not "
+"be parsed."
+msgstr ""
+"0 ба 100 -ийн хоорондох утгыг авбал JPEG чанартай; \"%s\" гэсэн утгыг задлан "
+"ялгал хийж чадсангүй"
+
+# gdk-pixbuf/io-jpeg.c:679
+#: gdk-pixbuf/io-png.c:950
+#, fuzzy, c-format
+msgid ""
+"PNG compression level must be a value between 0 and 9; value '%d' is not "
+"allowed."
+msgstr ""
+"JPEG төрөл нь 0 ба 100 -ийн хоорондох утгыг авбал сайн; \"%d\" утга бол "
+"зөвшөөрөгдөөгүй."
+
+# gdk-pixbuf/io-jpeg.c:679
+#: gdk-pixbuf/io-png.c:969
+#, fuzzy, c-format
+msgid "PNG x-dpi must be greater than zero; value '%s' is not allowed."
+msgstr ""
+"JPEG төрөл нь 0 ба 100 -ийн хоорондох утгыг авбал сайн; \"%d\" утга бол "
+"зөвшөөрөгдөөгүй."
+
+# gdk-pixbuf/io-jpeg.c:679
+#: gdk-pixbuf/io-png.c:989
+#, fuzzy, c-format
+msgid "PNG y-dpi must be greater than zero; value '%s' is not allowed."
+msgstr ""
+"JPEG төрөл нь 0 ба 100 -ийн хоорондох утгыг авбал сайн; \"%d\" утга бол "
+"зөвшөөрөгдөөгүй."
+
+# gdk-pixbuf/io-png.c:829
+#: gdk-pixbuf/io-png.c:1038
+#, fuzzy, c-format
+msgid "Value for PNG text chunk %s cannot be converted to ISO-8859-1 encoding."
+msgstr ""
+"PNG хэсэг текстэд утга нь %s -г ISO-8859-1 хувиргагч руу хөрвүүлж чадсангүй."
+
+#: gdk-pixbuf/io-png.c:1206
+msgctxt "image format"
+msgid "PNG"
+msgstr ""
+
+# gdk-pixbuf/io-pnm.c:254
+#: gdk-pixbuf/io-pnm.c:246
+msgid "PNM loader expected to find an integer, but didn't"
+msgstr "PNM ачаалагч бүхэл тоог олох санаатай, гэвч олдсонгүй."
+
+# gdk-pixbuf/io-pnm.c:286
+#: gdk-pixbuf/io-pnm.c:278
+msgid "PNM file has an incorrect initial byte"
+msgstr "PNM файл буруу эхлэл байттай байна"
+
+# gdk-pixbuf/io-pnm.c:316
+#: gdk-pixbuf/io-pnm.c:308
+msgid "PNM file is not in a recognized PNM subformat"
+msgstr "PNM файл бол танигдсан PNM ын дэд төрөлд биш"
+
+# gdk-pixbuf/io-pnm.c:341
+#: gdk-pixbuf/io-pnm.c:333
+msgid "PNM file has an image width of 0"
+msgstr "PNM файл 0 өргөнтэй зурагтай байна"
+
+# gdk-pixbuf/io-pnm.c:362
+#: gdk-pixbuf/io-pnm.c:354
+msgid "PNM file has an image height of 0"
+msgstr "PNM файл 0 өндөртэй зурагтай байна"
+
+# gdk-pixbuf/io-pnm.c:385
+#: gdk-pixbuf/io-pnm.c:377
+msgid "Maximum color value in PNM file is 0"
+msgstr "PNM файлын хамгийн их өнгөний утга 0"
+
+# gdk-pixbuf/io-pnm.c:393
+#: gdk-pixbuf/io-pnm.c:385
+msgid "Maximum color value in PNM file is too large"
+msgstr "PNM файлын хамгийн их өнгөний утга хэт том байна"
+
+# gdk-pixbuf/io-pnm.c:440 gdk-pixbuf/io-pnm.c:468 gdk-pixbuf/io-pnm.c:500
+#: gdk-pixbuf/io-pnm.c:425 gdk-pixbuf/io-pnm.c:455 gdk-pixbuf/io-pnm.c:500
+msgid "Raw PNM image type is invalid"
+msgstr "Боловсрогдоогүй PNM зургийн төрөл нь хүчингүй"
+
+# gdk-pixbuf/io-pnm.c:661
+#: gdk-pixbuf/io-pnm.c:650
+msgid "PNM image loader does not support this PNM subformat"
+msgstr "PNM зураг ачаалагч энэ PNM -ийн дэд төрөлийг дэмжээгүй байна"
+
+#: gdk-pixbuf/io-pnm.c:737 gdk-pixbuf/io-pnm.c:964
+msgid "Raw PNM formats require exactly one whitespace before sample data"
+msgstr ""
+"Боловсроогүй PNM төрөл яг нэг цагаан зай жишээ өгөгдлийн өмнөө шаарддаг"
+
+# gdk-pixbuf/io-pnm.c:775
+#: gdk-pixbuf/io-pnm.c:764
+#, fuzzy
+msgid "Cannot allocate memory for loading PNM image"
+msgstr "PNM зургийг санах ойд байрлуулж чадсангүй"
+
+# gdk-pixbuf/io-pnm.c:824
+#: gdk-pixbuf/io-pnm.c:814
+msgid "Insufficient memory to load PNM context struct"
+msgstr "PNM өмнөх бүтцийг ачаалахад санах ой хүрэхгүй."
+
+# gdk-pixbuf/io-pnm.c:874
+#: gdk-pixbuf/io-pnm.c:865
+msgid "Unexpected end of PNM image data"
+msgstr "PNM зургийн өгөгдлийн гэнэтийн төгсгөл"
+
+# gdk-pixbuf/io-pnm.c:996
+#: gdk-pixbuf/io-pnm.c:993
+msgid "Insufficient memory to load PNM file"
+msgstr "PNM файлыг ачаалахад хангалтгүй санах ой"
+
+#: gdk-pixbuf/io-pnm.c:1077
+msgctxt "image format"
+msgid "PNM/PBM/PGM/PPM"
+msgstr ""
+
+#: gdk-pixbuf/io-qtif.c:126
+msgid "Input file descriptor is NULL."
+msgstr ""
+
+# gdk-pixbuf/io-tiff.c:273
+#: gdk-pixbuf/io-qtif.c:141
+#, fuzzy
+msgid "Failed to read QTIF header"
+msgstr "TIFF зураг онгойсонгүй "
+
+#: gdk-pixbuf/io-qtif.c:150 gdk-pixbuf/io-qtif.c:187 gdk-pixbuf/io-qtif.c:454
+#, c-format
+msgid "QTIF atom size too large (%d byte)"
+msgid_plural "QTIF atom size too large (%d bytes)"
+msgstr[0] ""
+msgstr[1] ""
+
+# gdk-pixbuf/gdk-pixdata.c:403
+#: gdk-pixbuf/io-qtif.c:173
+#, fuzzy, c-format
+msgid "Failed to allocate %d byte for file read buffer"
+msgid_plural "Failed to allocate %d bytes for file read buffer"
+msgstr[0] "Зургийн %u байтын буфер байрлуулж чадсангүй"
+msgstr[1] "Зургийн %u байтын буфер байрлуулж чадсангүй"
+
+# gdk-pixbuf/io-gif.c:218
+#: gdk-pixbuf/io-qtif.c:201
+#, fuzzy, c-format
+msgid "File error when reading QTIF atom: %s"
+msgstr "GIF төрлийн файл уншигдахгүй байна: %s"
+
+#: gdk-pixbuf/io-qtif.c:238
+#, c-format
+msgid "Failed to skip the next %d byte with seek()."
+msgid_plural "Failed to skip the next %d bytes with seek()."
+msgstr[0] ""
+msgstr[1] ""
+
+# gdk-pixbuf/io-tga.c:793
+#: gdk-pixbuf/io-qtif.c:265
+#, fuzzy
+msgid "Failed to allocate QTIF context structure."
+msgstr "TGA контекст бүтцэд зориулан санах ой гаргаж чадахгүй байна"
+
+# gdk-pixbuf/io-xbm.c:427
+#: gdk-pixbuf/io-qtif.c:325
+#, fuzzy
+msgid "Failed to create GdkPixbufLoader object."
+msgstr "Түр зуурын файлаас уншигдсангүй"
+
+# gdk-pixbuf/io-tiff.c:273
+#: gdk-pixbuf/io-qtif.c:429
+#, fuzzy
+msgid "Failed to find an image data atom."
+msgstr "TIFF зураг онгойсонгүй "
+
+#: gdk-pixbuf/io-qtif.c:613
+msgctxt "image format"
+msgid "QuickTime"
+msgstr ""
+
+#: gdk-pixbuf/io-ras.c:123
+msgid "RAS image has bogus header data"
+msgstr "RAS зургийн толгой өгөгдөл нь худал"
+
+#: gdk-pixbuf/io-ras.c:145
+msgid "RAS image has unknown type"
+msgstr "RAS зургийн тодорхойгүй төрөл"
+
+# gdk-pixbuf/io-tga.c:1308 gdk-pixbuf/io-tga.c:1337
+#: gdk-pixbuf/io-ras.c:153
+msgid "unsupported RAS image variation"
+msgstr "RAS зургийн өөрчлөлт тодорхойлогдоогүй"
+
+#: gdk-pixbuf/io-ras.c:168 gdk-pixbuf/io-ras.c:197
+msgid "Not enough memory to load RAS image"
+msgstr "RAS зураг ачаалахад санах ой хүрэлцэхгүй байна"
+
+#: gdk-pixbuf/io-ras.c:542
+msgctxt "image format"
+msgid "Sun raster"
+msgstr ""
+
+# gdk-pixbuf/io-tga.c:159
+#: gdk-pixbuf/io-tga.c:151
+#, fuzzy
+msgid "Cannot allocate memory for IOBuffer struct"
+msgstr "О/Г зориулсан IOBuffer бүтцийг санах ойд байрлуулж чадахгүй байна"
+
+# gdk-pixbuf/io-tga.c:178
+#: gdk-pixbuf/io-tga.c:170
+#, fuzzy
+msgid "Cannot allocate memory for IOBuffer data"
+msgstr "О/Г зориулсан IOBuffer өгөгдлийг санах ойд байрлуулж чадахгүй байна"
+
+# gdk-pixbuf/io-tga.c:189
+#: gdk-pixbuf/io-tga.c:181
+#, fuzzy
+msgid "Cannot realloc IOBuffer data"
+msgstr "О/Г буферийн өгөгдлийг дахин байрлуулж чадахгүй байна"
+
+# gdk-pixbuf/io-tga.c:218
+#: gdk-pixbuf/io-tga.c:211
+#, fuzzy
+msgid "Cannot allocate temporary IOBuffer data"
+msgstr "Түр зуурын О/Г -ийн буферын өгөгдөл байрлуулж чадахгүй байна"
+
+# gdk-pixbuf/io-tga.c:305
+#: gdk-pixbuf/io-tga.c:339
+#, fuzzy
+msgid "Cannot allocate new pixbuf"
+msgstr "Шинэ pixbuf -ийг байрлуулсангүй"
+
+# gdk-pixbuf/io-gif.c:1437
+#: gdk-pixbuf/io-tga.c:678
+#, fuzzy
+msgid "Image is corrupted or truncated"
+msgstr "GIF зураг тасархай эсвэл дутуу болсон"
+
+# gdk-pixbuf/io-tga.c:617
+#: gdk-pixbuf/io-tga.c:685
+#, fuzzy
+msgid "Cannot allocate colormap structure"
+msgstr "Өнгөний таблицийн бүтцийг байрлуулж чадахгүй байна"
+
+# gdk-pixbuf/io-tga.c:624
+#: gdk-pixbuf/io-tga.c:692
+#, fuzzy
+msgid "Cannot allocate colormap entries"
+msgstr "Өнгөний хүснэгтийн бичлэг байрлуулж чадахгүй байна"
+
+# gdk-pixbuf/io-tga.c:646
+#: gdk-pixbuf/io-tga.c:714
+msgid "Unexpected bitdepth for colormap entries"
+msgstr "Өнгөний хүснэгт бичлэгийн санамсаргүй өнгөний гүн"
+
+# gdk-pixbuf/io-tga.c:664
+#: gdk-pixbuf/io-tga.c:732
+#, fuzzy
+msgid "Cannot allocate TGA header memory"
+msgstr "TGA толгой санах ойг байрлуулж чадсангүй"
+
+# gdk-pixbuf/io-tga.c:697
+#: gdk-pixbuf/io-tga.c:765
+msgid "TGA image has invalid dimensions"
+msgstr "TGA зургийн хэмжээс буруу байна"
+
+# gdk-pixbuf/io-tga.c:712 gdk-pixbuf/io-tga.c:721 gdk-pixbuf/io-tga.c:731
+# gdk-pixbuf/io-tga.c:741 gdk-pixbuf/io-tga.c:748
+#: gdk-pixbuf/io-tga.c:771 gdk-pixbuf/io-tga.c:780 gdk-pixbuf/io-tga.c:790
+#: gdk-pixbuf/io-tga.c:800 gdk-pixbuf/io-tga.c:807
+msgid "TGA image type not supported"
+msgstr "TGA зургийн төрөл тодорхойлогдсонгүй"
+
+# gdk-pixbuf/io-tga.c:793
+#: gdk-pixbuf/io-tga.c:854
+#, fuzzy
+msgid "Cannot allocate memory for TGA context struct"
+msgstr "TGA контекст бүтцэд зориулан санах ой гаргаж чадахгүй байна"
+
+# gdk-pixbuf/io-tga.c:857
+#: gdk-pixbuf/io-tga.c:919
+msgid "Excess data in file"
+msgstr "Файлд илүүдэл өгөгдөл байна"
+
+#: gdk-pixbuf/io-tga.c:1000
+msgctxt "image format"
+msgid "Targa"
+msgstr ""
+
+# gdk-pixbuf/io-tiff.c:152
+#: gdk-pixbuf/io-tiff.c:107
+msgid "Could not get image width (bad TIFF file)"
+msgstr "Зургийн өргөнийг авч чадахгүй байна (TIFF файл алдаатай)"
+
+# gdk-pixbuf/io-tiff.c:159
+#: gdk-pixbuf/io-tiff.c:115
+msgid "Could not get image height (bad TIFF file)"
+msgstr "Зургийн өндөрийг авч чадахгүй байна (TIFF файл алдаатай)"
+
+# gdk-pixbuf/io-tiff.c:169
+#: gdk-pixbuf/io-tiff.c:123
+msgid "Width or height of TIFF image is zero"
+msgstr "TIFF зургийн өргөн эсвэл өндөр нь '' 0 '' байна"
+
+#: gdk-pixbuf/io-tiff.c:132 gdk-pixbuf/io-tiff.c:141
+msgid "Dimensions of TIFF image too large"
+msgstr "TIFF зургийн багтаамж нь хэт их байна"
+
+# gdk-pixbuf/io-tiff.c:178 gdk-pixbuf/io-tiff.c:194 gdk-pixbuf/io-tiff.c:485
+#: gdk-pixbuf/io-tiff.c:165 gdk-pixbuf/io-tiff.c:177 gdk-pixbuf/io-tiff.c:535
+msgid "Insufficient memory to open TIFF file"
+msgstr "TIFF төрлийн файлыг ачаалахад санах хүрэхгүй байна"
+
+# gdk-pixbuf/io-tiff.c:203
+#: gdk-pixbuf/io-tiff.c:275
+msgid "Failed to load RGB data from TIFF file"
+msgstr "TIFF файлаас RGB өгөгдлийг ачаалахгүй байна"
+
+# gdk-pixbuf/io-tiff.c:273
+#: gdk-pixbuf/io-tiff.c:337
+msgid "Failed to open TIFF image"
+msgstr "TIFF зураг онгойсонгүй "
+
+# gdk-pixbuf/io-tiff.c:419 gdk-pixbuf/io-tiff.c:433
+#: gdk-pixbuf/io-tiff.c:471 gdk-pixbuf/io-tiff.c:484
+msgid "Failed to load TIFF image"
+msgstr "TIFF зураг ачаалагдсангүй"
+
+# gdk-pixbuf/io-tiff.c:273
+#: gdk-pixbuf/io-tiff.c:710
+#, fuzzy
+msgid "Failed to save TIFF image"
+msgstr "TIFF зураг онгойсонгүй "
+
+#: gdk-pixbuf/io-tiff.c:766
+msgid "TIFF compression doesn't refer to a valid codec."
+msgstr ""
+
+#: gdk-pixbuf/io-tiff.c:811
+msgid "TIFF bits-per-sample doesn't contain a supported value."
+msgstr ""
+
+# gdk-pixbuf/io-tiff.c:273
+#: gdk-pixbuf/io-tiff.c:892
+#, fuzzy
+msgid "Failed to write TIFF data"
+msgstr "TIFF зураг онгойсонгүй "
+
+# gdk-pixbuf/io-jpeg.c:679
+#: gdk-pixbuf/io-tiff.c:910
+#, fuzzy, c-format
+msgid "TIFF x-dpi must be greater than zero; value '%s' is not allowed."
+msgstr ""
+"JPEG төрөл нь 0 ба 100 -ийн хоорондох утгыг авбал сайн; \"%d\" утга бол "
+"зөвшөөрөгдөөгүй."
+
+# gdk-pixbuf/io-jpeg.c:679
+#: gdk-pixbuf/io-tiff.c:922
+#, fuzzy, c-format
+msgid "TIFF y-dpi must be greater than zero; value '%s' is not allowed."
+msgstr ""
+"JPEG төрөл нь 0 ба 100 -ийн хоорондох утгыг авбал сайн; \"%d\" утга бол "
+"зөвшөөрөгдөөгүй."
+
+# gtk/gtkfilesel.c:3854
+#: gdk-pixbuf/io-tiff.c:963
+#, fuzzy
+msgid "Couldn't write to TIFF file"
+msgstr "Файлын нэр өөрчлөгдсөнгүй"
+
+# gdk-pixbuf/io-wbmp.c:278
+#: gdk-pixbuf/io-wbmp.c:243
+msgid "Image has zero width"
+msgstr "Зурагын өргөн '' 0 '' болжээ"
+
+# gdk-pixbuf/io-wbmp.c:296
+#: gdk-pixbuf/io-wbmp.c:261
+msgid "Image has zero height"
+msgstr "Зурагын өндөр '' 0 '' болжээ"
+
+# gdk-pixbuf/io-wbmp.c:307
+#: gdk-pixbuf/io-wbmp.c:272
+msgid "Not enough memory to load image"
+msgstr "Зургийг ачаалахад санах ой хүрэлцэхгүй байна "
+
+# gdk-pixbuf/io-wbmp.c:366
+#: gdk-pixbuf/io-wbmp.c:331
+msgid "Couldn't save the rest"
+msgstr "Хадгалж чадсангүй"
+
+#: gdk-pixbuf/io-wbmp.c:372
+msgctxt "image format"
+msgid "WBMP"
+msgstr ""
+
+# gdk-pixbuf/io-xbm.c:283
+#: gdk-pixbuf/io-xbm.c:302
+msgid "Invalid XBM file"
+msgstr "XBM файл буруу байна "
+
+# gdk-pixbuf/io-xbm.c:293
+#: gdk-pixbuf/io-xbm.c:312
+msgid "Insufficient memory to load XBM image file"
+msgstr "XBM зургийн файлыг ачаалахад санах ой хүрэлцэхгүй байна"
+
+# gdk-pixbuf/io-xbm.c:427
+#: gdk-pixbuf/io-xbm.c:460
+msgid "Failed to write to temporary file when loading XBM image"
+msgstr "XBM зургийг түр зуурын файлд бичиж чадахгүй байна "
+
+#: gdk-pixbuf/io-xbm.c:499
+msgctxt "image format"
+msgid "XBM"
+msgstr ""
+
+# gdk-pixbuf/io-xpm.c:1235
+#: gdk-pixbuf/io-xpm.c:467
+msgid "No XPM header found"
+msgstr "XPM биш толгой олдлоо"
+
+# gdk-pixbuf/io-xbm.c:283
+#: gdk-pixbuf/io-xpm.c:476
+#, fuzzy
+msgid "Invalid XPM header"
+msgstr "XBM файл буруу байна "
+
+# gdk-pixbuf/io-xpm.c:1243
+#: gdk-pixbuf/io-xpm.c:484
+msgid "XPM file has image width <= 0"
+msgstr "XPM зургийн файлын өргөн <= '' 0 '' байна"
+
+# gdk-pixbuf/io-xpm.c:1251
+#: gdk-pixbuf/io-xpm.c:492
+msgid "XPM file has image height <= 0"
+msgstr "XPM зургийн файлын өндөр <= '' 0 '' байна"
+
+# gdk-pixbuf/io-xpm.c:1267
+#: gdk-pixbuf/io-xpm.c:500
+msgid "XPM has invalid number of chars per pixel"
+msgstr "XPM тэмдэгтүүдийн цэг бүрийн дугаар буруу "
+
+# gdk-pixbuf/io-xpm.c:1259
+#: gdk-pixbuf/io-xpm.c:509
+msgid "XPM file has invalid number of colors"
+msgstr "XPM зургийн өнгөний дугаар буруу "
+
+# gdk-pixbuf/io-xpm.c:1326
+#: gdk-pixbuf/io-xpm.c:521 gdk-pixbuf/io-xpm.c:530 gdk-pixbuf/io-xpm.c:582
+#, fuzzy
+msgid "Cannot allocate memory for loading XPM image"
+msgstr "XPM зураг ачаалахад санах ой хүрэлцэхгүй байна"
+
+# gdk-pixbuf/io-xpm.c:1285
+#: gdk-pixbuf/io-xpm.c:544
+#, fuzzy
+msgid "Cannot read XPM colormap"
+msgstr "XPM өнгөний хүснэгтийг уншиж чадахгүй байна"
+
+# gdk-pixbuf/io-xpm.c:1509
+#: gdk-pixbuf/io-xpm.c:776
+msgid "Failed to write to temporary file when loading XPM image"
+msgstr "XPM зураг ачаалахад завсрын файлаа үүсгэж чадахгүй байна"
+
+#: gdk-pixbuf/io-xpm.c:815
+msgctxt "image format"
+msgid "XPM"
+msgstr ""
+
+# gdk-pixbuf/io-ico.c:428
+#~ msgid "Unsupported animation type"
+#~ msgstr "Хөдөлгөөнт зургийн тодорхойгүй төрөл"
+
+# gdk-pixbuf/gdk-pixdata.c:151
+#~ msgid "The ANI image format"
+#~ msgstr "ANI зургийн төрөл "
+
+#~ msgid "The BMP image format"
+#~ msgstr "BMP зургийн төрөл "
+
+#, fuzzy
+#~ msgid "The EMF image format"
+#~ msgstr "BMP зургийн төрөл "
+
+# gdk-pixbuf/gdk-pixdata.c:151
+#~ msgid "The GIF image format"
+#~ msgstr "GIF зургийн төрөл"
+
+# gdk-pixbuf/gdk-pixdata.c:151
+#~ msgid "The ICO image format"
+#~ msgstr "ICO зургийн төрөл"
+
+#~ msgid "The JPEG image format"
+#~ msgstr "JPEG зургийн төрөл байна"
+
+#, fuzzy
+#~ msgid "The WMF image format"
+#~ msgstr "WBMP зургийн төрөл "
+
+# gdk-pixbuf/gdk-pixdata.c:151
+#, fuzzy
+#~ msgid "The ICNS image format"
+#~ msgstr "ICO зургийн төрөл"
+
+# gdk-pixbuf/io-ico.c:340
+#~ msgid "Icon has zero width"
+#~ msgstr "Дүрсний өргөн нь \" 0 \" болжээ"
+
+# gdk-pixbuf/io-ico.c:350
+#~ msgid "Icon has zero height"
+#~ msgstr "Дүрсийн өндөр нь \" 0 \" болжээ"
+
+#, fuzzy
+#~ msgid "The JPEG 2000 image format"
+#~ msgstr "JPEG зургийн төрөл байна"
+
+#~ msgid "The PCX image format"
+#~ msgstr "PCX зургийн төрөл "
+
+# gdk-pixbuf/io-pnm.c:560 gdk-pixbuf/io-pnm.c:602
+#~ msgid "The PNG image format"
+#~ msgstr "PNG төрлийн зураг."
+
+#~ msgid "The PNM/PBM/PGM/PPM image format family"
+#~ msgstr "PNM/PBM/PGM/PPM гэсэн зургийн төрлийн нэг бүлэг"
+
+#, fuzzy
+#~ msgid "The QTIF image format"
+#~ msgstr "TIFF зургийн төрөл "
+
+#~ msgid "The Sun raster image format"
+#~ msgstr "Sun компаны �астэрийн алгоритмийн зургийн төрөл"
+
+#~ msgid "The Targa image format"
+#~ msgstr "Targa зургийн төрөл "
+
+# gdk-pixbuf/io-tiff.c:286
+#~ msgid "TIFFClose operation failed"
+#~ msgstr "TIFFClose функцийн биелэлтийн алдаа "
+
+#~ msgid "The TIFF image format"
+#~ msgstr "TIFF зургийн төрөл "
+
+#~ msgid "The WBMP image format"
+#~ msgstr "WBMP зургийн төрөл "
+
+#~ msgid "The XBM image format"
+#~ msgstr "XBM зургийн төрөл "
+
+# gdk-pixbuf/io-pnm.c:560 gdk-pixbuf/io-pnm.c:602
+#~ msgid "The XPM image format"
+#~ msgstr "XPM зургийн төрөл "
+
+# gdk-pixbuf/io-tga.c:178
+#~ msgid "Couldn't allocate memory for paletted data"
+#~ msgstr "Нийлүүрийн өгөгдөлд зориулсан санах ой гаргаж чадахгүй б/а"

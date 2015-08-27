@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL_Pango", "SDL_Pango.vcproj", "{0918007B-132B-48DA-B913-8257CB000199}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testbench", "testbench\testbench.vcproj", "{4787711F-A383-4349-9CEE-FB9C16637113}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0918007B-132B-48DA-B913-8257CB000199} = {0918007B-132B-48DA-B913-8257CB000199}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{0918007B-132B-48DA-B913-8257CB000199}.Debug.ActiveCfg = Debug|Win32
+		{0918007B-132B-48DA-B913-8257CB000199}.Debug.Build.0 = Debug|Win32
+		{0918007B-132B-48DA-B913-8257CB000199}.Release.ActiveCfg = Release|Win32
+		{0918007B-132B-48DA-B913-8257CB000199}.Release.Build.0 = Release|Win32
+		{4787711F-A383-4349-9CEE-FB9C16637113}.Debug.ActiveCfg = Debug|Win32
+		{4787711F-A383-4349-9CEE-FB9C16637113}.Debug.Build.0 = Debug|Win32
+		{4787711F-A383-4349-9CEE-FB9C16637113}.Release.ActiveCfg = Release|Win32
+		{4787711F-A383-4349-9CEE-FB9C16637113}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

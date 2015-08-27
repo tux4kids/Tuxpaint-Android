@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-om-parser</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-num.html" title="cr-num">
+<link rel="next" href="libcroco-cr-parser.html" title="cr-parser">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-num.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-parser.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-om-parser.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-om-parser.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-om-parser"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-om-parser.top_of_page"></a>cr-om-parser</span></h2>
+<p>cr-om-parser</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-om-parser.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser">CROMParser</a>;
+                    <a class="link" href="libcroco-cr-om-parser.html#CROMParserPriv" title="CROMParserPriv">CROMParserPriv</a>;
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-om-parser.html#cr-om-parser-destroy" title="cr_om_parser_destroy ()">cr_om_parser_destroy</a>                (<em class="parameter"><code><a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a> *a_this</code></em>);
+<a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="returnvalue">CROMParser</span></a> *        <a class="link" href="libcroco-cr-om-parser.html#cr-om-parser-new" title="cr_om_parser_new ()">cr_om_parser_new</a>                    (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_input</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-om-parser.html#cr-om-parser-parse-buf" title="cr_om_parser_parse_buf ()">cr_om_parser_parse_buf</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> **a_result</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-om-parser.html#cr-om-parser-parse-file" title="cr_om_parser_parse_file ()">cr_om_parser_parse_file</a>             (<em class="parameter"><code><a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_file_uri</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> **a_result</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-om-parser.html#cr-om-parser-parse-paths-to-cascade" title="cr_om_parser_parse_paths_to_cascade ()">cr_om_parser_parse_paths_to_cascade</a> (<em class="parameter"><code><a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_author_path</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_user_path</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_ua_path</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_encoding</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> **a_result</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-om-parser.html#cr-om-parser-simply-parse-buf" title="cr_om_parser_simply_parse_buf ()">cr_om_parser_simply_parse_buf</a>       (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> **a_result</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-om-parser.html#cr-om-parser-simply-parse-file" title="cr_om_parser_simply_parse_file ()">cr_om_parser_simply_parse_file</a>      (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_file_path</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> **a_result</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-om-parser.html#cr-om-parser-simply-parse-paths-to-cascade" title="cr_om_parser_simply_parse_paths_to_cascade ()">cr_om_parser_simply_parse_paths_to_cascade</a>
+                                                        (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_author_path</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_user_path</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_ua_path</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_encoding</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> **a_result</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-om-parser.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-om-parser.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CROMParser"></a><h3>struct CROMParser</h3>
+<pre class="programlisting">struct CROMParser {
+        CROMParserPriv *priv ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CROMParserPriv"></a><h3>CROMParserPriv</h3>
+<pre class="programlisting">typedef struct _CROMParserPriv CROMParserPriv;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-om-parser-destroy"></a><h3>cr_om_parser_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_om_parser_destroy                (<em class="parameter"><code><a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a> *a_this</code></em>);</pre>
+<p>
+Destructor of the <a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a>.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-om-parser-new"></a><h3>cr_om_parser_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="returnvalue">CROMParser</span></a> *        cr_om_parser_new                    (<em class="parameter"><code><a class="link" href="libcroco-cr-input.html#CRInput" title="struct CRInput"><span class="type">CRInput</span></a> *a_input</code></em>);</pre>
+<p>
+Constructor of the CROMParser.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_input</code></em> :</span></p></td>
+<td>the input stream.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the newly built instance of <a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-om-parser-parse-buf"></a><h3>cr_om_parser_parse_buf ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_om_parser_parse_buf              (<em class="parameter"><code><a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> **a_result</code></em>);</pre>
+<p>
+Parses the content of an in memory  buffer.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_buf</code></em> :</span></p></td>
+<td>the in memory buffer to parse.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_len</code></em> :</span></p></td>
+<td>the length of the in memory buffer in number of bytes.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the encoding of the in memory buffer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_result</code></em> :</span></p></td>
+<td>out parameter the resulting style sheet</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-om-parser-parse-file"></a><h3>cr_om_parser_parse_file ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_om_parser_parse_file             (<em class="parameter"><code><a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_file_uri</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> **a_result</code></em>);</pre>
+<p>
+Parses a css2 stylesheet contained
+in a file.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of the cssom parser.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_file_uri</code></em> :</span></p></td>
+<td>the uri of the file.
+(only local file paths are suppported so far)</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the encoding of the file.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_result</code></em> :</span></p></td>
+<td>out parameter. A pointer
+the build css object model.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon succesful completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-om-parser-parse-paths-to-cascade"></a><h3>cr_om_parser_parse_paths_to_cascade ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_om_parser_parse_paths_to_cascade (<em class="parameter"><code><a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_author_path</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_user_path</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_ua_path</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_encoding</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> **a_result</code></em>);</pre>
+<p>
+Parses three sheets located by their paths and build a cascade
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-om-parser.html#CROMParser" title="struct CROMParser"><span class="type">CROMParser</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_author_path</code></em> :</span></p></td>
+<td>the path to the author stylesheet</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_user_path</code></em> :</span></p></td>
+<td>the path to the user stylesheet</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_ua_path</code></em> :</span></p></td>
+<td>the path to the User Agent stylesheet</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_encoding</code></em> :</span></p></td>
+<td>the encoding of the sheets.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_result</code></em> :</span></p></td>
+<td>out parameter. The resulting cascade if the parsing
+was okay</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-om-parser-simply-parse-buf"></a><h3>cr_om_parser_simply_parse_buf ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_om_parser_simply_parse_buf       (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_buf</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> a_len</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> **a_result</code></em>);</pre>
+<p>
+The simpler way to parse an in memory css2 buffer.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_buf</code></em> :</span></p></td>
+<td>the css2 in memory buffer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_len</code></em> :</span></p></td>
+<td>the length of the in memory buffer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the encoding of the in memory buffer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_result</code></em> :</span></p></td>
+<td>out parameter. The resulting css2 style sheet.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-om-parser-simply-parse-file"></a><h3>cr_om_parser_simply_parse_file ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_om_parser_simply_parse_file      (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_file_path</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_enc</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-statement.html#CRStyleSheet" title="CRStyleSheet"><span class="type">CRStyleSheet</span></a> **a_result</code></em>);</pre>
+<p>
+The simpler method to parse a css2 file.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_file_path</code></em> :</span></p></td>
+<td>the css2 local file path.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_enc</code></em> :</span></p></td>
+<td>the file encoding.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_result</code></em> :</span></p></td>
+<td>out parameter. The returned css stylesheet.
+Must be freed by the caller using cr_stylesheet_destroy.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.
+Note that this method uses <a class="link" href="libcroco-cr-om-parser.html#cr-om-parser-parse-file" title="cr_om_parser_parse_file ()"><code class="function">cr_om_parser_parse_file()</code></a> so both methods
+have the same return values.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-om-parser-simply-parse-paths-to-cascade"></a><h3>cr_om_parser_simply_parse_paths_to_cascade ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_om_parser_simply_parse_paths_to_cascade
+                                                        (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_author_path</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_user_path</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *a_ua_path</code></em>,
+                                                         <em class="parameter"><code><span class="type">enum CREncoding</span> a_encoding</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-cascade.html#CRCascade" title="struct CRCascade"><span class="type">CRCascade</span></a> **a_result</code></em>);</pre>
+<p>
+Parses three sheets located by their paths and build a cascade
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_author_path</code></em> :</span></p></td>
+<td>the path to the author stylesheet</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_user_path</code></em> :</span></p></td>
+<td>the path to the user stylesheet</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_ua_path</code></em> :</span></p></td>
+<td>the path to the User Agent stylesheet</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_encoding</code></em> :</span></p></td>
+<td>the encoding of the sheets.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_result</code></em> :</span></p></td>
+<td>out parameter. The resulting cascade if the parsing
+was okay</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successful completion, an error code otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+#!/bin/bash
+
+CFILES=`find . -name \*.c -o -name \*.cpp -o -name \*.m`
+HFILES=`find . -name \*.h`
+OFILES=`find . -name \*.o -o -name \*.obj | egrep -v dummy.o`
+SOFILES=`find . -name \*.so -o -name \*.lib -o -name \*.dll -o -name \*.a -o -name \*.bundle`
+
+echo
+echo ++++++++++++++++ function prototypes in a '*.c' file +++++++++++++++++++++
+egrep '^[a-zA-Z_].*[)].*;' $CFILES | egrep -v ':typedef|[)][(]'
+
+echo
+echo ++++++++++++++++ non-extern prototypes in a header file +++++++++++++++++++++
+egrep '^[a-zA-Z_].*;' $HFILES | egrep -v ':(extern|typedef)'
+
+echo
+echo -n ++++++++++++++++ stuff that should be static but is not +++++++++++++++++++++
+nm $OFILES | colrm 1 9 | egrep '^[A-TV-Z] ' | colrm 1 2 | sort | uniq > notU.check
+nm $OFILES | colrm 1 9 | egrep '^U ' | colrm 1 2 | sort | uniq > U.check
+cat U.check U.check U.check notU.check | sort | uniq -c | sort -n | egrep '1 ' | colrm 1 8 > badtux.check
+cat badtux.check | while read a ; do nm $OFILES | egrep ':| . '$a'$' | egrep -B1 ' . '$a'$' ; done | egrep -v -- -- > wh.check
+(cat wh.check | tr -d '\n' ; echo) | sed -r -e 's/[.][/]([-0-9a-zA-Z_]*[/])*/\n/g' | sed -r -e 's/:.* / /' | awk '{printf("%-18s %s\n",$1,$2)}' | sort > sorted.check
+egrep -v ' main$' sorted.check
+
+echo
+echo ++++++++++++++++ things leaking out of shared objects +++++++++++++++++++++
+nm $SOFILES | egrep ' [A-TV-Z] [^_]|:' | awk '/.*[/]([^/]+)[.][a-zA-Z]*:/{file=$1} / [A-Za-z] /{printf("%-33s %s\n",file,$3)}' > soD.check
+while read a ; do
+	for i in $SOFILES ; do
+		j=`echo $i | sed -r -e 's/.*[/]([^/]+)[.][a-z]+$/\1/'`
+		echo '[^a-zA-Z_0-9]'${j}_$a'$'
+	done
+done > patterns.check <<-DONE
+	get_tool_count
+	get_name
+	get_icon
+	get_description
+	requires_colors
+	modes
+	set_color
+	init
+	api_version
+	shutdown
+	click
+	drag
+	release
+	switchin
+	switchout
+DONE
+egrep -v -f patterns.check soD.check
+
+echo
+echo ++++++++++++++++ things belonging in .bss that may end up in .data instead +++++++++++++++++++++
+egrep '^[a-zA-Z_].*= *(NULL|0|'\'\\0\'') *; *$' $CFILES $HFILES

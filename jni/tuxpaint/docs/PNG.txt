@@ -1,0 +1,149 @@
+PNG.txt for Tux Paint
+
+Tux Paint - A simple drawing program for children.
+
+Copyright 2002-2007 by Bill Kendrick and others
+bill@newbreedsoftware.com
+http://www.tuxpaint.org/
+
+June 27, 2002 - June 19, 2007
+$Id: PNG.txt,v 1.6 2007/06/19 20:21:54 wkendrick Exp $
+
+
+About PNGs
+----------
+  PNG is the Portable Network Graphic format.  It is an open standard,
+  not burdened by patents (like GIFs).  It is a highly compressed format
+  (though not "lossy" like JPEGs - lossiness allows files to be much
+  smaller, but introduces 'mistakes' in the image when saved), and
+  supports 24-bit color (16.7 million colors) as well as a full
+  "alpha channel" - that is, each pixel can have a varying degree of
+  transparency.
+
+  For more information, visit:  http://www.libpng.org/
+
+  These features (openness, losslessness, compression, transparency/alpha)
+  make it the best choice for Tux Paint.  (Tux Paint's support for the PNG
+  format comes from the Open Source SDL_Image library, which in turn gets
+  it from the libPNG library.)
+
+  Support for many colors allows photo-quality "rubber stamp" images to
+  be used in Tux Paint, and alpha transparency allows for high-quality
+  "paint brushes."
+
+
+How To Make PNGs
+----------------
+  The following is a very _brief_ list of ways to create PNGs or
+  convert existing images into PNGs.
+
+
+  Linux/Unix Users
+  ----------------
+    The GIMP
+    --------
+      The best tool with which to create PNG images for use in Tux Paint is
+      the GNU Image Manipulation Program ("The GIMP"), a high-quality
+      Open Source interactive drawing and photo editing program.
+
+      It's probably already installed on your Linux system.  If not, it's
+      almost definitely available on the install CD or from your
+      distribution's download site.  Otherwise:
+
+        http://www.gimp.org/
+
+
+    Krita
+    -----
+      Krita is a painting and image editing application for KOffice.
+
+        http://koffice.kde.org/krita/
+
+
+    NetPBM
+    ------
+      The Portable Bitmap tools (collectively known as "NetPBM") is a
+      collection of Open Source command-line tools which convert to and from
+      various formats, including GIF, TIFF, BMP, PNG, and many more.
+
+      NOTE: The NetPBM formats (Portable Bitmap: PBM,
+      Portable Greymap: PGM, Portable Pixmap: PPM, and the catch-all
+      Portable Any Map: PNM) do not support alpha, so any transparency
+      information (e.g. from within a GIF) will be lost!  Use The GIMP!
+
+      It's probably already installed on your Linux system.  If not, it's
+      almost definitely available on the install CD or from your
+      distribution's download site.  Otherwise:
+
+        http://netpbm.sourceforge.net/
+
+
+    cjpeg/djpeg
+    -----------
+      The "cjpeg" and "djpeg" command-line programs convert between
+      the NetPBM Portable Any Map (PNM) format and JPEGs.
+
+      It's probably already installed on your Linux system.
+      (Under Debian, this is available in the package "libjpeg-progs".)
+      If not, it's almost definitely available on the install CD or from
+      your distribution's download site.  Otherwise:
+
+        ftp://ftp.uu.net/graphics/jpeg/
+
+
+  Windows Users
+  -------------
+    The Gimp
+      http://www.gimp.org/~tml/gimp/win32/
+
+    Canvas (Deneba)
+      http://www.deneba.com/products/canvas8/default2.html
+
+    CorelDRAW (Corel)
+      http://www.corel.com/
+
+    Fireworks (Macromedia)
+      http://macromedia.com/software/fireworks/
+      
+    Illustrator (Adobe)
+      http://www.adobe.com/products/illustrator/main.html
+
+    Paint Shop Pro (Jasc)
+      http://www.jasc.com/products/psp/
+    
+    Photoshop (Adobe)
+      http://www.adobe.com/products/photoshop/main.html
+
+    PIXresizer (Bluefive software)
+      http://bluefive.pair.com/pixresizer.htm
+
+
+  Macintosh Users
+  ---------------
+    Canvas (Deneba)
+      http://www.deneba.com/products/canvas8/default2.html
+
+    CorelDRAW (Corel)
+      http://www.corel.com/
+
+    Fireworks (Macromedia)
+      http://macromedia.com/software/fireworks/
+
+    GraphicConverter (Lemke Software)
+      http://www.lemkesoft.de/us_gcabout.html
+
+    Illustrator (Adobe)
+      http://www.adobe.com/products/illustrator/main.html
+      
+    Photoshop (Adobe)
+      http://www.adobe.com/products/photoshop/main.html
+
+
+More Info.
+----------
+  The libPNG website lists image editors and image converts that
+  support the PNG format:
+
+    http://www.libpng.org/pub/png/pngaped.html
+    http://www.libpng.org/pub/png/pngapcv.html
+

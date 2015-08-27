@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-string</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-statement.html" title="cr-statement">
+<link rel="next" href="libcroco-cr-style.html" title="cr-style">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-statement.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-style.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-string.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-string.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-string"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-string.top_of_page"></a>cr-string</span></h2>
+<p>cr-string</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-string.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString">CRString</a>;
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-string.html#cr-string-destroy" title="cr_string_destroy ()">cr_string_destroy</a>                   (<em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> *a_this</code></em>);
+<a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="returnvalue">CRString</span></a> *          <a class="link" href="libcroco-cr-string.html#cr-string-dup" title="cr_string_dup ()">cr_string_dup</a>                       (<em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> const *a_this</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="libcroco-cr-string.html#cr-string-dup2" title="cr_string_dup2 ()">cr_string_dup2</a>                      (<em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> const *a_this</code></em>);
+<a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="returnvalue">CRString</span></a> *          <a class="link" href="libcroco-cr-string.html#cr-string-new" title="cr_string_new ()">cr_string_new</a>                       (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="returnvalue">CRString</span></a> *          <a class="link" href="libcroco-cr-string.html#cr-string-new-from-gstring" title="cr_string_new_from_gstring ()">cr_string_new_from_gstring</a>          (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Strings.html#GString"><span class="type">GString</span></a> const *a_string</code></em>);
+<a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="returnvalue">CRString</span></a> *          <a class="link" href="libcroco-cr-string.html#cr-string-new-from-string" title="cr_string_new_from_string ()">cr_string_new_from_string</a>           (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *a_string</code></em>);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="libcroco-cr-string.html#cr-string-peek-raw-str" title="cr_string_peek_raw_str ()">cr_string_peek_raw_str</a>              (<em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> const *a_this</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="libcroco-cr-string.html#cr-string-peek-raw-str-len" title="cr_string_peek_raw_str_len ()">cr_string_peek_raw_str_len</a>          (<em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> const *a_this</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-string.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-string.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRString"></a><h3>struct CRString</h3>
+<pre class="programlisting">struct CRString {
+	/**
+	 *The GString where all the string
+	 *operation happen.
+	 */
+	GString *stryng ;
+	/**
+	 *The parsing location storage area.
+	 */
+	CRParsingLocation location ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-string-destroy"></a><h3>cr_string_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_string_destroy                   (<em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-string-dup"></a><h3>cr_string_dup ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="returnvalue">CRString</span></a> *          cr_string_dup                       (<em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> const *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-string-dup2"></a><h3>cr_string_dup2 ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             cr_string_dup2                      (<em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> const *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-string-new"></a><h3>cr_string_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="returnvalue">CRString</span></a> *          cr_string_new                       (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-string-new-from-gstring"></a><h3>cr_string_new_from_gstring ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="returnvalue">CRString</span></a> *          cr_string_new_from_gstring          (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Strings.html#GString"><span class="type">GString</span></a> const *a_string</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-string-new-from-string"></a><h3>cr_string_new_from_string ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="returnvalue">CRString</span></a> *          cr_string_new_from_string           (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *a_string</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-string-peek-raw-str"></a><h3>cr_string_peek_raw_str ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       cr_string_peek_raw_str              (<em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> const *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-string-peek-raw-str-len"></a><h3>cr_string_peek_raw_str_len ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                cr_string_peek_raw_str_len          (<em class="parameter"><code><a class="link" href="libcroco-cr-string.html#CRString" title="struct CRString"><span class="type">CRString</span></a> const *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

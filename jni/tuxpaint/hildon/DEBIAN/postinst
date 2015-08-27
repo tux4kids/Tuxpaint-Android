@@ -1,0 +1,16 @@
+#! /bin/sh
+
+# The clock might be wrong and we know that we need to update the icon
+# cache so we just force it.
+
+gtk-update-icon-cache -f /usr/share/icons/hicolor
+
+# Now we are ready to let the user move the entry around, but only if
+# this is a new install
+
+mkdir /media/mmc1/tuxpaint
+
+maemo-select-menu-location tuxpaint.desktop tana_fi_games
+
+
+exit 0

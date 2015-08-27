@@ -1,0 +1,11 @@
+prefix=/home/chris/android-9
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Fontconfig
+Description: Font configuration and customization library
+Version: 2.8.0
+Libs: -L${libdir} -lfontconfig
+Libs.private: -L/home/chris/android-9/lib -lxml2    -L/home/chris/android-9/lib -lfreetype -lz -liconv
+Cflags: -I${includedir}

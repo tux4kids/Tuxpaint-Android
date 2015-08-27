@@ -1,0 +1,1096 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+	<head><title>Documentaci&oacute;n de las OPCIONES de Tux Paint</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+	<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#FF0000" alink="#FF00FF">
+<center>
+  <h1>Tux&nbsp;Paint<br>
+    versi&oacute;n 0.9.14</h1>
+  <h2>Documentaci&oacute;n de Opciones</h2>
+  <p>Copyright 2004 por Bill Kendrick<br>
+    New Breed Software</p>
+  <p><a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a><br>
+    <a href="http://www.newbreedsoftware.com/tuxpaint/">http://www.newbreedsoftware.com/tuxpaint/</a></p>
+  <p>24 de Setiembre de 2004</p>
+  <hr size=2 noshade>
+</center>
+<div align="left"> 
+  <h1>Tux Paint Config.</h1>
+  <blockquote> 
+    <p>Desde la versi&oacute;n 0.9.14 de Tux Paint, existe una herramienta gr&aacute;fica 
+      que permite cambiar el comportamiento del Tux Paint. Sin embargo, si se 
+      prefiriera no instalar y usar esa herramienta o si se quisiera un mayor 
+      entendimiento de las opciones disponibles, por favor continuar leyendo.</p>
+  </blockquote>
+</div>
+<hr size=2 noshade>
+<h1>Archivo de Configuraci&oacute;n</h1>
+<blockquote> 
+  <p>Es posible crear un simple archivo de configuraci&oacute;n para Tux&nbsp;Paint, 
+    el cual ser&aacute; le&iacute;do cada vez que se inicie el programa.</p>
+  <p>El archivo es simplemente un archivo de texto conteniendo las opciones que 
+    se desea habilitar:</p>
+  <h2>Usuarios de Linux, Unix y Mac&nbsp;OS&nbsp;X</h2>
+  <blockquote> 
+    <p>El archivo se crear&aacute; con el nombre &quot;<code><b>.tuxpaintrc</b></code>&quot; 
+      y debe ser colocado en cada directorio presonal. (tambi&eacute;n referido 
+      como: &quot;<code>~/.tuxpaintrc</code>&quot; o &quot;<code>$HOME/.tuxpaintrc</code>&quot;)</p>
+    <h3>Archivo de Configuraci&oacute;n del Sistema (Linux y Unix)</h3>
+    <blockquote> 
+      <p>Antes de que el mencionado archivo sea le&iacute;do, es le&iacute;do 
+        un archivo de configuraci&oacute;n gen&eacute;rico del sistema. (De forma 
+        predeterminada, esta configuraci&oacute;n no contiene ninguna opci&oacute;n 
+        predeterminada.) Se encuentra ubicado en:</p>
+      <code>/etc/tuxpaint/tuxpaint.conf</code> 
+      <p>Es posible deshabilitar completamente la lectura de este archivo, dejando 
+        las preferencias como vienen de f&aacute;brica (las que pueden ser entonces 
+        sobreescritas por un archivo &quot;<code>.tuxpaintrc</code>&quot; y/o 
+        argumentos de l&iacute;nea de comandos), esto se logra mediante la opci&oacute;n 
+        de l&iacute;nea de comandos:</p>
+      <code>--nosysconfig</code></blockquote>
+  </blockquote>
+  <h2>Usuarios de Windows</h2>
+  <blockquote> 
+    <p>El archivo se crear&aacute; con el nombre &quot;<code><b>tuxpaint.cfg</b></code>&quot; 
+      y debe ser colocado en el directorio del Tux&nbsp;Paint.</p>
+    <p>Es posible utilizar el Bloc de Notas o WordPad para crearlo. Es importante 
+      asegurarse de que el archivo sea guardado como Documento de Texto y que 
+      el nombre del archivo no contenga la extensi&oacute;n &quot;.txt&quot; al 
+      final...</p>
+  </blockquote>
+</blockquote>
+<hr size=2 noshade>
+<h1>Opciones Disponibles</h1>
+<blockquote> 
+  <p>Las siguientes opciones pueden ser establecidas en el archivo de configuraci&oacute;n. 
+    (Las opciones de l&iacute;nea de comandos las sobreescribir&aacute;n. Ver 
+    las &quot;<a href="#command_line"><i>Opciones de L&iacute;nea de Comandos</i></a>&quot; 
+    m&aacute;s abajo.)</p>
+  <dl>
+    <dt><code><b>fullscreen=yes</b></code> 
+    <dd>Ejecuta el programa en modo pantalla completa, en vez de en una ventana. 
+    <dt><code><b>800x600=yes</b></code> 
+    <dd>Ejecuta el programa con una resoluci&oacute;n de 800x600 (EXPERIMENTAL), 
+      en vez de la resoluci&oacute;n normal de 640x480. 
+    <dt><code><b>nosound=yes</b></code> 
+    <dd>Deshabilita los efectos de sonido. 
+    <dt><code><b>noquit=yes</b></code> 
+    <dd>Deshabilita el bot&oacute;n &quot;Salir&quot; en pantalla. (Presionar 
+      la tecla <b>[Escape]</b> o hacer clic sobre el bot&oacute;n de cerrar ventana 
+      seguir&aacute; funcionando.) 
+    <dt><code><b>noprint=yes</b></code> 
+    <dd>Deshabilita la impresi&oacute;n. 
+    <dt><code><b>printdelay=<i>SEGUNDOS</i></b></code> 
+    <dd>Restringe la impresi&oacute;n de manera que &eacute;sta pueda ocurrir 
+      s&oacute;lo una vez cada <i>SEGUNDOS</i> segundos. 
+    <dt><code><b>printcommand=<i>COMANDO</i></b></code> 
+    <dd><i> (S&oacute;lamente Linux y Unix)</i></dd>
+    <dd>Usa el comando <i>COMANDO</i> para imprimir un archivo PNG. Si no se especifica, 
+      el comando por defecto es: 
+  </dl>
+  <blockquote> 
+    <dl>
+      <dd><code>pngtopnm | pnmtops | lpr</code> 
+    </dl>
+  </blockquote>
+  <dl>
+    <dd>Lo cual convierte la PNG en un archivo 'portable&nbsp;anymap' de NetPBM, 
+      luego convierte eso a un archivo PostScript y finalmente env&iacute;a este 
+      &uacute;ltimo a la impresora utilizando el comando &quot;<code>lpr</code>&quot;. 
+    <dt><code><b>printcfg=yes</b></code> 
+    <dd><code><b><i></i></b></code><i>(Solamente Windows)</i>
+      <dl>
+        <dt>Tux&nbsp;Paint utilizar&aacute; un archivo de configuraci&oacute;n de impresora 
+          al imprimir. Presionar la tecla <b>[ALT]</b> al hacer clic sobre el 
+          bot&oacute;n 'Imprimir' en el Tux&nbsp;Paint para lograr acceder al di&aacute;logo 
+          de configuraci&oacute;n de impresi&oacute;n de Windows.<br>
+          <br>
+          (Nota: Esto s&oacute;lo funciona si no se est&aacute; ejecutando Tux&nbsp;
+          Paint a pantalla completa.) Cualquier cambio en la configuraci&oacute;n 
+          hecha dentro de este di&aacute;logo ser&aacute; guardada en el archivo 
+          &quot;<code>userdata/print.cfg</code>&quot; y utilizada nuevamente, 
+          siempre que se encuentre activada la opci&oacute;n &quot;printcfg&quot;. 
+        </dt>
+      </dl>
+    </dd>
+    <dt><code><b>simpleshapes=yes</b></code> </dt>
+    <dd>Deshabilita el paso de rotaci&oacute;n en la herramienta 'Figuras'. Hacer 
+      clic, arrastrar y soltar ser&aacute; todo lo necesario para dibujar una 
+      figura. </dd>
+    <dt><code><b>uppercase=yes</b></code> </dt>
+    <dd>Todo el texto ser&aacute; mostrado en may&uacute;sculas (p.ej.: &quot;Pincel&quot; 
+      ser&aacute; &quot;PINCEL&quot;). &Uacute;til para ni&ntilde;os que pueden 
+      leer, pero que hasta el momento s&oacute;lo han aprendido las letras may&uacute;sculas. 
+    </dd>
+    <dt><code><b>grab=yes</b></code> </dt>
+    <dd>Tux Paint intentar&aacute; 'retener' el rat&oacute;n y el teclado, de 
+      modo que el rat&oacute;n quede confinado a la ventana del Tux Paint y casi 
+      todo ingreso por teclado sea pasado directamente al programa. </dd>
+    <dd>Esto es &uacute;til para deshabilitar acciones del sistema operativo que 
+      podr&iacute;an sacar al usuario fuera de Tux Paint, como el ciclado de ventanas 
+      hecho con <b>[Alt]-[Tab]</b>, <b>[Ctrl]-[Escape]</b>, etc. Esto resulta 
+      especialmente &uacute;til en modo pantalla completa. </dd>
+    <dt><code><b>noshortcuts=yes</b></code> </dt>
+    <dd>Esto deshabilita los atajos de teclado (p.ej.: <b>[Ctrl]-[S]</b> para 
+      guardar, <b>[Ctrl]-[N]</b> para una nueva imagen, etc.) </dd>
+    <dd>Es &uacute;til para prevenir que comandos indeseados sean activados por 
+      los ni&ntilde;os que son inexperientes con el uso del teclado. </dd>
+    <dt><code><b>nowheelmouse=yes</b></code> </dt>
+    <dd>Esto deshabilita el soporte para la rueda, en los ratones que tienen. 
+      (Normalmente, la rueda desplaza el men&uacute; del selector de la derecha.) 
+    </dd>
+    <dt><code><b>nofancycursors=yes</b></code> </dt>
+    <dd>Esto deshabilita los punteros de con formas de adorno en Tux&nbsp;Paint 
+      y utiliza el cursor normal del entorno donde est&aacute; siendo ejecutado 
+      el programa. </dd>
+    <dd>En algunos entornos los cursores de adorno pueden causar problemas. Utiliza 
+      esta opci&oacute;n para evitarlos. </dd>
+    <dt><code><b>nooutlines=yes</b></code> </dt>
+    <dd>En este modo, se muestran contornos y 'banditas de goma' mucho m&aacute;s 
+      simples al utilizar las herramientas <b>L&iacute;neas</b>, <b>Figuras</b>, 
+      <b>Sellos</b> y <b>Goma de Borrar</b>. </dd>
+    <dd>Esto puede ayudar cuando Tux&nbsp;Paint es ejecutado en computadoras muy 
+      lentas o si est&aacute; siendo visto atrav&eacute;s de una pantalla X-Window 
+      remota. </dd>
+    <dt><code><b>nostamps=yes</b></code> </dt>
+    <dd>Esta opci&oacute;n hace que Tux&nbsp;Paint no cargue ninguna imagen de 
+      sellos, lo que a su vez termina deshabilitando la herramienta <b>Sellos</b>. 
+    </dd>
+    <dd>Esto puede acelerar la primera carga del Tux&nbsp;Paint y reducir el consumo 
+      de memoria al ser ejecutado. Por supuesto no estar&aacute;n disponibles 
+      en absoluto los sellos. </dd>
+    <dt><code><b>nostampcontrols=yes</b></code> </dt>
+    <dd>Algunas im&aacute;genes de la herramienta <b>Sellos</b> pueden ser espejadas, 
+      invertidas y/o cambiadas de tama&ntilde;o. Esta opci&oacute;n deshabilita 
+      esos controles y s&oacute;lo pemite usar los sellos tal como vienen. </dd>
+    <dt><code><b>mirrorstamps=yes</b></code> </dt>
+    <dd>En el caso de los sellos que pueden ser espejados, esta opci&oacute;n 
+      los espeja autom&aacute;ticamente por defecto. </dd>
+    <dd>Esto puede ser &uacute;til para gente que prefiera las cosas de derecha 
+      a izquierda, en vez de izquierda a derecha. </dd>
+    <dt><code><b>keyboard=yes</b></code> </dt>
+    <dd>Esto permite que las teclas de cursor del teclado sean utilizadas para 
+      controlar el puntero del rat&oacute;n. (para entornos donde no haya rat&oacute;n 
+      disponible.) </dd>
+    <dd>Las teclas de <b>[Cursor]</b> mueven el puntero del rat&oacute;n. La <b>[Barra 
+      Espaciadora]</b> act&uacute;a como el bot&oacute;n del rat&oacute;n.</dd>
+    <dt><b><code></code></b><code><b>savedir=<i>DIRECTORIO</i></b></code></dt>
+    <dd><code><b><i></i></b></code>Esta opci&oacute;n cambia la ubicaci&oacute;n 
+      donde el Tux&nbsp;Paint guarda las im&aacute;genes. Por defecto se hace 
+      en &quot;<code>~/.tuxpaint/saved/</code>&quot; bajo Linux y Unix, y en &quot;<code>userdata\</code>&quot; 
+      bajo Windows.<br>
+      Esto puede ser &uacute;til en un sal&oacute;n con m&aacute;quinas Windows, 
+      donde Tux&nbsp;Paint est&eacute; instalado en un servidor y cada ni&ntilde;o 
+      lo use desde su estaci&oacute;n de trabajo. Es posible establecer <code>savedir</code> 
+      para que sea una carpeta dentro de su directorio presonal. (p.ej.: &quot;<code>H:\tuxpaint\</code>&quot;)<br>
+      <b>Nota:</b> Al especificar un disco de Windows (p.ej.: &quot;<code>H:\</code>&quot;), 
+      tambi&eacute;n se debe especificar un directorio.<br>
+      <b>Ejemplo:</b> <code>savedir=Z:\tuxpaint\</code></dd>
+    <dt><code><b>saveover=yes</b></code> </dt>
+    <dd>Esto deshabilita la consulta &quot;<i>&iquest;Guardar sobre la versi&oacute;n 
+      anterior...?</i>&quot; al guardar un archivo ya existente. Con esta opci&oacute;n, 
+      la versi&oacute;n antigua ser&aacute; autom&aacute;ticamente reemplazada 
+      por la nueva autom&aacute;ticamente. </dd>
+    <dt><code><b>saveover=new</b></code> </dt>
+    <dd>Esto tambi&eacute;n deshabilita la consulta &quot;<i>&iquest;Guardar sobre 
+      la versi&oacute;n anterior...?</i>&quot; al guardar un archivo ya existente. 
+      Esta opci&oacute;n, sin embargo, siempre guardar&aacute; un nuevo archivo, 
+      en vez de sobreescribir la versi&oacute;n antigua. </dd>
+    <dt><code><b>saveover=ask</b></code> </dt>
+    <dd><i>(Esta opci&oacute;n es redundante, al ser la opci&oacute;n por defecto.)</i></dd>
+    <dd>Al intentar guardar un dibujo ya existente, se consultar&aacute; antes 
+      si se va a guardar sobre la versi&oacute;n anterior o no. </dd>
+    <dt><code><b>nosave=yes</b></code> </dt>
+    <dd>Esta opci&oacute;n deshabilita la capacidad del Tux&nbsp;Paint de guardar 
+      archivos (y por lo tanto deshabilita el bot&oacute;n &quot;Guardar&quot; 
+      en la pantalla). Puede ser utilizada en situaciones donde el programa est&aacute; 
+      s&oacute;lamente siendo utilizado por diversi&oacute;n o en un entorno de 
+      prueba.</dd>
+    <dt><code><b>lang=<i>IDIOMA</i></b></code> </dt>
+  </dl>
+  <dl>
+    <dd>Ejecuta Tux&nbsp;Paint en uno de los idiomas soportados. Las opciones 
+      actualmente disponibles para <i>IDIOMA</i> son:</dd>
+    <dd> 
+      <div align="left"> 
+        <table border=1 cellspacing=0 cellpadding=4 summary="Possible values for 'lang' language setting">
+          <tr> 
+            <td nowrap><code>spanish</code></td>
+            <td nowrap><code>espanol</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Espa&ntilde;ol</td>
+          </tr>
+          <tr> 
+            <td><code>afrikaans</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Africaans</td>
+          </tr>
+          <tr> 
+            <td><code>basque</code></td>
+            <td><code>euskara</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Vasco</td>
+          </tr>
+          <tr> 
+            <td><code>belarusian</code></td>
+            <td><code>bielaruskaja</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Bielorruso</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>bokmal</code></td>
+            <td nowrap><code>&nbsp;</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Noruego (Bokmal)</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>brazilian-portuguese</code></td>
+            <td nowrap><code>portuges-brazilian</code></td>
+            <td nowrap><code>brazilian</code></td>
+            <td nowrap align="right" bgcolor="#dcdcff">Portugu&eacute;s (Brasil)</td>
+          </tr>
+          <tr> 
+            <td><code>breton</code></td>
+            <td><code>brezhoneg</code></td>
+            <td>&nbsp;</td>
+            <td nowrap align="right" bgcolor="#dcdcff">Bret&oacute;n</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>british-english</code></td>
+            <td nowrap><code>british</code></td>
+            <td nowrap>&nbsp;</td>
+            <td nowrap align="right" bgcolor="#dcdcff">Ingl&eacute;s (Reino Unido)</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>bulgarian</code></td>
+            <td nowrap>&nbsp; </td>
+            <td nowrap>&nbsp; </td>
+            <td align="right" nowrap bgcolor="#dcdcff">B&uacute;lgaro</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>catalan</code></td>
+            <td nowrap><code>catala</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Catal&aacute;n</td>
+          </tr>
+          <tr> 
+            <td><code>chinese</code></td>
+            <td><code>simplified-chinese</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Chino (simplificado)</td>
+          </tr>
+          <tr> 
+            <td><code>croatian</code></td>
+            <td><code>hrvatski</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Croata</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>czech</code></td>
+            <td nowrap><code>cesky</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Checo</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>danish</code></td>
+            <td nowrap><code>dansk</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Dan&eacute;s</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>dutch</code></td>
+            <td nowrap>&nbsp;</td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Holand&eacute;s</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>english</code></td>
+            <td nowrap><code>american-english</code></td>
+            <td nowrap>&nbsp;</td>
+            <td nowrap align="right" bgcolor="#dcdcff">Ingl&eacute;s (EE.UU.)</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>finnish</code></td>
+            <td nowrap><code>suomi</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Finland&eacute;s</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>french</code></td>
+            <td nowrap><code>francais</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Franc&eacute;s</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>german</code></td>
+            <td nowrap><code>deutsch</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Alem&aacute;n</td>
+          </tr>
+          <tr> 
+            <td><code>greek</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Griego</td>
+          </tr>
+          <tr> 
+            <td><code>hebrew</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Hebreo</td>
+          </tr>
+          <tr> 
+            <td><code>hindi</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Hind&uacute;</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>hungarian</code></td>
+            <td nowrap><code>magyar</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">H&uacute;ngaro</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>icelandic</code></td>
+            <td nowrap><code>islenska</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Island&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>indonesian</code></td>
+            <td><code>bahasa-indonesia</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Indonesio</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>italian</code></td>
+            <td nowrap><code>italiano</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Italiano</td>
+          </tr>
+          <tr> 
+            <td><code>japanese</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Japon&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>klingon</code></td>
+            <td><code>tlhIngan</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Klingon</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>korean</code></td>
+            <td nowrap>&nbsp;</td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Coreano</td>
+          </tr>
+          <tr> 
+            <td><code>lithuanian</code></td>
+            <td><code>lietuviu</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Lituano</td>
+          </tr>
+          <tr> 
+            <td><code>malay</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Malayo</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>norwegian</code></td>
+            <td nowrap><code>nynorsk</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Noruego</td>
+          </tr>
+          <tr> 
+            <td><code>polish</code></td>
+            <td><code>polski</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Polaco</td>
+          </tr>
+          <tr> 
+            <td><code>portuguese</code></td>
+            <td><code>portugues</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Portugu&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>romanian</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Rumano</td>
+          </tr>
+          <tr> 
+            <td><code>russian</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Ruso</td>
+          </tr>
+          <tr> 
+            <td><code>serbian</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Serbio</td>
+          </tr>
+          <tr> 
+            <td><code>slovak</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Eslovaco</td>
+          </tr>
+          <tr> 
+            <td><code>slovenian</code></td>
+            <td><code>slovensko</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Esloveno</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>swedish</code></td>
+            <td nowrap><code>svenska</code></td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Sueco</td>
+          </tr>
+          <tr> 
+            <td><code>tamil</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Tamil</td>
+          </tr>
+          <tr> 
+            <td><code>traditional-chinese</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Chino (tradicional)</td>
+          </tr>
+          <tr> 
+            <td nowrap><code>turkish</code></td>
+            <td nowrap>&nbsp;</td>
+            <td nowrap>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Turco</td>
+          </tr>
+          <tr> 
+            <td><code>vietnamese</code></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Vietnam&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>walloon</code></td>
+            <td><code>walon</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Val&oacute;n</td>
+          </tr>
+          <tr> 
+            <td><code>welsh</code></td>
+            <td><code>cymraeg</code></td>
+            <td>&nbsp;</td>
+            <td align="right" nowrap bgcolor="#dcdcff">Gal&eacute;s</td>
+          </tr>
+        </table>
+      </div>
+  </dl>
+</blockquote>
+<div align="left"> 
+  <hr size=2 noshade>
+  <h1>Sobreescribiendo las opciones de configuraci&oacute;n del sistema usando 
+    <code>.tuxpaintrc</code></h1>
+</div>
+<blockquote> 
+  <div align="left"> 
+    <p><i>(Para usuarios de Linux y Unix)<br>
+      <br>
+      </i>Si alguna de las opciones de arriba estuviara fijada en &quot;<code>etc/tuxpaint/tuxpaint.config</code>&quot;, 
+      es posible sobreescribirla en un archivo personal &quot;<code>~/.tuxpaintrc</code>&quot;.<br>
+      <br>
+      Para las opciones de tipo verdadero/falso, como &quot;<code>noprint</code>&quot; 
+      y &quot;<code>grab</code>&quot;, es posible asumir simplemente que equivalen 
+      a 'no' en el archivo &quot;<code>~/.tuxpaintrc</code>&quot;:</p>
+  </div>
+  <blockquote> 
+    <div align="left"> 
+      <p><code>noprint=no<br>
+        uppercase=no</code></p>
+    </div>
+  </blockquote>
+  <div align="left"> 
+    <p>O es posible usar opciones similares a las opciones de l&iacute;nea de 
+      comandos descriptas abajo. Por ejemplo<code>:</code></p>
+  </div>
+  <blockquote> 
+    <div align="left"> 
+      <p><code>print=yes<br>
+        </code><code>mixedcase=yes</code></p>
+    </div>
+  </blockquote>
+</blockquote>
+<blockquote> 
+  <div align="left"></div>
+</blockquote>
+<div align="left"> 
+  <hr size=2 noshade>
+  <h1><a name="command_line">Opciones de L&iacute;nea de Comandos</a></h1>
+</div>
+<blockquote> 
+  <div align="left"><a>T</a>ambi&eacute;n es posible enviar opciones en la l&iacute;nea 
+    de comandos al ejecutar Tux&nbsp;Paint. </div>
+  <blockquote> 
+    <p><code><b>--fullscreen<br>
+      --800x600<br>
+      --nosound<br>
+      --noquit<br>
+      --noprint<br>
+      --printdelay=SEGUNDOS<br>
+      --printcfg<br>
+      --simpleshapes<br>
+      --uppercase<br>
+      --grab<br>
+      --noshortcuts<br>
+      --nowheelmouse<br>
+      --nofancycursors<br>
+      --nooutlines<br>
+      --nostamps<br>
+      --nostampcontrols<br>
+      --mirrorstamps<br>
+      --keyboard<br>
+      --savedir&nbsp;DIRECTORIO<br>
+      --saveover<br>
+      --saveovernew<br>
+      --nosave<br>
+      --lang&nbsp;IDIOMA </b></code> Estos corresponden a las opciones de configuraci&oacute;n 
+      descriptas arriba.<br>
+      <code><b>--windowed<br>
+      --640x480<br>
+      --sound<br>
+      --quit<br>
+      --print<br>
+      --printdelay=0<br>
+      --noprintcfg<br>
+      --complexshapes<br>
+      --mixedcase<br>
+      --dontgrab<br>
+      --shortcuts<br>
+      --wheelmouse<br>
+      --fancycursors<br>
+      --outlines<br>
+      --stamps<br>
+      --stampcontrols<br>
+      --dontmirrorstamps<br>
+      --mouse<br>
+      --saveoverask<br>
+      --save</b></code></p>
+    <blockquote> 
+      <p>Estas opciones pueden ser utilizadas para sobreescribir cualquier opci&oacute;n 
+        incluida en el archivo de configuraci&oacute;n. (Si la opci&oacute;n no 
+        fue incluida en el archivo de configuraci&oacute;n, no ser&aacute; necesaria 
+        una opci&oacute;n de sobreescritura.)</p>
+    </blockquote>
+    <p><code><b>--locale localizaci&oacute;n</b></code></p>
+    <blockquote> 
+      <p>Ejecuta Tux&nbsp;Paint en uno de los idiomas soportados. Ver la secci&oacute;n 
+        &quot;<i><a href="#different_language">Escogiendo un Idioma Distinto</a></i>&quot; 
+        abajo para obtener los c&oacute;digos de localizaci&oacute;n a usar (p.ej: 
+        &quot;<code>de_DE@euro</code>&quot; para el Alem&aacute;n).<br>
+        <br>
+        (Si la localizaci&oacute;n ya est&aacute; establecida, mediante la variable 
+        de entorno &quot;<code>$LANG</code>&quot;, esta opci&oacute;n no deber&iacute;a 
+        ser necesaria, pues Tux&nbsp;Paint se ajusta a las preferencias de entorno, 
+        siempre que esto sea posible.)</p>
+    </blockquote>
+    <p><code><b>--nosysconfig</b></code></p>
+    <blockquote> 
+      <p>Bajo Linux y Unix, esta opci&oacute;n impide la lectura del archivo de 
+        configuraci&oacute;n global del sistema: &quot;<code>/etc/tuxpaint/tuxpaint.conf</code>&quot;.<br>
+        <br>
+        Solamente el archivo personal de configuraci&oacute;n &quot;<code>~/.tuxpaintrc</code>&quot; 
+        ser&aacute; usado, en caso de existir.</p>
+    </blockquote>
+    <p><code><b>--nolockfile</b></code></p>
+    <blockquote> 
+      <p>Por defecto, Tux&nbsp;Paint utiliza algo denominado 'archivo de bloqueo' 
+        (en ingl&eacute;s: 'lockfile') para prevenir que el programa sea lanzado 
+        m&aacute;s de una vez cada 30 segundos. (Esto es para prevenir la ejecuci&oacute;n 
+        accidental de m&uacute;ltiples copias del programa; por ejemplo, haciendo 
+        doble-clic sobre un lanzador de un s&oacute;lo clic o simplemente por 
+        m&uacute;ltiples clics impacientes sobre su &iacute;cono.)<br>
+        <br>
+        Para hacer que Tux Paint ignore el bloqueo, premiti&eacute;ndole ejecutarse 
+        nuevamente, a&uacute;n si no hubieran transcurrido 30&nbsp;segundos, ejecutar 
+        Tux&nbsp;Paint con la opci&oacute;n '<code>--nolockfile</code>' en la 
+        l&iacute;nea de comandos.<br>
+        <br>
+        Por defecto, el archivo de bloqueo es guardado en &quot;<code>~/.tuxpaint/</code>&quot; 
+        bajo Linux y Unix, y en &quot;<code>userdata\</code>&quot; bajo Windows.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>&nbsp;</p>
+<dd> 
+  <hr size=1 noshade>
+<dd> 
+  <h2>Opciones informativas de la l&iacute;nea de comandos</h2>
+<dd> 
+  <blockquote> 
+    <p> Las siguientes opciones muestran texto informativo en pantalla. Sin embargo 
+      Tux&nbsp;Paint no se llega a ejecutar realmente despu&eacute;s de esto<b><code>.</code></b></p>
+    <blockquote> 
+      <blockquote> 
+        <p><code><b>--version</b></code></p>
+        <blockquote> 
+          <p>Muestra el n&uacute;mero de versi&oacute;n y fecha de la copia de 
+            Tux&nbsp;Paint que se est&aacute; ejecutando. Tambi&eacute;n lista 
+            que opciones de compilaci&oacute;n fueron usadas, en caso que se haya 
+            usado alguna. (Ver INSTALACION.txt y FAQ.txt).</p>
+        </blockquote>
+        <p><code><b>--copying</b></code></p>
+        <blockquote> 
+          <p>Muestra una breve informaci&oacute;n acerca de la licencia de uso 
+            y copia de Tux&nbsp;Paint.</p>
+        </blockquote>
+        <p><code><b>--usage</b></code></p>
+        <blockquote> 
+          <p>Muestra la lista de opciones de l&iacute;nea de comandos disponibles.</p>
+        </blockquote>
+        <p><code><b>--help</b></code></p>
+        <blockquote> 
+          <p>Muestra una breve ayuda acerca de c&oacute;mo usar Tux&nbsp;Paint.</p>
+        </blockquote>
+        <p><code><b>--lang help</b></code></p>
+        <blockquote> 
+          <p>Muestra una lista de los idiomas disponibles en Tux&nbsp;Paint.</p>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+  <hr noshade>
+  <h1><a name="different_language">Escogiendo un idioma distinto</a></h1>
+  <blockquote> 
+    <p>Tux&nbsp;Paint ha sido traducido a varios idiomas. Para acceder a las traducciones, 
+      es posible usar la opci&oacute;n &quot;<code>--lang</code>&quot; en la l&iacute;nea 
+      de comandos para fijar el idioma (p.ej: &quot;<code>--lang&nbsp;english</code>&quot;) 
+      o usar la opci&oacute;n &quot;<code>lang=</code>&quot; en el archivo de 
+      configuraci&oacute;n (p.ej: &quot;<code>lang=english</code>&quot;).</p>
+    <p>Tux&nbsp;Paint tambi&eacute;n se adapta a la localizaci&oacute;n actual 
+      del entorno. (Es posible sobreescribirla en la l&iacute;nea de comandos 
+      usando la opci&oacute;n &quot;<code>--locale</code>&quot; (ver <a href="#locale">arriba</a>).</p>
+    <p>Usar la opci&oacute;n &quot;<code>--lang&nbsp;help</code>&quot; para obtener 
+      un listado de los idiomas disponibles.</p>
+    <h2>Idiomas disponibles</h2>
+    <blockquote> 
+      <blockquote> 
+        <table border=1 cellspacing=0 cellpadding=2 summary="Locale values and the languages they represent.">
+          <tr> 
+            <th>C&oacute;digo de la<br>
+              Localizaci&oacute;n</th>
+            <th>Idioma<br>
+              (nombre nativo)</th>
+            <th>Idioma<br>
+              (nombre Espa&ntilde;ol)</th>
+          </tr>
+          <tr> 
+            <td><code>es_ES@euro</code></td>
+            <td>Espa&ntilde;ol</td>
+            <td>Espa&ntilde;ol</td>
+          </tr>
+          <tr> 
+            <td><code>af_ZA</code></td>
+            <td>&nbsp;</td>
+            <td>Africaans</td>
+          </tr>
+          <tr> 
+            <td><code>be_BY</code></td>
+            <td>Bielaruskaja</td>
+            <td>Bielorruso</td>
+          </tr>
+          <tr> 
+            <td><code>bg_BG</code></td>
+            <td>&nbsp;</td>
+            <td>B&uacute;lgaro</td>
+          </tr>
+          <tr> 
+            <td><code>br_FR</code></td>
+            <td>Brezhoneg</td>
+            <td>Bret&oacute;n</td>
+          </tr>
+          <tr> 
+            <td><code>C</code></td>
+            <td>&nbsp;</td>
+            <td>Ingl&eacute;s (EE.UU.)</td>
+          </tr>
+          <tr> 
+            <td><code>ca_ES</code></td>
+            <td>Catal&agrave;</td>
+            <td>Catal&aacute;n</td>
+          </tr>
+          <tr> 
+            <td><code>cs_CZ</code></td>
+            <td>Cesky</td>
+            <td>Checo</td>
+          </tr>
+          <tr> 
+            <td><code>cy_GB</code></td>
+            <td>Cymraeg</td>
+            <td>Gal&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>da_DK</code></td>
+            <td>Dansk</td>
+            <td>Dan&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>de_DE@euro</code></td>
+            <td>Deutsch</td>
+            <td>Alem&aacute;n</td>
+          </tr>
+          <tr> 
+            <td><code>el_GR.UTF8</code> (*)</td>
+            <td>&nbsp;</td>
+            <td>Griego</td>
+          </tr>
+          <tr> 
+            <td><code>en_GB</code></td>
+            <td>&nbsp;</td>
+            <td>Ingl&eacute;s (Reino Unido)</td>
+          </tr>
+          <tr> 
+            <td><code>eu_ES</code></td>
+            <td>Euskara</td>
+            <td>Vasco</td>
+          </tr>
+          <tr> 
+            <td><code>fi_FI@euro</code></td>
+            <td>Suomi</td>
+            <td>Finland&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>fr_FR@euro</code></td>
+            <td>Fran&ccedil;ais</td>
+            <td>Franc&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>he_IL</code> (*)</td>
+            <td>&nbsp;</td>
+            <td>Hebreo</td>
+          </tr>
+          <tr> 
+            <td><code>hi_IN</code> (*)</td>
+            <td>&nbsp;</td>
+            <td>Hind&uacute;</td>
+          </tr>
+          <tr> 
+            <td><code>hr_HR</code></td>
+            <td>Hrvatski</td>
+            <td>Croata</td>
+          </tr>
+          <tr> 
+            <td><code>hu_HU</code></td>
+            <td>Magyar</td>
+            <td>H&uacute;ngaro</td>
+          </tr>
+          <tr> 
+            <td><code>id_ID</code></td>
+            <td>Bahasa Indonesia</td>
+            <td>Indonesio</td>
+          </tr>
+          <tr> 
+            <td><code>is_IS</code></td>
+            <td>&Iacute;slenska</td>
+            <td>Island&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>it_IT@euro</code></td>
+            <td>Italiano</td>
+            <td>Italiano</td>
+          </tr>
+          <tr> 
+            <td><code>ja_JP.UTF-8</code> (*)</td>
+            <td>&nbsp;</td>
+            <td>Japon&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>ko_KR.UTF-8</code> (*)</td>
+            <td>&nbsp;</td>
+            <td>Coreano</td>
+          </tr>
+          <tr> 
+            <td><code>lt_LT.UTF-8</code></td>
+            <td>Lietuviu</td>
+            <td>Lituano</td>
+          </tr>
+          <tr> 
+            <td><code>ms_MY</code></td>
+            <td>&nbsp;</td>
+            <td>Malayo</td>
+          </tr>
+          <tr> 
+            <td><code>nb_NO</code></td>
+            <td>Norsk (bokm&aring;l)</td>
+            <td>Noruego (Bokmal)</td>
+          </tr>
+          <tr> 
+            <td><code>nn_NO</code></td>
+            <td>Norsk (nynorsk)</td>
+            <td>Noruego (Nynorsk)</td>
+          </tr>
+          <tr> 
+            <td><code>nl_NL@euro</code></td>
+            <td>&nbsp;</td>
+            <td>Holand&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>pl_PL</code></td>
+            <td>Polski</td>
+            <td>Polaco</td>
+          </tr>
+          <tr> 
+            <td><code>pt_BR</code></td>
+            <td>Portug&ecirc;s Brazileiro</td>
+            <td>Portugu&eacute;s (Brasil)</td>
+          </tr>
+          <tr> 
+            <td><code>pt_PT</code></td>
+            <td>Portug&ecirc;s</td>
+            <td>Portugu&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>ro_RO</code></td>
+            <td>&nbsp;</td>
+            <td>Rumano</td>
+          </tr>
+          <tr> 
+            <td><code>ru_RU</code></td>
+            <td>&nbsp;</td>
+            <td>Ruso</td>
+          </tr>
+          <tr> 
+            <td><code>sk_SK</code></td>
+            <td>&nbsp;</td>
+            <td>Eslovaco</td>
+          </tr>
+          <tr> 
+            <td><code>sl_SI</code></td>
+            <td>&nbsp;</td>
+            <td>Esloveno</td>
+          </tr>
+          <tr> 
+            <td><code>sr_YU</code></td>
+            <td>&nbsp;</td>
+            <td>Serbio</td>
+          </tr>
+          <tr> 
+            <td><code>sv_SE@euro</code></td>
+            <td>Svenska</td>
+            <td>Sueco</td>
+          </tr>
+          <tr> 
+            <td><code>ta_IN</code> (*)</td>
+            <td>&nbsp;</td>
+            <td>Tamil</td>
+          </tr>
+          <tr> 
+            <td><code>tlh</code> (*)</td>
+            <td>tlhIngan</td>
+            <td>Klingon</td>
+          </tr>
+          <tr> 
+            <td><code>tr_TR@euro</code></td>
+            <td>&nbsp;</td>
+            <td>Turco</td>
+          </tr>
+          <tr> 
+            <td><code>vi_VN</code></td>
+            <td>&nbsp;</td>
+            <td>Vietnam&eacute;s</td>
+          </tr>
+          <tr> 
+            <td><code>wa_BE@euro</code></td>
+            <td>&nbsp;</td>
+            <td>Val&oacute;n</td>
+          </tr>
+          <tr> 
+            <td><code>zh_CN</code> (*)</td>
+            <td>&nbsp;</td>
+            <td>Chino (simplificado)</td>
+          </tr>
+          <tr> 
+            <td><code>zh_TW</code> (*)</td>
+            <td>&nbsp;</td>
+            <td>Chino (tradicional)</td>
+          </tr>
+        </table>
+        <b>(*)</b> - Estos idiomas requieren sus propios tipos de letra (fuentes), 
+        porque no se representan utilizando el conjunto Latino de caracteres como 
+        los otros. Ver &quot;<a href="#special_fonts"><i>Fuentes Especiales</i></a>&quot;, 
+        abajo. 
+        <blockquote> 
+          <blockquote> 
+            <p></p>
+          </blockquote>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+    <h2>Estableciendo la localizaci&oacute;n del entorno</h2>
+  </blockquote>
+<dd> 
+  <blockquote> 
+    <p>Cambiar la localizaci&oacute;n afectar&aacute; muchas partes del entorno.</p>
+  </blockquote>
+<dd> 
+  <blockquote> 
+    <p>Como se mencion&oacute; arriba, adem&aacute;s de permitir cambiar el idioma 
+      en el momento de su ejecuci&oacute;n usando opciones de l&iacute;nea de 
+      comandos (&quot;<code>--lang</code>&quot; y &quot;<code>--locale</code>&quot;), 
+      Tux&nbsp;Paint se ajusta a las preferencias globales de localizaci&oacute;n 
+      del entorno.</p>
+  </blockquote>
+  <blockquote> 
+    <p>Si a&uacute;n no se hubiera establecido la localizaci&oacute;n del entorno, 
+      lo siguiente explicar&aacute; brevemente c&oacute;mo hacerlo:</p>
+    <h3>Usuarios de Linux/Unix</h3>
+    <blockquote> 
+      <p>Primero asegurarse de que la localizaci&oacute;n que se desea usar est&eacute; 
+        habilitada editando el archivo &quot;<code>/etc/locale.gen</code>&quot; 
+        del sistema y luego ejecutando el programa &quot;<code>locale-gen</code>&quot; 
+        como root.</p>
+      <p><i>Nota: Los usuarios de Debian podr&aacute;n simplemente ejecutar el 
+        comando &quot;<code>dpkg-reconfigure&nbsp;locales</code>&quot;.</i></p>
+      <p>Luego, antes de ejecutar el Tux&nbsp;Paint, fijar la variable de entorno 
+        &quot;<code>$LANG</code>&quot; a una de las localizaciones listadas arriba. 
+        (Si se quiere que todos los programas que puedan estar traducidos lo est&eacute;n, 
+        es posible que se desee incluir lo siguiente en el gui&oacute;n de entrada: 
+        p.ej: <code>~/.profile</code>, <code>~/.bashrc</code>, <code>~/.cshrc</code>, 
+        etc.)</p>
+      <p>Por ejemplo, en un shell tipo Bourne (como el BASH):</p>
+    </blockquote>
+  </blockquote>
+<blockquote> 
+  <blockquote> 
+    <blockquote> 
+      <p><code>export&nbsp;LANG=es_ES@euro&nbsp;;&nbsp;\<br>
+        tuxpaint </code> </p>
+    </blockquote>
+    <p>Y en un shell tipo C (como el TCSH):</p>
+    <blockquote> 
+      <p><code>setenv&nbsp;LANG&nbsp;es_ES@euro&nbsp;;&nbsp;\<br>
+        tuxpaint</code> </p>
+    </blockquote>
+  </blockquote>
+  <hr size=1 noshade>
+  <h3>Usuarios de Windows</h3>
+  <blockquote> 
+    <p>Tux&nbsp;Paint reconocer&aacute; la localizaci&oacute;n actual y usar&aacute; 
+      los archivos apropiados por defecto. Por lo que esta secci&oacute;n interesar&aacute; 
+      solamente a aquellos que est&eacute;n intentando usar otro idioma.</p>
+    <p>Lo m&aacute;s sencillo es usar la opci&oacute;n '<code>--lang</code>' en 
+      el acceso directo (ver &quot;INSTALACION.txt&quot;). Sin embargo, utilizando 
+      una ventana de S&iacute;mbolo MSDOS, es tambi&eacute;n posible enviar un 
+      comando como este:</p>
+  </blockquote>
+</blockquote>
+<dd> 
+  <blockquote> 
+    <blockquote> 
+      <p><code>set LANG=es_ES@euro</code></p>
+      <p>...el que establecer&aacute; el idioma durante la duraci&oacute;n de 
+        esa ventana DOS.</p>
+      <p>Para algo m&aacute;s permanente, intentar editar el archivo '<code>autoexec.bat</code>' 
+        de la computadora usando la herramienta &quot;<b>sysedit</b>&quot; de 
+        Windows:</p>
+      <p><strong>Windows 95/98</strong></p>
+    </blockquote>
+  </blockquote>
+  <ol>
+    <ol>
+      <ol>
+        <ol>
+          <li>Hacer clic en el bot&oacute;n 'Inicio' y seleccionar 'Ejecutar...'.</li>
+          <li>Escribir &quot;sysedit&quot; en el espacio 'Abrir:' (con o sin las 
+            comillas). </li>
+          <li>Presionar 'Aceptar'. </li>
+          <li>Localizar la ventana del AUTOEXEC.BAT en el Editor de Configuraci&oacute;n 
+            del Sistema. </li>
+          <li>Agregar lo siguiente al final del archivo: </li>
+          <li><code>set LANG=es_ES@euro </code> </li>
+          <li>Cerrar el Editor de Configuraci&oacute;n del Sistema, respondiendo 
+            que s&iacute; a guardar los cambios. </li>
+          <li>Reiniciar la m&aacute;quina. </li>
+        </ol>
+      </ol>
+    </ol>
+  </ol>
+  <p> 
+<dd> </p> 
+  <blockquote> 
+    <blockquote> 
+      <blockquote> 
+        <p> Para afectar a la <b>m&aacute;quina entera</b> y a <b>todas las aplicaciones</b>, 
+          es posible usar el panel de control de &quot;Configuraci&oacute;n Regional&quot;:</p>
+        <ol>
+          <li>Hacer clic en el bot&oacute;n 'Inicio' y seleccionar 'Configuraci&oacute;n&nbsp;|&nbsp;Panel 
+            de Control'. 
+          <li>Hacer doble clic en el globo de &quot;Configuraci&oacute;n Regional&quot;. 
+          <li>Seleccionar un idioma/regi&oacute;n de la lista desplegable. 
+          <li>Hacer clic en 'Aceptar'. 
+          <li>Reiniciar la m&aacute;quina cuando se indique. 
+        </ol>
+      </blockquote>
+    </blockquote>
+    <h3>Fuentes Especiales</h3>
+  </blockquote>
+<dd> 
+  <blockquote>
+    <blockquote> 
+      <p>Algunos idiomas requieren que sean instalados tipos de letra especiales. 
+        Estos archivos de fuentes (que est&aacute;n en formato TrueType (TTF)), 
+        son demasiado grandes para ser incluidos en el paquete del TuxPaint y 
+        est&aacute;n disponibles por separado. (Ver la tabla de arriba, bajo la 
+        secci&oacute;n &quot;<a href="#different_language"><i>Escogiendo un idioma 
+        distinto</i></a>&quot;.)</p>
+    </blockquote>
+  </blockquote>
+<dd> 
+  <blockquote> 
+    <blockquote> 
+      <p>Al ejecutar Tux&nbsp;Paint en un idioma que requiere su propia fuente, 
+        Tux&nbsp;Paint intentar&aacute; cargar el archivo de la fuente desde el 
+        directorio de fuentes del sistema (&quot;<code><b>fonts</b></code>&quot;, 
+        bajo el subdirectorio de dicha &quot;localizaci&oacute;n&quot;). El nombre 
+        del archivo corresponde a las dos primeras letras en el c&oacute;digo 
+        de la 'localizaci&oacute;n' del idioma (p.ej: &quot;ko&quot; para Coreano, 
+        &quot;jp&quot; para Japon&eacute;s, &quot;zh&quot; para Chino).</p>
+    </blockquote>
+  </blockquote>
+<dd> 
+  <blockquote> 
+    <blockquote> 
+      <p>Por ejemplo, bajo Linux o Unix, cuando Tux&nbsp;Paint es ejecutado en 
+        Coreano (p.ej: con la opci&oacute;n &quot;<code>--lang&nbsp;korean</code>&quot;), 
+        Tux&nbsp;Paint intentar&aacute; cargar el siguiente archivo de fuentes:</p>
+    </blockquote>
+  </blockquote>
+<dd> 
+  <blockquote> 
+    <blockquote> 
+      <blockquote> 
+        <blockquote> 
+          <p><code>/usr/share/tuxpaint/fonts/locale/<b>ko.ttf</b></code></p>
+        </blockquote>
+      </blockquote>
+      <p>Las fuentes para los idiomas soportados se pueden bajar desde el sitio 
+        web del Tux&nbsp;Paint: <a href="http://www.newbreedsoftware.com/tuxpaint/">http://www.newbreedsoftware.com/tuxpaint/</a>. 
+        (Buscar en la secci&oacute;n 'Tipos de Letra' en 'Descargar.')</p>
+      <p>Bajo Unix y Linux, es posible usar el <code>Makefile</code> que viene 
+        con la fuente para instalarla en la ubicaci&oacute;n apropiada.</p>
+    </blockquote>
+  </blockquote>
+  <p></p>
+</body>
+
+</html>
+

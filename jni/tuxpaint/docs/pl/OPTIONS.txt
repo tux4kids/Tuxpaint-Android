@@ -1,0 +1,692 @@
+			Tux Paint 
+                                 wersja 0.9.14 
+
+                             Dokumentacja Opcji
+
+                        Prawo autorskie Bill Kendrick 2004
+                               New Breed Software 
+
+                           bill@newbreedsoftware.com 
+                   http://www.newbreedsoftware.com/tuxpaint/ 
+
+                               24 wrzesieñ 2004 
+
+   --------------------------------------------------------------------------- 
+
+                               Konfiguracja Tux Paint
+
+     Pocz¹wszy od wersji 0.9.14, dostêpne jest graficzne narzêdzie, które  
+     pozwala zmieniaæ zachowanie Tux Paint. Jednak¿e, jeœli nie chcia³byœ
+     instalowaæ i u¿ywaæ tego narzêdzia lub chcia³byœ lepiej poznaæ 
+     mo¿liwe opcje, proszê kontynuuj czytanie.
+
+   --------------------------------------------------------------------------- 
+
+                               Plik konfiguracyjny 
+
+     Mo¿esz utworzyæ prosty plik konfiguracyjny dla Tux Paint, który bêdzie 
+     czytany za ka¿dym razem, gdy uruchomisz program.
+
+     Plik jest po prostu zwyk³ym plikiem tekstowym zawieraj¹cym opcje, które chcesz
+     w³¹czyæ:
+
+U¿ytkownicy Linuksa, Uniksa i systemu Mac OS X
+
+       Plik, który powinieneœ utworzyæ powinien posiadaæ rozszerzenie ".tuxpaintrc" i powinien siê
+       znajdowaæ w Twoim katalogu g³ównym. ("~/.tuxpaintrc" albo
+       "$HOME/.tuxpaintrc")
+
+  Systemowy plik konfiguracyjny (Linux i Unix)
+
+         Zanim ten plik jest czytany, czytany jest systemowy plik konfiguracyjny.
+         (Domyœlnie, konfiguracja ta nie w³¹cza ¿adnych ustawieñ). Znajduje siê
+         w pliku:
+
+           /etc/tuxpaint/tuxpaint.conf 
+
+         Mo¿esz wy³¹czyæ czytanie tego pliku, pozostawiaj¹c
+         domyœlne ustawienia (które mog¹ byæ nadpisane przez Twój
+         plik ".tuxpaintrc" i/lub przez polecenie z wiersza poleceñ) lub u¿ywaj¹c
+         polecenia:
+
+           --nosysconfig 
+
+U¿ytkownicy systemu Windows
+
+       Plik, który powinieneœ utworzyæ powinien nazywaæ siê "tuxpaint.cfg" i powinien
+       znajdowaæ siê w folderze Tux Paint.
+
+       Mo¿esz u¿yæ program NotePad lub WordPad, by utworzyæ ten plik. Upewnij siê, ¿e zapisujesz go
+       jako czysty tekst i nazwa pliku nie koñczy siê na ".txt"
+
+   --------------------------------------------------------------------------- 
+
+                               Dostêpne opcje 
+
+     Poni¿sze ustawienia mog¹ zostaæ ustawione w pliku konfiguracyjnym.
+     (Opcje ustawione za pomoc¹ wiersza poleceñ nadpisz¹ je. Dalsze informacje w sekcji "Opcje
+     wiersza poleceñ" poni¿ej).
+
+     fullscreen=yes 
+             Uruchamia program w trybie pe³noekranowym.
+
+     800x600=yes
+             Uruchamia program w roŸdzielczoœci 800x600 (DOŒWIADCZALNYM) zamiast
+             mniejszej 640x480.
+
+     nosound=yes
+             Dezaktywuje efekty dŸwiêkowe.
+
+     noquit=yes
+             Dezaktywuje przycisk "Quit" na ekranie. (Klawisz [Escape]
+             lub klikniêcie przycisku zamykania okna nadal dzia³a).
+
+     noprint=yes 
+             Dezaktywuje mo¿liwoœæ drukowania.
+
+     printdelay=SEKUND 
+             Ogranicz drukowanie, aby mog³o nast¹piæ tylko raz na 
+             SEKUND sekund.
+
+     printcommand=ROZKAZ 
+
+             (tylko Linux i Unix)
+
+             U¿yj polecenia ROZKAZ, by wydrukowaæ plik PNG. Je¿eli nie ustawione,
+             domyœlnym poleceniem jest:
+
+               pngtopnm | pnmtops | lpr 
+
+             które konwertuje PNG do 'portable anymap' NetPBM, po czym
+             ponownie konwertuje do pliku PostScript i w koñcu wysy³a to 
+             do drukarki, u¿ywaj¹c polecenia "lpr".
+
+     printcfg=yes
+
+             (tylko system Windows)
+
+             Tux Paint u¿yje pliku konfiguracyjnego drukarki kiedy bêdzie drukowa³.
+             Naciœnij klawisz [ALT] podczas klikania przycisku 'Drukuj' w
+             Tux Paint, by spowodowaæ pojawienie siê okna opcji drukowania Windows.
+
+             (Zauwa¿: To dzia³a tylko gdy Tux Paint nie jest uruchomiony w trybie pe³noekranowym).
+             Jakiekolwiek zmiany w konfiguracji dokonane w tym oknie bêd¹
+             zapamiêtane do pliku "userdata/print.cfg" i u¿ywane ponownie, tak d³ugo
+             jak opcja "printcfg" bêdzie ustawiona.
+
+     simpleshapes=yes
+             Dezaktywuje mo¿liwoœæ rotacji narzêdzia Shape. Kliknij, przeci¹gnij i 
+             upuœæ to wszystko co bêdzie potrzebne, aby narysowaæ kszta³t.
+
+     uppercase=yes
+             Ca³y tekst bêdzie wyœwietlany tylko drukowanymi literami (np. "Pêdzel" bêdzie 
+             wyœwietlany jako "PÊDZEL"). Przydatne dla dzieci, które nie pozna³y jeszcze
+             ma³ych liter, a potrafi¹ czytaæ du¿e.
+
+     grab=yes
+
+             Tux Paint bêdzie usi³owa³ "przechwyciæ" mysz i klawiaturê, tak wiêc
+             mysz jest przydzielona do okna Tux Paint i prawie ca³a
+             klawiatura jest przesy³ana bezpoœrednio do tego okna.
+
+             To jest przydatne, aby przeszkodziæ systemowi operacyjnemu w dzia³aniach, które
+             u¿ytkownik mog³by wykonaæ poza oknem Tux Paint, takich jak [Alt]-[Tab] przechodzenie
+             miêdzy oknami, [Ctrl]-[Escape], itd. To jest szczególnie przydatne w trybie
+             pe³noekranowym.
+
+     noshortcuts=yes
+
+             To dezaktywuje skróty klawiatury (np. [Ctrl]-[S] aby zapisaæ,
+             [Ctrl]-[N] dla nowego obrazu, itd.)
+
+             To jest przydatne, aby zapobiec niechcianym dzia³aniom dokonanym 
+             przez dzieci, które nie s¹ przyzwyczajone do pracy z klawiatur¹.
+
+     nowheelmouse=yes
+             To dezaktywuje rolkê myszy, je¿eli ta j¹ posiada.
+             (Normalnie rolka przewinie menu umieszczone po prawej
+             stronie).
+
+     nofancycursors=yes
+
+             To dezaktywuje fantastyczne kszta³ty kursora myszy w Tux Paint i
+             w³¹cza normalny wskaŸnik myszy, taki jak w Twoim systemie.
+
+             W niektórych systemach specjalne kursory mog¹ powodowaæ problemy. U¿yj tej
+             opcji aby unikn¹æ ich.
+
+     nooutlines=yes
+
+             W tym trybie znacznie proœciej wyœwietlane s¹ linie konturowe
+             narysowane za pomoc¹ narzêdzi Linia, Kszta³ty, Znaczki i Gumka.
+
+             To mo¿e pomóc kiedy Tux Paint jest uruchomiony na bardzo powolnych komputerach
+             lub wyœwietlanych na zdalnych pulpitach X-Window.
+
+     nostamps=yes
+
+             Ta opcja Tux Paint powoduje nie za³adowywanie jakichkolwiek obrazów piecz¹tek,
+             które uniemo¿liwiaj¹ u¿ycie narzêdzia Piecz¹tki.
+
+             To mo¿e przyspieszaæ Tux Paint podczas pierwszego uruchomienia i zmniejszenie,
+             zu¿ycia pamiêci podczas pracy. Oczywiœcie, ¿adne piecz¹tki nie bêd¹
+             dostêpne.
+
+     nostampcontrols=yes
+             Niektóre obrazy w narzêdziu Piecz¹tki mog¹ zostaæ lustrzanie odbite, przekrêcone i/lub
+             mo¿na im zmieniæ wymiary. Ta opcja zdezaktywuje to i 
+             dostarczy tylko podstawowe piecz¹tki.
+
+     mirrorstamps=yes
+
+             Dla piecz¹tek, które mog¹ byæ odbite lustrzanie ta opcja ustawia ich odbity
+             kszta³t jako domyœlny.
+
+             To mo¿e byæ przydatne dla ludzi, którzy wol¹ rzeczy z prawej do lewej strony,
+             bardziej ni¿ z lewej do prawej strony.
+
+     keboard=yes
+
+             To pozwala klawiszom kursorów na klawiaturze sterowaæ
+             wskaŸnikiem myszy. (np. w systemach, gdzie nie wystêpuje mysz komputerowa).
+
+             Klawisze kursorów poruszaj¹ wskaŸnik myszy. Klawisz [Spacja] dzia³a jako
+             przycisk myszy.
+
+     savedir=KATALOG 
+
+             U¿yj tej opcji, by zmieniæ miejsce, gdzie Tux Paint zapisuje obrazy.
+             Domyœlnie jest to katalog "~/.tuxpaint/saved/" pod Linuksem i Uniksem i 
+             katalog "userdata"\ w systemie Windows.
+
+             To mo¿e byæ przydatne w laboratoriach z systemem Windows, gdzie Tux Paint
+             jest zainstalowany na serwerze i dzieci uruchamiaj¹ go na stacjach roboczych.
+             Mo¿esz ustawiæ ten katalog, by by³ folderem w ich katalogu g³ównym.
+             (np. "H:\tuxpaint\")
+
+             Zauwa¿: Kiedy okreœlasz napêd w systemie Windows (np. "H:\"), musisz
+             te¿ okreœliæ podkatalog.
+
+             Przyk³ad: savedir=Z:\tuxpaint\ 
+
+     saveover=yes
+             To dezaktywuje zapytanie "Nadpisaæ star¹ wersjê...?" kiedy
+             zapisujesz istniej¹cy plik. Z t¹ opcj¹, starsza wersja
+             zawsze bêdzie zast¹piona przez now¹.
+
+     saveover=new 
+             To równie¿ dezaktywuje zapytanie "Nadpisaæ star¹ wersjê...?"
+             podczas zapisywania istniej¹cego pliku. Jednak¿e ta opcja bêdzie zawsze
+             zapisywa³a w nowym pliku, zamiast zapisywaæ star¹ wersjê.
+
+     saveover=ask
+
+             (Ta opcja jest zbyteczna, odk¹d jest domyœlna)
+
+             Podczas zapisywania istniej¹cego rysunku najpierw bêdziesz spytany czy
+             nadpisaæ starsz¹ wersjê lub nie.
+
+     nosave=yes
+             To dezaktywuje mo¿liwoœæ zapisywania plików (i dezktywuje
+             przycisk "Zapisz" na ekranie). To mo¿e zostaæ u¿yte w
+             sytuacjach, gdzie program jest u¿ywany tylko dla zabawy lub w
+             œrodowisko testowym.
+
+     lang=JÊZYK 
+
+             Uruchom Tux Paint w jednym z mo¿liwych jêzyków. Aktualna wersja
+             pozwala na wybór JÊZYKA spoœród ni¿ej wymienionych:
+
+               + ------------------------------------------------- + 
+               | english             | american - english  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | afrikaans           |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | basque              | euskara           |         | 
+               | -------------------- + ------------------ + --------- | 
+               | belarusian          | bielaruskaja      |         | 
+               | -------------------- + ------------------ + --------- | 
+               | bokmal              |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | brazilian - Portugalczyk | portuges - brazilian | brazilian | 
+               | -------------------- + ------------------ + --------- | 
+               | breton              | brezhoneg         |         | 
+               | -------------------- + ------------------ + --------- | 
+               | british - english     | british           |         | 
+               | -------------------- + ------------------ + --------- | 
+               | bulgarian           |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | catalan             | catala            |         | 
+               | -------------------- + ------------------ + --------- | 
+               | chiñski             | uproœci³eœ - chiñski |         | 
+               | -------------------- + ------------------ + --------- | 
+               | croatian            | hrvatski          |         | 
+               | -------------------- + ------------------ + --------- | 
+               | czech               | cesky             |         | 
+               | -------------------- + ------------------ + --------- | 
+               | danish              | dansk             |         | 
+               | -------------------- + ------------------ + --------- | 
+               | ¿ona               | nederlands        |         | 
+               | -------------------- + ------------------ + --------- | 
+               | fiñski             | suomi             |         | 
+               | -------------------- + ------------------ + --------- | 
+               | jêzyk francuski              | francais          |         | 
+               | -------------------- + ------------------ + --------- | 
+               | rodzony              | deutsch           |         | 
+               | -------------------- + ------------------ + --------- | 
+               | grecki               |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | ¯yd              |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | hindi               |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | Wêgier           | magyar            |         | 
+               | -------------------- + ------------------ + --------- | 
+               | icelandic           | islenska          |         | 
+               | -------------------- + ------------------ + --------- | 
+               | indonesian          | bahasa - indonesia  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | w³oski             | italiano          |         | 
+               | -------------------- + ------------------ + --------- | 
+               | japanese            |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | klingon             | tlhIngan          |         | 
+               | -------------------- + ------------------ + --------- | 
+               | koreañski              |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | lithuanian          | lietuviu          |         | 
+               | -------------------- + ------------------ + --------- | 
+               | malay               |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | Norweg           | nynorsk           |         | 
+               | -------------------- + ------------------ + --------- | 
+               | nabierz po³ysku              | polski            |         | 
+               | -------------------- + ------------------ + --------- | 
+               | Portugalczyk          | portugues         |         | 
+               | -------------------- + ------------------ + --------- | 
+               | romanian            |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | russian             |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | serbian             |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | spanish             | espanol           |         | 
+               | -------------------- + ------------------ + --------- | 
+               | slovak              |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | slovenian           | slovensko         |         | 
+               | -------------------- + ------------------ + --------- | 
+               | swedish             | svenska           |         | 
+               | -------------------- + ------------------ + --------- | 
+               | tamil               |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | Tradycyjny - chiñski |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | turecki             |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | vietnamese          |                  |         | 
+               | -------------------- + ------------------ + --------- | 
+               | walloon             | walon             |         | 
+               | -------------------- + ------------------ + --------- | 
+               | walijski               | cymraeg           |         | 
+               + ------------------------------------------------- + 
+
+   --------------------------------------------------------------------------- 
+
+              Nadpisywanie ustawieñ systemowych u¿ywaj¹c .tuxpaintrc 
+
+     (Dla u¿ytkowników Linuksa i Uniksa)
+
+     Je¿eli jakaœ z powy¿szych opcji jest ustawiona w pliku "/etc/tuxpaint/tuxpaint.config",
+     mo¿esz nadpisaæ j¹ w Twoim w³asnym pliku "~/.tuxpaintrc".
+
+     Dla opcji typu prawda/fa³sz, jak "noprint" i "grab", mo¿esz po prostu powiedzieæ,
+     ¿e one równaj¹ siê "no" w Twoim pliku "~/.tuxpaintrc":
+
+       noprint=no
+       uppercase=no
+
+     Lub mo¿esz u¿yæ opcji podobnych do poleceñ z wiersza poleceñ opisanych
+     poni¿ej. Na przyk³ad:
+
+       print=yes 
+       mixedcase=yes
+
+   --------------------------------------------------------------------------- 
+
+                              Opcje wiersza poleceñ
+
+     Opcje mog¹ te¿ zostaæ wydane z wiersza poleceñ kiedy uruchamiasz Tux Paint.
+
+       --fullscreen
+       --800x600
+       --nosound
+       --noquit
+       --noprint
+       --printdelay=SEKUND
+       --printcfg
+       --simpleshapes
+       --uppercase
+       --grab
+       --noshortcuts
+       --nowheelmouse
+       --nofancycursors
+       --nooutlines
+       --nostamps
+       --nostampcontrols
+       --mirrorstamps
+       --keyboard
+       --savedir KATALOG
+       --saveover
+       --saveovernew
+       --nosave
+       --lang JÊZYK
+               Te opcje odpowiadaj¹ opcjom pliku konfiguracyjnego 
+               opisanym powy¿ej.
+
+                     ------------------------------------- 
+
+       --windowed
+       --640x480
+       --sound
+       --quit
+       --print
+       --printdelay=0 
+       --noprintcfg
+       --complexshapes
+       --mixedcase
+       --dontgrab
+       --shortcuts
+       --wheelmouse
+       --fancycursors
+       --outlines
+       --stamps
+       --stampcontrols
+       --dontmirrorstamps
+       --mouse
+       --saveoverask
+       --save
+               Te opcje mog¹ zostaæ u¿yte, by nadpisaæ jakieœ ustawienia zrobione w
+               pliku konfiguracyjnym. (Je¿eli jakaœ opcja nie jest ustawiona
+               w pliku(ach) konfiguracyjnym, nie jest konieczne nadpisywanie opcji).
+
+                     ------------------------------------- 
+
+       -- locale locale
+
+               Uruchom Tux Paint w jednym z dostêpnych jêzyków. Zobacz 
+               sekcjê "Wybór innego jêzyka" poni¿ej dla dok³adniejszych informacji
+               na temat u¿ywanych ³añcuchów (np. "de_DE@euro" dla jêzyka niemieckiego).
+
+               (Je¿eli Twoja lokalizacja jest ju¿ ustawiona, np. poprzez zmienn¹
+               œrodowiskow¹ "$LANG" ta opcja nie jest konieczna, od czasu gdy
+               Tux Paint honoruje ustawienia Twojego systemu).
+
+       --nosysconfig 
+
+               Pod Linuksem i Uniksem zapobiega to czytaniu pliku konfiguracyjnego
+               "/etc/tuxpaint/tuxpaint.conf"
+
+               Tylko Twój w³asny plik konfiguracyjny "~/.tuxpaintrc" bêdzie u¿yty,
+               je¿eli istnieje.
+
+       --nolockfile 
+
+               Domyœlnie, Tux Paint u¿ywa czegoœ w rodzaju 'pliku zabezpieczenia' ('lockfile')
+               by zapobiegaæ uruchamianiu czêœciej ni¿ raz na 30 sekund.
+               (To jest po to aby unikn¹æ przypadkowego wielokrotnego uruchamiania kopii;
+               na przyk³ad, poprzez podwójne klikniêcie na pojedynczym odpalaczu lub przez
+               wielokrotne klikanie na ikonê).
+
+               Aby Tux Paint ignorowa³ ten plik, pozwalaj¹c uruchomiæ siê ponownie,
+               nawet jeœli nie up³ynê³o 30 sekund od poprzedniego uruchomienia,
+               uruchom Tux Paint z opcj¹ '--nolockfile' w wierszu polecenia.
+
+               Domyœlnie, 'plik zabezpieczenia' ('lockfile') jest przechowywany w katalogu 
+               "~/.tuxpaint/" pod Linuksem/Uniksem i w katalogu "userdata\" pod
+               systemem Windows.
+
+   --------------------------------------------------------------------------- 
+
+Opcje informacyjne wiersza poleceñ
+
+       Poni¿sze opcje pokazuj¹ pewne informacyjne treœci na ekranie.
+
+         --version 
+                 Wyœwietla numer wersji i datê kopii Tux Paint,
+                 którego uruchomi³eœ. To równie¿ pokazuje listê jakie, je¿eli jakieœ opcje
+                 zosta³y ustawione podczas kompilacji. (Zobacz INSTALL.txt i FAQ.txt).
+
+         --copying
+                 Wyœwietla krótk¹ informacjê o licencji i kopiowaniu Tux Paint.
+
+         --usage 
+                 Wyœwietla listê dostêpnych opcji z wiersza poleceñ.
+
+         --help
+                 Wyœwietla krótk¹ pomoc na temat u¿ywania Tux Paint.
+
+         --lang help 
+                 Wyœwietla listê dostêpnych jêzyków w Tux Paint.
+
+   --------------------------------------------------------------------------- 
+
+                         Wybór innego jêzyka
+
+     Tux Paint zosta³ przet³umaczony na kilka jêzyków. Aby uzyskaæ dostêp do 
+     t³umaczenia mo¿esz u¿yæ opcji "--lang" w wierszu poleceñ by ustawiæ
+     jêzyk (np. "--lang spanish") lub wykorzystaj ustawienie "lang=" w
+     pliku konfiguracyjnym (np. "lang=spanish").
+
+     Tux Paint równie¿ honoruje aktualn¹ lokalizacjê Twojego systemu. (Mo¿esz
+     nadpisaæ j¹ u¿ywaj¹c wiersza poleceñ i opcji "--locale"; zobacz powy¿ej).
+
+     U¿yj opcji "--lang help" by sporz¹dziæ listê dostêpnych opcji jêzykowych.
+
+Dostêpne jêzyki
+
+       + --------------------------------------------------------- + 
+       | Code  Locale  |     Language      |      Language       | 
+       |               |   (rodzime imiê)   |   (angielskie imiê)    | 
+       | --------------- + ------------------- + --------------------- | 
+       | C              |                   | angielski              | 
+       | --------------- + ------------------- + --------------------- | 
+       | af_ZA          |                   | afrikaans            | 
+       | --------------- + ------------------- + --------------------- | 
+       | be_BY          | Bielaruskaja       | Belarusian           | 
+       | --------------- + ------------------- + --------------------- | 
+       | bg_BG          |                   | bu³garski            | 
+       | --------------- + ------------------- + --------------------- | 
+       | br_FR          | Brezhoneg          | bretoñski               | 
+       | --------------- + ------------------- + --------------------- | 
+       | ca_ES          | Catal`            | kataloñski              | 
+       | --------------- + ------------------- + --------------------- | 
+       | cs_CZ          | Cesky              | czeski                | 
+       | --------------- + ------------------- + --------------------- | 
+       | cy_GB          | Cymraeg            | walijski                | 
+       | --------------- + ------------------- + --------------------- | 
+       | da_DK          | Dansk              | duñski               | 
+       | --------------- + ------------------- + --------------------- | 
+       | de_DE @ euro     | Deutsch            | niemiecki               | 
+       | --------------- + ------------------- + --------------------- | 
+       | el_GR.UTF8 (*) |                   | grecki                | 
+       | --------------- + ------------------- + --------------------- | 
+       | en_GB          |                   | brytyjski Angielski      | 
+       | --------------- + ------------------- + --------------------- | 
+       | es_ES @ euro     | Espanol            | hiszpañski              | 
+       | --------------- + ------------------- + --------------------- | 
+       | eu_ES          | Euskara            | baskijski               | 
+       | --------------- + ------------------- + --------------------- | 
+       | fi_FI @ euro     | Suomi              | fiñski              | 
+       | --------------- + ------------------- + --------------------- | 
+       | fr_FR @ euro     | Franc,ais          | francuski               | 
+       | --------------- + ------------------- + --------------------- | 
+       | he_IL (*)      |                   | hebrajski               | 
+       | --------------- + ------------------- + --------------------- | 
+       | hi_IN (*)      |                   | Hindi                | 
+       | --------------- + ------------------- + --------------------- | 
+       | hr_HR          | Hrvatski           | Croatian             | 
+       | --------------- + ------------------- + --------------------- | 
+       | hu_HU          | wêgierski             | wêgierski            | 
+       | --------------- + ------------------- + --------------------- | 
+       | id_ID          | Indonezja Bahasa   | indonezyjski           | 
+       | --------------- + ------------------- + --------------------- | 
+       | is_IS          | Islenska           | islandzki            | 
+       | --------------- + ------------------- + --------------------- | 
+       | it_IT @ euro     | Italiano           | w³oski              | 
+       | --------------- + ------------------- + --------------------- | 
+       | ja_JP.UTF -8 (*)|                   | japoñski             | 
+       | --------------- + ------------------- + --------------------- | 
+       | ko_KR.UTF -8 (*)|                   | koreañski               | 
+       | --------------- + ------------------- + --------------------- | 
+       | lt_LT.UTF -8    | Lietuviu           | litewski           | 
+       | --------------- + ------------------- + --------------------- | 
+       | ms_MY          |                   | malajski                | 
+       | --------------- + ------------------- + --------------------- | 
+       | nb_NO          | Norsk (bokmaal)    | norweski Bokmaal    | 
+       | --------------- + ------------------- + --------------------- | 
+       | nn_NO          | Norsk (nynorsk)    | norweski Nynorsk    | 
+       | --------------- + ------------------- + --------------------- | 
+       | nl_NL @ euro     |                   | holenderski                | 
+       | --------------- + ------------------- + --------------------- | 
+       | pl_PL          | Polski             | polski               | 
+       | --------------- + ------------------- + --------------------- | 
+       | pt_BR          | Brazileiro Portuges | brazylijski Portugalski | 
+       | --------------- + ------------------- + --------------------- | 
+       | pt_PT          | Portuges           | portugalski           | 
+       | --------------- + ------------------- + --------------------- | 
+       | ro_RO          |                   | rumuñski             | 
+       | --------------- + ------------------- + --------------------- | 
+       | ru_RU          |                   | rosyjski              | 
+       | --------------- + ------------------- + --------------------- | 
+       | sk_SK          |                   | s³owacki               | 
+       | --------------- + ------------------- + --------------------- | 
+       | sl_SI          |                   | s³oweñski            | 
+       | --------------- + ------------------- + --------------------- | 
+       | sr_YU          |                   | serbski              | 
+       | --------------- + ------------------- + --------------------- | 
+       | sv_SE @ euro     | Svenska            | szwedzki              | 
+       | --------------- + ------------------- + --------------------- | 
+       | ta_IN (*)      |                   | tamilski                | 
+       | --------------- + ------------------- + --------------------- | 
+       | tlh (*)        | tlhIngan           | Klingon              | 
+       | --------------- + ------------------- + --------------------- | 
+       | tr_TR @ euro     |                   | turecki              | 
+       | --------------- + ------------------- + --------------------- | 
+       | vi_VN          |                   | wietnamski           | 
+       | --------------- + ------------------- + --------------------- | 
+       | wa_BE @ euro     |                   | Walloon              | 
+       | --------------- + ------------------- + --------------------- | 
+       | zh_CN (*)      |                   | chiñski (uproszczony     | 
+       | --------------- + ------------------- + --------------------- | 
+       | zh_TW (*)      |                   | Chiñski (tradycyjny)     | 
+       + --------------------------------------------------------- + 
+
+       (*) - Te jêzyki wymagaj¹ w³asnych czcionek, poniewa¿ nie s¹
+       reprezentowane przez ³aciñski zestaw znaków tak jak inne. Zobacz
+       sekcjê "Czcionki specjalne", która znajdujê siê poni¿ej.
+
+Ustawienia lokalizacji systemu
+
+       Zmiana Twojej lokalizacji mo¿e znacznie oddzia³aæ na system.
+
+       Jak podano wy¿ej, wraz z pozwoleniem wyboru jêzyka za pomoc¹
+       opcji wiersza poleceñ ("--lang" i "--locale"), Tux Paint
+       honoruje globaln¹ lokalizacjê ustawion¹ w Twoim systemie.
+
+       Je¿eli jeszcze nie ustawi³eœ lokalizacji Twojego systemu, poni¿ej
+       krótko wyjaœniê jak to zrobiæ:
+
+  U¿ytkownicy Linuksa/Uniksa
+
+         Po pierwsze, upewnij siê czy lokalizacja, któr¹ chcesz u¿yæ jest aktywna poprzez
+         edycjê pliku "/etc/locale.gen" w Twoim systemie i wtedy uruchom program
+         "locale-gen" jako u¿ytkownik "root".
+
+         Zauwa¿: U¿ytkownicy systemu Debian mog¹ u¿yæ polecenia
+         "dpkg-reconfigure locales".
+
+         Nastêpnie, przed uruchomieniem Tux Paint, ustaw zmienn¹ œrodowiskow¹ "$LANG"
+         na jedn¹ z lokalizacji podanych powy¿ej. (Je¿eli chcesz, aby wszystkie
+         programy, zosta³y przet³umaczone mo¿esz umieœciæ j¹ w jednym
+         ze skryptów logowania; np. ~/.profil, ~/.bashrc,
+         ~/.cshrc, itd.)
+
+         Na przyk³ad, w shellu Bourna (jak Bashu):
+
+           export LANG=pl_PL@euro ; \ 
+           tuxpaint 
+
+         i w shellu C (jak TCSH):
+
+           setnv LANG  pl_PL@euro ; \ 
+           tuxpaint 
+
+   --------------------------------------------------------------------------- 
+
+  U¿ytkownicy systemu Windows
+
+         Tux Paint rozpozna aktualn¹ lokalizacjê i u¿yje odpowiednich
+         plików domyœlnie. Wiêc ta sekcja jest tylko dla osób u¿ywaj¹cych
+         innych jêzyków ni¿ jêzyk systemowy.
+
+         Najprostsz¹ rzecz¹ by to zrobiæ jest u¿ycie opcji "--lang"
+         w skrócie (zobacz "INSTALL.txt"). Jednak¿e przy u¿yciu okna MSDOS 
+         równie¿ jest to mo¿liwe, przez polecenie:
+
+           set LANG=pl_PL@euro 
+
+         ...który na zawsze ustawi jêzyk dla okna systemu DOS.
+
+         Dla czegoœ bardziej trwa³ego, spróbuj edytowaæ Twój plik
+         'autoexec.bat' u¿ywaj¹c narzêdzia systemu Windows "sysedit":
+
+        Windows 95/98 
+
+          1. Kliknij na przycisk Start i wybierz 'Uruchom...'.
+          2. Napisz "sysedit" w polu 'Otwórz:'.
+          3. Kliknij "OK".
+          4. Zlokalizuj okno AUTOEXEC.BAT w Edytorze Ustawieñ Systemowych.
+          5. Dodaj nastêpuj¹cy wpis na koñcu pliku:
+
+               set LANG=pl_PL@euro 
+
+          6. Zamknij Edytor Ustawieñ Systemowych odpowiadaj¹c tak by zapisaæ
+             zmiany.
+          7. Ponownie uruchom komputer.
+
+           Aby oddzia³aæ na ca³¹ maszynê i wszystkie aplikacje, jest mo¿liwe 
+           u¿ycie "Ustawieñ regionalnych" z Panelu sterowania:
+
+          1. Kliknij na przycisk Start i wybierz 
+             'Ustawienia | Panel sterowania'.
+          2. Podwójnie kliknij na ikonê "Ustawienia regionalne".
+          3. Wybierz jêzyk/region z podanej listy.
+          4. Kliknij "OK".
+          5. Uruchom ponownie komputer kiedy otrzymasz komunikat.
+
+  Specjalne czcionki
+
+       Niektóre jêzyki wymagaj¹ zainstalowania specjalnych czcionek. Te pliki czcionek
+       (które s¹ w formacie TrueType (TTF)), s¹ zbyt du¿e by zawrzeæ je
+       wraz z g³ównym programem Tux Paint i s¹ dostêpne oddzielnie. (Zobacz
+       tabelê powy¿ej, w sekcji "Wybór innego jêzyka").
+
+       Kiedy uruchomisz Tux Paint w jêzyku, który wymaga w³asnej czcionki,
+       Tux Paint spróbuje za³adowaæ plik czcionki ze œcie¿ki czcionek systemowych
+       (w podkatalogu "locale"). Nazwa pliku odpowiada
+       pierwszym dwóm literom z kodu lokalizacji jêzyka
+       (np. "ko" dla koreañskiego, "ja" dla japoñskiego, "zh" dla chiñskiego).
+
+       Na przyk³ad, pod Linuksem lub Uniksem, kiedy Tux Paint jest uruchomiony
+       w jêzyku koreañskim (np. z opcj¹ "--lang korean"), Tux Paint bêdzie usi³owa³ 
+       za³adowaæ nastêpuj¹cy plik z czcionk¹:
+
+         /usr/share/tuxpaint/fonts/locale/ko.ttf 
+
+       Mo¿esz pobraæ czcionki jêzykowe ze strony internetowej Tux Paint 
+       http://www.newbreedsoftware.com/tuxpaint/. (Zobacz w 
+       sekcji 'Fonts' pod 'Download').
+
+       Pod Uniksem i Linuksem mo¿esz u¿yæ pliku Makefile, który pochodzi od
+       czcionki, aby zainstalowaæ czcionkê w odpowiednim miejscu.

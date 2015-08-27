@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cr-simple-sel</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Libcroco Reference Manual">
+<link rel="up" href="ch01.html" title="Extensive APIs description">
+<link rel="prev" href="libcroco-cr-selector.html" title="cr-selector">
+<link rel="next" href="libcroco-cr-statement.html" title="cr-statement">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libcroco-cr-selector.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libcroco Reference Manual</th>
+<td><a accesskey="n" href="libcroco-cr-statement.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libcroco-cr-simple-sel.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libcroco-cr-simple-sel.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="libcroco-cr-simple-sel"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libcroco-cr-simple-sel.top_of_page"></a>cr-simple-sel</span></h2>
+<p>cr-simple-sel</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libcroco-cr-simple-sel.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel">CRSimpleSel</a>;
+<a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="returnvalue">CRSimpleSel</span></a> *       <a class="link" href="libcroco-cr-simple-sel.html#cr-simple-sel-append-simple-sel" title="cr_simple_sel_append_simple_sel ()">cr_simple_sel_append_simple_sel</a>     (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_sel</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-simple-sel.html#cr-simple-sel-compute-specificity" title="cr_simple_sel_compute_specificity ()">cr_simple_sel_compute_specificity</a>   (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_this</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libcroco-cr-simple-sel.html#cr-simple-sel-destroy" title="cr_simple_sel_destroy ()">cr_simple_sel_destroy</a>               (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_this</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-simple-sel.html#cr-simple-sel-dump" title="cr_simple_sel_dump ()">cr_simple_sel_dump</a>                  (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">FILE</span> *a_fp</code></em>);
+enum <span class="returnvalue">CRStatus</span>       <a class="link" href="libcroco-cr-simple-sel.html#cr-simple-sel-dump-attr-sel-list" title="cr_simple_sel_dump_attr_sel_list ()">cr_simple_sel_dump_attr_sel_list</a>    (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> const *a_this</code></em>);
+<a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="returnvalue">CRSimpleSel</span></a> *       <a class="link" href="libcroco-cr-simple-sel.html#cr-simple-sel-new" title="cr_simple_sel_new ()">cr_simple_sel_new</a>                   (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            <a class="link" href="libcroco-cr-simple-sel.html#cr-simple-sel-one-to-string" title="cr_simple_sel_one_to_string ()">cr_simple_sel_one_to_string</a>         (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> const *a_this</code></em>);
+<a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="returnvalue">CRSimpleSel</span></a> *       <a class="link" href="libcroco-cr-simple-sel.html#cr-simple-sel-prepend-simple-sel" title="cr_simple_sel_prepend_simple_sel ()">cr_simple_sel_prepend_simple_sel</a>    (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_sel</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            <a class="link" href="libcroco-cr-simple-sel.html#cr-simple-sel-to-string" title="cr_simple_sel_to_string ()">cr_simple_sel_to_string</a>             (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> const *a_this</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-simple-sel.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="libcroco-cr-simple-sel.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CRSimpleSel"></a><h3>struct CRSimpleSel</h3>
+<pre class="programlisting">struct CRSimpleSel {
+        enum SimpleSelectorType type_mask ;
+        gboolean is_case_sentive ;
+        CRString * name ;
+        /**
+         *The combinator that separates
+         *this simple selector from the previous
+         *one.
+         */
+        enum Combinator combinator ;
+
+        /**
+         *The additional selector list of the
+         *current simple selector.
+         *An additional selector may
+         *be a class selector, an id selector,
+         *or an attribute selector.
+         *Note that this field is a linked list.
+         */
+        CRAdditionalSel *add_sel ;
+
+        /*
+         *the specificity as specified by
+         *chapter 6.4.3 of the spec.
+         */
+        gulong specificity ;
+
+        CRSimpleSel *next ;
+        CRSimpleSel *prev ;
+        CRParsingLocation location ;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-simple-sel-append-simple-sel"></a><h3>cr_simple_sel_append_simple_sel ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="returnvalue">CRSimpleSel</span></a> *       cr_simple_sel_append_simple_sel     (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_sel</code></em>);</pre>
+<p>
+Appends a simpe selector to the current list of simple selector.
+</p>
+<p>
+<em class="parameter"><code>a_this</code></em>: the this pointer of the current instance of <a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a>.
+<em class="parameter"><code>a_sel</code></em>: the simple selector to append.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new list upon successfull completion, an error code otherwise.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-simple-sel-compute-specificity"></a><h3>cr_simple_sel_compute_specificity ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_simple_sel_compute_specificity   (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_this</code></em>);</pre>
+<p>
+<em class="parameter"><code>a_this</code></em>: the current instance of <a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a>
+</p>
+<p>
+Computes the selector (combinator separated list of simple selectors)
+as defined in the css2 spec in chapter 6.4.3
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code otherwise.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-simple-sel-destroy"></a><h3>cr_simple_sel_destroy ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cr_simple_sel_destroy               (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_this</code></em>);</pre>
+<p>
+<em class="parameter"><code>a_this</code></em>: the this pointer of the current instance of <a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a>.
+</p>
+<p>
+The destructor of the current instance of
+<a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a>.
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-simple-sel-dump"></a><h3>cr_simple_sel_dump ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_simple_sel_dump                  (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> const *a_this</code></em>,
+                                                         <em class="parameter"><code><span class="type">FILE</span> *a_fp</code></em>);</pre>
+<p>
+Dumps the selector to a file.
+TODO: add the support of unicode in the dump.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_this</code></em> :</span></p></td>
+<td>the current instance of <a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a_fp</code></em> :</span></p></td>
+<td>the destination file pointer.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>CR_OK upon successfull completion, an error code
+otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-simple-sel-dump-attr-sel-list"></a><h3>cr_simple_sel_dump_attr_sel_list ()</h3>
+<pre class="programlisting">enum <span class="returnvalue">CRStatus</span>       cr_simple_sel_dump_attr_sel_list    (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> const *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-simple-sel-new"></a><h3>cr_simple_sel_new ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="returnvalue">CRSimpleSel</span></a> *       cr_simple_sel_new                   (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+The constructor of <a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new instance of <a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a>.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-simple-sel-one-to-string"></a><h3>cr_simple_sel_one_to_string ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            cr_simple_sel_one_to_string         (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> const *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-simple-sel-prepend-simple-sel"></a><h3>cr_simple_sel_prepend_simple_sel ()</h3>
+<pre class="programlisting"><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="returnvalue">CRSimpleSel</span></a> *       cr_simple_sel_prepend_simple_sel    (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_this</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> *a_sel</code></em>);</pre>
+<p>
+<em class="parameter"><code>a_this</code></em>: the this pointer of the current instance of <a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a>.
+<em class="parameter"><code>a_sel</code></em>: the simple selector to prepend.
+</p>
+<p>
+Prepends a simple selector to the current list of simple selectors.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new list upon successfull completion, an error code otherwise.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cr-simple-sel-to-string"></a><h3>cr_simple_sel_to_string ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            cr_simple_sel_to_string             (<em class="parameter"><code><a class="link" href="libcroco-cr-simple-sel.html#CRSimpleSel" title="struct CRSimpleSel"><span class="type">CRSimpleSel</span></a> const *a_this</code></em>);</pre>
+<p>
+</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>
