@@ -1,0 +1,31 @@
+Categories:Children,Science & Education
+License:GPLv2+
+Web Site:http://tuxpaint.org
+Source Code:https://github.com/perepujal/Tuxpaint-Android
+Issue Tracker:https://sourceforge.net/p/tuxpaint/bugs/?source=navbar
+Donate:http://www.newbreedsoftware.com/donate/
+Auto Name:Tux Paint
+Summary:Drawing program for children
+Description:
+Tux Paint is a free, award-winning drawing program for children ages 3 to 12. It combines an easy-to-use interface, fun sound effects, and an encouraging cartoon mascot who guides children as they use the program.
+Status:Beta.
+.
+
+Repo Type:git
+Repo:https://github.com/perepujal/Tuxpaint-Android.git
+
+Build:0.9.23-beta,1
+    commit=f7063d64ff22773b8ced62c168c3b258039a70f8
+    target=android-19
+    buildjni=yes
+    prebuild=rm jni/SDL2_image/external/libwebp-0.3.0/swig/libwebp.jar \\
+                jni/SDL2_image/external/libwebp-0.3.0/examples/test.webp \\
+                jni/SDL2_ttf/VisualC/external/lib/x64/libfreetype-6.lib \\
+                jni/SDL2_ttf/VisualC/external/lib/x86/libfreetype-6.lib
+
+
+Auto Update Mode:None
+Update Check Mode:RepoManifest
+Current Version:0.9.23-beta
+Current Version Code:1
+
