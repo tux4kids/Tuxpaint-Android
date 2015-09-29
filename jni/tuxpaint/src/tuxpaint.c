@@ -24100,7 +24100,7 @@ int main(int argc, char *argv[])
 #if defined(__APPLE__)
   freopen("/tmp/tuxpaint.log", "w", stdout);    // redirect stdout to a file
 #elif defined(__ANDROID__)
-  freopen("/mnt/sdcard/TuxPaint/tuxpaint.log", "w", stdout);    // redirect stdout to a file
+  freopen("/mnt/sdcard/tuxpaint/tuxpaint.log", "w", stdout);    // redirect stdout to a file
 #endif
 
   dup2(fileno(stdout), fileno(stderr));                 // redirect stderr to stdout

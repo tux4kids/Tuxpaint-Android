@@ -18,8 +18,8 @@ import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
 
-public class TuxPaintActivity extends SDLActivity {
-    private static final String TAG = "TuxPaint";
+public class tuxpaintActivity extends SDLActivity {
+    private static final String TAG = "Tux Paint";
     private static View mConfigButton = null;
 
     // Load the .so
@@ -118,7 +118,7 @@ public class TuxPaintActivity extends SDLActivity {
         mConfigButton.setBackgroundResource(R.drawable.ic_settings_black_36dp);
         mConfigButton.setOnClickListener(new View.OnClickListener() {
       	  public void onClick(View v) {
-          		startActivity(new Intent (TuxPaintActivity.this, ConfigActivity.class));
+          		startActivity(new Intent (tuxpaintActivity.this, ConfigActivity.class));
       	  }
         });
         SDLActivity.mLayout.addView(mConfigButton, params);

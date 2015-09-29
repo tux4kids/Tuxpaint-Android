@@ -24,9 +24,9 @@ import android.hardware.*;
 /**
     SDL Activity
     
-    -- Modification I For TuxPaint
+    -- Modification I For Tux Paint
     	disable accelerometer sensor.
-    -- Modification II For TuxPaint
+    -- Modification II For Tux Paint
         use "System.exit(0)" instead of "mSingleton.finish()";
 */
 public class SDLActivity extends Activity {

@@ -1,22 +1,22 @@
-TuxPaint-Android
+Tux Paint-Android
 ================
-This is TuxPaint on Android.
+This is Tux Paint on Android.
 
 Background
 ==========
-TuxPaint has been ported from SDL1 to SDL2.
-Thus TuxPaint-Android will try to port current TuxPaint to Android platform.
-Currently the tuxpaint source code is based on [tuxpaint-sdl2](http://sourceforge.net/p/tuxpaint-sdl2/code/ci/sdl2.0/tree/) 
+Tux Paint has been ported from SDL1 to SDL2.
+Thus Tux Paint-Android will try to port current Tux Paint to Android platform.
+Currently this Tux Paint source code is based on [tuxpaint-sdl2](http://sourceforge.net/p/tuxpaint-sdl2/code/ci/sdl2.0/tree/) 
 maintained by Pere Pujal i Carabantes with head commit b48c069b2ff6a0cabf82ec086ff6ef563eaaf3d3.
 The main work includes:
 
 1. port SDL2, SDL2_image, SDL2_ttf, SDL2_mixer, libpng, gettext, FriBiDi libraries to Android. 
-2. based on these libraries and SDL2 Android template project, port current tuxpaint source code to Android.
-3. extend tuxpaint further to make tuxpaint welcomed on Android.
+2. based on these libraries and SDL2 Android template project, port current Tux Paint source code to Android.
+3. extend Tux Paint further to make Tux Paint welcomed on Android.
 
 Project
 ========
-* TuxPaint-Android/
+* Tux Paint-Android/
   * AndroidManifest.xml
     package manifest. Among others, it contains the class name of the main Activity and the package name of the application.
   * build.properties
@@ -29,7 +29,7 @@ Project
   * assets/
     The resources folder
   * assets/tuxpaint.zip
-    The resources for TuxPaint, including images, sounds etc.
+    The resources for Tux Paint, including images, sounds etc.
   * res/
     directory holding resources for your application
   * res/drawable-*
@@ -106,7 +106,7 @@ From **[official Library Requirements](http://www.tuxpaint.org/requirements/)**,
 * libpaper (for POSIX printing)
 * gettext (for multilingual support)
 
-For making TuxPaint working on Android, currently these libraries have been downloaded and built :
+For making Tux Paint working on Android, currently these libraries have been downloaded and built :
 
 * [SDL2 2.0.3](http://www.libsdl.org/download-2.0.php)
 * [SDL2_image 2.0.0](http://www.libsdl.org/projects/SDL_image/)
@@ -176,26 +176,24 @@ If you have ant, then run:
 
 If you have Eclipse, then run:
 
-1. right click TuxPaint-Android project
+1. right click Tux Paint-Android project
 2. Run As -> Android Application
-
-Or you may directly install pre-built TuxPaint-Android.apk in the bin folder of TuxPaint project.
 
 Tips for Play
 ===========
 1. Sometimes if you cannot save your painted work, you should make sure:
-    * you shall have a storage in /mnt/sdcard/TuxPaint. You can check whether this path can be accessable with command:
+    * you shall have a storage in /mnt/sdcard/tuxpaint. You can check whether this path can be accessable with command:
     ```
 	adb shell
-	cd /mnt/sdcard/TuxPaint
+	cd /mnt/sdcard/tuxpaint
     ``` 
     * you shall have your Android device disconnected with your PC sometimes when you are using an old Android device.
-2. While tuxpaint can start with some default resources, you can further use your own resources for painting (supposing `/mnt/sdcard/TuxPaint/` is your `datadir`):
-    * In the folder `/mnt/sdcard/TuxPaint/brushes`, you can add some images which will be shown and used on `brushes` tool;
-    * In the folder `/mnt/sdcard/TuxPaint/fonts`, you can add some extra fonts which will be used on `texts` and `labels` tool;
-    * In the folder `/mnt/sdcard/TuxPaint/stamps`, you can add some stamps which will be shown and used on `stamps` tool;
-    * In the folder `/mnt/sdcard/TuxPaint/starters`, you can add some images which will be shown and used when `New` menu is clicked;
-3. Your work will be hosted in the folder `/mnt/sdcard/TuxPaint/saved` (supposing `/mnt/sdcard/TuxPaint/` is your `savedir`).
+2. While tuxpaint can start with some default resources, you can further use your own resources for painting (supposing `/mnt/sdcard/tuxpaint/` is your `datadir`):
+    * In the folder `/mnt/sdcard/tuxpaint/brushes`, you can add some images which will be shown and used on `brushes` tool;
+    * In the folder `/mnt/sdcard/tuxpaint/fonts`, you can add some extra fonts which will be used on `texts` and `labels` tool;
+    * In the folder `/mnt/sdcard/tuxpaint/stamps`, you can add some stamps which will be shown and used on `stamps` tool;
+    * In the folder `/mnt/sdcard/tuxpaint/starters`, you can add some images which will be shown and used when `New` menu is clicked;
+3. Your work will be hosted in the folder `/mnt/sdcard/TuxPaint/saved` (supposing `/mnt/sdcard/tuxpaint/` is your `savedir`).
 4. Different from PC, you can paint with your two fingers or more! This is really interesting :)
 
 Test
@@ -206,21 +204,21 @@ Test
 
 Develop
 ========
-If you want to develop futher tuxpaint on the Android, there are some points which might be helpful:
+If you want to develop futher Tux Paint on the Android, there are some points which might be helpful:
 
 1. Before you come to develop, you shall know a few about Linux, C, Java, JNI and NDK.
 2. If you meet some issues or problems, please check following `Issues&Solutions` section;
 3. Since `setlocale` is not implemented well by Android, please avoid to use this function;
-4. For onscreen keybord on the Android, if you have not set property `onscreen-keyboard` and `onscreen-keyboard-layout` in the config file, tuxpaint will try to use Android keybord; otherwise, tuxpaint will follow your decision. You can disable keybord by setting `onscreen-keyboard` to `false`, you can also use tuxpaint's keybord by setting `onscreen-keyboard-layout` to `$layout-name` in the `osk` folder.
-5. For debug the tuxpaint, you shall compile with DEBUG macro in the src/debug.h. And then, you can 
-  * eithor read the log file `/mnt/sdcard/TuxPaint/tuxpaint.log`;
+4. For onscreen keybord on the Android, if you have not set property `onscreen-keyboard` and `onscreen-keyboard-layout` in the config file, Tux Paint will try to use Android keybord; otherwise, Tux Paint will follow your decision. You can disable keybord by setting `onscreen-keyboard` to `false`, you can also use tuxpaint's keybord by setting `onscreen-keyboard-layout` to `$layout-name` in the `osk` folder.
+5. For debug the Tux Paint, you shall compile with DEBUG macro in the src/debug.h. And then, you can 
+  * eithor read the log file `/mnt/sdcard/tuxpaint/tuxpaint.log`;
   * or use `LOGE` and `LOGI` to get message from the `LogCat`.
-6. If you want to set or disable the property of tuxpaint, you can modify the configure file `tuxpaint.cfg` in `assert/tuxpaint.zip` of this project to create a new apk. But a better approach is that you can only create or modify the configure file `tuxpaint.cfg` in the `/mnt/sdcard/Android/data/org.tuxpaint/files/` directly on your test Android devices.
-7. Although the dependent libraries of tuxpaint have been compiled successfully, some functions of these libraries may not run as supposed or may even get crashed. Thus, please do not trust these compiled libraries too much and be careful. When something becomes strange, test by yourself.
+6. If you want to set or disable the property of Tux Paint, you can modify the configure file `tuxpaint.cfg` in `assets/tuxpaint.zip` of this project to create a new apk. But a better approach is that you can only create or modify the configure file `tuxpaint.cfg` in the `/mnt/sdcard/Android/data/org.tuxpaint/files/` directly on your test Android devices.
+7. Although the dependent libraries of Tux Paint have been compiled successfully, some functions of these libraries may not run as supposed or may even get crashed. Thus, please do not trust these compiled libraries too much and be careful. When something becomes strange, test by yourself.
  
 Bugs&Comments
 =================
-Send bugs and comments to TuxPaint developer's mailing list:
+Send bugs and comments to Tux Paint developer's mailing list:
 
 	tuxpaint-devel@lists.sourceforge.net
 
@@ -249,11 +247,11 @@ Problem: NDK compilation failed with following error message.
 > by "obj/local/armeabi/objs/tuxpaint/src/parse.o".  Stop.
 
 Solution: parse.c is generated from parse.gperf by Makefile (see line 1025). 
-Here compile another tuxpaint in linux system with Makefile 
+Here compile another Tux Paint in linux system with Makefile 
 and then copy generated parse.c to jni/tuxpaint/src folder.
 
 tp_magic_api.h is generated from tp_magic_api.h.in by Makefile.
-Here compile another tuxpaint in linux system with Makefile 
+Here compile another Tux Paint in linux system with Makefile 
 and then copy generated tp_magic_api.h to jni/tuxpaint/src folder.
 
 Issue 3: Full screen is required.
@@ -265,9 +263,9 @@ Solution: To enable full screen for Android, both `fullscreen=yes` and `native=y
 
 Issue 4: Android KeyEvent.KEYCODE_BACK cannot be handled successfully.
 
-Problem: The reason is that KeyEvent.KEYCODE_BACK in the Android will be changed into SDLK_AC_BACK in the SDL2.0, which is not processed by tuxpaint.
+Problem: The reason is that KeyEvent.KEYCODE_BACK in the Android will be changed into SDLK_AC_BACK in the SDL2.0, which is not processed by Tux Paint.
 
-Solution: From source code, we can find that the function of SDLK_AC_BACK is similar with SDLK_ESCAPE, which is processed by tuxpaint, thus add SDLK_AC_BACK to place where SDLK_ESCAPE exists.
+Solution: From source code, we can find that the function of SDLK_AC_BACK is similar with SDLK_ESCAPE, which is processed by Tux Paint, thus add SDLK_AC_BACK to place where SDLK_ESCAPE exists.
 
 Issue 5: Android 2.3.6 cannot save pictures when USB storage is connected on.
 
@@ -283,7 +281,7 @@ However all images are compressed in the apk file and current NDK AAssetsManager
 seems not support directory traverse operation well.
 
 Solution: All images and other resources will be compressed into tuxpaint.zip file in the assets folder. 
-TuxPaintActivity java class will decompress tuxpaint.zip into /data/data/org.tuxpaint/files folder, 
+tuxpaintActivity java class will decompress tuxpaint.zip into /data/data/org.tuxpaint/files folder, 
 then dir walk operation defined in dirwalk.c will work as supposed to load resource. 
 
 Issue 7: How to save pictures.
@@ -295,33 +293,33 @@ First is to use application internal storage, such as `/data/data/your.app.packa
 Second is to use application external storage, such as `/mnt/sdcard/Android/data/your.app.package/files`. 
 Third is also to use application extenral storage, such as `/mnt/sdcard/your.app`. 
 
-Here tuxpaint will be set to search the `tuxpaint.cfg` config file in the first and second path.
+Here Tux Paint will be set to search the `tuxpaint.cfg` config file in the first and second path.
 However, we recommend users not to rely on the config file in the second path, since sometime external path may not be support.
 Instead, if users want to set different configuration, they can achieve this on the screen, which will affect the config file in the first path.
 
-Anyway, the `save` dir and `data` dir will be set in the config file there. The default `save` and `data` dirs will be set the third path, which generally both are `/mnt/sdcard/TuxPaint`. But users can set different `save` dir and `data` dir if they want.
+Anyway, the `save` dir and `data` dir will be set in the config file there. The default `save` and `data` dirs will be set the third path, which generally both are `/mnt/sdcard/tuxpaint`. But users can set different `save` dir and `data` dir if they want.
 
 Issue 8: NDK android-21 make old Android devices crashed
 
 Problem: According to (1) http://stackoverflow.com/questions/27091001/how-to-use-mkfifo-using-androids-ndk/27093163#27093163 
 and (2) https://code.google.com/p/android/issues/detail?id=73725.
-If TuxPaint is compiled based NDK android-21, some old Android devices will crashed.
+If Tux Paint is compiled based NDK android-21, some old Android devices will crashed.
 
 Solution: Insead of android-21, set APP_PLATFORM in jni/Application.mk to android-19 (or other low version).
 
 Issue 9: Failed loading some magic plugin libraries due to too many libraries on old Android devices.
 
 Problem: In Android 2.3.6, magic plugin libraries are compilied successfullt. 
-However, when lauching the TuxPaint, some warnning words come to show that:
+However, when lauching Tux Paint, some warning words come to show that:
 
 > Failed loading xxx.so: Cannot load library: alloc_info[279]:1231 too many libraries when loading xxx.so
 
-But in Android 5.0.2, there are no warnning words about this case.
+But in Android 5.0.2, there are no warning words about this case.
 According to http://stackoverflow.com/questions/14876835/android-maximum-shared-library-size/22143184#22143184, the number of shared libraries loaded by bionic has a limit defined by SO_MAX.
 In Android 4.2, SO_MAX is 128. From Android 4.3, SO_MAX is removed.
 
 Solution: The maximal allowable number for Android 2.3.6 is unknown yet, but it seems not too big.
-Some solutions are found but seem useless for TuxPaint.
+Some solutions are found but seem useless for Tux Paint.
 From warning words, the result is that some magic plugin libraries will not be loaded, which means Android old devices will miss some magic tools.
 Anyway, the best soultion may be to use Android devices with new versions :(
 
@@ -334,9 +332,9 @@ In the Android platform, these libraries can also be named `xxx.so` with follow 
 	LOCAL_MODULE_FILENAME := xxx
 ```
 
-Then, all of these xxx.so will be compiled into `libs` folder of TuxPaint project and be packed into TuxPaint.apk.
+Then, all of these xxx.so will be compiled into `libs` folder of Tux Paint project and be packed into tuxpaint.apk.
 
-However, there is a strange problem that even `xxx.so` is in the TuxPaint.apk, xxx.so will not be uncompressed into
+However, there is a strange problem that even `xxx.so` is in the tuxpaint.apk, xxx.so will not be uncompressed into
 `/data/data/org.tuxpaint/lib`. It seems that Android system only allow `libxxx.so`.
 
 Solution: Since Android only acccept libxxx.so rather than xxx.so, Android.mk will use following word.
@@ -365,12 +363,12 @@ Solution: Since tuxpaint can tolerate the non-magic library even it complains, s
 Issue 12: Annoying joystick events from Android accelerometer
 
 Problem: SDL2 will add Android accelerometer as a joystick device by default.
-SDLActivity java class gets the sensor information and send this to native SDL2 library, and then send to TuxPaint, which will cause TuxPaint run joystick related method.
+SDLActivity java class gets the sensor information and send this to native SDL2 library, and then send to TuxPaint, which will cause Tux Paint run joystick related method.
 However, the accelerometer information may be useless for TuxPaint,  since joystic events come so frequencely that will disturb current paint activity.
 
 Solution: SDL2 will still take accelerometer as default joystick device.
 But SDLActivity java class will not register sensor listener so that the SDL2 native library cannot get accelerometer information and will not send any joystick events to disturb tuxpaint.
-TuxPaint will require no modification.
+Tux Paint will require no modification.
 
 Issue 13: Screen keyboard gets weird on old Android device due to `mbstowcs`
 
@@ -395,7 +393,7 @@ size_t mbsrtowcs(wchar_t* dst, const char** src, size_t len, mbstate_t* /*ps*/) 
 }
 ```
 
-Solution: We implement our own implementation of `mbstowcs` function for TuxPaint. For more information, please check out android_mbstowcs.h and android_mbstowcs.h.
+Solution: We implement our own implementation of `mbstowcs` function for Tux Paint. For more information, please check out android_mbstowcs.h and android_mbstowcs.h.
 
 Issue 14: Android has not support "setlocale" which will cause gettext not work.
 
@@ -437,7 +435,7 @@ gettext can be compiled into Android, but cannot run as expected.
 
 Solution: Refer to http://blog.stuff-o-matic.com/post/2013/09/07/Porting-a-C-game-to-Android%2C-the-case-of-Andy-s-Super-Great-Park,
 libintl-lite http://sourceforge.net/projects/libintl-lite/ can work.
-Currently TuxPaint-Android has used and extended this library instead of gettext.
+Currently Tux Paint-Android has used and extended this library instead of gettext.
 
 Issue 15: simplified-chinese cannot show properly.
 
@@ -482,17 +480,17 @@ But pango cannot locate symbol `hb_ft_face_create_cached` of harfbuzz_ng when Tu
 Again sometimes cairo will also meet this issue that it cannot locate some symbols of png.
 
 The reason may be that two libraries with same name in system lib path and local app lib path will have different versions.
-For example, there is already libharfbuzz_ng in /system/lib folder, which is pre-builted and hosted by Android phone. On the other hand, we compile another version of libharfbuzz_ng for tuxpaint and host this in the apk.
+For example, there is already libharfbuzz_ng in /system/lib folder, which is pre-builted and hosted by Android phone. On the other hand, we compile another version of libharfbuzz_ng for Tux Paint and host this in the apk.
 And a strange behavior which is found but not confirmed is that `System.loadLibrary` seems to search libharfbuzz_ng in system path and then user app path. This will cause that compiled libharfbuzz_ng for tuxpaint is not loaded as we supposed, and the system libharfbuzz_ng seems a little old and not implement some new functions yet.
 
 So Android already does pre-built so many libraries but only does export a few headers (see section `Stable APIs` of `NDK Programmer's Guide`). We have to build required libraries by ourselves. 
  
 Solution: To prevent loading those system libraries, we will add prefix `tuxpaint_` for all of libraries execept SDL2 related libraries.
 
-Issue 19: TuxPaint will crash when starting in the even number.
+Issue 19: Tux Paint will crash when starting in the even number.
 
-Problem: TuxPaint run well in the first time. 
-However when we quit normally and start tuxpaint again in the second time, it will crash.
+Problem: Tux Paint run well in the first time. 
+However when we quit normally and start Tux Paint again in the second time, it will crash.
 The LogCate will out the following message:
 
 > A/libc(9473): invalid address or address of corrupt block 0xb7c09448 passed to try_realloc_chunk
@@ -500,8 +498,8 @@ The LogCate will out the following message:
 
 But when we try to start it again in the third time, it will succeed again.
 
-Solution: It seems that tuxpaint will not quit normally when it does quit operation.
-We can still find tuxpaint process there by following command:
+Solution: It seems that Tux Paint will not quit normally when it does quit operation.
+We can still find Tux Paint process there by following command:
 
 ```
 adb shell
@@ -510,7 +508,7 @@ ps | grep tuxpaint
 
 And if testing further with `ps -t $(threadid)`, we can find that:
 
-After tuxpaint starts successfully, there are many threads.
+After Tux Paint starts successfully, there are many threads.
 
 > ffffffff 00000000 S org.tuxpaint
 > ffffffff 00000000 S Heap thread poo
@@ -535,8 +533,8 @@ After tuxpaint starts successfully, there are many threads.
 > ffffffff 00000000 S GL updater
 > ffffffff 00000000 S Binder_3
 
-After tuxpaint does quit operation, there are still many threads, but real work threads about tuxpaint quit indeed.
-SDLThread is the thread for running native tuxpaint code, which indeed quits.
+After Tux Paint does quit operation, there are still many threads, but real work threads about Tux Paint quit indeed.
+SDLThread is the thread for running native Tux Paint code, which indeed quits.
 
 > ffffffff 00000000 S org.tuxpaint
 > ffffffff 00000000 S Heap thread poo
@@ -555,8 +553,8 @@ SDLThread is the thread for running native tuxpaint code, which indeed quits.
 > ffffffff 00000000 S AudioTrack
 > ffffffff 00000000 S Binder_3
 
-So this imcomplete quit operation will cause tuxpaint cannot start in the even number.
-The patch is very simple that will force tuxpaint process quit in the SDLActivity class:
+So this imcomplete quit operation will cause Tux Paint cannot start in the even number.
+The patch is very simple that will force Tux Paint process quit in the SDLActivity class:
 
 ```
      public static void handleNativeExit() {
@@ -568,13 +566,13 @@ The patch is very simple that will force tuxpaint process quit in the SDLActivit
 ```
 
 This can work fine, but seems not be the best approach.
-A more reasonable approach shall be to make tuxpaint quit automatically by themselves.
+A more reasonable approach shall be to make Tux Paint quit automatically by themselves.
 
 Issue 20: Printing feature
 
-Problem: Tuxpaint on Linux platform depends on `lpr` command (see postscript_print.h).
+Problem: Tux paint on Linux platform depends on `lpr` command (see postscript_print.h).
 however currently it is not sure whether it can work for Android platform.
-The tuxpaint on other platform depend on different native system APIs (see win32_print.h BeOS_print.h macosx_print.h).
+The Tux Paint on other platform depend on different native system APIs (see win32_print.h BeOS_print.h macosx_print.h).
 
 Solution: Refer to https://developer.android.com/reference/android/support/v4/print/PrintHelper.html and https://developer.android.com/training/printing/photos.html, we use `JNI` and Android `PrintHelper` to support print feature on the Android.
 However, another issue coming likely is that `PrintHelper` seems to depend on Android 4.4 SDK http://www.techotopia.com/index.php/Printing_with_the_Android_Printing_Framework#Options_for_Building_Print_Support_into_Android_Apps.
