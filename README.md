@@ -38,10 +38,10 @@ Project
     strings used in your application, including the application name shown on the phone.
   * src/org/libsdl/app/SDLActivity.java
     the Java class handling the initialization and binding to SDL2.
-  * src/org/tuxpaint/app/TuxPaintActivity.java
-    the Java class handling something related with TuxPaint
+  * src/org/tuxpaint/app/tuxpaintActivity.java
+    the Java class handling something related with Tux Paint
   * src/org/tuxpaint/app/ConfigActivity.java
-    the Java class handling configuration related with TuxPaint
+    the Java class handling configuration related with Tux Paint
   * jni/
     directory holding native code
   * jni/Android.mk
@@ -92,7 +92,7 @@ Project
 
 Dependencies
 =================
-From **[official Library Requirements](http://www.tuxpaint.org/requirements/)**, TuxPaint requires:
+From **[official Library Requirements](http://www.tuxpaint.org/requirements/)**, Tux Paint requires:
 
 * SDL 
 * SDL_image (for PNG support)
@@ -160,7 +160,7 @@ Build
 * Linux system
 * Android SDK
 * Android NDK
-* TuxPaint-Android source code
+* Tuxpaint-Android source code
 * Eclipse & ADT (optional)
 * Git (optional)
 
@@ -363,8 +363,8 @@ Solution: Since tuxpaint can tolerate the non-magic library even it complains, s
 Issue 12: Annoying joystick events from Android accelerometer
 
 Problem: SDL2 will add Android accelerometer as a joystick device by default.
-SDLActivity java class gets the sensor information and send this to native SDL2 library, and then send to TuxPaint, which will cause Tux Paint run joystick related method.
-However, the accelerometer information may be useless for TuxPaint,  since joystic events come so frequencely that will disturb current paint activity.
+SDLActivity java class gets the sensor information and send this to native SDL2 library, and then send to Tux Paint, which will cause Tux Paint run joystick related method.
+However, the accelerometer information may be useless for Tux Paint,  since joystic events come so frequencely that will disturb current paint activity.
 
 Solution: SDL2 will still take accelerometer as default joystick device.
 But SDLActivity java class will not register sensor listener so that the SDL2 native library cannot get accelerometer information and will not send any joystick events to disturb tuxpaint.
@@ -476,7 +476,7 @@ Solution: Although the reason is found,  the corresponding solution cannot achie
 Issue 18: libharfbuzz_ng seems not be accessable by pango during "System.loadLibrary" call
 
 Problem: It is very strange that libharfbuzz_ng and pango library can compile successfully.
-But pango cannot locate symbol `hb_ft_face_create_cached` of harfbuzz_ng when TuxPaint app starts to dynamically load `libpango.so` by `System.loadLibrary`.
+But pango cannot locate symbol `hb_ft_face_create_cached` of harfbuzz_ng when Tux Paint app starts to dynamically load `libpango.so` by `System.loadLibrary`.
 Again sometimes cairo will also meet this issue that it cannot locate some symbols of png.
 
 The reason may be that two libraries with same name in system lib path and local app lib path will have different versions.

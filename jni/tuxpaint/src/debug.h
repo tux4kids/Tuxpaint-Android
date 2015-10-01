@@ -1,4 +1,4 @@
-//#define DEBUG
+#define DEBUG
 
 #ifdef __ANDROID__
 #include <android/log.h>
