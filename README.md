@@ -159,6 +159,7 @@ Build
 ========
 * Linux system
 * Android SDK
+    android-support-v4.jar from the sdk/extras/... directory, copy it into the libs directory
 * Android NDK
 * Tuxpaint-Android source code
 * Eclipse & ADT (optional)
