@@ -128,6 +128,8 @@ public class ConfigActivity extends Activity {
 			if (locales[index].compareTo(locale) == 0)
 				break;
 		}
+		if(index==locales.length)
+		    index = 0;
        	localeSpinner = (Spinner) findViewById(R.id.spinnerLocale);
 		localeSpinner.setSelection(index); 
 		localeSpinner.setOnItemSelectedListener(
