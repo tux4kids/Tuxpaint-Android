@@ -53,7 +53,7 @@ public class tuxpaintActivity extends SDLActivity {
     protected void onCreate(Bundle savedInstanceState) {
     	unzipAssets ();
     	super.onCreate(savedInstanceState);
-    	addConfigButton ();
+	//    	addConfigButton ();
     }
     
     private void unzipAssets(){
@@ -104,24 +104,24 @@ public class tuxpaintActivity extends SDLActivity {
 	     
     } 
     
-    private void addConfigButton () {
-    	if (mConfigButton != null)
-    		return;
+    // private void addConfigButton () {
+    // 	if (mConfigButton != null)
+    // 		return;
 
-    	DisplayMetrics dm = new DisplayMetrics();
-    	getWindowManager().getDefaultDisplay().getMetrics(dm);
-    	int width = dm.widthPixels;
-    	int heigh = dm.heightPixels;
-    	AbsoluteLayout.LayoutParams params = new AbsoluteLayout.LayoutParams
-        		(60, 60, width-60, heigh-60);
-        mConfigButton = new Button (getContext ());
-        mConfigButton.setBackgroundResource(R.drawable.ic_settings_black_36dp);
-        mConfigButton.setOnClickListener(new View.OnClickListener() {
-      	  public void onClick(View v) {
-          		startActivity(new Intent (tuxpaintActivity.this, ConfigActivity.class));
-      	  }
-        });
-        SDLActivity.mLayout.addView(mConfigButton, params);
-    }
+    // 	DisplayMetrics dm = new DisplayMetrics();
+    // 	getWindowManager().getDefaultDisplay().getMetrics(dm);
+    // 	int width = dm.widthPixels;
+    // 	int heigh = dm.heightPixels;
+    // 	AbsoluteLayout.LayoutParams params = new AbsoluteLayout.LayoutParams
+    //     		(60, 60, width-60, heigh-60);
+    //     mConfigButton = new Button (getContext ());
+    //     mConfigButton.setBackgroundResource(R.drawable.ic_settings_black_36dp);
+    //     mConfigButton.setOnClickListener(new View.OnClickListener() {
+    //   	  public void onClick(View v) {
+    //       		startActivity(new Intent (tuxpaintActivity.this, ConfigActivity.class));
+    //   	  }
+    //     });
+    //     SDLActivity.mLayout.addView(mConfigButton, params);
+    // }
     
 }

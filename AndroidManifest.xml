@@ -31,7 +31,14 @@
         </activity>
         
         <activity android:name=".ConfigActivity" 
-            		     android:screenOrientation="landscape">
+		  android:screenOrientation="landscape"
+		  android:label="@string/app_config"
+		  android:icon="@drawable/ic_settings_black_36dp"
+		  >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         
     </application>
