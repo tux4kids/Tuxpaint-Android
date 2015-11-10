@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
-"Report-Msgid-Bugs-To: tuxpaint-i18n@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-03 21:03+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-08 18:37+0200\n"
 "PO-Revision-Date: 2014-06-16 23:29+0200\n"
 "Last-Translator: Freek de Kruijf <f.de.kruijf@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -147,7 +147,9 @@ msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
 #: ../dirwalk.c:201
-msgid "`\\%_@$~#{<(^&*"
+#, fuzzy
+#| msgid "`\\%_@$~#{<(^&*"
+msgid "`%_@$~#{<(^&*"
 msgstr "`\\%_@$~#{<(^&*"
 
 #. digits (e.g., '0', '1' and '7')
@@ -232,56 +234,64 @@ msgid "ZH_TW"
 msgstr "ZH_TW"
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:171 ../shapes.h:172
+#: ../shapes.h:234 ../shapes.h:235
 msgid "Square"
 msgstr "Vierkant"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:175 ../shapes.h:176
+#: ../shapes.h:238 ../shapes.h:239
 msgid "Rectangle"
 msgstr "Rechthoek"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:179 ../shapes.h:180
+#: ../shapes.h:242 ../shapes.h:243
 msgid "Circle"
 msgstr "Cirkel"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:183 ../shapes.h:184
+#: ../shapes.h:246 ../shapes.h:247
 msgid "Ellipse"
 msgstr "Ellips"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:187 ../shapes.h:188
+#: ../shapes.h:250 ../shapes.h:251
 msgid "Triangle"
 msgstr "Driehoek"
 
 #. Pentagone shape tool (5 sides)
-#: ../shapes.h:191 ../shapes.h:192
+#: ../shapes.h:254 ../shapes.h:255
 msgid "Pentagon"
 msgstr "Vijfhoek"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:195 ../shapes.h:196
+#: ../shapes.h:258 ../shapes.h:259
 msgid "Rhombus"
 msgstr "Ruit"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:199 ../shapes.h:200
+#: ../shapes.h:262 ../shapes.h:263
 msgid "Octagon"
 msgstr "Achthoek"
 
+#. Triangle star (3 points star)
+#. Rhombus star (4 points star)
+#. Pentagone star (5 points star)
+#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
+#: ../shapes.h:278 ../shapes.h:281
+msgid "Star"
+msgstr ""
+
 #. Description of a square
-#: ../shapes.h:208 ../shapes.h:209
+#: ../shapes.h:290 ../shapes.h:291
 msgid "A square is a rectangle with four equal sides."
 msgstr "Een vierkant is een rechthoek met vier gelijke zijden."
 
 #. Description of a rectangle
-#: ../shapes.h:212 ../shapes.h:213
+#: ../shapes.h:294 ../shapes.h:295
 msgid "A rectangle has four sides and four right angles."
 msgstr "Een rechthoek heeft vier zijden en vier rechte hoeken."
 
-#: ../shapes.h:217 ../shapes.h:219
+#: ../shapes.h:299 ../shapes.h:301
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr ""
@@ -289,29 +299,41 @@ msgstr ""
 "tot het middelpunt."
 
 #. Description of an ellipse
-#: ../shapes.h:222 ../shapes.h:223
+#: ../shapes.h:304 ../shapes.h:305
 msgid "An ellipse is a stretched circle."
 msgstr "Een ellips is een uitgerekte cirkel."
 
 #. Description of a triangle
-#: ../shapes.h:226 ../shapes.h:227
+#: ../shapes.h:308 ../shapes.h:309
 msgid "A triangle has three sides."
 msgstr "Een driehoek heeft drie zijden."
 
 #. Description of a pentagon
-#: ../shapes.h:230 ../shapes.h:231
+#: ../shapes.h:312 ../shapes.h:313
 msgid "A pentagon has five sides."
 msgstr "Een vijfhoek heeft vijf zijden."
 
-#: ../shapes.h:235 ../shapes.h:237
+#: ../shapes.h:317 ../shapes.h:319
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr ""
 "Een ruit heeft vier gelijke zijden en tegenoverliggende zijden lopen "
 "parallel."
 
-#: ../shapes.h:241 ../shapes.h:243
+#: ../shapes.h:323 ../shapes.h:325
 msgid "An octagon has eight equal sides."
 msgstr "Een achthoek heeft acht gelijke zijden."
+
+#: ../shapes.h:327 ../shapes.h:328
+msgid "A star with 3 points."
+msgstr ""
+
+#: ../shapes.h:329 ../shapes.h:330
+msgid "A star with 4 points."
+msgstr ""
+
+#: ../shapes.h:331 ../shapes.h:332
+msgid "A star with 5 points."
+msgstr ""
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -403,7 +425,7 @@ msgstr "Nieuw"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7631
+#: ../tools.h:98 ../tuxpaint.c:7637
 msgid "Open"
 msgstr "Openen"
 
@@ -449,30 +471,31 @@ msgstr ""
 
 #. Text tool instructions
 #: ../tools.h:127
-#| msgid ""
-#| "Choose a style of text. Click on your drawing and you can start typing."
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text."
 msgstr ""
 "Kies een stijl voor de tekst. Klik op de tekening en je kunt beginnen met "
-"typen. "
-"Druk op [Enter] of [Tab] om de intypen van de tekst te beëindigen."
+"typen. Druk op [Enter] of [Tab] om de intypen van de tekst te beëindigen."
 
 #. Label tool instructions
 #: ../tools.h:130
+#, fuzzy
 #| msgid ""
-#| "Choose a style of text. Click on your drawing and you can start typing."
+#| "Choose a style of text. Click on your drawing and you can start typing. "
+#| "Press [Enter] or [Tab] to complete the text. By using the selector button "
+#| "and clicking an exist label, you can move it, edit it and change its text "
+#| "style."
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
-"and clicking an exist label, you can move it, edit it and change its text "
+"and clicking an existing label, you can move it, edit it and change its text "
 "style."
 msgstr ""
-"Kies een stijl voor de tekst. Klik op de tekening en begin te typen. Druk "
-"op [Enter] of [Tab] om de tekst te voltooien. Door de selectieknop te "
-"gebruiken en klikken op een bestaand label, kunt u het verplaatsen, "
-"bewerken en zijn tekststijl wijzigen."
+"Kies een stijl voor de tekst. Klik op de tekening en begin te typen. Druk op "
+"[Enter] of [Tab] om de tekst te voltooien. Door de selectieknop te gebruiken "
+"en klikken op een bestaand label, kunt u het verplaatsen, bewerken en zijn "
+"tekststijl wijzigen."
 
 #. Magic tool instruction
 #: ../tools.h:136
@@ -642,78 +665,78 @@ msgid "Sound unmuted."
 msgstr "Geluid aan"
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3065
+#: ../tuxpaint.c:3071
 msgid "Please wait…"
 msgstr "Even geduld_"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7634
+#: ../tuxpaint.c:7640
 msgid "Erase"
 msgstr "Uitgommen"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7637
+#: ../tuxpaint.c:7643
 msgid "Slides"
 msgstr "Dia's"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7640
+#: ../tuxpaint.c:7646
 msgid "Back"
 msgstr "Terug"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7649
 msgid "Next"
 msgstr "Volgende"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7652
 msgid "Play"
 msgstr "Afspelen"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8355
+#: ../tuxpaint.c:8361
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11664
+#: ../tuxpaint.c:11689
 msgid "Yes"
 msgstr "Ja"
 
-#: ../tuxpaint.c:11668
+#: ../tuxpaint.c:11693
 msgid "No"
 msgstr "Nee"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12710
+#: ../tuxpaint.c:12792
 msgid "Replace the picture with your changes?"
 msgstr "De tekening vervangen met de wijzigingen?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12714
+#: ../tuxpaint.c:12796
 msgid "Yes, replace the old one!"
 msgstr "Ja, vervang de oude!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12718
+#: ../tuxpaint.c:12800
 msgid "No, save a new file!"
 msgstr "Nee, opslaan in een nieuw bestand!"
 
-#: ../tuxpaint.c:13963
+#: ../tuxpaint.c:14045
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Kies de tekening die je wilt en klik dan op “Openen”."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:14994 ../tuxpaint.c:15322
+#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Kies de tekening die je wilt en klik dan op “Afspelen”."
 
-#: ../tuxpaint.c:22344
+#: ../tuxpaint.c:22439
 msgid "Pick a color."
 msgstr "Kies een kleur."
 
@@ -734,7 +757,10 @@ msgid "Color Shift"
 msgstr "Kleurverschuiving"
 
 #: ../../magic/src/alien.c:67
-msgid "Click and move the mouse to change the colors in parts of your picture."
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to change the colors in parts of your picture."
+msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr "Klik en beweeg de muis om daar de kleur van je tekening te veranderen."
 
 #: ../../magic/src/alien.c:68
@@ -767,18 +793,25 @@ msgid "Drip"
 msgstr "Druipen"
 
 #: ../../magic/src/blocks_chalk_drip.c:150
-msgid "Click and move the mouse around to make the picture blocky."
+#, fuzzy
+#| msgid "Click and move the mouse around to make the picture blocky."
+msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "Klik en beweeg de muis om daar de tekening blokkerig te maken."
 
 #: ../../magic/src/blocks_chalk_drip.c:153
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
 msgid ""
-"Click and move the mouse around to turn the picture into a chalk drawing."
+"Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr ""
 "Klik en beweeg de muis om daar de tekening te veranderen in een "
 "krijttekening!"
 
 #: ../../magic/src/blocks_chalk_drip.c:156
-msgid "Click and move the mouse around to make the picture drip."
+#, fuzzy
+#| msgid "Click and move the mouse around to make the picture drip."
+msgid "Click and drag the mouse around to make the picture drip."
 msgstr "Klik en beweeg de muis om daar de tekening te laten druipen!"
 
 #: ../../magic/src/blur.c:80
@@ -786,7 +819,9 @@ msgid "Blur"
 msgstr "Vervagen"
 
 #: ../../magic/src/blur.c:83
-msgid "Click and move the mouse around to blur the image."
+#, fuzzy
+#| msgid "Click and move the mouse around to blur the image."
+msgid "Click and drag the mouse around to blur the image."
 msgstr "Klik en beweeg de muis om daar de tekening te vervagen."
 
 #: ../../magic/src/blur.c:84
@@ -799,11 +834,15 @@ msgid "Bricks"
 msgstr "Stenen"
 
 #: ../../magic/src/bricks.c:131
-msgid "Click and move to draw large bricks."
+#, fuzzy
+#| msgid "Click and move to draw large bricks."
+msgid "Click and drag to draw large bricks."
 msgstr "Klik en beweeg om de grote stenen te tekenen."
 
 #: ../../magic/src/bricks.c:133
-msgid "Click and move to draw small bricks."
+#, fuzzy
+#| msgid "Click and move to draw small bricks."
+msgid "Click and drag to draw small bricks."
 msgstr "Klik en beweeg om de kleine stenen te tekenen."
 
 #: ../../magic/src/calligraphy.c:127
@@ -811,7 +850,9 @@ msgid "Calligraphy"
 msgstr "Schoonschrift"
 
 #: ../../magic/src/calligraphy.c:134
-msgid "Click and move the mouse around to draw in calligraphy."
+#, fuzzy
+#| msgid "Click and move the mouse around to draw in calligraphy."
+msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Klik en beweeg de muis om te schrijven in schoonschrift."
 
 #: ../../magic/src/cartoon.c:106
@@ -819,7 +860,9 @@ msgid "Cartoon"
 msgstr "Striptekening"
 
 #: ../../magic/src/cartoon.c:113
-msgid "Click and move the mouse around to turn the picture into a cartoon."
+#, fuzzy
+#| msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr "Klik en beweeg de muis om daar de tekening te veranderen in een strip."
 
 #: ../../magic/src/confetti.c:85
@@ -855,7 +898,9 @@ msgid "Darken"
 msgstr "Verdonkeren"
 
 #: ../../magic/src/fade_darken.c:134
-msgid "Click and move the mouse to lighten parts of your picture."
+#, fuzzy
+#| msgid "Click and move the mouse to lighten parts of your picture."
+msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "Klik en beweeg de muis om daar de tekening lichter te maken."
 
 #: ../../magic/src/fade_darken.c:136
@@ -863,7 +908,9 @@ msgid "Click to lighten your entire picture."
 msgstr "Klik om de hele tekening lichter te maken."
 
 #: ../../magic/src/fade_darken.c:141
-msgid "Click and move the mouse to darken parts of your picture."
+#, fuzzy
+#| msgid "Click and move the mouse to darken parts of your picture."
+msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "Klik en beweeg de muis om daar de tekening donkerder te maken."
 
 #: ../../magic/src/fade_darken.c:143
@@ -920,12 +967,10 @@ msgid "Fretwork"
 msgstr "Knipkunst"
 
 #: ../../magic/src/fretwork.c:180
-#| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw repetitive patterns. "
 msgstr "Klik en sleep om zich herhalende patronen te tekenen."
 
 #: ../../magic/src/fretwork.c:182
-#| msgid "Click to cover your picture with rain drops."
 msgid "Click to surround your picture with repetitive patterns."
 msgstr "Klik om je tekening te omgeven met zich herhalende patronen."
 
@@ -946,7 +991,9 @@ msgid "Grass"
 msgstr "Gras"
 
 #: ../../magic/src/grass.c:118
-msgid "Click and move to draw grass. Don’t forget the dirt!"
+#, fuzzy
+#| msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "Klik en beweeg om het gras te tekenen. Vergeet de aarde niet!"
 
 #: ../../magic/src/halftone.c:34
@@ -954,7 +1001,6 @@ msgid "Halftone"
 msgstr "Halftoon"
 
 #: ../../magic/src/halftone.c:38
-#| msgid "Click to turn your painting into its negative."
 msgid "Click and drag to turn your drawing into a newspaper."
 msgstr "Klik en versleep om uw tekening om te vormen in een krant."
 
@@ -980,18 +1026,14 @@ msgid "Kaleidoscope"
 msgstr "Caleidoscoop"
 
 #: ../../magic/src/kalidescope.c:136
-#| msgid ""
-#| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the left and right of your picture."
 msgstr ""
-"Klik en sleep de muis om met twee penselen te tekenen die symmetrisch aan "
-"de linker- en rechterkant van uw afbeelding"
+"Klik en sleep de muis om met twee penselen te tekenen die symmetrisch aan de "
+"linker- en rechterkant van uw afbeelding"
 
 #: ../../magic/src/kalidescope.c:138
-#| msgid ""
-#| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the top and bottom of your picture."
@@ -1000,19 +1042,20 @@ msgstr ""
 "aan de boven- en onderkant van uw afbeelding"
 
 #: ../../magic/src/kalidescope.c:140
-#| msgid "Click and drag the mouse to emboss the picture."
 msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr "Klik en sleep de muis om een patroon over de afbeelding te tekenen."
 
 #: ../../magic/src/kalidescope.c:142
+#, fuzzy
 #| msgid ""
-#| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+#| "Click and drag the mouse to draw a pattern plus its symmetric across the "
+#| "picture."
 msgid ""
-"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
 msgstr ""
-"Klik en sleep de muis om een patroon en zijn symmetrische over de "
-"afbeelding te tekenen."
+"Klik en sleep de muis om een patroon en zijn symmetrische over de afbeelding "
+"te tekenen."
 
 #. KAL_BOTH
 #: ../../magic/src/kalidescope.c:144
@@ -1059,68 +1102,70 @@ msgid "Mosaic"
 msgstr "Mozaïek"
 
 #: ../../magic/src/mosaic.c:103
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to add a mosaic effect to parts of your picture."
 msgid ""
-"Click and move the mouse to add a mosaic effect to parts of your picture."
+"Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr "Klik en beweeg de muis om de tekening daar te bedekken met mozaïek."
 
 #: ../../magic/src/mosaic.c:104
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Klik om de hele tekening te bedekken met mozaïek."
 
-#: ../../magic/src/mosaic_shaped.c:142
-#| msgid "Square"
+#: ../../magic/src/mosaic_shaped.c:147
 msgid "Square Mosaic"
 msgstr "Vierkante mozaïek"
 
-#: ../../magic/src/mosaic_shaped.c:143
-#| msgid "Mosaic"
+#: ../../magic/src/mosaic_shaped.c:148
 msgid "Hexagon Mosaic"
 msgstr "Zeshoek mozaïek"
 
-#: ../../magic/src/mosaic_shaped.c:144
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Irregular Mosaic"
 msgstr "Onregelmatige mozaïek"
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:156
+#, fuzzy
 #| msgid ""
-#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+#| "Click and move the mouse to add a square mosaic to parts of your picture."
 msgid ""
-"Click and move the mouse to add a square mosaic to parts of your picture."
+"Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr ""
 "Klik en sleep de muis om een vierkante mozaïek aan delen van uw afbeelding "
 "toe te voegen."
 
-#: ../../magic/src/mosaic_shaped.c:150
-#| msgid "Click to add a mosaic effect to your entire picture."
+#: ../../magic/src/mosaic_shaped.c:157
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Klik om de een vierkante mozaïek aan uw hele afbeelding toe te voegen."
 
-#: ../../magic/src/mosaic_shaped.c:152
+#: ../../magic/src/mosaic_shaped.c:161
+#, fuzzy
 #| msgid ""
-#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+#| "Click and move the mouse to add a hexagonal mosaic to parts of your "
+#| "picture."
 msgid ""
-"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+"Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr ""
 "Klik en sleep de muis om een zeskantige mozaïek aan delen van uw afbeelding "
 "toe te voegen."
 
-#: ../../magic/src/mosaic_shaped.c:153
-#| msgid "Click to add a mosaic effect to your entire picture."
+#: ../../magic/src/mosaic_shaped.c:162
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "Klik om een zeskantige mozaïek aan de gehele afbeelding toe te voegen."
 
-#: ../../magic/src/mosaic_shaped.c:155
+#: ../../magic/src/mosaic_shaped.c:166
+#, fuzzy
 #| msgid ""
-#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+#| "Click and move the mouse to add an irregular mosaic to parts of your "
+#| "picture."
 msgid ""
-"Click and move the mouse to add an irregular mosaic to parts of your picture."
+"Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr ""
 "Klik en sleep de muis om een onregelmatige mozaïek aan delen van uw "
-"afbeelding "
-"toe te voegen."
+"afbeelding toe te voegen."
 
-#: ../../magic/src/mosaic_shaped.c:156
-#| msgid "Click to add a mosaic effect to your entire picture."
+#: ../../magic/src/mosaic_shaped.c:167
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr ""
 "Klik om de een onregelmatige mozaïek aan uw hele afbeelding toe te voegen."
@@ -1130,7 +1175,9 @@ msgid "Negative"
 msgstr "Negatief"
 
 #: ../../magic/src/negative.c:106
-msgid "Click and move the mouse around to make your painting negative."
+#, fuzzy
+#| msgid "Click and move the mouse around to make your painting negative."
+msgid "Click and drag the mouse around to make your painting negative."
 msgstr "Klik en beweeg de muis om daar een negatief beeld te maken."
 
 #: ../../magic/src/negative.c:109
@@ -1142,7 +1189,9 @@ msgid "Noise"
 msgstr "Ruis"
 
 #: ../../magic/src/noise.c:66
-msgid "Click and move the mouse to add noise to parts of your picture."
+#, fuzzy
+#| msgid "Click and move the mouse to add noise to parts of your picture."
+msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr "Klik en beweeg de muis om geluid toe te voegen aan de tekening."
 
 #: ../../magic/src/noise.c:67
@@ -1158,28 +1207,24 @@ msgid "Zoom"
 msgstr "Zoomen"
 
 #: ../../magic/src/perspective.c:151
-#| msgid "Click and drag the mouse to emboss the picture."
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "Klik op de hoeken en sleep waar u de afbeelding wilt uitrekken."
 
 #: ../../magic/src/perspective.c:154
-#| msgid "Click and drag to squirt toothpaste onto your picture."
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgstr ""
-"Klik en sleep omhoog om in te zoomen of omlaag om uit zoomen in de afbeelding."
+"Klik en sleep omhoog om in te zoomen of omlaag om uit zoomen in de "
+"afbeelding."
 
 #: ../../magic/src/puzzle.c:105
-#| msgid "Purple!"
 msgid "Puzzle"
 msgstr "Puzzel"
 
 #: ../../magic/src/puzzle.c:112
-#| msgid "Click on part of your picture to create a fisheye effect."
 msgid "Click the part of your picture where would you like a puzzle."
 msgstr "Klik op een deel van de afbeelding waar u een puzzel wilt hebben."
 
 #: ../../magic/src/puzzle.c:113
-#| msgid "Click to make a mirror image."
 msgid "Click to make a puzzle in fullscreen mode."
 msgstr "Klik om een puzzel in de modus volledig scherm te maken."
 
@@ -1216,7 +1261,6 @@ msgid "Real Rainbow"
 msgstr "Echte regenboog"
 
 #: ../../magic/src/realrainbow.c:112
-#| msgid "Real Rainbow"
 msgid "ROYGBIV Rainbow"
 msgstr "ROYGBIV regenboog"
 
@@ -1265,7 +1309,9 @@ msgid "Silhouette"
 msgstr "Silhouet"
 
 #: ../../magic/src/sharpen.c:78
-msgid "Click and move the mouse to trace edges in parts of your picture."
+#, fuzzy
+#| msgid "Click and move the mouse to trace edges in parts of your picture."
+msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr "Klik en beweeg de muis om randen in je tekening te vinden."
 
 #: ../../magic/src/sharpen.c:79
@@ -1273,7 +1319,9 @@ msgid "Click to trace edges in your entire picture."
 msgstr "Klik en vindt randen in je hele tekening."
 
 #: ../../magic/src/sharpen.c:80
-msgid "Click and move the mouse to sharpen parts of your picture."
+#, fuzzy
+#| msgid "Click and move the mouse to sharpen parts of your picture."
+msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr "Klik en beweeg de muis om overgangen in je tekening te verscherpen."
 
 #: ../../magic/src/sharpen.c:81
@@ -1281,7 +1329,9 @@ msgid "Click to sharpen the entire picture."
 msgstr "Klik om overgangen in je hele tekening te verscherpen."
 
 #: ../../magic/src/sharpen.c:82
-msgid "Click and move the mouse to create a black and white silhouette."
+#, fuzzy
+#| msgid "Click and move the mouse to create a black and white silhouette."
+msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr "Klik en beweeg de muis om een deel van je tekening zwart-wit te maken."
 
 #: ../../magic/src/sharpen.c:83
@@ -1302,18 +1352,20 @@ msgstr "Doezelen"
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:108
-#| msgid "Metal Paint"
 msgid "Wet Paint"
 msgstr "Natte verf"
 
 #: ../../magic/src/smudge.c:115
-msgid "Click and move the mouse around to smudge the picture."
+#, fuzzy
+#| msgid "Click and move the mouse around to smudge the picture."
+msgid "Click and drag the mouse around to smudge the picture."
 msgstr "Klik en beweeg de muis om daar de tekening te doezelen!"
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:117
-#| msgid "Click and move the mouse around to blur the image."
-msgid "Click and move the mouse around to draw with wet, smudgy paint."
+#, fuzzy
+#| msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr "Klik en sleep de muis om te schilderen met natte, kledderige verf."
 
 #: ../../magic/src/snow.c:68
@@ -1369,8 +1421,12 @@ msgid "Color & White"
 msgstr "Kleur & Wit"
 
 #: ../../magic/src/tint.c:75
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to change the color of parts of your "
+#| "picture."
 msgid ""
-"Click and move the mouse around to change the color of parts of your picture."
+"Click and drag the mouse around to change the color of parts of your picture."
 msgstr "Klik en beweeg de muis om daar de kleur van je tekening te veranderen."
 
 #: ../../magic/src/tint.c:76
@@ -1378,8 +1434,12 @@ msgid "Click to change the color of your entire picture."
 msgstr "Klik en verander de kleur van je hele tekening."
 
 #: ../../magic/src/tint.c:77
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn parts of your picture into white "
+#| "and a color you choose."
 msgid ""
-"Click and move the mouse around to turn parts of your picture into white and "
+"Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
 msgstr ""
 "Klik en beweeg de muis om daar de tekening te veranderen in wit en een kleur "
@@ -1449,17 +1509,14 @@ msgstr ""
 "lange golven"
 
 #: ../../magic/src/xor.c:95
-#| msgid "Colors"
 msgid "Xor Colors"
 msgstr "Xor-kleuren"
 
 #: ../../magic/src/xor.c:101
-#| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw a XOR effect"
 msgstr "Klik en sleep om een XOR-effect te tekenen."
 
 #: ../../magic/src/xor.c:103
-#| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "Klik om in de hele afbeelding een XOR-effect te tekenen."
 

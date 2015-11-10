@@ -6,19 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TuxPaint 0.9.21 uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 17:43+0900\n"
+"POT-Creation-Date: 2015-10-08 18:37+0200\n"
 "PO-Revision-Date: 2009-06-01 23:22+0300\n"
 "Last-Translator: Serhij Dubyk <serhijdubyk@gmail.com>\n"
 "Language-Team: translation@linux.org.ua <Ukrainian Linux Team>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. Response to Black (0, 0, 0) color selected
 #: ../colors.h:86
@@ -124,11 +124,11 @@ msgstr "Беж!"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:164
+#: ../dirwalk.c:168
 msgid "qx"
 msgstr "юж"
 
-#: ../dirwalk.c:164
+#: ../dirwalk.c:168
 msgid "QX"
 msgstr "ЮЖ"
 
@@ -138,50 +138,50 @@ msgstr "ЮЖ"
 #. especially important for users who have scroll buttons disabled.
 #. Translators should do whatever is needed to put crummy fonts last.
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:191
+#: ../dirwalk.c:195
 msgid "oO"
 msgstr "оО"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:194
+#: ../dirwalk.c:198
 msgid ",.?!"
 msgstr ",.;’?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:197
+#: ../dirwalk.c:201
 #, fuzzy
 #| msgid "`\\%_@$~#{}<>^&*"
-msgid "`\\%_@$~#{<(^&*"
+msgid "`%_@$~#{<(^&*"
 msgstr "«»„“…-—–№%₴²°•≠±™©®`\\%_@$~#{}<>^&*"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:200
+#: ../dirwalk.c:204
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:203
+#: ../dirwalk.c:207
 msgid "O0"
 msgstr "О0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:206
+#: ../dirwalk.c:210
 msgid "1Il|"
 msgstr "1Il|іІїї"
 
-#: ../dirwalk.c:210
+#: ../dirwalk.c:214
 msgid "<1>spare-1a"
 msgstr ""
 
-#: ../dirwalk.c:211
+#: ../dirwalk.c:215
 msgid "<1>spare-1b"
 msgstr ""
 
-#: ../dirwalk.c:212
+#: ../dirwalk.c:216
 msgid "<9>spare-9a"
 msgstr ""
 
-#: ../dirwalk.c:213
+#: ../dirwalk.c:217
 msgid "<9>spare-9b"
 msgstr ""
 
@@ -236,83 +236,103 @@ msgid "ZH_TW"
 msgstr "ZH_TW"
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:171 ../shapes.h:172
+#: ../shapes.h:234 ../shapes.h:235
 msgid "Square"
 msgstr "Квадрат"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:175 ../shapes.h:176
+#: ../shapes.h:238 ../shapes.h:239
 msgid "Rectangle"
 msgstr "Прямокутник"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:179 ../shapes.h:180
+#: ../shapes.h:242 ../shapes.h:243
 msgid "Circle"
 msgstr "Круг"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:183 ../shapes.h:184
+#: ../shapes.h:246 ../shapes.h:247
 msgid "Ellipse"
 msgstr "Еліпс"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:187 ../shapes.h:188
+#: ../shapes.h:250 ../shapes.h:251
 msgid "Triangle"
 msgstr "Трикутник"
 
 #. Pentagone shape tool (5 sides)
-#: ../shapes.h:191 ../shapes.h:192
+#: ../shapes.h:254 ../shapes.h:255
 msgid "Pentagon"
 msgstr "П’ятикутник"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:195 ../shapes.h:196
+#: ../shapes.h:258 ../shapes.h:259
 msgid "Rhombus"
 msgstr "Ромб"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:199 ../shapes.h:200
+#: ../shapes.h:262 ../shapes.h:263
 msgid "Octagon"
 msgstr "Восьмикутник"
 
+#. Triangle star (3 points star)
+#. Rhombus star (4 points star)
+#. Pentagone star (5 points star)
+#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
+#: ../shapes.h:278 ../shapes.h:281
+msgid "Star"
+msgstr ""
+
 #. Description of a square
-#: ../shapes.h:208 ../shapes.h:209
+#: ../shapes.h:290 ../shapes.h:291
 msgid "A square is a rectangle with four equal sides."
 msgstr "Квадрат — прямокутник з чотирма рівними сторонами."
 
 #. Description of a rectangle
-#: ../shapes.h:212 ../shapes.h:213
+#: ../shapes.h:294 ../shapes.h:295
 msgid "A rectangle has four sides and four right angles."
 msgstr "У прямокутника чотири сторони і чотири прямих кути."
 
-#: ../shapes.h:217 ../shapes.h:219
+#: ../shapes.h:299 ../shapes.h:301
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr ""
 "Коло — крива, у якої усі крапки лежать на однаковій відстані від центру."
 
 #. Description of an ellipse
-#: ../shapes.h:222 ../shapes.h:223
+#: ../shapes.h:304 ../shapes.h:305
 msgid "An ellipse is a stretched circle."
 msgstr "Еліпс — витягнуте коло."
 
 #. Description of a triangle
-#: ../shapes.h:226 ../shapes.h:227
+#: ../shapes.h:308 ../shapes.h:309
 msgid "A triangle has three sides."
 msgstr "У трикутника три сторони (і кути)!"
 
 #. Description of a pentagon
-#: ../shapes.h:230 ../shapes.h:231
+#: ../shapes.h:312 ../shapes.h:313
 msgid "A pentagon has five sides."
 msgstr "А у п'ятикутника п’ять сторін (і кутів)!"
 
-#: ../shapes.h:235 ../shapes.h:237
+#: ../shapes.h:317 ../shapes.h:319
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr "Ромб має чотири рівні сторони, і протилежні сторони паралельні."
 
-#: ../shapes.h:241 ../shapes.h:243
+#: ../shapes.h:323 ../shapes.h:325
 msgid "An octagon has eight equal sides."
 msgstr "Восьмикутник має вісім рівних сторін."
+
+#: ../shapes.h:327 ../shapes.h:328
+msgid "A star with 3 points."
+msgstr ""
+
+#: ../shapes.h:329 ../shapes.h:330
+msgid "A star with 4 points."
+msgstr ""
+
+#: ../shapes.h:331 ../shapes.h:332
+msgid "A star with 5 points."
+msgstr ""
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -405,7 +425,7 @@ msgstr "Новий"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7605
+#: ../tools.h:98 ../tuxpaint.c:7637
 msgid "Open"
 msgstr "Відкрий"
 
@@ -466,7 +486,7 @@ msgstr "Виберіть стиль тексту. Клацніть на Вашо
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
-"and clicking an exist label, you can move it, edit it and change its text "
+"and clicking an existing label, you can move it, edit it and change its text "
 "style."
 msgstr "Виберіть стиль тексту. Клацніть на Вашому малюнку та друкуйте."
 
@@ -542,201 +562,204 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "Добре, продовжуємо малювати!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2040
+#: ../tuxpaint.c:2053
 msgid "Do you really want to quit?"
 msgstr "Ви дійсно хочете вийти?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2043
+#: ../tuxpaint.c:2056
 msgid "Yes, I’m done!"
 msgstr "Так, я завершив!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2046 ../tuxpaint.c:2073
+#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
 msgid "No, take me back!"
 msgstr "Ні, хочу назад!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2050
+#: ../tuxpaint.c:2063
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Якщо Ви вийдете, Ви втратите Ваш малюнок! Зберегти?"
 
-#: ../tuxpaint.c:2051 ../tuxpaint.c:2056
+#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
 msgid "Yes, save it!"
 msgstr "Так, зберегти!"
 
-#: ../tuxpaint.c:2052 ../tuxpaint.c:2057
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
 msgid "No, don’t bother saving!"
 msgstr "Ні, не потрібно зберігати!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2055
+#: ../tuxpaint.c:2068
 msgid "Save your picture first?"
 msgstr "Зберегти Ваш малюнок спочатку?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2060
+#: ../tuxpaint.c:2073
 msgid "Can’t open that picture!"
 msgstr "Не можу відкрити цей малюнок!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2063 ../tuxpaint.c:2068 ../tuxpaint.c:2077 ../tuxpaint.c:2084
-#: ../tuxpaint.c:2093
+#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
+#: ../tuxpaint.c:2106
 msgid "OK"
 msgstr "Гаразд"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2067
+#: ../tuxpaint.c:2080
 msgid "There are no saved files!"
 msgstr "Немає збережених малюнків!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2071
+#: ../tuxpaint.c:2084
 msgid "Print your picture now?"
 msgstr "Надрукувати Вашу малюнок?"
 
-#: ../tuxpaint.c:2072
+#: ../tuxpaint.c:2085
 msgid "Yes, print it!"
 msgstr "Так, роздрукувати!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2076
+#: ../tuxpaint.c:2089
 msgid "Your picture has been printed!"
 msgstr "Ваш малюнок роздруковано!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2080
+#: ../tuxpaint.c:2093
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Вибачте! Ваш малюнок не може бути роздрукований!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2083
+#: ../tuxpaint.c:2096
 msgid "You can’t print yet!"
 msgstr "Ви поки не можете друкувати!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2087
+#: ../tuxpaint.c:2100
 msgid "Erase this picture?"
 msgstr "Вилучити цей малюнок?"
 
-#: ../tuxpaint.c:2088
+#: ../tuxpaint.c:2101
 msgid "Yes, erase it!"
 msgstr "Так, вилучити!"
 
-#: ../tuxpaint.c:2089
+#: ../tuxpaint.c:2102
 msgid "No, don’t erase it!"
 msgstr "Ні, не вилучати!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2092
+#: ../tuxpaint.c:2105
 msgid "Remember to use the left mouse button!"
 msgstr "Не забувайте про ліву клавішу миші!"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2300
+#: ../tuxpaint.c:2313
 msgid "Sound muted."
 msgstr "Звук заглушено."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2305
+#: ../tuxpaint.c:2318
 msgid "Sound unmuted."
 msgstr "Звук увімкнено."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3052
+#: ../tuxpaint.c:3071
 msgid "Please wait…"
 msgstr "Будь ласка, зачекайте..."
 
 #  'Erase' label:
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7608
+#: ../tuxpaint.c:7640
 msgid "Erase"
 msgstr "Вилучити"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7611
+#: ../tuxpaint.c:7643
 msgid "Slides"
 msgstr "Слайди"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7614
+#: ../tuxpaint.c:7646
 msgid "Back"
 msgstr "Назад"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7617
+#: ../tuxpaint.c:7649
 msgid "Next"
 msgstr "Далі"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7620
+#: ../tuxpaint.c:7652
 msgid "Play"
 msgstr "Слайд-шоу"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8328
+#: ../tuxpaint.c:8361
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11586
+#: ../tuxpaint.c:11689
 msgid "Yes"
 msgstr "Так"
 
-#: ../tuxpaint.c:11590
+#: ../tuxpaint.c:11693
 msgid "No"
 msgstr "Ні"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12608
+#: ../tuxpaint.c:12792
 msgid "Replace the picture with your changes?"
 msgstr "Замінити старий малюнок?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12612
+#: ../tuxpaint.c:12796
 msgid "Yes, replace the old one!"
 msgstr "Так, замінити старий малюнок!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12616
+#: ../tuxpaint.c:12800
 msgid "No, save a new file!"
 msgstr "Ні, зберегти у новий файл!"
 
-#: ../tuxpaint.c:13861
+#: ../tuxpaint.c:14045
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Виберіть бажаний малюнок, а потім клацніть «Відкрити»."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:14892 ../tuxpaint.c:15220
+#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Виберіть бажані малюнки, а потім натисніть \"Слайд-шоу\"."
 
-#: ../tuxpaint.c:22159
+#: ../tuxpaint.c:22439
 msgid "Pick a color."
 msgstr "Виберіть колір."
 
 #: ../tuxpaint.desktop.in.h:1
-msgid "A drawing program for children."
-msgstr "Дитяча програма для малювання."
+msgid "Tux Paint"
+msgstr "Малюй разом з Tux!"
 
 #: ../tuxpaint.desktop.in.h:2
 msgid "Drawing program"
 msgstr "Програма для малювання"
 
 #: ../tuxpaint.desktop.in.h:3
-msgid "Tux Paint"
-msgstr "Малюй разом з Tux!"
+msgid "A drawing program for children."
+msgstr "Дитяча програма для малювання."
 
 #: ../../magic/src/alien.c:64
 msgid "Color Shift"
 msgstr "Зсув кольору"
 
 #: ../../magic/src/alien.c:67
-msgid "Click and move the mouse to change the colors in parts of your picture."
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to change the colors in parts of your picture."
+msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr ""
 "Клацніть та посовгайте по малюнку, щоб змінити кольори частини малюнку."
 
@@ -767,18 +790,25 @@ msgid "Drip"
 msgstr "Капання"
 
 #: ../../magic/src/blocks_chalk_drip.c:150
-msgid "Click and move the mouse around to make the picture blocky."
+#, fuzzy
+#| msgid "Click and move the mouse around to make the picture blocky."
+msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "Клацніть та поводіть по малюнку, щоб зробити мозаїку."
 
 #: ../../magic/src/blocks_chalk_drip.c:153
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
 msgid ""
-"Click and move the mouse around to turn the picture into a chalk drawing."
+"Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr ""
 "Клацніть та посовгайте по малюнку, щоб перетворити його частину на "
 "крейдування."
 
 #: ../../magic/src/blocks_chalk_drip.c:156
-msgid "Click and move the mouse around to make the picture drip."
+#, fuzzy
+#| msgid "Click and move the mouse around to make the picture drip."
+msgid "Click and drag the mouse around to make the picture drip."
 msgstr "Клацніть та поводіть по малюнку, щоб примусити його капати."
 
 #: ../../magic/src/blur.c:80
@@ -786,7 +816,9 @@ msgid "Blur"
 msgstr "Розмити"
 
 #: ../../magic/src/blur.c:83
-msgid "Click and move the mouse around to blur the image."
+#, fuzzy
+#| msgid "Click and move the mouse around to blur the image."
+msgid "Click and drag the mouse around to blur the image."
 msgstr "Клацніть та посовгайте по малюнку, щоб трохи розмити його."
 
 #: ../../magic/src/blur.c:84
@@ -799,11 +831,15 @@ msgid "Bricks"
 msgstr "Цегла"
 
 #: ../../magic/src/bricks.c:131
-msgid "Click and move to draw large bricks."
+#, fuzzy
+#| msgid "Click and move to draw large bricks."
+msgid "Click and drag to draw large bricks."
 msgstr "Клацніть та посовгайте по малюнку, щоб укласти великі цеглини."
 
 #: ../../magic/src/bricks.c:133
-msgid "Click and move to draw small bricks."
+#, fuzzy
+#| msgid "Click and move to draw small bricks."
+msgid "Click and drag to draw small bricks."
 msgstr "Клацніть та посовгайте по малюнку, щоб укласти маленькі цеглини."
 
 #: ../../magic/src/calligraphy.c:127
@@ -811,7 +847,9 @@ msgid "Calligraphy"
 msgstr "Каліграфія"
 
 #: ../../magic/src/calligraphy.c:134
-msgid "Click and move the mouse around to draw in calligraphy."
+#, fuzzy
+#| msgid "Click and move the mouse around to draw in calligraphy."
+msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Клацніть та напишіть щось на малюнку, щоб утворити каліграфію."
 
 #: ../../magic/src/cartoon.c:106
@@ -819,7 +857,9 @@ msgid "Cartoon"
 msgstr "Комікс"
 
 #: ../../magic/src/cartoon.c:113
-msgid "Click and move the mouse around to turn the picture into a cartoon."
+#, fuzzy
+#| msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr ""
 "Клацніть та посовгайте по малюнку, щоб перетворити його частину на комікс чи "
 "мультиплікацію."
@@ -858,7 +898,9 @@ msgid "Darken"
 msgstr "Темніше"
 
 #: ../../magic/src/fade_darken.c:134
-msgid "Click and move the mouse to lighten parts of your picture."
+#, fuzzy
+#| msgid "Click and move the mouse to lighten parts of your picture."
+msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "Клацніть та посовгайте по малюнку, щоб освітлити частину його."
 
 #: ../../magic/src/fade_darken.c:136
@@ -866,7 +908,9 @@ msgid "Click to lighten your entire picture."
 msgstr "Клацніть, щоб освітлити весь малюнок."
 
 #: ../../magic/src/fade_darken.c:141
-msgid "Click and move the mouse to darken parts of your picture."
+#, fuzzy
+#| msgid "Click and move the mouse to darken parts of your picture."
+msgid "Click and drag the mouse to darken parts of your picture."
 msgstr ""
 "Клацніть та посовгайте по малюнку, щоб затемнити деякі місця на малюнку."
 
@@ -954,7 +998,9 @@ msgid "Grass"
 msgstr "Трава"
 
 #: ../../magic/src/grass.c:118
-msgid "Click and move to draw grass. Don’t forget the dirt!"
+#, fuzzy
+#| msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr ""
 "Клацніть та посовгайте по малюнку, щоб намалювати траву. Не забудьте про "
 "ґрунт!"
@@ -1019,7 +1065,7 @@ msgstr "Клацніть та посовгайте мишкою, щоб зроб
 #| msgid ""
 #| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgid ""
-"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
 msgstr "Клацніть та малюйте фігури 4-ма симетричними пензликами (калейдоскоп)."
 
@@ -1066,8 +1112,11 @@ msgid "Mosaic"
 msgstr "Мозаїка"
 
 #: ../../magic/src/mosaic.c:103
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to add a mosaic effect to parts of your picture."
 msgid ""
-"Click and move the mouse to add a mosaic effect to parts of your picture."
+"Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr ""
 "Натисніть та потягайте мишку, щоб додати ефект мозаїки у деяких місцях "
 "малюнка."
@@ -1076,65 +1125,65 @@ msgstr ""
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Клацніть, щоб покрити мозаїкою весь малюнок."
 
-#: ../../magic/src/mosaic_shaped.c:142
+#: ../../magic/src/mosaic_shaped.c:147
 #, fuzzy
 #| msgid "Square"
 msgid "Square Mosaic"
 msgstr "Квадрат"
 
-#: ../../magic/src/mosaic_shaped.c:143
+#: ../../magic/src/mosaic_shaped.c:148
 #, fuzzy
 #| msgid "Mosaic"
 msgid "Hexagon Mosaic"
 msgstr "Мозаїка"
 
-#: ../../magic/src/mosaic_shaped.c:144
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Irregular Mosaic"
 msgstr ""
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:156
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
 msgid ""
-"Click and move the mouse to add a square mosaic to parts of your picture."
+"Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr ""
 "Натисніть та потягайте мишку, щоб додати ефект мозаїки у деяких місцях "
 "малюнка."
 
-#: ../../magic/src/mosaic_shaped.c:150
+#: ../../magic/src/mosaic_shaped.c:157
 #, fuzzy
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Клацніть, щоб покрити мозаїкою весь малюнок."
 
-#: ../../magic/src/mosaic_shaped.c:152
+#: ../../magic/src/mosaic_shaped.c:161
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
 msgid ""
-"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+"Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr ""
 "Натисніть та потягайте мишку, щоб додати ефект мозаїки у деяких місцях "
 "малюнка."
 
-#: ../../magic/src/mosaic_shaped.c:153
+#: ../../magic/src/mosaic_shaped.c:162
 #, fuzzy
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "Клацніть, щоб покрити мозаїкою весь малюнок."
 
-#: ../../magic/src/mosaic_shaped.c:155
+#: ../../magic/src/mosaic_shaped.c:166
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
 msgid ""
-"Click and move the mouse to add an irregular mosaic to parts of your picture."
+"Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr ""
 "Натисніть та потягайте мишку, щоб додати ефект мозаїки у деяких місцях "
 "малюнка."
 
-#: ../../magic/src/mosaic_shaped.c:156
+#: ../../magic/src/mosaic_shaped.c:167
 #, fuzzy
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to add an irregular mosaic to your entire picture."
@@ -1145,7 +1194,9 @@ msgid "Negative"
 msgstr "Негатив"
 
 #: ../../magic/src/negative.c:106
-msgid "Click and move the mouse around to make your painting negative."
+#, fuzzy
+#| msgid "Click and move the mouse around to make your painting negative."
+msgid "Click and drag the mouse around to make your painting negative."
 msgstr ""
 "Натисніть та порухайте мишку туди-сюди, щоб перетворювати Ваш живопис на "
 "негатив."
@@ -1159,7 +1210,9 @@ msgid "Noise"
 msgstr "Шум"
 
 #: ../../magic/src/noise.c:66
-msgid "Click and move the mouse to add noise to parts of your picture."
+#, fuzzy
+#| msgid "Click and move the mouse to add noise to parts of your picture."
+msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr "Клацніть та протягніть мишку по малюнку — додасться шум."
 
 #: ../../magic/src/noise.c:67
@@ -1209,6 +1262,14 @@ msgstr "Рейки"
 msgid "Click and drag to draw train track rails on your picture."
 msgstr "Натисніть та тягніть мишку — за нею прокладатимуться залізничні рейки."
 
+#: ../../magic/src/rainbow.c:139
+msgid "Rainbow"
+msgstr "Веселка"
+
+#: ../../magic/src/rainbow.c:146
+msgid "You can draw in rainbow colors!"
+msgstr "Ви можете малювати барвами веселки!"
+
 #: ../../magic/src/rain.c:65
 msgid "Rain"
 msgstr "Дощ"
@@ -1220,14 +1281,6 @@ msgstr "Поклацайте на малюнку, щоб помістити на
 #: ../../magic/src/rain.c:69
 msgid "Click to cover your picture with rain drops."
 msgstr "Клацніть, щоб покрити весь малюнок дощовими краплями."
-
-#: ../../magic/src/rainbow.c:139
-msgid "Rainbow"
-msgstr "Веселка"
-
-#: ../../magic/src/rainbow.c:146
-msgid "You can draw in rainbow colors!"
-msgstr "Ви можете малювати барвами веселки!"
 
 #: ../../magic/src/realrainbow.c:110
 msgid "Real Rainbow"
@@ -1284,7 +1337,9 @@ msgid "Silhouette"
 msgstr "Силует"
 
 #: ../../magic/src/sharpen.c:78
-msgid "Click and move the mouse to trace edges in parts of your picture."
+#, fuzzy
+#| msgid "Click and move the mouse to trace edges in parts of your picture."
+msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr "Натисніть та тягніть мишку по малюнку, щоб підсилювати краї по ходу."
 
 #: ../../magic/src/sharpen.c:79
@@ -1292,7 +1347,9 @@ msgid "Click to trace edges in your entire picture."
 msgstr "Клацніть, щоб підсилити краї по всьому малюнку."
 
 #: ../../magic/src/sharpen.c:80
-msgid "Click and move the mouse to sharpen parts of your picture."
+#, fuzzy
+#| msgid "Click and move the mouse to sharpen parts of your picture."
+msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr "Натисніть та посовгайте по малюнку, щоб зробити його різкішим."
 
 #: ../../magic/src/sharpen.c:81
@@ -1300,7 +1357,9 @@ msgid "Click to sharpen the entire picture."
 msgstr "Клацніть, щоб зробити різкішим весь малюнок."
 
 #: ../../magic/src/sharpen.c:82
-msgid "Click and move the mouse to create a black and white silhouette."
+#, fuzzy
+#| msgid "Click and move the mouse to create a black and white silhouette."
+msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr "Натисніть та рухайте мишку для створення чорно-білого силуету."
 
 #: ../../magic/src/sharpen.c:83
@@ -1327,14 +1386,16 @@ msgid "Wet Paint"
 msgstr "Метал"
 
 #: ../../magic/src/smudge.c:115
-msgid "Click and move the mouse around to smudge the picture."
+#, fuzzy
+#| msgid "Click and move the mouse around to smudge the picture."
+msgid "Click and drag the mouse around to smudge the picture."
 msgstr "Клацніть та посовгайте по малюнку, щоб помазати його частину."
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:117
 #, fuzzy
 #| msgid "Click and move the mouse around to blur the image."
-msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr "Клацніть та посовгайте по малюнку, щоб трохи розмити його."
 
 #: ../../magic/src/snow.c:68
@@ -1397,8 +1458,12 @@ msgid "Color & White"
 msgstr "Кольоровий та білий"
 
 #: ../../magic/src/tint.c:75
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to change the color of parts of your "
+#| "picture."
 msgid ""
-"Click and move the mouse around to change the color of parts of your picture."
+"Click and drag the mouse around to change the color of parts of your picture."
 msgstr ""
 "Клацніть та посовгайте мишку по малюнку, щоб змінити кольори в деяких місцях."
 
@@ -1407,8 +1472,12 @@ msgid "Click to change the color of your entire picture."
 msgstr "Клацніть, щоб змінити колір всього малюнка."
 
 #: ../../magic/src/tint.c:77
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn parts of your picture into white "
+#| "and a color you choose."
 msgid ""
-"Click and move the mouse around to turn parts of your picture into white and "
+"Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
 msgstr ""
 "Клацніть та посовгайте по малюнку, щоб залишити на його частині білий та "

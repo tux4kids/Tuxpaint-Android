@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint 0.9.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 17:43+0900\n"
-"PO-Revision-Date: 2013-10-26 17:51+0900\n"
+"POT-Creation-Date: 2015-05-03 09:18+0200\n"
+"PO-Revision-Date: 2015-10-18 18:08+0900\n"
 "Last-Translator: Shin-ichi TOYAMA <shin1@wmail.plala.or.jp>\n"
 "Language-Team: japanese <shin1@wmail.plala.or.jp>\n"
 "MIME-Version: 1.0\n"
@@ -120,11 +120,11 @@ msgstr "ベージュいろ"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:164
+#: ../dirwalk.c:168
 msgid "qx"
 msgstr "qx"
 
-#: ../dirwalk.c:164
+#: ../dirwalk.c:168
 msgid "QX"
 msgstr "QX"
 
@@ -134,48 +134,49 @@ msgstr "QX"
 #. especially important for users who have scroll buttons disabled.
 #. Translators should do whatever is needed to put crummy fonts last.
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:191
+#: ../dirwalk.c:195
 msgid "oO"
 msgstr "oO"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:194
+#: ../dirwalk.c:198
 msgid ",.?!"
 msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:197
+#: ../dirwalk.c:201
+#| msgid "`\\%_@$~#{<(^&*"
 msgid "`\\%_@$~#{<(^&*"
 msgstr "`\\%_@$~#{<(^&*"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:200
+#: ../dirwalk.c:204
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:203
+#: ../dirwalk.c:207
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:206
+#: ../dirwalk.c:210
 msgid "1Il|"
 msgstr "1Il|"
 
-#: ../dirwalk.c:210
+#: ../dirwalk.c:214
 msgid "<1>spare-1a"
 msgstr "<1>spare-1a"
 
-#: ../dirwalk.c:211
+#: ../dirwalk.c:215
 msgid "<1>spare-1b"
 msgstr "<1>spare-1b"
 
-#: ../dirwalk.c:212
+#: ../dirwalk.c:216
 msgid "<9>spare-9a"
 msgstr "<9>spare-9a"
 
-#: ../dirwalk.c:213
+#: ../dirwalk.c:217
 msgid "<9>spare-9b"
 msgstr "<9>spare-9b"
 
@@ -230,56 +231,64 @@ msgid "ZH_TW"
 msgstr "ちゅうごくご"
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:171 ../shapes.h:172
+#: ../shapes.h:234 ../shapes.h:235
 msgid "Square"
 msgstr "ましかく"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:175 ../shapes.h:176
+#: ../shapes.h:238 ../shapes.h:239
 msgid "Rectangle"
 msgstr "ながしかく"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:179 ../shapes.h:180
+#: ../shapes.h:242 ../shapes.h:243
 msgid "Circle"
 msgstr "まる"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:183 ../shapes.h:184
+#: ../shapes.h:246 ../shapes.h:247
 msgid "Ellipse"
 msgstr "ながまる"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:187 ../shapes.h:188
+#: ../shapes.h:250 ../shapes.h:251
 msgid "Triangle"
 msgstr "さんかく"
 
 #. Pentagone shape tool (5 sides)
-#: ../shapes.h:191 ../shapes.h:192
+#: ../shapes.h:254 ../shapes.h:255
 msgid "Pentagon"
 msgstr "ごかっけい"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:195 ../shapes.h:196
+#: ../shapes.h:258 ../shapes.h:259
 msgid "Rhombus"
 msgstr "ダイヤ"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:199 ../shapes.h:200
+#: ../shapes.h:262 ../shapes.h:263
 msgid "Octagon"
 msgstr "はちかっけい"
 
+#. Triangle star (3 points star)
+#. Rhombus star (4 points star)
+#. Pentagone star (5 points star)
+#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
+#: ../shapes.h:278 ../shapes.h:281
+msgid "Star"
+msgstr "ほし"
+
 #. Description of a square
-#: ../shapes.h:208 ../shapes.h:209
+#: ../shapes.h:290 ../shapes.h:291
 msgid "A square is a rectangle with four equal sides."
 msgstr "ましかくは ４つの「へん」が ぜんぶ おんなじ ながさの ながしかくだ"
 
 #. Description of a rectangle
-#: ../shapes.h:212 ../shapes.h:213
+#: ../shapes.h:294 ../shapes.h:295
 msgid "A rectangle has four sides and four right angles."
 msgstr "ながしかくには ４つの「へん」と ４つの「ちょっかく」があるんだ"
 
-#: ../shapes.h:217 ../shapes.h:219
+#: ../shapes.h:299 ../shapes.h:301
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr ""
@@ -287,29 +296,41 @@ msgstr ""
 "け はなれているんだ"
 
 #. Description of an ellipse
-#: ../shapes.h:222 ../shapes.h:223
+#: ../shapes.h:304 ../shapes.h:305
 msgid "An ellipse is a stretched circle."
 msgstr "「ながまる」は「だえん」とも いうよ。「まる」を ひきのばしたものなんだ"
 
 #. Description of a triangle
-#: ../shapes.h:226 ../shapes.h:227
+#: ../shapes.h:308 ../shapes.h:309
 msgid "A triangle has three sides."
 msgstr "さんかっけいには ３つの「へん」が あるんだ"
 
 #. Description of a pentagon
-#: ../shapes.h:230 ../shapes.h:231
+#: ../shapes.h:312 ../shapes.h:313
 msgid "A pentagon has five sides."
 msgstr "ごかっけいには ５つの「へん」が あるんだ"
 
-#: ../shapes.h:235 ../shapes.h:237
+#: ../shapes.h:317 ../shapes.h:319
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr ""
 "「ダイヤ」は「ひしがた」とも いうよ。４つの「へん」が おなじながさで むかい"
 "あった「へん」が へいこうなんだ"
 
-#: ../shapes.h:241 ../shapes.h:243
+#: ../shapes.h:323 ../shapes.h:325
 msgid "An octagon has eight equal sides."
 msgstr "はちかっけいには ８つの「へん」が あるんだ"
+
+#: ../shapes.h:327 ../shapes.h:328
+msgid "A star with 3 points."
+msgstr "とんがりが　３つの　ほし"
+
+#: ../shapes.h:329 ../shapes.h:330
+msgid "A star with 4 points."
+msgstr "とんがりが　４つの　ほし"
+
+#: ../shapes.h:331 ../shapes.h:332
+msgid "A star with 5 points."
+msgstr "とんがりが　５つの　ほし"
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -402,7 +423,7 @@ msgstr "さいしょから"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7605
+#: ../tools.h:98 ../tuxpaint.c:7631
 msgid "Open"
 msgstr "ひらく"
 
@@ -456,10 +477,15 @@ msgstr ""
 
 #. Label tool instructions
 #: ../tools.h:130
+#| msgid ""
+#| "Choose a style of text. Click on your drawing and you can start typing. "
+#| "Press [Enter] or [Tab] to complete the text. By using the selector button "
+#| "and clicking an exist label, you can move it, edit it and change its text "
+#| "style."
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
-"and clicking an exist label, you can move it, edit it and change its text "
+"and clicking an existing label, you can move it, edit it and change its text "
 "style."
 msgstr ""
 "じのかたちをえらんで、クリックしたあと キーをおして じをかこう。 [Enter] か "
@@ -540,204 +566,206 @@ msgstr "オッケー。 じゃあ このままつづけよう！"
 
 #  FIXME: Move elsewhere!!!
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2040
+#: ../tuxpaint.c:2053
 msgid "Do you really want to quit?"
 msgstr "ほんとうにやめる？"
 
 #  msgid "Yes, I'm done!"
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2043
+#: ../tuxpaint.c:2056
 msgid "Yes, I’m done!"
 msgstr "はい、やめます！"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2046 ../tuxpaint.c:2073
+#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
 msgid "No, take me back!"
 msgstr "いいえ、まえに もどります！"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2050
+#: ../tuxpaint.c:2063
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "やめると えがきえちゃうよ！ セーブする？"
 
-#: ../tuxpaint.c:2051 ../tuxpaint.c:2056
+#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
 msgid "Yes, save it!"
 msgstr "はい、セーブします！"
 
 #  msgid "No, don't bother saving!"
-#: ../tuxpaint.c:2052 ../tuxpaint.c:2057
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
 msgid "No, don’t bother saving!"
 msgstr "いいえ、セーブしなくても いいです！"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2055
+#: ../tuxpaint.c:2068
 msgid "Save your picture first?"
 msgstr "そのまえに いまのえを セーブする？"
 
 #. Error opening picture
-#: ../tuxpaint.c:2060
+#: ../tuxpaint.c:2073
 msgid "Can’t open that picture!"
 msgstr "そのえはひらけないよ！"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2063 ../tuxpaint.c:2068 ../tuxpaint.c:2077 ../tuxpaint.c:2084
-#: ../tuxpaint.c:2093
+#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
+#: ../tuxpaint.c:2106
 msgid "OK"
 msgstr "オッケー"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2067
+#: ../tuxpaint.c:2080
 msgid "There are no saved files!"
 msgstr "セーブされた えは なかったよ！"
 
 #. Verification of print action
-#: ../tuxpaint.c:2071
+#: ../tuxpaint.c:2084
 msgid "Print your picture now?"
 msgstr "いんさつする？"
 
-#: ../tuxpaint.c:2072
+#: ../tuxpaint.c:2085
 msgid "Yes, print it!"
 msgstr "はい、いんさつします！"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2076
+#: ../tuxpaint.c:2089
 msgid "Your picture has been printed!"
 msgstr "えを いんさつしたよ！"
 
 #. We got an error printing
-#: ../tuxpaint.c:2080
+#: ../tuxpaint.c:2093
 msgid "Sorry! Your picture could not be printed!"
 msgstr "いんさつ できませんでした"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2083
+#: ../tuxpaint.c:2096
 msgid "You can’t print yet!"
 msgstr "まだ いんさつは できないよ！"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2087
+#: ../tuxpaint.c:2100
 msgid "Erase this picture?"
 msgstr "このえを けす？"
 
-#: ../tuxpaint.c:2088
+#: ../tuxpaint.c:2101
 msgid "Yes, erase it!"
 msgstr "はい、けします！"
 
 #  msgid "No, don't erase it!"
-#: ../tuxpaint.c:2089
+#: ../tuxpaint.c:2102
 msgid "No, don’t erase it!"
 msgstr "いいえ、けしません！"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2092
+#: ../tuxpaint.c:2105
 msgid "Remember to use the left mouse button!"
 msgstr "マウスの ひだりのボタンを つかってね！"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2300
+#: ../tuxpaint.c:2313
 msgid "Sound muted."
 msgstr "おとが ならないように しました"
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2305
+#: ../tuxpaint.c:2318
 msgid "Sound unmuted."
 msgstr "おとが なるように しました"
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3052
+#: ../tuxpaint.c:3065
 msgid "Please wait…"
 msgstr "もうちょっと まってね…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7608
+#: ../tuxpaint.c:7634
 msgid "Erase"
 msgstr "けす"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7611
+#: ../tuxpaint.c:7637
 msgid "Slides"
 msgstr "スライド"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7614
+#: ../tuxpaint.c:7640
 msgid "Back"
 msgstr "もどる"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7617
+#: ../tuxpaint.c:7643
 msgid "Next"
 msgstr "つぎ"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7620
+#: ../tuxpaint.c:7646
 msgid "Play"
 msgstr "かいし"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8328
+#: ../tuxpaint.c:8355
 msgid "Aa"
 msgstr "Aa"
 
 #  FIXME: Move elsewhere! Or not?!
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11586
+#: ../tuxpaint.c:11683
 msgid "Yes"
 msgstr "はい"
 
-#: ../tuxpaint.c:11590
+#: ../tuxpaint.c:11687
 msgid "No"
 msgstr "いいえ"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12608
+#: ../tuxpaint.c:12786
 msgid "Replace the picture with your changes?"
 msgstr "いまかいたえと まえのえを いれかえる？"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12612
+#: ../tuxpaint.c:12790
 msgid "Yes, replace the old one!"
 msgstr "はい、まえのえと いれかえます！"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12616
+#: ../tuxpaint.c:12794
 msgid "No, save a new file!"
 msgstr "いいえ、あたらしく セーブします！"
 
-#: ../tuxpaint.c:13861
+#: ../tuxpaint.c:14039
 msgid "Choose the picture you want, then click “Open”."
 msgstr "えを えらんでから 「ひらく」をクリックしてね"
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:14892 ../tuxpaint.c:15220
+#: ../tuxpaint.c:15070 ../tuxpaint.c:15398
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "えを えらんでから 「かいし」をクリックしてね"
 
-#: ../tuxpaint.c:22159
+#: ../tuxpaint.c:22420
 msgid "Pick a color."
 msgstr "いろを えらんで"
 
 #: ../tuxpaint.desktop.in.h:1
-msgid "A drawing program for children."
-msgstr "子供向けお絵描きプログラム"
+msgid "Tux Paint"
+msgstr "タックスペイント"
 
 #: ../tuxpaint.desktop.in.h:2
 msgid "Drawing program"
 msgstr "お絵かきプログラム"
 
 #: ../tuxpaint.desktop.in.h:3
-msgid "Tux Paint"
-msgstr "タックスペイント"
+msgid "A drawing program for children."
+msgstr "子供向けお絵描きプログラム"
 
 #: ../../magic/src/alien.c:64
 msgid "Color Shift"
 msgstr "へんしょく"
 
 #: ../../magic/src/alien.c:67
-msgid "Click and move the mouse to change the colors in parts of your picture."
+#| msgid ""
+#| "Click and move the mouse to change the colors in parts of your picture."
+msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr "クリックしたまま　マウスをうごかして　えのいろをかえよう"
 
 #: ../../magic/src/alien.c:68
@@ -769,18 +797,22 @@ msgid "Drip"
 msgstr "ぬらす"
 
 #: ../../magic/src/blocks_chalk_drip.c:150
-msgid "Click and move the mouse around to make the picture blocky."
+#| msgid "Click and move the mouse around to make the picture blocky."
+msgid "Click and drag the mouse around to make the picture blocky."
 msgstr ""
 "クリックしたまま マウスをうごかして ちいさな　しかくでできた　ギザギザの　え"
 "に　しよう"
 
 #: ../../magic/src/blocks_chalk_drip.c:153
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
 msgid ""
-"Click and move the mouse around to turn the picture into a chalk drawing."
+"Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr "クリックしたままマウスをうごかして チョークでかいたみたいに しよう"
 
 #: ../../magic/src/blocks_chalk_drip.c:156
-msgid "Click and move the mouse around to make the picture drip."
+#| msgid "Click and move the mouse around to make the picture drip."
+msgid "Click and drag the mouse around to make the picture drip."
 msgstr "クリックしたまま マウスをうごかして えを ぬらしたように しよう"
 
 #: ../../magic/src/blur.c:80
@@ -788,7 +820,8 @@ msgid "Blur"
 msgstr "ぼかす"
 
 #: ../../magic/src/blur.c:83
-msgid "Click and move the mouse around to blur the image."
+#| msgid "Click and move the mouse around to blur the image."
+msgid "Click and drag the mouse around to blur the image."
 msgstr "クリックしたまま マウスをうごかして えを ぼかそう"
 
 #: ../../magic/src/blur.c:84
@@ -801,11 +834,13 @@ msgid "Bricks"
 msgstr "レンガ"
 
 #: ../../magic/src/bricks.c:131
-msgid "Click and move to draw large bricks."
+#| msgid "Click and move to draw large bricks."
+msgid "Click and drag to draw large bricks."
 msgstr "おおきな レンガを かこう"
 
 #: ../../magic/src/bricks.c:133
-msgid "Click and move to draw small bricks."
+#| msgid "Click and move to draw small bricks."
+msgid "Click and drag to draw small bricks."
 msgstr "ちいさな レンガを かこう"
 
 #: ../../magic/src/calligraphy.c:127
@@ -813,7 +848,8 @@ msgid "Calligraphy"
 msgstr "ふでもじ"
 
 #: ../../magic/src/calligraphy.c:134
-msgid "Click and move the mouse around to draw in calligraphy."
+#| msgid "Click and move the mouse around to draw in calligraphy."
+msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "クリックしたまま マウスをうごかして ふでもじを かこう"
 
 #: ../../magic/src/cartoon.c:106
@@ -821,7 +857,8 @@ msgid "Cartoon"
 msgstr "まんが"
 
 #: ../../magic/src/cartoon.c:113
-msgid "Click and move the mouse around to turn the picture into a cartoon."
+#| msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr "クリックしたままマウスをうごかして まんがみたいな えに しよう．"
 
 #: ../../magic/src/confetti.c:85
@@ -857,7 +894,8 @@ msgid "Darken"
 msgstr "こく"
 
 #: ../../magic/src/fade_darken.c:134
-msgid "Click and move the mouse to lighten parts of your picture."
+#| msgid "Click and move the mouse to lighten parts of your picture."
+msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "クリックしたまま　マウスをうごかして　えのいろを　うすくしよう"
 
 #: ../../magic/src/fade_darken.c:136
@@ -865,7 +903,8 @@ msgid "Click to lighten your entire picture."
 msgstr "えを　クリックして　ぜんたいの　いろを　うすくしよう"
 
 #: ../../magic/src/fade_darken.c:141
-msgid "Click and move the mouse to darken parts of your picture."
+#| msgid "Click and move the mouse to darken parts of your picture."
+msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "クリックしたまま　マウスをうごかして　えのいろを　こくしよう"
 
 #: ../../magic/src/fade_darken.c:143
@@ -946,7 +985,8 @@ msgid "Grass"
 msgstr "くさ"
 
 #: ../../magic/src/grass.c:118
-msgid "Click and move to draw grass. Don’t forget the dirt!"
+#| msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "くさを かこう。つちもわすれずにね"
 
 #: ../../magic/src/halftone.c:34
@@ -999,8 +1039,11 @@ msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr "クリックしたまま マウスをうごかして えの ぜんたいに もようを かこう"
 
 #: ../../magic/src/kalidescope.c:142
+#| msgid ""
+#| "Click and drag the mouse to draw a pattern plus its symmetric across the "
+#| "picture."
 msgid ""
-"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
 msgstr ""
 "クリックしたまま マウスをうごかして えの ぜんたいに たいしょうてきな もよう"
@@ -1053,8 +1096,10 @@ msgid "Mosaic"
 msgstr "モザイク"
 
 #: ../../magic/src/mosaic.c:103
+#| msgid ""
+#| "Click and move the mouse to add a mosaic effect to parts of your picture."
 msgid ""
-"Click and move the mouse to add a mosaic effect to parts of your picture."
+"Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr "クリックしたまま　マウスをうごかして　モザイクえのようにしよう"
 
 #: ../../magic/src/mosaic.c:104
@@ -1063,43 +1108,51 @@ msgstr ""
 "クリックしたまま　マウスをうごかして　えの　ぜんたいを　モザイクえのようにし"
 "よう"
 
-#: ../../magic/src/mosaic_shaped.c:142
+#: ../../magic/src/mosaic_shaped.c:147
 msgid "Square Mosaic"
 msgstr "タイル"
 
-#: ../../magic/src/mosaic_shaped.c:143
+#: ../../magic/src/mosaic_shaped.c:148
 msgid "Hexagon Mosaic"
 msgstr "はちのす"
 
-#: ../../magic/src/mosaic_shaped.c:144
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Irregular Mosaic"
 msgstr "モザイク"
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:156
+#| msgid ""
+#| "Click and move the mouse to add a square mosaic to parts of your picture."
 msgid ""
-"Click and move the mouse to add a square mosaic to parts of your picture."
+"Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr "クリックしたまま　マウスをうごかして　しかっけいの もざいくを かこう"
 
-#: ../../magic/src/mosaic_shaped.c:150
+#: ../../magic/src/mosaic_shaped.c:157
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "クリック して えのぜんたいを しかくい モザイクに しよう"
 
-#: ../../magic/src/mosaic_shaped.c:152
+#: ../../magic/src/mosaic_shaped.c:161
+#| msgid ""
+#| "Click and move the mouse to add a hexagonal mosaic to parts of your "
+#| "picture."
 msgid ""
-"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+"Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr "クリックしたまま　マウスをうごかして　ろっかっけいの モザイクを かこう"
 
-#: ../../magic/src/mosaic_shaped.c:153
+#: ../../magic/src/mosaic_shaped.c:162
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "クリック して えのぜんたいを ろっかくけいの モザイクに しよう"
 
-#: ../../magic/src/mosaic_shaped.c:155
+#: ../../magic/src/mosaic_shaped.c:166
+#| msgid ""
+#| "Click and move the mouse to add an irregular mosaic to parts of your "
+#| "picture."
 msgid ""
-"Click and move the mouse to add an irregular mosaic to parts of your picture."
+"Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr ""
 "クリックしたまま マウスをうごかして ふきそくな かたちの モザイクを かこう"
 
-#: ../../magic/src/mosaic_shaped.c:156
+#: ../../magic/src/mosaic_shaped.c:167
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "クリック して えのぜんたいを ふきそくな モザイクに しよう"
 
@@ -1108,7 +1161,8 @@ msgid "Negative"
 msgstr "ネガ"
 
 #: ../../magic/src/negative.c:106
-msgid "Click and move the mouse around to make your painting negative."
+#| msgid "Click and move the mouse around to make your painting negative."
+msgid "Click and drag the mouse around to make your painting negative."
 msgstr "クリックしたまま マウスをうごかして ネガポジにしよう"
 
 #: ../../magic/src/negative.c:109
@@ -1120,7 +1174,8 @@ msgid "Noise"
 msgstr "ノイズ"
 
 #: ../../magic/src/noise.c:66
-msgid "Click and move the mouse to add noise to parts of your picture."
+#| msgid "Click and move the mouse to add noise to parts of your picture."
+msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr "クリックしたまま マウスをうごかして えを　ざらざらに　しよう"
 
 #: ../../magic/src/noise.c:67
@@ -1166,6 +1221,14 @@ msgstr "せんろ"
 msgid "Click and drag to draw train track rails on your picture."
 msgstr "クリックしたまま　マウスをうごかして　でんしゃの　せんろを　かこう"
 
+#: ../../magic/src/rainbow.c:139
+msgid "Rainbow"
+msgstr "にじ"
+
+#: ../../magic/src/rainbow.c:146
+msgid "You can draw in rainbow colors!"
+msgstr "にじいろで かこう！"
+
 #: ../../magic/src/rain.c:65
 msgid "Rain"
 msgstr "あめ"
@@ -1177,14 +1240,6 @@ msgstr "クリックしたばしょに　あめを　ふらせよう"
 #: ../../magic/src/rain.c:69
 msgid "Click to cover your picture with rain drops."
 msgstr "えをクリックして　ぜんたいに　あめを　ふらせよう"
-
-#: ../../magic/src/rainbow.c:139
-msgid "Rainbow"
-msgstr "にじ"
-
-#: ../../magic/src/rainbow.c:146
-msgid "You can draw in rainbow colors!"
-msgstr "にじいろで かこう！"
 
 #  msgid "Rainbow"
 #: ../../magic/src/realrainbow.c:110
@@ -1241,7 +1296,8 @@ msgid "Silhouette"
 msgstr "かげえ"
 
 #: ../../magic/src/sharpen.c:78
-msgid "Click and move the mouse to trace edges in parts of your picture."
+#| msgid "Click and move the mouse to trace edges in parts of your picture."
+msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr "クリックしたまま　マウスをうごかして　えを　ふちどりだけに　しよう"
 
 #: ../../magic/src/sharpen.c:79
@@ -1249,7 +1305,8 @@ msgid "Click to trace edges in your entire picture."
 msgstr "えを　クリックして　ぜんたいを　ふちどりだけに　しよう"
 
 #: ../../magic/src/sharpen.c:80
-msgid "Click and move the mouse to sharpen parts of your picture."
+#| msgid "Click and move the mouse to sharpen parts of your picture."
+msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr "クリックしたまま　マウスをうごかして　えを　くっきり　させよう"
 
 #: ../../magic/src/sharpen.c:81
@@ -1257,7 +1314,8 @@ msgid "Click to sharpen the entire picture."
 msgstr "えを　クリックして　ぜんたいを　くっきり　させよう"
 
 #: ../../magic/src/sharpen.c:82
-msgid "Click and move the mouse to create a black and white silhouette."
+#| msgid "Click and move the mouse to create a black and white silhouette."
+msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr "クリックしたまま マウスをうごかして しろくろの　かげえに　しよう"
 
 #: ../../magic/src/sharpen.c:83
@@ -1282,12 +1340,14 @@ msgid "Wet Paint"
 msgstr "よごれたふで"
 
 #: ../../magic/src/smudge.c:115
-msgid "Click and move the mouse around to smudge the picture."
+#| msgid "Click and move the mouse around to smudge the picture."
+msgid "Click and drag the mouse around to smudge the picture."
 msgstr "クリックしたまま マウスをうごかして えを よごそう"
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:117
-msgid "Click and move the mouse around to draw with wet, smudgy paint."
+#| msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr "クリックしたまま マウスをうごかして ぬれて よごれた ふでで えをかこう"
 
 #: ../../magic/src/snow.c:68
@@ -1343,8 +1403,11 @@ msgid "Color & White"
 msgstr "いろ+しろ"
 
 #: ../../magic/src/tint.c:75
+#| msgid ""
+#| "Click and move the mouse around to change the color of parts of your "
+#| "picture."
 msgid ""
-"Click and move the mouse around to change the color of parts of your picture."
+"Click and drag the mouse around to change the color of parts of your picture."
 msgstr "クリックしたまま マウスをうごかして えの　いろを　かえよう"
 
 #: ../../magic/src/tint.c:76
@@ -1352,8 +1415,11 @@ msgid "Click to change the color of your entire picture."
 msgstr "えを　クリックして　ぜんたいの　いろを　かえよう"
 
 #: ../../magic/src/tint.c:77
+#| msgid ""
+#| "Click and move the mouse around to turn parts of your picture into white "
+#| "and a color you choose."
 msgid ""
-"Click and move the mouse around to turn parts of your picture into white and "
+"Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
 msgstr ""
 "いろを　えらんだあと　クリックしたままマウスをうごかして　そのいろと　しろい"
@@ -1427,17 +1493,14 @@ msgstr ""
 "クすれば ひくくなるよ"
 
 #: ../../magic/src/xor.c:95
-#| msgid "Colors"
 msgid "Xor Colors"
 msgstr "いろはんてん"
 
 #: ../../magic/src/xor.c:101
-#| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw a XOR effect"
 msgstr "クリックしたまま マウスをうごかして いろを はんてんさせよう"
 
 #: ../../magic/src/xor.c:103
-#| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "えを くりっくして ぜんたいの いろを はんてんさせよう"
 

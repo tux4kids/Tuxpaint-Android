@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
-"Report-Msgid-Bugs-To: tuxpaint-i18n@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-03 21:03+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-08 18:37+0200\n"
 "PO-Revision-Date: 2008-02-10 19:28+0400\n"
 "Last-Translator: none\n"
 "Language-Team: none\n"
@@ -145,7 +145,7 @@ msgstr ""
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
 #: ../dirwalk.c:201
-msgid "`\\%_@$~#{<(^&*"
+msgid "`%_@$~#{<(^&*"
 msgstr ""
 
 #. digits (e.g., '0', '1' and '7')
@@ -230,82 +230,102 @@ msgid "ZH_TW"
 msgstr "Ənənəvi çin"
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:171 ../shapes.h:172
+#: ../shapes.h:234 ../shapes.h:235
 msgid "Square"
 msgstr "Dördkünc"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:175 ../shapes.h:176
+#: ../shapes.h:238 ../shapes.h:239
 msgid "Rectangle"
 msgstr "Düzbucaqlı dördbucaq"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:179 ../shapes.h:180
+#: ../shapes.h:242 ../shapes.h:243
 msgid "Circle"
 msgstr "Dairə"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:183 ../shapes.h:184
+#: ../shapes.h:246 ../shapes.h:247
 msgid "Ellipse"
 msgstr "Ellips"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:187 ../shapes.h:188
+#: ../shapes.h:250 ../shapes.h:251
 msgid "Triangle"
 msgstr "Üçbucaq"
 
 #. Pentagone shape tool (5 sides)
-#: ../shapes.h:191 ../shapes.h:192
+#: ../shapes.h:254 ../shapes.h:255
 msgid "Pentagon"
 msgstr "Beşbucaq"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:195 ../shapes.h:196
+#: ../shapes.h:258 ../shapes.h:259
 msgid "Rhombus"
 msgstr "Romb"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:199 ../shapes.h:200
+#: ../shapes.h:262 ../shapes.h:263
 msgid "Octagon"
 msgstr "Səkkizbucaq"
 
+#. Triangle star (3 points star)
+#. Rhombus star (4 points star)
+#. Pentagone star (5 points star)
+#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
+#: ../shapes.h:278 ../shapes.h:281
+msgid "Star"
+msgstr ""
+
 #. Description of a square
-#: ../shapes.h:208 ../shapes.h:209
+#: ../shapes.h:290 ../shapes.h:291
 msgid "A square is a rectangle with four equal sides."
 msgstr "Dörd tərəfi bərabər olan düzbucaq."
 
 #. Description of a rectangle
-#: ../shapes.h:212 ../shapes.h:213
+#: ../shapes.h:294 ../shapes.h:295
 msgid "A rectangle has four sides and four right angles."
 msgstr "Düzbucağın dörd tərəfi və dörd düz bucağı olur."
 
-#: ../shapes.h:217 ../shapes.h:219
+#: ../shapes.h:299 ../shapes.h:301
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr "İndi dairə çəkə bilərsən."
 
 #. Description of an ellipse
-#: ../shapes.h:222 ../shapes.h:223
+#: ../shapes.h:304 ../shapes.h:305
 msgid "An ellipse is a stretched circle."
 msgstr "Ellips uzadılmış çevrədir."
 
 #. Description of a triangle
-#: ../shapes.h:226 ../shapes.h:227
+#: ../shapes.h:308 ../shapes.h:309
 msgid "A triangle has three sides."
 msgstr "Üçbucağın üç tərəfi olur."
 
 #. Description of a pentagon
-#: ../shapes.h:230 ../shapes.h:231
+#: ../shapes.h:312 ../shapes.h:313
 msgid "A pentagon has five sides."
 msgstr "Beşbucağın beş tərəfi olur."
 
-#: ../shapes.h:235 ../shapes.h:237
+#: ../shapes.h:317 ../shapes.h:319
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr "İndi romb çəkə bilərsən."
 
-#: ../shapes.h:241 ../shapes.h:243
+#: ../shapes.h:323 ../shapes.h:325
 msgid "An octagon has eight equal sides."
 msgstr "Səkkizbucağın səkkiz bərabər tərəfi olur."
+
+#: ../shapes.h:327 ../shapes.h:328
+msgid "A star with 3 points."
+msgstr ""
+
+#: ../shapes.h:329 ../shapes.h:330
+msgid "A star with 4 points."
+msgstr ""
+
+#: ../shapes.h:331 ../shapes.h:332
+msgid "A star with 5 points."
+msgstr ""
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -397,7 +417,7 @@ msgstr "Yeni"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7631
+#: ../tools.h:98 ../tuxpaint.c:7637
 msgid "Open"
 msgstr "Açmaq"
 
@@ -462,7 +482,7 @@ msgstr ""
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
-"and clicking an exist label, you can move it, edit it and change its text "
+"and clicking an existing label, you can move it, edit it and change its text "
 "style."
 msgstr ""
 "Mətn yazmaq üçün şəkilin üzərində mausun sol düyməsini bas və mətni yaz."
@@ -644,78 +664,78 @@ msgid "Sound unmuted."
 msgstr "Səs icazə olunub."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3065
+#: ../tuxpaint.c:3071
 msgid "Please wait…"
 msgstr "Bir az gözlə..."
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7634
+#: ../tuxpaint.c:7640
 msgid "Erase"
 msgstr "Poz"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7637
+#: ../tuxpaint.c:7643
 msgid "Slides"
 msgstr "Cizgi filmi"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7640
+#: ../tuxpaint.c:7646
 msgid "Back"
 msgstr "Geri"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7649
 msgid "Next"
 msgstr "İrəli"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7652
 msgid "Play"
 msgstr "Oyna"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8355
+#: ../tuxpaint.c:8361
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11664
+#: ../tuxpaint.c:11689
 msgid "Yes"
 msgstr "Bəli"
 
-#: ../tuxpaint.c:11668
+#: ../tuxpaint.c:11693
 msgid "No"
 msgstr "Yox"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12710
+#: ../tuxpaint.c:12792
 msgid "Replace the picture with your changes?"
 msgstr "Əvvəlki şəkili əvəz edim?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12714
+#: ../tuxpaint.c:12796
 msgid "Yes, replace the old one!"
 msgstr "Bəli, əvəz et!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12718
+#: ../tuxpaint.c:12800
 msgid "No, save a new file!"
 msgstr "Yox, yeni şəkil kimi yaddaşa sal!"
 
-#: ../tuxpaint.c:13963
+#: ../tuxpaint.c:14045
 msgid "Choose the picture you want, then click “Open”."
 msgstr "İstədiyin şəkili şeç və \"Aç\" düyməsini bas."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:14994 ../tuxpaint.c:15322
+#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "İstədiyin şəkilləri şeç və \"Oyna\" düyməsini bas."
 
-#: ../tuxpaint.c:22344
+#: ../tuxpaint.c:22439
 msgid "Pick a color."
 msgstr "Rəngi seç."
 
@@ -739,7 +759,7 @@ msgstr "Hərəkət"
 
 #: ../../magic/src/alien.c:67
 #, fuzzy
-msgid "Click and move the mouse to change the colors in parts of your picture."
+msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -772,18 +792,25 @@ msgid "Drip"
 msgstr "Damcılamaq"
 
 #: ../../magic/src/blocks_chalk_drip.c:150
-msgid "Click and move the mouse around to make the picture blocky."
+#, fuzzy
+#| msgid "Click and move the mouse around to make the picture blocky."
+msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "Kərpicləri düzmək üçün mausun düyməsini bas və mausu hərəkətə gətir."
 
 #: ../../magic/src/blocks_chalk_drip.c:153
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
 msgid ""
-"Click and move the mouse around to turn the picture into a chalk drawing."
+"Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr ""
 "Şəkili tabaşir ilə çəkmək üçün mausun sol düyməsini bas və mausu hərəkətə "
 "gətir."
 
 #: ../../magic/src/blocks_chalk_drip.c:156
-msgid "Click and move the mouse around to make the picture drip."
+#, fuzzy
+#| msgid "Click and move the mouse around to make the picture drip."
+msgid "Click and drag the mouse around to make the picture drip."
 msgstr "Şəkili sızmaq üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
 #: ../../magic/src/blur.c:80
@@ -792,7 +819,7 @@ msgstr "Ləkə"
 
 #: ../../magic/src/blur.c:83
 #, fuzzy
-msgid "Click and move the mouse around to blur the image."
+msgid "Click and drag the mouse around to blur the image."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -807,13 +834,17 @@ msgid "Bricks"
 msgstr "Kərpic"
 
 #: ../../magic/src/bricks.c:131
-msgid "Click and move to draw large bricks."
+#, fuzzy
+#| msgid "Click and move to draw large bricks."
+msgid "Click and drag to draw large bricks."
 msgstr ""
 "Böyük kərpicləri düzmək üçün mausun sol düyməsini bas və mausu hərəkətə "
 "gətir."
 
 #: ../../magic/src/bricks.c:133
-msgid "Click and move to draw small bricks."
+#, fuzzy
+#| msgid "Click and move to draw small bricks."
+msgid "Click and drag to draw small bricks."
 msgstr ""
 "Balaca kərpicləri düzmək üçün mausun sol düyməsini bas və mausu hərəkətə "
 "gətir."
@@ -823,7 +854,9 @@ msgid "Calligraphy"
 msgstr "Gözəl xətlə yazma"
 
 #: ../../magic/src/calligraphy.c:134
-msgid "Click and move the mouse around to draw in calligraphy."
+#, fuzzy
+#| msgid "Click and move the mouse around to draw in calligraphy."
+msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr ""
 "Gözəl xətlə yazmaq üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -832,7 +865,9 @@ msgid "Cartoon"
 msgstr "Cizgi filmi"
 
 #: ../../magic/src/cartoon.c:113
-msgid "Click and move the mouse around to turn the picture into a cartoon."
+#, fuzzy
+#| msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr ""
 "Şəkili cizgi filminə çevirmək üçün mausun sol düyməsini bas və mausu "
 "hərəkətə gətir."
@@ -873,7 +908,7 @@ msgstr "Qaralmaq"
 
 #: ../../magic/src/fade_darken.c:134
 #, fuzzy
-msgid "Click and move the mouse to lighten parts of your picture."
+msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -885,7 +920,7 @@ msgstr ""
 
 #: ../../magic/src/fade_darken.c:141
 #, fuzzy
-msgid "Click and move the mouse to darken parts of your picture."
+msgid "Click and drag the mouse to darken parts of your picture."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -980,7 +1015,9 @@ msgid "Grass"
 msgstr "Ot"
 
 #: ../../magic/src/grass.c:118
-msgid "Click and move to draw grass. Don’t forget the dirt!"
+#, fuzzy
+#| msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "Ot çəkmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
 #: ../../magic/src/halftone.c:34
@@ -1047,7 +1084,7 @@ msgstr ""
 #| msgid ""
 #| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgid ""
-"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
 msgstr ""
 "Şəkili kaleydoskopa çevirmək üçün mausun sol düyməsini bas və mausu hərəkətə "
@@ -1104,7 +1141,7 @@ msgstr "Möcüzə"
 #: ../../magic/src/mosaic.c:103
 #, fuzzy
 msgid ""
-"Click and move the mouse to add a mosaic effect to parts of your picture."
+"Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr "Şəkili güzgüdəki kimi görmək üçün mausun sol düyməsini bas."
 
 #: ../../magic/src/mosaic.c:104
@@ -1112,50 +1149,50 @@ msgstr "Şəkili güzgüdəki kimi görmək üçün mausun sol düyməsini bas."
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Şəkili güzgüdəki kimi görmək üçün mausun sol düyməsini bas."
 
-#: ../../magic/src/mosaic_shaped.c:142
+#: ../../magic/src/mosaic_shaped.c:147
 #, fuzzy
 #| msgid "Square"
 msgid "Square Mosaic"
 msgstr "Dördkünc"
 
-#: ../../magic/src/mosaic_shaped.c:143
+#: ../../magic/src/mosaic_shaped.c:148
 #, fuzzy
 msgid "Hexagon Mosaic"
 msgstr "Möcüzə"
 
-#: ../../magic/src/mosaic_shaped.c:144
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Irregular Mosaic"
 msgstr ""
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:156
 #, fuzzy
 msgid ""
-"Click and move the mouse to add a square mosaic to parts of your picture."
+"Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr "Şəkili güzgüdəki kimi görmək üçün mausun sol düyməsini bas."
 
-#: ../../magic/src/mosaic_shaped.c:150
+#: ../../magic/src/mosaic_shaped.c:157
 #, fuzzy
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Şəkili güzgüdəki kimi görmək üçün mausun sol düyməsini bas."
 
-#: ../../magic/src/mosaic_shaped.c:152
+#: ../../magic/src/mosaic_shaped.c:161
 #, fuzzy
 msgid ""
-"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+"Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr "Şəkili güzgüdəki kimi görmək üçün mausun sol düyməsini bas."
 
-#: ../../magic/src/mosaic_shaped.c:153
+#: ../../magic/src/mosaic_shaped.c:162
 #, fuzzy
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "Şəkili güzgüdəki kimi görmək üçün mausun sol düyməsini bas."
 
-#: ../../magic/src/mosaic_shaped.c:155
+#: ../../magic/src/mosaic_shaped.c:166
 #, fuzzy
 msgid ""
-"Click and move the mouse to add an irregular mosaic to parts of your picture."
+"Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr "Şəkili güzgüdəki kimi görmək üçün mausun sol düyməsini bas."
 
-#: ../../magic/src/mosaic_shaped.c:156
+#: ../../magic/src/mosaic_shaped.c:167
 #, fuzzy
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "Şəkili güzgüdəki kimi görmək üçün mausun sol düyməsini bas."
@@ -1167,7 +1204,7 @@ msgstr "Neqativ"
 #: ../../magic/src/negative.c:106
 #, fuzzy
 #| msgid "Click and move the mouse around to draw a negative."
-msgid "Click and move the mouse around to make your painting negative."
+msgid "Click and drag the mouse around to make your painting negative."
 msgstr "Şəkili neqativdə görmək üçün mausun sol düyməsini bas."
 
 #: ../../magic/src/negative.c:109
@@ -1181,7 +1218,7 @@ msgstr ""
 
 #: ../../magic/src/noise.c:66
 #, fuzzy
-msgid "Click and move the mouse to add noise to parts of your picture."
+msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -1324,7 +1361,7 @@ msgstr ""
 
 #: ../../magic/src/sharpen.c:78
 #, fuzzy
-msgid "Click and move the mouse to trace edges in parts of your picture."
+msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -1336,7 +1373,7 @@ msgstr ""
 
 #: ../../magic/src/sharpen.c:80
 #, fuzzy
-msgid "Click and move the mouse to sharpen parts of your picture."
+msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -1347,7 +1384,7 @@ msgstr "Şəkili güzgüdəki kimi görmək üçün mausun sol düyməsini bas."
 
 #: ../../magic/src/sharpen.c:82
 #, fuzzy
-msgid "Click and move the mouse to create a black and white silhouette."
+msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -1378,14 +1415,16 @@ msgid "Wet Paint"
 msgstr "Dəmir rəngləmə"
 
 #: ../../magic/src/smudge.c:115
-msgid "Click and move the mouse around to smudge the picture."
+#, fuzzy
+#| msgid "Click and move the mouse around to smudge the picture."
+msgid "Click and drag the mouse around to smudge the picture."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:117
 #, fuzzy
-msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -1447,7 +1486,7 @@ msgstr ""
 #: ../../magic/src/tint.c:75
 #, fuzzy
 msgid ""
-"Click and move the mouse around to change the color of parts of your picture."
+"Click and drag the mouse around to change the color of parts of your picture."
 msgstr ""
 "Şəkili ləkələmək üçün mausun sol düyməsini bas və mausu hərəkətə gətir."
 
@@ -1460,7 +1499,7 @@ msgstr ""
 #: ../../magic/src/tint.c:77
 #, fuzzy
 msgid ""
-"Click and move the mouse around to turn parts of your picture into white and "
+"Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
 msgstr ""
 "Şəkili cizgi filminə çevirmək üçün mausun sol düyməsini bas və mausu "

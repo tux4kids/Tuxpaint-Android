@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
-"Report-Msgid-Bugs-To: tuxpaint-i18n@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-03 21:03+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-08 18:37+0200\n"
 "PO-Revision-Date: 2004-10-17 11:19+0200\n"
 "Last-Translator: none\n"
 "Language-Team: none\n"
@@ -149,7 +149,7 @@ msgstr ""
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
 #: ../dirwalk.c:201
-msgid "`\\%_@$~#{<(^&*"
+msgid "`%_@$~#{<(^&*"
 msgstr ""
 
 #. digits (e.g., '0', '1' and '7')
@@ -235,86 +235,106 @@ msgid "ZH_TW"
 msgstr ""
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:171 ../shapes.h:172
+#: ../shapes.h:234 ../shapes.h:235
 msgid "Square"
 msgstr "Katror"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:175 ../shapes.h:176
+#: ../shapes.h:238 ../shapes.h:239
 msgid "Rectangle"
 msgstr "Drejtkëndësh"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:179 ../shapes.h:180
+#: ../shapes.h:242 ../shapes.h:243
 msgid "Circle"
 msgstr "Rreth"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:183 ../shapes.h:184
+#: ../shapes.h:246 ../shapes.h:247
 msgid "Ellipse"
 msgstr "Elips"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:187 ../shapes.h:188
+#: ../shapes.h:250 ../shapes.h:251
 msgid "Triangle"
 msgstr "Trekëndësh"
 
 #. Pentagone shape tool (5 sides)
-#: ../shapes.h:191 ../shapes.h:192
+#: ../shapes.h:254 ../shapes.h:255
 msgid "Pentagon"
 msgstr "Pesëkëndësh"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:195 ../shapes.h:196
+#: ../shapes.h:258 ../shapes.h:259
 msgid "Rhombus"
 msgstr "Romb"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:199 ../shapes.h:200
+#: ../shapes.h:262 ../shapes.h:263
 #, fuzzy
 msgid "Octagon"
 msgstr "Pesëkëndësh"
 
+#. Triangle star (3 points star)
+#. Rhombus star (4 points star)
+#. Pentagone star (5 points star)
+#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
+#: ../shapes.h:278 ../shapes.h:281
+msgid "Star"
+msgstr ""
+
 #. Description of a square
-#: ../shapes.h:208 ../shapes.h:209
+#: ../shapes.h:290 ../shapes.h:291
 #, fuzzy
 msgid "A square is a rectangle with four equal sides."
 msgstr "Katrori është drejtkëndësh me katër anë të barabarata ."
 
 #. Description of a rectangle
-#: ../shapes.h:212 ../shapes.h:213
+#: ../shapes.h:294 ../shapes.h:295
 #, fuzzy
 msgid "A rectangle has four sides and four right angles."
 msgstr "Një drejtkëndësh ka katër anë dhe katër kënde të drejta."
 
-#: ../shapes.h:217 ../shapes.h:219
+#: ../shapes.h:299 ../shapes.h:301
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr ""
 
 #. Description of an ellipse
-#: ../shapes.h:222 ../shapes.h:223
+#: ../shapes.h:304 ../shapes.h:305
 msgid "An ellipse is a stretched circle."
 msgstr "Elipsa është rreth i zgjatur."
 
 #. Description of a triangle
-#: ../shapes.h:226 ../shapes.h:227
+#: ../shapes.h:308 ../shapes.h:309
 msgid "A triangle has three sides."
 msgstr "Një trekëndësh ka tre anë."
 
 #. Description of a pentagon
-#: ../shapes.h:230 ../shapes.h:231
+#: ../shapes.h:312 ../shapes.h:313
 msgid "A pentagon has five sides."
 msgstr "Një pesëkëndësh ka pesë anë."
 
-#: ../shapes.h:235 ../shapes.h:237
+#: ../shapes.h:317 ../shapes.h:319
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr "Rombi ka katër anë të barabarta, dhe anët e kundërta janë paralele."
 
-#: ../shapes.h:241 ../shapes.h:243
+#: ../shapes.h:323 ../shapes.h:325
 #, fuzzy
 msgid "An octagon has eight equal sides."
 msgstr "Një pesëkëndësh ka pesë anë."
+
+#: ../shapes.h:327 ../shapes.h:328
+msgid "A star with 3 points."
+msgstr ""
+
+#: ../shapes.h:329 ../shapes.h:330
+msgid "A star with 4 points."
+msgstr ""
+
+#: ../shapes.h:331 ../shapes.h:332
+msgid "A star with 5 points."
+msgstr ""
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -407,7 +427,7 @@ msgstr "E re"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7631
+#: ../tools.h:98 ../tuxpaint.c:7637
 msgid "Open"
 msgstr "Hap"
 
@@ -471,7 +491,7 @@ msgstr ""
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
-"and clicking an exist label, you can move it, edit it and change its text "
+"and clicking an existing label, you can move it, edit it and change its text "
 "style."
 msgstr ""
 "Zgjidh një stil teksti. Kliko tek vizatimi juaj dhe mund të fillosh të "
@@ -647,81 +667,81 @@ msgid "Sound unmuted."
 msgstr ""
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3065
+#: ../tuxpaint.c:3071
 msgid "Please wait…"
 msgstr ""
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7634
+#: ../tuxpaint.c:7640
 msgid "Erase"
 msgstr "Fshi"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7637
+#: ../tuxpaint.c:7643
 msgid "Slides"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7640
+#: ../tuxpaint.c:7646
 msgid "Back"
 msgstr "Mbrapa"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7649
 #, fuzzy
 msgid "Next"
 msgstr "Teksti"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7652
 msgid "Play"
 msgstr ""
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8355
+#: ../tuxpaint.c:8361
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11664
+#: ../tuxpaint.c:11689
 msgid "Yes"
 msgstr "Po"
 
-#: ../tuxpaint.c:11668
+#: ../tuxpaint.c:11693
 msgid "No"
 msgstr "Jo"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12710
+#: ../tuxpaint.c:12792
 msgid "Replace the picture with your changes?"
 msgstr ""
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12714
+#: ../tuxpaint.c:12796
 msgid "Yes, replace the old one!"
 msgstr ""
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12718
+#: ../tuxpaint.c:12800
 #, fuzzy
 msgid "No, save a new file!"
 msgstr "Jo, ruaje në file tjetër"
 
-#: ../tuxpaint.c:13963
+#: ../tuxpaint.c:14045
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Zgjidh pikturën që dëshiron, pastaj kliko \"Hap\"."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:14994 ../tuxpaint.c:15322
+#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
 #, fuzzy
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Zgjidh pikturën që dëshiron, pastaj kliko \"Hap\"."
 
-#: ../tuxpaint.c:22344
+#: ../tuxpaint.c:22439
 msgid "Pick a color."
 msgstr ""
 
@@ -744,7 +764,7 @@ msgstr ""
 
 #: ../../magic/src/alien.c:67
 #, fuzzy
-msgid "Click and move the mouse to change the colors in parts of your picture."
+msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #: ../../magic/src/alien.c:68
@@ -775,18 +795,25 @@ msgid "Drip"
 msgstr "Shkrirje"
 
 #: ../../magic/src/blocks_chalk_drip.c:150
-msgid "Click and move the mouse around to make the picture blocky."
+#, fuzzy
+#| msgid "Click and move the mouse around to make the picture blocky."
+msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "Kliko dhe lëviz përqark miun për të grupuar foton."
 
 #: ../../magic/src/blocks_chalk_drip.c:153
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
 msgid ""
-"Click and move the mouse around to turn the picture into a chalk drawing."
+"Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr ""
 "Kliko dhe lëvize miun përqark që të kthesh pikturën si të vizatuar me "
 "shkumës."
 
 #: ../../magic/src/blocks_chalk_drip.c:156
-msgid "Click and move the mouse around to make the picture drip."
+#, fuzzy
+#| msgid "Click and move the mouse around to make the picture drip."
+msgid "Click and drag the mouse around to make the picture drip."
 msgstr "Kliko dhe lëvize miun përqark që të krijosh efekt shiu."
 
 #: ../../magic/src/blur.c:80
@@ -795,7 +822,7 @@ msgstr "Jashtë objektivi"
 
 #: ../../magic/src/blur.c:83
 #, fuzzy
-msgid "Click and move the mouse around to blur the image."
+msgid "Click and drag the mouse around to blur the image."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #: ../../magic/src/blur.c:84
@@ -811,12 +838,12 @@ msgstr "Blloqe"
 
 #: ../../magic/src/bricks.c:131
 #, fuzzy
-msgid "Click and move to draw large bricks."
+msgid "Click and drag to draw large bricks."
 msgstr "Kliko dhe lëviz për të vizatuar tullë të madhe."
 
 #: ../../magic/src/bricks.c:133
 #, fuzzy
-msgid "Click and move to draw small bricks."
+msgid "Click and drag to draw small bricks."
 msgstr "Kliko dhe lëviz për të vizatuar tullë të vogël."
 
 #: ../../magic/src/calligraphy.c:127
@@ -825,7 +852,7 @@ msgstr ""
 
 #: ../../magic/src/calligraphy.c:134
 #, fuzzy
-msgid "Click and move the mouse around to draw in calligraphy."
+msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Kliko dhe lëviz mausin rreth e qark për të krijuar një negativ."
 
 #: ../../magic/src/cartoon.c:106
@@ -834,7 +861,7 @@ msgstr "Vizatimor"
 
 #: ../../magic/src/cartoon.c:113
 #, fuzzy
-msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr ""
 "Kliko dhe lëvize miun përqark që të kthesh pikturën si të vizatuar me "
 "shkumës."
@@ -875,7 +902,7 @@ msgstr "Errësim"
 
 #: ../../magic/src/fade_darken.c:134
 #, fuzzy
-msgid "Click and move the mouse to lighten parts of your picture."
+msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #: ../../magic/src/fade_darken.c:136
@@ -885,7 +912,7 @@ msgstr "Kliko dhe lëviz përqark miun për të grupuar foton."
 
 #: ../../magic/src/fade_darken.c:141
 #, fuzzy
-msgid "Click and move the mouse to darken parts of your picture."
+msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #: ../../magic/src/fade_darken.c:143
@@ -972,7 +999,7 @@ msgstr "Bar!"
 
 #: ../../magic/src/grass.c:118
 #, fuzzy
-msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "Kliko dhe lëviz për të vizatuar spërkatje."
 
 #: ../../magic/src/halftone.c:34
@@ -1027,7 +1054,7 @@ msgstr "Kliko dhe lëviz miun për t'a \"holluar\" foton."
 #: ../../magic/src/kalidescope.c:142
 #, fuzzy
 msgid ""
-"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
 msgstr "Kliko dhe lëviz miun për të \"trashur\" foton."
 
@@ -1081,7 +1108,7 @@ msgstr "Magjik"
 #: ../../magic/src/mosaic.c:103
 #, fuzzy
 msgid ""
-"Click and move the mouse to add a mosaic effect to parts of your picture."
+"Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr "Kliko që të krijosh një foto pasqyrë."
 
 #: ../../magic/src/mosaic.c:104
@@ -1089,50 +1116,50 @@ msgstr "Kliko që të krijosh një foto pasqyrë."
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Kliko që të krijosh një foto pasqyrë."
 
-#: ../../magic/src/mosaic_shaped.c:142
+#: ../../magic/src/mosaic_shaped.c:147
 #, fuzzy
 #| msgid "Square"
 msgid "Square Mosaic"
 msgstr "Katror"
 
-#: ../../magic/src/mosaic_shaped.c:143
+#: ../../magic/src/mosaic_shaped.c:148
 #, fuzzy
 msgid "Hexagon Mosaic"
 msgstr "Magjik"
 
-#: ../../magic/src/mosaic_shaped.c:144
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Irregular Mosaic"
 msgstr ""
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:156
 #, fuzzy
 msgid ""
-"Click and move the mouse to add a square mosaic to parts of your picture."
+"Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr "Kliko që të krijosh një foto pasqyrë."
 
-#: ../../magic/src/mosaic_shaped.c:150
+#: ../../magic/src/mosaic_shaped.c:157
 #, fuzzy
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Kliko që të krijosh një foto pasqyrë."
 
-#: ../../magic/src/mosaic_shaped.c:152
+#: ../../magic/src/mosaic_shaped.c:161
 #, fuzzy
 msgid ""
-"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+"Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr "Kliko që të krijosh një foto pasqyrë."
 
-#: ../../magic/src/mosaic_shaped.c:153
+#: ../../magic/src/mosaic_shaped.c:162
 #, fuzzy
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "Kliko që të krijosh një foto pasqyrë."
 
-#: ../../magic/src/mosaic_shaped.c:155
+#: ../../magic/src/mosaic_shaped.c:166
 #, fuzzy
 msgid ""
-"Click and move the mouse to add an irregular mosaic to parts of your picture."
+"Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr "Kliko që të krijosh një foto pasqyrë."
 
-#: ../../magic/src/mosaic_shaped.c:156
+#: ../../magic/src/mosaic_shaped.c:167
 #, fuzzy
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "Kliko që të krijosh një foto pasqyrë."
@@ -1144,7 +1171,7 @@ msgstr "Negativi"
 #: ../../magic/src/negative.c:106
 #, fuzzy
 #| msgid "Click and move the mouse around to draw a negative."
-msgid "Click and move the mouse around to make your painting negative."
+msgid "Click and drag the mouse around to make your painting negative."
 msgstr "Kliko dhe lëviz mausin rreth e qark për të krijuar një negativ."
 
 #: ../../magic/src/negative.c:109
@@ -1158,7 +1185,7 @@ msgstr ""
 
 #: ../../magic/src/noise.c:66
 #, fuzzy
-msgid "Click and move the mouse to add noise to parts of your picture."
+msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #: ../../magic/src/noise.c:67
@@ -1291,7 +1318,7 @@ msgstr ""
 
 #: ../../magic/src/sharpen.c:78
 #, fuzzy
-msgid "Click and move the mouse to trace edges in parts of your picture."
+msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #: ../../magic/src/sharpen.c:79
@@ -1301,7 +1328,7 @@ msgstr "Kliko dhe lëviz përqark miun për të grupuar foton."
 
 #: ../../magic/src/sharpen.c:80
 #, fuzzy
-msgid "Click and move the mouse to sharpen parts of your picture."
+msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #: ../../magic/src/sharpen.c:81
@@ -1311,7 +1338,7 @@ msgstr "Kliko që të krijosh një foto pasqyrë."
 
 #: ../../magic/src/sharpen.c:82
 #, fuzzy
-msgid "Click and move the mouse to create a black and white silhouette."
+msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #: ../../magic/src/sharpen.c:83
@@ -1340,13 +1367,13 @@ msgstr "Bojë"
 
 #: ../../magic/src/smudge.c:115
 #, fuzzy
-msgid "Click and move the mouse around to smudge the picture."
+msgid "Click and drag the mouse around to smudge the picture."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:117
 #, fuzzy
-msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #: ../../magic/src/snow.c:68
@@ -1406,7 +1433,7 @@ msgstr ""
 #: ../../magic/src/tint.c:75
 #, fuzzy
 msgid ""
-"Click and move the mouse around to change the color of parts of your picture."
+"Click and drag the mouse around to change the color of parts of your picture."
 msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 
 #: ../../magic/src/tint.c:76
@@ -1417,7 +1444,7 @@ msgstr "Kliko dhe lëviz mausin nëpër pikturë për të krijuar dridhje."
 #: ../../magic/src/tint.c:77
 #, fuzzy
 msgid ""
-"Click and move the mouse around to turn parts of your picture into white and "
+"Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
 msgstr ""
 "Kliko dhe lëvize miun përqark që të kthesh pikturën si të vizatuar me "

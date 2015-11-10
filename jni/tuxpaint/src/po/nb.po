@@ -2,21 +2,21 @@
 # Oversettelse av Tux Paint til bokmål.
 # Dag H. Lorås <dag.loraas@operamail.com>, 2003.
 # Knut Erik Hollund <khollund@responze.net>, 2003.
-# Karl Ove Hufthammer <karl@huftis.org>, 2003, 2005, 2006, 2007, 2009, 2014.
+# Karl Ove Hufthammer <karl@huftis.org>, 2003, 2005, 2006, 2007, 2009, 2014, 2015.
 # Klaus Ade Johnstad <klaus@skolelinux.no>, 2004.
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-08 16:20+0200\n"
-"PO-Revision-Date: 2014-06-08 16:57+0200\n"
+"POT-Creation-Date: 2015-10-09 17:37+0200\n"
+"PO-Revision-Date: 2015-10-10 13:25+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 2.0\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #. Response to Black (0, 0, 0) color selected
@@ -148,8 +148,8 @@ msgstr "«»,.?!-–"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
 #: ../dirwalk.c:201
-msgid "`\\%_@$~#{<(^&*"
-msgstr "`\\%_@$~#{<(^&*"
+msgid "`%_@$~#{<(^&*"
+msgstr "`%_@$~#{<(^&*"
 
 #. digits (e.g., '0', '1' and '7')
 #: ../dirwalk.c:204
@@ -233,82 +233,102 @@ msgid "ZH_TW"
 msgstr "ZH_TW"
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:171 ../shapes.h:172
+#: ../shapes.h:234 ../shapes.h:235
 msgid "Square"
 msgstr "Kvadrat"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:175 ../shapes.h:176
+#: ../shapes.h:238 ../shapes.h:239
 msgid "Rectangle"
 msgstr "Rektangel"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:179 ../shapes.h:180
+#: ../shapes.h:242 ../shapes.h:243
 msgid "Circle"
 msgstr "Sirkel"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:183 ../shapes.h:184
+#: ../shapes.h:246 ../shapes.h:247
 msgid "Ellipse"
 msgstr "Ellipse"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:187 ../shapes.h:188
+#: ../shapes.h:250 ../shapes.h:251
 msgid "Triangle"
 msgstr "Trekant"
 
 #. Pentagone shape tool (5 sides)
-#: ../shapes.h:191 ../shapes.h:192
+#: ../shapes.h:254 ../shapes.h:255
 msgid "Pentagon"
 msgstr "Femkant"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:195 ../shapes.h:196
+#: ../shapes.h:258 ../shapes.h:259
 msgid "Rhombus"
 msgstr "Rhombus"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:199 ../shapes.h:200
+#: ../shapes.h:262 ../shapes.h:263
 msgid "Octagon"
 msgstr "Åttekant"
 
+#. Triangle star (3 points star)
+#. Rhombus star (4 points star)
+#. Pentagone star (5 points star)
+#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
+#: ../shapes.h:278 ../shapes.h:281
+msgid "Star"
+msgstr "Stjerne"
+
 #. Description of a square
-#: ../shapes.h:208 ../shapes.h:209
+#: ../shapes.h:290 ../shapes.h:291
 msgid "A square is a rectangle with four equal sides."
 msgstr "Et kvadrat er et rektangel med fire like sider."
 
 #. Description of a rectangle
-#: ../shapes.h:212 ../shapes.h:213
+#: ../shapes.h:294 ../shapes.h:295
 msgid "A rectangle has four sides and four right angles."
 msgstr "Et rektangel har fire sider og fire rette vinkler."
 
-#: ../shapes.h:217 ../shapes.h:219
+#: ../shapes.h:299 ../shapes.h:301
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr "En sirkel er en kurve der alle punktene er like langt fra sentrum."
 
 #. Description of an ellipse
-#: ../shapes.h:222 ../shapes.h:223
+#: ../shapes.h:304 ../shapes.h:305
 msgid "An ellipse is a stretched circle."
 msgstr "En ellipse er en avlang sirkel."
 
 #. Description of a triangle
-#: ../shapes.h:226 ../shapes.h:227
+#: ../shapes.h:308 ../shapes.h:309
 msgid "A triangle has three sides."
 msgstr "En trekant har tre sider."
 
 #. Description of a pentagon
-#: ../shapes.h:230 ../shapes.h:231
+#: ../shapes.h:312 ../shapes.h:313
 msgid "A pentagon has five sides."
 msgstr "En femkant har fem sider."
 
-#: ../shapes.h:235 ../shapes.h:237
+#: ../shapes.h:317 ../shapes.h:319
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr "En rombe har fire like lange sider og motstående sider er parallelle."
 
-#: ../shapes.h:241 ../shapes.h:243
+#: ../shapes.h:323 ../shapes.h:325
 msgid "An octagon has eight equal sides."
 msgstr "En åttekant har åtte sider."
+
+#: ../shapes.h:327 ../shapes.h:328
+msgid "A star with 3 points."
+msgstr "En stjerne med tre tagger."
+
+#: ../shapes.h:329 ../shapes.h:330
+msgid "A star with 4 points."
+msgstr "En stjerne med fire tagger."
+
+#: ../shapes.h:331 ../shapes.h:332
+msgid "A star with 5 points."
+msgstr "En stjerne med fem tagger."
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -400,7 +420,7 @@ msgstr "Ny"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7631
+#: ../tools.h:98 ../tuxpaint.c:7637
 msgid "Open"
 msgstr "Åpne"
 
@@ -445,30 +465,24 @@ msgstr ""
 
 #. Text tool instructions
 #: ../tools.h:127
-#| msgid ""
-#| "Choose a style of text. Click on your drawing and you can start typing."
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text."
 msgstr ""
-"Velg tekststil. Trykk så på tegningen og skriv i vei. "
-"Trykk «Enter» eller «Tab» for å fullføre teksten."
+"Velg tekststil. Trykk så på tegningen og skriv i vei. Trykk «Enter» eller "
+"«Tab» for å fullføre teksten."
 
 #. Label tool instructions
 #: ../tools.h:130
-#| msgid ""
-#| "Choose a style of text. Click on your drawing and you can start typing."
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
-"and clicking an exist label, you can move it, edit it and change its text "
+"and clicking an existing label, you can move it, edit it and change its text "
 "style."
 msgstr ""
-"Velg tekststil. Trykk så på tegningen og skriv i vei. "
-"Trykk «Enter» eller «Tab» for å fullføre teksten. Du "
-"kan bruke objektvelgeren og trykke på en "
-"merkelapp for å flytte eller redigere den, eller endre "
-"tekststilen."
+"Velg tekststil. Trykk så på tegningen og skriv i vei. Trykk «Enter» eller "
+"«Tab» for å fullføre teksten. Du kan bruke objektvelgeren og trykke på en "
+"merkelapp for å flytte eller redigere den, eller endre tekststilen."
 
 #. Magic tool instruction
 #: ../tools.h:136
@@ -637,78 +651,78 @@ msgid "Sound unmuted."
 msgstr "Lyd slått på."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3065
+#: ../tuxpaint.c:3071
 msgid "Please wait…"
 msgstr "Vent litt …"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7634
+#: ../tuxpaint.c:7640
 msgid "Erase"
 msgstr "Slett"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7637
+#: ../tuxpaint.c:7643
 msgid "Slides"
 msgstr "Lysbilder"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7640
+#: ../tuxpaint.c:7646
 msgid "Back"
 msgstr "Tilbake"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7649
 msgid "Next"
 msgstr "Neste"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7652
 msgid "Play"
 msgstr "Kjør"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8355
+#: ../tuxpaint.c:8361
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11664
+#: ../tuxpaint.c:11689
 msgid "Yes"
 msgstr "Ja!"
 
-#: ../tuxpaint.c:11668
+#: ../tuxpaint.c:11693
 msgid "No"
 msgstr "Nei!"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12710
+#: ../tuxpaint.c:12792
 msgid "Replace the picture with your changes?"
 msgstr "Vil du bytte ut den gamle tegningen med den nye?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12714
+#: ../tuxpaint.c:12796
 msgid "Yes, replace the old one!"
 msgstr "Ja, bytt ut den gamle!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12718
+#: ../tuxpaint.c:12800
 msgid "No, save a new file!"
 msgstr "Nei, lagre som en ny tegning!"
 
-#: ../tuxpaint.c:13963
+#: ../tuxpaint.c:14045
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Velg en tegning og trykk «Åpne»."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:14994 ../tuxpaint.c:15322
+#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Vel tegningene du vil ha, og trykk sjå på «Kjør»."
 
-#: ../tuxpaint.c:22344
+#: ../tuxpaint.c:22439
 msgid "Pick a color."
 msgstr "Velg en farge."
 
@@ -729,7 +743,7 @@ msgid "Color Shift"
 msgstr "Fargeskift"
 
 #: ../../magic/src/alien.c:67
-msgid "Click and move the mouse to change the colors in parts of your picture."
+msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr ""
 "Hold inne knappen og flytt rundt for å endre fargene på deler av tegningen."
 
@@ -762,17 +776,17 @@ msgid "Drip"
 msgstr "Drypping"
 
 #: ../../magic/src/blocks_chalk_drip.c:150
-msgid "Click and move the mouse around to make the picture blocky."
+msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "Hold inne knappen og flytt rundt for å gjøre tegningen «blokkete»."
 
 #: ../../magic/src/blocks_chalk_drip.c:153
 msgid ""
-"Click and move the mouse around to turn the picture into a chalk drawing."
+"Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr ""
 "Hold inne knappen og flytt rundt for å gjøre tegningen om til en krittegning."
 
 #: ../../magic/src/blocks_chalk_drip.c:156
-msgid "Click and move the mouse around to make the picture drip."
+msgid "Click and drag the mouse around to make the picture drip."
 msgstr "Hold inne knappen og flytt rundt for å gjøre tegningen dryppende."
 
 #: ../../magic/src/blur.c:80
@@ -780,7 +794,7 @@ msgid "Blur"
 msgstr "Uklar"
 
 #: ../../magic/src/blur.c:83
-msgid "Click and move the mouse around to blur the image."
+msgid "Click and drag the mouse around to blur the image."
 msgstr "Hold inne knappen og flytt rundt for å gjøre tegningen uskarp."
 
 #: ../../magic/src/blur.c:84
@@ -793,11 +807,11 @@ msgid "Bricks"
 msgstr "Murstein"
 
 #: ../../magic/src/bricks.c:131
-msgid "Click and move to draw large bricks."
+msgid "Click and drag to draw large bricks."
 msgstr "Hold inne knappen og flytt rundt for å tegne store mursteiner."
 
 #: ../../magic/src/bricks.c:133
-msgid "Click and move to draw small bricks."
+msgid "Click and drag to draw small bricks."
 msgstr "Hold inne knappen og flytt rundt for å tegne små mursteiner."
 
 #: ../../magic/src/calligraphy.c:127
@@ -805,7 +819,7 @@ msgid "Calligraphy"
 msgstr "Kalligrafi"
 
 #: ../../magic/src/calligraphy.c:134
-msgid "Click and move the mouse around to draw in calligraphy."
+msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Hold inne knappen og flytt rundt for å tegne kalligrafisk."
 
 #: ../../magic/src/cartoon.c:106
@@ -813,7 +827,7 @@ msgid "Cartoon"
 msgstr "Forsterk"
 
 #: ../../magic/src/cartoon.c:113
-msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr ""
 "Hold inne knappen og flytt rundt for å gjøre fargene klarere og strekene "
 "tydeligere."
@@ -851,7 +865,7 @@ msgid "Darken"
 msgstr "Mørkere"
 
 #: ../../magic/src/fade_darken.c:134
-msgid "Click and move the mouse to lighten parts of your picture."
+msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr ""
 "Hold inne knappen og flytt rundt for å gjøre deler av tegningen lysere."
 
@@ -860,7 +874,7 @@ msgid "Click to lighten your entire picture."
 msgstr "Trykk for å gjøre hele tegningen lysere."
 
 #: ../../magic/src/fade_darken.c:141
-msgid "Click and move the mouse to darken parts of your picture."
+msgid "Click and drag the mouse to darken parts of your picture."
 msgstr ""
 "Hold inne knappen og flytt rundt for å gjøre deler av tegningen mørkere."
 
@@ -918,12 +932,10 @@ msgid "Fretwork"
 msgstr "Pinneverk"
 
 #: ../../magic/src/fretwork.c:180
-#| msgid "Click and drag to draw string art aligned to the edges."
 msgid "Click and drag to draw repetitive patterns. "
 msgstr "Hold inne knappen og flytt rundt for å tegne mønster."
 
 #: ../../magic/src/fretwork.c:182
-#| msgid "Click to cover your picture with rain drops."
 msgid "Click to surround your picture with repetitive patterns."
 msgstr "Trykk for å dekke tegningen med mønster."
 
@@ -945,15 +957,14 @@ msgid "Grass"
 msgstr "Gress"
 
 #: ../../magic/src/grass.c:118
-msgid "Click and move to draw grass. Don’t forget the dirt!"
-msgstr "Hold inne knappen og flytt rundt for å tegne gress. Ikke glem jorden!"
+msgid "Click and drag to draw grass. Don’t forget the dirt!"
+msgstr "ŭHold inne knappen og flytt rundt for å tegne gress. Ikke glem jorden!"
 
 #: ../../magic/src/halftone.c:34
 msgid "Halftone"
 msgstr "Raster"
 
 #: ../../magic/src/halftone.c:38
-#| msgid "Click to turn your painting into its negative."
 msgid "Click and drag to turn your drawing into a newspaper."
 msgstr "Hold inne knappen og flytt rundt for gjøre tegningen om til en avis."
 
@@ -979,8 +990,6 @@ msgid "Kaleidoscope"
 msgstr "Kaleidoskop"
 
 #: ../../magic/src/kalidescope.c:136
-#| msgid ""
-#| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the left and right of your picture."
@@ -989,8 +998,6 @@ msgstr ""
 "speilbilder av hverandre til venstre og høyre."
 
 #: ../../magic/src/kalidescope.c:138
-#| msgid ""
-#| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the top and bottom of your picture."
@@ -999,16 +1006,13 @@ msgstr ""
 "speilbilder av hverandre til oppe og nede."
 
 #: ../../magic/src/kalidescope.c:140
-#| msgid "Click and drag the mouse to emboss the picture."
 msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr ""
 "Hold inne knappen og flytt rundt for å tegne et mønster over tegningen."
 
 #: ../../magic/src/kalidescope.c:142
-#| msgid ""
-#| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgid ""
-"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
 msgstr ""
 "Hold inne knappen og flytt rundt for å tegne et mønster pluss en symmetrisk "
@@ -1060,7 +1064,7 @@ msgstr "Mosaikk"
 
 #: ../../magic/src/mosaic.c:103
 msgid ""
-"Click and move the mouse to add a mosaic effect to parts of your picture."
+"Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr ""
 "Hold inne knappen og flytt rundt for å legge en mosaikk på deler av "
 "tegningen."
@@ -1069,62 +1073,48 @@ msgstr ""
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Trykk for å legge en mosaikk på hele tegningen."
 
-#: ../../magic/src/mosaic_shaped.c:142
-#| msgid "Square"
+#: ../../magic/src/mosaic_shaped.c:147
 msgid "Square Mosaic"
 msgstr "Kvadratisk mosaikk"
 
-#: ../../magic/src/mosaic_shaped.c:143
-#| msgid "Mosaic"
+#: ../../magic/src/mosaic_shaped.c:148
 msgid "Hexagon Mosaic"
 msgstr "Sekskantet mosaikk"
 
-#: ../../magic/src/mosaic_shaped.c:144
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Irregular Mosaic"
 msgstr "Uregelmessig mosaikk"
 
-#: ../../magic/src/mosaic_shaped.c:149
-#| msgid ""
-#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+#: ../../magic/src/mosaic_shaped.c:156
 msgid ""
-"Click and move the mouse to add a square mosaic to parts of your picture."
+"Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr ""
 "Hold inne knappen og flytt rundt for å legge en kvadratisk mosaikk på deler "
-"av "
-"tegningen."
+"av tegningen."
 
-#: ../../magic/src/mosaic_shaped.c:150
-#| msgid "Click to add a mosaic effect to your entire picture."
+#: ../../magic/src/mosaic_shaped.c:157
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Trykk for å legge en kvadratisk mosaikk på hele tegningen."
 
-#: ../../magic/src/mosaic_shaped.c:152
-#| msgid ""
-#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+#: ../../magic/src/mosaic_shaped.c:161
 msgid ""
-"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+"Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr ""
 "Hold inne knappen og flytt rundt for å legge en sekskantet mosaikk på deler "
-"av "
-"tegningen."
+"av tegningen."
 
-#: ../../magic/src/mosaic_shaped.c:153
-#| msgid "Click to add a mosaic effect to your entire picture."
+#: ../../magic/src/mosaic_shaped.c:162
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "Trykk for å legge en sekskantet mosaikk på hele tegningen."
 
-#: ../../magic/src/mosaic_shaped.c:155
-#| msgid ""
-#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+#: ../../magic/src/mosaic_shaped.c:166
 msgid ""
-"Click and move the mouse to add an irregular mosaic to parts of your picture."
+"Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr ""
-"Hold inne knappen og flytt rundt for å legge en uregelmessig mosaikk på deler "
-"av "
-"tegningen."
+"Hold inne knappen og flytt rundt for å legge en uregelmessig mosaikk på "
+"deler av tegningen."
 
-#: ../../magic/src/mosaic_shaped.c:156
-#| msgid "Click to add a mosaic effect to your entire picture."
+#: ../../magic/src/mosaic_shaped.c:167
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "Trykk for å legge en uregelmessig mosaikk på hele tegningen."
 
@@ -1133,7 +1123,7 @@ msgid "Negative"
 msgstr "Negativ"
 
 #: ../../magic/src/negative.c:106
-msgid "Click and move the mouse around to make your painting negative."
+msgid "Click and drag the mouse around to make your painting negative."
 msgstr "Hold inne knappen og flytt rundt for bytte om på fargene."
 
 #: ../../magic/src/negative.c:109
@@ -1145,7 +1135,7 @@ msgid "Noise"
 msgstr "Støy"
 
 #: ../../magic/src/noise.c:66
-msgid "Click and move the mouse to add noise to parts of your picture."
+msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr "Hold inne knappen og flytt rundt for å legge støy på tegningen."
 
 #: ../../magic/src/noise.c:67
@@ -1161,12 +1151,10 @@ msgid "Zoom"
 msgstr "Forstørr"
 
 #: ../../magic/src/perspective.c:151
-#| msgid "Click and drag the mouse to emboss the picture."
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "Trykk i hjørnene og dra der du vil strekke tegningen."
 
 #: ../../magic/src/perspective.c:154
-#| msgid "Click and drag to squirt toothpaste onto your picture."
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgstr ""
 "Hold inne knappen og flytt oppover for å forstørre tegningen, eller nedover "
@@ -1177,7 +1165,6 @@ msgid "Puzzle"
 msgstr "Puslespill"
 
 #: ../../magic/src/puzzle.c:112
-#| msgid "Click and drag to shift your picture around on the canvas."
 msgid "Click the part of your picture where would you like a puzzle."
 msgstr "Velg et område av tegningen du vil gjøre om til puslespill."
 
@@ -1218,7 +1205,6 @@ msgid "Real Rainbow"
 msgstr "Ekte regnbue"
 
 #: ../../magic/src/realrainbow.c:112
-#| msgid "Real Rainbow"
 msgid "ROYGBIV Rainbow"
 msgstr "ROGGBIF-regnbue"
 
@@ -1268,7 +1254,7 @@ msgid "Silhouette"
 msgstr "Silhuett"
 
 #: ../../magic/src/sharpen.c:78
-msgid "Click and move the mouse to trace edges in parts of your picture."
+msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr "Hold inne knappen og flytt rundt for å markere kantene i tegningen."
 
 #: ../../magic/src/sharpen.c:79
@@ -1276,7 +1262,7 @@ msgid "Click to trace edges in your entire picture."
 msgstr "Trykk for å markere kantene på hele tegningen."
 
 #: ../../magic/src/sharpen.c:80
-msgid "Click and move the mouse to sharpen parts of your picture."
+msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr "Hold inne knappen og flytt rundt for å gjøre tegningen skarpere."
 
 #: ../../magic/src/sharpen.c:81
@@ -1284,7 +1270,7 @@ msgid "Click to sharpen the entire picture."
 msgstr "Trykk for å gjøre hele tegningen skarpere."
 
 #: ../../magic/src/sharpen.c:82
-msgid "Click and move the mouse to create a black and white silhouette."
+msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr ""
 "Hold inne knappen og flytt rundt for å lage en silhuett i svart og hvitt."
 
@@ -1306,18 +1292,16 @@ msgstr "Gni ut"
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:108
-#| msgid "Metal Paint"
 msgid "Wet Paint"
 msgstr "Våt maling"
 
 #: ../../magic/src/smudge.c:115
-msgid "Click and move the mouse around to smudge the picture."
+msgid "Click and drag the mouse around to smudge the picture."
 msgstr "Hold inne knappen og flytt rundt for å gni tegningen utover."
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:117
-#| msgid "Click and move the mouse around to blur the image."
-msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr "Hold inne knappen og flytt rundt for å tegne med våt maling."
 
 #: ../../magic/src/snow.c:68
@@ -1375,7 +1359,7 @@ msgstr "Farge og hvitt"
 
 #: ../../magic/src/tint.c:75
 msgid ""
-"Click and move the mouse around to change the color of parts of your picture."
+"Click and drag the mouse around to change the color of parts of your picture."
 msgstr ""
 "Hold inne knappen og flytt rundt for å endre fargene på deler av tegningen."
 
@@ -1385,7 +1369,7 @@ msgstr "Trykk for å endre fargene på hele tegningen."
 
 #: ../../magic/src/tint.c:77
 msgid ""
-"Click and move the mouse around to turn parts of your picture into white and "
+"Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
 msgstr ""
 "Hold inne knappen og flytt rundt for å gjøre deler av tegningen hvit og en "
@@ -1456,17 +1440,14 @@ msgstr ""
 "til høyre for å lage lange bølger."
 
 #: ../../magic/src/xor.c:95
-#| msgid "Colors"
 msgid "Xor Colors"
 msgstr "XELLER-farger"
 
 #: ../../magic/src/xor.c:101
-#| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw a XOR effect"
 msgstr "Hold inne knappen og flytt rundt for å tegne med en XELLER-effekt."
 
 #: ../../magic/src/xor.c:103
-#| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "Trykk for å legge en XELLER-effekt på hele tegningen."
 

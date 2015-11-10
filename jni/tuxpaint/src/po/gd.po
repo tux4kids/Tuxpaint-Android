@@ -1,14 +1,14 @@
 # Translation of tuxpaint to Gaelic (Scottish) (gd).
-# Copyright (C) 2014 the Tuxpaint team.
+# Copyright (C) 2015 the Tuxpaint team.
 # This file is distributed under the same license as the tuxpaint package.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# GunChleoc <fios@foramnagaidhlig.net>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 17:43+0900\n"
-"PO-Revision-Date: 2014-08-17 08:52+0200\n"
+"POT-Creation-Date: 2015-10-08 18:37+0200\n"
+"PO-Revision-Date: 2015-05-02 20:16+0100\n"
 "Last-Translator: GunChleoc <fios@foramnagaidhlig.net>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "Language: gd\n"
@@ -123,11 +123,11 @@ msgstr "Bèis!"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:164
+#: ../dirwalk.c:168
 msgid "qx"
 msgstr "qx"
 
-#: ../dirwalk.c:164
+#: ../dirwalk.c:168
 msgid "QX"
 msgstr "QX"
 
@@ -137,48 +137,50 @@ msgstr "QX"
 #. especially important for users who have scroll buttons disabled.
 #. Translators should do whatever is needed to put crummy fonts last.
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:191
+#: ../dirwalk.c:195
 msgid "oO"
 msgstr "oO"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:194
+#: ../dirwalk.c:198
 msgid ",.?!"
 msgstr "’,.?!-"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:197
-msgid "`\\%_@$~#{<(^&*"
+#: ../dirwalk.c:201
+#, fuzzy
+#| msgid "`\\%_@$~#{<(^&*"
+msgid "`%_@$~#{<(^&*"
 msgstr "`\\%_@$~#{<(^&*┐⁊"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:200
+#: ../dirwalk.c:204
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:203
+#: ../dirwalk.c:207
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:206
+#: ../dirwalk.c:210
 msgid "1Il|"
 msgstr "1Il|"
 
-#: ../dirwalk.c:210
+#: ../dirwalk.c:214
 msgid "<1>spare-1a"
 msgstr "<1>spare-1a"
 
-#: ../dirwalk.c:211
+#: ../dirwalk.c:215
 msgid "<1>spare-1b"
 msgstr "<1>spare-1b"
 
-#: ../dirwalk.c:212
+#: ../dirwalk.c:216
 msgid "<9>spare-9a"
 msgstr "<9>spare-9a"
 
-#: ../dirwalk.c:213
+#: ../dirwalk.c:217
 msgid "<9>spare-9b"
 msgstr "<9>spare-9b"
 
@@ -233,57 +235,65 @@ msgid "ZH_TW"
 msgstr "Sìnis Thradaiseanta"
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:171 ../shapes.h:172
+#: ../shapes.h:234 ../shapes.h:235
 msgid "Square"
 msgstr "Ceàrnag"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:175 ../shapes.h:176
+#: ../shapes.h:238 ../shapes.h:239
 msgid "Rectangle"
 msgstr "Ceart-cheàrnach"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:179 ../shapes.h:180
+#: ../shapes.h:242 ../shapes.h:243
 msgid "Circle"
 msgstr "Cearcall"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:183 ../shapes.h:184
+#: ../shapes.h:246 ../shapes.h:247
 msgid "Ellipse"
 msgstr "Eileaps"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:187 ../shapes.h:188
+#: ../shapes.h:250 ../shapes.h:251
 msgid "Triangle"
 msgstr "Triantan"
 
 #. Pentagone shape tool (5 sides)
-#: ../shapes.h:191 ../shapes.h:192
+#: ../shapes.h:254 ../shapes.h:255
 msgid "Pentagon"
 msgstr "Còig-cheàrnach"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:195 ../shapes.h:196
+#: ../shapes.h:258 ../shapes.h:259
 msgid "Rhombus"
 msgstr "Rombas"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:199 ../shapes.h:200
+#: ../shapes.h:262 ../shapes.h:263
 msgid "Octagon"
 msgstr "Ochd-cheàrnach"
 
+#. Triangle star (3 points star)
+#. Rhombus star (4 points star)
+#. Pentagone star (5 points star)
+#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
+#: ../shapes.h:278 ../shapes.h:281
+msgid "Star"
+msgstr "Rionnag"
+
 #. Description of a square
-#: ../shapes.h:208 ../shapes.h:209
+#: ../shapes.h:290 ../shapes.h:291
 msgid "A square is a rectangle with four equal sides."
 msgstr ""
 "’S e ceart-chearnach le ceithir taobhan co-ionnan a th’ anns a’ cheàrnag."
 
 #. Description of a rectangle
-#: ../shapes.h:212 ../shapes.h:213
+#: ../shapes.h:294 ../shapes.h:295
 msgid "A rectangle has four sides and four right angles."
 msgstr "Tha ceithir taobhan is ceithir ceàrnan cearta aig ceàrnag."
 
-#: ../shapes.h:217 ../shapes.h:219
+#: ../shapes.h:299 ../shapes.h:301
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr ""
@@ -291,29 +301,41 @@ msgstr ""
 "gach puing."
 
 #. Description of an ellipse
-#: ../shapes.h:222 ../shapes.h:223
+#: ../shapes.h:304 ../shapes.h:305
 msgid "An ellipse is a stretched circle."
 msgstr "’S e cearcall air a shìneadh a th’ anns an eileaps."
 
 #. Description of a triangle
-#: ../shapes.h:226 ../shapes.h:227
+#: ../shapes.h:308 ../shapes.h:309
 msgid "A triangle has three sides."
 msgstr "Tha trì taobhan aig triantan."
 
 #. Description of a pentagon
-#: ../shapes.h:230 ../shapes.h:231
+#: ../shapes.h:312 ../shapes.h:313
 msgid "A pentagon has five sides."
 msgstr "Tha còig taobhan aig còig-cheàrnach."
 
-#: ../shapes.h:235 ../shapes.h:237
+#: ../shapes.h:317 ../shapes.h:319
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr ""
 "Tha ceithir taobhan dhen aon fhaide aig rombas, is tha na taobhan mu "
 "choinneamh co-shìnte."
 
-#: ../shapes.h:241 ../shapes.h:243
+#: ../shapes.h:323 ../shapes.h:325
 msgid "An octagon has eight equal sides."
 msgstr "Tha ochd taobhan de dh'fhaid co-ionnann aig ochd-cheàrnach."
+
+#: ../shapes.h:327 ../shapes.h:328
+msgid "A star with 3 points."
+msgstr "Rionnag le 3 puingean."
+
+#: ../shapes.h:329 ../shapes.h:330
+msgid "A star with 4 points."
+msgstr "Rionnag le 4 puingean."
+
+#: ../shapes.h:331 ../shapes.h:332
+msgid "A star with 5 points."
+msgstr "Rionnag le 5 puingean."
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -405,7 +427,7 @@ msgstr "Ùr"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7605
+#: ../tools.h:98 ../tuxpaint.c:7637
 msgid "Open"
 msgstr "Fosgail"
 
@@ -467,7 +489,7 @@ msgstr ""
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
-"and clicking an exist label, you can move it, edit it and change its text "
+"and clicking an existing label, you can move it, edit it and change its text "
 "style."
 msgstr ""
 "Tagh seòrsa de theacsa. Briog air an dealbh agad agus sgrìobh. Brùth air "
@@ -541,202 +563,202 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "Ceart ma-thà… Cumaidh sinn oirnn a' peantadh an fhir seo!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2040
+#: ../tuxpaint.c:2053
 msgid "Do you really want to quit?"
 msgstr "Am bu mhiann leat am prògram seo fhàgail dha-rìribh?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2043
+#: ../tuxpaint.c:2056
 msgid "Yes, I’m done!"
 msgstr "Bu mhiann, tha mi deiseil!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2046 ../tuxpaint.c:2073
+#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
 msgid "No, take me back!"
 msgstr "Cha bu mhiann, thoir air ais mi!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2050
+#: ../tuxpaint.c:2063
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Ma dh'fhàgas tu an seo, caillidh tu an dealbh agad! An sàbhail sinn e?"
 
-#: ../tuxpaint.c:2051 ../tuxpaint.c:2056
+#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
 msgid "Yes, save it!"
 msgstr "Sàbhailidh gu dearbh!"
 
-#: ../tuxpaint.c:2052 ../tuxpaint.c:2057
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
 msgid "No, don’t bother saving!"
 msgstr "Cha shàbhail, na bodraig leis!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2055
+#: ../tuxpaint.c:2068
 msgid "Save your picture first?"
 msgstr "An sàbhail sinn an dealbh agad an toiseach?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2060
+#: ../tuxpaint.c:2073
 msgid "Can’t open that picture!"
 msgstr "Chan urrainn dhomh an dealbh seo fhosgladh!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2063 ../tuxpaint.c:2068 ../tuxpaint.c:2077 ../tuxpaint.c:2084
-#: ../tuxpaint.c:2093
+#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
+#: ../tuxpaint.c:2106
 msgid "OK"
 msgstr "Ceart ma-thà"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2067
+#: ../tuxpaint.c:2080
 msgid "There are no saved files!"
 msgstr "Chan eil dealbhan air an sàbhaladh ann!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2071
+#: ../tuxpaint.c:2084
 msgid "Print your picture now?"
 msgstr "An clò-bhuail mi an dealbh agad an-dràsta?"
 
-#: ../tuxpaint.c:2072
+#: ../tuxpaint.c:2085
 msgid "Yes, print it!"
 msgstr "Clò-bhuail e!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2076
+#: ../tuxpaint.c:2089
 msgid "Your picture has been printed!"
 msgstr "Chlò-bhuail mi an dealbh agad!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2080
+#: ../tuxpaint.c:2093
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Tha mi duilich! Cha b' urrainn dhomh an dealbh agad a chlò-bhualadh!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2083
+#: ../tuxpaint.c:2096
 msgid "You can’t print yet!"
 msgstr "Chan urrainn dhut a chlò-bhualadh fhathast!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2087
+#: ../tuxpaint.c:2100
 msgid "Erase this picture?"
 msgstr "An sguab mi an dealbh seo às?"
 
-#: ../tuxpaint.c:2088
+#: ../tuxpaint.c:2101
 msgid "Yes, erase it!"
 msgstr "Sguabaidh!"
 
-#: ../tuxpaint.c:2089
+#: ../tuxpaint.c:2102
 msgid "No, don’t erase it!"
 msgstr "Cha sguab!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2092
+#: ../tuxpaint.c:2105
 msgid "Remember to use the left mouse button!"
 msgstr "Cuimhnich gun cleachd thu putan clì na luchaige agad!"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2300
+#: ../tuxpaint.c:2313
 msgid "Sound muted."
 msgstr "Fuaim air a mùchadh."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2305
+#: ../tuxpaint.c:2318
 msgid "Sound unmuted."
 msgstr "Fuaim air a neo-mhùchadh."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3052
+#: ../tuxpaint.c:3071
 msgid "Please wait…"
 msgstr "Fuirich greiseag…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7608
+#: ../tuxpaint.c:7640
 msgid "Erase"
 msgstr "Sgudail"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7611
+#: ../tuxpaint.c:7643
 msgid "Slides"
 msgstr "Sleamhnagan"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7614
+#: ../tuxpaint.c:7646
 msgid "Back"
 msgstr "Air ais"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7617
+#: ../tuxpaint.c:7649
 msgid "Next"
 msgstr "Air adhart"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7620
+#: ../tuxpaint.c:7652
 msgid "Play"
 msgstr "Cluich"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8328
+#: ../tuxpaint.c:8361
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11586
+#: ../tuxpaint.c:11689
 msgid "Yes"
 msgstr "Tha"
 
-#: ../tuxpaint.c:11590
+#: ../tuxpaint.c:11693
 msgid "No"
 msgstr "Chan eil"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12608
+#: ../tuxpaint.c:12792
 msgid "Replace the picture with your changes?"
 msgstr "An cuir mi na h-atharraichean agad an àite an deilbh?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12612
+#: ../tuxpaint.c:12796
 msgid "Yes, replace the old one!"
 msgstr "Cuiridh, cuir an aite an t-seann fhir e!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12616
+#: ../tuxpaint.c:12800
 msgid "No, save a new file!"
 msgstr "Cha chuir, sàbhail ann am faidhle ùr e!"
 
-#: ../tuxpaint.c:13861
+#: ../tuxpaint.c:14045
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Tagh an dealbh a tha thu ag iarraidh is briog air \"Fosgail\"."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:14892 ../tuxpaint.c:15220
+#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Tagh na dealbhan a tha thu ag iarraidh is briog air \"Cluich\"."
 
-#: ../tuxpaint.c:22159
+#: ../tuxpaint.c:22439
 msgid "Pick a color."
 msgstr "Tagh dath."
 
 #: ../tuxpaint.desktop.in.h:1
-msgid "A drawing program for children."
-msgstr "Prògram peantaidh do chloinn."
+msgid "Tux Paint"
+msgstr "Tux Paint"
 
 #: ../tuxpaint.desktop.in.h:2
 msgid "Drawing program"
 msgstr "Prògram peantaidh"
 
 #: ../tuxpaint.desktop.in.h:3
-msgid "Tux Paint"
-msgstr "Tux Paint"
+msgid "A drawing program for children."
+msgstr "Prògram peantaidh do chloinn."
 
 #: ../../magic/src/alien.c:64
 msgid "Color Shift"
 msgstr "Mùthadh datha"
 
 #: ../../magic/src/alien.c:67
-msgid "Click and move the mouse to change the colors in parts of your picture."
+msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr ""
-"Briog is gluais an luchag gus car a chur air na dathan ann am pàirt dhen "
+"Briog is slaod an luchag gus car a chur air na dathan ann am pàirt dhen "
 "dealbh agad."
 
 #: ../../magic/src/alien.c:68
@@ -768,31 +790,30 @@ msgid "Drip"
 msgstr "Sil"
 
 #: ../../magic/src/blocks_chalk_drip.c:150
-msgid "Click and move the mouse around to make the picture blocky."
+msgid "Click and drag the mouse around to make the picture blocky."
 msgstr ""
-"Briog is gluais an luchag mu thimcheall gus an tèid an dealbh 'na "
+"Briog is slaod an luchag mu thimcheall gus an tèid an dealbh 'na "
 "bhlocaichean."
 
 #: ../../magic/src/blocks_chalk_drip.c:153
 msgid ""
-"Click and move the mouse around to turn the picture into a chalk drawing."
+"Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr ""
-"Briog is gluais an luchag mu thimcheall gus an tèid an dealbh 'na dhealbh "
+"Briog is slaod an luchag mu thimcheall gus an tèid an dealbh 'na dhealbh "
 "cailce."
 
 #: ../../magic/src/blocks_chalk_drip.c:156
-msgid "Click and move the mouse around to make the picture drip."
+msgid "Click and drag the mouse around to make the picture drip."
 msgstr ""
-"Briog is gluais an luchag mu thimcheall gus sileadh a thoirt air an dealbh."
+"Briog is slaod an luchag mu thimcheall gus sileadh a thoirt air an dealbh."
 
 #: ../../magic/src/blur.c:80
 msgid "Blur"
 msgstr "Sgleò"
 
 #: ../../magic/src/blur.c:83
-msgid "Click and move the mouse around to blur the image."
-msgstr ""
-"Briog is gluais an luchag mu thimcheall gus sgleò a chur air an dealbh."
+msgid "Click and drag the mouse around to blur the image."
+msgstr "Briog is slaod an luchag mu thimcheall gus sgleò a chur air an dealbh."
 
 #: ../../magic/src/blur.c:84
 msgid "Click to blur the entire image."
@@ -804,15 +825,15 @@ msgid "Bricks"
 msgstr "Breigichean"
 
 #: ../../magic/src/bricks.c:131
-msgid "Click and move to draw large bricks."
+msgid "Click and drag to draw large bricks."
 msgstr ""
-"Briog is gluais an luchag mu thimcheall gus an tèid an dealbh 'na "
+"Briog is slaod an luchag mu thimcheall gus an tèid an dealbh 'na "
 "bhreigichean mòra."
 
 #: ../../magic/src/bricks.c:133
-msgid "Click and move to draw small bricks."
+msgid "Click and drag to draw small bricks."
 msgstr ""
-"Briog is gluais an luchag mu thimcheall gus tèid an dealbh 'na bhreigichean "
+"Briog is slaod an luchag mu thimcheall gus tèid an dealbh 'na bhreigichean "
 "beaga."
 
 #: ../../magic/src/calligraphy.c:127
@@ -820,19 +841,18 @@ msgid "Calligraphy"
 msgstr "Snas-sgrìobhadh"
 
 #: ../../magic/src/calligraphy.c:134
-msgid "Click and move the mouse around to draw in calligraphy."
+msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr ""
-"Briog is gluais an luchag mu thimcheall gus peantadh ann an stoidhle "
-"snasail."
+"Briog is slaod an luchag mu thimcheall gus peantadh ann an stoidhle snasail."
 
 #: ../../magic/src/cartoon.c:106
 msgid "Cartoon"
 msgstr "Cartùn"
 
 #: ../../magic/src/cartoon.c:113
-msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr ""
-"Briog is gluais an luchag mu thimcheall gus an tèid an dealbh 'na chartùn."
+"Briog is slaod an luchag mu thimcheall gus an tèid an dealbh 'na chartùn."
 
 #: ../../magic/src/confetti.c:85
 msgid "Confetti"
@@ -867,10 +887,9 @@ msgid "Darken"
 msgstr "Dorch"
 
 #: ../../magic/src/fade_darken.c:134
-msgid "Click and move the mouse to lighten parts of your picture."
+msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr ""
-"Briog is gluais an luchag gus pàirt dhen dealbh agad a dhèanamh nas "
-"soilleire."
+"Briog is slaod an luchag gus pàirt dhen dealbh agad a dhèanamh nas soilleire."
 
 #: ../../magic/src/fade_darken.c:136
 msgid "Click to lighten your entire picture."
@@ -878,9 +897,9 @@ msgstr ""
 "Briog is gluais an luchag gus an dealbh gu lèir a dhèanamh nas soilleire."
 
 #: ../../magic/src/fade_darken.c:141
-msgid "Click and move the mouse to darken parts of your picture."
+msgid "Click and drag the mouse to darken parts of your picture."
 msgstr ""
-"Briog is gluais an luchag gus pàirt dhen dealbh agad a dhèanamh nas duirche."
+"Briog is slaod an luchag gus pàirt dhen dealbh agad a dhèanamh nas duirche."
 
 #: ../../magic/src/fade_darken.c:143
 msgid "Click to darken your entire picture."
@@ -966,7 +985,7 @@ msgid "Grass"
 msgstr "Feur"
 
 #: ../../magic/src/grass.c:118
-msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "Briog is slaod gus feur a pheantadh. Na dìochuimhnich an talamh!"
 
 #: ../../magic/src/halftone.c:34
@@ -1020,11 +1039,11 @@ msgstr "Briog is slaod an luchag gus pàtran a chur thairis air an dealbh."
 
 #: ../../magic/src/kalidescope.c:142
 msgid ""
-"Click and drag the mouse to draw a pattern plus its symmetric across the "
+"Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
 msgstr ""
-"Briog is slaod an luchag gus pàtran agus am pàtran co-chothromach aige a "
-"pheantadh thairis air an dealbh."
+"Briog is slaod an luchag gus pàtran co-chothromach a pheantadh thairis air "
+"an dealbh."
 
 #. KAL_BOTH
 #: ../../magic/src/kalidescope.c:144
@@ -1072,7 +1091,7 @@ msgstr "Mosàig"
 
 #: ../../magic/src/mosaic.c:103
 msgid ""
-"Click and move the mouse to add a mosaic effect to parts of your picture."
+"Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr ""
 "Briog is slaod an luchag gus èifeachd mosàig a chur ri pàirt dhen dealbh "
 "agad."
@@ -1082,52 +1101,52 @@ msgid "Click to add a mosaic effect to your entire picture."
 msgstr ""
 "Briog is slaod an luchag gus èifeachd mosàig a chur ris an dealbh gu lèir."
 
-#: ../../magic/src/mosaic_shaped.c:142
+#: ../../magic/src/mosaic_shaped.c:147
 msgid "Square Mosaic"
 msgstr "Mosàig cheàrnach"
 
-#: ../../magic/src/mosaic_shaped.c:143
+#: ../../magic/src/mosaic_shaped.c:148
 msgid "Hexagon Mosaic"
 msgstr "Mosàig shia-cheàrnach"
 
-#: ../../magic/src/mosaic_shaped.c:144
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Irregular Mosaic"
 msgstr "Mosàig neo-riaghailteach"
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:156
 msgid ""
-"Click and move the mouse to add a square mosaic to parts of your picture."
+"Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr ""
 "Briog is slaod an luchag gus èifeachd mosàig cheàrnach a chur ri pàirt dhen "
 "dealbh agad."
 
-#: ../../magic/src/mosaic_shaped.c:150
+#: ../../magic/src/mosaic_shaped.c:157
 msgid "Click to add a square mosaic to your entire picture."
 msgstr ""
 "Briog is slaod an luchag gus èifeachd mosàig cheàrnach a chur ris an dealbh "
 "gu lèir."
 
-#: ../../magic/src/mosaic_shaped.c:152
+#: ../../magic/src/mosaic_shaped.c:161
 msgid ""
-"Click and move the mouse to add a hexagonal mosaic to parts of your picture."
+"Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr ""
 "Briog is slaod an luchag gus èifeachd mosàig sia-cheàrnach a chur ri pàirt "
 "dhen dealbh agad."
 
-#: ../../magic/src/mosaic_shaped.c:153
+#: ../../magic/src/mosaic_shaped.c:162
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr ""
 "Briog is slaod an luchag gus èifeachd mosàig shia-cheàrnach a chur ris an "
 "dealbh gu lèir."
 
-#: ../../magic/src/mosaic_shaped.c:155
+#: ../../magic/src/mosaic_shaped.c:166
 msgid ""
-"Click and move the mouse to add an irregular mosaic to parts of your picture."
+"Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr ""
 "Briog is slaod an luchag gus èifeachd mosàig neo-riaghailteach a chur ri "
 "pàirt dhen dealbh agad."
 
-#: ../../magic/src/mosaic_shaped.c:156
+#: ../../magic/src/mosaic_shaped.c:167
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr ""
 "Briog is slaod an luchag gus èifeachd mosàig neo-riaghailteach a chur ris an "
@@ -1138,7 +1157,7 @@ msgid "Negative"
 msgstr "Ais-thionndaidh"
 
 #: ../../magic/src/negative.c:106
-msgid "Click and move the mouse around to make your painting negative."
+msgid "Click and drag the mouse around to make your painting negative."
 msgstr ""
 "Briog is slaod an luchag gus na dathan ann am pàirt dhen dealbh agad ais-"
 "thionndadh."
@@ -1153,7 +1172,7 @@ msgid "Noise"
 msgstr "Riasladh"
 
 #: ../../magic/src/noise.c:66
-msgid "Click and move the mouse to add noise to parts of your picture."
+msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr ""
 "Briog is slaod an luchag gus riasladh a thoirt air pàirt dhen dealbh agad."
 
@@ -1202,6 +1221,14 @@ msgid "Click and drag to draw train track rails on your picture."
 msgstr ""
 "Briog is slaod gus rèilean rathaid-iarainn a pheantadh air an dealbh agad."
 
+#: ../../magic/src/rainbow.c:139
+msgid "Rainbow"
+msgstr "Dathan bogha-froise"
+
+#: ../../magic/src/rainbow.c:146
+msgid "You can draw in rainbow colors!"
+msgstr "'S urrainn dhut peantadh le dathan na bogha-froise!"
+
 #: ../../magic/src/rain.c:65
 msgid "Rain"
 msgstr "Uisge"
@@ -1213,14 +1240,6 @@ msgstr "Briog gus druthag uisge a chur air an dealbh agad."
 #: ../../magic/src/rain.c:69
 msgid "Click to cover your picture with rain drops."
 msgstr "Briog gus an dealbh agad a chòmhdachadh le druthagan uisge."
-
-#: ../../magic/src/rainbow.c:139
-msgid "Rainbow"
-msgstr "Dathan bogha-froise"
-
-#: ../../magic/src/rainbow.c:146
-msgid "You can draw in rainbow colors!"
-msgstr "'S urrainn dhut peantadh le dathan na bogha-froise!"
 
 #: ../../magic/src/realrainbow.c:110
 msgid "Real Rainbow"
@@ -1275,7 +1294,7 @@ msgid "Silhouette"
 msgstr "Sgàil-riochd"
 
 #: ../../magic/src/sharpen.c:78
-msgid "Click and move the mouse to trace edges in parts of your picture."
+msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr "Briog is slaod gus oirean a nochdadh ann am pàirt dhen dealbh agad."
 
 #: ../../magic/src/sharpen.c:79
@@ -1283,7 +1302,7 @@ msgid "Click to trace edges in your entire picture."
 msgstr "Briog is slaod gus oirean a nochdadh san dealbh gu lèir."
 
 #: ../../magic/src/sharpen.c:80
-msgid "Click and move the mouse to sharpen parts of your picture."
+msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr "Briog is slaod gus pàirt dhen dealbh agad a gheurachadh."
 
 #: ../../magic/src/sharpen.c:81
@@ -1291,7 +1310,7 @@ msgid "Click to sharpen the entire picture."
 msgstr "Briog is slaod gus an dealbh gu lèir a gheurachadh."
 
 #: ../../magic/src/sharpen.c:82
-msgid "Click and move the mouse to create a black and white silhouette."
+msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr "Briog is slaod an luchag gus sgàil-riochd dubh is geal a chruthachadh."
 
 #: ../../magic/src/sharpen.c:83
@@ -1317,14 +1336,14 @@ msgid "Wet Paint"
 msgstr "Peant fliuch"
 
 #: ../../magic/src/smudge.c:115
-msgid "Click and move the mouse around to smudge the picture."
-msgstr "Briog is gluais an luchag mu thimcheall gus an dealbh a smalachadh."
+msgid "Click and drag the mouse around to smudge the picture."
+msgstr "Briog is slaod an luchag mu thimcheall gus an dealbh a smalachadh."
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:117
-msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr ""
-"Briog is gluais an luchag mu thimcheall gus peantadh le peant fliuch is "
+"Briog is slaod an luchag mu thimcheall gus peantadh le peant fliuch is "
 "smeurach."
 
 #: ../../magic/src/snow.c:68
@@ -1382,9 +1401,9 @@ msgstr "Dath ⁊ geal"
 
 #: ../../magic/src/tint.c:75
 msgid ""
-"Click and move the mouse around to change the color of parts of your picture."
+"Click and drag the mouse around to change the color of parts of your picture."
 msgstr ""
-"Briog is gluais an luchag mu thimcheall gus na dathan ann am pàirt dhen "
+"Briog is slaod an luchag mu thimcheall gus na dathan ann am pàirt dhen "
 "dealbh agad atharrachadh."
 
 #: ../../magic/src/tint.c:76
@@ -1393,7 +1412,7 @@ msgstr "Briog gus an dath atharrachadh san dealbh gu lèir."
 
 #: ../../magic/src/tint.c:77
 msgid ""
-"Click and move the mouse around to turn parts of your picture into white and "
+"Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
 msgstr ""
 "Briog is slaod an luchag mu thimcheall gus pàirt dhen dealbh agad a "
@@ -1469,17 +1488,14 @@ msgstr ""
 "thonnan as lugha, is mu dheas airson thonnan as fhaide."
 
 #: ../../magic/src/xor.c:95
-#| msgid "Colors"
 msgid "Xor Colors"
 msgstr "Dathan XOR"
 
 #: ../../magic/src/xor.c:101
-#| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw a XOR effect"
 msgstr "Briog is slaod gus èifeachd XOR a pheantadh."
 
 #: ../../magic/src/xor.c:103
-#| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr ""
 "Briog is slaod an luchag gus èifeachd XOR  a chur ris an dealbh gu lèir."
