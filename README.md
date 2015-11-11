@@ -180,6 +180,9 @@ If you have Eclipse, then run:
 1. right click Tux Paint-Android project
 2. Run As -> Android Application
 
+If you want to regenerate the .zip assets file run:
+cd jni/tuxpaint && ./mkzip_assets.sh
+
 Tips for Play
 ===========
 1. Sometimes if you cannot save your painted work, you should make sure:
