@@ -1483,6 +1483,12 @@ static SDL_Surface *render_text(TuxPaint_Font * restrict font,
     fflush(stdout);
 #endif
 
+#ifdef __ANDROID__
+    /* FIXME This extrange workaround helps in getting the translations working
+       on 4.3 4.4 */
+    SDLPango_SetLanguage(font->pango_context, "ca");
+#endif
+
     SDLPango_SetDefaultColor(font->pango_context, &pango_color);
     SDLPango_SetText(font->pango_context, str, -1);
     ret = SDLPango_CreateSurfaceDraw(font->pango_context);
