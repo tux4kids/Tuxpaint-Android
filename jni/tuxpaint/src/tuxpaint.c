@@ -16514,13 +16514,36 @@ void do_print(void)
   }
   
 #elif defined(__ANDROID__) 
-  const char *error = SurfacePrint(save_canvas);
+
+  int x, y;
+  Uint8 src_r, src_g, src_b, src_a;
+  SDL_Surface * save_canvas_and =  SDL_CreateRGBSurface(0,
+				WINDOW_WIDTH - (96 * 2),
+				(48 * 7) + 40 + HEIGHTOFFSET,
+				screen->format->BitsPerPixel,
+				screen->format->Rmask,
+				screen->format->Gmask,
+				screen->format->Bmask, 0);
+
+
+  for (x = 0; x<save_canvas->w; x++)
+    for (y = 0; y<save_canvas->h; y++)
+      {
+	SDL_GetRGBA(getpixels[save_canvas->format->BytesPerPixel](save_canvas, x, y),
+		    save_canvas->format, &src_r, &src_g, &src_b, &src_a);
+
+	putpixels[save_canvas_and->format->BytesPerPixel](save_canvas_and, x, y,
+					     SDL_MapRGBA(save_canvas_and->format, src_r, src_g, src_b, SDL_ALPHA_OPAQUE));
+      }
+
+  const char *error = SurfacePrint(save_canvas_and);
 
   if (error)
   {
     fprintf(stderr, "Cannot print: %s\n", error);
     do_prompt_snd(error, PROMPT_PRINT_YES, "", SND_TUXOK, 0, 0);
   }
+  SDL_FreeSurface(save_canvas_and);
   #endif
 
 #endif
