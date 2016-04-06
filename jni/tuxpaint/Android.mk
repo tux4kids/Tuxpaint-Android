@@ -1,6 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 
-########### Mian tuxpaint library ###########
+########### Main tuxpaint library ###########
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := tuxpaint

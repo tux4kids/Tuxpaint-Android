@@ -29,6 +29,7 @@ import android.widget.ToggleButton;
 public class ConfigActivity extends Activity {
 	private static final String TAG = ConfigActivity.class.getSimpleName();
    	String[] locales = null;
+   	String[] printdelays = null;
 	private Properties props = null;
 	// current the configurable properties
 	String autosave = null;
@@ -38,6 +39,8 @@ public class ConfigActivity extends Activity {
 	String datadir = null;
 	String saveover = null;
 	String startblank = null;
+	String print = null;
+	String printdelay = null;
 	
 	EditText savedirView = null;
 	EditText datadirView = null;
@@ -46,6 +49,8 @@ public class ConfigActivity extends Activity {
 	ToggleButton startblankToggle = null;
 	Spinner localeSpinner = null;
 	RadioGroup saveoverGroup = null;
+	ToggleButton printToggle = null;
+	Spinner printdelaySpinner = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +165,43 @@ public class ConfigActivity extends Activity {
 						 saveover = "new";
 				}
 			});
+
+		printToggle = (ToggleButton)this.findViewById(R.id.togglePrint);
+		if (print.compareTo("yes") == 0)
+			printToggle.setChecked(true);
+		else
+			printToggle.setChecked(false);
+		printToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked)
+					print = "yes";
+				else
+					print = "no";
+			}
+		});
+
+		printdelays = getResources().getStringArray(R.array.printdelays);
+		int indexpd = 0;
+		for (; indexpd != printdelays.length; indexpd++){
+			if (printdelays[indexpd].compareTo(printdelay) == 0)
+				break;
+		}
+		if(indexpd==printdelays.length)
+		    indexpd = 0;
+       	printdelaySpinner = (Spinner) findViewById(R.id.spinnerPrintdelay);
+		printdelaySpinner.setSelection(indexpd); 
+		printdelaySpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+					public void onItemSelected(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						printdelay = printdelays[arg2];
+					}
+					public void onNothingSelected(AdapterView<?> arg0) {
+					}
+                });
+		
+
+
 	}
 	
     @Override
@@ -189,8 +231,10 @@ public class ConfigActivity extends Activity {
 	    	 savedir = props.getProperty("savedir", internal.getAbsolutePath());
 	    	 datadir = props.getProperty("datadir", internal.getAbsolutePath());
 	    	 locale = props.getProperty("locale", Locale.getDefault().toString());
+	    	 print = props.getProperty("print", "no");
+	    	 printdelay = props.getProperty("printdelay", "0");
 	    	 
-	         Log.v(TAG, autosave + " " + sound + " " + saveover + " " + savedir+ " "+datadir+ " " + locale);;
+	         Log.v(TAG, autosave + " " + sound + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + print + " " + printdelay);;
 	}
 	
 	private void save () {
@@ -203,6 +247,8 @@ public class ConfigActivity extends Activity {
         props.put("savedir", savedir);
         props.put("datadir", datadir);
         props.put("locale", locale);
+	props.put("print", print);
+        props.put("printdelay", printdelay);
 
 		try {
 	 	  	OutputStream	out = new FileOutputStream(cfg);
