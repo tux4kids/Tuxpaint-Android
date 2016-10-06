@@ -6,18 +6,25 @@ Copyright (c) 2002-2015 by Bill Kendrick and others
 bill@newbreedsoftware.com
 http://www.tuxpaint.org/
 
-$Id: CHANGES.txt,v 1.836 2015/04/02 22:49:04 perepujal Exp $
+$Id: CHANGES.txt,v 1.840 2016/09/19 21:20:06 perepujal Exp $
 
 201x.xxx.x (0.9.23)
+  * New color selector
+    ------------------
+      Pere Pujal i Carabantes
 
   * New shapes
     ----------
     * Stars
       Pere Pujal i Carabantes
 
+  * Documentation updates
+    ---------------------
+    * Made stamp controls (size, flip, mirror) section clearer.
+      Fixes https://sourceforge.net/p/tuxpaint/bugs/182/
+
   * New locales
     -----------
-
     * Bengali
       Provided by chandrakant dhutadmal
 
@@ -38,14 +45,34 @@ $Id: CHANGES.txt,v 1.836 2015/04/02 22:49:04 perepujal Exp $
     * Urdu
       Provided by chandrakant dhutadmal
 
-
   * Localization Updates:
     ---------------------
+    * Danish translation
+      Joe Hansen <joedalton2@yahoo.dk>
+
     * Estonian translation
-      "Sven Ollino" <sven.ollino@gmail.com>
+      Sven Ollino <sven.ollino@gmail.com>
+
+    * French translation
+      Chion Jacques <jacques.chion@orange.fr> 
+
+    * Gaelic (Irish) translation
+      Kevin Scannell <kscanne@gmail.com>
 
     * Galician translation
       Miguel Bouzada
+
+    * Georgian translation
+      Gia Shervashidze <giasher@gmail.com>
+
+    * Icelandic translation
+      Sveinn í Felli <sv1@fellsnet.is>
+
+    * Korean translation
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Russian translaton
+      Yuri Kozlov
 
     * Scottish translation
       Fòram na Gàidhlig
@@ -53,6 +80,12 @@ $Id: CHANGES.txt,v 1.836 2015/04/02 22:49:04 perepujal Exp $
     * Thai translation
       Nudjaree <poonim_p@hotmail.com>
 
+  * Bug Fixes
+    ---------
+    * Crash if any "mosaic" magic tool used, Xubuntu 15.10
+      If the PNG patterns used to generate the effect were compressed the wrong(lossy) way,
+      the program will crash
+      (SF.net Bug #210)
 
 2014.August.5 (0.9.22)
 

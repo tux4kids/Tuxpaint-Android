@@ -117,7 +117,6 @@ void puzzle_release(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED
 	           SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
 	           int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
-  api->playsound(puzzle_snd, 128, 255);
 }
 
 void puzzle_shutdown(magic_api * api ATTRIBUTE_UNUSED)
@@ -215,6 +214,7 @@ static void puzzle_draw(void * ptr, int which_tool ATTRIBUTE_UNUSED,
   
   SDL_BlitSurface(canvas, &rect_this, canvas, &rect_that);
   SDL_BlitSurface(canvas_backup, &rect_that, canvas, &rect_this);
+  api->playsound(puzzle_snd, (x * 255) / canvas->w, 255);
   }
 }
 

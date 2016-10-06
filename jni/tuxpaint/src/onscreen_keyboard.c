@@ -1742,7 +1742,7 @@ struct osk_keyboard * osk_clicked(on_screen_keyboard *keyboard, int x, int y)
 	event.key.keysym.sym = SDLK_BACKSPACE;
 	event.text.text[0] = '\b';
       }
-      else if (wcsncmp(L"NoSymbol", ks, 8 == 0))
+      else if (wcsncmp(L"NoSymbol", ks, 8) == 0)
 	return(keyboard);
 
       else
