@@ -54,5 +54,6 @@ then
 	zip ../tuxpaint-tmp.zip -r * && \
 	cd .. && \
 	rm -rf tmpzip && \
+	mkdir -p ../../assets &&\
 	mv tuxpaint-tmp.zip ../../assets/tuxpaint.zip
 fi
