@@ -316,6 +316,7 @@ extern WrapperData macosx;
 
 #ifdef __ANDROID__
 
+#define AUTOSAVE_GOING_BACKGROUND
 #include "android_print.h"
 
 #else
@@ -495,6 +496,7 @@ static void mtw(wchar_t * wtok, char * tok)
 #error "---------------------------------------------------"
 #endif
 
+#define AUTOSAVED_NAME "AUTOSAVED"
 //#include "SDL_getenv.h"
 
 #include "i18n.h"
@@ -1942,7 +1944,7 @@ static void free_surface_array(SDL_Surface * surface_array[], int count);
 static void do_shape(int cx, int cy, int ox, int oy, int rotn, int use_brush);
 static int shape_rotation(int ctr_x, int ctr_y, int ox, int oy);
 static int brush_rotation(int ctr_x, int ctr_y, int ox, int oy);
-static int do_save(int tool, int dont_show_success_results);
+static int do_save(int tool, int dont_show_success_results, int autosave);
 static int do_png_save(FILE * fi, const char *const fname,
 		       SDL_Surface * surf, int embed);
 static void load_embedded_data(char * fname, SDL_Surface * org_surf);
@@ -2235,6 +2237,12 @@ static void mainloop(void)
 
   unsigned int i = 0;
 
+#ifdef AUTOSAVE_GOING_BACKGROUND
+  char *fname;
+  char tmp[1024];
+  FILE *fi;
+#endif
+
   Uint32 TP_SDL_MOUSEBUTTONSCROLL = SDL_RegisterEvents(1);
   SDL_TimerID scrolltimer = NULL;
   SDL_Event event;
@@ -2321,6 +2329,33 @@ static void mainloop(void)
 	  }
 	}
       }
+#ifdef AUTOSAVE_GOING_BACKGROUND
+      else if (event.type == SDL_APP_DIDENTERBACKGROUND)
+      {
+	/* Triggers a save to a temporary file in case the app is killed later.
+	   That file should be deleted if tuxpaint continues without being killed but it contains unsaved data
+	   so it must be used as the next start drawing if tuxpaint is killed.
+	   Also a reference to the actual file being drawn should be kept and restored. */
+	if(!been_saved)
+	{
+	  do_save(cur_tool, 0, 1);
+	  save_current();
+	}
+      }
+      else if (event.type == SDL_APP_DIDENTERFOREGROUND)
+      {
+	/* Discard the temp file saved before as the user takes again control */
+	snprintf(tmp, sizeof(tmp), "saved/%s%s", AUTOSAVED_NAME, FNAME_EXTENSION);
+	fname = get_fname(tmp, DIR_SAVE);
+	fi = fopen(fname, "wb");
+	if (fi != NULL)
+	{
+	  fclose(fi);
+	  unlink(fname);
+	  free(fname);
+	}
+      }
+#endif
       else if (event.type == SDL_WINDOWEVENT)
       {
 	/* Reset Shapes tool and clean the canvas if we lose focus*/
@@ -2617,7 +2652,7 @@ static void mainloop(void)
           magic_switchout(canvas);
 	  hide_blinking_cursor();
 
-	  if (do_save(cur_tool, 0))
+	  if (do_save(cur_tool, 0, 0))
 	  {
 	    /* Only think it's been saved if it HAS been saved :^) */
 
@@ -3341,7 +3376,7 @@ printf("screenrectr_tools %d, %d, %d, %d\n", r_tools.x, r_tools.y, r_tools.w, r_
 	    }
 	    else if (cur_tool == TOOL_SAVE)
 	    {
-	      if (do_save(old_tool, 0))
+	      if (do_save(old_tool, 0, 0))
 	      {
 		been_saved = 1;
 		tool_avail[TOOL_SAVE] = 0;
@@ -11671,16 +11706,12 @@ static void load_template(char *img_id)
 }
 
 
-/* Load current (if any) image: */
-
-static void load_current(void)
-{
-  SDL_Surface *tmp, *org_surf;
-  char *fname;
-  char ftmp[1024];
-  FILE *fi;
 
   /* Determine the current picture's ID: */
+static void determine_id(void)
+{
+  char *fname;
+  FILE *fi;
 
   fname = get_fname("current_id.txt", DIR_SAVE);
 
@@ -11707,7 +11738,39 @@ static void load_current(void)
   }
 
   free(fname);
+}
 
+
+/* Load current (if any) image: */
+
+static void load_current(void)
+{
+  SDL_Surface *tmp, *org_surf;
+  char *fname;
+  char ftmp[1024];
+  FILE *fi;
+
+  int found_autosaved = 0;
+
+#ifdef AUTOSAVE_GOING_BACKGROUND
+  /* Look for an automatically saved file */
+
+  snprintf(ftmp, sizeof(ftmp),"saved/%s%s", AUTOSAVED_NAME, FNAME_EXTENSION);
+  fname = get_fname(ftmp, DIR_SAVE);
+
+  fi = fopen(fname, "r");
+  if (fi != NULL)
+  {
+    snprintf(file_id, sizeof(file_id), "%s", AUTOSAVED_NAME);
+    file_id[strlen(file_id)] = '\0';
+    found_autosaved = 1;
+    fclose(fi);
+    free(fname);
+  }
+#endif
+
+  if (!found_autosaved)
+    determine_id();
 
   /* Load that image: */
 
@@ -11766,6 +11829,24 @@ static void load_current(void)
     }
 
     free(fname);
+  }
+
+  if (!found_autosaved)
+  {
+    been_saved = 1;
+    tool_avail[TOOL_SAVE] = 0;
+  }
+  {
+    /* Set file_id to the draw that were edited when the autosave triggered */
+    determine_id();
+    snprintf(ftmp, sizeof(ftmp), "saved/%s%s", AUTOSAVED_NAME, FNAME_EXTENSION);
+    fname = get_fname(ftmp, DIR_SAVE);
+    unlink (fname);
+    free(fname);
+
+    /* The autosaved file comes from work that was not explicitely saved */
+    been_saved = 0;
+    tool_avail[TOOL_SAVE] = 1;
   }
 }
 
@@ -13037,15 +13118,15 @@ static int brush_rotation(int ctr_x, int ctr_y, int ox, int oy)
 
 /* Save the current image: */
 
-static int do_save(int tool, int dont_show_success_results)
+static int do_save(int tool, int dont_show_success_results, int autosave)
 {
   char *fname;
   char tmp[1024];
   SDL_Surface *thm;
   FILE *fi;
-  /* Was saving completely disabled? */
 
-  if (disable_save)
+  /* Was saving completely disabled? */
+  if (disable_save && !autosave)
     return 0;
 
   tmp_apply_uncommited_text();
@@ -13053,7 +13134,11 @@ static int do_save(int tool, int dont_show_success_results)
   SDL_BlitSurface(canvas, NULL, save_canvas, NULL);
   SDL_BlitSurface(label, NULL, save_canvas, NULL);
 
-  if (promptless_save == SAVE_OVER_NO)
+  if (autosave)
+    {
+    /* No prompts, no progressbar, always save to autosave.png */
+  }
+  else if (promptless_save == SAVE_OVER_NO)
   {
     /* Never save over - _always_ save a new file! */
 
@@ -13097,8 +13182,11 @@ static int do_save(int tool, int dont_show_success_results)
 
   /* Make sure we have a ~/.tuxpaint directory: */
 
-  show_progress_bar(screen);
-  do_setcursor(cursor_watch);
+  if (!autosave)
+  {
+    show_progress_bar(screen);
+    do_setcursor(cursor_watch);
+  }
 
   if (!make_directory("", "Can't create user data directory"))
   {
@@ -13107,7 +13195,10 @@ static int do_save(int tool, int dont_show_success_results)
     return 0;
   }
 
-  show_progress_bar(screen);
+  if (!autosave)
+  {
+    show_progress_bar(screen);
+  }
 
 
   /* Make sure we have a ~/.tuxpaint/saved directory: */
@@ -13119,7 +13210,10 @@ static int do_save(int tool, int dont_show_success_results)
     return 0;
   }
 
-  show_progress_bar(screen);
+  if (!autosave)
+  {
+    show_progress_bar(screen);
+  }
 
 
   /* Make sure we have a ~/.tuxpaint/saved/.thumbs/ directory: */
@@ -13131,21 +13225,18 @@ static int do_save(int tool, int dont_show_success_results)
     return 0;
   }
 
-  show_progress_bar(screen);
-
-  /* Make sure we have a ~/.tuxpaint/saved/.label/ directory: */
-
-  if (!make_directory("saved/.label", "Can't create label information directory"))
+  if (!autosave)
   {
-    fprintf(stderr, "Cannot save label information! SORRY!\n\n");
-    draw_tux_text(TUX_OOPS, strerror(errno), 0);
-    return 0;
+    show_progress_bar(screen);
   }
 
 
   /* Save the file: */
 
-  snprintf(tmp, sizeof(tmp), "saved/%s%s", file_id, FNAME_EXTENSION);
+  if (autosave)
+    snprintf(tmp, sizeof(tmp), "saved/AUTOSAVED%s", FNAME_EXTENSION);
+  else
+    snprintf(tmp, sizeof(tmp), "saved/%s%s", file_id, FNAME_EXTENSION);
   fname = get_fname(tmp, DIR_SAVE);
   debug(fname);
 
@@ -13171,6 +13262,10 @@ static int do_save(int tool, int dont_show_success_results)
 
   free(fname);
 
+
+  if(autosave)
+    /* No more process needed */
+    return 1;
 
   show_progress_bar(screen);
 
@@ -13874,7 +13969,7 @@ static int do_quit(int tool)
 		  PROMPT_QUIT_SAVE_YES, PROMPT_QUIT_SAVE_NO,
 		  screen->w / 2, screen->h / 2))
     {
-      if (do_save(tool, 1))
+      if (do_save(tool, 1, 0))
       {
         /* Don't bug user about successful save when quitting -bjk 2007.05.15 */
 	/* do_prompt(tool_tips[TOOL_SAVE], "OK", ""); */
@@ -14911,7 +15006,7 @@ static int do_open(void)
                   img_tools[TOOL_SAVE], NULL, NULL,
                   SND_AREYOUSURE, screen->w / 2, screen->h / 2))
             {
-              do_save(TOOL_OPEN, 1);
+              do_save(TOOL_OPEN, 1, 0);
             }
           }
 
@@ -19682,7 +19777,7 @@ static int do_new_dialog(void)
             SND_AREYOUSURE,
 	    screen->w / 2, screen->h / 2))
       {
-        do_save(TOOL_NEW, 1);
+        do_save(TOOL_NEW, 1, 0);
       }
     }
 
@@ -23312,7 +23407,11 @@ int TP_EventFilter(void *data, const SDL_Event * event)
       event->type == SDL_QUIT ||
       event->type == SDL_USEREVENT ||
       event->type == SDL_MOUSEWHEEL ||
-      event->type == SDL_TEXTINPUT)
+      event->type == SDL_TEXTINPUT ||
+      event->type == SDL_APP_WILLENTERBACKGROUND ||
+      event->type == SDL_APP_WILLENTERFOREGROUND ||
+      event->type == SDL_APP_DIDENTERBACKGROUND ||
+      event->type == SDL_APP_DIDENTERFOREGROUND)
     return 1;
 
   return 0;
@@ -24551,9 +24650,6 @@ static void claim_to_be_ready(void)
 
   if (start_blank == 0)
     load_current();
-
-  been_saved = 1;
-  tool_avail[TOOL_SAVE] = 0;
 
 
   /* Draw the screen! */
