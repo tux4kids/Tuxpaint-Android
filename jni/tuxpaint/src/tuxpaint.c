@@ -11836,6 +11836,7 @@ static void load_current(void)
     been_saved = 1;
     tool_avail[TOOL_SAVE] = 0;
   }
+  else
   {
     /* Set file_id to the draw that were edited when the autosave triggered */
     determine_id();
