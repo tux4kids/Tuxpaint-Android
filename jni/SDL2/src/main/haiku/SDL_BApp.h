@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2014 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -193,7 +193,8 @@ public:
         if(_current_context)
             _current_context->UnlockGL();
         _current_context = newContext;
-        _current_context->LockGL();
+        if (_current_context)
+	        _current_context->LockGL();
     }
 private:
     /* Event management */
@@ -254,7 +255,7 @@ private:
             return;
         }
         win = GetSDLWindow(winID);
-        SDL_SendMouseWheel(win, 0, xTicks, yTicks);
+        SDL_SendMouseWheel(win, 0, xTicks, yTicks, SDL_MOUSEWHEEL_NORMAL);
     }
 
     void _HandleKey(BMessage *msg) {
@@ -272,6 +273,17 @@ private:
         }
         BE_SetKeyState(scancode, state);
         SDL_SendKeyboardKey(state, BE_GetScancodeFromBeKey(scancode));
+        
+        if (state == SDL_PRESSED && SDL_EventState(SDL_TEXTINPUT, SDL_QUERY)) {
+            const int8 *keyUtf8;
+            ssize_t count;
+            if (msg->FindData("key-utf8", B_INT8_TYPE, (const void**)&keyUtf8, &count) == B_OK) {
+                char text[SDL_TEXTINPUTEVENT_TEXT_SIZE];
+                SDL_zero(text);
+                SDL_memcpy(text, keyUtf8, count);
+                SDL_SendKeyboardText(text);
+            }
+        }
     }
 
     void _HandleMouseFocus(BMessage *msg) {
