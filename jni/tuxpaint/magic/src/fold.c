@@ -81,7 +81,7 @@ int fold_init(magic_api * api)
 {
   char fname[1024];
 	
-    snprintf(fname, sizeof(fname), "%s/sounds/magic/fold.wav", api->data_directory);
+    snprintf(fname, sizeof(fname), "%ssounds/magic/fold.wav", api->data_directory);
     fold_snd = Mix_LoadWAV(fname);
 	
   return(1);
@@ -96,7 +96,7 @@ SDL_Surface * fold_get_icon(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUT
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/fold.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/fold.png",
 	     api->data_directory);
 
   return(IMG_Load(fname));

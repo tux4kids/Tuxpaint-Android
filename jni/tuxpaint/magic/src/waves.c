@@ -68,11 +68,11 @@ int waves_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/waves.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/waves.ogg",
 	    api->data_directory);
   waves_snd[0] = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/wavelet.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/wavelet.ogg",
 	    api->data_directory);
   waves_snd[1] = Mix_LoadWAV(fname);
 
@@ -91,8 +91,8 @@ SDL_Surface * waves_get_icon(magic_api * api, int which)
 {
   char fname[1024];
 
-  if (!which) snprintf(fname, sizeof(fname), "%s/images/magic/waves.png", api->data_directory);
-  else snprintf(fname, sizeof(fname), "%s/images/magic/wavelet.png", api->data_directory);
+  if (!which) snprintf(fname, sizeof(fname), "%simages/magic/waves.png", api->data_directory);
+  else snprintf(fname, sizeof(fname), "%simages/magic/wavelet.png", api->data_directory);
 
   return(IMG_Load(fname));
 }

@@ -69,7 +69,7 @@ int smudge_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/smudge.wav",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/smudge.wav",
 	    api->data_directory);
   smudge_snd = Mix_LoadWAV(fname);
 
@@ -90,10 +90,10 @@ SDL_Surface * smudge_get_icon(magic_api * api, int which)
   char fname[1024];
 
   if (which == 0)
-    snprintf(fname, sizeof(fname), "%s/images/magic/smudge.png",
+    snprintf(fname, sizeof(fname), "%simages/magic/smudge.png",
 	     api->data_directory);
   else /* if (which == 1) */
-    snprintf(fname, sizeof(fname), "%s/images/magic/wetpaint.png",
+    snprintf(fname, sizeof(fname), "%simages/magic/wetpaint.png",
 	     api->data_directory);
 
   return(IMG_Load(fname));

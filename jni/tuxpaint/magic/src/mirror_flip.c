@@ -72,11 +72,11 @@ int mirror_flip_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/mirror.wav",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/mirror.wav",
            api->data_directory);
   snd_effects[TOOL_MIRROR] = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/flip.wav",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/flip.wav",
            api->data_directory);
   snd_effects[TOOL_FLIP] = Mix_LoadWAV(fname);
 
@@ -98,12 +98,12 @@ SDL_Surface * mirror_flip_get_icon(magic_api * api, int which)
 
   if (which == TOOL_MIRROR)
   {
-    snprintf(fname, sizeof(fname), "%s/images/magic/mirror.png",
+    snprintf(fname, sizeof(fname), "%simages/magic/mirror.png",
 	     api->data_directory);
   }
   else if (which == TOOL_FLIP)
   {
-    snprintf(fname, sizeof(fname), "%s/images/magic/flip.png",
+    snprintf(fname, sizeof(fname), "%simages/magic/flip.png",
 	     api->data_directory);
   }
 

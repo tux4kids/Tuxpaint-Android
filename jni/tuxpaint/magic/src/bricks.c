@@ -82,7 +82,7 @@ int bricks_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/brick.wav",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/brick.wav",
 	    api->data_directory);
   brick_snd = Mix_LoadWAV(fname);
 
@@ -104,12 +104,12 @@ SDL_Surface * bricks_get_icon(magic_api * api, int which)
 
   if (which == TOOL_LARGEBRICKS)
   {
-    snprintf(fname, sizeof(fname), "%s/images/magic/largebrick.png",
+    snprintf(fname, sizeof(fname), "%simages/magic/largebrick.png",
 	     api->data_directory);
   }
   else if (which == TOOL_SMALLBRICKS)
   {
-    snprintf(fname, sizeof(fname), "%s/images/magic/smallbrick.png",
+    snprintf(fname, sizeof(fname), "%simages/magic/smallbrick.png",
 	     api->data_directory);
   }
 

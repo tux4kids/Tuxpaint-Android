@@ -76,7 +76,7 @@ int tv_init(magic_api * api ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 	
-    snprintf(fname, sizeof(fname), "%s/sounds/magic/tv.ogg", api->data_directory);
+    snprintf(fname, sizeof(fname), "%ssounds/magic/tv.ogg", api->data_directory);
     tv_snd = Mix_LoadWAV(fname);
 
   return(1);
@@ -91,7 +91,7 @@ SDL_Surface * tv_get_icon(magic_api * api, int which  ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/tv.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/tv.png",
 	     api->data_directory);
 
   return(IMG_Load(fname));

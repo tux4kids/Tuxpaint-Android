@@ -74,11 +74,11 @@ int grass_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/grass.wav",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/grass.wav",
 	    api->data_directory);
   grass_snd = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/grass_data.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/grass_data.png",
 	    api->data_directory);
   img_grass = IMG_Load(fname);
 
@@ -100,7 +100,7 @@ SDL_Surface * grass_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/grass.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/grass.png",
 	   api->data_directory);
 
   return(IMG_Load(fname));

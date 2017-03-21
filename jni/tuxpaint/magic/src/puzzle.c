@@ -78,7 +78,7 @@ int puzzle_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/puzzle.wav",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/puzzle.wav",
 	    api->data_directory);
   puzzle_snd = Mix_LoadWAV(fname);
 
@@ -94,7 +94,7 @@ SDL_Surface * puzzle_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/puzzle.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/puzzle.png",
 	   api->data_directory);
 
   return(IMG_Load(fname));

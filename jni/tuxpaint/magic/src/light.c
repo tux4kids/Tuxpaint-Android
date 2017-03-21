@@ -73,11 +73,11 @@ int light_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/light1.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/light1.ogg",
 	    api->data_directory);
   light1_snd = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/light2.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/light2.ogg",
 	    api->data_directory);
   light2_snd = Mix_LoadWAV(fname);
 
@@ -95,7 +95,7 @@ SDL_Surface * light_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/light.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/light.png",
 	   api->data_directory);
 
   return(IMG_Load(fname));

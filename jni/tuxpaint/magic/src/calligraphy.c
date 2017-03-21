@@ -79,12 +79,12 @@ int calligraphy_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/calligraphy.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/calligraphy.ogg",
 	   api->data_directory);
 
   calligraphy_snd = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/calligraphy_brush.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/calligraphy_brush.png",
            api->data_directory);
 
   calligraphy_brush = IMG_Load(fname);
@@ -116,7 +116,7 @@ SDL_Surface * calligraphy_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/calligraphy.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/calligraphy.png",
 	   api->data_directory);
   return(IMG_Load(fname));
 }

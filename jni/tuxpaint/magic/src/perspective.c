@@ -163,7 +163,7 @@ int perspective_init(magic_api * api){
   int i;
   char fname[1024];
   for (i = 0; i <= perspective_NUM_TOOLS; i++){
-    snprintf(fname, sizeof(fname), "%s/sounds/magic/%s", api->data_directory, perspective_snd_filenames[i]);
+    snprintf(fname, sizeof(fname), "%ssounds/magic/%s", api->data_directory, perspective_snd_filenames[i]);
     perspective_snd_effect[i] = Mix_LoadWAV(fname);
   }
   return(1);

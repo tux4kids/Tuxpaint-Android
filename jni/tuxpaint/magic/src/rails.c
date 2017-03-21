@@ -94,10 +94,10 @@ int rails_init(magic_api * api)
 	for (i = 0; i < 4; i++)
 		rails_images[i]=(char *)malloc(sizeof(char)*1024);
 	
-	snprintf(rails_images[0], 1024*sizeof(char), "%s/images/magic/rails_one.png", api->data_directory);
-	snprintf(rails_images[1], 1024*sizeof(char), "%s/images/magic/rails_three.png", api->data_directory);
-	snprintf(rails_images[2], 1024*sizeof(char), "%s/images/magic/rails_four.png", api->data_directory);
-	snprintf(rails_images[3], 1024*sizeof(char), "%s/images/magic/rails_corner.png", api->data_directory);
+	snprintf(rails_images[0], 1024*sizeof(char), "%simages/magic/rails_one.png", api->data_directory);
+	snprintf(rails_images[1], 1024*sizeof(char), "%simages/magic/rails_three.png", api->data_directory);
+	snprintf(rails_images[2], 1024*sizeof(char), "%simages/magic/rails_four.png", api->data_directory);
+	snprintf(rails_images[3], 1024*sizeof(char), "%simages/magic/rails_corner.png", api->data_directory);
 
 	rails_one=IMG_Load(rails_images[0]);
     rails_three=IMG_Load(rails_images[1]);
@@ -107,7 +107,7 @@ int rails_init(magic_api * api)
         img_w = rails_one->w;
         img_h = rails_one->h;
     
-	snprintf(fname, sizeof(fname), "%s/sounds/magic/rails.wav", api->data_directory);
+	snprintf(fname, sizeof(fname), "%ssounds/magic/rails.wav", api->data_directory);
     rails_snd = Mix_LoadWAV(fname);
 
   return(1);
@@ -122,7 +122,7 @@ SDL_Surface * rails_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/rails.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/rails.png",
 	     api->data_directory);
 
   return(IMG_Load(fname));

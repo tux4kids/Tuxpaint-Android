@@ -76,11 +76,11 @@ int foam_init(magic_api * api)
   char fname[1024];
   SDL_Surface * foam_data;
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/foam.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/foam.ogg",
 	    api->data_directory);
   foam_snd = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/foam_data.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/foam_data.png",
 	    api->data_directory);
   foam_data = IMG_Load(fname);
 
@@ -109,7 +109,7 @@ SDL_Surface * foam_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/foam.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/foam.png",
 	   api->data_directory);
 
   return(IMG_Load(fname));

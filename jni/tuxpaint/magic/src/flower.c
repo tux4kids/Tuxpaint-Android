@@ -104,23 +104,23 @@ int flower_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/flower_click.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/flower_click.ogg",
 	    api->data_directory);
   flower_click_snd = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/flower_release.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/flower_release.ogg",
 	    api->data_directory);
   flower_release_snd = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/flower_base.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/flower_base.png",
 	    api->data_directory);
   flower_base = IMG_Load(fname);
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/flower_leaf.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/flower_leaf.png",
 	    api->data_directory);
   flower_leaf = IMG_Load(fname);
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/flower_petals.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/flower_petals.png",
 	    api->data_directory);
   flower_petals = IMG_Load(fname);
 
@@ -138,7 +138,7 @@ SDL_Surface * flower_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/flower.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/flower.png",
 	   api->data_directory);
 
   return(IMG_Load(fname));

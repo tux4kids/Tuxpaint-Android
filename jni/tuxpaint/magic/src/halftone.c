@@ -86,7 +86,7 @@ int halftone_init(magic_api * api)
   for (i = 0; i < NUM_TOOLS; i++)
   {
     snprintf(fname, sizeof(fname),
-             "%s/sounds/magic/%s",
+             "%ssounds/magic/%s",
 	     api->data_directory, snd_filenames[i]);
 
     snd_effect[i] = Mix_LoadWAV(fname);
@@ -110,7 +110,7 @@ SDL_Surface * halftone_get_icon(magic_api * api, int which)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/%s",
+  snprintf(fname, sizeof(fname), "%simages/magic/%s",
 	     api->data_directory, icon_filenames[which]);
 
   return(IMG_Load(fname));

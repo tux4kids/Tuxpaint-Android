@@ -76,11 +76,11 @@ int fade_darken_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/fade.wav",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/fade.wav",
 	   api->data_directory);
   snd_effects[TOOL_FADE] = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/darken.wav",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/darken.wav",
 	   api->data_directory);
   snd_effects[TOOL_DARKEN] = Mix_LoadWAV(fname);
 
@@ -102,12 +102,12 @@ SDL_Surface * fade_darken_get_icon(magic_api * api, int which)
 
   if (which == TOOL_FADE)
   {
-    snprintf(fname, sizeof(fname), "%s/images/magic/fade.png",
+    snprintf(fname, sizeof(fname), "%simages/magic/fade.png",
 	     api->data_directory);
   }
   else if (which == TOOL_DARKEN)
   {
-    snprintf(fname, sizeof(fname), "%s/images/magic/darken.png",
+    snprintf(fname, sizeof(fname), "%simages/magic/darken.png",
 	     api->data_directory);
   }
 

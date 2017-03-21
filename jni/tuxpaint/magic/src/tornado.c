@@ -114,20 +114,20 @@ int tornado_init(magic_api * api)
   char fname[1024];
 
 /*
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/tornado_click.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/tornado_click.ogg",
 	    api->data_directory);
   tornado_click_snd = Mix_LoadWAV(fname);
 */
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/tornado_release.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/tornado_release.ogg",
 	    api->data_directory);
   tornado_release_snd = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/tornado_base.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/tornado_base.png",
 	    api->data_directory);
   tornado_base = IMG_Load(fname);
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/tornado_cloud.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/tornado_cloud.png",
 	    api->data_directory);
   tornado_cloud = IMG_Load(fname);
 
@@ -145,7 +145,7 @@ SDL_Surface * tornado_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/tornado.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/tornado.png",
 	   api->data_directory);
 
   return(IMG_Load(fname));

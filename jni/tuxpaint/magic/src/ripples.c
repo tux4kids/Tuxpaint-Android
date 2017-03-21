@@ -76,7 +76,7 @@ int ripples_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/ripples.ogg",
+  snprintf(fname, sizeof(fname), "%ssounds/magic/ripples.ogg",
 	    api->data_directory);
   ripples_snd = Mix_LoadWAV(fname);
 
@@ -94,7 +94,7 @@ SDL_Surface * ripples_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/ripples.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/ripples.png",
 	   api->data_directory);
 
   return(IMG_Load(fname));

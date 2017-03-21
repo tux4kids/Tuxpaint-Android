@@ -100,7 +100,7 @@ int distortion_init(magic_api * api)
   char fname[1024];
 
   snprintf(fname, sizeof(fname),
-           "%s/sounds/magic/distortion.ogg",
+           "%ssounds/magic/distortion.ogg",
 	   api->data_directory);
 
   // Try to load the file!
@@ -125,7 +125,7 @@ SDL_Surface * distortion_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/distortion.png",
+  snprintf(fname, sizeof(fname), "%simages/magic/distortion.png",
 	     api->data_directory);
 
 
