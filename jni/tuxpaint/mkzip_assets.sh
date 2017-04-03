@@ -1,7 +1,7 @@
 #!/bin/sh
 if [ a$1b = "a--helpb" ]
 then
-    echo " $1 A shell script to create the assets zip file used in the Android port
+    echo " $1 A shell script to put things into the assets dir used in the Android port
 Same license  as Tux Paint (GPL2+ at this writing)
 Usage:
     $1
@@ -47,13 +47,11 @@ then
 	cp magic/icons/* tmpzip/data/images/magic && \
 	mkdir tmpzip/data/sounds/magic && \
 	cp magic/sounds/* tmpzip/data/sounds/magic && \
-	cp -r stamps tmpzip/data/stamps && \
+	cp -r stamps tmpzip/stamps && \
 	cp -r starters tmpzip/data/starters && \
-	cp src/tuxpaint.cfg-android tmpzip/tuxpaint.cfg && \
-	cd tmpzip && \
-	zip ../tuxpaint-tmp.zip -r * && \
-	cd .. && \
-	rm -rf tmpzip && \
-	mkdir -p ../../assets &&\
-	mv tuxpaint-tmp.zip ../../assets/tuxpaint.zip
+	mkdir tmpzip/etc && \
+	cp src/tuxpaint.cfg-android tmpzip/etc/tuxpaint.cfg && \
+	mkdir -p ../../assets && \
+	mv tmpzip/* ../../assets/ && \
+	rmdir tmpzip
 fi
