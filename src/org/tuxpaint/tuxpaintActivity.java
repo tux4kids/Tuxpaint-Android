@@ -17,16 +17,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
+import android.content.res.AssetManager;
 
 public class tuxpaintActivity extends SDLActivity {
     private static final String TAG = "Tux Paint";
     private static View mConfigButton = null;
+
+    private static AssetManager mgr;
+    private static native boolean managertojni(AssetManager mgr);
 
     // Load the .so
     static {
         System.loadLibrary("stlport_shared");
         System.loadLibrary("tuxpaint_png");
         System.loadLibrary("tuxpaint_fribidi");
+	System.loadLibrary("tp_android_assets_fopen");
         System.loadLibrary("tuxpaint_intl");
         System.loadLibrary("tuxpaint_iconv");
         System.loadLibrary("tuxpaint_pixman");
@@ -51,11 +56,13 @@ public class tuxpaintActivity extends SDLActivity {
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    	unzipAssets ();
+	//	unzipAssets ();
     	super.onCreate(savedInstanceState);
-	//    	addConfigButton ();
+	mgr = getResources().getAssets();
+	managertojni(mgr);
     }
-    
+
+    /*
     private void unzipAssets(){
     	File internal = getFilesDir();
     	
@@ -65,7 +72,7 @@ public class tuxpaintActivity extends SDLActivity {
     		return;
 
     	// unzip to /data/data/org.tuxpaint/files
-    	Log.d(TAG, "unzip tuxpaint.zip to /data/data/org.tuxpaint/files");
+	Log.d(TAG, "unzip tuxpaint.zip to /data/data/org.tuxpaint/files");
 	     try {
 	    	 InputStream in = getAssets().open("tuxpaint.zip");
 	    	 ZipInputStream zin;
@@ -102,7 +109,8 @@ public class tuxpaintActivity extends SDLActivity {
 	         e.printStackTrace();
 	     }
 	     
-    } 
+    }
+    */
     
     // private void addConfigButton () {
     // 	if (mConfigButton != null)

@@ -27,14 +27,16 @@ LOCAL_SRC_FILES := \
 	src/rgblinear.c \
 	src/onscreen_keyboard.c \
 	src/android_print.c \
-	src/android_mbstowcs.c
+	src/android_mbstowcs.c \
+	src/android_assets.c
 
 MY_CFLAGS:= -O0 -g -W -Wall -fno-common -ffloat-store \
 	-Wcast-align -Wredundant-decls \
 	-Wbad-function-cast -Wwrite-strings \
 	-Waggregate-return \
 	-Wstrict-prototypes -Wmissing-prototypes \
-	-Wstrict-aliasing=2
+	-Wstrict-aliasing=2 \
+	-include $(LOCAL_PATH)"/../tp-assets-fopen/tp_android_assets_fopen.h"
 
 MY_VER_VERSION :=0.9.23
 MY_VER_DATE :=$(shell date +"%Y-%m-%d")
@@ -44,19 +46,20 @@ MY_NOPANGOFLAG :=
 # MY_NOPANGOFLAG :=  -DNO_SDLPANGO
 MY_NOSVGFLAG := 
 # MY_NOSVGFLAG := -DNOSVG
-MY_INTERNAL_DIR := /data/data/org.tuxpaint/files
+MY_INTERNAL_DIR := "/data/data/org.tuxpaint/"
+MY_ASSETS_DIR := ""
 # Data:
-MY_DATA_PREFIX := $(MY_INTERNAL_DIR)/data/
+MY_DATA_PREFIX := $(MY_ASSETS_DIR)data/
 # Doc files, but DOC_PREFIX is useless on the Android currently 
-MY_DOC_PREFIX := $(MY_INTERNAL_DIR)/doc/
+MY_DOC_PREFIX := $(MY_ASSETS_DIR)doc/
 # Locale files
-MY_LOCALE_PREFIX := $(MY_INTERNAL_DIR)/locale/
+MY_LOCALE_PREFIX := $(MY_ASSETS_DIR)locale
 # IM files
-MY_IM_PREFIX := $(MY_DATA_PREFIX)/im/
+MY_IM_PREFIX := $(MY_DATA_PREFIX)im/
 # 'System-wide' Config file, but CONFDIR is useless on the Android currently
-MY_CONFDIR := $(MY_DATA_PREFIX)/etc/
+MY_CONFDIR := $(MY_ASSETS_DIR)etc/
 # Magic Tool plug-ins
-MY_MAGIC_PREFIX:= /data/data/org.tuxpaint/lib/
+MY_MAGIC_PREFIX := $(MY_INTERNAL_DIR)lib/
 
 MY_DEFS := \
 	-DVER_DATE=\"$(MY_VER_DATE)\" \
@@ -75,10 +78,10 @@ LOCAL_CFLAGS := \
 	$(MY_DEFS)
 
 LOCAL_LDLIBS := \
-	-lz -llog -lGLESv1_CM -lGLESv2 \
+	-lz -llog -lGLESv1_CM -lGLESv2 -landroid \
 	$(NULL)
 
-LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango tuxpaint_intl tuxpaint_fribidi tuxpaint_png tuxpaint_rsvg tuxpaint_cairo
+LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango tuxpaint_intl tuxpaint_fribidi tuxpaint_png tuxpaint_rsvg tuxpaint_cairo tp_android_assets_fopen
 
 include $(BUILD_SHARED_LIBRARY)
 

@@ -977,6 +977,7 @@ static void loadfonts(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer 
     loadfonts(screen, texture, renderer, "/usr/share/fonts");
     loadfonts(screen, texture, renderer, "/usr/X11R6/lib/X11/fonts");
 #elif defined(__ANDROID__)
+    loadfonts(screen, texture, renderer, "data/fonts");
     loadfonts(screen, texture, renderer, "/system/fonts");
 #elif defined(__sun__)
     loadfonts(screen, texture, renderer, "/usr/openwin/lib/X11/fonts");

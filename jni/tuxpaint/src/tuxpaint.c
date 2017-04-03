@@ -318,7 +318,7 @@ extern WrapperData macosx;
 
 #define AUTOSAVE_GOING_BACKGROUND
 #include "android_print.h"
-
+#include "android_assets.h"
 #else
 
 /* Not Windows, not BeOS, not Apple, not Android */
@@ -7736,7 +7736,11 @@ static void load_stamps(SDL_Surface * screen)
   default_stamp_size = compute_default_scale_factor(1.0);
 
   load_stamp_dir(screen, homedirdir);
+#ifndef __ANDROID__
   load_stamp_dir(screen, DATA_PREFIX "stamps");
+#else
+  load_stamp_dir(screen, ASSETS_STAMPS_DIR);
+#endif
 #ifdef __APPLE__
   load_stamp_dir(screen, "/Library/Application Support/TuxPaint/stamps");
 #endif
@@ -18932,6 +18936,35 @@ static int do_new_dialog(void)
 
       closedir(d);
     }
+#ifdef __ANDROID__
+    else
+      if (dirname[places_to_look][0] != "/")
+      {
+	/* Try inside android assets only if it is a relative path*/
+
+	AAssetDir * ad = open_asset_dir(dirname[places_to_look]);
+	const char* afilename = (const char*)NULL;
+	while ((afilename = AAssetDir_getNextFileName(ad)) != NULL)
+        {
+	  f = malloc(sizeof(struct dirent));
+	  strncpy(f->d_name, afilename, sizeof(f->d_name));
+
+	  memcpy(&(fs[num_files_in_dirs].f), f, sizeof(struct dirent));
+	  fs[num_files_in_dirs].place = places_to_look;
+	  free(f);
+	  num_files_in_dirs++;
+
+	  if (num_files_in_dirs >= things_alloced)
+	  {
+	    things_alloced = things_alloced + 32;
+
+	    fs = (struct dirent2 *) realloc(fs,
+					    sizeof(struct dirent2) *
+					    things_alloced);
+	  }
+	}
+      }
+#endif
   }
 
 
@@ -22655,7 +22688,7 @@ static void setup_config(char *argv[])
   snprintf(str, sizeof(str), "%s/tuxpaint.cfg", macosx.preferencesPath);
 #elif defined(__ANDROID__)
   /* Try to find the first config file: /mnt/sdcard/Android/data/org.tuxpaint/files/tuxpaint.cfg */
-  // Donot rely on this file unless you want to override another tuxpaint.cfg in the internal path for debug
+  /* This file is now the "per user" config file. */
   snprintf(str, sizeof(str), "%s/tuxpaint.cfg", savedir);
 #else
   /* Linux and other Unixes:  Use 'rc' style (~/.tuxpaintrc) */
@@ -22684,9 +22717,9 @@ static void setup_config(char *argv[])
         snprintf(str, sizeof(str), "%s/tuxpaint.cfg", macosx.globalPreferencesPath);
         parse_file_options(&tmpcfg_sys, str);
 #elif defined(__ANDROID__)
-      /* Try to find the second config file:  /data/data/org.tuxpaint/files/tuxpaint.cfg  */
-     /* This file is unzipped from "assets/tuxpaint.zip" and will be modified when users want to set differnt configuraion*/
-    snprintf(str, sizeof(str), "%s/tuxpaint.cfg", SDL_AndroidGetInternalStoragePath());
+      /* Try to find the default config file from android asssets */
+     /* This file is loaded directly from assets and will NOT be modified when users want to set different configuration */
+    snprintf(str, sizeof(str), "etc/tuxpaint.cfg");
     parse_file_options(&tmpcfg_sys, str);
 #else
     // normally /etc/tuxpaint/tuxpaint.conf

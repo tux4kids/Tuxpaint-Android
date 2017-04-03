@@ -39,6 +39,7 @@
 
 #include "dirwalk.h"
 #include "progressbar.h"
+#include "android_assets.h"
 
 /*
 	The following section renames global variables defined in SDL_Pango.h to avoid errors during linking.
@@ -279,20 +280,66 @@ void tp_ftw(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer
   tp_ftw_str *dir_names = NULL;
   int d_namlen;
   int add_rsrc;
+  char * di;
+  unsigned dlen;
 
   dir[dirlen++] = '/';
   dir[dirlen] = '\0';
 //printf("processing directory %s %d\n", dir, dirlen);
+
+  dlen = dirlen;
+
   /* Open the directory: */
   d = opendir(dir);
+#ifdef __ANDROID__
+  AAssetDir * adir;
+  if (!d) /* Fallback into assets */
+  {
+    /* Remove the trailing '/' */
+    dlen = strlen(dir) - 1;
+    di = strndup(dir, dlen);
+    adir = open_asset_dir(di);
+    if (!adir)
+      return;
+  }
+#else
   if (!d)
     return;
+#endif
 
   for (;;)
   {
-    struct dirent *f = readdir(d);
+    struct dirent *f;
+    if (d)
+      f = readdir(d);
     int filetype = TP_FTW_UNKNOWN;
 
+#ifdef __ANDROID__
+    char * afilename;
+
+    if (!d)
+    {
+      afilename = AAssetDir_getNextFileName(adir);
+      if (afilename)
+      {
+	f=malloc(sizeof(struct dirent));
+	strncpy(f->d_name, afilename, sizeof(f->d_name));
+	f->d_type=DT_REG;
+
+	/* There is not _DIRENT_HAVE_D_NAMLEN currently on Android 4.3, but who knows in the future... */
+#if defined(_DIRENT_HAVE_D_NAMLEN)
+	f->d_namlen = strlen(f->d_name);
+#endif
+
+	/* AAssetDir_getNextFileName() only lists files, not (sub)dirs,
+	   and we don't put any device or special file inside assets,
+	   so it is a regular file */
+	filetype = TP_FTW_NORMAL;
+      }
+      else
+	break;
+    }
+#endif
     if (!f)
       break;
     if (f->d_name[0] == '.')
@@ -392,7 +439,10 @@ void tp_ftw(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer
     }
     free(file_names);
 #else
-    fn(screen, texture, renderer, dir, dirlen, file_names, num_file_names, locale);
+    if (dlen != dirlen) /* First case only happens in Android files coming from assets */
+      fn(screen, texture, renderer, di, dlen, file_names, num_file_names, locale);
+    else
+      fn(screen, texture, renderer, dir, dirlen, file_names, num_file_names, locale);
 #endif
   }
 

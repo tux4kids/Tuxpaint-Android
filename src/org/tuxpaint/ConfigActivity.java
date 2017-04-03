@@ -3,6 +3,7 @@ package org.tuxpaint;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -25,6 +26,7 @@ import android.widget.RadioGroup;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
+import android.content.res.AssetManager;
 
 public class ConfigActivity extends Activity {
 	private static final String TAG = ConfigActivity.class.getSimpleName();
@@ -51,7 +53,8 @@ public class ConfigActivity extends Activity {
 	RadioGroup saveoverGroup = null;
 	ToggleButton printToggle = null;
 	Spinner printdelaySpinner = null;
-
+        AssetManager mgr;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "onCreate()");
@@ -210,26 +213,40 @@ public class ConfigActivity extends Activity {
         save ();
         super.onDestroy();
     }
-    
+
+    /* Load first the defaults from the .cfg file inside assets, then try to overwrite them with the user defined config */
 	private void load (){
-	    	File internal = getFilesDir();
-	     	File cfg =  new File (internal, "tuxpaint.cfg");
+	    try {
+		mgr = getResources().getAssets();
+		InputStream inassetscfg = mgr.open ("etc/tuxpaint.cfg");
+		props = new Properties();
+		props.load(inassetscfg);
+		inassetscfg.close();
+	    } catch (Exception e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	    }
+
+	    	File external = getExternalFilesDir(null);
+	    	File cfg =  new File (external, "tuxpaint.cfg");
 	    	try {
 	    	InputStream in = new FileInputStream(cfg);
 			props = new Properties();
 	    	 props.load(in);
 	    	 in.close();
-	    	 } catch (Exception e1) {
+		} catch (FileNotFoundException el){ /* do nothing, defaults have already been loaded */
+		} catch (Exception e1) {
 	    	 // TODO Auto-generated catch block
 	    	 e1.printStackTrace();
 	    	 }
-	    	 
+
+		/* Fixme: Is this redundant after having added the load of the cfg file in assets? */
 	    	 autosave = props.getProperty("autosave", "no");
 	    	 sound = props.getProperty("sound", "no");
 	    	 saveover = props.getProperty("saveover", "ask");
 	    	 startblank = props.getProperty("startblank", "no");
-	    	 savedir = props.getProperty("savedir", internal.getAbsolutePath());
-	    	 datadir = props.getProperty("datadir", internal.getAbsolutePath());
+	    	 savedir = props.getProperty("savedir", external.getAbsolutePath());
+	    	 datadir = props.getProperty("datadir", external.getAbsolutePath());
 	    	 locale = props.getProperty("locale", Locale.getDefault().toString());
 	    	 print = props.getProperty("print", "no");
 	    	 printdelay = props.getProperty("printdelay", "0");
@@ -238,8 +255,8 @@ public class ConfigActivity extends Activity {
 	}
 	
 	private void save () {
-    	File internal = getFilesDir();
-     	File cfg =  new File (internal, "tuxpaint.cfg");
+    	File external = getExternalFilesDir(null);
+     	File cfg =  new File (external, "tuxpaint.cfg");
         props.put("autosave", autosave);
         props.put("sound", sound);
         props.put("saveover", saveover);
