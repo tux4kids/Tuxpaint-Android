@@ -29,6 +29,9 @@
          -->
     <property file="ant.properties" />
 
+    <!-- To make the starter's ".thumbs" dir enter into assets -->
+    <property name="aapt.ignore.assets" value=".." />
+
     <!-- if sdk.dir was not set from one of the property file, then
          get it from the ANDROID_HOME env var.
          This must be done before we load project.properties since
