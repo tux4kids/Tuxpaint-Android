@@ -927,15 +927,8 @@ static void SDL_UpdateRect(SDL_Surface * screen, Sint32 x, Sint32 y, Sint32 w, S
 
   SDL_UpdateTexture(texture, &r, screen->pixels + (y * screen->pitch + x * 4), screen->pitch);
 
-#if !defined (__ANDROID__)
-  //  NOTE docs says one should clear the renderer, however this means a refresh of the whole thing.
-  //  SDL_RenderClear(renderer);
-  //  SDL_RenderCopy(renderer, texture, NULL, NULL);
-  SDL_RenderCopy(renderer, texture, &r, &r);
-#else
   SDL_RenderClear(renderer);
   SDL_RenderCopy(renderer, texture, NULL, NULL);
-#endif
   SDL_RenderPresent(renderer);
 }
 

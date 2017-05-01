@@ -24,6 +24,12 @@ static int rw_close(void * ctx)
 
 FILE* android_fopen(char const* fname, char const* mode)
 {
+  int i;
+  int previous;
+  int current;
+  int pos;
+  char * path;
+  
   /* That call to the real fopen will not be preprocessed, needed to still be able to access to the filesystem */
   FILE* fi= (fopen) (fname, mode);
   if (fi != NULL)
@@ -40,7 +46,27 @@ FILE* android_fopen(char const* fname, char const* mode)
   if (strcmp(&fname[0] , "/") == 0)
     return NULL;
   
-  SDL_RWops * rwopss =SDL_RWFromFile(fname, mode);
+  /* Remove double slashes */
+  path = strdup(fname);
+  pos = 0;
+  for (i = 0; i < strlen(fname); i++)
+  {
+    previous = current;
+    if (fname[i] == '/')
+      current = 1;
+    else
+      current = 0;
+    if (!(previous && current))
+    {
+      path[pos] = fname[i];
+      pos++;
+    }
+    path[pos] = 0;
+  }
+
+  SDL_RWops * rwopss = SDL_RWFromFile(path, mode);
+  free(path);
+  
   if (rwopss == NULL)
     return NULL;
   
