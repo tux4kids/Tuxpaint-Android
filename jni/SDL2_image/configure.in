@@ -13,9 +13,9 @@ dnl Set various version strings - taken gratefully from the GTk sources
 
 MAJOR_VERSION=2
 MINOR_VERSION=0
-MICRO_VERSION=0
-INTERFACE_AGE=0
-BINARY_AGE=0
+MICRO_VERSION=1
+INTERFACE_AGE=1
+BINARY_AGE=1
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$MICRO_VERSION
 
 AC_SUBST(MAJOR_VERSION)
@@ -65,7 +65,7 @@ case "$host" in
     *-*-cygwin* | *-*-mingw32*)
         if test "$build" != "$host"; then # cross-compiling
             # Default cross-compile location
-            ac_default_prefix=/usr/local/cross-tools/i386-mingw32
+            ac_default_prefix=/usr/local/cross-tools/$host
         else
             # Look for the location of the tools and install there
             if test "$BUILD_PREFIX" != ""; then
@@ -80,7 +80,7 @@ case "$host" in
         AC_ARG_ENABLE([imageio], [AC_HELP_STRING([--enable-imageio], [use native Mac OS X frameworks for loading images [default=yes]])],
                       [], [enable_imageio=yes])
         if test x$enable_imageio = xyes; then
-            IMG_LIBS="-Wl,-framework,ApplicationServices $IMG_LIBS"
+            IMG_LIBS="-Wl,-framework,ApplicationServices -lobjc $IMG_LIBS"
         else
             CFLAGS="$CFLAGS -DSDL_IMAGE_USE_COMMON_BACKEND"
         fi
@@ -103,7 +103,7 @@ find_lib()
     else
         host_lib_path="/usr/$base_libdir /usr/local/$base_libdir"
     fi
-    for path in $gcc_bin_path $gcc_lib_path $env_lib_path $host_lib_path; do
+    for path in $env_lib_path $gcc_bin_path $gcc_lib_path $host_lib_path; do
         lib=[`ls -- $path/$1 2>/dev/null | sed -e '/\.so\..*\./d' -e 's,.*/,,' | sort | tail -1`]
         if test x$lib != x; then
             echo $lib

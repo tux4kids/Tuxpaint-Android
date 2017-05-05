@@ -6,17 +6,19 @@ LOCAL_MODULE := SDL2_image
 
 # Enable this if you want to support loading JPEG images
 # The library path should be a relative path to this directory.
-SUPPORT_JPG := true
+SUPPORT_JPG ?= true
 JPG_LIBRARY_PATH := external/jpeg-9
 
 # Enable this if you want to support loading PNG images
 # The library path should be a relative path to this directory.
-SUPPORT_PNG := true
+SUPPORT_PNG ?= true
 PNG_LIBRARY_PATH := external/libpng-1.6.2
 
 # Enable this if you want to support loading WebP images
 # The library path should be a relative path to this directory.
-SUPPORT_WEBP := false
+#
+# IMPORTANT: In order to enable this must have a symlink in your jni directory to external/libwebp-0.3.0.
+SUPPORT_WEBP ?= false
 WEBP_LIBRARY_PATH := external/libwebp-0.3.0
 
 
@@ -77,13 +79,19 @@ ifeq ($(SUPPORT_JPG),true)
         $(JPG_LIBRARY_PATH)/jfdctfst.c \
         $(JPG_LIBRARY_PATH)/jfdctint.c \
         $(JPG_LIBRARY_PATH)/jidctflt.c \
-        $(JPG_LIBRARY_PATH)/jidctfst.S \
         $(JPG_LIBRARY_PATH)/jidctint.c \
         $(JPG_LIBRARY_PATH)/jquant1.c \
         $(JPG_LIBRARY_PATH)/jquant2.c \
         $(JPG_LIBRARY_PATH)/jutils.c \
         $(JPG_LIBRARY_PATH)/jmemmgr.c \
         $(JPG_LIBRARY_PATH)/jmem-android.c
+
+    # assembler support is available for arm
+    ifeq ($(TARGET_ARCH),arm)
+        LOCAL_SRC_FILES += $(JPG_LIBRARY_PATH)/jidctfst.S
+    else
+        LOCAL_SRC_FILES += $(JPG_LIBRARY_PATH)/jidctfst.c
+    endif
 endif
 
 ifeq ($(SUPPORT_PNG),true)
