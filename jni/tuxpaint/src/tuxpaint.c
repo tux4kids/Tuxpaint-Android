@@ -23496,11 +23496,10 @@ static void setup(void)
   if (disable_screensaver == 0)
   {
     putenv((char *) "SDL_VIDEO_ALLOW_SCREENSAVER=1");
-    if (SDL_MAJOR_VERSION < 1 ||
-        (SDL_MAJOR_VERSION >= 1 && SDL_MINOR_VERSION < 2) ||
-        (SDL_MAJOR_VERSION >= 1 && SDL_MINOR_VERSION >= 2 && SDL_PATCHLEVEL < 12))
+    if (SDL_MAJOR_VERSION < 2 ||
+        (SDL_MAJOR_VERSION == 2 && SDL_MINOR_VERSION == 0 && SDL_PATCHLEVEL < 2))
     {
-      fprintf(stderr, "Note: 'allowscreensaver' requires SDL 1.2.12 or higher\n");
+      fprintf(stderr, "Note: 'allowscreensaver' requires SDL 2.0.2 or higher\n");
     }
   }
 

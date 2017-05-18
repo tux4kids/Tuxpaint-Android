@@ -42,7 +42,8 @@ public class ConfigActivity extends Activity {
 	String saveover = null;
 	String startblank = null;
 	String print = null;
-	String printdelay = null;
+        String printdelay = null;
+        String disablescreensaver = null;
 	
 	EditText savedirView = null;
 	EditText datadirView = null;
@@ -53,6 +54,7 @@ public class ConfigActivity extends Activity {
 	RadioGroup saveoverGroup = null;
 	ToggleButton printToggle = null;
 	Spinner printdelaySpinner = null;
+        ToggleButton disablescreensaverToggle = null;
         AssetManager mgr;
     
 	@Override
@@ -203,7 +205,19 @@ public class ConfigActivity extends Activity {
 					}
                 });
 		
-
+	disablescreensaverToggle = (ToggleButton)this.findViewById(R.id.toggleDisablescreensaver);
+		if (disablescreensaver.compareTo("yes") == 0)
+			disablescreensaverToggle.setChecked(true);
+		else
+			disablescreensaverToggle.setChecked(false);
+		disablescreensaverToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked)
+					disablescreensaver = "yes";
+				else
+					disablescreensaver = "no";
+			}
+		});
 
 	}
 	
@@ -250,8 +264,9 @@ public class ConfigActivity extends Activity {
 	    	 locale = props.getProperty("locale", Locale.getDefault().toString());
 	    	 print = props.getProperty("print", "no");
 	    	 printdelay = props.getProperty("printdelay", "0");
+		 disablescreensaver = props.getProperty("disablescreensaver", "0");
 	    	 
-	         Log.v(TAG, autosave + " " + sound + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + print + " " + printdelay);;
+	         Log.v(TAG, autosave + " " + sound + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + print + " " + printdelay + " " + disablescreensaver);;
 	}
 	
 	private void save () {
@@ -266,6 +281,7 @@ public class ConfigActivity extends Activity {
         props.put("locale", locale);
 	props.put("print", print);
         props.put("printdelay", printdelay);
+	props.put("disablescreensaver", disablescreensaver);
 
 		try {
 	 	  	OutputStream	out = new FileOutputStream(cfg);
