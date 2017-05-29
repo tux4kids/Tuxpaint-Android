@@ -23,9 +23,9 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  $Id: i18n.h,v 1.79 2015/03/10 23:38:59 perepujal Exp $
+  $Id: i18n.h,v 1.80 2016/12/12 07:20:35 wkendrick Exp $
   
-  June 14, 2002 - April 16, 2014
+  June 14, 2002 - December 11, 2016
 */
 
 
@@ -97,6 +97,7 @@ enum
   LANG_IU,                      /* Inuktitut */
   LANG_JA,			/* Japanese */
   LANG_KA,			/* Georgian */
+  LANG_KAB,                     /* Kabyle */
   LANG_KN,                      /* Kannada */
   LANG_KM,			/* Khmer */
   LANG_KOK_ROMAN,               /* Konkani (Roman) */

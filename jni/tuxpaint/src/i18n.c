@@ -134,6 +134,7 @@ const char *lang_prefixes[NUM_LANGS] = {
   "iu",
   "ja",
   "ka",
+  "kab",
   "kn",
   "km",
   "kok@roman",
@@ -352,6 +353,8 @@ static const language_to_locale_struct language_to_locale_array[] = {
   {"basque", "eu_ES.UTF-8"},
   {"euskara", "eu_ES.UTF-8"},
   {"georgian", "ka_GE"},
+  {"kabyle", "kab"},
+  {"kabylian", "kab"},
   {"kinyarwanda", "rw_RW.UTF-8"},
   {"klingon", "tlh.UTF-8"},
   {"tlhIngan", "tlh.UTF-8"},
@@ -505,6 +508,7 @@ static void show_lang_usage(int exitcode)
 /* iu */ "  inuktitut\n"
 /* it */ "  italian      italiano\n"
 /* ja */ "  japanese\n"
+/* kab */ "  kabyle       kabylian\n"
 /* kn */ "  kannada\n"
 /* ks@devanagari */ "  kashmiri-devanagari\n"
 /* ks */ "  kashmiri-perso-arabic\n"
