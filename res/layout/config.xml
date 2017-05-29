@@ -22,7 +22,7 @@
             android:id="@+id/viewDatadir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data dir" />
+            android:text="@string/Data_dir" />
 
         <EditText
             android:id="@+id/textDatadir"
@@ -44,7 +44,7 @@
             android:id="@+id/viewSavedir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save dir" />
+            android:text="@string/Save_dir" />
 
         <EditText
             android:id="@+id/textSavedir"
@@ -66,7 +66,7 @@
             android:id="@+id/viewLocale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Locale" />
+            android:text="@string/Locale" />
 
         <Spinner
             android:id="@+id/spinnerLocale"
@@ -86,7 +86,7 @@
             android:id="@+id/viewSound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable Sound" />
+            android:text="@string/Enable_sound" />
 
         <ToggleButton
             android:id="@+id/toggleSound"
@@ -106,7 +106,7 @@
             android:id="@+id/viewAutosave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable Autosave when quiting" />
+            android:text="@string/Enable_autosave" />
 
         <ToggleButton
             android:id="@+id/toggleAutosave"
@@ -126,7 +126,7 @@
             android:id="@+id/viewStartblank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable Startblank when starting" />
+            android:text="@string/Enable_startblank" />
 
         <ToggleButton
             android:id="@+id/toggleStartblank"
@@ -146,7 +146,7 @@
             android:id="@+id/viewSaveover"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save Approach" />
+            android:text="@string/Save_approach" />
         
 		<RadioGroup
 			android:id="@+id/groupSaveover"
@@ -159,19 +159,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Ask" />
+            android:text="@string/Ask" />
 
         <RadioButton
             android:id="@+id/radioYes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Replace" />
+            android:text="@string/Replace" />
 
         <RadioButton
             android:id="@+id/radioNew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New" />
+            android:text="@string/New" />
     	</RadioGroup>
     </LinearLayout>
 
@@ -186,7 +186,7 @@
             android:id="@+id/viewPrint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Allow printing" />
+            android:text="@string/Allow_printing" />
 
         <ToggleButton
             android:id="@+id/togglePrint"
@@ -206,7 +206,7 @@
             android:id="@+id/viewPrintdelay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Print Delay" />
+            android:text="@string/Print_delay" />
 
         <Spinner
             android:id="@+id/spinnerPrintdelay"
@@ -226,7 +226,7 @@
             android:id="@+id/viewDisablescreensaver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Disable the screen saver" />
+            android:text="@string/Disable_screen_saver" />
 
         <ToggleButton
             android:id="@+id/toggleDisablescreensaver"
