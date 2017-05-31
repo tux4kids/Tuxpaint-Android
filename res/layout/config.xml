@@ -92,7 +92,8 @@
             android:id="@+id/toggleSound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sound" />
+            android:textOn="@string/sound_enabled"
+            android:textOff="@string/sound_disabled" />
     </LinearLayout>
 
         <LinearLayout
@@ -112,7 +113,8 @@
             android:id="@+id/toggleAutosave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Autosave" />
+            android:textOn="@string/autosave_enabled"
+            android:textOff="@string/autosave_disabled" />
     </LinearLayout>
     
         <LinearLayout
@@ -132,7 +134,8 @@
             android:id="@+id/toggleStartblank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Startblank" />
+            android:textOff="@string/startblanktoggle_false"
+            android:textOn="@string/startblanktoggle_true" />
     </LinearLayout>
     
     <LinearLayout
@@ -192,7 +195,8 @@
             android:id="@+id/togglePrint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Print" />
+            android:textOn="@string/print_enabled"
+	    android:textOff="@string/print_disabled" />
     </LinearLayout>
 
     <LinearLayout
@@ -232,7 +236,8 @@
             android:id="@+id/toggleDisablescreensaver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Disable screen saver" />
+            android:textOn="@string/screensaver_disabled"
+            android:textOff="@string/screensaver_enabled" />
     </LinearLayout>
 
 
