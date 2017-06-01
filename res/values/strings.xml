@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Remove the following 3 lines to translate -->
     <string name="app_name" translatable="false">Tux Paint</string>
     <string name="app_config" translatable="false">Tux Paint Config</string>
     <string name="app_contact" translatable="false">tuxpaint-devel@lists.sourceforge.net</string>
 
+    <!-- Data and save directories -->
     <string name="Data_dir">Data dir</string>
     <string name="Save_dir">Save dir</string>
-    
+
+    <!-- Locale selector, next to this string appears the current selected locale -->
     <string name="Locale">Locale</string>
 
-    
+    <!-- Enable sound and the 2 possible states it takes -->
     <string name="Enable_sound">Sound</string>
     <string name="sound_enabled">Sound enabled</string>
     <string name="sound_disabled">Silent</string>
 
+    <!-- Enable autosave and the 2 possible states it takes -->
     <string name="Enable_autosave">Autosave when quiting</string>
     <string name="autosave_enabled">Save on quit</string>
-    <string name="autosave_disabled">Don\'t save automatically on quit</string>
+    <string name="autosave_disabled">Don’t save automatically on quit</string>
 
+    <!-- Enable startblank and the 2 possible values it takes -->
     <string name="Enable_startblank">Start blank</string>
     <string name="startblanktoggle_true">Start with a blank canvas</string>
     <string name="startblanktoggle_false">Start with last draw</string>
 
+    <!-- How to save: ask the user if in new draw or replacing the old
+	 Allways replace the old draw
+	 Allways save as a new draw
+         The 4 strings will display at the same time in a single row -->
     <string name="Save_approach">Save Approach</string>
     <string name="Ask">Ask</string>
     <string name="Replace">Replace</string>
     <string name="New">New</string>
 
+    <!-- Printing and states -->
     <string name="Allow_printing">Printing</string>
     <string name="print_enabled">Allow Printing</string>
     <string name="print_disabled">Printing disabled</string>
 
     <string name="Print_delay">Print delay in seconds</string>
 
+    <!-- Screensaver and states -->
     <string name="Disable_screen_saver">Screensaver</string>
     <string name="screensaver_disabled">Keep the screen on</string>
     <string name="screensaver_enabled">Allow Android blanking the screen</string>
