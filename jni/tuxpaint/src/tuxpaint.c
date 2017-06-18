@@ -705,6 +705,9 @@ static SDL_Rect r_ttoolopt;	/* was 96x40 @ 544,0 (title for tool options) */
 static SDL_Rect r_tuxarea;	/* was 640x56 */
 static SDL_Rect r_label;
 static SDL_Rect old_dest;
+static SDL_Rect r_tir;          /* Text input rectangle */
+static float render_scale;      /* Scale factor for the render */
+
 
 static int button_w;		/* was 48 */
 static int button_h;		/* was 48 */
@@ -2275,6 +2278,10 @@ static void mainloop(void)
   valhat_y = 0;
   done = 0;
   keyglobal = 0;
+  r_tir.x = 0;
+  r_tir.y = 0;
+  r_tir.w = 0;
+  r_tir.h = 0;
 
   if  (NUM_TOOLS > 14 + TOOLOFFSET)
   {
@@ -2753,6 +2760,15 @@ static void mainloop(void)
 #endif
 #endif
 
+	    /* Set the text input rectangle for system onscreen keyboards */
+	    if (onscreen_keyboard && !kbd)
+	    {
+	      r_tir.y = (float) cursor_y / render_scale;
+	      r_tir.x = (float) cursor_x / render_scale;
+	      SDL_SetTextInputRect(&r_tir);
+	      SDL_StartTextInput ();
+	    }
+
 	    /* Discard previous # of redraw characters */
 	    if((int)texttool_len <= redraw) texttool_len = 0;
 	    else texttool_len -= redraw;
@@ -3078,7 +3094,15 @@ static void mainloop(void)
 				"", img_mouse, img_mouse_click, NULL, 1,
 				event.button.x, event.button.y);
           if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
+	  {
+	    if (onscreen_keyboard && !kbd)
+	    {
+	      r_tir.y = (float) event.button.y / render_scale;
+	      SDL_SetTextInputRect(&r_tir);
+	      SDL_StartTextInput ();
+	    }
 	    do_render_cur_text(0);
+	  }
           draw_tux_text(TUX_BORED, "", 0);
 	}
       }
@@ -3210,7 +3234,9 @@ printf("screenrectr_tools %d, %d, %d, %d\n", r_tools.x, r_tools.y, r_tools.w, r_
 
 	      if (onscreen_keyboard && !kbd)
 	      {
-	    	  SDL_StartTextInput ();
+		r_tir.y = (float) event.button.y / render_scale;
+		SDL_SetTextInputRect(&r_tir);
+		SDL_StartTextInput ();
 	      }
 	      if (!font_thread_done)
 	      {
@@ -4518,6 +4544,13 @@ printf("screenrectr_tools %d, %d, %d, %d\n", r_tools.x, r_tools.y, r_tools.w, r_
 	  }
 	  else if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
 	  {
+	    if (onscreen_keyboard && !kbd)
+	    {
+	      r_tir.y = (float) old_y / render_scale;
+	      SDL_SetTextInputRect(&r_tir);
+	      SDL_StartTextInput ();
+	    }
+
 	    /* Text and Label Tools! */
             if(cur_tool == TOOL_LABEL && cur_label == LABEL_SELECT)
             {
@@ -4569,13 +4602,14 @@ printf("screenrectr_tools %d, %d, %d, %d\n", r_tools.x, r_tools.y, r_tools.w, r_
 
 		  if (onscreen_keyboard && !kbd)
 		  {
-			  SDL_StartTextInput ();
+		    r_tir.y = (float) old_y / render_scale;
+		    SDL_SetTextInputRect(&r_tir);
+		    SDL_StartTextInput ();
 		  }
                   do_render_cur_text(0);
                   draw_colors(COLORSEL_REFRESH);
                   draw_fonts();
                 }
-              
             }
 	    else
 	      hide_blinking_cursor();
@@ -4645,7 +4679,9 @@ printf("screenrectr_tools %d, %d, %d, %d\n", r_tools.x, r_tools.y, r_tools.w, r_
 
 		    if (onscreen_keyboard && !kbd)
 		    {
-		    	SDL_StartTextInput ();
+		      r_tir.y = (float) cursor_y / render_scale;
+		      SDL_SetTextInputRect(&r_tir);
+		      SDL_StartTextInput ();
 		    }
 	    }
 
@@ -16669,7 +16705,6 @@ static void do_render_cur_text(int do_blit)
   /* I THINK this is unnecessary to call here; trying to prevent flicker when typing -bjk 2010.02.10 */
   /* hide_blinking_cursor(); */
 
-
   /* Keep cursor on the screen! */
 
   if (cursor_y > ((48 * 7 + 40 + HEIGHTOFFSET) -
@@ -16678,6 +16713,7 @@ static void do_render_cur_text(int do_blit)
     cursor_y = ((48 * 7 + 40 + HEIGHTOFFSET) -
 		TuxPaint_Font_FontHeight(getfonthandle(cur_font)));
   }
+
 
 
   /* Render the text: */
@@ -16719,6 +16755,8 @@ static void do_render_cur_text(int do_blit)
 
     w = tmp_surf->w;
     h = tmp_surf->h;
+    r_tir.h = (float) tmp_surf->h / render_scale;
+    r_tir.w = (float) tmp_surf->w / render_scale;
 
     cursor_textwidth = w;
   }
@@ -23473,7 +23511,7 @@ static void setup(void)
   SDL_Thread * fontconfig_thread;
 #endif
 
-
+  render_scale = 1.0;
 
 #ifdef _WIN32
   if (fullscreen)
@@ -23717,6 +23755,7 @@ static void setup(void)
 	  /* Keep things squared */
 	  ww = window_scale_w * ww;
 	  hh = window_scale_w * hh;
+	  render_scale = window_scale_w;
 
 	  SDL_RenderSetScale(renderer, window_scale_w, window_scale_w);
 	}
@@ -23724,6 +23763,7 @@ static void setup(void)
 	{
 	  ww = window_scale_h * ww;
 	  hh = window_scale_h * hh;
+	  render_scale = window_scale_h;
 
 	  SDL_RenderSetScale(renderer, window_scale_h, window_scale_h);
 	}
