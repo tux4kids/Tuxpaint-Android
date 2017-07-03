@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -49,7 +49,7 @@ _log (const gchar *format, ...)
   now_tm = localtime (&now_time);
   strftime (time_buf, sizeof time_buf, "%H:%M:%S", now_tm);
 
-  g_print ("%s.%06d: %s\n",
+  g_printerr ("%s.%06d: %s\n",
            time_buf, (gint) now.tv_usec / 1000,
            str);
   g_free (str);
@@ -291,6 +291,9 @@ msg_cb_expect_error_disconnected (GDBusConnection *connection,
   GError *error;
   GVariant *result;
 
+  /* Make sure gdbusconnection isn't holding @connection's lock. (#747349) */
+  g_dbus_connection_get_last_serial (connection);
+
   error = NULL;
   result = g_dbus_connection_call_finish (connection,
                                           res,
@@ -310,6 +313,9 @@ msg_cb_expect_error_unknown_method (GDBusConnection *connection,
 {
   GError *error;
   GVariant *result;
+
+  /* Make sure gdbusconnection isn't holding @connection's lock. (#747349) */
+  g_dbus_connection_get_last_serial (connection);
 
   error = NULL;
   result = g_dbus_connection_call_finish (connection,
@@ -331,6 +337,9 @@ msg_cb_expect_success (GDBusConnection *connection,
   GError *error;
   GVariant *result;
 
+  /* Make sure gdbusconnection isn't holding @connection's lock. (#747349) */
+  g_dbus_connection_get_last_serial (connection);
+
   error = NULL;
   result = g_dbus_connection_call_finish (connection,
                                           res,
@@ -349,6 +358,9 @@ msg_cb_expect_error_cancelled (GDBusConnection *connection,
 {
   GError *error;
   GVariant *result;
+
+  /* Make sure gdbusconnection isn't holding @connection's lock. (#747349) */
+  g_dbus_connection_get_last_serial (connection);
 
   error = NULL;
   result = g_dbus_connection_call_finish (connection,
@@ -369,6 +381,9 @@ msg_cb_expect_error_cancelled_2 (GDBusConnection *connection,
 {
   GError *error;
   GVariant *result;
+
+  /* Make sure gdbusconnection isn't holding @connection's lock. (#747349) */
+  g_dbus_connection_get_last_serial (connection);
 
   error = NULL;
   result = g_dbus_connection_call_finish (connection,
@@ -1100,10 +1115,13 @@ send_bogus_message (GDBusConnection *c, guint32 *out_serial)
   g_object_unref (m);
 }
 
+#define SLEEP_USEC (100 * 1000)
+
 static gpointer
 serials_thread_func (GDBusConnection *c)
 {
   guint32 message_serial;
+  guint i;
 
   /* No calls on this thread yet */
   g_assert_cmpint (g_dbus_connection_get_last_serial(c), ==, 0);
@@ -1112,8 +1130,15 @@ serials_thread_func (GDBusConnection *c)
   message_serial = 0;
   send_bogus_message (c, &message_serial);
 
-  /* Give it some time to actually send the message out */
-  g_usleep (250000);
+  /* Give it some time to actually send the message out. 10 seconds
+   * should be plenty, even on slow machines. */
+  for (i = 0; i < 10 * G_USEC_PER_SEC / SLEEP_USEC; i++)
+    {
+      if (g_dbus_connection_get_last_serial(c) != 0)
+        break;
+
+      g_usleep (SLEEP_USEC);
+    }
 
   g_assert_cmpint (g_dbus_connection_get_last_serial(c), !=, 0);
   g_assert_cmpint (g_dbus_connection_get_last_serial(c), ==, message_serial);

@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the licence, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -40,10 +40,36 @@
  * @short_description: strongly typed value datatype
  * @see_also: GVariantType
  *
- * #GVariant is a variant datatype; it stores a value along with
- * information about the type of that value.  The range of possible
- * values is determined by the type.  The type system used by #GVariant
- * is #GVariantType.
+ * #GVariant is a variant datatype; it can contain one or more values
+ * along with information about the type of the values.
+ *
+ * A #GVariant may contain simple types, like an integer, or a boolean value;
+ * or complex types, like an array of two strings, or a dictionary of key
+ * value pairs. A #GVariant is also immutable: once it's been created neither
+ * its type nor its content can be modified further.
+ *
+ * GVariant is useful whenever data needs to be serialized, for example when
+ * sending method parameters in DBus, or when saving settings using GSettings.
+ *
+ * When creating a new #GVariant, you pass the data you want to store in it
+ * along with a string representing the type of data you wish to pass to it.
+ *
+ * For instance, if you want to create a #GVariant holding an integer value you
+ * can use:
+ *
+ * |[<!-- language="C" -->
+ *   GVariant *v = g_variant_new ("u", 40);
+ * ]|
+ *
+ * The string "u" in the first argument tells #GVariant that the data passed to
+ * the constructor (40) is going to be an unsigned integer.
+ *
+ * More advanced examples of #GVariant in use can be found in documentation for
+ * [GVariant format strings][gvariant-format-strings-pointers].
+ *
+ * The range of possible values is determined by the type.
+ *
+ * The type system used by #GVariant is #GVariantType. 
  *
  * #GVariant instances always have a type and a value (which are given
  * at construction time).  The type and value of a #GVariant instance
@@ -594,8 +620,8 @@ NUMERIC_TYPE (DOUBLE, double, gdouble)
 /* Container type Constructor / Deconstructors {{{1 */
 /**
  * g_variant_new_maybe:
- * @child_type: (allow-none): the #GVariantType of the child, or %NULL
- * @child: (allow-none): the child value, or %NULL
+ * @child_type: (nullable): the #GVariantType of the child, or %NULL
+ * @child: (nullable): the child value, or %NULL
  *
  * Depending on if @child is %NULL, either wraps @child inside of a
  * maybe container or creates a Nothing instance for the given @type.
@@ -657,7 +683,7 @@ g_variant_new_maybe (const GVariantType *child_type,
  * Given a maybe-typed #GVariant instance, extract its value.  If the
  * value is Nothing, then this function returns %NULL.
  *
- * Returns: (allow-none) (transfer full): the contents of @value, or %NULL
+ * Returns: (nullable) (transfer full): the contents of @value, or %NULL
  *
  * Since: 2.24
  **/
@@ -719,8 +745,8 @@ g_variant_get_variant (GVariant *value)
 
 /**
  * g_variant_new_array:
- * @child_type: (allow-none): the element type of the new array
- * @children: (allow-none) (array length=n_children): an array of
+ * @child_type: (nullable): the element type of the new array
+ * @children: (nullable) (array length=n_children): an array of
  *            #GVariant pointers, the children
  * @n_children: the length of @children
  *
@@ -970,7 +996,7 @@ g_variant_lookup (GVariant    *dictionary,
  * g_variant_lookup_value:
  * @dictionary: a dictionary #GVariant
  * @key: the key to lookup in the dictionary
- * @expected_type: (allow-none): a #GVariantType, or %NULL
+ * @expected_type: (nullable): a #GVariantType, or %NULL
  *
  * Looks up a value in a dictionary #GVariant.
  *
@@ -1084,11 +1110,11 @@ g_variant_lookup_value (GVariant           *dictionary,
  * - %G_VARIANT_TYPE_DOUBLE: #gdouble
  *
  * For example, if calling this function for an array of 32-bit integers,
- * you might say sizeof(gint32). This value isn't used except for the purpose
+ * you might say `sizeof(gint32)`. This value isn't used except for the purpose
  * of a double-check that the form of the serialised data matches the caller's
  * expectation.
  *
- * @n_elements, which must be non-%NULL is set equal to the number of
+ * @n_elements, which must be non-%NULL, is set equal to the number of
  * items in the array.
  *
  * Returns: (array length=n_elements) (transfer none): a pointer to
@@ -1151,10 +1177,10 @@ g_variant_get_fixed_array (GVariant *value,
  * @n_elements: the number of elements
  * @element_size: the size of each element
  *
- * Provides access to the serialised data for an array of fixed-sized
- * items.
+ * Constructs a new array #GVariant instance, where the elements are
+ * of @element_type type.
  *
- * @value must be an array with fixed-sized elements.  Numeric types are
+ * @elements must be an array with fixed-sized elements.  Numeric types are
  * fixed-size as are tuples containing only other fixed-sized types.
  *
  * @element_size must be the size of a single element in the array.
@@ -1163,8 +1189,7 @@ g_variant_get_fixed_array (GVariant *value,
  * of a double-check that the form of the serialised data matches the caller's
  * expectation.
  *
- * @n_elements, which must be non-%NULL is set equal to the number of
- * items in the array.
+ * @n_elements must be the length of the @elements array.
  *
  * Returns: (transfer none): a floating reference to a new array #GVariant instance
  *
@@ -1217,7 +1242,9 @@ g_variant_new_fixed_array (const GVariantType  *element_type,
  *
  * Creates a string #GVariant with the contents of @string.
  *
- * @string must be valid UTF-8.
+ * @string must be valid UTF-8, and must not be %NULL. To encode
+ * potentially-%NULL strings, use g_variant_new() with `ms` as the
+ * [format string][gvariant-format-strings-maybe-types].
  *
  * Returns: (transfer none): a floating reference to a new string #GVariant instance
  *
@@ -1239,7 +1266,8 @@ g_variant_new_string (const gchar *string)
  *
  * Creates a string #GVariant with the contents of @string.
  *
- * @string must be valid UTF-8.
+ * @string must be valid UTF-8, and must not be %NULL. To encode
+ * potentially-%NULL strings, use this with g_variant_new_maybe().
  *
  * This function consumes @string.  g_free() will be called on @string
  * when it is no longer required.
@@ -1400,14 +1428,14 @@ g_variant_is_signature (const gchar *string)
 /**
  * g_variant_get_string:
  * @value: a string #GVariant instance
- * @length: (allow-none) (default 0) (out): a pointer to a #gsize,
+ * @length: (optional) (default 0) (out): a pointer to a #gsize,
  *          to store the length
  *
  * Returns the string value of a #GVariant instance with a string
  * type.  This includes the types %G_VARIANT_TYPE_STRING,
  * %G_VARIANT_TYPE_OBJECT_PATH and %G_VARIANT_TYPE_SIGNATURE.
  *
- * The string will always be UTF-8 encoded.
+ * The string will always be UTF-8 encoded, and will never be %NULL.
  *
  * If @length is non-%NULL then the length of the string (in bytes) is
  * returned there.  For trusted values, this information is already
@@ -1537,7 +1565,7 @@ g_variant_new_strv (const gchar * const *strv,
 /**
  * g_variant_get_strv:
  * @value: an array of strings #GVariant
- * @length: (out) (allow-none): the length of the result, or %NULL
+ * @length: (out) (optional): the length of the result, or %NULL
  *
  * Gets the contents of an array of strings #GVariant.  This call
  * makes a shallow copy; the return result should be released with
@@ -1587,7 +1615,7 @@ g_variant_get_strv (GVariant *value,
 /**
  * g_variant_dup_strv:
  * @value: an array of strings #GVariant
- * @length: (out) (allow-none): the length of the result, or %NULL
+ * @length: (out) (optional): the length of the result, or %NULL
  *
  * Gets the contents of an array of strings #GVariant.  This call
  * makes a deep copy; the return result should be released with
@@ -1673,7 +1701,7 @@ g_variant_new_objv (const gchar * const *strv,
 /**
  * g_variant_get_objv:
  * @value: an array of object paths #GVariant
- * @length: (out) (allow-none): the length of the result, or %NULL
+ * @length: (out) (optional): the length of the result, or %NULL
  *
  * Gets the contents of an array of object paths #GVariant.  This call
  * makes a shallow copy; the return result should be released with
@@ -1723,7 +1751,7 @@ g_variant_get_objv (GVariant *value,
 /**
  * g_variant_dup_objv:
  * @value: an array of object paths #GVariant
- * @length: (out) (allow-none): the length of the result, or %NULL
+ * @length: (out) (optional): the length of the result, or %NULL
  *
  * Gets the contents of an array of object paths #GVariant.  This call
  * makes a deep copy; the return result should be released with
@@ -1810,6 +1838,9 @@ g_variant_new_bytestring (const gchar *string)
  * the last byte then the returned string is the string, up to the first
  * such nul character.
  *
+ * g_variant_get_fixed_array() should be used instead if the array contains
+ * arbitrary data that could not be nul-terminated or could contain nul bytes.
+ *
  * It is an error to call this function with a @value that is not an
  * array of bytes.
  *
@@ -1841,7 +1872,7 @@ g_variant_get_bytestring (GVariant *value)
 /**
  * g_variant_dup_bytestring:
  * @value: an array-of-bytes #GVariant instance
- * @length: (out) (allow-none) (default NULL): a pointer to a #gsize, to store
+ * @length: (out) (optional) (default NULL): a pointer to a #gsize, to store
  *          the length (not including the nul terminator)
  *
  * Similar to g_variant_get_bytestring() except that instead of
@@ -1910,7 +1941,7 @@ g_variant_new_bytestring_array (const gchar * const *strv,
 /**
  * g_variant_get_bytestring_array:
  * @value: an array of array of bytes #GVariant ('aay')
- * @length: (out) (allow-none): the length of the result, or %NULL
+ * @length: (out) (optional): the length of the result, or %NULL
  *
  * Gets the contents of an array of array of bytes #GVariant.  This call
  * makes a shallow copy; the return result should be released with
@@ -1960,7 +1991,7 @@ g_variant_get_bytestring_array (GVariant *value,
 /**
  * g_variant_dup_bytestring_array:
  * @value: an array of array of bytes #GVariant ('aay')
- * @length: (out) (allow-none): the length of the result, or %NULL
+ * @length: (out) (optional): the length of the result, or %NULL
  *
  * Gets the contents of an array of array of bytes #GVariant.  This call
  * makes a deep copy; the return result should be released with
@@ -2144,7 +2175,7 @@ g_variant_classify (GVariant *value)
 /**
  * g_variant_print_string: (skip)
  * @value: a #GVariant
- * @string: (allow-none) (default NULL): a #GString, or %NULL
+ * @string: (nullable) (default NULL): a #GString, or %NULL
  * @type_annotate: %TRUE if type information should be included in
  *                 the output
  *
@@ -2246,7 +2277,9 @@ g_variant_print_string (GVariant *value,
             }
 
           else
-            /* fall through and handle normally... */;
+            {
+              /* fall through and handle normally... */
+            }
         }
 
       /*
@@ -2584,7 +2617,7 @@ g_variant_print (GVariant *value,
 {
   return g_string_free (g_variant_print_string (value, NULL, type_annotate),
                         FALSE);
-};
+}
 
 /* Hash, Equal, Compare {{{1 */
 /**
@@ -2884,8 +2917,8 @@ struct heap_iter
 #define GVHI_MAGIC              ((gsize) 1450270775u)
 #define is_valid_iter(i)        (i != NULL && \
                                  GVSI(i)->magic == GVSI_MAGIC)
-#define is_valid_heap_iter(i)   (GVHI(i)->magic == GVHI_MAGIC && \
-                                 is_valid_iter(i))
+#define is_valid_heap_iter(i)   (is_valid_iter(i) && \
+                                 GVHI(i)->magic == GVHI_MAGIC)
 
 /**
  * g_variant_iter_new:
@@ -3054,7 +3087,7 @@ g_variant_iter_free (GVariantIter *iter)
  *   }
  * ]|
  *
- * Returns: (allow-none) (transfer full): a #GVariant, or %NULL
+ * Returns: (nullable) (transfer full): a #GVariant, or %NULL
  *
  * Since: 2.24
  **/
@@ -3140,10 +3173,35 @@ struct heap_builder
 #define GVSB(b)                  ((struct stack_builder *) (b))
 #define GVHB(b)                  ((struct heap_builder *) (b))
 #define GVSB_MAGIC               ((gsize) 1033660112u)
+#define GVSB_MAGIC_PARTIAL       ((gsize) 2942751021u)
 #define GVHB_MAGIC               ((gsize) 3087242682u)
 #define is_valid_builder(b)      (b != NULL && \
                                   GVSB(b)->magic == GVSB_MAGIC)
 #define is_valid_heap_builder(b) (GVHB(b)->magic == GVHB_MAGIC)
+
+/* Just to make sure that by adding a union to GVariantBuilder, we
+ * didn't accidentally change ABI. */
+G_STATIC_ASSERT (sizeof (GVariantBuilder) == sizeof (gsize[16]));
+
+static gboolean
+ensure_valid_builder (GVariantBuilder *builder)
+{
+  if (is_valid_builder (builder))
+    return TRUE;
+  if (builder->u.s.partial_magic == GVSB_MAGIC_PARTIAL)
+    {
+      static GVariantBuilder cleared_builder;
+
+      /* Make sure that only first two fields were set and the rest is
+       * zeroed to avoid messing up the builder that had parent
+       * address equal to GVSB_MAGIC_PARTIAL. */
+      if (memcmp (cleared_builder.u.s.y, builder->u.s.y, sizeof cleared_builder.u.s.y))
+        return FALSE;
+
+      g_variant_builder_init (builder, builder->u.s.type);
+    }
+  return is_valid_builder (builder);
+}
 
 /**
  * g_variant_builder_new:
@@ -3238,7 +3296,7 @@ g_variant_builder_ref (GVariantBuilder *builder)
  * #GVariantBuilder if you want to abort building the value part-way
  * through.  This function need not be called if you call
  * g_variant_builder_end() and it also doesn't need to be called on
- * builders allocated with g_variant_builder_new (see
+ * builders allocated with g_variant_builder_new() (see
  * g_variant_builder_unref() for that).
  *
  * This function leaves the #GVariantBuilder structure set to all-zeros.
@@ -3254,10 +3312,10 @@ g_variant_builder_clear (GVariantBuilder *builder)
   gsize i;
 
   if (GVSB(builder)->magic == 0)
-    /* all-zeros case */
+    /* all-zeros or partial case */
     return;
 
-  g_return_if_fail (is_valid_builder (builder));
+  g_return_if_fail (ensure_valid_builder (builder));
 
   g_variant_type_free (GVSB(builder)->type);
 
@@ -3420,7 +3478,7 @@ void
 g_variant_builder_add_value (GVariantBuilder *builder,
                              GVariant        *value)
 {
-  g_return_if_fail (is_valid_builder (builder));
+  g_return_if_fail (ensure_valid_builder (builder));
   g_return_if_fail (GVSB(builder)->offset < GVSB(builder)->max_items);
   g_return_if_fail (!GVSB(builder)->expected_type ||
                     g_variant_is_of_type (value,
@@ -3454,14 +3512,44 @@ g_variant_builder_add_value (GVariantBuilder *builder,
 /**
  * g_variant_builder_open:
  * @builder: a #GVariantBuilder
- * @type: a #GVariantType
+ * @type: the #GVariantType of the container
  *
  * Opens a subcontainer inside the given @builder.  When done adding
- * items to the subcontainer, g_variant_builder_close() must be called.
+ * items to the subcontainer, g_variant_builder_close() must be called. @type
+ * is the type of the container: so to build a tuple of several values, @type
+ * must include the tuple itself.
  *
  * It is an error to call this function in any way that would cause an
  * inconsistent value to be constructed (ie: adding too many values or
  * a value of an incorrect type).
+ *
+ * Example of building a nested variant:
+ * |[<!-- language="C" -->
+ * GVariantBuilder builder;
+ * guint32 some_number = get_number ();
+ * g_autoptr (GHashTable) some_dict = get_dict ();
+ * GHashTableIter iter;
+ * const gchar *key;
+ * const GVariant *value;
+ * g_autoptr (GVariant) output = NULL;
+ *
+ * g_variant_builder_init (&builder, G_VARIANT_TYPE ("(ua{sv})"));
+ * g_variant_builder_add (&builder, "u", some_number);
+ * g_variant_builder_open (&builder, G_VARIANT_TYPE ("a{sv}"));
+ *
+ * g_hash_table_iter_init (&iter, some_dict);
+ * while (g_hash_table_iter_next (&iter, (gpointer *) &key, (gpointer *) &value))
+ *   {
+ *     g_variant_builder_open (&builder, G_VARIANT_TYPE ("{sv}"));
+ *     g_variant_builder_add (&builder, "s", key);
+ *     g_variant_builder_add (&builder, "v", value);
+ *     g_variant_builder_close (&builder);
+ *   }
+ *
+ * g_variant_builder_close (&builder);
+ *
+ * output = g_variant_builder_end (&builder);
+ * ]|
  *
  * Since: 2.24
  **/
@@ -3471,7 +3559,7 @@ g_variant_builder_open (GVariantBuilder    *builder,
 {
   GVariantBuilder *parent;
 
-  g_return_if_fail (is_valid_builder (builder));
+  g_return_if_fail (ensure_valid_builder (builder));
   g_return_if_fail (GVSB(builder)->offset < GVSB(builder)->max_items);
   g_return_if_fail (!GVSB(builder)->expected_type ||
                     g_variant_type_is_subtype_of (type,
@@ -3517,7 +3605,7 @@ g_variant_builder_close (GVariantBuilder *builder)
 {
   GVariantBuilder *parent;
 
-  g_return_if_fail (is_valid_builder (builder));
+  g_return_if_fail (ensure_valid_builder (builder));
   g_return_if_fail (GVSB(builder)->parent != NULL);
 
   parent = GVSB(builder)->parent;
@@ -3562,7 +3650,10 @@ g_variant_make_array_type (GVariant *element)
  * It is not permissible to use @builder in any way after this call
  * except for reference counting operations (in the case of a
  * heap-allocated #GVariantBuilder) or by reinitialising it with
- * g_variant_builder_init() (in the case of stack-allocated).
+ * g_variant_builder_init() (in the case of stack-allocated). This
+ * means that for the stack-allocated builders there is no need to
+ * call g_variant_builder_clear() after the call to
+ * g_variant_builder_end().
  *
  * It is an error to call this function in any way that would create an
  * inconsistent value to be constructed (ie: insufficient number of
@@ -3582,7 +3673,7 @@ g_variant_builder_end (GVariantBuilder *builder)
   GVariantType *my_type;
   GVariant *value;
 
-  g_return_val_if_fail (is_valid_builder (builder), NULL);
+  g_return_val_if_fail (ensure_valid_builder (builder), NULL);
   g_return_val_if_fail (GVSB(builder)->offset >= GVSB(builder)->min_items,
                         NULL);
   g_return_val_if_fail (!GVSB(builder)->uniform_item_types ||
@@ -3739,14 +3830,39 @@ struct heap_dict
 #define GVSD(d)                 ((struct stack_dict *) (d))
 #define GVHD(d)                 ((struct heap_dict *) (d))
 #define GVSD_MAGIC              ((gsize) 2579507750u)
+#define GVSD_MAGIC_PARTIAL      ((gsize) 3488698669u)
 #define GVHD_MAGIC              ((gsize) 2450270775u)
 #define is_valid_dict(d)        (d != NULL && \
                                  GVSD(d)->magic == GVSD_MAGIC)
 #define is_valid_heap_dict(d)   (GVHD(d)->magic == GVHD_MAGIC)
 
+/* Just to make sure that by adding a union to GVariantDict, we didn't
+ * accidentally change ABI. */
+G_STATIC_ASSERT (sizeof (GVariantDict) == sizeof (gsize[16]));
+
+static gboolean
+ensure_valid_dict (GVariantDict *dict)
+{
+  if (is_valid_dict (dict))
+    return TRUE;
+  if (dict->u.s.partial_magic == GVSD_MAGIC_PARTIAL)
+    {
+      static GVariantDict cleared_dict;
+
+      /* Make sure that only first two fields were set and the rest is
+       * zeroed to avoid messing up the builder that had parent
+       * address equal to GVSB_MAGIC_PARTIAL. */
+      if (memcmp (cleared_dict.u.s.y, dict->u.s.y, sizeof cleared_dict.u.s.y))
+        return FALSE;
+
+      g_variant_dict_init (dict, dict->u.s.asv);
+    }
+  return is_valid_dict (dict);
+}
+
 /**
  * g_variant_dict_new:
- * @from_asv: (allow-none): the #GVariant with which to initialise the
+ * @from_asv: (nullable): the #GVariant with which to initialise the
  *   dictionary
  *
  * Allocates and initialises a new #GVariantDict.
@@ -3780,7 +3896,7 @@ g_variant_dict_new (GVariant *from_asv)
 /**
  * g_variant_dict_init: (skip)
  * @dict: a #GVariantDict
- * @from_asv: (allow-none): the initial value for @dict
+ * @from_asv: (nullable): the initial value for @dict
  *
  * Initialises a #GVariantDict structure.
  *
@@ -3851,7 +3967,7 @@ g_variant_dict_lookup (GVariantDict *dict,
   GVariant *value;
   va_list ap;
 
-  g_return_val_if_fail (is_valid_dict (dict), FALSE);
+  g_return_val_if_fail (ensure_valid_dict (dict), FALSE);
   g_return_val_if_fail (key != NULL, FALSE);
   g_return_val_if_fail (format_string != NULL, FALSE);
 
@@ -3871,7 +3987,7 @@ g_variant_dict_lookup (GVariantDict *dict,
  * g_variant_dict_lookup_value:
  * @dict: a #GVariantDict
  * @key: the key to lookup in the dictionary
- * @expected_type: (allow-none): a #GVariantType, or %NULL
+ * @expected_type: (nullable): a #GVariantType, or %NULL
  *
  * Looks up a value in a #GVariantDict.
  *
@@ -3896,7 +4012,7 @@ g_variant_dict_lookup_value (GVariantDict       *dict,
 {
   GVariant *result;
 
-  g_return_val_if_fail (is_valid_dict (dict), NULL);
+  g_return_val_if_fail (ensure_valid_dict (dict), NULL);
   g_return_val_if_fail (key != NULL, NULL);
 
   result = g_hash_table_lookup (GVSD(dict)->values, key);
@@ -3922,7 +4038,7 @@ gboolean
 g_variant_dict_contains (GVariantDict *dict,
                          const gchar  *key)
 {
-  g_return_val_if_fail (is_valid_dict (dict), FALSE);
+  g_return_val_if_fail (ensure_valid_dict (dict), FALSE);
   g_return_val_if_fail (key != NULL, FALSE);
 
   return g_hash_table_contains (GVSD(dict)->values, key);
@@ -3950,7 +4066,7 @@ g_variant_dict_insert (GVariantDict *dict,
 {
   va_list ap;
 
-  g_return_if_fail (is_valid_dict (dict));
+  g_return_if_fail (ensure_valid_dict (dict));
   g_return_if_fail (key != NULL);
   g_return_if_fail (format_string != NULL);
 
@@ -3976,7 +4092,7 @@ g_variant_dict_insert_value (GVariantDict *dict,
                              const gchar  *key,
                              GVariant     *value)
 {
-  g_return_if_fail (is_valid_dict (dict));
+  g_return_if_fail (ensure_valid_dict (dict));
   g_return_if_fail (key != NULL);
   g_return_if_fail (value != NULL);
 
@@ -3998,7 +4114,7 @@ gboolean
 g_variant_dict_remove (GVariantDict *dict,
                        const gchar  *key)
 {
-  g_return_val_if_fail (is_valid_dict (dict), FALSE);
+  g_return_val_if_fail (ensure_valid_dict (dict), FALSE);
   g_return_val_if_fail (key != NULL, FALSE);
 
   return g_hash_table_remove (GVSD(dict)->values, key);
@@ -4032,7 +4148,7 @@ g_variant_dict_clear (GVariantDict *dict)
     /* all-zeros case */
     return;
 
-  g_return_if_fail (is_valid_dict (dict));
+  g_return_if_fail (ensure_valid_dict (dict));
 
   g_hash_table_unref (GVSD(dict)->values);
   GVSD(dict)->values = NULL;
@@ -4063,7 +4179,7 @@ g_variant_dict_end (GVariantDict *dict)
   GHashTableIter iter;
   gpointer key, value;
 
-  g_return_val_if_fail (is_valid_dict (dict), NULL);
+  g_return_val_if_fail (ensure_valid_dict (dict), NULL);
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
 
@@ -4130,9 +4246,9 @@ g_variant_dict_unref (GVariantDict *dict)
 /*< private >
  * g_variant_format_string_scan:
  * @string: a string that may be prefixed with a format string
- * @limit: (allow-none) (default NULL): a pointer to the end of @string,
+ * @limit: (nullable) (default NULL): a pointer to the end of @string,
  *         or %NULL
- * @endptr: (allow-none) (default NULL): location to store the end pointer,
+ * @endptr: (nullable) (default NULL): location to store the end pointer,
  *          or %NULL
  *
  * Checks the string pointed to by @string for starting with a properly
@@ -4381,9 +4497,9 @@ g_variant_check_format_string (GVariant    *value,
 /*< private >
  * g_variant_format_string_scan_type:
  * @string: a string that may be prefixed with a format string
- * @limit: (allow-none) (default NULL): a pointer to the end of @string,
+ * @limit: (nullable) (default NULL): a pointer to the end of @string,
  *         or %NULL
- * @endptr: (allow-none) (default NULL): location to store the end pointer,
+ * @endptr: (nullable) (default NULL): location to store the end pointer,
  *          or %NULL
  *
  * If @string starts with a valid format string then this function will
@@ -4396,7 +4512,7 @@ g_variant_check_format_string (GVariant    *value,
  * This function is otherwise exactly like
  * g_variant_format_string_scan().
  *
- * Returns: (allow-none): a #GVariantType if there was a valid format string
+ * Returns: (nullable): a #GVariantType if there was a valid format string
  *
  * Since: 2.24
  */
@@ -5197,7 +5313,7 @@ g_variant_new (const gchar *format_string,
 /**
  * g_variant_new_va: (skip)
  * @format_string: a string that is prefixed with a format string
- * @endptr: (allow-none) (default NULL): location to store the end pointer,
+ * @endptr: (nullable) (default NULL): location to store the end pointer,
  *          or %NULL
  * @app: a pointer to a #va_list
  *
@@ -5219,7 +5335,7 @@ g_variant_new (const gchar *format_string,
  *
  * Note that the arguments in @app must be of the correct width for their
  * types specified in @format_string when collected into the #va_list.
- * See the [GVariant varargs documentation][gvariant-varargs.
+ * See the [GVariant varargs documentation][gvariant-varargs].
  *
  * These two generalisations allow mixing of multiple calls to
  * g_variant_new_va() and g_variant_get_va() within a single actual
@@ -5308,7 +5424,7 @@ g_variant_get (GVariant    *value,
  * g_variant_get_va: (skip)
  * @value: a #GVariant
  * @format_string: a string that is prefixed with a format string
- * @endptr: (allow-none) (default NULL): location to store the end pointer,
+ * @endptr: (nullable) (default NULL): location to store the end pointer,
  *          or %NULL
  * @app: a pointer to a #va_list
  *
@@ -5442,6 +5558,10 @@ g_variant_get_child (GVariant    *value,
 {
   GVariant *child;
   va_list ap;
+
+  /* if any direct-pointer-access formats are in use, flatten first */
+  if (strchr (format_string, '&'))
+    g_variant_get_data (value);
 
   child = g_variant_get_child_value (value, index_);
   g_return_if_fail (valid_format_string (format_string, TRUE, child));

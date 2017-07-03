@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -36,7 +36,7 @@
  * @include: gio/gio.h
  * @see_also: #GAsyncResult, #GTask
  *
- * As of GLib 2.36, #GSimpleAsyncResult is deprecated in favor of
+ * As of GLib 2.46, #GSimpleAsyncResult is deprecated in favor of
  * #GTask, which provides a simpler API.
  *
  * #GSimpleAsyncResult implements #GAsyncResult.
@@ -202,6 +202,8 @@
  * ]|
  */
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
 static void g_simple_async_result_async_result_iface_init (GAsyncResultIface       *iface);
 
 struct _GSimpleAsyncResult
@@ -288,7 +290,7 @@ g_simple_async_result_init (GSimpleAsyncResult *simple)
 
 /**
  * g_simple_async_result_new:
- * @source_object: (allow-none): a #GObject, or %NULL.
+ * @source_object: (nullable): a #GObject, or %NULL.
  * @callback: (scope async): a #GAsyncReadyCallback.
  * @user_data: (closure): user data passed to @callback.
  * @source_tag: the asynchronous function.
@@ -305,6 +307,8 @@ g_simple_async_result_init (GSimpleAsyncResult *simple)
  * this function returns.
  *
  * Returns: a #GSimpleAsyncResult.
+ *
+ * Deprecated: 2.46: Use g_task_new() instead.
  **/
 GSimpleAsyncResult *
 g_simple_async_result_new (GObject             *source_object,
@@ -330,7 +334,7 @@ g_simple_async_result_new (GObject             *source_object,
 
 /**
  * g_simple_async_result_new_from_error:
- * @source_object: (allow-none): a #GObject, or %NULL.
+ * @source_object: (nullable): a #GObject, or %NULL.
  * @callback: (scope async): a #GAsyncReadyCallback.
  * @user_data: (closure): user data passed to @callback.
  * @error: a #GError
@@ -338,6 +342,8 @@ g_simple_async_result_new (GObject             *source_object,
  * Creates a #GSimpleAsyncResult from an error condition.
  *
  * Returns: a #GSimpleAsyncResult.
+ *
+ * Deprecated: 2.46: Use g_task_new() and g_task_return_error() instead.
  **/
 GSimpleAsyncResult *
 g_simple_async_result_new_from_error (GObject             *source_object,
@@ -359,7 +365,7 @@ g_simple_async_result_new_from_error (GObject             *source_object,
 
 /**
  * g_simple_async_result_new_take_error: (skip)
- * @source_object: (allow-none): a #GObject, or %NULL
+ * @source_object: (nullable): a #GObject, or %NULL
  * @callback: (scope async): a #GAsyncReadyCallback
  * @user_data: (closure): user data passed to @callback
  * @error: a #GError
@@ -370,6 +376,8 @@ g_simple_async_result_new_from_error (GObject             *source_object,
  * Returns: a #GSimpleAsyncResult
  *
  * Since: 2.28
+ *
+ * Deprecated: 2.46: Use g_task_new() and g_task_return_error() instead.
  **/
 GSimpleAsyncResult *
 g_simple_async_result_new_take_error (GObject             *source_object,
@@ -391,7 +399,7 @@ g_simple_async_result_new_take_error (GObject             *source_object,
 
 /**
  * g_simple_async_result_new_error:
- * @source_object: (allow-none): a #GObject, or %NULL.
+ * @source_object: (nullable): a #GObject, or %NULL.
  * @callback: (scope async): a #GAsyncReadyCallback.
  * @user_data: (closure): user data passed to @callback.
  * @domain: a #GQuark.
@@ -402,6 +410,8 @@ g_simple_async_result_new_take_error (GObject             *source_object,
  * Creates a new #GSimpleAsyncResult with a set error.
  *
  * Returns: a #GSimpleAsyncResult.
+ *
+ * Deprecated: 2.46: Use g_task_new() and g_task_return_new_error() instead.
  **/
 GSimpleAsyncResult *
 g_simple_async_result_new_error (GObject             *source_object,
@@ -470,6 +480,8 @@ g_simple_async_result_async_result_iface_init (GAsyncResultIface *iface)
  * This function has nothing to do with
  * g_simple_async_result_set_check_cancellable().  It only refers to the
  * #GCancellable passed to g_simple_async_result_run_in_thread().
+ *
+ * Deprecated: 2.46
  **/
 void
 g_simple_async_result_set_handle_cancellation (GSimpleAsyncResult *simple,
@@ -486,6 +498,8 @@ g_simple_async_result_set_handle_cancellation (GSimpleAsyncResult *simple,
  * Gets the source tag for the #GSimpleAsyncResult.
  *
  * Returns: a #gpointer to the source object for the #GSimpleAsyncResult.
+ *
+ * Deprecated: 2.46. Use #GTask and g_task_get_source_tag() instead.
  **/
 gpointer
 g_simple_async_result_get_source_tag (GSimpleAsyncResult *simple)
@@ -507,6 +521,8 @@ g_simple_async_result_get_source_tag (GSimpleAsyncResult *simple)
  * function will return %TRUE with @dest set appropriately.
  *
  * Returns: %TRUE if the error was propagated to @dest. %FALSE otherwise.
+ *
+ * Deprecated: 2.46: Use #GTask instead.
  **/
 gboolean
 g_simple_async_result_propagate_error (GSimpleAsyncResult  *simple,
@@ -534,6 +550,8 @@ g_simple_async_result_propagate_error (GSimpleAsyncResult  *simple,
  * @destroy_op_res: a #GDestroyNotify function.
  *
  * Sets the operation result within the asynchronous result to a pointer.
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_return_pointer() instead.
  **/
 void
 g_simple_async_result_set_op_res_gpointer (GSimpleAsyncResult *simple,
@@ -554,6 +572,8 @@ g_simple_async_result_set_op_res_gpointer (GSimpleAsyncResult *simple,
  * Gets a pointer result as returned by the asynchronous function.
  *
  * Returns: a pointer from the result.
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_propagate_pointer() instead.
  **/
 gpointer
 g_simple_async_result_get_op_res_gpointer (GSimpleAsyncResult *simple)
@@ -569,6 +589,8 @@ g_simple_async_result_get_op_res_gpointer (GSimpleAsyncResult *simple)
  *
  * Sets the operation result within the asynchronous result to
  * the given @op_res.
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_return_int() instead.
  **/
 void
 g_simple_async_result_set_op_res_gssize (GSimpleAsyncResult *simple,
@@ -586,6 +608,8 @@ g_simple_async_result_set_op_res_gssize (GSimpleAsyncResult *simple,
  * Gets a gssize from the asynchronous result.
  *
  * Returns: a gssize returned from the asynchronous function.
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_propagate_int() instead.
  **/
 gssize
 g_simple_async_result_get_op_res_gssize (GSimpleAsyncResult *simple)
@@ -600,6 +624,8 @@ g_simple_async_result_get_op_res_gssize (GSimpleAsyncResult *simple)
  * @op_res: a #gboolean.
  *
  * Sets the operation result to a boolean within the asynchronous result.
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_return_boolean() instead.
  **/
 void
 g_simple_async_result_set_op_res_gboolean (GSimpleAsyncResult *simple,
@@ -618,6 +644,8 @@ g_simple_async_result_set_op_res_gboolean (GSimpleAsyncResult *simple,
  *
  * Returns: %TRUE if the operation's result was %TRUE, %FALSE
  *     if the operation's result was %FALSE.
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_propagate_boolean() instead.
  **/
 gboolean
 g_simple_async_result_get_op_res_gboolean (GSimpleAsyncResult *simple)
@@ -632,6 +660,8 @@ g_simple_async_result_get_op_res_gboolean (GSimpleAsyncResult *simple)
  * @error: #GError.
  *
  * Sets the result from a #GError.
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_return_error() instead.
  **/
 void
 g_simple_async_result_set_from_error (GSimpleAsyncResult *simple,
@@ -655,6 +685,8 @@ g_simple_async_result_set_from_error (GSimpleAsyncResult *simple,
  * of @error, so the caller does not need to free it any more.
  *
  * Since: 2.28
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_return_error() instead.
  **/
 void
 g_simple_async_result_take_error (GSimpleAsyncResult *simple,
@@ -679,6 +711,8 @@ g_simple_async_result_take_error (GSimpleAsyncResult *simple,
  *
  * Sets an error within the asynchronous result without a #GError.
  * Unless writing a binding, see g_simple_async_result_set_error().
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_return_error() instead.
  **/
 void
 g_simple_async_result_set_error_va (GSimpleAsyncResult *simple,
@@ -706,6 +740,8 @@ g_simple_async_result_set_error_va (GSimpleAsyncResult *simple,
  * @...: a list of variables to fill in @format.
  *
  * Sets an error within the asynchronous result without a #GError.
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_return_new_error() instead.
  **/
 void
 g_simple_async_result_set_error (GSimpleAsyncResult *simple,
@@ -736,6 +772,8 @@ g_simple_async_result_set_error (GSimpleAsyncResult *simple,
  *
  * Calling this function takes a reference to @simple for as long as
  * is needed to complete the call.
+ *
+ * Deprecated: 2.46: Use #GTask instead.
  **/
 void
 g_simple_async_result_complete (GSimpleAsyncResult *simple)
@@ -788,6 +826,8 @@ complete_in_idle_cb (gpointer data)
  *
  * Calling this function takes a reference to @simple for as long as
  * is needed to complete the call.
+ *
+ * Deprecated: 2.46: Use #GTask instead.
  */
 void
 g_simple_async_result_complete_in_idle (GSimpleAsyncResult *simple)
@@ -875,7 +915,7 @@ run_in_thread (GIOSchedulerJob *job,
  * @simple: a #GSimpleAsyncResult.
  * @func: a #GSimpleAsyncThreadFunc.
  * @io_priority: the io priority of the request.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
  *
  * Runs the asynchronous job in a separate thread and then calls
  * g_simple_async_result_complete_in_idle() on @simple to return
@@ -883,6 +923,8 @@ run_in_thread (GIOSchedulerJob *job,
  *
  * Calling this function takes a reference to @simple for as long as
  * is needed to run the job and report its completion.
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_run_in_thread() instead.
  */
 void
 g_simple_async_result_run_in_thread (GSimpleAsyncResult     *simple,
@@ -909,8 +951,8 @@ g_simple_async_result_run_in_thread (GSimpleAsyncResult     *simple,
 /**
  * g_simple_async_result_is_valid:
  * @result: the #GAsyncResult passed to the _finish function.
- * @source: (allow-none): the #GObject passed to the _finish function.
- * @source_tag: (allow-none): the asynchronous function.
+ * @source: (nullable): the #GObject passed to the _finish function.
+ * @source_tag: (nullable): the asynchronous function.
  *
  * Ensures that the data passed to the _finish function of an async
  * operation is consistent.  Three checks are performed.
@@ -928,6 +970,8 @@ g_simple_async_result_run_in_thread (GSimpleAsyncResult     *simple,
  * Returns: #TRUE if all checks passed or #FALSE if any failed.
  *
  * Since: 2.20
+ *
+ * Deprecated: 2.46: Use #GTask and g_task_is_valid() instead.
  **/
 gboolean
 g_simple_async_result_is_valid (GAsyncResult *result,
@@ -959,7 +1003,7 @@ g_simple_async_result_is_valid (GAsyncResult *result,
 
 /**
  * g_simple_async_report_error_in_idle: (skip)
- * @object: (allow-none): a #GObject, or %NULL.
+ * @object: (nullable): a #GObject, or %NULL.
  * @callback: a #GAsyncReadyCallback.
  * @user_data: user data passed to @callback.
  * @domain: a #GQuark containing the error domain (usually #G_IO_ERROR).
@@ -970,6 +1014,8 @@ g_simple_async_result_is_valid (GAsyncResult *result,
  * Reports an error in an asynchronous function in an idle function by
  * directly setting the contents of the #GAsyncResult with the given error
  * information.
+ *
+ * Deprecated: 2.46: Use g_task_report_error().
  **/
 void
 g_simple_async_report_error_in_idle (GObject             *object,
@@ -1000,7 +1046,7 @@ g_simple_async_report_error_in_idle (GObject             *object,
 
 /**
  * g_simple_async_report_gerror_in_idle:
- * @object: (allow-none): a #GObject, or %NULL
+ * @object: (nullable): a #GObject, or %NULL
  * @callback: (scope async): a #GAsyncReadyCallback.
  * @user_data: (closure): user data passed to @callback.
  * @error: the #GError to report
@@ -1008,6 +1054,8 @@ g_simple_async_report_error_in_idle (GObject             *object,
  * Reports an error in an idle function. Similar to
  * g_simple_async_report_error_in_idle(), but takes a #GError rather
  * than building a new one.
+ *
+ * Deprecated: 2.46: Use g_task_report_error().
  **/
 void
 g_simple_async_report_gerror_in_idle (GObject *object,
@@ -1030,7 +1078,7 @@ g_simple_async_report_gerror_in_idle (GObject *object,
 
 /**
  * g_simple_async_report_take_gerror_in_idle: (skip)
- * @object: (allow-none): a #GObject, or %NULL
+ * @object: (nullable): a #GObject, or %NULL
  * @callback: a #GAsyncReadyCallback.
  * @user_data: user data passed to @callback.
  * @error: the #GError to report
@@ -1040,6 +1088,8 @@ g_simple_async_report_gerror_in_idle (GObject *object,
  * ownership of @error, so the caller does not have to free it any more.
  *
  * Since: 2.28
+ *
+ * Deprecated: 2.46: Use g_task_report_error().
  **/
 void
 g_simple_async_report_take_gerror_in_idle (GObject *object,
@@ -1063,7 +1113,7 @@ g_simple_async_report_take_gerror_in_idle (GObject *object,
 /**
  * g_simple_async_result_set_check_cancellable:
  * @simple: a #GSimpleAsyncResult
- * @check_cancellable: (allow-none): a #GCancellable to check, or %NULL to unset
+ * @check_cancellable: (nullable): a #GCancellable to check, or %NULL to unset
  *
  * Sets a #GCancellable to check before dispatching results.
  *
@@ -1082,6 +1132,8 @@ g_simple_async_report_take_gerror_in_idle (GObject *object,
  * unrelated g_simple_async_result_set_handle_cancellation() function.
  *
  * Since: 2.32
+ *
+ * Deprecated: 2.46: Use #GTask instead.
  **/
 void
 g_simple_async_result_set_check_cancellable (GSimpleAsyncResult *simple,
@@ -1094,3 +1146,5 @@ g_simple_async_result_set_check_cancellable (GSimpleAsyncResult *simple,
   if (check_cancellable)
     simple->check_cancellable = g_object_ref (check_cancellable);
 }
+
+G_GNUC_END_IGNORE_DEPRECATIONS

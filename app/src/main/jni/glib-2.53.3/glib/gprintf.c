@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -58,7 +58,7 @@ g_printf (gchar const *format,
 
 /**
  * g_fprintf:
- * @file: the stream to write to.
+ * @file: (not nullable): the stream to write to.
  * @format: a standard printf() format string, but notice 
  *          [string precision pitfalls][string-precision]
  * @...: the arguments to insert in the output.
@@ -191,7 +191,7 @@ g_vprintf (gchar const *format,
 
 /**
  * g_vfprintf:
- * @file: the stream to write to.
+ * @file: (not nullable): the stream to write to.
  * @format: a standard printf() format string, but notice 
  *          [string precision pitfalls][string-precision]
  * @args: the list of arguments to insert in the output.
@@ -316,13 +316,6 @@ g_vasprintf (gchar      **string,
   len = vasprintf (string, format, args);
   if (len < 0)
     *string = NULL;
-  else if (!g_mem_is_system_malloc ()) 
-    {
-      /* vasprintf returns malloc-allocated memory */
-      gchar *string1 = g_strndup (*string, len);
-      free (*string);
-      *string = string1;
-    }
 
 #else
 

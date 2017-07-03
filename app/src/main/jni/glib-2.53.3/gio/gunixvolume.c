@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -307,6 +307,7 @@ eject_mount_do (GVolume              *volume,
   GTask *task;
 
   task = g_task_new (volume, cancellable, callback, user_data);
+  g_task_set_source_tag (task, eject_mount_do);
 
   if (g_task_return_error_if_cancelled (task))
     {

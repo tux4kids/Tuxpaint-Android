@@ -14,9 +14,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef __G_REGEX_H__
@@ -56,7 +55,7 @@ G_BEGIN_DECLS
  *     Since 2.16
  * @G_REGEX_ERROR_NOTHING_TO_REPEAT: Nothing to repeat. Since 2.16
  * @G_REGEX_ERROR_UNRECOGNIZED_CHARACTER: Unrecognized character after "(?",
- *     "(?&lt;" or "(?P". Since 2.16
+ *     "(?<" or "(?P". Since 2.16
  * @G_REGEX_ERROR_POSIX_NAMED_CLASS_OUTSIDE_CLASS: POSIX named classes are
  *     supported only within a class. Since 2.16
  * @G_REGEX_ERROR_UNMATCHED_PARENTHESIS: Missing terminating ")" or ")"

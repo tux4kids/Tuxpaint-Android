@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -98,8 +98,9 @@ usage (gint *argc, gchar **argv[], gboolean use_stdout)
                          "  monitor      Monitor a remote object\n"
                          "  call         Invoke a method on a remote object\n"
                          "  emit         Emit a signal\n"
+                         "  wait         Wait for a bus name to appear\n"
                          "\n"
-                         "Use \"%s COMMAND --help\" to get help on each command.\n"),
+                         "Use “%s COMMAND --help” to get help on each command.\n"),
                        program_name);
   g_free (program_name);
   g_option_context_set_description (o, s);
@@ -202,6 +203,12 @@ print_paths (GDBusConnection *c,
   const gchar *xml_data;
   GDBusNodeInfo *node;
   guint n;
+
+  if (!g_dbus_is_name (name))
+    {
+      g_printerr (_("Error: %s is not a valid name\n"), name);
+      goto out;
+    }
 
   error = NULL;
   result = g_dbus_connection_call_sync (c,
@@ -462,7 +469,7 @@ call_helper_get_method_in_signature (GDBusConnection  *c,
   if (interface_info == NULL)
     {
       g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
-                   _("Warning: According to introspection data, interface '%s' does not exist\n"),
+                   _("Warning: According to introspection data, interface “%s” does not exist\n"),
                    interface_name);
       goto out;
     }
@@ -471,7 +478,7 @@ call_helper_get_method_in_signature (GDBusConnection  *c,
   if (method_info == NULL)
     {
       g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
-                   _("Warning: According to introspection data, method '%s' does not exist on interface '%s'\n"),
+                   _("Warning: According to introspection data, method “%s” does not exist on interface “%s”\n"),
                    method_name,
                    interface_name);
       goto out;
@@ -555,6 +562,8 @@ handle_emit (gint        *argc,
   gchar *interface_name;
   gchar *signal_name;
   GVariantBuilder builder;
+  gboolean skip_dashes;
+  guint parm;
   guint n;
 
   ret = FALSE;
@@ -657,9 +666,19 @@ handle_emit (gint        *argc,
 
   /* Read parameters */
   g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
+  skip_dashes = TRUE;
+  parm = 0;
   for (n = 1; n < (guint) *argc; n++)
     {
       GVariant *value;
+
+      /* Under certain conditions, g_option_context_parse returns the "--"
+         itself (setting off unparsed arguments), too: */
+      if (skip_dashes && g_strcmp0 ((*argv)[n], "--") == 0)
+        {
+          skip_dashes = FALSE;
+          continue;
+        }
 
       error = NULL;
       value = g_variant_parse (NULL,
@@ -679,7 +698,7 @@ handle_emit (gint        *argc,
             {
               /* Use the original non-"parse-me-harder" error */
               g_printerr (_("Error parsing parameter %d: %s\n"),
-                          n,
+                          parm + 1,
                           context);
               g_error_free (error);
               g_free (context);
@@ -689,6 +708,7 @@ handle_emit (gint        *argc,
           g_free (context);
         }
       g_variant_builder_add_value (&builder, value);
+      ++parm;
     }
   parameters = g_variant_builder_end (&builder);
 
@@ -764,6 +784,8 @@ handle_call (gint        *argc,
   gboolean complete_paths;
   gboolean complete_methods;
   GVariantBuilder builder;
+  gboolean skip_dashes;
+  guint parm;
   guint n;
 
   ret = FALSE;
@@ -863,6 +885,12 @@ handle_call (gint        *argc,
         }
     }
 
+  if (!request_completion && !g_dbus_is_name (opt_call_dest))
+    {
+      g_printerr (_("Error: %s is not a valid bus name\n"), opt_call_dest);
+      goto out;
+    }
+
   /* validate and complete object path */
   if (complete_paths)
     {
@@ -920,7 +948,7 @@ handle_call (gint        *argc,
   s = strrchr (opt_call_method, '.');
   if (!request_completion && s == NULL)
     {
-      g_printerr (_("Error: Method name '%s' is invalid\n"), opt_call_method);
+      g_printerr (_("Error: Method name “%s” is invalid\n"), opt_call_method);
       goto out;
     }
   method_name = g_strdup (s + 1);
@@ -946,18 +974,28 @@ handle_call (gint        *argc,
 
   /* Read parameters */
   g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
+  skip_dashes = TRUE;
+  parm = 0;
   for (n = 1; n < (guint) *argc; n++)
     {
       GVariant *value;
       GVariantType *type;
 
+      /* Under certain conditions, g_option_context_parse returns the "--"
+         itself (setting off unparsed arguments), too: */
+      if (skip_dashes && g_strcmp0 ((*argv)[n], "--") == 0)
+        {
+          skip_dashes = FALSE;
+          continue;
+        }
+
       type = NULL;
       if (in_signature_types != NULL)
         {
-          if (n - 1 >= in_signature_types->len)
+          if (parm >= in_signature_types->len)
             {
               /* Only warn for the first param */
-              if (n - 1 == in_signature_types->len)
+              if (parm == in_signature_types->len)
                 {
                   g_printerr ("Warning: Introspection data indicates %d parameters but more was passed\n",
                               in_signature_types->len);
@@ -965,7 +1003,7 @@ handle_call (gint        *argc,
             }
           else
             {
-              type = in_signature_types->pdata[n - 1];
+              type = in_signature_types->pdata[parm];
             }
         }
 
@@ -988,8 +1026,8 @@ handle_call (gint        *argc,
               if (type != NULL)
                 {
                   s = g_variant_type_dup_string (type);
-                  g_printerr (_("Error parsing parameter %d of type '%s': %s\n"),
-                              n,
+                  g_printerr (_("Error parsing parameter %d of type “%s”: %s\n"),
+                              parm + 1,
                               s,
                               context);
                   g_free (s);
@@ -997,7 +1035,7 @@ handle_call (gint        *argc,
               else
                 {
                   g_printerr (_("Error parsing parameter %d: %s\n"),
-                              n,
+                              parm + 1,
                               context);
                 }
               g_error_free (error);
@@ -1008,6 +1046,7 @@ handle_call (gint        *argc,
           g_free (context);
         }
       g_variant_builder_add_value (&builder, value);
+      ++parm;
     }
   parameters = g_variant_builder_end (&builder);
 
@@ -1026,25 +1065,31 @@ handle_call (gint        *argc,
                                         &error);
   if (result == NULL)
     {
-      if (error)
+      g_printerr (_("Error: %s\n"), error->message);
+
+      if (g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS) && in_signature_types != NULL)
         {
-          g_printerr (_("Error: %s\n"), error->message);
-          g_error_free (error);
-        }
-      if (in_signature_types != NULL)
-        {
-          GString *s;
-          s = g_string_new (NULL);
-          for (n = 0; n < in_signature_types->len; n++)
+          if (in_signature_types->len > 0)
             {
-              GVariantType *type = in_signature_types->pdata[n];
-              g_string_append_len (s,
-                                   g_variant_type_peek_string (type),
-                                   g_variant_type_get_string_length (type));
+              GString *s;
+              s = g_string_new (NULL);
+
+              for (n = 0; n < in_signature_types->len; n++)
+                {
+                  GVariantType *type = in_signature_types->pdata[n];
+                  g_string_append_len (s,
+                                       g_variant_type_peek_string (type),
+                                       g_variant_type_get_string_length (type));
+                }
+
+              g_printerr ("(According to introspection data, you need to pass '%s')\n", s->str);
+              g_string_free (s, TRUE);
             }
-          g_printerr ("(According to introspection data, you need to pass '%s')\n", s->str);
-          g_string_free (s, TRUE);
+          else
+            g_printerr ("(According to introspection data, you need to pass no arguments)\n");
         }
+
+      g_error_free (error);
       goto out;
     }
 
@@ -1601,6 +1646,13 @@ handle_introspect (gint        *argc,
       print_paths (c, opt_introspect_dest, "/");
       goto out;
     }
+
+  if (!request_completion && !g_dbus_is_name (opt_introspect_dest))
+    {
+        g_printerr (_("Error: %s is not a valid bus name\n"), opt_introspect_dest);
+      goto out;
+    }
+
   if (opt_introspect_object_path == NULL)
     {
       if (request_completion)
@@ -1824,6 +1876,13 @@ handle_monitor (gint        *argc,
           goto out;
         }
     }
+
+  if (!request_completion && !g_dbus_is_name (opt_monitor_dest))
+    {
+      g_printerr (_("Error: %s is not a valid bus name\n"), opt_monitor_dest);
+      goto out;
+    }
+
   if (complete_paths)
     {
       print_paths (c, opt_monitor_dest, "/");
@@ -1886,6 +1945,238 @@ handle_monitor (gint        *argc,
   if (c != NULL)
     g_object_unref (c);
   g_option_context_free (o);
+  return ret;
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+
+static gboolean opt_wait_activate_set = FALSE;
+static gchar *opt_wait_activate_name = NULL;
+static gint64 opt_wait_timeout = 0;  /* no timeout */
+
+typedef enum {
+  WAIT_STATE_RUNNING,  /* waiting to see the service */
+  WAIT_STATE_SUCCESS,  /* seen it successfully */
+  WAIT_STATE_TIMEOUT,  /* timed out before seeing it */
+} WaitState;
+
+static gboolean
+opt_wait_activate_cb (const gchar  *option_name,
+                      const gchar  *value,
+                      gpointer      data,
+                      GError      **error)
+{
+  /* @value may be NULL */
+  opt_wait_activate_set = TRUE;
+  opt_wait_activate_name = g_strdup (value);
+
+  return TRUE;
+}
+
+static const GOptionEntry wait_entries[] =
+{
+  { "activate", 'a', G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK,
+    opt_wait_activate_cb,
+    N_("Service to activate before waiting for the other one (well-known name)"),
+    "[NAME]" },
+  { "timeout", 't', 0, G_OPTION_ARG_INT64, &opt_wait_timeout,
+    N_("Timeout to wait for before exiting with an error (seconds); 0 for "
+       "no timeout (default)"), "SECS" },
+  { NULL }
+};
+
+static void
+wait_name_appeared_cb (GDBusConnection *connection,
+                       const gchar     *name,
+                       const gchar     *name_owner,
+                       gpointer         user_data)
+{
+  WaitState *wait_state = user_data;
+
+  *wait_state = WAIT_STATE_SUCCESS;
+}
+
+static gboolean
+wait_timeout_cb (gpointer user_data)
+{
+  WaitState *wait_state = user_data;
+
+  *wait_state = WAIT_STATE_TIMEOUT;
+
+  /* Removed in handle_wait(). */
+  return G_SOURCE_CONTINUE;
+}
+
+static gboolean
+handle_wait (gint        *argc,
+             gchar      **argv[],
+             gboolean     request_completion,
+             const gchar *completion_cur,
+             const gchar *completion_prev)
+{
+  gint ret;
+  GOptionContext *o;
+  gchar *s;
+  GError *error;
+  GDBusConnection *c;
+  guint watch_id, timer_id = 0, activate_watch_id;
+  const gchar *activate_service, *wait_service;
+  WaitState wait_state = WAIT_STATE_RUNNING;
+
+  ret = FALSE;
+  c = NULL;
+
+  modify_argv0_for_command (argc, argv, "wait");
+
+  o = g_option_context_new (_("[OPTION…] BUS-NAME"));
+  g_option_context_set_help_enabled (o, FALSE);
+  g_option_context_set_summary (o, _("Wait for a bus name to appear."));
+  g_option_context_add_main_entries (o, wait_entries, GETTEXT_PACKAGE);
+  g_option_context_add_group (o, connection_get_group ());
+
+  if (!g_option_context_parse (o, argc, argv, NULL))
+    {
+      if (!request_completion)
+        {
+          s = g_option_context_get_help (o, FALSE, NULL);
+          g_printerr ("%s", s);
+          g_free (s);
+          goto out;
+        }
+    }
+
+  error = NULL;
+  c = connection_get_dbus_connection (&error);
+  if (c == NULL)
+    {
+      if (request_completion)
+        {
+          if (g_strcmp0 (completion_prev, "--address") == 0)
+            {
+              g_print ("unix:\n"
+                       "tcp:\n"
+                       "nonce-tcp:\n");
+            }
+          else
+            {
+              g_print ("--system \n--session \n--address \n");
+            }
+        }
+      else
+        {
+          g_printerr (_("Error connecting: %s\n"), error->message);
+          g_error_free (error);
+        }
+      goto out;
+    }
+
+  /* All done with completion now */
+  if (request_completion)
+    goto out;
+
+  /*
+   * Try and disentangle the command line arguments, with the aim of supporting:
+   *    gdbus wait --session --activate ActivateName WaitName
+   *    gdbus wait --session --activate ActivateAndWaitName
+   *    gdbus wait --activate --session ActivateAndWaitName
+   *    gdbus wait --session WaitName
+   */
+  if (*argc == 2 && opt_wait_activate_set && opt_wait_activate_name != NULL)
+    {
+      activate_service = opt_wait_activate_name;
+      wait_service = (*argv)[1];
+    }
+  else if (*argc == 2 &&
+           opt_wait_activate_set && opt_wait_activate_name == NULL)
+    {
+      activate_service = (*argv)[1];
+      wait_service = (*argv)[1];
+    }
+  else if (*argc == 2 && !opt_wait_activate_set)
+    {
+      activate_service = NULL;  /* disabled */
+      wait_service = (*argv)[1];
+    }
+  else if (*argc == 1 &&
+           opt_wait_activate_set && opt_wait_activate_name != NULL)
+    {
+      activate_service = opt_wait_activate_name;
+      wait_service = opt_wait_activate_name;
+    }
+  else if (*argc == 1 &&
+           opt_wait_activate_set && opt_wait_activate_name == NULL)
+    {
+      g_printerr (_("Error: A service to activate for must be specified.\n"));
+      goto out;
+    }
+  else if (*argc == 1 && !opt_wait_activate_set)
+    {
+      g_printerr (_("Error: A service to wait for must be specified.\n"));
+      goto out;
+    }
+  else /* if (*argc > 2) */
+    {
+      g_printerr (_("Error: Too many arguments.\n"));
+      goto out;
+    }
+
+  if (activate_service != NULL &&
+      (!g_dbus_is_name (activate_service) ||
+       g_dbus_is_unique_name (activate_service)))
+    {
+      g_printerr (_("Error: %s is not a valid well-known bus name.\n"),
+                  activate_service);
+      goto out;
+    }
+
+  if (!g_dbus_is_name (wait_service) || g_dbus_is_unique_name (wait_service))
+    {
+      g_printerr (_("Error: %s is not a valid well-known bus name.\n"),
+                  wait_service);
+      goto out;
+    }
+
+  /* Start the prerequisite service if needed. */
+  if (activate_service != NULL)
+    {
+      activate_watch_id = g_bus_watch_name_on_connection (c, activate_service,
+                                                          G_BUS_NAME_WATCHER_FLAGS_AUTO_START,
+                                                          NULL, NULL,
+                                                          NULL, NULL);
+    }
+  else
+    {
+      activate_watch_id = 0;
+    }
+
+  /* Wait for the expected name to appear. */
+  watch_id = g_bus_watch_name_on_connection (c,
+                                             wait_service,
+                                             G_BUS_NAME_WATCHER_FLAGS_NONE,
+                                             wait_name_appeared_cb,
+                                             NULL, &wait_state, NULL);
+
+  /* Safety timeout. */
+  if (opt_wait_timeout > 0)
+    timer_id = g_timeout_add (opt_wait_timeout, wait_timeout_cb, &wait_state);
+
+  while (wait_state == WAIT_STATE_RUNNING)
+    g_main_context_iteration (NULL, TRUE);
+
+  g_bus_unwatch_name (watch_id);
+  if (timer_id != 0)
+      g_source_remove (timer_id);
+  if (activate_watch_id != 0)
+      g_bus_unwatch_name (activate_watch_id);
+
+  ret = (wait_state == WAIT_STATE_SUCCESS);
+
+ out:
+  g_clear_object (&c);
+  g_option_context_free (o);
+  g_free (opt_wait_activate_name);
+  opt_wait_activate_name = NULL;
+
   return ret;
 }
 
@@ -2023,6 +2314,16 @@ main (gint argc, gchar *argv[])
         ret = 0;
       goto out;
     }
+  else if (g_strcmp0 (command, "wait") == 0)
+    {
+      if (handle_wait (&argc,
+                       &argv,
+                       request_completion,
+                       completion_cur,
+                       completion_prev))
+        ret = 0;
+      goto out;
+    }
   else if (g_strcmp0 (command, "complete") == 0 && argc == 4 && !request_completion)
     {
       const gchar *completion_line;
@@ -2092,7 +2393,7 @@ main (gint argc, gchar *argv[])
     {
       if (request_completion)
         {
-          g_print ("help \nemit \ncall \nintrospect \nmonitor \n");
+          g_print ("help \nemit \ncall \nintrospect \nmonitor \nwait \n");
           ret = 0;
           goto out;
         }

@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the licence, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -1423,6 +1423,130 @@
  * Returns: @val converted to the opposite byte order
  */
  
+/* Bounds-checked integer arithmetic {{{1 */
+/**
+ * SECTION:checkedmath
+ * @title: Bounds-checking integer arithmetic
+ * @short_description: a set of helpers for performing checked integer arithmetic
+ *
+ * GLib offers a set of macros for doing additions and multiplications
+ * of unsigned integers, with checks for overflows.
+ *
+ * The helpers all have three arguments.  A pointer to the destination
+ * is always the first argument and the operands to the operation are
+ * the other two.
+ *
+ * Following standard GLib convention, the helpers return %TRUE in case
+ * of success (ie: no overflow).
+ *
+ * The helpers may be macros, normal functions or inlines.  They may be
+ * implemented with inline assembly or compiler intrinsics where
+ * available.
+ *
+ * Since: 2.48
+ */
+
+/**
+ * g_uint_checked_add
+ * @dest: a pointer to the #guint destination
+ * @a: the #guint left operand
+ * @b: the #guint right operand
+ *
+ * Performs a checked addition of @a and @b, storing the result in
+ * @dest.
+ *
+ * If the operation is successful, %TRUE is returned.  If the operation
+ * overflows then the state of @dest is undefined and %FALSE is
+ * returned.
+ *
+ * Returns: %TRUE if there was no overflow
+ * Since: 2.48
+ */
+
+/**
+ * g_uint_checked_mul
+ * @dest: a pointer to the #guint destination
+ * @a: the #guint left operand
+ * @b: the #guint right operand
+ *
+ * Performs a checked multiplication of @a and @b, storing the result in
+ * @dest.
+ *
+ * If the operation is successful, %TRUE is returned.  If the operation
+ * overflows then the state of @dest is undefined and %FALSE is
+ * returned.
+ *
+ * Returns: %TRUE if there was no overflow
+ * Since: 2.48
+ */
+
+/**
+ * g_uint64_checked_add
+ * @dest: a pointer to the #guint64 destination
+ * @a: the #guint64 left operand
+ * @b: the #guint64 right operand
+ *
+ * Performs a checked addition of @a and @b, storing the result in
+ * @dest.
+ *
+ * If the operation is successful, %TRUE is returned.  If the operation
+ * overflows then the state of @dest is undefined and %FALSE is
+ * returned.
+ *
+ * Returns: %TRUE if there was no overflow
+ * Since: 2.48
+ */
+
+/**
+ * g_uint64_checked_mul
+ * @dest: a pointer to the #guint64 destination
+ * @a: the #guint64 left operand
+ * @b: the #guint64 right operand
+ *
+ * Performs a checked multiplication of @a and @b, storing the result in
+ * @dest.
+ *
+ * If the operation is successful, %TRUE is returned.  If the operation
+ * overflows then the state of @dest is undefined and %FALSE is
+ * returned.
+ *
+ * Returns: %TRUE if there was no overflow
+ * Since: 2.48
+ */
+
+/**
+ * g_size_checked_add
+ * @dest: a pointer to the #gsize destination
+ * @a: the #gsize left operand
+ * @b: the #gsize right operand
+ *
+ * Performs a checked addition of @a and @b, storing the result in
+ * @dest.
+ *
+ * If the operation is successful, %TRUE is returned.  If the operation
+ * overflows then the state of @dest is undefined and %FALSE is
+ * returned.
+ *
+ * Returns: %TRUE if there was no overflow
+ * Since: 2.48
+ */
+
+/**
+ * g_size_checked_mul
+ * @dest: a pointer to the #gsize destination
+ * @a: the #gsize left operand
+ * @b: the #gsize right operand
+ *
+ * Performs a checked multiplication of @a and @b, storing the result in
+ * @dest.
+ *
+ * If the operation is successful, %TRUE is returned.  If the operation
+ * overflows then the state of @dest is undefined and %FALSE is
+ * returned.
+ *
+ * Returns: %TRUE if there was no overflow
+ * Since: 2.48
+ */
 /* Numerical Definitions {{{1 */
 
 /**
@@ -1726,16 +1850,15 @@
 /**
  * G_INLINE_FUNC:
  *
- * This macro is used to export function prototypes so they can be linked
- * with an external version when no inlining is performed. The file which
- * implements the functions should define %G_IMPLEMENTS_INLINES
- * before including the headers which contain %G_INLINE_FUNC declarations.
- * Since inlining is very compiler-dependent using these macros correctly
- * is very difficult. Their use is strongly discouraged.
+ * This macro used to be used to conditionally define inline functions
+ * in a compatible way before this feature was supported in all
+ * compilers.  These days, GLib requires inlining support from the
+ * compiler, so your GLib-using programs can safely assume that the
+ * "inline" keywork works properly.
  *
- * This macro is often mistaken for a replacement for the inline keyword;
- * inline is already declared in a portable manner in the GLib headers
- * and can be used normally.
+ * Never use this macro anymore.  Just say "static inline".
+ *
+ * Deprecated: 2.48: Use "static inline" instead
  */
 
 /**
@@ -1870,6 +1993,21 @@
  * Expands to __extension__ when gcc is used as the compiler. This simply
  * tells gcc not to warn about the following non-standard code when compiling
  * with the `-pedantic` option.
+ */
+
+/**
+ * G_GNUC_CHECK_VERSION:
+ *
+ * Expands to a a check for a compiler with __GNUC__ defined and a version
+ * greater than or equal to the major and minor numbers provided. For example,
+ * the following would only match on compilers such as GCC 4.8 or newer.
+ *
+ * |[<!-- language="C" -->
+ * #if G_GNUC_CHECK_VERSION(4, 8)
+ * #endif
+ * ]|
+ *
+ * Since: 2.42
  */
 
 /**
@@ -2099,8 +2237,9 @@
 /**
  * G_GNUC_PRINTF:
  * @format_idx: the index of the argument corresponding to the
- *     format string (The arguments are numbered from 1)
- * @arg_idx: the index of the first of the format arguments
+ *     format string (the arguments are numbered from 1)
+ * @arg_idx: the index of the first of the format arguments, or 0 if
+ *     there are no format arguments
  *
  * Expands to the GNU C format function attribute if the compiler is gcc.
  * This is used for declaring functions which take a variable number of
@@ -2110,7 +2249,9 @@
  * Place the attribute after the function declaration, just before the
  * semicolon.
  *
- * See the GNU C documentation for more details.
+ * See the
+ * [GNU C documentation](https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html#index-Wformat-3288)
+ * for more details.
  *
  * |[<!-- language="C" -->
  * gint g_snprintf (gchar  *string,
@@ -2123,15 +2264,18 @@
 /**
  * G_GNUC_SCANF:
  * @format_idx: the index of the argument corresponding to
- *     the format string (The arguments are numbered from 1)
- * @arg_idx: the index of the first of the format arguments
+ *     the format string (the arguments are numbered from 1)
+ * @arg_idx: the index of the first of the format arguments, or 0 if
+ *     there are no format arguments
  *
  * Expands to the GNU C format function attribute if the compiler is gcc.
  * This is used for declaring functions which take a variable number of
  * arguments, with the same syntax as scanf(). It allows the compiler
  * to type-check the arguments passed to the function.
  *
- * See the GNU C documentation for details.
+ * See the
+ * [GNU C documentation](https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html#index-Wformat-3288)
+ * for details.
  */
 
 /**
@@ -2343,8 +2487,10 @@
  * {
  *   g_auto(GQueue) queue = G_QUEUE_INIT;
  *   g_auto(GVariantBuilder) builder;
+ *   g_auto(GStrv) strv;
  *
  *   g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
+ *   strv = g_strsplit("a:b:c", ":", -1);
  *
  *   ...
  *
@@ -2357,7 +2503,7 @@
  * }
  * ]|
  *
- * You must initialise the variable in some way -- either by use of an
+ * You must initialize the variable in some way -- either by use of an
  * initialiser or by ensuring that an _init function will be called on
  * it unconditionally before it goes out of scope.
  *
@@ -2393,9 +2539,8 @@
  * gboolean
  * check_exists(GVariant *dict)
  * {
- *   g_autoptr(GVariant) dirname;
- *   g_autoptr(GVariant) basename = NULL;
- *   g_autoptr(gchar) path = NULL;
+ *   g_autoptr(GVariant) dirname, basename = NULL;
+ *   g_autofree gchar *path = NULL;
  *
  *   dirname = g_variant_lookup_value (dict, "dirname", G_VARIANT_TYPE_STRING);
  *
@@ -2418,6 +2563,8 @@
  * You must initialise the variable in some way -- either by use of an
  * initialiser or by ensuring that it is assigned to unconditionally
  * before it goes out of scope.
+ *
+ * See also g_auto(), g_autofree() and g_steal_pointer().
  *
  * Since: 2.44
  */
@@ -2446,9 +2593,9 @@
  *
  *   membuf = g_malloc (8192);
  *
- *   /* Some computation on membuf */
+ *   /<!-- -->* Some computation on membuf *<!-- -->/
  *
- *   /* membuf will be automatically freed here */
+ *   /<!-- -->* membuf will be automatically freed here *<!-- -->/
  *   return TRUE;
  * }
  * ]|

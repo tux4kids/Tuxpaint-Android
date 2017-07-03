@@ -6,7 +6,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,6 +24,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <errno.h>
+#include <string.h>
 #include <gstdio.h>
 #ifdef G_OS_UNIX
 #include <unistd.h>
@@ -183,7 +185,7 @@ watch_parent (gint fd)
           for (n = 0; n < pids_to_kill->len; n++)
             {
               pid = g_array_index (pids_to_kill, guint, n);
-              g_print ("cleaning up pid %d\n", pid);
+              g_printerr ("cleaning up pid %d\n", pid);
               kill (pid, SIGTERM);
             }
 
@@ -243,14 +245,14 @@ watcher_init (void)
       /* fork a child to clean up when we are killed */
       if (pipe (pipe_fds) != 0)
         {
-          g_warning ("pipe() failed: %m");
+          g_warning ("pipe() failed: %s", strerror (errno));
           g_assert_not_reached ();
         }
 
       switch (fork ())
         {
         case -1:
-          g_warning ("fork() failed: %m");
+          g_warning ("fork() failed: %s", strerror (errno));
           g_assert_not_reached ();
           break;
 
@@ -713,7 +715,7 @@ g_test_dbus_get_flags (GTestDBus *self)
  * been called yet, %NULL is returned. This can be used with
  * g_dbus_connection_new_for_address().
  *
- * Returns: (allow-none): the address of the bus, or %NULL.
+ * Returns: (nullable): the address of the bus, or %NULL.
  */
 const gchar *
 g_test_dbus_get_bus_address (GTestDBus *self)
@@ -838,4 +840,6 @@ g_test_dbus_unset (void)
   g_unsetenv ("DBUS_SESSION_BUS_ADDRESS");
   g_unsetenv ("DBUS_STARTER_ADDRESS");
   g_unsetenv ("DBUS_STARTER_BUS_TYPE");
+  /* avoid using XDG_RUNTIME_DIR/bus */
+  g_unsetenv ("XDG_RUNTIME_DIR");
 }

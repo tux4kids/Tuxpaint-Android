@@ -6,7 +6,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -282,7 +282,7 @@ msort_r (void *b, size_t n, size_t s, GCompareDataFunc cmp, void *arg)
 
 /**
  * g_qsort_with_data:
- * @pbase: start of array to sort
+ * @pbase: (not nullable): start of array to sort
  * @total_elems: elements in the array
  * @size: size of each element
  * @compare_func: function to compare elements

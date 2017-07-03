@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -267,6 +267,31 @@ g_drive_is_media_check_automatic (GDrive *drive)
 }
 
 /**
+ * g_drive_is_removable:
+ * @drive: a #GDrive.
+ *
+ * Checks if the #GDrive and/or its media is considered removable by the user.
+ * See g_drive_is_media_removable().
+ *
+ * Returns: %TRUE if @drive and/or its media is considered removable, %FALSE otherwise.
+ *
+ * Since: 2.50
+ **/
+gboolean
+g_drive_is_removable (GDrive *drive)
+{
+  GDriveIface *iface;
+
+  g_return_val_if_fail (G_IS_DRIVE (drive), FALSE);
+
+  iface = G_DRIVE_GET_IFACE (drive);
+  if (iface->is_removable != NULL)
+    return iface->is_removable (drive);
+
+  return FALSE;
+}
+
+/**
  * g_drive_is_media_removable:
  * @drive: a #GDrive.
  * 
@@ -359,8 +384,8 @@ g_drive_can_poll_for_media (GDrive *drive)
  * g_drive_eject:
  * @drive: a #GDrive.
  * @flags: flags affecting the unmount if required for eject
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
- * @callback: (allow-none): a #GAsyncReadyCallback, or %NULL.
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
+ * @callback: (nullable): a #GAsyncReadyCallback, or %NULL.
  * @user_data: user data to pass to @callback
  * 
  * Asynchronously ejects a drive.
@@ -389,7 +414,7 @@ g_drive_eject (GDrive              *drive,
       g_task_report_new_error (drive, callback, user_data,
                                g_drive_eject_with_operation,
                                G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-                               _("drive doesn't implement eject"));
+                               _("drive doesn’t implement eject"));
       return;
     }
   
@@ -433,10 +458,10 @@ g_drive_eject_finish (GDrive        *drive,
  * g_drive_eject_with_operation:
  * @drive: a #GDrive.
  * @flags: flags affecting the unmount if required for eject
- * @mount_operation: (allow-none): a #GMountOperation or %NULL to avoid
+ * @mount_operation: (nullable): a #GMountOperation or %NULL to avoid
  *     user interaction.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
- * @callback: (allow-none): a #GAsyncReadyCallback, or %NULL.
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
+ * @callback: (nullable): a #GAsyncReadyCallback, or %NULL.
  * @user_data: user data passed to @callback.
  *
  * Ejects a drive. This is an asynchronous operation, and is
@@ -467,7 +492,7 @@ g_drive_eject_with_operation (GDrive              *drive,
                                /* Translators: This is an error
                                 * message for drive objects that
                                 * don't implement any of eject or eject_with_operation. */
-                               _("drive doesn't implement eject or eject_with_operation"));
+                               _("drive doesn’t implement eject or eject_with_operation"));
       return;
     }
 
@@ -516,8 +541,8 @@ g_drive_eject_with_operation_finish (GDrive        *drive,
 /**
  * g_drive_poll_for_media:
  * @drive: a #GDrive.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
- * @callback: (allow-none): a #GAsyncReadyCallback, or %NULL.
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
+ * @callback: (nullable): a #GAsyncReadyCallback, or %NULL.
  * @user_data: user data to pass to @callback
  * 
  * Asynchronously polls @drive to see if media has been inserted or removed.
@@ -543,7 +568,7 @@ g_drive_poll_for_media (GDrive              *drive,
       g_task_report_new_error (drive, callback, user_data,
                                g_drive_poll_for_media,
                                G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-                               _("drive doesn't implement polling for media"));
+                               _("drive doesn’t implement polling for media"));
       return;
     }
   
@@ -715,10 +740,10 @@ g_drive_can_start_degraded (GDrive *drive)
  * g_drive_start:
  * @drive: a #GDrive.
  * @flags: flags affecting the start operation.
- * @mount_operation: (allow-none): a #GMountOperation or %NULL to avoid
+ * @mount_operation: (nullable): a #GMountOperation or %NULL to avoid
  *     user interaction.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
- * @callback: (allow-none): a #GAsyncReadyCallback, or %NULL.
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
+ * @callback: (nullable): a #GAsyncReadyCallback, or %NULL.
  * @user_data: user data to pass to @callback
  *
  * Asynchronously starts a drive.
@@ -748,7 +773,7 @@ g_drive_start (GDrive              *drive,
       g_task_report_new_error (drive, callback, user_data,
                                g_drive_start,
                                G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-                               _("drive doesn't implement start"));
+                               _("drive doesn’t implement start"));
       return;
     }
 
@@ -817,10 +842,10 @@ g_drive_can_stop (GDrive *drive)
  * g_drive_stop:
  * @drive: a #GDrive.
  * @flags: flags affecting the unmount if required for stopping.
- * @mount_operation: (allow-none): a #GMountOperation or %NULL to avoid
+ * @mount_operation: (nullable): a #GMountOperation or %NULL to avoid
  *     user interaction.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
- * @callback: (allow-none): a #GAsyncReadyCallback, or %NULL.
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
+ * @callback: (nullable): a #GAsyncReadyCallback, or %NULL.
  * @user_data: user data to pass to @callback
  *
  * Asynchronously stops a drive.
@@ -850,7 +875,7 @@ g_drive_stop (GDrive               *drive,
       g_task_report_new_error (drive, callback, user_data,
                                g_drive_start,
                                G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-                               _("drive doesn't implement stop"));
+                               _("drive doesn’t implement stop"));
       return;
     }
 

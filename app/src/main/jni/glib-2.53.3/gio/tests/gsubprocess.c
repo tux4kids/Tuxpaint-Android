@@ -331,8 +331,9 @@ test_cat_utf8 (void)
 
   output_buf = g_memory_output_stream_steal_as_bytes ((GMemoryOutputStream*)output_buf_stream);
 
-  g_assert_cmpint (g_bytes_get_size (output_buf), ==, 13);
-  g_assert_cmpint (memcmp (g_bytes_get_data (output_buf, NULL), "hello, world!", 13), ==, 0);
+  g_assert_cmpmem (g_bytes_get_data (output_buf, NULL),
+                   g_bytes_get_size (output_buf),
+                   "hello, world!", 13);
 
   g_bytes_unref (output_buf);
   g_main_loop_unref (data.loop);
@@ -611,8 +612,7 @@ on_communicate_complete (GObject               *proc,
       stdout_len = strlen (stdout_str);
     }
 
-  g_assert_cmpint (stdout_len, ==, 11);
-  g_assert (memcmp (stdout_data, "hello world", 11) == 0);
+  g_assert_cmpmem (stdout_data, stdout_len, "hello world", 11);
   if (stdout)
     g_bytes_unref (stdout);
   g_free (stdout_str);
@@ -683,8 +683,7 @@ test_communicate (void)
   g_assert_no_error (error);
   stdout_data = g_bytes_get_data (stdout, &stdout_len);
 
-  g_assert_cmpint (stdout_len, ==, 11);
-  g_assert (memcmp (stdout_data, "hello world", 11) == 0);
+  g_assert_cmpmem (stdout_data, stdout_len, "hello world", 11);
   g_bytes_unref (stdout);
   
   g_bytes_unref (input);
@@ -943,6 +942,51 @@ test_env (void)
   g_assert_cmpstr (g_environ_getenv (split, "TWO"), ==, "2");
   g_assert_cmpstr (g_environ_getenv (split, "THREE"), ==, "3");
   g_assert_null (g_environ_getenv (split, "FOUR"));
+
+  g_strfreev (split);
+  g_free (result);
+  g_object_unref (proc);
+}
+
+/* Test that explicitly inheriting and modifying the parent process’
+ * environment works. */
+static void
+test_env_inherit (void)
+{
+  GError *local_error = NULL;
+  GError **error = &local_error;
+  GSubprocessLauncher *launcher;
+  GSubprocess *proc;
+  GPtrArray *args;
+  GInputStream *stdout;
+  gchar *result;
+  gchar **split;
+
+  g_setenv ("TEST_ENV_INHERIT1", "1", TRUE);
+  g_setenv ("TEST_ENV_INHERIT2", "2", TRUE);
+
+  args = get_test_subprocess_args ("env", NULL);
+  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_NONE);
+  g_subprocess_launcher_set_flags (launcher, G_SUBPROCESS_FLAGS_STDOUT_PIPE);
+  g_subprocess_launcher_set_environ (launcher, NULL);
+  g_subprocess_launcher_setenv (launcher, "TWO", "2", TRUE);
+  g_subprocess_launcher_unsetenv (launcher, "TEST_ENV_INHERIT1");
+
+  g_assert_null (g_subprocess_launcher_getenv (launcher, "TEST_ENV_INHERIT1"));
+  g_assert_cmpstr (g_subprocess_launcher_getenv (launcher, "TEST_ENV_INHERIT2"), ==, "2");
+  g_assert_cmpstr (g_subprocess_launcher_getenv (launcher, "TWO"), ==, "2");
+
+  proc = g_subprocess_launcher_spawn (launcher, error, args->pdata[0], "env", NULL);
+  g_ptr_array_free (args, TRUE);
+  g_assert_no_error (local_error);
+
+  stdout = g_subprocess_get_stdout_pipe (proc);
+
+  result = splice_to_string (stdout, error);
+  split = g_strsplit (result, "\n", -1);
+  g_assert_null (g_environ_getenv (split, "TEST_ENV_INHERIT1"));
+  g_assert_cmpstr (g_environ_getenv (split, "TEST_ENV_INHERIT2"), ==, "2");
+  g_assert_cmpstr (g_environ_getenv (split, "TWO"), ==, "2");
 
   g_strfreev (split);
   g_free (result);
@@ -1266,6 +1310,7 @@ main (int argc, char **argv)
   g_test_add_func ("/gsubprocess/communicate-nothing", test_communicate_nothing);
   g_test_add_func ("/gsubprocess/terminate", test_terminate);
   g_test_add_func ("/gsubprocess/env", test_env);
+  g_test_add_func ("/gsubprocess/env/inherit", test_env_inherit);
   g_test_add_func ("/gsubprocess/cwd", test_cwd);
 #ifdef G_OS_UNIX
   g_test_add_func ("/gsubprocess/stdout-file", test_stdout_file);

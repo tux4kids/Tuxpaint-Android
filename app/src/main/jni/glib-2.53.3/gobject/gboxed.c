@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -137,7 +137,7 @@ G_DEFINE_BOXED_TYPE (GHashTable, g_hash_table, g_hash_table_ref, g_hash_table_un
 G_DEFINE_BOXED_TYPE (GArray, g_array, g_array_ref, g_array_unref)
 G_DEFINE_BOXED_TYPE (GPtrArray, g_ptr_array,g_ptr_array_ref, g_ptr_array_unref)
 G_DEFINE_BOXED_TYPE (GByteArray, g_byte_array, g_byte_array_ref, g_byte_array_unref)
-G_DEFINE_BOXED_TYPE (GBytes, g_bytes, g_bytes_ref, g_bytes_unref);
+G_DEFINE_BOXED_TYPE (GBytes, g_bytes, g_bytes_ref, g_bytes_unref)
 
 G_DEFINE_BOXED_TYPE (GRegex, g_regex, g_regex_ref, g_regex_unref)
 G_DEFINE_BOXED_TYPE (GMatchInfo, g_match_info, g_match_info_ref, g_match_info_unref)
@@ -151,8 +151,8 @@ G_DEFINE_BOXED_TYPE (GVariantDict, g_variant_dict, g_variant_dict_ref, g_variant
 
 G_DEFINE_BOXED_TYPE (GError, g_error, g_error_copy, g_error_free)
 
-G_DEFINE_BOXED_TYPE (GDateTime, g_date_time, g_date_time_ref, g_date_time_unref);
-G_DEFINE_BOXED_TYPE (GTimeZone, g_time_zone, g_time_zone_ref, g_time_zone_unref);
+G_DEFINE_BOXED_TYPE (GDateTime, g_date_time, g_date_time_ref, g_date_time_unref)
+G_DEFINE_BOXED_TYPE (GTimeZone, g_time_zone, g_time_zone_ref, g_time_zone_unref)
 G_DEFINE_BOXED_TYPE (GKeyFile, g_key_file, g_key_file_ref, g_key_file_unref)
 G_DEFINE_BOXED_TYPE (GMappedFile, g_mapped_file, g_mapped_file_ref, g_mapped_file_unref)
 
@@ -322,11 +322,12 @@ g_boxed_type_register_static (const gchar   *name,
 /**
  * g_boxed_copy:
  * @boxed_type: The type of @src_boxed.
- * @src_boxed: The boxed structure to be copied.
+ * @src_boxed: (not nullable): The boxed structure to be copied.
  * 
  * Provide a copy of a boxed structure @src_boxed which is of type @boxed_type.
  * 
- * Returns: (transfer full): The newly created copy of the boxed structure.
+ * Returns: (transfer full) (not nullable): The newly created copy of the boxed
+ *    structure.
  */
 gpointer
 g_boxed_copy (GType         boxed_type,
@@ -383,7 +384,7 @@ g_boxed_copy (GType         boxed_type,
 /**
  * g_boxed_free:
  * @boxed_type: The type of @boxed.
- * @boxed: The boxed structure to be freed.
+ * @boxed: (not nullable): The boxed structure to be freed.
  *
  * Free the boxed structure @boxed which is of type @boxed_type.
  */
@@ -478,7 +479,7 @@ value_set_boxed_internal (GValue       *value,
 /**
  * g_value_set_boxed:
  * @value: a valid #GValue of %G_TYPE_BOXED derived type
- * @v_boxed: (allow-none): boxed value to be set
+ * @v_boxed: (nullable): boxed value to be set
  *
  * Set the contents of a %G_TYPE_BOXED derived #GValue to @v_boxed.
  */
@@ -495,7 +496,7 @@ g_value_set_boxed (GValue       *value,
 /**
  * g_value_set_static_boxed:
  * @value: a valid #GValue of %G_TYPE_BOXED derived type
- * @v_boxed: (allow-none): static boxed value to be set
+ * @v_boxed: (nullable): static boxed value to be set
  *
  * Set the contents of a %G_TYPE_BOXED derived #GValue to @v_boxed.
  * The boxed value is assumed to be static, and is thus not duplicated
@@ -514,7 +515,7 @@ g_value_set_static_boxed (GValue       *value,
 /**
  * g_value_set_boxed_take_ownership:
  * @value: a valid #GValue of %G_TYPE_BOXED derived type
- * @v_boxed: (allow-none): duplicated unowned boxed value to be set
+ * @v_boxed: (nullable): duplicated unowned boxed value to be set
  *
  * This is an internal function introduced mainly for C marshallers.
  *
@@ -530,7 +531,7 @@ g_value_set_boxed_take_ownership (GValue       *value,
 /**
  * g_value_take_boxed:
  * @value: a valid #GValue of %G_TYPE_BOXED derived type
- * @v_boxed: (allow-none): duplicated unowned boxed value to be set
+ * @v_boxed: (nullable): duplicated unowned boxed value to be set
  *
  * Sets the contents of a %G_TYPE_BOXED derived #GValue to @v_boxed
  * and takes over the ownership of the callers reference to @v_boxed;

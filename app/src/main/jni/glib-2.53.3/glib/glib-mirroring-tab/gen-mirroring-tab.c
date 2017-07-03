@@ -24,9 +24,7 @@
  * Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with this library, in a file named COPYING; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA
+ * along with this library; if not, see <http://www.gnu.org/licenses/>.
  * 
  * For licensing issues, contact <license@farsiweb.info>.
  */
@@ -139,7 +137,7 @@ read_bidi_mirroring_txt (
 
       k = sscanf (s, "%lx; %lx", &i, &j);
       if (k != 2 || i >= UNICODE_CHARS || j >= UNICODE_CHARS)
-	die4 ("invalid pair in input at line %ld: %04lX, %04lX", l, i, j);
+	die4 ("invalid pair in input at line %lu: %04lX, %04lX", l, i, j);
       dist = ((signed long) j - (signed long) i);
       table[i] = dist;
       if (dist > max_dist)

@@ -6,7 +6,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -548,12 +548,15 @@ g_winhttp_file_query_info (GFile                *file,
     {
       gint64 cl;
       int n;
+      const char *gint64_format = "%"G_GINT64_FORMAT"%n";
+      wchar_t *gint64_format_w = g_utf8_to_utf16 (gint64_format, -1, NULL, NULL, NULL);
 
-      if (swscanf (content_length, L"%I64d%n", &cl, &n) == 1 &&
+      if (swscanf (content_length, gint64_format_w, &cl, &n) == 1 &&
           n == wcslen (content_length))
         g_file_info_set_size (info, cl);
 
       g_free (content_length);
+      g_free (gint64_format_w);
     }
 
   if (matcher == NULL)

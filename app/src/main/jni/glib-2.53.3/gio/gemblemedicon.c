@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -143,7 +143,7 @@ g_emblemed_icon_init (GEmblemedIcon *emblemed)
 /**
  * g_emblemed_icon_new:
  * @icon: a #GIcon
- * @emblem: (allow-none): a #GEmblem, or %NULL
+ * @emblem: (nullable): a #GEmblem, or %NULL
  *
  * Creates a new emblemed icon for @icon with the emblem @emblem.
  *
@@ -359,7 +359,7 @@ g_emblemed_icon_from_tokens (gchar  **tokens,
       g_set_error (error,
                    G_IO_ERROR,
                    G_IO_ERROR_INVALID_ARGUMENT,
-                   _("Can't handle version %d of GEmblemedIcon encoding"),
+                   _("Can’t handle version %d of GEmblemedIcon encoding"),
                    version);
       goto fail;
     }

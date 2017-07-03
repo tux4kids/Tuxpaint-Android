@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -39,7 +39,6 @@
 #include "gfile.h"
 #include "gvolumemonitor.h"
 #include "gthemedicon.h"
-#include "gsimpleasyncresult.h"
 #include "gioerror.h"
 #include "glibintl.h"
 /* for BUFSIZ */
@@ -310,6 +309,7 @@ eject_unmount_do (GMount              *mount,
   GSource *timeout;
 
   task = g_task_new (mount, cancellable, callback, user_data);
+  g_task_set_source_tag (task, eject_unmount_do);
   g_task_set_task_data (task, g_strdupv (argv), (GDestroyNotify) g_strfreev);
 
   if (unix_mount->volume_monitor != NULL)

@@ -1,10 +1,10 @@
 /* 
  * Copyright © 2008 Ryan Lortie
  * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  * 
  * See the included COPYING file for more information.
  */
@@ -373,6 +373,7 @@ TestCase error_cases[] = /* error cases */
 int
 main (int argc, char **argv)
 {
+  g_setenv ("LC_ALL", "C", TRUE);
   g_test_init (&argc, &argv, NULL);
   add_tests (test, "/glib/markup/subparser/success", test_cases);
   add_tests (test, "/glib/markup/subparser/failure", error_cases);

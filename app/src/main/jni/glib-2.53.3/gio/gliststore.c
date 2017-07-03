@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -245,7 +245,7 @@ g_list_store_new (GType item_type)
  * g_list_store_insert:
  * @store: a #GListStore
  * @position: the position at which to insert the new item
- * @item: the new item
+ * @item: (type GObject): the new item
  *
  * Inserts @item into @store at @position. @item must be of type
  * #GListStore:item-type or derived from it. @position must be smaller
@@ -278,8 +278,8 @@ g_list_store_insert (GListStore *store,
 /**
  * g_list_store_insert_sorted:
  * @store: a #GListStore
- * @item: the new item
- * @compare_func: pairwise comparison function for sorting
+ * @item: (type GObject): the new item
+ * @compare_func: (scope call): pairwise comparison function for sorting
  * @user_data: (closure): user data for @compare_func
  *
  * Inserts @item into @store at a position to be determined by the
@@ -317,9 +317,35 @@ g_list_store_insert_sorted (GListStore       *store,
 }
 
 /**
+ * g_list_store_sort:
+ * @store: a #GListStore
+ * @compare_func: (scope call): pairwise comparison function for sorting
+ * @user_data: (closure): user data for @compare_func
+ *
+ * Sort the items in @store according to @compare_func.
+ *
+ * Since: 2.46
+ */
+void
+g_list_store_sort (GListStore       *store,
+                   GCompareDataFunc  compare_func,
+                   gpointer          user_data)
+{
+  gint n_items;
+
+  g_return_if_fail (G_IS_LIST_STORE (store));
+  g_return_if_fail (compare_func != NULL);
+
+  g_sequence_sort (store->items, compare_func, user_data);
+
+  n_items = g_sequence_get_length (store->items);
+  g_list_store_items_changed (store, 0, n_items, n_items);
+}
+
+/**
  * g_list_store_append:
  * @store: a #GListStore
- * @item: the new item
+ * @item: (type GObject): the new item
  *
  * Appends @item to @store. @item must be of type #GListStore:item-type.
  *
@@ -400,7 +426,7 @@ g_list_store_remove_all (GListStore *store)
  * @store: a #GListStore
  * @position: the position at which to make the change
  * @n_removals: the number of items to remove
- * @additions: (array length=n_additions): the items to add
+ * @additions: (array length=n_additions) (element-type GObject): the items to add
  * @n_additions: the number of items to add
  *
  * Changes @store by removing @n_removals items and adding @n_additions

@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the licence, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -54,7 +54,7 @@ static const struct help_topic topics[] = {
   },
   { "launch",       N_("Launch an application"),
                     N_("Launch the application (with optional files to open)"),
-                    N_("APPID [FILE...]")
+                    N_("APPID [FILE…]")
   },
   { "action",       N_("Activate an action"),
                     N_("Invoke an action on the application"),
@@ -69,7 +69,7 @@ static const struct help_topic topics[] = {
 static const struct help_substvar substvars[] = {
   { N_("COMMAND"),   N_("The command to print detailed help for")                             },
   { N_("APPID"),     N_("Application identifier in D-Bus format (eg: org.example.viewer)")    },
-  { N_("FILE"),      N_("Optional relative or relative filenames, or URIs to open")           },
+  { N_("FILE"),      N_("Optional relative or absolute filenames, or URIs to open")           },
   { N_("ACTION"),    N_("The action name to invoke")                                          },
   { N_("PARAMETER"), N_("Optional parameter to the action invocation, in GVariant format")    }
 };
@@ -130,7 +130,7 @@ app_help (gboolean     requested,
       gint maxwidth;
       gint i;
 
-      g_string_append_printf (string, "\n  %s %s %s\n\n", "gapplication", _("COMMAND"), _("[ARGS...]"));
+      g_string_append_printf (string, "\n  %s %s %s\n\n", "gapplication", _("COMMAND"), _("[ARGS…]"));
       g_string_append_printf (string, _("Commands:\n"));
 
       maxwidth = 0;
@@ -143,7 +143,7 @@ app_help (gboolean     requested,
 
       g_string_append (string, "\n");
       /* Translators: do not translate 'help', but please translate 'COMMAND'. */
-      g_string_append_printf (string, _("Use '%s help COMMAND' to get detailed help.\n\n"), "gapplication");
+      g_string_append_printf (string, _("Use “%s help COMMAND” to get detailed help.\n\n"), "gapplication");
     }
 
   if (requested)
@@ -168,7 +168,7 @@ app_check_name (gchar       **args,
 
   if (!g_dbus_is_name (args[0]))
     {
-      g_printerr (_("invalid application id: '%s'\n"), args[0]);
+      g_printerr (_("invalid application id: “%s”\n"), args[0]);
       return FALSE;
     }
 
@@ -179,7 +179,7 @@ static int
 app_no_args (const gchar *command)
 {
   /* Translators: %s is replaced with a command name like 'list-actions' */
-  g_printerr (_("'%s' takes no arguments\n\n"), command);
+  g_printerr (_("“%s” takes no arguments\n\n"), command);
   return app_help (FALSE, command);
 }
 
@@ -322,8 +322,8 @@ app_action (gchar **args)
 
   if (!g_action_name_is_valid (name))
     {
-      g_printerr (_("invalid action name: '%s'\n"
-                    "action names must consist of only alphanumerics, '-' and '.'\n"), name);
+      g_printerr (_("invalid action name: “%s”\n"
+                    "action names must consist of only alphanumerics, “-” and “.”\n"), name);
       return 1;
     }
 

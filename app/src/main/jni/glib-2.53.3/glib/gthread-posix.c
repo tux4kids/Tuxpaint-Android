@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -46,6 +46,7 @@
 #include "gmessages.h"
 #include "gstrfuncs.h"
 #include "gmain.h"
+#include "gutils.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -58,9 +59,6 @@
 
 #ifdef HAVE_SCHED_H
 #include <sched.h>
-#endif
-#ifdef HAVE_SYS_PRCTL_H
-#include <sys/prctl.h>
 #endif
 #ifdef G_OS_WIN32
 #include <windows.h>
@@ -77,7 +75,11 @@ g_thread_abort (gint         status,
 {
   fprintf (stderr, "GLib (gthread-posix.c): Unexpected error from C library during '%s': %s.  Aborting.\n",
            function, strerror (status));
-  abort ();
+#ifdef G_OS_WINDOWS
+  g_abort ();
+#else
+  abort();
+#endif
 }
 
 /* {{{1 GMutex */
@@ -1159,7 +1161,9 @@ g_system_thread_new (GThreadFunc   thread_func,
   if (stack_size)
     {
 #ifdef _SC_THREAD_STACK_MIN
-      stack_size = MAX (sysconf (_SC_THREAD_STACK_MIN), stack_size);
+      long min_stack_size = sysconf (_SC_THREAD_STACK_MIN);
+      if (min_stack_size >= 0)
+        stack_size = MAX (min_stack_size, stack_size);
 #endif /* _SC_THREAD_STACK_MIN */
       /* No error check here, because some systems can't do it and
        * we simply don't want threads to fail because of that. */
@@ -1225,10 +1229,10 @@ g_system_thread_exit (void)
 void
 g_system_thread_set_name (const gchar *name)
 {
-#if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
-  prctl (PR_SET_NAME, name, 0, 0, 0, 0); /* on Linux */
+#if defined(HAVE_PTHREAD_SETNAME_NP_WITH_TID)
+  pthread_setname_np (pthread_self(), name); /* on Linux and Solaris */
 #elif defined(HAVE_PTHREAD_SETNAME_NP_WITHOUT_TID)
-  pthread_setname_np(name); /* on OS X and iOS */
+  pthread_setname_np (name); /* on OS X and iOS */
 #endif
 }
 
@@ -1297,7 +1301,11 @@ g_mutex_clear (GMutex *mutex)
   if G_UNLIKELY (mutex->i[0] != 0)
     {
       fprintf (stderr, "g_mutex_clear() called on uninitialised or locked mutex\n");
-      abort ();
+#ifdef G_OS_WINDOWS
+      g_abort ();
+#else
+      abort();
+#endif
     }
 }
 
@@ -1323,7 +1331,11 @@ g_mutex_unlock_slowpath (GMutex *mutex,
   if G_UNLIKELY (prev == 0)
     {
       fprintf (stderr, "Attempt to unlock mutex that was not locked\n");
-      abort ();
+#ifdef G_OS_WINDOWS
+      g_abort ();
+#else
+      abort();
+#endif
     }
 
   syscall (__NR_futex, &mutex->i[0], (gsize) FUTEX_WAKE_PRIVATE, (gsize) 1, NULL);

@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -113,7 +113,7 @@ struct _GCredentialsClass
   GObjectClass parent_class;
 };
 
-G_DEFINE_TYPE (GCredentials, g_credentials, G_TYPE_OBJECT);
+G_DEFINE_TYPE (GCredentials, g_credentials, G_TYPE_OBJECT)
 
 static void
 g_credentials_finalize (GObject *object)
@@ -393,7 +393,7 @@ g_credentials_get_native (GCredentials     *credentials,
  * g_credentials_set_native:
  * @credentials: A #GCredentials.
  * @native_type: The type of native credentials to set.
- * @native: A pointer to native credentials.
+ * @native: (not nullable): A pointer to native credentials.
  *
  * Copies the native credentials of type @native_type from @native
  * into @credentials.

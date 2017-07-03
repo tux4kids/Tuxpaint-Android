@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -59,7 +59,7 @@ g_dbus_object_default_init (GDBusObjectIface *iface)
    *
    * Since: 2.30
    */
-  g_signal_new ("interface-added",
+  g_signal_new (I_("interface-added"),
                 G_TYPE_FROM_INTERFACE (iface),
                 G_SIGNAL_RUN_LAST,
                 G_STRUCT_OFFSET (GDBusObjectIface, interface_added),
@@ -79,7 +79,7 @@ g_dbus_object_default_init (GDBusObjectIface *iface)
    *
    * Since: 2.30
    */
-  g_signal_new ("interface-removed",
+  g_signal_new (I_("interface-removed"),
                 G_TYPE_FROM_INTERFACE (iface),
                 G_SIGNAL_RUN_LAST,
                 G_STRUCT_OFFSET (GDBusObjectIface, interface_removed),
@@ -116,7 +116,7 @@ g_dbus_object_get_object_path (GDBusObject *object)
  *
  * Gets the D-Bus interfaces associated with @object.
  *
- * Returns: (element-type GDBusInterface) (transfer full) : A list of #GDBusInterface instances.
+ * Returns: (element-type GDBusInterface) (transfer full): A list of #GDBusInterface instances.
  *   The returned list must be freed by g_list_free() after each element has been freed
  *   with g_object_unref().
  *

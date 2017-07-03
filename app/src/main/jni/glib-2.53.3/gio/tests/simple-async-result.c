@@ -1,10 +1,10 @@
 /*
  * Copyright © 2009 Ryan Lortie
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published
- * by the Free Software Foundation; either version 2 of the licence or (at
- * your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * See the included COPYING file for more information.
  */
@@ -13,6 +13,8 @@
 #include <gio/gio.h>
 #include <stdlib.h>
 #include <string.h>
+
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 
 static GObject      *got_source;
 static GAsyncResult *got_result;
@@ -193,3 +195,5 @@ main (int argc, char **argv)
 
   return g_test_run();
 }
+
+G_GNUC_END_IGNORE_DEPRECATIONS

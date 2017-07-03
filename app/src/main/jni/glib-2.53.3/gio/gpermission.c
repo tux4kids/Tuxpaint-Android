@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the licence, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,7 +24,7 @@
 #include "gioerror.h"
 #include "gioenums.h"
 #include "gasyncresult.h"
-#include "gsimpleasyncresult.h"
+#include "gtask.h"
 #include "glibintl.h"
 
 
@@ -78,7 +78,7 @@ G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (GPermission, g_permission, G_TYPE_OBJECT)
 /**
  * g_permission_acquire:
  * @permission: a #GPermission instance
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @error: a pointer to a %NULL #GError, or %NULL
  *
  * Attempts to acquire the permission represented by @permission.
@@ -114,7 +114,7 @@ g_permission_acquire (GPermission   *permission,
 /**
  * g_permission_acquire_async:
  * @permission: a #GPermission instance
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: the #GAsyncReadyCallback to call when done
  * @user_data: the user data to pass to @callback
  *
@@ -165,7 +165,7 @@ g_permission_acquire_finish (GPermission   *permission,
 /**
  * g_permission_release:
  * @permission: a #GPermission instance
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @error: a pointer to a %NULL #GError, or %NULL
  *
  * Attempts to release the permission represented by @permission.
@@ -201,7 +201,7 @@ g_permission_release (GPermission   *permission,
 /**
  * g_permission_release_async:
  * @permission: a #GPermission instance
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: the #GAsyncReadyCallback to call when done
  * @user_data: the user data to pass to @callback
  *
@@ -406,10 +406,11 @@ acquire_or_release_async (GPermission         *permission,
                           GAsyncReadyCallback  callback,
                           gpointer             user_data)
 {
-  g_simple_async_report_error_in_idle (G_OBJECT (permission),
-                                       callback, user_data,
-                                       G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-                                       "Can't acquire or release permission");
+  g_task_report_new_error (permission,
+                           callback, user_data,
+                           NULL,
+                           G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+                           "Can't acquire or release permission");
 }
 
 static gboolean
@@ -417,8 +418,7 @@ acquire_or_release_finish (GPermission   *permission,
                            GAsyncResult  *result,
                            GError       **error)
 {
-  g_async_result_legacy_propagate_error (result, error);
-  return FALSE;
+  return g_task_propagate_boolean (G_TASK (result), error);
 }
 
 static void

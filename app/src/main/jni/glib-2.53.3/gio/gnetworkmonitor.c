@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -35,8 +35,11 @@
  * @include: gio/gio.h
  *
  * #GNetworkMonitor provides an easy-to-use cross-platform API
- * for monitoring network connectivity. On Linux, the implementation
- * is based on the kernel's netlink interface.
+ * for monitoring network connectivity. On Linux, the available
+ * implementations are based on the kernel's netlink interface and
+ * on NetworkManager.
+ *
+ * There is also an implementation for use inside Flatpak sandboxes.
  */
 
 /**
@@ -115,6 +118,26 @@ g_network_monitor_get_network_available (GNetworkMonitor *monitor)
 }
 
 /**
+ * g_network_monitor_get_network_metered:
+ * @monitor: the #GNetworkMonitor
+ *
+ * Checks if the network is metered.
+ * See #GNetworkMonitor:network-metered for more details.
+ *
+ * Returns: whether the connection is metered
+ *
+ * Since: 2.46
+ */
+gboolean
+g_network_monitor_get_network_metered (GNetworkMonitor *monitor)
+{
+  gboolean metered = FALSE;
+
+  g_object_get (G_OBJECT (monitor), "network-metered", &metered, NULL);
+  return metered;
+}
+
+/**
  * g_network_monitor_get_connectivity:
  * @monitor: the #GNetworkMonitor
  *
@@ -156,7 +179,7 @@ g_network_monitor_get_connectivity (GNetworkMonitor *monitor)
  * g_network_monitor_can_reach:
  * @monitor: a #GNetworkMonitor
  * @connectable: a #GSocketConnectable
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @error: return location for a #GError, or %NULL
  *
  * Attempts to determine whether or not the host pointed to by
@@ -204,6 +227,8 @@ g_network_monitor_real_can_reach_async (GNetworkMonitor     *monitor,
   GError *error = NULL;
 
   task = g_task_new (monitor, cancellable, callback, user_data);
+  g_task_set_source_tag (task, g_network_monitor_real_can_reach_async);
+
   if (g_network_monitor_can_reach (monitor, connectable, cancellable, &error))
     g_task_return_boolean (task, TRUE);
   else
@@ -215,7 +240,7 @@ g_network_monitor_real_can_reach_async (GNetworkMonitor     *monitor,
  * g_network_monitor_can_reach_async:
  * @monitor: a #GNetworkMonitor
  * @connectable: a #GSocketConnectable
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: (scope async): a #GAsyncReadyCallback to call when the
  *     request is satisfied
  * @user_data: (closure): the data to pass to callback function
@@ -331,6 +356,37 @@ g_network_monitor_default_init (GNetworkMonitorInterface *iface)
                                        g_param_spec_boolean ("network-available",
                                                              P_("Network available"),
                                                              P_("Whether the network is available"),
+                                                             FALSE,
+                                                             G_PARAM_READABLE |
+                                                             G_PARAM_STATIC_STRINGS));
+
+  /**
+   * GNetworkMonitor:network-metered:
+   *
+   * Whether the network is considered metered. That is, whether the
+   * system has traffic flowing through the default connection that is
+   * subject to limitations set by service providers. For example, traffic
+   * might be billed by the amount of data transmitted, or there might be a
+   * quota on the amount of traffic per month. This is typical with tethered
+   * connections (3G and 4G) and in such situations, bandwidth intensive
+   * applications may wish to avoid network activity where possible if it will
+   * cost the user money or use up their limited quota.
+   *
+   * If more information is required about specific devices then the
+   * system network management API should be used instead (for example,
+   * NetworkManager or ConnMan).
+   *
+   * If this information is not available then no networks will be
+   * marked as metered.
+   *
+   * See also #GNetworkMonitor:network-available.
+   *
+   * Since: 2.46
+   */
+  g_object_interface_install_property (iface,
+                                       g_param_spec_boolean ("network-metered",
+                                                             P_("Network metered"),
+                                                             P_("Whether the network is metered"),
                                                              FALSE,
                                                              G_PARAM_READABLE |
                                                              G_PARAM_STATIC_STRINGS));

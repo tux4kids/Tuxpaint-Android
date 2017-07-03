@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,11 +23,22 @@
 #include "gappinfo.h"
 #include "gappinfoprivate.h"
 #include "gcontextspecificgroup.h"
+#include "gtask.h"
 
 #include "glibintl.h"
 #include <gioerror.h>
 #include <gfile.h>
 
+#ifdef G_OS_UNIX
+#include "gdbusconnection.h"
+#include "gdbusmessage.h"
+#include "gportalsupport.h"
+#include "gunixfdlist.h"
+#include "gopenuriportal.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#endif
 
 /**
  * SECTION:gappinfo
@@ -85,6 +96,10 @@
  * different ideas of what a given URI means.
  */
 
+struct _GAppLaunchContextPrivate {
+  char **envp;
+};
+
 typedef GAppInfoIface GAppInfoInterface;
 G_DEFINE_INTERFACE (GAppInfo, g_app_info, G_TYPE_OBJECT)
 
@@ -120,6 +135,10 @@ g_app_info_dup (GAppInfo *appinfo)
  * @appinfo2: the second #GAppInfo.
  *
  * Checks if two #GAppInfos are equal.
+ *
+ * Note that the check <em>may not</em> compare each individual field, and
+ * only does an identity check. In case detecting changes in the contents
+ * is needed, program code must additionally compare relevant fields.
  *
  * Returns: %TRUE if @appinfo1 is equal to @appinfo2. %FALSE otherwise.
  **/
@@ -240,7 +259,7 @@ g_app_info_get_description (GAppInfo *appinfo)
  * 
  * Gets the executable's name for the installed application.
  *
- * Returns: a string containing the @appinfo's application 
+ * Returns: (type filename): a string containing the @appinfo's application
  * binaries name
  **/
 const char *
@@ -263,7 +282,7 @@ g_app_info_get_executable (GAppInfo *appinfo)
  * Gets the commandline with which the application will be
  * started.  
  *
- * Returns: a string containing the @appinfo's commandline, 
+ * Returns: (type filename): a string containing the @appinfo's commandline,
  *     or %NULL if this information is not available
  *
  * Since: 2.20
@@ -339,7 +358,8 @@ g_app_info_set_as_last_used_for_type (GAppInfo    *appinfo,
 /**
  * g_app_info_set_as_default_for_extension:
  * @appinfo: a #GAppInfo.
- * @extension: a string containing the file extension (without the dot).
+ * @extension: (type filename): a string containing the file extension
+ *     (without the dot).
  * @error: a #GError.
  * 
  * Sets the application as the default handler for the given file extension.
@@ -515,8 +535,8 @@ g_app_info_get_icon (GAppInfo *appinfo)
 /**
  * g_app_info_launch:
  * @appinfo: a #GAppInfo
- * @files: (allow-none) (element-type GFile): a #GList of #GFile objects
- * @launch_context: (allow-none): a #GAppLaunchContext or %NULL
+ * @files: (nullable) (element-type GFile): a #GList of #GFile objects
+ * @launch_context: (nullable): a #GAppLaunchContext or %NULL
  * @error: a #GError
  * 
  * Launches the application. Passes @files to the launched application
@@ -610,8 +630,8 @@ g_app_info_supports_files (GAppInfo *appinfo)
 /**
  * g_app_info_launch_uris:
  * @appinfo: a #GAppInfo
- * @uris: (allow-none) (element-type utf8): a #GList containing URIs to launch.
- * @launch_context: (allow-none): a #GAppLaunchContext or %NULL
+ * @uris: (nullable) (element-type utf8): a #GList containing URIs to launch.
+ * @launch_context: (nullable): a #GAppLaunchContext or %NULL
  * @error: a #GError
  * 
  * Launches the application. This passes the @uris to the launched application
@@ -664,23 +684,10 @@ g_app_info_should_show (GAppInfo *appinfo)
   return (* iface->should_show) (appinfo);
 }
 
-/**
- * g_app_info_launch_default_for_uri:
- * @uri: the uri to show
- * @launch_context: (allow-none): an optional #GAppLaunchContext.
- * @error: a #GError.
- *
- * Utility function that launches the default application
- * registered to handle the specified uri. Synchronous I/O
- * is done on the uri to detect the type of the file if
- * required.
- * 
- * Returns: %TRUE on success, %FALSE on error.
- **/
-gboolean
-g_app_info_launch_default_for_uri (const char         *uri,
-				   GAppLaunchContext  *launch_context,
-				   GError            **error)
+static gboolean
+launch_default_for_uri (const char         *uri,
+                        GAppLaunchContext  *context,
+                        GError            **error)
 {
   char *uri_scheme;
   GAppInfo *app_info = NULL;
@@ -703,24 +710,132 @@ g_app_info_launch_default_for_uri (const char         *uri,
       file = g_file_new_for_uri (uri);
       app_info = g_file_query_default_handler (file, NULL, error);
       g_object_unref (file);
-      if (app_info == NULL)
-	return FALSE;
-
-      /* We still use the original @uri rather than calling
-       * g_file_get_uri(), because GFile might have modified the URI
-       * in ways we don't want (eg, removing the fragment identifier
-       * from a file: URI).
-       */
     }
+
+  if (app_info == NULL)
+    return FALSE;
 
   l.data = (char *)uri;
   l.next = l.prev = NULL;
-  res = g_app_info_launch_uris (app_info, &l,
-				launch_context, error);
+  res = g_app_info_launch_uris (app_info, &l, context, error);
 
   g_object_unref (app_info);
-  
+
   return res;
+}
+
+/**
+ * g_app_info_launch_default_for_uri:
+ * @uri: the uri to show
+ * @launch_context: (nullable): an optional #GAppLaunchContext
+ * @error: (nullable): return location for an error, or %NULL
+ *
+ * Utility function that launches the default application
+ * registered to handle the specified uri. Synchronous I/O
+ * is done on the uri to detect the type of the file if
+ * required.
+ * 
+ * Returns: %TRUE on success, %FALSE on error.
+ **/
+gboolean
+g_app_info_launch_default_for_uri (const char         *uri,
+				   GAppLaunchContext  *launch_context,
+				   GError            **error)
+{
+  if (launch_default_for_uri (uri, launch_context, error))
+    return TRUE;
+
+#ifdef G_OS_UNIX
+  if (glib_should_use_portal ())
+    {
+      const char *parent_window = NULL;
+
+      /* Reset any error previously set by launch_default_for_uri */
+      g_clear_error (error);
+
+      if (launch_context && launch_context->priv->envp)
+        parent_window = g_environ_getenv (launch_context->priv->envp, "PARENT_WINDOW_ID");
+
+      return g_openuri_portal_open_uri (uri, parent_window, error);
+
+    }
+#endif
+
+  return FALSE;
+}
+
+/**
+ * g_app_info_launch_default_for_uri_async:
+ * @uri: the uri to show
+ * @context: (nullable): an optional #GAppLaunchContext
+ * cancellable: (nullable): a #GCancellable
+ * @callback: (nullable): a #GASyncReadyCallback to call when the request is done
+ * @user_data: (nullable): data to pass to @callback
+ *
+ * Async version of g_app_info_launch_default_for_uri().
+ *
+ * This version is useful if you are interested in receiving
+ * error information in the case where the application is
+ * sandboxed and the portal may present an application chooser
+ * dialog to the user.
+ *
+ * Since: 2.50
+ */
+void
+g_app_info_launch_default_for_uri_async (const char          *uri,
+                                         GAppLaunchContext   *context,
+                                         GCancellable        *cancellable,
+                                         GAsyncReadyCallback  callback,
+                                         gpointer             user_data)
+{
+  gboolean res;
+  GError *error = NULL;
+  GTask *task;
+
+  res = launch_default_for_uri (uri, context, &error);
+
+#ifdef G_OS_UNIX
+  if (!res && glib_should_use_portal ())
+    {
+      const  char *parent_window = NULL;
+
+      if (context && context->priv->envp)
+        parent_window = g_environ_getenv (context->priv->envp, "PARENT_WINDOW_ID");
+
+      g_openuri_portal_open_uri_async (uri, parent_window, cancellable, callback, user_data);
+      return;
+    }
+#endif
+
+  task = g_task_new (context, cancellable, callback, user_data);
+  if (!res)
+    g_task_return_error (task, error);
+  else
+    g_task_return_boolean (task, TRUE);
+
+  g_object_unref (task);
+}
+
+/**
+ * g_app_info_launch_default_for_uri_finish:
+ * @result: a #GAsyncResult
+ * @error: (nullable): return location for an error, or %NULL
+ *
+ * Finishes an asynchronous launch-default-for-uri operation.
+ *
+ * Returns: %TRUE if the launch was successful, %FALSE if @error is set
+ *
+ * Since: 2.50
+ */
+gboolean
+g_app_info_launch_default_for_uri_finish (GAsyncResult  *result,
+                                          GError       **error)
+{
+#ifdef G_OS_UNIX
+  return g_openuri_portal_open_uri_finish (result, error);
+#else
+  return g_task_propagate_boolean (G_TASK (result), error);
+#endif
 }
 
 /**
@@ -787,10 +902,6 @@ enum {
   LAST_SIGNAL
 };
 
-struct _GAppLaunchContextPrivate {
-  char **envp;
-};
-
 static guint signals[LAST_SIGNAL] = { 0 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (GAppLaunchContext, g_app_launch_context, G_TYPE_OBJECT)
@@ -837,7 +948,7 @@ g_app_launch_context_class_init (GAppLaunchContextClass *klass)
    *
    * Since: 2.36
    */
-  signals[LAUNCH_FAILED] = g_signal_new ("launch-failed",
+  signals[LAUNCH_FAILED] = g_signal_new (I_("launch-failed"),
                                          G_OBJECT_CLASS_TYPE (object_class),
                                          G_SIGNAL_RUN_LAST,
                                          G_STRUCT_OFFSET (GAppLaunchContextClass, launch_failed),
@@ -858,7 +969,7 @@ g_app_launch_context_class_init (GAppLaunchContextClass *klass)
    *
    * Since: 2.36
    */
-  signals[LAUNCHED] = g_signal_new ("launched",
+  signals[LAUNCHED] = g_signal_new (I_("launched"),
                                     G_OBJECT_CLASS_TYPE (object_class),
                                     G_SIGNAL_RUN_LAST,
                                     G_STRUCT_OFFSET (GAppLaunchContextClass, launched),
@@ -1102,7 +1213,7 @@ g_app_info_monitor_class_init (GAppInfoMonitorClass *class)
    * Signal emitted when the app info database for changes (ie: newly installed
    * or removed applications).
    **/
-  g_app_info_monitor_changed_signal = g_signal_new ("changed", G_TYPE_APP_INFO_MONITOR, G_SIGNAL_RUN_FIRST,
+  g_app_info_monitor_changed_signal = g_signal_new (I_("changed"), G_TYPE_APP_INFO_MONITOR, G_SIGNAL_RUN_FIRST,
                                                     0, NULL, NULL, g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
 
   object_class->finalize = g_app_info_monitor_finalize;

@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the licence, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -385,7 +385,7 @@ g_futex_int_address (const volatile void *address)
 
 /**
  * g_pointer_bit_lock:
- * @address: a pointer to a #gpointer-sized value
+ * @address: (not nullable): a pointer to a #gpointer-sized value
  * @lock_bit: a bit value between 0 and 31
  *
  * This is equivalent to g_bit_lock, but working on pointers (or other
@@ -454,7 +454,7 @@ void
 
 /**
  * g_pointer_bit_trylock:
- * @address: a pointer to a #gpointer-sized value
+ * @address: (not nullable): a pointer to a #gpointer-sized value
  * @lock_bit: a bit value between 0 and 31
  *
  * This is equivalent to g_bit_trylock, but working on pointers (or
@@ -501,7 +501,7 @@ gboolean
 
 /**
  * g_pointer_bit_unlock:
- * @address: a pointer to a #gpointer-sized value
+ * @address: (not nullable): a pointer to a #gpointer-sized value
  * @lock_bit: a bit value between 0 and 31
  *
  * This is equivalent to g_bit_unlock, but working on pointers (or other

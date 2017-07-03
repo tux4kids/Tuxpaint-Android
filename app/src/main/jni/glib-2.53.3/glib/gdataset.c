@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -318,7 +318,7 @@ g_dataset_destroy_internal (GDataset *dataset)
 
 /**
  * g_dataset_destroy:
- * @dataset_location: the location identifying the dataset.
+ * @dataset_location: (not nullable): the location identifying the dataset.
  *
  * Destroys the dataset, freeing all memory allocated, and calling any
  * destroy functions set for data elements.
@@ -487,7 +487,7 @@ g_data_set_internal (GData	  **datalist,
 
 /**
  * g_dataset_id_set_data_full:
- * @dataset_location: the location identifying the dataset.
+ * @dataset_location: (not nullable): the location identifying the dataset.
  * @key_id: the #GQuark id to identify the data element.
  * @data: the data element.
  * @destroy_func: the function to call when the data element is
@@ -588,7 +588,7 @@ g_dataset_id_set_data_full (gconstpointer  dataset_location,
  * g_datalist_id_set_data_full:
  * @datalist: a datalist.
  * @key_id: the #GQuark to identify the data element.
- * @data: (allow-none): the data element or %NULL to remove any previous element
+ * @data: (nullable): the data element or %NULL to remove any previous element
  *        corresponding to @key_id.
  * @destroy_func: the function to call when the data element is
  *                removed. This function will be called with the data
@@ -605,7 +605,7 @@ g_dataset_id_set_data_full (gconstpointer  dataset_location,
  * g_datalist_set_data_full:
  * @dl: a datalist.
  * @k: the string to identify the data element.
- * @d: (allow-none): the data element, or %NULL to remove any previous element
+ * @d: (nullable): the data element, or %NULL to remove any previous element
  *     corresponding to @k.
  * @f: the function to call when the data element is removed. This
  *     function will be called with the data element and can be used to
@@ -619,7 +619,7 @@ g_dataset_id_set_data_full (gconstpointer  dataset_location,
  * g_datalist_id_set_data:
  * @dl: a datalist.
  * @q: the #GQuark to identify the data element.
- * @d: (allow-none): the data element, or %NULL to remove any previous element
+ * @d: (nullable): the data element, or %NULL to remove any previous element
  *     corresponding to @q.
  *
  * Sets the data corresponding to the given #GQuark id. Any previous
@@ -630,7 +630,7 @@ g_dataset_id_set_data_full (gconstpointer  dataset_location,
  * g_datalist_set_data:
  * @dl: a datalist.
  * @k: the string to identify the data element.
- * @d: (allow-none): the data element, or %NULL to remove any previous element
+ * @d: (nullable): the data element, or %NULL to remove any previous element
  *     corresponding to @k.
  *
  * Sets the data element corresponding to the given string identifier.
@@ -672,7 +672,7 @@ g_datalist_id_set_data_full (GData	  **datalist,
 
 /**
  * g_dataset_id_remove_no_notify:
- * @dataset_location: the location identifying the dataset.
+ * @dataset_location: (not nullable): the location identifying the dataset.
  * @key_id: the #GQuark ID identifying the data element.
  *
  * Removes an element, without calling its destroy notification
@@ -742,7 +742,7 @@ g_datalist_id_remove_no_notify (GData	**datalist,
 
 /**
  * g_dataset_id_get_data:
- * @dataset_location: the location identifying the dataset.
+ * @dataset_location: (not nullable): the location identifying the dataset.
  * @key_id: the #GQuark id to identify the data element.
  *
  * Gets the data element corresponding to a #GQuark.
@@ -815,8 +815,8 @@ g_datalist_id_get_data (GData  **datalist,
  * g_datalist_id_dup_data:
  * @datalist: location of a datalist
  * @key_id: the #GQuark identifying a data element
- * @dup_func: (allow-none): function to duplicate the old value
- * @user_data: (allow-none): passed as user_data to @dup_func
+ * @dup_func: (nullable): function to duplicate the old value
+ * @user_data: (nullable): passed as user_data to @dup_func
  *
  * This is a variant of g_datalist_id_get_data() which
  * returns a 'duplicate' of the value. @dup_func defines the
@@ -849,16 +849,14 @@ g_datalist_id_dup_data (GData          **datalist,
   GData *d;
   GDataElt *data, *data_end;
 
-  g_return_val_if_fail (datalist != NULL, NULL);
-
   g_datalist_lock (datalist);
 
   d = G_DATALIST_GET_POINTER (datalist);
   if (d)
     {
       data = d->data;
-      data_end = data + d->len - 1;
-      while (data <= data_end)
+      data_end = data + d->len;
+      do
         {
           if (data->key == key_id)
             {
@@ -867,6 +865,7 @@ g_datalist_id_dup_data (GData          **datalist,
             }
           data++;
         }
+      while (data < data_end);
     }
 
   if (dup_func)
@@ -883,10 +882,10 @@ g_datalist_id_dup_data (GData          **datalist,
  * g_datalist_id_replace_data:
  * @datalist: location of a datalist
  * @key_id: the #GQuark identifying a data element
- * @oldval: (allow-none): the old value to compare against
- * @newval: (allow-none): the new value to replace it with
- * @destroy: (allow-none): destroy notify for the new value
- * @old_destroy: (allow-none): destroy notify for the existing value
+ * @oldval: (nullable): the old value to compare against
+ * @newval: (nullable): the new value to replace it with
+ * @destroy: (nullable): destroy notify for the new value
+ * @old_destroy: (nullable): destroy notify for the existing value
  *
  * Compares the member that is associated with @key_id in
  * @datalist to @oldval, and if they are the same, replace
@@ -1055,7 +1054,7 @@ g_datalist_get_data (GData	 **datalist,
 
 /**
  * g_dataset_foreach:
- * @dataset_location: the location identifying the dataset.
+ * @dataset_location: (not nullable): the location identifying the dataset.
  * @func: the function to call for each data element.
  * @user_data: user data to pass to the function.
  *

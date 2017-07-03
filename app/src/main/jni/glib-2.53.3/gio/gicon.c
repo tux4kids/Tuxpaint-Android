@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -83,7 +83,7 @@ g_icon_default_init (GIconInterface *iface)
 
 /**
  * g_icon_hash:
- * @icon: #gconstpointer to an icon object.
+ * @icon: (not nullable): #gconstpointer to an icon object.
  * 
  * Gets a hash for an icon.
  *
@@ -105,8 +105,8 @@ g_icon_hash (gconstpointer icon)
 
 /**
  * g_icon_equal:
- * @icon1: (allow-none): pointer to the first #GIcon.
- * @icon2: (allow-none): pointer to the second #GIcon.
+ * @icon1: (nullable): pointer to the first #GIcon.
+ * @icon2: (nullable): pointer to the second #GIcon.
  * 
  * Checks if two icons are equal.
  * 
@@ -458,7 +458,7 @@ g_icon_new_for_string (const gchar   *str,
     g_set_error_literal (error,
                          G_IO_ERROR,
                          G_IO_ERROR_INVALID_ARGUMENT,
-                         _("Can't handle the supplied version of the icon encoding"));
+                         _("Can’t handle the supplied version of the icon encoding"));
 
   return icon;
 }

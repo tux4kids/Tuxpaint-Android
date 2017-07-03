@@ -149,6 +149,8 @@ GLIB_AVAILABLE_IN_ALL GType g_io_module_scope_flags_get_type (void) G_GNUC_CONST
 #define G_TYPE_IO_MODULE_SCOPE_FLAGS (g_io_module_scope_flags_get_type ())
 GLIB_AVAILABLE_IN_ALL GType g_socket_client_event_get_type (void) G_GNUC_CONST;
 #define G_TYPE_SOCKET_CLIENT_EVENT (g_socket_client_event_get_type ())
+GLIB_AVAILABLE_IN_ALL GType g_socket_listener_event_get_type (void) G_GNUC_CONST;
+#define G_TYPE_SOCKET_LISTENER_EVENT (g_socket_listener_event_get_type ())
 GLIB_AVAILABLE_IN_ALL GType g_test_dbus_flags_get_type (void) G_GNUC_CONST;
 #define G_TYPE_TEST_DBUS_FLAGS (g_test_dbus_flags_get_type ())
 GLIB_AVAILABLE_IN_ALL GType g_subprocess_flags_get_type (void) G_GNUC_CONST;

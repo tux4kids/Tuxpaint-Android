@@ -48,11 +48,11 @@ static void interface_per_class_init (void) { call_counter_init (NULL); }
 /* define 3 test interfaces */
 typedef GTypeInterface MyFace0Interface;
 static GType my_face0_get_type (void);
-G_DEFINE_INTERFACE (MyFace0, my_face0, G_TYPE_OBJECT);
+G_DEFINE_INTERFACE (MyFace0, my_face0, G_TYPE_OBJECT)
 static void my_face0_default_init (MyFace0Interface *iface) { call_counter_init (iface); }
 typedef GTypeInterface MyFace1Interface;
 static GType my_face1_get_type (void);
-G_DEFINE_INTERFACE (MyFace1, my_face1, G_TYPE_OBJECT);
+G_DEFINE_INTERFACE (MyFace1, my_face1, G_TYPE_OBJECT)
 static void my_face1_default_init (MyFace1Interface *iface) { call_counter_init (iface); }
 
 /* define 3 test objects, adding interfaces 0 & 1, and adding interface 2 after class initialization */
@@ -60,9 +60,8 @@ typedef GObject         MyTester0;
 typedef GObjectClass    MyTester0Class;
 static GType my_tester0_get_type (void);
 G_DEFINE_TYPE_WITH_CODE (MyTester0, my_tester0, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (my_face0_get_type(), interface_per_class_init);
-                         G_IMPLEMENT_INTERFACE (my_face1_get_type(), interface_per_class_init);
-                         );
+                         G_IMPLEMENT_INTERFACE (my_face0_get_type(), interface_per_class_init)
+                         G_IMPLEMENT_INTERFACE (my_face1_get_type(), interface_per_class_init))
 static void my_tester0_init (MyTester0*t) {}
 static void my_tester0_class_init (MyTester0Class*c) { call_counter_init (c); }
 typedef GObject         MyTester1;
@@ -72,23 +71,21 @@ typedef GObjectClass    MyTester1Class;
 #if 0
 typedef GTypeInterface MyFace2Interface;
 static GType my_face2_get_type (void);
-G_DEFINE_INTERFACE (MyFace2, my_face2, G_TYPE_OBJECT);
+G_DEFINE_INTERFACE (MyFace2, my_face2, G_TYPE_OBJECT)
 static void my_face2_default_init (MyFace2Interface *iface) { call_counter_init (iface); }
 
 static GType my_tester1_get_type (void);
 G_DEFINE_TYPE_WITH_CODE (MyTester1, my_tester1, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (my_face0_get_type(), interface_per_class_init);
-                         G_IMPLEMENT_INTERFACE (my_face1_get_type(), interface_per_class_init);
-                         );
+                         G_IMPLEMENT_INTERFACE (my_face0_get_type(), interface_per_class_init)
+                         G_IMPLEMENT_INTERFACE (my_face1_get_type(), interface_per_class_init))
 static void my_tester1_init (MyTester1*t) {}
 static void my_tester1_class_init (MyTester1Class*c) { call_counter_init (c); }
 typedef GObject         MyTester2;
 typedef GObjectClass    MyTester2Class;
 static GType my_tester2_get_type (void);
 G_DEFINE_TYPE_WITH_CODE (MyTester2, my_tester2, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (my_face0_get_type(), interface_per_class_init);
-                         G_IMPLEMENT_INTERFACE (my_face1_get_type(), interface_per_class_init);
-                         );
+                         G_IMPLEMENT_INTERFACE (my_face0_get_type(), interface_per_class_init)
+                         G_IMPLEMENT_INTERFACE (my_face1_get_type(), interface_per_class_init))
 static void my_tester2_init (MyTester2*t) {}
 static void my_tester2_class_init (MyTester2Class*c) { call_counter_init (c); }
 
@@ -132,11 +129,11 @@ test_threaded_class_init (void)
   while (g_atomic_int_get (&mtsafe_call_counter) < (3 + 3 + 3 * 3) * NUM_COUNTER_INCREMENTS)
     {
       if (g_test_verbose())
-        g_print ("Initializers counted: %u\n", g_atomic_int_get (&mtsafe_call_counter));
+        g_printerr ("Initializers counted: %u\n", g_atomic_int_get (&mtsafe_call_counter));
       g_usleep (50 * 1000); /* wait for threads to complete */
     }
   if (g_test_verbose())
-    g_print ("Total initializers: %u\n", g_atomic_int_get (&mtsafe_call_counter));
+    g_printerr ("Total initializers: %u\n", g_atomic_int_get (&mtsafe_call_counter));
   /* ensure non-corrupted counter updates */
   g_assert_cmpint (g_atomic_int_get (&mtsafe_call_counter), ==, unsafe_call_counter);
 
@@ -152,7 +149,7 @@ typedef struct {
 } PropTester;
 typedef GObjectClass    PropTesterClass;
 static GType prop_tester_get_type (void);
-G_DEFINE_TYPE (PropTester, prop_tester, G_TYPE_OBJECT);
+G_DEFINE_TYPE (PropTester, prop_tester, G_TYPE_OBJECT)
 #define PROP_NAME 1
 static void
 prop_tester_init (PropTester* t)
@@ -265,7 +262,7 @@ test_threaded_weak_ref (void)
       GError *error = NULL;
 
       if (g_test_verbose () && (i % (n/20)) == 0)
-        g_print ("%u%%\n", ((i * 100) / n));
+        g_printerr ("%u%%\n", ((i * 100) / n));
 
       /* Have an object and a weak ref to it */
       data.strong = g_object_new (my_tester0_get_type (), NULL);
@@ -332,7 +329,7 @@ test_threaded_weak_ref (void)
     }
 
   if (g_test_verbose ())
-    g_print ("Race won by get %u times, unref %u times\n",
+    g_printerr ("Race won by get %u times, unref %u times\n",
              get_wins, unref_wins);
 }
 

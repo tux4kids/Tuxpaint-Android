@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -53,7 +53,43 @@
  * Since: 2.30
  */
 
-G_DEFINE_ABSTRACT_TYPE (GTlsDatabase, g_tls_database, G_TYPE_OBJECT);
+/**
+ * GTlsDatabaseClass:
+ * @verify_chain: Virtual method implementing
+ *  g_tls_database_verify_chain().
+ * @verify_chain_async: Virtual method implementing
+ *  g_tls_database_verify_chain_async().
+ * @verify_chain_finish: Virtual method implementing
+ *  g_tls_database_verify_chain_finish().
+ * @create_certificate_handle: Virtual method implementing
+ *  g_tls_database_create_certificate_handle().
+ * @lookup_certificate_for_handle: Virtual method implementing
+ *  g_tls_database_lookup_certificate_for_handle().
+ * @lookup_certificate_for_handle_async: Virtual method implementing
+ *  g_tls_database_lookup_certificate_for_handle_async().
+ * @lookup_certificate_for_handle_finish: Virtual method implementing
+ *  g_tls_database_lookup_certificate_for_handle_finish().
+ * @lookup_certificate_issuer: Virtual method implementing
+ *  g_tls_database_lookup_certificate_issuer().
+ * @lookup_certificate_issuer_async: Virtual method implementing
+ *  g_tls_database_lookup_certificate_issuer_async().
+ * @lookup_certificate_issuer_finish: Virtual method implementing
+ *  g_tls_database_lookup_certificate_issuer_finish().
+ * @lookup_certificates_issued_by: Virtual method implementing
+ *  g_tls_database_lookup_certificates_issued_by().
+ * @lookup_certificates_issued_by_async: Virtual method implementing
+ *  g_tls_database_lookup_certificates_issued_by_async().
+ * @lookup_certificates_issued_by_finish: Virtual method implementing
+ *  g_tls_database_lookup_certificates_issued_by_finish().
+ *
+ * The class for #GTlsDatabase. Derived classes should implement the various
+ * virtual methods. _async and _finish methods have a default
+ * implementation that runs the corresponding sync method in a thread.
+ *
+ * Since: 2.30
+ */
+
+G_DEFINE_ABSTRACT_TYPE (GTlsDatabase, g_tls_database, G_TYPE_OBJECT)
 
 enum {
   UNLOCK_REQUIRED,
@@ -146,6 +182,7 @@ g_tls_database_real_verify_chain_async (GTlsDatabase           *self,
   args->flags = flags;
 
   task = g_task_new (self, cancellable, callback, user_data);
+  g_task_set_source_tag (task, g_tls_database_real_verify_chain_async);
   g_task_set_task_data (task, args, async_verify_chain_free);
   g_task_run_in_thread (task, async_verify_chain_thread);
   g_object_unref (task);
@@ -222,6 +259,8 @@ g_tls_database_real_lookup_certificate_for_handle_async (GTlsDatabase           
   args->interaction = interaction ? g_object_ref (interaction) : NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
+  g_task_set_source_tag (task,
+                         g_tls_database_real_lookup_certificate_for_handle_async);
   g_task_set_task_data (task, args, async_lookup_certificate_for_handle_free);
   g_task_run_in_thread (task, async_lookup_certificate_for_handle_thread);
   g_object_unref (task);
@@ -294,6 +333,8 @@ g_tls_database_real_lookup_certificate_issuer_async (GTlsDatabase           *sel
   args->interaction = interaction ? g_object_ref (interaction) : NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
+  g_task_set_source_tag (task,
+                         g_tls_database_real_lookup_certificate_issuer_async);
   g_task_set_task_data (task, args, async_lookup_certificate_issuer_free);
   g_task_run_in_thread (task, async_lookup_certificate_issuer_thread);
   g_object_unref (task);
@@ -373,6 +414,8 @@ g_tls_database_real_lookup_certificates_issued_by_async (GTlsDatabase           
   args->interaction = interaction ? g_object_ref (interaction) : NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
+  g_task_set_source_tag (task,
+                         g_tls_database_real_lookup_certificates_issued_by_async);
   g_task_set_task_data (task, args, async_lookup_certificates_issued_by_free);
   g_task_run_in_thread (task, async_lookup_certificates_issued_by_thread);
   g_object_unref (task);
@@ -406,14 +449,14 @@ g_tls_database_class_init (GTlsDatabaseClass *klass)
  * @self: a #GTlsDatabase
  * @chain: a #GTlsCertificate chain
  * @purpose: the purpose that this certificate chain will be used for.
- * @identity: (allow-none): the expected peer identity
- * @interaction: (allow-none): used to interact with the user if necessary
+ * @identity: (nullable): the expected peer identity
+ * @interaction: (nullable): used to interact with the user if necessary
  * @flags: additional verify flags
- * @cancellable: (allow-none): a #GCancellable, or %NULL
- * @error: (allow-none): a #GError, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
+ * @error: (nullable): a #GError, or %NULL
  *
- * Verify's a certificate chain after looking up and adding any missing
- * certificates to the chain.
+ * Determines the validity of a certificate chain after looking up and
+ * adding any missing certificates to the chain.
  *
  * @chain is a chain of #GTlsCertificate objects each pointing to the next
  * certificate in the chain by its %issuer property. The chain may initially
@@ -433,6 +476,15 @@ g_tls_database_class_init (GTlsDatabaseClass *klass)
  *
  * Currently there are no @flags, and %G_TLS_DATABASE_VERIFY_NONE should be
  * used.
+ *
+ * If @chain is found to be valid, then the return value will be 0. If
+ * @chain is found to be invalid, then the return value will indicate
+ * the problems found. If the function is unable to determine whether
+ * @chain is valid or not (eg, because @cancellable is triggered
+ * before it completes) then the return value will be
+ * %G_TLS_CERTIFICATE_GENERIC_ERROR and @error will be set
+ * accordingly. @error is not set when @chain is successfully analyzed
+ * but found to be invalid.
  *
  * This function can block, use g_tls_database_verify_chain_async() to perform
  * the verification operation asynchronously.
@@ -482,16 +534,16 @@ g_tls_database_verify_chain (GTlsDatabase           *self,
  * @self: a #GTlsDatabase
  * @chain: a #GTlsCertificate chain
  * @purpose: the purpose that this certificate chain will be used for.
- * @identity: (allow-none): the expected peer identity
- * @interaction: (allow-none): used to interact with the user if necessary
+ * @identity: (nullable): the expected peer identity
+ * @interaction: (nullable): used to interact with the user if necessary
  * @flags: additional verify flags
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: callback to call when the operation completes
  * @user_data: the data to pass to the callback function
  *
- * Asynchronously verify's a certificate chain after looking up and adding
- * any missing certificates to the chain. See g_tls_database_verify_chain()
- * for more information.
+ * Asynchronously determines the validity of a certificate chain after
+ * looking up and adding any missing certificates to the chain. See
+ * g_tls_database_verify_chain() for more information.
  *
  * Since: 2.30
  */
@@ -533,7 +585,17 @@ g_tls_database_verify_chain_async (GTlsDatabase           *self,
  * @error: a #GError pointer, or %NULL
  *
  * Finish an asynchronous verify chain operation. See
- * g_tls_database_verify_chain() for more information. *
+ * g_tls_database_verify_chain() for more information.
+ *
+ * If @chain is found to be valid, then the return value will be 0. If
+ * @chain is found to be invalid, then the return value will indicate
+ * the problems found. If the function is unable to determine whether
+ * @chain is valid or not (eg, because @cancellable is triggered
+ * before it completes) then the return value will be
+ * %G_TLS_CERTIFICATE_GENERIC_ERROR and @error will be set
+ * accordingly. @error is not set when @chain is successfully analyzed
+ * but found to be invalid.
+ *
  * Returns: the appropriate #GTlsCertificateFlags which represents the
  * result of verification.
  *
@@ -588,10 +650,10 @@ g_tls_database_create_certificate_handle (GTlsDatabase            *self,
  * g_tls_database_lookup_certificate_for_handle:
  * @self: a #GTlsDatabase
  * @handle: a certificate handle
- * @interaction: (allow-none): used to interact with the user if necessary
+ * @interaction: (nullable): used to interact with the user if necessary
  * @flags: Flags which affect the lookup.
- * @cancellable: (allow-none): a #GCancellable, or %NULL
- * @error: (allow-none): a #GError, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
+ * @error: (nullable): a #GError, or %NULL
  *
  * Lookup a certificate by its handle.
  *
@@ -606,7 +668,7 @@ g_tls_database_create_certificate_handle (GTlsDatabase            *self,
  * This function can block, use g_tls_database_lookup_certificate_for_handle_async() to perform
  * the lookup operation asynchronously.
  *
- * Returns: (transfer full) (allow-none): a newly allocated
+ * Returns: (transfer full) (nullable): a newly allocated
  * #GTlsCertificate, or %NULL. Use g_object_unref() to release the certificate.
  *
  * Since: 2.30
@@ -638,9 +700,9 @@ g_tls_database_lookup_certificate_for_handle (GTlsDatabase            *self,
  * g_tls_database_lookup_certificate_for_handle_async:
  * @self: a #GTlsDatabase
  * @handle: a certificate handle
- * @interaction: (allow-none): used to interact with the user if necessary
+ * @interaction: (nullable): used to interact with the user if necessary
  * @flags: Flags which affect the lookup.
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: callback to call when the operation completes
  * @user_data: the data to pass to the callback function
  *
@@ -707,10 +769,10 @@ g_tls_database_lookup_certificate_for_handle_finish (GTlsDatabase            *se
  * g_tls_database_lookup_certificate_issuer:
  * @self: a #GTlsDatabase
  * @certificate: a #GTlsCertificate
- * @interaction: (allow-none): used to interact with the user if necessary
+ * @interaction: (nullable): used to interact with the user if necessary
  * @flags: flags which affect the lookup operation
- * @cancellable: (allow-none): a #GCancellable, or %NULL
- * @error: (allow-none): a #GError, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
+ * @error: (nullable): a #GError, or %NULL
  *
  * Lookup the issuer of @certificate in the database.
  *
@@ -752,9 +814,9 @@ g_tls_database_lookup_certificate_issuer (GTlsDatabase           *self,
  * g_tls_database_lookup_certificate_issuer_async:
  * @self: a #GTlsDatabase
  * @certificate: a #GTlsCertificate
- * @interaction: (allow-none): used to interact with the user if necessary
+ * @interaction: (nullable): used to interact with the user if necessary
  * @flags: flags which affect the lookup operation
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: callback to call when the operation completes
  * @user_data: the data to pass to the callback function
  *
@@ -819,10 +881,10 @@ g_tls_database_lookup_certificate_issuer_finish (GTlsDatabase          *self,
  * g_tls_database_lookup_certificates_issued_by:
  * @self: a #GTlsDatabase
  * @issuer_raw_dn: a #GByteArray which holds the DER encoded issuer DN.
- * @interaction: (allow-none): used to interact with the user if necessary
+ * @interaction: (nullable): used to interact with the user if necessary
  * @flags: Flags which affect the lookup operation.
- * @cancellable: (allow-none): a #GCancellable, or %NULL
- * @error: (allow-none): a #GError, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
+ * @error: (nullable): a #GError, or %NULL
  *
  * Lookup certificates issued by this issuer in the database.
  *
@@ -860,9 +922,9 @@ g_tls_database_lookup_certificates_issued_by (GTlsDatabase           *self,
  * g_tls_database_lookup_certificates_issued_by_async:
  * @self: a #GTlsDatabase
  * @issuer_raw_dn: a #GByteArray which holds the DER encoded issuer DN.
- * @interaction: (allow-none): used to interact with the user if necessary
+ * @interaction: (nullable): used to interact with the user if necessary
  * @flags: Flags which affect the lookup operation.
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: callback to call when the operation completes
  * @user_data: the data to pass to the callback function
  *

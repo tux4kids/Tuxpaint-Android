@@ -111,7 +111,7 @@ check_PROGRAMS = $(am__EXEEXT_9)
 @ENABLE_INSTALLED_TESTS_TRUE@am__append_10 = $(test_scripts) \
 @ENABLE_INSTALLED_TESTS_TRUE@	$(installed_test_scripts) \
 @ENABLE_INSTALLED_TESTS_TRUE@	$(test_extra_scripts) \
-@ENABLE_INSTALLED_TESTS_TRUE@	$(test_installed_extra_scripts) \
+@ENABLE_INSTALLED_TESTS_TRUE@	$(installed_test_extra_scripts) \
 @ENABLE_INSTALLED_TESTS_TRUE@	$(dist_test_scripts) \
 @ENABLE_INSTALLED_TESTS_TRUE@	$(dist_test_extra_scripts) \
 @ENABLE_INSTALLED_TESTS_TRUE@	$(dist_installed_test_scripts) \
@@ -130,7 +130,7 @@ check_PROGRAMS = $(am__EXEEXT_9)
 @OS_UNIX_TRUE@	include				\
 @OS_UNIX_TRUE@	$(NULL)
 
-@OS_UNIX_TRUE@am__append_16 = tmpsample.xml key_file_* out.xbel
+@OS_UNIX_TRUE@am__append_16 = tmpsample.xml
 @HAVE_GCC_TRUE@am__append_17 = \
 @HAVE_GCC_TRUE@	autoptr				\
 @HAVE_GCC_TRUE@	$(NULL)
@@ -202,16 +202,17 @@ am__EXEEXT_4 = array-test$(EXEEXT) asyncqueue$(EXEEXT) base64$(EXEEXT) \
 	cache$(EXEEXT) checksum$(EXEEXT) collate$(EXEEXT) \
 	cond$(EXEEXT) convert$(EXEEXT) dataset$(EXEEXT) date$(EXEEXT) \
 	dir$(EXEEXT) environment$(EXEEXT) error$(EXEEXT) \
-	fileutils$(EXEEXT) gdatetime$(EXEEXT) gvariant$(EXEEXT) \
-	hash$(EXEEXT) hmac$(EXEEXT) hook$(EXEEXT) hostutils$(EXEEXT) \
-	keyfile$(EXEEXT) list$(EXEEXT) logging$(EXEEXT) \
-	mainloop$(EXEEXT) malloc$(EXEEXT) mappedfile$(EXEEXT) \
+	fileutils$(EXEEXT) gdatetime$(EXEEXT) guuid$(EXEEXT) \
+	gvariant$(EXEEXT) hash$(EXEEXT) hmac$(EXEEXT) hook$(EXEEXT) \
+	hostutils$(EXEEXT) keyfile$(EXEEXT) list$(EXEEXT) \
+	logging$(EXEEXT) mainloop$(EXEEXT) mappedfile$(EXEEXT) \
 	markup$(EXEEXT) markup-parse$(EXEEXT) markup-collect$(EXEEXT) \
 	markup-escape$(EXEEXT) markup-subparser$(EXEEXT) \
 	mem-overflow$(EXEEXT) mutex$(EXEEXT) node$(EXEEXT) \
 	once$(EXEEXT) option-context$(EXEEXT) option-argv0$(EXEEXT) \
-	pattern$(EXEEXT) private$(EXEEXT) protocol$(EXEEXT) \
-	queue$(EXEEXT) rand$(EXEEXT) rec-mutex$(EXEEXT) regex$(EXEEXT) \
+	overflow$(EXEEXT) overflow-fallback$(EXEEXT) pattern$(EXEEXT) \
+	private$(EXEEXT) protocol$(EXEEXT) queue$(EXEEXT) \
+	rand$(EXEEXT) rec-mutex$(EXEEXT) regex$(EXEEXT) \
 	rwlock$(EXEEXT) scannerapi$(EXEEXT) search-utils$(EXEEXT) \
 	sequence$(EXEEXT) shell$(EXEEXT) slice$(EXEEXT) slist$(EXEEXT) \
 	sort$(EXEEXT) spawn-multithreaded$(EXEEXT) \
@@ -342,6 +343,10 @@ gdatetime_SOURCES = gdatetime.c
 gdatetime_OBJECTS = gdatetime.$(OBJEXT)
 gdatetime_LDADD = $(LDADD)
 gdatetime_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+guuid_SOURCES = guuid.c
+guuid_OBJECTS = guuid.$(OBJEXT)
+guuid_LDADD = $(LDADD)
+guuid_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 gvariant_SOURCES = gvariant.c
 gvariant_OBJECTS = gvariant.$(OBJEXT)
 gvariant_LDADD = $(LDADD)
@@ -397,10 +402,6 @@ mainloop_SOURCES = mainloop.c
 mainloop_OBJECTS = mainloop.$(OBJEXT)
 mainloop_LDADD = $(LDADD)
 mainloop_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
-malloc_SOURCES = malloc.c
-malloc_OBJECTS = malloc.$(OBJEXT)
-malloc_LDADD = $(LDADD)
-malloc_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 mappedfile_SOURCES = mappedfile.c
 mappedfile_OBJECTS = mappedfile.$(OBJEXT)
 mappedfile_LDADD = $(LDADD)
@@ -449,6 +450,14 @@ option_context_SOURCES = option-context.c
 option_context_OBJECTS = option-context.$(OBJEXT)
 option_context_LDADD = $(LDADD)
 option_context_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+overflow_SOURCES = overflow.c
+overflow_OBJECTS = overflow.$(OBJEXT)
+overflow_LDADD = $(LDADD)
+overflow_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+am_overflow_fallback_OBJECTS = overflow.$(OBJEXT)
+overflow_fallback_OBJECTS = $(am_overflow_fallback_OBJECTS)
+overflow_fallback_LDADD = $(LDADD)
+overflow_fallback_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 pattern_SOURCES = pattern.c
 pattern_OBJECTS = pattern.$(OBJEXT)
 pattern_LDADD = $(LDADD)
@@ -478,8 +487,12 @@ rec_mutex_LDADD = $(LDADD)
 rec_mutex_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 regex_SOURCES = regex.c
 regex_OBJECTS = regex.$(OBJEXT)
-regex_LDADD = $(LDADD)
-regex_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+am__DEPENDENCIES_1 = $(top_builddir)/glib/libglib-2.0.la
+am__DEPENDENCIES_2 =
+@USE_SYSTEM_PCRE_FALSE@am__DEPENDENCIES_3 =  \
+@USE_SYSTEM_PCRE_FALSE@	$(top_builddir)/glib/pcre/libpcre.la
+@USE_SYSTEM_PCRE_TRUE@am__DEPENDENCIES_3 = $(am__DEPENDENCIES_2)
+regex_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_3)
 rwlock_SOURCES = rwlock.c
 rwlock_OBJECTS = rwlock.$(OBJEXT)
 rwlock_LDADD = $(LDADD)
@@ -553,6 +566,9 @@ thread_SOURCES = thread.c
 thread_OBJECTS = thread.$(OBJEXT)
 thread_LDADD = $(LDADD)
 thread_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+thread_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(thread_LDFLAGS) $(LDFLAGS) -o $@
 timeout_SOURCES = timeout.c
 timeout_OBJECTS = timeout.$(OBJEXT)
 timeout_LDADD = $(LDADD)
@@ -636,32 +652,34 @@ SOURCES = $(1bit_emufutex_SOURCES) 1bit-mutex.c 642026.c \
 	$(642026_ec_SOURCES) array-test.c asyncqueue.c atomic.c \
 	autoptr.c base64.c bitlock.c bookmarkfile.c bytes.c cache.c \
 	checksum.c collate.c cond.c convert.c dataset.c date.c dir.c \
-	environment.c error.c fileutils.c gdatetime.c gvariant.c \
-	$(gwakeup_SOURCES) $(gwakeup_fallback_SOURCES) hash.c hmac.c \
-	hook.c hostutils.c include.c keyfile.c list.c logging.c \
-	mainloop.c malloc.c mappedfile.c markup.c markup-collect.c \
+	environment.c error.c fileutils.c gdatetime.c guuid.c \
+	gvariant.c $(gwakeup_SOURCES) $(gwakeup_fallback_SOURCES) \
+	hash.c hmac.c hook.c hostutils.c include.c keyfile.c list.c \
+	logging.c mainloop.c mappedfile.c markup.c markup-collect.c \
 	markup-escape.c markup-parse.c markup-subparser.c \
 	mem-overflow.c mutex.c node.c once.c option-argv0.c \
-	option-context.c pattern.c private.c protocol.c queue.c rand.c \
-	rec-mutex.c regex.c rwlock.c scannerapi.c search-utils.c \
-	sequence.c shell.c slice.c slist.c sort.c \
-	spawn-multithreaded.c spawn-singlethread.c strfuncs.c string.c \
-	test-printf.c test-spawn-echo.c testing.c thread.c timeout.c \
-	timer.c tree.c unicode.c unix.c uri.c utf8-misc.c \
-	utf8-performance.c utf8-pointer.c utf8-validate.c utils.c
+	option-context.c overflow.c $(overflow_fallback_SOURCES) \
+	pattern.c private.c protocol.c queue.c rand.c rec-mutex.c \
+	regex.c rwlock.c scannerapi.c search-utils.c sequence.c \
+	shell.c slice.c slist.c sort.c spawn-multithreaded.c \
+	spawn-singlethread.c strfuncs.c string.c test-printf.c \
+	test-spawn-echo.c testing.c thread.c timeout.c timer.c tree.c \
+	unicode.c unix.c uri.c utf8-misc.c utf8-performance.c \
+	utf8-pointer.c utf8-validate.c utils.c
 DIST_SOURCES = $(1bit_emufutex_SOURCES) 1bit-mutex.c 642026.c \
 	$(642026_ec_SOURCES) array-test.c asyncqueue.c atomic.c \
 	autoptr.c base64.c bitlock.c bookmarkfile.c bytes.c cache.c \
 	checksum.c collate.c cond.c convert.c dataset.c date.c dir.c \
-	environment.c error.c fileutils.c gdatetime.c gvariant.c \
-	$(gwakeup_SOURCES) $(am__gwakeup_fallback_SOURCES_DIST) hash.c \
-	hmac.c hook.c hostutils.c include.c keyfile.c list.c logging.c \
-	mainloop.c malloc.c mappedfile.c markup.c markup-collect.c \
-	markup-escape.c markup-parse.c markup-subparser.c \
-	mem-overflow.c mutex.c node.c once.c option-argv0.c \
-	option-context.c pattern.c private.c protocol.c queue.c rand.c \
-	rec-mutex.c regex.c rwlock.c scannerapi.c search-utils.c \
-	sequence.c shell.c slice.c slist.c sort.c \
+	environment.c error.c fileutils.c gdatetime.c guuid.c \
+	gvariant.c $(gwakeup_SOURCES) \
+	$(am__gwakeup_fallback_SOURCES_DIST) hash.c hmac.c hook.c \
+	hostutils.c include.c keyfile.c list.c logging.c mainloop.c \
+	mappedfile.c markup.c markup-collect.c markup-escape.c \
+	markup-parse.c markup-subparser.c mem-overflow.c mutex.c \
+	node.c once.c option-argv0.c option-context.c overflow.c \
+	$(overflow_fallback_SOURCES) pattern.c private.c protocol.c \
+	queue.c rand.c rec-mutex.c regex.c rwlock.c scannerapi.c \
+	search-utils.c sequence.c shell.c slice.c slist.c sort.c \
 	spawn-multithreaded.c spawn-singlethread.c strfuncs.c string.c \
 	test-printf.c test-spawn-echo.c testing.c thread.c timeout.c \
 	timer.c tree.c unicode.c unix.c uri.c utf8-misc.c \
@@ -871,7 +889,6 @@ TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp \
 	$(top_srcdir)/glib-tap.mk $(top_srcdir)/test-driver
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ABS_GLIB_RUNTIME_LIBDIR = @ABS_GLIB_RUNTIME_LIBDIR@
 ABS_TAPSET_DIR = @ABS_TAPSET_DIR@
 ACLOCAL = @ACLOCAL@
 ALLOCA = @ALLOCA@
@@ -920,11 +937,8 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
-GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
-GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
-GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
 GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
@@ -937,7 +951,6 @@ GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
-GOBJECT_LINK_FLAGS = @GOBJECT_LINK_FLAGS@
 GREP = @GREP@
 GSPAWN = @GSPAWN@
 GTHREAD_COMPILE_IMPL_DEFINES = @GTHREAD_COMPILE_IMPL_DEFINES@
@@ -971,12 +984,15 @@ INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
+INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBELF_CFLAGS = @LIBELF_CFLAGS@
 LIBELF_LIBS = @LIBELF_LIBS@
 LIBFFI_CFLAGS = @LIBFFI_CFLAGS@
 LIBFFI_LIBS = @LIBFFI_LIBS@
+LIBMOUNT_CFLAGS = @LIBMOUNT_CFLAGS@
+LIBMOUNT_LIBS = @LIBMOUNT_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -991,6 +1007,7 @@ LT_CURRENT = @LT_CURRENT@
 LT_CURRENT_MINUS_AGE = @LT_CURRENT_MINUS_AGE@
 LT_RELEASE = @LT_RELEASE@
 LT_REVISION = @LT_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
@@ -1117,7 +1134,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-TESTS_ENVIRONMENT = \
+AM_TESTS_ENVIRONMENT = \
 	G_TEST_SRCDIR="$(abs_srcdir)" 		\
 	G_TEST_BUILDDIR="$(abs_builddir)" 	\
 	G_DEBUG=gc-friendly 			\
@@ -1171,9 +1188,16 @@ all_test_ltlibs = $(test_ltlibraries) $(uninstalled_test_ltlibraries) $(installe
 @ENABLE_INSTALLED_TESTS_TRUE@                      $(dist_test_scripts) $(dist_installed_test_scripts)
 
 @ENABLE_INSTALLED_TESTS_TRUE@installed_test_meta_DATA = $(installed_testcases:=.test)
+@USE_SYSTEM_PCRE_FALSE@pcre_lib = $(top_builddir)/glib/pcre/libpcre.la
+@USE_SYSTEM_PCRE_TRUE@pcre_lib = $(PCRE_LIBS)
+@USE_SYSTEM_PCRE_FALSE@pcre_inc = -DPCRE_STATIC
+@USE_SYSTEM_PCRE_TRUE@pcre_inc = $(PCRE_CFLAGS)
 LDADD = $(top_builddir)/glib/libglib-2.0.la -lm
 AM_CPPFLAGS = -g $(glib_INCLUDES) $(GLIB_DEBUG_FLAGS)
-AM_CFLAGS = $(GLIB_WARN_CFLAGS)
+AM_CFLAGS = $(GLIB_WARN_CFLAGS) $(pcre_inc)
+
+# The regex test uses pcre_version()
+regex_LDADD = $(LDADD) $(pcre_lib)
 
 # These tests corrupt the gcov bookkeeping, so we
 # skip them. See bug 682133
@@ -1206,14 +1230,14 @@ test_extra_programs = \
 # -----------------------------------------------------------------------------
 test_programs = array-test asyncqueue base64 bitlock bookmarkfile \
 	bytes cache checksum collate cond convert dataset date dir \
-	environment error fileutils gdatetime gvariant hash hmac hook \
-	hostutils keyfile list logging mainloop malloc mappedfile \
-	markup markup-parse markup-collect markup-escape \
-	markup-subparser mem-overflow mutex node once option-context \
-	option-argv0 pattern private protocol queue rand rec-mutex \
-	regex rwlock scannerapi search-utils sequence shell slice \
-	slist sort spawn-multithreaded spawn-singlethread strfuncs \
-	string testing test-printf thread timeout timer tree \
+	environment error fileutils gdatetime guuid gvariant hash hmac \
+	hook hostutils keyfile list logging mainloop mappedfile markup \
+	markup-parse markup-collect markup-escape markup-subparser \
+	mem-overflow mutex node once option-context option-argv0 \
+	overflow overflow-fallback pattern private protocol queue rand \
+	rec-mutex regex rwlock scannerapi search-utils sequence shell \
+	slice slist sort spawn-multithreaded spawn-singlethread \
+	strfuncs string testing test-printf thread timeout timer tree \
 	utf8-performance utf8-pointer utf8-validate utf8-misc utils \
 	unicode uri 1bit-mutex 642026 $(NULL) atomic 642026-ec \
 	$(am__append_15) $(am__append_17)
@@ -1245,6 +1269,8 @@ all_markup_data = \
 	$(addprefix markups/,$(cdata_markup_tests.=.cdata-as-text))
 
 atomic_CFLAGS = $(AM_CFLAGS) $(am__append_14)
+overflow_fallback_SOURCES = overflow.c
+overflow_fallback_FALGS = $(AM_CFLAGS) -D_GLIB_TEST_OVERFLOW_FALLBACK
 642026_ec_SOURCES = 642026.c
 642026_ec_CFLAGS = -DG_ERRORCHECK_MUTEXES
 1bit_emufutex_SOURCES = 1bit-mutex.c
@@ -1255,6 +1281,7 @@ gwakeup_SOURCES = gwakeuptest.c ../../glib/gwakeup.c
 @OS_UNIX_TRUE@XMLLINT = xmllint
 @OS_UNIX_TRUE@GTESTER = $(top_builddir)/glib/gtester
 @OS_UNIX_TRUE@private_LDFLAGS = @G_THREAD_LIBS@
+@OS_UNIX_TRUE@thread_LDFLAGS = @G_THREAD_LIBS@
 @HAVE_EVENTFD_TRUE@gwakeup_fallback_SOURCES = gwakeuptest.c ../../glib/gwakeup.c
 @HAVE_EVENTFD_TRUE@gwakeup_fallback_CFLAGS = $(AM_CFLAGS) -DTEST_EVENTFD_FALLBACK
 all: $(BUILT_SOURCES)
@@ -1513,6 +1540,10 @@ gdatetime$(EXEEXT): $(gdatetime_OBJECTS) $(gdatetime_DEPENDENCIES) $(EXTRA_gdate
 	@rm -f gdatetime$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gdatetime_OBJECTS) $(gdatetime_LDADD) $(LIBS)
 
+guuid$(EXEEXT): $(guuid_OBJECTS) $(guuid_DEPENDENCIES) $(EXTRA_guuid_DEPENDENCIES) 
+	@rm -f guuid$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(guuid_OBJECTS) $(guuid_LDADD) $(LIBS)
+
 gvariant$(EXEEXT): $(gvariant_OBJECTS) $(gvariant_DEPENDENCIES) $(EXTRA_gvariant_DEPENDENCIES) 
 	@rm -f gvariant$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gvariant_OBJECTS) $(gvariant_LDADD) $(LIBS)
@@ -1561,10 +1592,6 @@ mainloop$(EXEEXT): $(mainloop_OBJECTS) $(mainloop_DEPENDENCIES) $(EXTRA_mainloop
 	@rm -f mainloop$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(mainloop_OBJECTS) $(mainloop_LDADD) $(LIBS)
 
-malloc$(EXEEXT): $(malloc_OBJECTS) $(malloc_DEPENDENCIES) $(EXTRA_malloc_DEPENDENCIES) 
-	@rm -f malloc$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(malloc_OBJECTS) $(malloc_LDADD) $(LIBS)
-
 mappedfile$(EXEEXT): $(mappedfile_OBJECTS) $(mappedfile_DEPENDENCIES) $(EXTRA_mappedfile_DEPENDENCIES) 
 	@rm -f mappedfile$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(mappedfile_OBJECTS) $(mappedfile_LDADD) $(LIBS)
@@ -1612,6 +1639,14 @@ option-argv0$(EXEEXT): $(option_argv0_OBJECTS) $(option_argv0_DEPENDENCIES) $(EX
 option-context$(EXEEXT): $(option_context_OBJECTS) $(option_context_DEPENDENCIES) $(EXTRA_option_context_DEPENDENCIES) 
 	@rm -f option-context$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(option_context_OBJECTS) $(option_context_LDADD) $(LIBS)
+
+overflow$(EXEEXT): $(overflow_OBJECTS) $(overflow_DEPENDENCIES) $(EXTRA_overflow_DEPENDENCIES) 
+	@rm -f overflow$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(overflow_OBJECTS) $(overflow_LDADD) $(LIBS)
+
+overflow-fallback$(EXEEXT): $(overflow_fallback_OBJECTS) $(overflow_fallback_DEPENDENCIES) $(EXTRA_overflow_fallback_DEPENDENCIES) 
+	@rm -f overflow-fallback$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(overflow_fallback_OBJECTS) $(overflow_fallback_LDADD) $(LIBS)
 
 pattern$(EXEEXT): $(pattern_OBJECTS) $(pattern_DEPENDENCIES) $(EXTRA_pattern_DEPENDENCIES) 
 	@rm -f pattern$(EXEEXT)
@@ -1703,7 +1738,7 @@ testing$(EXEEXT): $(testing_OBJECTS) $(testing_DEPENDENCIES) $(EXTRA_testing_DEP
 
 thread$(EXEEXT): $(thread_OBJECTS) $(thread_DEPENDENCIES) $(EXTRA_thread_DEPENDENCIES) 
 	@rm -f thread$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(thread_OBJECTS) $(thread_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(thread_LINK) $(thread_OBJECTS) $(thread_LDADD) $(LIBS)
 
 timeout$(EXEEXT): $(timeout_OBJECTS) $(timeout_DEPENDENCIES) $(EXTRA_timeout_DEPENDENCIES) 
 	@rm -f timeout$(EXEEXT)
@@ -1814,6 +1849,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/error.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fileutils.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdatetime.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/guuid.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvariant.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwakeup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwakeup_fallback-gwakeup.Po@am__quote@
@@ -1828,7 +1864,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/list.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/logging.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mainloop.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/malloc.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mappedfile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/markup-collect.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/markup-escape.Po@am__quote@
@@ -1841,6 +1876,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/once.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/option-argv0.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/option-context.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/overflow.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pattern.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/private.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/protocol.Po@am__quote@
@@ -2351,6 +2387,13 @@ gdatetime.log: gdatetime$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+guuid.log: guuid$(EXEEXT)
+	@p='guuid$(EXEEXT)'; \
+	b='guuid'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 gvariant.log: gvariant$(EXEEXT)
 	@p='gvariant$(EXEEXT)'; \
 	b='gvariant'; \
@@ -2410,13 +2453,6 @@ logging.log: logging$(EXEEXT)
 mainloop.log: mainloop$(EXEEXT)
 	@p='mainloop$(EXEEXT)'; \
 	b='mainloop'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-malloc.log: malloc$(EXEEXT)
-	@p='malloc$(EXEEXT)'; \
-	b='malloc'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -2501,6 +2537,20 @@ option-context.log: option-context$(EXEEXT)
 option-argv0.log: option-argv0$(EXEEXT)
 	@p='option-argv0$(EXEEXT)'; \
 	b='option-argv0'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+overflow.log: overflow$(EXEEXT)
+	@p='overflow$(EXEEXT)'; \
+	b='overflow'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+overflow-fallback.log: overflow-fallback$(EXEEXT)
+	@p='overflow-fallback$(EXEEXT)'; \
+	b='overflow-fallback'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

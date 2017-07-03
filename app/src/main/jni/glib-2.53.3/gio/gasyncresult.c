@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -193,6 +193,7 @@ g_async_result_legacy_propagate_error (GAsyncResult  *res,
    * deprecation warnings in the future.)
    */
 
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   if (G_IS_SIMPLE_ASYNC_RESULT (res))
     {
       return g_simple_async_result_propagate_error (G_SIMPLE_ASYNC_RESULT (res),
@@ -200,6 +201,7 @@ g_async_result_legacy_propagate_error (GAsyncResult  *res,
     }
   else
     return FALSE;
+  G_GNUC_END_IGNORE_DEPRECATIONS
 }
 
 /**

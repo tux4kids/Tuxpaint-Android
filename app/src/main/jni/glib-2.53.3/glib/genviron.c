@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -67,11 +67,10 @@ g_environ_find (gchar       **envp,
 
 /**
  * g_environ_getenv:
- * @envp: (allow-none) (array zero-terminated=1) (transfer none): an environment
+ * @envp: (nullable) (array zero-terminated=1) (transfer none): an environment
  *     list (eg, as returned from g_get_environ()), or %NULL
  *     for an empty environment list
- * @variable: the environment variable to get, in the GLib file name
- *     encoding
+ * @variable: the environment variable to get
  *
  * Returns the value of the environment variable @variable in the
  * provided list @envp.
@@ -100,7 +99,7 @@ g_environ_getenv (gchar       **envp,
 
 /**
  * g_environ_setenv:
- * @envp: (allow-none) (array zero-terminated=1) (transfer full): an
+ * @envp: (nullable) (array zero-terminated=1) (transfer full): an
  *     environment list that can be freed using g_strfreev() (e.g., as
  *     returned from g_get_environ()), or %NULL for an empty
  *     environment list
@@ -187,7 +186,7 @@ g_environ_unsetenv_internal (gchar        **envp,
 
 /**
  * g_environ_unsetenv:
- * @envp: (allow-none) (array zero-terminated=1) (transfer full): an environment
+ * @envp: (nullable) (array zero-terminated=1) (transfer full): an environment
  *     list that can be freed using g_strfreev() (e.g., as returned from g_get_environ()), 
  *     or %NULL for an empty environment list
  * @variable: the environment variable to remove, must not contain '='
@@ -218,14 +217,13 @@ g_environ_unsetenv (gchar       **envp,
 
 /**
  * g_getenv:
- * @variable: the environment variable to get, in the GLib file name
- *     encoding
+ * @variable: the environment variable to get
  *
  * Returns the value of an environment variable.
  *
- * The name and value are in the GLib file name encoding. On UNIX,
- * this means the actual bytes which might or might not be in some
- * consistent character set and encoding. On Windows, it is in UTF-8.
+ * On UNIX, the name and value are byte strings which might or might not
+ * be in some consistent character set and encoding. On Windows, they are
+ * in UTF-8.
  * On Windows, in case the environment variable's value contains
  * references to other environment variables, they are expanded.
  *
@@ -248,10 +246,9 @@ g_getenv (const gchar *variable)
  * @value: the value for to set the variable to.
  * @overwrite: whether to change the variable if it already exists.
  *
- * Sets an environment variable. Both the variable's name and value
- * should be in the GLib file name encoding. On UNIX, this means that
- * they can be arbitrary byte strings. On Windows, they should be in
- * UTF-8.
+ * Sets an environment variable. On UNIX, both the variable's name and
+ * value can be arbitrary byte strings, except that the variable's name
+ * cannot contain '='. On Windows, they should be in UTF-8.
  *
  * Note that on some systems, when variables are overwritten, the memory
  * used for the previous variables and its value isn't reclaimed.
@@ -634,61 +631,39 @@ g_get_environ (void)
   return result;
 }
 
-/* Win32 binary compatibility versions {{{1 */
-#ifndef _WIN64
+#endif  /* G_OS_WIN32 */
 
-#undef g_getenv
+#ifdef G_OS_WIN32
+
+/* Binary compatibility versions. Not for newly compiled code. */
+
+_GLIB_EXTERN const gchar *g_getenv_utf8   (const gchar  *variable);
+_GLIB_EXTERN gboolean     g_setenv_utf8   (const gchar  *variable,
+                                           const gchar  *value,
+                                           gboolean      overwrite);
+_GLIB_EXTERN void         g_unsetenv_utf8 (const gchar  *variable);
 
 const gchar *
-g_getenv (const gchar *variable)
+g_getenv_utf8 (const gchar *variable)
 {
-  gchar *utf8_variable = g_locale_to_utf8 (variable, -1, NULL, NULL, NULL);
-  const gchar *utf8_value = g_getenv_utf8 (utf8_variable);
-  gchar *value;
-  GQuark quark;
-
-  g_free (utf8_variable);
-  if (!utf8_value)
-    return NULL;
-  value = g_locale_from_utf8 (utf8_value, -1, NULL, NULL, NULL);
-  quark = g_quark_from_string (value);
-  g_free (value);
-
-  return g_quark_to_string (quark);
+  return g_getenv (variable);
 }
-
-#undef g_setenv
 
 gboolean
-g_setenv (const gchar *variable,
-          const gchar *value,
-          gboolean     overwrite)
+g_setenv_utf8 (const gchar *variable,
+               const gchar *value,
+               gboolean     overwrite)
 {
-  gchar *utf8_variable = g_locale_to_utf8 (variable, -1, NULL, NULL, NULL);
-  gchar *utf8_value = g_locale_to_utf8 (value, -1, NULL, NULL, NULL);
-  gboolean retval = g_setenv_utf8 (utf8_variable, utf8_value, overwrite);
-
-  g_free (utf8_variable);
-  g_free (utf8_value);
-
-  return retval;
+  return g_setenv (variable, value, overwrite);
 }
-
-#undef g_unsetenv
 
 void
-g_unsetenv (const gchar *variable)
+g_unsetenv_utf8 (const gchar *variable)
 {
-  gchar *utf8_variable = g_locale_to_utf8 (variable, -1, NULL, NULL, NULL);
-
-  g_unsetenv_utf8 (utf8_variable);
-
-  g_free (utf8_variable);
+  return g_unsetenv (variable);
 }
 
-#endif  /* _WIN64 */
-
-#endif  /* G_OS_WIN32 */
+#endif
 
 /* Epilogue {{{1 */
 /* vim: set foldmethod=marker: */

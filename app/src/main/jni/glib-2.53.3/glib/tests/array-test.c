@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -168,6 +168,10 @@ array_remove_range (void)
       prev = cur;
     }
 
+  /* Ensure the entire array can be cleared, even when empty. */
+  g_array_remove_range (garray, 0, garray->len);
+  g_array_remove_range (garray, 0, garray->len);
+
   g_array_free (garray, TRUE);
 }
 
@@ -196,42 +200,6 @@ array_ref_count (void)
 
   g_assert_cmpint (garray2->len, ==, 0);
   g_array_unref (garray2);
-}
-
-static gpointer
-array_large_size_remalloc_impl (gpointer mem,
-				gsize n_bytes)
-{
-  /* We only care that g_array_set_size() doesn't hang before
-   * calling g_realloc(). So if we got here, we already won.
-   */
-  exit (0);
-}
-
-static GMemVTable array_large_size_mem_vtable = {
-  malloc, array_large_size_remalloc_impl, free,
-  NULL, NULL, NULL
-};
-
-static void
-array_large_size (void)
-{
-  g_test_bug ("568760");
-
-  if (g_test_subprocess ())
-    {
-      GArray *array;
-
-      array = g_array_new (FALSE, FALSE, sizeof (char));
-
-      g_mem_set_vtable (&array_large_size_mem_vtable);
-      g_array_set_size (array, 1073750016);
-      g_assert_not_reached ();
-      return;
-    }
-
-  g_test_trap_subprocess (NULL, 5000000, 0);
-  g_test_trap_assert_passed ();
 }
 
 static int
@@ -580,6 +548,59 @@ pointer_array_sort_with_data (void)
 }
 
 static void
+pointer_array_find_empty (void)
+{
+  GPtrArray *array;
+  guint idx;
+
+  array = g_ptr_array_new ();
+
+  g_assert_false (g_ptr_array_find (array, "some-value", NULL));  /* NULL index */
+  g_assert_false (g_ptr_array_find (array, "some-value", &idx));  /* non-NULL index */
+  g_assert_false (g_ptr_array_find_with_equal_func (array, "some-value", g_str_equal, NULL));  /* NULL index */
+  g_assert_false (g_ptr_array_find_with_equal_func (array, "some-value", g_str_equal, &idx));  /* non-NULL index */
+
+  g_ptr_array_free (array, TRUE);
+}
+
+static void
+pointer_array_find_non_empty (void)
+{
+  GPtrArray *array;
+  guint idx;
+  const gchar *str_pointer = "static-string";
+
+  array = g_ptr_array_new ();
+
+  g_ptr_array_add (array, "some");
+  g_ptr_array_add (array, "random");
+  g_ptr_array_add (array, "values");
+  g_ptr_array_add (array, "some");
+  g_ptr_array_add (array, "duplicated");
+  g_ptr_array_add (array, (gpointer) str_pointer);
+
+  g_assert_true (g_ptr_array_find_with_equal_func (array, "random", g_str_equal, NULL));  /* NULL index */
+  g_assert_true (g_ptr_array_find_with_equal_func (array, "random", g_str_equal, &idx));  /* non-NULL index */
+  g_assert_cmpuint (idx, ==, 1);
+
+  g_assert_true (g_ptr_array_find_with_equal_func (array, "some", g_str_equal, &idx));  /* duplicate element */
+  g_assert_cmpuint (idx, ==, 0);
+
+  g_assert_false (g_ptr_array_find_with_equal_func (array, "nope", g_str_equal, NULL));
+
+  g_assert_true (g_ptr_array_find_with_equal_func (array, str_pointer, g_str_equal, &idx));
+  g_assert_cmpuint (idx, ==, 5);
+  idx = G_MAXUINT;
+  g_assert_true (g_ptr_array_find_with_equal_func (array, str_pointer, NULL, &idx));  /* NULL equal func */
+  g_assert_cmpuint (idx, ==, 5);
+  idx = G_MAXUINT;
+  g_assert_true (g_ptr_array_find (array, str_pointer, &idx));  /* NULL equal func */
+  g_assert_cmpuint (idx, ==, 5);
+
+  g_ptr_array_free (array, TRUE);
+}
+
+static void
 byte_array_append (void)
 {
   GByteArray *gbarray;
@@ -747,6 +768,10 @@ byte_array_remove_range (void)
       g_assert (gbarray->data[4*i+3] == 'd');
     }
 
+  /* Ensure the entire array can be cleared, even when empty. */
+  g_byte_array_remove_range (gbarray, 0, gbarray->len);
+  g_byte_array_remove_range (gbarray, 0, gbarray->len);
+
   g_byte_array_free (gbarray, TRUE);
 }
 
@@ -871,7 +896,6 @@ main (int argc, char *argv[])
   g_test_add_func ("/array/remove-fast", array_remove_fast);
   g_test_add_func ("/array/remove-range", array_remove_range);
   g_test_add_func ("/array/ref-count", array_ref_count);
-  g_test_add_func ("/array/large-size", array_large_size);
   g_test_add_func ("/array/sort", array_sort);
   g_test_add_func ("/array/sort-with-data", array_sort_with_data);
   g_test_add_func ("/array/clear-func", array_clear_func);
@@ -883,6 +907,8 @@ main (int argc, char *argv[])
   g_test_add_func ("/pointerarray/free-func", pointer_array_free_func);
   g_test_add_func ("/pointerarray/sort", pointer_array_sort);
   g_test_add_func ("/pointerarray/sort-with-data", pointer_array_sort_with_data);
+  g_test_add_func ("/pointerarray/find/empty", pointer_array_find_empty);
+  g_test_add_func ("/pointerarray/find/non-empty", pointer_array_find_non_empty);
 
   /* byte arrays */
   g_test_add_func ("/bytearray/append", byte_array_append);

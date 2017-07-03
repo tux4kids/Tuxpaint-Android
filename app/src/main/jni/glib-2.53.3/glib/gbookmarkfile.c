@@ -3,18 +3,17 @@
  * Copyright (C) 2005-2006 Emmanuele Bassi
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "config.h"
@@ -752,7 +751,7 @@ parse_bookmark_element (GMarkupParseContext  *context,
            */
           g_set_error (error, G_MARKUP_ERROR,
 		       G_MARKUP_ERROR_UNKNOWN_ATTRIBUTE,
-          	       _("Unexpected attribute '%s' for element '%s'"),
+          	       _("Unexpected attribute “%s” for element “%s”"),
           	       attr,
           	       XBEL_BOOKMARK_ELEMENT);
           return;
@@ -763,7 +762,7 @@ parse_bookmark_element (GMarkupParseContext  *context,
     {
       g_set_error (error, G_MARKUP_ERROR,
       		   G_MARKUP_ERROR_INVALID_CONTENT,
-      		   _("Attribute '%s' of element '%s' not found"),
+      		   _("Attribute “%s” of element “%s” not found"),
       		   XBEL_HREF_ATTRIBUTE,
       		   XBEL_BOOKMARK_ELEMENT);
       return;
@@ -834,7 +833,7 @@ parse_application_element (GMarkupParseContext  *context,
     {
       g_set_error (error, G_MARKUP_ERROR,
       		   G_MARKUP_ERROR_INVALID_CONTENT,
-      		   _("Attribute '%s' of element '%s' not found"),
+      		   _("Attribute “%s” of element “%s” not found"),
       		   BOOKMARK_NAME_ATTRIBUTE,
       		   BOOKMARK_APPLICATION_ELEMENT);
       return;
@@ -844,7 +843,7 @@ parse_application_element (GMarkupParseContext  *context,
     {
       g_set_error (error, G_MARKUP_ERROR,
       		   G_MARKUP_ERROR_INVALID_CONTENT,
-      		   _("Attribute '%s' of element '%s' not found"),
+      		   _("Attribute “%s” of element “%s” not found"),
       		   BOOKMARK_EXEC_ATTRIBUTE,
       		   BOOKMARK_APPLICATION_ELEMENT);
       return;
@@ -951,7 +950,7 @@ parse_icon_element (GMarkupParseContext  *context,
     {
       g_set_error (error, G_MARKUP_ERROR,
       		   G_MARKUP_ERROR_INVALID_CONTENT,
-      		   _("Attribute '%s' of element '%s' not found"),
+      		   _("Attribute “%s” of element “%s” not found"),
       		   BOOKMARK_HREF_ATTRIBUTE,
       		   BOOKMARK_ICON_ELEMENT);
       return;
@@ -1121,7 +1120,7 @@ start_element_raw_cb (GMarkupParseContext *context,
       else
         g_set_error (error, G_MARKUP_ERROR,
 		     G_MARKUP_ERROR_INVALID_CONTENT,
-          	     _("Unexpected tag '%s', tag '%s' expected"),
+          	     _("Unexpected tag “%s”, tag “%s” expected"),
           	     element_name, XBEL_ROOT_ELEMENT);
       break;
     case STATE_ROOT:
@@ -1146,7 +1145,7 @@ start_element_raw_cb (GMarkupParseContext *context,
       else
         g_set_error (error, G_MARKUP_ERROR,
         	     G_MARKUP_ERROR_INVALID_CONTENT,
-        	     _("Unexpected tag '%s' inside '%s'"),
+        	     _("Unexpected tag “%s” inside “%s”"),
         	     element_name,
         	     XBEL_ROOT_ELEMENT);
       break;
@@ -1160,7 +1159,7 @@ start_element_raw_cb (GMarkupParseContext *context,
       else
         g_set_error (error, G_MARKUP_ERROR,
         	     G_MARKUP_ERROR_INVALID_CONTENT,
-          	     _("Unexpected tag '%s' inside '%s'"),
+          	     _("Unexpected tag “%s” inside “%s”"),
           	     element_name,
           	     XBEL_BOOKMARK_ELEMENT);
       break;
@@ -1186,7 +1185,7 @@ start_element_raw_cb (GMarkupParseContext *context,
       else
         g_set_error (error, G_MARKUP_ERROR,
         	     G_MARKUP_ERROR_INVALID_CONTENT,
-        	     _("Unexpected tag '%s', tag '%s' expected"),
+        	     _("Unexpected tag “%s”, tag “%s” expected"),
         	     element_name,
         	     XBEL_METADATA_ELEMENT);
       break;
@@ -1228,7 +1227,7 @@ start_element_raw_cb (GMarkupParseContext *context,
       else
         g_set_error (error, G_MARKUP_ERROR,
         	     G_MARKUP_ERROR_UNKNOWN_ELEMENT,
-        	     _("Unexpected tag '%s' inside '%s'"),
+        	     _("Unexpected tag “%s” inside “%s”"),
         	     element_name,
         	     XBEL_METADATA_ELEMENT);
       break;
@@ -1250,7 +1249,7 @@ start_element_raw_cb (GMarkupParseContext *context,
       else
         g_set_error (error, G_MARKUP_ERROR,
         	     G_MARKUP_ERROR_INVALID_CONTENT,
-        	     _("Unexpected tag '%s', tag '%s' expected"),
+        	     _("Unexpected tag “%s”, tag “%s” expected"),
         	     element_name,
         	     BOOKMARK_APPLICATION_ELEMENT);
       break;
@@ -1260,7 +1259,7 @@ start_element_raw_cb (GMarkupParseContext *context,
       else
         g_set_error (error, G_MARKUP_ERROR,
         	     G_MARKUP_ERROR_INVALID_CONTENT,
-        	     _("Unexpected tag '%s', tag '%s' expected"),
+        	     _("Unexpected tag “%s”, tag “%s” expected"),
         	     element_name,
         	     BOOKMARK_GROUP_ELEMENT);
       break;
@@ -1657,7 +1656,8 @@ g_bookmark_file_load_from_data (GBookmarkFile  *bookmark,
 /**
  * g_bookmark_file_load_from_file:
  * @bookmark: an empty #GBookmarkFile struct
- * @filename: the path of a filename to load, in the GLib file name encoding
+ * @filename: (type filename): the path of a filename to load, in the
+ *     GLib file name encoding
  * @error: return location for a #GError, or %NULL
  *
  * Loads a desktop bookmark file into an empty #GBookmarkFile structure.
@@ -1765,9 +1765,9 @@ find_file_in_data_dirs (const gchar   *file,
 /**
  * g_bookmark_file_load_from_data_dirs:
  * @bookmark: a #GBookmarkFile
- * @file: a relative path to a filename to open and parse
- * @full_path: (allow-none): return location for a string containing the full path
- *   of the file, or %NULL
+ * @file: (type filename): a relative path to a filename to open and parse
+ * @full_path: (type filename) (nullable): return location for a string
+ *    containing the full path of the file, or %NULL
  * @error: return location for a #GError, or %NULL
  *
  * This function looks for a desktop bookmark file named @file in the
@@ -1847,7 +1847,7 @@ g_bookmark_file_load_from_data_dirs (GBookmarkFile  *bookmark,
 /**
  * g_bookmark_file_to_data:
  * @bookmark: a #GBookmarkFile
- * @length: (allow-none) (out): return location for the length of the returned string, or %NULL
+ * @length: (out) (optional): return location for the length of the returned string, or %NULL
  * @error: return location for a #GError, or %NULL
  *
  * This function outputs @bookmark as a string.
@@ -1881,7 +1881,7 @@ g_bookmark_file_to_data (GBookmarkFile  *bookmark,
 /**
  * g_bookmark_file_to_file:
  * @bookmark: a #GBookmarkFile
- * @filename: path of the output file
+ * @filename: (type filename): path of the output file
  * @error: return location for a #GError, or %NULL
  *
  * This function outputs @bookmark into a file.  The write process is
@@ -1954,7 +1954,7 @@ g_bookmark_file_add_item (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_INVALID_URI,
-		   _("A bookmark for URI '%s' already exists"),
+		   _("A bookmark for URI “%s” already exists"),
 		   item->uri);
       return;
     }
@@ -2000,7 +2000,7 @@ g_bookmark_file_remove_item (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return FALSE;
     }
@@ -2037,7 +2037,7 @@ g_bookmark_file_has_item (GBookmarkFile *bookmark,
 /**
  * g_bookmark_file_get_uris:
  * @bookmark: a #GBookmarkFile
- * @length: (allow-none) (out): return location for the number of returned URIs, or %NULL
+ * @length: (out) (optional): return location for the number of returned URIs, or %NULL
  *
  * Returns all URIs of the bookmarks in the bookmark file @bookmark.
  * The array of returned URIs will be %NULL-terminated, so @length may
@@ -2081,7 +2081,7 @@ g_bookmark_file_get_uris (GBookmarkFile *bookmark,
 /**
  * g_bookmark_file_set_title:
  * @bookmark: a #GBookmarkFile
- * @uri: (allow-none): a valid URI or %NULL
+ * @uri: (nullable): a valid URI or %NULL
  * @title: a UTF-8 encoded string
  *
  * Sets @title as the title of the bookmark for @uri inside the
@@ -2126,7 +2126,7 @@ g_bookmark_file_set_title (GBookmarkFile *bookmark,
 /**
  * g_bookmark_file_get_title:
  * @bookmark: a #GBookmarkFile
- * @uri: (allow-none): a valid URI or %NULL
+ * @uri: (nullable): a valid URI or %NULL
  * @error: return location for a #GError, or %NULL
  *
  * Returns the title of the bookmark for @uri.
@@ -2158,7 +2158,7 @@ g_bookmark_file_get_title (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return NULL;
     }
@@ -2169,7 +2169,7 @@ g_bookmark_file_get_title (GBookmarkFile  *bookmark,
 /**
  * g_bookmark_file_set_description:
  * @bookmark: a #GBookmarkFile
- * @uri: (allow-none): a valid URI or %NULL
+ * @uri: (nullable): a valid URI or %NULL
  * @description: a string
  *
  * Sets @description as the description of the bookmark for @uri.
@@ -2243,7 +2243,7 @@ g_bookmark_file_get_description (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return NULL;
     }
@@ -2323,7 +2323,7 @@ g_bookmark_file_get_mime_type (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return NULL;
     }
@@ -2332,7 +2332,7 @@ g_bookmark_file_get_mime_type (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_INVALID_VALUE,
-		   _("No MIME type defined in the bookmark for URI '%s'"),
+		   _("No MIME type defined in the bookmark for URI “%s”"),
 		   uri);
       return NULL;
     }
@@ -2408,7 +2408,7 @@ g_bookmark_file_get_is_private (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return FALSE;
     }
@@ -2417,7 +2417,7 @@ g_bookmark_file_get_is_private (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_INVALID_VALUE,
-		   _("No private flag has been defined in bookmark for URI '%s'"),
+		   _("No private flag has been defined in bookmark for URI “%s”"),
 		    uri);
       return FALSE;
     }
@@ -2491,7 +2491,7 @@ g_bookmark_file_get_added (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return (time_t) -1;
     }
@@ -2569,7 +2569,7 @@ g_bookmark_file_get_modified (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return (time_t) -1;
     }
@@ -2648,7 +2648,7 @@ g_bookmark_file_get_visited (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return (time_t) -1;
     }
@@ -2690,7 +2690,7 @@ g_bookmark_file_has_group (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return FALSE;
     }
@@ -2787,7 +2787,7 @@ g_bookmark_file_remove_group (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return FALSE;
     }
@@ -2796,7 +2796,7 @@ g_bookmark_file_remove_group (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
                    G_BOOKMARK_FILE_ERROR_INVALID_VALUE,
-                   _("No groups set in bookmark for URI '%s'"),
+                   _("No groups set in bookmark for URI “%s”"),
                    uri);
       return FALSE;
     }
@@ -2822,7 +2822,7 @@ g_bookmark_file_remove_group (GBookmarkFile  *bookmark,
  * g_bookmark_file_set_groups:
  * @bookmark: a #GBookmarkFile
  * @uri: an item's URI
- * @groups: (allow-none): an array of group names, or %NULL to remove all groups
+ * @groups: (nullable): an array of group names, or %NULL to remove all groups
  * @length: number of group name values in @groups
  *
  * Sets a list of group names for the item with URI @uri.  Each previously
@@ -2872,7 +2872,7 @@ g_bookmark_file_set_groups (GBookmarkFile  *bookmark,
  * g_bookmark_file_get_groups:
  * @bookmark: a #GBookmarkFile
  * @uri: a valid URI
- * @length: (allow-none) (out): return location for the length of the returned string, or %NULL
+ * @length: (out) (optional): return location for the length of the returned string, or %NULL
  * @error: return location for a #GError, or %NULL
  *
  * Retrieves the list of group names of the bookmark for @uri.
@@ -2907,7 +2907,7 @@ g_bookmark_file_get_groups (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return NULL;
     }
@@ -2944,9 +2944,9 @@ g_bookmark_file_get_groups (GBookmarkFile  *bookmark,
  * g_bookmark_file_add_application:
  * @bookmark: a #GBookmarkFile
  * @uri: a valid URI
- * @name: (allow-none): the name of the application registering the bookmark
+ * @name: (nullable): the name of the application registering the bookmark
  *   or %NULL
- * @exec: (allow-none): command line to be used to launch the bookmark or %NULL
+ * @exec: (nullable): command line to be used to launch the bookmark or %NULL
  *
  * Adds the application with @name and @exec to the list of
  * applications that have registered a bookmark for @uri into
@@ -3097,7 +3097,7 @@ g_bookmark_file_has_application (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return FALSE;
     }
@@ -3173,7 +3173,7 @@ g_bookmark_file_set_app_info (GBookmarkFile  *bookmark,
         {
           g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		       G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		       _("No bookmark found for URI '%s'"),
+		       _("No bookmark found for URI “%s”"),
 		       uri);
 	  return FALSE;
 	}
@@ -3194,7 +3194,7 @@ g_bookmark_file_set_app_info (GBookmarkFile  *bookmark,
         {
           g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		       G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED,
-		       _("No application with name '%s' registered a bookmark for '%s'"),
+		       _("No application with name “%s” registered a bookmark for “%s”"),
 		       name,
 		       uri);
           return FALSE;
@@ -3297,9 +3297,9 @@ expand_exec_line (const gchar *exec_fmt,
  * @bookmark: a #GBookmarkFile
  * @uri: a valid URI
  * @name: an application's name
- * @exec: (allow-none) (out): return location for the command line of the application, or %NULL
- * @count: (allow-none) (out): return location for the registration count, or %NULL
- * @stamp: (allow-none) (out): return location for the last registration time, or %NULL
+ * @exec: (out) (optional): return location for the command line of the application, or %NULL
+ * @count: (out) (optional): return location for the registration count, or %NULL
+ * @stamp: (out) (optional): return location for the last registration time, or %NULL
  * @error: return location for a #GError, or %NULL
  *
  * Gets the registration informations of @app_name for the bookmark for
@@ -3341,7 +3341,7 @@ g_bookmark_file_get_app_info (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return FALSE;
     }
@@ -3351,7 +3351,7 @@ g_bookmark_file_get_app_info (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED,
-		   _("No application with name '%s' registered a bookmark for '%s'"),
+		   _("No application with name “%s” registered a bookmark for “%s”"),
 		   name,
 		   uri);
       return FALSE;
@@ -3374,7 +3374,7 @@ g_bookmark_file_get_app_info (GBookmarkFile  *bookmark,
         {
           g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		       G_BOOKMARK_FILE_ERROR_INVALID_URI,
-		       _("Failed to expand exec line '%s' with URI '%s'"),
+		       _("Failed to expand exec line “%s” with URI “%s”"),
 		     ai->exec, uri);
           g_free (command_line);
 
@@ -3397,7 +3397,7 @@ g_bookmark_file_get_app_info (GBookmarkFile  *bookmark,
  * g_bookmark_file_get_applications:
  * @bookmark: a #GBookmarkFile
  * @uri: a valid URI
- * @length: (allow-none) (out): return location of the length of the returned list, or %NULL
+ * @length: (out) (optional): return location of the length of the returned list, or %NULL
  * @error: return location for a #GError, or %NULL
  *
  * Retrieves the names of the applications that have registered the
@@ -3430,7 +3430,7 @@ g_bookmark_file_get_applications (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return NULL;
     }
@@ -3489,7 +3489,7 @@ g_bookmark_file_get_size (GBookmarkFile *bookmark)
  * g_bookmark_file_move_item:
  * @bookmark: a #GBookmarkFile
  * @old_uri: a valid URI
- * @new_uri: (allow-none): a valid URI, or %NULL
+ * @new_uri: (nullable): a valid URI, or %NULL
  * @error: return location for a #GError or %NULL
  *
  * Changes the URI of a bookmark item from @old_uri to @new_uri.  Any
@@ -3519,7 +3519,7 @@ g_bookmark_file_move_item (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   old_uri);
       return FALSE;
     }
@@ -3555,7 +3555,7 @@ g_bookmark_file_move_item (GBookmarkFile  *bookmark,
  * g_bookmark_file_set_icon:
  * @bookmark: a #GBookmarkFile
  * @uri: a valid URI
- * @href: (allow-none): the URI of the icon for the bookmark, or %NULL
+ * @href: (nullable): the URI of the icon for the bookmark, or %NULL
  * @mime_type: the MIME type of the icon for the bookmark
  *
  * Sets the icon for the bookmark for @uri. If @href is %NULL, unsets
@@ -3604,8 +3604,8 @@ g_bookmark_file_set_icon (GBookmarkFile *bookmark,
  * g_bookmark_file_get_icon:
  * @bookmark: a #GBookmarkFile
  * @uri: a valid URI
- * @href: (allow-none) (out): return location for the icon's location or %NULL
- * @mime_type: (allow-none) (out): return location for the icon's MIME type or %NULL
+ * @href: (out) (optional): return location for the icon's location or %NULL
+ * @mime_type: (out) (optional): return location for the icon's MIME type or %NULL
  * @error: return location for a #GError or %NULL
  *
  * Gets the icon of the bookmark for @uri.
@@ -3635,7 +3635,7 @@ g_bookmark_file_get_icon (GBookmarkFile  *bookmark,
     {
       g_set_error (error, G_BOOKMARK_FILE_ERROR,
 		   G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND,
-		   _("No bookmark found for URI '%s'"),
+		   _("No bookmark found for URI “%s”"),
 		   uri);
       return FALSE;
     }

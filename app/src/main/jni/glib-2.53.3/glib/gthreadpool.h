@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -65,6 +65,10 @@ GLIB_AVAILABLE_IN_ALL
 void            g_thread_pool_set_sort_function (GThreadPool      *pool,
                                                  GCompareDataFunc  func,
                                                  gpointer          user_data);
+GLIB_AVAILABLE_IN_2_46
+gboolean        g_thread_pool_move_to_front     (GThreadPool      *pool,
+                                                 gpointer          data);
+
 GLIB_AVAILABLE_IN_ALL
 gboolean        g_thread_pool_set_max_threads   (GThreadPool     *pool,
                                                  gint             max_threads,

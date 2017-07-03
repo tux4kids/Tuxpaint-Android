@@ -12,9 +12,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "config.h"
@@ -70,19 +69,32 @@ test_GDateTime_now (void)
 {
   GDateTime *dt;
   struct tm tm;
+  time_t before;
+  time_t after;
 
-  memset (&tm, 0, sizeof (tm));
-  get_localtime_tm (time (NULL), &tm);
+  /* before <= dt.to_unix() <= after, but the inequalities might not be
+   * equality if we're close to the boundary between seconds.
+   * We loop until before == after (and hence dt.to_unix() should equal both)
+   * to guard against that. */
+  do
+    {
+      before = g_get_real_time () / G_TIME_SPAN_SECOND;
 
-  dt = g_date_time_new_now_local ();
+      memset (&tm, 0, sizeof (tm));
+      get_localtime_tm (before, &tm);
+
+      dt = g_date_time_new_now_local ();
+
+      after = g_get_real_time () / G_TIME_SPAN_SECOND;
+    }
+  while (before != after);
 
   g_assert_cmpint (g_date_time_get_year (dt), ==, 1900 + tm.tm_year);
   g_assert_cmpint (g_date_time_get_month (dt), ==, 1 + tm.tm_mon);
   g_assert_cmpint (g_date_time_get_day_of_month (dt), ==, tm.tm_mday);
   g_assert_cmpint (g_date_time_get_hour (dt), ==, tm.tm_hour);
   g_assert_cmpint (g_date_time_get_minute (dt), ==, tm.tm_min);
-  /* XXX we need some fuzzyness here */
-  g_assert_cmpint (g_date_time_get_second (dt), >=, tm.tm_sec);
+  g_assert_cmpint (g_date_time_get_second (dt), ==, tm.tm_sec);
 
   g_date_time_unref (dt);
 }
@@ -125,6 +137,23 @@ test_GDateTime_new_from_unix (void)
   g_assert_cmpint (g_date_time_get_minute (dt), ==, 0);
   g_assert_cmpint (g_date_time_get_second (dt), ==, 0);
   g_date_time_unref (dt);
+}
+
+/* Check that trying to create a #GDateTime too far in the future reliably
+ * fails. Previously, the checks for this overflowed and it silently returned
+ * an incorrect #GDateTime. */
+static void
+test_GDateTime_new_from_unix_overflow (void)
+{
+  GDateTime *dt;
+
+  g_test_bug ("782089");
+
+  dt = g_date_time_new_from_unix_utc (G_MAXINT64);
+  g_assert_null (dt);
+
+  dt = g_date_time_new_from_unix_local (G_MAXINT64);
+  g_assert_null (dt);
 }
 
 static void
@@ -326,7 +355,7 @@ test_GDateTime_new_from_timeval (void)
   dt = g_date_time_new_from_timeval_local (&tv);
 
   if (g_test_verbose ())
-    g_print ("\nDT%04d-%02d-%02dT%02d:%02d:%02d%s\n",
+    g_printerr ("\nDT%04d-%02d-%02dT%02d:%02d:%02d%s\n",
              g_date_time_get_year (dt),
              g_date_time_get_month (dt),
              g_date_time_get_day_of_month (dt),
@@ -341,6 +370,71 @@ test_GDateTime_new_from_timeval (void)
   g_date_time_unref (dt);
 }
 
+static gint64
+find_maximum_supported_tv_sec (void)
+{
+  glong highest_success = 0, lowest_failure = G_MAXLONG;
+  GTimeVal tv;
+
+  tv.tv_usec = 0;
+
+  while (highest_success < lowest_failure - 1)
+    {
+      GDateTime *dt;
+
+      tv.tv_sec = (highest_success + lowest_failure) / 2;
+      dt = g_date_time_new_from_timeval_utc (&tv);
+
+      if (dt != NULL)
+        {
+          highest_success = tv.tv_sec;
+          g_date_time_unref (dt);
+        }
+      else
+        {
+          lowest_failure = tv.tv_sec;
+        }
+    }
+
+  return highest_success;
+}
+
+/* Check that trying to create a #GDateTime too far in the future reliably
+ * fails. With a #GTimeVal, this is subtle, as the tv_usec are added into the
+ * calculation part-way through. */
+static void
+test_GDateTime_new_from_timeval_overflow (void)
+{
+  GDateTime *dt;
+  GTimeVal tv;
+
+  g_test_bug ("782089");
+
+  tv.tv_sec = G_MAXLONG;
+  tv.tv_usec = 0;
+
+  dt = g_date_time_new_from_timeval_utc (&tv);
+  g_assert_null (dt);
+
+  dt = g_date_time_new_from_timeval_local (&tv);
+  g_assert_null (dt);
+
+  tv.tv_sec = find_maximum_supported_tv_sec ();
+  tv.tv_usec = G_USEC_PER_SEC - 1;
+
+  g_test_message ("Maximum supported GTimeVal.tv_sec = %lu", tv.tv_sec);
+
+  dt = g_date_time_new_from_timeval_utc (&tv);
+  g_assert_nonnull (dt);
+  g_date_time_unref (dt);
+
+  tv.tv_sec++;
+  tv.tv_usec = 0;
+
+  dt = g_date_time_new_from_timeval_utc (&tv);
+  g_assert_null (dt);
+}
+
 static void
 test_GDateTime_new_from_timeval_utc (void)
 {
@@ -351,7 +445,7 @@ test_GDateTime_new_from_timeval_utc (void)
   dt = g_date_time_new_from_timeval_utc (&tv);
 
   if (g_test_verbose ())
-    g_print ("\nDT%04d-%02d-%02dT%02d:%02d:%02d%s\n",
+    g_printerr ("\nDT%04d-%02d-%02dT%02d:%02d:%02d%s\n",
              g_date_time_get_year (dt),
              g_date_time_get_month (dt),
              g_date_time_get_day_of_month (dt),
@@ -623,22 +717,22 @@ test_GDateTime_new_full (void)
   g_date_time_unref (dt);
 
 #ifdef G_OS_UNIX
-  tz = g_time_zone_new ("America/Recife");
+  tz = g_time_zone_new ("America/Tijuana");
 #elif defined G_OS_WIN32
-  tz = g_time_zone_new ("E. South America Standard Time");
+  tz = g_time_zone_new ("Pacific Standard Time");
 #endif
-  dt = g_date_time_new (tz, 2010, 5, 24, 8, 4, 0);
+  dt = g_date_time_new (tz, 2010, 11, 24, 8, 4, 0);
   g_time_zone_unref (tz);
   g_assert_cmpint (2010, ==, g_date_time_get_year (dt));
-  g_assert_cmpint (5, ==, g_date_time_get_month (dt));
+  g_assert_cmpint (11, ==, g_date_time_get_month (dt));
   g_assert_cmpint (24, ==, g_date_time_get_day_of_month (dt));
   g_assert_cmpint (8, ==, g_date_time_get_hour (dt));
   g_assert_cmpint (4, ==, g_date_time_get_minute (dt));
   g_assert_cmpint (0, ==, g_date_time_get_second (dt));
 #ifdef G_OS_UNIX
-  g_assert_cmpstr ("BRT", ==, g_date_time_get_timezone_abbreviation (dt));
+  g_assert_cmpstr ("PST", ==, g_date_time_get_timezone_abbreviation (dt));
 #elif defined G_OS_WIN32
-  g_assert_cmpstr ("E. South America Standard Time", ==,
+  g_assert_cmpstr ("Pacific Standard Time", ==,
                     g_date_time_get_timezone_abbreviation (dt));
 #endif
   g_assert (!g_date_time_is_daylight_savings (dt));
@@ -649,23 +743,35 @@ static void
 test_GDateTime_now_utc (void)
 {
   GDateTime *dt;
-  time_t     t;
   struct tm  tm;
+  time_t     t;
+  time_t     after;
 
-  t = time (NULL);
+  /* t <= dt.to_unix() <= after, but the inequalities might not be
+   * equality if we're close to the boundary between seconds.
+   * We loop until t == after (and hence dt.to_unix() should equal both)
+   * to guard against that. */
+  do
+    {
+      t = g_get_real_time () / G_TIME_SPAN_SECOND;
 #ifdef HAVE_GMTIME_R
-  gmtime_r (&t, &tm);
+      gmtime_r (&t, &tm);
 #else
-  {
-    struct tm *tmp = gmtime (&t);
-    /* Assume gmtime() can't fail as we got t from time(NULL). (Note
-     * that on Windows, gmtime() *is* MT-safe, it uses a thread-local
-     * buffer.)
-     */
-    memcpy (&tm, tmp, sizeof (struct tm));
-  }
+      {
+        struct tm *tmp = gmtime (&t);
+        /* Assume gmtime() can't fail as we got t from time(NULL). (Note
+         * that on Windows, gmtime() *is* MT-safe, it uses a thread-local
+         * buffer.)
+         */
+        memcpy (&tm, tmp, sizeof (struct tm));
+      }
 #endif
-  dt = g_date_time_new_now_utc ();
+      dt = g_date_time_new_now_utc ();
+
+      after = g_get_real_time () / G_TIME_SPAN_SECOND;
+    }
+  while (t != after);
+
   g_assert_cmpint (tm.tm_year + 1900, ==, g_date_time_get_year (dt));
   g_assert_cmpint (tm.tm_mon + 1, ==, g_date_time_get_month (dt));
   g_assert_cmpint (tm.tm_mday, ==, g_date_time_get_day_of_month (dt));
@@ -708,7 +814,7 @@ test_GDateTime_get_utc_offset (void)
   struct tm tm;
 
   memset (&tm, 0, sizeof (tm));
-  get_localtime_tm (time (NULL), &tm);
+  get_localtime_tm (g_get_real_time () / G_TIME_SPAN_SECOND, &tm);
 
   dt = g_date_time_new_now_local ();
   ts = g_date_time_get_utc_offset (dt);
@@ -742,10 +848,24 @@ test_GDateTime_to_timeval (void)
 static void
 test_GDateTime_to_local (void)
 {
-  GDateTime *utc, *now, *dt;
+  GDateTime *utc = NULL, *now = NULL, *dt;
+  time_t before, after;
 
-  utc = g_date_time_new_now_utc ();
-  now = g_date_time_new_now_local ();
+  /* before <= utc.to_unix() <= now.to_unix() <= after, but the inequalities
+   * might not be equality if we're close to the boundary between seconds.
+   * We loop until before == after (and hence the GDateTimes should match)
+   * to guard against that. */
+  do
+    {
+      before = g_get_real_time () / G_TIME_SPAN_SECOND;
+      g_clear_pointer (&utc, g_date_time_unref);
+      g_clear_pointer (&now, g_date_time_unref);
+      utc = g_date_time_new_now_utc ();
+      now = g_date_time_new_now_local ();
+      after = g_get_real_time () / G_TIME_SPAN_SECOND;
+    }
+  while (before != after);
+
   dt = g_date_time_to_local (utc);
 
   g_assert_cmpint (g_date_time_get_year (now), ==, g_date_time_get_year (dt));
@@ -1146,7 +1266,7 @@ test_all_dates (void)
             dt = g_date_time_new (timezone, year, month, day, 0, 0, 0);
 
 #if 0
-            g_print ("%04d-%02d-%02d = %04d-W%02d-%d = %04d-%03d\n",
+            g_printerr ("%04d-%02d-%02d = %04d-W%02d-%d = %04d-%03d\n",
                      year, month, day,
                      week_year, week_num, weekday,
                      year, day_of_year);
@@ -1287,6 +1407,8 @@ test_z (void)
   g_time_zone_unref (tz);
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-y2k"
 static void
 test_strftime (void)
 {
@@ -1312,6 +1434,7 @@ test_strftime (void)
     }
 #endif
 }
+#pragma GCC diagnostic pop
 
 static void
 test_find_interval (void)
@@ -1611,8 +1734,10 @@ main (gint   argc,
   g_test_add_func ("/GDateTime/hash", test_GDateTime_hash);
   g_test_add_func ("/GDateTime/new_from_unix", test_GDateTime_new_from_unix);
   g_test_add_func ("/GDateTime/new_from_unix_utc", test_GDateTime_new_from_unix_utc);
+  g_test_add_func ("/GDateTime/new_from_unix/overflow", test_GDateTime_new_from_unix_overflow);
   g_test_add_func ("/GDateTime/new_from_timeval", test_GDateTime_new_from_timeval);
   g_test_add_func ("/GDateTime/new_from_timeval_utc", test_GDateTime_new_from_timeval_utc);
+  g_test_add_func ("/GDateTime/new_from_timeval/overflow", test_GDateTime_new_from_timeval_overflow);
   g_test_add_func ("/GDateTime/new_full", test_GDateTime_new_full);
   g_test_add_func ("/GDateTime/now", test_GDateTime_now);
   g_test_add_func ("/GDateTime/printf", test_GDateTime_printf);

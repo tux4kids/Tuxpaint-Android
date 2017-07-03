@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -21,7 +21,7 @@
 
 #include "config.h"
 
-// #include "../glib/valgrind.h"
+#include "../glib/valgrind.h"
 #include <string.h>
 
 #include "gtype.h"
@@ -31,7 +31,12 @@
 #include "gatomicarray.h"
 #include "gobject_trace.h"
 
+#include "glib-private.h"
 #include "gconstructor.h"
+
+#ifdef G_OS_WIN32
+#include <windows.h>
+#endif
 
 #ifdef	G_ENABLE_DEBUG
 #define	IF_DEBUG(debug_type)	if (_g_type_debug_flags & G_TYPE_DEBUG_ ## debug_type)
@@ -76,10 +81,10 @@
  * separately (typically by using #GArray or #GPtrArray) and put a pointer
  * to the buffer in the structure.
  *
- * A final word about type names: Such an identifier needs to be at least
- * three characters long. There is no upper length limit. The first character
- * needs to be a letter (a-z or A-Z) or an underscore '_'. Subsequent
- * characters can be letters, numbers or any of '-_+'.
+ * As mentioned in the [GType conventions][gtype-conventions], type names must
+ * be at least three characters long. There is no upper length limit. The first
+ * character must be a letter (a–z or A–Z) or an underscore (‘_’). Subsequent
+ * characters can be letters, numbers or any of ‘-_+’.
  */
 
 
@@ -133,15 +138,6 @@
 }G_STMT_END
 #define g_assert_type_system_initialized() \
   g_assert (static_quark_type_flags)
-
-#ifdef  G_ENABLE_DEBUG
-#define DEBUG_CODE(debug_type, code_block)  G_STMT_START {    \
-    if (_g_type_debug_flags & G_TYPE_DEBUG_ ## debug_type) \
-      { code_block; }                                     \
-} G_STMT_END
-#else /* !G_ENABLE_DEBUG */
-#define DEBUG_CODE(debug_type, code_block)  /* code_block */
-#endif  /* G_ENABLE_DEBUG */
 
 #define TYPE_FUNDAMENTAL_FLAG_MASK (G_TYPE_FLAG_CLASSED | \
 				    G_TYPE_FLAG_INSTANTIATABLE | \
@@ -1636,7 +1632,7 @@ g_type_interface_add_prerequisite (GType interface_type,
 /**
  * g_type_interface_prerequisites:
  * @interface_type: an interface type
- * @n_prerequisites: (out) (allow-none): location to return the number
+ * @n_prerequisites: (out) (optional): location to return the number
  *     of prerequisites, or %NULL
  *
  * Returns the prerequisites of an interfaces type.
@@ -1835,20 +1831,20 @@ g_type_create_instance (GType type)
   private_size = node->data->instance.private_size;
   ivar_size = node->data->instance.instance_size;
 
-//     if (private_size && RUNNING_ON_VALGRIND)
-//     {
-//       private_size += ALIGN_STRUCT (1);
+  if (private_size && RUNNING_ON_VALGRIND)
+    {
+      private_size += ALIGN_STRUCT (1);
 
       /* Allocate one extra pointer size... */
-//       allocated = g_slice_alloc0 (private_size + ivar_size + sizeof (gpointer));
+      allocated = g_slice_alloc0 (private_size + ivar_size + sizeof (gpointer));
       /* ... and point it back to the start of the private data. */
-//       *(gpointer *) (allocated + private_size + ivar_size) = allocated + ALIGN_STRUCT (1);
+      *(gpointer *) (allocated + private_size + ivar_size) = allocated + ALIGN_STRUCT (1);
 
       /* Tell valgrind that it should treat the object itself as such */
-//       VALGRIND_MALLOCLIKE_BLOCK (allocated + private_size, ivar_size + sizeof (gpointer), 0, TRUE);
-//       VALGRIND_MALLOCLIKE_BLOCK (allocated + ALIGN_STRUCT (1), private_size - ALIGN_STRUCT (1), 0, TRUE);
-//     }
-//   else
+      VALGRIND_MALLOCLIKE_BLOCK (allocated + private_size, ivar_size + sizeof (gpointer), 0, TRUE);
+      VALGRIND_MALLOCLIKE_BLOCK (allocated + ALIGN_STRUCT (1), private_size - ALIGN_STRUCT (1), 0, TRUE);
+    }
+  else
     allocated = g_slice_alloc0 (private_size + ivar_size);
 
   instance = (GTypeInstance *) (allocated + private_size);
@@ -1930,20 +1926,20 @@ g_type_free_instance (GTypeInstance *instance)
   /* See comment in g_type_create_instance() about what's going on here.
    * We're basically unwinding what we put into motion there.
    */
-//   if (private_size && RUNNING_ON_VALGRIND)
-//     {
-//       private_size += ALIGN_STRUCT (1);
-//       allocated -= ALIGN_STRUCT (1);
+  if (private_size && RUNNING_ON_VALGRIND)
+    {
+      private_size += ALIGN_STRUCT (1);
+      allocated -= ALIGN_STRUCT (1);
 
       /* Clear out the extra pointer... */
-//       *(gpointer *) (allocated + private_size + ivar_size) = NULL;
+      *(gpointer *) (allocated + private_size + ivar_size) = NULL;
       /* ... and ensure we include it in the size we free. */
-//       g_slice_free1 (private_size + ivar_size + sizeof (gpointer), allocated);
+      g_slice_free1 (private_size + ivar_size + sizeof (gpointer), allocated);
 
-//       VALGRIND_FREELIKE_BLOCK (allocated + ALIGN_STRUCT (1), 0);
-//       VALGRIND_FREELIKE_BLOCK (instance, 0);
-//     }
-//   else
+      VALGRIND_FREELIKE_BLOCK (allocated + ALIGN_STRUCT (1), 0);
+      VALGRIND_FREELIKE_BLOCK (instance, 0);
+    }
+  else
     g_slice_free1 (private_size + ivar_size, allocated);
 
 #ifdef	G_ENABLE_DEBUG
@@ -3532,7 +3528,7 @@ g_type_is_a (GType type,
 /**
  * g_type_children:
  * @type: the parent type
- * @n_children: (out) (allow-none): location to store the length of
+ * @n_children: (out) (optional): location to store the length of
  *     the returned array, or %NULL
  *
  * Return a newly allocated and 0-terminated array of type IDs, listing
@@ -3554,7 +3550,8 @@ g_type_children (GType  type,
       
       G_READ_LOCK (&type_rw_lock);	/* ->children is relocatable */
       children = g_new (GType, node->n_children + 1);
-      memcpy (children, node->children, sizeof (GType) * node->n_children);
+      if (node->n_children != 0)
+        memcpy (children, node->children, sizeof (GType) * node->n_children);
       children[node->n_children] = 0;
       
       if (n_children)
@@ -3575,7 +3572,7 @@ g_type_children (GType  type,
 /**
  * g_type_interfaces:
  * @type: the type to list interface types for
- * @n_interfaces: (out) (allow-none): location to store the length of
+ * @n_interfaces: (out) (optional): location to store the length of
  *     the returned array, or %NULL
  *
  * Return a newly allocated and 0-terminated array of type IDs, listing
@@ -4359,22 +4356,18 @@ g_type_init (void)
   g_assert_type_system_initialized ();
 }
 
-#if defined (G_HAS_CONSTRUCTORS)
-#ifdef G_DEFINE_CONSTRUCTOR_NEEDS_PRAGMA
-#pragma G_DEFINE_CONSTRUCTOR_PRAGMA_ARGS(gobject_init_ctor)
-#endif
-G_DEFINE_CONSTRUCTOR(gobject_init_ctor)
-#else
-# error Your platform/compiler is missing constructor support
-#endif
-
 static void
-gobject_init_ctor (void)
+gobject_init (void)
 {
   const gchar *env_string;
   GTypeInfo info;
   TypeNode *node;
   GType type;
+
+  /* Ensure GLib is initialized first, see
+   * https://bugzilla.gnome.org/show_bug.cgi?id=756139
+   */
+  GLIB_PRIVATE_CALL (glib_init) ();
 
   G_WRITE_LOCK (&type_rw_lock);
 
@@ -4390,25 +4383,25 @@ gobject_init_ctor (void)
 
       _g_type_debug_flags = g_parse_debug_string (env_string, debug_keys, G_N_ELEMENTS (debug_keys));
     }
-  
+
   /* quarks */
   static_quark_type_flags = g_quark_from_static_string ("-g-type-private--GTypeFlags");
   static_quark_iface_holder = g_quark_from_static_string ("-g-type-private--IFaceHolder");
   static_quark_dependants_array = g_quark_from_static_string ("-g-type-private--dependants-array");
-  
+
   /* type qname hash table */
   static_type_nodes_ht = g_hash_table_new (g_str_hash, g_str_equal);
-  
+
   /* invalid type G_TYPE_INVALID (0)
    */
   static_fundamental_type_nodes[0] = NULL;
-  
+
   /* void type G_TYPE_NONE
    */
   node = type_node_fundamental_new_W (G_TYPE_NONE, g_intern_static_string ("void"), 0);
   type = NODE_TYPE (node);
   g_assert (type == G_TYPE_NONE);
-  
+
   /* interface fundamental type G_TYPE_INTERFACE (!classed)
    */
   memset (&info, 0, sizeof (info));
@@ -4416,51 +4409,93 @@ gobject_init_ctor (void)
   type = NODE_TYPE (node);
   type_data_make_W (node, &info, NULL);
   g_assert (type == G_TYPE_INTERFACE);
-  
+
   G_WRITE_UNLOCK (&type_rw_lock);
-  
+
   _g_value_c_init ();
 
   /* G_TYPE_TYPE_PLUGIN
    */
   g_type_ensure (g_type_plugin_get_type ());
-  
+
   /* G_TYPE_* value types
    */
   _g_value_types_init ();
-  
+
   /* G_TYPE_ENUM & G_TYPE_FLAGS
    */
   _g_enum_types_init ();
-  
+
   /* G_TYPE_BOXED
    */
   _g_boxed_type_init ();
-  
+
   /* G_TYPE_PARAM
    */
   _g_param_type_init ();
-  
+
   /* G_TYPE_OBJECT
    */
   _g_object_type_init ();
-  
+
   /* G_TYPE_PARAM_* pspec types
    */
   _g_param_spec_types_init ();
-  
+
   /* Value Transformations
    */
   _g_value_transforms_init ();
-  
+
   /* Signal system
    */
   _g_signal_init ();
 }
 
+#if defined (G_OS_WIN32)
+
+BOOL WINAPI DllMain (HINSTANCE hinstDLL,
+                     DWORD     fdwReason,
+                     LPVOID    lpvReserved);
+
+BOOL WINAPI
+DllMain (HINSTANCE hinstDLL,
+         DWORD     fdwReason,
+         LPVOID    lpvReserved)
+{
+  switch (fdwReason)
+    {
+    case DLL_PROCESS_ATTACH:
+      gobject_init ();
+      break;
+
+    default:
+      /* do nothing */
+      ;
+    }
+
+  return TRUE;
+}
+
+#elif defined (G_HAS_CONSTRUCTORS)
+#ifdef G_DEFINE_CONSTRUCTOR_NEEDS_PRAGMA
+#pragma G_DEFINE_CONSTRUCTOR_PRAGMA_ARGS(gobject_init_ctor)
+#endif
+G_DEFINE_CONSTRUCTOR(gobject_init_ctor)
+
+static void
+gobject_init_ctor (void)
+{
+  gobject_init ();
+}
+
+#else
+# error Your platform/compiler is missing constructor support
+#endif
+
 /**
  * g_type_class_add_private:
- * @g_class: class structure for an instantiatable type
+ * @g_class: (type GObject.TypeClass): class structure for an instantiatable
+ *    type
  * @private_size: size of private structure
  *
  * Registers a private structure for an instantiatable type.
@@ -4692,7 +4727,7 @@ g_type_instance_get_private (GTypeInstance *instance,
 
 /**
  * g_type_class_get_instance_private_offset: (skip)
- * @g_class: a #GTypeClass
+ * @g_class: (type GObject.TypeClass): a #GTypeClass
  *
  * Gets the offset of the private data for instances of @g_class.
  *

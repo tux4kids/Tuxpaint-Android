@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -55,7 +55,8 @@ g_converter_default_init (GConverterInterface *iface)
  * @inbuf: (array length=inbuf_size) (element-type guint8): the buffer
  *         containing the data to convert.
  * @inbuf_size: the number of bytes in @inbuf
- * @outbuf: a buffer to write converted data in.
+ * @outbuf: (element-type guint8) (array length=outbuf_size): a buffer to write
+ *    converted data in.
  * @outbuf_size: the number of bytes in @outbuf, must be at least one
  * @flags: a #GConverterFlags controlling the conversion details
  * @bytes_read: (out): will be set to the number of bytes read from @inbuf on success

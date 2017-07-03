@@ -8,7 +8,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -303,12 +303,9 @@ g_poll (GPollFD *fds,
 
       /* If not, and we have a significant timeout, poll again with
        * timeout then. Note that this will return indication for only
-       * one event, or only for messages. We ignore timeouts less than
-       * ten milliseconds as they are mostly pointless on Windows, the
-       * MsgWaitForMultipleObjectsEx() call will timeout right away
-       * anyway.
+       * one event, or only for messages.
        */
-      if (retval == 0 && (timeout == INFINITE || timeout >= 10))
+      if (retval == 0 && (timeout == INFINITE || timeout > 0))
 	retval = poll_rest (poll_msgs, handles, nhandles, fds, nfds, timeout);
     }
   else

@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -48,6 +48,23 @@
 #if defined(_MSC_VER) || defined(__DMC__)
 #  include <io.h>
 #endif /* _MSC_VER || __DMC__ */
+
+#define MODERN_API_FAMILY 2
+
+#if WINAPI_FAMILY == MODERN_API_FAMILY
+/* This is for modern UI Builds, where we can't use LoadLibraryW()/GetProcAddress() */
+/* ntddk.h is found in the WDK, and MinGW */
+#include <ntddk.h>
+
+#ifdef _MSC_VER
+#pragma comment (lib, "ntoskrnl.lib")
+#endif
+#elif defined (__MINGW32__)
+/* mingw-w64, not MinGW, has winternl.h */
+#include <ntdef.h>
+#else
+#include <winternl.h>
+#endif
 
 #include "glib.h"
 #include "gthreadprivate.h"
@@ -175,7 +192,7 @@ g_win32_error_message (gint error)
 {
   gchar *retval;
   wchar_t *msg = NULL;
-  int nchars;
+  size_t nchars;
 
   FormatMessageW (FORMAT_MESSAGE_ALLOCATE_BUFFER
 		  |FORMAT_MESSAGE_IGNORE_INSERTS
@@ -185,12 +202,12 @@ g_win32_error_message (gint error)
   if (msg != NULL)
     {
       nchars = wcslen (msg);
-      
-      if (nchars > 2 && msg[nchars-1] == '\n' && msg[nchars-2] == '\r')
-	msg[nchars-2] = '\0';
-      
+
+      if (nchars >= 2 && msg[nchars-1] == L'\n' && msg[nchars-2] == L'\r')
+        msg[nchars-2] = L'\0';
+
       retval = g_utf16_to_utf8 (msg, -1, NULL, NULL, NULL);
-      
+
       LocalFree (msg);
     }
   else
@@ -201,7 +218,7 @@ g_win32_error_message (gint error)
 
 /**
  * g_win32_get_package_installation_directory_of_module:
- * @hmodule: (allow-none): The Win32 handle for a DLL loaded into the current process, or %NULL
+ * @hmodule: (nullable): The Win32 handle for a DLL loaded into the current process, or %NULL
  *
  * This function tries to determine the installation directory of a
  * software package based on the location of a DLL of the software
@@ -341,8 +358,8 @@ get_package_directory_from_module (const gchar *module_name)
 
 /**
  * g_win32_get_package_installation_directory:
- * @package: (allow-none): You should pass %NULL for this.
- * @dll_name: (allow-none): The name of a DLL that a package provides in UTF-8, or %NULL.
+ * @package: (nullable): You should pass %NULL for this.
+ * @dll_name: (nullable): The name of a DLL that a package provides in UTF-8, or %NULL.
  *
  * Try to determine the installation directory for a software package.
  *
@@ -395,9 +412,9 @@ get_package_directory_from_module (const gchar *module_name)
  * g_win32_get_package_installation_directory_of_module() instead.
  **/
 
- gchar *
-g_win32_get_package_installation_directory_utf8 (const gchar *package,
-						 const gchar *dll_name)
+gchar *
+g_win32_get_package_installation_directory (const gchar *package,
+                                            const gchar *dll_name)
 {
   gchar *result = NULL;
 
@@ -413,42 +430,10 @@ g_win32_get_package_installation_directory_utf8 (const gchar *package,
   return result;
 }
 
-#if !defined (_WIN64)
-
-/* DLL ABI binary compatibility version that uses system codepage file names */
-
-gchar *
-g_win32_get_package_installation_directory (const gchar *package,
-					    const gchar *dll_name)
-{
-  gchar *utf8_package = NULL, *utf8_dll_name = NULL;
-  gchar *utf8_retval, *retval;
-
-  if (package != NULL)
-    utf8_package = g_locale_to_utf8 (package, -1, NULL, NULL, NULL);
-
-  if (dll_name != NULL)
-    utf8_dll_name = g_locale_to_utf8 (dll_name, -1, NULL, NULL, NULL);
-
-  utf8_retval =
-    g_win32_get_package_installation_directory_utf8 (utf8_package,
-						     utf8_dll_name);
-
-  retval = g_locale_from_utf8 (utf8_retval, -1, NULL, NULL, NULL);
-
-  g_free (utf8_package);
-  g_free (utf8_dll_name);
-  g_free (utf8_retval);
-
-  return retval;
-}
-
-#endif
-
 /**
  * g_win32_get_package_installation_subdirectory:
- * @package: (allow-none): You should pass %NULL for this.
- * @dll_name: (allow-none): The name of a DLL that a package provides, in UTF-8, or %NULL.
+ * @package: (nullable): You should pass %NULL for this.
+ * @dll_name: (nullable): The name of a DLL that a package provides, in UTF-8, or %NULL.
  * @subdir: A subdirectory of the package installation directory, also in UTF-8
  *
  * This function is deprecated. Use
@@ -475,15 +460,15 @@ g_win32_get_package_installation_directory (const gchar *package,
  **/
 
 gchar *
-g_win32_get_package_installation_subdirectory_utf8 (const gchar *package,
-						    const gchar *dll_name,
-						    const gchar *subdir)
+g_win32_get_package_installation_subdirectory (const gchar *package,
+                                               const gchar *dll_name,
+                                               const gchar *subdir)
 {
   gchar *prefix;
   gchar *dirname;
 
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  prefix = g_win32_get_package_installation_directory_utf8 (package, dll_name);
+  prefix = g_win32_get_package_installation_directory (package, dll_name);
 G_GNUC_END_IGNORE_DEPRECATIONS
 
   dirname = g_build_filename (prefix, subdir, NULL);
@@ -491,32 +476,6 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
   return dirname;
 }
-
-#if !defined (_WIN64)
-
-/* DLL ABI binary compatibility version that uses system codepage file names */
-
-gchar *
-g_win32_get_package_installation_subdirectory (const gchar *package,
-					       const gchar *dll_name,
-					       const gchar *subdir)
-{
-  gchar *prefix;
-  gchar *dirname;
-
-  G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  prefix = g_win32_get_package_installation_directory (package, dll_name);
-  G_GNUC_END_IGNORE_DEPRECATIONS
-
-  dirname = g_build_filename (prefix, subdir, NULL);
-  g_free (prefix);
-
-  return dirname;
-}
-
-#endif
-
-#define gwin32condmask(base,var) VerSetConditionMask (base, var, VER_GREATER_EQUAL)
 
 /**
  * g_win32_check_windows_version:
@@ -550,42 +509,77 @@ g_win32_check_windows_version (const gint major,
                                const GWin32OSType os_type)
 {
   OSVERSIONINFOEXW osverinfo;
-  gboolean test_os_type;
-  const DWORDLONG conds = gwin32condmask (gwin32condmask (gwin32condmask (0, VER_MAJORVERSION), VER_MINORVERSION), VER_SERVICEPACKMAJOR);
+  gboolean is_ver_checked = FALSE;
+  gboolean is_type_checked = FALSE;
+
+#if WINAPI_FAMILY != MODERN_API_FAMILY
+  /* For non-modern UI Apps, use the LoadLibraryW()/GetProcAddress() thing */
+  typedef NTSTATUS (WINAPI fRtlGetVersion) (PRTL_OSVERSIONINFOEXW);
+
+  fRtlGetVersion *RtlGetVersion;
+  HMODULE hmodule;
+#endif
+  /* We Only Support Checking for XP or later */
+  g_return_val_if_fail (major >= 5 && (major <=6 || major == 10), FALSE);
+  g_return_val_if_fail ((major >= 5 && minor >= 1) || major >= 6, FALSE);
+
+  /* Check for Service Pack Version >= 0 */
+  g_return_val_if_fail (spver >= 0, FALSE);
+
+#if WINAPI_FAMILY != MODERN_API_FAMILY
+  hmodule = LoadLibraryW (L"ntdll.dll");
+  g_return_val_if_fail (hmodule != NULL, FALSE);
+
+  RtlGetVersion = (fRtlGetVersion *) GetProcAddress (hmodule, "RtlGetVersion");
+  g_return_val_if_fail (RtlGetVersion != NULL, FALSE);
+#endif
 
   memset (&osverinfo, 0, sizeof (OSVERSIONINFOEXW));
   osverinfo.dwOSVersionInfoSize = sizeof (OSVERSIONINFOEXW);
-  osverinfo.dwPlatformId = VER_PLATFORM_WIN32_NT;
-  osverinfo.dwMajorVersion = major;
-  osverinfo.dwMinorVersion = minor;
-  osverinfo.wServicePackMajor = spver;
+  RtlGetVersion (&osverinfo);
 
-  switch (os_type)
+  /* check the OS and Service Pack Versions */
+  if (osverinfo.dwMajorVersion > major)
+    is_ver_checked = TRUE;
+  else if (osverinfo.dwMajorVersion == major)
     {
-      case G_WIN32_OS_WORKSTATION:
-        osverinfo.wProductType = VER_NT_WORKSTATION;
-        test_os_type = TRUE;
-        break;
-      case G_WIN32_OS_SERVER:
-        osverinfo.wProductType = VER_NT_SERVER;
-        test_os_type = TRUE;
-        break;
-      default:
-        test_os_type = FALSE;
-        break;
+      if (osverinfo.dwMinorVersion > minor)
+        is_ver_checked = TRUE;
+      else if (osverinfo.dwMinorVersion == minor)
+        if (osverinfo.wServicePackMajor >= spver)
+          is_ver_checked = TRUE;
     }
 
-  if (test_os_type)
-    return VerifyVersionInfoW (&osverinfo,
-                               VER_MAJORVERSION | VER_MINORVERSION | VER_SERVICEPACKMAJOR | VER_PRODUCT_TYPE,
-                               gwin32condmask (conds, VER_PRODUCT_TYPE));
-  else
-    return VerifyVersionInfoW (&osverinfo,
-                               VER_MAJORVERSION | VER_MINORVERSION | VER_SERVICEPACKMAJOR,
-                               conds);
-}
+  /* Check OS Type */
+  if (is_ver_checked)
+    {
+      switch (os_type)
+        {
+          case G_WIN32_OS_ANY:
+            is_type_checked = TRUE;
+            break;
+          case G_WIN32_OS_WORKSTATION:
+            if (osverinfo.wProductType == VER_NT_WORKSTATION)
+              is_type_checked = TRUE;
+            break;
+          case G_WIN32_OS_SERVER:
+            if (osverinfo.wProductType == VER_NT_SERVER ||
+                osverinfo.wProductType == VER_NT_DOMAIN_CONTROLLER)
+              is_type_checked = TRUE;
+            break;
+          default:
+            /* shouldn't get here normally */
+            g_warning ("Invalid os_type specified");
+            break;
+        }
+    }
 
-#undef gwin32condmask
+#if WINAPI_FAMILY != MODERN_API_FAMILY
+  FreeLibrary (hmodule);
+#endif
+
+  return is_ver_checked && is_type_checked;
+}
 
 /**
  * g_win32_get_windows_version:
@@ -729,5 +723,40 @@ g_win32_get_command_line (void)
     result[i] = g_utf16_to_utf8 (args[i], -1, NULL, NULL, NULL);
   result[i] = NULL;
 
+  LocalFree (args);
   return result;
 }
+
+#ifdef G_OS_WIN32
+
+/* Binary compatibility versions. Not for newly compiled code. */
+
+_GLIB_EXTERN gchar *g_win32_get_package_installation_directory_utf8    (const gchar *package,
+                                                                        const gchar *dll_name);
+
+_GLIB_EXTERN gchar *g_win32_get_package_installation_subdirectory_utf8 (const gchar *package,
+                                                                        const gchar *dll_name,
+                                                                        const gchar *subdir);
+
+gchar *
+g_win32_get_package_installation_directory_utf8 (const gchar *package,
+                                                 const gchar *dll_name)
+{
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  return g_win32_get_package_installation_directory (package, dll_name);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
+gchar *
+g_win32_get_package_installation_subdirectory_utf8 (const gchar *package,
+                                                    const gchar *dll_name,
+                                                    const gchar *subdir)
+{
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  return g_win32_get_package_installation_subdirectory (package,
+                                                        dll_name,
+                                                        subdir);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
+#endif

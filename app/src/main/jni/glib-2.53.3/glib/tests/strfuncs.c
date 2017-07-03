@@ -1114,6 +1114,8 @@ test_bounds (void)
   char *tmp, *tmp2;
   char **array;
   char *string;
+  const char * const strjoinv_0[] = { NULL };
+  const char * const strjoinv_1[] = { "foo", NULL };
 
   /* if we allocate the file between two others and then free those
    * other two, then hopefully we end up with unmapped memory on either
@@ -1262,8 +1264,15 @@ test_bounds (void)
   tmp = g_strjoinv (".", array);
   g_strfreev (array);
 
-  g_assert_cmpint (strlen (tmp), ==, 4095);
-  g_assert (memcmp (tmp, string, 4095) == 0);
+  g_assert_cmpmem (tmp, strlen (tmp), string, 4095);
+  g_free (tmp);
+
+  tmp = g_strjoinv ("/", (char **) strjoinv_0);
+  g_assert_cmpstr (tmp, ==, "");
+  g_free (tmp);
+
+  tmp = g_strjoinv ("/", (char **) strjoinv_1);
+  g_assert_cmpstr (tmp, ==, "foo");
   g_free (tmp);
 
   tmp = g_strconcat (string, string, string, NULL);
@@ -1318,15 +1327,28 @@ test_strip_context (void)
 static void
 test_strerror (void)
 {
+  GHashTable *strs;
   gint i;
   const gchar *str;
+  GHashTableIter iter;
 
-  for (i = 1; i < 100; i++)
+  setlocale (LC_ALL, "C");
+
+  strs = g_hash_table_new (g_str_hash, g_str_equal);
+  for (i = 1; i < 200; i++)
     {
       str = g_strerror (i);
       g_assert (str != NULL);
       g_assert (g_utf8_validate (str, -1, NULL));
+      g_assert_false (g_hash_table_contains (strs, str));
+      g_hash_table_add (strs, (char *)str);
     }
+
+  g_hash_table_iter_init (&iter, strs);
+  while (g_hash_table_iter_next (&iter, (gpointer *)&str, NULL))
+    g_assert (g_utf8_validate (str, -1, NULL));
+
+  g_hash_table_unref (strs);
 }
 
 static void
@@ -1479,6 +1501,224 @@ test_strv_contains (void)
   g_assert_false (g_strv_contains (strv_empty, ""));
 }
 
+typedef enum
+  {
+    SIGNED,
+    UNSIGNED
+  } SignType;
+
+typedef struct
+{
+  const gchar *str;
+  SignType sign_type;
+  guint base;
+  gint min;
+  gint max;
+  gint expected;
+  gboolean should_fail;
+  GNumberParserError error_code;
+} TestData;
+
+const TestData test_data[] = {
+  /* typical cases for signed */
+  { "0",  SIGNED, 10, -2,  2,  0, FALSE, 0                                   },
+  { "+0", SIGNED, 10, -2,  2,  0, FALSE, 0                                   },
+  { "-0", SIGNED, 10, -2,  2,  0, FALSE, 0                                   },
+  { "-2", SIGNED, 10, -2,  2, -2, FALSE, 0                                   },
+  { "2",  SIGNED, 10, -2,  2,  2, FALSE, 0                                   },
+  { "+2", SIGNED, 10, -2,  2,  2, FALSE, 0                                   },
+  { "3",  SIGNED, 10, -2,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS },
+  { "+3", SIGNED, 10, -2,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS },
+  { "-3", SIGNED, 10, -2,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS },
+
+  /* typical cases for unsigned */
+  { "-1", UNSIGNED, 10, 0, 2, 0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID       },
+  { "1",  UNSIGNED, 10, 0, 2, 1, FALSE, 0                                   },
+  { "+1", UNSIGNED, 10, 0, 2, 0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID       },
+  { "0",  UNSIGNED, 10, 0, 2, 0, FALSE, 0                                   },
+  { "+0", UNSIGNED, 10, 0, 2, 0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID       },
+  { "-0", UNSIGNED, 10, 0, 2, 0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID       },
+  { "2",  UNSIGNED, 10, 0, 2, 2, FALSE, 0                                   },
+  { "+2", UNSIGNED, 10, 0, 2, 0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID       },
+  { "3",  UNSIGNED, 10, 0, 2, 0, TRUE,  G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS },
+  { "+3", UNSIGNED, 10, 0, 2, 0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID       },
+
+  /* min == max cases for signed */
+  { "-2", SIGNED, 10, -2, -2, -2, FALSE, 0                                   },
+  { "-1", SIGNED, 10, -2, -2,  0, TRUE,  G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS },
+  { "-3", SIGNED, 10, -2, -2,  0, TRUE,  G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS },
+
+  /* min == max cases for unsigned */
+  { "2", UNSIGNED, 10, 2, 2, 2, FALSE, 0                                   },
+  { "3", UNSIGNED, 10, 2, 2, 0, TRUE,  G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS },
+  { "1", UNSIGNED, 10, 2, 2, 0, TRUE,  G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS },
+
+  /* invalid inputs */
+  { "",    SIGNED,   10, -2,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "",    UNSIGNED, 10,  0,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "a",   SIGNED,   10, -2,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "a",   UNSIGNED, 10,  0,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "1a",  SIGNED,   10, -2,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "1a",  UNSIGNED, 10,  0,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "- 1", SIGNED,   10, -2,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+
+  /* leading/trailing whitespace */
+  { " 1", SIGNED,   10, -2,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { " 1", UNSIGNED, 10,  0,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "1 ", SIGNED,   10, -2,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "1 ", UNSIGNED, 10,  0,  2,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+
+  /* hexadecimal numbers */
+  { "a",     SIGNED,   16,   0, 15, 10, FALSE, 0                             },
+  { "a",     UNSIGNED, 16,   0, 15, 10, FALSE, 0                             },
+  { "0xa",   SIGNED,   16,   0, 15,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "0xa",   UNSIGNED, 16,   0, 15,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "-0xa",  SIGNED,   16, -15, 15,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "-0xa",  UNSIGNED, 16,   0, 15,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "+0xa",  SIGNED,   16,   0, 15,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "+0xa",  UNSIGNED, 16,   0, 15,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "- 0xa", SIGNED,   16, -15, 15,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "- 0xa", UNSIGNED, 16,   0, 15,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "+ 0xa", SIGNED,   16, -15, 15,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+  { "+ 0xa", UNSIGNED, 16,   0, 15,  0, TRUE,  G_NUMBER_PARSER_ERROR_INVALID },
+};
+
+static void
+test_ascii_string_to_number_usual (void)
+{
+  gsize idx;
+
+  for (idx = 0; idx < G_N_ELEMENTS (test_data); ++idx)
+    {
+      GError *error = NULL;
+      const TestData *data = &test_data[idx];
+      gboolean result;
+      gint value;
+
+      switch (data->sign_type)
+        {
+        case SIGNED:
+          {
+            gint64 value64 = 0;
+            result = g_ascii_string_to_signed (data->str,
+                                               data->base,
+                                               data->min,
+                                               data->max,
+                                               &value64,
+                                               &error);
+            value = value64;
+            g_assert_cmpint (value, ==, value64);
+            break;
+          }
+
+        case UNSIGNED:
+          {
+            guint64 value64 = 0;
+            result = g_ascii_string_to_unsigned (data->str,
+                                                 data->base,
+                                                 data->min,
+                                                 data->max,
+                                                 &value64,
+                                                 &error);
+            value = value64;
+            g_assert_cmpint (value, ==, value64);
+            break;
+          }
+
+        default:
+          g_assert_not_reached ();
+        }
+
+      if (data->should_fail)
+        {
+          g_assert_false (result);
+          g_assert_error (error, G_NUMBER_PARSER_ERROR, data->error_code);
+          g_clear_error (&error);
+        }
+      else
+        {
+          g_assert_true (result);
+          g_assert_no_error (error);
+          g_assert_cmpint (value, ==, data->expected);
+        }
+    }
+}
+
+static void
+test_ascii_string_to_number_pathological (void)
+{
+  GError *error = NULL;
+  const gchar *crazy_high = "999999999999999999999999999999999999";
+  const gchar *crazy_low = "-999999999999999999999999999999999999";
+  const gchar *max_uint64 = "18446744073709551615";
+  const gchar *max_int64 = "9223372036854775807";
+  const gchar *min_int64 = "-9223372036854775808";
+  guint64 uvalue = 0;
+  gint64 svalue = 0;
+
+  g_assert_false (g_ascii_string_to_unsigned (crazy_high,
+                                              10,
+                                              0,
+                                              G_MAXUINT64,
+                                              NULL,
+                                              &error));
+  g_assert_error (error, G_NUMBER_PARSER_ERROR, G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS);
+  g_clear_error (&error);
+  g_assert_false (g_ascii_string_to_unsigned (crazy_low,
+                                              10,
+                                              0,
+                                              G_MAXUINT64,
+                                              NULL,
+                                              &error));
+  // crazy_low is a signed number so it is not a valid unsigned number
+  g_assert_error (error, G_NUMBER_PARSER_ERROR, G_NUMBER_PARSER_ERROR_INVALID);
+  g_clear_error (&error);
+
+  g_assert_false (g_ascii_string_to_signed (crazy_high,
+                                            10,
+                                            G_MININT64,
+                                            G_MAXINT64,
+                                            NULL,
+                                            &error));
+  g_assert_error (error, G_NUMBER_PARSER_ERROR, G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS);
+  g_clear_error (&error);
+  g_assert_false (g_ascii_string_to_signed (crazy_low,
+                                            10,
+                                            G_MININT64,
+                                            G_MAXINT64,
+                                            NULL,
+                                            &error));
+  g_assert_error (error, G_NUMBER_PARSER_ERROR, G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS);
+  g_clear_error (&error);
+
+  g_assert_true (g_ascii_string_to_unsigned (max_uint64,
+                                             10,
+                                             0,
+                                             G_MAXUINT64,
+                                             &uvalue,
+                                             &error));
+  g_assert_no_error (error);
+  g_assert_cmpint (uvalue, ==, G_MAXUINT64);
+
+  g_assert_true (g_ascii_string_to_signed (max_int64,
+                                           10,
+                                           G_MININT64,
+                                           G_MAXINT64,
+                                           &svalue,
+                                           &error));
+  g_assert_no_error (error);
+  g_assert_cmpint (svalue, ==, G_MAXINT64);
+
+  g_assert_true (g_ascii_string_to_signed (min_int64,
+                                           10,
+                                           G_MININT64,
+                                           G_MAXINT64,
+                                           &svalue,
+                                           &error));
+  g_assert_no_error (error);
+  g_assert_cmpint (svalue, ==, G_MININT64);
+}
+
 int
 main (int   argc,
       char *argv[])
@@ -1515,6 +1755,8 @@ main (int   argc,
   g_test_add_func ("/strfuncs/strup", test_strup);
   g_test_add_func ("/strfuncs/transliteration", test_transliteration);
   g_test_add_func ("/strfuncs/strv-contains", test_strv_contains);
+  g_test_add_func ("/strfuncs/ascii-string-to-num/usual", test_ascii_string_to_number_usual);
+  g_test_add_func ("/strfuncs/ascii-string-to-num/pathological", test_ascii_string_to_number_pathological);
 
   return g_test_run();
 }

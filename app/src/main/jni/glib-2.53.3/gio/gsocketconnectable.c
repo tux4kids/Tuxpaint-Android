@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -145,4 +145,35 @@ g_socket_connectable_proxy_enumerate (GSocketConnectable *connectable)
     return (* iface->proxy_enumerate) (connectable);
   else
     return (* iface->enumerate) (connectable);
+}
+
+/**
+ * g_socket_connectable_to_string:
+ * @connectable: a #GSocketConnectable
+ *
+ * Format a #GSocketConnectable as a string. This is a human-readable format for
+ * use in debugging output, and is not a stable serialization format. It is not
+ * suitable for use in user interfaces as it exposes too much information for a
+ * user.
+ *
+ * If the #GSocketConnectable implementation does not support string formatting,
+ * the implementation’s type name will be returned as a fallback.
+ *
+ * Returns: (transfer full): the formatted string
+ *
+ * Since: 2.48
+ */
+gchar *
+g_socket_connectable_to_string (GSocketConnectable *connectable)
+{
+  GSocketConnectableIface *iface;
+
+  g_return_val_if_fail (G_IS_SOCKET_CONNECTABLE (connectable), NULL);
+
+  iface = G_SOCKET_CONNECTABLE_GET_IFACE (connectable);
+
+  if (iface->to_string != NULL)
+    return iface->to_string (connectable);
+  else
+    return g_strdup (G_OBJECT_TYPE_NAME (connectable));
 }

@@ -28,7 +28,7 @@ enum
 };
 
 static GType binding_source_get_type (void);
-G_DEFINE_TYPE (BindingSource, binding_source, G_TYPE_OBJECT);
+G_DEFINE_TYPE (BindingSource, binding_source, G_TYPE_OBJECT)
 
 static void
 binding_source_set_property (GObject      *gobject,
@@ -150,7 +150,7 @@ enum
 };
 
 static GType binding_target_get_type (void);
-G_DEFINE_TYPE (BindingTarget, binding_target, G_TYPE_OBJECT);
+G_DEFINE_TYPE (BindingTarget, binding_target, G_TYPE_OBJECT)
 
 static void
 binding_target_set_property (GObject      *gobject,
@@ -250,7 +250,7 @@ celsius_to_fahrenheit (GBinding     *binding,
   fahrenheit = (9 * celsius / 5) + 32.0;
 
   if (g_test_verbose ())
-    g_print ("Converting %.2fC to %.2fF\n", celsius, fahrenheit);
+    g_printerr ("Converting %.2fC to %.2fF\n", celsius, fahrenheit);
 
   g_value_set_double (to_value, fahrenheit);
 
@@ -272,7 +272,7 @@ fahrenheit_to_celsius (GBinding     *binding,
   celsius = 5 * (fahrenheit - 32.0) / 9;
 
   if (g_test_verbose ())
-    g_print ("Converting %.2fF to %.2fC\n", fahrenheit, celsius);
+    g_printerr ("Converting %.2fF to %.2fC\n", fahrenheit, celsius);
 
   g_value_set_double (to_value, celsius);
 
@@ -610,6 +610,19 @@ binding_unbind (void)
 
   g_object_unref (source);
   g_object_unref (target);
+
+
+  /* g_binding_unbind() has a special case for this */
+  source = g_object_new (binding_source_get_type (), NULL);
+  binding = g_object_bind_property (source, "foo",
+                                    source, "bar",
+                                    G_BINDING_DEFAULT);
+  g_object_add_weak_pointer (G_OBJECT (binding), (gpointer *) &binding);
+
+  g_binding_unbind (binding);
+  g_assert (binding == NULL);
+
+  g_object_unref (source);
 }
 
 static void

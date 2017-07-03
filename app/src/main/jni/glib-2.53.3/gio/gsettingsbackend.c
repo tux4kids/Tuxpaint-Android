@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the licence, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -173,7 +173,7 @@ g_settings_backend_watch_weak_notify (gpointer  data,
  * g_settings_backend_watch:
  * @backend: a #GSettingsBackend
  * @target: the GObject (typically GSettings instance) to call back to
- * @context: (allow-none): a #GMainContext, or %NULL
+ * @context: (nullable): a #GMainContext, or %NULL
  * ...: callbacks...
  *
  * Registers a new watch on a #GSettingsBackend.
@@ -586,7 +586,7 @@ g_settings_backend_flatten_one (gpointer key,
  * @path: (out): the location to save the path
  * @keys: (out) (transfer container) (array zero-terminated=1): the
  *        location to save the relative keys
- * @values: (out) (allow-none) (transfer container) (array zero-terminated=1):
+ * @values: (out) (optional) (transfer container) (array zero-terminated=1):
  *          the location to save the values, or %NULL
  *
  * Calculate the longest common prefix of all keys in a tree and write

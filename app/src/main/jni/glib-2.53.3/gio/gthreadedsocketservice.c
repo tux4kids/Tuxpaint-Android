@@ -3,10 +3,10 @@
  * Copyright © 2009 Codethink Limited
  * Copyright © 2009 Red Hat, Inc
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published
- * by the Free Software Foundation; either version 2 of the licence or (at
- * your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -231,7 +231,7 @@ g_threaded_socket_service_class_init (GThreadedSocketServiceClass *class)
    * Returns: %TRUE to stop further signal handlers from being called
    */
   g_threaded_socket_service_run_signal =
-    g_signal_new ("run", G_TYPE_FROM_CLASS (class), G_SIGNAL_RUN_LAST,
+    g_signal_new (I_("run"), G_TYPE_FROM_CLASS (class), G_SIGNAL_RUN_LAST,
 		  G_STRUCT_OFFSET (GThreadedSocketServiceClass, run),
 		  g_signal_accumulator_true_handled, NULL,
 		  NULL, G_TYPE_BOOLEAN,

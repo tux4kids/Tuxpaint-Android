@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -40,6 +40,7 @@
 #include "gthread.h"
 #include "gtestutils.h"
 #include "glib_trace.h"
+#include "glib-init.h"
 
 #define QUARK_BLOCK_SIZE         2048
 #define QUARK_STRING_BLOCK_SIZE (4096 - sizeof (gsize))
@@ -52,6 +53,16 @@ static gchar        **quarks = NULL;
 static gint           quark_seq_id = 0;
 static gchar         *quark_block = NULL;
 static gint           quark_block_offset = 0;
+
+void
+g_quark_init (void)
+{
+  g_assert (quark_seq_id == 0);
+  quark_ht = g_hash_table_new (g_str_hash, g_str_equal);
+  quarks = g_new (gchar*, QUARK_BLOCK_SIZE);
+  quarks[0] = NULL;
+  quark_seq_id = 1;
+}
 
 /**
  * SECTION:quarks
@@ -107,7 +118,7 @@ static gint           quark_block_offset = 0;
 
 /**
  * g_quark_try_string:
- * @string: (allow-none): a string
+ * @string: (nullable): a string
  *
  * Gets the #GQuark associated with the given string, or 0 if string is
  * %NULL or it has no associated #GQuark.
@@ -127,10 +138,9 @@ g_quark_try_string (const gchar *string)
     return 0;
 
   G_LOCK (quark_global);
-  if (quark_ht)
-    quark = GPOINTER_TO_UINT (g_hash_table_lookup (quark_ht, string));
+  quark = GPOINTER_TO_UINT (g_hash_table_lookup (quark_ht, string));
   G_UNLOCK (quark_global);
-  
+
   return quark;
 }
 
@@ -169,8 +179,7 @@ quark_from_string (const gchar *string,
 {
   GQuark quark = 0;
 
-  if (quark_ht)
-    quark = GPOINTER_TO_UINT (g_hash_table_lookup (quark_ht, string));
+  quark = GPOINTER_TO_UINT (g_hash_table_lookup (quark_ht, string));
 
   if (!quark)
     {
@@ -183,7 +192,7 @@ quark_from_string (const gchar *string,
 
 /**
  * g_quark_from_string:
- * @string: (allow-none): a string
+ * @string: (nullable): a string
  *
  * Gets the #GQuark identifying the given string. If the string does
  * not currently have an associated #GQuark, a new #GQuark is created,
@@ -208,7 +217,7 @@ g_quark_from_string (const gchar *string)
 
 /**
  * g_quark_from_static_string:
- * @string: (allow-none): a string
+ * @string: (nullable): a string
  *
  * Gets the #GQuark identifying the given (static) string. If the
  * string does not currently have an associated #GQuark, a new #GQuark
@@ -283,13 +292,6 @@ quark_new (gchar *string)
        */
       g_atomic_pointer_set (&quarks, quarks_new);
     }
-  if (!quark_ht)
-    {
-      g_assert (quark_seq_id == 0);
-      quark_ht = g_hash_table_new (g_str_hash, g_str_equal);
-      quarks[quark_seq_id] = NULL;
-      g_atomic_int_inc (&quark_seq_id);
-    }
 
   quark = quark_seq_id;
   g_atomic_pointer_set (&quarks[quark], string);
@@ -301,7 +303,7 @@ quark_new (gchar *string)
 
 /**
  * g_intern_string:
- * @string: (allow-none): a string
+ * @string: (nullable): a string
  *
  * Returns a canonical representation for @string. Interned strings
  * can be compared for equality by comparing the pointers, instead of
@@ -330,7 +332,7 @@ g_intern_string (const gchar *string)
 
 /**
  * g_intern_static_string:
- * @string: (allow-none): a static string
+ * @string: (nullable): a static string
  *
  * Returns a canonical representation for @string. Interned strings
  * can be compared for equality by comparing the pointers, instead of

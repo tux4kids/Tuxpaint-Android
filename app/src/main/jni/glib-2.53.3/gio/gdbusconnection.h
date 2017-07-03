@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -401,6 +401,14 @@ guint            g_dbus_connection_register_object            (GDBusConnection  
                                                                gpointer                    user_data,
                                                                GDestroyNotify              user_data_free_func,
                                                                GError                    **error);
+GLIB_AVAILABLE_IN_2_46
+guint            g_dbus_connection_register_object_with_closures (GDBusConnection         *connection,
+                                                                  const gchar             *object_path,
+                                                                  GDBusInterfaceInfo      *interface_info,
+                                                                  GClosure                *method_call_closure,
+                                                                  GClosure                *get_property_closure,
+                                                                  GClosure                *set_property_closure,
+                                                                  GError                 **error);
 GLIB_AVAILABLE_IN_ALL
 gboolean         g_dbus_connection_unregister_object          (GDBusConnection            *connection,
                                                                guint                       registration_id);
@@ -479,7 +487,7 @@ typedef GDBusInterfaceInfo ** (*GDBusSubtreeIntrospectFunc) (GDBusConnection    
  * @object_path: The object path that was registered with g_dbus_connection_register_subtree().
  * @interface_name: The D-Bus interface name that the method call or property access is for.
  * @node: A node that is a child of @object_path (relative to @object_path) or %NULL for the root of the subtree.
- * @out_user_data: Return location for user data to pass to functions in the returned #GDBusInterfaceVTable (never %NULL).
+ * @out_user_data: (nullable) (not optional): Return location for user data to pass to functions in the returned #GDBusInterfaceVTable (never %NULL).
  * @user_data: The @user_data #gpointer passed to g_dbus_connection_register_subtree().
  *
  * The type of the @dispatch function in #GDBusSubtreeVTable.
@@ -640,11 +648,11 @@ void             g_dbus_connection_signal_unsubscribe         (GDBusConnection  
  * If the returned #GDBusMessage is different from @message and cannot
  * be sent on @connection (it could use features, such as file
  * descriptors, not compatible with @connection), then a warning is
- * logged to <emphasis>standard error</emphasis>. Applications can
+ * logged to standard error. Applications can
  * check this ahead of time using g_dbus_message_to_blob() passing a
  * #GDBusCapabilityFlags value obtained from @connection.
  *
- * Returns: (transfer full) (allow-none): A #GDBusMessage that will be freed with
+ * Returns: (transfer full) (nullable): A #GDBusMessage that will be freed with
  * g_object_unref() or %NULL to drop the message. Passive filter
  * functions can simply return the passed @message object.
  *

@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,6 +22,7 @@
 
 #include "config.h"
 
+#include "../glib/valgrind.h"
 #include <string.h>
 
 #include <ffi.h>
@@ -189,14 +190,31 @@ GClosure*
 g_closure_new_simple (guint           sizeof_closure,
 		      gpointer        data)
 {
-  GRealClosure *real_closure;
   GClosure *closure;
+  gint private_size;
+  gchar *allocated;
 
   g_return_val_if_fail (sizeof_closure >= sizeof (GClosure), NULL);
-  sizeof_closure = sizeof_closure + sizeof (GRealClosure) - sizeof (GClosure);
 
-  real_closure = g_malloc0 (sizeof_closure);
-  closure = &real_closure->closure;
+  private_size = sizeof (GRealClosure) - sizeof (GClosure);
+
+  /* See comments in gtype.c about what's going on here... */
+  if (RUNNING_ON_VALGRIND)
+    {
+      private_size += sizeof (gpointer);
+
+      allocated = g_malloc0 (private_size + sizeof_closure + sizeof (gpointer));
+
+      *(gpointer *) (allocated + private_size + sizeof_closure) = allocated + sizeof (gpointer);
+
+      VALGRIND_MALLOCLIKE_BLOCK (allocated + private_size, sizeof_closure + sizeof (gpointer), 0, TRUE);
+      VALGRIND_MALLOCLIKE_BLOCK (allocated + sizeof (gpointer), private_size - sizeof (gpointer), 0, TRUE);
+    }
+  else
+    allocated = g_malloc0 (private_size + sizeof_closure);
+
+  closure = (GClosure *) (allocated + private_size);
+
   SET (closure, ref_count, 1);
   SET (closure, floating, TRUE);
   closure->data = data;
@@ -301,7 +319,8 @@ g_closure_set_meta_va_marshal (GClosure       *closure,
 /**
  * g_closure_set_meta_marshal: (skip)
  * @closure: a #GClosure
- * @marshal_data: context-dependent data to pass to @meta_marshal
+ * @marshal_data: (closure meta_marshal): context-dependent data to pass
+ *  to @meta_marshal
  * @meta_marshal: a #GClosureMarshal function
  *
  * Sets the meta marshaller of @closure.  A meta marshaller wraps
@@ -342,9 +361,11 @@ g_closure_set_meta_marshal (GClosure       *closure,
 /**
  * g_closure_add_marshal_guards: (skip)
  * @closure: a #GClosure
- * @pre_marshal_data: data to pass to @pre_marshal_notify
+ * @pre_marshal_data: (closure pre_marshal_notify): data to pass
+ *  to @pre_marshal_notify
  * @pre_marshal_notify: a function to call before the closure callback
- * @post_marshal_data: data to pass to @post_marshal_notify
+ * @post_marshal_data: (closure post_marshal_notify): data to pass
+ *  to @post_marshal_notify
  * @post_marshal_notify: a function to call after the closure callback
  *
  * Adds a pair of notifiers which get invoked before and after the
@@ -399,7 +420,7 @@ g_closure_add_marshal_guards (GClosure      *closure,
 /**
  * g_closure_add_finalize_notifier: (skip)
  * @closure: a #GClosure
- * @notify_data: data to pass to @notify_func
+ * @notify_data: (closure notify_func): data to pass to @notify_func
  * @notify_func: the callback function to register
  *
  * Registers a finalization notifier which will be called when the
@@ -435,7 +456,7 @@ g_closure_add_finalize_notifier (GClosure      *closure,
 /**
  * g_closure_add_invalidate_notifier: (skip)
  * @closure: a #GClosure
- * @notify_data: data to pass to @notify_func
+ * @notify_data: (closure notify_func): data to pass to @notify_func
  * @notify_func: the callback function to register
  *
  * Registers an invalidation notifier which will be called when the
@@ -589,7 +610,22 @@ g_closure_unref (GClosure *closure)
     {
       closure_invoke_notifiers (closure, FNOTIFY);
       g_free (closure->notifiers);
-      g_free (G_REAL_CLOSURE (closure));
+
+      /* See comments in gtype.c about what's going on here... */
+      if (RUNNING_ON_VALGRIND)
+        {
+          gchar *allocated;
+
+          allocated = (gchar *) G_REAL_CLOSURE (closure);
+          allocated -= sizeof (gpointer);
+
+          g_free (allocated);
+
+          VALGRIND_FREELIKE_BLOCK (allocated + sizeof (gpointer), 0);
+          VALGRIND_FREELIKE_BLOCK (closure, 0);
+        }
+      else
+        g_free (G_REAL_CLOSURE (closure));
     }
 }
 
@@ -719,14 +755,14 @@ g_closure_remove_finalize_notifier (GClosure      *closure,
 /**
  * g_closure_invoke:
  * @closure: a #GClosure
- * @return_value: (allow-none): a #GValue to store the return
+ * @return_value: (optional) (out): a #GValue to store the return
  *                value. May be %NULL if the callback of @closure
  *                doesn't return a value.
  * @n_param_values: the length of the @param_values array
  * @param_values: (array length=n_param_values): an array of
  *                #GValues holding the arguments on which to
  *                invoke the callback of @closure
- * @invocation_hint: (allow-none): a context-dependent invocation hint
+ * @invocation_hint: (nullable): a context-dependent invocation hint
  *
  * Invokes the closure, i.e. executes the callback represented by the @closure.
  */
@@ -888,7 +924,7 @@ _g_closure_set_va_marshal (GClosure       *closure,
 /**
  * g_cclosure_new: (skip)
  * @callback_func: the function to invoke
- * @user_data: user data to pass to @callback_func
+ * @user_data: (closure callback_func): user data to pass to @callback_func
  * @destroy_data: destroy notify to be called when @user_data is no longer used
  *
  * Creates a new closure which invokes @callback_func with @user_data as
@@ -916,7 +952,7 @@ g_cclosure_new (GCallback      callback_func,
 /**
  * g_cclosure_new_swap: (skip)
  * @callback_func: the function to invoke
- * @user_data: user data to pass to @callback_func
+ * @user_data: (closure callback_func): user data to pass to @callback_func
  * @destroy_data: destroy notify to be called when @user_data is no longer used
  *
  * Creates a new closure which invokes @callback_func with @user_data as
@@ -1153,9 +1189,15 @@ value_to_ffi_type (const GValue *gvalue,
       *value = enum_tmpval;
       *tmpval_used = TRUE;
       break;
+    case G_TYPE_FLAGS:
+      g_assert (enum_tmpval != NULL);
+      rettype = &ffi_type_uint;
+      *enum_tmpval = g_value_get_flags (gvalue);
+      *value = enum_tmpval;
+      *tmpval_used = TRUE;
+      break;
     case G_TYPE_UCHAR:
     case G_TYPE_UINT:
-    case G_TYPE_FLAGS:
       rettype = &ffi_type_uint;
       *value = (gpointer)&(gvalue->data[0].v_uint);
       break;
@@ -1454,12 +1496,13 @@ g_cclosure_marshal_generic (GClosure     *closure,
 /**
  * g_cclosure_marshal_generic_va:
  * @closure: the #GClosure to which the marshaller belongs
- * @return_value: (allow-none): a #GValue to store the return
+ * @return_value: (nullable): a #GValue to store the return
  *  value. May be %NULL if the callback of @closure doesn't return a
  *  value.
- * @instance: the instance on which the closure is invoked.
+ * @instance: (type GObject.TypeInstance): the instance on which the closure is
+ *  invoked.
  * @args_list: va_list of arguments to be passed to the closure.
- * @marshal_data: (allow-none): additional data specified when
+ * @marshal_data: (nullable): additional data specified when
  *  registering the marshaller, see g_closure_set_marshal() and
  *  g_closure_set_meta_marshal()
  * @n_params: the length of the @param_types array

@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,6 +24,7 @@
 #include <string.h>
 
 #include "gunixsocketaddress.h"
+#include "gsocketconnectable.h"
 #include "glibintl.h"
 #include "gnetworking.h"
 
@@ -76,7 +77,13 @@ struct _GUnixSocketAddressPrivate
   GUnixSocketAddressType address_type;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GUnixSocketAddress, g_unix_socket_address, G_TYPE_SOCKET_ADDRESS)
+static void   g_unix_socket_address_connectable_iface_init (GSocketConnectableIface *iface);
+static gchar *g_unix_socket_address_connectable_to_string  (GSocketConnectable      *connectable);
+
+G_DEFINE_TYPE_WITH_CODE (GUnixSocketAddress, g_unix_socket_address, G_TYPE_SOCKET_ADDRESS,
+                         G_ADD_PRIVATE (GUnixSocketAddress)
+                         G_IMPLEMENT_INTERFACE (G_TYPE_SOCKET_CONNECTABLE,
+                                                g_unix_socket_address_connectable_iface_init))
 
 static void
 g_unix_socket_address_set_property (GObject      *object,
@@ -109,7 +116,9 @@ g_unix_socket_address_set_property (GObject      *object,
 	  /* Clip to fit in UNIX_PATH_MAX with zero termination or first byte */
 	  len = MIN (array->len, UNIX_PATH_MAX-1);
 
-	  memcpy (address->priv->path, array->data, len);
+	  if (len != 0)
+	    memcpy (address->priv->path, array->data, len);
+
 	  address->priv->path[len] = 0; /* Ensure null-terminated */
 	  address->priv->path_len = len;
 	}
@@ -300,6 +309,49 @@ g_unix_socket_address_class_init (GUnixSocketAddressClass *klass)
 }
 
 static void
+g_unix_socket_address_connectable_iface_init (GSocketConnectableIface *iface)
+{
+  GSocketConnectableIface *parent_iface = g_type_interface_peek_parent (iface);
+
+  iface->enumerate = parent_iface->enumerate;
+  iface->proxy_enumerate = parent_iface->proxy_enumerate;
+  iface->to_string = g_unix_socket_address_connectable_to_string;
+}
+
+static gchar *
+g_unix_socket_address_connectable_to_string (GSocketConnectable *connectable)
+{
+  GUnixSocketAddress *ua;
+  GString *out;
+  const gchar *path;
+  gsize path_len, i;
+
+  ua = G_UNIX_SOCKET_ADDRESS (connectable);
+
+  /* Anonymous sockets have no path. */
+  if (ua->priv->address_type == G_UNIX_SOCKET_ADDRESS_ANONYMOUS)
+    return g_strdup ("anonymous");
+
+  path = g_unix_socket_address_get_path (ua);
+  path_len = g_unix_socket_address_get_path_len (ua);
+  out = g_string_sized_new (path_len);
+
+  /* Return the #GUnixSocketAddress:path, but with all non-printable characters
+   * (including nul bytes) escaped to hex. */
+  for (i = 0; i < path_len; i++)
+    {
+      guint8 c = path[i];
+
+      if (g_ascii_isprint (path[i]))
+        g_string_append_c (out, c);
+      else
+        g_string_append_printf (out, "\\x%02x", (guint) c);
+    }
+
+  return g_string_free (out, FALSE);
+}
+
+static void
 g_unix_socket_address_init (GUnixSocketAddress *address)
 {
   address->priv = g_unix_socket_address_get_instance_private (address);
@@ -361,6 +413,9 @@ g_unix_socket_address_new_abstract (const gchar *path,
  *
  * If @type is %G_UNIX_SOCKET_ADDRESS_PATH, this is equivalent to
  * calling g_unix_socket_address_new().
+ *
+ * If @type is %G_UNIX_SOCKET_ADDRESS_ANONYMOUS, @path and @path_len will be
+ * ignored.
  *
  * If @path_type is %G_UNIX_SOCKET_ADDRESS_ABSTRACT, then @path_len
  * bytes of @path will be copied to the socket's path, and only those

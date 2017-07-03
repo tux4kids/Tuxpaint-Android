@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -39,6 +39,7 @@ enum
   PROP_0,
 
   PROP_NETWORK_AVAILABLE,
+  PROP_NETWORK_METERED,
   PROP_CONNECTIVITY
 };
 
@@ -119,6 +120,11 @@ g_network_monitor_base_get_property (GObject    *object,
       g_value_set_boolean (value, monitor->priv->is_available);
       break;
 
+    case PROP_NETWORK_METERED:
+      /* Default to FALSE in the unknown case. */
+      g_value_set_boolean (value, FALSE);
+      break;
+
     case PROP_CONNECTIVITY:
       g_value_set_enum (value,
                         monitor->priv->is_available ?
@@ -160,6 +166,7 @@ g_network_monitor_base_class_init (GNetworkMonitorBaseClass *monitor_class)
   gobject_class->finalize     = g_network_monitor_base_finalize;
 
   g_object_class_override_property (gobject_class, PROP_NETWORK_AVAILABLE, "network-available");
+  g_object_class_override_property (gobject_class, PROP_NETWORK_METERED, "network-metered");
   g_object_class_override_property (gobject_class, PROP_CONNECTIVITY, "connectivity");
 }
 
@@ -295,6 +302,7 @@ g_network_monitor_base_can_reach_async (GNetworkMonitor     *monitor,
   GSocketAddressEnumerator *enumerator;
 
   task = g_task_new (monitor, cancellable, callback, user_data);
+  g_task_set_source_tag (task, g_network_monitor_base_can_reach_async);
 
   if (G_NETWORK_MONITOR_BASE (monitor)->priv->networks->len == 0)
     {

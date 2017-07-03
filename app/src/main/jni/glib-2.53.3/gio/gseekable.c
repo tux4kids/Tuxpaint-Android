@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -98,7 +98,7 @@ g_seekable_can_seek (GSeekable *seekable)
  * @seekable: a #GSeekable.
  * @offset: a #goffset.
  * @type: a #GSeekType.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
  * @error: a #GError location to store the error occurring, or %NULL to
  * ignore.
  *
@@ -161,7 +161,7 @@ g_seekable_can_truncate (GSeekable *seekable)
  * g_seekable_truncate:
  * @seekable: a #GSeekable.
  * @offset: a #goffset.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore. 
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore. 
  * @error: a #GError location to store the error occurring, or %NULL to 
  * ignore.
  * 

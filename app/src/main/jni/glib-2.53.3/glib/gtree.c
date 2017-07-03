@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -853,8 +853,8 @@ g_tree_lookup (GTree         *tree,
  * g_tree_lookup_extended:
  * @tree: a #GTree
  * @lookup_key: the key to look up
- * @orig_key: returns the original key
- * @value: returns the value associated with the key
+ * @orig_key: (optional) (nullable): returns the original key
+ * @value: (optional) (nullable): returns the value associated with the key
  * 
  * Looks up a key in the #GTree, returning the original key and the
  * associated value. This is useful if you need to free the memory

@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -37,6 +37,7 @@ typedef struct _GTlsClientConnectionInterface GTlsClientConnectionInterface;
 /**
  * GTlsClientConnectionInterface:
  * @g_iface: The parent interface.
+ * @copy_session_state: Copies session state from one #GTlsClientConnection to another.
  *
  * vtable for a #GTlsClientConnection implementation.
  *
@@ -46,6 +47,8 @@ struct _GTlsClientConnectionInterface
 {
   GTypeInterface g_iface;
 
+  void     ( *copy_session_state )     (GTlsClientConnection       *conn,
+                                        GTlsClientConnection       *source);
 };
 
 GLIB_AVAILABLE_IN_ALL
@@ -73,6 +76,10 @@ void                  g_tls_client_connection_set_use_ssl3         (GTlsClientCo
 								    gboolean                 use_ssl3);
 GLIB_AVAILABLE_IN_ALL
 GList *               g_tls_client_connection_get_accepted_cas     (GTlsClientConnection    *conn);
+
+GLIB_AVAILABLE_IN_2_46
+void                  g_tls_client_connection_copy_session_state   (GTlsClientConnection    *conn,
+                                                                    GTlsClientConnection    *source);
 
 G_END_DECLS
 

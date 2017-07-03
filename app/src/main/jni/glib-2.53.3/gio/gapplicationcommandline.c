@@ -1,10 +1,10 @@
 /*
  * Copyright © 2010 Codethink Limited
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * licence or (at your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -230,7 +230,7 @@ struct _GApplicationCommandLinePrivate
   GVariant *arguments;
   GVariant *options;
   GVariantDict *options_dict;
-  gchar *cwd;
+  gchar *cwd;  /* in GLib filename encoding, not UTF-8 */
 
   gchar **environ;
   gint exit_status;
@@ -449,7 +449,7 @@ g_application_command_line_class_init (GApplicationCommandLineClass *class)
 /**
  * g_application_command_line_get_arguments:
  * @cmdline: a #GApplicationCommandLine
- * @argc: (out) (allow-none): the length of the arguments array, or %NULL
+ * @argc: (out) (optional): the length of the arguments array, or %NULL
  *
  * Gets the list of arguments that was passed on the command line.
  *
@@ -552,7 +552,7 @@ g_application_command_line_get_stdin (GApplicationCommandLine *cmdline)
  * The return value should not be modified or freed and is valid for as
  * long as @cmdline exists.
  *
- * Returns: the current directory, or %NULL
+ * Returns: (nullable) (type filename): the current directory, or %NULL
  *
  * Since: 2.28
  **/

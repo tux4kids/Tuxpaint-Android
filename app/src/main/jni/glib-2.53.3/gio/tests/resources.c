@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -449,6 +449,8 @@ test_uri_query_info (void)
   GFile *file;
   GFileInfo *info;
   const char *content_type, *mime_type;
+  const char *fs_type;
+  gboolean readonly;
 
   loaded_file = g_file_get_contents (g_test_get_filename (G_TEST_BUILT, "test.gresource", NULL),
                                      &content, &content_size, NULL);
@@ -472,6 +474,16 @@ test_uri_query_info (void)
   mime_type = g_content_type_get_mime_type (content_type);
   g_assert (mime_type);
   g_assert_cmpstr (mime_type, ==, "text/plain");
+
+  g_object_unref (info);
+
+  info = g_file_query_filesystem_info (file, "*", NULL, &error);
+  g_assert_no_error (error);
+
+  fs_type = g_file_info_get_attribute_string (info, G_FILE_ATTRIBUTE_FILESYSTEM_TYPE);
+  g_assert_cmpstr (fs_type, ==, "resource");
+  readonly = g_file_info_get_attribute_boolean (info, G_FILE_ATTRIBUTE_FILESYSTEM_READONLY);
+  g_assert_true (readonly);
 
   g_object_unref (info);
 

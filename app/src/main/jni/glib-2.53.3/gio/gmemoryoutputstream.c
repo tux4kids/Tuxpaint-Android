@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -330,11 +330,11 @@ g_memory_output_stream_init (GMemoryOutputStream *stream)
 
 /**
  * g_memory_output_stream_new: (skip)
- * @data: (allow-none): pointer to a chunk of memory to use, or %NULL
+ * @data: (nullable): pointer to a chunk of memory to use, or %NULL
  * @size: the size of @data
- * @realloc_function: (allow-none): a function with realloc() semantics (like g_realloc())
+ * @realloc_function: (nullable): a function with realloc() semantics (like g_realloc())
  *     to be called when @data needs to be grown, or %NULL
- * @destroy_function: (allow-none): a function to be called on @data when the stream is
+ * @destroy_function: (nullable): a function to be called on @data when the stream is
  *     finalized, or %NULL
  *
  * Creates a new #GMemoryOutputStream.
@@ -422,7 +422,8 @@ g_memory_output_stream_new_resizable (void)
  * Note that the returned pointer may become invalid on the next
  * write or truncate operation on the stream.
  *
- * Returns: (transfer none): pointer to the stream's data
+ * Returns: (transfer none): pointer to the stream's data, or %NULL if the data
+ *    has been stolen
  **/
 gpointer
 g_memory_output_stream_get_data (GMemoryOutputStream *ostream)
@@ -492,7 +493,8 @@ g_memory_output_stream_get_data_size (GMemoryOutputStream *ostream)
  *
  * @ostream must be closed before calling this function.
  *
- * Returns: (transfer full): the stream's data
+ * Returns: (transfer full): the stream's data, or %NULL if it has previously
+ *    been stolen
  *
  * Since: 2.26
  **/
@@ -691,6 +693,7 @@ g_memory_output_stream_close_async (GOutputStream       *stream,
   GTask *task;
 
   task = g_task_new (stream, cancellable, callback, data);
+  g_task_set_source_tag (task, g_memory_output_stream_close_async);
 
   /* will always return TRUE */
   g_memory_output_stream_close (stream, cancellable, NULL);

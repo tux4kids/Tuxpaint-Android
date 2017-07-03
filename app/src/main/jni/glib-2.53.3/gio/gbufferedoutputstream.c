@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -704,6 +704,7 @@ g_buffered_output_stream_flush_async (GOutputStream        *stream,
   fdata->close_stream = FALSE;
 
   task = g_task_new (stream, cancellable, callback, data);
+  g_task_set_source_tag (task, g_buffered_output_stream_flush_async);
   g_task_set_task_data (task, fdata, free_flush_data);
   g_task_set_priority (task, io_priority);
 
@@ -735,6 +736,7 @@ g_buffered_output_stream_close_async (GOutputStream        *stream,
   fdata->close_stream = TRUE;
 
   task = g_task_new (stream, cancellable, callback, data);
+  g_task_set_source_tag (task, g_buffered_output_stream_close_async);
   g_task_set_task_data (task, fdata, free_flush_data);
   g_task_set_priority (task, io_priority);
 

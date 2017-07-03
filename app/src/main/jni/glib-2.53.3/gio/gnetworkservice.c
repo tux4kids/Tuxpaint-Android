@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -89,6 +89,7 @@ static void g_network_service_get_property (GObject      *object,
 static void                      g_network_service_connectable_iface_init       (GSocketConnectableIface *iface);
 static GSocketAddressEnumerator *g_network_service_connectable_enumerate        (GSocketConnectable      *connectable);
 static GSocketAddressEnumerator *g_network_service_connectable_proxy_enumerate  (GSocketConnectable      *connectable);
+static gchar                    *g_network_service_connectable_to_string        (GSocketConnectable      *connectable);
 
 G_DEFINE_TYPE_WITH_CODE (GNetworkService, g_network_service, G_TYPE_OBJECT,
                          G_ADD_PRIVATE (GNetworkService)
@@ -159,6 +160,7 @@ g_network_service_connectable_iface_init (GSocketConnectableIface *connectable_i
 {
   connectable_iface->enumerate = g_network_service_connectable_enumerate;
   connectable_iface->proxy_enumerate = g_network_service_connectable_proxy_enumerate;
+  connectable_iface->to_string = g_network_service_connectable_to_string;
 }
 
 static void
@@ -478,6 +480,8 @@ g_network_service_address_enumerator_next (GSocketAddressEnumerator  *enumerator
             {
               if (srv_enum->error == NULL)
                 srv_enum->error = error;
+              else
+                g_error_free (error);
               continue;
             }
 
@@ -541,6 +545,7 @@ g_network_service_address_enumerator_next_async (GSocketAddressEnumerator  *enum
   GTask *task;
 
   task = g_task_new (enumerator, cancellable, callback, user_data);
+  g_task_set_source_tag (task, g_network_service_address_enumerator_next_async);
 
   /* If we haven't yet resolved srv, do that */
   if (!srv_enum->srv->priv->targets)
@@ -742,4 +747,16 @@ g_network_service_connectable_proxy_enumerate (GSocketConnectable *connectable)
   srv_enum->use_proxy = TRUE;
 
   return addr_enum;
+}
+
+static gchar *
+g_network_service_connectable_to_string (GSocketConnectable *connectable)
+{
+  GNetworkService *service;
+
+  service = G_NETWORK_SERVICE (connectable);
+
+  return g_strdup_printf ("(%s, %s, %s, %s)", service->priv->service,
+                          service->priv->protocol, service->priv->domain,
+                          service->priv->scheme);
 }

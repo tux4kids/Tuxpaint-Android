@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -93,7 +93,7 @@ do_cmdline_test (gconstpointer d)
   gboolean res;
 
   err = NULL;
-g_print ("test cmdline: %s\n", test->cmdline);
+  g_printerr ("test cmdline: %s\n", test->cmdline);
   res = g_shell_parse_argv (test->cmdline, &argc, &argv, &err);
   if (test->error_code == -1)
     {

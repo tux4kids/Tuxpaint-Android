@@ -1,19 +1,18 @@
 /*
    Copyright (C) 2005 John McCutchan
 
-   The Gnome Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Library General Public License as
-   published by the Free Software Foundation; either version 2 of the
-   License, or (at your option) any later version.
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
 
-   The Gnome Library is distributed in the hope that it will be useful,
+   This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Library General Public License for more details.
+   Lesser General Public License for more details.
 
-   You should have received a copy of the GNU Library General Public
-   License along with the Gnome Library; see the file COPYING.LIB.  If not,
-   see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU Lesser General Public License
+   along with this library; if not, see <http://www.gnu.org/licenses/>.
 
    Authors:.
 		John McCutchan <john@johnmccutchan.com>
@@ -37,9 +36,10 @@ typedef struct ik_event_s {
    * then event1->pair == event2 and event2->pair == NULL.
    * It will result also in event1->pair->is_second_in_pair == TRUE */
   struct ik_event_s *pair;
+  gint64 timestamp; /* monotonic time that this was created */
 } ik_event_t;
 
-gboolean _ik_startup (void (*cb) (ik_event_t *event));
+gboolean _ik_startup (gboolean (*cb) (ik_event_t *event));
 
 ik_event_t *_ik_event_new_dummy (const char *name,
 				 gint32      wd,

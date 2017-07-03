@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,7 +24,10 @@
 
 #include "gresource.h"
 #include <gvdb/gvdb-reader.h>
-#include <gi18n.h>
+#include <gi18n-lib.h>
+#include <gstdio.h>
+#include <gio/gfile.h>
+#include <gio/gioerror.h>
 #include <gio/gmemoryinputstream.h>
 #include <gio/gzlibdecompressor.h>
 #include <gio/gconverterinputstream.h>
@@ -47,7 +50,7 @@ G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
  *
  * Applications and libraries often contain binary or textual data that is
  * really part of the application, rather than user data. For instance
- * #GtkBuilder .ui files, splashscreen images, GMenu markup xml, CSS files,
+ * #GtkBuilder .ui files, splashscreen images, GMenu markup XML, CSS files,
  * icons, etc. These are often shipped as files in `$datadir/appname`, or
  * manually included as literal strings in the code.
  *
@@ -68,7 +71,7 @@ G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
  * The only options currently supported are:
  *
  * `xml-stripblanks` which will use the xmllint command
- * to strip ignorable whitespace from the xml file. For this to work,
+ * to strip ignorable whitespace from the XML file. For this to work,
  * the `XMLLINT` environment variable must be set to the full path to
  * the xmllint executable, or xmllint must be in the `PATH`; otherwise
  * the preprocessing step is skipped.
@@ -80,8 +83,15 @@ G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
  * set to the full path to the gdk-pixbuf-pixdata executable; otherwise the resource compiler will
  * abort.
  *
+ * Resource files will be exported in the GResource namespace using the
+ * combination of the given `prefix` and the filename from the `file` element.
+ * The `alias` attribute can be used to alter the filename to expose them at a
+ * different location in the resource namespace. Typically, this is used to
+ * include files from a different source directory without exposing the source
+ * directory in the resource namespace, as in the example below.
+ *
  * Resource bundles are created by the [glib-compile-resources][glib-compile-resources] program
- * which takes an xml file that describes the bundle, and a set of files that the xml references. These
+ * which takes an XML file that describes the bundle, and a set of files that the XML references. These
  * are combined into a binary resource bundle.
  *
  * An example resource description:
@@ -92,6 +102,7 @@ G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
  *     <file>data/splashscreen.png</file>
  *     <file compressed="true">dialog.ui</file>
  *     <file preprocess="xml-stripblanks">menumarkup.xml</file>
+ *     <file alias="example.css">data/example.css</file>
  *   </gresource>
  * </gresources>
  * ]|
@@ -101,30 +112,67 @@ G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
  * /org/gtk/Example/data/splashscreen.png
  * /org/gtk/Example/dialog.ui
  * /org/gtk/Example/menumarkup.xml
+ * /org/gtk/Example/example.css
  * ]|
  *
- * Note that all resources in the process share the same namespace, so use java-style
+ * Note that all resources in the process share the same namespace, so use Java-style
  * path prefixes (like in the above example) to avoid conflicts.
  *
- * You can then use [glib-compile-resources][glib-compile-resources] to compile the xml to a
+ * You can then use [glib-compile-resources][glib-compile-resources] to compile the XML to a
  * binary bundle that you can load with g_resource_load(). However, its more common to use the --generate-source and
  * --generate-header arguments to create a source file and header to link directly into your application.
+ * This will generate `get_resource()`, `register_resource()` and
+ * `unregister_resource()` functions, prefixed by the `--c-name` argument passed
+ * to [glib-compile-resources][glib-compile-resources]. `get_resource()` returns
+ * the generated #GResource object. The register and unregister functions
+ * register the resource so its files can be accessed using
+ * g_resources_lookup_data().
  *
  * Once a #GResource has been created and registered all the data in it can be accessed globally in the process by
  * using API calls like g_resources_open_stream() to stream the data or g_resources_lookup_data() to get a direct pointer
- * to the data. You can also use uris like "resource:///org/gtk/Example/data/splashscreen.png" with #GFile to access
+ * to the data. You can also use URIs like "resource:///org/gtk/Example/data/splashscreen.png" with #GFile to access
  * the resource data.
+ *
+ * Some higher-level APIs, such as #GtkApplication, will automatically load
+ * resources from certain well-known paths in the resource namespace as a
+ * convenience. See the documentation for those APIs for details.
  *
  * There are two forms of the generated source, the default version uses the compiler support for constructor
  * and destructor functions (where available) to automatically create and register the #GResource on startup
- * or library load time. If you pass --manual-register two functions to register/unregister the resource is instead
- * created. This requires an explicit initialization call in your application/library, but it works on all platforms,
- * even on the minor ones where this is not available. (Constructor support is available for at least Win32, MacOS and Linux.)
+ * or library load time. If you pass `--manual-register`, two functions to register/unregister the resource are created
+ * instead. This requires an explicit initialization call in your application/library, but it works on all platforms,
+ * even on the minor ones where constructors are not supported. (Constructor support is available for at least Win32, Mac OS and Linux.)
  *
  * Note that resource data can point directly into the data segment of e.g. a library, so if you are unloading libraries
  * during runtime you need to be very careful with keeping around pointers to data from a resource, as this goes away
  * when the library is unloaded. However, in practice this is not generally a problem, since most resource accesses
- * is for your own resources, and resource data is often used once, during parsing, and then released.
+ * are for your own resources, and resource data is often used once, during parsing, and then released.
+ *
+ * When debugging a program or testing a change to an installed version, it is often useful to be able to
+ * replace resources in the program or library, without recompiling, for debugging or quick hacking and testing
+ * purposes. Since GLib 2.50, it is possible to use the `G_RESOURCE_OVERLAYS` environment variable to selectively overlay
+ * resources with replacements from the filesystem.  It is a colon-separated list of substitutions to perform
+ * during resource lookups.
+ *
+ * A substitution has the form
+ *
+ * |[
+ *    /org/gtk/libgtk=/home/desrt/gtk-overlay
+ * ]|
+ *
+ * The part before the `=` is the resource subpath for which the overlay applies.  The part after is a
+ * filesystem path which contains files and subdirectories as you would like to be loaded as resources with the
+ * equivalent names.
+ *
+ * In the example above, if an application tried to load a resource with the resource path
+ * `/org/gtk/libgtk/ui/gtkdialog.ui` then GResource would check the filesystem path
+ * `/home/desrt/gtk-overlay/ui/gtkdialog.ui`.  If a file was found there, it would be used instead.  This is an
+ * overlay, not an outright replacement, which means that if a file is not found at that path, the built-in
+ * version will be used instead.  Whiteouts are not currently supported.
+ *
+ * Substitutions must start with a slash, and must not contain a trailing slash before the '='.  The path after
+ * the slash should ideally be absolute, but this is not strictly required.  It is possible to overlay the
+ * location of a single resource with an individual file.
  *
  * Since: 2.32
  */
@@ -135,6 +183,266 @@ G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
  * #GStaticResource is an opaque data structure and can only be accessed
  * using the following functions.
  **/
+typedef gboolean (* CheckCandidate) (const gchar *candidate, gpointer user_data);
+
+static gboolean
+open_overlay_stream (const gchar *candidate,
+                     gpointer     user_data)
+{
+  GInputStream **res = (GInputStream **) user_data;
+  GError *error = NULL;
+  GFile *file;
+
+  file = g_file_new_for_path (candidate);
+  *res = (GInputStream *) g_file_read (file, NULL, &error);
+
+  if (*res)
+    {
+      g_message ("Opened file '%s' as a resource overlay", candidate);
+    }
+  else
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND))
+        g_warning ("Can't open overlay file '%s': %s", candidate, error->message);
+      g_error_free (error);
+    }
+
+  g_object_unref (file);
+
+  return *res != NULL;
+}
+
+static gboolean
+get_overlay_bytes (const gchar *candidate,
+                   gpointer     user_data)
+{
+  GBytes **res = (GBytes **) user_data;
+  GMappedFile *mapped_file;
+  GError *error = NULL;
+
+  mapped_file = g_mapped_file_new (candidate, FALSE, &error);
+
+  if (mapped_file)
+    {
+      g_message ("Mapped file '%s' as a resource overlay", candidate);
+      *res = g_mapped_file_get_bytes (mapped_file);
+      g_mapped_file_unref (mapped_file);
+    }
+  else
+    {
+      if (!g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
+        g_warning ("Can't mmap overlay file '%s': %s", candidate, error->message);
+      g_error_free (error);
+    }
+
+  return *res != NULL;
+}
+
+static gboolean
+enumerate_overlay_dir (const gchar *candidate,
+                       gpointer     user_data)
+{
+  GHashTable **hash = (GHashTable **) user_data;
+  GError *error = NULL;
+  GDir *dir;
+  const gchar *name;
+
+  dir = g_dir_open (candidate, 0, &error);
+  if (dir)
+    {
+      if (*hash == NULL)
+        /* note: keep in sync with same line below */
+        *hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+
+      g_message ("Enumerating directory '%s' as resource overlay", candidate);
+
+      while ((name = g_dir_read_name (dir)))
+        {
+          gchar *fullname = g_build_filename (candidate, name, NULL);
+
+          /* match gvdb behaviour by suffixing "/" on dirs */
+          if (g_file_test (fullname, G_FILE_TEST_IS_DIR))
+            g_hash_table_add (*hash, g_strconcat (name, "/", NULL));
+          else
+            g_hash_table_add (*hash, g_strdup (name));
+
+          g_free (fullname);
+        }
+
+      g_dir_close (dir);
+    }
+  else
+    {
+      if (!g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
+        g_warning ("Can't enumerate overlay directory '%s': %s", candidate, error->message);
+      g_error_free (error);
+      return FALSE;
+    }
+
+  /* We may want to enumerate results from more than one overlay
+   * directory.
+   */
+  return FALSE;
+}
+
+static gboolean
+g_resource_find_overlay (const gchar    *path,
+                         CheckCandidate  check,
+                         gpointer        user_data)
+{
+  /* This is a null-terminated array of replacement strings (with '=' inside) */
+  static const gchar * const *overlay_dirs;
+  gboolean res = FALSE;
+  gint path_len = -1;
+  gint i;
+
+  /* We try to be very fast in case there are no overlays.  Otherwise,
+   * we can take a bit more time...
+   */
+
+  if (g_once_init_enter (&overlay_dirs))
+    {
+      const gchar * const *result;
+      const gchar *envvar;
+
+      envvar = g_getenv ("G_RESOURCE_OVERLAYS");
+      if (envvar != NULL)
+        {
+          gchar **parts;
+          gint i, j;
+
+          parts = g_strsplit (envvar, ":", 0);
+
+          /* Sanity check the parts, dropping those that are invalid.
+           * 'i' may grow faster than 'j'.
+           */
+          for (i = j = 0; parts[i]; i++)
+            {
+              gchar *part = parts[i];
+              gchar *eq;
+
+              eq = strchr (part, '=');
+              if (eq == NULL)
+                {
+                  g_critical ("G_RESOURCE_OVERLAYS segment '%s' lacks '='.  Ignoring.", part);
+                  g_free (part);
+                  continue;
+                }
+
+              if (eq == part)
+                {
+                  g_critical ("G_RESOURCE_OVERLAYS segment '%s' lacks path before '='.  Ignoring.", part);
+                  g_free (part);
+                  continue;
+                }
+
+              if (eq[1] == '\0')
+                {
+                  g_critical ("G_RESOURCE_OVERLAYS segment '%s' lacks path after '='.  Ignoring", part);
+                  g_free (part);
+                  continue;
+                }
+
+              if (part[0] != '/')
+                {
+                  g_critical ("G_RESOURCE_OVERLAYS segment '%s' lacks leading '/'.  Ignoring.", part);
+                  g_free (part);
+                  continue;
+                }
+
+              if (eq[-1] == '/')
+                {
+                  g_critical ("G_RESOURCE_OVERLAYS segment '%s' has trailing '/' before '='.  Ignoring", part);
+                  g_free (part);
+                  continue;
+                }
+
+              if (eq[1] != '/')
+                {
+                  g_critical ("G_RESOURCE_OVERLAYS segment '%s' lacks leading '/' after '='.  Ignoring", part);
+                  g_free (part);
+                  continue;
+                }
+
+              g_message ("Adding GResources overlay '%s'", part);
+              parts[j++] = part;
+            }
+
+          parts[j] = NULL;
+
+          result = (const gchar **) parts;
+        }
+      else
+        {
+          /* We go out of the way to avoid malloc() in the normal case
+           * where the environment variable is not set.
+           */
+          static const gchar * const empty_strv[0 + 1];
+          result = empty_strv;
+        }
+
+      g_once_init_leave (&overlay_dirs, result);
+    }
+
+  for (i = 0; overlay_dirs[i]; i++)
+    {
+      const gchar *src;
+      gint src_len;
+      const gchar *dst;
+      gint dst_len;
+      gchar *candidate;
+
+      {
+        gchar *eq;
+
+        /* split the overlay into src/dst */
+        src = overlay_dirs[i];
+        eq = strchr (src, '=');
+        g_assert (eq); /* we checked this already */
+        src_len = eq - src;
+        dst = eq + 1;
+        /* hold off on dst_len because we will probably fail the checks below */
+      }
+
+      if (path_len == -1)
+        path_len = strlen (path);
+
+      /* The entire path is too short to match the source */
+      if (path_len < src_len)
+        continue;
+
+      /* It doesn't match the source */
+      if (memcmp (path, src, src_len) != 0)
+        continue;
+
+      /* The prefix matches, but it's not a complete path component */
+      if (path[src_len] && path[src_len] != '/')
+        continue;
+
+      /* OK.  Now we need this. */
+      dst_len = strlen (dst);
+
+      /* The candidate will be composed of:
+       *
+       *    dst + remaining_path + nul
+       */
+      candidate = g_malloc (dst_len + (path_len - src_len) + 1);
+      memcpy (candidate, dst, dst_len);
+      memcpy (candidate + dst_len, path + src_len, path_len - src_len);
+      candidate[dst_len + (path_len - src_len)] = '\0';
+
+      /* No matter what, 'r' is what we need, including the case where
+       * we are trying to enumerate a directory.
+       */
+      res = (* check) (candidate, user_data);
+      g_free (candidate);
+
+      if (res)
+        break;
+    }
+
+  return res;
+}
 
 /**
  * g_resource_error_quark:
@@ -151,7 +459,7 @@ G_DEFINE_QUARK (g-resource-error-quark, g_resource_error)
  * g_resource_ref:
  * @resource: A #GResource
  *
- * Atomically increments the reference count of @array by one. This
+ * Atomically increments the reference count of @resource by one. This
  * function is MT-safe and may be called from any thread.
  *
  * Returns: The passed in #GResource
@@ -170,7 +478,7 @@ g_resource_ref (GResource *resource)
  * @resource: A #GResource
  *
  * Atomically decrements the reference count of @resource by one. If the
- * reference count drops to 0, all memory allocated by the array is
+ * reference count drops to 0, all memory allocated by the resource is
  * released. This function is MT-safe and may be called from any
  * thread.
  *
@@ -295,7 +603,7 @@ gboolean do_lookup (GResource             *resource,
   if (value == NULL)
     {
       g_set_error (error, G_RESOURCE_ERROR, G_RESOURCE_ERROR_NOT_FOUND,
-                   _("The resource at '%s' does not exist"),
+                   _("The resource at “%s” does not exist"),
                    path);
     }
   else
@@ -460,7 +768,7 @@ g_resource_lookup_data (GResource             *resource,
               g_object_unref (decompressor);
 
               g_set_error (error, G_RESOURCE_ERROR, G_RESOURCE_ERROR_INTERNAL,
-                           _("The resource at '%s' failed to decompress"),
+                           _("The resource at “%s” failed to decompress"),
                            path);
               return NULL;
 
@@ -487,9 +795,9 @@ g_resource_lookup_data (GResource             *resource,
  * @resource: A #GResource
  * @path: A pathname inside the resource
  * @lookup_flags: A #GResourceLookupFlags
- * @size:  (out) (allow-none): a location to place the length of the contents of the file,
+ * @size:  (out) (optional): a location to place the length of the contents of the file,
  *    or %NULL if the length is not needed
- * @flags:  (out) (allow-none): a location to place the flags about the file,
+ * @flags:  (out) (optional): a location to place the flags about the file,
  *    or %NULL if the length is not needed
  * @error: return location for a #GError, or %NULL
  *
@@ -524,6 +832,9 @@ g_resource_get_info (GResource             *resource,
  * The return result is a %NULL terminated list of strings which should
  * be released with g_strfreev().
  *
+ * If @path is invalid or does not exist in the #GResource,
+ * %G_RESOURCE_ERROR_NOT_FOUND will be returned.
+ *
  * @lookup_flags controls the behaviour of the lookup.
  *
  * Returns: (array zero-terminated=1) (transfer full): an array of constant strings
@@ -543,7 +854,7 @@ g_resource_enumerate_children (GResource             *resource,
   if (*path == 0)
     {
       g_set_error (error, G_RESOURCE_ERROR, G_RESOURCE_ERROR_NOT_FOUND,
-                   _("The resource at '%s' does not exist"),
+                   _("The resource at “%s” does not exist"),
                    path);
       return NULL;
     }
@@ -560,7 +871,7 @@ g_resource_enumerate_children (GResource             *resource,
   if (children == NULL)
     {
       g_set_error (error, G_RESOURCE_ERROR, G_RESOURCE_ERROR_NOT_FOUND,
-                   _("The resource at '%s' does not exist"),
+                   _("The resource at “%s” does not exist"),
                    path);
       return NULL;
     }
@@ -655,6 +966,9 @@ g_resources_open_stream (const gchar           *path,
   GList *l;
   GInputStream *stream;
 
+  if (g_resource_find_overlay (path, open_overlay_stream, &res))
+    return res;
+
   register_lazy_static_resources ();
 
   g_rw_lock_reader_lock (&resources_lock);
@@ -681,7 +995,7 @@ g_resources_open_stream (const gchar           *path,
 
   if (l == NULL)
     g_set_error (error, G_RESOURCE_ERROR, G_RESOURCE_ERROR_NOT_FOUND,
-                 _("The resource at '%s' does not exist"),
+                 _("The resource at “%s” does not exist"),
                  path);
 
   g_rw_lock_reader_unlock (&resources_lock);
@@ -724,6 +1038,9 @@ g_resources_lookup_data (const gchar           *path,
   GList *l;
   GBytes *data;
 
+  if (g_resource_find_overlay (path, get_overlay_bytes, &res))
+    return res;
+
   register_lazy_static_resources ();
 
   g_rw_lock_reader_lock (&resources_lock);
@@ -750,7 +1067,7 @@ g_resources_lookup_data (const gchar           *path,
 
   if (l == NULL)
     g_set_error (error, G_RESOURCE_ERROR, G_RESOURCE_ERROR_NOT_FOUND,
-                 _("The resource at '%s' does not exist"),
+                 _("The resource at “%s” does not exist"),
                  path);
 
   g_rw_lock_reader_unlock (&resources_lock);
@@ -785,6 +1102,17 @@ g_resources_enumerate_children (const gchar           *path,
   char **children;
   int i;
 
+  /* This will enumerate actual files found in overlay directories but
+   * will not enumerate the overlays themselves.  For example, if we
+   * have an overlay "/org/gtk=/path/to/files" and we enumerate "/org"
+   * then we will not see "gtk" in the result set unless it is provided
+   * by another resource file.
+   *
+   * This is probably not going to be a problem since if we are doing
+   * such an overlay, we probably will already have that path.
+   */
+  g_resource_find_overlay (path, enumerate_overlay_dir, &hash);
+
   register_lazy_static_resources ();
 
   g_rw_lock_reader_lock (&resources_lock);
@@ -798,10 +1126,11 @@ g_resources_enumerate_children (const gchar           *path,
       if (children != NULL)
         {
           if (hash == NULL)
+            /* note: keep in sync with same line above */
             hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
           for (i = 0; children[i] != NULL; i++)
-            g_hash_table_insert (hash, children[i], children[i]);
+            g_hash_table_add (hash, children[i]);
           g_free (children);
         }
     }
@@ -811,24 +1140,14 @@ g_resources_enumerate_children (const gchar           *path,
   if (hash == NULL)
     {
       g_set_error (error, G_RESOURCE_ERROR, G_RESOURCE_ERROR_NOT_FOUND,
-                   _("The resource at '%s' does not exist"),
+                   _("The resource at “%s” does not exist"),
                    path);
       return NULL;
     }
   else
     {
-      GHashTableIter iter;
-      const char *key;
-      guint n_children;
-      n_children = g_hash_table_size (hash);
-      children = g_new (char *, n_children + 1);
-      i = 0;
-
-      g_hash_table_iter_init (&iter, hash);
-      while (g_hash_table_iter_next (&iter, (gpointer *)&key, NULL))
-        children[i++] = g_strdup (key);
-      children[i++] = NULL;
-
+      children = (gchar **) g_hash_table_get_keys_as_array (hash, NULL);
+      g_hash_table_steal_all (hash);
       g_hash_table_destroy (hash);
 
       return children;
@@ -839,9 +1158,9 @@ g_resources_enumerate_children (const gchar           *path,
  * g_resources_get_info:
  * @path: A pathname inside the resource
  * @lookup_flags: A #GResourceLookupFlags
- * @size:  (out) (allow-none): a location to place the length of the contents of the file,
+ * @size:  (out) (optional): a location to place the length of the contents of the file,
  *    or %NULL if the length is not needed
- * @flags:  (out) (allow-none): a location to place the flags about the file,
+ * @flags:  (out) (optional): a location to place the flags about the file,
  *    or %NULL if the length is not needed
  * @error: return location for a #GError, or %NULL
  *
@@ -891,7 +1210,7 @@ g_resources_get_info (const gchar           *path,
 
   if (l == NULL)
     g_set_error (error, G_RESOURCE_ERROR, G_RESOURCE_ERROR_NOT_FOUND,
-                 _("The resource at '%s' does not exist"),
+                 _("The resource at “%s” does not exist"),
                  path);
 
   g_rw_lock_reader_unlock (&resources_lock);

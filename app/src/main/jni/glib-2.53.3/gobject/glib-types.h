@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -356,13 +356,6 @@ GType   g_option_group_get_type    (void) G_GNUC_CONST;
 
 GLIB_DEPRECATED_FOR('G_TYPE_VARIANT')
 GType   g_variant_get_gtype        (void) G_GNUC_CONST;
-
-/**
- * GStrv:
- *
- * A C representable type name for #G_TYPE_STRV.
- */
-typedef gchar** GStrv;
 
 G_END_DECLS
 

@@ -75,9 +75,24 @@ Print help and exit
 </varlistentry>
 
 <varlistentry>
+<term><option>--version</option></term>
+<listitem><para>
+Print program version and exit
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
 <term><option>--targetdir=<replaceable>TARGET</replaceable></option></term>
 <listitem><para>
 Store <filename>gschemas.compiled</filename> in the <replaceable>TARGET</replaceable> directory instead of <replaceable>DIRECTORY</replaceable>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--strict</option></term>
+<listitem><para>
+Abort on any errors in schemas. Without this option, faulty schema files are
+simply omitted from the resulting compiled schema.
 </para></listitem>
 </varlistentry>
 

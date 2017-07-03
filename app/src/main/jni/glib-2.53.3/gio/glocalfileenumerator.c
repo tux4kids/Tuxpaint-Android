@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -76,7 +76,7 @@ struct _GLocalFileEnumerator
 };
 
 #define g_local_file_enumerator_get_type _g_local_file_enumerator_get_type
-G_DEFINE_TYPE (GLocalFileEnumerator, g_local_file_enumerator, G_TYPE_FILE_ENUMERATOR);
+G_DEFINE_TYPE (GLocalFileEnumerator, g_local_file_enumerator, G_TYPE_FILE_ENUMERATOR)
 
 static GFileInfo *g_local_file_enumerator_next_file (GFileEnumerator  *enumerator,
 						     GCancellable     *cancellable,
@@ -232,11 +232,15 @@ _g_local_file_enumerator_new (GLocalFile *file,
   dir = opendir (filename);
   if (dir == NULL)
     {
+      gchar *utf8_filename;
       errsv = errno;
 
-      g_set_error_literal (error, G_IO_ERROR,
-                           g_io_error_from_errno (errsv),
-                           g_strerror (errsv));
+      utf8_filename = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
+      g_set_error (error, G_IO_ERROR,
+                   g_io_error_from_errno (errsv),
+                   "Error opening directory '%s': %s",
+                   utf8_filename, g_strerror (errsv));
+      g_free (utf8_filename);
       g_free (filename);
       return NULL;
     }

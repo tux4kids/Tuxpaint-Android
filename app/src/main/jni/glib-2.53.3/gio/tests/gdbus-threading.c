@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -295,8 +295,8 @@ test_sleep_in_thread_func (gpointer _data)
                              (GAsyncReadyCallback) sleep_cb,
                              data);
           g_main_loop_run (data->thread_loop);
-          if (!g_test_quiet ())
-            g_print ("A");
+          if (g_test_verbose ())
+            g_printerr ("A");
           //g_debug ("done invoking async (%p)", g_thread_self ());
         }
       else
@@ -313,8 +313,8 @@ test_sleep_in_thread_func (gpointer _data)
                                            -1,
                                            NULL,
                                            &error);
-          if (!g_test_quiet ())
-            g_print ("S");
+          if (g_test_verbose ())
+            g_printerr ("S");
           //g_debug ("done invoking sync (%p)", g_thread_self ());
           g_assert_no_error (error);
           g_assert (result != NULL);
@@ -408,8 +408,8 @@ test_method_calls_on_proxy (GDBusProxy *proxy)
       g_assert_cmpint (elapsed_msec, >=, 3950);
       g_assert_cmpint (elapsed_msec,  <, 8000);
 
-      if (!g_test_quiet ())
-        g_print (" ");
+      if (g_test_verbose ())
+        g_printerr (" ");
     }
 }
 
@@ -419,7 +419,6 @@ test_method_calls_in_thread (void)
   GDBusProxy *proxy;
   GDBusConnection *connection;
   GError *error;
-  gchar *name_owner;
 
   error = NULL;
   connection = g_bus_get_sync (G_BUS_TYPE_SESSION,
@@ -437,17 +436,13 @@ test_method_calls_in_thread (void)
                                  &error);
   g_assert_no_error (error);
 
-  name_owner = g_dbus_proxy_get_name_owner (proxy);
-  g_assert_cmpstr (name_owner, !=, NULL);
-  g_free (name_owner);
-
   test_method_calls_on_proxy (proxy);
 
   g_object_unref (proxy);
   g_object_unref (connection);
 
-  if (!g_test_quiet ())
-    g_print ("\n");
+  if (g_test_verbose ())
+    g_printerr ("\n");
 }
 
 #define SLEEP_MIN_USEC 1
@@ -532,7 +527,7 @@ test_threaded_singleton (void)
         g_error ("connection had too many refs");
 
       if (g_test_verbose () && (i % (n/50)) == 0)
-        g_print ("%u%%\n", ((i * 100) / n));
+        g_printerr ("%u%%\n", ((i * 100) / n));
 
       /* Delay for a random time on each side of the race, to perturb the
        * timing. Ideally, we want each side to win half the races; these
@@ -574,7 +569,7 @@ test_threaded_singleton (void)
     }
 
   if (g_test_verbose ())
-    g_print ("Unref won %u races; Get won %u races\n", unref_wins, get_wins);
+    g_printerr ("Unref won %u races; Get won %u races\n", unref_wins, get_wins);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -596,8 +591,7 @@ main (int   argc,
   g_assert (g_spawn_command_line_async (path, NULL));
   g_free (path);
 
-  /* wait for the service to come up */
-  usleep (500 * 1000);
+  ensure_gdbus_testserver_up ();
 
   /* Create the connection in the main thread */
   error = NULL;

@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -960,6 +960,36 @@ g_thread_pool_set_sort_function (GThreadPool      *pool,
                                  real->sort_user_data);
 
   g_async_queue_unlock (real->queue);
+}
+
+/**
+ * g_thread_pool_move_to_front:
+ * @pool: a #GThreadPool
+ * @data: an unprocessed item in the pool
+ *
+ * Moves the item to the front of the queue of unprocessed
+ * items, so that it will be processed next.
+ *
+ * Returns: %TRUE if the item was found and moved
+ *
+ * Since: 2.46
+ */
+gboolean
+g_thread_pool_move_to_front (GThreadPool *pool,
+                             gpointer     data)
+{
+  GRealThreadPool *real = (GRealThreadPool*) pool;
+  gboolean found;
+
+  g_async_queue_lock (real->queue);
+
+  found = g_async_queue_remove_unlocked (real->queue, data);
+  if (found)
+    g_async_queue_push_front_unlocked (real->queue, data);
+
+  g_async_queue_unlock (real->queue);
+
+  return found;
 }
 
 /**

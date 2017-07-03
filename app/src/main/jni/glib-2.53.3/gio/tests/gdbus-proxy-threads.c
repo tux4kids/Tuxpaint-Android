@@ -6,7 +6,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -71,8 +71,8 @@ run_proxy_thread (gpointer data)
       GError *error = NULL;
       GVariant *ret;
 
-      if (!g_test_quiet ())
-        g_print (".");
+      if (g_test_verbose ())
+        g_printerr (".");
 
       proxy = g_dbus_proxy_new_sync (connection,
                                      G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START |
@@ -232,8 +232,8 @@ test_proxy (void)
   /* TODO: should call session_bus_down() but that requires waiting
    * for all the oustanding method calls to complete...
    */
-  if (!g_test_quiet ())
-    g_print ("\n");
+  if (g_test_verbose ())
+    g_printerr ("\n");
 }
 
 int

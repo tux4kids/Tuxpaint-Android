@@ -15,10 +15,8 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
- * USA.
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Authors: Christian Hergert <chris@dronelabs.com>
  *          Thiago Santos <thiago.sousa.santos@collabora.co.uk>
@@ -131,6 +129,8 @@ struct _GDateTime
   ((instant)/USEC_PER_SECOND - UNIX_EPOCH_START * SEC_PER_DAY)
 #define UNIX_TO_INSTANT(unix) \
   (((unix) + UNIX_EPOCH_START * SEC_PER_DAY) * USEC_PER_SECOND)
+#define UNIX_TO_INSTANT_IS_VALID(unix) \
+  ((gint64) (unix) <= INSTANT_TO_UNIX (G_MAXINT64))
 
 #define DAYS_IN_4YEARS    1461    /* days in 4 years */
 #define DAYS_IN_100YEARS  36524   /* days in 100 years */
@@ -196,11 +196,7 @@ static const gint month_item[2][12] =
 
 #else
 
-#define GET_AMPM(d)          ((g_date_time_get_hour (d) < 12)  \
-                                       /* Translators: 'before midday' indicator */ \
-                                ? C_("GDateTime", "AM") \
-                                  /* Translators: 'after midday' indicator */ \
-                                : C_("GDateTime", "PM"))
+#define GET_AMPM(d)          (get_fallback_ampm (g_date_time_get_hour (d)))
 
 /* Translators: this is the preferred format for expressing the date and the time */
 #define PREFERRED_DATE_TIME_FMT C_("GDateTime", "%a %b %e %H:%M:%S %Y")
@@ -348,6 +344,18 @@ get_weekday_name_abbr (gint day)
 }
 
 #endif  /* HAVE_LANGINFO_TIME */
+
+/* Format AM/PM indicator if the locale does not have a localized version. */
+static const gchar *
+get_fallback_ampm (gint hour)
+{
+  if (hour < 12)
+    /* Translators: 'before midday' indicator */
+    return C_("GDateTime", "AM");
+  else
+    /* Translators: 'after midday' indicator */
+    return C_("GDateTime", "PM");
+}
 
 static inline gint
 ymd_to_days (gint year,
@@ -644,6 +652,10 @@ static GDateTime *
 g_date_time_new_from_timeval (GTimeZone      *tz,
                               const GTimeVal *tv)
 {
+  if ((gint64) tv->tv_sec > G_MAXINT64 - 1 ||
+      !UNIX_TO_INSTANT_IS_VALID ((gint64) tv->tv_sec + 1))
+    return NULL;
+
   return g_date_time_from_instant (tz, tv->tv_usec +
                                    UNIX_TO_INSTANT (tv->tv_sec));
 }
@@ -673,6 +685,9 @@ static GDateTime *
 g_date_time_new_from_unix (GTimeZone *tz,
                            gint64     secs)
 {
+  if (!UNIX_TO_INSTANT_IS_VALID (secs))
+    return NULL;
+
   return g_date_time_from_instant (tz, UNIX_TO_INSTANT (secs));
 }
 
@@ -1363,8 +1378,8 @@ g_date_time_add_full (GDateTime *datetime,
 /* Compare, difference, hash, equal {{{1 */
 /**
  * g_date_time_compare:
- * @dt1: first #GDateTime to compare
- * @dt2: second #GDateTime to compare
+ * @dt1: (not nullable): first #GDateTime to compare
+ * @dt2: (not nullable): second #GDateTime to compare
  *
  * A comparison function for #GDateTimes that is suitable
  * as a #GCompareFunc. Both #GDateTimes must be non-%NULL.
@@ -1419,7 +1434,7 @@ g_date_time_difference (GDateTime *end,
 
 /**
  * g_date_time_hash:
- * @datetime: a #GDateTime
+ * @datetime: (not nullable): a #GDateTime
  *
  * Hashes @datetime into a #guint, suitable for use within #GHashTable.
  *
@@ -1435,8 +1450,8 @@ g_date_time_hash (gconstpointer datetime)
 
 /**
  * g_date_time_equal:
- * @dt1: a #GDateTime
- * @dt2: a #GDateTime
+ * @dt1: (not nullable): a #GDateTime
+ * @dt2: (not nullable): a #GDateTime
  *
  * Checks to see if @dt1 and @dt2 are equal.
  *
@@ -1458,9 +1473,9 @@ g_date_time_equal (gconstpointer dt1,
 /**
  * g_date_time_get_ymd:
  * @datetime: a #GDateTime.
- * @year: (out) (allow-none): the return location for the gregorian year, or %NULL.
- * @month: (out) (allow-none): the return location for the month of the year, or %NULL.
- * @day: (out) (allow-none): the return location for the day of the month, or %NULL.
+ * @year: (out) (optional): the return location for the gregorian year, or %NULL.
+ * @month: (out) (optional): the return location for the month of the year, or %NULL.
+ * @day: (out) (optional): the return location for the day of the month, or %NULL.
  *
  * Retrieves the Gregorian day, month, and year of a given #GDateTime.
  *
@@ -2198,6 +2213,52 @@ format_number (GString  *str,
     g_string_append (str, tmp[--i]);
 }
 
+static gboolean
+format_ampm (GDateTime *datetime,
+             GString   *outstr,
+             gboolean   locale_is_utf8,
+             gboolean   uppercase)
+{
+  const gchar *ampm;
+  gchar       *tmp, *ampm_dup;
+  gsize        len;
+
+  ampm = GET_AMPM (datetime);
+
+  if (!ampm || ampm[0] == '\0')
+    ampm = get_fallback_ampm (g_date_time_get_hour (datetime));
+
+#if defined (HAVE_LANGINFO_TIME)
+  if (!locale_is_utf8)
+    {
+      /* This assumes that locale encoding can't have embedded NULs */
+      ampm = tmp = g_locale_to_utf8 (ampm, -1, NULL, NULL, NULL);
+      if (!tmp)
+        return FALSE;
+    }
+#endif
+  if (uppercase)
+    ampm_dup = g_utf8_strup (ampm, -1);
+  else
+    ampm_dup = g_utf8_strdown (ampm, -1);
+  len = strlen (ampm_dup);
+  if (!locale_is_utf8)
+    {
+#if defined (HAVE_LANGINFO_TIME)
+      g_free (tmp);
+#endif
+      tmp = g_locale_from_utf8 (ampm_dup, -1, NULL, &len, NULL);
+      g_free (ampm_dup);
+      if (!tmp)
+        return FALSE;
+      ampm_dup = tmp;
+    }
+  g_string_append_len (outstr, ampm_dup, len);
+  g_free (ampm_dup);
+
+  return TRUE;
+}
+
 static gboolean g_date_time_format_locale (GDateTime   *datetime,
 					   const gchar *format,
 					   GString     *outstr,
@@ -2241,11 +2302,12 @@ g_date_time_format_locale (GDateTime   *datetime,
   guint     len;
   guint     colons;
   gchar    *tmp;
+  gsize     tmp_len;
   gunichar  c;
   gboolean  alt_digits = FALSE;
   gboolean  pad_set = FALSE;
   gchar    *pad = "";
-  gchar    *ampm;
+  const gchar *name;
   const gchar *tz;
 
   while (*format)
@@ -2257,10 +2319,10 @@ g_date_time_format_locale (GDateTime   *datetime,
 	    g_string_append_len (outstr, format, len);
 	  else
 	    {
-	      tmp = g_locale_from_utf8 (format, len, NULL, NULL, NULL);
+	      tmp = g_locale_from_utf8 (format, len, NULL, &tmp_len, NULL);
 	      if (!tmp)
 		return FALSE;
-	      g_string_append (outstr, tmp);
+	      g_string_append_len (outstr, tmp, tmp_len);
 	      g_free (tmp);
 	    }
 	}
@@ -2284,16 +2346,72 @@ g_date_time_format_locale (GDateTime   *datetime,
       switch (c)
 	{
 	case 'a':
-	  g_string_append (outstr, WEEKDAY_ABBR (datetime));
+	  name = WEEKDAY_ABBR (datetime);
+#if !defined (HAVE_LANGINFO_TIME)
+	  if (!locale_is_utf8)
+	    {
+	      tmp = g_locale_from_utf8 (name, -1, NULL, &tmp_len, NULL);
+	      if (!tmp)
+		return FALSE;
+	      g_string_append_len (outstr, tmp, tmp_len);
+	      g_free (tmp);
+	    }
+	  else
+#endif
+	    {
+	      g_string_append (outstr, name);
+	    }
 	  break;
 	case 'A':
-	  g_string_append (outstr, WEEKDAY_FULL (datetime));
+	  name = WEEKDAY_FULL (datetime);
+#if !defined (HAVE_LANGINFO_TIME)
+	  if (!locale_is_utf8)
+	    {
+	      tmp = g_locale_from_utf8 (name, -1, NULL, &tmp_len, NULL);
+	      if (!tmp)
+		return FALSE;
+	      g_string_append_len (outstr, tmp, tmp_len);
+	      g_free (tmp);
+	    }
+	  else
+#endif
+	    {
+	      g_string_append (outstr, name);
+	    }
 	  break;
 	case 'b':
-	  g_string_append (outstr, MONTH_ABBR (datetime));
+	  name = MONTH_ABBR (datetime);
+#if !defined (HAVE_LANGINFO_TIME)
+	  if (!locale_is_utf8)
+	    {
+	      tmp = g_locale_from_utf8 (name, -1, NULL, &tmp_len, NULL);
+	      if (!tmp)
+		return FALSE;
+	      g_string_append_len (outstr, tmp, tmp_len);
+	      g_free (tmp);
+	    }
+	  else
+#endif
+	    {
+	      g_string_append (outstr, name);
+	    }
 	  break;
 	case 'B':
-	  g_string_append (outstr, MONTH_FULL (datetime));
+	  name = MONTH_FULL (datetime);
+#if !defined (HAVE_LANGINFO_TIME)
+	  if (!locale_is_utf8)
+	    {
+	      tmp = g_locale_from_utf8 (name, -1, NULL, &tmp_len, NULL);
+	      if (!tmp)
+		return FALSE;
+	      g_string_append_len (outstr, tmp, tmp_len);
+	      g_free (tmp);
+	    }
+	  else
+#endif
+	    {
+	      g_string_append (outstr, name);
+	    }
 	  break;
 	case 'c':
 	  {
@@ -2329,7 +2447,21 @@ g_date_time_format_locale (GDateTime   *datetime,
 			 g_date_time_get_week_numbering_year (datetime));
 	  break;
 	case 'h':
-	  g_string_append (outstr, MONTH_ABBR (datetime));
+	  name = MONTH_ABBR (datetime);
+#if !defined (HAVE_LANGINFO_TIME)
+	  if (!locale_is_utf8)
+	    {
+	      tmp = g_locale_from_utf8 (name, -1, NULL, &tmp_len, NULL);
+	      if (!tmp)
+		return FALSE;
+	      g_string_append_len (outstr, tmp, tmp_len);
+	      g_free (tmp);
+	    }
+	  else
+#endif
+	    {
+	      g_string_append (outstr, name);
+	    }
 	  break;
 	case 'H':
 	  format_number (outstr, alt_digits, pad_set ? pad : "0", 2,
@@ -2366,46 +2498,12 @@ g_date_time_format_locale (GDateTime   *datetime,
 	  alt_digits = TRUE;
 	  goto next_mod;
 	case 'p':
-	  ampm = (gchar *) GET_AMPM (datetime);
-	  if (!locale_is_utf8)
-	    {
-	      ampm = tmp = g_locale_to_utf8 (ampm, -1, NULL, NULL, NULL);
-	      if (!tmp)
-		return FALSE;
-	    }
-	  ampm = g_utf8_strup (ampm, -1);
-	  if (!locale_is_utf8)
-	    {
-	      g_free (tmp);
-	      tmp = g_locale_from_utf8 (ampm, -1, NULL, NULL, NULL);
-	      g_free (ampm);
-	      if (!tmp)
-		return FALSE;
-	      ampm = tmp;
-	    }
-	  g_string_append (outstr, ampm);
-	  g_free (ampm);
-	  break;
+          if (!format_ampm (datetime, outstr, locale_is_utf8, TRUE))
+            return FALSE;
+          break;
 	case 'P':
-	  ampm = (gchar *) GET_AMPM (datetime);
-	  if (!locale_is_utf8)
-	    {
-	      ampm = tmp = g_locale_to_utf8 (ampm, -1, NULL, NULL, NULL);
-	      if (!tmp)
-		return FALSE;
-	    }
-	  ampm = g_utf8_strdown (ampm, -1);
-	  if (!locale_is_utf8)
-	    {
-	      g_free (tmp);
-	      tmp = g_locale_from_utf8 (ampm, -1, NULL, NULL, NULL);
-	      g_free (ampm);
-	      if (!tmp)
-		return FALSE;
-	      ampm = tmp;
-	    }
-	  g_string_append (outstr, ampm);
-	  g_free (ampm);
+          if (!format_ampm (datetime, outstr, locale_is_utf8, FALSE))
+            return FALSE;
 	  break;
 	case 'r':
 	  {
@@ -2472,23 +2570,21 @@ g_date_time_format_locale (GDateTime   *datetime,
 	case 'z':
 	  {
 	    gint64 offset;
-	    if (datetime->tz != NULL)
-	      offset = g_date_time_get_utc_offset (datetime) / USEC_PER_SECOND;
-	    else
-	      offset = 0;
+	    offset = g_date_time_get_utc_offset (datetime) / USEC_PER_SECOND;
 	    if (!format_z (outstr, (int) offset, colons))
 	      return FALSE;
 	  }
 	  break;
 	case 'Z':
 	  tz = g_date_time_get_timezone_abbreviation (datetime);
+	  tmp_len = strlen (tz);
 	  if (!locale_is_utf8)
 	    {
-	      tz = tmp = g_locale_from_utf8 (tz, -1, NULL, NULL, NULL);
+	      tz = tmp = g_locale_from_utf8 (tz, -1, NULL, &tmp_len, NULL);
 	      if (!tmp)
 		return FALSE;
 	    }
-	  g_string_append (outstr, tz);
+	  g_string_append_len (outstr, tz, tmp_len);
 	  if (!locale_is_utf8)
 	    g_free (tmp);
 	  break;
@@ -2546,7 +2642,7 @@ g_date_time_format_locale (GDateTime   *datetime,
  * - \%A: the full weekday name according to the current locale
  * - \%b: the abbreviated month name according to the current locale
  * - \%B: the full month name according to the current locale
- * - \%c: the  preferred date and time rpresentation for the current locale
+ * - \%c: the preferred date and time representation for the current locale
  * - \%C: the century number (year/100) as a 2-digit integer (00-99)
  * - \%d: the day of the month as a decimal number (range 01 to 31)
  * - \%e: the day of the month as a decimal number (range  1 to 31)

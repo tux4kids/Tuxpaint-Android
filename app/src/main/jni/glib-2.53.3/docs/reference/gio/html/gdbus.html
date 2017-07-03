@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>gdbus: GIO Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="tools.html" title="GIO Tools">
 <link rel="prev" href="glib-compile-resources.html" title="glib-compile-resources">
 <link rel="next" href="gdbus-codegen.html" title="gdbus-codegen">
-<meta name="generator" content="GTK-Doc V1.21.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -34,16 +34,17 @@
 <div class="cmdsynopsis"><p><code class="command">gdbus</code>   monitor  [ --system  |   --session  |   --address <em class="replaceable"><code>address</code></em> ]  --dest <em class="replaceable"><code>bus_name</code></em>  [ --object-path <em class="replaceable"><code>/path/to/object</code></em> ]</p></div>
 <div class="cmdsynopsis"><p><code class="command">gdbus</code>   call  [ --system  |   --session  |   --address <em class="replaceable"><code>address</code></em> ]  --dest <em class="replaceable"><code>bus_name</code></em>   --object-path <em class="replaceable"><code>/path/to/object</code></em>   --method <em class="replaceable"><code>org.project.InterfaceName.MethodName</code></em>  [ --timeout <em class="replaceable"><code>seconds</code></em> ]  ARG1   ARG2... </p></div>
 <div class="cmdsynopsis"><p><code class="command">gdbus</code>   emit  [ --system  |   --session  |   --address <em class="replaceable"><code>address</code></em> ]  --object-path <em class="replaceable"><code>/path/to/object</code></em>   --signal <em class="replaceable"><code>org.project.InterfaceName.SignalName</code></em>  [ --dest <em class="replaceable"><code>unique_bus_name</code></em> ]  ARG1   ARG2... </p></div>
+<div class="cmdsynopsis"><p><code class="command">gdbus</code>   wait  [ --system  |   --session  |   --address <em class="replaceable"><code>address</code></em> ]  --activate <em class="replaceable"><code>bus_name</code></em>  [ --timeout <em class="replaceable"><code>seconds</code></em> ]  <em class="replaceable"><code>bus_name</code></em> </p></div>
 <div class="cmdsynopsis"><p><code class="command">gdbus</code>   help </p></div>
 </div>
 <div class="refsect1">
-<a name="id-1.4.25.6.5"></a><h2>Description</h2>
+<a name="id-1.4.26.6.5"></a><h2>Description</h2>
 <p>
     <span class="command"><strong>gdbus</strong></span> is a simple tool for working with D-Bus objects.
   </p>
 </div>
 <div class="refsect1">
-<a name="id-1.4.25.6.6"></a><h2>Commands</h2>
+<a name="id-1.4.26.6.6"></a><h2>Commands</h2>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
 <col align="left" valign="top">
@@ -77,9 +78,9 @@
 <td><p>
           Invokes a method on a remote object.  Each argument to pass to the
           method must be specified as a serialized
-          <a href="https://developer.gnome.org/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> except that strings do
+          <a href="../glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> except that strings do
           not need explicit quotes. The return values are printed out as
-          serialized <a href="https://developer.gnome.org/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a>
+          serialized <a href="../glib-GVariant.html#GVariant"><span class="type">GVariant</span></a>
           values.
         </p></td>
 </tr>
@@ -87,8 +88,17 @@
 <td><p><span class="term"><code class="option">emit</code></span></p></td>
 <td><p>
           Emits a signal. Each argument to include in the signal must be specified as a serialized
-          <a href="https://developer.gnome.org/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> except that strings do
+          <a href="../glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> except that strings do
           not need explicit quotes.
+        </p></td>
+</tr>
+<tr>
+<td><p><span class="term"><code class="option">wait</code></span></p></td>
+<td><p>
+          Waits until <em class="replaceable"><code>bus_name</code></em> is owned by some
+          process on the bus. If the <code class="option">--activate</code> is specified,
+          that bus name will be auto-started first. It may be the same as the
+          bus name being waited for, or different.
         </p></td>
 </tr>
 <tr>
@@ -101,7 +111,7 @@
 </table></div>
 </div>
 <div class="refsect1">
-<a name="id-1.4.25.6.7"></a><h2>Bash Completion</h2>
+<a name="id-1.4.26.6.7"></a><h2>Bash Completion</h2>
 <p>
     <span class="command"><strong>gdbus</strong></span> ships with a bash completion script to
     complete commands, destinations, bus names, object paths and
@@ -109,7 +119,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id-1.4.25.6.8"></a><h2>Examples</h2>
+<a name="id-1.4.26.6.8"></a><h2>Examples</h2>
   This shows how to introspect an object - note that the value of each
   property is displayed:
 <pre class="programlisting">
@@ -277,9 +287,37 @@ $ gdbus emit --session --object-path /foo --signal org.bar.Foo "['foo', 'bar', '
 <pre class="programlisting">
 $ gdbus emit --session --object-path /bar --signal org.bar.Bar someString --dest :1.42
 </pre>
+<p>
+  Waiting for a well-known name to be owned on the bus; this will
+  <span class="emphasis"><em>not</em></span> auto-start the service:
+</p>
+<pre class="programlisting">
+$ gdbus wait --session org.bar.SomeName
+</pre>
+<p>
+  Auto-starting then waiting for a well-known name to be owned on the bus:
+</p>
+<pre class="programlisting">
+$ gdbus wait --session --activate org.bar.SomeName
+</pre>
+<p>
+  Auto-starting a different service, then waiting for a well-known name to be
+  owned on the bus. This is useful in situations where
+  <em class="replaceable"><code>SomeName</code></em> is not directly activatable:
+</p>
+<pre class="programlisting">
+$ gdbus wait --session --activate org.bar.PrerequisiteName org.bar.SomeName
+</pre>
+<p>
+  Waiting for a well-known name and giving up after 30 seconds. By default,
+  the timeout is disabled; or set <code class="option">--timeout</code> to 0 to disable it:
+</p>
+<pre class="programlisting">
+$ gdbus wait --session --timeout 30 org.bar.SomeName
+</pre>
 </div>
 <div class="refsect1">
-<a name="id-1.4.25.6.9"></a><h2>Bugs</h2>
+<a name="id-1.4.26.6.9"></a><h2>Bugs</h2>
 <p>
     Please send bug reports to either the distribution bug tracker
     or the upstream bug tracker at
@@ -287,14 +325,13 @@ $ gdbus emit --session --object-path /bar --signal org.bar.Bar someString --dest
   </p>
 </div>
 <div class="refsect1">
-<a name="id-1.4.25.6.10"></a><h2>See Also</h2>
+<a name="id-1.4.26.6.10"></a><h2>See Also</h2>
 <p>
     <span class="citerefentry"><span class="refentrytitle">dbus-send</span>(1)</span>
   </p>
 </div>
 </div>
 <div class="footer">
-<hr>
-          Generated by GTK-Doc V1.21.1</div>
+<hr>Generated by GTK-Doc V1.25.1</div>
 </body>
 </html>

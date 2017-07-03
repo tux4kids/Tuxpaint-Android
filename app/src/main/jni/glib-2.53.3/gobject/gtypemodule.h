@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -35,6 +35,8 @@ typedef struct _GTypeModuleClass GTypeModuleClass;
 #define G_IS_TYPE_MODULE(module)        (G_TYPE_CHECK_INSTANCE_TYPE ((module), G_TYPE_TYPE_MODULE))
 #define G_IS_TYPE_MODULE_CLASS(class)   (G_TYPE_CHECK_CLASS_TYPE ((class), G_TYPE_TYPE_MODULE))
 #define G_TYPE_MODULE_GET_CLASS(module) (G_TYPE_INSTANCE_GET_CLASS ((module), G_TYPE_TYPE_MODULE, GTypeModuleClass))
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GTypeModule, g_object_unref)
 
 /**
  * GTypeModule:
@@ -182,6 +184,7 @@ static gint     TypeName##_private_offset; \
 \
 _G_DEFINE_TYPE_EXTENDED_CLASS_INIT(TypeName, type_name) \
 \
+G_GNUC_UNUSED \
 static inline gpointer \
 type_name##_get_instance_private (TypeName *self) \
 { \

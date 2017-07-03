@@ -1,10 +1,10 @@
 /*
  * Copyright © 2010 Codethink Limited
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published
- * by the Free Software Foundation; either version 2 of the licence or (at
- * your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -54,7 +54,7 @@ G_DEFINE_INTERFACE (GAction, g_action, G_TYPE_OBJECT)
  * In all cases, the implementing class is responsible for storing the
  * name of the action, the parameter type, the enabled state, the
  * optional state type and the state and emitting the appropriate
- * signals when these change.  The implementor responsible for filtering
+ * signals when these change.  The implementor is responsible for filtering
  * calls to g_action_activate() and g_action_change_state() for type
  * safety and for the state being enabled.
  *
@@ -269,7 +269,7 @@ g_action_get_name (GAction *action)
  * In the case that this function returns %NULL, you must not give any
  * #GVariant, but %NULL instead.
  *
- * Returns: (allow-none): the parameter type
+ * Returns: (nullable): the parameter type
  *
  * Since: 2.28
  **/
@@ -299,7 +299,7 @@ g_action_get_parameter_type (GAction *action)
  * then this function will return %NULL. In that case, g_action_get_state()
  * will return %NULL and you must not call g_action_change_state().
  *
- * Returns: (allow-none): the state type, if the action is stateful
+ * Returns: (nullable): the state type, if the action is stateful
  *
  * Since: 2.28
  **/
@@ -373,7 +373,7 @@ g_action_get_enabled (GAction *action)
 /**
  * g_action_activate:
  * @action: a #GAction
- * @parameter: (allow-none): the parameter to the activation
+ * @parameter: (nullable): the parameter to the activation
  *
  * Activates the action.
  *
@@ -542,16 +542,15 @@ bad_fmt:
 /**
  * g_action_print_detailed_name:
  * @action_name: a valid action name
- * @target_value: (allow-none): a #GVariant target value, or %NULL
+ * @target_value: (nullable): a #GVariant target value, or %NULL
  *
  * Formats a detailed action name from @action_name and @target_value.
  *
  * It is an error to call this function with an invalid action name.
  *
- * This function is the opposite of
- * g_action_parse_detailed_action_name().  It will produce a string that
- * can be parsed back to the @action_name and @target_value by that
- * function.
+ * This function is the opposite of g_action_parse_detailed_name().
+ * It will produce a string that can be parsed back to the @action_name
+ * and @target_value by that function.
  *
  * See that function for the types of strings that will be printed by
  * this function.

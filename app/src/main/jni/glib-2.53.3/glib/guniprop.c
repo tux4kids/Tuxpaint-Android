@@ -6,7 +6,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -433,6 +433,32 @@ interval_compare (const void *key, const void *elt)
   return 0;
 }
 
+#define G_WIDTH_TABLE_MIDPOINT (G_N_ELEMENTS (g_unicode_width_table_wide) / 2)
+
+static inline gboolean
+g_unichar_iswide_bsearch (gunichar ch)
+{
+  int lower = 0;
+  int upper = G_N_ELEMENTS (g_unicode_width_table_wide) - 1;
+  static int saved_mid = G_WIDTH_TABLE_MIDPOINT;
+  int mid = saved_mid;
+
+  do
+    {
+      if (ch < g_unicode_width_table_wide[mid].start)
+	upper = mid - 1;
+      else if (ch > g_unicode_width_table_wide[mid].end)
+	lower = mid + 1;
+      else
+	return TRUE;
+
+      mid = (lower + upper) / 2;
+    }
+  while (lower <= upper);
+
+  return FALSE;
+}
+
 /**
  * g_unichar_iswide:
  * @c: a Unicode character
@@ -445,14 +471,10 @@ interval_compare (const void *key, const void *elt)
 gboolean
 g_unichar_iswide (gunichar c)
 {
-  if (bsearch (GUINT_TO_POINTER (c),
-               g_unicode_width_table_wide,
-               G_N_ELEMENTS (g_unicode_width_table_wide),
-               sizeof g_unicode_width_table_wide[0],
-	       interval_compare))
-    return TRUE;
-
-  return FALSE;
+  if (c < g_unicode_width_table_wide[0].start)
+    return FALSE;
+  else
+    return g_unichar_iswide_bsearch (c);
 }
 
 
@@ -480,6 +502,11 @@ g_unichar_iswide_cjk (gunichar c)
 {
   if (g_unichar_iswide (c))
     return TRUE;
+
+  /* bsearch() is declared attribute(nonnull(1)) so we can't validly search
+   * for a NULL key */
+  if (c == 0)
+    return FALSE;
 
   if (bsearch (GUINT_TO_POINTER (c), 
                g_unicode_width_table_ambiguous,
@@ -1392,6 +1419,21 @@ static const guint32 iso15924_tags[] =
     PACK ('T','i','r','h'), /* G_UNICODE_SCRIPT_TIRHUTA */
     PACK ('W','a','r','a'), /* G_UNICODE_SCRIPT_WARANG_CITI */
 
+  /* Unicode 8.0 additions */
+    PACK ('A','h','o','m'), /* G_UNICODE_SCRIPT_AHOM */
+    PACK ('H','l','u','w'), /* G_UNICODE_SCRIPT_ANATOLIAN_HIEROGLYPHS */
+    PACK ('H','a','t','r'), /* G_UNICODE_SCRIPT_HATRAN */
+    PACK ('M','u','l','t'), /* G_UNICODE_SCRIPT_MULTANI */
+    PACK ('H','u','n','g'), /* G_UNICODE_SCRIPT_OLD_HUNGARIAN */
+    PACK ('S','g','n','w'), /* G_UNICODE_SCRIPT_SIGNWRITING */
+
+  /* Unicode 9.0 additions */
+    PACK ('A','d','l','m'), /* G_UNICODE_SCRIPT_ADLAM */
+    PACK ('B','h','k','s'), /* G_UNICODE_SCRIPT_BHAIKSUKI */
+    PACK ('M','a','r','c'), /* G_UNICODE_SCRIPT_MARCHEN */
+    PACK ('N','e','w','a'), /* G_UNICODE_SCRIPT_NEWA */
+    PACK ('O','s','g','e'), /* G_UNICODE_SCRIPT_OSAGE */
+    PACK ('T','a','n','g'), /* G_UNICODE_SCRIPT_TANGUT */
 #undef PACK
 };
 

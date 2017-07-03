@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -45,6 +45,11 @@ GType   _g_local_file_get_type (void) G_GNUC_CONST;
 GFile * _g_local_file_new      (const char *filename);
 
 const char * _g_local_file_get_filename (GLocalFile *file);
+
+gboolean g_local_file_is_remote (const gchar *filename);
+
+GFile * g_local_file_new_from_dirname_and_basename (const char *dirname,
+                                                    const char *basename);
 
 G_END_DECLS
 

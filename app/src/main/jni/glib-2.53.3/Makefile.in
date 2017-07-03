@@ -146,7 +146,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
-	$(am__configure_deps) $(am__DIST_COMMON)
+	$(am__configure_deps) $(dist_valgrind_DATA) $(am__DIST_COMMON)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
@@ -185,7 +185,7 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(installed_testdir)" \
 	"$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(installed_testdir)" \
+	"$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(valgrinddir)" \
 	"$(DESTDIR)$(installed_test_metadir)" \
 	"$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(pkgconfigdir)"
 LTLIBRARIES = $(installed_test_LTLIBRARIES) $(noinst_LTLIBRARIES)
@@ -221,8 +221,8 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-DATA = $(installed_test_meta_DATA) $(nobase_installed_test_DATA) \
-	$(noinst_DATA) $(pkgconfig_DATA)
+DATA = $(dist_valgrind_DATA) $(installed_test_meta_DATA) \
+	$(nobase_installed_test_DATA) $(noinst_DATA) $(pkgconfig_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 am__recursive_targets = \
@@ -438,8 +438,8 @@ am__DIST_COMMON = $(srcdir)/INSTALL.in $(srcdir)/Makefile.in \
 	$(srcdir)/gmodule-no-export-2.0.pc.in \
 	$(srcdir)/gobject-2.0.pc.in $(srcdir)/gthread-2.0.pc.in \
 	$(top_srcdir)/glib.mk AUTHORS COPYING ChangeLog INSTALL NEWS \
-	README compile config.guess config.sub depcomp install-sh \
-	ltmain.sh missing py-compile test-driver
+	README compile config.guess config.sub install-sh ltmain.sh \
+	missing test-driver
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -482,7 +482,6 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ABS_GLIB_RUNTIME_LIBDIR = @ABS_GLIB_RUNTIME_LIBDIR@
 ABS_TAPSET_DIR = @ABS_TAPSET_DIR@
 ACLOCAL = @ACLOCAL@
 ALLOCA = @ALLOCA@
@@ -531,11 +530,8 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
-GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
-GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
-GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
 GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
@@ -548,7 +544,6 @@ GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
-GOBJECT_LINK_FLAGS = @GOBJECT_LINK_FLAGS@
 GREP = @GREP@
 GSPAWN = @GSPAWN@
 GTHREAD_COMPILE_IMPL_DEFINES = @GTHREAD_COMPILE_IMPL_DEFINES@
@@ -582,12 +577,15 @@ INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
+INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBELF_CFLAGS = @LIBELF_CFLAGS@
 LIBELF_LIBS = @LIBELF_LIBS@
 LIBFFI_CFLAGS = @LIBFFI_CFLAGS@
 LIBFFI_LIBS = @LIBFFI_LIBS@
+LIBMOUNT_CFLAGS = @LIBMOUNT_CFLAGS@
+LIBMOUNT_LIBS = @LIBMOUNT_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -602,6 +600,7 @@ LT_CURRENT = @LT_CURRENT@
 LT_CURRENT_MINUS_AGE = @LT_CURRENT_MINUS_AGE@
 LT_RELEASE = @LT_RELEASE@
 LT_REVISION = @LT_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
@@ -837,7 +836,7 @@ all_test_ltlibs = $(test_ltlibraries) $(uninstalled_test_ltlibraries) $(installe
 @ENABLE_INSTALLED_TESTS_TRUE@installed_test_meta_DATA = $(installed_testcases:=.test)
 ACLOCAL_AMFLAGS = -I m4macros ${ACLOCAL_FLAGS}
 SUBDIRS = . m4macros glib gmodule gthread gobject gio po docs tests
-DIST_SUBDIRS = $(SUBDIRS) build
+DIST_SUBDIRS = $(SUBDIRS) build win32
 bin_SCRIPTS = glib-gettextize
 AM_CPPFLAGS = \
 	-DG_LOG_DOMAIN=g_log_domain_glib 	\
@@ -850,6 +849,10 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = glib-2.0.pc gobject-2.0.pc gmodule-2.0.pc \
 	gmodule-export-2.0.pc gmodule-no-export-2.0.pc gthread-2.0.pc \
 	gio-2.0.pc $(am__append_16) $(am__append_17)
+
+# Install Valgrind suppression file
+valgrinddir = $(datadir)/glib-2.0/valgrind
+dist_valgrind_DATA = glib.supp
 
 # build documentation when doing distcheck
 DISTCHECK_CONFIGURE_FLAGS = --enable-debug --enable-gtk-doc --enable-man --disable-maintainer-mode
@@ -1138,6 +1141,27 @@ clean-libtool:
 
 distclean-libtool:
 	-rm -f libtool config.lt
+install-dist_valgrindDATA: $(dist_valgrind_DATA)
+	@$(NORMAL_INSTALL)
+	@list='$(dist_valgrind_DATA)'; test -n "$(valgrinddir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(valgrinddir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(valgrinddir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(valgrinddir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(valgrinddir)" || exit $$?; \
+	done
+
+uninstall-dist_valgrindDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dist_valgrind_DATA)'; test -n "$(valgrinddir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(valgrinddir)'; $(am__uninstall_files_from_dir)
 install-installed_test_metaDATA: $(installed_test_meta_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(installed_test_meta_DATA)'; test -n "$(installed_test_metadir)" || list=; \
@@ -1542,7 +1566,7 @@ distdir: $(DISTFILES)
 	  ! -type d ! -perm -444 -exec $(install_sh) -c -m a+r {} {} \; \
 	|| chmod -R a+r "$(distdir)"
 dist-gzip: distdir
-	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+	tardir=$(distdir) && $(am__tar) | eval GZIP= gzip $(GZIP_ENV) -c >$(distdir).tar.gz
 	$(am__post_remove_distdir)
 
 dist-bzip2: distdir
@@ -1567,7 +1591,7 @@ dist-shar: distdir
 	@echo WARNING: "Support for shar distribution archives is" \
 	               "deprecated." >&2
 	@echo WARNING: "It will be removed altogether in Automake 2.0" >&2
-	shar $(distdir) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).shar.gz
+	shar $(distdir) | eval GZIP= gzip $(GZIP_ENV) -c >$(distdir).shar.gz
 	$(am__post_remove_distdir)
 
 dist-zip: distdir
@@ -1585,7 +1609,7 @@ dist dist-all:
 distcheck: dist
 	case '$(DIST_ARCHIVES)' in \
 	*.tar.gz*) \
-	  GZIP=$(GZIP_ENV) gzip -dc $(distdir).tar.gz | $(am__untar) ;;\
+	  eval GZIP= gzip $(GZIP_ENV) -dc $(distdir).tar.gz | $(am__untar) ;;\
 	*.tar.bz2*) \
 	  bzip2 -dc $(distdir).tar.bz2 | $(am__untar) ;;\
 	*.tar.lz*) \
@@ -1595,7 +1619,7 @@ distcheck: dist
 	*.tar.Z*) \
 	  uncompress -c $(distdir).tar.Z | $(am__untar) ;;\
 	*.shar.gz*) \
-	  GZIP=$(GZIP_ENV) gzip -dc $(distdir).shar.gz | unshar ;;\
+	  eval GZIP= gzip $(GZIP_ENV) -dc $(distdir).shar.gz | unshar ;;\
 	*.zip*) \
 	  unzip $(distdir).zip ;;\
 	esac
@@ -1674,7 +1698,7 @@ all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
 		config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(installed_test_metadir)" "$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(pkgconfigdir)"; do \
+	for dir in "$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(valgrinddir)" "$(DESTDIR)$(installed_test_metadir)" "$(DESTDIR)$(installed_testdir)" "$(DESTDIR)$(pkgconfigdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -1740,7 +1764,8 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-installed_testLTLIBRARIES \
+install-data-am: install-dist_valgrindDATA \
+	install-installed_testLTLIBRARIES \
 	install-installed_testPROGRAMS install-installed_testSCRIPTS \
 	install-installed_test_metaDATA \
 	install-nobase_installed_testDATA install-pkgconfigDATA
@@ -1789,7 +1814,8 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-binSCRIPTS uninstall-installed_testLTLIBRARIES \
+uninstall-am: uninstall-binSCRIPTS uninstall-dist_valgrindDATA \
+	uninstall-installed_testLTLIBRARIES \
 	uninstall-installed_testPROGRAMS \
 	uninstall-installed_testSCRIPTS \
 	uninstall-installed_test_metaDATA \
@@ -1810,9 +1836,10 @@ uninstall-am: uninstall-binSCRIPTS uninstall-installed_testLTLIBRARIES \
 	distclean-libtool distclean-local distclean-tags \
 	distcleancheck distdir distuninstallcheck dvi dvi-am html \
 	html-am info info-am install install-am install-binSCRIPTS \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-installed_testLTLIBRARIES \
+	install-data install-data-am install-dist_valgrindDATA \
+	install-dvi install-dvi-am install-exec install-exec-am \
+	install-html install-html-am install-info install-info-am \
+	install-installed_testLTLIBRARIES \
 	install-installed_testPROGRAMS install-installed_testSCRIPTS \
 	install-installed_test_metaDATA install-man \
 	install-nobase_installed_testDATA install-pdf install-pdf-am \
@@ -1821,7 +1848,8 @@ uninstall-am: uninstall-binSCRIPTS uninstall-installed_testLTLIBRARIES \
 	maintainer-clean maintainer-clean-generic mostlyclean \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	recheck tags tags-am uninstall uninstall-am \
-	uninstall-binSCRIPTS uninstall-installed_testLTLIBRARIES \
+	uninstall-binSCRIPTS uninstall-dist_valgrindDATA \
+	uninstall-installed_testLTLIBRARIES \
 	uninstall-installed_testPROGRAMS \
 	uninstall-installed_testSCRIPTS \
 	uninstall-installed_test_metaDATA \

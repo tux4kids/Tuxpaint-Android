@@ -44,6 +44,8 @@ test_schema (gpointer data)
   if (test->err)
     {
       g_test_trap_assert_failed ();
+      g_test_trap_assert_stderr_unmatched ("*CRITICAL*");
+      g_test_trap_assert_stderr_unmatched ("*WARNING*");
       g_test_trap_assert_stderr (test->err);
     }
   else
@@ -126,6 +128,9 @@ static const SchemaTest tests[] = {
   { "flags-more-than-one-bit",      NULL, "*flags values must have at most 1 bit set*"          },
   { "flags-with-enum-attr",         NULL, "*<enum id='flags'> not (yet) defined*"               },
   { "flags-with-enum-tag",          NULL, "*<flags id='flags'> not (yet) defined*"              },
+  { "summary-xmllang",              NULL, "*Only one <summary> element allowed*"                },
+  { "description-xmllang",          NULL, "*Only one <description> element allowed*"            },
+  { "summary-xmllang-and-attrs",    NULL, "*attribute 'lang' invalid for element 'summary'*"    },
   { "inherit-gettext-domain",       NULL, NULL                                                  },
   { "range-type-test",              NULL, NULL                                                  },
   { "cdata",                        NULL, NULL                                                  }

@@ -365,6 +365,7 @@ g_file_monitor_flags_get_type (void)
         { G_FILE_MONITOR_WATCH_MOUNTS, "G_FILE_MONITOR_WATCH_MOUNTS", "watch-mounts" },
         { G_FILE_MONITOR_SEND_MOVED, "G_FILE_MONITOR_SEND_MOVED", "send-moved" },
         { G_FILE_MONITOR_WATCH_HARD_LINKS, "G_FILE_MONITOR_WATCH_HARD_LINKS", "watch-hard-links" },
+        { G_FILE_MONITOR_WATCH_MOVES, "G_FILE_MONITOR_WATCH_MOVES", "watch-moves" },
         { 0, NULL, NULL }
       };
       GType g_define_type_id =
@@ -437,6 +438,9 @@ g_file_monitor_event_get_type (void)
         { G_FILE_MONITOR_EVENT_PRE_UNMOUNT, "G_FILE_MONITOR_EVENT_PRE_UNMOUNT", "pre-unmount" },
         { G_FILE_MONITOR_EVENT_UNMOUNTED, "G_FILE_MONITOR_EVENT_UNMOUNTED", "unmounted" },
         { G_FILE_MONITOR_EVENT_MOVED, "G_FILE_MONITOR_EVENT_MOVED", "moved" },
+        { G_FILE_MONITOR_EVENT_RENAMED, "G_FILE_MONITOR_EVENT_RENAMED", "renamed" },
+        { G_FILE_MONITOR_EVENT_MOVED_IN, "G_FILE_MONITOR_EVENT_MOVED_IN", "moved-in" },
+        { G_FILE_MONITOR_EVENT_MOVED_OUT, "G_FILE_MONITOR_EVENT_MOVED_OUT", "moved-out" },
         { 0, NULL, NULL }
       };
       GType g_define_type_id =
@@ -502,6 +506,7 @@ g_io_error_enum_get_type (void)
         { G_IO_ERROR_BROKEN_PIPE, "G_IO_ERROR_BROKEN_PIPE", "broken-pipe" },
         { G_IO_ERROR_CONNECTION_CLOSED, "G_IO_ERROR_CONNECTION_CLOSED", "connection-closed" },
         { G_IO_ERROR_NOT_CONNECTED, "G_IO_ERROR_NOT_CONNECTED", "not-connected" },
+        { G_IO_ERROR_MESSAGE_TOO_LARGE, "G_IO_ERROR_MESSAGE_TOO_LARGE", "message-too-large" },
         { 0, NULL, NULL }
       };
       GType g_define_type_id =
@@ -1082,6 +1087,7 @@ g_dbus_call_flags_get_type (void)
       static const GFlagsValue values[] = {
         { G_DBUS_CALL_FLAGS_NONE, "G_DBUS_CALL_FLAGS_NONE", "none" },
         { G_DBUS_CALL_FLAGS_NO_AUTO_START, "G_DBUS_CALL_FLAGS_NO_AUTO_START", "no-auto-start" },
+        { G_DBUS_CALL_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION, "G_DBUS_CALL_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION", "allow-interactive-authorization" },
         { 0, NULL, NULL }
       };
       GType g_define_type_id =
@@ -1126,6 +1132,7 @@ g_dbus_message_flags_get_type (void)
         { G_DBUS_MESSAGE_FLAGS_NONE, "G_DBUS_MESSAGE_FLAGS_NONE", "none" },
         { G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED, "G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED", "no-reply-expected" },
         { G_DBUS_MESSAGE_FLAGS_NO_AUTO_START, "G_DBUS_MESSAGE_FLAGS_NO_AUTO_START", "no-auto-start" },
+        { G_DBUS_MESSAGE_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION, "G_DBUS_MESSAGE_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION", "allow-interactive-authorization" },
         { 0, NULL, NULL }
       };
       GType g_define_type_id =
@@ -1327,6 +1334,7 @@ g_application_flags_get_type (void)
         { G_APPLICATION_HANDLES_COMMAND_LINE, "G_APPLICATION_HANDLES_COMMAND_LINE", "handles-command-line" },
         { G_APPLICATION_SEND_ENVIRONMENT, "G_APPLICATION_SEND_ENVIRONMENT", "send-environment" },
         { G_APPLICATION_NON_UNIQUE, "G_APPLICATION_NON_UNIQUE", "non-unique" },
+        { G_APPLICATION_CAN_OVERRIDE_APP_ID, "G_APPLICATION_CAN_OVERRIDE_APP_ID", "can-override-app-id" },
         { 0, NULL, NULL }
       };
       GType g_define_type_id =
@@ -1612,6 +1620,28 @@ g_socket_client_event_get_type (void)
       };
       GType g_define_type_id =
         g_enum_register_static (g_intern_static_string ("GSocketClientEvent"), values);
+      g_once_init_leave (&g_define_type_id__volatile, g_define_type_id);
+    }
+
+  return g_define_type_id__volatile;
+}
+
+GType
+g_socket_listener_event_get_type (void)
+{
+  static volatile gsize g_define_type_id__volatile = 0;
+
+  if (g_once_init_enter (&g_define_type_id__volatile))
+    {
+      static const GEnumValue values[] = {
+        { G_SOCKET_LISTENER_BINDING, "G_SOCKET_LISTENER_BINDING", "binding" },
+        { G_SOCKET_LISTENER_BOUND, "G_SOCKET_LISTENER_BOUND", "bound" },
+        { G_SOCKET_LISTENER_LISTENING, "G_SOCKET_LISTENER_LISTENING", "listening" },
+        { G_SOCKET_LISTENER_LISTENED, "G_SOCKET_LISTENER_LISTENED", "listened" },
+        { 0, NULL, NULL }
+      };
+      GType g_define_type_id =
+        g_enum_register_static (g_intern_static_string ("GSocketListenerEvent"), values);
       g_once_init_leave (&g_define_type_id__volatile, g_define_type_id);
     }
 

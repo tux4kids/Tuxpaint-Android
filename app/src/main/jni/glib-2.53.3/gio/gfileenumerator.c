@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -176,7 +176,7 @@ g_file_enumerator_init (GFileEnumerator *enumerator)
 /**
  * g_file_enumerator_next_file:
  * @enumerator: a #GFileEnumerator.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
  * @error: location to store the error occurring, or %NULL to ignore
  *
  * Returns information for the next file in the enumerated object.
@@ -245,7 +245,7 @@ g_file_enumerator_next_file (GFileEnumerator *enumerator,
 /**
  * g_file_enumerator_close:
  * @enumerator: a #GFileEnumerator.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore. 
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
  * @error: location to store the error occurring, or %NULL to ignore
  *
  * Releases all resources used by this enumerator, making the
@@ -310,8 +310,8 @@ next_async_callback_wrapper (GObject      *source_object,
  * g_file_enumerator_next_files_async:
  * @enumerator: a #GFileEnumerator.
  * @num_files: the number of file info objects to request
- * @io_priority: the [I/O priority][io-priority] of the request 
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
+ * @io_priority: the [I/O priority][io-priority] of the request
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
  * @callback: (scope async): a #GAsyncReadyCallback to call when the request is satisfied
  * @user_data: (closure): the data to pass to callback function
  *
@@ -437,7 +437,7 @@ close_async_callback_wrapper (GObject      *source_object,
  * g_file_enumerator_close_async:
  * @enumerator: a #GFileEnumerator.
  * @io_priority: the [I/O priority][io-priority] of the request
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore. 
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
  * @callback: (scope async): a #GAsyncReadyCallback to call when the request is satisfied
  * @user_data: (closure): the data to pass to callback function
  *
@@ -576,8 +576,8 @@ g_file_enumerator_set_pending (GFileEnumerator *enumerator,
 /**
  * g_file_enumerator_iterate:
  * @direnum: an open #GFileEnumerator
- * @out_info: (out) (transfer none) (allow-none): Output location for the next #GFileInfo, or %NULL
- * @out_child: (out) (transfer none) (allow-none): Output location for the next #GFile, or %NULL
+ * @out_info: (out) (transfer none) (optional): Output location for the next #GFileInfo, or %NULL
+ * @out_child: (out) (transfer none) (optional): Output location for the next #GFile, or %NULL
  * @cancellable: a #GCancellable
  * @error: a #GError
  *
@@ -587,7 +587,7 @@ g_file_enumerator_set_pending (GFileEnumerator *enumerator,
  * requires allocation of a temporary #GError.
  *
  * In contrast, with this function, a %FALSE return from
- * gs_file_enumerator_iterate() *always* means
+ * g_file_enumerator_iterate() *always* means
  * "error".  End of iteration is signaled by @out_info or @out_child being %NULL.
  *
  * Another crucial difference is that the references for @out_info and
@@ -657,11 +657,6 @@ g_file_enumerator_iterate (GFileEnumerator  *direnum,
 
   if (ret_info)
     { 
-      if (out_info != NULL)
-        {
-          g_object_set_qdata_full ((GObject*)direnum, cached_info_quark, ret_info, (GDestroyNotify)g_object_unref);
-          *out_info = ret_info;
-        }
       if (out_child != NULL)
         {
           const char *name = g_file_info_get_name (ret_info);
@@ -674,6 +669,13 @@ g_file_enumerator_iterate (GFileEnumerator  *direnum,
               g_object_set_qdata_full ((GObject*)direnum, cached_child_quark, *out_child, (GDestroyNotify)g_object_unref);
             }
         }
+      if (out_info != NULL)
+        {
+          g_object_set_qdata_full ((GObject*)direnum, cached_info_quark, ret_info, (GDestroyNotify)g_object_unref);
+          *out_info = ret_info;
+        }
+      else
+        g_object_unref (ret_info);
     }
   else
     {
@@ -801,6 +803,7 @@ g_file_enumerator_real_next_files_async (GFileEnumerator     *enumerator,
   GTask *task;
 
   task = g_task_new (enumerator, cancellable, callback, user_data);
+  g_task_set_source_tag (task, g_file_enumerator_real_next_files_async);
   g_task_set_task_data (task, GINT_TO_POINTER (num_files), NULL);
   g_task_set_priority (task, io_priority);
 
@@ -847,6 +850,7 @@ g_file_enumerator_real_close_async (GFileEnumerator     *enumerator,
   GTask *task;
 
   task = g_task_new (enumerator, cancellable, callback, user_data);
+  g_task_set_source_tag (task, g_file_enumerator_real_close_async);
   g_task_set_priority (task, io_priority);
   
   g_task_run_in_thread (task, close_async_thread);

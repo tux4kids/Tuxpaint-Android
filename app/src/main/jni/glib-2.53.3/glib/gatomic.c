@@ -1,10 +1,10 @@
 /*
  * Copyright © 2011 Ryan Lortie
  *
- * This library is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * licence, or (at your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -58,7 +58,8 @@
  * fall outside of simple reference counting patterns are prone to
  * subtle bugs and occasionally undefined behaviour.  It is also worth
  * noting that since all of these operations require global
- * synchronisation of the entire machine, they can be quite slow.  In * the case of performing multiple atomic operations it can often be
+ * synchronisation of the entire machine, they can be quite slow.  In
+ * the case of performing multiple atomic operations it can often be
  * faster to simply acquire a mutex lock around the critical area,
  * perform the operations normally and then release the lock.
  **/
@@ -94,6 +95,16 @@
  */
 
 #if defined (__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4)
+
+#if defined(__ATOMIC_SEQ_CST) && !defined(__clang__)
+/* The implementation used in this code path in gatomic.h assumes
+ * 4-byte int */
+G_STATIC_ASSERT (sizeof (gint) == 4);
+
+/* The implementations in gatomic.h assume 4- or 8-byte pointers */
+G_STATIC_ASSERT (sizeof (void *) == 4 || sizeof (void *) == 8);
+#endif
+
 /**
  * g_atomic_int_get:
  * @atomic: a pointer to a #gint or #guint
@@ -300,7 +311,7 @@ guint
 
 /**
  * g_atomic_pointer_get:
- * @atomic: a pointer to a #gpointer-sized value
+ * @atomic: (not nullable): a pointer to a #gpointer-sized value
  *
  * Gets the current value of @atomic.
  *
@@ -319,7 +330,7 @@ gpointer
 
 /**
  * g_atomic_pointer_set:
- * @atomic: a pointer to a #gpointer-sized value
+ * @atomic: (not nullable): a pointer to a #gpointer-sized value
  * @newval: a new value to store
  *
  * Sets the value of @atomic to @newval.
@@ -338,7 +349,7 @@ void
 
 /**
  * g_atomic_pointer_compare_and_exchange:
- * @atomic: a pointer to a #gpointer-sized value
+ * @atomic: (not nullable): a pointer to a #gpointer-sized value
  * @oldval: the value to compare with
  * @newval: the value to conditionally replace with
  *
@@ -367,7 +378,7 @@ gboolean
 
 /**
  * g_atomic_pointer_add:
- * @atomic: a pointer to a #gpointer-sized value
+ * @atomic: (not nullable): a pointer to a #gpointer-sized value
  * @val: the value to add
  *
  * Atomically adds @val to the value of @atomic.
@@ -390,7 +401,7 @@ gssize
 
 /**
  * g_atomic_pointer_and:
- * @atomic: a pointer to a #gpointer-sized value
+ * @atomic: (not nullable): a pointer to a #gpointer-sized value
  * @val: the value to 'and'
  *
  * Performs an atomic bitwise 'and' of the value of @atomic and @val,
@@ -414,7 +425,7 @@ gsize
 
 /**
  * g_atomic_pointer_or:
- * @atomic: a pointer to a #gpointer-sized value
+ * @atomic: (not nullable): a pointer to a #gpointer-sized value
  * @val: the value to 'or'
  *
  * Performs an atomic bitwise 'or' of the value of @atomic and @val,
@@ -438,7 +449,7 @@ gsize
 
 /**
  * g_atomic_pointer_xor:
- * @atomic: a pointer to a #gpointer-sized value
+ * @atomic: (not nullable): a pointer to a #gpointer-sized value
  * @val: the value to 'xor'
  *
  * Performs an atomic bitwise 'xor' of the value of @atomic and @val,

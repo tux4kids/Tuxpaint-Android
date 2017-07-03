@@ -1,6 +1,6 @@
 # GLIB - Library of useful C routines
 
-TESTS_ENVIRONMENT= \
+AM_TESTS_ENVIRONMENT= \
 	G_TEST_SRCDIR="$(abs_srcdir)" 		\
 	G_TEST_BUILDDIR="$(abs_builddir)" 	\
 	G_DEBUG=gc-friendly 			\
@@ -112,7 +112,7 @@ if ENABLE_INSTALLED_TESTS
 installed_test_PROGRAMS += $(test_programs) $(installed_test_programs) \
                           $(test_extra_programs) $(installed_test_extra_programs)
 installed_test_SCRIPTS += $(test_scripts) $(installed_test_scripts) \
-                          $(test_extra_scripts) $(test_installed_extra_scripts)
+                          $(test_extra_scripts) $(installed_test_extra_scripts)
 installed_test_SCRIPTS += $(dist_test_scripts) $(dist_test_extra_scripts) \
                           $(dist_installed_test_scripts) $(dist_installed_test_extra_scripts)
 nobase_installed_test_DATA += $(test_data) $(installed_test_data)

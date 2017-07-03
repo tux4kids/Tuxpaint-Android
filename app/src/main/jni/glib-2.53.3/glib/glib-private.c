@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,6 +20,7 @@
 #include "config.h"
 
 #include "glib-private.h"
+#include "glib-init.h"
 
 /**
  * glib__private__:
@@ -44,7 +45,9 @@ glib__private__ (void)
     g_main_context_new_with_next_id,
 
     g_dir_open_with_errno,
-    g_dir_new_from_dirp
+    g_dir_new_from_dirp,
+
+    glib_init,
   };
 
   return &table;

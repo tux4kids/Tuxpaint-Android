@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -107,7 +107,7 @@ g_file_input_stream_init (GFileInputStream *stream)
  * g_file_input_stream_query_info:
  * @stream: a #GFileInputStream.
  * @attributes: a file attribute query string.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore. 
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore. 
  * @error: a #GError location to store the error occurring, or %NULL to 
  * ignore.
  *
@@ -146,7 +146,7 @@ g_file_input_stream_query_info (GFileInputStream  *stream,
     info = class->query_info (stream, attributes, cancellable, error);
   else
     g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-                         _("Stream doesn't support query_info"));
+                         _("Stream doesn’t support query_info"));
 
   if (cancellable)
     g_cancellable_pop_current (cancellable);
@@ -174,7 +174,7 @@ async_ready_callback_wrapper (GObject      *source_object,
  * @stream: a #GFileInputStream.
  * @attributes: a file attribute query string.
  * @io_priority: the [I/O priority][io-priority] of the request
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore. 
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore. 
  * @callback: (scope async): callback to call when the request is satisfied
  * @user_data: (closure): the data to pass to callback function
  * 
@@ -391,7 +391,7 @@ query_info_async_thread (GTask        *task,
     info = class->query_info (stream, attributes, cancellable, &error);
   else
     g_set_error_literal (&error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-                         _("Stream doesn't support query_info"));
+                         _("Stream doesn’t support query_info"));
 
   if (info == NULL)
     g_task_return_error (task, error);
@@ -410,6 +410,7 @@ g_file_input_stream_real_query_info_async (GFileInputStream    *stream,
   GTask *task;
 
   task = g_task_new (stream, cancellable, callback, user_data);
+  g_task_set_source_tag (task, g_file_input_stream_real_query_info_async);
   g_task_set_task_data (task, g_strdup (attributes), g_free);
   g_task_set_priority (task, io_priority);
   

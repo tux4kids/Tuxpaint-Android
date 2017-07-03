@@ -306,7 +306,6 @@ LOCAL_SRC_FILES :=  			\
 	gio/gdbusobjectmanagerserver.c	\
 	gio/gtestdbus.c			\
 	gio/ghttpproxy.c		\
-	gio/glocaldirectorymonitor.c 	\
 	gio/glocalfile.c 		\
 	gio/glocalfileenumerator.c 	\
 	gio/glocalfileinfo.c 		\
@@ -333,7 +332,18 @@ LOCAL_SRC_FILES :=  			\
 	gio/inotify/inotify-missing.c 	\
 	gio/inotify/inotify-helper.c 	\
 	gio/inotify/ginotifyfilemonitor.c 	\
-	gio/inotify/ginotifydirectorymonitor.c	\
+	gio/gdtlsserverconnection.c		\
+	gio/gdtlsclientconnection.c		\
+	gio/gdtlsconnection.c		\
+	gio/gnetworkmonitorportal.c		\
+	gio/gportalnotificationbackend.c		\
+	gio/gportalsupport.c		\
+	gio/gopenuriportal.c		\
+	gio/gproxyresolverportal.c		\
+	gio/gdocumentportal.c		\
+	gio/gdatagrambased.c		\
+	gio/xdp-dbus.c		\
+	gio/gnativesocketaddress.c		\
 	$(NULL)
 
 LOCAL_C_INCLUDES := 				\
@@ -388,6 +398,7 @@ LOCAL_CFLAGS := \
 	-DGIO_COMPILATION		\
 	-DGIO_MODULE_DIR=\"/mnt/sdcard/Android/data/org.tuxpaint/files/glib\"	\
 	-DXDG_PREFIX=_gio_xdg		\
+	-marm				\
 	$(NULL)
 
 LOCAL_SHARED_LIBRARIES := 	\

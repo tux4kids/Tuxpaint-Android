@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -46,18 +46,18 @@ G_BEGIN_DECLS
 /* --- typedefs --- */
 /**
  * GBoxedCopyFunc:
- * @boxed: The boxed structure to be copied.
+ * @boxed: (not nullable): The boxed structure to be copied.
  *
  * This function is provided by the user and should produce a copy
  * of the passed in boxed structure.
  *
- * Returns: The newly created copy of the boxed structure.
+ * Returns: (not nullable): The newly created copy of the boxed structure.
  */
 typedef gpointer (*GBoxedCopyFunc) (gpointer boxed);
 
 /**
  * GBoxedFreeFunc:
- * @boxed: The boxed structure to be freed.
+ * @boxed: (not nullable): The boxed structure to be freed.
  *
  * This function is provided by the user and should free the boxed
  * structure passed.

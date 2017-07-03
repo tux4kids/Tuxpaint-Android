@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the licence, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -192,6 +192,9 @@ typedef struct
 
   gboolean      checked;
   GVariant     *serialised;
+
+  gboolean      summary_seen;
+  gboolean      description_seen;
 } KeyState;
 
 static KeyState *
@@ -208,6 +211,8 @@ key_state_new (const gchar *type_string,
   state->have_gettext_domain = gettext_domain != NULL;
   state->is_enum = is_enum;
   state->is_flags = is_flags;
+  state->summary_seen = FALSE;
+  state->description_seen = FALSE;
 
   if (strinfo)
     state->strinfo = g_string_new_len (strinfo->str, strinfo->len);
@@ -464,6 +469,13 @@ key_state_end_default (KeyState  *state,
   state->default_value = g_variant_parse (state->type,
                                           state->unparsed_default_value->str,
                                           NULL, NULL, error);
+  if (!state->default_value)
+    {
+      gchar *type = g_variant_type_dup_string (state->type);
+      g_prefix_error (error, "failed to parse <default> value of type '%s': ", type);
+      g_free (type);
+    }
+
   key_state_check_range (state, error);
 }
 
@@ -867,6 +879,7 @@ schema_state_free (gpointer data)
   g_free (state->path);
   g_free (state->gettext_domain);
   g_hash_table_unref (state->keys);
+  g_slice_free (SchemaState, state);
 }
 
 static void
@@ -1058,6 +1071,8 @@ override_state_end (KeyState **key_state,
 /* Handling of toplevel state {{{1 */
 typedef struct
 {
+  gboolean     strict;                  /* TRUE if --strict was given */
+
   GHashTable  *schema_table;            /* string -> SchemaState */
   GHashTable  *flags_table;             /* string -> EnumState */
   GHashTable  *enum_table;              /* string -> EnumState */
@@ -1374,11 +1389,35 @@ start_element (GMarkupParseContext  *context,
           return;
         }
 
-      else if (strcmp (element_name, "summary") == 0 ||
-               strcmp (element_name, "description") == 0)
+      else if (strcmp (element_name, "summary") == 0)
         {
           if (NO_ATTRS ())
-            state->string = g_string_new (NULL);
+            {
+              if (state->key_state->summary_seen && state->strict)
+                g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
+                             _("Only one <%s> element allowed inside <%s>"),
+                             element_name, container);
+              else
+                state->string = g_string_new (NULL);
+
+              state->key_state->summary_seen = TRUE;
+            }
+          return;
+        }
+
+      else if (strcmp (element_name, "description") == 0)
+        {
+          if (NO_ATTRS ())
+            {
+              if (state->key_state->description_seen && state->strict)
+                g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
+                             _("Only one <%s> element allowed inside <%s>"),
+                             element_name, container);
+              else
+                state->string = g_string_new (NULL);
+
+            state->key_state->description_seen = TRUE;
+            }
           return;
         }
 
@@ -1583,6 +1622,12 @@ gvdb_pair_init (GvdbPair *pair)
   pair->root = gvdb_hash_table_insert (pair->table, "");
 }
 
+static void
+gvdb_pair_clear (GvdbPair *pair)
+{
+  g_hash_table_unref (pair->table);
+}
+
 typedef struct
 {
   GHashTable *schema_table;
@@ -1605,6 +1650,7 @@ output_key (gpointer key,
   const gchar *name;
   KeyState *state;
   GvdbItem *item;
+  GVariant *serialised = NULL;
 
   name = key;
   state = value;
@@ -1612,7 +1658,9 @@ output_key (gpointer key,
 
   item = gvdb_hash_table_insert (data->pair.table, name);
   gvdb_item_set_parent (item, data->pair.root);
-  gvdb_item_set_value (item, key_state_serialise (state));
+  serialised = key_state_serialise (state);
+  gvdb_item_set_value (item, serialised);
+  g_variant_unref (serialised);
 
   if (state->l10n)
     data->l10n = TRUE;
@@ -1664,6 +1712,8 @@ output_schema (gpointer key,
     gvdb_hash_table_insert_string (data.pair.table,
                                    ".gettext-domain",
                                    state->gettext_domain);
+
+  gvdb_pair_clear (&data.pair);
 }
 
 static gboolean
@@ -1698,6 +1748,8 @@ parse_gschema_files (gchar    **files,
   const gchar *filename;
   GError *error = NULL;
 
+  state.strict = strict;
+
   state.enum_table = g_hash_table_new_full (g_str_hash, g_str_equal,
                                             g_free, enum_state_free);
 
@@ -1712,6 +1764,7 @@ parse_gschema_files (gchar    **files,
       GMarkupParseContext *context;
       gchar *contents;
       gsize size;
+      gint line, col;
 
       if (!g_file_get_contents (filename, &contents, &size, &error))
         {
@@ -1743,7 +1796,8 @@ parse_gschema_files (gchar    **files,
             g_hash_table_remove (state.enum_table, item->data);
 
           /* let them know */
-          fprintf (stderr, "%s: %s.  ", filename, error->message);
+          g_markup_parse_context_get_position (context, &line, &col);
+          fprintf (stderr, "%s:%d:%d  %s.  ", filename, line, col, error->message);
           g_clear_error (&error);
 
           if (strict)
@@ -1754,6 +1808,8 @@ parse_gschema_files (gchar    **files,
               g_hash_table_unref (state.flags_table);
               g_hash_table_unref (state.enum_table);
 
+              g_free (contents);
+
               return NULL;
             }
           else
@@ -1761,6 +1817,7 @@ parse_gschema_files (gchar    **files,
         }
 
       /* cleanup */
+      g_free (contents);
       g_markup_parse_context_free (context);
       g_slist_free (state.this_file_schemas);
       g_slist_free (state.this_file_flagss);
@@ -1978,19 +2035,22 @@ set_overrides (GHashTable  *schema_table,
 int
 main (int argc, char **argv)
 {
-  GError *error;
-  GHashTable *table;
-  GDir *dir;
+  GError *error = NULL;
+  GHashTable *table = NULL;
+  GDir *dir = NULL;
   const gchar *file;
-  gchar *srcdir;
+  const gchar *srcdir;
+  gboolean show_version_and_exit = FALSE;
   gchar *targetdir = NULL;
-  gchar *target;
+  gchar *target = NULL;
   gboolean dry_run = FALSE;
   gboolean strict = FALSE;
   gchar **schema_files = NULL;
   gchar **override_files = NULL;
-  GOptionContext *context;
+  GOptionContext *context = NULL;
+  gint retval;
   GOptionEntry entries[] = {
+    { "version", 0, 0, G_OPTION_ARG_NONE, &show_version_and_exit, N_("Show program version and exit"), NULL },
     { "targetdir", 0, 0, G_OPTION_ARG_FILENAME, &targetdir, N_("where to store the gschemas.compiled file"), N_("DIRECTORY") },
     { "strict", 0, 0, G_OPTION_ARG_NONE, &strict, N_("Abort on any errors in schemas"), NULL },
     { "dry-run", 0, 0, G_OPTION_ARG_NONE, &dry_run, N_("Do not write the gschema.compiled file"), NULL },
@@ -2002,7 +2062,7 @@ main (int argc, char **argv)
   };
 
 #ifdef G_OS_WIN32
-  gchar *tmp;
+  gchar *tmp = NULL;
 #endif
 
   setlocale (LC_ALL, "");
@@ -2011,7 +2071,6 @@ main (int argc, char **argv)
 #ifdef G_OS_WIN32
   tmp = _glib_get_locale_dir ();
   bindtextdomain (GETTEXT_PACKAGE, tmp);
-  g_free (tmp);
 #else
   bindtextdomain (GETTEXT_PACKAGE, GLIB_LOCALE_DIR);
 #endif
@@ -2028,27 +2087,30 @@ main (int argc, char **argv)
        "and the cache file is called gschemas.compiled."));
   g_option_context_add_main_entries (context, entries, GETTEXT_PACKAGE);
 
-  error = NULL;
   if (!g_option_context_parse (context, &argc, &argv, &error))
     {
       fprintf (stderr, "%s\n", error->message);
-      return 1;
+      retval = 1;
+      goto done;
     }
 
-  g_option_context_free (context);
+  if (show_version_and_exit)
+    {
+      g_print (PACKAGE_VERSION "\n");
+      retval = 0;
+      goto done;
+    }
 
   if (!schema_files && argc != 2)
     {
       fprintf (stderr, _("You should give exactly one directory name\n"));
-      return 1;
+      retval = 1;
+      goto done;
     }
 
   srcdir = argv[1];
 
-  if (targetdir == NULL)
-    targetdir = srcdir;
-
-  target = g_build_filename (targetdir, "gschemas.compiled", NULL);
+  target = g_build_filename (targetdir ? targetdir : srcdir, "gschemas.compiled", NULL);
 
   if (!schema_files)
     {
@@ -2062,7 +2124,12 @@ main (int argc, char **argv)
       if (dir == NULL)
         {
           fprintf (stderr, "%s\n", error->message);
-          return 1;
+
+          g_ptr_array_unref (files);
+          g_ptr_array_unref (overrides);
+
+          retval = 1;
+          goto done;
         }
 
       while ((file = g_dir_read_name (dir)) != NULL)
@@ -2086,7 +2153,11 @@ main (int argc, char **argv)
           else
             fprintf (stdout, _("removed existing output file.\n"));
 
-          return 0;
+          g_ptr_array_unref (files);
+          g_ptr_array_unref (overrides);
+
+          retval = 0;
+          goto done;
         }
       g_ptr_array_sort (files, compare_strings);
       g_ptr_array_add (files, NULL);
@@ -2100,27 +2171,42 @@ main (int argc, char **argv)
 
   if ((table = parse_gschema_files (schema_files, strict)) == NULL)
     {
-      g_free (target);
-      return 1;
+      retval = 1;
+      goto done;
     }
 
   if (override_files != NULL &&
       !set_overrides (table, override_files, strict))
     {
-      g_free (target);
-      return 1;
+      retval = 1;
+      goto done;
     }
 
   if (!dry_run && !write_to_file (table, target, &error))
     {
       fprintf (stderr, "%s\n", error->message);
-      g_free (target);
-      return 1;
+      retval = 1;
+      goto done;
     }
 
-  g_free (target);
+  /* Success. */
+  retval = 0;
 
-  return 0;
+done:
+  g_clear_error (&error);
+  g_clear_pointer (&table, g_hash_table_unref);
+  g_clear_pointer (&dir, g_dir_close);
+  g_free (targetdir);
+  g_free (target);
+  g_strfreev (schema_files);
+  g_strfreev (override_files);
+  g_option_context_free (context);
+
+#ifdef G_OS_WIN32
+  g_free (tmp);
+#endif
+
+  return retval;
 }
 
 /* Epilogue {{{1 */

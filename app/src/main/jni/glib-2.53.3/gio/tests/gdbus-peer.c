@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -298,7 +298,7 @@ on_new_connection (GDBusServer *server,
   GError *error;
   guint reg_id;
 
-  //g_print ("Client connected.\n"
+  //g_printerr ("Client connected.\n"
   //         "Negotiated capabilities: unix-fd-passing=%d\n",
   //         g_dbus_connection_get_capabilities (connection) & G_DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING);
 
@@ -335,14 +335,34 @@ on_new_connection (GDBusServer *server,
   return TRUE;
 }
 
-static void
-create_service_loop (GMainContext *service_context)
+/* We don't tell the main thread about the new GDBusServer until it has
+ * had a chance to start listening. */
+static gboolean
+idle_in_service_loop (gpointer loop)
 {
   g_assert (service_loop == NULL);
   g_mutex_lock (&service_loop_lock);
-  service_loop = g_main_loop_new (service_context, FALSE);
+  service_loop = loop;
   g_cond_broadcast (&service_loop_cond);
   g_mutex_unlock (&service_loop_lock);
+
+  return G_SOURCE_REMOVE;
+}
+
+static void
+run_service_loop (GMainContext *service_context)
+{
+  GMainLoop *loop;
+  GSource *source;
+
+  g_assert (service_loop == NULL);
+
+  loop = g_main_loop_new (service_context, FALSE);
+  source = g_idle_source_new ();
+  g_source_set_callback (source, idle_in_service_loop, loop, NULL);
+  g_source_attach (source, service_context);
+  g_source_unref (source);
+  g_main_loop_run (loop);
 }
 
 static void
@@ -417,8 +437,7 @@ service_thread_func (gpointer user_data)
 
   g_dbus_server_start (server);
 
-  create_service_loop (service_context);
-  g_main_loop_run (service_loop);
+  run_service_loop (service_context);
 
   g_main_context_pop_thread_default (service_context);
 
@@ -512,8 +531,7 @@ service_thread_func (gpointer data)
                     data);
   g_socket_service_start (service);
 
-  create_service_loop (service_context);
-  g_main_loop_run (service_loop);
+  run_service_loop (service_context);
 
   g_main_context_pop_thread_default (service_context);
 
@@ -628,7 +646,7 @@ read_all_from_fd (gint fd, gsize *out_len, GError **error)
 
  error:
   if (out_len != NULL)
-    out_len = 0;
+    *out_len = 0;
   g_string_free (str, TRUE);
   return NULL;
 }
@@ -817,8 +835,7 @@ test_peer (void)
                          &len2,
                          &error);
     g_assert_no_error (error);
-    g_assert_cmpint (len, ==, len2);
-    g_assert (memcmp (buf, buf2, len) == 0);
+    g_assert_cmpmem (buf, len, buf2, len2);
     g_free (buf2);
     g_free (buf);
   }
@@ -1212,8 +1229,7 @@ nonce_tcp_service_thread_func (gpointer user_data)
 
   g_dbus_server_start (server);
 
-  create_service_loop (service_context);
-  g_main_loop_run (service_loop);
+  run_service_loop (service_context);
 
   g_main_context_pop_thread_default (service_context);
 
@@ -1405,8 +1421,7 @@ tcp_anonymous_service_thread_func (gpointer user_data)
 
   g_dbus_server_start (server);
 
-  create_service_loop (service_context);
-  g_main_loop_run (service_loop);
+  run_service_loop (service_context);
 
   g_main_context_pop_thread_default (service_context);
 
@@ -1519,7 +1534,7 @@ codegen_on_new_connection (GDBusServer *server,
   ExampleAnimal *animal = user_data;
   GError        *error = NULL;
 
-  /* g_print ("Client connected.\n" */
+  /* g_printerr ("Client connected.\n" */
   /*          "Negotiated capabilities: unix-fd-passing=%d\n", */
   /*          g_dbus_connection_get_capabilities (connection) & G_DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING); */
 
@@ -1561,8 +1576,7 @@ codegen_service_thread_func (gpointer user_data)
                     G_CALLBACK (codegen_on_new_connection),
                     animal);
 
-  create_service_loop (service_context);
-  g_main_loop_run (service_loop);
+  run_service_loop (service_context);
 
   g_object_unref (animal);
 

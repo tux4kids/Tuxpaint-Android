@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -84,6 +84,13 @@
  * certain number of columns, then \%Ns is not a correct solution
  * anyway, since it fails to take wide characters (see g_unichar_iswide())
  * into account.
+ *
+ * Note also that there are various printf() parameters which are platform
+ * dependent. GLib provides platform independent macros for these parameters
+ * which should be used instead. A common example is %G_GUINT64_FORMAT, which
+ * should be used instead of `%llu` or similar parameters for formatting
+ * 64-bit integers. These macros are all named `G_*_FORMAT`; see
+ * [Basic Types][glib-Basic-Types].
  */
 
 /**
@@ -336,7 +343,7 @@ get_C_locale (void)
 
 /**
  * g_strdup:
- * @str: the string to duplicate
+ * @str: (nullable): the string to duplicate
  *
  * Duplicates a string. If @str is %NULL it returns %NULL.
  * The returned string should be freed with g_free()
@@ -379,7 +386,7 @@ g_memdup (gconstpointer mem,
 {
   gpointer new_mem;
 
-  if (mem)
+  if (mem && byte_size != 0)
     {
       new_mem = g_malloc (byte_size);
       memcpy (new_mem, mem, byte_size);
@@ -594,8 +601,8 @@ g_strconcat (const gchar *string1, ...)
 /**
  * g_strtod:
  * @nptr:    the string to convert to a numeric value.
- * @endptr:  if non-%NULL, it returns the character after
- *           the last character used in the conversion.
+ * @endptr:  (out) (transfer none) (optional): if non-%NULL, it returns the
+ *           character after the last character used in the conversion.
  *
  * Converts a string to a #gdouble value.
  * It calls the standard strtod() function to handle the conversion, but
@@ -647,8 +654,8 @@ g_strtod (const gchar *nptr,
 /**
  * g_ascii_strtod:
  * @nptr:    the string to convert to a numeric value.
- * @endptr:  if non-%NULL, it returns the character after
- *           the last character used in the conversion.
+ * @endptr:  (out) (transfer none) (optional): if non-%NULL, it returns the
+ *           character after the last character used in the conversion.
  *
  * Converts a string to a #gdouble value.
  *
@@ -1123,8 +1130,8 @@ g_parse_long_long (const gchar  *nptr,
 /**
  * g_ascii_strtoull:
  * @nptr:    the string to convert to a numeric value.
- * @endptr:  if non-%NULL, it returns the character after
- *           the last character used in the conversion.
+ * @endptr:  (out) (transfer none) (optional): if non-%NULL, it returns the
+ *           character after the last character used in the conversion.
  * @base:    to be used for the conversion, 2..36 or 0
  *
  * Converts a string to a #guint64 value.
@@ -1170,8 +1177,8 @@ g_ascii_strtoull (const gchar *nptr,
 /**
  * g_ascii_strtoll:
  * @nptr:    the string to convert to a numeric value.
- * @endptr:  if non-%NULL, it returns the character after
- *           the last character used in the conversion.
+ * @endptr:  (out) (transfer none) (optional): if non-%NULL, it returns the
+ *           character after the last character used in the conversion.
  * @base:    to be used for the conversion, 2..36 or 0
  *
  * Converts a string to a #gint64 value.
@@ -1231,30 +1238,70 @@ g_ascii_strtoll (const gchar *nptr,
  * @errnum: the system error number. See the standard C %errno
  *     documentation
  *
- * Returns a string corresponding to the given error code, e.g.
- * "no such process". You should use this function in preference to
- * strerror(), because it returns a string in UTF-8 encoding, and since
- * not all platforms support the strerror() function.
+ * Returns a string corresponding to the given error code, e.g. "no
+ * such process". Unlike strerror(), this always returns a string in
+ * UTF-8 encoding, and the pointer is guaranteed to remain valid for
+ * the lifetime of the process.
+ *
+ * Note that the string may be translated according to the current locale.
+ *
+ * The value of %errno will not be changed by this function.
  *
  * Returns: a UTF-8 string describing the error code. If the error code
- *     is unknown, it returns "unknown error (<code>)".
+ *     is unknown, it returns a string like "unknown error (<code>)".
  */
 const gchar *
 g_strerror (gint errnum)
 {
-  gchar *msg;
-  gchar *tofree = NULL;
-  const gchar *ret;
+  static GHashTable *errors;
+  G_LOCK_DEFINE_STATIC (errors);
+  const gchar *msg;
   gint saved_errno = errno;
 
-  msg = strerror (errnum);
-  if (!g_get_charset (NULL))
-    msg = tofree = g_locale_to_utf8 (msg, -1, NULL, NULL, NULL);
+  G_LOCK (errors);
+  if (errors)
+    msg = g_hash_table_lookup (errors, GINT_TO_POINTER (errnum));
+  else
+    {
+      errors = g_hash_table_new (NULL, NULL);
+      msg = NULL;
+    }
 
-  ret = g_intern_string (msg);
-  g_free (tofree);
+  if (!msg)
+    {
+      gchar buf[1024];
+      GError *error = NULL;
+
+#if defined(G_OS_WIN32)
+      strerror_s (buf, sizeof (buf), errnum);
+      msg = buf;
+#elif defined(HAVE_STRERROR_R)
+      /* Match the condition in strerror_r(3) for glibc */
+#  if defined(__GLIBC__) && !((_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600) && ! _GNU_SOURCE)
+      msg = strerror_r (errnum, buf, sizeof (buf));
+#  else
+      strerror_r (errnum, buf, sizeof (buf));
+      msg = buf;
+#  endif /* HAVE_STRERROR_R */
+#else
+      g_strlcpy (buf, strerror (errnum), sizeof (buf));
+      msg = buf;
+#endif
+      if (!g_get_charset (NULL))
+        {
+          msg = g_locale_to_utf8 (msg, -1, NULL, NULL, &error);
+          if (error)
+            g_print ("%s\n", error->message);
+        }
+      else if (msg == (const gchar *)buf)
+        msg = g_strdup (buf);
+
+      g_hash_table_insert (errors, GINT_TO_POINTER (errnum), (char *) msg);
+    }
+  G_UNLOCK (errors);
+
   errno = saved_errno;
-  return ret;
+  return msg;
 }
 
 /**
@@ -1917,7 +1964,7 @@ g_strncasecmp (const gchar *s1,
 /**
  * g_strdelimit:
  * @string: the string to convert
- * @delimiters: (allow-none): a string containing the current delimiters,
+ * @delimiters: (nullable): a string containing the current delimiters,
  *     or %NULL to use the standard delimiters defined in #G_STR_DELIMITERS
  * @new_delimiter: the new delimiter character
  *
@@ -2069,10 +2116,10 @@ out:
 /**
  * g_strescape:
  * @source: a string to escape
- * @exceptions: a string of characters not to escape in @source
+ * @exceptions: (nullable): a string of characters not to escape in @source
  *
  * Escapes the special characters '\b', '\f', '\n', '\r', '\t', '\v', '\'
- * and '&quot;' in the string @source by inserting a '\' before
+ * and '"' in the string @source by inserting a '\' before
  * them. Additionally all characters in the range 0x01-0x1F (everything
  * below SPACE) and in the range 0x7F-0xFF (all non-ASCII chars) are
  * replaced with a '\' followed by their octal representation.
@@ -2414,8 +2461,15 @@ g_strsplit_set (const gchar *string,
 }
 
 /**
+ * GStrv:
+ *
+ * A typedef alias for gchar**. This is mostly useful when used together with
+ * g_auto().
+ */
+
+/**
  * g_strfreev:
- * @str_array: a %NULL-terminated array of strings to free
+ * @str_array: (nullable): a %NULL-terminated array of strings to free
  *
  * Frees a %NULL-terminated array of strings, as well as each
  * string it contains.
@@ -2438,14 +2492,14 @@ g_strfreev (gchar **str_array)
 
 /**
  * g_strdupv:
- * @str_array: a %NULL-terminated array of strings
+ * @str_array: (nullable): a %NULL-terminated array of strings
  *
  * Copies %NULL-terminated array of strings. The copy is a deep copy;
  * the new array should be freed by first freeing each string, then
  * the array itself. g_strfreev() does this for you. If called
  * on a %NULL value, g_strdupv() simply returns %NULL.
  *
- * Returns: a new %NULL-terminated array of strings.
+ * Returns: (nullable): a new %NULL-terminated array of strings.
  */
 gchar**
 g_strdupv (gchar **str_array)
@@ -2477,13 +2531,17 @@ g_strdupv (gchar **str_array)
 
 /**
  * g_strjoinv:
- * @separator: (allow-none): a string to insert between each of the
+ * @separator: (nullable): a string to insert between each of the
  *     strings, or %NULL
  * @str_array: a %NULL-terminated array of strings to join
  *
  * Joins a number of strings together to form one long string, with the
  * optional @separator inserted between each of them. The returned string
  * should be freed with g_free().
+ *
+ * If @str_array has no items, the return value will be an
+ * empty string. If @str_array contains a single item, @separator will not
+ * appear in the resulting string.
  *
  * Returns: a newly-allocated string containing all of the strings joined
  *     together, with @separator between them
@@ -2530,7 +2588,7 @@ g_strjoinv (const gchar  *separator,
 
 /**
  * g_strjoin:
- * @separator: (allow-none): a string to insert between each of the
+ * @separator: (nullable): a string to insert between each of the
  *     strings, or %NULL
  * @...: a %NULL-terminated list of strings to join
  *
@@ -2921,7 +2979,7 @@ split_words (const gchar *value)
 /**
  * g_str_tokenize_and_fold:
  * @string: a string
- * @translit_locale: (allow-none): the language code (like 'de' or
+ * @translit_locale: (nullable): the language code (like 'de' or
  *   'en_GB') from which @string originates
  * @ascii_alternates: (out) (transfer full) (array zero-terminated=1): a
  *   return location for ASCII alternates
@@ -3107,3 +3165,221 @@ g_strv_contains (const gchar * const *strv,
 
   return FALSE;
 }
+
+static gboolean
+str_has_sign (const gchar *str)
+{
+  return str[0] == '-' || str[0] == '+';
+}
+
+static gboolean
+str_has_hex_prefix (const gchar *str)
+{
+  return str[0] == '0' && g_ascii_tolower (str[1]) == 'x';
+}
+
+/**
+ * g_ascii_string_to_signed:
+ * @str: a string
+ * @base: base of a parsed number
+ * @min: a lower bound (inclusive)
+ * @max: an upper bound (inclusive)
+ * @out_num: (out) (optional): a return location for a number
+ * @error: a return location for #GError
+ *
+ * A convenience function for converting a string to a signed number.
+ *
+ * This function assumes that @str contains only a number of the given
+ * @base that is within inclusive bounds limited by @min and @max. If
+ * this is true, then the converted number is stored in @out_num. An
+ * empty string is not a valid input. A string with leading or
+ * trailing whitespace is also an invalid input.
+ *
+ * @base can be between 2 and 36 inclusive. Hexadecimal numbers must
+ * not be prefixed with "0x" or "0X". Such a problem does not exist
+ * for octal numbers, since they were usually prefixed with a zero
+ * which does not change the value of the parsed number.
+ *
+ * Parsing failures result in an error with the %G_NUMBER_PARSER_ERROR
+ * domain. If the input is invalid, the error code will be
+ * %G_NUMBER_PARSER_ERROR_INVALID. If the parsed number is out of
+ * bounds - %G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS.
+ *
+ * See g_ascii_strtoll() if you have more complex needs such as
+ * parsing a string which starts with a number, but then has other
+ * characters.
+ *
+ * Returns: %TRUE if @str was a number, otherwise %FALSE.
+ *
+ * Since: 2.54
+ */
+gboolean
+g_ascii_string_to_signed (const gchar  *str,
+                          guint         base,
+                          gint64        min,
+                          gint64        max,
+                          gint64       *out_num,
+                          GError      **error)
+{
+  gint64 number;
+  const gchar *end_ptr = NULL;
+  gint saved_errno = 0;
+
+  g_return_val_if_fail (str != NULL, FALSE);
+  g_return_val_if_fail (base >= 2 && base <= 36, FALSE);
+  g_return_val_if_fail (min <= max, FALSE);
+  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+  if (str[0] == '\0')
+    {
+      g_set_error_literal (error,
+                           G_NUMBER_PARSER_ERROR, G_NUMBER_PARSER_ERROR_INVALID,
+                           _("Empty string is not a number"));
+      return FALSE;
+    }
+
+  errno = 0;
+  number = g_ascii_strtoll (str, (gchar **)&end_ptr, base);
+  saved_errno = errno;
+
+  if (/* We do not allow leading whitespace, but g_ascii_strtoll
+       * accepts it and just skips it, so we need to check for it
+       * ourselves.
+       */
+      g_ascii_isspace (str[0]) ||
+      /* We don't support hexadecimal numbers prefixed with 0x or
+       * 0X.
+       */
+      (base == 16 &&
+       (str_has_sign (str) ? str_has_hex_prefix (str + 1) : str_has_hex_prefix (str))) ||
+      (saved_errno != 0 && saved_errno != ERANGE) ||
+      end_ptr == NULL ||
+      *end_ptr != '\0')
+    {
+      g_set_error (error,
+                   G_NUMBER_PARSER_ERROR, G_NUMBER_PARSER_ERROR_INVALID,
+                   _("“%s” is not a signed number"), str);
+      return FALSE;
+    }
+  if (saved_errno == ERANGE || number < min || number > max)
+    {
+      gchar *min_str = g_strdup_printf ("%" G_GINT64_FORMAT, min);
+      gchar *max_str = g_strdup_printf ("%" G_GINT64_FORMAT, max);
+
+      g_set_error (error,
+                   G_NUMBER_PARSER_ERROR, G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS,
+                   _("Number “%s” is out of bounds [%s, %s]"),
+                   str, min_str, max_str);
+      g_free (min_str);
+      g_free (max_str);
+      return FALSE;
+    }
+  if (out_num != NULL)
+    *out_num = number;
+  return TRUE;
+}
+
+/**
+ * g_ascii_string_to_unsigned:
+ * @str: a string
+ * @base: base of a parsed number
+ * @min: a lower bound (inclusive)
+ * @max: an upper bound (inclusive)
+ * @out_num: (out) (optional): a return location for a number
+ * @error: a return location for #GError
+ *
+ * A convenience function for converting a string to an unsigned number.
+ *
+ * This function assumes that @str contains only a number of the given
+ * @base that is within inclusive bounds limited by @min and @max. If
+ * this is true, then the converted number is stored in @out_num. An
+ * empty string is not a valid input. A string with leading or
+ * trailing whitespace is also an invalid input.
+ *
+ * @base can be between 2 and 36 inclusive. Hexadecimal numbers must
+ * not be prefixed with "0x" or "0X". Such a problem does not exist
+ * for octal numbers, since they were usually prefixed with a zero
+ * which does not change the value of the parsed number.
+ *
+ * Parsing failures result in an error with the %G_NUMBER_PARSER_ERROR
+ * domain. If the input is invalid, the error code will be
+ * %G_NUMBER_PARSER_ERROR_INVALID. If the parsed number is out of
+ * bounds - %G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS.
+ *
+ * See g_ascii_strtoull() if you have more complex needs such as
+ * parsing a string which starts with a number, but then has other
+ * characters.
+ *
+ * Returns: %TRUE if @str was a number, otherwise %FALSE.
+ *
+ * Since: 2.54
+ */
+gboolean
+g_ascii_string_to_unsigned (const gchar  *str,
+                            guint         base,
+                            guint64       min,
+                            guint64       max,
+                            guint64      *out_num,
+                            GError      **error)
+{
+  guint64 number;
+  const gchar *end_ptr = NULL;
+  gint saved_errno = 0;
+
+  g_return_val_if_fail (str != NULL, FALSE);
+  g_return_val_if_fail (base >= 2 && base <= 36, FALSE);
+  g_return_val_if_fail (min <= max, FALSE);
+  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+  if (str[0] == '\0')
+    {
+      g_set_error_literal (error,
+                           G_NUMBER_PARSER_ERROR, G_NUMBER_PARSER_ERROR_INVALID,
+                           _("Empty string is not a number"));
+      return FALSE;
+    }
+
+  errno = 0;
+  number = g_ascii_strtoull (str, (gchar **)&end_ptr, base);
+  saved_errno = errno;
+
+  if (/* We do not allow leading whitespace, but g_ascii_strtoull
+       * accepts it and just skips it, so we need to check for it
+       * ourselves.
+       */
+      g_ascii_isspace (str[0]) ||
+      /* Unsigned number should have no sign.
+       */
+      str_has_sign (str) ||
+      /* We don't support hexadecimal numbers prefixed with 0x or
+       * 0X.
+       */
+      (base == 16 && str_has_hex_prefix (str)) ||
+      (saved_errno != 0 && saved_errno != ERANGE) ||
+      end_ptr == NULL ||
+      *end_ptr != '\0')
+    {
+      g_set_error (error,
+                   G_NUMBER_PARSER_ERROR, G_NUMBER_PARSER_ERROR_INVALID,
+                   _("“%s” is not an unsigned number"), str);
+      return FALSE;
+    }
+  if (saved_errno == ERANGE || number < min || number > max)
+    {
+      gchar *min_str = g_strdup_printf ("%" G_GUINT64_FORMAT, min);
+      gchar *max_str = g_strdup_printf ("%" G_GUINT64_FORMAT, max);
+
+      g_set_error (error,
+                   G_NUMBER_PARSER_ERROR, G_NUMBER_PARSER_ERROR_OUT_OF_BOUNDS,
+                   _("Number “%s” is out of bounds [%s, %s]"),
+                   str, min_str, max_str);
+      g_free (min_str);
+      g_free (max_str);
+      return FALSE;
+    }
+  if (out_num != NULL)
+    *out_num = number;
+  return TRUE;
+}
+
+G_DEFINE_QUARK (g-number-parser-error-quark, g_number_parser_error)

@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -48,7 +48,7 @@ static void g_union_volume_monitor_remove_monitor (GUnionVolumeMonitor *union_mo
 
 
 #define g_union_volume_monitor_get_type _g_union_volume_monitor_get_type
-G_DEFINE_TYPE (GUnionVolumeMonitor, g_union_volume_monitor, G_TYPE_VOLUME_MONITOR);
+G_DEFINE_TYPE (GUnionVolumeMonitor, g_union_volume_monitor, G_TYPE_VOLUME_MONITOR)
 
 static GRecMutex the_volume_monitor_mutex;
 
@@ -591,11 +591,7 @@ _g_mount_get_for_mount_path (const gchar  *mount_path,
   mount = NULL;
 
   if (klass->get_mount_for_mount_path)
-    {
-      g_rec_mutex_lock (&the_volume_monitor_mutex);
-      mount = klass->get_mount_for_mount_path (mount_path, cancellable);
-      g_rec_mutex_unlock (&the_volume_monitor_mutex);
-    }
+    mount = klass->get_mount_for_mount_path (mount_path, cancellable);
 
   /* TODO: How do we know this succeeded? Keep in mind that the native
    *       volume monitor may fail (e.g. not being able to connect to

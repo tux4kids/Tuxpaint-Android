@@ -1,10 +1,10 @@
 /*
  * Copyright © 2011 Canonical Ltd.
  *
- *  This library is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License as
- *  published by the Free Software Foundation; either version 2 of the
- *  licence, or (at your option) any later version.
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
  *
  *  This library is distributed in the hope that it will be useful, but
  *  WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -377,7 +377,7 @@ g_menu_exporter_group_subscribe (GMenuExporterGroup *group,
       guint id = GPOINTER_TO_INT (key);
       GMenuExporterMenu *menu = val;
 
-      if (g_sequence_get_length (menu->item_links))
+      if (!g_sequence_is_empty (menu->item_links))
         {
           g_variant_builder_open (builder, G_VARIANT_TYPE ("(uuaa{sv})"));
           g_variant_builder_add (builder, "u", group->id);

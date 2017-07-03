@@ -1,10 +1,10 @@
 /*
  * Copyright © 2011 Canonical Ltd.
  *
- * This library is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * licence, or (at your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -625,7 +625,7 @@ g_dbus_menu_group_changed (GDBusMenuGroup *group,
   while (g_variant_iter_loop (&iter, "@a{sv}", &item))
     g_sequence_insert_before (point, g_dbus_menu_group_create_item (item));
 
-  if (g_sequence_get_length (items) == 0)
+  if (g_sequence_is_empty (items))
     {
       g_hash_table_remove (group->menus, GINT_TO_POINTER (menu_id));
       items = NULL;

@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -1064,6 +1064,7 @@ _g_dbus_auth_run_server (GDBusAuth              *auth,
               if (!g_data_output_stream_put_string (dos, s, cancellable, error))
                 {
                   g_free (s);
+                  g_free (line);
                   goto out;
                 }
               g_free (s);
@@ -1077,7 +1078,6 @@ _g_dbus_auth_run_server (GDBusAuth              *auth,
               GType auth_mech_to_use_gtype;
 
               tokens = g_strsplit (line, " ", 0);
-              g_free (line);
 
               switch (g_strv_length (tokens))
                 {
@@ -1100,8 +1100,11 @@ _g_dbus_auth_run_server (GDBusAuth              *auth,
                                "Unexpected line '%s' while in WaitingForAuth state",
                                line);
                   g_strfreev (tokens);
+                  g_free (line);
                   goto out;
                 }
+
+              g_free (line);
 
               /* TODO: record that the client has attempted to use this mechanism */
               //g_debug ("client is trying '%s'", mech_name);
@@ -1129,6 +1132,7 @@ _g_dbus_auth_run_server (GDBusAuth              *auth,
                   gchar *initial_response;
                   gsize initial_response_len;
 
+                  g_clear_object (&mech);
                   mech = g_object_new (auth_mech_to_use_gtype,
                                        "stream", auth->priv->stream,
                                        "credentials", credentials,
@@ -1204,19 +1208,25 @@ _g_dbus_auth_run_server (GDBusAuth              *auth,
                       {
                         gchar *data;
                         gsize data_len;
-                        gchar *encoded_data;
+
                         data = _g_dbus_auth_mechanism_server_data_send (mech, &data_len);
-                        encoded_data = hexencode (data);
-                        s = g_strdup_printf ("DATA %s\r\n", encoded_data);
-                        g_free (encoded_data);
-                        g_free (data);
-                        debug_print ("SERVER: writing '%s'", s);
-                        if (!g_data_output_stream_put_string (dos, s, cancellable, error))
+                        if (data != NULL)
                           {
+                            gchar *encoded_data;
+
+                            encoded_data = hexencode (data);
+                            s = g_strdup_printf ("DATA %s\r\n", encoded_data);
+                            g_free (encoded_data);
+                            g_free (data);
+
+                            debug_print ("SERVER: writing '%s'", s);
+                            if (!g_data_output_stream_put_string (dos, s, cancellable, error))
+                              {
+                                g_free (s);
+                                goto out;
+                              }
                             g_free (s);
-                            goto out;
                           }
-                        g_free (s);
                       }
                       goto change_state;
                       break;

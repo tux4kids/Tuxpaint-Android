@@ -7,7 +7,7 @@ include $(top_srcdir)/glib.mk
 ACLOCAL_AMFLAGS = -I m4macros ${ACLOCAL_FLAGS}
 
 SUBDIRS = . m4macros glib gmodule gthread gobject gio po docs tests
-DIST_SUBDIRS = $(SUBDIRS) build
+DIST_SUBDIRS = $(SUBDIRS) build win32
 
 bin_SCRIPTS = glib-gettextize
 
@@ -102,6 +102,10 @@ pkgconfig_DATA += gio-windows-2.0.pc
 endif
 
 $(pkgconfig_DATA): config.status
+
+# Install Valgrind suppression file
+valgrinddir = $(datadir)/glib-2.0/valgrind
+dist_valgrind_DATA = glib.supp
 
 # build documentation when doing distcheck
 DISTCHECK_CONFIGURE_FLAGS = --enable-debug --enable-gtk-doc --enable-man --disable-maintainer-mode

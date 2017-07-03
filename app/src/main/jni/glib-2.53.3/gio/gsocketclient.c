@@ -6,7 +6,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -489,7 +489,7 @@ g_socket_client_get_local_address (GSocketClient *client)
 /**
  * g_socket_client_set_local_address:
  * @client: a #GSocketClient.
- * @address: (allow-none): a #GSocketAddress, or %NULL
+ * @address: (nullable): a #GSocketAddress, or %NULL
  *
  * Sets the local address of the socket client.
  * The sockets created by this object will bound to the
@@ -720,7 +720,7 @@ g_socket_client_get_proxy_resolver (GSocketClient *client)
 /**
  * g_socket_client_set_proxy_resolver:
  * @client: a #GSocketClient.
- * @proxy_resolver: (allow-none): a #GProxyResolver, or %NULL for the
+ * @proxy_resolver: (nullable): a #GProxyResolver, or %NULL for the
  *   default.
  *
  * Overrides the #GProxyResolver used by @client. You can call this if
@@ -767,7 +767,7 @@ g_socket_client_class_init (GSocketClientClass *class)
    * @client: the #GSocketClient
    * @event: the event that is occurring
    * @connectable: the #GSocketConnectable that @event is occurring on
-   * @connection: the current representation of the connection
+   * @connection: (nullable): the current representation of the connection
    *
    * Emitted when @client's activity on @connectable changes state.
    * Among other things, this can be used to provide progress
@@ -939,7 +939,7 @@ g_socket_client_emit_event (GSocketClient       *client,
  * g_socket_client_connect:
  * @client: a #GSocketClient.
  * @connectable: a #GSocketConnectable specifying the remote address.
- * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
+ * @cancellable: (nullable): optional #GCancellable object, %NULL to ignore.
  * @error: #GError for error reporting, or %NULL to ignore.
  *
  * Tries to resolve the @connectable and make a network connection to it.
@@ -1107,7 +1107,7 @@ g_socket_client_connect (GSocketClient       *client,
 	  else
 	    {
 	      g_set_error (&last_error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-			   _("Proxy protocol '%s' is not supported."),
+			   _("Proxy protocol “%s” is not supported."),
 			   protocol);
 	      g_object_unref (connection);
 	      connection = NULL;
@@ -1163,7 +1163,7 @@ g_socket_client_connect (GSocketClient       *client,
  * @client: a #GSocketClient
  * @host_and_port: the name and optionally port of the host to connect to
  * @default_port: the default port to connect to
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @error: a pointer to a #GError, or %NULL
  *
  * This is a helper function for g_socket_client_connect().
@@ -1227,7 +1227,7 @@ g_socket_client_connect_to_host (GSocketClient  *client,
  * @client: a #GSocketConnection
  * @domain: a domain name
  * @service: the name of the service to connect to
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @error: a pointer to a #GError, or %NULL
  *
  * Attempts to create a TCP connection to a service.
@@ -1270,7 +1270,7 @@ g_socket_client_connect_to_service (GSocketClient  *client,
  * @client: a #GSocketClient
  * @uri: A network URI
  * @default_port: the default port to connect to
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @error: a pointer to a #GError, or %NULL
  *
  * This is a helper function for g_socket_client_connect().
@@ -1558,7 +1558,7 @@ g_socket_client_connected_callback (GObject      *source,
       g_clear_error (&data->last_error);
 
       g_set_error (&data->last_error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-          _("Proxy protocol '%s' is not supported."),
+          _("Proxy protocol “%s” is not supported."),
           protocol);
 
       enumerator_next_async (data);
@@ -1637,7 +1637,7 @@ g_socket_client_enumerator_callback (GObject      *object,
  * g_socket_client_connect_async:
  * @client: a #GSocketClient
  * @connectable: a #GSocketConnectable specifying the remote address.
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: (scope async): a #GAsyncReadyCallback
  * @user_data: (closure): user data for the callback
  *
@@ -1679,6 +1679,7 @@ g_socket_client_connect_async (GSocketClient       *client,
     data->enumerator = g_socket_connectable_enumerate (connectable);
 
   data->task = g_task_new (client, cancellable, callback, user_data);
+  g_task_set_source_tag (data->task, g_socket_client_connect_async);
   g_task_set_task_data (data->task, data, (GDestroyNotify)g_socket_client_async_connect_data_free);
 
   enumerator_next_async (data);
@@ -1689,7 +1690,7 @@ g_socket_client_connect_async (GSocketClient       *client,
  * @client: a #GSocketClient
  * @host_and_port: the name and optionally the port of the host to connect to
  * @default_port: the default port to connect to
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: (scope async): a #GAsyncReadyCallback
  * @user_data: (closure): user data for the callback
  *
@@ -1735,7 +1736,7 @@ g_socket_client_connect_to_host_async (GSocketClient        *client,
  * @client: a #GSocketClient
  * @domain: a domain name
  * @service: the name of the service to connect to
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: (scope async): a #GAsyncReadyCallback
  * @user_data: (closure): user data for the callback
  *
@@ -1766,7 +1767,7 @@ g_socket_client_connect_to_service_async (GSocketClient       *client,
  * @client: a #GSocketClient
  * @uri: a network uri
  * @default_port: the default port to connect to
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: (scope async): a #GAsyncReadyCallback
  * @user_data: (closure): user data for the callback
  *

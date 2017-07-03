@@ -2,17 +2,17 @@
  * Copyright (C) 1998-2000 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef __G_MAIN_H__
@@ -101,8 +101,13 @@ typedef struct _GSourceCallbackFuncs    GSourceCallbackFuncs;
  *     function may be %NULL if the source was never connected to a callback
  *     using g_source_set_callback(). The @dispatch function should call the
  *     callback function with @user_data and whatever additional parameters
- *     are needed for this type of event source.
- * @finalize: Called when the source is finalized.
+ *     are needed for this type of event source. The return value of the
+ *     @dispatch function should be #G_SOURCE_REMOVE if the source should be
+ *     removed or #G_SOURCE_CONTINUE to keep it.
+ * @finalize: Called when the source is finalized. At this point, the source
+ *     will have been destroyed, had its callback cleared, and have been removed
+ *     from its #GMainContext, but it will still have its final reference count;
+ *     so methods can be called on it from within this function.
  *
  * The `GSourceFuncs` struct contains a table of
  * functions used to handle event sources in a generic manner.
@@ -138,6 +143,17 @@ typedef struct _GSourceFuncs            GSourceFuncs;
  * GPid is used in GLib only for descendant processes spawned with
  * the g_spawn functions.
  */
+/* defined in glibconfig.h */
+
+/**
+ * G_PID_FORMAT:
+ *
+ * A format specifier that can be used in printf()-style format strings
+ * when printing a #GPid.
+ *
+ * Since: 2.50
+ */
+/* defined in glibconfig.h */
 
 /**
  * GSourceFunc:
@@ -353,10 +369,10 @@ gint     g_main_context_query    (GMainContext *context,
                                   GPollFD      *fds,
                                   gint          n_fds);
 GLIB_AVAILABLE_IN_ALL
-gint     g_main_context_check    (GMainContext *context,
-                                  gint          max_priority,
-                                  GPollFD      *fds,
-                                  gint          n_fds);
+gboolean     g_main_context_check    (GMainContext *context,
+                                      gint          max_priority,
+                                      GPollFD      *fds,
+                                      gint          n_fds);
 GLIB_AVAILABLE_IN_ALL
 void     g_main_context_dispatch (GMainContext *context);
 

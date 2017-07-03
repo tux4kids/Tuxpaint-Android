@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -39,6 +39,8 @@
  * a #GIOStream and provides TLS encryption on top of it. Its
  * subclasses, #GTlsClientConnection and #GTlsServerConnection,
  * implement client-side and server-side TLS, respectively.
+ *
+ * For DTLS (Datagram TLS) support, see #GDtlsConnection.
  *
  * Since: 2.28
  */
@@ -95,7 +97,11 @@ g_tls_connection_class_init (GTlsConnectionClass *klass)
   /**
    * GTlsConnection:base-io-stream:
    *
-   * The #GIOStream that the connection wraps
+   * The #GIOStream that the connection wraps. The connection holds a reference
+   * to this stream, and may run operations on the stream from other threads
+   * throughout its lifetime. Consequently, after the #GIOStream has been
+   * constructed, application code may only run its own operations on this
+   * stream when no #GIOStream operations are running.
    *
    * Since: 2.28
    */
@@ -128,7 +134,7 @@ g_tls_connection_class_init (GTlsConnectionClass *klass)
    * GTlsConnection:database:
    *
    * The certificate database to use when verifying this TLS connection.
-   * If no cerificate database is set, then the default database will be
+   * If no certificate database is set, then the default database will be
    * used. See g_tls_backend_get_default_database().
    *
    * Since: 2.30
@@ -200,7 +206,7 @@ g_tls_connection_class_init (GTlsConnectionClass *klass)
   g_object_class_install_property (gobject_class, PROP_CERTIFICATE,
 				   g_param_spec_object ("certificate",
 							P_("Certificate"),
-							P_("The connection's certificate"),
+							P_("The connection’s certificate"),
 							G_TYPE_TLS_CERTIFICATE,
 							G_PARAM_READWRITE |
 							G_PARAM_STATIC_STRINGS));
@@ -220,7 +226,7 @@ g_tls_connection_class_init (GTlsConnectionClass *klass)
   g_object_class_install_property (gobject_class, PROP_PEER_CERTIFICATE,
 				   g_param_spec_object ("peer-certificate",
 							P_("Peer Certificate"),
-							P_("The connection's peer's certificate"),
+							P_("The connection’s peer’s certificate"),
 							G_TYPE_TLS_CERTIFICATE,
 							G_PARAM_READABLE |
 							G_PARAM_STATIC_STRINGS));
@@ -239,7 +245,7 @@ g_tls_connection_class_init (GTlsConnectionClass *klass)
   g_object_class_install_property (gobject_class, PROP_PEER_CERTIFICATE_ERRORS,
 				   g_param_spec_flags ("peer-certificate-errors",
 						       P_("Peer Certificate Errors"),
-						       P_("Errors found with the peer's certificate"),
+						       P_("Errors found with the peer’s certificate"),
 						       G_TYPE_TLS_CERTIFICATE_FLAGS,
 						       0,
 						       G_PARAM_READABLE |
@@ -495,7 +501,7 @@ g_tls_connection_get_certificate (GTlsConnection *conn)
 /**
  * g_tls_connection_set_interaction:
  * @conn: a connection
- * @interaction: (allow-none): an interaction object, or %NULL
+ * @interaction: (nullable): an interaction object, or %NULL
  *
  * Set the object that will be used to interact with the user. It will be used
  * for things like prompting the user for passwords.
@@ -621,7 +627,8 @@ g_tls_connection_get_peer_certificate_errors (GTlsConnection *conn)
  * on @conn, this will send a close notification regardless of the
  * setting of this property. If you explicitly want to do an unclean
  * close, you can close @conn's #GTlsConnection:base-io-stream rather
- * than closing @conn itself.
+ * than closing @conn itself, but note that this may only be done when no other
+ * operations are pending on @conn or the base I/O stream.
  *
  * Since: 2.28
  */
@@ -728,7 +735,7 @@ g_tls_connection_get_rehandshake_mode (GTlsConnection       *conn)
 /**
  * g_tls_connection_handshake:
  * @conn: a #GTlsConnection
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @error: a #GError, or %NULL
  *
  * Attempts a TLS handshake on @conn.
@@ -772,7 +779,7 @@ g_tls_connection_handshake (GTlsConnection   *conn,
  * g_tls_connection_handshake_async:
  * @conn: a #GTlsConnection
  * @io_priority: the [I/O priority][io-priority] of the request
- * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @cancellable: (nullable): a #GCancellable, or %NULL
  * @callback: callback to call when the handshake is complete
  * @user_data: the data to pass to the callback function
  *

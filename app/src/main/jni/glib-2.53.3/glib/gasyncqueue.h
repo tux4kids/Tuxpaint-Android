@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -96,6 +96,19 @@ GLIB_AVAILABLE_IN_ALL
 void         g_async_queue_sort_unlocked        (GAsyncQueue      *queue,
                                                  GCompareDataFunc  func,
                                                  gpointer          user_data);
+
+GLIB_AVAILABLE_IN_2_46
+gboolean     g_async_queue_remove               (GAsyncQueue      *queue,
+                                                 gpointer          item);
+GLIB_AVAILABLE_IN_2_46
+gboolean     g_async_queue_remove_unlocked      (GAsyncQueue      *queue,
+                                                 gpointer          item);
+GLIB_AVAILABLE_IN_2_46
+void         g_async_queue_push_front           (GAsyncQueue      *queue,
+                                                 gpointer          item);
+GLIB_AVAILABLE_IN_2_46
+void         g_async_queue_push_front_unlocked  (GAsyncQueue      *queue,
+                                                 gpointer          item);
 
 GLIB_DEPRECATED_FOR(g_async_queue_timeout_pop)
 gpointer     g_async_queue_timed_pop            (GAsyncQueue      *queue,

@@ -51,9 +51,15 @@
 
 
 /* BOOLEAN:INT (./testmarshal.list:2) */
+extern void test_marshal_BOOLEAN__INT (GClosure     *closure,
+                                       GValue       *return_value,
+                                       guint         n_param_values,
+                                       const GValue *param_values,
+                                       gpointer      invocation_hint,
+                                       gpointer      marshal_data);
 void
 test_marshal_BOOLEAN__INT (GClosure     *closure,
-                           GValue       *return_value G_GNUC_UNUSED,
+                           GValue       *return_value,
                            guint         n_param_values,
                            const GValue *param_values,
                            gpointer      invocation_hint G_GNUC_UNUSED,
@@ -62,9 +68,9 @@ test_marshal_BOOLEAN__INT (GClosure     *closure,
   typedef gboolean (*GMarshalFunc_BOOLEAN__INT) (gpointer     data1,
                                                  gint         arg_1,
                                                  gpointer     data2);
-  register GMarshalFunc_BOOLEAN__INT callback;
-  register GCClosure *cc = (GCClosure*) closure;
-  register gpointer data1, data2;
+  GMarshalFunc_BOOLEAN__INT callback;
+  GCClosure *cc = (GCClosure*) closure;
+  gpointer data1, data2;
   gboolean v_return;
 
   g_return_if_fail (return_value != NULL);
@@ -90,9 +96,15 @@ test_marshal_BOOLEAN__INT (GClosure     *closure,
 }
 
 /* STRING:INT (./testmarshal.list:3) */
+extern void test_marshal_STRING__INT (GClosure     *closure,
+                                      GValue       *return_value,
+                                      guint         n_param_values,
+                                      const GValue *param_values,
+                                      gpointer      invocation_hint,
+                                      gpointer      marshal_data);
 void
 test_marshal_STRING__INT (GClosure     *closure,
-                          GValue       *return_value G_GNUC_UNUSED,
+                          GValue       *return_value,
                           guint         n_param_values,
                           const GValue *param_values,
                           gpointer      invocation_hint G_GNUC_UNUSED,
@@ -101,9 +113,9 @@ test_marshal_STRING__INT (GClosure     *closure,
   typedef gchar* (*GMarshalFunc_STRING__INT) (gpointer     data1,
                                               gint         arg_1,
                                               gpointer     data2);
-  register GMarshalFunc_STRING__INT callback;
-  register GCClosure *cc = (GCClosure*) closure;
-  register gpointer data1, data2;
+  GMarshalFunc_STRING__INT callback;
+  GCClosure *cc = (GCClosure*) closure;
+  gpointer data1, data2;
   gchar* v_return;
 
   g_return_if_fail (return_value != NULL);
@@ -129,9 +141,15 @@ test_marshal_STRING__INT (GClosure     *closure,
 }
 
 /* VARIANT:POINTER (./testmarshal.list:4) */
+extern void test_marshal_VARIANT__POINTER (GClosure     *closure,
+                                           GValue       *return_value,
+                                           guint         n_param_values,
+                                           const GValue *param_values,
+                                           gpointer      invocation_hint,
+                                           gpointer      marshal_data);
 void
 test_marshal_VARIANT__POINTER (GClosure     *closure,
-                               GValue       *return_value G_GNUC_UNUSED,
+                               GValue       *return_value,
                                guint         n_param_values,
                                const GValue *param_values,
                                gpointer      invocation_hint G_GNUC_UNUSED,
@@ -140,9 +158,9 @@ test_marshal_VARIANT__POINTER (GClosure     *closure,
   typedef GVariant* (*GMarshalFunc_VARIANT__POINTER) (gpointer     data1,
                                                       gpointer     arg_1,
                                                       gpointer     data2);
-  register GMarshalFunc_VARIANT__POINTER callback;
-  register GCClosure *cc = (GCClosure*) closure;
-  register gpointer data1, data2;
+  GMarshalFunc_VARIANT__POINTER callback;
+  GCClosure *cc = (GCClosure*) closure;
+  gpointer data1, data2;
   GVariant* v_return;
 
   g_return_if_fail (return_value != NULL);

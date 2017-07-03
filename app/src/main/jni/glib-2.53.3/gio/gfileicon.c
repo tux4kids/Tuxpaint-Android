@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -233,7 +233,7 @@ g_file_icon_from_tokens (gchar  **tokens,
       g_set_error (error,
                    G_IO_ERROR,
                    G_IO_ERROR_INVALID_ARGUMENT,
-                   _("Can't handle version %d of GFileIcon encoding"),
+                   _("Can’t handle version %d of GFileIcon encoding"),
                    version);
       goto out;
     }
@@ -322,6 +322,7 @@ g_file_icon_load_async (GLoadableIcon       *icon,
   GTask *task;
 
   task = g_task_new (icon, cancellable, callback, user_data);
+  g_task_set_source_tag (task, g_file_icon_load_async);
   
   g_file_read_async (file_icon->file, 0,
                      cancellable,

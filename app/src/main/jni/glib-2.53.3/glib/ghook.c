@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -453,7 +453,7 @@ g_hook_prepend (GHookList *hook_list,
 /**
  * g_hook_insert_before:
  * @hook_list: a #GHookList
- * @sibling: the #GHook to insert the new #GHook before
+ * @sibling: (nullable): the #GHook to insert the new #GHook before
  * @hook: the #GHook to insert
  *
  * Inserts a #GHook into a #GHookList, before a given #GHook.
@@ -930,7 +930,7 @@ g_hook_find_func (GHookList *hook_list,
  * @hook_list: a #GHookList
  * @need_valids: %TRUE if #GHook elements which have been destroyed
  *     should be skipped
- * @func: the function to find
+ * @func: (not nullable): the function to find
  * @data: the data to find
  *
  * Finds a #GHook in a #GHookList with the given function and data.

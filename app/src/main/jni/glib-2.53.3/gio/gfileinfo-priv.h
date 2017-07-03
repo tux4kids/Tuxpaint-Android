@@ -6,7 +6,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -43,6 +43,7 @@
 #define G_FILE_ATTRIBUTE_ID_STANDARD_TARGET_URI (1048576 + 17)
 #define G_FILE_ATTRIBUTE_ID_STANDARD_SORT_ORDER (1048576 + 18)
 #define G_FILE_ATTRIBUTE_ID_STANDARD_SYMBOLIC_ICON (1048576 + 19)
+#define G_FILE_ATTRIBUTE_ID_STANDARD_IS_VOLATILE (1048576 + 20)
 #define G_FILE_ATTRIBUTE_ID_ETAG_VALUE (2097152 + 1)
 #define G_FILE_ATTRIBUTE_ID_ID_FILE (3145728 + 1)
 #define G_FILE_ATTRIBUTE_ID_ID_FILESYSTEM (3145728 + 2)

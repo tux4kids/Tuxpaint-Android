@@ -7,7 +7,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -103,7 +103,7 @@
  *            various functions such as g_io_channel_write_chars() to
  *            write raw bytes to the channel.  Encoding and buffering
  *            issues are dealt with at a higher level.
- * @io_seek: &lpar;optional&rpar; seeks the channel.  This is called from
+ * @io_seek: (optional) seeks the channel.  This is called from
  *           g_io_channel_seek() on channels that support it.
  * @io_close: closes the channel.  This is called from
  *            g_io_channel_close() after flushing the buffers.
@@ -421,7 +421,7 @@ g_io_channel_seek (GIOChannel *channel,
 
 /**
  * g_io_channel_new_file:
- * @filename: A string containing the name of a file
+ * @filename: (type filename): A string containing the name of a file
  * @mode: One of "r", "w", "a", "r+", "w+", "a+". These have
  *        the same meaning as in fopen()
  * @error: A location to return an error of type %G_FILE_ERROR
@@ -867,7 +867,7 @@ g_io_channel_get_buffer_size (GIOChannel *channel)
 /**
  * g_io_channel_set_line_term:
  * @channel: a #GIOChannel
- * @line_term: (allow-none): The line termination string. Use %NULL for
+ * @line_term: (nullable): The line termination string. Use %NULL for
  *             autodetect.  Autodetection breaks on "\n", "\r\n", "\r", "\0",
  *             and the Unicode paragraph separator. Autodetection should not be
  *             used for anything other than file-based channels.
@@ -1264,7 +1264,7 @@ g_io_channel_get_buffered (GIOChannel *channel)
 /**
  * g_io_channel_set_encoding:
  * @channel: a #GIOChannel
- * @encoding: (allow-none): the encoding type
+ * @encoding: (nullable): the encoding type
  * @error: location to store an error of type #GConvertError
  *
  * Sets the encoding for the input/output of the channel. 
@@ -1381,11 +1381,11 @@ g_io_channel_set_encoding (GIOChannel	*channel,
 
           if (err == EINVAL)
             g_set_error (error, G_CONVERT_ERROR, G_CONVERT_ERROR_NO_CONVERSION,
-                         _("Conversion from character set '%s' to '%s' is not supported"),
+                         _("Conversion from character set “%s” to “%s” is not supported"),
                          from_enc, to_enc);
           else
             g_set_error (error, G_CONVERT_ERROR, G_CONVERT_ERROR_FAILED,
-                         _("Could not open converter from '%s' to '%s': %s"),
+                         _("Could not open converter from “%s” to “%s”: %s"),
                          from_enc, to_enc, g_strerror (err));
 
           if (read_cd != (GIConv) -1)
@@ -1626,8 +1626,8 @@ reencode:
  *              line terminator. This data should be freed with g_free()
  *              when no longer needed. This is a nul-terminated string. 
  *              If a @length of zero is returned, this will be %NULL instead.
- * @length: (allow-none) (out): location to store length of the read data, or %NULL
- * @terminator_pos: (allow-none) (out): location to store position of line terminator, or %NULL
+ * @length: (out) (optional): location to store length of the read data, or %NULL
+ * @terminator_pos: (out) (optional): location to store position of line terminator, or %NULL
  * @error: A location to return an error of type #GConvertError
  *         or #GIOChannelError
  *
@@ -1677,7 +1677,7 @@ g_io_channel_read_line (GIOChannel  *channel,
  * @buffer: a #GString into which the line will be written.
  *          If @buffer already contains data, the old data will
  *          be overwritten.
- * @terminator_pos: (allow-none): location to store position of line terminator, or %NULL
+ * @terminator_pos: (nullable): location to store position of line terminator, or %NULL
  * @error: a location to store an error of type #GConvertError
  *         or #GIOChannelError
  *
@@ -1730,7 +1730,7 @@ g_io_channel_read_line_backend (GIOChannel  *channel,
     {
       /* Can't do a raw read in read_line */
       g_set_error_literal (error, G_CONVERT_ERROR, G_CONVERT_ERROR_FAILED,
-                           _("Can't do a raw read in g_io_channel_read_line_string"));
+                           _("Can’t do a raw read in g_io_channel_read_line_string"));
       return G_IO_STATUS_ERROR;
     }
 
@@ -1921,7 +1921,7 @@ g_io_channel_read_to_end (GIOChannel  *channel,
   if (!channel->use_buffer)
     {
       g_set_error_literal (error, G_CONVERT_ERROR, G_CONVERT_ERROR_FAILED,
-                           _("Can't do a raw read in g_io_channel_read_to_end"));
+                           _("Can’t do a raw read in g_io_channel_read_to_end"));
       return G_IO_STATUS_ERROR;
     }
 
@@ -1972,7 +1972,7 @@ g_io_channel_read_to_end (GIOChannel  *channel,
  * @count: (in): the size of the buffer. Note that the buffer may not be
  *     complelely filled even if there is data in the buffer if the
  *     remaining data is not a complete character.
- * @bytes_read: (allow-none) (out): The number of bytes read. This may be
+ * @bytes_read: (out) (optional): The number of bytes read. This may be
  *     zero even on success if count < 6 and the channel's encoding
  *     is non-%NULL. This indicates that the next UTF-8 character is
  *     too wide for the buffer.

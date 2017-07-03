@@ -3,19 +3,18 @@
  *  Copyright 2000, 2003 Red Hat, Inc.
  *  Copyright 2007, 2008 Ryan Lortie <desrt@desrt.ca>
  *
- * GLib is free software; you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
- * GLib is distributed in the hope that it will be useful,
+ * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with GLib; see the file COPYING.LIB.  If not,
- * see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "config.h"
@@ -423,7 +422,7 @@ set_error (GMarkupParseContext  *context,
   /* Make sure that the GError message is valid UTF-8
    * even if it is complaining about invalid UTF-8 in the markup
    */
-  s_valid = _g_utf8_make_valid (s);
+  s_valid = g_utf8_make_valid (s, -1);
   set_error_literal (context, error, code, s);
 
   g_free (s);
@@ -618,7 +617,6 @@ unescape_gstring_inplace (GMarkupParseContext  *context,
                           GError              **error)
 {
   char mask, *to;
-  int line_num = 1;
   const char *from;
   gboolean normalize_attribute;
 
@@ -642,8 +640,6 @@ unescape_gstring_inplace (GMarkupParseContext  *context,
       *to = *from;
 
       mask |= *to;
-      if (*to == '\n')
-        line_num++;
       if (normalize_attribute && (*to == '\t' || *to == '\n'))
         *to = ' ';
       if (*to == '\r')
@@ -657,7 +653,7 @@ unescape_gstring_inplace (GMarkupParseContext  *context,
           from++;
           if (*from == '#')
             {
-              gboolean is_hex = FALSE;
+              gint base = 10;
               gulong l;
               gchar *end = NULL;
 
@@ -665,16 +661,12 @@ unescape_gstring_inplace (GMarkupParseContext  *context,
 
               if (*from == 'x')
                 {
-                  is_hex = TRUE;
+                  base = 16;
                   from++;
                 }
 
-              /* digit is between start and p */
               errno = 0;
-              if (is_hex)
-                l = strtoul (from, &end, 16);
-              else
-                l = strtoul (from, &end, 10);
+              l = strtoul (from, &end, base);
 
               if (end == from || errno != 0)
                 {
@@ -1917,8 +1909,8 @@ g_markup_parse_context_get_element_stack (GMarkupParseContext *context)
 /**
  * g_markup_parse_context_get_position:
  * @context: a #GMarkupParseContext
- * @line_number: (allow-none): return location for a line number, or %NULL
- * @char_number: (allow-none): return location for a char-on-line number, or %NULL
+ * @line_number: (nullable): return location for a line number, or %NULL
+ * @char_number: (nullable): return location for a char-on-line number, or %NULL
  *
  * Retrieves the current line number and the number of the character on
  * that line. Intended for use in error messages; there are no strict

@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,8 +23,9 @@
 #include "config.h"
 
 #include "glistmodel.h"
+#include "glibintl.h"
 
-G_DEFINE_INTERFACE (GListModel, g_list_model, G_TYPE_OBJECT);
+G_DEFINE_INTERFACE (GListModel, g_list_model, G_TYPE_OBJECT)
 
 /**
  * SECTION:glistmodel
@@ -60,7 +61,7 @@ G_DEFINE_INTERFACE (GListModel, g_list_model, G_TYPE_OBJECT);
  * interface, in which case all objects in the list must implement it.
  *
  * The semantics are close to that of an array:
- * g_list_model_get_length() returns the number of items in the list and
+ * g_list_model_get_n_items() returns the number of items in the list and
  * g_list_model_get_item() returns an item at a (0-based) position. In
  * order to allow implementations to calculate the list length lazily,
  * you can also iterate over items: starting from 0, repeatedly call
@@ -119,7 +120,7 @@ g_list_model_default_init (GListModelInterface *iface)
    *
    * Since: 2.44
    */
-  g_list_model_changed_signal = g_signal_new ("items-changed",
+  g_list_model_changed_signal = g_signal_new (I_("items-changed"),
                                               G_TYPE_LIST_MODEL,
                                               G_SIGNAL_RUN_LAST,
                                               0,

@@ -4,17 +4,17 @@
  *  Copyright (C) 2004       Anders Carlsson <andersca@gnome.org>
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -323,7 +323,7 @@ G_DEFINE_QUARK (g-option-context-error-quark, g_option_error)
 
 /**
  * g_option_context_new:
- * @parameter_string: (allow-none): a string which is displayed in
+ * @parameter_string: (nullable): a string which is displayed in
  *    the first line of `--help` output, after the usage summary
  *    `programname [OPTION...]`
  *
@@ -637,7 +637,7 @@ g_option_context_get_main_group (GOptionContext *context)
  * g_option_context_add_main_entries:
  * @context: a #GOptionContext
  * @entries: a %NULL-terminated array of #GOptionEntrys
- * @translation_domain: (allow-none): a translation domain to use for translating
+ * @translation_domain: (nullable): a translation domain to use for translating
  *    the `--help` output for the options in @entries
  *    with gettext(), or %NULL
  *
@@ -807,7 +807,7 @@ context_has_h_entry (GOptionContext *context)
  * g_option_context_get_help:
  * @context: a #GOptionContext
  * @main_help: if %TRUE, only include the main group
- * @group: (allow-none): the #GOptionGroup to create help for, or %NULL
+ * @group: (nullable): the #GOptionGroup to create help for, or %NULL
  *
  * Returns a formatted, translated help text for the given context.
  * To obtain the text produced by `--help`, call
@@ -854,8 +854,11 @@ g_option_context_get_help (GOptionContext *context,
         }
     }
 
-  g_string_append_printf (string, "%s\n  %s %s",
-                          _("Usage:"), g_get_prgname(), _("[OPTION...]"));
+  g_string_append_printf (string, "%s\n  %s", _("Usage:"), g_get_prgname ());
+  if (context->help_enabled ||
+      (context->main_group && context->main_group->n_entries > 0) ||
+      context->groups != NULL)
+    g_string_append_printf (string, " %s", _("[OPTION…]"));
 
   if (rest_description)
     {
@@ -1040,7 +1043,10 @@ g_option_context_get_help (GOptionContext *context,
     {
       list = context->groups;
 
-      g_string_append (string,  _("Application Options:"));
+      if (context->help_enabled || list)
+        g_string_append (string,  _("Application Options:"));
+      else
+        g_string_append (string, _("Options:"));
       g_string_append (string, "\n");
       if (context->main_group)
         for (i = 0; i < context->main_group->n_entries; i++)
@@ -1104,7 +1110,7 @@ parse_int (const gchar *arg_name,
     {
       g_set_error (error,
                    G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
-                   _("Cannot parse integer value '%s' for %s"),
+                   _("Cannot parse integer value “%s” for %s"),
                    arg, arg_name);
       return FALSE;
     }
@@ -1114,7 +1120,7 @@ parse_int (const gchar *arg_name,
     {
       g_set_error (error,
                    G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
-                   _("Integer value '%s' for %s out of range"),
+                   _("Integer value “%s” for %s out of range"),
                    arg, arg_name);
       return FALSE;
     }
@@ -1139,7 +1145,7 @@ parse_double (const gchar *arg_name,
     {
       g_set_error (error,
                    G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
-                   _("Cannot parse double value '%s' for %s"),
+                   _("Cannot parse double value “%s” for %s"),
                    arg, arg_name);
       return FALSE;
     }
@@ -1147,7 +1153,7 @@ parse_double (const gchar *arg_name,
     {
       g_set_error (error,
                    G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
-                   _("Double value '%s' for %s out of range"),
+                   _("Double value “%s” for %s out of range"),
                    arg, arg_name);
       return FALSE;
     }
@@ -1174,7 +1180,7 @@ parse_int64 (const gchar *arg_name,
     {
       g_set_error (error,
                    G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
-                   _("Cannot parse integer value '%s' for %s"),
+                   _("Cannot parse integer value “%s” for %s"),
                    arg, arg_name);
       return FALSE;
     }
@@ -1182,7 +1188,7 @@ parse_int64 (const gchar *arg_name,
     {
       g_set_error (error,
                    G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
-                   _("Integer value '%s' for %s out of range"),
+                   _("Integer value “%s” for %s out of range"),
                    arg, arg_name);
       return FALSE;
     }
@@ -1275,9 +1281,12 @@ parse_arg (GOptionContext *context,
 
         change = get_change (context, G_OPTION_ARG_STRING,
                              entry->arg_data);
-        g_free (change->allocated.str);
 
-        change->prev.str = *(gchar **)entry->arg_data;
+        if (!change->allocated.str)
+          change->prev.str = *(gchar **)entry->arg_data;
+        else
+          g_free (change->allocated.str);
+
         change->allocated.str = data;
 
         *(gchar **)entry->arg_data = data;
@@ -1339,9 +1348,12 @@ parse_arg (GOptionContext *context,
 #endif
         change = get_change (context, G_OPTION_ARG_FILENAME,
                              entry->arg_data);
-        g_free (change->allocated.str);
 
-        change->prev.str = *(gchar **)entry->arg_data;
+        if (!change->allocated.str)
+          change->prev.str = *(gchar **)entry->arg_data;
+        else
+          g_free (change->allocated.str);
+
         change->allocated.str = data;
 
         *(gchar **)entry->arg_data = data;
@@ -1856,8 +1868,8 @@ platform_get_argv0 (void)
 /**
  * g_option_context_parse:
  * @context: a #GOptionContext
- * @argc: (inout) (allow-none): a pointer to the number of command line arguments
- * @argv: (inout) (array length=argc) (allow-none): a pointer to the array of command line arguments
+ * @argc: (inout) (optional): a pointer to the number of command line arguments
+ * @argv: (inout) (array length=argc) (optional): a pointer to the array of command line arguments
  * @error: a return location for errors
  *
  * Parses the command line arguments, recognizing options
@@ -2225,9 +2237,9 @@ g_option_context_parse (GOptionContext   *context,
  * @help_description: a description for the `--help-`@name option.
  *   This string is translated using the translation domain or translation function
  *   of the group
- * @user_data: (allow-none): user data that will be passed to the pre- and post-parse hooks,
+ * @user_data: (nullable): user data that will be passed to the pre- and post-parse hooks,
  *   the error hook and to callbacks of %G_OPTION_ARG_CALLBACK options, or %NULL
- * @destroy: (allow-none): a function that will be called to free @user_data, or %NULL
+ * @destroy: (nullable): a function that will be called to free @user_data, or %NULL
  *
  * Creates a new #GOptionGroup.
  *
@@ -2349,7 +2361,10 @@ g_option_group_add_entries (GOptionGroup       *group,
 
   group->entries = g_renew (GOptionEntry, group->entries, group->n_entries + n_entries);
 
-  memcpy (group->entries + group->n_entries, entries, sizeof (GOptionEntry) * n_entries);
+  /* group->entries could be NULL in the trivial case where we add no
+   * entries to no entries */
+  if (n_entries != 0)
+    memcpy (group->entries + group->n_entries, entries, sizeof (GOptionEntry) * n_entries);
 
   for (i = group->n_entries; i < group->n_entries + n_entries; i++)
     {
@@ -2387,8 +2402,8 @@ g_option_group_add_entries (GOptionGroup       *group,
 /**
  * g_option_group_set_parse_hooks:
  * @group: a #GOptionGroup
- * @pre_parse_func: (allow-none): a function to call before parsing, or %NULL
- * @post_parse_func: (allow-none): a function to call after parsing, or %NULL
+ * @pre_parse_func: (nullable): a function to call before parsing, or %NULL
+ * @post_parse_func: (nullable): a function to call after parsing, or %NULL
  *
  * Associates two functions with @group which will be called
  * from g_option_context_parse() before the first option is parsed
@@ -2437,9 +2452,9 @@ g_option_group_set_error_hook (GOptionGroup     *group,
 /**
  * g_option_group_set_translate_func:
  * @group: a #GOptionGroup
- * @func: (allow-none): the #GTranslateFunc, or %NULL
- * @data: (allow-none): user data to pass to @func, or %NULL
- * @destroy_notify: (allow-none): a function which gets called to free @data, or %NULL
+ * @func: (nullable): the #GTranslateFunc, or %NULL
+ * @data: (nullable): user data to pass to @func, or %NULL
+ * @destroy_notify: (nullable): a function which gets called to free @data, or %NULL
  *
  * Sets the function which is used to translate user-visible strings,
  * for `--help` output. Different groups can use different
@@ -2498,9 +2513,9 @@ g_option_group_set_translation_domain (GOptionGroup *group,
 /**
  * g_option_context_set_translate_func:
  * @context: a #GOptionContext
- * @func: (allow-none): the #GTranslateFunc, or %NULL
- * @data: (allow-none): user data to pass to @func, or %NULL
- * @destroy_notify: (allow-none): a function which gets called to free @data, or %NULL
+ * @func: (nullable): the #GTranslateFunc, or %NULL
+ * @data: (nullable): user data to pass to @func, or %NULL
+ * @destroy_notify: (nullable): a function which gets called to free @data, or %NULL
  *
  * Sets the function which is used to translate the contexts
  * user-visible strings, for `--help` output. If @func is %NULL,
@@ -2557,7 +2572,7 @@ g_option_context_set_translation_domain (GOptionContext *context,
 /**
  * g_option_context_set_summary:
  * @context: a #GOptionContext
- * @summary: (allow-none): a string to be shown in `--help` output
+ * @summary: (nullable): a string to be shown in `--help` output
  *  before the list of options, or %NULL
  *
  * Adds a string to be displayed in `--help` output before the list
@@ -2601,7 +2616,7 @@ g_option_context_get_summary (GOptionContext *context)
 /**
  * g_option_context_set_description:
  * @context: a #GOptionContext
- * @description: (allow-none): a string to be shown in `--help` output
+ * @description: (nullable): a string to be shown in `--help` output
  *   after the list of options, or %NULL
  *
  * Adds a string to be displayed in `--help` output after the list

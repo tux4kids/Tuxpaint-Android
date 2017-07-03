@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -457,7 +457,8 @@ struct _GTypeQuery
  * @instance: Location of a #GTypeInstance structure
  * 
  * Checks if @instance is a valid #GTypeInstance structure,
- * otherwise issues a warning and returns %FALSE.
+ * otherwise issues a warning and returns %FALSE. %NULL is not a valid
+ * #GTypeInstance.
  * 
  * This macro should only be used in type implementations.
  *
@@ -466,23 +467,26 @@ struct _GTypeQuery
 #define G_TYPE_CHECK_INSTANCE(instance)				(_G_TYPE_CHI ((GTypeInstance*) (instance)))
 /**
  * G_TYPE_CHECK_INSTANCE_CAST:
- * @instance: Location of a #GTypeInstance structure
+ * @instance: (nullable): Location of a #GTypeInstance structure
  * @g_type: The type to be returned
  * @c_type: The corresponding C type of @g_type
  * 
  * Checks that @instance is an instance of the type identified by @g_type
  * and issues a warning if this is not the case. Returns @instance casted 
  * to a pointer to @c_type.
+ *
+ * No warning will be issued if @instance is %NULL, and %NULL will be returned.
  * 
  * This macro should only be used in type implementations.
  */
 #define G_TYPE_CHECK_INSTANCE_CAST(instance, g_type, c_type)    (_G_TYPE_CIC ((instance), (g_type), c_type))
 /**
  * G_TYPE_CHECK_INSTANCE_TYPE:
- * @instance: Location of a #GTypeInstance structure.
+ * @instance: (nullable): Location of a #GTypeInstance structure.
  * @g_type: The type to be checked
  * 
- * Checks if @instance is an instance of the type identified by @g_type.
+ * Checks if @instance is an instance of the type identified by @g_type. If
+ * @instance is %NULL, %FALSE will be returned.
  * 
  * This macro should only be used in type implementations.
  *
@@ -491,10 +495,11 @@ struct _GTypeQuery
 #define G_TYPE_CHECK_INSTANCE_TYPE(instance, g_type)            (_G_TYPE_CIT ((instance), (g_type)))
 /**
  * G_TYPE_CHECK_INSTANCE_FUNDAMENTAL_TYPE:
- * @instance: Location of a #GTypeInstance structure.
+ * @instance: (nullable): Location of a #GTypeInstance structure.
  * @g_type: The fundamental type to be checked
  *
  * Checks if @instance is an instance of the fundamental type identified by @g_type.
+ * If @instance is %NULL, %FALSE will be returned.
  *
  * This macro should only be used in type implementations.
  *
@@ -539,18 +544,18 @@ struct _GTypeQuery
  * 
  * Checks that @g_class is a class structure of the type identified by @g_type
  * and issues a warning if this is not the case. Returns @g_class casted 
- * to a pointer to @c_type.
+ * to a pointer to @c_type. %NULL is not a valid class structure.
  * 
  * This macro should only be used in type implementations.
  */
 #define G_TYPE_CHECK_CLASS_CAST(g_class, g_type, c_type)        (_G_TYPE_CCC ((g_class), (g_type), c_type))
 /**
  * G_TYPE_CHECK_CLASS_TYPE:
- * @g_class: Location of a #GTypeClass structure
+ * @g_class: (nullable): Location of a #GTypeClass structure
  * @g_type: The type to be checked
  * 
  * Checks if @g_class is a class structure of the type identified by 
- * @g_type.
+ * @g_type. If @g_class is %NULL, %FALSE will be returned.
  * 
  * This macro should only be used in type implementations.
  *
@@ -629,7 +634,7 @@ struct _GTypeQuery
  * This macro should only be used in type implementations.
  * 
  * Since: 2.4
- * Returns: a pointer to the private data structure
+ * Returns: (not nullable): a pointer to the private data structure
  */
 #define G_TYPE_INSTANCE_GET_PRIVATE(instance, g_type, c_type)   ((c_type*) g_type_instance_get_private ((GTypeInstance*) (instance), (g_type)))
 
@@ -646,7 +651,7 @@ struct _GTypeQuery
  * This macro should only be used in type implementations.
  * 
  * Since: 2.24
- * Returns: a pointer to the private data structure
+ * Returns: (not nullable): a pointer to the private data structure
  */
 #define G_TYPE_CLASS_GET_PRIVATE(klass, g_type, c_type)   ((c_type*) g_type_class_get_private ((GTypeClass*) (klass), (g_type)))
 
@@ -746,7 +751,7 @@ int                   g_type_get_instance_count      (GType            type);
 /* --- type registration --- */
 /**
  * GBaseInitFunc:
- * @g_class: The #GTypeClass structure to initialize
+ * @g_class: (type GObject.TypeClass): The #GTypeClass structure to initialize
  * 
  * A callback function used by the type system to do base initialization
  * of the class structures of derived types. It is called as part of the
@@ -755,23 +760,23 @@ int                   g_type_get_instance_count      (GType            type);
  * For example, class members (such as strings) that are not sufficiently
  * handled by a plain memory copy of the parent class into the derived class
  * have to be altered. See GClassInitFunc() for a discussion of the class
- * intialization process.
+ * initialization process.
  */
 typedef void   (*GBaseInitFunc)              (gpointer         g_class);
 /**
  * GBaseFinalizeFunc:
- * @g_class: The #GTypeClass structure to finalize
+ * @g_class: (type GObject.TypeClass): The #GTypeClass structure to finalize
  * 
  * A callback function used by the type system to finalize those portions
  * of a derived types class structure that were setup from the corresponding
  * GBaseInitFunc() function. Class finalization basically works the inverse
- * way in which class intialization is performed.
- * See GClassInitFunc() for a discussion of the class intialization process.
+ * way in which class initialization is performed.
+ * See GClassInitFunc() for a discussion of the class initialization process.
  */
 typedef void   (*GBaseFinalizeFunc)          (gpointer         g_class);
 /**
  * GClassInitFunc:
- * @g_class: The #GTypeClass structure to initialize.
+ * @g_class: (type GObject.TypeClass): The #GTypeClass structure to initialize.
  * @class_data: The @class_data member supplied via the #GTypeInfo structure.
  * 
  * A callback function used by the type system to initialize the class
@@ -874,7 +879,7 @@ typedef void   (*GClassInitFunc)             (gpointer         g_class,
 					      gpointer         class_data);
 /**
  * GClassFinalizeFunc:
- * @g_class: The #GTypeClass structure to finalize
+ * @g_class: (type GObject.TypeClass): The #GTypeClass structure to finalize
  * @class_data: The @class_data member supplied via the #GTypeInfo structure
  * 
  * A callback function used by the type system to finalize a class.
@@ -890,7 +895,8 @@ typedef void   (*GClassFinalizeFunc)         (gpointer         g_class,
 /**
  * GInstanceInitFunc:
  * @instance: The instance to initialize
- * @g_class: The class of the type the instance is created for
+ * @g_class: (type GObject.TypeClass): The class of the type the instance is
+ *    created for
  * 
  * A callback function used by the type system to initialize a new
  * instance of a type. This function initializes all instance members and
@@ -908,7 +914,7 @@ typedef void   (*GInstanceInitFunc)          (GTypeInstance   *instance,
 					      gpointer         g_class);
 /**
  * GInterfaceInitFunc:
- * @g_iface: The interface structure to initialize
+ * @g_iface: (type GObject.TypeInterface): The interface structure to initialize
  * @iface_data: The @interface_data supplied via the #GInterfaceInfo structure
  * 
  * A callback function used by the type system to initialize a new
@@ -922,7 +928,7 @@ typedef void   (*GInterfaceInitFunc)         (gpointer         g_iface,
 					      gpointer         iface_data);
 /**
  * GInterfaceFinalizeFunc:
- * @g_iface: The interface structure to finalize
+ * @g_iface: (type GObject.TypeInterface): The interface structure to finalize
  * @iface_data: The @interface_data supplied via the #GInterfaceInfo structure
  * 
  * A callback function used by the type system to finalize an interface.
@@ -934,7 +940,8 @@ typedef void   (*GInterfaceFinalizeFunc)     (gpointer         g_iface,
 /**
  * GTypeClassCacheFunc:
  * @cache_data: data that was given to the g_type_add_class_cache_func() call
- * @g_class: The #GTypeClass structure which is unreferenced
+ * @g_class: (type GObject.TypeClass): The #GTypeClass structure which is
+ *    unreferenced
  * 
  * A callback function which is called when the reference count of a class 
  * drops to zero. It may use g_type_class_ref() to prevent the class from
@@ -954,7 +961,8 @@ typedef gboolean (*GTypeClassCacheFunc)	     (gpointer	       cache_data,
 /**
  * GTypeInterfaceCheckFunc:
  * @check_data: data passed to g_type_add_interface_check()
- * @g_iface: the interface that has been initialized
+ * @g_iface: (type GObject.TypeInterface): the interface that has been
+ *    initialized
  * 
  * A callback called after an interface vtable is initialized.
  * See g_type_add_interface_check().
@@ -1392,9 +1400,9 @@ guint     g_type_get_type_registration_serial (void);
                                                                                                          \
   _GLIB_DEFINE_AUTOPTR_CHAINUP (ModuleObjName, ParentName)                                               \
                                                                                                          \
-  static inline ModuleObjName * MODULE##_##OBJ_NAME (gconstpointer ptr) {                                \
+  static inline ModuleObjName * MODULE##_##OBJ_NAME (gpointer ptr) {                                     \
     return G_TYPE_CHECK_INSTANCE_CAST (ptr, module_obj_name##_get_type (), ModuleObjName); }             \
-  static inline gboolean MODULE##_IS_##OBJ_NAME (gconstpointer ptr) {                                    \
+  static inline gboolean MODULE##_IS_##OBJ_NAME (gpointer ptr) {                                         \
     return G_TYPE_CHECK_INSTANCE_TYPE (ptr, module_obj_name##_get_type ()); }                            \
   G_GNUC_END_IGNORE_DEPRECATIONS
 
@@ -1483,15 +1491,15 @@ guint     g_type_get_type_registration_serial (void);
                                                                                                          \
   _GLIB_DEFINE_AUTOPTR_CHAINUP (ModuleObjName, ParentName)                                               \
                                                                                                          \
-  static inline ModuleObjName * MODULE##_##OBJ_NAME (gconstpointer ptr) {                                     \
+  static inline ModuleObjName * MODULE##_##OBJ_NAME (gpointer ptr) {                                     \
     return G_TYPE_CHECK_INSTANCE_CAST (ptr, module_obj_name##_get_type (), ModuleObjName); }             \
-  static inline ModuleObjName##Class * MODULE##_##OBJ_NAME##_CLASS (gconstpointer ptr) {                      \
+  static inline ModuleObjName##Class * MODULE##_##OBJ_NAME##_CLASS (gpointer ptr) {                      \
     return G_TYPE_CHECK_CLASS_CAST (ptr, module_obj_name##_get_type (), ModuleObjName##Class); }         \
-  static inline gboolean MODULE##_IS_##OBJ_NAME (gconstpointer ptr) {                                         \
+  static inline gboolean MODULE##_IS_##OBJ_NAME (gpointer ptr) {                                         \
     return G_TYPE_CHECK_INSTANCE_TYPE (ptr, module_obj_name##_get_type ()); }                            \
-  static inline gboolean MODULE##_IS_##OBJ_NAME##_CLASS (gconstpointer ptr) {                                 \
+  static inline gboolean MODULE##_IS_##OBJ_NAME##_CLASS (gpointer ptr) {                                 \
     return G_TYPE_CHECK_CLASS_TYPE (ptr, module_obj_name##_get_type ()); }                               \
-  static inline ModuleObjName##Class * MODULE##_##OBJ_NAME##_GET_CLASS (gconstpointer ptr) {                  \
+  static inline ModuleObjName##Class * MODULE##_##OBJ_NAME##_GET_CLASS (gpointer ptr) {                  \
     return G_TYPE_INSTANCE_GET_CLASS (ptr, module_obj_name##_get_type (), ModuleObjName##Class); }       \
   G_GNUC_END_IGNORE_DEPRECATIONS
 
@@ -1561,11 +1569,11 @@ guint     g_type_get_type_registration_serial (void);
                                                                                                            \
   _GLIB_DEFINE_AUTOPTR_CHAINUP (ModuleObjName, PrerequisiteName)                                           \
                                                                                                            \
-  static inline ModuleObjName * MODULE##_##OBJ_NAME (gconstpointer ptr) {                                       \
+  static inline ModuleObjName * MODULE##_##OBJ_NAME (gpointer ptr) {                                       \
     return G_TYPE_CHECK_INSTANCE_CAST (ptr, module_obj_name##_get_type (), ModuleObjName); }               \
-  static inline gboolean MODULE##_IS_##OBJ_NAME (gconstpointer ptr) {                                           \
+  static inline gboolean MODULE##_IS_##OBJ_NAME (gpointer ptr) {                                           \
     return G_TYPE_CHECK_INSTANCE_TYPE (ptr, module_obj_name##_get_type ()); }                              \
-  static inline ModuleObjName##Interface * MODULE##_##OBJ_NAME##_GET_IFACE (gconstpointer ptr) {                \
+  static inline ModuleObjName##Interface * MODULE##_##OBJ_NAME##_GET_IFACE (gpointer ptr) {                \
     return G_TYPE_INSTANCE_GET_INTERFACE (ptr, module_obj_name##_get_type (), ModuleObjName##Interface); } \
   G_GNUC_END_IGNORE_DEPRECATIONS
 
@@ -1823,6 +1831,8 @@ guint     g_type_get_type_registration_serial (void);
  *   {
  *     MyObjectPrivate *priv = my_object_get_instance_private (obj);
  *
+ *     g_return_val_if_fail (MY_IS_OBJECT (obj), 0);
+ *
  *     return priv->foo;
  *   }
  *
@@ -1831,6 +1841,8 @@ guint     g_type_get_type_registration_serial (void);
  *                      gint      bar)
  *   {
  *     MyObjectPrivate *priv = my_object_get_instance_private (obj);
+ *
+ *     g_return_if_fail (MY_IS_OBJECT (obj));
  *
  *     if (priv->bar != bar)
  *       priv->bar = bar;
@@ -1842,6 +1854,10 @@ guint     g_type_get_type_registration_serial (void);
  *
  * Also note that private structs added with these macros must have a struct
  * name of the form `TypeNamePrivate`.
+ *
+ * It is safe to call _get_instance_private on %NULL or invalid object since
+ * it's only adding an offset to the instance pointer. In that case the returned
+ * pointer must not be dereferenced.
  *
  * Since: 2.38
  */
@@ -1927,7 +1943,8 @@ static void     type_name##_class_intern_init (gpointer klass) \
 }
 #endif /* GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38 */
 
-#define _G_DEFINE_TYPE_EXTENDED_BEGIN(TypeName, type_name, TYPE_PARENT, flags) \
+/* Added for _G_DEFINE_TYPE_EXTENDED_WITH_PRELUDE */
+#define _G_DEFINE_TYPE_EXTENDED_BEGIN_PRE(TypeName, type_name, TYPE_PARENT) \
 \
 static void     type_name##_init              (TypeName        *self); \
 static void     type_name##_class_init        (TypeName##Class *klass); \
@@ -1938,7 +1955,7 @@ _G_DEFINE_TYPE_EXTENDED_CLASS_INIT(TypeName, type_name) \
 \
 G_GNUC_UNUSED \
 static inline gpointer \
-type_name##_get_instance_private (const TypeName *self) \
+type_name##_get_instance_private (TypeName *self) \
 { \
   return (G_STRUCT_MEMBER_P (self, TypeName##_private_offset)); \
 } \
@@ -1946,7 +1963,11 @@ type_name##_get_instance_private (const TypeName *self) \
 GType \
 type_name##_get_type (void) \
 { \
-  static volatile gsize g_define_type_id__volatile = 0; \
+  static volatile gsize g_define_type_id__volatile = 0;
+  /* Prelude goes here */
+
+/* Added for _G_DEFINE_TYPE_EXTENDED_WITH_PRELUDE */
+#define _G_DEFINE_TYPE_EXTENDED_BEGIN_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
   if (g_once_init_enter (&g_define_type_id__volatile))  \
     { \
       GType g_define_type_id = \
@@ -1965,6 +1986,13 @@ type_name##_get_type (void) \
     }					\
   return g_define_type_id__volatile;	\
 } /* closes type_name##_get_type() */
+
+/* This was defined before we had G_DEFINE_TYPE_WITH_CODE_AND_PRELUDE, it's simplest
+ * to keep it.
+ */
+#define _G_DEFINE_TYPE_EXTENDED_BEGIN(TypeName, type_name, TYPE_PARENT, flags) \
+  _G_DEFINE_TYPE_EXTENDED_BEGIN_PRE(TypeName, type_name, TYPE_PARENT) \
+  _G_DEFINE_TYPE_EXTENDED_BEGIN_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
 
 #define _G_DEFINE_INTERFACE_EXTENDED_BEGIN(TypeName, type_name, TYPE_PREREQ) \
 \
@@ -2021,7 +2049,17 @@ type_name##_get_type (void) \
  * A convenience macro for boxed type implementations.
  * Similar to G_DEFINE_BOXED_TYPE(), but allows to insert custom code into the
  * type_name_get_type() function, e.g. to register value transformations with
- * g_value_register_transform_func().
+ * g_value_register_transform_func(), for instance:
+ *
+ * |[<!-- language="C" -->
+ * G_DEFINE_BOXED_TYPE_WITH_CODE (GdkRectangle, gdk_rectangle,
+ *                                gdk_rectangle_copy,
+ *                                gdk_rectangle_free,
+ *                                register_rectangle_transform_funcs (g_define_type_id))
+ * ]|
+ *
+ * Similarly to the %G_DEFINE_TYPE family of macros, the #GType of the newly
+ * defined boxed type is exposed in the `g_define_type_id` variable.
  *
  * Since: 2.26
  */

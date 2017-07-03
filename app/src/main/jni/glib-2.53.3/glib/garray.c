@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -34,6 +34,7 @@
 #include "garray.h"
 
 #include "gbytes.h"
+#include "ghash.h"
 #include "gslice.h"
 #include "gmem.h"
 #include "gtestutils.h"
@@ -385,7 +386,7 @@ array_free (GRealArray     *array,
 /**
  * g_array_append_vals:
  * @array: a #GArray
- * @data: a pointer to the elements to append to the end of the array
+ * @data: (not nullable): a pointer to the elements to append to the end of the array
  * @len: the number of elements to append
  *
  * Adds @len elements onto the end of the array.
@@ -415,6 +416,9 @@ g_array_append_vals (GArray       *farray,
 
   g_return_val_if_fail (array, NULL);
 
+  if (len == 0)
+    return farray;
+
   g_array_maybe_expand (array, len);
 
   memcpy (g_array_elt_pos (array, array->len), data, 
@@ -430,7 +434,7 @@ g_array_append_vals (GArray       *farray,
 /**
  * g_array_prepend_vals:
  * @array: a #GArray
- * @data: a pointer to the elements to prepend to the start of the array
+ * @data: (not nullable): a pointer to the elements to prepend to the start of the array
  * @len: the number of elements to prepend
  *
  * Adds @len elements onto the start of the array.
@@ -468,6 +472,9 @@ g_array_prepend_vals (GArray        *farray,
 
   g_return_val_if_fail (array, NULL);
 
+  if (len == 0)
+    return farray;
+
   g_array_maybe_expand (array, len);
 
   memmove (g_array_elt_pos (array, len), g_array_elt_pos (array, 0),
@@ -486,7 +493,7 @@ g_array_prepend_vals (GArray        *farray,
  * g_array_insert_vals:
  * @array: a #GArray
  * @index_: the index to place the elements at
- * @data: a pointer to the elements to insert
+ * @data: (not nullable): a pointer to the elements to insert
  * @len: the number of elements to insert
  *
  * Inserts @len elements into a #GArray at the given index.
@@ -516,6 +523,9 @@ g_array_insert_vals (GArray        *farray,
   GRealArray *array = (GRealArray*) farray;
 
   g_return_val_if_fail (array, NULL);
+
+  if (len == 0)
+    return farray;
 
   g_array_maybe_expand (array, len);
 
@@ -666,7 +676,7 @@ g_array_remove_range (GArray *farray,
   GRealArray *array = (GRealArray*) farray;
 
   g_return_val_if_fail (array, NULL);
-  g_return_val_if_fail (index_ < array->len, NULL);
+  g_return_val_if_fail (index_ <= array->len, NULL);
   g_return_val_if_fail (index_ + length <= array->len, NULL);
 
   if (array->clear_func != NULL)
@@ -913,7 +923,7 @@ g_ptr_array_sized_new (guint reserved_size)
 
 /**
  * g_ptr_array_new_with_free_func:
- * @element_free_func: (allow-none): A function to free elements with
+ * @element_free_func: (nullable): A function to free elements with
  *     destroy @array or %NULL
  *
  * Creates a new #GPtrArray with a reference count of 1 and use
@@ -939,7 +949,7 @@ g_ptr_array_new_with_free_func (GDestroyNotify element_free_func)
 /**
  * g_ptr_array_new_full:
  * @reserved_size: number of pointers preallocated
- * @element_free_func: (allow-none): A function to free elements with
+ * @element_free_func: (nullable): A function to free elements with
  *     destroy @array or %NULL
  *
  * Creates a new #GPtrArray with @reserved_size pointers preallocated
@@ -969,7 +979,7 @@ g_ptr_array_new_full (guint          reserved_size,
 /**
  * g_ptr_array_set_free_func:
  * @array: A #GPtrArray
- * @element_free_func: (allow-none): A function to free elements with
+ * @element_free_func: (nullable): A function to free elements with
  *     destroy @array or %NULL
  *
  * Sets a function for freeing each element when @array is destroyed
@@ -1263,7 +1273,7 @@ g_ptr_array_remove_range (GPtrArray *array,
   guint n;
 
   g_return_val_if_fail (rarray != NULL, NULL);
-  g_return_val_if_fail (index_ < rarray->len, NULL);
+  g_return_val_if_fail (index_ <= rarray->len, NULL);
   g_return_val_if_fail (index_ + length <= rarray->len, NULL);
 
   if (rarray->element_free_func != NULL)
@@ -1500,6 +1510,81 @@ g_ptr_array_foreach (GPtrArray *array,
 
   for (i = 0; i < array->len; i++)
     (*func) (array->pdata[i], user_data);
+}
+
+/**
+ * g_ptr_array_find: (skip)
+ * @haystack: pointer array to be searched
+ * @needle: pointer to look for
+ * @index_: (optional) (out caller-allocates): return location for the index of
+ *    the element, if found
+ *
+ * Checks whether @needle exists in @haystack. If the element is found, %TRUE is
+ * returned and the element’s index is returned in @index_ (if non-%NULL).
+ * Otherwise, %FALSE is returned and @index_ is undefined. If @needle exists
+ * multiple times in @haystack, the index of the first instance is returned.
+ *
+ * This does pointer comparisons only. If you want to use more complex equality
+ * checks, such as string comparisons, use g_ptr_array_find_with_equal_func().
+ *
+ * Returns: %TRUE if @needle is one of the elements of @haystack
+ * Since: 2.54
+ */
+gboolean
+g_ptr_array_find (GPtrArray     *haystack,
+                  gconstpointer  needle,
+                  guint         *index_)
+{
+  return g_ptr_array_find_with_equal_func (haystack, needle, NULL, index_);
+}
+
+/**
+ * g_ptr_array_find_with_equal_func: (skip)
+ * @haystack: pointer array to be searched
+ * @needle: pointer to look for
+ * @equal_func: (nullable): the function to call for each element, which should
+ *    return %TRUE when the desired element is found; or %NULL to use pointer
+ *    equality
+ * @index_: (optional) (out caller-allocates): return location for the index of
+ *    the element, if found
+ *
+ * Checks whether @needle exists in @haystack, using the given @equal_func.
+ * If the element is found, %TRUE is returned and the element’s index is
+ * returned in @index_ (if non-%NULL). Otherwise, %FALSE is returned and @index_
+ * is undefined. If @needle exists multiple times in @haystack, the index of
+ * the first instance is returned.
+ *
+ * @equal_func is called with the element from the array as its first parameter,
+ * and @needle as its second parameter. If @equal_func is %NULL, pointer
+ * equality is used.
+ *
+ * Returns: %TRUE if @needle is one of the elements of @haystack
+ * Since: 2.54
+ */
+gboolean
+g_ptr_array_find_with_equal_func (GPtrArray     *haystack,
+                                  gconstpointer  needle,
+                                  GEqualFunc     equal_func,
+                                  guint         *index_)
+{
+  guint i;
+
+  g_return_val_if_fail (haystack != NULL, FALSE);
+
+  if (equal_func == NULL)
+    equal_func = g_direct_equal;
+
+  for (i = 0; i < haystack->len; i++)
+    {
+      if (equal_func (g_ptr_array_index (haystack, i), needle))
+        {
+          if (index_ != NULL)
+            *index_ = i;
+          return TRUE;
+        }
+    }
+
+  return FALSE;
 }
 
 /**
@@ -1813,7 +1898,7 @@ g_byte_array_remove_range (GByteArray *array,
                            guint       length)
 {
   g_return_val_if_fail (array, NULL);
-  g_return_val_if_fail (index_ < array->len, NULL);
+  g_return_val_if_fail (index_ <= array->len, NULL);
   g_return_val_if_fail (index_ + length <= array->len, NULL);
 
   return (GByteArray *)g_array_remove_range ((GArray *)array, index_, length);

@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the licence, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -246,8 +246,8 @@ g_settings_schema_source_unref (GSettingsSchemaSource *source)
 
 /**
  * g_settings_schema_source_new_from_directory:
- * @directory: the filename of a directory
- * @parent: (allow-none): a #GSettingsSchemaSource, or %NULL
+ * @directory: (type filename): the filename of a directory
+ * @parent: (nullable): a #GSettingsSchemaSource, or %NULL
  * @trusted: %TRUE, if the directory is trusted
  * @error: a pointer to a #GError pointer set to %NULL, or %NULL
  *
@@ -322,6 +322,14 @@ try_prepend_dir (const gchar *directory)
 }
 
 static void
+try_prepend_data_dir (const gchar *directory)
+{
+  const gchar *dirname = g_build_filename (directory, "glib-2.0", "schemas", NULL);
+  try_prepend_dir (dirname);
+  g_free (dirname);
+}
+
+static void
 initialise_schema_sources (void)
 {
   static gsize initialised;
@@ -340,13 +348,9 @@ initialise_schema_sources (void)
       for (i = 0; dirs[i]; i++);
 
       while (i--)
-        {
-          gchar *dirname;
+        try_prepend_data_dir (dirs[i]);
 
-          dirname = g_build_filename (dirs[i], "glib-2.0", "schemas", NULL);
-          try_prepend_dir (dirname);
-          g_free (dirname);
-        }
+      try_prepend_data_dir (g_get_user_data_dir ());
 
       if ((path = g_getenv ("GSETTINGS_SCHEMA_DIR")) != NULL)
         try_prepend_dir (path);
@@ -627,7 +631,7 @@ end_element (GMarkupParseContext *context,
 
           normalised = normalise_whitespace (info->string->str);
 
-          if (gettext_domain)
+          if (gettext_domain && normalised[0])
             {
               gchar *translated;
 
@@ -950,7 +954,7 @@ g_settings_schema_get_value (GSettingsSchema *schema,
 {
   GSettingsSchema *s = schema;
   GVariantIter *iter;
-  GVariant *value;
+  GVariant *value = NULL;
 
   g_return_val_if_fail (schema != NULL, NULL);
 
@@ -1036,6 +1040,8 @@ g_settings_schema_list_children (GSettingsSchema *schema)
   gint n_keys;
   gint i, j;
 
+  g_return_val_if_fail (schema != NULL, NULL);
+
   keys = g_settings_schema_list (schema, &n_keys);
   strv = g_new (gchar *, n_keys + 1);
   for (i = j = 0; i < n_keys; i++)
@@ -1050,6 +1056,45 @@ g_settings_schema_list_children (GSettingsSchema *schema)
           strv[j][length - 1] = '\0';
           j++;
         }
+    }
+  strv[j] = NULL;
+
+  return strv;
+}
+
+/**
+ * g_settings_schema_list_keys:
+ * @schema: a #GSettingsSchema
+ *
+ * Introspects the list of keys on @schema.
+ *
+ * You should probably not be calling this function from "normal" code
+ * (since you should already know what keys are in your schema).  This
+ * function is intended for introspection reasons.
+ *
+ * Returns: (transfer full) (element-type utf8): a list of the keys on
+ *   @schema
+ *
+ * Since: 2.46
+ */
+gchar **
+g_settings_schema_list_keys (GSettingsSchema *schema)
+{
+  const GQuark *keys;
+  gchar **strv;
+  gint n_keys;
+  gint i, j;
+
+  g_return_val_if_fail (schema != NULL, NULL);
+
+  keys = g_settings_schema_list (schema, &n_keys);
+  strv = g_new (gchar *, n_keys + 1);
+  for (i = j = 0; i < n_keys; i++)
+    {
+      const gchar *key = g_quark_to_string (keys[i]);
+
+      if (!g_str_has_suffix (key, "/"))
+        strv[j++] = g_strdup (key);
     }
   strv[j] = NULL;
 
@@ -1104,7 +1149,7 @@ g_settings_schema_list (GSettingsSchema *schema,
 
             child_table = NULL;
 
-            for (source = schema_sources; source; source = source->parent)
+            for (source = schema->source; source; source = source->parent)
               if ((child_table = gvdb_table_get_table (source->table, g_variant_get_string (child_schema, NULL))))
                 break;
 

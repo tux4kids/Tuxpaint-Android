@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -270,7 +270,7 @@ g_themed_icon_class_init (GThemedIconClass *klass)
   g_object_class_install_property (gobject_class, PROP_USE_DEFAULT_FALLBACKS,
                                    g_param_spec_boolean ("use-default-fallbacks",
                                                          P_("use default fallbacks"),
-                                                         P_("Whether to use default fallbacks found by shortening the name at '-' characters. Ignores names after the first if multiple names are given."),
+                                                         P_("Whether to use default fallbacks found by shortening the name at “-” characters. Ignores names after the first if multiple names are given."),
                                                          FALSE,
                                                          G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE | G_PARAM_STATIC_NAME | G_PARAM_STATIC_BLURB | G_PARAM_STATIC_NICK));
 }
@@ -515,7 +515,7 @@ g_themed_icon_from_tokens (gchar  **tokens,
       g_set_error (error,
                    G_IO_ERROR,
                    G_IO_ERROR_INVALID_ARGUMENT,
-                   _("Can't handle version %d of GThemedIcon encoding"),
+                   _("Can’t handle version %d of GThemedIcon encoding"),
                    version);
       goto out;
     }

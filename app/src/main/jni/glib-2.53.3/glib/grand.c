@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -262,8 +262,10 @@ g_rand_new (void)
       seed[3] = getppid ();
     }
 #else /* G_OS_WIN32 */
-  /* rand_s() is only available since Visual Studio 2005 */
-#if defined(_MSC_VER) && _MSC_VER >= 1400
+  /* rand_s() is only available since Visual Studio 2005 and
+   * MinGW-w64 has a wrapper that will emulate rand_s() if it's not in msvcrt
+   */
+#if (defined(_MSC_VER) && _MSC_VER >= 1400) || defined(__MINGW64_VERSION_MAJOR)
   gint i;
 
   for (i = 0; i < G_N_ELEMENTS (seed); i++)

@@ -9,7 +9,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -798,7 +798,7 @@ g_io_win32_prepare (GSource *source,
 
     default:
       g_assert_not_reached ();
-      abort ();
+      g_abort ();
     }
   if (channel->debug)
     g_print ("\n");
@@ -945,7 +945,7 @@ g_io_win32_check (GSource *source)
 
     default:
       g_assert_not_reached ();
-      abort ();
+      g_abort ();
     }
 }
 
@@ -1010,7 +1010,7 @@ g_io_win32_finalize (GSource *source)
 
     default:
       g_assert_not_reached ();
-      abort ();
+      g_abort ();
     }
   if (channel->debug)
     g_print ("\n");
@@ -1033,7 +1033,9 @@ g_io_win32_msg_read (GIOChannel *channel,
 {
   GIOWin32Channel *win32_channel = (GIOWin32Channel *)channel;
   MSG msg;               /* In case of alignment problems */
-  
+
+  *bytes_read = 0;
+
   if (count < sizeof (MSG))
     {
       g_set_error_literal (err, G_IO_CHANNEL_ERROR, G_IO_CHANNEL_ERROR_INVAL,
@@ -1062,7 +1064,9 @@ g_io_win32_msg_write (GIOChannel  *channel,
 {
   GIOWin32Channel *win32_channel = (GIOWin32Channel *)channel;
   MSG msg;
-  
+
+  *bytes_written = 0;
+
   if (count != sizeof (MSG))
     {
       g_set_error_literal (err, G_IO_CHANNEL_ERROR, G_IO_CHANNEL_ERROR_INVAL,
@@ -1295,7 +1299,7 @@ g_io_win32_fd_seek (GIOChannel *channel,
     default:
       whence = -1; /* Keep the compiler quiet */
       g_assert_not_reached ();
-      abort ();
+      g_abort ();
     }
 
   tmp_offset = offset;
@@ -1690,7 +1694,7 @@ g_io_channel_new_file (const gchar  *filename,
         break;
       default:
         g_assert_not_reached ();
-	abort ();
+        g_abort ();
     }
 
   /* always open 'untranslated' */
@@ -1736,37 +1740,11 @@ g_io_channel_new_file (const gchar  *filename,
         break;
       default:
         g_assert_not_reached ();
-	abort ();
+        g_abort ();
     }
 
   return channel;
 }
-
-#if !defined (_WIN64)
-
-#undef g_io_channel_new_file
-
-/* Binary compatibility version. Not for newly compiled code. */
-
-GIOChannel *
-g_io_channel_new_file (const gchar  *filename,
-                       const gchar  *mode,
-                       GError      **error)
-{
-  gchar *utf8_filename = g_locale_to_utf8 (filename, -1, NULL, NULL, error);
-  GIOChannel *retval;
-
-  if (utf8_filename == NULL)
-    return NULL;
-
-  retval = g_io_channel_new_file_utf8 (utf8_filename, mode, error);
-
-  g_free (utf8_filename);
-
-  return retval;
-}
-
-#endif
 
 static GIOStatus
 g_io_win32_unimpl_set_flags (GIOChannel *channel,
@@ -2225,7 +2203,7 @@ g_io_channel_win32_make_pollfd (GIOChannel   *channel,
 
     default:
       g_assert_not_reached ();
-      abort ();
+      g_abort ();
     }
   
   fd->events = condition;
@@ -2238,6 +2216,24 @@ GIOChannel *
 g_io_channel_win32_new_stream_socket (int socket)
 {
   return g_io_channel_win32_new_socket (socket);
+}
+
+#endif
+
+#ifdef G_OS_WIN32
+
+/* Binary compatibility versions. Not for newly compiled code. */
+
+_GLIB_EXTERN GIOChannel *g_io_channel_new_file_utf8 (const gchar  *filename,
+                                                     const gchar  *mode,
+                                                     GError      **error);
+
+GIOChannel *
+g_io_channel_new_file_utf8 (const gchar  *filename,
+                            const gchar  *mode,
+                            GError      **error)
+{
+  return g_io_channel_new_file (filename, mode, error);
 }
 
 #endif

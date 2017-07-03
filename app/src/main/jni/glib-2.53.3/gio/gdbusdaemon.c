@@ -7,6 +7,7 @@
 #include <gio/gio.h>
 #include <gio/gunixsocketaddress.h>
 #include "gdbusdaemon.h"
+#include "glibintl.h"
 
 #include "gdbus-daemon-generated.h"
 
@@ -74,7 +75,7 @@ static void g_dbus_daemon_iface_init (_GFreedesktopDBusIface *iface);
 #define g_dbus_daemon_get_type _g_dbus_daemon_get_type
 G_DEFINE_TYPE_WITH_CODE (GDBusDaemon, g_dbus_daemon, _G_TYPE_FREEDESKTOP_DBUS_SKELETON,
 			 G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE, initable_iface_init)
-			 G_IMPLEMENT_INTERFACE (_G_TYPE_FREEDESKTOP_DBUS, g_dbus_daemon_iface_init));
+			 G_IMPLEMENT_INTERFACE (_G_TYPE_FREEDESKTOP_DBUS, g_dbus_daemon_iface_init))
 
 typedef struct {
   GDBusDaemon *daemon;
@@ -1695,7 +1696,7 @@ g_dbus_daemon_class_init (GDBusDaemonClass *klass)
   gobject_class->get_property = g_dbus_daemon_get_property;
 
   g_dbus_daemon_signals[SIGNAL_IDLE_TIMEOUT] =
-    g_signal_new ("idle-timeout",
+    g_signal_new (I_("idle-timeout"),
 		  G_TYPE_DBUS_DAEMON,
 		  G_SIGNAL_RUN_LAST,
 		  0,

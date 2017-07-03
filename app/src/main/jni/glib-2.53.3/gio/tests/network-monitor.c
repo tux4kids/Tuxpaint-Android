@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -241,7 +241,8 @@ test_default (void)
   m = g_network_monitor_get_default ();
   g_assert (G_IS_NETWORK_MONITOR (m));
 
-  monitor = g_initable_newv (G_TYPE_NETWORK_MONITOR_BASE, 0, NULL, NULL,  &error);
+  monitor = g_object_new (G_TYPE_NETWORK_MONITOR_BASE, NULL);
+  g_initable_init (G_INITABLE (monitor), NULL, &error);
   g_assert_no_error (error);
 
   /* In the default configuration, all addresses are reachable */
@@ -500,6 +501,14 @@ watch_connectivity_changed (GNetworkMonitor *monitor,
 }
 
 static void
+watch_metered_changed (GNetworkMonitor *monitor,
+                       GParamSpec      *pspec,
+                       gpointer         user_data)
+{
+  g_print ("Metered is %d\n", g_network_monitor_get_network_metered (monitor));
+}
+
+static void
 do_watch_network (void)
 {
   GNetworkMonitor *monitor = g_network_monitor_get_default ();
@@ -511,8 +520,11 @@ do_watch_network (void)
                     G_CALLBACK (watch_network_changed), NULL);
   g_signal_connect (monitor, "notify::connectivity",
                     G_CALLBACK (watch_connectivity_changed), NULL);
+  g_signal_connect (monitor, "notify::network-metered",
+                    G_CALLBACK (watch_metered_changed), NULL);
   watch_network_changed (monitor, g_network_monitor_get_network_available (monitor), NULL);
   watch_connectivity_changed (monitor, NULL, NULL);
+  watch_metered_changed (monitor, NULL, NULL);
 
   loop = g_main_loop_new (NULL, FALSE);
   g_main_loop_run (loop);
