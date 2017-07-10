@@ -88,7 +88,9 @@ ifeq ($(SUPPORT_JPG),true)
 
     # assembler support is available for arm
     ifeq ($(TARGET_ARCH),arm)
-        LOCAL_SRC_FILES += $(JPG_LIBRARY_PATH)/jidctfst.S
+        # As of gradle 3.3, seems assembler support doesn't compiles fine
+        # LOCAL_SRC_FILES += $(JPG_LIBRARY_PATH)/jidctfst.S
+        LOCAL_SRC_FILES += $(JPG_LIBRARY_PATH)/jidctfst.c
     else
         LOCAL_SRC_FILES += $(JPG_LIBRARY_PATH)/jidctfst.c
     endif
