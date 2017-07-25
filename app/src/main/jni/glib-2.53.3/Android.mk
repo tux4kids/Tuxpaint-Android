@@ -2,6 +2,8 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
+LOCAL_DISABLE_FORMAT_STRING_CHECKS := true
+
 LOCAL_MODULE := tuxpaint_glib
 
 LOCAL_SRC_FILES :=  			\
@@ -22,7 +24,7 @@ LOCAL_SRC_FILES :=  			\
 	glib/pcre/pcre_tables.c 	\
 	glib/pcre/pcre_valid_utf8.c 	\
 	glib/pcre/pcre_xclass.c 	\
-    	glib/libcharset/localcharset.c 	\
+	glib/libcharset/localcharset.c 	\
 	glib/garray.c			\
 	glib/gasyncqueue.c		\
 	glib/gatomic.c			\
@@ -393,8 +395,8 @@ LOCAL_CFLAGS := \
 	-DGOBJECT_COMPILATION		\
 	-DG_DISABLE_CONST_RETURNS	\
 	-D_POSIX4_DRAFT_SOURCE		\
-    	-D_POSIX4A_DRAFT10_SOURCE	\
-    	-U_OSF_SOURCE			\
+	-D_POSIX4A_DRAFT10_SOURCE	\
+	-U_OSF_SOURCE			\
 	-DGIO_COMPILATION		\
 	-DGIO_MODULE_DIR=\"/mnt/sdcard/Android/data/org.tuxpaint/files/glib\"	\
 	-DXDG_PREFIX=_gio_xdg		\
