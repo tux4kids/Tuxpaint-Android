@@ -37,6 +37,17 @@
  * more freedom -- they can do as they please.
  */
 
+/*
+ * FIXME: Manually declaring HAVE_PTHREAD_COND_TIMEDWAIT_RELATIVE_NP
+ * to allow compiling under Android NDKs > r12 up to r15b currently.
+ * Otherwise, linking fails with undefined reference to pthread_condattr_setclock
+ * Tux Paint seems to continue working fine with this change.
+ * Pere 2017-07-24
+ */
+#define HAVE_PTHREAD_COND_TIMEDWAIT_RELATIVE_NP
+
+
+
 #include "config.h"
 
 #include "gthread.h"
