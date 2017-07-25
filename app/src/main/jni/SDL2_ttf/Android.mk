@@ -2,6 +2,8 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
+LOCAL_DISABLE_FORMAT_STRING_CHECKS := true
+
 LOCAL_MODULE := SDL2_ttf
 
 # Generally SDL2_ttf will compile the freetype in external folder.

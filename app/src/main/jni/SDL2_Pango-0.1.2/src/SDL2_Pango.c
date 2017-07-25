@@ -373,6 +373,88 @@ SDLPango_WasInit()
 }
 
 /*!
+    Copy bitmap to surface. 
+    From (x, y)-(w, h) to (x, y)-(w, h) of rect. 
+
+    @param *bitmap [in] Grayscale bitmap
+    @param *surface [out] Surface
+    @param *matrix [in] Foreground and background color
+    @param *rect [in] Rect to copy
+*/
+void
+SDLPango_CopyFTBitmapToSurface(
+    const FT_Bitmap *bitmap,
+    SDL_Surface *surface,
+    const SDLPango_Matrix *matrix,
+    SDL_Rect *rect)
+{
+    int i;
+    Uint8 *p_ft;
+    Uint8 *p_sdl;
+    int width = rect->w;
+    int height = rect->h;
+    int x = rect->x;
+    int y = rect->y;
+
+    if(x < 0) {
+	width += x; x = 0;
+    }
+    if(x + width > surface->w) {
+	width = surface->w - x;
+    }
+    if(width <= 0)
+	return;
+
+    if(y < 0) {
+	height += y; y = 0;
+    }
+    if(y + height > surface->h) {
+	height = surface->h - y;
+    }
+    if(height <= 0)
+	return;
+
+    if(SDL_LockSurface(surface)) {
+	SDL_SetError("surface lock failed");
+	SDL_FreeSurface(surface);
+	return;
+    }
+
+    p_ft = (Uint8 *)bitmap->buffer + (bitmap->pitch * y);
+    p_sdl = (Uint8 *)surface->pixels + (surface->pitch * y);
+    for(i = 0; i < height; i ++) {
+	int k;
+	for(k = 0; k < width; k ++) {
+	    /* TODO: rewrite by matrix calculation library */
+	    Uint8 pixel[4];	/* 4: RGBA */
+	    int n;
+
+	    for(n = 0; n < 4; n ++) {
+		Uint16 w;
+		w = ((Uint16)matrix->m[n][0] * (256 - p_ft[k + x])) + ((Uint16)matrix->m[n][1] * p_ft[k + x]);
+		pixel[n] = (Uint8)(w >> 8);
+	    }
+
+	    switch(surface->format->BytesPerPixel) {
+	    case 2:
+		((Uint16 *)p_sdl)[k + x] = (Uint16)SDL_MapRGBA(surface->format, pixel[0], pixel[1], pixel[2], pixel[3]);
+		break;
+	    case 4:
+		((Uint32 *)p_sdl)[k + x] = SDL_MapRGBA(surface->format, pixel[0], pixel[1], pixel[2], pixel[3]);
+		break;
+	    default:
+		SDL_SetError("surface->format->BytesPerPixel is invalid value");
+		return;
+	    }
+	}
+	p_ft += bitmap->pitch;
+	p_sdl += surface->pitch;
+    }
+
+    SDL_UnlockSurface(surface);
+}
+
+/*!
     Draw glyphs on rect.
 
     @param *context [in] Context
@@ -699,88 +781,6 @@ getItemProperties (
 	}
 	tmp_list = tmp_list->next;
     }
-}
-
-/*!
-    Copy bitmap to surface. 
-    From (x, y)-(w, h) to (x, y)-(w, h) of rect. 
-
-    @param *bitmap [in] Grayscale bitmap
-    @param *surface [out] Surface
-    @param *matrix [in] Foreground and background color
-    @param *rect [in] Rect to copy
-*/
-void
-SDLPango_CopyFTBitmapToSurface(
-    const FT_Bitmap *bitmap,
-    SDL_Surface *surface,
-    const SDLPango_Matrix *matrix,
-    SDL_Rect *rect)
-{
-    int i;
-    Uint8 *p_ft;
-    Uint8 *p_sdl;
-    int width = rect->w;
-    int height = rect->h;
-    int x = rect->x;
-    int y = rect->y;
-
-    if(x < 0) {
-	width += x; x = 0;
-    }
-    if(x + width > surface->w) {
-	width = surface->w - x;
-    }
-    if(width <= 0)
-	return;
-
-    if(y < 0) {
-	height += y; y = 0;
-    }
-    if(y + height > surface->h) {
-	height = surface->h - y;
-    }
-    if(height <= 0)
-	return;
-
-    if(SDL_LockSurface(surface)) {
-	SDL_SetError("surface lock failed");
-	SDL_FreeSurface(surface);
-	return;
-    }
-
-    p_ft = (Uint8 *)bitmap->buffer + (bitmap->pitch * y);
-    p_sdl = (Uint8 *)surface->pixels + (surface->pitch * y);
-    for(i = 0; i < height; i ++) {
-	int k;
-	for(k = 0; k < width; k ++) {
-	    /* TODO: rewrite by matrix calculation library */
-	    Uint8 pixel[4];	/* 4: RGBA */
-	    int n;
-
-	    for(n = 0; n < 4; n ++) {
-		Uint16 w;
-		w = ((Uint16)matrix->m[n][0] * (256 - p_ft[k + x])) + ((Uint16)matrix->m[n][1] * p_ft[k + x]);
-		pixel[n] = (Uint8)(w >> 8);
-	    }
-
-	    switch(surface->format->BytesPerPixel) {
-	    case 2:
-		((Uint16 *)p_sdl)[k + x] = (Uint16)SDL_MapRGBA(surface->format, pixel[0], pixel[1], pixel[2], pixel[3]);
-		break;
-	    case 4:
-		((Uint32 *)p_sdl)[k + x] = SDL_MapRGBA(surface->format, pixel[0], pixel[1], pixel[2], pixel[3]);
-		break;
-	    default:
-		SDL_SetError("surface->format->BytesPerPixel is invalid value");
-		return;
-	    }
-	}
-	p_ft += bitmap->pitch;
-	p_sdl += surface->pitch;
-    }
-
-    SDL_UnlockSurface(surface);
 }
 
 
