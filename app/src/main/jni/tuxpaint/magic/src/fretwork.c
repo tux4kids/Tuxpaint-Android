@@ -60,7 +60,7 @@ void fretwork_release(magic_api * api, int which,
 void fretwork_shutdown(magic_api * api);
 void fretwork_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * snapshot);
 void fretwork_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * snapshot);
-inline void fretwork_extract_coords_from_segment(unsigned int segment, Sint16 * x, Sint16 * y);
+static void fretwork_extract_coords_from_segment(unsigned int segment, Sint16 * x, Sint16 * y);
 void fretwork_click(magic_api * api, int which, int mode,
 		    SDL_Surface * canvas, SDL_Surface * snapshot,
 		    int x, int y, SDL_Rect * update_rect);
@@ -72,7 +72,7 @@ void fretwork_drag(magic_api * api, int which, SDL_Surface * canvas,
 		   SDL_Rect * update_rect);
 static void fretwork_draw_wrapper(void * ptr, int which, SDL_Surface * canvas, SDL_Surface * last,
 				  int x, int y);
-inline unsigned int fretwork_get_segment(int x, int y);
+static unsigned int fretwork_get_segment(int x, int y);
 
 
 SDL_Surface * fretwork_one, * fretwork_three, * fretwork_four, * fretwork_corner;
@@ -246,7 +246,7 @@ static int fretwork_math_ceil(int x, int y)
   else return temp;
 }
 	
-inline unsigned int fretwork_get_segment(int x, int y)
+static unsigned int fretwork_get_segment(int x, int y)
 {
   int xx;  //segments are numerated just like pixels
   int yy;  //in computer graphics: left upper (=1), ... ,right upper,
@@ -257,7 +257,7 @@ inline unsigned int fretwork_get_segment(int x, int y)
   return (yy-1)*fretwork_segments_x+xx;	
 }
 
-inline void fretwork_extract_coords_from_segment(unsigned int segment, Sint16 * x, Sint16 * y)
+static void fretwork_extract_coords_from_segment(unsigned int segment, Sint16 * x, Sint16 * y)
 {
   *x=((segment%fretwork_segments_x)-1)*img_w;					//useful to set update_rect as small as possible
   *y=(int)(segment/fretwork_segments_x)*img_h;

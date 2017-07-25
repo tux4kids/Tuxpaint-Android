@@ -61,7 +61,7 @@ void fold_drag(magic_api * api, int which, SDL_Surface * canvas,
 	          SDL_Surface * snapshot, int ox, int oy, int x, int y,
 		  SDL_Rect * update_rect);
 void fold_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
-inline Uint8 fold_what_corner(int x, int y, SDL_Surface * canvas);
+static Uint8 fold_what_corner(int x, int y, SDL_Surface * canvas);
 void fold_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 
 Uint32 fold_api_version(void)
@@ -362,7 +362,7 @@ void fold_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 
 // Interactivity functions
 
-inline Uint8 fold_what_corner(int x, int y, SDL_Surface * canvas)
+static Uint8 fold_what_corner(int x, int y, SDL_Surface * canvas)
 {
 	if (x>=canvas->w/2)
 	{

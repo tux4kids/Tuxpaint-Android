@@ -29,8 +29,8 @@ void confetti_release(magic_api * api, int which,
 	           SDL_Surface * canvas, SDL_Surface * snapshot,
 		      int x, int y, SDL_Rect * update_rect);
 void confetti_shutdown(magic_api * api);
-inline char confetti_get_greater(const char what1, const char what2);
-inline char confetti_get_lesser(const char what1, const char what2);
+static char confetti_get_greater(const char what1, const char what2);
+static char confetti_get_lesser(const char what1, const char what2);
 Uint32 confetti_get_new_color(void * ptr, SDL_Surface * canvas);
 void confetti_click(magic_api * api, int which, int mode,
 	           SDL_Surface * canvas, SDL_Surface * last,
@@ -101,9 +101,9 @@ void confetti_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 
 //private functions
 	
-inline char confetti_get_greater(const char what1, const char what2) { if (what1>what2) return what1; else return what2; }
+static char confetti_get_greater(const char what1, const char what2) { if (what1>what2) return what1; else return what2; }
 
-inline char confetti_get_lesser(const char what1, const char what2) { if (what1<what2) return what1; else return what2; }
+static char confetti_get_lesser(const char what1, const char what2) { if (what1<what2) return what1; else return what2; }
 
 // Interactivity functions
 
