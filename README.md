@@ -22,6 +22,7 @@ Project
   * build.properties
   * build.xml
     build description file, used by ant. The actual application name is specified here.
+    deprecated since the build changed to gradle.
   * default.properties
     holds the target ABI for the application, android-12 and up
   * project.properties
@@ -96,6 +97,15 @@ Project
   * jni/tuxpaint/Android.mk
     Android makefile for creating the tuxpaint shared library
 
+As part of changing the buid process from ant to gradle, the previous paths now hangs on app/src/main/
+
+  * settings.gradle
+    Indicates the directory gardle should build
+  * build.gradle
+    Common gradle configuration
+  * app/build.gradle
+    Configuration specific to the app directory
+
 Dependencies
 =================
 From **[official Library Requirements](http://www.tuxpaint.org/requirements/)**, Tux Paint requires:
@@ -134,7 +144,7 @@ However, these libraries will depend on more libraries, thus another libraries h
 * [fontconfig 2.8.0](http://www.freedesktop.org/wiki/Software/fontconfig/)
 * [cairo 1.14.0](http://cairographics.org/)
 * [pango 1.37.1](http://www.pango.org/)
-* [glib 2.44.1](https://developer.gnome.org/glib/)
+* [glib 2.53.3](https://developer.gnome.org/glib/)
 * [pixman 0.21.2](http://www.pixman.org/)
 * [harfbuzz 0.9.41](http://www.freedesktop.org/wiki/Software/HarfBuzz/)
 * [platform_external_libxml2 2.9.2](https://github.com/android/platform_external_libxml2)
@@ -173,9 +183,24 @@ Build
 
 Install&Run
 =============
-If you have ant, then run:
+If you want to (re)fill the assets dir run:
+...
+cd app/src/main/jni/tuxpaint && ./mkzip_assets.sh
+...
+
+If you have gradle, then run from the base directory:
+...
+	gradle build
+...
+
+If you have ant, deprecated, then run:
+Recover the build.xml and build.properties files from a previous version
+https://github.com/tux4kids/Tuxpaint-Android/tree/4a51d97dad140f044b2f653ebf43636dda1798cd
+and put them into app/src/main, then run
 
 ```
+	ln -s java src
+	cd app/src/main
 	ndk-build
 	ant debug
 	ant debug install
@@ -185,9 +210,6 @@ If you have Eclipse, then run:
 
 1. right click Tux Paint-Android project
 2. Run As -> Android Application
-
-If you want to regenerate the .zip assets file run:
-cd jni/tuxpaint && ./mkzip_assets.sh
 
 Tips for Play
 ===========
@@ -269,7 +291,7 @@ and then copy generated tp_magic_api.h to jni/tuxpaint/src folder.
 Issue 3: Full screen is required.
 
 Problem: Generally the default window screen is 800x600 instead of full screen.
-Howevre, if only `fullscreen=yes` is enabled in the tuxpaint.conf, it cannot work as supposed.
+However, if only `fullscreen=yes` is enabled in the tuxpaint.conf, it cannot work as supposed.
 
 Solution: To enable full screen for Android, both `fullscreen=yes` and `native=yes` will be set in the config file.
 
@@ -297,7 +319,8 @@ tuxpaintActivity java class will decompress tuxpaint.zip into /data/data/org.tux
 then dir walk operation defined in dirwalk.c will work as supposed to load resource. 
 This solution had the problem that, in multiuser Androids,  plain users(i.e. not owner) got Tux Paint crashed as they were denied from reading /data/data/org.tuxpaint/files
 
-Current solution: All stuff are put uncompressed into the assets folder, then we use a custom fopen to access it, see the files in jni/tp-assets-fopen
+Current solution: All stuff are put uncompressed into the assets folder, then we use a custom fopen to access it, see the files in jni/tp-assets-fopen.
+This current solution has the problem that the directories in the assets are hardcoded in the Tux Paint's code.
 
 Issue 7: How to save pictures.
 
@@ -458,7 +481,7 @@ Problem: While traditional-chinese, japanese and other languages can work, simpl
 
 Solution: zh_CN.ttf is not included in current tuxpaint source code.
 Instead, this can be downloaded from official tuxpaint website.
-Thus, we will include this file into tuxpaint.zip file of assets folder.
+Thus, we will include this file into the assets folder.
 
 Issue 16: Some input text from Android system onscreen keyborad cannot show, while some can succeed.
 
@@ -487,6 +510,7 @@ The code below in valgrind.h will cause this issue.
 ```
 
 Solution: Although the reason is found,  the corresponding solution cannot achieve yet. Instead, an alternative approach is that these valgrind related code in the glib2 will be commentted to disable valgrind.
+Currently exploring the solution of adding the -marm flag to compile glib, will this break x86 builds?
 
 Issue 18: libharfbuzz_ng seems not be accessable by pango during "System.loadLibrary" call
 
