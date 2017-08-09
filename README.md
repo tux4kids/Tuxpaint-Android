@@ -100,7 +100,7 @@ Project
 As part of changing the buid process from ant to gradle, the previous paths now hangs on app/src/main/
 
   * settings.gradle
-    Indicates the directory gardle should build
+    Indicates the directory gradle should build
   * build.gradle
     Common gradle configuration
   * app/build.gradle
@@ -184,23 +184,23 @@ Build
 Install&Run
 =============
 If you want to (re)fill the assets dir run:
-...
+```
 cd app/src/main/jni/tuxpaint && ./mkzip_assets.sh
-...
+```
 
 If you have gradle, then run from the base directory:
-...
+```
 	gradle build
-...
+```
 
-If you have ant, deprecated, then run:
-Recover the build.xml and build.properties files from a previous version
+If you have ant, deprecated, then:
+Recover the build.xml and project.properties files from a previous version, for example from
 https://github.com/tux4kids/Tuxpaint-Android/tree/4a51d97dad140f044b2f653ebf43636dda1798cd
-and put them into app/src/main, then run
+and put them into `app/src/main`, then run
 
 ```
-	ln -s java src
 	cd app/src/main
+	ln -s java src
 	ndk-build
 	ant debug
 	ant debug install
@@ -319,7 +319,7 @@ tuxpaintActivity java class will decompress tuxpaint.zip into /data/data/org.tux
 then dir walk operation defined in dirwalk.c will work as supposed to load resource. 
 This solution had the problem that, in multiuser Androids,  plain users(i.e. not owner) got Tux Paint crashed as they were denied from reading /data/data/org.tuxpaint/files
 
-Current solution: All stuff are put uncompressed into the assets folder, then we use a custom fopen to access it, see the files in jni/tp-assets-fopen.
+Current solution: All stuff are put uncompressed into the assets folder, then we use a custom fopen to access it, see the files in `jni/tp-assets-fopen`.
 This current solution has the problem that the directories in the assets are hardcoded in the Tux Paint's code.
 
 Issue 7: How to save pictures.
