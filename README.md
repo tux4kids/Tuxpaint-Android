@@ -644,6 +644,11 @@ However, `%lc` seems not to be parsed in a right way on the old Android devices.
 
 Solution: Instead changing `wchar_t` to `wint_t`, here we change `wchar_t` to `int` so that it is easy to save and load the `int` value from the tmp file. This approach may be not very reasonable, but it works fine in practice.
 
+Issue 22: __ANDROID_API__ macro redefined warnings
+
+If you build with ndk >= r15 the lowest supported SdkVersion is 14, you will get warnings about macro __ANDROID_API__ redefined but it will compile anyway. Note that in order to get support for older Androids you need to compile with ndk r14b and uncomment the line in app/src/main/jni/Application.mk setting NDK_TOOLCHAIN_VERSION to 4.9
+
+
 Issues and temporary Solution:
 ===============================
 
