@@ -7,7 +7,10 @@ Background
 Tux Paint has been ported from SDL1 to SDL2.
 Thus Tux Paint-Android will try to port current Tux Paint to Android platform.
 At the start this Tux Paint source code was based on [tuxpaint-sdl2](http://sourceforge.net/p/tuxpaint-sdl2/code/ci/sdl2.0/tree/) 
-maintained by Pere Pujal i Carabantes with head commit b48c069b2ff6a0cabf82ec086ff6ef563eaaf3d3, now it has been synced several times.
+maintained by Pere Pujal i Carabantes with head commit b48c069b2ff6a0cabf82ec086ff6ef563eaaf3d3, now it has been synced back and forth several times.
+As it is currently(2016/01/23) it has been synced also with the work made in the official(SDL1.2 based) work.
+https://sourceforge.net/u/perepujal/tuxpaint/ci/sdl2.0/tree/
+
 The main work made by Jianwei Zhang on GSoC 2015 includes:
 
 1. port SDL2, SDL2_image, SDL2_ttf, SDL2_mixer, libpng, gettext, FriBiDi libraries to Android. 
