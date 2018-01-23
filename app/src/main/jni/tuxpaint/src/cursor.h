@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   June 14, 2002 - May 15, 2007
-  $Id: cursor.h,v 1.3 2007/05/16 01:11:34 wkendrick Exp $
+  $Id$
 */
 
 #ifndef CURSOR_H

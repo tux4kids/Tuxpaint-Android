@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-08 18:37+0200\n"
+"POT-Creation-Date: 2017-07-29 15:48+0200\n"
 "PO-Revision-Date: 2010-07-08 13:33+0100\n"
 "Last-Translator: Zdeněk Chalupský <chalzd@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -427,7 +427,7 @@ msgstr "Nový"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7637
+#: ../tools.h:98 ../tuxpaint.c:7640
 msgid "Open"
 msgstr "Otevřít"
 
@@ -563,179 +563,183 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "Dobrá... A teď můžeme pokračovat dál!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2053
+#: ../tuxpaint.c:2054
 msgid "Do you really want to quit?"
 msgstr "Opravdu chceš malování ukončit?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2056
+#: ../tuxpaint.c:2057
 msgid "Yes, I’m done!"
 msgstr "Ano, jsem hotov!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
+#: ../tuxpaint.c:2060 ../tuxpaint.c:2087
 msgid "No, take me back!"
 msgstr "Nechci, ještě budu kreslit!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2063
+#: ../tuxpaint.c:2064
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Pokud skončíš, ztratíš svůj obrázek. Chceš ho uložit?"
 
-#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
 msgid "Yes, save it!"
 msgstr "Ano, uložit!"
 
-#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+#: ../tuxpaint.c:2066 ../tuxpaint.c:2071
 msgid "No, don’t bother saving!"
 msgstr "Ne, nebudeme ho ukládat!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2068
+#: ../tuxpaint.c:2069
 msgid "Save your picture first?"
 msgstr "Chceš nejdřív uložit svůj obrázek?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2073
+#: ../tuxpaint.c:2074
 msgid "Can’t open that picture!"
 msgstr "Tento obrázek nelze otevřít!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
-#: ../tuxpaint.c:2106
+#: ../tuxpaint.c:2077 ../tuxpaint.c:2082 ../tuxpaint.c:2091 ../tuxpaint.c:2098
+#: ../tuxpaint.c:2107
 msgid "OK"
 msgstr "OK"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2080
+#: ../tuxpaint.c:2081
 msgid "There are no saved files!"
 msgstr "Nejsou zde žádné uložené soubory!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2084
+#: ../tuxpaint.c:2085
 msgid "Print your picture now?"
 msgstr "Chceš obrázek vytisknout?"
 
-#: ../tuxpaint.c:2085
+#: ../tuxpaint.c:2086
 msgid "Yes, print it!"
 msgstr "Ano, vytisknout!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2089
+#: ../tuxpaint.c:2090
 msgid "Your picture has been printed!"
 msgstr "Obrázek byl vytištěn!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2093
+#: ../tuxpaint.c:2094
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Omlouváme se! Tvůj obraz nemohl být vytištěn!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2096
+#: ../tuxpaint.c:2097
 msgid "You can’t print yet!"
 msgstr "Zatím nelze tisknout!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2100
+#: ../tuxpaint.c:2101
 msgid "Erase this picture?"
 msgstr "Smazat tento obrázek?"
 
-#: ../tuxpaint.c:2101
+#: ../tuxpaint.c:2102
 msgid "Yes, erase it!"
 msgstr "Ano smazat!"
 
-#: ../tuxpaint.c:2102
+#: ../tuxpaint.c:2103
 msgid "No, don’t erase it!"
 msgstr "Ne, nemazat!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2105
+#: ../tuxpaint.c:2106
 msgid "Remember to use the left mouse button!"
 msgstr "Nezapomeň používat levé tlačítko myši!"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2313
+#: ../tuxpaint.c:2314
 msgid "Sound muted."
 msgstr "Ztlumit zvuk."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2318
+#: ../tuxpaint.c:2319
 msgid "Sound unmuted."
 msgstr "Zapnout zvuk."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3071
+#: ../tuxpaint.c:3072
 msgid "Please wait…"
 msgstr "Prosím počkej…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7640
+#: ../tuxpaint.c:7643
 msgid "Erase"
 msgstr "Smazat"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7646
 msgid "Slides"
 msgstr "Prezentace"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7649
 msgid "Back"
 msgstr "Zpět"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7649
+#: ../tuxpaint.c:7652
 msgid "Next"
 msgstr "Další"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7652
+#: ../tuxpaint.c:7655
 msgid "Play"
 msgstr "Přehrát"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8361
+#: ../tuxpaint.c:8364
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11689
+#: ../tuxpaint.c:11692
 msgid "Yes"
 msgstr "Ano"
 
-#: ../tuxpaint.c:11693
+#: ../tuxpaint.c:11696
 msgid "No"
 msgstr "Ne"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12792
+#: ../tuxpaint.c:12795
 msgid "Replace the picture with your changes?"
 msgstr "Nahradit starý obrázek změněným obrázkem?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12796
+#: ../tuxpaint.c:12799
 msgid "Yes, replace the old one!"
 msgstr "Ano, nahradit starý obrázek!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12800
+#: ../tuxpaint.c:12803
 msgid "No, save a new file!"
 msgstr "Ne, ulož jako nový obrázek!"
 
-#: ../tuxpaint.c:14045
+#: ../tuxpaint.c:14048
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Vyber si obrázek a klepni na \"Otevřít\"."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
+#: ../tuxpaint.c:15079 ../tuxpaint.c:15407
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Vyber si obrázek a klikni na \"Přehrát\"."
 
-#: ../tuxpaint.c:22439
+#: ../tuxpaint.c:22873
+msgid "Select a color from your drawing."
+msgstr ""
+
+#: ../tuxpaint.c:22885
 msgid "Pick a color."
 msgstr "Vyber si barvu."
 
@@ -1121,19 +1125,19 @@ msgstr ""
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Kliknutím přidáš mozaiku na celý obrázek."
 
-#: ../../magic/src/mosaic_shaped.c:147
+#: ../../magic/src/mosaic_shaped.c:139
 msgid "Square Mosaic"
 msgstr "Čtvercová mozaika"
 
-#: ../../magic/src/mosaic_shaped.c:148
+#: ../../magic/src/mosaic_shaped.c:140
 msgid "Hexagon Mosaic"
 msgstr "Śestiúhelníková mozaika"
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:141
 msgid "Irregular Mosaic"
 msgstr "Nepravidelná mozaika"
 
-#: ../../magic/src/mosaic_shaped.c:156
+#: ../../magic/src/mosaic_shaped.c:148
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a square mosaic to parts of your picture."
@@ -1143,11 +1147,11 @@ msgstr ""
 "Stiskni tlačítko myši a pohybem myši přidej čtvercovou mozaiku na vybrané "
 "části obrázku."
 
-#: ../../magic/src/mosaic_shaped.c:157
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Kliknutím přidáš čtvercovou mozaiku na celý obrázek."
 
-#: ../../magic/src/mosaic_shaped.c:161
+#: ../../magic/src/mosaic_shaped.c:153
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a hexagonal mosaic to parts of your "
@@ -1158,11 +1162,11 @@ msgstr ""
 "Kliknutím nebo pohybem myši přidej šestiúhelníkovou mozaiku na vybrané části "
 "obrázku."
 
-#: ../../magic/src/mosaic_shaped.c:162
+#: ../../magic/src/mosaic_shaped.c:154
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "Kliknutím přidáš šestiúhelníkovou mozaiku na celý obrázek."
 
-#: ../../magic/src/mosaic_shaped.c:166
+#: ../../magic/src/mosaic_shaped.c:158
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add an irregular mosaic to parts of your "
@@ -1173,7 +1177,7 @@ msgstr ""
 "Stikni tlačítko a pohybem myši přidej nepravidelnou mozaiku na vybrané části "
 "obrázku."
 
-#: ../../magic/src/mosaic_shaped.c:167
+#: ../../magic/src/mosaic_shaped.c:159
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "Kliknutím přidáš nepravidelnou mozaiku na celý obrázek."
 

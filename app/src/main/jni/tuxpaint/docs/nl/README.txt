@@ -10,6 +10,10 @@
 
                         14 Juni 2002 - 16 november 2002
 
+OUT OF DATE
+
+   See English version.
+
      ----------------------------------------------------------------------
 
                                       Over
@@ -420,25 +424,25 @@ Opties
            |-----------+-------------------+--------------------------------|
            |en_GB      |                   |Brits Engels                    |
            |-----------+-------------------+--------------------------------|
-           |es_ES@euro |Espanol            |Spaans                          |
+           |es_ES@euro |Español            |Spaans                          |
            |-----------+-------------------+--------------------------------|
            |fi_FI@euro |Suomi              |Fins                            |
            |-----------+-------------------+--------------------------------|
-           |fr_FR@euro |Franc,ais          |Frans                           |
+           |fr_FR@euro |Français           |Frans                           |
            |-----------+-------------------+--------------------------------|
            |hu_HU      |Magyar             |Hongaars                        |
            |-----------+-------------------+--------------------------------|
-           |is_IS      |Islenska           |IJslands                        |
+           |is_IS      |Íslenska           |IJslands                        |
            |-----------+-------------------+--------------------------------|
            |it_IT@euro |Italiano           |Italiaans                       |
            |-----------+-------------------+--------------------------------|
-           |nb_NO      |Norsk (bokmaal)    |Noors (Bokmaal)                 |
+           |nb_NO      |Norsk (bokmål)     |Noors (Bokmål)                  |
            |-----------+-------------------+--------------------------------|
            |nn_NO      |Norsk (nynorsk)    |Noors (Nynorsk)                 |
            |-----------+-------------------+--------------------------------|
            |nl_NL@euro |Nederlands         |Nederlands                      |
            |-----------+-------------------+--------------------------------|
-           |pt_BR      |Portuges Brazileiro|Braziliaans Portugees           |
+           |pt_BR      |Portugês Brazileiro|Braziliaans Portugees           |
            |-----------+-------------------+--------------------------------|
            |sv_SE@euro |Svenska            |Zweeds                          |
            |-----------+-------------------+--------------------------------|
@@ -591,7 +595,7 @@ Hoofd scherm
                      Onderaan: Help
 
                         Helemaal aan de onderkant van het scherm verschijnt
-                        Tux de Pinguin met handige tips en andere informatie.
+                        Tux de Pinguïn met handige tips en andere informatie.
 
            (Bijvoorbeed: 'Kies een vorm. Beweeg de muis om te draaien,      
            klik om te tekenen etc.)

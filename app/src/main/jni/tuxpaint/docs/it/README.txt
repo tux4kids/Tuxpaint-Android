@@ -14,6 +14,10 @@
                Traduzione a cura di Flavio "Iron Bishop" Pastore
                                  23 Aprile 2004
 
+OUT OF DATE
+
+                              See English version.
+
      ----------------------------------------------------------------------
 
                                     Indice:
@@ -69,7 +73,7 @@
 
                                  Introduzione:
 
-     "Tux Paint" e un programma di disegno per bambini. Mette a disposizione
+     "Tux Paint" è un programma di disegno per bambini. Mette a disposizione
      un'interfaccia semplice e una tela di dimensioni fisse; permette di
      accedere alle immagini precedentemente salvate attraverso piccole
      anteprime (nascondendo la struttura del file-system).
@@ -83,8 +87,8 @@
 
                                  Licenza d'uso:
 
-     Tux Paint e un progetto Open Source, Software Libero rilasciato sotto
-     GNU General Public License (GPL). Il codice sorgente del programma e
+     Tux Paint è un progetto Open Source, Software Libero rilasciato sotto
+     GNU General Public License (GPL). Il codice sorgente del programma è
      disponibile (questo permette a chiunque di aggiungere funzioni,
      correggere errori e usare parti di codice nei propri programmi sotto
      GPL).
@@ -98,34 +102,34 @@
                                   Descrizione:
 
      Facile e divertente
-             Tux Paint e pensato per essere un semplice programma di disegno
-             per bambini, non uno strumento di disegno professionale. e
+             Tux Paint è pensato per essere un semplice programma di disegno
+             per bambini, non uno strumento di disegno professionale. è
              pensato per essere diventente e facile da usare. Gli effetti
              sonori e un "aiutante disegnato" permettono all'utente di sapere
-             cosa succede in ogni istante, limitando noia e ripetitivit`a. Ci
+             cosa succede in ogni istante, limitando noia e ripetitività. Ci
              sono anche puntatori del mouse dalla forma grande e fumettosa.
 
-     Estensibilit`a
-             Tux Paint e estensibile. Pennelli e timbri possono essere
+     Estensibilità
+             Tux Paint è estensibile. Pennelli e timbri possono essere
              inseriti ed tolti dall'interfaccia. Ad esempio, un insegnante
-             puo inserire nel programma un insieme di forme di animali e
+             può inserire nel programma un insieme di forme di animali e
              chiedere agli studenti di disegnare un ecosistema. Ad ogni forma
-             puo essere assegnato un suono e un testo.
+             può essere assegnato un suono e un testo.
 
-     Portabilit`a
-             Tux Paint puo essere usato su molti sistemi operativi: Windows,
+     Portabilità
+             Tux Paint può essere usato su molti sistemi operativi: Windows,
              GNU Linux, ecc. L'interfaccia rimane la stessa in ogni
              piattaforma. Tux Paint funziona bene anche su sistemi datati
-             (come Pentium 133) e puo essere compilato appositamente per
+             (come Pentium 133) e può essere compilato appositamente per
              sistemi lenti.
 
-     Semplicit`a
-             Non c'e accesso diretto alla struttura dei dati sul computer.
+     Semplicità
+             Non c'è accesso diretto alla struttura dei dati sul computer.
              L'immagine corrente viene salvata quando si esce e riappare
-             quando si riapre il programma. Per salvare una immagine non c'e
+             quando si riapre il programma. Per salvare una immagine non c'è
              bisogno di specificare un nome o usare la tastiera. Per
              recuperare una immagine basta selezionare la sua anteprima
-             dall'elenco. Non si puo accedere ad altri file oltre a quelli
+             dall'elenco. Non si può accedere ad altri file oltre a quelli
              specificati dal programma.
 
      ----------------------------------------------------------------------
@@ -169,7 +173,7 @@ Aprire Tux Paint
 
            $ tuxpaint
 
-         e anche possibile creare un'icona di lancio (in GNOME o KDE su GNU
+         è anche possibile creare un'icona di lancio (in GNOME o KDE su GNU
          Linux), fate riferimento alla documentazione del vostro Desktop...
 
          In caso di errori, verranno visualizzati nel terminale (su
@@ -182,7 +186,7 @@ Aprire Tux Paint
                                                           [Icon]              
                                                          Tux Paint            
 
-         Fare doppio-click sull'icona "Tux Paint" nel desktop (che e stata
+         Fare doppio-click sull'icona "Tux Paint" nel desktop (che è stata
          creata dal programma di installazione) o fare doppio click sul file
          "tuxpaint.exe" nella cartella Tux Paint.
 
@@ -211,14 +215,14 @@ Opzioni
   File di configurazione
 
            Potete creare un semplice file di configurazione per Tux Paint,
-           che sar`a usato dal programma ad ogni avvio.
+           che sarà usato dal programma ad ogni avvio.
 
-           Il file e un semplice file di testo contenente le opzioni che
+           Il file è un semplice file di testo contenente le opzioni che
            volete attivare:
 
     Utenti GNU Linux
 
-             Il file da creare e chiamato ".tuxpaintrc" e deve essere messo
+             Il file da creare è chiamato ".tuxpaintrc" e deve essere messo
              nella cartella home (anche detta "~/.tuxpaintrc" oppure
              "$HOME/.tuxpaintrc")
 
@@ -229,7 +233,7 @@ Opzioni
                /etc/tuxpaint/tuxpaint.conf
 
              Potete disabilitare del tutto la lettura di questo file,
-             lasciando le opzioni cos`i come sono inizialmente (che possono
+             lasciando le opzioni così come sono inizialmente (che possono
              essere in seguito sovrascritte dal vostro file ".tuxpaintrc" e/o
              da argomenti di linea di comando) usando questa opzione nella
              riga di comando:
@@ -238,7 +242,7 @@ Opzioni
 
     Utenti Windows
 
-             Il file da creare e chiamato "tuxpaint.cfg" e deve essere messo
+             Il file da creare è chiamato "tuxpaint.cfg" e deve essere messo
              nella cartella di Tux Paint.
 
              Potete usare NotePad o WordPad per creare questo file.
@@ -281,7 +285,7 @@ Opzioni
                      (Solo per GNU Linux e Unix)
 
                      Usa il comando COMANDO per stampare un file PNG. Se non
-                     definito, il comando e:
+                     definito, il comando è:
 
                        pngtopnm | pnmtops | lpr
 
@@ -293,70 +297,70 @@ Opzioni
 
                      (Solo per Windows)
 
-                     Tux Paint al momento di stampare user`a un file di
+                     Tux Paint al momento di stampare userà un file di
                      configurazione predefinito. Premendo il tasto [ALT]
-                     mentre si cicka sul pulsante "Stampa" si puo far
+                     mentre si cicka sul pulsante "Stampa" si può far
                      apparire la finestra di configurazione della stampa di
                      Windows.
 
                      (Nota: questo funziona solo quando il programma non
-                     viene aperto in modalit`a a tutto schermo. Tutte le
+                     viene aperto in modalità a tutto schermo. Tutte le
                      modifiche di configurazione fatte in questa finestra
                      verranno salvate nel file "userdata/print.cfg" e usate
-                     ad ogni stampa successiva, finche l'opzione "printcfg"
+                     ad ogni stampa successiva, finchè l'opzione "printcfg"
                      rimane attiva.
 
              simpleshapes=yes
                      Disabilita la rotazione nello strumento "Forma".
-                     Clickare, trascinare e rilasciare sar`a sufficiente per
+                     Clickare, trascinare e rilasciare sarà sufficiente per
                      disegnare una forma.
 
              uppercase=yes
                      Tutti caratteri verranno visualizzati maiuscoli (ad
-                     esempio, "Pippo" diventer`a "PIPPO"). Utile per bambini
+                     esempio, "Pippo" diventerà "PIPPO"). Utile per bambini
                      che sanno leggere, ma che per il momento hanno imparato
                      solo le maiuscole.
 
              grab=yes
 
-                     Tux Paint prover`a a 'limitare' mouse e tastiera, in
-                     modo che il mouse possa muoversi solo all'interno della
+                     Tux Paint proverà a 'limitare' mouse e tastiera, in modo
+                     che il mouse possa muoversi solo all'interno della
                      finestra di Tux Paint e gli imput di tastiera vengano
                      passati direttamente al programma.
 
                      Utile per disabilitare azioni verso il sistema operativo
                      che potrebbero far uscire l'utente dal programma, come i
                      comandi [Alt]-[Tab], [Ctrl]-[Escape], ecc. Utile
-                     specialmente nella modalit`a a tutto schermo.
+                     specialmente nella modalità a tutto schermo.
 
              noshortcuts=yes
 
                      Disabilita le scorciatoie da tastiera (ad esempio:
                      [Ctrl]-[S] per Salva, [Ctrl]-[N] per Nuovo, ecc).
 
-                     E utile per prevenire l'uso di comandi indesiderati da
+                     È utile per prevenire l'uso di comandi indesiderati da
                      parte dei bambini che non hanno dimestichezza con la
                      tastiera.
 
              nowheelmouse=yes
                      Disabilita il supporto della "rotellina" per i mouse che
                      la possiedono (normalmente, la rotellina fa scorrere la
-                     selezione nel menu di destra).
+                     selezione nel menù di destra).
 
              nofancycursors=yes
 
                      Disabilita il puntatore del mouse di Tux Paint e
                      utilizza quello predefinito dal sistema operativo.
 
-                     In alcuni sistemi puo succedere che il puntatore dia
+                     In alcuni sistemi può succedere che il puntatore dia
                      problemi. In tal caso, usare questa opzione.
 
              nooutlines=yes
 
-                     Questa modalit`a offre contorni piu semplici per gli
+                     Questa modalità offre contorni più semplici per gli
                      strumenti Linea, Forma, Stampiglia e Cancella.
 
-                     Questo puo aiutare l'esecuzione di Tux Paint su computer
+                     Questo può aiutare l'esecuzione di Tux Paint su computer
                      obsoleti, oppure quando viene mostrato in uno schermo
                      X-Window remoto.
 
@@ -373,14 +377,14 @@ Opzioni
                      Alcune immagini usate con lo strumento Timbro possono
                      essere specchiate, capovolte, o essere ingrandite e
                      rimpicciolite. Questa opzione disabilita queste
-                     possibilit`a.
+                     possibilità.
 
              mirrorstamps=yes
 
                      Stabilisce che tutti i timbri che possono essere
                      specchiati vengano specchiati automaticamente.
 
-                     Puo essere utile a chi preferisce un orientamento
+                     Può essere utile a chi preferisce un orientamento
                      destra-verso-sinistra piuttosto che
                      sinistra-verso-destra.
 
@@ -399,13 +403,13 @@ Opzioni
                      "~/.tuxpaint/saved/" su GNU Linux e Unix, "userdata\" su
                      Windows.
 
-                     Questo puo essere utile in un laboratorio con Tux Paint
+                     Questo può essere utile in un laboratorio con Tux Paint
                      installato su un server e i bambini lo usano da
                      workstation. Potete configurare savedir per essere una
                      cartella nella loro cartella principale (ad esempio,
                      "H:\tuxpaint\")
 
-                     Nota: quando si specifica una unit`a di Windows (ad
+                     Nota: quando si specifica una unità di Windows (ad
                      esempio,"H:\"), bisogna anche specificare una
                      sottocartella.
 
@@ -413,14 +417,14 @@ Opzioni
 
              saveover=yes
                      Disabilita la domanda "Sovrascrivere la vecchia
-                     versione...?" quando si salva un file gi`a esistente.
-                     Con questa opzione attivata, la vecchia versione viene
+                     versione...?" quando si salva un file già esistente. Con
+                     questa opzione attivata, la vecchia versione viene
                      sempre rimpiazzata, automaticamente.
 
              saveover=new
                      Anche questa opzione disabilita la domanda
                      "Sovrascrivere la vecchia versione...?". In questo csao
-                     pero, viene automaticamente creato un nuovo file e la
+                     però, viene automaticamente creato un nuovo file e la
                      vecchia versione rimane salvata.
 
              saveover=ask
@@ -428,7 +432,7 @@ Opzioni
                      (Opzione superflua, in quanto corrisponde al
                      comportamento predefinito.)
 
-                     Salvando un disegno gi`a esistente, verr`a chiesto se
+                     Salvando un disegno già esistente, verrà chiesto se
                      sovrascrivere la vecchia versione o creare un nuovo
                      file.
 
@@ -523,10 +527,10 @@ Opzioni
     .tuxpaintrc
 
              Se qualcuna delle opzioni descritte sono definite nel file
-             "/etc/tuxpaint/tuxpaint.config", e possibile sovrascriverle nel
+             "/etc/tuxpaint/tuxpaint.config", è possibile sovrascriverle nel
              proprio file "~/.tuxpaintrc".
 
-             Per le opzioni vero/falso come "noprint" e "grab", si puo
+             Per le opzioni vero/falso come "noprint" e "grab", si può
              specificare semplicemente 'no' nel proprio "~/.tuxpaintrc":
 
                noprint=no
@@ -589,16 +593,16 @@ Opzioni
              --mouse
              --saveoverask
                      Queste possono essere usate per sovrascrivere quelle
-                     definite nel file di configurazione (se l'opzione non e
-                     definita nel file, non e necessario sovrascriverla).
+                     definite nel file di configurazione (se l'opzione non è
+                     definita nel file, non è necessario sovrascriverla).
 
              --locale locale
 
                      Utilizza Run Tux Paint in uno dei linguaggi supportati.
                      Si veda la sezione "Scegliere una lingua differente".
 
-                     (Se la localit`a e gi`a definita, ad esempio con una
-                     variabile d'ambiente "$LANG", questa opzione non e
+                     (Se la località è già definita, ad esempio con una
+                     variabile d'ambiente "$LANG", questa opzione non è
                      necessaria, dato che Tux Paint segue i settaggi
                      dell'ambiente, se possibile)
 
@@ -607,7 +611,7 @@ Opzioni
                      Su GNU Linux e Unix, questa opzione evita la lettura del
                      file "/etc/tuxpaint/tuxpaint.conf".
 
-                     Se esiste, verr`a usato solo il file di configurazione
+                     Se esiste, verrà usato solo il file di configurazione
                      "~/.tuxpaintrc".
 
      ----------------------------------------------------------------------
@@ -638,16 +642,16 @@ Opzioni
 
   Scegliere una lingua differente
 
-           Tux Paint e stato tradotto in molte lingue. Per accedere alle
-           traduzioni si puo usare l'argomento "--lang" da linea di comando
+           Tux Paint è stato tradotto in molte lingue. Per accedere alle
+           traduzioni si può usare l'argomento "--lang" da linea di comando
            (ad esempio "--lang italian") oppure specificare l'opzione "lang="
            nel file di configurazione (ad esempio, "lang=italian").
 
-           Tux Paint inoltre segue i settaggi del sistema operativo, se e
-           gi`a settata una variabile d'ambiente relativa alla lingua il
-           programma verr`a inizialmente visualizzato in quella lingua. (e
-           possibile sovrascrivere questo comportamento usando l'argomento
-           "--locale" da riga di comando (vedi sopra)).
+           Tux Paint inoltre segue i settaggi del sistema operativo, se è già
+           settata una variabile d'ambiente relativa alla lingua il programma
+           verrà inizialmente visualizzato in quella lingua. (è possibile
+           sovrascrivere questo comportamento usando l'argomento "--locale"
+           da riga di comando (vedi sopra)).
 
            Di seguito l'elenco delle lingue supportate:
 
@@ -657,7 +661,7 @@ Opzioni
              |---------------+-------------------+--------------------------|
              |C              |                   |English                   |
              |---------------+-------------------+--------------------------|
-             |ca_ES          |Catalan            |Catal`a                   |
+             |ca_ES          |Catalan            |Català                    |
              |---------------+-------------------+--------------------------|
              |cs_CZ          |Cesky              |Czech                     |
              |---------------+-------------------+--------------------------|
@@ -669,11 +673,11 @@ Opzioni
              |---------------+-------------------+--------------------------|
              |en_GB          |                   |British English           |
              |---------------+-------------------+--------------------------|
-             |es_ES@euro     |Espanol            |Spanish                   |
+             |es_ES@euro     |Español            |Spanish                   |
              |---------------+-------------------+--------------------------|
              |fi_FI@euro     |Suomi              |Finnish                   |
              |---------------+-------------------+--------------------------|
-             |fr_FR@euro     |Franc,ais          |French                    |
+             |fr_FR@euro     |Français           |French                    |
              |---------------+-------------------+--------------------------|
              |he_IL (*)      |                   |Hebrew                    |
              |---------------+-------------------+--------------------------|
@@ -681,7 +685,7 @@ Opzioni
              |---------------+-------------------+--------------------------|
              |id_ID          |Bahasa Indonesia   |Indonesian                |
              |---------------+-------------------+--------------------------|
-             |is_IS          |Islenska           |Icelandic                 |
+             |is_IS          |Íslenska           |Icelandic                 |
              |---------------+-------------------+--------------------------|
              |it_IT@euro     |Italiano           |Italian                   |
              |---------------+-------------------+--------------------------|
@@ -699,9 +703,9 @@ Opzioni
              |---------------+-------------------+--------------------------|
              |pl_PL          |Polski             |Polish                    |
              |---------------+-------------------+--------------------------|
-             |pt_BR          |Portuges Brazileiro|Brazilian Portuguese      |
+             |pt_BR          |Portugês Brazileiro|Brazilian Portuguese      |
              |---------------+-------------------+--------------------------|
-             |pt_PT          |Portuges           |Portuguese                |
+             |pt_PT          |Portugês           |Portuguese                |
              |---------------+-------------------+--------------------------|
              |ro_RO          |                   |Romanian                  |
              |---------------+-------------------+--------------------------|
@@ -724,13 +728,13 @@ Opzioni
 
     Specificare la lingua di sistema
 
-             Modificare la lingua locale avr`a molti effetti sul sistema.
+             Modificare la lingua locale avrà molti effetti sul sistema.
 
              Come anticipato, oltre a permettere la scelta della lingua
              tramite argomenti da linea di comando ("--lang" e "--locale"),
              Tux Paint segue le preferenze di lingua del sistema.
 
-             Se non si e gi`a specificata la variabile di lingua nel sistema,
+             Se non si è già specificata la variabile di lingua nel sistema,
              la sezione seguente spiega come fare:
 
       Utenti GNU Linux/Unix
@@ -764,20 +768,20 @@ Opzioni
       Utenti Windows
 
                Tux Paint riconosce e utilizza automaticamente la lingua
-               locale del sistema, quindi questa sezione e dedicata a chi
+               locale del sistema, quindi questa sezione è dedicata a chi
                intende provare lingue differenti.
 
-               La cosa piu semplice da fare e usare l'argomento '--lang' nel
+               La cosa più semplice da fare è usare l'argomento '--lang' nel
                collegamento (si veda "INSTALL.it.txt"). In ogni caso, usando
-               una finestra prompt di MSDOS, e anche possibile usare un
+               una finestra prompt di MSDOS, è anche possibile usare un
                comando come questo:
 
                  set LANG=es_ES@euro
 
-               ...che modificher`a la lingua di sistema solo finche quella
-               finestra di DOS rimarr`a aperta.
+               ...che modificherà la lingua di sistema solo finchè quella
+               finestra di DOS rimarrà aperta.
 
-               Per qualcosa di piu duraturo, si puo aprire il file
+               Per qualcosa di più duraturo, si può aprire il file
                'autoexec.bat' usando il programma "sysedit":
 
         Windows 95/98
@@ -797,7 +801,7 @@ Opzioni
                 7. Riavviare il computer.
 
                  Per far si che il cambiamento si ripercuota su tutto il
-                 sistema e su tutte le applicazioni e possibile usare il
+                 sistema e su tutte le applicazioni è possibile usare il
                  pannello di controllo "Opzioni Internazionali":
 
                 1. Fare click su 'Start' button, selezionare 'Pannello di
@@ -828,12 +832,12 @@ Opzioni
 
                /usr/share/tuxpaint/fonts/locale/ko.ttf
 
-             e possibile scaricare i file dei caratteri per le lingue
+             è possibile scaricare i file dei caratteri per le lingue
              supportate dal sito di Tux Paint
              http://www.newbreedsoftware.com/tuxpaint/. (Guardare nella
              sezione 'Fonts' sotto 'Download.')
 
-             Su Unix e GNU Linux, e possibile usare il Makefile disponibile
+             Su Unix e GNU Linux, è possibile usare il Makefile disponibile
              con il file carattere per installare il carattere nella
              posizione appropriata.
 
@@ -846,14 +850,14 @@ Schermata iniziale
 
                                [Title Screenshot]
 
-         Quando il caricamento e completato, fare click oppure premere un
-         tasto per continuare (l'immagine scomparir`a da se dopo 30 secondi).
+         Quando il caricamento è completato, fare click oppure premere un
+         tasto per continuare (l'immagine scomparirà da sè dopo 30 secondi).
 
      ----------------------------------------------------------------------
 
 Schermata principale
 
-         La schermata principale e divisa nelle seguenti sezioni:
+         La schermata principale è divisa nelle seguenti sezioni:
 
          Lato sinistro: Barra degli Strumenti (Toolbar)
 
@@ -864,7 +868,7 @@ Schermata principale
 
          In mezzo: spazio per disegnare (Drawing Canvas)
 
-                 e la parte piu grande dello schermo. e, ovviamente, il posto
+                 è la parte più grande dello schermo. è, ovviamente, il posto
                  in cui si disegna!
 
                                    [(Canvas)]
@@ -910,29 +914,29 @@ Strumenti
 
                    Fare click e muovere il mouse per disegnare.
 
-                   Mentre si disegna, viene eseguito un suono. Piu grande e
-                   il pennello, piu profondo e il suono.
+                   Mentre si disegna, viene eseguito un suono. Più grande è
+                   il pennello, più profondo è il suono.
 
      ----------------------------------------------------------------------
 
            Timbro
 
-                   Il Timbro e simile a degli adesivi. Permette di incollare
+                   Il Timbro è simile a degli adesivi. Permette di incollare
                    disegni pronti o immagini fotografiche all'interno del
                    proprio disegno.
 
                    Quando si muove il mouse, una linea lo segue evidenziando
                    le proporizioni del disegno sullo spazio per disegnare.
 
-                   Ad ogni timbro puo essere associato un suono. Alcuni
+                   Ad ogni timbro può essere associato un suono. Alcuni
                    timbri possono essere colorati o cambiare colore.
 
-                   Ogni Timbro puo essere modificato in altezza e larghezza,
+                   Ogni Timbro può essere modificato in altezza e larghezza,
                    e molti Timbri possono essere capovolti o specchiati,
                    usando i comandi in basso a destra sullo schermo.
 
-                   NOTA: Se e stato attivata l'opzione "nostampcontrols", Tux
-                   Paint non mostrer`a i comandi Specchia, Capovolgi e
+                   NOTA: Se è stato attivata l'opzione "nostampcontrols", Tux
+                   Paint non mostrerà i comandi Specchia, Capovolgi e
                    Ingrandisci dei Timbri. Vedi sezione "Opzioni".
 
      ----------------------------------------------------------------------
@@ -944,11 +948,11 @@ Strumenti
 
                    Fare click e temere premuto per scegliere il punto di
                    partenza della linea. Muovendo il mouse, si crea una riga
-                   sottile per evidenziare il modo in cui la linea sar`a
+                   sottile per evidenziare il modo in cui la linea sarà
                    disegnata.
 
                    Lasciare il tasto del mouse per completare la linea. Si
-                   udir`a un suono.
+                   udirà un suono.
 
      ----------------------------------------------------------------------
 
@@ -957,7 +961,7 @@ Strumenti
                    Questo strumento permette di disegnare alcune semplici
                    forme, perimetrali e piene.
 
-                   Puoi selezionare una forma dal menu di destra.
+                   Puoi selezionare una forma dal menù di destra.
 
                    Fare click e tenere premuto per ingrandire la forma.
                    Alcune forme (ad esempio il rettangolo e l'ovale) possono
@@ -972,12 +976,12 @@ Strumenti
                                 Ora, muovere il mouse per ruotare la forma.
 
                                 Facendo nuovamente click col mouse, la forma
-                                verr`a disegnata nel colore selezionato.
+                                verrà disegnata nel colore selezionato.
 
                         Modo "forme semplici":
-                                Se questa modalit`a e stata attivata (ad
+                                Se questa modalità è stata attivata (ad
                                 esempio con l'argomento da riga di comando
-                                "--simpleshapes") la forma verr`a disegnata
+                                "--simpleshapes") la forma verrà disegnata
                                 immediatamente, senza essere ruotata.
 
      ----------------------------------------------------------------------
@@ -987,25 +991,25 @@ Strumenti
                    Selezionare un carattere (dalle "Lettere" disponibili
                    sulla destra) e un colore (dalla tavolozza in basso). Fare
                    click sull'area di disegno per far apparire il cursore.
-                   Ora si puo scrivere un testo con la tastiera.
+                   Ora si può scrivere un testo con la tastiera.
 
                    Premere [Invio] o [Enter] per disegnare il testo sul
-                   disegno. Il cursore si sposter`a sulla riga sottostante.
+                   disegno. Il cursore si sposterà sulla riga sottostante.
 
                    Fare click da un'altra parte nel disegno e il testo appena
-                   scritto verr`a spostato in quel punto, dove e possibile
+                   scritto verrà spostato in quel punto, dove è possibile
                    modificarlo.
 
      ----------------------------------------------------------------------
 
            Magia (Effetti speciali)
 
-                   Lo strumento "Magia" non e altro che un insieme di altri
+                   Lo strumento "Magia" non è altro che un insieme di altri
                    strumenti. Puoi selezionare l'effetto sulla destra e poi
                    fare click sul disegno per applicare l'effetto.
 
                         Arcobaleno
-                                E simile al Pennello, ma quando si muove il
+                                È simile al Pennello, ma quando si muove il
                                 mouse, cambia tutti i colori dell'arcobaleno.
 
                         Scintille
@@ -1018,7 +1022,7 @@ Strumenti
                                 verticale.
 
                         Capovolgi
-                                E simile a "Specchia", ma applica una
+                                È simile a "Specchia", ma applica una
                                 simmetria ad asse orizzontale.
 
                         Sfuma
@@ -1037,7 +1041,7 @@ Strumenti
                         Scolora
                                 Permette di scolorire un'area del disegno
                                 (usando lo strumento molte volte nello stesso
-                                punto, questo diventer`a bianco).
+                                punto, questo diventerà bianco).
 
                         Gesso
                                 Permette di modificare il disegno facendolo
@@ -1049,10 +1053,10 @@ Strumenti
                                 disegno.
 
                         Pesante
-                                Fa prevalere il colore piu scuro.
+                                Fa prevalere il colore più scuro.
 
                         Leggero
-                                Fa prevalere il colore piu chiaro.
+                                Fa prevalere il colore più chiaro.
 
                         Riempi
                                 Campisce un'area con il colore selezionato.
@@ -1068,9 +1072,9 @@ Strumenti
                    disegno. Basta fare click in un punto per farlo tornare
                    bianco.
 
-                   Mentre si muove il mouse, il puntatore e seguito da una
+                   Mentre si muove il mouse, il puntatore è seguito da una
                    grande linea quadrata, che mostra quale parte del disegno
-                   verr`a cancellata facendo click.
+                   verrà cancellata facendo click.
 
                    Quando si cancella, viene eseguito un suono.
 
@@ -1080,24 +1084,24 @@ Strumenti
 
            Annulla
 
-                   Facendo click su questro comando e possibile annullare
-                   l'ultima azione compiuta. E anche possibile annullare piu
+                   Facendo click su questro comando è possibile annullare
+                   l'ultima azione compiuta. È anche possibile annullare più
                    di una volta!
 
-                   Nota: premere [Control]-[Z] sulla tastiera avr`a lo stesso
+                   Nota: premere [Control]-[Z] sulla tastiera avrà lo stesso
                    effetto.
 
      ----------------------------------------------------------------------
 
            Ripeti
 
-                   Facendo click su questo comando e possibile ripristinare
+                   Facendo click su questo comando è possibile ripristinare
                    le modifiche appena cancellate con lo strumento "Annulla".
 
-                   Finche non si disegna nuovamente, e possibile "ripetere"
-                   tante volte quante si e "annullato"!
+                   Finchè non si disegna nuovamente, è possibile "ripetere"
+                   tante volte quante si è "annullato"!
 
-                   Nota: premere [Control]-[R] sulla tastiera avr`a lo stesso
+                   Nota: premere [Control]-[R] sulla tastiera avrà lo stesso
                    effetto.
 
      ----------------------------------------------------------------------
@@ -1105,10 +1109,10 @@ Strumenti
            Nuovo
 
                    Fare click sul pulsante "Nuovo" per iniziare un nuovo
-                   disegno. Prima di cancellare quello corrente, verr`a
+                   disegno. Prima di cancellare quello corrente, verrà
                    chiesta una conferma.
 
-                   Nota: premere [Control]-[N] sulla tastiera avr`a lo stesso
+                   Nota: premere [Control]-[N] sulla tastiera avrà lo stesso
                    effetto.
 
      ----------------------------------------------------------------------
@@ -1116,30 +1120,30 @@ Strumenti
            Apri
 
                    Questo comando mostra l'elenco dei disegni salvati. Nel
-                   caso ce ne siano piu di quanti possano essere contenuti in
-                   una schermata, usare le freccie "Su" e "Giu" per scorrere
+                   caso ce ne siano più di quanti possano essere contenuti in
+                   una schermata, usare le freccie "Su" e "Giù" per scorrere
                    la lista.
 
-                   Fare click su un disegno per selezionarlo, dopodiche...
+                   Fare click su un disegno per selezionarlo, dopodichè...
 
                         * Fare click sul pulsante verde "Apri" per caricare
                           il disegno selezionato.
 
-                          (In alternativa, e possibile fare doppio click su
+                          (In alternativa, è possibile fare doppio click su
                           un disegno per caricarlo.)
 
                         * Fare click sul pulsante marrone "Cancella" (il
                           bidone della spazzatura) per cancellare il disegno
-                          selezionato (verr`a chiesta una conferma).
+                          selezionato (verrà chiesta una conferma).
 
                         * Fare click sul pulsante rosso "Indietro" per
                           tornare al disegno corrente.
 
                    Se si sceglie di caricare un disegno senza aver salvato
-                   quello corrente, verr`a chiesto se si lo si vuole salvare.
+                   quello corrente, verrà chiesto se si lo si vuole salvare.
                    (Vedi "Salva")
 
-                   Nota: premere [Control]-[O] sulla tastiera avr`a lo stesso
+                   Nota: premere [Control]-[O] sulla tastiera avrà lo stesso
                    effetto.
 
      ----------------------------------------------------------------------
@@ -1148,24 +1152,24 @@ Strumenti
 
                    Salva il disegno corrente.
 
-                   Se non era mai stato salvato prima, sar`a aggiunto un
-                   elemento alla lista dei disegni salvati (ovvero: verr`a
+                   Se non era mai stato salvato prima, sarà aggiunto un
+                   elemento alla lista dei disegni salvati (ovvero: verrà
                    creato un nuovo file).
 
                    Nota:non viene chiesto nulla (nemmeno un nome da dare al
                    file). Semplicemente, il disegno viene salvato e viene
                    eseguito un suono.
 
-                   Se il disegno e gi`a stato salvato in precedenza, o se il
-                   disegno e stato caricato con il comando "Apri", verr`a
+                   Se il disegno è già stato salvato in precedenza, o se il
+                   disegno è stato caricato con il comando "Apri", verrà
                    prima chiesto se sovrascrivere la vecchia versione o
                    creare un nuovo disegno (un nuovo file).
 
-                   (NOTA: se l'opzione "saveover" o "saveovernew" e attiva,
-                   non verr`a chiesto nulla prima di sovrascrivere. Si veda
-                   la sezione "Opzioni")
+                   (NOTA: se l'opzione "saveover" o "saveovernew" è attiva,
+                   non verrà chiesto nulla prima di sovrascrivere. Si veda la
+                   sezione "Opzioni")
 
-                   Nota: premere [Control]-[S] sulla tastiera avr`a lo stesso
+                   Nota: premere [Control]-[S] sulla tastiera avrà lo stesso
                    effetto.
 
      ----------------------------------------------------------------------
@@ -1176,23 +1180,23 @@ Strumenti
 
                         Disabilitare la stampa
 
-                                Se e stata attivata l'opzione "noprint"
+                                Se è stata attivata l'opzione "noprint"
                                 (attraverso l'uso di "noprint=yes" nel file
                                 di configurazione di Tux Paint o usando
                                 l'argomento da riga di comando "--noprint"),
-                                il pulsante "Stampa" sar`a disabilitato.
+                                il pulsante "Stampa" sarà disabilitato.
 
                                 Si veda la sezione "Opzioni".
 
                         Limitare la stampa
 
-                                Se e stata attivata l'opzione "printdelay"
+                                Se è stata attivata l'opzione "printdelay"
                                 (attraverso l'uso di "printdelay=SECONDI" nel
                                 file di configurazione o usando l'argomento
-                                da riga di comando "--printdelay=SECONDI"), e
+                                da riga di comando "--printdelay=SECONDI"), è
                                 possibile stampare solo ogni SECONDI secondi.
 
-                                Ad esempio, usando "printdelay=60", sar`a
+                                Ad esempio, usando "printdelay=60", sarà
                                 possibile stampare solo una volta ogni
                                 minuto.
 
@@ -1202,14 +1206,14 @@ Strumenti
 
                                 (solo per GNU Linux e Unix)
 
-                                Il comando usato per stampare e in realt`a
-                                una lista di comandi che convertono una
-                                immagine PNG in un file PostScript e lo
-                                mandano alla stampante:
+                                Il comando usato per stampare è in realtà una
+                                lista di comandi che convertono una immagine
+                                PNG in un file PostScript e lo mandano alla
+                                stampante:
 
                                   pngtopnm | pnmtops | lpr
 
-                                Questo comando puo essere modificato usando
+                                Questo comando può essere modificato usando
                                 l'opzione "printcommand" nel file di
                                 configurazione di Tux Paint.
 
@@ -1224,21 +1228,21 @@ Strumenti
                                 usato il pulsante "Stampa".
 
                                 Comunque, se si preme il tasto [ALT] mentre
-                                si fa click sul pulsante, se non si e in
-                                modalit`a tutto schermo, appare una finestra
-                                di dialogo di stampa di Windows, dove e
+                                si fa click sul pulsante, se non si è in
+                                modalità tutto schermo, appare una finestra
+                                di dialogo di stampa di Windows, dove è
                                 possibile modificare le opzioni di stampa.
 
-                                E possibile far apparire questa finestra di
+                                È possibile far apparire questa finestra di
                                 dialogo ad ogni stampa con l'opzione
                                 "printcfg", usando l'argomento da riga di
                                 comando "--printcfg" o "printcfg=yes" nel
                                 file di configurazione di Tux Paint
                                 ("tuxpaint.cfg").
 
-                                Se l'opzione "printcfg" e attiva, le opzioni
+                                Se l'opzione "printcfg" è attiva, le opzioni
                                 di stampa saranno caricate dal file
-                                "userdata/print.cfg". Ogni cambiamento verr`a
+                                "userdata/print.cfg". Ogni cambiamento verrà
                                 salvato nello stesso file.
 
                                 Si veda la sezione "Opzioni".
@@ -1249,23 +1253,23 @@ Strumenti
 
                    Facendo click sul pulsante "Esci" chiudendo la finestra di
                    Tux Paint o premendo il tasto "Escape" sulla tastiera,
-                   Tux Paint verr`a terminato.
+                   Tux Paint verrà terminato.
 
-                   (NOTA: il pulsante "Esci" puo essere disabilitato (ad
+                   (NOTA: il pulsante "Esci" può essere disabilitato (ad
                    esempio con l'argomento da riga di comando "--noquit"), ma
-                   il tasto [Escape] funzioner`a ancora. Si veda la sezione
+                   il tasto [Escape] funzionerà ancora. Si veda la sezione
                    "Opzioni")
 
-                   Verr`a chiesta una conferma della volont`a di terminare il
+                   Verrà chiesta una conferma della volontà di terminare il
                    programma.
 
-                   Se si sceglie di uscire, e non si e ancora salvato il
-                   disegno, verr`a chiesto se si desidera salvarlo. Se non e
-                   una nuova immagine verr`a chiesto se si vuole
-                   sovrascrivere la vecchia versione o creare un nuovo file
-                   (Si veda "Salva").
+                   Se si sceglie di uscire, e non si è ancora salvato il
+                   disegno, verrà chiesto se si desidera salvarlo. Se non è
+                   una nuova immagine verrà chiesto se si vuole sovrascrivere
+                   la vecchia versione o creare un nuovo file (Si veda
+                   "Salva").
 
-                   NOTA: Se l'immagine viene salvata, verr`a ricaricata
+                   NOTA: Se l'immagine viene salvata, verrà ricaricata
                    automaticamente al prossimo avvio di Tux Paint!
 
      ----------------------------------------------------------------------
@@ -1276,7 +1280,7 @@ Strumenti
        create con Tux Paint, cosa succederebbe se si volessero caricare altre
        immagini e disegni per modificarle con Tux Paint?
 
-       Per farlo, e sufficiente convertire l'immagine in formato PNG
+       Per farlo, è sufficiente convertire l'immagine in formato PNG
        (Portable Network Graphic) e inserirla nella cartella dei file salvati
        di Tux Paint ("~/.tuxpaint/saved/" su GNU Linux e Unix,
        "userdata\saved\" su Windows, "Library/Preferences/tuxpaint/saved/" su
@@ -1296,13 +1300,13 @@ Usare 'tuxpaint-import'
          all'utente di scegliere un nome di file quando Salva o Apre un
          disegno!)
 
-         Per usare 'tuxpaint-import', e sufficiente dare il comando da un
+         Per usare 'tuxpaint-import', è sufficiente dare il comando da un
          propt di linea di comando e inserire il nome del (o dei) file da
          convertire.
 
          Verranno convertiti e inseriti nella cartella appropriata (Nota: se
          si sta eseguendo il comando per conto di un utente diverso - ad
-         esempio il proprio figlio - e necessario accertarsi di stare usando
+         esempio il proprio figlio - è necessario accertarsi di stare usando
          il suo account).
 
          Esempio:
@@ -1311,11 +1315,11 @@ Usare 'tuxpaint-import'
            grandma.jpg -> /home/username/.tuxpaint/saved/20020921123456.png
            jpegtopnm: WRITING A PPM FILE
 
-         La prima riga ("tuxpaint-import grandma.jpg") e il comando da dare.
+         La prima riga ("tuxpaint-import grandma.jpg") è il comando da dare.
          Le altre due sono l'output del programma mentre lavora.
 
-         Adesso e possibile far partire Tux Paint, e una versione di
-         quell'immagine sar`a disponibile all'interno della finestra "Apri".
+         Adesso è possibile far partire Tux Paint, e una versione di
+         quell'immagine sarà disponibile all'interno della finestra "Apri".
          Per aprirla basta fare doppio click sulla sua icona!
 
 Procedura manuale
@@ -1332,8 +1336,8 @@ Procedura manuale
          un'altezza che non superi i 376 pixel (la grandezza massima deve
          essere di 448 x 376 pixel).
 
-         Salvare l'immagine in formato PNG. E fortemente consigliato usare un
-         nome di file composto da data e ora corrente, dato che questa e la
+         Salvare l'immagine in formato PNG. È fortemente consigliato usare un
+         nome di file composto da data e ora corrente, dato che questa è la
          convenzione usata da Tux Paint:
 
            AAAAMMGGOOmmss.png
@@ -1359,10 +1363,10 @@ Procedura manuale
                               Estendere Tux Paint
 
        Se si desidera cambiare cose come i Pennelli e i Timbri usati da
-       Tux Paint, e possibile farlo in modo abbastanza semplice aggiungendo o
+       Tux Paint, è possibile farlo in modo abbastanza semplice aggiungendo o
        togliendo file dal vostro disco fisso.
 
-       Nota: e necessario riavviare Tux Paint perche le modifiche abbiano
+       Nota: è necessario riavviare Tux Paint perché le modifiche abbiano
        effetto.
 
 Dove vanno i file
@@ -1378,11 +1382,11 @@ Dove vanno i file
              la variabile "DATA_PREFIX" al momento della compilazione. Si
              veda INSTALL.it.txt per maggiori informazioni.
 
-             In ogni caso, la locazione predefinita di questa cartella e:
+             In ogni caso, la locazione predefinita di questa cartella è:
 
                /usr/local/share/tuxpaint/
 
-             Nel caso si sia installato un pacchetto, la locazione sar`a piu
+             Nel caso si sia installato un pacchetto, la locazione sarà più
              probabilmente:
 
                /usr/share/tuxpaint/
@@ -1390,7 +1394,7 @@ Dove vanno i file
     Windows
 
              Tux Paint cerca una cartella "data" nella stessa cartella in cui
-             si trova l'eseguibile. Questa e la cartella che e stata usata al
+             si trova l'eseguibile. Questa è la cartella che è stata usata al
              momento dell'installazione, ad esempio:
 
                C:\Programmi\TuxPaint\data
@@ -1406,21 +1410,21 @@ Dove vanno i file
 
   File personali
 
-           E anche possibile creare pennelli, timbri e caratteri nella
+           È anche possibile creare pennelli, timbri e caratteri nella
            propria cartella personale per permettere a Tux Paint di trovarli.
 
     GNU Linux e Unix
 
-             La propria cartella personale di Tux Paint e "~/.tuxpaint/".
+             La propria cartella personale di Tux Paint è "~/.tuxpaint/".
 
-             Quindi, se la vostra cartella home e "/home/pippo", allora la
-             cartella di Tux Paint e "/home/pippo/.tuxpaint/".
+             Quindi, se la vostra cartella home è "/home/pippo", allora la
+             cartella di Tux Paint è "/home/pippo/.tuxpaint/".
 
              Non dimenticare il punto (".") prima del "tuxpaint"!
 
     Windows
 
-             La propria cartella personale di Tux Paint e chiamata "userdata"
+             La propria cartella personale di Tux Paint è chiamata "userdata"
              e si trova nella stessa cartella dell'eseguibile, ad esempio:
 
                C:\Programmi\TuxPaint\userdata
@@ -1430,7 +1434,7 @@ Dove vanno i file
            rispettivamente di nome "brushes", "stamps" e "fonts".
 
            (Ad esempio, se si crea un pennello di nome "flower.png", su GNU
-           Linux o Unix andr`a messo nella cartella "~/.tuxpaint/brushes/".)
+           Linux o Unix andrà messo nella cartella "~/.tuxpaint/brushes/".)
 
      ----------------------------------------------------------------------
 
@@ -1440,7 +1444,7 @@ Pennelli
          "Linea" in Tux Paint sono semplici immagini PNG in scala di grigi.
 
          L'alpha (trasparenza) dell'immagine PNG viene usata per determinare
-         la forma del pennello, questo significa che la forma puo avere un
+         la forma del pennello, questo significa che la forma può avere un
          effetto "anti-alising" e perfino essere parzialmente trasparente!
 
          Le immagini dei pennelli non devono superare i 40 pixel di larghezza
@@ -1450,7 +1454,7 @@ Pennelli
          Vanno semplicemente inserite nella cartella "brushes".
 
          Nota: se i nuovi pennelli risultano essere quadrati o rettangoli
-         pieni, e perche hai dimenticato di usare la trasparenza alpha! Vedi
+         pieni, è perché hai dimenticato di usare la trasparenza alpha! Vedi
          il file di documentazione PNG.it.txt per maggiori informazioni su
          questo.
 
@@ -1459,26 +1463,26 @@ Pennelli
 Timbri
 
          Tutte le informazioni relative ai Timbri vanno nella cartella
-         "stamps". E utile creare sottocartelle per organizzare i timbri (ad
-         esempio, e possibile avere una cartella "festivit`a" che contiene le
+         "stamps". È utile creare sottocartelle per organizzare i timbri (ad
+         esempio, è possibile avere una cartella "festività" che contiene le
          sottocartelle "natale" e "pasqua").
 
   Immagine
 
            I timbri possono essere composti da alcuni file separati. L'unico
-           obbligatorio, ovviamente, e l'immagine del timbro.
+           obbligatorio, ovviamente, è l'immagine del timbro.
 
            I timbri usati da Tux Paint sono immagini PNG. Possono essere a
-           colori o in scala di grigi. L'alpha (trasparenza) del file PNG e
+           colori o in scala di grigi. L'alpha (trasparenza) del file PNG è
            usato per determinare i contorni dell'immagine (altrimenti
            verrebbero dei grossi rettangoli sul disegno).
 
            La grandezza dei timbri non ha limiti, ma in pratica un'immagine
-           larga 100 pixel e alta 100 pixel (100 x 100 pixel) e gi`a grande
+           larga 100 pixel e alta 100 pixel (100 x 100 pixel) è già grande
            per Tux Paint.
 
            Nota: se i nuovi timbri hanno un contorno quadrato o rettangolare
-           di un colore fisso (ad esempio, bianco o nero) e perche hai
+           di un colore fisso (ad esempio, bianco o nero) è perché hai
            dimenticato di usare la trasparenza alpha! Vedi il file di
            documentazione PNG.it.txt per maggiori informazioni su questo.
 
@@ -1487,10 +1491,10 @@ Timbri
   Testo descrittivo
 
            Un file di testo (".TXT") con lo stesso nome dell'immagine PNG (ad
-           esempio, la descrizione di "picture.png" e contenuta nel file
+           esempio, la descrizione di "picture.png" è contenuta nel file
            "picture.txt" nella stessa cartella).
 
-           La prima riga del file sar`a usata come testo descrittivo
+           La prima riga del file sarà usata come testo descrittivo
            predefinito del timbro.
 
     Supporto multilingue
@@ -1505,12 +1509,12 @@ Timbri
              riga deve corrispondere al Codice Locale della lingua in
              questione (ad esempio, "de" per tedesco, "fr" per francese).
 
-               * Le righe che iniziano con "xx=" (dove "xx" e un Codice
+               * Le righe che iniziano con "xx=" (dove "xx" è un Codice
                  Locale) vengono considerate ASCII semplice. Di conseguenza,
-                 ogni carattere speciale presente nella riga verr`a
+                 ogni carattere speciale presente nella riga verrà
                  interpretato letteralmente.
 
-                 Per esempio, "es=*Ni*os!", verr`a reso letteralmente come
+                 Per esempio, "es=*Ni*os!", verrà reso letteralmente come
                  "*Ni*os!"
 
                * Le righe che iniziano con "xx.esc=" possono contenere
@@ -1529,17 +1533,17 @@ Timbri
 
                  Nota: come in HTML, se si desidera scrivere la "e
                  commerciale" ("&") nelle descrizioni che usano il metodo
-                 "xx.esc", e necessario utilizzare la sua sequenza di escape:
+                 "xx.esc", è necessario utilizzare la sua sequenza di escape:
                  "&amp;".
 
                * Le righe che iniziano con "xx.utf8=" possono essere usate
                  per usare testo in formato UTF-8 all'interno delle
-                 traduzioni delle descrizioni. In questo caso e necessario
+                 traduzioni delle descrizioni. In questo caso è necessario
                  usare un editor in grado di salvare file in formato UTF-8.
 
              Se non ci sono traduzioni disponibili per la lingua con cui si
              sta usando Tux Paint, viene visualizzata la riga predefinita
-             (ovvero la prima, che solitamente e in inglese).
+             (ovvero la prima, che solitamente è in inglese).
 
     Utenti Windows
 
@@ -1553,12 +1557,12 @@ Timbri
 
            Un file in formato WAVE (".WAV") con lo stesso nome del file PNG
            che costituisce l'immagine del timbro. (ad esempio, il suono
-           associato a "picture.png" e il file "picture.wav" che si trova
+           associato a "picture.png" è il file "picture.wav" che si trova
            nella stessa cartella).
 
     Supporto multilingue
 
-             Per suoni in differenti lingue (ad esempio, se e il suono di
+             Per suoni in differenti lingue (ad esempio, se è il suono di
              qualcuno che pronuncia una parola, e si vuole tradurre il
              significato della parola detta), bisogna usare un file WAVE con
              il Codice Locale nel nome del file, nella forma:
@@ -1566,24 +1570,24 @@ Timbri
 
              Il suono associato al timbro "picture.png", quando Tux Paint
              viene usato in lingua spagnola, sarebbe "picture_es.wav". In
-             francese sarebbe "picture_fr.wav". E cos`i via...
+             francese sarebbe "picture_fr.wav". E così via...
 
-             Se non e presente un file relativo alla lingua in uso, Tux Paint
-             user`a quello predefinito (ad esempio, "picture.wav").
+             Se non è presente un file relativo alla lingua in uso, Tux Paint
+             userà quello predefinito (ad esempio, "picture.wav").
 
      ----------------------------------------------------------------------
 
   Opzioni dei timbri
 
            Oltre che una forma grafica, una descrizione testuale e un effetto
-           sonoro, un timbro puo avere anche altre propriet`a. Per usarle,
+           sonoro, un timbro può avere anche altre proprietà. Per usarle,
            bisogna creare il "data file" del timbro.
 
-           Un data file e semplicemente un file di testo contenente le
+           Un data file è semplicemente un file di testo contenente le
            opzioni.
 
            Il file ha lo stesso nome dell'immagine PNG e l'estensione ".dat"
-           (ad esempio il data file relativo al timbro "picture.png" e il
+           (ad esempio il data file relativo al timbro "picture.png" è il
            file "picture.dat" contenuto nella stessa cartella).
 
     Timbri colorati
@@ -1607,14 +1611,14 @@ Timbri
 
                I timbri "a tinta" sono simili a quelli "a colori", ma vengono
                mantenuti i dettagli dell'immagine originale (tecnicamente,
-               viene usata l'immagine originale, ma la tonalit`a viene
+               viene usata l'immagine originale, ma la tonalità viene
                cambiata in base al colore selezionato).
 
                Aggiungere la parola "tintable" al data file del timbro.
 
     Timbri non modificabili
 
-             Normalmente un timbro puo essere capovolto, specchiato, o
+             Normalmente un timbro può essere capovolto, specchiato, o
              entrambe le cose. Queste modifiche vengono fatte usando i
              pulsanti sotto la "selezione", in basso a destra nella schermata
              di Tux Paint.
@@ -1638,7 +1642,7 @@ Timbri
 
   Immagini pre-specchiate
 
-           In alcuni casi, puo essere utile creare una versione specchiata
+           In alcuni casi, può essere utile creare una versione specchiata
            del timbro. Ad esempio, pensando ad un camion dei pomperi con la
            scritta "Vigili del fuoco" sulla fiancata, probabilmente non si
            desidera che la scritta appaia al contrario quando il timbro viene
@@ -1650,7 +1654,7 @@ Timbri
            prima dell'estensione.
 
            Ad esempio, per il timbro "CamionVdF.png" si crei un file chiamato
-           "CamionVdF_mirror.png", che verr`a usato quando il timbro viene
+           "CamionVdF_mirror.png", che verrà usato quando il timbro viene
            specchiato (evitando l'uso dell'immagine "CamionVdF.png" al
            contrario).
 
@@ -1660,10 +1664,10 @@ Caratteri
 
          I caratteri usati da Tux Paint sono TrueType Fonts (TTF).
 
-         E sufficiente inserire i file nella cartella "fonts" perche
+         È sufficiente inserire i file nella cartella "fonts" perché
          Tux Paint li carichi e permetta di utilizzarli con lo strumento
          "Testo", mettendoli a disposizione in quattro grandezze
-         selezionabili dal menu sulla destra.
+         selezionabili dal menù sulla destra.
 
      ----------------------------------------------------------------------
 
@@ -1672,11 +1676,11 @@ Caratteri
        Per maggiori inormazioni, si vedano gli altri file di documentazione
        allegati a Tux Paint.
 
-       Se si desidera aiuto, e possibile contattare liberamente New Breed
+       Se si desidera aiuto, è possibile contattare liberamente New Breed
        Software:
 
          http://www.newbreedsoftware.com/
 
-       E anche possibile partecipare alle numerose mailing list di Tux Paint:
+       È anche possibile partecipare alle numerose mailing list di Tux Paint:
 
          http://www.newbreedsoftware.com/tuxpaint/lists/

@@ -49,6 +49,7 @@ then
 	cp magic/sounds/* tmpzip/data/sounds/magic && \
 	cp -r stamps tmpzip/stamps && \
 	cp -r starters tmpzip/data/starters && \
+	cp -r templates tmpzip/data/templates &&\
 	mkdir tmpzip/etc && \
 	cp src/tuxpaint.cfg-android tmpzip/etc/tuxpaint.cfg && \
 	mkdir -p ../../assets && \

@@ -1,25 +1,24 @@
 # Makefile for Tux Paint docs
 # 
-# Uses "links" (or "lynx") to convert docs from HTML to plain text.
+# Uses "links" to convert docs from HTML to plain text.
 # (Normally only ran by the developers after updating the HTML, prior to
 # release.)
 #
 # Bill Kendrick
 # bill@newbreedsoftware.com
 # 
-# Sept. 4, 2005 - August 19, 2014
-# $Id: Makefile,v 1.11 2014/08/19 07:23:06 wkendrick Exp $
+# Sept. 4, 2005 - December 3, 2017
+# $Id$
 
-# Bah, "-no-numbering" and "-no-references" went away recently!? -bjk 2008.04.28
-LINKS_OPTIONS:=-dump
+LINKS_OPTIONS:=-dump -codepage utf8
 LINKS:=links $(LINKS_OPTIONS)
 
-LYNX_OPTIONS:=-dump
-LYNX:=lynx $(LYNX_OPTIONS)
-
 # FIXME: Support finding files in ??/html/ and ??_??/html/)
-HTMLFILES:=$(wildcard html/*.html)
-TEXTFILES:=$(patsubst html/%.html,%.txt,$(HTMLFILES))
+COPYING_HTMLFILES:=$(wildcard COPYING/html/*.html)
+COPYING_TEXTFILES:=$(patsubst COPYING/html/%.html,COPYING/%.txt,$(COPYING_HTMLFILES))
+
+EN_HTMLFILES:=$(wildcard en/html/*.html)
+EN_TEXTFILES:=$(patsubst en/html/%.html,en/%.txt,$(EN_HTMLFILES))
 
 ES_HTMLFILES:=$(wildcard es/html/*.html)
 ES_TEXTFILES:=$(patsubst es/html/%.html,es/%.txt,$(ES_HTMLFILES))
@@ -50,7 +49,8 @@ ZH_TW_TEXTFILES:=$(patsubst zh_tw/html/%.html,zh_tw/%.txt,$(ZH_TW_HTMLFILES))
 
 
 .PHONY: all
-all:	$(TEXTFILES) \
+all:	$(COPYING_TEXTFILES) \
+	$(EN_TEXTFILES) \
 	$(ES_TEXTFILES) \
 	$(FR_TEXTFILES) \
 	$(GL_TEXTFILES) \
@@ -64,7 +64,8 @@ all:	$(TEXTFILES) \
 .PHONY: clean
 clean:
 	-rm \
-	$(TEXTFILES) \
+	$(COPYING_TEXTFILES) \
+	$(EN_TEXTFILES) \
 	$(ES_TEXTFILES) \
 	$(FR_TEXTFILES) \
 	$(GL_TEXTFILES) \
@@ -75,32 +76,36 @@ clean:
 	$(ZH_CN_TEXTFILES) \
 	$(ZH_TW_TEXTFILES)
 
-$(TEXTFILES): %.txt: html/%.html  
+$(COPYING_TEXTFILES): COPYING/%.txt: COPYING/html/%.html
 	$(LINKS) $< > $@
 
-$(ES_TEXTFILES): es/%.txt: es/html/%.html  
+$(EN_TEXTFILES): en/%.txt: en/html/%.html
 	$(LINKS) $< > $@
 
-$(FR_TEXTFILES): fr/%.txt: fr/html/%.html  
+$(ES_TEXTFILES): es/%.txt: es/html/%.html
 	$(LINKS) $< > $@
 
-$(GL_TEXTFILES): gl/%.txt: gl/html/%.html  
+$(FR_TEXTFILES): fr/%.txt: fr/html/%.html
 	$(LINKS) $< > $@
 
-$(IT_TEXTFILES): it/%.txt: it/html/%.html  
+$(GL_TEXTFILES): gl/%.txt: gl/html/%.html
 	$(LINKS) $< > $@
 
-$(JA_TEXTFILES): ja/%.txt: ja/html/%.html  
-	$(LYNX) $< > $@
-
-$(NL_TEXTFILES): nl/%.txt: nl/html/%.html  
+$(IT_TEXTFILES): it/%.txt: it/html/%.html
 	$(LINKS) $< > $@
 
-$(RU_TEXTFILES): ru/%.txt: ru/html/%.html  
-	$(LYNX) $< > $@
+$(JA_TEXTFILES): ja/%.txt: ja/html/%.html
+	$(LINKS) $< > $@
 
-$(ZH_CN_TEXTFILES): zh_cn/%.txt: zh_cn/html/%.html  
-	$(LYNX) $< > $@
+$(NL_TEXTFILES): nl/%.txt: nl/html/%.html
+	$(LINKS) $< > $@
 
-$(ZH_TW_TEXTFILES): zh_tw/%.txt: zh_tw/html/%.html  
-	$(LYNX) $< > $@
+$(RU_TEXTFILES): ru/%.txt: ru/html/%.html
+	$(LINKS) $< > $@
+
+$(ZH_CN_TEXTFILES): zh_cn/%.txt: zh_cn/html/%.html
+	$(LINKS) $< > $@
+
+$(ZH_TW_TEXTFILES): zh_tw/%.txt: zh_tw/html/%.html
+	$(LINKS) $< > $@
+

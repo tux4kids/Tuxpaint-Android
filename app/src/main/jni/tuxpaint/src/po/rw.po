@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint 0.9.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-08 18:37+0200\n"
+"POT-Creation-Date: 2017-07-29 15:48+0200\n"
 "PO-Revision-Date: 2005-04-04 10:55-0700\n"
 "Last-Translator: Steven Michael Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -449,7 +449,7 @@ msgstr "Gishya"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7637
+#: ../tools.h:98 ../tuxpaint.c:7640
 msgid "Open"
 msgstr "Gufungura"
 
@@ -589,193 +589,197 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "Gumana: Igishushanyo iyi"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2053
+#: ../tuxpaint.c:2054
 #, fuzzy
 msgid "Do you really want to quit?"
 msgstr "Kuri Kuvamo"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2056
+#: ../tuxpaint.c:2057
 msgid "Yes, I’m done!"
 msgstr ""
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
+#: ../tuxpaint.c:2060 ../tuxpaint.c:2087
 msgid "No, take me back!"
 msgstr ""
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2063
+#: ../tuxpaint.c:2064
 #, fuzzy
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Kuvamo() y'Ishusho Kubika"
 
-#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
 msgid "Yes, save it!"
 msgstr ""
 
-#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+#: ../tuxpaint.c:2066 ../tuxpaint.c:2071
 msgid "No, don’t bother saving!"
 msgstr ""
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2068
+#: ../tuxpaint.c:2069
 #, fuzzy
 msgid "Save your picture first?"
 msgstr "Kubika() y'Ishusho Itangira"
 
 #. Error opening picture
-#: ../tuxpaint.c:2073
+#: ../tuxpaint.c:2074
 #, fuzzy
 msgid "Can’t open that picture!"
 msgstr "Gufungura() y'Ishusho"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
-#: ../tuxpaint.c:2106
+#: ../tuxpaint.c:2077 ../tuxpaint.c:2082 ../tuxpaint.c:2091 ../tuxpaint.c:2098
+#: ../tuxpaint.c:2107
 msgid "OK"
 msgstr "OKE"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2080
+#: ../tuxpaint.c:2081
 #, fuzzy
 msgid "There are no saved files!"
 msgstr "Oya Idosiye"
 
 #. Verification of print action
-#: ../tuxpaint.c:2084
+#: ../tuxpaint.c:2085
 #, fuzzy
 msgid "Print your picture now?"
 msgstr "y'Ishusho NONEAHA"
 
-#: ../tuxpaint.c:2085
+#: ../tuxpaint.c:2086
 msgid "Yes, print it!"
 msgstr ""
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2089
+#: ../tuxpaint.c:2090
 #, fuzzy
 msgid "Your picture has been printed!"
 msgstr "y'Ishusho Byacapwe"
 
 #. We got an error printing
-#: ../tuxpaint.c:2093
+#: ../tuxpaint.c:2094
 #, fuzzy
 msgid "Sorry! Your picture could not be printed!"
 msgstr "y'Ishusho Byacapwe"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2096
+#: ../tuxpaint.c:2097
 #, fuzzy
 msgid "You can’t print yet!"
 msgstr "Gucapa"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2100
+#: ../tuxpaint.c:2101
 #, fuzzy
 msgid "Erase this picture?"
 msgstr "iyi() y'Ishusho"
 
-#: ../tuxpaint.c:2101
+#: ../tuxpaint.c:2102
 msgid "Yes, erase it!"
 msgstr ""
 
-#: ../tuxpaint.c:2102
+#: ../tuxpaint.c:2103
 msgid "No, don’t erase it!"
 msgstr ""
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2105
+#: ../tuxpaint.c:2106
 msgid "Remember to use the left mouse button!"
 msgstr ""
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2313
+#: ../tuxpaint.c:2314
 msgid "Sound muted."
 msgstr ""
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2318
+#: ../tuxpaint.c:2319
 msgid "Sound unmuted."
 msgstr ""
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3071
+#: ../tuxpaint.c:3072
 msgid "Please wait…"
 msgstr ""
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7640
+#: ../tuxpaint.c:7643
 msgid "Erase"
 msgstr ""
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7646
 msgid "Slides"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7649
 msgid "Back"
 msgstr "Inyuma"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7649
+#: ../tuxpaint.c:7652
 #, fuzzy
 msgid "Next"
 msgstr "Umwandiko"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7652
+#: ../tuxpaint.c:7655
 msgid "Play"
 msgstr ""
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8361
+#: ../tuxpaint.c:8364
 msgid "Aa"
 msgstr ""
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11689
+#: ../tuxpaint.c:11692
 msgid "Yes"
 msgstr "Yego"
 
-#: ../tuxpaint.c:11693
+#: ../tuxpaint.c:11696
 msgid "No"
 msgstr "Oya"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12792
+#: ../tuxpaint.c:12795
 msgid "Replace the picture with your changes?"
 msgstr ""
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12796
+#: ../tuxpaint.c:12799
 msgid "Yes, replace the old one!"
 msgstr ""
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12800
+#: ../tuxpaint.c:12803
 #, fuzzy
 msgid "No, save a new file!"
 msgstr "Kubika a Gishya IDOSIYE"
 
-#: ../tuxpaint.c:14045
+#: ../tuxpaint.c:14048
 #, fuzzy
 msgid "Choose the picture you want, then click “Open”."
 msgstr "i() y'Ishusho Hanyuma Kanda"
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
+#: ../tuxpaint.c:15079 ../tuxpaint.c:15407
 #, fuzzy
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "i() y'Ishusho Hanyuma Kanda"
 
-#: ../tuxpaint.c:22439
+#: ../tuxpaint.c:22873
+msgid "Select a color from your drawing."
+msgstr ""
+
+#: ../tuxpaint.c:22885
 msgid "Pick a color."
 msgstr ""
 
@@ -1142,49 +1146,49 @@ msgstr "Kuri Ubwoko a Ishusho"
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Kuri Ubwoko a Ishusho"
 
-#: ../../magic/src/mosaic_shaped.c:147
+#: ../../magic/src/mosaic_shaped.c:139
 #, fuzzy
 #| msgid "Square"
 msgid "Square Mosaic"
 msgstr "kare"
 
-#: ../../magic/src/mosaic_shaped.c:148
+#: ../../magic/src/mosaic_shaped.c:140
 msgid "Hexagon Mosaic"
 msgstr ""
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:141
 msgid "Irregular Mosaic"
 msgstr ""
 
-#: ../../magic/src/mosaic_shaped.c:156
+#: ../../magic/src/mosaic_shaped.c:148
 #, fuzzy
 msgid ""
 "Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr "Kuri Ubwoko a Ishusho"
 
-#: ../../magic/src/mosaic_shaped.c:157
+#: ../../magic/src/mosaic_shaped.c:149
 #, fuzzy
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Kuri Ubwoko a Ishusho"
 
-#: ../../magic/src/mosaic_shaped.c:161
+#: ../../magic/src/mosaic_shaped.c:153
 #, fuzzy
 msgid ""
 "Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr "Kuri Ubwoko a Ishusho"
 
-#: ../../magic/src/mosaic_shaped.c:162
+#: ../../magic/src/mosaic_shaped.c:154
 #, fuzzy
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "Kuri Ubwoko a Ishusho"
 
-#: ../../magic/src/mosaic_shaped.c:166
+#: ../../magic/src/mosaic_shaped.c:158
 #, fuzzy
 msgid ""
 "Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr "Kuri Ubwoko a Ishusho"
 
-#: ../../magic/src/mosaic_shaped.c:167
+#: ../../magic/src/mosaic_shaped.c:159
 #, fuzzy
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "Kuri Ubwoko a Ishusho"

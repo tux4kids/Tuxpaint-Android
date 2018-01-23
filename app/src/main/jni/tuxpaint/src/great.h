@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   September 28, 2002 - July 17, 2007
-  $Id: great.h,v 1.6 2007/07/17 18:41:22 wkendrick Exp $
+  $Id$
 */
 
 

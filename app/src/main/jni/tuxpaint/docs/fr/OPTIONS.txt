@@ -1,179 +1,184 @@
    Options de Tux Paint
+
+OUT OF DATE
+
+   See English version.
+
    Avec la version 0.9.14, un outil graphique vous permet de modifier les
-   comportements de Tux Paint (Ha Bon! Ou c,`a? personnellement, je ne l'ai
-   pas trouve. Il ne doit pas etre dans le package de Mac OS X.) Toutefois si
-   vous ne l'avez pas installe ou si vous voulez comprendre un peu plus
-   comment c,`a marche, vous devez continuer `a lire ce qui suit.
+   comportements de Tux Paint (Ha Bon! Où çà? personnellement, je ne l'ai pas
+   trouvé. Il ne doit pas être dans le package de Mac OS X.) Toutefois si
+   vous ne l'avez pas installé ou si vous voulez comprendre un peu plus
+   comment çà marche, vous devez continuer à lire ce qui suit.
     1. Fichier de configuration
     1. Utilisateurs de Linux, d'Unix et de Mac OS X
-    2. Fichier de Configuration Systeme (Linux et UNIX)
+    2. Fichier de Configuration Système (Linux et UNIX)
     3. Utilisateurs de Windows
     4. Options disponibles
-    2. Outrepasser la configuration systeme en utilisant .tuxpaintrc.
+    2. Outrepasser la configuration système en utilisant .tuxpaintrc.
     3. Les options en ligne de commande
     4. Les Options d'information en ligne de commande.
-    5. Choisir un langage different.
-    6. Parametrer la localisation de votre environnement.
+    5. Choisir un langage différent.
+    6. Paramétrer la localisation de votre environnement.
     1. Utilisateurs de Linux/Unix.
     2. Utilisateurs de Windows.
-    7. Polices Speciales.
+    7. Polices Spéciales.
 
 Fichier de configuration
 
-   Vous pouvez creer un simple fichier de configuration pour Tux Paint, qui
-   est lu `a chaque demarrage du programme.
+   Vous pouvez créer un simple fichier de configuration pour Tux Paint, qui
+   est lu à chaque démarrage du programme.
    Ce fichier est un fichier au format texte contenant les options que vous
    voulez permettre. 
 
   Utilisateurs de Linux, d'Unix et de Mac OS X
 
-   Le fichier que vous devez creer s'appelle ".tuxpaintrc"  Et il doit etre
-   place `a la racine de votre repertoire personnel.  (C'est `a dire
+   Le fichier que vous devez créer s'appelle ".tuxpaintrc"  Et il doit être
+   placé à la racine de votre répertoire personnel.  (C'est à dire
    "~/.tuxpaintrc" ou  "$HOME/.tuxpaintrc")
 
-  Fichier de Configuration Systeme (Linux et UNIX)
+  Fichier de Configuration Système (Linux et UNIX)
 
-   Avant que ce fichier ne soit lu, un fichier de configuration systeme est
-   lu. (Par defaut cette configuration ne permet pas de reglages.) Il est
-   localise `a :
+   Avant que ce fichier ne soit lu, un fichier de configuration système est
+   lu. (Par défaut cette configuration ne permet pas de réglages.) Il est
+   localisé à :
    /etc/tuxpaint/tuxpaint.conf
 
-   Vous pouvez empecher le programme de lire ce fichier, abandonnant les
-   reglages par defaut (qui peuvent etre outrepasses par votre fichier et/ou
+   Vous pouvez empêcher le programme de lire ce fichier, abandonnant les
+   réglages par défaut (qui peuvent être outrepassés par votre fichier et/ou
    par un argument en ligne de commande.) en utilisant l'option de ligne de
    commande :
    --nosysconfig
 
   Utilisateurs de Windows
 
-   Le fichier que vous devez creer s'appelle "tuxpaint.cfg" et il doit etre
+   Le fichier que vous devez créer s'appelle "tuxpaint.cfg" et il doit être
    placer dans le dossier de Tux Paint.
 
-   Vous pouvez utiliser NotePad ou WordPad pour creer ce fichier. Soyez sur
-   de le sauvegarder au format plain text et verifier qu'il n'a pas
-   l'extension ".txt" `a la fin...
+   Vous pouvez utiliser NotePad ou WordPad pour créer ce fichier. Soyez sur
+   de le sauvegarder au format plain text et vérifier qu'il n'a pas
+   l'extension ".txt" à la fin...
 
   Options disponibles
 
-   Les reglages suivants peuvent etre inscrits dans le fichier de
+   Les réglages suivants peuvent être inscrits dans le fichier de
    configuration. (Les lignes de commandes les outrepasseront. Voir le
    chapitre options de ligne de commande ci-dessous.) (Ne pas tenir compte du
-   diese # qui n'est l`a que pour la presentation, si vous le laissez alors
-   la commande n'est pas prise en compte. On peut donc utiliser cette
-   subtilite pour desactiver une option sans effacer la ligne : cela
-   s'appelle commenter le ligne.)
+   dièse # qui n'est là que pour la présentation, si vous le laissez alors la
+   commande n'est pas prise en compte. On peut donc utiliser cette subtilité
+   pour désactiver une option sans effacer la ligne : cela s'appelle
+   commenter le ligne.)
    #fullscreen=yes
-   Le programme demarre en plein ecran au lieu d'une fenetre.
+   Le programme démarre en plein écran au lieu d'une fenêtre.
    #800x600=yes
-   Demarre le programme avec une resolution de 800x600  (EXPERIMENTAL),
-   plutot que la plus petite resolution de  640x480.
+   Démarre le programme avec une résolution de 800x600  (EXPERIMENTAL),
+   plutôt que la plus petite résolution de  640x480.
    #nosound=yes
-   Desactive les effets sonores.
+   Désactive les effets sonores.
    #noquit=yes
-   Desactive le bouton quitte du selecteur de gauche. (appuyer sur escape ou
-   cliquer sur le bouton de fermeture de la fenetre continu de fonctionner.) 
+   Désactive le bouton quitte du sélecteur de gauche. (appuyer sur escape ou
+   cliquer sur le bouton de fermeture de la fenêtre continu de fonctionner.) 
    #noprint=yes
-   Desactive la fonction d'impression.
+   Désactive la fonction d'impression.
    #printdelay=SECONDS
    L'impression ne peut avoir lieu qu'une fois toutes les SECONDS secondes.
    #printcommand=COMMAND (Linux et Unix uniquement)
    Utiliser la commande COMMAND pour imprimer un fichier PNG.  La commande
-   par defaut est pngtopnm | pnmtops | lpr qui convertie le PNG en un NetPBM
+   par défaut est pngtopnm | pnmtops | lpr qui convertie le PNG en un NetPBM
    'portable anymap',  ensuite le converti en un fichier postscript, et
-   finalement l'envoie `a l'imprimante via la commande "lpr"
+   finalement l'envoie à l'imprimante via la commande "lpr"
    #printcfg=yes (Windows uniquement)
    Tux Paint utilisera une configuration d'imprimante pour imprimer. Appuyez
    sur la touche [ALT] pendant que vous cliquez sur le bouton 'Print' dans
    Tux Paint pour forcer l'apparition d'une boite de dialogue pour
    l'impression.
-   (NB : Cela ne fonctionne pas quand Tux Paint est en mode plein ecran.)
+   (NB : Cela ne fonctionne pas quand Tux Paint est en mode plein écran.)
    Tout changement de configuration fait dans cette boite de dialogue sera
-   sauvegarde dans le fichier "userdata/print.cfg", et utilise de nouveau,
-   tant que l'option "printcfg" sera activee.
+   sauvegardé dans le fichier "userdata/print.cfg", et utilisé de nouveau,
+   tant que l'option "printcfg" sera activée.
    #simpleshapes=yes
-   Supprime l'etape de rotation des formes geometriques ('Shape').
-   Cliquer-glisser et relacher, c'est tout ce que vous avez besoin de faire
-   pour creer une nouvelle forme geometrique.
+   Supprime l'étape de rotation des formes géométriques ('Shape').
+   Cliquer-glisser et relâcher, c'est tout ce que vous avez besoin de faire
+   pour créer une nouvelle forme géométrique.
    #uppercase=yes
-   Tout le texte tape sera en majuscule (par exemple "Brosse" sera "BROSSE").
+   Tout le texte tapé sera en majuscule (par exemple "Brosse" sera "BROSSE").
    Utile pour les enfants qui n'ont encore  appris que les majuscules.
    #grab=yes
    Tux Paint essaiera de 'capturer' la souris et le clavier, afin qu'ils
-   restent confines dans sa fenetre.
-   Ceci est particulierement utile pour desactiver les actions sur l'OS qui
+   restent confinés dans sa fenêtre.
+   Ceci est particulièrement utile pour désactiver les actions sur l'OS qui
    peuvent sortir du programme  l'utilisateur de Tux Paint ([Alt]-[Tab] -ou
-   [pomme]-[<] sur Mac OS X- pour passer d'une fenetre `a l'autre,
-   [Ctrl]-[Escape], etc.) Cette option est tres utile en mode plein ecran.
+   [pomme]-[<] sur Mac OS X- pour passer d'une fenêtre à l'autre,
+   [Ctrl]-[Escape], etc.) Cette option est très utile en mode plein écran.
    #noshortcuts=yes
-   Cela deconnecte les raccourcis claviers tels que [Ctrl]-[S] pour
-   sauvegarder, [Ctrl]-[N] pour creer une nouvelle image, etc.
-   C'est utile pour empecher les commandes non desirees d'etre activees par
-   des enfants qui ne sont pas habitues au clavier.
+   Cela déconnecte les raccourcis claviers tels que [Ctrl]-[S] pour
+   sauvegarder, [Ctrl]-[N] pour créer une nouvelle image, etc.
+   C'est utile pour empêcher les commandes non désirées d'être activées par
+   des enfants qui ne sont pas habitués au clavier.
    #nowheelmouse=yes
-   Cela deconnecte le support de la molette des souris qui en ont une.
-   (Normalement, la molette deroule dans le selecteur de droite.)
+   Cela déconnecte le support de la molette des souris qui en ont une.
+   (Normalement, la molette déroule dans le sélecteur de droite.)
    #nofancycursors=yes
-   Ceci deconnecte le pointeur fantaisie dans Tux Paint,  et utilise le
+   Ceci déconnecte le pointeur fantaisie dans Tux Paint,  et utilise le
    pointeur normal de votre environnement.
-   Dans certains environnement, le pointeur fantaisie pose probleme :
+   Dans certains environnement, le pointeur fantaisie pose problème :
    utilisez alors cette option.
    #nooutlines=yes
-   Dans ce mode, sont affiches des silhouettes et des ruban elastiques plus
+   Dans ce mode, sont affichés des silhouettes et des ruban élastiques plus
    simples quand vous utilisez les outils Lignes, formes, Tampons et Gomme.
-   Cela peut etre utile sur les ordinateurs vraiment lent, ou lors
+   Cela peut être utile sur les ordinateurs vraiment lent, ou lors
    d'affichage sur un X-Window simple.
    #nostamps=yes
-   Cette option dit `a Tux Paint de ne pas charger de tampons, ce qui rend
-   indisponible l'outil Tampon. Ceci peut accelere Tux Paint lors du premier
-   lancement, et reduire la memoire allouee au programme pendant qu'il
-   fonctionne. Bien sur aucun tampon ne sera disponible. 
+   Cette option dit à Tux Paint de ne pas charger de tampons, ce qui rend
+   indisponible l'outil Tampon. Ceci peut accéléré Tux Paint lors du premier
+   lancement, et réduire la mémoire allouée au programme pendant qu'il
+   fonctionne. Bien sûr aucun tampon ne sera disponible. 
    #nostampcontrols=yes
-   Certaines images de l'outil Tampon peuvent etre retournees verticalement
-   ou comme dans un miroir et leur taille peut etre modifiee. Cette option
-   deconnecte ces controles, et ne laisse que les tampons basiques. 
+   Certaines images de l'outil Tampon peuvent être retournées verticalement
+   ou comme dans un miroir et leur taille peut être modifiée. Cette option
+   déconnecte ces contrôles, et ne laisse que les tampons basiques. 
    #mirrorstamps=yes
-   Pour les tampons qui peuvent etre retournes comme dans un miroir, cette
-   option regle ces tampons sous leur forme miroir par defaut. Ce peut etre
-   pratique pour les gens qui preferent les choses de droite `a gauche te non
-   de gauche `a droite. (perso sur un dessin je ne vois pas l'interet de
-   cette option.)
+   Pour les tampons qui peuvent être retournés comme dans un miroir, cette
+   option règle ces tampons sous leur forme miroir par défaut. Ce peut être
+   pratique pour les gens qui préfèrent les choses de droite à gauche te non
+   de gauche à droite. (perso sur un dessin je ne vois pas l'intérêt de cette
+   option.)
    #keyboard=yes
-   Ceci permet d'utiliser les fleches du clavier pour controler le pointeur
+   Ceci permet d'utiliser les flèches du clavier pour contrôler le pointeur
    de la souris. (par exemple pour les environnements sans souris.)
-   Les fleches bougent le pointeur. La touche espace agit comme le bouton de
+   Les flèches bougent le pointeur. La touche espace agit comme le bouton de
    souris.
    #savedir=DIRECTORY
-   Utilisez cette option pour modifier le repertoire ou Tux Paint sauvegarde
-   les images; par defaut c'est ~/.tuxpaint/saved/ sous Linux et UNIX,
+   Utilisez cette option pour modifier le répertoire où Tux Paint sauvegarde
+   les images; par défaut c'est ~/.tuxpaint/saved/ sous Linux et UNIX,
    ~/Library/Application Support/tuxpaint/saved sous Mac OS X,
    et userdata\saved sous Windows.
-   Ceci peut etre utile lors d'utilisation sur un reseau Windows, ou Tux
-   Paint est installe sur le serveur, et les enfants l'utilisent sur leur
-   poste client. Vous pouvez regler le repertoire de sauvegarde pour qu'il
-   soit dans leur propre repertoire et non sur le serveur (par exemple
+   Ceci peut être utile lors d'utilisation sur un réseau Windows, où Tux
+   Paint est installé sur le serveur, et les enfants l'utilisent sur leur
+   poste client. Vous pouvez régler le répertoire de sauvegarde pour qu'il
+   soit dans leur propre répertoire et non sur le serveur (par exemple
    "H:\tuxpaint\".)
-   NB : quand vous specifier une partition Windows (par exemple H:\), vous
-   devez aussi specifier un sous-repertoire.
+   NB : quand vous spécifier une partition Windows (par exemple H:\), vous
+   devez aussi spécifier un sous-répertoire.
    Exemple: savedir=Z:\tuxpaint\
    #saveover=yes
-   Ceci empeche l'apparition de la fenetre "Sauvegarder en ecrasant
+   Ceci empêche l'apparition de la fenêtre "Sauvegarder en écrasant
    l'ancienne version..?" ("Save over the old version...?") quand vous
-   sauvegardez un fichier dej`a existant. Avec cette option, l'ancienne
-   version est automatiquement ecrasee.
+   sauvegardez un fichier déjà existant. Avec cette option, l'ancienne
+   version est automatiquement écrasée.
    #saveover=new
-   Celle-ci deconnecte la meme fenetre de dialogue, toutefois le fichier est
-   sauvegarde en conservant l'ancienne version.
+   Celle-ci déconnecte la même fenêtre de dialogue, toutefois le fichier est
+   sauvegardé en conservant l'ancienne version.
    #saveover=ask
-   (Cette fonction est redondante puisque c'est celle par defaut)
-   Lorsque vous sauvegardez un dessin existant, il vous est d'abord demande
+   (Cette fonction est redondante puisque c'est celle par défaut)
+   Lorsque vous sauvegardez un dessin existant, il vous est d'abord demandé
    si vous voulez sauvegarder sur l'ancienne version ou non.
    #nosave=yes
-   Celle-ci retire la capacite d'enregistrer des fichiers de Tux Paint (et
-   dans le meme temps deconnecte le bouton de sauve garde ('Save') du
-   selecteur de gauche. Elle peut etre utilisee d'en les situation ou le
-   programme est utilise seulement pour le fun ou dans un environnement test.
+   Celle-ci retire la capacité d'enregistrer des fichiers de Tux Paint (et
+   dans le même temps déconnecte le bouton de sauve garde ('Save') du
+   sélecteur de gauche. Elle peut être utilisée d'en les situation où le
+   programme est utilisé seulement pour le fun ou dans un environnement test.
    #lang=LANGUAGE
-   Demarre Tux Paint dans un des langages supportes. Les choix possibles de
+   Démarre Tux Paint dans un des langages supportés. Les choix possibles de
    langages ('LANGUAGE') sont (pour le moment)
 
    +------------------------------------------------------------------------+
@@ -270,28 +275,28 @@ Fichier de configuration
    |welsh                                      |cymraeg           |         |
    +------------------------------------------------------------------------+
 
-Outrepasser la configuration systeme en utilisant .tuxpaintrc.
+Outrepasser la configuration système en utilisant .tuxpaintrc.
 
    (Pour les utilisateurs de Linux et d'Unix)
 
-   Si chacune des options precedentes peut etre reglee dans
+   Si chacune des options précédentes peut être réglée dans
    "/etc/tuxpaint/tuxpaint.config", Vous pouvez les outrepasser avec votre
    propre fichier "~/.tuxpaintrc".
 
    Pour les options vrai ou faux, telles que noprint et grab, vous pouvez
-   simplement dire, dans le fichier "~/.tuxpaintrc", qu'elle sont egales
-   `a non :
+   simplement dire, dans le fichier "~/.tuxpaintrc", qu'elle sont égales
+   à non :
    noprint=no
    uppercase=no
 
    Vous pouvez aussi utiliser des options similaire aux options de lignes de
-   commande comme decrite ci-dessous, par exemple: 
+   commande comme décrite ci-dessous, par exemple: 
    print=yes
    mixedcase=yes
 
 Les options en ligne de commande
 
-   Les options peuvent aussi etre passees en ligne commande lorsqu'on demarre
+   Les options peuvent aussi être passées en ligne commande lorsqu'on démarre
    Tux Paint.
    --fullscreen
    --800x600
@@ -317,7 +322,7 @@ Les options en ligne de commande
    --nosave
    --lang LANGUAGE
    Celles-ci permettent ou correspondent aux options du fichier de
-   configuration decrit plus haut.
+   configuration décrit plus haut.
 
    --windowed
    --640x480
@@ -339,48 +344,48 @@ Les options en ligne de commande
    --mouse
    --saveoverask
    --save
-   Ces options peuvent etre utilisees pour outrepasser n'importe quel reglage
-   effectue dans le fichier de configuration. (Si l'option n'est pas reglee
+   Ces options peuvent être utilisées pour outrepasser n'importe quel réglage
+   effectué dans le fichier de configuration. (Si l'option n'est pas réglée
    dans le fichier de configuration, aucune option "outrepassante" n'est
-   necessaire.)
+   nécessaire.)
 
    --locale locale
-   Demarre Tux Paint dans un des langage supporte. Voir la section choisir un
-   langage different ci-dessous pour la commande locale `a utiliser (Par
+   Démarre Tux Paint dans un des langage supporté. Voir la section choisir un
+   langage différent ci-dessous pour la commande locale à utiliser (Par
    exemple : "de_DE@euro" pour l'allemand).
-   Si votre localisation (langage) a dej`a ete selectionne, par exemple dans
-   votre variable d'environnement $LANG, cette option n'est pas necessaire
-   puisque Tux Paint essaye si possible de respecter vos reglages
+   Si votre localisation (langage) a déjà été sélectionné, par exemple dans
+   votre variable d'environnement $LANG, cette option n'est pas nécessaire
+   puisque Tux Paint essaye si possible de respecter vos réglages
    d'environnement.
 
    --nosysconfig
-   Sous Linux et UNIX, celle-ci empeche la lecture du fichier de
-   configuration systeme "/etc/tuxpaint/tuxpaint.conf".
+   Sous Linux et UNIX, celle-ci empêche la lecture du fichier de
+   configuration système "/etc/tuxpaint/tuxpaint.conf".
    Seul votre propre fichier de configuration, "~/.tuxpaintrc", sera lu, s'il
    existe. 
 
    --nolockfile
-   Par defaut, Tux Paint utilise ce qui est connu comme un 'fichier de
-   blocage' ('lockfile') pour l'empecher d'etre lancer plus d'une fois toutes
-   les 30 secondes. (Ceci est utile pour eviter de lancer de multiples
+   Par défaut, Tux Paint utilise ce qui est connu comme un 'fichier de
+   blocage' ('lockfile') pour l'empêcher d'être lancer plus d'une fois toutes
+   les 30 secondes. (Ceci est utile pour éviter de lancer de multiples
    copies, par exemple lorsqu'on clique deux fois sur un lanceur simple clic,
-   ou si on clique impatiemment plusieurs fois sur l'icone.)
-   Pour permettre `a Tux Paint d'ignorer le 'fichier de blocage',
-   l'autorisant `a etre lance meme s'il a dej`a ete lance dans les 30
-   secondes precedentes, il faut demarrer  Tux Paint avec l'option
-   '--nolockfile' dans la ligne de commande.
-   Par defaut, le 'fichier de blocage' est range dans "~/.tuxpaint/" sous
+   ou si on clique impatiemment plusieurs fois sur l'icône.)
+   Pour permettre à Tux Paint d'ignorer le 'fichier de blocage', l'autorisant
+   à être lancé même s'il a déjà été lancé dans les 30 secondes précédentes,
+   il faut démarrer  Tux Paint avec l'option '--nolockfile' dans la ligne de
+   commande.
+   Par défaut, le 'fichier de blocage' est rangé dans "~/.tuxpaint/" sous
    Linux et Unix,  et "userdata\" sous Windows.
 
 Les Options d'information en ligne de commande.
 
    Les options suivantes affichent un certain nombre de textes informatifs
-    sur l'ecran.   Tux Paint ne demarre pas reellement.
+    sur l'écran.   Tux Paint ne démarre pas réellement.
 
    --version
-   Affiche le numero de version et la date de la copie de Tux Paint que vous
-   avez. Elle affiche aussi si necessaire, les options de compilation que
-   vous avez fourni `a l'installation. (Voir INSTALL.txt et FAQ.txt).
+   Affiche le numéro de version et la date de la copie de Tux Paint que vous
+   avez. Elle affiche aussi si nécessaire, les options de compilation que
+   vous avez fourni à l'installation. (Voir INSTALL.txt et FAQ.txt).
 
    --copying
     Montre une courte information sur la licence pour copier Tux Paint.
@@ -394,12 +399,12 @@ Les Options d'information en ligne de commande.
     --lang help
     Montre la liste des langages disponibles dans Tux Paint.
 
-Choisir un langage different.
+Choisir un langage différent.
 
-   Tux Paint a ete traduit dans de nombreux langages; Pour acceder aux
+   Tux Paint a été traduit dans de nombreux langages; Pour accéder aux
    traductions, vous pouvez utiliser l'option "--lang"  dans la ligne de
-   commande pour regler le langage (par exemple "--lang spanish")  ou
-   utiliser le reglage "lang=" dans le fichier de configuration. 
+   commande pour régler le langage (par exemple "--lang spanish")  ou
+   utiliser le réglage "lang=" dans le fichier de configuration. 
 
    Tux Paint respecte aussi la localisation de votre environnement. (Vous
    pouvez l'outrepasser en utilisant l'option de ligne de commande
@@ -409,9 +414,9 @@ Choisir un langage different.
 
    +------------------------------------------------------------------------+
    |  Locale Code   |    Langage     |      Langage       |     Langage     |
-   |                |   (nom natif)  |    (nom Anglais)   | (nom franc,ais) |
+   |                |   (nom natif)  |    (nom Anglais)   | (nom français)  |
    |----------------+----------------+--------------------+-----------------|
-   |       C        |                |      English       |Anglais americain|
+   |       C        |                |      English       |Anglais américain|
    |----------------+----------------+--------------------+-----------------|
    |     af_ZA      |                |     Afrikaans      |    Afrikaner    |
    |----------------+----------------+--------------------+-----------------|
@@ -421,9 +426,9 @@ Choisir un langage different.
    |----------------+----------------+--------------------+-----------------|
    |     br_FR      |   Brezhoneg    |       Breton       |     Breton      |
    |----------------+----------------+--------------------+-----------------|
-   |     ca_ES      |    Catal`a     |      Catalan       |     Catalan     |
+   |     ca_ES      |     Català     |      Catalan       |     Catalan     |
    |----------------+----------------+--------------------+-----------------|
-   |     cs_CZ      |     Cesky      |       Czech        |     Tcheque     |
+   |     cs_CZ      |     Cesky      |       Czech        |     Tchèque     |
    |----------------+----------------+--------------------+-----------------|
    |     cy_GB      |    Cymraeg     |       Welsh        |     Galois      |
    |----------------+----------------+--------------------+-----------------|
@@ -435,15 +440,15 @@ Choisir un langage different.
    |----------------+----------------+--------------------+-----------------|
    |     en_GB      |                |  British English   |     Anglais     |
    |----------------+----------------+--------------------+-----------------|
-   |   es_ES@euro   |    Espanol     |       Spain        |    Espagnol     |
+   |   es_ES@euro   |    Español     |       Spain        |    Espagnol     |
    |----------------+----------------+--------------------+-----------------|
    |     eu_ES      |    Euskara     |       Basque       |     Basque      |
    |----------------+----------------+--------------------+-----------------|
    |   fi_FI@euro   |     Suomi      |      Finnish       |     Finnois     |
    |----------------+----------------+--------------------+-----------------|
-   |   fr_FR@euro   |                |       French       |    Franc,ais    |
+   |   fr_FR@euro   |                |       French       |    Français     |
    |----------------+----------------+--------------------+-----------------|
-   |   he_IL (*)    |                |       Hebrew       |     Hebreu      |
+   |   he_IL (*)    |                |       Hebrew       |     Hébreu      |
    |----------------+----------------+--------------------+-----------------|
    |   hi_IN (*)    |                |       Hindi        |      Hindi      |
    |----------------+----------------+--------------------+-----------------|
@@ -451,33 +456,33 @@ Choisir un langage different.
    |----------------+----------------+--------------------+-----------------|
    |     hu_HU      |     Magyar     |     Hungarian      |    Hongrois     |
    |----------------+----------------+--------------------+-----------------|
-   |     id_ID      |Bahasa Indonesia|     Indonesian     |   Indonesien    |
+   |     id_ID      |Bahasa Indonesia|     Indonesian     |   Indonésien    |
    |----------------+----------------+--------------------+-----------------|
-   |     is_IS      |    Islenska    |     Icelandic      |    Islandais    |
+   |     is_IS      |    Íslenska    |     Icelandic      |    Islandais    |
    |----------------+----------------+--------------------+-----------------|
    |   it_IT@euro   |    Italiano    |      Italian       |     Italien     |
    |----------------+----------------+--------------------+-----------------|
    |ja_JP.UTF-8 (*) |                |      Japanese      |    Japonais     |
    |----------------+----------------+--------------------+-----------------|
-   |ko_KR.UTF-8 (*) |                |       Korean       |     Coreen      |
+   |ko_KR.UTF-8 (*) |                |       Korean       |     Coréen      |
    |----------------+----------------+--------------------+-----------------|
    |  lt_LT.UTF-8   |    Lietuviu    |     Lithuanian     |    Lituanien    |
    |----------------+----------------+--------------------+-----------------|
    |     ms_MY      |                |       Malay        |     Malais      |
    |----------------+----------------+--------------------+-----------------|
-   |     nb_NO      |Norsk (bokmaal) | Norwegian Bokmaal  |    Norvegien    |
+   |     nb_NO      | Norsk (bokmål) |  Norwegian Bokmål  |    Norvégien    |
    |                |                |                    |   "livresque"   |
    |----------------+----------------+--------------------+-----------------|
-   |     nn_NO      |Norsk (nynorsk) | Norwegian Nynorsk  |  Neo-norvegien  |
+   |     nn_NO      |Norsk (nynorsk) | Norwegian Nynorsk  |  Néo-norvégien  |
    |----------------+----------------+--------------------+-----------------|
    |   nl_NL@euro   |                |       Dutch        |   Hollandais    |
    |----------------+----------------+--------------------+-----------------|
    |     pl_PL      |     Polski     |       Polish       |    Polonais     |
    |----------------+----------------+--------------------+-----------------|
-   |     pt_BR      |    Portuges    |Brazilian Portuguese|    Portugais    |
-   |                |   Brazileiro   |                    |    bresilien    |
+   |     pt_BR      |    Portugês    |Brazilian Portuguese|    Portugais    |
+   |                |   Brazileiro   |                    |    brésilien    |
    |----------------+----------------+--------------------+-----------------|
-   |     pt_PT      |    Portuges    |     Portuguese     |    Portugais    |
+   |     pt_PT      |    Portugês    |     Portuguese     |    Portugais    |
    |----------------+----------------+--------------------+-----------------|
    |     ro_RO      |                |      Romanian      |     Roumain     |
    |----------------+----------------+--------------------+-----------------|
@@ -485,15 +490,15 @@ Choisir un langage different.
    |----------------+----------------+--------------------+-----------------|
    |     sk_SK      |                |       Slovak       |    Slovaque     |
    |----------------+----------------+--------------------+-----------------|
-   |     sl_SI      |                |     Slovenian      |    Slovenien    |
+   |     sl_SI      |                |     Slovenian      |    Slovénien    |
    |----------------+----------------+--------------------+-----------------|
    |     sr_YU      |                |      Serbian       |      Serbe      |
    |----------------+----------------+--------------------+-----------------|
-   |   sv_SE@euro   |    Svenska     |      Swedish       |     Suedois     |
+   |   sv_SE@euro   |    Svenska     |      Swedish       |     Suédois     |
    |----------------+----------------+--------------------+-----------------|
    |   ta_IN (*)    |                |       Tamil        |     Tamoul      |
    |----------------+----------------+--------------------+-----------------|
-   |    tlh (*)     |    tlhIngan    |      Klingon       |  l`a je seche   |
+   |    tlh (*)     |    tlhIngan    |      Klingon       |   là je sèche   |
    |----------------+----------------+--------------------+-----------------|
    |   tr_TR@euro   |                |      Turkish       |      Turc       |
    |----------------+----------------+--------------------+-----------------|
@@ -501,39 +506,39 @@ Choisir un langage different.
    |----------------+----------------+--------------------+-----------------|
    |   wa_BE@euro   |                |      Walloon       |     Wallon      |
    |----------------+----------------+--------------------+-----------------|
-   |   zh_CN (*)    |                |Chinese (Simplified)|Chinois simplifie|
+   |   zh_CN (*)    |                |Chinese (Simplified)|Chinois simplifié|
    |----------------+----------------+--------------------+-----------------|
    |   zh_TW (*)    |                |      Chinese       |     Chinois     |
    |                |                |   (Traditional)    |  traditionnel   |
    +------------------------------------------------------------------------+
 
-   (*) - Ces langages requierent leurs propres polices, car elles n'utilisent
-   pas le jeu de caracteres latin comme les autres. Voir la section "Polices
-   speciales" plus loin.
+   (*) - Ces langages requièrent leurs propres polices, car elles n'utilisent
+   pas le jeu de caractères latin comme les autres. Voir la section "Polices
+   spéciales" plus loin.
 
-Parametrer la localisation de votre environnement.
+Paramétrer la localisation de votre environnement.
 
    Changer votre localisation affectera une bonne partie de votre
    environnement.
 
-   Comme explique plus haut, tant que vous n'avez pas parametre votre langage
+   Comme expliqué plus haut, tant que vous n'avez pas paramétré votre langage
    avec les lignes de commandes (ou le fichier de configuration), Tux Paint
-   respecte le reglage de localisation de votre environnement. 
+   respecte le réglage de localisation de votre environnement. 
 
-   Si vous n'avez pas dej`a regle votre localisation de votre environnement,
-   la suite vous explique brievement comment faire.
+   Si vous n'avez pas déjà réglé votre localisation de votre environnement,
+   la suite vous explique brièvement comment faire.
 
   Utilisateurs de Linux/Unix.
 
-   Premierement soyez sur que la localisation que vous voulez est permise en
-   editant le fichier  "/etc/locale.gen" sur votre systeme et ensuite lancez
+   Premièrement soyez sûr que la localisation que vous voulez est permise en
+   éditant le fichier  "/etc/locale.gen" sur votre système et ensuite lancez
    le programme "locale-gen" en mode root.
 
    NB : Les utilisateurs de Debian pourront simplement lancer la commande
    "dpkg-reconfigure locales".
 
-   Ensuite avant de lancer Tux Paint, reglez votre variable d'environnement
-   "$LANG" dans une des localisation listees plus haut. (Si vous voulez que
+   Ensuite avant de lancer Tux Paint, réglez votre variable d'environnement
+   "$LANG" dans une des localisation listées plus haut. (Si vous voulez que
    tous les programmes soient traduits, vous pouvez vouloir placer ce qui
    suit dans votre script de connection : par exemple  ~/.profile, 
    ~/.bashrc, ~/.cshrc, etc.)
@@ -548,72 +553,72 @@ Parametrer la localisation de votre environnement.
 
   Utilisateurs de Windows.
 
-   Tux Paint va reconnaitre la localisation courante et utiliser les fichiers
-   appropries par defaut. Donc cette section concerne  uniquement les
+   Tux Paint va reconnaître la localisation courante et utiliser les fichiers
+   appropriés par défaut. Donc cette section concerne  uniquement les
    personnes utilisant plusieurs langages.
 
    La chose la plus simple a faire est d'utiliser le convertisseur '--lang' 
    dans le raccourcis (Voir "INSTALL.txt"). Toutefois, en utilisant une
-   fenetre emulant MSDOS, il est aussi possible de donner la commande comme
+   fenêtre émulant MSDOS, il est aussi possible de donner la commande comme
    suit : 
     set LANG=es_ES@euro
 
-    ...Ce qui reglera ce langage pendant la duree de vie de cette fenetre
+    ...Ce qui réglera ce langage pendant la durée de vie de cette fenêtre
    MSDOS.
 
-   Pour quelque chose de plus permanent, essayez d'editer votre fichier
+   Pour quelque chose de plus permanent, essayez d'éditer votre fichier
    'autoexec.bat' en utilisant l'outil "sysedit" de windows:
 
     Windows 95/98
 
-       1.      Cliquez sur le bouton 'start' et selectionnez 'run'
-       2.      Tapez "sysedit" dans la fenetre 'Open:' (avec ou sans les
+       1.      Cliquez sur le bouton 'start' et sélectionnez 'run'
+       2.      Tapez "sysedit" dans la fenêtre 'Open:' (avec ou sans les
    guillemets).
        3.      Cliquez sur 'OK'.
-       4.      Localisez la fenetre AUTOEXEC.BAT dans l'editeur de
-   configuration systeme (System Configuration  Editor).
+       4.      Localisez la fenêtre AUTOEXEC.BAT dans l'éditeur de
+   configuration système (System Configuration  Editor).
        5.      Ajoutez ce qui suit en bas de la file : 
     set LANG=es_ES@euro
-       6.      Fermez l'editeur de configuration systeme, repondez oui
+       6.      Fermez l'éditeur de configuration système, répondez oui
    lorsqu'il demande si vous voulez conserver les changement.
-       7.       Redemarrer votre machine.
-    Pour affecter la machine entiere, et toutes les applications, il est
-   possible d'utiliser le tableau de controle des "reglages de regions" :
-       1.      Cliquez sur le bouton 'Start', et selectionnez
+       7.       Redémarrer votre machine.
+    Pour affecter la machine entière, et toutes les applications, il est
+   possible d'utiliser le tableau de contrôle des "réglages de régions" :
+       1.      Cliquez sur le bouton 'Start', et sélectionnez
    'Settings | Control Panel'.
-       2.      Double-cliquez sur le globe de "reglage de region".
-       3.      Selectionnez un langage ou une region dans le menu deroulant.
+       2.      Double-cliquez sur le globe de "réglage de région".
+       3.      Sélectionnez un langage ou une région dans le menu déroulant.
        4.      Cliquez sur 'OK'.
-       5.      Redemarrez votre ordinateur lorsqu'il vous le demande.
+       5.      Redémarrez votre ordinateur lorsqu'il vous le demande.
 
-Polices Speciales.
+Polices Spéciales.
 
-   Certains langages requierent que certaines polices speciales soient
-   installees. Ces fichiers de polices (qui sont au format True Type (TTF)),
-   sont trop gros pour etre inclus dans le telechargement de Tux Paint, et
-   sont disponibles separement. (Voir la table ci-dessus dans la section
-   choisir un langage different.)  
+   Certains langages requièrent que certaines polices spéciales soient
+   installées. Ces fichiers de polices (qui sont au format True Type (TTF)),
+   sont trop gros pour être inclus dans le téléchargement de Tux Paint, et
+   sont disponibles séparément. (Voir la table ci-dessus dans la section
+   choisir un langage différent.)  
 
-   Quand vous demarrez Tux Paint dans un langage qui requiere ces propres
-   fonts, Tux Paint va essayer de charger les polices `a partir de son
-   repertoire systeme (dans un sous-repertoire "locale"). Le nom du fichier
-   correspond au deux premieres lettres du code 'locale' pour ce langage (Par
+   Quand vous démarrez Tux Paint dans un langage qui requière ces propres
+   fonts, Tux Paint va essayer de charger les polices à partir de son
+   répertoire système (dans un sous-répertoire "locale"). Le nom du fichier
+   correspond au deux premières lettres du code 'locale' pour ce langage (Par
    exemple : "ko" for Korean, "ja" for Japanese,  "zh" for Chinese).
 
-   Par exemple, sous linux, quand Tux Paint est demarre en coreen (i.e., avec
-   l'option "--lang korean"), Tux Paint va tenter de charge le fichier de
+   Par exemple, sous linux, quand Tux Paint est démarré en coréen (i.e., avec
+   l'option "--lang korean"), Tux Paint va tenter de chargé le fichier de
    police suivant : 
 
    /usr/share/tuxpaint/fonts/locale/ko.ttf
 
-   Vous pouvez telecharger les polices pour les langages supportes sur le
+   Vous pouvez télécharger les polices pour les langages supportés sur le
    site de Tux Paint, http://www.newbreedsoftware.com/tuxpaint/.  (Regardez
    dans la section 'Fonts' sous 'Download.')
 
    Sous Linux et Unix, vous pouvez utiliser le Makefile qui vient avec les
    polices pour installer les polices au bon endroit.
 
-   Traduction faite le 30/09/2005 de
+   Traduction faîte le 30/09/2005 de
     version  0.9.14
 
     Options Documentation

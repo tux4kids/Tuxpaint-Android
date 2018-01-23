@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  $Id: im.h,v 1.4 2009/11/22 23:17:35 albert Exp $
+  $Id$
 */
 
 #ifndef TUXPAINT_IM_H
@@ -33,15 +33,16 @@
 * TYPES
 */
 
-typedef struct IM_DATA {
-  int lang;             /* Language used in sequence translation */
-  wchar_t s[16];        /* Characters that should be displayed */
-  const char* tip_text; /* Tip text, read-only please */
+typedef struct IM_DATA
+{
+  int lang;                     /* Language used in sequence translation */
+  wchar_t s[16];                /* Characters that should be displayed */
+  const char *tip_text;         /* Tip text, read-only please */
 
   /* For use by language-specific im_event_<lang> calls. PRIVATE! */
-  wchar_t buf[8];       /* Buffered characters */
-  int redraw;           /* Redraw this many characters next time */
-  int request;          /* Event request */
+  wchar_t buf[8];               /* Buffered characters */
+  int redraw;                   /* Redraw this many characters next time */
+  int request;                  /* Event request */
 } IM_DATA;
 
 
@@ -49,9 +50,9 @@ typedef struct IM_DATA {
 * FUNCTIONS
 */
 
-void im_init(IM_DATA* im, int lang);      /* Initialize IM */
-void im_softreset(IM_DATA* im);           /* Soft Reset IM */
-int im_read(IM_DATA* im, SDL_Event event);
+void im_init(IM_DATA * im, int lang);   /* Initialize IM */
+void im_softreset(IM_DATA * im);        /* Soft Reset IM */
+int im_read(IM_DATA * im, SDL_Event event);
 
 
 #endif /* TUXPAINT_IM_H */

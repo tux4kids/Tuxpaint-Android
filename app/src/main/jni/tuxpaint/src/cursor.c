@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   June 14, 2002 - May 15, 2007
-  $Id: cursor.c,v 1.6 2011/08/29 22:48:18 scottmc Exp $
+  $Id$
 */
 
 #include "cursor.h"
@@ -84,8 +84,8 @@ void do_setcursor(SDL_Cursor * c)
 void free_cursor(SDL_Cursor ** cursor)
 {
   if (*cursor)
-  {
-    SDL_FreeCursor(*cursor);
-    *cursor = NULL;
-  }
+    {
+      SDL_FreeCursor(*cursor);
+      *cursor = NULL;
+    }
 }

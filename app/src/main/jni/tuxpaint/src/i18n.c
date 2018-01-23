@@ -23,9 +23,9 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  $Id: i18n.c,v 1.130 2015/03/11 21:48:34 perepujal Exp $
+  $Id$
 
-  June 14, 2002 - April 16, 2014
+  June 14, 2002 - December 11, 2016
 */
 
 #include <stdio.h>
@@ -54,20 +54,21 @@
 // setlocale cannot get current default locale of the device.
 // Here, JNI and Java Locale class can get the default locale
 // if user has not set locale and lang in the config file yet.
-static char * android_locale ()
+static char *android_locale()
 {
-	static char android_locale_buf[32];
-	JNIEnv *mEnv = Android_JNI_GetEnv();
-    jclass mLocaleClass = (*mEnv)->FindClass(mEnv, "java/util/Locale");
-    jmethodID mGetDefaultMethod = (*mEnv)->GetStaticMethodID(mEnv, mLocaleClass, "getDefault", "()Ljava/util/Locale;");
-    jobject mLocaleObject = (*mEnv)->CallStaticObjectMethod(mEnv, mLocaleClass, mGetDefaultMethod);
-    jmethodID mToStringMethod = (*mEnv)->GetMethodID(mEnv, mLocaleClass, "toString", "()Ljava/lang/String;");
-    jstring mLocaleString = (*mEnv)->CallObjectMethod(mEnv, mLocaleObject, mToStringMethod);
-    const char* locale = (*mEnv)->GetStringUTFChars(mEnv, mLocaleString, 0);
-    strcpy(android_locale_buf, locale);
-    (*mEnv)->ReleaseStringUTFChars(mEnv, mLocaleString, locale);
-    printf("android locale %s\n", android_locale_buf);
-    return android_locale_buf;
+  static char android_locale_buf[32];
+  JNIEnv *mEnv = Android_JNI_GetEnv();
+  jclass mLocaleClass = (*mEnv)->FindClass(mEnv, "java/util/Locale");
+  jmethodID mGetDefaultMethod = (*mEnv)->GetStaticMethodID(mEnv, mLocaleClass, "getDefault", "()Ljava/util/Locale;");
+  jobject mLocaleObject = (*mEnv)->CallStaticObjectMethod(mEnv, mLocaleClass, mGetDefaultMethod);
+  jmethodID mToStringMethod = (*mEnv)->GetMethodID(mEnv, mLocaleClass, "toString", "()Ljava/lang/String;");
+  jstring mLocaleString = (*mEnv)->CallObjectMethod(mEnv, mLocaleObject, mToStringMethod);
+  const char *locale = (*mEnv)->GetStringUTFChars(mEnv, mLocaleString, 0);
+
+  strcpy(android_locale_buf, locale);
+  (*mEnv)->ReleaseStringUTFChars(mEnv, mLocaleString, locale);
+  printf("android locale %s\n", android_locale_buf);
+  return android_locale_buf;
 }
 #endif
 
@@ -255,7 +256,7 @@ int need_right_to_left_word;
 const char *lang_prefix, *short_lang_prefix;
 
 int num_wished_langs = 0;
-w_langs wished_langs[255]; 
+w_langs wished_langs[255];
 
 static const language_to_locale_struct language_to_locale_array[] = {
   {"english", "C"},
@@ -390,10 +391,10 @@ static const language_to_locale_struct language_to_locale_array[] = {
   {"northern-sotho", "nso_ZA.UTF-8"},
   {"sesotho-sa-leboa", "nso_ZA.UTF-8"},
   {"occitan", "oc_FR.UTF-8"},
-  {"odia", "or_IN.UTF-8"}, // Proper spelling
-  {"oriya", "or_IN.UTF-8"}, // Alternative
-  {"ojibwe", "oj_CA.UTF-8"}, // Proper spelling
-  {"ojibway", "oj_CA.UTF-8"}, // For compatibility
+  {"odia", "or_IN.UTF-8"},      // Proper spelling
+  {"oriya", "or_IN.UTF-8"},     // Alternative
+  {"ojibwe", "oj_CA.UTF-8"},    // Proper spelling
+  {"ojibway", "oj_CA.UTF-8"},   // For compatibility
   {"punjabi", "pa_IN.UTF-8"},
   {"panjabi", "pa_IN.UTF-8"},
   {"polish", "pl_PL.UTF-8"},
@@ -409,7 +410,7 @@ static const language_to_locale_struct language_to_locale_array[] = {
   {"sanskrit", "sa_IN.UTF-8"},
   {"santali-devaganari", "sat_IN.UTF-8"},
   {"santali-ol-chiki", "sat@olchiki"},
-  {"serbian", "sr_RS.UTF-8"}, /* Was sr_YU, but that's not in /usr/share/i18n/SUPPORTED, and sr_RS is -bjk 2014.08.04 */
+  {"serbian", "sr_RS.UTF-8"},   /* Was sr_YU, but that's not in /usr/share/i18n/SUPPORTED, and sr_RS is -bjk 2014.08.04 */
   {"serbian-latin", "sr_RS@latin"},
   {"shuswap", "shs_CA.UTF-8"},
   {"secwepemctin", "shs_CA.UTF-8"},
@@ -426,7 +427,7 @@ static const language_to_locale_struct language_to_locale_array[] = {
   {"swahili", "sw_TZ.UTF-8"},
   {"tagalog", "tl_PH.UTF-8"},
   {"thai", "th_TH.UTF-8"},
-  {"tibetan", "bo_CN.UTF-8"},	/* Based on: http://texinfo.org/pipermail/texinfo-pretest/2005-April/000334.html */
+  {"tibetan", "bo_CN.UTF-8"},   /* Based on: http://texinfo.org/pipermail/texinfo-pretest/2005-April/000334.html */
   {"turkish", "tr_TR.UTF-8"},
   {"twi", "tw_GH.UTF-8"},
   {"ukrainian", "uk_UA.UTF-8"},
@@ -449,13 +450,12 @@ static const language_to_locale_struct language_to_locale_array[] = {
 /* Show available languages: */
 static void show_lang_usage(int exitcode)
 {
-  FILE * f = exitcode ? stderr : stdout;
+  FILE *f = exitcode ? stderr : stdout;
   const char *const prg = "tuxpaint";
-  fprintf(f,
-	  "\n"
-	  "Usage: %s [--lang LANGUAGE]\n" "\n" "LANGUAGE may be one of:\n"
-/* C */  "  english      american-english\n"
-/* ach */"  acholi       acoli\n"
+
+  fprintf(f, "\n" "Usage: %s [--lang LANGUAGE]\n" "\n" "LANGUAGE may be one of:\n"
+/* C */ "  english      american-english\n"
+/* ach */ "  acholi       acoli\n"
 /* af */ "  afrikaans\n"
 /* ak */ "  akan         twi-fante\n"
 /* sq */ "  albanian\n"
@@ -464,7 +464,7 @@ static void show_lang_usage(int exitcode)
 /* an */ "  aragones\n"
 /* hy */ "  armenian     hayeren\n"
 /* as */ "  assamese\n"
-/* ast */"  asturian\n"
+/* ast */ "  asturian\n"
 /* en_AU */ "  australian-english\n"
 /* az */ "  azerbaijani\n"
 /* bm */ "  bambara\n"
@@ -498,7 +498,7 @@ static void show_lang_usage(int exitcode)
 /* ka */ "  georgian\n"
 /* de */ "  german       deutsch\n"
 /* el */ "  greek\n"
-/* gos */"  gronings     zudelk-veenkelonioals\n"
+/* gos */ "  gronings     zudelk-veenkelonioals\n"
 /* gu */ "  gujarati\n"
 /* he */ "  hebrew\n"
 /* hi */ "  hindi\n"
@@ -513,18 +513,18 @@ static void show_lang_usage(int exitcode)
 /* ks@devanagari */ "  kashmiri-devanagari\n"
 /* ks */ "  kashmiri-perso-arabic\n"
 /* km */ "  khmer\n"
-/* cgg */"  kiga         chiga\n"
+/* cgg */ "  kiga         chiga\n"
 /* rw */ "  kinyarwanda\n"
-/* tlh */"  klingon      tlhIngan\n"
-/* kok */"  konkani-devaganari\n"
-/* kok@roman */"  konkani-roman\n"
+/* tlh */ "  klingon      tlhIngan\n"
+/* kok */ "  konkani-devaganari\n"
+/* kok@roman */ "  konkani-roman\n"
 /* ko */ "  korean\n"
 /* ku */ "  kurdish\n"
 /* lv */ "  latvian\n"
 /* lt */ "  lithuanian   lietuviu\n"
 /* lg */ "  luganda\n"
 /* lb */ "  luxembourgish letzebuergesch\n"
-/* mai */"  maithili\n"
+/* mai */ "  maithili\n"
 /* mk */ "  macedonian\n"
 /* ms */ "  malay\n"
 /* ml */ "  malayalam\n"
@@ -535,7 +535,7 @@ static void show_lang_usage(int exitcode)
 /* mn */ "  mongolian\n"
 /* nr */ "  ndebele\n"
 /* ne */ "  nepali\n"
-/* nso */"  northern-sotho                      sesotho-sa-leboa\n"
+/* nso */ "  northern-sotho                      sesotho-sa-leboa\n"
 /* nn */ "  norwegian    nynorsk                norsk\n"
 /* oc */ "  occitan\n"
 /* or */ "  odia         oriya\n"
@@ -547,8 +547,8 @@ static void show_lang_usage(int exitcode)
 /* ro */ "  romanian\n"
 /* ru */ "  russian      russkiy\n"
 /* sa */ "  sanskrit\n"
-/* sat */"  santali-devaganari\n"
-/* sat@olchiki */"  santali-ol-chiki\n"
+/* sat */ "  santali-devaganari\n"
+/* sat@olchiki */ "  santali-ol-chiki\n"
 /* gd */ "  scottish     scottish-gaelic        ghaidhlig\n"
 /* sr */ "  serbian\n"
 /* sr@latin */ "  serbian-latin\n"
@@ -573,15 +573,15 @@ static void show_lang_usage(int exitcode)
 /* tr */ "  turkish\n"
 /* uk */ "  ukrainian\n"
 /* ur */ "  urdu\n"
-/* ca@valencia */  "  valencian    valencia\n"
+/* ca@valencia */ "  valencian    valencia\n"
 /* ve */ "  venda\n"
-/* vec */"  venetian     veneto\n"
+/* vec */ "  venetian     veneto\n"
 /* vi */ "  vietnamese\n"
 /* wa */ "  walloon      walon\n"
 /* wo */ "  wolof\n"
 /* cy */ "  welsh        cymraeg\n"
 /* xh */ "  xhosa\n"
-/* zam */"  zapotec      miahuatlan-zapotec\n"
+/* zam */ "  zapotec      miahuatlan-zapotec\n"
 /* zu */ "  zulu\n"
           "\n", prg);
   exit(exitcode);
@@ -593,13 +593,13 @@ static void show_lang_usage(int exitcode)
 static void show_locale_usage(FILE * f, const char *const prg)
 {
   fprintf(f,
-	  "\n"
-	  "Usage: %s [--locale LOCALE]\n"
-	  "\n"
-	  "LOCALE may be one of:\n"
-	  "  C       (English      American English)\n"
+          "\n"
+          "Usage: %s [--locale LOCALE]\n"
+          "\n"
+          "LOCALE may be one of:\n"
+          "  C       (English      American English)\n"
           "  ach_UG  (Acholi       Acoli)\n"
-	  "  af_ZA   (Afrikaans)\n"
+          "  af_ZA   (Afrikaans)\n"
           "  ak_GH   (Akan         Twi-Fante)\n"
           "  am_ET   (Amharic)\n"
           "  ar_SA   (Arabic)\n"
@@ -615,44 +615,44 @@ static void show_locale_usage(FILE * f, const char *const prg)
           "  brx_IN  (Bodo)\n"
           "  bs_BA   (Bosnian)\n"
           "  nb_NO   (Bokmal)\n"
-	  "  pt_BR   (Brazilian    Brazilian Portuguese   Portugues Brazilian)\n"
-	  "  br_FR   (Breton       Brezhoneg)\n"
-	  "  en_AU   (Australian English)\n"
-	  "  en_CA   (Canadian English)\n"
-	  "  en_GB   (British      British English)\n"
-	  "  en_ZA   (South African English)\n"
-	  "  bg_BG   (Bulgarian)\n"
-	  "  ca_ES   (Catalan      Catala)\n"
+          "  pt_BR   (Brazilian    Brazilian Portuguese   Portugues Brazilian)\n"
+          "  br_FR   (Breton       Brezhoneg)\n"
+          "  en_AU   (Australian English)\n"
+          "  en_CA   (Canadian English)\n"
+          "  en_GB   (British      British English)\n"
+          "  en_ZA   (South African English)\n"
+          "  bg_BG   (Bulgarian)\n"
+          "  ca_ES   (Catalan      Catala)\n"
           "  ca_ES@valencia   (Valencian    Valencia)n"
-	  "  zh_CN   (Chinese-Simplified)\n"
-	  "  zh_TW   (Chinese-Traditional)\n"
-	  "  cs_CZ   (Czech        Cesky)\n"
-	  "  da_DK   (Danish       Dansk)\n"
-	  "  doi_IN   (Dogri)\n"
-	  "  nl_NL   (Dutch)\n"
+          "  zh_CN   (Chinese-Simplified)\n"
+          "  zh_TW   (Chinese-Traditional)\n"
+          "  cs_CZ   (Czech        Cesky)\n"
+          "  da_DK   (Danish       Dansk)\n"
+          "  doi_IN   (Dogri)\n"
+          "  nl_NL   (Dutch)\n"
           "  fa_IR   (Persian)\n"
           "  ff_SN   (Fulah)\n"
-	  "  fi_FI   (Finnish      Suomi)\n"
-	  "  fo_FO   (Faroese)\n"
-	  "  fr_FR   (French       Francais)\n"
-	  "  ga_IE   (Irish Gaelic Gaidhlig)\n"
-	  "  gd_GB   (Scottish Gaelic  Ghaidhlig)\n"
-	  "  gl_ES   (Galician     Galego)\n"
-	  "  gos_NL  (Gronings     Zudelk Veenkelonioals)\n"
-	  "  gu_IN   (Gujarati)\n"
-	  "  de_DE   (German       Deutsch)\n"
+          "  fi_FI   (Finnish      Suomi)\n"
+          "  fo_FO   (Faroese)\n"
+          "  fr_FR   (French       Francais)\n"
+          "  ga_IE   (Irish Gaelic Gaidhlig)\n"
+          "  gd_GB   (Scottish Gaelic  Ghaidhlig)\n"
+          "  gl_ES   (Galician     Galego)\n"
+          "  gos_NL  (Gronings     Zudelk Veenkelonioals)\n"
+          "  gu_IN   (Gujarati)\n"
+          "  de_DE   (German       Deutsch)\n"
           "  eo      (Esperanto)\n"
-	  "  et_EE   (Estonian)\n"
-	  "  el_GR   (Greek)\n"
-	  "  he_IL   (Hebrew)\n"
-	  "  hi_IN   (Hindi)\n"
-	  "  hr_HR   (Croatian     Hrvatski)\n"
-	  "  hu_HU   (Hungarian    Magyar)\n"
+          "  et_EE   (Estonian)\n"
+          "  el_GR   (Greek)\n"
+          "  he_IL   (Hebrew)\n"
+          "  hi_IN   (Hindi)\n"
+          "  hr_HR   (Croatian     Hrvatski)\n"
+          "  hu_HU   (Hungarian    Magyar)\n"
           "  cgg_UG  (Kiga         Chiga)\n"
-	  "  tlh     (Klingon      tlhIngan)\n"
-	  "  is_IS   (Icelandic    Islenska)\n"
-	  "  id_ID   (Indonesian   Bahasa Indonesia)\n"
-	  "  it_IT   (Italian      Italiano)\n"
+          "  tlh     (Klingon      tlhIngan)\n"
+          "  is_IS   (Icelandic    Islenska)\n"
+          "  id_ID   (Indonesian   Bahasa Indonesia)\n"
+          "  it_IT   (Italian      Italiano)\n"
           "  iu_CA   (Inuktitut)\n"
           "  ja_JP   (Japanese)\n"
           "  ka_GE   (Georgian)\n"
@@ -679,16 +679,16 @@ static void show_locale_usage(FILE * f, const char *const prg)
           "  nr_ZA   (Ndebele)\n"
           "  ne_NP   (Nepali)\n"
           "  nso_ZA  (Northern Sotho                      Sotho sa Leboa)\n"
-	  "  nn_NO   (Norwegian    Nynorsk                Norsk)\n"
-	  "  oc_FR   (Occitan)\n"
-	  "  oj_CA   (Ojibway)\n"
+          "  nn_NO   (Norwegian    Nynorsk                Norsk)\n"
+          "  oc_FR   (Occitan)\n"
+          "  oj_CA   (Ojibway)\n"
           "  or_IN   (Odia         Oriya)\n"
-	  "  pa_IN   (Punjabi      Panjabi)\n"
-	  "  pl_PL   (Polish       Polski)\n"
-	  "  pt_PT   (Portuguese   Portugues)\n"
-	  "  ro_RO   (Romanian)\n"
-	  "  ru_RU   (Russian      Russkiy)\n"
-	  "  rw_RW   (Kinyarwanda)\n"
+          "  pa_IN   (Punjabi      Panjabi)\n"
+          "  pl_PL   (Polish       Polski)\n"
+          "  pt_PT   (Portuguese   Portugues)\n"
+          "  ro_RO   (Romanian)\n"
+          "  ru_RU   (Russian      Russkiy)\n"
+          "  rw_RW   (Kinyarwanda)\n"
           "  sa_IN   (Sanskrit)\n"
           "  sat_IN  (Santali)\n"
           "  sat@olchiki  (Santali (Ol-Chiki))\n"
@@ -696,10 +696,10 @@ static void show_locale_usage(FILE * f, const char *const prg)
           "  sd_IN  (Sindhii (Perso-Arabic))\n"
           "  shs_CA  (Shuswap      Secwepemctin)\n"
           "  si_LK   (Sinhala)\n"
-	  "  sk_SK   (Slovak)\n"
-	  "  sl_SI   (Slovenian)\n"
+          "  sk_SK   (Slovak)\n"
+          "  sl_SI   (Slovenian)\n"
           "  son     (Songhay)\n"
-	  "  sq_AL   (Albanian)\n"
+          "  sq_AL   (Albanian)\n"
           "  sr_YU   (Serbian (cyrillic))\n"
           "  sr_RS@latin  (Serbian (latin))\n"
           "  es_ES   (Spanish      Espanol)\n"
@@ -707,12 +707,12 @@ static void show_locale_usage(FILE * f, const char *const prg)
           "  es_MX   (Mexican      Mexican Spanish       Espanol Mejicano)\n"
           "  sw_TZ   (Swahili)\n"
           "  sv_SE   (Swedish      Svenska)\n"
-	  "  ta_IN   (Tamil)\n"
+          "  ta_IN   (Tamil)\n"
           "  te_IN   (Telugu)\n"
-	  "  tl_PH   (Tagalog)\n"
-	  "  bo_CN   (Tibetan)\n"
-	  "  th_TH   (Thai)\n"
-	  "  tr_TR   (Turkish)\n"
+          "  tl_PH   (Tagalog)\n"
+          "  bo_CN   (Tibetan)\n"
+          "  th_TH   (Thai)\n"
+          "  tr_TR   (Turkish)\n"
           "  tw_GH  (Twi)\n"
           "  uk_UA   (Ukrainian)\n"
           "  ur_IN   (Urdu)\n"
@@ -722,10 +722,7 @@ static void show_locale_usage(FILE * f, const char *const prg)
           "  wa_BE   (Walloon)\n"
           "  wo_SN   (Wolof)\n"
           "  cy_GB   (Welsh        Cymraeg)\n"
-          "  xh_ZA   (Xhosa)\n"
-          "  zam     (Zapoteco-Miahuatlan)\n"
-          "  zu_ZA   (Zulu)\n"
-          "\n", prg);
+          "  xh_ZA   (Xhosa)\n" "  zam     (Zapoteco-Miahuatlan)\n" "  zu_ZA   (Zulu)\n" "\n", prg);
 }
 
 
@@ -740,10 +737,10 @@ static int search_int_array(int l, int *array)
   int i;
 
   for (i = 0; array[i] != -1; i++)
-  {
-    if (array[i] == l)
-      return 1;
-  }
+    {
+      if (array[i] == l)
+        return 1;
+    }
 
   return 0;
 }
@@ -754,17 +751,19 @@ static void ctype_utf8(void)
 {
 #ifndef _WIN32
   /*  FIXME: should this iterate over more locales?
-      A zapotec speaker may have es_MX.UTF-8 available but not have en_US.UTF-8 for example */
-  const char *names[] = {"en_US.UTF8","en_US.UTF-8","UTF8","UTF-8","C.UTF-8"};
-  int i = sizeof(names)/sizeof(names[0]);
-  for(;;){
-    if(iswprint((wchar_t)0xf7)) // division symbol -- which is in Latin-1 :-/
-      return;
-    if(--i < 0)
-      break;
-    setlocale(LC_CTYPE,names[i]);
-    setlocale(LC_MESSAGES,names[i]);
-  }
+     A zapotec speaker may have es_MX.UTF-8 available but not have en_US.UTF-8 for example */
+  const char *names[] = { "en_US.UTF8", "en_US.UTF-8", "UTF8", "UTF-8", "C.UTF-8" };
+  int i = sizeof(names) / sizeof(names[0]);
+
+  for (;;)
+    {
+      if (iswprint((wchar_t) 0xf7))     // division symbol -- which is in Latin-1 :-/
+        return;
+      if (--i < 0)
+        break;
+      setlocale(LC_CTYPE, names[i]);
+      setlocale(LC_MESSAGES, names[i]);
+    }
   fprintf(stderr, "Failed to find a locale with iswprint() working!\n");
 #endif
 }
@@ -773,11 +772,12 @@ static void ctype_utf8(void)
 static const char *language_to_locale(const char *langstr)
 {
   int i = sizeof language_to_locale_array / sizeof language_to_locale_array[0];
+
   while (i--)
-  {
-    if (!strcmp(langstr, language_to_locale_array[i].language))
-      return language_to_locale_array[i].locale;
-  }
+    {
+      if (!strcmp(langstr, language_to_locale_array[i].language))
+        return language_to_locale_array[i].locale;
+    }
   if (strcmp(langstr, "help") == 0 || strcmp(langstr, "list") == 0)
     show_lang_usage(0);
   fprintf(stderr, "%s is an invalid language\n", langstr);
@@ -797,6 +797,7 @@ static void set_langint_from_locale_string(const char *restrict loc)
   size_t len_baseloc;
   int found = 0;
   int i;
+
   //  printf("langint %i\n", langint);
 
   if (!loc)
@@ -808,75 +809,73 @@ static void set_langint_from_locale_string(const char *restrict loc)
      if it still fails, try to find language and country code without the variant,
      finally scan just the lang part.
      as a last resource reverse the scanning
-  */
+   */
 
-  if(dot)
+  if (dot)
     *dot = '\0';
 
   if (cntrycode)
-  {
-    ccodeaux = strdup(cntrycode);
-    *cntrycode = '\0';
-  }
+    {
+      ccodeaux = strdup(cntrycode);
+      *cntrycode = '\0';
+    }
 
   if (at)
-  {
-    ataux = strdup(at);
-    *at = '\0';
-
-    if(cntrycode)
     {
-      /* ll_CC@variant */
-      //if (found == 0)  printf("ll_CC@variant check\n");
-      snprintf(straux, 255, "%s%s%s", baseloc, ccodeaux, ataux);
+      ataux = strdup(at);
+      *at = '\0';
+
+      if (cntrycode)
+        {
+          /* ll_CC@variant */
+          //if (found == 0)  printf("ll_CC@variant check\n");
+          snprintf(straux, 255, "%s%s%s", baseloc, ccodeaux, ataux);
+          len_baseloc = strlen(straux);
+          for (i = 0; i < NUM_LANGS && found == 0; i++)
+            {
+              // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
+              if (len_baseloc == strlen(lang_prefixes[i]) && !strncasecmp(straux, lang_prefixes[i], len_baseloc))
+                {
+                  langint = i;
+                  found = 1;
+                }
+            }
+        }
+
+      /* ll@variant */
+      //if (found == 0)  printf("ll@variant check\n");
+      snprintf(straux, 255, "%s%s", baseloc, ataux);
       len_baseloc = strlen(straux);
       for (i = 0; i < NUM_LANGS && found == 0; i++)
-      {
-	// Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
-	if (len_baseloc == strlen(lang_prefixes[i]) &&
-	    !strncasecmp(straux, lang_prefixes[i], len_baseloc))
-	{
-	  langint = i;
-	  found = 1;
-	}
-      }
+        {
+          // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
+          if (len_baseloc == strlen(lang_prefixes[i]) && !strncasecmp(straux, lang_prefixes[i], len_baseloc))
+            {
+              langint = i;
+              found = 1;
+            }
+        }
     }
 
-    /* ll@variant*/
-    //if (found == 0)  printf("ll@variant check\n");
-    snprintf(straux, 255, "%s%s", baseloc, ataux);
-    len_baseloc = strlen(straux);
-    for (i = 0; i < NUM_LANGS && found == 0; i++)
-    {
-      // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
-      if (len_baseloc == strlen(lang_prefixes[i]) &&
-	  !strncasecmp(straux, lang_prefixes[i], len_baseloc))
-      {
-	langint = i;
-	found = 1;
-      }
-    }
-  }
-
-  if(cntrycode)
+  if (cntrycode)
     {
       /* ll_CC */
       //if (found == 0)  printf("ll_CC check\n");
-      snprintf(straux, 255, "%s%s",baseloc, ccodeaux); 
+      snprintf(straux, 255, "%s%s", baseloc, ccodeaux);
       len_baseloc = strlen(straux);
 
       /* Which, if any, of the locales is it? */
 
       for (i = 0; i < NUM_LANGS && found == 0; i++)
-      {
-	// Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
-	if (len_baseloc == strlen(lang_prefixes[i]) &&
-	    !strncasecmp(straux, lang_prefixes[i], strlen(lang_prefixes[i])))
-	{
-	  langint = i;
-	  found = 1;
-	}
-      }
+        {
+          // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
+          if (len_baseloc == strlen(lang_prefixes[i]) &&
+              !strncasecmp(straux, lang_prefixes[i], strlen(lang_prefixes[i])))
+            {
+              langint = i;
+              found = 1;
+            }
+        }
     }
 
   /* ll */
@@ -885,15 +884,14 @@ static void set_langint_from_locale_string(const char *restrict loc)
   /* Which, if any, of the locales is it? */
 
   for (i = 0; i < NUM_LANGS && found == 0; i++)
-  {
-    // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
-    if (len_baseloc == strlen(lang_prefixes[i]) &&
-	!strncasecmp(baseloc, lang_prefixes[i], strlen(lang_prefixes[i])))
     {
-      langint = i;
-      found = 1;
+      // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
+      if (len_baseloc == strlen(lang_prefixes[i]) && !strncasecmp(baseloc, lang_prefixes[i], strlen(lang_prefixes[i])))
+        {
+          langint = i;
+          found = 1;
+        }
     }
-  }
 
 /* Last resource, we should never arrive here, this check depends
    on the right order in lang_prefixes[] 
@@ -903,21 +901,21 @@ static void set_langint_from_locale_string(const char *restrict loc)
   // printf("Language still not found: loc= %s  Trying reverse check as last resource...\n", loc);
 
   for (i = 0; i < NUM_LANGS && found == 0; i++)
-  {
-    // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
-    if (!strncasecmp(loc, lang_prefixes[i], strlen(lang_prefixes[i])))
     {
-      langint = i;
-      found = 1;
+      // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
+      if (!strncasecmp(loc, lang_prefixes[i], strlen(lang_prefixes[i])))
+        {
+          langint = i;
+          found = 1;
+        }
     }
-  }
   //  printf("langint %i, lang_ext %s\n", langint, lang_prefixes[langint]);
 
   free(baseloc);
   if (ataux)
     free(ataux);
   if (ccodeaux)
-    free(ccodeaux);  
+    free(ccodeaux);
 }
 
 #define HAVE_SETENV
@@ -930,8 +928,9 @@ static void mysetenv(const char *name, const char *value)
 #ifdef HAVE_SETENV
   setenv(name, value, 1);
 #else
-  int len = strlen(name)+1+strlen(value)+1;
+  int len = strlen(name) + 1 + strlen(value) + 1;
   char *str = malloc(len);
+
   sprintf(str, "%s=%s", name, value);
   putenv(str);
 #endif
@@ -939,32 +938,32 @@ static void mysetenv(const char *name, const char *value)
 
 
 static int set_current_language(const char *restrict locale_choice) MUST_CHECK;
-static int set_current_language(const char *restrict loc)
+     static int set_current_language(const char *restrict loc)
 {
   int i;
   int y_nudge = 0;
-  char * oldloc;
+  char *oldloc;
   char *env_language;
 
 
   if (strlen(loc) > 0)
-  {
-    /* Got command line or config file language */
-    mysetenv("LANGUAGE", loc);
-  }
-  else
-  {
-    /* Find what language to use from env vars */
-    if (getenv("LANGUAGE") == NULL)
     {
-      if (getenv("LC_ALL"))
-	mysetenv("LANGUAGE", getenv("LC_ALL"));
-      else if (getenv("LC_MESSAGES"))
-	mysetenv("LANGUAGE", getenv("LC_MESSAGES"));
-      else if (getenv("LANG"))
-	mysetenv("LANGUAGE", getenv("LANG"));
+      /* Got command line or config file language */
+      mysetenv("LANGUAGE", loc);
     }
-  }
+  else
+    {
+      /* Find what language to use from env vars */
+      if (getenv("LANGUAGE") == NULL)
+        {
+          if (getenv("LC_ALL"))
+            mysetenv("LANGUAGE", getenv("LC_ALL"));
+          else if (getenv("LC_MESSAGES"))
+            mysetenv("LANGUAGE", getenv("LC_MESSAGES"));
+          else if (getenv("LANG"))
+            mysetenv("LANGUAGE", getenv("LANG"));
+        }
+    }
 
   oldloc = strdup(loc);
 
@@ -972,14 +971,14 @@ static int set_current_language(const char *restrict loc)
      after that, ctype_utf8() call will test the compatibility with utf8 and try to load
      a different locale if the resulting one is not compatible. */
 #ifdef DEBUG
-printf ("Locale BEFORE is: %s\n", setlocale(LC_ALL,NULL));//EP
+  printf("Locale BEFORE is: %s\n", setlocale(LC_ALL, NULL));    //EP
 #endif
   setlocale(LC_ALL, "");
   setlocale(LC_ALL, loc);
   ctype_utf8();
 #ifdef DEBUG
-printf ("Locale AFTER is: %s\n", setlocale(LC_ALL,NULL));//EP
-#endif        
+  printf("Locale AFTER is: %s\n", setlocale(LC_ALL, NULL));     //EP
+#endif
 
   bindtextdomain("tuxpaint", LOCALEDIR);
   /* Old version of glibc does not have bind_textdomain_codeset() */
@@ -997,78 +996,82 @@ printf ("Locale AFTER is: %s\n", setlocale(LC_ALL,NULL));//EP
   loc = setlocale(LC_MESSAGES, NULL);
 #endif
 
-  if (oldloc && loc && strcmp(oldloc, "") != 0 && strcmp(loc, oldloc) != 0) {
-    /* System doesn't recognize that locale!  Hack, per Albert C., is to set LC_ALL to a valid UTF-8 locale, then set LANGUAGE to the locale we want to force -bjk 2010.10.05 */
+  if (oldloc && loc && strcmp(oldloc, "") != 0 && strcmp(loc, oldloc) != 0)
+    {
+      /* System doesn't recognize that locale!  Hack, per Albert C., is to set LC_ALL to a valid UTF-8 locale, then set LANGUAGE to the locale we want to force -bjk 2010.10.05 */
 
-    /* Albert's comments from December 2009:
-       gettext() won't even bother to look up messages unless it
-       is totally satisfied that you are using one of the locales that
-       it ships with! Make gettext() unhappy, and it'll switch to the
-       lobotomized 7-bit Linux "C" locale just to spite you.
-       
-       http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/localedata/SUPPORTED?content-type=text/x-cvsweb-markup&cvsroot=glibc
-       
-       You can confuse gettext() into mostly behaving. For example, a
-       user could pick a random UTF-8 locale and change the messages.
-       In that case, Tux Paint thinks it's in the other locale but the
-       messages come out right. Like so: LANGUAGE=zam LC_ALL=fr_FR.UTF-8
-       It doesn't work to leave LC_ALL unset, set it to "zam", set it to "C",
-       or set it to random nonsense. Yeah, Tux Paint will think it's in
-       a French locale, but the messages will be Zapotec nonetheless.
-       
-       Maybe it's time to give up on gettext().
+      /* Albert's comments from December 2009:
+         gettext() won't even bother to look up messages unless it
+         is totally satisfied that you are using one of the locales that
+         it ships with! Make gettext() unhappy, and it'll switch to the
+         lobotomized 7-bit Linux "C" locale just to spite you.
 
-       [see also: https://sourceforge.net/mailarchive/message.php?msg_name=787b0d920912222352i5ab22834x92686283b565016b%40mail.gmail.com ]
-    */
+         http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/localedata/SUPPORTED?content-type=text/x-cvsweb-markup&cvsroot=glibc
 
-    /* Unneeded here, this has yet been done as part of ctype_utf8() call before, iterating over a list of locales */
-    //    setlocale(LC_ALL, "en_US.UTF-8"); /* Is it dumb to assume "en_US" is pretty close to "C" locale? */
+         You can confuse gettext() into mostly behaving. For example, a
+         user could pick a random UTF-8 locale and change the messages.
+         In that case, Tux Paint thinks it's in the other locale but the
+         messages come out right. Like so: LANGUAGE=zam LC_ALL=fr_FR.UTF-8
+         It doesn't work to leave LC_ALL unset, set it to "zam", set it to "C",
+         or set it to random nonsense. Yeah, Tux Paint will think it's in
+         a French locale, but the messages will be Zapotec nonetheless.
 
-    mysetenv("LANGUAGE", oldloc);
-    set_langint_from_locale_string(oldloc);
-  } else {
+         Maybe it's time to give up on gettext().
+
+         [see also: https://sourceforge.net/mailarchive/message.php?msg_name=787b0d920912222352i5ab22834x92686283b565016b%40mail.gmail.com ]
+       */
+
+      /* Unneeded here, this has yet been done as part of ctype_utf8() call before, iterating over a list of locales */
+      //    setlocale(LC_ALL, "en_US.UTF-8"); /* Is it dumb to assume "en_US" is pretty close to "C" locale? */
+
+      mysetenv("LANGUAGE", oldloc);
+      set_langint_from_locale_string(oldloc);
+    }
+  else
+    {
 #ifdef _WIN32
-    if (getenv("LANGUAGE") == NULL)
-      mysetenv("LANGUAGE", loc);
+      if (getenv("LANGUAGE") == NULL)
+        mysetenv("LANGUAGE", loc);
 #endif
 
-    if (getenv("LANGUAGE") == NULL)
-      mysetenv("LANGUAGE", "C");
-  }
-    env_language = strdup(getenv("LANGUAGE"));
-    int j = 0;
-    char *env_language_lang;
-    if (*env_language)
-      {
+      if (getenv("LANGUAGE") == NULL)
+        mysetenv("LANGUAGE", "C");
+    }
+  env_language = strdup(getenv("LANGUAGE"));
+  int j = 0;
+  char *env_language_lang;
+
+  if (*env_language)
+    {
       env_language_lang = strtok(env_language, ":");
       while (env_language_lang != NULL)
-      {
-	num_wished_langs++;
-	set_langint_from_locale_string(env_language_lang);
-	wished_langs[j].langint = langint;
-	wished_langs[j].lang_prefix = lang_prefixes[langint];
-	wished_langs[j].need_own_font = search_int_array(langint, lang_use_own_font);
-	wished_langs[j].need_right_to_left = search_int_array(langint, lang_use_right_to_left);
-	wished_langs[j].need_right_to_left_word = search_int_array(langint, lang_use_right_to_left_word);
-	for (i = 0; lang_y_nudge[i][0] != -1; i++)
-	{
-	  // printf("lang_y_nudge[%d][0] = %d\n", i, lang_y_nudge[i][0]);
-	  if (lang_y_nudge[i][0] == langint)
-	  {
-	    wished_langs[j].lang_y_nudge = lang_y_nudge[i][1];
-	    //printf("y_nudge = %d\n", y_nudge);
-	    break;
-	  }
-	}
- 
+        {
+          num_wished_langs++;
+          set_langint_from_locale_string(env_language_lang);
+          wished_langs[j].langint = langint;
+          wished_langs[j].lang_prefix = lang_prefixes[langint];
+          wished_langs[j].need_own_font = search_int_array(langint, lang_use_own_font);
+          wished_langs[j].need_right_to_left = search_int_array(langint, lang_use_right_to_left);
+          wished_langs[j].need_right_to_left_word = search_int_array(langint, lang_use_right_to_left_word);
+          for (i = 0; lang_y_nudge[i][0] != -1; i++)
+            {
+              // printf("lang_y_nudge[%d][0] = %d\n", i, lang_y_nudge[i][0]);
+              if (lang_y_nudge[i][0] == langint)
+                {
+                  wished_langs[j].lang_y_nudge = lang_y_nudge[i][1];
+                  //printf("y_nudge = %d\n", y_nudge);
+                  break;
+                }
+            }
 
-	j++;
-	env_language_lang = strtok(NULL, ":");
-      }
+
+          j++;
+          env_language_lang = strtok(NULL, ":");
+        }
       if (*env_language)
-      free(env_language);
+        free(env_language);
     }
-    //    set_langint_from_locale_string(loc);
+  //    set_langint_from_locale_string(loc);
 
 
   lang_prefix = lang_prefixes[wished_langs[0].langint];
@@ -1084,21 +1087,19 @@ printf ("Locale AFTER is: %s\n", setlocale(LC_ALL,NULL));//EP
 
 #if 0
   for (i = 0; lang_y_nudge[i][0] != -1; i++)
-  {
-    // printf("lang_y_nudge[%d][0] = %d\n", i, lang_y_nudge[i][0]);
-    if (lang_y_nudge[i][0] == langint)
     {
-      y_nudge = lang_y_nudge[i][1];
-      //printf("y_nudge = %d\n", y_nudge);
-      break;
+      // printf("lang_y_nudge[%d][0] = %d\n", i, lang_y_nudge[i][0]);
+      if (lang_y_nudge[i][0] == langint)
+        {
+          y_nudge = lang_y_nudge[i][1];
+          //printf("y_nudge = %d\n", y_nudge);
+          break;
+        }
     }
-  }
 #endif
 #ifdef DEBUG
   fprintf(stderr, "DEBUG: Language is %s (%d) %s/%s\n",
-	  lang_prefix, langint,
-	  need_right_to_left ? "(RTL)" : "",
-	  need_right_to_left_word ? "(RTL words)" : "");
+          lang_prefix, langint, need_right_to_left ? "(RTL)" : "", need_right_to_left_word ? "(RTL words)" : "");
   fflush(stderr);
 #endif
 
@@ -1118,29 +1119,25 @@ int setup_i18n(const char *restrict lang, const char *restrict locale)
   printf("lang \"%s\", locale \"%s\"\n", lang, locale);
 #endif
 
-  if(locale)
-  {
-    if(!strcmp(locale,"help"))
+  if (locale)
     {
-      show_locale_usage(stdout,"tuxpaint");
-      exit(0);
+      if (!strcmp(locale, "help"))
+        {
+          show_locale_usage(stdout, "tuxpaint");
+          exit(0);
+        }
     }
-  }
 
-  if(lang)
+  if (lang)
     locale = language_to_locale(lang);
 
-#ifdef __APPLE__
-  patch_i18n(locale);   //EP
-#endif
-
 #ifdef __ANDROID__
-  if(locale == NULL)
-	  locale = android_locale();
+  if (locale == NULL)
+    locale = android_locale();
 #endif
 
-  if(locale == NULL)
-	  locale = "";
+  if (locale == NULL)
+    locale = "";
   return set_current_language(locale);
 }
 

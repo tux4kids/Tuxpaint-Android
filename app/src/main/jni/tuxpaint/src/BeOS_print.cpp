@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  $Id: BeOS_print.cpp,v 1.3 2009/06/03 20:46:07 wkendrick Exp $
+  $Id$
 */
   
 /* Jan. 17, 2003 */

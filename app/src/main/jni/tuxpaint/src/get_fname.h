@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  $Id: get_fname.h,v 1.5 2009/11/23 07:45:25 albert Exp $
+  $Id$
 */
 
 #ifndef GET_FNAME_H
@@ -28,7 +28,8 @@
 extern const char *savedir;
 extern const char *datadir;
 
-enum {
+enum
+{
   DIR_SAVE,
   DIR_DATA
 };

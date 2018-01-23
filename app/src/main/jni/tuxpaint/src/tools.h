@@ -24,7 +24,7 @@
   http://www.tuxpaint.org/
 
   June 14, 2002 - October 9, 2009
-  $Id: tools.h,v 1.15 2015/03/12 18:01:03 joedaltonhansen Exp $
+  $Id$
 */
 
 
@@ -121,13 +121,16 @@ const char *const tool_tips[NUM_TOOLS] = {
   gettext_noop("Click to start drawing a line. Let go to complete it."),
 
   // Shape tool instructions
-  gettext_noop("Pick a shape. Click to pick the center, drag, then let go when it is the size you want. Move around to rotate it, and click to draw it."),
+  gettext_noop
+    ("Pick a shape. Click to pick the center, drag, then let go when it is the size you want. Move around to rotate it, and click to draw it."),
 
   // Text tool instructions
-  gettext_noop("Choose a style of text. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text."),
+  gettext_noop
+    ("Choose a style of text. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text."),
 
   // Label tool instructions
-  gettext_noop("Choose a style of text. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text. By using the selector button and clicking an existing label, you can move it, edit it and change its text style."),
+  gettext_noop
+    ("Choose a style of text. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text. By using the selector button and clicking an existing label, you can move it, edit it and change its text style."),
 
   // Reserved...
   " ",

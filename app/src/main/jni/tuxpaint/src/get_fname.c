@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  $Id: get_fname.c,v 1.5 2009/11/23 07:45:25 albert Exp $
+  $Id$
 */
 
 #include <stdio.h>
@@ -33,7 +33,7 @@
   /* DIR_SAVE: Where is the user's saved directory?
      This is where their saved files are stored
      and where the "current_id.txt" file is saved.
-     
+
      Windows predefines "savedir" as:
      "C:\Documents and Settings\%USERNAME%\Application Data\TuxPaint"
      though it may get overridden with "--savedir" option
@@ -60,10 +60,10 @@ const char *datadir;
 char *get_fname(const char *const name, int kind)
 {
   char f[512];
-  const char *restrict const dir = (kind==DIR_SAVE) ? savedir : datadir;
+  const char *restrict const dir = (kind == DIR_SAVE) ? savedir : datadir;
 
   // Some mkdir()'s don't like trailing slashes
-  snprintf(f, sizeof(f), "%s%c%s", dir, (*name)?'/':'\0', name);
+  snprintf(f, sizeof(f), "%s%c%s", dir, (*name) ? '/' : '\0', name);
 
   return strdup(f);
 }

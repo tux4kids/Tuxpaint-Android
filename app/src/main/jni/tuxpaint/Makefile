@@ -1,15 +1,15 @@
 # Tux Paint - A simple drawing program for children.
 
-# Copyright (c) 2002-2014 by Bill Kendrick and others
+# Copyright (c) 2002-2017 by Bill Kendrick and others
 # bill@newbreedsoftware.com
 # http://www.tuxpaint.org/
 
-# June 14, 2002 - March 30, 2014
+# June 14, 2002 - December 30, 2017
 
 
 # The version number, for release:
 
-VER_VERSION:=0.9.22
+VER_VERSION:=0.9.23
 VER_DATE:=$(shell date +"%Y-%m-%d")
 MAGIC_API_VERSION:=0x00000003
 
@@ -68,7 +68,7 @@ beos_MIMESET_CMD:=mimeset -f tuxpaint
 MIMESET_CMD:=$($(OS)_MIMESET_CMD)
 
 windows_SO_TYPE:=dll
-osx_SO_TYPE:=bundle
+osx_SO_TYPE:=dylib
 beos_SO_TYPE:=so
 linux_SO_TYPE:=so
 SO_TYPE:=$($(OS)_SO_TYPE)
@@ -79,11 +79,30 @@ LIBMINGW:=$($(OS)_LIBMINGW)
 windows_EXE_EXT:=.exe
 EXE_EXT:=$($(OS)_EXE_EXT)
 
+windows_BUNDLE:=
+osx_BUNDLE=./TuxPaint.app
+beos_BUNDLE:=
+linux_BUNDLE:=
+BUNDLE:=$($(OS)_BUNDLE)
+
 windows_ARCH_LIBS:=obj/win32_print.o obj/resource.o
-osx_ARCH_LIBS:=obj/postscript_print.o
+osx_ARCH_LIBS:=obj/postscript_print.o obj/macos.o
 beos_ARCH_LIBS:=obj/BeOS_print.o
 linux_ARCH_LIBS:=obj/postscript_print.o
 ARCH_LIBS:=$($(OS)_ARCH_LIBS)
+
+windows_ARCH_CFLAGS:=
+osx_ARCH_CFLAGS:=-mmacosx-version-min=10.6 -isystem /opt/local/include -DHAVE_STRCASESTR -w
+beos_ARCH_CFLAGS:=
+linux_ARCH_CFLAGS:=
+ARCH_CFLAGS:=$($(OS)_ARCH_CFLAGS)
+
+windows_ARCH_LDFLAGS:=
+osx_ARCH_LDFLAGS:=-L/opt/local/lib
+beos_ARCH_LDFLAGS:=
+linux_ARCH_LDFLAGS:=
+ARCH_LDFLAGS:=$($(OS)_ARCH_LDFLAGS)
+LDFLAGS:=$(ARCH_LDFLAGS)
 
 PAPER_LIB:=$(call linktest,-lpaper,)
 PNG:=$(call linktest,-lpng,)
@@ -99,23 +118,26 @@ linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB)
 ARCH_LINKS:=$($(OS)_ARCH_LINKS)
 
 windows_ARCH_HEADERS:=src/win32_print.h
-osx_ARCH_HEADERS:=
+osx_ARCH_HEADERS:=src/macos.h
 beos_ARCH_HEADERS:=src/BeOS_print.h
 linux_ARCH_HEADERS:=
 ARCH_HEADERS:=$($(OS)_ARCH_HEADERS)
 
 # Where things will go when ultimately installed:
+# For macOS, the prefix is relative to DESTDIR.
 windows_PREFIX:=/usr/local
-osx_PREFIX:=/usr/local
-
+osx_PREFIX:=Resources
 beos_PREFIX=$(shell finddir B_APPS_DIRECTORY)/TuxPaint
 linux_PREFIX:=/usr/local
 PREFIX:=$($(OS)_PREFIX)
 
 # Root directory to place files when creating packages.
 # PKG_ROOT is the old name for this, and should be undefined.
+# macOS is set up as a bundle, with all files under 'Contents'.
 # "TuxPaint-1" is the OLPC XO name. Installing to ./ is bad!
-ifeq ($(PREFIX),./)
+ifeq ($(OS),osx)
+DESTDIR:=$(BUNDLE)/Contents/
+else ifeq ($(PREFIX),./)
 DESTDIR:=TuxPaint-1
 else
 DESTDIR:=$(PKG_ROOT)
@@ -217,6 +239,8 @@ hack:
 	@echo 'SDL_LIBS      is' $(SDL_LIBS)
 	@echo 'SDL_CFLAGS    is' $(SDL_CFLAGS)
 	@echo 'SVG_CFLAGS    is' $(SVG_CFLAGS)
+	@echo 'PAPER_LIB     is' $(PAPER_LIB)
+	@echo 'PNG           is' $(PNG)
 	@echo 'LDFLAGS       is' $(LDFLAGS)
 	@echo 'CFLAGS        is' $(CFLAGS)
 	@echo 'CPPFLAGS      is' $(CPPFLAGS)
@@ -232,7 +256,8 @@ CFLAGS:=$(CPPFLAGS) $(OPTFLAGS) -W -Wall -fno-common -ffloat-store \
 	-Wbad-function-cast -Wwrite-strings \
 	-Waggregate-return \
 	-Wstrict-prototypes -Wmissing-prototypes \
-	$(shell src/test-option.sh -Wstrict-aliasing=2)
+	$(shell src/test-option.sh -Wstrict-aliasing=2) \
+	$(ARCH_CFLAGS)
 
 DEFS:=-DVER_DATE=\"$(VER_DATE)\" -DVER_VERSION=\"$(VER_VERSION)\" \
 	-DDATA_PREFIX=\"$(patsubst $(DESTDIR)%,%,$(DATA_PREFIX))/\" \
@@ -292,7 +317,7 @@ build/tuxpaint-$(VER_VERSION):
 	@echo
 	@mkdir -p build/tuxpaint-$(VER_VERSION)
 	@find . -follow \
-	     \( -wholename '*/CVS' -o -name .thumbs -o -name .cvsignore -o -name 'dummy.o' -o -name 'build' -o -name '.#*' \) \
+	     \( -wholename '*/.git' -o -name .gitignore -o -name .thumbs -o -name .cvsignore -o -name 'dummy.o' -o -name 'build' -o -name '.#*' \) \
 	     -prune -o -type f -exec cp --parents -vdp \{\} build/tuxpaint-$(VER_VERSION)/ \;
 
 .PHONY: release
@@ -433,7 +458,7 @@ trans:
 ######
 
 windows_ARCH_INSTALL:=
-osx_ARCH_INSTALL:=
+osx_ARCH_INSTALL:=install-bundlefiles
 beos_ARCH_INSTALL:=install-haiku
 linux_ARCH_INSTALL:=install-gnome install-kde install-kde-icons
 ARCH_INSTALL:=$($(OS)_ARCH_INSTALL)
@@ -455,11 +480,18 @@ install:	install-bin install-data install-man install-doc \
 	@echo
 	@echo "--------------------------------------------------------------"
 	@echo
-	@echo "All done! Now (preferably NOT as 'root' superuser),"
-	@echo "you can type the command 'tuxpaint' to run the program!!!"
-	@echo
-	@echo "For more information, see the 'tuxpaint' man page,"
-	@echo "run 'tuxpaint --usage' or see $(DOC_PREFIX)/README.txt"
+	@if [ "x$(OS)" == "xosx" ]; then \
+		echo "All done! Now you can double click $(BUNDLE) to run the"; \
+		echo "program!!!"; \
+		echo; \
+		echo "For more information, see $(DOC_PREFIX)/README.txt"; \
+	else \
+		echo "All done! Now (preferably NOT as 'root' superuser),"; \
+		echo "you can type the command 'tuxpaint' to run the program!!!"; \
+		echo; \
+		echo "For more information, see the 'tuxpaint' man page,"; \
+		echo "run 'tuxpaint --usage' or see $(DOC_PREFIX)/README.txt"; \
+	fi
 	@echo
 	@echo "Visit Tux Paint's home page for more information, updates"
 	@echo "and to learn how you can help out!"
@@ -558,6 +590,8 @@ clean:
 	@if [ -d starters/.thumbs ]; then rmdir starters/.thumbs; fi
 	@-rm -f templates/.thumbs/*.png
 	@if [ -d templates/.thumbs ]; then rmdir templates/.thumbs; fi
+	@-if [ "x$(BUNDLE)" != "x" ]; then rm -rf $(BUNDLE); fi
+	@-rm -f TuxPaint.dmg
 	@echo
 
 # "make uninstall" should remove the various parts from their
@@ -602,6 +636,9 @@ uninstall:	uninstall-i18n
 	-rm -r $(INCLUDE_PREFIX)/tuxpaint
 	-rm $(BIN_PREFIX)/tp-magic-config
 	-rm -r $(DEVDOC_PREFIX)
+	-if [ "x$(BUNDLE)" != "x" ]; then \
+	  rm -rf $(BUNDLE); \
+	fi
 
 
 # Install default config file:
@@ -857,7 +894,7 @@ install-dlls:
 	@cp `which libgcc_s_dw2-1.dll` $(BIN_PREFIX)
 	@cp `which libstdc++-6.dll` $(BIN_PREFIX)
 	@cp `which libfribidi-0.dll` $(BIN_PREFIX)
-	@cp `which libpthread-2.dll` $(BIN_PREFIX)
+	@cp `which libwinpthread-1.dll` $(BIN_PREFIX)
 	@if [ "x$(BDIST_WIN9X)" == "x" ]; then \
 	  cp `which libxml2-2.dll` $(BIN_PREFIX); \
 	  cp `which libcairo-2.dll` $(BIN_PREFIX); \
@@ -976,6 +1013,21 @@ install-man:
 	@chmod a+rx,g-w,o-w $(MAN_PREFIX)/man1/tp-magic-config.1.gz
 
 
+# Install the support files for macOS application bundle
+.PHONY: install-bundlefiles
+install-bundlefiles:
+	@echo
+	@echo "...Installing App Bundle Support Files..."
+	@install -d -m 755 $(BUNDLE)/Contents/MacOS
+	@install -d -m 755 $(BUNDLE)/Contents/Resources
+	@install -d -m 755 $(BUNDLE)/Contents/lib
+	@install -m 755 tuxpaint $(BUNDLE)/Contents/MacOS
+	@install -m 644 macos/PkgInfo $(BUNDLE)/Contents
+	@install -m 644 macos/Info.plist $(BUNDLE)/Contents
+	@install -m 644 macos/tuxpaint.icns $(BUNDLE)/Contents/Resources
+	@custom/macos.sh
+	@hdiutil create -volname "Tux Paint $(VER_VERSION)" -srcfolder $(BUNDLE) -ov -format UDBZ -o TuxPaint.dmg
+
 
 # Build the program!
 
@@ -1026,7 +1078,7 @@ obj/tuxpaint.o:	src/tuxpaint.c \
 obj/parse.c:	obj/parse_step1.c
 	@echo
 	@echo "...Generating the command-line and config file parser (STEP 2)..."
-	@sed -r -e 's/^const struct/static const struct/' -e 's/_GNU/_TUX/' obj/parse_step1.c > obj/parse.c
+	@sed -e 's/^const struct/static const struct/' -e 's/_GNU/_TUX/' obj/parse_step1.c > obj/parse.c
 	
 obj/parse_step1.c:	src/parse.gperf
 	@echo
@@ -1129,6 +1181,12 @@ obj/postscript_print.o:	src/postscript_print.c Makefile \
 	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
 		-c src/postscript_print.c -o obj/postscript_print.o
 
+obj/macos.o: src/macos.c src/macos.h src/debug.h
+	@echo
+	@echo "...Compiling macOS support..."
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+		-c src/macos.c -o obj/macos.o
+
 obj/resource.o:	win32/resources.rc win32/resource.h
 	@echo
 	@echo "...Compiling win32 resources..."
@@ -1172,14 +1230,14 @@ MAGIC_SDL_LIBS:=-L/usr/local/lib $(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME)
 MAGIC_ARCH_LINKS:=-lintl $(PNG)
 
 windows_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
-osx_PLUGIN_LIBS:=
+osx_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
 beos_PLUGIN_LIBS:="$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS) $(MAGIC_SDL_CPPFLAGS)"
 linux_PLUGIN_LIBS:=
 PLUGIN_LIBS:=$($(OS)_PLUGIN_LIBS)
 
 #MAGIC_CFLAGS:=-g3 -O2 -fvisibility=hidden -fno-common -W -Wstrict-prototypes -Wmissing-prototypes -Wall $(MAGIC_SDL_CPPFLAGS) -Isrc/
-MAGIC_CFLAGS:=-g3 -O2 -fno-common -W -Wstrict-prototypes -Wmissing-prototypes -Wall $(MAGIC_SDL_CPPFLAGS) -Isrc/
-SHARED_FLAGS:=-shared -fpic -Wl,--warn-shared-textrel
+MAGIC_CFLAGS:=-g3 -O2 -fno-common -W -Wstrict-prototypes -Wmissing-prototypes -Wall $(MAGIC_SDL_CPPFLAGS) -Isrc/ $(ARCH_CFLAGS)
+SHARED_FLAGS:=-shared -fpic
 
 MAGIC_C:=$(wildcard magic/src/*.c)
 MAGIC_SO:=$(patsubst magic/src/%.c,magic/%.$(SO_TYPE),$(MAGIC_C))

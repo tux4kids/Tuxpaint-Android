@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   June 17, 2002 - June 27, 2002
-  $Id: tip_tux.h,v 1.5 2009/06/03 20:46:07 wkendrick Exp $
+  $Id$
 */
 
 

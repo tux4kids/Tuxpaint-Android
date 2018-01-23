@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   June 14, 2002 - October 9, 2009
-  $Id: titles.h,v 1.9 2009/10/10 06:33:38 wkendrick Exp $
+  $Id$
 */
 
 

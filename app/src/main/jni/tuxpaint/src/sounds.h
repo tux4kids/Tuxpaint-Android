@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   June 15, 2002 - July 5, 2007
-  $Id: sounds.h,v 1.14 2007/07/17 18:41:22 wkendrick Exp $
+  $Id$
 */
 
 #ifndef SOUNDS_H
@@ -37,34 +37,34 @@
 
 enum
 {
-  SND_HARP,			/* Begin / New */
-  SND_CLICK,			/* Tool selections */
-  SND_BLEEP,			/* Selector selection */
-  SND_BUBBLE,			/* Color selection */
-  SND_STAMP,			/* Using stamp tool */
-  SND_LINE_START,		/* Using line tool */
+  SND_HARP,                     /* Begin / New */
+  SND_CLICK,                    /* Tool selections */
+  SND_BLEEP,                    /* Selector selection */
+  SND_BUBBLE,                   /* Color selection */
+  SND_STAMP,                    /* Using stamp tool */
+  SND_LINE_START,               /* Using line tool */
   SND_LINE_END,
-  SND_SCROLL,			/* Selector scroll buttons */
-  SND_PAINT1,			/* Sound while painting */
+  SND_SCROLL,                   /* Selector scroll buttons */
+  SND_PAINT1,                   /* Sound while painting */
   SND_PAINT2,
   SND_PAINT3,
   SND_PAINT4,
-  SND_ERASER1,			/* Sound while erasing */
+  SND_ERASER1,                  /* Sound while erasing */
   SND_ERASER2,
-  SND_SAVE,			/* Save sound effect */
-  SND_PROMPT,			/* Prompt animation sound effect */
-  SND_FLIP,			/* Magic flip */
-  SND_MIRROR,			/* Magic mirror */
-  SND_KEYCLICK,			/* Text tool keyboard click feedback */
-  SND_KEYCLICKRING,		/* Text tool keyboard click feedback with bell ring */
-  SND_RETURN,			/* Text tool carriage return sound */
-  SND_SHRINK,			/* Stamp shrink */
-  SND_GROW,			/* Stamp grow */
-  SND_ITALIC_ON,		/* Italic on */
-  SND_ITALIC_OFF,		/* Italic off */
-  SND_AREYOUSURE,		/* "Are you sure?" */
-  SND_YOUCANNOT,		/* "No no no!" */
-  SND_TUXOK,			/* "Ok" */
+  SND_SAVE,                     /* Save sound effect */
+  SND_PROMPT,                   /* Prompt animation sound effect */
+  SND_FLIP,                     /* Magic flip */
+  SND_MIRROR,                   /* Magic mirror */
+  SND_KEYCLICK,                 /* Text tool keyboard click feedback */
+  SND_KEYCLICKRING,             /* Text tool keyboard click feedback with bell ring */
+  SND_RETURN,                   /* Text tool carriage return sound */
+  SND_SHRINK,                   /* Stamp shrink */
+  SND_GROW,                     /* Stamp grow */
+  SND_ITALIC_ON,                /* Italic on */
+  SND_ITALIC_OFF,               /* Italic off */
+  SND_AREYOUSURE,               /* "Are you sure?" */
+  SND_YOUCANNOT,                /* "No no no!" */
+  SND_TUXOK,                    /* "Ok" */
   SND_THICK,
   SND_THIN,
   NUM_SOUNDS

@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   June 14, 2002 - February 17, 2006
-  $Id: pixels.h,v 1.3 2009/11/22 23:17:35 albert Exp $
+  $Id$
 */
 
 #ifndef PIXELS_H

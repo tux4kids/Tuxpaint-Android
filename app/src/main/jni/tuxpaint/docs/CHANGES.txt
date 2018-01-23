@@ -2,22 +2,23 @@ CHANGES.txt for Tux Paint
 
 Tux Paint - A simple drawing program for children.
 
-Copyright (c) 2002-2015 by Bill Kendrick and others
+Copyright (c) 2002-2017 by Bill Kendrick and others
 bill@newbreedsoftware.com
 http://www.tuxpaint.org/
 
-$Id: CHANGES.txt,v 1.840 2016/09/19 21:20:06 perepujal Exp $
+$Id$
 
-201x.xxx.x (0.9.23)
+2017.xxx.x (0.9.23)
+  * New tools
+    ---------
+    * Color selector
+      Pere Pujal i Carabantes
+
   * SDL2 port
     Pere Pujal i Carabantes
 
   * Android port
     JianWei Zhang as contribution in the GSoC 2015
-
-  * New color selector
-    ------------------
-      Pere Pujal i Carabantes
 
   * New shapes
     ----------
@@ -29,6 +30,8 @@ $Id: CHANGES.txt,v 1.840 2016/09/19 21:20:06 perepujal Exp $
     * Made stamp controls (size, flip, mirror) section clearer.
       Fixes https://sourceforge.net/p/tuxpaint/bugs/182/
 
+    * Cleaned up and reorganized docs subdirectory.
+
   * New locales
     -----------
     * Bengali
@@ -39,6 +42,9 @@ $Id: CHANGES.txt,v 1.840 2016/09/19 21:20:06 perepujal Exp $
 
     * Dogri
       Provided by chandrakant dhutadmal
+
+    * Kabyle (aka Kabylian)
+      Yacine Bouklif <yacine_tizi2003@yahoo.fr>
 
     * Kashmiri (Devanagari)
     * Kashmiri (Perso-Arabic)
@@ -53,14 +59,38 @@ $Id: CHANGES.txt,v 1.840 2016/09/19 21:20:06 perepujal Exp $
 
   * Localization Updates:
     ---------------------
+    * Various
+      Chris Leonard <cjlhomeaddress@gmail.com>
+
+    * Aragnoes translation
+      Juan Pablo Martinez Cortes <jpmart@unizar.es>
+
+    * British English translation
+      Caroline Ford <caroline.ford.work@googlemail.com>
+
+    * Catalan translation
+      Robert Buj Gelonch <rbuj@users.sf.net>
+
+    * Chinese (Simplified) translation
+      Never Min <nevermin@gmail.com>
+
+    * Croatian translation
+      Paulo Pavačić <pavacic.p@gmail.com>
+
     * Danish translation
       Joe Hansen <joedalton2@yahoo.dk>
+
+    * Dutch translation
+      Willem Heppe <heppew@yahoo.com>
 
     * Estonian translation
       Sven Ollino <sven.ollino@gmail.com>
 
     * French translation
       Chion Jacques <jacques.chion@orange.fr> 
+
+    * Fula translation
+      Ibraahiima SAAR <ibrahima.sarr@pulaagu.com>
 
     * Gaelic (Irish) translation
       Kevin Scannell <kscanne@gmail.com>
@@ -71,11 +101,40 @@ $Id: CHANGES.txt,v 1.840 2016/09/19 21:20:06 perepujal Exp $
     * Georgian translation
       Gia Shervashidze <giasher@gmail.com>
 
+    * German translation
+      Holger Wansing <hwansing@mailbox.org>
+      Helge Kreutzmann <debian@helgefjell.de> typos fixes and improvements for stamps
+
+    * Greek translation
+      Yannis Kaskamanidis <kiolalis@gmail.com>
+
+    * Gujarati translation
+      Kartik Mistry <kartik.mistry@gmail.com>,
+
     * Icelandic translation
       Sveinn í Felli <sv1@fellsnet.is>
 
+    * Indonesian translation
+      Courtesy of SugarLabs and
+      T. Surya Fajri <kilelme@gmail.com>
+
+    * Italian translation
+      Flavio Pastore <ironbishop@fsfe.org>
+
+    * Japanese translation
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
     * Korean translation
       Mark K. Kim <mkkim214@gmail.com>
+
+    * Norwegian translation
+      Karl Ove Hufthammer
+
+    * Portuguese (Brazilian) translation
+      Fred Ulisses Maranhão <fred.maranhao@gmail.com>
+
+    * Portuguese (Portugal) translation
+      Sérgio Marques <smarquespt@gmail.com>
 
     * Russian translaton
       Yuri Kozlov
@@ -83,15 +142,48 @@ $Id: CHANGES.txt,v 1.840 2016/09/19 21:20:06 perepujal Exp $
     * Scottish translation
       Fòram na Gàidhlig
 
+    * Slovenian
+      Matej Urbančič <mateju@svn.gnome.org>
+
+    * Songhay translation
+      Abdoul Cisse <abdoulseydou@hotmail.com>
+
+    * Spanish translaton
+      Matías Bellone
+
+    * Swedish translation
+      Sebastian Rasmussen <sebras@gmail.com>
+
     * Thai translation
       Nudjaree <poonim_p@hotmail.com>
+
+    * Ukrainian translation
+      yurchor <yurchor@ukr.net> 
+      Sugar Labs i18n team <https://translate.sugarlabs.org/accounts/yurchor/>
 
   * Bug Fixes
     ---------
     * Crash if any "mosaic" magic tool used, Xubuntu 15.10
-      If the PNG patterns used to generate the effect were compressed the wrong(lossy) way,
-      the program will crash
+      If the PNG patterns used to generate the effect were compressed
+      the wrong(lossy) way, the program will crash
       (SF.net Bug #210)
+
+    * Fix text not displaying on systems without Fontconfig installed.
+      Mark K. Kim <mkkim214@gmail.com>
+
+  * Ports
+    -----
+    * Rewrote the macOS build system to be more Linux-like, with no XCode IDE.
+      Build for older releases of macOS / Mac OS X (10.6 and later).
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Mac install creates a DMG
+      Robert Buj Gelonch <rbuj@users.sf.net>
+
+  * Other Improvements:
+    -------------------
+    * Reformatted source code via GNU Indent tool; should
+      greatly increase code readability and formatting consistency.
 
 2014.August.5 (0.9.22)
 
@@ -220,14 +312,14 @@ $Id: CHANGES.txt,v 1.840 2016/09/19 21:20:06 perepujal Exp $
         motion.
       * The responsivity of the joystick can be configured via command
         line or config files:
-	* --joystick-slownes sets a delay at each axis motion event.
-	    Allowed values from 0 to 500, defaults to 15.
-	* --joystick-threshold sets the minimum value of axis motion to
-	  begin move the pointer.
-	    Allowed values from 0 to 32766, defaults to 3200.
-	* --joystick_maxsteps sets the maximum number of pixels that
-	  the pointer will move at a time.
-	    Allowed values from 1 to 7, defaults to 7.
+        * --joystick-slownes sets a delay at each axis motion event.
+            Allowed values from 0 to 500, defaults to 15.
+        * --joystick-threshold sets the minimum value of axis motion to
+          begin move the pointer.
+            Allowed values from 0 to 32766, defaults to 3200.
+        * --joystick_maxsteps sets the maximum number of pixels that
+          the pointer will move at a time.
+            Allowed values from 1 to 7, defaults to 7.
       * Joystick buttons can be assigned used to activate certain commands
         in Tux Paint (--joystick-btn-COMMAND options)
 
@@ -1129,7 +1221,7 @@ $Id: CHANGES.txt,v 1.840 2016/09/19 21:20:06 perepujal Exp $
       + Other misc. updates and efficiency improvements
       + Automatic testing for SVG, SDL_Pango, SDL_Mixer and libpng vs libpng12
         libraries; 'oldsvg' and 'nosvg' targets removed; new means for building
-	without sound, etc.
+        without sound, etc.
       Albert Cahalan <albert@users.sf.net>
 
     * Made sure Makefile works with NetBSD again.

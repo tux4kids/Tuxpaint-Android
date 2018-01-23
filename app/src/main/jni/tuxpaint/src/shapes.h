@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   June 14, 2002 - July 26, 2007
-  $Id: shapes.h,v 1.13 2015/03/14 21:46:45 perepujal Exp $
+  $Id$
 */
 
 
@@ -62,84 +62,84 @@ enum
 /* How many sides do they have? */
 
 const int shape_sides[NUM_SHAPES] = {
-  4,				/* Square */
-  4,				/* Square */
-  4,				/* Rectangle */
-  4,				/* Rectangle */
-  72,				/* Circle */
-  72,				/* Circle */
-  72,				/* Ellipse */
-  72,				/* Ellipse */
-  3,				/* Triangle */
-  3,				/* Triangle */
-  5,				/* Pentagon */
-  5,				/* Pentagon */
-  4,				/* Rhombus */
-  4,				/* Rhombus */
-  8,				/* Octagon */
-  8,				/* Octagon */
-  3,				/* 3 points star*/
-  3,				/* 3 points star*/
-  4,				/* 4 points star*/
-  4,				/* 4 points star*/
-  5,				/* 5 points star*/
-  5				/* 5 points star*/
+  4,                            /* Square */
+  4,                            /* Square */
+  4,                            /* Rectangle */
+  4,                            /* Rectangle */
+  72,                           /* Circle */
+  72,                           /* Circle */
+  72,                           /* Ellipse */
+  72,                           /* Ellipse */
+  3,                            /* Triangle */
+  3,                            /* Triangle */
+  5,                            /* Pentagon */
+  5,                            /* Pentagon */
+  4,                            /* Rhombus */
+  4,                            /* Rhombus */
+  8,                            /* Octagon */
+  8,                            /* Octagon */
+  3,                            /* 3 points star */
+  3,                            /* 3 points star */
+  4,                            /* 4 points star */
+  4,                            /* 4 points star */
+  5,                            /* 5 points star */
+  5                             /* 5 points star */
 };
 
 
 /* Which shapes are 1:1 aspect? */
 
 const int shape_locked[NUM_SHAPES] = {
-  1,				/* Square */
-  1,				/* Square */
-  0,				/* Rectangle */
-  0,				/* Rectangle */
-  1,				/* Circle */
-  1,				/* Circle */
-  0,				/* Ellipse */
-  0,				/* Ellipse */
-  0,				/* Triangle */
-  0,				/* Triangle */
-  0,				/* Pentagon */
-  0,				/* Pentagon */
-  0,				/* Rhombus */
-  0,				/* Rhombus */
-  1,				/* Octagon */
-  1,				/* Octagon */
-  0,				/* 3 points star*/
-  0,				/* 3 points star*/
-  0,				/* 4 points star*/
-  0,				/* 4 points star*/
-  0,				/* 5 points star*/
-  0				/* 5 points star*/
+  1,                            /* Square */
+  1,                            /* Square */
+  0,                            /* Rectangle */
+  0,                            /* Rectangle */
+  1,                            /* Circle */
+  1,                            /* Circle */
+  0,                            /* Ellipse */
+  0,                            /* Ellipse */
+  0,                            /* Triangle */
+  0,                            /* Triangle */
+  0,                            /* Pentagon */
+  0,                            /* Pentagon */
+  0,                            /* Rhombus */
+  0,                            /* Rhombus */
+  1,                            /* Octagon */
+  1,                            /* Octagon */
+  0,                            /* 3 points star */
+  0,                            /* 3 points star */
+  0,                            /* 4 points star */
+  0,                            /* 4 points star */
+  0,                            /* 5 points star */
+  0                             /* 5 points star */
 };
 
 
 /* Which shapes are filled? */
 
 const int shape_filled[NUM_SHAPES] = {
-  0,				/* Square */
-  1,				/* Square */
-  0,				/* Rectangle */
-  1,				/* Rectangle */
-  0,				/* Circle */
-  1,				/* Circle */
-  0,				/* Ellipse */
-  1,				/* Ellipse */
-  0,				/* Triangle */
-  1,				/* Triangle */
-  0,				/* Pentagon */
-  1,				/* Pentagon */
-  0,				/* Rhombus */
-  1,				/* Rhombus */
-  0,				/* Octagon */
-  1,				/* Octagon */
-  0,				/* 3 points star*/
-  1,				/* 3 points star*/
-  0,				/* 4 points star*/
-  1,				/* 4 points star*/
-  0,				/* 5 points star*/
-  1				/* 5 points star*/
+  0,                            /* Square */
+  1,                            /* Square */
+  0,                            /* Rectangle */
+  1,                            /* Rectangle */
+  0,                            /* Circle */
+  1,                            /* Circle */
+  0,                            /* Ellipse */
+  1,                            /* Ellipse */
+  0,                            /* Triangle */
+  1,                            /* Triangle */
+  0,                            /* Pentagon */
+  1,                            /* Pentagon */
+  0,                            /* Rhombus */
+  1,                            /* Rhombus */
+  0,                            /* Octagon */
+  1,                            /* Octagon */
+  0,                            /* 3 points star */
+  1,                            /* 3 points star */
+  0,                            /* 4 points star */
+  1,                            /* 4 points star */
+  0,                            /* 5 points star */
+  1                             /* 5 points star */
 };
 
 
@@ -147,83 +147,83 @@ const int shape_filled[NUM_SHAPES] = {
 /* Initial angles for shapes: */
 
 const int shape_init_ang[NUM_SHAPES] = {
-  45,				/* Square */
-  45,				/* Square */
-  45,				/* Rectangle */
-  45,				/* Rectangle */
-  0,				/* Circle */
-  0,				/* Circle */
-  0,				/* Ellipse */
-  0,				/* Ellipse */
-  210,				/* Triangle */
-  210,				/* Triangle */
-  162,				/* Pentagon */
-  162,				/* Pentagon */
-  0,				/* Rhombus */
-  0,				/* Rhombus */
-  22,				/* Octagon */
-  22,				/* Octagon */
-  210,				/* 3 points star*/
-  210,				/* 3 points star*/
-  0,				/* 4 points star*/
-  0,				/* 4 points star*/
-  162,				/* 5 points star */
-  162				/* 5 points star */
+  45,                           /* Square */
+  45,                           /* Square */
+  45,                           /* Rectangle */
+  45,                           /* Rectangle */
+  0,                            /* Circle */
+  0,                            /* Circle */
+  0,                            /* Ellipse */
+  0,                            /* Ellipse */
+  210,                          /* Triangle */
+  210,                          /* Triangle */
+  162,                          /* Pentagon */
+  162,                          /* Pentagon */
+  0,                            /* Rhombus */
+  0,                            /* Rhombus */
+  22,                           /* Octagon */
+  22,                           /* Octagon */
+  210,                          /* 3 points star */
+  210,                          /* 3 points star */
+  0,                            /* 4 points star */
+  0,                            /* 4 points star */
+  162,                          /* 5 points star */
+  162                           /* 5 points star */
 };
 
 
 /* Shapes that don't make sense rotating (e.g., circles): */
 
 const int shape_no_rotate[NUM_SHAPES] = {
-  0,				/* Square */
-  0,				/* Square */
-  0,				/* Rectangle */
-  0,				/* Rectangle */
-  1,				/* Circle */
-  1,				/* Circle */
-  0,				/* Ellipse */
-  0,				/* Ellipse */
-  0,				/* Triangle */
-  0,				/* Triangle */
-  0,				/* Pentagon */
-  0,				/* Pentagon */
-  0,				/* Rhombus */
-  0,				/* Rhombus */
-  0,				/* Octagon */
-  0,				/* Octagon */
-  0,				/* 3 points star */
-  0,				/* 3 points star */
-  0,				/* 4 points star */
-  0,				/* 4 points star */
-  0,				/* 5 points star */
-  0				/* 5 points star */
+  0,                            /* Square */
+  0,                            /* Square */
+  0,                            /* Rectangle */
+  0,                            /* Rectangle */
+  1,                            /* Circle */
+  1,                            /* Circle */
+  0,                            /* Ellipse */
+  0,                            /* Ellipse */
+  0,                            /* Triangle */
+  0,                            /* Triangle */
+  0,                            /* Pentagon */
+  0,                            /* Pentagon */
+  0,                            /* Rhombus */
+  0,                            /* Rhombus */
+  0,                            /* Octagon */
+  0,                            /* Octagon */
+  0,                            /* 3 points star */
+  0,                            /* 3 points star */
+  0,                            /* 4 points star */
+  0,                            /* 4 points star */
+  0,                            /* 5 points star */
+  0                             /* 5 points star */
 };
 
 /* Valley of stars in percent of size */
 
 const int shape_valley[NUM_SHAPES] = {
-  100,				/* Square */
-  100,				/* Square */
-  100,				/* Rectangle */
-  100,				/* Rectangle */
-  100,				/* Circle */
-  100,				/* Circle */
-  100,				/* Ellipse */
-  100,				/* Ellipse */
-  100,				/* Triangle */
-  100,				/* Triangle */
-  100,				/* Pentagon */
-  100,				/* Pentagon */
-  100,				/* Rhombus */
-  100,				/* Rhombus */
-  100,				/* Octagon */
-  100,				/* Octagon */
-  20,				/* 3 points star */
-  20,				/* 3 points star */
-  30,				/* 4 points star */
-  30,				/* 4 points star */
-  35,				/* 5 points star */
-  35				/* 5 points star */
+  100,                          /* Square */
+  100,                          /* Square */
+  100,                          /* Rectangle */
+  100,                          /* Rectangle */
+  100,                          /* Circle */
+  100,                          /* Circle */
+  100,                          /* Ellipse */
+  100,                          /* Ellipse */
+  100,                          /* Triangle */
+  100,                          /* Triangle */
+  100,                          /* Pentagon */
+  100,                          /* Pentagon */
+  100,                          /* Rhombus */
+  100,                          /* Rhombus */
+  100,                          /* Octagon */
+  100,                          /* Octagon */
+  20,                           /* 3 points star */
+  20,                           /* 3 points star */
+  30,                           /* 4 points star */
+  30,                           /* 4 points star */
+  35,                           /* 5 points star */
+  35                            /* 5 points star */
 };
 
 
@@ -279,7 +279,6 @@ const char *const shape_names[NUM_SHAPES] = {
 
   // Pentagone star (5 points star)
   gettext_noop("Star")
-
 };
 
 
@@ -295,10 +294,8 @@ const char *const shape_tips[NUM_SHAPES] = {
   gettext_noop("A rectangle has four sides and four right angles."),
 
   // Description of a circle
-  gettext_noop
-    ("A circle is a curve where all points have the same distance from the center."),
-  gettext_noop
-    ("A circle is a curve where all points have the same distance from the center."),
+  gettext_noop("A circle is a curve where all points have the same distance from the center."),
+  gettext_noop("A circle is a curve where all points have the same distance from the center."),
 
   // Description of an ellipse
   gettext_noop("An ellipse is a stretched circle."),
@@ -313,16 +310,12 @@ const char *const shape_tips[NUM_SHAPES] = {
   gettext_noop("A pentagon has five sides."),
 
   // Description of a rhombus
-  gettext_noop
-    ("A rhombus has four equal sides, and opposite sides are parallel."),
-  gettext_noop
-    ("A rhombus has four equal sides, and opposite sides are parallel."),
+  gettext_noop("A rhombus has four equal sides, and opposite sides are parallel."),
+  gettext_noop("A rhombus has four equal sides, and opposite sides are parallel."),
 
   // Description of an octagon
-  gettext_noop
-    ("An octagon has eight equal sides."),
-  gettext_noop
-  ("An octagon has eight equal sides."),
+  gettext_noop("An octagon has eight equal sides."),
+  gettext_noop("An octagon has eight equal sides."),
 
   gettext_noop("A star with 3 points."),
   gettext_noop("A star with 3 points."),
@@ -330,7 +323,6 @@ const char *const shape_tips[NUM_SHAPES] = {
   gettext_noop("A star with 4 points."),
   gettext_noop("A star with 5 points."),
   gettext_noop("A star with 5 points.")
-
 };
 
 
@@ -359,5 +351,4 @@ const char *const shape_img_fnames[NUM_SHAPES] = {
   DATA_PREFIX "images/shapes/star4p_f.png",
   DATA_PREFIX "images/shapes/star5p.png",
   DATA_PREFIX "images/shapes/star5p_f.png"
-
 };

@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   June 14, 2002 - February 17, 2006
-  $Id: progressbar.h,v 1.2 2006/08/27 21:00:55 wkendrick Exp $
+  $Id$
 */
 
 

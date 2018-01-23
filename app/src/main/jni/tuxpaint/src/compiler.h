@@ -24,39 +24,9 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - February 24, 2010
-  $Id: compiler.h,v 1.8 2013/11/04 19:17:33 scottmc Exp $
+  June 14, 2002 - December 30, 2017
+  $Id$
 */
-
-#ifdef WIN32
-/* Horrible, dangerous macros. */
-/*
-  The SDL stderr redirection trick doesn't seem to work for perror().
-  This does pretty much the same thing.
-*/
-#define perror(str) ({ \
-  if ( (str) && *(str) ) \
-    fprintf(stderr,"%s : ",(str)); \
-  fprintf(stderr, \
-          "%s [%d]\n", \
-          (errno<_sys_nerr)?_sys_errlist[errno]:"unknown",errno ); \
-})
-
-/*
-  MinGW implementation of isspace() crashes on some Win98 boxes
-  if c is 'out-of-range'.
-*/
-#define isspace(c) (((c) == 0x20) || ((c) >= 0x09 && (c) <= 0x0D))
-
-/*
-  WIN32 and MINGW don't have strcasestr().
-*/
-#define NOMINMAX
-#include "shlwapi.h"
-#define strcasestr StrStrI
-#endif /* WIN32 */
-
-
 
 #ifndef __HAIKU__
 #ifdef __GNUC__
@@ -84,7 +54,7 @@
 // since gcc-2.5
 #ifdef __GNUC__
 #define NORETURN __attribute__((__noreturn__))
-#define FUNCTION __attribute__((__const__))	// no access to global mem, even via ptr, and no side effect
+#define FUNCTION __attribute__((__const__))     // no access to global mem, even via ptr, and no side effect
 #else
 #define NORETURN
 #define FUNCTION

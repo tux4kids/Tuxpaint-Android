@@ -18,7 +18,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  $Id: playsound.h,v 1.4 2009/06/03 20:46:07 wkendrick Exp $
+  $Id$
 */
 
 #ifndef PLAYSOUND_H
@@ -37,7 +37,6 @@
 extern Mix_Chunk *sounds[NUM_SOUNDS];
 extern int mute, use_sound;
 
-void playsound(SDL_Surface * screen, int chan, int s, int override, int x,
-	       int y);
+void playsound(SDL_Surface * screen, int chan, int s, int override, int x, int y);
 
 #endif

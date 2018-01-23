@@ -86,4 +86,5 @@ struct cfginfo
 
 #define CFGINFO_MAXOFFSET  (sizeof(struct cfginfo))
 
-extern void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const char *opt, const char *restrict src);
+extern void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const char *opt,
+                             const char *restrict src);

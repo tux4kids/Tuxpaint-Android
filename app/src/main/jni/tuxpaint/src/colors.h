@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   June 14, 2002 - July 17, 2007
-  $Id: colors.h,v 1.22 2007/07/17 18:41:22 wkendrick Exp $
+  $Id$
 */
 
 
@@ -59,23 +59,23 @@ enum
 /* Hex codes: */
 
 const int default_color_hexes[NUM_DEFAULT_COLORS][3] = {
-  {0, 0, 0},			/* Black */
-  {128, 128, 128},		/* Dark grey */
-  {192, 192, 192},		/* Light grey */
-  {255, 255, 255},		/* White */
-  {255, 0, 0},			/* Red */
-  {255, 128, 0},		/* Orange */
-  {255, 255, 0},		/* Yellow */
-  {160, 228, 128},		/* Light green */
-  {33, 148, 70},		/* Dark green */
-  {138, 168, 205},		/* Sky blue */
-  {50, 100, 255},		/* Blue */
-  {186, 157, 255},		/* Lavender */
-  {128, 0, 128},		/* Purple */
-  {255, 165, 211},		/* Pink */
-  {128, 80, 0},			/* Brown */
-  {226, 189, 166},		/* Tan */
-  {247, 228, 219}		/* Beige */
+  {0, 0, 0},                    /* Black */
+  {128, 128, 128},              /* Dark grey */
+  {192, 192, 192},              /* Light grey */
+  {255, 255, 255},              /* White */
+  {255, 0, 0},                  /* Red */
+  {255, 128, 0},                /* Orange */
+  {255, 255, 0},                /* Yellow */
+  {160, 228, 128},              /* Light green */
+  {33, 148, 70},                /* Dark green */
+  {138, 168, 205},              /* Sky blue */
+  {50, 100, 255},               /* Blue */
+  {186, 157, 255},              /* Lavender */
+  {128, 0, 128},                /* Purple */
+  {255, 165, 211},              /* Pink */
+  {128, 80, 0},                 /* Brown */
+  {226, 189, 166},              /* Tan */
+  {247, 228, 219}               /* Beige */
 };
 
 

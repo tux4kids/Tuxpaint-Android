@@ -29,8 +29,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-08 18:37+0200\n"
-"PO-Revision-Date: 2017-01-28 15:20-0300\n"
+"POT-Creation-Date: 2017-07-29 15:48+0200\n"
+"PO-Revision-Date: 2017-12-18 20:31-0300\n"
 "Last-Translator: Matías Bellone <matiasbellone+debian@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -163,7 +163,7 @@ msgstr "oO"
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
 #: ../dirwalk.c:198
 msgid ",.?!"
-msgstr ",.?!"
+msgstr "¡¿,.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
 #: ../dirwalk.c:201
@@ -342,15 +342,15 @@ msgstr "Un octógono tiene ocho lados iguales."
 
 #: ../shapes.h:327 ../shapes.h:328
 msgid "A star with 3 points."
-msgstr "Una estrella de 3 puntas"
+msgstr "Una estrella de 3 puntas."
 
 #: ../shapes.h:329 ../shapes.h:330
 msgid "A star with 4 points."
-msgstr "Una estrella de 4 puntas"
+msgstr "Una estrella de 4 puntas."
 
 #: ../shapes.h:331 ../shapes.h:332
 msgid "A star with 5 points."
-msgstr "Una estrella de 5 puntas"
+msgstr "Una estrella de 5 puntas."
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -442,7 +442,7 @@ msgstr "Nuevo"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7637
+#: ../tools.h:98 ../tuxpaint.c:7640
 msgid "Open"
 msgstr "Abrir"
 
@@ -576,179 +576,183 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "Muy bien… ¡vamos a seguir dibujando!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2053
+#: ../tuxpaint.c:2054
 msgid "Do you really want to quit?"
 msgstr "¿De verdad quieres salir?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2056
+#: ../tuxpaint.c:2057
 msgid "Yes, I’m done!"
 msgstr "¡Sí, de momento ya está!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
+#: ../tuxpaint.c:2060 ../tuxpaint.c:2087
 msgid "No, take me back!"
 msgstr "No, ¡quiero volver!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2063
+#: ../tuxpaint.c:2064
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Si te vas perderás tu dibujo, ¿lo quieres guardar?"
 
-#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
 msgid "Yes, save it!"
 msgstr "Sí, ¡guárdalo!"
 
-#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+#: ../tuxpaint.c:2066 ../tuxpaint.c:2071
 msgid "No, don’t bother saving!"
-msgstr "No, no me importa."
+msgstr "No, ¡no me importa!."
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2068
+#: ../tuxpaint.c:2069
 msgid "Save your picture first?"
 msgstr "¿Quieres guardar tu dibujo primero?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2073
+#: ../tuxpaint.c:2074
 msgid "Can’t open that picture!"
 msgstr "¡No se pudo abrir ese dibujo!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
-#: ../tuxpaint.c:2106
+#: ../tuxpaint.c:2077 ../tuxpaint.c:2082 ../tuxpaint.c:2091 ../tuxpaint.c:2098
+#: ../tuxpaint.c:2107
 msgid "OK"
 msgstr "Aceptar"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2080
+#: ../tuxpaint.c:2081
 msgid "There are no saved files!"
 msgstr "¡No hay documentos guardados!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2084
+#: ../tuxpaint.c:2085
 msgid "Print your picture now?"
 msgstr "¿Quieres imprimir tu dibujo ahora?"
 
-#: ../tuxpaint.c:2085
+#: ../tuxpaint.c:2086
 msgid "Yes, print it!"
 msgstr "¡Sí, imprímelo!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2089
+#: ../tuxpaint.c:2090
 msgid "Your picture has been printed!"
 msgstr "¡Tu dibujo se ha impreso!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2093
+#: ../tuxpaint.c:2094
 msgid "Sorry! Your picture could not be printed!"
 msgstr "¡Perdón, no se pudo imprimir tu dibujo!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2096
+#: ../tuxpaint.c:2097
 msgid "You can’t print yet!"
 msgstr "¡Todavía no puedes imprimir!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2100
+#: ../tuxpaint.c:2101
 msgid "Erase this picture?"
 msgstr "¿Quieres borrar este dibujo?"
 
-#: ../tuxpaint.c:2101
+#: ../tuxpaint.c:2102
 msgid "Yes, erase it!"
 msgstr "¡Sí, bórralo!"
 
-#: ../tuxpaint.c:2102
+#: ../tuxpaint.c:2103
 msgid "No, don’t erase it!"
 msgstr "¡No, no lo borres!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2105
+#: ../tuxpaint.c:2106
 msgid "Remember to use the left mouse button!"
 msgstr "¡Utiliza el botón izquierdo del ratón!"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2313
+#: ../tuxpaint.c:2314
 msgid "Sound muted."
 msgstr "Sonido desactivado."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2318
+#: ../tuxpaint.c:2319
 msgid "Sound unmuted."
 msgstr "Sonido activado."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3071
+#: ../tuxpaint.c:3072
 msgid "Please wait…"
 msgstr "Espera…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7640
+#: ../tuxpaint.c:7643
 msgid "Erase"
 msgstr "Borrar"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7646
 msgid "Slides"
 msgstr "Diapositivas"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7649
 msgid "Back"
 msgstr "Atrás"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7649
+#: ../tuxpaint.c:7652
 msgid "Next"
 msgstr "Siguiente"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7652
+#: ../tuxpaint.c:7655
 msgid "Play"
 msgstr "Reproducir"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8361
+#: ../tuxpaint.c:8364
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11689
+#: ../tuxpaint.c:11692
 msgid "Yes"
 msgstr "Sí"
 
-#: ../tuxpaint.c:11693
+#: ../tuxpaint.c:11696
 msgid "No"
 msgstr "No"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12792
+#: ../tuxpaint.c:12795
 msgid "Replace the picture with your changes?"
 msgstr "¿Quieres reemplazar el dibujo con tus cambios?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12796
+#: ../tuxpaint.c:12799
 msgid "Yes, replace the old one!"
 msgstr "¡Sí, reemplázalo!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12800
+#: ../tuxpaint.c:12803
 msgid "No, save a new file!"
 msgstr "¡No, guarda un documento nuevo!"
 
-#: ../tuxpaint.c:14045
+#: ../tuxpaint.c:14048
 msgid "Choose the picture you want, then click “Open”."
-msgstr "Elige el dibujo que quieres y luego selecciona \"Abrir\""
+msgstr "Elige el dibujo que quieres y luego selecciona \"Abrir\"."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
+#: ../tuxpaint.c:15079 ../tuxpaint.c:15407
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Elige el dibujo que quieres y luego selecciona \"Reproducir\"."
 
-#: ../tuxpaint.c:22439
+#: ../tuxpaint.c:22873
+msgid "Select a color from your drawing."
+msgstr "Elige un color de tu dibujo."
+
+#: ../tuxpaint.c:22885
 msgid "Pick a color."
 msgstr "Elige un color."
 
@@ -770,7 +774,9 @@ msgstr "Cambiar de color"
 
 #: ../../magic/src/alien.c:67
 msgid "Click and drag the mouse to change the colors in parts of your picture."
-msgstr "Haz click y arrastra el ratón para cambiar los colores en alguna parte de tu dibujo."
+msgstr ""
+"Haz click y arrastra el ratón para cambiar los colores en alguna parte de tu "
+"dibujo."
 
 #: ../../magic/src/alien.c:68
 msgid "Click to change the colors in your entire picture."
@@ -807,7 +813,8 @@ msgstr "Haz click y arrastra el ratón para cuadricular la imagen."
 #: ../../magic/src/blocks_chalk_drip.c:153
 msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
-msgstr "Haz click y arrastra el ratón para que el dibujo parezca hecho con tiza."
+msgstr ""
+"Haz click y arrastra el ratón para que el dibujo parezca hecho con tiza."
 
 #: ../../magic/src/blocks_chalk_drip.c:156
 msgid "Click and drag the mouse around to make the picture drip."
@@ -852,7 +859,8 @@ msgstr "Cómic"
 
 #: ../../magic/src/cartoon.c:113
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
-msgstr "Haz click y arrastra el ratón para que tu dibujo se vea como en un cómic."
+msgstr ""
+"Haz click y arrastra el ratón para que tu dibujo se vea como en un cómic."
 
 #: ../../magic/src/confetti.c:85
 msgid "Confetti"
@@ -979,7 +987,9 @@ msgstr "Hierba"
 
 #: ../../magic/src/grass.c:118
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
-msgstr "Haz click y arrastra el ratón para dibujar hierba. ¡No te olvides de la tierra!"
+msgstr ""
+"Haz click y arrastra el ratón para dibujar hierba. ¡No te olvides de la "
+"tierra!"
 
 #: ../../magic/src/halftone.c:34
 msgid "Halftone"
@@ -1086,49 +1096,57 @@ msgstr "Mosaico"
 #: ../../magic/src/mosaic.c:103
 msgid ""
 "Click and drag the mouse to add a mosaic effect to parts of your picture."
-msgstr "Haz click y arrastra el ratón para añadir un efecto de mosaico en alguna parte de tu dibujo."
+msgstr ""
+"Haz click y arrastra el ratón para añadir un efecto de mosaico en alguna "
+"parte de tu dibujo."
 
 #: ../../magic/src/mosaic.c:104
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Haz click para lograr un efecto de mosaico en todo el dibujo."
 
-#: ../../magic/src/mosaic_shaped.c:147
+#: ../../magic/src/mosaic_shaped.c:139
 msgid "Square Mosaic"
 msgstr "Mosaico cuadrado"
 
-#: ../../magic/src/mosaic_shaped.c:148
+#: ../../magic/src/mosaic_shaped.c:140
 msgid "Hexagon Mosaic"
 msgstr "Mosaico hexagonal"
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:141
 msgid "Irregular Mosaic"
 msgstr "Mosaico irregular"
 
-#: ../../magic/src/mosaic_shaped.c:156
+#: ../../magic/src/mosaic_shaped.c:148
 msgid ""
 "Click and drag the mouse to add a square mosaic to parts of your picture."
-msgstr "Haz click y arrastra el ratón para añadir un efecto de mosaico cuadrado en alguna parte de tu dibujo."
+msgstr ""
+"Haz click y arrastra el ratón para añadir un efecto de mosaico cuadrado en "
+"alguna parte de tu dibujo."
 
-#: ../../magic/src/mosaic_shaped.c:157
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Haz click para lograr un efecto de mosaico cuadrado en todo el dibujo."
 
-#: ../../magic/src/mosaic_shaped.c:161
+#: ../../magic/src/mosaic_shaped.c:153
 msgid ""
 "Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
-msgstr "Haz click y arrastra el ratón para añadir un efecto de mosaico hexagonal en alguna parte de tu dibujo."
+msgstr ""
+"Haz click y arrastra el ratón para añadir un efecto de mosaico hexagonal en "
+"alguna parte de tu dibujo."
 
-#: ../../magic/src/mosaic_shaped.c:162
+#: ../../magic/src/mosaic_shaped.c:154
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr ""
 "Haz click para lograr un efecto de mosaico hexagonal en todo el dibujo."
 
-#: ../../magic/src/mosaic_shaped.c:166
+#: ../../magic/src/mosaic_shaped.c:158
 msgid ""
 "Click and drag the mouse to add an irregular mosaic to parts of your picture."
-msgstr "Haz click y arrastra el ratón para añadir un mosaico irregular en partes del dibujo."
+msgstr ""
+"Haz click y arrastra el ratón para añadir un mosaico irregular en partes del "
+"dibujo."
 
-#: ../../magic/src/mosaic_shaped.c:167
+#: ../../magic/src/mosaic_shaped.c:159
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr ""
 "Haz click para lograr un efecto de mosaico irregular en todo el dibujo."
@@ -1139,7 +1157,8 @@ msgstr "Negativo"
 
 #: ../../magic/src/negative.c:106
 msgid "Click and drag the mouse around to make your painting negative."
-msgstr "Haz click y arrastra el ratón para ver partes de tu dibujo en negativo."
+msgstr ""
+"Haz click y arrastra el ratón para ver partes de tu dibujo en negativo."
 
 #: ../../magic/src/negative.c:109
 msgid "Click to turn your painting into its negative."
@@ -1151,7 +1170,9 @@ msgstr "Ruido"
 
 #: ../../magic/src/noise.c:66
 msgid "Click and drag the mouse to add noise to parts of your picture."
-msgstr "Haz click y arrastra el ratón para añadir ruido a distintas partes de tu dibujo."
+msgstr ""
+"Haz click y arrastra el ratón para añadir ruido a distintas partes de tu "
+"dibujo."
 
 #: ../../magic/src/noise.c:67
 msgid "Click to add noise to your entire picture."
@@ -1167,7 +1188,7 @@ msgstr "Zoom"
 
 #: ../../magic/src/perspective.c:151
 msgid "Click on the corners and drag where you want to stretch the picture."
-msgstr "Haz click en las esquinas y mueve el cursor para estrechar el dibujo. "
+msgstr "Haz click en las esquinas y mueve el cursor para estrechar el dibujo."
 
 #: ../../magic/src/perspective.c:154
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
@@ -1184,7 +1205,7 @@ msgstr ""
 
 #: ../../magic/src/puzzle.c:113
 msgid "Click to make a puzzle in fullscreen mode."
-msgstr "Haz click para convertir en un rompecabezas todo del dibujo"
+msgstr "Haz click para convertir en un rompecabezas todo del dibujo."
 
 #: ../../magic/src/rails.c:131
 msgid "Rails"
@@ -1268,7 +1289,9 @@ msgstr "Silueta"
 
 #: ../../magic/src/sharpen.c:78
 msgid "Click and drag the mouse to trace edges in parts of your picture."
-msgstr "Haz click y arrastra el ratón para perfilar los bordes en algunas partes del dibujo."
+msgstr ""
+"Haz click y arrastra el ratón para perfilar los bordes en algunas partes del "
+"dibujo."
 
 #: ../../magic/src/sharpen.c:79
 msgid "Click to trace edges in your entire picture."
@@ -1342,7 +1365,7 @@ msgstr "Hilorama 90º"
 
 #: ../../magic/src/string.c:129
 msgid "String 'V'"
-msgstr "Hilorama en V"
+msgstr "Hilorama en 'V'"
 
 #: ../../magic/src/string.c:137
 msgid ""
@@ -1355,7 +1378,7 @@ msgstr ""
 
 #: ../../magic/src/string.c:140
 msgid "Click and drag to draw arrows made of string art."
-msgstr "Haz click y mueve el ratón para dibujar hiloramas en ángulo recto. "
+msgstr "Haz click y mueve el ratón para dibujar hiloramas en ángulo recto."
 
 #: ../../magic/src/string.c:143
 msgid "Draw string art arrows with free angles."
@@ -1372,7 +1395,9 @@ msgstr "Color y blanco"
 #: ../../magic/src/tint.c:75
 msgid ""
 "Click and drag the mouse around to change the color of parts of your picture."
-msgstr "Haz click y arrastra el ratón para cambiar el color en ciertas partes de tu dibujo."
+msgstr ""
+"Haz click y arrastra el ratón para cambiar el color en ciertas partes de tu "
+"dibujo."
 
 #: ../../magic/src/tint.c:76
 msgid "Click to change the color of your entire picture."
@@ -1382,7 +1407,9 @@ msgstr "Haz click para cambiar el color de todo tu dibujo."
 msgid ""
 "Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
-msgstr "Haz click y arrastra el ratón para que partes de tu dibujo aparezcan en blanco y el color que tú elijas."
+msgstr ""
+"Haz click y arrastra el ratón para que partes de tu dibujo aparezcan en "
+"blanco y el color que tú elijas."
 
 #: ../../magic/src/tint.c:78
 msgid "Click to turn your entire picture into white and a color you choose."
@@ -1460,4 +1487,4 @@ msgstr "Haz click y mueve el ratón para lograr un efecto excluyente («XOR»)."
 
 #: ../../magic/src/xor.c:103
 msgid "Click to draw a XOR effect on the whole picture"
-msgstr "Haz click para lograr un efecto excluyente en todo el dibujo."
+msgstr "Haz click para lograr un efecto excluyente en todo el dibujo"

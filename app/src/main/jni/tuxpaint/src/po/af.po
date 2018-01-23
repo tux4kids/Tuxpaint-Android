@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: af\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-08 18:37+0200\n"
-"PO-Revision-Date: 2014-07-18 08:21+0200\n"
-"Last-Translator: Dawid van Wyngaard <dawid.vanwyngaard@gmail.com>\n"
+"POT-Creation-Date: 2017-07-29 15:48+0200\n"
+"PO-Revision-Date: 2017-12-19 06:38+0000\n"
+"Last-Translator: OdettePretorius <odettepret@gmail.com>\n"
 "Language-Team: translate-discuss-af@lists.sourceforge.net\n"
 "Language: af\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.6\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1513665507.000000\n"
 
 #. Response to Black (0, 0, 0) color selected
 #: ../colors.h:86
@@ -147,10 +148,9 @@ msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
 #: ../dirwalk.c:201
-#, fuzzy
 #| msgid "`\\%_@$~#{<(^&*"
 msgid "`%_@$~#{<(^&*"
-msgstr "`\\%_@$~#{<(^&*"
+msgstr "`%_@$~#{<(^&*"
 
 #. digits (e.g., '0', '1' and '7')
 #: ../dirwalk.c:204
@@ -279,7 +279,7 @@ msgstr "Agthoek"
 #: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
 #: ../shapes.h:278 ../shapes.h:281
 msgid "Star"
-msgstr ""
+msgstr "Ster"
 
 #. Description of a square
 #: ../shapes.h:290 ../shapes.h:291
@@ -323,15 +323,15 @@ msgstr "'n Agthoek het agt kante."
 
 #: ../shapes.h:327 ../shapes.h:328
 msgid "A star with 3 points."
-msgstr ""
+msgstr "'n Ster met 3 punte."
 
 #: ../shapes.h:329 ../shapes.h:330
 msgid "A star with 4 points."
-msgstr ""
+msgstr "'n Ster met 4 punte."
 
 #: ../shapes.h:331 ../shapes.h:332
 msgid "A star with 5 points."
-msgstr ""
+msgstr "'n Ster met 5 punte."
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -423,7 +423,7 @@ msgstr "Nuwe"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7637
+#: ../tools.h:98 ../tuxpaint.c:7640
 msgid "Open"
 msgstr "Maak oop"
 
@@ -479,7 +479,6 @@ msgstr ""
 
 #. Label tool instructions
 #: ../tools.h:130
-#, fuzzy
 #| msgid ""
 #| "Choose a style of text. Click on your drawing and you can start typing. "
 #| "Press [Enter] or [Tab] to complete the text. By using the selector button "
@@ -492,7 +491,7 @@ msgid ""
 "style."
 msgstr ""
 "Kies 'n styl vir die teks. Klik op die prent en begin tik. Druk [Enter] of "
-"[tab] om die teks te voltooi. Deur met die kiesknoppie op 'n bestaande "
+"[Tab] om die teks te voltooi. Deur met die kiesknoppie op 'n bestaande "
 "etiket te klik, kan dit geskuif, geredigeer of die teksstyl verander word."
 
 #. Magic tool instruction
@@ -558,182 +557,186 @@ msgstr "Beweeg die muis om die vorm te draai. Klik om dit te teken."
 #. Notification that 'New' action was aborted (current image would have been lost)
 #: ../tools.h:173
 msgid "OK then… Let’s keep drawing this one!"
-msgstr "Goed dan... Kom ons teken verder op hierdie een!"
+msgstr "OK... Kom ons teken verder op hierdie een!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2053
+#: ../tuxpaint.c:2054
 msgid "Do you really want to quit?"
 msgstr "Wil jy werklik afsluit?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2056
+#: ../tuxpaint.c:2057
 msgid "Yes, I’m done!"
 msgstr "Ja, ek is klaar!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
+#: ../tuxpaint.c:2060 ../tuxpaint.c:2087
 msgid "No, take me back!"
 msgstr "Nee, vat my terug!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2063
+#: ../tuxpaint.c:2064
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "As jy ophou, sal jy die prent verloor. Wil jy dit eers bêre?"
 
-#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
 msgid "Yes, save it!"
 msgstr "Ja, stoor dit!"
 
-#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+#: ../tuxpaint.c:2066 ../tuxpaint.c:2071
 msgid "No, don’t bother saving!"
 msgstr "Nee, moenie stoor nie!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2068
+#: ../tuxpaint.c:2069
 msgid "Save your picture first?"
 msgstr "Wil jy eers die prent stoor?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2073
+#: ../tuxpaint.c:2074
 msgid "Can’t open that picture!"
 msgstr "Kan nie daardie prent oopmaak nie!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
-#: ../tuxpaint.c:2106
+#: ../tuxpaint.c:2077 ../tuxpaint.c:2082 ../tuxpaint.c:2091 ../tuxpaint.c:2098
+#: ../tuxpaint.c:2107
 msgid "OK"
 msgstr "Goedso"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2080
+#: ../tuxpaint.c:2081
 msgid "There are no saved files!"
 msgstr "Daar is geen gestoorde lêers nie!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2084
+#: ../tuxpaint.c:2085
 msgid "Print your picture now?"
 msgstr "Wil jy nou die prent laat druk?"
 
-#: ../tuxpaint.c:2085
+#: ../tuxpaint.c:2086
 msgid "Yes, print it!"
 msgstr "Ja, laat dit druk!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2089
+#: ../tuxpaint.c:2090
 msgid "Your picture has been printed!"
 msgstr "Die prent is gedruk!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2093
+#: ../tuxpaint.c:2094
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Jammer, die prent kon nie gedruk word nie!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2096
+#: ../tuxpaint.c:2097
 msgid "You can’t print yet!"
 msgstr "Jy kan nog nie druk nie!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2100
+#: ../tuxpaint.c:2101
 msgid "Erase this picture?"
 msgstr "Vee hierdie prent uit?"
 
-#: ../tuxpaint.c:2101
+#: ../tuxpaint.c:2102
 msgid "Yes, erase it!"
 msgstr "Ja, vee dit uit!"
 
-#: ../tuxpaint.c:2102
+#: ../tuxpaint.c:2103
 msgid "No, don’t erase it!"
 msgstr "Nee, moenie dit uitvee nie!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2105
+#: ../tuxpaint.c:2106
 msgid "Remember to use the left mouse button!"
 msgstr "Onthou om die linker-muisknoppie te gebruik!"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2313
+#: ../tuxpaint.c:2314
 msgid "Sound muted."
 msgstr "Klank af."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2318
+#: ../tuxpaint.c:2319
 msgid "Sound unmuted."
 msgstr "Klank aan."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3071
+#: ../tuxpaint.c:3072
 msgid "Please wait…"
 msgstr "Wag asseblief…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7640
+#: ../tuxpaint.c:7643
 msgid "Erase"
 msgstr "Vee uit"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7646
 msgid "Slides"
 msgstr "Skyfies"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7649
 msgid "Back"
 msgstr "Terug"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7649
+#: ../tuxpaint.c:7652
 msgid "Next"
 msgstr "Volgende"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7652
+#: ../tuxpaint.c:7655
 msgid "Play"
 msgstr "Speel"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8361
+#: ../tuxpaint.c:8364
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11689
+#: ../tuxpaint.c:11692
 msgid "Yes"
 msgstr "Ja"
 
-#: ../tuxpaint.c:11693
+#: ../tuxpaint.c:11696
 msgid "No"
 msgstr "Nee"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12792
+#: ../tuxpaint.c:12795
 msgid "Replace the picture with your changes?"
 msgstr "Vervang die prent met jou veranderinge?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12796
+#: ../tuxpaint.c:12799
 msgid "Yes, replace the old one!"
 msgstr "Ja, vervang die ou een!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12800
+#: ../tuxpaint.c:12803
 msgid "No, save a new file!"
 msgstr "Nee, stoor 'n nuwe lêer!"
 
-#: ../tuxpaint.c:14045
+#: ../tuxpaint.c:14048
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Kies die prent wat jy wil hê en klik “Maak oop”."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
+#: ../tuxpaint.c:15079 ../tuxpaint.c:15407
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Kies die prente wat jy wil hê en klik “Maak oop”."
 
-#: ../tuxpaint.c:22439
+#: ../tuxpaint.c:22873
+msgid "Select a color from your drawing."
+msgstr "Kies 'n kleur van jou prentjie af."
+
+#: ../tuxpaint.c:22885
 msgid "Pick a color."
 msgstr "Kies 'n kleur."
 
@@ -754,7 +757,6 @@ msgid "Color Shift"
 msgstr "Kleurverandering"
 
 #: ../../magic/src/alien.c:67
-#, fuzzy
 #| msgid ""
 #| "Click and move the mouse to change the colors in parts of your picture."
 msgid "Click and drag the mouse to change the colors in parts of your picture."
@@ -791,22 +793,19 @@ msgid "Drip"
 msgstr "Drup"
 
 #: ../../magic/src/blocks_chalk_drip.c:150
-#, fuzzy
 #| msgid "Click and move the mouse around to make the picture blocky."
 msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "Klik en beweeg die muis om die prent blokkerig te maak."
 
 #: ../../magic/src/blocks_chalk_drip.c:153
-#, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn the picture into a chalk drawing."
 msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr ""
-"Klik en beweeg die muis om die prent te verander na 'n bordkryt-tekening."
+"Klik en beweeg die muis om die prent na 'n bordkryt-tekening te verander."
 
 #: ../../magic/src/blocks_chalk_drip.c:156
-#, fuzzy
 #| msgid "Click and move the mouse around to make the picture drip."
 msgid "Click and drag the mouse around to make the picture drip."
 msgstr "Klik en beweeg die muis om die prent te laat afdrup."
@@ -816,7 +815,6 @@ msgid "Blur"
 msgstr "Verwaas"
 
 #: ../../magic/src/blur.c:83
-#, fuzzy
 #| msgid "Click and move the mouse around to blur the image."
 msgid "Click and drag the mouse around to blur the image."
 msgstr "Klik en beweeg die muis om die prent wasig te maak."
@@ -831,13 +829,11 @@ msgid "Bricks"
 msgstr "Stene"
 
 #: ../../magic/src/bricks.c:131
-#, fuzzy
 #| msgid "Click and move to draw large bricks."
 msgid "Click and drag to draw large bricks."
 msgstr "Klik en beweeg om groot stene te teken."
 
 #: ../../magic/src/bricks.c:133
-#, fuzzy
 #| msgid "Click and move to draw small bricks."
 msgid "Click and drag to draw small bricks."
 msgstr "Klik en beweeg om klein stene te teken."
@@ -847,7 +843,6 @@ msgid "Calligraphy"
 msgstr "Kalligrafie"
 
 #: ../../magic/src/calligraphy.c:134
-#, fuzzy
 #| msgid "Click and move the mouse around to draw in calligraphy."
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Klik en beweeg die muis om met kalligrafie te teken."
@@ -857,10 +852,9 @@ msgid "Cartoon"
 msgstr "Cartoon"
 
 #: ../../magic/src/cartoon.c:113
-#, fuzzy
 #| msgid "Click and move the mouse around to turn the picture into a cartoon."
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
-msgstr "Klik en beweeg die muis om die prent te verander na 'n cartoon."
+msgstr "Klik en beweeg die muis om die prent na 'n spotprent te verander."
 
 #: ../../magic/src/confetti.c:85
 msgid "Confetti"
@@ -895,7 +889,6 @@ msgid "Darken"
 msgstr "Maak donkerder"
 
 #: ../../magic/src/fade_darken.c:134
-#, fuzzy
 #| msgid "Click and move the mouse to lighten parts of your picture."
 msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "Klik en beweeg die muis om gedeeltes van die prent ligter te maak."
@@ -905,7 +898,6 @@ msgid "Click to lighten your entire picture."
 msgstr "Klik om die hele prent ligter te maak."
 
 #: ../../magic/src/fade_darken.c:141
-#, fuzzy
 #| msgid "Click and move the mouse to darken parts of your picture."
 msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "Klik en beweeg die muis om gedeeltes van die prent donkerder te maak."
@@ -964,7 +956,7 @@ msgstr "Lys werk"
 
 #: ../../magic/src/fretwork.c:180
 msgid "Click and drag to draw repetitive patterns. "
-msgstr "Klik en sleep om herhalende patrone te teken."
+msgstr "Klik en sleep om herhalende patrone te teken. "
 
 #: ../../magic/src/fretwork.c:182
 msgid "Click to surround your picture with repetitive patterns."
@@ -987,7 +979,6 @@ msgid "Grass"
 msgstr "Gras"
 
 #: ../../magic/src/grass.c:118
-#, fuzzy
 #| msgid "Click and move to draw grass. Don’t forget the dirt!"
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "Klik en beweeg om gras te teken. Moenie die grond vergeet nie!"
@@ -1042,7 +1033,6 @@ msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr "Klik en sleep die muis om 'n patroon oor die prent te teken."
 
 #: ../../magic/src/kalidescope.c:142
-#, fuzzy
 #| msgid ""
 #| "Click and drag the mouse to draw a pattern plus its symmetric across the "
 #| "picture."
@@ -1050,7 +1040,7 @@ msgid ""
 "Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
 msgstr ""
-"Klik en sleep die muis om 'n patroon en sy simmetriese oor die prent te verf."
+"Klik en beweeg die muis om 'n simmetriese patroon oor die prent te verf."
 
 #. KAL_BOTH
 #: ../../magic/src/kalidescope.c:144
@@ -1096,7 +1086,6 @@ msgid "Mosaic"
 msgstr "Mosaïek"
 
 #: ../../magic/src/mosaic.c:103
-#, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
 msgid ""
@@ -1108,20 +1097,19 @@ msgstr ""
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Klik om die hele prent 'n mosaïek-effek te gee."
 
-#: ../../magic/src/mosaic_shaped.c:147
+#: ../../magic/src/mosaic_shaped.c:139
 msgid "Square Mosaic"
 msgstr "Vierkant-mosaïek"
 
-#: ../../magic/src/mosaic_shaped.c:148
+#: ../../magic/src/mosaic_shaped.c:140
 msgid "Hexagon Mosaic"
 msgstr "Seshoek-mosaïek"
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:141
 msgid "Irregular Mosaic"
 msgstr "Onreëlmatige mosaïek"
 
-#: ../../magic/src/mosaic_shaped.c:156
-#, fuzzy
+#: ../../magic/src/mosaic_shaped.c:148
 #| msgid ""
 #| "Click and move the mouse to add a square mosaic to parts of your picture."
 msgid ""
@@ -1130,12 +1118,11 @@ msgstr ""
 "Klik en beweeg die muis om gedeeltes van die prent 'n vierkant-mosaïek-effek "
 "te gee."
 
-#: ../../magic/src/mosaic_shaped.c:157
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Klik om die hele prent 'n vierkant-mosaïek-effek te gee."
 
-#: ../../magic/src/mosaic_shaped.c:161
-#, fuzzy
+#: ../../magic/src/mosaic_shaped.c:153
 #| msgid ""
 #| "Click and move the mouse to add a hexagonal mosaic to parts of your "
 #| "picture."
@@ -1145,12 +1132,11 @@ msgstr ""
 "Klik en beweeg die muis om gedeeltes van die prent 'n seshoek-mosaïek-effek "
 "te gee."
 
-#: ../../magic/src/mosaic_shaped.c:162
+#: ../../magic/src/mosaic_shaped.c:154
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "Klik om die hele prent 'n seshoek-mosaïek-effek te gee."
 
-#: ../../magic/src/mosaic_shaped.c:166
-#, fuzzy
+#: ../../magic/src/mosaic_shaped.c:158
 #| msgid ""
 #| "Click and move the mouse to add an irregular mosaic to parts of your "
 #| "picture."
@@ -1160,7 +1146,7 @@ msgstr ""
 "Klik en beweeg die muis om gedeeltes van die prent 'n onreëlmatige mosaïek-"
 "effek te gee."
 
-#: ../../magic/src/mosaic_shaped.c:167
+#: ../../magic/src/mosaic_shaped.c:159
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "Klik om die hele prent 'n onreëlmatige mosaïek-effek te gee."
 
@@ -1169,12 +1155,9 @@ msgid "Negative"
 msgstr "Negatief"
 
 #: ../../magic/src/negative.c:106
-#, fuzzy
 #| msgid "Click and move the mouse around to make your painting negative."
 msgid "Click and drag the mouse around to make your painting negative."
-msgstr ""
-"Klik en beweeg die muis om gedeeltes negatief te maak, met teenoorgestelde "
-"kleure."
+msgstr "Klik en beweeg die muis om gedeeltes negatief te maak."
 
 #: ../../magic/src/negative.c:109
 msgid "Click to turn your painting into its negative."
@@ -1185,7 +1168,6 @@ msgid "Noise"
 msgstr "Geraas"
 
 #: ../../magic/src/noise.c:66
-#, fuzzy
 #| msgid "Click and move the mouse to add noise to parts of your picture."
 msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr ""
@@ -1259,7 +1241,7 @@ msgstr "Regte reënboog"
 
 #: ../../magic/src/realrainbow.c:112
 msgid "ROYGBIV Rainbow"
-msgstr "ROGGBIV-reënboog"
+msgstr "ROYGBIV-reënboog"
 
 #: ../../magic/src/realrainbow.c:117
 msgid ""
@@ -1306,7 +1288,6 @@ msgid "Silhouette"
 msgstr "Silhoeët"
 
 #: ../../magic/src/sharpen.c:78
-#, fuzzy
 #| msgid "Click and move the mouse to trace edges in parts of your picture."
 msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr ""
@@ -1317,7 +1298,6 @@ msgid "Click to trace edges in your entire picture."
 msgstr "Klik om die hele prent se rande op te spoor."
 
 #: ../../magic/src/sharpen.c:80
-#, fuzzy
 #| msgid "Click and move the mouse to sharpen parts of your picture."
 msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr "Klik en beweeg die muis om gedeeltes van die prent skerper te maak."
@@ -1327,7 +1307,6 @@ msgid "Click to sharpen the entire picture."
 msgstr "Klik om die hele prent skerper te maak."
 
 #: ../../magic/src/sharpen.c:82
-#, fuzzy
 #| msgid "Click and move the mouse to create a black and white silhouette."
 msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr "Klik en beweeg die muis om 'n swart en wit silhoeët te maak."
@@ -1358,11 +1337,10 @@ msgstr "Nat verf"
 #, fuzzy
 #| msgid "Click and move the mouse around to smudge the picture."
 msgid "Click and drag the mouse around to smudge the picture."
-msgstr "Klik en beweeg die muis om die prent te smeer."
+msgstr "Klik en beweeg die muis om die prent te smet."
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:117
-#, fuzzy
 #| msgid "Click and move the mouse around to draw with wet, smudgy paint."
 msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr "Klik en beweeg die muis rond om met nat, smerige verf te teken."
@@ -1420,7 +1398,6 @@ msgid "Color & White"
 msgstr "Kleur & wit"
 
 #: ../../magic/src/tint.c:75
-#, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to change the color of parts of your "
 #| "picture."
@@ -1434,7 +1411,6 @@ msgid "Click to change the color of your entire picture."
 msgstr "Klik om die hele prent se kleure te verander."
 
 #: ../../magic/src/tint.c:77
-#, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn parts of your picture into white "
 #| "and a color you choose."

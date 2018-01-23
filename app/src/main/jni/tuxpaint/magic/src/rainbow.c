@@ -24,7 +24,7 @@
   (See COPYING.txt)
 
   Last updated: July 8, 2008
-  $Id: rainbow.c,v 1.13 2011/12/19 09:32:26 perepujal Exp $
+  $Id$
 */
 
 #include <stdio.h>
@@ -65,31 +65,24 @@ static const int rainbow_hexes[NUM_RAINBOW_COLORS][3] = {
 
 static int rainbow_color;
 static Uint32 rainbow_rgb;
-static Mix_Chunk * rainbow_snd;
+static Mix_Chunk *rainbow_snd;
 
 int rainbow_init(magic_api * api);
 Uint32 rainbow_api_version(void);
 int rainbow_get_tool_count(magic_api * api);
-SDL_Surface * rainbow_get_icon(magic_api * api, int which);
-char * rainbow_get_name(magic_api * api, int which);
-char * rainbow_get_description(magic_api * api, int which, int mode);
-static void rainbow_linecb(void * ptr, int which,
-		    SDL_Surface * canvas, SDL_Surface * last,
-                    int x, int y);
+SDL_Surface *rainbow_get_icon(magic_api * api, int which);
+char *rainbow_get_name(magic_api * api, int which);
+char *rainbow_get_description(magic_api * api, int which, int mode);
+static void rainbow_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 
 void rainbow_drag(magic_api * api, int which, SDL_Surface * canvas,
-	          SDL_Surface * last, int ox, int oy, int x, int y,
-		  SDL_Rect * update_rect);
+                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 
 void rainbow_click(magic_api * api, int which, int mode,
-	           SDL_Surface * canvas, SDL_Surface * last,
-	           int x, int y,
-		   SDL_Rect * update_rect);
+                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 
 void rainbow_release(magic_api * api, int which,
-	           SDL_Surface * canvas, SDL_Surface * last,
-	           int x, int y,
-		   SDL_Rect * update_rect);
+                     SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 
 
 void rainbow_shutdown(magic_api * api);
@@ -99,7 +92,10 @@ void rainbow_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas
 void rainbow_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int rainbow_modes(magic_api * api, int which);
 
-Uint32 rainbow_api_version(void) { return(TP_MAGIC_API_VERSION); }
+Uint32 rainbow_api_version(void)
+{
+  return (TP_MAGIC_API_VERSION);
+}
 
 // Load our sfx:
 int rainbow_init(magic_api * api)
@@ -109,79 +105,85 @@ int rainbow_init(magic_api * api)
 
   rainbow_color = 0;
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/rainbow.wav",
-	   api->data_directory);
+  snprintf(fname, sizeof(fname), "%s/sounds/magic/rainbow.wav", api->data_directory);
   rainbow_snd = Mix_LoadWAV(fname);
 
-  return(1);
+  return (1);
 }
 
 // We have multiple tools:
 int rainbow_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
 {
-  return(1);
+  return (1);
 }
 
 // Load our icons:
-SDL_Surface * rainbow_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *rainbow_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/rainbow.png",
-	   api->data_directory);
+  snprintf(fname, sizeof(fname), "%s/images/magic/rainbow.png", api->data_directory);
 
-  return(IMG_Load(fname));
+  return (IMG_Load(fname));
 }
 
 // Return our names, localized:
-char * rainbow_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *rainbow_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return(strdup(gettext_noop("Rainbow")));
+  return (strdup(gettext_noop("Rainbow")));
 }
 
 // Return our descriptions, localized:
-char * rainbow_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *rainbow_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return(strdup(
-	   gettext_noop("You can draw in rainbow colors!")));
+  return (strdup(gettext_noop("You can draw in rainbow colors!")));
 }
 
 // Do the effect:
 
-static void rainbow_linecb(void * ptr, int which ATTRIBUTE_UNUSED,
-		    SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED,
-                    int x, int y)
+static void rainbow_linecb(void *ptr, int which ATTRIBUTE_UNUSED,
+                           SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
 {
-  magic_api * api = (magic_api *) ptr;
+  magic_api *api = (magic_api *) ptr;
   int xx, yy;
 
   for (yy = y - 16; yy < y + 16; yy++)
-  {
-    for (xx = x - 16; xx < x + 16; xx++)
     {
-      if (api->in_circle(xx - x, yy - y, 16))
-      {
-        api->putpixel(canvas, xx, yy, rainbow_rgb);
-      }
+      for (xx = x - 16; xx < x + 16; xx++)
+        {
+          if (api->in_circle(xx - x, yy - y, 16))
+            {
+              api->putpixel(canvas, xx, yy, rainbow_rgb);
+            }
+        }
     }
-  }
 }
 
 // Affect the canvas on drag:
 void rainbow_drag(magic_api * api, int which, SDL_Surface * canvas,
-	          SDL_Surface * last, int ox, int oy, int x, int y,
-		  SDL_Rect * update_rect)
+                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
 {
   rainbow_color = (rainbow_color + 1) % NUM_RAINBOW_COLORS;
   rainbow_rgb = SDL_MapRGB(canvas->format,
-			   rainbow_hexes[rainbow_color][0],
-			   rainbow_hexes[rainbow_color][1],
-			   rainbow_hexes[rainbow_color][2]);
+                           rainbow_hexes[rainbow_color][0],
+                           rainbow_hexes[rainbow_color][1], rainbow_hexes[rainbow_color][2]);
 
-  api->line((void *) api, which, canvas, last, ox, oy, x, y, 1, rainbow_linecb);
+  api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, rainbow_linecb);
 
-  if (ox > x) { int tmp = ox; ox = x; x = tmp; }
-  if (oy > y) { int tmp = oy; oy = y; y = tmp; }
+  if (ox > x)
+    {
+      int tmp = ox;
+
+      ox = x;
+      x = tmp;
+    }
+  if (oy > y)
+    {
+      int tmp = oy;
+
+      oy = y;
+      y = tmp;
+    }
 
   update_rect->x = ox - 16;
   update_rect->y = oy - 16;
@@ -193,17 +195,14 @@ void rainbow_drag(magic_api * api, int which, SDL_Surface * canvas,
 
 // Affect the canvas on click:
 void rainbow_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-	           SDL_Surface * canvas, SDL_Surface * last,
-	           int x, int y,
-		   SDL_Rect * update_rect)
+                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
   rainbow_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
 void rainbow_release(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-	           SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-	           int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED,
-		   SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -215,7 +214,8 @@ void rainbow_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void rainbow_set_color(magic_api * api ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED)
+void rainbow_set_color(magic_api * api ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                       Uint8 b ATTRIBUTE_UNUSED)
 {
 }
 
@@ -225,15 +225,17 @@ int rainbow_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUT
   return 0;
 }
 
-void rainbow_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void rainbow_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void rainbow_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void rainbow_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 int rainbow_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return(MODE_PAINT);
+  return (MODE_PAINT);
 }

@@ -3,7 +3,7 @@
 # Bill Kendrick <bill@newbreedsoftware.com>; http://www.tuxpaint.org/
 # Based on inkscape's completion file, by allali@univ-mlv.fr
 #
-# $Id: tuxpaint-completion.bash,v 1.6 2014/03/31 05:54:33 wkendrick Exp $
+# $Id$
 
 # FIXME: See http://www.debian-administration.org/articles/316 for an intro
 # to how we should be doing this... -bjk 2009.09.09

@@ -1,24 +1,25 @@
 # Swedish translation of tuxpaint.
-# Copyright (C) 2006-2014 Free Software Foundation, Inc.
+# Copyright (C) 2006-2017 Free Software Foundation, Inc.
 # Daniel Nylander <po@danielnylander.se>, 2008.
 # Daniel Andersson <tuxpaint@septum.org>
 # Robin Rosenberg <robin.rosenberg@dewire.com>, 2007.
 # Henrik Holst <henrik.holst@millistream.com>, 2014.
+# Sebastian Rasmussen <sebras@gmail.com>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-08 18:37+0200\n"
-"PO-Revision-Date: 2014-06-14 02:01+0200\n"
-"Last-Translator: Henrik Holst <henrik.holst@millistream.com>\n"
+"POT-Creation-Date: 2017-07-29 15:48+0200\n"
+"PO-Revision-Date: 2017-12-17 22:48+0100\n"
+"Last-Translator: Sebastian Rasmussen <sebras@gmail.com>\n"
 "Language-Team: Svenska <debian-l10n-swedish@lists.debian.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Poedit 2.0.5\n"
 
 #. Response to Black (0, 0, 0) color selected
 #: ../colors.h:86
@@ -149,10 +150,9 @@ msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
 #: ../dirwalk.c:201
-#, fuzzy
 #| msgid "`\\%_@$~#{<(^&*"
 msgid "`%_@$~#{<(^&*"
-msgstr "`\\%_@$~#{}<>^&*"
+msgstr "`%_@$~#{<(^&*"
 
 #. digits (e.g., '0', '1' and '7')
 #: ../dirwalk.c:204
@@ -281,7 +281,7 @@ msgstr "Oktogon"
 #: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
 #: ../shapes.h:278 ../shapes.h:281
 msgid "Star"
-msgstr ""
+msgstr "Stjärna"
 
 #. Description of a square
 #: ../shapes.h:290 ../shapes.h:291
@@ -319,19 +319,19 @@ msgstr "En romb har fyra lika sidor och motstående sidor är parallella."
 
 #: ../shapes.h:323 ../shapes.h:325
 msgid "An octagon has eight equal sides."
-msgstr "En oktogon har åtta lika långa sidor"
+msgstr "En oktogon har åtta lika långa sidor."
 
 #: ../shapes.h:327 ../shapes.h:328
 msgid "A star with 3 points."
-msgstr ""
+msgstr "En stjärna med 3 hörn."
 
 #: ../shapes.h:329 ../shapes.h:330
 msgid "A star with 4 points."
-msgstr ""
+msgstr "En stjärna med 4 hörn."
 
 #: ../shapes.h:331 ../shapes.h:332
 msgid "A star with 5 points."
-msgstr ""
+msgstr "En stjärna med 5 hörn."
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -423,7 +423,7 @@ msgstr "Ny"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7637
+#: ../tools.h:98 ../tuxpaint.c:7640
 msgid "Open"
 msgstr "Öppna"
 
@@ -480,12 +480,6 @@ msgstr ""
 
 #. Label tool instructions
 #: ../tools.h:130
-#, fuzzy
-#| msgid ""
-#| "Choose a style of text. Click on your drawing and you can start typing. "
-#| "Press [Enter] or [Tab] to complete the text. By using the selector button "
-#| "and clicking an exist label, you can move it, edit it and change its text "
-#| "style."
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
@@ -520,12 +514,12 @@ msgstr "Suddgummi!"
 #. Response to 'start a new image' action
 #: ../tools.h:148
 msgid "Pick a color or picture with which to start a new drawing."
-msgstr "Välj en färg eller bild som början på en ny teckning"
+msgstr "Välj en färg eller bild som början på en ny teckning."
 
 #. Response to 'open' action (while file dialog is being constructed)
 #: ../tools.h:151
 msgid "Open…"
-msgstr "Öppna..."
+msgstr "Öppna…"
 
 #. Response to 'save' action
 #: ../tools.h:154
@@ -535,7 +529,7 @@ msgstr "Din bild har sparats!"
 #. Response to 'print' action (while printing, or print dialog is being used)
 #: ../tools.h:157
 msgid "Printing…"
-msgstr "Skriver ut..."
+msgstr "Skriver ut…"
 
 #. Response to 'quit' (exit) action
 #: ../tools.h:160
@@ -563,179 +557,183 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "Okej.. Vi fortsätter med att rita den här!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2053
+#: ../tuxpaint.c:2054
 msgid "Do you really want to quit?"
 msgstr "Vill du verkligen avsluta?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2056
+#: ../tuxpaint.c:2057
 msgid "Yes, I’m done!"
 msgstr "Ja, jag är färdig!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2059 ../tuxpaint.c:2086
+#: ../tuxpaint.c:2060 ../tuxpaint.c:2087
 msgid "No, take me back!"
 msgstr "Nej, ta mig tillbaka!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2063
+#: ../tuxpaint.c:2064
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Om du avslutar så kommer du att förlora bilden! Vill du spara den?"
 
-#: ../tuxpaint.c:2064 ../tuxpaint.c:2069
+#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
 msgid "Yes, save it!"
 msgstr "Ja, spara den!"
 
-#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+#: ../tuxpaint.c:2066 ../tuxpaint.c:2071
 msgid "No, don’t bother saving!"
 msgstr "Nej, spara inte!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2068
+#: ../tuxpaint.c:2069
 msgid "Save your picture first?"
 msgstr "Spara bilden först?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2073
+#: ../tuxpaint.c:2074
 msgid "Can’t open that picture!"
 msgstr "Kan inte öppna den här bilden!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2076 ../tuxpaint.c:2081 ../tuxpaint.c:2090 ../tuxpaint.c:2097
-#: ../tuxpaint.c:2106
+#: ../tuxpaint.c:2077 ../tuxpaint.c:2082 ../tuxpaint.c:2091 ../tuxpaint.c:2098
+#: ../tuxpaint.c:2107
 msgid "OK"
 msgstr "OK"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2080
+#: ../tuxpaint.c:2081
 msgid "There are no saved files!"
 msgstr "Det finns inga sparade filer!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2084
+#: ../tuxpaint.c:2085
 msgid "Print your picture now?"
 msgstr "Vill du skriva ut bilden nu?"
 
-#: ../tuxpaint.c:2085
+#: ../tuxpaint.c:2086
 msgid "Yes, print it!"
 msgstr "Ja, skriv ut den!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2089
+#: ../tuxpaint.c:2090
 msgid "Your picture has been printed!"
 msgstr "Din bild har skrivits ut!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2093
+#: ../tuxpaint.c:2094
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Tyvärr, din bild kunde inte skrivas ut!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2096
+#: ../tuxpaint.c:2097
 msgid "You can’t print yet!"
 msgstr "Du kan inte skriva ut än!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2100
+#: ../tuxpaint.c:2101
 msgid "Erase this picture?"
 msgstr "Radera den här bilden?"
 
-#: ../tuxpaint.c:2101
+#: ../tuxpaint.c:2102
 msgid "Yes, erase it!"
 msgstr "Ja, ta bort den!"
 
-#: ../tuxpaint.c:2102
+#: ../tuxpaint.c:2103
 msgid "No, don’t erase it!"
 msgstr "Nej, ta inte bort den!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2105
+#: ../tuxpaint.c:2106
 msgid "Remember to use the left mouse button!"
 msgstr "Kom ihåg att använda vänster musknapp!"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2313
+#: ../tuxpaint.c:2314
 msgid "Sound muted."
 msgstr "Tyst läge."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2318
+#: ../tuxpaint.c:2319
 msgid "Sound unmuted."
 msgstr "Ljud på."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3071
+#: ../tuxpaint.c:3072
 msgid "Please wait…"
-msgstr "Vänta..."
+msgstr "Vänta…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7640
+#: ../tuxpaint.c:7643
 msgid "Erase"
 msgstr "Radera"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7646
 msgid "Slides"
 msgstr "Bildspel"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7649
 msgid "Back"
 msgstr "Bakåt"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7649
+#: ../tuxpaint.c:7652
 msgid "Next"
 msgstr "Nästa"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7652
+#: ../tuxpaint.c:7655
 msgid "Play"
 msgstr "Spela"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8361
+#: ../tuxpaint.c:8364
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11689
+#: ../tuxpaint.c:11692
 msgid "Yes"
 msgstr "Ja"
 
-#: ../tuxpaint.c:11693
+#: ../tuxpaint.c:11696
 msgid "No"
 msgstr "Nej"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12792
+#: ../tuxpaint.c:12795
 msgid "Replace the picture with your changes?"
 msgstr "Ersätt bilden med dina ändringar?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12796
+#: ../tuxpaint.c:12799
 msgid "Yes, replace the old one!"
 msgstr "Ja, skriv över den gamla!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12800
+#: ../tuxpaint.c:12803
 msgid "No, save a new file!"
 msgstr "Nej, spara en ny fil!"
 
-#: ../tuxpaint.c:14045
+#: ../tuxpaint.c:14048
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Välj den bild du vill ha, klicka sen på \"Öppna\"."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:15076 ../tuxpaint.c:15404
+#: ../tuxpaint.c:15079 ../tuxpaint.c:15407
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Välj de bilder som du vill ha, klicka sedan på \"Spela\"."
 
-#: ../tuxpaint.c:22439
+#: ../tuxpaint.c:22873
+msgid "Select a color from your drawing."
+msgstr "Välj en färg från din ritning."
+
+#: ../tuxpaint.c:22885
 msgid "Pick a color."
 msgstr "Välj en färg."
 
@@ -756,9 +754,6 @@ msgid "Color Shift"
 msgstr "Färgväxling"
 
 #: ../../magic/src/alien.c:67
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to change the colors in parts of your picture."
 msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr "Klicka och dra med musen för att ändra färgen i delar av din bild."
 
@@ -791,22 +786,15 @@ msgid "Drip"
 msgstr "Droppa"
 
 #: ../../magic/src/blocks_chalk_drip.c:150
-#, fuzzy
-#| msgid "Click and move the mouse around to make the picture blocky."
 msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "Klicka och dra med musen för att göra bilden kantig."
 
 #: ../../magic/src/blocks_chalk_drip.c:153
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn the picture into a chalk drawing."
 msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr "Klicka och dra med musen för att omvandla bilden till kritteckning."
 
 #: ../../magic/src/blocks_chalk_drip.c:156
-#, fuzzy
-#| msgid "Click and move the mouse around to make the picture drip."
 msgid "Click and drag the mouse around to make the picture drip."
 msgstr "Klicka och dra med musen för att göra så att bilden \"droppar\"!"
 
@@ -815,8 +803,6 @@ msgid "Blur"
 msgstr "Suddig"
 
 #: ../../magic/src/blur.c:83
-#, fuzzy
-#| msgid "Click and move the mouse around to blur the image."
 msgid "Click and drag the mouse around to blur the image."
 msgstr "Klicka och dra med musen för att göra bilden suddig."
 
@@ -830,14 +816,10 @@ msgid "Bricks"
 msgstr "Tegelstenar"
 
 #: ../../magic/src/bricks.c:131
-#, fuzzy
-#| msgid "Click and move to draw large bricks."
 msgid "Click and drag to draw large bricks."
 msgstr "Klicka och dra med musen för att rita stora tegelstenar."
 
 #: ../../magic/src/bricks.c:133
-#, fuzzy
-#| msgid "Click and move to draw small bricks."
 msgid "Click and drag to draw small bricks."
 msgstr "Klicka och dra med musen för att rita små tegelstenar."
 
@@ -846,8 +828,6 @@ msgid "Calligraphy"
 msgstr "Kalligrafi"
 
 #: ../../magic/src/calligraphy.c:134
-#, fuzzy
-#| msgid "Click and move the mouse around to draw in calligraphy."
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Klicka och dra med musen för att rita med kalligrafipensel."
 
@@ -856,10 +836,9 @@ msgid "Cartoon"
 msgstr "Seriefigur"
 
 #: ../../magic/src/cartoon.c:113
-#, fuzzy
-#| msgid "Click and move the mouse around to turn the picture into a cartoon."
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
-msgstr "Klicka och dra med musen för att omvandla bilden till serieteckning!"
+msgstr ""
+"Klicka och dra med musen för att omvandla bilden till en serieteckning!"
 
 #: ../../magic/src/confetti.c:85
 msgid "Confetti"
@@ -894,8 +873,6 @@ msgid "Darken"
 msgstr "Mörkare"
 
 #: ../../magic/src/fade_darken.c:134
-#, fuzzy
-#| msgid "Click and move the mouse to lighten parts of your picture."
 msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "Klicka och dra med musen för att göra delar av din bild ljusare."
 
@@ -904,8 +881,6 @@ msgid "Click to lighten your entire picture."
 msgstr "Klicka för att göra hela din bild ljusare."
 
 #: ../../magic/src/fade_darken.c:141
-#, fuzzy
-#| msgid "Click and move the mouse to darken parts of your picture."
 msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "Klicka och dra med musen för att göra delar av din bild mörkare."
 
@@ -963,7 +938,7 @@ msgstr "Figursågning"
 
 #: ../../magic/src/fretwork.c:180
 msgid "Click and drag to draw repetitive patterns. "
-msgstr "Klicka och dra för att rita repetitiva mönster."
+msgstr "Klicka och dra för att rita repetitiva mönster. "
 
 #: ../../magic/src/fretwork.c:182
 msgid "Click to surround your picture with repetitive patterns."
@@ -986,8 +961,6 @@ msgid "Grass"
 msgstr "Gräs"
 
 #: ../../magic/src/grass.c:118
-#, fuzzy
-#| msgid "Click and move to draw grass. Don’t forget the dirt!"
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "Klicka och dra för att rita gräs. Glöm inte jorden!"
 
@@ -1041,15 +1014,11 @@ msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr "Klicka och dra med musen för att rita ett mönster över bilden."
 
 #: ../../magic/src/kalidescope.c:142
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse to draw a pattern plus its symmetric across the "
-#| "picture."
 msgid ""
 "Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
 msgstr ""
-"Klicka och dra med musen för att rita ett mönster samt dess symmetri över "
+"Klicka och dra med musen för att rita ett mönster som är symmetriskt över "
 "bilden."
 
 #. KAL_BOTH
@@ -1090,16 +1059,13 @@ msgstr "Klicka för att skapa en spegelbild."
 
 #: ../../magic/src/mirror_flip.c:133
 msgid "Click to flip the picture upside-down."
-msgstr "Klicka för att vända bilden upp-och-ner!"
+msgstr "Klicka för att vända bilden upp-och-ner."
 
 #: ../../magic/src/mosaic.c:100
 msgid "Mosaic"
 msgstr "Mosaik"
 
 #: ../../magic/src/mosaic.c:103
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to add a mosaic effect to parts of your picture."
 msgid ""
 "Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr ""
@@ -1110,58 +1076,47 @@ msgstr ""
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Klicka för att lägga till en mosaikeffekt till hela din bild."
 
-#: ../../magic/src/mosaic_shaped.c:147
+#: ../../magic/src/mosaic_shaped.c:139
 msgid "Square Mosaic"
 msgstr "Rutmosaik"
 
-#: ../../magic/src/mosaic_shaped.c:148
+#: ../../magic/src/mosaic_shaped.c:140
 msgid "Hexagon Mosaic"
 msgstr "Hexagonal mosaik"
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:141
 msgid "Irregular Mosaic"
 msgstr "Oregelbunden mosaik"
 
-#: ../../magic/src/mosaic_shaped.c:156
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to add a square mosaic to parts of your picture."
+#: ../../magic/src/mosaic_shaped.c:148
 msgid ""
 "Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr ""
 "Klicka och dra med musen för att lägga till rutmosaik till delar av din bild."
 
-#: ../../magic/src/mosaic_shaped.c:157
+#: ../../magic/src/mosaic_shaped.c:149
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Klicka för att lägga rutmosaik till hela bilden."
 
-#: ../../magic/src/mosaic_shaped.c:161
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to add a hexagonal mosaic to parts of your "
-#| "picture."
+#: ../../magic/src/mosaic_shaped.c:153
 msgid ""
 "Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr ""
 "Klicka och dra med musen för att lägga till en hexagonal mosaik till delar "
 "av din bild."
 
-#: ../../magic/src/mosaic_shaped.c:162
+#: ../../magic/src/mosaic_shaped.c:154
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "Klicka för att lägga en hexagonal mosaik till hela bilden."
 
-#: ../../magic/src/mosaic_shaped.c:166
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to add an irregular mosaic to parts of your "
-#| "picture."
+#: ../../magic/src/mosaic_shaped.c:158
 msgid ""
 "Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr ""
 "Klicka och dra med musen för att lägga till en oregelbunden mosaik till "
 "delar av din bild."
 
-#: ../../magic/src/mosaic_shaped.c:167
+#: ../../magic/src/mosaic_shaped.c:159
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "Klicka för att lägga en oregelbunden mosaik till hela bilden."
 
@@ -1170,8 +1125,6 @@ msgid "Negative"
 msgstr "Negativ"
 
 #: ../../magic/src/negative.c:106
-#, fuzzy
-#| msgid "Click and move the mouse around to make your painting negative."
 msgid "Click and drag the mouse around to make your painting negative."
 msgstr "Klicka och dra med musen för att skapa ett negativ av din bild."
 
@@ -1184,8 +1137,6 @@ msgid "Noise"
 msgstr "Brus"
 
 #: ../../magic/src/noise.c:66
-#, fuzzy
-#| msgid "Click and move the mouse to add noise to parts of your picture."
 msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr ""
 "Klicka och dra med musen för att lägga till brus till delar av din bild."
@@ -1305,8 +1256,6 @@ msgid "Silhouette"
 msgstr "Silhuett"
 
 #: ../../magic/src/sharpen.c:78
-#, fuzzy
-#| msgid "Click and move the mouse to trace edges in parts of your picture."
 msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr "Klicka och dra med musen för att spåra kanterna i delar av din bild."
 
@@ -1315,8 +1264,6 @@ msgid "Click to trace edges in your entire picture."
 msgstr "Klicka för att spåra kanterna i hela din bild."
 
 #: ../../magic/src/sharpen.c:80
-#, fuzzy
-#| msgid "Click and move the mouse to sharpen parts of your picture."
 msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr "Klicka och dra med musen för att göra delar av din bild skarpare."
 
@@ -1325,8 +1272,6 @@ msgid "Click to sharpen the entire picture."
 msgstr "Klicka för att göra hela bilden skarpare."
 
 #: ../../magic/src/sharpen.c:82
-#, fuzzy
-#| msgid "Click and move the mouse to create a black and white silhouette."
 msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr "Klicka och dra med musen för att skapa en svartvit silhuett."
 
@@ -1352,15 +1297,11 @@ msgid "Wet Paint"
 msgstr "Våt färg"
 
 #: ../../magic/src/smudge.c:115
-#, fuzzy
-#| msgid "Click and move the mouse around to smudge the picture."
 msgid "Click and drag the mouse around to smudge the picture."
 msgstr "Klicka och dra med musen för att kladda till bilden."
 
 #. if (which == 1)
 #: ../../magic/src/smudge.c:117
-#, fuzzy
-#| msgid "Click and move the mouse around to draw with wet, smudgy paint."
 msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr "Klicka och dra med musen för att rita med våt, suddig färg."
 
@@ -1418,10 +1359,6 @@ msgid "Color & White"
 msgstr "Färg och vitt"
 
 #: ../../magic/src/tint.c:75
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to change the color of parts of your "
-#| "picture."
 msgid ""
 "Click and drag the mouse around to change the color of parts of your picture."
 msgstr "Klicka och dra med musen för att ändra färgen i delar av din bild."
@@ -1431,16 +1368,12 @@ msgid "Click to change the color of your entire picture."
 msgstr "Klicka för att ändra färgen för hela din bild."
 
 #: ../../magic/src/tint.c:77
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn parts of your picture into white "
-#| "and a color you choose."
 msgid ""
 "Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
 msgstr ""
 "Klicka och dra med musen för att göra delar av din bild till vit samt en "
-"färg som du väljer själv."
+"färg som du själv väljer."
 
 #: ../../magic/src/tint.c:78
 msgid "Click to turn your entire picture into white and a color you choose."
