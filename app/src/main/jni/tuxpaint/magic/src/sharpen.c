@@ -127,7 +127,7 @@ int sharpen_init(magic_api * api)
 
   for (i = 0; i < sharpen_NUM_TOOLS; i++)
     {
-      snprintf(fname, sizeof(fname), "%s/sounds/magic/%s", api->data_directory, sharpen_snd_filenames[i]);
+      snprintf(fname, sizeof(fname), "%ssounds/magic/%s", api->data_directory, sharpen_snd_filenames[i]);
       sharpen_snd_effect[i] = Mix_LoadWAV(fname);
     }
 

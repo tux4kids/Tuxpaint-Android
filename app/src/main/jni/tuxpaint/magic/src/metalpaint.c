@@ -70,7 +70,7 @@ int metalpaint_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/metalpaint.wav", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/metalpaint.wav", api->data_directory);
   metalpaint_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -87,7 +87,7 @@ SDL_Surface *metalpaint_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/metalpaint.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/metalpaint.png", api->data_directory);
 
   return (IMG_Load(fname));
 }

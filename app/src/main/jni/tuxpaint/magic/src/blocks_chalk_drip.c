@@ -77,13 +77,13 @@ int blocks_chalk_drip_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/blocks.wav", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/blocks.wav", api->data_directory);
   snd_effect[0] = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/chalk.wav", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/chalk.wav", api->data_directory);
   snd_effect[1] = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/drip.wav", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/drip.wav", api->data_directory);
   snd_effect[2] = Mix_LoadWAV(fname);
 
   return (1);
@@ -108,15 +108,15 @@ SDL_Surface *blocks_chalk_drip_get_icon(magic_api * api, int which)
 
   if (which == TOOL_BLOCKS)
     {
-      snprintf(fname, sizeof(fname), "%s/images/magic/blocks.png", api->data_directory);
+      snprintf(fname, sizeof(fname), "%simages/magic/blocks.png", api->data_directory);
     }
   else if (which == TOOL_CHALK)
     {
-      snprintf(fname, sizeof(fname), "%s/images/magic/chalk.png", api->data_directory);
+      snprintf(fname, sizeof(fname), "%simages/magic/chalk.png", api->data_directory);
     }
   else if (which == TOOL_DRIP)
     {
-      snprintf(fname, sizeof(fname), "%s/images/magic/drip.png", api->data_directory);
+      snprintf(fname, sizeof(fname), "%simages/magic/drip.png", api->data_directory);
     }
 
   return (IMG_Load(fname));

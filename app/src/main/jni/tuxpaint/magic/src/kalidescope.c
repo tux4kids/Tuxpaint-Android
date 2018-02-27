@@ -90,7 +90,7 @@ int kalidescope_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/kaleidoscope.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/kaleidoscope.ogg", api->data_directory);
   kalidescope_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -106,7 +106,7 @@ SDL_Surface *kalidescope_get_icon(magic_api * api, int which)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/%s", api->data_directory, kal_icon_names[which]);
+  snprintf(fname, sizeof(fname), "%simages/magic/%s", api->data_directory, kal_icon_names[which]);
 
   return (IMG_Load(fname));
 }

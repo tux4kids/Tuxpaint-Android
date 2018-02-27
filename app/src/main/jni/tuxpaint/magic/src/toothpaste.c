@@ -109,7 +109,7 @@ int toothpaste_init(magic_api * api)
   //Load sounds
   for (i = 0; i < toothpaste_NUM_TOOLS; i++)
     {
-      snprintf(fname, sizeof(fname), "%s/sounds/magic/%s", api->data_directory, toothpaste_snd_filenames[i]);
+      snprintf(fname, sizeof(fname), "%ssounds/magic/%s", api->data_directory, toothpaste_snd_filenames[i]);
       toothpaste_snd_effect[i] = Mix_LoadWAV(fname);
     }
 

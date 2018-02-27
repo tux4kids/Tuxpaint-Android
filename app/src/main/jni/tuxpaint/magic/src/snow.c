@@ -111,14 +111,14 @@ int snow_init(magic_api * api)
 
   srand(time(0));
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/Snow_flake4.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/Snow_flake4.png", api->data_directory);
   snow_flake1 = IMG_Load(fname);
   if (snow_flake1 == NULL)
     {
       return (0);
     }
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/Snow_flake5.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/Snow_flake5.png", api->data_directory);
   snow_flake2 = IMG_Load(fname);
   if (snow_flake2 == NULL)
     {
@@ -131,7 +131,7 @@ int snow_init(magic_api * api)
     }
   for (i = 0; i < snow_NUM_TOOLS; i++)
     {
-      snprintf(fname, sizeof(fname), "%s/sounds/magic/%s", api->data_directory, snow_snd_filenames[i]);
+      snprintf(fname, sizeof(fname), "%ssounds/magic/%s", api->data_directory, snow_snd_filenames[i]);
       snow_snd_effect[i] = Mix_LoadWAV(fname);
     }
   return (1);

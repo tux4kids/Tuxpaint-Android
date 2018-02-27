@@ -22,6 +22,10 @@
 #define SEG_RIGHT_TOP_BOTTOM (SEG_RIGHT | SEG_TOP | SEG_BOTTOM)
 #define SEG_LEFT_RIGHT_TOP_BOTTOM (SEG_LEFT | SEG_RIGHT | SEG_TOP | SEG_BOTTOM)
 
+#ifdef __ANDROID__
+#define inline static
+#endif
+
 Mix_Chunk *fretwork_snd;
 unsigned int img_w, img_h;
 unsigned int fretwork_segments_x, fretwork_segments_y;  //how many segments do we have?
@@ -128,10 +132,10 @@ int fretwork_init(magic_api * api)
   for (i = 0; i < 4; i++)
     fretwork_images[i] = (char *)malloc(sizeof(char) * 1024);
 
-  snprintf(fretwork_images[0], 1024 * sizeof(char), "%s/images/magic/fretwork_one.png", api->data_directory);
-  snprintf(fretwork_images[1], 1024 * sizeof(char), "%s/images/magic/fretwork_three.png", api->data_directory);
-  snprintf(fretwork_images[2], 1024 * sizeof(char), "%s/images/magic/fretwork_four.png", api->data_directory);
-  snprintf(fretwork_images[3], 1024 * sizeof(char), "%s/images/magic/fretwork_corner.png", api->data_directory);
+  snprintf(fretwork_images[0], 1024 * sizeof(char), "%simages/magic/fretwork_one.png", api->data_directory);
+  snprintf(fretwork_images[1], 1024 * sizeof(char), "%simages/magic/fretwork_three.png", api->data_directory);
+  snprintf(fretwork_images[2], 1024 * sizeof(char), "%simages/magic/fretwork_four.png", api->data_directory);
+  snprintf(fretwork_images[3], 1024 * sizeof(char), "%simages/magic/fretwork_corner.png", api->data_directory);
 
   fretwork_one = IMG_Load(fretwork_images[0]);
   fretwork_three = IMG_Load(fretwork_images[1]);
@@ -145,7 +149,7 @@ int fretwork_init(magic_api * api)
   img_w = fretwork_one->w;
   img_h = fretwork_one->h;
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/fretwork.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/fretwork.ogg", api->data_directory);
   fretwork_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -160,7 +164,7 @@ SDL_Surface *fretwork_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/fretwork.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/fretwork.png", api->data_directory);
 
   return (IMG_Load(fname));
 }

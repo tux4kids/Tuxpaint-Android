@@ -101,13 +101,13 @@ SDL_Surface *string_get_icon(magic_api * api, int which)
   switch (which)
     {
     case STRING_TOOL_FULL_BY_OFFSET:
-      snprintf(fname, sizeof(fname), "%s/images/magic/string_art_full_by_offset.png", api->data_directory);
+      snprintf(fname, sizeof(fname), "%simages/magic/string_art_full_by_offset.png", api->data_directory);
       break;
     case STRING_TOOL_TRIANGLE:
-      snprintf(fname, sizeof(fname), "%s/images/magic/string_art_triangles.png", api->data_directory);
+      snprintf(fname, sizeof(fname), "%simages/magic/string_art_triangles.png", api->data_directory);
       break;
     case STRING_TOOL_ANGLE:
-      snprintf(fname, sizeof(fname), "%s/images/magic/string_art_angles.png", api->data_directory);
+      snprintf(fname, sizeof(fname), "%simages/magic/string_art_angles.png", api->data_directory);
       break;
     }
 
@@ -179,13 +179,13 @@ int string_init( __attribute__ ((unused)) magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/string.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/string.ogg", api->data_directory);
   string_snd[STRING_TOOL_FULL_BY_OFFSET] = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/string2.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/string2.ogg", api->data_directory);
   string_snd[STRING_TOOL_TRIANGLE] = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/string3.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/string3.ogg", api->data_directory);
   string_snd[STRING_TOOL_ANGLE] = Mix_LoadWAV(fname);
 
   return (1);

@@ -110,7 +110,7 @@ int alien_init(magic_api * api)
 
   for (i = 0; i < alien_NUM_TOOLS; i++)
     {
-      snprintf(fname, sizeof(fname), "%s/sounds/magic/%s", api->data_directory, alien_snd_filenames[i]);
+      snprintf(fname, sizeof(fname), "%ssounds/magic/%s", api->data_directory, alien_snd_filenames[i]);
       alien_snd_effect[i] = Mix_LoadWAV(fname);
     }
   return (1);

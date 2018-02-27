@@ -167,7 +167,7 @@ int mosaic_shaped_init(magic_api * api)
 
   for (i = 0; i < mosaic_shaped_NUM_TOOLS; i++)
     {
-      snprintf(fname, sizeof(fname), "%s/sounds/magic/%s", api->data_directory, mosaic_shaped_snd_filenames[i]);
+      snprintf(fname, sizeof(fname), "%ssounds/magic/%s", api->data_directory, mosaic_shaped_snd_filenames[i]);
       mosaic_shaped_snd_effect[i] = Mix_LoadWAV(fname);
     }
 
@@ -436,6 +436,9 @@ void mosaic_shaped_switchin(magic_api * api, int which, int mode ATTRIBUTE_UNUSE
                               canvas->format->BitsPerPixel,
                               canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, amask);
 
+  surf_aux = SDL_ConvertSurfaceFormat(tmp2, SDL_PIXELFORMAT_RGB888, 0);
+  SDL_FreeSurface(tmp2);
+
   /* Generation of patterns now in the program, solves #210 */
   if (which == TOOL_SQUARE)
     {
@@ -556,6 +559,7 @@ void mosaic_shaped_switchin(magic_api * api, int which, int mode ATTRIBUTE_UNUSE
 
     }
 
+  SDL_SetSurfaceBlendMode(mosaic_shaped_pattern, SDL_BLENDMODE_NONE);
 
   rect.w = mosaic_shaped_pattern->w;
   rect.h = mosaic_shaped_pattern->h;

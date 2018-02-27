@@ -59,17 +59,17 @@ int realrainbow_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/realrainbow-colors.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/realrainbow-colors.png", api->data_directory);
   realrainbow_colors[0] = IMG_Load(fname);
   if (realrainbow_colors[0] == NULL)
     return (0);
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/realrainbow-roygbiv-colors.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/realrainbow-roygbiv-colors.png", api->data_directory);
   realrainbow_colors[1] = IMG_Load(fname);
   if (realrainbow_colors[1] == NULL)
     return (0);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/realrainbow.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/realrainbow.ogg", api->data_directory);
   realrainbow_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -85,9 +85,9 @@ SDL_Surface *realrainbow_get_icon(magic_api * api, int which)
   char fname[1024];
 
   if (which == 0)
-    snprintf(fname, sizeof(fname), "%s/images/magic/realrainbow.png", api->data_directory);
+    snprintf(fname, sizeof(fname), "%simages/magic/realrainbow.png", api->data_directory);
   else
-    snprintf(fname, sizeof(fname), "%s/images/magic/realrainbow-roygbiv.png", api->data_directory);
+    snprintf(fname, sizeof(fname), "%simages/magic/realrainbow-roygbiv.png", api->data_directory);
 
   return (IMG_Load(fname));
 }

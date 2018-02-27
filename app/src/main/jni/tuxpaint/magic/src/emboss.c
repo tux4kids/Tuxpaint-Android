@@ -73,7 +73,7 @@ int emboss_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/emboss.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/emboss.ogg", api->data_directory);
   emboss_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -90,7 +90,7 @@ SDL_Surface *emboss_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/emboss.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/emboss.png", api->data_directory);
 
   return (IMG_Load(fname));
 }

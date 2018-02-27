@@ -78,7 +78,7 @@ int shift_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/shift.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/shift.ogg", api->data_directory);
   shift_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -95,7 +95,7 @@ SDL_Surface *shift_get_icon(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUT
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/shift.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/shift.png", api->data_directory);
 
   return (IMG_Load(fname));
 }
