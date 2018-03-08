@@ -264,7 +264,7 @@ public class ConfigActivity extends Activity {
 	    	 locale = props.getProperty("locale", Locale.getDefault().toString());
 	    	 print = props.getProperty("print", "no");
 	    	 printdelay = props.getProperty("printdelay", "0");
-		 disablescreensaver = props.getProperty("disablescreensaver", "0");
+		 disablescreensaver = props.getProperty("disablescreensaver", "no");
 	    	 
 	         Log.v(TAG, autosave + " " + sound + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + print + " " + printdelay + " " + disablescreensaver);;
 	}
