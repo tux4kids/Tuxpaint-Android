@@ -22246,9 +22246,9 @@ static void setup_config(char *argv[])
   /* Mac OS X: Use a "tuxpaint.cfg" file in the Tux Paint application support folder */
   snprintf(str, sizeof(str), "%s/tuxpaint.cfg", macos.preferencesPath());
 #elif defined(__ANDROID__)
-  /* Try to find the first config file: /mnt/sdcard/Android/data/org.tuxpaint/files/tuxpaint.cfg */
-  // Donot rely on this file unless you want to override another tuxpaint.cfg in the internal path for debug
-  snprintf(str, sizeof(str), "%s/tuxpaint.cfg", savedir);
+  /* Try to find the user's config file */
+  /* This file is writed by the tuxpaint config activity when the user runs it */
+  snprintf(str, sizeof(str), "%s/tuxpaint.cfg", SDL_AndroidGetExternalStoragePath());
 #else
   /* Linux and other Unixes:  Use 'rc' style (~/.tuxpaintrc) */
   /* it should it be "~/.tuxpaint/tuxpaintrc" instead, but too late now */
@@ -22281,9 +22281,9 @@ static void setup_config(char *argv[])
       snprintf(str, sizeof(str), "%s/tuxpaint.cfg", macos_globalPreferencesPath());
       parse_file_options(&tmpcfg_sys, str);
 #elif defined(__ANDROID__)
-      /* Try to find the second config file:  /data/data/org.tuxpaint/files/tuxpaint.cfg  */
-      /* This file is unzipped from "assets/tuxpaint.zip" and will be modified when users want to set differnt configuraion */
-      snprintf(str, sizeof(str), "%s/tuxpaint.cfg", SDL_AndroidGetInternalStoragePath());
+      /* Load the config file we provide in assets/etc/tuxpaint.cfg */
+      snprintf(str, sizeof(str), "etc/tuxpaint.cfg");
+
       parse_file_options(&tmpcfg_sys, str);
 #else
       /* normally /etc/tuxpaint/tuxpaint.conf */
