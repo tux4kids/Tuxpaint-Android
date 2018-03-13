@@ -92,7 +92,7 @@ linux_ARCH_LIBS:=obj/postscript_print.o
 ARCH_LIBS:=$($(OS)_ARCH_LIBS)
 
 windows_ARCH_CFLAGS:=
-osx_ARCH_CFLAGS:=-mmacosx-version-min=10.6 -isystem /opt/local/include -DHAVE_STRCASESTR -w
+osx_ARCH_CFLAGS:=-isystem /opt/local/include -DHAVE_STRCASESTR -w -headerpad_max_install_names
 beos_ARCH_CFLAGS:=
 linux_ARCH_CFLAGS:=
 ARCH_CFLAGS:=$($(OS)_ARCH_CFLAGS)
