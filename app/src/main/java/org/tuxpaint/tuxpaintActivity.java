@@ -31,7 +31,8 @@ public class tuxpaintActivity extends SDLActivity {
         System.loadLibrary("stlport_shared");
         System.loadLibrary("tuxpaint_png");
         System.loadLibrary("tuxpaint_fribidi");
-	System.loadLibrary("tp_android_assets_fopen");
+        System.loadLibrary("SDL2");
+        System.loadLibrary("tp_android_assets_fopen");
         System.loadLibrary("tuxpaint_intl");
         System.loadLibrary("tuxpaint_iconv");
         System.loadLibrary("tuxpaint_pixman");
@@ -46,7 +47,6 @@ public class tuxpaintActivity extends SDLActivity {
         System.loadLibrary("tuxpaint_gdk_pixbuf");
         System.loadLibrary("tuxpaint_croco");
         System.loadLibrary("tuxpaint_rsvg");
-        System.loadLibrary("SDL2");
         System.loadLibrary("SDL2_image");
         System.loadLibrary("SDL2_mixer");
         System.loadLibrary("SDL2_ttf");

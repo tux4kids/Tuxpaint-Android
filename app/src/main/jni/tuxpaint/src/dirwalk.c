@@ -430,7 +430,8 @@ void tp_ftw(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer
         }
     }
 
-  closedir(d);
+  if (d)
+    closedir(d);
   show_progress_bar_(screen, texture, renderer);
   dir[dirlen] = '\0';           // repair it (clobbered for stat() call above)
 
