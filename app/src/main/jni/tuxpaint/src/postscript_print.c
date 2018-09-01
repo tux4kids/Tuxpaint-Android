@@ -3,7 +3,7 @@
 
   For Tux Paint
   PostScript(r) printing routine.
-  (for non-Windows, non-Mac OS X, non-BeOS platforms, e.g. Linux)
+  (for non-Windows, non-BeOS platforms, e.g. Linux and macOS)
   (moved from tuxpaint.c in 0.9.17)
 
   Copyright (c) 2009 by Bill Kendrick and others
@@ -51,6 +51,7 @@
 #include <paper.h>
 #include <math.h>
 #include <errno.h>
+#include "debug.h"
 
 #ifndef PAPER_H
 #error "---------------------------------------------------"
@@ -296,13 +297,18 @@ int do_ps_save(FILE * fi,
       pid_t child_pid, w;
       int status;
 
+#ifdef __APPLE__
+      /* macOS does not always reset errno so Tux Paint thinks print never
+       * succeeds - let's reset before calling pclose() on macOS */
+      errno = 0;
+#endif
+
       child_pid = pclose(fi);
 
-/* debug */
-/*
+#ifdef DEBUG
     printf("pclose returned %d\n", child_pid); fflush(stdout);
     printf("errno = %d\n", errno); fflush(stdout);
-*/
+#endif
 
       if (child_pid < 0 || (errno != 0 && errno != EAGAIN))
         {                       /* FIXME: This right? */
@@ -317,8 +323,7 @@ int do_ps_save(FILE * fi,
         {
           w = waitpid(child_pid, &status, 0);
 
-/* debug */
-/*
+#ifdef DEBUG
             if (w == -1) { perror("waitpid"); exit(EXIT_FAILURE); }
             if (WIFEXITED(status)) {
                 printf("exited, status=%d\n", WEXITSTATUS(status));
@@ -329,7 +334,7 @@ int do_ps_save(FILE * fi,
             } else if (WIFCONTINUED(status)) {
                 printf("continued\n");
             }
-*/
+#endif
         }
       while (w != -1 && !WIFEXITED(status) && !WIFSIGNALED(status));
 

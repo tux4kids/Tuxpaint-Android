@@ -1,46 +1,50 @@
 # Tux Paint - A simple drawing program for children.
 
-# Copyright (c) 2002-2017 by Bill Kendrick and others
-# bill@newbreedsoftware.com
+# Copyright (c) 2002-2018
+# Various contributors (see AUTHORS.txt)
 # http://www.tuxpaint.org/
 
-# June 14, 2002 - December 30, 2017
+# June 14, 2002 - August 30, 2018
 
 
 # The version number, for release:
 
 VER_VERSION:=0.9.23
-VER_DATE:=$(shell date +"%Y-%m-%d")
+ifdef SOURCE_DATE_EPOCH
+  VER_DATE=$(shell date -u -d "@$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u -r "$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u "+%Y-%m-%d")
+else
+  VER_DATE=$(shell date "+%Y-%m-%d")
+endif
 MAGIC_API_VERSION:=0x00000003
 
 # Need to know the OS
 
 SYSNAME:=$(shell uname -s)
 ifeq ($(findstring MINGW32, $(SYSNAME)),MINGW32)
-OS:=windows
-GPERF:=/usr/bin/gperf
+  OS:=windows
+  GPERF:=/usr/bin/gperf
 else
-ifeq ($(SYSNAME),Darwin)
-OS:=osx
-GPERF:=/usr/bin/gperf
-else
-ifeq ($(SYSNAME),BeOS)
-OS:=beos
-GPERF:=$(shell finddir B_USER_BIN_DIRECTORY)/gperf
-else
-ifeq ($(SYSNAME),Haiku)
-OS:=beos
-GPERF:=$(shell finddir B_SYSTEM_BIN_DIRECTORY)/gperf
-STDC_LIB:=-lstdc++
-ifeq ($(shell gcc --version | cut -c 1-6),2.95.3)
-STDC_LIB:=-lstdc++.r4
-endif
-else
-OS:=linux
-GPERF:=/usr/bin/gperf
-endif
-endif
-endif
+  ifeq ($(SYSNAME),Darwin)
+    OS:=osx
+    GPERF:=/usr/bin/gperf
+  else
+    ifeq ($(SYSNAME),BeOS)
+      OS:=beos
+      GPERF:=$(shell finddir B_USER_BIN_DIRECTORY)/gperf
+    else
+      ifeq ($(SYSNAME),Haiku)
+        OS:=beos
+        GPERF:=$(shell finddir B_SYSTEM_BIN_DIRECTORY)/gperf
+        STDC_LIB:=-lstdc++
+        ifeq ($(shell gcc --version | cut -c 1-6),2.95.3)
+          STDC_LIB:=-lstdc++.r4
+        endif
+      else
+        OS:=linux
+        GPERF:=/usr/bin/gperf
+      endif
+    endif
+  endif
 endif
 
 # change to sdl-console to build a console version on Windows
@@ -92,7 +96,7 @@ linux_ARCH_LIBS:=obj/postscript_print.o
 ARCH_LIBS:=$($(OS)_ARCH_LIBS)
 
 windows_ARCH_CFLAGS:=
-osx_ARCH_CFLAGS:=-isystem /opt/local/include -DHAVE_STRCASESTR -w -headerpad_max_install_names
+osx_ARCH_CFLAGS:=-mmacosx-version-min=10.7 -isystem /opt/local/include -DHAVE_STRCASESTR -w -headerpad_max_install_names
 beos_ARCH_CFLAGS:=
 linux_ARCH_CFLAGS:=
 ARCH_CFLAGS:=$($(OS)_ARCH_CFLAGS)
@@ -136,11 +140,11 @@ PREFIX:=$($(OS)_PREFIX)
 # macOS is set up as a bundle, with all files under 'Contents'.
 # "TuxPaint-1" is the OLPC XO name. Installing to ./ is bad!
 ifeq ($(OS),osx)
-DESTDIR:=$(BUNDLE)/Contents/
+  DESTDIR:=$(BUNDLE)/Contents/
 else ifeq ($(PREFIX),./)
-DESTDIR:=TuxPaint-1
+  DESTDIR:=TuxPaint-1
 else
-DESTDIR:=$(PKG_ROOT)
+  DESTDIR:=$(PKG_ROOT)
 endif
 
 # Program:
@@ -160,12 +164,11 @@ LIBDIR=$(PREFIX)
 
 # Magic Tool plug-ins
 INCLUDE_PREFIX:=$(DESTDIR)$(PREFIX)/include
-MAGIC_PREFIX:=$(DESTDIR)$(LIBDIR)/lib/tuxpaint/plugins
-
+MAGIC_PREFIX:=$(DESTDIR)$(LIBDIR)/lib$(LIBDIRSUFFIX)/tuxpaint/plugins
 
 # Docs and man page:
-DOC_PREFIX:=$(DESTDIR)$(PREFIX)/share/doc/tuxpaint
-DEVDOC_PREFIX:=$(DESTDIR)$(PREFIX)/share/doc/tuxpaint-dev
+DOC_PREFIX:=$(DESTDIR)$(PREFIX)/share/doc/tuxpaint-$(VER_VERSION)
+DEVDOC_PREFIX:=$(DESTDIR)$(PREFIX)/share/doc/tuxpaint-$(VER_VERSION)/tuxpaint-dev
 MAN_PREFIX:=$(DESTDIR)$(PREFIX)/share/man
 DEVMAN_PREFIX:=$(DESTDIR)$(PREFIX)/share/man
 
@@ -185,10 +188,10 @@ endif
 
 # Icons and launchers:
 ICON_PREFIX:=$(DESTDIR)$(PREFIX)/share/pixmaps
-X11_ICON_PREFIX:=$(DESTDIR)$(PREFIX)/X11R6/include/X11/pixmaps
-GNOME_PREFIX:=$(shell gnome-config --prefix 2> /dev/null)
-KDE_PREFIX:=$(shell kde-config --install apps --expandvars 2> /dev/null)
-KDE_ICON_PREFIX:=$(shell kde-config --install icon --expandvars 2> /dev/null)
+X11_ICON_PREFIX:=$(DESTDIR)$(PREFIX)/share/pixmaps
+
+KDE_PREFIX:=$(shell kde-config --install xdgdata-apps --expandvars 2> /dev/null)
+KDE_ICON_PREFIX:=$(shell kde4-config --install icon --expandvars 2> /dev/null)
 
 # Maemo flag
 MAEMOFLAG:=
@@ -458,9 +461,9 @@ trans:
 ######
 
 windows_ARCH_INSTALL:=
-osx_ARCH_INSTALL:=install-bundlefiles
+osx_ARCH_INSTALL:=install-macbundle TuxPaint.dmg
 beos_ARCH_INSTALL:=install-haiku
-linux_ARCH_INSTALL:=install-gnome install-kde install-kde-icons
+linux_ARCH_INSTALL:=install-kde install-kde-icons
 ARCH_INSTALL:=$($(OS)_ARCH_INSTALL)
 
 # "make install" installs all of the various parts
@@ -482,7 +485,8 @@ install:	install-bin install-data install-man install-doc \
 	@echo
 	@if [ "x$(OS)" == "xosx" ]; then \
 		echo "All done! Now you can double click $(BUNDLE) to run the"; \
-		echo "program!!!"; \
+		echo "program!!! TuxPaint.dmg has also been created for"; \
+		echo "distribution."; \
 		echo; \
 		echo "For more information, see $(DOC_PREFIX)/README.txt"; \
 	else \
@@ -591,7 +595,7 @@ clean:
 	@-rm -f templates/.thumbs/*.png
 	@if [ -d templates/.thumbs ]; then rmdir templates/.thumbs; fi
 	@-if [ "x$(BUNDLE)" != "x" ]; then rm -rf $(BUNDLE); fi
-	@-rm -f TuxPaint.dmg
+	@-rm -f TuxPaint.dmg temp.dmg; rm -rf magic/*.dSYM
 	@echo
 
 # "make uninstall" should remove the various parts from their
@@ -599,15 +603,10 @@ clean:
 # are the same as they were when you installed, of course!!!
 .PHONY: uninstall
 uninstall:	uninstall-i18n
-	-if [ "x$(GNOME_PREFIX)" != "x" ]; then \
-	  rm $(GNOME_PREFIX)/share/applications/tuxpaint.desktop; \
-	  rm $(GNOME_PREFIX)/share/pixmaps/tuxpaint.png; \
-	else \
-	  rm /usr/share/applications/tuxpaint.desktop; \
-	  rm /usr/share/pixmaps/tuxpaint.png; \
-	fi
+	-rm /usr/share/applications/tuxpaint.desktop; \
+	-rm /usr/share/pixmaps/tuxpaint.png; \
 	-if [ "x$(KDE_PREFIX)" != "x" ]; then \
-	  rm $(KDE_PREFIX)/Graphics/tuxpaint.desktop; \
+	  rm $(KDE_PREFIX)/tuxpaint.desktop; \
 	fi
 	-rm $(ICON_PREFIX)/tuxpaint.png
 	-rm $(X11_ICON_PREFIX)/tuxpaint.xpm
@@ -752,21 +751,6 @@ echo-install-example-templates:
 install-example-templates: echo-install-example-templates install-example-template-dirs $(INSTALLED_TEMPLATES)
 
 
-# Install a launcher icon in the Gnome menu
-.PHONY: install-gnome
-install-gnome:
-	@echo
-	@echo "...Installing launcher icon into GNOME..."
-	@if [ "x$(GNOME_PREFIX)" != "x" ]; then \
-	 install -d $(DESTDIR)$(GNOME_PREFIX)/share/pixmaps; \
-	 cp data/images/icon.png $(DESTDIR)/$(GNOME_PREFIX)/share/pixmaps/tuxpaint.png; \
-	 chmod 644 $(DESTDIR)$(GNOME_PREFIX)/share/pixmaps/tuxpaint.png; \
-	 install -d $(DESTDIR)$(GNOME_PREFIX)/share/applications; \
-	 cp src/tuxpaint.desktop $(DESTDIR)$(GNOME_PREFIX)/share/applications/; \
-	 chmod 644 $(DESTDIR)$(GNOME_PREFIX)/share/applications/tuxpaint.desktop; \
-	fi
-
-
 # Install a launcher icon for the Nokia 770.
 .PHONY: install-nokia770
 install-nokia770:
@@ -798,10 +782,11 @@ install-kde:
 	@echo
 	@echo "...Installing launcher icon into KDE..."
 	@if [ "x$(KDE_PREFIX)" != "x" ]; then \
-	  install -d $(DESTDIR)$(KDE_PREFIX)/Graphics; \
-	  cp src/tuxpaint.desktop $(DESTDIR)$(KDE_PREFIX)/Graphics/; \
-	  chmod 644 $(DESTDIR)$(KDE_PREFIX)/Graphics/tuxpaint.desktop; \
+	  install -d $(DESTDIR)$(KDE_PREFIX); \
+	  cp src/tuxpaint.desktop $(DESTDIR)$(KDE_PREFIX)/; \
+	  chmod 644 $(DESTDIR)$(KDE_PREFIX)/tuxpaint.desktop; \
 	fi
+	kbuildsycoca4
 
 .PHONY: install-kde-icons
 install-kde-icons:
@@ -846,10 +831,8 @@ install-kde-icons:
 	fi
 
 
-# Install the PNG icon (for GNOME, KDE, etc.)
+# Install the PNG icon (for KDE desktop, etc.)
 # and the 24-color 32x32 XPM (for other Window managers):
-
-# FIXME: Should this also use $(DESTDIR)?
 .PHONY: install-icon
 install-icon:
 	@echo
@@ -982,7 +965,9 @@ install-doc:
 	@echo "...Installing documentation..."
 	@install -d $(DOC_PREFIX)
 	@cp -R docs/* $(DOC_PREFIX)
-	@cp -R magic/magic-docs $(DOC_PREFIX)
+	@# FIXME: Needs improvement, when we add other translations -bjk 2018.08.30
+	@install -d $(DOC_PREFIX)/en/magic-docs
+	@cp -R magic/magic-docs/en/* $(DOC_PREFIX)/en/magic-docs/
 	@chmod -R a=rX,g=rX,u=rwX $(DOC_PREFIX)
 
 
@@ -1014,8 +999,8 @@ install-man:
 
 
 # Install the support files for macOS application bundle
-.PHONY: install-bundlefiles
-install-bundlefiles:
+.PHONY: install-macbundle
+install-macbundle:
 	@echo
 	@echo "...Installing App Bundle Support Files..."
 	@install -d -m 755 $(BUNDLE)/Contents/MacOS
@@ -1026,7 +1011,13 @@ install-bundlefiles:
 	@install -m 644 macos/Info.plist $(BUNDLE)/Contents
 	@install -m 644 macos/tuxpaint.icns $(BUNDLE)/Contents/Resources
 	@custom/macos.sh
-	@hdiutil create -volname "Tux Paint $(VER_VERSION)" -srcfolder $(BUNDLE) -ov -format UDBZ -o TuxPaint.dmg
+
+
+# Create DMG for macOS
+TuxPaint.dmg:
+	@echo
+	@echo "...Creating DMG Distribution File..."
+	@custom/macos-mkdmg.sh
 
 
 # Build the program!

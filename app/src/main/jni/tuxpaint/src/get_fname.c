@@ -30,22 +30,22 @@
 #include "debug.h"
 #include "compiler.h"
 
-  /* DIR_SAVE: Where is the user's saved directory?
-     This is where their saved files are stored
-     and where the "current_id.txt" file is saved.
+/* DIR_SAVE: Where is the user's saved directory?
+   This is where their saved files are stored
+   and where the "current_id.txt" file is saved.
 
-     Windows predefines "savedir" as:
-     "C:\Documents and Settings\%USERNAME%\Application Data\TuxPaint"
-     though it may get overridden with "--savedir" option
+   Windows predefines "savedir" as:
+   "C:\Documents and Settings\%USERNAME%\Application Data\TuxPaint"
+   though it may get overridden with "--savedir" option
 
-     BeOS similarly predefines "savedir" as "./userdata"...
+   BeOS similarly predefines "savedir" as "./userdata"...
 
-     Macintosh: It's under ~/Library/Application Support/TuxPaint
+   Macintosh: It's under ~/Library/Application Support/TuxPaint
 
-     Linux & Unix: It's under ~/.tuxpaint
+   Linux & Unix: It's under ~/.tuxpaint
 
-     DIR_DATA: Where is the user's data directory?
-     This is where local fonts, brushes and stamps can be found. */
+   DIR_DATA: Where is the user's data directory?
+   This is where local fonts, brushes and stamps can be found. */
 
 
 const char *savedir;
@@ -57,6 +57,14 @@ const char *datadir;
 //        for caller-provided space, and maybe callee strdup.
 //        That's at most 4 functions per Tux Paint thread.
 
+/**
+ * Construct a filepath, given a filename, and what kind of file
+ * (data file, or saved images?)
+ *
+ * @param name Filaneme
+ * @param kind What kind of file? (DIR_SAVE or DIR_DATA?)
+ * @return Full fillpath
+ */
 char *get_fname(const char *const name, int kind)
 {
   char f[512];

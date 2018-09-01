@@ -1,2 +1,2 @@
-See [locale]/html/README.html or [local]/README.txt.
+See [locale]/html/README.html or [locale]/README.txt.
 

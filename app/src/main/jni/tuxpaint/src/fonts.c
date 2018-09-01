@@ -161,29 +161,6 @@ static void reliable_read(int fd, void *buf, size_t count);
 #endif
 
 
-/* This doesn't actually ever get used; see load_locale_font()
-   -bjk 2017.10.15 */
-/*
-#ifndef NO_SDLPANGO
-static TuxPaint_Font *try_alternate_font(int size)
-{
-  char str[128];
-  char prefix[64];
-  char *p;
-
-  strcpy(prefix, lang_prefix);
-  if ((p = strrchr(prefix, '_')) != NULL)
-    {
-      *p = 0;
-      snprintf(str, sizeof(str), "%sfonts/locale/%s.ttf", DATA_PREFIX, prefix);
-
-      return TuxPaint_Font_OpenFont("", str, size);
-    }
-  return NULL;
-}
-#endif
-*/
-
 #ifdef NO_SDLPANGO
 TuxPaint_Font *load_locale_font(TuxPaint_Font * fallback, int size)
 {
@@ -923,7 +900,7 @@ static void groupfonts(void)
   qsort(user_font_families, num_font_families, sizeof user_font_families[0], compar_fontscore);
   //printf("groupfonts() qsort(user_font_families 2...)\n");
   //fflush(stdout);
-  if (user_font_families[0]->score < 0)
+  if (num_font_families > 0 && user_font_families[0]->score < 0)
     printf("sorted the wrong way, or all fonts were unusable\n");
 #if 0
 // THREADED_FONTS
@@ -1035,7 +1012,17 @@ static void loadfonts(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer 
   free(homedirdir);
 #endif
 
+#ifdef DEBUG
+  printf("Grouping fonts...\n");
+  fflush(stdout);
+#endif
+
   groupfonts();
+
+#ifdef DEBUG
+  printf("Finished loading the fonts\n");
+  fflush(stdout);
+#endif
 
   font_thread_done = 1;
   waiting_for_fonts = 0;

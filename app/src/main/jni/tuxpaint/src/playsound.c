@@ -33,6 +33,20 @@ int mute;
 int use_sound = 1;
 static int old_sound[4] = { -1, -1, -1, -1 };
 
+/**
+ * Play a sound.
+ *
+ * @param screen Screen surface (for dealing with panning & volume)
+ * @param chan Channel to play on (-1 for first free unused channel)
+ * @param s Which sound to play (integer index of `sounds[]` array)
+ * @param override 1 to override an already-playing sound, 0 otherwise
+ * @param x X coordinate within the screen surface, for left/right panning
+ *   effect; or SNDPOS_LEFT, SNDPOS_CENTER, or SNDPOS_RIGHT for
+ *   far left, center, or far right panning, respectively.
+ * @param y Y coordinate within the screen surface, for volume control
+ *   (low values, near the top of the window, are quieter), or
+ *   SNDDIST_NEAR for full volume
+ */
 void playsound(SDL_Surface * screen, int chan, int s, int override, int x, int y)
 {
 #ifndef NOSOUND
@@ -40,6 +54,10 @@ void playsound(SDL_Surface * screen, int chan, int s, int override, int x, int y
 
   if (!mute && use_sound && s != SND_NONE)
     {
+#ifdef DEBUG
+  printf("playsound #%d in channel %d, pos (%d,%d), %soverride, ptr=%p\n", s, chan, x, y, override ? "" : "no ", sounds[s]);
+  fflush(stdout);
+#endif
       if (override || !Mix_Playing(chan))
         {
           Mix_PlayChannel(chan, sounds[s], 0);
@@ -77,8 +95,10 @@ void playsound(SDL_Surface * screen, int chan, int s, int override, int x, int y
               left = ((255 - dist) * ((screen->w - 1) - x)) / (screen->w - 1);
             }
 
-
-
+#ifdef DEBUG
+  printf("Panning of sound #%d in channel %d, left=%d, right=%d\n", s, chan, left, (255-dist)-left);
+  fflush(stdout);
+#endif
           Mix_SetPanning(chan, left, (255 - dist) - left);
         }
     }

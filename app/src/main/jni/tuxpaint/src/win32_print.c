@@ -37,6 +37,9 @@
 
 static HDC hDCprinter = NULL;
 
+/**
+ * FIXME
+ */
 static SDL_Surface *make24bitDIB(SDL_Surface * surf)
 {
   SDL_PixelFormat pixfmt;
@@ -84,6 +87,9 @@ static SDL_Surface *make24bitDIB(SDL_Surface * surf)
   return surfDIB;
 }
 
+/**
+ * FIXME
+ */
 /* returns 0 if failed */
 static int GetDefaultPrinterStrings(char *device, char *driver, char *output)
 {
@@ -115,6 +121,9 @@ static int GetDefaultPrinterStrings(char *device, char *driver, char *output)
 
 #define dmDeviceNameSize    32
 
+/**
+ * FIXME
+ */
 static HANDLE LoadCustomPrinterHDEVMODE(HWND hWnd, const char *filepath)
 {
   char device[MAX_PATH];
@@ -179,7 +188,9 @@ err_exit:
   return NULL;
 }
 
-
+/**
+ * FIXME
+ */
 static int SaveCustomPrinterHDEVMODE(HWND hWnd, const char *filepath, HANDLE hDevMode)
 {
   FILE *fp = NULL;
@@ -202,6 +213,12 @@ static int SaveCustomPrinterHDEVMODE(HWND hWnd, const char *filepath, HANDLE hDe
   return 0;
 }
 
+/**
+ * Returns whether or not a given file exists.
+ *
+ * @param filepath Path to the file
+ * @return 1 if file exists, 0 otherwise
+ */
 static int FileExists(const char *filepath)
 {
   FILE *fp;
@@ -214,6 +231,10 @@ static int FileExists(const char *filepath)
   return 0;
 }
 
+
+/**
+ * FIXME
+ */
 static int GetCustomPrinterDC(HWND hWnd, const char *printcfg, int show)
 {
   PRINTDLG pd = {
@@ -254,6 +275,9 @@ static int GetCustomPrinterDC(HWND hWnd, const char *printcfg, int show)
 }
 
 
+/**
+ * FIXME
+ */
 static HDC GetDefaultPrinterDC(void)
 {
   char device[MAX_PATH], driver[MAX_PATH], output[MAX_PATH];
@@ -264,6 +288,10 @@ static HDC GetDefaultPrinterDC(void)
   return NULL;
 }
 
+
+/**
+ * FIXME
+ */
 static int GetPrinterDC(HWND hWnd, const char *printcfg, int show)
 {
   hDCprinter = NULL;
@@ -277,6 +305,9 @@ static int GetPrinterDC(HWND hWnd, const char *printcfg, int show)
 }
 
 
+/**
+ * FIXME
+ */
 int IsPrinterAvailable(void)
 {
   return (GetDefaultPrinterStrings(NULL, NULL, NULL) != 0);
@@ -285,6 +316,10 @@ int IsPrinterAvailable(void)
 #define STRETCH_TO_FIT  0
 #define SCALE_TO_FIT    1
 
+
+/**
+ * FIXME
+ */
 const char *SurfacePrint(SDL_Surface * surf, const char *printcfg, int showdialog)
 {
   const char *res = NULL;
@@ -472,6 +507,10 @@ error:
   return res;
 }
 
+
+/**
+ * FIXME
+ */
 /*
   Read access to Windows Registry
 */
@@ -494,9 +533,12 @@ err_exit:
   return HRESULT_FROM_WIN32(res);
 }
 
-/*
-  Removes a single '\' or '/' from end of path 
-*/
+/**
+ * Removes a single '\' or '/' from end of path
+ *
+ * @param path Directory path
+ * @return the path argument, contents of which may have been modified
+ */
 static char *remove_slash(char *path)
 {
   int len = strlen(path);
@@ -533,10 +575,13 @@ char *GetDefaultSaveDir(const char *suffix)
   return strdup("userdata");
 }
 
-/*
-  Returns heap string containing system font directory.
-  E.g. 'C:\Windows\Fonts'
-*/
+/**
+ * 
+ * Returns heap string containing system font directory.
+ * (e.g. 'C:\Windows\Fonts')
+ *
+ * @return system font dir
+ */
 char *GetSystemFontDir(void)
 {
   char path[MAX_PATH];
@@ -567,6 +612,12 @@ static char *GetUserTempDir(void)
   return strdup(temp);
 }
 
+/**
+ * Get path of a file in a temp directory
+ *
+ * @param name Filename for temp file
+ * @return full path to the temp file
+ */
 char *get_temp_fname(const char *const name)
 {
   char f[512];
@@ -584,6 +635,9 @@ char *get_temp_fname(const char *const name)
 static HHOOK g_hKeyboardHook = NULL;
 static int g_bWindowActive = 0;
 
+/**
+ * FIXME
+ */
 LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
   int bEatKeystroke = 0;
@@ -607,6 +661,9 @@ LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
   return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
 }
 
+/**
+ * FIXME
+ */
 int InstallKeyboardHook(void)
 {
   if (g_hKeyboardHook)
@@ -615,6 +672,9 @@ int InstallKeyboardHook(void)
   return g_hKeyboardHook ? 0 : -2;
 }
 
+/**
+ * FIXME
+ */
 int RemoveKeyboardHook(void)
 {
   if (!g_hKeyboardHook)
@@ -624,6 +684,9 @@ int RemoveKeyboardHook(void)
   return 0;
 }
 
+/**
+ * FIXME
+ */
 void SetActivationState(int state)
 {
   g_bWindowActive = state;

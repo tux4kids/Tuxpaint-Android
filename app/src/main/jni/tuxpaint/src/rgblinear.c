@@ -30,6 +30,13 @@
 #include "rgblinear.h"
 #include "debug.h"
 
+/**
+ * Return sRGB mapping (0-255 byte) of a linear (0.0 to 1.0) value
+ * (see rgblinear.h)
+ *
+ * @param linear Linear (float) value
+ * @return sRGB (byte) value
+ */
 unsigned char linear_to_sRGB(float linear)
 {
   unsigned slot;

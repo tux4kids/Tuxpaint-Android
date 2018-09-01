@@ -44,9 +44,9 @@
 #endif
 
 /*
-	The following section renames global variables defined in SDL_Pango.h to avoid errors during linking.
-	It is okay to rename these variables because they are constants.
-	SDL_Pang.h is included by fonts.h.  
+  The following section renames global variables defined in SDL_Pango.h to avoid errors during linking.
+  It is okay to rename these variables because they are constants.
+  SDL_Pang.h is included by fonts.h.  
 */
 #define _MATRIX_WHITE_BACK _MATRIX_WHITE_BACK1
 #define MATRIX_WHITE_BACK MATRIX_WHITE_BACK1
@@ -68,8 +68,14 @@
 
 
 
-///////////////// directory walking callers and callbacks //////////////////
+/* Directory walking callers and callbacks */
 
+/**
+ * Callback to invoke when loading fonts
+ *
+ * @param screen Screen surface, for animating progress bar.
+ * FIXME
+ */
 void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer,
                        const char *restrict const dir, unsigned dirlen, tp_ftw_str * files, unsigned i,
                        const char *restrict const locale)
@@ -257,15 +263,35 @@ void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer
 }
 
 
-// For qsort()
+/**
+ * Callback for comparing filenames
+ *
+ * @param v1 Filename #1
+ * @param v2 Filename #2
+ * @return An integer less than, equal to, or greater than zero if the
+ *   filename of dir entry 'v1' is found, respectively, to be less than,
+ *   to match, or be greater than that of 'v2'.
+ */
 int compare_ftw_str(const void *v1, const void *v2)
 {
   const char *restrict const s1 = ((tp_ftw_str *) v1)->str;
   const char *restrict const s2 = ((tp_ftw_str *) v2)->str;
 
-  return -strcmp(s1, s2);       /* FIXME: Should we try strcasecmp, to group things together despite uppercase/lowercase in filenames (e.g., Jigsaw* vs jigsaw* Starters)??? -bjk 2009.10.11 */
+  return -strcmp(s1, s2);
+  /* FIXME: Should we try strcasecmp, to group things together despite uppercase/lowercase in filenames (e.g., Jigsaw* vs jigsaw* Starters)??? -bjk 2009.10.11 */
 }
 
+/**
+ * Process a directory full of files, using a callback function to
+ * deal with the files. (For loading fonts, brushes, and stamps)
+ *
+ * @param screen Screen surface, for updating progress bar.
+ * @param dir Directory to Process
+ * @param dirlen Size of directory to process
+ * @param rsrc Dealing with resources? (FIXME: better explanation)
+ * @param fn Callback function to invoke
+ * @param locale Locale, to pass to callback function when applicable (i.e., for fonts), else NULL
+ */
 void tp_ftw(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, char *restrict const dir,
             unsigned dirlen, int rsrc, void (*fn) (SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer,
                                                    const char *restrict const dir, unsigned dirlen, tp_ftw_str * files,
@@ -430,8 +456,7 @@ void tp_ftw(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer
         }
     }
 
-  if (d)
-    closedir(d);
+  closedir(d);
   show_progress_bar_(screen, texture, renderer);
   dir[dirlen] = '\0';           // repair it (clobbered for stat() call above)
 

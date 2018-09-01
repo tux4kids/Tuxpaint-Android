@@ -35,7 +35,14 @@
   
 #include "win32_dirent.h"
 #include "debug.h"
-  DIR * opendir(const char *pSpec) 
+
+/**
+ * Open a directory for reading
+ *
+ * @param pSpec Path of directory to open
+ * @return Opened directory, or NULL on failure
+ */
+DIR * opendir(const char *pSpec) 
 {
   char pathname[MAX_PATH + 2];
 
@@ -46,7 +53,6 @@
   strcat(pathname, "/*");
   pDir->hFind = FindFirstFile(pathname, &pDir->wfd);
   if (pDir->hFind == INVALID_HANDLE_VALUE)
-    
     {
       free(pDir);
       pDir = NULL;
@@ -54,11 +60,24 @@
   return pDir;
 }
 
+/**
+ * Close an opened directory
+ *
+ * @param pDir Opened directory to close.
+ */
 void closedir(DIR * pDir) 
 {
   assert(pDir != NULL);
   free(pDir);
-} struct dirent *readdir(struct DIR *pDir) 
+}
+
+/**
+ * Read an entry from an opened directory.
+ *
+ * @param pDir Opened directory from which to read.
+ * @return The next entry from the directory
+ */
+struct dirent *readdir(struct DIR *pDir) 
 {
   assert(pDir != NULL);
   if (pDir->hFind)
@@ -76,10 +95,30 @@ void closedir(DIR * pDir)
   return NULL;
 }
 
+/**
+ * Callback for sorting directory entries by filenames.
+ *
+ * @param a Directory entry #1
+ * @param b Directory entry #2
+ * @return An integer less than, equal to, or greater than zero if the
+ *   filename of dir entry 'a' is found, respectively, to be less than,
+ *   to match, or be greater than that of 'b'.
+ */
 int alphasort(const void *a, const void *b) 
 {
   return (strcmp((*(const struct dirent **)a)->d_name, (*(const struct dirent **)b)->d_name));
-} static int addToList(int i, struct dirent ***namelist, struct dirent *entry) 
+}
+
+/**
+ * Add directory entry filenames into a list.
+ *
+ * @param i Incoming count of items
+ * @param namelist Pointer to an array of directory entries, which will
+ *   be resized as items are added
+ * @param entry The directory entry to add to 'namelist'
+ * @return New count of items, or -1 on error (e.g., failed malloc())
+ */
+static int addToList(int i, struct dirent ***namelist, struct dirent *entry) 
 {
   int size;
   struct dirent *block;
@@ -96,6 +135,15 @@ int alphasort(const void *a, const void *b)
   return ++i;
 }
 
+/**
+ * Scan a directory
+ *
+ * @param dir Path to the directory to be scanned.
+ * @param namelist Pointer to an array of directory entries, to be filled.
+ * @param select Callback function for selecting items to add to the list.
+ * @param compar Callback for sorting items in the list (via qsort()).
+ * @return Count of items, or -1 on error.
+ */
 int scandir(const char *dir, struct dirent ***namelist, selectCB select, comparCB compar) 
 {
   DIR * pDir;
@@ -108,7 +156,6 @@ int scandir(const char *dir, struct dirent ***namelist, selectCB select, comparC
     return -1;
   count = 0;
   while ((entry = readdir(pDir)) != NULL)
-    
     {
       if (select == NULL || (select != NULL && select(entry)))
         if ((count = addToList(count, namelist, entry)) < 0)
@@ -121,5 +168,3 @@ int scandir(const char *dir, struct dirent ***namelist, selectCB select, comparC
     qsort((void *)(*namelist), (size_t) count, sizeof(struct dirent *), compar);
   return count;
 }
-
-

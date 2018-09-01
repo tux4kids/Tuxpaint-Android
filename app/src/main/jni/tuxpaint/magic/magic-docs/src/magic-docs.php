@@ -1,11 +1,11 @@
-<?
+<?php
 /* This PHP file contains all the documentation for the various Magic Tools
 that are shipped with Tux Paint, as well as code and templates to generate
 individual HTML files for each of them, and an index.html that links to
 them all. */
 
 /* Bill Kendrick <bill@newbreedsoftware.com> */
-/* 2009.10.08 */
+/* Oct. 8, 2009 - August 30, 2018 */
 
 
 /* Authors of the Magic tools: */
@@ -216,6 +216,11 @@ $tools = array(
    'desc'=>'Add random noise and static to your picture.',
    'author'=>$AUTHOR_ANDREWC),
 
+  array('name'=>'Pattern',
+   'desc'=>'Draws a tiled pattern around the picture.',
+   'author'=>$AUTHOR_PERE,
+   'see'=>array('Tiles')),
+
   array('name'=>'Perspective',
    'desc'=>'Click and drag from the corners to change the perspective of your picture.',
    'author'=>$AUTHOR_PERE),
@@ -224,6 +229,10 @@ $tools = array(
    'desc'=>'Draw three swirling brushes at once, in a Picasso style.',
    'author'=>$AUTHOR_ADAMR,
    'see'=>'Rosette', 'Kaleidoscope'),
+
+  array('name'=>'Puzzle',
+   'desc'=>'Slide parts of your picture around like a sliding puzzle.',
+   'author'=>$AUTHOR_ADAMR),
 
   array('name'=>'Rails',
    'desc'=>'Draw connecting locomotive train rails on your picture.',
@@ -299,20 +308,37 @@ $tools = array(
    'author'=>$AUTHOR_PERE,
    'see'=>array('String V', 'String Corner')),
 
-  array('name'=>'TV',
-   'desc'=>'Distort your picture so it looks like it\'s on a television (TV).',
-   'author'=>$AUTHOR_ADAMR),
+  array('name'=>'Symmetry Left/Right',
+   'desc'=>'Paint with relfective symmetry across the horizontal center of the image.',
+   'author'=>$AUTHOR_PERE,
+   'see'=>array('Kaleidoscope', 'Pattern', 'Symmetry Up/Down', 'Tiles')),
+
+  array('name'=>'Symmetry Up/Down',
+   'desc'=>'Paint with relfective symmetry across the vertical center of the image.',
+   'author'=>$AUTHOR_PERE,
+   'see'=>array('Kaleidoscope', 'Pattern', 'Symmetry Left/Right', 'Tiles')),
+
+  array('name'=>'Tiles',
+   'desc'=>'Draws a symettric pattern around the picture.',
+   'author'=>$AUTHOR_PERE,
+   'see'=>array('Pattern')),
 
   array('name'=>'Tint',
    'desc'=>'This changes the color (or hue) of the parts of the picture to the selected color.',
    'author'=>$AUTHOR_KENDRICK,
    'see'=>array('Lighten', 'Darken')),
 
+  array('name'=>'TV',
+   'desc'=>'Distort your picture so it looks like it\'s on a television (TV).',
+   'author'=>$AUTHOR_ADAMR),
+
   array('name'=>'Toothpaste',
    'desc'=>'Paint thick blobs of color on your picture that look like toothpaste.',
    'author'=>$AUTHOR_ANDREWC),
 
-/* FIXME: Tornado */
+  array('name'=>'Tornado',
+   'desc'=>'Draws a tornado effect onto the picture.',
+   'author'=>$AUTHOR_PERE),
 
   array('name'=>'Waves',
    'desc'=>'Click to make the entire picture wavy, side-to-side.  Drag the mouse up and down to change the height of the ripples, and left and right to change the width.  Release the mouse button when it looks the way you like it.', /* FIXME: Dragging went away! */
@@ -329,18 +355,22 @@ $tools = array(
    'author'=>array($AUTHOR_ALBERT, $AUTHOR_KENDRICK),
    'see'=>'Smudge'),
 
+  array('name'=>'Xor Colors',
+   'desc'=>'Colors based on the position drawn on the picture.',
+   'author'=>'Lukasz Dmitrowski|lukasz.dmitrowski@gmail.com'),
+
   array('name'=>'Zoom',
    'desc'=>'Click and drag up to zoom in, or down to zoom out.',
    'author'=>$AUTHOR_PERE),
 );
 
-$fiidx = fopen("../html/index.html", "w");
+$fiidx = fopen("../en/html/index.html", "w");
 
 fwrite($fiidx, page_header("List of Magic Tools"));
 
 foreach ($tools as $t) {
 
-  $shortname = str_replace(' ','', strtolower($t['name']));
+  $shortname = make_shortname($t['name']);
 
   $out = page_header($t['name']);
   $out .= "<h2 align=\"center\">By ";
@@ -362,21 +392,21 @@ foreach ($tools as $t) {
     $out .= "<p>See also: ";
     if (is_array($t['see'])) {
       foreach ($t['see'] as $s) {
-        $out .= "<a href=\"".str_replace(' ', '', strtolower($s)).".html\">".$s."</a> ";
+        $out .= "<a href=\"".make_shortname($s).".html\">".$s."</a> ";
       }
     } else {
-      $out .= "<a href=\"".str_replace(' ', '', strtolower($t['see'])).".html\">".$t['see']."</a>";
+      $out .= "<a href=\"".make_shortname($t['see']).".html\">".$t['see']."</a>";
     }
     $out .= "</p>\n";
   }
 
-  if (file_exists("../html/images/ex_".$shortname.".png")) {
+  if (file_exists("../en/html/images/ex_".$shortname.".png")) {
     $out .= "<p align=center><img src=\"images/ex_".$shortname.".png\"></p>\n";
   }
 
   $out .= page_footer();
 
-  $fi = fopen("../html/".$shortname.".html", "w");
+  $fi = fopen("../en/html/".$shortname.".html", "w");
   fwrite($fi, $out);
   fclose($fi);
 
@@ -402,6 +432,10 @@ function page_header($title)
 function page_footer()
 {
   return "</body></html>";
+}
+
+function make_shortname($name) {
+  return preg_replace("/[^a-z]/", "_", strtolower($name));
 }
 
 ?>

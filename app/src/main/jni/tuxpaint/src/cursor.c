@@ -49,6 +49,11 @@ int no_fancy_cursors = 1;
 int no_fancy_cursors;
 #endif
 
+/**
+ * Set the current cursor shape.
+ *
+ * @param c The cursor shape to use.
+ */
 void do_setcursor(SDL_Cursor * c)
 {
   /* Shut GCC up over the fact that the XBMs are #included within cursor.h
@@ -81,6 +86,11 @@ void do_setcursor(SDL_Cursor * c)
     SDL_SetCursor(c);
 }
 
+/**
+ * Free (deallocate) a cursor.
+ *
+ * @param cursor Pointer to a cursor to free; will be set to point to NULL afterwards.
+ */
 void free_cursor(SDL_Cursor ** cursor)
 {
   if (*cursor)

@@ -76,6 +76,10 @@ static char *android_locale()
 
 static int langint = LANG_EN;
 
+/* Strings representing each language's ISO 639 (-1 or -2) codes.
+ * Should map to the 'enum' of possible languages ("LANG_xxx")
+ * found in "i18n.h" (where "NUM_LANGS" is found, as the final
+ * entry in the 'enum' list). */
 const char *lang_prefixes[NUM_LANGS] = {
   "ach",
   "af",
@@ -209,7 +213,7 @@ const char *lang_prefixes[NUM_LANGS] = {
 };
 
 
-// languages which don't use the default font
+/* Languages which don't use the default font */
 static int lang_use_own_font[] = {
   LANG_AR,
   LANG_BO,
@@ -227,6 +231,7 @@ static int lang_use_own_font[] = {
   -1
 };
 
+/* Languages which are written right-to-left */
 static int lang_use_right_to_left[] = {
   LANG_AR,
   LANG_FA,
@@ -237,6 +242,7 @@ static int lang_use_right_to_left[] = {
   -1
 };
 
+/* FIXME: */
 static int lang_use_right_to_left_word[] = {
 #ifdef NO_SDLPANGO
   LANG_HE,
@@ -244,6 +250,8 @@ static int lang_use_right_to_left_word[] = {
   -1
 };
 
+/* Languages which require a vertical 'nudge' in
+ * text rendering, and by how much? */
 static int lang_y_nudge[][2] = {
   {LANG_KM, 4},
   {-1, -1}
@@ -258,6 +266,13 @@ const char *lang_prefix, *short_lang_prefix;
 int num_wished_langs = 0;
 w_langs wished_langs[255];
 
+/* Mappings from human-readable language names (found in
+ * config files, or command-line arguments) to the precise
+ * local code to use.  Some locales appear multiple times,
+ * (e.g. "de_DE.UTF-8" is represented by both "german"
+ * (the English name of the language) and "deutsch"
+ * (the German name of the language)).
+ */
 static const language_to_locale_struct language_to_locale_array[] = {
   {"english", "C"},
   {"american-english", "C"},
@@ -446,13 +461,20 @@ static const language_to_locale_struct language_to_locale_array[] = {
   {"zulu", "zu_ZA.UTF-8"}
 };
 
-/* FIXME: All this should REALLY be array-based!!! */
-/* Show available languages: */
+
+/**
+ * Show available languages
+ *
+ * @param exitcode Exit code; also determines whether STDERR or STDOUT used.
+ *   (e.g., is this output of "--lang help" (STDOUT & exit 0),
+ *   or complaint of an inappropriate "--lang" argument (STDERR & exit 1)?)
+ */
 static void show_lang_usage(int exitcode)
 {
   FILE *f = exitcode ? stderr : stdout;
   const char *const prg = "tuxpaint";
 
+  /* FIXME: All this should REALLY be array-based!!! */
   fprintf(f, "\n" "Usage: %s [--lang LANGUAGE]\n" "\n" "LANGUAGE may be one of:\n"
 /* C */ "  english      american-english\n"
 /* ach */ "  acholi       acoli\n"
@@ -588,10 +610,15 @@ static void show_lang_usage(int exitcode)
 }
 
 
-/* FIXME: Add accented characters to the descriptions */
-/* Show available locales: */
+/**
+ * Show available locales as a "usage" output
+ *
+ * @param f File descriptor to write to (e.g., STDOUT or STDERR)
+ * @param prg Program name (e.g., "tuxpaint" or "tuxpaint.exe")
+ */
 static void show_locale_usage(FILE * f, const char *const prg)
 {
+  /* FIXME: Add accented characters to the descriptions */
   fprintf(f,
           "\n"
           "Usage: %s [--locale LOCALE]\n"
@@ -725,13 +752,23 @@ static void show_locale_usage(FILE * f, const char *const prg)
           "  xh_ZA   (Xhosa)\n" "  zam     (Zapoteco-Miahuatlan)\n" "  zu_ZA   (Zulu)\n" "\n", prg);
 }
 
-
+/**
+ * Return the current language
+ *
+ * @return The current language (one of the LANG_xxx enums)
+ */
 int get_current_language(void)
 {
   return langint;
 }
 
-
+/**
+ * Search an array of ints for a given int
+ *
+ * @param l The int to search for
+ * @param array The array of ints to search, terminated by -1
+ * @return 1 if "l" is found in "array", 0 otherwise
+ */
 static int search_int_array(int l, int *array)
 {
   int i;
@@ -745,12 +782,16 @@ static int search_int_array(int l, int *array)
   return 0;
 }
 
-// This is to ensure that iswprint() works beyond ASCII,
-// even if the locale wouldn't normally support that.
+/**
+ * Ensures that iswprint() works beyond ASCII,
+ * even if the locale wouldn't normally support that.
+ * Tries fallback locales until one works.
+ * Emits an error message to STDERR if none work.
+ */
 static void ctype_utf8(void)
 {
 #ifndef _WIN32
-  /*  FIXME: should this iterate over more locales?
+  /* FIXME: should this iterate over more locales?
      A zapotec speaker may have es_MX.UTF-8 available but not have en_US.UTF-8 for example */
   const char *names[] = { "en_US.UTF8", "en_US.UTF-8", "UTF8", "UTF-8", "C.UTF-8" };
   int i = sizeof(names) / sizeof(names[0]);
@@ -768,7 +809,12 @@ static void ctype_utf8(void)
 #endif
 }
 
-
+/**
+ * For a given language, return its local, or exit with a usage error.
+ *
+ * @param langstr Name of language (e.g., "german")
+ * @return Locale (e.g., "de_DE.UTF-8")
+ */
 static const char *language_to_locale(const char *langstr)
 {
   int i = sizeof language_to_locale_array / sizeof language_to_locale_array[0];
@@ -785,6 +831,12 @@ static const char *language_to_locale(const char *langstr)
   return NULL;
 }
 
+/**
+ * Set language ("langint" global) based on a given locale;
+ * will try a few ways of checking, is case-insensitive, etc.
+ *
+ * @param loc Locale (e.g., "pt_BR.UTF-8", "pt_BR", "pt_br", etc.)
+ */
 static void set_langint_from_locale_string(const char *restrict loc)
 {
   char *baseloc = strdup(loc);
@@ -893,10 +945,10 @@ static void set_langint_from_locale_string(const char *restrict loc)
         }
     }
 
-/* Last resource, we should never arrive here, this check depends
-   on the right order in lang_prefixes[] 
-   Languages sharing the same starting letters must be ordered 
-   from longest to shortest, like currently are pt_BR and pt */
+  /* Last resort, we should never arrive here, this check depends
+     on the right order in lang_prefixes[] 
+     Languages sharing the same starting letters must be ordered 
+     from longest to shortest, like currently are pt_BR and pt */
 // if (found == 0)
   // printf("Language still not found: loc= %s  Trying reverse check as last resource...\n", loc);
 
@@ -923,6 +975,14 @@ static void set_langint_from_locale_string(const char *restrict loc)
 #undef HAVE_SETENV
 #endif
 
+
+/**
+ * Set an environment variable.
+ * (Wrapper for setenv() or putenv(), depending on OS)
+ *
+ * @param name Variable to set
+ * @param value Value to set the variable to
+ */
 static void mysetenv(const char *name, const char *value)
 {
 #ifdef HAVE_SETENV
@@ -937,8 +997,15 @@ static void mysetenv(const char *name, const char *value)
 }
 
 
+/**
+ * Attempt to set Tux Paint's UI language.
+ *
+ * @param loc Locale
+ * @return The Y-nudge value for font rendering in the language.
+ */
 static int set_current_language(const char *restrict locale_choice) MUST_CHECK;
-     static int set_current_language(const char *restrict loc)
+
+static int set_current_language(const char *restrict loc)
 {
   int i;
   int y_nudge = 0;
@@ -1112,6 +1179,17 @@ static int set_current_language(const char *restrict locale_choice) MUST_CHECK;
   return wished_langs[0].lang_y_nudge;
 }
 
+
+/**
+ * Given a locale (e.g., "de_DE.UTF-8" or a language name (e.g., "german"),
+ * attempt to set Tux Paint's UI language.  Show help, and exit,
+ * if asked (either 'locale' or 'lang' are "help"), or if the
+ * given input is not recognized.
+ *
+ * @param lang Language name (or NULL)
+ * @param locale Locale (or NULL)
+ * @return Y-nudge
+ */
 int setup_i18n(const char *restrict lang, const char *restrict locale)
 {
 #ifdef DEBUG
@@ -1142,6 +1220,9 @@ int setup_i18n(const char *restrict lang, const char *restrict locale)
 }
 
 #ifdef NO_SDLPANGO
+/**
+ * FIXME
+ */
 int smash_i18n(void)
 {
   return set_current_language("C");

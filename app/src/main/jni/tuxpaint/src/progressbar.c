@@ -34,6 +34,11 @@
 SDL_Surface *img_progress;
 int progress_bar_disabled, prog_bar_ctr;
 
+/**
+ * Draw & animate (as function is called repeatedly) the progress bar.
+ *
+ * @param screen Screen surface
+ */
 void show_progress_bar_(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer)
 {
   SDL_Rect dest, src, r;

@@ -2,13 +2,13 @@ CHANGES.txt for Tux Paint
 
 Tux Paint - A simple drawing program for children.
 
-Copyright (c) 2002-2017 by Bill Kendrick and others
-bill@newbreedsoftware.com
+Copyright (c) 2002-2018
+Various contributors (see below, and AUTHORS.txt)
 http://www.tuxpaint.org/
 
 $Id$
 
-2018.xxx.x (0.9.23)
+2018.August.30 (0.9.23)
   * New tools
     ---------
     * Color selector
@@ -35,27 +35,27 @@ $Id$
   * New locales
     -----------
     * Bengali
-      Provided by chandrakant dhutadmal
+      Provided by Chandrakant Dhutadmal
 
     * Bodo
-      Provided by chandrakant dhutadmal
+      Provided by Chandrakant Dhutadmal
 
     * Dogri
-      Provided by chandrakant dhutadmal
+      Provided by Chandrakant Dhutadmal
 
     * Kabyle (aka Kabylian)
       Yacine Bouklif <yacine_tizi2003@yahoo.fr>
 
     * Kashmiri (Devanagari)
     * Kashmiri (Perso-Arabic)
-      Provided by chandrakant dhutadmal
+      Provided by Chandrakant Dhutadmal
 
     * Sindhi (Devanagari)
     * Sindhi (Perso-Arabic)
-      Provided by chandrakant dhutadmal
+      Provided by Chandrakant Dhutadmal
 
     * Urdu
-      Provided by chandrakant dhutadmal
+      Provided by Chandrakant Dhutadmal
 
   * Localization Updates:
     ---------------------
@@ -172,17 +172,38 @@ $Id$
       the wrong(lossy) way, the program will crash
       (SF.net Bug #210)
 
-    * Fix text not displaying on systems without Fontconfig installed.
-      Mark K. Kim <mkkim214@gmail.com>
+    * "Hat" started could not be drawn on.  Mended.
+      https://sourceforge.net/p/tuxpaint/bugs/202/
 
-  * Ports
-    -----
+  * Ports & Building
+    ----------------
     * Rewrote the macOS build system to be more Linux-like, with no XCode IDE.
       Build for older releases of macOS / Mac OS X (10.6 and later).
       Mark K. Kim <mkkim214@gmail.com>
 
     * Mac install creates a DMG
       Robert Buj Gelonch <rbuj@users.sf.net>
+      Mark K. Kim <mkkim214@gmail.com>
+
+    * Allow override override build date (in order to make builds reproducible)
+      ("SOURCE_DATE_EPOCH")
+      by Chris Lamb, pushed by Bernhard M. Wiedemann
+
+    * Allow specifying a suffix to the "lib" directory where
+      magic tools are installed.
+      ("LIBDIRSUFFIX")
+      Tim Dickson <dickson.tim@googlemail.com>
+
+    * Install Tux Paint docs into a version-numbered directory
+      (e.g., "/usr/local/share/doc/tuxpaint-0.9.23/")
+      Tim Dickson <dickson.tim@googlemail.com>
+
+    * Launcher icon installation location adjustments:
+      * .../X11R6/include/X11/pixmaps/ -> .../share/pixmaps/
+      * Using kde4config (vs kdeconfig); not putting things in "Graphics" subdir.
+      * Removed gnome-config stuff
+      Tim Dickson <dickson.tim@googlemail.com>
+      Bill Kendrick <bill@newbreedsoftware.com>
 
   * Other Improvements:
     -------------------
