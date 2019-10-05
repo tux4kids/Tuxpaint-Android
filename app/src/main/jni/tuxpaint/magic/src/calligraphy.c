@@ -4,7 +4,7 @@
   Calligraphy Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2019 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: August 29, 2019
   $Id$
 */
 
@@ -137,7 +137,6 @@ void calligraphy_drag(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface *
 {
   Point2D *curve;
   int i, n_points, thick, new_thick;
-  Uint32 colr;
   SDL_Rect src, dest;
 
 //  if (SDL_GetTicks() < calligraphy_last_time + 5)
@@ -184,8 +183,6 @@ void calligraphy_drag(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface *
 
   calligraphy_ComputeBezier(calligraphy_control_points, n_points, curve);
 
-  colr = SDL_MapRGB(canvas->format, calligraphy_r, calligraphy_g, calligraphy_b);
-
   new_thick = 40 - min((n_points /* / 2 */ ), 32);
 
   for (i = 0; i < n_points - 1; i++)
@@ -218,23 +215,6 @@ void calligraphy_drag(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface *
       dest.y = y;
 
       SDL_BlitSurface(calligraphy_colored_brush, &src, canvas, &dest);
-
-      /* Old way; using putpixel:
-         SDL_LockSurface(canvas);
-
-         for (j = -(thick / 2); j < (thick / 2) + 1; j++)
-         {
-         x = curve[i].x + j;
-         y = curve[i].y - (j / 2); // 30 degrees
-
-         api->putpixel(canvas, x, y, colr);
-         api->putpixel(canvas, x + 1, y, colr);
-         api->putpixel(canvas, x, y + 1, colr);
-         api->putpixel(canvas, x + 1, y + 1, colr);
-         }
-
-         SDL_UnlockSurface(canvas);
-       */
     }
 
   calligraphy_old_thick = (calligraphy_old_thick + new_thick) / 2;

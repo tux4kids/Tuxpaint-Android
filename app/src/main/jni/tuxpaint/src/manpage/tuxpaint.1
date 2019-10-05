@@ -1,5 +1,5 @@
-.\" tuxpaint.1 - 2018.08.19
-.TH TUXPAINT 1 "19 August 2018" "0.9.23" "Tux Paint"
+.\" tuxpaint.1 - 2019.09.25
+.TH TUXPAINT 1 "25 September 2019" "0.9.24" "Tux Paint"
 .SH NAME
 tuxpaint -- "Tux Paint", a drawing program for young children.
 
@@ -9,7 +9,7 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 
 .TP 9
 .B tuxpaint
-[\-\-fullscreen]
+[\-\-fullscreen {yes|native|no}]
 .br
 [\-\-allowscreensaver]
 .br
@@ -22,6 +22,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-startblank]
 .br
 [\-\-nosound]
+.br
+[\-\-nostereo]
 .br
 [\-\-noquit]
 .br
@@ -60,6 +62,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-nomagiccontrols]
 .br
 [\-\-nolabel]
+.br
+[\-\-newcolorslast]
 .br
 [\-\-mirrorstamps]
 .br
@@ -151,6 +155,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 .br
 [\-\-sound]
 .br
+[\-\-stereo]
+.br
 [\-\-quit]
 .br
 [\-\-print]
@@ -186,6 +192,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-magiccontrols]
 .br
 [\-\-label]
+.br
+[\-\-newcolorsfirst]
 .br
 [\-\-dontmirrorstamps]
 .br
@@ -252,8 +260,11 @@ Show the license (GNU GPL) under which Tux Paint is released.
 They can be used along with, instead of, or to override options set in
 configuration files. (See below.)
 .TP 8
-.B \-\-fullscreen \-\-windowed
-Run \fITux Paint\fP in full-screen mode, or in a window (default).
+.B \-\-fullscreen=yes \-\-fullscreen=native \-\-fullscreen=no \-\-windowed
+Run \fITux Paint\fP in full-screen mode at its default -- or a specified
+-- screen resolution ("--fullscreen=yes"); or in full-screen mode at the
+system's native resolution ("--fullscreen=native"); or run in a window
+("--fullscreen=no" or "--windowed") (default).
 
 .TP 8
 .B \-\-allowscreensaver \-\-disablescreensaver
@@ -273,7 +284,7 @@ orientations are both supported.  (Also see \-\-orient, below.)
 
 .TP 8
 .B \-\-orient=landscape \-\-orient=portrait
-If \-\-orient=portraitis set, asks \fITux Paint\fP to swap the WIDTH and HEIGHT
+If \-\-orient=portrait is set, asks \fITux Paint\fP to swap the WIDTH and HEIGHT
 values it uses for windowed or fullscreen mode, without having to actually
 change the WIDTH and HEIGHT values in the configuration file or on the
 command-line. (This is useful on devices where the screen can be rotated,
@@ -282,6 +293,10 @@ e.g. tablet PCs.)
 .TP 8
 .B \-\-nosound \-\-sound
 Disable or enable (default) sound.
+
+.TP 8
+.B \-\-nostereo \-\-stereo
+Disable or enable (default) stereo panning support.
 
 .TP 8
 .B \-\-noquit \-\-quit
@@ -407,6 +422,11 @@ controllable.)
 .B \-\-nolabel \-\-label
 Disable or enable (default) the \fILabel\fP tool, which lets you create
 text which can be altered or moved later.
+
+.TP 8
+.B \-\-newcolorslast \-\-newcolorsfirst
+List solid (blank) colors at the end, or beginning (default) of the
+options displayed when using the \fINew\fP tool to start a new picture.
 
 .TP 8
 .B \-\-mirrorstamps \-\-dontmirrorstamps
@@ -1154,9 +1174,8 @@ Pablo Pita,
 Milan Plzik,
 Sergei Popov,
 John Popplewell,
-Rodrigo Perez Ramirez and Indigenas Sin Fronteras,
 Adam 'foo-script' Rakowski,
-Rodrigo Perez Ramirez,
+Rodrigo Perez Ramirez and Indigenas Sin Fronteras,
 Robert Readman,
 Leandro Regueiro,
 Simona Riva,

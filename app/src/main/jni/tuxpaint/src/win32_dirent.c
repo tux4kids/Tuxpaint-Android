@@ -1,16 +1,16 @@
-/****************************************************/  
-/*                                                  */ 
-/* For Win32 that lacks Unix direct support.        */ 
-/*    - avoids including "windows.h"                */ 
-/*                                                  */ 
-/* Copyright (c) 2002 John Popplewell               */ 
-/* john@johnnypops.demon.co.uk                      */ 
-/*                                                  */ 
-/* Version 1.0.1 - fixed bug in opendir()           */ 
-/* Version 1.0.0 - initial version                  */ 
-/*                                                  */ 
-/****************************************************/ 
-  
+/****************************************************/
+/*                                                  */
+/* For Win32 that lacks Unix direct support.        */
+/*    - avoids including "windows.h"                */
+/*                                                  */
+/* Copyright (c) 2002 John Popplewell               */
+/* john@johnnypops.demon.co.uk                      */
+/*                                                  */
+/* Version 1.0.1 - fixed bug in opendir()           */
+/* Version 1.0.0 - initial version                  */
+/*                                                  */
+/****************************************************/
+
 /*
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -25,14 +25,14 @@
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/ 
-  
-/* $Id$ */ 
-  
+*/
+
+/* $Id$ */
+
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-  
+
 #include "win32_dirent.h"
 #include "debug.h"
 
@@ -42,11 +42,12 @@
  * @param pSpec Path of directory to open
  * @return Opened directory, or NULL on failure
  */
-DIR * opendir(const char *pSpec) 
+DIR *opendir(const char *pSpec)
 {
   char pathname[MAX_PATH + 2];
 
-  DIR * pDir = calloc(1, sizeof(DIR));
+  DIR *pDir = calloc(1, sizeof(DIR));
+
   if (!pDir)
     return NULL;
   strcpy(pathname, pSpec);
@@ -65,7 +66,7 @@ DIR * opendir(const char *pSpec)
  *
  * @param pDir Opened directory to close.
  */
-void closedir(DIR * pDir) 
+void closedir(DIR * pDir)
 {
   assert(pDir != NULL);
   free(pDir);
@@ -77,15 +78,15 @@ void closedir(DIR * pDir)
  * @param pDir Opened directory from which to read.
  * @return The next entry from the directory
  */
-struct dirent *readdir(struct DIR *pDir) 
+struct dirent *readdir(struct DIR *pDir)
 {
   assert(pDir != NULL);
   if (pDir->hFind)
-    
+
     {
       strcpy(pDir->de.d_name, (const char *)pDir->wfd.cFileName);
       if (!FindNextFile(pDir->hFind, &pDir->wfd))
-        
+
         {
           FindClose(pDir->hFind);
           pDir->hFind = NULL;
@@ -104,7 +105,7 @@ struct dirent *readdir(struct DIR *pDir)
  *   filename of dir entry 'a' is found, respectively, to be less than,
  *   to match, or be greater than that of 'b'.
  */
-int alphasort(const void *a, const void *b) 
+int alphasort(const void *a, const void *b)
 {
   return (strcmp((*(const struct dirent **)a)->d_name, (*(const struct dirent **)b)->d_name));
 }
@@ -118,7 +119,7 @@ int alphasort(const void *a, const void *b)
  * @param entry The directory entry to add to 'namelist'
  * @return New count of items, or -1 on error (e.g., failed malloc())
  */
-static int addToList(int i, struct dirent ***namelist, struct dirent *entry) 
+static int addToList(int i, struct dirent ***namelist, struct dirent *entry)
 {
   int size;
   struct dirent *block;
@@ -144,9 +145,9 @@ static int addToList(int i, struct dirent ***namelist, struct dirent *entry)
  * @param compar Callback for sorting items in the list (via qsort()).
  * @return Count of items, or -1 on error.
  */
-int scandir(const char *dir, struct dirent ***namelist, selectCB select, comparCB compar) 
+int scandir(const char *dir, struct dirent ***namelist, selectCB select, comparCB compar)
 {
-  DIR * pDir;
+  DIR *pDir;
   int count;
   struct dirent *entry;
 

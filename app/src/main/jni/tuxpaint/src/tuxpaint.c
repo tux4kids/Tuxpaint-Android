@@ -3,7 +3,7 @@
 
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2018
+  Copyright (c) 2002-2019
   by various contributors; see AUTHORS.txt
   http://www.tuxpaint.org/
 
@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - August 28, 2018
+  June 14, 2002 - September 21, 2019
 */
 
 
@@ -38,6 +38,8 @@
 
 /* Color depth for Tux Paint to run in, and store canvases in: */
 
+/* *INDENT-OFF* */
+
 #if defined(NOKIA_770)
 #define VIDEO_BPP 16
 #endif
@@ -47,22 +49,19 @@
 #endif
 
 #ifndef VIDEO_BPP
-                                                                               /*# define VIDEO_BPP 15 *//* saves memory */
-                                                                               /*# define VIDEO_BPP 16 *//* causes discoloration */
-                                                                               /*# define VIDEO_BPP 24 *//* compromise */
-#define VIDEO_BPP 32            /* might be fastest, if conversion funcs removed */
+    /*# define VIDEO_BPP 15 *//* saves memory */
+    /*# define VIDEO_BPP 16 *//* causes discoloration */
+    /*# define VIDEO_BPP 24 *//* compromise */
+    #define VIDEO_BPP 32      /* might be fastest, if conversion funcs removed */
 #endif
 
-
-                                                                                     /* #define CORNER_SHAPES *//* need major work! */
-
+/* #define CORNER_SHAPES *//* need major work! */
 
 /* Method for printing images: */
 
 #define PRINTMETHOD_PS          /* Direct to PostScript */
-                                                                                                  /*#define PRINTMETHOD_PNM_PS *//* Output PNM, assuming it gets printed */
-                                                                                                          /*#define PRINTMETHOD_PNG_PNM_PS *//* Output PNG, assuming it gets printed */
-
+/*#define PRINTMETHOD_PNM_PS *//* Output PNM, assuming it gets printed */
+/*#define PRINTMETHOD_PNG_PNM_PS *//* Output PNG, assuming it gets printed */
 
 #define MAX_PATH 256
 
@@ -110,6 +109,8 @@
 #else
 #define TPAINT_AMASK 0x000000ff
 #endif
+
+/* *INDENT-ON* */
 
 static unsigned draw_colors(unsigned action);
 
@@ -302,6 +303,17 @@ typedef struct safer_dirent
 
 #else /* __BEOS__ */
 
+/* Not BeOS */
+
+#ifdef __APPLE__
+
+/* Apple */
+
+#include "macos_print.h"
+
+#else /* __APPLE__ */
+
+/* Not Windows, not BeOS, not Apple */
 #ifdef __ANDROID__
 
 #define AUTOSAVE_GOING_BACKGROUND
@@ -310,11 +322,13 @@ typedef struct safer_dirent
 
 #else
 
-/* Not Windows, not BeOS, not Android */
+/* Not Windows, not BeOS, not Apple, not Android*/
 
 #include "postscript_print.h"
 
 #endif /* __ANDROID__ */
+
+#endif /* __APPLE__ */
 
 #endif /* __BEOS__ */
 
@@ -371,7 +385,7 @@ static void mtw(wchar_t * wtok, char *tok)
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_thread.h"
 
-#if !defined(_SDL_H)
+#if !defined(_SDL_H) && !defined(SDL_h_)
 #error "---------------------------------------------------"
 #error "If you installed SDL from a package, be sure to get"
 #error "the development package, as well!"
@@ -381,7 +395,7 @@ static void mtw(wchar_t * wtok, char *tok)
 
 #include "SDL2/SDL_image.h"
 
-#if !defined(_SDL_IMAGE_H) && !defined(_IMG_h)
+#if !defined(_SDL_IMAGE_H) && !defined(_IMG_h) && !defined(SDL_IMAGE_H_)
 #error "---------------------------------------------------"
 #error "If you installed SDL_image from a package, be sure"
 #error "to get the development package, as well!"
@@ -391,7 +405,7 @@ static void mtw(wchar_t * wtok, char *tok)
 
 #include "SDL2/SDL_ttf.h"
 
-#if !defined(_SDL_TTF_H) && !defined(_SDLttf_h)
+#if !defined(_SDL_TTF_H) && !defined(_SDLttf_h) && !defined(SDL_TTF_H_)
 #error "---------------------------------------------------"
 #error "If you installed SDL_ttf from a package, be sure"
 #error "to get the development package, as well!"
@@ -437,7 +451,7 @@ static void mtw(wchar_t * wtok, char *tok)
 
 #include "SDL2/SDL_mixer.h"
 
-#if !defined(_SDL_MIXER_H) && !defined(_MIXER_H_)
+#if !defined(_SDL_MIXER_H) && !defined(_MIXER_H_) && !defined(SDL_MIXER_H_)
 #error "---------------------------------------------------"
 #error "If you installed SDL_mixer from a package, be sure"
 #error "to get the development package, as well!"
@@ -464,9 +478,7 @@ static void mtw(wchar_t * wtok, char *tok)
 #else
 
 #include <librsvg/rsvg.h>
-#include <librsvg/rsvg-cairo.h>
-/* #include "rsvg.h" */
-/* #include "rsvg-cairo.h" */
+
 #if !defined(RSVG_H) || !defined(RSVG_CAIRO_H)
 #error "---------------------------------------------------"
 #error "If you installed libRSVG from packages, be sure"
@@ -512,6 +524,8 @@ static void mtw(wchar_t * wtok, char *tok)
 #include "sounds.h"
 #include "tip_tux.h"
 #include "great.h"
+
+#include "fill.h"
 
 #include "im.h"
 
@@ -566,7 +580,9 @@ static void mtw(wchar_t * wtok, char *tok)
 int TP_EventFilter(void *data, const SDL_Event * event);
 
 
-                                                                     /* #define fmemopen_alternative *//* Uncomment this to test the fmemopen alternative in systems were fmemopen exists */
+/* *INDENT-OFF* */
+/* #define fmemopen_alternative *//* Uncomment this to test the fmemopen alternative in systems were fmemopen exists */
+/* *INDENT-ON* */
 
 #if defined (WIN32) || defined (__APPLE__) || defined(__NetBSD__) || defined(__sun) || defined(__ANDROID__)     /* MINGW/MSYS, NetBSD, and MacOSX need it, at least for now */
 #define fmemopen_alternative
@@ -694,7 +710,10 @@ typedef struct
   Uint8 rows, cols;
 } grid_dims;
 
-                                                                                              /* static SDL_Rect r_screen; *//* was 640x480 @ 0,0  -- but this isn't so useful */
+/* *INDENT-OFF* */
+/* static SDL_Rect r_screen; *//* was 640x480 @ 0,0  -- but this isn't so useful */
+/* *INDENT-ON* */
+
 static SDL_Rect r_canvas;       /* was 448x376 @ 96,0 */
 static SDL_Rect r_tools;        /* was 96x336 @ 0,40 */
 static SDL_Rect r_sfx;
@@ -721,7 +740,9 @@ static grid_dims gd_tools;      /* was 2x7 */
 static grid_dims gd_sfx;
 static grid_dims gd_toolopt;    /* was 2x7 */
 
-                                                                                                /* static grid_dims gd_open; *//* was 4x4 */
+/* *INDENT-OFF* */
+/* static grid_dims gd_open; *//* was 4x4 */
+/* *INDENT-ON* */
 static grid_dims gd_colors;     /* was 17x1 */
 
 #define HEIGHTOFFSET (((WINDOW_HEIGHT - 480) / 48) * 48)
@@ -1274,12 +1295,14 @@ static int disable_save;
 static int ok_to_use_lockfile = 1;
 static int start_blank;
 static int autosave_on_quit;
+static int no_prompt_on_quit = 0;
 
 static int dont_do_xor;
 static int dont_load_stamps;
 static int mirrorstamps;
 static int disable_stamp_controls;
 static int stamp_size_override = -1;
+static int new_colors_last;
 
 #ifdef NOKIA_770
 static int simple_shapes = 1;
@@ -1450,7 +1473,7 @@ enum
 static magic_api *magic_api_struct;     /* Pointer to our internal functions; passed to shared object's functions when we call them */
 
 
-#if !defined(WIN32) && !defined(__BEOS__) && !defined(__HAIKU__) && !defined(__ANDROID__)
+#if !defined(WIN32) && !defined(__APPLE__) && !defined(__BEOS__) && !defined(__HAIKU__) && !defined(__ANDROID__)
 #include <paper.h>
 #if !defined(PAPER_H)
 #error "---------------------------------------------------"
@@ -1753,6 +1776,7 @@ typedef struct stamp_type
 #ifndef NOSOUND
   Mix_Chunk *ssnd;
   Mix_Chunk *sdesc;
+  unsigned sound_processed:1;
 #endif
 
   SDL_Surface *thumbnail;
@@ -1784,6 +1808,8 @@ typedef struct stamp_type
 
   unsigned is_svg:1;
 } stamp_type;
+
+static void get_stamp_thumb(stamp_type * sd, int process_sound);
 
 #define MAX_STAMP_GROUPS 256
 
@@ -2046,6 +2072,8 @@ static void get_new_file_id(void);
 static int do_quit(int tool);
 static int do_open(void);
 static int do_new_dialog(void);
+static int do_new_dialog_add_colors(SDL_Surface * *thumbs, int num_files, int *d_places, char * *d_names,
+                                    char * *d_exts, int *white_in_palette);
 static int do_color_picker(void);
 static int do_color_sel(void);
 static int do_slideshow(void);
@@ -2116,16 +2144,18 @@ static char *debug_gettext(const char *str);
 static int charsize(Uint16 c);
 #endif
 
-static SDL_Surface *load_kpx(char *file);
+static SDL_Surface *load_kpx(const char *file);
 
 #ifndef NOSVG
-static SDL_Surface *load_svg(char *file);
+static SDL_Surface *load_svg(const char *file);
 static float pick_best_scape(unsigned int orig_w, unsigned int orig_h, unsigned int max_w, unsigned int max_h);
 #endif
-static SDL_Surface *myIMG_Load_RWops(char *file);
-static SDL_Surface *myIMG_Load(char *file);
+static SDL_Surface *myIMG_Load_RWops(const char *file);
+static SDL_Surface *myIMG_Load(const char *file);
 static int trash(char *path);
 int file_exists(char *path);
+
+int generate_fontconfig_cache_spinner(SDL_Surface * screen);
 
 
 #define MAX_UTF8_CHAR_LENGTH 6
@@ -2716,6 +2746,14 @@ static void mainloop(void)
 
                   magic_switchin(canvas);
                 }
+#ifdef __APPLE__
+              else if (key == SDLK_p && (mod & KMOD_CTRL) && (mod & KMOD_SHIFT) && !noshortcuts)
+                {
+                  /* Ctrl-Shft-P - Page Setup */
+                  if (!disable_print)
+                    DisplayPageSetup(canvas);
+                }
+#endif
               else if (key == SDLK_p && (mod & KMOD_CTRL) && !noshortcuts)
                 {
                   /* Ctrl-P - Print */
@@ -3225,6 +3263,12 @@ static void mainloop(void)
                               num_things = num_brushes;
                               thing_scroll = &brush_scroll;
                               draw_brushes();
+                              draw_colors(COLORSEL_ENABLE);
+                            }
+                          else if (cur_tool == TOOL_FILL)
+                            {
+                              keybd_flag = 0;
+                              draw_none();
                               draw_colors(COLORSEL_ENABLE);
                             }
                           else if (cur_tool == TOOL_SHAPES)
@@ -4196,6 +4240,13 @@ static void mainloop(void)
                           /* Only play when picking a different stamp */
                           if (toolopt_changed && !mute)
                             {
+			      /* If the sound hasn't been loaded yet, do it now */
+
+			      if (!stamp_data[stamp_group][cur_thing]->sound_processed)
+				{
+				  get_stamp_thumb(stamp_data[stamp_group][cur_thing], 1);
+				}
+
                               /* If there's an SFX, play it! */
 
                               if (stamp_data[stamp_group][cur_thing]->ssnd != NULL)
@@ -4563,6 +4614,35 @@ static void mainloop(void)
                       if (mouseaccessibility)
                         emulate_button_pressed = !emulate_button_pressed;
                     }
+                  else if (cur_tool == TOOL_FILL)
+                    {
+                      Uint32 draw_color, canv_color;
+
+                      /* Fill */
+
+                      draw_color = SDL_MapRGB(canvas->format,
+                                     color_hexes[cur_color][0],
+                                     color_hexes[cur_color][1],
+                                     color_hexes[cur_color][2]);
+                      canv_color = getpixels[canvas->format->BytesPerPixel] (canvas, old_x, old_y);
+
+                      if (would_flood_fill(canvas, draw_color, canv_color))
+                        {
+                          /* We only bother recording an undo buffer
+                             (which may kill our redos) if we're about
+                             to actually change the picture */
+                          int x1, y1, x2, y2;
+
+                          rec_undo_buffer();
+
+                          x1 = x2 = old_x;
+                          y1 = y2 = old_y;
+
+                          do_flood_fill(canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2);
+
+                          update_canvas(x1, y1, x2, y2);
+                        }
+                    }
                   else if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
                     {
                       if (onscreen_keyboard && !kbd)
@@ -4764,7 +4844,8 @@ static void mainloop(void)
 
               if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_STAMP ||
                   cur_tool == TOOL_SHAPES || cur_tool == TOOL_LINES ||
-                  cur_tool == TOOL_MAGIC || cur_tool == TOOL_TEXT || cur_tool == TOOL_ERASER || cur_tool == TOOL_LABEL)
+                  cur_tool == TOOL_MAGIC || cur_tool == TOOL_TEXT ||
+                  cur_tool == TOOL_ERASER || cur_tool == TOOL_LABEL)
                 {
 
                   /* Left tools scroll */
@@ -5381,7 +5462,7 @@ static void mainloop(void)
                     do_setcursor(cursor_brush);
                   else if (cur_tool == TOOL_STAMP)
                     do_setcursor(cursor_tiny);
-                  else if (cur_tool == TOOL_LINES)
+                  else if (cur_tool == TOOL_LINES || cur_tool == TOOL_FILL)
                     do_setcursor(cursor_crosshair);
                   else if (cur_tool == TOOL_SHAPES)
                     {
@@ -5412,7 +5493,6 @@ static void mainloop(void)
                             do_setcursor(cursor_arrow);
                         }
                     }
-
                   else if (cur_tool == TOOL_MAGIC)
                     do_setcursor(cursor_wand);
                   else if (cur_tool == TOOL_ERASER)
@@ -6648,80 +6728,95 @@ void show_version(int details)
 void show_usage(int exitcode)
 {
   FILE *f = exitcode ? stderr : stdout;
-  char *blank;
-  unsigned i;
 
-  blank = strdup(progname);
-
-  for (i = 0; i < strlen(blank); i++)
-    blank[i] = ' ';
-
+  /* *INDENT-OFF* */
   fprintf(f,
           "\n"
           "Usage: %s {--usage | --help | --version | --verbose-version | --copying}\n"
           "\n"
-          "  %s [--windowed | --fullscreen]\n"
-          "  %s [--WIDTHxHEIGHT | --native]\n"
-          "  %s [--disablescreensaver | --allowscreensaver ]\n"
-          "  %s [--orient=landscape | --orient=portrait]\n"
-          "  %s [--startblank | --startlast]\n"
-          "  %s [--sound | --nosound]\n"
-          "  %s [--quit | --noquit]\n"
-          "  %s [--print | --noprint]\n"
-          "  %s [--complexshapes | --simpleshapes]\n"
-          "  %s [--mixedcase | --uppercase]\n"
-          "  %s [--fancycursors | --nofancycursors]\n"
-          "  %s [--hidecursor | --showcursor]\n"
-          "  %s [--mouse | --keyboard]\n"
-          "  %s [--dontgrab | --grab]\n"
-          "  %s [--noshortcuts | --shortcuts]\n"
-          "  %s [--wheelmouse | --nowheelmouse]\n"
-          "  %s [--nobuttondistinction | --buttondistinction]\n"
-          "  %s [--outlines | --nooutlines]\n"
-          "  %s [--stamps | --nostamps]\n"
-          "  %s [--sysfonts | --nosysfonts]\n"
-          "  %s [--nostampcontrols | --stampcontrols]\n"
-          "  %s [--nomagiccontrols | --magiccontrols]\n"
-          "  %s [--nolabel | --label]\n"
-          "  %s [--mirrorstamps | --dontmirrorstamps]\n"
-          "  %s [--stampsize=[0-10] | --stampsize=default]\n"
-          "  %s [--saveoverask | --saveover | --saveovernew]\n"
-          "  %s [--nosave | --save]\n"
-          "  %s [--autosave | --noautosave]\n" "  %s [--savedir DIRECTORY]\n" "  %s [--datadir DIRECTORY]\n"
+          " Config:\n"
+          "  [--nosysconfig]\n"
+          "\n"
+          " Video/Sound:\n"
+          "  [--windowed | --fullscreen]\n"
+          "  [--WIDTHxHEIGHT | --native]\n"
+          "  [--orient=landscape | --orient=portrait]\n"
+          "  [--disablescreensaver | --allowscreensaver ]\n"
+          "  [--sound | --nosound]\n"
+          "  [--stereo | --nostereo]\n"
+          "  [--colorfile FILE]\n"
+          "\n"
+          " Mouse/Keyboard:\n"
+          "  [--fancycursors | --nofancycursors]\n"
+          "  [--hidecursor | --showcursor]\n"
+          "  [--noshortcuts | --shortcuts]\n"
+          "  [--dontgrab | --grab]\n"
+          "  [--wheelmouse | --nowheelmouse]\n"
+          "  [--nobuttondistinction | --buttondistinction]\n"
+          "\n"
+          " Simplification:\n"
+          "  [--complexshapes | --simpleshapes]\n"
+          "  [--outlines | --nooutlines]\n"
+          "  [--mixedcase | --uppercase]\n"
+          "  [--stampsize=[0-10] | --stampsize=default]\n"
+          "  [--quit | --noquit]\n"
+          "  [--stamps | --nostamps]\n"
+          "  [--nostampcontrols | --stampcontrols]\n"
+          "  [--nomagiccontrols | --magiccontrols]\n"
+          "  [--nolabel | --label]\n"
+          "  [--newcolorsfirst | --newcolorslast]\n"
+          "\n"
+          " Languages:\n"
+          "  [--lang LANGUAGE | --locale LOCALE | --lang help]\n"
+          "  [--mirrorstamps | --dontmirrorstamps]\n"
+          "  [--sysfonts | --nosysfonts]\n"
+          "  [--currentlocalefont | --alllocalefonts]\n"
+          "\n"
+          " Printing:\n"
+          "  [--print | --noprint]\n"
+          "  [--printdelay=SECONDS]\n"
+          "  [--altprintmod | --altprintalways | --altprintnever]\n"
 #if defined(WIN32) || defined(__APPLE__)
-          "  %s [--printcfg | --noprintcfg]\n"
+          "  [--printcfg | --noprintcfg]\n"
 #endif
-          "  %s [--printdelay=SECONDS]\n" "  %s [--altprintmod | --altprintalways | --altprintnever]\n"
-#if !defined(WIN32) && !defined(__APPLE__) && !defined(__BEOS__) && !defined(__HAIKU__) && !defined(__ANDROID__)
-          "  %s [--papersize PAPERSIZE | --papersize help]\n"
-#endif
-          "  %s [--lang LANGUAGE | --locale LOCALE | --lang help]\n"
-          "  %s [--nosysconfig]\n"
-          "  %s [--nolockfile]\n"
-          "  %s [--colorfile FILE]\n"
-          "  %s [--mouse-accessibility]\n"
-          "  %s [--onscreen-keyboard]\n"
-          "  %s [--joystick-dev N] (default=0)\n"
-          "  %s [--joystick-slowness N] (0-500; default value is 15)\n"
-          "  %s [--joystick-threshold N] (0-32766; default value is 3200)\n"
-          "  %s [--joystick-maxsteps N] (1-7; default value is 7)\n"
-          "\n",
-          progname, progname,
-          blank, blank, blank, blank,
-          blank, blank, blank, blank,
-          blank, blank, blank, blank,
-          blank, blank, blank, blank,
-          blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank,
-#ifdef WIN32
-          blank,
-#endif
-          blank, blank,
-#if !defined(WIN32) && !defined(__APPLE__) && !defined(__BEOS__) && !defined(__HAIKU__) && !defined(__ANDROID__)
-          blank,
-#endif
-          blank, blank, blank, blank, blank, blank, blank, blank, blank, blank);
 
-  free(blank);
+#if !defined(WIN32) && !defined(__APPLE__) && !defined(__BEOS__) && !defined(__HAIKU__) && !defined(__ANDROID__)
+          "  [--printcommand=COMMAND]\n"
+          "  [--altprintcommand=COMMAND]\n"
+          "  [--papersize PAPERSIZE | --papersize help]\n"
+#endif
+          "\n"
+          " Saving:\n"
+          "  [--saveoverask | --saveover | --saveovernew]\n"
+          "  [--startblank | --startlast]\n"
+          "  [--savedir DIRECTORY]\n"
+          "  [--nosave | --save]\n"
+          "  [--autosave | --noautosave]\n"
+          "\n"
+          " Data:\n"
+          "  [--nolockfile]\n"
+          "  [--datadir DIRECTORY]\n"
+          "\n"
+          " Accessibility:\n"
+          "  [--mouse-accessibility]\n"
+          "  [--mouse | --keyboard]\n"
+          "  [--onscreen-keyboard]\n"
+          "  [--onscreen-keyboard-layout=LAYOUT]\n"
+          "  [--onscreen-keyboard-disable-change]\n"
+          "\n"
+          " Joystick:\n"
+          "  [--joystick-dev N] (default=0)\n"
+          "  [--joystick-slowness N] (0-500; default value is 15)\n"
+          "  [--joystick-threshold N] (0-32766; default value is 3200)\n"
+          "  [--joystick-maxsteps N] (1-7; default value is 7)\n"
+          "  [--joystick-hat-slowness N] (0-500; default value is 15)\n"
+          "  [--joystick-hat-timeout N] (0-3000; default value is 1000)\n"
+          "  [--joystick-buttons-ignore=BUTTON1,BUTTON2,...]\n"
+          "  [--joystick-btn-COMMAND=BUTTON]\n"
+          /* FIXME: "--joystick-btn-help" to list available commands, like "--lang help" */
+          "\n",
+          progname);
+  /* *INDENT-ON* */
 }
 
 
@@ -7339,7 +7434,7 @@ static void set_active_stamp(void)
 /**
  * FIXME
  */
-static void get_stamp_thumb(stamp_type * sd)
+static void get_stamp_thumb(stamp_type * sd, int process_sound)
 {
   SDL_Surface *bigimg = NULL;
   unsigned len = strlen(sd->stampname);
@@ -7389,22 +7484,27 @@ static void get_stamp_thumb(stamp_type * sd)
     }
 
 #ifndef NOSOUND
-  /* good time to load the sound */
-  if (!sd->no_sound && !sd->ssnd && use_sound)
+  if (!sd->sound_processed && process_sound)
     {
-      /* damn thing wants a .png extension; give it one */
-      memcpy(buf + len, ".png", 5);
-      sd->ssnd = loadsound(buf);
-      sd->no_sound = !sd->ssnd;
-    }
+      /* good time to load the sound */
+      if (!sd->no_sound && !sd->ssnd && use_sound)
+	{
+	  /* damn thing wants a .png extension; give it one */
+	  memcpy(buf + len, ".png", 5);
+	  sd->ssnd = loadsound(buf);
+	  sd->no_sound = !sd->ssnd;
+	}
 
-  /* ...and the description */
-  if (!sd->no_descsound && !sd->sdesc && use_sound)
-    {
-      /* damn thing wants a .png extension; give it one */
-      memcpy(buf + len, ".png", 5);
-      sd->sdesc = loaddescsound(buf);
-      sd->no_descsound = !sd->sdesc;
+      /* ...and the description */
+      if (!sd->no_descsound && !sd->sdesc && use_sound)
+	{
+	  /* damn thing wants a .png extension; give it one */
+	  memcpy(buf + len, ".png", 5);
+	  sd->sdesc = loaddescsound(buf);
+	  sd->no_descsound = !sd->sdesc;
+	}
+
+      sd->sound_processed = 1;
     }
 #endif
 
@@ -7698,7 +7798,7 @@ static void loadstamp_callback(SDL_Surface * screen,
   (void)locale;
 #ifdef DEBUG
   /* FIXME: Stderr instead of stdout? */
-  printf("loadstamp_callback: %s\n", dir);
+  printf("loadstamp_callback (%d): %s\n", i, dir);
 #endif
 
   if (num_stamps[stamp_group] > 0)
@@ -7738,7 +7838,6 @@ static void loadstamp_callback(SDL_Surface * screen,
 
 
   /* Sort and iterate the file list: */
-
   qsort(files, i, sizeof *files, compare_ftw_str);
   while (i--)
     {
@@ -7784,7 +7883,12 @@ static void loadstamp_callback(SDL_Surface * screen,
         }
 #endif
 
-      show_progress_bar(screen);
+      /*
+       * Showing the progress bar across the screen can be CPU-intensive, so
+       * update infrequently.
+       */
+      if ((i % 32) == 0)
+        show_progress_bar(screen);
 
       if (dotext > files[i].str && !strcasecmp(dotext, ext)
           && (dotext - files[i].str + 1 + dirlen < (int)(sizeof fname))
@@ -7970,7 +8074,7 @@ static int generate_fontconfig_cache_real(void)
 /**
  * FIXME
  */
-static int generate_fontconfig_cache(void *vp)
+static int generate_fontconfig_cache(__attribute__((unused)) void *vp)
 {
   return generate_fontconfig_cache_real();
 }
@@ -7981,13 +8085,23 @@ static int generate_fontconfig_cache(void *vp)
   ((c) >= 'a' && (c) <= 'f') ? ((c) - 'a' + 10) : 0)
 
 #ifndef WIN32
-/**
- * FIXME
- */
 static void signal_handler(int sig)
 {
-  (void)sig;
   // It is not legal to call printf or most other functions here!
+  if (sig == SIGUSR1 || sig == SIGUSR2)
+    {
+      autosave_on_quit = 1;
+      no_prompt_on_quit = 1;
+      if (sig == SIGUSR1)
+        {
+          promptless_save = SAVE_OVER_NO;
+        }
+      else
+        {
+          promptless_save = SAVE_OVER_ALWAYS;
+        }
+      raise(SIGTERM);
+    }
 }
 #endif
 
@@ -9060,7 +9174,8 @@ static void draw_stamps(void)
 
       if (stamp < num_stamps[stamp_group])
         {
-          get_stamp_thumb(stamp_data[stamp_group][stamp]);
+	  /* Loads the thumbnail and sounds, the sounds just if this is the current stamp, increasing responsivity for low powered devices */
+	  get_stamp_thumb(stamp_data[stamp_group][stamp], stamp == cur_stamp[stamp_group] ? 1 : 0);
           img = stamp_data[stamp_group][stamp]->thumbnail;
 
           base_x = ((i % 2) * 48) + (WINDOW_WIDTH - 96) + ((48 - (img->w)) / 2);
@@ -9571,13 +9686,6 @@ static SDL_Surface *thumbnail2(SDL_Surface * src, int max_x, int max_y, int keep
       for (x = 0; x < max_x; x++)
         {
 #ifndef LOW_QUALITY_THUMBNAILS
-
-#ifdef GAMMA_CORRECTED_THUMBNAILS
-          /* per: http://www.4p8.com/eric.brasseur/gamma.html */
-          float gamma = 2.2;
-          float gamma_invert = 1.0 / gamma;
-#endif
-
           tr = 0;
           tg = 0;
           tb = 0;
@@ -9592,9 +9700,8 @@ static SDL_Surface *thumbnail2(SDL_Surface * src, int max_x, int max_y, int keep
                   SDL_GetRGBA(getpixel(src, src_x, src_y), src->format, &r, &g, &b, &a);
 
 #ifdef GAMMA_CORRECTED_THUMBNAILS
-//        tr = tr + pow((float)r, gamma);
-//        tb = tb + pow((float)b, gamma);
-//        tg = tg + pow((float)g, gamma);
+                  /* per: http://www.4p8.com/eric.brasseur/gamma.html */
+
                   tr = tr + sRGB_to_linear_table[r];
                   tg = tg + sRGB_to_linear_table[g];
                   tb = tb + sRGB_to_linear_table[b];
@@ -9617,9 +9724,6 @@ static SDL_Surface *thumbnail2(SDL_Surface * src, int max_x, int max_y, int keep
               ta = ta / tmp;
 
 #ifdef GAMMA_CORRECTED_THUMBNAILS
-//      tr = ceil(pow(tr, gamma_invert));
-//      tg = ceil(pow(tg, gamma_invert));
-//      tb = ceil(pow(tb, gamma_invert));
               tr = linear_to_sRGB(tr);
               tg = linear_to_sRGB(tg);
               tb = linear_to_sRGB(tb);
@@ -10346,11 +10450,6 @@ static void reset_avail_tools(void)
 
   if (disable_label)
     tool_avail[TOOL_LABEL] = 0;
-
-
-  /* TBD... */
-
-  tool_avail[TOOL_NA] = 0;
 
 
   /* Disable save? */
@@ -11516,7 +11615,8 @@ static void load_starter_id(char *saved_id, FILE * fil)
   char fname[FILENAME_MAX];
   FILE *fi;
   char color_tag;
-  int r, g, b, tmp;
+  int r, g, b, __attribute__((unused))tmp;
+  char * __attribute__((unused)) tmp_ptr;
 
   rname = NULL;
 
@@ -11574,7 +11674,7 @@ static void load_starter_id(char *saved_id, FILE * fil)
 
           if (!feof(fi) && color_tag == 'T')
             {
-              tmp = fgets(template_id, sizeof(template_id), fi);
+              tmp_ptr = fgets(template_id, sizeof(template_id), fi);
               template_id[strlen(template_id) - 1] = '\0';
               tmp = fscanf(fi, "%d", &template_personal);
               /* FIXME: Debug only? */
@@ -11602,12 +11702,12 @@ static void load_starter_id(char *saved_id, FILE * fil)
 /**
  * FIXME
  */
-static SDL_Surface *load_starter_helper(char *path_and_basename, char *extension, SDL_Surface * (*load_func) (char *))
+static SDL_Surface *load_starter_helper(char *path_and_basename, const char *extension, SDL_Surface * (*load_func) (const char *))
 {
   char *ext;
   char fname[256];
   SDL_Surface *surf;
-  int i;
+  unsigned int i;
 
   ext = strdup(extension);
   snprintf(fname, sizeof(fname), "%s.%s", path_and_basename, ext);
@@ -12172,7 +12272,7 @@ static int do_prompt_image_flash_snd(const char *const text,
   int i;
   SDL_Surface *alpha_surf;
 #endif
-  int img1_w, img2_w, img3_w, max_img_w, img_x, img_y, offset;
+  int img1_w, img2_w, img3_w, max_img_w, img_y, offset;
   SDL_Surface *img1b;
   int free_img1b;
   int txt_left, txt_right, img_left, btn_left, txt_btn_left, txt_btn_right;
@@ -12180,14 +12280,16 @@ static int do_prompt_image_flash_snd(const char *const text,
   int valhat_x, valhat_y, hatmotioner;
 
 #ifdef DEBUG
-  if(snd >= 0) {
-    printf("Prompt and play sound #%d: %s\n", snd, sound_fnames[snd]);
-    fflush(stdout);
-  }
-  else {
-    printf("Prompt without sound\n");
-    fflush(stdout);
-  }
+  if (snd >= 0)
+    {
+      printf("Prompt and play sound #%d: %s\n", snd, sound_fnames[snd]);
+      fflush(stdout);
+    }
+  else
+    {
+      printf("Prompt without sound\n");
+      fflush(stdout);
+    }
 #endif
 
   val_x = val_y = motioner = 0;
@@ -12353,7 +12455,6 @@ static int do_prompt_image_flash_snd(const char *const text,
 
   /* Draw the images (if any, and if not animated): */
 
-  img_x = img_left;
   img_y = 100 + PROMPTOFFSETY + 4;
 
   if (img1b != NULL)
@@ -13540,9 +13641,9 @@ static void set_chunk_data(unsigned char **chunk_data, size_t * chunk_data_len, 
 
   strcat(headers, "Tuxpaint\n");
   strcat(headers, "Tuxpaint_" VER_VERSION "\n");
-  sprintf(line, "%d%s", uncompressed_size, "\n");
+  sprintf(line, "%lu%s", uncompressed_size, "\n");
   strcat(headers, line);
-  sprintf(line, "%d%s", dataLen, "\n");
+  sprintf(line, "%lu%s", dataLen, "\n");
   strcat(headers, line);
 
   headersLen = strlen(headers);
@@ -13617,7 +13718,9 @@ static void do_png_embed_data(png_structp png_ptr)
   /* Starter foreground */
   if (img_starter)
     {
+#ifdef DEBUG
       printf("Saving starter... %d\n", (int)(intptr_t) img_starter);    //EP added (intptr_t) to avoid warning on x64
+#endif
       sbk_pixs = malloc(img_starter->h * img_starter->w * 4);
       compressedLen = compressBound(img_starter->h * img_starter->w * 4);
 
@@ -13901,12 +14004,11 @@ static void do_png_embed_data(png_structp png_ptr)
               for (x = 0; x < current_node->save_width; x++)
                 for (y = 0; y < current_node->save_height; y++)
                   {
-                    pix =
-                      getpixels[current_node->label_node_surface->format->BytesPerPixel] (current_node->
-                                                                                          label_node_surface, x, y);
+                    /* *INDENT-OFF* */
+                    pix = getpixels[current_node->label_node_surface->format->BytesPerPixel](current_node->label_node_surface, x, y);
+                    /* *INDENT-ON* */
                     SDL_GetRGBA(pix, current_label_node->label_node_surface->format, &r, &g, &b, &a);
                     fwrite(&a, alpha_size, 1, lfi);
-
                   }
               SDL_UnlockSurface(current_node->label_node_surface);
               fprintf(lfi, "\n\n");
@@ -14141,9 +14243,16 @@ static int do_quit(int tool)
 {
   int done, tmp_tool;
 
-  done = do_prompt_snd(PROMPT_QUIT_TXT,
-                       PROMPT_QUIT_YES, PROMPT_QUIT_NO, SND_AREYOUSURE,
-                       (TOOL_QUIT % 2) * 48 + 24, (TOOL_QUIT / 2) * 48 + 40 + 24);
+  if (!no_prompt_on_quit)
+    {
+      done = do_prompt_snd(PROMPT_QUIT_TXT,
+                           PROMPT_QUIT_YES, PROMPT_QUIT_NO, SND_AREYOUSURE,
+                           (TOOL_QUIT % 2) * 48 + 24, (TOOL_QUIT / 2) * 48 + 40 + 24);
+    }
+  else
+    {
+      done = 1;
+    }
 
   if (done && !been_saved && !disable_save)
     {
@@ -16686,7 +16795,7 @@ void do_print(void)
   SDL_BlitSurface(canvas, NULL, save_canvas, NULL);
   SDL_BlitSurface(label, NULL, save_canvas, NULL);
 
-#if !defined(WIN32) && !defined(__BEOS__) && !defined(__HAIKU__) && !defined(__ANDROID__)
+#if !defined(WIN32) && !defined(__BEOS__) && !defined(__APPLE__) && !defined(__HAIKU__) && !defined(__ANDROID__)
   const char *pcmd;
   FILE *pi;
 
@@ -16738,6 +16847,17 @@ void do_print(void)
   /* BeOS */
 
   SurfacePrint(save_canvas);
+#elif defined(__APPLE__)
+  /* Mac OS X */
+  int show = (want_alt_printcommand && !fullscreen);
+
+  const char *error = SurfacePrint(save_canvas, show);
+  
+  if (error)
+    {
+      fprintf(stderr, "Cannot print: %s\n", error);
+      do_prompt_snd(error, PROMPT_PRINT_YES, "", SND_TUXOK, 0, 0);
+    }
 
 #elif defined(__ANDROID__)
 
@@ -17826,7 +17946,7 @@ static int paintsound(int size)
 /* Old libcairo1, svg and svg-cairo based code
    Based on cairo-demo/sdl/main.c from Cairo (GPL'd, (c) 2004 Eric Windisch):
 */
-static SDL_Surface *load_svg(char *file)
+static SDL_Surface *load_svg(const char *file)
 {
   svg_cairo_t *scr;
   int bpp, btpp, stride;
@@ -17985,7 +18105,7 @@ static SDL_Surface *load_svg(char *file)
  * FIXME
  */
 /* New libcairo2, rsvg and rsvg-cairo based code */
-static SDL_Surface *load_svg(char *file)
+static SDL_Surface *_load_svg(const char *file)
 {
   cairo_surface_t *cairo_surf;
   cairo_t *cr;
@@ -18152,6 +18272,17 @@ static SDL_Surface *load_svg(char *file)
   return (sdl_surface);
 }
 
+/* Wraper to fallback to SDL2_Image's nanosvg in case rsvg fails for some reason
+   like in Android builds trying to access starters provided as assets. */
+static SDL_Surface *load_svg(const char *file)
+{
+  SDL_Surface *sdl_surface;
+  sdl_surface = _load_svg(file);
+  if (sdl_surface == NULL)
+    sdl_surface = IMG_Load(file);
+  return(sdl_surface);
+}
+
 #endif
 
 
@@ -18236,7 +18367,7 @@ static float pick_best_scape(unsigned int orig_w, unsigned int orig_h, unsigned 
  */
 /* FIXME: we can remove this after SDL folks fix their bug at http://bugzilla.libsdl.org/show_bug.cgi?id=1485 */
 /* Try to load an image with IMG_Load(), if it fails, then try with RWops() */
-static SDL_Surface *myIMG_Load_RWops(char *file)
+static SDL_Surface *myIMG_Load_RWops(const char *file)
 {
   SDL_Surface *surf;
   FILE *fi;
@@ -18270,7 +18401,7 @@ static SDL_Surface *myIMG_Load_RWops(char *file)
    if we notice it's an SVG file (if available!);
    call load_kpx() if we notice it's a KPX file (JPEG with wrapper);
    otherwise call SDL_Image lib's IMG_Load() (for PNGs, JPEGs, BMPs, etc.) */
-static SDL_Surface *myIMG_Load(char *file)
+static SDL_Surface *myIMG_Load(const char *file)
 {
   if (strlen(file) > 4 && strcasecmp(file + strlen(file) - 4, ".kpx") == 0)
     {
@@ -18291,7 +18422,7 @@ static SDL_Surface *myIMG_Load(char *file)
 /**
  * FIXME
  */
-static SDL_Surface *load_kpx(char *file)
+static SDL_Surface *load_kpx(const char *file)
 {
   SDL_RWops *data;
   FILE *fi;
@@ -18904,7 +19035,15 @@ static void magic_playsound(Mix_Chunk * snd, int left_right, int up_down)
   else if (left_right > 255)
     left_right = 255;
 
-  left = ((255 - dist) * (255 - left_right)) / 255;
+  if (use_stereo)
+    {
+      left = ((255 - dist) * (255 - left_right)) / 255;
+    }
+  else
+    {
+      /* Stereo disabled; no panning (see playsound.c) */
+      left = (255 - dist) / 2;
+    }
 
   Mix_SetPanning(0, left, (255 - dist) - left);
 #endif
@@ -18968,9 +19107,7 @@ static int do_new_dialog(void)
   int last_click_which, last_click_button;
   int places_to_look;
   int tot;
-  int first_starter, first_template;
-  int added;
-  Uint8 r, g, b;
+  int first_color, first_starter, first_template;
   int white_in_palette;
   int val_x, val_y, motioner;
   int valhat_x, valhat_y, hatmotioner;
@@ -19092,8 +19229,10 @@ static int do_new_dialog(void)
 
 
   /* (Re)allocate space for the information about these files: */
+  tot = num_files_in_dirs;
 
-  tot = num_files_in_dirs + NUM_COLORS;
+  /* And colors... */
+  tot += NUM_COLORS;
 
   thumbs = (SDL_Surface * *)malloc(sizeof(SDL_Surface *) * tot);
   d_places = (int *)malloc(sizeof(int) * tot);
@@ -19106,65 +19245,14 @@ static int do_new_dialog(void)
   qsort(fs, num_files_in_dirs, sizeof(struct dirent2), (int (*)(const void *, const void *))compare_dirent2s);
 
 
-  /* Throw the color palette at the beginning: */
+  /* Throw the color palette at the beginning (default): */
 
   white_in_palette = -1;
 
-  for (j = -1; j < NUM_COLORS; j++)
+  if (!new_colors_last)
     {
-      added = 0;
-
-      if (j < NUM_COLORS - 1)
-        {
-          if (j == -1 ||        /* (short circuit) */
-              color_hexes[j][0] != 255 ||       /* Ignore white, we'll have already added it */
-              color_hexes[j][1] != 255 || color_hexes[j][2] != 255)
-            {
-              /* Palette colors: */
-
-              thumbs[num_files] = SDL_CreateRGBSurface(screen->flags,
-                                                       THUMB_W - 20, THUMB_H - 20,
-                                                       screen->format->BitsPerPixel,
-                                                       screen->format->Rmask,
-                                                       screen->format->Gmask, screen->format->Bmask, 0);
-
-              if (thumbs[num_files] != NULL)
-                {
-                  if (j == -1)
-                    {
-                      r = g = b = 255;  /* White */
-                    }
-                  else
-                    {
-                      r = color_hexes[j][0];
-                      g = color_hexes[j][1];
-                      b = color_hexes[j][2];
-                    }
-                  SDL_FillRect(thumbs[num_files], NULL, SDL_MapRGB(thumbs[num_files]->format, r, g, b));
-                  added = 1;
-                }
-            }
-          else
-            {
-              white_in_palette = j;
-            }
-        }
-      else
-        {
-          /* Color picker: */
-
-          thumbs[num_files] = thumbnail(img_color_picker, THUMB_W - 20, THUMB_H - 20, 0);
-          added = 1;
-        }
-
-      if (added)
-        {
-          d_places[num_files] = PLACE_COLOR_PALETTE;
-          d_names[num_files] = NULL;
-          d_exts[num_files] = NULL;
-
-          num_files++;
-        }
+      first_color = 0;
+      num_files = do_new_dialog_add_colors(thumbs, num_files, d_places, d_names, d_exts, &white_in_palette);
     }
 
   first_starter = num_files;
@@ -19198,7 +19286,8 @@ static int do_new_dialog(void)
                   /* Support legacy BMP files for load: */
                   || strcasestr(f->d_name, ".bmp") != NULL
                   /* Support for KPX (Kid Pix templates; just a JPEG with resource fork header): */
-                  || strcasestr(f->d_name, ".kpx") != NULL || strcasestr(f->d_name, ".jpg") != NULL
+                  || strcasestr(f->d_name, ".kpx") != NULL
+                  || strcasestr(f->d_name, ".jpg") != NULL
 #ifndef NOSVG
                   || strcasestr(f->d_name, ".svg") != NULL
 #endif
@@ -19251,7 +19340,7 @@ static int do_new_dialog(void)
                           f2 = &(fs[k].f);
                           strcpy(fname2, f2->d_name);
 
-                          if (strstr(fname2, fname) == fname2 && strcasestr(fname2, ".svg") != NULL)
+                          if (strstr(fname2, fname) == fname2 && strlen(fname) == strlen(fname2)- strlen(".svg") && strcasestr(fname2, ".svg") != NULL)
                             {
                               /* SVG of this bitmap exists; we'll skip it */
                               skip = 1;
@@ -19321,11 +19410,12 @@ static int do_new_dialog(void)
                         {
                           /* No thumbnail - load original: */
 
-                          /* Make sure we have a ~/.tuxpaint/saved directory: */
-                          if (make_directory("saved", "Can't create user data directory"))
+                          /* Make sure we have a ~/.tuxpaint/[starters|templates] directory: */
+                          if (make_directory(dirname[d_places[num_files]], "Can't create user data directory"))
                             {
-                              /* (Make sure we have a .../saved/.thumbs/ directory:) */
-                              make_directory("saved/.thumbs", "Can't create user data thumbnail directory");
+                              /* (Make sure we have a .../[starters|templates]/.thumbs/ directory:) */
+                              snprintf(fname, sizeof(fname), "%s/.thumbs", dirname[d_places[num_files]]);
+                              make_directory(fname, "Can't create user data thumbnail directory");
                             }
 
                           img = NULL;
@@ -19336,8 +19426,6 @@ static int do_new_dialog(void)
                               /* Try to load a starter's background image, first!
                                  If it exists, it should give a better idea of what the
                                  starter looks like, compared to the overlay image... */
-
-                              /* FIXME: Add .jpg support -bjk 2007.03.22 */
 
                               /* (Try JPEG first) */
                               snprintf(fname, sizeof(fname), "%s/%s-back",
@@ -19468,10 +19556,19 @@ static int do_new_dialog(void)
         }
     }
 
+  /* Throw the color palette at the end (alternative option): */
+
+  if (new_colors_last)
+    {
+      first_color = num_files;
+      num_files = do_new_dialog_add_colors(thumbs, num_files, d_places, d_names, d_exts, &white_in_palette);
+    }
 
 
 #ifdef DEBUG
-  printf("%d files were found!\n", num_files);
+  printf("%d files and colors were found!\n", num_files);
+  printf("first_color = %d\nfirst_starter = %d\nfirst_template = %d\nnum_files = %d\n\n", first_color, first_starter,
+         first_template, num_files);
 #endif
 
 
@@ -19930,7 +20027,8 @@ static int do_new_dialog(void)
         label_node_to_edit = NULL;
       have_to_rec_label_node = FALSE;
 
-      if (which >= first_starter && (first_template == -1 || which < first_template))
+      if (which >= first_starter && (first_template == -1 || which < first_template)
+          && (!new_colors_last || which < first_color))
         {
           /* Load a starter: */
 
@@ -19989,7 +20087,7 @@ static int do_new_dialog(void)
               SDL_BlitSurface(img_starter, NULL, canvas, NULL);
             }
         }
-      else if (first_template != -1 && which >= first_template)
+      else if (first_template != -1 && which >= first_template && (!new_colors_last || which < first_color))
         {
           /* Load a template: */
 
@@ -20053,6 +20151,8 @@ static int do_new_dialog(void)
           starter_flipped = 0;
           starter_personal = 0;
           starter_modified = 0;
+
+          which = which - first_color;
 
           /* Launch color picker if they chose that: */
 
@@ -20129,6 +20229,78 @@ static int do_new_dialog(void)
   return (which != -1);
 }
 
+/* Add colors to the "New" dialog's list of choices;
+   normally appears at the beginning (above Starts & Templates),
+   but may be placed at the end with the "--newcolorslast" option.
+*/
+static int do_new_dialog_add_colors(SDL_Surface * *thumbs, int num_files, int *d_places, char * *d_names,
+                                    char * *d_exts, int *white_in_palette)
+{
+  int j;
+  int added;
+  Uint8 r, g, b;
+
+  for (j = -1; j < NUM_COLORS; j++)
+    {
+      added = 0;
+
+      if (j < NUM_COLORS - 1)
+        {
+          if (j == -1 ||        /* (short circuit) */
+              color_hexes[j][0] != 255 ||       /* Ignore white, we'll have already added it */
+              color_hexes[j][1] != 255 || color_hexes[j][2] != 255)
+            {
+              /* Palette colors: */
+
+              thumbs[num_files] = SDL_CreateRGBSurface(screen->flags,
+                                                       THUMB_W - 20, THUMB_H - 20,
+                                                       screen->format->BitsPerPixel,
+                                                       screen->format->Rmask,
+                                                       screen->format->Gmask, screen->format->Bmask, 0);
+
+              if (thumbs[num_files] != NULL)
+                {
+                  if (j == -1)
+                    {
+                      r = g = b = 255;  /* White */
+                    }
+                  else
+                    {
+                      r = color_hexes[j][0];
+                      g = color_hexes[j][1];
+                      b = color_hexes[j][2];
+                    }
+                  SDL_FillRect(thumbs[num_files], NULL, SDL_MapRGB(thumbs[num_files]->format, r, g, b));
+                  added = 1;
+                }
+            }
+          else
+            {
+              *white_in_palette = j;
+            }
+        }
+      else
+        {
+          /* Color picker: */
+
+          thumbs[num_files] = thumbnail(img_color_picker, THUMB_W - 20, THUMB_H - 20, 0);
+          added = 1;
+        }
+
+      if (added)
+        {
+          d_places[num_files] = PLACE_COLOR_PALETTE;
+          d_names[num_files] = NULL;
+          d_exts[num_files] = NULL;
+
+          num_files++;
+        }
+    }
+
+  return num_files;
+}
+
+
 /**
  * FIXME
  */
@@ -20180,7 +20352,8 @@ static int do_color_sel(void)
   int i, dx, dy;
   int done, chose;
   int back_left, back_top;
-  int color_sel_x, color_sel_y;
+  int color_sel_x = 0, color_sel_y = 0;
+  int want_animated_popups = 1;
   SDL_Surface *tmp_btn_up, *tmp_btn_down;
 
   Uint32(*getpixel_tmp_btn_up) (SDL_Surface *, int, int);
@@ -20201,7 +20374,6 @@ static int do_color_sel(void)
 
   /* FIXME this is the first step to make animated popups optional,
      to be removed from here when implemented in a more general way */
-  int want_animated_popups = 1;
 
   hide_blinking_cursor();
 
@@ -21497,7 +21669,7 @@ static void render_all_nodes_starting_at(struct label_node **node)
  * FIXME
  */
 /* FIXME: This should search for the top-down of the overlaping labels and only re-render from it */
-static void derender_node(struct label_node **ref_head)
+static void derender_node(__attribute__((unused)) struct label_node **ref_head)
 {
   SDL_Rect r_tmp_derender;
 
@@ -22582,7 +22754,7 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
 
 /* ================================================================================== */
 
-#if !defined(WIN32) && !defined(__BEOS__) && !defined(__HAIKU__) && !defined(__ANDROID__)
+#if !defined(WIN32) && !defined(__APPLE__) && !defined(__BEOS__) && !defined(__HAIKU__) && !defined(__ANDROID__)
 /**
  * FIXME
  */
@@ -22829,7 +23001,7 @@ static void setup_config(char *argv[])
       char buffer[B_PATH_NAME_LENGTH + B_FILE_NAME_LENGTH];
       status_t result;
 
-      result = find_directory(B_USER_DIRECTORY, volume, false, buffer, sizeof(buffer));
+      result = find_directory(B_USER_SETTINGS_DIRECTORY, volume, false, buffer, sizeof(buffer));
       asprintf((char **)&savedir, "%s/%s", buffer, "TuxPaint");
 #elif __APPLE__
       savedir = strdup(macos.preferencesPath());
@@ -22946,6 +23118,7 @@ static void setup_config(char *argv[])
   SETBOOL(keymouse);
   SETBOOL(mirrorstamps);
   SETBOOL(native_screensize);
+  SETBOOL(new_colors_last);
   SETBOOL(no_button_distinction);
   SETBOOL(no_fancy_cursors);
   SETBOOL(no_system_fonts);
@@ -22956,6 +23129,7 @@ static void setup_config(char *argv[])
   SETBOOL(start_blank);
   SETBOOL(use_print_config);
   SETBOOL(use_sound);
+  SETBOOL(use_stereo);
   SETBOOL(wheely);
   SETBOOL(mouseaccessibility);
   SETBOOL(onscreen_keyboard);
@@ -23279,7 +23453,7 @@ static void setup_config(char *argv[])
     {
       char *token;
 
-      token = strtok(tmpcfg.joystick_buttons_ignore, ",");
+      token = strtok((char *) tmpcfg.joystick_buttons_ignore, ",");
       while (token != NULL)
         {
           if (strtof(token, NULL) < 0 || strtof(token, NULL) > 254)
@@ -23868,22 +24042,21 @@ static void setup(void)
 #endif
   setup_colors();
 
-  /* Set window icon and caption: */
-
-#ifndef __APPLE__
-  seticon();
-#endif
-  if (hide_cursor)
-    SDL_ShowCursor(SDL_DISABLE);
-
 
   /* Deal with orientation rotation option */
-
+#if defined __ANDROID__
+  SDL_SetHint(SDL_HINT_ORIENTATIONS, "LandscapeRight");
+#endif
+  
   if (rotate_orientation)
     {
       if (native_screensize && fullscreen)
         {
+#if defined __ANDROID__
+	  SDL_SetHint(SDL_HINT_ORIENTATIONS, "Portrait");
+#else
           fprintf(stderr, "Warning: Asking for native screen size overrides request to rotate orientation.\n");
+#endif
         }
       else
         {
@@ -24077,6 +24250,14 @@ static void setup(void)
   /* (Need to do this after native screen resolution is handled) */
 
   setup_screen_layout();
+
+  /* Set window icon and caption: */
+
+#ifndef __APPLE__
+  seticon();
+#endif
+  if (hide_cursor)
+    SDL_ShowCursor(SDL_DISABLE);
 
 
   /* quickly: title image, version, progress bar, and watch cursor */
@@ -24763,6 +24944,10 @@ static void setup(void)
      instead of 'Ok') */
 
   signal(SIGPIPE, signal_handler);
+
+  /* Set up signal for no-questions-asked remote closing of app */
+  signal(SIGUSR1, signal_handler);
+  signal(SIGUSR2, signal_handler);
 #endif
 }
 

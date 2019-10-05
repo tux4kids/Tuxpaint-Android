@@ -1,6 +1,12 @@
 #!/usr/bin/make -f
 
-confflags = --disable-webp --disable-jpg-shared --disable-png-shared --disable-tif-shared
+confflags =
+
+# These flags can be used to create a package directly linking with external libraries and having the appropriate package dependencies
+#confflags += --disable-jpg-shared
+#confflags += --disable-png-shared
+#confflags += --disable-tif-shared
+#confflags += --disable-webp-shared
 
 %:
 	dh $@ --with autoreconf --parallel

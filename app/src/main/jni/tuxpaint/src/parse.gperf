@@ -37,6 +37,10 @@ struct cfg
 #define NEGBOOL(x) (void*)(offsetof(struct cfginfo,x)|NEG)
 #define IMM(x)     imm_##x
 
+/* Prototypes of what's in tuxpaint.c: */
+void show_version(int details);
+void show_usage(int exitcode);
+
 static void imm_version(void)
 {
   show_version(0);
@@ -123,6 +127,8 @@ mirrorstamps,        POSBOOL(mirrorstamps)
 mixedcase,           NEGBOOL(only_uppercase)
 mouse,               NEGBOOL(keymouse)
 native,              POSBOOL(native_screensize)
+newcolorsfirst,      NEGBOOL(new_colors_last)
+newcolorslast,       POSBOOL(new_colors_last)
 orient,              MULTI(rotate_orientation)
 outlines,            NEGBOOL(dont_do_xor)
 papersize,           MULTI(papersize)
@@ -140,6 +146,7 @@ shortcuts,           NEGBOOL(noshortcuts)
 showcursor,          NEGBOOL(hide_cursor)
 simpleshapes,        POSBOOL(simple_shapes)
 sound,               POSBOOL(use_sound)
+stereo,              POSBOOL(use_stereo)
 stampcontrols,       NEGBOOL(disable_stamp_controls)
 stamps,              NEGBOOL(dont_load_stamps)
 stampsize,           MULTI(stamp_size_override)

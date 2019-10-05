@@ -32,11 +32,11 @@
 extern "C"
 {
 
-#endif				/* __cplusplus */
+#endif                          /* __cplusplus */
   extern int SurfacePrint(SDL_Surface * surf);
   extern int IsPrinterAvailable();
 #ifdef __cplusplus
 }
-#endif				/* __cplusplus */
+#endif                          /* __cplusplus */
 
-#endif				/* __BEOS_PRINT__ */
+#endif                          /* __BEOS_PRINT__ */

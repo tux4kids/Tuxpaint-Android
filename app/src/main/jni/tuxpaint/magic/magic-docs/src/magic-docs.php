@@ -5,7 +5,7 @@ individual HTML files for each of them, and an index.html that links to
 them all. */
 
 /* Bill Kendrick <bill@newbreedsoftware.com> */
-/* Oct. 8, 2009 - August 30, 2018 */
+/* Oct. 8, 2009 - September 12, 2019 */
 
 
 /* Authors of the Magic tools: */
@@ -113,10 +113,6 @@ $tools = array(
    'desc'=>'This makes parts of your picture look "embossed."  Wherever there are sharp edges in your picture, the picture will look raised like it was stamped in metal.',
    'author'=>$AUTHOR_KENDRICK,
    'see'=>array('Edges', 'Silhouette')),
-
-  array('name'=>'Fill',
-   'desc'=>'This floods the picture with a color.  It lets you quickly fill parts of the picture, as if it were a coloring book.',
-   'author'=>$AUTHOR_KENDRICK),
 
   array('name'=>'Fisheye',
    'desc'=>'Warp parts of your picture like it\'s being seen through a fisheye lens.',

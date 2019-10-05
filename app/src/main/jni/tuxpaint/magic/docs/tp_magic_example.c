@@ -303,8 +303,9 @@ void example_shutdown(magic_api * api)
 
 // Affect the canvas on click:
 
-void example_click(magic_api * api, int which, int mode,
-                   SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void
+example_click(magic_api * api, int which, int mode,
+              SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
 {
   // In our case, a single click (which is also the start of a drag!)
   // is identical to what dragging does, but just at one point, rather
@@ -319,8 +320,9 @@ void example_click(magic_api * api, int which, int mode,
 
 // Affect the canvas on drag:
 
-void example_drag(magic_api * api, int which, SDL_Surface * canvas,
-                  SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void
+example_drag(magic_api * api, int which, SDL_Surface * canvas,
+             SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
 {
   // Call Tux Paint's "line()" function.
   //
@@ -380,8 +382,9 @@ void example_drag(magic_api * api, int which, SDL_Surface * canvas,
 
 // Affect the canvas on release:
 
-void example_release(magic_api * api, int which,
-                     SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void
+example_release(magic_api * api, int which,
+                SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
 {
   // Neither of our effects do anything special when the mouse is released
   // from a click or click-and-drag, so there's no code here...

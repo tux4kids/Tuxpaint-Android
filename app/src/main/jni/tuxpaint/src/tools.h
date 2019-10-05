@@ -19,11 +19,11 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Copyright (c) 2002-2009 by Bill Kendrick
+  Copyright (c) 2002-2019 by Bill Kendrick
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
-  June 14, 2002 - October 9, 2009
+  June 14, 2002 - September 12, 2019
   $Id$
 */
 
@@ -41,7 +41,7 @@ enum
   TOOL_SHAPES,
   TOOL_TEXT,
   TOOL_LABEL,
-  TOOL_NA,
+  TOOL_FILL,
   TOOL_MAGIC,
   TOOL_UNDO,
   TOOL_REDO,
@@ -76,8 +76,8 @@ const char *const tool_names[NUM_TOOLS] = {
   // Label tool
   gettext_noop("Label"),
 
-  // Reserved...
-  " ",
+  // Fill tool
+  gettext_noop("Fill"),
 
   // "Magic" effects tools (blur, flip image, etc.)
   gettext_noop("Magic"),
@@ -132,8 +132,8 @@ const char *const tool_tips[NUM_TOOLS] = {
   gettext_noop
     ("Choose a style of text. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text. By using the selector button and clicking an existing label, you can move it, edit it and change its text style."),
 
-  // Reserved...
-  " ",
+  // Fill tool instructions
+  gettext_noop("Click in the picture to fill that area with color."),
 
   // Magic tool instruction
   gettext_noop("Pick a magical effect to use on your drawing!"),
@@ -185,7 +185,7 @@ const char *const tool_img_fnames[NUM_TOOLS] = {
   DATA_PREFIX "images/tools/shapes.png",
   DATA_PREFIX "images/tools/text.png",
   DATA_PREFIX "images/tools/label.png",
-  DATA_PREFIX "images/ui/dead40x40.png",
+  DATA_PREFIX "images/tools/fill.png",
   DATA_PREFIX "images/tools/magic.png",
   DATA_PREFIX "images/tools/undo.png",
   DATA_PREFIX "images/tools/redo.png",

@@ -1,3 +1,9 @@
+/*
+ * Folds the picture down from the corners.
+ *
+ * Last updated: 2019-08-29
+ */
+
 //optimized version soon :)
 //when "folding" same corner many times it gives strange results. Now it's allowed. Let me know
 //if you think it shouldn't be.
@@ -142,25 +148,29 @@ void fold_draw(magic_api * api, int which,
   right_step_y = (float)(y - left_arm_y) / (float)(left_arm_x - fold_ox);
   left_step_x = (float)(x - right_arm_x) / (float)(right_arm_y - fold_oy);
   left_step_y = (float)(y - right_arm_y) / (float)(right_arm_y - fold_oy);
+
+  left_y = (float)right_arm_y / left_arm_x * (left_arm_x - canvas->w);
+  right_x = (float)left_arm_x / right_arm_y * (right_arm_y - canvas->h);
+
   for (w = 0; w < canvas->w; w += 0.5)
-    for (h = 0; h < canvas->h; h += 0.5)
-      {
-        dist_x = right_step_x * w + left_step_x * h;
-        dist_y = right_step_y * w + left_step_y * h;
-        api->putpixel(canvas, x - dist_x, y - dist_y, api->getpixel(temp, w, h));
-      }
+    {
+      for (h = 0; h < canvas->h; h += 0.5)
+        {
+          dist_x = right_step_x * w + left_step_x * h;
+          dist_y = right_step_y * w + left_step_y * h;
+          api->putpixel(canvas, x - dist_x, y - dist_y, api->getpixel(temp, w, h));
+        }
+    }
 
   // Erasing the triangle.
   // The 1 pixel in plus  is a workaround for api-line not getting the end in some lines.
   if (left_arm_x > canvas->w)
     {
-      left_y = (float)right_arm_y / left_arm_x * (left_arm_x - canvas->w);
       for (h = 0; h <= right_arm_y; h++)
         api->line((void *)api, which, canvas, snapshot, canvas->w, left_y - h, -1, right_arm_y - h, 1, fold_erase);
     }
   else if (right_arm_y > canvas->h)
     {
-      right_x = (float)left_arm_x / right_arm_y * (right_arm_y - canvas->h);
       for (w = 0; w <= left_arm_x; w++)
         api->line((void *)api, which, canvas, snapshot, left_arm_x - w, 0, right_x - w, canvas->h + 1, 1, fold_erase);
     }

@@ -28,6 +28,7 @@ LOCAL_SRC_FILES := \
 	src/onscreen_keyboard.c \
 	src/android_print.c \
 	src/android_mbstowcs.c \
+	src/fill.c \
 	src/android_assets.c
 
 MY_CFLAGS:= -O0 -g -W -Wall -fno-common -ffloat-store \

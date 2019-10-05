@@ -1,6 +1,6 @@
 /*
   SDL_image:  An example image loading library for use with SDL
-  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2019 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -29,10 +29,6 @@
    Stencil and colorkey fixes by David Raulo (david.raulo AT free DOT fr) in February 2004.
    Buffer overflow fix in RLE decompression by David Raulo in January 2008.
 */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #include "SDL_endian.h"
 #include "SDL_image.h"
@@ -187,6 +183,11 @@ SDL_Surface *IMG_LoadLBM_RW( SDL_RWops *src )
 
         if ( !SDL_memcmp( id, "CMAP", 4 ) ) /* palette ( Color Map ) */
         {
+            if (size > sizeof (colormap)) {
+                error="colormap size is too large";
+                goto done;
+            }
+
             if ( !SDL_RWread( src, &colormap, size, 1 ) )
             {
                 error="error reading CMAP chunk";
@@ -245,11 +246,11 @@ SDL_Surface *IMG_LoadLBM_RW( SDL_RWops *src )
     MiniBuf = (Uint8 *)SDL_malloc( bytesperline * (nbplanes + stencil) );
     if ( MiniBuf == NULL )
     {
-        error="no enough memory for temporary buffer";
+        error="not enough memory for temporary buffer";
         goto done;
     }
 
-    if ( ( Image = SDL_CreateRGBSurface( SDL_SWSURFACE, width, bmhd.h, (bmhd.planes==24 || flagHAM==1)?24:8, 0, 0, 0, 0 ) ) == NULL )
+    if ( ( Image = SDL_CreateRGBSurface( SDL_SWSURFACE, width, bmhd.h, (nbplanes==24 || flagHAM==1)?24:8, 0, 0, 0, 0 ) ) == NULL )
        goto done;
 
     if ( bmhd.mask & 2 )               /* There is a transparent color */
@@ -276,7 +277,7 @@ SDL_Surface *IMG_LoadLBM_RW( SDL_RWops *src )
         /* The 32 last colors are the same but divided by 2 */
         /* Some Amiga pictures save 64 colors with 32 last wrong colors, */
         /* they shouldn't !, and here we overwrite these 32 bad colors. */
-        if ( (nbcolors==32 || flagEHB ) && (1<<bmhd.planes)==64 )
+        if ( (nbcolors==32 || flagEHB ) && (1<<nbplanes)==64 )
         {
             nbcolors = 64;
             ptr = &colormap[0];
@@ -290,8 +291,8 @@ SDL_Surface *IMG_LoadLBM_RW( SDL_RWops *src )
 
         /* If nbcolors < 2^nbplanes, repeat the colormap */
         /* This happens when pictures have a stencil mask */
-        if ( nbrcolorsfinal > (1<<bmhd.planes) ) {
-            nbrcolorsfinal = (1<<bmhd.planes);
+        if ( nbrcolorsfinal > (1<<nbplanes) ) {
+            nbrcolorsfinal = (1<<nbplanes);
         }
         for ( i=nbcolors; i < (Uint32)nbrcolorsfinal; i++ )
         {

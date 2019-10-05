@@ -5,7 +5,7 @@
   for Tux Paint
 
   Mostly by Albert Cahalan <albert@users.sf.net>
-  Copyright (c) 2002-2006
+  Copyright (c) 2002-2019
 
   http://www.newbreedsoftware.com/tuxpaint/
 
@@ -24,7 +24,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - December 30, 2017
+  June 14, 2002 - September 12, 2019
   $Id$
 */
 
@@ -127,3 +127,13 @@
 #undef CLOCK_ASM
 #define CLOCK_ASM(x) x=42
 #endif
+
+/* h/t https://tutel.me/c/programming/questions/45349079/how+to+use+__attribute__fallthrough+correctly+in+gcc */
+#ifndef FALLTHROUGH
+#if defined(__GNUC__) && __GNUC__ >= 7
+ #define FALL_THROUGH __attribute__ ((fallthrough))
+#else
+ #define FALL_THROUGH ((void)0)
+#endif /* __GNUC__ >= 7 */
+#endif
+

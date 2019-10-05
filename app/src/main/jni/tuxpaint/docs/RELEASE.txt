@@ -1,0 +1,26 @@
+Release checklist for Tux Paint
+
+Places to make sure version # and release date gets updated, prior to
+cutting a release (tagging in the source code repository, and running
+"make release" to roll a .tar.gz source tarball).
+
+ * Makefile
+
+ * Build description files:
+   * tuxpaint.spec (RPM package)
+   * macos/Info.plist (macOS build)
+
+ * Documentation
+   (For HTML variants, be sure to run "make" in "docs/", to
+   produce plaintext alternatives!)
+
+   * docs/CHANGES.txt
+   * docs/en/html/README.html
+   * docs/en/html/FAQ.html
+   * docs/en/html/OPTIONS.html
+   * docs/en/html/EXTENDING.html
+   * docs/en/html/ADVANCED-STAMPS-HOWTO.html
+
+ * Manual page (manpage)
+   * src/manpage/tuxpaint.1
+

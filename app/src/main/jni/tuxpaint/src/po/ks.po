@@ -1,0 +1,1522 @@
+# Tuxpaint Translations for Kashmiri language (Using Perso Arabic Script).
+# Copyright (C) 2015
+# This file is distributed under the same license as the PACKAGE package.
+# Chandrakant Dhutadmal <cpdhutadmal@yahoo.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-24 08:40-0700\n"
+"PO-Revision-Date: 2012-01-02 11:36+0530\n"
+"Last-Translator: \n"
+"Language-Team: Kashmiri-PA\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Response to Black (0, 0, 0) color selected
+#: ../colors.h:86
+msgid "Black!"
+msgstr "  کرٚہُن!"
+
+#. Response to Dark grey (128, 128, 128) color selected
+#: ../colors.h:89
+msgid "Dark grey! Some people spell it “dark gray”."
+msgstr "تیٖز سوٗرۍ! کد۪نٛہ چھس ونان “dark gray”"
+
+#. Response to Light grey (192, 192, 192) color selected
+#: ../colors.h:92
+msgid "Light grey! Some people spell it “light gray”."
+msgstr "ہلکہٕ سوٗرۍ! کد۪نٛہ چھس ونان “light gray”"
+
+#. Response to White (255, 255, 255) color selected
+#: ../colors.h:95
+msgid "White!"
+msgstr "سفید!"
+
+#. Response to Red (255, 0, 0) color selected
+#: ../colors.h:98
+msgid "Red!"
+msgstr "وَزُل!"
+
+#. Response to Orange (255, 128, 0) color selected
+#: ../colors.h:101
+msgid "Orange!"
+msgstr "  سنٛگتر رنٛگ!"
+
+#. Response to Yellow (255, 255, 0) color selected
+#: ../colors.h:104
+msgid "Yellow!"
+msgstr "  لیوٚدُر"
+
+#. Response to Light green (160, 228, 128) color selected
+#: ../colors.h:107
+msgid "Light green!"
+msgstr "  ہلکہٕ سبز!"
+
+#. Response to Dark green (33, 148, 70) color selected
+#: ../colors.h:110
+msgid "Dark green!"
+msgstr "  تیز سبز!"
+
+#. Response to "Sky" blue (138, 168, 205) color selected
+#: ../colors.h:113
+msgid "Sky blue!"
+msgstr "  آسمٲن۪یرنگ!"
+
+#. Response to Blue (50, 100, 255) color selected
+#: ../colors.h:116
+msgid "Blue!"
+msgstr "  نیوٗل"
+
+#. Response to Lavender (186, 157, 255) color selected
+#: ../colors.h:119
+msgid "Lavender!"
+msgstr " لیوینڈر"
+
+#. Response to Purple (128, 0, 128) color selected
+#: ../colors.h:122
+msgid "Purple!"
+msgstr "  وانٛگن۪ی رنگ!"
+
+#. Response to Pink (255, 165, 211) color selected
+#: ../colors.h:125
+msgid "Pink!"
+msgstr "  گۄلٲب۪ی"
+
+#. Response to Brown (128, 80, 0) color selected
+#: ../colors.h:128
+msgid "Brown!"
+msgstr "  گُرٕ!"
+
+#. Response to Tan (226, 189, 166) color selected
+#: ../colors.h:131
+msgid "Tan!"
+msgstr " گُنٛدم۪ی رنگ!"
+
+#. Response to Beige (247, 228, 219) color selected
+#: ../colors.h:134
+msgid "Beige!"
+msgstr " بادٲم۪ی رنگ!"
+
+#. First, the blacklist. We list font families that can crash Tux Paint
+#. via bugs in the SDL_ttf library. We also test fonts to be sure that
+#. they have both uppercase and lowercase letters. Note that we do not
+#. test for "Aa", because it is OK if uppercase and lowercase are the
+#. same (but not nice -- such fonts get a low score later).
+#.
+#. Most locales leave the blacklist strings alone: "QX" and "qx"
+#. (it is less destructive to use the scoring strings instead)
+#.
+#. Locales that absolutely require all fonts to have some
+#. extra characters should use "QX..." and "qx...", where "..."
+#. are some characters you absolutely require in all fonts.
+#.
+#. Locales with absolutely NO use for ASCII may use "..." and "...",
+#. where "..." are some characters you absolutely require in
+#. all fonts. This would be the case for a locale in which it is
+#. impossible for a user to type ASCII letters.
+#.
+#. Most translators should use scoring instead.
+#: ../dirwalk.c:177
+msgid "qx"
+msgstr "qx"
+
+#: ../dirwalk.c:177
+msgid "QX"
+msgstr "QX"
+
+#. TODO: weight specification
+#. Now we score fonts to ensure that the best ones will be placed at
+#. the top of the list. The user will see them first. This sorting is
+#. especially important for users who have scroll buttons disabled.
+#. Translators should do whatever is needed to put crummy fonts last.
+#. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
+#: ../dirwalk.c:202
+msgid "oO"
+msgstr "oO"
+
+#. common punctuation (e.g., '?', '!', '.', ',', etc.)
+#: ../dirwalk.c:205
+msgid ",.?!"
+msgstr ",.?!"
+
+#. uncommon punctuation (e.g., '@', '#', '*', etc.)
+#: ../dirwalk.c:208
+#, fuzzy
+#| msgid "`\\%_@$~#{<(^&*"
+msgid "`%_@$~#{<(^&*"
+msgstr "`\\%_@$~#{<(^&*"
+
+#. digits (e.g., '0', '1' and '7')
+#: ../dirwalk.c:211
+msgid "017"
+msgstr "017"
+
+#. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
+#: ../dirwalk.c:214
+msgid "O0"
+msgstr "O0"
+
+#. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
+#: ../dirwalk.c:217
+msgid "1Il|"
+msgstr "1Il|"
+
+#: ../dirwalk.c:221
+msgid "<1>spare-1a"
+msgstr "<1>spare-1a"
+
+#: ../dirwalk.c:222
+msgid "<1>spare-1b"
+msgstr "<1>spare-1b"
+
+#: ../dirwalk.c:223
+msgid "<9>spare-9a"
+msgstr "<9>spare-9a"
+
+#: ../dirwalk.c:224
+msgid "<9>spare-9b"
+msgstr "<9>spare-9b"
+
+#. Congratulations #1
+#: ../great.h:37
+msgid "Great!"
+msgstr "سد۪ٹھا اَسٕل!"
+
+#. Congratulations #2
+#: ../great.h:40
+msgid "Cool!"
+msgstr "مست!"
+
+#. Congratulations #3
+#: ../great.h:43
+msgid "Keep it up!"
+msgstr "یِتھٔے پٲٹ۪ی تھٲیو!"
+
+#. Congratulations #4
+#: ../great.h:46
+msgid "Good job!"
+msgstr " اَسٕل کٲم!"
+
+#. Input Method: English mode
+#: ../im.c:74
+msgid "English"
+msgstr " انٛگریزی"
+
+#. Input Method: Japanese Romanized Hiragana mode
+#: ../im.c:77
+msgid "Hiragana"
+msgstr " ہیراگانا"
+
+#. Input Method: Japanese Romanized Katakana mode
+#: ../im.c:80
+msgid "Katakana"
+msgstr " کٹاکَنا"
+
+#. Input Method: Korean Hangul 2-Bul mode
+#: ../im.c:83
+msgid "Hangul"
+msgstr " ہانٛگُل"
+
+#. Input Method: Thai mode
+#: ../im.c:86
+msgid "Thai"
+msgstr " تھای"
+
+#. Input Method: Traditional Chinese mode
+#: ../im.c:89
+msgid "ZH_TW"
+msgstr " ZH_TW"
+
+#. Square shape tool (4 equally-lengthed sides at right angles)
+#: ../shapes.h:234 ../shapes.h:235
+msgid "Square"
+msgstr " مۄربعہٕ"
+
+#. Rectangle shape tool (4 sides at right angles)
+#: ../shapes.h:238 ../shapes.h:239
+msgid "Rectangle"
+msgstr " ژٕکوٗنجل"
+
+#. Circle shape tool (X radius and Y radius are the same)
+#: ../shapes.h:242 ../shapes.h:243
+msgid "Circle"
+msgstr " گوٗل"
+
+#. Ellipse shape tool (X radius and Y radius may differ)
+#: ../shapes.h:246 ../shapes.h:247
+msgid "Ellipse"
+msgstr "ٹھولہٕ شکلہِ"
+
+#. Triangle shape tool (3 sides)
+#: ../shapes.h:250 ../shapes.h:251
+msgid "Triangle"
+msgstr " تِکوٗن "
+
+#. Pentagone shape tool (5 sides)
+#: ../shapes.h:254 ../shapes.h:255
+msgid "Pentagon"
+msgstr "پانٛژکونَل"
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:258 ../shapes.h:259
+msgid "Rhombus"
+msgstr "معین"
+
+#. Octagon shape tool (8 sides)
+#: ../shapes.h:262 ../shapes.h:263
+msgid "Octagon"
+msgstr " ٲٹھ کونَل"
+
+#. Triangle star (3 points star)
+#. Rhombus star (4 points star)
+#. Pentagone star (5 points star)
+#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
+#: ../shapes.h:278 ../shapes.h:281
+msgid "Star"
+msgstr ""
+
+#. Description of a square
+#: ../shapes.h:289 ../shapes.h:290
+msgid "A square is a rectangle with four equal sides."
+msgstr "اَکھ مۄربعہٕ چھُہ  سُہ   ژٕکوٗنجل یَتھ ژۄنوٲی انٛد برابر آسد۪ن"
+
+#. Description of a rectangle
+#: ../shapes.h:293 ../shapes.h:294
+msgid "A rectangle has four sides and four right angles."
+msgstr "أکِس ژٕکوٗنجلَس ژور انٛد تہٕ ژور عمودی زٲوِیہٕ آسان"
+
+#. Description of a circle
+#: ../shapes.h:297 ../shapes.h:298
+msgid ""
+"A circle is a curve where all points have the same distance from the center."
+msgstr ""
+"گوٗل چھُہ اَکھ گُماو دار شکل یَتھ منٛز سٲری نۄختہٕ  مرکز پد۪ٹھ برابر دوری پد۪ٹھ آسد۪ن"
+
+#. Description of an ellipse
+#: ../shapes.h:301 ../shapes.h:302
+msgid "An ellipse is a stretched circle."
+msgstr "ٹھولہٕ شکل چھہ اَکھ زیٹھرٲیِتھ گوٗل آسان"
+
+#. Description of a triangle
+#: ../shapes.h:305 ../shapes.h:306
+msgid "A triangle has three sides."
+msgstr "  تِکوٗنَس چھہ ترٚے انٛد آسان"
+
+#. Description of a pentagon
+#: ../shapes.h:309 ../shapes.h:310
+msgid "A pentagon has five sides."
+msgstr "پانٛژ کونَس چھہ پانٛژ انٛد آسان"
+
+#. Description of a rhombus
+#: ../shapes.h:313 ../shapes.h:314
+msgid "A rhombus has four equal sides, and opposite sides are parallel."
+msgstr "معینَس چھہٕ ژور برابرانٛد آسان تہم مدِمقابل انٛد متوازی آسان"
+
+#. Description of an octagon
+#: ../shapes.h:317 ../shapes.h:318
+msgid "An octagon has eight equal sides."
+msgstr "ٲٹھ کوٗنلَس چھہ ٲٹھ برابر انٛد آسان"
+
+#: ../shapes.h:320 ../shapes.h:321
+msgid "A star with 3 points."
+msgstr ""
+
+#: ../shapes.h:322 ../shapes.h:323
+msgid "A star with 4 points."
+msgstr ""
+
+#: ../shapes.h:324 ../shapes.h:325
+msgid "A star with 5 points."
+msgstr ""
+
+#. Title of tool selector (buttons down the left)
+#: ../titles.h:56
+msgid "Tools"
+msgstr "اوزار"
+
+#. Title of color palette (buttons across the bottom)
+#: ../titles.h:59
+msgid "Colors"
+msgstr "رنٛگ"
+
+#. Title of brush selector (buttons down the right for paint and line tools)
+#: ../titles.h:62
+msgid "Brushes"
+msgstr "بُرش"
+
+#. Title of eraser selector (buttons down the right for eraser tool)
+#: ../titles.h:65
+msgid "Erasers"
+msgstr "رَبّد"
+
+#. Title of stamp selector (buttons down the right for stamps tool)
+#: ../titles.h:68
+msgid "Stamps"
+msgstr "مۄہر"
+
+#. Title of shape selector (buttons down the right for shapes tool)
+#. Shape creation tool (square, circle, etc.)
+#: ../titles.h:71 ../tools.h:71
+msgid "Shapes"
+msgstr "شکل"
+
+#. Title of font selector (buttons down the right for text and label tools)
+#: ../titles.h:74
+msgid "Letters"
+msgstr "حروف"
+
+#. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
+#. "Magic" effects tools (blur, flip image, etc.)
+#: ../titles.h:77 ../tools.h:83
+msgid "Magic"
+msgstr "مٲتھر"
+
+#. Freehand painting tool
+#: ../tools.h:62
+msgid "Paint"
+msgstr "پینٹ"
+
+#. Stamp tool (aka Rubber Stamps)
+#: ../tools.h:65
+msgid "Stamp"
+msgstr "مۄہر"
+
+#. Line drawing tool
+#: ../tools.h:68
+msgid "Lines"
+msgstr "رٕکھہٕ"
+
+#. Text tool
+#: ../tools.h:74
+msgid "Text"
+msgstr "ٹیکسٹ"
+
+#. Label tool
+#: ../tools.h:77
+msgid "Label"
+msgstr "لیبل"
+
+#. Fill tool
+#: ../tools.h:80
+msgid "Fill"
+msgstr "بھٔرِو"
+
+#. Undo last action
+#: ../tools.h:86
+msgid "Undo"
+msgstr "اندو"
+
+#. Redo undone action
+#: ../tools.h:89
+msgid "Redo"
+msgstr "ریڈو"
+
+#. Eraser tool
+#: ../tools.h:92
+msgid "Eraser"
+msgstr "رَبّڈ"
+
+#. Start a new picture
+#: ../tools.h:95
+msgid "New"
+msgstr "نو"
+
+#. Open a saved picture
+#. buttons for the file open dialog
+#. Open dialog: 'Open' button, to load the selected picture
+#: ../tools.h:98 ../tuxpaint.c:7846
+msgid "Open"
+msgstr "کھولِو"
+
+#. Save the current picture
+#: ../tools.h:101
+msgid "Save"
+msgstr "محفوظ کٔریو"
+
+#. Print the current picture
+#: ../tools.h:104
+msgid "Print"
+msgstr "پرنٚٹ کٔریو"
+
+#. Quit/exit Tux Paint application
+#: ../tools.h:107
+msgid "Quit"
+msgstr "بنٛد کٔریو"
+
+#. Paint tool instructions
+#: ../tools.h:115
+msgid "Pick a color and a brush shape to draw with."
+msgstr "اَکھ رنٛگ تہٕ بُرش چُنِو بناونہٕ خٲطرٕ"
+
+#. Stamp tool instructions
+#: ../tools.h:118
+msgid "Pick a picture to stamp around your drawing."
+msgstr "اَکھ تصویر چُنِو پَنٕنہِ ڈرائنگ أند۪ی أند۪ی لاگنہٕ خٲطرٕ۔"
+
+#. Line tool instructions
+#: ../tools.h:121
+msgid "Click to start drawing a line. Let go to complete it."
+msgstr "رٕکھ بناوٕن۪ی شروع کرنہٕ خٲطرٕ کٔریو کلِک۔ یہٕ اَتھ دِیو گَسنہٕ یہٕ مکلاونہٕ خٲطرٕ۔"
+
+#: ../tools.h:125
+msgid ""
+"Pick a shape. Click to pick the center, drag, then let go when it is the "
+"size you want. Move around to rotate it, and click to draw it."
+msgstr ""
+"اَکھ شکل چُنِو۔  کلِک کٔریو مرکز چُنٕنہٕ خٲطرٕ،  ڈریگ کٔریو تہٕ ترٚٲیو یَلہٕ تَم۪ی ساتھ یٔلہِ "
+"مرضی ہِنٛد۪ی سائزٕ حساب گَسہِ۔ أند۪ی أند۪ی ڈٲلیو نَژناونہٕ خٲطرٕ  تہٕ کلِک کٔریو بناونہٕ "
+"خٲطرٕ۔"
+
+#: ../tools.h:129
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text."
+msgstr ""
+"ٹیکسٹک۪ی اندازُک کٔریو انتخاب۔ پَنٕنہِ ڈرائنگ پد۪ٹھ کٔریو کلِک تہٕ تُہۍ ہد۪کِو ٹائپِنگ "
+"شروع کٔرتھ۪ی۔ [Enter]  یا  [Tab] دبٲیو ٹائپِنگ پورٕ کرنہٕ خٲطرٕ۔"
+
+#: ../tools.h:133
+#, fuzzy
+#| msgid ""
+#| "Choose a style of text. Click on your drawing and you can start typing. "
+#| "Press [Enter] or [Tab] to complete the text. By using the selector button "
+#| "and clicking an exist label, you can move it, edit it and change its text "
+#| "style."
+msgid ""
+"Choose a style of text. Click on your drawing and you can start typing. "
+"Press [Enter] or [Tab] to complete the text. By using the selector button "
+"and clicking an existing label, you can move it, edit it and change its text "
+"style."
+msgstr ""
+"ٹیکسٹک۪ی اندازُک کٔریو انتخاب۔ پَنٕنہِ ڈرائنگ پد۪ٹھ کٔریو کلِک تہٕ تُہۍ ہد۪کِو ٹائپِنگ "
+"شروع کٔرتھ۪ی۔  [Enter]  یا  [Tab] دبٲیو ٹائپِنگ پورٕ کرنہٕ خٲطرٕ۔ سلیکٹر بٹن "
+"لٲگتھ۪ی تہٕ موجود لیبل پد۪ٹھ کلِک کٔرتھ۪ی ہد۪کِو تُہِۍ یہٕ ڈٲلتھ۪ی، اَتھ ترمیم کٔرتھ۪ی تہٕ "
+"ٹیکسٹُک انداز تبدیل کٔرتھ۪ی۔"
+
+#. Fill tool instructions
+#: ../tools.h:136
+msgid "Click in the picture to fill that area with color."
+msgstr "تصویر منٛز کٔریو کلِک سُہ علاقہٕ رنٛگ ست۪ی بھرنہٕ خٲطرٕ۔"
+
+#. Magic tool instruction
+#: ../tools.h:139
+msgid "Pick a magical effect to use on your drawing!"
+msgstr "مٲتھر دار اثر چُنِو پَنٕنہِ ڈرائنگ  منٛز لاگنہٕ خٲطرٕ"
+
+#. Response to 'undo' action
+#: ../tools.h:142
+msgid "Undo!"
+msgstr "انڈو!"
+
+#. Response to 'redo' action
+#: ../tools.h:145
+msgid "Redo!"
+msgstr "ریڈو!"
+
+#. Eraser tool
+#: ../tools.h:148
+msgid "Eraser!"
+msgstr "ربّڈ!"
+
+#. Response to 'start a new image' action
+#: ../tools.h:151
+msgid "Pick a color or picture with which to start a new drawing."
+msgstr "اَکھ رنٛگ یا شکل ژٲرِو یَمہِ پد۪ٹھ نٔو ڈرائنگ شروع کَرو"
+
+#. Response to 'open' action (while file dialog is being constructed)
+#: ../tools.h:154
+msgid "Open…"
+msgstr "کھولِو…"
+
+#. Response to 'save' action
+#: ../tools.h:157
+msgid "Your image has been saved!"
+msgstr "تُہٕنٛز شکل آیہٕ محفوظ کرنہٕ"
+
+#. Response to 'print' action (while printing, or print dialog is being used)
+#: ../tools.h:160
+msgid "Printing…"
+msgstr "پرنٛٹ کران…"
+
+#. Response to 'quit' (exit) action
+#: ../tools.h:163
+msgid "Bye bye!"
+msgstr "خۄدایَس حوال!"
+
+#. Instruction while using Line tool (after click, before release)
+#: ../tools.h:167
+msgid "Let go of the button to complete the line."
+msgstr "بٹنَس دِیو گَسنہٕ رٕکھ پورٕ کرنہٕ خٲطرٕ"
+
+#. Instruction while using Shape tool (after first click, before release)
+#: ../tools.h:170
+msgid "Hold the button to stretch the shape."
+msgstr "بٹن تھٲیو دبٲیتھٕی شکل زیٹھراونہٕ خٲطرٕ"
+
+#. Instruction while finishing Shape tool (after release, during rotation step before second click)
+#: ../tools.h:173
+msgid "Move the mouse to rotate the shape. Click to draw it."
+msgstr "ماوس ڈٲلِو شکل نَژناونہٕ خٲطرٕ۔"
+
+#. Notification that 'New' action was aborted (current image would have been lost)
+#: ../tools.h:176
+msgid "OK then… Let’s keep drawing this one!"
+msgstr "ٹھیک چُھہ تد۪لہِ…  أس۪ی تھاوُو چالو یہٕ بناوُن۔"
+
+#. Prompt to confirm user wishes to quit
+#: ../tuxpaint.c:2113
+msgid "Do you really want to quit?"
+msgstr "توہِیہٕ چھوا پَزے بنٛد یژھان کَرُن؟"
+
+#. Quit prompt positive response (quit)
+#: ../tuxpaint.c:2116
+msgid "Yes, I’m done!"
+msgstr "اَوا، مِیَہ مَکلو!"
+
+#. Quit prompt negative response (don't quit)
+#: ../tuxpaint.c:2119 ../tuxpaint.c:2146
+msgid "No, take me back!"
+msgstr "نَہ، مِیَہ نہِ واپس!"
+
+#. Current picture is not saved; user is quitting
+#: ../tuxpaint.c:2123
+msgid "If you quit, you’ll lose your picture! Save it?"
+msgstr "اگر توہِیہٕ بنٛد کۄروُہ ہُہٕنٛز شکل رایہٕ! محفوظ کَرہۄنا؟"
+
+#: ../tuxpaint.c:2124 ../tuxpaint.c:2129
+msgid "Yes, save it!"
+msgstr "اوا، کَرُن محفوظ!"
+
+#: ../tuxpaint.c:2125 ../tuxpaint.c:2130
+msgid "No, don’t bother saving!"
+msgstr "نَہ، مَہ کَرُن محفوظ!"
+
+#. Current picture is not saved; user is opening another picture
+#: ../tuxpaint.c:2128
+msgid "Save your picture first?"
+msgstr "تُہٕنٛز شکل کَروا محفوظ گۄڈٕ؟"
+
+#. Error opening picture
+#: ../tuxpaint.c:2133
+msgid "Can’t open that picture!"
+msgstr "یہٕ شکل ہد۪چ نہٕ کھولِتھ!"
+
+#. Generic dialog dismissal
+#: ../tuxpaint.c:2136 ../tuxpaint.c:2141 ../tuxpaint.c:2150 ../tuxpaint.c:2157
+#: ../tuxpaint.c:2166
+msgid "OK"
+msgstr "ٹھیک"
+
+#. Notification that 'Open' dialog has nothing to show
+#: ../tuxpaint.c:2140
+msgid "There are no saved files!"
+msgstr "یَتہِ چھہٕ نہٕ کِہن۪ی محفوظ کٔرتھ۪ی فائلہٕ!"
+
+#. Verification of print action
+#: ../tuxpaint.c:2144
+msgid "Print your picture now?"
+msgstr "تُہٕنٛز شکل کَروا وٕن۪ی پرٚنٹ؟"
+
+#: ../tuxpaint.c:2145
+msgid "Yes, print it!"
+msgstr "اوا، پرٚنٹ کَرُن!"
+
+#. Confirmation of successful (we hope) printing
+#: ../tuxpaint.c:2149
+msgid "Your picture has been printed!"
+msgstr "تُہٕنٛز شکل آیہٕ پرٚنٹ کرنہٕ!"
+
+#. We got an error printing
+#: ../tuxpaint.c:2153
+msgid "Sorry! Your picture could not be printed!"
+msgstr "معٲفی دِیو! تُہٕنٛز شکل آیہٕ نہٕ پرٚٹ کرنہٕ!"
+
+#. Notification that it's too soon to print again (--printdelay option is in effect)
+#: ../tuxpaint.c:2156
+msgid "You can’t print yet!"
+msgstr "توہِی ہد۪کِو نہٕ وُنہِ پرٚٹ کٔرتھ۪ی!"
+
+#. Prompt to confirm erasing a picture in the Open dialog
+#: ../tuxpaint.c:2160
+msgid "Erase this picture?"
+msgstr "یہٕ شکل مِٹٲوہۄنا؟"
+
+#: ../tuxpaint.c:2161
+msgid "Yes, erase it!"
+msgstr "اوا، مِتٲیہُن!"
+
+#: ../tuxpaint.c:2162
+msgid "No, don’t erase it!"
+msgstr "نا،مَہ مِتٲیہُن!"
+
+#. Reminder that Mouse Button 1 is the button to use in Tux Paint
+#: ../tuxpaint.c:2165
+msgid "Remember to use the left mouse button!"
+msgstr "کھوٚر ماوس بٹن استعمال کَرُن تھٲیزد۪و یاد!"
+
+#. Sound has been muted (silenced) via keyboard shortcut
+#: ../tuxpaint.c:2371
+msgid "Sound muted."
+msgstr "آواز چھہٕ بنٛد کٔرتھ۪ی۔"
+
+#. Sound has been unmuted (unsilenced) via keyboard shortcut
+#: ../tuxpaint.c:2376
+msgid "Sound unmuted."
+msgstr "آواز چھہٕ یَلہٕ ترٚٲیِتھ۔"
+
+#. Wait while Text tool finishes loading fonts
+#: ../tuxpaint.c:3129
+msgid "Please wait…"
+msgstr "ہَنا کٔریو سبر…"
+
+#. Open dialog: 'Erase' button, to erase/deleted the selected picture
+#: ../tuxpaint.c:7849
+msgid "Erase"
+msgstr "مِٹٲیو"
+
+#. Open dialog: 'Slides' button, to switch to slide show mode
+#: ../tuxpaint.c:7852
+msgid "Slides"
+msgstr "سلائڈ"
+
+#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
+#: ../tuxpaint.c:7855
+msgid "Back"
+msgstr "پَتھ"
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7858
+msgid "Next"
+msgstr "بیاکھ"
+
+#. Slideshow: 'Play' button, to begin a slideshow sequence
+#: ../tuxpaint.c:7861
+msgid "Play"
+msgstr "چَلٲیو"
+
+#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
+#: ../tuxpaint.c:8576
+msgid "Aa"
+msgstr "آ"
+
+#. Admittedly stupid way of determining which keys can be used for
+#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
+#: ../tuxpaint.c:11944
+msgid "Yes"
+msgstr "اوا"
+
+#: ../tuxpaint.c:11948
+msgid "No"
+msgstr "نَہ"
+
+#. Prompt to ask whether user wishes to save over old version of their file
+#: ../tuxpaint.c:13018
+msgid "Replace the picture with your changes?"
+msgstr "شکل بدلاوا تُنٛہزو تبدیلِیو ست۪ی؟"
+
+#. Positive response to saving over old version
+#. (like a 'File:Save' action in other applications)
+#: ../tuxpaint.c:13022
+msgid "Yes, replace the old one!"
+msgstr "اوا، بَدلٲیو پرٚین۪ی اَکھ!"
+
+#. Negative response to saving over old version (saves a new image)
+#. (like a 'File:Save As...' action in other applications)
+#: ../tuxpaint.c:13026
+msgid "No, save a new file!"
+msgstr "نَہ نٔو فائل کٔریو محفوظ!"
+
+#. Let user choose an image:
+#. Instructions for 'Open' file dialog
+#: ../tuxpaint.c:14270
+msgid "Choose the picture you want, then click “Open”."
+msgstr "شکل ژٲرِو یۄس تُہِۍ یژھان چھو، تہٕ پَتہٕ کٔریو کلِک “کھولِو“۔"
+
+#. Let user choose images:
+#. Instructions for Slideshow file dialog (FIXME: Make a #define)
+#: ../tuxpaint.c:15266 ../tuxpaint.c:15586
+msgid "Choose the pictures you want, then click “Play”."
+msgstr "شکل ژٲرِو یۄس تُہِۍ یژھان چھو، تہٕ پَتہٕ کٔریو کلِک “چلٲیو“۔"
+
+#: ../tuxpaint.c:23179
+msgid "Select a color from your drawing."
+msgstr ""
+
+#: ../tuxpaint.c:23191
+msgid "Pick a color."
+msgstr "اَکھ رنٛگ تُلِو۔"
+
+#: ../tuxpaint.desktop.in.h:1
+msgid "Tux Paint"
+msgstr "ٹَکس پینٹ"
+
+#: ../tuxpaint.desktop.in.h:2
+msgid "Drawing program"
+msgstr "ڈرائنگ پروگرام"
+
+#: ../tuxpaint.desktop.in.h:3
+msgid "A drawing program for children."
+msgstr "اَکھ ڈرائنگ پروگرام بَچَن خٲطرٕ"
+
+#: ../../magic/src/alien.c:68
+msgid "Color Shift"
+msgstr "کلر شفٹ"
+
+#: ../../magic/src/alien.c:72
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to change the colors in parts of your picture."
+msgid "Click and drag the mouse to change the colors in parts of your picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلِو ماوس تُہنٛزِ شکلہِ ہِنٛد د۪ن رنٛگ تبدیل کرنہٕ خٲطرٕ"
+
+#: ../../magic/src/alien.c:73
+msgid "Click to change the colors in your entire picture."
+msgstr "تُہنٛزِ سٲرۍسی شکلہِ رنٛگ تبدیل کرنہٕ خٲطرٕ کٔریو کلِک"
+
+#: ../../magic/src/blind.c:116
+msgid "Blind"
+msgstr "اۄن"
+
+#: ../../magic/src/blind.c:123
+msgid ""
+"Click towards the edge of your picture to pull window blinds over it. Move "
+"perpendicularly to open or close the blinds."
+msgstr ""
+"پَنٕنہِ تصویر ہِنٛزۍ دنٛدرِ کُن کٔریو کلِک وِنڈو بلِنڈ اَتھ پد۪ٹھ لمنہٕ خٲطرٕ۔  اَتھ کھڈا "
+"دٲلیو بلِنڈ یَلہٕ ترٚاونہٕ یا بنٛد کرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/blocks_chalk_drip.c:129
+msgid "Blocks"
+msgstr "بلاک"
+
+#: ../../magic/src/blocks_chalk_drip.c:131
+msgid "Chalk"
+msgstr "چاک"
+
+#: ../../magic/src/blocks_chalk_drip.c:133
+msgid "Drip"
+msgstr "ڈرِپ"
+
+#: ../../magic/src/blocks_chalk_drip.c:142
+#, fuzzy
+#| msgid "Click and move the mouse around to make the picture blocky."
+msgid "Click and drag the mouse around to make the picture blocky."
+msgstr "کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس تصویر بلاکی بناونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/blocks_chalk_drip.c:144
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
+msgid ""
+"Click and drag the mouse around to turn the picture into a chalk drawing."
+msgstr ""
+"کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس تصویر چاک ڈرائنگ  منٛز تبدیل کرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/blocks_chalk_drip.c:146
+#, fuzzy
+#| msgid "Click and move the mouse around to make the picture drip."
+msgid "Click and drag the mouse around to make the picture drip."
+msgstr "کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس ڈرِپ تصویر بناونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/blur.c:80
+msgid "Blur"
+msgstr "بلر"
+
+#: ../../magic/src/blur.c:84
+#, fuzzy
+#| msgid "Click and move the mouse around to blur the image."
+msgid "Click and drag the mouse around to blur the image."
+msgstr "کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس تصویر بلر کرنہٕ خٲطرٕ"
+
+#: ../../magic/src/blur.c:85
+msgid "Click to blur the entire image."
+msgstr "سٲری تصویر بلر کرنہٕ خٲطرٕ کلِک کٔریو "
+
+#. Both are named "Bricks", at the moment:
+#: ../../magic/src/bricks.c:120
+msgid "Bricks"
+msgstr "سیٖرِ"
+
+#: ../../magic/src/bricks.c:127
+#, fuzzy
+#| msgid "Click and move to draw large bricks."
+msgid "Click and drag to draw large bricks."
+msgstr "کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس بَجہٕ سیرِ بناونہٕ خٲطرٕ"
+
+#: ../../magic/src/bricks.c:129
+#, fuzzy
+#| msgid "Click and move to draw small bricks."
+msgid "Click and drag to draw small bricks."
+msgstr "کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس لۄکچہٕ سیرِ بناونہٕ خٲطرٕ"
+
+#: ../../magic/src/calligraphy.c:124
+msgid "Calligraphy"
+msgstr "خوش نویسی"
+
+#: ../../magic/src/calligraphy.c:131
+#, fuzzy
+#| msgid "Click and move the mouse around to draw in calligraphy."
+msgid "Click and drag the mouse around to draw in calligraphy."
+msgstr "کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس  خوش نویسی منٛز بناونہٕ خٲطرٕ "
+
+#: ../../magic/src/cartoon.c:103
+msgid "Cartoon"
+msgstr "کارٹون"
+
+#: ../../magic/src/cartoon.c:109
+#, fuzzy
+#| msgid "Click and move the mouse around to turn the picture into a cartoon."
+msgid "Click and drag the mouse around to turn the picture into a cartoon."
+msgstr "کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس تصویر کارٹونَس منٛز تبدیل کرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/confetti.c:83
+msgid "Confetti"
+msgstr "کَن فِٹی"
+
+#: ../../magic/src/confetti.c:88
+msgid "Click to throw confetti!"
+msgstr "کَن فِٹی چھکنہٕ خٲطرٕ کٔریو کلِک"
+
+#: ../../magic/src/distortion.c:134
+msgid "Distortion"
+msgstr "ڈِسٹارشن"
+
+#: ../../magic/src/distortion.c:143
+msgid "Click and drag the mouse to cause distortion in your picture."
+msgstr "کلِک تہٕ ڈریگ کٔریو ماوس تصویر منٛز ڈِسٹارشن پٲدٕ کرنہٕ خٲطرٕ"
+
+#: ../../magic/src/emboss.c:101
+msgid "Emboss"
+msgstr "ابھار"
+
+#: ../../magic/src/emboss.c:107
+msgid "Click and drag the mouse to emboss the picture."
+msgstr "کلِک تہٕ ڈریگ کٔریو ماوس تصویر ابھار اَنٕنہٕ خٲطرٕ"
+
+#: ../../magic/src/fade_darken.c:114
+msgid "Lighten"
+msgstr "ہلکہٕ کٔریو "
+
+#: ../../magic/src/fade_darken.c:116
+msgid "Darken"
+msgstr "تیکھ کٔریو"
+
+#: ../../magic/src/fade_darken.c:127
+#, fuzzy
+#| msgid "Click and move the mouse to lighten parts of your picture."
+msgid "Click and drag the mouse to lighten parts of your picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس تصویر ہِنٛد۪ی حصہٕ گوٚٹ بناونہٕ خٲطرٕ"
+
+#: ../../magic/src/fade_darken.c:129
+msgid "Click to lighten your entire picture."
+msgstr "کلِک کٔریو سٲری شکل گاشدار بناونہٕ خٲطرٕ"
+
+#: ../../magic/src/fade_darken.c:134
+#, fuzzy
+#| msgid "Click and move the mouse to darken parts of your picture."
+msgid "Click and drag the mouse to darken parts of your picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس تصویر ہِنٛد۪ی حصہٕ تیکھ کَرنہٕ خٲطرٕ"
+
+#: ../../magic/src/fade_darken.c:136
+msgid "Click to darken your entire picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس  سارےٛ تصویٖرِ ہِنٛد رنٛگ تیکھ کَرنہٕ خٲطر"
+
+#: ../../magic/src/fisheye.c:101
+msgid "Fisheye"
+msgstr "گاڈٕ أچھ"
+
+#: ../../magic/src/fisheye.c:106
+msgid "Click on part of your picture to create a fisheye effect."
+msgstr "شکلہِ ہِنٛدِس حِصَس پد۪ٹھ کٔریو کلِک تَتھ پد۪ٹھ گاڈٕ أچھ اثر بناونہٕ خٲطرٕ"
+
+#: ../../magic/src/flower.c:144
+msgid "Flower"
+msgstr "پوش"
+
+#: ../../magic/src/flower.c:150
+msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
+msgstr "کلِک تہٕ ڈریگ کٔریو اَکھ پوش سٹاک بناونہٕ خٲطرٕ۔ یَلہٕ ترٚٲیو مکلاونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/foam.c:114
+msgid "Foam"
+msgstr "فوم"
+
+#: ../../magic/src/foam.c:120
+msgid "Click and drag the mouse to cover an area with foamy bubbles."
+msgstr "کلِک تہٕ ڈریگ کٔریو ماوس "
+
+#: ../../magic/src/fold.c:103
+msgid "Fold"
+msgstr "تَہ دِیو"
+
+#: ../../magic/src/fold.c:108
+msgid ""
+"Choose a background color and click to turn the corner of the page over."
+msgstr "بیک گرانٛڈ رنٛگُک کٔریو انتخاب تہٕ  صفُک کوٗن پھِرنہٕ خٲطرٕ کٔریو کلِک۔"
+
+#: ../../magic/src/fretwork.c:176
+msgid "Fretwork"
+msgstr ""
+
+#: ../../magic/src/fretwork.c:182
+#, fuzzy
+#| msgid "Click and drag to draw arrows made of string art."
+msgid "Click and drag to draw repetitive patterns. "
+msgstr "پَنکہِ فَن ست۪ی بَنومُت ایرو بناونہٕ خٲطرٕ کٔریو کلِک تہٕ ڈریگ"
+
+#: ../../magic/src/fretwork.c:184
+#, fuzzy
+#| msgid "Click to cover your picture with rain drops."
+msgid "Click to surround your picture with repetitive patterns."
+msgstr "کلِک کٔریو پَنٕن۪ی تصویر رۄدٕ پھد۪ریو ست۪ی ڈھکنہٕ خٲطرٕ"
+
+#: ../../magic/src/glasstile.c:104
+msgid "Glass Tile"
+msgstr "شیشو ٹٲلہٕ"
+
+#: ../../magic/src/glasstile.c:111
+msgid "Click and drag the mouse to put glass tile over your picture."
+msgstr "کلِک تہٕ ڈریگ کٔریو ماوس پَنٕنہِ تصویر پد۪ٹھ شیشو ٹٲلہٕ تھاونہٕ خٲطرٕ"
+
+#: ../../magic/src/glasstile.c:113
+msgid "Click to cover your entire picture in glass tiles."
+msgstr "کلِک کٔریو پَنٕن۪ی سٲری تصویر شیشو ٹٲلو ست۪ی ڈھکنہٕ خٲطرٕ"
+
+#: ../../magic/src/grass.c:107
+msgid "Grass"
+msgstr "گاسہٕ"
+
+#: ../../magic/src/grass.c:113
+#, fuzzy
+#| msgid "Click and move to draw grass. Don’t forget the dirt!"
+msgid "Click and drag to draw grass. Don’t forget the dirt!"
+msgstr "کلِک کٔریو  تہٕ ڈٲلیو گاسہٕ بناونہٕ خٲطرٕ۔ لَژھ یِنہٕ مٔشِت گَسِوٕہ!"
+
+#: ../../magic/src/halftone.c:35
+msgid "Halftone"
+msgstr ""
+
+#: ../../magic/src/halftone.c:39
+#, fuzzy
+#| msgid "Click to turn your painting into its negative."
+msgid "Click and drag to turn your drawing into a newspaper."
+msgstr "  کلِک کٔریو پَنٕن۪ی پینٕن۪ی پینٹِنگ منفی بناونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/kalidescope.c:119
+msgid "Symmetric Left/Right"
+msgstr "متوازن کھوٚر/دۄچھُن"
+
+#: ../../magic/src/kalidescope.c:123
+msgid "Symmetric Up/Down"
+msgstr "متوازن ہد۪ور/بۄن"
+
+#: ../../magic/src/kalidescope.c:127
+msgid "Pattern"
+msgstr ""
+
+#: ../../magic/src/kalidescope.c:131
+msgid "Tiles"
+msgstr ""
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:135
+msgid "Kaleidoscope"
+msgstr "کیلوڈوسکوپ"
+
+#: ../../magic/src/kalidescope.c:146
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the left and right of your picture."
+msgstr ""
+"کلِک تہٕ ڈریگ کٔریو ماوس دۄیو بُرشو ست۪ بناونہٕ خٲطرٕ یِم متوازن آسد۪ن تصویرِ کھوٚر تہٕ "
+"دۄچھن۪ی کِن۪ی۔"
+
+#: ../../magic/src/kalidescope.c:152
+msgid ""
+"Click and drag the mouse to draw with two brushes that are symmetric across "
+"the top and bottom of your picture."
+msgstr ""
+"کلِک تہٕ ڈریگ کٔریو ماوس دۄیو بُرشو ست۪ی بناونہٕ خٲطرٕ یِم متوازن آسد۪ن تصویرِ ہد۪رۍ تہٕ "
+"بۄن کِن۪ی۔"
+
+#: ../../magic/src/kalidescope.c:156
+#, fuzzy
+#| msgid "Click and drag the mouse to emboss the picture."
+msgid "Click and drag the mouse to draw a pattern across the picture."
+msgstr "کلِک تہٕ ڈریگ کٔریو ماوس تصویر ابھار اَنٕنہٕ خٲطرٕ"
+
+#: ../../magic/src/kalidescope.c:160
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse to draw with two brushes that are symmetric "
+#| "across the left and right of your picture."
+msgid ""
+"Click and drag the mouse to draw a pattern that is symmetric across the "
+"picture."
+msgstr ""
+"کلِک تہٕ ڈریگ کٔریو ماوس دۄیو بُرشو ست۪ بناونہٕ خٲطرٕ یِم متوازن آسد۪ن تصویرِ کھوٚر تہٕ "
+"دۄچھن۪ی کِن۪ی۔"
+
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:164
+msgid ""
+"Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
+msgstr "کلِک تہٕ ڈریگ کٔریو ماوس متوازن بُرشو ست۪ی بناونہٕ خٲطرٕ (اَکھ کیلوڈوسکوپ)"
+
+#: ../../magic/src/light.c:103
+msgid "Light"
+msgstr "گاش"
+
+#: ../../magic/src/light.c:109
+msgid "Click and drag to draw a beam of light on your picture."
+msgstr "کلِک تہٕ ڈریگ کٔریو تُہٕنٛزِ شکلہِ پد۪ٹھ اَکھ گاشہٕ زٕژ بناونہٕ خٲطرٕ"
+
+#: ../../magic/src/metalpaint.c:98
+msgid "Metal Paint"
+msgstr "مد۪ٹل رنگ"
+
+#: ../../magic/src/metalpaint.c:105
+msgid "Click and drag the mouse to paint with a metallic color."
+msgstr "کلِک تہٕ ڈریگ کٔریو ماوس مد۪ٹَکلِک رنٛگ ست۪ی پینٹ کرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/mirror_flip.c:110
+msgid "Mirror"
+msgstr "شیشہٕ"
+
+#: ../../magic/src/mirror_flip.c:112
+msgid "Flip"
+msgstr "دُبہٕ کٔریو"
+
+#: ../../magic/src/mirror_flip.c:121
+msgid "Click to make a mirror image."
+msgstr "تصویر ہُنٛد عکس بناونہٕ خٲطرٕ کٔریو کلِک"
+
+#: ../../magic/src/mirror_flip.c:123
+msgid "Click to flip the picture upside-down."
+msgstr "کلِک کٔریو تصویر ہد۪رٕ پد۪ٹھ بون کُن دُبہٕ پھِرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/mosaic.c:96
+msgid "Mosaic"
+msgstr "موزیک"
+
+#: ../../magic/src/mosaic.c:100
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+msgid ""
+"Click and drag the mouse to add a mosaic effect to parts of your picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس تُہٕنٛزِ شکلہِ ہِنٛدد۪ن حِصَن موزیک اثر رَلاونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/mosaic.c:101
+msgid "Click to add a mosaic effect to your entire picture."
+msgstr "کلِک کٔریو تُہٕنٛزِ سٲرۍ سی شکلہِ موزیک اثر رَلاونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/mosaic_shaped.c:132
+msgid "Square Mosaic"
+msgstr "مربعہٕ موزیک"
+
+#: ../../magic/src/mosaic_shaped.c:133
+msgid "Hexagon Mosaic"
+msgstr "شَہ کوٗنَل موزیک"
+
+#: ../../magic/src/mosaic_shaped.c:134
+msgid "Irregular Mosaic"
+msgstr "بے قٲیدٕ موزیک"
+
+#: ../../magic/src/mosaic_shaped.c:140
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to add a square mosaic to parts of your picture."
+msgid ""
+"Click and drag the mouse to add a square mosaic to parts of your picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس تُہنٛزِ تصویر ہِنٛدد۪ن حصَن مربعہٕ موزیک رَلاونہٕ خٲطرٕ"
+
+#: ../../magic/src/mosaic_shaped.c:141
+msgid "Click to add a square mosaic to your entire picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس تُہنٛزِ تصویرِ مربعہٕ موزیک رَلاونہٕ خٲطرٕ"
+
+#: ../../magic/src/mosaic_shaped.c:145
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to add a hexagonal mosaic to parts of your "
+#| "picture."
+msgid ""
+"Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس تُہنٛزِ تصویر ہِنٛدد۪ن حصَن شَہ کوٗنَل موزیک رَلاونہٕ خٲطرٕ"
+
+#: ../../magic/src/mosaic_shaped.c:146
+msgid "Click to add a hexagonal mosaic to your entire picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس تُہنٛزِ تصویرِ شَہ کوٗنَل موزیک رَلاونہٕ خٲطرٕ"
+
+#: ../../magic/src/mosaic_shaped.c:150
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to add an irregular mosaic to parts of your "
+#| "picture."
+msgid ""
+"Click and drag the mouse to add an irregular mosaic to parts of your picture."
+msgstr ""
+"کلِک کٔریو تہٕ ڈٲلیو ماوس تُہنٛزِ تصویر ہِنٛدد۪ن حصَن بے قٲیدٕ موزیک رَلاونہٕ خٲطرٕ  "
+
+#: ../../magic/src/mosaic_shaped.c:151
+msgid "Click to add an irregular mosaic to your entire picture."
+msgstr " کلِک کٔریو تہٕ ڈٲلیو ماوس تُہنٛزِ تصویرِ بے قٲیدٕ  موزیک رَلاونہٕ خٲطرٕ"
+
+#: ../../magic/src/negative.c:94
+msgid "Negative"
+msgstr "  منفی"
+
+#: ../../magic/src/negative.c:101
+#, fuzzy
+#| msgid "Click and move the mouse around to make your painting negative."
+msgid "Click and drag the mouse around to make your painting negative."
+msgstr " کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس پَنٕن۪ی پینٹِنگ منفی بناونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/negative.c:103
+msgid "Click to turn your painting into its negative."
+msgstr "  کلِک کٔریو پَنٕن۪ی پینٕن۪ی پینٹِنگ منفی بناونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/noise.c:66
+msgid "Noise"
+msgstr "  شوٚر"
+
+#: ../../magic/src/noise.c:70
+#, fuzzy
+#| msgid "Click and move the mouse to add noise to parts of your picture."
+msgid "Click and drag the mouse to add noise to parts of your picture."
+msgstr " کلِک کٔریو تہٕ ڈٲلِو ماوس پَنٕنہِ تصویر ہِنٛدد۪ن حصَن ست۪ی شور رَلاونہٕ خٲطرٕ"
+
+#: ../../magic/src/noise.c:71
+msgid "Click to add noise to your entire picture."
+msgstr "  کلِک کٔریو تہٕ ڈٲلِو ماوس پَنٕنہِ سٲرۍسی تصویر شور رَلاونہٕ خٲطرٕ"
+
+#: ../../magic/src/perspective.c:147
+msgid "Perspective"
+msgstr " نقطہ نظر"
+
+#: ../../magic/src/perspective.c:148
+msgid "Zoom"
+msgstr "  بۄڈ کٔریو"
+
+#: ../../magic/src/perspective.c:153
+msgid "Click on the corners and drag where you want to stretch the picture."
+msgstr "  کونَن پد۪ٹھ کٔریو کلِک تہٕ ڈریگ کٔریو یۄت تام تۄہِیہٕ شکل زیٹھراوٕن۪ی چھو۔"
+
+#: ../../magic/src/perspective.c:156
+msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr ""
+"  کلِک کٔریو تہٕ ہد۪ور کُن کٔریو ڈریگ تصویر بۄڈ کرنہٕ تہٕ بۄن کُن کٔریو ڈریگ تصویر "
+"لۄکٕٹ کرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/puzzle.c:103
+msgid "Puzzle"
+msgstr "  پرٚژھ"
+
+#: ../../magic/src/puzzle.c:110
+msgid "Click the part of your picture where would you like a puzzle."
+msgstr " تَھ حصَس پد۪ٹھ کٔریو کلِک یَتد۪ن تُہِۍ پرٚژھ چھو یژھان تھاوٕن۪ی"
+
+#: ../../magic/src/puzzle.c:111
+msgid "Click to make a puzzle in fullscreen mode."
+msgstr "کلِک کٔریو پورٕ سکرینَس پد۪ٹھ  پرٚژھ بناونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/rails.c:129
+msgid "Rails"
+msgstr "پَٹٕر"
+
+#: ../../magic/src/rails.c:134
+msgid "Click and drag to draw train track rails on your picture."
+msgstr " کلِک تہٕ ڈریگ کٔریو پَنٕنہِ تصویر ہد۪ٹھ ٹرین پَٹرٕ بناونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/rainbow.c:133
+msgid "Rainbow"
+msgstr " رینبو"
+
+#: ../../magic/src/rainbow.c:139
+msgid "You can draw in rainbow colors!"
+msgstr "تُہۍ ہد۪کِو رینبو رنٛگَن منٛز بنٲیِتھ!"
+
+#: ../../magic/src/rain.c:68
+msgid "Rain"
+msgstr " رود"
+
+#: ../../magic/src/rain.c:72
+msgid "Click to place a rain drop onto your picture."
+msgstr "تُہۍ ہد۪کِو رۄدٕ پھد۪ور پَنٕنہِ تصویر پد۪ٹھ ترٚٲیِتھ"
+
+#: ../../magic/src/rain.c:73
+msgid "Click to cover your picture with rain drops."
+msgstr "کلِک کٔریو پَنٕن۪ی تصویر رۄدٕ پھد۪ریو ست۪ی ڈھکنہٕ خٲطرٕ"
+
+#: ../../magic/src/realrainbow.c:98
+msgid "Real Rainbow"
+msgstr "اصلی رینبو"
+
+#: ../../magic/src/realrainbow.c:100
+msgid "ROYGBIV Rainbow"
+msgstr "ROYGBIV رینبو"
+
+#: ../../magic/src/realrainbow.c:108
+msgid ""
+"Click where you want your rainbow to start, drag to where you want it to "
+"end, and then let go to draw a rainbow."
+msgstr ""
+"کلِک کٔریو یَتد۪ن تُہۍرینبو چھو شروع یژھان کَرُن تہٕ ڈریگ کٔریو یَتد۪ن تُہۍ بنٛد چھو "
+"یژھان کَرُن تہٕ ترٲیو یَلہٕ رینبو بناونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/ripples.c:102
+msgid "Ripples"
+msgstr " لٔہرٕ"
+
+#: ../../magic/src/ripples.c:108
+msgid "Click to make ripples appear over your picture."
+msgstr "کلِک کٔریو پَنٕنہِ تصویر پد۪ٹھ "
+
+#: ../../magic/src/rosette.c:115
+msgid "Rosette"
+msgstr "روزیٹ"
+
+#: ../../magic/src/rosette.c:117
+msgid "Picasso"
+msgstr "پِکاسو"
+
+#: ../../magic/src/rosette.c:123
+msgid "Click and start drawing your rosette."
+msgstr "کلِک کٔریو تہٕ روزیٹ ست۪ی بناوُن کٔریو شروع۔"
+
+#: ../../magic/src/rosette.c:125
+msgid "You can draw just like Picasso!"
+msgstr "تُہۍ ہد۪کِو پِکاسو ہد۪و بنٲیِتھ"
+
+#: ../../magic/src/sharpen.c:76
+msgid "Edges"
+msgstr "دنٛدرٕ"
+
+#: ../../magic/src/sharpen.c:77
+msgid "Sharpen"
+msgstr "تیز کٔرۍہُن"
+
+#: ../../magic/src/sharpen.c:78
+msgid "Silhouette"
+msgstr "سِلہوٹ"
+
+#: ../../magic/src/sharpen.c:82
+#, fuzzy
+#| msgid "Click and move the mouse to trace edges in parts of your picture."
+msgid "Click and drag the mouse to trace edges in parts of your picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس دنٛدرٕ ٹریس کرنہٕ خٲطرٕ پَنٕنہِ تصویر ہِنٛدد۪ن حصَن منٛز"
+
+#: ../../magic/src/sharpen.c:83
+msgid "Click to trace edges in your entire picture."
+msgstr "کلِک کٔریو دنٛدرٕ ٹریس کرنہٕ خٲطرٕ پَنٕنہِ سٲرۍ سی تصویر منٛز"
+
+#: ../../magic/src/sharpen.c:84
+#, fuzzy
+#| msgid "Click and move the mouse to sharpen parts of your picture."
+msgid "Click and drag the mouse to sharpen parts of your picture."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس پَنٕنہِ شکلہِ ہِنٛد۪ی حصہٕ تیٖز کرنہٕ خٲطرٕ"
+
+#: ../../magic/src/sharpen.c:85
+msgid "Click to sharpen the entire picture."
+msgstr "کلِک کٔریو پَنٕنہِ سٲری تصویر تیز کرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/sharpen.c:86
+#, fuzzy
+#| msgid "Click and move the mouse to create a black and white silhouette."
+msgid "Click and drag the mouse to create a black and white silhouette."
+msgstr "کلِک کٔریو تہٕ ڈٲلیو ماوس سفید تہٕ کرٚہُن سِلہوٹ بناونہٕ خٲطرٕ "
+
+#: ../../magic/src/sharpen.c:87
+msgid "Click to create a black and white silhouette of your entire picture."
+msgstr "کلِک کٔریو پَنٕنہِ سٲرۍ سی تصویر پد۪ٹھ سفید تہٕ کرٚہُن سِلہوٹ بناونہٕ خٲطرٕ"
+
+#: ../../magic/src/shift.c:106
+msgid "Shift"
+msgstr "تٲرِو"
+
+#: ../../magic/src/shift.c:112
+msgid "Click and drag to shift your picture around on the canvas."
+msgstr "کلِک تہٕ ڈریگ کٔریو پَنٕن۪ی تصویر کنواسَس أند۪ی أند۪ی تارنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/smudge.c:102
+msgid "Smudge"
+msgstr "داغ لگٲیو"
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:104
+msgid "Wet Paint"
+msgstr "اۄدُر رنٛگ"
+
+#: ../../magic/src/smudge.c:111
+#, fuzzy
+#| msgid "Click and move the mouse around to smudge the picture."
+msgid "Click and drag the mouse around to smudge the picture."
+msgstr "کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس تصویرِ داغ لگاونہٕ خٲطرٕ"
+
+#. if (which == 1)
+#: ../../magic/src/smudge.c:113
+#, fuzzy
+#| msgid "Click and move the mouse around to draw with wet, smudgy paint."
+msgid "Click and drag the mouse around to draw with wet, smudgy paint."
+msgstr "کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس اۄدُر داغدار پینٹ بناونہٕ خٲطرٕ خٲطرٕ"
+
+#: ../../magic/src/snow.c:71
+msgid "Snow Ball"
+msgstr "شِنہٕ گۄلہٕ"
+
+#: ../../magic/src/snow.c:72
+msgid "Snow Flake"
+msgstr "شِنہٕ تھۄس"
+
+#: ../../magic/src/snow.c:76
+msgid "Click to add snow balls to your picture."
+msgstr "پَنٕنہِ تصویر منٛز شِنہٕ گۄلہٕ رَلاونہٕ خٲطرٕ کٔریو کلِک "
+
+#: ../../magic/src/snow.c:77
+msgid "Click to add snow flakes to your picture."
+msgstr "پَنٕنہِ تصویر منٛز شِنہٕ تھٔس۪ی رَلاونہٕ خٲطرٕ کٔریو کلِک"
+
+#: ../../magic/src/string.c:129
+msgid "String edges"
+msgstr "پَنٕچ دنٛدرٕ"
+
+#: ../../magic/src/string.c:132
+msgid "String corner"
+msgstr "پَنٕک۪ی انٛد"
+
+#: ../../magic/src/string.c:135
+msgid "String 'V'"
+msgstr "'V' پَن"
+
+#: ../../magic/src/string.c:147
+msgid ""
+"Click and drag to draw string art. Drag top-bottom to draw less or more "
+"lines, left or right to make a bigger hole."
+msgstr ""
+"پَنُک فَن بناونہٕ خٲطرٕ کٔریو کلِک تہٕ ڈریگ۔ ہد۪رٕ پد۪ٹھ بۄن کٔریو ڈریگ کم یا ذیادٕ رٕکھہٕ "
+"بناونہٕ خٲطرٕ، کھوٚر یا دۄچھُن زد۪ود بۄڈ بناونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/string.c:150
+msgid "Click and drag to draw arrows made of string art."
+msgstr "پَنکہِ فَن ست۪ی بَنومُت ایرو بناونہٕ خٲطرٕ کٔریو کلِک تہٕ ڈریگ"
+
+#: ../../magic/src/string.c:153
+msgid "Draw string art arrows with free angles."
+msgstr "پَنکہِ فَن ست۪ی بَنومُت ایرو بنٲیو یَلے ذٲوِیو ست۪ی"
+
+#: ../../magic/src/tint.c:74
+msgid "Tint"
+msgstr "ٹِنٹ"
+
+#: ../../magic/src/tint.c:75
+msgid "Color & White"
+msgstr "رنگدار تہٕ سفید"
+
+#: ../../magic/src/tint.c:79
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to change the color of parts of your "
+#| "picture."
+msgid ""
+"Click and drag the mouse around to change the color of parts of your picture."
+msgstr "کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس تصویر ہِنٛدد۪ن حصَن رنٛگ تبدیل کرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/tint.c:80
+msgid "Click to change the color of your entire picture."
+msgstr "کلِک کٔریو سٲرۍسی تصویر رنٛگ تبدیل کرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/tint.c:81
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn parts of your picture into white "
+#| "and a color you choose."
+msgid ""
+"Click and drag the mouse around to turn parts of your picture into white and "
+"a color you choose."
+msgstr ""
+"کلِک کٔریو تہٕ أند۪ی أند۪ی ڈٲلیو ماوس پَنٕنہِ تصویر ہِند۪ی حصہ سفید تہٕ تُہنٛدِس منتخب "
+"رنٛگَس منٛز تبدیل کرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/tint.c:82
+msgid "Click to turn your entire picture into white and a color you choose."
+msgstr "کلِک کٔریو سٲری تصویر سفید تہٕ تُہنٛدِس منتخب رنٛگَس منٛز تبدیل کرنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/toothpaste.c:68
+msgid "Toothpaste"
+msgstr "دنٛدٕ دوا"
+
+#: ../../magic/src/toothpaste.c:72
+msgid "Click and drag to squirt toothpaste onto your picture."
+msgstr "کلِک تہٕ ڈریگ کٔریو دنٛدٕ دوا تصویر پد۪ٹھ چھکنہٕ خٲطرٕ۔"
+
+#: ../../magic/src/tornado.c:153
+msgid "Tornado"
+msgstr "ٹورناڈو"
+
+#: ../../magic/src/tornado.c:159
+msgid "Click and drag to draw a tornado funnel on your picture."
+msgstr "کلِک تہٕ ڈریگ کٔریو پَنٕنہِ تصویر پد۪ٹھ ٹورناڈو فنل بناونہٕ خٲطرٕ۔"
+
+#: ../../magic/src/tv.c:96
+msgid "TV"
+msgstr "ٹی وی"
+
+#: ../../magic/src/tv.c:102
+msgid ""
+"Click and drag to make parts of your picture look like they are on "
+"television."
+msgstr ""
+"کلِک تہٕ ڈریگ کٔریو پَنٕنہِ تصویر ہِنٛد۪ی حصہٕ تِتھ۪ی بناونہٕ خٲطرٕ زَن تہِ چھہٕ تِم ٹیلی وجنَس "
+"پد۪ٹھ۔"
+
+#: ../../magic/src/tv.c:105
+msgid "Click to make your picture look like it's on television."
+msgstr "کلِک کٔریو پَنٕن۪ی تصویر تِژھ بناونہٕ خٲطرٕ زَن تہِ چھہٕ سۄہ ٹیلی وجنَس پد۪ٹھ۔"
+
+#: ../../magic/src/waves.c:104
+msgid "Waves"
+msgstr "لٔہرٕ"
+
+#: ../../magic/src/waves.c:106
+msgid "Wavelets"
+msgstr "لَکچہٕ لٔہرٕ "
+
+#: ../../magic/src/waves.c:115
+msgid ""
+"Click to make the picture horizontally wavy. Click toward the top for "
+"shorter waves, the bottom for taller waves, the left for small waves, and "
+"the right for long waves."
+msgstr ""
+"کلِک کٔریو تصویر سد۪دھے لہرٕ دار بناونہٕ خٲطرٕ۔ ہد۪ور کُن کٔریو کلِک ژھۄچَن لہرَن خٲطرٕ، "
+"بوں کُن زیچھَن لہرَن خٲطرٕ، کھوٚر لۄکچَن تہٕ دۄچھُن بَجَن لہرَن خٲطرٕ۔"
+
+#: ../../magic/src/waves.c:118
+msgid ""
+"Click to make the picture vertically wavy. Click toward the top for shorter "
+"waves, the bottom for taller waves, the left for small waves, and the right "
+"for long waves."
+msgstr ""
+"کلِک کٔریو تصویر کھڈا لہرٕ دار بناونہٕ خٲطرٕ۔ ہد۪ور کُن کٔریو کلِک ژھۄچَن لہرَن خٲطرٕ، "
+"بوں کُن زیچھَن لہرَن خٲطرٕ، کھوٚر لۄکچَن تہٕ دۄچھُن بَجَن لہرَن خٲطرٕ۔"
+
+#: ../../magic/src/xor.c:93
+#, fuzzy
+#| msgid "Colors"
+msgid "Xor Colors"
+msgstr "رنٛگ"
+
+#: ../../magic/src/xor.c:99
+#, fuzzy
+#| msgid "Click and drag to draw arrows made of string art."
+msgid "Click and drag to draw a XOR effect"
+msgstr "پَنکہِ فَن ست۪ی بَنومُت ایرو بناونہٕ خٲطرٕ کٔریو کلِک تہٕ ڈریگ"
+
+#: ../../magic/src/xor.c:101
+#, fuzzy
+#| msgid "Click to add a mosaic effect to your entire picture."
+msgid "Click to draw a XOR effect on the whole picture"
+msgstr "کلِک کٔریو تُہٕنٛزِ سٲرۍ سی شکلہِ موزیک اثر رَلاونہٕ خٲطرٕ۔"

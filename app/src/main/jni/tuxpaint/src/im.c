@@ -2,7 +2,7 @@
   im.c
 
   Input method handling
-  Copyright (c)2007 by Mark K. Kim and others
+  Copyright (c) 2007-2019 by Mark K. Kim and others
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -47,7 +47,6 @@
 #ifdef __ANDROID__
 #include "android_mbstowcs.h"
 #endif
-
 
 /* ***************************************************************************
 * I18N GETTEXT
@@ -941,12 +940,12 @@ static int im_event_zh_tw(IM_DATA * im, SDL_Event event)
 
     case IM_REQ_FREE:          /* Free allocated resources */
       charmap_free(&cm);
-      /* go onto full reset */
+      FALL_THROUGH; /* go onto full reset */
 
     case IM_REQ_RESET_FULL:    /* Full reset */
       cm.section = SEC_ENGLISH;
       im->tip_text = im_tip_text[IM_TIP_ENGLISH];
-      /* go onto soft reset */
+      FALL_THROUGH; /* go onto soft reset */
 
     case IM_REQ_RESET_SOFT:    /* Soft reset */
       im->s[0] = L'\0';
@@ -1006,7 +1005,7 @@ static int im_event_zh_tw(IM_DATA * im, SDL_Event event)
       /* Left-Alt & Right-Alt mapped to mode-switch */
     case SDLK_RALT:
     case SDLK_LALT:
-      cm.section = ((cm.section + 1) % SEC_TOTAL);  /* Change section */
+      cm.section = ((cm.section + 1) % SEC_TOTAL);      /* Change section */
       im_softreset(im);         /* Soft reset */
 
       /* Set tip text */
@@ -1164,12 +1163,12 @@ static int im_event_th(IM_DATA * im, SDL_Event event)
 
     case IM_REQ_FREE:          /* Free allocated resources */
       charmap_free(&cm);
-      /* go onto full reset */
+      FALL_THROUGH; /* go onto full reset */
 
     case IM_REQ_RESET_FULL:    /* Full reset */
       cm.section = SEC_ENGLISH;
       im->tip_text = im_tip_text[IM_TIP_ENGLISH];
-      /* go onto soft reset */
+      FALL_THROUGH; /* go onto soft reset */
 
     case IM_REQ_RESET_SOFT:    /* Soft reset */
       im->s[0] = L'\0';
@@ -1229,7 +1228,7 @@ static int im_event_th(IM_DATA * im, SDL_Event event)
 
       /* Right-Alt mapped to mode-switch */
     case SDLK_RALT:
-      cm.section = ((cm.section + 1) % SEC_TOTAL);  /* Change section */
+      cm.section = ((cm.section + 1) % SEC_TOTAL);      /* Change section */
       im_softreset(im);         /* Soft reset */
 
       /* Set tip text */
@@ -1384,12 +1383,12 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
 
     case IM_REQ_FREE:          /* Free allocated resources */
       charmap_free(&cm);
-      /* go onto full reset */
+      FALL_THROUGH; /* go onto full reset */
 
     case IM_REQ_RESET_FULL:    /* Full reset */
       cm.section = SEC_ENGLISH;
       im->tip_text = im_tip_text[IM_TIP_ENGLISH];
-      /* go onto soft reset */
+      FALL_THROUGH; /* go onto soft reset */
 
     case IM_REQ_RESET_SOFT:    /* Soft reset */
       im->s[0] = L'\0';
@@ -1449,7 +1448,7 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
 
       /* Right-Alt mapped to mode-switch */
     case SDLK_RALT:
-      cm.section = ((cm.section + 1) % SEC_TOTAL);  /* Change section */
+      cm.section = ((cm.section + 1) % SEC_TOTAL);      /* Change section */
       im_softreset(im);         /* Soft reset */
 
       /* Set tip text */
@@ -1634,12 +1633,12 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
 
     case IM_REQ_FREE:          /* Free allocated resources */
       charmap_free(&cm);
-      /* go onto full reset */
+      FALL_THROUGH; /* go onto full reset */
 
     case IM_REQ_RESET_FULL:    /* Full reset */
       cm.section = SEC_ENGLISH;
       im->tip_text = im_tip_text[IM_TIP_ENGLISH];
-      /* go onto soft reset */
+      FALL_THROUGH; /* go onto soft reset */
 
     case IM_REQ_RESET_SOFT:    /* Soft reset */
       im->s[0] = L'\0';
@@ -1699,7 +1698,7 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
       /* Right-Alt mapped to mode-switch */
     case SDLK_LALT:
     case SDLK_RALT:
-      cm.section = ((cm.section + 1) % SEC_TOTAL);  /* Change section */
+      cm.section = ((cm.section + 1) % SEC_TOTAL);      /* Change section */
       im_softreset(im);         /* Soft reset */
 
       /* Set tip text */
@@ -1724,7 +1723,7 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
             im->redraw--;
           event.text.text[0] = L'\0';
         }
-      /* continue processing: */
+      FALL_THROUGH; /* continue processing: */
 
       /* Actual character processing */
     default:

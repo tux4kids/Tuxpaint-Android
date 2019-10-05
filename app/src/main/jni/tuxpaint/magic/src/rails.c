@@ -28,7 +28,7 @@
 Mix_Chunk *rails_snd;
 unsigned int img_w, img_h;
 unsigned int rails_segments_x, rails_segments_y;        //how many segments do we have?
-static int rails_math_ceil(int x, int y);       //ceil() in cstdlib returns float and is relative slow, so we'll use our one
+inline int rails_math_ceil(int x, int y);       //ceil() in cstdlib returns float and is relative slow, so we'll use our one
 static Uint8 *rails_status_of_segments; //a place to store an info about bitmap used for selected segment
 static char **rails_images;     //the pathes to all the images needed
 static unsigned int rails_segment_modified;     //which segment was modified this time?
@@ -55,7 +55,6 @@ void rails_release(magic_api * api, int which,
 void rails_shutdown(magic_api * api);
 void rails_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void rails_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
-static int rails_math_ceil(int x, int y);
 inline unsigned int rails_get_segment(int x, int y);
 inline void rails_extract_coords_from_segment(unsigned int segment, Sint16 * x, Sint16 * y);
 static void rails_flip(void *ptr, SDL_Surface * dest, SDL_Surface * src);
@@ -197,7 +196,7 @@ void rails_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
 
 // Interactivity functions
 
-static int rails_math_ceil(int x, int y)
+inline int rails_math_ceil(int x, int y)
 {
   int temp;
 

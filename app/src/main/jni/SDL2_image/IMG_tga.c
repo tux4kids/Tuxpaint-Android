@@ -1,6 +1,6 @@
 /*
   SDL_image:  An example image loading library for use with SDL
-  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2019 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -22,10 +22,6 @@
 #if !defined(__APPLE__) || defined(SDL_IMAGE_USE_COMMON_BACKEND)
 
 /* This is a Targa image file loading framework */
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
 #include "SDL_endian.h"
 
@@ -301,7 +297,7 @@ SDL_Surface *IMG_LoadTGA_RW(SDL_RWops *src)
         } else {
             SDL_RWread(src, dst, w * bpp, 1);
         }
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
         if (bpp == 2) {
             /* swap byte order */
             int x;

@@ -1,38 +1,61 @@
-apply plugin: 'com.android.application'
+def buildAsLibrary = project.hasProperty('BUILD_AS_LIBRARY');
+def buildAsApplication = !buildAsLibrary
+if (buildAsApplication) {
+    apply plugin: 'com.android.application'
+}
+else {
+    apply plugin: 'com.android.library'
+}
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
-
+    compileSdkVersion 26
     defaultConfig {
-        applicationId "org.tuxpaint"
-        minSdkVersion 12
-        targetSdkVersion 19
-	externalNativeBuild {
-        		        ndkBuild {
-                		abiFilters "armeabi-v7a", "armeabi"
-            			}
-        		}
-    		}
-   sourceSets.main {
-        jni.srcDirs = [] // This prevents the auto generation of Android.mk
-	}
+        if (buildAsApplication) {
+            applicationId "org.tuxpaint"
+        }
+        minSdkVersion 16
+        targetSdkVersion 26
+        externalNativeBuild {
+            ndkBuild {
+                arguments "APP_PLATFORM=android-16"
+                abiFilters 'armeabi-v7a', "armeabi"
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    externalNativeBuild {
-        ndkBuild {
-            path 'src/main/jni/Android.mk'
+    if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
+        sourceSets.main {
+            jniLibs.srcDir 'libs'
+        }
+        externalNativeBuild {
+            ndkBuild {
+                path 'src/main/jni/Android.mk'
+            }
+        }
+       
+    }
+    lintOptions {
+        abortOnError false
+    }
+    
+    if (buildAsLibrary) {
+        libraryVariants.all { variant ->
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith(".aar")) {
+                    def fileName = "org.libsdl.app.aar";
+                    output.outputFile = new File(outputFile.parent, fileName);
+                }
+            }
         }
     }
-
-
-
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:25.3.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 }

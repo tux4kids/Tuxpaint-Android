@@ -1,6 +1,6 @@
 /*
   SDL_image:  An example image loading library for use with SDL
-  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2019 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -19,17 +19,18 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-#if !defined(__APPLE__) || defined(SDL_IMAGE_USE_COMMON_BACKEND)
-
 /* This is a JPEG image file loading framework */
 
 #include <stdio.h>
-#include <string.h>
 #include <setjmp.h>
 
 #include "SDL_image.h"
 
+#if !(defined(__APPLE__) || defined(SDL_IMAGE_USE_WIC_BACKEND)) || defined(SDL_IMAGE_USE_COMMON_BACKEND)
+
 #ifdef LOAD_JPG
+
+#define USE_JPEGLIB
 
 #include <jpeglib.h>
 
@@ -56,80 +57,50 @@ static struct {
     JDIMENSION (*jpeg_read_scanlines) (j_decompress_ptr cinfo, JSAMPARRAY scanlines, JDIMENSION max_lines);
     boolean (*jpeg_resync_to_restart) (j_decompress_ptr cinfo, int desired);
     boolean (*jpeg_start_decompress) (j_decompress_ptr cinfo);
+    void (*jpeg_CreateCompress) (j_compress_ptr cinfo, int version, size_t structsize);
+    void (*jpeg_start_compress) (j_compress_ptr cinfo, boolean write_all_tables);
+    void (*jpeg_set_quality) (j_compress_ptr cinfo, int quality, boolean force_baseline);
+    void (*jpeg_set_defaults) (j_compress_ptr cinfo);
+    JDIMENSION (*jpeg_write_scanlines) (j_compress_ptr cinfo, JSAMPARRAY scanlines, JDIMENSION num_lines);
+    void (*jpeg_finish_compress) (j_compress_ptr cinfo);
+    void (*jpeg_destroy_compress) (j_compress_ptr cinfo);
     struct jpeg_error_mgr * (*jpeg_std_error) (struct jpeg_error_mgr * err);
 } lib;
 
 #ifdef LOAD_JPG_DYNAMIC
+#define FUNCTION_LOADER(FUNC, SIG) \
+    lib.FUNC = (SIG) SDL_LoadFunction(lib.handle, #FUNC); \
+    if (lib.FUNC == NULL) { SDL_UnloadObject(lib.handle); return -1; }
+#else
+#define FUNCTION_LOADER(FUNC, SIG) \
+    lib.FUNC = FUNC;
+#endif
+
 int IMG_InitJPG()
 {
     if ( lib.loaded == 0 ) {
+#ifdef LOAD_JPG_DYNAMIC
         lib.handle = SDL_LoadObject(LOAD_JPG_DYNAMIC);
         if ( lib.handle == NULL ) {
             return -1;
         }
-        lib.jpeg_calc_output_dimensions =
-            (void (*) (j_decompress_ptr))
-            SDL_LoadFunction(lib.handle, "jpeg_calc_output_dimensions");
-        if ( lib.jpeg_calc_output_dimensions == NULL ) {
-            SDL_UnloadObject(lib.handle);
-            return -1;
-        }
-        lib.jpeg_CreateDecompress =
-            (void (*) (j_decompress_ptr, int, size_t))
-            SDL_LoadFunction(lib.handle, "jpeg_CreateDecompress");
-        if ( lib.jpeg_CreateDecompress == NULL ) {
-            SDL_UnloadObject(lib.handle);
-            return -1;
-        }
-        lib.jpeg_destroy_decompress =
-            (void (*) (j_decompress_ptr))
-            SDL_LoadFunction(lib.handle, "jpeg_destroy_decompress");
-        if ( lib.jpeg_destroy_decompress == NULL ) {
-            SDL_UnloadObject(lib.handle);
-            return -1;
-        }
-        lib.jpeg_finish_decompress =
-            (boolean (*) (j_decompress_ptr))
-            SDL_LoadFunction(lib.handle, "jpeg_finish_decompress");
-        if ( lib.jpeg_finish_decompress == NULL ) {
-            SDL_UnloadObject(lib.handle);
-            return -1;
-        }
-        lib.jpeg_read_header =
-            (int (*) (j_decompress_ptr, boolean))
-            SDL_LoadFunction(lib.handle, "jpeg_read_header");
-        if ( lib.jpeg_read_header == NULL ) {
-            SDL_UnloadObject(lib.handle);
-            return -1;
-        }
-        lib.jpeg_read_scanlines =
-            (JDIMENSION (*) (j_decompress_ptr, JSAMPARRAY, JDIMENSION))
-            SDL_LoadFunction(lib.handle, "jpeg_read_scanlines");
-        if ( lib.jpeg_read_scanlines == NULL ) {
-            SDL_UnloadObject(lib.handle);
-            return -1;
-        }
-        lib.jpeg_resync_to_restart =
-            (boolean (*) (j_decompress_ptr, int))
-            SDL_LoadFunction(lib.handle, "jpeg_resync_to_restart");
-        if ( lib.jpeg_resync_to_restart == NULL ) {
-            SDL_UnloadObject(lib.handle);
-            return -1;
-        }
-        lib.jpeg_start_decompress =
-            (boolean (*) (j_decompress_ptr))
-            SDL_LoadFunction(lib.handle, "jpeg_start_decompress");
-        if ( lib.jpeg_start_decompress == NULL ) {
-            SDL_UnloadObject(lib.handle);
-            return -1;
-        }
-        lib.jpeg_std_error =
-            (struct jpeg_error_mgr * (*) (struct jpeg_error_mgr *))
-            SDL_LoadFunction(lib.handle, "jpeg_std_error");
-        if ( lib.jpeg_std_error == NULL ) {
-            SDL_UnloadObject(lib.handle);
-            return -1;
-        }
+#endif
+        FUNCTION_LOADER(jpeg_calc_output_dimensions, void (*) (j_decompress_ptr cinfo))
+        FUNCTION_LOADER(jpeg_CreateDecompress, void (*) (j_decompress_ptr cinfo, int version, size_t structsize))
+        FUNCTION_LOADER(jpeg_destroy_decompress, void (*) (j_decompress_ptr cinfo))
+        FUNCTION_LOADER(jpeg_finish_decompress, boolean (*) (j_decompress_ptr cinfo))
+        FUNCTION_LOADER(jpeg_read_header, int (*) (j_decompress_ptr cinfo, boolean require_image))
+        FUNCTION_LOADER(jpeg_read_scanlines, JDIMENSION (*) (j_decompress_ptr cinfo, JSAMPARRAY scanlines, JDIMENSION max_lines))
+        FUNCTION_LOADER(jpeg_resync_to_restart, boolean (*) (j_decompress_ptr cinfo, int desired))
+        FUNCTION_LOADER(jpeg_start_decompress, boolean (*) (j_decompress_ptr cinfo))
+        FUNCTION_LOADER(jpeg_CreateCompress, void (*) (j_compress_ptr cinfo, int version, size_t structsize))
+        FUNCTION_LOADER(jpeg_start_compress, void (*) (j_compress_ptr cinfo, boolean write_all_tables))
+        FUNCTION_LOADER(jpeg_set_quality, void (*) (j_compress_ptr cinfo, int quality, boolean force_baseline))
+        FUNCTION_LOADER(jpeg_set_defaults, void (*) (j_compress_ptr cinfo))
+        FUNCTION_LOADER(jpeg_write_scanlines, JDIMENSION (*) (j_compress_ptr cinfo, JSAMPARRAY scanlines, JDIMENSION num_lines))
+        FUNCTION_LOADER(jpeg_finish_compress, void (*) (j_compress_ptr cinfo))
+        FUNCTION_LOADER(jpeg_destroy_compress, void (*) (j_compress_ptr cinfo))
+        FUNCTION_LOADER(jpeg_std_error, struct jpeg_error_mgr * (*) (struct jpeg_error_mgr * err))
     }
     ++lib.loaded;
 
@@ -141,38 +112,12 @@ void IMG_QuitJPG()
         return;
     }
     if ( lib.loaded == 1 ) {
+#ifdef LOAD_JPG_DYNAMIC
         SDL_UnloadObject(lib.handle);
+#endif
     }
     --lib.loaded;
 }
-#else
-int IMG_InitJPG()
-{
-    if ( lib.loaded == 0 ) {
-        lib.jpeg_calc_output_dimensions = jpeg_calc_output_dimensions;
-        lib.jpeg_CreateDecompress = jpeg_CreateDecompress;
-        lib.jpeg_destroy_decompress = jpeg_destroy_decompress;
-        lib.jpeg_finish_decompress = jpeg_finish_decompress;
-        lib.jpeg_read_header = jpeg_read_header;
-        lib.jpeg_read_scanlines = jpeg_read_scanlines;
-        lib.jpeg_resync_to_restart = jpeg_resync_to_restart;
-        lib.jpeg_start_decompress = jpeg_start_decompress;
-        lib.jpeg_std_error = jpeg_std_error;
-    }
-    ++lib.loaded;
-
-    return 0;
-}
-void IMG_QuitJPG()
-{
-    if ( lib.loaded == 0 ) {
-        return;
-    }
-    if ( lib.loaded == 1 ) {
-    }
-    --lib.loaded;
-}
-#endif /* LOAD_JPG_DYNAMIC */
 
 /* See if an image is contained in a data source */
 int IMG_isJPG(SDL_RWops *src)
@@ -265,7 +210,7 @@ static boolean fill_input_buffer (j_decompress_ptr cinfo)
     my_source_mgr * src = (my_source_mgr *) cinfo->src;
     int nbytes;
 
-    nbytes = SDL_RWread(src->ctx, src->buffer, 1, INPUT_BUFFER_SIZE);
+    nbytes = (int)SDL_RWread(src->ctx, src->buffer, 1, INPUT_BUFFER_SIZE);
     if (nbytes <= 0) {
         /* Insert a fake EOI marker */
         src->buffer[0] = (Uint8) 0xFF;
@@ -386,7 +331,7 @@ SDL_Surface *IMG_LoadJPG_RW(SDL_RWops *src)
     }
     start = SDL_RWtell(src);
 
-    if ( !IMG_Init(IMG_INIT_JPG) ) {
+    if ( (IMG_Init(IMG_INIT_JPG) & IMG_INIT_JPG) == 0 ) {
         return NULL;
     }
 
@@ -466,6 +411,129 @@ SDL_Surface *IMG_LoadJPG_RW(SDL_RWops *src)
     return(surface);
 }
 
+#define OUTPUT_BUFFER_SIZE   4096
+typedef struct {
+    struct jpeg_destination_mgr pub;
+
+    SDL_RWops *ctx;
+    Uint8 buffer[OUTPUT_BUFFER_SIZE];
+} my_destination_mgr;
+
+static void init_destination(j_compress_ptr cinfo)
+{
+    /* We don't actually need to do anything */
+    return;
+}
+
+static boolean empty_output_buffer(j_compress_ptr cinfo)
+{
+    my_destination_mgr * dest = (my_destination_mgr *)cinfo->dest;
+
+    /* In typical applications, it should write out the *entire* buffer */
+    SDL_RWwrite(dest->ctx, dest->buffer, 1, OUTPUT_BUFFER_SIZE);
+    dest->pub.next_output_byte = dest->buffer;
+    dest->pub.free_in_buffer = OUTPUT_BUFFER_SIZE;
+
+    return TRUE;
+}
+
+static void term_destination(j_compress_ptr cinfo)
+{
+    my_destination_mgr * dest = (my_destination_mgr *)cinfo->dest;
+
+    /*  In most applications, this must flush any data remaining in the buffer */
+    SDL_RWwrite(dest->ctx, dest->buffer, 1, OUTPUT_BUFFER_SIZE - dest->pub.free_in_buffer);
+}
+
+static void jpeg_SDL_RW_dest(j_compress_ptr cinfo, SDL_RWops *ctx)
+{
+    my_destination_mgr *dest;
+
+    if (cinfo->dest == NULL) {
+        cinfo->dest = (struct jpeg_destination_mgr *)
+            (*cinfo->mem->alloc_small) ((j_common_ptr)cinfo, JPOOL_PERMANENT,
+            sizeof(my_destination_mgr));
+        dest = (my_destination_mgr *)cinfo->dest;
+    }
+
+    dest = (my_destination_mgr *)cinfo->dest;
+    dest->pub.init_destination = init_destination;
+    dest->pub.empty_output_buffer = empty_output_buffer;
+    dest->pub.term_destination = term_destination;
+    dest->ctx = ctx;
+    dest->pub.next_output_byte = dest->buffer;
+    dest->pub.free_in_buffer = OUTPUT_BUFFER_SIZE;
+}
+
+static int IMG_SaveJPG_RW_jpeglib(SDL_Surface *surface, SDL_RWops *dst, int freedst, int quality)
+{
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+    static const Uint32 jpg_format = SDL_PIXELFORMAT_RGB24;
+#else
+    static const Uint32 jpg_format = SDL_PIXELFORMAT_BGR24;
+#endif
+    struct jpeg_compress_struct cinfo;
+    struct my_error_mgr jerr;
+    JSAMPROW row_pointer[1];
+    SDL_Surface* jpeg_surface = surface;
+    int result = -1;
+
+    if (!dst) {
+        SDL_SetError("Passed NULL dst");
+        goto done;
+    }
+
+    if (!IMG_Init(IMG_INIT_JPG)) {
+        goto done;
+    }
+
+    /* Convert surface to format we can save */
+    if (surface->format->format != jpg_format) {
+        jpeg_surface = SDL_ConvertSurfaceFormat(surface, jpg_format, 0);
+        if (!jpeg_surface) {
+            goto done;
+        }
+    }
+
+    /* Create a decompression structure and load the JPEG header */
+    cinfo.err = lib.jpeg_std_error(&jerr.errmgr);
+    jerr.errmgr.error_exit = my_error_exit;
+    jerr.errmgr.output_message = output_no_message;
+
+    lib.jpeg_create_compress(&cinfo);
+    jpeg_SDL_RW_dest(&cinfo, dst);
+
+    cinfo.image_width = jpeg_surface->w;
+    cinfo.image_height = jpeg_surface->h;
+    cinfo.in_color_space = JCS_RGB;
+    cinfo.input_components = 3;
+
+    lib.jpeg_set_defaults(&cinfo);
+    lib.jpeg_set_quality(&cinfo, quality, TRUE);
+    lib.jpeg_start_compress(&cinfo, TRUE);
+
+    while (cinfo.next_scanline < cinfo.image_height) {
+        int offset = cinfo.next_scanline * jpeg_surface->pitch;
+        row_pointer[0] = ((Uint8*)jpeg_surface->pixels) + offset;
+        lib.jpeg_write_scanlines(&cinfo, row_pointer, 1);
+    }
+
+    lib.jpeg_finish_compress(&cinfo);
+    lib.jpeg_destroy_compress(&cinfo);
+
+    if (jpeg_surface != surface) {
+        SDL_FreeSurface(jpeg_surface);
+    }
+
+    result = 0;
+
+done:
+    if (freedst) {
+        SDL_RWclose(dst);
+    }
+    return result;
+}
+
 #else
 
 int IMG_InitJPG()
@@ -493,3 +561,29 @@ SDL_Surface *IMG_LoadJPG_RW(SDL_RWops *src)
 #endif /* LOAD_JPG */
 
 #endif /* !defined(__APPLE__) || defined(SDL_IMAGE_USE_COMMON_BACKEND) */
+
+/* We'll always have JPG save support */
+#define SAVE_JPG
+
+#ifdef SAVE_JPG
+
+int IMG_SaveJPG(SDL_Surface *surface, const char *file, int quality)
+{
+    SDL_RWops *dst = SDL_RWFromFile(file, "wb");
+    if (dst) {
+        return IMG_SaveJPG_RW(surface, dst, 1, quality);
+    } else {
+        return -1;
+    }
+}
+
+int IMG_SaveJPG_RW(SDL_Surface *surface, SDL_RWops *dst, int freedst, int quality)
+{
+#ifdef USE_JPEGLIB
+    return IMG_SaveJPG_RW_jpeglib(surface, dst, freedst, quality);
+#else
+    return IMG_SetError("SDL_image not built with jpeglib, saving not supported");
+#endif
+}
+
+#endif /* SAVE_JPG */

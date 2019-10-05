@@ -155,6 +155,7 @@ static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layou
   char *filename;
   char *key, *value;
   osk_layout *layout;
+  char * __attribute__((unused)) tmp_ptr;
 
   layout = malloc(sizeof(osk_layout));
   layout->name = NULL;
@@ -205,7 +206,7 @@ static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layou
 
   while (!feof(fi))
     {
-      fgets(line, 1023, fi);
+      tmp_ptr = fgets(line, 1023, fi);
 
       if (is_blank_or_comment(line))
         continue;
@@ -277,6 +278,7 @@ void load_hlayout(osk_layout * layout, char *hlayout_name)
   char *key, *fontpath;
   char *plain_label, *top_label, *altgr_label, *shift_altgr_label;
   FILE *fi;
+  char * __attribute__((unused)) tmp_ptr;
 
   key_number = line_number = 0;
   width = height = 0;
@@ -342,7 +344,7 @@ void load_hlayout(osk_layout * layout, char *hlayout_name)
           allocated = 1;
         }
 
-      fgets(line, 1023, fi);
+      tmp_ptr = fgets(line, 1023, fi);
 
       if (is_blank_or_comment(line))
         continue;
@@ -466,6 +468,7 @@ void load_keymap(osk_layout * layout, char *keymap_name)
   char *ksname1, *ksname2, *ksname3, *ksname4;
   char *line;
   FILE *fi;
+  char * __attribute__((unused)) tmp_ptr;
 
   filename = malloc(sizeof(char) * 255);
 
@@ -502,7 +505,7 @@ void load_keymap(osk_layout * layout, char *keymap_name)
 
   while (!feof(fi))
     {
-      fgets(line, 1023, fi);
+      tmp_ptr = fgets(line, 1023, fi);
 
       if (is_blank_or_comment(line))
         continue;
@@ -652,6 +655,7 @@ static void load_composemap(osk_layout * layout, char *composemap_name)
   char **pointer;
   char *line;
   FILE *fi;
+  char * __attribute__((unused)) tmp_ptr;
 
   pointer = malloc(sizeof(wchar_t *));
   filename = malloc(sizeof(char) * 255);
@@ -684,7 +688,7 @@ static void load_composemap(osk_layout * layout, char *composemap_name)
 
   while (!feof(fi))
     {
-      fgets(line, 1023, fi);
+      tmp_ptr = fgets(line, 1023, fi);
 
       if (is_blank_or_comment(line))
         continue;
@@ -760,6 +764,7 @@ static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name)
   char *filename;
   char *line;
   FILE *fi;
+  char * __attribute__((unused)) tmp_ptr;
 
   filename = malloc(sizeof(char) * 255);
 
@@ -789,7 +794,7 @@ static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name)
 
   while (!feof(fi))
     {
-      fgets(line, 1023, fi);
+      tmp_ptr = fgets(line, 1023, fi);
       if (strncmp("#define XK_", line, 11) != 0)
         continue;
 

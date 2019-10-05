@@ -1,12 +1,12 @@
 /*
   alien.c
-//
+
   alien, Modifies the colours of the image.
   Tux Paint - A simple drawing program for children.
 
   Credits: Andrew Corcoran <akanewbie@gmail.com> inspired by the Alien Map GIMP plugin
 
-  Copyright (c) 2002-2007 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2019 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: June 6, 2008
+  Last updated: August 29, 2019
   $Id$
 */
 
@@ -168,9 +168,6 @@ static void do_alien_pixel(void *ptr, int which ATTRIBUTE_UNUSED,
 // Do the effect for the full image
 static void do_alien_full(void *ptr, SDL_Surface * canvas, SDL_Surface * last, int which)
 {
-
-  magic_api *api = (magic_api *) ptr;
-
   int x, y;
 
   for (y = 0; y < last->h; y++)

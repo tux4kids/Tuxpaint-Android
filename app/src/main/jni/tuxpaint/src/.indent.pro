@@ -1,0 +1,13 @@
+--blank-lines-after-declarations
+--blank-lines-after-procedures
+--break-before-boolean-operator
+--continue-at-parentheses
+--declaration-indentation1
+--dont-break-function-decl-args
+--dont-break-procedure-type
+--line-length120
+--no-blank-lines-after-commas
+--no-space-after-casts
+--no-space-after-function-call-names
+--no-space-after-parentheses
+--no-tabs

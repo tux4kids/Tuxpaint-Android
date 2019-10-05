@@ -4,7 +4,7 @@
   For Tux Paint
   List of sound effects.
 
-  Copyright (c) 2002-2007 by Bill Kendrick and others
+  Copyright (c) 2002-2019 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 15, 2002 - July 5, 2007
+  June 15, 2002 - September 12, 2019
   $Id$
 */
 
@@ -67,6 +67,7 @@ enum
   SND_TUXOK,                    /* "Ok" */
   SND_THICK,
   SND_THIN,
+  SND_FILL,
   NUM_SOUNDS
 };
 
@@ -107,7 +108,8 @@ static const char *sound_fnames[NUM_SOUNDS] = {
   DATA_PREFIX "sounds/youcannot.wav",
   DATA_PREFIX "sounds/tuxok.wav",
   DATA_PREFIX "sounds/thick.wav",
-  DATA_PREFIX "sounds/thin.wav"
+  DATA_PREFIX "sounds/thin.wav",
+  DATA_PREFIX "sounds/fill.wav"
 };
 
 #endif

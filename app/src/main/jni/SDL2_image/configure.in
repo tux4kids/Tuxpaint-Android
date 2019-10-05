@@ -13,9 +13,9 @@ dnl Set various version strings - taken gratefully from the GTk sources
 
 MAJOR_VERSION=2
 MINOR_VERSION=0
-MICRO_VERSION=1
-INTERFACE_AGE=1
-BINARY_AGE=1
+MICRO_VERSION=5
+INTERFACE_AGE=3
+BINARY_AGE=5
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$MICRO_VERSION
 
 AC_SUBST(MAJOR_VERSION)
@@ -79,6 +79,9 @@ case "$host" in
     *-*-darwin*)
         AC_ARG_ENABLE([imageio], [AC_HELP_STRING([--enable-imageio], [use native Mac OS X frameworks for loading images [default=yes]])],
                       [], [enable_imageio=yes])
+        dnl Show a message when we use ImageIO support so it's not a surprise
+        AC_MSG_CHECKING([for ImageIO support])
+        AC_MSG_RESULT($enable_imageio)
         if test x$enable_imageio = xyes; then
             IMG_LIBS="-Wl,-framework,ApplicationServices -lobjc $IMG_LIBS"
         else
@@ -113,7 +116,7 @@ find_lib()
 }
 
 dnl Check for SDL
-SDL_VERSION=2.0.0
+SDL_VERSION=2.0.8
 AC_SUBST(SDL_VERSION)
 AM_PATH_SDL2($SDL_VERSION,
             :,
@@ -142,6 +145,8 @@ AC_ARG_ENABLE([png-shared], AC_HELP_STRING([--enable-png-shared], [dynamically l
  [], [enable_png_shared=yes])
 AC_ARG_ENABLE([pnm], [AC_HELP_STRING([--enable-pnm], [support loading PNM images [default=yes]])],
  [], [enable_pnm=yes])
+AC_ARG_ENABLE([svg], [AC_HELP_STRING([--enable-svg], [support loading SVG images [default=yes]])],
+ [], [enable_svg=yes])
 AC_ARG_ENABLE([tga], [AC_HELP_STRING([--enable-tga], [support loading TGA images [default=yes]])],
  [], [enable_tga=yes])
 AC_ARG_ENABLE([tif], [AC_HELP_STRING([--enable-tif], [support loading TIFF images [default=yes]])],
@@ -158,10 +163,6 @@ AC_ARG_ENABLE([webp], [AC_HELP_STRING([--enable-webp], [support loading WEBP ima
  [], [enable_webp=yes])
 AC_ARG_ENABLE([webp-shared], AC_HELP_STRING([--enable-webp-shared], [dynamically load WEBP support [[default=yes]]]),
  [], [enable_webp_shared=yes])
-
-dnl Show a message when we use ImageIO support so it's not a surprise
-AC_MSG_CHECKING([for ImageIO support])
-AC_MSG_RESULT($enable_imageio)
 
 if (test x$enable_jpg = xyes || test x$enable_tif = xyes) && test x$enable_imageio != xyes; then
     AC_CHECK_HEADER([jpeglib.h], [have_jpg_hdr=yes])
@@ -195,11 +196,16 @@ fi
 if test x$enable_png = xyes -a x$enable_imageio != xyes; then
     PKG_CHECK_MODULES([LIBPNG], [libpng], [dnl
         have_png_hdr=yes
-        CFLAGS="$LIBPNG_CFLAGS $CFLAGS"
         have_png_lib=yes
       ], [dnl
-        AC_CHECK_HEADER([png.h], [have_png_hdr=yes])
-        AC_CHECK_LIB([png], [png_create_read_struct], [have_png_lib=yes], [], [-lz])
+        AC_CHECK_HEADER([png.h], [
+            have_png_hdr=yes
+            LIBPNG_CFLAGS=""
+        ])
+        AC_CHECK_LIB([png], [png_create_read_struct], [
+            have_png_lib=yes
+            LIBPNG_LIBS="-lpng -lz"
+        ], [], [-lz])
       ])
     if test x$have_png_hdr = xyes -a x$have_png_lib = xyes; then
         AC_DEFINE([LOAD_PNG])
@@ -253,11 +259,16 @@ fi
 if test x$enable_webp = xyes; then
     PKG_CHECK_MODULES([LIBWEBP], [libwebp], [dnl
         have_webp_hdr=yes
-        CFLAGS="$LIBWEBP_CFLAGS $CFLAGS"
         have_webp_lib=yes
       ], [dnl
-        AC_CHECK_HEADER([webp/decode.h], [have_webp_hdr=yes])
-        AC_CHECK_LIB([webp], [WebPGetDecoderVersion], [have_webp_lib=yes], [], [-lm])
+        AC_CHECK_HEADER([webp/decode.h], [
+            have_webp_hdr=yes
+            LIBWEBP_CFLAGS=""
+        ])
+        AC_CHECK_LIB([webp], [WebPGetDecoderVersion], [
+            have_webp_lib=yes
+            LIBWEBP_LIBS="-lwebp"
+        ], [], [-lm])
       ])
     if test x$have_webp_hdr = xyes -a x$have_webp_lib = xyes; then
         AC_DEFINE([LOAD_WEBP])
@@ -267,7 +278,7 @@ if test x$enable_webp = xyes; then
                 webp_lib=[`find_lib libwebp.dylib`]
                 ;;
             *-*-cygwin* | *-*-mingw32*)
-                webp_lib=[`find_lib "libwebp*.dll"`]
+                webp_lib=[`find_lib "libwebp-*.dll"`]
                 ;;
             *)
                 webp_lib=[`find_lib "libwebp[0-9]*.so.*"`]
@@ -302,6 +313,10 @@ if test x$enable_pnm = xyes; then
     AC_DEFINE([LOAD_PNM])
 fi
 
+if test x$enable_svg = xyes; then
+    AC_DEFINE([LOAD_SVG])
+fi
+
 if test x$enable_tga = xyes; then
     AC_DEFINE([LOAD_TGA])
 fi
@@ -319,11 +334,12 @@ if test x$enable_xv = xyes; then
 fi
 
 if test x$enable_webp = xyes -a x$have_webp_hdr = xyes -a x$have_webp_lib = xyes; then
+    CFLAGS="$LIBWEBP_CFLAGS $CFLAGS"
     if test x$enable_webp_shared = xyes && test x$webp_lib != x; then
         echo "-- dynamic libwebp -> $webp_lib"
         AC_DEFINE_UNQUOTED(LOAD_WEBP_DYNAMIC, "$webp_lib")
     else
-        IMG_LIBS="-lwebp $IMG_LIBS"
+        IMG_LIBS="$LIBWEBP_LIBS $IMG_LIBS"
     fi
 fi
 
@@ -348,11 +364,12 @@ if test x$enable_jpg = xyes -a x$have_jpg_hdr = xyes -a x$have_jpg_lib = xyes; t
     fi
 fi
 if test x$enable_png = xyes -a x$have_png_hdr = xyes -a x$have_png_lib = xyes; then
+    CFLAGS="$LIBPNG_CFLAGS $CFLAGS"
     if test x$enable_png_shared = xyes && test x$png_lib != x; then
         echo "-- dynamic libpng -> $png_lib"
         AC_DEFINE_UNQUOTED(LOAD_PNG_DYNAMIC, "$png_lib")
     else
-        IMG_LIBS="-lpng -lz $IMG_LIBS"
+        IMG_LIBS="$LIBPNG_LIBS $IMG_LIBS"
     fi
 fi
 

@@ -1,6 +1,6 @@
 /* playsound.h
 
-  Copyright (c) 2002-2009
+  Copyright (c) 2002-2019
   http://www.tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -35,7 +35,7 @@
 #define SNDDIST_NEAR -999
 
 extern Mix_Chunk *sounds[NUM_SOUNDS];
-extern int mute, use_sound;
+extern int mute, use_sound, use_stereo;
 
 void playsound(SDL_Surface * screen, int chan, int s, int override, int x, int y);
 

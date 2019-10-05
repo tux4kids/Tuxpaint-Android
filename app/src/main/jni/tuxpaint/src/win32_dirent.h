@@ -1,13 +1,13 @@
-/****************************************************/  
-/*                                                  */ 
-/* For Win32 that lacks Unix direct support.        */ 
-/*    - avoids including "windows.h"                */ 
-/*                                                  */ 
-/* Copyright (c) 2002 John Popplewell               */ 
-/* john@johnnypops.demon.co.uk                      */ 
-/*                                                  */ 
-/****************************************************/ 
-/* $Id$ */ 
+/****************************************************/
+/*                                                  */
+/* For Win32 that lacks Unix direct support.        */
+/*    - avoids including "windows.h"                */
+/*                                                  */
+/* Copyright (c) 2002 John Popplewell               */
+/* john@johnnypops.demon.co.uk                      */
+/*                                                  */
+/****************************************************/
+/* $Id$ */
 typedef long BOOL;
 typedef unsigned int DWORD;
 typedef wchar_t TCHAR;
@@ -17,12 +17,12 @@ typedef void *HANDLE;
 #define MAX_PATH                256
 #define INVALID_HANDLE_VALUE    ((HANDLE)(-1))
 #define WINAPI                  __stdcall
-typedef struct 
+typedef struct
 {
   DWORD dwLowDateTime;
   DWORD dwHighDateTime;
 } FILETIME;
-typedef struct 
+typedef struct
 {
   DWORD dwFileAttributes;
   FILETIME ftCreationTime;
@@ -40,26 +40,26 @@ typedef struct
 #define FindFirstFile   FindFirstFileA
 #define FindNextFile    FindNextFileA
 #define FindClose       FindClose
-  
+
 #ifdef __cplusplus
 extern "C"
 {
-  
+
 #endif                          /*  */
   extern HANDLE WINAPI FindFirstFile(const char *, WIN32_FIND_DATA *);
   extern BOOL WINAPI FindNextFile(HANDLE, WIN32_FIND_DATA *);
   extern BOOL WINAPI FindClose(HANDLE);
-  
+
 #ifdef __cplusplus
 };
 
 
 #endif /*  */
-struct dirent 
+struct dirent
 {
   char d_name[MAX_PATH];
 };
-typedef struct 
+typedef struct
 {
   WIN32_FIND_DATA wfd;
   HANDLE hFind;
@@ -72,5 +72,3 @@ typedef int (*selectCB) (const struct dirent *);
 typedef int (*comparCB) (const void *, const void *);
 extern int alphasort(const void *a, const void *b);
 extern int scandir(const char *dir, struct dirent ***namelist, selectCB select, comparCB compar);
-
-

@@ -4,7 +4,7 @@
   For Tux Paint
   Language-related functions
 
-  Copyright (c) 2002-2014 by Bill Kendrick and others
+  Copyright (c) 2002-2019 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
 
   $Id$
 
-  June 14, 2002 - December 11, 2016
+  June 14, 2002 - August 29, 2019
 */
 
 #include <stdio.h>
@@ -1003,14 +1003,17 @@ static void mysetenv(const char *name, const char *value)
  * @param loc Locale
  * @return The Y-nudge value for font rendering in the language.
  */
+/* *INDENT-OFF* */
 static int set_current_language(const char *restrict locale_choice) MUST_CHECK;
+/* *INDENT-ON* */
 
 static int set_current_language(const char *restrict loc)
 {
   int i;
-  int y_nudge = 0;
+  int j = 0;
   char *oldloc;
   char *env_language;
+  char *env_language_lang;
 
 
   if (strlen(loc) > 0)
@@ -1105,8 +1108,6 @@ static int set_current_language(const char *restrict loc)
         mysetenv("LANGUAGE", "C");
     }
   env_language = strdup(getenv("LANGUAGE"));
-  int j = 0;
-  char *env_language_lang;
 
   if (*env_language)
     {
@@ -1126,7 +1127,6 @@ static int set_current_language(const char *restrict loc)
               if (lang_y_nudge[i][0] == langint)
                 {
                   wished_langs[j].lang_y_nudge = lang_y_nudge[i][1];
-                  //printf("y_nudge = %d\n", y_nudge);
                   break;
                 }
             }
@@ -1152,18 +1152,6 @@ static int set_current_language(const char *restrict loc)
   need_right_to_left = wished_langs[0].need_right_to_left;
   need_right_to_left_word = wished_langs[0].need_right_to_left_word;
 
-#if 0
-  for (i = 0; lang_y_nudge[i][0] != -1; i++)
-    {
-      // printf("lang_y_nudge[%d][0] = %d\n", i, lang_y_nudge[i][0]);
-      if (lang_y_nudge[i][0] == langint)
-        {
-          y_nudge = lang_y_nudge[i][1];
-          //printf("y_nudge = %d\n", y_nudge);
-          break;
-        }
-    }
-#endif
 #ifdef DEBUG
   fprintf(stderr, "DEBUG: Language is %s (%d) %s/%s\n",
           lang_prefix, langint, need_right_to_left ? "(RTL)" : "", need_right_to_left_word ? "(RTL words)" : "");

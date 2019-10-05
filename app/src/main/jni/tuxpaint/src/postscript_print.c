@@ -306,8 +306,10 @@ int do_ps_save(FILE * fi,
       child_pid = pclose(fi);
 
 #ifdef DEBUG
-    printf("pclose returned %d\n", child_pid); fflush(stdout);
-    printf("errno = %d\n", errno); fflush(stdout);
+      printf("pclose returned %d\n", child_pid);
+      fflush(stdout);
+      printf("errno = %d\n", errno);
+      fflush(stdout);
 #endif
 
       if (child_pid < 0 || (errno != 0 && errno != EAGAIN))
@@ -324,15 +326,26 @@ int do_ps_save(FILE * fi,
           w = waitpid(child_pid, &status, 0);
 
 #ifdef DEBUG
-            if (w == -1) { perror("waitpid"); exit(EXIT_FAILURE); }
-            if (WIFEXITED(status)) {
-                printf("exited, status=%d\n", WEXITSTATUS(status));
-            } else if (WIFSIGNALED(status)) {
-                printf("killed by signal %d\n", WTERMSIG(status));
-            } else if (WIFSTOPPED(status)) {
-                printf("stopped by signal %d\n", WSTOPSIG(status));
-            } else if (WIFCONTINUED(status)) {
-                printf("continued\n");
+          if (w == -1)
+            {
+              perror("waitpid");
+              exit(EXIT_FAILURE);
+            }
+          if (WIFEXITED(status))
+            {
+              printf("exited, status=%d\n", WEXITSTATUS(status));
+            }
+          else if (WIFSIGNALED(status))
+            {
+              printf("killed by signal %d\n", WTERMSIG(status));
+            }
+          else if (WIFSTOPPED(status))
+            {
+              printf("stopped by signal %d\n", WSTOPSIG(status));
+            }
+          else if (WIFCONTINUED(status))
+            {
+              printf("continued\n");
             }
 #endif
         }

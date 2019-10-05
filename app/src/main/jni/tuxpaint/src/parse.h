@@ -28,6 +28,7 @@ struct cfginfo
   const char *keymouse;
   const char *mirrorstamps;
   const char *native_screensize;
+  const char *new_colors_last;
   const char *no_button_distinction;
   const char *no_fancy_cursors;
   const char *no_system_fonts;
@@ -53,6 +54,7 @@ struct cfginfo
   const char *start_blank;
   const char *use_print_config;
   const char *use_sound;
+  const char *use_stereo;
   const char *wheely;
   const char *mouseaccessibility;
   const char *onscreen_keyboard;

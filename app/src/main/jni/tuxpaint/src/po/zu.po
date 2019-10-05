@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-29 15:48+0200\n"
+"POT-Creation-Date: 2019-09-24 08:40-0700\n"
 "PO-Revision-Date: 2011-02-07 12:30+0200\n"
 "Last-Translator: sipho <sipho@translate.org.za>\n"
 "Language-Team: SIpho\n"
@@ -121,11 +121,11 @@ msgstr "Okusaphuzi!"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:168
+#: ../dirwalk.c:177
 msgid "qx"
 msgstr "i-qx"
 
-#: ../dirwalk.c:168
+#: ../dirwalk.c:177
 msgid "QX"
 msgstr "i-QX"
 
@@ -135,50 +135,50 @@ msgstr "i-QX"
 #. especially important for users who have scroll buttons disabled.
 #. Translators should do whatever is needed to put crummy fonts last.
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:195
+#: ../dirwalk.c:202
 msgid "oO"
 msgstr "oO"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:198
+#: ../dirwalk.c:205
 msgid ",.?!"
 msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:201
+#: ../dirwalk.c:208
 #, fuzzy
 #| msgid "`\\%_@$~#{<(^&*"
 msgid "`%_@$~#{<(^&*"
 msgstr "`\\%_@$~#{<(^&*"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:204
+#: ../dirwalk.c:211
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:207
+#: ../dirwalk.c:214
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:210
+#: ../dirwalk.c:217
 msgid "1Il|"
 msgstr "1Il|"
 
-#: ../dirwalk.c:214
+#: ../dirwalk.c:221
 msgid "<1>spare-1a"
 msgstr "<1>onga-1a"
 
-#: ../dirwalk.c:215
+#: ../dirwalk.c:222
 msgid "<1>spare-1b"
 msgstr "<1>onga-1b"
 
-#: ../dirwalk.c:216
+#: ../dirwalk.c:223
 msgid "<9>spare-9a"
 msgstr "<9>onga-9a"
 
-#: ../dirwalk.c:217
+#: ../dirwalk.c:224
 msgid "<9>spare-9b"
 msgstr "<9>onga-9b"
 
@@ -203,32 +203,32 @@ msgid "Good job!"
 msgstr "Umsebenzi omuhle!"
 
 #. Input Method: English mode
-#: ../im.c:75
+#: ../im.c:74
 msgid "English"
 msgstr "IsiNgisi"
 
 #. Input Method: Japanese Romanized Hiragana mode
-#: ../im.c:78
+#: ../im.c:77
 msgid "Hiragana"
 msgstr "i-Hiragana"
 
 #. Input Method: Japanese Romanized Katakana mode
-#: ../im.c:81
+#: ../im.c:80
 msgid "Katakana"
 msgstr "i-Katakana"
 
 #. Input Method: Korean Hangul 2-Bul mode
-#: ../im.c:84
+#: ../im.c:83
 msgid "Hangul"
 msgstr "i-Hangul"
 
 #. Input Method: Thai mode
-#: ../im.c:87
+#: ../im.c:86
 msgid "Thai"
 msgstr "i-Thai"
 
 #. Input Method: Traditional Chinese mode
-#: ../im.c:90
+#: ../im.c:89
 msgid "ZH_TW"
 msgstr "ZH_TW"
 
@@ -281,16 +281,17 @@ msgid "Star"
 msgstr ""
 
 #. Description of a square
-#: ../shapes.h:290 ../shapes.h:291
+#: ../shapes.h:289 ../shapes.h:290
 msgid "A square is a rectangle with four equal sides."
 msgstr "Isikwele wunxande onezinhlangothi ezine ezilinganayo."
 
 #. Description of a rectangle
-#: ../shapes.h:294 ../shapes.h:295
+#: ../shapes.h:293 ../shapes.h:294
 msgid "A rectangle has four sides and four right angles."
 msgstr "Inxende inezinhlangothi ezine namagumbi amane aqonde mpo."
 
-#: ../shapes.h:299 ../shapes.h:301
+#. Description of a circle
+#: ../shapes.h:297 ../shapes.h:298
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr ""
@@ -298,40 +299,42 @@ msgstr ""
 "enkabeni."
 
 #. Description of an ellipse
-#: ../shapes.h:304 ../shapes.h:305
+#: ../shapes.h:301 ../shapes.h:302
 msgid "An ellipse is a stretched circle."
 msgstr "Umbhoxo indingilizi enwebile."
 
 #. Description of a triangle
-#: ../shapes.h:308 ../shapes.h:309
+#: ../shapes.h:305 ../shapes.h:306
 msgid "A triangle has three sides."
 msgstr "Okubuso-buntathu kunezinhlangothi ezintathu."
 
 #. Description of a pentagon
-#: ../shapes.h:312 ../shapes.h:313
+#: ../shapes.h:309 ../shapes.h:310
 msgid "A pentagon has five sides."
 msgstr "Unxanhlanu unezinhlangothi ezinhlanu."
 
-#: ../shapes.h:317 ../shapes.h:319
+#. Description of a rhombus
+#: ../shapes.h:313 ../shapes.h:314
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr ""
 "Irombusi inezinhlangothi ezine ezilinganayo, futhi izinhlangothi ezibhekene "
 "zilinganisene."
 
-#: ../shapes.h:323 ../shapes.h:325
+#. Description of an octagon
+#: ../shapes.h:317 ../shapes.h:318
 msgid "An octagon has eight equal sides."
 msgstr ""
 "Unxasishiyagalombili onezinhlangothi eziyisishiyagalombili ezilinganayo."
 
-#: ../shapes.h:327 ../shapes.h:328
+#: ../shapes.h:320 ../shapes.h:321
 msgid "A star with 3 points."
 msgstr ""
 
-#: ../shapes.h:329 ../shapes.h:330
+#: ../shapes.h:322 ../shapes.h:323
 msgid "A star with 4 points."
 msgstr ""
 
-#: ../shapes.h:331 ../shapes.h:332
+#: ../shapes.h:324 ../shapes.h:325
 msgid "A star with 5 points."
 msgstr ""
 
@@ -402,6 +405,11 @@ msgstr "Umbhalo"
 msgid "Label"
 msgstr "Ilebula"
 
+#. Fill tool
+#: ../tools.h:80
+msgid "Fill"
+msgstr "Gcwalisa"
+
 #. Undo last action
 #: ../tools.h:86
 msgid "Undo"
@@ -425,7 +433,7 @@ msgstr "Okusha"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7640
+#: ../tools.h:98 ../tuxpaint.c:7846
 msgid "Open"
 msgstr "Vula"
 
@@ -459,8 +467,7 @@ msgstr "Khetha isithombe ozosinamathisela emdwebeni wakho."
 msgid "Click to start drawing a line. Let go to complete it."
 msgstr "Chofoza ukuze uqale ukudweba umugqa. Yeka uziqedelele ngokwawo."
 
-#. Shape tool instructions
-#: ../tools.h:124
+#: ../tools.h:125
 msgid ""
 "Pick a shape. Click to pick the center, drag, then let go when it is the "
 "size you want. Move around to rotate it, and click to draw it."
@@ -469,8 +476,7 @@ msgstr ""
 "wusayizi owufunayo. Sizungezise ukuze siguquke, bese usichofoza ukuze "
 "usidwebe."
 
-#. Text tool instructions
-#: ../tools.h:127
+#: ../tools.h:129
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text."
@@ -478,8 +484,7 @@ msgstr ""
 "Khetha isitayela sombhalo. Chofoza emdwebeni wakho usungaqala-ke "
 "ukuthayipha. Cindezela [Enter] or [Tab] ukuqedela umbhalo."
 
-#. Label tool instructions
-#: ../tools.h:130
+#: ../tools.h:133
 #, fuzzy
 #| msgid ""
 #| "Choose a style of text. Click on your drawing and you can start typing. "
@@ -497,250 +502,257 @@ msgstr ""
 "inkinobho yokukhetha bese uchofoza ilebula ye-exist, ungayihambisa, uyihlele "
 "futhi ushintshe ngisho nesitayela sombhalo wayo."
 
-#. Magic tool instruction
+#. Fill tool instructions
 #: ../tools.h:136
+msgid "Click in the picture to fill that area with color."
+msgstr "Chofoza esithombeni ukugcwalisa leyo ndawo ngomubala."
+
+#. Magic tool instruction
+#: ../tools.h:139
 msgid "Pick a magical effect to use on your drawing!"
 msgstr "Khetha uhlobo lomlingo ozolusebenzisa emdwebeni wakho!"
 
 #. Response to 'undo' action
-#: ../tools.h:139
+#: ../tools.h:142
 msgid "Undo!"
 msgstr "Qaqa!"
 
 #. Response to 'redo' action
-#: ../tools.h:142
+#: ../tools.h:145
 msgid "Redo!"
 msgstr "Yenza kabusha!"
 
 #. Eraser tool
-#: ../tools.h:145
+#: ../tools.h:148
 msgid "Eraser!"
 msgstr "Isicimi!"
 
 #. Response to 'start a new image' action
-#: ../tools.h:148
+#: ../tools.h:151
 msgid "Pick a color or picture with which to start a new drawing."
 msgstr "Khetha umbala noma isithombe ozosisebenzisa ukuqala umdwebo omusha."
 
 #. Response to 'open' action (while file dialog is being constructed)
-#: ../tools.h:151
+#: ../tools.h:154
 msgid "Open…"
 msgstr "Vula…"
 
 #. Response to 'save' action
-#: ../tools.h:154
+#: ../tools.h:157
 msgid "Your image has been saved!"
 msgstr "Isithombe sakho sesigciniwe!"
 
 #. Response to 'print' action (while printing, or print dialog is being used)
-#: ../tools.h:157
+#: ../tools.h:160
 msgid "Printing…"
 msgstr "Iyaphrinta…"
 
 #. Response to 'quit' (exit) action
-#: ../tools.h:160
+#: ../tools.h:163
 msgid "Bye bye!"
 msgstr "Sala kahle!"
 
 #. Instruction while using Line tool (after click, before release)
-#: ../tools.h:164
+#: ../tools.h:167
 msgid "Let go of the button to complete the line."
 msgstr "Yekela inkinobho ukuze umugqa wakho uqedeleke."
 
 #. Instruction while using Shape tool (after first click, before release)
-#: ../tools.h:167
+#: ../tools.h:170
 msgid "Hold the button to stretch the shape."
 msgstr "Cindezela inkinobho ukunweba isifanekiso."
 
 #. Instruction while finishing Shape tool (after release, during rotation step before second click)
-#: ../tools.h:170
+#: ../tools.h:173
 msgid "Move the mouse to rotate the shape. Click to draw it."
 msgstr ""
 "Nyakazisa i-mouse ukuze uzungezise isifanekiso. Chofoza ukuze usidwebe."
 
 #. Notification that 'New' action was aborted (current image would have been lost)
-#: ../tools.h:173
+#: ../tools.h:176
 msgid "OK then… Let’s keep drawing this one!"
 msgstr "Kulungile-ke... Asiqhubeke sidwebe lena!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2054
+#: ../tuxpaint.c:2113
 msgid "Do you really want to quit?"
 msgstr "Ngabe ufuna ukuphuma ngempela na?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2057
+#: ../tuxpaint.c:2116
 msgid "Yes, I’m done!"
 msgstr "Yebo, sengiqedile!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2060 ../tuxpaint.c:2087
+#: ../tuxpaint.c:2119 ../tuxpaint.c:2146
 msgid "No, take me back!"
 msgstr "Cha, ngibuyisele emuva!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2064
+#: ../tuxpaint.c:2123
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Uma uphuma, uzolahlekelwa isithombe sakho! Sisigcine na?"
 
-#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+#: ../tuxpaint.c:2124 ../tuxpaint.c:2129
 msgid "Yes, save it!"
 msgstr "Yebo, sigcine!"
 
-#: ../tuxpaint.c:2066 ../tuxpaint.c:2071
+#: ../tuxpaint.c:2125 ../tuxpaint.c:2130
 msgid "No, don’t bother saving!"
 msgstr "Cha, ungazihluphi ukusigcina!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2069
+#: ../tuxpaint.c:2128
 msgid "Save your picture first?"
 msgstr "Gcina isithombe sakho kuqala?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2074
+#: ../tuxpaint.c:2133
 msgid "Can’t open that picture!"
 msgstr "Angikwazi ukuvula leso sithombe!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2077 ../tuxpaint.c:2082 ../tuxpaint.c:2091 ../tuxpaint.c:2098
-#: ../tuxpaint.c:2107
+#: ../tuxpaint.c:2136 ../tuxpaint.c:2141 ../tuxpaint.c:2150 ../tuxpaint.c:2157
+#: ../tuxpaint.c:2166
 msgid "OK"
 msgstr "Kulungile"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2081
+#: ../tuxpaint.c:2140
 msgid "There are no saved files!"
 msgstr "Awekho amafayela agciniwe!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2085
+#: ../tuxpaint.c:2144
 msgid "Print your picture now?"
 msgstr "Ngabe uyasiphrinta isithombe sakho manje?"
 
-#: ../tuxpaint.c:2086
+#: ../tuxpaint.c:2145
 msgid "Yes, print it!"
 msgstr "Yebo, phrinta!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2090
+#: ../tuxpaint.c:2149
 msgid "Your picture has been printed!"
 msgstr "Isithombe sakho sesiphrintiwe!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2094
+#: ../tuxpaint.c:2153
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Phephisa! Isithombe sakho asikwazanga ukuphrinteka!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2097
+#: ../tuxpaint.c:2156
 msgid "You can’t print yet!"
 msgstr "Awukwazi ukuphrinta okwamanje!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2101
+#: ../tuxpaint.c:2160
 msgid "Erase this picture?"
 msgstr "Ngisicime lesi sithombe?"
 
-#: ../tuxpaint.c:2102
+#: ../tuxpaint.c:2161
 msgid "Yes, erase it!"
 msgstr "Yebo, sicime!"
 
-#: ../tuxpaint.c:2103
+#: ../tuxpaint.c:2162
 msgid "No, don’t erase it!"
 msgstr "Cha, ungasicimi!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2106
+#: ../tuxpaint.c:2165
 msgid "Remember to use the left mouse button!"
 msgstr "Khumbula ukusebenzisa inkinobho yemawusi yangasesinxeleni!"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2314
+#: ../tuxpaint.c:2371
 msgid "Sound muted."
 msgstr "Umsindo awukho."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2319
+#: ../tuxpaint.c:2376
 msgid "Sound unmuted."
 msgstr "Umsindo ukhona."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3072
+#: ../tuxpaint.c:3129
 msgid "Please wait…"
 msgstr "Ngicela ulinde…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7849
 msgid "Erase"
 msgstr "Susa"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7852
 msgid "Slides"
 msgstr "Izilayidi"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7649
+#: ../tuxpaint.c:7855
 msgid "Back"
 msgstr "Emuva"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7652
+#: ../tuxpaint.c:7858
 msgid "Next"
 msgstr "Phambili"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7655
+#: ../tuxpaint.c:7861
 msgid "Play"
 msgstr "Dlala"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8364
+#: ../tuxpaint.c:8576
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11692
+#: ../tuxpaint.c:11944
 msgid "Yes"
 msgstr "Yebo"
 
-#: ../tuxpaint.c:11696
+#: ../tuxpaint.c:11948
 msgid "No"
 msgstr "Cha"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12795
+#: ../tuxpaint.c:13018
 msgid "Replace the picture with your changes?"
 msgstr "Shintshanisa isithombe ngoshintsho olwenzile?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12799
+#: ../tuxpaint.c:13022
 msgid "Yes, replace the old one!"
 msgstr "Yebo, shintshanisa esidala!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12803
+#: ../tuxpaint.c:13026
 msgid "No, save a new file!"
 msgstr "Cha, gcina ifayela elisha!"
 
-#: ../tuxpaint.c:14048
+#. Let user choose an image:
+#. Instructions for 'Open' file dialog
+#: ../tuxpaint.c:14270
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Khetha isithombe osifunayo, bese ucindezela “Vula”."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:15079 ../tuxpaint.c:15407
+#: ../tuxpaint.c:15266 ../tuxpaint.c:15586
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Khetha isithombe osifunayo, bese ucindezela “Dlala”."
 
-#: ../tuxpaint.c:22873
+#: ../tuxpaint.c:23179
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:22885
+#: ../tuxpaint.c:23191
 msgid "Pick a color."
 msgstr "Khetha umbala."
 
@@ -756,11 +768,11 @@ msgstr "Iprogram yokudweba"
 msgid "A drawing program for children."
 msgstr "Iprogremu yokudweba yezingane."
 
-#: ../../magic/src/alien.c:64
+#: ../../magic/src/alien.c:68
 msgid "Color Shift"
 msgstr "Ququla umubala"
 
-#: ../../magic/src/alien.c:67
+#: ../../magic/src/alien.c:72
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to change the colors in parts of your picture."
@@ -769,15 +781,15 @@ msgstr ""
 "Chofoza bese unyakazisa igundane ukushintsha imibala ezingxenyeni zesithombe "
 "sakho."
 
-#: ../../magic/src/alien.c:68
+#: ../../magic/src/alien.c:73
 msgid "Click to change the colors in your entire picture."
 msgstr "Chofoza ukushintsha imibala esithombeni sakho sonke."
 
-#: ../../magic/src/blind.c:117
+#: ../../magic/src/blind.c:116
 msgid "Blind"
 msgstr "Ibhulayindi"
 
-#: ../../magic/src/blind.c:122
+#: ../../magic/src/blind.c:123
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
@@ -785,26 +797,26 @@ msgstr ""
 "Chofoza umphetho wesithombe sakho ukudonsela iwindi elibhulayindi kuso. Iya "
 "phezulu ukuze uvule noma uvale ibhulayindi."
 
-#: ../../magic/src/blocks_chalk_drip.c:136
+#: ../../magic/src/blocks_chalk_drip.c:129
 msgid "Blocks"
 msgstr "Amabhuloki"
 
-#: ../../magic/src/blocks_chalk_drip.c:138
+#: ../../magic/src/blocks_chalk_drip.c:131
 msgid "Chalk"
 msgstr "Ushoki"
 
-#: ../../magic/src/blocks_chalk_drip.c:140
+#: ../../magic/src/blocks_chalk_drip.c:133
 msgid "Drip"
 msgstr "Consisa"
 
-#: ../../magic/src/blocks_chalk_drip.c:150
+#: ../../magic/src/blocks_chalk_drip.c:142
 #, fuzzy
 #| msgid "Click and move the mouse around to make the picture blocky."
 msgid "Click and drag the mouse around to make the picture blocky."
 msgstr ""
 "Chofoza bese unyakazisa igundane kaningana ukwenza isithombe sibe sikwedlana."
 
-#: ../../magic/src/blocks_chalk_drip.c:153
+#: ../../magic/src/blocks_chalk_drip.c:144
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn the picture into a chalk drawing."
@@ -814,7 +826,7 @@ msgstr ""
 "Chofoza bese unyakazisa igundane kaningana ukujikisa isithombe sibe umdwebo "
 "kashoki."
 
-#: ../../magic/src/blocks_chalk_drip.c:156
+#: ../../magic/src/blocks_chalk_drip.c:146
 #, fuzzy
 #| msgid "Click and move the mouse around to make the picture drip."
 msgid "Click and drag the mouse around to make the picture drip."
@@ -825,49 +837,49 @@ msgstr ""
 msgid "Blur"
 msgstr "Kumafifi"
 
-#: ../../magic/src/blur.c:83
+#: ../../magic/src/blur.c:84
 #, fuzzy
 #| msgid "Click and move the mouse around to blur the image."
 msgid "Click and drag the mouse around to blur the image."
 msgstr ""
 "Chofoza bese unyakazisa igundane kaningana ukwenza isithombe sibe lufifi."
 
-#: ../../magic/src/blur.c:84
+#: ../../magic/src/blur.c:85
 msgid "Click to blur the entire image."
 msgstr "Chofoza ukwenza lufifi wonke umfanekiso wakho."
 
 #. Both are named "Bricks", at the moment:
-#: ../../magic/src/bricks.c:124
+#: ../../magic/src/bricks.c:120
 msgid "Bricks"
 msgstr "Izitini"
 
-#: ../../magic/src/bricks.c:131
+#: ../../magic/src/bricks.c:127
 #, fuzzy
 #| msgid "Click and move to draw large bricks."
 msgid "Click and drag to draw large bricks."
 msgstr "Chofoza bese uyanyakazisa ukuze udwebe izitini ezinkulu."
 
-#: ../../magic/src/bricks.c:133
+#: ../../magic/src/bricks.c:129
 #, fuzzy
 #| msgid "Click and move to draw small bricks."
 msgid "Click and drag to draw small bricks."
 msgstr "Chofoza bese uyanyakazisa ukuze udwebe izitini ezincane."
 
-#: ../../magic/src/calligraphy.c:127
+#: ../../magic/src/calligraphy.c:124
 msgid "Calligraphy"
 msgstr "Ukuloba kahle"
 
-#: ../../magic/src/calligraphy.c:134
+#: ../../magic/src/calligraphy.c:131
 #, fuzzy
 #| msgid "Click and move the mouse around to draw in calligraphy."
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Chofoza bese unyakazisa igundane kaningana ukuze ulobe kahle."
 
-#: ../../magic/src/cartoon.c:106
+#: ../../magic/src/cartoon.c:103
 msgid "Cartoon"
 msgstr "Ikhathuni"
 
-#: ../../magic/src/cartoon.c:113
+#: ../../magic/src/cartoon.c:109
 #, fuzzy
 #| msgid "Click and move the mouse around to turn the picture into a cartoon."
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
@@ -875,102 +887,93 @@ msgstr ""
 "Chofoza bese unyakazisa igundane kaningana ukuze ujikise isithombe sibe "
 "ikhathuni."
 
-#: ../../magic/src/confetti.c:85
+#: ../../magic/src/confetti.c:83
 msgid "Confetti"
 msgstr "Ikhomfeti"
 
-#: ../../magic/src/confetti.c:87
+#: ../../magic/src/confetti.c:88
 msgid "Click to throw confetti!"
 msgstr "Chofoza ukuze uphonse ikhombfeti!"
 
-#: ../../magic/src/distortion.c:142
+#: ../../magic/src/distortion.c:134
 msgid "Distortion"
 msgstr "Inhlanekezela"
 
-#: ../../magic/src/distortion.c:150
+#: ../../magic/src/distortion.c:143
 msgid "Click and drag the mouse to cause distortion in your picture."
 msgstr ""
 "Chofoza bese donsa igundane ukuze wenze inhlanekezela esithombeni sakho."
 
-#: ../../magic/src/emboss.c:103
+#: ../../magic/src/emboss.c:101
 msgid "Emboss"
 msgstr "i-emboss"
 
-#: ../../magic/src/emboss.c:109
+#: ../../magic/src/emboss.c:107
 msgid "Click and drag the mouse to emboss the picture."
 msgstr "Chofoza bese udonsa igundane wenzi isithombe sibeyi-emboss."
 
-#: ../../magic/src/fade_darken.c:121
+#: ../../magic/src/fade_darken.c:114
 msgid "Lighten"
 msgstr "Khanyisa"
 
-#: ../../magic/src/fade_darken.c:123
+#: ../../magic/src/fade_darken.c:116
 msgid "Darken"
 msgstr "Yenza kubemnyamana"
 
-#: ../../magic/src/fade_darken.c:134
+#: ../../magic/src/fade_darken.c:127
 #, fuzzy
 #| msgid "Click and move the mouse to lighten parts of your picture."
 msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr ""
 "Chofoza bese unyakazisa igundane ukukhanyisa izingxenye zesithombe sakho."
 
-#: ../../magic/src/fade_darken.c:136
+#: ../../magic/src/fade_darken.c:129
 msgid "Click to lighten your entire picture."
 msgstr "Chofoza ukukhanyisa isithombe sakho sonke."
 
-#: ../../magic/src/fade_darken.c:141
+#: ../../magic/src/fade_darken.c:134
 #, fuzzy
 #| msgid "Click and move the mouse to darken parts of your picture."
 msgid "Click and drag the mouse to darken parts of your picture."
 msgstr ""
 "Chofoza bese unyakazisa igundane ukukhanyisa izingxenye zesithombe sakho."
 
-#: ../../magic/src/fade_darken.c:143
+#: ../../magic/src/fade_darken.c:136
 msgid "Click to darken your entire picture."
 msgstr "Chofoza ukwenza kube mnyamana isithombe sakho sonke."
 
-#: ../../magic/src/fill.c:108
-msgid "Fill"
-msgstr "Gcwalisa"
-
-#: ../../magic/src/fill.c:115
-msgid "Click in the picture to fill that area with color."
-msgstr "Chofoza esithombeni ukugcwalisa leyo ndawo ngomubala."
-
-#: ../../magic/src/fisheye.c:104
+#: ../../magic/src/fisheye.c:101
 msgid "Fisheye"
 msgstr "Ihlo lenhlanzi"
 
-#. Needs better name
 #: ../../magic/src/fisheye.c:106
 msgid "Click on part of your picture to create a fisheye effect."
 msgstr "Chofoza engxenyeni yesithombe sakho ukwenza okufana neso lenhlanzi."
 
-#: ../../magic/src/flower.c:150
+#: ../../magic/src/flower.c:144
 msgid "Flower"
 msgstr "Imbali"
 
-#: ../../magic/src/flower.c:156
+#: ../../magic/src/flower.c:150
 msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
 msgstr ""
 "Chofoza bese uyadonsa ukuze udwebe isiqu sembali. Dedela ukuze kuqedeleke "
 "imbali."
 
-#: ../../magic/src/foam.c:121
+#: ../../magic/src/foam.c:114
 msgid "Foam"
 msgstr "Igwebu"
 
-#: ../../magic/src/foam.c:127
+#: ../../magic/src/foam.c:120
 msgid "Click and drag the mouse to cover an area with foamy bubbles."
 msgstr ""
 "Chofoza bese udonsa igundane ukuze umboze indawo ngamagwebu aphukuzelayo."
 
-#: ../../magic/src/fold.c:105
+#: ../../magic/src/fold.c:103
 msgid "Fold"
 msgstr "Goqa"
 
-#: ../../magic/src/fold.c:107
+#: ../../magic/src/fold.c:108
 msgid ""
 "Choose a background color and click to turn the corner of the page over."
 msgstr "Khetha umbala wasemuva bese uyachofoza ukuze ujikise ikhona lekhasi."
@@ -979,7 +982,7 @@ msgstr "Khetha umbala wasemuva bese uyachofoza ukuze ujikise ikhona lekhasi."
 msgid "Fretwork"
 msgstr ""
 
-#: ../../magic/src/fretwork.c:180
+#: ../../magic/src/fretwork.c:182
 #, fuzzy
 #| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw repetitive patterns. "
@@ -987,68 +990,68 @@ msgstr ""
 "Chofoza bese uyadonsa ukuze udwebe imicibisholo eyenziwe ngochungechunge "
 "lobuciko."
 
-#: ../../magic/src/fretwork.c:182
+#: ../../magic/src/fretwork.c:184
 #, fuzzy
 #| msgid "Click to cover your picture with rain drops."
 msgid "Click to surround your picture with repetitive patterns."
 msgstr "Chofoza ukugwuma isithombe sakho ngamaconsi emvula."
 
-#: ../../magic/src/glasstile.c:107
+#: ../../magic/src/glasstile.c:104
 msgid "Glass Tile"
 msgstr "Uthayela wengilazi"
 
-#: ../../magic/src/glasstile.c:114
+#: ../../magic/src/glasstile.c:111
 msgid "Click and drag the mouse to put glass tile over your picture."
 msgstr ""
 "Chofoza bese udonsa igundane ukuze ubeke uthayela wengilazi esithombeni "
 "sakho."
 
-#: ../../magic/src/glasstile.c:116
+#: ../../magic/src/glasstile.c:113
 msgid "Click to cover your entire picture in glass tiles."
 msgstr "Chofoza ukuze umboze isithombe sakho sonke ngamathayela wengilazi."
 
-#: ../../magic/src/grass.c:112
+#: ../../magic/src/grass.c:107
 msgid "Grass"
 msgstr "Utshani"
 
-#: ../../magic/src/grass.c:118
+#: ../../magic/src/grass.c:113
 #, fuzzy
 #| msgid "Click and move to draw grass. Don’t forget the dirt!"
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "Chofoza bese uyanyakazisa ukuze udwebe utshani. Ungakhohlwa ukungcola!"
 
-#: ../../magic/src/halftone.c:34
+#: ../../magic/src/halftone.c:35
 msgid "Halftone"
 msgstr ""
 
-#: ../../magic/src/halftone.c:38
+#: ../../magic/src/halftone.c:39
 #, fuzzy
 #| msgid "Click to turn your painting into its negative."
 msgid "Click and drag to turn your drawing into a newspaper."
 msgstr "Chofoza ukuze ushintshele upende wakho kunegative."
 
-#: ../../magic/src/kalidescope.c:120
+#: ../../magic/src/kalidescope.c:119
 msgid "Symmetric Left/Right"
 msgstr "Ukufana kwesokunxele/kwesokudla"
 
-#: ../../magic/src/kalidescope.c:122
+#: ../../magic/src/kalidescope.c:123
 msgid "Symmetric Up/Down"
 msgstr "Ukufana phezulu/phansi"
 
-#: ../../magic/src/kalidescope.c:124
+#: ../../magic/src/kalidescope.c:127
 msgid "Pattern"
 msgstr ""
 
-#: ../../magic/src/kalidescope.c:126
+#: ../../magic/src/kalidescope.c:131
 msgid "Tiles"
 msgstr ""
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:128
+#: ../../magic/src/kalidescope.c:135
 msgid "Kaleidoscope"
 msgstr "i-Kaleidoscope"
 
-#: ../../magic/src/kalidescope.c:136
+#: ../../magic/src/kalidescope.c:146
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the left and right of your picture."
@@ -1056,7 +1059,7 @@ msgstr ""
 "Chofoza bese udonsa igundane ukuze udwebe ngamabhulashi amabili afanayo "
 "ngakwesikunxele nokwesokudla esithombeni sakho."
 
-#: ../../magic/src/kalidescope.c:138
+#: ../../magic/src/kalidescope.c:152
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the top and bottom of your picture."
@@ -1064,13 +1067,13 @@ msgstr ""
 "Chofoza bese udonsa igundane ukuze udwebe ngamabhulashi amabili afanayo "
 "phuzulu naphansi esithombeni sakho."
 
-#: ../../magic/src/kalidescope.c:140
+#: ../../magic/src/kalidescope.c:156
 #, fuzzy
 #| msgid "Click and drag the mouse to emboss the picture."
 msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr "Chofoza bese udonsa igundane wenzi isithombe sibeyi-emboss."
 
-#: ../../magic/src/kalidescope.c:142
+#: ../../magic/src/kalidescope.c:160
 #, fuzzy
 #| msgid ""
 #| "Click and drag the mouse to draw with two brushes that are symmetric "
@@ -1083,50 +1086,50 @@ msgstr ""
 "ngakwesikunxele nokwesokudla esithombeni sakho."
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:144
+#: ../../magic/src/kalidescope.c:164
 msgid ""
 "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgstr ""
 "Chofoza bese udonsa igundane ukuze udwebe ngamabhulashi afanayo (i-"
 "kaleidoscope)."
 
-#: ../../magic/src/light.c:107
+#: ../../magic/src/light.c:103
 msgid "Light"
 msgstr "Ukukhanya"
 
-#: ../../magic/src/light.c:113
+#: ../../magic/src/light.c:109
 msgid "Click and drag to draw a beam of light on your picture."
 msgstr "Chofoza udonse ukuze udwebe umsebe womkhanyo esithombeni sakho."
 
-#: ../../magic/src/metalpaint.c:101
+#: ../../magic/src/metalpaint.c:98
 msgid "Metal Paint"
 msgstr "Upende oqinile"
 
-#: ../../magic/src/metalpaint.c:107
+#: ../../magic/src/metalpaint.c:105
 msgid "Click and drag the mouse to paint with a metallic color."
 msgstr "Chofoza udonse imawuzi ukuze upende ngombala oqinile."
 
-#: ../../magic/src/mirror_flip.c:117
+#: ../../magic/src/mirror_flip.c:110
 msgid "Mirror"
 msgstr "Isibuko"
 
-#: ../../magic/src/mirror_flip.c:119
+#: ../../magic/src/mirror_flip.c:112
 msgid "Flip"
 msgstr "Phenqa"
 
-#: ../../magic/src/mirror_flip.c:130
+#: ../../magic/src/mirror_flip.c:121
 msgid "Click to make a mirror image."
 msgstr "Chofoza ukuze wenze isithombe sesibuko."
 
-#: ../../magic/src/mirror_flip.c:133
+#: ../../magic/src/mirror_flip.c:123
 msgid "Click to flip the picture upside-down."
 msgstr "Chofoza ukuphendula isithombe sakho phansi-phezulu."
 
-#: ../../magic/src/mosaic.c:100
+#: ../../magic/src/mosaic.c:96
 msgid "Mosaic"
 msgstr "Mozayiki"
 
-#: ../../magic/src/mosaic.c:103
+#: ../../magic/src/mosaic.c:100
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
@@ -1136,23 +1139,23 @@ msgstr ""
 "Chofoza bese unyakazisa igundane ukuze wongeze amiphumela yemozayiki "
 "ezinxenyeni zesithombe sakho."
 
-#: ../../magic/src/mosaic.c:104
+#: ../../magic/src/mosaic.c:101
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Chofoza ungeze umphumela wemozayiki esithombeni sakho sonke."
 
-#: ../../magic/src/mosaic_shaped.c:139
+#: ../../magic/src/mosaic_shaped.c:132
 msgid "Square Mosaic"
 msgstr "Imozayiki engunxantathu"
 
-#: ../../magic/src/mosaic_shaped.c:140
+#: ../../magic/src/mosaic_shaped.c:133
 msgid "Hexagon Mosaic"
 msgstr "Imozayiki engusithuphanhlangothi"
 
-#: ../../magic/src/mosaic_shaped.c:141
+#: ../../magic/src/mosaic_shaped.c:134
 msgid "Irregular Mosaic"
 msgstr "Imozayiki engaqondile"
 
-#: ../../magic/src/mosaic_shaped.c:148
+#: ../../magic/src/mosaic_shaped.c:140
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a square mosaic to parts of your picture."
@@ -1162,12 +1165,12 @@ msgstr ""
 "Chofoza uhambise imawuzi ukuze unezelele imozayiki engunxantathu ezinxenyeni "
 "zesithombe sakho."
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:141
 msgid "Click to add a square mosaic to your entire picture."
 msgstr ""
 "Chofoza ukuze unezelele ngemozayiki engunxantathu esithombeni sakho sonke."
 
-#: ../../magic/src/mosaic_shaped.c:153
+#: ../../magic/src/mosaic_shaped.c:145
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a hexagonal mosaic to parts of your "
@@ -1178,13 +1181,13 @@ msgstr ""
 "Chofoza uhambise imawuzi ukuze unezelele imozayiki engusithuphanhlangothi "
 "ezinxenyeni zesithombe sakho."
 
-#: ../../magic/src/mosaic_shaped.c:154
+#: ../../magic/src/mosaic_shaped.c:146
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr ""
 "Chofoza ukuze unezelele imozayiki engusithuphanhlangothi esithombeni sakho "
 "sonke."
 
-#: ../../magic/src/mosaic_shaped.c:158
+#: ../../magic/src/mosaic_shaped.c:150
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add an irregular mosaic to parts of your "
@@ -1195,30 +1198,30 @@ msgstr ""
 "Chofoza uhambise imawuzi ukuze unezelele imozayiki engaqondile ezinxenyeni "
 "zesithombe sakho."
 
-#: ../../magic/src/mosaic_shaped.c:159
+#: ../../magic/src/mosaic_shaped.c:151
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "Chofa ukuze unezelele imozayiki engaqondile esithombeni sakho sonke."
 
-#: ../../magic/src/negative.c:98
+#: ../../magic/src/negative.c:94
 msgid "Negative"
 msgstr "Nekethivu"
 
-#: ../../magic/src/negative.c:106
+#: ../../magic/src/negative.c:101
 #, fuzzy
 #| msgid "Click and move the mouse around to make your painting negative."
 msgid "Click and drag the mouse around to make your painting negative."
 msgstr ""
 "Chofoza uhambise imawuzi izungeze ukuze wenze upende wakho uebenekethivu."
 
-#: ../../magic/src/negative.c:109
+#: ../../magic/src/negative.c:103
 msgid "Click to turn your painting into its negative."
 msgstr "Chofoza ukuze ushintshele upende wakho kunegative."
 
-#: ../../magic/src/noise.c:63
+#: ../../magic/src/noise.c:66
 msgid "Noise"
 msgstr "Umsindo"
 
-#: ../../magic/src/noise.c:66
+#: ../../magic/src/noise.c:70
 #, fuzzy
 #| msgid "Click and move the mouse to add noise to parts of your picture."
 msgid "Click and drag the mouse to add noise to parts of your picture."
@@ -1226,78 +1229,78 @@ msgstr ""
 "Chofoza uhambise imawuzi ukuze unezelele umsindo ezinxenyeni zesithombe "
 "sakho."
 
-#: ../../magic/src/noise.c:67
+#: ../../magic/src/noise.c:71
 msgid "Click to add noise to your entire picture."
 msgstr "Chofoza ukuze unezelele umsindo esithombeni sakho sonke."
 
-#: ../../magic/src/perspective.c:145
+#: ../../magic/src/perspective.c:147
 msgid "Perspective"
 msgstr "Umubono"
 
-#: ../../magic/src/perspective.c:146
+#: ../../magic/src/perspective.c:148
 msgid "Zoom"
 msgstr "Sondeza"
 
-#: ../../magic/src/perspective.c:151
+#: ../../magic/src/perspective.c:153
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "Chofoza emachosheni udonse lapho ufuna ukunwebisa khona isithombe."
 
-#: ../../magic/src/perspective.c:154
+#: ../../magic/src/perspective.c:156
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgstr ""
 "Chofoza bese udonsela phezulu ukuze usondeze noma donsela phansi ukuze "
 "uhlehlise isithombe."
 
-#: ../../magic/src/puzzle.c:105
+#: ../../magic/src/puzzle.c:103
 msgid "Puzzle"
 msgstr "Indida"
 
-#: ../../magic/src/puzzle.c:112
+#: ../../magic/src/puzzle.c:110
 msgid "Click the part of your picture where would you like a puzzle."
 msgstr "Chofoza indawo esithombeni sakho lapho ungathanda khona ipuzzle."
 
-#: ../../magic/src/puzzle.c:113
+#: ../../magic/src/puzzle.c:111
 msgid "Click to make a puzzle in fullscreen mode."
 msgstr "Chofoza ukuze wenze indida igcwale isithonbe."
 
-#: ../../magic/src/rails.c:131
+#: ../../magic/src/rails.c:129
 msgid "Rails"
 msgstr "Imishayo yokubambelela"
 
-#: ../../magic/src/rails.c:133
+#: ../../magic/src/rails.c:134
 msgid "Click and drag to draw train track rails on your picture."
 msgstr ""
 "Chofoza bese uyadonsa ukuze udwebe izindlela zesitimela esithombeni sakho."
 
-#: ../../magic/src/rainbow.c:139
+#: ../../magic/src/rainbow.c:133
 msgid "Rainbow"
 msgstr "Uthingo lwenkosasazana"
 
-#: ../../magic/src/rainbow.c:146
+#: ../../magic/src/rainbow.c:139
 msgid "You can draw in rainbow colors!"
 msgstr "Ungadweba ngemibala yothingo lwenkosasazana!"
 
-#: ../../magic/src/rain.c:65
+#: ../../magic/src/rain.c:68
 msgid "Rain"
 msgstr "Imvula"
 
-#: ../../magic/src/rain.c:68
+#: ../../magic/src/rain.c:72
 msgid "Click to place a rain drop onto your picture."
 msgstr "Chofoza ukubeka iconsi lemvula esithombeni sakho."
 
-#: ../../magic/src/rain.c:69
+#: ../../magic/src/rain.c:73
 msgid "Click to cover your picture with rain drops."
 msgstr "Chofoza ukugwuma isithombe sakho ngamaconsi emvula."
 
-#: ../../magic/src/realrainbow.c:110
+#: ../../magic/src/realrainbow.c:98
 msgid "Real Rainbow"
 msgstr "Uthingo lwenkosasazane lwangempela"
 
-#: ../../magic/src/realrainbow.c:112
+#: ../../magic/src/realrainbow.c:100
 msgid "ROYGBIV Rainbow"
 msgstr "Uthingo lwenkosazana lwe-ROYGBIV"
 
-#: ../../magic/src/realrainbow.c:117
+#: ../../magic/src/realrainbow.c:108
 msgid ""
 "Click where you want your rainbow to start, drag to where you want it to "
 "end, and then let go to draw a rainbow."
@@ -1305,43 +1308,43 @@ msgstr ""
 "Chofoza lapho ofuna uthingo lwakho lwenkosazane luqale khona, donsela lapho "
 "ofuna khona luphele, bese uyadedela ukuze kudwebeke uthingo lwenkosazane."
 
-#: ../../magic/src/ripples.c:106
+#: ../../magic/src/ripples.c:102
 msgid "Ripples"
 msgstr "Amaqimba"
 
-#: ../../magic/src/ripples.c:112
+#: ../../magic/src/ripples.c:108
 msgid "Click to make ripples appear over your picture."
 msgstr "Chofoza ukuze wenze amaqimba avele esithombeni sakho."
 
-#: ../../magic/src/rosette.c:116
+#: ../../magic/src/rosette.c:115
 msgid "Rosette"
 msgstr "i-rosette"
 
-#: ../../magic/src/rosette.c:116
+#: ../../magic/src/rosette.c:117
 msgid "Picasso"
 msgstr "i-picasso"
 
-#: ../../magic/src/rosette.c:121
+#: ../../magic/src/rosette.c:123
 msgid "Click and start drawing your rosette."
 msgstr "Chofoza ukuze uqale ukudweba i-rosette yakho."
 
-#: ../../magic/src/rosette.c:123
+#: ../../magic/src/rosette.c:125
 msgid "You can draw just like Picasso!"
 msgstr "Ungadweba njenge-Picasso!"
 
-#: ../../magic/src/sharpen.c:73
+#: ../../magic/src/sharpen.c:76
 msgid "Edges"
 msgstr "Umiphetho"
 
-#: ../../magic/src/sharpen.c:74
+#: ../../magic/src/sharpen.c:77
 msgid "Sharpen"
 msgstr "Ukucijisa"
 
-#: ../../magic/src/sharpen.c:75
+#: ../../magic/src/sharpen.c:78
 msgid "Silhouette"
 msgstr "Umfanekiso oyisithunzi"
 
-#: ../../magic/src/sharpen.c:78
+#: ../../magic/src/sharpen.c:82
 #, fuzzy
 #| msgid "Click and move the mouse to trace edges in parts of your picture."
 msgid "Click and drag the mouse to trace edges in parts of your picture."
@@ -1349,22 +1352,22 @@ msgstr ""
 "Chofoza bese unyakazisa igundane ukuze ulinganise imiphetho ezinxenyeni "
 "zesithombe sakho."
 
-#: ../../magic/src/sharpen.c:79
+#: ../../magic/src/sharpen.c:83
 msgid "Click to trace edges in your entire picture."
 msgstr "Chofoza ukuze ulinganise yonke imiphetho esithombeni sakho sonke."
 
-#: ../../magic/src/sharpen.c:80
+#: ../../magic/src/sharpen.c:84
 #, fuzzy
 #| msgid "Click and move the mouse to sharpen parts of your picture."
 msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr ""
 "Chofoza bese unyakazisa igundane ukuze ucijise izingxenye zesithombe sakho."
 
-#: ../../magic/src/sharpen.c:81
+#: ../../magic/src/sharpen.c:85
 msgid "Click to sharpen the entire picture."
 msgstr "Chofoza ukucijisa sonke isithombe."
 
-#: ../../magic/src/sharpen.c:82
+#: ../../magic/src/sharpen.c:86
 #, fuzzy
 #| msgid "Click and move the mouse to create a black and white silhouette."
 msgid "Click and drag the mouse to create a black and white silhouette."
@@ -1372,38 +1375,38 @@ msgstr ""
 "Chofoza bese unyakazisa igundane ukuze udale umfanekiso oyisithunzi omnyama "
 "nokumhlophe."
 
-#: ../../magic/src/sharpen.c:83
+#: ../../magic/src/sharpen.c:87
 msgid "Click to create a black and white silhouette of your entire picture."
 msgstr ""
 "Chofoza ukuze udale umfanekiso oyisithunzi omhlophe nokumnyama wesithombe "
 "sakho sonke."
 
-#: ../../magic/src/shift.c:109
+#: ../../magic/src/shift.c:106
 msgid "Shift"
 msgstr "Gudluza"
 
-#: ../../magic/src/shift.c:115
+#: ../../magic/src/shift.c:112
 msgid "Click and drag to shift your picture around on the canvas."
 msgstr ""
 "Chofoza bese uyadonsa ukuze ugudluze isithombe sakho undwangwini yokudwebela."
 
-#: ../../magic/src/smudge.c:106
+#: ../../magic/src/smudge.c:102
 msgid "Smudge"
 msgstr "Ninda"
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:108
+#: ../../magic/src/smudge.c:104
 msgid "Wet Paint"
 msgstr "Upende Omanzi"
 
-#: ../../magic/src/smudge.c:115
+#: ../../magic/src/smudge.c:111
 #, fuzzy
 #| msgid "Click and move the mouse around to smudge the picture."
 msgid "Click and drag the mouse around to smudge the picture."
 msgstr "Chofoza bese unyakazisa igundane ukuze uninde isithombe."
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:117
+#: ../../magic/src/smudge.c:113
 #, fuzzy
 #| msgid "Click and move the mouse around to draw with wet, smudgy paint."
 msgid "Click and drag the mouse around to draw with wet, smudgy paint."
@@ -1411,35 +1414,35 @@ msgstr ""
 "Chofoza bese unyakazisa igundane ukuze udwebeb ngopende omanzi futhi "
 "onindayo."
 
-#: ../../magic/src/snow.c:68
+#: ../../magic/src/snow.c:71
 msgid "Snow Ball"
 msgstr "Ibhola leqhwa"
 
-#: ../../magic/src/snow.c:69
+#: ../../magic/src/snow.c:72
 msgid "Snow Flake"
 msgstr "Ithonsi leqhwa"
 
-#: ../../magic/src/snow.c:72
+#: ../../magic/src/snow.c:76
 msgid "Click to add snow balls to your picture."
 msgstr "Chofoza ukuwe wongeze amabhola weqhwa esithombeni sakho."
 
-#: ../../magic/src/snow.c:73
+#: ../../magic/src/snow.c:77
 msgid "Click to add snow flakes to your picture."
 msgstr "Chofoza ukuze wongeze amathonsi weqhwa esithombeni sakho."
 
-#: ../../magic/src/string.c:123
+#: ../../magic/src/string.c:129
 msgid "String edges"
 msgstr "Imiphetho yochungechunge"
 
-#: ../../magic/src/string.c:126
+#: ../../magic/src/string.c:132
 msgid "String corner"
 msgstr "Ikhona lochungechunge"
 
-#: ../../magic/src/string.c:129
+#: ../../magic/src/string.c:135
 msgid "String 'V'"
 msgstr "Uchungechunge 'V'"
 
-#: ../../magic/src/string.c:137
+#: ../../magic/src/string.c:147
 msgid ""
 "Click and drag to draw string art. Drag top-bottom to draw less or more "
 "lines, left or right to make a bigger hole."
@@ -1448,25 +1451,25 @@ msgstr ""
 "phezulu ukuya phansi ukuze udwebe imigqa eminingi noma enincane, "
 "kwesokunxele noma kwesokudla ukunza umgodi omkhudlwana."
 
-#: ../../magic/src/string.c:140
+#: ../../magic/src/string.c:150
 msgid "Click and drag to draw arrows made of string art."
 msgstr ""
 "Chofoza bese uyadonsa ukuze udwebe imicibisholo eyenziwe ngochungechunge "
 "lobuciko."
 
-#: ../../magic/src/string.c:143
+#: ../../magic/src/string.c:153
 msgid "Draw string art arrows with free angles."
 msgstr "Dweba imicibisholo yochungechunge lobuciko ngama-angela akhululekile."
 
-#: ../../magic/src/tint.c:71
+#: ../../magic/src/tint.c:74
 msgid "Tint"
 msgstr "Umbadlana"
 
-#: ../../magic/src/tint.c:72
+#: ../../magic/src/tint.c:75
 msgid "Color & White"
 msgstr "Umubala & Mhlo"
 
-#: ../../magic/src/tint.c:75
+#: ../../magic/src/tint.c:79
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to change the color of parts of your "
@@ -1477,11 +1480,11 @@ msgstr ""
 "Chofoza bese uhambisa igundane ukuze ushintshe umbala wezinxenye zesithombe "
 "sakho."
 
-#: ../../magic/src/tint.c:76
+#: ../../magic/src/tint.c:80
 msgid "Click to change the color of your entire picture."
 msgstr "Chofoza ukuze ushintshe umbala wesithombe sakho sonke."
 
-#: ../../magic/src/tint.c:77
+#: ../../magic/src/tint.c:81
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn parts of your picture into white "
@@ -1493,35 +1496,35 @@ msgstr ""
 "Chofoza bese unyakazisa igundane ukuze wenze izinxenye zesithombe sakho zibe "
 "mhlophe futhi nombala owukhethayo."
 
-#: ../../magic/src/tint.c:78
+#: ../../magic/src/tint.c:82
 msgid "Click to turn your entire picture into white and a color you choose."
 msgstr ""
 "Chofoza ukuze wenze isithombe sakho sonke sibemhlophe futhi nombala "
 "owukhethayo."
 
-#: ../../magic/src/toothpaste.c:65
+#: ../../magic/src/toothpaste.c:68
 msgid "Toothpaste"
 msgstr "Insipho yokuxubha amazinyo"
 
-#: ../../magic/src/toothpaste.c:68
+#: ../../magic/src/toothpaste.c:72
 msgid "Click and drag to squirt toothpaste onto your picture."
 msgstr ""
 "Chofoza bese uyadonsa ukuze ufaze insipho yokuxubha amazinyo esithombeni "
 "sakho."
 
-#: ../../magic/src/tornado.c:157
+#: ../../magic/src/tornado.c:153
 msgid "Tornado"
 msgstr "Isivunguvungu"
 
-#: ../../magic/src/tornado.c:163
+#: ../../magic/src/tornado.c:159
 msgid "Click and drag to draw a tornado funnel on your picture."
 msgstr "Chofoza udonse ukuze udwebe ushimula wesivunguvungu esithombeni sakho."
 
-#: ../../magic/src/tv.c:100
+#: ../../magic/src/tv.c:96
 msgid "TV"
 msgstr "I-TV"
 
-#: ../../magic/src/tv.c:105
+#: ../../magic/src/tv.c:102
 msgid ""
 "Click and drag to make parts of your picture look like they are on "
 "television."
@@ -1529,19 +1532,19 @@ msgstr ""
 "Chofoza bese uyadonsa ukwenza izingxenye zesithombe sakho zibukeke engathi "
 "zikumabonakude."
 
-#: ../../magic/src/tv.c:108
+#: ../../magic/src/tv.c:105
 msgid "Click to make your picture look like it's on television."
 msgstr "Chofoza ukwenz aisithombe sakho sibukeke engathi sikumabonakude."
 
-#: ../../magic/src/waves.c:103
+#: ../../magic/src/waves.c:104
 msgid "Waves"
 msgstr "Amagagasi"
 
-#: ../../magic/src/waves.c:104
+#: ../../magic/src/waves.c:106
 msgid "Wavelets"
 msgstr "Amagagasi amancane"
 
-#: ../../magic/src/waves.c:111
+#: ../../magic/src/waves.c:115
 msgid ""
 "Click to make the picture horizontally wavy. Click toward the top for "
 "shorter waves, the bottom for taller waves, the left for small waves, and "
@@ -1551,7 +1554,7 @@ msgstr ""
 "ukuze wenza amagagasi amafushane, phansi ukuze wenze amade kancane, "
 "kwesokunxele kuze wenze amancane bese kwesokudla ukuze wenze amade."
 
-#: ../../magic/src/waves.c:112
+#: ../../magic/src/waves.c:118
 msgid ""
 "Click to make the picture vertically wavy. Click toward the top for shorter "
 "waves, the bottom for taller waves, the left for small waves, and the right "
@@ -1561,13 +1564,13 @@ msgstr ""
 "phezulu ukuze wenza amagagasi amafushane, phansi ukuze wenze amade kancane, "
 "kwesokunxele kuze wenze amancane bese kwesokudla ukuze wenze amade."
 
-#: ../../magic/src/xor.c:95
+#: ../../magic/src/xor.c:93
 #, fuzzy
 #| msgid "Colors"
 msgid "Xor Colors"
 msgstr "Imibala"
 
-#: ../../magic/src/xor.c:101
+#: ../../magic/src/xor.c:99
 #, fuzzy
 #| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw a XOR effect"
@@ -1575,7 +1578,7 @@ msgstr ""
 "Chofoza bese uyadonsa ukuze udwebe imicibisholo eyenziwe ngochungechunge "
 "lobuciko."
 
-#: ../../magic/src/xor.c:103
+#: ../../magic/src/xor.c:101
 #, fuzzy
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to draw a XOR effect on the whole picture"

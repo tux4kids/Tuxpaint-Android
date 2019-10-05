@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-29 15:48+0200\n"
+"POT-Creation-Date: 2019-09-24 08:40-0700\n"
 "PO-Revision-Date: 2014-06-28 12:48+0200\n"
 "Last-Translator: Dr. Nagy Elemér Károly <eknagy@omikk.bme.hu>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.d.o>\n"
@@ -123,11 +123,11 @@ msgstr "Bézs!"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:168
+#: ../dirwalk.c:177
 msgid "qx"
 msgstr "qx"
 
-#: ../dirwalk.c:168
+#: ../dirwalk.c:177
 msgid "QX"
 msgstr "QX"
 
@@ -137,50 +137,50 @@ msgstr "QX"
 #. especially important for users who have scroll buttons disabled.
 #. Translators should do whatever is needed to put crummy fonts last.
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:195
+#: ../dirwalk.c:202
 msgid "oO"
 msgstr "oO"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:198
+#: ../dirwalk.c:205
 msgid ",.?!"
 msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:201
+#: ../dirwalk.c:208
 #, fuzzy
 #| msgid "`\\%_@$~#{<(^&*"
 msgid "`%_@$~#{<(^&*"
 msgstr "`\\%_@$~#{}<>^&*ß€£¥"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:204
+#: ../dirwalk.c:211
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:207
+#: ../dirwalk.c:214
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:210
+#: ../dirwalk.c:217
 msgid "1Il|"
 msgstr "1Il|"
 
-#: ../dirwalk.c:214
+#: ../dirwalk.c:221
 msgid "<1>spare-1a"
 msgstr "<1>spare-1a"
 
-#: ../dirwalk.c:215
+#: ../dirwalk.c:222
 msgid "<1>spare-1b"
 msgstr "<1>spare-1b"
 
-#: ../dirwalk.c:216
+#: ../dirwalk.c:223
 msgid "<9>spare-9a"
 msgstr "áíűőüöúóé"
 
-#: ../dirwalk.c:217
+#: ../dirwalk.c:224
 msgid "<9>spare-9b"
 msgstr "ÁÍŰŐÜÖÓÉ"
 
@@ -205,32 +205,32 @@ msgid "Good job!"
 msgstr "Szép munka!"
 
 #. Input Method: English mode
-#: ../im.c:75
+#: ../im.c:74
 msgid "English"
 msgstr "Angol"
 
 #. Input Method: Japanese Romanized Hiragana mode
-#: ../im.c:78
+#: ../im.c:77
 msgid "Hiragana"
 msgstr "Hiragana"
 
 #. Input Method: Japanese Romanized Katakana mode
-#: ../im.c:81
+#: ../im.c:80
 msgid "Katakana"
 msgstr "Katakana"
 
 #. Input Method: Korean Hangul 2-Bul mode
-#: ../im.c:84
+#: ../im.c:83
 msgid "Hangul"
 msgstr "Hangul"
 
 #. Input Method: Thai mode
-#: ../im.c:87
+#: ../im.c:86
 msgid "Thai"
 msgstr "Thai"
 
 #. Input Method: Traditional Chinese mode
-#: ../im.c:90
+#: ../im.c:89
 msgid "ZH_TW"
 msgstr "Tajvani"
 
@@ -283,16 +283,17 @@ msgid "Star"
 msgstr ""
 
 #. Description of a square
-#: ../shapes.h:290 ../shapes.h:291
+#: ../shapes.h:289 ../shapes.h:290
 msgid "A square is a rectangle with four equal sides."
 msgstr "Egy téglalapnak négy egyenlő oldala van."
 
 #. Description of a rectangle
-#: ../shapes.h:294 ../shapes.h:295
+#: ../shapes.h:293 ../shapes.h:294
 msgid "A rectangle has four sides and four right angles."
 msgstr "Egy négyzetnek négy oldala és négy derékszöge van."
 
-#: ../shapes.h:299 ../shapes.h:301
+#. Description of a circle
+#: ../shapes.h:297 ../shapes.h:298
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr ""
@@ -300,38 +301,40 @@ msgstr ""
 "távolságra van."
 
 #. Description of an ellipse
-#: ../shapes.h:304 ../shapes.h:305
+#: ../shapes.h:301 ../shapes.h:302
 msgid "An ellipse is a stretched circle."
 msgstr "Az ellipszis egy nyújtott kör."
 
 #. Description of a triangle
-#: ../shapes.h:308 ../shapes.h:309
+#: ../shapes.h:305 ../shapes.h:306
 msgid "A triangle has three sides."
 msgstr "A háromszögnek három oldala van."
 
 #. Description of a pentagon
-#: ../shapes.h:312 ../shapes.h:313
+#: ../shapes.h:309 ../shapes.h:310
 msgid "A pentagon has five sides."
 msgstr "Az ötszögnek öt oldala van."
 
-#: ../shapes.h:317 ../shapes.h:319
+#. Description of a rhombus
+#: ../shapes.h:313 ../shapes.h:314
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr ""
 "A rombusznak négy egyenlő oldala van és a szemközti oldalak párhuzamosak."
 
-#: ../shapes.h:323 ../shapes.h:325
+#. Description of an octagon
+#: ../shapes.h:317 ../shapes.h:318
 msgid "An octagon has eight equal sides."
 msgstr "A nyolcszögnek nyolc egyenlő oldala van."
 
-#: ../shapes.h:327 ../shapes.h:328
+#: ../shapes.h:320 ../shapes.h:321
 msgid "A star with 3 points."
 msgstr ""
 
-#: ../shapes.h:329 ../shapes.h:330
+#: ../shapes.h:322 ../shapes.h:323
 msgid "A star with 4 points."
 msgstr ""
 
-#: ../shapes.h:331 ../shapes.h:332
+#: ../shapes.h:324 ../shapes.h:325
 msgid "A star with 5 points."
 msgstr ""
 
@@ -402,6 +405,11 @@ msgstr "Szöveg"
 msgid "Label"
 msgstr "Címke"
 
+#. Fill tool
+#: ../tools.h:80
+msgid "Fill"
+msgstr "Kitöltés"
+
 #. Undo last action
 #: ../tools.h:86
 msgid "Undo"
@@ -425,7 +433,7 @@ msgstr "Új"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7640
+#: ../tools.h:98 ../tuxpaint.c:7846
 msgid "Open"
 msgstr "Megnyitás"
 
@@ -461,8 +469,7 @@ msgstr ""
 "Kattints oda a rajzodon, ahova a vonalat szeretnéd rajzolni. Engedd el a "
 "befejezéséhez."
 
-#. Shape tool instructions
-#: ../tools.h:124
+#: ../tools.h:125
 msgid ""
 "Pick a shape. Click to pick the center, drag, then let go when it is the "
 "size you want. Move around to rotate it, and click to draw it."
@@ -471,8 +478,7 @@ msgstr ""
 "egeret, majd engedd el, ha már akkor amekkorának szeretnéd. Mozgasd az "
 "egeret körülötte a forgatásához és kattints a húzásához."
 
-#. Text tool instructions
-#: ../tools.h:127
+#: ../tools.h:129
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text."
@@ -481,8 +487,7 @@ msgstr ""
 "írni a szöveget. Nyomd meg az [Enter] vagy a [Tab] billentyűt a szöveg "
 "befejezéséhez."
 
-#. Label tool instructions
-#: ../tools.h:130
+#: ../tools.h:133
 #, fuzzy
 #| msgid ""
 #| "Choose a style of text. Click on your drawing and you can start typing. "
@@ -500,251 +505,258 @@ msgstr ""
 "befejezéséhez. A kiválasztó gombra majd egy már létező cimkére kattintva "
 "mozgathatod, szerkesztheted a szöveget, vagy megváltoztathatod a stílusát."
 
-#. Magic tool instruction
+#. Fill tool instructions
 #: ../tools.h:136
+msgid "Click in the picture to fill that area with color."
+msgstr "Kattints oda a rajzodon, ahol ki szeretnéd tölteni a színnel!"
+
+#. Magic tool instruction
+#: ../tools.h:139
 msgid "Pick a magical effect to use on your drawing!"
 msgstr "Válassz egy varázslatot, amit kipróbálsz a rajzodon."
 
 #. Response to 'undo' action
-#: ../tools.h:139
+#: ../tools.h:142
 msgid "Undo!"
 msgstr "Vissza!"
 
 #. Response to 'redo' action
-#: ../tools.h:142
+#: ../tools.h:145
 msgid "Redo!"
 msgstr "Újra!"
 
 #. Eraser tool
-#: ../tools.h:145
+#: ../tools.h:148
 msgid "Eraser!"
 msgstr "Radír!"
 
 #. Response to 'start a new image' action
-#: ../tools.h:148
+#: ../tools.h:151
 msgid "Pick a color or picture with which to start a new drawing."
 msgstr "Válassz egy színt vagy képet, amellyel új rajzba kezdesz!"
 
 #. Response to 'open' action (while file dialog is being constructed)
-#: ../tools.h:151
+#: ../tools.h:154
 msgid "Open…"
 msgstr "Megnyitás…"
 
 #. Response to 'save' action
-#: ../tools.h:154
+#: ../tools.h:157
 msgid "Your image has been saved!"
 msgstr "Elmentettük a rajzodat!"
 
 #. Response to 'print' action (while printing, or print dialog is being used)
-#: ../tools.h:157
+#: ../tools.h:160
 msgid "Printing…"
 msgstr "Nyomtatás…"
 
 #. Response to 'quit' (exit) action
-#: ../tools.h:160
+#: ../tools.h:163
 msgid "Bye bye!"
 msgstr "Szia!"
 
 #. Instruction while using Line tool (after click, before release)
-#: ../tools.h:164
+#: ../tools.h:167
 msgid "Let go of the button to complete the line."
 msgstr "Engedd fel a gombot a vonal befejezéséhez."
 
 #. Instruction while using Shape tool (after first click, before release)
-#: ../tools.h:167
+#: ../tools.h:170
 msgid "Hold the button to stretch the shape."
 msgstr ""
 "Tartsd nyomva az egér gombját, hogy változtatni tudd az alakzat méretét."
 
 #. Instruction while finishing Shape tool (after release, during rotation step before second click)
-#: ../tools.h:170
+#: ../tools.h:173
 msgid "Move the mouse to rotate the shape. Click to draw it."
 msgstr ""
 "Mozgasd az egeret, hogy forgatni tudd az alakzatot. Kattints a húzásához."
 
 #. Notification that 'New' action was aborted (current image would have been lost)
-#: ../tools.h:173
+#: ../tools.h:176
 msgid "OK then… Let’s keep drawing this one!"
 msgstr "Rendben… Akkor folytassuk ezt a rajzot!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2054
+#: ../tuxpaint.c:2113
 msgid "Do you really want to quit?"
 msgstr "Biztos ki szeretnél lépni?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2057
+#: ../tuxpaint.c:2116
 msgid "Yes, I’m done!"
 msgstr "Igen, befejeztem!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2060 ../tuxpaint.c:2087
+#: ../tuxpaint.c:2119 ../tuxpaint.c:2146
 msgid "No, take me back!"
 msgstr "Nem, folytatni akarom!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2064
+#: ../tuxpaint.c:2123
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "El fog veszni a rajzod, ha kilépsz. Mentsük el?"
 
-#: ../tuxpaint.c:2065 ../tuxpaint.c:2070
+#: ../tuxpaint.c:2124 ../tuxpaint.c:2129
 msgid "Yes, save it!"
 msgstr "Igen, mentsd!"
 
-#: ../tuxpaint.c:2066 ../tuxpaint.c:2071
+#: ../tuxpaint.c:2125 ../tuxpaint.c:2130
 msgid "No, don’t bother saving!"
 msgstr "Ne mentsd!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2069
+#: ../tuxpaint.c:2128
 msgid "Save your picture first?"
 msgstr "Elmentjük előbb a rajzod?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2074
+#: ../tuxpaint.c:2133
 msgid "Can’t open that picture!"
 msgstr "Ezt a képet nem lehet megnyitni!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2077 ../tuxpaint.c:2082 ../tuxpaint.c:2091 ../tuxpaint.c:2098
-#: ../tuxpaint.c:2107
+#: ../tuxpaint.c:2136 ../tuxpaint.c:2141 ../tuxpaint.c:2150 ../tuxpaint.c:2157
+#: ../tuxpaint.c:2166
 msgid "OK"
 msgstr "Oké"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2081
+#: ../tuxpaint.c:2140
 msgid "There are no saved files!"
 msgstr "Nincsenek mentett fájlok!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2085
+#: ../tuxpaint.c:2144
 msgid "Print your picture now?"
 msgstr "Kinyomtassuk most a rajzod?"
 
-#: ../tuxpaint.c:2086
+#: ../tuxpaint.c:2145
 msgid "Yes, print it!"
 msgstr "Igen, nyomtasd!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2090
+#: ../tuxpaint.c:2149
 msgid "Your picture has been printed!"
 msgstr "Kinyomtattuk a rajzod!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2094
+#: ../tuxpaint.c:2153
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Elnézést, a rajzod nem sikerült kinyomtatni!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2097
+#: ../tuxpaint.c:2156
 msgid "You can’t print yet!"
 msgstr "Még nem nyomtathatsz!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2101
+#: ../tuxpaint.c:2160
 msgid "Erase this picture?"
 msgstr "Biztos törlöd ezt a rajzot?"
 
-#: ../tuxpaint.c:2102
+#: ../tuxpaint.c:2161
 msgid "Yes, erase it!"
 msgstr "Igen, töröld!"
 
-#: ../tuxpaint.c:2103
+#: ../tuxpaint.c:2162
 msgid "No, don’t erase it!"
 msgstr "Ne töröld!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2106
+#: ../tuxpaint.c:2165
 msgid "Remember to use the left mouse button!"
 msgstr "Ne feledd használni a bal egérgombot!"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2314
+#: ../tuxpaint.c:2371
 msgid "Sound muted."
 msgstr "Hang elnémítva."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2319
+#: ../tuxpaint.c:2376
 msgid "Sound unmuted."
 msgstr "Hang bekapcsolva."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3072
+#: ../tuxpaint.c:3129
 msgid "Please wait…"
 msgstr "Kis türelmet…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7643
+#: ../tuxpaint.c:7849
 msgid "Erase"
 msgstr "Törlés"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7646
+#: ../tuxpaint.c:7852
 msgid "Slides"
 msgstr "Fóliák"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7649
+#: ../tuxpaint.c:7855
 msgid "Back"
 msgstr "Vissza"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7652
+#: ../tuxpaint.c:7858
 msgid "Next"
 msgstr "Következő"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7655
+#: ../tuxpaint.c:7861
 msgid "Play"
 msgstr "Lejátszás"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8364
+#: ../tuxpaint.c:8576
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11692
+#: ../tuxpaint.c:11944
 msgid "Yes"
 msgstr "Igen"
 
-#: ../tuxpaint.c:11696
+#: ../tuxpaint.c:11948
 msgid "No"
 msgstr "Nem"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:12795
+#: ../tuxpaint.c:13018
 msgid "Replace the picture with your changes?"
 msgstr "Lecseréled a képet a módosítottra?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:12799
+#: ../tuxpaint.c:13022
 msgid "Yes, replace the old one!"
 msgstr "Igen, lecserélem a régit!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:12803
+#: ../tuxpaint.c:13026
 msgid "No, save a new file!"
 msgstr "Nem, inkább mentsük el más néven!"
 
-#: ../tuxpaint.c:14048
+#. Let user choose an image:
+#. Instructions for 'Open' file dialog
+#: ../tuxpaint.c:14270
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Válaszd ki a képet, majd kattints a „Megnyitás” gombra."
 
 #. Let user choose images:
 #. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:15079 ../tuxpaint.c:15407
+#: ../tuxpaint.c:15266 ../tuxpaint.c:15586
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Válaszd ki a képeket, majd kattints a „Lejátszás” gombra."
 
-#: ../tuxpaint.c:22873
+#: ../tuxpaint.c:23179
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:22885
+#: ../tuxpaint.c:23191
 msgid "Pick a color."
 msgstr "Válassz egy színt!"
 
@@ -760,50 +772,50 @@ msgstr "Rajzolóprogram"
 msgid "A drawing program for children."
 msgstr "Rajzolóprogram gyerekeknek"
 
-#: ../../magic/src/alien.c:64
+#: ../../magic/src/alien.c:68
 msgid "Color Shift"
 msgstr "Színeltolás"
 
-#: ../../magic/src/alien.c:67
+#: ../../magic/src/alien.c:72
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to change the colors in parts of your picture."
 msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr "Kattints oda a rajzodon, ahol meg szeretnéd változtatni a színeket."
 
-#: ../../magic/src/alien.c:68
+#: ../../magic/src/alien.c:73
 msgid "Click to change the colors in your entire picture."
 msgstr "Kattints az egész rajz színeinek megváltoztatásához."
 
-#: ../../magic/src/blind.c:117
+#: ../../magic/src/blind.c:116
 msgid "Blind"
 msgstr "Függöny"
 
-#: ../../magic/src/blind.c:122
+#: ../../magic/src/blind.c:123
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
 msgstr "Kattints a kép szélére, hogy húzd be a függönyt az ablak előtt."
 
-#: ../../magic/src/blocks_chalk_drip.c:136
+#: ../../magic/src/blocks_chalk_drip.c:129
 msgid "Blocks"
 msgstr "Kockák"
 
-#: ../../magic/src/blocks_chalk_drip.c:138
+#: ../../magic/src/blocks_chalk_drip.c:131
 msgid "Chalk"
 msgstr "Kréta"
 
-#: ../../magic/src/blocks_chalk_drip.c:140
+#: ../../magic/src/blocks_chalk_drip.c:133
 msgid "Drip"
 msgstr "Csepp"
 
-#: ../../magic/src/blocks_chalk_drip.c:150
+#: ../../magic/src/blocks_chalk_drip.c:142
 #, fuzzy
 #| msgid "Click and move the mouse around to make the picture blocky."
 msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "Kattints oda a rajzodon, ahova kockákat szeretnél rajzolni."
 
-#: ../../magic/src/blocks_chalk_drip.c:153
+#: ../../magic/src/blocks_chalk_drip.c:144
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn the picture into a chalk drawing."
@@ -811,7 +823,7 @@ msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr "Kattints oda a rajzodon, ahol krétával szeretnél rajzolni."
 
-#: ../../magic/src/blocks_chalk_drip.c:156
+#: ../../magic/src/blocks_chalk_drip.c:146
 #, fuzzy
 #| msgid "Click and move the mouse around to make the picture drip."
 msgid "Click and drag the mouse around to make the picture drip."
@@ -821,146 +833,137 @@ msgstr "Kattints oda a rajzodon, ahova festéket szeretnél csepegtetni."
 msgid "Blur"
 msgstr "Maszat"
 
-#: ../../magic/src/blur.c:83
+#: ../../magic/src/blur.c:84
 #, fuzzy
 #| msgid "Click and move the mouse around to blur the image."
 msgid "Click and drag the mouse around to blur the image."
 msgstr "Kattints oda a rajzodon, ahol maszatolni szeretnél."
 
-#: ../../magic/src/blur.c:84
+#: ../../magic/src/blur.c:85
 msgid "Click to blur the entire image."
 msgstr "Kattints az egész rajz maszatolásához."
 
 #. Both are named "Bricks", at the moment:
-#: ../../magic/src/bricks.c:124
+#: ../../magic/src/bricks.c:120
 msgid "Bricks"
 msgstr "Téglák"
 
-#: ../../magic/src/bricks.c:131
+#: ../../magic/src/bricks.c:127
 #, fuzzy
 #| msgid "Click and move to draw large bricks."
 msgid "Click and drag to draw large bricks."
 msgstr "Kattints oda a rajzodon, ahol nagy téglákat szeretnél rajzolni."
 
-#: ../../magic/src/bricks.c:133
+#: ../../magic/src/bricks.c:129
 #, fuzzy
 #| msgid "Click and move to draw small bricks."
 msgid "Click and drag to draw small bricks."
 msgstr "Kattints oda a rajzodon, ahol kis téglákat szeretnél rajzolni."
 
-#: ../../magic/src/calligraphy.c:127
+#: ../../magic/src/calligraphy.c:124
 msgid "Calligraphy"
 msgstr "Kalligráfia"
 
-#: ../../magic/src/calligraphy.c:134
+#: ../../magic/src/calligraphy.c:131
 #, fuzzy
 #| msgid "Click and move the mouse around to draw in calligraphy."
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Kattints oda a rajzodon, ahova kalligráfiát szeretnél rajzolni."
 
-#: ../../magic/src/cartoon.c:106
+#: ../../magic/src/cartoon.c:103
 msgid "Cartoon"
 msgstr "Képregény"
 
-#: ../../magic/src/cartoon.c:113
+#: ../../magic/src/cartoon.c:109
 #, fuzzy
 #| msgid "Click and move the mouse around to turn the picture into a cartoon."
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr ""
 "Kattints oda a rajzodon, ahol a képet képregénnyé szeretnéd változtatni!"
 
-#: ../../magic/src/confetti.c:85
+#: ../../magic/src/confetti.c:83
 msgid "Confetti"
 msgstr "Konfetti"
 
-#: ../../magic/src/confetti.c:87
+#: ../../magic/src/confetti.c:88
 msgid "Click to throw confetti!"
 msgstr "Kattints a konfetti szétdobálásához!"
 
-#: ../../magic/src/distortion.c:142
+#: ../../magic/src/distortion.c:134
 msgid "Distortion"
 msgstr "Torzítás"
 
-#: ../../magic/src/distortion.c:150
+#: ../../magic/src/distortion.c:143
 msgid "Click and drag the mouse to cause distortion in your picture."
 msgstr "Kattints oda a rajzodon, ahol torzítani szeretnél."
 
-#: ../../magic/src/emboss.c:103
+#: ../../magic/src/emboss.c:101
 msgid "Emboss"
 msgstr "Domborítás"
 
-#: ../../magic/src/emboss.c:109
+#: ../../magic/src/emboss.c:107
 msgid "Click and drag the mouse to emboss the picture."
 msgstr "Kattints oda a rajzodon, ahol a képet domborítani szeretnéd."
 
-#: ../../magic/src/fade_darken.c:121
+#: ../../magic/src/fade_darken.c:114
 msgid "Lighten"
 msgstr "Fényesítés"
 
-#: ../../magic/src/fade_darken.c:123
+#: ../../magic/src/fade_darken.c:116
 msgid "Darken"
 msgstr "Sötétítés"
 
-#: ../../magic/src/fade_darken.c:134
+#: ../../magic/src/fade_darken.c:127
 #, fuzzy
 #| msgid "Click and move the mouse to lighten parts of your picture."
 msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "Kattints oda a rajzodon, ahol világosítani szeretnél."
 
-#: ../../magic/src/fade_darken.c:136
+#: ../../magic/src/fade_darken.c:129
 msgid "Click to lighten your entire picture."
 msgstr "Kattints az egész rajz világosabbá tételéhez."
 
-#: ../../magic/src/fade_darken.c:141
+#: ../../magic/src/fade_darken.c:134
 #, fuzzy
 #| msgid "Click and move the mouse to darken parts of your picture."
 msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "Kattints oda a rajzodon, ahol sötétíteni szeretnél."
 
-#: ../../magic/src/fade_darken.c:143
+#: ../../magic/src/fade_darken.c:136
 msgid "Click to darken your entire picture."
 msgstr "Kattints az egész rajz sötétebbé tételéhez."
 
-#: ../../magic/src/fill.c:108
-msgid "Fill"
-msgstr "Kitöltés"
-
-#: ../../magic/src/fill.c:115
-msgid "Click in the picture to fill that area with color."
-msgstr "Kattints oda a rajzodon, ahol ki szeretnéd tölteni a színnel!"
-
-#: ../../magic/src/fisheye.c:104
+#: ../../magic/src/fisheye.c:101
 msgid "Fisheye"
 msgstr "Halszem"
 
-#. Needs better name
 #: ../../magic/src/fisheye.c:106
 msgid "Click on part of your picture to create a fisheye effect."
 msgstr "Kattints oda a rajzodon, ahol halszem hatást szeretnél."
 
-#: ../../magic/src/flower.c:150
+#: ../../magic/src/flower.c:144
 msgid "Flower"
 msgstr "Virág"
 
-#: ../../magic/src/flower.c:156
+#: ../../magic/src/flower.c:150
 msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
 msgstr ""
 "Kattints oda a rajzodon, ahol virágszárat szeretnél rajzolni, és engedd fel "
 "a virág befejezéséhez."
 
-#: ../../magic/src/foam.c:121
+#: ../../magic/src/foam.c:114
 msgid "Foam"
 msgstr "Buborék"
 
-#: ../../magic/src/foam.c:127
+#: ../../magic/src/foam.c:120
 msgid "Click and drag the mouse to cover an area with foamy bubbles."
 msgstr "Kattints oda a rajzodon, ahova szappanbuborékokat szeretnél rajzolni."
 
-#: ../../magic/src/fold.c:105
+#: ../../magic/src/fold.c:103
 msgid "Fold"
 msgstr "Összecsukás"
 
-#: ../../magic/src/fold.c:107
+#: ../../magic/src/fold.c:108
 msgid ""
 "Choose a background color and click to turn the corner of the page over."
 msgstr "Válassz háttérszínt és kattints az oldal sarkának felhajtásához."
@@ -969,68 +972,68 @@ msgstr "Válassz háttérszínt és kattints az oldal sarkának felhajtásához.
 msgid "Fretwork"
 msgstr "Faragott díszítés"
 
-#: ../../magic/src/fretwork.c:180
+#: ../../magic/src/fretwork.c:182
 msgid "Click and drag to draw repetitive patterns. "
 msgstr "Az egér gombját lenyomva tartva ismétlődő mintát rajzolhatsz."
 
-#: ../../magic/src/fretwork.c:182
+#: ../../magic/src/fretwork.c:184
 msgid "Click to surround your picture with repetitive patterns."
 msgstr "Kattints a rajz ismétlődő mintákkal körbedíszítéséhez."
 
-#: ../../magic/src/glasstile.c:107
+#: ../../magic/src/glasstile.c:104
 msgid "Glass Tile"
 msgstr "Üvegmozaik"
 
-#: ../../magic/src/glasstile.c:114
+#: ../../magic/src/glasstile.c:111
 msgid "Click and drag the mouse to put glass tile over your picture."
 msgstr "Kattints oda a rajzodon, ahova üvegmozaikot szeretnél rajzolni."
 
-#: ../../magic/src/glasstile.c:116
+#: ../../magic/src/glasstile.c:113
 msgid "Click to cover your entire picture in glass tiles."
 msgstr "Kattints az egész rajzod befedéséhez üvegmozaikkal."
 
-#: ../../magic/src/grass.c:112
+#: ../../magic/src/grass.c:107
 msgid "Grass"
 msgstr "Fű"
 
-#: ../../magic/src/grass.c:118
+#: ../../magic/src/grass.c:113
 #, fuzzy
 #| msgid "Click and move to draw grass. Don’t forget the dirt!"
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr ""
 "Kattints oda a rajzodon, ahol füvet szeretnél rajzolni. Ne feledd a piszkot!"
 
-#: ../../magic/src/halftone.c:34
+#: ../../magic/src/halftone.c:35
 msgid "Halftone"
 msgstr "Féltónus"
 
-#: ../../magic/src/halftone.c:38
+#: ../../magic/src/halftone.c:39
 msgid "Click and drag to turn your drawing into a newspaper."
 msgstr ""
 "Az egér gombját lenyomva tartva újságpapírrá változtathatod a rajzodat."
 
-#: ../../magic/src/kalidescope.c:120
+#: ../../magic/src/kalidescope.c:119
 msgid "Symmetric Left/Right"
 msgstr "Szimmetrikus Bal/Jobb"
 
-#: ../../magic/src/kalidescope.c:122
+#: ../../magic/src/kalidescope.c:123
 msgid "Symmetric Up/Down"
 msgstr "Szimmetrikus Fent/Lent"
 
-#: ../../magic/src/kalidescope.c:124
+#: ../../magic/src/kalidescope.c:127
 msgid "Pattern"
 msgstr "Minta"
 
-#: ../../magic/src/kalidescope.c:126
+#: ../../magic/src/kalidescope.c:131
 msgid "Tiles"
 msgstr "Csempék"
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:128
+#: ../../magic/src/kalidescope.c:135
 msgid "Kaleidoscope"
 msgstr "Kaleidoszkóp"
 
-#: ../../magic/src/kalidescope.c:136
+#: ../../magic/src/kalidescope.c:146
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the left and right of your picture."
@@ -1038,7 +1041,7 @@ msgstr ""
 "Az egér gombját lenyomva tartva két szimmetrikus ecsettel rajzolhatsz a "
 "képed bal és jobb oldalára."
 
-#: ../../magic/src/kalidescope.c:138
+#: ../../magic/src/kalidescope.c:152
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the top and bottom of your picture."
@@ -1046,11 +1049,11 @@ msgstr ""
 "Az egér gombját lenyomva tartva két szimmetrikus ecsettel rajzolhatsz a "
 "képed tetején és alján."
 
-#: ../../magic/src/kalidescope.c:140
+#: ../../magic/src/kalidescope.c:156
 msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr "Az egér gombját lenyomva tartva mintát rajzolhatsz a képedre."
 
-#: ../../magic/src/kalidescope.c:142
+#: ../../magic/src/kalidescope.c:160
 #, fuzzy
 #| msgid ""
 #| "Click and drag the mouse to draw a pattern plus its symmetric across the "
@@ -1063,51 +1066,51 @@ msgstr ""
 "képedre."
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:144
+#: ../../magic/src/kalidescope.c:164
 msgid ""
 "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgstr ""
 "Kattints oda a rajzodon, ahova szimmetrikus ecsetekkel szeretnél rajzolni "
 "(mint egy kaleidoszkóp)."
 
-#: ../../magic/src/light.c:107
+#: ../../magic/src/light.c:103
 msgid "Light"
 msgstr "Fény"
 
-#: ../../magic/src/light.c:113
+#: ../../magic/src/light.c:109
 msgid "Click and drag to draw a beam of light on your picture."
 msgstr "Kattints oda a rajzodon, ahova fénysugarat szeretnél rajzolni."
 
-#: ../../magic/src/metalpaint.c:101
+#: ../../magic/src/metalpaint.c:98
 msgid "Metal Paint"
 msgstr "Fémes festés"
 
-#: ../../magic/src/metalpaint.c:107
+#: ../../magic/src/metalpaint.c:105
 msgid "Click and drag the mouse to paint with a metallic color."
 msgstr ""
 "Kattints oda a rajzodon, ahova fémes csillogású színnel szeretnél festeni."
 
-#: ../../magic/src/mirror_flip.c:117
+#: ../../magic/src/mirror_flip.c:110
 msgid "Mirror"
 msgstr "Tükör"
 
-#: ../../magic/src/mirror_flip.c:119
+#: ../../magic/src/mirror_flip.c:112
 msgid "Flip"
 msgstr "Megfordít"
 
-#: ../../magic/src/mirror_flip.c:130
+#: ../../magic/src/mirror_flip.c:121
 msgid "Click to make a mirror image."
 msgstr "Kattints a rajzlapra, hogy tükrözzük a rajzodat."
 
-#: ../../magic/src/mirror_flip.c:133
+#: ../../magic/src/mirror_flip.c:123
 msgid "Click to flip the picture upside-down."
 msgstr "Kattints a rajzlapra, hogy fejjel lefelé fordítsuk a rajzodat."
 
-#: ../../magic/src/mosaic.c:100
+#: ../../magic/src/mosaic.c:96
 msgid "Mosaic"
 msgstr "Mozaik"
 
-#: ../../magic/src/mosaic.c:103
+#: ../../magic/src/mosaic.c:100
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
@@ -1115,23 +1118,23 @@ msgid ""
 "Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr "Kattints oda a rajzodon, ahova mozaik hatást szeretnél tenni."
 
-#: ../../magic/src/mosaic.c:104
+#: ../../magic/src/mosaic.c:101
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Kattints a mozaik hatás alkalmazásához az egész rajzra."
 
-#: ../../magic/src/mosaic_shaped.c:139
+#: ../../magic/src/mosaic_shaped.c:132
 msgid "Square Mosaic"
 msgstr "Négyzet"
 
-#: ../../magic/src/mosaic_shaped.c:140
+#: ../../magic/src/mosaic_shaped.c:133
 msgid "Hexagon Mosaic"
 msgstr "Hatszög"
 
-#: ../../magic/src/mosaic_shaped.c:141
+#: ../../magic/src/mosaic_shaped.c:134
 msgid "Irregular Mosaic"
 msgstr "Szabálytalan mozaik"
 
-#: ../../magic/src/mosaic_shaped.c:148
+#: ../../magic/src/mosaic_shaped.c:140
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a square mosaic to parts of your picture."
@@ -1139,11 +1142,11 @@ msgid ""
 "Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr "Kattints oda a rajzodon, ahova mozaik hatást szeretnél tenni."
 
-#: ../../magic/src/mosaic_shaped.c:149
+#: ../../magic/src/mosaic_shaped.c:141
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "Kattints a mozaik hatás alkalmazásához az egész rajzra."
 
-#: ../../magic/src/mosaic_shaped.c:153
+#: ../../magic/src/mosaic_shaped.c:145
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a hexagonal mosaic to parts of your "
@@ -1152,11 +1155,11 @@ msgid ""
 "Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr "Kattints oda a rajzodon, ahova mozaik hatást szeretnél tenni."
 
-#: ../../magic/src/mosaic_shaped.c:154
+#: ../../magic/src/mosaic_shaped.c:146
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "Kattints a mozaik hatás alkalmazásához az egész rajzra."
 
-#: ../../magic/src/mosaic_shaped.c:158
+#: ../../magic/src/mosaic_shaped.c:150
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add an irregular mosaic to parts of your "
@@ -1165,103 +1168,103 @@ msgid ""
 "Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr "Kattints oda a rajzodon, ahova mozaik hatást szeretnél tenni."
 
-#: ../../magic/src/mosaic_shaped.c:159
+#: ../../magic/src/mosaic_shaped.c:151
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "Kattints a mozaik hatás alkalmazásához az egész rajzra."
 
-#: ../../magic/src/negative.c:98
+#: ../../magic/src/negative.c:94
 msgid "Negative"
 msgstr "Színcsere"
 
-#: ../../magic/src/negative.c:106
+#: ../../magic/src/negative.c:101
 #, fuzzy
 #| msgid "Click and move the mouse around to make your painting negative."
 msgid "Click and drag the mouse around to make your painting negative."
 msgstr "Kattints oda a rajzodon, ahol fel szeretnéd cserélni a színeket."
 
-#: ../../magic/src/negative.c:109
+#: ../../magic/src/negative.c:103
 msgid "Click to turn your painting into its negative."
 msgstr "Kattints a rajz színeinek felcseréléséhez."
 
-#: ../../magic/src/noise.c:63
+#: ../../magic/src/noise.c:66
 msgid "Noise"
 msgstr "Zaj"
 
-#: ../../magic/src/noise.c:66
+#: ../../magic/src/noise.c:70
 #, fuzzy
 #| msgid "Click and move the mouse to add noise to parts of your picture."
 msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr "Kattints oda a rajzodon, ahol zajossá szeretnéd tenni."
 
-#: ../../magic/src/noise.c:67
+#: ../../magic/src/noise.c:71
 msgid "Click to add noise to your entire picture."
 msgstr "Kattints az egész rajz zajossá tételéhez."
 
-#: ../../magic/src/perspective.c:145
+#: ../../magic/src/perspective.c:147
 msgid "Perspective"
 msgstr "Perspektíva"
 
-#: ../../magic/src/perspective.c:146
+#: ../../magic/src/perspective.c:148
 msgid "Zoom"
 msgstr "Nagyít"
 
-#: ../../magic/src/perspective.c:151
+#: ../../magic/src/perspective.c:153
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "Kattints oda a rajzodon, ahol a képet domborítani szeretnéd."
 
-#: ../../magic/src/perspective.c:154
+#: ../../magic/src/perspective.c:156
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgstr "Kattints oda a rajzodon, ahova fogkrémet szeretnél nyomni."
 
-#: ../../magic/src/puzzle.c:105
+#: ../../magic/src/puzzle.c:103
 msgid "Puzzle"
 msgstr "Kirakós"
 
-#: ../../magic/src/puzzle.c:112
+#: ../../magic/src/puzzle.c:110
 msgid "Click the part of your picture where would you like a puzzle."
 msgstr "Kattints oda a rajzodon, ahol kirakó hatást szeretnél."
 
-#: ../../magic/src/puzzle.c:113
+#: ../../magic/src/puzzle.c:111
 msgid "Click to make a puzzle in fullscreen mode."
 msgstr "Kattints rá, hogy teljes képernyős kirakót csináljunk."
 
-#: ../../magic/src/rails.c:131
+#: ../../magic/src/rails.c:129
 msgid "Rails"
 msgstr "Sínek"
 
-#: ../../magic/src/rails.c:133
+#: ../../magic/src/rails.c:134
 msgid "Click and drag to draw train track rails on your picture."
 msgstr "Kattints oda a rajzodon, ahova vasúti síneket szeretnél rajzolni."
 
-#: ../../magic/src/rainbow.c:139
+#: ../../magic/src/rainbow.c:133
 msgid "Rainbow"
 msgstr "Szivárvány"
 
-#: ../../magic/src/rainbow.c:146
+#: ../../magic/src/rainbow.c:139
 msgid "You can draw in rainbow colors!"
 msgstr "Szivárványszínekkel is rajzolhatsz!"
 
-#: ../../magic/src/rain.c:65
+#: ../../magic/src/rain.c:68
 msgid "Rain"
 msgstr "Eső"
 
-#: ../../magic/src/rain.c:68
+#: ../../magic/src/rain.c:72
 msgid "Click to place a rain drop onto your picture."
 msgstr "Kattints egy esőcsepp elhelyezéséhez a rajzodra."
 
-#: ../../magic/src/rain.c:69
+#: ../../magic/src/rain.c:73
 msgid "Click to cover your picture with rain drops."
 msgstr "Kattints a rajz beterítéséhez esőcseppekkel."
 
-#: ../../magic/src/realrainbow.c:110
+#: ../../magic/src/realrainbow.c:98
 msgid "Real Rainbow"
 msgstr "Szivárvány"
 
-#: ../../magic/src/realrainbow.c:112
+#: ../../magic/src/realrainbow.c:100
 msgid "ROYGBIV Rainbow"
 msgstr "Szivárvány"
 
-#: ../../magic/src/realrainbow.c:117
+#: ../../magic/src/realrainbow.c:108
 msgid ""
 "Click where you want your rainbow to start, drag to where you want it to "
 "end, and then let go to draw a rainbow."
@@ -1269,133 +1272,133 @@ msgstr ""
 "Kattints oda a rajzodon, ahol a szivárvány kezdődjön, majd húzd oda az "
 "egeret ahol végződjön és engedd fel a gombot a rajzoláshoz."
 
-#: ../../magic/src/ripples.c:106
+#: ../../magic/src/ripples.c:102
 msgid "Ripples"
 msgstr "Fodrozódás"
 
-#: ../../magic/src/ripples.c:112
+#: ../../magic/src/ripples.c:108
 msgid "Click to make ripples appear over your picture."
 msgstr "Kattints fodrozódás rajzolásához a képre."
 
-#: ../../magic/src/rosette.c:116
+#: ../../magic/src/rosette.c:115
 msgid "Rosette"
 msgstr "Rozetta"
 
-#: ../../magic/src/rosette.c:116
+#: ../../magic/src/rosette.c:117
 msgid "Picasso"
 msgstr "Picasso"
 
-#: ../../magic/src/rosette.c:121
+#: ../../magic/src/rosette.c:123
 msgid "Click and start drawing your rosette."
 msgstr "Kattints oda a rajzodon, ahova a rozettát szeretnéd rajzolni."
 
-#: ../../magic/src/rosette.c:123
+#: ../../magic/src/rosette.c:125
 msgid "You can draw just like Picasso!"
 msgstr "Picassoként is rajzolhatsz!"
 
-#: ../../magic/src/sharpen.c:73
+#: ../../magic/src/sharpen.c:76
 msgid "Edges"
 msgstr "Szélek"
 
-#: ../../magic/src/sharpen.c:74
+#: ../../magic/src/sharpen.c:77
 msgid "Sharpen"
 msgstr "Élesítés"
 
-#: ../../magic/src/sharpen.c:75
+#: ../../magic/src/sharpen.c:78
 msgid "Silhouette"
 msgstr "Sziluett"
 
-#: ../../magic/src/sharpen.c:78
+#: ../../magic/src/sharpen.c:82
 #, fuzzy
 #| msgid "Click and move the mouse to trace edges in parts of your picture."
 msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr ""
 "Kattints oda a rajzodon, ahol a kép részein a széleket szeretnéd követni."
 
-#: ../../magic/src/sharpen.c:79
+#: ../../magic/src/sharpen.c:83
 msgid "Click to trace edges in your entire picture."
 msgstr "Kattints a szélek követéséhez az egész rajzodon."
 
-#: ../../magic/src/sharpen.c:80
+#: ../../magic/src/sharpen.c:84
 #, fuzzy
 #| msgid "Click and move the mouse to sharpen parts of your picture."
 msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr "Kattints oda a rajzodon, ahol élesíteni szeretnéd a kép részeit."
 
-#: ../../magic/src/sharpen.c:81
+#: ../../magic/src/sharpen.c:85
 msgid "Click to sharpen the entire picture."
 msgstr "Kattints az egész kép élesítéséhez."
 
-#: ../../magic/src/sharpen.c:82
+#: ../../magic/src/sharpen.c:86
 #, fuzzy
 #| msgid "Click and move the mouse to create a black and white silhouette."
 msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr ""
 "Kattints oda a rajzodon, ahol fekete-fehér sziluettet szeretnél rajzolni."
 
-#: ../../magic/src/sharpen.c:83
+#: ../../magic/src/sharpen.c:87
 msgid "Click to create a black and white silhouette of your entire picture."
 msgstr "Kattints a fekete-fehér sziluett rajzolásához az egész képre."
 
-#: ../../magic/src/shift.c:109
+#: ../../magic/src/shift.c:106
 msgid "Shift"
 msgstr "Eltolás"
 
-#: ../../magic/src/shift.c:115
+#: ../../magic/src/shift.c:112
 msgid "Click and drag to shift your picture around on the canvas."
 msgstr "Kattints a kép eltolásához a vásznon."
 
-#: ../../magic/src/smudge.c:106
+#: ../../magic/src/smudge.c:102
 msgid "Smudge"
 msgstr "Piszok"
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:108
+#: ../../magic/src/smudge.c:104
 msgid "Wet Paint"
 msgstr "Fémes festés"
 
-#: ../../magic/src/smudge.c:115
+#: ../../magic/src/smudge.c:111
 #, fuzzy
 #| msgid "Click and move the mouse around to smudge the picture."
 msgid "Click and drag the mouse around to smudge the picture."
 msgstr "Kattints oda a rajzodon, ahol piszkot szeretnél."
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:117
+#: ../../magic/src/smudge.c:113
 #, fuzzy
 #| msgid "Click and move the mouse around to draw with wet, smudgy paint."
 msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr "Kattints oda a rajzodon, ahol maszatolni szeretnél."
 
-#: ../../magic/src/snow.c:68
+#: ../../magic/src/snow.c:71
 msgid "Snow Ball"
 msgstr "Hógolyó"
 
-#: ../../magic/src/snow.c:69
+#: ../../magic/src/snow.c:72
 msgid "Snow Flake"
 msgstr "Hópehely"
 
-#: ../../magic/src/snow.c:72
+#: ../../magic/src/snow.c:76
 msgid "Click to add snow balls to your picture."
 msgstr "Kattints a hógolyók hozzáadásához a rajzhoz."
 
-#: ../../magic/src/snow.c:73
+#: ../../magic/src/snow.c:77
 msgid "Click to add snow flakes to your picture."
 msgstr "Kattints a hópelyhek hozzáadásához a rajzhoz."
 
-#: ../../magic/src/string.c:123
+#: ../../magic/src/string.c:129
 msgid "String edges"
 msgstr "Fonalszélek"
 
-#: ../../magic/src/string.c:126
+#: ../../magic/src/string.c:132
 msgid "String corner"
 msgstr "Fonalsarok"
 
-#: ../../magic/src/string.c:129
+#: ../../magic/src/string.c:135
 msgid "String 'V'"
 msgstr "Fonal „V”"
 
-#: ../../magic/src/string.c:137
+#: ../../magic/src/string.c:147
 msgid ""
 "Click and drag to draw string art. Drag top-bottom to draw less or more "
 "lines, left or right to make a bigger hole."
@@ -1403,23 +1406,23 @@ msgstr ""
 "Kattints fonalképek készítéséhez. Húzd az egeret fentről lefelé kevesebb "
 "vagy több vonal húzásához, vagy középre a vonalak középre közelítéséhez."
 
-#: ../../magic/src/string.c:140
+#: ../../magic/src/string.c:150
 msgid "Click and drag to draw arrows made of string art."
 msgstr "Kattints oda a rajzodon, ahova fénysugarat szeretnél rajzolni."
 
-#: ../../magic/src/string.c:143
+#: ../../magic/src/string.c:153
 msgid "Draw string art arrows with free angles."
 msgstr "Rajzolj művészi nyilakat, a szabad szögekkel."
 
-#: ../../magic/src/tint.c:71
+#: ../../magic/src/tint.c:74
 msgid "Tint"
 msgstr "Árnyalat"
 
-#: ../../magic/src/tint.c:72
+#: ../../magic/src/tint.c:75
 msgid "Color & White"
 msgstr "Színes és fehér"
 
-#: ../../magic/src/tint.c:75
+#: ../../magic/src/tint.c:79
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to change the color of parts of your "
@@ -1428,11 +1431,11 @@ msgid ""
 "Click and drag the mouse around to change the color of parts of your picture."
 msgstr "Kattints oda a rajzodon, ahol meg szeretnéd változtatni a kép színét."
 
-#: ../../magic/src/tint.c:76
+#: ../../magic/src/tint.c:80
 msgid "Click to change the color of your entire picture."
 msgstr "Kattints az egész rajz színének megváltoztatásához."
 
-#: ../../magic/src/tint.c:77
+#: ../../magic/src/tint.c:81
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn parts of your picture into white "
@@ -1444,33 +1447,33 @@ msgstr ""
 "Kattints oda a rajzodon, ahol a képet fehérré és egy kiválasztott színűvé "
 "szeretnéd változtatni!"
 
-#: ../../magic/src/tint.c:78
+#: ../../magic/src/tint.c:82
 msgid "Click to turn your entire picture into white and a color you choose."
 msgstr ""
 "Kattints az egész rajz fehérré és egy kiválasztott színűvé változtatásához."
 
-#: ../../magic/src/toothpaste.c:65
+#: ../../magic/src/toothpaste.c:68
 msgid "Toothpaste"
 msgstr "Fogkrém"
 
-#: ../../magic/src/toothpaste.c:68
+#: ../../magic/src/toothpaste.c:72
 msgid "Click and drag to squirt toothpaste onto your picture."
 msgstr "Kattints oda a rajzodon, ahova fogkrémet szeretnél nyomni."
 
-#: ../../magic/src/tornado.c:157
+#: ../../magic/src/tornado.c:153
 msgid "Tornado"
 msgstr "Tornádó"
 
-#: ../../magic/src/tornado.c:163
+#: ../../magic/src/tornado.c:159
 msgid "Click and drag to draw a tornado funnel on your picture."
 msgstr ""
 "Az egér gombját lenyomva tartva tornádó tölcsért rajzolhatsz a képedre."
 
-#: ../../magic/src/tv.c:100
+#: ../../magic/src/tv.c:96
 msgid "TV"
 msgstr "TV"
 
-#: ../../magic/src/tv.c:105
+#: ../../magic/src/tv.c:102
 msgid ""
 "Click and drag to make parts of your picture look like they are on "
 "television."
@@ -1478,19 +1481,19 @@ msgstr ""
 "Az egér gombját lenyomva tartva TV kinézetűvé változtathatod a képed egyes "
 "részeit."
 
-#: ../../magic/src/tv.c:108
+#: ../../magic/src/tv.c:105
 msgid "Click to make your picture look like it's on television."
 msgstr "Kattints oda a rajzodon, ahol azt TV kinézetűvé szeretnéd változtatni."
 
-#: ../../magic/src/waves.c:103
+#: ../../magic/src/waves.c:104
 msgid "Waves"
 msgstr "Hullámok"
 
-#: ../../magic/src/waves.c:104
+#: ../../magic/src/waves.c:106
 msgid "Wavelets"
 msgstr "Hullámkák"
 
-#: ../../magic/src/waves.c:111
+#: ../../magic/src/waves.c:115
 msgid ""
 "Click to make the picture horizontally wavy. Click toward the top for "
 "shorter waves, the bottom for taller waves, the left for small waves, and "
@@ -1500,7 +1503,7 @@ msgstr ""
 "alacsonyabb, az aljára magasabb hullámokért, a bal oldalra kisebb és jobbra "
 "hosszabb hullámokért."
 
-#: ../../magic/src/waves.c:112
+#: ../../magic/src/waves.c:118
 msgid ""
 "Click to make the picture vertically wavy. Click toward the top for shorter "
 "waves, the bottom for taller waves, the left for small waves, and the right "
@@ -1510,14 +1513,14 @@ msgstr ""
 "alacsonyabb, az aljára magasabb hullámokért, a bal oldalra kisebb és jobbra "
 "hosszabb hullámokért."
 
-#: ../../magic/src/xor.c:95
+#: ../../magic/src/xor.c:93
 msgid "Xor Colors"
 msgstr "Színek XOR-olása."
 
-#: ../../magic/src/xor.c:101
+#: ../../magic/src/xor.c:99
 msgid "Click and drag to draw a XOR effect"
 msgstr "Az egér gombját lenyomva tartva XOR hatással rahzolhatsz."
 
-#: ../../magic/src/xor.c:103
+#: ../../magic/src/xor.c:101
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "Rákattintva XOR hatást tehetsz az egész rajzodra."

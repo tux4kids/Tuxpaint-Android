@@ -1,3 +1,8 @@
+/*
+ * Strings -- draws string art.
+ *
+ * Last modified: 2019-08-29
+ */
 #include "tp_magic_api.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
@@ -353,20 +358,9 @@ void string_draw_triangle_preview(magic_api * api, int which,
                                   SDL_Rect * update_rect)
 {
   int middle_x, middle_y;
-  int w, h;
 
   scale_coords(&ox, &oy, &x, &y);
-  w = max(string_ox, x) - min(string_ox, x);
-  h = max(string_oy, y) - min(string_oy, y);
 
-  /*
-     This is enouth if you move the mouse slowly, but if you move the mouse fast,
-     there are rests of old previews left around.
-     update_rect->w=max(max(string_ox,x),max(ox,x))-min(min(string_ox,x),min(ox,x)) +80;
-     update_rect->h=max(max(string_oy,y),max(oy,y))-min(min(string_oy,y),min(oy,y)) +80;
-     update_rect->x=min(string_ox,x) -40;
-     update_rect->y=min(string_oy,y) -40;
-   */
   update_rect->x = 0;
   update_rect->y = 0;
   update_rect->w = canvas->w;
@@ -387,12 +381,8 @@ void string_draw_angle_preview(magic_api * api, int which,
                                int ox, __attribute__ ((unused))
                                int oy, int x, int y, SDL_Rect * update_rect)
 {
-  int w, h;
   int middle_x, middle_y;
   int dx, dy;
-
-  w = max(string_ox, x) - min(string_ox, x);
-  h = max(string_oy, y) - min(string_oy, y);
 
   update_rect->x = 0;
   update_rect->y = 0;

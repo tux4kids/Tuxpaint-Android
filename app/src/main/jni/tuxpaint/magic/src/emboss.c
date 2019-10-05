@@ -4,7 +4,7 @@
   Emboss Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2019 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: August 29, 2019
   $Id$
 */
 
@@ -114,7 +114,7 @@ static void do_emboss(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canva
   magic_api *api = (magic_api *) ptr;
   int xx, yy;
   Uint8 r1, g1, b1, r2, g2, b2;
-  int r, g, b;
+  int r;
   float h, s, v;
   int avg1, avg2;
 
@@ -139,7 +139,6 @@ static void do_emboss(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canva
                     r = 0;
                   if (r > 255)
                     r = 255;
-                  g = b = r;
 
                   v = (r / 255.0);
 

@@ -1,6 +1,6 @@
 /*
   SDL_image:  An example image loading library for use with SDL
-  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2019 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -41,11 +41,6 @@
  * TODO: include rgb.txt here. The full table (from solaris 2.6) only
  * requires about 13K in binary form.
  */
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
 
 #include "SDL_image.h"
 
@@ -106,7 +101,7 @@ static struct color_hash *create_colorhash(int maxnum)
 
     /* we know how many entries we need, so we can allocate
        everything here */
-    hash = (struct color_hash *)SDL_malloc(sizeof *hash);
+    hash = (struct color_hash *)SDL_calloc(1, sizeof(*hash));
     if (!hash)
         return NULL;
 
@@ -115,15 +110,29 @@ static struct color_hash *create_colorhash(int maxnum)
         ;
     hash->size = s;
     hash->maxnum = maxnum;
+
     bytes = hash->size * sizeof(struct hash_entry **);
-    hash->entries = NULL;   /* in case malloc fails */
-    hash->table = (struct hash_entry **)SDL_malloc(bytes);
+    /* Check for overflow */
+    if ((bytes / sizeof(struct hash_entry **)) != hash->size) {
+        IMG_SetError("memory allocation overflow");
+        SDL_free(hash);
+        return NULL;
+    }
+    hash->table = (struct hash_entry **)SDL_calloc(1, bytes);
     if (!hash->table) {
         SDL_free(hash);
         return NULL;
     }
-    SDL_memset(hash->table, 0, bytes);
-    hash->entries = (struct hash_entry *)SDL_malloc(maxnum * sizeof(struct hash_entry));
+
+    bytes = maxnum * sizeof(struct hash_entry);
+    /* Check for overflow */
+    if ((bytes / sizeof(struct hash_entry)) != maxnum) {
+        IMG_SetError("memory allocation overflow");
+        SDL_free(hash->table);
+        SDL_free(hash);
+        return NULL;
+    }
+    hash->entries = (struct hash_entry *)SDL_calloc(1, bytes);
     if (!hash->entries) {
         SDL_free(hash->table);
         SDL_free(hash);
@@ -888,7 +897,7 @@ static int color_to_rgb(char *spec, int speclen, Uint32 *rgb)
             break;
         }
         buf[6] = '\0';
-        *rgb = SDL_strtol(buf, NULL, 16);
+        *rgb = (Uint32)SDL_strtol(buf, NULL, 16);
         return 1;
     } else {
         int i;
@@ -1031,6 +1040,11 @@ static SDL_Surface *load_xpm(char **xpm, SDL_RWops *src)
         goto done;
     }
 
+    /* Check for allocation overflow */
+    if ((size_t)(ncolors * cpp)/cpp != ncolors) {
+        error = "Invalid color specification";
+        goto done;
+    }
     keystrings = (char *)SDL_malloc(ncolors * cpp);
     if (!keystrings) {
         error = "Out of memory";
@@ -1088,7 +1102,7 @@ static SDL_Surface *load_xpm(char **xpm, SDL_RWops *src)
             if (nametype == 's')
                 continue;      /* skip symbolic colour names */
 
-            if (!color_to_rgb(colname, p - colname, &rgb))
+            if (!color_to_rgb(colname, (int)(p - colname), &rgb))
                 continue;
 
             SDL_memcpy(nextkey, line, cpp);
@@ -1098,8 +1112,9 @@ static SDL_Surface *load_xpm(char **xpm, SDL_RWops *src)
                 c->g = (Uint8)(rgb >> 8);
                 c->b = (Uint8)(rgb);
                 pixel = index;
-            } else
+            } else {
                 pixel = rgb;
+            }
             add_colorhash(colors, nextkey, cpp, pixel);
             nextkey += cpp;
             if (rgb == 0xffffffff)

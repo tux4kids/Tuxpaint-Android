@@ -229,7 +229,7 @@ static SDL_Surface* Create_SDL_Surface_From_CGImage_RGB(CGImageRef image_ref)
     Gmask = 0x0000FF00;
     Bmask = 0x000000FF;
 
-    surface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32, Rmask, Gmask, Bmask, Amask);
+    surface = SDL_CreateRGBSurface(SDL_SWSURFACE, (int)w, (int)h, 32, Rmask, Gmask, Bmask, Amask);
     if (surface)
     {
         // Sets up a context to be drawn to with surface->pixels as the area to be drawn to
@@ -306,7 +306,7 @@ static SDL_Surface* Create_SDL_Surface_From_CGImage_Index(CGImageRef image_ref)
     }
 
     CGColorSpaceGetColorTable(color_space, entries);
-    surface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, bits_per_pixel, 0, 0, 0, 0);
+    surface = SDL_CreateRGBSurface(SDL_SWSURFACE, (int)w, (int)h, bits_per_pixel, 0, 0, 0, 0);
     if (surface) {
         uint8_t* pixels = (uint8_t*)surface->pixels;
         CGDataProviderRef provider = CGImageGetDataProvider(image_ref);
@@ -389,7 +389,7 @@ static int Internal_isType_UIImage (SDL_RWops *rw_ops, CFStringRef uti_string_to
     int is_type = 0;
 
 #if defined(ALLOW_UIIMAGE_FALLBACK) && ((TARGET_OS_IPHONE == 1) || (TARGET_IPHONE_SIMULATOR == 1))
-    int start = SDL_RWtell(rw_ops);
+    Sint64 start = SDL_RWtell(rw_ops);
     if ((0 == CFStringCompare(uti_string_to_test, kUTTypeICO, 0)) ||
         (0 == CFStringCompare(uti_string_to_test, CFSTR("com.microsoft.cur"), 0))) {
 
@@ -504,7 +504,7 @@ static int Internal_isType_UIImage (SDL_RWops *rw_ops, CFStringRef uti_string_to
         }
     }
 
-    // reset the file descption pointer
+    // reset the file pointer
     SDL_RWseek(rw_ops, start, SEEK_SET);
 
 #endif  /* #if defined(ALLOW_UIIMAGE_FALLBACK) && ((TARGET_OS_IPHONE == 1) || (TARGET_IPHONE_SIMULATOR == 1)) */
@@ -515,6 +515,7 @@ static int Internal_isType_ImageIO (SDL_RWops *rw_ops, CFStringRef uti_string_to
 {
     int is_type = 0;
 
+    Sint64 start = SDL_RWtell(rw_ops);
     CFDictionaryRef hint_dictionary = CreateHintDictionary(uti_string_to_test);
     CGImageSourceRef image_source = CreateCGImageSourceFromRWops(rw_ops, hint_dictionary);
 
@@ -523,6 +524,8 @@ static int Internal_isType_ImageIO (SDL_RWops *rw_ops, CFStringRef uti_string_to
     }
 
     if (NULL == image_source) {
+        // reset the file pointer
+        SDL_RWseek(rw_ops, start, SEEK_SET);
         return 0;
     }
 
@@ -538,6 +541,9 @@ static int Internal_isType_ImageIO (SDL_RWops *rw_ops, CFStringRef uti_string_to
     is_type = (int)UTTypeConformsTo(uti_string_to_test, uti_type);
 
     CFRelease(image_source);
+
+    // reset the file pointer
+    SDL_RWseek(rw_ops, start, SEEK_SET);
     return is_type;
 }
 

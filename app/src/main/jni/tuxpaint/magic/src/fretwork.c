@@ -1,3 +1,9 @@
+/*
+ * Draws fretwork
+ *
+ * Last updated: 2019-08-29
+ */
+
 #include "tp_magic_api.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
@@ -29,7 +35,7 @@
 Mix_Chunk *fretwork_snd;
 unsigned int img_w, img_h;
 unsigned int fretwork_segments_x, fretwork_segments_y;  //how many segments do we have?
-static int fretwork_math_ceil(int x, int y);    //ceil() in cstdlib returns float and is relative slow, so we'll use our one
+inline int fretwork_math_ceil(int x, int y);    //ceil() in cstdlib returns float and is relative slow, so we'll use our one
 static Uint8 *fretwork_status_of_segments;      //a place to store an info about bitmap used for selected segment
 static char **fretwork_images;  //the pathes to all the images needed
 static unsigned int fretwork_segment_modified;  //which segment was modified this time?
@@ -243,7 +249,7 @@ void fretwork_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
 // Interactivity functions
 
 
-static int fretwork_math_ceil(int x, int y)
+inline int fretwork_math_ceil(int x, int y)
 {
   int temp;
 

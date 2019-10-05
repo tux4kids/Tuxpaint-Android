@@ -19,14 +19,18 @@ libSDL2_image_la_SOURCES =	\
 	IMG_pcx.c		\
 	IMG_png.c		\
 	IMG_pnm.c		\
+	IMG_svg.c		\
 	IMG_tga.c		\
 	IMG_tif.c		\
 	IMG_xcf.c		\
 	IMG_xpm.c		\
 	IMG_xv.c		\
 	IMG_webp.c		\
+	IMG_WIC.c		\
 	$(IMAGEIO_SOURCE)	\
-	miniz.h
+	miniz.h			\
+	nanosvg.h		\
+	nanosvgrast.h
 
 EXTRA_DIST =			\
 	Android.mk		\
@@ -35,6 +39,7 @@ EXTRA_DIST =			\
 	version.rc		\
 	VisualC			\
 	VisualCE		\
+	VisualC-WinRT	\
 	Xcode			\
 	Xcode-iOS		\
 	IMG_xxx.c		\

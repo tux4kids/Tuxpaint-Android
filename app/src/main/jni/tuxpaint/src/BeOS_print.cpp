@@ -21,7 +21,7 @@
 
   $Id$
 */
-  
+
 /* Jan. 17, 2003 */
 
 #include "BeOS_print.h"
@@ -36,117 +36,122 @@
 #include "string.h"
 
 
-class PrintView : public BView
+class PrintView:public BView
 {
-	public:
-					PrintView( BBitmap *bitmap)
-						: BView( bitmap->Bounds(), "TuxPaint Print", B_FOLLOW_NONE, B_WILL_DRAW)
-						{
-							b = bitmap;
-						};
-					~PrintView()
-						{
-							delete b;
-						};
-		void		Draw( BRect updateRect)
-						{
-							DrawBitmap( b);
-						}
-	private:
-		BBitmap	*b;
+public:
+  PrintView(BBitmap * bitmap):BView(bitmap->Bounds(), "TuxPaint Print", B_FOLLOW_NONE, B_WILL_DRAW)
+  {
+    b = bitmap;
+  };
+
+  ~PrintView()
+  {
+    delete b;
+  };
+  void Draw(BRect updateRect)
+  {
+    DrawBitmap(b);
+  }
+private:
+  BBitmap * b;
 };
 
 
-BBitmap *SurfaceToBBitmap( SDL_Surface *surf)
+BBitmap *SurfaceToBBitmap(SDL_Surface * surf)
 {
-	BBitmap				*bitmap = new BBitmap( BRect( 0, 0, surf->w, surf->h), B_RGBA32);
-    SDL_PixelFormat     pixfmt;
-    SDL_Surface         *surf32;
-    Uint8               *src,*dst;
-    Uint32              linesize;
-    int                 i;
+  BBitmap *bitmap = new BBitmap(BRect(0, 0, surf->w, surf->h), B_RGBA32);
+  SDL_PixelFormat pixfmt;
+  SDL_Surface *surf32;
+  Uint8 *src, *dst;
+  Uint32 linesize;
+  int i;
 
-    memset( &pixfmt, 0, sizeof(pixfmt) );
-    pixfmt.palette      = NULL;
-    pixfmt.BitsPerPixel = 32;
-    pixfmt.BytesPerPixel= 4;
-    pixfmt.Rmask        = 0x00FF0000;
-    pixfmt.Gmask        = 0x0000FF00;
-    pixfmt.Bmask        = 0x000000FF;
-    pixfmt.Amask        = 0xFF000000;
-    pixfmt.Rshift       = 16;
-    pixfmt.Gshift       = 8;
-    pixfmt.Bshift       = 0;
-    pixfmt.Ashift       = 24;
-    pixfmt.Rloss        = 0;
-    pixfmt.Gloss        = 0;
-    pixfmt.Bloss        = 0;
-    pixfmt.Aloss        = 0;
-    pixfmt.colorkey     = 0;
-    pixfmt.alpha        = 0;
+  memset(&pixfmt, 0, sizeof(pixfmt));
+  pixfmt.palette = NULL;
+  pixfmt.BitsPerPixel = 32;
+  pixfmt.BytesPerPixel = 4;
+  pixfmt.Rmask = 0x00FF0000;
+  pixfmt.Gmask = 0x0000FF00;
+  pixfmt.Bmask = 0x000000FF;
+  pixfmt.Amask = 0xFF000000;
+  pixfmt.Rshift = 16;
+  pixfmt.Gshift = 8;
+  pixfmt.Bshift = 0;
+  pixfmt.Ashift = 24;
+  pixfmt.Rloss = 0;
+  pixfmt.Gloss = 0;
+  pixfmt.Bloss = 0;
+  pixfmt.Aloss = 0;
+  pixfmt.colorkey = 0;
+  pixfmt.alpha = 0;
 
-    surf32 = SDL_ConvertSurface( surf, &pixfmt, SDL_SWSURFACE );
- 
-    linesize = surf32->w*sizeof(Uint32);
-    dst = (Uint8*)bitmap->Bits();
-    src = (Uint8*)surf32->pixels;
-    for ( i = 0; i < surf32->h; i++ )
+  surf32 = SDL_ConvertSurface(surf, &pixfmt, SDL_SWSURFACE);
+
+  linesize = surf32->w * sizeof(Uint32);
+  dst = (Uint8 *) bitmap->Bits();
+  src = (Uint8 *) surf32->pixels;
+  for (i = 0; i < surf32->h; i++)
     {
-        memcpy( dst, src, linesize );
-        src += surf32->pitch-4;
-        dst += linesize;
+      memcpy(dst, src, linesize);
+      src += surf32->pitch - 4;
+      dst += linesize;
     }
 
-    SDL_FreeSurface( surf32 );              /* Free temp surface */
+  SDL_FreeSurface(surf32);      /* Free temp surface */
 
-    return bitmap;
+  return bitmap;
 }
 
 
-int IsPrinterAvailable( void )
+int IsPrinterAvailable(void)
 {
-	// this code is a little hack, i don't like such hardcoded things
-	// but i have no choice ;]
-	DIR *d;
-	struct dirent *f = NULL;
-	int num_files = 0;
-	d = opendir("/boot/home/config/settings/printers");
-	if( d != NULL)
-	{
-		while( (f = readdir(d)) != NULL)
-			num_files++;
-		closedir( d);
-		if( num_files > 2)
-			return 1;
-	}
-	return 0;
+  // this code is a little hack, i don't like such hardcoded things
+  // but i have no choice ;]
+  DIR *d;
+  struct dirent *f = NULL;
+  int num_files = 0;
+
+  d = opendir("/boot/home/config/settings/printers");
+  if (d != NULL)
+    {
+      while ((f = readdir(d)) != NULL)
+        num_files++;
+      closedir(d);
+      if (num_files > 2)
+        return 1;
+    }
+  return 0;
 }
 
 
-int SurfacePrint( SDL_Surface *surf )
+int SurfacePrint(SDL_Surface * surf)
 {
-	BWindow *window = new BWindow( BRect( 0, 0, surf->w, surf->h), "TuxPaint Print", B_NO_BORDER_WINDOW_LOOK, B_NORMAL_WINDOW_FEEL, B_NOT_MOVABLE | B_NOT_CLOSABLE | B_NOT_ZOOMABLE | B_NOT_RESIZABLE | B_AVOID_FRONT | B_AVOID_FOCUS);
-	PrintView *view = new PrintView( SurfaceToBBitmap( surf));
-	window->AddChild(view);
-	window->Run();
+  BWindow *window =
+    new BWindow(BRect(0, 0, surf->w, surf->h), "TuxPaint Print", B_NO_BORDER_WINDOW_LOOK, B_NORMAL_WINDOW_FEEL,
+                B_NOT_MOVABLE | B_NOT_CLOSABLE | B_NOT_ZOOMABLE | B_NOT_RESIZABLE | B_AVOID_FRONT | B_AVOID_FOCUS);
+  PrintView *view = new PrintView(SurfaceToBBitmap(surf));
 
-	BPrintJob job("TuxPaint");
-	if( job.ConfigPage() == B_OK)
-	{
-		if( job.ConfigJob() == B_OK)
-		{
-			job.BeginJob();
-			if( job.CanContinue())
-			{
-				job.DrawView(view, BRect( 0, 0, surf->w, surf->h), BPoint( 0, 0));
-				job.SpoolPage();
-			}
-			if( job.CanContinue())
-				job.CommitJob();
-		}
-	}
+  window->AddChild(view);
+  window->Run();
 
-	BMessenger( window).SendMessage( B_QUIT_REQUESTED);
+  BPrintJob job("TuxPaint");
 
-	return 0;
+  if (job.ConfigPage() == B_OK)
+    {
+      if (job.ConfigJob() == B_OK)
+        {
+          job.BeginJob();
+          if (job.CanContinue())
+            {
+              job.DrawView(view, BRect(0, 0, surf->w, surf->h), BPoint(0, 0));
+              job.SpoolPage();
+            }
+          if (job.CanContinue())
+            job.CommitJob();
+        }
+    }
+
+  BMessenger(window).SendMessage(B_QUIT_REQUESTED);
+
+  return 0;
 }
