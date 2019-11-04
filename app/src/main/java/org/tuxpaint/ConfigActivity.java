@@ -44,6 +44,7 @@ public class ConfigActivity extends Activity {
 	String print = null;
         String printdelay = null;
         String disablescreensaver = null;
+        String orient = null;
 	
 	EditText savedirView = null;
 	EditText datadirView = null;
@@ -55,6 +56,7 @@ public class ConfigActivity extends Activity {
 	ToggleButton printToggle = null;
 	Spinner printdelaySpinner = null;
         ToggleButton disablescreensaverToggle = null;
+        ToggleButton orientToggle = null;
         AssetManager mgr;
     
 	@Override
@@ -219,6 +221,20 @@ public class ConfigActivity extends Activity {
 			}
 		});
 
+	orientToggle = (ToggleButton)this.findViewById(R.id.toggleOrient);
+		if (orient.compareTo("landscape") == 0)
+			orientToggle.setChecked(true);
+		else
+			orientToggle.setChecked(false);
+		orientToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked)
+					orient = "landscape";
+				else
+					orient = "portrait";
+			}
+		});
+
 	}
 	
     @Override
@@ -265,8 +281,9 @@ public class ConfigActivity extends Activity {
 	    	 print = props.getProperty("print", "no");
 	    	 printdelay = props.getProperty("printdelay", "0");
 		 disablescreensaver = props.getProperty("disablescreensaver", "no");
+		 orient = props.getProperty("orient", "landscape");
 	    	 
-	         Log.v(TAG, autosave + " " + sound + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + print + " " + printdelay + " " + disablescreensaver);;
+	         Log.v(TAG, autosave + " " + sound + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);;
 	}
 	
 	private void save () {
@@ -282,6 +299,7 @@ public class ConfigActivity extends Activity {
 	props.put("print", print);
         props.put("printdelay", printdelay);
 	props.put("disablescreensaver", disablescreensaver);
+	props.put("orient", orient);
 
 		try {
 	 	  	OutputStream	out = new FileOutputStream(cfg);
