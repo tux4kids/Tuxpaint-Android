@@ -36,6 +36,7 @@ public class ConfigActivity extends Activity {
 	// current the configurable properties
 	String autosave = null;
 	String sound = null;
+	String stereo = null;
 	String locale = null;
 	String savedir = null;
 	String datadir = null;
@@ -48,7 +49,8 @@ public class ConfigActivity extends Activity {
 	
 	EditText savedirView = null;
 	EditText datadirView = null;
-	ToggleButton soundToggle = null; 
+	ToggleButton soundToggle = null;
+	ToggleButton stereoToggle = null;
 	ToggleButton autosaveToggle = null;
 	ToggleButton startblankToggle = null;
 	Spinner localeSpinner = null;
@@ -104,7 +106,21 @@ public class ConfigActivity extends Activity {
 					sound = "no";
 			}
 		});
-			
+
+		stereoToggle = (ToggleButton)this.findViewById(R.id.toggleStereo);
+		if (stereo.compareTo("stereo") == 0)
+			stereoToggle.setChecked(true);
+		else
+			stereoToggle.setChecked(false);
+		stereoToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked)
+					stereo = "yes";
+				else
+					stereo = "no";
+			}
+		});
+
        	autosaveToggle = (ToggleButton)this.findViewById(R.id.toggleAutosave);
 		if (autosave.compareTo("yes") == 0)
 			autosaveToggle.setChecked(true);
@@ -273,6 +289,7 @@ public class ConfigActivity extends Activity {
 		/* Fixme: Is this redundant after having added the load of the cfg file in assets? */
 	    	 autosave = props.getProperty("autosave", "no");
 	    	 sound = props.getProperty("sound", "no");
+	    	 stereo = props.getProperty("stereo", "yes");
 	    	 saveover = props.getProperty("saveover", "ask");
 	    	 startblank = props.getProperty("startblank", "no");
 	    	 savedir = props.getProperty("savedir", external.getAbsolutePath());
@@ -283,7 +300,7 @@ public class ConfigActivity extends Activity {
 		 disablescreensaver = props.getProperty("disablescreensaver", "no");
 		 orient = props.getProperty("orient", "landscape");
 	    	 
-	         Log.v(TAG, autosave + " " + sound + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);;
+	         Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);;
 	}
 	
 	private void save () {
@@ -291,6 +308,7 @@ public class ConfigActivity extends Activity {
      	File cfg =  new File (external, "tuxpaint.cfg");
         props.put("autosave", autosave);
         props.put("sound", sound);
+        props.put("stereo", stereo);
         props.put("saveover", saveover);
         props.put("startblank", startblank);
         props.put("savedir", savedir);

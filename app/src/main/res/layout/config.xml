@@ -96,6 +96,27 @@
             android:textOff="@string/sound_disabled" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layoutStereo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/viewStereo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Enable_stereo" />
+
+        <ToggleButton
+            android:id="@+id/toggleStereo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="@string/stereo_enabled"
+            android:textOff="@string/stereo_disabled" />
+    </LinearLayout>
+
         <LinearLayout
         android:id="@+id/layoutAutosave"
         android:layout_width="wrap_content"
