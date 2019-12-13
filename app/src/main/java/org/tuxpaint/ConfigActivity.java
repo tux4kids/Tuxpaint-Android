@@ -42,6 +42,7 @@ public class ConfigActivity extends Activity {
 	String datadir = null;
 	String saveover = null;
 	String startblank = null;
+	String newcolorsfirst = null;
 	String print = null;
         String printdelay = null;
         String disablescreensaver = null;
@@ -53,6 +54,7 @@ public class ConfigActivity extends Activity {
 	ToggleButton stereoToggle = null;
 	ToggleButton autosaveToggle = null;
 	ToggleButton startblankToggle = null;
+	ToggleButton newcolorsfirstToggle = null;
 	Spinner localeSpinner = null;
 	RadioGroup saveoverGroup = null;
 	ToggleButton printToggle = null;
@@ -149,7 +151,20 @@ public class ConfigActivity extends Activity {
 			}
 		});
 		
-		
+       	newcolorsfirstToggle = (ToggleButton)this.findViewById(R.id.toggleNewcolorsfirst);
+		if (newcolorsfirst.compareTo("yes") == 0)
+			newcolorsfirstToggle.setChecked(true);
+		else
+			newcolorsfirstToggle.setChecked(false);
+		newcolorsfirstToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked)
+					newcolorsfirst = "yes";
+				else
+					newcolorsfirst = "no";
+			}
+		});
+
 		locales = getResources().getStringArray(R.array.locales);
 		int index = 0;
 		for (; index != locales.length; index++){
@@ -292,6 +307,7 @@ public class ConfigActivity extends Activity {
 	    	 stereo = props.getProperty("stereo", "yes");
 	    	 saveover = props.getProperty("saveover", "ask");
 	    	 startblank = props.getProperty("startblank", "no");
+	    	 newcolorsfirst = props.getProperty("newcolorsfirst", "yes");
 	    	 savedir = props.getProperty("savedir", external.getAbsolutePath());
 	    	 datadir = props.getProperty("datadir", external.getAbsolutePath());
 	    	 locale = props.getProperty("locale", Locale.getDefault().toString());
@@ -311,6 +327,7 @@ public class ConfigActivity extends Activity {
         props.put("stereo", stereo);
         props.put("saveover", saveover);
         props.put("startblank", startblank);
+        props.put("newcolorsfirst", newcolorsfirst);
         props.put("savedir", savedir);
         props.put("datadir", datadir);
         props.put("locale", locale);

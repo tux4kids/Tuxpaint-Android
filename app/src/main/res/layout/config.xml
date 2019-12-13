@@ -158,7 +158,28 @@
             android:textOff="@string/startblanktoggle_false"
             android:textOn="@string/startblanktoggle_true" />
     </LinearLayout>
-    
+
+        <LinearLayout
+        android:id="@+id/layoutNewcolorsfirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+        <TextView
+            android:id="@+id/viewNewcolorsfirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Enable_newcolorsfirst" />
+
+        <ToggleButton
+            android:id="@+id/toggleNewcolorsfirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="@string/newcolorsfirsttoggle_false"
+            android:textOn="@string/newcolorsfirsttoggle_true" />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/layoutSaveover"
         android:layout_width="wrap_content"
