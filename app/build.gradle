@@ -8,6 +8,10 @@ else {
 }
 
 android {
+
+    aaptOptions {
+        ignoreAssetsPattern "nonexisting.file"
+    }
     compileSdkVersion 26
     defaultConfig {
         if (buildAsApplication) {
