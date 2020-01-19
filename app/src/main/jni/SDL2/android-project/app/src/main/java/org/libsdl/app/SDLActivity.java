@@ -120,12 +120,11 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     }
 
     /**
-     * This method returns the name of the application entry point
-     * It can be overridden by derived classes.
-     */
-    protected String getMainFunction() {
-        return "SDL_main";
-    }
+	 * This method returns the name of the application entry point It can be overridden by derived classes.
+	 */
+	protected static String getMainFunction() {
+		return "SDL_main";
+	}
 
     /**
      * This method is called by SDL before loading the native shared libraries.
