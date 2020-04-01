@@ -43,6 +43,7 @@ then
 	cp -r fonts/locale tmpzip/data/fonts/locale && \
 	cp -r im tmpzip/data/im && \
 	cp -r osk tmpzip/data/osk && \
+	rm tmpzip/data/osk/.indent.pro && \
 	mkdir tmpzip/data/images/magic && \
 	cp magic/icons/* tmpzip/data/images/magic && \
 	mkdir tmpzip/data/sounds/magic && \
