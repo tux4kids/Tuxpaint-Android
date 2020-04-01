@@ -1,0 +1,52 @@
+2019.Sep.25 (0.9.24)
+  * New tools
+    ---------
+    * Fill
+      Not actually a new tool, but promoted from a "Magic" tool
+      to a full-fledge tool in the "Tools" bar.  However, also
+      avoids filling "Undo" buffer with snapshots of the drawing,
+      if the fill does nothing (e.g., if you click the same spot
+      a second time).
+
+  * Other Improvements
+    ------------------
+    * Added ability to move color palette options to the end of
+      the New dialog, for situations where users are meant to start
+      drawings with specific Starters or Templates.
+      Use "--newcolorslast" option.
+      (Suggested by Bernard Verhaeghe)
+
+    * Recognize signals (SIGUSR1 and SIGUSR2) on POSIX systems,
+      which causes Tux Paint to quit, first saving the current drawing
+      (if unsaved) (like "--autosave"), either saving a new image
+      (like "--saveovernew") (via SIGUSR1), or overwritting the current
+      drawing (like "--saveover") (via SIGUSR2).
+      (Thanks to Flavio Airundo for the idea; closes
+      https://sourceforge.net/p/tuxpaint/feature-requests/188/)
+
+    * Updated most parts of the code that were throwing warnings in GCC.
+
+    * Build process generates thumbnails of included Starters and Templates.
+      When installed, this greatly increases the speed of the "New" dialog.
+
+    * Updated some Starter source images so they work better with
+      flood fill (Bald Eagle, World map, Gecko).
+
+    * Ability to disable stereo panning effect (e.g., paint brush, UI
+      elements sound effect feedback, etc.), useful for users with
+      hearing impairment in one ear, or situations where one speaker or
+      headphone is being used.  Use "--nostereo" command-line option
+      or "nostereo=yes" config. file option.
+
+    * Various bugfixes.
+
+  * Android port
+    ------------
+    * Updated SDL and SDL_Image libraries.
+
+    * SVG Starters now open throught nanosvg included in SDL_Image.
+
+
+  * See the Tux Paint changelog at
+    * https://sourceforge.net/p/tuxpaint/tuxpaint/ci/master/tree/docs/CHANGES.txt
+    
