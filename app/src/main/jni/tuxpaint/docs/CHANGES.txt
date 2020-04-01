@@ -2,13 +2,13 @@ CHANGES.txt for Tux Paint
 
 Tux Paint - A simple drawing program for children.
 
-Copyright (c) 2002-2019
+Copyright (c) 2002-2020
 Various contributors (see below, and AUTHORS.txt)
 http://www.tuxpaint.org/
 
 $Id$
 
-2019.Sep.25 (0.9.24)
+2020.Mar.30 (0.9.24)
   * New tools
     ---------
     * Fill
@@ -23,6 +23,11 @@ $Id$
     * Updates to build on Haiku.
       Luc 'Begasus' Schrijvers <begasus@gmail.com>
 
+    * Replaced KDE (older, KDE4, in fact) specific icon and
+      launcher (.desktop file) installation & uninstallaton
+      invocations in Makefile with those that use Freedesktop.org
+      `xdg-...` tools.
+
   * Other Improvements
     ------------------
     * Added ability to move color palette options to the end of
@@ -30,6 +35,9 @@ $Id$
       drawings with specific Starters or Templates.
       Use "--newcolorslast" option.
       (Suggested by Bernard Verhaeghe)
+
+    * Show progress bar while loading (more) stamps, to avoid
+      looking hung on slower systems or with complicated stamp images.
 
     * Recognize signals (SIGUSR1 and SIGUSR2) on POSIX systems,
       which causes Tux Paint to quit, first saving the current drawing
@@ -63,6 +71,18 @@ $Id$
     * Documentation on POSIX signals recognized by Tux Paint (e.g.,
       the new "SIGUSR1" & "SIGUSR2") added to a new doc file,
       "SIGNALS.txt".
+
+  * Translation Updates:
+    --------------------
+    * Norwegian Nynorsk translation
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Swahili
+      Benson Muite <benson_muite@emailplus.org>
+
+    * Valencian
+      Pilar Embid Giner <embid_mar@gva.es>
+      via Pere Pujal i Carabantes <perepujal@gmail.com>
 
   * Bug Fixes
     ---------

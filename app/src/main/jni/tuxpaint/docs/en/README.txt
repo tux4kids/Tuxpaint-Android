@@ -3,10 +3,10 @@
 
   A simple drawing program for children
 
-          Copyright 2002-2019 by various contributors; see AUTHORS.txt
+          Copyright 2002-2020 by various contributors; see AUTHORS.txt
                             http://www.tuxpaint.org/
 
-                       June 14, 2002 - September 21, 2019
+                         June 14, 2002 - March 28, 2020
 
      ----------------------------------------------------------------------
 

@@ -3,7 +3,7 @@
 
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2019
+  Copyright (c) 2002-2020
   by various contributors; see AUTHORS.txt
   http://www.tuxpaint.org/
 
@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - October 5, 2019
+  June 14, 2002 - March 15, 2020
 */
 
 
@@ -9154,7 +9154,7 @@ static void draw_stamps(void)
   for (stamp = stamp_scroll[stamp_group]; stamp < stamp_scroll[stamp_group] + max; stamp++)
     {
       i = stamp - stamp_scroll[stamp_group];
-
+      show_progress_bar(screen);
 
       dest.x = ((i % 2) * 48) + (WINDOW_WIDTH - 96);
       dest.y = ((i / 2) * 48) + 40 + off_y;
@@ -9374,6 +9374,8 @@ static void draw_stamps(void)
         }
 #endif
     }
+
+    redraw_tux_text();
 }
 
 
@@ -24434,7 +24436,7 @@ static void setup(void)
   printf("%s\n", tmp_str);
 #endif
 
-  snprintf(tmp_str, sizeof(tmp_str), "© 2002–2019 Bill Kendrick et al.");
+  snprintf(tmp_str, sizeof(tmp_str), "© 2002–2020 Bill Kendrick et al.");
   tmp_surf = render_text(medium_font, tmp_str, black);
   dest.x = 10;
   dest.y = WINDOW_HEIGHT - img_progress->h - (tmp_surf->h * 2);
