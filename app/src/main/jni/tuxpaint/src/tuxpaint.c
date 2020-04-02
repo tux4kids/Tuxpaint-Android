@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - March 15, 2020
+  June 14, 2002 - April 1, 2020
 */
 
 
@@ -7533,6 +7533,8 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
 
   /* nope, see if there's a pre-rendered one we can use */
 
+  show_progress_bar(screen);
+
   need_mirror = sd->mirrored;
   need_flip = sd->flipped;
   bigimg = NULL;
@@ -9154,7 +9156,6 @@ static void draw_stamps(void)
   for (stamp = stamp_scroll[stamp_group]; stamp < stamp_scroll[stamp_group] + max; stamp++)
     {
       i = stamp - stamp_scroll[stamp_group];
-      show_progress_bar(screen);
 
       dest.x = ((i % 2) * 48) + (WINDOW_WIDTH - 96);
       dest.y = ((i / 2) * 48) + 40 + off_y;
