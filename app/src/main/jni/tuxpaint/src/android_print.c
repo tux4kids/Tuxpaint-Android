@@ -65,6 +65,14 @@ const char *SurfacePrint(SDL_Surface *surface)
 	jmethodID mInitMethod = (*mEnv)->GetMethodID(mEnv, mPrintClass, "<init>", "(Landroid/content/Context;)V");
 	jobject mPrint = (*mEnv)->NewObject(mEnv, mPrintClass, mInitMethod, mContext);
 	jmethodID mPrintMethod = (*mEnv)->GetMethodID(mEnv, mPrintClass, "printBitmap", "(Ljava/lang/String;Landroid/graphics/Bitmap;)V");
+
+	/* Thanks to n.collins for the explaination on the int signature
+	   on https://stackoverflow.com/questions/13468041/android-how-to-call-java-method-from-jni-with-int-and-int-parameters  --Pere */
+	jmethodID msetScaleMode = (*mEnv)->GetMethodID(mEnv, mPrintClass, "setScaleMode", "(I)V");
+	jfieldID mScaleModeField = (*mEnv)->GetStaticFieldID(mEnv,  mPrintClass, "SCALE_MODE_FIT", "I");
+	jint mScaleModeInt = (*mEnv)->GetStaticIntField(mEnv, mPrintClass, mScaleModeField);
+	(*mEnv)->CallVoidMethod(mEnv, mPrint, msetScaleMode, mScaleModeInt);
+
 	jstring mString = (*mEnv)->NewStringUTF(mEnv, "TuxPaint");
 	(*mEnv)->CallVoidMethod(mEnv, mPrint, mPrintMethod, mString, mBitMap);
 
