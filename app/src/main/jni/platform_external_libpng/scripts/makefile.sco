@@ -1,5 +1,5 @@
 # makefile for SCO OSr5  ELF and Unixware 7 with Native cc
-# Contributed by Mike Hopkirk (hops@sco.com) modified from Makefile.lnx
+# Contributed by Mike Hopkirk (hops at sco.com) modified from Makefile.lnx
 #   force ELF build dynamic linking, SONAME setting in lib and RPATH in app
 # Copyright (C) 2002, 2006, 2010-2014 Glenn Randers-Pehrson
 # Copyright (C) 1998 Greg Roelofs
@@ -25,6 +25,7 @@ AR_RC=ar rc
 MKDIR_P=mkdir
 LN_SF=ln -f -s
 RANLIB=echo
+CP=cp
 RM_F=/bin/rm -f
 
 # where make install puts libpng.a, $(OLDSO)*, and png.h
@@ -61,6 +62,10 @@ DI=$(DESTDIR)$(INCPATH)
 DL=$(DESTDIR)$(LIBPATH)
 DM=$(DESTDIR)$(MANPATH)
 
+# Pre-built configuration
+# See scripts/pnglibconf.mak for more options
+PNGLIBCONF_H_PREBUILT = scripts/pnglibconf.h.prebuilt
+
 OBJS = png.o pngset.o pngget.o pngrutil.o pngtrans.o pngwutil.o \
 	pngread.o pngrio.o pngwio.o pngwrite.o pngrtran.o \
 	pngwtran.o pngmem.o pngerror.o pngpread.o
@@ -77,9 +82,8 @@ OBJSDLL = $(OBJS:.o=.pic.o)
 
 all: libpng.a $(LIBSO) pngtest libpng.pc libpng-config
 
-# see scripts/pnglibconf.mak for more options
-pnglibconf.h: scripts/pnglibconf.h.prebuilt
-	cp scripts/pnglibconf.h.prebuilt $@
+pnglibconf.h: $(PNGLIBCONF_H_PREBUILT)
+	$(CP) $(PNGLIBCONF_H_PREBUILT) $@
 
 libpng.a: $(OBJS)
 	$(AR_RC) $@ $(OBJS)
@@ -197,7 +201,7 @@ clean:
 	$(LIBSO) $(LIBSOMAJ)* pngtest-static pngtesti \
 	pnglibconf.h libpng.pc
 
-DOCS = ANNOUNCE CHANGES INSTALL KNOWNBUG LICENSE README TODO Y2KINFO
+DOCS = ANNOUNCE CHANGES INSTALL KNOWNBUG LICENSE README TODO
 writelock:
 	chmod a-w *.[ch35] $(DOCS) scripts/*
 

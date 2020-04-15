@@ -4,7 +4,7 @@
 
   ---------------------------------------------------------------------------
 
-      Copyright (c) 1998-2007 Greg Roelofs.  All rights reserved.
+      Copyright (c) 1998-2007, 2017 Greg Roelofs.  All rights reserved.
 
       This software is provided "as is," without warranty of any kind,
       express or implied.  In no event shall the author or contributors
@@ -90,7 +90,7 @@ int writepng_init(mainprog_info *mainprog_ptr)
 
     /* could also replace libpng warning-handler (final NULL), but no need: */
 
-    png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, mainprog_ptr,
+    png_ptr = png_create_write_struct(png_get_libpng_ver(NULL), mainprog_ptr,
       writepng_error_handler, NULL);
     if (!png_ptr)
         return 4;   /* out of memory */

@@ -10,7 +10,7 @@
 # Library name:
 LIBNAME = libpng16
 PNGMAJ = 16
-RELEASE = 10
+RELEASE = 37
 
 # Shared library names:
 LIBSO=$(LIBNAME).so
@@ -24,6 +24,7 @@ CC=gcc
 MKDIR_P=mkdir -p
 LN_SF=ln -sf
 RANLIB=ranlib
+CP=cp
 RM_F=/bin/rm -f
 
 # where "make install" puts libpng16.a, libpng16.so*,
@@ -49,8 +50,7 @@ WARNMORE=-Wwrite-strings -Wpointer-arith -Wshadow \
 # for pgcc version 2.95.1, -O3 is buggy; don't use it.
 
 CPPFLAGS=-I$(ZLIBINC) # -DPNG_DEBUG=5
-CFLAGS= -W -Wall -O3 -funroll-loops \
-	$(ALIGN) # $(WARNMORE) -g -DPNG_DEBUG=5
+CFLAGS=-W -Wall -O3 -funroll-loops $(ALIGN) # $(WARNMORE) -g
 
 LDFLAGS=-L. -Wl,-rpath,. -L$(ZLIBLIB) -Wl,-rpath,$(ZLIBLIB) -lpng16 -lz -lm
 LDFLAGS_A=-L$(ZLIBLIB) -Wl,-rpath,$(ZLIBLIB) libpng.a -lz -lm
@@ -75,6 +75,10 @@ DI=$(DESTDIR)$(INCPATH)
 DL=$(DESTDIR)$(LIBPATH)
 DM=$(DESTDIR)$(MANPATH)
 
+# Pre-built configuration
+# See scripts/pnglibconf.mak for more options
+PNGLIBCONF_H_PREBUILT = scripts/pnglibconf.h.prebuilt
+
 OBJS =  png.o pngset.o pngget.o pngrutil.o pngtrans.o pngwutil.o \
 	pngread.o pngrio.o pngwio.o pngwrite.o pngrtran.o \
 	pngwtran.o pngmem.o pngerror.o pngpread.o
@@ -87,13 +91,12 @@ OBJSDLL = $(OBJS:.o=.pic.o)
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
 .c.pic.o:
-	$(CC) -c $(CFLAGS) -fPIC -o $@ $*.c
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -fPIC -o $@ $*.c
 
 all: libpng.a $(LIBSO) pngtest pngtest-static libpng.pc libpng-config
 
-# see scripts/pnglibconf.mak for more options
-pnglibconf.h: scripts/pnglibconf.h.prebuilt
-	cp scripts/pnglibconf.h.prebuilt $@
+pnglibconf.h: $(PNGLIBCONF_H_PREBUILT)
+	$(CP) $(PNGLIBCONF_H_PREBUILT) $@
 
 libpng.a: $(OBJS)
 	$(AR_RC) $@ $(OBJS)
@@ -218,7 +221,7 @@ clean:
 	$(LIBSO) $(LIBSOMAJ)* pngtest-static pngtesti \
 	libpng.pc pnglibconf.h
 
-DOCS = ANNOUNCE CHANGES INSTALL KNOWNBUG LICENSE README TODO Y2KINFO
+DOCS = ANNOUNCE CHANGES INSTALL KNOWNBUG LICENSE README TODO
 writelock:
 	chmod a-w *.[ch35] $(DOCS) scripts/*
 

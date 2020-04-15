@@ -1,8 +1,8 @@
 /* contrib/arm-neon/linux.c
  *
- * Copyright (c) 2014 Glenn Randers-Pehrson
- * Written by John Bowler, 2014.
- * Last changed in libpng 1.6.10 [March 6, 2014]
+ * Last changed in libpng 1.6.31 [July 27, 2017]
+ * Copyright (c) 2014, 2017 Glenn Randers-Pehrson
+ * Written by John Bowler, 2014, 2017.
  *
  * This code is released under the libpng license.
  * For conditions of distribution and use, see the disclaimer
@@ -16,8 +16,8 @@
  * png_have_neon implemented for Linux by reading the widely available
  * pseudo-file /proc/cpuinfo.
  *
- * This code is strict ANSI-C and is probably moderately portable, it does
- * however use <stdio.h> and assumes that /proc/cpuinfo is never localized.
+ * This code is strict ANSI-C and is probably moderately portable; it does
+ * however use <stdio.h> and it assumes that /proc/cpuinfo is never localized.
  */
 #include <stdio.h>
 
@@ -62,7 +62,7 @@ png_have_neon(png_structp png_ptr)
 
                counter=0;
                state = Feature;
-               /* FALL THROUGH */
+               /* FALLTHROUGH */
 
             case Feature:
                /* Match 'FEATURE', ASCII case insensitive. */
@@ -72,10 +72,10 @@ png_have_neon(png_structp png_ptr)
                      state = Colon;
                   break;
                }
-               
+
                /* did not match 'feature' */
                state = SkipLine;
-               /* FALL THROUGH */
+               /* FALLTHROUGH */
 
             case SkipLine:
             skipLine:
@@ -110,7 +110,7 @@ png_have_neon(png_structp png_ptr)
 
                state = Neon;
                counter = 0;
-               /* FALL THROUGH */
+               /* FALLTHROUGH */
 
             case Neon:
                /* Look for 'neon' tag */
@@ -122,7 +122,7 @@ png_have_neon(png_structp png_ptr)
                }
 
                state = SkipTag;
-               /* FALL THROUGH */
+               /* FALLTHROUGH */
 
             case SkipTag:
                /* Skip non-space characters */
@@ -152,8 +152,10 @@ png_have_neon(png_structp png_ptr)
       }
    }
 
+#ifdef PNG_WARNINGS_SUPPORTED
    else
       png_warning(png_ptr, "/proc/cpuinfo open failed");
+#endif
 
    return 0;
 }
