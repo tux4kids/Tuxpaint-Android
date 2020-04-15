@@ -27,6 +27,7 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 import android.content.res.AssetManager;
+import android.content.pm.PackageManager;
 
 public class ConfigActivity extends Activity {
 	private static final String TAG = ConfigActivity.class.getSimpleName();
@@ -66,7 +67,12 @@ public class ConfigActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "onCreate()");
-		super.onCreate(savedInstanceState);
+	super.onCreate(savedInstanceState);
+
+        if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+	    this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+	}
+
 		setContentView(R.layout.config);
 		load ();
 		

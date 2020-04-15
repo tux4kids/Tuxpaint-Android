@@ -19,16 +19,34 @@ import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.content.res.AssetManager;
 
+
+
+import android.content.pm.PackageManager;
+import android.Manifest;
+
 public class tuxpaintActivity extends SDLActivity {
     private static final String TAG = "Tux Paint";
-    private static View mConfigButton = null;
-
     private static AssetManager mgr;
     private static native boolean managertojni(AssetManager mgr);
 
-    // Load the .so
-    static {
-        System.loadLibrary("stlport_shared");
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        Log.v(TAG, "onCreate()");
+	super.onCreate(savedInstanceState);
+	mgr = getResources().getAssets();
+	managertojni(mgr);
+
+        if (this.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+	    Intent intent = new Intent(this, ConfigActivity.class);
+	    this.startActivity(intent);
+	}
+    }
+
+
+
+ static {
+        System.loadLibrary("c++_shared");
         System.loadLibrary("tuxpaint_png");
         System.loadLibrary("tuxpaint_fribidi");
         System.loadLibrary("SDL2");
@@ -52,84 +70,9 @@ public class tuxpaintActivity extends SDLActivity {
         System.loadLibrary("SDL2_ttf");
         System.loadLibrary("SDL2_Pango");
         System.loadLibrary("tuxpaint");
-    }
- 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-	//	unzipAssets ();
-    	super.onCreate(savedInstanceState);
-	mgr = getResources().getAssets();
-	managertojni(mgr);
-    }
+ }
 
-    /*
-    private void unzipAssets(){
-    	File internal = getFilesDir();
-    	
-    	// test whether tuxpaint.zip in assets folder is already unziped.
-    	File brushes =  new File (internal, "data/brushes");
-    	if (brushes.exists() && brushes.isDirectory())
-    		return;
 
-    	// unzip to /data/data/org.tuxpaint/files
-	Log.d(TAG, "unzip tuxpaint.zip to /data/data/org.tuxpaint/files");
-	     try {
-	    	 InputStream in = getAssets().open("tuxpaint.zip");
-	    	 ZipInputStream zin;
-	         String name;
-	         zin = new ZipInputStream(new BufferedInputStream(in));          
-	         ZipEntry ze;
-	         byte[] buffer = new byte[1024];
-	         int count;
-	         while ((ze = zin.getNextEntry()) != null) 
-	         {
-	        	 name = ze.getName();
 
-	             if (ze.isDirectory()) {
-	                File dir = new File(internal, name);
-	                dir.mkdirs();
-	                continue;
-	             }
 
-	             File file = new File (internal, name);
-	             file.createNewFile();
-	             FileOutputStream fout = new FileOutputStream(file);
-
-	             while ((count = zin.read(buffer)) != -1) {
-	                 fout.write(buffer, 0, count);             
-	             }
-	             fout.flush();
-	             fout.close();               
-	             zin.closeEntry();
-	         }
-
-	         zin.close();
-	     } 
-	     catch(IOException e) {
-	         e.printStackTrace();
-	     }
-	     
-    }
-    */
-    
-    // private void addConfigButton () {
-    // 	if (mConfigButton != null)
-    // 		return;
-
-    // 	DisplayMetrics dm = new DisplayMetrics();
-    // 	getWindowManager().getDefaultDisplay().getMetrics(dm);
-    // 	int width = dm.widthPixels;
-    // 	int heigh = dm.heightPixels;
-    // 	AbsoluteLayout.LayoutParams params = new AbsoluteLayout.LayoutParams
-    //     		(60, 60, width-60, heigh-60);
-    //     mConfigButton = new Button (getContext ());
-    //     mConfigButton.setBackgroundResource(R.drawable.ic_settings_black_36dp);
-    //     mConfigButton.setOnClickListener(new View.OnClickListener() {
-    //   	  public void onClick(View v) {
-    //       		startActivity(new Intent (tuxpaintActivity.this, ConfigActivity.class));
-    //   	  }
-    //     });
-    //     SDLActivity.mLayout.addView(mConfigButton, params);
-    // }
-    
 }
