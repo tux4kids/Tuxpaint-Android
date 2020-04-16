@@ -17,8 +17,8 @@ android {
         if (buildAsApplication) {
             applicationId "org.tuxpaint"
         }
-        minSdkVersion 18
-        targetSdkVersion 31
+        minSdkVersion 21
+        targetSdkVersion 29
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
