@@ -221,6 +221,27 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layoutSysfonts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/viewSysfonts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Allow_sysfonts" />
+
+        <ToggleButton
+            android:id="@+id/toggleSysfonts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="@string/sysfonts_enabled"
+	    android:textOff="@string/sysfonts_disabled" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/layoutPrint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -44,6 +44,7 @@ public class ConfigActivity extends Activity {
 	String saveover = null;
 	String startblank = null;
 	String newcolorsfirst = null;
+	String sysfonts = null;
 	String print = null;
         String printdelay = null;
         String disablescreensaver = null;
@@ -58,6 +59,7 @@ public class ConfigActivity extends Activity {
 	ToggleButton newcolorsfirstToggle = null;
 	Spinner localeSpinner = null;
 	RadioGroup saveoverGroup = null;
+	ToggleButton sysfontsToggle = null;
 	ToggleButton printToggle = null;
 	Spinner printdelaySpinner = null;
         ToggleButton disablescreensaverToggle = null;
@@ -210,6 +212,20 @@ public class ConfigActivity extends Activity {
 				}
 			});
 
+		sysfontsToggle = (ToggleButton)this.findViewById(R.id.toggleSysfonts);
+		if (sysfonts.compareTo("yes") == 0)
+			sysfontsToggle.setChecked(true);
+		else
+			sysfontsToggle.setChecked(false);
+		sysfontsToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked)
+					sysfonts = "yes";
+				else
+					sysfonts = "no";
+			}
+		});
+
 		printToggle = (ToggleButton)this.findViewById(R.id.togglePrint);
 		if (print.compareTo("yes") == 0)
 			printToggle.setChecked(true);
@@ -317,12 +333,13 @@ public class ConfigActivity extends Activity {
 	    	 savedir = props.getProperty("savedir", external.getAbsolutePath());
 	    	 datadir = props.getProperty("datadir", external.getAbsolutePath());
 	    	 locale = props.getProperty("locale", Locale.getDefault().toString());
+	    	 sysfonts = props.getProperty("sysfonts", "no");
 	    	 print = props.getProperty("print", "no");
 	    	 printdelay = props.getProperty("printdelay", "0");
 		 disablescreensaver = props.getProperty("disablescreensaver", "no");
 		 orient = props.getProperty("orient", "landscape");
 	    	 
-	         Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);;
+	         Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);;
 	}
 	
 	private void save () {
@@ -337,6 +354,7 @@ public class ConfigActivity extends Activity {
         props.put("savedir", savedir);
         props.put("datadir", datadir);
         props.put("locale", locale);
+	props.put("sysfonts", sysfonts);
 	props.put("print", print);
         props.put("printdelay", printdelay);
 	props.put("disablescreensaver", disablescreensaver);
