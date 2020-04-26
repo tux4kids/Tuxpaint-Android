@@ -24450,7 +24450,7 @@ static void setup(void)
 #ifdef FORKED_FONTS
   reliable_write(font_socket_fd, &no_system_fonts, sizeof no_system_fonts);
 #else
-  font_thread = SDL_CreateThread(load_user_fonts_stub, NULL);
+  font_thread = SDL_CreateThread(load_user_fonts_stub, "font_thread",  NULL);
 #endif
 
   /* continuing on with the rest of the cursors... */

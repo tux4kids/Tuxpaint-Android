@@ -34,7 +34,9 @@
 #ifdef __APPLE__
 #undef FORKED_FONTS
 #endif
-
+#ifdef __ANDROID__
+#undef FORKED_FONTS
+#endif
 
 #include "SDL.h"
 #include "SDL_ttf.h"
