@@ -3295,13 +3295,6 @@ static void mainloop(void)
                                   SDL_BlitSurface(kbd->surface, &kbd->rect, screen, &kbd_rect);
                                   update_screen_rect(&kbd_rect);
                                 }
-
-                              if (onscreen_keyboard && !kbd)
-                                {
-                                  r_tir.y = (float)event.button.y / render_scale;
-                                  SDL_SetTextInputRect(&r_tir);
-                                  SDL_StartTextInput();
-                                }
                               if (!font_thread_done)
                                 {
                                   draw_colors(COLORSEL_DISABLE);
@@ -3328,6 +3321,12 @@ static void mainloop(void)
 #endif
                                   set_label_fonts();
                                   do_setcursor(cursor_arrow);
+                                }
+                              if (onscreen_keyboard && !kbd)
+                                {
+                                  r_tir.y = (float)event.button.y / render_scale;
+                                  SDL_SetTextInputRect(&r_tir);
+                                  SDL_StartTextInput();
                                 }
                               draw_tux_text(tool_tux[cur_tool], tool_tips[cur_tool], 1);
 
