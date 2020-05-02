@@ -69,8 +69,10 @@ public class ConfigActivity extends Activity {
         Log.v(TAG, "onCreate()");
 	super.onCreate(savedInstanceState);
 
-        if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-	    this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+	if (android.os.Build.VERSION.SDK_INT > 22) {
+	    if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+		this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+	    }
 	}
 
 		setContentView(R.layout.config);
