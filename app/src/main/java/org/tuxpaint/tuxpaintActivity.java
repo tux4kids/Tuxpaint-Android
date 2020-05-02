@@ -1,26 +1,13 @@
 package org.tuxpaint;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 import org.libsdl.app.SDLActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
-import android.widget.AbsoluteLayout;
-import android.widget.Button;
 import android.content.res.AssetManager;
-
-
-
 import android.content.pm.PackageManager;
 import android.Manifest;
 
@@ -36,16 +23,15 @@ public class tuxpaintActivity extends SDLActivity {
 	super.onCreate(savedInstanceState);
 	mgr = getResources().getAssets();
 	managertojni(mgr);
-
-        if (this.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-	    Intent intent = new Intent(this, ConfigActivity.class);
-	    this.startActivity(intent);
+	if (android.os.Build.VERSION.SDK_INT > 22) {
+	    if (this.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+		Intent intent = new Intent(this, reqpermsActivity.class);
+		this.startActivity(intent);
+	    }
 	}
     }
 
-
-
- static {
+    static {
         System.loadLibrary("c++_shared");
         System.loadLibrary("tuxpaint_png");
         System.loadLibrary("tuxpaint_fribidi");
@@ -70,9 +56,5 @@ public class tuxpaintActivity extends SDLActivity {
         System.loadLibrary("SDL2_ttf");
         System.loadLibrary("SDL2_Pango");
         System.loadLibrary("tuxpaint");
- }
-
-
-
-
+    }
 }
