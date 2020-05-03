@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.util.Locale;
 import java.util.Properties;
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,6 +25,7 @@ import android.widget.RadioGroup;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
+import android.widget.Button;
 import android.content.res.AssetManager;
 import android.content.pm.PackageManager;
 
@@ -32,6 +34,7 @@ public class ConfigActivity extends Activity {
    	String[] locales = null;
    	String[] printdelays = null;
 	private Properties props = null;
+	private Properties propsback = null;
 	// current the configurable properties
 	String autosave = null;
 	String sound = null;
@@ -47,7 +50,8 @@ public class ConfigActivity extends Activity {
         String printdelay = null;
         String disablescreensaver = null;
         String orient = null;
-	
+        boolean cancel = false;
+
 	EditText savedirView = null;
 	EditText datadirView = null;
 	ToggleButton soundToggle = null;
@@ -62,6 +66,8 @@ public class ConfigActivity extends Activity {
 	Spinner printdelaySpinner = null;
         ToggleButton disablescreensaverToggle = null;
         ToggleButton orientToggle = null;
+    Button okButton = null;
+    Button cancelButton = null;
         AssetManager mgr;
     
 	@Override
@@ -288,6 +294,24 @@ public class ConfigActivity extends Activity {
 			}
 		});
 
+		okButton = (Button)this.findViewById(R.id.buttonOk);
+
+		okButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View buttonView) {
+			    finish();
+			}
+		    });
+
+		cancelButton = (Button)this.findViewById(R.id.buttonCancel);
+
+		cancelButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View buttonView) {
+			    cancel = true;
+			    finish();
+			}
+		    });
+
+
 	}
 	
     @Override
@@ -298,51 +322,58 @@ public class ConfigActivity extends Activity {
     }
 
     /* Load first the defaults from the .cfg file inside assets, then try to overwrite them with the user defined config */
-	private void load (){
-	    try {
-		mgr = getResources().getAssets();
-		InputStream inassetscfg = mgr.open ("etc/tuxpaint.cfg");
-		props = new Properties();
-		props.load(inassetscfg);
-		inassetscfg.close();
-	    } catch (Exception e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	    }
+    private void load (){
+	Log.v(TAG, "load()");
+	props = new Properties();
+	propsback = new Properties();
 
-	    	File external = getExternalFilesDir(null);
-	    	File cfg =  new File (external, "tuxpaint.cfg");
-	    	try {
-	    	InputStream in = new FileInputStream(cfg);
-			props = new Properties();
-	    	 props.load(in);
-	    	 in.close();
-		} catch (FileNotFoundException el){ /* do nothing, defaults have already been loaded */
-		} catch (Exception e1) {
-	    	 // TODO Auto-generated catch block
-	    	 e1.printStackTrace();
-	    	 }
-
-		/* Fixme: Is this redundant after having added the load of the cfg file in assets? */
-	    	 autosave = props.getProperty("autosave", "no");
-	    	 sound = props.getProperty("sound", "no");
-	    	 stereo = props.getProperty("stereo", "yes");
-	    	 saveover = props.getProperty("saveover", "ask");
-	    	 startblank = props.getProperty("startblank", "no");
-	    	 newcolorsfirst = props.getProperty("newcolorsfirst", "yes");
-	    	 savedir = props.getProperty("savedir", external.getAbsolutePath());
-	    	 datadir = props.getProperty("datadir", external.getAbsolutePath());
-	    	 locale = props.getProperty("locale", Locale.getDefault().toString());
-	    	 sysfonts = props.getProperty("sysfonts", "no");
-	    	 print = props.getProperty("print", "no");
-	    	 printdelay = props.getProperty("printdelay", "0");
-		 disablescreensaver = props.getProperty("disablescreensaver", "no");
-		 orient = props.getProperty("orient", "landscape");
-	    	 
-	         Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);;
+	try {
+	    mgr = getResources().getAssets();
+	    InputStream inassetscfg = mgr.open ("etc/tuxpaint.cfg");
+	    props.load(inassetscfg);
+	    inassetscfg.close();
+	    InputStream inassetscfgback = mgr.open ("etc/tuxpaint.cfg");
+	    propsback.load(inassetscfgback);
+	    inassetscfgback.close();
+	} catch (Exception e1) {
+	    // TODO Auto-generated catch block
+	    e1.printStackTrace();
 	}
-	
-	private void save () {
+
+	File external = getExternalFilesDir(null);
+	File cfg =  new File (external, "tuxpaint.cfg");
+	try {
+	    InputStream in = new FileInputStream(cfg);
+	    props.load(in);
+	    in.close();
+	    InputStream inback = new FileInputStream(cfg);
+	    propsback.load(inback);
+	    inback.close();
+	} catch (FileNotFoundException el){ /* do nothing, defaults have already been loaded */
+	} catch (Exception e1) {
+	    // TODO Auto-generated catch block
+	    e1.printStackTrace();
+	}
+
+	autosave = props.getProperty("autosave", "no");
+	sound = props.getProperty("sound", "no");
+	stereo = props.getProperty("stereo", "yes");
+	saveover = props.getProperty("saveover", "ask");
+	startblank = props.getProperty("startblank", "no");
+	newcolorsfirst = props.getProperty("newcolorsfirst", "yes");
+	savedir = props.getProperty("savedir", external.getAbsolutePath());
+	datadir = props.getProperty("datadir", external.getAbsolutePath());
+	locale = props.getProperty("locale", Locale.getDefault().toString());
+	sysfonts = props.getProperty("sysfonts", "no");
+	print = props.getProperty("print", "no");
+	printdelay = props.getProperty("printdelay", "0");
+	disablescreensaver = props.getProperty("disablescreensaver", "no");
+	orient = props.getProperty("orient", "landscape");
+	    	 
+	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);
+    }
+
+    private void save () {
     	File external = getExternalFilesDir(null);
      	File cfg =  new File (external, "tuxpaint.cfg");
         props.put("autosave", autosave);
@@ -360,15 +391,19 @@ public class ConfigActivity extends Activity {
 	props.put("disablescreensaver", disablescreensaver);
 	props.put("orient", orient);
 
-		try {
-	 	  	OutputStream	out = new FileOutputStream(cfg);
-	        props.store(out, "");
-	        out.close();
-		} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-		}
-         
+	try {
+	    OutputStream	out = new FileOutputStream(cfg);
+	    if (cancel == true){
+		propsback.store(out,"");
+	    }
+	    else {
+		props.store(out, "");
+	    }
+
+	    out.close();
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
-    
+    }
 }
