@@ -8,7 +8,7 @@ Tux Paint has been ported from SDL1 to SDL2.
 Thus Tux Paint-Android will try to port current Tux Paint to Android platform.
 At the start this Tux Paint source code was based on [tuxpaint-sdl2](http://sourceforge.net/p/tuxpaint-sdl2/code/ci/sdl2.0/tree/) 
 maintained by Pere Pujal i Carabantes with head commit b48c069b2ff6a0cabf82ec086ff6ef563eaaf3d3, now it has been synced back and forth several times.
-As it is currently(2016/01/23) it has been synced also with the work made in the official(SDL1.2 based) work.
+As it is currently(May 2020) it has been synced also with the work made in the official(SDL1.2 based) work.
 https://sourceforge.net/u/perepujal/tuxpaint/ci/sdl2.0/tree/
 
 The main work made by Jianwei Zhang on GSoC 2015 includes:
@@ -52,6 +52,8 @@ Project
     the Java class handling something related with Tux Paint
   * src/org/tuxpaint/app/ConfigActivity.java
     the Java class handling configuration related with Tux Paint
+  * src/org/tuxpaint/app/reqpermsActivity.java
+    the Java class handling permissions related with Tux Paint
   * jni/
     directory holding native code
   * jni/Android.mk
@@ -127,12 +129,11 @@ From **[official Library Requirements](http://www.tuxpaint.org/requirements/)**,
 
 For making Tux Paint working on Android, currently these libraries have been downloaded and built :
 
-* [SDL2 2.0.5](http://www.libsdl.org/download-2.0.php)
-* [SDL2_image 2.0.1](http://www.libsdl.org/projects/SDL_image/)
+* [SDL2 2.0.12](http://www.libsdl.org/download-2.0.php)
+* [SDL2_image 2.0.5](http://www.libsdl.org/projects/SDL_image/)
 * [SDL2_ttf 2.0.12](http://www.libsdl.org/projects/SDL_ttf/)
 * [SDL2_mixer 2.0.0](http://www.libsdl.org/projects/SDL_mixer/)
-* [platform_external_libpng 1.6.10](https://github.com/android/platform_external_libpng)
-	unoffcial but forked from Github Android external library. The official website is http://libmng.com/pub/png/libpng.html.
+* [platform_external_libpng 1.6.37](http://libpng.org/pub/png/libpng.html)
 * [libintl-lite 0.5](http://sourceforge.net/projects/libintl-lite/)
 	Instead of [official gettext library](http://www.gnu.org/software/gettext/)(meeting issues on Android ), an alternative similar library called libintl-lite is used and extended for tuxpaint.
 * [FriBiDi 0.19.6](http://www.fribidi.org/)
@@ -142,9 +143,8 @@ For making Tux Paint working on Android, currently these libraries have been dow
 
 However, these libraries will depend on more libraries, thus another libraries have been downloaded and built :
 
-* [platform_external_freetype 2.6.0](https://github.com/android/platform_external_freetype)
-	unoffcial but forked from Github Android external library. The official website is http://www.freetype.org/
-* [fontconfig 2.8.0](http://www.freedesktop.org/wiki/Software/fontconfig/)
+* [platform_external_freetype 2.10.1](https://www.freetype.org/)
+* [fontconfig 2.13.92](http://www.freedesktop.org/wiki/Software/fontconfig/)
 * [cairo 1.14.0](http://cairographics.org/)
 * [pango 1.37.1](http://www.pango.org/)
 * [glib 2.53.3](https://developer.gnome.org/glib/)
@@ -152,7 +152,7 @@ However, these libraries will depend on more libraries, thus another libraries h
 * [harfbuzz 0.9.41](http://www.freedesktop.org/wiki/Software/HarfBuzz/)
 * [platform_external_libxml2 2.9.2](https://github.com/android/platform_external_libxml2)
 	unoffcial but forked from Github Android external library
-* [libffi 3.2.1](https://www.sourceware.org/libffi/)
+* [libffi 3.3](https://www.sourceware.org/libffi/)
 * [libiconv 1.14](http://www.gnu.org/software/libiconv/)
 * [gdk-pixbuf 2.31.4](https://developer.gnome.org/gdk-pixbuf/)
 * [libcroco 0.6.8](http://ftp.gnome.org/pub/GNOME/sources/libcroco/)
@@ -179,7 +179,7 @@ Build
 * Linux system
 * Android SDK
     android-support-v4.jar from the sdk/extras/... directory, copy it into the libs directory
-* Android NDK
+* Android NDK (compiling tested with the 17c and 21 releases of the ndk tools)
 * Tuxpaint-Android source code
 * Eclipse & ADT (optional)
 * Git (optional)
@@ -347,11 +347,12 @@ and (2) https://code.google.com/p/android/issues/detail?id=73725.
 If Tux Paint is compiled based NDK android-21, some old Android devices will crashed.
 
 Solution: Insead of android-21, set APP_PLATFORM in jni/Application.mk to android-19 (or other low version).
+2020 Update: In order to be able to compile newer versions of the libraries(SDL2,etc) APP_PLATFORM has been raised to android-21, then minSdkVersion also to 21, that means that Androids older than 5 can not install Tux Paint. If you want to compile Tux Paint for older Androids, the last commit that allows this is c88bcc0fa0fc3584b1d8de44a4efda97860acbd3 from 2020/04/4.
 
 Issue 9: Failed loading some magic plugin libraries due to too many libraries on old Android devices.
 
 Problem: In Android 2.3.6, magic plugin libraries are compilied successfullt. 
-However, when lauching Tux Paint, some warning words come to show that:
+However, when launching Tux Paint, some warning words come to show that:
 
 > Failed loading xxx.so: Cannot load library: alloc_info[279]:1231 too many libraries when loading xxx.so
 
