@@ -42,11 +42,25 @@
 
   * Android port
     ------------
-    * Updated SDL and SDL_Image libraries.
+    * Updated SDL, SDL_Image, fontconfig, freetype, glib... libraries.
+
+    * Raised minSdkVersion to 21 to be able to compile and run the new versions of the libraries.
 
     * SVG Starters now open throught nanosvg included in SDL_Image.
 
+    * Scanning of fonts now is not forked, seems to help with some devices.
+
+    * Asking for permissions at start time.
+
+    * Improvements in the config activity.
+
+    * Translations for the config activity.
+        New
+	    Galician by Miguel Bouzada
+	    Kiswahili by Benson Muite
+	    Norwegian Nynorsk by Karl Ove Hufthammer
+	Updated
+	    Catalan by Pere Pujal i Carabantes
 
   * See the Tux Paint changelog at
     * https://sourceforge.net/p/tuxpaint/tuxpaint/ci/master/tree/docs/CHANGES.txt
-    
