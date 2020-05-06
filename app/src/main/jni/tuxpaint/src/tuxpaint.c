@@ -2424,6 +2424,8 @@ static void mainloop(void)
                   unlink(fname);
                   free(fname);
                 }
+	      redraw_tux_text();
+
             }
 #endif
           else if (event.type == SDL_WINDOWEVENT)
