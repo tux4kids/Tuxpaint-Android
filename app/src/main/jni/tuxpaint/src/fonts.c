@@ -1519,7 +1519,11 @@ int charset_works(TuxPaint_Font * font, const char *s)
   unsigned count = 0;
   int ret = 0;
 
+#ifndef FORKED_FONTS && #defined __ANDROID__
+  while (*s && !font_thread_aborted)
+#else
   while (*s)
+#endif
     {
       char c[8];
       unsigned offset = 0;

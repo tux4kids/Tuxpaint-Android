@@ -2425,7 +2425,6 @@ static void mainloop(void)
                   free(fname);
                 }
 	      redraw_tux_text();
-
             }
 #endif
           else if (event.type == SDL_WINDOWEVENT)
@@ -5780,6 +5779,12 @@ static void mainloop(void)
       SDL_Delay(1);
     }
   while (!done);
+#ifndef FORKED_FONTS && #defined __ANDROID__
+  /* Closing Tux Paint before the end of font scanning resulted in crashes in the Android port */
+  /* This is an abuse of font_thread_aborted, maybe it is better to use a new, more descriptive marker? */
+  if(!font_thread_done)
+    font_thread_aborted = 1;
+#endif
 }
 
 /**
@@ -24451,7 +24456,7 @@ static void setup(void)
 #ifdef FORKED_FONTS
   reliable_write(font_socket_fd, &no_system_fonts, sizeof no_system_fonts);
 #else
-  font_thread = SDL_CreateThread(load_user_fonts_stub, "font_thread",  NULL);
+  font_thread = SDL_CreateThread(load_user_fonts_stub, "font_thread", NULL);
 #endif
 
   /* continuing on with the rest of the cursors... */
