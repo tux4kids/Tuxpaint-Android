@@ -221,9 +221,9 @@ void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const ch
       opt = "yes";
     } else if (strcmp(opt, "yes")) {
       if(src)
-        printf("Option '%s' in config file '%s' is yes/ask/new only, but got '%s'\n",str,src,opt);
+        fprintf(stderr, "Option '%s' in config file '%s' is yes/ask/new only, but got '%s'\n",str,src,opt);
       else
-        printf("Command line option '--%s' is yes/ask/new only, but got '%s'\n",str,opt);
+        fprintf(stderr, "Command line option '--%s' is yes/ask/new only, but got '%s'\n",str,opt);
       exit(51);
     }
   }
@@ -237,9 +237,9 @@ void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const ch
   if(!cfg || (!(flags & BOOLMASK) && noflag) )
   {
     if(src)
-      printf("Unknown option '%s' in config file '%s'\n",str,src);
+      fprintf(stderr, "Unknown option '%s' in config file '%s'\n",str,src);
     else
-      printf("Unknown command line option '--%s'\n",str);
+      fprintf(stderr, "Unknown command line option '--%s'\n",str);
     exit(47);
   }
 
@@ -248,12 +248,12 @@ void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const ch
     if(src)
     {
       // immediate options are only for the command line
-      printf("Unknown option '%s' in config file '%s'\n",str,src);
+      fprintf(stderr, "Unknown option '%s' in config file '%s'\n",str,src);
       exit(49);
     }
     if(opt)
     {
-      printf("Command line option '--%s' doesn't take a value.\n",str);
+      fprintf(stderr, "Command line option '--%s' doesn't take a value.\n",str);
       exit(50);
     }
     cfg->val();
@@ -272,18 +272,18 @@ void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const ch
     else
     {
       if(src)
-        printf("Option '%s' in config file '%s' is yes/no only, but got '%s'\n",str,src,opt);
+        fprintf(stderr, "Option '%s' in config file '%s' is yes/no only, but got '%s'\n",str,src,opt);
       else
-        printf("Command line option '--%s' is yes/no only, but got '%s'\n",str,opt);
+        fprintf(stderr, "Command line option '--%s' is yes/no only, but got '%s'\n",str,opt);
       exit(51);
     }
   }
   else if(!opt || !*opt)
   {
       if(src)
-        printf("Option '%s' in config file '%s' needs a value\n",str,src);
+        fprintf(stderr, "Option '%s' in config file '%s' needs a value\n",str,src);
       else
-        printf("Command line option '--%s' needs a value\n",str);
+        fprintf(stderr, "Command line option '--%s' needs a value\n",str);
       exit(52);
   }
 
@@ -293,9 +293,9 @@ void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const ch
   if(dupecheck)
   {
     if(src)
-      printf("Option '%s' in config file '%s' sets '%s' again.\n",str,src,cfg->name);
+      fprintf(stderr, "Option '%s' in config file '%s' sets '%s' again.\n",str,src,cfg->name);
     else
-      printf("Command line option '--%s' sets '%s' again.\n",str,cfg->name);
+      fprintf(stderr, "Command line option '--%s' sets '%s' again.\n",str,cfg->name);
     exit(53);
   }
 

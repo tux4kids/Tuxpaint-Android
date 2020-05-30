@@ -4,7 +4,7 @@
   For Tux Paint
   Language-related functions
 
-  Copyright (c) 2002-2019 by Bill Kendrick and others
+  Copyright (c) 2002-2020 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
 
   $Id$
 
-  June 14, 2002 - August 29, 2019
+  June 14, 2002 - April 2, 2020
 */
 
 #include <stdio.h>

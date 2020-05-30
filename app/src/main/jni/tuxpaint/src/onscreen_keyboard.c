@@ -1,3 +1,25 @@
+/*
+  onscreen_keyboard.c
+
+  Copyright (c) 2020
+  http://www.tuxpaint.org/
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  (See COPYING.txt)
+*/
+
 #include "onscreen_keyboard.h"
 
 #define DEBUG_OSK_COMPOSEMAP
@@ -79,14 +101,14 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas, SDL_Sur
   layout = load_layout(keyboard, layout_name);
   if (!layout)
     {
-      printf("Error trying to load the required layout %s\n", layout_name);
+      fprintf(stderr, "Error trying to load the required layout %s\n", layout_name);
       layout = load_layout(keyboard, strdup("default.layout"));
       if (!layout)
         {
-          printf("Error trying to load the default layout\n");
+          fprintf(stderr, "Error trying to load the default layout\n");
           return NULL;
         }
-      printf("Loaded the default layout instead.\n");
+      fprintf(stderr, "Loaded the default layout instead.\n");
     }
 
 #ifdef DEBUG
@@ -100,7 +122,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas, SDL_Sur
                                  canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, 0);
   if (!surface)
     {
-      printf("Error creating the onscreen keyboard surface\n");
+      fprintf(stderr, "Error creating the onscreen keyboard surface\n");
       return NULL;
     }
   //  keyboard->name = layout_name;
@@ -177,7 +199,7 @@ static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layou
           fi = fopen(filename, "r");
           if (fi == NULL)
             {
-              printf("Can't open either %s nor %s\n", layout_name, filename);
+              fprintf(stderr, "Can't open either %s nor %s\n", layout_name, filename);
               /* Fallback to default */
               snprintf(filename, 255, "%sosk/default.layout", DATA_PREFIX);
               fi = fopen(filename, "r");
@@ -195,7 +217,7 @@ static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layou
   free(filename);
   if (fi == NULL)
     {
-      printf("Can't load the on screen keyboard layout\n");
+      fprintf(stderr, "Can't load the on screen keyboard layout\n");
       return NULL;
     }
 
@@ -297,7 +319,7 @@ void load_hlayout(osk_layout * layout, char *hlayout_name)
       fi = fopen(filename, "r");
       if (fi == NULL)
         {
-          printf("Can't open either %s nor %s\n", hlayout_name, filename);
+          fprintf(stderr, "Can't open either %s nor %s\n", hlayout_name, filename);
           layout->keys = NULL;
           free(filename);
           return;
@@ -482,7 +504,7 @@ void load_keymap(osk_layout * layout, char *keymap_name)
       fi = fopen(filename, "r");
       if (fi == NULL)
         {
-          printf("Can't open either %s nor %s\n", keymap_name, filename);
+          fprintf(stderr, "Can't open either %s nor %s\n", keymap_name, filename);
           layout->keys = NULL;
           free(filename);
           return;
@@ -670,7 +692,7 @@ static void load_composemap(osk_layout * layout, char *composemap_name)
       fi = fopen(filename, "r");
       if (fi == NULL)
         {
-          printf("Can't open either %s nor %s\n", composemap_name, filename);
+          fprintf(stderr, "Can't open either %s nor %s\n", composemap_name, filename);
           layout->keys = NULL;
           free(filename);
           return;
@@ -778,7 +800,7 @@ static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name)
       fi = fopen(filename, "r");
       if (fi == NULL)
         {
-          printf("Can't open either %s nor %s\n", keysymdefs_name, filename);
+          fprintf(stderr, "Can't open either %s nor %s\n", keysymdefs_name, filename);
           layout->keysymdefs = NULL;
           free(filename);
           return;

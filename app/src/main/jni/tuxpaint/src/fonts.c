@@ -1,7 +1,7 @@
 /*
   fonts.c
 
-  Copyright (c) 2009-2017
+  Copyright (c) 2009-2020
   http://www.tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -901,7 +901,7 @@ static void groupfonts(void)
   //printf("groupfonts() qsort(user_font_families 2...)\n");
   //fflush(stdout);
   if (num_font_families > 0 && user_font_families[0]->score < 0)
-    printf("sorted the wrong way, or all fonts were unusable\n");
+    fprintf(stderr, "sorted the wrong way, or all fonts were unusable\n");
 #if 0
 // THREADED_FONTS
   printf("Trim starting with %d families\n", num_font_families);
@@ -1225,7 +1225,7 @@ void receive_some_font_info(SDL_Surface * screen, SDL_Texture * texture, SDL_Ren
   waitpid(font_scanner_pid, &status, 0);
   if (WIFSIGNALED(status) || font_thread_aborted)
     {
-      printf("child killed by signal %u\n", WTERMSIG(status));
+      fprintf(stderr, "child killed by signal %u\n", WTERMSIG(status));
       user_font_families = NULL;
       num_font_families = 0;
       font_thread_done = 1;
@@ -1457,7 +1457,7 @@ static int do_surfcmp(const SDL_Surface * const *const v1, const SDL_Surface * c
 
   if (s1 == s2)
     {
-      printf("s1==s2?\n");
+      fprintf(stderr, "s1==s2?\n");
       return 0;
     }
   if (!s1 || !s2 || !s1->w || !s2->w || !s1->h || !s2->h || !s1->format || !s2->format)
@@ -1567,7 +1567,7 @@ out:
   while (count--)
     {
       if (surfs[count] == NULL)
-        printf("TRYING TO RE-FREE!");
+        fprintf(stderr, "TRYING TO RE-FREE!");
       else
         {
           SDL_FreeSurface(surfs[count]);
