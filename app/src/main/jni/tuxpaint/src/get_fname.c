@@ -1,7 +1,7 @@
 /*
   get_fname.c
 
-  Copyright (c) 2009
+  Copyright (c) 2009 - 2020
   http://www.tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -30,26 +30,39 @@
 #include "debug.h"
 #include "compiler.h"
 
-/* DIR_SAVE: Where is the user's saved directory?
-   This is where their saved files are stored
-   and where the "current_id.txt" file is saved.
+/*
+  See tuxpaint.c for the OS-specific defaults.
 
-   Windows predefines "savedir" as:
-   "C:\Documents and Settings\%USERNAME%\Application Data\TuxPaint"
-   though it may get overridden with "--savedir" option
+  * DIR_SAVE: Where does the user's drawings get saved?
 
-   BeOS similarly predefines "savedir" as "./userdata"...
+    This is where their saved files (PNG) are stored, and where the
+    "current_id.txt" file is saved (so we can re-load the latest
+    picture upon a subsequent launch).  Generally, end users aren't
+    expected to access the files in here directly, but they can.
 
-   Macintosh: It's under ~/Library/Application Support/TuxPaint
+    The defaults may be overridden with the "--savedir" option.
 
-   Linux & Unix: It's under ~/.tuxpaint
+  * DIR_DATA: Where is the user's data directory?
 
-   DIR_DATA: Where is the user's data directory?
-   This is where local fonts, brushes and stamps can be found. */
+    This is where local (user-specific) fonts, brushes, stamps,
+    starter images, etc., can be found.  End users only put things
+    here if they wish to extend their Tux Paint experience.
+
+    The defaults may be overridden with the "--datadir" option.
+
+  * DIR_EXPORT: Where does Tux Paint export drawings / animations?
+
+    This is where single images, or animated GIF slideshows,
+    will be exported.  It is expected that this is an obvious,
+    and easily-accessible place for end users to retrieve the exports.
+
+    The defaults may be overridden with the "--exportdir" option.
+*/
 
 
 const char *savedir;
 const char *datadir;
+const char *exportdir;
 
 // FIXME: We shouldn't be allocating memory all the time.
 //        There should be distinct functions for each directory.
@@ -62,16 +75,28 @@ const char *datadir;
  * (data file, or saved images?)
  *
  * @param name Filaneme
- * @param kind What kind of file? (DIR_SAVE or DIR_DATA?)
+ * @param kind What kind of file? (DIR_SAVE, DIR_DATA, or DIR_EXPORT?)
  * @return Full fillpath
  */
 char *get_fname(const char *const name, int kind)
 {
   char f[512];
-  const char *restrict const dir = (kind == DIR_SAVE) ? savedir : datadir;
+  // const char *restrict const dir;
+  const char * dir;
 
-  // Some mkdir()'s don't like trailing slashes
-  snprintf(f, sizeof(f), "%s%c%s", dir, (*name) ? '/' : '\0', name);
+  if (kind == DIR_SAVE) {
+    dir = savedir;
+  } else if (kind == DIR_DATA) {
+    dir = datadir;
+  } else if (kind == DIR_EXPORT) {
+    dir = exportdir;
+  }
+
+  snprintf(f, sizeof(f),
+           "%s%c%s",
+	   dir, (*name) ? '/' : '\0', /* Some mkdir()'s don't like trailing slashes */
+	   name);
 
   return strdup(f);
 }
+

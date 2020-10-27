@@ -4,7 +4,7 @@
   For Tux Paint
   Language-related functions
 
-  Copyright (c) 2002-2012 by Bill Kendrick and others
+  Copyright (c) 2002-2020 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
 
   $Id$
   
-  June 14, 2002 - December 11, 2016
+  June 14, 2002 - July 26, 2020
 */
 
 
@@ -188,7 +188,6 @@ extern int need_own_font;
 extern int need_right_to_left;  // Right-justify
 extern int need_right_to_left_word;     // Words need to be reversed, too! (e.g., Hebrew, but not Arabic)
 extern const char *lang_prefix, *short_lang_prefix;
-extern int num_wished_langs;
 
 typedef struct w_langs
 {
@@ -206,7 +205,7 @@ extern w_langs wished_langs[255];
 /* Function prototypes: */
 
 int get_current_language(void);
-int setup_i18n(const char *restrict lang, const char *restrict locale) MUST_CHECK;
+int setup_i18n(const char *restrict lang, const char *restrict locale, int * ptr_num_wished_languages) MUST_CHECK;
 
 #ifdef NO_SDLPANGO
      int smash_i18n(void) MUST_CHECK;

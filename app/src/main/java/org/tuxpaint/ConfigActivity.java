@@ -42,6 +42,7 @@ public class ConfigActivity extends Activity {
 	String locale = null;
 	String savedir = null;
 	String datadir = null;
+	String exportdir = null;
 	String saveover = null;
 	String startblank = null;
 	String newcolorsfirst = null;
@@ -54,6 +55,7 @@ public class ConfigActivity extends Activity {
 
 	EditText savedirView = null;
 	EditText datadirView = null;
+	EditText exportdirView = null;
 	ToggleButton soundToggle = null;
 	ToggleButton stereoToggle = null;
 	ToggleButton autosaveToggle = null;
@@ -108,7 +110,18 @@ public class ConfigActivity extends Activity {
 			public void afterTextChanged(Editable s) {
 			}
 		});
-		
+		exportdirView = (EditText)this.findViewById(R.id.textExportdir);
+		exportdirView.setText(exportdir);
+		exportdirView.addTextChangedListener(new TextWatcher() {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				exportdir = exportdirView.getText().toString();
+			}
+			public void beforeTextChanged(CharSequence s, int start, int count,
+										  int after) {
+			}
+			public void afterTextChanged(Editable s) {
+			}
+		});
 		soundToggle = (ToggleButton)this.findViewById(R.id.toggleSound);
 		if (sound.compareTo("yes") == 0)
 			soundToggle.setChecked(true);
@@ -363,6 +376,7 @@ public class ConfigActivity extends Activity {
 	newcolorsfirst = props.getProperty("newcolorsfirst", "yes");
 	savedir = props.getProperty("savedir", external.getAbsolutePath());
 	datadir = props.getProperty("datadir", external.getAbsolutePath());
+		exportdir = props.getProperty("exportdir", external.getAbsolutePath());
 	locale = props.getProperty("locale", Locale.getDefault().toString());
 	sysfonts = props.getProperty("sysfonts", "no");
 	print = props.getProperty("print", "no");
@@ -370,7 +384,7 @@ public class ConfigActivity extends Activity {
 	disablescreensaver = props.getProperty("disablescreensaver", "no");
 	orient = props.getProperty("orient", "landscape");
 	    	 
-	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir+ " "+datadir+ " " + locale + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);
+	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir+ " "+datadir+ " " + exportdir + " " + locale + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);
     }
 
     private void save () {
@@ -384,6 +398,7 @@ public class ConfigActivity extends Activity {
         props.put("newcolorsfirst", newcolorsfirst);
         props.put("savedir", savedir);
         props.put("datadir", datadir);
+        props.put("exportdir", exportdir);
         props.put("locale", locale);
 	props.put("sysfonts", sysfonts);
 	props.put("print", print);

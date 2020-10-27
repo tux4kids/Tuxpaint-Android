@@ -1,27 +1,45 @@
 Release checklist for Tux Paint
+Last updated 2020-07-27 -bjk
 
-Places to make sure version # and release date gets updated, prior to
-cutting a release (tagging in the source code repository, and running
-"make release" to roll a .tar.gz source tarball).
+Do these things _prior_ to cutting a release -- that is, prior to
+tagging in the source code repository, running "make release" to roll
+a .tar.gz source tarball, and making the tarball available for download.
 
- * Makefile
+ * Update version # and release dates
 
- * Build description files:
-   * tuxpaint.spec (Linux RPM package)
-   * macos/Info.plist (macOS build)
-   * win32/resources.rc (Windows mingw/msys build)
+   Places to make sure version # and release date gets updated,
 
- * Documentation
-   (For HTML variants, be sure to run "make" in "docs/", to
-   produce plaintext alternatives!)
+   * Makefile
+  
+   * Build description files:
+     * tuxpaint.spec (Linux RPM package)
+     * macos/Info.plist (macOS build)
+     * win32/resources.rc (Windows mingw/msys build)
+  
+   * Documentation
+     (For HTML variants, be sure to run "make" in "docs/", to
+     produce plaintext alternatives!)
+  
+     * docs/CHANGES.txt
+     * docs/en/html/README.html
+     * docs/en/html/FAQ.html
+     * docs/en/html/OPTIONS.html
+     * docs/en/html/EXTENDING.html
+     * docs/en/html/ADVANCED-STAMPS-HOWTO.html
+  
+   * Manual page (manpage)
+     * src/manpage/tuxpaint.1
 
-   * docs/CHANGES.txt
-   * docs/en/html/README.html
-   * docs/en/html/FAQ.html
-   * docs/en/html/OPTIONS.html
-   * docs/en/html/EXTENDING.html
-   * docs/en/html/ADVANCED-STAMPS-HOWTO.html
+ * Tidy the HTML documentation
 
- * Manual page (manpage)
-   * src/manpage/tuxpaint.1
+   Using 
+   (Be sure to run "make" in "docs/", to produce plaintext alternatives!)
+
+     tidy -i --markup yes --vertical-space yes --indent yes --indent-attributes yes INFILE.html > OUTFILE.html
+
+   Make certain it looks okay, and stil renders properly in a browser.
+   If not, correct the issues!  Then replace the original with the new
+   version 'tidy' created.
+
+ * Don't forget to commit the changes!  (git add ... / git commit / git push)
 

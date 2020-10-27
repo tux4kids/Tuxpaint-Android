@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-24 08:40-0700\n"
+"POT-Creation-Date: 2020-07-29 23:01-0700\n"
 "PO-Revision-Date: 2020-03-29 23:40+0200\n"
 "Last-Translator: Pilar Embid Giner <embid_mar@gva.es>\n"
 "Language-Team: LliureX\n"
@@ -428,7 +428,7 @@ msgstr "Nou"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7846
+#: ../tools.h:98 ../tuxpaint.c:7887
 msgid "Open"
 msgstr "Obri"
 
@@ -564,185 +564,227 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "D'acord… Continuem dibuixant esta figura!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2113
+#: ../tuxpaint.c:2132
 msgid "Do you really want to quit?"
 msgstr "Esteu segur que voleu eixir?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2116
+#: ../tuxpaint.c:2135
 msgid "Yes, I’m done!"
 msgstr "Sí, ja he acabat!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2119 ../tuxpaint.c:2146
+#: ../tuxpaint.c:2138 ../tuxpaint.c:2165
 msgid "No, take me back!"
 msgstr "No, tornem-hi!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2123
+#: ../tuxpaint.c:2142
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Si eixiu, perdreu el vostre dibuix! El voleu guardar?"
 
-#: ../tuxpaint.c:2124 ../tuxpaint.c:2129
+#: ../tuxpaint.c:2143 ../tuxpaint.c:2148
 msgid "Yes, save it!"
 msgstr "Sí, guarda'l!"
 
-#: ../tuxpaint.c:2125 ../tuxpaint.c:2130
+#: ../tuxpaint.c:2144 ../tuxpaint.c:2149
 msgid "No, don’t bother saving!"
 msgstr "No, no cal que el guardes!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2128
+#: ../tuxpaint.c:2147
 msgid "Save your picture first?"
 msgstr "Voleu guardar primer el vostre dibuix?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2133
+#: ../tuxpaint.c:2152
 msgid "Can’t open that picture!"
 msgstr "No es pot obrir esta imatge!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2136 ../tuxpaint.c:2141 ../tuxpaint.c:2150 ../tuxpaint.c:2157
-#: ../tuxpaint.c:2166
+#: ../tuxpaint.c:2155 ../tuxpaint.c:2160 ../tuxpaint.c:2169 ../tuxpaint.c:2176
+#: ../tuxpaint.c:2185 ../tuxpaint.c:2190
 msgid "OK"
 msgstr "D'acord"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2140
+#: ../tuxpaint.c:2159
 msgid "There are no saved files!"
 msgstr "No hi ha fitxers guardats!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2144
+#: ../tuxpaint.c:2163
 msgid "Print your picture now?"
 msgstr "Voleu imprimir el dibuix?"
 
-#: ../tuxpaint.c:2145
+#: ../tuxpaint.c:2164
 msgid "Yes, print it!"
 msgstr "Sí, imprimix-lo!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2149
+#: ../tuxpaint.c:2168
 msgid "Your picture has been printed!"
 msgstr "La imatge s'ha imprés!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2153
+#: ../tuxpaint.c:2172
 msgid "Sorry! Your picture could not be printed!"
 msgstr "La imatge no s'ha pogut imprimir!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2156
+#: ../tuxpaint.c:2175
 msgid "You can’t print yet!"
 msgstr "Encara no podeu imprimir!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2160
+#: ../tuxpaint.c:2179
 msgid "Erase this picture?"
 msgstr "Voleu esborrar este dibuix?"
 
-#: ../tuxpaint.c:2161
+#: ../tuxpaint.c:2180
 msgid "Yes, erase it!"
 msgstr "Sí, esborra'l!"
 
-#: ../tuxpaint.c:2162
+#: ../tuxpaint.c:2181
 msgid "No, don’t erase it!"
 msgstr "No, no l'esborres!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2165
+#: ../tuxpaint.c:2184
 msgid "Remember to use the left mouse button!"
 msgstr "Recordeu de fer servir el botó esquerre!"
 
+#. Confirmation of successful (we hope) image export
+#: ../tuxpaint.c:2188
+#, fuzzy
+#| msgid "Your picture has been printed!"
+msgid "Your picture has been exported!"
+msgstr "La imatge s'ha imprés!"
+
+#: ../tuxpaint.c:2189
+#, fuzzy
+#| msgid "Your picture has been printed!"
+msgid "Your slideshow GIF has been exported!"
+msgstr "La imatge s'ha imprés!"
+
+#. We got an error exporting
+#: ../tuxpaint.c:2193
+#, fuzzy
+#| msgid "Sorry! Your picture could not be printed!"
+msgid "Sorry! Your picture could not be exported!"
+msgstr "La imatge no s'ha pogut imprimir!"
+
+#: ../tuxpaint.c:2194
+#, fuzzy
+#| msgid "Sorry! Your picture could not be printed!"
+msgid "Sorry! Your slideshow GIF could not be exported!"
+msgstr "La imatge no s'ha pogut imprimir!"
+
+#. Slideshow instructions
+#: ../tuxpaint.c:2198
+msgid "Choose the pictures you want, then click “Play”."
+msgstr "Trieu els dibuixos que voleu, llavors feu clic en «Reproduïx»."
+
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2371
+#: ../tuxpaint.c:2405
 msgid "Sound muted."
 msgstr "S'ha desactivat el so."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2376
+#: ../tuxpaint.c:2410
 msgid "Sound unmuted."
 msgstr "S'ha activat el so."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3129
+#: ../tuxpaint.c:3165
 msgid "Please wait…"
 msgstr "Espereu, per favor..."
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7849
+#: ../tuxpaint.c:7890
 msgid "Erase"
 msgstr "Esborra"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7852
+#: ../tuxpaint.c:7893
 msgid "Slides"
 msgstr "Diapositives"
 
+#. Open dialog: 'Export' button, to copy an image to an easily-accessible location
+#: ../tuxpaint.c:7896
+msgid "Export"
+msgstr ""
+
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7855
+#: ../tuxpaint.c:7899
 msgid "Back"
 msgstr "Arrere"
 
-#. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7858
-msgid "Next"
-msgstr "Següent"
-
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7861
+#: ../tuxpaint.c:7902
 msgid "Play"
 msgstr "Reproduïx"
 
+#. Slideshow: 'GIF Export' button, to create an animated GIF
+#: ../tuxpaint.c:7905
+msgid "GIF Export"
+msgstr ""
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7908
+msgid "Next"
+msgstr "Següent"
+
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8576
+#: ../tuxpaint.c:8623
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11944
+#: ../tuxpaint.c:11991
 msgid "Yes"
 msgstr "Sí"
 
-#: ../tuxpaint.c:11948
+#: ../tuxpaint.c:11995
 msgid "No"
 msgstr "No"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:13018
+#: ../tuxpaint.c:13069
 msgid "Replace the picture with your changes?"
 msgstr "Voleu reemplaçar el dibuix amb els vostres canvis?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:13022
+#: ../tuxpaint.c:13073
 msgid "Yes, replace the old one!"
 msgstr "Sí, reemplaça l'antic!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:13026
+#: ../tuxpaint.c:13077
 msgid "No, save a new file!"
 msgstr "No, guarda un fitxer nou"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:14270
+#: ../tuxpaint.c:14333
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Trieu la imatge que voleu i després feu clic en «Obri»."
 
-#. Let user choose images:
-#. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:15266 ../tuxpaint.c:15586
-msgid "Choose the pictures you want, then click “Play”."
-msgstr "Trieu els dibuixos que voleu, llavors feu clic en «Reproduïx»."
+#. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
+#. Only 1 selected?  No point in saving as GIF.
+#.
+#: ../tuxpaint.c:15759
+msgid "Select 2 or more drawings to turn into an animated GIF."
+msgstr ""
 
-#: ../tuxpaint.c:23179
+#: ../tuxpaint.c:23417
 msgid "Select a color from your drawing."
 msgstr "Trieu un color del vostre dibuix."
 
-#: ../tuxpaint.c:23191
+#: ../tuxpaint.c:23429
 msgid "Pick a color."
 msgstr "Trieu un color."
 
@@ -764,7 +806,9 @@ msgstr "Canvi de color"
 
 #: ../../magic/src/alien.c:72
 msgid "Click and drag the mouse to change the colors in parts of your picture."
-msgstr "Feu clic i arrossegueu el ratolí per a canviar els colors en parts del dibuix."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a canviar els colors en parts del "
+"dibuix."
 
 #: ../../magic/src/alien.c:73
 msgid "Click to change the colors in your entire picture."
@@ -778,7 +822,9 @@ msgstr "Persiana"
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
-msgstr "Feu clic i arrossegueu des de la vora de la imatge per a passar una persiana. Moveu perpendicularment per a obrir o tancar les persianes."
+msgstr ""
+"Feu clic i arrossegueu des de la vora de la imatge per a passar una "
+"persiana. Moveu perpendicularment per a obrir o tancar les persianes."
 
 #: ../../magic/src/blocks_chalk_drip.c:129
 msgid "Blocks"
@@ -794,16 +840,21 @@ msgstr "Goteja"
 
 #: ../../magic/src/blocks_chalk_drip.c:142
 msgid "Click and drag the mouse around to make the picture blocky."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a fer quadradets en la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a fer quadradets en la "
+"imatge."
 
 #: ../../magic/src/blocks_chalk_drip.c:144
 msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a convertir la imatge en un dibuix fet amb guix."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a convertir la imatge en un "
+"dibuix fet amb guix."
 
 #: ../../magic/src/blocks_chalk_drip.c:146
 msgid "Click and drag the mouse around to make the picture drip."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a fer que la imatge gotege."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a fer que la imatge gotege."
 
 #: ../../magic/src/blur.c:80
 msgid "Blur"
@@ -811,7 +862,8 @@ msgstr "Difumina"
 
 #: ../../magic/src/blur.c:84
 msgid "Click and drag the mouse around to blur the image."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a difuminar la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a difuminar la imatge."
 
 #: ../../magic/src/blur.c:85
 msgid "Click to blur the entire image."
@@ -836,7 +888,8 @@ msgstr "Cal·ligrafia"
 
 #: ../../magic/src/calligraphy.c:131
 msgid "Click and drag the mouse around to draw in calligraphy."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a dibuixar en cal·ligrafia."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a dibuixar en cal·ligrafia."
 
 #: ../../magic/src/cartoon.c:103
 msgid "Cartoon"
@@ -844,7 +897,9 @@ msgstr "Vinyeta"
 
 #: ../../magic/src/cartoon.c:109
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a convertir la imatge en una vinyeta."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a convertir la imatge en "
+"una vinyeta."
 
 #: ../../magic/src/confetti.c:83
 msgid "Confetti"
@@ -881,7 +936,9 @@ msgstr "Enfosquix"
 
 #: ../../magic/src/fade_darken.c:127
 msgid "Click and drag the mouse to lighten parts of your picture."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a aclarir parts de la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a aclarir parts de la "
+"imatge."
 
 #: ../../magic/src/fade_darken.c:129
 msgid "Click to lighten your entire picture."
@@ -889,7 +946,9 @@ msgstr "Feu clic per a aclarir tota la imatge."
 
 #: ../../magic/src/fade_darken.c:134
 msgid "Click and drag the mouse to darken parts of your picture."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a enfosquir parts de la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a enfosquir parts de la "
+"imatge."
 
 #: ../../magic/src/fade_darken.c:136
 msgid "Click to darken your entire picture."
@@ -1020,7 +1079,9 @@ msgstr "Feu clic i moveu el ratolí per a dibuixar patrons en la imatge."
 msgid ""
 "Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
-msgstr "Feu clic i arrossegueu el ratolí per a dibuixar patrons simètrics en la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a dibuixar patrons simètrics en la "
+"imatge."
 
 #. KAL_BOTH
 #: ../../magic/src/kalidescope.c:164
@@ -1070,7 +1131,9 @@ msgstr "Mosaic"
 #: ../../magic/src/mosaic.c:100
 msgid ""
 "Click and drag the mouse to add a mosaic effect to parts of your picture."
-msgstr "Feu clic i arrossegueu el ratolí per a afegir un efecte de mosaic a parts de la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a afegir un efecte de mosaic a parts de "
+"la imatge."
 
 #: ../../magic/src/mosaic.c:101
 msgid "Click to add a mosaic effect to your entire picture."
@@ -1091,7 +1154,9 @@ msgstr "Mosaic irregular"
 #: ../../magic/src/mosaic_shaped.c:140
 msgid ""
 "Click and drag the mouse to add a square mosaic to parts of your picture."
-msgstr "Feu clic i arrossegueu el ratolí per a afegir un efecte de mosaic quadrat a parts de la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a afegir un efecte de mosaic quadrat a "
+"parts de la imatge."
 
 #: ../../magic/src/mosaic_shaped.c:141
 msgid "Click to add a square mosaic to your entire picture."
@@ -1100,7 +1165,9 @@ msgstr "Feu clic per a afegir un efecte de mosaic quadrat a tota la imatge."
 #: ../../magic/src/mosaic_shaped.c:145
 msgid ""
 "Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
-msgstr "Feu clic i arrossegueu el ratolí per a afegir un efecte de mosaic hexagonal a parts de la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a afegir un efecte de mosaic hexagonal "
+"a parts de la imatge."
 
 #: ../../magic/src/mosaic_shaped.c:146
 msgid "Click to add a hexagonal mosaic to your entire picture."
@@ -1109,7 +1176,9 @@ msgstr "Feu clic per a afegir un efecte de mosaic hexagonal a tota la imatge."
 #: ../../magic/src/mosaic_shaped.c:150
 msgid ""
 "Click and drag the mouse to add an irregular mosaic to parts of your picture."
-msgstr "Feu clic i arrossegueu el ratolí per a afegir un efecte de mosaic irregular a parts de la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a afegir un efecte de mosaic irregular "
+"a parts de la imatge."
 
 #: ../../magic/src/mosaic_shaped.c:151
 msgid "Click to add an irregular mosaic to your entire picture."
@@ -1121,7 +1190,8 @@ msgstr "Negatiu"
 
 #: ../../magic/src/negative.c:101
 msgid "Click and drag the mouse around to make your painting negative."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a fer el negatiu del dibuix."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a fer el negatiu del dibuix."
 
 #: ../../magic/src/negative.c:103
 msgid "Click to turn your painting into its negative."
@@ -1133,7 +1203,8 @@ msgstr "Soroll"
 
 #: ../../magic/src/noise.c:70
 msgid "Click and drag the mouse to add noise to parts of your picture."
-msgstr "Feu clic i arrossegueu el ratolí per a afegir soroll a parts de la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a afegir soroll a parts de la imatge."
 
 #: ../../magic/src/noise.c:71
 msgid "Click to add noise to your entire picture."
@@ -1251,7 +1322,8 @@ msgstr "Silueta"
 
 #: ../../magic/src/sharpen.c:82
 msgid "Click and drag the mouse to trace edges in parts of your picture."
-msgstr "Feu clic i arrossegueu el ratolí per a dibuixar vores en parts de la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a dibuixar vores en parts de la imatge."
 
 #: ../../magic/src/sharpen.c:83
 msgid "Click to trace edges in your entire picture."
@@ -1267,7 +1339,8 @@ msgstr "Feu clic per a afinar tota la imatge."
 
 #: ../../magic/src/sharpen.c:86
 msgid "Click and drag the mouse to create a black and white silhouette."
-msgstr "Feu clic i arrossegueu el ratolí per a crear una silueta en blanc i negre."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a crear una silueta en blanc i negre."
 
 #: ../../magic/src/sharpen.c:87
 msgid "Click to create a black and white silhouette of your entire picture."
@@ -1297,7 +1370,8 @@ msgstr "Feu clic i arrossegueu el ratolí per a passar el dit pel dibuix."
 #. if (which == 1)
 #: ../../magic/src/smudge.c:113
 msgid "Click and drag the mouse around to draw with wet, smudgy paint."
-msgstr "Feu clic i arrossegueu el ratolí per a mullar amb pintura parts del dibuix."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a mullar amb pintura parts del dibuix."
 
 #: ../../magic/src/snow.c:71
 msgid "Snow Ball"
@@ -1358,7 +1432,9 @@ msgstr "Color i blanc"
 #: ../../magic/src/tint.c:79
 msgid ""
 "Click and drag the mouse around to change the color of parts of your picture."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a canviar el color de parts de la imatge."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a canviar el color de parts "
+"de la imatge."
 
 #: ../../magic/src/tint.c:80
 msgid "Click to change the color of your entire picture."
@@ -1368,7 +1444,9 @@ msgstr "Feu clic per a canviar el color de tota la imatge."
 msgid ""
 "Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
-msgstr "Feu clic i arrossegueu el ratolí per la zona per a convertir parts de la imatge a blanc i un color a triar."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a convertir parts de la "
+"imatge a blanc i un color a triar."
 
 #: ../../magic/src/tint.c:82
 msgid "Click to turn your entire picture into white and a color you choose."

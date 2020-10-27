@@ -27,7 +27,6 @@ DO NOT EDIT ME!
 
 /* min() and max() variable comparisons: */
 
-#ifndef __HAIKU__
 #ifdef __GNUC__
 // This version has strict type checking for safety.
 // See the "unnecessary" pointer comparison. (from Linux)
@@ -45,7 +44,6 @@ DO NOT EDIT ME!
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define max(a,b) (((a) > (b)) ? (a) : (b))
 #endif
-#endif /* Not Haiku */
 
 /* clamp() returns 'value', unless it's less than 'lo' or greater than 'hi',
    in which cases it returns 'lo' or 'hi', respectively: */

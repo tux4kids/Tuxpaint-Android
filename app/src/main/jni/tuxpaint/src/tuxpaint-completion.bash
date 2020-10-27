@@ -3,6 +3,8 @@
 # Bill Kendrick <bill@newbreedsoftware.com>; http://www.tuxpaint.org/
 # Based on inkscape's completion file, by allali@univ-mlv.fr
 #
+# Last modified 2020-07-25
+#
 # $Id$
 
 # FIXME: See http://www.debian-administration.org/articles/316 for an intro
@@ -57,7 +59,7 @@ _tuxpaint()
 			--saveoverask --saveover --saveovernew \
 			--nosave --save \
 			--autosave --noautosave \
-			--savedir --datadir \
+			--savedir --datadir --exportdir \
 			--printdelay= \
 			--altprintmod --altprintalways --altprintnever \
 			--papersize \

@@ -1,15 +1,15 @@
 # Tux Paint - A simple drawing program for children.
 
-# Copyright (c) 2002-2019
+# Copyright (c) 2002-2020
 # Various contributors (see AUTHORS.txt)
 # http://www.tuxpaint.org/
 
-# June 14, 2002 - October 29, 2019
+# June 14, 2002 - July 24, 2020
 
 
 # The version number, for release:
 
-VER_VERSION:=0.9.24
+VER_VERSION:=0.9.25
 ifdef SOURCE_DATE_EPOCH
   VER_DATE=$(shell date -u -d "@$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u -r "$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u "+%Y-%m-%d")
 else
@@ -115,10 +115,10 @@ PNG:=$(if $(PNG),$(PNG),$(call linktest,-lpng12,))
 FRIBIDI_LIB:=$(shell $(PKG_CONFIG) --libs fribidi)
 FRIBIDI_CFLAGS:=$(shell $(PKG_CONFIG) --cflags fribidi)
 
-windows_ARCH_LINKS:=-lintl $(PNG) -lzdll -lwinspool -lshlwapi $(FRIBIDI_LIB) -liconv
-osx_ARCH_LINKS:=$(FRIBIDI_LIB)
-beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(PAPER_LIB) $(STDC_LIB)
-linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB)
+windows_ARCH_LINKS:=-lintl $(PNG) -lzdll -lwinspool -lshlwapi $(FRIBIDI_LIB) -liconv -limagequant
+osx_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant
+beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(PAPER_LIB) $(STDC_LIB) -limagequant
+linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
 ARCH_LINKS:=$($(OS)_ARCH_LINKS)
 
 windows_ARCH_HEADERS:=src/win32_print.h
@@ -1035,6 +1035,7 @@ TuxPaint.dmg:
 tuxpaint:	obj/tuxpaint.o obj/i18n.o obj/im.o obj/cursor.o obj/pixels.o \
 		obj/rgblinear.o obj/playsound.o obj/fonts.o obj/parse.o obj/fill.o \
 		obj/progressbar.o obj/dirwalk.o obj/get_fname.o obj/onscreen_keyboard.o \
+		obj/gifenc.o \
 		$(ARCH_LIBS)
 	@echo
 	@echo "...Linking Tux Paint..."
@@ -1055,6 +1056,7 @@ obj/tuxpaint.o:	src/tuxpaint.c \
 		src/tools.h src/titles.h src/colors.h src/shapes.h \
 		src/sounds.h src/tip_tux.h src/great.h \
 		src/tp_magic_api.h src/parse.h src/onscreen_keyboard.h \
+		src/gifenc.h \
 		src/$(MOUSEDIR)/arrow.xbm src/$(MOUSEDIR)/arrow-mask.xbm \
 		src/$(MOUSEDIR)/hand.xbm src/$(MOUSEDIR)/hand-mask.xbm \
 		src/$(MOUSEDIR)/insertion.xbm \
@@ -1139,6 +1141,12 @@ obj/pixels.o:	src/pixels.c src/pixels.h src/compiler.h src/debug.h
 	@echo "...Compiling pixel functions..."
 	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
 		-c src/pixels.c -o obj/pixels.o
+
+obj/gifenc.o:	src/gifenc.c src/gifenc.h
+	@echo
+	@echo "...Compiling animated GIF export libary..."
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(DEFS) \
+		-c src/gifenc.c -o obj/gifenc.o
 
 obj/playsound.o:	src/playsound.c src/playsound.h \
 			src/compiler.h src/debug.h

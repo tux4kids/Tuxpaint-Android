@@ -28,7 +28,6 @@
   $Id$
 */
 
-#ifndef __HAIKU__
 #ifdef __GNUC__
 // This version has strict type checking for safety.
 // See the "unnecessary" pointer comparison. (from Linux)
@@ -46,7 +45,6 @@
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define max(a,b) (((a) > (b)) ? (a) : (b))
 #endif
-#endif /* Not Haiku */
 
 #define clamp(lo,value,hi)    (min(max(value,lo),hi))
 

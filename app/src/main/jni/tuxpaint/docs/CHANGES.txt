@@ -8,6 +8,66 @@ http://www.tuxpaint.org/
 
 $Id$
 
+2020.July.31 (0.9.25)
+  * New Features
+    ------------
+    * Export drawings:
+      * GIF export option from the Open -> Slideshow dialog.
+        (Closes https://sourceforge.net/p/tuxpaint/feature-requests/191/)
+        * Utilizes "gifenc", public domain by Marcel Rodrigues:
+          https://github.com/lecram/gifenc
+        * Depends on "libimagequant", from the "pngquant2" project:
+          https://github.com/ImageOptim/libimagequant
+          (GPL v3 or later, for Free/Libre Open Source Software)
+      * Single image (PNG) export from the Open dialog.
+        (Closes https://sourceforge.net/p/tuxpaint/feature-requests/192/)
+      * Both utilize XDG user dirs settings, if available, to determine
+        where to store them, or "~/Pictures", otherwise.  In those cases,
+        files are stored in a new "TuxPaint" subdirectory.
+      * The "--exportdir" option can be used to override the default
+        location (but a "TuxPaint" subdir. will NOT be placed there).
+
+  * Ports & Building
+    ----------------
+    * Corrections for Haiku not opening saved files.
+      (Ref: https://github.com/haikuports/haikuports/issues/3045)
+      Gerasim Troeglazov <3dEyes@gmail.com>
+
+  * Documentation updates
+    ---------------------
+    * Cleaned up HTML code of HTML-based documentation.
+
+    * Sub-section links within README's Table of Contents.
+
+  * Bug Fixes
+    ---------
+    * Mended issue where stamp descriptions were not loading
+      when "getenv()" (e.g., "getenv("LANGUAGE")") returned an
+      empty string, rather than a NULL.
+
+    * Mended bug where corrupt text would appear as stamp
+      descriptions, if we failed to know what language to use
+      (see above).
+
+  * Translation Updates:
+    --------------------
+    * Basque translation
+      Alexander Gabilondo <alexgabi@irakasle.eus>
+
+    * Galician translation
+      Miguel Bouzada <mbouzada@gmail.com>
+
+    * Icelandic translation
+      Sveinn í Felli <sv1@fellsnet.is>
+
+    * Santali translation (Ol-Chiki)
+      Prasanta Hembram <prasantahembram720@gmail.com>
+
+  * Misc
+    ----
+    * Improved safety when copying things into string buffers.
+
+
 2020.April.24 (0.9.24)
   * New tools
     ---------
@@ -229,7 +289,7 @@ $Id$
       Kevin Scannell <kscanne@gmail.com>
 
     * Galician translation
-      Miguel Bouzada
+      Miguel Bouzada <mbouzada@gmail.com>
 
     * Georgian translation
       Gia Shervashidze <giasher@gmail.com>

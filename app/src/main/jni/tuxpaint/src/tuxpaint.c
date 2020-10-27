@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - May 23, 2020
+  June 14, 2002 - July 29, 2020
 */
 
 
@@ -282,7 +282,7 @@ char *strcasestr(const char *haystack, const char *needle)
 #include <dirent.h>
 #include <signal.h>
 
-#if defined __BEOS__
+#if defined __BEOS__ || defined __HAIKU__
 
 /* BeOS */
 
@@ -505,6 +505,8 @@ static void mtw(wchar_t * wtok, char *tok)
 #endif
 
 #define AUTOSAVED_NAME "AUTOSAVED"
+#include "libimagequant.h"
+
 //#include "SDL_getenv.h"
 
 #include "i18n.h"
@@ -517,6 +519,7 @@ static void mtw(wchar_t * wtok, char *tok)
 #include "dirwalk.h"
 #include "get_fname.h"
 #include "onscreen_keyboard.h"
+#include "gifenc.h"
 
 #include "tools.h"
 #include "titles.h"
@@ -1410,6 +1413,9 @@ static void convert_motion_to_wheel(SDL_Event event);
 static void stop_motion_convert(SDL_Event event);
 #endif
 
+char * get_xdg_user_dir(const char * dir_type, const char * fallback);
+
+
 /* Magic tools API and tool handles: */
 
 #include "tp_magic_api.h"
@@ -1526,8 +1532,8 @@ static SDL_Surface *img_dead40x40;
 static SDL_Surface *img_black, *img_grey;
 static SDL_Surface *img_yes, *img_no;
 static SDL_Surface *img_sfx, *img_speak;
-static SDL_Surface *img_open, *img_erase, *img_back, *img_trash;
-static SDL_Surface *img_slideshow, *img_play, *img_select_digits;
+static SDL_Surface *img_open, *img_erase, *img_back, *img_trash, *img_pict_export;
+static SDL_Surface *img_slideshow, *img_play, *img_gif_export, *img_select_digits;
 static SDL_Surface *img_printer, *img_printer_wait;
 static SDL_Surface *img_save_over, *img_popup_arrow;
 static SDL_Surface *img_cursor_up, *img_cursor_down;
@@ -1859,7 +1865,8 @@ static short *brushes_directional = NULL;
 
 static SDL_Surface *img_shapes[NUM_SHAPES], *img_shape_names[NUM_SHAPES];
 static SDL_Surface *img_openlabels_open, *img_openlabels_erase,
-  *img_openlabels_slideshow, *img_openlabels_back, *img_openlabels_play, *img_openlabels_next;
+  *img_openlabels_slideshow, *img_openlabels_back, *img_openlabels_play,
+  *img_openlabels_gif_export, *img_openlabels_pict_export, *img_openlabels_next;
 
 static SDL_Surface *img_tux[NUM_TIP_TUX];
 
@@ -1925,6 +1932,8 @@ static unsigned int texttool_len;
 static int tool_avail[NUM_TOOLS], tool_avail_bak[NUM_TOOLS];
 
 static Uint32 cur_toggle_count;
+
+static int num_wished_langs;
 
 typedef struct edge_type
 {
@@ -2077,9 +2086,16 @@ static int do_new_dialog_add_colors(SDL_Surface * *thumbs, int num_files, int *d
                                     char * *d_exts, int *white_in_palette);
 static int do_color_picker(void);
 static int do_color_sel(void);
+
 static int do_slideshow(void);
 static void play_slideshow(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed);
 static void draw_selection_digits(int right, int bottom, int n);
+
+static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed);
+int export_gif_monitor_events(void);
+static int export_pict(char * fname);
+static char * get_export_filepath(const char * ext);
+
 static void wait_for_sfx(void);
 static void rgbtohsv(Uint8 r8, Uint8 g8, Uint8 b8, float *h, float *s, float *v);
 static void hsvtorgb(float h, float s, float v, Uint8 * r8, Uint8 * g8, Uint8 * b8);
@@ -2158,6 +2174,9 @@ int file_exists(char *path);
 
 int generate_fontconfig_cache_spinner(SDL_Surface * screen);
 
+char * safe_strncat(char *dest, const char *src, size_t n);
+char * safe_strncpy(char *dest, const char *src, size_t n);
+int safe_snprintf(char *str, size_t size, const char *format, ...);
 
 #define MAX_UTF8_CHAR_LENGTH 6
 
@@ -2267,6 +2286,19 @@ static void do_wait(int counter)
 /* Reminder that Mouse Button 1 is the button to use in Tux Paint */
 #define PROMPT_TIP_LEFTCLICK_TXT gettext_noop("Remember to use the left mouse button!")
 #define PROMPT_TIP_LEFTCLICK_YES gettext_noop("OK")
+
+/* Confirmation of successful (we hope) image export */
+#define PROMPT_PICT_EXPORT_TXT gettext_noop("Your picture has been exported!")
+#define PROMPT_GIF_EXPORT_TXT gettext_noop("Your slideshow GIF has been exported!")
+#define PROMPT_EXPORT_YES gettext_noop("OK")
+
+/* We got an error exporting */
+#define PROMPT_PICT_EXPORT_FAILED_TXT gettext_noop("Sorry! Your picture could not be exported!")
+#define PROMPT_GIF_EXPORT_FAILED_TXT gettext_noop("Sorry! Your slideshow GIF could not be exported!")
+
+
+/* Slideshow instructions */
+#define TUX_TIP_SLIDESHOW gettext("Choose the pictures you want, then click “Play”.")
 
 
 enum
@@ -4211,7 +4243,7 @@ static void mainloop(void)
 
                           /* FIXME */
                           /*
-                             snprintf(font_tux_text, sizeof font_tux_text, "%s (%s).",
+                             safe_snprintf(font_tux_text, sizeof font_tux_text, "%s (%s).",
                              TTF_FontFaceFamilyName(getfonthandle(cur_font)),
                              TTF_FontFaceStyleName(getfonthandle(cur_font)));
                              draw_tux_text(TUX_GREAT, font_tux_text, 1);
@@ -6806,6 +6838,9 @@ void show_usage(int exitcode)
           "  [--nolockfile]\n"
           "  [--datadir DIRECTORY]\n"
           "\n"
+          " Exporting:\n"
+          "  [--exportdir DIRECTORY]\n"
+          "\n"
           " Accessibility:\n"
           "  [--mouse-accessibility]\n"
           "  [--mouse | --keyboard]\n"
@@ -6898,7 +6933,7 @@ static void loadbrush_callback(SDL_Surface * screen,
           if (strcasecmp(files[i].str, SHAPE_BRUSH_NAME) == 0)
             shape_brush = num_brushes;
 
-          snprintf(fname, sizeof fname, "%s/%s", dir, files[i].str);
+          safe_snprintf(fname, sizeof fname, "%s/%s", dir, files[i].str);
           if (num_brushes == num_brushes_max)
             {
               num_brushes_max = num_brushes_max * 5 / 4 + 4;
@@ -6916,7 +6951,7 @@ static void loadbrush_callback(SDL_Surface * screen,
           brushes_directional[num_brushes] = 0;
           brushes_spacing[num_brushes] = img_brushes[num_brushes]->h / 4;
 
-          strcpy(strcasestr(fname, ".png"), ".dat");
+          strcpy(strcasestr(fname, ".png"), ".dat"); /* FIXME: Use strncpy (ugh, complicated) */
           fi = fopen(fname, "r");
 
           want_rand = 0;
@@ -7878,8 +7913,8 @@ static void loadstamp_callback(SDL_Surface * screen,
           char svgname[512];
           FILE *fi;
 
-          snprintf(svgname, sizeof(svgname), "%s/%s", dir, files[i].str);
-          strcpy(strcasestr(svgname, ".png"), ".svg");
+          safe_snprintf(svgname, sizeof(svgname), "%s/%s", dir, files[i].str);
+          strcpy(strcasestr(svgname, ".png"), ".svg"); /* FIXME: Use strncpy (ugh, complicated) */
 
           fi = fopen(svgname, "r");
           if (fi != NULL)
@@ -7906,7 +7941,7 @@ static void loadstamp_callback(SDL_Surface * screen,
           && !strcasestr(files[i].str, mirror_ext)
           && !strcasestr(files[i].str, flip_ext) && !strcasestr(files[i].str, mirrorflip_ext))
         {
-          snprintf(fname, sizeof fname, "%s/%s", dir, files[i].str);
+          safe_snprintf(fname, sizeof fname, "%s/%s", dir, files[i].str);
           if (num_stamps[stamp_group] == max_stamps[stamp_group])
             {
               max_stamps[stamp_group] = max_stamps[stamp_group] * 5 / 4 + 15;
@@ -8167,14 +8202,20 @@ static void create_button_labels(void)
   /* Open dialog: 'Slides' button, to switch to slide show mode */
   img_openlabels_slideshow = do_render_button_label(gettext_noop("Slides"));
 
+  /* Open dialog: 'Export' button, to copy an image to an easily-accessible location */
+  img_openlabels_pict_export = do_render_button_label(gettext_noop("Export"));
+
   /* Open dialog: 'Back' button, to dismiss Open dialog without opening a picture */
   img_openlabels_back = do_render_button_label(gettext_noop("Back"));
 
-  /* Slideshow: 'Next' button, to load next slide (image) */
-  img_openlabels_next = do_render_button_label(gettext_noop("Next"));
-
   /* Slideshow: 'Play' button, to begin a slideshow sequence */
   img_openlabels_play = do_render_button_label(gettext_noop("Play"));
+
+  /* Slideshow: 'GIF Export' button, to create an animated GIF */
+  img_openlabels_gif_export = do_render_button_label(gettext_noop("GIF Export"));
+
+  /* Slideshow: 'Next' button, to load next slide (image) */
+  img_openlabels_next = do_render_button_label(gettext_noop("Next"));
 }
 
 
@@ -11114,7 +11155,7 @@ static Mix_Chunk *loadsound_extra(const char *const fname, const char *extra)
 
   if (strcasestr(fname, ".png") != NULL)
     {
-      strcpy(ext, ".png");
+      strcpy(ext, ".png"); /* char[5] size is sufficient */
     }
   else
     {
@@ -11127,9 +11168,9 @@ static Mix_Chunk *loadsound_extra(const char *const fname, const char *extra)
 
   snd_fname = malloc(strlen(fname) + strlen(lang_prefix) + 16);
 
-  strcpy(snd_fname, fname);
-  snprintf(tmp_str, sizeof(tmp_str), "%s_%s.ogg", extra, lang_prefix);
-  strcpy((char *)strcasestr(snd_fname, ext), tmp_str);
+  strcpy(snd_fname, fname); /* malloc'd size should be sufficient */
+  safe_snprintf(tmp_str, sizeof(tmp_str), "%s_%s.ogg", extra, lang_prefix);
+  strcpy((char *)strcasestr(snd_fname, ext), tmp_str); /* FIXME: Use strncpy() (ugh, complicated) */
   debug(snd_fname);
   tmp_snd = Mix_LoadWAV(snd_fname);
 
@@ -11137,9 +11178,9 @@ static Mix_Chunk *loadsound_extra(const char *const fname, const char *extra)
     {
       debug("...No local version of sound (OGG)!");
 
-      strcpy(snd_fname, fname);
-      snprintf(tmp_str, sizeof(tmp_str), "%s_%s.wav", extra, lang_prefix);
-      strcpy((char *)strcasestr(snd_fname, ext), tmp_str);
+      strcpy(snd_fname, fname); /* malloc'd size should be sufficient */
+      safe_snprintf(tmp_str, sizeof(tmp_str), "%s_%s.wav", extra, lang_prefix);
+      strcpy((char *)strcasestr(snd_fname, ext), tmp_str); /* FIXME: Use strncpy() (ugh, complicated) */
       debug(snd_fname);
       tmp_snd = Mix_LoadWAV(snd_fname);
 
@@ -11149,9 +11190,9 @@ static Mix_Chunk *loadsound_extra(const char *const fname, const char *extra)
 
           /* Check for non-country-code locale */
 
-          strcpy(snd_fname, fname);
-          snprintf(tmp_str, sizeof(tmp_str), "%s_%s.ogg", extra, short_lang_prefix);
-          strcpy((char *)strcasestr(snd_fname, ext), tmp_str);
+          strcpy(snd_fname, fname); /* malloc'd size should be sufficient */
+          safe_snprintf(tmp_str, sizeof(tmp_str), "%s_%s.ogg", extra, short_lang_prefix);
+          strcpy((char *)strcasestr(snd_fname, ext), tmp_str); /* FIXME: Use strncpy() (ugh, complicated) */
           debug(snd_fname);
           tmp_snd = Mix_LoadWAV(snd_fname);
 
@@ -11159,9 +11200,9 @@ static Mix_Chunk *loadsound_extra(const char *const fname, const char *extra)
             {
               debug("...No short local version of sound (OGG)!");
 
-              strcpy(snd_fname, fname);
-              snprintf(tmp_str, sizeof(tmp_str), "%s_%s.wav", extra, short_lang_prefix);
-              strcpy((char *)strcasestr(snd_fname, ext), tmp_str);
+              strcpy(snd_fname, fname); /* malloc'd size should be sufficient */
+              safe_snprintf(tmp_str, sizeof(tmp_str), "%s_%s.wav", extra, short_lang_prefix);
+              strcpy((char *)strcasestr(snd_fname, ext), tmp_str); /* FIXME: Use strncpy() (ugh, complicated) */
               debug(snd_fname);
               tmp_snd = Mix_LoadWAV(snd_fname);
 
@@ -11171,9 +11212,9 @@ static Mix_Chunk *loadsound_extra(const char *const fname, const char *extra)
 
                   debug("...No short local version of sound (WAV)!");
 
-                  strcpy(snd_fname, fname);
-                  snprintf(tmp_str, sizeof(tmp_str), "%s.ogg", extra);
-                  strcpy((char *)strcasestr(snd_fname, ext), tmp_str);
+                  strcpy(snd_fname, fname); /* malloc'd size should be sufficient */
+                  safe_snprintf(tmp_str, sizeof(tmp_str), "%s.ogg", extra);
+                  strcpy((char *)strcasestr(snd_fname, ext), tmp_str); /* FIXME: Use strncpy() (ugh, complicated) */
                   debug(snd_fname);
                   tmp_snd = Mix_LoadWAV(snd_fname);
 
@@ -11181,9 +11222,9 @@ static Mix_Chunk *loadsound_extra(const char *const fname, const char *extra)
                     {
                       debug("...No default version of sound (OGG)!");
 
-                      strcpy(snd_fname, fname);
-                      snprintf(tmp_str, sizeof(tmp_str), "%s.wav", extra);
-                      strcpy((char *)strcasestr(snd_fname, ext), tmp_str);
+                      strcpy(snd_fname, fname); /* malloc'd size should be sufficient */
+                      safe_snprintf(tmp_str, sizeof(tmp_str), "%s.wav", extra);
+                      strcpy((char *)strcasestr(snd_fname, ext), tmp_str); /* FIXME: Use strncpy() (ugh, complicated) */
                       debug(snd_fname);
                       tmp_snd = Mix_LoadWAV(snd_fname);
 
@@ -11263,21 +11304,17 @@ static char *loaddesc(const char *const fname, Uint8 * locale_text)
   if (extptr != NULL)
     {
       found = 0;
+      strcpy(def_buf, ""); /* In case of total inability to find anything */
 
       /* Set the first available language */
       for (i = 0; i < num_wished_langs && !found; i++)
         {
-          strcpy((char *)extptr, ".txt");
-
+          strcpy((char *)extptr, ".txt"); /* safe; pointing into a safe spot within an existing string (txt_fname) */
           fi = fopen(txt_fname, "r");
-
           if (!fi)
             return NULL;
 
-
           got_first = 0;
-          //    found = 0;
-
           strcpy(def_buf, "");
 
           do
@@ -11292,10 +11329,9 @@ static char *loaddesc(const char *const fname, Uint8 * locale_text)
                         {
                           /* First one is the default: */
 
-                          strcpy(def_buf, buf);
+                          strcpy(def_buf, buf); /* safe; both the same size */
                           got_first = 1;
                         }
-
 
                       debug(buf);
 
@@ -11333,6 +11369,7 @@ static char *loaddesc(const char *const fname, Uint8 * locale_text)
           fclose(fi);
 
         }
+
       free(txt_fname);
 
 
@@ -11346,12 +11383,12 @@ static char *loaddesc(const char *const fname, Uint8 * locale_text)
       else
         {
           /* No locale-specific translation; use the default (English) */
-
           return (strdup(def_buf));
         }
     }
   else
     {
+      fprintf(stderr, "Somehow, '%s' doesn't have a filename extension!?\n", fname);
       return NULL;
     }
 }
@@ -11455,8 +11492,6 @@ static double loadinfo(const char *const fname, stamp_type * inf)
                     {
                       debug(cp);
                     }
-
-                  /* printf("tinter=%d\n", inf->tinter); */
                 }
               else if (strcmp(buf, "nomirror") == 0)
                 inf->mirrorable = 0;
@@ -11538,9 +11573,13 @@ static int SDLCALL NondefectiveBlit(SDL_Surface * src, SDL_Rect * srcrect, SDL_S
 
 
 /**
- * FIXME
+ * Copy an image, scaling and smearing, as needed, into a new surface.
+ * Free the original surface.
+ * 
+ * @param SDL_Surface * src -- source surface (will be freed by this function!)
+ * @param SDL_Surface * dst -- destination surface
+ * @param int SDCALL(*blit) -- function for blitting; "NondefectiveBlit" or "SDL_BlitSurface"
  */
-/* For the 3rd arg, pass either NondefectiveBlit or SDL_BlitSurface. */
 static void autoscale_copy_smear_free(SDL_Surface * src, SDL_Surface * dst,
                                       int SDLCALL(*blit) (SDL_Surface * src,
                                                           SDL_Rect * srcrect, SDL_Surface * dst, SDL_Rect * dstrect))
@@ -11634,7 +11673,7 @@ static void load_starter_id(char *saved_id, FILE * fil)
 
   if (saved_id != NULL)
     {
-      snprintf(fname, sizeof(fname), "saved/%s.dat", saved_id);
+      safe_snprintf(fname, sizeof(fname), "saved/%s.dat", saved_id);
       rname = get_fname(fname, DIR_SAVE);
 
       fi = fopen(rname, "r");
@@ -11723,7 +11762,7 @@ static SDL_Surface *load_starter_helper(char *path_and_basename, const char *ext
   unsigned int i;
 
   ext = strdup(extension);
-  snprintf(fname, sizeof(fname), "%s.%s", path_and_basename, ext);
+  safe_snprintf(fname, sizeof(fname), "%s.%s", path_and_basename, ext);
   surf = (*load_func) (fname);
 
   if (surf == NULL)
@@ -11732,7 +11771,7 @@ static SDL_Surface *load_starter_helper(char *path_and_basename, const char *ext
         {
           ext[i] = toupper(ext[i]);
         }
-      snprintf(fname, sizeof(fname), "%s.%s", path_and_basename, ext);
+      safe_snprintf(fname, sizeof(fname), "%s.%s", path_and_basename, ext);
       surf = (*load_func) (fname);
     }
 
@@ -11770,21 +11809,21 @@ static void load_starter(char *img_id)
     {
       /* Try loading an SVG */
 
-      snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "svg", &load_svg);
     }
 #endif
 
   if (tmp_surf == NULL)
     {
-      snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "png", &IMG_Load);
     }
 
   if (tmp_surf == NULL)
     {
       /* Try loading a KPX */
-      snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "kpx", &myIMG_Load);
     }
 
@@ -11806,7 +11845,7 @@ static void load_starter(char *img_id)
   /* (Try SVG) */
   if (tmp_surf == NULL)
     {
-      snprintf(fname, sizeof(fname), "%s/%s-back", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s-back", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "svg", &load_svg);
     }
 #endif
@@ -11814,21 +11853,21 @@ static void load_starter(char *img_id)
   /* (JPEG) */
   if (tmp_surf == NULL)
     {
-      snprintf(fname, sizeof(fname), "%s/%s-back", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s-back", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "jpeg", &IMG_Load);
     }
 
   if (tmp_surf == NULL)
     {
       /* (Then just JPG) */
-      snprintf(fname, sizeof(fname), "%s/%s-back", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s-back", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "jpg", &IMG_Load);
     }
 
   /* (Failed? Try PNG next) */
   if (tmp_surf == NULL)
     {
-      snprintf(fname, sizeof(fname), "%s/%s-back", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s-back", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "png", &IMG_Load);
     }
 
@@ -11952,14 +11991,14 @@ static void load_template(char *img_id)
   img_starter_bkgd = NULL;
 
   /* (Try loading a KPX) */
-  snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
+  safe_snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
   tmp_surf = load_starter_helper(fname, "kpx", &myIMG_Load);
 
 #ifndef NOSVG
   /* (Failed? Try SVG next) */
   if (tmp_surf == NULL)
     {
-      snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "svg", &load_svg);
     }
 #endif
@@ -11967,20 +12006,20 @@ static void load_template(char *img_id)
   /* (JPEG) */
   if (tmp_surf == NULL)
     {
-      snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "jpeg", &IMG_Load);
     }
   if (tmp_surf == NULL)
     {
       /* (Then just JPG) */
-      snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "jpg", &IMG_Load);
     }
 
   /* (Failed? Try PNG next) */
   if (tmp_surf == NULL)
     {
-      snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
+      safe_snprintf(fname, sizeof(fname), "%s/%s", dirname, img_id);
       tmp_surf = load_starter_helper(fname, "png", &IMG_Load);
     }
 
@@ -12086,7 +12125,7 @@ static void load_current(void)
       label_node_to_edit = NULL;
       have_to_rec_label_node = FALSE;
 
-      snprintf(ftmp, sizeof(ftmp), "saved/%s%s", file_id, FNAME_EXTENSION);
+      safe_snprintf(ftmp, sizeof(ftmp), "saved/%s%s", file_id, FNAME_EXTENSION);
       fname = get_fname(ftmp, DIR_SAVE);
 
       tmp = myIMG_Load_RWops(fname);
@@ -12155,12 +12194,12 @@ static void load_current(void)
  * FIXME
  */
 /* Make sure we have a 'path' directory */
-static int make_directory(const char *path, const char *errmsg)
+static int make_directory(int dir_type, const char *path, const char *errmsg)
 {
   char *fname;
   int res;
 
-  fname = get_fname(path, DIR_SAVE);
+  fname = get_fname(path, dir_type);
   res = mkdir(fname, 0755);
   if (res != 0 && errno != EEXIST)
     {
@@ -12182,7 +12221,7 @@ static void save_current(void)
   char *fname;
   FILE *fi;
 
-  if (!make_directory("", "Can't create user data directory"))
+  if (!make_directory(DIR_SAVE, "", "Can't create user data directory"))
     {
       draw_tux_text(TUX_OOPS, strerror(errno), 0);
       return;
@@ -12766,9 +12805,11 @@ static void cleanup(void)
   free_surface(&img_openlabels_open);
   free_surface(&img_openlabels_slideshow);
   free_surface(&img_openlabels_erase);
+  free_surface(&img_openlabels_pict_export);
   free_surface(&img_openlabels_back);
   free_surface(&img_openlabels_next);
   free_surface(&img_openlabels_play);
+  free_surface(&img_openlabels_gif_export);
 
   free_surface(&img_progress);
 
@@ -12788,11 +12829,13 @@ static void cleanup(void)
 
   free_surface(&img_open);
   free_surface(&img_erase);
+  free_surface(&img_pict_export);
   free_surface(&img_back);
   free_surface(&img_trash);
 
   free_surface(&img_slideshow);
   free_surface(&img_play);
+  free_surface(&img_gif_export);
   free_surface(&img_select_digits);
 
   free_surface(&img_dead40x40);
@@ -13482,7 +13525,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
       do_setcursor(cursor_watch);
     }
 
-  if (!make_directory("", "Can't create user data directory"))
+  if (!make_directory(DIR_SAVE, "", "Can't create user data directory"))
     {
       fprintf(stderr, "Cannot save the any pictures! SORRY!\n\n");
       draw_tux_text(TUX_OOPS, strerror(errno), 0);
@@ -13497,7 +13540,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
 
   /* Make sure we have a ~/.tuxpaint/saved directory: */
 
-  if (!make_directory("saved", "Can't create user data directory"))
+  if (!make_directory(DIR_SAVE, "saved", "Can't create user data directory"))
     {
       fprintf(stderr, "Cannot save any pictures! SORRY!\n\n");
       draw_tux_text(TUX_OOPS, strerror(errno), 0);
@@ -13512,13 +13555,23 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
 
   /* Make sure we have a ~/.tuxpaint/saved/.thumbs/ directory: */
 
-  if (!make_directory("saved/.thumbs", "Can't create user data thumbnail directory"))
+  if (!make_directory(DIR_SAVE, "saved/.thumbs", "Can't create user data thumbnail directory"))
     {
       fprintf(stderr, "Cannot save any pictures! SORRY!\n\n");
       draw_tux_text(TUX_OOPS, strerror(errno), 0);
       return 0;
     }
 
+
+
+      /* Make sure we have a ~/.tuxpaint/saved/.label/ directory: */
+  if (!make_directory(DIR_SAVE, "saved/.label", "Can't create label information directory"))
+      {
+      fprintf(stderr, "Cannot save label information! SORRY!\n\n");
+      draw_tux_text(TUX_OOPS, strerror(errno), 0);
+      return 0;
+      }
+  
   if (!autosave)
     {
       show_progress_bar(screen);
@@ -13566,7 +13619,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
 
   /* (Was thumbnail in old directory, rather than under .thumbs?) */
 
-  snprintf(tmp, sizeof(tmp), "saved/%s-t%s", file_id, FNAME_EXTENSION);
+  safe_snprintf(tmp, sizeof(tmp), "saved/%s-t%s", file_id, FNAME_EXTENSION);
   fname = get_fname(tmp, DIR_SAVE);
   fi = fopen(fname, "r");
   if (fi != NULL)
@@ -13578,7 +13631,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
       /* No old thumbnail!  Save this image's thumbnail in the new place,
          under ".thumbs" */
 
-      snprintf(tmp, sizeof(tmp), "saved/.thumbs/%s-t%s", file_id, FNAME_EXTENSION);
+      safe_snprintf(tmp, sizeof(tmp), "saved/.thumbs/%s-t%s", file_id, FNAME_EXTENSION);
       fname = get_fname(tmp, DIR_SAVE);
     }
 
@@ -13606,7 +13659,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
   if (starter_id[0] != '\0' ||
       template_id[0] != '\0' || canvas_color_r != 255 || canvas_color_g != 255 || canvas_color_b != 255)
     {
-      snprintf(tmp, sizeof(tmp), "saved/%s.dat", file_id);
+      safe_snprintf(tmp, sizeof(tmp), "saved/%s.dat", file_id);
       fname = get_fname(tmp, DIR_SAVE);
       fi = fopen(fname, "w");
       if (fi != NULL)
@@ -13647,23 +13700,26 @@ static void set_chunk_data(unsigned char **chunk_data, size_t * chunk_data_len, 
   int headersLen;
   unsigned int i;
   char *line, *headers, *cdata;
+  size_t line_sz, headers_sz;
 
   headersLen = 0;
-  headers = calloc(256, 1);
-  line = calloc(256, 1);
+  headers_sz = 256;
+  headers = calloc(headers_sz, 1);
+  line_sz = 256;
+  line = calloc(line_sz, 1);
 
-  strcat(headers, "Tuxpaint\n");
-  strcat(headers, "Tuxpaint_" VER_VERSION "\n");
-  sprintf(line, "%lu%s", uncompressed_size, "\n");
-  strcat(headers, line);
-  sprintf(line, "%lu%s", dataLen, "\n");
-  strcat(headers, line);
+  safe_strncat(headers, "Tuxpaint\n", headers_sz);
+  safe_strncat(headers, "Tuxpaint_" VER_VERSION "\n", headers_sz);
+  safe_snprintf(line, line_sz, "%lu%s", uncompressed_size, "\n");
+  safe_strncat(headers, line, headers_sz);
+  safe_snprintf(line, line_sz, "%lu%s", dataLen, "\n");
+  safe_strncat(headers, line, headers_sz);
 
   headersLen = strlen(headers);
   *chunk_data_len = headersLen + dataLen;
 
   cdata = calloc(*chunk_data_len, sizeof(unsigned char *));
-  strcat(cdata, headers);
+  strcat(cdata, headers); /* FIXME: Use strncat() */
 
   for (i = 0; i < dataLen; i++)
     cdata[headersLen + i] = data[i];
@@ -13725,7 +13781,7 @@ static void do_png_embed_data(png_structp png_ptr)
   Uint32 i;
   struct label_node *current_node;
   char *char_stream, *line;
-  size_t dat_size;
+  size_t dat_size, char_stream_sz, line_sz;
 
 
   /* Starter foreground */
@@ -14073,25 +14129,27 @@ static void do_png_embed_data(png_structp png_ptr)
       template_id[0] != '\0' || canvas_color_r != 255 || canvas_color_g != 255 || canvas_color_b != 255)
     {
       /* Usually the .dat data are less than 100 bytes, hope this keeps line and char_stream in the safe side */
-      line = calloc(256, 1);
-      char_stream = calloc(256 + sizeof(starter_id) + sizeof(template_id), 1);
+      line_sz = 256;
+      line = calloc(line_sz, 1);
+      char_stream_sz = 256 + sizeof(starter_id) + sizeof(template_id),
+      char_stream = calloc(char_stream_sz, 1);
 
-      sprintf(char_stream, "%s\n", starter_id);
+      safe_snprintf(char_stream, char_stream_sz, "%s\n", starter_id);
 
-      sprintf(line, "%d %d %d\n", starter_mirrored, starter_flipped, starter_personal);
-      strcat(char_stream, line);
+      safe_snprintf(line, line_sz, "%d %d %d\n", starter_mirrored, starter_flipped, starter_personal);
+      safe_strncat(char_stream, line, char_stream_sz);
 
-      sprintf(line, "c%d %d %d\n", canvas_color_r, canvas_color_g, canvas_color_b);
-      strcat(char_stream, line);
+      safe_snprintf(line, line_sz, "c%d %d %d\n", canvas_color_r, canvas_color_g, canvas_color_b);
+      safe_strncat(char_stream, line, char_stream_sz);
 
-      sprintf(line, "T%s\n", template_id);
-      strcat(char_stream, line);
+      safe_snprintf(line, line_sz, "T%s\n", template_id);
+      safe_strncat(char_stream, line, char_stream_sz);
 
-      sprintf(line, "%d\n", template_personal);
-      strcat(char_stream, line);
+      safe_snprintf(line, line_sz, "%d\n", template_personal);
+      safe_strncat(char_stream, line, char_stream_sz);
 
-      sprintf(line, "M%d\n", starter_modified);
-      strcat(char_stream, line);
+      safe_snprintf(line, line_sz, "M%d\n", starter_modified);
+      safe_strncat(char_stream, line, char_stream_sz);
 
       dat_size = strlen(char_stream);
 
@@ -14237,9 +14295,12 @@ static int do_png_save(FILE * fi, const char *const fname, SDL_Surface * surf, i
 }
 
 /**
- * FIXME
+ * Generate a new file ID.  Used when saving a picture for
+ * the first time (i.e., very first save, or saving as a new
+ * file, rather than overwriting/replacing the existing version).
+ *
+ * Affects "file_id" string.
  */
-/* Pick a new file ID: */
 static void get_new_file_id(void)
 {
   time_t t;
@@ -14248,9 +14309,6 @@ static void get_new_file_id(void)
 
   strftime(file_id, sizeof(file_id), "%Y%m%d%H%M%S", localtime(&t));
   debug(file_id);
-
-
-  /* FIXME: Show thumbnail and prompt for title: */
 }
 
 
@@ -14341,8 +14399,9 @@ static int do_open(void)
   char **d_names = NULL, **d_exts = NULL;
   int *d_places;
   FILE *fi;
-  char fname[1024];
-  int num_files, i, done, slideshow, update_list, want_erase, cur, which, num_files_in_dirs, j, any_saved_files;
+  char fname[MAX_PATH];
+  int num_files, i, done, slideshow, update_list, want_erase, want_export;
+  int cur, which, num_files_in_dirs, j, any_saved_files;
   SDL_Rect dest;
   SDL_Event event;
   SDLKey key;
@@ -14481,17 +14540,17 @@ static int do_open(void)
                       /* Support legacy BMP files for load: */
                       || strcasestr(f->d_name, ".bmp") != NULL)
                     {
-                      strcpy(fname, f->d_name);
+                      safe_strncpy(fname, f->d_name, sizeof(fname));
                       if (strcasestr(fname, FNAME_EXTENSION) != NULL)
                         {
                           d_exts[num_files] = strdup(strcasestr(fname, FNAME_EXTENSION));
-                          strcpy((char *)strcasestr(fname, FNAME_EXTENSION), "");
+                          strcpy((char *)strcasestr(fname, FNAME_EXTENSION), ""); /* Safe; truncating */
                         }
 
                       if (strcasestr(fname, ".bmp") != NULL)
                         {
                           d_exts[num_files] = strdup(strcasestr(fname, ".bmp"));
-                          strcpy((char *)strcasestr(fname, ".bmp"), "");
+                          strcpy((char *)strcasestr(fname, ".bmp"), ""); /* Safe; truncating */
                         }
 
                       d_names[num_files] = strdup(fname);
@@ -14518,7 +14577,7 @@ static int do_open(void)
 
                       /* Try to load thumbnail first: */
 
-                      snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png",
+                      safe_snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png",
                                dirname[d_places[num_files]], d_names[num_files]);
                       debug(fname);
                       img = IMG_Load(fname);
@@ -14528,7 +14587,7 @@ static int do_open(void)
                           /* No thumbnail in the new location ("saved/.thumbs"),
                              try the old locatin ("saved/"): */
 
-                          snprintf(fname, sizeof(fname), "%s/%s-t.png",
+                          safe_snprintf(fname, sizeof(fname), "%s/%s-t.png",
                                    dirname[d_places[num_files]], d_names[num_files]);
                           debug(fname);
 
@@ -14568,16 +14627,16 @@ static int do_open(void)
                           /* No thumbnail - load original: */
 
                           /* Make sure we have a ~/.tuxpaint/saved directory: */
-                          if (make_directory("saved", "Can't create user data directory"))
+                          if (make_directory(DIR_SAVE, "saved", "Can't create user data directory"))
                             {
                               /* (Make sure we have a .../saved/.thumbs/ directory:) */
-                              make_directory("saved/.thumbs", "Can't create user data thumbnail directory");
+                              make_directory(DIR_SAVE, "saved/.thumbs", "Can't create user data thumbnail directory");
                             }
 
 
                           if (img == NULL)
                             {
-                              snprintf(fname, sizeof(fname), "%s/%s", dirname[d_places[num_files]], f->d_name);
+                              safe_snprintf(fname, sizeof(fname), "%s/%s", dirname[d_places[num_files]], f->d_name);
                               debug(fname);
                               img = myIMG_Load(fname);
                             }
@@ -14626,7 +14685,7 @@ static int do_open(void)
                                 {
                                   debug("Saving thumbnail for this one!");
 
-                                  snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png",
+                                  safe_snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png",
                                            dirname[d_places[num_files]], d_names[num_files]);
 
                                   fi = fopen(fname, "wb");
@@ -14676,16 +14735,15 @@ static int do_open(void)
           /* Let user choose an image: */
 
           /* Instructions for 'Open' file dialog */
-          char *freeme = textdir(gettext_noop("Choose the picture you want, " "then click “Open”."));
-
-          draw_tux_text(TUX_BORED, freeme, 1);
-          free(freeme);
+          char *instructions = textdir(gettext_noop("Choose the picture you want, then click “Open”."));
+          draw_tux_text(TUX_BORED, instructions, 1);
 
           /* NOTE: cur is now set above; if file_id'th file is found, it's
              set to that file's index; otherwise, we default to '0' */
 
           update_list = 1;
           want_erase = 0;
+          want_export = 0;
 
           done = 0;
           slideshow = 0;
@@ -14798,6 +14856,25 @@ static int do_open(void)
                   dest.x = WINDOW_WIDTH - 96 - 48 + (48 - img_openlabels_back->w) / 2;
                   dest.y = (48 * 7 + 40 + HEIGHTOFFSET) - img_openlabels_back->h;
                   SDL_BlitSurface(img_openlabels_back, NULL, screen, &dest);
+
+
+                  /* "Export" button: */
+
+                  dest.x = WINDOW_WIDTH - 96 - 48 - 48 - 48;
+                  dest.y = (48 * 7 + 40 + HEIGHTOFFSET) - 48;
+
+                  if (d_places[which] != PLACE_STARTERS_DIR && d_places[which] != PLACE_PERSONAL_STARTERS_DIR)
+                    SDL_BlitSurface(img_btn_up, NULL, screen, &dest);
+                  else
+                    SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
+
+                  dest.x = WINDOW_WIDTH - 96 - 48 - 48 - 48 + (48 - img_pict_export->w) / 2;
+                  dest.y = (48 * 7 + 40 + HEIGHTOFFSET) - 48;
+                  SDL_BlitSurface(img_pict_export, NULL, screen, &dest);
+
+                  dest.x = WINDOW_WIDTH - 96 - 48 - 48 - 48 + (48 - img_openlabels_pict_export->w) / 2;
+                  dest.y = (48 * 7 + 40 + HEIGHTOFFSET) - img_openlabels_pict_export->h;
+                  SDL_BlitSurface(img_openlabels_pict_export, NULL, screen, &dest);
 
 
                   /* "Erase" button: */
@@ -15036,9 +15113,19 @@ static int do_open(void)
 
                           want_erase = 1;
                         }
+                      else if (event.button.x >= (WINDOW_WIDTH - 96 - 48 - 48 - 48) &&
+                               event.button.x < (WINDOW_WIDTH - 48 - 48 - 96) &&
+                               event.button.y >= (48 * 7 + 40 + HEIGHTOFFSET) - 48 &&
+                               event.button.y < (48 * 7 + 40 + HEIGHTOFFSET) &&
+                               d_places[which] != PLACE_STARTERS_DIR && d_places[which] != PLACE_PERSONAL_STARTERS_DIR)
+                        {
+                          /* Export */
+
+                          want_export = 1;
+                        }
 #ifdef __ANDROID__
                       start_motion_convert(event);
-#endif
+#endif	      
                     }
                   else if (event.type == SDL_MOUSEBUTTONUP)
                     {
@@ -15099,8 +15186,9 @@ static int do_open(void)
                       else if (((event.button.x >= 96 && event.button.x < 96 + 48 + 48) ||
                                 (event.button.x >= (WINDOW_WIDTH - 96 - 48) &&
                                  event.button.x < (WINDOW_WIDTH - 96)) ||
-                                (event.button.x >= (WINDOW_WIDTH - 96 - 48 - 48) &&
+                                (event.button.x >= (WINDOW_WIDTH - 96 - 48 - 48 - 48) &&
                                  event.button.x < (WINDOW_WIDTH - 48 - 96) &&
+				 /* Both "Erase" and "Export" only work on our own files... */
                                  d_places[which] != PLACE_STARTERS_DIR &&
                                  d_places[which] != PLACE_PERSONAL_STARTERS_DIR)) &&
                                event.button.y >= (48 * 7 + 40 + HEIGHTOFFSET) - 48 &&
@@ -15165,7 +15253,7 @@ static int do_open(void)
                                           img_popup_arrow, img_trash, SND_AREYOUSURE,
                                           WINDOW_WIDTH - 96 - 48 - 48 + 24, 48 * 7 + 40 + HEIGHTOFFSET - 48 + 24))
                     {
-                      snprintf(fname, sizeof(fname), "saved/%s%s", d_names[which], d_exts[which]);
+                      safe_snprintf(fname, sizeof(fname), "saved/%s%s", d_names[which], d_exts[which]);
 
                       rfname = get_fname(fname, DIR_SAVE);
 
@@ -15176,7 +15264,7 @@ static int do_open(void)
 
                           /* Delete the thumbnail, too: */
 
-                          snprintf(fname, sizeof(fname), "saved/.thumbs/%s-t.png", d_names[which]);
+                          safe_snprintf(fname, sizeof(fname), "saved/.thumbs/%s-t.png", d_names[which]);
 
                           free(rfname);
                           rfname = get_fname(fname, DIR_SAVE);
@@ -15186,7 +15274,7 @@ static int do_open(void)
 
                           /* Try deleting old-style thumbnail, too: */
 
-                          snprintf(fname, sizeof(fname), "saved/%s-t.png", d_names[which]);
+                          safe_snprintf(fname, sizeof(fname), "saved/%s-t.png", d_names[which]);
 
                           free(rfname);
                           rfname = get_fname(fname, DIR_SAVE);
@@ -15196,7 +15284,7 @@ static int do_open(void)
 
                           /* Delete .dat file, if any: */
 
-                          snprintf(fname, sizeof(fname), "saved/%s.dat", d_names[which]);
+                          safe_snprintf(fname, sizeof(fname), "saved/%s.dat", d_names[which]);
 
                           free(rfname);
                           rfname = get_fname(fname, DIR_SAVE);
@@ -15263,6 +15351,21 @@ static int do_open(void)
                       update_list = 1;
                     }
                 }
+
+              if (want_export)
+                {
+                  want_export = 0;
+
+                  safe_snprintf(fname, sizeof(fname), "saved/%s%s", d_names[which], d_exts[which]);
+                  rfname = get_fname(fname, DIR_SAVE);
+                  if (export_pict(rfname))
+                    do_prompt_snd(PROMPT_PICT_EXPORT_TXT, PROMPT_EXPORT_YES, "", SND_TUXOK, screen->w / 2, screen->h / 2);
+                  else
+                    do_prompt_snd(PROMPT_PICT_EXPORT_FAILED_TXT, PROMPT_EXPORT_YES, "", SND_YOUCANNOT, screen->w / 2, screen->h / 2);
+
+                  draw_tux_text(TUX_BORED, instructions, 1);
+		  update_list = 1;
+                }
             }
           while (!done);
 
@@ -15297,7 +15400,7 @@ static int do_open(void)
 
                   /* Figure out filename: */
 
-                  snprintf(fname, sizeof(fname), "%s/%s%s", dirname[d_places[which]], d_names[which], d_exts[which]);
+                  safe_snprintf(fname, sizeof(fname), "%s/%s%s", dirname[d_places[which]], d_names[which], d_exts[which]);
                   fi = fopen(fname, "r");
                   if (fi == NULL)
                     {
@@ -15340,7 +15443,7 @@ static int do_open(void)
 
                       been_saved = 1;
 
-                      strcpy(file_id, d_names[which]);
+                      safe_strncpy(file_id, d_names[which], sizeof(file_id));
                       starter_id[0] = '\0';
                       template_id[0] = '\0';
 
@@ -15377,6 +15480,8 @@ static int do_open(void)
 
 
           update_canvas(0, 0, WINDOW_WIDTH - 96 - 96, 48 * 7 + 40 + HEIGHTOFFSET);
+
+          free(instructions);
         }
 
 
@@ -15436,13 +15541,14 @@ static int do_slideshow(void)
   SDL_Rect dest;
   SDL_Event event;
   SDLKey key;
-  char *freeme;
+  char *freeme, *instructions;
   int speeds;
   float x_per, y_per;
   int xx, yy;
   SDL_Surface *btn, *blnk;
   int val_x, val_y, motioner;
   int valhat_x, valhat_y, hatmotioner;
+  int export_successful;
 
   val_x = val_y = motioner = 0;
   valhat_x = valhat_y = hatmotioner = 0;
@@ -15528,17 +15634,17 @@ static int do_slideshow(void)
                   /* Support legacy BMP files for load: */
                   || strcasestr(f->d_name, ".bmp") != NULL)
                 {
-                  strcpy(fname, f->d_name);
+                  safe_strncpy(fname, f->d_name, sizeof(fname));
                   if (strcasestr(fname, FNAME_EXTENSION) != NULL)
                     {
                       d_exts[num_files] = strdup(strcasestr(fname, FNAME_EXTENSION));
-                      strcpy((char *)strcasestr(fname, FNAME_EXTENSION), "");
+                      strcpy((char *)strcasestr(fname, FNAME_EXTENSION), ""); /* FIXME: Use strncpy() (ugh, complicated) */
                     }
 
                   if (strcasestr(fname, ".bmp") != NULL)
                     {
                       d_exts[num_files] = strdup(strcasestr(fname, ".bmp"));
-                      strcpy((char *)strcasestr(fname, ".bmp"), "");
+                      strcpy((char *)strcasestr(fname, ".bmp"), ""); /* Safe; truncating */
                     }
 
                   d_names[num_files] = strdup(fname);
@@ -15549,7 +15655,7 @@ static int do_slideshow(void)
 
                   /* Try to load thumbnail first: */
 
-                  snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png", dirname, d_names[num_files]);
+                  safe_snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png", dirname, d_names[num_files]);
                   debug("Loading thumbnail...");
                   debug(fname);
                   img = IMG_Load(fname);
@@ -15558,7 +15664,7 @@ static int do_slideshow(void)
                       /* No thumbnail in the new location ("saved/.thumbs"),
                          try the old locatin ("saved/"): */
 
-                      snprintf(fname, sizeof(fname), "%s/%s-t.png", dirname, d_names[num_files]);
+                      safe_snprintf(fname, sizeof(fname), "%s/%s-t.png", dirname, d_names[num_files]);
                       debug(fname);
 
                       img = IMG_Load(fname);
@@ -15602,13 +15708,13 @@ static int do_slideshow(void)
                       /* No thumbnail - load original: */
 
                       /* Make sure we have a ~/.tuxpaint/saved directory: */
-                      if (make_directory("saved", "Can't create user data directory"))
+                      if (make_directory(DIR_SAVE, "saved", "Can't create user data directory"))
                         {
                           /* (Make sure we have a .../saved/.thumbs/ directory:) */
-                          make_directory("saved/.thumbs", "Can't create user data thumbnail directory");
+                          make_directory(DIR_SAVE, "saved/.thumbs", "Can't create user data thumbnail directory");
                         }
 
-                      snprintf(fname, sizeof(fname), "%s/%s", dirname, f->d_name);
+                      safe_snprintf(fname, sizeof(fname), "%s/%s", dirname, f->d_name);
 
                       debug("Loading original, to make thumbnail");
                       debug(fname);
@@ -15654,7 +15760,7 @@ static int do_slideshow(void)
 
                               debug("Saving thumbnail for this one!");
 
-                              snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png", dirname, d_names[num_files]);
+                              safe_snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png", dirname, d_names[num_files]);
 
                               fi = fopen(fname, "wb");
                               if (fi == NULL)
@@ -15684,10 +15790,9 @@ static int do_slideshow(void)
 #endif
   /* Let user choose images: */
 
-  /* Instructions for Slideshow file dialog (FIXME: Make a #define) */
-  freeme = textdir(gettext_noop("Choose the pictures you want, " "then click “Play”."));
-  draw_tux_text(TUX_BORED, freeme, 1);
-  free(freeme);
+  /* Instructions for Slideshow file dialog */
+  instructions = textdir(TUX_TIP_SLIDESHOW);
+  draw_tux_text(TUX_BORED, instructions, 1);
 
   /* NOTE: cur is now set above; if file_id'th file is found, it's
      set to that file's index; otherwise, we default to '0' */
@@ -15791,6 +15896,21 @@ static int do_slideshow(void)
           dest.x = 96 + (48 - img_openlabels_play->w) / 2;
           dest.y = (48 * 7 + 40 + HEIGHTOFFSET) - img_openlabels_play->h;
           SDL_BlitSurface(img_openlabels_play, NULL, screen, &dest);
+
+
+          /* "GIF Export" button: */
+
+          dest.x = WINDOW_WIDTH - 96 - 48 * 2;
+          dest.y = (48 * 7 + 40 + HEIGHTOFFSET) - 48;
+          SDL_BlitSurface(img_btn_up, NULL, screen, &dest);
+
+          dest.x = WINDOW_WIDTH - 96 - 48 * 2 + (48 - img_gif_export->w) / 2;
+          dest.y = (48 * 7 + 40 + HEIGHTOFFSET) - 48;
+          SDL_BlitSurface(img_gif_export, NULL, screen, &dest);
+
+          dest.x = WINDOW_WIDTH - 96 - 48 * 2 + (48 - img_openlabels_gif_export->w) / 2;
+          dest.y = (48 * 7 + 40 + HEIGHTOFFSET) - img_openlabels_gif_export->h;
+          SDL_BlitSurface(img_openlabels_gif_export, NULL, screen, &dest);
 
 
           /* "Back" button: */
@@ -16004,8 +16124,8 @@ static int do_slideshow(void)
                   draw_colors(COLORSEL_CLOBBER_WIPE);
                   draw_none();
 
-                  /* Instructions for Slideshow file dialog (FIXME: Make a #define) */
-                  freeme = textdir(gettext_noop("Choose the pictures you want, " "then click “Play”."));
+                  /* Instructions for Slideshow file dialog */
+                  freeme = textdir(TUX_TIP_SLIDESHOW);
                   draw_tux_text(TUX_BORED, freeme, 1);
                   free(freeme);
 
@@ -16039,6 +16159,51 @@ static int do_slideshow(void)
 
                       update_list = 1;
                     }
+                }
+              else if (event.button.x >= (WINDOW_WIDTH - 96 - 48 - 48) &&
+                       event.button.x < (WINDOW_WIDTH - 96 - 48) &&
+                       event.button.y >= (48 * 7 + 40 + HEIGHTOFFSET) - 48 &&
+                       event.button.y < (48 * 7 + 40 + HEIGHTOFFSET))
+                {
+                  /* GIF Export */
+
+                  playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
+
+                  if (num_selected < 2)
+		    {
+	              /* None selected? Too dangerous to automatically select all (like we do for slideshow playback).
+		         Only 1 selected?  No point in saving as GIF.
+                      */
+                      freeme = textdir(gettext_noop("Select 2 or more drawings to turn into an animated GIF."));
+                      draw_tux_text(TUX_BORED, freeme, 1);
+                      free(freeme);
+
+                      control_drawtext_timer(2000, instructions, 0); /* N.B. It will draw instructions, regardless */
+		    }
+		  else
+		    {
+                      export_successful = export_gif(selected, num_selected, dirname, d_names, d_exts, speed);
+
+                      /* Redraw entire screen, after export: */
+                      SDL_FillRect(screen, NULL, SDL_MapRGB(canvas->format, 255, 255, 255));
+                      draw_toolbar();
+                      draw_colors(COLORSEL_CLOBBER_WIPE);
+                      draw_none();
+        
+                      /* Show a message depending on success */
+                      if (export_successful)
+                        do_prompt_snd(PROMPT_GIF_EXPORT_TXT, PROMPT_EXPORT_YES, "", SND_TUXOK, screen->w / 2, screen->h / 2);
+                      else
+                        do_prompt_snd(PROMPT_GIF_EXPORT_FAILED_TXT, PROMPT_EXPORT_YES, "", SND_YOUCANNOT, screen->w / 2, screen->h / 2);
+        
+                      freeme = textdir(TUX_TIP_SLIDESHOW);
+                      draw_tux_text(TUX_BORED, freeme, 1);
+                      free(freeme);
+        
+                      SDL_Flip(screen);
+        
+                      update_list = 1;
+		    }
                 }
               else if (event.button.x >= (WINDOW_WIDTH - 96 - 48) &&
                        event.button.x < (WINDOW_WIDTH - 96) &&
@@ -16112,7 +16277,7 @@ static int do_slideshow(void)
                   do_setcursor(cursor_down);
                 }
               else if (((event.button.x >= 96 && event.button.x < 96 + 48 + 96) ||
-                        (event.button.x >= (WINDOW_WIDTH - 96 - 48) &&
+                        (event.button.x >= (WINDOW_WIDTH - 96 - 48 * 2) &&
                          event.button.x < (WINDOW_WIDTH - 96))) &&
                        event.button.y >= (48 * 7 + 40 + HEIGHTOFFSET) - 48 &&
                        event.button.y < (48 * 7 + 40 + HEIGHTOFFSET))
@@ -16157,6 +16322,17 @@ static int do_slideshow(void)
 
           else if (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP)
             handle_joybuttonupdown(event, oldpos_x, oldpos_y);
+
+          else if (event.type == SDL_USEREVENT)
+            {
+              if (event.user.code == USEREVENT_TEXT_UPDATE)
+                {
+                  if (event.user.data1 != NULL)
+                    {
+                      draw_tux_text(TUX_BORED, instructions, 1);
+                    }
+		}
+	    }
         }
 
       if (motioner | hatmotioner)
@@ -16185,13 +16361,24 @@ static int do_slideshow(void)
   free(d_exts);
   free(selected);
 
+  control_drawtext_timer(0, "", 0);
+  free(instructions);
 
   return go_back;
 }
 
 
 /**
- * FIXME
+ * Play an animated slideshow within Tux Paint.
+ * Called by the Open->Slideshow dialog, once a set of images
+ * have been selected/chosen, and "Play" is clicked.
+ *
+ * @param int * selected -- array of selected images, in the order they should be played
+ * @param int num_selected -- count of how many images were selected
+ * @char * dirname -- path to the directory of saved images to be played
+ * @char ** d_names -- array of file basenames of the images to be played
+ * @char ** d_ext -- array of file exentions of the images to be played
+ * @int speed -- how fast to play the slideshow (0 = no automatic advance, 1 = slowest, 10 = as fast as possible)
  */
 static void play_slideshow(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed)
 {
@@ -16210,9 +16397,9 @@ static void play_slideshow(int *selected, int num_selected, char *dirname, char 
 
   val_x = val_y = motioner = 0;
   valhat_x = valhat_y = hatmotioner = 0;
+
   /* Back up the current image's IDs, because they will get
      clobbered below! */
-
   tmp_starter_id = strdup(starter_id);
   tmp_template_id = strdup(template_id);
   tmp_file_id = strdup(file_id);
@@ -16234,7 +16421,7 @@ static void play_slideshow(int *selected, int num_selected, char *dirname, char 
 
           /* Figure out filename: */
 
-          snprintf(fname, sizeof(fname), "%s/%s%s", dirname, d_names[which], d_exts[which]);
+          safe_snprintf(fname, sizeof(fname), "%s/%s%s", dirname, d_names[which], d_exts[which]);
 
 
           img = myIMG_Load(fname);
@@ -16243,7 +16430,7 @@ static void play_slideshow(int *selected, int num_selected, char *dirname, char 
             {
               autoscale_copy_smear_free(img, screen, SDL_BlitSurface);
 
-              strcpy(file_id, d_names[which]);
+              safe_strncpy(file_id, d_names[which], sizeof(file_id));
 
 
 /* FIXME: is the starter even used??? -bjk 2009.10.16 */
@@ -16418,13 +16605,15 @@ static void play_slideshow(int *selected, int num_selected, char *dirname, char 
     }
   while (!done);
 
-  strcpy(starter_id, tmp_starter_id);
+  /* Restore everything about the currently-active image
+     that got clobbered above */
+  strcpy(starter_id, tmp_starter_id); /* safe; originally strdup()'d from the dest. */
   free(tmp_starter_id);
 
-  strcpy(template_id, tmp_template_id);
+  strcpy(template_id, tmp_template_id); /* safe; originally strdup()'d from the dest. */
   free(tmp_template_id);
 
-  strcpy(file_id, tmp_file_id);
+  strcpy(file_id, tmp_file_id); /* safe; originally strdup()'d from the dest. */
   free(tmp_file_id);
 
   starter_mirrored = tmp_starter_mirrored;
@@ -16854,7 +17043,7 @@ void do_print(void)
   char f[512];
   int show = want_alt_printcommand;
 
-  snprintf(f, sizeof(f), "%s/%s", savedir, "print.cfg");        /* FIXME */
+  safe_snprintf(f, sizeof(f), "%s/%s", savedir, "print.cfg");        /* FIXME */
 
   {
     const char *error = SurfacePrint(save_canvas, use_print_config ? f : NULL, show);
@@ -17255,7 +17444,7 @@ static char *textdir(const char *const str)
     }
   else
     {
-      strcpy((char *)dstr, str);
+      strcpy((char *)dstr, str); /* safe; malloc'd to a sufficient size */
     }
 
 #ifdef DEBUG
@@ -18554,14 +18743,14 @@ static void load_magic_plugins(void)
                 {
                   struct stat sbuf;
 
-                  snprintf(fname, sizeof(fname), "%s%s", place, f->d_name);
+                  safe_snprintf(fname, sizeof(fname), "%s%s", place, f->d_name);
                   if (!stat(fname, &sbuf) && S_ISREG(sbuf.st_mode))
                     {
                       /* Get just the name of the object (e.g., "negative"), w/o filename
                          extension: */
 
-                      strcpy(objname, f->d_name);
-                      strcpy(strchr(objname, '.'), "");
+                      safe_strncpy(objname, f->d_name, sizeof(objname));
+                      strcpy(strchr(objname, '.'), ""); /* safe; truncating */
 
 #if defined(__ANDROID__)
                       // since Android compiles magic tools with name like "libxxx.so", here we shall exclude the prefix "lib".
@@ -18577,63 +18766,63 @@ static void load_magic_plugins(void)
                           fflush(stdout);
 #endif
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_tool_count");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_tool_count");
                           magic_funcs[num_plugin_files].get_tool_count =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_name");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_name");
                           magic_funcs[num_plugin_files].get_name =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_icon");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_icon");
                           magic_funcs[num_plugin_files].get_icon =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_description");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_description");
                           magic_funcs[num_plugin_files].get_description =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "requires_colors");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "requires_colors");
                           magic_funcs[num_plugin_files].requires_colors =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "modes");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "modes");
                           magic_funcs[num_plugin_files].modes =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "set_color");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "set_color");
                           magic_funcs[num_plugin_files].set_color =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "init");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "init");
                           magic_funcs[num_plugin_files].init =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "api_version");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "api_version");
                           magic_funcs[num_plugin_files].api_version =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "shutdown");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "shutdown");
                           magic_funcs[num_plugin_files].shutdown =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "click");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "click");
                           magic_funcs[num_plugin_files].click =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "drag");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "drag");
                           magic_funcs[num_plugin_files].drag =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "release");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "release");
                           magic_funcs[num_plugin_files].release =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "switchin");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "switchin");
                           magic_funcs[num_plugin_files].switchin =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-                          snprintf(funcname, sizeof(funcname), "%s_%s", objname, "switchout");
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "switchout");
                           magic_funcs[num_plugin_files].switchout =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
@@ -19312,39 +19501,39 @@ static int do_new_dialog(void)
 #endif
                 )
                 {
-                  strcpy(fname, f->d_name);
+                  safe_strncpy(fname, f->d_name, sizeof(fname));
                   skip = 0;
 
                   if (strcasestr(fname, FNAME_EXTENSION) != NULL)
                     {
                       d_exts[num_files] = strdup(strcasestr(fname, FNAME_EXTENSION));
-                      strcpy((char *)strcasestr(fname, FNAME_EXTENSION), "");
+                      strcpy((char *)strcasestr(fname, FNAME_EXTENSION), ""); /* safe; truncating */
                     }
 
                   if (strcasestr(fname, ".bmp") != NULL)
                     {
                       d_exts[num_files] = strdup(strcasestr(fname, ".bmp"));
-                      strcpy((char *)strcasestr(fname, ".bmp"), "");
+                      strcpy((char *)strcasestr(fname, ".bmp"), ""); /* safe; truncating */
                     }
 
 #ifndef NOSVG
                   if (strcasestr(fname, ".svg") != NULL)
                     {
                       d_exts[num_files] = strdup(strcasestr(fname, ".svg"));
-                      strcpy((char *)strcasestr(fname, ".svg"), "");
+                      strcpy((char *)strcasestr(fname, ".svg"), ""); /* safe; truncating */
                     }
 #endif
 
                   if (strcasestr(fname, ".kpx") != NULL)
                     {
                       d_exts[num_files] = strdup(strcasestr(fname, ".kpx"));
-                      strcpy((char *)strcasestr(fname, ".kpx"), "");
+                      strcpy((char *)strcasestr(fname, ".kpx"), ""); /* safe; truncating */
                     }
 
                   if (strcasestr(fname, ".jpg") != NULL)
                     {
                       d_exts[num_files] = strdup(strcasestr(fname, ".jpg"));
-                      strcpy((char *)strcasestr(fname, ".jpg"), "");
+                      strcpy((char *)strcasestr(fname, ".jpg"), ""); /* safe; truncating */
                     }
 
 #ifndef NOSVG
@@ -19357,7 +19546,7 @@ static int do_new_dialog(void)
                           char fname2[1024];
 
                           f2 = &(fs[k].f);
-                          strcpy(fname2, f2->d_name);
+                          safe_strncpy(fname2, f2->d_name, sizeof(fname2));
 
                           if (strstr(fname2, fname) == fname2 && strlen(fname) == strlen(fname2)- strlen(".svg") && strcasestr(fname2, ".svg") != NULL)
                             {
@@ -19379,7 +19568,7 @@ static int do_new_dialog(void)
 
                       /* Try to load thumbnail first: */
 
-                      snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png",
+                      safe_snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png",
                                dirname[d_places[num_files]], d_names[num_files]);
                       debug(fname);
                       img = IMG_Load(fname);
@@ -19389,7 +19578,7 @@ static int do_new_dialog(void)
                           /* No thumbnail in the new location ("saved/.thumbs"),
                              try the old location ("saved/"): */
 
-                          snprintf(fname, sizeof(fname), "%s/%s-t.png",
+                          safe_snprintf(fname, sizeof(fname), "%s/%s-t.png",
                                    dirname[d_places[num_files]], d_names[num_files]);
                           debug(fname);
 
@@ -19420,7 +19609,7 @@ static int do_new_dialog(void)
                           if (thumbs[num_files] == NULL)
                             {
                               fprintf(stderr,
-                                      "\nError: Couldn't create a thumbnail of " "saved image!\n" "%s\n", fname);
+                                      "\nError: Couldn't create a thumbnail of saved image!\n" "%s\n", fname);
                             }
 
                           num_files++;
@@ -19430,11 +19619,11 @@ static int do_new_dialog(void)
                           /* No thumbnail - load original: */
 
                           /* Make sure we have a ~/.tuxpaint/[starters|templates] directory: */
-                          if (make_directory(dirname[d_places[num_files]], "Can't create user data directory"))
+                          if (make_directory(DIR_SAVE, dirname[d_places[num_files]], "Can't create user data directory"))
                             {
                               /* (Make sure we have a .../[starters|templates]/.thumbs/ directory:) */
-                              snprintf(fname, sizeof(fname), "%s/.thumbs", dirname[d_places[num_files]]);
-                              make_directory(fname, "Can't create user data thumbnail directory");
+                              safe_snprintf(fname, sizeof(fname), "%s/.thumbs", dirname[d_places[num_files]]);
+                              make_directory(DIR_SAVE, fname, "Can't create user data thumbnail directory");
                             }
 
                           img = NULL;
@@ -19447,12 +19636,12 @@ static int do_new_dialog(void)
                                  starter looks like, compared to the overlay image... */
 
                               /* (Try JPEG first) */
-                              snprintf(fname, sizeof(fname), "%s/%s-back",
+                              safe_snprintf(fname, sizeof(fname), "%s/%s-back",
                                        dirname[d_places[num_files]], d_names[num_files]);
                               img = load_starter_helper(fname, "jpeg", &IMG_Load);
                               if (img == NULL)
                                 {
-                                  snprintf(fname, sizeof(fname), "%s/%s-back",
+                                  safe_snprintf(fname, sizeof(fname), "%s/%s-back",
                                            dirname[d_places[num_files]], d_names[num_files]);
                                   img = load_starter_helper(fname, "jpg", &IMG_Load);
                                 }
@@ -19461,7 +19650,7 @@ static int do_new_dialog(void)
                               if (img == NULL)
                                 {
                                   /* (Try SVG next) */
-                                  snprintf(fname, sizeof(fname), "%s/%s-back",
+                                  safe_snprintf(fname, sizeof(fname), "%s/%s-back",
                                            dirname[d_places[num_files]], d_names[num_files]);
                                   img = load_starter_helper(fname, "svg", &load_svg);
                                 }
@@ -19470,7 +19659,7 @@ static int do_new_dialog(void)
                               if (img == NULL)
                                 {
                                   /* (Try PNG next) */
-                                  snprintf(fname, sizeof(fname), "%s/%s-back",
+                                  safe_snprintf(fname, sizeof(fname), "%s/%s-back",
                                            dirname[d_places[num_files]], d_names[num_files]);
                                   img = load_starter_helper(fname, "png", &IMG_Load);
                                 }
@@ -19481,7 +19670,7 @@ static int do_new_dialog(void)
                               /* Didn't load a starter background (or didn't try!),
                                  try loading the actual image... */
 
-                              snprintf(fname, sizeof(fname), "%s/%s", dirname[d_places[num_files]], f->d_name);
+                              safe_snprintf(fname, sizeof(fname), "%s/%s", dirname[d_places[num_files]], f->d_name);
                               debug(fname);
                               img = myIMG_Load(fname);
                             }
@@ -19515,7 +19704,7 @@ static int do_new_dialog(void)
                               if (thumbs[num_files] == NULL)
                                 {
                                   fprintf(stderr,
-                                          "\nError: Couldn't create a thumbnail of " "saved image!\n" "%s\n", fname);
+                                          "\nError: Couldn't create a thumbnail of saved image!\n" "%s\n", fname);
                                 }
 
                               SDL_FreeSurface(img);
@@ -19532,13 +19721,13 @@ static int do_new_dialog(void)
                                 {
                                   debug("Saving thumbnail for this one!");
 
-                                  snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png",
+                                  safe_snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png",
                                            dirname[d_places[num_files]], d_names[num_files]);
 
-                                  if (!make_directory("starters", "Can't create user data directory") ||
-                                      !make_directory("templates", "Can't create user data directory") ||
-                                      !make_directory("starters/.thumbs", "Can't create user data directory") ||
-                                      !make_directory("templates/.thumbs", "Can't create user data directory"))
+                                  if (!make_directory(DIR_SAVE, "starters", "Can't create user data directory") ||
+                                      !make_directory(DIR_SAVE, "templates", "Can't create user data directory") ||
+                                      !make_directory(DIR_SAVE, "starters/.thumbs", "Can't create user data directory") ||
+                                      !make_directory(DIR_SAVE, "templates/.thumbs", "Can't create user data directory"))
                                     fprintf(stderr, "Cannot save any pictures! SORRY!\n\n");
                                   else
                                     {
@@ -20053,7 +20242,7 @@ static int do_new_dialog(void)
 
           /* Figure out filename: */
 
-          snprintf(fname, sizeof(fname), "%s/%s%s", dirname[d_places[which]], d_names[which], d_exts[which]);
+          safe_snprintf(fname, sizeof(fname), "%s/%s%s", dirname[d_places[which]], d_names[which], d_exts[which]);
 
           img = myIMG_Load(fname);
 
@@ -20062,7 +20251,7 @@ static int do_new_dialog(void)
               fprintf(stderr,
                       "\nWarning: Couldn't load the saved image! (3)\n"
                       "%s\n"
-                      "The Simple DirectMedia Layer error that occurred " "was:\n" "%s\n\n", fname, SDL_GetError());
+                      "The Simple DirectMedia Layer error that occurred was:\n" "%s\n\n", fname, SDL_GetError());
 
               do_prompt(PROMPT_OPEN_UNOPENABLE_TXT, PROMPT_OPEN_UNOPENABLE_YES, "", 0, 0);
             }
@@ -20087,7 +20276,7 @@ static int do_new_dialog(void)
               been_saved = 1;
 
               file_id[0] = '\0';
-              strcpy(starter_id, d_names[which]);
+              safe_strncpy(starter_id, d_names[which], sizeof(starter_id));
               template_id[0] = '\0';
 
               if (d_places[which] == PLACE_PERSONAL_STARTERS_DIR)
@@ -20112,7 +20301,7 @@ static int do_new_dialog(void)
 
           /* Figure out filename: */
 
-          snprintf(fname, sizeof(fname), "%s/%s%s", dirname[d_places[which]], d_names[which], d_exts[which]);
+          safe_snprintf(fname, sizeof(fname), "%s/%s%s", dirname[d_places[which]], d_names[which], d_exts[which]);
           img = myIMG_Load(fname);
 
           if (img == NULL)
@@ -20120,7 +20309,7 @@ static int do_new_dialog(void)
               fprintf(stderr,
                       "\nWarning: Couldn't load the saved image! (4)\n"
                       "%s\n"
-                      "The Simple DirectMedia Layer error that occurred " "was:\n" "%s\n\n", fname, SDL_GetError());
+                      "The Simple DirectMedia Layer error that occurred was:\n" "%s\n\n", fname, SDL_GetError());
 
               do_prompt(PROMPT_OPEN_UNOPENABLE_TXT, PROMPT_OPEN_UNOPENABLE_YES, "", 0, 0);
             }
@@ -20142,7 +20331,7 @@ static int do_new_dialog(void)
               been_saved = 1;
 
               file_id[0] = '\0';
-              strcpy(template_id, d_names[which]);
+              safe_strncpy(template_id, d_names[which], sizeof(template_id));
               starter_id[0] = '\0';
 
               if (d_places[which] == PLACE_PERSONAL_TEMPLATES_DIR)
@@ -22993,6 +23182,7 @@ static void tmpcfg_merge(struct cfginfo *loser, const struct cfginfo *winner)
 static void setup_config(char *argv[])
 {
   char str[128];
+  char * picturesdir;
 
 #if !defined(_WIN32) && !defined(__ANDROID__)
   const char *home = getenv("HOME");
@@ -23030,6 +23220,7 @@ static void setup_config(char *argv[])
     }
 #endif
 
+  /* == SAVEDIR == */
   if (tmpcfg_cmd.savedir)
     savedir = strdup(tmpcfg_cmd.savedir);
   else
@@ -23062,25 +23253,47 @@ static void setup_config(char *argv[])
 #endif
     }
 
+  /* == EXPORTDIR == */
+  if (tmpcfg_cmd.exportdir)
+    exportdir = strdup(tmpcfg_cmd.exportdir);
+  else
+    {
+      /* FIXME: Need assist for:
+         * _WIN32
+         * __BEOS__
+         * __HAIKU__
+         * __APPLE__
+      */
+      /* __ANDROID__ will likely never arrive here as we provide exportdir already in the configuration file */
+      
+      picturesdir = get_xdg_user_dir("PICTURES", "Pictures");
+      
+      safe_snprintf(str, sizeof(str), "%s/TuxPaint", picturesdir);
+      free(picturesdir);
+      exportdir = strdup(str);
+    }
+    
   /* Load options from user's own configuration (".rc" / ".cfg") file: */
 
 #if defined(_WIN32)
   /* Default local config file in users savedir directory on Windows */
-  snprintf(str, sizeof(str), "%s/tuxpaint.cfg", savedir);       /* FIXME */
+  safe_snprintf(str, sizeof(str), "%s/tuxpaint.cfg", savedir);       /* FIXME */
 #elif defined(__BEOS__) || defined(__HAIKU__)
   /* BeOS: Use a "tuxpaint.cfg" file: */
-  strcpy(str, "tuxpaint.cfg");
+  strcpy(str, "tuxpaint.cfg"); /* safe; sufficient size */
 #elif defined(__APPLE__)
   /* Mac OS X: Use a "tuxpaint.cfg" file in the Tux Paint application support folder */
-  snprintf(str, sizeof(str), "%s/tuxpaint.cfg", macos.preferencesPath());
+  safe_snprintf(str, sizeof(str), "%s/tuxpaint.cfg", macos_preferencesPath());
 #elif defined(__ANDROID__)
   /* Try to find the user's config file */
   /* This file is writed by the tuxpaint config activity when the user runs it */
-  snprintf(str, sizeof(str), "%s/tuxpaint.cfg", SDL_AndroidGetExternalStoragePath());
+  safe_snprintf(str, sizeof(str), "%s/tuxpaint.cfg", SDL_AndroidGetExternalStoragePath());
+
+
 #else
   /* Linux and other Unixes:  Use 'rc' style (~/.tuxpaintrc) */
   /* it should it be "~/.tuxpaint/tuxpaintrc" instead, but too late now */
-  snprintf(str, sizeof(str), "%s/.tuxpaintrc", home);
+  safe_snprintf(str, sizeof(str), "%s/.tuxpaintrc", home);
 #endif
   parse_file_options(&tmpcfg_usr, str);
 
@@ -23106,7 +23319,7 @@ static void setup_config(char *argv[])
          folder & extension inconsistency with Tux Paint Config application) */
       /* Mac OS X: Use a "tuxpaint.cfg" file in the *global* Tux Paint
          application support folder */
-      snprintf(str, sizeof(str), "%s/tuxpaint.cfg", macos_globalPreferencesPath());
+      safe_snprintf(str, sizeof(str), "%s/tuxpaint.cfg", macos_globalPreferencesPath());
       parse_file_options(&tmpcfg_sys, str);
 #elif defined(__ANDROID__)
       /* Load the config file we provide in assets/etc/tuxpaint.cfg */
@@ -23129,11 +23342,13 @@ static void setup_config(char *argv[])
 
   datadir = tmpcfg.datadir ? tmpcfg.datadir : savedir;
 
+  exportdir = tmpcfg.exportdir ? tmpcfg.exportdir : exportdir;
+
   if (tmpcfg.parsertmp_lang == PARSE_CLOBBER)
     tmpcfg.parsertmp_lang = NULL;
   if (tmpcfg.parsertmp_locale == PARSE_CLOBBER)
     tmpcfg.parsertmp_locale = NULL;
-  button_label_y_nudge = setup_i18n(tmpcfg.parsertmp_lang, tmpcfg.parsertmp_locale);
+  button_label_y_nudge = setup_i18n(tmpcfg.parsertmp_lang, tmpcfg.parsertmp_locale, &num_wished_langs);
 
 
   /* FIXME: most of this is not required before starting the font scanner */
@@ -23225,7 +23440,7 @@ static void setup_config(char *argv[])
   if (tmpcfg.rotate_orientation)
     rotate_orientation = !strcmp(tmpcfg.rotate_orientation, "portrait");        /* alternative is "landscape" */
   if (tmpcfg.colorfile)
-    strcpy(colorfile, tmpcfg.colorfile);        /* FIXME can overflow */
+    safe_strncpy(colorfile, tmpcfg.colorfile, sizeof(colorfile));
   if (tmpcfg.print_delay)
     {
       print_delay = atoi(tmpcfg.print_delay);
@@ -24465,7 +24680,7 @@ static void setup(void)
       exit(1);
     }
 
-  snprintf(tmp_str, sizeof(tmp_str), "Version: %s – %s", VER_VERSION, VER_DATE);
+  safe_snprintf(tmp_str, sizeof(tmp_str), "Version: %s – %s", VER_VERSION, VER_DATE);
 
   tmp_surf = render_text(medium_font, tmp_str, black);
   dest.x = 10;
@@ -24477,7 +24692,7 @@ static void setup(void)
   printf("%s\n", tmp_str);
 #endif
 
-  snprintf(tmp_str, sizeof(tmp_str), "© 2002–2020 Bill Kendrick et al.");
+  safe_snprintf(tmp_str, sizeof(tmp_str), "© 2002–2020 Bill Kendrick et al.");
   tmp_surf = render_text(medium_font, tmp_str, black);
   dest.x = 10;
   dest.y = WINDOW_HEIGHT - img_progress->h - (tmp_surf->h * 2);
@@ -24661,11 +24876,13 @@ static void setup(void)
 
   img_open = loadimage(DATA_PREFIX "images/ui/open.png");
   img_erase = loadimage(DATA_PREFIX "images/ui/erase.png");
+  img_pict_export = loadimage(DATA_PREFIX "images/ui/pict_export.png");
   img_back = loadimage(DATA_PREFIX "images/ui/back.png");
   img_trash = loadimage(DATA_PREFIX "images/ui/trash.png");
 
   img_slideshow = loadimage(DATA_PREFIX "images/ui/slideshow.png");
   img_play = loadimage(DATA_PREFIX "images/ui/play.png");
+  img_gif_export = loadimage(DATA_PREFIX "images/ui/gif_export.png");
   img_select_digits = loadimage(DATA_PREFIX "images/ui/select_digits.png");
 
   img_popup_arrow = loadimage(DATA_PREFIX "images/ui/popup_arrow.png");
@@ -24786,10 +25003,11 @@ static void setup(void)
 
   small_font = TuxPaint_Font_OpenFont(PANGO_DEFAULT_FONT, DATA_PREFIX "fonts/default_font.ttf",
 #ifdef __APPLE__
-                                      12 - (only_uppercase * 2));
+                                      12 - (only_uppercase * 2)
 #else
-                                      13 - (only_uppercase * 2));
+                                      13 - (only_uppercase * 2)
 #endif
+  );
 
   if (small_font == NULL)
     {
@@ -25262,7 +25480,7 @@ static int trash(char *path)
 #ifdef DEBUG
   printf("trash: basename=%s", basename(path)); /* EP */
 #endif
-  strcpy(fname, basename(path));
+  safe_strncpy(fname, basename(path), sizeof(fname));
 
   if (!file_exists(path))
     {
@@ -25273,13 +25491,14 @@ static int trash(char *path)
 
   /* Move file into Trash folder */
 
+  /* FIXME: Use xdg function */
   if (getenv("XDG_DATA_HOME") != NULL)
     {
-      sprintf(trashpath, "%s/Trash", getenv("XDG_DATA_HOME"));
+      safe_snprintf(trashpath, sizeof(trashpath), "%s/Trash", getenv("XDG_DATA_HOME"));
     }
   else if (getenv("HOME") != NULL)
     {
-      sprintf(trashpath, "%s/.local/share/Trash", getenv("HOME"));
+      safe_snprintf(trashpath, sizeof(trashpath), "%s/.local/share/Trash", getenv("HOME"));
     }
   else
     {
@@ -25288,18 +25507,18 @@ static int trash(char *path)
     }
 
   mkdir(trashpath, 0x777);
-  sprintf(dest, "%s/files", trashpath);
+  safe_snprintf(dest, sizeof(dest), "%s/files", trashpath);
   mkdir(dest, 0x777);
-  sprintf(dest, "%s/info", trashpath);
+  safe_snprintf(dest, sizeof(dest), "%s/info", trashpath);
   mkdir(dest, 0x777);
 
-  sprintf(dest, "%s/files/%s", trashpath, fname);
+  safe_snprintf(dest, sizeof(dest), "%s/files/%s", trashpath, fname);
 
-  strcpy(bname, fname);
+  safe_strncpy(bname, fname, sizeof(bname));
   if (strstr(bname, ".") != NULL)
     {
-      strcpy(strstr(bname, "."), "\0");
-      strcpy(ext, strstr(fname, ".") + 1);
+      strcpy(strstr(bname, "."), "\0"); /* FIXME: Use strncpy() (ugh, complicated) */
+      safe_strncpy(ext, strstr(fname, ".") + 1, sizeof(ext));
     }
   else
     {
@@ -25307,15 +25526,15 @@ static int trash(char *path)
       return (unlink(path));
     }
 
-  sprintf(infoname, "%s/info/%s.trashinfo", trashpath, fname);
+  safe_snprintf(infoname, sizeof(infoname), "%s/info/%s.trashinfo", trashpath, fname);
 
   cnt = 1;
   while (file_exists(dest) && cnt < 100)
     {
-      sprintf(fname, "%s_%d.%s", bname, cnt, ext);
+      safe_snprintf(fname, sizeof(fname), "%s_%d.%s", bname, cnt, ext);
 
-      sprintf(dest, "%s/files/%s", trashpath, fname);
-      sprintf(infoname, "%s/info/%s.trashinfo", trashpath, fname);
+      safe_snprintf(dest, sizeof(dest), "%s/files/%s", trashpath, fname);
+      safe_snprintf(infoname, sizeof(infoname), "%s/info/%s.trashinfo", trashpath, fname);
       cnt++;
     }
 
@@ -25346,10 +25565,10 @@ static int trash(char *path)
         }
       while (!feof(fi))
         {
-          len = fread(buf, sizeof(buf), 1, fi);
+          len = fread(buf, sizeof(unsigned char), sizeof(buf), fi);
           if (len > 0)
             {
-              fwrite(buf, sizeof(buf), 1, fo);
+              fwrite(buf, sizeof(unsigned char), sizeof(buf), fo);
             }
         }
       fclose(fi);
@@ -25855,3 +26074,486 @@ static void convert_motion_to_wheel(SDL_Event event)
     }
 }
 #endif
+
+/**
+ * Grab the user's XDG user dir for something (e.g., ~/Pictures)
+ *
+ * @param char * dir_type -- the thing to query, e.g. "PICTURES" or "VIDEOS"
+ *   (note: currently, Tux Paint only puts things in the PICTURES one)
+ * @param char * fallback -- path, under $HOME, to use instead (e.g., "Pictures")
+ * @return char * path (caller is expected to free() it)
+ */
+char * get_xdg_user_dir(const char * dir_type, const char * fallback) {
+  FILE * fi;
+  char * config_home, * found;
+  char tmp_path[MAX_PATH], config_path[MAX_PATH], line[MAX_PATH], search[MAX_PATH], return_path[MAX_PATH];
+  int found_it;
+
+  found_it = FALSE;
+
+  /* Figure out where XDG user-dirs config exists, and use it if possible */
+  if (getenv("XDG_CONFIG_HOME") != NULL) {
+    config_home = strdup(getenv("XDG_CONFIG_HOME"));
+  } else {
+#ifdef DEBUG
+    fprintf(stderr, "XDG_CONFIG_HOME not set, checking $HOME/.config/\n");
+#endif
+    if (getenv("HOME") != NULL) {
+      safe_snprintf(tmp_path, MAX_PATH, "%s/.config", getenv("HOME"));
+      config_home = strdup(tmp_path);
+    } else {
+#ifdef DEBUG
+      fprintf(stderr, "No HOME, either?! Returing fallback in current directory\n");
+#endif
+      return strdup(fallback);
+    }
+  }
+
+  if (config_home[strlen(config_home) - 1] == '/') {
+    config_home[strlen(config_home) - 1] = '\0';
+  }
+  safe_snprintf(config_path, MAX_PATH, "%s/user-dirs.dirs", config_home);
+  free(config_home);
+
+#ifdef DEBUG
+  fprintf(stderr, "User dirs config = %s\n", config_path);
+#endif
+
+  safe_snprintf(search, MAX_PATH, "XDG_%s_DIR=\"", dir_type);
+
+  /* Read the config to find the path we want */
+  fi = fopen(config_path, "r");
+  if (fi != NULL) {
+    /* Search for a line in the form of either
+       either XDG_PICTURES_DIR="$HOME/Pictures"
+       or XDG_PICTURES_DIR="/Path/To/Pictures"
+    */
+#ifdef DEBUG
+    fprintf(stderr, "Searching it for: %s\n", search);
+#endif
+    while (fgets(line, MAX_PATH, fi) && !found_it) {
+      /* Trim trailing CR/LF */
+        if (line[strlen(line) - 1] == '\n' ||
+            line[strlen(line) - 1] == '\r') {
+          line[strlen(line) - 1] = '\0';
+        }
+
+      if (strstr(line, search) == line) {
+        found = line + strlen(search);
+#ifdef DEBUG
+        fprintf(stderr, "Found it: %s\n", found);
+#endif
+        if (strstr(found, "$HOME/") == found) {
+          safe_snprintf(return_path, MAX_PATH, "%s/%s", getenv("HOME"), found + 6 /* skip '$HOME/' */);
+        } else {
+          safe_strncpy(return_path, found, MAX_PATH);
+        }
+        
+        /* Trim trailing " */
+        if (return_path[strlen(return_path) - 1] == '\"') {
+          return_path[strlen(return_path) - 1] = '\0';
+        }
+  
+        found_it = TRUE;
+      }
+    }
+
+    fclose(fi);
+#ifdef DEBUG
+  } else {
+    fprintf(stderr, "%s doesn't exist\n", config_path);
+#endif
+  }
+
+  if (!found_it) {
+#ifdef DEBUG
+    fprintf(stderr, "Using fallback of $HOME/%s\n", fallback);
+#endif
+    safe_snprintf(return_path, MAX_PATH, "%s/%s", getenv("HOME"), fallback);
+  }
+
+#ifdef DEBUG
+  fprintf(stderr, "Location for %s => %s\n", dir_type, return_path);
+#endif
+
+  return strdup(return_path);
+}
+
+/**
+ * After 2+ images have been selected in the Open->Slideshow
+ * dialog, they can be exported as an animated GIF.
+ *
+ * Params the same as play_slideshow(), except...
+ *
+ * @param int speed -- how fast to play the slideshow (0 and 1 both = slowest, 10 = fasted)
+ * @return int -- 0 if export failed or was aborted, 1 if successful
+ */
+static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed) {
+  char *tmp_starter_id, *tmp_template_id, *tmp_file_id;
+  int tmp_starter_mirrored, tmp_starter_flipped, tmp_starter_personal;
+  char * gif_fname;
+  char fname[MAX_PATH];
+  int i, j, done, which, x, y;
+  SDL_Surface *img;
+  int overall_w, overall_h, overall_area;
+  Uint8 * bitmap;
+  Uint8 r, g, b, a;
+  size_t pixels_size;
+  unsigned char *raw_8bit_pixels;
+  uint8_t gif_palette[768]; /* 256 x 3 */
+  liq_attr *liq_handle;
+  liq_image *input_image;
+  liq_result *quantization_result;
+  liq_error qtiz_status;
+  const liq_palette *palette;
+  int gif_speed;
+
+  /* Back up the current image's IDs, because they will get
+     clobbered below! */
+  tmp_starter_id = strdup(starter_id);
+  tmp_template_id = strdup(template_id);
+  tmp_file_id = strdup(file_id);
+  tmp_starter_mirrored = starter_mirrored;
+  tmp_starter_flipped = starter_flipped;
+  tmp_starter_personal = starter_personal;
+
+  do_setcursor(cursor_watch);
+  show_progress_bar(screen);
+
+  gif_fname = get_export_filepath("gif");
+  if (gif_fname == NULL)
+    {
+      /* Can't create export dir! Abort! */
+      return FALSE;
+    }
+
+  /* For now, always saving GIF using the size of Tux Paint's window,
+     which is how images appear in the slide show */
+  overall_w = screen->w;
+  overall_h = screen->h;
+  overall_area = overall_w * overall_h;
+
+  if (speed == 0)
+    {
+      gif_speed = 1;
+    }
+  gif_speed = (10 - speed) * 50;
+
+  bitmap = malloc(num_selected * overall_area * 4);
+  if (bitmap != NULL)
+    {
+      done = 0;
+    
+      for (i = 0; i < num_selected && !done; i++)
+        {
+          which = selected[i];
+          show_progress_bar(screen);
+    
+    
+          /* Figure out filename: */
+          safe_snprintf(fname, sizeof(fname), "%s/%s%s", dirname, d_names[which], d_exts[which]);
+    
+          /* Load and scale the image */
+          img = myIMG_Load(fname);
+    
+          if (img != NULL)
+            {
+              autoscale_copy_smear_free(img, screen, SDL_BlitSurface);
+    
+              safe_strncpy(file_id, d_names[which], sizeof(file_id));
+    
+              /* See if this saved image was based on a 'starter' */
+              load_starter_id(d_names[which], NULL);
+              if (starter_id[0] != '\0')
+                {
+                  load_starter(starter_id);
+    
+                  if (starter_mirrored)
+                    mirror_starter();
+    
+                  if (starter_flipped)
+                    flip_starter();
+                }
+              else
+                load_template(template_id);
+            } else {
+              /* Error loading !*/
+              fprintf(stderr, "Error loading %s!\n", fname);
+              /* FIXME Abort? */
+            }
+
+	  /* Record the raw RGB into a big strip, to be quantized and sliced later */
+          for (y = 0; y < overall_h; y++) {
+            for (x = 0; x < overall_w; x++) {
+              SDL_GetRGBA(getpixels[screen->format->BytesPerPixel](screen, x, y), screen->format, &r, &g, &b, &a);
+          
+              bitmap[((i * overall_area) + (y * overall_w) + x) * 4 + 0] = r;
+              bitmap[((i * overall_area) + (y * overall_w) + x) * 4 + 1] = g;
+              bitmap[((i * overall_area) + (y * overall_w) + x) * 4 + 2] = b;
+              bitmap[((i * overall_area) + (y * overall_w) + x) * 4 + 3] = 255;
+            }
+          }
+
+          SDL_Flip(screen);
+	  done = export_gif_monitor_events(); 
+        }
+
+
+      if (!done)
+        {
+          /* Quantize to max 256 (8bpp) colors and generate a suitable palette */
+          liq_handle = liq_attr_create();
+          input_image = liq_image_create_rgba(liq_handle, bitmap, overall_w, num_selected * overall_h, 0); 
+	  liq_set_max_colors(liq_handle, 256);
+
+          show_progress_bar(screen);
+	  done = export_gif_monitor_events();
+
+          qtiz_status = liq_image_quantize(input_image, liq_handle, &quantization_result);
+	  done = (qtiz_status != LIQ_OK);
+
+          if (!done) {
+            // Use libimagequant to make new image pixels from the palette
+            pixels_size = num_selected * overall_area;
+            raw_8bit_pixels = malloc(pixels_size);
+            liq_set_dithering_level(quantization_result, 1.0);
+          
+            liq_write_remapped_image(quantization_result, input_image, raw_8bit_pixels, pixels_size);
+            palette = liq_get_palette(quantization_result);
+            free(bitmap);
+
+	    for (j = 0; j < (int) palette->count; j++) {
+              gif_palette[j * 3 + 0] = palette->entries[j].r;
+              gif_palette[j * 3 + 1] = palette->entries[j].g;
+              gif_palette[j * 3 + 2] = palette->entries[j].b;
+            }
+
+            /* Open GIF */
+            ge_GIF *gif = ge_new_gif(
+                gif_fname,
+                overall_w, overall_h,
+                gif_palette,
+                8, /* 256 colors */
+                0 /* infinite loop */
+            );
+      
+            /* Export each frame */
+            for (i = 0; i < num_selected && !done; i++)
+              {
+                memcpy(gif->frame, raw_8bit_pixels + i * overall_area, overall_area);
+                ge_add_frame(gif, gif_speed);
+      
+                show_progress_bar(screen);
+	        done = export_gif_monitor_events(); 
+              }
+      
+            /* Close the GIF */
+            ge_close_gif(gif);
+          } else {
+            fprintf(stderr, "Quantization failed\n");
+	    done = 1;
+	  }
+    
+          if (done)
+            {
+              /* Aborted; discard the partially-saved GIF */
+              unlink(gif_fname);
+	    }
+	}
+    }
+  else
+    {
+      /* Out of memory! */
+      done = 1;
+    }
+
+
+  /* Restore everything about the currently-active image
+     that got clobbered above */
+  strcpy(starter_id, tmp_starter_id); /* safe; originally strdup()'d from the dest. */
+  free(tmp_starter_id);
+
+  strcpy(template_id, tmp_template_id); /* safe; originally strdup()'d from the dest. */
+  free(tmp_template_id);
+
+  strcpy(file_id, tmp_file_id); /* safe; originally strdup()'d from the dest. */
+  free(tmp_file_id);
+
+  starter_mirrored = tmp_starter_mirrored;
+  starter_flipped = tmp_starter_flipped;
+  starter_personal = tmp_starter_personal;
+
+  
+  free(gif_fname);
+
+  /* Success if we didn't have an error, and user didn't abort */
+  return(!done);
+}
+
+/**
+ * Called by export_gif() while it's iterating through images
+ * in a few different ways, to monitor SDL event queue for
+ * any [Esc] keypress or quit event (e.g., closing window),
+ * which triggers an abort of the export.
+ *
+ * @return int 0 = keep going, 1 = abort
+ */
+int export_gif_monitor_events(void) {
+  int done;
+  SDL_Event event;
+  SDLKey key;
+
+  done = 0;
+  while (SDL_PollEvent(&event))
+    {
+      if (event.type == SDL_QUIT)
+        {
+          done = 1;
+        }
+      else if (event.type == SDL_KEYDOWN)
+        {
+          key = event.key.keysym.sym;
+          if (key == SDLK_ESCAPE) {
+            done = 1;
+          }
+        }
+    }
+  SDL_Delay(10);
+  return done;
+}
+
+/**
+ * Copy an image (just the main PNG) from Tux Paint's "saved"
+ * directory to the user's chosen export directory
+ * (e.g., ~/Pictures, or whatever "--exportdir" says).
+ *
+ * Used when exporting a single image from the Open dialog.
+ *
+ * @param char * fname -- full path to the image to export
+ * @return int 1 = success, 0 = failed
+ */
+static int export_pict(char * fname) {
+  FILE * fi, * fo;
+  size_t len;
+  unsigned char buf[1024];
+  char * pict_fname;
+  Uint32 time_before, time_after;
+
+  do_setcursor(cursor_watch);
+  show_progress_bar(screen);
+
+  fi = fopen(fname, "rb");
+  if (fi == NULL)
+    {
+      fprintf(stderr, "Cannot export from saved Tux Paint file '%s'\nThe error that occurred was:\n%s\n\n", fname, strerror(errno));
+      return FALSE;
+    }
+
+  time_before = SDL_GetTicks();
+  pict_fname = get_export_filepath("png");
+  if (pict_fname == NULL)
+    {
+      fclose(fi);
+      return FALSE;
+    }
+
+  fo = fopen(pict_fname, "wb");
+  if (fo == NULL)
+    {
+      fprintf(stderr, "Cannot export to new file '%s'\nThe error that occurred was:\n%s\n\n", pict_fname, strerror(errno));
+      free(pict_fname);
+      fclose(fi);
+      return FALSE;
+    }
+
+  while (!feof(fi))
+    {
+      len = fread(buf, sizeof(unsigned char), sizeof(buf), fi);
+      if (len > 0)
+        {
+          fwrite(buf, sizeof(unsigned char), sizeof(buf), fo);
+        }
+    }
+
+  /* FIXME: Probably good to check for errors here and respond accordingly -bjk 2020.07.26 */
+
+  fclose(fi);
+  fclose(fo);
+
+  free(pict_fname);
+
+  /* Unique filenames are timestamp-based, down to the second,
+     so ensure at least one second has elapsed */
+  time_after = SDL_GetTicks();
+  if (time_after - time_before < 1000)
+    {
+      show_progress_bar(screen);
+      SDL_Delay(time_after + 1000 - time_before);
+    }
+
+  return TRUE;
+}
+
+/**
+ * Returns the name of a new file, located in the user's chosen
+ * export directory (e.g., ~/Pictures/TuxPaint, or whatever "--exportdir" says).
+ *
+ * Also ensures that the directory exists, in the first place.
+ *
+ * Used when exporting animated GIFs (via "Export GIF" in the
+ * Open->Slideshow dialog) and static PNGs (via "Export" in the
+ * main Open dialog).
+ *
+ * @param const char * ext -- extnesion of the file (e.g., "png" or "gif")
+ * @return char * -- filepath for the new file to be created
+ *   (e.g., /home/username/Pictures/TuxPaint/2020072620110100.gif")
+ *   Or NULL if the directory cannot be created.
+ */
+static char * get_export_filepath(const char * ext) {
+  char *rname;
+  char fname[FILENAME_MAX];
+  char timestamp[16];
+  time_t t;
+
+
+  /* Make sure the export dir exists */
+  if (!make_directory(DIR_EXPORT, "", "Can't create export directory"))
+    {
+      return NULL;
+    }
+
+  /* Create a unique filename, within that dir */
+  t = time(NULL);
+  strftime(timestamp, sizeof(timestamp), "%Y%m%d%H%M%S", localtime(&t));
+  safe_snprintf(fname, sizeof(fname), "%s.%s", timestamp, ext);
+  rname = get_fname(fname, DIR_EXPORT);
+  debug(rname);
+
+  return(rname);
+}
+
+char * safe_strncat(char *dest, const char *src, size_t n) {
+  char * ptr;
+  ptr = strncat(dest, src, n - 1);
+  dest[n - 1] = '\0';
+  return ptr;
+}
+
+char * safe_strncpy(char *dest, const char *src, size_t n) {
+  char * ptr;
+  ptr = strncpy(dest, src, n - 1);
+  dest[n - 1] = '\0';
+  return ptr;
+}
+
+int safe_snprintf(char *str, size_t size, const char *format, ...) {
+  int r;
+  va_list ap;
+
+  va_start(ap, format);
+  r = vsnprintf(str, size - 1, format, ap);
+  va_end(ap);
+
+  str[size - 1] = '\0';
+  return r;
+}

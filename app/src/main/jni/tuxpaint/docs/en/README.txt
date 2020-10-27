@@ -1,12 +1,12 @@
                                    Tux Paint
-                                 version 0.9.24
+                                 version 0.9.25
 
   A simple drawing program for children
 
           Copyright 2002-2020 by various contributors; see AUTHORS.txt
                             http://www.tuxpaint.org/
 
-                          June 14, 2002 - May 29, 2020
+                         June 14, 2002 - July 27, 2020
 
      ----------------------------------------------------------------------
 
@@ -15,6 +15,12 @@
    |-------------------------------------------|
    |  * About                                  |
    |  * Using Tux Paint                        |
+   |       * Loading Tux Paint                 |
+   |       * Title Screen                      |
+   |       * Main Screen                       |
+   |       * Available Tools                   |
+   |            * Drawing Tools                |
+   |            * Other Controls               |
    |  * Loading Other Pictures into Tux Paint  |
    |  * Further Reading                        |
    |  * How to Get Help                        |
@@ -121,7 +127,7 @@ Loading Tux Paint
 
      ----------------------------------------------------------------------
 
-  Mac OS X Users
+  macOS Users
 
          Simply double-click the "Tux Paint" icon.
 
@@ -147,8 +153,8 @@ Main Screen
 
                The toolbar contains the drawing and editing controls.
 
-   [Tools: Paint, Stamp, Lines, Shapes, Text, Magic, Label, Undo, Redo,      
-                     Eraser, New, Open, Save, Print, Quit]
+  [Tools: Paint, Stamp, Lines, Shapes, Text, Magic, Label, Undo, Redo, Eraser,
+                         New, Open, Save, Print, Quit]
 
        Middle: Drawing Canvas
 
@@ -176,8 +182,8 @@ Main Screen
                A palette of available colors are shown near the bottom of the
                screen.
 
-  [Colors - Black, White, Red, Pink, Orange, Yellow, Green, Cyan,       Blue,
-                              Purple, Brown, Grey]
+ [Colors - Black, White, Red, Pink, Orange, Yellow, Green, Cyan, Blue, Purple,
+                                  Brown, Grey]
 
                On the far right are two special color options, the
                "color picker", which has an outline of an eye-dropper, and
@@ -193,9 +199,8 @@ Main Screen
                At the very bottom of the screen, Tux, the Linux Penguin,
                provides tips and other information while you draw.
 
- (For example: 'Pick a shape. Click to pick the center, drag, then       let go
-when it is the size you want.  Move around to rotate it, and       click to draw
-                                      it.)
+(For example: 'Pick a shape. Click to pick the center, drag, then let go when it
+     is the size you want. Move around to rotate it, and click to draw it.)
 
      ----------------------------------------------------------------------
 
@@ -367,6 +372,7 @@ Available Tools
                               not include all characters for all languages,
                               so sometimes you'll need to change fonts to see
                               the characters you're trying to type.
+
                                  * Japanese — Romanized Hiragana and
                                    Romanized Katakana — right [Alt]
                                  * Korean — Hangul 2-Bul — right [Alt] or
@@ -497,6 +503,10 @@ Available Tools
                         Note: As of version 0.9.22, the picture will be
                         placed in your desktop's trash can, on Linux only.
 
+                      * Click the "Export" button near the lower right to
+                        export the image to your export folder. (e.g.,
+                        "~/Pictures/TuxPaint/")
+
                       * Click the blue "Slides" (slide projector) button at
                         the lower left to go to slideshow mode. See "Slides",
                         below, for details.
@@ -604,7 +614,7 @@ Available Tools
 
                       Printer Settings
 
-                              (Windows and Mac OS X)
+                              (Windows and macOS)
 
                               By default, Tux Paint simply prints to the
                               default printer with default settings when the
@@ -653,42 +663,79 @@ Available Tools
          Slides (under "Open")
 
                  The "Slides" button is available in the "Open" dialog. It
-                 displays a list of your saved files, just like the "Open"
-                 dialog.
+                 can be used to play a simple animation within Tux Paint, or
+                 a slideshow of pictures. It can also export an animated GIF
+                 based on the chosen images.
 
-                 Click each of the images you wish to display in a
-                 slideshow-style presentation, one by one. A digit will
-                 appear over each image, letting you know in which order they
-                 will be displayed.
+                      Chosing pictures
 
-                 You can click a selected image to unselect it (take it out
-                 of your slideshow).
+                              When you enter the "Slides" section of
+                              Tux Paint, it displays a list of your saved
+                              files, just like the "Open" dialog.
 
-                 A sliding scale at the lower left of the screen (next to the
-                 "Play" button) can be used to adjust the speed of the
-                 slideshow, from slowest to fastest. Choose the leftmost
-                 setting to disable automatic advancement — you will need to
-                 press a key or click to go to the next slide (see below).
+                              Click each of the images you wish to display in
+                              a slideshow-style presentation, one by one. A
+                              digit will appear over each image, letting you
+                              know in which order they will be displayed.
 
-                 Note: The slowest setting does not automatically advance
-                 through the slides. Use it for when you want to step through
-                 them manually.
+                              You can click a selected image to unselect it
+                              (take it out of your slideshow). Click it again
+                              if you wish to add it to the end of the list.
 
-                 When you're ready, click the "Play" button to begin the
-                 slideshow. (Note: If you hadn't selected ANY images, then
-                 ALL images will be played in the slideshow.)
+                      Set playback speed
 
-                 During the slideshow, press [Space], [Enter] or [Return] or
-                 the [Right Arrow], or click the "Next" button at the lower
-                 left, to manually advance to the next slide. Press [Left] to
-                 go back to the previous slide.
+                              A sliding scale at the lower left of the screen
+                              (next to the "Play" button) can be used to
+                              adjust the speed of the slideshow or animated
+                              GIF, from slowest to fastest. Choose the
+                              leftmost setting to disable automatic
+                              advancement during playback within Tux Paint —
+                              you will need to press a key or click to go to
+                              the next slide (see below).
 
-                 Press [Escape], or click the "Back" button at the lower
-                 right, to exit the slideshow and return to the slideshow
-                 image selection screen.
+                              Note: The slowest setting does not
+                              automatically advance through the slides. Use
+                              it for when you want to step through them
+                              manually. (This does not apply to an exported
+                              animated GIF.)
+
+                      Playback in Tux Paint
+
+                              To play a slideshow within Tux Paint, click the
+                              "Play" button. (Note: If you hadn't selected
+                              ANY images, then ALL of your saved images will
+                              be played in the slideshow!)
+
+                              During the slideshow, press [Space], [Enter] or
+                              [Return], or the [Right Arrow] — or click the
+                              "Next" button at the lower left — to manually
+                              advance to the next slide. Press [Left] to go
+                              back to the previous slide.
+
+                              Press [Escape], or click the "Back" button at
+                              the lower right, to exit the slideshow and
+                              return to the slideshow image selection screen.
+
+                      Exporting an animated GIF
+
+                              Click the "GIF Export" button near the lower
+                              right to have Tux Paint generate an animated
+                              GIF file based on the selected images.
+
+                              Note: At least two images must be selected. (To
+                              export a single image, use the "Export" option
+                              from the "Open" dialog.) If no images are
+                              selected, Tux Paint will NOT attempt to
+                              generate a GIF based on all saved images.
+
+                              Pressing [Escape] during export will abort the
+                              process, and return you to the "Slideshow"
+                              dialog.
 
                  Click "Back" in the slideshow image selection screen to
                  return to the "Open" dialog.
+
+     ----------------------------------------------------------------------
 
          Quit
 
@@ -719,6 +766,8 @@ Available Tools
                  If neither of those are possible, the key sequence of
                  [Shift] + [Control] + [Escape] may be used to quit. (See the
                  "Options" documentation.)
+
+     ----------------------------------------------------------------------
 
          Sound Muting
 
@@ -753,7 +802,7 @@ Available Tools
              Inside the user's "Application Data" folder, e.g.: "C:\Documents
              and Settings\(user name)\Application Data\TuxPaint\saved\"
 
-     Mac OS X
+     macOS
              Inside the user's "Library" folder:
              "/Users/(user name)/Library/Application
              Support/Tux Paint/saved/"
@@ -799,7 +848,7 @@ Using 'tuxpaint-import'
 
 Doing it Manually
 
-       Windows, Mac OS X and BeOS users must currently do the conversion
+       Windows, macOS, BeOS, and Haiku users must currently do the conversion
        manually.
 
        Load a graphics program that is capable of both loading your picture
@@ -842,6 +891,7 @@ Doing it Manually
 
          Calculating the height of Tux Paint's canvas requires multiple
          steps:
+
           1. Take the height of the window (e.g, 480, 600 or 768 pixels) and
              subtract 144
           2. Take the result of Step 1 and divide it by 48
@@ -851,6 +901,7 @@ Doing it Manually
           5. Finally, take the result of Step 4 and add 40
 
          Example: Tux Paint running at fullscreen on a 1440x900 display.
+
            * The canvas width is simply 1440 - 192, or 1248.
            * The canvas height is calculated as:
                1. 900 - 144, or 756
@@ -858,6 +909,7 @@ Doing it Manually
                3. 15.75 rounded down, or 15
                4. 15 * 48, or 720
                5. 720 + 40, or 760
+
          So the canvas within a 1440x900 Tux Paint window is 1248x760.
 
      ----------------------------------------------------------------------

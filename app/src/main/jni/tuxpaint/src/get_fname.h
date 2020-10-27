@@ -1,7 +1,7 @@
 /*
   get_fname.h
 
-  Copyright (c) 2009
+  Copyright (c) 2009 - July 25, 2020
   http://www.tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -27,11 +27,14 @@
 
 extern const char *savedir;
 extern const char *datadir;
+extern const char *exportdir;
 
 enum
 {
+  /* (See get_fname.c for details) */
   DIR_SAVE,
-  DIR_DATA
+  DIR_DATA,
+  DIR_EXPORT
 };
 
 char *get_fname(const char *const name, int kind);

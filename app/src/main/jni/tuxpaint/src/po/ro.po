@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tuxpaint 0.9.2pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-24 08:40-0700\n"
+"POT-Creation-Date: 2020-07-29 23:01-0700\n"
 "PO-Revision-Date: 2003-01-03 21:32-0500\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "Language: ro\n"
@@ -435,7 +435,7 @@ msgstr "Nou"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7846
+#: ../tools.h:98 ../tuxpaint.c:7887
 msgid "Open"
 msgstr "Deschide"
 
@@ -577,201 +577,243 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "Bine atunci… Hai să continuăm să o desenăm pe aceasta!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2113
+#: ../tuxpaint.c:2132
 msgid "Do you really want to quit?"
 msgstr "Eşti sigur că vrei să părăseşti programul?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2116
+#: ../tuxpaint.c:2135
 #, fuzzy
 #| msgid "Yes, I'm done!"
 msgid "Yes, I’m done!"
 msgstr "Da, am terminat!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2119 ../tuxpaint.c:2146
+#: ../tuxpaint.c:2138 ../tuxpaint.c:2165
 msgid "No, take me back!"
 msgstr "Nu, du-mă înapoi!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2123
+#: ../tuxpaint.c:2142
 #, fuzzy
 #| msgid "If you quit, you'll lose your picture! Save it?"
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Dacă închizi, vei pierde pictura! Vrei să o salvezi?"
 
-#: ../tuxpaint.c:2124 ../tuxpaint.c:2129
+#: ../tuxpaint.c:2143 ../tuxpaint.c:2148
 msgid "Yes, save it!"
 msgstr "Da, salveaz-o!"
 
-#: ../tuxpaint.c:2125 ../tuxpaint.c:2130
+#: ../tuxpaint.c:2144 ../tuxpaint.c:2149
 #, fuzzy
 #| msgid "No, don't bother saving!"
 msgid "No, don’t bother saving!"
 msgstr "Nu, nu salva!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2128
+#: ../tuxpaint.c:2147
 msgid "Save your picture first?"
 msgstr "Salvezi pictura mai întâi?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2133
+#: ../tuxpaint.c:2152
 #, fuzzy
 #| msgid "Can't open that picture!"
 msgid "Can’t open that picture!"
 msgstr "Nu pot deschide acea pictură!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2136 ../tuxpaint.c:2141 ../tuxpaint.c:2150 ../tuxpaint.c:2157
-#: ../tuxpaint.c:2166
+#: ../tuxpaint.c:2155 ../tuxpaint.c:2160 ../tuxpaint.c:2169 ../tuxpaint.c:2176
+#: ../tuxpaint.c:2185 ../tuxpaint.c:2190
 msgid "OK"
 msgstr "OK"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2140
+#: ../tuxpaint.c:2159
 msgid "There are no saved files!"
 msgstr "Nu sunt fişiere salvate!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2144
+#: ../tuxpaint.c:2163
 msgid "Print your picture now?"
 msgstr "Imprimi pictura acum?"
 
-#: ../tuxpaint.c:2145
+#: ../tuxpaint.c:2164
 msgid "Yes, print it!"
 msgstr "Da, imprim-o!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2149
+#: ../tuxpaint.c:2168
 msgid "Your picture has been printed!"
 msgstr "Pictura ta a fost tipărită!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2153
+#: ../tuxpaint.c:2172
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Imi pare rau! Pictura nu a putut fi imprimată!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2156
+#: ../tuxpaint.c:2175
 #, fuzzy
 #| msgid "You can't print yet!"
 msgid "You can’t print yet!"
 msgstr "Nu poţi încă imprima!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2160
+#: ../tuxpaint.c:2179
 msgid "Erase this picture?"
 msgstr "Ştergi pictura?"
 
-#: ../tuxpaint.c:2161
+#: ../tuxpaint.c:2180
 msgid "Yes, erase it!"
 msgstr "Da, şterege-o!"
 
-#: ../tuxpaint.c:2162
+#: ../tuxpaint.c:2181
 #, fuzzy
 #| msgid "No, don't erase it!"
 msgid "No, don’t erase it!"
 msgstr "Nu, nu o şterge!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2165
+#: ../tuxpaint.c:2184
 msgid "Remember to use the left mouse button!"
 msgstr "Nu uita să foloseşti butonul din stânga al mouse-ului!"
 
-#. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2371
-msgid "Sound muted."
-msgstr "Sunet oprit."
-
-#. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2376
-msgid "Sound unmuted."
-msgstr "Sunet pornit."
-
-#. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3129
-msgid "Please wait…"
-msgstr "Aşteaptă, te rog…"
-
-#. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7849
-msgid "Erase"
-msgstr "Şterge"
-
-#. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7852
-msgid "Slides"
-msgstr "Diapozitive"
-
-#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7855
-msgid "Back"
-msgstr "Înapoi"
-
-#. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7858
-msgid "Next"
-msgstr "Următoroul"
-
-#. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7861
-msgid "Play"
-msgstr "Rulează"
-
-#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8576
-msgid "Aa"
-msgstr "Aa"
-
-#. Admittedly stupid way of determining which keys can be used for
-#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11944
-msgid "Yes"
-msgstr "Da"
-
-#: ../tuxpaint.c:11948
-msgid "No"
-msgstr "Nu"
-
-#. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:13018
-msgid "Replace the picture with your changes?"
-msgstr "Înlocuieşti pictura cu modificările tale?"
-
-#. Positive response to saving over old version
-#. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:13022
-msgid "Yes, replace the old one!"
-msgstr "Da, înlocuieşte-o pe cea veche!"
-
-#. Negative response to saving over old version (saves a new image)
-#. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:13026
-msgid "No, save a new file!"
-msgstr "Nu, salveaz-o ca fişier nou!"
-
-#. Let user choose an image:
-#. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:14270
+#. Confirmation of successful (we hope) image export
+#: ../tuxpaint.c:2188
 #, fuzzy
-#| msgid "Choose the picture you want, then click 'Open'."
-msgid "Choose the picture you want, then click “Open”."
-msgstr "Alege imaginea dorită, apoi fă Click pe 'Deschide'."
+#| msgid "Your picture has been printed!"
+msgid "Your picture has been exported!"
+msgstr "Pictura ta a fost tipărită!"
 
-#. Let user choose images:
-#. Instructions for Slideshow file dialog (FIXME: Make a #define)
-#: ../tuxpaint.c:15266 ../tuxpaint.c:15586
+#: ../tuxpaint.c:2189
+#, fuzzy
+#| msgid "Your picture has been printed!"
+msgid "Your slideshow GIF has been exported!"
+msgstr "Pictura ta a fost tipărită!"
+
+#. We got an error exporting
+#: ../tuxpaint.c:2193
+#, fuzzy
+#| msgid "Sorry! Your picture could not be printed!"
+msgid "Sorry! Your picture could not be exported!"
+msgstr "Imi pare rau! Pictura nu a putut fi imprimată!"
+
+#: ../tuxpaint.c:2194
+#, fuzzy
+#| msgid "Sorry! Your picture could not be printed!"
+msgid "Sorry! Your slideshow GIF could not be exported!"
+msgstr "Imi pare rau! Pictura nu a putut fi imprimată!"
+
+#. Slideshow instructions
+#: ../tuxpaint.c:2198
 #, fuzzy
 #| msgid "Choose the pictures you want, then click 'Play'."
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Alege imaginile dorite, apoi fă Click pe 'Rulează'."
 
-#: ../tuxpaint.c:23179
+#. Sound has been muted (silenced) via keyboard shortcut
+#: ../tuxpaint.c:2405
+msgid "Sound muted."
+msgstr "Sunet oprit."
+
+#. Sound has been unmuted (unsilenced) via keyboard shortcut
+#: ../tuxpaint.c:2410
+msgid "Sound unmuted."
+msgstr "Sunet pornit."
+
+#. Wait while Text tool finishes loading fonts
+#: ../tuxpaint.c:3165
+msgid "Please wait…"
+msgstr "Aşteaptă, te rog…"
+
+#. Open dialog: 'Erase' button, to erase/deleted the selected picture
+#: ../tuxpaint.c:7890
+msgid "Erase"
+msgstr "Şterge"
+
+#. Open dialog: 'Slides' button, to switch to slide show mode
+#: ../tuxpaint.c:7893
+msgid "Slides"
+msgstr "Diapozitive"
+
+#. Open dialog: 'Export' button, to copy an image to an easily-accessible location
+#: ../tuxpaint.c:7896
+msgid "Export"
+msgstr ""
+
+#. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
+#: ../tuxpaint.c:7899
+msgid "Back"
+msgstr "Înapoi"
+
+#. Slideshow: 'Play' button, to begin a slideshow sequence
+#: ../tuxpaint.c:7902
+msgid "Play"
+msgstr "Rulează"
+
+#. Slideshow: 'GIF Export' button, to create an animated GIF
+#: ../tuxpaint.c:7905
+msgid "GIF Export"
+msgstr ""
+
+#. Slideshow: 'Next' button, to load next slide (image)
+#: ../tuxpaint.c:7908
+msgid "Next"
+msgstr "Următoroul"
+
+#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
+#: ../tuxpaint.c:8623
+msgid "Aa"
+msgstr "Aa"
+
+#. Admittedly stupid way of determining which keys can be used for
+#. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
+#: ../tuxpaint.c:11991
+msgid "Yes"
+msgstr "Da"
+
+#: ../tuxpaint.c:11995
+msgid "No"
+msgstr "Nu"
+
+#. Prompt to ask whether user wishes to save over old version of their file
+#: ../tuxpaint.c:13069
+msgid "Replace the picture with your changes?"
+msgstr "Înlocuieşti pictura cu modificările tale?"
+
+#. Positive response to saving over old version
+#. (like a 'File:Save' action in other applications)
+#: ../tuxpaint.c:13073
+msgid "Yes, replace the old one!"
+msgstr "Da, înlocuieşte-o pe cea veche!"
+
+#. Negative response to saving over old version (saves a new image)
+#. (like a 'File:Save As...' action in other applications)
+#: ../tuxpaint.c:13077
+msgid "No, save a new file!"
+msgstr "Nu, salveaz-o ca fişier nou!"
+
+#. Let user choose an image:
+#. Instructions for 'Open' file dialog
+#: ../tuxpaint.c:14333
+#, fuzzy
+#| msgid "Choose the picture you want, then click 'Open'."
+msgid "Choose the picture you want, then click “Open”."
+msgstr "Alege imaginea dorită, apoi fă Click pe 'Deschide'."
+
+#. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
+#. Only 1 selected?  No point in saving as GIF.
+#.
+#: ../tuxpaint.c:15759
+msgid "Select 2 or more drawings to turn into an animated GIF."
+msgstr ""
+
+#: ../tuxpaint.c:23417
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:23191
+#: ../tuxpaint.c:23429
 msgid "Pick a color."
 msgstr "Alege o culoare."
 

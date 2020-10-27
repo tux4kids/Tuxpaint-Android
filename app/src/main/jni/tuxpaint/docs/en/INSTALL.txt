@@ -2,11 +2,11 @@ INSTALL.txt for Tux Paint
 
 Tux Paint - A simple drawing program for children.
 
-Copyright (c) 2002-2018
+Copyright (c) 2002-2020
 Various contributors (see below, and AUTHORS.txt)
 http://www.tuxpaint.org/
 
-June 27, 2002 - December 8, 2018
+June 27, 2002 - July 25, 2020
 $Id$
 
 
@@ -118,6 +118,14 @@ Requirements:
 
         Also depends on:
           libxml2
+
+    Animated GIF Export feature
+    ---------------------------
+      So support export of animated GIFs (slideshows), the
+      "libimagequant" library (from the "pngquant2" project)
+      is required.
+
+        https://github.com/ImageOptim/libimagequant
 
     NetPBM Tools  [OPTIONAL]  [No longer used, by default]
     ------------------------

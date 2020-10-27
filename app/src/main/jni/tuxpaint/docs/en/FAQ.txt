@@ -1,11 +1,11 @@
                                    Tux Paint
-                                 version 0.9.24
+                                 version 0.9.25
                            Frequently Asked Questions
 
         Copyright (c) 2002-2020 by various contributors; see AUTHORS.txt
                             http://www.tuxpaint.org/
 
-                       September 14, 2002 - May 29, 2020
+                       September 14, 2002 - July 27, 2020
 
 Drawing-related
 
@@ -42,30 +42,30 @@ Drawing-related
        it with "--stamps" on the command line or "nostamps=no" or
        "stamps=yes" in a configuration file.
 
-          * The Magic "Fill" Tool Looks Bad
+     * The Magic "Fill" Tool Looks Bad
 
-            Tux Paint is probably comparing exact pixel colors when filling.
-            This is faster, but looks worse. Run the command
-            "tuxpaint --version" from a command line, and you should see,
-            amongst the other output: "Low Quality Flood Fill enabled".
+       Tux Paint is probably comparing exact pixel colors when filling. This
+       is faster, but looks worse. Run the command "tuxpaint --version" from
+       a command line, and you should see, amongst the other output: "Low
+       Quality Flood Fill enabled".
 
-            To change this, you must rebuild Tux Paint from source. Be sure
-            to remove or comment out any line that says:
+       To change this, you must rebuild Tux Paint from source. Be sure to
+       remove or comment out any line that says:
 
-              #define LOW_QUALITY_FLOOD_FILL
+         #define LOW_QUALITY_FLOOD_FILL
 
-              in the "tuxpaint.c" file in the "src" directory.
+       in the "tuxpaint.c" file in the "src" directory.
 
-          * Stamp outlines are always rectangles
+     * Stamp outlines are always rectangles
 
-            Tux Paint was built with low-quality (but faster) stamp outlines.
+       Tux Paint was built with low-quality (but faster) stamp outlines.
 
-            Rebuild Tux Paint from source. Be sure to remove or comment out
-            any line that says:
+       Rebuild Tux Paint from source. Be sure to remove or comment out any
+       line that says:
 
-              #define LOW_QUALITY_STAMP_OUTLINE
+         #define LOW_QUALITY_STAMP_OUTLINE
 
-            in the "tuxpaint.c" file in the "src" directory.
+       in the "tuxpaint.c" file in the "src" directory.
 
 Interface Problems
 

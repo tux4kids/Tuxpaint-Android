@@ -7,6 +7,7 @@ LOCAL_MODULE := tuxpaint
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../SDL2/src/main/android \
+	$(LOCAL_PATH)/../libimagequant \
 	$(LOCAL_PATH)/src \
 	$(LOCAL_PATH)/src/mouse \
 	$(NULL)
@@ -29,7 +30,8 @@ LOCAL_SRC_FILES := \
 	src/android_print.c \
 	src/android_mbstowcs.c \
 	src/fill.c \
-	src/android_assets.c
+	src/android_assets.c \
+	src/gifenc.c
 
 MY_CFLAGS:= -O0 -g -W -Wall -fno-common -ffloat-store \
 	-Wcast-align -Wredundant-decls \
@@ -82,7 +84,7 @@ LOCAL_LDLIBS := \
 	-lz -llog -lGLESv1_CM -lGLESv2 -landroid \
 	$(NULL)
 
-LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango tuxpaint_intl tuxpaint_fribidi tuxpaint_png tuxpaint_rsvg tuxpaint_cairo tp_android_assets_fopen
+LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango tuxpaint_intl tuxpaint_fribidi tuxpaint_png tuxpaint_rsvg tuxpaint_cairo tp_android_assets_fopen libimagequant
 
 include $(BUILD_SHARED_LIBRARY)
 
