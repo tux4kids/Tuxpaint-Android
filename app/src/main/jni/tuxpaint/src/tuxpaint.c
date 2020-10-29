@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - July 29, 2020
+  June 14, 2002 - October 15, 2020
 */
 
 
@@ -54,8 +54,6 @@
     /*# define VIDEO_BPP 24 *//* compromise */
     #define VIDEO_BPP 32      /* might be fastest, if conversion funcs removed */
 #endif
-
-/* #define CORNER_SHAPES *//* need major work! */
 
 /* Method for printing images: */
 
@@ -1316,6 +1314,9 @@ static int simple_shapes;
 static int only_uppercase;
 
 static int disable_magic_controls;
+static int disable_shape_controls;
+
+static int shape_mode = SHAPEMODE_CENTER;
 
 static int starter_mirrored;
 static int starter_flipped;
@@ -1414,7 +1415,9 @@ static void stop_motion_convert(SDL_Event event);
 #endif
 
 char * get_xdg_user_dir(const char * dir_type, const char * fallback);
-
+#ifdef WIN32
+extern char * GetUserImageDir(void);
+#endif
 
 /* Magic tools API and tool handles: */
 
@@ -1523,7 +1526,7 @@ static int text_undo[NUM_UNDO_BUFS];
 static int have_to_rec_label_node;
 static int have_to_rec_label_node_back;
 static SDL_Surface *img_title, *img_title_credits, *img_title_tuxpaint;
-static SDL_Surface *img_btn_up, *img_btn_down, *img_btn_off;
+static SDL_Surface *img_btn_up, *img_btn_down, *img_btn_off, *img_btn_hold;
 static SDL_Surface *img_btnsm_up, *img_btnsm_off, *img_btnsm_down, *img_btnsm_hold;
 static SDL_Surface *img_btn_nav, *img_btnsm_nav;
 static SDL_Surface *img_prev, *img_next;
@@ -1542,6 +1545,7 @@ static SDL_Surface *img_scroll_up, *img_scroll_down;
 static SDL_Surface *img_scroll_up_off, *img_scroll_down_off;
 static SDL_Surface *img_grow, *img_shrink;
 static SDL_Surface *img_magic_paint, *img_magic_fullscreen;
+static SDL_Surface *img_shapes_corner, *img_shapes_center;
 static SDL_Surface *img_bold, *img_italic;
 static SDL_Surface *img_label, *img_label_select;
 static SDL_Surface *img_color_picker, *img_color_picker_thumb, *img_paintwell, *img_color_sel;
@@ -1899,10 +1903,11 @@ static int img_cur_brush_frame_w, img_cur_brush_w, img_cur_brush_h,
   img_cur_brush_frames, img_cur_brush_directional, img_cur_brush_spacing;
 static int brush_counter, brush_frame;
 
-#define NUM_ERASERS 12          /* How many sizes of erasers
+#define NUM_ERASERS 16          /* How many sizes of erasers
                                    (from ERASER_MIN to _MAX as squares, then again
-                                   from ERASER_MIN to _MAX as circles) */
-#define ERASER_MIN 13
+                                   from ERASER_MIN to _MAX as circles; best if a
+                                   multiple of 4, since selector is 2 buttons across) */
+#define ERASER_MIN 5            /* Smaller than 5 will not render as a circle! */
 #define ERASER_MAX 128
 
 
@@ -2022,7 +2027,9 @@ static void update_stamp_xor(void);
 
 static void set_active_stamp(void);
 
-static void do_eraser(int x, int y);
+static int calc_eraser_size(int which_eraser);
+static void do_eraser(int x, int y, int update);
+static void eraser_draw(int x1, int y1, int x2, int y2);
 static void disable_avail_tools(void);
 static void enable_avail_tools(void);
 static void reset_avail_tools(void);
@@ -2069,7 +2076,7 @@ static void free_surface_array(SDL_Surface * surface_array[], int count);
 
 /*static void update_shape(int cx, int ox1, int ox2, int cy, int oy1, int oy2,
                           int fixed); */
-static void do_shape(int cx, int cy, int ox, int oy, int rotn, int use_brush);
+static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush);
 static int shape_rotation(int ctr_x, int ctr_y, int ox, int oy);
 static int brush_rotation(int ctr_x, int ctr_y, int ox, int oy);
 static int do_save(int tool, int dont_show_success_results, int autosave);
@@ -2308,6 +2315,8 @@ enum
   SHAPE_TOOL_MODE_DONE
 };
 
+int shape_reverse;
+
 
 int brushflag, xnew, ynew, eraflag, lineflag, magicflag, keybd_flag, keybd_position, keyglobal, initial_y, gen_key_flag,
   ide, activeflag, old_x, old_y;
@@ -2319,7 +2328,7 @@ int cur_thing;
 static void mainloop(void)
 {
   int done, val_x, val_y, valhat_x, valhat_y, new_x, new_y,
-    shape_tool_mode, shape_ctr_x, shape_ctr_y, shape_outer_x, shape_outer_y, old_stamp_group, which;
+    shape_tool_mode, shape_start_x, shape_start_y, shape_current_x, shape_current_y, old_stamp_group, which;
   int num_things;
   int *thing_scroll;
   int do_draw, max;
@@ -2365,10 +2374,10 @@ static void mainloop(void)
   old_x = 0;
   old_y = 0;
   which = 0;
-  shape_ctr_x = 0;
-  shape_ctr_y = 0;
-  shape_outer_x = 0;
-  shape_outer_y = 0;
+  shape_start_x = 0;
+  shape_start_y = 0;
+  shape_current_x = 0;
+  shape_current_y = 0;
   shape_tool_mode = SHAPE_TOOL_MODE_DONE;
   button_down = 0;
   last_cursor_blink = cur_toggle_count = 0;
@@ -3321,6 +3330,40 @@ static void mainloop(void)
                             {
                               if (onscreen_keyboard && kbd)
                                 {
+                                  if (kbd == NULL)
+                                    {
+                                      if (onscreen_keyboard_layout)
+                                        kbd =
+                                          osk_create(onscreen_keyboard_layout, screen,
+                                                     img_btn_up, img_btn_down, img_btn_off,
+                                                     img_btn_nav, img_btn_hold,
+                                                     img_oskdel, img_osktab, img_oskenter,
+                                                     img_oskcapslock, img_oskshift,
+                                                     img_btnsm_up, img_btnsm_down, img_btnsm_off,
+                                                     img_btnsm_nav, img_btnsm_hold,
+                                                     /* FIXME */
+                                                     img_oskdel, img_osktab, img_oskenter,
+                                                     img_oskcapslock, img_oskshift,
+                                                     onscreen_keyboard_disable_change);
+                                      else
+                                        kbd =
+                                          osk_create(strdup("default.layout"), screen,
+                                                     img_btn_up, img_btn_down, img_btn_off,
+                                                     img_btn_nav, img_btn_hold,
+                                                     img_oskdel, img_osktab, img_oskenter,
+                                                     img_oskcapslock, img_oskshift,
+                                                     img_btnsm_up, img_btnsm_down, img_btnsm_off,
+                                                     img_btnsm_nav, img_btnsm_hold,
+                                                     /* FIXME */
+                                                     img_oskdel, img_osktab, img_oskenter,
+                                                     img_oskcapslock, img_oskshift,
+                                                     onscreen_keyboard_disable_change);
+                                    }
+                                  if (kbd == NULL)
+                                    {
+                                      fprintf(stderr, "kbd = NULL\n");
+                                    }
+
                                   kbd_rect.x = button_w * 2 + (canvas->w - kbd->surface->w) / 2;
                                   if (old_y > canvas->h / 2)
                                     kbd_rect.y = 0;
@@ -3722,6 +3765,15 @@ static void mainloop(void)
                             }
                         }
 
+                      else if (cur_tool == TOOL_SHAPES)
+                        {
+                          if (!disable_shape_controls)
+                            {
+                              gd_controls.rows = 1;
+                              gd_controls.cols = 2;
+                            }
+                        }
+
                       /* number of whole or partial rows that will be needed
                          (can make this per-tool if variable columns needed) */
                       num_rows_needed = (num_things + gd_items.cols - 1) / gd_items.cols;
@@ -3927,6 +3979,17 @@ static void mainloop(void)
                                   update_screen_rect(&r_toolopt);
                                 }
                               /* FIXME: Sfx */
+                            }
+                          else if (cur_tool == TOOL_SHAPES)
+                            {
+                              /* Shape controls! */
+                              shape_mode = which;
+                              draw_shapes();
+			      update_screen_rect(&r_toolopt);
+                              draw_tux_text(TUX_GREAT, shapemode_tips[shape_mode], 1);
+                              playsound(screen, 0, SND_CLICK, 0, SNDPOS_RIGHT, SNDDIST_NEAR);
+                              update_screen_rect(&r_tuxarea);
+                              toolopt_changed = 0;
                             }
                           else if (cur_tool == TOOL_TEXT)
                             {
@@ -4361,8 +4424,8 @@ static void mainloop(void)
                               update_canvas(0, 0, canvas->w, canvas->h);
                             }
 
-
-                          draw_tux_text(TUX_GREAT, shape_tips[cur_shape], 1);
+                          if (toolopt_changed)
+                            draw_tux_text(TUX_GREAT, shape_tips[cur_shape], 1);
 
                           if (do_draw)
                             draw_shapes();
@@ -4551,8 +4614,8 @@ static void mainloop(void)
 
                           rec_undo_buffer();
 
-                          shape_ctr_x = old_x;
-                          shape_ctr_y = old_y;
+                          shape_start_x = old_x;
+                          shape_start_y = old_y;
 
                           shape_tool_mode = SHAPE_TOOL_MODE_STRETCH;
 
@@ -4573,8 +4636,8 @@ static void mainloop(void)
                               reset_brush_counter();
 
                               playsound(screen, 1, SND_LINE_END, 1, event.button.x, SNDDIST_NEAR);
-                              do_shape(shape_ctr_x, shape_ctr_y, shape_outer_x, shape_outer_y,
-                                       shape_rotation(shape_ctr_x, shape_ctr_y,
+                              do_shape(shape_start_x, shape_start_y, shape_current_x, shape_current_y,
+                                       shape_rotation(shape_start_x, shape_start_y,
                                                       event.button.x - r_canvas.x, event.button.y - r_canvas.y), 1);
 
                               shape_tool_mode = SHAPE_TOOL_MODE_DONE;
@@ -4644,7 +4707,7 @@ static void mainloop(void)
                       if (!emulate_button_pressed)
                         rec_undo_buffer();
 
-                      do_eraser(old_x, old_y);
+                      do_eraser(old_x, old_y, 1);
 
                       if (mouseaccessibility)
                         emulate_button_pressed = !emulate_button_pressed;
@@ -4988,6 +5051,14 @@ static void mainloop(void)
                               gd_controls.cols = 2;
                             }
                         }
+                      else if (cur_tool == TOOL_SHAPES)
+                        {
+                          if (!disable_shape_controls)
+                            {
+                              gd_controls.rows = 1;
+                              gd_controls.cols = 2;
+                            }
+                        }
 
                       /* number of whole or partial rows that will be needed
                          (can make this per-tool if variable columns needed) */
@@ -5204,31 +5275,31 @@ static void mainloop(void)
                             {
                               /* Now we can rotate the shape... */
 
-                              shape_outer_x = event.button.x - r_canvas.x;
-                              shape_outer_y = event.button.y - r_canvas.y;
+                              shape_current_x = event.button.x - r_canvas.x;
+                              shape_current_y = event.button.y - r_canvas.y;
 
                               if (!simple_shapes && !shape_no_rotate[cur_shape])
                                 {
                                   shape_tool_mode = SHAPE_TOOL_MODE_ROTATE;
 
                                   shape_radius =
-                                    sqrt((shape_ctr_x - shape_outer_x) * (shape_ctr_x - shape_outer_x) +
-                                         (shape_ctr_y - shape_outer_y) * (shape_ctr_y - shape_outer_y));
+                                    sqrt((shape_start_x - shape_current_x) * (shape_start_x - shape_current_x) +
+                                         (shape_start_y - shape_current_y) * (shape_start_y - shape_current_y));
 
-                                  SDL_WarpMouse(shape_outer_x + 96, shape_ctr_y);
+                                  SDL_WarpMouse(shape_current_x + 96, shape_start_y);
                                   do_setcursor(cursor_rotate);
 
 
                                   /* Erase stretchy XOR: */
 
-                                  if (abs(shape_ctr_x - shape_outer_x) > 15 || abs(shape_ctr_y - shape_outer_y) > 15)
-                                    do_shape(shape_ctr_x, shape_ctr_y, old_x, old_y, 0, 0);
+                                  if (abs(shape_start_x - shape_current_x) > 15 || abs(shape_start_y - shape_current_y) > 15)
+                                    do_shape(shape_start_x, shape_start_y, old_x, old_y, 0, 0);
 
                                   /* Make an initial rotation XOR to be erased: */
 
-                                  do_shape(shape_ctr_x, shape_ctr_y,
-                                           shape_outer_x, shape_outer_y,
-                                           shape_rotation(shape_ctr_x, shape_ctr_y, shape_outer_x, shape_outer_y), 0);
+                                  do_shape(shape_start_x, shape_start_y,
+                                           shape_current_x, shape_current_y,
+                                           shape_rotation(shape_start_x, shape_start_y, shape_current_x, shape_current_y), 0);
 
                                   playsound(screen, 1, SND_LINE_START, 1, event.button.x, SNDDIST_NEAR);
                                   draw_tux_text(TUX_BORED, TIP_SHAPE_NEXT, 1);
@@ -5244,7 +5315,7 @@ static void mainloop(void)
 
 
                                   playsound(screen, 1, SND_LINE_END, 1, event.button.x, SNDDIST_NEAR);
-                                  do_shape(shape_ctr_x, shape_ctr_y, shape_outer_x, shape_outer_y, 0, 1);
+                                  do_shape(shape_start_x, shape_start_y, shape_current_x, shape_current_y, 0, 1);
 
                                   SDL_Flip(screen);
 
@@ -5257,12 +5328,16 @@ static void mainloop(void)
                               reset_brush_counter();
 
                               playsound(screen, 1, SND_LINE_END, 1, event.button.x, SNDDIST_NEAR);
-                              do_shape(shape_ctr_x, shape_ctr_y, shape_outer_x, shape_outer_y,
-                                       shape_rotation(shape_ctr_x, shape_ctr_y,
+                              do_shape(shape_start_x, shape_start_y, shape_current_x, shape_current_y,
+                                       shape_rotation(shape_start_x, shape_start_y,
                                                       event.button.x - r_canvas.x, event.button.y - r_canvas.y), 1);
 
                               shape_tool_mode = SHAPE_TOOL_MODE_DONE;
                               draw_tux_text(TUX_GREAT, tool_tips[TOOL_SHAPES], 1);
+
+                              /* FIXME: Do something less intensive! */
+
+                              SDL_Flip(screen);
                             }
                         }
                     }
@@ -5440,6 +5515,8 @@ static void mainloop(void)
                     max = 10;
                   if (cur_tool == TOOL_MAGIC && !disable_magic_controls)
                     max = 12;
+                  if (cur_tool == TOOL_SHAPES && !disable_shape_controls)
+                    max = 12;
 
 
                   if (num_things > max + TOOLOFFSET)
@@ -5576,15 +5653,17 @@ static void mainloop(void)
 
                       if (shape_tool_mode == SHAPE_TOOL_MODE_STRETCH)
                         {
-                          do_shape(shape_ctr_x, shape_ctr_y, old_x, old_y, 0, 0);
+                          do_shape(shape_start_x, shape_start_y, old_x, old_y, 0, 0);
 
-                          do_shape(shape_ctr_x, shape_ctr_y, new_x, new_y, 0, 0);
+                          do_shape(shape_start_x, shape_start_y, new_x, new_y, 0, 0);
+
+                          shape_reverse = (new_x < shape_start_x);
 
 
                           /* FIXME: Fix update shape function! */
 
-                          /* update_shape(shape_ctr_x, old_x, new_x,
-                             shape_ctr_y, old_y, new_y,
+                          /* update_shape(shape_start_x, old_x, new_x,
+                             shape_start_y, old_y, new_y,
                              shape_locked[cur_shape]); */
 
                           SDL_Flip(screen);
@@ -5623,7 +5702,7 @@ static void mainloop(void)
                     {
                       /* Still pushing, and moving - Erase! */
 
-                      do_eraser(new_x, new_y);
+                      eraser_draw(old_x, old_y, new_x, new_y);
                     }
                 }
 
@@ -5766,12 +5845,12 @@ static void mainloop(void)
                 }
               else if (cur_tool == TOOL_SHAPES && shape_tool_mode == SHAPE_TOOL_MODE_ROTATE)
                 {
-                  do_shape(shape_ctr_x, shape_ctr_y,
-                           shape_outer_x, shape_outer_y, shape_rotation(shape_ctr_x, shape_ctr_y, old_x, old_y), 0);
+                  do_shape(shape_start_x, shape_start_y,
+                           shape_current_x, shape_current_y, shape_rotation(shape_start_x, shape_start_y, old_x, old_y), 0);
 
 
-                  do_shape(shape_ctr_x, shape_ctr_y,
-                           shape_outer_x, shape_outer_y, shape_rotation(shape_ctr_x, shape_ctr_y, new_x, new_y), 0);
+                  do_shape(shape_start_x, shape_start_y,
+                           shape_current_x, shape_current_y, shape_rotation(shape_start_x, shape_start_y, new_x, new_y), 0);
 
 
                   /* FIXME: Do something less intensive! */
@@ -6804,6 +6883,7 @@ void show_usage(int exitcode)
           "  [--stamps | --nostamps]\n"
           "  [--nostampcontrols | --stampcontrols]\n"
           "  [--nomagiccontrols | --magiccontrols]\n"
+          "  [--noshapecontrols | --shapecontrols]\n"
           "  [--nolabel | --label]\n"
           "  [--newcolorsfirst | --newcolorslast]\n"
           "\n"
@@ -8590,7 +8670,7 @@ static void draw_magic(void)
     }
 
 
-  /* Draw text controls: */
+  /* Draw magic controls: */
 
   if (!disable_magic_controls)
     {
@@ -9436,17 +9516,20 @@ static void draw_stamps(void)
 /* Draw the shape selector: */
 static void draw_shapes(void)
 {
-  int i, shape, max, off_y;
+  int i, shape, max, off_y, most;
   SDL_Rect dest;
 
 
   draw_image_title(TITLE_SHAPES, r_ttoolopt);
 
+  most = 12;
+  if (disable_shape_controls)
+    most = 14;
 
-  if (NUM_SHAPES > 14 + TOOLOFFSET)
+  if (NUM_SHAPES > most + TOOLOFFSET)
     {
       off_y = 24;
-      max = 12 + TOOLOFFSET;
+      max = (most - 2) + TOOLOFFSET;
 
       dest.x = WINDOW_WIDTH - 96;
       dest.y = 40;
@@ -9461,9 +9544,9 @@ static void draw_shapes(void)
         }
 
       dest.x = WINDOW_WIDTH - 96;
-      dest.y = 40 + 24 + ((6 + TOOLOFFSET / 2) * 48);
+      dest.y = 40 + 24 + ((((most - 2) / 2) + TOOLOFFSET / 2) * 48);
 
-      if (shape_scroll < NUM_SHAPES - 12 - TOOLOFFSET)
+      if (shape_scroll < NUM_SHAPES - (most - 2) - TOOLOFFSET)
         {
           SDL_BlitSurface(img_scroll_down, NULL, screen, &dest);
         }
@@ -9475,7 +9558,7 @@ static void draw_shapes(void)
   else
     {
       off_y = 0;
-      max = 14 + TOOLOFFSET;
+      max = most + TOOLOFFSET;
     }
 
   for (shape = shape_scroll; shape < shape_scroll + max; shape++)
@@ -9511,6 +9594,48 @@ static void draw_shapes(void)
 
           SDL_BlitSurface(img_shape_names[shape], NULL, screen, &dest);
         }
+    }
+
+  /* Draw magic controls: */
+
+  if (!disable_shape_controls)
+    {
+      SDL_Surface *button_color;
+
+      /* Show shape-from-center button: */
+
+      if (shape_mode == SHAPEMODE_CENTER) 
+        button_color = img_btn_down;
+      else
+        button_color = img_btn_up;
+
+      dest.x = WINDOW_WIDTH - 96;
+      dest.y = 40 + ((6 + TOOLOFFSET / 2) * 48);
+
+      SDL_BlitSurface(button_color, NULL, screen, &dest);
+
+      dest.x = WINDOW_WIDTH - 96 + (48 - img_shapes_center->w) / 2;
+      dest.y = (40 + ((6 + TOOLOFFSET / 2) * 48) + (48 - img_shapes_center->h) / 2);
+
+      SDL_BlitSurface(img_shapes_center, NULL, screen, &dest);
+
+
+      /* Show shape-from-corner button: */
+
+      if (shape_mode == SHAPEMODE_CORNER) 
+        button_color = img_btn_down;
+      else
+        button_color = img_btn_up;
+
+      dest.x = WINDOW_WIDTH - 48;
+      dest.y = 40 + ((6 + TOOLOFFSET / 2) * 48);
+
+      SDL_BlitSurface(button_color, NULL, screen, &dest);
+
+      dest.x = WINDOW_WIDTH - 48 + (48 - img_shapes_corner->w) / 2;
+      dest.y = (40 + ((6 + TOOLOFFSET / 2) * 48) + (48 - img_shapes_corner->h) / 2);
+
+      SDL_BlitSurface(img_shapes_corner, NULL, screen, &dest);
     }
 }
 
@@ -10350,22 +10475,30 @@ static void rect_xor(int x1, int y1, int x2, int y2)
 }
 
 
+static int calc_eraser_size(int which_eraser)
+{
+#define NUM_SIZES (NUM_ERASERS / 2)
+  if (which_eraser >= NUM_SIZES)
+    which_eraser -= NUM_SIZES;
+
+  return(((NUM_SIZES - 1 - which_eraser) * ((ERASER_MAX - ERASER_MIN) / (NUM_SIZES - 1))) + ERASER_MIN);
+}
+
 /**
  * FIXME
  */
 /* Erase at the cursor! */
-static void do_eraser(int x, int y)
+static void do_eraser(int x, int y, int update)
 {
   SDL_Rect dest;
   int sz;
   int xx, yy, n, hit;
 
-  if (cur_eraser < NUM_ERASERS / 2)
+  sz = calc_eraser_size(cur_eraser);
+
+  if (cur_eraser < NUM_SIZES)
     {
       /* Square eraser: */
-
-      sz = (ERASER_MIN +
-            (((NUM_ERASERS / 2) - 1 - cur_eraser) * ((ERASER_MAX - ERASER_MIN) / ((NUM_ERASERS / 2) - 1))));
 
       dest.x = x - (sz / 2);
       dest.y = y - (sz / 2);
@@ -10373,28 +10506,20 @@ static void do_eraser(int x, int y)
       dest.h = sz;
 
       if (img_starter_bkgd == NULL)
-        {
-          SDL_FillRect(canvas, &dest, SDL_MapRGB(canvas->format, canvas_color_r, canvas_color_g, canvas_color_b));
-        }
+        SDL_FillRect(canvas, &dest, SDL_MapRGB(canvas->format, canvas_color_r, canvas_color_g, canvas_color_b));
       else
-        {
-          SDL_BlitSurface(img_starter_bkgd, &dest, canvas, &dest);
-        }
+        SDL_BlitSurface(img_starter_bkgd, &dest, canvas, &dest);
     }
   else
     {
       /* Round eraser: */
 
-      sz = (ERASER_MIN +
-            (((NUM_ERASERS / 2) - 1 - (cur_eraser - (NUM_ERASERS / 2))) *
-             ((ERASER_MAX - ERASER_MIN) / ((NUM_ERASERS / 2) - 1))));
-
-      for (yy = 0; yy < sz; yy++)
+      for (yy = 0; yy <= sz; yy++)
         {
           hit = 0;
           for (xx = 0; xx <= sz && hit == 0; xx++)
             {
-              n = (xx * xx) + (yy * yy) - ((sz / 2) * (sz / 2));
+              n = (xx * xx) + (yy * yy) - ((sz * sz) / 4);
 
               if (n >= -sz && n <= sz)
                 hit = 1;
@@ -10407,14 +10532,10 @@ static void do_eraser(int x, int y)
                   dest.h = 1;
 
                   if (img_starter_bkgd == NULL)
-                    {
-                      SDL_FillRect(canvas, &dest, SDL_MapRGB(canvas->format,
-                                                             canvas_color_r, canvas_color_g, canvas_color_b));
-                    }
+                    SDL_FillRect(canvas, &dest, SDL_MapRGB(canvas->format,
+                                                           canvas_color_r, canvas_color_g, canvas_color_b));
                   else
-                    {
-                      SDL_BlitSurface(img_starter_bkgd, &dest, canvas, &dest);
-                    }
+                    SDL_BlitSurface(img_starter_bkgd, &dest, canvas, &dest);
 
 
                   dest.x = x - xx;
@@ -10423,14 +10544,10 @@ static void do_eraser(int x, int y)
                   dest.h = 1;
 
                   if (img_starter_bkgd == NULL)
-                    {
-                      SDL_FillRect(canvas, &dest, SDL_MapRGB(canvas->format,
-                                                             canvas_color_r, canvas_color_g, canvas_color_b));
-                    }
+                    SDL_FillRect(canvas, &dest, SDL_MapRGB(canvas->format,
+                                                           canvas_color_r, canvas_color_g, canvas_color_b));
                   else
-                    {
-                      SDL_BlitSurface(img_starter_bkgd, &dest, canvas, &dest);
-                    }
+                    SDL_BlitSurface(img_starter_bkgd, &dest, canvas, &dest);
                 }
             }
         }
@@ -10449,16 +10566,104 @@ static void do_eraser(int x, int y)
     }
 #endif
 
-  update_canvas(x - sz / 2, y - sz / 2, x + sz / 2, y + sz / 2);
+  if (update)
+    {
+      update_canvas(x - sz / 2, y - sz / 2, x + sz / 2, y + sz / 2);
 
-  rect_xor(x - sz / 2, y - sz / 2, x + sz / 2, y + sz / 2);
+      rect_xor(x - sz / 2, y - sz / 2, x + sz / 2, y + sz / 2);
 
 #ifdef __APPLE__
-  /* Prevent ghosted eraser outlines from remaining on the screen in windowed mode */
-  update_screen(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+      /* Prevent ghosted eraser outlines from remaining on the screen in windowed mode */
+      update_screen(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 #endif
+    }
 }
 
+/**
+ * Draw a line on the canvas using the eraser.
+ *
+ * @param x1 Starting X coordinate
+ * @param y1 Starting Y coordinate
+ * @param x2 Ending X coordinate
+ * @param y2 Ending Y coordinate
+ */
+static void eraser_draw(int x1, int y1, int x2, int y2)
+{
+  int dx, dy, y;
+  int orig_x1, orig_y1, orig_x2, orig_y2, tmp, length;
+  float m, b;
+
+  orig_x1 = x1;
+  orig_y1 = y1;
+
+  orig_x2 = x2;
+  orig_y2 = y2;
+
+
+  dx = x2 - x1;
+  dy = y2 - y1;
+
+  if (dx != 0)
+    {
+      m = ((float)dy) / ((float)dx);
+      b = y1 - m * x1;
+
+      if (x2 >= x1)
+        dx = 1;
+      else
+        dx = -1;
+
+
+      while (x1 != x2)
+        {
+          y1 = m * x1 + b;
+          y2 = m * (x1 + dx) + b;
+
+          if (y1 > y2)
+            {
+              for (y = y1; y >= y2; y--)
+                do_eraser(x1, y, 0);
+            }
+          else
+            {
+              for (y = y1; y <= y2; y++)
+                do_eraser(x1, y, 0);
+            }
+
+          x1 = x1 + dx;
+        }
+    }
+  else
+    {
+      if (y1 > y2)
+        {
+          y = y1;
+          y1 = y2;
+          y2 = y;
+        }
+
+      for (y = y1; y <= y2; y++)
+        do_eraser(x1, y, 0);
+    }
+
+
+  if (orig_x1 > orig_x2)
+    {
+      tmp = orig_x1;
+      orig_x1 = orig_x2;
+      orig_x2 = tmp;
+    }
+
+  if (orig_y1 > orig_y2)
+    {
+      tmp = orig_y1;
+      orig_y1 = orig_y2;
+      orig_y2 = tmp;
+    }
+
+  length = (calc_eraser_size(cur_eraser) >> 1) + 1;
+  update_canvas(orig_x1 - length, orig_y1 - length, orig_x2 + length, orig_y2 + length);
+}
 
 /**
  * FIXME
@@ -12221,7 +12426,7 @@ static void save_current(void)
   char *fname;
   FILE *fi;
 
-  if (!make_directory(DIR_SAVE, "", "Can't create user data directory"))
+  if (!make_directory(DIR_SAVE, "", "Can't create user data directory (E001)"))
     {
       draw_tux_text(TUX_OOPS, strerror(errno), 0);
       return;
@@ -12847,6 +13052,7 @@ static void cleanup(void)
   free_surface(&img_btn_up);
   free_surface(&img_btn_down);
   free_surface(&img_btn_off);
+  free_surface(&img_btn_hold);
 
   free_surface(&img_btnsm_up);
   free_surface(&img_btnsm_off);
@@ -12875,6 +13081,9 @@ static void cleanup(void)
 
   free_surface(&img_magic_paint);
   free_surface(&img_magic_fullscreen);
+
+  free_surface(&img_shapes_center);
+  free_surface(&img_shapes_corner);
 
   free_surface(&img_bold);
   free_surface(&img_italic);
@@ -13113,45 +13322,24 @@ static void free_surface_array(SDL_Surface * surface_array[], int count)
  * FIXME
  */
 /* Draw a shape! */
-static void do_shape(int cx, int cy, int ox, int oy, int rotn, int use_brush)
+static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush)
 {
   int side, angle_skip, init_ang, rx, ry, rmax, x1, y1, x2, y2, xp, yp, xv, yv, old_brush, step;
   float a1, a2, rotn_rad;
-  int xx, yy;
+  int xx, yy, offx, offy, max_x, max_y;
 
 
   /* Determine radius/shape of the shape to draw: */
 
   old_brush = 0;
 
-#ifdef CORNER_SHAPES
-  int tmp = 0;
-
-  if (cx > ox)
+  rx = abs(nx - sx);
+  ry = abs(ny - sy);
+  if (shape_mode == SHAPEMODE_CORNER)
     {
-      tmp = cx;
-      cx = ox;
-      ox = tmp;
+      rx = sqrt(rx * rx) / 2;
+      ry = sqrt(ry * ry) / 2;
     }
-
-  if (cy > oy)
-    {
-      tmp = cy;
-      cy = oy;
-      oy = tmp;
-    }
-
-  x1 = cx;
-  x2 = ox;
-  y1 = cy;
-  y2 = oy;
-
-  cx += ((x2 - x1) / 2);
-  cy += ((y2 - y1) / 2);
-#endif
-
-  rx = abs(ox - cx);
-  ry = abs(oy - cy);
 
   /* If the shape has a 1:1 ("locked") aspect ratio, use the larger radius: */
 
@@ -13172,6 +13360,11 @@ static void do_shape(int cx, int cy, int ox, int oy, int rotn, int use_brush)
       ry = 15;
     }
 
+  if (rx < 2)
+    rx = 2;
+  if (ry < 2)
+    ry = 2;
+
 
   /* Render a default brush: */
 
@@ -13190,6 +13383,38 @@ static void do_shape(int cx, int cy, int ox, int oy, int rotn, int use_brush)
   init_ang = shape_init_ang[cur_shape];
 
 
+  if (shape_mode == SHAPEMODE_CORNER)
+    {
+      /* Get extent of shape based on it's vertices,
+         and scale up if we need to
+         (e.g., square's points are at 45, 135, 225 & 315 degrees,
+         which do not extend to the full radius).
+
+         This works well for square and rectangle; it mostly
+         works for triangle and 5-pointed star, but it seems
+         sufficient. -bjk 2020.08.15 */
+      max_x = 0;
+      max_y = 0;
+      for (side = 0; side < shape_sides[cur_shape]; side++)
+        {
+          a1 = (angle_skip * side + init_ang) * M_PI / 180;
+          a2 = (angle_skip * (side + 1) + init_ang) * M_PI / 180;
+          x1 = (int)(cos(a1) * rx);
+          y1 = (int)(-sin(a1) * ry);
+
+          if (abs(x1) > max_x)
+            max_x = abs(x1);
+          if (abs(y1) > max_y)
+            max_y = abs(y1);
+        }
+
+      if (max_x < rx)
+        rx = (rx * rx) / max_x;
+      if (max_y < ry)
+        ry = (ry * ry) / max_y;
+    }
+
+
   step = 1;
 
   if (dont_do_xor && !use_brush)
@@ -13201,6 +13426,33 @@ static void do_shape(int cx, int cy, int ox, int oy, int rotn, int use_brush)
         step = (shape_sides[cur_shape] / 8);
     }
 
+
+  /* Where is the object? */
+  if (shape_mode == SHAPEMODE_CENTER) {
+    offx = 0;
+    offy = 0;
+  } else {
+    offx = (nx - sx) / 2;
+    offy = (ny - sy) / 2;
+
+    if (shape_locked[cur_shape])
+      {
+        if (abs(offx) > abs(offy))
+          {
+            if (offy > 0)
+              offy = abs(offx);
+            else
+              offy = -abs(offx);
+          }
+        else
+          {
+            if (offx > 0)
+              offx = abs(offy);
+            else
+              offx = -abs(offy);
+          }
+      }
+  }
 
   for (side = 0; side < shape_sides[cur_shape]; side = side + step)
     {
@@ -13216,43 +13468,40 @@ static void do_shape(int cx, int cy, int ox, int oy, int rotn, int use_brush)
       xv = (int)(cos((a1 + a2) / 2) * rx * shape_valley[cur_shape] / 100);
       yv = (int)(-sin((a1 + a2) / 2) * ry * shape_valley[cur_shape] / 100);
 
-
-
-
       /* Rotate the line: */
 
       if (rotn != 0)
         {
           rotn_rad = rotn * M_PI / 180;
 
-          xp = x1 * cos(rotn_rad) - y1 * sin(rotn_rad);
-          yp = x1 * sin(rotn_rad) + y1 * cos(rotn_rad);
+          xp = (x1 + offx) * cos(rotn_rad) - (y1 + offy) * sin(rotn_rad);
+          yp = (x1 + offx) * sin(rotn_rad) + (y1 + offy) * cos(rotn_rad);
 
-          x1 = xp;
-          y1 = yp;
+          x1 = xp - offx;
+          y1 = yp - offy;
 
-          xp = x2 * cos(rotn_rad) - y2 * sin(rotn_rad);
-          yp = x2 * sin(rotn_rad) + y2 * cos(rotn_rad);
+          xp = (x2 + offx) * cos(rotn_rad) - (y2 + offy) * sin(rotn_rad);
+          yp = (x2 + offx) * sin(rotn_rad) + (y2 + offy) * cos(rotn_rad);
 
-          x2 = xp;
-          y2 = yp;
+          x2 = xp - offx;
+          y2 = yp - offy;
 
-          xp = xv * cos(rotn_rad) - yv * sin(rotn_rad);
-          yp = xv * sin(rotn_rad) + yv * cos(rotn_rad);
+          xp = (xv + offx) * cos(rotn_rad) - (yv + offy) * sin(rotn_rad);
+          yp = (xv + offx) * sin(rotn_rad) + (yv + offy) * cos(rotn_rad);
 
-          xv = xp;
-          yv = yp;
+          xv = xp - offx;
+          yv = yp - offy;
         }
 
 
       /* Center the line around the center of the shape: */
 
-      x1 = x1 + cx;
-      y1 = y1 + cy;
-      x2 = x2 + cx;
-      y2 = y2 + cy;
-      xv = xv + cx;
-      yv = yv + cy;
+      x1 = x1 + sx + offx;
+      y1 = y1 + sy + offy;
+      x2 = x2 + sx + offx;
+      y2 = y2 + sy + offy;
+      xv = xv + sx + offx;
+      yv = yv + sy + offy;
 
 
       /* Draw: */
@@ -13325,35 +13574,35 @@ static void do_shape(int cx, int cy, int ox, int oy, int rotn, int use_brush)
               if (rotn != 0)
                 {
                   rotn_rad = rotn * M_PI / 180;
-
-                  xp = x1 * cos(rotn_rad) - y1 * sin(rotn_rad);
-                  yp = x1 * sin(rotn_rad) + y1 * cos(rotn_rad);
-
-                  x1 = xp;
-                  y1 = yp;
-
-                  xp = x2 * cos(rotn_rad) - y2 * sin(rotn_rad);
-                  yp = x2 * sin(rotn_rad) + y2 * cos(rotn_rad);
-
-                  x2 = xp;
-                  y2 = yp;
-
-                  xp = xv * cos(rotn_rad) - yv * sin(rotn_rad);
-                  yp = xv * sin(rotn_rad) + yv * cos(rotn_rad);
-
-                  xv = xp;
-                  yv = yp;
+        
+                  xp = (x1 + offx) * cos(rotn_rad) - (y1 + offy) * sin(rotn_rad);
+                  yp = (x1 + offx) * sin(rotn_rad) + (y1 + offy) * cos(rotn_rad);
+        
+                  x1 = xp - offx;
+                  y1 = yp - offy;
+        
+                  xp = (x2 + offx) * cos(rotn_rad) - (y2 + offy) * sin(rotn_rad);
+                  yp = (x2 + offx) * sin(rotn_rad) + (y2 + offy) * cos(rotn_rad);
+        
+                  x2 = xp - offx;
+                  y2 = yp - offy;
+        
+                  xp = (xv + offx) * cos(rotn_rad) - (yv + offy) * sin(rotn_rad);
+                  yp = (xv + offx) * sin(rotn_rad) + (yv + offy) * cos(rotn_rad);
+        
+                  xv = xp - offx;
+                  yv = yp - offy;
                 }
 
 
               /* Center the line around the center of the shape: */
 
-              x1 = x1 + cx;
-              y1 = y1 + cy;
-              x2 = x2 + cx;
-              y2 = y2 + cy;
-              xv = xv + cx;
-              yv = yv + cy;
+              x1 = x1 + sx + offx;
+              y1 = y1 + sy + offy;
+              x2 = x2 + sx + offx;
+              y2 = y2 + sy + offy;
+              xv = xv + sx + offx;
+              yv = yv + sy + offy;
 
 
               /* Draw: */
@@ -13382,7 +13631,7 @@ static void do_shape(int cx, int cy, int ox, int oy, int rotn, int use_brush)
       else
         rmax = abs(ry) + 20;
 
-      update_canvas(cx - rmax, cy - rmax, cx + rmax, cy + rmax);
+      update_canvas(sx - rmax + offx, sy - rmax + offy, sx + rmax + offx, sy + rmax + offy);
     }
 
 
@@ -13404,8 +13653,11 @@ static int shape_rotation(int ctr_x, int ctr_y, int ox, int oy)
 {
   int deg;
 
-
   deg = (atan2(oy - ctr_y, ox - ctr_x) * 180 / M_PI);
+
+  if (shape_reverse) {
+    deg = (deg + 180) % 360;
+  }
 
   if (shape_radius < 50)
     deg = ((deg - 15) / 30) * 30;
@@ -13525,7 +13777,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
       do_setcursor(cursor_watch);
     }
 
-  if (!make_directory(DIR_SAVE, "", "Can't create user data directory"))
+  if (!make_directory(DIR_SAVE, "", "Can't create user data directory (E002)"))
     {
       fprintf(stderr, "Cannot save the any pictures! SORRY!\n\n");
       draw_tux_text(TUX_OOPS, strerror(errno), 0);
@@ -13540,7 +13792,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
 
   /* Make sure we have a ~/.tuxpaint/saved directory: */
 
-  if (!make_directory(DIR_SAVE, "saved", "Can't create user data directory"))
+  if (!make_directory(DIR_SAVE, "saved", "Can't create user data directory (for saved drawings) (E003)"))
     {
       fprintf(stderr, "Cannot save any pictures! SORRY!\n\n");
       draw_tux_text(TUX_OOPS, strerror(errno), 0);
@@ -13555,7 +13807,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
 
   /* Make sure we have a ~/.tuxpaint/saved/.thumbs/ directory: */
 
-  if (!make_directory(DIR_SAVE, "saved/.thumbs", "Can't create user data thumbnail directory"))
+  if (!make_directory(DIR_SAVE, "saved/.thumbs", "Can't create user data thumbnail directory (for saved drawings' thumbnails) (E004)"))
     {
       fprintf(stderr, "Cannot save any pictures! SORRY!\n\n");
       draw_tux_text(TUX_OOPS, strerror(errno), 0);
@@ -13564,9 +13816,8 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
 
 
 
-      /* Make sure we have a ~/.tuxpaint/saved/.label/ directory: */
-  if (!make_directory(DIR_SAVE, "saved/.label", "Can't create label information directory"))
-      {
+  if (!make_directory(DIR_SAVE, "saved/.label", "Can't create label information directory (E005)"))
+    {
       fprintf(stderr, "Cannot save label information! SORRY!\n\n");
       draw_tux_text(TUX_OOPS, strerror(errno), 0);
       return 0;
@@ -14627,10 +14878,10 @@ static int do_open(void)
                           /* No thumbnail - load original: */
 
                           /* Make sure we have a ~/.tuxpaint/saved directory: */
-                          if (make_directory(DIR_SAVE, "saved", "Can't create user data directory"))
+                          if (make_directory(DIR_SAVE, "saved", "Can't create user data directory (for saved drawings) (E006)"))
                             {
                               /* (Make sure we have a .../saved/.thumbs/ directory:) */
-                              make_directory(DIR_SAVE, "saved/.thumbs", "Can't create user data thumbnail directory");
+                              make_directory(DIR_SAVE, "saved/.thumbs", "Can't create user data thumbnail directory (for saved drawings' thumbnails) (E007)");
                             }
 
 
@@ -15708,10 +15959,10 @@ static int do_slideshow(void)
                       /* No thumbnail - load original: */
 
                       /* Make sure we have a ~/.tuxpaint/saved directory: */
-                      if (make_directory(DIR_SAVE, "saved", "Can't create user data directory"))
+                      if (make_directory(DIR_SAVE, "saved", "Can't create user data directory (for saved drawings) (E008)"))
                         {
                           /* (Make sure we have a .../saved/.thumbs/ directory:) */
-                          make_directory(DIR_SAVE, "saved/.thumbs", "Can't create user data thumbnail directory");
+                          make_directory(DIR_SAVE, "saved/.thumbs", "Can't create user data thumbnail directory (for saved drawings' thumbnails) (E009)");
                         }
 
                       safe_snprintf(fname, sizeof(fname), "%s/%s", dirname, f->d_name);
@@ -19618,12 +19869,16 @@ static int do_new_dialog(void)
                         {
                           /* No thumbnail - load original: */
 
-                          /* Make sure we have a ~/.tuxpaint/[starters|templates] directory: */
-                          if (make_directory(DIR_SAVE, dirname[d_places[num_files]], "Can't create user data directory"))
+                          if (d_places[num_files] == PLACE_PERSONAL_TEMPLATES_DIR ||
+                              d_places[num_files] == PLACE_PERSONAL_STARTERS_DIR)
                             {
-                              /* (Make sure we have a .../[starters|templates]/.thumbs/ directory:) */
-                              safe_snprintf(fname, sizeof(fname), "%s/.thumbs", dirname[d_places[num_files]]);
-                              make_directory(DIR_SAVE, fname, "Can't create user data thumbnail directory");
+                              /* Make sure we have a ~/.tuxpaint/[starters|templates] directory: */
+                              if (make_directory(DIR_SAVE, dirname[d_places[num_files]], "Can't create user data directory (for starters/templates) (E010)"))
+                                {
+                                  /* (Make sure we have a .../[starters|templates]/.thumbs/ directory:) */
+                                  safe_snprintf(fname, sizeof(fname), "%s/.thumbs", dirname[d_places[num_files]]);
+                                  make_directory(DIR_SAVE, fname, "Can't create user data thumbnail directory (for starters/templates) (E011)");
+                                }
                             }
 
                           img = NULL;
@@ -19724,10 +19979,10 @@ static int do_new_dialog(void)
                                   safe_snprintf(fname, sizeof(fname), "%s/.thumbs/%s-t.png",
                                            dirname[d_places[num_files]], d_names[num_files]);
 
-                                  if (!make_directory(DIR_SAVE, "starters", "Can't create user data directory") ||
-                                      !make_directory(DIR_SAVE, "templates", "Can't create user data directory") ||
-                                      !make_directory(DIR_SAVE, "starters/.thumbs", "Can't create user data directory") ||
-                                      !make_directory(DIR_SAVE, "templates/.thumbs", "Can't create user data directory"))
+                                  if (!make_directory(DIR_SAVE, "starters", "Can't create user data directory (for starters) (E012)") ||
+                                      !make_directory(DIR_SAVE, "templates", "Can't create user data directory (for templates) (E013)") ||
+                                      !make_directory(DIR_SAVE, "starters/.thumbs", "Can't create user data directory (for starters) (E014)") ||
+                                      !make_directory(DIR_SAVE, "templates/.thumbs", "Can't create user data directory (for templates) (E015)"))
                                     fprintf(stderr, "Cannot save any pictures! SORRY!\n\n");
                                   else
                                     {
@@ -23259,15 +23514,15 @@ static void setup_config(char *argv[])
   else
     {
       /* FIXME: Need assist for:
-         * _WIN32
          * __BEOS__
          * __HAIKU__
          * __APPLE__
       */
-      /* __ANDROID__ will likely never arrive here as we provide exportdir already in the configuration file */
-      
+#ifdef WIN32
+      picturesdir = GetUserImageDir();
+#else
       picturesdir = get_xdg_user_dir("PICTURES", "Pictures");
-      
+#endif
       safe_snprintf(str, sizeof(str), "%s/TuxPaint", picturesdir);
       free(picturesdir);
       exportdir = strdup(str);
@@ -23363,6 +23618,7 @@ static void setup_config(char *argv[])
   SETBOOL(autosave_on_quit);
   SETBOOL(disable_label);
   SETBOOL(disable_magic_controls);
+  SETBOOL(disable_shape_controls);
   SETBOOL(disable_print);
   SETBOOL(disable_quit);
   SETBOOL(disable_save);
@@ -24833,6 +25089,7 @@ static void setup(void)
   img_btn_up = loadimage(DATA_PREFIX "images/ui/btn_up.png");
   img_btn_down = loadimage(DATA_PREFIX "images/ui/btn_down.png");
   img_btn_off = loadimage(DATA_PREFIX "images/ui/btn_off.png");
+  img_btn_hold = loadimage(DATA_PREFIX "images/ui/btn_hold.png");
 
   img_btnsm_up = loadimage(DATA_PREFIX "images/ui/btnsm_up.png");
   img_btnsm_off = loadimage(DATA_PREFIX "images/ui/btnsm_off.png");
@@ -24900,6 +25157,9 @@ static void setup(void)
   img_magic_paint = loadimage(DATA_PREFIX "images/ui/magic_paint.png");
   img_magic_fullscreen = loadimage(DATA_PREFIX "images/ui/magic_fullscreen.png");
 
+  img_shapes_center = loadimage(DATA_PREFIX "images/ui/shapes_center.png");
+  img_shapes_corner = loadimage(DATA_PREFIX "images/ui/shapes_corner.png");
+
   img_bold = loadimage(DATA_PREFIX "images/ui/bold.png");
   img_italic = loadimage(DATA_PREFIX "images/ui/italic.png");
 
@@ -24948,14 +25208,22 @@ static void setup(void)
             kbd = NULL;
           else
             kbd =
-              osk_create(onscreen_keyboard_layout, screen, img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
+              osk_create(onscreen_keyboard_layout, screen,                                                      img_btn_up, img_btn_down, img_btn_off,
+                                                     img_btn_nav, img_btn_hold,
+                                                     img_oskdel, img_osktab, img_oskenter,
+                                                     img_oskcapslock, img_oskshift,
+img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
                          img_btnsm_hold, img_oskdel, img_osktab, img_oskenter, img_oskcapslock, img_oskshift,
                          onscreen_keyboard_disable_change);
         }
       else
         {
           kbd =
-            osk_create(strdup("default.layout"), screen, img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
+            osk_create(strdup("default.layout"), screen,                                                      img_btn_up, img_btn_down, img_btn_off,
+                                                     img_btn_nav, img_btn_hold,
+                                                     img_oskdel, img_osktab, img_oskenter,
+                                                     img_oskcapslock, img_oskshift,
+img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
                        img_btnsm_hold, img_oskdel, img_osktab, img_oskenter, img_oskcapslock, img_oskshift,
                        onscreen_keyboard_disable_change);
         }
@@ -26204,7 +26472,9 @@ static int export_gif(int *selected, int num_selected, char *dirname, char **d_n
   liq_attr *liq_handle;
   liq_image *input_image;
   liq_result *quantization_result;
+#if LIQ_VERSION >= 20800
   liq_error qtiz_status;
+#endif
   const liq_palette *palette;
   int gif_speed;
 
@@ -26309,9 +26579,13 @@ static int export_gif(int *selected, int num_selected, char *dirname, char **d_n
           show_progress_bar(screen);
 	  done = export_gif_monitor_events();
 
-          qtiz_status = liq_image_quantize(input_image, liq_handle, &quantization_result);
+#if LIQ_VERSION >= 20800
+	  qtiz_status = liq_image_quantize(input_image, liq_handle, &quantization_result);
 	  done = (qtiz_status != LIQ_OK);
-
+#else
+	  quantization_result = liq_quantize_image(liq_handle, input_image);
+	  done = (quantization_result == NULL);
+#endif
           if (!done) {
             // Use libimagequant to make new image pixels from the palette
             pixels_size = num_selected * overall_area;
@@ -26517,7 +26791,7 @@ static char * get_export_filepath(const char * ext) {
 
 
   /* Make sure the export dir exists */
-  if (!make_directory(DIR_EXPORT, "", "Can't create export directory"))
+  if (!make_directory(DIR_EXPORT, "", "Can't create export directory (E016)"))
     {
       return NULL;
     }

@@ -597,6 +597,27 @@ char *GetSystemFontDir(void)
   return strdup("C:\\WINDOWS\\FONTS");
 }
 
+/**
+ * 
+ * Returns heap string containing user's image directory.
+ *
+ * @return user's image dir
+ */
+char *GetUserImageDir(void)
+{
+  char path[MAX_PATH];
+  const char *key = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders";
+  const char *option = "My Pictures";
+  HRESULT hr = S_OK;
+  
+  if (SUCCEEDED(hr = ReadRegistry(key, option, path, sizeof(path))))
+    {
+      remove_slash(path);
+      return strdup(path);
+    }
+  return strdup("C:\\Pictures");
+}
+
 /*
   Returns heap string containing user temp directory.
   E.g. C:\Documents and Settings\jfp\Local Settings\Temp

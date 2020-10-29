@@ -6,7 +6,7 @@ Options Documentation
         Copyright (c) 2002-2020 by various contributors; see AUTHORS.txt
                             http://www.tuxpaint.org/
 
-                                 July 27, 2020
+                                August 14, 2020
 
      ----------------------------------------------------------------------
 
@@ -357,6 +357,12 @@ Windows Users
              affecting the entire canvas at once. This option disables the
              controls, and only provides the default functionality (usually
              paint-mode).
+
+     noshapecontrols=yes
+             Disable the control buttons shown when using the Shapes tool
+             that allow changing how shapes are drawn — centered around the
+             initial mouse click, or with a corner at the initial mouse
+             click.
 
      nolabel=yes
              Disables the Label tool: the tool that allows text entry which
@@ -1018,6 +1024,7 @@ Windows Users
        --nostamps
        --nostampcontrols
        --nomagiccontrols
+       --noshapecontrols
        --nolabel
        --newcolorslast
        --mouse-accessibility
@@ -1091,6 +1098,7 @@ Windows Users
        --stamps
        --stampcontrols
        --magiccontrols
+       --shapecontrols
        --label
        --newcolorsfirst
        --nosysfonts

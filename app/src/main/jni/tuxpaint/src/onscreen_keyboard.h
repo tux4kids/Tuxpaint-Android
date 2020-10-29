@@ -104,13 +104,15 @@ typedef struct osk_keyboard
 {
   char *name;                   /* The name of the keyboard */
   char *keyboard_list;          /* The names of the keyboards allowed from this one */
-  SDL_Surface *surface;         /* The surface containing the keyboard */
-  SDL_Surface *button_up;       /* The surfaces containing the buttons */
+  SDL_Surface *surface;         /* The surface containing the current layout's keyboard */
+  /* The surfaces containing the current layout's button backgrounds*/
+  SDL_Surface *button_up;
   SDL_Surface *button_down;
   SDL_Surface *button_off;
   SDL_Surface *button_nav;
   SDL_Surface *button_hold;
-  SDL_Surface *oskdel;          /* The surfaces containing some symbols for the buttons, delete arrow */
+  /* The surfaces containing some symbols for the current layout's buttons */ 
+  SDL_Surface *oskdel;          /* delete arrow */
   SDL_Surface *osktab;          /* Tab arrows */
   SDL_Surface *oskenter;        /* Return hook/arrow */
   SDL_Surface *oskcapslock;     /* CapsLock */
@@ -131,12 +133,41 @@ typedef struct osk_keyboard
   int composed_type;            /* 1 if the value stored in composed is yet the unicode value */
   osk_composenode *composing;   /* The node in the middle of a compose sequence */
   osk_key *last_key_pressed;    /* The last key pressed */
+  SDL_Surface * canvas_ptr;     /* Canvas drawing surface, for bpp and sizing needs when cycling through keyboard layouts */
+  /* Large and small buttons, to pass back to osk_create() when cycling through keyboard layouts */
+  SDL_Surface *LG_button_up;
+  SDL_Surface *LG_button_down;
+  SDL_Surface *LG_button_off;
+  SDL_Surface *LG_button_nav;
+  SDL_Surface *LG_button_hold;
+  SDL_Surface *LG_oskdel;
+  SDL_Surface *LG_osktab;
+  SDL_Surface *LG_oskenter;
+  SDL_Surface *LG_oskcapslock;
+  SDL_Surface *LG_oskshift;
+  SDL_Surface *SM_button_up;
+  SDL_Surface *SM_button_down;
+  SDL_Surface *SM_button_off;
+  SDL_Surface *SM_button_nav;
+  SDL_Surface *SM_button_hold;
+  SDL_Surface *SM_oskdel;
+  SDL_Surface *SM_osktab;
+  SDL_Surface *SM_oskenter;
+  SDL_Surface *SM_oskcapslock;
+  SDL_Surface *SM_oskshift;
 } on_screen_keyboard;
 
-struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas, SDL_Surface * button_up,
-                                SDL_Surface * button_down, SDL_Surface * button_off, SDL_Surface * button_nav,
-                                SDL_Surface * button_hold, SDL_Surface * oskdel, SDL_Surface * osktab,
-                                SDL_Surface * oskenter, SDL_Surface * oskcapslock, SDL_Surface * oskshift,
+struct osk_keyboard *osk_create(char * layout_name, SDL_Surface * canvas,
+                                SDL_Surface * LG_button_up, SDL_Surface * LG_button_down,
+                                SDL_Surface * LG_button_off, SDL_Surface * LG_button_nav,
+                                SDL_Surface * LG_button_hold,
+                                SDL_Surface * LG_oskdel, SDL_Surface * LG_osktab, SDL_Surface * LG_oskenter,
+                                SDL_Surface * LG_oskcapslock, SDL_Surface * LG_oskshift,
+                                SDL_Surface * SM_button_up, SDL_Surface * SM_button_down,
+                                SDL_Surface * SM_button_off, SDL_Surface * SM_button_nav,
+                                SDL_Surface * SM_button_hold,
+                                SDL_Surface * SM_oskdel, SDL_Surface * SM_osktab, SDL_Surface * SM_oskenter,
+                                SDL_Surface * SM_oskcapslock, SDL_Surface * SM_oskshift,
                                 int disable_change);
 
 struct osk_layout *osk_load_layout(char *layout_name);

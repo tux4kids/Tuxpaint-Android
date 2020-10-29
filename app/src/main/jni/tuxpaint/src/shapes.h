@@ -4,7 +4,7 @@
   For Tux Paint
   List of available shapes.
 
-  Copyright (c) 2002-2007 by Bill Kendrick and others
+  Copyright (c) 2002-2020 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - July 26, 2007
+  June 14, 2002 - August 15, 2020
   $Id$
 */
 
@@ -351,4 +351,24 @@ const char *const shape_img_fnames[NUM_SHAPES] = {
   DATA_PREFIX "images/shapes/star4p_f.png",
   DATA_PREFIX "images/shapes/star5p.png",
   DATA_PREFIX "images/shapes/star5p_f.png"
+};
+
+
+/* Shape controls */
+
+enum
+{
+  SHAPEMODE_CENTER,
+  SHAPEMODE_CORNER,
+  NUM_SHAPEMODES
+};
+
+const char *const shapemode_img_fnames[NUM_SHAPEMODES] = {
+  DATA_PREFIX "images/ui/shapes_center.png",
+  DATA_PREFIX "images/ui/shapes_corner.png"
+};
+
+const char *const shapemode_tips[NUM_SHAPES] = {
+  gettext_noop("Draw shapes from the center."),
+  gettext_noop("Draw shapes from a corner."),
 };

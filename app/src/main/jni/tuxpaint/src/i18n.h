@@ -137,6 +137,7 @@ enum
   LANG_SAT_OL_CHIKI,
   LANG_SAT,                     /* Santali */
   LANG_SA,                      /* Sanskrit */
+  LANG_SC,                      /* Sardinian */
   LANG_SD,                      /* Sindhi (Perso-Arabic) */
   LANG_SD_DEVANAGARI,           /* Sindhi (Devanagari) */
   LANG_SHS,                     /* Shuswap */

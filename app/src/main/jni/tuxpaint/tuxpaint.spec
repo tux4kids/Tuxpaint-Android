@@ -7,9 +7,9 @@ Group: Multimedia/Graphics
 URL: http://www.tuxpaint.org/
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: SDL >= 1.2.4 SDL_image SDL_mixer SDL_ttf SDL_Pango libpaper fribidi xdg-utils
+Requires: SDL >= 1.2.4 SDL_image SDL_mixer SDL_ttf SDL_Pango libpaper fribidi xdg-utils libimagequant
 BuildRequires: SDL-devel >= 1.2.4 SDL_image-devel SDL_mixer-devel SDL_ttf-devel SDL_Pango-devel
-BuildRequires: librsvg2-devel libpaper-devel fribidi-devel gperf gettext ImageMagick xdg-utils
+BuildRequires: librsvg2-devel libpaper-devel fribidi-devel gperf gettext ImageMagick xdg-utils libimagequant-devel
 
 %description
 "Tux Paint" is a drawing program for young children.
@@ -36,7 +36,7 @@ development files for tuxpaint plugins.
 %setup -q
 
 %build
-make PREFIX=%{_prefix} DOC_PREFIX=%{_docdir}/tuxpaint/en
+make PREFIX=%{_prefix} DOC_PREFIX=%{_docdir}/tuxpaint/en linux_ARCH_CFLAGS=-I/usr/include/imagequant
 
 %install
 rm -rf $RPM_BUILD_ROOT

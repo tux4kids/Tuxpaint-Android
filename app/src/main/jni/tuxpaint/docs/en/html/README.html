@@ -35,7 +35,7 @@
       </p>
 
       <p>
-        June 14, 2002 - July 27, 2020
+        June 14, 2002 - August 25, 2020
       </p>
     </center>
 
@@ -708,10 +708,46 @@
               </p>
 
               <p>
+                Use the options at the bottom right to choose
+                the shape tool's behavior:
+              </p>
+
+              <dl>
+                <dt>
+                  Shapes from center
+                </dt>
+                <dd>
+                  The shape will expand from where you initially
+                  clicked, and will be centered around that position.
+                  (This was Tux&nbsp;Paint's only behavior through
+                  version 0.9.24.)
+                </dd>
+
+                <dt>
+                  Shapes from corner
+                </dt>
+                <dd>
+                  The shape will extend with one corner starting
+                  from where you initially clicked.  This is the
+                  default method of most other traditional drawing
+                  software. (This option was added starting with
+                  Tux&nbsp;Paint version 0.9.25.)
+                </dd>
+              </dl>
+
+              <p>
+                Note: If shape controls are disabled (e.g., with the
+                "<code>--noshapecontrols</code>" option), the controls
+                will not be presented, and the "shapes from center"
+                method will be used.
+              </p>
+
+              <p>
                 In the canvas, click the mouse and hold it to
                 stretch the shape out from where you clicked. Some
                 shapes can change proportion (e.g., rectangle and
-                oval), others cannot (e.g., square and circle).
+                oval may be wider than tall, or taller than wide),
+                others cannot (e.g., square and circle).
               </p>
 
               <p>
@@ -1075,29 +1111,44 @@
                 Clicking the "New" button will start a new drawing.
                 A dialog will appear where you may choose to start
                 a new picture using a solid background color, or
-                using a 'Starter' image (see below). You will first
-                be asked whether you really want to do this.
+                using a 'Starter' or 'Template' image (see below).
+                You will first be asked whether you really want to
+                do this.
               </p>
 
               <p>
                 Note: You can also press <b>[Control]-[N]</b> on
                 the keyboard to start a new drawing.
               </p>
-              <b>'Starter' Images</b>
+              <b>'Starter' &amp; Template Images</b>
               <blockquote>
                 <p>
-                  'Starters' can be like a page from a coloring
-                  book (a black-and-white outline of a picture,
-                  which you can then color in), or like a 3D
-                  photograph, where you draw the bits in between.
+                  'Starters' can behave like a page from a coloring
+                  book &mdash; a black-and-white outline of a picture,
+                  which you can then color in, and the black outline
+                  remains intact &mdash; or like a 3D photograph,
+                  where you draw in between a foreground and background
+                  layer.
+                </p>
+                <p>
+                  'Templates' are similar, but simply provide a
+                  background drawing to work off of.  Unlike 'Starters',
+                  there is no layer that remains in the foreground of
+                  anything you draw in the picture.
+                </p>
+                <p>
+                  When using the 'Eraser' tool, the original image
+                  from the 'Starter' or 'Template' will reappear.
+                  The 'Flip' and 'Mirror' Magic tools affect the
+                  orientation of the 'Starter' or 'Template', as well.
+                <p>
+                  When you load a 'Starter' or 'Template', draw on it,
+                  and then click 'Save,' it creates a new picture file
+                  &mdash; it doesn't overwrite the original, so you
+                  can use it again later (by accessing it from the 'New'
+                  dialoge)..
                 </p>
 
-                <p>
-                  When you load a 'Starter,' draw on it, and then
-                  click 'Save,' it creates a new picture file (it
-                  doesn't overwrite the original 'Starter,' so you
-                  can use it again later).
-                </p>
               </blockquote>
               <br clear="all">
 

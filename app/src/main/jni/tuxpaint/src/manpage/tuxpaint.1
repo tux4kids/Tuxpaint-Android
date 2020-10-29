@@ -1,5 +1,5 @@
-.\" tuxpaint.1 - 2020.06.22
-.TH TUXPAINT 1 "22 June 2020" "0.9.25" "Tux Paint"
+.\" tuxpaint.1 - 2020.08.15
+.TH TUXPAINT 1 "15 August 2020" "0.9.25" "Tux Paint"
 .SH NAME
 tuxpaint -- "Tux Paint", a drawing program for young children.
 
@@ -60,6 +60,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-nostampcontrols]
 .br
 [\-\-nomagiccontrols]
+.br
+[\-\-noshapecontrols]
 .br
 [\-\-nolabel]
 .br
@@ -190,6 +192,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-stampcontrols]
 .br
 [\-\-magiccontrols]
+.br
+[\-\-shapecontrols]
 .br
 [\-\-label]
 .br
@@ -417,6 +421,12 @@ Disable or enable (default) buttons to control Magic tools.  Controls include
 controlling whether a Magic tool is used like a paint brush, or if it
 affects the entire image at once.  (Note: Not all Magic tools will be
 controllable.)
+
+.TP 8
+.B \-\-noshapecontrols \-\-shapecontrols
+Disable or enable (default) buttons to change the Shape tool's behavior --
+shapes expanding from the center, or from a corner, where the mouse is
+initially clicked.
 
 .TP 8
 .B \-\-nolabel \-\-label
@@ -829,6 +839,9 @@ santali-devaganari
 santali-ol-chiki
 .TP 2
 -
+sardinian
+.TP 2
+-
 scottish | scottish-gaelic | ghaidhlig
 .TP 2
 -
@@ -1217,6 +1230,7 @@ Damian Yerrick,
 Muhammad Najmi Ahmad Zabidi,
 Eugene Zelenko,
 Martin Zhekov,
+Flavia Floris,
 and
 Huang Zuzhen.
 

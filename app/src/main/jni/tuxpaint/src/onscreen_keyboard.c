@@ -83,15 +83,27 @@ static void mtw(wchar_t * wtok, char *tok)
 #define mbstowcs(wtok, tok, size) mtw(wtok, tok)
 #endif
 
-struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas, SDL_Surface * button_up,
-                                SDL_Surface * button_down, SDL_Surface * button_off, SDL_Surface * button_nav,
-                                SDL_Surface * button_hold, SDL_Surface * oskdel, SDL_Surface * osktab,
-                                SDL_Surface * oskenter, SDL_Surface * oskcapslock, SDL_Surface * oskshift,
+struct osk_keyboard *osk_create(char * layout_name, SDL_Surface * canvas,
+                                SDL_Surface * LG_button_up, SDL_Surface * LG_button_down,
+                                SDL_Surface * LG_button_off, SDL_Surface * LG_button_nav,
+                                SDL_Surface * LG_button_hold,
+                                SDL_Surface * LG_oskdel, SDL_Surface * LG_osktab, SDL_Surface * LG_oskenter,
+                                SDL_Surface * LG_oskcapslock, SDL_Surface * LG_oskshift,
+                                SDL_Surface * SM_button_up, SDL_Surface * SM_button_down,
+                                SDL_Surface * SM_button_off, SDL_Surface * SM_button_nav,
+                                SDL_Surface * SM_button_hold,
+                                SDL_Surface * SM_oskdel, SDL_Surface * SM_osktab, SDL_Surface * SM_oskenter,
+                                SDL_Surface * SM_oskcapslock, SDL_Surface * SM_oskshift,
                                 int disable_change)
 {
-  SDL_Surface *surface;
-  osk_layout *layout;
-  on_screen_keyboard *keyboard;
+  SDL_Surface * surface;
+  SDL_Surface * button_up, * button_down;
+  SDL_Surface * button_off, * button_nav;
+  SDL_Surface * button_hold;
+  SDL_Surface * oskdel, * osktab, * oskenter;
+  SDL_Surface * oskcapslock, * oskshift;
+  osk_layout * layout;
+  on_screen_keyboard * keyboard;
 
   keyboard = malloc(sizeof(on_screen_keyboard));
 
@@ -115,6 +127,32 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas, SDL_Sur
   printf("w %i, h %i\n", layout->width, layout->height);
 #endif
 
+  if (layout->width * LG_button_up->w >= (canvas->w - 48 * 4) * 0.9 ||
+      layout->height * LG_button_up->h >= canvas->h * 0.5) {
+      /* Full-size buttons too large, use small buttons */
+      button_up = SM_button_up;
+      button_down = SM_button_down;
+      button_off = SM_button_off;
+      button_nav = SM_button_nav;
+      button_hold = SM_button_hold;
+      oskdel = SM_oskdel;
+      osktab = SM_osktab;
+      oskenter = SM_oskenter;
+      oskcapslock = SM_oskcapslock;
+      oskshift = SM_oskshift;
+  } else {
+      button_up = LG_button_up;
+      button_down = LG_button_down;
+      button_off = LG_button_off;
+      button_nav = LG_button_nav;
+      button_hold = LG_button_hold;
+      oskdel = LG_oskdel;
+      osktab = LG_osktab;
+      oskenter = LG_oskenter;
+      oskcapslock = LG_oskcapslock;
+      oskshift = LG_oskshift;
+  }
+
   surface = SDL_CreateRGBSurface(canvas->flags,
                                  layout->width * button_up->w,
                                  layout->height * button_up->h,
@@ -126,6 +164,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas, SDL_Sur
       return NULL;
     }
   //  keyboard->name = layout_name;
+  keyboard->canvas_ptr = canvas;
   keyboard->layout = layout;
   keyboard->surface = surface;
   keyboard->rect.x = 0;
@@ -158,6 +197,27 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas, SDL_Sur
   keyboard->kmdf.dead2 = NULL;
   keyboard->kmdf.dead3 = NULL;
   keyboard->kmdf.dead4 = NULL;
+
+  keyboard->LG_button_up = LG_button_up;
+  keyboard->LG_button_down = LG_button_down;
+  keyboard->LG_button_off = LG_button_off;
+  keyboard->LG_button_nav = LG_button_nav;
+  keyboard->LG_button_hold = LG_button_hold;
+  keyboard->LG_oskdel = LG_oskdel;
+  keyboard->LG_osktab = LG_osktab;
+  keyboard->LG_oskenter = LG_oskenter;
+  keyboard->LG_oskcapslock = LG_oskcapslock;
+  keyboard->LG_oskshift = LG_oskshift;
+  keyboard->SM_button_up = SM_button_up;
+  keyboard->SM_button_down = SM_button_down;
+  keyboard->SM_button_off = SM_button_off;
+  keyboard->SM_button_nav = SM_button_nav;
+  keyboard->SM_button_hold = SM_button_hold;
+  keyboard->SM_oskdel = SM_oskdel;
+  keyboard->SM_osktab = SM_osktab;
+  keyboard->SM_oskenter = SM_oskenter;
+  keyboard->SM_oskcapslock = SM_oskcapslock;
+  keyboard->SM_oskshift = SM_oskshift;
 
   SDL_FillRect(surface, NULL,
                SDL_MapRGB(surface->format, keyboard->layout->bgcolor.r, keyboard->layout->bgcolor.g,
@@ -1005,36 +1065,40 @@ static int is_blank_or_comment(char *line)
 /* } */
 
 
-/* Fixme: Is it safe to supose that if a font is loaded at one size, it will be loaded at any size? */
-/* Fixme: sizes should be dynamically adapted to the button size */
-/* Fixme: starting a layout with one font causes all other layouts be in that font */
+/* FIXME: Is it safe to supose that if a font is loaded at one size, it will be loaded at any size? */
+/* FIXME: starting a layout with one font causes all other layouts be in that font */
 static void keybd_prepare(on_screen_keyboard * keyboard)
 {
   char *fontname;
-
+  int font_height;
+  
+  /* Pick a height (e.g., 16pt for small (24x24), 32pt for large (48x48) buttons) */
+  font_height = ((keyboard->button_up->h * 2) / 3);
+  
   fontname = malloc(sizeof(char) * 255);
   if (keyboard->osk_fonty == NULL)
     {
+      
       if (keyboard->layout->fontpath)
         {
           /* First try if it is an absolute path */
-          keyboard->osk_fonty = TTF_OpenFont(keyboard->layout->fontpath, 12);
+          keyboard->osk_fonty = TTF_OpenFont(keyboard->layout->fontpath, font_height);
           if (keyboard->osk_fonty == NULL)
             {
               /* Now trying if it is relative to DATA_PREFIX/fonts/ */
               snprintf(fontname, 255, "%s/fonts/%s", DATA_PREFIX, keyboard->layout->fontpath);
 
-              keyboard->osk_fonty = TTF_OpenFont(fontname, 12);
+              keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
               if (keyboard->osk_fonty == NULL)
                 {
                   /* Perhaps it is relative to DATA_PREFIX only? */
                   snprintf(fontname, 255, "%s/%s", DATA_PREFIX, keyboard->layout->fontpath);
-                  keyboard->osk_fonty = TTF_OpenFont(fontname, 12);
+                  keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
                   if (keyboard->osk_fonty == NULL)
                     {
                       /* Or to DATA_PREFIX/fonts/locale/ ? */
                       snprintf(fontname, 255, "%s/fonts/locale/%s", DATA_PREFIX, keyboard->layout->fontpath);
-                      keyboard->osk_fonty = TTF_OpenFont(fontname, 12);
+                      keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
                     }
                 }
             }
@@ -1044,7 +1108,7 @@ static void keybd_prepare(on_screen_keyboard * keyboard)
         {
           /* Going with the default */
           sprintf(fontname, "%s/fonts/FreeSansBold.ttf", DATA_PREFIX);
-          keyboard->osk_fonty = TTF_OpenFont(fontname, 12);
+          keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
         }
 
       if (keyboard->osk_fonty == NULL)
@@ -1687,9 +1751,20 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
 
 
           new_keyboard =
-            osk_create(name, keyboard->surface, keyboard->button_up, keyboard->button_down, keyboard->button_off,
-                       keyboard->button_nav, keyboard->button_hold, keyboard->oskdel, keyboard->osktab,
-                       keyboard->oskenter, keyboard->oskcapslock, keyboard->oskshift, keyboard->disable_change);
+            osk_create(name, keyboard->canvas_ptr,
+                       keyboard->LG_button_up, keyboard->LG_button_down,
+                       keyboard->LG_button_off, keyboard->LG_button_nav,
+                       keyboard->LG_button_hold,
+                       keyboard->LG_oskdel, keyboard->LG_osktab,
+                       keyboard->LG_oskenter, keyboard->LG_oskcapslock,
+                       keyboard->LG_oskshift,
+                       keyboard->SM_button_up, keyboard->SM_button_down,
+                       keyboard->SM_button_off, keyboard->SM_button_nav,
+                       keyboard->SM_button_hold,
+                       keyboard->SM_oskdel, keyboard->SM_osktab,
+                       keyboard->SM_oskenter, keyboard->SM_oskcapslock,
+                       keyboard->SM_oskshift,
+                       keyboard->disable_change);
 
           free(aux_list_ptr);
 
@@ -1774,7 +1849,7 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
           //event.text.text = keysym2unicode(mnemo2keysym(mnemo, keyboard), keyboard);
 
           clear_dead_sticks(keyboard);
-          event.type = SDL_KEYDOWN;
+          event.type = SDL_TEXTINPUT;
           SDL_PushEvent(&event);
           free(mnemo);
         }

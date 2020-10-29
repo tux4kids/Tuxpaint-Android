@@ -1,19 +1,48 @@
+                                   Extending
                                    Tux Paint
                                  version 0.9.25
-                              Extending Tux Paint
 
         Copyright (c) 2002-2020 by various contributors; see AUTHORS.txt
                             http://www.tuxpaint.org/
 
-                         June 14, 2002 - July 27, 2020
+                        June 14, 2002 - August 29, 2020
 
      ----------------------------------------------------------------------
 
-   If you wish to add or change things like Brushes and Rubber Stamps used by
-   Tux Paint, you can do it fairly easily by simply putting or removing files
-   on your hard disk.
+   +------------------------------------------+
+   |Table of Contents                         |
+   |------------------------------------------|
+   |  * Where Files Go                        |
+   |       * Standard Files                   |
+   |       * Personal Files                   |
+   |  * Brushes                               |
+   |       * Brush Options                    |
+   |  * Stamps                                |
+   |       * Images                           |
+   |       * Description Text                 |
+   |       * Sound Effects                    |
+   |       * Descriptive Sound                |
+   |       * Stamp Options                    |
+   |       * Pre-Mirrored and Flipped Images  |
+   |  * Fonts                                 |
+   |  * 'Starters'                            |
+   |       * Coloring-Book Style              |
+   |       * Scene-Style                      |
+   |  * 'Templates'                           |
+   |  * Translations                          |
+   |  * Alternative Input Methods             |
+   |  * On-screen Keyboard                    |
+   +------------------------------------------+
+
+     ----------------------------------------------------------------------
+
+   If you wish to add or change things like Brushes, Starters, Rubber Stamps
+   and other content used by Tux Paint, you can do so fairly easily by simply
+   adding, changing, or removing files where Tux Paint looks for them.
 
    Note: You'll need to restart Tux Paint for the changes to take effect.
+
+     ----------------------------------------------------------------------
 
 Where Files Go
 
@@ -42,11 +71,12 @@ Where Files Go
 
            C:\Program Files\TuxPaint\data
 
-    Mac OS X
+    macOS
 
          Tux Paint stores its data files inside the "Tux Paint" application
-         (which is actually a special kind of folder on Mac OS X). The
-         following steps explain how to get to the folders within:
+         icon (which is actually a special kind of folder on macOS & Mac OS X
+         before it). The following steps explain how to get to the folders
+         within it:
 
           1. Bring up a 'context' menu by holding the [Control] key and
              clicking the Tux Paint icon the in Finder. (If you have a mouse
@@ -55,10 +85,10 @@ Where Files Go
              window will appear with a folder inside called "Contents."
           3. Open the "Contents" folder and open the "Resources" folder found
              inside.
-          4. There, you will find the "starters", "stamps" and "brushes"
-             folders. Adding new content to these folders will make the
-             content available to any user that launches this copy (icon) of
-             Tux Paint.
+          4. There, you will find various sub-folders, such as "starters",
+             "stamps", "brushes", etc. Adding new content to these folders
+             will make the content available to any user that launches this
+             copy (icon) of Tux Paint.
 
          Note: If you install a newer version of Tux Paint and replace or
          discard the old version, you will lose changes made by following the
@@ -67,13 +97,13 @@ Where Files Go
 
          Tux Paint also looks for files in a "TuxPaint" folder that you can
          place in your system's "Application Support" folder (found under
-         "Library" at the root of your hard disk):
+         "Library" at the root of your filesystem):
 
            /Library/Application Support/TuxPaint/
 
          It also looks for files in the user's "Application Support" folder:
 
-           /Users/(user name)/Library/Application Support/TuxPaint/
+           /Users/(username)/Library/Application Support/TuxPaint/
 
          When you upgrade to a newer version of Tux Paint, the contents of
          this TuxPaint folder will stay the same and remain accessible by all
@@ -91,14 +121,14 @@ Where Files Go
          Your personal Tux Paint folder is stored in your "Application Data".
          For example, on newer Windows (set up for an English-speaking user):
 
-           C:\Documents and Settings\(user name)\Application Data\TuxPaint\
+           C:\Documents and Settings\(username)\Application Data\TuxPaint\
 
     Mac OS X
 
          Your personal Tux Paint folder is stored in your "Application
          Support" folder:
 
-           /Users/(user name)/Library/Application Support/ TuxPaint/
+           /Users/(username)/Library/Application Support/TuxPaint/
 
     Linux and Unix
 
@@ -121,8 +151,8 @@ Where Files Go
 
 Brushes
 
-     The brushes used for drawing with the 'Brush' and 'Lines' tools in
-     Tux Paint are simply PNG image files.
+     The brushes used for drawing with the 'Brush' and 'Lines' tools in Tux
+     Paint are simply PNG image files.
 
      The alpha (transparency) of the PNG image is used to determine the shape
      of the brush, which means that the shape can be 'anti-aliased' and even
@@ -130,9 +160,6 @@ Brushes
 
      Greyscale pixels in the brush PNG will be drawn using the
      currently-selected color in Tux Paint. Color pixels will be tinted.
-
-     Brush images should be no wider than 40 pixels across and no taller than
-     40 pixels high. (i.e., the maximum size can be 40 x 40.)
 
   Brush Options
 
@@ -245,8 +272,8 @@ Stamps
        information and tips.
 
        Advanced Users: The Advanced Stamps HOWTO describes, in detail, how to
-       make PNG images which will scale perfectly when used as stamps in
-       Tux Paint.
+       make PNG images which will scale perfectly when used as stamps in Tux
+       Paint.
 
      ----------------------------------------------------------------------
 
@@ -281,8 +308,8 @@ Stamps
     Windows Users
 
          Use NotePad or WordPad to edit/create these files. Be sure to save
-         them as Plain Text, and make sure they have ".txt" at the end of the
-         filename...
+         them as plain-text, and make sure they have a ".txt" extension at
+         the end of the filename.
 
      ----------------------------------------------------------------------
 
@@ -380,19 +407,18 @@ Stamps
              one of the following lines to the stamp's data file:
 
              "tinter=normal" (default)
-                     This is the normal tinting mode. (Hue range is
-                     +/- 18 degrees, 27 replace.)
+                     This is the normal tinting mode. (Hue range is ±18°, 27
+                     replace.)
 
              "tinter=anyhue"
-                     This remaps all hues in the stamp. (Hue range is
-                     +/- 180 degrees.)
+                     This remaps all hues in the stamp. (Hue range is ±180°.)
 
              "tinter=narrow"
                      This like 'anyhue', but a narrower hue angle. (Hue range
-                     is +/- 6 degrees, 9 replace.)
+                     is ±6°, 9 replace.)
 
              "tinter=vector"
-                     This is map 'black through white' to 'black through
+                     This maps 'black through white' to 'black through
                      destination'.
 
     Unalterable Stamps
@@ -415,9 +441,9 @@ Stamps
     Initial Stamp Size
 
          By default, Tux Paint assumes that your stamp is sized appropriately
-         for unscaled display on a 608x472 canvas. This is the original
-         Tux Paint canvas size, provided by a 640x480 screen. Tux Paint will
-         then adjust the stamp according to the current canvas size and, if
+         for unscaled display on a 608x472 canvas. This is the original Tux
+         Paint canvas size, provided by a 640x480 screen. Tux Paint will then
+         adjust the stamp according to the current canvas size and, if
          enabled, the user's stamp size controls.
 
          If your stamp would be too big or too small, you can specify a scale
@@ -480,7 +506,7 @@ Fonts
      image is not overwritten. Additionally, as you edit your new picture,
      the contents of the original 'starter' affect it.
 
-     Coloring-Book Style
+  Coloring-Book Style
 
        The most basic kind of 'starter' is similar to a picture in a coloring
        book. It's an outline of a shape which you can then color in and add
@@ -503,7 +529,7 @@ Fonts
        graphics) or KPX (templates from Kid Pix, another childrens' drawing
        program; they are special files which simply contain a JPEG within).
 
-     Scene-Style
+  Scene-Style
 
        Along with the 'coloring-book' style overlay, you can also provide a
        separate background image as part of a 'starter' picture. The overlay
@@ -600,8 +626,8 @@ Fonts
 Translations
 
      Tux Paint supports numerous languages, thanks to use of the "gettext"
-     localization library. (See OPTIONS for how to change locales in
-     Tux Paint.)
+     localization library. (See OPTIONS for how to change locales in Tux
+     Paint.)
 
      To translate Tux Paint to a new language, copy the translation template
      file, "tuxpaint.pot" (found in Tux Paint's source code, in the folder
@@ -621,7 +647,7 @@ Translations
 
        msgid "Smudge"
        msgstr "Manchar"
-        
+
        msgid "Click and drag to draw large bricks."
        msgstr "Haz clic y arrastra para dibujar ladrillos grandes."
 
@@ -631,8 +657,8 @@ Translations
      Note: It is best to always work off of the latest Tux Paint text catalog
      template ("tuxpaint.pot"), since new text is added, and old text is
      occasionally changed. The text catalog for the upcoming, unreleased
-     version of Tux Paint can be found in Tux Paint's CVS repository (see:
-     http://www.tuxpaint.org/download/source/cvs/), and on the Tux Paint
+     version of Tux Paint can be found in Tux Paint's Git repository (see:
+     http://www.tuxpaint.org/download/source/git/), and on the Tux Paint
      website at http://www.tuxpaint.org/help/po/.
 
      To edit an existing translation, download the latest ".po" file for that
@@ -644,13 +670,15 @@ Translations
 
      Alternatively, if you have an account with SourceForge.net, you can
      request to be added to the "tuxpaint" project and receive write-access
-     to the CVS source code repository so that you may commit your changes
+     to the Git source code repository so that you may commit your changes
      directly.
 
      Note: Additional locale support also requires additions to Tux Paint's
      source code (/src/i18n.h and /src/i18n.c), and requires updates to the
      Makefile, to have the ".po" gettext catalog source files compiled into
      ".mo" files, and installed, for use at runtime.
+
+     ----------------------------------------------------------------------
 
 Alternative Input Methods
 
@@ -659,8 +687,8 @@ Alternative Input Methods
      with a Japanese locale, the right [Alt] key can be pressed to cycle
      between Latin, Romanized Hiragana and Romanized Katakana modes. This
      allows native characters and words to be entered into the "Text" tool by
-     typing one or more keys on a keyboard with Latin characters (e.g., a
-     US QWERTY keyboard).
+     typing one or more keys on a keyboard with Latin characters (e.g., a US
+     QWERTY keyboard).
 
      To create an input method for a new locale, create a text file with a
      name based on the locale (e.g., "ja" for Japanese), with ".im" as the
@@ -687,19 +715,19 @@ Alternative Input Methods
      Example:
 
        # Hiragana
-       304B   ka   -
-       304C   ga   -
-       304D   ki   -
-       304E   gi   -
-       304D:3083   kya   -
-       3063:305F   tta   -
-        
+       304B ka -
+       304C ga -
+       304D ki -
+       304E gi -
+       304D:3083 kya -
+       3063:305F tta -
+
        # Katakana
        section
-       30AB   ka   -
-       30AC   ga   -
-       30AD   ki   -
-       30AE   gi   -
+       30AB ka -
+       30AC ga -
+       30AD ki -
+       30AE gi -
 
      Note: Blank lines within the ".im" file will be ignored, as will any
      text following a "#" (pound/hash) character — it can be used to denote
@@ -710,6 +738,164 @@ Alternative Input Methods
      used in Korean to handle Batchim, which may carry over to the next
      character.
 
-     Note: Additional input method support also requires additions to
-     Tux Paint's source code (/src/im.c), and requires updates to the
-     Makefile, to have the ".im" files installed, for use at runtime.
+     Note: Additional input method support also requires additions to Tux
+     Paint's source code (/src/im.c), and requires updates to the Makefile,
+     to have the ".im" files installed, for use at runtime.
+
+     ----------------------------------------------------------------------
+
+On-screen Keyboard
+
+     As of version 0.9.22, Tux Paint's "Text" and "Label" tools can present
+     an on-screen keyboard that allows the pointer (via a mouse, eye-tracking
+     systems, etc.) to be used to input characters. Files that describe the
+     layout and available keys are stored in Tux Paint's "osk" directory.
+     Each keyboard layout is defined by a number of files (some of which may
+     be shared by different layouts). We'll use the QWERTY keyboard as an
+     example:
+
+  Layout overview file ("qwerty.layout")
+
+       This is a text file that specifies the other files used to describe
+       the layout and key mappings.
+
+         layout qwerty.h_layout
+         keymap us-intl-altgr-dead-keys.keymap
+         composemap en_US.UTF-8_Compose
+         keysymdefs keysymdef.h
+         keyboardlist qwerty.layout default.layout
+
+       Note: Blank lines within the ".layout" file will be ignored, as will
+       any text following a "#" (pound/hash) character — it can be used to
+       denote comments, as seen in the example above.
+
+       The "keyboardlist" line describes which layouts to switch to, when the
+       user clicks the left and right buttons on the keyboard. (See below.)
+
+  Keyboard layout file ("qwerty.h_layout")
+
+       This describes how big the keyboard is (as a W×H grid), and lists each
+       key with its numeric keycode (see the "keymap" file, below), the width
+       it should be drawn at (typically "1.0", to take one space on the
+       keyboard, but in the example below, notice the "TAB" and "SPACE" keys
+       are much wider), the character or text to display on the key,
+       depending on which modifier keys have been pressed (one each for: no
+       modifiers, [Shift], [AltGr], and [Shift]+[AltGr]), and finally whether
+       or not the key is affected by the [CapsLock] key (use "1") or [AltGr]
+       (alternate graphics) key (use "2"), or not at all (use "0").
+
+         WIDTH 15
+         HEIGHT 5
+
+         KEY 49 1.0 ` ~ ` ~ 0
+         KEY 10 1.0 1 ! ¡ ¹ 0
+         KEY 11 1.0 2 @ ² ˝ 0
+         KEY 12 1.0 3 # · ³ 0
+         KEY 13 1.0 4 $ ¤ £ 0
+         KEY 14 1.0 5 % € ¸ 0
+         KEY 15 1.0 6 ^ ¼ ^ 0
+         ...
+         KEY 21 1.0 = + × ÷ 0
+         KEY 22 2.0 DELETE DELETE DELETE DELETE 0
+
+         NEWLINE
+
+         KEY 23 1.5 TAB TAB TAB TAB 0
+         KEY 24 1.0 q Q ä Ä 1
+         KEY 25 1.0 w W å Å 1
+         KEY 26 1.0 e E é É 1
+         KEY 27 1.0 r R ® ® 1
+         ...
+
+         NEWLINE
+
+         # Arrow to left will change to the previous keyboard
+         KEY 2 1.0 <- <- <- <- 0
+
+         KEY 133 2.0 Cmp Cmp Cmp Cmp 0
+
+         # The ALT or ALTGR keys are used in im to switch the input mode.
+         KEY 64 2.0 Alt Alt Alt Alt 0
+
+         # Space
+         KEY 65 7.0 SPACE SPACE SPACE SPACE 0
+
+         KEY 108 2.0 AltGr AltGr AltGr AltGr 0
+
+         # Arrow to right will change to the next keyboard
+         KEY 1 1.0 -> -> -> -> 0
+
+       Notice here that alphabetic keys ([Q], [W], etc.) will be affected by
+       [CapsLock], while numeric keys ([1], [2], etc.), [Space], and so on,
+       will not.
+
+       Keycodes up to "8" are reserved for internal use. The ones currently
+       used are described below.
+
+         * 0 — empty button
+         * 1 — next layout (per the layout file's "keyboardlist" setting)
+         * 2 — previous layout (per the layout file's "keyboardlist" setting)
+
+  Keymap file ("us-intl-altgr-dead-keys.keymap")
+
+       This file defines which numeric keycodes (seen in the keyboard layout
+       files, such as "qwerty.h_layout" described above) should be mapped to
+       which actual characters that an application such as Tux Paint expects
+       to receive when keys (e.g., on a real keyboard) are pressed.
+
+       If you're using an operating system such as Linux, which runs X-Window
+       and has the "xmodmap" command-line tool available, you can run it with
+       the ("print keymap expressions" option, "-pke", to generate a keymap
+       file.
+
+         keycode 9 = Escape NoSymbol Escape Escape
+         keycode 10 = 1 exclam exclamdown onesuperior 1 exclam 1 exclam
+         NoSymbol onesuperior
+         keycode 11 = 2 at twosuperior dead_doubleacute 2 at 2 at onehalf
+         twosuperior
+         keycode 12 = 3 numbersign periodcentered threesuperior dead_macron
+         periodcentered
+         ...
+         keycode 52 = z Z ae AE Arabic_hamzaonyeh asciitilde guillemotright
+         NoSymbol Greek_zeta Greek_ZETA U037D U03FF
+         keycode 53 = x X x X Arabic_hamza Arabic_sukun guillemotleft
+         NoSymbol Greek_chi Greek_CHI rightarrow leftarrow
+         keycode 54 = c C copyright cent Arabic_hamzaonwaw braceright
+         Greek_psi Greek_PSI copyright
+         keycode 55 = v V v V Arabic_ra braceleft Greek_omega Greek_OMEGA
+         U03D6
+         keycode 56 = b B b B UFEFB UFEF5 Greek_beta Greek_BETA U03D0
+         keycode 57 = n N ntilde Ntilde Arabic_alefmaksura Arabic_maddaonalef
+         Greek_nu Greek_NU U0374 U0375
+         keycode 58 = m M mu mu Arabic_tehmarbuta apostrophe Greek_mu
+         Greek_MU U03FB U03FA
+         keycode 59 = comma less ccedilla Ccedilla Arabic_waw comma comma
+         less guillemotleft
+         keycode 60 = period greater dead_abovedot dead_caron Arabic_zain
+         period period greater guillemotright periodcentered
+         keycode 61 = slash question questiondown dead_hook Arabic_zah
+         Arabic_question_mark slash question
+         keycode 62 = Shift_R NoSymbol Shift_R Shift_R
+         ...
+
+  Composemap file ("en_US.UTF-8_Compose")
+
+       This file describes characters that can be composed by multiple
+       inputs. For example, "[Compose]" followed by "[A]" and "[E]" can be
+       used to create the "æ" character.
+
+       The file that comes with Tux Paint is based on the US English UTF-8
+       (Unicode) composemap that comes with X.Org's X Window system. The
+       current version from the Xlib library as a web page at
+       https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html).
+
+  Keysym definitions file ("keysymdef.h")
+
+       This file (which is a C programming language header file) is also from
+       the X Window System. It defines the Unicode values of each keycap
+       (e.g., "XK_equal" corresponds to "U+003D", for the character "="
+       ("EQUALS SIGN").
+
+       It is unlikely that any modification will be required of this file.
+
+     ----------------------------------------------------------------------

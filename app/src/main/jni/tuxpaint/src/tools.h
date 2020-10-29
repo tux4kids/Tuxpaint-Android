@@ -19,11 +19,11 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Copyright (c) 2002-2019 by Bill Kendrick
+  Copyright (c) 2002-2020 by Bill Kendrick
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
-  June 14, 2002 - September 12, 2019
+  June 14, 2002 - August 15, 2020
   $Id$
 */
 
@@ -122,7 +122,7 @@ const char *const tool_tips[NUM_TOOLS] = {
 
   // Shape tool instructions
   gettext_noop
-    ("Pick a shape. Click to pick the center, drag, then let go when it is the size you want. Move around to rotate it, and click to draw it."),
+    ("Pick a shape. Click to start drawing, drag, and let go when it is the size you want. Move around to rotate it, and click to draw it."),
 
   // Text tool instructions
   gettext_noop

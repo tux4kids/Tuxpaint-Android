@@ -3,7 +3,7 @@
 # Bill Kendrick <bill@newbreedsoftware.com>; http://www.tuxpaint.org/
 # Based on inkscape's completion file, by allali@univ-mlv.fr
 #
-# Last modified 2020-07-25
+# Last modified 2020-08-15
 #
 # $Id$
 
@@ -50,6 +50,7 @@ _tuxpaint()
 			--sysfonts --nosysfonts \
 			--nostampcontrols --stampcontrols \
 			--nomagiccontrols --magiccontrols \
+			--noshapecontrols --shapecontrols \
 			--mirrorstamps --dontmirrorstamps \
 			--stampsize=0 --stampsize=1 \
 			--stampsize=2 --stampsize=3 \

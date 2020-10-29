@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tux Paint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-29 23:01-0700\n"
+"POT-Creation-Date: 2020-08-15 16:42-0700\n"
 "PO-Revision-Date: 2015-03-07 13:09+0000\n"
 "Last-Translator: Sven Ollino <sven.ollino@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/projects/p/doudoulinux/"
@@ -338,6 +338,14 @@ msgstr ""
 msgid "A star with 5 points."
 msgstr ""
 
+#: ../shapes.h:372
+msgid "Draw shapes from the center."
+msgstr ""
+
+#: ../shapes.h:373
+msgid "Draw shapes from a corner."
+msgstr ""
+
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
 msgid "Tools"
@@ -433,7 +441,7 @@ msgstr "Uus"
 #. Open a saved picture
 #. buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7887
+#: ../tools.h:98 ../tuxpaint.c:7920
 msgid "Open"
 msgstr "Ava"
 
@@ -468,9 +476,13 @@ msgid "Click to start drawing a line. Let go to complete it."
 msgstr "Klõpsa pildil joone joonistamiseks. Lõpetamiseks vabasta hiire nupp."
 
 #: ../tools.h:125
+#, fuzzy
+#| msgid ""
+#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
+#| "size you want. Move around to rotate it, and click to draw it."
 msgid ""
-"Pick a shape. Click to pick the center, drag, then let go when it is the "
-"size you want. Move around to rotate it, and click to draw it."
+"Pick a shape. Click to start drawing, drag, and let go when it is the size "
+"you want. Move around to rotate it, and click to draw it."
 msgstr ""
 "Vali kujund. Klõpsa, et valida keskkoht, lohista, siis lase paraja suuruse "
 "juures nupp lahti. Liiguta hiirt ringi, et pöörata kujund ümber, ning siis "
@@ -565,227 +577,227 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "Olgu nii, joonistame seda pilti edasi!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2132
+#: ../tuxpaint.c:2134
 msgid "Do you really want to quit?"
 msgstr "Kas sa tõesti tahad väljuda?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2135
+#: ../tuxpaint.c:2137
 msgid "Yes, I’m done!"
 msgstr "Jah, ma lõpetasin!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2138 ../tuxpaint.c:2165
+#: ../tuxpaint.c:2140 ../tuxpaint.c:2167
 msgid "No, take me back!"
 msgstr "Ei, vii mind tagasi!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2142
+#: ../tuxpaint.c:2144
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Kui sa praegu väljud, kaotad sa oma pildi ära! Kas salvestame?"
 
-#: ../tuxpaint.c:2143 ../tuxpaint.c:2148
+#: ../tuxpaint.c:2145 ../tuxpaint.c:2150
 msgid "Yes, save it!"
 msgstr "Jah, salvesta!"
 
-#: ../tuxpaint.c:2144 ../tuxpaint.c:2149
+#: ../tuxpaint.c:2146 ../tuxpaint.c:2151
 msgid "No, don’t bother saving!"
 msgstr "Ei, pole vaja salvestada!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2147
+#: ../tuxpaint.c:2149
 msgid "Save your picture first?"
 msgstr "Salvestame su pildi enne ära?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2152
+#: ../tuxpaint.c:2154
 msgid "Can’t open that picture!"
 msgstr "Selle pildi avamine ei ole võimalik!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2155 ../tuxpaint.c:2160 ../tuxpaint.c:2169 ../tuxpaint.c:2176
-#: ../tuxpaint.c:2185 ../tuxpaint.c:2190
+#: ../tuxpaint.c:2157 ../tuxpaint.c:2162 ../tuxpaint.c:2171 ../tuxpaint.c:2178
+#: ../tuxpaint.c:2187 ../tuxpaint.c:2192
 msgid "OK"
 msgstr "Selge"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2159
+#: ../tuxpaint.c:2161
 msgid "There are no saved files!"
 msgstr "Salvestatud pilte ei ole!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2163
+#: ../tuxpaint.c:2165
 msgid "Print your picture now?"
 msgstr "Kas trükin sinu pildi välja?"
 
-#: ../tuxpaint.c:2164
+#: ../tuxpaint.c:2166
 msgid "Yes, print it!"
 msgstr "Jah, trüki!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2168
+#: ../tuxpaint.c:2170
 msgid "Your picture has been printed!"
 msgstr "Sinu pilt on välja trükitud!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2172
+#: ../tuxpaint.c:2174
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Anna andeks aga su pilti ei olnud võimalik printida!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2175
+#: ../tuxpaint.c:2177
 msgid "You can’t print yet!"
 msgstr "Ei saa veel välja trükkida!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2179
+#: ../tuxpaint.c:2181
 msgid "Erase this picture?"
 msgstr "Kas kustutan selle pildi?"
 
-#: ../tuxpaint.c:2180
+#: ../tuxpaint.c:2182
 msgid "Yes, erase it!"
 msgstr "Jah, kustuta!"
 
-#: ../tuxpaint.c:2181
+#: ../tuxpaint.c:2183
 msgid "No, don’t erase it!"
 msgstr "Ei, ära kustuta!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2184
+#: ../tuxpaint.c:2186
 msgid "Remember to use the left mouse button!"
 msgstr "Ära unusta kasutamast vasakut hiire nuppu!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2188
+#: ../tuxpaint.c:2190
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "Sinu pilt on välja trükitud!"
 
-#: ../tuxpaint.c:2189
+#: ../tuxpaint.c:2191
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "Sinu pilt on välja trükitud!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2193
+#: ../tuxpaint.c:2195
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "Anna andeks aga su pilti ei olnud võimalik printida!"
 
-#: ../tuxpaint.c:2194
+#: ../tuxpaint.c:2196
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "Anna andeks aga su pilti ei olnud võimalik printida!"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2198
+#: ../tuxpaint.c:2200
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Vali soovitud pildid ja klõpsa nupul  \"Esita\""
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2405
+#: ../tuxpaint.c:2407
 msgid "Sound muted."
 msgstr "Heli vaigistatud."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2410
+#: ../tuxpaint.c:2412
 msgid "Sound unmuted."
 msgstr "Heli taastatud."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3165
+#: ../tuxpaint.c:3167
 msgid "Please wait…"
 msgstr "Palun oota..."
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7890
+#: ../tuxpaint.c:7923
 msgid "Erase"
 msgstr "Kustuta"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7893
+#: ../tuxpaint.c:7926
 msgid "Slides"
 msgstr "Slaidid"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:7896
+#: ../tuxpaint.c:7929
 msgid "Export"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7899
+#: ../tuxpaint.c:7932
 msgid "Back"
 msgstr "Tagasi"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7902
+#: ../tuxpaint.c:7935
 msgid "Play"
 msgstr "Esita"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:7905
+#: ../tuxpaint.c:7938
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7908
+#: ../tuxpaint.c:7941
 msgid "Next"
 msgstr "Edasi"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8623
+#: ../tuxpaint.c:8656
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:11991
+#: ../tuxpaint.c:12069
 msgid "Yes"
 msgstr "Jah"
 
-#: ../tuxpaint.c:11995
+#: ../tuxpaint.c:12073
 msgid "No"
 msgstr "Ei"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:13069
+#: ../tuxpaint.c:13190
 msgid "Replace the picture with your changes?"
 msgstr "Asenda pilt tehtud muudatustega?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:13073
+#: ../tuxpaint.c:13194
 msgid "Yes, replace the old one!"
 msgstr "Jah, vaheta vana pilt välja!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:13077
+#: ../tuxpaint.c:13198
 msgid "No, save a new file!"
 msgstr "Ei, salvestame uude faili!"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:14333
+#: ../tuxpaint.c:14454
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Vali pilt ja klõpsa nupul  \"Ava\""
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:15759
+#: ../tuxpaint.c:15880
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
-#: ../tuxpaint.c:23417
+#: ../tuxpaint.c:23539
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:23429
+#: ../tuxpaint.c:23551
 msgid "Pick a color."
 msgstr "Vali värv."
 

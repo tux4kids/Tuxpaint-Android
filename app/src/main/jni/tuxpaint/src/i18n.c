@@ -179,6 +179,7 @@ const char *lang_prefixes[NUM_LANGS] = {
   "sat@olchiki",
   "sat",
   "sa",
+  "sc",
   "sd",
   "sd@devanagari",
   "shs",
@@ -424,6 +425,8 @@ static const language_to_locale_struct language_to_locale_array[] = {
   {"sanskrit", "sa_IN.UTF-8"},
   {"santali-devaganari", "sat_IN.UTF-8"},
   {"santali-ol-chiki", "sat@olchiki"},
+  {"sardinian", "sc_IT"},
+  {"sardu", "sc_IT"},
   {"serbian", "sr_RS.UTF-8"},   /* Was sr_YU, but that's not in /usr/share/i18n/SUPPORTED, and sr_RS is -bjk 2014.08.04 */
   {"serbian-latin", "sr_RS@latin"},
   {"shuswap", "shs_CA.UTF-8"},
@@ -570,6 +573,7 @@ static void show_lang_usage(int exitcode)
 /* sa */ "  sanskrit\n"
 /* sat */ "  santali-devaganari\n"
 /* sat@olchiki */ "  santali-ol-chiki\n"
+/* sc */ "  sardinian    sardu\n"
 /* gd */ "  scottish     scottish-gaelic        ghaidhlig\n"
 /* sr */ "  serbian\n"
 /* sr@latin */ "  serbian-latin\n"
@@ -718,6 +722,7 @@ static void show_locale_usage(FILE * f, const char *const prg)
           "  sa_IN   (Sanskrit)\n"
           "  sat_IN  (Santali)\n"
           "  sat@olchiki  (Santali (Ol-Chiki))\n"
+          "  sc_IT   (Sardinian)\n"
           "  sd_IN@devanagari  (Sindhi (Devanagari))\n"
           "  sd_IN  (Sindhii (Perso-Arabic))\n"
           "  shs_CA  (Shuswap      Secwepemctin)\n"
