@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Locale;
 import java.util.Properties;
 
 
@@ -26,12 +25,14 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.content.res.AssetManager;
 import android.content.pm.PackageManager;
 
 public class ConfigActivity extends Activity {
 	private static final String TAG = ConfigActivity.class.getSimpleName();
-   	String[] locales = null;
+   	String[] languages = null;
+   	String [] langs = null;
    	String[] printdelays = null;
 	private Properties props = null;
 	private Properties propsback = null;
@@ -39,7 +40,7 @@ public class ConfigActivity extends Activity {
 	String autosave = null;
 	String sound = null;
 	String stereo = null;
-	String locale = null;
+	String language = null;
 	String savedir = null;
 	String datadir = null;
 	String exportdir = null;
@@ -51,6 +52,7 @@ public class ConfigActivity extends Activity {
         String printdelay = null;
         String disablescreensaver = null;
         String orient = null;
+        String lang = null;
         boolean cancel = false;
 
 	EditText savedirView = null;
@@ -61,7 +63,7 @@ public class ConfigActivity extends Activity {
 	ToggleButton autosaveToggle = null;
 	ToggleButton startblankToggle = null;
 	ToggleButton newcolorsfirstToggle = null;
-	Spinner localeSpinner = null;
+	Spinner languageSpinner = null;
 	RadioGroup saveoverGroup = null;
 	ToggleButton sysfontsToggle = null;
 	ToggleButton printToggle = null;
@@ -192,21 +194,33 @@ public class ConfigActivity extends Activity {
 			}
 		});
 
-		locales = getResources().getStringArray(R.array.locales);
+		languages = getResources().getStringArray(R.array.languages);
+		langs = getResources().getStringArray(R.array.languages);
 		int index = 0;
-		for (; index != locales.length; index++){
-			if (locales[index].compareTo(locale) == 0)
+		for (; index != languages.length; index++){
+		      langs[index] = languages[index].split(",")[0];
+		}
+
+		index = 0;
+		for (; index != languages.length; index++){
+		    if (languages[index].split(",")[1].compareTo(lang) == 0)
 				break;
 		}
-		if(index==locales.length)
+		if(index == languages.length)
 		    index = 0;
-       	localeSpinner = (Spinner) findViewById(R.id.spinnerLocale);
-		localeSpinner.setSelection(index); 
-		localeSpinner.setOnItemSelectedListener(
+
+		languageSpinner = (Spinner) findViewById(R.id.spinnerLanguage);
+
+		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, langs)   ;
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		languageSpinner.setAdapter(adapter);
+		languageSpinner.setSelection(index);
+		languageSpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
-						locale = locales[arg2];
+						language = languages[arg2].split(",")[0];
+						lang = languages[arg2].split(",")[1];
 					}
 					public void onNothingSelected(AdapterView<?> arg0) {
 					}
@@ -368,6 +382,7 @@ public class ConfigActivity extends Activity {
 	    e1.printStackTrace();
 	}
 
+
 	autosave = props.getProperty("autosave", "no");
 	sound = props.getProperty("sound", "no");
 	stereo = props.getProperty("stereo", "yes");
@@ -376,15 +391,15 @@ public class ConfigActivity extends Activity {
 	newcolorsfirst = props.getProperty("newcolorsfirst", "yes");
 	savedir = props.getProperty("savedir", external.getAbsolutePath());
 	datadir = props.getProperty("datadir", external.getAbsolutePath());
-		exportdir = props.getProperty("exportdir", external.getAbsolutePath());
-	locale = props.getProperty("locale", Locale.getDefault().toString());
+	exportdir = props.getProperty("exportdir", external.getAbsolutePath());
+	lang = props.getProperty("lang", "en");
 	sysfonts = props.getProperty("sysfonts", "no");
 	print = props.getProperty("print", "no");
 	printdelay = props.getProperty("printdelay", "0");
 	disablescreensaver = props.getProperty("disablescreensaver", "no");
 	orient = props.getProperty("orient", "landscape");
 	    	 
-	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir+ " "+datadir+ " " + exportdir + " " + locale + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);
+	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir+ " "+datadir+ " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);
     }
 
     private void save () {
@@ -399,7 +414,7 @@ public class ConfigActivity extends Activity {
         props.put("savedir", savedir);
         props.put("datadir", datadir);
         props.put("exportdir", exportdir);
-        props.put("locale", locale);
+        props.put("lang", lang);
 	props.put("sysfonts", sysfonts);
 	props.put("print", print);
         props.put("printdelay", printdelay);
