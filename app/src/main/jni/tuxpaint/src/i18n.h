@@ -101,7 +101,7 @@ enum
   LANG_KN,                      /* Kannada */
   LANG_KM,                      /* Khmer */
   LANG_KOK_ROMAN,               /* Konkani (Roman) */
-  LANG_KOK,                     /* Konkani (Devaganari) */
+  LANG_KOK,                     /* Konkani (Devanagari) */
   LANG_KO,                      /* Korean */
   LANG_KS_DEVANAGARI,           /* Kashmiri (Devanagari script) */
   LANG_KS,                      /* Kashmiri (Perso-Arabic script) */

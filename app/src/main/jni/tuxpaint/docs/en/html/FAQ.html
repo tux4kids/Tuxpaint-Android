@@ -32,29 +32,29 @@
       </p>
 
       <p>
-        September 14, 2002 - July 27, 2020
+        September 14, 2002 - October 30, 2020
       </p>
     </center>
+
+    <hr>
 
     <h2>
       Drawing-related
     </h2>
 
-    <ul>
-      <li>
-        <em>Fonts I added to Tux&nbsp;Paint only show squares</em>
-        <p>
-          The TrueType Font you're using might have the wrong
-          encoding. If it's 'custom' encoded, for example, you can
-          try running it through FontForge (<a href=
-          "http://fontforge.sourceforge.net/">http://fontforge.sourceforge.net/</a>)
-          to convert it to an ISO-8859 format. (Email us if you
-          need help with special fonts.)
-        </p>
-      </li>
+    <dl>
+      <dt><h3>Fonts I added to Tux&nbsp;Paint only show squares</h3></dt>
+      <dd>
+        The TrueType Font you're using might have the wrong
+        encoding. If it's 'custom' encoded, for example, you can
+        try running it through FontForge (<a href=
+        "http://fontforge.sourceforge.net/">http://fontforge.sourceforge.net/</a>)
+        to convert it to an ISO-8859 format. (Email us if you
+        need help with special fonts.)
+      </dd>
 
-      <li>
-        <em>The Rubber Stamp tool is greyed out!</em>
+      <dt><h3>The Rubber Stamp tool is greyed out!<h3></dt>
+      <dd>
         <p>
           This means that Tux&nbsp;Paint either couldn't find any
           stamp images, or was asked not to load them.
@@ -92,10 +92,10 @@
           command line or "<code>nostamps=no</code>" or
           "<code>stamps=yes</code>" in a configuration file.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>The Magic "Fill" Tool Looks Bad</em>
+      <dt><h3>The Magic "Fill" Tool Looks Bad</h3></dt>
+      <dd>
         <p>
           Tux&nbsp;Paint is probably comparing exact pixel colors
           when filling. This is faster, but looks worse. Run the
@@ -119,10 +119,10 @@
         <p>
           in the "tuxpaint.c" file in the "src" directory.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>Stamp outlines are always rectangles</em>
+      <dt><h3>Stamp outlines are always rectangles</h3></dt>
+      <dd>
         <p>
           Tux&nbsp;Paint was built with low-quality (but faster)
           stamp outlines.
@@ -142,16 +142,18 @@
         <p>
           in the "tuxpaint.c" file in the "src" directory.
         </p>
-      </li>
-    </ul>
+      </dd>
+    </dl>
+
+    <hr>
 
     <h2>
       Interface Problems
     </h2>
 
-    <ul>
-      <li>
-        <em>Stamp thumbnails in the Stamp Selector look bad</em>
+    <dl>
+      <dt><h3>Stamp thumbnails in the Stamp Selector look bad</h3></dt>
+      <dd>
         <p>
           Tux&nbsp;Paint was probably compiled with the faster,
           lower quality thumbnail code enabled. Run the command:
@@ -175,19 +177,16 @@
         <p>
           in the "tuxpaint.c" file in the "src" directory.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>Pictures in the 'Open' dialog look bad</em>
-        <p>
-          "Low Quality Thumbnails" is probably enabled. See: "Stamp
-          thumbnails in the Stamp Selector look bad", above.
-        </p>
-      </li>
+      <dt><h3>Pictures in the 'Open' dialog look bad</h3></dt>
+      <dd>
+        "Low Quality Thumbnails" is probably enabled. See: "Stamp
+        thumbnails in the Stamp Selector look bad", above.
+      </dd>
 
-      <li>
-        <em>The color picker buttons are ugly squares, not pretty
-        buttons!</em>
+      <dt><h3>The color picker buttons are ugly squares, not pretty buttons!</h3></dt>
+      <dd>
         <p>
           Tux&nbsp;Paint was probably compiled with the nice
           looking color selector buttons disabled. Run the command:
@@ -211,10 +210,10 @@
         <p>
           in the "tuxpaint.c" file in the "src" directory.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>All of the text is in uppercase!</em>
+      <dt><h3>All of the text is in uppercase!</h3></dt>
+      <dd>
         <p>
           The "uppercase" option is on.
         </p>
@@ -251,18 +250,16 @@
           Or use Tux&nbsp;Paint&nbsp;Config. and make sure "Show
           Uppercase Text Only" (under "Languages") is not checked.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>Tux&nbsp;Paint is in a different language!</em>
-        <p>
-          Make sure your locale setting is correct. See
-          "Tux&nbsp;Paint won't switch to my language", below.
-        </p>
-      </li>
+      <dt><h3>Tux&nbsp;Paint is in a different language!</h3></dt>
+      <dd>
+        Make sure your locale setting is correct. See
+        "Tux&nbsp;Paint won't switch to my language", below.
+      </dd>
 
-      <li>
-        <em>Tux&nbsp;Paint won't switch to my language</em>
+      <dt><h3>Tux&nbsp;Paint won't switch to my language</h3></dt>
+      <dd>
         <ul>
           <li>
             <i>Linux and Unix users: Make sure the locale is
@@ -276,73 +273,73 @@
             </p>
 
             <p>
-              Note: Debian users can simply run
+              Note: Debian and derivative (e.g., Ubuntu) users can simply run
               "<code>dpkg-reconfigure locales</code>" if the
               locales are managed by "dpkg."
             </p>
+          </li>
+            
+          <li>If you're using the "<code>--lang</code>"
+          command-line option
+            <p>
+              Try using the "<code>--locale</code>"
+              command-line option, or your operating system's
+              locale settings (e.g., the "<code>$LANG</code>"
+              environment variable), and please e-mail us
+              regarding your trouble.
+            </p>
+          </li>
 
-            <ul>
-              <li>If you're using the "<code>--lang</code>"
-              command-line option
-                <p>
-                  Try using the "<code>--locale</code>"
-                  command-line option, or your operating system's
-                  locale settings (e.g., the "<code>$LANG</code>"
-                  environment variable), and please e-mail us
-                  regarding your trouble.
-                </p>
-              </li>
+          <li>If you're using the "<code>--locale</code>"
+          command-line option
+            <p>
+              If this doesn't work, please e-mail us regarding
+              your trouble.
+            </p>
+          </li>
 
-              <li>If you're using the "<code>--locale</code>"
-              command-line option
-                <p>
-                  If this doesn't work, please e-mail us regarding
-                  your trouble.
-                </p>
-              </li>
+          <li>If you're trying to use your Operating System's
+          locale
+            <p>
+              If this doesn't work, please e-mail us regarding
+              your trouble.
+            </p>
+          </li>
 
-              <li>If you're trying to use your Operating System's
-              locale
-                <p>
-                  If this doesn't work, please e-mail us regarding
-                  your trouble.
-                </p>
-              </li>
+          <li>Make sure you have the necessary font
+            <p>
+              Some translations require their own font. Chinese
+              and Korean, for example, need Chinese and Korean
+              TrueType Fonts installed and placed in the proper
+              location, respectively.
+            </p>
 
-              <li>Make sure you have the necessary font
-                <p>
-                  Some translations require their own font. Chinese
-                  and Korean, for example, need Chinese and Korean
-                  TrueType Fonts installed and placed in the proper
-                  location, respectively.
-                </p>
+            <p>
+              The appropriate fonts for such locales can be
+              downloaded from the Tux&nbsp;Paint website:
+            </p>
 
-                <p>
-                  The appropriate fonts for such locales can be
-                  downloaded from the Tux&nbsp;Paint website:
-                </p>
-
-                <blockquote>
-                  <p>
-                    <a href=
-                    "http://www.tuxpaint.org/download/fonts/">http://www.tuxpaint,org/download/fonts/</a>
-                  </p>
-                </blockquote>
-              </li>
-            </ul>
+            <blockquote>
+              <p>
+                <a href=
+                "http://www.tuxpaint.org/download/fonts/">http://www.tuxpaint,org/download/fonts/</a>
+              </p>
+            </blockquote>
           </li>
         </ul>
-      </li>
-    </ul>
+      </dd>
+    </dl>
+
+    <hr>
 
     <h2>
       Printing
     </h2>
 
-    <ul>
-      <li>
-        <em>Tux&nbsp;Paint won't print, gives an error, or prints
-        garbage (Unix/Linux)</em>
+    <dl>
+      <dt><h3>Tux&nbsp;Paint won't print, gives an error, or prints
+        garbage (Unix/Linux)</h3></dt>
+      <dd>
         <p>
           Tux&nbsp;Paint prints by creating a PostScript rendition
           of the picture and sending it to an external command. By
@@ -370,11 +367,11 @@
           Tux&nbsp;Paint 0.9.15, you will need to go back and alter
           it to accept PostScript.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>I get the message "You can't print yet!" when I go to
-        print!</em>
+      <dt><h3>I get the message "You can't print yet!" when I go to
+        print!</h3></dt>
+      <dd>
         <p>
           The "print delay" option is on. You can only print once
           every <i>X</i>&nbsp;seconds.
@@ -419,10 +416,10 @@
           Or use Tux&nbsp;Paint&nbsp;Config. and make sure "Print
           Delay" (under "Printing") is set to "0&nbsp;seconds."
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>I simply can't print! The button is greyed out!</em>
+      <dt><h3>I simply can't print! The button is greyed out!</h3></dt>
+      <dd>
         <p>
           The "no print" option is on.
         </p>
@@ -457,16 +454,18 @@
           Or use Tux&nbsp;Paint&nbsp;Config. and make sure "Allow
           Printing" (under "Printing") is checked.
         </p>
-      </li>
-    </ul>
+      </dd>
+    </dl>
+
+    <hr>
 
     <h2>
       Saving
     </h2>
 
-    <ul>
-      <li>
-        <em>Where are my pictures?</em>
+    <dl>
+      <dt><h3>Where does Tux Paint save my drawings?</h3><dt>
+      <dd>
         <p>
           Unless you asked Tux&nbsp;Paint to save into a specific
           location (using the 'savedir' option), Tux&nbsp;Paint
@@ -475,7 +474,7 @@
 
         <dl>
           <dt>
-            Windows Vista
+            Windows Vista, Windows 8, Windows 10
           </dt>
 
           <dd>
@@ -522,10 +521,10 @@
           programs should be able to load (image editors, word
           processors, web browsers, etc.)
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>Tux&nbsp;Paint always saves over my old picture!</em>
+      <dt><h3>Tux&nbsp;Paint always saves over my old picture!</h3></dt>
+      <dd>
         <p>
           The "save over" option is enabled. (This disables the
           prompt that would appear when you click 'Save.')
@@ -567,10 +566,10 @@
           Also, see "Tux&nbsp;Paint always saves a new picture!",
           below.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>Tux&nbsp;Paint always saves a new picture!</em>
+      <dt><h3>Tux&nbsp;Paint always saves a new picture!</h3></dt>
+      <dd>
         <p>
           The "never save over" option is enabled. (This disables
           the prompt that would appear when you click 'Save.')
@@ -612,16 +611,18 @@
           Also, see "Tux&nbsp;Paint always saves over my old
           picture!", above.
         </p>
-      </li>
-    </ul>
+      </dd>
+    </dl>
+
+    <hr>
 
     <h2>
       Audio Problems
     </h2>
 
-    <ul>
-      <li>
-        <em>There's no sound!</em>
+    <dl>
+      <dt><h3>There's no sound!</h3></dt>
+      <dd>
         <ul>
           <li>
             <em>First, check the obvious:</em>
@@ -735,11 +736,10 @@
             </p>
           </li>
         </ul>
-      </li>
+      </dd>
 
-      <li>
-        <em>Tux Paint makes too much noise! Can I turn them
-        off?</em>
+      <dt><h3>Tux Paint makes too much noise! Can I turn them off?</h3></dt>
+      <dd>
         <p>
           Yes, there are a number of ways to disable sounds in Tux
           Paint:
@@ -774,10 +774,31 @@
             </ul>
           </li>
         </ul>
-      </li>
+      </dd>
 
-      <li>
-        <em>The sound effects sound strange</em>
+      <dt><h3>The stereo panning of sound effects is bothersome; can sound effects be monophonic?</h3></dt>
+      <dd>
+        <p>
+          Run Tux&nbsp;Paint with the "no&nbsp;stereo" option:
+        </p>
+        <ul>
+          <li>Use Tux&nbsp;Paint&nbsp;Config to uncheck the
+          "Enable Stereo Sound" option (under "Video &amp; Sound").
+          </li>
+
+          <li>Edit Tux&nbsp;Paint's configuration file (see
+          <a href="OPTIONS.html">OPTIONS</a> for details) and
+          add a line containing "<code>nostereo=yes</code>".
+          </li>
+
+          <li>Run "<code>tuxpaint&nbsp;--nostereo</code>" from
+          the command line or shortcut or desktop icon.
+          </li>
+        </ul>
+      </dd>
+
+      <dt><h3>The sound effects sound strange</h3><dt>
+      <dd>
         <p>
           This could have to do with how SDL and SDL_mixer were
           initialized. (The buffer size chosen.)
@@ -790,25 +811,25 @@
           "<code>tuxpaint&nbsp;--version</code>" to verify), and so
           on.)
         </p>
-      </li>
-    </ul>
+      </dd>
+    </dl>
+
+    <hr>
 
     <h2>
       Fullscreen Mode Problems
     </h2>
 
-    <ul>
-      <li>
-        <em>When I run Tux&nbsp;Paint full-screen and ALT-TAB out,
-        the window turns black!</em>
-        <p>
-          This is apparently a bug in the SDL library. Sorry.
-        </p>
-      </li>
+    <dl>
+      <dt><h3>When I run Tux&nbsp;Paint full-screen and ALT-TAB out,
+        the window turns black!</h3></dt>
+      <dd>
+        This is apparently a bug in the SDL library. Sorry.
+      </dd>
 
-      <li>
-        <em>When I run Tux&nbsp;Paint full-screen, it has large
-        borders around it</em>
+      <dt><h3>When I run Tux&nbsp;Paint full-screen, it has large
+        borders around it</h3></dt>
+      <dd>
         <p>
           Linux users - Your X-Window server is probably not set
           with the ability to switch to the desired resolution:
@@ -853,11 +874,11 @@
           command "dpkg-reconfigure xserver-xfree86" as root, for
           example.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>Tux&nbsp;Paint keeps running in Full Screen mode - I
-        want it windowed!</em>
+      <dt><h3>Tux&nbsp;Paint keeps running in Full Screen mode - I
+        want it windowed!</h3></dt>
+      <dd>
         <p>
           The "fullscreen" option is set.
         </p>
@@ -892,16 +913,18 @@
           Or use Tux&nbsp;Paint&nbsp;Config. and make sure
           "Fullscreen" (under "Video &amp; Sound") is not checked.
         </p>
-      </li>
-    </ul>
+      </dd>
+    </dl>
+
+    <hr>
 
     <h2>
       Other Probelms
     </h2>
 
-    <ul>
-      <li>
-        <em>Tux&nbsp;Paint won't run</em>
+    <dl>
+      <dt><h3>Tux&nbsp;Paint won't run</h3></dt>
+      <dd>
         <p>
           If Tux&nbsp;Paint aborts with the message: "You're
           already running a copy of Tux&nbsp;Paint!", this means it
@@ -940,10 +963,10 @@
           "<code>--nolockfile</code>" argument to Tux&nbsp;Paint's
           command-line.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>I can't quit Tux&nbsp;Paint</em>
+      <dt><h3>I can't quit Tux&nbsp;Paint</h3></dt>
+      <dd>
         <p>
           The "noquit" option is set. This disables the "Quit"
           button in Tux&nbsp;Paint's toolbar (greying it out), and
@@ -968,10 +991,10 @@
           the <b>[Alt] + [F4]</b> combination on your keyboard to
           quit Tux&nbsp;Paint.)
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>I don't want "noquit" mode enabled!</em>
+      <dt><h3>I don't want "noquit" mode enabled!</h3></dt>
+      <dd>
         <p>
           If you're running Tux&nbsp;Paint from a command-line,
           make sure you're not giving it a "<code>--noquit</code>"
@@ -1003,11 +1026,11 @@
           Quit Button and [Escape] Key" (under "Simplification") is
           not checked.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>Tux&nbsp;Paint keeps writing weird messages to the
-        screen / to a text file</em>
+      <dt><h3>Tux&nbsp;Paint keeps writing weird messages to the
+        screen / to a text file</h3></dt>
+      <dd>
         <p>
           A few messages are normal, but if Tux&nbsp;Paint is being
           extremely verbose (like listing the name of every
@@ -1029,10 +1052,10 @@
         <p>
           in the "tuxpaint.c" file in the "src" directory.
         </p>
-      </li>
+      </dd>
 
-      <li>
-        <em>Tux&nbsp;Paint is using options I didn't specify!</em>
+      <dt><h3>Tux&nbsp;Paint is using options I didn't specify!</h3></dt>
+      <dd>
         <p>
           By default, Tux&nbsp;Paint first looks at configuration
           files for options.
@@ -1145,32 +1168,35 @@
           command-line arguments to determine what options should
           be set.
         </p>
-      </li>
-    </ul>
+      </dd>
+    </dl>
+
+    <hr>
 
     <h2>
       Help / Contact
     </h2>
 
     <p>
-      Any questions you don't see answered? Let me know!
-    </p>
-
-    <blockquote>
-      <p>
-        <a href=
-        "mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a>
-      </p>
-    </blockquote>
-
-    <p>
-      Or post to our 'tuxpaint-users' mailing list:
+      Any questions you don't see answered? Please let us know!
+      You can subscribe and post to our "tuxpaint-users" mailing list:
     </p>
 
     <blockquote>
       <p>
         <a href=
         "http://www.tuxpaint.org/lists/">http://www.tuxpaint.org/lists/</a>
+      </p>
+    </blockquote>
+
+    <p>
+      Or, contact lead developer Bill Kendrick directly:
+    </p>
+
+    <blockquote>
+      <p>
+        <a href=
+        "mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a>
       </p>
     </blockquote>
   </body>
