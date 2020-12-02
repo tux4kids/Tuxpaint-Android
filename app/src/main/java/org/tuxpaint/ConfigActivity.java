@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
-
+import java.util.Locale;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -28,6 +28,8 @@ import android.widget.Button;
 import android.widget.ArrayAdapter;
 import android.content.res.AssetManager;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 
 public class ConfigActivity extends Activity {
 	private static final String TAG = ConfigActivity.class.getSimpleName();
@@ -36,6 +38,11 @@ public class ConfigActivity extends Activity {
    	String[] printdelays = null;
 	private Properties props = null;
 	private Properties propsback = null;
+    String locLanguage = null;
+    String locRegion = null;
+    String locScript = null;
+    String locVariant = null;
+
 	// current the configurable properties
 	String autosave = null;
 	String sound = null;
@@ -74,10 +81,18 @@ public class ConfigActivity extends Activity {
     Button cancelButton = null;
         AssetManager mgr;
     
+    Resources res;
+    Configuration conf;
+    Locale localeback;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "onCreate()");
 	super.onCreate(savedInstanceState);
+
+	res = getResources();
+	conf = res.getConfiguration();
+	localeback = conf.locale;
 
 	if (android.os.Build.VERSION.SDK_INT > 22) {
 	    if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -221,6 +236,14 @@ public class ConfigActivity extends Activity {
 							int arg2, long arg3) {
 						language = languages[arg2].split(",")[0];
 						lang = languages[arg2].split(",")[1];
+						String loc;
+						if (languages[arg2].split(",").length >2)
+						    loc = languages[arg2].split(",")[2];
+						/* This "else" should be removed when all languages in the list  have their Android counterpart */
+						else
+						    loc = "en";
+
+						setLocale(loc);
 					}
 					public void onNothingSelected(AdapterView<?> arg0) {
 					}
@@ -435,5 +458,39 @@ public class ConfigActivity extends Activity {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
+    }
+
+    public void setLocale(String lang) {
+	String[] langsplit = lang.split("_");
+	locLanguage = langsplit[0];
+
+	if (langsplit.length > 1)
+	    locRegion = langsplit[1];
+	else
+	    locRegion = "";
+
+	if (langsplit.length > 2)
+	    locScript = langsplit[2];
+	else
+	    locScript = "";
+
+	if (langsplit.length > 3)
+	    locVariant = langsplit[3];
+	else
+	    locVariant = "";
+
+	Locale myLocale = new Locale.Builder().setLanguage(locLanguage).setRegion(locRegion).setScript(locScript).setVariant(locVariant).build();
+	if (!localeback.equals(myLocale))
+	    {
+		conf.locale = myLocale;
+
+		/* FIXME: Ugly hack to deal with shrink changes every time updateConfiguration/recreate is called.
+		   Unsetting android:anyDensity="false" in AndroidManifest.xml would be the right fix, but can't do it right 
+		   now as buttons in the main program would be too small on many devices. Pere - November 2020*/
+		conf.densityDpi=360;
+
+		res.updateConfiguration(conf, res.getDisplayMetrics());
+		recreate();
+	    }
     }
 }
