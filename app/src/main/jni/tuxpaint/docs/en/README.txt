@@ -6,7 +6,7 @@
           Copyright 2002-2020 by various contributors; see AUTHORS.txt
                             http://www.tuxpaint.org/
 
-                        June 14, 2002 - August 25, 2020
+                       June 14, 2002 - December 27, 2020
 
      ----------------------------------------------------------------------
 

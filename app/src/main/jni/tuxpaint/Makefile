@@ -36,7 +36,7 @@ else
     MINGW_DIR:=/mingw64
   else
     ifeq ($(SYSNAME),Darwin)
-      OS:=osx
+      OS:=macos
       GPERF:=/usr/bin/gperf
     else
       ifeq ($(SYSNAME),BeOS)
@@ -84,7 +84,7 @@ beos_MIMESET_CMD:=mimeset -f tuxpaint
 MIMESET_CMD:=$($(OS)_MIMESET_CMD)
 
 windows_SO_TYPE:=dll
-osx_SO_TYPE:=dylib
+macos_SO_TYPE:=dylib
 beos_SO_TYPE:=so
 linux_SO_TYPE:=so
 SO_TYPE:=$($(OS)_SO_TYPE)
@@ -96,25 +96,25 @@ windows_EXE_EXT:=.exe
 EXE_EXT:=$($(OS)_EXE_EXT)
 
 windows_BUNDLE:=
-osx_BUNDLE=./TuxPaint.app
+macos_BUNDLE=./TuxPaint.app
 beos_BUNDLE:=
 linux_BUNDLE:=
 BUNDLE:=$($(OS)_BUNDLE)
 
 windows_ARCH_LIBS:=obj/win32_print.o obj/resource.o
-osx_ARCH_LIBS:=src/macos_print.m obj/macos.o
+macos_ARCH_LIBS:=src/macos_print.m obj/macos.o
 beos_ARCH_LIBS:=obj/BeOS_print.o
 linux_ARCH_LIBS:=obj/postscript_print.o
 ARCH_LIBS:=$($(OS)_ARCH_LIBS)
 
 windows_ARCH_CFLAGS:=
-osx_ARCH_CFLAGS:=-mmacosx-version-min=10.8 -isystem /opt/local/include -DHAVE_STRCASESTR -w -headerpad_max_install_names
+macos_ARCH_CFLAGS:=-mmacosx-version-min=10.8 -isystem /opt/local/include -DHAVE_STRCASESTR -w -headerpad_max_install_names
 beos_ARCH_CFLAGS:=
 linux_ARCH_CFLAGS:=
 ARCH_CFLAGS:=$($(OS)_ARCH_CFLAGS)
 
 windows_ARCH_LDFLAGS:=
-osx_ARCH_LDFLAGS:=-L/opt/local/lib
+macos_ARCH_LDFLAGS:=-L/opt/local/lib
 beos_ARCH_LDFLAGS:=
 linux_ARCH_LDFLAGS:=
 ARCH_LDFLAGS:=$($(OS)_ARCH_LDFLAGS)
@@ -128,13 +128,13 @@ FRIBIDI_LIB:=$(shell $(PKG_CONFIG) --libs fribidi)
 FRIBIDI_CFLAGS:=$(shell $(PKG_CONFIG) --cflags fribidi)
 
 windows_ARCH_LINKS:=-lgdi32 -lcomdlg32 $(PNG) -lz -lwinspool -lshlwapi $(FRIBIDI_LIB) -liconv -limagequant
-osx_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant
+macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant
 beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(PAPER_LIB) $(STDC_LIB) -limagequant
 linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
 ARCH_LINKS:=$($(OS)_ARCH_LINKS)
 
 windows_ARCH_HEADERS:=src/win32_print.h
-osx_ARCH_HEADERS:=src/macos.h
+macos_ARCH_HEADERS:=src/macos.h
 beos_ARCH_HEADERS:=src/BeOS_print.h
 linux_ARCH_HEADERS:=
 ARCH_HEADERS:=$($(OS)_ARCH_HEADERS)
@@ -142,7 +142,7 @@ ARCH_HEADERS:=$($(OS)_ARCH_HEADERS)
 # Where things will go when ultimately installed:
 # For macOS, the prefix is relative to DESTDIR.
 windows_PREFIX:=/usr/local
-osx_PREFIX:=Resources
+macos_PREFIX:=Resources
 linux_PREFIX:=/usr/local
 PREFIX:=$($(OS)_PREFIX)
 
@@ -150,7 +150,7 @@ PREFIX:=$($(OS)_PREFIX)
 # PKG_ROOT is the old name for this, and should be undefined.
 # macOS is set up as a bundle, with all files under 'Contents'.
 # "TuxPaint-1" is the OLPC XO name. Installing to ./ is bad!
-ifeq ($(OS),osx)
+ifeq ($(OS),macos)
   DESTDIR:=$(BUNDLE)/Contents/
 else ifeq ($(PREFIX),./)
   DESTDIR:=TuxPaint-1
@@ -474,7 +474,7 @@ trans:
 ######
 
 windows_ARCH_INSTALL:=
-osx_ARCH_INSTALL:=install-macbundle TuxPaint.dmg
+macos_ARCH_INSTALL:=install-macbundle TuxPaint.dmg
 linux_ARCH_INSTALL:=install-xdg
 ARCH_INSTALL:=$($(OS)_ARCH_INSTALL)
 
@@ -495,7 +495,7 @@ install:	install-bin install-data install-man install-doc \
 	@echo
 	@echo "--------------------------------------------------------------"
 	@echo
-	@if [ "x$(OS)" = "xosx" ]; then \
+	@if [ "x$(OS)" = "xmacos" ]; then \
 		echo "All done! Now you can double click $(BUNDLE) to run the"; \
 		echo "program!!! TuxPaint.dmg has also been created for"; \
 		echo "distribution."; \
@@ -715,7 +715,7 @@ STARTER_BACK_NAME=$(or $(wildcard $(subst starters/.thumbs,starters,$(@:-t.png=-
 
 # FIXME: Need to be able to update a thumbnail if the source image is modified -bjk 2019.09.14
 $(THUMB_STARTERS):
-	@echo -n "."
+	@printf "."
 	@mkdir -p starters/.thumbs
 	@if [ "x" != "x"$(STARTER_BACK_NAME) ] ; \
 	then \
@@ -776,7 +776,7 @@ TEMPLATE_NAME=$(or $(wildcard $(subst templates/.thumbs,templates,$(@:-t.png=.sv
 
 # FIXME: Need to be able to update a thumbnail if the source image is modified -bjk 2019.09.14
 $(THUMB_TEMPLATES):
-	@echo -n "."
+	@printf "."
 	@mkdir -p templates/.thumbs
 	@convert $(CONVERT_OPTS) $(TEMPLATE_NAME) $@ 2> /dev/null || ( echo "($@ failed)" ; rm $@ ) ; \
 
@@ -1255,7 +1255,7 @@ MAGIC_SDL_LIBS:=-L/usr/local/lib $(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME)
 MAGIC_ARCH_LINKS:=-lintl $(PNG)
 
 windows_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
-osx_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
+macos_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
 beos_PLUGIN_LIBS:="$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS) $(MAGIC_SDL_CPPFLAGS)"
 linux_PLUGIN_LIBS:=
 PLUGIN_LIBS:=$($(OS)_PLUGIN_LIBS)
