@@ -18942,7 +18942,15 @@ static void load_magic_plugins(void)
   for (plc = 0; plc < NUM_MAGIC_PLACES; plc++)
     {
       if (plc == MAGIC_PLACE_GLOBAL)
-        place = strdup(MAGIC_PREFIX);
+	{
+#if defined (__ANDROID__)
+	  /* Need this at runtime as Android installs on different locations depending on the user */
+	  place = strdup(SDL_AndroidGetInternalStoragePath());
+	  strcpy(strstr(place, "/files"), "/lib/");
+#else
+	  place = strdup(MAGIC_PREFIX);
+#endif
+	}
       else if (plc == MAGIC_PLACE_LOCAL)
         place = get_fname("plugins/", DIR_DATA);
 #ifdef __APPLE__
