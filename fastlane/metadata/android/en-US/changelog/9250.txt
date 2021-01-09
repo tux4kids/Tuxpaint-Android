@@ -1,0 +1,10 @@
+Changes from 0.9.25 that affects mainly Android >= 10:
+
+Set target sdk version to 28 to trigger automatic legacy storage in gradle.build
+Explicit set legacy storage in AndroidManifest.xml in case the previous action
+was not enough.
+Using legacy storage is just a temporary solution as more sooner than lather 
+Android apps will have to use Storage Access Framework to deal with files.
+
+Solve "magic tools not appearing for restricted users" by setting the path to 
+the "lib" directori based on current running path.
