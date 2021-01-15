@@ -5,20 +5,19 @@
         Copyright (c) 2002-2020 by various contributors; see AUTHORS.txt
                             http://www.tuxpaint.org/
 
-                     September 14, 2002 - October 30, 2020
+                     September 14, 2002 - December 27, 2020
 
      ----------------------------------------------------------------------
 
 Drawing-related
 
-  Fonts I added to Tux Paint only show squares
-
+   Fonts I added to Tux Paint only show squares
            The TrueType Font you're using might have the wrong encoding. If
            it's 'custom' encoded, for example, you can try running it through
            FontForge (http://fontforge.sourceforge.net/) to convert it to an
            ISO-8859 format. (Email us if you need help with special fonts.)
 
-  The Rubber Stamp tool is greyed out!
+   The Rubber Stamp tool is greyed out!
 
            This means that Tux Paint either couldn't find any stamp images,
            or was asked not to load them.
@@ -44,7 +43,7 @@ Drawing-related
            override it with "--stamps" on the command line or "nostamps=no"
            or "stamps=yes" in a configuration file.
 
-  The Magic "Fill" Tool Looks Bad
+   The Magic "Fill" Tool Looks Bad
 
            Tux Paint is probably comparing exact pixel colors when filling.
            This is faster, but looks worse. Run the command
@@ -58,7 +57,7 @@ Drawing-related
 
            in the "tuxpaint.c" file in the "src" directory.
 
-  Stamp outlines are always rectangles
+   Stamp outlines are always rectangles
 
            Tux Paint was built with low-quality (but faster) stamp outlines.
 
@@ -73,7 +72,7 @@ Drawing-related
 
 Interface Problems
 
-  Stamp thumbnails in the Stamp Selector look bad
+   Stamp thumbnails in the Stamp Selector look bad
 
            Tux Paint was probably compiled with the faster, lower quality
            thumbnail code enabled. Run the command: "tuxpaint --version" from
@@ -87,12 +86,11 @@ Interface Problems
 
            in the "tuxpaint.c" file in the "src" directory.
 
-  Pictures in the 'Open' dialog look bad
-
+   Pictures in the 'Open' dialog look bad
            "Low Quality Thumbnails" is probably enabled. See: "Stamp
            thumbnails in the Stamp Selector look bad", above.
 
-  The color picker buttons are ugly squares, not pretty buttons!
+   The color picker buttons are ugly squares, not pretty buttons!
 
            Tux Paint was probably compiled with the nice looking color
            selector buttons disabled. Run the command: "tuxpaint --version"
@@ -107,7 +105,7 @@ Interface Problems
 
            in the "tuxpaint.c" file in the "src" directory.
 
-  All of the text is in uppercase!
+   All of the text is in uppercase!
 
            The "uppercase" option is on.
 
@@ -130,13 +128,11 @@ Interface Problems
            Or use Tux Paint Config. and make sure "Show Uppercase Text Only"
            (under "Languages") is not checked.
 
-  Tux Paint is in a different language!
-
+   Tux Paint is in a different language!
            Make sure your locale setting is correct. See "Tux Paint won't
            switch to my language", below.
 
-  Tux Paint won't switch to my language
-
+   Tux Paint won't switch to my language
               * Linux and Unix users: Make sure the locale is available
 
                 Make sure the locale you want is available. Check your
@@ -180,7 +176,7 @@ Interface Problems
 
 Printing
 
-  Tux Paint won't print, gives an error, or prints garbage (Unix/Linux)
+   Tux Paint won't print, gives an error, or prints garbage (Unix/Linux)
 
            Tux Paint prints by creating a PostScript rendition of the picture
            and sending it to an external command. By default, this command is
@@ -200,7 +196,7 @@ Printing
            0.9.15, you will need to go back and alter it to accept
            PostScript.
 
-  I get the message "You can't print yet!" when I go to print!
+   I get the message "You can't print yet!" when I go to print!
 
            The "print delay" option is on. You can only print once every
            X seconds.
@@ -229,7 +225,7 @@ Printing
            Or use Tux Paint Config. and make sure "Print Delay" (under
            "Printing") is set to "0 seconds."
 
-  I simply can't print! The button is greyed out!
+   I simply can't print! The button is greyed out!
 
            The "no print" option is on.
 
@@ -255,7 +251,7 @@ Printing
 
 Saving
 
-  Where does Tux Paint save my drawings?
+   Where does Tux Paint save my drawings?
 
            Unless you asked Tux Paint to save into a specific location (using
            the 'savedir' option), Tux Paint saves into a standard location on
@@ -285,7 +281,7 @@ Saving
            should be able to load (image editors, word processors, web
            browsers, etc.)
 
-  Tux Paint always saves over my old picture!
+   Tux Paint always saves over my old picture!
 
            The "save over" option is enabled. (This disables the prompt that
            would appear when you click 'Save.')
@@ -310,7 +306,7 @@ Saving
 
            Also, see "Tux Paint always saves a new picture!", below.
 
-  Tux Paint always saves a new picture!
+   Tux Paint always saves a new picture!
 
            The "never save over" option is enabled. (This disables the prompt
            that would appear when you click 'Save.')
@@ -339,8 +335,7 @@ Saving
 
 Audio Problems
 
-  There's no sound!
-
+   There's no sound!
               * First, check the obvious:
                    * Are your speakers connected and turned on?
                    * Is the volume turned up on your speakers?
@@ -403,7 +398,7 @@ Audio Problems
                 the SDL_mixer library and its development headers are
                 available!
 
-  Tux Paint makes too much noise! Can I turn them off?
+   Tux Paint makes too much noise! Can I turn them off?
 
            Yes, there are a number of ways to disable sounds in Tux Paint:
 
@@ -419,8 +414,8 @@ Audio Problems
                    * Recompile Tux Paint with sound support disabled. (See
                      above and INSTALL.txt.)
 
-  The stereo panning of sound effects is bothersome; can sound effects be
-  monophonic?
+   The stereo panning of sound effects is bothersome; can sound effects be
+   monophonic?
 
            Run Tux Paint with the "no stereo" option:
 
@@ -431,7 +426,7 @@ Audio Problems
               * Run "tuxpaint --nostereo" from the command line or shortcut
                 or desktop icon.
 
-  The sound effects sound strange
+   The sound effects sound strange
 
            This could have to do with how SDL and SDL_mixer were initialized.
            (The buffer size chosen.)
@@ -445,11 +440,10 @@ Audio Problems
 
 Fullscreen Mode Problems
 
-  When I run Tux Paint full-screen and ALT-TAB out, the window turns black!
-
+   When I run Tux Paint full-screen and ALT-TAB out, the window turns black!
            This is apparently a bug in the SDL library. Sorry.
 
-  When I run Tux Paint full-screen, it has large borders around it
+   When I run Tux Paint full-screen, it has large borders around it
 
            Linux users - Your X-Window server is probably not set with the
            ability to switch to the desired resolution: 800×600. (or whatever
@@ -477,7 +471,7 @@ Fullscreen Mode Problems
            changes for you. Debian users can run the command
            "dpkg-reconfigure xserver-xfree86" as root, for example.
 
-  Tux Paint keeps running in Full Screen mode - I want it windowed!
+   Tux Paint keeps running in Full Screen mode - I want it windowed!
 
            The "fullscreen" option is set.
 
@@ -504,7 +498,7 @@ Fullscreen Mode Problems
 
 Other Probelms
 
-  Tux Paint won't run
+   Tux Paint won't run
 
            If Tux Paint aborts with the message: "You're already running a
            copy of Tux Paint!", this means it has been launched in the last
@@ -530,7 +524,7 @@ Other Probelms
            To disable the lockfile, add the "--nolockfile" argument to
            Tux Paint's command-line.
 
-  I can't quit Tux Paint
+   I can't quit Tux Paint
 
            The "noquit" option is set. This disables the "Quit" button in
            Tux Paint's toolbar (greying it out), and prevents Tux Paint from
@@ -547,7 +541,7 @@ Other Probelms
            (Note: with or without "noquit" set, you can always use the [Alt]
            + [F4] combination on your keyboard to quit Tux Paint.)
 
-  I don't want "noquit" mode enabled!
+   I don't want "noquit" mode enabled!
 
            If you're running Tux Paint from a command-line, make sure you're
            not giving it a "--noquit" option.
@@ -567,7 +561,7 @@ Other Probelms
            Or use Tux Paint Config. and make sure "Disable Quit Button and
            [Escape] Key" (under "Simplification") is not checked.
 
-  Tux Paint keeps writing weird messages to the screen / to a text file
+   Tux Paint keeps writing weird messages to the screen / to a text file
 
            A few messages are normal, but if Tux Paint is being extremely
            verbose (like listing the name of every rubber-stamp image it
@@ -581,7 +575,7 @@ Other Probelms
 
            in the "tuxpaint.c" file in the "src" directory.
 
-  Tux Paint is using options I didn't specify!
+   Tux Paint is using options I didn't specify!
 
            By default, Tux Paint first looks at configuration files for
            options.

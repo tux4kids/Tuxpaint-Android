@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-15 16:42-0700\n"
-"PO-Revision-Date: 2017-12-03 07:56+0100\n"
+"PO-Revision-Date: 2020-12-08 10:39+0100\n"
 "Last-Translator: Chion Jacques <jacques.chion@orange.fr>\n"
 "Language-Team: <fr@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #. Response to Black (0, 0, 0) color selected
 #: ../colors.h:86
@@ -323,23 +323,23 @@ msgstr "Un octogone a huit côtés égaux."
 
 #: ../shapes.h:320 ../shapes.h:321
 msgid "A star with 3 points."
-msgstr "Étoile à 3 branches"
+msgstr "Étoile à 3 branches."
 
 #: ../shapes.h:322 ../shapes.h:323
 msgid "A star with 4 points."
-msgstr "Étoile à 4 branches"
+msgstr "Étoile à 4 branches."
 
 #: ../shapes.h:324 ../shapes.h:325
 msgid "A star with 5 points."
-msgstr "Étoile à 5 branches"
+msgstr "Étoile à 5 branches."
 
 #: ../shapes.h:372
 msgid "Draw shapes from the center."
-msgstr ""
+msgstr "Dessine des objets depuis le centre."
 
 #: ../shapes.h:373
 msgid "Draw shapes from a corner."
-msgstr ""
+msgstr "Dessine des objets depuis un coin."
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:56
@@ -472,16 +472,13 @@ msgstr ""
 "Clique pour commencer à dessiner une ligne. Puis continue pour la compléter."
 
 #: ../tools.h:125
-#, fuzzy
-#| msgid ""
-#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
-#| "size you want. Move around to rotate it, and click to draw it."
 msgid ""
 "Pick a shape. Click to start drawing, drag, and let go when it is the size "
 "you want. Move around to rotate it, and click to draw it."
 msgstr ""
-"Choisis une forme. Clique en son centre, choisis sa place et sa taille tout "
-"en appuyant, fais-la tourner, et clique enfin pour la dessiner."
+"Choisis une forme. Clique pour démarrer le dessin, fais glisser, et continue "
+"jusqu'à la taille désirée. Déplace-toi pour la faire tourner, et clique pour "
+"dessiner."
 
 #: ../tools.h:129
 msgid ""
@@ -537,7 +534,7 @@ msgstr ""
 #. Response to 'open' action (while file dialog is being constructed)
 #: ../tools.h:154
 msgid "Open…"
-msgstr "Ouvrir.."
+msgstr "Ouvrir ..."
 
 #. Response to 'save' action
 #: ../tools.h:157
@@ -547,7 +544,7 @@ msgstr "Ton image a été sauvegardée !"
 #. Response to 'print' action (while printing, or print dialog is being used)
 #: ../tools.h:160
 msgid "Printing…"
-msgstr "Impression.."
+msgstr "Impression ..."
 
 #. Response to 'quit' (exit) action
 #: ../tools.h:163
@@ -667,34 +664,26 @@ msgstr "N'oublie pas d'utiliser le bouton gauche de la souris !"
 
 #. Confirmation of successful (we hope) image export
 #: ../tuxpaint.c:2190
-#, fuzzy
-#| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
-msgstr "Ton image a été imprimée !"
+msgstr "Ton image a été exportée !"
 
 #: ../tuxpaint.c:2191
-#, fuzzy
-#| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
-msgstr "Ton image a été imprimée !"
+msgstr "Ton image GIF a été exportée !"
 
 #. We got an error exporting
 #: ../tuxpaint.c:2195
-#, fuzzy
-#| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
-msgstr "Désolé, ton image n'a pas pu être imprimée !"
+msgstr "Désolé, ton image n'a pas pu être exportée !"
 
 #: ../tuxpaint.c:2196
-#, fuzzy
-#| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
-msgstr "Désolé, ton image n'a pas pu être imprimée !"
+msgstr "Désolé, ton image GIF n'a pas pu être exportée !"
 
 #. Slideshow instructions
 #: ../tuxpaint.c:2200
 msgid "Choose the pictures you want, then click “Play”."
-msgstr "Choisis les images que tu veux, puis clique sur “Départ”"
+msgstr "Choisis les images que tu veux, puis clique sur “Départ”."
 
 #. Sound has been muted (silenced) via keyboard shortcut
 #: ../tuxpaint.c:2407
@@ -709,7 +698,7 @@ msgstr "Son activé."
 #. Wait while Text tool finishes loading fonts
 #: ../tuxpaint.c:3167
 msgid "Please wait…"
-msgstr "Attends s'il te plaît .."
+msgstr "Attends s'il te plaît ..."
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
 #: ../tuxpaint.c:7923
@@ -724,7 +713,7 @@ msgstr "Diapos"
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
 #: ../tuxpaint.c:7929
 msgid "Export"
-msgstr ""
+msgstr "Exporter"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
 #: ../tuxpaint.c:7932
@@ -739,7 +728,7 @@ msgstr "Départ"
 #. Slideshow: 'GIF Export' button, to create an animated GIF
 #: ../tuxpaint.c:7938
 msgid "GIF Export"
-msgstr ""
+msgstr "Exporter en GIF"
 
 #. Slideshow: 'Next' button, to load next slide (image)
 #: ../tuxpaint.c:7941
@@ -782,14 +771,14 @@ msgstr "Non, c'est une nouvelle image !"
 #. Instructions for 'Open' file dialog
 #: ../tuxpaint.c:14454
 msgid "Choose the picture you want, then click “Open”."
-msgstr "Choisis une image, et clique ensuite sur “Ouvrir”"
+msgstr "Choisis une image, et clique ensuite sur “Ouvrir”."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
 #: ../tuxpaint.c:15880
 msgid "Select 2 or more drawings to turn into an animated GIF."
-msgstr ""
+msgstr "Sélectionner 2 ou plusieurs dessins pour créer une image animée GIF."
 
 #: ../tuxpaint.c:23539
 msgid "Select a color from your drawing."
@@ -1259,7 +1248,7 @@ msgstr ""
 
 #: ../../magic/src/puzzle.c:103
 msgid "Puzzle"
-msgstr "Puzzle "
+msgstr "Puzzle"
 
 #: ../../magic/src/puzzle.c:110
 msgid "Click the part of your picture where would you like a puzzle."
@@ -1573,7 +1562,7 @@ msgstr "Clique et promène la souris pour dessiner un effet Xor"
 #
 #: ../../magic/src/xor.c:101
 msgid "Click to draw a XOR effect on the whole picture"
-msgstr "Clique pour avoir un effet Xor sur l'ensemble de l'image."
+msgstr "Clique pour avoir un effet Xor sur l'ensemble de l'image"
 
 #~ msgid "Black & White"
 #~ msgstr "Gris"

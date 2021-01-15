@@ -1,6 +1,6 @@
 /* ANSI-C code produced by gperf version 3.1 */
 /* Command-line: /usr/bin/gperf src/parse.gperf  */
-/* Computed positions: -k'1,3,14,$' */
+/* Computed positions: -k'2-3,14,$' */
 
 #if !((' ' == 32) && ('!' == 33) && ('"' == 34) && ('#' == 35) \
       && ('%' == 37) && ('&' == 38) && ('\'' == 39) && ('(' == 40) \
@@ -119,12 +119,12 @@ static void imm_copying(void)
 #line 95 "src/parse.gperf"
 struct cfg;
 
-#define TOTAL_KEYWORDS 94
+#define TOTAL_KEYWORDS 95
 #define MIN_WORD_LENGTH 4
 #define MAX_WORD_LENGTH 32
-#define MIN_HASH_VALUE 13
-#define MAX_HASH_VALUE 230
-/* maximum key range = 218, duplicates = 0 */
+#define MIN_HASH_VALUE 16
+#define MAX_HASH_VALUE 189
+/* maximum key range = 174, duplicates = 0 */
 
 #ifdef __TUXC__
 __inline
@@ -138,19 +138,19 @@ hash (register const char *str, register size_t len)
 {
   static const unsigned char asso_values[] =
     {
-      231, 231, 231, 231, 231, 231, 231, 231, 231, 231,
-      231, 231, 231, 231, 231, 231, 231, 231, 231, 231,
-      231, 231, 231, 231, 231, 231, 231, 231, 231, 231,
-      231, 231, 231, 231, 231, 231, 231, 231, 231, 231,
-      231, 231, 231, 231, 231, 231, 231, 231, 231, 231,
-      231, 231, 231, 231, 231, 231, 231, 231, 231, 231,
-      231, 231, 231, 231, 231, 231, 231, 231, 231, 231,
-      231, 231, 231, 231, 231, 231, 231, 231, 231, 231,
-      231, 231, 231, 231, 231, 231, 231, 231, 231, 231,
-      231, 231, 231, 231, 231, 231, 231,  35,  75,  40,
-       40,  20,  50,  65,  55,  15,   5,  70,  75,  50,
-       15,   0,  60,   5,  30,   5,   0,  65,  50,  10,
-       10,   0, 231, 231, 231, 231, 231, 231
+      190, 190, 190, 190, 190, 190, 190, 190, 190, 190,
+      190, 190, 190, 190, 190, 190, 190, 190, 190, 190,
+      190, 190, 190, 190, 190, 190, 190, 190, 190, 190,
+      190, 190, 190, 190, 190, 190, 190, 190, 190, 190,
+      190, 190, 190, 190, 190, 190, 190, 190, 190, 190,
+      190, 190, 190, 190, 190, 190, 190, 190, 190, 190,
+      190, 190, 190, 190, 190, 190, 190, 190, 190, 190,
+      190, 190, 190, 190, 190, 190, 190, 190, 190, 190,
+      190, 190, 190, 190, 190, 190, 190, 190, 190, 190,
+      190, 190, 190, 190, 190, 190, 190,  55,  80,  10,
+       55,  10,   0,  65,   5,  50, 190,   0,  15, 100,
+       40,   0,  65, 190,  35,   5,   0,  70,  35,  20,
+       10,  20, 190, 190, 190, 190, 190, 190
     };
   register unsigned int hval = len;
 
@@ -173,8 +173,7 @@ hash (register const char *str, register size_t len)
         hval += asso_values[(unsigned char)str[2]];
       /*FALLTHROUGH*/
       case 2:
-      case 1:
-        hval += asso_values[(unsigned char)str[0]];
+        hval += asso_values[(unsigned char)str[1]];
         break;
     }
   return hval + asso_values[(unsigned char)str[len - 1]];
@@ -186,239 +185,236 @@ in_word_set (register const char *str, register size_t len)
   static const struct cfg wordlist[] =
     {
       {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-      {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-#line 134 "src/parse.gperf"
-      {"outlines",            NEGBOOL(dont_do_xor)},
-      {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-#line 146 "src/parse.gperf"
-      {"shortcuts",           NEGBOOL(noshortcuts)},
-      {"",0},
-#line 133 "src/parse.gperf"
-      {"orient",              MULTI(rotate_orientation)},
-#line 180 "src/parse.gperf"
-      {"joystick-btn-text",     MULTI(joystick_button_selecttexttool)},
-#line 157 "src/parse.gperf"
-      {"sysfonts",            NEGBOOL(no_system_fonts)},
-#line 140 "src/parse.gperf"
-      {"quit",                NEGBOOL(disable_quit)},
-#line 174 "src/parse.gperf"
-      {"joystick-hat-timeout",  MULTI(joystick_hat_timeout)},
-      {"",0},
-#line 172 "src/parse.gperf"
-      {"joystick-maxsteps",   MULTI(joystick_maxsteps)},
-      {"",0},
-#line 167 "src/parse.gperf"
-      {"onscreen-keyboard-layout",         MULTI(onscreen_keyboard_layout)},
-      {"",0},
-#line 150 "src/parse.gperf"
+      {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
+      {"",0}, {"",0},
+#line 151 "src/parse.gperf"
       {"stereo",              POSBOOL(use_stereo)},
       {"",0}, {"",0},
-#line 179 "src/parse.gperf"
-      {"joystick-btn-shapes",   MULTI(joystick_button_selectshapestool)},
-      {"",0},
-#line 173 "src/parse.gperf"
-      {"joystick-hat-slowness", MULTI(joystick_hat_slowness)},
-#line 187 "src/parse.gperf"
-      {"joystick-btn-open",     MULTI(joystick_button_open)},
-#line 132 "src/parse.gperf"
-      {"newcolorslast",       POSBOOL(new_colors_last)},
-#line 131 "src/parse.gperf"
-      {"newcolorsfirst",      NEGBOOL(new_colors_last)},
-      {"",0},
-#line 130 "src/parse.gperf"
-      {"native",              POSBOOL(native_screensize)},
-#line 170 "src/parse.gperf"
-      {"joystick-slowness",   MULTI(joystick_slowness)},
+#line 147 "src/parse.gperf"
+      {"shortcuts",           NEGBOOL(noshortcuts)},
+      {"",0}, {"",0}, {"",0},
 #line 100 "src/parse.gperf"
       {"altprint",            MULTI(alt_print_command_default)},
-      {"",0},
-#line 147 "src/parse.gperf"
-      {"showcursor",          NEGBOOL(hide_cursor)},
-#line 186 "src/parse.gperf"
-      {"joystick-btn-new",      MULTI(joystick_button_new)},
-#line 188 "src/parse.gperf"
-      {"joystick-btn-save",     MULTI(joystick_button_save)},
-#line 191 "src/parse.gperf"
-      {"joystick-buttons-ignore",    MULTI(joystick_buttons_ignore)},
-#line 155 "src/parse.gperf"
-      {"startlast",           NEGBOOL(start_blank)},
-      {"",0},
-#line 152 "src/parse.gperf"
-      {"stamps",              NEGBOOL(dont_load_stamps)},
-#line 184 "src/parse.gperf"
-      {"joystick-btn-redo",     MULTI(joystick_button_redo)},
       {"",0}, {"",0},
-#line 164 "src/parse.gperf"
-      {"windowsize",          MULTI(parsertmp_windowsize)},
-      {"",0},
-#line 168 "src/parse.gperf"
-      {"onscreen-keyboard-disable-change", POSBOOL(onscreen_keyboard_disable_change)},
-#line 151 "src/parse.gperf"
-      {"stampcontrols",       NEGBOOL(disable_stamp_controls)},
-#line 101 "src/parse.gperf"
-      {"altprintalways",      MULTI(alt_print_command_default)},
-#line 162 "src/parse.gperf"
-      {"wheelmouse",          POSBOOL(wheely)},
-      {"",0},
-#line 166 "src/parse.gperf"
-      {"onscreen-keyboard",   POSBOOL(onscreen_keyboard)},
-#line 105 "src/parse.gperf"
-      {"autosave",            POSBOOL(autosave_on_quit)},
-#line 175 "src/parse.gperf"
-      {"joystick-btn-escape",   MULTI(joystick_button_escape)},
-      {"",0}, {"",0},
-#line 169 "src/parse.gperf"
-      {"joystick-dev",        MULTI(joystick_dev)},
-#line 171 "src/parse.gperf"
-      {"joystick-threshold",  MULTI(joystick_lowthreshold)},
-#line 153 "src/parse.gperf"
-      {"stampsize",           MULTI(stamp_size_override)},
-      {"",0}, {"",0},
-#line 148 "src/parse.gperf"
-      {"simpleshapes",        POSBOOL(simple_shapes)},
-#line 163 "src/parse.gperf"
-      {"windowed",            NEGBOOL(fullscreen)},
-#line 185 "src/parse.gperf"
-      {"joystick-btn-eraser",   MULTI(joystick_button_selecterasertool)},
-      {"",0},
-#line 145 "src/parse.gperf"
-      {"saveovernew",         POSBOOL(_promptless_save_over_new)},
-#line 111 "src/parse.gperf"
-      {"datadir",             MULTI(datadir)},
-#line 104 "src/parse.gperf"
-      {"altprintnever",       MULTI(alt_print_command_default)},
-#line 141 "src/parse.gperf"
-      {"save",                NEGBOOL(disable_save)},
-#line 136 "src/parse.gperf"
-      {"print",               NEGBOOL(disable_print)},
-      {"",0},
-#line 116 "src/parse.gperf"
-      {"fancycursors",        NEGBOOL(no_fancy_cursors)},
-#line 190 "src/parse.gperf"
-      {"joystick-btn-print",    MULTI(joystick_button_print)},
-#line 156 "src/parse.gperf"
-      {"sysconfig",           POSBOOL(parsertmp_sysconfig)},
-#line 139 "src/parse.gperf"
-      {"printdelay",          MULTI(print_delay)},
-#line 103 "src/parse.gperf"
-      {"altprintmod",         MULTI(alt_print_command_default)},
-#line 183 "src/parse.gperf"
-      {"joystick-btn-undo",     MULTI(joystick_button_undo)},
-#line 177 "src/parse.gperf"
-      {"joystick-btn-stamp",    MULTI(joystick_button_selectstamptool)},
-#line 128 "src/parse.gperf"
-      {"mixedcase",           NEGBOOL(only_uppercase)},
-      {"",0}, {"",0},
-#line 142 "src/parse.gperf"
-      {"savedir",             MULTI(savedir)},
-#line 143 "src/parse.gperf"
-      {"saveover",            POSBOOL(_promptless_save_over)},
-      {"",0}, {"",0}, {"",0},
-#line 127 "src/parse.gperf"
-      {"mirrorstamps",        POSBOOL(mirrorstamps)},
-#line 112 "src/parse.gperf"
-      {"disablescreensaver",  POSBOOL(disable_screensaver)},
-      {"",0}, {"",0}, {"",0},
-#line 161 "src/parse.gperf"
-      {"version",             IMM(version)},
-#line 178 "src/parse.gperf"
-      {"joystick-btn-lines",    MULTI(joystick_button_selectlinestool)},
-      {"",0},
-#line 102 "src/parse.gperf"
-      {"altprintcommand",     MULTI(altprintcommand)},
-      {"",0},
-#line 106 "src/parse.gperf"
-      {"buttondistinction",   NEGBOOL(no_button_distinction)},
-#line 108 "src/parse.gperf"
-      {"complexshapes",       NEGBOOL(simple_shapes)},
-      {"",0},
-#line 160 "src/parse.gperf"
-      {"verbose-version",     IMM(verbose_version)},
-      {"",0}, {"",0},
-#line 182 "src/parse.gperf"
-      {"joystick-btn-magic",    MULTI(joystick_button_selectmagictool)},
-      {"",0},
-#line 149 "src/parse.gperf"
-      {"sound",               POSBOOL(use_sound)},
-      {"",0}, {"",0},
-#line 121 "src/parse.gperf"
-      {"keyboard",            POSBOOL(keymouse)},
-#line 115 "src/parse.gperf"
-      {"exportdir",           MULTI(exportdir)},
-#line 154 "src/parse.gperf"
-      {"startblank",          POSBOOL(start_blank)},
-      {"",0}, {"",0}, {"",0}, {"",0},
-#line 159 "src/parse.gperf"
-      {"usage",               IMM(usage)},
-#line 114 "src/parse.gperf"
-      {"dontmirrorstamps",    NEGBOOL(mirrorstamps)},
-#line 138 "src/parse.gperf"
-      {"printcommand",        MULTI(printcommand)},
-      {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-#line 126 "src/parse.gperf"
-      {"magiccontrols",       NEGBOOL(disable_magic_controls)},
-#line 98 "src/parse.gperf"
-      {"alllocalefonts",      POSBOOL(all_locale_fonts)},
-#line 120 "src/parse.gperf"
-      {"hidecursor",          POSBOOL(hide_cursor)},
-#line 144 "src/parse.gperf"
-      {"saveoverask",         POSBOOL(_promptless_save_over_ask)},
-#line 110 "src/parse.gperf"
-      {"currentlocalefont",   NEGBOOL(all_locale_fonts)},
-#line 113 "src/parse.gperf"
-      {"dontgrab",            NEGBOOL(grab_input)},
-      {"",0},
-#line 129 "src/parse.gperf"
-      {"mouse",               NEGBOOL(keymouse)},
 #line 124 "src/parse.gperf"
       {"locale",              MULTI(parsertmp_locale)},
       {"",0},
 #line 125 "src/parse.gperf"
       {"lockfile",            POSBOOL(ok_to_use_lockfile)},
+      {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
 #line 107 "src/parse.gperf"
       {"colorfile",           MULTI(colorfile)},
+#line 163 "src/parse.gperf"
+      {"wheelmouse",          POSBOOL(wheely)},
+      {"",0},
+#line 181 "src/parse.gperf"
+      {"joystick-btn-text",     MULTI(joystick_button_selecttexttool)},
+#line 158 "src/parse.gperf"
+      {"sysfonts",            NEGBOOL(no_system_fonts)},
+#line 101 "src/parse.gperf"
+      {"altprintalways",      MULTI(alt_print_command_default)},
+#line 175 "src/parse.gperf"
+      {"joystick-hat-timeout",  MULTI(joystick_hat_timeout)},
+      {"",0},
+#line 173 "src/parse.gperf"
+      {"joystick-maxsteps",   MULTI(joystick_maxsteps)},
+#line 133 "src/parse.gperf"
+      {"newcolorslast",       POSBOOL(new_colors_last)},
+#line 132 "src/parse.gperf"
+      {"newcolorsfirst",      NEGBOOL(new_colors_last)},
+      {"",0}, {"",0}, {"",0}, {"",0},
+#line 180 "src/parse.gperf"
+      {"joystick-btn-shapes",   MULTI(joystick_button_selectshapestool)},
+#line 148 "src/parse.gperf"
+      {"showcursor",          NEGBOOL(hide_cursor)},
+#line 174 "src/parse.gperf"
+      {"joystick-hat-slowness", MULTI(joystick_hat_slowness)},
 #line 189 "src/parse.gperf"
-      {"joystick-btn-pgsetup",  MULTI(joystick_button_pagesetup)},
-      {"",0}, {"",0},
-#line 137 "src/parse.gperf"
-      {"printcfg",            POSBOOL(use_print_config)},
+      {"joystick-btn-save",     MULTI(joystick_button_save)},
+#line 192 "src/parse.gperf"
+      {"joystick-buttons-ignore",    MULTI(joystick_buttons_ignore)},
+#line 98 "src/parse.gperf"
+      {"alllocalefonts",      POSBOOL(all_locale_fonts)},
+      {"",0}, {"",0}, {"",0},
+#line 179 "src/parse.gperf"
+      {"joystick-btn-lines",    MULTI(joystick_button_selectlinestool)},
+#line 176 "src/parse.gperf"
+      {"joystick-btn-escape",   MULTI(joystick_button_escape)},
+      {"",0}, {"",0}, {"",0},
+#line 104 "src/parse.gperf"
+      {"altprintnever",       MULTI(alt_print_command_default)},
+#line 156 "src/parse.gperf"
+      {"startlast",           NEGBOOL(start_blank)},
+#line 155 "src/parse.gperf"
+      {"startblank",          POSBOOL(start_blank)},
+#line 153 "src/parse.gperf"
+      {"stamps",              NEGBOOL(dont_load_stamps)},
+#line 170 "src/parse.gperf"
+      {"joystick-dev",        MULTI(joystick_dev)},
+#line 182 "src/parse.gperf"
+      {"joystick-btn-label",    MULTI(joystick_button_selectlabeltool)},
+#line 168 "src/parse.gperf"
+      {"onscreen-keyboard-layout",         MULTI(onscreen_keyboard_layout)},
+      {"",0},
+#line 131 "src/parse.gperf"
+      {"native",              POSBOOL(native_screensize)},
+#line 185 "src/parse.gperf"
+      {"joystick-btn-redo",     MULTI(joystick_button_redo)},
+#line 152 "src/parse.gperf"
+      {"stampcontrols",       NEGBOOL(disable_stamp_controls)},
+#line 154 "src/parse.gperf"
+      {"stampsize",           MULTI(stamp_size_override)},
+#line 160 "src/parse.gperf"
+      {"usage",               IMM(usage)},
+      {"",0},
+#line 188 "src/parse.gperf"
+      {"joystick-btn-open",     MULTI(joystick_button_open)},
+#line 127 "src/parse.gperf"
+      {"shapecontrols",       NEGBOOL(disable_shape_controls)},
+#line 129 "src/parse.gperf"
+      {"mixedcase",           NEGBOOL(only_uppercase)},
+      {"",0},
+#line 103 "src/parse.gperf"
+      {"altprintmod",         MULTI(alt_print_command_default)},
+#line 171 "src/parse.gperf"
+      {"joystick-slowness",   MULTI(joystick_slowness)},
 #line 135 "src/parse.gperf"
-      {"papersize",           MULTI(papersize)},
+      {"outlines",            NEGBOOL(dont_do_xor)},
+#line 186 "src/parse.gperf"
+      {"joystick-btn-eraser",   MULTI(joystick_button_selecterasertool)},
+#line 130 "src/parse.gperf"
+      {"mouse",               NEGBOOL(keymouse)},
+      {"",0},
+#line 169 "src/parse.gperf"
+      {"onscreen-keyboard-disable-change", POSBOOL(onscreen_keyboard_disable_change)},
+#line 105 "src/parse.gperf"
+      {"autosave",            POSBOOL(autosave_on_quit)},
+      {"",0},
+#line 137 "src/parse.gperf"
+      {"print",               NEGBOOL(disable_print)},
+#line 134 "src/parse.gperf"
+      {"orient",              MULTI(rotate_orientation)},
+#line 162 "src/parse.gperf"
+      {"version",             IMM(version)},
+#line 121 "src/parse.gperf"
+      {"keyboard",            POSBOOL(keymouse)},
+#line 119 "src/parse.gperf"
+      {"help",                IMM(help)},
+      {"",0},
+#line 187 "src/parse.gperf"
+      {"joystick-btn-new",      MULTI(joystick_button_new)},
+#line 111 "src/parse.gperf"
+      {"datadir",             MULTI(datadir)},
+#line 172 "src/parse.gperf"
+      {"joystick-threshold",  MULTI(joystick_lowthreshold)},
+#line 157 "src/parse.gperf"
+      {"sysconfig",           POSBOOL(parsertmp_sysconfig)},
+#line 161 "src/parse.gperf"
+      {"verbose-version",     IMM(verbose_version)},
+#line 145 "src/parse.gperf"
+      {"saveoverask",         POSBOOL(_promptless_save_over_ask)},
+#line 128 "src/parse.gperf"
+      {"mirrorstamps",        POSBOOL(mirrorstamps)},
+#line 191 "src/parse.gperf"
+      {"joystick-btn-print",    MULTI(joystick_button_print)},
+#line 142 "src/parse.gperf"
+      {"save",                NEGBOOL(disable_save)},
+      {"",0}, {"",0},
+#line 184 "src/parse.gperf"
+      {"joystick-btn-undo",     MULTI(joystick_button_undo)},
+#line 178 "src/parse.gperf"
+      {"joystick-btn-stamp",    MULTI(joystick_button_selectstamptool)},
+      {"",0},
+#line 165 "src/parse.gperf"
+      {"windowsize",          MULTI(parsertmp_windowsize)},
+      {"",0},
+#line 116 "src/parse.gperf"
+      {"fancycursors",        NEGBOOL(no_fancy_cursors)},
+#line 112 "src/parse.gperf"
+      {"disablescreensaver",  POSBOOL(disable_screensaver)},
+      {"",0},
+#line 140 "src/parse.gperf"
+      {"printdelay",          MULTI(print_delay)},
+#line 99 "src/parse.gperf"
+      {"allowscreensaver",    NEGBOOL(disable_screensaver)},
+#line 167 "src/parse.gperf"
+      {"onscreen-keyboard",   POSBOOL(onscreen_keyboard)},
+#line 108 "src/parse.gperf"
+      {"complexshapes",       NEGBOOL(simple_shapes)},
+#line 115 "src/parse.gperf"
+      {"exportdir",           MULTI(exportdir)},
+      {"",0},
+#line 146 "src/parse.gperf"
+      {"saveovernew",         POSBOOL(_promptless_save_over_new)},
+#line 110 "src/parse.gperf"
+      {"currentlocalefont",   NEGBOOL(all_locale_fonts)},
+#line 177 "src/parse.gperf"
+      {"joystick-btn-brush",    MULTI(joystick_button_selectbrushtool)},
+#line 141 "src/parse.gperf"
+      {"quit",                NEGBOOL(disable_quit)},
+#line 102 "src/parse.gperf"
+      {"altprintcommand",     MULTI(altprintcommand)},
+      {"",0},
+#line 106 "src/parse.gperf"
+      {"buttondistinction",   NEGBOOL(no_button_distinction)},
+#line 113 "src/parse.gperf"
+      {"dontgrab",            NEGBOOL(grab_input)},
+      {"",0},
+#line 150 "src/parse.gperf"
+      {"sound",               POSBOOL(use_sound)},
+      {"",0},
+#line 143 "src/parse.gperf"
+      {"savedir",             MULTI(savedir)},
+#line 144 "src/parse.gperf"
+      {"saveover",            POSBOOL(_promptless_save_over)},
+      {"",0},
 #line 117 "src/parse.gperf"
       {"fullscreen",          MULTI(parsertmp_fullscreen_native)},
-      {"",0}, {"",0},
-#line 176 "src/parse.gperf"
-      {"joystick-btn-brush",    MULTI(joystick_button_selectbrushtool)},
-#line 158 "src/parse.gperf"
-      {"uppercase",           POSBOOL(only_uppercase)},
-      {"",0}, {"",0}, {"",0}, {"",0},
-#line 123 "src/parse.gperf"
-      {"lang",                MULTI(parsertmp_lang)},
-      {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-      {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
+      {"",0},
 #line 109 "src/parse.gperf"
       {"copying",             IMM(copying)},
-#line 181 "src/parse.gperf"
-      {"joystick-btn-label",    MULTI(joystick_button_selectlabeltool)},
-      {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
+#line 126 "src/parse.gperf"
+      {"magiccontrols",       NEGBOOL(disable_magic_controls)},
+#line 136 "src/parse.gperf"
+      {"papersize",           MULTI(papersize)},
+      {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
+      {"",0},
+#line 183 "src/parse.gperf"
+      {"joystick-btn-magic",    MULTI(joystick_button_selectmagictool)},
+#line 159 "src/parse.gperf"
+      {"uppercase",           POSBOOL(only_uppercase)},
+#line 120 "src/parse.gperf"
+      {"hidecursor",          POSBOOL(hide_cursor)},
+      {"",0},
+#line 139 "src/parse.gperf"
+      {"printcommand",        MULTI(printcommand)},
+#line 164 "src/parse.gperf"
+      {"windowed",            NEGBOOL(fullscreen)},
+      {"",0},
+#line 122 "src/parse.gperf"
+      {"label",               NEGBOOL(disable_label)},
+      {"",0}, {"",0},
+#line 138 "src/parse.gperf"
+      {"printcfg",            POSBOOL(use_print_config)},
+      {"",0}, {"",0},
+#line 114 "src/parse.gperf"
+      {"dontmirrorstamps",    NEGBOOL(mirrorstamps)},
+      {"",0}, {"",0},
+#line 123 "src/parse.gperf"
+      {"lang",                MULTI(parsertmp_lang)},
+      {"",0}, {"",0},
+#line 149 "src/parse.gperf"
+      {"simpleshapes",        POSBOOL(simple_shapes)},
+      {"",0}, {"",0},
+#line 190 "src/parse.gperf"
+      {"joystick-btn-pgsetup",  MULTI(joystick_button_pagesetup)},
+      {"",0}, {"",0}, {"",0},
 #line 118 "src/parse.gperf"
       {"grab",                POSBOOL(grab_input)},
       {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
       {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-#line 119 "src/parse.gperf"
-      {"help",                IMM(help)},
-      {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-      {"",0}, {"",0}, {"",0}, {"",0},
-#line 99 "src/parse.gperf"
-      {"allowscreensaver",    NEGBOOL(disable_screensaver)},
-      {"",0}, {"",0},
-#line 165 "src/parse.gperf"
-      {"mouse-accessibility", POSBOOL(mouseaccessibility)},
-      {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-      {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-      {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-#line 122 "src/parse.gperf"
-      {"label",               NEGBOOL(disable_label)}
+#line 166 "src/parse.gperf"
+      {"mouse-accessibility", POSBOOL(mouseaccessibility)}
     };
 
   if (len <= MAX_WORD_LENGTH && len >= MIN_WORD_LENGTH)
@@ -435,7 +431,7 @@ in_word_set (register const char *str, register size_t len)
     }
   return 0;
 }
-#line 192 "src/parse.gperf"
+#line 193 "src/parse.gperf"
 
 
 void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const char *opt, const char *restrict src)
