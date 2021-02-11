@@ -347,6 +347,46 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layoutButtonsize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/viewButtonsize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Button_size" />
+
+        <Spinner
+            android:id="@+id/spinnerButtonsize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/buttonsizes"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutColorsrows"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/viewColorsrows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Colors_rows" />
+
+        <Spinner
+            android:id="@+id/spinnerColorsrows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/colors_rows"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/layoutbuttonUnderstood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
