@@ -1,5 +1,5 @@
-.\" tuxpaint.1 - 2020.12.27
-.TH TUXPAINT 1 "27 December 2020" "0.9.25" "Tux Paint"
+.\" tuxpaint.1 - 2021.02.05
+.TH TUXPAINT 1 "5 February 2021" "0.9.26" "Tux Paint"
 .SH NAME
 tuxpaint -- "Tux Paint", a drawing program for young children.
 
@@ -18,6 +18,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-native]
 .br
 [\-\-orient=portrait]
+.br
+[\-\-buttonsize SIZE]
 .br
 [\-\-startblank]
 .br
@@ -68,6 +70,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-newcolorslast]
 .br
 [\-\-mirrorstamps]
+.br
+[\-\-colorsrows=\fIROWS\fP]
 .br
 [\-\-mouse-accessibility]
 .br
@@ -131,6 +135,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 .br
 [\-\-savedir \fIDIR\fP]
 .br
+[\-\-exportdir \fIDIR\fP]
+.br
 [\-\-datadir \fIDIR\fP]
 .br
 [\-\-saveover]
@@ -152,6 +158,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-800x600]
 .br
 [\-\-orient=landscape]
+.br
+[\-\-buttonsize 48]
 .br
 [\-\-startlast]
 .br
@@ -293,6 +301,12 @@ values it uses for windowed or fullscreen mode, without having to actually
 change the WIDTH and HEIGHT values in the configuration file or on the
 command-line. (This is useful on devices where the screen can be rotated,
 e.g. tablet PCs.)
+
+.TP 8
+.B \-\-buttonsize SIZE
+Adjust the size of the buttons in \fITux Paint's\fP user interface,
+between 24 and 192 pixels (48 is the default, and suitable for displays
+with 96 to 120dpi pixel density).
 
 .TP 8
 .B \-\-nosound \-\-sound
@@ -439,6 +453,12 @@ List solid (blank) colors at the end, or beginning (default) of the
 options displayed when using the \fINew\fP tool to start a new picture.
 
 .TP 8
+.B \-\-colorsrows=\fIrows\fP
+How many rows of color palette buttons to show; useful when using
+a large color palette, and/or for use with coarse input devices
+(like eyegaze trackers).  It can be between 1 (default) and 3.
+
+.TP 8
 .B \-\-mirrorstamps \-\-dontmirrorstamps
 With \fImirrorstamps\fP set, stamps which can be mirrored will appear
 mirrored by default.  This can be useful when used by people who prefer
@@ -484,7 +504,11 @@ Use the \fIalllocalefonts\fP option to load all such fonts, for use in the
 
 .TP 8
 .B \-\-savedir \fIDIR\fP
-Specify where \fITux Paint\fP should save files.
+Specify where \fITux Paint\fP should save and load its drawings.
+
+.TP 8
+.B \-\-exportdir \fIDIR\fP
+Specify where \fITux Paint\fP should export drawings and animations.
 
 .TP 8
 .B \-\-datadir \fIDIR\fP

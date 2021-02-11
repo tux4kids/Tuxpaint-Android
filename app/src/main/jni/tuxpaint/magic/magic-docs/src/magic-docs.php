@@ -5,7 +5,7 @@ individual HTML files for each of them, and an index.html that links to
 them all. */
 
 /* Bill Kendrick <bill@newbreedsoftware.com> */
-/* Oct. 8, 2009 - September 12, 2019 */
+/* Oct. 8, 2009 - January 10, 2020 */
 
 
 /* Authors of the Magic tools: */
@@ -65,7 +65,8 @@ $tools = array(
 
   array('name'=>'Bricks',
    'desc'=>'These two tools intelligently paint large and small brick patterns on the canvas.  The bricks can be tinted various redish hues by selecting different colors in the color palette.',
-   'author'=>$AUTHOR_ALBERT),
+   'author'=>$AUTHOR_ALBERT,
+   'see'=>'Pixels'),
 
   array('name'=>'Calligraphy',
    'desc'=>'This paints on the canvas with a calligraphy pen. The quicker you move, the thinner the lines.',
@@ -77,6 +78,10 @@ $tools = array(
 
   array('name'=>'Chalk',
    'desc'=>'This makes parts of the picture (where you move the mouse) look like a chalk drawing.',
+   'author'=>$AUTHOR_KENDRICK),
+
+  array('name'=>'Clone',
+   'desc'=>'Clone (copy, via painting) part of the picture. Click ones to choose the source, then click and drag to clone it elsewhere in the drawing. Once you release, click to choose another source and start again.',
    'author'=>$AUTHOR_KENDRICK),
 
   array('name'=>'Color and White',
@@ -226,6 +231,11 @@ $tools = array(
    'author'=>$AUTHOR_ADAMR,
    'see'=>'Rosette', 'Kaleidoscope'),
 
+  array('name'=>'Pixels',
+   'desc'=>'Draw large square "pixels" on the canvas.',
+   'author'=>$AUTHOR_KENDRICK,
+   'see'=>'Bricks'),
+
   array('name'=>'Puzzle',
    'desc'=>'Slide parts of your picture around like a sliding puzzle.',
    'author'=>$AUTHOR_ADAMR),
@@ -372,11 +382,11 @@ foreach ($tools as $t) {
   $out .= "<h2 align=\"center\">By ";
   if (is_array($t['author'])) {
     foreach ($t['author'] as $a) {
-      list($authname, $authemail) = split('\|', $a);
+      list($authname, $authemail) = explode('|', $a);
       $out .= $authname." &lt;<a href=\"mailto:".$authemail."\">".$authemail."</a>&gt;<br>\n";
     }
   } else {
-    list($authname, $authemail) = split('\|', $t['author']);
+    list($authname, $authemail) = explode('|', $t['author']);
     $out .= $authname." &lt;<a href=\"mailto:".$authemail."\">".$authemail."</a>&gt;";
   }
 

@@ -43,6 +43,8 @@ struct cfginfo
   const char *parsertmp_locale;
   const char *parsertmp_sysconfig;
   const char *parsertmp_windowsize;
+  const char *button_size;
+  const char *colors_rows;
   const char *print_delay;
   const char *printcommand;
 //  const char *promptless_save;

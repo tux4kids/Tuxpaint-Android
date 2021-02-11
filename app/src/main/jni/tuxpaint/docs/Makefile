@@ -7,8 +7,7 @@
 # Bill Kendrick
 # bill@newbreedsoftware.com
 # 
-# Sept. 4, 2005 - December 3, 2017
-# $Id$
+# Sept. 4, 2005 - February 5, 2020
 
 LINKS_OPTIONS:=-dump -codepage utf8
 LINKS:=links $(LINKS_OPTIONS)
@@ -20,14 +19,14 @@ COPYING_TEXTFILES:=$(patsubst COPYING/html/%.html,COPYING/%.txt,$(COPYING_HTMLFI
 EN_HTMLFILES:=$(wildcard en/html/*.html)
 EN_TEXTFILES:=$(patsubst en/html/%.html,en/%.txt,$(EN_HTMLFILES))
 
-ES_HTMLFILES:=$(wildcard es/html/*.html)
-ES_TEXTFILES:=$(patsubst es/html/%.html,es/%.txt,$(ES_HTMLFILES))
+ES_HTMLFILES:=$(wildcard es_ES.UTF-8/html/*.html)
+ES_TEXTFILES:=$(patsubst es_ES.UTF-8/html/%.html,es_ES.UTF-8/%.txt,$(ES_HTMLFILES))
 
-FR_HTMLFILES:=$(wildcard fr/html/*.html)
-FR_TEXTFILES:=$(patsubst fr/html/%.html,fr/%.txt,$(FR_HTMLFILES))
+FR_HTMLFILES:=$(wildcard fr_FR.UTF-8/html/*.html)
+FR_TEXTFILES:=$(patsubst fr_FR.UTF-8/html/%.html,fr_FR.UTF-8/%.txt,$(FR_HTMLFILES))
 
-GL_HTMLFILES:=$(wildcard gl/html/*.html)
-GL_TEXTFILES:=$(patsubst gl/html/%.html,gl/%.txt,$(GL_HTMLFILES))
+GL_HTMLFILES:=$(wildcard gl_ES.UTF-8/html/*.html)
+GL_TEXTFILES:=$(patsubst gl_ES.UTF-8/html/%.html,gl_ES.UTF-8/%.txt,$(GL_HTMLFILES))
 
 IT_HTMLFILES:=$(wildcard it/html/*.html)
 IT_TEXTFILES:=$(patsubst it/html/%.html,it/%.txt,$(IT_HTMLFILES))
@@ -82,13 +81,13 @@ $(COPYING_TEXTFILES): COPYING/%.txt: COPYING/html/%.html
 $(EN_TEXTFILES): en/%.txt: en/html/%.html
 	$(LINKS) $< > $@
 
-$(ES_TEXTFILES): es/%.txt: es/html/%.html
+$(ES_TEXTFILES): es_ES.UTF-8/%.txt: es_ES.UTF-8/html/%.html
 	$(LINKS) $< > $@
 
-$(FR_TEXTFILES): fr/%.txt: fr/html/%.html
+$(FR_TEXTFILES): fr_FR.UTF-8/%.txt: fr_FR.UTF-8/html/%.html
 	$(LINKS) $< > $@
 
-$(GL_TEXTFILES): gl/%.txt: gl/html/%.html
+$(GL_TEXTFILES): gl_ES.UTF-8/%.txt: gl_ES.UTF-8/html/%.html
 	$(LINKS) $< > $@
 
 $(IT_TEXTFILES): it/%.txt: it/html/%.html

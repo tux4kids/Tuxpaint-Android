@@ -1,21 +1,21 @@
                                    Tux Paint
-                                 version 0.9.25
+                                 version 0.9.26
 
 Options Documentation
 
-        Copyright (c) 2002-2020 by various contributors; see AUTHORS.txt
+          Copyright © 2002-2021 by various contributors; see AUTHORS.
                             http://www.tuxpaint.org/
 
-                               December 27, 2020
+                                5 February 2021
 
      ----------------------------------------------------------------------
 
                                Tux Paint Config.
 
-     As of Tux Paint version 0.9.14, a graphical tool is available that
-     allows you to change Tux Paint's behavior. However, if you'd rather not
-     install and use this tool, or want a better understanding of the
-     available options, please continue reading.
+     A graphical tool is available that allows you to change Tux Paint's
+     behavior. However, if you'd rather not install and use this tool, or
+     want a better understanding of the available options, please continue
+     reading.
 
      ----------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ Linux and Unix Users
 
            --nosysconfig
 
-Mac OS X Users
+macOS Users
 
        The file you should create is called "tuxpaint.cfg" and it should be
        placed in your home folder, under the sub-folder: Library/Application
@@ -116,6 +116,17 @@ Windows Users
              screen's current resolution (overriding any "windowsize"
              option), as set by the operating system.
 
+     buttonsize=SIZE
+
+             Set the pixel size of buttons in Tux Paint's user interface
+             (overriding the default of "48"). Useful when using very
+             high-density displays or coarse input devices, such as eye gaze
+             trackers.
+
+             The SIZE value should be presented in pixels, and can be
+             anything between 24 and 192, inclusive. Most buttons are square,
+             and this will affect their width and height.
+
      allowscreensaver=yes
 
              By default, Tux Paint prevents your system's screensaver from
@@ -165,8 +176,8 @@ Windows Users
                lpr
 
              Note: Versions of Tux Paint prior to 0.9.15 sent PNG format data
-             to the print command (which defaulted to
-             "pngtopnm | pnmtops | lpr").
+             to the print command (which defaulted to "pngtopnm | pnmtops |
+             lpr").
 
              If you set an alternative printcommand in the configuration file
              prior to version 0.9.15, you will need to change it.
@@ -176,10 +187,9 @@ Windows Users
              (Linux and Unix only)
 
              Use the command COMMAND to print a PostScript format file when
-             the 'Print' button is clicked while the [Alt] modifier key is
-             being held. (This is typically used for providing a print
-             dialog, similar to when pressing [Alt]+'Print' in Windows and
-             Mac OS X.)
+             the 'Print' button is clicked while the modifier key is being
+             held. (This is typically used for providing a print dialog,
+             similar to when pressing [Alt]+'Print' in Windows and macOS.)
 
              If this option is not specifically not set, the default command
              is KDE's graphical print dialog:
@@ -191,12 +201,12 @@ Windows Users
              (Windows and macOS only)
 
              Tux Paint will use a printer configuration file when printing.
-             Push the [Alt] key while clicking the 'Print' button in
-             Tux Paint to cause a Windows print dialog window to appear.
+             Push the [Alt] key while clicking the 'Print' button in Tux
+             Paint to cause a Windows print dialog window to appear.
 
              (Note: This only works when not running Tux Paint in fullscreen
              mode.) Any configuration changes made in this dialog will be
-             saved to the file "userdata/print.cfg", and used again, as long
+             saved to the file "userdata/print.cfg" , and used again, as long
              as the "printcfg" option is set.
 
      altprint=always
@@ -248,7 +258,7 @@ Windows Users
              To make Tux Paint ignore the lockfile, allowing it to run again,
              even if it was just launched less than 30 seconds ago, enable
              this setting in the configuration file, or run Tux Paint with
-             the '--nolockfile' option on the command-line.
+             the --nolockfile option on the command-line.
 
              By default, the lockfile is stored in "~/.tuxpaint/" under Linux
              and Unix, and "userdata\" under Windows.
@@ -323,9 +333,8 @@ Windows Users
      sysfonts=yes
 
              This option causes Tux Paint to attempt to load fonts (for use
-             in the Text tool) from your operating system. Normally,
-             Tux Paint will only load the ones that came bundled with
-             Tux Paint.
+             in the Text tool) from your operating system. Normally, Tux
+             Paint will only load the ones that came bundled with Tux Paint.
 
      alllocalefonts=yes
 
@@ -435,63 +444,63 @@ Windows Users
 
      joystick-btn-brush=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to select the brush tool.
+             a shortcut to select the brush tool.
 
      joystick-btn-stamp=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to select the stamp tool.
+             a shortcut to select the stamp tool.
 
      joystick-btn-lines=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to select the lines tool.
+             a shortcut to select the lines tool.
 
      joystick-btn-shapes=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to select the shapes tool.
+             a shortcut to select the shapes tool.
 
      joystick-btn-text=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to select the text tool.
+             a shortcut to select the text tool.
 
      joystick-btn-label=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to select the label tool.
+             a shortcut to select the label tool.
 
      joystick-btn-magic=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to select the magic tool.
+             a shortcut to select the magic tool.
 
      joystick-btn-undo=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to the undo tool.
+             a shortcut to invoke the undo tool.
 
      joystick-btn-redo=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to the redo tool.
+             a shortcut to select redo tool.
 
      joystick-btn-eraser=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt for selecting the eraser tool.
+             a shortcut to select eraser tool.
 
      joystick-btn-new=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to launch the dialog for opening a new draw.
+             a shortcut to launch the dialog for creating a new drawing.
 
      joystick-btn-open=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to launch the dialog for opening an existing draw.
+             a shortcut to launch the dialog for opening an existing drawing.
 
      joystick-btn-save=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt for saving the draw.
+             a shortcut to save the drawing.
 
      joystick-btn-pgsetup=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to launch the page setup dialog for printing.
+             a shortcut to launch the page setup dialog for printing.
 
      joystick-btn-print=BUTTON NUMBER
              Selects the joystick button number, as seen by SDL, that will be
-             a shortcurt to print.
+             a shortcut to print.
 
      joystick-buttons-ignore=BUTTON1,BUTTON2,...
              A set of joystick button numbers, as seen by SDL, that should be
@@ -507,7 +516,7 @@ Windows Users
              stamp, which depends on the stamp itself, and Tux Paint's
              current canvas size.
 
-             Specifc "default" to let Tux Paint decide (it's standard
+             Specify "default" to let Tux Paint decide (its standard
              behavior).
 
      keyboard=yes
@@ -518,7 +527,7 @@ Windows Users
 
              Features:
 
-                * Fine movement within canvas, or coarse movement if [Shift]
+                * Fine movement within canvas, or coarse movement if default
                   is held.
                 * Coarse movement within tool button areas.
                 * Key controls:
@@ -557,17 +566,15 @@ Windows Users
 
                 * Linux & Unix — Under a hidden directory named ".tuxpaint"
                   in your home directory (aka "~" or "$HOME")
-                  Example: "/home/username/.tuxpaint/saved/"
-
+                  Example: /home/username/.tuxpaint/saved/
                 * Windows — Inside a folder named "TuxPaint" in your
                   "Application Data" folder.
-                  Example:
-                  "C:\Documents and Settings\Username\Application Data\TuxPaint\saved\"
-
+                  Example: C:\Documents and Settings\Username\Application
+                  Data\TuxPaint\saved\
                 * macOS — Inside a folder named "TuxPaint" in your
                   "Application Support" folder.
-                  Example:
-                  "/Users/Username/Library/Application Support/TuxPaint/saved/"
+                  Example: /Users/Username/Library/Application
+                  Support/TuxPaint/saved/
 
              Note: When specifying a Windows drive (e.g., "H:\"), you must
              also specify a subdirectory.
@@ -585,31 +592,32 @@ Windows Users
              Use this option to change where Tux Paint exports files — single
              images, or animated GIF slideshows — for external use.
 
-             If you do not override it, the default location is determined as
-             follows:
+             If you do not override it, the default location is:
 
                 * Linux & Unix — If available, wherever your desktop
                   environment is configured for pictures to be stored, based
                   on your XDG (X Desktop Group) configuration. (Try running
                   the command-line "xdg-user-dir PICTURES" to find out.)
-
-                  Typically (in an English locale), this will be a
-                  "Pictures/" subdirectory in your home directory (i.e.,
-                  "$HOME/Pictures/" aka "~/Pictures").
-
+                  Typically (in an English locale), this will be a "Pictures"
+                  subdirectory in your home directory (i.e., "$HOME/Pictures"
+                  aka "~/Pictures").
                   Tux Paint will fall back to using that typical directory,
                   of no XDG configuration can be read, or nothing is set for
                   "XDG_PICTURES_DIR".
-
                 * Windows — TBD! 
                 * macOS — TBD!
 
              Note: When the defaults are used, a new "TuxPaint" subdirectory
              will be created and used. (e.g., "~/Pictures/TuxPaint") When the
              "--exportdir" option is used, the exact path specified will be
-             used (no "TuxPaint" subdirectory is created). It is expected
-             that the parent directory exists. (The directory itself will be
-             created, if it doesn't.)
+             used (no "TuxPaint" subdirectory is created).
+
+             The directory itself (e.g., "~/Pictures/TuxPaint") will be
+             created, if it doesn't exist.
+
+             If the parent directory (e.g., "~/Pictures/TuxPaint") also does
+             not exist, Tux Paint will attempt to create it as well (but not
+             any directories higher than that).
 
              Example: exportdir=/home/penguin/TuxPaintExports
 
@@ -627,17 +635,15 @@ Windows Users
 
                 * Linux & Unix — Under a hidden directory named ".tuxpaint"
                   in your home directory (aka "~" or "$HOME")
-                  Example: "/home/username/.tuxpaint/brushes/"
-
+                  Example: /home/username/.tuxpaint/brushes/
                 * Windows — Inside a folder named "TuxPaint" in your
                   "Application Data" folder.
-                  Example:
-                  "C:\Documents and Settings\Username\Application Data\TuxPaint\brushes\"
-
+                  Example: C:\Documents and Settings\Username\Application
+                  Data\TuxPaint\brushes\
                 * macOS — Inside a folder named "TuxPaint" in your
                   "Application Support" folder.
-                  Example:
-                  "/Users/Username/Library/Application Support/TuxPaint/brushes/"
+                  Example: /Users/Username/Library/Application
+                  Support/TuxPaint/brushes/
 
              Note: Prior to version 0.9.18, Tux Paint would use the same
              setting or default as for "savedir" to search for data files. As
@@ -684,16 +690,16 @@ Windows Users
 
              You may override Tux Paint's default color palette by creating a
              plain ASCII text file that describes the colors you want, and
-             pointing to that file using the colorfile option.
+             pointing to that file using the "colorfile" option.
 
              The file should list one color per line. Colors are defined in
              terms of their Red, Green and Blue values, each from 0 (off) to
              255 (brightest). (For more information, try Wikipedia's "RGB
              color model" article.)
 
-             Colors may be listed using three decimal numbers (e.g.,
-             "255 68 136") or a 6- or 3-digit-long hexadecimal 'triplet'
-             (e.g., "#ff4488" or "#F48").
+             Colors may be listed using three decimal numbers (e.g., "255 68
+             136") or a 6- or 3-digit-long hexadecimal 'triplet' (e.g.,
+             "#ff4488" or "#F48").
 
              After the color definition (on the same line) you may enter text
              to describe the color. Tux will display this text when the color
@@ -707,6 +713,13 @@ Windows Users
              3-digit hexadecimal, each digit is used for both the high and
              low halves of the byte, so "#FFF" is the same as "#FFFFFF", not
              "#F0F0F0".
+
+     colorsrows=ROWS
+
+             How many rows of color palette buttons to show; useful when
+             using a large color palette (see "colorfile", above), and/or for
+             use with coarse input devices (like eyegaze trackers). "ROWS"
+             may be between "1" (the default) and "3".
 
      lang=LANGUAGE
 
@@ -971,7 +984,7 @@ Windows Users
 
      ----------------------------------------------------------------------
 
-              Overriding System Config. Options using .tuxpaintrc
+                       Overriding System Config. Options
 
      (For Linux and Unix users)
 
@@ -1122,8 +1135,8 @@ Windows Users
                strings (e.g., "de_DE" for German) to use.
 
                (If your locale is already set, e.g. with the "$LANG"
-               environment variable, this option is not necessary, since
-               Tux Paint honors your environment's setting, if possible.)
+               environment variable, this option is not necessary, since Tux
+               Paint honors your environment's setting, if possible.)
 
        --nosysconfig
 
@@ -1138,15 +1151,14 @@ Windows Users
 
 Command-Line Informational Options
 
-       The following options display some informative text on the screen.
-       Tux Paint doesn't actually start up and run afterwards, however.
+       The following options display some informative text on the screen. Tux
+       Paint doesn't actually start up and run afterwards, however.
 
          --version
          --verbose-version
                  Display the version number and date of the copy of Tux Paint
                  you are running. The "--verbose-version" also lists what
-                 compile-time options were set. (See INSTALL.txt and
-                 FAQ.txt).
+                 compile-time options were set. (See INSTALL and FAQ).
 
          --copying
                  Show brief license information about copying Tux Paint.
@@ -1490,17 +1502,17 @@ Setting Your Environment's Locale
 
          Note: Debian users may be able to simply run the command
          "dpkg-reconfigure locales" as root to bring up a configuration
-         dialog. Ubuntu users may be able to run
-         "sudo dpkg-reconfigure localeconf" (the "localeconf" package may
-         need to be installed first), or may need to edit the file
+         dialog. Ubuntu users may be able to run "sudo dpkg-reconfigure
+         localeconf" (the "localeconf" package may need to be installed
+         first), or you may need to edit the file
          "/var/lib/locales/supported.d/local" first, and add locales they
          want, from the list found in "/usr/share/i18n/SUPPORTED".
 
          Then, before running Tux Paint, set your "$LANG" environment
          variable to one of the locales listed above. (If you want all
          programs that can be translated to be, you may wish to place the
-         following in your login script; e.g. ~/.profile, ~/.bashrc,
-         ~/.cshrc, etc.)
+         following in your login script; e.g. "~/.profile", "~/.bashrc",
+         "~/.cshrc", etc.)
 
          For example, in a Bourne Shell (like BASH):
 
@@ -1520,41 +1532,16 @@ Setting Your Environment's Locale
          files by default. So this section is only for people trying
          different languages.
 
-         The simplest thing to do is to use the '--lang' switch in the
-         shortcut (see "INSTALL.txt"). However, by using an MSDOS Prompt
-         window, it is also possible to issue a command like this:
+         The simplest thing to do is to use the "--lang" switch in the
+         shortcut (see "INSTALL"). However, by using an MSDOS Prompt window,
+         it is also possible to issue a command like this:
 
            set LANG=es_ES
 
          ...which will set the language for the lifetime of that DOS window.
 
          For something more permanent, try editing your computer's
-         'autoexec.bat' file using Windows' "sysedit" tool:
-
-        Windows 95/98
-
-          1. Click on the 'Start' button, and select 'Run...'.
-          2. Type "sysedit" into the 'Open:' box (with or without quotes).
-          3. Click 'OK'.
-          4. Locate the AUTOEXEC.BAT window in the System Configuration
-             Editor.
-          5. Add the following at the bottom of the file:
-
-               set LANG=es_ES
-
-          6. Close the System Configuration Editor, answering yes to save the
-             changes.
-          7. Restart your machine.
-
-           To affect the entire machine, and all applications, it is possible
-           to use the "Regional Settings" control panel:
-
-          1. Click on the 'Start' button, and select
-             'Settings | Control Panel'.
-          2. Double click on the "Regional Settings" globe.
-          3. Select a language/region from the drop down list.
-          4. Click 'OK'.
-          5. Restart your machine when prompted.
+         "autoexec.bat" file using Windows' "sysedit" tool:
 
   Special Fonts
 
@@ -1569,8 +1556,8 @@ Setting Your Environment's Locale
        Tux Paint was built without Pango support, special fonts should no
        longer be necessary.
 
-       When running Tux Paint in a language that requires its own font,
-       Tux Paint will try to load the font file from its system-wide "fonts"
+       When running Tux Paint in a language that requires its own font, Tux
+       Paint will try to load the font file from its system-wide "fonts"
        directory (under a "locale" subdirectory). The name of the file
        corresponds to the first two letters in the 'locale' code of the
        language (e.g., "ko" for Korean, "ja" for Japanese, "zh_tw" for

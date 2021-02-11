@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      «Como facer» os selos avanzados de Tux Paint    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+    <center>
+      <h1>
+        <img src="../../html/images/tuxpaint-title.png"
+            width="205"
+            height="210"
+            alt="Tux Paint"><br>
+        versión 0.9.26        «Como facer» os selos avanzados      </h1>
+
+      <p>
+        Copyright &copy; 2006-2021 por Albert Cahalan e outros others; vexa AUTORES (AUTHORS).<br>
+        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
+      </p>
+    </center>
+
+    <h2>
+      Sobre este «Como facelo»    </h2>
+
+    <blockquote>
+      <p>
+        Este «Como facelo» supón que quere facer un excelente selo de Tux Paint, en formato PNG con mapa de bits, a partir dunha imaxe JPEG (p. ex.: unha fotografía dixital). Hai métodos máis sinxelos e rápidos que producen unha calidade inferior.      </p>
+
+      <p>
+        Este «Como facelo» supón que está a tratar con obxectos opacos normais. O tratamento de obxectos semitransparentes (lume, ventilador en movemento, globo infantil) ou obxectos que dan luz (lume, bombilla, sol) faise mellor cun software personalizado. As imaxes con fondos de cor sólida perfectos tamén se fan mellor con software personalizado, pero non son difíciles de facer do seguinte xeito.      </p>
+    </blockquote>
+
+    <h2>
+      A elección da imaxe é crucial    </h2>
+
+    <blockquote>
+      <h3>
+        Licenza      </h3>
+
+      <blockquote>
+        <p>
+          Se quere enviar ilustracións aos desenvolvedores de Tux Paint para a súa inclusión no proxecto oficial, ou se quere publicar a súa propia copia de Tux Paint, xunto cos seus propios gráficos, precisa unha imaxe que sexa compatíbel coa Licenza Pública Xeral GNU empregada por Tux Paint.        </p>
+
+        <p>
+          As imaxes producidas polo goberno dos Estados Unidos son de dominio público, pero teña en conta que o goberno dos Estados Unidos ás veces usa outras imaxes na web. As consultas de <a href="http://images.google.com/">Google image</a> incluíndo <code>site:gov</code> or <code>site:mil</code> proporcionarán moitas imaxes axeitadas. (Nota: os sitios *.mil tamén inclúen contido non militar.)        </p>
+
+        <p>
+          As súas propias imaxes pódense colocar no dominio público ou nunha licenza adecuada, como o <a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons CC0</a> declarándoas así . (Consulta cun avogado se consideras a necesidade dun asesoramento xurídico.)        </p>
+
+        <p>
+          Para uso persoal, calquera imaxe que lexitimamente poida modificar e usar para o seu uso persoal debería estar ben.        </p>
+      </blockquote>
+
+      <h3>
+        Tamaño e orientación da imaxe      </h3>
+
+      <blockquote>
+        <p>
+          Precisa unha imaxe que teña unha orientación útil. A perspectiva é un inimigo. As imaxes que obxecto un obxecto dende un canto son difíciles de encaixar nun bo debuxo. Como regra xeral, as vistas laterais con teleobxectivo son as mellores. O ideal imposíbel é que, por exemplo, dúas rodas dun coche estean perfectamente agochadas tras as outras dúas.        </p>
+
+        <p>
+          Rotar unha imaxe pode facela borrosa, especialmente se só rota uns graos. As imaxes que non precisan rotación son as mellores, as imaxes que precisan moita rotación (30 a 60 graos) son as seguintes mellores e as que precisan uns poucos graos as peores. A rotación tamén fará que a imaxe sexa máis escura porque a maioría do software de edición de imaxes é moi malo na manipulación da gamma. (A rotación só é lexítima para imaxes gamma = 1,0.)        </p>
+
+        <p>
+          As imaxes moi grandes son máis indulxentes cos erros e, polo tanto, son máis doadas de traballar. Escolla unha imaxe cun obxecto de máis de 1000 píxeles se pode. Pode reducilo máis tarde para agochar os seus erros.        </p>
+
+        <p>
+          Asegúrese de que a imaxe non está demasiado granulada, tenue ou lavada.        </p>
+
+        <p>
+          Preste atención aos pés e ás rodas. Se están enterrados en algo, terá que debuxar outros novos. Se só un está enterrado, pode que poida copiar o outro como substituto.        </p>
+      </blockquote>
+    </blockquote>
+
+    <h2>
+      Preparar a imaxe    </h2>
+
+    <blockquote>
+      <p>
+        Primeiro de todo, asegúrese de evitar gardar de novo a imaxe como JPEG. Isto provoca unha perda de calidade. Hai unha ferramenta especial chamada <a href="https://jpegclub.org/">jpegtran</a> que permite recortar unha imaxe sen perder a calidade normal.      </p>
+
+      <blockquote>
+        <p>
+          <code>jpegtran -trim -copy none -crop 512x1728+160+128 &lt; src.jpg &gt; cropped.jpg</code>
+        </p>
+      </blockquote>
+
+      <p>
+        Cargue esa imaxe para o seu editor de imaxes. Se aínda non a cortou, pode que o seu editor de imaxes sexa moi lento. Rote e recorte a imaxe segundo sexa necesario. Garde a imaxe, escolla o formato nativo que admita capas, máscaras, alfa, etc. Os usuarios de <a href="http://www.gimp.org/">GIMP</a> deberían escoller «XCF» e os usuarios de Adobe Photoshop debería escoller «PSD», por exemplo.      </p>
+
+      <p>
+        Se rotou ou recortou a imaxe no seu editor de imaxes, aplánea agora. Debe ter só unha capa RGB <i>sen máscara nin alfa</i>.      </p>
+
+      <p>
+        Abra o cadro de diálogo de capas. Replique a capa varias veces. De arriba abaixo necesitará algo así:      </p>
+
+      <ol>
+        <li>imaxe sen modificar (protexa isto contra escritura se pode)</li>
+        <li>unha imaxe que modificar: a capa de «traballo en ptoceso»</li>
+        <li>verde sólido (protexa isto contra escritura se pode)</li>
+        <li>maxenta sólido (protexa isto contra escritura se pode)</li>
+        <li>imaxe sen modificar (protexa isto contra escritura se pode)</li>
+        </li>
+      </ol>
+
+      <p>
+        Delle á capa Traballo en proceso (WIP — «work in progress» ) unha máscara inicial aproximada. Pode comezar cunha selección ou empregando o valor de escala de grises da capa WIP. Pode inverter a máscara.      </p>
+
+      <p>
+        <b>Advertencia:</b> unha vez que teña a máscara, non pode rotar nin escalar a imaxe normalmente. Isto provocaría a perda de datos. Máis adiante se lle darán instrucións especiais de escalado.      </p>
+    </blockquote>
+
+    <h2>
+      Preparar a máscara    </h2>
+
+    <blockquote>
+      <p>
+        Acostúmese a facer <b>[Ctrl]</b>-premer e <b>[Alt]</b>-premer nas imaxes en miniatura no diálogo de capas. Necesitará isto para controlar o que está a ver e o que está a editar. Ás veces estará editando cousas que non pode ver. Por exemplo, pode editar a máscara da capa WIP mentres mira a imaxe sen modificar. Preste atención para non meter a pata. Verifica sempre que está a editar o correcto.      </p>
+
+      <p>
+        Estabeleza unha imaxe sen modificar como a que vai ver (a superior é a máis doada). Estabeleza a máscara WIP como o que vai editar. Nalgún momento, quizais non de inmediato, debería aumentar a imaxe ata aproximadamente o 400% (cada píxel da imaxe vese e edítase como un bloque de píxeles 4x4 na súa pantalla).      </p>
+
+      <p>
+        Seleccione partes da imaxe que deben ser 100% opacas ou 0% opacas. Se pode seleccionar o obxecto ou o fondo con certa precisión por cor, fágao. Se é necesario para evitar seleccionar píxeles que deben ser parcialmente opacos (xeralmente no bordo do obxecto), debe aumentar, diminuír e inverter a selección.      </p>
+
+      <p>
+        Encha as áreas 100% opacas con branco e as áreas  0% opacas con negro. Isto faise máis facilmente arrastrando e soltando dende o indicador de cor de primeiro plano/fondo. Non debería ver ocorrer nada porque está a ver a capa de imaxe sen modificar mentres edita a máscara da capa WIP. É posíbel que se poidan notar grandes cambios na miniatura.      </p>
+
+      <p>
+        Agora debe ampliala.      </p>
+
+      <p>
+        Comprobe o seu traballo. Agoche a capa superior da imaxe sen modificar. Amose só a máscara, que debería ser un obxecto branco sobre un fondo negro (probabelmente cun gris sen editar no bordo). Agora amose normalmente a capa WIP para que a máscara estea activa. Isto debería amosar o seu obxecto sobre a seguinte capa máis alta activada, que debería ser verde ou maxenta segundo sexa necesario para obter o máximo contraste. Quizais queira alternar entre eses fondos premendo varias veces para activar/desactivar a capa verde. Corrixa os problemas obvios e sinxelos editando a máscara mentres a ve.      </p>
+
+      <p>
+        Volva ver a capa superior sen modificar mentres edita a máscara WIP. Estabeleza a súa ferramenta de debuxo co pincel. Para o pincel, escolla un pequeno círculo difuso. O tamaño 5x5 é bo para a maioría dos usos.      </p>
+
+      <p>
+        Con man firme, faga un trazo arredor da imaxe. Use negro polo exterior e branco polo interior. Evite facer máis dun pase sen cambiar de cor (e, polo tanto, de lado).      </p>
+
+      <p>
+        Vire un pouco as vistas, comprobando que a máscara funciona ben. Cando a capa WIP se compón sobre o verde ou o maxenta, debería ver un pouco do fondo orixinal como unha franxa fea ao redor do bordo. Se falta esta franxa, fixo a máscara de obxectos demasiado pequena. A franxa consta de píxeles que non son nin 100% obxecto nin 0% obxecto. Para eles, a máscara non debería ser nin do 100% nin do 0%. A franxa retirase pronto.      </p>
+
+      <p>
+        Ver e editar a máscara. Seleccione por cor, escollendo negro ou branco. O máis probábel é que vexa pintas non seleccionadas que non son da cor agardada. Inverta a selección e logo pínteas coa ferramenta de lapis. Faga esta operación tanto para branco como para negro.      </p>
+    </blockquote>
+
+    <h2>
+      Substituír a franxa e os píxeles lixo    </h2>
+
+    <blockquote>
+      <p>
+        Se sigue a ver a máscara, seleccione por cor. Escolla o negro. Reduza a selección en varios píxeles, asegurándose de NON reducir os bordos da máscara (a contracción axúdalle a evitar e recuperar os erros).      </p>
+
+      <p>
+        Agora desactive a máscara. Vexa e edite a capa WIP sen máscara. Usando a ferramenta de selección de cores, escolla unha cor termo medio para o obxecto. Arrastre e solte esta cor na selección, eliminando así a maioría dos píxeles que non son do obxecto.      </p>
+
+      <p>
+        Esta cor sólida comprimirase ben e axudará a evitar franxas de cor feas cando Tux Paint reduza a imaxe. Se o bordo do obxecto ten varias cores moi diferentes, debe dividir a selección para que poida colorar o fondo próximo para que sexa semellante.      </p>
+
+      <p>
+        Agora pintará a franxa de bordo existente. Asegúrese de que está editando e vendo a imaxe WIP. Os cambios frecuentes na visibilidade das capas axudaranlle a ver o que fai. É probábel que empregue todos os:      </p>
+
+      <ul>
+        <li>composto sobre verde (máscara activada)</li>
+        <li>composto sobre maxenta (máscara activada)</li>
+        <li>orixinal (a capa superior ou inferior)</li>
+        <li>composto sobre o orixinal (máscara activada)</li>
+        <li>capa WIP en bruto (máscara <strong>desactivada</strong>)</li>
+      </ul>
+
+      <p>
+        Para reducir os accidentes, pode que queira seleccionar só os píxeles que non estean grises na máscara. (Seleccione por cor na máscara, escolla negro, engada o modo, escolla o branco, inverter. Alternativamente: seleccione todo, seleccione por cor da máscara, modo de subtracción, escolla o negro, escolla o branco.) Se fai isto, probabelmente queira expandir un pouco a selección e/ou agochar a ringleira de «formigas» que marca a selección.      </p>
+
+      <p>
+        Use a ferramenta de clonación e a de pincel. Varie a opacidade segundo sexa necesario. Empregue principalmente pinceis redondos pequenos, quizais 3x3 ou 5x5, difusos ou non. (Xeralmente é bo emparellar pinceis difusos cun 100% de opacidade e pinceis non difusos cun 70% de opacidade.) Os modos de debuxo pouco comúns poden ser útiles con obxectos semitransparentes.      </p>
+
+      <p>
+        O obxectivo é eliminar a franxa do bordo, tanto dentro como fóra do obxecto. A franxa interior, visíbel cando o obxecto está composto sobre maxenta ou verde, debe eliminarse por razóns obvias. Tamén hai que eliminar a franxa exterior porque se fará visíbel cando a imaxe se reduza. Como exemplo, considere unha rexión de 2x2 de píxeles no bordo dun obxecto de bordos afiados. A metade esquerda é negra e 0% opaca. A metade dereita é branca e 100% opaca. É dicir, temos un obxecto branco sobre fondo negro. Cando Tux Paint escala este ao 50% (unha área de 1x1 píxeles), o resultado será un píxel gris opaco do 50%. O resultado correcto sería un píxel branco ao 50% opaco. Para obter este resultado, pintaríamos os píxeles negros. Estes iImportan, a pesar de ser 0% opacos.      </p>
+
+      <p>
+        Tux Paint pode reducir a escala das imaxes nun factor moi grande, polo que é importante estender moito o bordo do obxecto cara a fóra. Xusto no bordo do obxecto, debe ser moi preciso respecto diso. A medida que se afasta do o, pode ser un pouco desleixado. É razoable pintar cara a fóra unha ducia de píxeles ou máis. Canto máis lonxe vaia, máis pode Tux Paint reducir sen crear franxas de cor feas. Para as áreas que están a máis duns poucos píxeles de distancia do bordo do obxecto, debería empregar a ferramenta de lapis (ou seleccionar arrastrar e soltar cor) para garantir que o resultado se comprime ben.      </p>
+    </blockquote>
+
+    <h2>
+      Gardar a imaxe para Tux Paint    </h2>
+
+    <blockquote>
+      <p>
+        É moi doado esnaquizar un traballo arreo. Os editores de imaxes poden esnaquizar silenciosamente píxeles en áreas  0% opacas. As condicións nas que isto ocorre poden variar dunha versión a outra. Se confía moito, pode tentar gardar a súa imaxe directamente como PNG. Asegúrese de vela de novo para verificar que as áreas 0% opacas non se volveron negras ou brancas, o que crearía franxas cando Tux Paint reduza a imaxe. Se precisa escalar a súa imaxe para aforrar espazo (e agochar os seus erros), é case seguro que destruirá todas as áreas 0% opacas. Velaquí unha mellor forma...      </p>
+
+      <h3>
+        Un xeito máis seguro de gardar      </h3>
+
+      <blockquote>
+        <p>
+          Arrastre a máscara desde o diálogo de capas ata a parte non utilizada da barra de ferramentas (xusto após a última ferramenta de debuxo). Isto creará unha nova imaxe composta por unha capa que contén os datos da máscara. Escale isto como queira, lembrando os axustes que utiliza. Moitas veces debe comezar cunha imaxe de entre 700 e 1500 píxeles de largo e acabar cunha de 300 a 400.        </p>
+
+        <p>
+          Garde a imaxe da máscara como un ficheiro de mapa de grises portátil NetPBM («<code>.pgm</code>»). (Se está a usar unha versión antiga de The GIMP, é posíbel que deba converter a imaxe en escala de grises antes de gardala.) Escolla o formato máis compacto «RAW PGM». (O segundo carácter do ficheiro debe ser o díxito ASCII «5», byte hexadecimal 0x35.)        </p>
+
+        <p>
+          Pode pechar a imaxe da máscara.        </p>
+
+        <p>
+          Volvendo á imaxe multicapa, agora seleccione a capa WIP. Como fixo coa máscara, arrastre isto dende o diálogo de capas ata a barra de ferramentas. Debería obter unha imaxe dunha soa capa dos seus datos WIP. Se tamén apareceu a máscara, desfágase dela. Debería ver o obxecto e o contorno pintado sen ningunha miniatura de máscara no diálogo de capas. Se escalou a máscara, entón escale esta imaxe exactamente do mesmo xeito. Garde esta imaxe como un ficheiro de pixmap portátil NetPBM («<code>.ppm</code>»). (Nota: <code>.ppm</code>, non <code>.pgm</code>.) (Se escolle o formato RAW PPM, o segundo byte do ficheiro debería ser o díxito ASCII «6», o byte hexadecimal 0x36.)        </p>
+
+        <p>
+          Agora cómpre fusionar os dous ficheiros nun só. Fagao coa orde <a href="http://netpbm.sourceforge.net/">pnmtopng</a>, así:        </p>
+
+        <blockquote>
+          <p>
+            <code>pnmtopng -force -compression 9 -alpha mask.pgm fg.ppm &gt; final-stamp.png</code>
+          </p>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </body>
+</html>

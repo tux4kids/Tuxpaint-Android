@@ -1,0 +1,1127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Extending Tux Paint    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+    <center>
+      <h1>
+        Extending<br>
+        <img src="../../html/images/tuxpaint-title.png"
+            width="205"
+            height="210"
+            alt="Tux Paint"><br>
+        versi&oacute;n 0.9.26      </h1>
+
+      <p>
+        Copyright &copy; 2002-2021 by various contributors; see AUTHORS.<br>
+        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
+      </p>
+
+      <p>
+        30 enero 2021      </p>
+    </center>
+
+    <hr size="2"
+        noshade>
+
+    <table border="2"
+           cellspacing="0"
+           cellpadding="2"
+           summary="Table of Contents">
+      <tr>
+        <th>
+          Table of Contents        </th>
+      </tr>
+
+      <tr>
+        <td>
+          <ul>
+            <li>
+              <a href="#where_files_go">Where Files Go</a>
+              <ul>
+                <li>
+                  <a href="#standard_files">Standard Files</a>
+                </li>
+
+                <li>
+                  <a href="#personal_files">Personal Files</a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#brushes">Brushes</a>
+              <ul>
+                <li>
+                  <a href="#brush_options">Brush Options</a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#stamps">Stamps</a>
+              <ul>
+                <li>
+                  <a href="#stamps_images">Stamp Images</a>
+                </li>
+
+                <li>
+                  <a href="#description_text">Stamp Descriptive Text</a>
+                </li>
+
+                <li>
+                  <a href="#sound_effects">Stamp Sound Effects</a>
+                </li>
+
+                <li>
+                  <a href="#descriptive_sound">Stamp Descriptive Sound</a>
+                </li>
+
+                <li>
+                  <a href="#stamp_options">Stamp Options</a>
+                </li>
+
+                <li>
+                  <a href="#pre_mirroed_and_flipped_images">Pre-Mirrored and Flipped Stamps</a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#fonts">Fonts</a>
+            </li>
+
+            <li>
+              <a href="#starters">'Starters'</a>
+              <ul>
+                <li>
+                  <a href="#coloring_book_style">Coloring-Book Style Starters</a>
+                </li>
+
+                <li>
+                  <a href="#scene_style">Scene-Style Starters</a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#templates">'Templates'</a>
+            </li>
+
+            <li>
+              <a href="#translations">Translations</a>
+            </li>
+
+            <li>
+              <a href="#input_methods">Alternative Input Methods</a>
+            </li>
+
+            <li>
+              <a href="#on_screen_keyboard">On-screen Keyboard</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+    <hr size="2"
+        noshade>
+
+    <p>
+      If you wish to add or change things like Brushes, Starters, Rubber Stamps, and other content used by Tux Paint, you can do so fairly easily by simply adding, changing, or removing files where Tux Paint looks for them.    </p>
+
+    <p>
+      Note: You'll need to re-launch Tux Paint for the changes to take effect.    </p>
+
+    <hr size="2"
+        noshade>
+
+    <h2>
+      <a name="where_files_go"
+          id="where_files_go">Where Files Go</a>
+    </h2>
+
+    <blockquote>
+      <h3>
+        <a name="standard_files"
+            id="standard_files">Standard Files</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Tux Paint looks for its various data files in its '<code>data</code>' directory.        </p>
+
+        <h4>
+          Linux and Unix        </h4>
+
+        <blockquote>
+          <p>
+            Where this directory goes depends on what value was set for "<code>DATA_PREFIX</code>" when Tux Paint was built. See 'Install documentation' for details.          </p>
+
+          <p>
+            By default, though, the directory is:          </p>
+
+          <blockquote>
+            <code>/usr/local/share/tuxpaint/</code>
+          </blockquote>
+
+          <p>
+            If you installed from a package, it is more likely to be:          </p>
+
+          <blockquote>
+            <code>/usr/share/tuxpaint/</code>
+          </blockquote>
+        </blockquote>
+
+        <h4>
+          Windows
+        </h4>
+
+        <blockquote>
+          <p>
+            Tux Paint looks for a directory called '<code>data</code>' in the same directory as the executable. This is the directory that the installer used when installing Tux Paint e.g.:          </p>
+
+          <blockquote>
+            <code style="white-space: nowrap;">C:\Program Files\TuxPaint\data</code>
+          </blockquote>
+        </blockquote>
+
+        <h4>
+          macOS
+        </h4>
+
+        <blockquote>
+          <p>
+            Tux Paint stores its data files inside the "Tux Paint" application icon (which is actually a special kind of folder on macOS &amp; Mac OS X before it). The following steps explain how to get to the folders within it:          </p>
+
+          <ol>
+            <li>Bring up a 'context' menu by holding the <b>[Control]</b> key and clicking the Tux Paint icon the in <cite>Finder</cite>. (If you have a mouse with more than one button, you can simply right-click the icon.)            </li>
+
+            <li>Select "Show Contents" from the menu that appears. A new <cite>Finder</cite> window will appear with a folder inside called "Contents".            </li>
+
+            <li>Open the "Contents" folder and open the "Resources" folder found inside.            </li>
+
+            <li>There, you will find various sub-folders, such as "starters", "stamps", "brushes", etc. Adding new content to these folders will make the content available to any user that launches this copy (icon) of Tux Paint.            </li>
+          </ol>
+
+          <p>
+            <em>Note:</em> If you install a newer version of Tux Paint and replace or discard the old version, you will lose changes made by following the instructions above, so keep backups of your new content (stamps, brushes, etc.).          </p>
+
+          <p>
+            Tux Paint also looks for files in a "TuxPaint" folder that you can place in your system's "Application Support" folder (found under "Library" at the root of your filesystem):          </p>
+
+          <blockquote>
+            <code style="white-space: nowrap;">/Library/Application Support/TuxPaint/</code>
+          </blockquote>
+
+          <p>
+            When you upgrade to a newer version of Tux Paint, the contents of this "TuxPaint" folder will stay the same, and remain accessible by all users of Tux Paint.          </p>
+        </blockquote>
+      </blockquote>
+
+      <hr size="1"
+          noshade>
+
+      <h3>
+        <a name="personal_files"
+            id="personal_files">Personal Files</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          You can also create brushes, stamps, 'starters', templates, and fonts in your own user account directory (folder) for Tux Paint to find.        </p>
+
+        <h4>
+          Windows
+        </h4>
+
+        <blockquote>
+          <p>
+            Your personal Tux Paint folder is stored in your personal "Application Data". For example, on newer Windows:          </p>
+
+          <blockquote>
+            <code style="white-space: nowrap;">C:\Documents and Settings\<i>(username)</i>\Application Data\TuxPaint\</code>
+          </blockquote>
+        </blockquote>
+
+        <h4>
+          macOS
+        </h4>
+
+        <blockquote>
+          <p>
+            Your personal Tux Paint folder is stored in your personal "Application Support" folder:          </p>
+
+          <blockquote>
+            <code style= "white-space: nowrap;">/Users/<i>(username)</i>/Library/Application Support/TuxPaint/</code>
+          </blockquote>
+        </blockquote>
+
+        <h4>
+          Linux and Unix</h4>
+
+        <blockquote>
+          <p>
+            Your personal Tux Paint files go into a 'hidden directory' found in your account's home directory: "<code>$(HOME)/.tuxpaint/</code>" (also known as "<code>~/.tuxpaint/</code>").          </p>
+
+          <p>
+            That is, if your home directory is "<code>/home/tux</code>", then your personal Tux Paint files go in "<code>/home/tux/.tuxpaint/</code>".          </p>
+
+          <p>
+            Don't forget the period ("<code>.</code>") before the "<code>tuxpaint</code>"!          </p>
+        </blockquote>
+
+        <p>
+          To add your own brushes, stamps, 'starters,' templates, and fonts, create subdirectories under your personal Tux Paint directory named "<code><b>brushes</b></code>", "<code><b>stamps</b></code>", "<code><b>starters</b></code>", "<code><b>templates</b></code>", "<code><b>fonts</b></code>", respectively.        </p>
+
+        <p>
+          (For example, if you created a brush named "<code>flower.png</code>", you would put it in "<code>~/.tuxpaint/brushes/</code>" under Linux or Unix.)        </p>
+      </blockquote>
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="brushes"
+          id="brushes">Brushes</a>
+    </h2>
+
+    <blockquote>
+      <p>
+        The brushes used for drawing with the 'Brush' and 'Lines' tools in Tux Paint are simply PNG image files.      </p>
+      <img src="../../html/images/brush_edit.png"
+                  width="123"
+                  height="147"
+                  alt=""
+                  align="right">
+      <p>
+        The alpha (transparency) of the PNG image is used to determine the shape of the brush, which means that the shape can be 'anti-aliased' and even partially-transparent!      </p>
+
+      <p>
+        Greyscale pixels in the brush PNG will be drawn using the currently-selected color in Tux Paint. Color pixels will be tinted.      </p>
+
+      <h3>
+        <a name="brush_options"
+            id="brush_options">Brush Options</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Aside from a graphical shape, brushes can also be given other attributes. To do this, you need to create a 'data file' for the brush.        </p>
+
+        <p>
+          A brush's data file is simply a plain ASCII text file containing the options for the brush.        </p>
+
+        <p>
+          The file has the same name as the PNG image, but a "<code>.dat</code>" extension. (e.g., "<code>brush.png</code>"'s data file is the text file "<code>brush.dat</code>", found in the same directory.)        </p>
+
+        <h4>
+          Brush Spacing        </h4>
+
+        <blockquote>
+          <p>
+            As of Tux Paint version 0.9.16, you can now specify the spacing for brushes (that is, how often they are drawn). By default, the spacing will be the brush's height, divided by 4.          </p>
+
+          <p>
+            Add a line containing the line "<code><b>spacing=<i>N</i></b></code>" to the brush's data file, where "<i>N</i>" is the spacing you want for the brush. (The lower the number, the more often the brush is drawn.)          </p>
+        </blockquote>
+
+        <h4>
+          Animated Brushes        </h4>
+
+        <blockquote>
+          <p>
+            As of Tux Paint version 0.9.16, you may now create animated brushes. As the brush is used, each frame of the animation is drawn.          </p>
+
+          <p>
+            Lay each frame out across a wide PNG image. For example, if your brush is 30x30 and you have 5 frames, the image should be 150x30.          </p>
+
+          <p>
+            Add a line containing the line "<code><b>frames=<i>N</i></b></code>" to the brush's data file, where "<i>N</i>" is the number of frames in the brush.          </p>
+
+          <p>
+            <b>Note:</b> If you'd rather the frames be flipped through randomly, rather than sequentially, also add a line containing "<code><b>random</b></code>" to the brush's data file.          </p>
+        </blockquote>
+
+        <h4>
+          Directional Brushes        </h4>
+
+        <blockquote>
+          <p>
+            As of Tux Paint version 0.9.16, you may now create directional brushes. As the brush is used, different shapes are drawn, depending on the direction the brush is going.          </p>
+
+          <p>
+            The directional shapes are divided into a 3x3 square in a PNG image. For example, if your brush is 30x30, the image should be 90x90, and each of the direction's shapes placed in a 3x3 grid. The center region is used for no motion. The top right is used for motion that's both up, and to the right. And so on.          </p>
+
+          <p>
+            Add a line containing the word "<code><b>directional</b></code>" to the brush's data file.          </p>
+        </blockquote>
+
+        <h4>
+          Animated Directional Brushes        </h4>
+
+        <blockquote>
+          <p>
+            You may mix both animated and directional features into one brush. Use both options ("<code><b>frames=<i>N</i></b></code>" and "<code><b>directional</b></code>"), in separate lines in the brush's "<code>.dat</code>" file.          </p>
+
+          <p>
+            Lay the brush out so that each 3x3 set of directional shapes are laid out across a wide PNG image. For example, if the brush is 30x30 and there are 5 frames, it would be 450x90. (The leftmost 150x90 pixels of the image represent the 9 direction shapes for the first frame, for example.)          </p>
+        </blockquote>
+      </blockquote>
+
+      <p>
+        Place the brush image PNGs (and any data text files) in the "<code><b>brushes</b></code>" directory.      </p>
+
+      <p>
+        Note: If your new brushes all come out as solid squares or rectangles, it's because you forgot to use alpha transparency! See the 'PNG documentation' in Tux Paint for more information and tips.      </p>
+      <br clear="all">
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="stamps"
+          id="stamps">Stamps</a>
+    </h2>
+
+    <blockquote>
+      <p>
+        All stamp-related files go in the "<code><b>stamps</b></code>" directory. It's useful to create subdirectories and sub-subdirectories there to organize the stamps. (For example, you can have a "<code>holidays</code>" folder with "<code>halloween</code>" and "<code>christmas</code>" sub-folders.)      </p>
+
+      <h3>
+        <a name="stamps_images"
+            id="stamps_images">Stamp Images</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Rubber Stamps in Tux Paint can be made up of a number of separate files. The one file that is required is, of course, the picture itself.        </p>
+        <img src="../../html/images/stamp_edit.png"
+                    width="128"
+                    height="147"
+                    alt=""
+                    align="right">
+        <p>
+          As of Tux Paint version 0.9.17, Stamps may be either PNG bitmap images or SVG vector images. They can be full-color or greyscale. The alpha (transparency) channel of PNGs is used to determine the actual shape of the picture (otherwise you'll stamp a large rectangle on your drawings).        </p>
+
+        <p>
+          PNGs can be any size, and Tux Paint (by default) provides a set of sizing buttons to let the user scale the stamp up (larger) and down (smaller).        </p>
+
+        <p>
+          SVGs are vector-based, and will be scaled appropriately for the canvas size being used in Tux Paint.        </p>
+
+        <p>
+        Note: If your new PNG-based stamps all come out as solid squares or rectangles, it's because you forgot to use alpha transparency! See the 'PNG documentation' in Tux Paint for more information and tips.        </p>
+
+        <p>
+          Note: If your new SVG stamps seem to have a lot of whitespace, make sure the SVG 'document' is no larger than the shape(s) within. If they are being clipped, make sure the 'document' is large enough to contain the shape(s). See the 'SVG documentation' in Tux Paint for more information and tips.        </p>
+
+        <p>
+          <b>Advanced Users:</b> The 'Advanced Stamps How-To' document describes, in detail, how to make PNG images which will scale perfectly when used as stamps in Tux Paint.        </p>
+        <br clear="all">
+      </blockquote>
+
+      <hr size="1"
+          noshade>
+
+      <h3>
+        <a name="description_text"
+            id="description_text">Stamp Descriptive Text</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Tux Paint will display descriptive text when a stamp is selected. These are placed in plain text files with the same name as the PNG or SVG, but with a "<code>.txt</code>" filename extension. (e.g., "<code>stamp.png</code>"'s description is stored in "<code>stamp.txt</code>" in the same directory.)        </p>
+
+        <p>
+          The first line of the text file will be used as the US English description of the stamp's image. It must be encoded in UTF-8.        </p>
+
+        <h4>
+          Localization Support        </h4>
+
+        <blockquote>
+          <p>
+            Additional lines can be added to the text file to provide translations of the description, to be displayed when Tux Paint is running in a different locale (like French or Spanish).          </p>
+
+          <p>
+            The beginning of the line should correspond to the language code of the language in question (e.g., "<code>fr</code>" for French, and "<code>zh_TW</code>" for Traditional Chinese), followed by "<code>.utf8=</code>" and the translated description (Unicode, encoded in UTF-8).          </p>
+
+          <p>
+            <b>For Tux Paint developers:</b> There are scripts in the "<code>po</code>" directory for converting the text files to PO format (and back) for easy translation to different languages. Therefore you should never add or change translations in the "<code>.txt</code>" files directly.          </p>
+
+          <p>
+            If no translation is available for the language Tux Paint is currently running in, the US English text is used.          </p>
+        </blockquote>
+
+        <h4>Windows Users</h4>
+
+        <blockquote>
+          <p>
+            Use <cite>NotePad</cite> or <cite>WordPad</cite> to edit/create these files. Be sure to save them as plain-text, and make sure they have a "<code>.txt</code>" extension at the end of the filename.          </p>
+        </blockquote>
+      </blockquote>
+
+      <hr size="1"
+          noshade>
+
+      <h3>
+        <a name="sound_effects"
+            id="sound_effects">Stamp Sound Effects</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Tux Paint can play a sound effect when a stamp is selected. For example, the sound of a duck quaking when selecting a duck, or a brief piece of music when a musical instrument is chosen.  Files may be in "WAVE ("<code>.wav</code>")" or "OGG Vorbis ("<code>.ogg</code>")" formats, and are given same name as the PNG or SVG image. (e.g., "<code>stamp.svg</code>"'s sound effect is the sound file "<code>stamp.ogg</code>" in the same directory.)        </p>
+
+        <h4>
+          Localization Support        </h4>
+
+        <blockquote>
+          <p>
+            For sounds for different locales (e.g., if the sound is someone saying a word, and you want translated versions of the word said), also create WAV or OGG files with the locale's label in the filename, in the form: "<code>stamp_LOCALE.EXT</code>"          </p>
+
+          <p>
+            "<code>stamp.png</code>"'s sound effect, when Tux Paint is run in Spanish mode, would be "<code>stamp.png</code>". In French mode, "<code>stamp_es.wav</code>". In Brazilian Portuguese mode, "<code>stamp_fr.wav</code>". And so on...          </p>
+
+          <p>
+            If no localized sound effect can be loaded, Tux Paint will attempt to load the 'default' sound file. (e.g., "<code>stamp.wav</code>")          </p>
+        </blockquote>
+
+        <p>
+          Note: For descriptive sounds (not sound effects, like a bang or a bird chirping), consider using descriptive sounds; see 'Stamp Descriptive Sound', below.        </p>
+      </blockquote>
+
+      <hr size="1"
+          noshade>
+
+      <h3>
+        <a name="descriptive_sound"
+            id="descriptive_sound">Stamp Descriptive Sound</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Tux Paint can also play a descriptive sound when a stamp is selected. For example, the sound of someone saying the word "duck" when selecting a duck, or the name of a musical instrument when one is chosen.  Files may be in "WAVE ("<code>.wav</code>")" or "OGG Vorbis ("<code>.ogg</code>")" formats, and are given same name as the PNG or SVG image, with "<code>_desc</code>" at the end. (e.g., "<code>stamp.svg</code>"'s descriptive sound is the sound file "<code>stamp_desc.ogg</code>" in the same directory.)        </p>
+
+        <h4>
+          Localization Support        </h4>
+
+        <blockquote>
+          <p>
+            For descriptive sounds for different locales, also create WAV or OGG files with <em>both</em> "<code>_desc</code>" <em>and</em> the locale's label in the filename, in the form: "<code>stamp_desc_LOCALE.EXT</code>"          </p>
+
+            "<code>stamp.png</code>"'s descriptive sound, when Tux Paint is run in Spanish mode, would be "<code>stamp_desc_es.wav</code>". In French mode, "<code>stamp_desc_fr.wav</code>". In Brazilian Portuguese mode, "<code>stamp_desc_pt_BR.wav</code>". And so on...
+          <p>
+            If no localized descriptive sound can be loaded, Tux Paint will attempt to load the 'default' sound file. (e.g., "<code>stamp_desc.wav</code>")          </p>
+        </blockquote>
+      </blockquote>
+
+      <hr size="1"
+          noshade>
+
+      <h3>
+        <a name="stamp_options"
+            id="stamp_options">Stamp Options</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Aside from a graphical shape, a textual description, a sound effect, and a descriptive sound, stamps can also be given other attributes. To do this, you need to create a 'data file' for the stamp.        </p>
+
+        <p>
+          A stamp's data file is simply a plain ASCII text file containing the options for the stamp.        </p>
+
+        <p>
+          The file has the same name as the PNG or SVG image, but a "<code>.dat</code>" extension. (e.g., "<code>stamp.png</code>"'s data file is the text file "<code>stamp.dat</code>", found in the same directory.)        </p>
+
+        <h4>
+          Colored Stamps        </h4>
+
+        <blockquote>
+          <p>
+            Stamps can be made to be either "colorable" or "tintable."          </p>
+
+          <h5>
+            Colorable          </h5>
+
+          <blockquote>
+            <p>
+              "Colorable" stamps they work much like brushes - you pick the stamp to get the shape, and then pick the color you want it to be. (Symbol stamps, like the mathematical and musical ones, are an example.)            </p>
+
+            <p>
+              Nothing about the original image is used except the transparency (from "alpha" channel). The color of the stamp comes out solid.            </p>
+
+            <center>
+              <img src="../../html/images/ex_colorable.png"
+                      width="74"
+                      height="92"
+                      alt="">
+            </center>
+
+            <p>
+              Add a line containing the word "<code><b>colorable</b></code>" to the stamp's data file.            </p>
+          </blockquote>
+
+          <h5>
+            Tinted          </h5>
+
+          <blockquote>
+            <p>
+              "Tinted" stamps are similar to "colorable" ones, except the details of the original image are kept. (To put it technically, the original image is used, but its hue is changed, based on the currently-selected color.)            </p>
+
+            <center>
+              <img src="../../html/images/ex_tintable.png"
+                      width="151"
+                      height="78"
+                      alt="">
+            </center>
+
+            <p>
+              Add a line containing the word "<code><b>tintable</b></code>" to the stamp's data file.            </p>
+
+            <h6>
+              Tinting Options:            </h6>
+
+            <blockquote>
+              <p>
+                Depending on the contents of your stamp, you might want to have Tux Paint use one of a number of methods when tinting it. Add one of the following lines to the stamp's data file:              </p>
+
+              <dl>
+                <dt>
+                  Normal tinter &mdash; "<code><b>tinter=normal</b></code>" (the default)                </dt>
+
+                <dd>
+                  This is the normal tinting mode. (Hue range is ±18°, 27 replace.)                </dd>
+
+                <dt>
+                  'Any hue' tinter &mdash; "<code><b>tinter=anyhue</b></code>"
+                </dt>
+
+                <dd>
+                  This remaps all hues in the stamp. (Hue range is ±180°.)                </dd>
+
+                <dt>
+                  Narrow tinter &mdash; "<code><b>tinter=narrow</b></code>"
+                </dt>
+
+                <dd>
+                  This like the "<code>anyhue</code>" option, but with a narrower hue angle. (Hue range is ±6°, 9 replace.)                </dd>
+
+                <dt>
+                  Vector tinter &mdash; "<code><b>tinter=vector</b></code>"
+                </dt>
+
+                <dd>
+                  This maps 'black through white' to 'black through destination'.                </dd>
+              </dl>
+            </blockquote>
+          </blockquote>
+        </blockquote>
+
+        <h4>
+          Unalterable Stamps        </h4>
+
+        <blockquote>
+          <p>
+            By default, a stamp can be flipped upside down, shown as a mirror image, or both. This is done using the control buttons below the stamp selector, at the lower right side of the screen in Tux Paint.          </p>
+
+          <p>
+            Sometimes, it doesn't make sense for a stamp to be flippable or mirrored; for example, stamps of letters or numbers. Sometimes stamps are symmetrical, so letting the user flip or mirror them isn't useful.          </p>
+
+          <p>
+            To prevent a stamp from being flipped vertically, add the option "<code><b>noflip</b></code>" to the stamp's data file.          </p>
+
+          <p>
+            To prevent a stamp from being mirrored horizontally, add the option "<code><b>nomirror</b></code>" to the stamp's data file.          </p>
+        </blockquote>
+
+        <h4>
+          Initial Stamp Size        </h4>
+
+        <blockquote>
+          <p>
+            By default, Tux Paint assumes that your stamp is sized appropriately for unscaled display on a 608x472 canvas. This was the original Tux Paint canvas size, provided by a 640x480 screen. Tux Paint will then adjust the stamp according to the current canvas size and, if enabled, the user's stamp size controls.          </p>
+
+          <p>
+            If your stamp would be too big or too small, you can specify a scale factor. If your stamp would be 2.5 times as wide (or tall) as it should be, add one of the following options, which represent the same adjustment, to the stamp's data file. (An equals sign, "<code>=</code>", may be included after the word "<code>scale</code>".)          </p>
+          <ul>
+            <li>"<code><b>scale 40%</b></code>"</li>
+            <li>"<code><b>scale 5/2</b></code>"</li>
+            <li>"<code><b>scale 2.5</b></code>"</li>
+            <li>"<code><b>scale 2:5</b></code>"</li>
+          </ul>
+        </blockquote>
+
+        <h4>Windows Users</h4>
+
+        <blockquote>
+          <p>
+            Use <cite>NotePad</cite> or <cite>WordPad</cite> to edit/create these files. Be sure to save them as plain-text, and make sure they have a "<code>.txt</code>" extension at the end of the filename.          </p>
+        </blockquote>
+      </blockquote>
+
+      <h3>
+        <a name="pre_mirroed_and_flipped_images"
+            id="pre_mirroed_and_flipped_images">Pre-Mirrored and Flipped Stamps</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          In some cases, you may wish to provide a pre-drawn version of a stamp's mirror-image, flipped image, or even both. For example, imagine a picture of a fire truck with the words "<cite>Fire Department</cite>" written across the side. You probably do not want that text to appear backwards when the image is flipped!        </p>
+
+        <p>
+          To create a mirrored version of a stamp that you want Tux Paint to use, rather than mirroring one on its own, simply create a second "<code>.png</code>" or "<code>.svg</code>" graphics file with the same name, except with "<code><b>_mirror</b></code>" before the filename extension.        </p>
+
+        <p>
+          For example, for the stamp "<code>stamp.png</code>" you would create another file named "<code>stamp_mirror.png</code>", which will be used when the stamp is mirrored (rather than using a backwards version of "<code>stamp.png</code>").        </p>
+
+        <p>
+          As of Tux Paint 0.9.18, you may similarly provide a pre-flipped image with "<code><b>_flip</b></code>" in the name, and/or an image that is both mirrored and flipped, by naming it "<code><b>_mirror_flip</b></code>".        </p>
+
+        <p>
+          <b>Note:</b> If the user flips and mirrors an image, and a pre-drawn "<code>_mirror_flip</code>" doesn't exist, but either "<code>_flip</code>" or "<code>_mirror</code>" does, it will be used, and mirrored or flipped, respectively.        </p>
+      </blockquote>
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="fonts"
+          id="fonts">Fonts</a>
+    </h2>
+
+    <blockquote>
+      <img src="../../html/images/fontsizes.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        The fonts used by Tux Paint are TrueType Fonts (TTF).      </p>
+
+      <p>
+        Simply place them in the "<code><b>fonts</b></code>" directory. Tux Paint will load the font and provide four different sizes in the 'Letters' selector when using the 'Text' and 'Label' tools.      </p>
+      <br clear="all">
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="starters"
+          id="starters">'Starters'</a>
+    </h2>
+
+    <blockquote>
+      <img src="../../html/images/open_open.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        'Starter' images appear in the 'New' dialog, along with solid color background choices.      </p>
+
+      <p>
+        When you use a 'starter' image, make modifications, and save it, the original 'starter' image is not overwritten. Additionally, as you edit your new picture, the contents of the original 'starter' can affect it.      </p>
+
+      <h3>
+        <a name="coloring_book_style"
+            id="coloring_book_style">Coloring-Book Style Starters</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          The most basic kind of 'starter' is similar to a picture in a coloring book. It's an outline of a shape which you can then color in and add details to. In Tux Paint, as you draw, type text, or stamp stamps, the outline remains 'above' what you draw. You can erase the parts of the drawing you made, but you can't erase the outline.        </p>
+
+        <p>
+          To create this kind of 'starter' image, simply create an outlined black and white picture in a paint program, and save it as a raster PNG file, or vector SVG.  If saving as a PNG, you may optionally render the image as black-and-transparent, rather than black-and-white, but (as of Tux Paint 0.9.21) this is not required.        </p>
+      </blockquote>
+
+      <h3>
+        <a name="scene_style"
+            id="scene_style">Scene-Style Starters</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Along with the 'coloring-book' style overlay, you can also provide a separate background image as part of a 'starter' picture. The overlay acts the same: it can't be drawn over, erased, or affected by 'Magic' tools. However, the background can be!        </p>
+
+        <p>
+          When the 'Eraser' tool is used on a picture based on this kind of 'starter' image, rather than turning the canvas to a solid color, such as white, it returns that part of the canvas to the original background picture from the 'starter' image.        </p>
+
+        <p>
+          By creating both an overlay and a background, you can create a 'starter' which simulates depth. Imagine a background that shows the ocean, and an overlay that's a picture of a reef. You can then draw (or stamp) fish in the picture. They'll appear in the ocean, but never 'in front of' the reef.        </p>
+
+        <p>
+          To create this kind of 'starter' picture, simply create an overlay (with transparency) and save it as a PNG. Then create another image (without transparency), and save it with the same filename, but with "<code>-back</code>" (short for 'background') appended to the name. (e.g., "<code>starter-back.png</code>" would be the background ocean picture that corresponds to the overlay, or foreground.)        </p>
+      </blockquote>
+
+      <p>
+        For best results, 'starter' images should be at least the same size as Tux Paint's drawing canvas. (See the "Loading Other Pictures into Tux Paint" section of Tux Paint's main documentation (README) for details on sizing.) If they are not, they will be stretched or scaled.  This is done without affecting the shape ("aspect ratio"); however some smudging may be applied to the edges.      </p>
+
+      <p>
+        Place them in the "<code><b>starters</b></code>" directory. When the 'New' dialog is accessed in Tux Paint, the 'starter' images will appear in the screen that appears, after the various solid color choices.      </p>
+
+      <p>
+        <b>Note:</b> 'Starters' are 'attached' to saved pictures, via a small text file that has the same name as the saved file, but with "<code>.dat</code>" as the extension. This allows it to continue to affect the drawing even after Tux Paint has been quit, or another picture is loaded or a new image is created. (In other words, if you base a drawing on a 'starter' image, it will always be affected by it.)      </p>
+      <br clear="all">
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="templates"
+          id="templates">'Templates'</a>
+    </h2>
+
+    <blockquote>
+      <img src="../../html/images/open_open.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        'Template' images also appear in the 'New' dialog, along with solid color background choices and 'Starters'. (Note: Tux Paint prior to version 0.9.22 did not have the 'Template' feature.)      </p>
+
+      <p>
+        Unlike pictures drawn in Tux Paint by users and then opened later, opening a 'template' creates a new drawing. When you save, the 'template' image is not overwritten. Unlike 'starters', there is no immutable 'layer' above the canvas. You may draw over any part of it.      </p>
+
+      <p>
+          When the 'Eraser' tool is used on a picture based on this kind of 'template' image, rather than turning the canvas to a solid color, such as white, it returns that part of the canvas to the original background picture from the 'template' image.      </p>
+
+      <p>
+        'Templates' are simply image files (in PNG, JPEG, SVG, or KPX (KidPix) format). No preparation or conversion should be required.      </p>
+
+      <p>
+        For best results, 'template' images should be at least the same size as Tux Paint's drawing canvas. (See the "Loading Other Pictures into Tux Paint" section of Tux Paint's main documentation (README) for details on sizing.) If they are not, they will be stretched or scaled.  This is done without affecting the shape ("aspect ratio"); however some smudging may be applied to the edges.      </p>
+
+      <p>
+        Place them in the "<code><b>templates</b></code>" directory. When the 'New' dialog is accessed in Tux Paint, the 'template' images will appear in the screen that appears, after the various solid color choices.      </p>
+
+      <p>
+        <b>Note:</b> 'Templates' are 'attached' to saved pictures, via a small text file that has the same name as the saved file, but with "<code>.dat</code>" as the extension. This allows it to continue to affect the drawing even after Tux Paint has been quit, or another picture is loaded or a new image is created. (In other words, if you base a drawing on a 'template' image, it will always be affected by it.)      </p>
+      <br clear="all">
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="translations"
+          id="translations">Translations</a>
+    </h2>
+
+    <blockquote>
+      <p>
+        Tux Paint supports numerous languages, thanks to use of the "gettext" localization library. (See "Options documentation" for how to change locales in Tux Paint.)      </p>
+
+      <p>
+        To translate Tux Paint to a new language, copy the translation template file, "<code>tuxpaint.pot</code>" (found in Tux Paint's source code, in the folder "<code>src/po/</code>"). Rename the copy as a "<code>.po</code>" file, with an appropriate name for the locale you're translating to (e.g., "<code>es.po</code>" for Spanish; or "<code>pt_BR.po</code>" for Brazilian Portuguese, versus "<code>pt.po</code>" or "<code>pt_PT.po</code>" for Portuguese spoken in Portugal.)      </p>
+
+      <p>
+        Open the newly-created "<code>.po</code>" file — you can edit in a <i>plain</i> text edtior, such as Emacs, Pico or VI on Linux, or NotePad on Windows. The original English text used in Tux Paint is listed in lines starting with "<code>msgid</code>". Enter your translations of each of these pieces of text in the empty "<code>msgstr</code>" lines directly below the corresponding "<code>msgid</code>" lines. (<i>Note:</i> Do not remove the quotes.)      </p>
+
+      <p>
+        Example:      </p>
+
+      <blockquote>
+        <p>
+          <code>msgid "Smudge"<br>
+          msgstr "<u>Manchar</u>"<br>
+          <br>
+          msgid "Click and drag to draw large bricks."<br>
+          msgstr "<u>Haz clic y arrastra para dibujar ladrillos grandes.</u>"</code>
+        </p>
+      </blockquote>
+
+      <p>
+        Various tools exist to manage gettext translation catalogs, so you don't have to edit them by hand in a text editor. Here are a few:      </p>
+      <ul>
+        <li><a href="http://www.poedit.net/">Poedit</a></li>
+        <li><a href="https://wiki.gnome.org/Apps/Gtranslator">Gtranslator (GNOME Translator)</a></li>
+        <li><a href="https://virtaal.translatehouse.org/">Virtraal</a></li>
+        <li><a href="https://apps.kde.org/en/lokalize">Lokalize</a></li>
+      </ul>
+
+      <p>
+        <i>Note:</i> It is best to always work off of the <i>latest</i> Tux Paint text catalog template ("<code>tuxpaint.pot</code>"), since new text is added, and old text is occasionally changed. The text catalog for the upcoming, unreleased version of Tux Paint can be found in Tux Paint's Git repository (see: <a href="http://www.tuxpaint.org/download/source/git/">http://www.tuxpaint.org/download/source/git/</a>), and on the Tux Paint website at <a href="http://www.tuxpaint.org/help/po/">http://www.tuxpaint.org/help/po/</a>.      </p>
+
+      <p>
+        To edit an existing translation, download the latest "<code>.po</code>" file for that language, and edit it as described above.      </p>
+
+      <p>
+        You may send new or edited translation files to Bill Kendrick, lead developer of Tux Paint, at: <a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a>, or post them to the "tuxpaint-i18n" mailing list (see: <a href="http://www.tuxpaint.org/lists/">http://www.tuxpaint.org/lists/</a>).      </p>
+
+      <p>
+        Alternatively, if you have an account with <a href="http://www.sourceforge.net/">SourceForge.net</a>, you can request to be added to the "<code>tuxpaint</code>" project and receive write-access to the Git source code repository so that you may commit your changes directly.      </p>
+
+      <p>
+        <i>Note:</i> Support for new locales requires making additions to Tux Paint's source code ("<code>/src/i18n.h</code>" and "<code>/src/i18n.c</code>"), and requires updates to the <code>Makefile</code>, to ensure the "<code>.po</code>" files are compiled into "<code>.mo</code>" files, and available for use at runtime.      </p>
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="input_methods"
+          id="input_methods">Alternative Input Methods</a>
+    </h2>
+
+    <blockquote>
+      <p>
+        Tux Paint's 'Text' and 'Label' tools can provide alternative input methods for some languages. For example, when Tux Paint is running with a Japanese locale, the right <b><code>[Alt]</code></b> key can be pressed to cycle between Latin, Romanized Hiragana and Romanized Katakana modes. This allows native characters and words to be entered into the 'Text' and 'Label' tools by typing one or more keys on a keyboard with Latin characters (e.g., a <i>US QWERTY</i> keyboard).      </p>
+
+      <p>
+        To create an input method for a new locale, create a text file with a name based on the locale (e.g., "<code>ja</code>" for Japanese), with "<code>.im</code>" as the extension (e.g., "<code>ja.im</code>").      </p>
+
+      <p>
+        The "<code>.im</code>" file can have multiple character mapping sections for different character mapping modes. For example, on a Japanese typing system, typing <b><code>[K]</code></b> <b><code>[A]</code></b> in Hiragana mode generates a different Unicode character ("&#12363;") than typing <b><code>[K]</code></b> <b><code>[A]</code></b> in Katakana mode ("&#12459;").      </p>
+
+      <p>
+        List the character mappings in this file, one per line. Each line should contain (separated by whitespace):      </p>
+
+      <ul>
+        <li>the Unicode value of the character, in hexadecimal (more than one character can be listed, separated by a colon (':'), this allowing some sequences to map to words)        </li>
+
+        <li>the keycode sequence (the ASCII characters that must be entered to generate the Unicode character)        </li>
+
+        <li>a flag (or "<code>-</code>" if none)        </li>
+      </ul>
+
+      <p>
+        Start additional character mapping sections with a line containign the word "<code>section</code>".      </p>
+
+      <p>
+        Example:      </p>
+
+      <blockquote>
+        <p>
+          <code># Hiragana<br>
+          304B ka -<br>
+          304C ga -<br>
+          304D ki -<br>
+          304E gi -<br>
+          304D:3083 kya -<br>
+          3063:305F tta -<br>
+          <br>
+          # Katakana<br>
+          section<br>
+          30AB ka -<br>
+          30AC ga -<br>
+          30AD ki -<br>
+          30AE gi -</code>
+        </p>
+      </blockquote>
+
+      <p>
+        <i>Note:</i> Blank lines within the "<code>.im</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example above.      </p>
+
+      <p>
+        <i>Note:</i> Meanings of the flags are locale-specific, and are processed by the language-specific source code in "<code>src/im.c</code>". For example, "<code>b</code>" is used in Korean to handle Batchim, which may carry over to the next character.      </p>
+
+      <p>
+        <i>Note:</i> Support for new input methods requires making additions to Tux Paint's source code ("<code>/src/im.c</code>"), and requires updates to the <code>Makefile</code>, to ensure the "<code>.im</code>" files are available for use at runtime.      </p>
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="on_screen_keyboard"
+          id="on_screen_keyboard">On-screen Keyboard</a>
+    </h2>
+
+    <blockquote>
+      <p>
+        As of version 0.9.22, Tux Paint's 'Text' and 'Label' tools can present an on-screen keyboard that allows the pointer (via a mouse, eye-tracking systems, etc.) to be used to input characters. Files that describe the layout and available keys are stored in Tux Paint "<code>osk</code>" directory. Each keyboard layout is defined by a number of files (some of which may be shared by different layouts).      </p>
+      <p>
+        We'll use the QWERTY keyboard as an example:      </p>
+      
+      <h3>
+        Layout overview file ("<code>qwerty.layout</code>")      </h3>
+
+      <blockquote>
+        <p>
+          This is a text file that specifies the other files used to describe the layout and key mappings.        </p>
+
+        <blockquote>
+          <p>
+            <code>layout qwerty.h_layout<br>
+            keymap us-intl-altgr-dead-keys.keymap<br>
+            composemap en_US.UTF-8_Compose<br>
+            keysymdefs keysymdef.h<br>
+            keyboardlist qwerty.layout default.layout</code>
+          </p>
+        </blockquote>
+
+        <p>
+        <i>Note:</i> Blank lines within the "<code>.layout</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example above.        </p>
+
+        <p>
+          The "<code>keyboardlist</code>" line describes which layouts to switch to, when the user clicks the left and right buttons on the keyboard. (See below.)        </p>
+      </blockquote>
+
+      <h3>
+        Keyboard layout file ("<code>qwerty.h_layout</code>")      </h3>
+
+      <blockquote>
+        <p>
+          This describes how big the keyboard is (as a "width × height" grid), and lists each key with its numeric keycode (see the "<code>keymap</code>" file, below), the width it should be drawn at (typically "<code>1.0</code>", to take one space on the keyboard, but in the example below, notice the "<code>TAB</code>" and "<code>SPACE</code>" keys are much wider), the character or text to display on the key, depending on which modifier keys have been pressed (one each for: no modifiers, <b><code>[Shift]</code></b>, <b><code>[AltGr]</code></b>, and <b><code>[Shift]</code></b> + <b><code>[AltGr]</code></b>), and finally whether or not the key is affected by the <b><code>[CapsLock]</code></b> key (use "<code>1</code>") or <b><code>[AltGr]</code></b> (alternate graphics) key (use "<code>2</code>"), or not at all (use "<code>0</code>").        </p>
+
+        <blockquote>
+          <p>
+            <code>WIDTH 15<br>
+            HEIGHT 5<br>
+            <br>
+            KEY 49 1.0 ` ~ ` ~ 0<br>
+            KEY 10 1.0 1 ! ¡ ¹ 0<br>
+            KEY 11 1.0 2 @ ² ˝ 0<br>
+            KEY 12 1.0 3 # · ³ 0<br>
+            KEY 13 1.0 4 $ ¤ £ 0<br>
+            KEY 14 1.0 5 % € ¸ 0<br>
+            KEY 15 1.0 6 ^ ¼ ^ 0<br>
+            ...<br>
+            KEY 21 1.0 = + × ÷ 0<br>
+            KEY 22 2.0 DELETE DELETE DELETE DELETE 0<br>
+            <br>
+            NEWLINE<br>
+            <br>
+            KEY 23 1.5 TAB TAB TAB TAB 0<br>
+            KEY 24 1.0 q Q ä Ä 1<br>
+            KEY 25 1.0 w W å Å 1<br>
+            KEY 26 1.0 e E é É 1<br>
+            KEY 27 1.0 r R ® ® 1<br>
+            ...<br>
+            <br>
+            NEWLINE<br>
+            <br>
+            # Arrow to left will change to the previous keyboard<br>
+            KEY 2 1.0 &lt;- &lt;- &lt;- &lt;- 0<br>
+            <br>
+            KEY 133 2.0 Cmp Cmp Cmp Cmp 0<br>
+            <br>
+            # The ALT or ALTGR keys are used in im to switch the input mode<br>
+            KEY 64 2.0 Alt Alt Alt Alt 0<br>
+            <br>
+            # Space<br>
+            KEY 65 7.0 SPACE SPACE SPACE SPACE 0<br>
+            <br>
+            KEY 108 2.0 AltGr AltGr AltGr AltGr 0<br>
+            <br>
+            # Arrow to right will change to the next keyboard<br>
+            KEY 1 1.0 -&gt; -&gt; -&gt; -&gt; 0</code>
+          </p>
+        </blockquote>
+
+        <p>
+          Notice here that alphabetic keys (<b><code>[Q]</code></b>, <b><code>[W]</code></b>, etc.) will be affected by <b>[CapsLock]</b>, while numeric keys (<b><code>[1]</code></b>, <b><code>[2]</code></b>, etc.), <b><code>[Space]</code></b>, and so on, will not.        </p>
+
+        <p>
+          Keycodes up to "<code>8</code>" are reserved for internal use. The ones currently used are described below.        </p>
+
+        <ul>
+          <li>
+            <code>0</code> —
+                empty button          </li>
+
+          <li>
+            <code>1</code> —
+                next layout (per the layout file's "<code>keyboardlist</code>" setting)          </li>
+
+          <li>
+            <code>2</code> —
+                previous layout (per the layout file's "<code>keyboardlist</code>" setting)          </li>
+        </ul>
+      </blockquote>
+
+      <h3>
+        Keymap file ("<code>us-intl-altgr-dead-keys.keymap</code>")      </h3>
+
+      <blockquote>
+        <p>
+          This file defines which numeric keycodes (seen in the keyboard layout files, such as "<code>qwerty.h_layout</code>" described above) should be mapped to which actual characters that an application such as Tux Paint expects to receive when keys (e.g., on a real keyboard) are pressed.        </p>
+
+        <p>
+          If you're using an operating system such as <cite>Linux</cite>, which runs <cite>X-Window</cite> and has the "<code>xmodmap</code>" command-line tool available, you can run it with the ("print keymap expressions" option, "<code>-pke</code>", to generate a keymap file.        </p>
+
+        <blockquote>
+          <p>
+            <code>keycode 9 = Escape NoSymbol Escape Escape<br>
+            keycode 10 = 1 exclam exclamdown onesuperior 1 exclam 1
+            exclam NoSymbol onesuperior<br>
+            keycode 11 = 2 at twosuperior dead_doubleacute 2 at 2
+            at onehalf twosuperior<br>
+            keycode 12 = 3 numbersign periodcentered threesuperior
+            dead_macron periodcentered<br>
+            ...<br>
+            keycode 52 = z Z ae AE Arabic_hamzaonyeh asciitilde
+            guillemotright NoSymbol Greek_zeta Greek_ZETA U037D
+            U03FF<br>
+            keycode 53 = x X x X Arabic_hamza Arabic_sukun
+            guillemotleft NoSymbol Greek_chi Greek_CHI rightarrow
+            leftarrow<br>
+            keycode 54 = c C copyright cent Arabic_hamzaonwaw
+            braceright Greek_psi Greek_PSI copyright<br>
+            keycode 55 = v V v V Arabic_ra braceleft Greek_omega
+            Greek_OMEGA U03D6<br>
+            keycode 56 = b B b B UFEFB UFEF5 Greek_beta Greek_BETA
+            U03D0<br>
+            keycode 57 = n N ntilde Ntilde Arabic_alefmaksura
+            Arabic_maddaonalef Greek_nu Greek_NU U0374 U0375<br>
+            keycode 58 = m M mu mu Arabic_tehmarbuta apostrophe
+            Greek_mu Greek_MU U03FB U03FA<br>
+            keycode 59 = comma less ccedilla Ccedilla Arabic_waw
+            comma comma less guillemotleft<br>
+            keycode 60 = period greater dead_abovedot dead_caron
+            Arabic_zain period period greater guillemotright
+            periodcentered<br>
+            keycode 61 = slash question questiondown dead_hook
+            Arabic_zah Arabic_question_mark slash question<br>
+            keycode 62 = Shift_R NoSymbol Shift_R Shift_R<br>
+            ...<br></code>
+          </p>
+        </blockquote>
+      </blockquote>
+
+      <h3>
+        Composemap file ("<code>en_US.UTF-8_Compose</code>")      </h3>
+
+      <blockquote>
+        <p>
+          This file describes single characters that can be composed by multiple inputs. For example, "<b><code>[Compose]</code></b>" followed by "<b><code>[A]</code></b>" and "<b><code>[E]</code></b>" can be used to create the "<code>æ</code>" character.        </p>
+
+        <p>
+          The file that comes with Tux Paint is based on the US English UTF-8 (Unicode) composemap that comes with X.Org's <cite>X Window system</cite>. The current version from the <cite>Xlib</cite> library has a web located page at <a href="https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html">https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html</a>.        </p>
+      </blockquote>
+
+      <h3>
+        Keysym definitions file ("<code>keysymdef.h</code>")      </h3>
+
+      <blockquote>
+        <p>
+          This file (which is a <cite>C</cite> programming language header file) is also from the <cite>X Window System</cite>. It defines the Unicode values of each keycap (e.g., "<code>XK_equal</code>" corresponds to "<code>U+003D</code>", for the character "<code>=</code>" ("<code>EQUALS SIGN</code>").        </p>
+
+        <p>
+          <b>Note:</b> This file is not compiled into Tux Paint, but is read and parsed at runtime.        </p>
+
+        <p>
+          It is unlikely that any modification will be required of this file.        </p>
+      </blockquote>
+    </blockquote>
+
+    <hr size="2"
+        noshade>
+  </body>
+</html>

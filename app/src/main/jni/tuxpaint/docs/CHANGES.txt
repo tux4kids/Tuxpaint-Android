@@ -2,11 +2,68 @@ CHANGES.txt for Tux Paint
 
 Tux Paint - A simple drawing program for children.
 
-Copyright (c) 2002-2020
+Copyright (c) 2002-2021
 Various contributors (see below, and AUTHORS.txt)
 http://www.tuxpaint.org/
 
 $Id$
+
+2021.February.5 (0.9.26)
+  * New Features
+    ------------
+    * [WIP] Larger UI buttons
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * It's now possible to increase how many rows of buttons are shown
+      for the color palette at the bottom of the screen.
+      (Use the "colorsrows" option.)
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+      
+  * New Magic Tools:
+    ----------------
+    * Pixels
+      Draws large squares, for classic computer 'pixel art' style drawings.
+
+    * Clone
+      Clones (copies, via painting) part of a drawing to another position.
+
+  * Documentation updates
+    ---------------------
+    * Documentation is now maintained in a separate source repository,
+      'tuxpaint-docs', which allows for easier and more consisten
+      translation of the documentation.  Pulling in initial version of
+      these docs, which contain a variety of minor updates (and also a
+      few which had previously only been available as plain TXT are now
+      available as HTML).
+      + Galician
+        Miguel Anxo Bouzada <mbouzada@gmail.com>
+
+    * Expanded the steps for making and posting releases.
+
+    * Documented how to build Tux Paint using old macOS
+      Mark K. Kim <markuskimius@gmail.com>
+
+  * Other Improvements
+    ------------------
+    * Reduce CPU usage by increasing delay in main loop
+      from 1ms to 10ms, and only using SDL's Timer subsystem
+      when scrolling happens.
+      (Details at
+      https://sourceforge.net/p/tuxpaint/tuxpaint/ci/7727b995c53df208596eff89ac1acb954a16098c/)
+      Mark K. Kim <markuskimius@gmail.com>
+      (h/t @bbugwong on Twitter for reporting the issue)
+
+    * If parent of export directory doesn't exist, Tux Paint will
+      try to create it as well.
+      (Only one level up; e.g., with an export location like
+      /path/to/Pictures/TuxPaint/, it will try to create
+      /path/to/Pictures/ if it doesn't exist, but not its parents).
+      h/t Tim Dickson
+
+  * Translation Updates:
+    --------------------
+    * Galician translation
+      Miguel Bouzada <mbouzada@gmail.com>
 
 2020.December.27 (0.9.25)
   * New Features

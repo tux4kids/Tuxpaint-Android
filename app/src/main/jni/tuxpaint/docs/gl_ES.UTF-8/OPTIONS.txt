@@ -1,0 +1,1605 @@
+                                   Tux Paint
+                                 versión 0.9.26
+
+Documentación de opcións
+
+    Copyright © 2002-2021 por varios colaboradores; vexa AUTORES (AUTHORS).
+                            http://www.tuxpaint.org/
+
+                                5 Febreiro 2021
+
+     ----------------------------------------------------------------------
+
+                               Tux Paint Config.
+
+     Está dispoñible unha ferramenta gráfica que lle permite cambiar o
+     comportamento de Tux Paint. Non obstante, se prefire non instalar e usar
+     esta ferramenta, ou quere comprender mellor as opcións dispoñibles, siga
+     lendo.
+
+     ----------------------------------------------------------------------
+
+                           Ficheiro de configuración
+
+     Pode crear un ficheiro de configuración sinxelo para Tux Paint, que lerá
+     cada vez que o inicie.
+
+     O ficheiro é simplemente un ficheiro de texto sinxelo que contén as
+     opcións que quere activar habilitar:
+
+Usuarios de Linux e Unix
+
+       O ficheiro que debe crear chámase «.tuxpaintrc» e debería colocarse no
+       seu directorio persoal. (tamén coñecido como «~/.tuxpaintrc» ou
+       «$HOME/.tuxpaintrc»)
+
+  Ficheiro de configuración de todo o sistema
+
+         Antes de ler este ficheiro, le un ficheiro de configuración en todo
+         o sistema. (De xeito predeterminado, esta configuración non ten
+         axustes activados.) Atópase en:
+
+           /etc/tuxpaint/tuxpaint.conf
+
+         Pode desactivar a lectura deste ficheiro por completo, deixando os
+         axustes como predeterminados (que poden ser substituídos polo seu
+         ficheiro «.tuxpaintrc» e/ou argumentos da liña de ordes) usando a
+         opción da liña de ordes:
+
+           --nosysconfig
+
+Usuarios de macOS
+
+       O ficheiro que debe crear chámase «tuxpaint.cfg» e debería colocalo no
+       seu cartafol persoal, baixo o subcartafol: Library/Application
+       Support/TuxPaint
+
+  Ficheiro de configuración de todo o sistema
+
+         Antes de ler este ficheiro, le un ficheiro de configuración en todo
+         o sistema. (De xeito predeterminado, esta configuración non ten
+         axustes activados.) Atópase en:
+
+           /Library/Application Support/TuxPaint/tuxpaint.cfg
+
+Usuarios de Windows
+
+       O ficheiro que debe crear chámase «tuxpaint.cfg» e debería colocarse
+       no cartafol de Tux Paint.
+
+       Pode usar NotePad ou WordPad para crear este ficheiro. Asegúrese de
+       gardalo como texto simple e asegúrese de que o nome do ficheiro non
+       teña «.txt» ao final...
+
+     ----------------------------------------------------------------------
+
+                              Opcións dispoñíbeis
+
+     Os seguintes axustes pódense estabelecer no ficheiro de configuración.
+     (A configuración da liña de ordes substituirá estes. Vexa a sección
+     «Opcións da liña de ordes», a continuación.)
+
+     fullscreen=yes
+             Executar o programa en modo de pantalla completa en vez de nunha
+             xanela.
+
+     fullscreen=native
+             Executar o programa en modo de pantalla completa. Ademais, asume
+             a resolución actual da pantalla (estabelecida polo sistema
+             operativo).
+
+     windowsize=TAMAÑO
+
+             Executar o programa a un tamaño diferente (en modo xanela) ou a
+             unha resolución de pantalla diferente (en modo de pantalla
+             completa), en lugar do predeterminado (normalmente 800x600).
+
+             O valor TAMAÑO debería presentarse en píxeles, en formato «largo
+             por alto», cun «x» (X minúsculo) entre os valores. O tamaño pode
+             ser calquera que teña polo menos 640 de largo e polo menos 480
+             de alto.
+
+             Algúns exemplos:
+
+                * 640x480
+                * 1024x768
+                * 768x1024
+                * 1600x1200
+
+     orient=portrait
+
+             Cambia as opcións de largo/alto dadas a Tux Paint, útiles para
+             xirar a xanela nas pantallas verticais, como unha tableta que
+             está en orientación de tableta.
+
+     native=yes
+
+             Ao executar Tux Paint en modo de pantalla completa, isto asume a
+             resolución actual da pantalla (anulando calquera opción
+             «windowsize»), segundo o estabelecido polo sistema operativo.
+
+     buttonsize=TAMAÑO
+
+             Estableza o tamaño dos píxeles dos botóns na interface de
+             usuario de Tux Paint (substituíndo o predeterminado de «48»).
+             Útil cando se usan pantallas de alta densidade ou dispositivos
+             de entrada groseiros, como rastrexadores de ollos.
+
+             The TAMAÑO value should be presented in pixels, and can be
+             anything between 24 and 192, inclusive. Most buttons are square,
+             and this will affect their width and height.
+
+     allowscreensaver=yes
+
+             De xeito predeterminado, Tux Paint impide que o protector de
+             pantalla do seu sistema se inicie. Pode anular isto empregando a
+             opción «allowscreensaver». Nota: Isto require a versión 1.2.12
+             ou superior da biblioteca SDL. (Tamén pode facelo configurando a
+             variábel de contorno «SDL_VIDEO_ALLOW_SCREENSAVER» do seu
+             sistema en «1».)
+
+     nosound=yes
+             Desactivar os efectos de son. (Nota: Ao premer [Alt] + [S] non
+             se poden volver activar os sons se se desactivaron usando esta
+             opción).
+
+     nostereo=yes
+             Desactivar a compatibilidade con panorama estéreo. (Útil para
+             usuarios con discapacidade auditiva nun oído ou lugares onde se
+             está a empregar un só altofalante ou auricular.)
+
+     noquit=yes
+
+             Desactivar o botón «Saír» na pantalla e evitar saír de Tux Paint
+             coa tecla [Escape].
+
+             Usar a combinación de teclado [Alt] + [F4] ou premer no botón de
+             peche da xanela (asumindo que non está en modo de pantalla
+             completa) segue a funcionar para saír de Tux Paint.
+
+             Tamén pode usar a seguinte combinación de teclado para saír:
+             [Maiúsculas] + [Control] + [Escape].
+
+     noprint=yes
+             Desactivar a función de impresión.
+
+     printdelay=SEGUNDOS
+             Restrinxir a impresión para que só poida producirse unha vez
+             cada SEGUNDOS segundos.
+
+     printcommand=ORDE
+
+             (Só Linux e Unix)
+
+             Use a orde ORDE para imprimir un ficheiro en formato PostScript
+             cando se preme no botón «Imprimir». Se esta opción non está
+             especificamente definida, o comando predeterminado é:
+
+               lpr
+
+             Nota: As versións de Tux Paint anteriores ao 0.9.15 enviaban
+             datos en formato PNG á orde de impresión (de xeito
+             predeterminado era «pngtopnm | pnmtops | lpr»).
+
+             Se estabeleceu unha alternativa printcommand no ficheiro de
+             configuración antes da versión 0.9.15, terá que cambialo.
+
+     altprintcommand=ORDE
+
+             (Só Linux e Unix)
+
+             Usa a orde ORDE para imprimir un ficheiro en formato PostScript
+             cando se preme no botón «Imprimir» mentres se mantén premida a
+             tecla modificadora . (Iso utilizase normalmente para fornecer un
+             diálogo de impresión, semellante a cando se preme
+             [Alt]+«Imprimir» en Windows e macOS.)
+
+             Se esta opción non está especificamente definida, a orde
+             predeterminada é o diálogo gráfico de impresión de KDE:
+
+               kprinter
+
+     printcfg=yes
+
+             (Só Windows e macOS)
+
+             Tux Paint empregará un ficheiro de configuración da impresora
+             cando imprima. Prema a tecla [Alt] mentres preme no botón
+             «Imprimir» en Tux Paint para que apareza unha xanela de diálogo
+             de impresión de Windows.
+
+             (Nota: Isto só funciona cando non se está a executar Tux Paint
+             en modo de pantalla completa.) Calquera cambio de configuración
+             feito neste diálogo gardarase no ficheiro «userdata/print.cfg» e
+             volverase a usar, sempre que estea configurada a opción
+             «printcfg»
+
+     altprint=always
+
+             Isto fai que Tux Paint amose sempre o diálogo da impresora (ou,
+             en Linux/Unix, execute a orde «altprint») cando se preme no
+             botón «Imprimir». Noutras palabras, é como premer en «Imprimir»
+             mentres mantén premido [Alt], agás que non precisa manter
+             premida [Alt] cada vez.
+
+     altprint=never
+
+             Isto evita que Tux Paint nunca amose o diálogo da impresora (ou,
+             en Linux/Unix, execute «altprintcommand») cando se preme no
+             botón «Imprimir». Noutras palabras, fai que a tecla [Alt] non
+             teña efecto ao premer no botón «Imprimir».
+
+     altprint=mod
+
+             Este é o comportamento normal e predeterminado. Tux Paint amosa
+             un diálogo de impresora (ou, en Linux/Unix, executa a orde
+             «altprint»), cando se preme a tecla [Alt] mentres se preme no
+             botón «Imprimir». Premer en «Imprimir» sen manter premida [Alt]
+             imprime sen amosar un diálogo.
+
+     papersize=TAMAÑO DO PAPEL
+
+             (Plataformas que usan o xerador interno PostScript de Tux Paint,
+             non Windows, macOS, BeOS ou Haiku).
+
+             Indica a Tux Paint que tamaño de PostScript debe xerar. Se non
+             se especifica ningún, Tux Paint comproba primeiro a súa variábel
+             de contorno $PAPER, após o ficheiro /etc/papersize e após usa o
+             tamaño de papel predeterminado da biblioteca «libpaper».
+
+             Os tamaños de papel válidos inclúen: letter, legal, tabloid,
+             executive, note, statement, a0, a1, a2, a3, a4, a5, a6, a7, a8,
+             a9, a10, b0, b1, b2 b3, b4, 10x14, 11x17, halfletter,
+             halfexecutive, halfnote, folio, quarto, ledger, archA, archB,
+             archC, archD, archE, flsa, flse, csheet, dsheet, esheet.
+
+     nolockfile=yes
+
+             De xeito predeterminado, Tux Paint usa o que se coñece como
+             «ficheiro de bloqueo» para evitar que se inicie máis dunha vez
+             en 30 segundos. (Isto é para evitar executar accidentalmente
+             varias copias; por exemplo, premendo dúas veces nun iniciador
+             dun só clic ou simplemente premendo impacientemente na icona
+             varias veces.)
+
+             To make Tux Paint ignore the lockfile, allowing it to run again,
+             even if it was just launched less than 30 seconds ago, enable
+             this setting in the configuration file, or run Tux Paint with
+             the --nolockfile option on the command-line.
+
+             By default, the lockfile is stored in "~/.tuxpaint/" under Linux
+             and Unix, and "userdata\" under Windows.
+
+     simpleshapes=yes
+             Disable the rotation step of the 'Shape' tool. Click, drag and
+             release is all that will be needed to draw a shape.
+
+     uppercase=yes
+             All text will be rendered only in uppercase (e.g., "Brush" will
+             be "BRUSH"). Useful for children who can read, but who have only
+             learned uppercase letters so far.
+
+     grab=yes
+
+             Tux Paint will attempt to 'grab' the mouse and keyboard, so that
+             the mouse is confined to Tux Paint's window, and nearly all
+             keyboard input is passed directly to it.
+
+             This is useful to disable operating system actions that could
+             get the user out of Tux Paint [Alt]-[Tab] window cycling,
+             [Ctrl]-[Escape], etc. This is especially useful in fullscreen
+             mode.
+
+     noshortcuts=yes
+
+             This disable keyboard shortcuts (e.g., [Ctrl]-[S] for save,
+             [Ctrl]-[N] for a new image, etc.)
+
+             This is useful to prevent unwanted commands from being activated
+             by children who aren't experienced with keyboards.
+
+     nowheelmouse=yes
+             This disables support for the wheel on mice that have it.
+             (Normally, the wheel will scroll the selector menu on the
+             right.)
+
+     nobuttondistinction=yes
+
+             Prior to Tux Paint 0.9.15, the middle and right buttons on a
+             mouse could also be used for clicking. In version 0.9.15, it was
+             changed so that only the left mouse button worked, so as to not
+             train children to use the wrong button.
+
+             However, for children who have trouble with the mouse, this
+             distinction between the two or three buttons on a mouse can be
+             disabled (returning Tux Paint to its old behavior) by using this
+             option.
+
+     nofancycursors=yes
+
+             This disables the fancy mouse pointer shapes in Tux Paint, and
+             uses your environment's normal mouse pointer.
+
+             In some enviornments, the fancy cursors cause problems. Use this
+             option to avoid them.
+
+     hidecursor=yes
+
+             Isto agocha completamente as formas do punteiro do rato en Tux
+             Paint.
+
+             Isto é útil para dispositivos con pantalla táctil, como as
+             tabletas.
+
+     nooutlines=yes
+
+             In this mode, much simpler outlines and 'rubber-band' lines are
+             displayed when using the Lines, Shapes, Stamps and Eraser tools.
+
+             This can help when Tux Paint is run on very slow computers, or
+             displayed on a remote X-Window display.
+
+     sysfonts=yes
+
+             This option causes Tux Paint to attempt to load fonts (for use
+             in the Text tool) from your operating system. Normally, Tux
+             Paint will only load the ones that came bundled with Tux Paint.
+
+     alllocalefonts=yes
+
+             Prior to version 0.9.21, Tux Paint loaded all fonts in its own
+             fonts directory, including locale-specific ones (e.g., the one
+             for Tibetan, which had no latin characters). As of 0.9.21, the
+             only font loaded from the locale-specific subdirectory, if any,
+             is one matching the locale Tux Paint is running on.
+
+             To load all locale-specific fonts (the old behavior), set this
+             option.
+
+     nostamps=yes
+
+             This option tells Tux Paint to not load any rubber stamp images,
+             which in turn ends up disabling the Stamps tool.
+
+             This can speed up Tux Paint when it first loads up, and reduce
+             memory usage while it's running. Of course, no stamps will be
+             available at all.
+
+     nostampcontrols=yes
+             Some images in the Stamps tool can be mirrored, flipped, and/or
+             have their size changed. This option disables the controls, and
+             only provides the basic stamps.
+
+     nomagiccontrols=yes
+             Some Magic tools have the option of acting like a paintbrush, or
+             affecting the entire canvas at once. This option disables the
+             controls, and only provides the default functionality (usually
+             paint-mode).
+
+     noshapecontrols=yes
+             Disable the control buttons shown when using the Shapes tool
+             that allow changing how shapes are drawn — centered around the
+             initial mouse click, or with a corner at the initial mouse
+             click.
+
+     nolabel=yes
+             Disables the Label tool: the tool that allows text entry which
+             can be edited later.
+
+     newcolorslast=yes
+             Places the blank color options in the New dialog at the end, so
+             that any Starters and/or Templates are shown first.
+
+     mirrorstamps=yes
+
+             For stamps that can be mirrored, this option sets them to their
+             mirrored shape by default.
+
+             This can be useful for people who prefer things right-to-left,
+             rather than left-to-right.
+
+     mouse-accessibility=yes
+             In this mode, instead of clicking, dragging and releasing (e.g.,
+             to draw), you click, move, and click again to end the motion.
+
+     onscreen-keyboard=yes
+             Presents a clickable on-screen keyboard when using the Text and
+             Label tools.
+
+     onscreen-keyboard-layout=NOME DA DISPOSICIÓN
+             Selecciona o deseño inicial para o teclado en pantalla cando usa
+             as ferramentas Texto e Etiqueta.
+             Nota: Usar esta opción implica onscreen-keyboard=yes
+             automaticamente, polo que configurar ambas as cousas é
+             redundante .
+
+     onscreen-keyboard-disable-change=yes
+             Desactiva a posibilidade de cambiar o deseño do teclado en
+             pantalla cando se usan as ferramentas Texto e Etiqueta, útil
+             para simplificar as cousas para os nenos pequenos.
+             Nota: Usar esta opción implica automaticamente
+             onscreen-keyboard=yes, polo que estabelecer ambas as cousas é
+             redundante.
+
+     joystick-dev=N
+             Especifica que dispositivo de mando debe ser usado por Tux
+             Paint. O valor predeterminado é 0 (a primeira panca de mando —
+             joystick).
+
+     joystick-slowness=VELOCIDADE
+             Estabelece un atraso en cada movemento do eixo, permitindo
+             atrasar a panca de mando (joystick). Os valores permitidos van
+             de 0 a 500. O valor predeterminado é 15.
+
+     joystick-threshold=LIMIAR
+             Estabelece o nivel mínimo de movemento do eixe para comezar a
+             mover o punteiro. Os valores permitidos son de 0 a 32766. O
+             valor predeterminado é 3200.
+
+     joystick-maxsteps=PASOS
+             Define os píxeles máximos que moverá o punteiro á vez. Os
+             valores permitidos van do 1 ao 7. O valor predeterminado é 7.
+
+     joystick-hat-timeout=MILISEGUNDOS
+             Establece o atraso após de que o punteiro comezará a moverse
+             automaticamente se se mantén premido o sombreiro. Os valores
+             permitidos van de 0 a 3000. O valor predeterminado é 1000.
+
+     joystick-hat-slowness=VELOCIDADE
+             Establece un atraso en cada movemento automático, o que permite
+             diminuír a velocidade do sombreiro. Os valores permitidos van de
+             0 a 500. O valor predeterminado é 15.
+
+     joystick-btn-escape=NÚMERO DE BOTÓN
+             Selecciona o número do botón da panca de control (joystick), tal
+             e como o ve SDL, que se usará para xerar un evento de escape.
+             Útil para desactivar os diálogos e saír.
+
+     joystick-btn-brush=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a seleccionar a ferramenta de pinceis.
+
+     joystick-btn-stamp=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a seleccionar a ferramenta de selos.
+
+     joystick-btn-lines=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a seleccionar a ferramenta de liñas.
+
+     joystick-btn-shapes=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a seleccionar a ferramenta de formas.
+
+     joystick-btn-text=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a seleccionar a ferramenta de texto.
+
+     joystick-btn-label=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a seleccionar a ferramenta de etiquetas.
+
+     joystick-btn-magic=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a seleccionar a ferramenta de máxia.
+
+     joystick-btn-undo=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a invocar a ferramenta de desfacer.
+
+     joystick-btn-redo=NÚMERO DE BOTÓN
+             Selecciona o número do botón da panca de mando (joystick), tal e
+             como o ve SDL, que será un atallo para seleccionar ferramenta de
+             refacer.
+
+     joystick-btn-eraser=NÚMERO DE BOTÓN
+             Selecciona o número do botón da panca de mando (joystick), tal e
+             como o ve SDL, que será un atallo para seleccionar Ferramenta de
+             goma.
+
+     joystick-btn-new=NÚMERO DE BOTÓN
+             Selecciona o número do botón da panca de mando (joystick), como
+             o ve SDL, que será un atallo para iniciar o diálogo para crear
+             un novo debuxo.
+
+     joystick-btn-open=NÚMERO DE BOTÓN
+             Selecciona o número do botón da panca de mando (joystick), como
+             o ve SDL, que será un atallo para iniciar o diálogo para abrir
+             un debuxo existente.
+
+     joystick-btn-save=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a garda o debuxo.
+
+     joystick-btn-pgsetup=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a inicia o diálogo de configuración da páxina
+             para imprimir.
+
+     joystick-btn-print=NÚMERO DE BOTÓN
+             Selecciona o número do botón do joystick, como o ve SDL, que
+             será un atallo a imprimir.
+
+     joystick-buttons-ignore=BOTÓN1,BOTÓN2,...
+             Un conxunto de números de botóns do mando (joystick), como se ve
+             en SDL, que deben ignorarse. Se non, a menos que sexan
+             utilizados por unha das opcións «joystick-btn-» anteriores, os
+             botóns veranse como un botón esquerdo do rato.
+
+     stampsize=TAMAÑO
+
+             Use esta opción para forzar a Tux Paint a estabelecer o tamaño
+             inicial de todos os selos. O valor TAMAÑO debería estar entre 0
+             (máis pequeno) e 10 (máis grande). O tamaño é relativo aos
+             tamaños dispoñíbeis do selo, que depende do selo en si, e do
+             tamaño actual do lenzo de Tux Paint.
+
+             Especifique «default» para que Tux Paint decida (o seu
+             comportamento estándar).
+
+     keyboard=yes
+
+             Isto permite empregar as teclas de frecha do teclado para
+             controlar o punteiro do rato. (por exemplo, para contornos sen
+             rato ou persoas con discapacidade ou problemas de
+             accesibilidade)
+
+             Funcionalidades:
+
+                * Movemento fino dentro do lenzo ou movemento groseiro se se
+                  mantén premida default.
+                * Movemento groseiro dentro das áreas dos botóns da
+                  ferramenta.
+                * Principais controis:
+                     * [Left]/[Right]/[Up]/[Down], teclado numérico [1] ata
+                       [9]: mover o rato
+                     * [Space]/[5]: premer co rato (agás cando se empregan as
+                       ferramentas de «Texto» ou de «Etiqueta»)
+                     * [Insert]/[F5]: premer co rato (sempre)
+                     * [F4] fai saltar o rato entre as «Ferramentas», «Cores»
+                       e as áreas do lenzo
+                     * Se o rato está dentro da sección «Ferramentas» á
+                       esquerda ou na sección «Cores» na parte inferior:
+                          * [F7]/[F8]: mover cara abaixo/arriba entre os
+                            botóns, respectivamente (só sección de
+                            ferramentas)
+                          * [F11]/[F12]: mover ao botón anterior/seguinte,
+                            respectivamente
+                * Para premer e arrastrar, manteña premida unha das teclas de
+                  «clic» (p. ex.: [Insert]) e use as teclas de movemento (p.
+                  ex.: [Left]).
+                     * Nota: a función de «accesibilidade do rato» funciona
+                       cos controis do rato do teclado. Con ambas as opcións
+                       activadas, as ferramentas de pintura pódense empregar
+                       para debuxar premendo unha tecla «clic» para comezar a
+                       premer, as teclas de movemento para moverse (que
+                       debuxará) e outra tecla «clic» para deixar de premer
+                       (deixar de debuxar).
+                * Aínda se pode usar un rato e/ou unha panca de mando
+                  (joystick) normais (para que poida, por exemplo, moverse co
+                  rato e premer co teclado ou viceversa)
+
+     savedir=DIRECTORIO
+
+             Use esta opción para cambiar onde se atopa o directorio/cartafol
+             «saved» de Tux Paint, que é onde Tux Paint garda e abre imaxes.
+
+             Se non o anula, a ubicación predeterminada é:
+
+                * Linux & Unix — Under a hidden directory named ".tuxpaint"
+                  in your home directory (aka "~" or "$HOME")
+                  Exemplo: /home/username/.tuxpaint/saved/
+                * Windows — Inside a folder named "TuxPaint" in your
+                  "Application Data" folder.
+                  Exemplo: C:\Documents and Settings\Username\Application
+                  Data\TuxPaint\saved\
+                * macOS — Inside a folder named "TuxPaint" in your
+                  "Application Support" folder.
+                  Exemplo: /Users/Username/Library/Application
+                  Support/TuxPaint/saved/
+
+             Note: When specifying a Windows drive (e.g., "H:\"), you must
+             also specify a subdirectory.
+
+             Note: Prior to version 0.9.18, Tux Paint would also use the
+             setting or default for "savedir" as the place to search for
+             personal data files (brushes, stamps, starters and fonts). As of
+             version 0.9.18, they may be specified separately (see the
+             "datadir" option, below).
+
+             Exemplo: savedir=Z:\tuxpaint\
+
+     exportdir=DIRECTORIO
+
+             Use this option to change where Tux Paint exports files — single
+             images, or animated GIF slideshows — for external use.
+
+             Se non o anula, a ubicación predeterminada é:
+
+                * Linux & Unix — If available, wherever your desktop
+                  environment is configured for pictures to be stored, based
+                  on your XDG (X Desktop Group) configuration. (Try running
+                  the command-line "xdg-user-dir PICTURES" to find out.)
+                  Typically (in an English locale), this will be a "Imaxes"
+                  subdirectory in your home directory (i.e., "$HOME/Imaxes"
+                  aka "~/Imaxes").
+                  Tux Paint will fall back to using that typical directory,
+                  of no XDG configuration can be read, or nothing is set for
+                  "XDG_PICTURES_DIR".
+                * Windows — TBD! 
+                * macOS — TBD!
+
+             Note: When the defaults are used, a new "TuxPaint" subdirectory
+             will be created and used. (e.g., "~/Imaxes/TuxPaint") When the
+             "--exportdir" option is used, the exact path specified will be
+             used (no "TuxPaint" subdirectory is created).
+
+             The directory itself (e.g., "~/Imaxes/TuxPaint") will be
+             created, if it doesn't exist.
+
+             If the parent directory (e.g., "~/Imaxes/TuxPaint") also does
+             not exist, Tux Paint will attempt to create it as well (but not
+             any directories higher than that).
+
+             Exemplo: exportdir=/home/penguin/TuxPaintExports
+
+     datadir=DIRECTORIO
+
+             Use this option to change where Tux Paint looks for personal
+             data files (brushes, stamps, starters, templates, and fonts
+             specific to the current user).
+
+             Tux Paint will search for subdirectories/subfolders named
+             "brushes", "stamps", "starters", "templates", and "fonts" under
+             the specified data directory.
+
+             Se non o anula, a ubicación predeterminada é:
+
+                * Linux & Unix — Under a hidden directory named ".tuxpaint"
+                  in your home directory (aka "~" or "$HOME")
+                  Exemplo: /home/username/.tuxpaint/brushes/
+                * Windows — Inside a folder named "TuxPaint" in your
+                  "Application Data" folder.
+                  Exemplo: C:\Documents and Settings\Username\Application
+                  Data\TuxPaint\brushes\
+                * macOS — Inside a folder named "TuxPaint" in your
+                  "Application Support" folder.
+                  Exemplo: /Users/Username/Library/Application
+                  Support/TuxPaint/brushes/
+
+             Note: Prior to version 0.9.18, Tux Paint would use the same
+             setting or default as for "savedir" to search for data files. As
+             of version 0.9.18, they may be specified separately.
+
+             Note: When specifying a Windows drive (e.g., "H:\"), you must
+             also specify a subdirectory.
+
+             Exemplo: datadir=/home/johnny/tuxpaint-data/
+
+     saveover=yes
+             This disables the "Save over the old version...?" prompt when
+             saving an existing file. With this option, the older version
+             will always be replaced by the new version, automatically.
+
+     saveover=new
+             This also disables the "Save over the old version...?" prompt
+             when saving an existing file. This option, however, will always
+             save a new file, rather than overwrite the older version.
+
+     saveover=ask
+
+             (This option is redundant, since this is the default.)
+
+             When saving an existing drawing, you will be first asked whether
+             to save over the older version or not.
+
+     nosave=yes
+             This disables Tux Paint's ability to save files (and therefore
+             disables the on-screen "Save" button). It can be used in
+             situations where the program is only being used for fun, or in a
+             test environment.
+
+     autosave=yes
+             This prevents Tux Paint from asking whether you want to save the
+             current picture when quitting, and assumes you do.
+
+     startblank=yes
+             This causes Tux Paint to display a blank canvas when it first
+             starts up, rather than loading the last image that was being
+             edited.
+
+     colorfile=NOME DE FICHEIRO
+
+             You may override Tux Paint's default color palette by creating a
+             plain ASCII text file that describes the colors you want, and
+             pointing to that file using the "colorfile" option.
+
+             The file should list one color per line. Colors are defined in
+             terms of their Red, Green and Blue values, each from 0 (off) to
+             255 (brightest). (For more information, try Wikipedia's "RGB
+             color model" article.)
+
+             Colors may be listed using three decimal numbers (e.g., "255 68
+             136") or a 6- or 3-digit-long hexadecimal 'triplet' (e.g.,
+             "#ff4488" or "#F48").
+
+             After the color definition (on the same line) you may enter text
+             to describe the color. Tux will display this text when the color
+             is clicked. (For example, "#FFF Branco coma a neve.")
+
+             As an example, you can see the default colors currently used in
+             Tux Paint in: "default_colors.txt".
+
+             NOTES: You must separate decimal values with spaces, and begin
+             hexadecimal values with a pound/number-sign character ("#"). In
+             3-digit hexadecimal, each digit is used for both the high and
+             low halves of the byte, so "#FFF" is the same as "#FFFFFF", not
+             "#F0F0F0".
+
+     colorsrows=ROWS
+
+             How many rows of color palette buttons to show; useful when
+             using a large color palette (see "colorfile", above), and/or for
+             use with coarse input devices (like eyegaze trackers). "ROWS"
+             may be between "1" (the default) and "3".
+
+     lang=IDIOMA
+
+             Run Tux Paint in one of the supported languages. Possible choice
+             for LANGUAGE currently include:
+
+               +-----------------------------------------------------------+
+               |english              |american-english     |               |
+               |---------------------+---------------------+---------------|
+               |acholi               |acoli                |               |
+               |---------------------+---------------------+---------------|
+               |afrikaans            |                     |               |
+               |---------------------+---------------------+---------------|
+               |akan                 |twi-fante            |               |
+               |---------------------+---------------------+---------------|
+               |albanian             |                     |               |
+               |---------------------+---------------------+---------------|
+               |amharic              |                     |               |
+               |---------------------+---------------------+---------------|
+               |arabic               |                     |               |
+               |---------------------+---------------------+---------------|
+               |aragones             |                     |               |
+               |---------------------+---------------------+---------------|
+               |armenian             |hayeren              |               |
+               |---------------------+---------------------+---------------|
+               |assamese             |                     |               |
+               |---------------------+---------------------+---------------|
+               |asturian             |                     |               |
+               |---------------------+---------------------+---------------|
+               |australian-english   |                     |               |
+               |---------------------+---------------------+---------------|
+               |azerbaijani          |                     |               |
+               |---------------------+---------------------+---------------|
+               |bambara              |                     |               |
+               |---------------------+---------------------+---------------|
+               |basque               |euskara              |               |
+               |---------------------+---------------------+---------------|
+               |belarusian           |bielaruskaja         |               |
+               |---------------------+---------------------+---------------|
+               |bengali              |                     |               |
+               |---------------------+---------------------+---------------|
+               |bodo                 |                     |               |
+               |---------------------+---------------------+---------------|
+               |bokmal               |                     |               |
+               |---------------------+---------------------+---------------|
+               |bosnian              |                     |               |
+               |---------------------+---------------------+---------------|
+               |brazilian-portuguese |portugues-brazilian  |brazilian      |
+               |---------------------+---------------------+---------------|
+               |breton               |brezhoneg            |               |
+               |---------------------+---------------------+---------------|
+               |british-english      |british              |               |
+               |---------------------+---------------------+---------------|
+               |bulgarian            |                     |               |
+               |---------------------+---------------------+---------------|
+               |canadian-english     |                     |               |
+               |---------------------+---------------------+---------------|
+               |catalan              |catala               |               |
+               |---------------------+---------------------+---------------|
+               |chinese              |simplified-chinese   |               |
+               |---------------------+---------------------+---------------|
+               |croatian             |hrvatski             |               |
+               |---------------------+---------------------+---------------|
+               |czech                |cesky                |               |
+               |---------------------+---------------------+---------------|
+               |danish               |dansk                |               |
+               |---------------------+---------------------+---------------|
+               |                     |dogri                |               |
+               |---------------------+---------------------+---------------|
+               |dutch                |nederlands           |               |
+               |---------------------+---------------------+---------------|
+               |esperanto            |                     |               |
+               |---------------------+---------------------+---------------|
+               |estonian             |                     |               |
+               |---------------------+---------------------+---------------|
+               |faroese              |                     |               |
+               |---------------------+---------------------+---------------|
+               |finnish              |suomi                |               |
+               |---------------------+---------------------+---------------|
+               |french               |francais             |               |
+               |---------------------+---------------------+---------------|
+               |fula                 |fulah                |pulaar-fulfulde|
+               |---------------------+---------------------+---------------|
+               |gaelic               |gaidhlig             |irish-gaelic   |
+               |---------------------+---------------------+---------------|
+               |galician             |galego               |               |
+               |---------------------+---------------------+---------------|
+               |georgian             |                     |               |
+               |---------------------+---------------------+---------------|
+               |german               |deutsch              |               |
+               |---------------------+---------------------+---------------|
+               |greek                |                     |               |
+               |---------------------+---------------------+---------------|
+               |gronings             |zudelk-veenkelonioals|               |
+               |---------------------+---------------------+---------------|
+               |gujarati             |                     |               |
+               |---------------------+---------------------+---------------|
+               |hebrew               |                     |               |
+               |---------------------+---------------------+---------------|
+               |hindi                |                     |               |
+               |---------------------+---------------------+---------------|
+               |hungarian            |magyar               |               |
+               |---------------------+---------------------+---------------|
+               |icelandic            |islenska             |               |
+               |---------------------+---------------------+---------------|
+               |indonesian           |bahasa-indonesia     |               |
+               |---------------------+---------------------+---------------|
+               |inuktitut            |                     |               |
+               |---------------------+---------------------+---------------|
+               |italian              |italiano             |               |
+               |---------------------+---------------------+---------------|
+               |japanese             |                     |               |
+               |---------------------+---------------------+---------------|
+               |kabyle               |                     |kabylian       |
+               |---------------------+---------------------+---------------|
+               |kannada              |                     |               |
+               |---------------------+---------------------+---------------|
+               |kashmiri-devanagari  |                     |               |
+               |---------------------+---------------------+---------------|
+               |kashmiri-perso-arabic|                     |               |
+               |---------------------+---------------------+---------------|
+               |khmer                |                     |               |
+               |---------------------+---------------------+---------------|
+               |kiga                 |chiga                |               |
+               |---------------------+---------------------+---------------|
+               |kinyarwanda          |                     |               |
+               |---------------------+---------------------+---------------|
+               |klingon              |tlhIngan             |               |
+               |---------------------+---------------------+---------------|
+               |konkani-devanagari   |                     |               |
+               |---------------------+---------------------+---------------|
+               |konkani-roman        |                     |               |
+               |---------------------+---------------------+---------------|
+               |korean               |                     |               |
+               |---------------------+---------------------+---------------|
+               |kurdish              |                     |               |
+               |---------------------+---------------------+---------------|
+               |latvian              |                     |               |
+               |---------------------+---------------------+---------------|
+               |lithuanian           |lietuviu             |               |
+               |---------------------+---------------------+---------------|
+               |luganda              |                     |               |
+               |---------------------+---------------------+---------------|
+               |luxembourgish        |letzebuergesch       |               |
+               |---------------------+---------------------+---------------|
+               |macedonian           |                     |               |
+               |---------------------+---------------------+---------------|
+               |maithili             |                     |               |
+               |---------------------+---------------------+---------------|
+               |malay                |                     |               |
+               |---------------------+---------------------+---------------|
+               |malayalam            |                     |               |
+               |---------------------+---------------------+---------------|
+               |manipuri-bengali     |                     |               |
+               |---------------------+---------------------+---------------|
+               |manipuri-meitei-mayek|                     |               |
+               |---------------------+---------------------+---------------|
+               |marathi              |                     |               |
+               |---------------------+---------------------+---------------|
+               |mexican-spanish      |espanol-mejicano     |mexican        |
+               |---------------------+---------------------+---------------|
+               |mongolian            |                     |               |
+               |---------------------+---------------------+---------------|
+               |ndebele              |                     |               |
+               |---------------------+---------------------+---------------|
+               |nepali               |                     |               |
+               |---------------------+---------------------+---------------|
+               |northern-sotho       |sesotho-sa-leboa     |               |
+               |---------------------+---------------------+---------------|
+               |norwegian            |nynorsk              |norsk          |
+               |---------------------+---------------------+---------------|
+               |occitan              |                     |               |
+               |---------------------+---------------------+---------------|
+               |odia                 |oriya                |               |
+               |---------------------+---------------------+---------------|
+               |ojibwe               |ojibway              |               |
+               |---------------------+---------------------+---------------|
+               |persian              |                     |               |
+               |---------------------+---------------------+---------------|
+               |polish               |polski               |               |
+               |---------------------+---------------------+---------------|
+               |portuguese           |portugues            |               |
+               |---------------------+---------------------+---------------|
+               |punjabi              |panjabi              |               |
+               |---------------------+---------------------+---------------|
+               |romanian             |                     |               |
+               |---------------------+---------------------+---------------|
+               |russian              |russkiy              |               |
+               |---------------------+---------------------+---------------|
+               |sanskrit             |                     |               |
+               |---------------------+---------------------+---------------|
+               |santali-devanagari   |                     |               |
+               |---------------------+---------------------+---------------|
+               |santali-ol-chiki     |                     |               |
+               |---------------------+---------------------+---------------|
+               |scottish             |ghaidhlig            |scottish-gaelic|
+               |---------------------+---------------------+---------------|
+               |serbian              |                     |               |
+               |---------------------+---------------------+---------------|
+               |serbian-latin        |                     |               |
+               |---------------------+---------------------+---------------|
+               |shuswap              |secwepemctin         |               |
+               |---------------------+---------------------+---------------|
+               |sindhi-devanagari    |                     |               |
+               |---------------------+---------------------+---------------|
+               |sindhi-perso-arabic  |                     |               |
+               |---------------------+---------------------+---------------|
+               |slovak               |                     |               |
+               |---------------------+---------------------+---------------|
+               |slovenian            |slovensko            |               |
+               |---------------------+---------------------+---------------|
+               |songhay              |                     |               |
+               |---------------------+---------------------+---------------|
+               |southafrican-english |                     |               |
+               |---------------------+---------------------+---------------|
+               |spanish              |espanol              |               |
+               |---------------------+---------------------+---------------|
+               |sundanese            |                     |               |
+               |---------------------+---------------------+---------------|
+               |swahili              |                     |               |
+               |---------------------+---------------------+---------------|
+               |swedish              |svenska              |               |
+               |---------------------+---------------------+---------------|
+               |tagalog              |                     |               |
+               |---------------------+---------------------+---------------|
+               |tamil                |                     |               |
+               |---------------------+---------------------+---------------|
+               |telugu               |                     |               |
+               |---------------------+---------------------+---------------|
+               |thai                 |                     |               |
+               |---------------------+---------------------+---------------|
+               |tibetan              |                     |               |
+               |---------------------+---------------------+---------------|
+               |traditional-chinese  |                     |               |
+               |---------------------+---------------------+---------------|
+               |turkish              |                     |               |
+               |---------------------+---------------------+---------------|
+               |twi                  |                     |               |
+               |---------------------+---------------------+---------------|
+               |ukrainian            |                     |               |
+               |---------------------+---------------------+---------------|
+               |urdu                 |                     |               |
+               |---------------------+---------------------+---------------|
+               |venda                |                     |               |
+               |---------------------+---------------------+---------------|
+               |venetian             |veneto               |               |
+               |---------------------+---------------------+---------------|
+               |vietnamese           |                     |               |
+               |---------------------+---------------------+---------------|
+               |walloon              |walon                |               |
+               |---------------------+---------------------+---------------|
+               |welsh                |cymraeg              |               |
+               |---------------------+---------------------+---------------|
+               |wolof                |                     |               |
+               |---------------------+---------------------+---------------|
+               |xhosa                |                     |               |
+               |---------------------+---------------------+---------------|
+               |miahuatlan-zapotec   |                     |zapotec        |
+               |---------------------+---------------------+---------------|
+               |zulu                 |                     |zulu           |
+               +-----------------------------------------------------------+
+
+     ----------------------------------------------------------------------
+
+                 Anulación da configuración do sistema. Opcións
+
+     (Para usuarios de Linux e Unix)
+
+     If any of the above options are set in "/etc/tuxpaint/tuxpaint.config",
+     you can override them in your own "~/.tuxpaintrc" file.
+
+     For true/false options, like "noprint" and "grab", you can simply say
+     they equal 'no' in your "~/.tuxpaintrc" file:
+
+       noprint=no
+       uppercase=no
+
+     Or, you can use options similar to the command-line override options
+     described below. For example:
+
+       print=yes
+       mixedcase=yes
+
+     ----------------------------------------------------------------------
+
+                            Opcións da liña de ordes
+
+     As opcións tamén se poden emitir na liña de ordes cando se inicia Tux
+     Paint.
+
+       --fullscreen
+       --LARGOxALTO
+       --orient=portrait
+       --native
+       --allowscreensaver
+       --startblank
+       --nosound
+       --nostereo
+       --noquit
+       --noprint
+       --printdelay=SEGUNDOS
+       --printcfg
+       --altprintnever
+       --altprintalways
+       --papersize=TAMAÑO DO PAPEL
+       --nolockfile
+       --simpleshapes
+       --uppercase
+       --grab
+       --noshortcuts
+       --nowheelmouse
+       --nobuttondistinction
+       --nofancycursors
+       --hidecursor
+       --nooutlines
+       --nostamps
+       --nostampcontrols
+       --nomagiccontrols
+       --noshapecontrols
+       --nolabel
+       --newcolorslast
+       --mouse-accessibility
+       --onscreen-keyboard
+       --onscreen-keyboard-layout
+       --onscreen-keyboard-disable-change
+       --joystick-dev
+       --joystick-slowness
+       --joystick-threshold
+       --joystick-maxsteps
+       --joystick-hat-slowness
+       --joystick-hat-timeout
+       --joystick-btn-escape
+       --joystick-btn-brush
+       --joystick-btn-stamp
+       --joystick-btn-lines
+       --joystick-btn-shapes
+       --joystick-btn-text
+       --joystick-btn-label
+       --joystick-btn-magic
+       --joystick-btn-undo
+       --joystick-btn-redo
+       --joystick-btn-eraser
+       --joystick-btn-new
+       --joystick-btn-open
+       --joystick-btn-save
+       --joystick-btn-pgsetup
+       --joystick-btn-print
+       --joystick-buttons-ignore
+       --sysfonts
+       --alllocalefonts
+       --mirrorstamps
+       --stampsize=TAMAÑO
+       --keyboard
+       --savedir DIRECTORIO
+       --datadir DIRECTORIO
+       --exportdir DIRECTORIO
+       --saveover
+       --saveovernew
+       --nosave
+       --autosave
+       --lang IDIOMA
+       --colorfile FICHEIRO
+               These enable or correspond to the configuration file options
+               described above.
+
+                     -------------------------------------
+
+       --windowed
+       --800x600
+       --orient=landscape
+       --disablescreensaver
+       --startlast
+       --sound
+       --stereo
+       --quit
+       --print
+       --printdelay=0
+       --noprintcfg
+       --altprintmod
+       --lockfile
+       --complexshapes
+       --mixedcase
+       --dontgrab
+       --shortcuts
+       --wheelmouse
+       --buttondistinction
+       --fancycursors
+       --showcursor
+       --outlines
+       --stamps
+       --stampcontrols
+       --magiccontrols
+       --shapecontrols
+       --label
+       --newcolorsfirst
+       --nosysfonts
+       --currentlocalefont
+       --dontmirrorstamps
+       --stampsize=default
+       --mouse
+       --saveoverask
+       --save
+       --noautosave
+               These options can be used to override any settings made in the
+               configuration file. (If the option isn't set in the
+               configuration file(s), no overriding option is necessary.)
+
+                     -------------------------------------
+
+       --locale CONF. REXIONAL
+
+               Run Tux Paint in one of the support languages. See the
+               "Choosing a Different Language" section below for the locale
+               strings (e.g., "de_DE" for German) to use.
+
+               (If your locale is already set, e.g. with the "$LANG"
+               environment variable, this option is not necessary, since Tux
+               Paint honors your environment's setting, if possible.)
+
+       --nosysconfig
+
+               Under Linux and Unix, this prevents the system-wide
+               configuration file, "/etc/tuxpaint/tuxpaint.conf", from being
+               read.
+
+               Only your own configuration file, "~/.tuxpaintrc", if it
+               exists, will be used.
+
+     ----------------------------------------------------------------------
+
+Command-Line Informational Options
+
+       The following options display some informative text on the screen. Tux
+       Paint doesn't actually start up and run afterwards, however.
+
+         --version
+         --verbose-version
+                 Display the version number and date of the copy of Tux Paint
+                 you are running. The "--verbose-version" also lists what
+                 compile-time options were set. (See INSTALL and FAQ).
+
+         --copying
+                 Show brief license information about copying Tux Paint.
+
+         --usage
+                 Display the list of available command-line options.
+
+         --help
+                 Display brief help on using Tux Paint.
+
+         --lang help
+                 Display a list of available languages in Tux Paint.
+
+         --joystick-dev list
+                 Display list of attached joysticks available to Tux Paint.
+
+     ----------------------------------------------------------------------
+
+                         Choosing a Different Language
+
+     Tux Paint has been translated into a number of languages. To access the
+     translations, you can use the "--lang" option on the command-line to set
+     the language (e.g. "--lang spanish") or use the "lang=" setting in the
+     configuration file (e.g., "lang=spanish").
+
+     Tux Paint also honors your environment's current locale. (You can
+     override it on the command-line using the "--locale" option; see above.)
+
+     Use the option "--lang help" to list the available language options
+     available.
+
+Idiomas dispoñíbeis
+
+       +--------------------------------------------------------------------+
+       |                |                   |                |Combinación de|
+       |                |Idioma             |Idioma          |teclas de     |
+       |Código rexional |(nome nativo)      |(nome en inglés)|ciclo de      |
+       |                |                   |                |método de     |
+       |                |                   |                |entrada       |
+       |----------------+-------------------+----------------+--------------|
+       |C               |                   |English         |              |
+       |----------------+-------------------+----------------+--------------|
+       |ach_UG          |Acoli              |Acholi          |              |
+       |----------------+-------------------+----------------+--------------|
+       |af_ZA           |                   |Afrikaans       |              |
+       |----------------+-------------------+----------------+--------------|
+       |ak_GH           |                   |Akan            |              |
+       |----------------+-------------------+----------------+--------------|
+       |am_ET           |                   |Amharic         |              |
+       |----------------+-------------------+----------------+--------------|
+       |an_ES           |                   |Aragones        |              |
+       |----------------+-------------------+----------------+--------------|
+       |ar_SA           |                   |Arabic          |              |
+       |----------------+-------------------+----------------+--------------|
+       |as_IN           |                   |Assamese        |              |
+       |----------------+-------------------+----------------+--------------|
+       |ast_ES          |                   |Asturian        |              |
+       |----------------+-------------------+----------------+--------------|
+       |az_AZ           |                   |Azerbaijani     |              |
+       |----------------+-------------------+----------------+--------------|
+       |bm_ML           |                   |Bambara         |              |
+       |----------------+-------------------+----------------+--------------|
+       |bn_IN           |                   |Bengali         |              |
+       |----------------+-------------------+----------------+--------------|
+       |be_BY           |Bielaruskaja       |Belarusian      |              |
+       |----------------+-------------------+----------------+--------------|
+       |bg_BG           |                   |Bulgarian       |              |
+       |----------------+-------------------+----------------+--------------|
+       |bo_CN (*)       |                   |Tibetan         |              |
+       |----------------+-------------------+----------------+--------------|
+       |br_FR           |Brezhoneg          |Breton          |              |
+       |----------------+-------------------+----------------+--------------|
+       |brx_IN          |                   |Bodo            |              |
+       |----------------+-------------------+----------------+--------------|
+       |bs_BA           |                   |Bosnian         |              |
+       |----------------+-------------------+----------------+--------------|
+       |ca_ES           |Català             |Catalan         |              |
+       |----------------+-------------------+----------------+--------------|
+       |ca_ES@valencia  |Valencia           |Valencian       |              |
+       |----------------+-------------------+----------------+--------------|
+       |cgg_UG          |Chiga              |Kiga            |              |
+       |----------------+-------------------+----------------+--------------|
+       |cs_CZ           |Cesky              |Czech           |              |
+       |----------------+-------------------+----------------+--------------|
+       |cy_GB           |Cymraeg            |Welsh           |              |
+       |----------------+-------------------+----------------+--------------|
+       |da_DK           |Dansk              |Danish          |              |
+       |----------------+-------------------+----------------+--------------|
+       |de_DE           |Deutsch            |German          |              |
+       |----------------+-------------------+----------------+--------------|
+       |doi_IN          |                   |Dogri           |              |
+       |----------------+-------------------+----------------+--------------|
+       |et_EE           |                   |Estonian        |              |
+       |----------------+-------------------+----------------+--------------|
+       |el_GR (*)       |                   |Greek           |              |
+       |----------------+-------------------+----------------+--------------|
+       |en_AU           |                   |Australian      |              |
+       |                |                   |English         |              |
+       |----------------+-------------------+----------------+--------------|
+       |en_CA           |                   |Canadian English|              |
+       |----------------+-------------------+----------------+--------------|
+       |en_GB           |                   |British English |              |
+       |----------------+-------------------+----------------+--------------|
+       |en_ZA           |                   |South African   |              |
+       |                |                   |English         |              |
+       |----------------+-------------------+----------------+--------------|
+       |eo              |                   |Esperanto       |              |
+       |----------------+-------------------+----------------+--------------|
+       |es_ES           |Español            |Spanish         |              |
+       |----------------+-------------------+----------------+--------------|
+       |es_MX           |Español-Mejicano   |Mexican Spanish |              |
+       |----------------+-------------------+----------------+--------------|
+       |eu_ES           |Euskara            |Basque          |              |
+       |----------------+-------------------+----------------+--------------|
+       |fa_IR           |                   |Persian         |              |
+       |----------------+-------------------+----------------+--------------|
+       |ff_SN           |Fulah              |Fula            |              |
+       |----------------+-------------------+----------------+--------------|
+       |fi_FI           |Suomi              |Finnish         |              |
+       |----------------+-------------------+----------------+--------------|
+       |fo_FO           |                   |Faroese         |              |
+       |----------------+-------------------+----------------+--------------|
+       |fr_FR           |Français           |French          |              |
+       |----------------+-------------------+----------------+--------------|
+       |ga_IE           |Gàidhlig           |Irish Gaelic    |              |
+       |----------------+-------------------+----------------+--------------|
+       |gd_GB           |Ghaidhlig          |Scottish Gaelic |              |
+       |----------------+-------------------+----------------+--------------|
+       |gl_ES           |Galego             |Galician        |              |
+       |----------------+-------------------+----------------+--------------|
+       |gos_NL          |Zudelk             |Gronings        |              |
+       |                |Veenkelonioals     |                |              |
+       |----------------+-------------------+----------------+--------------|
+       |gu_IN           |                   |Gujarati        |              |
+       |----------------+-------------------+----------------+--------------|
+       |he_IL (*)       |                   |Hebrew          |              |
+       |----------------+-------------------+----------------+--------------|
+       |hi_IN (*)       |                   |Hindi           |              |
+       |----------------+-------------------+----------------+--------------|
+       |hr_HR           |Hrvatski           |Croatian        |              |
+       |----------------+-------------------+----------------+--------------|
+       |hu_HU           |Magyar             |Hungarian       |              |
+       |----------------+-------------------+----------------+--------------|
+       |hy_AM           |Hayeren            |Armenian        |              |
+       |----------------+-------------------+----------------+--------------|
+       |id_ID           |Bahasa Indonesia   |Indonesian      |              |
+       |----------------+-------------------+----------------+--------------|
+       |is_IS           |Íslenska           |Icelandic       |              |
+       |----------------+-------------------+----------------+--------------|
+       |it_IT           |Italiano           |Italian         |              |
+       |----------------+-------------------+----------------+--------------|
+       |iu_CA           |                   |Inuktitut       |              |
+       |----------------+-------------------+----------------+--------------|
+       |ja_JP (*)       |                   |Japanese        |right [Alt]   |
+       |----------------+-------------------+----------------+--------------|
+       |ka_GE           |                   |Georgian        |              |
+       |----------------+-------------------+----------------+--------------|
+       |kab             |                   |Kabyle          |              |
+       |----------------+-------------------+----------------+--------------|
+       |km_KH           |                   |Khmer           |              |
+       |----------------+-------------------+----------------+--------------|
+       |kn_IN           |                   |Kannada         |              |
+       |----------------+-------------------+----------------+--------------|
+       |ko_KR (*)       |                   |Korean          |right [Alt] or|
+       |                |                   |                |left [Alt]    |
+       |----------------+-------------------+----------------+--------------|
+       |kok_IN          |                   |Konkani         |              |
+       |                |                   |(Devanagari)    |              |
+       |----------------+-------------------+----------------+--------------|
+       |kok@roman       |                   |Konkani (Roman) |              |
+       |----------------+-------------------+----------------+--------------|
+       |ks_IN@devanagari|                   |Kashmiri        |              |
+       |                |                   |(Devanagari)    |              |
+       |----------------+-------------------+----------------+--------------|
+       |ks_IN           |                   |Kashmiri        |              |
+       |                |                   |(Perso-Arabic)  |              |
+       |----------------+-------------------+----------------+--------------|
+       |ku_TR           |                   |Kurdish         |              |
+       |----------------+-------------------+----------------+--------------|
+       |lb_LU           |Letzebuergesch     |Luxembourgish   |              |
+       |----------------+-------------------+----------------+--------------|
+       |lg_UG           |                   |Luganda         |              |
+       |----------------+-------------------+----------------+--------------|
+       |lt_LT           |Lietuviu           |Lithuanian      |              |
+       |----------------+-------------------+----------------+--------------|
+       |lv_LV           |                   |Latvian         |              |
+       |----------------+-------------------+----------------+--------------|
+       |mk_MK           |                   |Macedonian      |              |
+       |----------------+-------------------+----------------+--------------|
+       |mai_IN          |                   |Maithili        |              |
+       |----------------+-------------------+----------------+--------------|
+       |ml_IN           |                   |Malayalam       |              |
+       |----------------+-------------------+----------------+--------------|
+       |mn_MN           |                   |Mongolian       |              |
+       |----------------+-------------------+----------------+--------------|
+       |mni_IN          |                   |Manipuri        |              |
+       |                |                   |(Bengali)       |              |
+       |----------------+-------------------+----------------+--------------|
+       |mni@meiteimayek |                   |Manipuri (Meitei|              |
+       |                |                   |Mayek)          |              |
+       |----------------+-------------------+----------------+--------------|
+       |mr_IN           |                   |Marathi         |              |
+       |----------------+-------------------+----------------+--------------|
+       |ms_MY           |                   |Malay           |              |
+       |----------------+-------------------+----------------+--------------|
+       |nb_NO           |Norsk (bokmål)     |Norwegian Bokmål|              |
+       |----------------+-------------------+----------------+--------------|
+       |ne_NP           |Nepali             |                |              |
+       |----------------+-------------------+----------------+--------------|
+       |nl_NL           |                   |Dutch           |              |
+       |----------------+-------------------+----------------+--------------|
+       |nn_NO           |Norsk (nynorsk)    |Norwegian       |              |
+       |                |                   |Nynorsk         |              |
+       |----------------+-------------------+----------------+--------------|
+       |nr_ZA           |                   |Ndebele         |              |
+       |----------------+-------------------+----------------+--------------|
+       |nso_ZA          |Sesotho sa Leboa   |Northern Sotho  |              |
+       |----------------+-------------------+----------------+--------------|
+       |oc_FR           |                   |Occitan         |              |
+       |----------------+-------------------+----------------+--------------|
+       |oj_CA           |                   |Ojibwe          |Ojibway       |
+       |----------------+-------------------+----------------+--------------|
+       |pa_IN           |                   |Punjabi         |              |
+       |----------------+-------------------+----------------+--------------|
+       |or_IN           |                   |Odia            |Oriya         |
+       |----------------+-------------------+----------------+--------------|
+       |pl_PL           |Polski             |Polish          |              |
+       |----------------+-------------------+----------------+--------------|
+       |pt_BR           |Portugês Brazileiro|Brazilian       |              |
+       |                |                   |Portuguese      |              |
+       |----------------+-------------------+----------------+--------------|
+       |pt_PT           |Portugês           |Portuguese      |              |
+       |----------------+-------------------+----------------+--------------|
+       |ro_RO           |                   |Romanian        |              |
+       |----------------+-------------------+----------------+--------------|
+       |ru_RU           |Russkiy            |Russian         |              |
+       |----------------+-------------------+----------------+--------------|
+       |rw_RW           |                   |Kinyarwanda     |              |
+       |----------------+-------------------+----------------+--------------|
+       |sa_IN           |                   |Sanskrit        |              |
+       |----------------+-------------------+----------------+--------------|
+       |sat_IN          |                   |Santali         |              |
+       |                |                   |(Devanagari)    |              |
+       |----------------+-------------------+----------------+--------------|
+       |sat@olchiki     |                   |Santali         |              |
+       |                |                   |(Ol-Chikii)     |              |
+       |----------------+-------------------+----------------+--------------|
+       |shs_CA          |Secwepemctin       |Shuswap         |              |
+       |----------------+-------------------+----------------+--------------|
+       |si_LK           |                   |Sinhala         |              |
+       |----------------+-------------------+----------------+--------------|
+       |sd_IN@devanagari|                   |Sindhi          |              |
+       |                |                   |(Devanagari)    |              |
+       |----------------+-------------------+----------------+--------------|
+       |sd_IN           |                   |Sindhi          |              |
+       |----------------+-------------------+----------------+--------------|
+       |sk_SK           |                   |Slovak          |              |
+       |----------------+-------------------+----------------+--------------|
+       |sl_SI           |                   |Slovenian       |              |
+       |----------------+-------------------+----------------+--------------|
+       |son             |                   |Songhay         |              |
+       |----------------+-------------------+----------------+--------------|
+       |sq_AL           |                   |Albanian        |              |
+       |----------------+-------------------+----------------+--------------|
+       |sr_YU           |                   |Serbian         |              |
+       |                |                   |(cyrillic)      |              |
+       |----------------+-------------------+----------------+--------------|
+       |sr_RS@latin     |                   |Serbian (latin) |              |
+       |----------------+-------------------+----------------+--------------|
+       |su_ID           |                   |Sundanese       |              |
+       |----------------+-------------------+----------------+--------------|
+       |sv_SE           |Svenska            |Swedish         |              |
+       |----------------+-------------------+----------------+--------------|
+       |sw_TZ           |                   |Swahili         |              |
+       |----------------+-------------------+----------------+--------------|
+       |ta_IN (*)       |                   |Tamil           |              |
+       |----------------+-------------------+----------------+--------------|
+       |te_IN (*)       |                   |Telugu          |              |
+       |----------------+-------------------+----------------+--------------|
+       |th_TH (*)       |                   |Thai            |              |
+       |----------------+-------------------+----------------+--------------|
+       |tl_PH (*)       |                   |Tagalog         |              |
+       |----------------+-------------------+----------------+--------------|
+       |tlh             |tlhIngan           |Klingon         |              |
+       |----------------+-------------------+----------------+--------------|
+       |tr_TR           |                   |Turkish         |              |
+       |----------------+-------------------+----------------+--------------|
+       |tw_GH           |                   |Twi             |              |
+       |----------------+-------------------+----------------+--------------|
+       |uk_UA           |                   |Ukrainian       |              |
+       |----------------+-------------------+----------------+--------------|
+       |ur_IN           |                   |Urdu            |              |
+       |----------------+-------------------+----------------+--------------|
+       |ve_ZA           |                   |Venda           |              |
+       |----------------+-------------------+----------------+--------------|
+       |vec             |Venèto             |Venetian        |              |
+       |----------------+-------------------+----------------+--------------|
+       |vi_VN           |                   |Vietnamese      |              |
+       |----------------+-------------------+----------------+--------------|
+       |wa_BE           |                   |Walloon         |              |
+       |----------------+-------------------+----------------+--------------|
+       |wo_SN           |                   |Wolof           |              |
+       |----------------+-------------------+----------------+--------------|
+       |xh_ZA           |                   |Xhosa           |              |
+       |----------------+-------------------+----------------+--------------|
+       |zh_CN (*)       |                   |Chinese         |              |
+       |                |                   |(Simplified)    |              |
+       |----------------+-------------------+----------------+--------------|
+       |zh_TW (*)       |                   |Chinese         |              |
+       |                |                   |(Traditional)   |              |
+       |----------------+-------------------+----------------+--------------|
+       |zam             |                   |Zapotec         |              |
+       |                |                   |(Miahuatlan)    |              |
+       |----------------+-------------------+----------------+--------------|
+       |zu_ZA           |                   |Zulu            |              |
+       +--------------------------------------------------------------------+
+
+       (*) - These languages require their own fonts, since they are not
+       represented using a Latin character set, like the others. See the
+       "Special Fonts" section, below.
+
+       Note: Tux Paint provides an alternative input method for entering
+       characters with the Text tool in some locales. The key comibation(s)
+       listed can be used to cycle through the supported input methods while
+       the Text tool is active.
+
+Axustando a configuración rexional do seu contorno
+
+       Cambiar a súa configuración rexional afectará a gran parte do seu
+       contorno.
+
+       As stated above, along with letting you choose the language at runtime
+       using command-line options ("--lang" and "--locale"), Tux Paint honors
+       the global locale setting in your environment.
+
+       If you haven't already set your environment's locale, the following
+       will briefly explain how:
+
+  Usuarios de Linux/Unix
+
+         First, be sure the locale you want to use is enabled by editing the
+         file "/etc/locale.gen" on your system and then running the program
+         "locale-gen" as root.
+
+         Note: Debian users may be able to simply run the command
+         "dpkg-reconfigure locales" as root to bring up a configuration
+         dialog. Ubuntu users may be able to run "sudo dpkg-reconfigure
+         localeconf" (the "localeconf" package may need to be installed
+         first), or you may need to edit the file
+         "/var/lib/locales/supported.d/local" first, and add locales they
+         want, from the list found in "/usr/share/i18n/SUPPORTED".
+
+         Then, before running Tux Paint, set your "$LANG" environment
+         variable to one of the locales listed above. (If you want all
+         programs that can be translated to be, you may wish to place the
+         following in your login script; e.g. "~/.profile", "~/.bashrc",
+         "~/.cshrc", etc.)
+
+         Por exemplo, nunha consola Bourne (como BASH):
+
+           export LANG=es_ES ; \
+           tuxpaint
+
+         E nunha consola C (como TCSH):
+
+           setenv LANG es_ES ; \
+           tuxpaint
+
+     ----------------------------------------------------------------------
+
+  Usuarios de Windows
+
+         Tux Paint will recognize the current locale and use the appropriate
+         files by default. So this section is only for people trying
+         different languages.
+
+         The simplest thing to do is to use the "--lang" switch in the
+         shortcut (see "INSTALL"). However, by using an MSDOS Prompt window,
+         it is also possible to issue a command like this:
+
+           set LANG=es_ES
+
+         ...which will set the language for the lifetime of that DOS window.
+
+         For something more permanent, try editing your computer's
+         "autoexec.bat" file using Windows' "sysedit" tool:
+
+  Tipos de letra especiais
+
+       Some languages require special fonts be installed. These font files
+       (which are in TrueType format (TTF)), are much too large to include
+       with the Tux Paint download, and are available separately. (See the
+       table above, under the "Choosing a Different Language" section.)
+
+       Note: As of version 0.9.18, Tux Paint uses the "SDL_Pango" library,
+       which utilizes the "Pango" library to render text in the user
+       interface, rather than using "SDL_ttf" directly. Unless your copy of
+       Tux Paint was built without Pango support, special fonts should no
+       longer be necessary.
+
+       When running Tux Paint in a language that requires its own font, Tux
+       Paint will try to load the font file from its system-wide "fonts"
+       directory (under a "locale" subdirectory). The name of the file
+       corresponds to the first two letters in the 'locale' code of the
+       language (e.g., "ko" for Korean, "ja" for Japanese, "zh_tw" for
+       Traditional Chinese).
+
+       For example, under Linux or Unix, when Tux Paint is run in Korean
+       (e.g., with the option "--lang korean"), Tux Paint will attempt to
+       load the following font file:
+
+         /usr/share/tuxpaint/fonts/locale/ko.ttf
+
+       You can download fonts for supported languages from Tux Paint's
+       website, http://www.tuxpaint.org/. (Look in the 'Fonts' section under
+       'Download.')
+
+       Under Unix and Linux, you can use the Makefile that comes with the
+       font to install the font in the appropriate location.
+
+     ----------------------------------------------------------------------

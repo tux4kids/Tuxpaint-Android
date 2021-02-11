@@ -1,7 +1,7 @@
 /*
   get_fname.c
 
-  Copyright (c) 2009 - 2020
+  Copyright (c) 2009 - 2021
   http://www.tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -57,6 +57,11 @@
     and easily-accessible place for end users to retrieve the exports.
 
     The defaults may be overridden with the "--exportdir" option.
+
+  * DIR_EXPORT_PARENT: The parent of the directory
+    specified by DIR_EXPORT.  (e.g., if /home/username/Pictures/TuxPaint/
+    is our export dir., we may need to make .../Pictures first,
+    the first time we export something.)
 */
 
 
@@ -88,7 +93,7 @@ char *get_fname(const char *const name, int kind)
     dir = savedir;
   } else if (kind == DIR_DATA) {
     dir = datadir;
-  } else if (kind == DIR_EXPORT) {
+  } else if (kind == DIR_EXPORT || kind == DIR_EXPORT_PARENT) {
     dir = exportdir;
   }
 
@@ -96,6 +101,20 @@ char *get_fname(const char *const name, int kind)
            "%s%c%s",
 	   dir, (*name) ? '/' : '\0', /* Some mkdir()'s don't like trailing slashes */
 	   name);
+
+  if (kind == DIR_EXPORT_PARENT) {
+    int len, i, stop;
+
+    stop = -1;
+    len = strlen(f);
+    for (i = len - 1; i >= 0 && stop == -1; i--) {
+      if (f[i] == '/')
+        stop = i;
+    }
+    if (stop != -1) {
+      f[stop] = '\0';
+    }
+  }
 
   return strdup(f);
 }

@@ -1,0 +1,395 @@
+                                   Tux Paint
+                                 versión 0.9.26
+                          Documentación da instalación
+
+    Copyright © 2002-2021 por varios colaboradores; vexa AUTORES (AUTHORS).
+                            http://www.tuxpaint.org/
+
+                                30 Xaneiro 2021
+
+     ----------------------------------------------------------------------
+
+Requisitos:
+
+  libSDL
+
+       Tux Paint require a «Simple DirectMedia Layer Library (libSDL)», unha
+       biblioteca de programación multimedia de código aberto dispoñíbel
+       baixo a licenza pública GNU Lesser General Public License (LGPL).
+
+       Xunto con libSDL, Tux Paint depende doutras bibliotecas «de axuda» de
+       SDL: SDL_Image (para ficheiros gráficos), SDL_TTF e (opcionalmente)
+       SDL_Pango (para compatibilidade de tipo True Type) e, opcionalmente,
+       SDL_Mixer (para efectos de son).
+
+    Usuarios de Linux/Unix:
+
+         As bibliotecas SDL están dispoñíbeis como código fonte ou como
+         paquetes RPM ou Debian para varias distribucións de Linux. Pódense
+         descargar dende:
+
+           * libSDL: http://www.libsdl.org/
+           * SDL_Image: http://www.libsdl.org/projects/SDL_image/
+           * SDL_TTF: http://www.libsdl.org/projects/SDL_ttf/
+           * SDL_Pango: http://sourceforge.net/projects/sdlpango/ (opcional)
+           * SDL_Mixer: http://www.libsdl.org/projects/SDL_mixer/ (opcional)
+
+         Normalmente tamén están dispoñíbeis xunto coa súa distribución de
+         Linux (p. ex.: nun medio de instalación ou dispoñíbeis a través dun
+         software de mantemento de paquetes como «apt» de Debian).
+
+         Nota: Cando instale bibliotecas a partir de paquetes, asegúrese de
+         instalar TAMÉN as versións de desenvolvemento dos paquetes. (Por
+         exemplo, instale tanto «SDL-1.2.4.rpm» como «SDL-1.2.4-devel.rpm».).
+
+  Outras bibliotecas
+
+       Tux Paint tamén aproveita outras bibliotecas libres con licenza LGPL.
+       En Linux, do mesmo xeito que SDL, deberían estar xa instaladas ou
+       estar dispoñíbeis para a súa instalación como parte da súa
+       distribución de Linux.
+
+    libPNG
+
+         Tux Paint utiliza o formato PNG (Portable Network Graphics –
+         Gráficos de Rede Portátiles) para os seus ficheiros de datos. A
+         imaxe SDL requirirá a instalación de libPNG.
+
+         http://www.libpng.org/pub/png/libpng.html
+
+    gettext
+
+         Tux Paint utiliza a configuración rexional do sistema xunto coa
+         biblioteca «gettext» para admitir varios idiomas (p. ex., o
+         español). Necesitará ter a biblioteca gettext instalada.
+
+         http://www.gnu.org/software/gettext/
+
+    libpaper (Só Linux/Unix)
+
+         A partir de Tux Paint 0.9.17, Tux Paint pode determinar o tamaño de
+         papel predeterminado do seu sistema (p. ex.: A4 ou Carta), ou
+         pódeselle indicar que use un tamaño de papel particular, grazas a
+         «libpaper».
+
+         https://github.com/naota/libpaper
+
+    FriBiDi
+
+         As ferramentas «Texto» e «Etiqueta» de Tux Paint admiten linguaxes
+         bidireccionais grazas á biblioteca «FriBiDi».
+
+         http://fribidi.org/
+
+    Compatibilidade de SVG
+
+         A partir de Tux Paint 0.9.17, Tux Paint pode cargar imaxes SVG
+         (gráficos vectoriais escalábeis) como selos. Admítense dous
+         conxuntos de bibliotecas e pódese desactivar completamente a
+         compatibilidade SVG (a través de «make SVG_LIB:=»)
+
+      librsvg-2 & libCairo2 (bibliotecas máis recentes)
+
+           * libRSVG 2: http://librsvg.sourceforge.net/
+           * Cairo 2: http://www.cairographics.org/
+           * Estes tamén dependen do seguinte:
+                * GdkPixbuf & GLib: http://www.gtk.org/
+                * Pango: http://www.pango.org/
+
+      Bibliotecas SVG máis antigas
+
+           * libcairo1, libsvg1, & libsvg-cairo1:
+             http://www.cairographics.org/
+           * Estes tamén dependen do seguinte:
+                * libxml2: https://gitlab.gnome.org/GNOME/libxml2
+
+    Función de exportación de GIF animado
+
+         Para a compatibilidade da exportación de GIF animados (presentacións
+         de diapositivas), é necesaria a biblioteca «libimagequant» (do
+         proxecto «pngquant2»).
+
+         https://github.com/ImageOptim/libimagequant
+
+    Ferramentas NetPBM (opcional) Xa non se usa, de xeito predeterminado
+
+         En Linux e Unix, as versións anteriores de Tux Paint utilizaban as
+         ferramentas NetPBM para axudar á impresión. (Tux Paint xera un PNG e
+         convértese nun PostScript usando as ferramentas da liña de ordes
+         NetPBM «pngtopnm» e «pnmtops»).
+
+         http://netpbm.sourceforge.net/
+
+Compilación e instalación
+
+     Tux Paint publícase baixo a Licenza Pública Xeral de GNU (GPL) (consulte
+     «COPYING.txt» para máis detalles) e, polo tanto, o «código fonte» do
+     programa está dispoñíbel libremente.
+
+  Usuarios de Windows:
+
+    Compilación:
+
+         A partir de febreiro de 2005 (comezando con Tux Paint 0.9.15), o
+         «Makefile» inclúe compatibilidade para construír nun sistema Windows
+         usando MinGW/MSYS (http://www.mingw.org/).
+
+         Após configurar o contorno e construír e instalar todas as
+         dependencias, use estas ordes en MSYS para construír, instalar e
+         executar:
+
+      Antes da versión 0.9.20:
+
+           $ make win32
+           $ make install-win32
+           $ tuxpaint
+
+      Versión 0.9.20 e posteriores:
+
+           $ make
+           $ make install
+           $ tuxpaint
+
+         Use a seguinte orde para crear unha versión axeitada para a
+         redistribución co instalador ou nun ficheiro zip:
+
+           $ make bdist-win32
+
+         Ou se está a construír para Win9x/ME:
+
+           $ BDIST_WIN9X=1 make bdist-win32
+
+         Antes de que calquera dos anteriores funcione, cómpre configurar o
+         contorno e construír ou instalar as bibliotecas das que depende Tux
+         Paint. John Popplewell xuntou aquí algunhas instrucións para facelo:
+
+         http://www.johnnypops.co.uk/tuxpaint/
+
+         Lea as notas pertinentes se está a construír para Win9X/ME.
+
+    Executando o instalador:
+
+         Faga dobre clic no executábel do instalador de Tux Paint (ficheiro
+         .EXE) e siga as instrucións.
+
+         En primeiro lugar, solicitaráselle que acepte a licenza. (É a
+         Licenza pública xeral de GNU (GPL), que tamén está dispoñíbel como
+         «COPYING.txt»).
+
+         Após preguntaráselle se quere instalar accesos directos a Tux Paint
+         no seu menú de inicio de Windows e no escritorio de Windows.
+         (Ámbalas dúas opcións están definidas de xeito predeterminado.)
+
+         A seguir preguntaráselle onde quere instalar Tux Paint. O valor
+         predeterminado debería ser axeitado, sempre que haxa espazo
+         dispoñíbel. Se non, escolla un lugar diferente.
+
+         Neste punto, pode premer en «Instalar» para instalar Tux Paint.
+
+    Cambiar os axustes usando o acceso directo:
+
+         Para cambiar os axustes do programa, prema co botón dereito no
+         atallo de TuxPaint e seleccione «Propiedades» (na parte inferior).
+
+         Asegúrese de que a lapela «Atallo» está seleccionada na xanela que
+         aparece e examine o campo «Obxectivo:». Debería ver algo así:
+
+           "C:\Program Files\TuxPaint\TuxPaint.exe"
+
+         Agora pode engadir opcións de liña de ordes que se activarán ao
+         facer dobre clic na icona.
+
+         Por exemplo, para que o xogo se execute en modo de pantalla
+         completa, con formas sinxelas (sen opción de rotación) e en francés,
+         engada as opcións (após «TuxPaint.exe»), así:
+
+           "C:\Program Files\TuxPaint\TuxPaint.exe" -f -s --lang french
+
+         (Vexa a documentación principal para obter unha lista completa das
+         opcións dispoñíbeis da liña de ordes.)
+
+         Se se trabuca ou desaparece todo, use [Ctrl] + [Z] para desfacer ou
+         só prema a tecla [Esc] e a caixa pecharase sen facer cambios (a non
+         ser que premera o botón «Aplicar»).
+
+         Cando teña rematado, prema en «Aceptar».
+
+    Se algo vai mal:
+
+         Se ao facer dobre clic no atallo para executar Tux Paint, non ocorre
+         nada, probabelmente sexa porque algunhas destas opcións da liña de
+         ordes son incorrectas. Abra un explorador coma antes e busque un
+         ficheiro chamado «stderr.txt» no cartafol TuxPaint.
+
+         Conterá unha descrición do que estaba mal. Normalmente só se debe a
+         maiúsculas e minúsculas incorrectas (maiúsculas «Z» no canto de
+         minúsculas «z») ou a falta (ou exceso) de «-» (guións).
+
+  Usuarios de Linux/Unix:
+
+    Compilación:
+
+         Nota: Tux Paint non usa autoconf/automake, polo que non hai ningún
+         script «./configure» para executar. Non obstante, a compilación
+         debería ser directa, supoñendo que todo o que precisa Tux Paint está
+         instalado.
+
+         Para compilar o programa dende as fontes, simplemente execute a
+         seguinte orde dende un indicador do sistema (p. ex.: «$»):
+
+           $ make
+
+    Desactivando a compatibilidade de «SVG» (e, polo tanto, as dependencias de
+    «Cairo, libSVG, e svg-cairo»:
+
+         Para desactivar a compatibilidade con SVG (por exemplo, se o seu
+         sistema non é compatíbel coa biblioteca de Cairo ou outras
+         dependencias relacionadas co SVG), pode executar «make» engadindo
+         «SVG_LIB= SVG_CFLAGS= NOSVGFLAG=NOSVG»:
+
+           $ make SVG_LIB= SVG_CFLAGS=
+
+    Desactivando a compatibilidade de «Pango» (e, polo tanto, as dependencias de
+    «Pango, Cairo, etc.»:
+
+         Antes da versión 0.9.18, Tux Paint utilizaba a biblioteca libSDL_ttf
+         para renderizar texto usando tipos de letra TrueType. Dende o 0.9.18
+         úsase libSDL_Pango, xa que ten unha mellor compatibilidade coa
+         internacionalización. Non obstante, se quere desactivar o uso de
+         SDL_Pango, pode facelo executando «make» engadindo «SDL_PANGO_LIB=»:
+
+           $ make SDL_PANGO_LIB=
+
+    Desactivación do son en tempo de compilación:
+
+         Se non te unha tarxeta de son ou prefire construír o programa sen
+         asistencia de son (e polo tanto sen a dependencia SDL_mixer), pode
+         executar «make» con «SDL_MIXER_LIB=» engadido:
+
+           $ make SDL_MIXER_LIB=
+
+    Outras opcións:
+
+         Outras opcións (p. ex.: rutas de instalación) poden ser anuladas;
+         véxaas en «Makefile» para máis detalles.
+
+    Se se producen erros:
+
+         If you receive any errors during compile-time, make sure you have
+         the appropriate libraries installed (see above). If using packaged
+         versions of the libraries (e.g., RPMs under RedHat or DEBs under
+         Debian), be sure to get the corresponding "-dev" or "-devel"
+         packages as well, otherwise you won't be able to compile Tux Paint
+         (and other programs) from source!
+
+    Instalar:
+
+         Assuming no fatal errors occured, you can now install the program so
+         that it can be run by users on the system. By default, this must be
+         done by the "root" user ('superuser'). Switch to "root" by typing
+         the command:
+
+           $ su
+
+         Enter "root"'s password at the prompt. You should now be "root"
+         (with a prompt like "#"). To install the program and its data files,
+         type:
+
+           # make install
+
+         Finally, you can switch back to your regular user by exiting
+         superuser mode:
+
+           # exit
+
+         Alternatively, you may be able to simply use the "sudo" command
+         (e.g., on Ubuntu Linux):
+
+           $ sudo make install
+
+         Note: By default, "tuxpaint", the executable program, is placed in
+         "/usr/local/bin/". The data files (images, sounds, etc.) are placed
+         in "/usr/local/share/tuxpaint/".
+
+      Cambiando onde van as cousas
+
+           You can change where things will go by setting "Makefile"variables
+           on the command line. "DESTDIR" is used to place output in a
+           staging area for package creation. "PREFIX" is the basis of where
+           all other files go, and is, by default, set to "/usr/local".
+
+           Outras variábeis son:
+
+           BIN_PREFIX
+                   Onde se instalará o binario «tuxpaint». (Estabelécese como
+                   «$(PREFIX)/bin»como predeterminado, p. ex.:
+                   «/usr/local/bin»)
+
+           DATA_PREFIX
+                   Where the data files (sound, graphics, brushes, stamps,
+                   fonts) will go, and where Tux Paint will look for them
+                   when it's run. (Set to "$(PREFIX)/share/tuxpaint")
+
+           DOC_PREFIX
+                   Onde irán os ficheiros de texto da documentación (o
+                   directorio «docs»). (Estabelecer como
+                   «$(PREFIX)/share/doc/tuxpaint»)
+
+           MAN_PREFIX
+                   Onde irá a páxina do manual de Tux Paint. (Estabelecer
+                   como «$(PREFIX)/share/man»)
+
+           ICON_PREFIX — $(PREFIX)/share/pixmaps
+
+           X11_ICON_PREFIX — $(PREFIX)/X11R6/include/X11/pixmaps
+
+           GNOME_PREFIX — $(PREFIX)/share/gnome/apps/Graphics
+
+           KDE_PREFIX — $(PREFIX)/share/applnk/Graphics
+                   Onde irán as iconas e os lanzadores (para GNOME e KDE).
+
+           LOCALE_PREFIX
+                   Where the translation files for Tux Paint will go, and
+                   where Tux Paint will look for them. (Set to
+                   "$(PREFIX)/share/locale/") (Final location of a
+                   translation file will be under the locale's directory
+                   (e.g., "es" for Spanish), within the "LC_MESSAGES"
+                   subdirectory.)
+
+           Nota: Esta lista non está actualizada. Consulte «Makefile» e
+           «Makefile-i18n» para ver unha lista completa.
+
+Depuración:
+
+     A depuración (a «STDOUT», por exemplo, á terminal ou a un ficheiro
+     «stdout.txt» en Windows) pódese activar co axuste «DEBUG» (e, se se
+     quere un rexistro detallado, «VERBOSE») #define en «src/debug.h».
+
+Desinstalación de Tux Paint:
+
+  Windows
+
+    Uso do desinstalador
+
+         Se instalou os atallos do menú Inicio (o predeterminado), vaia ao
+         cartafol TuxPaint e seleccione «Desinstalar». Amosarase unha caixa
+         que confirmará que está a piques de desinstalar Tux Paint e, se está
+         seguro de que quere eliminar permanentemente Tux Paint, prema no
+         botón «Desinstalar».
+
+         Cando remate, prema no botón pechar.
+
+    Usando o Panel de control
+
+         Tamén é posible usar a entrada «TuxPaint (só eliminar)« na sección
+         Engadir/Eliminar programas do Panel de control.
+
+  Linux
+
+       Within the Tux Paint source directory (where you compiled Tux Paint),
+       you can use the "make uninstall" target to uninstall Tux Paint. By
+       default, this must be done by the "root" user ('superuser'), but if
+       you installed Tux Paint somewhere else (e.g., using a "PREFIX=..."
+       setting to "make" and "make install"), you may not, and will want to
+       provide those same settings here. (See the installation instructions
+       above for further information.)

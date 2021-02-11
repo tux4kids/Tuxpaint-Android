@@ -4,12 +4,12 @@
 # Various contributors (see AUTHORS.txt)
 # http://www.tuxpaint.org/
 
-# June 14, 2002 - October 15, 2020
+# June 14, 2002 - December 27, 2020
 
 
 # The version number, for release:
 
-VER_VERSION:=0.9.25
+VER_VERSION:=0.9.26
 ifdef SOURCE_DATE_EPOCH
   VER_DATE=$(shell date -u -d "@$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u -r "$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u "+%Y-%m-%d")
 else
@@ -82,6 +82,9 @@ RSRC_CMD:=$($(OS)_RSRC_CMD)
 
 beos_MIMESET_CMD:=mimeset -f tuxpaint
 MIMESET_CMD:=$($(OS)_MIMESET_CMD)
+
+macos_RAD_CMD:=[[ ! -d Resources/share ]] && mkdir -p Resources/share && ln -s ../../data Resources/share/tuxpaint || :
+RAD_CMD:=$($(OS)_RAD_CMD)
 
 windows_SO_TYPE:=dll
 macos_SO_TYPE:=dylib
@@ -607,7 +610,7 @@ clean:
 	@-rm -f templates/.thumbs/*.png
 	@if [ -d templates/.thumbs ]; then rmdir templates/.thumbs; fi
 	@-if [ "x$(BUNDLE)" != "x" ]; then rm -rf $(BUNDLE); fi
-	@-rm -f TuxPaint.dmg temp.dmg; rm -rf magic/*.dSYM
+	@-rm -f TuxPaint.dmg temp.dmg; rm -rf magic/*.dSYM Resources
 	@echo
 
 # "make uninstall" should remove the various parts from their
@@ -1030,14 +1033,14 @@ install-macbundle:
 	@install -m 644 macos/PkgInfo $(BUNDLE)/Contents
 	@install -m 644 macos/Info.plist $(BUNDLE)/Contents
 	@install -m 644 macos/tuxpaint.icns $(BUNDLE)/Contents/Resources
-	@custom/macos.sh
+	@macos/build-app.sh
 
 
 # Create DMG for macOS
 TuxPaint.dmg:
 	@echo
 	@echo "...Creating DMG Distribution File..."
-	@custom/macos-mkdmg.sh
+	@macos/build-dmg.sh
 
 
 # Build the program!
@@ -1052,6 +1055,7 @@ tuxpaint:	obj/tuxpaint.o obj/i18n.o obj/im.o obj/cursor.o obj/pixels.o \
 	$(CC) $(CFLAGS) $(LDFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(DEFS) \
 		-o tuxpaint $^ \
 		$(SDL_LIBS) $(SVG_LIB) $(ARCH_LINKS)
+	@$(RAD_CMD)
 	@$(RSRC_CMD)
 	@$(MIMESET_CMD)
 

@@ -1,0 +1,1127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Ampliación de Tux Paint    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+    <center>
+      <h1>
+        Ampliar<br>
+        <img src="../../html/images/tuxpaint-title.png"
+            width="205"
+            height="210"
+            alt="Tux Paint"><br>
+        versión 0.9.26      </h1>
+
+      <p>
+        Copyright &copy; 2002-2021 por varios colaboradores; vexa AUTORES (AUTHORS).<br>
+        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
+      </p>
+
+      <p>
+        30 Xaneiro 2021      </p>
+    </center>
+
+    <hr size="2"
+        noshade>
+
+    <table border="2"
+           cellspacing="0"
+           cellpadding="2"
+           summary="Índice">
+      <tr>
+        <th>
+          Índice        </th>
+      </tr>
+
+      <tr>
+        <td>
+          <ul>
+            <li>
+              <a href="#where_files_go">Onde van os ficheiros</a>
+              <ul>
+                <li>
+                  <a href="#standard_files">Ficheiros estándar</a>
+                </li>
+
+                <li>
+                  <a href="#personal_files">Ficheiros persoais</a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#brushes">Pinceis</a>
+              <ul>
+                <li>
+                  <a href="#brush_options">Opcións de pinceis</a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#stamps">Selos</a>
+              <ul>
+                <li>
+                  <a href="#stamps_images">Imaxes de selos</a>
+                </li>
+
+                <li>
+                  <a href="#description_text">Texto descritivo do selo</a>
+                </li>
+
+                <li>
+                  <a href="#sound_effects">Efectos de son dos selos</a>
+                </li>
+
+                <li>
+                  <a href="#descriptive_sound">Son descritivo do selo</a>
+                </li>
+
+                <li>
+                  <a href="#stamp_options">Opcións de selos</a>
+                </li>
+
+                <li>
+                  <a href="#pre_mirroed_and_flipped_images">Selos prereflectidos e invertidos</a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#fonts">Tipos de letra</a>
+            </li>
+
+            <li>
+              <a href="#starters">«Imaxes de comezo»</a>
+              <ul>
+                <li>
+                  <a href="#coloring_book_style">Imaxes «de comezo» ao estilo dun libro para colorar</a>
+                </li>
+
+                <li>
+                  <a href="#scene_style">Imaxes «de comezo» ao estilo dunha escena</a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#templates">«Modelos»</a>
+            </li>
+
+            <li>
+              <a href="#translations">Traducións</a>
+            </li>
+
+            <li>
+              <a href="#input_methods">Métodos de entrada alternativos</a>
+            </li>
+
+            <li>
+              <a href="#on_screen_keyboard">Teclado en pantalla</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+    <hr size="2"
+        noshade>
+
+    <p>
+      Se quere engadir ou cambiar cousas como pinceis, imaxes de comezo, selos de goma e outros contidos empregados por Tux Paint, pode facelo con bastante facilidade simplemente engadindo, cambiando ou eliminando ficheiros onde os busque Tux Paint.    </p>
+
+    <p>
+      Nota: Deberá reiniciar Tux Paint para que os cambios teñan efecto.    </p>
+
+    <hr size="2"
+        noshade>
+
+    <h2>
+      <a name="where_files_go"
+          id="where_files_go">Onde van os ficheiros</a>
+    </h2>
+
+    <blockquote>
+      <h3>
+        <a name="standard_files"
+            id="standard_files">Ficheiros estándar</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Tux Paint busca os seus diferentes ficheiros de datos no directorio «<code>data</code>».        </p>
+
+        <h4>
+          Linux e Unix        </h4>
+
+        <blockquote>
+          <p>
+            Onde vai este directorio depende do valor estabelecido para «<code>DATA_PREFIX</code>» cando se construíu Tux Paint. Vexa a «Documentación de instalación» para máis detalles.          </p>
+
+          <p>
+            De xeito predeterminado, o directorio é:          </p>
+
+          <blockquote>
+            <code>/usr/local/share/tuxpaint/</code>
+          </blockquote>
+
+          <p>
+            Se instalou dende un paquete, o máis probábel é que sexa:          </p>
+
+          <blockquote>
+            <code>/usr/share/tuxpaint/</code>
+          </blockquote>
+        </blockquote>
+
+        <h4>
+          Windows
+        </h4>
+
+        <blockquote>
+          <p>
+            Tux Paint busca un directorio chamado «<code>data</code>» no mesmo directorio que o executábel. Este é o directorio que utilizou o instalador ao instalar Tux Paint p. ex.:          </p>
+
+          <blockquote>
+            <code style="white-space: nowrap;">C:\Program Files\TuxPaint\data</code>
+          </blockquote>
+        </blockquote>
+
+        <h4>
+          macOS
+        </h4>
+
+        <blockquote>
+          <p>
+            Tux Paint almacena os seus ficheiros de datos dentro da icona da aplicación «Tux Paint» (que en realidade é un tipo de cartafol especial en macOS e Mac OS X antes). Os seguintes pasos explican como chegar aos cartafoles dentro del:          </p>
+
+          <ol>
+            <li>Abra un menú «contextual» mantendo premida a tecla <b>[Control]</b> e premendo na icona de Tux Paint no <cite>Finder (buscador)</cite>. (Se ten un rato con máis dun botón, pode simplemente premer co botón dereito na icona.)            </li>
+
+            <li>Seleccione «Amosar contido» no menú que aparece. Aparecerá unha nova xanela <cite>Finder</cite> cun cartafol dentro chamado «Contido».            </li>
+
+            <li>Abra o cartafol «Contido» e abra o cartafol «Recursos» que se atopa dentro.            </li>
+
+            <li>Alí atoparás varios subcartafoles, como «imaxes de comezo», «selos», «pinceis», etc. Engadindo novo contido a estes cartafoles fará que o contido estea dispoñíbel para calquera usuario que inicia copia (icona) de Tux Paint .            </li>
+          </ol>
+
+          <p>
+            <em>Nota:</em> Se instala unha versión máis recente de Tux Paint e substitúe ou desbota a versión antiga, perderá os cambios feitos seguindo as instrucións anteriores, así que garde as copias de seguridade do seu novo contido (selos, pinceis, etc.) .          </p>
+
+          <p>
+            Tux Paint tamén busca ficheiros nun cartafol «TuxPaint» que pode colocar no seu sistema cartafol «Application Support» (atópase en «Library» na raíz do seu sistema de ficheiros):          </p>
+
+          <blockquote>
+            <code style="white-space: nowrap;">/Library/Application Support/TuxPaint/</code>
+          </blockquote>
+
+          <p>
+            Cando actualice a unha versión máis recente de Tux Paint, o contido deste cartafol «TuxPaint» seguirá sendo o mesmo e permanecerá accesíbel por todos os usuarios de Tux Paint.          </p>
+        </blockquote>
+      </blockquote>
+
+      <hr size="1"
+          noshade>
+
+      <h3>
+        <a name="personal_files"
+            id="personal_files">Ficheiros persoais</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Tamén pode crear pinceis, selos, «imaxes de comezo», modelos e tipos de letra no directorio da súa propia conta de usuario (cartafol) para que Tux Paint poida atopalos.        </p>
+
+        <h4>
+          Windows
+        </h4>
+
+        <blockquote>
+          <p>
+            O seu cartafol persoal de Tux Paint almacénase nos seus «Datos da aplicación» persoais. Por exemplo, nos Windows máis recentes:          </p>
+
+          <blockquote>
+            <code style="white-space: nowrap;">C:\Documentos e axustes\<i>(nome de usuario)</i>\Datos da aplicación\TuxPaint\</code>
+          </blockquote>
+        </blockquote>
+
+        <h4>
+          macOS
+        </h4>
+
+        <blockquote>
+          <p>
+            O seu cartafol persoal de Tux Paint almacénase no cartafol persoal «Application Support»:          </p>
+
+          <blockquote>
+            <code style= "white-space: nowrap;">/Users/<i>(nome de usuario)</i>/Library/Application Support/TuxPaint/</code>
+          </blockquote>
+        </blockquote>
+
+        <h4>
+          Linux e Unix</h4>
+
+        <blockquote>
+          <p>
+            Os seus ficheiros persoais de Tux Paint van a un «directorio agochado» que se atopa no directorio persoal da súa conta: «<code>$(HOME)/.tuxpaint/</code>» (tamén coñecido como «<code>~/.tuxpaint/</code>»).          </p>
+
+          <p>
+            É dicir, se o seu directorio persoal é «<code>/home/tux</code>», entón os ficheiros persoais de Tux Paint entrarán en «<code>/home/tux/.tuxpaint/</code>».          </p>
+
+          <p>
+            Non esqueza o período («<code>.</code>») anterior ao «<code>tuxpaint</code>».          </p>
+        </blockquote>
+
+        <p>
+          Para engadir os seus propios pinceis, selos, «imaxes de comezo», modelos e tipos de letra, cree subdirectorios no seu directorio persoal de Tux Paint chamados «<code><b>brushes</b></code>», «<code><b>stamps</b></code>», «<code><b>starters</b></code>», «<code><b>templates</b></code>», «<code><b>fonts</b></code>», , respectivamente.        </p>
+
+        <p>
+          (Por exemplo, se creou un pincel chamado «<code>flor.png</code>», poñeríao en «<code>~/.tuxpaint/brushes/</code>» en Linux ou Unix.)        </p>
+      </blockquote>
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="brushes"
+          id="brushes">Pinceis</a>
+    </h2>
+
+    <blockquote>
+      <p>
+        Os pinceis empregados para debuxar coas ferramentas «Pincel» e «Liñas» en Tux Paint son simplemente ficheiros de imaxe PNG.      </p>
+      <img src="../../html/images/brush_edit.png"
+                  width="123"
+                  height="147"
+                  alt=""
+                  align="right">
+      <p>
+        A alfa (transparencia) da imaxe PNG úsase para determinar a forma do pincel, o que significa que a forma pode ser «alisado» e incluso parcialmente transparente.      </p>
+
+      <p>
+        Os píxeles de escala de grises no pincel PNG debuxaranse empregando a cor seleccionada actualmente en Tux Paint. Os píxeles de cor tinguiranse.      </p>
+
+      <h3>
+        <a name="brush_options"
+            id="brush_options">Opcións de pinceis</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Ademais de a graphical shape, a brushes tamén se lle poden dar outros atributos. Para facelo, cómpre crear un «ficheiro de datos» para brush.        </p>
+
+        <p>
+          Un ficheiro de datos de brush's é simplemente un ficheiro de texto ASCII simple que contén as opcións de brush.        </p>
+
+        <p>
+          O ficheiro ten o mesmo nome que a imaxe PNG, pero unha extensión «<code>.dat</code>». (p. ex.: o ficheiro de datos de «<code>pincel.png</code>» é o ficheiro de texto «<code>pincel.dat</code>», que se atopa no mesmo directorio.)        </p>
+
+        <h4>
+          Espazado do pincel        </h4>
+
+        <blockquote>
+          <p>
+            A partir da versión 0.9.16 de Tux Paint, agora pode especificar o espazado para os pinceis (é dicir, a frecuencia coa que se debuxan). De xeito predeterminado, o espazado será a altura do pincel, dividido por 4.          </p>
+
+          <p>
+            Engada unha liña que conteña a liña «<code><b>spacing=<i>N</i></b></code>» ao ficheiro de datos do pincel, onde «<i>N</i>» é o espazado que quere para o pincel. (Canto menor sexa o número, máis veces se debuxa o pincel.)          </p>
+        </blockquote>
+
+        <h4>
+          Pinceis animados        </h4>
+
+        <blockquote>
+          <p>
+            A partir da versión 0.9.16 de Tux Paint, pode crear pinceis animados. A medida que se usa o pincel, debúxase cada cadro da animación.          </p>
+
+          <p>
+            Coloca cada cadro nunha ampla imaxe PNG. Por exemplo, se o pincel ten 30x30 e ten 5 fotogramas, a imaxe debería ser 150x30.          </p>
+
+          <p>
+            Engada unha liña que conteña a liña «<code><b>frames=<i>N</i></b></code>» ao ficheiro de datos do pincel, onde «<i>N</i>» é o número de fotogramas do pincel.          </p>
+
+          <p>
+            <b>Nota:</b> Se prefire que os fotogramas se pasen ao chou, no canto de secuencialmente, engada tamén unha liña que conteña «<code><b>random</b></code>» ao ficheiro de datos do pincel.          </p>
+        </blockquote>
+
+        <h4>
+          Pinceis direccionais        </h4>
+
+        <blockquote>
+          <p>
+            A partir da versión 0.9.16 de Tux Paint, pode crear pinceis direccionais. A medida que se usa o pincel, debúxanse diferentes formas, dependendo da dirección na que vaia.          </p>
+
+          <p>
+            As formas direccionais divídense nun cadrado de 3x3 nunha imaxe PNG. Por exemplo, se o pincel ten 30x30, a imaxe debería ser 90x90 e cada unha das formas da dirección colocadas nunha grade 3x3. A rexión central úsase sen movemento. A parte superior dereita úsase para o movemento cara arriba e á dereita. E así sucesivamente.          </p>
+
+          <p>
+            Engada unha liña que conteña a palabra «<code><b>directional</b></code>» ao ficheiro de datos debrush's.          </p>
+        </blockquote>
+
+        <h4>
+          Pinceis direccionais animados        </h4>
+
+        <blockquote>
+          <p>
+            Pode mesturar funcións animadas e direccionais nun pincel. Use ambas as opcións («<code><b>frames=<i>N</i></b></code>» e «<code><b>directional</b></code>»), en liñas separadas no ficheiro «<code>.dat</code>» do pincel.          </p>
+
+          <p>
+            Coloque o pincel de xeito que cada conxunto de formas 3x3 de dirección estea distribuído nunha ampla imaxe PNG. Por exemplo, se o pincel ten 30x30 e hai 5 fotogramas, sería de 450x90. (Os píxeles máis a esquerda de 150x90 da imaxe representan as 9 formas de dirección do primeiro cadro, por exemplo).          </p>
+        </blockquote>
+      </blockquote>
+
+      <p>
+        Coloque os ficheiros PNG de pincel (e calquera ficheiro de texto de datos) no directorio «<code><b>brushes</b></code>».      </p>
+
+      <p>
+        Nota: Se o seu novo brushes sae como cadrados ou rectángulos sólidos, é porque esqueceu usar a transparencia alfa. Vexa a «Documentación PNG» en Tux Paint para obter máis información e consellos.      </p>
+      <br clear="all">
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="stamps"
+          id="stamps">Selos</a>
+    </h2>
+
+    <blockquote>
+      <p>
+        Todos os ficheiros relacionados co selo van no directorio «<code><b>stamps</b></code>». É útil crear alí subdirectorios e subsubdirectorios para organizar os selos. (Por exemplo, pode ter un cartafol «<code>vacacións</code>» con subcartafoles «<code>samaín</code>» e «<code>nadal</code>»).      </p>
+
+      <h3>
+        <a name="stamps_images"
+            id="stamps_images">Imaxes de selos</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Os selos de caucho en Tux Paint poden estar formados por varios ficheiros separados. O único ficheiro necesario é, por suposto, a imaxe en si.        </p>
+        <img src="../../html/images/stamp_edit.png"
+                    width="128"
+                    height="147"
+                    alt=""
+                    align="right">
+        <p>
+          A partir da versión 0.9.17 de Tux Paint, os selos poden ser imaxes de mapa de bits PNG ou imaxes vectoriais SVG. Poden ser a toda cor ou en escala de grises. A canle alfa (transparencia) dos PNG utilízase para determinar a forma real da imaxe (se non, marcará un rectángulo grande nos seus debuxos).        </p>
+
+        <p>
+          Os PNG poden ter calquera tamaño e Tux Paint (de xeito predeterminado) ofrece un conxunto de botóns de tamaño para que o usuario poida escalar o selo cara arriba (máis grande) e cara abaixo (máis pequeno).        </p>
+
+        <p>
+          Os SVG están baseados en vectores e escalaranse axeitadamente para o tamaño do lenzo que se use en Tux Paint.        </p>
+
+        <p>
+        Nota: Se o seu novo PNG-based stamps sae como cadrados ou rectángulos sólidos, é porque esqueceu usar a transparencia alfa. Vexa a «Documentación PNG» en Tux Paint para obter máis información e consellos.        </p>
+
+        <p>
+          Nota: Se os seus novos selos SVG parecen ter moito espazo en branco, asegúrese de que o «documento» SVG non sexa maior que a(s) forma(s) que contén. Se se están recortando, asegúrese de que o «documento» é grande de abondo como para conter a(s) forma(s). Vexa a «Documentación SVG» en Tux Paint para obter máis información e consellos.        </p>
+
+        <p>
+          <b>Usuarios avanzados:</b> O documento «Como facer os selos avanzados» describe detalladamente como facer imaxes PNG que se adaptarán perfectamente cando se usen como selos en Tux Paint.        </p>
+        <br clear="all">
+      </blockquote>
+
+      <hr size="1"
+          noshade>
+
+      <h3>
+        <a name="description_text"
+            id="description_text">Texto descritivo do selo</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Tux Paint amosará texto descritivo cando se seleccione un selo. Estes colócanse en ficheiros de texto sinxelo co mesmo nome que PNG ou SVG, pero cunha extensión de nome de ficheiro «<code>.txt</code>». (p. ex.: a descrición de «<code>selo.png</code>» almacénase en «<code>selo.txt</code>» no mesmo directorio.)        </p>
+
+        <p>
+          A primeira liña do ficheiro de texto usarase como a descrición da imaxe do selo en inglés dos EUA. Debe estar codificado en UTF-8.        </p>
+
+        <h4>
+          Compatibilidade da localización        </h4>
+
+        <blockquote>
+          <p>
+            Pódense engadir liñas adicionais ao ficheiro de texto para fornecer traducións da descrición, que se amosarán cando Tux Paint estea a executarse nunha configuración rexional diferente (como o francés ou o español).          </p>
+
+          <p>
+            O comezo da liña debería corresponder ao código de idioma do idioma en cuestión (por exemplo, «<code>fr</code>» para o francés e «<code>zh_TW</code>» para o chinés tradicional), seguido de «<code>.utf8=</code>» e a descrición traducida (Unicode, codificado en UTF-8).          </p>
+
+          <p>
+            <b>Para os desenvolvedores de Tux Paint:</b> Hai scripts no directorio «<code>po</code>» para converter os ficheiros de texto ao formato PO (e posterior) para facilitar a tradución a diferentes idiomas. Polo tanto, nunca debería engadir nin cambiar traducións directamente nos ficheiros «<code>.txt</code>».          </p>
+
+          <p>
+            Se non hai tradución dispoñíbel para o idioma en que se está a executar Tux Paint, utilízase o texto en inglés dos EUA.          </p>
+        </blockquote>
+
+        <h4>Usuarios de Windows</h4>
+
+        <blockquote>
+          <p>
+            Use <cite>NotePad</cite> ou <cite>WordPad</cite> para editar/crear estes ficheiros. Asegúrese de gardalos como texto simple e asegúrese de que teñen unha extensión «<code>.txt</code>» ao final do nome do ficheiro.          </p>
+        </blockquote>
+      </blockquote>
+
+      <hr size="1"
+          noshade>
+
+      <h3>
+        <a name="sound_effects"
+            id="sound_effects">Efectos de son dos selos</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Tux Paint pode reproducir un efecto de son cando se selecciona un selo. Por exemplo, o son dun pato tremendo cando se selecciona un pato ou unha breve peza musical cando se escolle un instrumento musical. Os ficheiros poden estar en formatos «WAVE ("<code>.wav</code>")» ou «OGG Vorbis ("<code>.ogg</code>")» e reciben o mesmo nome que a imaxe PNG ou SVG. (p. ex.: o efecto de son de «<code>selo.svg</code>» é o ficheiro de son «<code>selo.ogg</code>» no mesmo directorio.)        </p>
+
+        <h4>
+          Compatibilidade da localización        </h4>
+
+        <blockquote>
+          <p>
+            Para sons para distintas configuracións rexionais (p. ex.: se o son é alguén que di unha palabra e quere versións traducidas da palabra dita), cree tamén ficheiros WAV ou OGG coa etiqueta da configuración rexional no nome do ficheiro, na forma: «<code>selo_CONF. REXIONAL.EXT</code>»          </p>
+
+          <p>
+            O efecto de son de «<code>selo.png</code>», cando Tux Paint se executa en modo español, sería «<code>selo.png</code>». En modo francés, «<code>selo_es.wav</code>». No modo portugués brasileiro, «<code>selo_fr.wav</code>». Etcétera...          </p>
+
+          <p>
+            Se non se pode cargar efecto de son localizado, Tux Paint tentará cargar o ficheiro de son «predeterminado». (por exemplo, «<code>selo.wav</code>»)          </p>
+        </blockquote>
+
+        <p>
+          Nota: para sons descritivos (non efectos de son, como un estrondo ou o chío dun paxaro), considere o uso de sons descritivos; vexa «Son descritivo do selo», a continuación.        </p>
+      </blockquote>
+
+      <hr size="1"
+          noshade>
+
+      <h3>
+        <a name="descriptive_sound"
+            id="descriptive_sound">Son descritivo do selo</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Tux Paint tamén pode reproducir un son descritivo cando se selecciona un selo. Por exemplo, o son de alguén que di a palabra «pato» cando selecciona un pato ou o nome dun instrumento musical cando se elixe un. Os ficheiros poden estar en formatos «WAVE ("<code>.wav</code>")» ou «OGG Vorbis ("<code>.ogg</code>")» e reciben o mesmo nome que a imaxe PNG ou SVG, con «<code>_desc</code>» ao final. (p. ex.: o son descritivo de «<code>selo.svg</code>» é o ficheiro de son «<code>selo_desc.ogg</code>» no mesmo directorio.)        </p>
+
+        <h4>
+          Compatibilidade da localización        </h4>
+
+        <blockquote>
+          <p>
+            Para sons descritivos de diferentes configuracións rexionais, cree tamén ficheiros WAV ou OGG con <em>ambos</em> «<code>_desc</code>» <em>e</em> a etiqueta local no nome do ficheiro, na forma: «<code>selo_desc_CONF. REXIONAL.EXT</code>»          </p>
+
+            O son descritivo de «<code>selo.png</code>», cando Tux Paint se executa en modo español, sería «<code>selo_desc_es.wav</code>». En modo francés, «<code>selo_desc_fr.wav</code>». No modo portugués brasileiro, «<code>selo_desc_pt_BR.wav</code>». Etcétera...
+          <p>
+            Se non se pode cargar son descritivo localizado, Tux Paint tentará cargar o ficheiro de son «predeterminado». (por exemplo, «<code>selo_desc.wav</code>»)          </p>
+        </blockquote>
+      </blockquote>
+
+      <hr size="1"
+          noshade>
+
+      <h3>
+        <a name="stamp_options"
+            id="stamp_options">Opcións de selos</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Ademais de a graphical shape, a textual description, a sound effect, and a descriptive sound, a stamps tamén se lle poden dar outros atributos. Para facelo, cómpre crear un «ficheiro de datos» para stamp.        </p>
+
+        <p>
+          Un ficheiro de datos de stamp's é simplemente un ficheiro de texto ASCII simple que contén as opcións de stamp.        </p>
+
+        <p>
+          O ficheiro ten o mesmo nome que a imaxe PNG or SVG, pero unha extensión «<code>.dat</code>». (p. ex.: o ficheiro de datos de «<code>selo.png</code>» é o ficheiro de texto «<code>selo.dat</code>», que se atopa no mesmo directorio.)        </p>
+
+        <h4>
+          Selos de cores        </h4>
+
+        <blockquote>
+          <p>
+            Os selos pódense facer «colorábeis» ou «tinguíbeis».          </p>
+
+          <h5>
+            Colorábel          </h5>
+
+          <blockquote>
+            <p>
+              Os selos «colorábeis» funcionan como os pinceis: escolle o selo para obter a forma e logo escolle a cor que quere que sexa. (Os selos de símbolos, como os matemáticos e os musicais, son un exemplo).            </p>
+
+            <p>
+              Non se usa nada sobre a imaxe orixinal agás a transparencia (da canle «alfa»). A cor do selo sae sólida.            </p>
+
+            <center>
+              <img src="../../html/images/ex_colorable.png"
+                      width="74"
+                      height="92"
+                      alt="">
+            </center>
+
+            <p>
+              Engada unha liña que conteña a palabra «<code><b>colorable</b></code>» ao ficheiro de datos destamp's.            </p>
+          </blockquote>
+
+          <h5>
+            Tinguido          </h5>
+
+          <blockquote>
+            <p>
+              Os selos «tinguidos» son semellantes aos «colorábeis», agás que se conservan os detalles da imaxe orixinal. (Para dicilo tecnicamente, úsase a imaxe orixinal, pero a súa tonalidade cambia, en función da cor seleccionada actualmente).            </p>
+
+            <center>
+              <img src="../../html/images/ex_tintable.png"
+                      width="151"
+                      height="78"
+                      alt="">
+            </center>
+
+            <p>
+              Engada unha liña que conteña a palabra «<code><b>tintable</b></code>» ao ficheiro de datos destamp's.            </p>
+
+            <h6>
+              Opcións de tintura:            </h6>
+
+            <blockquote>
+              <p>
+                Dependendo do contido do seu selo, é posíbel que queira que Tux Paint use un dos varios métodos para tinguilo. Engada unha das seguintes liñas ao ficheiro de datos do selo:              </p>
+
+              <dl>
+                <dt>
+                  Tinguido normal &mdash; "<code><b>tinter=normal</b></code>" (o predeterminado)                </dt>
+
+                <dd>
+                  Este é o modo normal de tinguido. (O rango de tonalidade é de ± 18 °, 27 como substituto).                </dd>
+
+                <dt>
+                  Tinguir de «calquera tonalidade» &mdash; "<code><b>tinter=anyhue</b></code>"
+                </dt>
+
+                <dd>
+                  Isto volve asignar todas as tonalidades do selo. (O rango de tonalidades é de ± 180°).                </dd>
+
+                <dt>
+                  Tinguido estreito &mdash; "<code><b>tinter=narrow</b></code>"
+                </dt>
+
+                <dd>
+                  Isto é como a opción «<code>anyhue</code>», pero cun ángulo de tonalidade máis reducido. (O intervalo de tonalidade é de ± 6 °, 9 como substituto).                </dd>
+
+                <dt>
+                  Tinguido vectorial &mdash; "<code><b>tinter=vector</b></code>"
+                </dt>
+
+                <dd>
+                  Isto asigna de «negro a través branco» a «negro a través do destino».                </dd>
+              </dl>
+            </blockquote>
+          </blockquote>
+        </blockquote>
+
+        <h4>
+          Selos inalterábeis        </h4>
+
+        <blockquote>
+          <p>
+            De xeito predeterminado, un selo pode virar do revés, amosarse como unha imaxe reflectida ou ámbalas dúas cousas. Isto faise usando os botóns de control situados debaixo do selector de selos, na parte inferior dereita da pantalla en Tux Paint.          </p>
+
+          <p>
+            Ás veces, non ten sentido que un selo poida ser virado ou reflectido; por exemplo, selos de letras ou números. Ás veces, os selos son simétricos, polo que non é útil deixar que o usuario os volteen ou reflictan.          </p>
+
+          <p>
+            Para evitar que un selo sexa from being flipped vertically, engada a opción «<code><b>noflip</b></code>» no ficheiro de datos do selo.          </p>
+
+          <p>
+            Para evitar que un selo sexa from being mirrored horizontally, engada a opción «<code><b>nomirror</b></code>» no ficheiro de datos do selo.          </p>
+        </blockquote>
+
+        <h4>
+          Tamaño inicial do selo        </h4>
+
+        <blockquote>
+          <p>
+            De xeito predeterminado, Tux Paint asume que o seu selo ten o tamaño axeitado para ser visto sen escala nun lenzo de 608x472. Este era o tamaño orixinal do lenzo de Tux Paint, fornecido por unha pantalla de 640x480. Tux Paint axustará o selo segundo o tamaño actual do lenzo e, se está activado, os controis do tamaño do selo do usuario.          </p>
+
+          <p>
+            Se o seu selo fose demasiado grande ou moi pequeno, pode especificar un factor de escala. Se o seu selo fose 2,5 veces máis largo (ou alto) do que debería ser, engada unha das seguintes opcións, que representan o mesmo axuste, ao ficheiro de datos do selo. (Pódese incluír un signo igual, «<code>=</code>» após a palabra «<code>scale</code>».)          </p>
+          <ul>
+            <li>"<code><b>scale 40%</b></code>"</li>
+            <li>"<code><b>scale 5/2</b></code>"</li>
+            <li>"<code><b>scale 2.5</b></code>"</li>
+            <li>"<code><b>scale 2:5</b></code>"</li>
+          </ul>
+        </blockquote>
+
+        <h4>Usuarios de Windows</h4>
+
+        <blockquote>
+          <p>
+            Use <cite>NotePad</cite> ou <cite>WordPad</cite> para editar/crear estes ficheiros. Asegúrese de gardalos como texto simple e asegúrese de que teñen unha extensión «<code>.txt</code>» ao final do nome do ficheiro.          </p>
+        </blockquote>
+      </blockquote>
+
+      <h3>
+        <a name="pre_mirroed_and_flipped_images"
+            id="pre_mirroed_and_flipped_images">Selos prereflectidos e invertidos</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Nalgúns casos, pode que queira fornecer unha versión deseñada previamente da imaxe reflectida, da imaxe invertida ou incluso de ámbalas dúas. Por exemplo, imaxine unha foto dun camión de bombeiros coa palabra «<cite>Bombeiros</cite>» escritas á beira. Probabelmente non quererá que o texto apareza cara atrás cando se reflicte a imaxe.        </p>
+
+        <p>
+          Para crear unha versión reflectida dun selo que quere que use Tux Paint, no canto de reflectila vostede mesmo, simplemente cree un segundo ficheiro gráfico «<code>.png</code>» ou «<code>.svg</code>» co mesmo nome, agás con con «<code><b>_mirror</b></code>» antes da extensión do nome do ficheiro.        </p>
+
+        <p>
+          Por exemplo, para o selo «<code>selo.png</code>» crearíase outro ficheiro chamado «<code>selo_mirror.png</code>», que se usará cando o selo se reflicta (no canto de  usar unha versión ao revés de «<code>selo.png</code>».        </p>
+
+        <p>
+          A partir de Tux Paint 0.9.18, de xeito similar pode fornecer unha imaxe previamente invertida con «<code><b>_flip</b></code>» no nome e/ou unha imaxe que se reflicta e inverta, denominándoa «<code><b>_mirror_flip</b></code>».        </p>
+
+        <p>
+          <b>Nota:</b> Se o usuario inverte e reflicte unha imaxe e non existe un «<code>_mirror_flip</code>» deseñado previamente, mais si un «<code>_flip</code>» ou un «<code>_mirror</code>» , usarase e reflectirase ou inverterase, respectivamente.        </p>
+      </blockquote>
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="fonts"
+          id="fonts">Tipos de letra</a>
+    </h2>
+
+    <blockquote>
+      <img src="../../html/images/fontsizes.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        Os tipos de letra empregados por Tux Paint son TrueType Fonts (TTF).      </p>
+
+      <p>
+        Simplemente colóqueas no directorio «<code><b>fonts</b></code>». Tux Paint cargará o tipo de letra e fornecerá catro tamaños diferentes no selector de «Letras» cando empregue as ferramentas «Texto» e «Etiqueta».      </p>
+      <br clear="all">
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="starters"
+          id="starters">«Imaxes de comezo»</a>
+    </h2>
+
+    <blockquote>
+      <img src="../../html/images/open_open.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        As imaxes « de inicio» aparecen no diálogo «Novo», xunto con opcións de fondo de cor sólida.      </p>
+
+      <p>
+        Cando usa unha imaxe «de inicio», fai modificacións e a garda, a imaxe «de inicio» orixinal non se sobreescribe. Ademais, ao editar a súa nova imaxe, o contido da imaxe «de inicio» orixinal pode afectala.      </p>
+
+      <h3>
+        <a name="coloring_book_style"
+            id="coloring_book_style">Imaxes «de comezo» ao estilo dun libro para colorar</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          O tipo máis básico de imaxe «de inicio» é semellante a unha imaxe dun libro para colorar. É un esquema dunha forma que logo pode colorar e engadir detalles. En Tux Paint, mentre debuxa, escribe texto ou estampa selos, o contorno segue «por riba» do que debuxa. Pode borrar as partes do debuxo que fixo, mais non pode borrar o contorno.        </p>
+
+        <p>
+          Para crear este tipo de imaxe «de inicio», simplemente cree unha imaxe en branco e negro nun programa de pintura e gárdea como ficheiro PNG rasterizado ou SVG vectorial. Se o garda como PNG, opcionalmente pode renderizar a imaxe en negro e transparente no canto de en branco e negro, mais (a partir do Tux Paint 0.9.21) isto non é necesario.        </p>
+      </blockquote>
+
+      <h3>
+        <a name="scene_style"
+            id="scene_style">Imaxes «de comezo» ao estilo dunha escena</a>
+      </h3>
+
+      <blockquote>
+        <p>
+          Xunto coa superposición de estilo «libro para colorar», tamén pode fornecer unha imaxe de fondo separada como parte dunha imaxe «de inicio». A superposición actúa igual: non pode ser debuxada, borrada nin afectada polas ferramentas de «Maxia». Porén, o fondo pode si o pode ser ser.        </p>
+
+        <p>
+          Cando a ferramenta «Goma» se usa nunha imaxe baseada neste tipo de imaxe «de comezo», no canto de converter o lenzo a unha cor sólida, como o branco, devolve esa parte do lenzo á imaxe de fondo orixinal dende o imaxe «de comezo».        </p>
+
+        <p>
+          Ao crear unha superposición e un fondo, pode crear unha imaxe «de inicio» que simule a profundidade. Imaxine un fondo que amosa o océano e unha capa que representa a imaxe dun arrecife. Após pode debuxar (ou estampar) peixes na imaxe. Aparecerán no océano, pero nunca «diante» do arrecife.        </p>
+
+        <p>
+          Para crear este tipo de imaxe «de inicio», simplemente cree unha superposición (con transparencia) e gárdea como PNG. A continuación, cree outra imaxe (sen transparencia) e gárdea co mesmo nome de ficheiro, pero con «<code>-back</code>» (abreviatura de «fondo») engadido ao nome. (p. ex.: «<code>imaxe-de-comezo-back.png</code>» sería a imaxe de fondo do océano que corresponde á superposición ou primeiro plano.)        </p>
+      </blockquote>
+
+      <p>
+        Para obter os mellores resultados, imaxes «de comezo» debería ter polo menos o mesmo tamaño que o lenzo de debuxo de Tux Paint. (Vexa a sección «Cargar outras imaxes en Tux Paint» da documentación principal de Tux Paint (LÉEME) para os detalles sobre o tamaño.) Se non o son, estiraranse ou escalaranse. Isto faise sen afectar a forma («relación de aspecto»); con todo pódense aplicar algunhas manchas nos bordos.      </p>
+
+      <p>
+        Colóqueas no directorio  de «<code><b>starters</b></code>». Cando se accede ao diálogo «Novo» en Tux Paint, as imaxes «de comezo» veranse na pantalla que aparece, após as distintas opcións de cor sólida.      </p>
+
+      <p>
+        <b>Nota:</b> As «Imaxes de comezo» están «anexadas» ás imaxes gardadas, a través dun pequeno ficheiro de texto que leva o mesmo nome que o ficheiro gardado, pero con «<code>.dat</code>» como extensión. Isto permítelle seguir afectando ao debuxo incluso após saír de Tux Paint, ou se cargue outra imaxe ou se cree unha nova imaxe. (Noutras palabras, se un debuxo se basea nun imaxe «de comezo», sempre se verá afectado por el.)      </p>
+      <br clear="all">
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="templates"
+          id="templates">«Modelos»</a>
+    </h2>
+
+    <blockquote>
+      <img src="../../html/images/open_open.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        As imaxes «modelo» tamén aparecen no diálogo «Novo», xunto coas opcións de fondo de cor sólida e «imaxes de inicio». (Nota: Tux Paint antes da versión 0.9.22 non tiña a función «Modelo»).      </p>
+
+      <p>
+        A diferenza das imaxes debuxadas en Tux Paint polos usuarios e abertas despois, a apertura dun «modelo» crea un novo debuxo. Cando garda, a imaxe «modelo» non se sobreescribe. A diferenza das «imaxes de inicio», non hai unha «capa» inmutábel por riba do lenzo. Pode debuxar sobre calquera parte del.      </p>
+
+      <p>
+          Cando a ferramenta «Goma» se usa nunha imaxe baseada neste tipo de imaxe «modelo», no canto de converter o lenzo a unha cor sólida, como o branco, devolve esa parte do lenzo á imaxe de fondo orixinal dende o imaxe «modelo».      </p>
+
+      <p>
+        Os «modelos» son simplemente ficheiros de imaxe (en formato PNG, JPEG, SVG ou KPX (KidPix)). Non debe ser necesaria ningunha preparación nin conversión.      </p>
+
+      <p>
+        Para obter os mellores resultados, imaxes «modelo» debería ter polo menos o mesmo tamaño que o lenzo de debuxo de Tux Paint. (Vexa a sección «Cargar outras imaxes en Tux Paint» da documentación principal de Tux Paint (LÉEME) para os detalles sobre o tamaño.) Se non o son, estiraranse ou escalaranse. Isto faise sen afectar a forma («relación de aspecto»); con todo pódense aplicar algunhas manchas nos bordos.      </p>
+
+      <p>
+        Colóqueas no directorio  de «<code><b>templates</b></code>». Cando se accede ao diálogo «Novo» en Tux Paint, as imaxes «modelo» veranse na pantalla que aparece, após as distintas opcións de cor sólida.      </p>
+
+      <p>
+        <b>Nota:</b> As «Modelos» están «anexadas» ás imaxes gardadas, a través dun pequeno ficheiro de texto que leva o mesmo nome que o ficheiro gardado, pero con «<code>.dat</code>» como extensión. Isto permítelle seguir afectando ao debuxo incluso após saír de Tux Paint, ou se cargue outra imaxe ou se cree unha nova imaxe. (Noutras palabras, se un debuxo se basea nun imaxe «modelo», sempre se verá afectado por el.)      </p>
+      <br clear="all">
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="translations"
+          id="translations">Traducións</a>
+    </h2>
+
+    <blockquote>
+      <p>
+        Tux Paint admite numerosos idiomas grazas ao uso da biblioteca de localización «gettext». (Vexa a «Documentación de opcións» para saber como cambiar as configuracións rexionais en Tux Paint.)      </p>
+
+      <p>
+        Para traducir Tux Paint a un novo idioma, copie o ficheiro de modelo de tradución, «<code>tuxpaint.pot</code>» (atopado no código fonte de Tux Paint, no cartafol «<code>src/po/</code>»). Cambie o nome da copia como un ficheiro «<code>.po</code>», cun nome apropiado para o idioma local ao que está a traducir (p. ex.: «<code>es.po</code>» para o español; ou «<code>pt_BR.po</code>» para o portugués brasileiro fronte a «<code>pt.po</code>» ou «<code>pt_PT.po</code>» para o portugués falado en Portugal.)      </p>
+
+      <p>
+        Abra o ficheiro «<code>.po</code>» creado recentemente: pode editar nun editor de texto <i>simple</i>, como Emacs, Pico ou VI en Linux ou NotePad en Windows. O texto orixinal en inglés usado en Tux Paint está listado en liñas que comezan por «<code>msgid</code>». Introduza as traducións de cada un destes anacos de texto nas liñas baleiras «<code>msgstr</code>» directamente baixo as liñas correspondentes «<code>msgid</code>». (<i>Nota:</i> Non elimine as comiñas.)      </p>
+
+      <p>
+        Exemplo:      </p>
+
+      <blockquote>
+        <p>
+          <code>msgid "Smudge"<br>
+          msgstr "<u>Manchar</u>"<br>
+          <br>
+          msgid "Click and drag to draw large bricks."<br>
+          msgstr "<u>Haz clic y arrastra para dibujar ladrillos grandes.</u>"</code>
+        </p>
+      </blockquote>
+
+      <p>
+        Existen varias ferramentas para xestionar os catálogos de tradución de gettext, polo que non ten que editalos a man nun editor de texto. Aquí ten algúns:      </p>
+      <ul>
+        <li><a href="http://www.poedit.net/">Poedit</a></li>
+        <li><a href="https://wiki.gnome.org/Apps/Gtranslator">Gtranslator (GNOME Translator)</a></li>
+        <li><a href="https://virtaal.translatehouse.org/">Virtraal</a></li>
+        <li><a href="https://apps.kde.org/en/lokalize">Lokalize</a></li>
+      </ul>
+
+      <p>
+        <i>Nota:</i> É mellor traballar sempre co <i>último</i> modelo de catálogo de texto Tux Paint («<code>tuxpaint.pot</code>»), xa que se engade n novos textos e o texto antigo cambia ocasionalmente. O catálogo de texto para a próxima versión inédita de Tux Paint pódese atopar no repositorio Git de Tux Paint (ver: <a href="http://www.tuxpaint.org/download/source/git/">http://www.tuxpaint.org/download/source/git/</a>) e no sitio web de Tux Paint en <a href="http://www.tuxpaint.org/help/po/">http://www.tuxpaint.org/help/po/</a>.      </p>
+
+      <p>
+        Para editar unha tradución existente, descargue o último ficheiro «<code>.po</code>» para ese idioma e edíteo como se describe anteriormente.      </p>
+
+      <p>
+        Pode enviar ficheiros de tradución novos ou editados a Bill Kendrick, responsábel do desenvolvemento de Tux Paint, a: <a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a>, ou publicalos na lista de correo «tuxpaint-i18n» (vexa: <a href="http://www.tuxpaint.org/lists/">http://www.tuxpaint.org/lists/</a>).      </p>
+
+      <p>
+        Como alternativa, se te unha conta con <a href="http://www.sourceforge.net/">SourceForge.net</a>, pode solicitar que o engadan ao proxecto «<code>tuxpaint</code>» e recibir acceso de escritura ao repositorio de código fonte de Git para que poida enviar os seus cambios directamente.      </p>
+
+      <p>
+        <i>Nota:</i> A compatibilidade coas novas configuracións rexionais require facer adicións ao código fonte de Tux Paint («<code>/src/i18n.h</code>» e «<code>/src/i18n.c</code>»), e require actualizacións dos <code>Makefile</code>, para asegurarse de que os ficheiros «<code>.po</code>» están compilados en ficheiros «<code>.mo</code>» e están dispoñíbeis para o seu uso en tempo de execución.      </p>
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="input_methods"
+          id="input_methods">Métodos de entrada alternativos</a>
+    </h2>
+
+    <blockquote>
+      <p>
+        Tux Paint's 'Text' and 'Label' tools can provide alternative input methods for some languages. For example, when Tux Paint is running with a Japanese locale, the right <b><code>[Alt]</code></b> key can be pressed to cycle between Latin, Romanized Hiragana and Romanized Katakana modes. This allows native characters and words to be entered into the 'Text' and 'Label' tools by typing one or more keys on a keyboard with Latin characters (e.g., a <i>US QWERTY</i> keyboard).      </p>
+
+      <p>
+        To create an input method for a new locale, create a text file with a name based on the locale (e.g., "<code>ja</code>" for Japanese), with "<code>.im</code>" as the extension (e.g., "<code>ja.im</code>").      </p>
+
+      <p>
+        The "<code>.im</code>" file can have multiple character mapping sections for different character mapping modes. For example, on a Japanese typing system, typing <b><code>[K]</code></b> <b><code>[A]</code></b> in Hiragana mode generates a different Unicode character ("&#12363;") than typing <b><code>[K]</code></b> <b><code>[A]</code></b> in Katakana mode ("&#12459;").      </p>
+
+      <p>
+        List the character mappings in this file, one per line. Each line should contain (separated by whitespace):      </p>
+
+      <ul>
+        <li>the Unicode value of the character, in hexadecimal (more than one character can be listed, separated by a colon (':'), this allowing some sequences to map to words)        </li>
+
+        <li>the keycode sequence (the ASCII characters that must be entered to generate the Unicode character)        </li>
+
+        <li>a flag (or "<code>-</code>" if none)        </li>
+      </ul>
+
+      <p>
+        Start additional character mapping sections with a line containign the word "<code>section</code>".      </p>
+
+      <p>
+        Exemplo:      </p>
+
+      <blockquote>
+        <p>
+          <code># Hiragana<br>
+          304B ka -<br>
+          304C ga -<br>
+          304D ki -<br>
+          304E gi -<br>
+          304D:3083 kya -<br>
+          3063:305F tta -<br>
+          <br>
+          # Katakana<br>
+          section<br>
+          30AB ka -<br>
+          30AC ga -<br>
+          30AD ki -<br>
+          30AE gi -</code>
+        </p>
+      </blockquote>
+
+      <p>
+        <i>Note:</i> Blank lines within the "<code>.im</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example above.      </p>
+
+      <p>
+        <i>Note:</i> Meanings of the flags are locale-specific, and are processed by the language-specific source code in "<code>src/im.c</code>". For example, "<code>b</code>" is used in Korean to handle Batchim, which may carry over to the next character.      </p>
+
+      <p>
+        <i>Nota:</i> A compatibilidade coas novas input methods require facer adicións ao código fonte de Tux Paint ("<code>/src/im.c</code>"), e require actualizacións dos <code>Makefile</code>, to ensure the "<code>.im</code>" files are available for use at runtime.      </p>
+    </blockquote>
+
+    <hr size="1"
+        noshade>
+
+    <h2>
+      <a name="on_screen_keyboard"
+          id="on_screen_keyboard">Teclado en pantalla</a>
+    </h2>
+
+    <blockquote>
+      <p>
+        As of version 0.9.22, Tux Paint's 'Text' and 'Label' tools can present an on-screen keyboard that allows the pointer (via a mouse, eye-tracking systems, etc.) to be used to input characters. Files that describe the layout and available keys are stored in Tux Paint "<code>osk</code>" directory. Each keyboard layout is defined by a number of files (some of which may be shared by different layouts).      </p>
+      <p>
+        Usaremos o teclado QWERTY como exemplo:      </p>
+      
+      <h3>
+        Ficheiro de visión xeral da disposición («<code>qwerty.layout</code>»)      </h3>
+
+      <blockquote>
+        <p>
+          Este é un ficheiro de texto que especifica os outros ficheiros empregados para describir a disposición e as asignacións de teclas.        </p>
+
+        <blockquote>
+          <p>
+            <code>layout qwerty.h_layout<br>
+            keymap us-intl-altgr-dead-keys.keymap<br>
+            composemap en_US.UTF-8_Compose<br>
+            keysymdefs keysymdef.h<br>
+            keyboardlist qwerty.layout default.layout</code>
+          </p>
+        </blockquote>
+
+        <p>
+        <i>Note:</i> Blank lines within the "<code>.layout</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example above.        </p>
+
+        <p>
+          A liña «<code>keyboardlist</code>» describe a que esquemas cambiar, cando o usuario preme nos botóns esquerdo e dereito do teclado. (Ver abaixo.)        </p>
+      </blockquote>
+
+      <h3>
+        Ficheiro de disposición do teclado («<code>qwerty.h_layout</code>»)      </h3>
+
+      <blockquote>
+        <p>
+          Isto describe o tamaño do teclado (como unha reixa de «largo × alto») e lista cada tecla co seu código numérico (ver o ficheiro «<code>keymap</code>», abaixo), o largo no que debería debuxarse ​​(normalmente «<code>1.0</code>», para ocupar un espazo no teclado, pero no seguinte exemplo, teña en conta que as teclas «<code>TAB</code>» e «<code>SPACE</code>» son moito máis largas), o carácter ou o texto que se amosará na tecla, dependendo das teclas modificadoras premido (unha para cada unha: sen modificadores,<b><code>[Maiúsculas]</code></b>,<b><code>[AltGr]</code></b> e <b><code>[Maiúsculas]</code></b> + <b><code>[AltGr]</code></b>) e, finalmente, se a tecla está afectada ou non pola tecla <b><code>[BloqMaiús]</code></b> (use «<code>1</code>») ou a tecla <b><code>[AltGr]</code></b> (gráficos alternativos) ( use «<code>2</code>»), ou non (use «<code>0</code>»).        </p>
+
+        <blockquote>
+          <p>
+            <code>WIDTH 15<br>
+            HEIGHT 5<br>
+            <br>
+            KEY 49 1.0 ` ~ ` ~ 0<br>
+            KEY 10 1.0 1 ! ¡ ¹ 0<br>
+            KEY 11 1.0 2 @ ² ˝ 0<br>
+            KEY 12 1.0 3 # · ³ 0<br>
+            KEY 13 1.0 4 $ ¤ £ 0<br>
+            KEY 14 1.0 5 % € ¸ 0<br>
+            KEY 15 1.0 6 ^ ¼ ^ 0<br>
+            ...<br>
+            KEY 21 1.0 = + × ÷ 0<br>
+            KEY 22 2.0 DELETE DELETE DELETE DELETE 0<br>
+            <br>
+            NEWLINE<br>
+            <br>
+            KEY 23 1.5 TAB TAB TAB TAB 0<br>
+            KEY 24 1.0 q Q ä Ä 1<br>
+            KEY 25 1.0 w W å Å 1<br>
+            KEY 26 1.0 e E é É 1<br>
+            KEY 27 1.0 r R ® ® 1<br>
+            ...<br>
+            <br>
+            NEWLINE<br>
+            <br>
+            # A frecha cara á esquerda cambiará ao teclado anterior<br>
+            KEY 2 1.0 &lt;- &lt;- &lt;- &lt;- 0<br>
+            <br>
+            KEY 133 2.0 Cmp Cmp Cmp Cmp 0<br>
+            <br>
+            # As teclas ALT ou ALTGR úsanse no método de entrada (im) para cambiar o modo de entrada<br>
+            KEY 64 2.0 Alt Alt Alt Alt 0<br>
+            <br>
+            # Espazo<br>
+            KEY 65 7.0 SPACE SPACE SPACE SPACE 0<br>
+            <br>
+            KEY 108 2.0 AltGr AltGr AltGr AltGr 0<br>
+            <br>
+            # A frecha cara á dereita cambiará ao seguinte teclado<br>
+            KEY 1 1.0 -&gt; -&gt; -&gt; -&gt; 0</code>
+          </p>
+        </blockquote>
+
+        <p>
+          Teña en conta aquí que as teclas alfabéticas (<b><code>[Q]</code></b>,<b><code>[W]</code></b>, etc.) serán afectadas por <b>[BloqMaiús]</b>, mentres as teclas numéricas (<b><code>[1]</code></b>, <b><code>[2]</code></b>, etc.), <b><code>[Espazo]</code></b>, etc., non o farán.        </p>
+
+        <p>
+          Os códigos de tecla ata «<code>8</code>» están reservados para uso interno. Os que se usan actualmente descríbense a continuación.        </p>
+
+        <ul>
+          <li>
+            <code>0</code> —
+                botón baleiro          </li>
+
+          <li>
+            <code>1</code> —
+                seguinte disposición (segundo o axuste «<code>keyboardlist</code>» do ficheiro de disposición)          </li>
+
+          <li>
+            <code>2</code> —
+                disposición anterior (segundo o axuste «<code>keyboardlist</code>» do ficheiro de disposición)          </li>
+        </ul>
+      </blockquote>
+
+      <h3>
+        Ficheiro do mapa do teclado («<code>us-intl-altgr-dead-keys.keymap</code>»)      </h3>
+
+      <blockquote>
+        <p>
+          Este ficheiro define que códigos das teclas numéricas (vistos nos ficheiros de disposición de teclado, como «<code>qwerty.h_layout</code>» descrito anteriormente) deben asignarse a que caracteres reais que unha aplicación como Tux Paint agarda recibir cando se premen as teclas (por exemplo, nun teclado real).        </p>
+
+        <p>
+          Se está a usar un sistema operativo como <cite>Linux</cite>, que executa <cite>X-Window</cite> e ten dispoñíbel a ferramenta de liña de ordes «<code>xmodmap</code>», pode executala coa opción «print keymap expressions», «<code>-pke</code>», para xerar un ficheiro de mapa de teclas.        </p>
+
+        <blockquote>
+          <p>
+            <code>keycode 9 = Escape NoSymbol Escape Escape<br>
+            keycode 10 = 1 exclam exclamdown onesuperior 1 exclam 1
+            exclam NoSymbol onesuperior<br>
+            keycode 11 = 2 at twosuperior dead_doubleacute 2 at 2
+            at onehalf twosuperior<br>
+            keycode 12 = 3 numbersign periodcentered threesuperior
+            dead_macron periodcentered<br>
+            ...<br>
+            keycode 52 = z Z ae AE Arabic_hamzaonyeh asciitilde
+            guillemotright NoSymbol Greek_zeta Greek_ZETA U037D
+            U03FF<br>
+            keycode 53 = x X x X Arabic_hamza Arabic_sukun
+            guillemotleft NoSymbol Greek_chi Greek_CHI rightarrow
+            leftarrow<br>
+            keycode 54 = c C copyright cent Arabic_hamzaonwaw
+            braceright Greek_psi Greek_PSI copyright<br>
+            keycode 55 = v V v V Arabic_ra braceleft Greek_omega
+            Greek_OMEGA U03D6<br>
+            keycode 56 = b B b B UFEFB UFEF5 Greek_beta Greek_BETA
+            U03D0<br>
+            keycode 57 = n N ntilde Ntilde Arabic_alefmaksura
+            Arabic_maddaonalef Greek_nu Greek_NU U0374 U0375<br>
+            keycode 58 = m M mu mu Arabic_tehmarbuta apostrophe
+            Greek_mu Greek_MU U03FB U03FA<br>
+            keycode 59 = comma less ccedilla Ccedilla Arabic_waw
+            comma comma less guillemotleft<br>
+            keycode 60 = period greater dead_abovedot dead_caron
+            Arabic_zain period period greater guillemotright
+            periodcentered<br>
+            keycode 61 = slash question questiondown dead_hook
+            Arabic_zah Arabic_question_mark slash question<br>
+            keycode 62 = Shift_R NoSymbol Shift_R Shift_R<br>
+            ...<br></code>
+          </p>
+        </blockquote>
+      </blockquote>
+
+      <h3>
+        Ficheiro do mapa de composición («<code>en_US.UTF-8_Compose</code>»)      </h3>
+
+      <blockquote>
+        <p>
+          Este ficheiro describe caracteres individuais que poden ser compostos por varias entradas. Por exemplo, pódese usar «<b><code>[Composición]</code></b>» seguido de «<b><code>[A]</code></b>» e «<b><code>[E]</code></b>» para crear o carácter «<code>æ</code>».        </p>
+
+        <p>
+          O ficheiro que vén con Tux Paint está baseado no mapa de composición UTF-8 (Unicode) en inglés dos EUA que vén co <cite>Sistema X Window</cite> de X.Org. A versión actual da biblioteca <cite>Xlib</cite> dispón dunha páxina en <a href="https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html">https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html</a>.        </p>
+      </blockquote>
+
+      <h3>
+        Ficheiro de definición Keysym («<code>keysymdef.h</code>»)      </h3>
+
+      <blockquote>
+        <p>
+          Este ficheiro (que é un ficheiro de cabeceira da linguaxe de programación <cite>C</cite>) tamén é do <cite>Sistema X Window</cite>. Define os valores Unicode de cada tecla (p. ex.: «<code>XK_equal</code>» corresponde a «<code>U+003D</code>», para o carácter «<code>=</code>» («<code>EQUALS SIGN</code>»).        </p>
+
+        <p>
+          <b>Nota:</b> este ficheiro non se compila en Tux Paint, senón que se le e analiza no tempo de execución.        </p>
+
+        <p>
+          É pouco probábel que se precise algunha modificación neste ficheiro.        </p>
+      </blockquote>
+    </blockquote>
+
+    <hr size="2"
+        noshade>
+  </body>
+</html>

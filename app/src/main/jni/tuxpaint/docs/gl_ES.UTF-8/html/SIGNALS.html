@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Documentación de sinais de Tux Paint    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+    <center>
+      <h1>
+        <img src="../../html/images/tuxpaint-title.png"
+            width="205"
+            height="210"
+            alt="Tux Paint"><br>
+        versión 0.9.26<br/>
+        Documentación de sinais      </h1>
+
+      <p>
+        Copyright &copy; 2019-2021 por varios colaboradores; vexa AUTORES (AUTHORS).<br>
+        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
+      </p>
+
+      <p>
+        30 Xaneiro 2021      </p>
+    </center>
+
+    <hr>
+
+    <p>
+      Tux Paint responds to the following signals (which can be sent to the program's process via `<code>kill</code>` or `<code>killall</code>`, for example).    </p>
+
+    <dl>
+      <dt>
+        <code>SIGTERM</code>
+        (also, <b><code>[Ctrl]</code></b> + <b><code>[C]</code></b> from a terminal running `<code>tuxpaint</code>`)      </dt>
+
+      <dd>
+        <p>
+          Tux Paint responds as if the "Quit" button were pressed, or the desktop environment was told to close Tux Paint (e.g., by clicking a window close button, or pressing <b><code>[Alt]</code></b> + <b><code>[F4]</code></b> on most systems).        </p>
+
+        <p>
+          From the main interface, Tux Paint will prompt whether or not you wish to quit, and (unless overridden by the auto-save option, e.g. "<code>--autosave</code>") if you'd like to save the current drawing (if unsaved), and if so, and it's a modified version of an existing drawing (unless overridden by the options to save over old images, or always save new images; e.g. "<code>--saveover</code>" and "<code>--saveovernew</code>", respectively), whether or not to overwrite the existing drawing, or save to a new file.        </p>
+
+        <p>
+          <b>Note:</b> From other parts of the interface, the signal is currently interpreted as a request to go back (e.g., from the "New" dialog back to the main interface), as if a "Back" button in Tux Paint were clicked, or the <b><code>[Esc]</code></b> was key pressed.        </p>
+
+        <p>
+          Exemplo: <code>killall tuxpaint</code>        </p>
+      </dd>
+
+      <dt>
+        <code>SIGUSR1</code> &amp; <code>SIGUSR2</code>
+      </dt>
+
+      <dd>
+        <p>
+          Tux Paint responds by setting its auto-save option (as if it had been launched with "<code>--autosave</code>"), as well as either the option to always save new images (as if launched with "<code>--saveovernew</code>") in the case of receiving a <code>SIGUSR1</code> signal, or to always save over the existing image (as if launched with "<code>--saveover</code>") in the case of receiving <code>SIGUSR2</code>.  Then Tux Paint sends itself a <code>SIGTERM</code> signal, in an attempt to quit. (See above.)        </p>
+
+        <p>
+          So, from the main interface, Tux Paint should quit almost immediately, with no questions asked.        </p>
+
+        <p>
+          <b>Note:</b> From other parts of the interface, unfortunately, Tux Paint will go back one level in the interface.  Therefore, at this time, it may be necessary to send this signal to Tux Paint a few times, for it to quit completely.        </p>
+
+        <p>
+          Exemplo: <code>killall -s SIGUSR1 tuxpaint</code>        </p>
+      </dd>
+    </dl>
+  </body>
+</html>

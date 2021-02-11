@@ -1,0 +1,268 @@
+                                   Tux Paint
+                    versión 0.9.26 Advanced Stamps 'How-To'
+
+        Copyright © 2006-2021 by Albert Cahalan and others; see AUTHORS.
+                            http://www.tuxpaint.org/
+
+About this 'How-To'
+
+     This 'How-To' assumes that you want to make an excellent Tux Paint
+     stamp, in PNG bitmapped format, from a JPEG image (e.g., a digital
+     photograph). There are easier and faster methods that produce lower
+     quality.
+
+     This 'How-To' assumes you are dealing with normal opaque objects.
+     Dealing with semi-transparent objects (fire, moving fan blade, kid's
+     balloon) or light-giving objects (fire, lightbulb, sun) is best done
+     with custom software. Images with perfect solid-color backgrounds are
+     also best done with custom software, but are not troublesome to do as
+     follows.
+
+Image choice is crucial
+
+  License
+
+       If you wish to submit artwork to the Tux Paint developers for
+       consideration for inclusion in the official project, or if you wish to
+       release your own copy of Tux Paint, bundled with your own graphics,
+       you need an image that is compatible with the GNU General Public
+       License used by Tux Paint.
+
+       Images produced by the US government are Public Domain, but be aware
+       that the US government sometimes uses other images on the web. Google
+       image queries including either site:gov or site:mil will supply many
+       suitable images. (Note: the *.mil sites include non-military content,
+       too!)
+
+       Your own images can be placed in the Public Domain or a suitable
+       license, such as the Creative Commons CC0 by declaring it so. (Hire a
+       lawyer if you feel the need for legal advice.)
+
+       For personal use, any image you can legitimately modify and use for
+       your own personal use should be fine.
+
+  Image Size and Orientation
+
+       You need an image that has a useful orientation. Perspective is an
+       enemy. Images that show an object from the corner are difficult to fit
+       into a nice drawing. As a general rule, telephoto side views are the
+       best. The impossible ideal is that, for example, two wheels of a car
+       are perfectly hidden behind the other two.
+
+       Rotating an image can make it blurry, especially if you only rotate by
+       a few degrees. Images that don't need rotation are best, images that
+       need lots of rotation (30 to 60 degrees) are next best, and images
+       that need just a few degrees are worst. Rotation will also make an
+       image darker because most image editing software is very bad about
+       gamma handling. (Rotation is only legitimate for gamma=1.0 images.)
+
+       Very large images are more forgiving of mistakes, and thus easier to
+       work with. Choose an image with an object that is over 1000 pixels
+       across if you can. You can shrink this later to hide your mistakes.
+
+       Be sure that the image is not too grainy, dim, or washed out.
+
+       Pay attention to feet and wheels. If they are buried in something, you
+       will need to draw new ones. If only one is buried, you might be able
+       to copy the other one as a replacement.
+
+Prepare the image
+
+     First of all, be sure to avoid re-saving the image as a JPEG. This
+     causes quality loss. There is a special tool called jpegtran that lets
+     you crop an image without the normal quality loss.
+
+       jpegtran -trim -copy none -crop 512x1728+160+128 < src.jpg >
+       cropped.jpg
+
+     Bring that image up in your image editor. If you didn't crop it yet, you
+     may find that your image editor is very slow. Rotate and crop the image
+     as needed. Save the image — choose whatever native format supports
+     layers, masks, alpha, etc. GIMP users should choose "XCF", and Adobe
+     Photoshop users should choose "PSD", for example.
+
+     If you have rotated or cropped the image in your image editor, flatten
+     it now. You need to have just one RGB layer without mask or alpha.
+
+     Open the layers dialog box. Replicate the one layer several times. From
+     top to bottom you will need something like this:
+
+      1. unmodified image (write-protect this if you can)
+      2. an image you will modify — the "work in progress" layer
+      3. solid green (write-protect this if you can)
+      4. solid magenta (write-protect this if you can)
+      5. unmodified image (write-protect this if you can)
+
+     Give the work in progress (WIP) layer a rough initial mask. You might
+     start with a selection, or by using the grayscale value of the WIP
+     layer. You might invert the mask.
+
+     Warning: once you have the mask, you may not rotate or scale the image
+     normally. This would cause data loss. You will be given special scaling
+     instructions later.
+
+Prepare the mask
+
+     Get used to doing [Ctrl]-click and [Alt]-click on the thumbnail images
+     in the layers dialog. You will need this to control what you are looking
+     at and what you are editing. Sometimes you will be editing things you
+     can't see. For example, you might edit the mask of the WIP layer while
+     looking at the unmodified image. Pay attention so you don't screw up.
+     Always verify that you are editing the right thing.
+
+     Set an unmodified image as what you will view (the top one is easiest).
+     Set the WIP mask as what you will edit. At some point, perhaps not
+     immediately, you should magnify the image to about 400% (each pixel of
+     the image is seen and edited as a 4x4 block of pixels on your screen).
+
+     Select parts of the image that need to be 100% opaque or 0% opaque. If
+     you can select the object or background somewhat accurately by color, do
+     so. As needed to avoid selecting any pixels that should be partially
+     opaque (generally at the edge of the object) you should grow, shrink,
+     and invert the selection.
+
+     Fill the 100% opaque areas with white, and the 0% opaque areas with
+     black. This is most easily done by drag-and-drop from the
+     foreground/background color indicator. You should not see anything
+     happen, because you are viewing the unmodified image layer while editing
+     the mask of the WIP layer. Large changes might be noticable in the
+     thumbnail.
+
+     Now you must be zoomed in.
+
+     Check your work. Hide the top unmodified image layer. Display just the
+     mask, which should be a white object on a black background (probably
+     with unedited grey at the edge). Now display the WIP layer normally, so
+     that the mask is active. This should show your object over top of the
+     next highest enabled layer, which should be green or magenta as needed
+     for maximum contrast. You might wish to flip back and forth between
+     those backgrounds by repeatedly clicking to enable/disable the green
+     layer. Fix any obvious and easy problems by editing the mask while
+     viewing the mask.
+
+     Go back to viewing the top unmodified layer while editing the WIP mask.
+     Set your drawing tool the paintbrush. For the brush, choose a small
+     fuzzy circle. The 5x5 size is good for most uses.
+
+     With a steady hand, trace around the image. Use black around the
+     outside, and white around the inside. Avoid making more than one pass
+     without switching colors (and thus sides).
+
+     Flip views a bit, checking to see that the mask is working well. When
+     the WIP layer is composited over the green or magenta, you should see a
+     tiny bit of the original background as an ugly fringe around the edge.
+     If this fringe is missing, then you made the object mask too small. The
+     fringe consists of pixels that are neither 100% object nor 0% object.
+     For them, the mask should be neither 100% nor 0%. The fringe gets
+     removed soon.
+
+     View and edit the mask. Select by color, choosing either black or white.
+     Most likely you will see unselected specks that are not quite the
+     expected color. Invert the selection, then paint these away using the
+     pencil tool. Do this operation for both white and black.
+
+Replace the fringe and junk pixels
+
+     Still viewing the mask, select by color. Choose black. Shrink the
+     selection by several pixels, being sure to NOT shrink from the edges of
+     the mask (the shrink helps you avoid and recover from mistakes).
+
+     Now disable the mask. View and edit the unmasked WIP layer. Using the
+     color picker tool, choose a color that is average for the object.
+     Drag-and-drop this color into the selection, thus removing most of the
+     non-object pixels.
+
+     This solid color will compress well and will help prevent ugly color
+     fringes when Tux Paint scales the image down. If the edge of the object
+     has multiple colors that are very different, you should split up your
+     selection so that you can color the nearby background to be similar.
+
+     Now you will paint away the existing edge fringe. Be sure that you are
+     editing and viewing the WIP image. Frequent layer visibility changes
+     will help you to see what you are doing. You are likely to use all of:
+
+       * composited over green (mask enabled)
+       * composited over magenta (mask enabled)
+       * original (the top or bottom layer)
+       * composited over the original (mask enabled)
+       * raw WIP layer (mask disabled)
+
+     To reduce accidents, you may wish to select only those pixels that are
+     not grey in the mask. (Select by color from the mask, choose black, add
+     mode, choose white, invert. Alternately: Select all, select by color
+     from the mask, subtract mode, choose black, choose white.) If you do
+     this, you'll probably want to expand the selection a bit and/or hide the
+     "crawling ants" line that marks the selection.
+
+     Use the clone tool and the brush tool. Vary the opacity as needed. Use
+     small round brushes mostly, perhaps 3x3 or 5x5, fuzzy or not. (It is
+     generally nice to pair up fuzzy brushes with 100% opacity and non-fuzzy
+     brushes with about 70% opacity.) Unusual drawing modes can be helpful
+     with semi-transparent objects.
+
+     The goal is to remove the edge fringe, both inside and outside of the
+     object. The inside fringe, visible when the object is composited over
+     magenta or green, must be removed for obvious reasons. The outside
+     fringe must also be removed because it will become visible when the
+     image is scaled down. As an example, consider a 2x2 region of pixels at
+     the edge of a sharp-edged object. The left half is black and 0% opaque.
+     The right half is white and 100% opaque. That is, we have a white object
+     on a black background. When Tux Paint scales this to 50% (a 1x1 pixel
+     area), the result will be a grey 50% opaque pixel. The correct result
+     would be a white 50% opaque pixel. To get this result, we would paint
+     away the black pixels. They matter, despite being 0% opaque.
+
+     Tux Paint can scale images down by a very large factor, so it is
+     important to extend the edge of your object outward by a great deal.
+     Right at the edge of your object, you should be very accurate about
+     this. As you go outward away from the object, you can get a bit sloppy.
+     It is reasonable to paint outward by a dozen pixels or more. The farther
+     you go, the more Tux Paint can scale down without creating ugly color
+     fringes. For areas that are more than a few pixels away from the object
+     edge, you should use the pencil tool (or sloppy select with
+     drag-and-drop color) to ensure that the result will compress well.
+
+Save the image for Tux Paint
+
+     It is very easy to ruin your hard work. Image editors can silently
+     destroy pixels in 0% opaque areas. The conditions under which this
+     happens may vary from version to version. If you are very trusting, you
+     can try saving your image directly as a PNG. Be sure to read it back in
+     again to verify that the 0% opaque areas didn't turn black or white,
+     which would create fringes when Tux Paint scales the image down. If you
+     need to scale your image to save space (and hide your mistakes), you are
+     almost certain to destroy all the 0% opaque areas. So here is a better
+     way...
+
+  A Safer Way to Save
+
+       Drag the mask from the layers dialog to the unused portion of the
+       toolbar (right after the last drawing tool). This will create a new
+       image consisting of one layer that contains the mask data. Scale this
+       as desired, remembering the settings you use. Often you should start
+       with an image that is about 700 to 1500 pixels across, and end up with
+       one that is 300 to 400.
+
+       Save the mask image as a NetPBM portable greymap (".pgm") file. (If
+       you are using an old release of The GIMP, you might need to convert
+       the image to greyscale before you can save it.) Choose the more
+       compact "RAW PGM" format. (The second character of the file should be
+       the ASCII digit "5", hex byte 0x35.)
+
+       You may close the mask image.
+
+       Going back to the multi-layer image, now select the WIP layer. As you
+       did with the mask, drag this from the layers dialog to the toolbar.
+       You should get a single-layer image of your WIP data. If the mask came
+       along too, get rid of it. You should be seeing the object and the
+       painted-away surroundings, without any mask thumbnail in the layers
+       dialog. If you scaled the mask, then scale this image in exactly the
+       same way. Save this image as a NetPBM portable pixmap (".ppm") file.
+       (Note: .ppm, not .pgm.) (If you choose the RAW PPM format, the second
+       byte of the file should be the ASCII digit "6", hex byte 0x36.)
+
+       Now you need to merge the two files into one. Do that with the
+       pnmtopng command, like this:
+
+         pnmtopng -force -compression 9 -alpha mask.pgm fg.ppm >
+         final-stamp.png
