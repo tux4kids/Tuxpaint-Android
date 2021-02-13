@@ -2,7 +2,7 @@
                                    Tux Paint
                                  versión 0.9.26
 
-    Copyright © 2002-2021 por varios colaboradores; vexa AUTORES (AUTHORS).
+    Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
                                 30 Xaneiro 2021
@@ -141,7 +141,7 @@ Onde van os ficheiros
          É dicir, se o seu directorio persoal é «/home/tux», entón os
          ficheiros persoais de Tux Paint entrarán en «/home/tux/.tuxpaint/».
 
-         Non esqueza o período («.») anterior ao «tuxpaint».
+         Non esqueza o punto («.») antes de «tuxpaint»!
 
        Para engadir os seus propios pinceis, selos, «imaxes de comezo»,
        modelos e tipos de letra, cree subdirectorios no seu directorio
@@ -299,8 +299,7 @@ Selos
 
          Pódense engadir liñas adicionais ao ficheiro de texto para fornecer
          traducións da descrición, que se amosarán cando Tux Paint estea a
-         executarse nunha configuración rexional diferente (como o francés ou
-         o español).
+         executarse nun idioma diferente (como o francés ou o español).
 
          O comezo da liña debería corresponder ao código de idioma do idioma
          en cuestión (por exemplo, «fr» para o francés e «zh_TW» para o
@@ -336,10 +335,10 @@ Selos
 
     Compatibilidade da localización
 
-         Para sons para distintas configuracións rexionais (p. ex.: se o son
-         é alguén que di unha palabra e quere versións traducidas da palabra
-         dita), cree tamén ficheiros WAV ou OGG coa etiqueta da configuración
-         rexional no nome do ficheiro, na forma: «selo_CONF. REXIONAL.EXT»
+         Para sons para distintos idiomas (p. ex.: se o son é alguén que di
+         unha palabra e quere versións traducidas da palabra dita), cree
+         tamén ficheiros WAV ou OGG coa etiqueta de idioma no nome do
+         ficheiro, na forma: «selo_IDIOMA.EXT»
 
          O efecto de son de «selo.png», cando Tux Paint se executa en modo
          español, sería «selo.png». En modo francés, «selo_es.wav». No modo
@@ -366,9 +365,9 @@ Selos
 
     Compatibilidade da localización
 
-         Para sons descritivos de diferentes configuracións rexionais, cree
-         tamén ficheiros WAV ou OGG con ambos «_desc» e a etiqueta local no
-         nome do ficheiro, na forma: «selo_desc_CONF. REXIONAL.EXT»
+         Para sons descritivos de diferentes idiomas, cree tamén ficheiros
+         WAV ou OGG con ambos «_desc» e a etiqueta local no nome do ficheiro,
+         na forma: «selo_desc_IDIOMA.EXT»
 
          O son descritivo de «selo.png», cando Tux Paint se executa en modo
          español, sería «selo_desc_es.wav». En modo francés,
@@ -577,7 +576,7 @@ Tipos de letra
      Para obter os mellores resultados, imaxes «de comezo» debería ter polo
      menos o mesmo tamaño que o lenzo de debuxo de Tux Paint. (Vexa a sección
      «Cargar outras imaxes en Tux Paint» da documentación principal de Tux
-     Paint (LÉEME) para os detalles sobre o tamaño.) Se non o son,
+     Paint (README – LÉEME) para os detalles sobre o tamaño.) Se non o son,
      estiraranse ou escalaranse. Isto faise sen afectar a forma («relación de
      aspecto»); con todo pódense aplicar algunhas manchas nos bordos.
 
@@ -597,12 +596,12 @@ Tipos de letra
 «Modelos»
 
      As imaxes «modelo» tamén aparecen no diálogo «Novo», xunto coas opcións
-     de fondo de cor sólida e «imaxes de inicio». (Nota: Tux Paint antes da
+     de fondo de cor sólida e «imaxes de comezo». (Nota: Tux Paint antes da
      versión 0.9.22 non tiña a función «Modelo»).
 
      A diferenza das imaxes debuxadas en Tux Paint polos usuarios e abertas
      despois, a apertura dun «modelo» crea un novo debuxo. Cando garda, a
-     imaxe «modelo» non se sobreescribe. A diferenza das «imaxes de inicio»,
+     imaxe «modelo» non se sobreescribe. A diferenza das «imaxes de comezo»,
      non hai unha «capa» inmutábel por riba do lenzo. Pode debuxar sobre
      calquera parte del.
 
@@ -618,7 +617,7 @@ Tipos de letra
      Para obter os mellores resultados, imaxes «modelo» debería ter polo
      menos o mesmo tamaño que o lenzo de debuxo de Tux Paint. (Vexa a sección
      «Cargar outras imaxes en Tux Paint» da documentación principal de Tux
-     Paint (LÉEME) para os detalles sobre o tamaño.) Se non o son,
+     Paint (README – LÉEME) para os detalles sobre o tamaño.) Se non o son,
      estiraranse ou escalaranse. Isto faise sen afectar a forma («relación de
      aspecto»); con todo pódense aplicar algunhas manchas nos bordos.
 
@@ -639,7 +638,7 @@ Traducións
 
      Tux Paint admite numerosos idiomas grazas ao uso da biblioteca de
      localización «gettext». (Vexa a «Documentación de opcións» para saber
-     como cambiar as configuracións rexionais en Tux Paint.)
+     como cambiar os idiomas en Tux Paint.)
 
      Para traducir Tux Paint a un novo idioma, copie o ficheiro de modelo de
      tradución, «tuxpaint.pot» (atopado no código fonte de Tux Paint, no
@@ -692,45 +691,47 @@ Traducións
      repositorio de código fonte de Git para que poida enviar os seus cambios
      directamente.
 
-     Nota: A compatibilidade coas novas configuracións rexionais require
-     facer adicións ao código fonte de Tux Paint («/src/i18n.h» e
-     «/src/i18n.c»), e require actualizacións dos Makefile, para asegurarse
-     de que os ficheiros «.po» están compilados en ficheiros «.mo» e están
-     dispoñíbeis para o seu uso en tempo de execución.
+     Nota: A compatibilidade cos novo idiomas require facer adicións ao
+     código fonte de Tux Paint («/src/i18n.h» e «/src/i18n.c»), e require
+     actualizacións dos Makefile, para asegurarse de que os ficheiros «.po»
+     están compilados en ficheiros «.mo» e están dispoñíbeis para o seu uso
+     en tempo de execución.
 
      ----------------------------------------------------------------------
 
 Métodos de entrada alternativos
 
-     Tux Paint's 'Text' and 'Label' tools can provide alternative input
-     methods for some languages. For example, when Tux Paint is running with
-     a Japanese locale, the right [Alt] key can be pressed to cycle between
-     Latin, Romanized Hiragana and Romanized Katakana modes. This allows
-     native characters and words to be entered into the 'Text' and 'Label'
-     tools by typing one or more keys on a keyboard with Latin characters
-     (e.g., a US QWERTY keyboard).
+     As ferramentas «Texto» e «Etiqueta» de Tux Paint poden fornecer métodos
+     alternativos de entrada para algúns idiomas. Por exemplo, cando Tux
+     Paint está a executarse co idioma xaponés, pódese premer a tecla [Alt]
+     da dereita para alternar entre os modos latino, hiragana romanizado e
+     Katakana romanizado. Isto permite introducir palabras e caracteres
+     nativos nas ferramentas «Texto» e «Etiqueta» escribindo unha ou máis
+     teclas dun teclado con caracteres latinos (por exemplo, un teclado US
+     QWERTY).
 
-     To create an input method for a new locale, create a text file with a
-     name based on the locale (e.g., "ja" for Japanese), with ".im" as the
-     extension (e.g., "ja.im").
+     Para crear un método de entrada para un idioma novo, cree un ficheiro de
+     texto cun nome baseado no idioma (por exemplo, «ja» para xaponés), con
+     «.im» como extensión (por exemplo, «ja.im»).
 
-     The ".im" file can have multiple character mapping sections for
-     different character mapping modes. For example, on a Japanese typing
-     system, typing [K] [A] in Hiragana mode generates a different Unicode
-     character ("か") than typing [K] [A] in Katakana mode ("カ").
+     O ficheiro «.im» pode ter varias seccións de asignación de caracteres
+     para diferentes modos de asignación de caracteres. Por exemplo, nun
+     sistema de escritura de xaponés, escribir [K] [A] no modo Hiragana xera
+     un carácter Unicode diferente ("か") que escribir [K] [A] no modo
+     Katakana ("カ").
 
-     List the character mappings in this file, one per line. Each line should
-     contain (separated by whitespace):
+     Enumere as asignacións de caracteres neste ficheiro, unha por liña. Cada
+     liña debe conter (separada por espazos en branco):
 
-       * the Unicode value of the character, in hexadecimal (more than one
-         character can be listed, separated by a colon (':'), this allowing
-         some sequences to map to words)
-       * the keycode sequence (the ASCII characters that must be entered to
-         generate the Unicode character)
-       * a flag (or "-" if none)
+       * o valor Unicode do carácter, en hexadecimal (pode enumerar máis dun
+         carácter, separados por dous puntos («:»), permitindo que algunhas
+         secuencias se asignen a palabras)
+       * a secuencia de código de teclas (os caracteres ASCII que se deben
+         introducir para xerar o carácter Unicode)
+       * un sinalador (ou «-» se non hai ningún)
 
-     Start additional character mapping sections with a line containign the
-     word "section".
+     Inicie seccións adicionais de asignación de caracteres cunha liña que
+     conteña a palabra «section».
 
      Exemplo:
 
@@ -749,29 +750,31 @@ Métodos de entrada alternativos
        30AD ki -
        30AE gi -
 
-     Note: Blank lines within the ".im" file will be ignored, as will any
-     text following a "#" (pound/hash) character — it can be used to denote
-     comments, as seen in the example above.
+     Nota: Ignoraranse as liñas en branco dentro do ficheiro «.im», así como
+     calquera texto que teña un carácter «#» (grella). Isto pódese usar para
+     denotar comentarios , como se ve no exemplo anterior.
 
-     Note: Meanings of the flags are locale-specific, and are processed by
-     the language-specific source code in "src/im.c". For example, "b" is
-     used in Korean to handle Batchim, which may carry over to the next
-     character.
+     Nota: Os significados dos sinaladores son específicos do idioma e son
+     procesados ​​polo código fonte específico do idioma en «src/im.c». Por
+     exemplo, «b» úsase en coreano para tratar Batchim, que pode pasar ao
+     seguinte carácter.
 
-     Nota: A compatibilidade coas novas input methods require facer adicións
-     ao código fonte de Tux Paint ("/src/im.c"), e require actualizacións dos
-     Makefile, to ensure the ".im" files are available for use at runtime.
+     Nota: A compatibilidade cos novo input methods require facer adicións ao
+     código fonte de Tux Paint ("/src/im.c"), e require actualizacións dos
+     Makefile, para asegurarse de que os ficheiros «.im» están dispoñíbeis
+     para o seu uso en tempo de execución.
 
      ----------------------------------------------------------------------
 
 Teclado en pantalla
 
-     As of version 0.9.22, Tux Paint's 'Text' and 'Label' tools can present
-     an on-screen keyboard that allows the pointer (via a mouse, eye-tracking
-     systems, etc.) to be used to input characters. Files that describe the
-     layout and available keys are stored in Tux Paint "osk" directory. Each
-     keyboard layout is defined by a number of files (some of which may be
-     shared by different layouts).
+     A partir da versión 0.9.22, as ferramentas «Texto» e «Etiqueta» de Tux
+     Paint poden presentar un teclado en pantalla que permite utilizar o
+     punteiro (mediante un rato, sistemas de seguimento de ollos, etc.) para
+     introducir caracteres. Os ficheiros que describen o deseño e as claves
+     dispoñíbeis almacénanse no directorio «osk» de Tux Paint. Cada deseño de
+     teclado está definido por varios ficheiros (algúns dos cales poden ser
+     compartidos por diferentes deseños).
 
      Usaremos o teclado QWERTY como exemplo:
 
@@ -786,9 +789,9 @@ Teclado en pantalla
          keysymdefs keysymdef.h
          keyboardlist qwerty.layout default.layout
 
-       Note: Blank lines within the ".layout" file will be ignored, as will
-       any text following a "#" (pound/hash) character — it can be used to
-       denote comments, as seen in the example above.
+       Nota: Ignoraranse as liñas en branco dentro do ficheiro «.layout», así
+       como calquera texto que teña un carácter «#» (grella). Isto pódese
+       usar para denotar comentarios , como se ve no exemplo anterior.
 
        A liña «keyboardlist» describe a que esquemas cambiar, cando o usuario
        preme nos botóns esquerdo e dereito do teclado. (Ver abaixo.)

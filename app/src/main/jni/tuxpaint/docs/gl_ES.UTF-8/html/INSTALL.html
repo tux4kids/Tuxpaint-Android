@@ -21,7 +21,7 @@
         Documentación da instalación      </h1>
 
       <p>
-        Copyright &copy; 2002-2021 por varios colaboradores; vexa AUTORES (AUTHORS).<br>
+        Copyright &copy; 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).<br>
         <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
       </p>
 
@@ -80,7 +80,7 @@
         <h4>gettext</h4>
         <blockquote>
           <p>
-            Tux Paint utiliza a configuración rexional do sistema xunto coa biblioteca «gettext» para admitir varios idiomas (p. ex., o español). Necesitará ter a biblioteca gettext instalada.          </p>
+            Tux Paint utiliza o idioma do sistema xunto coa biblioteca «gettext» para admitir varios idiomas (p. ex., o español). Necesitará ter a biblioteca gettext instalada.          </p>
 
           <p>
             <a href="http://www.gnu.org/software/gettext/">http://www.gnu.org/software/gettext/</a>
@@ -155,7 +155,7 @@
       </blockquote>
     </blockquote>
 
-    <h2>Compilación e instalación</h2>
+    <h2>Compilación e instalación:</h2>
     <blockquote>
       <p>
         Tux Paint publícase baixo a Licenza Pública Xeral de GNU (GPL) (consulte «COPYING.txt» para máis detalles) e, polo tanto, o «código fonte» do programa está dispoñíbel libremente.      </p>
@@ -270,7 +270,7 @@
         <h4>Se algo vai mal:</h4>
         <blockquote>
           <p>
-            Se ao facer dobre clic no atallo para executar Tux Paint, non ocorre nada, probabelmente sexa porque algunhas destas opcións da liña de ordes son incorrectas. Abra un explorador coma antes e busque un ficheiro chamado «<code>stderr.txt</code>» no cartafol TuxPaint.          </p>
+            Se ao facer dobre clic no atallo para executar Tux Paint, non ocorre nada, probabelmente sexa porque algunhas destas opcións da liña de ordes son incorrectas. Abra un explorador de ficheiros coma antes e busque un ficheiro chamado «<code>stderr.txt</code>» no cartafol TuxPaint.          </p>
 
           <p>
             Conterá unha descrición do que estaba mal. Normalmente só se debe a maiúsculas e minúsculas incorrectas (maiúsculas «Z» no canto de minúsculas «z») ou a falta (ou exceso) de «-» (guións).          </p>
@@ -285,7 +285,7 @@
             Nota: Tux Paint non usa <code>autoconf</code>/<code>automake</code>, polo que non hai ningún script «<code>./configure</code>» para executar. Non obstante, a compilación debería ser directa, supoñendo que todo o que precisa Tux Paint está instalado.          </p>
 
           <p>
-            Para compilar o programa dende as fontes, simplemente execute a seguinte orde dende un indicador do sistema (p. ex.: «$»):          </p>
+            Para compilar o programa dende o código fonte, simplemente execute a seguinte orde dende un indicador do sistema (p. ex.: «$»):          </p>
 
           <blockquote>
             <code>
@@ -337,13 +337,13 @@
         <h4>Se se producen erros:</h4>
         <blockquote>
           <p>
-            If you receive any errors during compile-time, make sure you have the appropriate libraries installed (see above).  If using packaged versions of the libraries (e.g., RPMs under RedHat or DEBs under Debian), be sure to get the corresponding "<code>-dev</code>" or "<code>-devel</code>" packages as well, otherwise you won't be able to compile Tux Paint (and other programs) from source!          </p>
+            Se recibe algún erro durante o tempo de compilación, asegúrese de ter instaladas as bibliotecas axeitadas (ver máis arriba). Se está a empregar versións empaquetadas das bibliotecas (por exemplo, RPM en RedHat ou DEB en Debian), asegúrese de obter tamén os correspondentes paquetes «<code>-dev</code>» ou «<code>-devel</code>», se non, non poderá compilar Tux Paint (e outros programas) dende o código fonte.          </p>
         </blockquote>
 
         <h4>Instalar:</h4>
         <blockquote>
           <p>
-            Assuming no fatal errors occured, you can now install the program so that it can be run by users on the system.  By default, this must be done by the "root" user ('superuser').  Switch to "root" by typing the command:          </p>
+            Supoñendo que non se produciron erros graves, agora pode instalar o programa para que os usuarios do sistema poidan executalo. De xeito predeterminado, isto debe facelo o usuario «root» («superusuario»). Cambie a «root» escribindo a orde:          </p>
 
           <blockquote>
             <code>
@@ -352,7 +352,7 @@
           </blockquote>
 
           <p>
-            Enter "root"'s password at the prompt.  You should now be "root" (with a prompt like "#").  To install the program and its data files, type:          </p>
+            Introduza o contrasinal de «root» no indicador do sistema. Agora debería ser «root» (cun indicador como «#»). Para instalar o programa e os seus ficheiros de datos, escriba:          </p>
 
           <blockquote>
             <code>
@@ -361,7 +361,7 @@
           </blockquote>
 
           <p>
-            Finally, you can switch back to your regular user by exiting superuser mode:          </p>
+            Finalmente, pode volver ao seu usuario habitual saíndo do modo de superusuario:          </p>
 
           <blockquote>
             <code>
@@ -370,7 +370,7 @@
           </blockquote>
 
           <p>
-            Alternatively, you may be able to simply use the "sudo" command (e.g., on Ubuntu Linux):          </p>
+            Como alternativa, pode simplemente usar a orde «sudo» (po.ex.: en Ubuntu Linux):          </p>
 
           <blockquote>
             <code>
@@ -379,12 +379,12 @@
           </blockquote>
 
           <p>
-            <b>Note:</b> By default, "<code>tuxpaint</code>", the executable program, is placed in "<code>/usr/local/bin/</code>".  The data files (images, sounds, etc.) are placed in "<code>/usr/local/share/tuxpaint/</code>".          </p>
+            <b>Nota:</b> De xeito predeterminado, «<code>tuxpaint</code>», o programa executábel, colócase en «<code>/usr/local/bin/</code>». Os ficheiros de datos (imaxes, sons, etc.) colócanse en «<code>/usr/local/share/tuxpaint/</code>».          </p>
 
           <h5>Cambiando onde van as cousas</h5>
           <blockquote>
             <p>
-              You can change where things will go by setting "<code>Makefile</code>"variables on the command line.  "<code>DESTDIR</code>" is used to place output in a staging area for package creation. "<code>PREFIX</code>" is the basis of where all other files go, and is, by default, set to "<code>/usr/local</code>".            </p>
+              Pode cambiar onde irán as cousas axustando as variábeis de «<code>Makefile</code>» na liña de ordes. «<code>DESTDIR</code>» úsase para colocar a saída nunha área de espera para a creación de paquetes. «<code>PREFIX</code>» é a base de onde van todos os demais ficheiros e, de xeito predeterminado, está estabelecido en «<code>/usr/local</code>».            </p>
 
             <p>
               Outras variábeis son:            </p>
@@ -395,7 +395,7 @@
 
               <dt><code>DATA_PREFIX</code></dt>
               <dd>
-                Where the data files (sound, graphics, brushes, stamps, fonts) will go, and where Tux Paint will look for them when it's run. (Set to "<code>$(PREFIX)/share/tuxpaint</code>")              </dd>
+                Onde irán os ficheiros de datos (son, gráficos, pinceis, selos, tipos de letra) e onde os buscará Tux Paint cando se execute. (Estabelecer en «<code>$(PREFIX)/share/tuxpaint</code>»)              </dd>
 
               <dt><code>DOC_PREFIX</code></dt>
               <dd>
@@ -414,7 +414,7 @@
 
               <dt><code>LOCALE_PREFIX</code></dt>
               <dd>
-                Where the translation files for Tux Paint will go, and where Tux Paint will look for them.  (Set to "<code>$(PREFIX)/share/locale/</code>") (Final location of a translation file will be under the locale's directory (e.g., "<code>es</code>" for Spanish), within the "<code>LC_MESSAGES</code>" subdirectory.)              </dd>
+                Onde irán os ficheiros de tradución para Tux Paint e onde os buscará Tux Paint. (Estabelécese en «<code>$(PREFIX)/share/locale/</code>») (A localización final dun ficheiro de tradución estará no directorio local (por exemplo, «<code>es</code>» para o español), dentro do subdirectorio «<code>LC_MESSAGES</code>»).              </dd>
             </dl>
 
             <p>
@@ -451,7 +451,7 @@
       <h3>Linux</h3>
       <blockquote>
         <p>
-          Within the Tux Paint source directory (where you compiled Tux Paint), you can use the "<code>make uninstall</code>" target to uninstall Tux Paint. By default, this must be done by the "root" user ('superuser'), but if you installed Tux Paint somewhere else (e.g., using a "<code>PREFIX=...</code>" setting to "<code>make</code>" and "<code>make install</code>"), you may not, and will want to provide those same settings here. (See the installation instructions above for further information.)        </p>
+          Dentro do directorio de orixe de Tux Paint (onde compilou Tux Paint), pode usar o destino «<code>make uninstall</code>» para desinstalar Tux Paint. De xeito predeterminado, debe facelo o usuario «root» («superusuario»), mais se instalou Tux Paint noutro lugar (por exemplo, usando a configuración «<code>PREFIX=...</code>» en «<code>make</code>» e «<code>make install</code>»), pode que non e queira proporcionar a mesma configuración aquí. (Consulte as instrucións de instalación anteriores para obter máis información.)        </p>
       </blockquote>
     <blockquote>
   </body>

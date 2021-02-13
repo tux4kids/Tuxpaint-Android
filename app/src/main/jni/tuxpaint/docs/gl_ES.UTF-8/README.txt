@@ -3,7 +3,7 @@
 
   Un sinxelo programa de debuxo para cativos
 
-    Copyright © 2002-2021 por varios colaboradores; vexa AUTORES (AUTHORS).
+    Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
                                 2 Febreiro 2021
@@ -14,17 +14,17 @@
    |Índice                                 |
    |---------------------------------------|
    |  * Sobre Tux Paint                    |
-   |  * Uso de Tux Paint:                  |
+   |  * Uso de Tux Paint                   |
    |       * Inicio de Tux Paint           |
-   |       * Title Screen                  |
-   |       * Main Screen                   |
+   |       * Pantalla de título            |
+   |       * Pantalla principal            |
    |       * Ferramentas dispoñíbeis       |
-   |            * Drawing Tools            |
+   |            * Ferramentas de debuxo    |
    |            * Outros controis          |
    |  * Carga doutras imaxes en Tux Paint  |
-   |  * Further Reading                    |
-   |  * How to Get Help                    |
-   |  * How to Participate                 |
+   |  * Máis información                   |
+   |  * Como obter axuda                   |
+   |  * Como participar                    |
    +---------------------------------------+
 
      ----------------------------------------------------------------------
@@ -48,9 +48,9 @@ Licenza:
 
        See COPYING.txt for the full text of the GPL license.
 
-Objectives:
+Obxectivos:
 
-       Easy and Fun
+       Fácil e divertido
                Tux Paint is meant to be a simple drawing program for young
                children. It is not meant as a general-purpose drawing tool.
                It is meant to be fun and easy to use. Sound effects and a
@@ -58,7 +58,7 @@ Objectives:
                keeps them entertained. There are also extra-large
                cartoon-style mouse pointer shapes.
 
-       Extensibility
+       Ampliabilidade
                Tux Paint is extensible. Brushes and 'rubber stamp' shapes can
                be dropped in and pulled out. For example, a teacher can drop
                in a collection of animal shapes and ask their students to
@@ -66,7 +66,7 @@ Objectives:
                played, and textual facts which are displayed, when the child
                selects the shape.
 
-       Portability
+       Portabilidade
                Tux Paint is portable among various computer platforms:
                Windows, Macintosh, Linux, etc. The interface looks the same
                among them all. Tux Paint runs suitably well on older systems,
@@ -82,7 +82,7 @@ Objectives:
 
      ----------------------------------------------------------------------
 
-                               Uso de Tux Paint:
+                                Uso de Tux Paint
 
 Inicio de Tux Paint
 
@@ -133,7 +133,7 @@ Inicio de Tux Paint
 
      ----------------------------------------------------------------------
 
-Title Screen
+Pantalla de título
 
        When Tux Paint first loads, a title/credits screen will appear.
 
@@ -145,30 +145,30 @@ Title Screen
 
      ----------------------------------------------------------------------
 
-Main Screen
+Pantalla principal
 
        The main screen is divided into the following sections:
 
-       Left Side: Toolbar
+       Lado esquerdo: Barra de Ferramentas
 
-               The toolbar contains the drawing and editing controls.
+               A barra de ferramentas contén os controis de debuxo e edición.
 
-  [Tools: Paint, Stamp, Lines, Shapes, Text, Magic, Label, Undo, Redo, Eraser,
-                         New, Open, Save, Print, Quit]
+  [Ferramentas: Pintar, Selo, Liñas, Formas, Texto, Maxia, Etiqueta, Desfacer,
+            Refacer, Borrador, Novo, Abrir, Gardar, Imprimir, Saír]
 
-       Middle: Drawing Canvas
+       Medio: Lenzo de debuxo
 
-               The largest part of the screen, in the center, is the drawing
-               canvas. This is, obviously, where you draw!
+               A parte máis grande da pantalla, no centro, é o lenzo de
+               debuxo. Aquí é, obviamente, onde debuxas.
 
-                                    [Canvas]
+                                    [Lenzo]
 
                Note: The size of the drawing canvas depends on the size of
                Tux Paint. You can change the size of Tux Paint using the Tux
                Paint Config. configuration tool, or by other means. See the
                Options documentation for more details.
 
-       Right Side: Selector
+       Lado dereito: Selector
 
                Depending on the current tool, the selector shows different
                things. e.g., when the Paint Brush or Line tool is selected,
@@ -177,15 +177,15 @@ Main Screen
                When the Text or Label tool is selected, it shows various
                fonts.
 
-                 [Selectors - Brushes, Letters, Shapes, Stamps]
+                  [Selectores: pinceis, letras, formas, selos]
 
-       Lower: Colors
+       Máis abaixo: Cores
 
                A palette of available colors are shown near the bottom of the
                screen.
 
- [Colors - Black, White, Red, Pink, Orange, Yellow, Green, Cyan, Blue, Purple,
-                                  Brown, Grey]
+  [Cores: negro, branco, vermello, rosa, laranxa, amarelo, verde, cian, azul,
+                              roxo, marrón, gris]
 
                On the far right are two special color options, the "color
                picker", which has an outline of an eye-dropper, and allows
@@ -196,7 +196,7 @@ Main Screen
                (Note: You can define your own colors for Tux Paint. See the
                "Options" documentation.)
 
-       Bottom: Help Area
+       Abaixo de todo: Área de axuda
 
                At the very bottom of the screen, Tux, the Linux Penguin,
                provides tips and other information while you use Tux Paint.
@@ -208,9 +208,9 @@ Main Screen
 
 Ferramentas dispoñíbeis
 
-  Drawing Tools
+  Ferramentas de debuxo
 
-         "Paint" Tool (Brush)
+         Ferramenta «Pintar» (pinceis)
 
                  The Paint Brush tool lets you draw freehand, using various
                  brushes (chosen in the Selector on the right) and colors
@@ -224,7 +224,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         "Stamp" Tool (Rubber Stamps)
+         Ferramenta «Selo» (selos de caucho)
 
                  The Stamp tool is like a set of rubber stamps or stickers.
                  It lets you paste pre-drawn or photographic images (like a
@@ -266,7 +266,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         "Lines" Tool
+         Ferramenta «Liñas»
 
                  This tool lets you draw straight lines using the various
                  brushes and colors you normally use with the Paint Brush.
@@ -280,7 +280,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         "Shapes" Tool
+         Ferramenta «Formas»
 
                  This tool lets you draw some simple filled, and un-filled
                  shapes.
@@ -291,13 +291,13 @@ Ferramentas dispoñíbeis
                  Use the options at the bottom right to choose the shape
                  tool's behavior:
 
-                      Shapes from center
+                      Formas dende o centro
                               The shape will expand from where you initially
                               clicked, and will be centered around that
                               position. (This was Tux Paint's only behavior
                               through version 0.9.24.)
 
-                      Shapes from corner
+                      Formas dende cantos
                               The shape will extend with one corner starting
                               from where you initially clicked. This is the
                               default method of most other traditional
@@ -316,7 +316,7 @@ Ferramentas dispoñíbeis
 
                  Let go of the mouse when you're done stretching.
 
-                      Normal Shapes Mode
+                      Modo de formas normais
 
                               Now you can move the mouse around the canvas to
                               rotate the shape.
@@ -324,7 +324,7 @@ Ferramentas dispoñíbeis
                               Click the mouse button again and the shape will
                               be drawn in the current color.
 
-                      Simple Shapes Mode
+                      Modo de formas simples
                               If simple shapes are enabled (e.g., with the
                               "simpleshapes" option), the shape will be drawn
                               on the canvas when you let go of the mouse
@@ -332,7 +332,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         "Text" and "Label" Tools
+         Ferramentas «Texto» e «Etiquetas»
 
                  Choose a font (from the 'Letters' available on the right)
                  and a color (from the color palette near the bottom). Click
@@ -398,12 +398,13 @@ Ferramentas dispoñíbeis
                               the characters you're trying to type.
 
                                  * Japanese — Romanized Hiragana and
-                                   Romanized Katakana — right [Alt] key
-                                 * Korean — Hangul 2-Bul — right [Alt] key or
-                                   left [Alt] key
-                                 * Traditional Chinese — right [Alt] key or
-                                   left [Alt] key
-                                 * Thai — right [Alt] key
+                                   Romanized Katakana — tecla [Alt] da
+                                   dereita
+                                 * Korean — Hangul 2-Bul — tecla [Alt] da
+                                   dereita or tecla [Alt] da esquerda
+                                 * Traditional Chinese — tecla [Alt] da
+                                   dereita or tecla [Alt] da esquerda
+                                 * Thai — tecla [Alt] da dereita
 
                       Teclado en pantalla
 
@@ -416,7 +417,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         Ferramenta de «encher»
+         Ferramenta «Encher»
 
                  The 'Fill' tool 'flood-fills' a contiguous area of your
                  drawing with a solid color of your choice.
@@ -426,7 +427,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         "Magic" Tool (Special Effects)
+         Ferramenta «Maxia» (efectos especiais)
 
                  The Magic tool is actually a set of special tools. Select
                  one of the 'magic' effects from the selector on the right.
@@ -445,7 +446,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         Ferramenta de «goma»
+         Ferramenta de «Goma» (de borrar)
 
                  This tool is similar to the Paint Brush. Wherever you click
                  (or click and drag), the picture will be erased. (This may
@@ -466,17 +467,17 @@ Ferramentas dispoñíbeis
 
   Outros controis
 
-         "Undo" Command
+         Orde «Desfacer»
 
                  Clicking this tool will undo the last drawing action. You
                  can even undo more than once!
 
                  Note: You can also press [Control] + [Z] on the keyboard to
-                 Undo.
+                 Desfacer.
 
      ----------------------------------------------------------------------
 
-         "Redo" Command
+         Orde «refacer»
 
                  Clicking this tool will redo the drawing action you just
                  un-did with the 'Undo' button.
@@ -485,11 +486,11 @@ Ferramentas dispoñíbeis
                  as you had undone!
 
                  Note: You can also press [Control] + [R] on the keyboard to
-                 Redo.
+                 Refacer.
 
      ----------------------------------------------------------------------
 
-         "New" Command
+         Orde «Novo»
 
                  Clicking the 'New' button will start a new drawing. A dialog
                  will appear where you may choose to start a new picture
@@ -500,7 +501,7 @@ Ferramentas dispoñíbeis
                  Note: You can also press [Control] + [N] on the keyboard to
                  iniciar un novo debuxo.
 
-                 Imaxes «de inicio» e de «modelo»
+                 Imaxes «de comezo» e de «modelo»
 
                    'Starters' can behave like a page from a coloring book — a
                    black-and-white outline of a picture, which you can then
@@ -525,7 +526,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         "Open" Command
+         Orde «Abrir»
 
                  This shows you a list of all of the pictures you've saved.
                  If there are more than can fit on the screen, use the up and
@@ -568,7 +569,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         "Save" Command
+         Orde «Gardar»
 
                  This saves your current picture.
 
@@ -594,7 +595,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         "Print" Command
+         Orde «Imprimir»
 
                  Click this button and your picture will be printed!
 
@@ -610,7 +611,7 @@ Ferramentas dispoñíbeis
 
                               See the "Options" documentation.
 
-                      Restricting Printing
+                      Restrición da impresión
 
                               The "printdelay" option can be set, which will
                               only allow occasional printing — once every so
@@ -679,11 +680,12 @@ Ferramentas dispoñíbeis
 
                       Dialogo de opcións da impresora
 
-                              By default, Tux Paint only shows the printer
-                              dialog (or, on Linux/Unix, runs the
-                              "altprintcommand"; e.g., "kprinter" instead of
-                              "lpr") if the [Alt] (or [Opción]) key is held
-                              while clicking the 'Print' button.
+                              De xeito predeterminado, Tux Paint só amosa o
+                              diálogo da impresora (ou, en Linux/Unix,
+                              executa «altprintcommand»; p. ex.: «kprinter»
+                              no canto de «lpr») se se mantén premida a tecla
+                              [Alt] (ou [Opción]) ao premer no botón
+                              «Imprimir».
 
                               However, this behavior can be changed. You can
                               have the printer dialog always appear by using
@@ -697,14 +699,14 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         "Slides" Command (under "Open")
+         Orde «Diapositivas» (en «Abrir»)
 
                  The 'Slides' button is available in the 'Open' dialog. It
                  can be used to play a simple animation within Tux Paint, or
                  a slideshow of pictures. It can also export an animated GIF
                  based on the chosen images.
 
-                      Chosing pictures
+                      Escolla de imaxes
 
                               When you enter the 'Slides' section of Tux
                               Paint, it displays a list of your saved files,
@@ -719,7 +721,7 @@ Ferramentas dispoñíbeis
                               (take it out of your slideshow). Click it again
                               if you wish to add it to the end of the list.
 
-                      Set playback speed
+                      Estabelecer a velocidade de reprodución
 
                               A sliding scale at the lower left of the screen
                               (next to the 'Play' button) can be used to
@@ -736,18 +738,19 @@ Ferramentas dispoñíbeis
                               manually. (This does not apply to an exported
                               animated GIF.)
 
-                      Playback in Tux Paint
+                      Reprodución en Tux Paint
 
                               To play a slideshow within Tux Paint, click the
                               'Play' button. (Note: If you hadn't selected
                               ANY images, then ALL of your saved images will
                               be played in the slideshow!)
 
-                              During the slideshow, press [Espazo], [Enter]
-                              or [Return], or the [Right arrow] — or click
-                              the 'Next' button at the lower left — to
-                              manually advance to the next slide. Press [Left
-                              arrow] to go back to the previous slide.
+                              During the slideshow, press [Espazo], [Intro]
+                              or [Retorno], or the [Frecha cara á dereita] —
+                              or click the 'Next' button at the lower left —
+                              to manually advance to the next slide. Press
+                              [Frecha cara arriba] to go back to the previous
+                              slide.
 
                               Press [Escape], or click the 'Back' button at
                               the lower right, to exit the slideshow and
@@ -774,7 +777,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         "Quit" Command
+         Orde «Saír»
 
                  Clicking the 'Quit' button, closing the Tux Paint window, or
                  pushing the [Escape] key will quit Tux Paint.
@@ -806,7 +809,7 @@ Ferramentas dispoñíbeis
 
      ----------------------------------------------------------------------
 
-         Sound Muting
+         Silenciar o son
 
                  There is no on-screen control button at this time, but by
                  using the [Alt] + [S] keyboard sequence, sound effects can
@@ -873,13 +876,12 @@ Using the import script, "tuxpaint-import"
 
        Exemplo:
 
-         $ tuxpaint-import grandma.jpg
-         grandma.jpg -> /home/username/.tuxpaint/saved/20210205180425.png
+         $ tuxpaint-import avoa.jpg
+         avoa.jpg -> /home/username/.tuxpaint/saved/20210210232156.png
          jpegtopnm: WRITING A PPM FILE
 
-       The first line ("tuxpaint-import grandma.jpg") is the command to run.
-       The following two lines are output from the program while it's
-       working.
+       The first line ("tuxpaint-import avoa.jpg") is the command to run. The
+       following two lines are output from the program while it's working.
 
        Now you can load Tux Paint, and a version of that original picture
        will be available under the 'Open' dialog. Just double-click its icon!
@@ -910,13 +912,13 @@ Importing Pictures Manually
          AAAAMMDDhhmmss.png
 
          * AAAA = Ano
-         * MM = Month (two digits, "01"-"12")
-         * DD = Day of month (two digits, "01"-"31")
-         * HH = Hour (two digits, in 24-hour format, "00"-"23")
-         * mm = Minute (two digits, "00"-"59")
-         * ss = Seconds (two digits, "00"-"59")
+         * MM = Mes (dous díxitos, «01»-«12»)
+         * DD = Día do mes (dous díxitos, «01»-«31»)
+         * HH = Hora (dous díxitos, en formato 24 horas, «00»-«23»)
+         * mm = Minuto (dous díxitos, «00»-«59»)
+         * ss = Segundo (dous díxitos, «00»-«59»)
 
-       Example: "20210205180425.png", for 5 Febreiro 2021 at 18:04:25.
+       Example: "20210210232156.png", for 10 Febreiro 2021 at 23:21:56.
 
        Place this PNG file in your Tux Paint "saved" directory/folder. (See
        above.)
@@ -931,14 +933,14 @@ Importing Pictures Manually
 
      ----------------------------------------------------------------------
 
-                                Further Reading
+                                Máis información
 
      Other documentation included with Tux Paint (found in the "docs"
      folder/directory) includes:
        * Documentación da ferramenta «Maxia» («magic-docs»)
          Documentation for each of the currently-installed 'Magic' tools.
        * AUTHORS.txt
-         Lista de autores e colaboradores
+         Lista de autores e colaboradores.
        * CHANGES.txt
          Summary of what has changed between releases of Tux Paint.
        * COPYING.txt
@@ -964,7 +966,7 @@ Importing Pictures Manually
 
      ----------------------------------------------------------------------
 
-                                How to Get Help
+                                Como obter axuda
 
      If you need help, there are numerous ways to interact with Tux Paint
      developers and other users.
@@ -980,7 +982,7 @@ Importing Pictures Manually
 
      ----------------------------------------------------------------------
 
-                               How to Participate
+                                Como participar
 
      Tux Paint is a volunteer-driven project, and we're happy to accept your
      help in a variety of ways.
@@ -992,5 +994,5 @@ Importing Pictures Manually
        * Create classroom curriculum
        * Promote or help support others using Tux Paint
 
-     To learn more, visit the "Help Us" page of the official Tux Paint
-     website: http://tuxpaint.org/help/
+     To learn more, visit the "Colabora connosco" page of the official Tux
+     Paint website: http://tuxpaint.org/help/

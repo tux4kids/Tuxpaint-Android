@@ -3,7 +3,7 @@
 
 Documentación de opcións
 
-    Copyright © 2002-2021 por varios colaboradores; vexa AUTORES (AUTHORS).
+    Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
                                 5 Febreiro 2021
@@ -125,9 +125,9 @@ Usuarios de Windows
              Útil cando se usan pantallas de alta densidade ou dispositivos
              de entrada groseiros, como rastrexadores de ollos.
 
-             The TAMAÑO value should be presented in pixels, and can be
-             anything between 24 and 192, inclusive. Most buttons are square,
-             and this will affect their width and height.
+             O valor TAMAÑO debería presentarse en píxeles e pode estar entre
+             24 e 192, inclusive. A maioría dos botóns son cadrados e isto
+             afectará ao seu largo e alto.
 
      allowscreensaver=yes
 
@@ -212,7 +212,7 @@ Usuarios de Windows
              en modo de pantalla completa.) Calquera cambio de configuración
              feito neste diálogo gardarase no ficheiro «userdata/print.cfg» e
              volverase a usar, sempre que estea configurada a opción
-             «printcfg»
+             «printcfg».
 
      altprint=always
 
@@ -237,7 +237,7 @@ Usuarios de Windows
              botón «Imprimir». Premer en «Imprimir» sen manter premida [Alt]
              imprime sen amosar un diálogo.
 
-     papersize=TAMAÑO DO PAPEL
+     papersize=TAMAÑO_DO_PAPEL
 
              (Plataformas que usan o xerador interno PostScript de Tux Paint,
              non Windows, macOS, BeOS ou Haiku).
@@ -262,66 +262,68 @@ Usuarios de Windows
              dun só clic ou simplemente premendo impacientemente na icona
              varias veces.)
 
-             To make Tux Paint ignore the lockfile, allowing it to run again,
-             even if it was just launched less than 30 seconds ago, enable
-             this setting in the configuration file, or run Tux Paint with
-             the --nolockfile option on the command-line.
+             Para facer que Tux Paint ignore o ficheiro de bloqueo,
+             permitindo que se execute de novo, aínda que se lanzase hai
+             menos de 30 segundos, active este axuste no ficheiro de
+             configuración ou execute Tux Paint coa opción --nolockfile na
+             liña de ordes.
 
-             By default, the lockfile is stored in "~/.tuxpaint/" under Linux
-             and Unix, and "userdata\" under Windows.
+             De xeito predeterminado, o ficheiro de bloqueo almacénase en
+             «~/.tuxpaint/» en Linux e Unix e en «userdata\» en Windows.
 
      simpleshapes=yes
-             Disable the rotation step of the 'Shape' tool. Click, drag and
-             release is all that will be needed to draw a shape.
+             Desactive o paso de rotación da ferramenta «Forma». Prema,
+             arrastra e solte é todo o que se necesita para debuxar unha
+             forma.
 
      uppercase=yes
-             All text will be rendered only in uppercase (e.g., "Brush" will
-             be "BRUSH"). Useful for children who can read, but who have only
-             learned uppercase letters so far.
+             Todo o texto renderizarase só con maiúscula (por exemplo,
+             «Pincel» será «PINCEL»). Útil para os nenos que saben ler, pero
+             que ata agora só aprenderon maiúsculas.
 
      grab=yes
 
-             Tux Paint will attempt to 'grab' the mouse and keyboard, so that
-             the mouse is confined to Tux Paint's window, and nearly all
-             keyboard input is passed directly to it.
+             Tux Paint tentará «amarrar» o rato e o teclado, de xeito que o
+             rato estea confinado na xanela de Tux Paint e case toda a
+             entrada do teclado se lle pase directamente.
 
-             This is useful to disable operating system actions that could
-             get the user out of Tux Paint [Alt]-[Tab] window cycling,
-             [Ctrl]-[Escape], etc. This is especially useful in fullscreen
-             mode.
+             Isto é útil para desactivar as accións do sistema operativo que
+             poidan sacar ao usuario de Tux Pain do ciclo de xanelast
+             [Alt]-[Tab], [Ctrl]-[Escape], etc. Isto é especialmente útil no
+             modo de pantalla completa.
 
      noshortcuts=yes
 
-             This disable keyboard shortcuts (e.g., [Ctrl]-[S] for save,
-             [Ctrl]-[N] for a new image, etc.)
+             Isto desactiva os atallos de teclado (por exemplo,[Ctrl]-[S]
+             para gardar, [Ctrl]-[N] para unha nova imaxe, etc.)
 
-             This is useful to prevent unwanted commands from being activated
-             by children who aren't experienced with keyboards.
+             Isto é útil para evitar que ordes non desexadas sexan activadas
+             por nenos que non teñen experiencia con teclados.
 
      nowheelmouse=yes
-             This disables support for the wheel on mice that have it.
-             (Normally, the wheel will scroll the selector menu on the
-             right.)
+             Isto desactiva a compatibilidade para a roda dos ratos que a
+             teñen. (Normalmente, a roda desprazará o menú do selector á
+             dereita.)
 
      nobuttondistinction=yes
 
-             Prior to Tux Paint 0.9.15, the middle and right buttons on a
-             mouse could also be used for clicking. In version 0.9.15, it was
-             changed so that only the left mouse button worked, so as to not
-             train children to use the wrong button.
+             Antes do Tux Paint 0.9.15, tamén se podían empregar os botóns
+             medio e dereito do rato para premer. Na versión 0.9.15,
+             cambiouse para que só funcionase o botón esquerdo do rato para
+             non adestrar aos nenos a usar o botón incorrecto.
 
-             However, for children who have trouble with the mouse, this
-             distinction between the two or three buttons on a mouse can be
-             disabled (returning Tux Paint to its old behavior) by using this
-             option.
+             Porén, para os nenos que teñen problemas co rato, pódese
+             desactivar esta distinción entre os dous ou tres botóns do rato
+             (devolvendo Tux Paint ao seu antigo comportamento) usando esta
+             opción.
 
      nofancycursors=yes
 
-             This disables the fancy mouse pointer shapes in Tux Paint, and
-             uses your environment's normal mouse pointer.
+             Isto desactiva as fantásticas formas do punteiro do rato en Tux
+             Paint e usa o punteiro normal do seu contorno.
 
-             In some enviornments, the fancy cursors cause problems. Use this
-             option to avoid them.
+             Nalgúns contornos, os cursores de fantasía causan problemas. Use
+             esta opción para evitalos.
 
      hidecursor=yes
 
@@ -333,78 +335,84 @@ Usuarios de Windows
 
      nooutlines=yes
 
-             In this mode, much simpler outlines and 'rubber-band' lines are
-             displayed when using the Lines, Shapes, Stamps and Eraser tools.
+             Neste modo, amósanse contornos e liñas «elásticas» moito máis
+             sinxelas cando se usan as ferramentas Liñas, Formas, Selos e
+             Goma.
 
-             This can help when Tux Paint is run on very slow computers, or
-             displayed on a remote X-Window display.
+             Isto pode axudar cando Tux Paint se executa en ordenadores moi
+             lentos ou se amosa nunha pantalla remota de X-Window.
 
      sysfonts=yes
 
-             This option causes Tux Paint to attempt to load fonts (for use
-             in the Text tool) from your operating system. Normally, Tux
-             Paint will only load the ones that came bundled with Tux Paint.
+             Esta opción fai que Tux Paint tente cargar tipos de letra (para
+             usalos na ferramenta Texto) dende o seu sistema operativo.
+             Normalmente, Tux Paint só cargará os que foron incluídos con Tux
+             Paint.
 
      alllocalefonts=yes
 
-             Prior to version 0.9.21, Tux Paint loaded all fonts in its own
-             fonts directory, including locale-specific ones (e.g., the one
-             for Tibetan, which had no latin characters). As of 0.9.21, the
-             only font loaded from the locale-specific subdirectory, if any,
-             is one matching the locale Tux Paint is running on.
+             Antes da versión 0.9.21, Tux Paint cargaba todos os tipos de
+             letra no seu propio directorio de tipos de letra, incluídos os
+             específicos da configuración local (por exemplo, o tibetano, que
+             non tiña caracteres latinos). A partir doa 0.9.21, o único tipo
+             de letra cargado dende o subdirectorio específico da
+             configuración local, se o hai, é o que coincide coa
+             configuración local en que se está a executar Tux Paint.
 
-             To load all locale-specific fonts (the old behavior), set this
-             option.
+             Para cargar todos os tipos de letra específicos de idiomas (o
+             comportamento antigo), configure esta opción.
 
      nostamps=yes
 
-             This option tells Tux Paint to not load any rubber stamp images,
-             which in turn ends up disabling the Stamps tool.
+             Esta opción dille a Tux Paint que non cargue ningunha imaxe de
+             selo de caucho, o que á súa vez acaba desactivando a ferramenta
+             Selos.
 
-             This can speed up Tux Paint when it first loads up, and reduce
-             memory usage while it's running. Of course, no stamps will be
-             available at all.
+             Isto pode acelerar Tux Paint cando se carga por primeira vez e
+             reducir o uso de memoria mentres se está a executar. Por
+             suposto, ningún selo estará dispoñíbel.
 
      nostampcontrols=yes
-             Some images in the Stamps tool can be mirrored, flipped, and/or
-             have their size changed. This option disables the controls, and
-             only provides the basic stamps.
+             Algunhas imaxes da ferramenta Selos pódense reflectir, virar
+             e/ou cambiar o seu tamaño. Esta opción desactiva os controis e
+             só fornece os selos básicos.
 
      nomagiccontrols=yes
-             Some Magic tools have the option of acting like a paintbrush, or
-             affecting the entire canvas at once. This option disables the
-             controls, and only provides the default functionality (usually
-             paint-mode).
+             Algunhas ferramentas de Maxia teñen a opción de actuar coma un
+             pincel ou afectar todo o lenzo á vez. Esta opción desactiva os
+             controis e só fornece a funcionalidade predeterminada
+             (normalmente en modo pintura).
 
      noshapecontrols=yes
-             Disable the control buttons shown when using the Shapes tool
-             that allow changing how shapes are drawn — centered around the
-             initial mouse click, or with a corner at the initial mouse
-             click.
+             Desactivar os botóns de control que se amosan cando se usa a
+             ferramenta Formas que permiten cambiar como se debuxan as
+             formas: centradas arredor do clic inicial do rato ou cun canto
+             co clic inicial do rato.
 
      nolabel=yes
-             Disables the Label tool: the tool that allows text entry which
-             can be edited later.
+             Desactiva a ferramenta Etiqueta: a ferramenta que permite a
+             entrada de texto que se pode editar máis tarde.
 
      newcolorslast=yes
-             Places the blank color options in the New dialog at the end, so
-             that any Starters and/or Templates are shown first.
+             Coloca as opcións de cor en branco no diálogo Novo ao final, de
+             xeito que se amosen primeiro os iniciadores e/ou modelos.
 
      mirrorstamps=yes
 
-             For stamps that can be mirrored, this option sets them to their
-             mirrored shape by default.
+             Para os selos que se poden relectir, esta opción estabeleceos de
+             xeito predeterminado na súa forma reflectida.
 
-             This can be useful for people who prefer things right-to-left,
-             rather than left-to-right.
+             Isto pode ser útil para as persoas que prefiren as cousas de
+             dereita a esquerda no canto de de esquerda a dereita.
 
      mouse-accessibility=yes
-             In this mode, instead of clicking, dragging and releasing (e.g.,
-             to draw), you click, move, and click again to end the motion.
+             Neste modo, no canto de premer, arrastrar e soltar (por exemplo,
+             para debuxar), premese, móvese e premese de novo para rematar o
+             movemento.
 
      onscreen-keyboard=yes
-             Presents a clickable on-screen keyboard when using the Text and
-             Label tools.
+             Presenta un teclado en pantalla sobre que se pode premer cando
+             empregan as ferramentas Texto e Etiqueta.
 
      onscreen-keyboard-layout=NOME DA DISPOSICIÓN
              Selecciona o deseño inicial para o teclado en pantalla cando usa
@@ -494,8 +502,8 @@ Usuarios de Windows
 
      joystick-btn-eraser=NÚMERO DE BOTÓN
              Selecciona o número do botón da panca de mando (joystick), tal e
-             como o ve SDL, que será un atallo para seleccionar Ferramenta de
-             goma.
+             como o ve SDL, que será un atallo para seleccionar ferramenta de
+             goma de borrar.
 
      joystick-btn-new=NÚMERO DE BOTÓN
              Selecciona o número do botón da panca de mando (joystick), como
@@ -586,68 +594,73 @@ Usuarios de Windows
 
              Se non o anula, a ubicación predeterminada é:
 
-                * Linux & Unix — Under a hidden directory named ".tuxpaint"
-                  in your home directory (aka "~" or "$HOME")
+                * Linux e Unix: baixo un directorio agochado chamado
+                  «.tuxpaint» no seu directorio persoal (tamén coñecido como
+                  «~» ou «$HOME»)
                   Exemplo: /home/username/.tuxpaint/saved/
-                * Windows — Inside a folder named "TuxPaint" in your
-                  "Application Data" folder.
+                * Windows: Dentro un cartafol chamado «TuxPaint» no seu
+                  cartafol «Application Data».
                   Exemplo: C:\Documents and Settings\Username\Application
                   Data\TuxPaint\saved\
-                * macOS — Inside a folder named "TuxPaint" in your
-                  "Application Support" folder.
+                * macOS: Dentro un cartafol chamado «TuxPaint» no seu
+                  cartafol «Application Support».
                   Exemplo: /Users/Username/Library/Application
                   Support/TuxPaint/saved/
 
-             Note: When specifying a Windows drive (e.g., "H:\"), you must
-             also specify a subdirectory.
+             Nota: Ao especificar unha unidade de Windows (por exemplo,
+             «H:\»), tamén debe especificar un subdirectorio.
 
-             Note: Prior to version 0.9.18, Tux Paint would also use the
-             setting or default for "savedir" as the place to search for
-             personal data files (brushes, stamps, starters and fonts). As of
-             version 0.9.18, they may be specified separately (see the
-             "datadir" option, below).
+             Nota: Antes da versión 0.9.18, Tux Paint tamén usaba a
+             configuración ou o valor predeterminado para «savedir» como o
+             lugar onde buscar ficheiros de datos persoais (pinceis, selos,
+             imaxes de comezo e tipos de letra) . A partir da versión 0.9.18,
+             pódense especificar por separado (consulte a opción «datadir»,
+             máis abaixo).
 
              Exemplo: savedir=Z:\tuxpaint\
 
      exportdir=DIRECTORIO
 
-             Use this option to change where Tux Paint exports files — single
-             images, or animated GIF slideshows — for external use.
+             Use esta opción para cambiar onde Tux Paint exporta ficheiros
+             –imaxes individuais ou presentacións de diapositivas GIF
+             animadas– uso externo.
 
              Se non o anula, a ubicación predeterminada é:
 
-                * Linux & Unix — If available, wherever your desktop
-                  environment is configured for pictures to be stored, based
-                  on your XDG (X Desktop Group) configuration. (Try running
-                  the command-line "xdg-user-dir PICTURES" to find out.)
-                  Typically (in an English locale), this will be a "Imaxes"
-                  subdirectory in your home directory (i.e., "$HOME/Imaxes"
-                  aka "~/Imaxes").
-                  Tux Paint will fall back to using that typical directory,
-                  of no XDG configuration can be read, or nothing is set for
-                  "XDG_PICTURES_DIR".
+                * Linux e Unix: se está dispoñíbel, onde queira que o seu
+                  contorno de escritorio estea configurado para que se
+                  almacenen imaxes, en función da configuración XDG (X
+                  Desktop Group). (Probe a executar a liña de ordes
+                  «xdg-user-dir PICTURES» para descubrilo.)
+                  Normalmente (no idioma inglés), este será un subdirectorio
+                  «Imaxes» no seu directorio persoal (é dicir, «$HOME/Imaxes»
+                  tamén coñecido como «~/Imaxes»).
+                  Tux Paint volverá usar ese directorio habitual, se non se
+                  pode ler a configuración XDG, ou non se estabelece nada
+                  «XDG_PICTURES_DIR».
                 * Windows — TBD! 
                 * macOS — TBD!
 
-             Note: When the defaults are used, a new "TuxPaint" subdirectory
-             will be created and used. (e.g., "~/Imaxes/TuxPaint") When the
-             "--exportdir" option is used, the exact path specified will be
-             used (no "TuxPaint" subdirectory is created).
+             Nota: Cando se empregan os valores predeterminados, crearase e
+             usarase un novo subdirectorio «TuxPaint». (p. ex.:
+             «~/Imaxes/TuxPaintx) Cando se usa a opción «--exportdir»,
+             empregarase a ruta exacta especificada (non se crea ningún
+             subdirectorio «TuxPaint»).
 
-             The directory itself (e.g., "~/Imaxes/TuxPaint") will be
-             created, if it doesn't exist.
+             O directorio en si (p. ex.: «~/Imaxes/TuxPaint») crearase, se
+             non existe.
 
-             If the parent directory (e.g., "~/Imaxes/TuxPaint") also does
-             not exist, Tux Paint will attempt to create it as well (but not
-             any directories higher than that).
+             Se o directorio pai (por exemplo, «~/Imaxes/TuxPaint») tampouco
+             existe, Tux Paint tentará crealo tamén (pero non ningún
+             directorio superior a ese).
 
              Exemplo: exportdir=/home/penguin/TuxPaintExports
 
      datadir=DIRECTORIO
 
-             Use this option to change where Tux Paint looks for personal
-             data files (brushes, stamps, starters, templates, and fonts
-             specific to the current user).
+             Use esta opción para cambiar onde Tux Paint busca ficheiros de
+             datos persoais (pinceis, selos, imaxes de comezo, modelos e
+             tipos de letra específicos do usuario actual).
 
              Tux Paint will search for subdirectories/subfolders named
              "brushes", "stamps", "starters", "templates", and "fonts" under
@@ -655,15 +668,16 @@ Usuarios de Windows
 
              Se non o anula, a ubicación predeterminada é:
 
-                * Linux & Unix — Under a hidden directory named ".tuxpaint"
-                  in your home directory (aka "~" or "$HOME")
+                * Linux e Unix: baixo un directorio agochado chamado
+                  «.tuxpaint» no seu directorio persoal (tamén coñecido como
+                  «~» ou «$HOME»)
                   Exemplo: /home/username/.tuxpaint/brushes/
-                * Windows — Inside a folder named "TuxPaint" in your
-                  "Application Data" folder.
+                * Windows: Dentro un cartafol chamado «TuxPaint» no seu
+                  cartafol «Application Data».
                   Exemplo: C:\Documents and Settings\Username\Application
                   Data\TuxPaint\brushes\
-                * macOS — Inside a folder named "TuxPaint" in your
-                  "Application Support" folder.
+                * macOS: Dentro un cartafol chamado «TuxPaint» no seu
+                  cartafol «Application Support».
                   Exemplo: /Users/Username/Library/Application
                   Support/TuxPaint/brushes/
 
@@ -671,8 +685,8 @@ Usuarios de Windows
              setting or default as for "savedir" to search for data files. As
              of version 0.9.18, they may be specified separately.
 
-             Note: When specifying a Windows drive (e.g., "H:\"), you must
-             also specify a subdirectory.
+             Nota: Ao especificar unha unidade de Windows (por exemplo,
+             «H:\»), tamén debe especificar un subdirectorio.
 
              Exemplo: datadir=/home/johnny/tuxpaint-data/
 
@@ -688,10 +702,11 @@ Usuarios de Windows
 
      saveover=ask
 
-             (This option is redundant, since this is the default.)
+             (Esta opción é redundante, xa que esta é a opción
+             predeterminada.)
 
-             When saving an existing drawing, you will be first asked whether
-             to save over the older version or not.
+             Ao gardar un debuxo existente, primeiro preguntaráselle se quere
+             gardar sobre a versión anterior ou non.
 
      nosave=yes
              This disables Tux Paint's ability to save files (and therefore
@@ -700,15 +715,15 @@ Usuarios de Windows
              test environment.
 
      autosave=yes
-             This prevents Tux Paint from asking whether you want to save the
-             current picture when quitting, and assumes you do.
+             Isto impide a Tux Paint preguntar se quere gardar a imaxe actual
+             ao saír e supón que si.
 
      startblank=yes
-             This causes Tux Paint to display a blank canvas when it first
-             starts up, rather than loading the last image that was being
-             edited.
+             Isto fai que Tux Paint amose un lenzo en branco cando se inicia
+             por vez primeira, no canto de cargar a última imaxe que se
+             estaba a editar.
 
-     colorfile=NOME DE FICHEIRO
+     colorfile=NOME_DE_FICHEIRO
 
              You may override Tux Paint's default color palette by creating a
              plain ASCII text file that describes the colors you want, and
@@ -727,8 +742,8 @@ Usuarios de Windows
              to describe the color. Tux will display this text when the color
              is clicked. (For example, "#FFF Branco coma a neve.")
 
-             As an example, you can see the default colors currently used in
-             Tux Paint in: "default_colors.txt".
+             Como exemplo, pode ver as cores predeterminadas empregadas
+             actualmente en Tux Paint en: «default_colors.txt».
 
              NOTES: You must separate decimal values with spaces, and begin
              hexadecimal values with a pound/number-sign character ("#"). In
@@ -736,17 +751,17 @@ Usuarios de Windows
              low halves of the byte, so "#FFF" is the same as "#FFFFFF", not
              "#F0F0F0".
 
-     colorsrows=ROWS
+     colorsrows=FILAS
 
              How many rows of color palette buttons to show; useful when
              using a large color palette (see "colorfile", above), and/or for
-             use with coarse input devices (like eyegaze trackers). "ROWS"
+             use with coarse input devices (like eyegaze trackers). "FILAS"
              may be between "1" (the default) and "3".
 
      lang=IDIOMA
 
-             Run Tux Paint in one of the supported languages. Possible choice
-             for LANGUAGE currently include:
+             Executa Tux Paint nun dos idiomas compatíbeis. A opción posíbel
+             para IDIOMA inclúe actualmente:
 
                +-----------------------------------------------------------+
                |english              |american-english     |               |
@@ -1046,7 +1061,7 @@ Usuarios de Windows
        --printcfg
        --altprintnever
        --altprintalways
-       --papersize=TAMAÑO DO PAPEL
+       --papersize=TAMAÑO_DO_PAPEL
        --nolockfile
        --simpleshapes
        --uppercase
@@ -1151,7 +1166,7 @@ Usuarios de Windows
 
                      -------------------------------------
 
-       --locale CONF. REXIONAL
+       --locale IDIOMA
 
                Run Tux Paint in one of the support languages. See the
                "Choosing a Different Language" section below for the locale
@@ -1218,7 +1233,7 @@ Idiomas dispoñíbeis
        +--------------------------------------------------------------------+
        |                |                   |                |Combinación de|
        |                |Idioma             |Idioma          |teclas de     |
-       |Código rexional |(nome nativo)      |(nome en inglés)|ciclo de      |
+       |Código do idioma|(nome nativo)      |(nome en inglés)|ciclo de      |
        |                |                   |                |método de     |
        |                |                   |                |entrada       |
        |----------------+-------------------+----------------+--------------|
@@ -1508,10 +1523,9 @@ Idiomas dispoñíbeis
        listed can be used to cycle through the supported input methods while
        the Text tool is active.
 
-Axustando a configuración rexional do seu contorno
+Axustando o idioma do seu contorno
 
-       Cambiar a súa configuración rexional afectará a gran parte do seu
-       contorno.
+       Cambiar o seu idioma afectará a gran parte do seu contorno.
 
        As stated above, along with letting you choose the language at runtime
        using command-line options ("--lang" and "--locale"), Tux Paint honors
@@ -1526,13 +1540,13 @@ Axustando a configuración rexional do seu contorno
          file "/etc/locale.gen" on your system and then running the program
          "locale-gen" as root.
 
-         Note: Debian users may be able to simply run the command
-         "dpkg-reconfigure locales" as root to bring up a configuration
-         dialog. Ubuntu users may be able to run "sudo dpkg-reconfigure
-         localeconf" (the "localeconf" package may need to be installed
-         first), or you may need to edit the file
-         "/var/lib/locales/supported.d/local" first, and add locales they
-         want, from the list found in "/usr/share/i18n/SUPPORTED".
+         Nota: os usuarios de Debian poden executar a orde «dpkg-reconfigure
+         locales» como superusuario (root) para abrir un diálogo de
+         configuración. Os usuarios de Ubuntu poden executar «sudo
+         dpkg-reconfigure localeconf» (é posíbel que teña que instalar antes
+         o paquete «localeconf») ou pode que teña que editar primeiro o
+         ficheiro «/var/lib/locales/supported.d/local» e engadir os idiomas
+         que queiran, da lista que se atopa en «/usr/share/i18n/SUPPORTED».
 
          Then, before running Tux Paint, set your "$LANG" environment
          variable to one of the locales listed above. (If you want all

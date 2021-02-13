@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 10, 2021
+  Last updated: February 10, 2021
   $Id$
 */
 
@@ -55,7 +55,7 @@ enum
 
 /* Our globals: */
 
-static Mix_Chunk *clone_snd;
+static Mix_Chunk *clone_start_snd, *clone_snd;
 int clone_state;
 int clone_src_x, clone_src_y;
 int clone_drag_start_x, clone_drag_start_y;
@@ -85,6 +85,9 @@ int clone_modes(magic_api * api, int which);
 int clone_init(magic_api * api)
 {
   char fname[1024];
+
+  snprintf(fname, sizeof(fname), "%s/sounds/magic/clone_start.ogg", api->data_directory);
+  clone_start_snd = Mix_LoadWAV(fname);
 
   snprintf(fname, sizeof(fname), "%s/sounds/magic/clone.ogg", api->data_directory);
   clone_snd = Mix_LoadWAV(fname);
@@ -203,6 +206,7 @@ void clone_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
     clone_src_x = x;
     clone_src_y = y;
     clone_state = CLONE_STARTING;
+    api->playsound(clone_start_snd, (x * 255) / canvas->w, 255);
   } else if (clone_state == CLONE_CLONING) {
     clone_drag(api, which, canvas, last, x, y, x, y, update_rect);
   }
@@ -216,8 +220,8 @@ void clone_release(magic_api * api, int which ATTRIBUTE_UNUSED,
     clone_state = CLONE_CLONING;
   } else {
     clone_state = CLONE_READY_TO_START;
+    api->stopsound();
   }
-  api->stopsound();
 }
 
 // No setup happened:
@@ -225,6 +229,8 @@ void clone_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 {
   if (clone_snd != NULL)
     Mix_FreeChunk(clone_snd);
+  if (clone_start_snd != NULL)
+    Mix_FreeChunk(clone_start_snd);
 }
 
 // Record the color from Tux Paint:

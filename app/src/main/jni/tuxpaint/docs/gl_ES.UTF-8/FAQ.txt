@@ -1,7 +1,7 @@
                                    Tux Paint
                     versión 0.9.26 Preguntas máis frecuentes
 
-    Copyright © 2002-2021 por varios colaboradores; vexa AUTORES (AUTHORS).
+    Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
                                 23 Xaneiro 2021
@@ -45,7 +45,7 @@ Relacionado co debuxo
            «--stamps» na liña de ordes ou con «nostamps=no» ou »stamps=yes»
            nun ficheiro de configuración.
 
-   A ferramenta de «encher» vese mal
+   A ferramenta «Encher» vese mal
 
            Tux Paint probabelmente estea a comparar as cores exactas dos
            píxeles ao encher. Isto é máis rápido, pero ten un aspecto peor.
@@ -53,8 +53,8 @@ Relacionado co debuxo
            ordes e debe ver, entre outras saídas: «Low Quality Flood Fill
            enabled».
 
-           Para cambialo, debe volver compilar Tux Paint dende as fontes.
-           Asegúrese de eliminar ou comentar calquera liña que diga:
+           Para cambialo, debe volver compilar Tux Paint dende o código
+           fonte. Asegúrese de eliminar ou comentar calquera liña que diga:
 
              #define LOW_QUALITY_FLOOD_FILL
 
@@ -65,8 +65,8 @@ Relacionado co debuxo
            Tux Paint foi compilado con contornos de selo de baixa calidade
            (pero máis rápidos).
 
-           Para cambialo, debe volver compilar Tux Paint dende as fontes.
-           Asegúrese de eliminar ou comentar calquera liña que diga:
+           Para cambialo, debe volver compilar Tux Paint dende o código
+           fonte. Asegúrese de eliminar ou comentar calquera liña que diga:
 
              #define LOW_QUALITY_STAMP_OUTLINE
 
@@ -84,8 +84,8 @@ Problemas de interface
            saídas, ves o texto: «Low Quality Thumbnails enabled», entón é
            isto o que está a suceder.
 
-           Para cambialo, debe volver compilar Tux Paint dende as fontes.
-           Asegúrese de eliminar ou comentar calquera liña que diga:
+           Para cambialo, debe volver compilar Tux Paint dende o código
+           fonte. Asegúrese de eliminar ou comentar calquera liña que diga:
 
              #define LOW_QUALITY_THUMBNAILS
 
@@ -104,8 +104,8 @@ Problemas de interface
            «Low Quality Color Selector enabled», entón é isto o que está a
            suceder.
 
-           Para cambialo, debe volver compilar Tux Paint dende as fontes.
-           Asegúrese de eliminar ou comentar calquera liña que diga:
+           Para cambialo, debe volver compilar Tux Paint dende o código
+           fonte. Asegúrese de eliminar ou comentar calquera liña que diga:
 
              #define LOW_QUALITY_COLOR_SELECTOR
 
@@ -120,37 +120,35 @@ Problemas de interface
            »mixedcase=yes» nun ficheiro de configuración.
 
    Tux Paint está noutro idioma
-           Asegúrese de que a súa configuración rexional sexa correcto. Vexa
-           «Tux Paint non cambia ao meu idioma», máis abaixo.
+           Asegúrese de que os seu axuste de idioma sexa correcto. Vexa «Tux
+           Paint non cambia ao meu idioma», máis abaixo.
 
    Tux Paint non cambia ao meu idioma
               * Usuarios de Linux e Unix: asegúrese de que o idioma está
                 dispoñíbel
 
-                Asegúrese de que a configuración rexional que desexa está
-                dispoñible. Comprobe o seu ficheiro «/etc/locale.gen». Vexa a
-                «Documentación de opcións» para coñecer as configuracións
-                rexionais que usa Tux Paint (especialmente cando se usa a
-                opción «--lang»).
+                Asegúrese de que o idioma que quere está dispoñíbel. Comprobe
+                o seu ficheiro «/etc/locale.gen». Vexa a «Documentación de
+                opcións» para coñecer os idiomas que usa Tux Paint
+                (especialmente cando se usa a opción «--lang»).
 
                 Nota: os usuarios de Debian e derivados (p. ex.: Ubuntu)
-                poden simplemente executar «dpkg-reconfigure locales» se se a
-                configuración local é xestionada por «dpkg».
+                poden simplemente executar «dpkg-reconfigure locales» se se
+                os idiomas son xestionados por «dpkg».
 
               * Se está a empregar a opción de liña de ordes «--lang»
 
-                Probe a usar a opción de liña de ordes «--locale» ou a
-                configuración rexional do seu sistema operativo (p. ex.: a
-                variábel de contorno «$LANG») e envíenos un correo-e con
-                respecto ao seu problema.
+                Probe a usar a opción de liña de ordes «--locale» ou o axuste
+                de idioma do seu sistema operativo (p. ex.: a variábel de
+                contorno «$LANG») e envíenos un correo-e con respecto ao seu
+                problema.
 
               * Se está a empregar a opción de liña de ordes «--locale»
 
                 Se isto non funciona, envíenos un correo-e con respecto ao
                 seu problema.
 
-              * Se está a empregar a configuración rexional do seu sistema
-                operativo
+              * Se está a empregar o idioma do seu sistema operativo
 
                 Se isto non funciona, envíenos un correo-e con respecto ao
                 seu problema.
@@ -162,8 +160,8 @@ Problemas de interface
                 letra TrueType chinés e coreano estean instalados e colocados
                 no lugar adecuado, respectivamente.
 
-                Os tipos de letra axeitados para estas configuracións
-                rexionais pódense descargar dende o sitio web de Tux Paint:
+                Os tipos de letra axeitados para estes idiomas pódense
+                descargar dende o sitio web de Tux Paint:
 
                   http://www.tuxpaint.org/download/fonts/
 
@@ -577,8 +575,8 @@ Outros problemas
            selo de goma que atopa ao cargalas), entón probabelmente foi
            compilado coa saída de depuración activada.
 
-           Para cambialo, debe volver compilar Tux Paint dende as fontes.
-           Asegúrese de eliminar ou comentar calquera liña que diga:
+           Para cambialo, debe volver compilar Tux Paint dende o código
+           fonte. Asegúrese de eliminar ou comentar calquera liña que diga:
 
              #define DEBUG
 

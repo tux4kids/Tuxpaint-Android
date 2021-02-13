@@ -20,7 +20,7 @@
         Documentación de opcións      </h2>
 
       <p>
-        Copyright &copy; 2002-2021 por varios colaboradores; vexa AUTORES (AUTHORS).<br>
+        Copyright &copy; 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).<br>
         <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
       </p>
 
@@ -192,7 +192,7 @@
             Estableza o tamaño dos píxeles dos botóns na interface de usuario de Tux Paint (substituíndo o predeterminado de «48»). Útil cando se usan pantallas de alta densidade ou dispositivos de entrada groseiros, como rastrexadores de ollos.          </p>
 
           <p>
-            The <i>TAMAÑO</i> value should be presented in pixels, and can be anything between 24 and 192, inclusive. Most buttons are square, and this will affect their width and height.          </p>
+            O valor <i>TAMAÑO</i> debería presentarse en píxeles e pode estar entre 24 e 192, inclusive. A maioría dos botóns son cadrados e isto afectará ao seu largo e alto.          </p>
         </dd>
 
         <dt>
@@ -303,7 +303,7 @@
             Tux Paint empregará un ficheiro de configuración da impresora cando imprima. Prema a tecla <b>[Alt]</b> mentres preme no botón «Imprimir» en Tux Paint para que apareza unha xanela de diálogo de impresión de Windows.          </p>
 
           <p>
-            (Nota: Isto só funciona cando non se está a executar Tux Paint en modo de pantalla completa.) Calquera cambio de configuración feito neste diálogo gardarase no ficheiro «<code>userdata/print.cfg</code>» e volverase a usar, sempre que estea configurada a opción «printcfg»          </p>
+            (Nota: Isto só funciona cando non se está a executar Tux Paint en modo de pantalla completa.) Calquera cambio de configuración feito neste diálogo gardarase no ficheiro «<code>userdata/print.cfg</code>» e volverase a usar, sempre que estea configurada a opción «printcfg».          </p>
         </dd>
 
         <dt>
@@ -334,7 +334,7 @@
         </dd>
 
         <dt>
-          <code><b>papersize=<i>TAMAÑO DO PAPEL</i></b></code>
+          <code><b>papersize=<i>TAMAÑO_DO_PAPEL</i></b></code>
         </dt>
 
         <dd>
@@ -358,10 +358,10 @@
             De xeito predeterminado, Tux Paint usa o que se coñece como «ficheiro de bloqueo» para evitar que se inicie máis dunha vez en 30 segundos. (Isto é para evitar executar accidentalmente varias copias; por exemplo, premendo dúas veces nun iniciador dun só clic ou simplemente premendo impacientemente na icona varias veces.)          </p>
 
           <p>
-            To make Tux Paint ignore the lockfile, allowing it to run again, even if it was just launched less than 30 seconds ago, enable this setting in the configuration file, or run Tux Paint with the <code>--nolockfile</code> option on the command-line.          </p>
+            Para facer que Tux Paint ignore o ficheiro de bloqueo, permitindo que se execute de novo, aínda que se lanzase hai menos de 30 segundos, active este axuste no ficheiro de configuración ou execute Tux Paint coa opción <code>--nolockfile</code> na liña de ordes.          </p>
 
           <p>
-            By default, the lockfile is stored in "<code>~/.tuxpaint/</code>" under Linux and Unix, and "<code>userdata\</code>" under Windows.          </p>
+            De xeito predeterminado, o ficheiro de bloqueo almacénase en «<code>~/.tuxpaint/</code>» en Linux e Unix e en «<code>userdata\</code>» en Windows.          </p>
         </dd>
 
         <dt>
@@ -369,14 +369,14 @@
         </dt>
 
         <dd>
-          Disable the rotation step of the 'Shape' tool. Click, drag and release is all that will be needed to draw a shape.        </dd>
+          Desactive o paso de rotación da ferramenta «Forma». Prema, arrastra e solte é todo o que se necesita para debuxar unha forma.        </dd>
 
         <dt>
           <code><b>uppercase=yes</b></code>
         </dt>
 
         <dd>
-          All text will be rendered only in uppercase (e.g., "Brush" will be "BRUSH"). Useful for children who can read, but who have only learned uppercase letters so far.        </dd>
+          Todo o texto renderizarase só con maiúscula (por exemplo, «Pincel» será «PINCEL»). Útil para os nenos que saben ler, pero que ata agora só aprenderon maiúsculas.        </dd>
 
         <dt>
           <code><b>grab=yes</b></code>
@@ -384,10 +384,10 @@
 
         <dd>
           <p>
-            Tux Paint will attempt to 'grab' the mouse and keyboard, so that the mouse is confined to Tux Paint's window, and nearly all keyboard input is passed directly to it.          </p>
+            Tux Paint tentará «amarrar» o rato e o teclado, de xeito que o rato estea confinado na xanela de Tux Paint e case toda a entrada do teclado se lle pase directamente.          </p>
 
           <p>
-            This is useful to disable operating system actions that could get the user out of Tux Paint <b>[Alt]-[Tab]</b> window cycling, <b>[Ctrl]-[Escape]</b>, etc. This is especially useful in fullscreen mode.          </p>
+            Isto é útil para desactivar as accións do sistema operativo que poidan sacar ao usuario de Tux Pain do ciclo de xanelast <b>[Alt]-[Tab]</b>, <b>[Ctrl]-[Escape]</b>, etc. Isto é especialmente útil no modo de pantalla completa.          </p>
         </dd>
 
         <dt>
@@ -396,10 +396,10 @@
 
         <dd>
           <p>
-            This disable keyboard shortcuts (e.g., <b>[Ctrl]-[S]</b> for save, <b>[Ctrl]-[N]</b> for a new image, etc.)          </p>
+            Isto desactiva os atallos de teclado (por exemplo,<b>[Ctrl]-[S]</b> para gardar, <b>[Ctrl]-[N]</b> para unha nova imaxe, etc.)          </p>
 
           <p>
-            This is useful to prevent unwanted commands from being activated by children who aren't experienced with keyboards.          </p>
+            Isto é útil para evitar que ordes non desexadas sexan activadas por nenos que non teñen experiencia con teclados.          </p>
         </dd>
 
         <dt>
@@ -407,7 +407,7 @@
         </dt>
 
         <dd>
-          This disables support for the wheel on mice that have it. (Normally, the wheel will scroll the selector menu on the right.)        </dd>
+          Isto desactiva a compatibilidade para a roda dos ratos que a teñen. (Normalmente, a roda desprazará o menú do selector á dereita.)        </dd>
 
         <dt>
           <code><b>nobuttondistinction=yes</b></code>
@@ -415,10 +415,10 @@
 
         <dd>
           <p>
-            Prior to Tux Paint 0.9.15, the middle and right buttons on a mouse could also be used for clicking. In version 0.9.15, it was changed so that <i>only</i> the left mouse button worked, so as to not train children to use the wrong button.          </p>
+            Antes do Tux Paint 0.9.15, tamén se podían empregar os botóns medio e dereito do rato para premer. Na versión 0.9.15, cambiouse para que <i>só</i> funcionase o botón esquerdo do rato para non adestrar aos nenos a usar o botón incorrecto.          </p>
 
           <p>
-            However, for children who have trouble with the mouse, this distinction between the two or three buttons on a mouse can be disabled (returning Tux Paint to its old behavior) by using this option.          </p>
+            Porén, para os nenos que teñen problemas co rato, pódese desactivar esta distinción entre os dous ou tres botóns do rato (devolvendo Tux Paint ao seu antigo comportamento) usando esta opción.          </p>
         </dd>
 
         <dt>
@@ -427,10 +427,10 @@
 
         <dd>
           <p>
-            This disables the fancy mouse pointer shapes in Tux Paint, and uses your environment's normal mouse pointer.          </p>
+            Isto desactiva as fantásticas formas do punteiro do rato en Tux Paint e usa o punteiro normal do seu contorno.          </p>
 
           <p>
-            In some enviornments, the fancy cursors cause problems. Use this option to avoid them.          </p>
+            Nalgúns contornos, os cursores de fantasía causan problemas. Use esta opción para evitalos.          </p>
         </dd>
 
         <dt>
@@ -451,10 +451,10 @@
 
         <dd>
           <p>
-            In this mode, much simpler outlines and 'rubber-band' lines are displayed when using the <b>Lines</b>, <b>Shapes</b>, <b>Stamps</b> and <b>Eraser</b> tools.          </p>
+            Neste modo, amósanse contornos e liñas «elásticas» moito máis sinxelas cando se usan as ferramentas <b>Liñas</b>, <b>Formas</b>, <b>Selos</b> e <b>Goma</b>.          </p>
 
           <p>
-            This can help when Tux Paint is run on very slow computers, or displayed on a remote X-Window display.          </p>
+            Isto pode axudar cando Tux Paint se executa en ordenadores moi lentos ou se amosa nunha pantalla remota de X-Window.          </p>
         </dd>
 
         <dt>
@@ -463,7 +463,7 @@
 
         <dd>
           <p>
-            This option causes Tux Paint to attempt to load fonts (for use in the <b>Text</b> tool) from your operating system. Normally, Tux Paint will only load the ones that came bundled with Tux Paint.          </p>
+            Esta opción fai que Tux Paint tente cargar tipos de letra (para usalos na ferramenta <b>Texto</b>) dende o seu sistema operativo. Normalmente, Tux Paint só cargará os que foron incluídos con Tux Paint.          </p>
         </dd>
 
         <dt>
@@ -472,10 +472,10 @@
 
         <dd>
           <p>
-            Prior to version 0.9.21, Tux Paint loaded all fonts in its own fonts directory, including locale-specific ones (e.g., the one for Tibetan, which had no latin characters). As of 0.9.21, the only font loaded from the locale-specific subdirectory, if any, is one matching the locale Tux Paint is running on.          </p>
+            Antes da versión 0.9.21, Tux Paint cargaba todos os tipos de letra no seu propio directorio de tipos de letra, incluídos os específicos da configuración local (por exemplo, o tibetano, que non tiña caracteres latinos). A partir doa 0.9.21, o único tipo de letra cargado dende o subdirectorio específico da configuración local, se o hai, é o que coincide coa configuración local en que se está a executar Tux Paint.          </p>
 
           <p>
-            To load all locale-specific fonts (the old behavior), set this option.          </p>
+            Para cargar todos os tipos de letra específicos de idiomas (o comportamento antigo), configure esta opción.          </p>
         </dd>
 
         <dt>
@@ -484,10 +484,10 @@
 
         <dd>
           <p>
-            This option tells Tux Paint to not load any rubber stamp images, which in turn ends up disabling the <b>Stamps</b> tool.          </p>
+            Esta opción dille a Tux Paint que non cargue ningunha imaxe de selo de caucho, o que á súa vez acaba desactivando a ferramenta <b>Selos</b>.          </p>
 
           <p>
-            This can speed up Tux Paint when it first loads up, and reduce memory usage while it's running. Of course, no stamps will be available at all.          </p>
+            Isto pode acelerar Tux Paint cando se carga por primeira vez e reducir o uso de memoria mentres se está a executar. Por suposto, ningún selo estará dispoñíbel.          </p>
         </dd>
 
         <dt>
@@ -495,35 +495,35 @@
         </dt>
 
         <dd>
-          Some images in the <b>Stamps</b> tool can be mirrored, flipped, and/or have their size changed. This option disables the controls, and only provides the basic stamps.        </dd>
+          Algunhas imaxes da ferramenta <b>Selos</b> pódense reflectir, virar e/ou cambiar o seu tamaño. Esta opción desactiva os controis e só fornece os selos básicos.        </dd>
 
         <dt>
           <code><b>nomagiccontrols=yes</b></code>
         </dt>
 
         <dd>
-          Some <b>Magic</b> tools have the option of acting like a paintbrush, or affecting the entire canvas at once. This option disables the controls, and only provides the default functionality (usually paint-mode).        </dd>
+          Algunhas ferramentas de <b>Maxia</b> teñen a opción de actuar coma un pincel ou afectar todo o lenzo á vez. Esta opción desactiva os controis e só fornece a funcionalidade predeterminada (normalmente en modo pintura).        </dd>
 
         <dt>
           <code><b>noshapecontrols=yes</b></code>
         </dt>
 
         <dd>
-          Disable the control buttons shown when using the <b>Shapes</b> tool that allow changing how shapes are drawn — centered around the initial mouse click, or with a corner at the initial mouse click.        </dd>
+          Desactivar os botóns de control que se amosan cando se usa a ferramenta <b>Formas</b> que permiten cambiar como se debuxan as formas: centradas arredor do clic inicial do rato ou cun canto co clic inicial do rato.        </dd>
 
         <dt>
           <code><b>nolabel=yes</b></code>
         </dt>
 
         <dd>
-          Disables the <b>Label</b> tool: the tool that allows text entry which can be edited later.        </dd>
+          Desactiva a ferramenta <b>Etiqueta</b>: a ferramenta que permite a entrada de texto que se pode editar máis tarde.        </dd>
 
         <dt>
           <code><b>newcolorslast=yes</b></code>
         </dt>
 
         <dd>
-          Places the blank color options in the <b>New</b> dialog at the end, so that any Starters and/or Templates are shown first.        </dd>
+          Coloca as opcións de cor en branco no diálogo <b>Novo</b> ao final, de xeito que se amosen primeiro os iniciadores e/ou modelos.        </dd>
 
         <dt>
           <code><b>mirrorstamps=yes</b></code>
@@ -531,10 +531,10 @@
 
         <dd>
           <p>
-            For stamps that can be mirrored, this option sets them to their mirrored shape by default.          </p>
+            Para os selos que se poden relectir, esta opción estabeleceos de xeito predeterminado na súa forma reflectida.          </p>
 
           <p>
-            This can be useful for people who prefer things right-to-left, rather than left-to-right.          </p>
+            Isto pode ser útil para as persoas que prefiren as cousas de dereita a esquerda no canto de de esquerda a dereita.          </p>
         </dd>
 
         <dt>
@@ -542,14 +542,14 @@
         </dt>
 
         <dd>
-          In this mode, instead of clicking, dragging and releasing (e.g., to draw), you click, move, and click again to end the motion.        </dd>
+          Neste modo, no canto de premer, arrastrar e soltar (por exemplo, para debuxar), premese, móvese e premese  de novo para rematar o movemento.        </dd>
 
         <dt>
           <code><b>onscreen-keyboard=yes</b></code>
         </dt>
 
         <dd>
-          Presents a clickable on-screen keyboard when using the <b>Text</b> and <b>Label</b> tools.        </dd>
+          Presenta un teclado en pantalla sobre que se pode premer cando empregan as ferramentas <b>Texto</b> e <b>Etiqueta</b>.        </dd>
 
         <dt>
           <code><b>onscreen-keyboard-layout=<i>NOME DA DISPOSICIÓN</i></b></code>
@@ -683,7 +683,7 @@
         </dt>
 
         <dd>
-          Selecciona o número do botón da panca de mando (joystick), tal e como o ve SDL, que será un atallo para seleccionar Ferramenta de goma.        </dd>
+          Selecciona o número do botón da panca de mando (joystick), tal e como o ve SDL, que será un atallo para seleccionar ferramenta de goma de borrar.        </dd>
 
         <dt>
           <code><b>joystick-btn-new=<i>NÚMERO DE BOTÓN</i></b></code>
@@ -794,22 +794,22 @@
             Se non o anula, a ubicación <b><i>predeterminada</i></b> é:          </p>
 
           <ul>
-            <li>Linux &amp; Unix — Under a hidden directory named "<code>.tuxpaint</code>" in your home directory (aka "<code>~</code>" or "<code>$HOME</code>")<br>
+            <li>Linux e Unix: baixo un directorio agochado chamado «<code>.tuxpaint</code>» no seu directorio persoal (tamén coñecido como «<code>~</code>» ou «<code>$HOME</code>»)<br>
                 Exemplo: <code>/home/<i>username</i>/.tuxpaint/saved/</code>            </li>
 
-            <li>Windows — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Data</code>" folder.<br>
+            <li>Windows: Dentro un cartafol chamado «<code>TuxPaint</code>» no seu cartafol «<code>Application Data</code>».<br>
                 Exemplo: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\saved\</code>              <br>
             </li>
 
-            <li>macOS — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Support</code>" folder.<br>
+            <li>macOS: Dentro un cartafol chamado «<code>TuxPaint</code>» no seu cartafol «<code>Application Support</code>».<br>
                 Exemplo: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/saved/</code>            </li>
           </ul>
 
           <p>
-            <b>Note:</b> When specifying a Windows drive (e.g., "<code>H:\</code>"), you must also specify a subdirectory.          </p>
+            <b>Nota:</b> Ao especificar unha unidade de Windows (por exemplo, «<code>H:\</code>»), tamén debe especificar un subdirectorio.          </p>
 
           <p>
-            <b>Note:</b> Prior to version 0.9.18, Tux Paint would also use the setting or default for "<code>savedir</code>" as the place to search for personal data files (brushes, stamps, starters and fonts). As of version 0.9.18, they may be specified separately (see the "<code>datadir</code>" option, below).          </p>
+            <b>Nota:</b> Antes da versión 0.9.18, Tux Paint tamén usaba a configuración ou o valor predeterminado para «<code>savedir</code>» como o lugar onde buscar ficheiros de datos persoais (pinceis, selos, imaxes de comezo e tipos de letra) . A partir da versión 0.9.18, pódense especificar por separado (consulte a opción «<code>datadir</code>», máis abaixo).          </p>
 
           <p>
             Exemplo: <code>savedir=Z:\tuxpaint\</code>          </p>
@@ -821,15 +821,15 @@
 
         <dd>
           <p>
-            Use this option to change where Tux Paint exports files — single images, or animated GIF slideshows — for external use.          </p>
+            Use esta opción para cambiar onde Tux Paint exporta ficheiros –imaxes individuais ou presentacións de diapositivas GIF animadas– uso externo.          </p>
 
           <p>
             Se non o anula, a ubicación <b><i>predeterminada</i></b> é:          </p>
 
           <ul>
-            <li>Linux &amp; Unix — If available, wherever your desktop environment is configured for pictures to be stored, based on your XDG (X Desktop Group) configuration. (Try running the command-line "<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" to find out.)<br>
-              Typically (in an English locale), this will be a "<code>Imaxes</code>" subdirectory in your home directory (i.e., "<code>$HOME/Imaxes</code>" aka "<code>~/Imaxes</code>").<br>
-              Tux Paint will fall back to using that typical directory, of no XDG configuration can be read, or nothing is set for "<code>XDG_PICTURES_DIR</code>".            </li>
+            <li>Linux e Unix: se está dispoñíbel, onde queira que o seu contorno de escritorio estea configurado para que se almacenen imaxes, en función da configuración XDG (X Desktop Group). (Probe a executar a liña de ordes «<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>» para descubrilo.)<br>
+              Normalmente (no idioma inglés), este será un subdirectorio «<code>Imaxes</code>» no seu directorio persoal (é dicir, «<code>$HOME/Imaxes</code>» tamén coñecido como «<code>~/Imaxes</code>»).<br>
+              Tux Paint volverá usar ese directorio habitual, se non se pode ler a configuración XDG, ou non se estabelece nada «<code>XDG_PICTURES_DIR</code>».            </li>
 
                         <li>Windows — TBD! <!-- FIXME -->
             </li>
@@ -839,11 +839,11 @@
           </ul>
 
           <p>
-            <b>Note:</b> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., "<code>~/Imaxes/TuxPaint</code>") When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).          </p>
+            <b>Nota:</b> Cando se empregan os valores predeterminados, crearase e usarase un novo subdirectorio «<code>TuxPaint</code>». (p. ex.: «<code>~/Imaxes/TuxPaint</code>x) Cando se usa a opción «<code>--exportdir</code>», empregarase a ruta exacta especificada (non se crea ningún subdirectorio «<code>TuxPaint</code>»).          </p>
           <p>
-            The directory itself (e.g., "<code>~/Imaxes/TuxPaint</code>") will be created, if it doesn't exist.          </p>
+            O directorio en si (p. ex.: «<code>~/Imaxes/TuxPaint</code>») crearase, se non existe.          </p>
           <p>
-            If the <em>parent</em> directory (e.g., "<code>~/Imaxes/TuxPaint</code>") also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).          </p>
+            Se o directorio <em>pai</em> (por exemplo, «<code>~/Imaxes/TuxPaint</code>») tampouco existe, Tux Paint tentará crealo tamén (pero non ningún directorio superior a ese).          </p>
 
           <p>
             Exemplo: <code>exportdir=/home/penguin/TuxPaintExports</code>          </p>
@@ -855,7 +855,7 @@
 
         <dd>
           <p>
-            Use this option to change where Tux Paint looks for personal data files (brushes, stamps, starters, templates, and fonts specific to the current user).          </p>
+            Use esta opción para cambiar onde Tux Paint busca ficheiros de datos persoais (pinceis, selos, imaxes de comezo, modelos e tipos de letra específicos do usuario actual).          </p>
 
           <p>
             Tux Paint will search for subdirectories/subfolders named "<code>brushes</code>", "<code>stamps</code>", "<code>starters</code>", "<code>templates</code>", and "<code>fonts</code>" under the specified data directory.          </p>
@@ -864,13 +864,13 @@
             Se non o anula, a ubicación <b><i>predeterminada</i></b> é:          </p>
 
           <ul>
-            <li>Linux &amp; Unix — Under a hidden directory named "<code>.tuxpaint</code>" in your home directory (aka "<code>~</code>" or "<code>$HOME</code>")<br>
+            <li>Linux e Unix: baixo un directorio agochado chamado «<code>.tuxpaint</code>» no seu directorio persoal (tamén coñecido como «<code>~</code>» ou «<code>$HOME</code>»)<br>
                 Exemplo: <code>/home/<i>username</i>/.tuxpaint/brushes/</code>            </li>
 
-            <li>Windows — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Data</code>" folder.<br>
+            <li>Windows: Dentro un cartafol chamado «<code>TuxPaint</code>» no seu cartafol «<code>Application Data</code>».<br>
                 Exemplo: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\brushes\</code>            </li>
 
-            <li>macOS — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Support</code>" folder.<br>
+            <li>macOS: Dentro un cartafol chamado «<code>TuxPaint</code>» no seu cartafol «<code>Application Support</code>».<br>
                 Exemplo: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/brushes/</code>            </li>
           </ul>
 
@@ -878,7 +878,7 @@
             <b>Note:</b> Prior to version 0.9.18, Tux Paint would use the same setting or default as for "<code>savedir</code>" to search for data files. As of version 0.9.18, they may be specified separately.          </p>
 
           <p>
-            <b>Note:</b> When specifying a Windows drive (e.g., "<code>H:\</code>"), you must also specify a subdirectory.          </p>
+            <b>Nota:</b> Ao especificar unha unidade de Windows (por exemplo, «<code>H:\</code>»), tamén debe especificar un subdirectorio.          </p>
 
           <p>
             Exemplo: <code>datadir=/home/johnny/tuxpaint-data/</code>          </p>
@@ -904,9 +904,9 @@
 
         <dd>
           <p>
-            <i>(This option is redundant, since this is the default.)</i>
+            <i>(Esta opción é redundante, xa que esta é a opción predeterminada.)</i>
           </p>
-          When saving an existing drawing, you will be first asked whether to save over the older version or not.        </dd>
+          Ao gardar un debuxo existente, primeiro preguntaráselle se quere gardar sobre a versión anterior ou non.        </dd>
 
         <dt>
           <code><b>nosave=yes</b></code>
@@ -920,17 +920,17 @@
         </dt>
 
         <dd>
-          This prevents Tux Paint from asking whether you want to save the current picture when quitting, and assumes you do.        </dd>
+          Isto impide a Tux Paint preguntar se quere gardar a imaxe actual ao saír e supón que si.        </dd>
 
         <dt>
           <code><b>startblank=yes</b></code>
         </dt>
 
         <dd>
-          This causes Tux Paint to display a blank canvas when it first starts up, rather than loading the last image that was being edited.        </dd>
+          Isto fai que Tux Paint amose un lenzo en branco cando se inicia por vez primeira, no canto de cargar a última imaxe que se estaba a editar.        </dd>
 
         <dt>
-          <code><b>colorfile=<i>NOME DE FICHEIRO</i></b></code>
+          <code><b>colorfile=<i>NOME_DE_FICHEIRO</i></b></code>
         </dt>
 
         <dd>
@@ -947,19 +947,19 @@
             After the color definition (on the same line) you may enter text to describe the color. Tux will display this text when the color is clicked. (For example, "<code>#FFF Branco coma a neve.</code>")          </p>
 
           <p>
-            As an example, you can see the default colors currently used in Tux Paint in: "<a href="../../default_colors.txt"><code>default_colors.txt</code></a>".          </p>
+            Como exemplo, pode ver as cores predeterminadas empregadas actualmente en Tux Paint en: «<a href="../../default_colors.txt"><code>default_colors.txt</code></a>».          </p>
 
           <p>
             NOTES: You must separate decimal values with spaces, and begin hexadecimal values with a pound/number-sign character ("<code>#</code>"). In 3-digit hexadecimal, each digit is used for both the high and low halves of the byte, so "<code>#FFF</code>" is the same as "<code>#FFFFFF</code>", not "<code>#F0F0F0</code>".          </p>
         </dd>
 
         <dt>
-          <code><b>colorsrows=<i>ROWS</i></b></code>
+          <code><b>colorsrows=<i>FILAS</i></b></code>
         </dt>
 
         <dd>
           <p>
-            How many rows of color palette buttons to show; useful when using a large color palette (see "<code>colorfile</code>", above), and/or for use with coarse input devices (like eyegaze trackers).  "<code>ROWS</code>" may be between "1" (the default) and "3".          </p>
+            How many rows of color palette buttons to show; useful when using a large color palette (see "<code>colorfile</code>", above), and/or for use with coarse input devices (like eyegaze trackers).  "<code>FILAS</code>" may be between "1" (the default) and "3".          </p>
         </dd>
 
         <dt>
@@ -968,7 +968,7 @@
 
         <dd>
           <p>
-            Run Tux Paint in one of the supported languages. Possible choice for <i>LANGUAGE</i> currently include:          </p>
+            Executa Tux Paint nun dos idiomas compatíbeis. A opción posíbel para <i>IDIOMA</i> inclúe actualmente:          </p>
 
           
           <blockquote>
@@ -976,7 +976,7 @@
                    cellspacing="0"
                    cellpadding="2"
                    summary=
-                   "Possible values for 'lang' language setting">
+                   "Valores posibles para o axuste de idioma «lang»">
               <tr>
                 <td>
                   <code>english</code>
@@ -2563,7 +2563,7 @@
             --printcfg<br>
             --altprintnever<br>
             --altprintalways<br>
-            --papersize=<i>TAMAÑO DO PAPEL</i><br>
+            --papersize=<i>TAMAÑO_DO_PAPEL</i><br>
             --nolockfile<br>
             --simpleshapes<br>
             --uppercase<br>
@@ -2678,7 +2678,7 @@
 
           <dt>
             <code><b><a name="locale"
-               id="locale">--locale CONF. REXIONAL</a></b></code>
+               id="locale">--locale IDIOMA</a></b></code>
           </dt>
 
           <dd>
@@ -2789,10 +2789,10 @@
                cellspacing="0"
                cellpadding="2"
                summary=
-               "Valores rexionais e os idiomas que representan.">
+               "Valores locais e os idiomas que representan.">
           <tr>
             <th>
-              Código rexional            </th>
+              Código do idioma            </th>
             <th>
               Idioma<br>(nome nativo)            </th>
             <th>
@@ -4745,11 +4745,11 @@
       </blockquote>
 
       <h2>
-        Axustando a configuración rexional do seu contorno      </h2>
+        Axustando o idioma do seu contorno      </h2>
 
       <blockquote>
         <p>
-          Cambiar a súa configuración rexional afectará a gran parte do seu contorno.        </p>
+          Cambiar o seu idioma afectará a gran parte do seu contorno.        </p>
 
         <p>
           As stated above, along with letting you choose the language at runtime using command-line options ("<code>--lang</code>" and "<code>--locale</code>"), Tux Paint honors the global locale setting in your environment.        </p>
@@ -4765,7 +4765,7 @@
             First, be sure the locale you want to use is enabled by editing the file "<code>/etc/locale.gen</code>" on your system and then running the program "<code>locale-gen</code>" as root.          </p>
 
           <p>
-            <i>Note: Debian users may be able to simply run the command "<code>dpkg-reconfigure locales</code>" as root to bring up a configuration dialog. Ubuntu users may be able to run "<code>sudo dpkg-reconfigure localeconf</code>" (the "localeconf" package may need to be installed first), or you may need to edit the file "<code>/var/lib/locales/supported.d/local</code>" first, and add locales they want, from the list found in "<code>/usr/share/i18n/SUPPORTED</code>".</i>          </p>
+            <i>Nota: os usuarios de Debian poden executar a orde «<code>dpkg-reconfigure locales</code>» como superusuario (root) para abrir un diálogo de configuración. Os usuarios de Ubuntu poden executar «<code>sudo dpkg-reconfigure localeconf</code>» (é posíbel que teña que instalar antes o paquete «localeconf») ou pode que teña que editar primeiro o ficheiro «<code>/var/lib/locales/supported.d/local</code>» e engadir os idiomas que queiran, da lista que se atopa en «<code>/usr/share/i18n/SUPPORTED</code>».</i>          </p>
 
           <p>
             Then, before running Tux Paint, set your "<code>$LANG</code>" environment variable to one of the locales listed above. (If you want all programs that can be translated to be, you may wish to place the following in your login script; e.g. "<code>~/.profile</code>", "<code>~/.bashrc</code>", "<code>~/.cshrc</code>", etc.)          </p>

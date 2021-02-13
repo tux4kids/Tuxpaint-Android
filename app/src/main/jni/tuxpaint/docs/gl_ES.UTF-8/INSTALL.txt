@@ -2,7 +2,7 @@
                                  versión 0.9.26
                           Documentación da instalación
 
-    Copyright © 2002-2021 por varios colaboradores; vexa AUTORES (AUTHORS).
+    Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
                                 30 Xaneiro 2021
@@ -59,9 +59,9 @@ Requisitos:
 
     gettext
 
-         Tux Paint utiliza a configuración rexional do sistema xunto coa
-         biblioteca «gettext» para admitir varios idiomas (p. ex., o
-         español). Necesitará ter a biblioteca gettext instalada.
+         Tux Paint utiliza o idioma do sistema xunto coa biblioteca «gettext»
+         para admitir varios idiomas (p. ex., o español). Necesitará ter a
+         biblioteca gettext instalada.
 
          http://www.gnu.org/software/gettext/
 
@@ -120,7 +120,7 @@ Requisitos:
 
          http://netpbm.sourceforge.net/
 
-Compilación e instalación
+Compilación e instalación:
 
      Tux Paint publícase baixo a Licenza Pública Xeral de GNU (GPL) (consulte
      «COPYING.txt» para máis detalles) e, polo tanto, o «código fonte» do
@@ -218,8 +218,8 @@ Compilación e instalación
 
          Se ao facer dobre clic no atallo para executar Tux Paint, non ocorre
          nada, probabelmente sexa porque algunhas destas opcións da liña de
-         ordes son incorrectas. Abra un explorador coma antes e busque un
-         ficheiro chamado «stderr.txt» no cartafol TuxPaint.
+         ordes son incorrectas. Abra un explorador de ficheiros coma antes e
+         busque un ficheiro chamado «stderr.txt» no cartafol TuxPaint.
 
          Conterá unha descrición do que estaba mal. Normalmente só se debe a
          maiúsculas e minúsculas incorrectas (maiúsculas «Z» no canto de
@@ -234,7 +234,7 @@ Compilación e instalación
          debería ser directa, supoñendo que todo o que precisa Tux Paint está
          instalado.
 
-         Para compilar o programa dende as fontes, simplemente execute a
+         Para compilar o programa dende o código fonte, simplemente execute a
          seguinte orde dende un indicador do sistema (p. ex.: «$»):
 
            $ make
@@ -275,48 +275,49 @@ Compilación e instalación
 
     Se se producen erros:
 
-         If you receive any errors during compile-time, make sure you have
-         the appropriate libraries installed (see above). If using packaged
-         versions of the libraries (e.g., RPMs under RedHat or DEBs under
-         Debian), be sure to get the corresponding "-dev" or "-devel"
-         packages as well, otherwise you won't be able to compile Tux Paint
-         (and other programs) from source!
+         Se recibe algún erro durante o tempo de compilación, asegúrese de
+         ter instaladas as bibliotecas axeitadas (ver máis arriba). Se está a
+         empregar versións empaquetadas das bibliotecas (por exemplo, RPM en
+         RedHat ou DEB en Debian), asegúrese de obter tamén os
+         correspondentes paquetes «-dev» ou «-devel», se non, non poderá
+         compilar Tux Paint (e outros programas) dende o código fonte.
 
     Instalar:
 
-         Assuming no fatal errors occured, you can now install the program so
-         that it can be run by users on the system. By default, this must be
-         done by the "root" user ('superuser'). Switch to "root" by typing
-         the command:
+         Supoñendo que non se produciron erros graves, agora pode instalar o
+         programa para que os usuarios do sistema poidan executalo. De xeito
+         predeterminado, isto debe facelo o usuario «root» («superusuario»).
+         Cambie a «root» escribindo a orde:
 
            $ su
 
-         Enter "root"'s password at the prompt. You should now be "root"
-         (with a prompt like "#"). To install the program and its data files,
-         type:
+         Introduza o contrasinal de «root» no indicador do sistema. Agora
+         debería ser «root» (cun indicador como «#»). Para instalar o
+         programa e os seus ficheiros de datos, escriba:
 
            # make install
 
-         Finally, you can switch back to your regular user by exiting
-         superuser mode:
+         Finalmente, pode volver ao seu usuario habitual saíndo do modo de
+         superusuario:
 
            # exit
 
-         Alternatively, you may be able to simply use the "sudo" command
-         (e.g., on Ubuntu Linux):
+         Como alternativa, pode simplemente usar a orde «sudo» (po.ex.: en
+         Ubuntu Linux):
 
            $ sudo make install
 
-         Note: By default, "tuxpaint", the executable program, is placed in
-         "/usr/local/bin/". The data files (images, sounds, etc.) are placed
-         in "/usr/local/share/tuxpaint/".
+         Nota: De xeito predeterminado, «tuxpaint», o programa executábel,
+         colócase en «/usr/local/bin/». Os ficheiros de datos (imaxes, sons,
+         etc.) colócanse en «/usr/local/share/tuxpaint/».
 
       Cambiando onde van as cousas
 
-           You can change where things will go by setting "Makefile"variables
-           on the command line. "DESTDIR" is used to place output in a
-           staging area for package creation. "PREFIX" is the basis of where
-           all other files go, and is, by default, set to "/usr/local".
+           Pode cambiar onde irán as cousas axustando as variábeis de
+           «Makefile» na liña de ordes. «DESTDIR» úsase para colocar a saída
+           nunha área de espera para a creación de paquetes. «PREFIX» é a
+           base de onde van todos os demais ficheiros e, de xeito
+           predeterminado, está estabelecido en «/usr/local».
 
            Outras variábeis son:
 
@@ -326,9 +327,9 @@ Compilación e instalación
                    «/usr/local/bin»)
 
            DATA_PREFIX
-                   Where the data files (sound, graphics, brushes, stamps,
-                   fonts) will go, and where Tux Paint will look for them
-                   when it's run. (Set to "$(PREFIX)/share/tuxpaint")
+                   Onde irán os ficheiros de datos (son, gráficos, pinceis,
+                   selos, tipos de letra) e onde os buscará Tux Paint cando
+                   se execute. (Estabelecer en «$(PREFIX)/share/tuxpaint»)
 
            DOC_PREFIX
                    Onde irán os ficheiros de texto da documentación (o
@@ -349,12 +350,12 @@ Compilación e instalación
                    Onde irán as iconas e os lanzadores (para GNOME e KDE).
 
            LOCALE_PREFIX
-                   Where the translation files for Tux Paint will go, and
-                   where Tux Paint will look for them. (Set to
-                   "$(PREFIX)/share/locale/") (Final location of a
-                   translation file will be under the locale's directory
-                   (e.g., "es" for Spanish), within the "LC_MESSAGES"
-                   subdirectory.)
+                   Onde irán os ficheiros de tradución para Tux Paint e onde
+                   os buscará Tux Paint. (Estabelécese en
+                   «$(PREFIX)/share/locale/») (A localización final dun
+                   ficheiro de tradución estará no directorio local (por
+                   exemplo, «es» para o español), dentro do subdirectorio
+                   «LC_MESSAGES»).
 
            Nota: Esta lista non está actualizada. Consulte «Makefile» e
            «Makefile-i18n» para ver unha lista completa.
@@ -386,10 +387,10 @@ Desinstalación de Tux Paint:
 
   Linux
 
-       Within the Tux Paint source directory (where you compiled Tux Paint),
-       you can use the "make uninstall" target to uninstall Tux Paint. By
-       default, this must be done by the "root" user ('superuser'), but if
-       you installed Tux Paint somewhere else (e.g., using a "PREFIX=..."
-       setting to "make" and "make install"), you may not, and will want to
-       provide those same settings here. (See the installation instructions
-       above for further information.)
+       Dentro do directorio de orixe de Tux Paint (onde compilou Tux Paint),
+       pode usar o destino «make uninstall» para desinstalar Tux Paint. De
+       xeito predeterminado, debe facelo o usuario «root» («superusuario»),
+       mais se instalou Tux Paint noutro lugar (por exemplo, usando a
+       configuración «PREFIX=...» en «make» e «make install»), pode que non e
+       queira proporcionar a mesma configuración aquí. (Consulte as
+       instrucións de instalación anteriores para obter máis información.)
