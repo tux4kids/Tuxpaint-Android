@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TuxPaint 0.9.13\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-11 09:03-0800\n"
+"POT-Creation-Date: 2021-02-20 20:40-0800\n"
 "PO-Revision-Date: 2009-01-18 00:06+0530\n"
 "Last-Translator: ravishankar <ravidreams@gmail.com>\n"
 "Language-Team: A. Ravishankar <ravishankar.ayyakkannu@gmail.com>\n"
@@ -178,6 +178,38 @@ msgstr ""
 msgid "<9>spare-9b"
 msgstr ""
 
+#: ../fill_tools.h:49
+msgid "Solid"
+msgstr ""
+
+#: ../fill_tools.h:50
+#, fuzzy
+#| msgid "Lines"
+msgid "Linear"
+msgstr "கோடு"
+
+#: ../fill_tools.h:51
+msgid "Radial"
+msgstr ""
+
+#: ../fill_tools.h:55
+#, fuzzy
+#| msgid "Click in the picture to fill that area with color."
+msgid "Click to fill an area with a solid color."
+msgstr "சொடுக்கினால், படத்தின் குறிப்பிட்ட பகுதியில் வண்ணத்தை நிரப்பலாம்."
+
+#: ../fill_tools.h:56
+msgid ""
+"Click and drag to fill an area with a linear gradient (from the chosen color "
+"to transparent)."
+msgstr ""
+
+#: ../fill_tools.h:57
+msgid ""
+"Click to fill an area with a radial gradient (from the chosen color to "
+"transparent)."
+msgstr ""
+
 #. Congratulations #1
 #: ../great.h:37
 msgid "Great!"
@@ -342,46 +374,53 @@ msgid "Draw shapes from a corner."
 msgstr ""
 
 #. Title of tool selector (buttons down the left)
-#: ../titles.h:56
+#: ../titles.h:57
 msgid "Tools"
 msgstr "கருவிகள்"
 
 #. Title of color palette (buttons across the bottom)
-#: ../titles.h:59
+#: ../titles.h:60
 msgid "Colors"
 msgstr "வண்ணங்கள்"
 
 #. Title of brush selector (buttons down the right for paint and line tools)
-#: ../titles.h:62
+#: ../titles.h:63
 msgid "Brushes"
 msgstr "தூரிகைகள்"
 
 #. Title of eraser selector (buttons down the right for eraser tool)
-#: ../titles.h:65
+#: ../titles.h:66
 msgid "Erasers"
 msgstr "அழிப்பான்கள்"
 
 #. Title of stamp selector (buttons down the right for stamps tool)
-#: ../titles.h:68
+#: ../titles.h:69
 msgid "Stamps"
 msgstr "முத்திரைகள்"
 
 #. Title of shape selector (buttons down the right for shapes tool)
 #. Shape creation tool (square, circle, etc.)
-#: ../titles.h:71 ../tools.h:71
+#: ../titles.h:72 ../tools.h:71
 msgid "Shapes"
 msgstr "வடிவம்"
 
 #. Title of font selector (buttons down the right for text and label tools)
-#: ../titles.h:74
+#: ../titles.h:75
 msgid "Letters"
 msgstr "எழுத்துகள்"
 
 #. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
 #. "Magic" effects tools (blur, flip image, etc.)
-#: ../titles.h:77 ../tools.h:83
+#: ../titles.h:78 ../tools.h:83
 msgid "Magic"
 msgstr "வித்தை"
+
+#. Title of fill selector (buttons down the right for fill tool)
+#: ../titles.h:81
+#, fuzzy
+#| msgid "Fill"
+msgid "Fills"
+msgstr "நிரப்பு"
 
 #. Freehand painting tool
 #: ../tools.h:62
@@ -434,9 +473,9 @@ msgid "New"
 msgstr "புதிது"
 
 #. Open a saved picture
-#. buttons for the file open dialog
+#. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7949
+#: ../tools.h:98 ../tuxpaint.c:8105
 msgid "Open"
 msgstr "திற"
 
@@ -576,235 +615,235 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "அப்ப சரி.. தொடர்ந்து இந்தப் படத்தை வரைவோம்!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2141
+#: ../tuxpaint.c:2161
 msgid "Do you really want to quit?"
 msgstr "உண்மையிலேயே வெளியேற வேண்டுமா?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2144
+#: ../tuxpaint.c:2164
 #, fuzzy
 #| msgid "Yes, I'm done!"
 msgid "Yes, I’m done!"
 msgstr "ஆம், வேலை முடிந்தது!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2147 ../tuxpaint.c:2174
+#: ../tuxpaint.c:2167 ../tuxpaint.c:2194
 msgid "No, take me back!"
 msgstr "இல்லை, முன் பக்கத்துக்கு கொண்டு செல்!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2151
+#: ../tuxpaint.c:2171
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "நீங்கள் வெளியேறினால், படத்தை இழக்க நேரிடும்! படத்தைச் சேமிக்கவா?"
 
-#: ../tuxpaint.c:2152 ../tuxpaint.c:2157
+#: ../tuxpaint.c:2172 ../tuxpaint.c:2177
 msgid "Yes, save it!"
 msgstr "ஆம், சேமி!"
 
-#: ../tuxpaint.c:2153 ../tuxpaint.c:2158
+#: ../tuxpaint.c:2173 ../tuxpaint.c:2178
 #, fuzzy
 #| msgid "No, don't bother saving!"
 msgid "No, don’t bother saving!"
 msgstr "இல்லை, சேமிக்க வேண்டாம்!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2156
+#: ../tuxpaint.c:2176
 msgid "Save your picture first?"
 msgstr "முதலில் உங்கள் படத்தைச் சேமிக்கலாமா?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2161
+#: ../tuxpaint.c:2181
 msgid "Can’t open that picture!"
 msgstr "அந்தப் படத்தைத் திறக்க இயலவில்லை!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2164 ../tuxpaint.c:2169 ../tuxpaint.c:2178 ../tuxpaint.c:2185
-#: ../tuxpaint.c:2194 ../tuxpaint.c:2199
+#: ../tuxpaint.c:2184 ../tuxpaint.c:2189 ../tuxpaint.c:2198 ../tuxpaint.c:2205
+#: ../tuxpaint.c:2214 ../tuxpaint.c:2219
 msgid "OK"
 msgstr "சரி"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2168
+#: ../tuxpaint.c:2188
 msgid "There are no saved files!"
 msgstr "சேமித்த படங்கள் ஏதும் இல்லை!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2172
+#: ../tuxpaint.c:2192
 msgid "Print your picture now?"
 msgstr "இப்பொழுது உங்கள் படத்தை அச்சிடலாமா?"
 
-#: ../tuxpaint.c:2173
+#: ../tuxpaint.c:2193
 msgid "Yes, print it!"
 msgstr "ஆம், அச்சிடு!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2177
+#: ../tuxpaint.c:2197
 msgid "Your picture has been printed!"
 msgstr "உங்கள் படத்தை அச்சிட்டு விட்டோம்!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2181
+#: ../tuxpaint.c:2201
 msgid "Sorry! Your picture could not be printed!"
 msgstr "மன்னிக்கவும், உங்கள் படத்தை அச்சிட இயலவில்லை!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2184
+#: ../tuxpaint.c:2204
 msgid "You can’t print yet!"
 msgstr "இப்பொழுது அச்செடுக்க இயலாது!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2188
+#: ../tuxpaint.c:2208
 msgid "Erase this picture?"
 msgstr "படத்தை அழிக்கவா?"
 
-#: ../tuxpaint.c:2189
+#: ../tuxpaint.c:2209
 msgid "Yes, erase it!"
 msgstr "ஆம், அழிக்கவும்!"
 
-#: ../tuxpaint.c:2190
+#: ../tuxpaint.c:2210
 #, fuzzy
 #| msgid "No, don't erase it!"
 msgid "No, don’t erase it!"
 msgstr "இல்லை, அழிக்க வேண்டாம்!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2193
+#: ../tuxpaint.c:2213
 msgid "Remember to use the left mouse button!"
 msgstr "சொடுக்கியின் இடது பொத்தானை அழுத்த மறக்காதீங்க!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2197
+#: ../tuxpaint.c:2217
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "உங்கள் படத்தை அச்சிட்டு விட்டோம்!"
 
-#: ../tuxpaint.c:2198
+#: ../tuxpaint.c:2218
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "உங்கள் படத்தை அச்சிட்டு விட்டோம்!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2202
+#: ../tuxpaint.c:2222
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "மன்னிக்கவும், உங்கள் படத்தை அச்சிட இயலவில்லை!"
 
-#: ../tuxpaint.c:2203
+#: ../tuxpaint.c:2223
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "மன்னிக்கவும், உங்கள் படத்தை அச்சிட இயலவில்லை!"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2207
+#: ../tuxpaint.c:2227
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "வேண்டிய படங்களைத் தெரிவு செய்த பிறகு, \"காட்டு\" பொத்தானை அழுத்துங்க."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2416
+#: ../tuxpaint.c:2436
 msgid "Sound muted."
 msgstr "ஒலியை நிறுத்தி விட்டோம்."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2421
+#: ../tuxpaint.c:2441
 msgid "Sound unmuted."
 msgstr "மீண்டும் ஒலிக்கிறது."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3190
+#: ../tuxpaint.c:3218
 msgid "Please wait…"
 msgstr "கொஞ்சம் காத்திருங்க..."
 
 #  'Erase' label:
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7952
+#: ../tuxpaint.c:8108
 msgid "Erase"
 msgstr "அழி"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7955
+#: ../tuxpaint.c:8111
 msgid "Slides"
 msgstr "வில்லைகள்"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:7958
+#: ../tuxpaint.c:8114
 msgid "Export"
 msgstr ""
 
 #  'Back' label:
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7961
+#: ../tuxpaint.c:8117
 msgid "Back"
 msgstr "திரும்பு"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7964
+#: ../tuxpaint.c:8120
 msgid "Play"
 msgstr "காட்டு"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:7967
+#: ../tuxpaint.c:8123
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7970
+#: ../tuxpaint.c:8126
 msgid "Next"
 msgstr "அடுத்து"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8685
+#: ../tuxpaint.c:8874
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12179
+#: ../tuxpaint.c:12515
 msgid "Yes"
 msgstr "ஆம்"
 
-#: ../tuxpaint.c:12183
+#: ../tuxpaint.c:12519
 msgid "No"
 msgstr "இல்லை"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:13309
+#: ../tuxpaint.c:13658
 msgid "Replace the picture with your changes?"
 msgstr "படத்தில் செய்த மாற்றங்களோடு சேமிக்கவா?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:13313
+#: ../tuxpaint.c:13662
 msgid "Yes, replace the old one!"
 msgstr "ஆம், ஏற்கனவே உள்ளதை மாற்று!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:13317
+#: ../tuxpaint.c:13666
 msgid "No, save a new file!"
 msgstr "இல்லை, புதிய படம் ஒன்றைச் சேமி!"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:14573
+#: ../tuxpaint.c:14929
 msgid "Choose the picture you want, then click “Open”."
 msgstr "வேண்டிய படத்தைத் தெரிவு செய்த பிறகு, \"திற\" பொத்தானைச் சொடுக்குங்க."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:15999
+#: ../tuxpaint.c:16355
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
-#: ../tuxpaint.c:23670
+#: ../tuxpaint.c:24060
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:23682
+#: ../tuxpaint.c:24072
 msgid "Pick a color."
 msgstr "ஒரு நிறத்தைத் தேர்ந்தெடுங்க."
 
@@ -835,11 +874,11 @@ msgstr "சொடுக்கி நகர்த்தினால், படத
 msgid "Click to change the colors in your entire picture."
 msgstr "சொடுக்கினால், முழுப் படத்தில் உள்ள வண்ணங்களையும் மாற்றலாம்."
 
-#: ../../magic/src/blind.c:116
+#: ../../magic/src/blind.c:115
 msgid "Blind"
 msgstr ""
 
-#: ../../magic/src/blind.c:123
+#: ../../magic/src/blind.c:122
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
@@ -930,11 +969,21 @@ msgstr "கேலிப்படம்"
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr "சொடுக்கி நகர்த்தினால், படத்தை ஒரு கேலிப்படம் போல மாற்றலாம்."
 
-#: ../../magic/src/clone.c:121
+#: ../../magic/src/checkerboard.c:99
+msgid "Checkerboard"
+msgstr ""
+
+#: ../../magic/src/checkerboard.c:106
+#, fuzzy
+#| msgid "Click and drag to draw train track rails on your picture."
+msgid "Click and drag to fill the canvas with a checkerboard pattern."
+msgstr "சொடுக்கி இழுத்தால், படத்தில் தொடர்வண்டி இருப்புப் பாதைகளை வரையலாம்."
+
+#: ../../magic/src/clone.c:132
 msgid "Clone"
 msgstr ""
 
-#: ../../magic/src/clone.c:127
+#: ../../magic/src/clone.c:138
 msgid ""
 "Click once to pick a spot to begin cloning. Click again and drag to clone "
 "that part of the picture."

@@ -6,7 +6,7 @@
           Copyright © 2002-2021 by various contributors; see AUTHORS.
                             http://www.tuxpaint.org/
 
-                                 2 febrero 2021
+                                20 febrero 2021
 
      ----------------------------------------------------------------------
 
@@ -419,10 +419,19 @@ Available Tools
          "Fill" Tool
 
                  The 'Fill' tool 'flood-fills' a contiguous area of your
-                 drawing with a solid color of your choice.
+                 drawing with a color of your choice. Three fill options are
+                 offered:
+                    * Solid — click once to fill an area with a solid color.
+                    * Linear — click and then drag to fill the area with
+                      color that fades away (a gradient) towards where you
+                      drag the mouse.
+                    * Radial — click once to fill an area with a color that
+                      fades away (a gradient) radially, centered on where you
+                      clicked.
 
                  Note: Prior to Tux Paint 0.9.24, this was a Magic tool (see
-                 below).
+                 below). Note: Prior to Tux Paint 0.9.26, this tool only
+                 offered the 'Solid' method of filling.
 
      ----------------------------------------------------------------------
 
@@ -874,7 +883,7 @@ Using the import script, "tuxpaint-import"
        Example:
 
          $ tuxpaint-import grandma.jpg
-         grandma.jpg -> /home/username/.tuxpaint/saved/20210205180425.png
+         grandma.jpg -> /home/username/.tuxpaint/saved/20210220203557.png
          jpegtopnm: WRITING A PPM FILE
 
        The first line ("tuxpaint-import grandma.jpg") is the command to run.
@@ -916,7 +925,7 @@ Importing Pictures Manually
          * mm = Minute (two digits, "00"-"59")
          * ss = Seconds (two digits, "00"-"59")
 
-       Example: "20210205180425.png", for 5 febrero 2021 at 18:04:25.
+       Example: "20210220203557.png", for 20 febrero 2021 at 20:35:57.
 
        Place this PNG file in your Tux Paint "saved" directory/folder. (See
        above.)

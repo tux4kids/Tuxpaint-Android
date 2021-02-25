@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 10, 2021
+  Last updated: February 20, 2021
   $Id$
 */
 
@@ -59,6 +59,8 @@ static Mix_Chunk *clone_start_snd, *clone_snd;
 int clone_state;
 int clone_src_x, clone_src_y;
 int clone_drag_start_x, clone_drag_start_y;
+SDL_Surface * clone_last;
+int clone_crosshair_visible;
 
 
 /* Local function prototype: */
@@ -71,6 +73,9 @@ char *clone_get_name(magic_api * api, int which);
 char *clone_get_description(magic_api * api, int which, int mode);
 void clone_drag(magic_api * api, int which, SDL_Surface * canvas,
                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
+void clone_doit(magic_api * api, int which, SDL_Surface * canvas,
+                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect,
+                 int crosshairs);
 void clone_click(magic_api * api, int which, int mode,
                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 void clone_release(magic_api * api, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
@@ -80,19 +85,22 @@ int clone_requires_colors(magic_api * api, int which);
 void clone_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void clone_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int clone_modes(magic_api * api, int which);
+void clone_crosshairs(magic_api * api, SDL_Surface * canvas, int x, int y);
+void done_cloning(magic_api * api, SDL_Surface * canvas, SDL_Rect * update_rect);
 
 // No setup required:
 int clone_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/clone_start.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/clone_start.ogg", api->data_directory);
   clone_start_snd = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/clone.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/clone.ogg", api->data_directory);
   clone_snd = Mix_LoadWAV(fname);
 
   clone_state = CLONE_READY_TO_START;
+  clone_crosshair_visible = 0;
 
   return (1);
 }
@@ -113,7 +121,7 @@ SDL_Surface *clone_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/clone.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/clone.png", api->data_directory);
 
   return (IMG_Load(fname));
 }
@@ -145,15 +153,18 @@ static void do_clone(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas
   srcx = clone_src_x + (x - clone_drag_start_x);
   srcy = clone_src_y + (y - clone_drag_start_y);
 
-  for (yy = -16; yy < 16; yy++)
+  if (!api->touched(x, y))
     {
-      for (xx = -16; xx < 16; xx++)
+      for (yy = -16; yy < 16; yy++)
         {
-          if (api->in_circle(xx, yy, 16))
+          for (xx = -16; xx < 16; xx++)
             {
-              SDL_GetRGB(api->getpixel(last, srcx + xx, srcy + yy), last->format, &r, &g, &b);
-              pixel = SDL_MapRGB(canvas->format, r, g, b);
-              api->putpixel(canvas, x + xx, y + yy, pixel);
+              if (api->in_circle(xx, yy, 16))
+                {
+                  SDL_GetRGB(api->getpixel(last, srcx + xx, srcy + yy), last->format, &r, &g, &b);
+                  pixel = SDL_MapRGB(canvas->format, r, g, b);
+                  api->putpixel(canvas, x + xx, y + yy, pixel);
+                }
             }
         }
     }
@@ -161,7 +172,21 @@ static void do_clone(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas
 
 // Affect the canvas on drag:
 void clone_drag(magic_api * api, int which, SDL_Surface * canvas,
-                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+                 SDL_Surface * last ATTRIBUTE_UNUSED, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+{
+  /* Step 3 - Actively cloning (moving the mouse) */
+
+  /* Erase crosshairs at old source position */
+  clone_crosshairs(api, canvas, clone_src_x, clone_src_y);
+  clone_crosshair_visible = 0;
+
+  /* Do the cloning (and draw crosshairs at new source position) */
+  clone_doit(api, which, canvas, clone_last, ox, oy, x, y, update_rect, 1);
+}
+
+void clone_doit(magic_api * api, int which, SDL_Surface * canvas,
+                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect,
+                 int crosshairs)
 {
   if (clone_state != CLONE_CLONING)
     return;
@@ -170,8 +195,8 @@ void clone_drag(magic_api * api, int which, SDL_Surface * canvas,
   clone_drag_start_y = oy;
 
   api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_clone);
-//  do_clone((void *)api, which, canvas, last, x, y);
 
+  /* Move source position relative to mouse motion */
   clone_src_x += (x - ox);
   clone_src_y += (y - oy);
 
@@ -190,10 +215,20 @@ void clone_drag(magic_api * api, int which, SDL_Surface * canvas,
       y = tmp;
     }
 
-  update_rect->x = x - 64;
-  update_rect->y = y - 64;
-  update_rect->w = (ox + 128) - update_rect->x;
-  update_rect->h = (oy + 128) - update_rect->h;
+  if (crosshairs) {
+    clone_crosshairs(api, canvas, clone_src_x, clone_src_y);
+    /* FIXME be more clever */
+    update_rect->x = 0;
+    update_rect->y = 0;
+    update_rect->w = canvas->w;
+    update_rect->h = canvas->h;
+    clone_crosshair_visible = 1;
+  } else {
+    update_rect->x = x - 64;
+    update_rect->y = y - 64;
+    update_rect->w = (ox + 128) - update_rect->x;
+    update_rect->h = (oy + 128) - update_rect->h;
+  }
 
   api->playsound(clone_snd, (x * 255) / canvas->w, 255);
 }
@@ -203,28 +238,67 @@ void clone_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
   if (clone_state == CLONE_READY_TO_START) {
+    /* Step 1 - Picking a source for the clone */
     clone_src_x = x;
     clone_src_y = y;
     clone_state = CLONE_STARTING;
     api->playsound(clone_start_snd, (x * 255) / canvas->w, 255);
+
+    SDL_BlitSurface(last, NULL, clone_last, NULL);
+
+    /* Draw crosshairs at starting source position */
+    clone_crosshairs(api, canvas, clone_src_x, clone_src_y);
+    clone_crosshair_visible = 1;
+    update_rect->x = x - 15;
+    update_rect->y = y - 15;
+    update_rect->w = 32;
+    update_rect->h = 32;
   } else if (clone_state == CLONE_CLONING) {
-    clone_drag(api, which, canvas, last, x, y, x, y, update_rect);
+    /* Step 2 - Starting a clone (hopefully holding mouse down here) */
+    clone_doit(api, which, canvas, clone_last, x, y, x, y, update_rect, 0);
   }
 }
 
 void clone_release(magic_api * api, int which ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                    SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED,
+                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect)
 {
   if (clone_state == CLONE_STARTING) {
+    /* Release of the initial click (to pick initial source position);
+       now ready for second click (to begin cloning) */
     clone_state = CLONE_CLONING;
   } else {
-    clone_state = CLONE_READY_TO_START;
-    api->stopsound();
+    done_cloning(api, canvas, update_rect);
   }
 }
 
-// No setup happened:
+void done_cloning(magic_api * api, SDL_Surface * canvas, SDL_Rect * update_rect) {
+  /* Done cloning! */
+
+  /* Erase crosshairs from source position, now that we're all done */
+  if (clone_crosshair_visible)
+    {
+      clone_crosshairs(api, canvas, clone_src_x, clone_src_y);
+      update_rect->x = clone_src_x - 15;
+      update_rect->y = clone_src_y - 15;
+      update_rect->w = 32;
+      update_rect->h = 32;
+      clone_crosshair_visible = 0;
+    }
+
+  clone_state = CLONE_READY_TO_START;
+  api->stopsound();
+}
+
+void clone_crosshairs(magic_api * api, SDL_Surface * canvas, int x, int y) {
+  int i;
+
+  for (i = -15; i < 16; i++) {
+    api->xorpixel(canvas, x + i, y);
+    api->xorpixel(canvas, x, y + i);
+  }
+}
+
 void clone_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 {
   if (clone_snd != NULL)
@@ -233,12 +307,10 @@ void clone_shutdown(magic_api * api ATTRIBUTE_UNUSED)
     Mix_FreeChunk(clone_start_snd);
 }
 
-// Record the color from Tux Paint:
 void clone_set_color(magic_api * api ATTRIBUTE_UNUSED, Uint8 ATTRIBUTE_UNUSED r, Uint8 ATTRIBUTE_UNUSED g, Uint8 ATTRIBUTE_UNUSED b)
 {
 }
 
-// Use colors:
 int clone_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
@@ -247,13 +319,22 @@ int clone_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_
 void clone_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
                      int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
+  clone_last = SDL_CreateRGBSurface(0, canvas->w, canvas->h, canvas->format->BitsPerPixel,
+                                    canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask,
+                                    canvas->format->Amask);
+
   clone_state = CLONE_READY_TO_START;
 }
 
-void clone_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void clone_switchout(magic_api * api, int which ATTRIBUTE_UNUSED,
+                      int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
 {
-  clone_state = CLONE_READY_TO_START;
+  SDL_Rect update_rect; /* Needed to satisfy done_cloning() :-( */
+
+  done_cloning(api, canvas, &update_rect);
+
+  if (clone_last != NULL)
+    SDL_FreeSurface(clone_last);
 }
 
 int clone_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)

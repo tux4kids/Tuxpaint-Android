@@ -5,7 +5,7 @@ individual HTML files for each of them, and an index.html that links to
 them all. */
 
 /* Bill Kendrick <bill@newbreedsoftware.com> */
-/* Oct. 8, 2009 - January 10, 2020 */
+/* Oct. 8, 2009 - February 15, 2020 */
 
 
 /* Authors of the Magic tools: */
@@ -78,6 +78,10 @@ $tools = array(
 
   array('name'=>'Chalk',
    'desc'=>'This makes parts of the picture (where you move the mouse) look like a chalk drawing.',
+   'author'=>$AUTHOR_KENDRICK),
+
+  array('name'=>'Checkerboard',
+   'desc'=>'This covers the entire canvas with a checkboard pattern using the current color. Drag to change the size of the squares.',
    'author'=>$AUTHOR_KENDRICK),
 
   array('name'=>'Clone',

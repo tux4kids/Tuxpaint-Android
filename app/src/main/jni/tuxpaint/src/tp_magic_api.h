@@ -127,6 +127,9 @@ typedef struct magic_api_t {
      SDL_MustLockSurface() can tell you whether a surface needs to be locked. */
   void (*putpixel)(SDL_Surface *, int, int, Uint32);
 
+  /* XOR's the pixel at (x,y) location of the surface. */
+  Uint32 (*xorpixel)(SDL_Surface *, int, int);
+
   /* Asks Tux Paint to play a sound (one loaded via SDL_mixer library);
      the first value is for left/right panning (0 is left, 128 is center,
      255 is right); the second value is for total volume (0 is off, 255 is
@@ -176,7 +179,7 @@ typedef struct magic_api_t {
    If Tux Paint deems you compatible, it will call your 'XYZ_init()' (etc.)
    and you will be active. */
 
-#define TP_MAGIC_API_VERSION 0x00000003
+#define TP_MAGIC_API_VERSION 0x00000004
 
 #ifndef ATTRIBUTE_UNUSED
 #define ATTRIBUTE_UNUSED __attribute__ ((__unused__))

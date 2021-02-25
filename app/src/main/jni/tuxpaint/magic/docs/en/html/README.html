@@ -12,7 +12,7 @@ alink="#FF00FF">
 <p>Copyright 2007-2018 by various contributors; see AUTHORS.txt<br/>
 <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a></p>
 
-<p>July 5, 2007 - August 30, 2018</p>
+<p>July 5, 2007 - February 20, 2021</p>
 </center>
 
 <hr size=2 noshade>
@@ -495,6 +495,15 @@ plugin's functions.
   (You can use SDL's "SDL_MapRGB()" function to convert a set of Uint8
   RGB values to a Uint32 'pixel' value appropriate to the destination
   surface.)<br>
+  <br>
+
+<li><code><b>Uint32 xorpixel(SDL_Surface&nbsp;*&nbsp;surf,
+  int&nbsp;x, int&nbsp;y)</b></code><br>
+  Applies an XOR (exclusive-or) operation to the pixel at coordinates
+  (x,y) of the SDL_Surface.  Applying an XOR again at the same position
+  will return the pixel to the original value.  Useful for displaying
+  temporary 'rubberband' lines, outlines, and crosshairs, while
+  utilizing a Magic Tool.<br>
   <br>
 
 <li><code><b>SDL_Surface * scale(SDL_Surface&nbsp;*&nbsp;surf,

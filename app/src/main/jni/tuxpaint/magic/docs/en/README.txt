@@ -3,7 +3,7 @@
           Copyright 2007-2018 by various contributors; see AUTHORS.txt
                             http://www.tuxpaint.org/
 
-                         July 5, 2007 - August 30, 2018
+                        July 5, 2007 - February 20, 2021
 
      ----------------------------------------------------------------------
 
@@ -392,6 +392,13 @@ Interfaces
              RGB values to a Uint32 'pixel' value appropriate to the
              destination surface.)
 
+           * Uint32 xorpixel(SDL_Surface * surf, int x, int y)
+             Applies an XOR (exclusive-or) operation to the pixel at
+             coordinates (x,y) of the SDL_Surface. Applying an XOR again at
+             the same position will return the pixel to the original value.
+             Useful for displaying temporary 'rubberband' lines, outlines,
+             and crosshairs, while utilizing a Magic Tool.
+
            * SDL_Surface * scale(SDL_Surface * surf, int w, int h,
              int keep_aspect)
              This accepts an existing SDL surface and creates a new one
@@ -648,12 +655,12 @@ Compiling
          A snippet from a Makefile to compile a Tux Paint "Magic" tool plugin
          might look like this:
 
-           +----------------------------------------------------------------+
-           | CFLAGS=-Wall -O2 $(shell tp-magic-config --cflags)             |
-           |                                                                |
-           | my_plugin.so: my_plugin.c                                      |
-           |    gcc -shared $(CFLAGS) -o my_plugin.so my_plugin.c           |
-           +----------------------------------------------------------------+
+           +------------------------------------------------------+
+           | CFLAGS=-Wall -O2 $(shell tp-magic-config --cflags)   |
+           |                                                      |
+           | my_plugin.so: my_plugin.c                            |
+           |    gcc -shared $(CFLAGS) -o my_plugin.so my_plugin.c |
+           +------------------------------------------------------+
 
          The first line sets up Makefile variable ("CFLAGS") that contains
          flags for the compiler. "-Wall" asks for all compiler warnings to be
@@ -683,15 +690,15 @@ Compiling
 
          An even more generalized Makefile might look like this:
 
-           +----------------------------------------------------------------+
-           | CFLAGS=-Wall -O2 $(shell tp-magic-config --cflags)             |
-           |                                                                |
-           | my_plugin_1.so: my_plugin_1.c                                  |
-           |    $(CC) -shared $(CFLAGS) -o $@ $<                            |
-           |                                                                |
-           | my_plugin_2.so: my_plugin_2.c                                  |
-           |    $(CC) -shared $(CFLAGS) -o $@ $<                            |
-           +----------------------------------------------------------------+
+           +----------------------------------------------------+
+           | CFLAGS=-Wall -O2 $(shell tp-magic-config --cflags) |
+           |                                                    |
+           | my_plugin_1.so: my_plugin_1.c                      |
+           |    $(CC) -shared $(CFLAGS) -o $@ $<                |
+           |                                                    |
+           | my_plugin_2.so: my_plugin_2.c                      |
+           |    $(CC) -shared $(CFLAGS) -o $@ $<                |
+           +----------------------------------------------------+
 
          As before, there are lines that define the command "make" should run
          when it determines that it needs to (re)compile the ".so" file(s).
@@ -799,35 +806,35 @@ Installing
 
          A snippet from a more generalized Makefile might look like this:
 
-           +----------------------------------------------------------------+
-           | PLUGINPREFIX=$(shell tp-magic-config --pluginprefix)           |
-           | PLUGINDOCPREFIX=$(shell tp-magic-config --plugindocprefix)     |
-           | DATAPREFIX=$(shell tp-magic-config --dataprefix)               |
-           |                                                                |
-           | install:                                                       |
-           |    #                                                           |
-           |    # Install plugin                                            |
-           |    mkdir -p $(PLUGINPREFIX)                                    |
-           |    cp *.so $(PLUGINPREFIX)/                                    |
-           |    chmod 644 $(PLUGINPREFIX)/*.so                              |
-           |    #                                                           |
-           |    # Install icons                                             |
-           |    mkdir -p $(DATAPREFIX)/images/magic                         |
-           |    cp icons/*.png $(DATAPREFIX)/images/magic/                  |
-           |    chmod 644 $(DATAPREFIX)/images/magic/*.png                  |
-           |    #                                                           |
-           |    # Install sound effects                                     |
-           |    mkdir -p $(DATAPREFIX)/sounds/magic                         |
-           |    cp sounds/*.ogg $(DATAPREFIX)/sounds/magic/                 |
-           |    chmod 644 $(DATAPREFIX)/sounds/magic/*.ogg                  |
-           |    #                                                           |
-           |    # Install docs                                              |
-           |    mkdir -p $(PLUGINDOCPREFIX)/html                            |
-           |    cp docs/*.html $(PLUGINDOCPREFIX)/html/                     |
-           |    cp docs/*.txt $(PLUGINDOCPREFIX)/                           |
-           |    chmod 644 $(PLUGINDOCPREFIX)/html/*.html                    |
-           |    chmod 644 $(PLUGINDOCPREFIX)/*.txt                          |
-           +----------------------------------------------------------------+
+           +------------------------------------------------------------+
+           | PLUGINPREFIX=$(shell tp-magic-config --pluginprefix)       |
+           | PLUGINDOCPREFIX=$(shell tp-magic-config --plugindocprefix) |
+           | DATAPREFIX=$(shell tp-magic-config --dataprefix)           |
+           |                                                            |
+           | install:                                                   |
+           |    #                                                       |
+           |    # Install plugin                                        |
+           |    mkdir -p $(PLUGINPREFIX)                                |
+           |    cp *.so $(PLUGINPREFIX)/                                |
+           |    chmod 644 $(PLUGINPREFIX)/*.so                          |
+           |    #                                                       |
+           |    # Install icons                                         |
+           |    mkdir -p $(DATAPREFIX)/images/magic                     |
+           |    cp icons/*.png $(DATAPREFIX)/images/magic/              |
+           |    chmod 644 $(DATAPREFIX)/images/magic/*.png              |
+           |    #                                                       |
+           |    # Install sound effects                                 |
+           |    mkdir -p $(DATAPREFIX)/sounds/magic                     |
+           |    cp sounds/*.ogg $(DATAPREFIX)/sounds/magic/             |
+           |    chmod 644 $(DATAPREFIX)/sounds/magic/*.ogg              |
+           |    #                                                       |
+           |    # Install docs                                          |
+           |    mkdir -p $(PLUGINDOCPREFIX)/html                        |
+           |    cp docs/*.html $(PLUGINDOCPREFIX)/html/                 |
+           |    cp docs/*.txt $(PLUGINDOCPREFIX)/                       |
+           |    chmod 644 $(PLUGINDOCPREFIX)/html/*.html                |
+           |    chmod 644 $(PLUGINDOCPREFIX)/*.txt                      |
+           +------------------------------------------------------------+
 
          The first three lines set up Makefile variables that contain the
          paths returned by the "tp-magic-config" command-line tool. (The

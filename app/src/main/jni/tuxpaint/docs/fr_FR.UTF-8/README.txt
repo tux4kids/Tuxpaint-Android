@@ -6,7 +6,7 @@
            Copyright © 2002-2021 by various contributors; cf AUTHORS.
                             http://www.tuxpaint.org/
 
-                                 2 février 2021
+                                20 février 2021
 
      ----------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ What Is "Tux Paint"?
        they use the program. It provides a blank canvas and a variety of
        drawing tools to help your child be creative.
 
-License:
+Licence :
 
        Tux Paint is an Open Source project, Free Software released under the
        GNU General Public License (GPL). It is free, and the 'source code'
@@ -103,8 +103,8 @@ Launching Tux Paint
 
   Windows Users
 
-                                                            [Tux Paint Icon]  
-                                                               Tux Paint      
+                                                      [Icône pour Tux Paint]  
+                                                            Tux Paint         
 
          If you installed Tux Paint on your computer using the 'Tux Paint
          Installer,' it will have asked you whether you wanted a 'Start' menu
@@ -419,10 +419,19 @@ Available Tools
          "Fill" Tool
 
                  The 'Fill' tool 'flood-fills' a contiguous area of your
-                 drawing with a solid color of your choice.
+                 drawing with a color of your choice. Three fill options are
+                 offered:
+                    * Solid — click once to fill an area with a solid color.
+                    * Linear — click and then drag to fill the area with
+                      color that fades away (a gradient) towards where you
+                      drag the mouse.
+                    * Radial — click once to fill an area with a color that
+                      fades away (a gradient) radially, centered on where you
+                      clicked.
 
                  Note: Prior to Tux Paint 0.9.24, this was a Magic tool (see
-                 below).
+                 below). Note: Prior to Tux Paint 0.9.26, this tool only
+                 offered the 'Solid' method of filling.
 
      ----------------------------------------------------------------------
 
@@ -874,7 +883,7 @@ Using the import script, "tuxpaint-import"
        Example:
 
          $ tuxpaint-import grandma.jpg
-         grandma.jpg -> /home/username/.tuxpaint/saved/20210212093342.png
+         grandma.jpg -> /home/username/.tuxpaint/saved/20210220203557.png
          jpegtopnm: WRITING A PPM FILE
 
        The first line ("tuxpaint-import grandma.jpg") is the command to run.
@@ -916,7 +925,7 @@ Importing Pictures Manually
          * mm = Minute (two digits, "00"-"59")
          * ss = Seconds (two digits, "00"-"59")
 
-       Example: "20210212093342.png", for 12 février 2021 at 09:33:42.
+       Example: "20210220203557.png", for 20 février 2021 at 20:35:57.
 
        Place this PNG file in your Tux Paint "saved" directory/folder. (See
        above.)
@@ -935,7 +944,7 @@ Importing Pictures Manually
 
      Other documentation included with Tux Paint (found in the "docs"
      folder/directory) includes:
-       * 'Magic' Tool Documentation ("magic-docs")
+       * Documentation sur l'outil 'Magie' ("magic-docs")
          Documentation for each of the currently-installed 'Magic' tools.
        * AUTHORS.txt
          List of authors and contributors.

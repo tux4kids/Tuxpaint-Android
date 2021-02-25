@@ -6,7 +6,7 @@
     Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
-                                2 Febreiro 2021
+                                20 Febreiro 2021
 
      ----------------------------------------------------------------------
 
@@ -420,10 +420,19 @@ Ferramentas dispoñíbeis
          Ferramenta «Encher»
 
                  The 'Fill' tool 'flood-fills' a contiguous area of your
-                 drawing with a solid color of your choice.
+                 drawing with a color of your choice. Three fill options are
+                 offered:
+                    * Solid — click once to fill an area with a solid color.
+                    * Linear — click and then drag to fill the area with
+                      color that fades away (a gradient) towards where you
+                      drag the mouse.
+                    * Radial — click once to fill an area with a color that
+                      fades away (a gradient) radially, centered on where you
+                      clicked.
 
                  Note: Prior to Tux Paint 0.9.24, this was a Magic tool (see
-                 below).
+                 below). Note: Prior to Tux Paint 0.9.26, this tool only
+                 offered the 'Solid' method of filling.
 
      ----------------------------------------------------------------------
 
@@ -877,7 +886,7 @@ Using the import script, "tuxpaint-import"
        Exemplo:
 
          $ tuxpaint-import avoa.jpg
-         avoa.jpg -> /home/username/.tuxpaint/saved/20210210232156.png
+         avoa.jpg -> /home/username/.tuxpaint/saved/20210220203557.png
          jpegtopnm: WRITING A PPM FILE
 
        The first line ("tuxpaint-import avoa.jpg") is the command to run. The
@@ -918,7 +927,7 @@ Importing Pictures Manually
          * mm = Minuto (dous díxitos, «00»-«59»)
          * ss = Segundo (dous díxitos, «00»-«59»)
 
-       Example: "20210210232156.png", for 10 Febreiro 2021 at 23:21:56.
+       Example: "20210220203557.png", for 20 Febreiro 2021 at 20:35:57.
 
        Place this PNG file in your Tux Paint "saved" directory/folder. (See
        above.)

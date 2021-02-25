@@ -1,10 +1,10 @@
 # Tux Paint - A simple drawing program for children.
 
-# Copyright (c) 2002-2020
+# Copyright (c) 2002-2021
 # Various contributors (see AUTHORS.txt)
 # http://www.tuxpaint.org/
 
-# June 14, 2002 - December 27, 2020
+# June 14, 2002 - February 20, 2021
 
 
 # The version number, for release:
@@ -15,7 +15,7 @@ ifdef SOURCE_DATE_EPOCH
 else
   VER_DATE=$(shell date "+%Y-%m-%d")
 endif
-MAGIC_API_VERSION:=0x00000003
+MAGIC_API_VERSION:=0x00000004
 
 # Need to know the OS
 
@@ -131,7 +131,7 @@ FRIBIDI_LIB:=$(shell $(PKG_CONFIG) --libs fribidi)
 FRIBIDI_CFLAGS:=$(shell $(PKG_CONFIG) --cflags fribidi)
 
 windows_ARCH_LINKS:=-lgdi32 -lcomdlg32 $(PNG) -lz -lwinspool -lshlwapi $(FRIBIDI_LIB) -liconv -limagequant
-macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant
+macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant -lSDLmain -Wl,-framework,AppKit -Wl,-framework,Cocoa
 beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(PAPER_LIB) $(STDC_LIB) -limagequant
 linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
 ARCH_LINKS:=$($(OS)_ARCH_LINKS)
@@ -1064,7 +1064,8 @@ tuxpaint:	obj/tuxpaint.o obj/i18n.o obj/im.o obj/cursor.o obj/pixels.o \
 
 obj/tuxpaint.o:	src/tuxpaint.c \
 		src/i18n.h src/im.h src/cursor.h src/pixels.h \
-		src/rgblinear.h src/playsound.h src/fonts.h src/fill.h \
+		src/rgblinear.h src/playsound.h src/fonts.h \
+		src/fill.h src/fill_tools.h \
 		src/progressbar.h src/dirwalk.h src/get_fname.h \
 		src/compiler.h src/debug.h \
 		src/tools.h src/titles.h src/colors.h src/shapes.h \
@@ -1255,7 +1256,7 @@ obj:
 ######
 
 MAGIC_SDL_CPPFLAGS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --cflags)
-MAGIC_SDL_LIBS:=-L/usr/local/lib $(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL_image -lSDL_ttf $(SDL_MIXER_LIB)
+MAGIC_SDL_LIBS:=-L/usr/local/lib $(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
 MAGIC_ARCH_LINKS:=-lintl $(PNG)
 
 windows_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)

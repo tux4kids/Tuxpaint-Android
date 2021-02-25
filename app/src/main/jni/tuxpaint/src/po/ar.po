@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-11 09:03-0800\n"
+"POT-Creation-Date: 2021-02-20 20:40-0800\n"
 "PO-Revision-Date: 2008-10-07 14:54+0200\n"
 "Last-Translator: none\n"
 "Language-Team: none\n"
@@ -194,6 +194,38 @@ msgstr ""
 msgid "<9>spare-9b"
 msgstr ""
 
+#: ../fill_tools.h:49
+msgid "Solid"
+msgstr ""
+
+#: ../fill_tools.h:50
+#, fuzzy
+#| msgid "Lines"
+msgid "Linear"
+msgstr "خطوط"
+
+#: ../fill_tools.h:51
+msgid "Radial"
+msgstr ""
+
+#: ../fill_tools.h:55
+#, fuzzy
+#| msgid "Click in the picture to fill that area with color."
+msgid "Click to fill an area with a solid color."
+msgstr "انقر على الصورةِ لمَلْئ تلك المنطقةِ باللونِ."
+
+#: ../fill_tools.h:56
+msgid ""
+"Click and drag to fill an area with a linear gradient (from the chosen color "
+"to transparent)."
+msgstr ""
+
+#: ../fill_tools.h:57
+msgid ""
+"Click to fill an area with a radial gradient (from the chosen color to "
+"transparent)."
+msgstr ""
+
 #. Congratulations #1
 #: ../great.h:37
 msgid "Great!"
@@ -354,46 +386,53 @@ msgid "Draw shapes from a corner."
 msgstr ""
 
 #. Title of tool selector (buttons down the left)
-#: ../titles.h:56
+#: ../titles.h:57
 msgid "Tools"
 msgstr "أدوات"
 
 #. Title of color palette (buttons across the bottom)
-#: ../titles.h:59
+#: ../titles.h:60
 msgid "Colors"
 msgstr "ألوان"
 
 #. Title of brush selector (buttons down the right for paint and line tools)
-#: ../titles.h:62
+#: ../titles.h:63
 msgid "Brushes"
 msgstr "فرشاة"
 
 #. Title of eraser selector (buttons down the right for eraser tool)
-#: ../titles.h:65
+#: ../titles.h:66
 msgid "Erasers"
 msgstr "مِمْحايات"
 
 #. Title of stamp selector (buttons down the right for stamps tool)
-#: ../titles.h:68
+#: ../titles.h:69
 msgid "Stamps"
 msgstr "أختام"
 
 #. Title of shape selector (buttons down the right for shapes tool)
 #. Shape creation tool (square, circle, etc.)
-#: ../titles.h:71 ../tools.h:71
+#: ../titles.h:72 ../tools.h:71
 msgid "Shapes"
 msgstr "أشكال"
 
 #. Title of font selector (buttons down the right for text and label tools)
-#: ../titles.h:74
+#: ../titles.h:75
 msgid "Letters"
 msgstr "حروف"
 
 #. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
 #. "Magic" effects tools (blur, flip image, etc.)
-#: ../titles.h:77 ../tools.h:83
+#: ../titles.h:78 ../tools.h:83
 msgid "Magic"
 msgstr "سحر"
+
+#. Title of fill selector (buttons down the right for fill tool)
+#: ../titles.h:81
+#, fuzzy
+#| msgid "Fill"
+msgid "Fills"
+msgstr "املأ"
 
 #. Freehand painting tool
 #: ../tools.h:62
@@ -447,9 +486,9 @@ msgstr "جديد"
 
 # أزرار لأوامر فتح الملف
 #. Open a saved picture
-#. buttons for the file open dialog
+#. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7949
+#: ../tools.h:98 ../tuxpaint.c:8105
 msgid "Open"
 msgstr "افتح"
 
@@ -587,235 +626,235 @@ msgstr "إذن …  دعنا نَستمرُّ برسَم هذا الشكل"
 
 # FIXME: تحرّكُ الي مكان آخر! ! !
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2141
+#: ../tuxpaint.c:2161
 msgid "Do you really want to quit?"
 msgstr "أتُريدُ حقاً الخروج؟"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2144
+#: ../tuxpaint.c:2164
 msgid "Yes, I’m done!"
 msgstr "نعم، لقد انتهيت"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2147 ../tuxpaint.c:2174
+#: ../tuxpaint.c:2167 ../tuxpaint.c:2194
 msgid "No, take me back!"
 msgstr "لا، عُد بي ثانية"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2151
+#: ../tuxpaint.c:2171
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "إذا خرجت الآن، ستفقد صورتك أتريد حفظها؟"
 
-#: ../tuxpaint.c:2152 ../tuxpaint.c:2157
+#: ../tuxpaint.c:2172 ../tuxpaint.c:2177
 msgid "Yes, save it!"
 msgstr "نعم، احفظها الآن"
 
-#: ../tuxpaint.c:2153 ../tuxpaint.c:2158
+#: ../tuxpaint.c:2173 ../tuxpaint.c:2178
 #, fuzzy
 #| msgid "No, don't bother saving!"
 msgid "No, don’t bother saving!"
 msgstr "لا، لا تهتم بحفظها"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2156
+#: ../tuxpaint.c:2176
 msgid "Save your picture first?"
 msgstr "أأحفظ صورتك أولاً؟"
 
 #. Error opening picture
-#: ../tuxpaint.c:2161
+#: ../tuxpaint.c:2181
 msgid "Can’t open that picture!"
 msgstr "لايمكن فتح هذه الصورة"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2164 ../tuxpaint.c:2169 ../tuxpaint.c:2178 ../tuxpaint.c:2185
-#: ../tuxpaint.c:2194 ../tuxpaint.c:2199
+#: ../tuxpaint.c:2184 ../tuxpaint.c:2189 ../tuxpaint.c:2198 ../tuxpaint.c:2205
+#: ../tuxpaint.c:2214 ../tuxpaint.c:2219
 msgid "OK"
 msgstr "موافق"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2168
+#: ../tuxpaint.c:2188
 msgid "There are no saved files!"
 msgstr "لايوجد أي ملف محفوظ"
 
 #. Verification of print action
-#: ../tuxpaint.c:2172
+#: ../tuxpaint.c:2192
 msgid "Print your picture now?"
 msgstr "أأطبع صورتك الآن؟"
 
-#: ../tuxpaint.c:2173
+#: ../tuxpaint.c:2193
 msgid "Yes, print it!"
 msgstr "نعم، اطبع الصورة"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2177
+#: ../tuxpaint.c:2197
 msgid "Your picture has been printed!"
 msgstr "لقد طُبِعت صورتك"
 
 #. We got an error printing
-#: ../tuxpaint.c:2181
+#: ../tuxpaint.c:2201
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Sorry! Your picture could not be printed!"
 msgstr "لقد طُبِعت صورتك"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2184
+#: ../tuxpaint.c:2204
 msgid "You can’t print yet!"
 msgstr "لا يمكنك الطبع الآن"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2188
+#: ../tuxpaint.c:2208
 msgid "Erase this picture?"
 msgstr "أتريد مسح هذه الصورة؟"
 
-#: ../tuxpaint.c:2189
+#: ../tuxpaint.c:2209
 msgid "Yes, erase it!"
 msgstr "نعم، امسحه"
 
-#: ../tuxpaint.c:2190
+#: ../tuxpaint.c:2210
 #, fuzzy
 #| msgid "No, don't erase it!"
 msgid "No, don’t erase it!"
 msgstr "لا، لاتمسحه"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2193
+#: ../tuxpaint.c:2213
 msgid "Remember to use the left mouse button!"
 msgstr "تذكر استخدام زر الفأرة الأيسر"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2197
+#: ../tuxpaint.c:2217
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "لقد طُبِعت صورتك"
 
-#: ../tuxpaint.c:2198
+#: ../tuxpaint.c:2218
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "لقد طُبِعت صورتك"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2202
+#: ../tuxpaint.c:2222
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "لقد طُبِعت صورتك"
 
-#: ../tuxpaint.c:2203
+#: ../tuxpaint.c:2223
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "لقد طُبِعت صورتك"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2207
+#: ../tuxpaint.c:2227
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "اختر الصورة التي تريد، ثم انقر ”شغّل“."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2416
+#: ../tuxpaint.c:2436
 msgid "Sound muted."
 msgstr "بلا صوت"
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2421
+#: ../tuxpaint.c:2441
 msgid "Sound unmuted."
 msgstr "شغل الصوت"
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3190
+#: ../tuxpaint.c:3218
 msgid "Please wait…"
 msgstr "من فضلك انتظر..."
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7952
+#: ../tuxpaint.c:8108
 msgid "Erase"
 msgstr "امسح"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7955
+#: ../tuxpaint.c:8111
 msgid "Slides"
 msgstr "شرائح"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:7958
+#: ../tuxpaint.c:8114
 msgid "Export"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7961
+#: ../tuxpaint.c:8117
 msgid "Back"
 msgstr "الخلف"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7964
+#: ../tuxpaint.c:8120
 msgid "Play"
 msgstr "شغّل"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:7967
+#: ../tuxpaint.c:8123
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7970
+#: ../tuxpaint.c:8126
 msgid "Next"
 msgstr "التالي"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8685
+#: ../tuxpaint.c:8874
 msgid "Aa"
 msgstr "انتبه"
 
 # FIXME: Move elsewhere! Or not?!
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12179
+#: ../tuxpaint.c:12515
 msgid "Yes"
 msgstr "نعم"
 
-#: ../tuxpaint.c:12183
+#: ../tuxpaint.c:12519
 msgid "No"
 msgstr "لا"
 
 # #define PROMPT_SAVE_OVER_TXT gettext_noop("Save over the older version of this picture?")
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:13309
+#: ../tuxpaint.c:13658
 msgid "Replace the picture with your changes?"
 msgstr "أأستبدل الصورة بتعديلاتك؟"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:13313
+#: ../tuxpaint.c:13662
 msgid "Yes, replace the old one!"
 msgstr "نعم، استبدل الملف القديم"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:13317
+#: ../tuxpaint.c:13666
 msgid "No, save a new file!"
 msgstr "لا، احفظ باسم جديد"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:14573
+#: ../tuxpaint.c:14929
 msgid "Choose the picture you want, then click “Open”."
 msgstr "اختر الصورة التي تريد، ثم انقر على ”فتح“."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:15999
+#: ../tuxpaint.c:16355
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
-#: ../tuxpaint.c:23670
+#: ../tuxpaint.c:24060
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:23682
+#: ../tuxpaint.c:24072
 msgid "Pick a color."
 msgstr "اختر لون"
 
@@ -851,13 +890,13 @@ msgstr "انقر وحرك الفأره  لتغيير لون أجزاء من صو
 msgid "Click to change the colors in your entire picture."
 msgstr "انقر لتغير لون كل الصوره"
 
-#: ../../magic/src/blind.c:116
+#: ../../magic/src/blind.c:115
 #, fuzzy
 #| msgid "Alien"
 msgid "Blind"
 msgstr "مخالف, دخيل"
 
-#: ../../magic/src/blind.c:123
+#: ../../magic/src/blind.c:122
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
@@ -946,11 +985,21 @@ msgstr "كرتون , كاريكاتور"
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr "انقر وحرّكُ الفأرة على الصورة لتحويلها إلى رسمة كرتونية."
 
-#: ../../magic/src/clone.c:121
+#: ../../magic/src/checkerboard.c:99
+msgid "Checkerboard"
+msgstr ""
+
+#: ../../magic/src/checkerboard.c:106
+#, fuzzy
+#| msgid "Click and drag to draw train track rails on your picture."
+msgid "Click and drag to fill the canvas with a checkerboard pattern."
+msgstr "انقر واسحب لوضع مسار من قضبان القطار علي صورتك"
+
+#: ../../magic/src/clone.c:132
 msgid "Clone"
 msgstr ""
 
-#: ../../magic/src/clone.c:127
+#: ../../magic/src/clone.c:138
 msgid ""
 "Click once to pick a spot to begin cloning. Click again and drag to clone "
 "that part of the picture."

@@ -1,13 +1,12 @@
 /*
   blind.c
-//
+
   BLIND Magic Tools Plugin
   Tux Paint - A simple drawing program for children.
 
   By Pere Pujal Carabantes
 
-  Copyright (c) 2002-2009 by Bill Kendrick and others; see AUTHORS.txt
-  bill@newbreedsoftware.com
+  Copyright (c) 2009-2021
   http://www.tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -275,20 +274,20 @@ void blind_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 
     {
       if (x < y)
-        blind_side = 1;         /* left */
+        blind_side = BLIND_SIDE_LEFT;
       else if (canvas->w - x < y)
-        blind_side = 3;         /* right */
+        blind_side = BLIND_SIDE_RIGHT;
       else
-        blind_side = 0;         /* top */
+        blind_side = BLIND_SIDE_TOP;
     }
   else
     {
       if (x < canvas->h - y)
-        blind_side = 1;         /* left */
+        blind_side = BLIND_SIDE_LEFT;
       else if (canvas->w - x < canvas->h - y)
-        blind_side = 3;         /* right */
+        blind_side = BLIND_SIDE_RIGHT;
       else
-        blind_side = 2;         /* bottom */
+        blind_side = BLIND_SIDE_BOTTOM;
     }
 
   blind_drag(api, which, canvas, last, x, y, x, y, update_rect);

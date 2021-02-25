@@ -8,24 +8,36 @@ http://www.tuxpaint.org/
 
 $Id$
 
-2021.February.10 (0.9.26)
+2021.February.20 (0.9.26)
   * New Features
     ------------
-    * [WIP] Larger UI buttons
+    * Larger UI buttons
       Pere Pujal i Carabantes <pere@fornol.no-ip.org>
 
     * It's now possible to increase how many rows of buttons are shown
       for the color palette at the bottom of the screen.
       (Use the "colorsrows" option.)
       Pere Pujal i Carabantes <pere@fornol.no-ip.org>
-      
+
+    * Adding sub-tools to the Fill tool:
+      + Solid -- The classic fill tool; click to fill 
+      + Linear -- A linear gradient; click and drag to adjust,
+        release mouse to finish
+      + Radial -- A radial gradient; click to fill
+      (The gradients transition from the current color to the
+      background that's being filled.)
+
   * New Magic Tools:
     ----------------
-    * Pixels
-      Draws large squares, for classic computer 'pixel art' style drawings.
+    * Checkerboard
+      Cover the entire canvas with a checkboard pattern using the
+      current color.  Drag to change the size of the squares.
 
     * Clone
       Clones (copies, via painting) part of a drawing to another position.
+
+    * Pixels
+      Draws large squares, for classic computer 'pixel art' style drawings.
 
   * Documentation updates
     ---------------------
@@ -35,6 +47,9 @@ $Id$
       these docs, which contain a variety of minor updates (and also a
       few which had previously only been available as plain TXT are now
       available as HTML).
+
+      + French translation
+        Jacques Chion <jacques.chion@orange.fr>
 
       + Galician
         Miguel Anxo Bouzada <mbouzada@gmail.com>
@@ -65,6 +80,15 @@ $Id$
     --------------------
     * Galician translation
       Miguel Bouzada <mbouzada@gmail.com>
+
+  * Magic Tool Improvememnts:
+    -------------------------
+    * A new "xorpixel()" function has been added to the Magic Tools API.
+
+  * Bug Fixes:
+    ----------
+    * Halftone magic tool wasn't loading due to a problem
+      with its sound effect file.
 
 2020.December.27 (0.9.25)
   * New Features

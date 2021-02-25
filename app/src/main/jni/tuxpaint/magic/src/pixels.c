@@ -73,7 +73,7 @@ int pixels_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/sounds/magic/pixels.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/pixels.ogg", api->data_directory);
   pixel_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -95,7 +95,7 @@ SDL_Surface *pixels_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%s/images/magic/pixels.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/pixels.png", api->data_directory);
 
   return (IMG_Load(fname));
 }

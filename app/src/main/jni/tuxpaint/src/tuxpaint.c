@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - January 26, 2021
+  June 14, 2002 - February 20, 2021
 */
 
 
@@ -530,6 +530,7 @@ static void mtw(wchar_t * wtok, char *tok)
 #include "great.h"
 
 #include "fill.h"
+#include "fill_tools.h"
 
 #include "im.h"
 
@@ -775,6 +776,7 @@ static int WINDOW_HEIGHT = 600;
 
 static void magic_putpixel(SDL_Surface * surface, int x, int y, Uint32 pixel);
 static Uint32 magic_getpixel(SDL_Surface * surface, int x, int y);
+static void magic_xorpixel(SDL_Surface * surface, int x, int y);
 
 /**
  * Sets a variety of screen layout globals, based on the
@@ -1341,6 +1343,9 @@ static int starter_modified;
 
 static Uint8 canvas_color_r, canvas_color_g, canvas_color_b;
 static Uint8 *touched;
+static Uint8 *sim_flood_touched;
+int sim_flood_x1 = 0, sim_flood_y1 = 0, sim_flood_x2 = 0, sim_flood_y2 = 0;
+int fill_x, fill_y;
 static int last_print_time = 0;
 
 static int shape_radius;
@@ -1883,6 +1888,7 @@ static int *brushes_spacing = NULL;
 static short *brushes_directional = NULL;
 
 static SDL_Surface *img_shapes[NUM_SHAPES], *img_shape_names[NUM_SHAPES];
+static SDL_Surface *img_fills[NUM_FILLS], *img_fill_names[NUM_FILLS];
 static SDL_Surface *img_openlabels_open, *img_openlabels_erase,
   *img_openlabels_slideshow, *img_openlabels_back, *img_openlabels_play,
   *img_openlabels_gif_export, *img_openlabels_pict_export, *img_openlabels_next;
@@ -1930,7 +1936,7 @@ static unsigned cur_color;
 static int cur_tool, cur_brush, old_tool;
 static int cur_stamp[MAX_STAMP_GROUPS];
 static int cur_shape, cur_magic;
-static int cur_font, cur_eraser;
+static int cur_font, cur_eraser, cur_fill;
 static int cursor_left, cursor_x, cursor_y, cursor_textwidth;   /* canvas-relative */
 static int old_cursor_x, old_cursor_y;
 static int cur_label, cur_select;
@@ -1941,7 +1947,7 @@ static char template_id[FILENAME_MAX];
 static int brush_scroll;
 static int stamp_scroll[MAX_STAMP_GROUPS];
 static int font_scroll, magic_scroll, tool_scroll;
-static int eraser_scroll, shape_scroll;
+static int eraser_scroll, shape_scroll, fill_scroll;
 
 static int eraser_sound;
 
@@ -2015,11 +2021,13 @@ static void draw_stamps(void);
 static void draw_shapes(void);
 static void draw_erasers(void);
 static void draw_fonts(void);
+static void draw_fills(void);
 static void draw_none(void);
 
 static void do_undo(void);
 static void do_redo(void);
 static void render_brush(void);
+static void _xorpixel(SDL_Surface * surf, int x, int y);
 static void line_xor(int x1, int y1, int x2, int y2);
 static void rect_xor(int x1, int y1, int x2, int y2);
 static void draw_blinking_cursor(void);
@@ -2708,6 +2716,8 @@ static void mainloop(void)
                     draw_shapes();
                   else if (cur_tool == TOOL_ERASER)
                     draw_erasers();
+                  else if (cur_tool == TOOL_FILL)
+                    draw_fills();
 
                   draw_tux_text(TUX_GREAT, tool_tips[cur_tool], 1);
 
@@ -2768,6 +2778,8 @@ static void mainloop(void)
                     draw_shapes();
                   else if (cur_tool == TOOL_ERASER)
                     draw_erasers();
+                  else if (cur_tool == TOOL_FILL)
+                    draw_fills();
 
                   update_screen_rect(&r_toolopt);
                   update_screen_rect(&r_ttoolopt);
@@ -3329,7 +3341,10 @@ static void mainloop(void)
                           else if (cur_tool == TOOL_FILL)
                             {
                               keybd_flag = 0;
-                              draw_none();
+                              cur_thing = cur_fill;
+                              num_things = NUM_FILLS;
+                              thing_scroll = &fill_scroll;
+                              draw_fills();
                               draw_colors(COLORSEL_ENABLE);
                             }
                           else if (cur_tool == TOOL_SHAPES)
@@ -3469,6 +3484,15 @@ static void mainloop(void)
                               draw_erasers();
                               draw_colors(COLORSEL_DISABLE);
                             }
+                          else if (cur_tool == TOOL_FILL)
+                            {
+                              keybd_flag = 0;
+                              cur_thing = cur_fill;
+                              num_things = NUM_FILLS;
+                              thing_scroll = &fill_scroll;
+                              draw_fills();
+                              draw_colors(COLORSEL_DISABLE);
+                            }
                           else if (cur_tool == TOOL_UNDO)
                             {
                               if (cur_undo == newest_undo)
@@ -3549,6 +3573,8 @@ static void mainloop(void)
                                 draw_shapes();
                               else if (cur_tool == TOOL_ERASER)
                                 draw_erasers();
+                              else if (cur_tool == TOOL_FILL)
+                                draw_fills();
                             }
                           else if (cur_tool == TOOL_SAVE)
                             {
@@ -3628,6 +3654,8 @@ static void mainloop(void)
                                 draw_shapes();
                               else if (cur_tool == TOOL_ERASER)
                                 draw_erasers();
+                              else if (cur_tool == TOOL_FILL)
+                                draw_fills();
                             }
                           else if (cur_tool == TOOL_PRINT)
                             {
@@ -3716,7 +3744,8 @@ static void mainloop(void)
                   if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_STAMP ||
                       cur_tool == TOOL_SHAPES || cur_tool == TOOL_LINES ||
                       cur_tool == TOOL_MAGIC || cur_tool == TOOL_TEXT ||
-                      cur_tool == TOOL_ERASER || cur_tool == TOOL_LABEL)
+                      cur_tool == TOOL_ERASER || cur_tool == TOOL_LABEL ||
+                      cur_tool == TOOL_FILL)
                     {
                       int num_rows_needed;
                       SDL_Rect r_controls;
@@ -4321,6 +4350,13 @@ static void mainloop(void)
                           if (do_draw)
                             draw_erasers();
                         }
+                      else if (cur_tool == TOOL_FILL)
+                        {
+                          cur_fill = cur_thing;
+
+                          if (do_draw)
+                            draw_fills();
+                        }
                       else if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
                         {
                           /* FIXME */
@@ -4543,6 +4579,8 @@ static void mainloop(void)
                                 draw_shapes();
                               else if (cur_tool == TOOL_ERASER)
                                 draw_erasers();
+                              else if (cur_tool == TOOL_FILL)
+                                draw_fills();
 
                               playsound(screen, 1, SND_BUBBLE, 1, SNDPOS_CENTER, SNDDIST_NEAR);
 
@@ -4748,21 +4786,65 @@ static void mainloop(void)
                                      color_hexes[cur_color][2]);
                       canv_color = getpixels[canvas->format->BytesPerPixel] (canvas, old_x, old_y);
 
+                      fill_x = old_x;
+                      fill_y = old_y;
+    
                       if (would_flood_fill(canvas, draw_color, canv_color))
                         {
+                          int x1, y1, x2, y2;
+    
                           /* We only bother recording an undo buffer
                              (which may kill our redos) if we're about
                              to actually change the picture */
-                          int x1, y1, x2, y2;
-
                           rec_undo_buffer();
-
                           x1 = x2 = old_x;
                           y1 = y2 = old_y;
+    
+                          if (cur_fill == FILL_FLOOD)
+                            {
+                              /* Flood fill a solid color */
+                              do_flood_fill(canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2);
+    
+                              update_canvas(x1, y1, x2, y2);
+                            }
+                          else
+                            {
+                              SDL_Surface * tmp_canvas;
 
-                          do_flood_fill(canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2);
+                              for (y1 = 0; y1 < canvas->h; y1++) {
+                                for (x1 = 0; x1 < canvas->w; x1++) {
+                                  sim_flood_touched[(y1 * canvas->w) + x1] = 0;
+                                }
+                              }
 
-                          update_canvas(x1, y1, x2, y2);
+                              tmp_canvas = SDL_CreateRGBSurface(canvas->flags,
+                                canvas->w, canvas->h, canvas->format->BitsPerPixel,
+                                canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
+                              SDL_BlitSurface(canvas, NULL, tmp_canvas, NULL);
+
+                              simulate_flood_fill(tmp_canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2, sim_flood_touched);
+                              SDL_FreeSurface(tmp_canvas);
+
+                              sim_flood_x1 = x1;
+                              sim_flood_y1 = y1;
+                              sim_flood_x2 = x2;
+                              sim_flood_y2 = y2;
+
+                              if (cur_fill == FILL_GRADIENT_RADIAL)
+                                {
+                                  /* Radial gradient */
+                                  draw_radial_gradient(canvas, sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2,
+                                    old_x, old_y, draw_color, sim_flood_touched);
+                                }
+                              else if (cur_fill == FILL_GRADIENT_LINEAR)
+                                {
+                                  /* Start a linear gradient */
+                                  draw_linear_gradient(canvas, canvas, sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2,
+                                    fill_x, fill_y, old_x, old_y + 1, draw_color, sim_flood_touched);
+                                }
+
+                              update_canvas(x1, y1, x2, y2);
+                            }
                         }
                     }
                   else if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
@@ -4967,7 +5049,8 @@ static void mainloop(void)
               if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_STAMP ||
                   cur_tool == TOOL_SHAPES || cur_tool == TOOL_LINES ||
                   cur_tool == TOOL_MAGIC || cur_tool == TOOL_TEXT ||
-                  cur_tool == TOOL_ERASER || cur_tool == TOOL_LABEL)
+                  cur_tool == TOOL_ERASER || cur_tool == TOOL_LABEL ||
+                  cur_tool == TOOL_FILL)
                 {
 
                   /* Left tools scroll */
@@ -5147,6 +5230,11 @@ static void mainloop(void)
                         {
                           if (do_draw)
                             draw_erasers();
+                        }
+                      else if (cur_tool == TOOL_FILL)
+                        {
+                          if (do_draw)
+                            draw_fills();
                         }
                       else if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
                         {
@@ -5635,7 +5723,6 @@ static void mainloop(void)
                     do_setcursor(cursor_wand);
                   else if (cur_tool == TOOL_ERASER)
                     do_setcursor(cursor_tiny);
-
                 }
               else
                 {
@@ -5734,6 +5821,30 @@ static void mainloop(void)
 
                       sz = calc_eraser_size(cur_eraser);
                       rect_xor(new_x - sz / 2, new_y - sz / 2, new_x + sz / 2, new_y + sz / 2);
+                    }
+                  else if (cur_tool == TOOL_FILL && cur_fill == FILL_GRADIENT_LINEAR)
+                    {
+                      Uint32 draw_color, canv_color;
+                      int undo_ctr;
+                      SDL_Surface * last;
+
+                      if (cur_undo > 0)
+                        undo_ctr = cur_undo - 1;
+                      else
+                        undo_ctr = NUM_UNDO_BUFS - 1;
+        
+                      last = undo_bufs[undo_ctr];
+
+                      /* Pushing button and moving: Update the gradient: */
+
+                      draw_color = SDL_MapRGB(canvas->format,
+                                     color_hexes[cur_color][0],
+                                     color_hexes[cur_color][1],
+                                     color_hexes[cur_color][2]);
+                      draw_linear_gradient(canvas, last, sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2,
+                        fill_x, fill_y, new_x, new_y, draw_color, sim_flood_touched);
+
+                      update_canvas(sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2);
                     }
                 }
 
@@ -8329,16 +8440,23 @@ static void create_button_labels(void)
 {
   int i;
 
+  /* Main tools */
   for (i = 0; i < NUM_TOOLS; i++)
     img_tool_names[i] = do_render_button_label(tool_names[i]);
 
+  /* Magic Tools */
   for (i = 0; i < num_magics; i++)
     magics[i].img_name = do_render_button_label(magics[i].name);
 
+  /* Shapes for Shape Tool */
   for (i = 0; i < NUM_SHAPES; i++)
     img_shape_names[i] = do_render_button_label(shape_names[i]);
 
-  /* buttons for the file open dialog */
+  /* Fill methods for Fill Tool */
+  for (i = 0; i < NUM_FILLS; i++)
+    img_fill_names[i] = do_render_button_label(fill_names[i]);
+
+  /* Buttons for the file open dialog */
 
   /* Open dialog: 'Open' button, to load the selected picture */
   img_openlabels_open = do_render_button_label(gettext_noop("Open"));
@@ -9236,7 +9354,8 @@ static void draw_fonts(void)
       SDL_BlitSurface(img_italic, NULL, screen, &dest);
 
       most = most + gd_toolopt.cols;
-      printf("most %d\n", most);
+      // printf("most %d\n", most);
+
       /* Show shrink button: */
 
       dest.x = WINDOW_WIDTH - r_ttoolopt.w;
@@ -9700,7 +9819,7 @@ static void draw_shapes(void)
         }
     }
 
-  /* Draw magic controls: */
+  /* Draw shape tool controls: */
 
   if (!disable_shape_controls)
     {
@@ -9763,10 +9882,9 @@ static void draw_erasers(void)
   /* Space for buttons, was 14 */
   most = (buttons_tall * gd_toolopt.cols) - TOOLOFFSET;
 
+  /* Do we need scrollbars? */
 
-    /* Do we need scrollbars? */
-
-  if (NUM_ERASERS > most + TOOLOFFSET)
+  if (NUM_FILLS > most + TOOLOFFSET)
     {
       most = most - gd_toolopt.cols; /* was 12 */
       off_y = img_scroll_up->h;
@@ -9916,6 +10034,96 @@ static void draw_none(void)
 
       SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
     }
+}
+
+/* Draw Fill sub-tools */
+static void draw_fills(void)
+{
+  int i, j, x, y, sz;
+  int xx, yy, n;
+  void (*putpixel) (SDL_Surface *, int, int, Uint32);
+  SDL_Rect dest;
+  int most, off_y, max;
+
+  draw_image_title(TITLE_FILLS, r_ttoolopt);
+
+  /* Space for buttons, was 14 */
+  most = (buttons_tall * gd_toolopt.cols) - TOOLOFFSET;
+
+
+  /* Do we need scrollbars? */
+
+  if (NUM_FILLS > most + TOOLOFFSET)
+    {
+      most = most - gd_toolopt.cols; /* was 12 */
+      off_y = img_scroll_up->h;
+      max = most + TOOLOFFSET;
+
+      dest.x = WINDOW_WIDTH - r_ttoolopt.w;
+      dest.y = r_ttoolopt.h;
+
+      if (fill_scroll > 0)
+        {
+          SDL_BlitSurface(img_scroll_up, NULL, screen, &dest);
+        }
+      else
+        {
+          SDL_BlitSurface(img_scroll_up_off, NULL, screen, &dest);
+        }
+
+      dest.x = WINDOW_WIDTH - r_ttoolopt.w;
+      dest.y = r_ttoolopt.h + img_scroll_up->h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
+
+      if (fill_scroll < NUM_FILLS - most - TOOLOFFSET)
+        {
+          SDL_BlitSurface(img_scroll_down, NULL, screen, &dest);
+        }
+      else
+        {
+          SDL_BlitSurface(img_scroll_down_off, NULL, screen, &dest);
+        }
+    }
+  else
+    {
+      off_y = 0;
+      max = most + TOOLOFFSET;
+    }
+
+  for (j = 0; j < most + TOOLOFFSET; j++)
+    {
+      i = j;
+      dest.x = ((i % 2) * button_w) + WINDOW_WIDTH - r_ttoolopt.w;
+      dest.y = ((i / 2) * button_h) + r_ttoolopt.h + off_y;
+
+      i = j + fill_scroll;
+
+      if (i == cur_fill)
+        {
+          SDL_BlitSurface(img_btn_down, NULL, screen, &dest);
+        }
+      else if (i < NUM_FILLS)
+        {
+          SDL_BlitSurface(img_btn_up, NULL, screen, &dest);
+        }
+      else
+        {
+          SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
+        }
+
+      if (i < NUM_FILLS)
+        {
+          dest.x = ((i % 2) * button_w) + (4 * button_w) / ORIGINAL_BUTTON_SIZE + WINDOW_WIDTH - r_ttoolopt.w;
+          dest.y = ((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + off_y;
+
+          SDL_BlitSurface(img_fills[i], NULL, screen, &dest);
+
+          dest.x = ((i % 2) * button_w) + (4 * button_w) / ORIGINAL_BUTTON_SIZE + WINDOW_WIDTH - r_ttoolopt.w + ((40 * button_w) / ORIGINAL_BUTTON_SIZE - img_fill_names[i]->w) / 2;
+	  dest.y = ((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - img_fill_names[i]->h) + off_y;
+
+          SDL_BlitSurface(img_fill_names[i], NULL, screen, &dest);
+        }
+    }
+
 }
 
 /**
@@ -10250,32 +10458,26 @@ static SDL_Surface *zoom(SDL_Surface * src, int new_w, int new_h)
 #endif
 
 
-/**
- * FIXME
- */
 /* XOR must show up on black, white, 0x7f grey, and 0x80 grey.
   XOR must be exactly 100% perfectly reversable. */
-static void xorpixel(int x, int y)
+static void _xorpixel(SDL_Surface * surf, int x, int y)
 {
   Uint8 *p;
   int BytesPerPixel;
 
   /* if outside the canvas, return */
-  if ((unsigned)x >= (unsigned)canvas->w || (unsigned)y >= (unsigned)canvas->h)
+  if (x < 0 || x >= surf->w || y < 0 || y >= surf->h)
     return;
-  /* now switch to screen coordinates */
-  x += r_canvas.x;
-  y += r_canvas.y;
 
   /* Always 4, except 3 when loading a saved image. */
-  BytesPerPixel = screen->format->BytesPerPixel;
+  BytesPerPixel = surf->format->BytesPerPixel;
 
   /* Set a pointer to the exact location in memory of the pixel */
-  p = (Uint8 *) (((Uint8 *) screen->pixels) +   /* Start: beginning of RAM */
-                 (y * screen->pitch) +  /* Go down Y lines */
+  p = (Uint8 *) (((Uint8 *) surf->pixels) +   /* Start: beginning of RAM */
+                 (y * surf->pitch) +  /* Go down Y lines */
                  (x * BytesPerPixel));  /* Go in X pixels */
 
-  /* XOR the (correctly-sized) piece of data in the screen's RAM */
+  /* XOR the (correctly-sized) piece of data in the surface's RAM */
   if (likely(BytesPerPixel == 4))
     *(Uint32 *) p ^= 0x80808080u;       /* 32-bit display */
   else if (BytesPerPixel == 1)
@@ -10288,6 +10490,21 @@ static void xorpixel(int x, int y)
       p[1] ^= 0x80;
       p[2] ^= 0x80;
     }
+}
+
+/**
+ * FIXME
+ */
+static void xorpixel(int x, int y) {
+  /* if outside the canvas, return */
+  if ((unsigned)x >= (unsigned)canvas->w || (unsigned)y >= (unsigned)canvas->h)
+    return;
+
+  /* now switch to screen coordinates */
+  x += r_canvas.x;
+  y += r_canvas.y;
+
+  _xorpixel(screen, x, y);
 }
 
 
@@ -13159,6 +13376,8 @@ static void cleanup(void)
     }
   free_surface_array(img_shapes, NUM_SHAPES);
   free_surface_array(img_shape_names, NUM_SHAPES);
+  free_surface_array(img_fills, NUM_FILLS);
+  free_surface_array(img_fill_names, NUM_FILLS);
   free_surface_array(img_tux, NUM_TIP_TUX);
 
   free_surface(&img_openlabels_open);
@@ -13276,6 +13495,12 @@ static void cleanup(void)
     {
       free(touched);
       touched = NULL;
+    }
+
+  if (sim_flood_touched != NULL)
+    {
+      free(sim_flood_touched);
+      sim_flood_touched = NULL;
     }
 
   if (medium_font != NULL)
@@ -19154,6 +19379,7 @@ static void load_magic_plugins(void)
           magic_api_struct->in_circle = in_circle_rad;
           magic_api_struct->getpixel = magic_getpixel;
           magic_api_struct->putpixel = magic_putpixel;
+          magic_api_struct->xorpixel = magic_xorpixel;
           magic_api_struct->line = magic_line_func;
           magic_api_struct->playsound = magic_playsound;
           magic_api_struct->stopsound = magic_stopsound;
@@ -21851,6 +22077,14 @@ static Uint32 magic_getpixel(SDL_Surface * surface, int x, int y)
   return (getpixels[surface->format->BytesPerPixel] (surface, x, y));
 }
 
+/**
+ * FIXME
+ */
+static void magic_xorpixel(SDL_Surface * surface, int x, int y)
+{
+  _xorpixel(surface, x, y);
+}
+
 
 /**
  * FIXME
@@ -23675,7 +23909,7 @@ static void setup_config(char *argv[])
       result = find_directory(B_USER_SETTINGS_DIRECTORY, volume, false, buffer, sizeof(buffer));
       asprintf((char **)&savedir, "%s/%s", buffer, "TuxPaint");
 #elif __APPLE__
-      savedir = strdup(macos.preferencesPath());
+      savedir = strdup(macos_preferencesPath());
 #elif __ANDROID__
       savedir = SDL_AndroidGetExternalStoragePath();
 #else
@@ -25231,7 +25465,16 @@ static void setup(void)
   touched = (Uint8 *) malloc(sizeof(Uint8) * (canvas->w * canvas->h));
   if (touched == NULL)
     {
-      fprintf(stderr, "\nError: Can't build drawing touch mask!\n");
+      fprintf(stderr, "\nError: Can't build drawing touch mask for Magic!\n");
+
+      cleanup();
+      exit(1);
+    }
+
+  sim_flood_touched = (Uint8 *) malloc(sizeof(Uint8) * (canvas->w * canvas->h));
+  if (sim_flood_touched == NULL)
+    {
+      fprintf(stderr, "\nError: Can't build drawing touch mask for Fill!\n");
 
       cleanup();
       exit(1);
@@ -25526,6 +25769,16 @@ img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
 
   show_progress_bar(screen);
 
+  /* Load fill sub-tool icons: */
+  for (i = 0; i < NUM_FILLS; i++)
+    {
+      SDL_Surface *aux_surf = loadimage(fill_img_fnames[i]);
+      img_fills[i] = thumbnail2(aux_surf, (aux_surf->w * button_w) / ORIGINAL_BUTTON_SIZE, (aux_surf->h * button_h) / ORIGINAL_BUTTON_SIZE, 0, 1);
+      SDL_FreeSurface(aux_surf);
+    }
+
+  show_progress_bar(screen);
+
   /* Load tip tux images: */
   for (i = 0; i < NUM_TIP_TUX; i++)
     img_tux[i] = loadimagerb(tux_img_fnames[i]);
@@ -25792,6 +26045,7 @@ static void claim_to_be_ready(void)
   magic_scroll = 0;
   tool_scroll = 0;
   eraser_scroll = 0;
+  fill_scroll = 0;
 
   reset_avail_tools();
 
