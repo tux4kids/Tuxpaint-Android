@@ -27,12 +27,23 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: September 14, 2019
+  Last updated: February 20, 2021
   $Id$
 */
+
+#ifndef FILL_H
+#define FILL_H
 
 #include "SDL.h"
 
 int would_flood_fill(SDL_Surface * canvas, Uint32 cur_colr, Uint32 old_colr);
 void do_flood_fill(SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2);
+void simulate_flood_fill(SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched);
+void draw_linear_gradient(SDL_Surface * canvas, SDL_Surface * last,
+  int x_left, int y_top, int x_right, int y_bottom,
+  int x1, int y1, int x2, int y2, Uint32 draw_color, Uint8 * touched);
+void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top, int x_right, int y_bottom,
+  int x, int y, Uint32 draw_color, Uint8 * touched);
+
+#endif
 

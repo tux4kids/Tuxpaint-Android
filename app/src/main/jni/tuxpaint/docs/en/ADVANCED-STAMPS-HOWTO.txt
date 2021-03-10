@@ -1,24 +1,22 @@
                                    Tux Paint
-                                 version 0.9.25
-                             Advanced Stamps HOWTO
+                    version 0.9.26 Advanced Stamps 'How-To'
 
-        Copyright 2006-2008 by Albert Cahalan for the Tux Paint project
-                               New Breed Software
-
-                              albert@users.sf.net
+        Copyright © 2006-2021 by Albert Cahalan and others; see AUTHORS.
                             http://www.tuxpaint.org/
 
-About this HOWTO
+About this 'How-To'
 
-     This HOWTO assumes that you want to make an excellent Tux Paint stamp,
-     in PNG bitmapped format, from a JPEG image (e.g., a digital photograph).
-     There are easier and faster methods that produce lower quality.
+     This 'How-To' assumes that you want to make an excellent Tux Paint
+     stamp, in PNG bitmapped format, from a JPEG image (e.g., a digital
+     photograph). There are easier and faster methods that produce lower
+     quality.
 
-     This HOWTO assumes you are dealing with normal opaque objects. Dealing
-     with semi-transparent objects (fire, moving fan blade, kid's baloon) or
-     light-giving objects (fire, lightbulb, sun) is best done with custom
-     software. Images with perfect solid-color backgrounds are also best done
-     with custom software, but are not troublesome to do as follows.
+     This 'How-To' assumes you are dealing with normal opaque objects.
+     Dealing with semi-transparent objects (fire, moving fan blade, kid's
+     balloon) or light-giving objects (fire, lightbulb, sun) is best done
+     with custom software. Images with perfect solid-color backgrounds are
+     also best done with custom software, but are not troublesome to do as
+     follows.
 
 Image choice is crucial
 
@@ -36,13 +34,14 @@ Image choice is crucial
        suitable images. (Note: the *.mil sites include non-military content,
        too!)
 
-       Your own images can be placed in the Public Domain by declaring it so.
-       (Hire a lawyer if you feel the need for legal advice.)
+       Your own images can be placed in the Public Domain or a suitable
+       license, such as the Creative Commons CC0 by declaring it so. (Hire a
+       lawyer if you feel the need for legal advice.)
 
        For personal use, any image you can legitimately modify and use for
        your own personal use should be fine.
 
-  Image Size and Orientation:
+  Image Size and Orientation
 
        You need an image that has a useful orientation. Perspective is an
        enemy. Images that show an object from the corner are difficult to fit
@@ -67,12 +66,11 @@ Image choice is crucial
        will need to draw new ones. If only one is buried, you might be able
        to copy the other one as a replacement.
 
-Prepare the image:
+Prepare the image
 
      First of all, be sure to avoid re-saving the image as a JPEG. This
      causes quality loss. There is a special tool called jpegtran that lets
-     you crop an image without the normal quality loss. If you want a GUI for
-     it, use ljcrop. Otherwise, use it like this:
+     you crop an image without the normal quality loss.
 
        jpegtran -trim -copy none -crop 512x1728+160+128 < src.jpg >
        cropped.jpg
@@ -90,27 +88,27 @@ Prepare the image:
      top to bottom you will need something like this:
 
       1. unmodified image (write-protect this if you can)
-      2. an image you will modify — the "WIP" layer
+      2. an image you will modify — the "work in progress" layer
       3. solid green (write-protect this if you can)
       4. solid magenta (write-protect this if you can)
       5. unmodified image (write-protect this if you can)
 
-     Give the WIP layer a rough initial mask. You might start with a
-     selection, or by using the grayscale value of the WIP layer. You might
-     invert the mask.
+     Give the work in progress (WIP) layer a rough initial mask. You might
+     start with a selection, or by using the grayscale value of the WIP
+     layer. You might invert the mask.
 
      Warning: once you have the mask, you may not rotate or scale the image
      normally. This would cause data loss. You will be given special scaling
      instructions later.
 
-Prepare the mask:
+Prepare the mask
 
-     Get used to doing Ctrl-click and Alt-click on the thumbnail images in
-     the layers dialog. You will need this to control what you are looking at
-     and what you are editing. Sometimes you will be editing things you can't
-     see. For example, you might edit the mask of the WIP layer while looking
-     at the unmodified image. Pay attention so you don't screw up. Always
-     verify that you are editing the right thing.
+     Get used to doing [Ctrl]-click and [Alt]-click on the thumbnail images
+     in the layers dialog. You will need this to control what you are looking
+     at and what you are editing. Sometimes you will be editing things you
+     can't see. For example, you might edit the mask of the WIP layer while
+     looking at the unmodified image. Pay attention so you don't screw up.
+     Always verify that you are editing the right thing.
 
      Set an unmodified image as what you will view (the top one is easiest).
      Set the WIP mask as what you will edit. At some point, perhaps not
@@ -163,7 +161,7 @@ Prepare the mask:
      expected color. Invert the selection, then paint these away using the
      pencil tool. Do this operation for both white and black.
 
-Replace the fringe and junk pixels:
+Replace the fringe and junk pixels
 
      Still viewing the mask, select by color. Choose black. Shrink the
      selection by several pixels, being sure to NOT shrink from the edges of
@@ -187,7 +185,7 @@ Replace the fringe and junk pixels:
        * composited over magenta (mask enabled)
        * original (the top or bottom layer)
        * composited over the original (mask enabled)
-       * raw WIP layer (mask DISABLED)
+       * raw WIP layer (mask disabled)
 
      To reduce accidents, you may wish to select only those pixels that are
      not grey in the mask. (Select by color from the mask, choose black, add
@@ -236,7 +234,7 @@ Save the image for Tux Paint
      almost certain to destroy all the 0% opaque areas. So here is a better
      way...
 
-  A Safer Way to Save:
+  A Safer Way to Save
 
        Drag the mask from the layers dialog to the unused portion of the
        toolbar (right after the last drawing tool). This will create a new
@@ -260,7 +258,7 @@ Save the image for Tux Paint
        painted-away surroundings, without any mask thumbnail in the layers
        dialog. If you scaled the mask, then scale this image in exactly the
        same way. Save this image as a NetPBM portable pixmap (".ppm") file.
-       (Note: ppm, not pgm.) (If you choose the RAW PPM format, the second
+       (Note: .ppm, not .pgm.) (If you choose the RAW PPM format, the second
        byte of the file should be the ASCII digit "6", hex byte 0x36.)
 
        Now you need to merge the two files into one. Do that with the

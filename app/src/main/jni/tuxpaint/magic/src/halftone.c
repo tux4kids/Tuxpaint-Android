@@ -1,6 +1,6 @@
 /* halftone.c
 
-   Last modified: 2011.07.17
+   Last modified: 2021.02.20
 */
 
 
@@ -24,7 +24,7 @@ enum
 
 
 const char *snd_filenames[NUM_TOOLS] = {
-  "halftone.wav",
+  "halftone.ogg",
 };
 
 const char *icon_filenames[NUM_TOOLS] = {
@@ -84,12 +84,14 @@ int halftone_init(magic_api * api)
       snprintf(fname, sizeof(fname), "%ssounds/magic/%s", api->data_directory, snd_filenames[i]);
 
       snd_effect[i] = Mix_LoadWAV(fname);
+/*
       if (snd_effect[i] == NULL)
         {
           SDL_FreeSurface(canvas_backup);
           SDL_FreeSurface(square);
           return (0);
         }
+*/
     }
 
 
@@ -146,8 +148,11 @@ void halftone_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 {
   int i;
 
-  for (i = 0; i < NUM_TOOLS; i++)
-    Mix_FreeChunk(snd_effect[i]);
+  for (i = 0; i < NUM_TOOLS; i++) {
+    if (snd_effect[i] != NULL) {
+      Mix_FreeChunk(snd_effect[i]);
+    }
+  }
 
   SDL_FreeSurface(canvas_backup);
   SDL_FreeSurface(square);

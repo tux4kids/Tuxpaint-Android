@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-15 16:42-0700\n"
+"POT-Creation-Date: 2021-02-20 20:40-0800\n"
 "PO-Revision-Date: 2011-02-07 12:30+0200\n"
 "Last-Translator: sipho <sipho@translate.org.za>\n"
 "Language-Team: SIpho\n"
@@ -182,6 +182,38 @@ msgstr "<9>onga-9a"
 msgid "<9>spare-9b"
 msgstr "<9>onga-9b"
 
+#: ../fill_tools.h:49
+msgid "Solid"
+msgstr ""
+
+#: ../fill_tools.h:50
+#, fuzzy
+#| msgid "Lines"
+msgid "Linear"
+msgstr "Imiqga"
+
+#: ../fill_tools.h:51
+msgid "Radial"
+msgstr ""
+
+#: ../fill_tools.h:55
+#, fuzzy
+#| msgid "Click in the picture to fill that area with color."
+msgid "Click to fill an area with a solid color."
+msgstr "Chofoza esithombeni ukugcwalisa leyo ndawo ngomubala."
+
+#: ../fill_tools.h:56
+msgid ""
+"Click and drag to fill an area with a linear gradient (from the chosen color "
+"to transparent)."
+msgstr ""
+
+#: ../fill_tools.h:57
+msgid ""
+"Click to fill an area with a radial gradient (from the chosen color to "
+"transparent)."
+msgstr ""
+
 #. Congratulations #1
 #: ../great.h:37
 msgid "Great!"
@@ -347,46 +379,53 @@ msgid "Draw shapes from a corner."
 msgstr ""
 
 #. Title of tool selector (buttons down the left)
-#: ../titles.h:56
+#: ../titles.h:57
 msgid "Tools"
 msgstr "Amathuluzi"
 
 #. Title of color palette (buttons across the bottom)
-#: ../titles.h:59
+#: ../titles.h:60
 msgid "Colors"
 msgstr "Imibala"
 
 #. Title of brush selector (buttons down the right for paint and line tools)
-#: ../titles.h:62
+#: ../titles.h:63
 msgid "Brushes"
 msgstr "Amabhulashi"
 
 #. Title of eraser selector (buttons down the right for eraser tool)
-#: ../titles.h:65
+#: ../titles.h:66
 msgid "Erasers"
 msgstr "Izicimi"
 
 #. Title of stamp selector (buttons down the right for stamps tool)
-#: ../titles.h:68
+#: ../titles.h:69
 msgid "Stamps"
 msgstr "Izitembu"
 
 #. Title of shape selector (buttons down the right for shapes tool)
 #. Shape creation tool (square, circle, etc.)
-#: ../titles.h:71 ../tools.h:71
+#: ../titles.h:72 ../tools.h:71
 msgid "Shapes"
 msgstr "Isifanekiso"
 
 #. Title of font selector (buttons down the right for text and label tools)
-#: ../titles.h:74
+#: ../titles.h:75
 msgid "Letters"
 msgstr "Izinhlamvu"
 
 #. Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
 #. "Magic" effects tools (blur, flip image, etc.)
-#: ../titles.h:77 ../tools.h:83
+#: ../titles.h:78 ../tools.h:83
 msgid "Magic"
 msgstr "Umlingo"
+
+#. Title of fill selector (buttons down the right for fill tool)
+#: ../titles.h:81
+#, fuzzy
+#| msgid "Fill"
+msgid "Fills"
+msgstr "Gcwalisa"
 
 #. Freehand painting tool
 #: ../tools.h:62
@@ -439,9 +478,9 @@ msgid "New"
 msgstr "Okusha"
 
 #. Open a saved picture
-#. buttons for the file open dialog
+#. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:7920
+#: ../tools.h:98 ../tuxpaint.c:8105
 msgid "Open"
 msgstr "Vula"
 
@@ -586,227 +625,227 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "Kulungile-ke... Asiqhubeke sidwebe lena!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2134
+#: ../tuxpaint.c:2161
 msgid "Do you really want to quit?"
 msgstr "Ngabe ufuna ukuphuma ngempela na?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2137
+#: ../tuxpaint.c:2164
 msgid "Yes, I’m done!"
 msgstr "Yebo, sengiqedile!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2140 ../tuxpaint.c:2167
+#: ../tuxpaint.c:2167 ../tuxpaint.c:2194
 msgid "No, take me back!"
 msgstr "Cha, ngibuyisele emuva!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2144
+#: ../tuxpaint.c:2171
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Uma uphuma, uzolahlekelwa isithombe sakho! Sisigcine na?"
 
-#: ../tuxpaint.c:2145 ../tuxpaint.c:2150
+#: ../tuxpaint.c:2172 ../tuxpaint.c:2177
 msgid "Yes, save it!"
 msgstr "Yebo, sigcine!"
 
-#: ../tuxpaint.c:2146 ../tuxpaint.c:2151
+#: ../tuxpaint.c:2173 ../tuxpaint.c:2178
 msgid "No, don’t bother saving!"
 msgstr "Cha, ungazihluphi ukusigcina!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2149
+#: ../tuxpaint.c:2176
 msgid "Save your picture first?"
 msgstr "Gcina isithombe sakho kuqala?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2154
+#: ../tuxpaint.c:2181
 msgid "Can’t open that picture!"
 msgstr "Angikwazi ukuvula leso sithombe!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2157 ../tuxpaint.c:2162 ../tuxpaint.c:2171 ../tuxpaint.c:2178
-#: ../tuxpaint.c:2187 ../tuxpaint.c:2192
+#: ../tuxpaint.c:2184 ../tuxpaint.c:2189 ../tuxpaint.c:2198 ../tuxpaint.c:2205
+#: ../tuxpaint.c:2214 ../tuxpaint.c:2219
 msgid "OK"
 msgstr "Kulungile"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2161
+#: ../tuxpaint.c:2188
 msgid "There are no saved files!"
 msgstr "Awekho amafayela agciniwe!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2165
+#: ../tuxpaint.c:2192
 msgid "Print your picture now?"
 msgstr "Ngabe uyasiphrinta isithombe sakho manje?"
 
-#: ../tuxpaint.c:2166
+#: ../tuxpaint.c:2193
 msgid "Yes, print it!"
 msgstr "Yebo, phrinta!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2170
+#: ../tuxpaint.c:2197
 msgid "Your picture has been printed!"
 msgstr "Isithombe sakho sesiphrintiwe!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2174
+#: ../tuxpaint.c:2201
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Phephisa! Isithombe sakho asikwazanga ukuphrinteka!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2177
+#: ../tuxpaint.c:2204
 msgid "You can’t print yet!"
 msgstr "Awukwazi ukuphrinta okwamanje!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2181
+#: ../tuxpaint.c:2208
 msgid "Erase this picture?"
 msgstr "Ngisicime lesi sithombe?"
 
-#: ../tuxpaint.c:2182
+#: ../tuxpaint.c:2209
 msgid "Yes, erase it!"
 msgstr "Yebo, sicime!"
 
-#: ../tuxpaint.c:2183
+#: ../tuxpaint.c:2210
 msgid "No, don’t erase it!"
 msgstr "Cha, ungasicimi!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2186
+#: ../tuxpaint.c:2213
 msgid "Remember to use the left mouse button!"
 msgstr "Khumbula ukusebenzisa inkinobho yemawusi yangasesinxeleni!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2190
+#: ../tuxpaint.c:2217
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "Isithombe sakho sesiphrintiwe!"
 
-#: ../tuxpaint.c:2191
+#: ../tuxpaint.c:2218
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "Isithombe sakho sesiphrintiwe!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2195
+#: ../tuxpaint.c:2222
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "Phephisa! Isithombe sakho asikwazanga ukuphrinteka!"
 
-#: ../tuxpaint.c:2196
+#: ../tuxpaint.c:2223
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "Phephisa! Isithombe sakho asikwazanga ukuphrinteka!"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2200
+#: ../tuxpaint.c:2227
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Khetha isithombe osifunayo, bese ucindezela “Dlala”."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2407
+#: ../tuxpaint.c:2436
 msgid "Sound muted."
 msgstr "Umsindo awukho."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2412
+#: ../tuxpaint.c:2441
 msgid "Sound unmuted."
 msgstr "Umsindo ukhona."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3167
+#: ../tuxpaint.c:3218
 msgid "Please wait…"
 msgstr "Ngicela ulinde…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:7923
+#: ../tuxpaint.c:8108
 msgid "Erase"
 msgstr "Susa"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:7926
+#: ../tuxpaint.c:8111
 msgid "Slides"
 msgstr "Izilayidi"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:7929
+#: ../tuxpaint.c:8114
 msgid "Export"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:7932
+#: ../tuxpaint.c:8117
 msgid "Back"
 msgstr "Emuva"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:7935
+#: ../tuxpaint.c:8120
 msgid "Play"
 msgstr "Dlala"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:7938
+#: ../tuxpaint.c:8123
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:7941
+#: ../tuxpaint.c:8126
 msgid "Next"
 msgstr "Phambili"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8656
+#: ../tuxpaint.c:8874
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12069
+#: ../tuxpaint.c:12515
 msgid "Yes"
 msgstr "Yebo"
 
-#: ../tuxpaint.c:12073
+#: ../tuxpaint.c:12519
 msgid "No"
 msgstr "Cha"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:13190
+#: ../tuxpaint.c:13658
 msgid "Replace the picture with your changes?"
 msgstr "Shintshanisa isithombe ngoshintsho olwenzile?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:13194
+#: ../tuxpaint.c:13662
 msgid "Yes, replace the old one!"
 msgstr "Yebo, shintshanisa esidala!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:13198
+#: ../tuxpaint.c:13666
 msgid "No, save a new file!"
 msgstr "Cha, gcina ifayela elisha!"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:14454
+#: ../tuxpaint.c:14929
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Khetha isithombe osifunayo, bese ucindezela “Vula”."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:15880
+#: ../tuxpaint.c:16355
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
-#: ../tuxpaint.c:23539
+#: ../tuxpaint.c:24060
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:23551
+#: ../tuxpaint.c:24072
 msgid "Pick a color."
 msgstr "Khetha umbala."
 
@@ -839,11 +878,11 @@ msgstr ""
 msgid "Click to change the colors in your entire picture."
 msgstr "Chofoza ukushintsha imibala esithombeni sakho sonke."
 
-#: ../../magic/src/blind.c:116
+#: ../../magic/src/blind.c:115
 msgid "Blind"
 msgstr "Ibhulayindi"
 
-#: ../../magic/src/blind.c:123
+#: ../../magic/src/blind.c:122
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
@@ -940,6 +979,28 @@ msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr ""
 "Chofoza bese unyakazisa igundane kaningana ukuze ujikise isithombe sibe "
 "ikhathuni."
+
+#: ../../magic/src/checkerboard.c:99
+msgid "Checkerboard"
+msgstr ""
+
+#: ../../magic/src/checkerboard.c:106
+#, fuzzy
+#| msgid "Click and drag to draw arrows made of string art."
+msgid "Click and drag to fill the canvas with a checkerboard pattern."
+msgstr ""
+"Chofoza bese uyadonsa ukuze udwebe imicibisholo eyenziwe ngochungechunge "
+"lobuciko."
+
+#: ../../magic/src/clone.c:132
+msgid "Clone"
+msgstr ""
+
+#: ../../magic/src/clone.c:138
+msgid ""
+"Click once to pick a spot to begin cloning. Click again and drag to clone "
+"that part of the picture."
+msgstr ""
 
 #: ../../magic/src/confetti.c:83
 msgid "Confetti"
@@ -1304,6 +1365,17 @@ msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgstr ""
 "Chofoza bese udonsela phezulu ukuze usondeze noma donsela phansi ukuze "
 "uhlehlise isithombe."
+
+#. Both are named "Pixels", at the moment:
+#: ../../magic/src/pixels.c:108
+msgid "Pixels"
+msgstr ""
+
+#: ../../magic/src/pixels.c:114
+#, fuzzy
+#| msgid "Click and move to draw large bricks."
+msgid "Click and drag to draw large pixels."
+msgstr "Chofoza bese uyanyakazisa ukuze udwebe izitini ezinkulu."
 
 #: ../../magic/src/puzzle.c:103
 msgid "Puzzle"

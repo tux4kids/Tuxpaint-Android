@@ -36,6 +36,8 @@ public class ConfigActivity extends Activity {
    	String[] languages = null;
    	String [] langs = null;
    	String[] printdelays = null;
+        String[] buttonsizes = null;
+        String[] colors_rows = null;
 	private Properties props = null;
 	private Properties propsback = null;
     String locLanguage = null;
@@ -59,6 +61,8 @@ public class ConfigActivity extends Activity {
         String printdelay = null;
         String disablescreensaver = null;
         String orient = null;
+        String buttonsize = null;
+        String colorsrows = null;
         String lang = null;
         boolean cancel = false;
 
@@ -77,6 +81,8 @@ public class ConfigActivity extends Activity {
 	Spinner printdelaySpinner = null;
         ToggleButton disablescreensaverToggle = null;
         ToggleButton orientToggle = null;
+        Spinner buttonsizeSpinner = null;
+        Spinner colorsrowsSpinner = null;
     Button okButton = null;
     Button cancelButton = null;
         AssetManager mgr;
@@ -361,9 +367,48 @@ public class ConfigActivity extends Activity {
 			}
 		    });
 
+		buttonsizes = getResources().getStringArray(R.array.buttonsizes);
+		indexpd = 0;
+		for (; indexpd != buttonsizes.length; indexpd++){
+			if (buttonsizes[indexpd].compareTo(buttonsize) == 0)
+				break;
+		}
+		if(indexpd==buttonsizes.length)
+		    indexpd = 0;
+                buttonsizeSpinner = (Spinner) findViewById(R.id.spinnerButtonsize);
+		buttonsizeSpinner.setSelection(indexpd);
+		buttonsizeSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+					public void onItemSelected(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						buttonsize = buttonsizes[arg2];
+					}
+					public void onNothingSelected(AdapterView<?> arg0) {
+					}
+                });
+
+		colors_rows = getResources().getStringArray(R.array.colors_rows);
+		indexpd = 0;
+		for (; indexpd != colors_rows.length; indexpd++){
+			if (colors_rows[indexpd].compareTo(colorsrows) == 0)
+				break;
+		}
+		if(indexpd==colors_rows.length)
+		    indexpd = 0;
+                colorsrowsSpinner = (Spinner) findViewById(R.id.spinnerColorsrows);
+		colorsrowsSpinner.setSelection(indexpd);
+		colorsrowsSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+					public void onItemSelected(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						colorsrows = colors_rows[arg2];
+					}
+					public void onNothingSelected(AdapterView<?> arg0) {
+					}
+                });
 
 	}
-	
+
     @Override
     protected void onDestroy() {
         Log.v(TAG, "onDestroy()");
@@ -421,8 +466,10 @@ public class ConfigActivity extends Activity {
 	printdelay = props.getProperty("printdelay", "0");
 	disablescreensaver = props.getProperty("disablescreensaver", "no");
 	orient = props.getProperty("orient", "landscape");
+	buttonsize = props.getProperty("buttonsize", "48");
+	colorsrows = props.getProperty("colorsrows", "1");
 	    	 
-	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir+ " "+datadir+ " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient);
+	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient + " " + buttonsize + " " + colorsrows);
     }
 
     private void save () {
@@ -443,6 +490,8 @@ public class ConfigActivity extends Activity {
         props.put("printdelay", printdelay);
 	props.put("disablescreensaver", disablescreensaver);
 	props.put("orient", orient);
+	props.put("buttonsize", buttonsize);
+	props.put("colorsrows", colorsrows);
 
 	try {
 	    OutputStream	out = new FileOutputStream(cfg);
@@ -487,7 +536,7 @@ public class ConfigActivity extends Activity {
 		/* FIXME: Ugly hack to deal with shrink changes every time updateConfiguration/recreate is called.
 		   Unsetting android:anyDensity="false" in AndroidManifest.xml would be the right fix, but can't do it right 
 		   now as buttons in the main program would be too small on many devices. Pere - November 2020*/
-		conf.densityDpi=360;
+		//		conf.densityDpi=360;
 
 		res.updateConfiguration(conf, res.getDisplayMetrics());
 		recreate();

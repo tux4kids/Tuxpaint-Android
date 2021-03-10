@@ -1,50 +1,55 @@
-SIGNALS.txt for Tux Paint
+                                   Tux Paint
+                                 version 0.9.26
+                             Signals Documentation
 
-Tux Paint - A simple drawing program for children.
+          Copyright © 2019-2021 by various contributors; see AUTHORS.
+                            http://www.tuxpaint.org/
 
-Copyright 2019 by Bill Kendrick and others
-bill@newbreedsoftware.com
-http://www.tuxpaint.org/
+                                30 January 2021
 
-April 3, 2019
+     ----------------------------------------------------------------------
 
-Tux Paint responds to the following signals (which can be
-sent to the program's process via `kill` or `killall`, for
-example).
+   Tux Paint responds to the following signals (which can be sent to the
+   program's process via `kill` or `killall`, for example).
 
- * SIGTERM (also, [Ctrl]+[C] from a terminal running "tuxpaint")
+   SIGTERM (also, [Ctrl] + [C] from a terminal running `tuxpaint`)
 
-   Tux Paint responds as if the "Quit" button were pressed,
-   or the desktop environment was told to close Tux Paint
-   (e.g., by clicking a window close button, or pressing
-   [Alt]+[F4] on most systems).
+           Tux Paint responds as if the "Quit" button were pressed, or the
+           desktop environment was told to close Tux Paint (e.g., by clicking
+           a window close button, or pressing [Alt] + [F4] on most systems).
 
-   From the main interface, Tux Paint will prompt whether or
-   not you wish to quit, and (unless overridden by "--autosave")
-   if you'd like to save the current drawing (if unsaved),
-   and if so, and it's a modified version of an existing drawing
-   (unless overridden by "--saveover" or "--saveovernew"),
-   whether or not to overwrite the existing drawing, or save
-   to a new file.
+           From the main interface, Tux Paint will prompt whether or not you
+           wish to quit, and (unless overridden by the auto-save option, e.g.
+           "--autosave") if you'd like to save the current drawing (if
+           unsaved), and if so, and it's a modified version of an existing
+           drawing (unless overridden by the options to save over old images,
+           or always save new images; e.g. "--saveover" and "--saveovernew",
+           respectively), whether or not to overwrite the existing drawing,
+           or save to a new file.
 
-   From other parts of the interface, the signal is currently
-   interpreted as a request to go back (e.g., from the
-   "New" dialog back to the main interface), as if a "Back"
-   button in Tux Paint were clicked, or the [Esc] key pressed.
+           Note: From other parts of the interface, the signal is currently
+           interpreted as a request to go back (e.g., from the "New" dialog
+           back to the main interface), as if a "Back" button in Tux Paint
+           were clicked, or the [Esc] was key pressed.
 
- * SIGUSR1 & SIGUSR2
+           Example: killall tuxpaint
 
-   Tux Paint responds by setting its "--autosave" option, and either
-   "--saveovernew" (for SIGUSR1) or "--saveover" (for SIGUSR2),
-   and sending itself a SIGTERM signal.
+   SIGUSR1 & SIGUSR2
 
-   So, from the main interface, Tux Paint should quit almost immediately,
-   with no questions asked.
+           Tux Paint responds by setting its auto-save option (as if it had
+           been launched with "--autosave"), as well as either the option to
+           always save new images (as if launched with "--saveovernew") in
+           the case of receiving a SIGUSR1 signal, or to always save over the
+           existing image (as if launched with "--saveover") in the case of
+           receiving SIGUSR2. Then Tux Paint sends itself a SIGTERM signal,
+           in an attempt to quit. (See above.)
 
-   From other parts of the interface, unfortunately, Tux Paint
-   will go back one level in the interface.  Therefore, at this time,
-   it may be necessary to send this signal to Tux Paint a few times,
-   for it to quit completely.
+           So, from the main interface, Tux Paint should quit almost
+           immediately, with no questions asked.
 
-   e.g., `killall -s SIGUSR1 tuxpaint`
+           Note: From other parts of the interface, unfortunately, Tux Paint
+           will go back one level in the interface. Therefore, at this time,
+           it may be necessary to send this signal to Tux Paint a few times,
+           for it to quit completely.
 
+           Example: killall -s SIGUSR1 tuxpaint

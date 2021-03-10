@@ -4,7 +4,7 @@
   For Tux Paint
   List of available titles
 
-  Copyright (c) 2002-2007 by Bill Kendrick and others
+  Copyright (c) 2002-2021 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - October 9, 2009
+  June 14, 2002 - February 20, 2021
   $Id$
 */
 
@@ -43,6 +43,7 @@ enum
   TITLE_SHAPES,
   TITLE_LETTERS,
   TITLE_MAGIC,
+  TITLE_FILLS,
   NUM_TITLES
 };
 
@@ -74,5 +75,8 @@ const char *const title_names[NUM_TITLES] = {
   gettext_noop("Letters"),
 
   // Title of magic tool selector (buttons down the right for magic (effect plugin) tool)
-  gettext_noop("Magic")
+  gettext_noop("Magic"),
+
+  // Title of fill selector (buttons down the right for fill tool)
+  gettext_noop("Fills")
 };

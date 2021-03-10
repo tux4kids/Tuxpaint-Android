@@ -1,21 +1,21 @@
 # Tux Paint - A simple drawing program for children.
 
-# Copyright (c) 2002-2020
+# Copyright (c) 2002-2021
 # Various contributors (see AUTHORS.txt)
 # http://www.tuxpaint.org/
 
-# June 14, 2002 - October 15, 2020
+# June 14, 2002 - February 20, 2021
 
 
 # The version number, for release:
 
-VER_VERSION:=0.9.25
+VER_VERSION:=0.9.26
 ifdef SOURCE_DATE_EPOCH
   VER_DATE=$(shell date -u -d "@$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u -r "$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u "+%Y-%m-%d")
 else
   VER_DATE=$(shell date "+%Y-%m-%d")
 endif
-MAGIC_API_VERSION:=0x00000003
+MAGIC_API_VERSION:=0x00000004
 
 # Need to know the OS
 
@@ -83,6 +83,9 @@ RSRC_CMD:=$($(OS)_RSRC_CMD)
 beos_MIMESET_CMD:=mimeset -f tuxpaint
 MIMESET_CMD:=$($(OS)_MIMESET_CMD)
 
+macos_RAD_CMD:=[[ ! -d Resources/share ]] && mkdir -p Resources/share && ln -s ../../data Resources/share/tuxpaint || :
+RAD_CMD:=$($(OS)_RAD_CMD)
+
 windows_SO_TYPE:=dll
 macos_SO_TYPE:=dylib
 beos_SO_TYPE:=so
@@ -128,7 +131,7 @@ FRIBIDI_LIB:=$(shell $(PKG_CONFIG) --libs fribidi)
 FRIBIDI_CFLAGS:=$(shell $(PKG_CONFIG) --cflags fribidi)
 
 windows_ARCH_LINKS:=-lgdi32 -lcomdlg32 $(PNG) -lz -lwinspool -lshlwapi $(FRIBIDI_LIB) -liconv -limagequant
-macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant
+macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant -lSDLmain -Wl,-framework,AppKit -Wl,-framework,Cocoa
 beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(PAPER_LIB) $(STDC_LIB) -limagequant
 linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
 ARCH_LINKS:=$($(OS)_ARCH_LINKS)
@@ -607,7 +610,7 @@ clean:
 	@-rm -f templates/.thumbs/*.png
 	@if [ -d templates/.thumbs ]; then rmdir templates/.thumbs; fi
 	@-if [ "x$(BUNDLE)" != "x" ]; then rm -rf $(BUNDLE); fi
-	@-rm -f TuxPaint.dmg temp.dmg; rm -rf magic/*.dSYM
+	@-rm -f TuxPaint.dmg temp.dmg; rm -rf magic/*.dSYM Resources
 	@echo
 
 # "make uninstall" should remove the various parts from their
@@ -1030,14 +1033,14 @@ install-macbundle:
 	@install -m 644 macos/PkgInfo $(BUNDLE)/Contents
 	@install -m 644 macos/Info.plist $(BUNDLE)/Contents
 	@install -m 644 macos/tuxpaint.icns $(BUNDLE)/Contents/Resources
-	@custom/macos.sh
+	@macos/build-app.sh
 
 
 # Create DMG for macOS
 TuxPaint.dmg:
 	@echo
 	@echo "...Creating DMG Distribution File..."
-	@custom/macos-mkdmg.sh
+	@macos/build-dmg.sh
 
 
 # Build the program!
@@ -1052,6 +1055,7 @@ tuxpaint:	obj/tuxpaint.o obj/i18n.o obj/im.o obj/cursor.o obj/pixels.o \
 	$(CC) $(CFLAGS) $(LDFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(DEFS) \
 		-o tuxpaint $^ \
 		$(SDL_LIBS) $(SVG_LIB) $(ARCH_LINKS)
+	@$(RAD_CMD)
 	@$(RSRC_CMD)
 	@$(MIMESET_CMD)
 
@@ -1060,7 +1064,8 @@ tuxpaint:	obj/tuxpaint.o obj/i18n.o obj/im.o obj/cursor.o obj/pixels.o \
 
 obj/tuxpaint.o:	src/tuxpaint.c \
 		src/i18n.h src/im.h src/cursor.h src/pixels.h \
-		src/rgblinear.h src/playsound.h src/fonts.h src/fill.h \
+		src/rgblinear.h src/playsound.h src/fonts.h \
+		src/fill.h src/fill_tools.h \
 		src/progressbar.h src/dirwalk.h src/get_fname.h \
 		src/compiler.h src/debug.h \
 		src/tools.h src/titles.h src/colors.h src/shapes.h \
@@ -1251,7 +1256,7 @@ obj:
 ######
 
 MAGIC_SDL_CPPFLAGS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --cflags)
-MAGIC_SDL_LIBS:=-L/usr/local/lib $(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL_image -lSDL_ttf $(SDL_MIXER_LIB)
+MAGIC_SDL_LIBS:=-L/usr/local/lib $(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
 MAGIC_ARCH_LINKS:=-lintl $(PNG)
 
 windows_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
