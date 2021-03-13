@@ -4,7 +4,7 @@
     Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
-                                23 Xaneiro 2021
+                               9 de Marzo de 2021
 
      ----------------------------------------------------------------------
 
@@ -120,35 +120,38 @@ Problemas de interface
            »mixedcase=yes» nun ficheiro de configuración.
 
    Tux Paint está noutro idioma
-           Asegúrese de que os seu axuste de idioma sexa correcto. Vexa «Tux
-           Paint non cambia ao meu idioma», máis abaixo.
+           Asegúrese de que os seu axuste da configuración local sexa
+           correcto. Vexa «Tux Paint non cambia ao meu idioma», a
+           continuación.
 
    Tux Paint non cambia ao meu idioma
-              * Usuarios de Linux e Unix: asegúrese de que o idioma está
-                dispoñíbel
+              * Usuarios de Linux e Unix: asegúrese de que a configuración
+                local está dispoñíbel
 
-                Asegúrese de que o idioma que quere está dispoñíbel. Comprobe
-                o seu ficheiro «/etc/locale.gen». Vexa a «Documentación de
-                opcións» para coñecer os idiomas que usa Tux Paint
-                (especialmente cando se usa a opción «--lang»).
+                Asegúrese de que a configuración local que quere está
+                dispoñíbel. Comprobe o seu ficheiro «/etc/locale.gen». Vexa a
+                «Documentación de opcións» para coñecer as configuracións
+                locais que usa Tux Paint (especialmente cando se usa a opción
+                «--lang»).
 
                 Nota: os usuarios de Debian e derivados (p. ex.: Ubuntu)
                 poden simplemente executar «dpkg-reconfigure locales» se se
-                os idiomas son xestionados por «dpkg».
+                as configuracións locais son xestionadas por «dpkg».
 
               * Se está a empregar a opción de liña de ordes «--lang»
 
                 Probe a usar a opción de liña de ordes «--locale» ou o axuste
-                de idioma do seu sistema operativo (p. ex.: a variábel de
-                contorno «$LANG») e envíenos un correo-e con respecto ao seu
-                problema.
+                da configuración local do seu sistema operativo (p. ex.: a
+                variábel de contorno «$LANG») e envíenos un correo-e con
+                respecto ao seu problema.
 
               * Se está a empregar a opción de liña de ordes «--locale»
 
                 Se isto non funciona, envíenos un correo-e con respecto ao
                 seu problema.
 
-              * Se está a empregar o idioma do seu sistema operativo
+              * Se está a empregar a configuración local do seu sistema
+                operativo
 
                 Se isto non funciona, envíenos un correo-e con respecto ao
                 seu problema.
@@ -160,8 +163,8 @@ Problemas de interface
                 letra TrueType chinés e coreano estean instalados e colocados
                 no lugar adecuado, respectivamente.
 
-                Os tipos de letra axeitados para estes idiomas pódense
-                descargar dende o sitio web de Tux Paint:
+                Os tipos de letra axeitados para estas configuracións locais
+                pódense descargar dende o sitio web de Tux Paint:
 
                   http://www.tuxpaint.org/download/fonts/
 
@@ -175,7 +178,7 @@ Impresión
            e enviándoa a unha orde externa. De xeito predeterminado, esta
            orde é a ferramenta de impresión «lpr».
 
-           Se ese programa non está dispoñible (por exemplo, está a usar
+           Se ese programa non está dispoñíbel (por exemplo, está a usar
            CUPS, o Sistema Común de Impresión Unix e non ten instalado
            «cups-lpr»), terá que especificar unha orde apropiada usando a
            opción «printcommand» no ficheiro de configuración de Tux Paint.
@@ -379,9 +382,9 @@ Problemas de son
 
               * Foi compilado Tux Paint sen compatibilidade con son?
 
-                É posible que Tux Paint se compilase coa compatibilidade de
+                É posíbel que Tux Paint se compilase coa compatibilidade de
                 son desactivada. Para comprobar se a compatibilidade de son
-                estivo activado cando se compilou Tux Paint, execute Tux
+                estaba activada cando se compilou Tux Paint, execute Tux
                 Paint dende unha liña de ordes, así:
 
                   tuxpaint --verbose-version
@@ -445,7 +448,7 @@ Problemas no modo de pantalla completa
 
    Cando executo Tux Paint a pantalla completa, ten grandes bordos ao redor
 
-           Usuarios de Linux: o seu servidor X-Window probablemente non estea
+           Usuarios de Linux: o seu servidor X-Window probabelmente non estea
            configurado coa capacidade de cambiar á resolución desexada:
            800×600. (ou a resolución que teña configurada para Tux Paint para
            que funcione.) (Normalmente faise manualmente no servidor X-Window
@@ -513,7 +516,7 @@ Outros problemas
            Un ficheiro de bloqueo («~/.tuxpaint/lockfile.dat» en Linux e
            Unix, «userdata\lockfile.dat» en Windows) úsase para asegurarse de
            que Tux Paint non se executa demasiadas veces á vez (por exemplo,
-           porque un neno preme impaciente na súa icona máis dunha vez) .
+           porque un cativo preme impaciente na súa icona máis dunha vez) .
 
            Mesmo se o ficheiro de bloqueo existe, contén a «hora» na que se
            executou Tux Paint por última vez. Se pasaron máis de 30 segundos,

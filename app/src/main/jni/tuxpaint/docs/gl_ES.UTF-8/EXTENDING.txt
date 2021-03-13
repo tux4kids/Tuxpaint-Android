@@ -5,7 +5,7 @@
     Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
-                                30 Xaneiro 2021
+                               9 de Marzo de 2021
 
      ----------------------------------------------------------------------
 
@@ -100,7 +100,7 @@ Onde van os ficheiros
          novo contido (selos, pinceis, etc.) .
 
          Tux Paint tamén busca ficheiros nun cartafol «TuxPaint» que pode
-         colocar no seu sistema cartafol «Application Support» (atópase en
+         colocar no seu sistema no cartafol «Application Support» (atópase en
          «Library» na raíz do seu sistema de ficheiros):
 
            /Library/Application Support/TuxPaint/
@@ -400,8 +400,8 @@ Selos
 
       Colorábel
 
-           Os selos «colorábeis» funcionan como os pinceis: escolle o selo
-           para obter a forma e logo escolle a cor que quere que sexa. (Os
+           Os selos «colorábeis» funcionan como os pinceis: escolla o selo
+           para obter a forma e logo escolla a cor que quere que sexa. (Os
            selos de símbolos, como os matemáticos e os musicais, son un
            exemplo).
 
@@ -446,15 +446,15 @@ Selos
 
     Selos inalterábeis
 
-         De xeito predeterminado, un selo pode virar do revés, amosarse como
-         unha imaxe reflectida ou ámbalas dúas cousas. Isto faise usando os
-         botóns de control situados debaixo do selector de selos, na parte
-         inferior dereita da pantalla en Tux Paint.
+         De xeito predeterminado, un selo pode inverter (poñer do revés),
+         amosarse como unha imaxe reflectida ou ámbalas dúas cousas. Isto
+         faise usando os botóns de control situados baixo o selector de
+         selos, na parte inferior dereita da pantalla en Tux Paint.
 
-         Ás veces, non ten sentido que un selo poida ser virado ou
+         Ás veces, non ten sentido que un selo poida ser invertido ou
          reflectido; por exemplo, selos de letras ou números. Ás veces, os
-         selos son simétricos, polo que non é útil deixar que o usuario os
-         volteen ou reflictan.
+         selos son simétricos, polo que non é útil deixar que os usuarios os
+         invertan ou reflictan.
 
          Para evitar que un selo sexa from being flipped vertically, engada a
          opción «noflip» no ficheiro de datos do selo.
@@ -576,7 +576,7 @@ Tipos de letra
      Para obter os mellores resultados, imaxes «de comezo» debería ter polo
      menos o mesmo tamaño que o lenzo de debuxo de Tux Paint. (Vexa a sección
      «Cargar outras imaxes en Tux Paint» da documentación principal de Tux
-     Paint (README – LÉEME) para os detalles sobre o tamaño.) Se non o son,
+     Paint (README – LÉAME) para os detalles sobre o tamaño.) Se non o son,
      estiraranse ou escalaranse. Isto faise sen afectar a forma («relación de
      aspecto»); con todo pódense aplicar algunhas manchas nos bordos.
 
@@ -617,7 +617,7 @@ Tipos de letra
      Para obter os mellores resultados, imaxes «modelo» debería ter polo
      menos o mesmo tamaño que o lenzo de debuxo de Tux Paint. (Vexa a sección
      «Cargar outras imaxes en Tux Paint» da documentación principal de Tux
-     Paint (README – LÉEME) para os detalles sobre o tamaño.) Se non o son,
+     Paint (README – LÉAME) para os detalles sobre o tamaño.) Se non o son,
      estiraranse ou escalaranse. Isto faise sen afectar a forma («relación de
      aspecto»); con todo pódense aplicar algunhas manchas nos bordos.
 
@@ -638,18 +638,18 @@ Traducións
 
      Tux Paint admite numerosos idiomas grazas ao uso da biblioteca de
      localización «gettext». (Vexa a «Documentación de opcións» para saber
-     como cambiar os idiomas en Tux Paint.)
+     como cambiar a configuración local en Tux Paint.)
 
      Para traducir Tux Paint a un novo idioma, copie o ficheiro de modelo de
      tradución, «tuxpaint.pot» (atopado no código fonte de Tux Paint, no
      cartafol «src/po/»). Cambie o nome da copia como un ficheiro «.po», cun
-     nome apropiado para o idioma local ao que está a traducir (p. ex.:
-     «es.po» para o español; ou «pt_BR.po» para o portugués brasileiro fronte
-     a «pt.po» ou «pt_PT.po» para o portugués falado en Portugal.)
+     nome apropiado para o idioma ao que está a traducir (p. ex.: «es.po»
+     para o español; ou «pt_BR.po» para o portugués brasileiro fronte a
+     «pt.po» ou «pt_PT.po» para o portugués falado en Portugal.)
 
      Abra o ficheiro «.po» creado recentemente: pode editar nun editor de
      texto simple, como Emacs, Pico ou VI en Linux ou NotePad en Windows. O
-     texto orixinal en inglés usado en Tux Paint está listado en liñas que
+     texto orixinal en inglés usado en Tux Paint está coutado en liñas que
      comezan por «msgid». Introduza as traducións de cada un destes anacos de
      texto nas liñas baleiras «msgstr» directamente baixo as liñas
      correspondentes «msgid». (Nota: Non elimine as comiñas.)
@@ -691,11 +691,11 @@ Traducións
      repositorio de código fonte de Git para que poida enviar os seus cambios
      directamente.
 
-     Nota: A compatibilidade cos novo idiomas require facer adicións ao
-     código fonte de Tux Paint («/src/i18n.h» e «/src/i18n.c»), e require
-     actualizacións dos Makefile, para asegurarse de que os ficheiros «.po»
-     están compilados en ficheiros «.mo» e están dispoñíbeis para o seu uso
-     en tempo de execución.
+     Nota: A compatibilidade cos novo configuracións locais require facer
+     adicións ao código fonte de Tux Paint («/src/i18n.h» e «/src/i18n.c»), e
+     require actualizacións dos Makefile, para asegurarse de que os ficheiros
+     «.po» están compilados en ficheiros «.mo» e están dispoñíbeis para o seu
+     uso en tempo de execución.
 
      ----------------------------------------------------------------------
 
@@ -754,10 +754,10 @@ Métodos de entrada alternativos
      calquera texto que teña un carácter «#» (grella). Isto pódese usar para
      denotar comentarios , como se ve no exemplo anterior.
 
-     Nota: Os significados dos sinaladores son específicos do idioma e son
-     procesados ​​polo código fonte específico do idioma en «src/im.c». Por
-     exemplo, «b» úsase en coreano para tratar Batchim, que pode pasar ao
-     seguinte carácter.
+     Nota: Os significados dos sinaladores son específicos da configuración
+     local e son procesados ​​polo código fonte específico do idioma en
+     «src/im.c». Por exemplo, «b» úsase en coreano para tratar Batchim, que
+     pode pasar ao seguinte carácter.
 
      Nota: A compatibilidade cos novo input methods require facer adicións ao
      código fonte de Tux Paint ("/src/im.c"), e require actualizacións dos
@@ -794,20 +794,21 @@ Teclado en pantalla
        usar para denotar comentarios , como se ve no exemplo anterior.
 
        A liña «keyboardlist» describe a que esquemas cambiar, cando o usuario
-       preme nos botóns esquerdo e dereito do teclado. (Ver abaixo.)
+       preme nos botóns esquerdo e dereito do teclado. (Ver máis abaixo.)
 
   Ficheiro de disposición do teclado («qwerty.h_layout»)
 
        Isto describe o tamaño do teclado (como unha reixa de «largo × alto»)
        e lista cada tecla co seu código numérico (ver o ficheiro «keymap»,
-       abaixo), o largo no que debería debuxarse ​​(normalmente «1.0», para
-       ocupar un espazo no teclado, pero no seguinte exemplo, teña en conta
-       que as teclas «TAB» e «SPACE» son moito máis largas), o carácter ou o
-       texto que se amosará na tecla, dependendo das teclas modificadoras
-       premido (unha para cada unha: sen modificadores,[Maiúsculas],[AltGr] e
-       [Maiúsculas] + [AltGr]) e, finalmente, se a tecla está afectada ou non
-       pola tecla [BloqMaiús] (use «1») ou a tecla [AltGr] (gráficos
-       alternativos) ( use «2»), ou non (use «0»).
+       máis abaixo), o largo no que debería debuxarse ​​(normalmente «1.0»,
+       para ocupar un espazo no teclado, pero no seguinte exemplo, teña en
+       conta que as teclas «TAB» e «SPACE» son moito máis largas), o carácter
+       ou o texto que se amosará na tecla, dependendo das teclas
+       modificadoras premido (unha para cada unha: sen
+       modificadores,[Maiúsculas],[AltGr] e [Maiúsculas] + [AltGr]) e,
+       finalmente, se a tecla está afectada ou non pola tecla [BloqMaiús]
+       (use «1») ou a tecla [AltGr] (gráficos alternativos) ( use «2»), ou
+       non (use «0»).
 
          WIDTH 15
          HEIGHT 5

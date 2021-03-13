@@ -26,7 +26,7 @@
       </p>
 
       <p>
-        30 Xaneiro 2021      </p>
+         9 de Marzo de 2021      </p>
     </center>
 
     <hr>
@@ -80,7 +80,7 @@
         <h4>gettext</h4>
         <blockquote>
           <p>
-            Tux Paint utiliza o idioma do sistema xunto coa biblioteca «gettext» para admitir varios idiomas (p. ex., o español). Necesitará ter a biblioteca gettext instalada.          </p>
+            Tux Paint utiliza a configuración local do sistema xunto coa biblioteca «gettext» para admitir varios idiomas (p. ex., o español). Necesitará ter a biblioteca gettext instalada.          </p>
 
           <p>
             <a href="http://www.gnu.org/software/gettext/">http://www.gnu.org/software/gettext/</a>
@@ -110,7 +110,7 @@
         <h4>Compatibilidade de SVG</h4>
         <blockquote>
           <p>
-            A partir de Tux Paint 0.9.17, Tux Paint pode cargar imaxes SVG (gráficos vectoriais escalábeis) como selos. Admítense dous conxuntos de bibliotecas e pódese desactivar completamente a compatibilidade SVG (a través de «<code>make SVG_LIB:=</code>»)          </p>
+            A partir de Tux Paint 0.9.17, Tux Paint pode cargar imaxes SVG (Scalable Vector Graphics — Gráficos Vectoriais Escalábeis) como selos. Admítense dous conxuntos de bibliotecas e pódese desactivar completamente a compatibilidade SVG (a través de «<code>make SVG_LIB:=</code>»)          </p>
 
           <h5>librsvg-2 &amp; libCairo2 (bibliotecas máis recentes)</h5>
           <ul>
@@ -214,7 +214,7 @@
             Lea as notas pertinentes se está a construír para Win9X/ME.          </p>
         </blockquote>
 
-        <h4>Executando o instalador:</h4>
+        <h4>Executar o instalador:</h4>
         <blockquote>
           <p>
             Faga dobre clic no executábel do instalador de Tux Paint (ficheiro .EXE) e siga as instrucións.
@@ -295,7 +295,7 @@
         </blockquote>
 
         <h4>
-          Desactivando a compatibilidade de «SVG» (e, polo tanto, as dependencias de «Cairo, libSVG, e svg-cairo»:        </h4>
+          Desactivar a compatibilidade de «SVG» (e, polo tanto, as dependencias de «Cairo, libSVG, e svg-cairo»:        </h4>
         <blockquote>
           <p>
             Para desactivar a compatibilidade con SVG (por exemplo, se o seu sistema non é compatíbel coa biblioteca de Cairo ou outras dependencias relacionadas co SVG), pode executar «<code>make</code>» engadindo «<code>SVG_LIB= SVG_CFLAGS= NOSVGFLAG=NOSVG</code>»:
@@ -307,7 +307,7 @@
         </blockquote>
 
         <h4>
-          Desactivando a compatibilidade de «Pango» (e, polo tanto, as dependencias de «Pango, Cairo, etc.»:        </h4>
+          Desactivar a compatibilidade de «Pango» (e, polo tanto, as dependencias de «Pango, Cairo, etc.»:        </h4>
         <blockquote>
           <p>
             Antes da versión 0.9.18, Tux Paint utilizaba a biblioteca <code>libSDL_ttf</code> para renderizar texto usando tipos de letra TrueType. Dende o 0.9.18 úsase <code>libSDL_Pango</code>, xa que ten unha mellor compatibilidade coa internacionalización. Non obstante, se quere desactivar o uso de SDL_Pango, pode facelo executando «<code>make</code>» engadindo «<code>SDL_PANGO_LIB=</code>»:          </p>
@@ -381,7 +381,7 @@
           <p>
             <b>Nota:</b> De xeito predeterminado, «<code>tuxpaint</code>», o programa executábel, colócase en «<code>/usr/local/bin/</code>». Os ficheiros de datos (imaxes, sons, etc.) colócanse en «<code>/usr/local/share/tuxpaint/</code>».          </p>
 
-          <h5>Cambiando onde van as cousas</h5>
+          <h5>Cambiar onde van as cousas</h5>
           <blockquote>
             <p>
               Pode cambiar onde irán as cousas axustando as variábeis de «<code>Makefile</code>» na liña de ordes. «<code>DESTDIR</code>» úsase para colocar a saída nunha área de espera para a creación de paquetes. «<code>PREFIX</code>» é a base de onde van todos os demais ficheiros e, de xeito predeterminado, está estabelecido en «<code>/usr/local</code>».            </p>
@@ -414,7 +414,7 @@
 
               <dt><code>LOCALE_PREFIX</code></dt>
               <dd>
-                Onde irán os ficheiros de tradución para Tux Paint e onde os buscará Tux Paint. (Estabelécese en «<code>$(PREFIX)/share/locale/</code>») (A localización final dun ficheiro de tradución estará no directorio local (por exemplo, «<code>es</code>» para o español), dentro do subdirectorio «<code>LC_MESSAGES</code>»).              </dd>
+                Onde irán os ficheiros de tradución para Tux Paint e onde os buscará Tux Paint. (Estabelécese en «<code>$(PREFIX)/share/locale/</code>») (A localización final dun ficheiro de tradución estará no directorio da configuración local (por exemplo, «<code>es</code>» para o español), dentro do subdirectorio «<code>LC_MESSAGES</code>»).              </dd>
             </dl>
 
             <p>
@@ -441,10 +441,10 @@
             Cando remate, prema no botón pechar.          </p>
         </blockquote>
 
-        <h4>Usando o Panel de control</h4>
+        <h4>Usar o Panel de control</h4>
         <blockquote>
           <p>
-            Tamén é posible usar a entrada «TuxPaint (só eliminar)« na sección Engadir/Eliminar programas do Panel de control.          </p>
+            Tamén é posíbel usar a entrada «TuxPaint (só eliminar)« na sección Engadir/Eliminar programas do Panel de control.          </p>
         </blockquote>
       </blockquote>
 

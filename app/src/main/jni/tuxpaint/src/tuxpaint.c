@@ -3,7 +3,7 @@
 
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2020
+  Copyright (c) 2002-2021
   by various contributors; see AUTHORS.txt
   http://www.tuxpaint.org/
 
@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - February 20, 2021
+  June 14, 2002 - March 8, 2021
 */
 
 
@@ -1936,7 +1936,7 @@ static unsigned cur_color;
 static int cur_tool, cur_brush, old_tool;
 static int cur_stamp[MAX_STAMP_GROUPS];
 static int cur_shape, cur_magic;
-static int cur_font, cur_eraser, cur_fill;
+static int cur_font, cur_eraser, cur_fill, fill_drag_started;
 static int cursor_left, cursor_x, cursor_y, cursor_textwidth;   /* canvas-relative */
 static int old_cursor_x, old_cursor_y;
 static int cur_label, cur_select;
@@ -4792,6 +4792,8 @@ static void mainloop(void)
                       if (would_flood_fill(canvas, draw_color, canv_color))
                         {
                           int x1, y1, x2, y2;
+                          SDL_Surface * last;
+                          int undo_ctr;
     
                           /* We only bother recording an undo buffer
                              (which may kill our redos) if we're about
@@ -4799,30 +4801,38 @@ static void mainloop(void)
                           rec_undo_buffer();
                           x1 = x2 = old_x;
                           y1 = y2 = old_y;
-    
+
+                          if (cur_undo > 0)
+                            undo_ctr = cur_undo - 1;
+                          else
+                            undo_ctr = NUM_UNDO_BUFS - 1;
+
+                          last = undo_bufs[undo_ctr];
+
+
+                          for (y1 = 0; y1 < canvas->h; y1++) {
+                            for (x1 = 0; x1 < canvas->w; x1++) {
+                              sim_flood_touched[(y1 * canvas->w) + x1] = 0;
+                            }
+                          }
+
                           if (cur_fill == FILL_FLOOD)
                             {
                               /* Flood fill a solid color */
-                              do_flood_fill(canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2);
-    
+                              do_flood_fill(screen, texture, renderer, last, canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2, sim_flood_touched);
+
                               update_canvas(x1, y1, x2, y2);
                             }
                           else
                             {
                               SDL_Surface * tmp_canvas;
 
-                              for (y1 = 0; y1 < canvas->h; y1++) {
-                                for (x1 = 0; x1 < canvas->w; x1++) {
-                                  sim_flood_touched[(y1 * canvas->w) + x1] = 0;
-                                }
-                              }
-
                               tmp_canvas = SDL_CreateRGBSurface(canvas->flags,
                                 canvas->w, canvas->h, canvas->format->BitsPerPixel,
                                 canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
                               SDL_BlitSurface(canvas, NULL, tmp_canvas, NULL);
 
-                              simulate_flood_fill(tmp_canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2, sim_flood_touched);
+                              simulate_flood_fill(screen, texture, renderer, last, tmp_canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2, sim_flood_touched);
                               SDL_FreeSurface(tmp_canvas);
 
                               sim_flood_x1 = x1;
@@ -4841,10 +4851,13 @@ static void mainloop(void)
                                   /* Start a linear gradient */
                                   draw_linear_gradient(canvas, canvas, sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2,
                                     fill_x, fill_y, old_x, old_y + 1, draw_color, sim_flood_touched);
+                                  fill_drag_started = 1;
                                 }
 
                               update_canvas(x1, y1, x2, y2);
                             }
+
+                            draw_tux_text(TUX_GREAT, tool_tips[TOOL_FILL], 1);
                         }
                     }
                   else if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
@@ -4995,7 +5008,6 @@ static void mainloop(void)
                         }
 
                       do_render_cur_text(0);
-
                     }
 
                   button_down = 1;
@@ -5502,6 +5514,10 @@ static void mainloop(void)
                           SDL_StartTextInput();
                         }
                     }
+                  else if (cur_tool == TOOL_FILL)
+                    {
+                      fill_drag_started = 0;
+                    }
                 }
               button_down = 0;
 
@@ -5822,7 +5838,7 @@ static void mainloop(void)
                       sz = calc_eraser_size(cur_eraser);
                       rect_xor(new_x - sz / 2, new_y - sz / 2, new_x + sz / 2, new_y + sz / 2);
                     }
-                  else if (cur_tool == TOOL_FILL && cur_fill == FILL_GRADIENT_LINEAR)
+                  else if (cur_tool == TOOL_FILL && cur_fill == FILL_GRADIENT_LINEAR && fill_drag_started)
                     {
                       Uint32 draw_color, canv_color;
                       int undo_ctr;
@@ -25386,7 +25402,7 @@ static void setup(void)
   printf("%s\n", tmp_str);
 #endif
 
-  safe_snprintf(tmp_str, sizeof(tmp_str), "© 2002–2020 Bill Kendrick et al.");
+  safe_snprintf(tmp_str, sizeof(tmp_str), "© 2002–2021 Bill Kendrick et al.");
   tmp_surf = render_text(medium_font, tmp_str, black);
   dest.x = 10;
   dest.y = WINDOW_HEIGHT - img_progress->h - (tmp_surf->h * 2);
@@ -26020,6 +26036,8 @@ static void claim_to_be_ready(void)
   cur_magic = 0;
   cur_font = 0;
   cur_eraser = 0;
+  cur_fill = 0;
+  fill_drag_started = 0;
   cur_label = LABEL_LABEL;
   cur_select = 0;
   cursor_left = -1;

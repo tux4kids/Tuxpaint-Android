@@ -8,7 +8,7 @@ http://www.tuxpaint.org/
 
 $Id$
 
-2021.February.20 (0.9.26)
+2021.March.10 (0.9.26)
   * New Features
     ------------
     * Larger UI buttons
@@ -54,6 +54,9 @@ $Id$
       + Galician
         Miguel Anxo Bouzada <mbouzada@gmail.com>
 
+      + Japanese
+        TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
     * Expanded the steps for making and posting releases.
 
     * Documented how to build Tux Paint using old macOS
@@ -61,6 +64,9 @@ $Id$
 
   * Other Improvements
     ------------------
+    * Fill tools do a better job at filling around
+      antialiased edges, and apply some blending.
+
     * Reduce CPU usage by increasing delay in main loop
       from 1ms to 10ms, and only using SDL's Timer subsystem
       when scrolling happens.

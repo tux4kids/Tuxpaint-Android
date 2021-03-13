@@ -5,7 +5,7 @@
     Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
-                                30 Xaneiro 2021
+                               9 de Marzo de 2021
 
      ----------------------------------------------------------------------
 
@@ -59,9 +59,9 @@ Requisitos:
 
     gettext
 
-         Tux Paint utiliza o idioma do sistema xunto coa biblioteca «gettext»
-         para admitir varios idiomas (p. ex., o español). Necesitará ter a
-         biblioteca gettext instalada.
+         Tux Paint utiliza a configuración local do sistema xunto coa
+         biblioteca «gettext» para admitir varios idiomas (p. ex., o
+         español). Necesitará ter a biblioteca gettext instalada.
 
          http://www.gnu.org/software/gettext/
 
@@ -84,9 +84,9 @@ Requisitos:
     Compatibilidade de SVG
 
          A partir de Tux Paint 0.9.17, Tux Paint pode cargar imaxes SVG
-         (gráficos vectoriais escalábeis) como selos. Admítense dous
-         conxuntos de bibliotecas e pódese desactivar completamente a
-         compatibilidade SVG (a través de «make SVG_LIB:=»)
+         (Scalable Vector Graphics — Gráficos Vectoriais Escalábeis) como
+         selos. Admítense dous conxuntos de bibliotecas e pódese desactivar
+         completamente a compatibilidade SVG (a través de «make SVG_LIB:=»)
 
       librsvg-2 & libCairo2 (bibliotecas máis recentes)
 
@@ -167,7 +167,7 @@ Compilación e instalación:
 
          Lea as notas pertinentes se está a construír para Win9X/ME.
 
-    Executando o instalador:
+    Executar o instalador:
 
          Faga dobre clic no executábel do instalador de Tux Paint (ficheiro
          .EXE) e siga as instrucións.
@@ -239,7 +239,7 @@ Compilación e instalación:
 
            $ make
 
-    Desactivando a compatibilidade de «SVG» (e, polo tanto, as dependencias de
+    Desactivar a compatibilidade de «SVG» (e, polo tanto, as dependencias de
     «Cairo, libSVG, e svg-cairo»:
 
          Para desactivar a compatibilidade con SVG (por exemplo, se o seu
@@ -249,7 +249,7 @@ Compilación e instalación:
 
            $ make SVG_LIB= SVG_CFLAGS=
 
-    Desactivando a compatibilidade de «Pango» (e, polo tanto, as dependencias de
+    Desactivar a compatibilidade de «Pango» (e, polo tanto, as dependencias de
     «Pango, Cairo, etc.»:
 
          Antes da versión 0.9.18, Tux Paint utilizaba a biblioteca libSDL_ttf
@@ -311,7 +311,7 @@ Compilación e instalación:
          colócase en «/usr/local/bin/». Os ficheiros de datos (imaxes, sons,
          etc.) colócanse en «/usr/local/share/tuxpaint/».
 
-      Cambiando onde van as cousas
+      Cambiar onde van as cousas
 
            Pode cambiar onde irán as cousas axustando as variábeis de
            «Makefile» na liña de ordes. «DESTDIR» úsase para colocar a saída
@@ -353,9 +353,9 @@ Compilación e instalación:
                    Onde irán os ficheiros de tradución para Tux Paint e onde
                    os buscará Tux Paint. (Estabelécese en
                    «$(PREFIX)/share/locale/») (A localización final dun
-                   ficheiro de tradución estará no directorio local (por
-                   exemplo, «es» para o español), dentro do subdirectorio
-                   «LC_MESSAGES»).
+                   ficheiro de tradución estará no directorio da
+                   configuración local (por exemplo, «es» para o español),
+                   dentro do subdirectorio «LC_MESSAGES»).
 
            Nota: Esta lista non está actualizada. Consulte «Makefile» e
            «Makefile-i18n» para ver unha lista completa.
@@ -380,9 +380,9 @@ Desinstalación de Tux Paint:
 
          Cando remate, prema no botón pechar.
 
-    Usando o Panel de control
+    Usar o Panel de control
 
-         Tamén é posible usar a entrada «TuxPaint (só eliminar)« na sección
+         Tamén é posíbel usar a entrada «TuxPaint (só eliminar)« na sección
          Engadir/Eliminar programas do Panel de control.
 
   Linux

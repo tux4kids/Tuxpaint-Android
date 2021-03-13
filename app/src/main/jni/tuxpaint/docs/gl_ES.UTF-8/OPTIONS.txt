@@ -6,15 +6,15 @@ Documentación de opcións
     Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
-                                5 Febreiro 2021
+                               9 de Marzo de 2021
 
      ----------------------------------------------------------------------
 
                                Tux Paint Config.
 
-     Está dispoñible unha ferramenta gráfica que lle permite cambiar o
+     Está dispoñíbel unha ferramenta gráfica que lle permite cambiar o
      comportamento de Tux Paint. Non obstante, se prefire non instalar e usar
-     esta ferramenta, ou quere comprender mellor as opcións dispoñibles, siga
+     esta ferramenta, ou quere comprender mellor as opcións dispoñíbeis, siga
      lendo.
 
      ----------------------------------------------------------------------
@@ -120,7 +120,7 @@ Usuarios de Windows
 
      buttonsize=TAMAÑO
 
-             Estableza o tamaño dos píxeles dos botóns na interface de
+             Estabeleza o tamaño dos píxeles dos botóns na interface de
              usuario de Tux Paint (substituíndo o predeterminado de «48»).
              Útil cando se usan pantallas de alta densidade ou dispositivos
              de entrada groseiros, como rastrexadores de ollos.
@@ -239,7 +239,7 @@ Usuarios de Windows
 
      papersize=TAMAÑO_DO_PAPEL
 
-             (Plataformas que usan o xerador interno PostScript de Tux Paint,
+             (Plataformas que usan o xerador interno PostScript de Tux Paint;
              non Windows, macOS, BeOS ou Haiku).
 
              Indica a Tux Paint que tamaño de PostScript debe xerar. Se non
@@ -278,8 +278,8 @@ Usuarios de Windows
 
      uppercase=yes
              Todo o texto renderizarase só con maiúscula (por exemplo,
-             «Pincel» será «PINCEL»). Útil para os nenos que saben ler, pero
-             que ata agora só aprenderon maiúsculas.
+             «Pincel» será «PINCEL»). Útil para os cativos que saben ler,
+             pero que ata agora só aprenderon maiúsculas.
 
      grab=yes
 
@@ -298,7 +298,7 @@ Usuarios de Windows
              para gardar, [Ctrl]-[N] para unha nova imaxe, etc.)
 
              Isto é útil para evitar que ordes non desexadas sexan activadas
-             por nenos que non teñen experiencia con teclados.
+             por cativos que non teñen experiencia con teclados.
 
      nowheelmouse=yes
              Isto desactiva a compatibilidade para a roda dos ratos que a
@@ -310,9 +310,9 @@ Usuarios de Windows
              Antes do Tux Paint 0.9.15, tamén se podían empregar os botóns
              medio e dereito do rato para premer. Na versión 0.9.15,
              cambiouse para que só funcionase o botón esquerdo do rato para
-             non adestrar aos nenos a usar o botón incorrecto.
+             non adestrar aos cativos a usar o botón incorrecto.
 
-             Porén, para os nenos que teñen problemas co rato, pódese
+             Porén, para os cativos que teñen problemas co rato, pódese
              desactivar esta distinción entre os dous ou tres botóns do rato
              (devolvendo Tux Paint ao seu antigo comportamento) usando esta
              opción.
@@ -339,7 +339,7 @@ Usuarios de Windows
              sinxelas cando se usan as ferramentas Liñas, Formas, Selos e
              Goma.
 
-             Isto pode axudar cando Tux Paint se executa en ordenadores moi
+             Isto pode axudar cando Tux Paint se executa en computadores moi
              lentos ou se amosa nunha pantalla remota de X-Window.
 
      sysfonts=yes
@@ -359,8 +359,9 @@ Usuarios de Windows
              configuración local, se o hai, é o que coincide coa
              configuración local en que se está a executar Tux Paint.
 
-             Para cargar todos os tipos de letra específicos de idiomas (o
-             comportamento antigo), configure esta opción.
+             Para cargar todos os tipos de letra específicos das
+             configuracións locais (o comportamento antigo), configure esta
+             opción.
 
      nostamps=yes
 
@@ -373,7 +374,7 @@ Usuarios de Windows
              suposto, ningún selo estará dispoñíbel.
 
      nostampcontrols=yes
-             Algunhas imaxes da ferramenta Selos pódense reflectir, virar
+             Algunhas imaxes da ferramenta Selos pódense reflectir, inverter
              e/ou cambiar o seu tamaño. Esta opción desactiva os controis e
              só fornece os selos básicos.
 
@@ -399,8 +400,8 @@ Usuarios de Windows
 
      mirrorstamps=yes
 
-             Para os selos que se poden relectir, esta opción estabeleceos de
-             xeito predeterminado na súa forma reflectida.
+             Para os selos que se poden reflectir, esta opción estabeléceos
+             de xeito predeterminado na súa forma reflectida.
 
              Isto pode ser útil para as persoas que prefiren as cousas de
              dereita a esquerda no canto de de esquerda a dereita.
@@ -424,7 +425,7 @@ Usuarios de Windows
      onscreen-keyboard-disable-change=yes
              Desactiva a posibilidade de cambiar o deseño do teclado en
              pantalla cando se usan as ferramentas Texto e Etiqueta, útil
-             para simplificar as cousas para os nenos pequenos.
+             para simplificar as cousas para os máis pequechos.
              Nota: Usar esta opción implica automaticamente
              onscreen-keyboard=yes, polo que estabelecer ambas as cousas é
              redundante.
@@ -449,12 +450,12 @@ Usuarios de Windows
              valores permitidos van do 1 ao 7. O valor predeterminado é 7.
 
      joystick-hat-timeout=MILISEGUNDOS
-             Establece o atraso após de que o punteiro comezará a moverse
+             Estabelece o atraso após de que o punteiro comezará a moverse
              automaticamente se se mantén premido o sombreiro. Os valores
              permitidos van de 0 a 3000. O valor predeterminado é 1000.
 
      joystick-hat-slowness=VELOCIDADE
-             Establece un atraso en cada movemento automático, o que permite
+             Estabelece un atraso en cada movemento automático, o que permite
              diminuír a velocidade do sombreiro. Os valores permitidos van de
              0 a 500. O valor predeterminado é 15.
 
@@ -614,16 +615,16 @@ Usuarios de Windows
              configuración ou o valor predeterminado para «savedir» como o
              lugar onde buscar ficheiros de datos persoais (pinceis, selos,
              imaxes de comezo e tipos de letra) . A partir da versión 0.9.18,
-             pódense especificar por separado (consulte a opción «datadir»,
-             máis abaixo).
+             pódense especificar por separado (consulte a opción «datadir», a
+             continuación).
 
              Exemplo: savedir=Z:\tuxpaint\
 
      exportdir=DIRECTORIO
 
              Use esta opción para cambiar onde Tux Paint exporta ficheiros
-             –imaxes individuais ou presentacións de diapositivas GIF
-             animadas– uso externo.
+             —imaxes individuais ou diaporamasositivas GIF animadas— uso
+             externo.
 
              Se non o anula, a ubicación predeterminada é:
 
@@ -632,9 +633,9 @@ Usuarios de Windows
                   almacenen imaxes, en función da configuración XDG (X
                   Desktop Group). (Probe a executar a liña de ordes
                   «xdg-user-dir PICTURES» para descubrilo.)
-                  Normalmente (no idioma inglés), este será un subdirectorio
-                  «Imaxes» no seu directorio persoal (é dicir, «$HOME/Imaxes»
-                  tamén coñecido como «~/Imaxes»).
+                  Normalmente (na configuración local inglesa), este será un
+                  subdirectorio «Imaxes» no seu directorio persoal (é dicir,
+                  «$HOME/Imaxes» tamén coñecido como «~/Imaxes»).
                   Tux Paint volverá usar ese directorio habitual, se non se
                   pode ler a configuración XDG, ou non se estabelece nada
                   «XDG_PICTURES_DIR».
@@ -643,7 +644,7 @@ Usuarios de Windows
 
              Nota: Cando se empregan os valores predeterminados, crearase e
              usarase un novo subdirectorio «TuxPaint». (p. ex.:
-             «~/Imaxes/TuxPaintx) Cando se usa a opción «--exportdir»,
+             «~/Imaxes/TuxPaint») Cando se usa a opción «--exportdir»,
              empregarase a ruta exacta especificada (non se crea ningún
              subdirectorio «TuxPaint»).
 
@@ -662,9 +663,9 @@ Usuarios de Windows
              datos persoais (pinceis, selos, imaxes de comezo, modelos e
              tipos de letra específicos do usuario actual).
 
-             Tux Paint will search for subdirectories/subfolders named
-             "brushes", "stamps", "starters", "templates", and "fonts" under
-             the specified data directory.
+             Tux Paint buscará subdirectorios/subcartafoles chamados
+             «brushes», «stamps», «starters», «templates», «fonts» no
+             directorio de datos especificado.
 
              Se non o anula, a ubicación predeterminada é:
 
@@ -681,9 +682,10 @@ Usuarios de Windows
                   Exemplo: /Users/Username/Library/Application
                   Support/TuxPaint/brushes/
 
-             Note: Prior to version 0.9.18, Tux Paint would use the same
-             setting or default as for "savedir" to search for data files. As
-             of version 0.9.18, they may be specified separately.
+             Nota: Antes da versión 0.9.18, Tux Paint usaba o mesmo axuste ou
+             predeterminado que para «savedir» para buscar ficheiros de
+             datos. A partir da versión 0.9.18, pódense especificar por
+             separado.
 
              Nota: Ao especificar unha unidade de Windows (por exemplo,
              «H:\»), tamén debe especificar un subdirectorio.
@@ -691,14 +693,16 @@ Usuarios de Windows
              Exemplo: datadir=/home/johnny/tuxpaint-data/
 
      saveover=yes
-             This disables the "Save over the old version...?" prompt when
-             saving an existing file. With this option, the older version
-             will always be replaced by the new version, automatically.
+             Isto desactiva a pregunta «Gardar sobre a versión antiga...?» ao
+             gardar un ficheiro existente. Con esta opción, a versión
+             anterior sempre será substituída pola nova versión
+             automaticamente.
 
      saveover=new
-             This also disables the "Save over the old version...?" prompt
-             when saving an existing file. This option, however, will always
-             save a new file, rather than overwrite the older version.
+             Isto tamén desactiva a pregunta «Gardar sobre a versión
+             antiga...?» cando garda un ficheiro existente. Non obstante,
+             esta opción sempre gardará un novo ficheiro no canto de
+             sobrescribir a versión anterior.
 
      saveover=ask
 
@@ -709,10 +713,10 @@ Usuarios de Windows
              gardar sobre a versión anterior ou non.
 
      nosave=yes
-             This disables Tux Paint's ability to save files (and therefore
-             disables the on-screen "Save" button). It can be used in
-             situations where the program is only being used for fun, or in a
-             test environment.
+             Isto desactiva a capacidade de Tux Paint para gardar ficheiros
+             (e, polo tanto, desactiva o botón «Gardar» na pantalla). Pode
+             usarse en situacións nas que o programa só se usa para
+             divertirse ou nun contorno de proba.
 
      autosave=yes
              Isto impide a Tux Paint preguntar se quere gardar a imaxe actual
@@ -725,38 +729,40 @@ Usuarios de Windows
 
      colorfile=NOME_DE_FICHEIRO
 
-             You may override Tux Paint's default color palette by creating a
-             plain ASCII text file that describes the colors you want, and
-             pointing to that file using the "colorfile" option.
+             Pode anular a paleta de cores predeterminada de Tux Paint
+             creando un ficheiro de texto ASCII simple que describa as cores
+             que quere e apuntando a ese ficheiro usando a opción
+             «colorfile».
 
-             The file should list one color per line. Colors are defined in
-             terms of their Red, Green and Blue values, each from 0 (off) to
-             255 (brightest). (For more information, try Wikipedia's "RGB
-             color model" article.)
+             O ficheiro debería incluír unha cor por liña. As cores defínense
+             en función dos seus valores vermello, verde e azul, cada un de 0
+             (apagado) a 255 (máis brillante). (Para obter máis información,
+             vexa o artigo «Modelo de cor RGB (en inglés) de Wikipedia).
 
-             Colors may be listed using three decimal numbers (e.g., "255 68
-             136") or a 6- or 3-digit-long hexadecimal 'triplet' (e.g.,
-             "#ff4488" or "#F48").
+             As cores pódense enumerar usando tres números decimais (por
+             exemplo, «255 68 136») ou un «triplete» hexadecimal de 6 ou 3
+             díxitos de longo (por exemplo, «#ff4488» ou «#F48»).
 
-             After the color definition (on the same line) you may enter text
-             to describe the color. Tux will display this text when the color
-             is clicked. (For example, "#FFF Branco coma a neve.")
+             Após a definición da cor (na mesma liña) pode introducir texto
+             para describir a cor. Tux amosará este texto cando se prema na
+             cor. (Por exemplo, «#FFF Branco coma a neve.»)
 
              Como exemplo, pode ver as cores predeterminadas empregadas
              actualmente en Tux Paint en: «default_colors.txt».
 
-             NOTES: You must separate decimal values with spaces, and begin
-             hexadecimal values with a pound/number-sign character ("#"). In
-             3-digit hexadecimal, each digit is used for both the high and
-             low halves of the byte, so "#FFF" is the same as "#FFFFFF", not
-             "#F0F0F0".
+             NOTAS: Debe separar os valores decimais con espazos e comezar os
+             valores hexadecimais cun carácter de libra/signo de númeral
+             («#»). En hexadecimais de 3 díxitos, cada díxito úsase tanto
+             para a metade alta como para a baixa do byte, polo que «#FFF» é
+             o mesmo que «#FFFFFF» e non que «#F0F0F0».
 
      colorsrows=FILAS
 
-             How many rows of color palette buttons to show; useful when
-             using a large color palette (see "colorfile", above), and/or for
-             use with coarse input devices (like eyegaze trackers). "FILAS"
-             may be between "1" (the default) and "3".
+             Cantas filas de botóns da paleta de cores amosar; útil cando se
+             usa unha gran paleta de cores (ver «colorfile», arriba) e/ou
+             para usar con dispositivos de entrada groseiros (como os
+             rastrexadores de ollos). «FILAS» pode estar entre «1» (o
+             predeterminado) e «3».
 
      lang=IDIOMA
 
@@ -1025,17 +1031,18 @@ Usuarios de Windows
 
      (Para usuarios de Linux e Unix)
 
-     If any of the above options are set in "/etc/tuxpaint/tuxpaint.config",
-     you can override them in your own "~/.tuxpaintrc" file.
+     Se algunha das opcións anteriores está estabelecida en
+     «/etc/tuxpaint/tuxpaint.config», pode anulala no seu propio ficheiro
+     «~/.tuxpaintrc».
 
-     For true/false options, like "noprint" and "grab", you can simply say
-     they equal 'no' in your "~/.tuxpaintrc" file:
+     Para opcións verdadeiro/falso, como «noprint» e «grab», pode simplemente
+     dicir que son iguais a «no» no seu ficheiro «~/.tuxpaintrc»:
 
        noprint=no
        uppercase=no
 
-     Or, you can use options similar to the command-line override options
-     described below. For example:
+     Ou pode usar opcións semellantes ás opcións de anulación da liña de
+     ordes que se describen a continuación. Por exemplo:
 
        print=yes
        mixedcase=yes
@@ -1044,7 +1051,7 @@ Usuarios de Windows
 
                             Opcións da liña de ordes
 
-     As opcións tamén se poden emitir na liña de ordes cando se inicia Tux
+     As opcións tamén se poden indicar na liña de ordes cando se inicia Tux
      Paint.
 
        --fullscreen
@@ -1119,8 +1126,8 @@ Usuarios de Windows
        --autosave
        --lang IDIOMA
        --colorfile FICHEIRO
-               These enable or correspond to the configuration file options
-               described above.
+               Estas activan ou corresponden ás opcións do ficheiro de
+               configuración descritas anteriormente.
 
                      -------------------------------------
 
@@ -1160,73 +1167,77 @@ Usuarios de Windows
        --saveoverask
        --save
        --noautosave
-               These options can be used to override any settings made in the
-               configuration file. (If the option isn't set in the
-               configuration file(s), no overriding option is necessary.)
+               Estas opcións pódense usar para anular calquera axuste feito
+               no ficheiro de configuración. (Se a opción non está
+               configurada no(s) ficheiro(s) de configuración, non será
+               necesaria ningunha opción de anulación.)
 
                      -------------------------------------
 
        --locale IDIOMA
 
-               Run Tux Paint in one of the support languages. See the
-               "Choosing a Different Language" section below for the locale
-               strings (e.g., "de_DE" for German) to use.
+               Execute Tux Paint nun dos idiomas compatíbeis. Vexa a sección
+               «Escoller un idioma diferente» a continuación para ver as
+               cadeas de configuración local (por exemplo, «de_DE» para o
+               alemán) que debe usar.
 
-               (If your locale is already set, e.g. with the "$LANG"
-               environment variable, this option is not necessary, since Tux
-               Paint honors your environment's setting, if possible.)
+               (Se a súa configuración local xa está configurada, por
+               exemplo, coa variábel de contorno «$LANG», esta opción non é
+               necesaria, xa que Tux Paint respecta a configuración do seu
+               contorno, se é posíbel).
 
        --nosysconfig
 
-               Under Linux and Unix, this prevents the system-wide
-               configuration file, "/etc/tuxpaint/tuxpaint.conf", from being
-               read.
+               En Linux e Unix, isto evita ler o ficheiro de configuración de
+               todo o sistema, «/etc/tuxpaint/tuxpaint.conf».
 
-               Only your own configuration file, "~/.tuxpaintrc", if it
-               exists, will be used.
+               Só se empregará o seu propio ficheiro de configuración,
+               «~/.tuxpaintrc», se existe.
 
      ----------------------------------------------------------------------
 
-Command-Line Informational Options
+Opcións informativas da liña de ordes
 
-       The following options display some informative text on the screen. Tux
-       Paint doesn't actually start up and run afterwards, however.
+       As seguintes opcións amosan un texto informativo na pantalla. Non
+       obstante, Tux Paint non se inicia nin se executa despois.
 
          --version
          --verbose-version
-                 Display the version number and date of the copy of Tux Paint
-                 you are running. The "--verbose-version" also lists what
-                 compile-time options were set. (See INSTALL and FAQ).
+                 Amosa o número de versión e a data da copia de Tux Paint que
+                 está a executar. O «--verbose-version» tamén lista as
+                 opcións de tempo de compilación definidas. (Vexa INSTALL
+                 [INSTALAR] e FAQ [Preguntas frecuentes] ).
 
          --copying
-                 Show brief license information about copying Tux Paint.
+                 Amosa información breve sobre a licenza para copiar Tux
+                 Paint.
 
          --usage
-                 Display the list of available command-line options.
+                 Amosa a lista de opcións de liña de ordes dispoñíbeis.
 
          --help
-                 Display brief help on using Tux Paint.
+                 Amosa unha breve axuda sobre o uso de Tux Paint.
 
          --lang help
-                 Display a list of available languages in Tux Paint.
+                 Amosa unha lista de idiomas dispoñíbeis en Tux Paint.
 
          --joystick-dev list
-                 Display list of attached joysticks available to Tux Paint.
+                 Amosa a lista de pancas de mando (joysticks) conectados
+                 dispoñíbeis para Tux Paint.
 
      ----------------------------------------------------------------------
 
-                         Choosing a Different Language
+                          Escoller un idioma diferente
 
-     Tux Paint has been translated into a number of languages. To access the
-     translations, you can use the "--lang" option on the command-line to set
-     the language (e.g. "--lang spanish") or use the "lang=" setting in the
-     configuration file (e.g., "lang=spanish").
+     Tux Paint foi traducido a varios idiomas. Para acceder ás traducións,
+     pode usar a opción «--lang» na liña de ordes para estabelecer o idioma
+     (por exemplo, «--lang spanish») ou usar o axuste «lang=» no ficheiro de
+     configuración (p. ex.: «lang=spanish»).
 
-     Tux Paint also honors your environment's current locale. (You can
-     override it on the command-line using the "--locale" option; see above.)
+     Tux Paint tamén respecta o contorno local actual. (Pode anulalo na liña
+     de ordes usando a opción «--locale»; vexa consulta arriba).
 
-     Use the option "--lang help" to list the available language options
-     available.
+     Use a opción «--lang help» para listar as opcións de idioma dispoñíbeis.
 
 Idiomas dispoñíbeis
 
@@ -1514,45 +1525,50 @@ Idiomas dispoñíbeis
        |zu_ZA           |                   |Zulu            |              |
        +--------------------------------------------------------------------+
 
-       (*) - These languages require their own fonts, since they are not
-       represented using a Latin character set, like the others. See the
-       "Special Fonts" section, below.
+       (*) - Estes idiomas requiren os seus propios tipos de letra, xa que
+       non se representan usando un conxunto de caracteres latinos, como os
+       demais. Vexa a sección «Tipos de letra especiais», a continuación.
 
-       Note: Tux Paint provides an alternative input method for entering
-       characters with the Text tool in some locales. The key comibation(s)
-       listed can be used to cycle through the supported input methods while
-       the Text tool is active.
+       Nota: Tux Paint fornece un método de entrada alternativo para
+       introducir caracteres coa ferramenta Texto nalgunhas configuracións
+       locais. A(s) combinación(s) de teclas indicada(s) pode usarse para
+       percorrer os métodos de entrada admitidos mentres a ferramenta Texto
+       está activa.
 
-Axustando o idioma do seu contorno
+Axustar o idioma do seu contorno
 
-       Cambiar o seu idioma afectará a gran parte do seu contorno.
+       Cambiar a súa configuración local afectará a gran parte do seu
+       contorno.
 
-       As stated above, along with letting you choose the language at runtime
-       using command-line options ("--lang" and "--locale"), Tux Paint honors
-       the global locale setting in your environment.
+       Como se indicou anteriormente, ademais de permitirche escoller o
+       idioma en tempo de execución empregando opcións de liña de ordes
+       («--lang» e «--locale»), Tux Paint respecta o axuste da configuración
+       local do seu contorno.
 
-       If you haven't already set your environment's locale, the following
-       will briefly explain how:
+       Se aínda non estabeleceu a configuración local do seu contorno, o
+       seguinte explicará brevemente como:
 
   Usuarios de Linux/Unix
 
-         First, be sure the locale you want to use is enabled by editing the
-         file "/etc/locale.gen" on your system and then running the program
-         "locale-gen" as root.
+         Primeiro, asegúrese de que a configuración local que quere usar está
+         activada editando o ficheiro «/etc/locale.gen» no seu sistema e logo
+         executando o programa «locale-gen» como superusuario «root».
 
          Nota: os usuarios de Debian poden executar a orde «dpkg-reconfigure
          locales» como superusuario (root) para abrir un diálogo de
          configuración. Os usuarios de Ubuntu poden executar «sudo
          dpkg-reconfigure localeconf» (é posíbel que teña que instalar antes
          o paquete «localeconf») ou pode que teña que editar primeiro o
-         ficheiro «/var/lib/locales/supported.d/local» e engadir os idiomas
-         que queiran, da lista que se atopa en «/usr/share/i18n/SUPPORTED».
+         ficheiro «/var/lib/locales/supported.d/local» e engadir as
+         configuracións locais que queiran, da lista que se atopa en
+         «/usr/share/i18n/SUPPORTED».
 
-         Then, before running Tux Paint, set your "$LANG" environment
-         variable to one of the locales listed above. (If you want all
-         programs that can be translated to be, you may wish to place the
-         following in your login script; e.g. "~/.profile", "~/.bashrc",
-         "~/.cshrc", etc.)
+         Após, antes de executar Tux Paint, configure a súa variábel de
+         contorno «$LANG» a unha das configuracións locais mencionadas
+         anteriormente. (Se quere que todos os programas que se poidan
+         traducir o sexan, pode que queira colocar o seguinte no seu script
+         de inicio de sesión; por exemplo, «~/.profile», «~/.bashrc»,
+         «~/.cshrc», etc.)
 
          Por exemplo, nunha consola Bourne (como BASH):
 
@@ -1568,52 +1584,54 @@ Axustando o idioma do seu contorno
 
   Usuarios de Windows
 
-         Tux Paint will recognize the current locale and use the appropriate
-         files by default. So this section is only for people trying
-         different languages.
+         Tux Paint recoñecerá a configuración local actual e empregará de
+         xeito predeterminado os ficheiros apropiados. Polo tanto, esta
+         sección é só para persoas que proban idiomas diferentes.
 
-         The simplest thing to do is to use the "--lang" switch in the
-         shortcut (see "INSTALL"). However, by using an MSDOS Prompt window,
-         it is also possible to issue a command like this:
+         O máis sinxelo é empregar o interruptor «--lang» no atallo (ver
+         «INSTALL [INSTALAR]»). Non obstante, usando unha xanela de indicador
+         do sistema de MSDOS, tamén é posíbel emitir un comando coma este:
 
            set LANG=es_ES
 
-         ...which will set the language for the lifetime of that DOS window.
+         ...que estabelecerá o idioma para toda a vida desa xanela DOS.
 
-         For something more permanent, try editing your computer's
-         "autoexec.bat" file using Windows' "sysedit" tool:
+         Para obter algo máis permanente, probe a editar o ficheiro
+         «autoexec.bat» do seu computador usando a ferramenta «sysedit» de
+         Windows:
 
   Tipos de letra especiais
 
-       Some languages require special fonts be installed. These font files
-       (which are in TrueType format (TTF)), are much too large to include
-       with the Tux Paint download, and are available separately. (See the
-       table above, under the "Choosing a Different Language" section.)
+       Algúns idiomas requiren que se instalen tipos de letra especiais.
+       Estes ficheiros de letra (que están en formato TrueType (TTF)), son
+       demasiado grandes para incluílos coa descarga de Tux Paint e están
+       dispoñíbeis por separado. (Vexa a táboa anterior, na sección «Escoller
+       un idioma diferente»).
 
-       Note: As of version 0.9.18, Tux Paint uses the "SDL_Pango" library,
-       which utilizes the "Pango" library to render text in the user
-       interface, rather than using "SDL_ttf" directly. Unless your copy of
-       Tux Paint was built without Pango support, special fonts should no
-       longer be necessary.
+       Nota: A partir da versión 0.9.18, Tux Paint usa a biblioteca
+       «SDL_Pango», que utiliza a biblioteca «Pango» para renderizar texto na
+       interface de usuario, no canto de usar directamente «SDL_ttf». A non
+       ser que a súa copia de Tux Paint se construíse sen compatibilidade con
+       Pango, os tipos de letra especiais xa non deberían ser necesarios .
 
-       When running Tux Paint in a language that requires its own font, Tux
-       Paint will try to load the font file from its system-wide "fonts"
-       directory (under a "locale" subdirectory). The name of the file
-       corresponds to the first two letters in the 'locale' code of the
-       language (e.g., "ko" for Korean, "ja" for Japanese, "zh_tw" for
-       Traditional Chinese).
+       Cando se executa Tux Paint nun idioma que require o seu propio tipo de
+       letra, Tux Paint tentará cargar o ficheiro de letra dende o directorio
+       «fonts» do sistema (nun subdirectorio «locale»). O nome do ficheiro
+       corresponde ás dúas primeiras letras do código «local» do idioma (por
+       exemplo, «ko» para coreano, «ja» para xaponés, «zh_tw» para chinés
+       tradicional).
 
-       For example, under Linux or Unix, when Tux Paint is run in Korean
-       (e.g., with the option "--lang korean"), Tux Paint will attempt to
-       load the following font file:
+       Por exemplo, en Linux ou Unix, cando Tux Paint se executa en coreano
+       (é dicir, coa opción «--lang korean»), Tux Paint tentará cargar o
+       seguinte ficheiro de tipo de letra:
 
          /usr/share/tuxpaint/fonts/locale/ko.ttf
 
-       You can download fonts for supported languages from Tux Paint's
-       website, http://www.tuxpaint.org/. (Look in the 'Fonts' section under
-       'Download.')
+       Pode descargar os tipos de letra para os idiomas compatíbeis dende o
+       sitio web de Tux Paint, http://www.tuxpaint.org/.. (Mire na sección
+       «Tipos de letra» en «Descargas»).
 
-       Under Unix and Linux, you can use the Makefile that comes with the
-       font to install the font in the appropriate location.
+       En Unix e Linux, pode usar o Makefile que vén co tipo de letra para
+       instalalo no lugar adecuado.
 
      ----------------------------------------------------------------------

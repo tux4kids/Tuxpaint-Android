@@ -6,7 +6,7 @@
           Copyright © 2002-2021 by various contributors; see AUTHORS.
                             http://www.tuxpaint.org/
 
-                                20 February 2021
+                                 March 9, 2021
 
      ----------------------------------------------------------------------
 
@@ -883,7 +883,7 @@ Using the import script, "tuxpaint-import"
        Example:
 
          $ tuxpaint-import grandma.jpg
-         grandma.jpg -> /home/username/.tuxpaint/saved/20210220203651.png
+         grandma.jpg -> /home/username/.tuxpaint/saved/20210310223855.png
          jpegtopnm: WRITING A PPM FILE
 
        The first line ("tuxpaint-import grandma.jpg") is the command to run.
@@ -925,7 +925,7 @@ Importing Pictures Manually
          * mm = Minute (two digits, "00"-"59")
          * ss = Seconds (two digits, "00"-"59")
 
-       Example: "20210220203651.png", for 20 February 2021 at 20:36:51.
+       Example: "20210731110500.png", for July 31, 2021 at 11:05am.
 
        Place this PNG file in your Tux Paint "saved" directory/folder. (See
        above.)

@@ -31,8 +31,8 @@ GL_TEXTFILES:=$(patsubst gl_ES.UTF-8/html/%.html,gl_ES.UTF-8/%.txt,$(GL_HTMLFILE
 IT_HTMLFILES:=$(wildcard it/html/*.html)
 IT_TEXTFILES:=$(patsubst it/html/%.html,it/%.txt,$(IT_HTMLFILES))
 
-JA_HTMLFILES:=$(wildcard ja/html/*.html)
-JA_TEXTFILES:=$(patsubst ja/html/%.html,ja/%.txt,$(JA_HTMLFILES))
+JA_HTMLFILES:=$(wildcard ja_JP.UTF-8/html/*.html)
+JA_TEXTFILES:=$(patsubst ja_JP.UTF-8/html/%.html,ja_JP.UTF-8/%.txt,$(JA_HTMLFILES))
 
 NL_HTMLFILES:=$(wildcard nl/html/*.html)
 NL_TEXTFILES:=$(patsubst nl/html/%.html,nl/%.txt,$(NL_HTMLFILES))
@@ -93,7 +93,7 @@ $(GL_TEXTFILES): gl_ES.UTF-8/%.txt: gl_ES.UTF-8/html/%.html
 $(IT_TEXTFILES): it/%.txt: it/html/%.html
 	$(LINKS) $< > $@
 
-$(JA_TEXTFILES): ja/%.txt: ja/html/%.html
+$(JA_TEXTFILES): ja_JP.UTF-8/%.txt: ja_JP.UTF-8/html/%.html
 	$(LINKS) $< > $@
 
 $(NL_TEXTFILES): nl/%.txt: nl/html/%.html
