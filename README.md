@@ -259,6 +259,9 @@ Send bugs and comments to Tux Paint developer's mailing list:
 
 	tuxpaint-devel@lists.sourceforge.net
 
+You could also use our bug tracker at
+	https://sourceforge.net/p/tuxpaint/bugs/
+	
 Issues&Solutions
 ======================
 
