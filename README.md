@@ -102,7 +102,7 @@ Project
   * jni/tuxpaint/Android.mk
     Android makefile for creating the tuxpaint shared library
 
-As part of changing the buid process from ant to gradle, the previous paths now hangs on app/src/main/
+As part of changing the build process from ant to gradle, the previous paths now hangs on app/src/main/
 
   * settings.gradle
     Indicates the directory gradle should build
@@ -259,6 +259,9 @@ Send bugs and comments to Tux Paint developer's mailing list:
 
 	tuxpaint-devel@lists.sourceforge.net
 
+You could also use our bug tracker at
+	https://sourceforge.net/p/tuxpaint/bugs/
+	
 Issues&Solutions
 ======================
 
