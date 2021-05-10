@@ -6,7 +6,7 @@ Documentación de opcións
     Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
-                               9 de Marzo de 2021
+                              19 de Abril de 2021
 
      ----------------------------------------------------------------------
 
@@ -80,10 +80,12 @@ Usuarios de Windows
      «Opcións da liña de ordes», a continuación.)
 
      fullscreen=yes
+
              Executar o programa en modo de pantalla completa en vez de nunha
              xanela.
 
      fullscreen=native
+
              Executar o programa en modo de pantalla completa. Ademais, asume
              a resolución actual da pantalla (estabelecida polo sistema
              operativo).
@@ -129,6 +131,12 @@ Usuarios de Windows
              24 e 192, inclusive. A maioría dos botóns son cadrados e isto
              afectará ao seu largo e alto.
 
+             Nota: Se o tamaño do botón escollido fai que os botóns sexan
+             demasiado grandes para que aparezan todos os elementos da
+             interface de usuario requiridos dentro do tamaño de xanela
+             escollido por Tux Paint, empregarase o tamaño de botón máis
+             grande posíbel. (Aparecerá unha nota en stderr.)
+
      allowscreensaver=yes
 
              De xeito predeterminado, Tux Paint impide que o protector de
@@ -139,11 +147,13 @@ Usuarios de Windows
              sistema en «1».)
 
      nosound=yes
+
              Desactivar os efectos de son. (Nota: Ao premer [Alt] + [S] non
              se poden volver activar os sons se se desactivaron usando esta
              opción).
 
      nostereo=yes
+
              Desactivar a compatibilidade con panorama estéreo. (Útil para
              usuarios con discapacidade auditiva nun oído ou lugares onde se
              está a empregar un só altofalante ou auricular.)
@@ -161,9 +171,11 @@ Usuarios de Windows
              [Maiúsculas] + [Control] + [Escape].
 
      noprint=yes
+
              Desactivar a función de impresión.
 
      printdelay=SEGUNDOS
+
              Restrinxir a impresión para que só poida producirse unha vez
              cada SEGUNDOS segundos.
 
@@ -173,7 +185,7 @@ Usuarios de Windows
 
              Use a orde ORDE para imprimir un ficheiro en formato PostScript
              cando se preme no botón «Imprimir». Se esta opción non está
-             especificamente definida, o comando predeterminado é:
+             especificamente definida, a orde predeterminada é:
 
                lpr
 
@@ -182,16 +194,16 @@ Usuarios de Windows
              predeterminado era «pngtopnm | pnmtops | lpr»).
 
              Se estabeleceu unha alternativa printcommand no ficheiro de
-             configuración antes da versión 0.9.15, terá que cambialo.
+             configuración antes da versión 0.9.15, terá que cambiala.
 
      altprintcommand=ORDE
 
              (Só Linux e Unix)
 
-             Usa a orde ORDE para imprimir un ficheiro en formato PostScript
+             Use a orde ORDE para imprimir un ficheiro en formato PostScript
              cando se preme no botón «Imprimir» mentres se mantén premida a
-             tecla modificadora . (Iso utilizase normalmente para fornecer un
-             diálogo de impresión, semellante a cando se preme
+             tecla modificadora [Alt]. (Iso utilizase normalmente para
+             fornecer un diálogo de impresión, semellante a cando se preme
              [Alt]+«Imprimir» en Windows e macOS.)
 
              Se esta opción non está especificamente definida, a orde
@@ -204,7 +216,7 @@ Usuarios de Windows
              (Só Windows e macOS)
 
              Tux Paint empregará un ficheiro de configuración da impresora
-             cando imprima. Prema a tecla [Alt] mentres preme no botón
+             cando imprima. Prema a tecla [Alt] mentres fai clic no botón
              «Imprimir» en Tux Paint para que apareza unha xanela de diálogo
              de impresión de Windows.
 
@@ -272,11 +284,13 @@ Usuarios de Windows
              «~/.tuxpaint/» en Linux e Unix e en «userdata\» en Windows.
 
      simpleshapes=yes
+
              Desactive o paso de rotación da ferramenta «Forma». Prema,
              arrastra e solte é todo o que se necesita para debuxar unha
              forma.
 
      uppercase=yes
+
              Todo o texto renderizarase só con maiúscula (por exemplo,
              «Pincel» será «PINCEL»). Útil para os cativos que saben ler,
              pero que ata agora só aprenderon maiúsculas.
@@ -301,6 +315,7 @@ Usuarios de Windows
              por cativos que non teñen experiencia con teclados.
 
      nowheelmouse=yes
+
              Isto desactiva a compatibilidade para a roda dos ratos que a
              teñen. (Normalmente, a roda desprazará o menú do selector á
              dereita.)
@@ -374,27 +389,32 @@ Usuarios de Windows
              suposto, ningún selo estará dispoñíbel.
 
      nostampcontrols=yes
+
              Algunhas imaxes da ferramenta Selos pódense reflectir, inverter
              e/ou cambiar o seu tamaño. Esta opción desactiva os controis e
              só fornece os selos básicos.
 
      nomagiccontrols=yes
+
              Algunhas ferramentas de Maxia teñen a opción de actuar coma un
              pincel ou afectar todo o lenzo á vez. Esta opción desactiva os
              controis e só fornece a funcionalidade predeterminada
              (normalmente en modo pintura).
 
      noshapecontrols=yes
+
              Desactivar os botóns de control que se amosan cando se usa a
              ferramenta Formas que permiten cambiar como se debuxan as
              formas: centradas arredor do clic inicial do rato ou cun canto
              co clic inicial do rato.
 
      nolabel=yes
+
              Desactiva a ferramenta Etiqueta: a ferramenta que permite a
              entrada de texto que se pode editar máis tarde.
 
      newcolorslast=yes
+
              Coloca as opcións de cor en branco no diálogo Novo ao final, de
              xeito que se amosen primeiro os iniciadores e/ou modelos.
 
@@ -407,15 +427,18 @@ Usuarios de Windows
              dereita a esquerda no canto de de esquerda a dereita.
 
      mouse-accessibility=yes
+
              Neste modo, no canto de premer, arrastrar e soltar (por exemplo,
              para debuxar), premese, móvese e premese de novo para rematar o
              movemento.
 
      onscreen-keyboard=yes
+
              Presenta un teclado en pantalla sobre que se pode premer cando
              empregan as ferramentas Texto e Etiqueta.
 
      onscreen-keyboard-layout=NOME DA DISPOSICIÓN
+
              Selecciona o deseño inicial para o teclado en pantalla cando usa
              as ferramentas Texto e Etiqueta.
              Nota: Usar esta opción implica onscreen-keyboard=yes
@@ -423,6 +446,7 @@ Usuarios de Windows
              redundante .
 
      onscreen-keyboard-disable-change=yes
+
              Desactiva a posibilidade de cambiar o deseño do teclado en
              pantalla cando se usan as ferramentas Texto e Etiqueta, útil
              para simplificar as cousas para os máis pequechos.
@@ -431,105 +455,128 @@ Usuarios de Windows
              redundante.
 
      joystick-dev=N
+
              Especifica que dispositivo de mando debe ser usado por Tux
              Paint. O valor predeterminado é 0 (a primeira panca de mando —
              joystick).
 
      joystick-slowness=VELOCIDADE
+
              Estabelece un atraso en cada movemento do eixo, permitindo
              atrasar a panca de mando (joystick). Os valores permitidos van
              de 0 a 500. O valor predeterminado é 15.
 
      joystick-threshold=LIMIAR
+
              Estabelece o nivel mínimo de movemento do eixe para comezar a
              mover o punteiro. Os valores permitidos son de 0 a 32766. O
              valor predeterminado é 3200.
 
      joystick-maxsteps=PASOS
+
              Define os píxeles máximos que moverá o punteiro á vez. Os
              valores permitidos van do 1 ao 7. O valor predeterminado é 7.
 
      joystick-hat-timeout=MILISEGUNDOS
+
              Estabelece o atraso após de que o punteiro comezará a moverse
              automaticamente se se mantén premido o sombreiro. Os valores
              permitidos van de 0 a 3000. O valor predeterminado é 1000.
 
      joystick-hat-slowness=VELOCIDADE
+
              Estabelece un atraso en cada movemento automático, o que permite
              diminuír a velocidade do sombreiro. Os valores permitidos van de
              0 a 500. O valor predeterminado é 15.
 
      joystick-btn-escape=NÚMERO DE BOTÓN
+
              Selecciona o número do botón da panca de control (joystick), tal
              e como o ve SDL, que se usará para xerar un evento de escape.
              Útil para desactivar os diálogos e saír.
 
      joystick-btn-brush=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a seleccionar a ferramenta de pinceis.
 
      joystick-btn-stamp=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a seleccionar a ferramenta de selos.
 
      joystick-btn-lines=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a seleccionar a ferramenta de liñas.
 
      joystick-btn-shapes=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a seleccionar a ferramenta de formas.
 
      joystick-btn-text=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a seleccionar a ferramenta de texto.
 
      joystick-btn-label=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a seleccionar a ferramenta de etiquetas.
 
      joystick-btn-magic=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a seleccionar a ferramenta de máxia.
 
      joystick-btn-undo=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a invocar a ferramenta de desfacer.
 
      joystick-btn-redo=NÚMERO DE BOTÓN
+
              Selecciona o número do botón da panca de mando (joystick), tal e
              como o ve SDL, que será un atallo para seleccionar ferramenta de
              refacer.
 
      joystick-btn-eraser=NÚMERO DE BOTÓN
+
              Selecciona o número do botón da panca de mando (joystick), tal e
              como o ve SDL, que será un atallo para seleccionar ferramenta de
              goma de borrar.
 
      joystick-btn-new=NÚMERO DE BOTÓN
+
              Selecciona o número do botón da panca de mando (joystick), como
              o ve SDL, que será un atallo para iniciar o diálogo para crear
              un novo debuxo.
 
      joystick-btn-open=NÚMERO DE BOTÓN
+
              Selecciona o número do botón da panca de mando (joystick), como
              o ve SDL, que será un atallo para iniciar o diálogo para abrir
              un debuxo existente.
 
      joystick-btn-save=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a garda o debuxo.
 
      joystick-btn-pgsetup=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a inicia o diálogo de configuración da páxina
              para imprimir.
 
      joystick-btn-print=NÚMERO DE BOTÓN
+
              Selecciona o número do botón do joystick, como o ve SDL, que
              será un atallo a imprimir.
 
      joystick-buttons-ignore=BOTÓN1,BOTÓN2,...
+
              Un conxunto de números de botóns do mando (joystick), como se ve
              en SDL, que deben ignorarse. Se non, a menos que sexan
              utilizados por unha das opcións «joystick-btn-» anteriores, os
@@ -556,7 +603,7 @@ Usuarios de Windows
              Funcionalidades:
 
                 * Movemento fino dentro do lenzo ou movemento groseiro se se
-                  mantén premida default.
+                  mantén premida Shift.
                 * Movemento groseiro dentro das áreas dos botóns da
                   ferramenta.
                 * Principais controis:
@@ -639,7 +686,13 @@ Usuarios de Windows
                   Tux Paint volverá usar ese directorio habitual, se non se
                   pode ler a configuración XDG, ou non se estabelece nada
                   «XDG_PICTURES_DIR».
-                * Windows — TBD! 
+                * Windows: Directorio «As miñas imaxes» para cada usuario
+                  (normalmente «c:\Users\NOME_DE_USUARIO\Pictures»).
+                  Pode abrir directamente o cartafol do seguinte xeito:
+                     * Prema a tecla «[Windows]+[R]» para abrir o diálogo
+                       «Executar...».
+                     * Escriba «Shell: As miñas imaxes« na caixa de texto e
+                       prema en [Aceptar.]
                 * macOS — TBD!
 
              Nota: Cando se empregan os valores predeterminados, crearase e
@@ -693,12 +746,14 @@ Usuarios de Windows
              Exemplo: datadir=/home/johnny/tuxpaint-data/
 
      saveover=yes
+
              Isto desactiva a pregunta «Gardar sobre a versión antiga...?» ao
              gardar un ficheiro existente. Con esta opción, a versión
              anterior sempre será substituída pola nova versión
              automaticamente.
 
      saveover=new
+
              Isto tamén desactiva a pregunta «Gardar sobre a versión
              antiga...?» cando garda un ficheiro existente. Non obstante,
              esta opción sempre gardará un novo ficheiro no canto de
@@ -707,22 +762,23 @@ Usuarios de Windows
      saveover=ask
 
              (Esta opción é redundante, xa que esta é a opción
-             predeterminada.)
-
-             Ao gardar un debuxo existente, primeiro preguntaráselle se quere
-             gardar sobre a versión anterior ou non.
+             predeterminada.) Ao gardar un debuxo existente, primeiro
+             preguntaráselle se quere gardar sobre a versión anterior ou non.
 
      nosave=yes
+
              Isto desactiva a capacidade de Tux Paint para gardar ficheiros
              (e, polo tanto, desactiva o botón «Gardar» na pantalla). Pode
              usarse en situacións nas que o programa só se usa para
              divertirse ou nun contorno de proba.
 
      autosave=yes
+
              Isto impide a Tux Paint preguntar se quere gardar a imaxe actual
              ao saír e supón que si.
 
      startblank=yes
+
              Isto fai que Tux Paint amose un lenzo en branco cando se inicia
              por vez primeira, no canto de cargar a última imaxe que se
              estaba a editar.
@@ -1126,6 +1182,7 @@ Usuarios de Windows
        --autosave
        --lang IDIOMA
        --colorfile FICHEIRO
+
                Estas activan ou corresponden ás opcións do ficheiro de
                configuración descritas anteriormente.
 
@@ -1167,6 +1224,7 @@ Usuarios de Windows
        --saveoverask
        --save
        --noautosave
+
                Estas opcións pódense usar para anular calquera axuste feito
                no ficheiro de configuración. (Se a opción non está
                configurada no(s) ficheiro(s) de configuración, non será
@@ -1203,25 +1261,31 @@ Opcións informativas da liña de ordes
 
          --version
          --verbose-version
+
                  Amosa o número de versión e a data da copia de Tux Paint que
                  está a executar. O «--verbose-version» tamén lista as
                  opcións de tempo de compilación definidas. (Vexa INSTALL
                  [INSTALAR] e FAQ [Preguntas frecuentes] ).
 
          --copying
+
                  Amosa información breve sobre a licenza para copiar Tux
                  Paint.
 
          --usage
+
                  Amosa a lista de opcións de liña de ordes dispoñíbeis.
 
          --help
+
                  Amosa unha breve axuda sobre o uso de Tux Paint.
 
          --lang help
+
                  Amosa unha lista de idiomas dispoñíbeis en Tux Paint.
 
          --joystick-dev list
+
                  Amosa a lista de pancas de mando (joysticks) conectados
                  dispoñíbeis para Tux Paint.
 
@@ -1590,15 +1654,23 @@ Axustar o idioma do seu contorno
 
          O máis sinxelo é empregar o interruptor «--lang» no atallo (ver
          «INSTALL [INSTALAR]»). Non obstante, usando unha xanela de indicador
-         do sistema de MSDOS, tamén é posíbel emitir un comando coma este:
+         do sistema de MSDOS, tamén é posíbel emitir unha orde coma esta:
 
            set LANG=es_ES
 
          ...que estabelecerá o idioma para toda a vida desa xanela DOS.
 
-         Para obter algo máis permanente, probe a editar o ficheiro
-         «autoexec.bat» do seu computador usando a ferramenta «sysedit» de
-         Windows:
+         Para obter algo máis permanente, pode estabelecer unha «variábel de
+         contorno» usando o diálogo «Propiedades do sistema» do seguinte
+         xeito:
+
+           * Prema a combinación de teclas «[Windows]+[R]» para abrir o
+             diálogo «Executar...».
+           * Escriba «sysdm.cpl» na caixa de texto e prema no botón «[OK]»
+             para abrir o diálogo «Propiedades do sistema».
+           * Seleccione a lapela «Avanzado».
+           * Prema no botón «Variábeis de contorno...».
+           * Edite o valor do parámetr «LANG») (créeo, se non existe).
 
   Tipos de letra especiais
 

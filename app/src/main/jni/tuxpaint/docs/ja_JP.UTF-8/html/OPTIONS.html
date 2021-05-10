@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>
-      Tux Paint Documentaci&oacute;n de Opciones    </title>
+      Tux Paintの各種設定について    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
   </head>
@@ -14,64 +14,64 @@
     <center>
       <h1>
         <span style="white-space: nowrap;">Tux Paint</span><br>
-        versi&oacute;n 0.9.26      </h1>
+        バージョン 0.9.26      </h1>
 
       <h2>
-        Options Documentation      </h2>
+        各種設定について      </h2>
 
       <p>
-        Copyright &copy; 2002-2021 by various contributors; see AUTHORS.<br>
+        Copyright &copy; 2002-2021 by various contributors; "AUTHORS" 参照.<br>
         <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
       </p>
 
       <p>
-        abril 19, 2021      </p>
+        2021年4月19日      </p>
     </center>
 
     <hr size="2"
         noshade>
 
     <h1>
-      Tux Paint Config.    </h1>
+      Tux Paint 設定ツール    </h1>
 
     <blockquote>
       <p>
-        A graphical tool is available that allows you to change Tux Paint's behavior. However, if you'd rather not install and use this tool, or want a better understanding of the available options, please continue reading.      </p>
+        Tux Paint の動作をカスタマイズするには、グラフィカルな操作で設定が変更できるツールがご利用いただけます。しかしながら、このツールをインストールしたくない場合や、利用可能なオプションについて、さらに詳細を知りたいという方は、以下の説明を参照して下さい。      </p>
     </blockquote>
 
     <hr size="2"
         noshade>
 
     <h1>
-      Configuration File    </h1>
+      設定ファイルについて    </h1>
 
     <blockquote>
       <p>
-        You can create a simple configuration file for Tux Paint, which it will read each time you start it up.      </p>
+        簡単な設定ファイルを作成して、Tux Paint の起動時に読み込ませることができます。      </p>
 
       <p>
-        The file is simply a plain text file containing the options you want enabled:      </p>
+        設定ファイルは、有効にしたいオプションを記述した、シンプルなテキストファイルです。      </p>
 
       <h2>
-        Linux and Unix Users      </h2>
+        Linux 及び Unix のユーザー      </h2>
 
       <blockquote>
         <p>
-          The file you should create is called "<code><b>.tuxpaintrc</b></code>" and it should be placed in your home directory. (a.k.a. "<code>~/.tuxpaintrc</code>" or "<code>$HOME/.tuxpaintrc</code>")        </p>
+          ユーザー毎の設定ファイルは、ホームディレクトリに "<code><b>.tuxpaintrc</b></code>" というファイル名で作成します。（"<code>~/.tuxpaintrc</code>" あるいは "<code>$HOME/.tuxpaintrc</code>"）        </p>
 
         <h3>
-          System-Wide Configuration File        </h3>
+          システム全体の設定ファイル        </h3>
 
         <blockquote>
           <p>
-            Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is located at:          </p>
+            上記のユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）          </p>
 
           <blockquote>
             <code>/etc/tuxpaint/tuxpaint.conf</code>
           </blockquote>
 
           <p>
-            You can disable reading of this file altogether, leaving the settings as defaults (which can then be overridden by your "<code>.tuxpaintrc</code>" file and/or command-line arguments) by using the command-line option:          </p>
+            以下のコマンドラインオプションを指定すると、システム全体の設定ファイルは無視され、設定ファイル "<code>.tuxpaintrc</code>" やコマンドラインオプションによる変更のみが反映されます。          </p>
 
           <blockquote>
             <code>--nosysconfig</code>
@@ -80,18 +80,18 @@
       </blockquote>
 
       <h2>
-        macOS Users      </h2>
+        macOS のユーザー      </h2>
 
       <blockquote>
         <p>
-          The file you should create is called "<code><b>tuxpaint.cfg</b></code>" and it should be placed in your home folder, under the sub-folder: <code>Library/Application Support/TuxPaint</code>        </p>
+          ユーザー毎の設定ファイルは、ホームフォルダ以下のサブフォルダ <code>Library/Application Support/TuxPaint</code> 内に "<code><b>tuxpaint.cfg</b></code>" というファイル名で作成します。        </p>
 
         <h3>
-          System-Wide Configuration File        </h3>
+          システム全体の設定ファイル        </h3>
 
         <blockquote>
           <p>
-            Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is located at:          </p>
+            上記のユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）          </p>
 
           <blockquote>
             <code>/Library/Application Support/TuxPaint/tuxpaint.cfg</code>
@@ -100,14 +100,14 @@
       </blockquote>
 
       <h2>
-        Windows Users      </h2>
+        Windows のユーザー      </h2>
 
       <blockquote>
         <p>
-          The file you should create is called "<code><b>tuxpaint.cfg</b></code>" and it should be placed in Tux Paint's folder.        </p>
+          設定ファイルは、Tux Paint をインストールしたフォルダに "<code><b>tuxpaint.cfg</b></code>" というファイル名で作成します。        </p>
 
         <p>
-          You can use NotePad or WordPad to create this file. Be sure to save it as Plain Text, and make sure the filename doesn't have ".txt" at the end...        </p>
+          設定ファイルはメモ帳やワードパッドで作成できますが、必ずテキストファイルとして保存するよう注意して下さい。また、ファイル名に ".txt" という拡張子をつけないようにします。        </p>
       </blockquote>
     </blockquote>
 
@@ -115,11 +115,11 @@
         noshade>
 
     <h1>
-      Available Options    </h1>
+      利用可能なオプション    </h1>
 
     <blockquote>
       <p>
-        The following settings can be set in the configuration file. (Command-line settings will override these. See the "<a href="#command_line"><i>Command-Line Options</i></a>" section, below.)      </p>
+        設定ファイルでは、以下のオプションを設定することができます。（コマンドラインオプションによる設定が優先されます。以下の<a href="#command_line"><i>コマンドラインオプション</i></a>"の項をごらん下さい）      </p>
 
       <dl>
         <dt>
@@ -128,7 +128,7 @@
 
         <dd>
           <p>
-            Run the program in full screen mode, rather than in a window.          </p>
+            プログラムを、ウィンドウ内ではなく、フルスクリーンモードで起動します。          </p>
         </dd>
 
         <dt>
@@ -137,7 +137,7 @@
 
         <dd>
           <p>
-            Run the program in full screen mode. Additionally, assume the screen's current resolution (set by the operating system).          </p>
+            プログラムをフルスクリーンモードで起動します。その際、画面の解像度をオペレーティングシステムの設定から推定します。          </p>
         </dd>
 
         <dt>
@@ -146,13 +146,13 @@
 
         <dd>
           <p>
-            Run the program at a different size (in windowed mode) or at a different screen resolution (in fullscreen mode), rather than the default (usually 800x600).          </p>
+            ウィンドウモードの場合、"SIZE" で指定するウィンドウサイズで、フルスクリーンモードの場合、"SIZE" で指定する解像度でプログラムを起動します。（標準では "800x600" です）          </p>
 
           <p>
-            The <i>SIZE</i> value should be presented in pixels, in 'width-by-height' format, with an "x" (lowercase X) between the values. The size can be anything that's at least 640 wide, and at least 480 tall.          </p>
+            <i>SIZE</i> の値は、数値の間に半角小文字の "x" を用いて、’幅x高さ' のように、ピクセル単位で記述します。幅は最低で 640 ピクセル、高さは最低で 480 ピクセルです。          </p>
 
           <p>
-            Some examples:          </p>
+            例：          </p>
 
           <ul>
             <li>640x480
@@ -175,7 +175,7 @@
 
         <dd>
           <p>
-            Swaps the width/height options given to Tux Paint, useful for rotating the window on portait displays, such as a tablet PC that's in tablet orientation.          </p>
+            ウィンドウの幅と高さの設定を入れ替えます。これは、タブレットパソコンのような縦型のディスプレイでウィンドウを回転させる際に便利なオプションです。          </p>
         </dd>
 
         <dt>
@@ -184,7 +184,7 @@
 
         <dd>
           <p>
-            When running Tux Paint in fullscreen mode, this assumes the screen's current resolution (overriding any "<code>windowsize</code>" option), as set by the operating system.          </p>
+            Tux Paint をフルスクリーンモードで起動する際、"<code>windowsize</code>" オプションの設定を無視して、オペレーティングシステムが設定する画面解像度に従います。          </p>
         </dd>
 
         <dt>
@@ -193,10 +193,10 @@
 
         <dd>
           <p>
-            Set the pixel size of buttons in Tux Paint's user interface (overriding the default of "48"). Useful when using very high-density displays or coarse input devices, such as eye gaze trackers.          </p>
+            Tux Paint のユーザーインターフェースの各種ボタンのサイズを標準の "48" から変更します。非常に高解像度のディスプレイや、視線入力といった分解能の低い操作デバイスを使用する場合に有効です。          </p>
 
           <p>
-            The <i>SIZE</i> value should be presented in pixels, and can be anything between 24 and 192, inclusive. Most buttons are square, and this will affect their width and height.          </p>
+            <i>SIZE</i> の値は24から192までのピクセル値で指定します。ほとんどのボタンは正方形となっており、この設定はボタンの幅と高さの両方に影響します。          </p>
 
           <p>
             Note: If the chosen button size would cause the buttons to be too large for all required UI elements to appear under Tux Paint's chosen window size, the largest possible button size will be used. (A note will appear in <code>stderr</code>.)          </p>
@@ -208,7 +208,7 @@
 
         <dd>
           <p>
-            By default, Tux Paint prevents your system's screensaver from starting up. You can override this by using the "<code>allowscreensaver</code>" option. Note: This requires version 1.2.12 or higher of the SDL library. (You can also do this by setting the "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" environment variable on your system to "<code>1</code>".)          </p>
+            標準では、Tux Paint の起動中は スクリーンセーバーが起動しない設定になっていますが、"<code>allowscreensaver</code>" オプションを指定すると、スクリーンセーバーが有効になります。これはSDLライブラリのバージョンが 1.2.12 以降の場合に有効なオプションであることに注意して下さい。（環境変数 "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" の値を "<code>1</code>" に設定しても、同様のことができます）          </p>
         </dd>
 
         <dt>
@@ -217,7 +217,7 @@
 
         <dd>
           <p>
-            Disable sound effects. (Note: Pressing <b>[Alt]</b> + <b>[S]</b> cannot be used to reenable sounds if they were disabled using this option.)          </p>
+            効果音を無効にします。（注：このオプションを設定すると、<b>[Alt]</b> + <b>[S]</b> を押しても、効果音を有効化することはできません          </p>
         </dd>
 
         <dt>
@@ -226,7 +226,7 @@
 
         <dd>
           <p>
-            Disable stereo panning support. (Useful for users with hearing impairment in one ear, or places where a single speaker or headphone is being used.)          </p>
+            ステレオの効果音を無効にする。（片耳イヤホンや１台のスピーカーで使用する場合に役に立ちます）          </p>
         </dd>
 
         <dt>
@@ -235,13 +235,13 @@
 
         <dd>
           <p>
-            Disable the on-screen "Quit" button and prevent the <b>[Escape]</b> key from quitting Tux Paint.          </p>
+            画面の "やめる" ボタンや <b>[Escape]</b> キーによるプログラム終了を無効にする。          </p>
 
           <p>
-            Using the <b>[Alt]</b> + <b>[F4]</b> keyboard combination or clicking the window's close button (assuming you're not in fullscreen mode) still works to quit Tux Paint.          </p>
+            なお、この場合でも <b>[Alt]</b> + <b>[F4]</b> の組み合わせや、フルスクリーンモードでない場合は、閉じるボタンを押せば、プログラムを終了することができます。          </p>
 
           <p>
-            You can also use the following keyboard combination to quit: <b>[Shift]</b> + <b>[Control]</b> + <b>[Escape]</b>.          </p>
+            また、<b>[Shift]</b> + <b>[Control]</b> + <b>[Escape]</b>. というキーの組み合わせでもプログラムを終了することができます。          </p>
         </dd>
 
         <dt>
@@ -250,7 +250,7 @@
 
         <dd>
           <p>
-            Disable the printing feature.          </p>
+            印刷を無効にします。          </p>
         </dd>
 
         <dt>
@@ -259,7 +259,7 @@
 
         <dd>
           <p>
-            Restrict printing so that printing can occur only once every <i>SECONDS</i> seconds.          </p>
+            <i>SECONDS</i> で設定した秒数ごとに１回だけしか印刷できなくなります。          </p>
         </dd>
 
         <dt>
@@ -268,21 +268,21 @@
 
         <dd>
           <p>
-            <i>(Linux and Unix only)</i>
+            <i>(Linux 及び Unix の場合のみ)</i>
           </p>
 
           <p>
-            Use the command <i>COMMAND</i> to print a PostScript format file when the 'Print' button is clicked. If this option is not specifically not set, the default command is:          </p>
+            "いんさつ" ボタンが押されると、<i>COMMAND</i> で指定したコマンドを用いて PostScript 形式のファイルを印刷します。標準では以下のコマンドが使用されます：          </p>
 
           <blockquote>
             <code>lpr</code>
           </blockquote>
 
           <p>
-            <b>Note:</b> Versions of Tux Paint prior to 0.9.15 sent PNG format data to the print command (which defaulted to "<code>pngtopnm | pnmtops | lpr</code>").          </p>
+            <b>注：</b> バージョン 0.9.15 より前までは、印刷コマンド（標準では "<code>pngtopnm | pnmtops | lpr</code>"）に PNG 形式のデータを送信していました。          </p>
 
           <p>
-            If you set an alternative <code><b>printcommand</b></code> in the configuration file prior to version 0.9.15, you will need to change it.          </p>
+            このため、バージョン 0.9.15 以前で <code><b>printcommand</b></code> を lpr 以外に設定していた場合は、この設定を変更する必要があります。          </p>
         </dd>
 
         <dt>
@@ -291,14 +291,14 @@
 
         <dd>
           <p>
-            <i>(Linux and Unix only)</i>
+            <i>(Linux 及び Unix の場合のみ)</i>
           </p>
 
           <p>
-            Use the command <i>COMMAND</i> to print a PostScript format file when the 'Print' button is clicked while the <b>[Alt]</b> modifier key is being held. (This is typically used for providing a print dialog, similar to when pressing <b>[Alt]</b>+'Print' in Windows and macOS.)          </p>
+            <b>[Alt]</b> キーを押しながら "いんさつ" ボタンをクリックすると、<i>COMMAND</i> で指定したコマンドを用いて PostScript 形式のファイルを印刷します。（Windows やmacOSで <b>[Alt]</b> + '印刷' とすると、印刷ダイアログが表示されるのと似ています）          </p>
 
           <p>
-            If this option is not specifically not set, the default command is KDE's graphical print dialog:          </p>
+            標準では、以下の KDE の印刷ダイアログが用いられます：          </p>
 
           <blockquote>
             <code>kprinter</code>
@@ -311,14 +311,14 @@
 
         <dd>
           <p>
-            <i>(Windows and macOS only)</i>
+            <i>（Windows と macOS のみ）</i>
           </p>
 
           <p>
-            Tux Paint will use a printer configuration file when printing. Push the <b>[Alt]</b> key while clicking the 'Print' button in Tux Paint to cause a Windows print dialog window to appear.          </p>
+            印刷の設定をファイルから読み込みます。<b>[Alt]</b> キーを押しながら "いんさつ" ボタンを押すと、Windows の印刷ダイアログが起動します。          </p>
 
           <p>
-            (Note: This only works when not running Tux Paint in fullscreen mode.) Any configuration changes made in this dialog will be saved to the file "<code>userdata/print.cfg</code>" , and used again, as long as the "printcfg" option is set.          </p>
+            （注：これは、Tux Paint をフルスクリーンモードで起動している場合にのみ有効であることに注意してください。）"printcfg" オプションが設定されていれば、変更した印刷の設定は "<code>userdata/print.cfg</code>" ファイルに記録され、再利用されます。          </p>
         </dd>
 
         <dt>
@@ -327,7 +327,7 @@
 
         <dd>
           <p>
-            This causes Tux Paint to always show the printer dialog (or, on Linux/Unix, run the "altprintcommand") when the 'Print' button is clicked. In other words, it's like clicking 'Print' while holding <b>[Alt]</b>, except you don't need to hold <b>[Alt]</b> every time.          </p>
+            "いんさつ" ボタンをクリックすると、常に印刷ダイアログを表示します（Linux と Unix では、"altprintcommand" で設定したプログラムが起動します）。<b>[Alt]</b> キーを押しながら "いんさつ" ボタンをクリックするのと同じ動作ですが、毎回 <b>[Alt]</b> キーを押す必要がないということです。          </p>
         </dd>
 
         <dt>
@@ -336,7 +336,7 @@
 
         <dd>
           <p>
-            This prevents Tux Paint from <i>ever</i> showing the printer dialog (or, on Linux/Unix, run the "altprintcommand") when the 'Print' button is clicked. In other words, it makes the <b>[Alt]</b> key have no effect when clicking the 'Print' button.          </p>
+            "いんさつ" ボタンを押したときの <b>[Alt]</b> キーの効果を無効にして、印刷ダイアログが表示されないようにします（Linux と Unix では、"altprintcommand" で設定したコマンドが起動されなくなります）。          </p>
         </dd>
 
         <dt>
@@ -345,7 +345,7 @@
 
         <dd>
           <p>
-            This is the normal, default behavior. Tux Paint shows a printer dialog (or, on Linux/Unix, runs the "altprintcommand"), when the <b>[Alt]</b> key is pressed while the 'Print' button is clicked. Clicking 'Print' without holding <b>[Alt]</b> prints without showing a dialog.          </p>
+            印刷時の標準の動作です。<b>[Alt]</b> キーを押しながら "いんさつ" ボタンをクリックすると印刷ダイアログが表示され、<b>[Alt]</b> キーを押さずに "いんさつ" ボタンをクリックすると、ダイアログを表示せずに印刷します。          </p>
         </dd>
 
         <dt>
@@ -354,14 +354,14 @@
 
         <dd>
           <p>
-            <i>(Platforms that use Tux Paint's internal PostScript generator — not Windows, macOS, BeOS, or Haiku.)</i>
+            <i>（Windows, macOS, BeOS, Haiku を除く、内蔵 PostScript 出力エンジンを使用するプラットフォーム向け）</i>
           </p>
 
           <p>
-            Tell Tux Paint what size PostScript to generate. If none is specified, Tux Paint first checks your <code>$PAPER</code> environment variable, then the file <code>/etc/papersize</code>, then uses the the 'libpaper' library's default paper size.          </p>
+            生成する PostScript ファイルの用紙サイズを指定します。指定がなければ、最初に環境変数 <code>$PAPER</code> が、次に <code>/etc/papersize</code> ファイルがチェックされ、最後に 'libpaper'ライブラリの標準の用紙サイズが使用されます。          </p>
 
           <p>
-            Valid paper sizes include: letter, legal, tabloid, executive, note, statement, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, b0, b1, b2 b3, b4, 10x14, 11x17, halfletter, halfexecutive, halfnote, folio, quarto, ledger, archA, archB, archC, archD, archE, flsa, flse, csheet, dsheet, esheet.          </p>
+            以下のサイズ指定が使えます：letter, legal, tabloid, executive, note, statement, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, b0, b1, b2 b3, b4, 10x14, 11x17, halfletter, halfexecutive, halfnote, folio, quarto, ledger, archA, archB, archC, archD, archE, flsa, flse, csheet, dsheet, esheet.          </p>
         </dd>
 
         <dt>
@@ -370,13 +370,13 @@
 
         <dd>
           <p>
-            By default, Tux Paint uses what's known as a 'lockfile' to prevent it from being launched more than once in 30 seconds. (This is to avoid accidentally running multiple copies; for example, by double-clicking a single-click launcher, or simply impatiently clicking the icon multiple times.)          </p>
+            標準では、タックスペイントは「ロックファイル」と呼ばれるものを使用して、30秒間に1回以上起動できないようになっています。これは、シングルクリックのランチャーをダブルクリックしたり、アイコンをせわしなく何度もクリックしたりして、誤って複数回起動してしまうことを防ぐためです。          </p>
 
           <p>
-            To make Tux Paint ignore the lockfile, allowing it to run again, even if it was just launched less than 30 seconds ago, enable this setting in the configuration file, or run Tux Paint with the <code>--nolockfile</code> option on the command-line.          </p>
+            ロックファイルを無視して、起動してから30秒以内であっても再びすぐに実行できるようにするには、設定ファイルでこの設定を有効にするか、コマンドラインで <code>--nolockfile</code> オプションを指定して Tux Paint を実行してください。          </p>
 
           <p>
-            By default, the lockfile is stored in "<code>~/.tuxpaint/</code>" under Linux and Unix, and "<code>userdata\</code>" under Windows.          </p>
+            標準では、Linux および Unix では "<code>~/.tuxpaint/</code>" に、Windows では "<code>userdata\</code>" にロックファイルが保存されます。          </p>
         </dd>
 
         <dt>
@@ -385,7 +385,7 @@
 
         <dd>
           <p>
-            Disable the rotation step of the 'Shape' tool. Click, drag and release is all that will be needed to draw a shape.          </p>
+            「ずけい」ツールで、形を決めたあとに回転させるステップを省略します。クリックして、ドラッグして、ボタンを離すだけで、図形を描くことができます。          </p>
         </dd>
 
         <dt>
@@ -394,7 +394,7 @@
 
         <dd>
           <p>
-            All text will be rendered only in uppercase (e.g., "Brush" will be "BRUSH"). Useful for children who can read, but who have only learned uppercase letters so far.          </p>
+            すべてのテキストが大文字で表記されます（例：「Brush」は「BRUSH」）。まだ大文字しか習っていない子供たちにとって役に立つオプションです。          </p>
         </dd>
 
         <dt>
@@ -403,10 +403,10 @@
 
         <dd>
           <p>
-            Tux Paint will attempt to 'grab' the mouse and keyboard, so that the mouse is confined to Tux Paint's window, and nearly all keyboard input is passed directly to it.          </p>
+            タックスペイントがマウスとキーボードを「独占」します。マウスカーソルがタックスペイントのウィンドウ内に限定され、ほとんどすべてのキーボード入力が直接タックスペイントに渡されます。          </p>
 
           <p>
-            This is useful to disable operating system actions that could get the user out of Tux Paint <b>[Alt]-[Tab]</b> window cycling, <b>[Ctrl]-[Escape]</b>, etc. This is especially useful in fullscreen mode.          </p>
+            これは、ユーザーが Tux Paint から抜け出すことができないようにするのに便利です。 <b>[Alt]-[Tab]</b> によるウィンドウの切り替えや、<b>[Ctrl]-[Escape]</b> キーによる操作が無効になります。このオプションは、特にフルスクリーンモード時に有効です。          </p>
         </dd>
 
         <dt>
@@ -415,10 +415,10 @@
 
         <dd>
           <p>
-            This disable keyboard shortcuts (e.g., <b>[Ctrl]-[S]</b> for save, <b>[Ctrl]-[N]</b> for a new image, etc.)          </p>
+            キーボードショートカット（保存: <b>[Ctrl]-[S]</b>、新規作成: <b>[Ctrl]-[N]</b> など）を無効にします。          </p>
 
           <p>
-            This is useful to prevent unwanted commands from being activated by children who aren't experienced with keyboards.          </p>
+            これは、キーボードの操作に慣れていない子供が不用意にコマンドを実行してしまうことを防ぐために有効です。          </p>
         </dd>
 
         <dt>
@@ -427,7 +427,7 @@
 
         <dd>
           <p>
-            This disables support for the wheel on mice that have it. (Normally, the wheel will scroll the selector menu on the right.)          </p>
+            マウスでのホイールによる操作が無効になります。(通常、ホイールは右のセレクターメニューをスクロールします)。          </p>
         </dd>
 
         <dt>
@@ -436,10 +436,10 @@
 
         <dd>
           <p>
-            Prior to Tux Paint 0.9.15, the middle and right buttons on a mouse could also be used for clicking. In version 0.9.15, it was changed so that <i>only</i> the left mouse button worked, so as to not train children to use the wrong button.          </p>
+            Tux Paint 0.9.15 以前では、マウスの中ボタンと右ボタンでもクリックが可能でしたが、バージョン0.9.15からは、子供たちが間違ったボタン押さないように、マウスの左ボタンだけが使えるように変更しました。          </p>
 
           <p>
-            However, for children who have trouble with the mouse, this distinction between the two or three buttons on a mouse can be disabled (returning Tux Paint to its old behavior) by using this option.          </p>
+            マウス操作が苦手なお子さんの場合、このオプションを使用することで、マウスの2つまたは3つのボタンの区別を無効にすることができます。          </p>
         </dd>
 
         <dt>
@@ -448,10 +448,10 @@
 
         <dd>
           <p>
-            This disables the fancy mouse pointer shapes in Tux Paint, and uses your environment's normal mouse pointer.          </p>
+            Tux Paint 独自のマウスポインタを無効にし、システム標準のマウスポインタを使用するようにします。          </p>
 
           <p>
-            In some enviornments, the fancy cursors cause problems. Use this option to avoid them.          </p>
+            環境によっては Tux Paint のマウスカーソルが原因で不具合が起こることがあります。そういった場合にこのオプションを有効にして下さい。          </p>
         </dd>
 
         <dt>
@@ -460,10 +460,10 @@
 
         <dd>
           <p>
-            This completely hides the mouse pointer shapes in Tux Paint.          </p>
+            マウスカーソルを表示しないようにします。          </p>
 
           <p>
-            This is useful for touchscreen devices, such as tablet PCs.          </p>
+            タブレットＰＣなどのタッチスクリーンを用いるデバイスのためのオプションです。          </p>
         </dd>
 
         <dt>
@@ -472,10 +472,10 @@
 
         <dd>
           <p>
-            In this mode, much simpler outlines and 'rubber-band' lines are displayed when using the <b>Lines</b>, <b>Shapes</b>, <b>Stamps</b> and <b>Eraser</b> tools.          </p>
+            このモードでは、<b>「せん」ツール</b>、<b>「かたち」ツール</b>、<b>「はんこ」ツール</b>そして<b>けしゴム</b>を使うときに、アウトラインをシンプルな線で表示します。          </p>
 
           <p>
-            This can help when Tux Paint is run on very slow computers, or displayed on a remote X-Window display.          </p>
+            Tux Paint を非常に遅いパソコンで使いたい場合や、リモートの X-Window ディスプレイで使う場合に、速度を改善します。          </p>
         </dd>
 
         <dt>
@@ -484,7 +484,7 @@
 
         <dd>
           <p>
-            This option causes Tux Paint to attempt to load fonts (for use in the <b>Text</b> tool) from your operating system. Normally, Tux Paint will only load the ones that came bundled with Tux Paint.          </p>
+            <b>もじ</b>ツールで、オペレーティングシステムのフォントを使用します。通常では、Tux Paint はパッケージに付属するフォントだけを使用します。          </p>
         </dd>
 
         <dt>
@@ -493,10 +493,10 @@
 
         <dd>
           <p>
-            Prior to version 0.9.21, Tux Paint loaded all fonts in its own fonts directory, including locale-specific ones (e.g., the one for Tibetan, which had no latin characters). As of 0.9.21, the only font loaded from the locale-specific subdirectory, if any, is one matching the locale Tux Paint is running on.          </p>
+            バージョン0.9.21以前では、Tux Paintは、特定の言語のみに固有のもの（例えば、ラテン文字を持たないチベット語のフォントなど）も含めて、fonts ディレクトリにあるすべてのフォントを読み込んでいました。0.9.21 以降では、Tux Paint が動作している言語環境に合ったフォントだけが読み込まれます。          </p>
 
           <p>
-            To load all locale-specific fonts (the old behavior), set this option.          </p>
+            以前のバージョンのように全てのフォントを読み込むようにするには、このオプションを有効にします。          </p>
         </dd>
 
         <dt>
@@ -505,10 +505,10 @@
 
         <dd>
           <p>
-            This option tells Tux Paint to not load any rubber stamp images, which in turn ends up disabling the <b>Stamps</b> tool.          </p>
+            「はんこ」の画像を読み込まず、<b>「はんこ」</b>ツールを無効にします。          </p>
 
           <p>
-            This can speed up Tux Paint when it first loads up, and reduce memory usage while it's running. Of course, no stamps will be available at all.          </p>
+            これによって、初回起動時のプログラムの読み込みが高速になります。          </p>
         </dd>
 
         <dt>
@@ -517,7 +517,7 @@
 
         <dd>
           <p>
-            Some images in the <b>Stamps</b> tool can be mirrored, flipped, and/or have their size changed. This option disables the controls, and only provides the basic stamps.          </p>
+            「はんこ」ツールの画像には、上下または左右に反転できたり、大きさを変更したりできるものがあります。このオプションを設定すると、このような操作を無効にします。          </p>
         </dd>
 
         <dt>
@@ -526,7 +526,7 @@
 
         <dd>
           <p>
-            Some <b>Magic</b> tools have the option of acting like a paintbrush, or affecting the entire canvas at once. This option disables the controls, and only provides the default functionality (usually paint-mode).          </p>
+            「まほう」ツールの中には、「ふで」ツールのように画像の一部分だけに効果を及ぼすか、キャンバス全体に効果を及ぼすかを選択できるものがあります。このオプションを設定すると、「まほう」ツールの動作の選択を無効にして、ツールごとに標準の動作だけをするようにします。（たいていは「ふで」のような動作になります）          </p>
         </dd>
 
         <dt>
@@ -535,7 +535,7 @@
 
         <dd>
           <p>
-            Disable the control buttons shown when using the <b>Shapes</b> tool that allow changing how shapes are drawn — centered around the initial mouse click, or with a corner at the initial mouse click.          </p>
+            「かたち」ツールでの２つの動作モード－マウスをクリックした箇所を中心として図形を拡大するか、マウスをクリックした箇所をコーナーとして図形を拡大するか－を選択するボタンを無効にします。          </p>
         </dd>
 
         <dt>
@@ -544,7 +544,7 @@
 
         <dd>
           <p>
-            Disables the <b>Label</b> tool: the tool that allows text entry which can be edited later.          </p>
+            「ラベル」ツールを無効にします。          </p>
         </dd>
 
         <dt>
@@ -553,7 +553,7 @@
 
         <dd>
           <p>
-            Places the blank color options in the <b>New</b> dialog at the end, so that any Starters and/or Templates are shown first.          </p>
+            「さいしょから」でキャンバスを選択する際、単色のキャンバスが末尾に、スターター画像やテンプレートが先頭になるよう、表示順序を変更します。          </p>
         </dd>
 
         <dt>
@@ -562,10 +562,10 @@
 
         <dd>
           <p>
-            For stamps that can be mirrored, this option sets them to their mirrored shape by default.          </p>
+            反転可能なスタンプは、はじめから反転されるようにします。          </p>
 
           <p>
-            This can be useful for people who prefer things right-to-left, rather than left-to-right.          </p>
+            左から右ではなく右から左に向かって描き進むことを好むユーザーに役に立つオプションです。          </p>
         </dd>
 
         <dt>
@@ -574,7 +574,7 @@
 
         <dd>
           <p>
-            In this mode, instead of clicking, dragging and releasing (e.g., to draw), you click, move, and click again to end the motion.          </p>
+            例えば「せん」ツールなどでは、マウスをクリックしてドラッグした後にマウスボタンを放すというのが標準の操作ですが、このモードを設定すると、マウスをクリックしてからマウスを動かした後に再度マウスをクリックするという操作になります。          </p>
         </dd>
 
         <dt>
@@ -583,16 +583,16 @@
 
         <dd>
           <p>
-            Presents a clickable on-screen keyboard when using the <b>Text</b> and <b>Label</b> tools.          </p>
+            「もじ」ツールと「ラベル」ツールで、画面キーボードを表示します。          </p>
         </dd>
 
         <dt>
-          <code><b>onscreen-keyboard-layout=<i>LAYOUTNAME</i></b></code>
+          <code><b>onscreen-keyboard-layout=<i>レイアウト名</i></b></code>
         </dt>
 
         <dd>
           <p>
-            Selects the initial layout for the on-screen keyboard when using the <b>Text</b> and <b>Label</b> tools.<br> Note: Using this option implies automatically <b>onscreen-keyboard=yes</b>, so setting both is redundant.          </p>
+            画面キーボードの初期レイアウトを設定します。<br>注：このオプションが設定されると、<b>onscreen-keyboard=yes</b> も設定されているとみなします。          </p>
         </dd>
 
         <dt>
@@ -601,8 +601,8 @@
 
         <dd>
           <p>
-            Disables the possibility for changing the layout of the on-screen keyboard when using the <b>Text</b> and <b>Label</b> tools, useful for simplifying things for the small children.<br>
-          Note: Using this option implies automatically <b>onscreen-keyboard=yes</b>, so setting both is redundant.          </p>
+            画面キーボードの変更をできないようにします。小さな子供向けにシンプルにしたい場合に設定します。<br>
+          このオプションが設定されると <b>onscreen-keyboard=yes</b> も設定されているとみなします。          </p>
         </dd>
 
         <dt>
@@ -611,7 +611,7 @@
 
         <dd>
           <p>
-            Specify which joystick device should be used by Tux Paint. Default value is 0 (the first joystick).          </p>
+            何番目のジョイスティックデバイスを使うかを設定します。標準では 0 （最初のジョイスティック）          </p>
         </dd>
 
         <dt>
@@ -620,7 +620,7 @@
 
         <dd>
           <p>
-            Sets a delay at each axis motion, allowing to slow the joystick. Allowed values are from 0 to 500. Default value is 15.          </p>
+            ジョイスティックの感度を SPEED の値で設定します。0 から 500 までの値が設定できます。標準の値は 15 です。          </p>
         </dd>
 
         <dt>
@@ -629,7 +629,7 @@
 
         <dd>
           <p>
-            Sets the minimum level of axis motion to start moving the pointer. Allowed values are from 0 to 32766. Default value is 3200.          </p>
+            ジョイスティックでポインターを動かし始めるためのしきい値を THRESHOLD の値で設定します。0 から 32766 までの値が設定できます。標準の値は 3200 です。          </p>
         </dd>
 
         <dt>
@@ -638,7 +638,7 @@
 
         <dd>
           <p>
-          Sets the maximum pixels the pointer will move at once. Allowed values are from 1 to 7. Default value is 7.          </p>
+          ポインターの移動速度の上限を STEPS にピクセル単位で設定します。1 から 7 までの値が設定可能で、標準の値は 7 です。          </p>
         </dd>
 
         <dt>
@@ -647,7 +647,7 @@
 
         <dd>
           <p>
-            Sets the delay after wich the pointer will start moving automatically if the hat is keeped pushed. Allowed values are from 0 to 3000. Default value is 1000.          </p>
+            ジョイスティックのハットスイッチを押し続けたときに、ポインターが連続して動き始めるまでの時間を MILLISECONDS にミリ秒単位で設定します。0 から 3000 までの値が設定可能で、標準の設定は 1000 です。          </p>
         </dd>
 
         <dt>
@@ -656,7 +656,7 @@
 
         <dd>
           <p>
-            Sets a delay at each automatic motion, allowing to slow the speed of the hat. Allowed values are from 0 to 500. Default value is 15.          </p>
+            ハットスイッチの感度を設定します。設定可能な値は 0 から 500 で、標準の値は 15 です。          </p>
         </dd>
 
         <dt>
@@ -665,7 +665,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be used to generate a escape event. Useful to dismiss dialogs and quit.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "ESC" キーの機能を割り当てます。（ダイアログの "もどる" や "やめる" で使います）          </p>
         </dd>
 
         <dt>
@@ -674,7 +674,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to select the brush tool.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「ふで」ツール" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -683,7 +683,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to select the stamp tool.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「はんこ」ツール" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -692,7 +692,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to select the lines tool.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「せん」ツール" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -701,7 +701,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to select the shapes tool.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「かたち」ツール" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -710,7 +710,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to select the text tool.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「もじ」ツール" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -719,7 +719,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to select the label tool.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「ラベル」ツール" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -728,7 +728,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to select the magic tool.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「まほう」ツール" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -737,7 +737,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to invoke the undo tool.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「とりけし」" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -746,7 +746,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to select redo tool.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「やりなおし」" を選択するショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -755,7 +755,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to select eraser tool.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「けしごむ」" を選択するショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -764,7 +764,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to launch the dialog for creating a new drawing.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに、「さいしょから」ダイアログへのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -773,7 +773,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to launch the dialog for opening an existing drawing.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに、「ひらく」ダイアログへのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -782,7 +782,7 @@
 
         <dd>
           <p>
-          Selects the joystick button number, as seen by SDL, that will be a shortcut to save the drawing.          </p>
+          ジョイスティックの BUTTON NUMBER で設定したボタンに "「ほぞん」" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -791,7 +791,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to launch the page setup dialog for printing.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "印刷設定ダイアログ" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -800,7 +800,7 @@
 
         <dd>
           <p>
-            Selects the joystick button number, as seen by SDL, that will be a shortcut to print.          </p>
+            ジョイスティックの BUTTON NUMBER で設定したボタンに "「いんさつ」" へのショートカットを割り当てます。          </p>
         </dd>
 
         <dt>
@@ -809,7 +809,7 @@
 
         <dd>
           <p>
-            A set of joystick button numbers, as seen by SDL, that should be ignored. Otherwise, unless they are used by one of the "<code>joystick-btn-</code>" options above, buttons will be seen as a mouse left-click.          </p>
+            無効にするジョイスティックのボタンの番号を指定します。何も指定しない場合、上記の "<code>joystick-btn-</code>" オプションで機能が設定されたボタン以外は、マウスの左ボタンと同じ動作になります。          </p>
         </dd>
 
         <dt>
@@ -818,10 +818,10 @@
 
         <dd>
           <p>
-            Use this option to force Tux Paint to set the starting size of all stamps. The <code>SIZE</code> value should be between 0 (smallest) and 10 (largest). The size is relative to the available sizes of the stamp, which depends on the stamp itself, and Tux Paint's current canvas size.          </p>
+            すべてのスタンプの初期の大きさを 0（最小）から 10（最大）の間で設定します。<code>SIZE</code> の値はスタンプ自体の大きさとタックスペイントのキャンバスサイズによって決まる大きさに対する相対的な指定になります。          </p>
 
           <p>
-            Specify "<code>default</code>" to let Tux Paint decide (its standard behavior).          </p>
+            SIZE の値に <code>default</code> を指定すると、Tux Paint がスタンプの大きさを自動的に決定します。（これが標準の動作です）          </p>
         </dd>
 
         <dt>
@@ -830,40 +830,40 @@
 
         <dd>
           <p>
-            This allows the keyboard arrow keys to be used to control the mouse pointer. (e.g., for mouseless environments, or handicapped/accessibility purposes)          </p>
+            キーボードの矢印キーによるマウスポインターの操作が行えるようにします（マウスが使えない場合や、マウス操作が難しいユーザー向けの機能です）          </p>
 
           <p>
-            Features:          </p>
+            使用方法：          </p>
 
           <ul>
-            <li>Fine movement within canvas, or coarse movement if <code>Shift</code> is held.            </li>
+            <li>キャンバスエリアでは、通常はなめらかに、<code>Shift</code> キーを押しながらでは飛び飛びにカーソルが動きます。            </li>
 
-            <li>Coarse movement within tool button areas.            </li>
+            <li>ツールボタンのエリアでは、飛び飛びにカーソルが動きます。            </li>
 
-            <li>Key controls:              <ul>
-                <li>[Left]/[Right]/[Up]/[Down], numpad <b>[1]</b> thru <b>[9]</b>: Move mouse                </li>
+            <li>各キーの動作：              <ul>
+                <li>[Left]/[Right]/[Up]/[Down], テンキーの <b>[1]</b> から <b>[9]</b>： マウスカーソルの移動                </li>
 
-                <li>[Space]/<b>[5]</b>: Click mouse (except when using "Text" or "Label" tools)                </li>
+                <li>[Space]/<b>[5]</b>： マウスクリック（テキストツールまたはラベルツールを使っている場合を除く)                </li>
 
-                <li>[Insert]/<b>[F5]</b>: Click mouse (always)                </li>
+                <li>[Insert]/<b>[F5]</b>： マウスクリック                </li>
 
-                <li><b>[F4]</b> jump mouse between "Tools", "Colors" and canvas areas                </li>
+                <li><b>[F4]</b>：「どうぐ」、「いろ」、キャンバスの間を順にジャンプ                </li>
 
-                <li>If mouse is within "Tools" section on the left, or "Colors" section at the bottom:                  <ul>
-                    <li><b>[F7]</b>, <b>[F8]</b>: Move down/up between buttons, respectively (Tools section, only)                    </li>
+                <li>マウスカーソルが左側の「どうぐ」または下部の「いろ」のエリアにある場合：                  <ul>
+                    <li><b>[F7]</b>（<b>[F8]</b>）： 上のボタン（下のボタン）に移動（「どうぐ」エリアのみ）                    </li>
 
-                    <li><b>[F11]</b>, <b>[F12]</b>: Move to previous/next button, respectively                    </li>
+                    <li><b>[F11]</b>（<b>[F12]</b>）： 前のボタン（次のボタン）に移動                    </li>
                   </ul>
                 </li>
               </ul>
             </li>
 
-            <li>To click-and-drag, hold one of the 'click' keys (e.g., [Insert]), and use the movement keys (e.g., [Left]).              <ul>
-                <li>Note: The "mouse accessibility" feature works with the keyboard mouse controls. With both options enabled, painting tools can be used to draw by pressing a 'click' key to start clicking, movement keys to move around (which will draw), and another 'click' key to end the click (stop drawing).                </li>
+            <li>クリック＆ドラッグの操作は、クリックキーのどちらか（例えば [Insert]）を押しながら、マウス移動のキー（例えば [Left]）を押します。              <ul>
+                <li>注：「mouse-accessibility」オプションの機能は、キーボードの操作にも連動します。両方のオプションを有効にした場合、例えば線を引く場合は、「クリック」のキーを一度押してから「移動」のキーで描画し、最後にもう一度「クリック」キーを押して描画を完了します。                </li>
               </ul>
             </li>
 
-            <li>A regular mouse and/or joystick may still be used (so you can, e.g., move with the mouse, and click with the keyboard, or vice-versa)            </li>
+            <li>通常のマウスやジョイスティックも同時に使用することができます（例えば、マウスで移動してキーボードでクリックしたり、その逆も可能です）。            </li>
           </ul>
         </dd>
 
@@ -873,31 +873,31 @@
 
         <dd>
           <p>
-            Use this option to change where Tux Paint's "<code>saved</code>" directory/folder is located, which is where Tux Paint saves and opens pictures.          </p>
+            Tux Paint が、作品を保存する "<code>saved</code>" ディレクトリの場所を変更します。          </p>
 
           <p>
-            If you do not override it, the <b><i>default</i></b> location is:          </p>
+            特に設定していなければ、標準のディレクトリは次の場所にあります：          </p>
 
           <ul>
-            <li>Linux &amp; Unix — Under a hidden directory named "<code>.tuxpaint</code>" in your home directory (aka "<code>~</code>" or "<code>$HOME</code>")<br>
-                Example: <code>/home/<i>username</i>/.tuxpaint/saved/</code>            </li>
+            <li>Linux および Unix — ユーザーのホームディレクトリ（"<code>~</code>" または "<code>$HOME</code>"）にある隠しディレクトリ "<code>.tuxpaint</code>" 以下<br>
+                例：<code>/home/<i>username</i>/.tuxpaint/saved/</code>            </li>
 
-            <li>Windows — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Data</code>" folder.<br>
-                Example: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\saved\</code>              <br>
+            <li>Windows — ユーザーごとの "<code>Application Data</code>" フォルダーにある "<code>TuxPaint</code>" フォルダー以下<br>
+                例：<code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\saved\</code>              <br>
             </li>
 
-            <li>macOS — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Support</code>" folder.<br>
-                Example: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/saved/</code>            </li>
+            <li>macOS — ユーザーごとの "<code>Application Support</code>" フォルダーにある "<code>TuxPaint</code>" フォルダー以下<br>
+                例：<code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/saved/</code>            </li>
           </ul>
 
           <p>
-            <b>Note:</b> When specifying a Windows drive (e.g., "<code>H:\</code>"), you must also specify a subdirectory.          </p>
+            <b>注：</b>Windowsのドライブ（例："<code>H:\</code>"）を指定する際は、サブディレクトリも指定する必要があります。          </p>
 
           <p>
-            <b>Note:</b> Prior to version 0.9.18, Tux Paint would also use the setting or default for "<code>savedir</code>" as the place to search for personal data files (brushes, stamps, starters and fonts). As of version 0.9.18, they may be specified separately (see the "<code>datadir</code>" option, below).          </p>
+            <b>注：</b>バージョン 0.9.18 以前は、作品データ以外に、個人用データファイル（ペイントブラシ、スタンプ、スターター、フォント）を検索する場所としても、"<code>savedir</code>" の設定を使用していました。バージョン 0.9.18 からは、これらのディレクトリの場所を別途指定することができます（後述の "<code>datadir</code>" オプションを参照）。          </p>
 
           <p>
-            Example: <code>savedir=Z:\tuxpaint\</code>          </p>
+            例：<code>savedir=Z:\tuxpaint\</code>          </p>
         </dd>
 
         <dt>
@@ -906,18 +906,18 @@
 
         <dd>
           <p>
-            Use this option to change where Tux Paint exports files — single images, or animated GIF slideshows — for external use.          </p>
+            「かきだす」によって、作品を画像にエクスポートして他で利用する場合や、アニメーションGIFによるスライドショーデータなど、データの出力先のディレクトリを変更します。          </p>
 
           <p>
-            If you do not override it, the <b><i>default</i></b> location is:          </p>
+            特に設定していなければ、標準のディレクトリは次の場所にあります：          </p>
 
           <ul>
-            <li>Linux &amp; Unix — If available, wherever your desktop environment is configured for pictures to be stored, based on your XDG (X Desktop Group) configuration. (Try running the command-line "<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" to find out.)<br>
-              Typically (in an English locale), this will be a "<code>Pictures</code>" subdirectory in your home directory (i.e., "<code>$HOME/Pictures</code>" aka "<code>~/Pictures</code>").<br>
-              Tux Paint will fall back to using that typical directory, of no XDG configuration can be read, or nothing is set for "<code>XDG_PICTURES_DIR</code>".            </li>
-            <li>Windows - "My Pictures" directory for each user (normaly "c:\Users\<i>USERNAME</i>\Pictures").<br>You can directly open the folder as follows:              <ul>
-                <li>Press "[Windows]+[R]" key to open "Run ..." dialogue.</li>
-                <li>Enter "Shell:My Pictures" in the text box and push [OK].</li>
+            <li>Linux および Unix — XDG (X Desktop Group) 標準に基づく設定が利用可能な場合、個々のデスクトップ環境において画像保存用として設定されているディレクトリ（"<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" コマンドで確認できます）<br>
+              英語環境では一般的にユーザーのホームディレクトリ（"<code>$HOME/Pictures</code>" あるいは "<code>~/Pictures</code>"）以下の "<code>Pictures</code>" ディレクトリになります。（日本語環境では "画像"）<br>
+              XDGの設定が読み取れない場合や、"<code>XDG_PICTURES_DIR</code> "に何も設定されていない場合は、上記の英語環境で一般的なディレクトリ（~/Pictures）を使用します。            </li>
+            <li>Windows — 各ユーザーの "ピクチャ" ディレクトリ（通常は "C:\Users\<i>ユーザー名</i>\Pictures"）。<br>また、次のようにして、フォルダを直接開くこともできます：              <ul>
+                <li>"[Windows]+[R]" キーを押して "ファイル名を指定して実行" ダイアログを開く。</li>
+                <li>テキストボックスに "Shell:My Pictures" と入力して [OK] を押す。</li>
               </ul>
             </li>
 
@@ -926,14 +926,14 @@
           </ul>
 
           <p>
-            <b>Note:</b> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., "<code>~/Pictures/TuxPaint</code>") When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).          </p>
+            <b>注：</b>標準の設定を用いる場合は、画像用のディレクトリにサブディレクトリ "<code>TuxPaint</code>" が作成されます。（例："<code>~/Pictures/TuxPaint</code>"）一方、"<code>--exportdir</code>" オプションを用いると、指定されたパスがそのまま使用されます（サブディレクトリ "<code>TuxPaint</code>" は作成されません）。          </p>
           <p>
-            The directory itself (e.g., "<code>~/Pictures/TuxPaint</code>") will be created, if it doesn't exist.          </p>
+            ディレクトリ（例: "<code>~/Pictures/TuxPaint</code>"）が存在しない場合は新たに作成されます。          </p>
           <p>
-            If the <em>parent</em> directory (e.g., "<code>~/Pictures/TuxPaint</code>") also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).          </p>
+            一つ上の<em>親ディレクトリ</em>（例："<code>~/Pictures/TuxPaint</code>"）が存在しない場合もディレクトリの作成を試みますが、それ以上の階層のディレクトリを作成することはありません。          </p>
 
           <p>
-            Example: <code>exportdir=/home/penguin/TuxPaintExports</code>          </p>
+            例：<code>exportdir=/home/penguin/TuxPaintExports</code>          </p>
         </dd>
 
         <dt>
@@ -942,33 +942,33 @@
 
         <dd>
           <p>
-            Use this option to change where Tux Paint looks for personal data files (brushes, stamps, starters, templates, and fonts specific to the current user).          </p>
+            個人用データファイル（ペイントブラシ、スタンプ、スターター、テンプレート、個人用のフォント）を検索する場所を変更します。          </p>
 
           <p>
-            Tux Paint will search for subdirectories/subfolders named "<code>brushes</code>", "<code>stamps</code>", "<code>starters</code>", "<code>templates</code>", and "<code>fonts</code>" under the specified data directory.          </p>
+            Tux Paint は、ここで指定されたディレクトリ以下の "<code>brushes</code>", "<code>stamps</code>", "<code>starters</code>", "<code>templates</code>", and "<code>fonts</code>" という名前のサブディレクトリをそれぞれ検索します。          </p>
 
           <p>
-            If you do not override it, the <b><i>default</i></b> location is:          </p>
+            特に設定していなければ、標準のディレクトリは次の場所にあります：          </p>
 
           <ul>
-            <li>Linux &amp; Unix — Under a hidden directory named "<code>.tuxpaint</code>" in your home directory (aka "<code>~</code>" or "<code>$HOME</code>")<br>
-                Example: <code>/home/<i>username</i>/.tuxpaint/brushes/</code>            </li>
+            <li>Linux および Unix — ユーザーのホームディレクトリ（"<code>~</code>" または "<code>$HOME</code>"）にある隠しディレクトリ "<code>.tuxpaint</code>" 以下<br>
+                例：<code>/home/<i>username</i>/.tuxpaint/brushes/</code>            </li>
 
-            <li>Windows — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Data</code>" folder.<br>
-                Example: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\brushes\</code>            </li>
+            <li>Windows — ユーザーごとの "<code>Application Data</code>" フォルダーにある "<code>TuxPaint</code>" フォルダー以下<br>
+                例：<code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\brushes\</code>            </li>
 
-            <li>macOS — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Support</code>" folder.<br>
-                Example: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/brushes/</code>            </li>
+            <li>macOS — ユーザーごとの "<code>Application Support</code>" フォルダーにある "<code>TuxPaint</code>" フォルダー以下<br>
+                例：<code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/brushes/</code>            </li>
           </ul>
 
           <p>
-            <b>Note:</b> Prior to version 0.9.18, Tux Paint would use the same setting or default as for "<code>savedir</code>" to search for data files. As of version 0.9.18, they may be specified separately.          </p>
+            <b>注：</b>バージョン 0.9.18 以前は "<code>savedir</code>" の指定と同じディレクトリを使用していました。0.9.18 以降では個別に設定できるようになりました。          </p>
 
           <p>
-            <b>Note:</b> When specifying a Windows drive (e.g., "<code>H:\</code>"), you must also specify a subdirectory.          </p>
+            <b>注：</b>Windowsのドライブ（例："<code>H:\</code>"）を指定する際は、サブディレクトリも指定する必要があります。          </p>
 
           <p>
-            Example: <code>datadir=/home/johnny/tuxpaint-data/</code>          </p>
+            例：<code>datadir=/home/johnny/tuxpaint-data/</code>          </p>
         </dd>
 
         <dt>
@@ -977,7 +977,7 @@
 
         <dd>
           <p>
-            This disables the "<i>Save over the old version...?</i>" prompt when saving an existing file. With this option, the older version will always be replaced by the new version, automatically.          </p>
+            以前の絵を編集して保存するときに、"<i>いまかいたえと まえのえを いれかえる？</i>" と確認を求めないようにします。この設定では、前の絵は常に上書きされます。          </p>
         </dd>
 
         <dt>
@@ -986,7 +986,7 @@
 
         <dd>
           <p>
-            This also disables the "<i>Save over the old version...?</i>" prompt when saving an existing file. This option, however, will always save a new file, rather than overwrite the older version.          </p>
+            上記と同様に保存の確認を求めないようにしますが、この設定では、前の絵を上書きせずに、常に新しいファイルを作成して保存します。          </p>
         </dd>
 
         <dt>
@@ -995,8 +995,8 @@
 
         <dd>
           <p>
-            <i>(This option is redundant, since this is the default.)</i>
-          When saving an existing drawing, you will be first asked whether to save over the older version or not.          </p>
+            <i>（絵を保存するときの標準の動作なので、この設定は冗長なものとなります）</i>
+          以前の絵を編集して保存するときに、以前の絵を上書きするかどうかを尋ねられます。          </p>
         </dd>
 
         <dt>
@@ -1005,7 +1005,7 @@
 
         <dd>
           <p>
-            This disables Tux Paint's ability to save files (and therefore disables the on-screen "Save" button). It can be used in situations where the program is only being used for fun, or in a test environment.          </p>
+            絵の保存ができないようにします（"セーブ" ボタンも無効になります）。一時的なお遊びに使う場合や、テスト環境で使えるオプションです。          </p>
         </dd>
 
         <dt>
@@ -1014,7 +1014,7 @@
 
         <dd>
           <p>
-            This prevents Tux Paint from asking whether you want to save the current picture when quitting, and assumes you do.          </p>
+            プログラムを終了するときに、絵を保存するかどうか尋ねずに、自動的に保存します。          </p>
         </dd>
 
         <dt>
@@ -1023,7 +1023,7 @@
 
         <dd>
           <p>
-            This causes Tux Paint to display a blank canvas when it first starts up, rather than loading the last image that was being edited.          </p>
+            Tux Paint を起動する際、前回最後に開いていた絵を読み込む代わりに、毎回、空のキャンバスで開始します。          </p>
         </dd>
 
         <dt>
@@ -1032,22 +1032,22 @@
 
         <dd>
           <p>
-            You may override Tux Paint's default color palette by creating a plain ASCII text file that describes the colors you want, and pointing to that file using the "<code>colorfile</code>" option.          </p>
+            お好みのカラーパレットを記述した簡単なテキストファイルを作成して、そのファイル名を "<code>colorfile</code>" オプションで指定すれば、標準のカラーパレットを置き換えることができます。          </p>
 
           <p>
-            The file should list one color per line. Colors are defined in terms of their Red, Green and Blue values, each from 0 (off) to 255 (brightest). (For more information, try Wikipedia's "<a href="http://en.wikipedia.org/wiki/Rgb">RGB color model</a>" article.)          </p>
+            ファイルは、１行ごとに１色のリストです。色は RGB の形式で、各色 0 から 255 の範囲で指定します。（詳細は、Wikipedia の "<a href="https://ja.wikipedia.org/wiki/RGB">RGB</a>" のページを参照して下さい。）          </p>
 
           <p>
-            Colors may be listed using three decimal numbers (e.g., "<code>255 68 136</code>") or a 6- or 3-digit-long hexadecimal 'triplet' (e.g., "<code>#ff4488</code>" or "<code>#F48</code>").          </p>
+            各行の色は、３つの十進数の組み（例："<code>255 68 136</code>"）、あるいは、3つの16 進数の組からなる6桁または3桁の表記（例："<code>#ff4488</code>" または "<code>#F48</code>”）で指定します。          </p>
 
           <p>
-            After the color definition (on the same line) you may enter text to describe the color. Tux will display this text when the color is clicked. (For example, "<code>#FFF White as snow.</code>")          </p>
+            色の定義に続いて、色の説明を同じ行に書いておけば、カラーパレットでその色をクリックしたときに Tux がその説明文を表示します。（例："<code>#FFF 雪のような白。</code>"）          </p>
 
           <p>
-            As an example, you can see the default colors currently used in Tux Paint in: "<a href="../../default_colors.txt"><code>default_colors.txt</code></a>".          </p>
+            参考となる例として、標準で使われているカラーパレット "<a href="../../default_colors.txt"><code>default_colors.txt</code></a>" をご確認ください。          </p>
 
           <p>
-            NOTES: You must separate decimal values with spaces, and begin hexadecimal values with a pound/number-sign character ("<code>#</code>"). In 3-digit hexadecimal, each digit is used for both the high and low halves of the byte, so "<code>#FFF</code>" is the same as "<code>#FFFFFF</code>", not "<code>#F0F0F0</code>".          </p>
+            注：十進数の値は空白文字で区切って記載し、16進数の値は "<code>#</code>" で始める必要があります。3桁の16進数では、各桁がバイトの上位と下位の両方に使用されるため、"<code>#FFF</code>" は "<code>#F0F0F0</code>" ではなく "<code>#FFFFFF</code>" を意味します。          </p>
         </dd>
 
         <dt>
@@ -1056,7 +1056,7 @@
 
         <dd>
           <p>
-            How many rows of color palette buttons to show; useful when using a large color palette (see "<code>colorfile</code>", above), and/or for use with coarse input devices (like eyegaze trackers).  "<code>ROWS</code>" may be between "1" (the default) and "3".          </p>
+            カラーパレットのボタンを何列表示するかを指定します。色数の多いカラーパレット（上記の "<code>colorfile</code>" を参照）を使う場合や、視線入力などの分解能の低い操作デバイスを使用する場合に便利です。"<code>ROWS</code> "には、"1"（デフォルト）から "3" までの値を指定します。          </p>
         </dd>
 
         <dt>
@@ -1065,7 +1065,7 @@
 
         <dd>
           <p>
-            Run Tux Paint in one of the supported languages. Possible choice for <i>LANGUAGE</i> currently include:          </p>
+            サポートされている言語の中から、Tux Paint で使用する言語を指定します。現時点で<i>LANGUAGE</i>に指定できる言語は以下のとおりです：          </p>
 
           
           <blockquote>
@@ -1073,7 +1073,7 @@
                    cellspacing="0"
                    cellpadding="2"
                    summary=
-                   "Possible values for 'lang' language setting">
+                   "'lang’ 向けに設定できる値">
               <tr>
                 <td>
                   <code>english</code>
@@ -2607,18 +2607,18 @@
         noshade>
 
     <h1>
-      Overriding System Config. Options    </h1>
+      システム全体の設定を上書きする    </h1>
 
     <blockquote>
       <p>
-        <i>(For Linux and Unix users)</i>
+        <i>（Linux および Unix ユーザー向け）</i>
       </p>
 
       <p>
-        If any of the above options are set in "<code>/etc/tuxpaint/tuxpaint.config</code>", you can override them in your own "<code>~/.tuxpaintrc</code>" file.      </p>
+        "<code>/etc/tuxpaint/tuxpaint.config</code>" でオプションが設定されている場合でも、ユーザー各自の "<code>~/.tuxpaintrc</code>" ファイルの設定が優先されます。      </p>
 
       <p>
-        For true/false options, like "<code>noprint</code>" and "<code>grab</code>", you can simply say they equal 'no' in your "<code>~/.tuxpaintrc</code>" file:      </p>
+        "<code>noprint</code>" や "<code>grab</code>" のように、真か偽で設定するオプションでは、ユーザー毎の "<code>~/.tuxpaintrc</code>" ファイルで、例えば次のように、単純に 「'no' に等しい」と設定することができます：      </p>
 
       <blockquote>
         <code>noprint=no<br>
@@ -2626,7 +2626,7 @@
       </blockquote>
 
       <p>
-        Or, you can use options similar to the command-line override options described below. For example:      </p>
+        また、以下の例のように、コマンドラインオプションによる上書きのように記述することもできます：      </p>
 
       <blockquote>
         <code>print=yes<br>
@@ -2639,11 +2639,11 @@
 
     <h1>
       <a name="command_line"
-          id="command_line">Command-Line Options</a>
+          id="command_line">コマンドラインオプション</a>
     </h1>
 
     <blockquote>
-      Options can also be issued on the command-line when you start Tux Paint.      <blockquote>
+      各種オプションは、Tux Paint を起動する際のコマンドラインでもできます。      <blockquote>
         <dl>
           <dt>
             <code><b>--fullscreen<br>
@@ -2722,7 +2722,7 @@
 
           <dd>
           <p>
-            These enable or correspond to the configuration file options described above.          </p>
+            以上のオプションは、上記で説明した設定ファイルでの各種オプションと関連しています。          </p>
 
             <hr size="1"
                 noshade
@@ -2770,7 +2770,7 @@
 
           <dd>
             <p>
-              These options can be used to override any settings made in the configuration file. (If the option isn't set in the configuration file(s), no overriding option is necessary.)            </p>
+              以上のオプションは、設定ファイルでの設定を上書きするために用いられます。（オプションが設定ファイルで指定されていない場合、設定を上書きしないというオプションが必要です）            </p>
 
             <hr size="1"
                 noshade
@@ -2784,10 +2784,10 @@
 
           <dd>
             <p>
-              Run Tux Paint in one of the support languages. See the "<i><a href="#different_language">Choosing a Different Language</a></i>" section below for the locale strings (e.g., "<code>de_DE</code>" for German) to use.            </p>
+              Tux Paint で使用する言語を指定します。使用する言語ごとの言語コードの設定（例えば、ドイツ語では "<code>de_DE</code>"）については、以下の "<i><a href="#different_language">使用する言語を変更する</a></i>" の項もごらん下さい。            </p>
 
             <p>
-              (If your locale is already set, e.g. with the "<code>$LANG</code>" environment variable, this option is not necessary, since Tux Paint honors your environment's setting, if possible.)            </p>
+              （環境変数 "<code>$LANG</code>" などによって言語環境が設定されている場合は、環境設定が優先されるので、このオプションを設定するは必要ありません。）            </p>
           </dd>
 
           <dt>
@@ -2796,10 +2796,10 @@
 
           <dd>
             <p>
-              Under Linux and Unix, this prevents the system-wide configuration file, "<code>/etc/tuxpaint/tuxpaint.conf</code>", from being read.            </p>
+              Linux および Unix において、システム全体の設定ファイル "<code>/etc/tuxpaint/tuxpaint.conf</code>" から設定を読み込まないようにします。            </p>
 
             <p>
-              Only your own configuration file, "<code>~/.tuxpaintrc</code>", if it exists, will be used.            </p>
+              ユーザーごとの設定ファイル "<code>~/.tuxpaintrc</code>" が存在すれば、このファイルのみから設定を読み込みます。            </p>
           </dd>
         </dl>
       </blockquote>
@@ -2808,11 +2808,11 @@
           noshade>
 
       <h2>
-        Command-Line Informational Options      </h2>
+        情報を表示するためのコマンドラインオプション      </h2>
 
       <blockquote>
         <p>
-          The following options display some informative text on the screen. Tux Paint doesn't actually start up and run afterwards, however.        </p>
+          以下の各オプションは、Tux Paint を起動せず、情報をテキスト画面に表示して終了します。        </p>
 
         <blockquote>
           <dl>
@@ -2823,7 +2823,7 @@
 
             <dd>
               <p>
-                Display the version number and date of the copy of Tux Paint you are running. The "--verbose-version" also lists what compile-time options were set. (See INSTALL and FAQ).              </p>
+                プログラムのバージョンとリリース日を表示します。"--verbose-version" オプションでは、コンパイル時のオプションも追加で表示します。（ドキュメント "Tux Paint のインストール" および "よくある質問" もごらんください。）              </p>
             </dd>
 
             <dt>
@@ -2832,7 +2832,7 @@
 
             <dd>
               <p>
-                Show brief license information about copying Tux Paint.              </p>
+                Tux Paint のライセンスについての情報を表示します。              </p>
             </dd>
 
             <dt>
@@ -2841,7 +2841,7 @@
 
             <dd>
               <p>
-                Display the list of available command-line options.              </p>
+                利用可能なコマンドラインオプションの一覧を表示します。              </p>
             </dd>
 
             <dt>
@@ -2850,7 +2850,7 @@
 
             <dd>
               <p>
-                Display brief help on using Tux Paint.              </p>
+                Tux Paint の使い方についての簡単な説明を表示します。              </p>
             </dd>
 
             <dt>
@@ -2859,7 +2859,7 @@
 
             <dd>
               <p>
-                Display a list of available languages in Tux Paint.              </p>
+                Tux Paint で利用可能な言語の一覧を表示します。              </p>
             </dd>
 
             <dt>
@@ -2868,7 +2868,7 @@
 
             <dd>
               <p>
-                Display list of attached joysticks available to Tux Paint.              </p>
+                接続されているジョイスティックについて、Tux Paint で利用可能なものの一覧を表示します。              </p>
             </dd>
           </dl>
         </blockquote>
@@ -2880,21 +2880,21 @@
 
     <h1>
       <a name="different_language"
-          id="different_language">Choosing a Different Language</a>
+          id="different_language">使用する言語の選択</a>
     </h1>
 
     <blockquote>
       <p>
-        Tux Paint has been translated into a number of languages. To access the translations, you can use the "<code>--lang</code>" option on the command-line to set the language (e.g. "<code>--lang spanish</code>") or use the "<code>lang=</code>" setting in the configuration file (e.g., "<code>lang=spanish</code>").      </p>
+        Tux Paint は非常に多くの言語に翻訳されています。翻訳された言語で Tux Paint を使うには、コマンドラインオプション "<code>--lang</code>" を用いて、"<code>--lang spanish</code>" のように指定するか、設定ファイル中の "<code>lang=</code>" オプションを用いて "<code>lang=spanish</code>" のように指定します。      </p>
 
       <p>
-        Tux Paint also honors your environment's current locale. (You can override it on the command-line using the "<code>--locale</code>" option; see <a href="#locale">above</a>.)      </p>
+        また、Tux Paint はお使いの環境の言語設定にも従います。（"<code>--locale</code>" オプションにより環境の設定を上書きすることができます。<a href="#locale">前述の説明もごらんください</a>）      </p>
 
       <p>
-        Use the option "<code>--lang help</code>" to list the available language options available.      </p>
+        "<code>--lang help</code>" オプションを用いれば、利用可能な全ての言語の一覧が表示されます。      </p>
 
       <h2>
-        Available Languages      </h2>
+        利用可能な言語      </h2>
 
       
       <blockquote>
@@ -2902,16 +2902,16 @@
                cellspacing="0"
                cellpadding="2"
                summary=
-               "Locale values and the languages they represent.">
+               "言語コードと実際の言語の対応">
           <tr>
             <th>
-              Locale Code            </th>
+              言語コード            </th>
             <th>
-              Language<br>(native name)            </th>
+              言語名<br>（原語表記）            </th>
             <th>
-              Language<br>(English name)            </th>
+              言語名<br>（英語表記）            </th>
             <th>
-              Input Method Cycle Key Combination            </th>
+              入力切り替えキー            </th>
           </tr>
 
           <tr>
@@ -4851,40 +4851,40 @@
         </table>
 
         <p>
-          <b>(*)</b> - These languages require their own fonts, since they are not represented using a Latin character set, like the others. See the "<a href="#special_fonts"><i>Special Fonts</i></a>" section, below.        </p>
+          <b>(*)</b> - これらの原語では専用のフォントが必要です。以下の"<a href="#special_fonts"><i>言語固有のフォント</i></a>"の項をごらんください。        </p>
 
         <p>
-          <i>Note:</i> Tux Paint provides an alternative input method for entering characters with the <b>Text</b> tool in some locales. The key comibation(s) listed can be used to cycle through the supported input methods while the <b>Text</b> tool is active.        </p>
+          <i>注：</i>いくつかの言語では、<b>もじツール</b>や<b>ラベルツール</b>で、その言語用の入力方式が利用できます。<b>もじツール</b>や<b>ラベルツール</b>を使っているときに利用可能な入力方式を順に切り替えるためのキーの組み合わせが上の表の最後の列に示されています。        </p>
       </blockquote>
 
       <h2>
-        Setting Your Environment's Locale      </h2>
+        環境で使用する言語の設定      </h2>
 
       <blockquote>
         <p>
-          Changing your locale will affect much of your environment.        </p>
+          システムの言語を変更すると環境に大きな影響があります。        </p>
 
         <p>
-          As stated above, along with letting you choose the language at runtime using command-line options ("<code>--lang</code>" and "<code>--locale</code>"), Tux Paint honors the global locale setting in your environment.        </p>
+          ここまでで説明したとおり、コマンドラインオプション（"<code>--lang</code>" および "<code>--locale</code>"）を用いて実行時に言語を選択できるほか、Tux Paint は、お使いのシステムの言語環境の設定を参照します。        </p>
 
         <p>
-          If you haven't already set your environment's locale, the following will briefly explain how:        </p>
+          言語環境を設定するやり方は以下のとおりです：        </p>
 
         <h3>
-          Linux/Unix Users        </h3>
+          Linux または Unix のユーザー        </h3>
 
         <blockquote>
           <p>
-            First, be sure the locale you want to use is enabled by editing the file "<code>/etc/locale.gen</code>" on your system and then running the program "<code>locale-gen</code>" as root.          </p>
+            まず最初に、使用したい言語が有効になるように "<code>/etc/locale.gen</code>" ファイルを確認、編集した後、管理者権限で "<code>locale-gen</code>" コマンドを実行します。          </p>
 
           <p>
-            <i>Note: Debian users may be able to simply run the command "<code>dpkg-reconfigure locales</code>" as root to bring up a configuration dialog. Ubuntu users may be able to run "<code>sudo dpkg-reconfigure localeconf</code>" (the "localeconf" package may need to be installed first), or you may need to edit the file "<code>/var/lib/locales/supported.d/local</code>" first, and add locales they want, from the list found in "<code>/usr/share/i18n/SUPPORTED</code>".</i>          </p>
+            <i>注：Debian Linux のユーザーは、"<code>dpkg-reconfigure locales</code>" というコマンドを管理者権限で実行すれば、ダイアログ形式で設定を行えます。。Ubuntu では、"localeconf" パッケージがインストールされていれば "<code>sudo dpkg-reconfigure localeconf</code>" というコマンドが使えます。また、"<code>/usr/share/i18n/SUPPORTED</code>" ファイルにある言語のリストの中から、使用したい言語を "<code>/var/lib/locales/supported.d/local</code>" ファイルに追加するという方法もあります。</i>          </p>
 
           <p>
-            Then, before running Tux Paint, set your "<code>$LANG</code>" environment variable to one of the locales listed above. (If you want all programs that can be translated to be, you may wish to place the following in your login script; e.g. "<code>~/.profile</code>", "<code>~/.bashrc</code>", "<code>~/.cshrc</code>", etc.)          </p>
+            次に、Tux Paint を起動する前に、環境変数 "<code>$LANG</code>" を上記のリストの言語コードのいずれかに設定します。（言語の設定を、全てのプログラムに適用したい場合は、以下の設定をログインスクリプト（"<code>~/.profile</code>", "<code>~/.bashrc</code>", "<code>~/.cshrc</code>" など）に記述する方法もあります。          </p>
 
           <p>
-            For example, in a Bourne Shell (like BASH):          </p>
+            BASH などの Bourne Shell 系列の環境の場合：          </p>
 
           <blockquote>
             <code>export LANG=es_ES ; \<br>
@@ -4892,7 +4892,7 @@
           </blockquote>
 
           <p>
-            And in a C Shell (like TCSH):          </p>
+            TCSH などの C Shell 系列の場合：          </p>
 
           <blockquote>
             <code>setenv LANG es_ES ; \<br>
@@ -4904,51 +4904,51 @@
             noshade>
 
         <h3>
-          Windows Users        </h3>
+          Windows のユーザー        </h3>
 
         <blockquote>
           <p>
-            Tux Paint will recognize the current locale and use the appropriate files by default. So this section is only for people trying different languages.          </p>
+            何もしなくても、利用している言語環境に応じて適切な設定が用いられますので、以下は、他の言語で利用したい場合のための説明になります。          </p>
 
           <p>
-            The simplest thing to do is to use the "<code>--lang</code>" switch in the shortcut (see "INSTALL"). However, by using an MSDOS Prompt window, it is also possible to issue a command like this:          </p>
+            ショートカットに "<code>--lang</code>" スイッチを記述するのが最も簡単です（"Tux Paint のインストール"のドキュメントを参照）。また、コマンドプロンプトで、以下のようなコマンドを実行する方法もあります：          </p>
 
           <blockquote>
             <code>set LANG=es_ES</code>
           </blockquote>
 
           <p>
-            ...which will set the language for the lifetime of that DOS window.          </p>
+            ... この言語指定は、実行したコマンドプロンプトウィンドウが終了するまでの間だけ有効となります。          </p>
 
           <p>
-            For something more permanent, you can set an 'environment variable' using the "System properties" dialogue as follows:          </p>
+            常にこの言語設定を有効にするには、以下のようにして、"システムのプロパティ" ダイアログで環境変数を設定します：          </p>
           <ul>
-            <li>Press the "<b>[Windows]+[R]</b>" key combination to open the "Run ..." dialogue.</li>
-            <li>Enter "<code>sysdm.cpl</code>" in the text box and click the "<b>[OK]</b>" button to open the "System properties" dialogue.</li>
-            <li>Select the "Advanced" tab.</li>
-            <li>Click the "Environment Variables..." button.</li>
-            <li>Edit the value of the parameter "<code>LANG</code>" (create it, if it doesn't exists).</li>
+            <li>"<b>[Windows]+[R]</b>" キーを押して "ファイル名を指定して実行" ダイアログを開く。</li>
+            <li>テキストボックスに "<code>sysdm.cpl</code>" と入力して "<b>[OK]</b>" ボタンを押し、"システムのプロパティ" ダイアログを開く。</li>
+            <li>"詳細設定" タブを選択。</li>
+            <li>"環境変数(N)..." ボタンをクリック。</li>
+            <li>環境変数 "<code>LANG</code>" の値を編集。（変数が設定されていなければ新たに作成）</li>
           </ul>
         </blockquote>
       </blockquote>
 
       <h3>
         <a name="special_fonts"
-            id="special_fonts">Special Fonts</a>
+            id="special_fonts">言語固有のフォント</a>
       </h3>
 
       <blockquote>
         <p>
-          Some languages require special fonts be installed. These font files (which are in TrueType format (TTF)), are much too large to include with the Tux Paint download, and are available separately. (See the table above, under the "<a href="#different_language"><i>Choosing a Different Language</i></a>" section.)        </p>
+          いくつかの言語では、専用のフォントが必要になります。TrueType（TTF）形式のフォントファイルは、サイズが非常に大きいので、Tux Paint のダウンロードファイルには含めず、個別にダウンロードできるようにしています。（"<a href="#different_language"><i>使用する言語の選択</i></a>"の項の表を参照してください）        </p>
 
         <p>
-          <b>Note:</b> As of version 0.9.18, Tux Paint uses the "SDL_Pango" library, which utilizes the "Pango" library to render text in the user interface, rather than using "SDL_ttf" directly. Unless your copy of Tux Paint was built without Pango support, special fonts should <b><i>no longer be necessary</i></b>.        </p>
+          <b>注：</b>バージョン 0.9.18 の時点で、Tux Paint では SDL_ttf ライブラリを直接には使わず、テキストレンダリングライブラリ "Pango" をSDL経由で使うための "SDL_Pango" ライブラリを用いています。お使いの Tux Paint が Pango のサポートを無効にしてコンパイルされていない限り、言語固有のフォントは<b><i>必要ありません</i></b>        </p>
 
         <p>
-          When running Tux Paint in a language that requires its own font, Tux Paint will try to load the font file from its system-wide "<code><b>fonts</b></code>" directory (under a "<code><b>locale</b></code>" subdirectory). The name of the file corresponds to the first two letters in the 'locale' code of the language (e.g., "ko" for Korean, "ja" for Japanese, "zh_tw" for Traditional Chinese).        </p>
+          固有のフォントを必要とする言語で Tux Paint を使用する場合、システム全体の "<code><b>fonts</b></code>" ディレクトリ（"<code><b>locale</b></code>" 以下にあります）からフォントファイルを読み込みます。フォントファイルのファイル名は、言語コードの最初の2文字と対応します（例えば、韓国語では "ko"、日本語では "ja"、繁体中国語では "zh_tw" となります）。        </p>
 
         <p>
-          For example, under Linux or Unix, when Tux Paint is run in Korean (e.g., with the option "<code>--lang korean</code>"), Tux Paint will attempt to load the following font file:        </p>
+          例えば、Linux や Unix では、（例えば "<code>--lang korean</code>" オプションをつけて）韓国語で Tux Paint を使う場合、次のファイルを読み込もうとします。        </p>
 
         <blockquote>
           <p>
@@ -4957,10 +4957,10 @@
         </blockquote>
 
         <p>
-          You can download fonts for supported languages from Tux Paint's website, <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>. (Look in the 'Fonts' section under 'Download.')        </p>
+          サポートされる言語用のフォントファイルは、Tux Paint のウェブサイト <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a> からダウンロードできます。（'ダウンロード' ページの 'フォント' セクションにあります）        </p>
 
         <p>
-          Under Unix and Linux, you can use the <code>Makefile</code> that comes with the font to install the font in the appropriate location.        </p>
+          Unix や Linux では、同梱の Makefile を使って、適切な場所にフォントをインストールすることができます。        </p>
       </blockquote>
     </blockquote>
 

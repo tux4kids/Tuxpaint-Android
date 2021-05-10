@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: tuxpaint 0.9.23\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-20 20:40-0800\n"
-"PO-Revision-Date: 2020-08-19 20:56+0900\n"
+"PO-Revision-Date: 2021-05-04 13:29+0900\n"
 "Last-Translator: Shin-ichi TOYAMA <shin1@wmail.plala.or.jp>\n"
 "Language-Team: japanese <shin1@wmail.plala.or.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.3\n"
 
 #. Response to Black (0, 0, 0) color selected
 #: ../colors.h:86
@@ -182,35 +182,35 @@ msgstr "<9>spare-9b"
 
 #: ../fill_tools.h:49
 msgid "Solid"
-msgstr ""
+msgstr "なし"
 
 #: ../fill_tools.h:50
-#, fuzzy
-#| msgid "Lines"
 msgid "Linear"
-msgstr "せん"
+msgstr "リニア"
 
 #: ../fill_tools.h:51
 msgid "Radial"
-msgstr ""
+msgstr "ほうしゃ"
 
 #: ../fill_tools.h:55
-#, fuzzy
-#| msgid "Click in the picture to fill that area with color."
 msgid "Click to fill an area with a solid color."
-msgstr "いろで ぬりつぶしたいところを クリックしてね。"
+msgstr "クリックしたところを ひとつのいろで ぬりつぶします。"
 
 #: ../fill_tools.h:56
 msgid ""
 "Click and drag to fill an area with a linear gradient (from the chosen color "
 "to transparent)."
 msgstr ""
+"クリックしてからドラッグすると ひとつのむきにグラデーションをつけて ぬりつぶ"
+"します。"
 
 #: ../fill_tools.h:57
 msgid ""
 "Click to fill an area with a radial gradient (from the chosen color to "
 "transparent)."
 msgstr ""
+"クリックしてからドラッグすると まわりにむかってグラデーションをつけて ぬりつ"
+"ぶします。"
 
 #. Congratulations #1
 #: ../great.h:37
@@ -420,10 +420,8 @@ msgstr "まほう"
 
 #. Title of fill selector (buttons down the right for fill tool)
 #: ../titles.h:81
-#, fuzzy
-#| msgid "Fill"
 msgid "Fills"
-msgstr "ぬる"
+msgstr "グラデーション"
 
 #. Freehand painting tool
 #: ../tools.h:62
@@ -945,24 +943,26 @@ msgstr "クリックしたままマウスをうごかして まんがみたい�
 
 #: ../../magic/src/checkerboard.c:99
 msgid "Checkerboard"
-msgstr ""
+msgstr "チェッカーボード"
 
 #  msgid "Click and drag to draw train track rails on your picture."
 #: ../../magic/src/checkerboard.c:106
-#, fuzzy
-#| msgid "Click and drag to draw repetitive patterns. "
 msgid "Click and drag to fill the canvas with a checkerboard pattern."
-msgstr "クリックしたまま マウスをうごかして くりかえしもようを かこう。 "
+msgstr ""
+"クリックしてからドラッグすると えのぜんたいに チェッカーボードのパターンを え"
+"がきます。"
 
 #: ../../magic/src/clone.c:132
 msgid "Clone"
-msgstr ""
+msgstr "クローン"
 
 #: ../../magic/src/clone.c:138
 msgid ""
 "Click once to pick a spot to begin cloning. Click again and drag to clone "
 "that part of the picture."
 msgstr ""
+"えを ほかのばしょに うつしとります。まず うつしとりたい もとのところを クリッ"
+"クしてから うつしたいさきのところで ドラッグします。"
 
 #: ../../magic/src/confetti.c:83
 msgid "Confetti"
@@ -1282,13 +1282,11 @@ msgstr ""
 #. Both are named "Pixels", at the moment:
 #: ../../magic/src/pixels.c:108
 msgid "Pixels"
-msgstr ""
+msgstr "ピクセル"
 
 #: ../../magic/src/pixels.c:114
-#, fuzzy
-#| msgid "Click and drag to draw large bricks."
 msgid "Click and drag to draw large pixels."
-msgstr "おおきな レンガを かこう。"
+msgstr "おおきなドットのふでで せんを かこう。"
 
 #: ../../magic/src/puzzle.c:103
 msgid "Puzzle"

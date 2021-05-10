@@ -4,7 +4,7 @@
   Fill tool
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2019 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: March 8, 2021
+  Last updated: May 5, 2021
   $Id$
 */
 
@@ -137,6 +137,7 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
   double in_line, closeness;
   static unsigned char prog_anim;
   Uint32 px_colr;
+  Uint8 touch_byt;
 
 
   /* "Same" color?  No need to fill */
@@ -187,7 +188,11 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
       }
 
       if (touched != NULL) {
-        touched[(y * canvas->w) + fillL] = (255 - ((Uint8) (in_line * 85)));
+        touch_byt = (255 - ((Uint8) (in_line * 85)));
+        if (touch_byt == 0)
+          touch_byt = 1;
+
+        touched[(y * canvas->w) + fillL] = touch_byt;
       }
 
       px_colr = getpixels[last->format->BytesPerPixel] (last, fillL, y);
@@ -210,7 +215,11 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
     {
       if (touched != NULL)
         {
-          touched[(y * canvas->w) + fillL] = (255 - ((Uint8) (in_line * 85)));
+          touch_byt = (255 - ((Uint8) (in_line * 85)));
+          if (touch_byt == 0)
+            touch_byt = 1;
+
+          touched[(y * canvas->w) + fillL] = touch_byt;
         }
 
       px_colr = getpixels[last->format->BytesPerPixel] (last, fillL, y);
@@ -240,7 +249,11 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
       }
 
       if (touched != NULL) {
-        touched[(y * canvas->w) + fillR] = (255 - ((Uint8) (in_line * 85)));
+        touch_byt = (255 - ((Uint8) (in_line * 85)));
+        if (touch_byt == 0)
+          touch_byt = 1;
+
+        touched[(y * canvas->w) + fillR] = touch_byt;
       }
 
       px_colr = getpixels[last->format->BytesPerPixel] (last, fillR, y);
@@ -263,7 +276,11 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
     {
       if (touched != NULL)
         {
-          touched[(y * canvas->w) + fillR] = (255 - ((Uint8) (in_line * 85)));
+          touch_byt = (255 - ((Uint8) (in_line * 85)));
+          if (touch_byt == 0)
+            touch_byt = 1;
+
+          touched[(y * canvas->w) + fillR] = touch_byt;
         }
 
       px_colr = getpixels[last->format->BytesPerPixel] (last, fillR, y);

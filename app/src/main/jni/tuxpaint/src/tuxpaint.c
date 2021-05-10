@@ -22,9 +22,10 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - March 8, 2021
+  June 14, 2002 - April 19, 2021
 */
 
+#include "platform.h"
 
 /* (Note: VER_VERSION and VER_DATE are now handled by Makefile) */
 
@@ -303,15 +304,21 @@ typedef struct safer_dirent
 
 /* Not BeOS */
 
-#ifdef __APPLE__
+#if defined(__MACOS__)
 
-/* Apple */
+/* macOS */
 
 #include "macos_print.h"
 
-#else /* __APPLE__ */
+#elif defined(__IOS__)
 
-/* Not Windows, not BeOS, not Apple */
+/* iOS */
+
+#include "ios_print.h"
+
+#else /* __MACOS__, __IOS__ */
+
+/* Not Windows, not BeOS, not macOS, not iOS */
 #ifdef __ANDROID__
 
 #define AUTOSAVE_GOING_BACKGROUND
@@ -326,7 +333,7 @@ typedef struct safer_dirent
 
 #endif /* __ANDROID__ */
 
-#endif /* __APPLE__ */
+#endif /* __MACOS__, __IOS__ */
 
 #endif /* __BEOS__ */
 
@@ -373,8 +380,10 @@ static void mtw(wchar_t * wtok, char *tok)
 
 #endif /* WIN32 */
 
-#ifdef __APPLE__
+#if defined(__MACOS__)
 #include "macos.h"
+#elif defined(__IOS__)
+#include "ios.h"
 #endif
 
 #include <errno.h>
@@ -779,6 +788,23 @@ static Uint32 magic_getpixel(SDL_Surface * surface, int x, int y);
 static void magic_xorpixel(SDL_Surface * surface, int x, int y);
 
 /**
+ * Sets button_scale to the maximum Tux Paint can handle
+ */
+static void set_max_buttonscale(void)
+{
+  float max_w, max_h;
+
+  /* WINDOW_WIDTH / original size of tools columnss + 9 buttons + tooloption columns */
+  max_w = (float)WINDOW_WIDTH / (gd_tools.cols * 48 + 9 * 48 + gd_toolopt.cols * 48);
+
+  /* WINDOW_HEIGHT / original size of r_ttools.h + 5 buttons + colors rows + tux area */
+  max_h = (float)WINDOW_HEIGHT / (40 + 5 * 48 + gd_colors.rows * 48 + 56);
+
+  button_scale = min(max_w, max_h);
+  fprintf(stderr, "Will use a button size of %d\n", (int)(button_scale * ORIGINAL_BUTTON_SIZE));
+}
+
+/**
  * Sets a variety of screen layout globals, based on the
  * size of the window/screen Tux Paint is being displayed on
  * (WINDOW_WIDTH & WINDOW_HEIGHT).
@@ -831,13 +857,15 @@ static void setup_normal_screen_layout(void)
   if (buttons_tall < 5) {
     fprintf(stderr, "Button size '%d' with window size '%dx%d' is not reasonable (not tall enough).\n",
       button_w, WINDOW_WIDTH, WINDOW_HEIGHT);
-    exit(93);
+    set_max_buttonscale();
+    setup_normal_screen_layout();
   }
 
   if (r_canvas.w < button_w * 9) {
     fprintf(stderr, "Button size '%d' with window size '%dx%d' is not reasonable (not wide enough).\n",
       button_w, WINDOW_WIDTH, WINDOW_HEIGHT);
-    exit(93);
+    set_max_buttonscale();
+    setup_normal_screen_layout();
   }
 
   gd_tools.rows = buttons_tall;
@@ -4353,6 +4381,7 @@ static void mainloop(void)
                       else if (cur_tool == TOOL_FILL)
                         {
                           cur_fill = cur_thing;
+                          draw_tux_text(TUX_GREAT, fill_tips[cur_fill], 1);
 
                           if (do_draw)
                             draw_fills();
@@ -4857,7 +4886,7 @@ static void mainloop(void)
                               update_canvas(x1, y1, x2, y2);
                             }
 
-                            draw_tux_text(TUX_GREAT, tool_tips[TOOL_FILL], 1);
+                            draw_tux_text(TUX_GREAT, fill_tips[cur_fill], 1);
                         }
                     }
                   else if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
@@ -8265,9 +8294,12 @@ static void load_stamps(SDL_Surface * screen)
 #else
   load_stamp_dir(screen, ASSETS_STAMPS_DIR);
 #endif
-#ifdef __APPLE__
+#ifdef __MACOS__
   load_stamp_dir(screen, "Resources/stamps");
   load_stamp_dir(screen, "/Library/Application Support/TuxPaint/stamps");
+#endif
+#ifdef __IOS__
+  load_stamp_dir(screen, "stamps");
 #endif
 #ifdef WIN32
   free(homedirdir);
@@ -17718,7 +17750,7 @@ void do_print(void)
 
   SurfacePrint(save_canvas);
 #elif defined(__APPLE__)
-  /* Mac OS X */
+  /* macOS, iOS */
   int show = (want_alt_printcommand && !fullscreen);
 
   const char *error = SurfacePrint(save_canvas, show);
@@ -23925,7 +23957,7 @@ static void setup_config(char *argv[])
       result = find_directory(B_USER_SETTINGS_DIRECTORY, volume, false, buffer, sizeof(buffer));
       asprintf((char **)&savedir, "%s/%s", buffer, "TuxPaint");
 #elif __APPLE__
-      savedir = strdup(macos_preferencesPath());
+      savedir = strdup(apple_preferencesPath());
 #elif __ANDROID__
       savedir = SDL_AndroidGetExternalStoragePath();
 #else
@@ -23948,10 +23980,11 @@ static void setup_config(char *argv[])
       /* FIXME: Need assist for:
          * __BEOS__
          * __HAIKU__
-         * __APPLE__
       */
 #ifdef WIN32
       picturesdir = GetUserImageDir();
+#elif __APPLE__
+      picturesdir = strdup(apple_picturesPath());
 #else
       picturesdir = get_xdg_user_dir("PICTURES", "Pictures");
 #endif
@@ -23969,8 +24002,8 @@ static void setup_config(char *argv[])
   /* BeOS: Use a "tuxpaint.cfg" file: */
   strcpy(str, "tuxpaint.cfg"); /* safe; sufficient size */
 #elif defined(__APPLE__)
-  /* Mac OS X: Use a "tuxpaint.cfg" file in the Tux Paint application support folder */
-  safe_snprintf(str, sizeof(str), "%s/tuxpaint.cfg", macos_preferencesPath());
+  /* macOS, iOS: Use a "tuxpaint.cfg" file in the Tux Paint application support folder */
+  safe_snprintf(str, sizeof(str), "%s/tuxpaint.cfg", apple_preferencesPath());
 #elif defined(__ANDROID__)
   /* Try to find the user's config file */
   /* This file is writed by the tuxpaint config activity when the user runs it */
@@ -24004,9 +24037,9 @@ static void setup_config(char *argv[])
 #elif defined(__APPLE__)
       /* EP added this conditional section for Mac to fix
          folder & extension inconsistency with Tux Paint Config application) */
-      /* Mac OS X: Use a "tuxpaint.cfg" file in the *global* Tux Paint
+      /* macOS, iOS: Use a "tuxpaint.cfg" file in the *global* Tux Paint
          application support folder */
-      safe_snprintf(str, sizeof(str), "%s/tuxpaint.cfg", macos_globalPreferencesPath());
+      safe_snprintf(str, sizeof(str), "%s/tuxpaint.cfg", apple_globalPreferencesPath());
       parse_file_options(&tmpcfg_sys, str);
 #elif defined(__ANDROID__)
       /* Load the config file we provide in assets/etc/tuxpaint.cfg */
@@ -24500,7 +24533,7 @@ static void chdir_to_binary(char *argv0)
       char *app_path = strdup(argv0);
       char *slash = strrchr(app_path, '/');
 
-#if defined(__APPLE__)
+#if defined(__MACOS__)
       // On macOS, execution is deep inside the app bundle.
       // E.g., "/Applications/TuxPaint.app/Contents/MacOS/tuxpaint"
       // But we want to point somewhere higher up, say to "Contents", so we can access
@@ -26134,7 +26167,7 @@ int main(int argc, char *argv[])
   CLOCK_ASM(time2);
 #endif
 
-#if defined(__APPLE__)
+#if defined(__MACOS__)
   /* Pango uses Fontconfig which requires /opt/local/etc/fonts/fonts.conf. This
    * file may not exist on the runtime system, however, so we copy the file
    * into our app bundle at compile time, and tell Fontconfig here to look for

@@ -686,7 +686,7 @@ Ferramentas dispoñíbeis
                               «Imprimir».
 
                               Non obstante, se mantén premida a tecla [Alt]
-                              (ou [Opción]) mentres preme no botón
+                              (ou [Opción]) mentres cando preme no botón
                               «Imprimir», sempre que non estea en modo de
                               pantalla completa, aparecerá o diálogo da
                               impresora do seu sistema operativo no que
@@ -913,7 +913,7 @@ Uso do script de importación, «tuxpaint-import»
        Exemplo:
 
          $ tuxpaint-import avoa.jpg
-         avoa.jpg -> /home/username/.tuxpaint/saved/20210310223855.png
+         avoa.jpg -> /home/username/.tuxpaint/saved/20211231012359.png
          jpegtopnm: WRITING A PPM FILE
 
        A primeira liña («tuxpaint-import avoa.jpg») é a orde a executar. As

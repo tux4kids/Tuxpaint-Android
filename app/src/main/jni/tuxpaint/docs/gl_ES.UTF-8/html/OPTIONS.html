@@ -25,7 +25,7 @@
       </p>
 
       <p>
-         9 de Marzo de 2021      </p>
+        19 de Abril de 2021      </p>
     </center>
 
     <hr size="2"
@@ -127,14 +127,18 @@
         </dt>
 
         <dd>
-          Executar o programa en modo de pantalla completa en vez de nunha xanela.        </dd>
+          <p>
+            Executar o programa en modo de pantalla completa en vez de nunha xanela.          </p>
+        </dd>
 
         <dt>
-          <code><b>fullscreen=native</b></code>
+            <code><b>fullscreen=native</b></code>
         </dt>
 
         <dd>
-          Executar o programa en modo de pantalla completa. Ademais, asume a resolución actual da pantalla (estabelecida polo sistema operativo).        </dd>
+          <p>
+            Executar o programa en modo de pantalla completa. Ademais, asume a resolución actual da pantalla (estabelecida polo sistema operativo).          </p>
+        </dd>
 
         <dt>
           <code><b>windowsize=<i>TAMAÑO</i></b></code>
@@ -193,6 +197,9 @@
 
           <p>
             O valor <i>TAMAÑO</i> debería presentarse en píxeles e pode estar entre 24 e 192, inclusive. A maioría dos botóns son cadrados e isto afectará ao seu largo e alto.          </p>
+
+          <p>
+            Nota: Se o tamaño do botón escollido fai que os botóns sexan demasiado grandes para que aparezan todos os elementos da interface de usuario requiridos dentro do tamaño de xanela escollido por Tux Paint, empregarase o tamaño de botón  máis grande posíbel. (Aparecerá unha nota en <code>stderr</code>.)          </p>
         </dd>
 
         <dt>
@@ -209,14 +216,18 @@
         </dt>
 
         <dd>
-          Desactivar os efectos de son. (Nota: Ao premer <b>[Alt]</b> + <b>[S]</b> non se poden  volver activar os sons se se desactivaron usando esta opción).        </dd>
+          <p>
+            Desactivar os efectos de son. (Nota: Ao premer <b>[Alt]</b> + <b>[S]</b> non se poden  volver activar os sons se se desactivaron usando esta opción).          </p>
+        </dd>
 
         <dt>
           <code><b>nostereo=yes</b></code>
         </dt>
 
         <dd>
-          Desactivar a compatibilidade con panorama estéreo. (Útil para usuarios con discapacidade auditiva nun oído ou lugares onde se está a empregar un só altofalante ou auricular.)        </dd>
+          <p>
+            Desactivar a compatibilidade con panorama estéreo. (Útil para usuarios con discapacidade auditiva nun oído ou lugares onde se está a empregar un só altofalante ou auricular.)          </p>
+        </dd>
 
         <dt>
           <code><b>noquit=yes</b></code>
@@ -238,14 +249,18 @@
         </dt>
 
         <dd>
-          Desactivar a función de impresión.        </dd>
+          <p>
+            Desactivar a función de impresión.          </p>
+        </dd>
 
         <dt>
-          <code><b>printdelay=<i>SEGUNDOS</i></b></code>
+            <code><b>printdelay=<i>SEGUNDOS</i></b></code>
         </dt>
 
         <dd>
-          Restrinxir a impresión para que só poida producirse unha vez cada <i>SEGUNDOS</i> segundos.        </dd>
+          <p>
+            Restrinxir a impresión para que só poida producirse unha vez cada <i>SEGUNDOS</i> segundos.          </p>
+        </dd>
 
         <dt>
           <code><b>printcommand=<i>ORDE</i></b></code>
@@ -257,7 +272,7 @@
           </p>
 
           <p>
-            Use a orde <i>ORDE</i> para imprimir un ficheiro en formato PostScript cando se preme no botón «Imprimir». Se esta opción non está especificamente definida, o comando predeterminado é:          </p>
+            Use a orde <i>ORDE</i> para imprimir un ficheiro en formato PostScript cando se preme no botón «Imprimir». Se esta opción non está especificamente definida, a orde predeterminada é:          </p>
 
           <blockquote>
             <code>lpr</code>
@@ -267,7 +282,7 @@
             <b>Nota:</b> As versións de Tux Paint anteriores ao 0.9.15 enviaban datos en formato PNG á orde de impresión (de xeito predeterminado era «<code>pngtopnm | pnmtops | lpr</code>»).          </p>
 
           <p>
-            Se estabeleceu unha alternativa <code><b>printcommand</b></code> no ficheiro de configuración antes da versión 0.9.15, terá que cambialo.          </p>
+            Se estabeleceu unha alternativa <code><b>printcommand</b></code> no ficheiro de configuración antes da versión 0.9.15, terá que cambiala.          </p>
         </dd>
 
         <dt>
@@ -280,7 +295,7 @@
           </p>
 
           <p>
-            Usa a orde <i>ORDE para imprimir un ficheiro en formato PostScript cando se preme no botón «Imprimir» mentres se mantén premida a tecla modificadora </i>. (Iso utilizase normalmente para fornecer un diálogo de impresión, semellante a cando se preme <b>[Alt]</b>+«Imprimir» en Windows e macOS.)          </p>
+            Use a orde <i>ORDE</i> para imprimir un ficheiro en formato PostScript cando se preme no botón «Imprimir» mentres se mantén premida a tecla modificadora <b>[Alt]</b>. (Iso utilizase normalmente para fornecer un diálogo de impresión, semellante a cando se preme <b>[Alt]</b>+«Imprimir» en Windows e macOS.)          </p>
 
           <p>
             Se esta opción non está especificamente definida, a orde predeterminada é o diálogo gráfico de impresión de KDE:          </p>
@@ -300,7 +315,7 @@
           </p>
 
           <p>
-            Tux Paint empregará un ficheiro de configuración da impresora cando imprima. Prema a tecla <b>[Alt]</b> mentres preme no botón «Imprimir» en Tux Paint para que apareza unha xanela de diálogo de impresión de Windows.          </p>
+            Tux Paint empregará un ficheiro de configuración da impresora cando imprima. Prema a tecla <b>[Alt]</b> mentres fai clic no botón «Imprimir» en Tux Paint para que apareza unha xanela de diálogo de impresión de Windows.          </p>
 
           <p>
             (Nota: Isto só funciona cando non se está a executar Tux Paint en modo de pantalla completa.) Calquera cambio de configuración feito neste diálogo gardarase no ficheiro «<code>userdata/print.cfg</code>» e volverase a usar, sempre que estea configurada a opción «printcfg».          </p>
@@ -369,14 +384,18 @@
         </dt>
 
         <dd>
-          Desactive o paso de rotación da ferramenta «Forma». Prema, arrastra e solte é todo o que se necesita para debuxar unha forma.        </dd>
+          <p>
+            Desactive o paso de rotación da ferramenta «Forma». Prema, arrastra e solte é todo o que se necesita para debuxar unha forma.          </p>
+        </dd>
 
         <dt>
           <code><b>uppercase=yes</b></code>
         </dt>
 
         <dd>
-          Todo o texto renderizarase só con maiúscula (por exemplo, «Pincel» será «PINCEL»). Útil para os cativos que saben ler, pero que ata agora só aprenderon maiúsculas.        </dd>
+          <p>
+            Todo o texto renderizarase só con maiúscula (por exemplo, «Pincel» será «PINCEL»). Útil para os cativos que saben ler, pero que ata agora só aprenderon maiúsculas.          </p>
+        </dd>
 
         <dt>
           <code><b>grab=yes</b></code>
@@ -407,7 +426,9 @@
         </dt>
 
         <dd>
-          Isto desactiva a compatibilidade para a roda dos ratos que a teñen. (Normalmente, a roda desprazará o menú do selector á dereita.)        </dd>
+          <p>
+            Isto desactiva a compatibilidade para a roda dos ratos que a teñen. (Normalmente, a roda desprazará o menú do selector á dereita.)          </p>
+        </dd>
 
         <dt>
           <code><b>nobuttondistinction=yes</b></code>
@@ -495,35 +516,45 @@
         </dt>
 
         <dd>
-          Algunhas imaxes da ferramenta <b>Selos</b> pódense reflectir, inverter e/ou cambiar o seu tamaño. Esta opción desactiva os controis e só fornece os selos básicos.        </dd>
+          <p>
+            Algunhas imaxes da ferramenta <b>Selos</b> pódense reflectir, inverter e/ou cambiar o seu tamaño. Esta opción desactiva os controis e só fornece os selos básicos.          </p>
+        </dd>
 
         <dt>
           <code><b>nomagiccontrols=yes</b></code>
         </dt>
 
         <dd>
-          Algunhas ferramentas de <b>Maxia</b> teñen a opción de actuar coma un pincel ou afectar todo o lenzo á vez. Esta opción desactiva os controis e só fornece a funcionalidade predeterminada (normalmente en modo pintura).        </dd>
+          <p>
+            Algunhas ferramentas de <b>Maxia</b> teñen a opción de actuar coma un pincel ou afectar todo o lenzo á vez. Esta opción desactiva os controis e só fornece a funcionalidade predeterminada (normalmente en modo pintura).          </p>
+        </dd>
 
         <dt>
           <code><b>noshapecontrols=yes</b></code>
         </dt>
 
         <dd>
-          Desactivar os botóns de control que se amosan cando se usa a ferramenta <b>Formas</b> que permiten cambiar como se debuxan as formas: centradas arredor do clic inicial do rato ou cun canto co clic inicial do rato.        </dd>
+          <p>
+            Desactivar os botóns de control que se amosan cando se usa a ferramenta <b>Formas</b> que permiten cambiar como se debuxan as formas: centradas arredor do clic inicial do rato ou cun canto co clic inicial do rato.          </p>
+        </dd>
 
         <dt>
           <code><b>nolabel=yes</b></code>
         </dt>
 
         <dd>
-          Desactiva a ferramenta <b>Etiqueta</b>: a ferramenta que permite a entrada de texto que se pode editar máis tarde.        </dd>
+          <p>
+            Desactiva a ferramenta <b>Etiqueta</b>: a ferramenta que permite a entrada de texto que se pode editar máis tarde.          </p>
+        </dd>
 
         <dt>
           <code><b>newcolorslast=yes</b></code>
         </dt>
 
         <dd>
-          Coloca as opcións de cor en branco no diálogo <b>Novo</b> ao final, de xeito que se amosen primeiro os iniciadores e/ou modelos.        </dd>
+          <p>
+            Coloca as opcións de cor en branco no diálogo <b>Novo</b> ao final, de xeito que se amosen primeiro os iniciadores e/ou modelos.          </p>
+        </dd>
 
         <dt>
           <code><b>mirrorstamps=yes</b></code>
@@ -538,194 +569,248 @@
         </dd>
 
         <dt>
-          <code><b>mouse-accessibility=yes</b></code>
+            <code><b>mouse-accessibility=yes</b></code>
         </dt>
 
         <dd>
-          Neste modo, no canto de premer, arrastrar e soltar (por exemplo, para debuxar), premese, móvese e premese  de novo para rematar o movemento.        </dd>
+          <p>
+            Neste modo, no canto de premer, arrastrar e soltar (por exemplo, para debuxar), premese, móvese e premese  de novo para rematar o movemento.          </p>
+        </dd>
 
         <dt>
           <code><b>onscreen-keyboard=yes</b></code>
         </dt>
 
         <dd>
-          Presenta un teclado en pantalla sobre que se pode premer cando empregan as ferramentas <b>Texto</b> e <b>Etiqueta</b>.        </dd>
+          <p>
+            Presenta un teclado en pantalla sobre que se pode premer cando empregan as ferramentas <b>Texto</b> e <b>Etiqueta</b>.          </p>
+        </dd>
 
         <dt>
           <code><b>onscreen-keyboard-layout=<i>NOME DA DISPOSICIÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o deseño inicial para o teclado en pantalla cando usa as ferramentas <b>Texto</b> e <b>Etiqueta</b>.<br> Nota: Usar esta opción implica <b>onscreen-keyboard=yes</b> automaticamente, polo que configurar ambas as cousas é redundante .        </dd>
+          <p>
+            Selecciona o deseño inicial para o teclado en pantalla cando usa as ferramentas <b>Texto</b> e <b>Etiqueta</b>.<br> Nota: Usar esta opción implica <b>onscreen-keyboard=yes</b> automaticamente, polo que configurar ambas as cousas é redundante .          </p>
+        </dd>
 
         <dt>
           <code><b>onscreen-keyboard-disable-change=yes</b></code>
         </dt>
 
         <dd>
-          Desactiva a posibilidade de cambiar o deseño do teclado en pantalla cando se usan as ferramentas <b>Texto</b> e <b>Etiqueta</b>, útil para simplificar as cousas para os máis pequechos.<br>
-          Nota: Usar esta opción implica automaticamente <b>onscreen-keyboard=yes</b>, polo que estabelecer ambas as cousas é redundante.        </dd>
+          <p>
+            Desactiva a posibilidade de cambiar o deseño do teclado en pantalla cando se usan as ferramentas <b>Texto</b> e <b>Etiqueta</b>, útil para simplificar as cousas para os máis pequechos.<br>
+          Nota: Usar esta opción implica automaticamente <b>onscreen-keyboard=yes</b>, polo que estabelecer ambas as cousas é redundante.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-dev=<i>N</i></b></code>
         </dt>
 
         <dd>
-          Especifica que dispositivo de mando debe ser usado por Tux Paint. O valor predeterminado é 0 (a primeira panca de mando — joystick).        </dd>
+          <p>
+            Especifica que dispositivo de mando debe ser usado por Tux Paint. O valor predeterminado é 0 (a primeira panca de mando — joystick).          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-slowness=<i>VELOCIDADE</i></b></code>
         </dt>
 
         <dd>
-          Estabelece un atraso en cada movemento do eixo, permitindo atrasar a panca de mando (joystick). Os valores permitidos van de 0 a 500. O valor predeterminado é 15.        </dd>
+          <p>
+            Estabelece un atraso en cada movemento do eixo, permitindo atrasar a panca de mando (joystick). Os valores permitidos van de 0 a 500. O valor predeterminado é 15.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-threshold=<i>LIMIAR</i></b></code>
         </dt>
 
         <dd>
-          Estabelece o nivel mínimo de movemento do eixe para comezar a mover o punteiro. Os valores permitidos son de 0 a 32766. O valor predeterminado é 3200.        </dd>
+          <p>
+            Estabelece o nivel mínimo de movemento do eixe para comezar a mover o punteiro. Os valores permitidos son de 0 a 32766. O valor predeterminado é 3200.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-maxsteps=<i>PASOS</i></b></code>
         </dt>
 
         <dd>
-          Define os píxeles máximos que moverá o punteiro á vez. Os valores permitidos van do 1 ao 7. O valor predeterminado é 7.        </dd>
+          <p>
+          Define os píxeles máximos que moverá o punteiro á vez. Os valores permitidos van do 1 ao 7. O valor predeterminado é 7.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-hat-timeout=<i>MILISEGUNDOS</i></b></code>
         </dt>
 
         <dd>
-          Estabelece o atraso após de que o punteiro comezará a moverse automaticamente se se mantén premido o sombreiro. Os valores permitidos van de 0 a 3000. O valor predeterminado é 1000.        </dd>
+          <p>
+            Estabelece o atraso após de que o punteiro comezará a moverse automaticamente se se mantén premido o sombreiro. Os valores permitidos van de 0 a 3000. O valor predeterminado é 1000.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-hat-slowness=<i>VELOCIDADE</i></b></code>
         </dt>
 
         <dd>
-          Estabelece un atraso en cada movemento automático, o que permite diminuír a velocidade do sombreiro. Os valores permitidos van de 0 a 500. O valor predeterminado é 15.        </dd>
+          <p>
+            Estabelece un atraso en cada movemento automático, o que permite diminuír a velocidade do sombreiro. Os valores permitidos van de 0 a 500. O valor predeterminado é 15.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-escape=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón da panca de control (joystick), tal e como o ve SDL, que se usará para xerar un evento de escape. Útil para desactivar os diálogos e saír.        </dd>
+          <p>
+            Selecciona o número do botón da panca de control (joystick), tal e como o ve SDL, que se usará para xerar un evento de escape. Útil para desactivar os diálogos e saír.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-brush=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de pinceis.        </dd>
+          <p>
+            Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de pinceis.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-stamp=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de selos.        </dd>
+          <p>
+            Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de selos.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-lines=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de liñas.        </dd>
+          <p>
+            Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de liñas.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-shapes=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de formas.        </dd>
+          <p>
+            Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de formas.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-text=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de texto.        </dd>
+          <p>
+            Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de texto.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-label=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de etiquetas.        </dd>
+          <p>
+            Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de etiquetas.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-magic=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de máxia.        </dd>
+          <p>
+            Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a seleccionar a ferramenta de máxia.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-undo=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a invocar a ferramenta de desfacer.        </dd>
+          <p>
+            Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a invocar a ferramenta de desfacer.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-redo=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón da panca de mando (joystick), tal e como o ve SDL, que será un atallo para seleccionar ferramenta de refacer.        </dd>
+          <p>
+            Selecciona o número do botón da panca de mando (joystick), tal e como o ve SDL, que será un atallo para seleccionar ferramenta de refacer.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-eraser=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón da panca de mando (joystick), tal e como o ve SDL, que será un atallo para seleccionar ferramenta de goma de borrar.        </dd>
+          <p>
+            Selecciona o número do botón da panca de mando (joystick), tal e como o ve SDL, que será un atallo para seleccionar ferramenta de goma de borrar.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-new=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón da panca de mando (joystick), como o ve SDL, que será un atallo para iniciar o diálogo para crear un novo debuxo.        </dd>
+          <p>
+            Selecciona o número do botón da panca de mando (joystick), como o ve SDL, que será un atallo para iniciar o diálogo para crear un novo debuxo.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-open=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón da panca de mando (joystick), como o ve SDL, que será un atallo para iniciar o diálogo para abrir un debuxo existente.        </dd>
+          <p>
+            Selecciona o número do botón da panca de mando (joystick), como o ve SDL, que será un atallo para iniciar o diálogo para abrir un debuxo existente.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-save=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a garda o debuxo.        </dd>
+          <p>
+          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a garda o debuxo.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-pgsetup=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a inicia o diálogo de configuración da páxina para imprimir.        </dd>
+          <p>
+            Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a inicia o diálogo de configuración da páxina para imprimir.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-btn-print=<i>NÚMERO DE BOTÓN</i></b></code>
         </dt>
 
         <dd>
-          Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a imprimir.        </dd>
+          <p>
+            Selecciona o número do botón do joystick, como o ve SDL, que será un atallo a imprimir.          </p>
+        </dd>
 
         <dt>
           <code><b>joystick-buttons-ignore=<i>BOTÓN1,BOTÓN2,...</i></b></code>
         </dt>
 
         <dd>
-          Un conxunto de números de botóns do mando (joystick), como se ve en SDL, que deben ignorarse. Se non, a menos que sexan utilizados por unha das opcións «<code>joystick-btn-</code>» anteriores, os botóns veranse como un botón esquerdo do rato.        </dd>
+          <p>
+            Un conxunto de números de botóns do mando (joystick), como se ve en SDL, que deben ignorarse. Se non, a menos que sexan utilizados por unha das opcións «<code>joystick-btn-</code>» anteriores, os botóns veranse como un botón esquerdo do rato.          </p>
+        </dd>
 
         <dt>
           <code><b>stampsize=<i>TAMAÑO</i></b></code>
@@ -751,7 +836,7 @@
             Funcionalidades:          </p>
 
           <ul>
-            <li>Movemento fino dentro do lenzo ou movemento groseiro se se mantén premida <code>default</code>.            </li>
+            <li>Movemento fino dentro do lenzo ou movemento groseiro se se mantén premida <code>Shift</code>.            </li>
 
             <li>Movemento groseiro dentro das áreas dos botóns da ferramenta.            </li>
 
@@ -830,8 +915,10 @@
             <li>Linux e Unix: se está dispoñíbel, onde queira que o seu contorno de escritorio estea configurado para que se almacenen imaxes, en función da configuración XDG (X Desktop Group). (Probe a executar a liña de ordes «<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>» para descubrilo.)<br>
               Normalmente (na configuración local inglesa), este será un subdirectorio «<code>Imaxes</code>» no seu directorio persoal (é dicir, «<code>$HOME/Imaxes</code>» tamén coñecido como «<code>~/Imaxes</code>»).<br>
               Tux Paint volverá usar ese directorio habitual, se non se pode ler a configuración XDG, ou non se estabelece nada «<code>XDG_PICTURES_DIR</code>».            </li>
-
-                        <li>Windows — TBD! <!-- FIXME -->
+            <li>Windows: Directorio «As miñas imaxes» para cada usuario (normalmente «c:\Users\<i>NOME_DE_USUARIO</i>\Pictures»). <br>Pode abrir directamente o cartafol do seguinte xeito:              <ul>
+                <li>Prema a tecla «[Windows]+[R]» para abrir o diálogo «Executar...».</li>
+                <li>Escriba «Shell: As miñas imaxes« na caixa de texto e prema en [Aceptar.]</li>
+              </ul>
             </li>
 
                         <li>macOS — TBD! <!-- FIXME -->
@@ -889,14 +976,18 @@
         </dt>
 
         <dd>
-          Isto desactiva a pregunta «<i>Gardar sobre a versión antiga...?</i>» ao gardar un ficheiro existente. Con esta opción, a versión anterior sempre será substituída pola nova versión automaticamente.        </dd>
+          <p>
+            Isto desactiva a pregunta «<i>Gardar sobre a versión antiga...?</i>» ao gardar un ficheiro existente. Con esta opción, a versión anterior sempre será substituída pola nova versión automaticamente.          </p>
+        </dd>
 
         <dt>
           <code><b>saveover=new</b></code>
         </dt>
 
         <dd>
-          Isto tamén desactiva a pregunta «<i>Gardar sobre a versión antiga...?</i>» cando garda un ficheiro existente. Non obstante, esta opción sempre gardará un novo ficheiro no canto de sobrescribir a versión anterior.        </dd>
+          <p>
+            Isto tamén desactiva a pregunta «<i>Gardar sobre a versión antiga...?</i>» cando garda un ficheiro existente. Non obstante, esta opción sempre gardará un novo ficheiro no canto de sobrescribir a versión anterior.          </p>
+        </dd>
 
         <dt>
           <code><b>saveover=ask</b></code>
@@ -905,29 +996,35 @@
         <dd>
           <p>
             <i>(Esta opción é redundante, xa que esta é a opción predeterminada.)</i>
-          </p>
-          Ao gardar un debuxo existente, primeiro preguntaráselle se quere gardar sobre a versión anterior ou non.        </dd>
+          Ao gardar un debuxo existente, primeiro preguntaráselle se quere gardar sobre a versión anterior ou non.          </p>
+        </dd>
 
         <dt>
           <code><b>nosave=yes</b></code>
         </dt>
 
         <dd>
-          Isto desactiva a capacidade de Tux Paint para gardar ficheiros (e, polo tanto, desactiva o botón «Gardar» na pantalla). Pode usarse en situacións nas que o programa só se usa para divertirse ou nun contorno de proba.        </dd>
+          <p>
+            Isto desactiva a capacidade de Tux Paint para gardar ficheiros (e, polo tanto, desactiva o botón «Gardar» na pantalla). Pode usarse en situacións nas que o programa só se usa para divertirse ou nun contorno de proba.          </p>
+        </dd>
 
         <dt>
           <code><b>autosave=yes</b></code>
         </dt>
 
         <dd>
-          Isto impide a Tux Paint preguntar se quere gardar a imaxe actual ao saír e supón que si.        </dd>
+          <p>
+            Isto impide a Tux Paint preguntar se quere gardar a imaxe actual ao saír e supón que si.          </p>
+        </dd>
 
         <dt>
           <code><b>startblank=yes</b></code>
         </dt>
 
         <dd>
-          Isto fai que Tux Paint amose un lenzo en branco cando se inicia por vez primeira, no canto de cargar a última imaxe que se estaba a editar.        </dd>
+          <p>
+            Isto fai que Tux Paint amose un lenzo en branco cando se inicia por vez primeira, no canto de cargar a última imaxe que se estaba a editar.          </p>
+        </dd>
 
         <dt>
           <code><b>colorfile=<i>NOME_DE_FICHEIRO</i></b></code>
@@ -2624,7 +2721,9 @@
           </dt>
 
           <dd>
-            Estas activan ou corresponden ás opcións do ficheiro de configuración descritas anteriormente.
+          <p>
+            Estas activan ou corresponden ás opcións do ficheiro de configuración descritas anteriormente.          </p>
+
             <hr size="1"
                 noshade
                 width="50%">
@@ -2670,7 +2769,9 @@
           </dt>
 
           <dd>
-            Estas opcións pódense usar para anular calquera axuste feito no ficheiro de configuración. (Se a opción non está configurada no(s) ficheiro(s) de configuración, non será necesaria ningunha opción de anulación.)
+            <p>
+              Estas opcións pódense usar para anular calquera axuste feito no ficheiro de configuración. (Se a opción non está configurada no(s) ficheiro(s) de configuración, non será necesaria ningunha opción de anulación.)            </p>
+
             <hr size="1"
                 noshade
                 width="50%">
@@ -2721,42 +2822,54 @@
             </dt>
 
             <dd>
-              Amosa o número de versión e a data da copia de Tux Paint que está a executar. O «--verbose-version» tamén lista as opcións de tempo de compilación definidas. (Vexa INSTALL [INSTALAR] e FAQ [Preguntas frecuentes] ).            </dd>
+              <p>
+                Amosa o número de versión e a data da copia de Tux Paint que está a executar. O «--verbose-version» tamén lista as opcións de tempo de compilación definidas. (Vexa INSTALL [INSTALAR] e FAQ [Preguntas frecuentes] ).              </p>
+            </dd>
 
             <dt>
               <code><b>--copying</b></code>
             </dt>
 
             <dd>
-              Amosa información breve sobre a licenza para copiar Tux Paint.            </dd>
+              <p>
+                Amosa información breve sobre a licenza para copiar Tux Paint.              </p>
+            </dd>
 
             <dt>
               <code><b>--usage</b></code>
             </dt>
 
             <dd>
-              Amosa a lista de opcións de liña de ordes dispoñíbeis.            </dd>
+              <p>
+                Amosa a lista de opcións de liña de ordes dispoñíbeis.              </p>
+            </dd>
 
             <dt>
               <code><b>--help</b></code>
             </dt>
 
             <dd>
-              Amosa unha breve axuda sobre o uso de Tux Paint.            </dd>
+              <p>
+                Amosa unha breve axuda sobre o uso de Tux Paint.              </p>
+            </dd>
 
             <dt>
               <code><b>--lang help</b></code>
             </dt>
 
             <dd>
-              Amosa unha lista de idiomas dispoñíbeis en Tux Paint.            </dd>
+              <p>
+                Amosa unha lista de idiomas dispoñíbeis en Tux Paint.              </p>
+            </dd>
 
             <dt>
               <code><b>--joystick-dev list</b></code>
             </dt>
 
             <dd>
-              Amosa a lista de pancas de mando (joysticks) conectados dispoñíbeis para Tux Paint.            </dd>
+              <p>
+                Amosa a lista de pancas de mando (joysticks) conectados dispoñíbeis para Tux Paint.              </p>
+            </dd>
           </dl>
         </blockquote>
       </blockquote>
@@ -4798,7 +4911,7 @@
             Tux Paint recoñecerá a configuración local actual e empregará de xeito predeterminado os ficheiros apropiados. Polo tanto, esta sección é só para persoas que proban idiomas diferentes.          </p>
 
           <p>
-            O máis sinxelo é empregar o interruptor «<code>--lang</code>» no atallo (ver «INSTALL [INSTALAR]»). Non obstante, usando unha xanela de indicador do sistema de MSDOS, tamén é posíbel emitir un comando coma este:          </p>
+            O máis sinxelo é empregar o interruptor «<code>--lang</code>» no atallo (ver «INSTALL [INSTALAR]»). Non obstante, usando unha xanela de indicador do sistema de MSDOS, tamén é posíbel emitir unha orde coma esta:          </p>
 
           <blockquote>
             <code>set LANG=es_ES</code>
@@ -4808,8 +4921,14 @@
             ...que estabelecerá o idioma para toda a vida desa xanela DOS.          </p>
 
           <p>
-            Para obter algo máis permanente, probe a editar o ficheiro «<code>autoexec.bat</code>» do seu computador usando a ferramenta «<b>sysedit</b>» de Windows:          </p>
-
+            Para obter algo máis permanente, pode estabelecer unha «variábel de contorno» usando o diálogo «Propiedades do sistema» do seguinte xeito:          </p>
+          <ul>
+            <li>Prema a combinación de teclas «<b>[Windows]+[R]</b>» para abrir o diálogo «Executar...».</li>
+            <li>Escriba «<code>sysdm.cpl</code>» na caixa de texto e prema no botón «<b>[OK]</b>» para abrir o diálogo «Propiedades do sistema».</li>
+            <li>Seleccione a lapela «Avanzado».</li>
+            <li>Prema no botón «Variábeis de contorno...».</li>
+            <li>Edite o valor do parámetr «<code>LANG</code>») (créeo, se non existe).</li>
+          </ul>
         </blockquote>
       </blockquote>
 

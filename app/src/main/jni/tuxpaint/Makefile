@@ -38,6 +38,12 @@ else
     ifeq ($(SYSNAME),Darwin)
       OS:=macos
       GPERF:=/usr/bin/gperf
+
+      CC:=$(shell xcrun -f clang)
+      ARCHS:=$(shell uname -m)
+      MINVER:=10.8
+      SDKROOT:=$(shell xcrun --show-sdk-path)
+      HOSTROOT:=/opt/local
     else
       ifeq ($(SYSNAME),BeOS)
         OS:=beos
@@ -59,16 +65,71 @@ else
   endif
 endif
 
+# CROSS COMPILATION OVERRIDES
+#
+# Usage:
+#   make HOST=<HOST> HOSTROOT=<HOSTROOT> [EXTRA_ARGS]
+#
+# <HOST> may be one of:
+#   iphoneos          Build for the iphoneos, presumably on macOS.
+#   iphonesimulator   Build for the iphonesimulator, presumably on macOS.
+#
+# <HOSTROOT> is the directory containing support files for building for <HOST>:
+#   <HOSTROOT>/include        Header files.
+#   <HOSTROOT>/lib            Library files.
+#   <HOSTROOT>/lib/pkgconfig  *.pc files.
+#
+ifdef HOST
+  ifndef HOSTROOT
+    $(error Must set HOSTROOT to cross compile)
+  endif
+  ifeq ($(wildcard $(HOSTROOT)/.),)
+    $(error Invalid HOSTROOT: $(HOSTROOT))
+  endif
+
+  ifeq ($(HOST),iphoneos)
+    OS:=ios
+    CC:=$(shell xcrun --sdk iphoneos -f clang)
+    SDK:=iphoneos
+    ARCHS:=arm64 armv7s armv7
+    MINVER:=9.0
+    MINVEROPT:=-miphoneos-version-min=$(MINVER)
+    SDKROOT:=$(shell xcrun --sdk iphoneos --show-sdk-path)
+  else ifeq ($(HOST),iphonesimulator)
+    OS:=ios
+    CC:=$(shell xcrun --sdk iphonesimulator -f clang)
+    SDK:=iphonesimulator
+    ARCHS:=$(shell uname -m)
+    MINVER:=9.0
+    MINVEROPT:=-mios-simulator-version-min=$(MINVER)
+    SDKROOT:=$(shell xcrun --sdk iphonesimulator --show-sdk-path)
+  else
+    $(error Invalid HOST: $(HOST))
+  endif
+
+  # We set PKG_CONFIG_LIBDIR instead of PKG_CONFIG_PATH because we want to
+  # *change* where pkg-config looks for .pc files instead of adding to the
+  # default path which may have libraries that aren't for HOST.
+  export PKG_CONFIG_LIBDIR:=$(HOSTROOT)/lib/pkgconfig
+endif
+
 # change to sdl-console to build a console version on Windows
 SDL_PCNAME:=sdl2
 
 WINDRES:=windres
 PKG_CONFIG:=pkg-config
+ifdef PKG_CONFIG_LIBDIR
+  # Cross compilation override
+  PKG_CONFIG:=PKG_CONFIG_LIBDIR=$(PKG_CONFIG_LIBDIR) $(PKG_CONFIG)
+endif
 
-# test if a library can be linked
-linktest = $(shell if $(CC) $(CPPFLAGS) $(CFLAGS) -o dummy.o dummy.c $(LDFLAGS) $(1) $(2) > /dev/null 2>&1; \
+# test if a pkg-config library exists or can be linked manually
+linktest = $(shell [ -n "$(1)" ] \
+    && $(PKG_CONFIG) --exists $(1) \
+    && $(PKG_CONFIG) --libs $(1) \
+    || if $(CC) $(CPPFLAGS) $(CFLAGS) -o dummy.o dummy.c $(LDFLAGS) $(2) $(3) > /dev/null 2>&1; \
 	then \
-		echo "$(1)"; \
+		echo "$(2)"; \
 	fi ;)
 
 # test compiler options
@@ -88,50 +149,53 @@ RAD_CMD:=$($(OS)_RAD_CMD)
 
 windows_SO_TYPE:=dll
 macos_SO_TYPE:=dylib
+ios_SO_TYPE:=dylib
 beos_SO_TYPE:=so
 linux_SO_TYPE:=so
 SO_TYPE:=$($(OS)_SO_TYPE)
 
-windows_LIBMINGW:=-lmingw32
+windows_LIBMINGW:=-L/usr/local/lib -lmingw32
 LIBMINGW:=$($(OS)_LIBMINGW)
 
 windows_EXE_EXT:=.exe
 EXE_EXT:=$($(OS)_EXE_EXT)
 
-windows_BUNDLE:=
-macos_BUNDLE=./TuxPaint.app
-beos_BUNDLE:=
-linux_BUNDLE:=
+macos_BUNDLE:=./TuxPaint.app
+ios_BUNDLE:=./TuxPaint-$(SDK).app
 BUNDLE:=$($(OS)_BUNDLE)
 
 windows_ARCH_LIBS:=obj/win32_print.o obj/resource.o
 macos_ARCH_LIBS:=src/macos_print.m obj/macos.o
+ios_ARCH_LIBS:=src/ios_print.m obj/ios.o
 beos_ARCH_LIBS:=obj/BeOS_print.o
 linux_ARCH_LIBS:=obj/postscript_print.o
 ARCH_LIBS:=$($(OS)_ARCH_LIBS)
 
 windows_ARCH_CFLAGS:=
-macos_ARCH_CFLAGS:=-mmacosx-version-min=10.8 -isystem /opt/local/include -DHAVE_STRCASESTR -w -headerpad_max_install_names
+macos_ARCH_CFLAGS:=-isysroot $(SDKROOT) -I$(SDKROOT)/usr/include -I$(HOSTROOT)/include -mmacosx-version-min=$(MINVER) -arch $(subst $() $(), -arch ,$(ARCHS)) -w -headerpad_max_install_names -DHAVE_STRCASESTR
+ios_ARCH_CFLAGS:=-isysroot $(SDKROOT) -I$(SDKROOT)/usr/include -I$(HOSTROOT)/include $(MINVEROPT) -arch $(subst $() $(), -arch ,$(ARCHS)) -w -fPIC -DHAVE_STRCASESTR -DUNLINK_ONLY
 beos_ARCH_CFLAGS:=
 linux_ARCH_CFLAGS:=
 ARCH_CFLAGS:=$($(OS)_ARCH_CFLAGS)
 
 windows_ARCH_LDFLAGS:=
-macos_ARCH_LDFLAGS:=-L/opt/local/lib
+macos_ARCH_LDFLAGS:=-isysroot $(SDKROOT) -L$(HOSTROOT)/lib -mmacosx-version-min=$(MINVER) -arch $(subst $() $(), -arch ,$(ARCHS))
+ios_ARCH_LDFLAGS:=-isysroot $(SDKROOT) -L$(HOSTROOT)/lib $(MINVEROPT) -arch $(subst $() $(), -arch ,$(ARCHS))
 beos_ARCH_LDFLAGS:=
 linux_ARCH_LDFLAGS:=
 ARCH_LDFLAGS:=$($(OS)_ARCH_LDFLAGS)
 LDFLAGS:=$(ARCH_LDFLAGS)
 
-PAPER_LIB:=$(call linktest,-lpaper,)
-PNG:=$(call linktest,-lpng,)
-PNG:=$(if $(PNG),$(PNG),$(call linktest,-lpng12,))
+PAPER_LIB:=$(call linktest,,-lpaper,)
+PNG:=$(call linktest,libpng,-lpng,)
+PNG:=$(if $(PNG),$(PNG),$(call linktest,,-lpng12,))
 
 FRIBIDI_LIB:=$(shell $(PKG_CONFIG) --libs fribidi)
 FRIBIDI_CFLAGS:=$(shell $(PKG_CONFIG) --cflags fribidi)
 
 windows_ARCH_LINKS:=-lgdi32 -lcomdlg32 $(PNG) -lz -lwinspool -lshlwapi $(FRIBIDI_LIB) -liconv -limagequant
 macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant -lSDLmain -Wl,-framework,AppKit -Wl,-framework,Cocoa
+ios_ARCH_LINKS=$(FRIBIDI_LIB) -limagequant -ljpeg -lbz2 $(shell $(PKG_CONFIG) --libs freetype2 libtiff-4 libwebp libffi harfbuzz libmpg123 ogg vorbisenc vorbisidec libxml-2.0 pangoft2 libpcre)
 beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(PAPER_LIB) $(STDC_LIB) -limagequant
 linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
 ARCH_LINKS:=$($(OS)_ARCH_LINKS)
@@ -143,18 +207,21 @@ linux_ARCH_HEADERS:=
 ARCH_HEADERS:=$($(OS)_ARCH_HEADERS)
 
 # Where things will go when ultimately installed:
-# For macOS, the prefix is relative to DESTDIR.
+# For macOS and iOS, the prefix is relative to DESTDIR.
 windows_PREFIX:=/usr/local
 macos_PREFIX:=Resources
+ios_PREFIX:=.
 linux_PREFIX:=/usr/local
 PREFIX:=$($(OS)_PREFIX)
 
 # Root directory to place files when creating packages.
 # PKG_ROOT is the old name for this, and should be undefined.
-# macOS is set up as a bundle, with all files under 'Contents'.
+# macOS and iOS are set up as bundles, with all files under the bundle.
 # "TuxPaint-1" is the OLPC XO name. Installing to ./ is bad!
 ifeq ($(OS),macos)
   DESTDIR:=$(BUNDLE)/Contents/
+else ifeq ($(OS),ios)
+  DESTDIR:=$(BUNDLE)/
 else ifeq ($(PREFIX),./)
   DESTDIR:=TuxPaint-1
 else
@@ -216,14 +283,18 @@ CURSOR_SHAPES:=LARGE
 # CURSOR_SHAPES:=SMALL
 
 # Libraries, paths, and flags:
-SDL_LIBS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf -lz $(PNG)
+SDL_LIBS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs)
+SDL_LIBS+=$(call linktest,SDL2_image,-lSDL2_image,$(SDL_LIBS))
+SDL_LIBS+=$(call linktest,SDL2_ttf,-lSDL2_ttf,$(SDL_LIBS))
+SDL_LIBS+=$(call linktest,zlib,-lz,)
+SDL_LIBS+=$(call linktest,libpng,$(PNG),)
 
 # Sound support
-SDL_MIXER_LIB:=$(call linktest,-lSDL2_mixer,$(SDL_LIBS))
+SDL_MIXER_LIB:=$(call linktest,SDL2_mixer,-lSDL2_mixer,$(SDL_LIBS))
 NOSOUNDFLAG:=$(if $(SDL_MIXER_LIB),,-DNOSOUND$(warning -lSDL2_Mixer failed, no sound for you!))
 
 # SDL Pango is needed to render complex scripts like Thai and Arabic
-SDL2_PANGO_LIB:=$(call linktest,-lSDL2_Pango,$(SDL_LIBS))
+SDL2_PANGO_LIB:=$(call linktest,SDL2_Pango,-lSDL2_Pango,$(SDL_LIBS))
 NOPANGOFLAG:=$(if $(SDL2_PANGO_LIB),,-DNO_SDLPANGO$(warning -lSDL2_Pango failed, no scripts for you!))
 
 SDL_LIBS+=$(SDL_MIXER_LIB) $(SDL2_PANGO_LIB)
@@ -478,6 +549,7 @@ trans:
 
 windows_ARCH_INSTALL:=
 macos_ARCH_INSTALL:=install-macbundle TuxPaint.dmg
+ios_ARCH_INSTALL:=install-iosbundle
 linux_ARCH_INSTALL:=install-xdg
 ARCH_INSTALL:=$($(OS)_ARCH_INSTALL)
 
@@ -1025,7 +1097,7 @@ install-man:
 .PHONY: install-macbundle
 install-macbundle:
 	@echo
-	@echo "...Installing App Bundle Support Files..."
+	@echo "...Installing macOS App Bundle Support Files..."
 	@install -d -m 755 $(BUNDLE)/Contents/MacOS
 	@install -d -m 755 $(BUNDLE)/Contents/Resources
 	@install -d -m 755 $(BUNDLE)/Contents/lib
@@ -1034,6 +1106,19 @@ install-macbundle:
 	@install -m 644 macos/Info.plist $(BUNDLE)/Contents
 	@install -m 644 macos/tuxpaint.icns $(BUNDLE)/Contents/Resources
 	@macos/build-app.sh
+
+# Install the support files for iOS application bundle
+.PHONY: install-iosbundle
+install-iosbundle:
+	@echo
+	@echo "...Installing iOS App Bundle Support Files..."
+	install -m 755 tuxpaint $(BUNDLE)
+	install -m 644 ios/PkgInfo $(BUNDLE)
+	install -m 644 ios/Info.plist $(BUNDLE)
+	install -m 644 ios/tuxpaint.icns $(BUNDLE)
+	install -m 644 ios/tuxpaint.cfg $(BUNDLE)
+	install -m 644 ios/Splash.png $(BUNDLE)
+	ibtool --compile $(BUNDLE)/Splash.storyboardc ios/Splash.storyboard
 
 
 # Create DMG for macOS
@@ -1071,7 +1156,7 @@ obj/tuxpaint.o:	src/tuxpaint.c \
 		src/tools.h src/titles.h src/colors.h src/shapes.h \
 		src/sounds.h src/tip_tux.h src/great.h \
 		src/tp_magic_api.h src/parse.h src/onscreen_keyboard.h \
-		src/gifenc.h \
+		src/gifenc.h src/platform.h \
 		src/$(MOUSEDIR)/arrow.xbm src/$(MOUSEDIR)/arrow-mask.xbm \
 		src/$(MOUSEDIR)/hand.xbm src/$(MOUSEDIR)/hand-mask.xbm \
 		src/$(MOUSEDIR)/insertion.xbm \
@@ -1211,11 +1296,17 @@ obj/postscript_print.o:	src/postscript_print.c \
 	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
 		-c src/postscript_print.c -o obj/postscript_print.o
 
-obj/macos.o: src/macos.c src/macos.h src/debug.h
+obj/macos.o: src/macos.c src/macos.h src/platform.h src/debug.h
 	@echo
 	@echo "...Compiling macOS support..."
 	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
 		-c src/macos.c -o obj/macos.o
+
+obj/ios.o: src/ios.c src/ios.h src/platform.h src/debug.h
+	@echo
+	@echo "...Compiling iOS support..."
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+		-c src/ios.c -o obj/ios.o
 
 obj/resource.o:	win32/resources.rc win32/resource.h
 	@echo
@@ -1256,11 +1347,17 @@ obj:
 ######
 
 MAGIC_SDL_CPPFLAGS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --cflags)
-MAGIC_SDL_LIBS:=-L/usr/local/lib $(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
-MAGIC_ARCH_LINKS:=-lintl $(PNG)
+MAGIC_SDL_LIBS:=$(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
+windows_MAGIC_ARCH_LINKS:=-lintl $(PNG)
+macos_MAGIC_ARCH_LINKS:=-lintl $(PNG)
+ios_MAGIC_ARCH_LINKS=-lintl -ljpeg $(PNG) $(shell $(PKG_CONFIG) --libs libtiff-4 libwebp libmpg123 ogg vorbisenc vorbisidec)
+beos_MAGIC_ARCH_LINKS:=-lintl $(PNG)
+linux_MAGIC_ARCH_LINKS:=-lintl $(PNG)
+MAGIC_ARCH_LINKS:=$($(OS)_MAGIC_ARCH_LINKS)
 
 windows_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
 macos_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
+ios_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
 beos_PLUGIN_LIBS:="$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS) $(MAGIC_SDL_CPPFLAGS)"
 linux_PLUGIN_LIBS:=
 PLUGIN_LIBS:=$($(OS)_PLUGIN_LIBS)

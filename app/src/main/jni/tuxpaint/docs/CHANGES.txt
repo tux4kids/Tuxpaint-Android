@@ -8,10 +8,15 @@ http://www.tuxpaint.org/
 
 $Id$
 
-2021.March.10 (0.9.26)
+2021.May.9 (0.9.26)
   * New Features
     ------------
     * Larger UI buttons
+      Override the ages-old default 48x48 size for UI buttons
+      (via a new "buttonsize" option).  Note: If the button size
+      would be too large for the required parts of the UI to appear
+      within Tux Paint's window size, the largest possible size will
+      be used.
       Pere Pujal i Carabantes <pere@fornol.no-ip.org>
 
     * It's now possible to increase how many rows of buttons are shown
@@ -84,8 +89,17 @@ $Id$
 
   * Translation Updates:
     --------------------
-    * Galician translation
+    * Albanian
+      Besnik Bleta <besnik@programeshqip.org>
+
+    * Catalan
+      Pere Pujal i Carabantes <pere@fornol.no-ip.org>
+
+    * Galician
       Miguel Bouzada <mbouzada@gmail.com>
+
+    * Icelandic
+      Sveinn í Felli <sv1@fellsnet.is>
 
   * Magic Tool Improvememnts:
     -------------------------
@@ -95,6 +109,11 @@ $Id$
     ----------
     * Halftone magic tool wasn't loading due to a problem
       with its sound effect file.
+
+  * Ports & Building
+    ----------------
+    * [WIP] Apple iOS port
+      Mark K. Kim <markuskimius@gmail.com>
 
 2020.December.27 (0.9.25)
   * New Features

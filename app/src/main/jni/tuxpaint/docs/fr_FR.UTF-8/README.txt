@@ -883,7 +883,7 @@ Using the import script, "tuxpaint-import"
        Example:
 
          $ tuxpaint-import grandma.jpg
-         grandma.jpg -> /home/username/.tuxpaint/saved/20210309212248.png
+         grandma.jpg -> /home/username/.tuxpaint/saved/20211231012359.png
          jpegtopnm: WRITING A PPM FILE
 
        The first line ("tuxpaint-import grandma.jpg") is the command to run.

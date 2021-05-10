@@ -1,5 +1,5 @@
 /*
-  macos.h
+  ios.h
 
   Copyright (c) 2021
   http://www.tuxpaint.org/
@@ -19,8 +19,8 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 */
-#ifndef __MACOS_H__
-#define __MACOS_H__
+#ifndef __IOS_H__
+#define __IOS_H__
 
 const char *apple_fontsPath(void);
 const char *apple_preferencesPath(void);
@@ -28,4 +28,4 @@ const char *apple_globalPreferencesPath(void);
 const char *apple_picturesPath(void);
 
 
-#endif /* __MACOS_H__ */
+#endif /* __IOS_H__ */
