@@ -2,69 +2,75 @@
                                  version 0.9.26
                       Documentation sur PNG pour Tux Paint
 
-           Copyright © 2007-2021 by various contributors; cf AUTHORS.
+      Copyright &copie; 2007-2021 par divers contributeurs; voir AUTHORS.
                             http://www.tuxpaint.org/
 
                                   mars 9, 2021
 
      ----------------------------------------------------------------------
 
-About PNGs
+À propos des PNG
 
-   PNG is the Portable Network Graphic format. It is an open standard, not
-   burdened by patents (like GIFs). It is a highly compressed format (though
-   not "lossy" like JPEGs - lossiness allows files to be much smaller, but
-   introduces 'mistakes' in the image when saved), and supports 24-bit color
-   (16.7 million colors) as well as a full "alpha channel" - that is, each
-   pixel can have a varying degree of transparency.
+   PNG veut dire Portable Network Portable (format graphique portable pour
+   réseau). C'est un standard ouvert, qui n'est pas sous le poids des brevets
+   (comme les GIF). C'est un format hautement compressé (mais pas "avec
+   perte" comme les JPEG - la perte permet aux fichiers d'être plus petit,
+   mais introduit des `` erreurs '' dans l'image lors de l'enregistrement),
+   et prend en charge la couleur 24 bits (16,7 millions de couleurs) ainsi
+   qu'un "canal alpha", c'est-à-dire que chaque pixel peut avoir un degré
+   variable de transparence.
 
-   For more information, visit: http://www.libpng.org/
+   Pour plus d'informations, voir : http://www.libpng.org/
 
-   These features (openness, losslessness, compression, transparency/alpha)
-   make it the best choice for Tux Paint. (Tux Paint's support for the PNG
-   format comes from the Open Source SDL_Image library, which in turn gets it
-   from the libPNG library.)
+   Ces fonctionnalités (format ouvert, pas de perte, compression,
+   transparence/alpha) en font le meileur choix pour Tux Paint (La prise en
+   charge du format PNG par Tux Paint vient de la bibliothèque Open Source
+   SDL_Image, qui à son tour l'a obtenue de la bibliothèque libPNG.)
 
-   Support for many colors allows photo-quality "rubber stamp" images to be
-   used in Tux Paint, and alpha transparency allows for high-quality brushes.
+   La prise en charge de nombreuses couleurs permet aux images "tampons de
+   caoutchouc" de qualité photo d'être utilisable dans Tux Paint, et la
+   transparence alpha permet une haute qualité pour les pinceaux.
 
-How To Make PNGs
+Comment créer des PNG
 
-   The following is a very brief list of ways to create PNGs or convert
-   existing images into PNGs.
+   Ce qui suit est une très brève liste de méthodes pour créer des PNG ou
+   convertir des images existantes en PNG.
 
   GIMP & Krita
 
-   Excellent tools with which to create PNG images for use in Tux Paint are
-   GIMP and Krita, both high-quality Open Source interactive drawing and
-   photo editing programs.
+   D'excellents outils pour créer des images PNG utilisables dans Tux Paint
+   sont Gimp et Krita, tous deux programmes interactifs de dessin et
+   d'édition de photos Open Source et de grande qualité.
 
-   It is likely that one or both are already installed on your system. If
-   not, they should be readily available from your Linux distribution's
-   software repository. If not, or to learn more, visit http://www.gimp.org/
-   and http://www.krita.org/, respectively.
+   Ils sont probablement déjà installés l'un, ou les deux sur votre système
+   Linux. Sinon, ils sont certainement disponibles depuis le site de
+   téléchargement de votre distribution. Sinon, ou pour en apprendre plus,
+   visitez respectivement http://www.gimp.org/d et http://www.krita.org/.
 
-  Command-line Tools
+  Outils en ligne de commande
 
     NetPBM
 
-   The Portable Bitmap tools (collectively known as "NetPBM") is a collection
-   of Open Source command-line tools which convert to and from various
-   formats, including GIF, TIFF, BMP, PNG, and many more.
+   Les outils Bitmap portables (appelés généralement «NetPBM») sont une
+   collection d'outils de ligne de commande Open Source qui convertissent
+   vers et depuis différents formats tels que GIF, TIFF, BMP, PNG et beaucoup
+   d'autres.
 
-   It is possible that it's already installed on your system. If not, they it
-   be readily available from your Linux distribution's software repository.
-   If not, or to learn more, visit http://netpbm.sourceforge.net/.
+   Ils sont probablement déjà installés sur votre système. Sinon, ils sont
+   certainement disponibles depuis le site de téléchargement de votre
+   distribution Linux. Sinon, ou pour en apprendre plus, visitez
+   http://netpbm.sourceforge.net/.
 
     cjpeg/djpeg
 
-   The "cjpeg" and "djpeg" command-line programs convert between the NetPBM
-   Portable Any Map (PNM) format and JPEGs. It is possible that it's already
-   installed on your system. If not, they it be readily available from your
-   Linux distribution's software repository. If not, or to learn more, visit
+   Les programmes en ligne de commande "cjpeg" et "djpeg" font la conversion
+   entre le format PNM (Portable Any Map) de NetPBM et les JPEG. Ils sont
+   probablement déjà installés sur votre système. Sinon, ils sont
+   certainement disponibles depuis le site de téléchargement de votre
+   distribution Linux. Sinon, ou pour en apprendre plus, visitez
    https://jpegclub.org/.
 
-  Windows Users
+  Utilisateurs de Windows
 
      * CorelDRAW (Corel) — http://www.corel.com/
      * Illustrator (Adobe) — http://www.adobe.com/products/illustrator.html
@@ -73,7 +79,7 @@ How To Make PNGs
      * PIXresizer (Bluefive software) —
        http://bluefive.pair.com/pixresizer.htm
 
-  Macintosh Users
+  Utilisateurs de Macintosh
 
      * CorelDRAW (Corel) — http://www.corel.com/
      * GraphicConverter (Lemke Software) —

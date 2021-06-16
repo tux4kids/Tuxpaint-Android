@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-20 20:40-0800\n"
+"POT-Creation-Date: 2021-06-13 21:06-0700\n"
 "PO-Revision-Date: 2015-10-09 20:33-0400\n"
 "Last-Translator: Mark K. Kim <mkkim214@gmail.com>\n"
 "Language-Team: N/A\n"
@@ -473,7 +473,7 @@ msgstr "새 그림"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:8105
+#: ../tools.h:98 ../tuxpaint.c:8179
 msgid "Open"
 msgstr "열기"
 
@@ -611,227 +611,227 @@ msgid "OK then… Let’s keep drawing this one!"
 msgstr "그럼, 계속 그림을 그리세요!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2161
+#: ../tuxpaint.c:2190
 msgid "Do you really want to quit?"
 msgstr "프로그램을 끝 마칠까요?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2164
+#: ../tuxpaint.c:2193
 msgid "Yes, I’m done!"
 msgstr "네, 끝마쳐요!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2167 ../tuxpaint.c:2194
+#: ../tuxpaint.c:2196 ../tuxpaint.c:2223
 msgid "No, take me back!"
 msgstr "아니요, 전 화면으로 돌아가요!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2171
+#: ../tuxpaint.c:2200
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "그림을 저장않하고 종료 하면 그림이 없어져요! 저장할까요?"
 
-#: ../tuxpaint.c:2172 ../tuxpaint.c:2177
+#: ../tuxpaint.c:2201 ../tuxpaint.c:2206
 msgid "Yes, save it!"
 msgstr "네, 저장하세요!"
 
-#: ../tuxpaint.c:2173 ../tuxpaint.c:2178
+#: ../tuxpaint.c:2202 ../tuxpaint.c:2207
 msgid "No, don’t bother saving!"
 msgstr "아니요, 저장하지 마세요!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2176
+#: ../tuxpaint.c:2205
 msgid "Save your picture first?"
 msgstr "먼저, 그림을 저장할까요?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2181
+#: ../tuxpaint.c:2210
 msgid "Can’t open that picture!"
 msgstr "그 그림은 열지 못합니다!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2184 ../tuxpaint.c:2189 ../tuxpaint.c:2198 ../tuxpaint.c:2205
-#: ../tuxpaint.c:2214 ../tuxpaint.c:2219
+#: ../tuxpaint.c:2213 ../tuxpaint.c:2218 ../tuxpaint.c:2227 ../tuxpaint.c:2234
+#: ../tuxpaint.c:2243 ../tuxpaint.c:2248
 msgid "OK"
 msgstr "네"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2188
+#: ../tuxpaint.c:2217
 msgid "There are no saved files!"
 msgstr "저장된 파일이 없네요!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2192
+#: ../tuxpaint.c:2221
 msgid "Print your picture now?"
 msgstr "그림을 인쇄 할까요?"
 
-#: ../tuxpaint.c:2193
+#: ../tuxpaint.c:2222
 msgid "Yes, print it!"
 msgstr "네, 인쇄하세요!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2197
+#: ../tuxpaint.c:2226
 msgid "Your picture has been printed!"
 msgstr "그림을 인쇄 했습니다!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2201
+#: ../tuxpaint.c:2230
 msgid "Sorry! Your picture could not be printed!"
 msgstr "어쩌죠? 인쇄하지 못했네요..."
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2204
+#: ../tuxpaint.c:2233
 msgid "You can’t print yet!"
 msgstr "아직 인쇄 하지 못합니다!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2208
+#: ../tuxpaint.c:2237
 msgid "Erase this picture?"
 msgstr "이 그림을 지울까요?"
 
-#: ../tuxpaint.c:2209
+#: ../tuxpaint.c:2238
 msgid "Yes, erase it!"
 msgstr "네, 지우세요!"
 
-#: ../tuxpaint.c:2210
+#: ../tuxpaint.c:2239
 msgid "No, don’t erase it!"
 msgstr "아니요, 지우지 마세요!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2213
+#: ../tuxpaint.c:2242
 msgid "Remember to use the left mouse button!"
 msgstr "왼쪽 마우스버튼을 사용하는걸 잊지 마세요!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2217
+#: ../tuxpaint.c:2246
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "그림을 인쇄 했습니다!"
 
-#: ../tuxpaint.c:2218
+#: ../tuxpaint.c:2247
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "그림을 인쇄 했습니다!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2222
+#: ../tuxpaint.c:2251
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "어쩌죠? 인쇄하지 못했네요..."
 
-#: ../tuxpaint.c:2223
+#: ../tuxpaint.c:2252
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "어쩌죠? 인쇄하지 못했네요..."
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2227
+#: ../tuxpaint.c:2256
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "원하는 그림을 고른후 「시작」버튼을 눌러주세요."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2436
+#: ../tuxpaint.c:2465
 msgid "Sound muted."
 msgstr "음향제거"
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2441
+#: ../tuxpaint.c:2470
 msgid "Sound unmuted."
 msgstr "음향복구"
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3218
+#: ../tuxpaint.c:3247
 msgid "Please wait…"
 msgstr "잠깐만 기다려 주세요..."
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:8108
+#: ../tuxpaint.c:8182
 msgid "Erase"
 msgstr "지우기"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:8111
+#: ../tuxpaint.c:8185
 msgid "Slides"
 msgstr "슬라이드"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:8114
+#: ../tuxpaint.c:8188
 msgid "Export"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:8117
+#: ../tuxpaint.c:8191
 msgid "Back"
 msgstr "되 돌아가기"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:8120
+#: ../tuxpaint.c:8194
 msgid "Play"
 msgstr "시작"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:8123
+#: ../tuxpaint.c:8197
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:8126
+#: ../tuxpaint.c:8200
 msgid "Next"
 msgstr "다음"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8874
+#: ../tuxpaint.c:8948
 msgid "Aa"
 msgstr "A가"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12515
+#: ../tuxpaint.c:12589
 msgid "Yes"
 msgstr "네"
 
-#: ../tuxpaint.c:12519
+#: ../tuxpaint.c:12593
 msgid "No"
 msgstr "아니요"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:13658
+#: ../tuxpaint.c:13732
 msgid "Replace the picture with your changes?"
 msgstr "전그림에 덮어쓸까요? 전그림은 없어집니다."
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:13662
+#: ../tuxpaint.c:13736
 msgid "Yes, replace the old one!"
 msgstr "네, 전그림을 덮어쓰세요!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:13666
+#: ../tuxpaint.c:13740
 msgid "No, save a new file!"
 msgstr "아니요, 새로운 파일로 저장하죠"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:14929
+#: ../tuxpaint.c:15003
 msgid "Choose the picture you want, then click “Open”."
 msgstr "원하는 그림을 고른후 「열기」버튼을 눌러주세요."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:16355
+#: ../tuxpaint.c:16429
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
-#: ../tuxpaint.c:24060
+#: ../tuxpaint.c:24135
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:24072
+#: ../tuxpaint.c:24147
 msgid "Pick a color."
 msgstr "색을 고르세요"
 

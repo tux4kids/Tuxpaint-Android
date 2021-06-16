@@ -4,7 +4,7 @@
           Copyright © 2002-2021 by various contributors; "AUTHORS" 参照.
                             http://www.tuxpaint.org/
 
-                                   2021年3月 9日
+                                   2021年6月 2日
 
      ----------------------------------------------------------------------
 
@@ -296,12 +296,12 @@ Saving
            not giving it a "--saveovernew" option.
 
            If you're running Tux Paint by double-clicking an icon, check the
-           properties of the icon to see if "--saveovernew" is listed as an
-           argument.
+           properties of the icon to see if "--saveovernew" is listed as a
+           command-line argument.
 
-           If "--saveovernew" isn't on the command-line, check Tux Paint's
-           configuration file ("~/.tuxpaintrc" under Linux and Unix,
-           "tuxpaint.cfg" under Windows) for a line reading: "saveover=new".
+           If a "--saveovernew" option isn't being sent on the command line,
+           check Tux Paint's configuration file for a line reading:
+           "saveover=new".
 
            Either remove that line, or simply run Tux Paint with the
            command-line argument: "--saveoverask", which will override the

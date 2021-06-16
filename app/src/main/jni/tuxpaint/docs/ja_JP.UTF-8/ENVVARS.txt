@@ -1,0 +1,94 @@
+                                   Tux Paint
+                                  バージョン 0.9.26
+                      Environment Variables Documentation
+
+          Copyright © 2021-2021 by various contributors; "AUTHORS" 参照.
+                            http://www.tuxpaint.org/
+
+                                   2021年5月11日
+
+     ----------------------------------------------------------------------
+
+   Tux Paint understands a number of environment variables, either directly,
+   or indirectly by the libraries that it utilizes.
+
+Storage-related environment variables
+
+   HOME
+
+           Specifies the user's "home directory", which is used to locate
+           numerous other files or directories. In some cases, it is utilized
+           as part of a fall-back location, when other environment variables
+           (elsewhere in this documentation) are not set. Sometimes, the
+           location to use can be overridden by options provided on the
+           command-line or via Tux Paint's configuration file. See the
+           "OPTIONS" documentation for details.
+
+           A few examples of where "$HOME" is used include:
+
+              * The location of Tux Paint's configuration file
+              * The basis of where Tux Paint saves and loads users' drawings
+              * The location of a user's private collection of data files —
+                stamps, brushes, etc. — (versus those available system wide)
+
+   XDG_CONFIG_HOME
+
+           On Linux and other platforms where the X Desktop Group standards
+           are used, the location of the user's configuration files.
+           Specifically, where to find "user-dirs.dirs", where the
+           "XDG_PICTURES_DIR" might be defined. It is used for exporting
+           drawings and animated GIFs. Generally it's set to something like
+           "$HOME/Pictures/". If not specified, Tux Paint checks in the
+           directory "$HOME/.config/". If the configuration cannot be found,
+           Tux Paint simply exports drawings and GIFs to "$HOME".
+
+   XDG_DATA_HOME
+
+           On Linux and other platforms where the X Desktop Group standards
+           are used, the location of the user's data directories.
+           Specifically, where to find the "Trash" directory. It is used when
+           deleting images from Tux Paint's "Open" dialog. If not set, the
+           location "$HOME/.local/share/Trash/" is used, if available. If
+           not, images are simply deleted, rather than moved anywhere.
+
+   TEMP
+
+           Specifies the location where temporary files may be created. Only
+           used by Tux Paint on Microsoft Windows OSes. Uses "userdata" if
+           not set.
+
+Language-related environment variables
+
+   LANG
+
+   LANGUAGE
+
+   LC_ALL
+
+   LC_MESSAGES
+
+           Specify the language Tux Paint should utilize in its user
+           interface. Overridde by the "--lang" and "--locale" command-line
+           options or their configuration file counterparts. The "LANGUAGE"
+           environment variable is used, if set. If not, "LC_ALL" is used as
+           a fallback. Then "LC_MESSAGES", and finally "LANG".
+
+Display-related environment variables
+
+   The following are a few of the environment variables supported by Simple
+   DirectMedia Layer (libSD) — which Tux Paint utilizes for displaying
+   graphics, playing sounds, and receiving mouse, keyboard, and joystick
+   input — and which may be useful to users of Tux Paint.
+
+   SDL_VIDEO_ALLOW_SCREENSAVER
+
+           Specifies whether Tux Paint should allow a screensaver to run. Can
+           be set to '1' (true) by Tux Paint itself by issuing the
+           command-line option "--allowscreensaver" or its configuration file
+           counterpart.
+
+   SDL_VIDEO_WINDOW_POS
+
+           Requests where to position Tux Paint's window. Normally set to
+           "center" by Tux Paint itself, unless the environment variable is
+           already set (e.g., to "nopref", meaning "no preference").

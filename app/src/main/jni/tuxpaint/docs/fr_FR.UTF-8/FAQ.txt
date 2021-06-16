@@ -1,629 +1,679 @@
                                    Tux Paint
-                   version 0.9.26 Frequently Asked Questions
+                  version 0.9.26 Questions fréquemment posées
 
-           Copyright © 2002-2021 by various contributors; cf AUTHORS.
+      Copyright &copie; 2002-2021 par divers contributeurs; voir AUTHORS.
                             http://www.tuxpaint.org/
 
-                                  mars 9, 2021
+                                  juin 2, 2021
 
      ----------------------------------------------------------------------
 
-Drawing-related
+Liées au dessin
 
-   Fonts I added to Tux Paint only show squares
-           The TrueType Font you're using might have the wrong encoding. If
-           it's 'custom' encoded, for example, you can try running it through
-           FontForge (http://fontforge.sourceforge.net/) to convert it to an
-           ISO-8859 format. (Email us if you need help with special fonts.)
+   Les polices que j'ai ajoutées à Tux Paint n'affichent que des carrés
+           La police TrueType que vous utilisez peut avoir le mauvais
+           encodage. S'il est encodé «personnalisé», par exemple, vous pouvez
+           essayer de l'exécuter via FontForge (
+           http://fontforge.sourceforge.net/ ) pour le convertir au format
+           ISO-8859. (Envoyez-nous un e-mail si vous avez besoin d'aide avec
+           des polices spéciales.)
 
-   The Rubber Stamp tool is greyed out!
+   L'outil Tampon en caoutchouc est grisé !
 
-           This means that Tux Paint either couldn't find any stamp images,
-           or was asked not to load them.
+           Cela signifie que Tux Paint n'a pas pu trouver d'images de tampons
+           ou a été invité à ne pas les charger.
 
-           If you installed Tux Paint, but did not install the separate,
-           optional "Stamps" collection, quit Tux Paint and install it now.
-           It should be available from the same place you got the main Tux
-           Paint program. (Note: As of version 0.9.14, Tux Paint comes with a
-           small collection of example stamps.)
+           Si vous avez installé Tux Paint, mais que vous n'avez pas installé
+           la collection optionnelle "Stamps" séparée, quittez Tux Paint et
+           installez-le maintenant. Il devrait être disponible à partir du
+           même endroit où vous avez obtenu le programme principal de Tux
+           Paint. (Remarque: à partir de la version 0.9.14, Tux Paint est
+           livré avec une petite collection d'exemples de tampons.)
 
-           If you don't want to install the default collection of stamps, you
-           can just create your own. See the "Extending Tux Paint"
-           documentation for more on creating PNG and SVG image files, TXT
-           text description files, Ogg Vorbis, MP3 or WAV sound files, and
-           DAT text data files that make up stamps.
+           Si vous ne souhaitez pas installer la collection de tampons par
+           défaut, vous pouvez simplement créer la vôtre. Consultez la
+           documentation "Extending Tux Paint" pour en savoir plus sur la
+           création de fichiers image PNG et SVG, de fichiers de description
+           de texte TXT, de fichiers audio Ogg Vorbis, MP3 ou WAV et de
+           fichiers de données texte DAT qui composent les tampons.
 
-           Finally, if you installed stamps, and think they should be
-           loading, check to see that the "nostamps" option isn't being set.
-           (Either via a "--nostamps" option to Tux Paint's command line, or
-           "nostamps=yes" in the configuration file.)
+           Enfin, si vous avez installé des tampons et pensez qu'ils
+           devraient être chargés, vérifiez que l'option "nostamps" n'est pas
+           définie. (Soit via une option "--nostamps" sur la ligne de
+           commande de Tux Paint, soit "nostamps=yes" dans le fichier de
+           configuration.)
 
-           Either change/remove the "nostamps" option, or you can override it
-           with "--stamps" on the command line or either "nostamps=no" or
-           "stamps=yes" in a configuration file.
+           Modifiez / supprimez l'option "nostamps" ou remplacez-la par
+           "--stamps" sur la ligne de commande ou "nostamps=no" ou
+           "stamps=yes" dans un des fichiers de configuration.
 
-   The "Fill" Tool Looks Bad
+   L'outil magique "Remplir" semble mauvais
 
-           Tux Paint is probably comparing exact pixel colors when filling.
-           This is faster, but looks worse. Run the command "tuxpaint
-           --verbose-version" from a command line, and you should see,
-           amongst the other output: "Low Quality Flood Fill enabled".
+           Tux Paint compare probablement les couleurs exactes des pixels
+           lors du remplissage. C'est plus rapide, mais semble pire. Exécutez
+           la commande "tuxpaint --verbose-version" à partir d'une ligne de
+           commande, et vous devriez voir, parmi les autres résultats: "Low
+           Quality Flood Fill enabled".
 
-           To change this, you must rebuild Tux Paint from source. Be sure to
-           remove or comment out any line that says:
+           Pour changer cela, vous devez reconstruire Tux Paint à partir des
+           sources. Assurez-vous de supprimer ou de commenter toute ligne qui
+           dit :
 
              #define LOW_QUALITY_FLOOD_FILL
 
-           in the "tuxpaint.c" file in the "src" directory.
+           dans le fichier "tuxpaint.c" du répertoire "src".
 
-   Stamp outlines are always rectangles
+   Les contours des tampons sont toujours des rectangles
 
-           Tux Paint was built with low-quality (but faster) stamp outlines.
+           Tux Paint a été élaboré avec des contours de basse qualité (mais
+           plus rapides).
 
-           To change this, you must rebuild Tux Paint from source. Be sure to
-           remove or comment out any line that says:
+           Pour changer cela, vous devez reconstruire Tux Paint à partir des
+           sources. Assurez-vous de supprimer ou de commenter toute ligne qui
+           dit :
 
              #define LOW_QUALITY_STAMP_OUTLINE
 
-           in the "tuxpaint.c" file in the "src" directory.
+           dans le fichier "tuxpaint.c" du répertoire "src".
 
      ----------------------------------------------------------------------
 
-Interface Problems
+Problèmes d'interface
 
-   Stamp thumbnails in the Stamp Selector look bad
+   Les vignettes des tampons dans le sélecteur de tampons ne sont pas jolies
 
-           Tux Paint was probably compiled with the faster, lower quality
-           thumbnail code enabled. Run the command: "tuxpaint
-           --verbose-version" from a command line. If, amongst the other
-           output, you see the text: "Low Quality Thumbnails enabled", then
-           this is what's happening.
+           Tux Paint a probablement été compilé avec un code de vignette plus
+           rapide et de qualité inférieure. Exécutez la commande: "tuxpaint
+           --verbose-version" en ligne de commande. Si, parmi les résultats,
+           vous voyez le texte : "Low Quality Thumbnails enabled", c'est le
+           cas.
 
-           To change this, you must rebuild Tux Paint from source. Be sure to
-           remove or comment out any line that says:
+           Pour changer cela, vous devez reconstruire Tux Paint à partir des
+           sources. Assurez-vous de supprimer ou de commenter toute ligne qui
+           dit :
 
              #define LOW_QUALITY_THUMBNAILS
 
-           in the "tuxpaint.c" file in the "src" directory.
+           dans le fichier "tuxpaint.c" du répertoire "src".
 
-   Pictures in the 'Open' dialog look bad
-           "Low Quality Thumbnails" is probably enabled. See: "Stamp
-           thumbnails in the Stamp Selector look bad", above.
+   Les images de la boîte de dialogue "Ouvrir" ne sont pas jolies
+           "Miniatures de faible qualité" a été probablement activé. Voir:
+           "Les vignettes de tampon dans le sélecteur de tampon ne sont pas
+           jolies", ci-dessus.
 
-   The color picker buttons are ugly squares, not pretty buttons!
+   Les boutons du sélecteur de couleurs sont des carrés affreux, pas de jolis
+   boutons !
 
-           Tux Paint was probably compiled with the nice looking color
-           selector buttons disabled. Run the command: "tuxpaint
-           --verbose-version" from a command line. If, amongst the other
-           output, you see the text: "Low Quality Color Selector enabled",
-           then this is what's happening.
+           Tux Paint a probablement été compilé avec les jolis boutons de
+           sélection de couleur désactivés. Exécutez la commande: "tuxpaint
+           --verbose-version" à partir d'une ligne de commande. Si, parmi les
+           résultats, vous voyez le texte: "Low Quality Color Selector
+           enabled", c'est ce qui se passe.
 
-           To change this, you must rebuild Tux Paint from source. Be sure to
-           remove or comment out any line that says:
+           Pour changer cela, vous devez reconstruire Tux Paint à partir des
+           sources. Assurez-vous de supprimer ou de commenter toute ligne qui
+           dit :
 
              #define LOW_QUALITY_COLOR_SELECTOR
 
-           in the "tuxpaint.c" file in the "src" directory.
+           dans le fichier "tuxpaint.c" du répertoire "src".
 
-   All of the text is in uppercase!
+   Tout le texte est en majuscule !
 
-           The "uppercase" option is on.
+           L'option "majuscule" est activée.
 
-           Either change/remove the "uppercase" option, or you can override
-           it with "--mixedcase" on the command line or either "uppercase=no"
-           or "mixedcase=yes" in a configuration file.
+           Modifiez / supprimez l'option "uppercase" ou remplacez-la par
+           "--mixedcase" sur la ligne de commande ou "uppercase=no" ou
+           "mixedcase=yes" dans un des fichiers de configuration.
 
-   Tux Paint is in a different language
-           Make sure your locale setting is correct. See "Tux Paint won't
-           switch to my language", below.
+   Tux Paint est dans une autre langue
+           Assurez-vous que vos paramètres régionaux sont corrects. Voir "Tux
+           Paint ne bascule pas dans ma langue" ci-dessous.
 
-   Tux Paint won't switch to my language
-              * Linux and Unix users: Make sure the locale is available
+   Tux Paint ne bascule pas dans ma langue
+              * Utilisateurs Linux et Unix: assurez-vous que les paramètres
+                régionaux sont disponibles
 
-                Make sure the locale you want is available. Check your
-                "/etc/locale.gen" file. See the "Options Documentation" for
-                the locales Tux Paint uses (especially when using the
-                "--lang" option).
+                Assurez-vous que les paramètres régionaux souhaités sont
+                disponibles. Vérifiez votre fichier "/etc/locale.gen".
+                Consultez la documentation OPTIONS pour les paramètres
+                régionaux utilisés par Tux Paint (en particulier lors de
+                l'utilisation de l'option "--lang").
 
-                Note: Debian and derivative (e.g., Ubuntu) users can simply
-                run "dpkg-reconfigure locales" if the locales are managed by
-                "dpkg".
+                Remarque : les utilisateurs Debian et dérivés (par exemple,
+                Ubuntu) peuvent simplement exécuter "dpkg-reconfigure
+                locales" si les paramètres régionaux sont gérés par "dpkg".
 
-              * If you're using the "--lang" command-line option
+              * Si vous utilisez l'option en ligne de commande "--lang"
 
-                Try using the "--locale" command-line option, or your
-                operating system's locale settings (e.g., the "$LANG"
-                environment variable), and please e-mail us regarding your
-                trouble.
+                Essayez d'utiliser l'option en ligne de commande "--locale",
+                ou les réglages des paramètres régionaux de votre système
+                d'exploitation (par exemple, la variable d'environnement
+                "$LANG"), et envoyez nous un mail pour faire part de votre
+                problème.
 
-              * If you're using the "--locale" command-line option
+              * Si vous utilisez l'option en ligne de commande "--locale"
 
-                If this doesn't work, please e-mail us regarding your
-                trouble.
+                Si ça ne marche pas, envoyez nous un courriel pour expliquer
+                vos soucis.
 
-              * If you're trying to use your Operating System's locale
+              * Si vous essayez d'utiliser la langue utilisée par votre
+                système d'exploitation
 
-                If this doesn't work, please e-mail us regarding your
-                trouble.
+                Si ça ne marche pas, envoyez nous un courriel pour expliquer
+                vos soucis.
 
-              * Make sure you have the necessary font
+              * Soyez certains d'avoir la police nécessaire
 
-                Some translations require their own font. Chinese and Korean,
-                for example, need Chinese and Korean TrueType Fonts installed
-                and placed in the proper location, respectively.
+                Certaines traductions ont besoin de leurs propres polices. Le
+                Chinois et le Coréen, par exemple, ont besoin de fontes True
+                Type installées et placées au bon endroit pour chacune.
 
-                The appropriate fonts for such locales can be downloaded from
-                the Tux Paint website:
+                Les fontes adéquates pour de telles langues peuvent être
+                téléchargées depuis le site de Tux Paint :
 
                   http://www.tuxpaint.org/download/fonts/
 
      ----------------------------------------------------------------------
 
-Printing
+Impression
 
-   Tux Paint won't print, gives an error, or prints garbage (Unix/Linux)
+   Tux Paint n'imprime pas, donne une erreur ou imprime n'importe quoi (Unix
+   / Linux)\
 
-           Tux Paint prints by creating a PostScript rendition of the picture
-           and sending it to an external command. By default, this command is
-           the "lpr" printing tool.
+           Tux Paint imprime en créant un rendu PostScript de l'image et en
+           l'envoyant à une commande externe. Par défaut, cette commande est
+           "lpr".
 
-           If that program is not available (for example, you're using CUPS,
-           the Common Unix Printing System, and do not have "cups-lpr"
-           installed), you will need to specify an appropriate command using
-           the "printcommand" option in Tux Paint's configuration file. (See
-           the "Options Documentation".)
+           Si ce programme n'est pas disponible (par exemple, vous utilisez
+           CUPS, le système d'impression commun Unix, et n'avez pas installé
+           "cups-lpr"), vous devrez spécifier une commande appropriée en
+           utilisant l'option "printcommand" dans le fichier de configuration
+           de Tux Paint. (Voir la documentation OPTIONS .)
 
-           Note: Versions of Tux Paint prior to 0.9.15 used a different
-           default command for printing, "pngtopnm | pnmtops | lpr", as Tux
-           Paint output PNG format, rather than PostScript.
+           Remarque : les versions de Tux Paint antérieures à 0.9.15
+           utilisaient une commande par défaut différente pour l'impression,
+           "pngtopnm | pnmtops | lpr", avec le format de sortie PNG, plutôt
+           que PostScript.
 
-           If you had changed your "printcommand" option prior to Tux Paint
-           0.9.15, you will need to go back and alter it to accept
-           PostScript.
+           Si vous avez changé votre option "printcommand" avant Tux Paint
+           0.9.15, vous devrez revenir en arrière et la modifier pour pouvoir
+           accepter PostScript.
 
-   I get the message "You can't print yet!" when I go to print
+   Je reçois le message "Vous ne pouvez pas encore imprimer !" quand je veux
+   imprimer
 
-           The "print delay" option is on. You can only print once every X
-           seconds.
+           L'option "délai d'impression" est activée. Vous ne pouvez imprimer
+           qu'une fois toutes les X secondes.
 
-           If you're running Tux Paint from a command-line, make sure you're
-           not giving it a "--printdelay=..." option.
+           Si vous exécutez Tux Paint à partir d'une ligne de commande,
+           assurez-vous de ne pas lui donner l'option "--printdelay=...".
 
-           If you're running Tux Paint by double-clicking an icon, check the
-           properties of the icon to see if "--printdelay=..." is listed as a
-           command-line argument.
+           Si vous exécutez Tux Paint en double-cliquant sur une icône,
+           vérifiez les propriétés de l'icône pour voir si "--printdelay=..."
+           est répertorié comme argument de ligne de commande.
 
-           If a "--printdelay=..." option isn't being sent on the command
-           line, check Tux Paint's configuration file for a line reading:
-           "printdelay=...".
+           Si une option "--printdelay=..." n'est pas mise sur la ligne de
+           commande, vérifiez si le fichier de configuration de Tux Paint
+           possède une ligne comportant : "printdelay=....".
 
-           Either remove that line, set the delay value to 0 (no delay), or
-           decrease the delay to a value you prefer. (See the "Options
-           Documentation".)
+           Soit vous supprimez cette ligne, soit vous mettez la valeur du
+           délai à 0 (aucun délai) oubien réduisez le délai à la valeur que
+           vous préférez. (Voir la documentation OPTIONS ).
 
-           Or, you can simply run Tux Paint with the command-line argument:
-           "--printdelay=0", which will override the configuration file's
-           setting, and allow unlimited printing. (You won't have to wait
-           between prints.)
+           Ou, vous pouvez simplement exécuter Tux Paint avec l'argument de
+           ligne de commande: "--printdelay=0", qui remplacera le paramètre
+           du fichier de configuration et autorisera une impression
+           illimitée. (Vous n'aurez pas à attendre entre les impressions.)
 
-   I simply can't print! The button is greyed out!
+   Je ne peux tout simplement pas imprimer ! Le bouton est grisé !
 
-           The "no print" option is on.
+           L'option "pas d'impression" est activée.
 
-           If you're running Tux Paint from a command-line, make sure you're
-           not giving it a "--noprint" option.
+           Si vous exécutez Tux Paint à partir d'une ligne de commande,
+           assurez-vous de ne pas lui donner l'option "--noprint".
 
-           If you're running Tux Paint by double-clicking an icon, check the
-           properties of the icon to see if "--noprint" is listed as a
-           command-line argument.
+           Si vous exécutez Tux Paint en double-cliquant sur une icône,
+           vérifiez les propriétés de l'icône pour voir si "--noprint" est
+           répertorié comme argument de ligne de commande.
 
-           If a "--noprint" option isn't being sent on the command line,
-           check Tux Paint's configuration file for a line reading:
-           "noprint=yes".
+           Si une option "--noprint" n'est pas mise sur la ligne de commande,
+           vérifiez si le fichier de configuration de Tux Paint possède une
+           ligne comportant : "noprint=yes.".
 
-           Either remove that line, or simply run Tux Paint with the
-           command-line argument: "--print", which will override the
-           configuration file's setting.
+           Supprimez cette ligne ou exécutez simplement Tux Paint avec
+           l'argument de ligne de commande : "--print", qui remplacera le
+           paramètre du fichier de configuration.
 
-           Or use Tux Paint Config. and make sure "Allow Printing" (under
-           "Printing") is checked.
+           Ou utilisez Tux Paint Config. et assurez-vous que "Autoriser
+           l'impression" (sous "Impression") est vérifié.
 
      ----------------------------------------------------------------------
 
-Saving
+Sauvegarde
 
-   Where does Tux Paint save my drawings?
+   Où Tux Paint enregistre-t-il mes dessins ?
 
-           Unless you asked Tux Paint to save into a specific location (using
-           the "savedir" option), Tux Paint saves into a standard location on
-           your local drive:
+           Sauf si vous avez demandé à Tux Paint d'enregistrer dans un
+           emplacement spécifique (en utilisant l'option 'savedir'), Tux
+           Paint enregistre dans un emplacement standard sur votre disque
+           local :
 
                 Windows Vista, Windows 8, Windows 10
-                        In the user's "AppData" folder:
-                        e.g.,
+                        Dans le dossier "AppData" de l'utilisateur :
+                        par ex..,
                         C:\Users\Username\AppData\Roaming\TuxPaint\saved
 
                 Windows 95, 98, ME, 2000, XP
-                        In the user's "Application Data" folder:
-                        e.g., C:\Documents and Settings\Username\Application
-                        Data\TuxPaint\saved
+                        Dans le dossier "Application Data" de l'utilisateur :
+                        par ex., C:\Documents and
+                        Settings\Username\Application Data\TuxPaint\saved
 
                 macOS
-                        In the user's "Application Support" folder:
-                        e.g., /Users/Username/Library/Applicaton
+                        Dans le dossier "Application Support" de
+                        l'utilisateur :
+                        par ex., /Users/Username/Library/Applicaton
                         Support/TuxPaint/saved/
 
                 Linux / Unix
-                        In the user's home directory ("$HOME"), under a
-                        ".tuxpaint" subfolder:
-                        e.g., /home/username/.tuxpaint/saved/
+                        Dans le dossier personnel de l'utilisateur ("$HOME"),
+                        dans un sous-dossier ".tuxpaint"), par ex.,
+                        /home/username/.tuxpaint/saved/
 
-           The images are stored as PNG bitmaps, which most modern programs
-           should be able to load (image editors, word processors, web
-           browsers, etc.)
+           Les images sont stockées sous forme de bitmaps PNG, que la plupart
+           des programmes récents savent lire (éditeurs d'image, éditeurs de
+           texte, navigateurs, etc ...)
 
-   Tux Paint always saves over my old picture
+   Tux Paint sauvegarde toujours en écrasant mon ancienne image
 
-           The "save over" option is enabled. (This disables the prompt that
-           would appear when you click 'Save.')
+           L'option "save over" est activée. (Cela désactive l'invite qui
+           apparaît lorsque vous cliquez sur «Enregistrer».)
 
-           If you're running Tux Paint from a command-line, make sure you're
-           not giving it a "--saveover" option.
+           Si vous exécutez Tux Paint à partir d'une ligne de commande,
+           assurez-vous de ne pas lui donner l'option "--saveover".
 
-           If you're running Tux Paint by double-clicking an icon, check the
-           properties of the icon to see if "--saveover" is listed as a
-           command-line argument.
+           Si vous exécutez Tux Paint en double-cliquant sur une icône,
+           vérifiez les propriétés de l'icône pour voir si "--saveover" est
+           répertorié comme argument de ligne de commande.
 
-           If a "--saveover" option isn't being sent on the command line,
-           check Tux Paint's configuration file for a line reading:
-           "saveover=yes".
+           Si une option "--saveover" n'est pas mise sur la ligne de
+           commande, vérifiez si le fichier de configuration de Tux Paint
+           possède une ligne comportant : "saveover=yes.".
 
-           Either remove that line, or simply run Tux Paint with the
-           command-line argument: "--saveoverask", which will override the
-           configuration file's setting.
+           Supprimez cette ligne ou exécutez simplement Tux Paint avec
+           l'argument de ligne de commande : "--saveoverask", qui remplacera
+           le paramètre du fichier de configuration.
 
-           Or use Tux Paint Config. and make sure "Ask Before Overwriting"
-           (under "Saving") is checked.
+           Ou utilisez Tux Paint Config. et assurez-vous que "Demander avant
+           d'écraser" (sous "Sauvegarde") est vérifié.
 
-           Also, see "Tux Paint always saves a new picture!", below.
+           Également voyez "Tux Paint sauvegarde toujours avec une nouvelle
+           image !", ci-dessous.
 
-   Tux Paint always saves a new picture!
+   Tux Paint sauvegarde toujours avec une nouvelle image !
 
-           The "never save over" option is enabled. (This disables the prompt
-           that would appear when you click 'Save.')
+           L'option "never save over" est activée. (Cela désactive l'invite
+           qui apparaît lorsque vous cliquez sur «Enregistrer».)
 
-           If you're running Tux Paint from a command-line, make sure you're
-           not giving it a "--saveovernew" option.
+           Si vous exécutez Tux Paint à partir d'une ligne de commande,
+           assurez-vous de ne pas lui donner l'option "--saveovernew".
 
-           If you're running Tux Paint by double-clicking an icon, check the
-           properties of the icon to see if "--saveovernew" is listed as an
-           argument.
+           Si vous exécutez Tux Paint en double-cliquant sur une icône,
+           vérifiez les propriétés de l'icône pour voir si "--saveovernew"
+           est répertorié comme argument de ligne de commande.
 
-           If "--saveovernew" isn't on the command-line, check Tux Paint's
-           configuration file ("~/.tuxpaintrc" under Linux and Unix,
-           "tuxpaint.cfg" under Windows) for a line reading: "saveover=new".
+           Si une option "--saveovernew" n'est pas mise sur la ligne de
+           commande, vérifiez si le fichier de configuration de Tux Paint
+           possède une ligne comportant : "saveover=new.".
 
-           Either remove that line, or simply run Tux Paint with the
-           command-line argument: "--saveoverask", which will override the
-           configuration file's setting.
+           Supprimez cette ligne ou exécutez simplement Tux Paint avec
+           l'argument de ligne de commande : "--saveoverask", qui remplacera
+           le paramètre du fichier de configuration.
 
-           Or use Tux Paint Config. and make sure "Ask Before Overwriting"
-           (under "Saving") is checked.
+           Ou utilisez Tux Paint Config. et assurez-vous que "Demander avant
+           d'écraser" (sous "Sauvegarde") est vérifié.
 
            Also, see "Tux Paint always saves over my old picture!", above.
 
      ----------------------------------------------------------------------
 
-Audio Problems
+Problèmes audio
 
-   There's no sound!
-              * First, check the obvious:
-                   * Are your speakers connected and turned on?
-                   * Is the volume turned up on your speakers?
-                   * Is the volume turned up in your Operating System's
-                     "mixer?"
-                   * Are you certain you're using a computer with a sound
-                     card?
-                   * Are any other programs running that use sound? (They may
-                     be 'blocking' Tux Paint from accessing your sound
-                     device)
-                   * (Unix/Linux) Are you using a sound system, such as aRts,
-                     ESD or GStreamer? If so, try setting the
-                     "SDL_AUDIODRIVER" environment variable before running
-                     Tux Paint (e.g., "export SDL_AUDIODRIVER=arts"). Or, run
-                     Tux Paint through the system's rerouter (e.g., run
-                     "artsdsp tuxpaint" or "esddsp tuxpaint", instead of
-                     simply "tuxpaint").
-              * Is sound disabled in Tux Paint?
+   Il n'y a pas de son !
+              * D'abord, vérifiez ce qui est évident :
+                   * Est-ce que vos haut-parleurs sont branchés et en marche
+                     ?
+                   * Est-ce que le volume est correct ?
+                   * Le volume est-il correct dans la «table de mixage» de
+                     votre système d'exploitation ?
+                   * Êtes-vous certains d'avoir une carte son ?
+                   * Y a-t-il d'autres programmes qui tourne et qui utilise
+                     le son ? (Ils peuvent empêcher Tux Paint d'accéder à
+                     votre carte son)
+                   * (Unix / Linux) Utilisez-vous un système audio, tel que
+                     aRts, ESD ou GStreamer ? Si tel est le cas, essayez de
+                     définir la variable d'environnement "SDL_AUDIODRIVER"
+                     avant d'exécuter Tux Paint (par ex., "export
+                     SDL_AUDIODRIVER=arts"). Ou exécutez vous Tux Paint via
+                     le routeur du système (par exemple, exécuter "artsdsp
+                     tuxpaint" ou "esddsp tuxpaint", au lieu de simplement
+                     "tuxpaint").
+              * Est-ce que le son est désactivé dans Tux Paint ?
 
-                If sound seems to work otherwise (and you're sure no other
-                program is "blocking" the sound device), then Tux Paint may
-                be running with a "no sound" option.
+                Si le son semble fonctionner autrement (et que vous êtes sûr
+                qu'aucun autre programme ne "bloque" le périphérique audio),
+                alors Tux Paint tourne peut-être avec l'option "pas de son".
 
-                If you're running Tux Paint from a command-line, make sure
-                you're not giving it a "--nosound" option.
+                Si vous exécutez Tux Paint à partir d'une ligne de commande,
+                assurez-vous de ne pas lui donner l'option "--nosound".
 
-                If you're running Tux Paint by double-clicking an icon, check
-                the properties of the icon to see if "--nosound" is listed as
-                a command-line argument.
+                Si vous exécutez Tux Paint en double-cliquant sur une icône,
+                vérifiez les propriétés de l'icône pour voir si "--nosound"
+                est répertorié comme argument de ligne de commande.
 
-                If a "--nosound" option isn't being sent on the command line,
-                check Tux Paint's configuration file for a line reading:
-                "nosound=yes".
+                Si une option "--nosound" n'est pas mise sur la ligne de
+                commande, vérifiez si le fichier de configuration de Tux
+                Paint possède une ligne comportant : "nosound=yes.".
 
-                Either remove that line, or simply run Tux Paint with the
-                command-line argument: "--sound", which will override the
-                configuration file's setting.
+                Supprimez cette ligne ou exécutez simplement Tux Paint avec
+                l'argument de ligne de commande : "--sound", qui remplacera
+                le paramètre du fichier de configuration.
 
-                Or, you can simply run Tux Paint with the command-line
-                argument: "Enable Sound Effects", which will override the
-                configuration file's setting, and allow unlimited printing.
-                (You won't have to wait between prints.)
+                Ou, vous pouvez simplement exécuter Tux Paint avec l'argument
+                de ligne de commande: "Activez les effets sonores", qui
+                remplacera le paramètre du fichier de configuration et
+                autorisera une impression illimitée. (Vous n'aurez pas à
+                attendre entre les impressions.)
 
-              * Were sounds temporarily disabled?
+              * Le son a-t-il été temporairement désactivé ?
 
-                Even if sounds are enabled in Tux Paint, it is possible to
-                disable and re-enable them temporarily using the [Alt] + [S]
-                key sequence. Try pressing those keys to see if sounds begin
-                working again.
+                Même si les sons sont activés dans Tux Paint, il est possible
+                de les désactiver et de les réactiver temporairement à l'aide
+                de la séquence de touches [Alt] + [S] . Essayez d'appuyer sur
+                ces touches pour voir si les sons recommencent à fonctionner.
 
-              * Was Tux Paint built without sound support?
+              * Tux Paint a-t-il été construit sans le support pour le son?
 
-                Tux Paint may have been compiled with sound support disabled.
-                To test whether sound support was enabled when Tux Paint was
-                compiled, run Tux Paint from a command line, like so:
+                Tux Paint a peut-être été compilé avec la prise en charge du
+                son désactivée. Pour tester si la prise en charge du son
+                était activée lors de la compilation de Tux Paint, démarrez
+                Tux Paint en ligne de commande, comme ceci :
 
                   tuxpaint --verbose-version
 
-                If, amongst the other information, you see "Sound disabled",
-                then the version of Tux Paint you're running has sound
-                disabled. Recompile Tux Paint, and be sure NOT to build the
-                "nosound" target. (i.e., don't run "make nosound") Be sure
-                the SDL_mixer library and its development headers are
-                available!
+                Si, parmi les autres informations, vous voyez "Son
+                désactivé", alors la version de Tux Paint que vous utilisez a
+                le son désactivé. Recompilez Tux Paint et assurez-vous de NE
+                PAS construire avec la cible "nosound". (c'est-à-dire, ne
+                lancez pas "make nosound") Assurez-vous que la bibliothèque
+                SDL_mixer et ses en-têtes de développement sont disponibles !
 
-   Tux Paint makes too much noise! Can I turn them off?
+   Tux Paint fait trop de bruit ! Puis-je arrêter cela ?
 
-           Yes, there are a number of ways to disable sounds in Tux Paint:
+           Oui, il existe plusieurs façons de désactiver les sons dans Tux
+           Paint :
 
-              * Press [Alt] + [S] while in Tux Paint to temporarily disable
-                sounds. (Press that key sequence again to re-enable sounds.)
-              * Run Tux Paint with the "no sound" option:
-                   * Run "tuxpaint --nosound" from the command line or
-                     shortcut or desktop icon.
-                   * Edit Tux Paint's configuration file (see "Options
-                     Documentation" for details) and add a line containing
-                     "nosound=yes".
-                   * Or use Tux Paint Config. and make sure "Enable Sound
-                     Effects" (under "Video & Sound") is not checked.
-                   * Alternatively, recompile Tux Paint with sound support
-                     disabled. (See above, and the 'Install' documentation.
+              * Appuyez sur [Alt] + [S] quand Tux Paint tourne pour
+                désactiver temporairement les sons. (Appuyez à nouveau sur
+                cette séquence de touches pour réactiver les sons.)
+              * Exécutez Tux Paint avec l'option "pas de son" :
+                   * Exécutez "tuxpaint --nosound" en ligne de commande ou à
+                     partir du raccourci ou à partir de l'icône sur le
+                     bureau.
+                   * Editez le fichier de configuration de Tux Paint (voir
+                     OPTIONS pour plus de détails) et ajoutez une ligne
+                     contenant "nosound=yes".
+                   * Ou utilisez Tux Paint Config. et assurez-vous que
+                     "Activez les effets sonores" (sous "Vidéo et son") n'est
+                     pas coché.
+                   * Autrement, recompilez Tux Paint avec la prise en charge
+                     du son désactivée. (Voir ci-dessus et la documentation
+                     'install' .)
 
-   The stereo panning of sound effects is bothersome; can sound effects be
-   monophonic?
+   La stéréo des effets sonores est gênante; les effets sonores peuvent-ils
+   être monophoniques ?
 
-           Run Tux Paint with the "no stereo" option:
+           Lancez Tux Paint avec l'option "no stereo" :
 
-              * Run "tuxpaint --nostereo" from the command line or shortcut
-                or desktop icon.
-              * Edit Tux Paint's configuration file (see "Options
-                Documentation" for details) and add a line containing
+              * Exécutez "tuxpaint --nostereo" en ligne de commande ou à
+                partir du raccourci ou à partir de l'icône sur le bureau.
+              * Editez le fichier de configuration de Tux Paint (voir OPTIONS
+                pour plus de détails) et ajoutez une ligne contenant
                 "nostereo=yes".
-              * Or use Tux Paint Config. and make sure "Enable Stereo
-                Effects" (under "Video & Sound") is not checked.
+              * Ou utilisez Tux Paint Config. et assurez-vous que "Activez
+                les effets stéréo" (sous "Vidéo et son") n'est pas coché.
 
-   The sound effects sound strange
+   Les effets sonores sont étranges
 
-           This could have to do with how SDL and SDL_mixer were initialized.
-           (The buffer size chosen.)
+           Cela pourrait avoir à voir avec la façon dont SDL et SDL_mixer ont
+           été initialisés. (Choix de la taille de la mémoire tampon.)
 
-           Please e-mail us with details about your computer system.
-           (Operating system and version, sound card, which version of Tux
-           Paint you're running (run "tuxpaint --version" to verify), and so
-           on.)
+           Veuillez nous envoyer un e-mail avec des détails sur votre système
+           utilisé. (Système d'exploitation et version, carte son, quelle
+           version de Tux Paint vous utilisez (exécutez "tuxpaint --version"
+           pour vérifier), etc...)
 
      ----------------------------------------------------------------------
 
-Fullscreen Mode Problems
+Problèmes en mode plein écran
 
-   When I run Tux Paint full-screen and [Alt] + [Tab] out, the window turns
-   black!
-           This is apparently a bug in the SDL library. Sorry.
+   Lorsque j'exécute Tux Paint en plein écran et que je fais [Alt] + [Tab],
+   la fenêtre devient noire !
+           C'est apparemment un bug de la bibbliothèque de SDL. Désolé.
 
-   When I run Tux Paint full-screen, it has large borders around it
+   Lorsque j'exécute Tux Paint en plein écran, il est entouré de grandes
+   bordures
 
-           Linux users - Your X-Window server is probably not set with the
-           ability to switch to the desired resolution: 800×600. (or whatever
-           resolution you have Tux Paint set to run at.) (This is typically
-           done manually under the X-Window server by pressing [Ctrl] + [Alt]
-           + [Keypad Plus] and [Ctrl] + [Alt] + [Keypad Minus].)
+           Utilisateurs Linux - Votre serveur X-Window n'est probablement pas
+           configuré avec la possibilité de passer à la résolution souhaitée
+           : 800 × 600. (ou quelle que soit la résolution à laquelle Tux
+           Paint doit s'exécuter.) (Cela se fait généralement manuellement
+           sous le serveur X-Window en appuyant sur [Ctrl] + [Alt] + [Keypad
+           Plus] et [Ctrl] + [Alt] + [Keypad Minus].)
 
-           For this to work, your monitor must support that resolution, and
-           you need to have it listed in your X server configuration.
+           Pour que cela fonctionne, votre moniteur doit prendre en charge
+           cette résolution et elle doit être répertoriée dans la
+           configuration de votre serveur X.
 
-           Check the "Display" subsection of the "Screen" section of your
-           XFree86 or X.org configuration file (typically
-           "/etc/X11/XF86Config-4" or "/etc/X11/XF86Config", depending on the
-           version of XFree86 you're using; 3.x or 4.x, respectively, or
-           "/etc/X11/xorg.conf" for X.org).
+           Vérifiez la sous-section «Display» de la section «Screen» de votre
+           fichier de configuration XFree86 ou X.org (généralement
+           «/etc/X11/XF86Config-4» ou «/etc/X11/XF86Config», selon la version
+           de XFree86 que vous utilisez; 3.x ou 4.x, respectivement, ou
+           "/etc/X11/xorg.conf" pour X.org).
 
-           Add "800x600" (or whatever resolution(s) you want) to the
-           appropriate "Modes" line. (e.g., in the "Display" subsection that
-           contains 24-bit color depth ("Depth 24"), which is what Tux Paint
-           tries to use.)
+           Ajoutez "800x600" (ou la (les) résolution (s) souhaitée (s)) à la
+           ligne "Modes" appropriée. (par ex., dans la sous-section "Display"
+           qui contient une profondeur de couleur de 24 bits ("Depth 24"), ce
+           que Tux Paint essaye d'utiliser.)
 
              Modes "1280x1024" "1024x768" "800x600" "640x480"
 
-           Note that some Linux distributions have tools that can make these
-           changes for you. Debian users can run the command
-           "dpkg-reconfigure xserver-xfree86" as root, for example.
+           Notez que certaines distributions Linux ont des outils qui peuvent
+           apporter ces modifications à votre place. Les utilisateurs Debian
+           peuvent exécuter la commande "dpkg-reconfigure xserver-xfree86" en
+           tant que root, par exemple.
 
-   Tux Paint keeps running in Full Screen mode - I want it windowed!
+   Tux Paint continue de fonctionner en mode plein écran - je veux qu'il soit
+   fenêtré !
 
-           The "fullscreen" option is set.
+           L'option "plein écran" est définie.
 
-           If you're running Tux Paint from a command-line, make sure you're
-           not giving it a "--fullscreen" option.
+           Si vous exécutez Tux Paint à partir d'une ligne de commande,
+           assurez-vous de ne pas lui donner l'option "--fullscreen".
 
-           If you're running Tux Paint by double-clicking an icon, check the
-           properties of the icon to see if "--fullscreen" is listed as a
-           command-line argument.
+           Si vous exécutez Tux Paint en double-cliquant sur une icône,
+           vérifiez les propriétés de l'icône pour voir si "--fullscreen" est
+           répertorié comme argument de ligne de commande.
 
-           If a "--fullscreen" option isn't being sent on the command line,
-           check Tux Paint's configuration file for a line reading:
-           "fullscreen=yes".
+           Si une option "--fullscreen" n'est pas mise sur la ligne de
+           commande, vérifiez si le fichier de configuration de Tux Paint
+           possède une ligne comportant : "fullscreen=yes.".
 
-           Either remove that line, or simply run Tux Paint with the
-           command-line argument: "--windowed", which will override the
-           configuration file's setting.
+           Supprimez cette ligne ou exécutez simplement Tux Paint avec
+           l'argument de ligne de commande : "--windowed", qui remplacera le
+           paramètre du fichier de configuration.
 
-           Or use Tux Paint Config. and make sure "Fullscreen" (under "Video
-           & Sound") is not checked.
+           Ou utilisez Tux Paint Config. et assurez-vous que "Plein écran"
+           (sous "Vidéo et son") n'est pas coché.
 
      ----------------------------------------------------------------------
 
-Other Probelms
+Autres problèmes
 
    Tux Paint ne veut pas fonctionner
 
-           If Tux Paint aborts with the message: "You're already running a
-           copy of Tux Paint!", this means it has been launched in the last
-           30 seconds. (On Unix/Linux, this message would appear in a
-           terminal console if you ran Tux Paint from a command-line. On
-           Windows, this message would appear in a file named "stdout.txt" in
-           the same folder where TuxPaint.exe resides (e.g., in "C:\Program
+           Si Tux Paint échoue avec le message: "You're already running a
+           copy of Tux Paint!", cela signifie qu'il a déjà été lancé dans les
+           30 dernières secondes. (Sous Unix / Linux, ce message devrait
+           apparaîtrr dans une console de terminal si vous exécutiez Tux
+           Paint en ligne de commande. Sous Windows, ce message apparaîtrait
+           dans un fichier nommé "stdout.txt" dans le même dossier où
+           TuxPaint.exe réside (par exemple, dans "C:\Program
            Files\TuxPaint").
 
-           A lockfile ("~/.tuxpaint/lockfile.dat" on Linux and Unix,
-           "userdata\lockfile.dat" on Windows) is used to make sure Tux Paint
-           isn't run too many times at once (e.g., due to a child impatiently
-           clicking its icon more than once).
+           Un fichier de verrouillage ("~/.tuxpaint/lockfile.dat" sous Linux
+           et Unix, "userdata\lockfile.dat" sous Windows) est utilisé pour
+           s'assurer que Tux Paint n'est pas exécuté trop de fois en même
+           temps (par exemple, en à cause d'un enfant impatient qui clique
+           plusieurs fois sur son icône).
 
-           Even if the lockfile exists, it contains the 'time' Tux Paint was
-           last run. If it's been more than 30 seconds, Tux Paint should run
-           fine, and simply update the lockfile with the current time.
+           Même si le fichier de verrouillage existe, il contient l'heure de
+           la dernière exécution de Tux Paint. Si cela fait plus de 30
+           secondes, Tux Paint devrait fonctionner correctement et simplement
+           mettre à jour le fichier de verrouillage avec l'heure courante.
 
-           If multiple users are sharing the directory where this file is
-           stored (e.g., on a shared network drive), then you'll need to
-           disable this feature.
+           Si plusieurs utilisateurs partagent le répertoire dans lequel ce
+           fichier est stocké (par exemple, sur un lecteur réseau partagé),
+           vous devrez désactiver cette fonctionnalité.
 
-           To disable the lockfile, add the "--nolockfile" argument to Tux
-           Paint's command-line, or "nolockfile=yes" to the configuration
-           file.
+           Pour désactiver le fichier de verrouillage, ajoutez l'argument
+           "--nolockfile" à la ligne de commande de Tux Paint, ou
+           "nolockfile=yes" au fichier de configuration.
 
-   I can't quit Tux Paint
+   Je ne peux pas quitter Tux Paint
 
-           The "no quit" option is set. This disables the "Quit" button in
-           Tux Paint's toolbar (greying it out), and prevents Tux Paint from
-           being exited via the [Escape] key.
+           L'option "noquit" est activée. Cela désactive le bouton "Quitter"
+           dans la barre d'outils de Tux Paint (en grisé), et empêche Tux
+           Paint d'être fermé en utilisant la touche [Escape].
 
-           If Tux Paint is not in fullscreen mode, simply click the window
-           close button on Tux Paint's title bar. (i.e., the "ⓧ" at the upper
-           right.)
+           Si Tux Paint n'est pas en mode plein écran, cliquez simplement sur
+           le bouton de fermeture de la fenêtre dans la barre de titre de Tux
+           Paint. (c'est-à-dire le "ⓧ" en haut à droite.)
 
-           If Tux Paint is in fullscreen mode, you will need to use the
-           [Shift] + [Control] + [Escape] sequence on the keyboard to quit
-           Tux Paint.
+           Si Tux Paint est en mode plein écran, vous devrez utiliser la
+           séquence [Shift] + [Control] + [Escape] sur le clavier pour
+           quitter Tux Paint.
 
-           (Note: with or without "no quit" set, you can always use the [Alt]
-           + [F4] combination on your keyboard to quit Tux Paint.)
+           Remarque : avec ou sans "noquit" défini, vous pouvez toujours
+           utiliser la combinaison [Alt] + [F4] sur votre clavier pour
+           quitter Tux Paint.)
 
-   I don't want "no quit" mode enabled!
+   Je ne veux pas que le mode "noquit" soit activé !
 
-           If you're running Tux Paint from a command-line, make sure you're
-           not giving it a "--noquit" option.
+           Si vous exécutez Tux Paint à partir d'une ligne de commande,
+           assurez-vous de ne pas lui donner l'option "--noquit".
 
-           If you're running Tux Paint by double-clicking an icon, check the
-           properties of the icon to see if "--noquit" is listed as a
-           command-line argument.
+           Si vous exécutez Tux Paint en double-cliquant sur une icône,
+           vérifiez les propriétés de l'icône pour voir si "--noquit" est
+           répertorié comme argument de ligne de commande.
 
-           If a "--noquit" option isn't being sent on the command line, check
-           Tux Paint's configuration file for a line reading: "noquit=yes".
+           Si une option "--noquit" n'est pas mise sur la ligne de commande,
+           vérifiez si le fichier de configuration de Tux Paint possède une
+           ligne comportant : "noquit=yes.".
 
-           Either remove that line, or simply run Tux Paint with the
-           command-line argument: "--quit", which will override the
-           configuration file's setting.
+           Supprimez cette ligne ou exécutez simplement Tux Paint avec
+           l'argument de ligne de commande : "--quit", qui remplacera le
+           paramètre du fichier de configuration.
 
-           Or use Tux Paint Config. and make sure "Disable Quit Button and
-           [Escape] Key" (under "Simplification") is not checked.
+           Ou utilisez Tux Paint Config. et assurez-vous que "Désactiver le
+           bouton Quit et la touche Escape" (sous "Simplification") n'est pas
+           coché.
 
-   Tux Paint keeps writing weird messages to the screen / to a text file
+   Tux Paint continue d'écrire des messages étranges à l'écran / dans un
+   fichier texte
 
-           A few messages are normal, but if Tux Paint is being extremely
-           verbose (like listing the name of every rubber-stamp image it
-           finds while loading them), then it was probably compiled with
-           debugging output turned on.
+           Quelques messages sont normaux, mais si Tux Paint est extrêmement
+           bavard (comme lister le nom de chaque image de tampon qu'il trouve
+           lors de son chargement), alors il a probablement été compilé avec
+           la sortie de débogage activée.
 
-           To change this, you must rebuild Tux Paint from source. Be sure to
-           remove or comment out any line that says:
+           Pour changer cela, vous devez reconstruire Tux Paint à partir des
+           sources. Assurez-vous de supprimer ou de commenter toute ligne qui
+           dit :
 
              #define DEBUG
 
-           in the "tuxpaint.c" file in the "src" directory.
+           dans le fichier "tuxpaint.c" du répertoire "src".
 
-   Tux Paint is using options I didn't specify!
+   Tux Paint utilise des options que je n'ai pas spécifiées !
 
-           By default, Tux Paint first looks at configuration files for
-           options.
+           Par défaut, Tux Paint regarde d'abord les fichiers de
+           configuration pour les options.
 
-              * Unix and Linux
+              * Unix et Linux
 
-                Under Unix and Linux, it first examines the system-wide
-                configuration file, located here:
+                Sous Unix et Linux, il examine d'abord le fichier de
+                configuration à l'échelle du système, situé ici :
 
                   /etc/tuxpaint/tuxpaint.conf
 
-                It then examines the user's personal configuration file:
+                Il examine ensuite le fichier de configuration personnel de
+                l'utilisateur :
 
                   ~/.tuxpaintrc
 
-                Finally, any options sent as command-line arguments are used.
+                Et finalement, toutes les options envoyées en tant
+                qu'arguments de ligne de commande sont utilisées.
 
               * Windows
 
-                Under Windows, Tux Paint first examines the configuration
-                file:
+                Sous Windows, Tux Paint examine d'abord le fichier de
+                configuration :
 
                   tuxpaint.cfg
 
-                Finally, any options sent as command-line arguments are used.
+                Et finalement, toutes les options envoyées en tant
+                qu'arguments de ligne de commande sont utilisées.
 
-           This means that if anything is set in a configuration file that
-           you don't want set, you'll need to either change the config. file
-           (if you can), or override the option on the command-line.
+           Cela signifie que si quelque chose est défini dans un fichier de
+           configuration que vous ne souhaitez pas activer, vous devrez soit
+           modifier le fichier config. fichier (si vous le pouvez), ou
+           changer l'option par le biais de la ligne de commande.
 
-           For example, on Linux and Unix, if "/etc/tuxpaint/tuxpaint.conf"
-           includes this option to disable sound...
+           Par exemple, si "/etc/tuxpaint/tuxpaint.conf" inclut une option
+           pour désactiver le son ...
 
              nosound=yes
 
-           ...then you can reenable sound by either adding this option to
-           your own ".tuxpaintrc" file:
+           ... Alors vous pouvez réactiver le son en ajoutant cette option à
+           votre propre fichier ".tuxpaintrc" :
 
              sound=yes
 
-           ...or by using this command-line argument:
+           ... Ou en utilisant cet argument en ligne de commande :
 
              --sound
 
-           Linux and Unix users can also disable the system-wide
-           configuration file by including the following command-line
-           argument:
+           Les utilisateurs Linux et Unix peuvent également désactiver le
+           fichier de configuration à l'échelle du système en incluant
+           l'argument de ligne de commande suivant :
 
              --nosysconfig
 
-           Tux Paint will then only look at "~/.tuxpaintrc" and command-line
-           arguments to determine what options should be set.
+           Tux Paint examinera alors uniquement "~/.tuxpaintrc" et les
+           arguments en ligne de commande pour déterminer les options à
+           activer.
 
      ----------------------------------------------------------------------
 
-Help / Contact
+Aide / Contact
 
-   Any questions you don't see answered? Please let us know! You can
-   subscribe and post to our "tuxpaint-users" mailing list:
+   Des questions auxquelles vous ne trouvez pas de réponse ? Merci de nous le
+   faire savoir ! Vous pouvez vous abonner et écrire sur notre liste de
+   diffusion "tuxpaint-users" :
 
      http://www.tuxpaint.org/lists/
 
-   Or, contact lead developer Bill Kendrick directly:
+   Ou contactez directement le développeur principal Bill Kendrick :
 
      bill@newbreedsoftware.com

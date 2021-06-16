@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Documentation sur les variables d'environnement pour Tux Paint    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+    <center>
+      <h1>
+        <img src="../../html/images/tuxpaint-title.png"
+            width="205"
+            height="210"
+            alt="Tux Paint"><br>
+        version 0.9.26<br/>
+        Documentation sur les variables d'environnement      </h1>
+
+      <p>
+        Copyright &copie; 2021-2021 par divers contributeurs; voir AUTHORS.<br>
+        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
+      </p>
+
+      <p>
+        mai 11, 2021      </p>
+    </center>
+
+    <hr>
+
+    <p>
+      Tux Paint interprète plusieurs variables d'environnement, soit directement, soit indirectement par le biais des bibliothèques qu'il utilise.    </p>
+
+    <h2>
+      Variables d'environnement relatives au stockage    </h2>
+    <dl>
+      <dt>
+        <code>HOME</code>
+      </dt>
+
+      <dd>
+        <p>
+          Spécifie le répertoire personnel de l'utilisateur, qui sert à accueillir de nombreux autres fichiers ou répertoires. Dans quelques cas, il sert de solution de repli, quand d'autres variables d'environnement (autre part dans cette documentation) n'ont pas été positionnées. Parfois, l'endroit à utiliser peut être changer par des options fournies en ligne de commande ou via le fichier de configuration de Tux Paint. Voir le document "OPTIONS" pour les détails.        </p>
+
+        <p>
+          Quelques exemples où "<code>$HOME</code>" est utilisé incluent :        </p>
+
+        <ul>
+          <li>L'emplacement du fichier de configuration de Tux Paint</li>
+          <li>La base où Tux Paint sauvegarde et lit les dessins des utilisateurs</li>
+          <li>L'endroit où se situent les fichiers privés d'un utilisateur (&mdash; tampons, pinceaux, etc, &mdash;) (par opposition aux fichiers accessibles à tout le monde)</li>
+        </ul>
+      </dd>
+
+      <dt>
+        <code>XDG_CONFIG_HOME</code>
+      </dt>
+
+      <dd>
+        <p>
+          Sur Linux et d'autres plateformes où les standards du XDG (X Desktop Group) sont appliqués, c'est l'endroit où se trouvent les fichiers de configuration de l'utilisateur. Plus précisément, c'est où trouver "<code>user-dirs.dirs</code>", où le "<code>XDG_PICTURES_DIR</code>" devrait être défini. Il est utilisé pour exporter les dessins et GIF animés. En général, il est égal à quelque chose comme "<code>$HOME/Pictures/</code>". S'il n'est pas spécifié, Tux Paint vérifie le répertoire "<code>$HOME/.config/</code>". Si la configuration ne peut être trouvée, Tux Paint exporte simplement les dessins et GIF animés vers "<code>$HOME</code>".        </p>
+      </dd>
+
+      <dt>
+        <code>XDG_DATA_HOME</code>
+      </dt>
+
+      <dd>
+        <p>
+          Sur Linux et d'autres plateformes où les standards du XDG (X Desktop Group) sont appliqués, c'est l'endroit où se trouvent les fichiers de données de l'utilisateur. Plus précisément, c'est où trouver le répertoire "<code>Trash</code>". Il est utilisé quand on supprime des images à partir de la boîte de dialogue "Ouvrir". Si ce n'est pas défini, le répertoire "<code>$HOME/.local/share/Trash/</code>" est utilisé, s'il existe. Sinon, les images sont simplement supprimées, plutôt que déplacées quelque part.        </p>
+      </dd>
+
+      <dt>
+        <code>TEMP</code>
+      </dt>
+
+      <dd>
+        <p>
+          Spécifie l'endroit où les fichiers temporaires peuvent être créés. Tux Paint l'utilise seulement sous Microsoft Windows. Utilise "<code>userdata</code>" si non spécifié.        </p>
+    </dl>
+
+
+    <h2>
+      Variables d'environnement relatives aux langues    </h2>
+    <dl>
+      <dt>
+        <code>LANG</code>
+      </dt>
+      <dt>
+        <code>LANGUAGE</code>
+      </dt>
+      <dt>
+        <code>LC_ALL</code>
+      </dt>
+      <dt>
+        <code>LC_MESSAGES</code>
+      </dt>
+
+      <dd>
+        <p>
+          Spécifie la langue utilisée par Tux Paint sur l'interface utilisateur. Remplacé par les options en ligne de commande "<code>--lang</code>" et <code>--locale</code>, ou bien leurs équivalents dans le fichier de configuration. La variable d'environnement "<code>LANGUAGE</code>" est utilisée (si elle est activée. Sinon, "<code>LC_ALL</code>' est utilisé comme solution de repli. Puis "<code>LC_MESSAGES</code>" et enfin "<code>LANG</code>".        </p>
+      </dd>
+
+    </dl>
+
+    <h2>
+      Variables d'environnement en rapport avec l'affichage    </h2>
+
+    <p>
+      Ce qui suit donne quelques variables d'environnement supportées par Simple DirectMedia Layer (libSD) &mdash; que Tux Paint utilise pour l'affichage des dessins, pour jouer des sons et traiter les saisies de la souris, du clavier et du joystick &mdash; et qui peuvent être utiles aux utilisateurs de Tux Paint.
+    <dl>
+      <dt>
+        <code>SDL_VIDEO_ALLOW_SCREENSAVER</code>
+      </dt>
+      <dd>
+        <p>
+          Spécifie si Tux Paint autorise l'utilisation d'un économiseur d'écran. Peut être mis à '1' (vrai) par Tux Paint lui-même avec l'option en ligne de commande "<code>--allowscreensaver</code>" ou dans son fichier de configuration.        </p>
+      </dd>
+      <dt>
+        <code>SDL_VIDEO_WINDOW_POS</code>
+      </dt>
+      <dd>
+        <p>
+          Indique où positionner la fenêtre de Tux Paint. Normalement positionnée à "<code>center</code>" par Tux Paint lui-même, à moins que la variable d'environnement n'ait déjà une valeur (par ex. "<code>nopref</code>" signifie pas de préférence).        </p>
+      </dd>
+
+    </dl>
+
+  </body>
+</html>
+

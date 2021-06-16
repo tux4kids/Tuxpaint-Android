@@ -1,0 +1,101 @@
+                                   Tux Paint
+                                 versión 0.9.26
+                     Documentación de variábeis de contorno
+
+    Copyright © 2021-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
+                            http://www.tuxpaint.org/
+
+                               11 de Maio de 2021
+
+     ----------------------------------------------------------------------
+
+   Tux Paint comprende unha serie de variábeis de contorno, ben directamente
+   ou indirectamente polas bibliotecas que emprega.
+
+Variábeis de contorno relacionadas co almacenamento
+
+   HOME
+
+           Especifica o «directorio persoal» do usuario, que se usa para
+           localizar outros ficheiros ou directorios. Nalgúns casos, úsase
+           como parte dunha situación alternativa, cando non se configuran
+           outras variábeis de contorno (noutros lugares desta
+           documentación). Ás veces, a localización a empregar pode ser
+           anulada polas opcións fornecidas na liña de ordes ou a través do
+           ficheiro de configuración de Tux Paint. Consulte a documentación
+           de «OPCIÓNS» (OPTIONS) para máis detalles.
+
+           Algúns exemplos de onde se usa «$HOME» inclúen:
+
+              * A localización do ficheiro de configuración de Tux Paint
+              * A base de onde Tux Paint garda e carga os debuxos dos
+                usuarios
+              * A localización da colección privada de ficheiros de datos dun
+                usuario — selos, pinceis, etc. — (fronte aos dispoñíbeis no
+                sistema)
+
+   XDG_CONFIG_HOME
+
+           En Linux e noutras plataformas onde se usan os estándares X
+           Desktop Group, a localización dos ficheiros de configuración do
+           usuario. Especificamente, onde atopar «user-dirs.dirs», onde se
+           podería definir o «XDG_PICTURES_DIR». Úsase para exportar debuxos
+           e GIF animados. Xeralmente estabelecese en algo así como
+           «$HOME/Pictures/». Se non se especifica, Tux Paint comproba no
+           directorio «$HOME/.config/». Se non se pode atopar a
+           configuración, Tux Paint simplemente exporta debuxos e GIF a
+           «$HOME».
+
+   XDG_DATA_HOME
+
+           En Linux e noutras plataformas onde se usan os estándares X
+           Desktop Group, a localización dos directorios de datos do usuario.
+           En concreto, onde atopar o directorio «Trash». Úsase cando se
+           eliminan imaxes do diálogo «Abrir» de Tux Paint. Se non se define,
+           úsase a localización «$HOME/.local/share/Trash/», se está
+           dispoñíbel. Se non, as imaxes bórranse simplemente no canto de
+           movelas a calquera outro lugar.
+
+   TEMP
+
+           Especifica a localización onde se poden crear ficheiros temporais.
+           Só o usa Tux Paint nos sistemas operativos Microsoft Windows.
+           Emprega «userdata» se non se define.
+
+Variábeis de contorno relacionadas co idioma
+
+   LANG
+
+   LANGUAGE
+
+   LC_ALL
+
+   LC_MESSAGES
+
+           Especifica o idioma que debe empregar Tux Paint na súa interface
+           de usuario. Anulada polas opcións da liña de ordes «--lang» e
+           «--locale» ou as súas equivalentes do ficheiro de configuración.
+           Utilízase a variábel de contorno 'LANGUAGE', se está definida. Se
+           non, «LC_ALL» úsase como alternativa. Após «LC_MESSAGES» e,
+           finalmente, «LANG».
+
+Variábeisbles de contorno relacionadas co que se amosa
+
+   A seguir amósanse algunhas das variábeis de contorno compatíbeis con
+   Simple DirectMedia Layer (libSD) — que Tux Paint utiliza para amosar
+   gráficos, reproducir sons e recibir entrada do rato, teclado e joystick —
+   e que poden ser útiles para os usuarios de Tux Paint.
+
+   SDL_VIDEO_ALLOW_SCREENSAVER
+
+           Especifica se Tux Paint debería permitir a execución dun protector
+           de pantalla. Pode ser definido como «1» (verdadeiro) polo propio
+           Tux Paint emitindo a opción de liña de ordes «--allowscreensaver»
+           ou o seu equivaente no ficheiro de configuración.
+
+   SDL_VIDEO_WINDOW_POS
+
+           Solicita onde colocar a xanela de Tux Paint. Normalmente
+           estabelécese en «center» polo propio Tux Paint, a menos que a
+           variábel de contorno xa estea estabelecida (por exemplo, en
+           «nopref», que significa «sen preferencia»).
