@@ -2,21 +2,21 @@
 # Oversettelse av Tux Paint til bokmål.
 # Dag H. Lorås <dag.loraas@operamail.com>, 2003.
 # Knut Erik Hollund <khollund@responze.net>, 2003.
-# Karl Ove Hufthammer <karl@huftis.org>, 2003, 2005, 2006, 2007, 2009, 2014, 2015, 2017, 2020.
+# Karl Ove Hufthammer <karl@huftis.org>, 2003, 2005, 2006, 2007, 2009, 2014, 2015, 2017, 2020, 2021.
 # Klaus Ade Johnstad <klaus@skolelinux.no>, 2004.
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 21:06-0700\n"
-"PO-Revision-Date: 2020-12-12 15:25+0100\n"
+"PO-Revision-Date: 2021-06-28 19:40+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.03.70\n"
+"X-Generator: Lokalize 21.04.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #. Response to Black (0, 0, 0) color selected
@@ -184,35 +184,37 @@ msgstr "<9>spare-9b"
 
 #: ../fill_tools.h:49
 msgid "Solid"
-msgstr ""
+msgstr "Ensfarget"
 
 #: ../fill_tools.h:50
-#, fuzzy
 #| msgid "Lines"
 msgid "Linear"
-msgstr "Linjer"
+msgstr "Lineær"
 
 #: ../fill_tools.h:51
 msgid "Radial"
-msgstr ""
+msgstr "Radiell"
 
 #: ../fill_tools.h:55
-#, fuzzy
 #| msgid "Click in the picture to fill that area with color."
 msgid "Click to fill an area with a solid color."
-msgstr "Trykk på tegningen for å fylle området med fargen fra malingbøtta."
+msgstr "Trykk for å fylle hele området med fargen fra malingbøtta."
 
 #: ../fill_tools.h:56
 msgid ""
 "Click and drag to fill an area with a linear gradient (from the chosen color "
 "to transparent)."
 msgstr ""
+"Trykk for å fylle området med en lineær fargeovergang (fra den valgte fargen"
+" til gjennomsiktig)."
 
 #: ../fill_tools.h:57
 msgid ""
 "Click to fill an area with a radial gradient (from the chosen color to "
 "transparent)."
 msgstr ""
+"Trykk for å fylle området med en radiell fargeovergang (fra den valgte fargen"
+" til gjennomsiktig)."
 
 #. Congratulations #1
 #: ../great.h:37
@@ -417,7 +419,6 @@ msgstr "Magi"
 
 #. Title of fill selector (buttons down the right for fill tool)
 #: ../titles.h:81
-#, fuzzy
 #| msgid "Fill"
 msgid "Fills"
 msgstr "Bøtte"
@@ -818,7 +819,7 @@ msgstr ""
 
 #: ../tuxpaint.c:24135
 msgid "Select a color from your drawing."
-msgstr "Vel ein farge frå teikninga."
+msgstr "Velg en farge fra tegningen."
 
 #: ../tuxpaint.c:24147
 msgid "Pick a color."
@@ -932,23 +933,24 @@ msgstr ""
 
 #: ../../magic/src/checkerboard.c:99
 msgid "Checkerboard"
-msgstr ""
+msgstr "Sjakkbrett"
 
 #: ../../magic/src/checkerboard.c:106
-#, fuzzy
 #| msgid "Click and drag to draw repetitive patterns. "
 msgid "Click and drag to fill the canvas with a checkerboard pattern."
-msgstr "Hold inne knappen og flytt rundt for å tegne mønster."
+msgstr "Hold inne knappen og flytt rundt for å tegne et sjakkbrett­mønster."
 
 #: ../../magic/src/clone.c:132
 msgid "Clone"
-msgstr ""
+msgstr "Klon"
 
 #: ../../magic/src/clone.c:138
 msgid ""
 "Click once to pick a spot to begin cloning. Click again and drag to clone "
 "that part of the picture."
 msgstr ""
+"Trykk først for å velge hvor du vil klone fra. Trykk så en annen plass og dra"
+" for å klone tegningen."
 
 #: ../../magic/src/confetti.c:83
 msgid "Confetti"
@@ -1067,7 +1069,7 @@ msgstr "Gress"
 
 #: ../../magic/src/grass.c:113
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
-msgstr "ŭHold inne knappen og flytt rundt for å tegne gress. Ikke glem jorden!"
+msgstr "Hold inne knappen og flytt rundt for å tegne gress. Ikke glem jorden!"
 
 #: ../../magic/src/halftone.c:35
 msgid "Halftone"
@@ -1272,13 +1274,12 @@ msgstr ""
 #. Both are named "Pixels", at the moment:
 #: ../../magic/src/pixels.c:108
 msgid "Pixels"
-msgstr ""
+msgstr "Piksler"
 
 #: ../../magic/src/pixels.c:114
-#, fuzzy
 #| msgid "Click and drag to draw large bricks."
 msgid "Click and drag to draw large pixels."
-msgstr "Hold inne knappen og flytt rundt for å tegne store mursteiner."
+msgstr "Hold inne knappen og flytt rundt for å tegne store piksler."
 
 #: ../../magic/src/puzzle.c:103
 msgid "Puzzle"
