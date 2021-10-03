@@ -92,6 +92,7 @@ int sharpen_init(magic_api * api);
 int sharpen_get_tool_count(magic_api * api);
 SDL_Surface *sharpen_get_icon(magic_api * api, int which);
 char *sharpen_get_name(magic_api * api, int which);
+int sharpen_get_group(magic_api * api, int which);
 char *sharpen_get_description(magic_api * api, int which, int mode);
 static int sharpen_grey(Uint8 r1, Uint8 g1, Uint8 b1);
 static void do_sharpen_pixel(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
@@ -153,6 +154,12 @@ SDL_Surface *sharpen_get_icon(magic_api * api, int which)
 char *sharpen_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return (strdup(gettext_noop(sharpen_names[which])));
+}
+
+// Return our group (all the same):
+int sharpen_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_DISTORTS;
 }
 
 // Return our descriptions, localized:

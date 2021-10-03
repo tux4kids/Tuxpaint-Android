@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 6, 2021
+  Last updated: September 21, 2021
   $Id$
 */
 
@@ -55,6 +55,7 @@ Uint32 pixels_api_version(void);
 int pixels_get_tool_count(magic_api * api);
 SDL_Surface *pixels_get_icon(magic_api * api, int which);
 char *pixels_get_name(magic_api * api, int which);
+int pixels_get_group(magic_api * api, int which);
 char *pixels_get_description(magic_api * api, int which, int mode);
 void pixels_drag(magic_api * api, int which, SDL_Surface * canvas,
                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
@@ -103,9 +104,13 @@ SDL_Surface *pixels_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 // Return our names, localized:
 char *pixels_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  /* Both are named "Pixels", at the moment: */
-
   return (strdup(gettext_noop("Pixels")));
+}
+
+// Return our group (both the same):
+int pixels_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PAINTING;
 }
 
 // Return our descriptions, localized:

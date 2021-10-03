@@ -4,7 +4,7 @@
   Fill tool -- tool variations (for selector)
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2019 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 20, 2021
+  Last updated: September 6, 2021
   $Id$
 */
 

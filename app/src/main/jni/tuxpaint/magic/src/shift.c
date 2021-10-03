@@ -4,7 +4,7 @@
   Shift Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: September 20, 2021
   $Id$
 */
 
@@ -50,6 +50,7 @@ int shift_init(magic_api * api);
 int shift_get_tool_count(magic_api * api);
 SDL_Surface *shift_get_icon(magic_api * api, int which);
 char *shift_get_name(magic_api * api, int which);
+int shift_get_group(magic_api * api, int which);
 char *shift_get_description(magic_api * api, int which, int mode);
 void shift_drag(magic_api * api, int which, SDL_Surface * canvas,
                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
@@ -104,6 +105,12 @@ SDL_Surface *shift_get_icon(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUT
 char *shift_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Shift")));
+}
+
+// Return our group
+int shift_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PICTURE_WARPS;
 }
 
 // Return our descriptions, localized:

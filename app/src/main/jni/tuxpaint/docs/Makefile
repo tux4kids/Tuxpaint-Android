@@ -7,14 +7,10 @@
 # Bill Kendrick
 # bill@newbreedsoftware.com
 # 
-# Sept. 4, 2005 - February 5, 2020
+# Sept. 4, 2005 - September 18, 2021
 
 LINKS_OPTIONS:=-dump -codepage utf8
 LINKS:=links $(LINKS_OPTIONS)
-
-# FIXME: Support finding files in ??/html/ and ??_??/html/)
-COPYING_HTMLFILES:=$(wildcard COPYING/html/*.html)
-COPYING_TEXTFILES:=$(patsubst COPYING/html/%.html,COPYING/%.txt,$(COPYING_HTMLFILES))
 
 EN_HTMLFILES:=$(wildcard en/html/*.html)
 EN_TEXTFILES:=$(patsubst en/html/%.html,en/%.txt,$(EN_HTMLFILES))
@@ -48,8 +44,7 @@ ZH_TW_TEXTFILES:=$(patsubst zh_tw/html/%.html,zh_tw/%.txt,$(ZH_TW_HTMLFILES))
 
 
 .PHONY: all
-all:	$(COPYING_TEXTFILES) \
-	$(EN_TEXTFILES) \
+all:	$(EN_TEXTFILES) \
 	$(ES_TEXTFILES) \
 	$(FR_TEXTFILES) \
 	$(GL_TEXTFILES) \
@@ -63,7 +58,6 @@ all:	$(COPYING_TEXTFILES) \
 .PHONY: clean
 clean:
 	-rm \
-	$(COPYING_TEXTFILES) \
 	$(EN_TEXTFILES) \
 	$(ES_TEXTFILES) \
 	$(FR_TEXTFILES) \
@@ -74,9 +68,6 @@ clean:
 	$(RU_TEXTFILES) \
 	$(ZH_CN_TEXTFILES) \
 	$(ZH_TW_TEXTFILES)
-
-$(COPYING_TEXTFILES): COPYING/%.txt: COPYING/html/%.html
-	$(LINKS) $< > $@
 
 $(EN_TEXTFILES): en/%.txt: en/html/%.html
 	$(LINKS) $< > $@

@@ -1,12 +1,12 @@
                                    Tux Paint
-                                  バージョン 0.9.26
+                                  バージョン 0.9.27
 
   子供向けのシンプルなお絵かきプログラム
 
           Copyright © 2002-2021 by various contributors; "AUTHORS" 参照.
                             http://www.tuxpaint.org/
 
-                                   2021年6月28日
+                                   2021年9月 5日
 
      ----------------------------------------------------------------------
 
@@ -172,6 +172,22 @@ Tux Paint の起動
 
                  ボタンを押したままマウスを動かすと、描画できます。
 
+                 Some brushes are animated — they change their shape as you
+                 draw them. A good example of this is the vines brush that
+                 ships with Tux Paint. These brushes will have a small
+                 "filmstrip" icon drawn on their Selector buttons.
+
+                 Other brushes are directional — they will draw a different
+                 shape depending on what direction you are painting with
+                 them. An example of this is the arrow brush that ships with
+                 Tux Paint. These brushes have a small 8-way arrow icon drawn
+                 on their Selector buttons.
+
+                 Finally, some brushes can be both direction and animated.
+                 Examples of this are the cat and squirrel brushes that ship
+                 with Tux Paint. These brushes will have both the "filmstrip"
+                 and 8-way arrow icons.
+
                  描画中にはサウンドが流れます。筆の大きさが大きいほど、低い音になります。
 
      ----------------------------------------------------------------------
@@ -205,6 +221,12 @@ Tux Paint の起動
                  直線を描き始める位置でマウスをクリックして、そのままマウスを動かすと、描かれる直線が、「ゴム紐」のような薄い色の線で表示されます。
 
                  マウスを放すと、バネのような効果音とともに線が描画されます。
+
+                 Some brushes are animated, and will show a pattern of shapes
+                 along the line. Others are directional, and will show a
+                 different shape depending on the angle of the brush. And
+                 finally some are both animated and directional. See "Paint",
+                 above, to learn more.
 
      ----------------------------------------------------------------------
 

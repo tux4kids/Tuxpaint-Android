@@ -18,7 +18,7 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        version 0.9.26      </h1>
+        version 0.9.27      </h1>
 
       <p>
         Copyright &copie; 2002-2021 par divers contributeurs; voir AUTHORS.<br>
@@ -26,7 +26,7 @@
       </p>
 
       <p>
-        mai 31, 2021      </p>
+        septembre 19, 2021      </p>
     </center>
 
     <hr size="2"
@@ -157,7 +157,7 @@
 
       <blockquote>
         <p>
-          Tux Paint recherche ses différents fichiers de données dans son répertoire ' <code>data</code>'.        </p>
+          Tux Paint recherche ses différents fichiers de données dans son répertoire '<code>data</code>'.        </p>
 
         <h4>
           Linux et Unix        </h4>
@@ -205,7 +205,7 @@
           <ol>
             <li>Affichez un menu «contextuel» en maintenant la touche <b>[Control]</b> enfoncée et en cliquant sur l' icône Tux Paint dans le <cite>Finder</cite> . (Si vous avez une souris avec plus d'un bouton, vous pouvez simplement cliquer avec le bouton droit de la souris sur l'icône.)            </li>
 
-            <li>Sélectionnez " Afficher le contenu " dans le menu qui apparaît. Une nouvelle fenêtre du <cite>Finder</cite> apparaîtra avec un dossier à l'intérieur appelé " Contents".            </li>
+            <li>Sélectionnez "Afficher le contenu" dans le menu qui apparaît. Une nouvelle fenêtre du <cite>Finder</cite> apparaîtra avec un dossier à l'intérieur appelé " Contents".            </li>
 
             <li>Ouvrez le dossier "Contents " et ouvrez le dossier "Resources" qui se trouve à l'intérieur.            </li>
 
@@ -237,7 +237,7 @@
 
       <blockquote>
         <p>
-          Vous pouvez également créer des pinceaux, des tampons, des polices des images de démarrage, des modèles et des polices dans votre propre répertoire où Tux Paint les retrouvera.        </p>
+          Vous pouvez également créer des pinceaux, des images de démarrage, des modèles et des polices dans votre propre répertoire où Tux Paint les retrouvera.        </p>
 
         <h4>
           Windows
@@ -245,7 +245,7 @@
 
         <blockquote>
           <p>
-            Votre dossier personnel Tux Paint est stocké dans votre dossier "Application Data". Par exemple, sur Windows plus récent :          </p>
+            Votre dossier personnel Tux Paint est stocké dans votre dossier "Application Data". Par exemple, sur un Windows plus récent :          </p>
 
           <blockquote>
             <code style="white-space: nowrap;">C:\Documents and Settings\<i>(nom d'utilisateur)</i>\Application Data\TuxPaint\</code>
@@ -270,7 +270,7 @@
 
         <blockquote>
           <p>
-            Vos fichiers personnels Tux Paint vont dans un 'répertoire caché' que l'on trouve dans votre répertoire personnel " <code>$(HOME)/.tuxpaint/</code>" (également appelé "<code>~/.tuxpaint/</code>".          </p>
+            Vos fichiers personnels Tux Paint vont dans un 'répertoire caché' que l'on trouve dans votre répertoire personnel "<code>$(HOME)/.tuxpaint/</code>" (également appelé "<code>~/.tuxpaint/</code>".          </p>
 
           <p>
             Autrement dit, si votre répertoire personnel est "<code>/home/tux</code>", alors votre répertoire Tux Paint est "<code>/home/tux/.tuxpaint/</code>".          </p>
@@ -316,7 +316,7 @@
 
       <blockquote>
         <p>
-          Outre une a graphical shape, les brushes peuvent également recevoir d'autres attributs. Pour ce faire, vous devez créer un «fichier de données» pour brush.        </p>
+          Outre une une forme graphique, les pinceaux peuvent également recevoir d'autres attributs. Pour ce faire, vous devez créer un «fichier de données» pour brosse.        </p>
 
         <p>
           Un fichier de données de brush's est simplement un fichier texte ASCII contenant les options pour le brush.        </p>
@@ -363,18 +363,29 @@
             Les formes orientables sont divisées en carrés de 3x3 dans une image PNG. Par exemple, si votre pinceau fait 30x30, l'image doit être de 90x90 et chacune des formes orientables est placée dans une grille de 3x3. La région centrale n'est pas orientable. Le haut à droite est utilisé pour le mouvement vers le haut, et vers la droite. Etc ...          </p>
 
           <p>
-            Ajoute une ligne contenant le mot "<code><b>directional</b></code>" au fichier de données brush's.          </p>
+            Ajoute une ligne contenant le mot "<code><b>directional</b></code>" au fichier de données brosse.          </p>
         </blockquote>
 
         <h4>
-          Pinceaux animés orientables        </h4>
+          Pinceaux tournants        </h4>
 
         <blockquote>
           <p>
-            Vous pouvez mélanger animation et orientation dans un même pinceau. Utilisez les deux options ("<code><b>frames=<i>N</i></b></code>" et "<code><b>directional</b></code>") en deux lignes séparées dans le fichier "<code>.dat</code>" qui concerne le pinceau.          </p>
+            Depuis la version 0.9.27 de Tux Paint , vous pouvez désormais créer des pinceaux tournants. Au fur et à mesure que le pinceau est utilisé, il tourne de 360 degrés, en fonction de la direction du pinceau.          </p>
 
           <p>
-            Disposez le pinceau de manière à ce que chaque ensemble 3x3 de formes orientables soit disposé sur une grande image PNG. Par exemple, si le pinceau mesure 30x30 et qu'il y a 5 cadres, ce sera 450x90. (Les 150x90 pixels les plus à gauche de l'image représentent les 9 formes de direction pour la première image, par exemple).          </p>
+            Ajoute une ligne contenant le mot "<code><b>rotate</b></code>" au fichier de données brosse.          </p>
+        </blockquote>
+
+        <h4>
+          Pinceaux animés orientables ou tournants        </h4>
+
+        <blockquote>
+          <p>
+            Vous pouvez mélanger animation et orientation  (ou rotation) dans un même pinceau. Utilisez les deux options ("<code><b>frames=<i>N</i></b></code>" et "<code><b>directional</b></code>" ou "<code><b>rotate</b></code>) en deux lignes séparées dans le fichier "<code>.dat</code>" qui concerne le pinceau.          </p>
+
+          <p>
+            Pour les pinceaux directionnels, disposez le pinceau de manière à ce que chaque ensemble 3x3 de formes orientables soit disposé sur une grande image PNG. Par exemple, si le pinceau mesure 30x30 et qu'il y a 5 cadres, ce sera 450x90. (Les 150x90 pixels les plus à gauche de l'image représentent les 9 formes de direction pour la première image, par exemple).          </p>
         </blockquote>
       </blockquote>
 
@@ -382,7 +393,7 @@
         Placez les PNG de l'image du pinceau (et tous les fichiers texte de données) dans le répertoire "<code><b>brushes</b></code>".      </p>
 
       <p>
-        Remarque: si vos nouveaux brushes se présentent tous sous forme de carrés ou de rectangles pleins, c'est que vous avez oublié d'utiliser la transparence alpha ! Consultez le fichier de documentation "PNG" pour plus d'informations et de conseils.      </p>
+        Remarque: si vos nouveaux pinceaux se présentent tous sous forme de carrés ou de rectangles pleins, c'est que vous avez oublié d'utiliser la transparence alpha ! Consultez le fichier de documentation "PNG" pour plus d'informations et de conseils.      </p>
       <br clear="all">
     </blockquote>
 
@@ -415,13 +426,13 @@
           Depuis la version 0.9.17 de Tux Paint , les tampons peuvent être des images bitmap PNG ou bien des images vectorielles SVG. Ils peuvent être en couleur ou en niveaux de gris. Le canal alpha (transparence) des PNG est utilisé pour déterminer la forme réelle de l'image (sinon vous obtiendriez un grand rectangle sur vos dessins).        </p>
 
         <p>
-          Les fichiers PNG peuvent être de n'importe quelle taille, et Tux Paint (par défaut) fournit un ensemble de boutons de redimensionnement pour permettre à l'utilisateur d'ajuster le tampon vers le haut (plus grand) et vers le bas (plus petit).        </p>
+          Les fichiers PNG peuvent être de n'importe quelle taille, et Tux Paint (par défaut) fournit un ensemble de boutons de redimensionnement pour permettre à l'utilisateur d'ajuster le tampon vers le haut (plus grand) et vers le bas (plus petits).        </p>
 
         <p>
           Les SVG sont basés sur des vecteurs et seront mis à l'échelle de manière adéquate pour le canevas utilisé.        </p>
 
         <p>
-        Remarque: si vos nouveaux PNG-based stamps se présentent tous sous forme de carrés ou de rectangles pleins, c'est que vous avez oublié d'utiliser la transparence alpha ! Consultez le fichier de documentation "PNG" pour plus d'informations et de conseils.        </p>
+        Remarque: si vos nouveaux des tampons basés sur PNG se présentent tous sous forme de carrés ou de rectangles pleins, c'est que vous avez oublié d'utiliser la transparence alpha ! Consultez le fichier de documentation "PNG" pour plus d'informations et de conseils.        </p>
 
         <p>
           Remarque: si vos nouveaux tampons SVG semblent avoir beaucoup de zones vides, assurez-vous que le «document» SVG n'est pas plus grand que la ou les formes qu'il contient. S'ils sont coupés, assurez-vous que le «document» est suffisamment grand pour contenir la ou les formes. Voir le fichier de documentation " SVG" pour plus d'informations et de conseils.        </p>
@@ -481,7 +492,7 @@
 
       <blockquote>
         <p>
-          Tux Paint peut jouer un effet sonore quand un tampon est choisi. Par exemple, le son d'un canard faisant coin-coin, ou un bref morceau de musique quand un instrument est choisi. Les fichiers doivent être aux formats "WAVE ("<code>.wav</code>")" ou OGG Vorbis ("<code>.ogg</code>"), et porter le même nom que l'image PNG ou SVG.( par ex., l'effet sonore "<code>stamp.svg</code>" est le son du fichier "<code>stamp.ogg</code>" qui est le même répertoire).        </p>
+          Tux Paint peut jouer un effet sonore quand un tampon est choisi. Par exemple, le son d'un canard faisant coin-coin, ou un bref morceau de musique quand un instrument est choisi. Les fichiers doivent être aux formats "WAVE ("<code>.wav</code>")" ou OGG Vorbis ("<code>.ogg</code>"), et porter le même nom que l'image PNG ou SVG.( par ex., l'effet sonore "<code>stamp.ogg</code>" est le son du fichier "<code>stamp.svg</code>" qui est dans le même répertoire).        </p>
 
         <h4>
           Support pour la régionalisation        </h4>
@@ -491,7 +502,7 @@
             Pour les sons de différentes locales (par exemple, si le son est quelqu'un qui dit un mot, et que vous voulez des versions traduites du mot prononcé), créez également des fichiers WAV ou OGG avec l'étiquette de la locale dans le nom de fichier, sous la forme : "<code>stamp_LOCALE.EXT</code>"          </p>
 
           <p>
-            "effet sonore" de "<code>stamp.png</code>", lorsque Tux Paint est exécuté en mode espagnol, serait «<code>stamp.png</code>".  En mode français, "<code>stamp_es.wav</code>". En mode portugais brésilien, "<code>stamp_fr.wav</code>". Etc...          </p>
+            L'effet sonore qui sera joué lorsque le tampon correspondant au fichier image "<code>stamp.png</code>" est choisi, et que Tux Paint utilise la langue espagnole, sera "<code>stamp_es.wav</code>". Avec la langue française, ce sera "<code>stamp_fr.wav</code>". Avec le portugais brésilien, "<code>stamp_pt_BR.wav</code>", etc ...          </p>
 
           <p>
             Si aucun effet sonore localisé ne peut être chargé, Tux Paint tentera de charger le fichier son «par défaut». (par exemple, "<code>stamp.wav</code>")          </p>
@@ -520,7 +531,7 @@
           <p>
             Pour les descriptions dans différentes langues, créez également des fichiers WAV ou OGG avec <em>à la fois</em> "<code>_desc</code>" <em>et</em>  le libellé des paramètres régionaux dans le nom de fichier, sous la forme : "<code>stamp_desc_LOCALE.EXT</code>"          </p>
 
-            "son descriptif" de "<code>stamp.png</code>", lorsque Tux Paint est exécuté en mode espagnol, serait «<code>stamp_desc_es.wav</code>".  En mode français, "<code>stamp_desc_fr.wav</code>". En mode portugais brésilien, "<code>stamp_desc_pt_BR.wav</code>". Etc...
+            L'son descriptif qui sera joué lorsque le tampon correspondant au fichier image "<code>stamp.png</code>" est choisi, et que Tux Paint utilise la langue espagnole, sera "<code>stamp_desc_es.wav</code>". Avec la langue française, ce sera "<code>stamp_desc_fr.wav</code>". Avec le portugais brésilien, "<code>stamp_desc_pt_BR.wav</code>", etc ...
           <p>
             Si aucun son descriptif localisé ne peut être chargé, Tux Paint tentera de charger le fichier son «par défaut». (par exemple, "<code>stamp_desc.wav</code>")          </p>
         </blockquote>
@@ -536,13 +547,13 @@
 
       <blockquote>
         <p>
-          Outre une a graphical shape, a textual description, a sound effect, and a descriptive sound, les stamps peuvent également recevoir d'autres attributs. Pour ce faire, vous devez créer un «fichier de données» pour stamp.        </p>
+          Outre une une forme graphique, un texte de description, un effet sonore et une description orale, les tampons peuvent également recevoir d'autres attributs. Pour ce faire, vous devez créer un «fichier de données» pour tampon.        </p>
 
         <p>
-          Un fichier de données de stamp's est simplement un fichier texte ASCII contenant les options pour le stamp.        </p>
+          Un fichier de données de tampon est simplement un fichier texte ASCII contenant les options pour le tampon.        </p>
 
         <p>
-          Le fichier porte le même nom que l'image PNG or SVG , mais une extension "<code>.dat</code>". (par exemple, le fichier de données "<code>stamp.png</code>" est le fichier texte "<code>stamp.dat</code>" qui se trouve dans le même répertoire.)        </p>
+          Le fichier porte le même nom que l'image PNG ou SVG , mais une extension "<code>.dat</code>". (par exemple, le fichier de données "<code>stamp.png</code>" est le fichier texte "<code>stamp.dat</code>" qui se trouve dans le même répertoire.)        </p>
 
         <h4>
           Tampons colorés        </h4>
@@ -569,7 +580,7 @@
             </center>
 
             <p>
-              Ajoute une ligne contenant le mot "<code><b>colorable</b></code>" au fichier de données stamp's.            </p>
+              Ajoute une ligne contenant le mot "<code><b>colorable</b></code>" au fichier de données tampon.            </p>
           </blockquote>
 
           <h5>
@@ -587,7 +598,7 @@
             </center>
 
             <p>
-              Ajoute une ligne contenant le mot "<code><b>tintable</b></code>" au fichier de données stamp's.            </p>
+              Ajoute une ligne contenant le mot "<code><b>tintable</b></code>" au fichier de données tampon.            </p>
 
             <h6>
               Options de teinture :            </h6>
@@ -601,21 +612,21 @@
                   Coloriage normal &mdash; "<code><b>tinter=normal</b></code>" (par défaut)                </dt>
 
                 <dd>
-                  C'est le mode normal pour teinter. (La gamme de teinte est de +/- 18°)                </dd>
-
-                <dt>
-                  Coloriage 'toutes tonalités' &mdash; "<code><b>tinter=anyhue</b></code>"
-                </dt>
-
-                <dd>
-                  Cela remappe toutes les teintes du tampon. (La plage de teinte est de ± 180°.)                </dd>
+                  C'est le mode normal de teinture. Tout d'abord, la teinte primaire du tampon est déterminée. (Par exemple, l'image d'une fleur avec sa tige aura la couleur des pétales considérée comme teinte primaire de l'ensemble de l'image). Puis on trouve la partie de l'image la plus saturée. Avec "le mode de teinture normal", l'étendue de la teinte utilisée pour faire cela démarre dans un angle de ±18° de la teinte primaire trouvée dans l'étape 1. (Si aucune n'est trouvée, ce sera dans une étendue de 50 %, puis on réessaie). Tout ce qui est à l'intérieur de l'étendue de 50 % (par ex. ±27°) est modifié pour avoir la teinte de la couleur choisie par l'utilisateur.                </dd>
 
                 <dt>
                   Coloriage étroit &mdash; "<code><b>tinter=narrow</b></code>"
                 </dt>
 
                 <dd>
-                  Cela ressemble à "<code>anyhue</code>", mais avec un angle de teinte plus étroit. (La gamme de teinte est de ± 6 °, 9 remplacer.)                </dd>
+                  C'est comme l'option "<code>normal</code>" décrite plus haut, mais avec une étendue de teinte plus faible de ±6°. Tout ce qui est trouvé dans l'étendue (par ex. ±9°) est teinté. Si une trop grande partie de vitre image est teintée, essayez cette option.                </dd>
+
+                <dt>
+                  Coloriage 'toutes tonalités' &mdash; "<code><b>tinter=anyhue</b></code>"
+                </dt>
+
+                <dd>
+                  Cela rempappe <em>toutes</em> les teintes du tampon. C'est pareil que les options "<code>anyhue</code>" et "<code>narrow</code>" décrites auparavant, mais l'étendu de teinte est ±180°.                </dd>
 
                 <dt>
                   Coloriage vectoriel &mdash; "<code><b>tinter=vector</b></code>"
@@ -639,10 +650,10 @@
             Parfois, cela n'a pas de sens pour un timbre d'être retourné ou reflété; par exemple, des timbres de lettres ou de chiffres. Parfois, les tampons sont symétriques, il n'est donc pas utile de laisser l'utilisateur les retourner ou les refléter.          </p>
 
           <p>
-            Pour empêcher un tampon d'être from being flipped vertically, ajoutez une ligne contenant le mot «<code><b>noflip</b></code>» au fichier de données du tampon.          </p>
+            Pour empêcher un tampon d'être qui a été inversé verticalement, ajoutez une ligne contenant le mot «<code><b>noflip</b></code>» au fichier de données du tampon.          </p>
 
           <p>
-            Pour empêcher un tampon d'être from being mirrored horizontally, ajoutez une ligne contenant le mot «<code><b>nomirror</b></code>» au fichier de données du tampon.          </p>
+            Pour empêcher un tampon d'être qui a été inversé horizontalement, ajoutez une ligne contenant le mot «<code><b>nomirror</b></code>» au fichier de données du tampon.          </p>
         </blockquote>
 
         <h4>
@@ -847,7 +858,7 @@
       </blockquote>
 
       <p>
-        DE nombreux outils existent pour gérer les catalogues de traduction 'gettext', vous n'avez donc pas besoin de les éditer avec un éditeur de texte. En voici quelques uns :      </p>
+        De nombreux outils existent pour gérer les catalogues de traduction 'gettext', vous n'avez donc pas besoin de les éditer avec un éditeur de texte. En voici quelques uns :      </p>
       <ul>
         <li><a href="http://www.poedit.net/">Poedit</a></li>
         <li><a href="https://wiki.gnome.org/Apps/Gtranslator">Gtranslator (GNOME Translator)</a></li>
@@ -932,7 +943,7 @@
         <i>Remarque :</i> Les significations des indicateurs sont spécifiques à la langue et sont traitées par le code source spécifique à la langue dans "<code>src/im.c</code>". Par exemple, "<code>b</code>" est utilisé en coréen pour gérer Batchim, qui peut être reporté au caractère suivant.      </p>
 
       <p>
-        <i>Remarque :</i> la prise en charge de nouveaux input methods nécessite des ajouts au code source de Tux Paint ( "<code>/src/im.c</code>"), et nécessite des mises à jour de <code>Makefile</code>, pour s'assurer que les fichiers "<code>.im</code>" sont disponibles pour être utilisés lors de l'exécution du programme.      </p>
+        <i>Remarque :</i> la prise en charge de nouveaux méthodes de saisie nécessite des ajouts au code source de Tux Paint ( "<code>/src/im.c</code>"), et nécessite des mises à jour de <code>Makefile</code>, pour s'assurer que les fichiers "<code>.im</code>" sont disponibles pour être utilisés lors de l'exécution du programme.      </p>
     </blockquote>
 
     <hr size="1"
@@ -1117,7 +1128,7 @@
           <b>Remarque :</b> Ce fichier n'est pas compilé avec Tux Paint, mais il est lu et analysé durant l'exécution de celui-ci.        </p>
 
         <p>
-          Il est peu probable qu'une modification soit requise de ce fichier.        </p>
+          Il est peu probable qu'une modification de ce fichier soit requise.        </p>
       </blockquote>
     </blockquote>
 

@@ -1,7 +1,7 @@
 /*
  * Folds the picture down from the corners.
  *
- * Last updated: 2019-08-29
+ * Last updated: 2021-09-20
  */
 
 //optimized version soon :)
@@ -47,6 +47,7 @@ int fold_init(magic_api * api);
 int fold_get_tool_count(magic_api * api);
 SDL_Surface *fold_get_icon(magic_api * api, int which);
 char *fold_get_name(magic_api * api, int which);
+int fold_get_group(magic_api * api, int which);
 char *fold_get_description(magic_api * api, int which, int mode);
 int fold_requires_colors(magic_api * api, int which);
 void fold_release(magic_api * api, int which,
@@ -105,6 +106,11 @@ SDL_Surface *fold_get_icon(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE
 char *fold_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (gettext_noop("Fold"));
+}
+
+int fold_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PICTURE_WARPS;
 }
 
 char *fold_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)

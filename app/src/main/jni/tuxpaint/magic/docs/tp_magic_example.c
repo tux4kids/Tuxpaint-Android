@@ -1,7 +1,7 @@
 /* tp_magic_example.c
 
    An example of a "Magic" tool plugin for Tux Paint
-   Last modified: 2008.07.10
+   Last modified: 2021.09.21
 */
 
 
@@ -53,6 +53,15 @@ const char *icon_filenames[NUM_TOOLS] = {
 const char *names[NUM_TOOLS] = {
   gettext_noop("A tool"),
   gettext_noop("Another tool")
+};
+
+
+/* How to group the tools with other similar tools,
+   within the 'Magic' selector: */
+
+const int groups[NUM_TOOLS] = {
+  MAGIC_TYPE_PAINTING,
+  MAGIC_TYPE_DISTORTS
 };
 
 
@@ -222,6 +231,22 @@ char *example_get_name(magic_api * api, int which)
   // will free it for us, so we have one less thing to keep track of.)
 
   return (strdup(our_name_localized));
+}
+
+
+// Report our "Magic" tool groups
+//
+// When Tux Paint is starting up and loading plugins, it asks us to
+// specify where the tool should be grouped.
+
+int example_get_group(magic_api * api, int which)
+{
+  // Return our group from the "groups[]" array.
+  //
+  // We use 'which' (which of our tools Tux Paint is asking about)
+  // as an index into the array.
+
+  return (groups[which]);
 }
 
 

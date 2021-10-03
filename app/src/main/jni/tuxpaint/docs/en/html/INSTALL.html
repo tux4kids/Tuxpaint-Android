@@ -17,7 +17,7 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        version 0.9.26<br/>
+        version 0.9.27<br/>
         Installation Documentation      </h1>
 
       <p>
@@ -26,21 +26,88 @@
       </p>
 
       <p>
-        March  9, 2021      </p>
+        September 17, 2021      </p>
     </center>
 
-    <hr>
+    <hr size="2" noshade />
 
-    <h2>Requirements:</h2>
+    <table border="2"
+           cellspacing="0"
+           cellpadding="2"
+           summary="Table of Contents">
+      <tr>
+        <th>
+          Table of Contents        </th>
+      </tr>
+
+      <tr>
+        <td>
+          <ul>
+            <li>
+              <a href="#requirements">Requirements</a>
+              <ul>
+                <li>
+                  <a href="#req-libsdl">Simple DirectMedia Layer library (libSDL)</a>
+                </li>
+                <li>
+                  <a href="#req-other-libs">Other Libraries</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#compiling">Compiling and Installation</a>
+              <ul>
+                <li>
+                  <a href="#compiling-windows">Windows Users</a>
+                </li>
+                <li>
+                  <a href="#compiling-linux">Linux/Unix Users</a>
+                </li>
+                <li>
+                  <a href="#compiling-macos">macOS Users</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#debugging">Debugging</a>
+            </li>
+            <li>
+              <a href="#uninstalling">Uninstalling Tux Paint</a>
+              <ul>
+                <li>
+                  <a href="#uninstalling-windows">Windows</a>
+                </li>
+                <li>
+                  <a href="#uninstalling-macOS">macOS</a>
+                </li>
+                <li>
+                  <a href="#uninstalling-linux">Linux</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+    <hr size="2" noshade />
+
+    <h2>
+      <a name="requirements" id="requirements">
+        Requirements      </a>
+    </h2>
     <blockquote>
 
-      <h3>libSDL</h3>
+      <h3>
+        <a name="req-libsdl" id="req-libsdl">
+          Simple DirectMedia Layer library (libSDL)        </a>
+      </h3>
       <blockquote>
         <p>
           Tux Paint requires the Simple DirectMedia Layer Library (libSDL), an Open Source multimedia programming library available under the GNU Lesser General Public License (LGPL).        </p>
 
         <p>
-          Along with libSDL, Tux Paint depends on a number of other SDL 'helper' libraries:  SDL_Image (for graphics files), SDL_TTF and (optionally) SDL_Pango (for True Type Font support) and, optionally, SDL_Mixer (for sound effects).        </p>
+          Along with libSDL, Tux Paint depends on a number of other SDL 'helper' libraries: SDL_Image (for graphics files), SDL_gfx (for some graphical functions, like rotation), SDL_TTF and (optionally) SDL_Pango (for True Type Font support) and, optionally, SDL_Mixer (for sound effects).        </p>
 
         <h4>Linux/Unix Users:</h4>
         <blockquote>
@@ -49,6 +116,7 @@
           <ul>
             <li>libSDL: <a href="http://www.libsdl.org/">http://www.libsdl.org/</a></li>
             <li>SDL_Image: <a href="http://www.libsdl.org/projects/SDL_image/">http://www.libsdl.org/projects/SDL_image/</a></li>
+            <li>SDL_gfx: <a href="https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/">https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/</a> (<a href="https://sourceforge.net/projects/sdlgfx/">https://sourceforge.net/projects/sdlgfx/</a>)</li>
             <li>SDL_TTF: <a href="http://www.libsdl.org/projects/SDL_ttf/">http://www.libsdl.org/projects/SDL_ttf/</a></li>
             <li>SDL_Pango: <a href="http://sourceforge.net/projects/sdlpango/">http://sourceforge.net/projects/sdlpango/</a> (optional)</li>
             <li>SDL_Mixer: <a href="http://www.libsdl.org/projects/SDL_mixer/">http://www.libsdl.org/projects/SDL_mixer/</a> (optional)</li>
@@ -62,7 +130,10 @@
         </blockquote>
       </blockquote>
 
-      <h3>Other Libraries</h3>
+      <h3>
+        <a name="req-other-libs" id="req-other-libs">
+          Other Libraries        </a>
+      </h3>
       <blockquote>
         <p>
           Tux Paint also takes advantage of a number of other free, LGPL'd libraries.  Under Linux, just like SDL, they should either already be installed, or are readily available for installation as part of your Linux distribution.        </p>
@@ -110,7 +181,7 @@
         <h4>SVG graphics support</h4>
         <blockquote>
           <p>
-            As of Tux Paint 0.9.17, Tux Paint can load SVG (Scalable Vector Graphics) images as stamps. Two sets of libraries are supported, and SVG support can be completely disabled (via "<code>make SVG_LIB:=</code>")          </p>
+            As of Tux Paint 0.9.17, Tux Paint can load SVG (Scalable Vector Graphics) images as stamps. Two sets of libraries are supported, and SVG support can be completely disabled (via "<code style="white-space: nowrap;">make SVG_LIB:=</code>")          </p>
 
           <h5>librsvg-2 &amp; libCairo2 (newer libraries)</h5>
           <ul>
@@ -155,66 +226,322 @@
       </blockquote>
     </blockquote>
 
-    <h2>Compiling and Installation:</h2>
+    <hr size="2" noshade />
+
+    <h2>
+      <a name="compiling" id="compiling">
+        Compiling and Installation      </a>
+    </h2>
     <blockquote>
       <p>
         Tux Paint is released under the GNU General Public License (GPL) (see "COPYING.txt" for details), and therefore the 'source code' to the program is available freely.      </p>
 
-      <h3>Windows Users:</h3>
+      <h3>
+        <a name="compiling-windows" id="compiling-windows">
+          Windows Users        </a>
+      </h3>
+      <p style="font-size: small;">
+        <em>
+          October 25, 2020          Shin-ichi TOYAMA shin1@wmail.plala.or.jp &lt;<a href="mailto:shin1@wmail.plala.or.jp">shin1@wmail.plala.or.jp</a>&gt;
+        </em>
+      </p>
       <blockquote>
-        <h4>Compiling:</h4>
+        <h4>Compiling Set-Up</h4>
         <blockquote>
           <p>
-            As of February 2005 (starting with Tux Paint 0.9.15), the "<code>Makefile</code>" includes support for building on a Windows system using MinGW/MSYS (<a href="http://www.mingw.org/">http://www.mingw.org/</a>).          </p>
+            As of February 2005 (starting with Tux Paint 0.9.15), the "<code>Makefile</code>" includes support for building on a Windows system using MinGW/MSYS (<a href="https://sourceforge.net/projects/msys2/">https://sourceforge.net/projects/msys2/</a>).          </p>
 
           <p>
-            After configuring the environment and building and installing all the dependencies, use these commands, in MSYS, to build, install and run:          </p>
-
-          <h5>Prior to version 0.9.20:</h5>
-          <blockquote>
-            <code>
-              $ make win32<br/>
-              $ make install-win32<br/>
-              $ tuxpaint
-            </code>
-          </blockquote>
-
-          <h5>Version 0.9.20 and beyond:</h5>
-          <blockquote>
-            <code>
-              $ make<br/>
-              $ make install<br/>
-              $ tuxpaint
-            </code>
-          </blockquote>
+            Many tools and libraries are required to build Tux Paint. The package management system "<code>pacman</code>" helps you install them automatically solving complicated dependencies.          </p>
 
           <p>
-            Use the following command to build a version suitable for redistribution with the installer or in a zip-file:          </p>
-          <blockquote>
-            <code>
-              $ make bdist-win32
-            </code>
-          </blockquote>
-
+            Download the latest MSYS2 environment from <a href="https://sourceforge.net/projects/msys2/files/Base/">https://sourceforge.net/projects/msys2/files/Base/</a> and install it where you'd like (the default is "<code>C:\msys64</code>")          </p>
           <p>
-            Or if building for Win9x/ME:          </p>
-          <blockquote>
-            <code>
-              $ BDIST_WIN9X=1 make bdist-win32
-            </code>
-          </blockquote>
-
-          <p>
-            Before any of the above will work, you need to configure the environment and build or install the libraries that Tux Paint depends upon.  John Popplewell put together some instructions for doing that here:          </p>
-          <p>
-            <a href="http://www.johnnypops.co.uk/tuxpaint/">http://www.johnnypops.co.uk/tuxpaint/</a>
+            Open the MSYS2 shell from the "Start Menu" -&gt; "MSYS2 64bit" -&gt; "MSYS2 MSYS" and execute following command (press <b><code>[Enter]</code></b> or <b><code>[Return]</code></b> to accept the defaults for all questions):
+            <blockquote>
+              <code>
+                pacman -Syu
+              </code>
+            </blockquote>
           </p>
 
           <p>
-            Read the relevant notes if building for Win9X/ME.          </p>
+            This will update core system and the window will close automatically.  Repeat the steps above one more time to finish the remaining update process.          </p>
+
+          <p>
+            Within the MSYS2 shell, run the following command to install basic development tools:            <blockquote>
+              <code>
+                pacman -S base-devel msys2-devel git
+              </code>
+            </blockquote>
+          </p>
+
         </blockquote>
 
-        <h4>Running the Installer:</h4>
+        <p>
+          <i>
+            Proceed to the next "<a href="#64bit">MinGW 64bit (x86_64) toolchains</a>" section, or skip to the "<a href="#32bit">MinGW 32bit (i686) toolchains</a>" section if you need only a 32bit build environment.          </i>
+        </p>
+
+                  <hr size="1" noshade width="75%" />
+          <h4>
+            <a name="64bit" id="64bit">
+              MinGW 64bit (x86_64) toolchains            </a>
+          </h4>
+
+          <blockquote>
+            <p>
+              Within the MSYS2 shell, run the following command to install basic 64bit development tools:              <blockquote>
+                <code>
+                  pacman -S mingw-w64-x86_64-toolchain
+                </code>
+              </blockquote>
+            </p>
+
+          </blockquote>
+
+          <h4>
+            64bit (x86_64) dependency libraries for Tux Paint          </h4>
+
+          <blockquote>
+            <p>
+              You can install tools and libraries required for compiling Tux Paint on MSYS2/MINGW using "<code>pacman</code>" except for SDL_Pango and SDL_gfx.            </p>
+            <p>
+              "<code>ntldd</code>" is a small tool which examine windows executable files to list Dynamic Link Library (<code>.dll</code>) files they depends on. Tux Paint's packaging process for binary distribution uses it to find required <code>.dll</code> files.            </p>
+            <p>
+              FLTK is a cross-platform GUI toolkit used by "Tux Paint Config.". You can skip installing it if you are <em>only</em> building "Tux Paint".            </p>
+            <p>
+              <blockquote>
+                <code>
+                  $ pacman -S mingw-w64-x86_64-SDL_{image,mixer,ttf}<br/>
+                  $ pacman -S mingw-w64-x86_64-librsvg<br/>
+                  $ pacman -S mingw-w64-x86_64-fribidi<br/>
+                  $ pacman -S mingw-w64-x86_64-libimagequant<br/>
+                  $ pacman -S mingw-w64-x86_64-fltk<br/>
+                  $ pacman -S mingw64/mingw-w64-x86_64-ntldd-git
+                </code>
+              </blockquote>
+            </p>
+            <p>
+              <strong>Note:</strong> Close the shell before proceeding to the remaining process.            </p>
+
+          </blockquote>
+
+          <h4>
+            Install SDL_Pango and SDL_gfx on the 64bit environment          </h4>
+
+          <blockquote>
+            <p>
+              SDL_Pango and SDL_gfx should be installed manually.            </p>
+            <p>
+              This time, use the MinGW "64bit" shell. Open the shell from the "Start Menu" -&gt; "MSYS2 64bit" -&gt; "MSYS2 MinGW 64-bit"            </p>
+
+            <h5>SDL_Pango</h5>
+
+            <blockquote>
+
+              <p>
+                At first, you have to prepare source tar-ball and a required patch in the same directory.              </p>
+              <ul>
+                <li>
+                  Download <a href="https://sourceforge.net/projects/sdlpango/files/SDL_Pango/0.1.2/SDL_Pango-0.1.2.tar.gz/download">source tar-ball of SDL_Pango-0.1.2</a> from <a href="https://sourceforge.net/projects/sdlpango/">SDL_Pango's page on Sourceforge.net</a>.                </li>
+                <li>
+                  Download <a href="http://johnnypops.co.uk/tuxpaint/SDL_Pango-configure-extra-api.patch">a patch file</a> from <a href="http://www.johnnypops.co.uk/tuxpaint/">John Popplewell's "Tux Paint - MinGW/MSYS build instructions" webpage</a>.                  (This adds some extra (required) functionality to SDL_Pango.)                </li>
+              </ul>
+              <p>
+                Build and install SDL_Pango as follows.                <blockquote>
+                  <code>
+                    $ tar zxvf SDL_Pango-0.1.2.tar.gz<br/>
+                    $ cd SDL_Pango-0.1.2/<br/>
+                    $ patch -p0 &lt; ../SDL_Pango-configure-extra-api.patch<br/>
+                    $ ./configure --prefix=/mingw64  &amp;&amp; make &amp;&amp; make install
+                  </code>
+                </blockquote>
+              </p>
+            </blockquote>
+
+            <h5>SDL_gfx</h5>
+            <blockquote>
+              <p>
+                  Download <a href="https://sourceforge.net/projects/sdlgfx/files/SDL_gfx-2.0.25.tar.gz/download">source tar-ball of SDL_gfx-2.0.25</a> from <a href="https://sourceforge.net/projects/sdlgfx/">SDL_gfx's page on Sourceforge.net</a>.              </p>
+              <p>
+                Install SDL_gfx as follows.                <blockquote>
+                  <code>
+                    $ tar zxvf SDL_gfx-2.0.25.tar.gz<br/>
+                    $ cd SDL_gfx-2.0.25<br/>
+                    $ ./configure --prefix=/mingw64 &amp;&amp; make &amp;&amp; make install
+                  </code>
+                </blockquote>
+              </p>
+            </blockquote>
+
+          </blockquote>
+
+                      <p>
+              <i>
+                Proceed to the next "<a href="#32bit">MinGW 32bit (i686) toolchains</a>" section, or skip to the "<a href="#imagemagick">ImageMagick</a>" section if you need only a 64bit build environment.              </i>
+            </p>
+                      <hr size="1" noshade width="75%" />
+          <h4>
+            <a name="32bit" id="32bit">
+              MinGW 32bit (i686) toolchains            </a>
+          </h4>
+
+          <blockquote>
+            <p>
+              Within the MSYS2 shell, run the following command to install basic 32bit development tools:              <blockquote>
+                <code>
+                  pacman -S mingw-w64-i686-toolchain
+                </code>
+              </blockquote>
+            </p>
+
+          </blockquote>
+
+          <h4>
+            32bit (i686) dependency libraries for Tux Paint          </h4>
+
+          <blockquote>
+            <p>
+              You can install tools and libraries required for compiling Tux Paint on MSYS2/MINGW using "<code>pacman</code>" except for SDL_Pango and SDL_gfx.            </p>
+            <p>
+              "<code>ntldd</code>" is a small tool which examine windows executable files to list Dynamic Link Library (<code>.dll</code>) files they depends on. Tux Paint's packaging process for binary distribution uses it to find required <code>.dll</code> files.            </p>
+            <p>
+              FLTK is a cross-platform GUI toolkit used by "Tux Paint Config.". You can skip installing it if you are <em>only</em> building "Tux Paint".            </p>
+            <p>
+              <blockquote>
+                <code>
+                  $ pacman -S mingw-w64-i686-SDL_{image,mixer,ttf}<br/>
+                  $ pacman -S mingw-w64-i686-librsvg<br/>
+                  $ pacman -S mingw-w64-i686-fribidi<br/>
+                  $ pacman -S mingw-w64-i686-libimagequant<br/>
+                  $ pacman -S mingw-w64-i686-fltk<br/>
+                  $ pacman -S mingw-w64-i686-ntldd-git
+                </code>
+              </blockquote>
+            </p>
+            <p>
+              <strong>Note:</strong> Close the shell before proceeding to the remaining process.            </p>
+
+          </blockquote>
+
+          <h4>
+            Install SDL_Pango and SDL_gfx on the 32bit environment          </h4>
+
+          <blockquote>
+            <p>
+              SDL_Pango and SDL_gfx should be installed manually.            </p>
+            <p>
+              This time, use the MinGW "32bit" shell. Open the shell from the "Start Menu" -&gt; "MSYS2 64bit" -&gt; "MSYS2 MinGW 32-bit"            </p>
+
+            <h5>SDL_Pango</h5>
+
+            <blockquote>
+
+              <p>
+                At first, you have to prepare source tar-ball and a required patch in the same directory.              </p>
+              <ul>
+                <li>
+                  Download <a href="https://sourceforge.net/projects/sdlpango/files/SDL_Pango/0.1.2/SDL_Pango-0.1.2.tar.gz/download">source tar-ball of SDL_Pango-0.1.2</a> from <a href="https://sourceforge.net/projects/sdlpango/">SDL_Pango's page on Sourceforge.net</a>.                </li>
+                <li>
+                  Download <a href="http://johnnypops.co.uk/tuxpaint/SDL_Pango-configure-extra-api.patch">a patch file</a> from <a href="http://www.johnnypops.co.uk/tuxpaint/">John Popplewell's "Tux Paint - MinGW/MSYS build instructions" webpage</a>.                  (This adds some extra (required) functionality to SDL_Pango.)                </li>
+              </ul>
+              <p>
+                Build and install SDL_Pango as follows.                <blockquote>
+                  <code>
+                    $ tar zxvf SDL_Pango-0.1.2.tar.gz<br/>
+                    $ cd SDL_Pango-0.1.2/<br/>
+                    $ patch -p0 &lt; ../SDL_Pango-configure-extra-api.patch<br/>
+                    $ ./configure --prefix=/mingw32  &amp;&amp; make &amp;&amp; make install
+                  </code>
+                </blockquote>
+              </p>
+            </blockquote>
+
+            <h5>SDL_gfx</h5>
+            <blockquote>
+              <p>
+                  Download <a href="https://sourceforge.net/projects/sdlgfx/files/SDL_gfx-2.0.25.tar.gz/download">source tar-ball of SDL_gfx-2.0.25</a> from <a href="https://sourceforge.net/projects/sdlgfx/">SDL_gfx's page on Sourceforge.net</a>.              </p>
+              <p>
+                Install SDL_gfx as follows.                <blockquote>
+                  <code>
+                    $ tar zxvf SDL_gfx-2.0.25.tar.gz<br/>
+                    $ cd SDL_gfx-2.0.25<br/>
+                    $ ./configure --prefix=/mingw32 &amp;&amp; make &amp;&amp; make install
+                  </code>
+                </blockquote>
+              </p>
+            </blockquote>
+
+          </blockquote>
+
+          
+        <hr size="1" noshade width="75%" />
+
+        <h4>
+          <a name="imagemagick" id="imagemagick">ImageMagick</a>
+        </h4>
+
+        <blockquote>
+          <p>
+            <a href="https://imagemagick.org">ImageMagick</a> is a compilation of command line tools to create, edit, compose, or convert bitmap images supporting quite a large number of image formats. Tux Paint uses two functions ("convert" and "composite") in it to generate thumbnails for startar images and templates during the build process.          </p>
+          <p>
+            Using official binary release available from "<a href="https://imagemagick.org/script/download.php#windowsand">Windows Binary Release</a>" is recommended, due to the commands installed with "<code>pacman</code>" on MinGW/MSYS not working as expected!          </p>
+          <p>
+            Do not forget to enable "Install legacy utilities (e.g. convert)" while installing it, because Tux Paint's build process uses them.          </p>
+          <p>
+            Add the path to the directory in which ImageMagick is installed at the top of your "PATH" environment variable. For example:            <blockquote>
+              <code>
+                $ export PATH=/c/Program\ Files/ImageMagick-7.0.10-Q16-HDRI:$PATH
+              </code>
+            </blockquote>
+          </p>
+          <p>
+            You can make this permanent by adding the above to your the BASH shell configuration file, "<code>~/.bash_profile</code>".          </p>
+        </blockquote>
+
+        <hr size="1" noshade width="75%" />
+
+        <h4>Tux Paint</h4>
+
+        <blockquote>
+          <p>
+            You can compile 64bit binaries using MSYS2 64bit shell, and 32bit binaries using MSYS2 32bit shell, respectively.          </p>
+          <ul>
+            <li>
+              Select "MSYS2 64bit" -&gt; "MSYS2 MinGW 64-bit" from the "Start Menu" to open the 64bit shell.            </li>
+            <li>
+              Select "MSYS2 64bit" -&gt; "MSYS2 MinGW 32-bit" from the "Start Menu" to open the 32bit shell.            </li>
+          </ul>
+          <p>
+            Compile Tux Paint with the following command:            <blockquote>
+              <code>
+                $ make bdist-win32
+              </code>
+            </blockquote>
+          </p>
+          <p>
+            <strong>Note:</strong> At this point, you will want to build "Tux Paint Config." for Windows, so it can be included along with "Tux Paint", if you're making an official (or test) release.  The build process will look for it in a directory named "<code>tuxpaint-config</code>" (with no version number, e.g., "<code>tuxpaint-config-X.Y.Z</code>"). See "Tux Paint Config."'s INSTALL.txt documentation for details.          </p>
+          <p>
+            All the files needed for starting Tux Paint (and Tux Paint Config.) are collected in the directory for binary distribution "<code>bdist</code>" directory under "<code>win32</code>". You can start them by double-clicking their executable (<code>.exe</code>) files in the "<code>bdist</code>" directory.          </p>
+        </blockquote>
+
+        <hr size="1" noshade width="75%" />
+
+        <h4>Building the Tux Paint Windows Installer:</h4>
+        <blockquote>
+
+          <p>
+            <a href="https://jrsoftware.org/isinfo.php">Inno Setup</a> is used to build executable installer for Tux Paint. Therefore you have to install it in the first place.          </p>
+          <p>
+                      </p>
+          <p>
+            Then, you can easily build an executable installer by right-clicking on the "<code>tuxpaint.iss</code>" icon in the "<code>win32</code>" directory and selecting "Compile" on the list.  It will run for a while, and eventually you will find a "<code>tuxpaint-<i>X.Y.Z</i>-win32-installer.exe</code>" file in the same directory.          </p>
+        </blockquote>
+
+        <hr size="1" noshade width="75%" />
+
+        <h4>Running the Tux Paint Windows Installer:</h4>
         <blockquote>
           <p>
             Double-click the Tux Paint installer executable (.EXE file) and follow the instructions.
@@ -230,6 +557,8 @@
           <p>
             At this point, you can click 'Install' to install Tux Paint!          </p>
         </blockquote>
+
+        <hr size="1" noshade width="75%" />
 
         <h4>Changing the Settings Using the Shortcut:</h4>
         <blockquote>
@@ -267,6 +596,8 @@
             When you have finished, click "OK."          </p>
         </blockquote>
 
+        <hr size="1" noshade width="75%" />
+
         <h4>If Something Goes Wrong:</h4>
         <blockquote>
           <p>
@@ -277,7 +608,12 @@
         </blockquote>
       </blockquote>
 
-      <h3>Linux/Unix Users:</h3>
+      <hr size="1" noshade />
+
+      <h3>
+        <a name="compiling-linux" id="compiling-linux">
+          Linux/Unix Users        </a>
+      </h3>
       <blockquote>
         <h4>Compiling:</h4>
         <blockquote>
@@ -294,17 +630,21 @@
           </blockquote>
         </blockquote>
 
+        <hr size="1" noshade width="75%" />
+
         <h4>
           Disabling SVG support (and hence Cairo, libSVG, and svg-cairo dependencies):        </h4>
         <blockquote>
           <p>
-            To disable SVG support (e.g., if your system is not currently supported by the Cairo library or other SVG-related dependencies), you can run "<code>make</code>" with "<code>SVG_LIB= SVG_CFLAGS= NOSVGFLAG=NOSVG</code>" added:
+            To disable SVG support (e.g., if your system is not currently supported by the Cairo library or other SVG-related dependencies), you can run "<code>make</code>" with "<code style="white-space: nowrap;">SVG_LIB= SVG_CFLAGS= NOSVGFLAG=NOSVG</code>" added:
           <blockquote>
             <code>
               $ make SVG_LIB= SVG_CFLAGS=
             </code>
           </blockquote>
         </blockquote>
+
+        <hr size="1" noshade width="75%" />
 
         <h4>
           Disabling Pango support (and hence Pango, Cairo, etc. dependencies):        </h4>
@@ -318,6 +658,8 @@
           </blockquote>
         </blockquote>
 
+        <hr size="1" noshade width="75%" />
+
         <h4>Disabling Sound at Compile-time:</h4>
         <blockquote>
           If you don't have a sound card, or would prefer to build the program with no sound support (and therefore without a the <code>SDL_mixer</code> dependency), you can run "<code>make</code>" with "<code>SDL_MIXER_LIB=</code>" added:          </p>
@@ -328,17 +670,23 @@
           </blockquote>
         </blockquote>
 
+        <hr size="1" noshade width="75%" />
+
         <h4>Other options:</h4>
         <blockquote>
           <p>
             Various other options (e.g., installation paths) may be overridden; see them in "<code>Makefile</code>" for further details.          </p>
         </blockquote>
 
+        <hr size="1" noshade width="75%" />
+
         <h4>If you get errors:</h4>
         <blockquote>
           <p>
             If you receive any errors during compile-time, make sure you have the appropriate libraries installed (see above).  If using packaged versions of the libraries (e.g., RPMs under RedHat or DEBs under Debian), be sure to get the corresponding "<code>-dev</code>" or "<code>-devel</code>" packages as well, otherwise you won't be able to compile Tux Paint (and other programs) from source!          </p>
         </blockquote>
+
+        <hr size="1" noshade width="75%" />
 
         <h4>Installng:</h4>
         <blockquote>
@@ -422,15 +770,156 @@
           </blockquote>
         </blockquote>
       </blockquote>
+
+      <hr size="1" noshade />
+
+      <h3>
+        <a name="compiling-macos" id="compiling-macos">
+          macOS Users        </a>
+      </h3>
+      <p style="font-size: small;">
+        <em>
+          September 21, 2021          Mark K. Kim &lt;<a href="mailto:markuskimius@gmail.com">markuskimius@gmail.com</a>&gt;
+        </em>
+      </p>
+
+      <blockquote>
+        <p>
+          Tux Paint 0.9.22 and earlier required building Tux Paint from the Xcode IDE. Starting with 0.9.23, however, Tux Paint for macOS is built as though it were a Linux application.        </p>
+
+        <h4>Prerequisites</h4>
+        <blockquote>
+          <p>
+            Although Tux Paint is built without the Xcode IDE, Xcode itself is still required to build Tux Paint. <a href="https://developer.apple.com/xcode/ide/">Download it from the App Store</a>, and launch it once to accept its license agreements. You may also need to install the Xcode command line tools using the command:            <blockquote>
+              <code>
+                xcode-select --install
+              </code>
+            </blockquote>
+          </p>
+
+          <p>
+            Building Tux Paint also requires various libraries. We install them from MacPorts where possible, source code otherwise. Install MacPorts to the default <code>/opt/local</code> path according to the instructions found on their website: <a href="https://www.macports.org/">https://www.macports.org/</a>            <ul>
+              <li><code>ImageMagick</code></li>
+              <li><code>cairo</code></li>
+              <li><code>fribidi</code></li>
+              <li><code>lbzip2</code></li>
+              <li><code>libimagequant</code><sup>*</sup></li>
+              <li><code>libpaper</code></li>
+              <li><code>libpng</code></li>
+              <li><code>librsvg</code></li>
+              <li><code>libsdl</code></li>
+              <li><code>libsdl_image</code></li>
+              <li><code>libsdl_mixer</code></li>
+              <li><code>libsdl_pango</code></li>
+              <li><code>libsdl_ttf</code></li>
+              <li><code>libsdl_gfx</code></li>
+              <li><code>pkgconfig</code></li>
+              <li><code>zlib</code></li>
+            </ul>
+            ... but you should install any package that is required by the latest version of Tux Paint.<br/>
+            <br/>
+            <sup>*</sup> Not available from MacPorts as of this writing, see below.          </p>
+
+          <h5>libimagequant</h5>
+          <blockquote>
+            <p>
+              <code>libimagequant</code> is not available from MacPorts as of this writing. It can be installed from the source code as follows. It should be installed to <code>/opt/local</code> (same as MacPorts) for the library to be included in <code>TuxPaint.dmg</code>.              <blockquote>
+                <code>
+                  $ git clone https://github.com/ImageOptim/libimagequant.git<br/>
+                  $ cd libimagequant<br/>
+                  $ ./configure --prefix=/opt/local<br/>
+                  $ make<br/>
+                  $ sudo make install
+                </code>
+              </blockquote>
+            </p>
+
+          </blockquote>
+
+          <p>
+            <strong>WARNING:</strong> Having any UNIX-like toolset installed on your Mac besides MacPorts and Xcode, such as Fink or Brew, will prevent your app bundle from being portable. Be sure Fink and Brew are not accessible from your build environment.          </p>
+        </blockquote>
+
+        <hr size="1" noshade width="75%" />
+
+        <h4>How to Build</h4>
+        <blockquote>
+          <p>
+            Simply, run:            <blockquote>
+              <code>
+                % make<br/>
+                % make install
+              </code>
+            </blockquote>
+            ... to create the <code>TuxPaint.app</code> application bundle that can be run in-place or copied to <code>/Applications</code>. It also creates <code>TuxPaint.dmg</code> for distribution.          </p>
+        </blockquote>
+
+        <hr size="1" noshade width="75%" />
+
+        <h4>Known Issues</h4>
+        <blockquote>
+          <ul>
+            <li>
+              A macOS binary built on a specific version of macOS only runs on that version of macOS or later.  To ensure Tux Paint can run on the oldest version of macOS possible, build it on the oldest version of macOS available.  As of this writing we know Tux Paint cannot be built to run on macOS 10.7 or earlier.<br/>
+              <br/>
+              See "Old Versions of macOS" below for best-effort instructions on how to obtain, install, and build Tux Paint on an old version of macOS.            </li>
+          </ul>
+        </blockquote>
+
+        <hr size="1" noshade width="75%" />
+
+        <h4>Old Versions of macOS</h4>
+        <blockquote>
+          <p>
+            Some old versions of macOS can be downloaded from Apple's support page: <a href="https://support.apple.com/en-us/HT211683">https://support.apple.com/en-us/HT211683</a>          </p>
+
+          <p>
+            macOS does allow dual booting of multiple versions of the OS, but it's safer and easier to install the old macOS onto a flash drive.  Wherever you're installing it, the target drive's partitioniong scheme and partition type must match what the old macOS expects, so use the Disk Utility to partition and format the flash drive accordingly.          </p>
+
+          <p>
+            As of this writing, the oldest version of macOS available on Apple's support site is Yosemite 10.10, which expects "GPT (GUID Partition Table)" partitioning scheme instead of the older MBR scheme, and "Mac OS Extended (Journaled)" as the partition type instead of the newer APFS partition type.          </p>
+
+          <p>
+            Upon launching the installer, if you get a popup about macOS being too old or new to be installed, a bootable installer can be created using the instructions found here: <a href="https://support.apple.com/en-mide/HT201372">https://support.apple.com/en-mide/HT201372</a>          </p>
+
+          <p>
+            It has been found that macOS can be installed onto the bootable media itself, so you can make the flash drive into a bootable installer then install the old macOS onto the same flash drive.          </p>
+
+          <p>
+            Once the old macOS is installed, you may find the Xcode on the App Store is too new to run on the version of the old macOS.  Old versions of Xcode can be downloaded from Apple's Developer site in an area accessible with free registration: <a href="https://developer.apple.com/download/more/">https://developer.apple.com/download/more/</a>          </p>
+
+          <p>
+            The list of macOS versions and the last version of Xcode compatible with them are laid out nicely on the Wikipedia page on Xcode: <a href="https://en.wikipedia.org/wiki/Xcode#Version_comparison_table">https://en.wikipedia.org/wiki/Xcode#Version_comparison_table</a>          </p>
+
+          <p>
+            And because Xcode is being installed manually, you can skip the step to install the Xcode command line tools (do not run "<code style="white-space: nowrap;">xcode-select --install</code>") but otherwise build Tux Paint using the same steps described in the earlier part of this document.          </p>
+
+        </blockquote>
+
+      </blockquote>
+
     </blockquote>
 
-    <h2>Debugging:</h2>
-    <blockquote>
-      Debugging (to "STDOUT", e.g. to the terminal, or to a "<code>stdout.txt</code>" file, on Windows) can be enabled by setting "<code>DEBUG</code>" (and, if verbose logging is wanted, "<code>VERBOSE</code>") <code>#define</code>s in "<code>src/debug.h</code>".    </blockquote>
+    <hr size="2" noshade />
 
-    <h2>Uninstalling Tux Paint:</h2>
+    <h2>
+      <a name="debugging" id="debugging">
+        Debugging      </a>
+    </h2>
     <blockquote>
-      <h3>Windows</h3>
+      Debugging output &mdash; to "STDOUT" on Linux and Unix, to a "<code>stdout.txt</code>" file on Windows, and to the file "<code>/tmp/tuxpaint.log</code>" on macOS &mdash; can be enabled by setting "<code>DEBUG</code>" (and, if verbose logging is wanted, "<code>VERBOSE</code>") <code>#define</code>s in "<code>src/debug.h</code>" and (re)compiling Tux Paint.    </blockquote>
+
+    <hr size="2" noshade />
+
+    <h2>
+      <a name="uninstalling" id="uninstalling">
+        Uninstalling Tux Paint      </h2>
+    </h2>
+    <blockquote>
+      <h3>
+        <a name="uninstalling-windows" id="uninstalling-windows">
+          Windows        </a>
+      </h3>
       <blockquote>
         <h4>Using the Uninstaller</h4>
         <blockquote>
@@ -448,10 +937,27 @@
         </blockquote>
       </blockquote>
 
-      <h3>Linux</h3>
+      <hr size="1" noshade />
+
+      <h3>
+        <a name="uninstalling-macos" id="uninstalling-macos">
+          macOS        </a>
+      </h3>
+
       <blockquote>
         <p>
-          Within the Tux Paint source directory (where you compiled Tux Paint), you can use the "<code>make uninstall</code>" target to uninstall Tux Paint. By default, this must be done by the "root" user ('superuser'), but if you installed Tux Paint somewhere else (e.g., using a "<code>PREFIX=...</code>" setting to "<code>make</code>" and "<code>make install</code>"), you may not, and will want to provide those same settings here. (See the installation instructions above for further information.)        </p>
+          Delete "<code>TuxPaint.app</code>" from the "Applications" folder. Data files, including the configuration files, stamps, and saved pictures, may be found in "<code style="white-space: nowrap;">Library/Application Support/TuxPaint</code>" (all users) and "<code style="white-space: nowrap;">/Users/<i>USERNAME</i>/Library/Application Support/TuxPaint</code>" (individual users).        </p>
+      </blockquote>
+
+      <hr size="1" noshade />
+
+      <h3>
+        <a name="uninstalling-linux" id="uninstalling-linux">
+          Linux        </a>
+      </h3>
+      <blockquote>
+        <p>
+          Within the Tux Paint source directory (where you compiled Tux Paint), you can use the "<code style="white-space: nowrap;">make uninstall</code>" target to uninstall Tux Paint. By default, this must be done by the "root" user ('superuser'), but if you installed Tux Paint somewhere else (e.g., using a "<code>PREFIX=...</code>" setting to "<code>make</code>" and "<code style="white-space: nowrap;">make install</code>"), you may not, and will want to provide those same settings here. (See the <a href="#compiling-linux">installation instructions above</a> for further information.)        </p>
       </blockquote>
     <blockquote>
   </body>

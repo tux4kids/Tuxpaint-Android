@@ -1,12 +1,12 @@
                                    Tux Paint
-                                 versión 0.9.26
+                                 versión 0.9.27
 
   Un sinxelo programa de debuxo para cativos
 
     Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
-                               28 de Xuño de 2021
+                             5 de Setembro de 2021
 
      ----------------------------------------------------------------------
 
@@ -226,6 +226,22 @@ Ferramentas dispoñíbeis
                  Se mantén premido o botón do rato e move o rato, irá
                  debuxando a medida que se move.
 
+                 Some brushes are animated — they change their shape as you
+                 draw them. A good example of this is the vines brush that
+                 ships with Tux Paint. These brushes will have a small
+                 "filmstrip" icon drawn on their Selector buttons.
+
+                 Other brushes are directional — they will draw a different
+                 shape depending on what direction you are painting with
+                 them. An example of this is the arrow brush that ships with
+                 Tux Paint. These brushes have a small 8-way arrow icon drawn
+                 on their Selector buttons.
+
+                 Finally, some brushes can be both direction and animated.
+                 Examples of this are the cat and squirrel brushes that ship
+                 with Tux Paint. These brushes will have both the "filmstrip"
+                 and 8-way arrow icons.
+
                  Mentres debuxa, soa un son. Canto maior sexa o pincel, menor
                  será o ton.
 
@@ -286,6 +302,12 @@ Ferramentas dispoñíbeis
                  |elástica» amosará onde se trazará a liña.
 
                  Solte o rato para completar a liña. Soará un «chimpo».
+
+                 Some brushes are animated, and will show a pattern of shapes
+                 along the line. Others are directional, and will show a
+                 different shape depending on the angle of the brush. And
+                 finally some are both animated and directional. See "Paint",
+                 above, to learn more.
 
      ----------------------------------------------------------------------
 
@@ -348,8 +370,8 @@ Ferramentas dispoñíbeis
                  inferior). prema na pantalla e aparecerá un cursor. Escriba
                  un texto e aparecerá na pantalla.
 
-                 Prema [Enter] ou [Return] e o texto será debuxado na imaxe e
-                 o cursor moverase cara abaixo unha liña.
+                 Prema [Intro] ou [Retorno] e o texto será debuxado na imaxe
+                 e o cursor moverase cara abaixo unha liña.
 
                  Como alternativa, prema [Tab] e o texto será debuxado na
                  imaxe, mais o cursor moverase á dereita do texto, no canto

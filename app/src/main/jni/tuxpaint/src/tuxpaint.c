@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - April 19, 2021
+  June 14, 2002 - September 25, 2021
 */
 
 #include "platform.h"
@@ -417,6 +417,15 @@ static void mtw(wchar_t * wtok, char *tok)
 #error "If you installed SDL_ttf from a package, be sure"
 #error "to get the development package, as well!"
 #error "(e.g., 'libsdl-ttf1.2-devel.rpm')"
+#error "---------------------------------------------------"
+#endif
+
+#include "SDL2_rotozoom.h"
+#if !defined(_SDL2_rotozoom_h)
+#error "---------------------------------------------------"
+#error "If you installed SDL_gfx from a package, be sure"
+#error "to get the development package, as well!"
+#error "(e.g., 'libsdl-gfx1.2-devel.rpm')"
 #error "---------------------------------------------------"
 #endif
 
@@ -1477,6 +1486,7 @@ static void special_notify(int flags);
 typedef struct magic_funcs_s
 {
   int (*get_tool_count) (magic_api *);
+  int (*get_group) (magic_api *, int);
   char *(*get_name) (magic_api *, int);
   SDL_Surface *(*get_icon) (magic_api *, int);
   char *(*get_description) (magic_api *, int, int);
@@ -1502,6 +1512,7 @@ typedef struct magic_s
   int mode;                     /* Current mode (paint or fullscreen) */
   int avail_modes;              /* Available modes (paint &/or fullscreen) */
   int colors;                   /* Whether magic tool accepts colors */
+  int group;                    /* Which group of magic tools this lives in */
   char *name;                   /* Name of magic tool */
   char *tip[MAX_MODES];         /* Description of magic tool, in each possible mode */
   SDL_Surface *img_icon;
@@ -1509,14 +1520,16 @@ typedef struct magic_s
 } magic_t;
 
 
-/* FIXME: Drop the 512 constants :^P */
+#define MAX_MAGIC_GROUPS 16
+#define MAX_MAGICS_PER_GROUP 128
 
 static int num_plugin_files;    /* How many shared object files we went through */
-static void *magic_handle[512]; /* Handle to shared object (to be unloaded later) *//* FIXME: Unload them! */
-static magic_funcs_t magic_funcs[512];  /* Pointer to shared objects' functions */
+static void *magic_handle[MAX_MAGIC_GROUPS * MAX_MAGICS_PER_GROUP]; /* Handle to shared object (to be unloaded later) *//* FIXME: Unload them! */
+static magic_funcs_t magic_funcs[MAX_MAGIC_GROUPS * MAX_MAGICS_PER_GROUP];  /* Pointer to shared objects' functions */
 
-static magic_t magics[512];
-static int num_magics;          /* How many magic tools were loaded (note: shared objs may report more than 1 tool) */
+static magic_t magics[MAX_MAGIC_GROUPS][MAX_MAGICS_PER_GROUP];
+static int num_magics[MAX_MAGIC_GROUPS];  /* How many magic tools were loaded (note: shared objs may report more than 1 tool) */
+static int num_magics_total;
 
 enum
 {
@@ -1577,6 +1590,7 @@ static SDL_Surface *img_title, *img_title_credits, *img_title_tuxpaint;
 static SDL_Surface *img_btn_up, *img_btn_down, *img_btn_off, *img_btn_hold;
 static SDL_Surface *img_btnsm_up, *img_btnsm_off, *img_btnsm_down, *img_btnsm_hold;
 static SDL_Surface *img_btn_nav, *img_btnsm_nav;
+static SDL_Surface *img_brush_anim, *img_brush_dir;
 static SDL_Surface *img_prev, *img_next;
 static SDL_Surface *img_mirror, *img_flip;
 static SDL_Surface *img_dead40x40;
@@ -1914,6 +1928,7 @@ static SDL_Surface **img_brushes, **img_brushes_thumbs;
 static int *brushes_frames = NULL;
 static int *brushes_spacing = NULL;
 static short *brushes_directional = NULL;
+static short *brushes_rotate = NULL;
 
 static SDL_Surface *img_shapes[NUM_SHAPES], *img_shape_names[NUM_SHAPES];
 static SDL_Surface *img_fills[NUM_FILLS], *img_fill_names[NUM_FILLS];
@@ -1949,7 +1964,8 @@ enum
 
 static SDL_Surface *img_cur_brush;
 static int img_cur_brush_frame_w, img_cur_brush_w, img_cur_brush_h,
-  img_cur_brush_frames, img_cur_brush_directional, img_cur_brush_spacing;
+  img_cur_brush_frames, img_cur_brush_directional, img_cur_brush_rotate,
+  img_cur_brush_spacing;
 static int brush_counter, brush_frame;
 
 #define NUM_ERASERS 16          /* How many sizes of erasers
@@ -1962,8 +1978,9 @@ static int brush_counter, brush_frame;
 
 static unsigned cur_color;
 static int cur_tool, cur_brush, old_tool;
+static int magic_group = 0;
 static int cur_stamp[MAX_STAMP_GROUPS];
-static int cur_shape, cur_magic;
+static int cur_shape, cur_magic[MAX_MAGIC_GROUPS];
 static int cur_font, cur_eraser, cur_fill, fill_drag_started;
 static int cursor_left, cursor_x, cursor_y, cursor_textwidth;   /* canvas-relative */
 static int old_cursor_x, old_cursor_y;
@@ -1974,7 +1991,8 @@ static char starter_id[FILENAME_MAX];
 static char template_id[FILENAME_MAX];
 static int brush_scroll;
 static int stamp_scroll[MAX_STAMP_GROUPS];
-static int font_scroll, magic_scroll, tool_scroll;
+static int magic_scroll[MAX_MAGIC_GROUPS];
+static int font_scroll, tool_scroll;
 static int eraser_scroll, shape_scroll, fill_scroll;
 
 static int eraser_sound;
@@ -2029,7 +2047,7 @@ SDL_Joystick *joystick;
 
 static void mainloop(void);
 static void brush_draw(int x1, int y1, int x2, int y2, int update);
-static void blit_brush(int x, int y, int direction);
+static void blit_brush(int x, int y, int direction, int rotation, int * w, int * h);
 static void stamp_draw(int x, int y);
 static void rec_undo_buffer(void);
 
@@ -2088,6 +2106,7 @@ static int compare_dirent2s(struct dirent2 *f1, struct dirent2 *f2);
 static void redraw_tux_text(void);
 static void draw_tux_text(int which_tux, const char *const str, int want_right_to_left);
 static void draw_tux_text_ex(int which_tux, const char *const str, int want_right_to_left, Uint8 locale_text);
+static void draw_cur_tool_tip(void);
 static void wordwrap_text(const char *const str, SDL_Color color, int left, int top, int right, int want_right_to_left);
 static void wordwrap_text_ex(const char *const str, SDL_Color color,
                              int left, int top, int right, int want_right_to_left, Uint8 locale_text);
@@ -2747,10 +2766,11 @@ static void mainloop(void)
                   else if (cur_tool == TOOL_FILL)
                     draw_fills();
 
-                  draw_tux_text(TUX_GREAT, tool_tips[cur_tool], 1);
+                  draw_cur_tool_tip();
 
                   /* FIXME: Make delay configurable: */
                   control_drawtext_timer(1000, tool_tips[cur_tool], 0);
+                  /* FIXME: May need to use draw_cur_tool_tip() here? -bjk 2021.09.06 */
 
                   magic_switchin(canvas);
                 }
@@ -3332,7 +3352,7 @@ static void mainloop(void)
 
                           /* FIXME: this "if" is just plain gross */
                           if (cur_tool != TOOL_TEXT)
-                            draw_tux_text(tool_tux[cur_tool], tool_tips[cur_tool], 1);
+                            draw_cur_tool_tip();
 
                           /* Draw items for this tool: */
 
@@ -3466,7 +3486,7 @@ static void mainloop(void)
                                   SDL_SetTextInputRect(&r_tir);
                                   SDL_StartTextInput();
                                 }
-                              draw_tux_text(tool_tux[cur_tool], tool_tips[cur_tool], 1);
+                              draw_cur_tool_tip();
 
                               if (num_font_families > 0)
                                 {
@@ -3490,18 +3510,18 @@ static void mainloop(void)
                           else if (cur_tool == TOOL_MAGIC)
                             {
                               keybd_flag = 0;
-                              cur_thing = cur_magic;
-                              num_things = num_magics;
-                              thing_scroll = &magic_scroll;
+                              cur_thing = cur_magic[magic_group];
+                              num_things = num_magics[magic_group];
+                              thing_scroll = &(magic_scroll[magic_group]);
                               magic_current_snd_ptr = NULL;
                               draw_magic();
-                              draw_colors(magics[cur_magic].colors);
+                              draw_colors(magics[magic_group][cur_thing].colors);
 
-                              if (magics[cur_magic].colors)
-                                magic_funcs[magics[cur_magic].handle_idx].set_color(magic_api_struct,
-                                                                                    color_hexes[cur_color][0],
-                                                                                    color_hexes[cur_color][1],
-                                                                                    color_hexes[cur_color][2]);
+                              if (magics[magic_group][cur_thing].colors)
+                                magic_funcs[magics[magic_group][cur_thing].handle_idx].set_color(magic_api_struct,
+                                                                                                 color_hexes[cur_color][0],
+                                                                                                 color_hexes[cur_color][1],
+                                                                                                 color_hexes[cur_color][2]);
                             }
                           else if (cur_tool == TOOL_ERASER)
                             {
@@ -3573,7 +3593,7 @@ static void mainloop(void)
                               draw_toolbar();
                               update_screen_rect(&r_tools);
 
-                              draw_tux_text(TUX_GREAT, tool_tips[cur_tool], 1);
+                              draw_cur_tool_tip();
 
                               draw_colors(COLORSEL_REFRESH);
 
@@ -3833,6 +3853,11 @@ static void mainloop(void)
                         {
                           if (!disable_magic_controls)
                             {
+                              gd_controls.rows = 2;
+                              gd_controls.cols = 2;
+                            }
+                          else
+                            {
                               gd_controls.rows = 1;
                               gd_controls.cols = 2;
                             }
@@ -4018,40 +4043,92 @@ static void mainloop(void)
                             }
                           else if (cur_tool == TOOL_MAGIC)
                             {
-                              /* Magic controls! */
-                              if (which == 1 && magics[cur_magic].avail_modes & MODE_FULLSCREEN)
+                              int grp;
+                              int cur;
+
+                              grp = magic_group;
+                              cur = cur_magic[grp];
+
+                              if (which == 0 || which == 1)
                                 {
-                                  magic_switchout(canvas);
-                                  magics[cur_magic].mode = MODE_FULLSCREEN;
-                                  magic_switchin(canvas);
+                                  int tries = 0;
+
+                                  /* Magic pagination */
+                                  do
+                                    {
+                                      tries++;
+
+                                      if (which == 0)
+                                        {
+                                          magic_group--;
+                                          if (magic_group < 0)
+                                            magic_group = MAX_MAGIC_GROUPS - 1;
+                                        }
+                                      else if (which == 1)
+                                        {
+                                          magic_group++;
+                                          if (magic_group >= MAX_MAGIC_GROUPS)
+                                            magic_group = 0;
+                                        }
+                                    }
+                                  while (num_magics[magic_group] == 0 && tries < MAX_MAGIC_GROUPS);
+
+                                  keybd_flag = 0;
+                                  cur_thing = cur_magic[magic_group];
+                                  num_things = num_magics[magic_group];
+                                  thing_scroll = &(magic_scroll[magic_group]);
+                                  magic_current_snd_ptr = NULL;
+
                                   draw_magic();
                                   update_screen_rect(&r_toolopt);
+
+                                  draw_colors(magics[magic_group][cur_thing].colors);
+    
+                                  if (magics[magic_group][cur_thing].colors)
+                                    magic_funcs[magics[magic_group][cur_thing].handle_idx].set_color(magic_api_struct,
+                                                                                                     color_hexes[cur_color][0],
+                                                                                                     color_hexes[cur_color][1],
+                                                                                                     color_hexes[cur_color][2]);
+
+                                  playsound(screen, 0, SND_CLICK, 0, SNDPOS_CENTER, SNDDIST_NEAR);
                                 }
-                              else if (which == 0 && magics[cur_magic].avail_modes & MODE_PAINT)
-                                {
-                                  magic_switchout(canvas);
-                                  magics[cur_magic].mode = MODE_PAINT;
-                                  magic_switchin(canvas);
-                                  draw_magic();
-                                  update_screen_rect(&r_toolopt);
+                              else
+                                { 
+                                  /* Magic controls! */
+                                  if (which == 3 && magics[grp][cur].avail_modes & MODE_FULLSCREEN)
+                                    {
+                                      magic_switchout(canvas);
+                                      magics[grp][cur].mode = MODE_FULLSCREEN;
+                                      magic_switchin(canvas);
+                                      draw_magic();
+                                      update_screen_rect(&r_toolopt);
+                                    }
+                                  else if (which == 2 && magics[grp][cur].avail_modes & MODE_PAINT)
+                                    {
+                                      magic_switchout(canvas);
+                                      magics[grp][cur].mode = MODE_PAINT;
+                                      magic_switchin(canvas);
+                                      draw_magic();
+                                      update_screen_rect(&r_toolopt);
+                                    }
+                                  else if (which == 2 && magics[grp][cur].avail_modes & MODE_PAINT_WITH_PREVIEW)
+                                    {
+                                      magic_switchout(canvas);
+                                      magics[grp][cur].mode = MODE_PAINT_WITH_PREVIEW;
+                                      magic_switchin(canvas);
+                                      draw_magic();
+                                      update_screen_rect(&r_toolopt);
+                                    }
+                                  else if (which == 2 && magics[grp][cur].avail_modes & MODE_ONECLICK)
+                                    {
+                                      magic_switchout(canvas);
+                                      magics[grp][cur].mode = MODE_ONECLICK;
+                                      magic_switchin(canvas);
+                                      draw_magic();
+                                      update_screen_rect(&r_toolopt);
+                                    }
+                                  /* FIXME: Sfx */
                                 }
-                              else if (which == 0 && magics[cur_magic].avail_modes & MODE_PAINT_WITH_PREVIEW)
-                                {
-                                  magic_switchout(canvas);
-                                  magics[cur_magic].mode = MODE_PAINT_WITH_PREVIEW;
-                                  magic_switchin(canvas);
-                                  draw_magic();
-                                  update_screen_rect(&r_toolopt);
-                                }
-                              else if (which == 0 && magics[cur_magic].avail_modes & MODE_ONECLICK)
-                                {
-                                  magic_switchout(canvas);
-                                  magics[cur_magic].mode = MODE_ONECLICK;
-                                  magic_switchin(canvas);
-                                  draw_magic();
-                                  update_screen_rect(&r_toolopt);
-                                }
-                              /* FIXME: Sfx */
                             }
                           else if (cur_tool == TOOL_SHAPES)
                             {
@@ -4521,23 +4598,30 @@ static void mainloop(void)
                         }
                       else if (cur_tool == TOOL_MAGIC)
                         {
-                          if (cur_thing != cur_magic)
+                          int grp;
+                          int cur;
+
+                          grp = magic_group;
+                          cur = cur_magic[grp];
+
+                          if (cur_thing != cur)
                             {
+                              cur = cur_thing;
                               magic_switchout(canvas);
 
-                              cur_magic = cur_thing;
-                              draw_colors(magics[cur_magic].colors);
+                              cur_magic[grp] = cur_thing;
+                              draw_colors(magics[grp][cur].colors);
 
-                              if (magics[cur_magic].colors)
-                                magic_funcs[magics[cur_magic].handle_idx].set_color(magic_api_struct,
-                                                                                    color_hexes[cur_color][0],
-                                                                                    color_hexes[cur_color][1],
-                                                                                    color_hexes[cur_color][2]);
+                              if (magics[grp][cur].colors)
+                                magic_funcs[magics[grp][cur].handle_idx].set_color(magic_api_struct,
+                                                                                   color_hexes[cur_color][0],
+                                                                                   color_hexes[cur_color][1],
+                                                                                   color_hexes[cur_color][2]);
 
                               magic_switchin(canvas);
                             }
 
-                          draw_tux_text(TUX_GREAT, magics[cur_magic].tip[magic_modeint(magics[cur_magic].mode)], 1);
+                          draw_tux_text(TUX_GREAT, magics[grp][cur].tip[magic_modeint(magics[grp][cur].mode)], 1);
 
                           if (do_draw)
                             draw_magic();
@@ -4592,7 +4676,7 @@ static void mainloop(void)
                               draw_toolbar();
                               update_screen_rect(&r_tools);
 
-                              draw_tux_text(TUX_GREAT, tool_tips[cur_tool], 1);
+                              draw_cur_tool_tip();
 
                               draw_colors(COLORSEL_FORCE_REDRAW);
 
@@ -4628,10 +4712,11 @@ static void mainloop(void)
                           if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
                             do_render_cur_text(0);
                           else if (cur_tool == TOOL_MAGIC)
-                            magic_funcs[magics[cur_magic].handle_idx].set_color(magic_api_struct,
-                                                                                color_hexes[cur_color][0],
-                                                                                color_hexes[cur_color][1],
-                                                                                color_hexes[cur_color][2]);
+                            magic_funcs[magics[magic_group][cur_magic[magic_group]].handle_idx].set_color(
+                              magic_api_struct,
+                              color_hexes[cur_color][0],
+                              color_hexes[cur_color][1],
+                              color_hexes[cur_color][2]);
                         }
                     }
                 }
@@ -4732,7 +4817,7 @@ static void mainloop(void)
                                                       event.button.x - r_canvas.x, event.button.y - r_canvas.y), 1);
 
                               shape_tool_mode = SHAPE_TOOL_MODE_DONE;
-                              draw_tux_text(TUX_GREAT, tool_tips[TOOL_SHAPES], 1);
+                              draw_tux_text(TUX_GREAT, shape_tool_tips[simple_shapes ? SHAPE_COMPLEXITY_SIMPLE : SHAPE_COMPLEXITY_NORMAL], 1);
                             }
                         }
                       else if (shape_tool_mode == SHAPE_TOOL_MODE_STRETCH)
@@ -4741,6 +4826,12 @@ static void mainloop(void)
                     }
                   else if (cur_tool == TOOL_MAGIC)
                     {
+                      int grp;
+                      int cur;
+
+                      grp = magic_group;
+                      cur = cur_magic[grp];
+
                       if (!emulate_button_pressed)
                         {
                           int undo_ctr;
@@ -4775,12 +4866,12 @@ static void mainloop(void)
 
                           reset_touched();
 
-                          magic_funcs[magics[cur_magic].handle_idx].click(magic_api_struct,
-                                                                          magics[cur_magic].idx,
-                                                                          magics[cur_magic].mode,
-                                                                          canvas, last, old_x, old_y, &update_rect);
+                          magic_funcs[magics[grp][cur].handle_idx].click(magic_api_struct,
+                                                                         magics[grp][cur].idx,
+                                                                         magics[grp][cur].mode,
+                                                                         canvas, last, old_x, old_y, &update_rect);
 
-                          draw_tux_text(TUX_GREAT, magics[cur_magic].tip[magic_modeint(magics[cur_magic].mode)], 1);
+                          draw_tux_text(TUX_GREAT, magics[grp][cur].tip[magic_modeint(magics[grp][cur].mode)], 1);
 
                           update_canvas(update_rect.x, update_rect.y,
                                         update_rect.x + update_rect.w, update_rect.y + update_rect.h);
@@ -4788,7 +4879,7 @@ static void mainloop(void)
 
                       if (mouseaccessibility)
                         {
-                          if (magics[cur_magic].mode != MODE_FULLSCREEN && magics[cur_magic].mode != MODE_ONECLICK)     /* Note: some non-fullscreen tools are also click-only (not click-and-drag) -bjk 2011.04.26 */
+                          if (magics[grp][cur].mode != MODE_FULLSCREEN && magics[grp][cur].mode != MODE_ONECLICK)     /* Note: some non-fullscreen tools are also click-only (not click-and-drag) -bjk 2011.04.26 */
                             emulate_button_pressed = !emulate_button_pressed;
                         }
                     }
@@ -4817,13 +4908,13 @@ static void mainloop(void)
 
                       fill_x = old_x;
                       fill_y = old_y;
-    
+
                       if (would_flood_fill(canvas, draw_color, canv_color))
                         {
                           int x1, y1, x2, y2;
                           SDL_Surface * last;
                           int undo_ctr;
-    
+
                           /* We only bother recording an undo buffer
                              (which may kill our redos) if we're about
                              to actually change the picture */
@@ -5195,6 +5286,11 @@ static void mainloop(void)
                         {
                           if (!disable_magic_controls)
                             {
+                              gd_controls.rows = 2;
+                              gd_controls.cols = 2;
+                            }
+                          else
+                            {
                               gd_controls.rows = 1;
                               gd_controls.cols = 2;
                             }
@@ -5474,7 +5570,7 @@ static void mainloop(void)
                                   SDL_Flip(screen);
 
                                   shape_tool_mode = SHAPE_TOOL_MODE_DONE;
-                                  draw_tux_text(TUX_GREAT, tool_tips[TOOL_SHAPES], 1);
+                                  draw_tux_text(TUX_GREAT, shape_tool_tips[simple_shapes ? SHAPE_COMPLEXITY_SIMPLE : SHAPE_COMPLEXITY_NORMAL], 1);
                                 }
                             }
                           else if (shape_tool_mode == SHAPE_TOOL_MODE_ROTATE)
@@ -5487,7 +5583,7 @@ static void mainloop(void)
                                                       event.button.x - r_canvas.x, event.button.y - r_canvas.y), 1);
 
                               shape_tool_mode = SHAPE_TOOL_MODE_DONE;
-                              draw_tux_text(TUX_GREAT, tool_tips[TOOL_SHAPES], 1);
+                              draw_tux_text(TUX_GREAT, shape_tool_tips[simple_shapes ? SHAPE_COMPLEXITY_SIMPLE : SHAPE_COMPLEXITY_NORMAL], 1);
 
                               /* FIXME: Do something less intensive! */
 
@@ -5496,9 +5592,16 @@ static void mainloop(void)
                         }
                     }
                   else if (cur_tool == TOOL_MAGIC
-                           && (magics[cur_magic].mode == MODE_PAINT || magics[cur_magic].mode == MODE_ONECLICK
-                               || magics[cur_magic].mode == MODE_PAINT_WITH_PREVIEW))
+                           && (magics[magic_group][cur_magic[magic_group]].mode == MODE_PAINT
+                               || magics[magic_group][cur_magic[magic_group]].mode == MODE_ONECLICK
+                               || magics[magic_group][cur_magic[magic_group]].mode == MODE_PAINT_WITH_PREVIEW))
                     {
+                      int grp;
+                      int cur;
+
+                      grp = magic_group;
+                      cur = cur_magic[grp];
+
                       if (!mouseaccessibility || (mouseaccessibility && !emulate_button_pressed))
                         {
                           int undo_ctr;
@@ -5518,11 +5621,11 @@ static void mainloop(void)
                           update_rect.w = 0;
                           update_rect.h = 0;
 
-                          magic_funcs[magics[cur_magic].handle_idx].release(magic_api_struct,
-                                                                            magics[cur_magic].idx,
+                          magic_funcs[magics[grp][cur].handle_idx].release(magic_api_struct,
+                                                                            magics[grp][cur].idx,
                                                                             canvas, last, old_x, old_y, &update_rect);
 
-                          draw_tux_text(TUX_GREAT, magics[cur_magic].tip[magic_modeint(magics[cur_magic].mode)], 1);
+                          draw_tux_text(TUX_GREAT, magics[grp][cur].tip[magic_modeint(magics[grp][cur].mode)], 1);
 
                           update_canvas(update_rect.x, update_rect.y,
                                         update_rect.x + update_rect.w, update_rect.y + update_rect.h);
@@ -5671,8 +5774,12 @@ static void mainloop(void)
 
                   if (cur_tool == TOOL_TEXT && !disable_stamp_controls)
 		    control_rows = 2;
-                  if (cur_tool == TOOL_MAGIC && !disable_magic_controls)
-		    control_rows = 1;
+                  if (cur_tool == TOOL_MAGIC)
+                    {
+		      control_rows = 1;
+                      if (!disable_magic_controls)
+                        control_rows = 2;
+                    }
                   if (cur_tool == TOOL_SHAPES && !disable_shape_controls)
 		    control_rows = 1;
 		  int num_places = buttons_tall * gd_toolopt.cols - control_rows * gd_toolopt.cols;
@@ -5828,8 +5935,9 @@ static void mainloop(void)
                         }
                     }
                   else if (cur_tool == TOOL_MAGIC
-                           && (magics[cur_magic].mode == MODE_PAINT || magics[cur_magic].mode == MODE_ONECLICK
-                               || magics[cur_magic].mode == MODE_PAINT_WITH_PREVIEW))
+                           && (magics[magic_group][cur_magic[magic_group]].mode == MODE_PAINT
+                               || magics[magic_group][cur_magic[magic_group]].mode == MODE_ONECLICK
+                               || magics[magic_group][cur_magic[magic_group]].mode == MODE_PAINT_WITH_PREVIEW))
                     {
                       int undo_ctr;
                       SDL_Surface *last;
@@ -5848,10 +5956,11 @@ static void mainloop(void)
                       update_rect.w = 0;
                       update_rect.h = 0;
 
-                      magic_funcs[magics[cur_magic].handle_idx].drag(magic_api_struct,
-                                                                     magics[cur_magic].idx,
-                                                                     canvas, last,
-                                                                     old_x, old_y, new_x, new_y, &update_rect);
+                      magic_funcs[magics[magic_group][cur_magic[magic_group]].handle_idx].drag(
+                        magic_api_struct,
+                        magics[magic_group][cur_magic[magic_group]].idx,
+                        canvas, last,
+                        old_x, old_y, new_x, new_y, &update_rect);
 
                       update_canvas(update_rect.x, update_rect.y,
                                     update_rect.x + update_rect.w, update_rect.y + update_rect.h);
@@ -5877,7 +5986,7 @@ static void mainloop(void)
                         undo_ctr = cur_undo - 1;
                       else
                         undo_ctr = NUM_UNDO_BUFS - 1;
-        
+
                       last = undo_bufs[undo_ctr];
 
                       /* Pushing button and moving: Update the gradient: */
@@ -6153,14 +6262,23 @@ static void brush_draw(int x1, int y1, int x2, int y2, int update)
 
 
   direction = BRUSH_DIRECTION_NONE;
-  if (brushes_directional[cur_brush])
+  r = 0;
+  if (brushes_directional[cur_brush] || brushes_rotate[cur_brush])
     {
-      r = brush_rotation(x1, y1, x2, y2) + 22;
-      if (r < 0)
-        r = r + 360;
+      r = brush_rotation(x1, y1, x2, y2);
 
-      if (x1 != x2 || y1 != y2)
-        direction = (r / 45);
+      if (brushes_directional[cur_brush])
+        {
+          r = r + 22;
+          if (r < 0)
+            r = r + 360;
+          if (x1 != x2 || y1 != y2)
+            direction = (r / 45);
+        }
+      else
+        {
+          r = 270 - r;
+        }
     }
 
 
@@ -6186,12 +6304,12 @@ static void brush_draw(int x1, int y1, int x2, int y2, int update)
           if (y1 > y2)
             {
               for (y = y1; y >= y2; y--)
-                blit_brush(x1, y, direction);
+                blit_brush(x1, y, direction, r, &w, &h);
             }
           else
             {
               for (y = y1; y <= y2; y++)
-                blit_brush(x1, y, direction);
+                blit_brush(x1, y, direction, r, &w, &h);
             }
 
           x1 = x1 + dx;
@@ -6207,7 +6325,7 @@ static void brush_draw(int x1, int y1, int x2, int y2, int update)
         }
 
       for (y = y1; y <= y2; y++)
-        blit_brush(x1, y, direction);
+        blit_brush(x1, y, direction, r, &w, &h);
     }
 
   if (orig_x1 > orig_x2)
@@ -6252,9 +6370,10 @@ void reset_brush_counter(void)
  *
  * @param x X coordinate
  * @param y Y coordinate
- * @param direction BRUSH_DIRECTION_... being drawn
+ * @param direction BRUSH_DIRECTION_... being drawn (for compass direction brushes)
+ * @param rotation angle being drawn (for brushes which may rotate at any angle (0-360 degrees))
  */
-static void blit_brush(int x, int y, int direction)
+static void blit_brush(int x, int y, int direction, int rotation, int * w, int * h)
 {
   SDL_Rect src, dest;
 
@@ -6327,8 +6446,64 @@ static void blit_brush(int x, int y, int direction)
       src.w = img_cur_brush_w;
       src.h = img_cur_brush_h;
 
-      SDL_BlitSurface(img_cur_brush, &src, canvas, &dest);
+      if (img_cur_brush_rotate)
+        {
+          SDL_Surface * rotated_brush;
+
+          /* TODO: Cache these; discard them when the user changes the brush or alters its color */
+
+          rotated_brush = NULL;
+
+          if (img_cur_brush_frames != 1)
+            {
+              SDL_Surface * brush_frame_surf;
+
+              brush_frame_surf =
+                SDL_CreateRGBSurface(img_cur_brush->flags,
+                                     src.w,
+                                     src.h,
+                                     img_cur_brush->format->BitsPerPixel,
+                                     img_cur_brush->format->Rmask, img_cur_brush->format->Gmask, img_cur_brush->format->Bmask,
+                                     img_cur_brush->format->Amask);
+              if (brush_frame_surf != NULL)
+                {
+		  /* 2021/09/28 SDL(2)_gfxBlitRGBA() is not available in the SDL2_gfx library, using plain SDL_BlitSurface() instead. Pere
+		     SDL_gfxBlitRGBA(img_cur_brush, &src, brush_frame_surf, NULL); */
+		  SDL_BlitSurface(img_cur_brush, &src, brush_frame_surf, NULL);
+                  rotated_brush = rotozoomSurface(brush_frame_surf, rotation, 1.0, SMOOTHING_ON);
+                  SDL_FreeSurface(brush_frame_surf);
+                }
+            }
+          else
+            {
+              rotated_brush = rotozoomSurface(img_cur_brush, rotation, 1.0, SMOOTHING_ON);
+            }
+
+          if (rotated_brush != NULL)
+            {
+              src.x = 0;
+              src.y = 0;
+              src.w = rotated_brush->w;
+              src.h = rotated_brush->h;
+
+              dest.x = dest.x - (img_cur_brush_w >> 1) + (rotated_brush->w >> 1);
+              dest.y = dest.y - (img_cur_brush_h >> 1) + (rotated_brush->h >> 1);
+              dest.w = rotated_brush->w;
+              dest.h = rotated_brush->h;
+   
+              SDL_BlitSurface(rotated_brush, &src, canvas, &dest);
+    
+              SDL_FreeSurface(rotated_brush);
+            }
+        }
+      else
+        {
+          SDL_BlitSurface(img_cur_brush, &src, canvas, &dest);
+        }
     }
+
+    *w = src.w;
+    *h = src.h;
 }
 
 
@@ -7051,6 +7226,8 @@ void show_usage(int exitcode)
           "  [--disablescreensaver | --allowscreensaver ]\n"
           "  [--sound | --nosound]\n"
           "  [--stereo | --nostereo]\n"
+          "  [--buttonsize=N] (24-192; default=48)\n"
+          "  [--colorsrows=N] (1-3; default=1)\n"
           "  [--colorfile FILE]\n"
           "\n"
           " Mouse/Keyboard:\n"
@@ -7210,6 +7387,7 @@ static void loadbrush_callback(SDL_Surface * screen,
               img_brushes_thumbs = realloc(img_brushes_thumbs, num_brushes_max * sizeof *img_brushes_thumbs);
               brushes_frames = realloc(brushes_frames, num_brushes_max * sizeof(int));
               brushes_directional = realloc(brushes_directional, num_brushes_max * sizeof(short));
+              brushes_rotate = realloc(brushes_rotate, num_brushes_max * sizeof(short));
               brushes_spacing = realloc(brushes_spacing, num_brushes_max * sizeof(int));
             }
           img_brushes[num_brushes] = loadimage(fname);
@@ -7218,6 +7396,7 @@ static void loadbrush_callback(SDL_Surface * screen,
 
           brushes_frames[num_brushes] = 1;
           brushes_directional[num_brushes] = 0;
+          brushes_rotate[num_brushes] = 0;
           brushes_spacing[num_brushes] = img_brushes[num_brushes]->h / 4;
 
           strcpy(strcasestr(fname, ".png"), ".dat"); /* FIXME: Use strncpy (ugh, complicated) */
@@ -7242,6 +7421,10 @@ static void loadbrush_callback(SDL_Surface * screen,
                       else if (strstr(buf, "directional") != NULL)
                         {
                           brushes_directional[num_brushes] = 1;
+                        }
+                      else if (strstr(buf, "rotate") != NULL)
+                        {
+                          brushes_rotate[num_brushes] = 1;
                         }
                       else if (strstr(buf, "random") != NULL)
                         {
@@ -8486,15 +8669,20 @@ static SDL_Surface *do_render_button_label(const char *const label)
  */
 static void create_button_labels(void)
 {
-  int i;
+  int i, j;
 
   /* Main tools */
   for (i = 0; i < NUM_TOOLS; i++)
     img_tool_names[i] = do_render_button_label(tool_names[i]);
 
   /* Magic Tools */
-  for (i = 0; i < num_magics; i++)
-    magics[i].img_name = do_render_button_label(magics[i].name);
+  for (i = 0; i < MAX_MAGIC_GROUPS; i++)
+    {
+      for (j = 0; j < num_magics[i]; j++)
+        {
+          magics[i][j].img_name = do_render_button_label(magics[i][j].name);
+        }
+    }
 
   /* Shapes for Shape Tool */
   for (i = 0; i < NUM_SHAPES; i++)
@@ -8537,10 +8725,8 @@ static void create_button_labels(void)
  */
 static void seticon(void)
 {
-#ifndef WIN32
   int masklen;
   Uint8 *mask;
-#endif
   SDL_Surface *icon;
 
   /* Load icon into a surface: */
@@ -8561,7 +8747,6 @@ static void seticon(void)
     }
 
 
-#ifndef WIN32
   /* Create mask: */
   masklen = (((icon->w) + 7) / 8) * (icon->h);
   mask = malloc(masklen * sizeof(Uint8));
@@ -8572,10 +8757,6 @@ static void seticon(void)
   SDL_SetWindowIcon(window_screen, icon);
   /* Free icon surface & mask: */
   free(mask);
-#else
-  /* Set icon: */
-  SDL_WM_SetIcon(icon, NULL);
-#endif
   SDL_FreeSurface(icon);
 
 
@@ -8848,16 +9029,18 @@ static void draw_magic(void)
   int magic, i, max, off_y;
   SDL_Rect dest;
   int most;
+  SDL_Surface *button_color;
+  SDL_Surface *button_body;
 
   draw_image_title(TITLE_MAGIC, r_ttoolopt);
 
   /* How many can we show? */
 
-  most = (buttons_tall * gd_toolopt.cols) - gd_toolopt.cols - TOOLOFFSET; /* was 12 */
+  most = (buttons_tall * gd_toolopt.cols) - gd_toolopt.cols - TOOLOFFSET - 2;
   if (disable_magic_controls)
-    most = most + gd_toolopt.cols; /* was 14 */
+    most = most + gd_toolopt.cols;
 
-  if (num_magics > most + TOOLOFFSET)
+  if (num_magics[magic_group] > most + TOOLOFFSET)
     {
       off_y = img_scroll_down->h;
       max = (most - 2) + TOOLOFFSET;
@@ -8865,7 +9048,7 @@ static void draw_magic(void)
       dest.x = WINDOW_WIDTH - r_ttoolopt.w;
       dest.y = r_ttoolopt.h;
 
-      if (magic_scroll > 0)
+      if (magic_scroll[magic_group] > 0)
         {
           SDL_BlitSurface(img_scroll_up, NULL, screen, &dest);
         }
@@ -8877,7 +9060,7 @@ static void draw_magic(void)
       dest.x = WINDOW_WIDTH - r_ttoolopt.w;
       dest.y = r_ttoolopt.h + img_scroll_down->h + ((((most - 2) / 2) + TOOLOFFSET / 2) * button_h);
 
-      if (magic_scroll < num_magics - (most - 2) - TOOLOFFSET)
+      if (magic_scroll[magic_group] < num_magics[magic_group] - (most - 2) - TOOLOFFSET)
         {
           SDL_BlitSurface(img_scroll_down, NULL, screen, &dest);
         }
@@ -8893,16 +9076,16 @@ static void draw_magic(void)
     }
 
 
-  for (magic = magic_scroll; magic < magic_scroll + max; magic++)
+  for (magic = magic_scroll[magic_group]; magic < magic_scroll[magic_group] + max; magic++)
     {
-      i = magic - magic_scroll;
+      i = magic - magic_scroll[magic_group];
 
       dest.x = ((i % 2) * button_w) + (WINDOW_WIDTH - r_ttoolopt.w);
       dest.y = ((i / 2) * button_h) + r_ttoolopt.h + off_y;
 
-      if (magic < num_magics)
+      if (magic < num_magics[magic_group])
         {
-          if (magic == cur_magic)
+          if (magic == cur_magic[magic_group])
             {
               SDL_BlitSurface(img_btn_down, NULL, screen, &dest);
             }
@@ -8914,13 +9097,13 @@ static void draw_magic(void)
           dest.x = WINDOW_WIDTH - r_ttoolopt.w + ((i % 2) * button_w) + 4;
           dest.y = ((i / 2) * button_h) + r_ttoolopt.h + 4 + off_y;
 
-          SDL_BlitSurface(magics[magic].img_icon, NULL, screen, &dest);
+          SDL_BlitSurface(magics[magic_group][magic].img_icon, NULL, screen, &dest);
 
 
-          dest.x = WINDOW_WIDTH - r_ttoolopt.w + ((i % 2) * button_w) + (4 * button_w) / ORIGINAL_BUTTON_SIZE + ((40 * button_w) / ORIGINAL_BUTTON_SIZE - magics[magic].img_name->w) / 2;
-          dest.y = (((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - magics[magic].img_name->h) + off_y);
+          dest.x = WINDOW_WIDTH - r_ttoolopt.w + ((i % 2) * button_w) + (4 * button_w) / ORIGINAL_BUTTON_SIZE + ((40 * button_w) / ORIGINAL_BUTTON_SIZE - magics[magic_group][magic].img_name->w) / 2;
+          dest.y = (((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - magics[magic_group][magic].img_name->h) + off_y);
 
-          SDL_BlitSurface(magics[magic].img_name, NULL, screen, &dest);
+          SDL_BlitSurface(magics[magic_group][magic].img_name, NULL, screen, &dest);
         }
       else
         {
@@ -8929,50 +9112,90 @@ static void draw_magic(void)
     }
 
 
+  /* Draw group pagination buttons: */
+
+  /* Show prev button: */
+
+  button_color = img_black;
+  button_body = img_btn_nav;
+
+  dest.x = WINDOW_WIDTH - r_ttoolopt.w;
+  dest.y = r_ttoolopt.h + (((most + TOOLOFFSET) / 2) * button_h);
+
+  SDL_BlitSurface(button_body, NULL, screen, &dest);
+
+  dest.x = WINDOW_WIDTH - r_ttoolopt.w + (button_w - img_prev->w) / 2;
+  dest.y = (r_ttoolopt.h + (((most + TOOLOFFSET) / 2) * button_h) + (button_h - img_prev->h) / 2);
+
+  SDL_BlitSurface(button_color, NULL, img_prev, NULL);
+  SDL_BlitSurface(img_prev, NULL, screen, &dest);
+
+  /* Show next button: */
+
+  button_color = img_black;
+  button_body = img_btn_nav;
+
+  dest.x = WINDOW_WIDTH - button_w;
+  dest.y = r_ttoolopt.h + (((most + TOOLOFFSET) / gd_toolopt.cols) * button_h);
+
+  SDL_BlitSurface(button_body, NULL, screen, &dest);
+
+  dest.x = WINDOW_WIDTH - button_w + (button_w - img_next->w) / 2;
+  dest.y = (r_ttoolopt.h + (((most + TOOLOFFSET) / gd_toolopt.cols) * button_h) + (button_h - img_next->h) / 2);
+
+  SDL_BlitSurface(button_color, NULL, img_next, NULL);
+  SDL_BlitSurface(img_next, NULL, screen, &dest);
+
+
   /* Draw magic controls: */
 
   if (!disable_magic_controls)
     {
       SDL_Surface *button_color;
+      int grp, cur;
+
+      grp = magic_group;
+      cur = cur_magic[magic_group];
+ 
 
       /* Show paint button: */
 
-      if (magics[cur_magic].mode == MODE_PAINT || magics[cur_magic].mode == MODE_ONECLICK
-          || magics[cur_magic].mode == MODE_PAINT_WITH_PREVIEW)
+      if (magics[grp][cur].mode == MODE_PAINT || magics[grp][cur].mode == MODE_ONECLICK
+          || magics[grp][cur].mode == MODE_PAINT_WITH_PREVIEW)
         button_color = img_btn_down;    /* Active */
-      else if (magics[cur_magic].avail_modes & MODE_PAINT || magics[cur_magic].avail_modes & MODE_ONECLICK
-               || magics[cur_magic].avail_modes & MODE_PAINT_WITH_PREVIEW)
+      else if (magics[grp][cur].avail_modes & MODE_PAINT || magics[grp][cur].avail_modes & MODE_ONECLICK
+               || magics[grp][cur].avail_modes & MODE_PAINT_WITH_PREVIEW)
         button_color = img_btn_up;      /* Available, but not active */
       else
         button_color = img_btn_off;     /* Unavailable */
 
       dest.x = WINDOW_WIDTH - r_ttoolopt.w;
-      dest.y = r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
+      dest.y = r_ttoolopt.h + ((most / gd_toolopt.cols + (TOOLOFFSET + 2) / gd_toolopt.cols) * button_h);
 
       SDL_BlitSurface(button_color, NULL, screen, &dest);
 
       dest.x = WINDOW_WIDTH - r_ttoolopt.w + (button_w - img_magic_paint->w) / 2;
-      dest.y = (r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h) + (button_h - img_magic_paint->h) / 2);
+      dest.y = (r_ttoolopt.h + ((most / gd_toolopt.cols + (TOOLOFFSET + 2) / gd_toolopt.cols) * button_h) + (button_h - img_magic_paint->h) / 2);
 
       SDL_BlitSurface(img_magic_paint, NULL, screen, &dest);
 
 
       /* Show fullscreen button: */
 
-      if (magics[cur_magic].mode == MODE_FULLSCREEN)
+      if (magics[grp][cur].mode == MODE_FULLSCREEN)
         button_color = img_btn_down;    /* Active */
-      else if (magics[cur_magic].avail_modes & MODE_FULLSCREEN)
+      else if (magics[grp][cur].avail_modes & MODE_FULLSCREEN)
         button_color = img_btn_up;      /* Available, but not active */
       else
         button_color = img_btn_off;     /* Unavailable */
 
       dest.x = WINDOW_WIDTH - button_w;
-      dest.y = r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
+      dest.y = r_ttoolopt.h + ((most / gd_toolopt.cols + (TOOLOFFSET + 2) / gd_toolopt.cols) * button_h);
 
       SDL_BlitSurface(button_color, NULL, screen, &dest);
 
       dest.x = WINDOW_WIDTH - button_w + (button_w - img_magic_fullscreen->w) / 2;
-      dest.y = (r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h) + (button_h - img_magic_fullscreen->h) / 2);
+      dest.y = (r_ttoolopt.h + ((most / gd_toolopt.cols + (TOOLOFFSET + 2) / gd_toolopt.cols) * button_h) + (button_h - img_magic_fullscreen->h) / 2);
 
       SDL_BlitSurface(img_magic_fullscreen, NULL, screen, &dest);
     }
@@ -9147,6 +9370,8 @@ static void draw_brushes(void)
 
       if (brush < num_brushes)
         {
+          int ui_btn_x, ui_btn_y;
+
           if (brushes_directional[brush])
             src.x = (img_brushes_thumbs[brush]->w / abs(brushes_frames[brush])) / 3;
           else
@@ -9157,10 +9382,26 @@ static void draw_brushes(void)
           src.w = (img_brushes_thumbs[brush]->w / abs(brushes_frames[brush])) / (brushes_directional[brush] ? 3 : 1);
           src.h = (img_brushes_thumbs[brush]->h / (brushes_directional[brush] ? 3 : 1));
 
-          dest.x = ((i % 2) * button_w) + (WINDOW_WIDTH - r_ttoolopt.w) + ((button_w - src.w) >> 1);
-          dest.y = ((i / 2) * button_h) + r_ttoolopt.h + ((button_h - src.h) >> 1) + off_y;
+          ui_btn_x = ((i % 2) * button_w) + (WINDOW_WIDTH - r_ttoolopt.w);
+          ui_btn_y = ((i / 2) * button_h) + r_ttoolopt.h + off_y;
+
+          dest.x = ui_btn_x + ((button_w - src.w) >> 1);
+          dest.y = ui_btn_y + ((button_h - src.h) >> 1);
 
           SDL_BlitSurface(img_brushes_thumbs[brush], &src, screen, &dest);
+
+          if (brushes_directional[brush] || brushes_rotate[brush])
+            {
+              dest.x = ui_btn_x + button_w - img_brush_dir->w;
+              dest.y = ui_btn_y + button_h - img_brush_dir->h;
+              SDL_BlitSurface(img_brush_dir, NULL, screen, &dest);
+            }
+          if (brushes_frames[brush] != 1)
+            {
+              dest.x = ui_btn_x;
+              dest.y = ui_btn_y + button_h - img_brush_anim->h;
+              SDL_BlitSurface(img_brush_anim, NULL, screen, &dest);
+            }
         }
     }
 }
@@ -10765,6 +11006,7 @@ static void render_brush(void)
   img_cur_brush_h = img_cur_brush->h / (brushes_directional[cur_brush] ? 3 : 1);
   img_cur_brush_frames = brushes_frames[cur_brush];
   img_cur_brush_directional = brushes_directional[cur_brush];
+  img_cur_brush_rotate = brushes_rotate[cur_brush];
   img_cur_brush_spacing = brushes_spacing[cur_brush];
 
   brush_counter = 0;
@@ -11107,7 +11349,7 @@ static void reset_avail_tools(void)
   if (num_stamps[0] == 0)
     tool_avail[TOOL_STAMP] = 0;
 
-  if (num_magics == 0)
+  if (num_magics_total == 0)
     tool_avail[TOOL_MAGIC] = 0;
 
 
@@ -11316,6 +11558,30 @@ static void draw_tux_text_ex(int which_tux, const char *const str, int want_righ
   update_screen_rect(&r_tuxarea);
 }
 
+
+/**
+ * Draw the current tool's tool tip.
+ * Mostly this comes from `tool_tips[]`, based on the current
+ * tool (`cur_tool`).  However, some tools have various
+ * context-specific strings to show:
+ *  - Fill: Describe the currently-selected fill mode (`fill_tips[]` from `fill_tools.h`)
+ *  - Shapes: Depends on "simple" vs "complex" shapes option (`shape_tool_tips[]` from `shapes.h`)
+ */
+static void draw_cur_tool_tip(void)
+{
+  if (cur_tool == TOOL_FILL)
+    {
+      draw_tux_text(tool_tux[cur_tool], fill_tips[cur_fill], 1);
+    }
+  else if (cur_tool == TOOL_SHAPES)
+    {
+      draw_tux_text(tool_tux[cur_tool], shape_tool_tips[simple_shapes ? SHAPE_COMPLEXITY_SIMPLE : SHAPE_COMPLEXITY_NORMAL], 1);
+    }
+  else
+    {
+      draw_tux_text(tool_tux[cur_tool], tool_tips[cur_tool], 1);
+    }
+}
 
 /**
  * FIXME
@@ -13413,14 +13679,18 @@ static void cleanup(void)
   free_surface_array(img_brushes_thumbs, num_brushes);
   free(brushes_frames);
   free(brushes_directional);
+  free(brushes_rotate);
   free(brushes_spacing);
   free_surface_array(img_tools, NUM_TOOLS);
   free_surface_array(img_tool_names, NUM_TOOLS);
   free_surface_array(img_title_names, NUM_TITLES);
-  for (i = 0; i < num_magics; i++)
+  for (i = 0; i < MAX_MAGIC_GROUPS; i++)
     {
-      free_surface(&(magics[i].img_icon));
-      free_surface(&(magics[i].img_name));
+      for (j = 0; j < num_magics[i]; j++)
+        {
+          free_surface(&(magics[i][j].img_icon));
+          free_surface(&(magics[i][j].img_name));
+        }
     }
   free_surface_array(img_shapes, NUM_SHAPES);
   free_surface_array(img_shape_names, NUM_SHAPES);
@@ -13482,6 +13752,9 @@ static void cleanup(void)
 
   free_surface(&img_btn_nav);
   free_surface(&img_btnsm_nav);
+
+  free_surface(&img_brush_anim);
+  free_surface(&img_brush_dir);
 
   free_surface(&img_sfx);
   free_surface(&img_speak);
@@ -17740,7 +18013,7 @@ void do_print(void)
   safe_snprintf(f, sizeof(f), "%s/%s", savedir, "print.cfg");        /* FIXME */
 
   {
-    const char *error = SurfacePrint(save_canvas, use_print_config ? f : NULL, show);
+    const char *error = SurfacePrint(window_screen, save_canvas, use_print_config ? f : NULL, show);
 
     if (error)
       fprintf(stderr, "%s\n", error);
@@ -18599,7 +18872,7 @@ static void handle_active(SDL_Event * event)
         }
 
 #ifdef _WIN32
-      SetActivationState(event->active.gain);
+      SetActivationState(1);
 #endif
     }
 }
@@ -19370,7 +19643,9 @@ static void load_magic_plugins(void)
   char funcname[512];
 
   num_plugin_files = 0;
-  num_magics = 0;
+  for (i = 0; i < MAX_MAGIC_GROUPS; i++)
+    num_magics[i] = 0;
+  num_magics_total = 0;
 
   for (plc = 0; plc < NUM_MAGIC_PLACES; plc++)
     {
@@ -19476,6 +19751,10 @@ static void load_magic_plugins(void)
                           magic_funcs[num_plugin_files].get_tool_count =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
+                          safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_group");
+                          magic_funcs[num_plugin_files].get_group =
+                            SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
+
                           safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_name");
                           magic_funcs[num_plugin_files].get_name =
                             SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
@@ -19536,6 +19815,7 @@ static void load_magic_plugins(void)
                           //EP added (intptr_t) to avoid warning on x64 on all lines below
                           printf("get_tool_count = 0x%x\n",
                                  (int)(intptr_t) magic_funcs[num_plugin_files].get_tool_count);
+                          printf("get_group = 0x%x\n", (int)(intptr_t) magic_funcs[num_plugin_files].get_group);
                           printf("get_name = 0x%x\n", (int)(intptr_t) magic_funcs[num_plugin_files].get_name);
                           printf("get_icon = 0x%x\n", (int)(intptr_t) magic_funcs[num_plugin_files].get_icon);
                           printf("get_description = 0x%x\n",
@@ -19559,6 +19839,11 @@ static void load_magic_plugins(void)
                           if (magic_funcs[num_plugin_files].get_tool_count == NULL)
                             {
                               fprintf(stderr, "Error: plugin %s is missing get_tool_count\n", fname);
+                              err = 1;
+                            }
+                          if (magic_funcs[num_plugin_files].get_group == NULL)
+                            {
+                              fprintf(stderr, "Error: plugin %s is missing get_group\n", fname);
                               err = 1;
                             }
                           if (magic_funcs[num_plugin_files].get_name == NULL)
@@ -19666,66 +19951,91 @@ static void load_magic_plugins(void)
                                 }
                               else
                                 {
-                                  int j;
+                                  int j, group, idx;
+                                  SDL_Surface * icon_tmp;
 
                                   for (i = 0; i < n; i++)
                                     {
-                                      magics[num_magics].idx = i;
-                                      magics[num_magics].place = plc;
-                                      magics[num_magics].handle_idx = num_plugin_files;
-                                      magics[num_magics].name =
-                                        magic_funcs[num_plugin_files].get_name(magic_api_struct, i);
-
-                                      magics[num_magics].avail_modes =
-                                        magic_funcs[num_plugin_files].modes(magic_api_struct, i);
-
-                                      for (j = 0; j < MAX_MODES; j++)
+                                      group = magic_funcs[num_plugin_files].get_group(magic_api_struct, i);
+                                      if (group < MAX_MAGIC_GROUPS)
                                         {
-                                          magics[num_magics].tip[j] = NULL;
-                                          if (j)
+                                          idx = num_magics[group];
+    
+                                          magics[group][idx].idx = i;
+                                          magics[group][idx].place = plc;
+                                          magics[group][idx].handle_idx = num_plugin_files;
+                                          magics[group][idx].group = group;
+                                          magics[group][idx].name =
+                                            magic_funcs[num_plugin_files].get_name(magic_api_struct, i);
+    
+                                          magics[group][idx].avail_modes =
+                                            magic_funcs[num_plugin_files].modes(magic_api_struct, i);
+    
+                                          for (j = 0; j < MAX_MODES; j++)
                                             {
-                                              if (magics[num_magics].avail_modes & MODE_FULLSCREEN)
-                                                magics[num_magics].tip[j] =
-                                                  magic_funcs[num_plugin_files].get_description(magic_api_struct, i,
-                                                                                                MODE_FULLSCREEN);
+                                              magics[group][idx].tip[j] = NULL;
+                                              if (j)
+                                                {
+                                                  if (magics[group][idx].avail_modes & MODE_FULLSCREEN)
+                                                    magics[group][idx].tip[j] =
+                                                      magic_funcs[num_plugin_files].get_description(magic_api_struct, i,
+                                                                                                    MODE_FULLSCREEN);
+                                                }
+                                              else
+                                                {
+                                                  if (magics[group][idx].avail_modes & MODE_PAINT)
+                                                    magics[group][idx].tip[j] =
+                                                      magic_funcs[num_plugin_files].get_description(magic_api_struct, i,
+                                                                                                    MODE_PAINT);
+                                                  else if (magics[group][idx].avail_modes & MODE_ONECLICK)
+                                                    magics[group][idx].tip[j] =
+                                                      magic_funcs[num_plugin_files].get_description(magic_api_struct, i,
+                                                                                                    MODE_ONECLICK);
+                                                  else if (magics[group][idx].avail_modes & MODE_PAINT_WITH_PREVIEW)
+                                                    magics[group][idx].tip[j] =
+                                                      magic_funcs[num_plugin_files].get_description(magic_api_struct, i,
+                                                                                                    MODE_PAINT_WITH_PREVIEW);
+                                                }
+                                            }
+    
+                                          magics[group][idx].colors =
+                                            magic_funcs[num_plugin_files].requires_colors(magic_api_struct, i);
+                                          if (magics[group][idx].avail_modes & MODE_PAINT)
+                                            magics[group][idx].mode = MODE_PAINT;
+                                          else if (magics[group][idx].avail_modes & MODE_ONECLICK)
+                                            magics[group][idx].mode = MODE_ONECLICK;
+                                          else if (magics[group][idx].avail_modes & MODE_PAINT_WITH_PREVIEW)
+                                            magics[group][idx].mode = MODE_PAINT_WITH_PREVIEW;
+                                          else
+                                            magics[group][idx].mode = MODE_FULLSCREEN;
+   
+                                          icon_tmp = magic_funcs[num_plugin_files].get_icon(magic_api_struct, i);
+                                          if (icon_tmp != NULL)
+                                            { 
+                                              magics[group][idx].img_icon = thumbnail(icon_tmp, 40 * button_w / ORIGINAL_BUTTON_SIZE, 30 * button_h / ORIGINAL_BUTTON_SIZE, 1);
+                                              SDL_FreeSurface(icon_tmp);
+    
+#ifdef DEBUG
+                                              printf("-- %s\n", magics[group][idx].name);
+                                              printf("avail_modes = %d\n", magics[group][idx].avail_modes);
+#endif
+        
+                                              num_magics[group]++;
+                                              num_magics_total++;
                                             }
                                           else
                                             {
-                                              if (magics[num_magics].avail_modes & MODE_PAINT)
-                                                magics[num_magics].tip[j] =
-                                                  magic_funcs[num_plugin_files].get_description(magic_api_struct, i,
-                                                                                                MODE_PAINT);
-                                              else if (magics[num_magics].avail_modes & MODE_ONECLICK)
-                                                magics[num_magics].tip[j] =
-                                                  magic_funcs[num_plugin_files].get_description(magic_api_struct, i,
-                                                                                                MODE_ONECLICK);
-                                              else if (magics[num_magics].avail_modes & MODE_PAINT_WITH_PREVIEW)
-                                                magics[num_magics].tip[j] =
-                                                  magic_funcs[num_plugin_files].get_description(magic_api_struct, i,
-                                                                                                MODE_PAINT_WITH_PREVIEW);
+                                              fprintf(stderr, "Error: plugin %s mode # %d failed to load an icon\n",
+                                                fname, i, group);
+                                              fflush(stderr);
                                             }
                                         }
-
-                                      magics[num_magics].colors =
-                                        magic_funcs[num_plugin_files].requires_colors(magic_api_struct, i);
-                                      if (magics[num_magics].avail_modes & MODE_PAINT)
-                                        magics[num_magics].mode = MODE_PAINT;
-                                      else if (magics[num_magics].avail_modes & MODE_ONECLICK)
-                                        magics[num_magics].mode = MODE_ONECLICK;
-                                      else if (magics[num_magics].avail_modes & MODE_PAINT_WITH_PREVIEW)
-                                        magics[num_magics].mode = MODE_PAINT_WITH_PREVIEW;
                                       else
-                                        magics[num_magics].mode = MODE_FULLSCREEN;
-
-                                      magics[num_magics].img_icon =
-					thumbnail( magic_funcs[num_plugin_files].get_icon(magic_api_struct, i), 40 * button_w / ORIGINAL_BUTTON_SIZE, 30 * button_h / ORIGINAL_BUTTON_SIZE, 1);
-
-#ifdef DEBUG
-                                      printf("-- %s\n", magics[num_magics].name);
-                                      printf("avail_modes = %d\n", magics[num_magics].avail_modes);
-#endif
-
-                                      num_magics++;
+                                        {
+                                          fprintf(stderr, "Error: plugin %s mode # %d reported group %d (higher than %d)\n",
+                                            fname, i, group, MAX_MAGIC_GROUPS - 1);
+                                          fflush(stderr);
+                                        }
                                     }
 
                                   num_plugin_files++;
@@ -19747,10 +20057,12 @@ static void load_magic_plugins(void)
     }
 
 
-  qsort(magics, num_magics, sizeof(magic_t), magic_sort);
+  for (i = 0; i < MAX_MAGIC_GROUPS; i++) {
+    qsort(magics[i], num_magics[i], sizeof(magic_t), magic_sort);
+  }
 
 #ifdef DEBUG
-  printf("Loaded %d magic tools from %d plug-in files\n", num_magics, num_plugin_files);
+  printf("Loaded %d magic tools from %d plug-in files\n", num_magics_total, num_plugin_files);
   printf("\n");
   fflush(stdout);
 #endif
@@ -22151,11 +22463,16 @@ static void magic_switchout(SDL_Surface * last)
 
   if (cur_tool == TOOL_MAGIC)
     {
-      magic_funcs[magics[cur_magic].handle_idx].switchout(magic_api_struct,
-                                                          magics[cur_magic].idx, magics[cur_magic].mode, canvas, last);
+      int grp, cur;
+
+      grp = magic_group;
+      cur = cur_magic[magic_group];
+
+      magic_funcs[magics[grp][cur].handle_idx].switchout(magic_api_struct,
+                                                          magics[grp][cur].idx, magics[grp][cur].mode, canvas, last);
       update_canvas(0, 0, canvas->w, canvas->h);
 
-      if (was_clicking && magics[cur_magic].mode == MODE_PAINT_WITH_PREVIEW)
+      if (was_clicking && magics[grp][cur].mode == MODE_PAINT_WITH_PREVIEW)
         {
           /* Clean up preview! */
           do_undo();
@@ -22173,8 +22490,13 @@ static void magic_switchin(SDL_Surface * last)
 {
   if (cur_tool == TOOL_MAGIC)
     {
-      magic_funcs[magics[cur_magic].handle_idx].switchin(magic_api_struct,
-                                                         magics[cur_magic].idx, magics[cur_magic].mode, canvas, last);
+      int grp, cur;
+
+      grp = magic_group;
+      cur = cur_magic[magic_group];
+
+      magic_funcs[magics[grp][cur].handle_idx].switchin(magic_api_struct,
+                                                         magics[grp][cur].idx, magics[grp][cur].mode, canvas, last);
 
       /* In case the Magic tool's switchin() called update_progress_bar(),
          let's put the old Tux text back: */
@@ -24858,6 +25180,7 @@ static void setup(void)
   SDL_Surface *tmp_surf;
   SDL_Rect dest;
   int scale;
+  int canvas_width, canvas_height;
 
 #ifndef LOW_QUALITY_COLOR_SELECTOR
   int x, y;
@@ -25479,18 +25802,20 @@ static void setup(void)
   cursor_tiny = get_cursor(tiny_bits, tiny_mask_bits, tiny_width, tiny_height, 3, 3);   /* Exactly the same in SMALL (16x16) size! */
 
 
-  //button_h * buttons_tall + r_ttools.h
   /* Create drawing canvas: */
 
-  canvas = SDL_CreateRGBSurface(screen->flags,
-                                WINDOW_WIDTH - r_ttools.w - r_ttoolopt.w,
-                                (button_h * buttons_tall) + r_ttools.h,
+  canvas_width = WINDOW_WIDTH - r_ttools.w - r_ttoolopt.w;
+  canvas_height = (button_h * buttons_tall) + r_ttools.h;
+
+#ifdef DEBUG
+  printf("Canvas size is %d x %d\n", canvas_width, canvas_height);
+#endif
+
+  canvas = SDL_CreateRGBSurface(screen->flags, canvas_width, canvas_height,
                                 screen->format->BitsPerPixel,
                                 screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, 0);
 
-  save_canvas = SDL_CreateRGBSurface(screen->flags,
-                                     WINDOW_WIDTH - r_ttools.w - r_ttoolopt.w,
-                                     (button_h * buttons_tall) + r_ttools.h,
+  save_canvas = SDL_CreateRGBSurface(screen->flags, canvas_width, canvas_height,
                                      screen->format->BitsPerPixel,
                                      screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, 0);
 
@@ -25550,9 +25875,7 @@ static void setup(void)
 
   for (i = 0; i < NUM_UNDO_BUFS; i++)
     {
-      undo_bufs[i] = SDL_CreateRGBSurface(screen->flags,
-                                          WINDOW_WIDTH - (r_ttools.w * 2),
-                                          (button_h * 7) + 40 + HEIGHTOFFSET,
+      undo_bufs[i] = SDL_CreateRGBSurface(screen->flags, canvas_width, canvas_height,
                                           screen->format->BitsPerPixel,
                                           screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, 0);
 
@@ -25594,6 +25917,9 @@ static void setup(void)
 
   img_btn_nav = loadimagerb(DATA_PREFIX "images/ui/btn_nav.png");
   img_btnsm_nav = loadimagerb(DATA_PREFIX "images/ui/btnsm_nav.png");
+
+  img_brush_anim = loadimagerb(DATA_PREFIX "images/ui/brush_anim.png");
+  img_brush_dir = loadimagerb(DATA_PREFIX "images/ui/brush_dir.png");
 
   img_sfx = loadimagerb(DATA_PREFIX "images/tools/sfx.png");
   img_speak = loadimagerb(DATA_PREFIX "images/tools/speak.png");
@@ -26066,7 +26392,6 @@ static void claim_to_be_ready(void)
   for (i = 0; i < MAX_STAMP_GROUPS; i++)
     cur_stamp[i] = 0;
   cur_shape = SHAPE_SQUARE;
-  cur_magic = 0;
   cur_font = 0;
   cur_eraser = 0;
   cur_fill = 0;
@@ -26090,10 +26415,17 @@ static void claim_to_be_ready(void)
 
   brush_scroll = 0;
   for (i = 0; i < MAX_STAMP_GROUPS; i++)
-    stamp_scroll[i] = 0;
+    {
+      stamp_scroll[i] = 0;
+    }
   stamp_group = 0;              /* reset! */
+
+  for (i = 0; i < MAX_MAGIC_GROUPS; i++)
+    {
+      magic_scroll[i] = 0;
+      cur_magic[i] = 0;
+    }
   font_scroll = 0;
-  magic_scroll = 0;
   tool_scroll = 0;
   eraser_scroll = 0;
   fill_scroll = 0;
@@ -26118,7 +26450,7 @@ static void claim_to_be_ready(void)
 
   SDL_Flip(screen);
 
-  draw_tux_text(tool_tux[cur_tool], tool_tips[cur_tool], 1);
+  draw_cur_tool_tip();
 }
 
 /* ================================================================================== */

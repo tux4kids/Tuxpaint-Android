@@ -4,7 +4,7 @@
   Negative Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: September 21, 2021
   $Id$
 */
 
@@ -40,6 +40,7 @@ Uint32 negative_api_version(void);
 int negative_get_tool_count(magic_api * api);
 SDL_Surface *negative_get_icon(magic_api * api, int which);
 char *negative_get_name(magic_api * api, int which);
+int negative_get_group(magic_api * api, int which);
 char *negative_get_description(magic_api * api, int which, int mode);
 static void do_negative(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 void negative_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -56,7 +57,35 @@ void negative_switchin(magic_api * api, int which, int mode, SDL_Surface * canva
 void negative_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int negative_modes(magic_api * api, int which);
 
-// No setup required:
+enum
+{
+  TOOL_NEGATIVE,
+  TOOL_COMPLEMENTARY,
+  negative_NUM_TOOLS
+};
+
+const char *negative_icon_filenames[negative_NUM_TOOLS] = {
+  "negative.png",
+  "opposite.png"
+};
+
+const char *negative_names[negative_NUM_TOOLS] = {
+  gettext_noop("Negative"),
+  gettext_noop("Opposite")
+};
+
+const char *negative_descs[negative_NUM_TOOLS][2] = {
+  {
+    gettext_noop("Click and drag the mouse around to make your painting negative."),
+    gettext_noop("Click to turn your painting into its negative.")
+  },
+  {
+    gettext_noop("Click and drag the mouse around to change colors to their opposites -- their complementary colors."),
+    gettext_noop("Click to turn all colors in your painting into their opposites -- their complementary colors.")
+  },
+};
+
+
 int negative_init(magic_api * api)
 {
   char fname[1024];
@@ -73,43 +102,75 @@ Uint32 negative_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-// Only one tool:
 int negative_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
 {
-  return (1);
+  return (negative_NUM_TOOLS);
 }
 
 // Load our icon:
-SDL_Surface *negative_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *negative_get_icon(magic_api * api, int which)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/negative.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/%s", api->data_directory, negative_icon_filenames[which]);
   return (IMG_Load(fname));
 }
 
 // Return our name, localized:
-char *negative_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *negative_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
-  return (strdup(gettext_noop("Negative")));
+  return (strdup(gettext_noop(negative_names[which])));
+}
+
+// Return our group (both the same):
+int negative_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_COLOR_FILTERS;
 }
 
 // Return our description, localized:
-char *negative_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+char *negative_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
 {
-  if (mode == MODE_PAINT)
-    return (strdup(gettext_noop("Click and drag the mouse around to make your painting negative.")));   /* Does this make more sense? */
-  else if (mode == MODE_FULLSCREEN)
-    return (strdup(gettext_noop("Click to turn your painting into its negative.")));
+  int mode_idx;
+
+  if (mode == MODE_PAINT) {
+    mode_idx = 0;
+  } else if (mode == MODE_FULLSCREEN) {
+    mode_idx = 1;
+  } else {
+    return NULL;
+  }
+
+  return(strdup(gettext_noop(negative_descs[which][mode_idx])));
+}
+
+static void negative_calc(void *ptr, int which, Uint8 r, Uint8 g, Uint8 b, Uint8 * new_r, Uint8 * new_g, Uint8 * new_b) {
+  float h, s, v, new_h;
+  magic_api *api = (magic_api *) ptr;
+
+  if (which == TOOL_NEGATIVE)
+    {
+      *new_r = 0xFF - r;
+      *new_g = 0xFF - g;
+      *new_b = 0xFF - b;
+    }
   else
-    return (NULL);
+    {
+      api->rgbtohsv(r, g, b, &h, &s, &v);
+      new_h = h + 180.0;
+      if (new_h >= 360.0)
+        {
+          new_h = new_h - 360.0;
+        }
+      api->hsvtorgb(new_h, s, v, new_r, new_g, new_b);
+    }
 }
 
 // Callback that does the negative color effect on a circle centered around x,y
-static void do_negative(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
+static void do_negative(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
 {
   int xx, yy;
-  Uint8 r, g, b;
+  Uint8 r, g, b, new_r, new_g, new_b;
   magic_api *api = (magic_api *) ptr;
 
   for (yy = y - 16; yy < y + 16; yy++)
@@ -119,12 +180,8 @@ static void do_negative(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * can
           if (api->in_circle(xx - x, yy - y, 16))
             {
               SDL_GetRGB(api->getpixel(last, xx, yy), last->format, &r, &g, &b);
-
-              r = 0xFF - r;
-              g = 0xFF - g;
-              b = 0xFF - b;
-
-              api->putpixel(canvas, xx, yy, SDL_MapRGB(canvas->format, r, g, b));
+              negative_calc(api, which, r, g, b, &new_r, &new_g, &new_b);
+              api->putpixel(canvas, xx, yy, SDL_MapRGB(canvas->format, new_r, new_g, new_b));
             }
         }
     }
@@ -175,19 +232,15 @@ void negative_click(magic_api * api, int which, int mode,
   else
     {
       int xx, yy;
-      Uint8 r, g, b;
+      Uint8 r, g, b, new_r, new_g, new_b;
 
       for (yy = 0; yy < canvas->h; yy++)
         {
           for (xx = 0; xx < canvas->w; xx++)
             {
               SDL_GetRGB(api->getpixel(last, xx, yy), last->format, &r, &g, &b);
-
-              r = 0xFF - r;
-              g = 0xFF - g;
-              b = 0xFF - b;
-
-              api->putpixel(canvas, xx, yy, SDL_MapRGB(canvas->format, r, g, b));
+              negative_calc(api, which, r, g, b, &new_r, &new_g, &new_b);
+              api->putpixel(canvas, xx, yy, SDL_MapRGB(canvas->format, new_r, new_g, new_b));
             }
         }
 
@@ -195,6 +248,8 @@ void negative_click(magic_api * api, int which, int mode,
       update_rect->y = 0;
       update_rect->w = canvas->w;
       update_rect->h = canvas->h;
+
+      api->playsound(negative_snd, (x * 255) / canvas->w, 255);
     }
 }
 
@@ -238,3 +293,4 @@ int negative_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
 }
+

@@ -41,6 +41,7 @@ int fisheye_init(magic_api * api);
 int fisheye_get_tool_count(magic_api * api);
 SDL_Surface *fisheye_get_icon(magic_api * api, int which);
 char *fisheye_get_name(magic_api * api, int which);
+int fisheye_get_group(magic_api * api, int which);
 char *fisheye_get_description(magic_api * api, int which, int mode);
 int fisheye_requires_colors(magic_api * api, int which);
 void fisheye_release(magic_api * api, int which,
@@ -99,7 +100,12 @@ SDL_Surface *fisheye_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 char *fisheye_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext_noop("Fisheye"));
-}                               //Needs better name
+}
+
+int fisheye_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_DISTORTS;
+}
 
 char *fisheye_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {

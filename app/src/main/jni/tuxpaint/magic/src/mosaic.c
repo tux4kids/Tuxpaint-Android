@@ -7,7 +7,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2009 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -26,7 +26,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: May 6, 2009
+  Last updated: September 21, 2021
   $Id$
 */
 
@@ -56,6 +56,7 @@ int mosaic_init(magic_api *);
 int mosaic_get_tool_count(magic_api *);
 SDL_Surface *mosaic_get_icon(magic_api *, int);
 char *mosaic_get_name(magic_api *, int);
+int mosaic_get_group(magic_api *, int);
 char *mosaic_get_description(magic_api *, int, int);
 void mosaic_paint(void *, int, SDL_Surface *, SDL_Surface *, int, int);
 void mosaic_drag(magic_api *, int, SDL_Surface *, SDL_Surface *, int, int, int, int, SDL_Rect *);
@@ -94,6 +95,10 @@ const char *mosaic_icon_filenames[mosaic_NUM_TOOLS] = {
 
 const char *mosaic_names[mosaic_NUM_TOOLS] = {
   gettext_noop("Mosaic"),
+};
+
+const int mosaic_groups[mosaic_NUM_TOOLS] = {
+  MAGIC_TYPE_DISTORTS,
 };
 
 const char *mosaic_descs[mosaic_NUM_TOOLS][2] = {
@@ -140,6 +145,12 @@ SDL_Surface *mosaic_get_icon(magic_api * api, int which)
 char *mosaic_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return (strdup(gettext_noop(mosaic_names[which])));
+}
+
+// Return our groups:
+int mosaic_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
+{
+  return mosaic_groups[which];
 }
 
 // Return our descriptions, localized:

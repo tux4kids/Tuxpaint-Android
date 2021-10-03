@@ -6,7 +6,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2007 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: October 4, 2008
+  Last updated: September 21, 2021
   $Id$
 */
 
@@ -68,6 +68,10 @@ const char *rain_names[rain_NUM_TOOLS] = {
   gettext_noop("Rain"),
 };
 
+const int rain_groups[rain_NUM_TOOLS] = {
+  MAGIC_TYPE_PAINTING,
+};
+
 const char *rain_descs[rain_NUM_TOOLS][2] = {
   {gettext_noop("Click to place a rain drop onto your picture."),
    gettext_noop("Click to cover your picture with rain drops."),},
@@ -78,6 +82,7 @@ int rain_init(magic_api * api);
 int rain_get_tool_count(magic_api * api);
 SDL_Surface *rain_get_icon(magic_api * api, int which);
 char *rain_get_name(magic_api * api, int which);
+int rain_get_group(magic_api * api, int which);
 char *rain_get_description(magic_api * api, int which, int mode);
 static void do_rain_drop(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 static void rain_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
@@ -143,6 +148,12 @@ SDL_Surface *rain_get_icon(magic_api * api, int which)
 char *rain_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return (strdup(gettext_noop(rain_names[which])));
+}
+
+// Return our groups
+int rain_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
+{
+  return rain_groups[which];
 }
 
 // Return our descriptions, localized:

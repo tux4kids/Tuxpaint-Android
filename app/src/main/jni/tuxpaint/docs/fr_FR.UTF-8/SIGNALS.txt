@@ -1,5 +1,5 @@
                                    Tux Paint
-                                 version 0.9.26
+                                 version 0.9.27
                          Documentation sur les signaux
 
       Copyright &copie; 2019-2021 par divers contributeurs; voir AUTHORS.
@@ -19,14 +19,14 @@
            exemple, en cliquant sur un bouton de fermeture de fenêtre, ou en
            appuyant sur [Alt] + [F4] sur la plupart des systèmes).
 
-           Depuis l'interface principale, Tux Paint vous demandera si
-           souhaitez quitter ou pas, et (sauf si remplacé par l'option
+           Depuis l'interface principale, Tux Paint vous demandera si vous
+           souhaitez quitter ou non, et (sauf si remplacé par l'option
            autosave, par ex. "--autosave") si vous souhaitez enregistrer le
            dessin courant (s'il n'est pas enregistré), et si c'est le cas, et
            c'est une version modifiée d'un dessin existant (sauf si remplacé
            par les options pour écraser les images anciennes, ou bien
-           sauvegarder avec un nouveau nom; par ex. "--saveover" ou
-           "--saveovernew"). vers un nouveau fichier.
+           sauvegarder avec un nouveau nom (par ex. "--saveover" ou
+           "--saveovernew") vers un nouveau fichier.
 
            Remarque :Sur d'autres parties de l'interface, le signal est en
            fait interprété comme une demande de retour en arrière (par
@@ -53,7 +53,7 @@
            À partir d'autres parties de l'interface, malheureusement, Tux
            Paint ne reviendra que d'un niveau dans l'interface. Par
            conséquent, à ce moment, il peut être nécessaire d'envoyer ce
-           signal à Tux Paint plusieurs fois, pour qu'il s'arrête
+           signal à Tux Paint plusieurs fois pour qu'il s'arrête
            complètement.
 
            Exemple: killall -s SIGUSR1 tuxpaint

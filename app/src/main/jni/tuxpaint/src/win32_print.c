@@ -65,8 +65,6 @@ static SDL_Surface *make24bitDIB(SDL_Surface * surf)
   pixfmt.Gloss = 0;
   pixfmt.Bloss = 0;
   pixfmt.Aloss = 0;
-  pixfmt.colorkey = 0;
-  pixfmt.alpha = 0;
 
   surf24 = SDL_ConvertSurface(surf, &pixfmt, SDL_SWSURFACE);
   surfDIB = SDL_CreateRGBSurface(SDL_SWSURFACE, surf24->w, surf24->h, 24,
@@ -320,7 +318,7 @@ int IsPrinterAvailable(void)
 /**
  * FIXME
  */
-const char *SurfacePrint(SDL_Surface * surf, const char *printcfg, int showdialog)
+const char *SurfacePrint(SDL_Window * window, SDL_Surface * surf, const char *printcfg, int showdialog)
 {
   const char *res = NULL;
   HWND hWnd;
@@ -338,10 +336,10 @@ const char *SurfacePrint(SDL_Surface * surf, const char *printcfg, int showdialo
   int scaling = SCALE_TO_FIT;
 
   SDL_VERSION(&wminfo.version);
-  if (!SDL_GetWMInfo(&wminfo))
+  if (!SDL_GetWindowWMInfo(window, &wminfo))
     return "win32_print: SDL_GetWMInfo() failed.";
 
-  hWnd = wminfo.window;
+  hWnd = wminfo.info.win.window;
   if (!GetPrinterDC(hWnd, printcfg, showdialog))
     {
       ShowWindow(hWnd, SW_SHOWNORMAL);

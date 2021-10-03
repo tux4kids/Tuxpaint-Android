@@ -4,7 +4,7 @@
   Light Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: September 21, 2021
   $Id$
 */
 
@@ -45,6 +45,7 @@ int light_init(magic_api * api);
 int light_get_tool_count(magic_api * api);
 SDL_Surface *light_get_icon(magic_api * api, int which);
 char *light_get_name(magic_api * api, int which);
+int light_get_group(magic_api * api, int which);
 char *light_get_description(magic_api * api, int which, int mode);
 static void do_light(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 void light_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -101,6 +102,12 @@ SDL_Surface *light_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 char *light_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Light")));
+}
+
+// Return our groups:
+int light_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PAINTING;
 }
 
 // Return our descriptions, localized:

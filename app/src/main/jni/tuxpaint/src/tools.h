@@ -19,11 +19,11 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Copyright (c) 2002-2020 by Bill Kendrick
+  Copyright (c) 2002-2021 by Bill Kendrick
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
-  June 14, 2002 - August 15, 2020
+  June 14, 2002 - September 6, 2021
   $Id$
 */
 
@@ -120,9 +120,8 @@ const char *const tool_tips[NUM_TOOLS] = {
   // Line tool instructions
   gettext_noop("Click to start drawing a line. Let go to complete it."),
 
-  // Shape tool instructions
-  gettext_noop
-    ("Pick a shape. Click to start drawing, drag, and let go when it is the size you want. Move around to rotate it, and click to draw it."),
+  // Shape tool instructions (defined in "shapes.h")
+  "",
 
   // Text tool instructions
   gettext_noop
@@ -132,8 +131,8 @@ const char *const tool_tips[NUM_TOOLS] = {
   gettext_noop
     ("Choose a style of text. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text. By using the selector button and clicking an existing label, you can move it, edit it and change its text style."),
 
-  // Fill tool instructions
-  gettext_noop("Click in the picture to fill that area with color."),
+  // Fill tool instructions (defined in "fill_tools.h")
+  "",
 
   // Magic tool instruction
   gettext_noop("Pick a magical effect to use on your drawing!"),

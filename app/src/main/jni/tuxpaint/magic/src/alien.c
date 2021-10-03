@@ -6,7 +6,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com> inspired by the Alien Map GIMP plugin
 
-  Copyright (c) 2002-2019 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: August 29, 2019
+  Last updated: September 20, 2021
   $Id$
 */
 
@@ -68,6 +68,10 @@ const char *alien_names[alien_NUM_TOOLS] = {
   gettext_noop("Color Shift"),
 };
 
+const int alien_groups[alien_NUM_TOOLS] = {
+  MAGIC_TYPE_COLOR_FILTERS,
+};
+
 const char *alien_descs[alien_NUM_TOOLS][2] = {
   {gettext_noop("Click and drag the mouse to change the colors in parts of your picture."),
    gettext_noop("Click to change the colors in your entire picture."),},
@@ -79,6 +83,7 @@ int alien_init(magic_api * api);
 int alien_get_tool_count(magic_api * api);
 SDL_Surface *alien_get_icon(magic_api * api, int which);
 char *alien_get_name(magic_api * api, int which);
+int alien_get_group(magic_api * api, int which);
 char *alien_get_description(magic_api * api, int which, int mode);
 void alien_drag(magic_api * api, int which, SDL_Surface * canvas,
                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
@@ -134,6 +139,11 @@ SDL_Surface *alien_get_icon(magic_api * api, int which)
 char *alien_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return (strdup(gettext_noop(alien_names[which])));
+}
+
+int alien_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
+{
+  return alien_groups[which];
 }
 
 // Return our descriptions, localized:

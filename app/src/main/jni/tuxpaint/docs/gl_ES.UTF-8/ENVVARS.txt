@@ -1,11 +1,11 @@
                                    Tux Paint
-                                 versión 0.9.26
+                                 versión 0.9.27
                      Documentación de variábeis de contorno
 
     Copyright © 2021-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
-                               11 de Maio de 2021
+                              8 de Agosto de 2021
 
      ----------------------------------------------------------------------
 
@@ -36,25 +36,23 @@ Variábeis de contorno relacionadas co almacenamento
 
    XDG_CONFIG_HOME
 
-           En Linux e noutras plataformas onde se usan os estándares X
-           Desktop Group, a localización dos ficheiros de configuración do
-           usuario. Especificamente, onde atopar «user-dirs.dirs», onde se
-           podería definir o «XDG_PICTURES_DIR». Úsase para exportar debuxos
-           e GIF animados. Xeralmente estabelecese en algo así como
-           «$HOME/Pictures/». Se non se especifica, Tux Paint comproba no
-           directorio «$HOME/.config/». Se non se pode atopar a
-           configuración, Tux Paint simplemente exporta debuxos e GIF a
-           «$HOME».
+           On Linux and other platforms where the X Desktop Group standards
+           are used, the location of the user's configuration files.
+           Specifically, where to find "user-dirs.dirs", where the
+           "XDG_PICTURES_DIR" might be defined. It is used for exporting
+           drawings and animated GIFs. Generally it's set to something like
+           "$HOME/Pictures/". If not specified, Tux Paint checks in the
+           directory "$HOME/.config/". If the configuration cannot be found,
+           Tux Paint simply exports drawings and GIFs to "$HOME".
 
    XDG_DATA_HOME
 
-           En Linux e noutras plataformas onde se usan os estándares X
-           Desktop Group, a localización dos directorios de datos do usuario.
-           En concreto, onde atopar o directorio «Trash». Úsase cando se
-           eliminan imaxes do diálogo «Abrir» de Tux Paint. Se non se define,
-           úsase a localización «$HOME/.local/share/Trash/», se está
-           dispoñíbel. Se non, as imaxes bórranse simplemente no canto de
-           movelas a calquera outro lugar.
+           On Linux and other platforms where the X Desktop Group standards
+           are used, the location of the user's data directories.
+           Specifically, where to find the "Trash" directory. It is used when
+           deleting images from Tux Paint's "Open" dialog. If not set, the
+           location "$HOME/.local/share/Trash/" is used, if available. If
+           not, images are simply deleted, rather than moved anywhere.
 
    TEMP
 
@@ -72,12 +70,11 @@ Variábeis de contorno relacionadas co idioma
 
    LC_MESSAGES
 
-           Especifica o idioma que debe empregar Tux Paint na súa interface
-           de usuario. Anulada polas opcións da liña de ordes «--lang» e
-           «--locale» ou as súas equivalentes do ficheiro de configuración.
-           Utilízase a variábel de contorno 'LANGUAGE', se está definida. Se
-           non, «LC_ALL» úsase como alternativa. Após «LC_MESSAGES» e,
-           finalmente, «LANG».
+           Specify the language Tux Paint should utilize in its user
+           interface. Overridde by the "--lang" and "--locale" command-line
+           options or their configuration file counterparts. The "LANGUAGE"
+           environment variable is used, if set. If not, "LC_ALL" is used as
+           a fallback. Then "LC_MESSAGES", and finally "LANG".
 
 Variábeisbles de contorno relacionadas co que se amosa
 
@@ -95,7 +92,6 @@ Variábeisbles de contorno relacionadas co que se amosa
 
    SDL_VIDEO_WINDOW_POS
 
-           Solicita onde colocar a xanela de Tux Paint. Normalmente
-           estabelécese en «center» polo propio Tux Paint, a menos que a
-           variábel de contorno xa estea estabelecida (por exemplo, en
-           «nopref», que significa «sen preferencia»).
+           Requests where to position Tux Paint's window. Normally set to
+           "center" by Tux Paint itself, unless the environment variable is
+           already set (e.g., to "nopref", meaning "no preference").

@@ -6,7 +6,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2007 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: June 6, 2008
+  Last updated: September 21, 2021
   $Id$
 */
 
@@ -66,6 +66,10 @@ const char *noise_names[noise_NUM_TOOLS] = {
   gettext_noop("Noise"),
 };
 
+const int noise_groups[noise_NUM_TOOLS] = {
+  MAGIC_TYPE_DISTORTS,
+};
+
 const char *noise_descs[noise_NUM_TOOLS][2] = {
   {gettext_noop("Click and drag the mouse to add noise to parts of your picture."),
    gettext_noop("Click to add noise to your entire picture."),},
@@ -75,6 +79,7 @@ Uint32 noise_api_version(void);
 int noise_init(magic_api * api);
 SDL_Surface *noise_get_icon(magic_api * api, int which);
 char *noise_get_name(magic_api * api, int which);
+int noise_get_group(magic_api * api, int which);
 char *noise_get_description(magic_api * api, int which, int mode);
 static void do_noise_pixel(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 static void do_noise_full(void *ptr, SDL_Surface * canvas, SDL_Surface * last, int which);
@@ -132,6 +137,12 @@ SDL_Surface *noise_get_icon(magic_api * api, int which)
 char *noise_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return (strdup(gettext_noop(noise_names[which])));
+}
+
+// Return our groups
+int noise_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
+{
+  return noise_groups[which];
 }
 
 // Return our descriptions, localized:

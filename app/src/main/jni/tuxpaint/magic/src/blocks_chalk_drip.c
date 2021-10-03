@@ -4,7 +4,7 @@
   Blocks, Chalk and Drip Magic Tools Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: September 20, 2021
   $Id$
 */
 
@@ -56,6 +56,7 @@ Uint32 blocks_chalk_drip_api_version(void);
 int blocks_chalk_drip_get_tool_count(magic_api * api);
 SDL_Surface *blocks_chalk_drip_get_icon(magic_api * api, int which);
 char *blocks_chalk_drip_get_name(magic_api * api, int which);
+int blocks_chalk_drip_get_group(magic_api * api, int which);
 char *blocks_chalk_drip_get_description(magic_api * api, int which, int mode);
 static void blocks_chalk_drip_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 void blocks_chalk_drip_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -133,6 +134,12 @@ char *blocks_chalk_drip_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
     return (strdup(gettext_noop("Drip")));
 
   return (NULL);
+}
+
+// Return our group (all the same):
+int blocks_chalk_drip_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_DISTORTS;
 }
 
 // Return our descriptions, localized:

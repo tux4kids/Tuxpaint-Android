@@ -4,7 +4,7 @@
   Flower Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,13 +23,14 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 26, 2011
+  Last updated: September 21, 2021
   $Id$
 */
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 #include "tp_magic_api.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
@@ -69,6 +70,7 @@ int flower_init(magic_api * api);
 int flower_get_tool_count(magic_api * api);
 SDL_Surface *flower_get_icon(magic_api * api, int which);
 char *flower_get_name(magic_api * api, int which);
+int flower_get_group(magic_api * api, int which);
 char *flower_get_description(magic_api * api, int which, int mode);
 static void flower_predrag(magic_api * api, SDL_Surface * canvas, SDL_Surface * last, int ox, int oy, int x, int y);
 void flower_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -142,6 +144,12 @@ SDL_Surface *flower_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 char *flower_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Flower")));
+}
+
+// Return our groups:
+int flower_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_ARTISTIC;
 }
 
 // Return our descriptions, localized:
@@ -381,7 +389,7 @@ static void flower_drawstalk(magic_api * api ATTRIBUTE_UNUSED, SDL_Surface * can
               else
                 side = LEAFSIDE_RIGHT_UP;
             }
-          else if (abs(curve[i - 2].x - curve[i + 2].x) < 5)
+          else if (fabs(curve[i - 2].x - curve[i + 2].x) < 5)
             {
               /* Mostly up; stick left- or right-downward: */
 

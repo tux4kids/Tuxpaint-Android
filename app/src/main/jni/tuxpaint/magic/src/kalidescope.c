@@ -4,7 +4,7 @@
   Kaleidoscope Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: September 21, 2021
   $Id$
 */
 
@@ -65,6 +65,7 @@ int kalidescope_init(magic_api * api);
 int kalidescope_get_tool_count(magic_api * api);
 SDL_Surface *kalidescope_get_icon(magic_api * api, int which);
 char *kalidescope_get_name(magic_api * api, int which);
+int kalidescope_get_group(magic_api * api, int which);
 char *kalidescope_get_description(magic_api * api, int which, int mode);
 static void do_kalidescope(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 void kalidescope_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -135,6 +136,13 @@ char *kalidescope_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
       return (strdup(gettext_noop("Kaleidoscope")));
     }
 }
+
+// Return our group (all the same):
+int kalidescope_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PATTERN_PAINTING;
+}
+
 
 // Return our descriptions, localized:
 char *kalidescope_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)

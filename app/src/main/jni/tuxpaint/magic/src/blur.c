@@ -6,7 +6,7 @@
 
   Credits: Bill Kendrick<bill@newbreedsoftware.com> & Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: September 20, 2021
   $Id$
 */
 
@@ -44,6 +44,7 @@ int blur_init(magic_api * api);
 int blur_get_tool_count(magic_api * api);
 SDL_Surface *blur_get_icon(magic_api * api, int which);
 char *blur_get_name(magic_api * api, int which);
+int blur_get_group(magic_api * api, int which);
 char *blur_get_description(magic_api * api, int which, int mode);
 void blur_drag(magic_api * api, int which, SDL_Surface * canvas,
                SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
@@ -78,6 +79,10 @@ const char *blur_icon_filenames[blur_NUM_TOOLS] = {
 
 const char *blur_names[blur_NUM_TOOLS] = {
   gettext_noop("Blur"),
+};
+
+const int blur_groups[blur_NUM_TOOLS] = {
+  MAGIC_TYPE_DISTORTS,
 };
 
 const char *blur_descs[blur_NUM_TOOLS][2] = {
@@ -123,6 +128,12 @@ SDL_Surface *blur_get_icon(magic_api * api, int which)
 char *blur_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return (strdup(gettext_noop(blur_names[which])));
+}
+
+// Return our group
+int blur_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
+{
+  return blur_groups[which];
 }
 
 // Return our descriptions, localized:

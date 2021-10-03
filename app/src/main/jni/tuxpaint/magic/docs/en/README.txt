@@ -1,9 +1,9 @@
                      Creating Tux Paint Magic Tool Plugins
 
-          Copyright 2007-2018 by various contributors; see AUTHORS.txt
+          Copyright 2007-2021 by various contributors; see AUTHORS.txt
                             http://www.tuxpaint.org/
 
-                        July 5, 2007 - February 20, 2021
+                       July 5, 2007 - September 21, 2021
 
      ----------------------------------------------------------------------
 
@@ -203,6 +203,33 @@ Interfaces
 
              Note: Called once for each Magic tool your plugin claims to
              contain (by your "get_tool_count()").
+
+           * int get_group(magic_api * api, int which)
+             Use this to group tools together within sections of the 'Magic'
+             selector. A number of groups are pre-defined within an enum
+             found in "tp_magic_api.h":
+                * MAGIC_TYPE_DISTORTS mdash; Tools that distort the shape of
+                  the image, like Blur, Emboss, and Ripples
+                * MAGIC_TYPE_COLOR_FILTERS mdash; Tools that mostly affect
+                  the colors of the image without distortion, like Darken,
+                  Negative, and Tint
+                * MAGIC_TYPE_PICTURE_WARPS mdash; Tools that warp or move the
+                  entire picture, like Shift, Flip, and Waves
+                * MAGIC_TYPE_PAINTING mdash; Tools that generally paint new
+                  content at the cursor position, like Grass, Bricks, and
+                  Rails
+                * MAGIC_TYPE_PATTERN_PAINTING mdash; Tools that paint in
+                  multiple places at once, like Kaleidoscope and the Symmetry
+                  tools
+                * MAGIC_TYPE_PICTURE_DECORATIONS mdash; Tools that apply
+                  decorations to the entire picture, like Blinds and
+                  Checkboard
+                * MAGIC_TYPE_ARTISTIC mdash; Special-purpose artistic tools,
+                  like Flower, the String tools, and the Rainbow-arc-drawing
+                  tools.
+             Note: Called once for each Magic tool your plugin claims to
+             contain (by your "get_tool_count()").
+             Note: Added to Tux Paint 0.9.27; Magic API version '0x00000005'
 
            * SDL_Surface * get_icon(magic_api * api, int which)
              This should return an SDL_Surface containing the icon

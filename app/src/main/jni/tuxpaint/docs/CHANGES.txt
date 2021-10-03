@@ -8,6 +8,160 @@ http://www.tuxpaint.org/
 
 $Id$
 
+2021.September.29 (0.9.28)
+  * New Magic Tools:
+    ----------------
+    * "Lightning" - Draws a bolt of lightning striking between
+      the start and end positions of a line.
+
+    * "Opposite" -- Change parts of the picture to their complementary
+      colors.  (Similar to "Negative", but instead of inverting the
+      Red, Green, and Blue components, it rotates the Hue 180 degrees
+      while leaving Saturation and Lightness alone.)
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/136/)
+
+    * "Panels" - Convert your picture to 4-panel-comic-style
+      2x2 image, repeating the original.  (Repeat for "compound eye"
+      style effects!)
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/204/)
+
+    * "Smooth Rainbow" - A smooth, gradient variation of the classic
+      "Rainbow" Magic tool.
+
+  * Magic Tool Improvements:
+    ------------------------
+    * "Halftone" works much better, drawing large overlapping circles
+      of Cyan, Magenta, Yellow, and Black, based on the average
+      color of the area of the picture being replaced, to give a
+      "newsprint" effect.
+
+    * "TV" now breaks pixels into red/green/blue components,
+      rather than merely adding a 'scanline' effect.
+
+    * "Halftone" and "Emboss" can now affect the entire image at once.
+
+  * Other Improvements:
+    -------------------
+    * Grouped similar Magic tools into sections.
+      (e.g., all of the distortions, versus painting tools, versus
+      full-image effects, etc.)
+
+      Use the left/right pagination buttons that now appear at the
+      bottom of the selector (similar to those used with Stamps tool)
+      to switch between groups.
+
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/201/
+      Note: Bumps `TP_MAGIC_API_VERSION` to 0x00000005.
+
+    * Rotational brushes now supported.  Unlike "directional"
+      brushes, in which a 3x3 grid representing the 8 cardinal
+      directions (45 degree steps) is used, only a single brush image
+      is required, and Tux Paint will rotate it between 0 and 360 degrees,
+      depending on the direction the mouse is going.  The brush's ".dat"
+      file should contain a line consisting of the word "rotate".
+      + Note: This adds a dependency on "SDL_gfx" library
+        (Homepage: https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/
+        SourceForge project page: https://sourceforge.net/projects/sdlgfx/)
+        as this feature use it's "rotozoomSurface()" and "SDL_gfxBlitRGBA()".
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/122/)
+
+    * Replaced the "arrow_compass_points" brush with a single
+      arrow which can rotate at any angle, using the new
+      "rotational" brush feature.
+
+    * Small icons appear on brush selection buttons denoting
+      when the brush is animated and/or directional.
+      (Closes https://sourceforge.net/p/tuxpaint/bugs/183/)
+
+    * Always show the appropriate instructions at the bottom when the
+      "Fill" (depends on which sub-tool chosen) and "Shapes" (depends
+      on whether "simpleshapes" option is set) tools are selected
+      (e.g., when returning from the "Open" dialog).
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/186/)
+
+  * Documentation updates:
+    ---------------------
+    * Ensured Tux Paint's built-in help ("tuxpaint --help"),
+      Unix manual ("man page"), and command-line option
+      tab-completion list, and "OPTIONS" documentation all cover
+      the full set of Tux Paint options.
+
+    * Reorganized the "Available Options" section of "OPTIONS"
+      documentation (to match the organization found in the UI
+      of "Tux Paint Config.")
+
+    * Reorganized the options listed in Tux Paint's man page,
+      to more closely (but not precisely) match the organization
+      noted above.
+
+    * tuxpaint(1) manpage is now managed & translatable via the
+      'tuxpaint-docs' project, just like the HTML & plaintext
+      documentation files (since 0.9.26).
+
+    * Documentation to the various Magic tools are also now
+      managed & translatable via the 'tuxpaint-docs' project.
+
+    * Added table of contents to some documentation
+      ("Options Documentation", "FAQ", "Installation Documentation",
+      and "Advanced Stamps 'How-To'").
+
+    * Moved Windows and macOS compilation instructions into main
+      "Installation Documentation" (docs/.../INSTALL...).
+
+    * Expanded explanation of how stamp tinting modes work
+      in "Extending Tux Paint" documentation.
+
+    * Documentation translation updates:
+      + French translation
+        Jacques Chion <jacques.chion@orange.fr>
+
+  * Translation Updates:
+    --------------------
+    * Ensure some locales have hints to find the best fonts
+      for the Text and Label tools:
+      + Greek
+      + Scottish Gaelic
+
+    * Catalan
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * French
+      Jacques Chion <jacques.chion@orange.fr>
+
+    * Icelandic
+      Sveinn í Felli <sv1@fellsnet.is>
+
+    * Japanese
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Portuguese (Portugal) translation
+      Hugo Carvalho <hugokarvalho@hotmail.com>
+
+  * Bug Fixes:
+    ----------
+    * "Negative" magic tool did not play its sound when using
+      fullscreen (vs painting) mode. Fixed.
+
+    * "Zoom" magic tool icon had weird artifacting. Mended.
+
+    * "Halftone" magic tool had the "Zoom" tool's icon.
+
+    * Undo buffer canvases were not always the same dimensions
+      as the drawing surface, if buttonsize was adjusted.
+      (Adversely affected "Shift" magic tool.)
+
+  * Ports & Building
+    ----------------
+    * Fix compilation error on Linux with HOST environment variable set.
+      Modifies the Makefile so it attempts to cross compile only when both
+      HOST and HOSTROOT environment variable (which are both required for
+      cross compilation) are set; avoid confusion when an unrelated
+      $HOST env. var. is set.
+      Mark K. Kim <markuskimius@gmail.com>
+
+    * Include "AppVersion" directive to Windows installer ISS file.
+      Easton Pillay <https://sourceforge.net/u/jedieaston/profile/>
+
 2021.June.28 (0.9.26)
   * New Features
     ------------

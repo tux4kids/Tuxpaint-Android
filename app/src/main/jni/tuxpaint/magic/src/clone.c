@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 20, 2021
+  Last updated: September 21, 2021
   $Id$
 */
 
@@ -70,6 +70,7 @@ Uint32 clone_api_version(void);
 int clone_get_tool_count(magic_api * api);
 SDL_Surface *clone_get_icon(magic_api * api, int which);
 char *clone_get_name(magic_api * api, int which);
+int clone_get_group(magic_api * api, int which);
 char *clone_get_description(magic_api * api, int which, int mode);
 void clone_drag(magic_api * api, int which, SDL_Surface * canvas,
                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
@@ -130,6 +131,12 @@ SDL_Surface *clone_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 char *clone_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Clone")));
+}
+
+// Return our groups:
+int clone_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_DISTORTS;
 }
 
 // Return our descriptions, localized:

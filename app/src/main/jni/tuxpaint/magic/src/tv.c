@@ -5,8 +5,9 @@
   Tux Paint - A simple drawing program for children.
 
   Credits: Adam 'foo-script' Rakowski <foo-script@o2.pl>
+  and Bill Kendrick <bill@newbreedsoftware.com>
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -29,6 +30,7 @@
 #include "tp_magic_api.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
+#include <math.h>
 
 int RADIUS = 16;
 
@@ -40,6 +42,7 @@ int tv_init(magic_api * api);
 int tv_get_tool_count(magic_api * api);
 SDL_Surface *tv_get_icon(magic_api * api, int which);
 char *tv_get_name(magic_api * api, int which);
+int tv_get_group(magic_api * api, int which);
 char *tv_get_description(magic_api * api, int which, int mode);
 int tv_requires_colors(magic_api * api, int which);
 void tv_release(magic_api * api, int which,
@@ -96,6 +99,11 @@ char *tv_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
   return strdup(gettext_noop("TV"));
 }
 
+int tv_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_DISTORTS;
+}
+
 char *tv_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
@@ -124,25 +132,61 @@ void tv_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 
 // Interactivity functions
 
+void tv_do_tv(void *ptr_to_api, int which_tool ATTRIBUTE_UNUSED,
+              SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+{
+  magic_api *api = (magic_api *) ptr_to_api;
+  Uint8 r, g, b, i;
+
+  for (i = 0; i < 2; i++)
+    {
+      /* Convert the line below to their red/green/blue elements */
+      SDL_GetRGB(api->getpixel(snapshot, x, y + i), snapshot->format, &r, &g, &b);
+      if (x % 3 == 0)
+        {
+          /* Red */
+          g = 0;
+          b = 0;
+        }
+      else if (x % 3 == 1)
+        {
+          /* Green */
+          r = 0;
+          b = 0;
+        }
+      else
+        {
+          /* Blue */
+          r = 0;
+          g = 0;
+        }
+
+      r = r / (i + 1);
+      g = g / (i + 1);
+      b = b / (i + 1);
+
+      api->putpixel(canvas, x, y + i, SDL_MapRGB(canvas->format, r, g, b));
+    }
+}
+
 void tv_paint_tv(void *ptr_to_api, int which_tool ATTRIBUTE_UNUSED,
                  SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   int i, j;
   magic_api *api = (magic_api *) ptr_to_api;
 
+  y = (y - (y % 2)); 
+
   for (i = x - RADIUS; i < x + RADIUS; i++)
-    for (j = y - RADIUS; j < y + RADIUS; j++)
-      if ((j + 1) % 2 && api->in_circle(i - x, j - y, RADIUS) && !api->touched(i, j))
-        api->putpixel(canvas, i, j, SDL_MapRGB(canvas->format, 128, 128, 165));
-}
-
-void tv_do_tv(void *ptr_to_api, int which_tool ATTRIBUTE_UNUSED,
-              SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
-{
-  magic_api *api = (magic_api *) ptr_to_api;
-
-  api->putpixel(canvas, x, y, SDL_MapRGB(canvas->format, 128, 128, 165));
-  //api->putpixel(canvas, x, y, SDL_MapRGB(canvas->format, 0, 0, 255));
+    {
+      for (j = y - RADIUS; j < y + RADIUS; j += 2)
+        {
+          if (api->in_circle(i - x, j - y, RADIUS) && !api->touched(i, j))
+            {
+              tv_do_tv(api, 0, canvas, snapshot, i, j);
+            }
+        }
+    }
 }
 
 void tv_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -162,10 +206,13 @@ void tv_click(magic_api * api, int which, int mode,
 {
   if (mode == MODE_FULLSCREEN)
     {
-      int i;
-
-      for (i = 0; i < canvas->h; i += 2)
-        api->line(api, which, canvas, last, 0, i, canvas->w, i, 1, tv_do_tv);
+      for (y = 0; y < canvas->h; y += 2)
+        {
+          for (x = 0; x < canvas->w; x++)
+            {
+              tv_do_tv(api, which, canvas, last, x, y);
+            }
+        }
 
       update_rect->w = canvas->w;
       update_rect->h = canvas->h;

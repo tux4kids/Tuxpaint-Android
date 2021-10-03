@@ -1,11 +1,11 @@
                                    Extension
                                    Tux Paint
-                                 version 0.9.26
+                                 version 0.9.27
 
       Copyright &copie; 2002-2021 par divers contributeurs; voir AUTHORS.
                             http://www.tuxpaint.org/
 
-                                  mai 31, 2021
+                               septembre 19, 2021
 
      ----------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ Où vont les fichiers
   Fichiers standards
 
        Tux Paint recherche ses différents fichiers de données dans son
-       répertoire ' data'.
+       répertoire 'data'.
 
     Linux et Unix
 
@@ -88,7 +88,7 @@ Où vont les fichiers
              (Si vous avez une souris avec plus d'un bouton, vous pouvez
              simplement cliquer avec le bouton droit de la souris sur
              l'icône.)
-          2. Sélectionnez " Afficher le contenu " dans le menu qui apparaît.
+          2. Sélectionnez "Afficher le contenu" dans le menu qui apparaît.
              Une nouvelle fenêtre du Finder apparaîtra avec un dossier à
              l'intérieur appelé " Contents".
           3. Ouvrez le dossier "Contents " et ouvrez le dossier "Resources"
@@ -118,14 +118,14 @@ Où vont les fichiers
 
   Fichiers personnels
 
-       Vous pouvez également créer des pinceaux, des tampons, des polices des
-       images de démarrage, des modèles et des polices dans votre propre
-       répertoire où Tux Paint les retrouvera.
+       Vous pouvez également créer des pinceaux, des images de démarrage, des
+       modèles et des polices dans votre propre répertoire où Tux Paint les
+       retrouvera.
 
     Windows
 
          Votre dossier personnel Tux Paint est stocké dans votre dossier
-         "Application Data". Par exemple, sur Windows plus récent :
+         "Application Data". Par exemple, sur un Windows plus récent :
 
            C:\Documents and Settings\(nom d'utilisateur)\Application
            Data\TuxPaint\
@@ -140,8 +140,8 @@ Où vont les fichiers
     Linux et Unix
 
          Vos fichiers personnels Tux Paint vont dans un 'répertoire caché'
-         que l'on trouve dans votre répertoire personnel "
-         $(HOME)/.tuxpaint/" (également appelé "~/.tuxpaint/".
+         que l'on trouve dans votre répertoire personnel "$(HOME)/.tuxpaint/"
+         (également appelé "~/.tuxpaint/".
 
          Autrement dit, si votre répertoire personnel est "/home/tux", alors
          votre répertoire Tux Paint est "/home/tux/.tuxpaint/".
@@ -173,9 +173,9 @@ Pinceaux
 
   Options de pinceau
 
-       Outre une a graphical shape, les brushes peuvent également recevoir
+       Outre une une forme graphique, les pinceaux peuvent également recevoir
        d'autres attributs. Pour ce faire, vous devez créer un «fichier de
-       données» pour brush.
+       données» pour brosse.
 
        Un fichier de données de brush's est simplement un fichier texte ASCII
        contenant les options pour le brush.
@@ -228,24 +228,36 @@ Pinceaux
          ...
 
          Ajoute une ligne contenant le mot "directional" au fichier de
-         données brush's.
+         données brosse.
 
-    Pinceaux animés orientables
+    Pinceaux tournants
 
-         Vous pouvez mélanger animation et orientation dans un même pinceau.
-         Utilisez les deux options ("frames=N" et "directional") en deux
-         lignes séparées dans le fichier ".dat" qui concerne le pinceau.
+         Depuis la version 0.9.27 de Tux Paint , vous pouvez désormais créer
+         des pinceaux tournants. Au fur et à mesure que le pinceau est
+         utilisé, il tourne de 360 degrés, en fonction de la direction du
+         pinceau.
 
-         Disposez le pinceau de manière à ce que chaque ensemble 3x3 de
-         formes orientables soit disposé sur une grande image PNG. Par
-         exemple, si le pinceau mesure 30x30 et qu'il y a 5 cadres, ce sera
-         450x90. (Les 150x90 pixels les plus à gauche de l'image représentent
-         les 9 formes de direction pour la première image, par exemple).
+         Ajoute une ligne contenant le mot "rotate" au fichier de données
+         brosse.
+
+    Pinceaux animés orientables ou tournants
+
+         Vous pouvez mélanger animation et orientation (ou rotation) dans un
+         même pinceau. Utilisez les deux options ("frames=N" et "directional"
+         ou "rotate) en deux lignes séparées dans le fichier ".dat" qui
+         concerne le pinceau.
+
+         Pour les pinceaux directionnels, disposez le pinceau de manière à ce
+         que chaque ensemble 3x3 de formes orientables soit disposé sur une
+         grande image PNG. Par exemple, si le pinceau mesure 30x30 et qu'il y
+         a 5 cadres, ce sera 450x90. (Les 150x90 pixels les plus à gauche de
+         l'image représentent les 9 formes de direction pour la première
+         image, par exemple).
 
      Placez les PNG de l'image du pinceau (et tous les fichiers texte de
      données) dans le répertoire "brushes".
 
-     Remarque: si vos nouveaux brushes se présentent tous sous forme de
+     Remarque: si vos nouveaux pinceaux se présentent tous sous forme de
      carrés ou de rectangles pleins, c'est que vous avez oublié d'utiliser la
      transparence alpha ! Consultez le fichier de documentation "PNG" pour
      plus d'informations et de conseils.
@@ -274,14 +286,14 @@ Tampons
        Les fichiers PNG peuvent être de n'importe quelle taille, et Tux Paint
        (par défaut) fournit un ensemble de boutons de redimensionnement pour
        permettre à l'utilisateur d'ajuster le tampon vers le haut (plus
-       grand) et vers le bas (plus petit).
+       grand) et vers le bas (plus petits).
 
        Les SVG sont basés sur des vecteurs et seront mis à l'échelle de
        manière adéquate pour le canevas utilisé.
 
-       Remarque: si vos nouveaux PNG-based stamps se présentent tous sous
-       forme de carrés ou de rectangles pleins, c'est que vous avez oublié
-       d'utiliser la transparence alpha ! Consultez le fichier de
+       Remarque: si vos nouveaux des tampons basés sur PNG se présentent tous
+       sous forme de carrés ou de rectangles pleins, c'est que vous avez
+       oublié d'utiliser la transparence alpha ! Consultez le fichier de
        documentation "PNG" pour plus d'informations et de conseils.
 
        Remarque: si vos nouveaux tampons SVG semblent avoir beaucoup de zones
@@ -344,8 +356,8 @@ Tampons
        exemple, le son d'un canard faisant coin-coin, ou un bref morceau de
        musique quand un instrument est choisi. Les fichiers doivent être aux
        formats "WAVE (".wav")" ou OGG Vorbis (".ogg"), et porter le même nom
-       que l'image PNG ou SVG.( par ex., l'effet sonore "stamp.svg" est le
-       son du fichier "stamp.ogg" qui est le même répertoire).
+       que l'image PNG ou SVG.( par ex., l'effet sonore "stamp.ogg" est le
+       son du fichier "stamp.svg" qui est dans le même répertoire).
 
     Support pour la régionalisation
 
@@ -355,9 +367,11 @@ Tampons
          l'étiquette de la locale dans le nom de fichier, sous la forme :
          "stamp_LOCALE.EXT"
 
-         "effet sonore" de "stamp.png", lorsque Tux Paint est exécuté en mode
-         espagnol, serait «stamp.png". En mode français, "stamp_es.wav". En
-         mode portugais brésilien, "stamp_fr.wav". Etc...
+         L'effet sonore qui sera joué lorsque le tampon correspondant au
+         fichier image "stamp.png" est choisi, et que Tux Paint utilise la
+         langue espagnole, sera "stamp_es.wav". Avec la langue française, ce
+         sera "stamp_fr.wav". Avec le portugais brésilien, "stamp_pt_BR.wav",
+         etc ...
 
          Si aucun effet sonore localisé ne peut être chargé, Tux Paint
          tentera de charger le fichier son «par défaut». (par exemple,
@@ -386,10 +400,11 @@ Tampons
          paramètres régionaux dans le nom de fichier, sous la forme :
          "stamp_desc_LOCALE.EXT"
 
-         "son descriptif" de "stamp.png", lorsque Tux Paint est exécuté en
-         mode espagnol, serait «stamp_desc_es.wav". En mode français,
-         "stamp_desc_fr.wav". En mode portugais brésilien,
-         "stamp_desc_pt_BR.wav". Etc...
+         L'son descriptif qui sera joué lorsque le tampon correspondant au
+         fichier image "stamp.png" est choisi, et que Tux Paint utilise la
+         langue espagnole, sera "stamp_desc_es.wav". Avec la langue
+         française, ce sera "stamp_desc_fr.wav". Avec le portugais brésilien,
+         "stamp_desc_pt_BR.wav", etc ...
 
          Si aucun son descriptif localisé ne peut être chargé, Tux Paint
          tentera de charger le fichier son «par défaut». (par exemple,
@@ -399,15 +414,15 @@ Tampons
 
   Options des tampons
 
-       Outre une a graphical shape, a textual description, a sound effect,
-       and a descriptive sound, les stamps peuvent également recevoir
-       d'autres attributs. Pour ce faire, vous devez créer un «fichier de
-       données» pour stamp.
+       Outre une une forme graphique, un texte de description, un effet
+       sonore et une description orale, les tampons peuvent également
+       recevoir d'autres attributs. Pour ce faire, vous devez créer un
+       «fichier de données» pour tampon.
 
-       Un fichier de données de stamp's est simplement un fichier texte ASCII
-       contenant les options pour le stamp.
+       Un fichier de données de tampon est simplement un fichier texte ASCII
+       contenant les options pour le tampon.
 
-       Le fichier porte le même nom que l'image PNG or SVG , mais une
+       Le fichier porte le même nom que l'image PNG ou SVG , mais une
        extension ".dat". (par exemple, le fichier de données "stamp.png" est
        le fichier texte "stamp.dat" qui se trouve dans le même répertoire.)
 
@@ -427,7 +442,7 @@ Tampons
            unie.
 
            Ajoute une ligne contenant le mot "colorable" au fichier de
-           données stamp's.
+           données tampon.
 
       Teinté
 
@@ -437,7 +452,7 @@ Tampons
            est modifiée en fonction de la couleur actuellement sélectionnée.)
 
            Ajoute une ligne contenant le mot "tintable" au fichier de données
-           stamp's.
+           tampon.
 
         Options de teinture :
 
@@ -447,17 +462,30 @@ Tampons
              de données du tampon :
 
              Coloriage normal — "tinter=normal" (par défaut)
-                     C'est le mode normal pour teinter. (La gamme de teinte
-                     est de +/- 18°)
-
-             Coloriage 'toutes tonalités' — "tinter=anyhue"
-                     Cela remappe toutes les teintes du tampon. (La plage de
-                     teinte est de ± 180°.)
+                     C'est le mode normal de teinture. Tout d'abord, la
+                     teinte primaire du tampon est déterminée. (Par exemple,
+                     l'image d'une fleur avec sa tige aura la couleur des
+                     pétales considérée comme teinte primaire de l'ensemble
+                     de l'image). Puis on trouve la partie de l'image la plus
+                     saturée. Avec "le mode de teinture normal", l'étendue de
+                     la teinte utilisée pour faire cela démarre dans un angle
+                     de ±18° de la teinte primaire trouvée dans l'étape 1.
+                     (Si aucune n'est trouvée, ce sera dans une étendue de 50
+                     %, puis on réessaie). Tout ce qui est à l'intérieur de
+                     l'étendue de 50 % (par ex. ±27°) est modifié pour avoir
+                     la teinte de la couleur choisie par l'utilisateur.
 
              Coloriage étroit — "tinter=narrow"
-                     Cela ressemble à "anyhue", mais avec un angle de teinte
-                     plus étroit. (La gamme de teinte est de ± 6 °, 9
-                     remplacer.)
+                     C'est comme l'option "normal" décrite plus haut, mais
+                     avec une étendue de teinte plus faible de ±6°. Tout ce
+                     qui est trouvé dans l'étendue (par ex. ±9°) est teinté.
+                     Si une trop grande partie de vitre image est teintée,
+                     essayez cette option.
+
+             Coloriage 'toutes tonalités' — "tinter=anyhue"
+                     Cela rempappe toutes les teintes du tampon. C'est pareil
+                     que les options "anyhue" et "narrow" décrites
+                     auparavant, mais l'étendu de teinte est ±180°.
 
              Coloriage vectoriel — "tinter=vector"
                      Cela mappe «noir à blanc» à «noir à destination».
@@ -474,11 +502,11 @@ Tampons
          Parfois, les tampons sont symétriques, il n'est donc pas utile de
          laisser l'utilisateur les retourner ou les refléter.
 
-         Pour empêcher un tampon d'être from being flipped vertically,
+         Pour empêcher un tampon d'être qui a été inversé verticalement,
          ajoutez une ligne contenant le mot «noflip» au fichier de données du
          tampon.
 
-         Pour empêcher un tampon d'être from being mirrored horizontally,
+         Pour empêcher un tampon d'être qui a été inversé horizontalement,
          ajoutez une ligne contenant le mot «nomirror» au fichier de données
          du tampon.
 
@@ -698,7 +726,7 @@ Traductions
        msgid "Click and drag to draw large bricks."
        msgstr "Haz clic y arrastra para dibujar ladrillos grandes."
 
-     DE nombreux outils existent pour gérer les catalogues de traduction
+     De nombreux outils existent pour gérer les catalogues de traduction
      'gettext', vous n'avez donc pas besoin de les éditer avec un éditeur de
      texte. En voici quelques uns :
 
@@ -795,8 +823,8 @@ Méthodes alternatives de saisie
      "src/im.c". Par exemple, "b" est utilisé en coréen pour gérer Batchim,
      qui peut être reporté au caractère suivant.
 
-     Remarque : la prise en charge de nouveaux input methods nécessite des
-     ajouts au code source de Tux Paint ( "/src/im.c"), et nécessite des
+     Remarque : la prise en charge de nouveaux méthodes de saisie nécessite
+     des ajouts au code source de Tux Paint ( "/src/im.c"), et nécessite des
      mises à jour de Makefile, pour s'assurer que les fichiers ".im" sont
      disponibles pour être utilisés lors de l'exécution du programme.
 
@@ -967,6 +995,6 @@ Clavier virtuel sur écran
        Remarque : Ce fichier n'est pas compilé avec Tux Paint, mais il est lu
        et analysé durant l'exécution de celui-ci.
 
-       Il est peu probable qu'une modification soit requise de ce fichier.
+       Il est peu probable qu'une modification de ce fichier soit requise.
 
      ----------------------------------------------------------------------

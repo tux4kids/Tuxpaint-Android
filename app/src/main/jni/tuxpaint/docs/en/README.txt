@@ -1,12 +1,12 @@
                                    Tux Paint
-                                 version 0.9.26
+                                 version 0.9.27
 
   A simple drawing program for children
 
           Copyright © 2002-2021 by various contributors; see AUTHORS.
                             http://www.tuxpaint.org/
 
-                                 June 28, 2021
+                               September 5, 2021
 
      ----------------------------------------------------------------------
 
@@ -219,6 +219,22 @@ Available Tools
                  If you hold the mouse button down, and move the mouse, it
                  will draw as you move.
 
+                 Some brushes are animated — they change their shape as you
+                 draw them. A good example of this is the vines brush that
+                 ships with Tux Paint. These brushes will have a small
+                 "filmstrip" icon drawn on their Selector buttons.
+
+                 Other brushes are directional — they will draw a different
+                 shape depending on what direction you are painting with
+                 them. An example of this is the arrow brush that ships with
+                 Tux Paint. These brushes have a small 8-way arrow icon drawn
+                 on their Selector buttons.
+
+                 Finally, some brushes can be both direction and animated.
+                 Examples of this are the cat and squirrel brushes that ship
+                 with Tux Paint. These brushes will have both the "filmstrip"
+                 and 8-way arrow icons.
+
                  As you draw, a sound is played. The bigger the brush, the
                  lower the pitch.
 
@@ -277,6 +293,12 @@ Available Tools
 
                  Let go of the mouse to complete the line. A "sproing!" sound
                  will play.
+
+                 Some brushes are animated, and will show a pattern of shapes
+                 along the line. Others are directional, and will show a
+                 different shape depending on the angle of the brush. And
+                 finally some are both animated and directional. See "Paint",
+                 above, to learn more.
 
      ----------------------------------------------------------------------
 

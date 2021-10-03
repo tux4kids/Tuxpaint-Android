@@ -1,3 +1,4 @@
+/* Last modified: 2021-09-21 */
 #include "tp_magic_api.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
@@ -48,6 +49,7 @@ int rails_init(magic_api * api);
 int rails_get_tool_count(magic_api * api);
 SDL_Surface *rails_get_icon(magic_api * api, int which);
 char *rails_get_name(magic_api * api, int which);
+int rails_get_group(magic_api * api, int which);
 char *rails_get_description(magic_api * api, int which, int mode);
 int rails_requires_colors(magic_api * api, int which);
 void rails_release(magic_api * api, int which,
@@ -131,6 +133,11 @@ SDL_Surface *rails_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 char *rails_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext_noop("Rails"));
+}
+
+int rails_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PAINTING;
 }
 
 char *rails_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)

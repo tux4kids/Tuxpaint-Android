@@ -4,7 +4,7 @@
   Emboss Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2019 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: August 29, 2019
+  Last updated: September 20, 2021
   $Id$
 */
 
@@ -43,6 +43,7 @@ int emboss_init(magic_api * api);
 int emboss_get_tool_count(magic_api * api);
 SDL_Surface *emboss_get_icon(magic_api * api, int which);
 char *emboss_get_name(magic_api * api, int which);
+int emboss_get_group(magic_api * api, int which);
 char *emboss_get_description(magic_api * api, int which, int mode);
 
 void emboss_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -101,22 +102,55 @@ char *emboss_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
   return (strdup(gettext_noop("Emboss")));
 }
 
+// Return our groups:
+int emboss_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_DISTORTS;
+}
+
 // Return our descriptions, localized:
 char *emboss_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Click and drag the mouse to emboss the picture.")));
 }
 
-// Do the effect:
 
-static void do_emboss(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
-{
+// Do the effect (single pixel; used by do_emboss() (painted circle)
+// and emboss_click() when in fullscreen mode):
+static void emboss_pixel(void * ptr, SDL_Surface * last, int x, int y, SDL_Surface * canvas) {
   magic_api *api = (magic_api *) ptr;
-  int xx, yy;
   Uint8 r1, g1, b1, r2, g2, b2;
   int r;
   float h, s, v;
   int avg1, avg2;
+
+  SDL_GetRGB(api->getpixel(last, x, y), last->format, &r1, &g1, &b1);
+  SDL_GetRGB(api->getpixel(last, x + 2, y + 2), last->format, &r2, &g2, &b2);
+
+  avg1 = (r1 + g1 + b1) / 3;
+  avg2 = (r2 + g2 + b2) / 3;
+
+  api->rgbtohsv(r1, g1, b1, &h, &s, &v);
+
+  r = 128 + (((avg1 - avg2) * 3) / 2);
+  if (r < 0)
+    r = 0;
+  if (r > 255)
+    r = 255;
+
+  v = (r / 255.0);
+
+  api->hsvtorgb(h, s, v, &r1, &g1, &b1);
+
+  api->putpixel(canvas, x, y, SDL_MapRGB(canvas->format, r1, g1, b1));
+}
+
+
+// Do the effect (a circle around a touch point):
+static void do_emboss(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
+{
+  magic_api *api = (magic_api *) ptr;
+  int xx, yy;
 
   for (yy = -16; yy < 16; yy++)
     {
@@ -126,25 +160,7 @@ static void do_emboss(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canva
             {
               if (!api->touched(x + xx, y + yy))
                 {
-                  SDL_GetRGB(api->getpixel(last, x + xx, y + yy), last->format, &r1, &g1, &b1);
-                  SDL_GetRGB(api->getpixel(last, x + xx + 2, y + yy + 2), last->format, &r2, &g2, &b2);
-
-                  avg1 = (r1 + g1 + b1) / 3;
-                  avg2 = (r2 + g2 + b2) / 3;
-
-                  api->rgbtohsv(r1, g1, b1, &h, &s, &v);
-
-                  r = 128 + (((avg1 - avg2) * 3) / 2);
-                  if (r < 0)
-                    r = 0;
-                  if (r > 255)
-                    r = 255;
-
-                  v = (r / 255.0);
-
-                  api->hsvtorgb(h, s, v, &r1, &g1, &b1);
-
-                  api->putpixel(canvas, x + xx, y + yy, SDL_MapRGB(canvas->format, r1, g1, b1));
+                  emboss_pixel(api, last, x + xx, y + yy, canvas);
                 }
             }
         }
@@ -181,10 +197,23 @@ void emboss_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void emboss_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
+void emboss_click(magic_api * api, int which, int mode,
                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
-  emboss_drag(api, which, canvas, last, x, y, x, y, update_rect);
+  if (mode == MODE_PAINT) {
+    emboss_drag(api, which, canvas, last, x, y, x, y, update_rect);
+  } else {
+    for (y = 0; y < canvas->h; y++) {
+      for (x = 0; x < canvas->w; x++) {
+        emboss_pixel(api, last, x, y, canvas);
+      }
+    }
+    update_rect->x = 0;
+    update_rect->y = 0;
+    update_rect->w = canvas->w;
+    update_rect->h = canvas->h;
+    api->playsound(emboss_snd, 128, 255);
+  }
 }
 
 // Affect the canvas on release:
@@ -225,5 +254,5 @@ void emboss_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
 
 int emboss_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return (MODE_PAINT);          /* FIXME - Can also be turned into a full-image effect */
+  return (MODE_PAINT | MODE_FULLSCREEN);
 }

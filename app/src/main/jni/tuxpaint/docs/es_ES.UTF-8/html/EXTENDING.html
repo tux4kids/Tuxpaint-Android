@@ -18,7 +18,7 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        versi&oacute;n 0.9.26      </h1>
+        versi&oacute;n 0.9.27      </h1>
 
       <p>
         Copyright &copy; 2002-2021 by various contributors; see AUTHORS.<br>
@@ -26,7 +26,7 @@
       </p>
 
       <p>
-        mayo 31, 2021      </p>
+        septiembre 19, 2021      </p>
     </center>
 
     <hr size="2"
@@ -367,14 +367,25 @@
         </blockquote>
 
         <h4>
-          Animated Directional Brushes        </h4>
+          Rotating Brushes        </h4>
 
         <blockquote>
           <p>
-            You may mix both animated and directional features into one brush. Use both options ("<code><b>frames=<i>N</i></b></code>" and "<code><b>directional</b></code>"), in separate lines in the brush's "<code>.dat</code>" file.          </p>
+            As of Tux Paint version 0.9.27, you may now create rotating brushes. As the brush is used, it is rotated 360 degrees, depending on the direction the brush is going.          </p>
 
           <p>
-            Lay the brush out so that each 3x3 set of directional shapes are laid out across a wide PNG image. For example, if the brush is 30x30 and there are 5 frames, it would be 450x90. (The leftmost 150x90 pixels of the image represent the 9 direction shapes for the first frame, for example.)          </p>
+            Add a line containing the word "<code><b>rotate</b></code>" to the brush's data file.          </p>
+        </blockquote>
+
+        <h4>
+          Animated Directional or Rotating Brushes        </h4>
+
+        <blockquote>
+          <p>
+            You may mix both animated and either directional or rotating features into one brush. Use both options desired ("<code><b>frames=<i>N</i></b></code>" and "<code><b>directional</b></code>" or "<code><b>rotate</b></code>"), in separate lines in the brush's "<code>.dat</code>" file.          </p>
+
+          <p>
+            For directional brushes, lay the brush out so that each 3x3 set of directional shapes are laid out across a wide PNG image. For example, if the brush is 30x30 and there are 5 frames, it would be 450x90. (The leftmost 150x90 pixels of the image represent the 9 direction shapes for the first frame, for example.)          </p>
         </blockquote>
       </blockquote>
 
@@ -491,7 +502,7 @@
             For sounds for different locales (e.g., if the sound is someone saying a word, and you want translated versions of the word said), also create WAV or OGG files with the locale's label in the filename, in the form: "<code>stamp_LOCALE.EXT</code>"          </p>
 
           <p>
-            "<code>stamp.png</code>"'s sound effect, when Tux Paint is run in Spanish mode, would be "<code>stamp.png</code>". In French mode, "<code>stamp_es.wav</code>". In Brazilian Portuguese mode, "<code>stamp_fr.wav</code>". And so on...          </p>
+            The sound effect that will be played when the stamp corresponding to the image file "<code>stamp.png</code>" is selected, and when Tux Paint is using the Spanish locale, would be "<code>stamp_es.wav</code>". Under the French locale, it would be "<code>stamp_fr.wav</code>". Under the Brazilian Portuguese locale, "<code>stamp_pt_BR.wav</code>". And so on...          </p>
 
           <p>
             If no localized sound effect can be loaded, Tux Paint will attempt to load the 'default' sound file. (e.g., "<code>stamp.wav</code>")          </p>
@@ -520,7 +531,7 @@
           <p>
             For descriptive sounds for different locales, also create WAV or OGG files with <em>both</em> "<code>_desc</code>" <em>and</em> the locale's label in the filename, in the form: "<code>stamp_desc_LOCALE.EXT</code>"          </p>
 
-            "<code>stamp.png</code>"'s descriptive sound, when Tux Paint is run in Spanish mode, would be "<code>stamp_desc_es.wav</code>". In French mode, "<code>stamp_desc_fr.wav</code>". In Brazilian Portuguese mode, "<code>stamp_desc_pt_BR.wav</code>". And so on...
+            The descriptive sound that will be played when the stamp corresponding to the image file "<code>stamp.png</code>" is selected, and when Tux Paint is using the Spanish locale, would be "<code>stamp_desc_es.wav</code>". Under the French locale, it would be "<code>stamp_desc_fr.wav</code>". Under the Brazilian Portuguese locale, "<code>stamp_desc_pt_BR.wav</code>". And so on...
           <p>
             If no localized descriptive sound can be loaded, Tux Paint will attempt to load the 'default' sound file. (e.g., "<code>stamp_desc.wav</code>")          </p>
         </blockquote>
@@ -601,21 +612,21 @@
                   Normal tinter &mdash; "<code><b>tinter=normal</b></code>" (the default)                </dt>
 
                 <dd>
-                  This is the normal tinting mode. (Hue range is ±18°, 27 replace.)                </dd>
-
-                <dt>
-                  'Any hue' tinter &mdash; "<code><b>tinter=anyhue</b></code>"
-                </dt>
-
-                <dd>
-                  This remaps all hues in the stamp. (Hue range is ±180°.)                </dd>
+                  This is the normal tinting mode. First, the primary hue of the stamp is determined. (For example, a picture of a flower with a stem will have the petal color seen as the primary hue of the overall image.) Next, the most highly saturated part of the picture is found. With "normal tinter", the range of hue used to do this starts out within ±18° of the pimary hue found in step 1. (If none can be found, it widens the range by 50% and tries again.)  Finally, the image is tinted.  Anything falling within 50% of the range (e.g., ±27°) is altered to have the hue of the color chosen by the user.                </dd>
 
                 <dt>
                   Narrow tinter &mdash; "<code><b>tinter=narrow</b></code>"
                 </dt>
 
                 <dd>
-                  This like the "<code>anyhue</code>" option, but with a narrower hue angle. (Hue range is ±6°, 9 replace.)                </dd>
+                  This like the "<code>normal</code>" option described above, but starts a narrower hue range of ±6°. Anything found within 50% of the range (e.g. ±9°) is tinted. If too much of your stamp is being tinted, try this option.                </dd>
+
+                <dt>
+                  'Any hue' tinter &mdash; "<code><b>tinter=anyhue</b></code>"
+                </dt>
+
+                <dd>
+                  This remaps <em>all</em> hues in the stamp. It works similarly to the "<code>anyhue</code>" and "<code>narrow</code>" options described above, but the hue range is ±180°.                </dd>
 
                 <dt>
                   Vector tinter &mdash; "<code><b>tinter=vector</b></code>"

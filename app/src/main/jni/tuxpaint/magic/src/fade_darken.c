@@ -4,7 +4,7 @@
   Fade and Darken Magic Tools Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 9, 2008
+  Last updated: September 20, 2021
   $Id$
 */
 
@@ -49,6 +49,7 @@ int fade_darken_init(magic_api * api);
 Uint32 fade_darken_api_version(void);
 int fade_darken_get_tool_count(magic_api * api);
 SDL_Surface *fade_darken_get_icon(magic_api * api, int which);
+int fade_darken_get_group(magic_api * api, int which);
 char *fade_darken_get_name(magic_api * api, int which);
 char *fade_darken_get_description(magic_api * api, int which, int mode);
 static void do_fade_darken(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
@@ -116,6 +117,12 @@ char *fade_darken_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
     return (strdup(gettext_noop("Darken")));
 
   return (NULL);
+}
+
+// Return our group (all the same):
+int fade_darken_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_COLOR_FILTERS;
 }
 
 // Return our description, localized:
