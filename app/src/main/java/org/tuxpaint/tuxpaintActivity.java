@@ -55,6 +55,7 @@ public class tuxpaintActivity extends SDLActivity {
         System.loadLibrary("SDL2_mixer");
         System.loadLibrary("SDL2_ttf");
         System.loadLibrary("SDL2_Pango");
+	System.loadLibrary("SDL2_gfx");
         System.loadLibrary("tuxpaint");
     }
 }
