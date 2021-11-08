@@ -23137,6 +23137,7 @@ static void load_info_about_label_surface(FILE * lfi)
         }
 
 #elif defined(__ANDROID__)
+      wchar_t tmp_char;
       for (l = 0; l < new_node->save_texttool_len; l++)
         {
           fscanf(lfi, "%d ", &tmp_char);
