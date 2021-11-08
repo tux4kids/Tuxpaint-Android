@@ -31,7 +31,8 @@ LOCAL_SRC_FILES := \
 	src/android_mbstowcs.c \
 	src/fill.c \
 	src/android_assets.c \
-	src/gifenc.c
+	src/gifenc.c\
+	src/sounds.c
 
 MY_CFLAGS:= -O0 -g -W -Wall -fno-common -ffloat-store \
 	-Wcast-align -Wredundant-decls \
