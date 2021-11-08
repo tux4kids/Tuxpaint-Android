@@ -4,7 +4,7 @@
 # Various contributors (see AUTHORS.txt)
 # http://www.tuxpaint.org/
 
-# June 14, 2002 - September 28, 2021
+# June 14, 2002 - October 24, 2021
 
 
 # The version number, for release:
@@ -23,12 +23,7 @@ SYSNAME:=$(shell uname -s)
 ifeq ($(findstring MINGW32, $(SYSNAME)),MINGW32)
   OS:=windows
   GPERF:=/usr/bin/gperf
-  ifeq ($(findstring NT-6.2, $(SYSNAME)),NT-6.2)
-    BDIST_2KXP:=True
-    MINGW_DIR:=/usr/local
-  else
-    MINGW_DIR:=/mingw32
-  endif
+  MINGW_DIR:=/mingw32
 else
   ifeq ($(findstring MINGW64, $(SYSNAME)),MINGW64)
     OS:=windows
@@ -163,7 +158,7 @@ macos_BUNDLE:=./TuxPaint.app
 ios_BUNDLE:=./TuxPaint-$(SDK).app
 BUNDLE:=$($(OS)_BUNDLE)
 
-windows_ARCH_LIBS:=obj/win32_print.o obj/resource.o
+windows_ARCH_LIBS:=obj/win32_print.o obj/resource.o obj/win32_trash.o
 macos_ARCH_LIBS:=src/macos_print.m obj/macos.o
 ios_ARCH_LIBS:=src/ios_print.m obj/ios.o
 beos_ARCH_LIBS:=obj/BeOS_print.o
@@ -547,24 +542,23 @@ trans:
 
 ######
 
-windows_ARCH_INSTALL:=
-macos_ARCH_INSTALL:=install-macbundle TuxPaint.dmg
-ios_ARCH_INSTALL:=install-iosbundle
-linux_ARCH_INSTALL:=install-xdg
+windows_ARCH_INSTALL:=install-dlls install-tpconf-i18n
+macos_ARCH_INSTALL:=install-macbundle TuxPaint.dmg install-man install-importscript install-bash-completion
+ios_ARCH_INSTALL:=install-iosbundle install-man install-importscript install-bash-completion
+linux_ARCH_INSTALL:=install-xdg install-man install-importscript install-bash-completion
 ARCH_INSTALL:=$($(OS)_ARCH_INSTALL)
 
 # "make install" installs all of the various parts
 # (depending on the *PREFIX variables at the top, you probably need
 # to do this as superuser ("root"))
 .PHONY: install
-install:	install-bin install-data install-man install-doc \
+install:	install-bin install-data install-doc \
 		install-magic-plugins \
 		install-magic-plugin-dev \
-		install-icon install-gettext install-im install-importscript \
+		install-icon install-gettext install-im \
 		install-default-config install-example-stamps \
 		install-example-starters install-example-templates \
 		install-thumb-starters install-thumb-templates \
-		install-bash-completion \
 		install-osk \
 		$(ARCH_INSTALL)
 	@echo
@@ -650,8 +644,7 @@ bdist-win32:
 		CONFDIR:=./win32/bdist \
 		COMPLETIONDIR:=./win32/bdist \
 		INCLUDE_PREFIX:=./win32/bdist/plugins/include \
-		MAGIC_PREFIX:=./win32/bdist/plugins \
-		windows_ARCH_INSTALL:=install-dlls install-tpconf-i18n
+		MAGIC_PREFIX:=./win32/bdist/plugins
 
 # "make bdist-clean" deletes the 'bdist' directory
 .PHONY: bdist-clean
@@ -683,6 +676,8 @@ clean:
 	@if [ -d templates/.thumbs ]; then rmdir templates/.thumbs; fi
 	@-if [ "x$(BUNDLE)" != "x" ]; then rm -rf $(BUNDLE); fi
 	@-rm -f TuxPaint.dmg temp.dmg; rm -rf magic/*.dSYM Resources
+	@-rm -f dlllist a.exe
+	@-rm -f win32/Preprocessed.iss win32/tuxpaint-*.zip win32/tuxpaint-*.exe
 	@echo
 
 # "make uninstall" should remove the various parts from their
@@ -960,52 +955,7 @@ install-dlls:
 	@echo "...Installing Windows DLLs..."
 	@install -d $(BIN_PREFIX)
 	@cp $(TPCONF_PATH)/tuxpaint-config.exe $(BIN_PREFIX)
-	@if [ "x$(BDIST_2KXP)" = "xTrue" ]; then \
-	  cp $(MINGW_DIR)/bin/libintl-8.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libiconv-2.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libpng12.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/SDL.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/SDL_image.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/SDL_gfx.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/SDL_mixer.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/SDL_ttf.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libfreetype-6.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/zlib1.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libogg-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libvorbis-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libvorbisfile-3.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libjpeg-8.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libfribidi-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libxml2-2.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libcairo-2.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libfontconfig-1.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libSDL_Pango-1.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libgobject-2.0-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libgthread-2.0-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/librsvg-2-2.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libcroco-0.6-3.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libgdk_pixbuf-2.0-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libglib-2.0-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libgsf-1-114.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libpango-1.0-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libpangocairo-1.0-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libpangoft2-1.0-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libgmodule-2.0-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libpangowin32-1.0-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libpixman-1-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libgio-2.0-0.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/bz2-1.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libimagequant.dll $(BIN_PREFIX); \
-	  cp $(MINGW_DIR)/bin/libSDL_gfx-15.dll $(BIN_PREFIX); \
-	  cp `which libgcc_s_dw2-1.dll` $(BIN_PREFIX); \
-	  cp `which libstdc++-6.dll` $(BIN_PREFIX); \
-	  cp `which libpthread-2.dll` $(BIN_PREFIX); \
-	  mkdir -p $(BIN_PREFIX)/lib/pango/1.6.0/modules; \
-	  cp /usr/local/lib/pango/1.6.0/modules/*.dll $(BIN_PREFIX)/lib/pango/1.6.0/modules; \
-	  strip -s $(BIN_PREFIX)/lib/pango/1.6.0/modules/*.dll; \
-	else \
-	  src/install-dlls.sh tuxpaint.exe $(TPCONF_PATH)/tuxpaint-config.exe $(BIN_PREFIX); \
-	fi
+	@src/install-dlls.sh tuxpaint.exe $(TPCONF_PATH)/tuxpaint-config.exe $(BIN_PREFIX)
 	@strip -s $(BIN_PREFIX)/*.dll
 	@echo
 	@echo "...Installing Configuration Files..."
@@ -1150,7 +1100,7 @@ TuxPaint.dmg:
 tuxpaint:	obj/tuxpaint.o obj/i18n.o obj/im.o obj/cursor.o obj/pixels.o \
 		obj/rgblinear.o obj/playsound.o obj/fonts.o obj/parse.o obj/fill.o \
 		obj/progressbar.o obj/dirwalk.o obj/get_fname.o obj/onscreen_keyboard.o \
-		obj/gifenc.o \
+		obj/gifenc.o obj/sounds.o \
 		$(ARCH_LIBS)
 	@echo
 	@echo "...Linking Tux Paint..."
@@ -1293,6 +1243,12 @@ obj/rgblinear.o:	src/rgblinear.c src/rgblinear.h \
 	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
 		-c src/rgblinear.c -o obj/rgblinear.o
 
+obj/sounds.o:	src/sounds.c src/sounds.h
+	@echo
+	@echo "...Compiling sound effect list..."
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+		-c src/sounds.c -o obj/sounds.o
+
 
 obj/BeOS_print.o:	src/BeOS_print.cpp src/BeOS_print.h
 	@echo
@@ -1305,6 +1261,12 @@ obj/win32_print.o:	src/win32_print.c src/win32_print.h src/debug.h
 	@echo "...Compiling win32 print support..."
 	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
 		-c src/win32_print.c -o obj/win32_print.o
+
+obj/win32_trash.o:	src/win32_trash.c src/debug.h
+	@echo
+	@echo "...Compiling win32 trash support..."
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+		-c src/win32_trash.c -o obj/win32_trash.o
 
 obj/postscript_print.o:	src/postscript_print.c \
 			src/postscript_print.h src/debug.h

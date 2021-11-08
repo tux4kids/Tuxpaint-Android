@@ -326,6 +326,7 @@ const char *SurfacePrint(SDL_Window * window, SDL_Surface * surf, const char *pr
   int nError;
   SDL_SysWMinfo wminfo;
   BITMAPINFOHEADER bmih;
+  BITMAPINFO bmi;
   SDL_Surface *surf24 = NULL;
   RECT rcDst;
   float sX, sY;
@@ -462,12 +463,13 @@ const char *SurfacePrint(SDL_Window * window, SDL_Surface * surf, const char *pr
     {
       SetStretchBltMode(hDCprinter, COLORONCOLOR);
 
+      bmi.bmiHeader = bmih;
       nError = StretchDIBits(hDCprinter, rcDst.left, rcDst.top,
                              rcDst.right - rcDst.left,
                              rcDst.bottom - rcDst.top,
                              0, 0, bmih.biWidth, bmih.biHeight,
-                             surf24->pixels, (BITMAPINFO *) & bmih, DIB_RGB_COLORS, SRCCOPY);
-      if (nError == GDI_ERROR)
+                             surf24->pixels, &bmi, DIB_RGB_COLORS, SRCCOPY);
+      if (nError == (int) GDI_ERROR)
         {
           res = "win32_print: StretchDIBits() failed.";
           goto error;
@@ -516,11 +518,13 @@ static HRESULT ReadRegistry(const char *key, const char *option, char *value, in
 {
   LONG res;
   HKEY hKey = NULL;
+  DWORD _size;
 
+  _size = size;
   res = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hKey);
   if (res != ERROR_SUCCESS)
     goto err_exit;
-  res = RegQueryValueEx(hKey, option, NULL, NULL, (LPBYTE) value, (LPDWORD) & size);
+  res = RegQueryValueEx(hKey, option, NULL, NULL, (LPBYTE) value, &_size);
   if (res != ERROR_SUCCESS)
     goto err_exit;
   res = ERROR_SUCCESS;
@@ -601,6 +605,7 @@ char *GetSystemFontDir(void)
  *
  * @return user's image dir
  */
+char *GetUserImageDir(void);
 char *GetUserImageDir(void)
 {
   char path[MAX_PATH];
@@ -622,7 +627,7 @@ char *GetUserImageDir(void)
 */
 static char *GetUserTempDir(void)
 {
-  char *temp = getenv("TEMP");
+  const char *temp = getenv("TEMP");
 
   if (!temp)
     {
@@ -657,6 +662,7 @@ static int g_bWindowActive = 0;
 /**
  * FIXME
  */
+LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
   int bEatKeystroke = 0;

@@ -557,5 +557,5 @@ void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const ch
     exit(53);
   }
 
-  memcpy(offset+(char*)tmpcfg, &opt, sizeof(char*));
+  memcpy(offset+(char*)tmpcfg, &opt, sizeof(char*)); /* FIXME: This causes a warning; should it be 'sizeof(char)', or do we need to have the warning suppressed? -bjk 2021.10.14 */
 }

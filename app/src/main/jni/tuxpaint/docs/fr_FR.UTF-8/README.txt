@@ -6,7 +6,7 @@
       Copyright &copie; 2002-2021 par divers contributeurs; voir AUTHORS.
                             http://www.tuxpaint.org/
 
-                               septembre 5, 2021
+                                octobre 27, 2021
 
      ----------------------------------------------------------------------
 
@@ -310,10 +310,13 @@ Outils disponibles
                  l'aide des différents pinceaux et couleurs que vous utilisez
                  habituellement.
 
-                 Cliquez sur la souris et maintenez-la enfoncée pour choisir
-                 le point de départ de la ligne. Au fur et à mesure que vous
-                 déplacez la souris, une fine ligne «élastique» indiquera là
-                 où la ligne sera dessinée.
+                 Click the mouse and hold it to choose the starting point of
+                 the line. As you move the mouse around, a thin 'rubber-band'
+                 line will show where the line will be drawn. At the bottom,
+                 you'll see the angle of your line, in degrees. A line going
+                 straight to the right is 0°, a line going straight up is
+                 90°, a line going straight left is 180°, a line going
+                 straight down is 270°, and so on.
 
                  Relâchez la souris pour terminer la ligne. On entend alors
                  le son "sproing !".
@@ -368,8 +371,10 @@ Outils disponibles
 
                       Mode normal
 
-                              Vous pouvez maintenant déplacer la souris sur
-                              le dessin pour faire pivoter la forme.
+                              Now you can move the mouse around the canvas to
+                              rotate the shape. The angle your shape is
+                              rotated will be shown at the bottom, in degrees
+                              (similar to the "Lines" tool, described above).
 
                               Cliquez à nouveau sur le bouton de la souris et
                               la forme sera dessinée avec la couleur en
@@ -485,6 +490,8 @@ Outils disponibles
                  de remplissage sont offertes :
                     * Solide — cliquez une fois pour remplir une zone avec
                       une couleur unie.
+                    * Brush — click and drag to fill an area with a solid
+                      color using freehand painting.
                     * Linéaire—cliquez et faites glisser pour remplir une
                       zone avec une couleur qui s'atténue au fur et à mesure
                       dans la direction où vous déplacez la souris.
@@ -620,9 +627,10 @@ Outils disponibles
                         bas à droite de la liste pour effacer l'image
                         sélectionnée. (Il vous sera demandé de confirmer.)
 
-                        Remarque : à partir de la version 0.9.22, l'image
-                        sera placée dans la corbeille de votre bureau,
-                        uniquement sous Linux.
+                        Note: On Linux (as of version 0.9.22) and Windows (as
+                        of version 0.9.27), the picture will be placed in
+                        your desktop's trash can / recycle bin (where you may
+                        recover and restore it, if you change your mind).
 
                       * Cliquez sur le bouton "Exporter" près du coin
                         inférieur droit pour exporter l'image vers votre

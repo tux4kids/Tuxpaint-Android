@@ -1,6 +1,6 @@
 /* halftone.c
 
-   Last modified: 2021.09.21
+   Last modified: 2021.11.07
 */
 
 
@@ -45,8 +45,11 @@ const int groups[NUM_TOOLS] = {
   MAGIC_TYPE_DISTORTS,
 };
 
-const char *descs[NUM_TOOLS] = {
-  gettext_noop("Click and drag to turn your drawing into a newspaper."),
+const char *descs[NUM_TOOLS][2] = {
+  {
+    gettext_noop("Click and drag to turn your drawing into a newspaper."),
+    gettext_noop("Click to turn your drawing into a newspaper."),
+  },
 };
 
 Mix_Chunk *snd_effect[NUM_TOOLS];
@@ -131,13 +134,13 @@ int halftone_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
   return groups[which];
 }
 
-char *halftone_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *halftone_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
 {
   const char *our_desc_english;
   const char *our_desc_localized;
 
-  our_desc_english = descs[which];
-  our_desc_localized = gettext_noop(our_desc_english);
+  our_desc_english = descs[which][mode - 1];
+  our_desc_localized = gettext(our_desc_english);
 
   return (strdup(our_desc_localized));
 }
@@ -301,9 +304,9 @@ void halftone_line_callback(void *ptr, int which ATTRIBUTE_UNUSED,
         }
     }
 
-  total_r /= (GRID_SIZE * GRID_SIZE);
-  total_g /= (GRID_SIZE * GRID_SIZE);
-  total_b /= (GRID_SIZE * GRID_SIZE);
+  total_r /= px_cnt;
+  total_g /= px_cnt;
+  total_b /= px_cnt;
 
 
   /* Convert the average color from RGB to CMYK values, for 'painting' later */
@@ -337,7 +340,11 @@ void halftone_line_callback(void *ptr, int which ATTRIBUTE_UNUSED,
                      'square' buffer (which starts as white)
                      (since the target is RGB, we use `min()`) */
                   SDL_GetRGB(api->getpixel(square, sqx, sqy), square->format, &or, &og, &ob);
-                  pixel = SDL_MapRGB(square->format, min(r * 1.2, or), min(g * 1.2, og), min(b * 1.2, ob));
+                  pixel = SDL_MapRGB(square->format,
+                    min((Uint8) (r * 2.0), or),
+                    min((Uint8) (g * 2.0), og),
+                    min((Uint8) (b * 2.0), ob)
+                  );
                   api->putpixel(square, sqx, sqy, pixel);
                 }
             }

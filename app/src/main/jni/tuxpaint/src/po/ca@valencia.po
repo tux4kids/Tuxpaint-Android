@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 00:17-0700\n"
+"POT-Creation-Date: 2021-11-07 20:32-0800\n"
 "PO-Revision-Date: 2020-03-29 23:40+0200\n"
 "Last-Translator: Pilar Embid Giner <embid_mar@gva.es>\n"
 "Language-Team: LliureX\n"
@@ -119,11 +119,11 @@ msgstr "Beix!"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:177
+#: ../dirwalk.c:188
 msgid "qx"
 msgstr "qx"
 
-#: ../dirwalk.c:177
+#: ../dirwalk.c:188
 msgid "QX"
 msgstr "QX"
 
@@ -133,79 +133,91 @@ msgstr "QX"
 #. especially important for users who have scroll buttons disabled.
 #. Translators should do whatever is needed to put crummy fonts last.
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:202
+#: ../dirwalk.c:213
 msgid "oO"
 msgstr "oO"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:205
+#: ../dirwalk.c:216
 msgid ",.?!"
 msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:208
+#: ../dirwalk.c:219
 #, fuzzy
 msgid "`%_@$~#{<(^&*"
 msgstr "`%_@$~#{}<>()^&*"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:211
+#: ../dirwalk.c:222
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:214
+#: ../dirwalk.c:225
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:217
+#: ../dirwalk.c:228
 msgid "1Il|"
 msgstr "1Il|"
 
-#: ../dirwalk.c:221
+#: ../dirwalk.c:232
 msgid "<1>spare-1a"
 msgstr "aa"
 
-#: ../dirwalk.c:222
+#: ../dirwalk.c:233
 msgid "<1>spare-1b"
 msgstr "aa"
 
-#: ../dirwalk.c:223
+#: ../dirwalk.c:234
 msgid "<9>spare-9a"
 msgstr "eèéëcÇ"
 
-#: ../dirwalk.c:224
+#: ../dirwalk.c:235
 msgid "<9>spare-9b"
 msgstr "EÉÈËCÇ"
 
-#: ../fill_tools.h:49
+#: ../fill_tools.h:50
 msgid "Solid"
 msgstr ""
 
-#: ../fill_tools.h:50
+#: ../fill_tools.h:51
+#, fuzzy
+#| msgid "Brushes"
+msgid "Brush"
+msgstr "Pinzells"
+
+#: ../fill_tools.h:52
 #, fuzzy
 #| msgid "Lines"
 msgid "Linear"
 msgstr "Línies"
 
-#: ../fill_tools.h:51
+#: ../fill_tools.h:53
 msgid "Radial"
 msgstr ""
 
-#: ../fill_tools.h:55
+#: ../fill_tools.h:57
 #, fuzzy
 #| msgid "Click in the picture to fill that area with color."
 msgid "Click to fill an area with a solid color."
 msgstr "Feu clic en la imatge per a omplir l'àrea amb color."
 
-#: ../fill_tools.h:56
+#: ../fill_tools.h:58
+#, fuzzy
+#| msgid "Click in the picture to fill that area with color."
+msgid "Click and drag to fill an area by hand, using a brush."
+msgstr "Feu clic en la imatge per a omplir l'àrea amb color."
+
+#: ../fill_tools.h:59
 msgid ""
 "Click and drag to fill an area with a linear gradient (from the chosen color "
 "to transparent)."
 msgstr ""
 
-#: ../fill_tools.h:57
+#: ../fill_tools.h:60
 msgid ""
 "Click to fill an area with a radial gradient (from the chosen color to "
 "transparent)."
@@ -232,32 +244,32 @@ msgid "Good job!"
 msgstr "Bon treball!"
 
 #. Input Method: English mode
-#: ../im.c:74
+#: ../im.c:80
 msgid "English"
 msgstr "Anglés"
 
 #. Input Method: Japanese Romanized Hiragana mode
-#: ../im.c:77
+#: ../im.c:83
 msgid "Hiragana"
 msgstr "Hiragana"
 
 #. Input Method: Japanese Romanized Katakana mode
-#: ../im.c:80
+#: ../im.c:86
 msgid "Katakana"
 msgstr "Katakana"
 
 #. Input Method: Korean Hangul 2-Bul mode
-#: ../im.c:83
+#: ../im.c:89
 msgid "Hangul"
 msgstr "Hangul"
 
 #. Input Method: Thai mode
-#: ../im.c:86
+#: ../im.c:92
 msgid "Thai"
 msgstr "Tai"
 
 #. Input Method: Traditional Chinese mode
-#: ../im.c:89
+#: ../im.c:95
 msgid "ZH_TW"
 msgstr "Xinés tradicional"
 
@@ -501,7 +513,7 @@ msgstr "Nou"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:8364
+#: ../tools.h:98 ../tuxpaint.c:8431
 msgid "Open"
 msgstr "Obri"
 
@@ -607,243 +619,259 @@ msgstr "Adéu!"
 msgid "Let go of the button to complete the line."
 msgstr "Deixeu anar el botó per a completar la línia."
 
+#: ../tools.h:167
+#, fuzzy, c-format
+#| msgid "Let go of the button to complete the line."
+msgid ""
+"Let go of the button to complete the line. (Your line's angle is %.0f "
+"degrees.)"
+msgstr "Deixeu anar el botó per a completar la línia."
+
 #. Instruction while using Shape tool (after first click, before release)
-#: ../tools.h:169
+#: ../tools.h:170
 msgid "Hold the button to stretch the shape."
 msgstr "Manteniu el botó premut per a estirar la figura."
 
 #. Instruction while finishing Shape tool (after release, during rotation step before second click)
-#: ../tools.h:172
+#: ../tools.h:173
 msgid "Move the mouse to rotate the shape. Click to draw it."
 msgstr "Moveu el ratolí per a girar la figura.  Feu clic per a dibuixar-la."
 
+#: ../tools.h:174
+#, fuzzy, c-format
+#| msgid "Move the mouse to rotate the shape. Click to draw it."
+msgid ""
+"Move the mouse to rotate the shape. Click to draw it. (It is rotated %d "
+"degrees.)"
+msgstr "Moveu el ratolí per a girar la figura.  Feu clic per a dibuixar-la."
+
 #. Notification that 'New' action was aborted (current image would have been lost)
-#: ../tools.h:175
+#: ../tools.h:177
 msgid "OK then… Let’s keep drawing this one!"
 msgstr "D'acord… Continuem dibuixant esta figura!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2209
+#: ../tuxpaint.c:2234
 msgid "Do you really want to quit?"
 msgstr "Esteu segur que voleu eixir?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2212
+#: ../tuxpaint.c:2237
 msgid "Yes, I’m done!"
 msgstr "Sí, ja he acabat!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2215 ../tuxpaint.c:2242
+#: ../tuxpaint.c:2240 ../tuxpaint.c:2267
 msgid "No, take me back!"
 msgstr "No, tornem-hi!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2219
+#: ../tuxpaint.c:2244
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Si eixiu, perdreu el vostre dibuix! El voleu guardar?"
 
-#: ../tuxpaint.c:2220 ../tuxpaint.c:2225
+#: ../tuxpaint.c:2245 ../tuxpaint.c:2250
 msgid "Yes, save it!"
 msgstr "Sí, guarda'l!"
 
-#: ../tuxpaint.c:2221 ../tuxpaint.c:2226
+#: ../tuxpaint.c:2246 ../tuxpaint.c:2251
 msgid "No, don’t bother saving!"
 msgstr "No, no cal que el guardes!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2224
+#: ../tuxpaint.c:2249
 msgid "Save your picture first?"
 msgstr "Voleu guardar primer el vostre dibuix?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2229
+#: ../tuxpaint.c:2254
 msgid "Can’t open that picture!"
 msgstr "No es pot obrir esta imatge!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2232 ../tuxpaint.c:2237 ../tuxpaint.c:2246 ../tuxpaint.c:2253
-#: ../tuxpaint.c:2262 ../tuxpaint.c:2267
+#: ../tuxpaint.c:2257 ../tuxpaint.c:2262 ../tuxpaint.c:2271 ../tuxpaint.c:2278
+#: ../tuxpaint.c:2287 ../tuxpaint.c:2292
 msgid "OK"
 msgstr "D'acord"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2236
+#: ../tuxpaint.c:2261
 msgid "There are no saved files!"
 msgstr "No hi ha fitxers guardats!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2240
+#: ../tuxpaint.c:2265
 msgid "Print your picture now?"
 msgstr "Voleu imprimir el dibuix?"
 
-#: ../tuxpaint.c:2241
+#: ../tuxpaint.c:2266
 msgid "Yes, print it!"
 msgstr "Sí, imprimix-lo!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2245
+#: ../tuxpaint.c:2270
 msgid "Your picture has been printed!"
 msgstr "La imatge s'ha imprés!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2249
+#: ../tuxpaint.c:2274
 msgid "Sorry! Your picture could not be printed!"
 msgstr "La imatge no s'ha pogut imprimir!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2252
+#: ../tuxpaint.c:2277
 msgid "You can’t print yet!"
 msgstr "Encara no podeu imprimir!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2256
+#: ../tuxpaint.c:2281
 msgid "Erase this picture?"
 msgstr "Voleu esborrar este dibuix?"
 
-#: ../tuxpaint.c:2257
+#: ../tuxpaint.c:2282
 msgid "Yes, erase it!"
 msgstr "Sí, esborra'l!"
 
-#: ../tuxpaint.c:2258
+#: ../tuxpaint.c:2283
 msgid "No, don’t erase it!"
 msgstr "No, no l'esborres!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2261
+#: ../tuxpaint.c:2286
 msgid "Remember to use the left mouse button!"
 msgstr "Recordeu de fer servir el botó esquerre!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2265
+#: ../tuxpaint.c:2290
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "La imatge s'ha imprés!"
 
-#: ../tuxpaint.c:2266
+#: ../tuxpaint.c:2291
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "La imatge s'ha imprés!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2270
+#: ../tuxpaint.c:2295
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "La imatge no s'ha pogut imprimir!"
 
-#: ../tuxpaint.c:2271
+#: ../tuxpaint.c:2296
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "La imatge no s'ha pogut imprimir!"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2275
+#: ../tuxpaint.c:2300
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Trieu els dibuixos que voleu, llavors feu clic en «Reproduïx»."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2484
+#: ../tuxpaint.c:2512
 msgid "Sound muted."
 msgstr "S'ha desactivat el so."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2489
+#: ../tuxpaint.c:2517
 msgid "Sound unmuted."
 msgstr "S'ha activat el so."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3267
+#: ../tuxpaint.c:3296
 msgid "Please wait…"
 msgstr "Espereu, per favor..."
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:8367
+#: ../tuxpaint.c:8434
 msgid "Erase"
 msgstr "Esborra"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:8370
+#: ../tuxpaint.c:8437
 msgid "Slides"
 msgstr "Diapositives"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:8373
+#: ../tuxpaint.c:8440
 msgid "Export"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:8376
+#: ../tuxpaint.c:8443
 msgid "Back"
 msgstr "Arrere"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:8379
+#: ../tuxpaint.c:8446
 msgid "Play"
 msgstr "Reproduïx"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:8382
+#: ../tuxpaint.c:8449
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:8385
+#: ../tuxpaint.c:8452
 msgid "Next"
 msgstr "Següent"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:9193
+#: ../tuxpaint.c:9260
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12859
+#: ../tuxpaint.c:12920
 msgid "Yes"
 msgstr "Sí"
 
-#: ../tuxpaint.c:12863
+#: ../tuxpaint.c:12924
 msgid "No"
 msgstr "No"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:14009
+#: ../tuxpaint.c:14070
 msgid "Replace the picture with your changes?"
 msgstr "Voleu reemplaçar el dibuix amb els vostres canvis?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:14013
+#: ../tuxpaint.c:14074
 msgid "Yes, replace the old one!"
 msgstr "Sí, reemplaça l'antic!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:14017
+#: ../tuxpaint.c:14078
 msgid "No, save a new file!"
 msgstr "No, guarda un fitxer nou"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:15280
+#: ../tuxpaint.c:15342
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Trieu la imatge que voleu i després feu clic en «Obri»."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:16706
+#: ../tuxpaint.c:16768
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
-#: ../tuxpaint.c:24450
+#: ../tuxpaint.c:24545
 msgid "Select a color from your drawing."
 msgstr "Trieu un color del vostre dibuix."
 
-#: ../tuxpaint.c:24462
+#: ../tuxpaint.c:24557
 msgid "Pick a color."
 msgstr "Trieu un color."
 
@@ -885,32 +913,47 @@ msgstr ""
 "Feu clic i arrossegueu des de la vora de la imatge per a passar una "
 "persiana. Moveu perpendicularment per a obrir o tancar les persianes."
 
-#: ../../magic/src/blocks_chalk_drip.c:130
+#: ../../magic/src/blocks_chalk_drip.c:132
 msgid "Blocks"
 msgstr "Quadradets"
 
-#: ../../magic/src/blocks_chalk_drip.c:132
+#: ../../magic/src/blocks_chalk_drip.c:134
 msgid "Chalk"
 msgstr "Guix"
 
-#: ../../magic/src/blocks_chalk_drip.c:134
+#: ../../magic/src/blocks_chalk_drip.c:136
 msgid "Drip"
 msgstr "Goteja"
 
-#: ../../magic/src/blocks_chalk_drip.c:149
+#: ../../magic/src/blocks_chalk_drip.c:154
 msgid "Click and drag the mouse around to make the picture blocky."
 msgstr ""
 "Feu clic i arrossegueu el ratolí per la zona per a fer quadradets en la "
 "imatge."
 
-#: ../../magic/src/blocks_chalk_drip.c:151
+#: ../../magic/src/blocks_chalk_drip.c:158
+#, fuzzy
+#| msgid "Click to sharpen the entire picture."
+msgid "Click to make the entire picture blocky."
+msgstr "Feu clic per a afinar tota la imatge."
+
+#: ../../magic/src/blocks_chalk_drip.c:165
 msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr ""
 "Feu clic i arrossegueu el ratolí per la zona per a convertir la imatge en un "
 "dibuix fet amb guix."
 
-#: ../../magic/src/blocks_chalk_drip.c:153
+#: ../../magic/src/blocks_chalk_drip.c:169
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse around to turn the picture into a chalk drawing."
+msgid "Click to turn the entire picture into a chalk drawing."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a convertir la imatge en un "
+"dibuix fet amb guix."
+
+#: ../../magic/src/blocks_chalk_drip.c:174
 msgid "Click and drag the mouse around to make the picture drip."
 msgstr ""
 "Feu clic i arrossegueu el ratolí per la zona per a fer que la imatge gotege."
@@ -950,15 +993,24 @@ msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr ""
 "Feu clic i arrossegueu el ratolí per la zona per a dibuixar en cal·ligrafia."
 
-#: ../../magic/src/cartoon.c:104
+#: ../../magic/src/cartoon.c:107
 msgid "Cartoon"
 msgstr "Vinyeta"
 
-#: ../../magic/src/cartoon.c:116
+#: ../../magic/src/cartoon.c:121
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr ""
 "Feu clic i arrossegueu el ratolí per la zona per a convertir la imatge en "
 "una vinyeta."
+
+#: ../../magic/src/cartoon.c:125
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse around to turn the picture into a chalk drawing."
+msgid "Click to turn the entire picture into a cartoon."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per la zona per a convertir la imatge en un "
+"dibuix fet amb guix."
 
 #: ../../magic/src/checkerboard.c:100
 msgid "Checkerboard"
@@ -1110,8 +1162,15 @@ msgstr "Feu clic i arrossegueu per a dibuixar herba. No oblideu la terra."
 msgid "Halftone"
 msgstr "Semitons"
 
-#: ../../magic/src/halftone.c:49
+#: ../../magic/src/halftone.c:50
 msgid "Click and drag to turn your drawing into a newspaper."
+msgstr ""
+"Feu clic i arrossegueu per a transformar el dibuix com si fóra un diari.."
+
+#: ../../magic/src/halftone.c:51
+#, fuzzy
+#| msgid "Click and drag to turn your drawing into a newspaper."
+msgid "Click to turn your drawing into a newspaper."
 msgstr ""
 "Feu clic i arrossegueu per a transformar el dibuix com si fóra un diari.."
 
@@ -1178,6 +1237,18 @@ msgstr "Llum"
 
 #: ../../magic/src/light.c:116
 msgid "Click and drag to draw a beam of light on your picture."
+msgstr "Feu clic i arrossegueu per a dibuixar un raig de llum en la imatge."
+
+#: ../../magic/src/lightning.c:78
+#, fuzzy
+#| msgid "Lighten"
+msgid "Lightning"
+msgstr "Aclarix"
+
+#: ../../magic/src/lightning.c:88
+#, fuzzy
+#| msgid "Click and drag to draw a beam of light on your picture."
+msgid "Click, drag, and release to draw a lightning bolt between two points."
 msgstr "Feu clic i arrossegueu per a dibuixar un raig de llum en la imatge."
 
 #: ../../magic/src/metalpaint.c:99
@@ -1413,6 +1484,19 @@ msgstr ""
 "Feu clic on ha de començar l'arc de Sant Martí, arrossegueu fins on s'ha "
 "d'acabar, i deixeu anar per a dibuixar-lo."
 
+#: ../../magic/src/reflection.c:110
+msgid "Reflection"
+msgstr ""
+
+#: ../../magic/src/reflection.c:120
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse to add a mosaic effect to parts of your picture."
+msgid "Click and drag the mouse around to add a reflection to your picture."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per a afegir un efecte de mosaic a parts de "
+"la imatge."
+
 #: ../../magic/src/ripples.c:103
 msgid "Ripples"
 msgstr "Ondulacions"
@@ -1517,6 +1601,21 @@ msgstr "Feu clic per a afegir boles de neu a la imatge."
 #: ../../magic/src/snow.c:77
 msgid "Click to add snow flakes to your picture."
 msgstr "Feu clic per a afegir flocs de neu a la imatge."
+
+#: ../../magic/src/stretch.c:107
+msgid "Stretch"
+msgstr ""
+
+#: ../../magic/src/stretch.c:119
+#, fuzzy
+#| msgid ""
+#| "Click and drag to make parts of your picture look like they are on "
+#| "television."
+msgid ""
+"Click and drag to stretch part of your picture vertically or horizontally."
+msgstr ""
+"Feu clic i arrossegueu per a fer que parts de la imatge semblen com si "
+"estigueren en un televisor."
 
 #: ../../magic/src/string.c:129
 msgid "String edges"

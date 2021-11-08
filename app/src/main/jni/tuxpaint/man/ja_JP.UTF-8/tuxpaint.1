@@ -1,7 +1,7 @@
 .\" tuxpaint.1 - 2021.09.14
 .TH TUXPAINT 1 "2021年9月14日" "0.9.27" "Tux Paint"
 .SH NAME
-tuxpaint -- "Tux Paint", a drawing program for young children.
+tuxpaint -- 小さな子供向けのお絵かきプログラム
 
 .SH SYNOPSYS
 .B tuxpaint
@@ -284,7 +284,7 @@ Show the license (GNU GPL) under which Tux Paint is released.
 can be used along with, instead of, or to override options set in
 configuration files. (See below.)
 
-.SS VIDEO
+.SS 画面
 .TP 8
 .B \-\-fullscreen=yes \-\-fullscreen=native \-\-fullscreen=no \-\-windowed
 Run \fITux Paint\fP in full-screen mode at its default -- or a specified --
@@ -316,7 +316,7 @@ rotated, e.g. tablet PCs.)
 Normally, \fItuxpaint\fP disables your screensaver. Use
 \-\-allowscreensaver to prevent this from happening.
 
-.SS SOUND
+.SS 音声
 .TP 8
 .B \-\-nosound \-\-sound
 Disable or enable (default) sound.
@@ -325,7 +325,7 @@ Disable or enable (default) sound.
 .B \-\-nostereo \-\-stereo
 Disable or enable (default) stereo panning support.
 
-.SS INTERFACE SIZE
+.SS インターフェースサイズ
 .TP 8
 .B \-\-buttonsize \fISIZE\fP
 Adjust the size of the buttons in \fITux Paint\fP's user interface, between
@@ -338,7 +338,7 @@ How many rows of color palette buttons to show; useful when using a large
 color palette, and/or for use with coarse input devices (like eyegaze
 trackers).  It can be between 1 (default) and 3.
 
-.SS INTERFACE SIMPLIFICATION
+.SS 操作の単純化
 .TP 8
 .B \-\-simpleshapes \-\-complexshapes
 Disable or enable (default) the rotation step when using the Shape tool
@@ -360,7 +360,7 @@ tools will display only uppercase letters.  This is useful for children who
 are not yet comfortable with the lowercase characterset.  Default mode is
 mixed case.
 
-.SS INITIAL STAMP SIZE
+.SS スタンプサイズ
 .TP 8
 .B \-\-stampsize=\fISIZE\fP \-\-stampsize=default
 Overrides the default size of all stamps, relative to their possible sizes
@@ -381,7 +381,7 @@ blank canvas.  The default behavior is "\-\-startlast".
 List solid (blank) colors at the end, or beginning (default) of the options
 displayed when using the New tool to start a new picture.
 
-.SS CONTROL SIMPLIFICATION
+.SS 機能制限
 .TP 8
 .B \-\-noquit \-\-quit
 Disable or enable (default) the on-screen Quit button and [Escape] key for
@@ -425,7 +425,7 @@ which can be altered or moved later.
 Paint.  They can be used along with, instead of, or to override options set
 in configuration files. (See below.)
 
-.SS CURSOR
+.SS マウスカーソル
 .TP 8
 .B \-\-nofancycursors \-\-fancycursors
 Disable or enable (default) the 'fancy' mouse pointer shapes in Tux Paint.
@@ -437,7 +437,7 @@ trouble displaying the mouse pointer, and/or leave 'trails' on the screen.
 Completely hide, or enable (default) the mouse pointer in Tux Paint. This
 can be useful on touchscreen devices, such as tablet PCs.
 
-.SS KEYBOARD
+.SS キーボード
 .TP 8
 .B \-\-noshortcuts \-\-shortcuts
 If "--noshortcuts" mode, keyboard shortcuts (e.g., [Ctrl]+[S] for Save)
@@ -477,7 +477,7 @@ mice with more than one button) can be used for interacting with Tux Paint.
 (right) can be used, as well. This is useful for children who aren't yet
 comfortable with the mouse. Default is to only recognize button #1.
 
-.SS ONSCREEN KEYBOARD
+.SS 画面キーボード
 .TP 8
 .B \-\-onscreen-keyboard
 Presents a clickable on-screen keyboard when using the Text and Label
@@ -492,7 +492,7 @@ Specify the default layout for the on-screen keyboard (see above).
 Disables the left/right arrow buttons visible on the on-screen keyboard,
 which are used to switch between the available on-screen keyboard layouts.
 
-.SS JOYSTICK
+.SS ジョイスティック
 .TP 8
 .B \-\-joystick-dev=\fIDEVICE\fP
 何番目のジョイスティックデバイスを使うかを設定します。標準では
@@ -605,7 +605,7 @@ above, buttons will be seen as a mouse left-click.  Comma-separated.
 printing.  They can be used along with, instead of, or to override options
 set in configuration files. (See below.)
 
-.SS PRINT PERMISSIONS
+.SS 印刷の制御
 .TP 8
 .B \-\-noprint \-\-print
 Disable or enable (default) the Print command within Tux Paint.
@@ -615,7 +615,7 @@ Disable or enable (default) the Print command within Tux Paint.
 Only allow printing (via the Print command) once every SECONDS seconds. 
 Default is 0 (no limitation).
 
-.SS SHOW PRINTER DIALOG
+.SS 印刷ダイアログの表示設定
 .TP 8
 .B \-\-altprintmod \-\-altprintnever \-\-altprintalways
 These options control whether an system printer dialog appears when the
@@ -625,7 +625,7 @@ mode).  With "--altprintalways", the dialog will always appear, even if
 [Alt] is not being held.  With "--altprintnever", the dialog will never
 appear, even if [Alt] is being held.
 
-.SS SAVE PRINTER CONFIGURATION
+.SS 印刷設定の保存
 .TP 8
 .B \-\-printcfg \-\-noprintcfg
 (Windows and Mac OS X only.)  Enable or disable loading and saving of
@@ -636,7 +636,7 @@ see also "--altprintalways" and "--altprintnever", below.)  Unless
 "--noprintcfg" is used, your previous settings will be loaded when Tux
 Paint starts up, and setting changes will be saved for next time.
 
-.SS PRINT COMMANDS
+.SS 印刷コマンド
 .TP 8
 .B \-\-printcommand \fICOMMAND\fP
 (Only when PostScript printing is used.) Have Tux Paint print via an
@@ -661,7 +661,7 @@ libpaper.  See papersize(5).
 operates when saving or exporting drawings.  They can be used along with,
 instead of, or to override options set in configuration files. (See below.)
 
-.SS SAVE OVER EARLIER WORK
+.SS 上書き保存
 .TP 8
 .B \-\-saveover \-\-saveovernew \-\-saveoverask
 If, when saving a picture, an older version of the file will be
@@ -671,7 +671,7 @@ over the old file, or create a new file.  This prompt can be disabled with
 "--saveovernew" (which always saves a new file). The default is to prompt
 ("--saveoverask").
 
-.SS SAVE AND EXPORT DIRECTORIES
+.SS 保存・書き出し先のディレクトリ
 .TP 8
 .B \-\-savedir \fIDIR\fP
 Specify where Tux Paint should save and load its drawings.
@@ -680,7 +680,7 @@ Specify where Tux Paint should save and load its drawings.
 .B \-\-exportdir \fIDIR\fP
 Specify where Tux Paint should export drawings and animations.
 
-.SS MORE SAVING OPTIONS
+.SS 保存関連の追加オプション
 .TP 8
 .B \-\-nosave \-\-save
 The --nosave option disables Tux Paint's ability to save files. This can be
@@ -1143,7 +1143,7 @@ With "--mirrorstamps" set, stamps which can be mirrored will appear
 mirrored by default.  This can be useful when used by people who prefer
 things right-to-left over left-to-right.
 
-.SS FONTS
+.SS フォント
 .TP 8
 .B \-\-nosysfonts \-\-sysfonts
 Tux Paint normally attempts to search for additional TrueType Fonts

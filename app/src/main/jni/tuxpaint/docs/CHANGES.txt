@@ -8,7 +8,7 @@ http://www.tuxpaint.org/
 
 $Id$
 
-2021.September.29 (0.9.28)
+2021.November.4 (0.9.27)
   * New Magic Tools:
     ----------------
     * "Lightning" - Draws a bolt of lightning striking between
@@ -28,6 +28,9 @@ $Id$
     * "Smooth Rainbow" - A smooth, gradient variation of the classic
       "Rainbow" Magic tool.
 
+    * "Stretch" - Squish and stretch parts of your picture, giving a
+      fun-house mirror effect.
+
   * Magic Tool Improvements:
     ------------------------
     * "Halftone" works much better, drawing large overlapping circles
@@ -38,21 +41,11 @@ $Id$
     * "TV" now breaks pixels into red/green/blue components,
       rather than merely adding a 'scanline' effect.
 
-    * "Halftone" and "Emboss" can now affect the entire image at once.
+    * "Blocks", "Cartoon", "Chalk", "Emboss", and "Halftone" can all now
+       affect the entire image at once.
 
-  * Other Improvements:
-    -------------------
-    * Grouped similar Magic tools into sections.
-      (e.g., all of the distortions, versus painting tools, versus
-      full-image effects, etc.)
-
-      Use the left/right pagination buttons that now appear at the
-      bottom of the selector (similar to those used with Stamps tool)
-      to switch between groups.
-
-      Closes https://sourceforge.net/p/tuxpaint/feature-requests/201/
-      Note: Bumps `TP_MAGIC_API_VERSION` to 0x00000005.
-
+  * Improvements to "Paint" and "Lines" tools:
+    ------------------------------------------
     * Rotational brushes now supported.  Unlike "directional"
       brushes, in which a 3x3 grid representing the 8 cardinal
       directions (45 degree steps) is used, only a single brush image
@@ -73,11 +66,28 @@ $Id$
       when the brush is animated and/or directional.
       (Closes https://sourceforge.net/p/tuxpaint/bugs/183/)
 
-    * Always show the appropriate instructions at the bottom when the
-      "Fill" (depends on which sub-tool chosen) and "Shapes" (depends
-      on whether "simpleshapes" option is set) tools are selected
-      (e.g., when returning from the "Open" dialog).
-      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/186/)
+  * Other Improvements:
+    -------------------
+    * New "Fill" tool mode: "Brush".  Similar to classic flood fill,
+      but only fills as you move the brush within the area to be
+      filled.
+
+    * Grouped similar Magic tools into sections.
+      (e.g., all of the distortions, versus painting tools, versus
+      full-image effects, etc.)
+
+      Use the left/right pagination buttons that now appear at the
+      bottom of the selector (similar to those used with Stamps tool)
+      to switch between groups.
+
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/201/
+      Note: Bumps `TP_MAGIC_API_VERSION` to 0x00000005.
+
+    * Initial support to place pictures deleted from the "Open" dialog
+      into the "Recycle Bin" on Windows.
+
+    * When drawing lines or rotating a shape, the angle of rotation
+      is shown (in the instructions at the bottom).
 
   * Documentation updates:
     ---------------------
@@ -115,27 +125,36 @@ $Id$
       + French translation
         Jacques Chion <jacques.chion@orange.fr>
 
-  * Translation Updates:
-    --------------------
-    * Ensure some locales have hints to find the best fonts
-      for the Text and Label tools:
-      + Greek
-      + Scottish Gaelic
+  * New Starters:
+    -------------
+    * Frog
+      Jeff Davidson, (Parkdale Elementary, Waco, TX; 2007)
 
-    * Catalan
+  * Localization Updates:
+    ---------------------
+    * Allowing Left [Alt] key for switching to Japanese input method
+      (for keyboards that lack a Right [Alt] key).
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Catalan translation
       Pere Pujal i Carabantes <perepujal@gmail.com>
 
-    * French
+    * French translation
       Jacques Chion <jacques.chion@orange.fr>
 
-    * Icelandic
+    * Icelandic translation
       Sveinn í Felli <sv1@fellsnet.is>
 
-    * Japanese
+    * Japanese translation
       TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
 
     * Portuguese (Portugal) translation
       Hugo Carvalho <hugokarvalho@hotmail.com>
+
+    * Ensure some locales have hints to find the best fonts
+      for the Text and Label tools:
+      + Greek
+      + Scottish Gaelic
 
   * Bug Fixes:
     ----------
@@ -150,6 +169,25 @@ $Id$
       as the drawing surface, if buttonsize was adjusted.
       (Adversely affected "Shift" magic tool.)
 
+    * Remove some old Win32-specific code to handle multibyte
+      characters, which could cause a crash bug when using the
+      on-screen keyboard under Windows.  (Older mingw/msys did
+      not supply a needed function.)
+      * h/t @Miyagi_Andel on Twitter for reporting the crash
+      * h/t Pere Pujal i Carabantes for confirming how to reproduce it
+      * TOYAMA Shin-ichi <shin1@wmail.plala.or.jp> dropped the old
+        code and rebuilt Tux Paint 0.9.26 for Win32 as 0.9.26-5
+      * Note: This means dropping support for Windows 2000 & XP
+      * (Also, remove Windows-only call to `_nl_locale_name()`,
+        and avoid crashing if our `mysetenv()` receives any NULL pointers.
+        T. Shin-Ichi & Bill K.)
+
+    * Always show the appropriate instructions at the bottom when the
+      "Fill" (depends on which sub-tool chosen) and "Shapes" (depends
+      on whether "simpleshapes" option is set) tools are selected
+      (e.g., when returning from the "Open" dialog).
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/186/)
+
   * Ports & Building
     ----------------
     * Fix compilation error on Linux with HOST environment variable set.
@@ -159,8 +197,28 @@ $Id$
       $HOST env. var. is set.
       Mark K. Kim <markuskimius@gmail.com>
 
-    * Include "AppVersion" directive to Windows installer ISS file.
+    * Include "AppVersion" directive to Windows installer Inno Setup
+      recipe file (.iss).
       Easton Pillay <https://sourceforge.net/u/jedieaston/profile/>
+
+    * Other Windows installer updates:
+      + Updated to Inno Setup 6
+      + 64-bit version now to be installed in the standard "Program Files"
+        folder on 64-bit architecture instead of "Program Files (x86)" as before.
+      + 64-bit installer will invoke uninstaller for existing old x86 mode
+        installation, if found.
+      + Updated translation files for the installer
+      + Added language specification to start menu shorcuts for which
+        translation is supported both for the web site and installer.
+      + Disabled start menu shortcut to outdated translations of README.html.
+      + Remove old OpenCandy stuff from Windows .iss file.
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Added shell script to build windows installer and portable zip archive.
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Further work to remove compiler warnings.
+
 
 2021.June.28 (0.9.26)
   * New Features

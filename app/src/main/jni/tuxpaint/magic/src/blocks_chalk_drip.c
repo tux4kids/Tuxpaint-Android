@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: September 20, 2021
+  Last updated: October 27, 2021
   $Id$
 */
 
@@ -42,6 +42,8 @@ enum
   TOOL_DRIP,
   NUM_TOOLS
 };
+
+#define EFFECT_REZ 4
 
 
 /* Our globals: */
@@ -143,14 +145,34 @@ int blocks_chalk_drip_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTR
 }
 
 // Return our descriptions, localized:
-char *blocks_chalk_drip_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *blocks_chalk_drip_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
 {
   if (which == TOOL_BLOCKS)
-    return (strdup(gettext_noop("Click and drag the mouse around to make the picture blocky.")));
+    {
+      if (mode == MODE_PAINT)
+        {
+          return (strdup(gettext_noop("Click and drag the mouse around to make the picture blocky.")));
+        }
+      else
+        {
+          return (strdup(gettext_noop("Click to make the entire picture blocky.")));
+        }
+    }
   else if (which == TOOL_CHALK)
-    return (strdup(gettext_noop("Click and drag the mouse around to turn the picture into a chalk drawing.")));
+    {
+      if (mode == MODE_PAINT)
+        {
+          return (strdup(gettext_noop("Click and drag the mouse around to turn the picture into a chalk drawing.")));
+        }
+      else
+        {
+          return (strdup(gettext_noop("Click to turn the entire picture into a chalk drawing.")));
+        }
+    }
   else if (which == TOOL_DRIP)
-    return (strdup(gettext_noop("Click and drag the mouse around to make the picture drip.")));
+    {
+      return (strdup(gettext_noop("Click and drag the mouse around to make the picture drip.")));
+    }
 
   return (NULL);
 }
@@ -170,19 +192,19 @@ static void blocks_chalk_drip_linecb(void *ptr, int which, SDL_Surface * canvas,
     {
       /* Put x/y on exact grid points: */
 
-      x = (x / 4) * 4;
-      y = (y / 4) * 4;
+      x = (x / EFFECT_REZ) * EFFECT_REZ;
+      y = (y / EFFECT_REZ) * EFFECT_REZ;
 
       if (!api->touched(x, y))
         {
-          for (yy = y - 8; yy < y + 8; yy = yy + 4)
+          for (yy = y - (EFFECT_REZ * 2); yy < y + (EFFECT_REZ * 2); yy = yy + EFFECT_REZ)
             {
-              for (xx = x - 8; xx < x + 8; xx = xx + 4)
+              for (xx = x - (EFFECT_REZ * 2); xx < x + (EFFECT_REZ * 2); xx = xx + EFFECT_REZ)
                 {
-                  Uint32 pix[16];
+                  Uint32 pix[(EFFECT_REZ * EFFECT_REZ)];
                   Uint32 p_or = 0;
                   Uint32 p_and = ~0;
-                  unsigned i = 16;
+                  unsigned i = (EFFECT_REZ * EFFECT_REZ);
 
                   while (i--)
                     {
@@ -203,7 +225,7 @@ static void blocks_chalk_drip_linecb(void *ptr, int which, SDL_Surface * canvas,
                       double g_sum = 0.0;
                       double b_sum = 0.0;
 
-                      i = 16;
+                      i = (EFFECT_REZ * EFFECT_REZ);
                       while (i--)
                         {
                           SDL_GetRGB(pix[i], last->format, &r, &g, &b);
@@ -211,17 +233,17 @@ static void blocks_chalk_drip_linecb(void *ptr, int which, SDL_Surface * canvas,
                           g_sum += api->sRGB_to_linear(g);
                           b_sum += api->sRGB_to_linear(b);
                         }
-                      r = api->linear_to_sRGB(r_sum / 16.0);
-                      g = api->linear_to_sRGB(g_sum / 16.0);
-                      b = api->linear_to_sRGB(b_sum / 16.0);
+                      r = api->linear_to_sRGB(r_sum / (float) (EFFECT_REZ * EFFECT_REZ));
+                      g = api->linear_to_sRGB(g_sum / (float) (EFFECT_REZ * EFFECT_REZ));
+                      b = api->linear_to_sRGB(b_sum / (float) (EFFECT_REZ * EFFECT_REZ));
                     }
 
                   /* Draw block: */
 
                   dest.x = xx;
                   dest.y = yy;
-                  dest.w = 4;
-                  dest.h = 4;
+                  dest.w = EFFECT_REZ;
+                  dest.h = EFFECT_REZ;
 
                   SDL_FillRect(canvas, &dest, SDL_MapRGB(canvas->format, r, g, b));
                 }
@@ -230,15 +252,14 @@ static void blocks_chalk_drip_linecb(void *ptr, int which, SDL_Surface * canvas,
     }
   else if (which == TOOL_CHALK)
     {
-
-      for (yy = y - 8; yy <= y + 8; yy = yy + 4)
+      for (yy = y - (EFFECT_REZ * 2); yy <= y + (EFFECT_REZ * 2); yy = yy + EFFECT_REZ)
         {
-          for (xx = x - 8; xx <= x + 8; xx = xx + 4)
+          for (xx = x - (EFFECT_REZ * 2); xx <= x + (EFFECT_REZ * 2); xx = xx + EFFECT_REZ)
             {
-              dest.x = xx + ((rand() % 5) - 2);
-              dest.y = yy + ((rand() % 5) - 2);
-              dest.w = (rand() % 4) + 2;
-              dest.h = (rand() % 4) + 2;
+              dest.x = xx + ((rand() % (EFFECT_REZ + 1)) - (EFFECT_REZ / 2));
+              dest.y = yy + ((rand() % (EFFECT_REZ + 1)) - (EFFECT_REZ / 2));
+              dest.w = (rand() % EFFECT_REZ) + (EFFECT_REZ / 2);
+              dest.h = (rand() % EFFECT_REZ) + (EFFECT_REZ / 2);
 
               colr = api->getpixel(last, clamp(0, xx, canvas->w - 1), clamp(0, yy, canvas->h - 1));
               SDL_FillRect(canvas, &dest, colr);
@@ -297,10 +318,22 @@ void blocks_chalk_drip_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void blocks_chalk_drip_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
+void blocks_chalk_drip_click(magic_api * api, int which, int mode,
                              SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
-  blocks_chalk_drip_drag(api, which, canvas, last, x, y, x, y, update_rect);
+  if (mode == MODE_PAINT) {
+    blocks_chalk_drip_drag(api, which, canvas, last, x, y, x, y, update_rect);
+  } else /* MODE_FULLSCREEN */ {
+    for (y = 0; y < canvas->h; y += EFFECT_REZ) {
+      for (x = 0; x < canvas->w; x += EFFECT_REZ) {
+        blocks_chalk_drip_linecb(api, which, canvas, last, x, y);
+      }
+    }
+    update_rect->x = 0;
+    update_rect->y = 0;
+    update_rect->w = canvas->w;
+    update_rect->h = canvas->h;
+  }
 }
 
 // Affect the canvas on release:
@@ -342,7 +375,11 @@ void blocks_chalk_drip_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATT
 {
 }
 
-int blocks_chalk_drip_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int blocks_chalk_drip_modes(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
-  return (MODE_PAINT);          /* FIXME - Blocks and Chalk, at least, can also be turned into a full-image effect */
+  if (which == TOOL_BLOCKS || TOOL_CHALK) {
+    return (MODE_PAINT | MODE_FULLSCREEN);
+  } else /* TOOL_DRIP */ {
+    return (MODE_PAINT);
+  }
 }

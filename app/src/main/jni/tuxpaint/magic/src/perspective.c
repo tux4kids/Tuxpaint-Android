@@ -562,8 +562,10 @@ void perspective_set_color(magic_api * api ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, U
 }
 
 // Use colors:
-int perspective_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int perspective_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
+  if (which == TOOL_PANELS)
+    return 0;
   return 1;
 }
 

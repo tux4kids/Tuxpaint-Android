@@ -6,7 +6,7 @@
     Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
 
-                             5 de Setembro de 2021
+                             27 de Outubro de 2021
 
      ----------------------------------------------------------------------
 
@@ -297,9 +297,13 @@ Ferramentas dispoñíbeis
                  os diversos pinceis e cores que normalmente emprega co
                  pincel.
 
-                 Prema co rato e manteña o botón premido para escoller o
-                 punto de inicio da liña. Ao mover o rato, unha delgada liña
-                 |elástica» amosará onde se trazará a liña.
+                 Click the mouse and hold it to choose the starting point of
+                 the line. As you move the mouse around, a thin 'rubber-band'
+                 line will show where the line will be drawn. At the bottom,
+                 you'll see the angle of your line, in degrees. A line going
+                 straight to the right is 0°, a line going straight up is
+                 90°, a line going straight left is 180°, a line going
+                 straight down is 270°, and so on.
 
                  Solte o rato para completar a liña. Soará un «chimpo».
 
@@ -349,8 +353,10 @@ Ferramentas dispoñíbeis
 
                       Modo de formas normais
 
-                              Agora pode mover o rato arredor do lenzo para
-                              xirar a forma.
+                              Now you can move the mouse around the canvas to
+                              rotate the shape. The angle your shape is
+                              rotated will be shown at the bottom, in degrees
+                              (similar to the "Lines" tool, described above).
 
                               Prema de novo no botón do rato e a forma
                               debuxarase na cor actual.
@@ -461,6 +467,8 @@ Ferramentas dispoñíbeis
                  recheo:
                     * Sólida: prema unha vez para encher unha área cunha cor
                       sólida.
+                    * Brush — click and drag to fill an area with a solid
+                      color using freehand painting.
                     * Lineal: prema e arrastra para encher a área cunha cor
                       que se esvae (un gradiente) cara a onde arrastra o
                       rato.
@@ -589,8 +597,10 @@ Ferramentas dispoñíbeis
                         parte inferior dereita da lista para borrar a imaxe
                         seleccionada. (Pediráselle que o confirme).
 
-                        Nota: A partir da versión 0.9.22, a imaxe colocarase
-                        no cesto do lixo do seu escritorio, só en Linux.
+                        Note: On Linux (as of version 0.9.22) and Windows (as
+                        of version 0.9.27), the picture will be placed in
+                        your desktop's trash can / recycle bin (where you may
+                        recover and restore it, if you change your mind).
 
                       * Prema no botón «Exportar» preto da parte inferior
                         dereita para exportar a imaxe ao cartafol de

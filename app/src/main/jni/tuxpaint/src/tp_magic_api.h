@@ -128,7 +128,7 @@ typedef struct magic_api_t {
   void (*putpixel)(SDL_Surface *, int, int, Uint32);
 
   /* XOR's the pixel at (x,y) location of the surface. */
-  Uint32 (*xorpixel)(SDL_Surface *, int, int);
+  void (*xorpixel)(SDL_Surface *, int, int);
 
   /* Asks Tux Paint to play a sound (one loaded via SDL_mixer library);
      the first value is for left/right panning (0 is left, 128 is center,

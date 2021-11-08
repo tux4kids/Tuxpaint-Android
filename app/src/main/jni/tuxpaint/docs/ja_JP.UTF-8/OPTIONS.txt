@@ -16,15 +16,15 @@
    |  * Tux Paint 設定ツール              |
    |  * 設定ファイルについて                   |
    |  * 利用可能なオプション                   |
-   |       * Video/Sound             |
-   |       * Mouse/Keyboard          |
-   |       * Simplification          |
-   |       * Languages               |
-   |       * Printing                |
-   |       * Saving                  |
-   |       * Data                    |
-   |       * Accessibility           |
-   |       * Joystick                |
+   |       * 画面・音声                   |
+   |       * マウス・キーボード               |
+   |       * 単純化                     |
+   |       * 言語関連                    |
+   |       * 印刷                      |
+   |       * 保存                      |
+   |       * データ                     |
+   |       * アクセシビリティ                |
+   |       * ジョイスティック                |
    |  * システム全体の設定を上書きする              |
    |  * コマンドラインオプション                 |
    |       * 情報を表示するためのコマンドラインオプション  |
@@ -91,18 +91,17 @@ Windows のユーザー
 
      ----------------------------------------------------------------------
 
-Video/Sound
+画面・音声
 
-  Video
+  画面
 
          fullscreen=yes
 
                  プログラムを、ウィンドウ内ではなく、フルスクリーンモードで起動します。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "fullscreen=no". In both cases, may be overridden by the
-                 command-line option "--windowed".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "fullscreen=no"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "--windowed"
+                 で変更できます。
 
          fullscreen=native
 
@@ -127,10 +126,9 @@ Video/Sound
 
                  ウィンドウの幅と高さの設定を入れ替えます。これは、タブレットパソコンのような縦型のディスプレイでウィンドウを回転させる際に便利なオプションです。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "orient=landscape". In both cases, may be overridden by the
-                 command-line option "--orient=landscape".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "orient=landscape"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--orient=landscape" で変更できます。
 
          native=yes
 
@@ -145,34 +143,31 @@ Video/Sound
                  以降の場合に有効なオプションであることに注意して下さい。（環境変数
                  "SDL_VIDEO_ALLOW_SCREENSAVER" の値を "1" に設定しても、同様のことができます）
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "allowscreensaver=no" or "disablescreensaver=yes". In both
-                 cases, may be overridden by the command-line option
-                 "--disablescreensaver".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで
+                 "allowscreensaver=no" または "disablescreensaver=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--disablescreensaver" で変更できます。
 
-  Sound
+  音声
 
          nosound=yes
 
                  効果音を無効にします。（注：このオプションを設定すると、[Alt] + [S]
                  を押しても、効果音を有効化することはできません
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nosound=no" or "sound=yes". In both cases, may be
-                 overridden by the command-line option "--sound".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nosound=no" または
+                 "sound=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--sound" で変更できます。
 
          nostereo=yes
 
                  ステレオの効果音を無効にする。（片耳イヤホンや１台のスピーカーで使用する場合に役に立ちます）
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nostereo=no" or "stereo=yes". In both cases, may be
-                 overridden by the command-line option "--stereo".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nostereo=no" または
+                 "stereo=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--stereo" で変更できます。
 
-  Interface Size
+  インターフェースサイズ
 
          buttonsize=SIZE
 
@@ -182,10 +177,7 @@ Video/Sound
                  SIZE
                  の値は24から192までのピクセル値で指定します。ほとんどのボタンは正方形となっており、この設定はボタンの幅と高さの両方に影響します。
 
-                 Note: If the chosen button size would cause the buttons to
-                 be too large for all required UI elements to appear under
-                 Tux Paint's chosen window size, the largest possible button
-                 size will be used. (A note will appear in stderr.)
+                 注：選択されたボタンのサイズが大きすぎて画面内に必要なすべてのインターフェースが表示しきれない場合は、できる限り大きなボタンサイズが使用されます。(stderrにメモが表示されます。)
 
          colorsrows=ROWS
 
@@ -195,9 +187,9 @@ Video/Sound
 
      ----------------------------------------------------------------------
 
-Mouse/Keyboard
+マウス・キーボード
 
-  Cursor
+  マウスカーソル
 
          nofancycursors=yes
 
@@ -206,11 +198,10 @@ Mouse/Keyboard
                  環境によっては Tux Paint
                  のマウスカーソルが原因で不具合が起こることがあります。そういった場合にこのオプションを有効にして下さい。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nofancycursors=no" or "fancycursors=yes". In both cases,
-                 may be overridden by the command-line option
-                 "--fancycursors".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nofancycursors=no"
+                 または "fancycursors=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--fancycursors" で変更できます。
 
          hidecursor=yes
 
@@ -218,12 +209,12 @@ Mouse/Keyboard
 
                  タブレットＰＣなどのタッチスクリーンを用いるデバイスのためのオプションです。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "hidecursor=no" or "showcursor=yes". In both cases, may be
-                 overridden by the command-line option "--showcursor".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "hidecursor=no" または
+                 "showcursor=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "--showcursor"
+                 で変更できます。
 
-  Keyboard
+  キーボード
 
          noshortcuts=yes
 
@@ -231,12 +222,11 @@ Mouse/Keyboard
 
                  これは、キーボードの操作に慣れていない子供が不用意にコマンドを実行してしまうことを防ぐために有効です。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "noshortcuts=no" or "shortcuts=yes". In both cases, may be
-                 overridden by the command-line option "--shortcuts".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "noshortcuts=no" または
+                 "shortcuts=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--shortcuts" で変更できます。
 
-  Mouse
+  マウス
 
          grab=yes
 
@@ -246,19 +236,18 @@ Mouse/Keyboard
                  によるウィンドウの切り替えや、[Ctrl]-[Escape]
                  キーによる操作が無効になります。このオプションは、特にフルスクリーンモード時に有効です。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using "grab=no"
-                 or "dontgrab=yes". In both cases, may be overridden by the
-                 command-line option "--dontgrab".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "grab=no" または
+                 "dontgrab=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--dontgrab" で変更できます。
 
          nowheelmouse=yes
 
                  マウスでのホイールによる操作が無効になります。(通常、ホイールは右のセレクターメニューをスクロールします)。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nowheelmouse=no" or "wheelmouse=yes". In both cases, may be
-                 overridden by the command-line option "--wheelmouse".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nowheelmouse=no"
+                 または "wheelmouse=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "--wheelmouse"
+                 で変更できます。
 
          nobuttondistinction=yes
 
@@ -267,26 +256,25 @@ Mouse/Keyboard
 
                  マウス操作が苦手なお子さんの場合、このオプションを使用することで、マウスの2つまたは3つのボタンの区別を無効にすることができます。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nobuttondistinction=no" or "buttondistinction=yes". In both
-                 cases, may be overridden by the command-line option
-                 "--buttondistinction".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで
+                 "nobuttondistinction=no" または "buttondistinction=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--buttondistinction" で変更できます。
 
      ----------------------------------------------------------------------
 
-Simplification
+単純化
 
-  Interface Simplification
+  操作の単純化
 
          simpleshapes=yes
 
                  「ずけい」ツールで、形を決めたあとに回転させるステップを省略します。クリックして、ドラッグして、ボタンを離すだけで、図形を描くことができます。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "simpleshapes=no" or "complexshapes=yes". In both cases, may
-                 be overridden by the command-line option "--complexshapes".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "simpleshapes=no"
+                 または "complexshapes=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--complexshapes" で変更できます。
 
          nooutlines=yes
 
@@ -295,21 +283,19 @@ Simplification
                  Tux Paint を非常に遅いパソコンで使いたい場合や、リモートの X-Window
                  ディスプレイで使う場合に、速度を改善します。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nooutlines=no" or "outlines=yes". In both cases, may be
-                 overridden by the command-line option "--outlines".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nooutlines=no" または
+                 "outlines=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--outlines" で変更できます。
 
          uppercase=yes
 
                  すべてのテキストが大文字で表記されます（例：「Brush」は「BRUSH」）。まだ大文字しか習っていない子供たちにとって役に立つオプションです。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "uppercase=no" or "mixedcase=yes". In both cases, may be
-                 overridden by the command-line option "--mixedcase".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "uppercase=no" または
+                 "mixedcase=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--mixedcase" で変更できます。
 
-  Initial Stamp Size
+  スタンプサイズ
 
          stampsize=SIZE
 
@@ -319,7 +305,7 @@ Simplification
                  SIZE の値に default を指定すると、Tux Paint
                  がスタンプの大きさを自動的に決定します。（これが標準の動作です）
 
-  Control Simplification
+  機能制限
 
          noquit=yes
 
@@ -331,10 +317,9 @@ Simplification
                  また、[Shift] + [Control] + [Escape].
                  というキーの組み合わせでもプログラムを終了することができます。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "noquit=no" or "quit=yes". In both cases, may be overridden
-                 by the command-line option "--quit".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "noquit=no" または
+                 "quit=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--quit" で変更できます。
 
          nostamps=yes
 
@@ -342,55 +327,50 @@ Simplification
 
                  これによって、初回起動時のプログラムの読み込みが高速になります。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nostamps=no" or "stamps=yes". In both cases, may be
-                 overridden by the command-line option "--stamps".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nostamps=no" または
+                 "stamps=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--stamps" で変更できます。
 
          nostampcontrols=yes
 
                  「はんこ」ツールの画像には、上下または左右に反転できたり、大きさを変更したりできるものがあります。このオプションを設定すると、このような操作を無効にします。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nostampcontrols=no" or "stampcontrols=yes". In both cases,
-                 may be overridden by the command-line option
-                 "--stampcontrols".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nostampcontrols=no"
+                 または "stampcontrols=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--stampcontrols" で変更できます。
 
          nomagiccontrols=yes
 
                  「まほう」ツールの中には、「ふで」ツールのように画像の一部分だけに効果を及ぼすか、キャンバス全体に効果を及ぼすかを選択できるものがあります。このオプションを設定すると、「まほう」ツールの動作の選択を無効にして、ツールごとに標準の動作だけをするようにします。（たいていは「ふで」のような動作になります）
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nomagiccontrols=no" or "magiccontrols=yes". In both cases,
-                 may be overridden by the command-line option
-                 "--magiccontrols".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nomagiccontrols=no"
+                 または "magiccontrols=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--magiccontrols" で変更できます。
 
          noshapecontrols=yes
 
                  「かたち」ツールでの２つの動作モード－マウスをクリックした箇所を中心として図形を拡大するか、マウスをクリックした箇所をコーナーとして図形を拡大するか－を選択するボタンを無効にします。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "noshapecontrols=no" or "shapecontrols=yes". In both cases,
-                 may be overridden by the command-line option
-                 "--shapecontrols".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "noshapecontrols=no"
+                 または "shapecontrols=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--shapecontrols" で変更できます。
 
          nolabel=yes
 
                  「ラベル」ツールを無効にします。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nolabel=no" or "label=yes". In both cases, may be
-                 overridden by the command-line option "--label".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nolabel=no" または
+                 "label=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--label" で変更できます。
 
      ----------------------------------------------------------------------
 
-Languages
+言語関連
 
-  Language
+  言語
 
          lang=LANGUAGE
 
@@ -667,23 +647,22 @@ Languages
 
                  左から右ではなく右から左に向かって描き進むことを好むユーザーに役に立つオプションです。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "mirrorstamps=no" or "dontmirrorstamps=yes". In both cases,
-                 may be overridden by the command-line option
-                 "--dontmirrorstamps".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "mirrorstamps=no"
+                 または "dontmirrorstamps=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--dontmirrorstamps" で変更できます。
 
-  Fonts
+  フォント
 
          sysfonts=yes
 
                  もじツールで、オペレーティングシステムのフォントを使用します。通常では、Tux Paint
                  はパッケージに付属するフォントだけを使用します。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "sysfonts=no" or "nosysfonts=yes". In both cases, may be
-                 overridden by the command-line option "--nosysfonts".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "sysfonts=no" または
+                 "nosysfonts=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "--nosysfonts"
+                 で変更できます。
 
          alllocalefonts=yes
 
@@ -694,17 +673,16 @@ Languages
 
                  以前のバージョンのように全てのフォントを読み込むようにするには、このオプションを有効にします。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "alllocalefonts=no" or "currentlocalefont=yes". In both
-                 cases, may be overridden by the command-line option
-                 "--currentlocalefont".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "alllocalefonts=no"
+                 または "currentlocalefont=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--currentlocalefont" で変更できます。
 
      ----------------------------------------------------------------------
 
-Printing
+印刷
 
-  Print Permissions
+  印刷の制御
 
          noprint=yes
 
@@ -714,12 +692,11 @@ Printing
 
                  SECONDS で設定した秒数ごとに１回だけしか印刷できなくなります。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "printdelay=0". In both cases, may be overridden by the
-                 command-line option "--printdelay=0".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "printdelay=0"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--printdelay=0" で変更できます。
 
-  Show Printer Dialog
+  印刷ダイアログの表示
 
          altprint=always
 
@@ -739,7 +716,7 @@ Printing
                  ボタンをクリックすると印刷ダイアログが表示され、[Alt] キーを押さずに "いんさつ"
                  ボタンをクリックすると、ダイアログを表示せずに印刷します。
 
-  Save Printer Configuration
+  印刷設定の保存
 
          printcfg=yes
 
@@ -753,12 +730,12 @@ Printing
                  オプションが設定されていれば、変更した印刷の設定は "userdata/print.cfg"
                  ファイルに記録され、再利用されます。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "printcfg=no" or "noprintcfg=yes". In both cases, may be
-                 overridden by the command-line option "--noprintcfg".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "printcfg=no" または
+                 "noprintcfg=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "--noprintcfg"
+                 で変更できます。
 
-  Print Commands
+  印刷コマンド
 
          printcommand=COMMAND
 
@@ -787,7 +764,7 @@ Printing
 
                    kprinter
 
-  Paper Size
+  用紙サイズ
 
          papersize=PAPERSIZE
 
@@ -806,9 +783,9 @@ Printing
 
      ----------------------------------------------------------------------
 
-Saving
+保存
 
-  Save Over Earlier Work
+  上書き保存
 
          saveover=yes
 
@@ -824,28 +801,26 @@ Saving
                  （絵を保存するときの標準の動作なので、この設定は冗長なものとなります）
                  以前の絵を編集して保存するときに、以前の絵を上書きするかどうかを尋ねられます。
 
-  Starting Out
+  起動時の設定
 
          startblank=yes
 
                  Tux Paint を起動する際、前回最後に開いていた絵を読み込む代わりに、毎回、空のキャンバスで開始します。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "startblank=no" or "startlast=yes". In both cases, may be
-                 overridden by the command-line option "--startlast".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "startblank=no" または
+                 "startlast=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--startlast" で変更できます。
 
          newcolorslast=yes
 
                  「さいしょから」でキャンバスを選択する際、単色のキャンバスが末尾に、スターター画像やテンプレートが先頭になるよう、表示順序を変更します。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "newcolorslast=no" or "newcolorsfirst=yes". In both cases,
-                 may be overridden by the command-line option
-                 "--newcolorsfirst".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "newcolorslast=no"
+                 または "newcolorsfirst=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--newcolorsfirst" で変更できます。
 
-  Save and Export Directories
+  保存・書き出し先のディレクトリ
 
          savedir=DIRECTORY
 
@@ -904,32 +879,31 @@ Saving
 
                  例：exportdir=/home/penguin/TuxPaintExports
 
-  More Saving Options
+  保存関連の追加オプション
 
          nosave=yes
 
                  絵の保存ができないようにします（"セーブ"
                  ボタンも無効になります）。一時的なお遊びに使う場合や、テスト環境で使えるオプションです。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nosave=no" or "save=yes". In both cases, may be overridden
-                 by the command-line option "--save".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nosave=no" または
+                 "save=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--save" で変更できます。
 
          autosave=yes
 
                  プログラムを終了するときに、絵を保存するかどうか尋ねずに、自動的に保存します。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "autosave=no" or "noautosave=yes". In both cases, may be
-                 overridden by the command-line option "--noautosave".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "autosave=no" または
+                 "noautosave=yes"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "--noautosave"
+                 で変更できます。
 
      ----------------------------------------------------------------------
 
-Data
+データ
 
-  Lockfile
+  ロックファイル
 
          nolockfile=yes
 
@@ -941,12 +915,11 @@ Data
                  標準では、Linux および Unix では "~/.tuxpaint/" に、Windows では
                  "userdata\" にロックファイルが保存されます。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "nolockfile=no" or "lockfile=yes". In both cases, may be
-                 overridden by the command-line option "--lockfile".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nolockfile=no" または
+                 "lockfile=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--lockfile" で変更できます。
 
-  Data Directory
+  データ・ディレクトリ
 
          datadir=DIRECTORY
 
@@ -977,7 +950,7 @@ Data
 
                  例：datadir=/home/johnny/tuxpaint-data/
 
-  Color Palette File
+  カラーパレットファイル
 
          colorfile=FILENAME
 
@@ -1001,15 +974,15 @@ Data
 
      ----------------------------------------------------------------------
 
-Accessibility
+アクセシビリティ
 
-  Mouse
+  マウス
 
          mouse-accessibility=yes
 
                  例えば「せん」ツールなどでは、マウスをクリックしてドラッグした後にマウスボタンを放すというのが標準の操作ですが、このモードを設定すると、マウスをクリックしてからマウスを動かした後に再度マウスをクリックするという操作になります。
 
-  Keyboard
+  キーボード
 
          keyboard=yes
 
@@ -1033,12 +1006,11 @@ Accessibility
                          * 注：「mouse-accessibility」オプションの機能は、キーボードの操作にも連動します。両方のオプションを有効にした場合、例えば線を引く場合は、「クリック」のキーを一度押してから「移動」のキーで描画し、最後にもう一度「クリック」キーを押して描画を完了します。
                     * 通常のマウスやジョイスティックも同時に使用することができます（例えば、マウスで移動してキーボードでクリックしたり、その逆も可能です）。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "keyboard=no" or "mouse=yes". In both cases, may be
-                 overridden by the command-line option "--mouse".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "keyboard=no" または
+                 "mouse=yes" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--mouse" で変更できます。
 
-  Onscreen Keyboard
+  画面キーボード
 
          onscreen-keyboard=yes
 
@@ -1054,17 +1026,16 @@ Accessibility
                  画面キーボードの変更をできないようにします。小さな子供向けにシンプルにしたい場合に設定します。
                  このオプションが設定されると onscreen-keyboard=yes も設定されているとみなします。
 
-                 Note: If used in a system-wide configuration file, may be
-                 overridden by the user's configuration file using
-                 "onscreen-keyboard-disable-change=no". In both cases, may be
-                 overridden by the command-line option
-                 "--onscreen-keyboard-disable-change=no".
+                 注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで
+                 "onscreen-keyboard-disable-change=no"
+                 を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの
+                 "--onscreen-keyboard-disable-change=no" で変更できます。
 
      ----------------------------------------------------------------------
 
-Joystick
+ジョイスティック
 
-  Main Device
+  デバイスの設定
 
          joystick-dev=N
 
@@ -1085,7 +1056,7 @@ Joystick
                  ポインターの移動速度の上限を STEPS にピクセル単位で設定します。1 から 7 までの値が設定可能で、標準の値は 7
                  です。
 
-  Hat
+  ハットスイッチ
 
          joystick-hat-slowness=SPEED
 
@@ -1096,14 +1067,14 @@ Joystick
                  ジョイスティックのハットスイッチを押し続けたときに、ポインターが連続して動き始めるまでの時間を MILLISECONDS
                  にミリ秒単位で設定します。0 から 3000 までの値が設定可能で、標準の設定は 1000 です。
 
-  Buttons to Disable
+  ボタンの無効化
 
          joystick-buttons-ignore=BUTTON1,BUTTON2,...
 
                  無効にするジョイスティックのボタンの番号を指定します。何も指定しない場合、上記の "joystick-btn-"
                  オプションで機能が設定されたボタン以外は、マウスの左ボタンと同じ動作になります。
 
-  Button Shortcuts
+  ボタンショートカット
 
          joystick-btn-escape=BUTTON NUMBER
 

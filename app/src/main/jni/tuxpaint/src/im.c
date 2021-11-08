@@ -621,10 +621,10 @@ static int charmap_load(CHARMAP * cm, const char *path)
         default:
           if (charmap_add(cm, section, buf, unicode, flag))
             {
-              size_t i = 0;
-
 #ifndef __BEOS__
 #if defined __GLIBC__ && __GLIBC__ == 2 && __GLIBC_MINOR__ >=2 || __GLIBC__ > 2 || __APPLE__
+              size_t i = 0;
+
               fwprintf(stderr, L"Unable to add sequence '%ls', unicode ", buf);
               for (i = 0; i < wcslen(unicode); i++)
                 fwprintf(stderr, L"%04X ", (int)unicode[i]);
@@ -1446,7 +1446,6 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
     case SDLK_RSHIFT:
     case SDLK_LCTRL:
     case SDLK_RCTRL:
-    case SDLK_LALT:
     case SDLK_LGUI:
     case SDLK_RGUI:
     case SDLK_MENU:
@@ -1454,8 +1453,9 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
     case SDLK_APPLICATION:
       break;
 
-      /* Right-Alt mapped to mode-switch */
+      /* Left-Alt & Right-Alt mapped to mode-switch */
     case SDLK_RALT:
+    case SDLK_LALT:
       cm.section = ((cm.section + 1) % SEC_TOTAL);      /* Change section */
       im_softreset(im);         /* Soft reset */
 
@@ -1703,7 +1703,7 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
     case SDLK_APPLICATION:
       break;
 
-      /* Right-Alt mapped to mode-switch */
+      /* Left-Alt & Right-Alt mapped to mode-switch */
     case SDLK_LALT:
     case SDLK_RALT:
       cm.section = ((cm.section + 1) % SEC_TOTAL);      /* Change section */

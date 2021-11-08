@@ -53,31 +53,31 @@
               <a href="#available">利用可能なオプション</a>
               <ul>
                 <li>
-                  <a href="#video_sound">Video/Sound</a>
+                  <a href="#video_sound">画面・音声</a>
                 </li>
                 <li>
-                  <a href="#mouse_keyboard">Mouse/Keyboard</a>
+                  <a href="#mouse_keyboard">マウス・キーボード</a>
                 </li>
                 <li>
-                  <a href="#simplification">Simplification</a>
+                  <a href="#simplification">単純化</a>
                 </li>
                 <li>
-                  <a href="#languages">Languages</a>
+                  <a href="#languages">言語関連</a>
                 </li>
                 <li>
-                  <a href="#printing">Printing</a>
+                  <a href="#printing">印刷</a>
                 </li>
                 <li>
-                  <a href="#saving">Saving</a>
+                  <a href="#saving">保存</a>
                 </li>
                 <li>
-                  <a href="#data">Data</a>
+                  <a href="#data">データ</a>
                 </li>
                 <li>
-                  <a href="#accessibility">Accessibility</a>
+                  <a href="#accessibility">アクセシビリティ</a>
                 </li>
                 <li>
-                  <a href="#joystick">Joystick</a>
+                  <a href="#joystick">ジョイスティック</a>
                 </li>
               </ul>
             </li>
@@ -214,11 +214,11 @@
       <hr/>
       <h2>
         <a name="video_sound" id="video_sound">
-          Video/Sound        </a>
+          画面・音声        </a>
       </h2>
       <blockquote>
         <h3>
-  Video</h3>
+  画面</h3>
 
 <blockquote>
   <dl>
@@ -230,7 +230,7 @@
       <p>
         プログラムを、ウィンドウ内ではなく、フルスクリーンモードで起動します。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>fullscreen=no</code>". In both cases, may be overridden by the command-line option "<code>--windowed</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>fullscreen=no</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--windowed</code>" で変更できます。      </p>
     </dd>
   
     <dt>
@@ -279,7 +279,7 @@
       <p>
         ウィンドウの幅と高さの設定を入れ替えます。これは、タブレットパソコンのような縦型のディスプレイでウィンドウを回転させる際に便利なオプションです。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>orient=landscape</code>". In both cases, may be overridden by the command-line option "<code>--orient=landscape</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>orient=landscape</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--orient=landscape</code>" で変更できます。      </p>
     </dd>
   
     <dt>
@@ -299,13 +299,13 @@
       <p>
         標準では、Tux Paint の起動中は スクリーンセーバーが起動しない設定になっていますが、"<code>allowscreensaver</code>" オプションを指定すると、スクリーンセーバーが有効になります。これはSDLライブラリのバージョンが 1.2.12 以降の場合に有効なオプションであることに注意して下さい。（環境変数 "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" の値を "<code>1</code>" に設定しても、同様のことができます）      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>allowscreensaver=no</code>" or "<code>disablescreensaver=yes</code>". In both cases, may be overridden by the command-line option "<code>--disablescreensaver</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>allowscreensaver=no</code>" または "<code>disablescreensaver=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--disablescreensaver</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
 
 <h3>
-  Sound</h3>
+  音声</h3>
 <blockquote>
   <dl>
     <dt>
@@ -316,7 +316,7 @@
       <p>
         効果音を無効にします。（注：このオプションを設定すると、<b>[Alt]</b> + <b>[S]</b> を押しても、効果音を有効化することはできません      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nosound=no</code>" or "<code>sound=yes</code>". In both cases, may be overridden by the command-line option "<code>--sound</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nosound=no</code>" または "<code>sound=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--sound</code>" で変更できます。      </p>
     </dd>
   
     <dt>
@@ -327,13 +327,13 @@
       <p>
         ステレオの効果音を無効にする。（片耳イヤホンや１台のスピーカーで使用する場合に役に立ちます）      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nostereo=no</code>" or "<code>stereo=yes</code>". In both cases, may be overridden by the command-line option "<code>--stereo</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nostereo=no</code>" または "<code>stereo=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--stereo</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
 
 <h3>
-  Interface Size</h3>
+  インターフェースサイズ</h3>
 <blockquote>
   <dl>
     <dt>
@@ -348,7 +348,7 @@
         <i>SIZE</i> の値は24から192までのピクセル値で指定します。ほとんどのボタンは正方形となっており、この設定はボタンの幅と高さの両方に影響します。      </p>
   
       <p>
-        Note: If the chosen button size would cause the buttons to be too large for all required UI elements to appear under Tux Paint's chosen window size, the largest possible button size will be used. (A note will appear in <code>stderr</code>.)      </p>
+        注：選択されたボタンのサイズが大きすぎて画面内に必要なすべてのインターフェースが表示しきれない場合は、できる限り大きなボタンサイズが使用されます。(stderrにメモが表示されます。)      </p>
     </dd>
   
     <dt>
@@ -366,11 +366,11 @@
       <hr/>
       <h2>
         <a name="mouse_keyboard" id="mouse_keyboard">
-          Mouse/Keyboard        </a>
+          マウス・キーボード        </a>
       </h2>
       <blockquote>
         <h3>
-  Cursor</h3>
+  マウスカーソル</h3>
 
 <blockquote>
   <dl>
@@ -385,7 +385,7 @@
       <p>
         環境によっては Tux Paint のマウスカーソルが原因で不具合が起こることがあります。そういった場合にこのオプションを有効にして下さい。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nofancycursors=no</code>" or "<code>fancycursors=yes</code>". In both cases, may be overridden by the command-line option "<code>--fancycursors</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nofancycursors=no</code>" または "<code>fancycursors=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--fancycursors</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -399,13 +399,13 @@
       <p>
         タブレットＰＣなどのタッチスクリーンを用いるデバイスのためのオプションです。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>hidecursor=no</code>" or "<code>showcursor=yes</code>". In both cases, may be overridden by the command-line option "<code>--showcursor</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>hidecursor=no</code>" または "<code>showcursor=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--showcursor</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
 
 <h3>
-  Keyboard</h3>
+  キーボード</h3>
 
 <blockquote>
   <dl>
@@ -420,13 +420,13 @@
       <p>
         これは、キーボードの操作に慣れていない子供が不用意にコマンドを実行してしまうことを防ぐために有効です。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>noshortcuts=no</code>" or "<code>shortcuts=yes</code>". In both cases, may be overridden by the command-line option "<code>--shortcuts</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>noshortcuts=no</code>" または "<code>shortcuts=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--shortcuts</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
 
 <h3>
-  Mouse</h3>
+  マウス</h3>
 
 <blockquote>
   <dl>
@@ -441,7 +441,7 @@
       <p>
         これは、ユーザーが Tux Paint から抜け出すことができないようにするのに便利です。 <b>[Alt]-[Tab]</b> によるウィンドウの切り替えや、<b>[Ctrl]-[Escape]</b> キーによる操作が無効になります。このオプションは、特にフルスクリーンモード時に有効です。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>grab=no</code>" or "<code>dontgrab=yes</code>". In both cases, may be overridden by the command-line option "<code>--dontgrab</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>grab=no</code>" または "<code>dontgrab=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--dontgrab</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -452,7 +452,7 @@
       <p>
         マウスでのホイールによる操作が無効になります。(通常、ホイールは右のセレクターメニューをスクロールします)。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nowheelmouse=no</code>" or "<code>wheelmouse=yes</code>". In both cases, may be overridden by the command-line option "<code>--wheelmouse</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nowheelmouse=no</code>" または "<code>wheelmouse=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--wheelmouse</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -466,7 +466,7 @@
       <p>
         マウス操作が苦手なお子さんの場合、このオプションを使用することで、マウスの2つまたは3つのボタンの区別を無効にすることができます。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nobuttondistinction=no</code>" or "<code>buttondistinction=yes</code>". In both cases, may be overridden by the command-line option "<code>--buttondistinction</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nobuttondistinction=no</code>" または "<code>buttondistinction=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--buttondistinction</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
@@ -475,11 +475,11 @@
       <hr/>
       <h2>
         <a name="simplification" id="simplification">
-          Simplification        </a>
+          単純化        </a>
       </h2>
       <blockquote>
         <h3>
-  Interface Simplification</h3>
+  操作の単純化</h3>
 
 <blockquote>
   <dl>
@@ -491,7 +491,7 @@
       <p>
         「ずけい」ツールで、形を決めたあとに回転させるステップを省略します。クリックして、ドラッグして、ボタンを離すだけで、図形を描くことができます。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>simpleshapes=no</code>" or "<code>complexshapes=yes</code>". In both cases, may be overridden by the command-line option "<code>--complexshapes</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>simpleshapes=no</code>" または "<code>complexshapes=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--complexshapes</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -505,7 +505,7 @@
       <p>
         Tux Paint を非常に遅いパソコンで使いたい場合や、リモートの X-Window ディスプレイで使う場合に、速度を改善します。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nooutlines=no</code>" or "<code>outlines=yes</code>". In both cases, may be overridden by the command-line option "<code>--outlines</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nooutlines=no</code>" または "<code>outlines=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--outlines</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -516,13 +516,13 @@
       <p>
         すべてのテキストが大文字で表記されます（例：「Brush」は「BRUSH」）。まだ大文字しか習っていない子供たちにとって役に立つオプションです。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>uppercase=no</code>" or "<code>mixedcase=yes</code>". In both cases, may be overridden by the command-line option "<code>--mixedcase</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>uppercase=no</code>" または "<code>mixedcase=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--mixedcase</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
 
 <h3>
-  Initial Stamp Size</h3>
+  スタンプサイズ</h3>
 
 <blockquote>
   <dl>
@@ -541,7 +541,7 @@
 </blockquote>
 
 <h3>
-  Control Simplification</h3>
+  機能制限</h3>
 
 <blockquote>
   <dl>
@@ -560,7 +560,7 @@
         また、<b>[Shift]</b> + <b>[Control]</b> + <b>[Escape]</b>. というキーの組み合わせでもプログラムを終了することができます。      </p>
 
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>noquit=no</code>" or "<code>quit=yes</code>". In both cases, may be overridden by the command-line option "<code>--quit</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>noquit=no</code>" または "<code>quit=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--quit</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -574,7 +574,7 @@
       <p>
         これによって、初回起動時のプログラムの読み込みが高速になります。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nostamps=no</code>" or "<code>stamps=yes</code>". In both cases, may be overridden by the command-line option "<code>--stamps</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nostamps=no</code>" または "<code>stamps=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--stamps</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -585,7 +585,7 @@
       <p>
         「はんこ」ツールの画像には、上下または左右に反転できたり、大きさを変更したりできるものがあります。このオプションを設定すると、このような操作を無効にします。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nostampcontrols=no</code>" or "<code>stampcontrols=yes</code>". In both cases, may be overridden by the command-line option "<code>--stampcontrols</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nostampcontrols=no</code>" または "<code>stampcontrols=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--stampcontrols</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -596,7 +596,7 @@
       <p>
         「まほう」ツールの中には、「ふで」ツールのように画像の一部分だけに効果を及ぼすか、キャンバス全体に効果を及ぼすかを選択できるものがあります。このオプションを設定すると、「まほう」ツールの動作の選択を無効にして、ツールごとに標準の動作だけをするようにします。（たいていは「ふで」のような動作になります）      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nomagiccontrols=no</code>" or "<code>magiccontrols=yes</code>". In both cases, may be overridden by the command-line option "<code>--magiccontrols</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nomagiccontrols=no</code>" または "<code>magiccontrols=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--magiccontrols</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -607,7 +607,7 @@
       <p>
         「かたち」ツールでの２つの動作モード－マウスをクリックした箇所を中心として図形を拡大するか、マウスをクリックした箇所をコーナーとして図形を拡大するか－を選択するボタンを無効にします。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>noshapecontrols=no</code>" or "<code>shapecontrols=yes</code>". In both cases, may be overridden by the command-line option "<code>--shapecontrols</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>noshapecontrols=no</code>" または "<code>shapecontrols=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--shapecontrols</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -618,7 +618,7 @@
       <p>
         「ラベル」ツールを無効にします。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nolabel=no</code>" or "<code>label=yes</code>". In both cases, may be overridden by the command-line option "<code>--label</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nolabel=no</code>" または "<code>label=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--label</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
@@ -627,11 +627,11 @@
       <hr/>
       <h2>
         <a name="languages" id="languages">
-          Languages        </a>
+          言語関連        </a>
       </h2>
       <blockquote>
         <h3>
-  Language</h3>
+  言語</h3>
 
 <blockquote>
   <dl>
@@ -2201,13 +2201,13 @@
       <p>
         左から右ではなく右から左に向かって描き進むことを好むユーザーに役に立つオプションです。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>mirrorstamps=no</code>" or "<code>dontmirrorstamps=yes</code>". In both cases, may be overridden by the command-line option "<code>--dontmirrorstamps</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>mirrorstamps=no</code>" または "<code>dontmirrorstamps=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--dontmirrorstamps</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
 
 <h3>
-  Fonts</h3>
+  フォント</h3>
 
 <blockquote>
   <dl>
@@ -2219,7 +2219,7 @@
       <p>
         <b>もじ</b>ツールで、オペレーティングシステムのフォントを使用します。通常では、Tux Paint はパッケージに付属するフォントだけを使用します。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>sysfonts=no</code>" or "<code>nosysfonts=yes</code>". In both cases, may be overridden by the command-line option "<code>--nosysfonts</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>sysfonts=no</code>" または "<code>nosysfonts=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--nosysfonts</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -2233,7 +2233,7 @@
       <p>
         以前のバージョンのように全てのフォントを読み込むようにするには、このオプションを有効にします。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>alllocalefonts=no</code>" or "<code>currentlocalefont=yes</code>". In both cases, may be overridden by the command-line option "<code>--currentlocalefont</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>alllocalefonts=no</code>" または "<code>currentlocalefont=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--currentlocalefont</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
@@ -2242,11 +2242,11 @@
       <hr/>
       <h2>
         <a name="printing" id="printing">
-          Printing        </a>
+          印刷        </a>
       </h2>
       <blockquote>
         <h3>
-  Print Permissions</h3>
+  印刷の制御</h3>
 
 <blockquote>
   <dl>
@@ -2268,13 +2268,13 @@
         <i>SECONDS</i> で設定した秒数ごとに１回だけしか印刷できなくなります。      </p>
 
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>printdelay=0</code>". In both cases, may be overridden by the command-line option "<code>--printdelay=0</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>printdelay=0</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--printdelay=0</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
 
 <h3>
-  Show Printer Dialog</h3>
+  印刷ダイアログの表示</h3>
 
 <blockquote>
   <dl>
@@ -2309,7 +2309,7 @@
 </blockquote>
 
 <h3>
-  Save Printer Configuration</h3>
+  印刷設定の保存</h3>
 
 <blockquote>
   <dl>
@@ -2329,14 +2329,14 @@
         （注：これは、Tux Paint をフルスクリーンモードで起動している場合にのみ有効であることに注意してください。）"printcfg" オプションが設定されていれば、変更した印刷の設定は "<code>userdata/print.cfg</code>" ファイルに記録され、再利用されます。      </p>
 
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>printcfg=no</code>" or "<code>noprintcfg=yes</code>". In both cases, may be overridden by the command-line option "<code>--noprintcfg</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>printcfg=no</code>" または "<code>noprintcfg=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--noprintcfg</code>" で変更できます。      </p>
     </dd>
 
   </dl>
 </blockquote>
 
 <h3>
-  Print Commands</h3>
+  印刷コマンド</h3>
 
 <blockquote>
   <dl>
@@ -2387,7 +2387,7 @@
 </blockquote>
 
 <h3>
-  Paper Size</h3>
+  用紙サイズ</h3>
 
 <blockquote>
   <dl>
@@ -2414,11 +2414,11 @@
       <hr/>
       <h2>
         <a name="saving" id="saving">
-          Saving        </a>
+          保存        </a>
       </h2>
       <blockquote>
         <h3>
-  Save Over Earlier Work</h3>
+  上書き保存</h3>
 
 <blockquote>
   <dl>
@@ -2453,7 +2453,7 @@
 </blockquote>
 
 <h3>
-  Starting Out</h3>
+  起動時の設定</h3>
 
 <blockquote>
   <dl>
@@ -2465,7 +2465,7 @@
       <p>
         Tux Paint を起動する際、前回最後に開いていた絵を読み込む代わりに、毎回、空のキャンバスで開始します。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>startblank=no</code>" or "<code>startlast=yes</code>". In both cases, may be overridden by the command-line option "<code>--startlast</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>startblank=no</code>" または "<code>startlast=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--startlast</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -2476,14 +2476,14 @@
       <p>
         「さいしょから」でキャンバスを選択する際、単色のキャンバスが末尾に、スターター画像やテンプレートが先頭になるよう、表示順序を変更します。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>newcolorslast=no</code>" or "<code>newcolorsfirst=yes</code>". In both cases, may be overridden by the command-line option "<code>--newcolorsfirst</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>newcolorslast=no</code>" または "<code>newcolorsfirst=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--newcolorsfirst</code>" で変更できます。      </p>
     </dd>
 
   </dl>
 </blockquote>
 
 <h3>
-  Save and Export Directories</h3>
+  保存・書き出し先のディレクトリ</h3>
 
 <blockquote>
   <dl>
@@ -2560,7 +2560,7 @@
 </blockquote>
 
 <h3>
-  More Saving Options</h3>
+  保存関連の追加オプション</h3>
 
 <blockquote>
   <dl>
@@ -2572,7 +2572,7 @@
       <p>
         絵の保存ができないようにします（"セーブ" ボタンも無効になります）。一時的なお遊びに使う場合や、テスト環境で使えるオプションです。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nosave=no</code>" or "<code>save=yes</code>". In both cases, may be overridden by the command-line option "<code>--save</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nosave=no</code>" または "<code>save=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--save</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -2583,7 +2583,7 @@
       <p>
         プログラムを終了するときに、絵を保存するかどうか尋ねずに、自動的に保存します。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>autosave=no</code>" or "<code>noautosave=yes</code>". In both cases, may be overridden by the command-line option "<code>--noautosave</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>autosave=no</code>" または "<code>noautosave=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--noautosave</code>" で変更できます。      </p>
     </dd>
 
   </dl>
@@ -2593,11 +2593,11 @@
       <hr/>
       <h2>
         <a name="data" id="data">
-          Data        </a>
+          データ        </a>
       </h2>
       <blockquote>
         <h3>
-  Lockfile</h3>
+  ロックファイル</h3>
 
 <blockquote>
   <dl>
@@ -2616,14 +2616,14 @@
         標準では、Linux および Unix では "<code>~/.tuxpaint/</code>" に、Windows では "<code>userdata\</code>" にロックファイルが保存されます。      </p>
 
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nolockfile=no</code>" or "<code>lockfile=yes</code>". In both cases, may be overridden by the command-line option "<code>--lockfile</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nolockfile=no</code>" または "<code>lockfile=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--lockfile</code>" で変更できます。      </p>
     </dd>
 
   </dl>
 </blockquote>
 
 <h3>
-  Data Directory</h3>
+  データ・ディレクトリ</h3>
 
 <blockquote>
   <dl>
@@ -2666,7 +2666,7 @@
 </blockquote>
 
 <h3>
-  Color Palette File</h3>
+  カラーパレットファイル</h3>
 
 <blockquote>
   <dl>
@@ -2700,11 +2700,11 @@
       <hr/>
       <h2>
         <a name="accessibility" id="accessibility">
-          Accessibility        </a>
+          アクセシビリティ        </a>
       </h2>
       <blockquote>
         <h3>
-  Mouse</h3>
+  マウス</h3>
 
 <blockquote>
   <dl>
@@ -2720,7 +2720,7 @@
 </blockquote>
 
 <h3>
-  Keyboard</h3>
+  キーボード</h3>
 
 <blockquote>
   <dl>
@@ -2767,13 +2767,13 @@
       </ul>
 
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>keyboard=no</code>" or "<code>mouse=yes</code>". In both cases, may be overridden by the command-line option "<code>--mouse</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>keyboard=no</code>" または "<code>mouse=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--mouse</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
 
 <h3>
-  Onscreen Keyboard</h3>
+  画面キーボード</h3>
 
 <blockquote>
   <dl>
@@ -2804,7 +2804,7 @@
         画面キーボードの変更をできないようにします。小さな子供向けにシンプルにしたい場合に設定します。<br>
       このオプションが設定されると <b>onscreen-keyboard=yes</b> も設定されているとみなします。      </p>
       <p>
-        Note: If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>onscreen-keyboard-disable-change=no</code>". In both cases, may be overridden by the command-line option "<code>--onscreen-keyboard-disable-change=no</code>".      </p>
+        注：システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>onscreen-keyboard-disable-change=no</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--onscreen-keyboard-disable-change=no</code>" で変更できます。      </p>
     </dd>
   </dl>
 </blockquote>
@@ -2813,11 +2813,11 @@
       <hr/>
       <h2>
         <a name="joystick" id="joystick">
-          Joystick        </a>
+          ジョイスティック        </a>
       </h2>
       <blockquote>
         <h3>
-  Main Device</h3>
+  デバイスの設定</h3>
 
 <blockquote>
   <dl>
@@ -2861,7 +2861,7 @@
 </blockquote>
 
 <h3>
-  Hat</h3>
+  ハットスイッチ</h3>
 
 <blockquote>
   <dl>
@@ -2886,7 +2886,7 @@
 </blockquote>
 
 <h3>
-  Buttons to Disable</h3>
+  ボタンの無効化</h3>
 
 <blockquote>
   <dl>
@@ -2902,7 +2902,7 @@
 </blockquote>
 
 <h3>
-  Button Shortcuts</h3>
+  ボタンショートカット</h3>
 
 <blockquote>
   <dl>

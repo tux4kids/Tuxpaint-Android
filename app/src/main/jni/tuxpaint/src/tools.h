@@ -23,7 +23,7 @@
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
-  June 14, 2002 - September 6, 2021
+  June 14, 2002 - October 25, 2021
   $Id$
 */
 
@@ -164,12 +164,14 @@ const char *const tool_tips[NUM_TOOLS] = {
 
 // Instruction while using Line tool (after click, before release)
 #define TIP_LINE_START gettext_noop("Let go of the button to complete the line.")
+#define TIP_LINE_MOVING gettext_noop("Let go of the button to complete the line. (Your line's angle is %.0f degrees.)")
 
 // Instruction while using Shape tool (after first click, before release)
 #define TIP_SHAPE_START gettext_noop("Hold the button to stretch the shape.")
 
 // Instruction while finishing Shape tool (after release, during rotation step before second click)
 #define TIP_SHAPE_NEXT gettext_noop("Move the mouse to rotate the shape. Click to draw it.")
+#define TIP_SHAPE_ROTATING gettext_noop("Move the mouse to rotate the shape. Click to draw it. (It is rotated %d degrees.)")
 
 // Notification that 'New' action was aborted (current image would have been lost)
 #define TIP_NEW_ABORT gettext_noop("OK then… Let’s keep drawing this one!")

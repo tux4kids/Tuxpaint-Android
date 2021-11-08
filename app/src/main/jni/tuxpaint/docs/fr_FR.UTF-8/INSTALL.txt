@@ -152,7 +152,7 @@ Compilation et installation
 
   Utilisateurs de Windows
 
-     octobre 25, 2020 Shin-ichi TOYAMA shin1@wmail.plala.or.jp
+     novembre 3, 2021 Shin-ichi TOYAMA shin1@wmail.plala.or.jp
      <shin1@wmail.plala.or.jp>
 
     Réglages pour compilation
@@ -200,9 +200,8 @@ Compilation et installation
 
     bibliothèques de dépendance 64bit (x86_64) pour Tux Paint
 
-         Vous pouvez installer les outils et bibliothèques nécessaires pour
-         la compilation de Tux Paint sur MSYS2/MINGW en utilisant "pacman",
-         sauf pour SDL_Pango et SDL_gfx.
+         You can install tools and libraries required for compiling Tux Paint
+         on MSYS2/MINGW using "pacman" except for SDL_Pango.
 
          "ntldd" est un petit outil qui examine les fichiers exécutables de
          windows en vue de lister les fichiers DLL (.dll) qui leur sont
@@ -213,19 +212,19 @@ Compilation et installation
          Config.". Vous pouvez ne pas l'installer si vous compilez seulement
          "Tux Paint".
 
-           $ pacman -S mingw-w64-x86_64-SDL_{image,mixer,ttf}
+           $ pacman -S mingw-w64-x86_64-SDL_{image,mixer,ttf,gfx}
            $ pacman -S mingw-w64-x86_64-librsvg
            $ pacman -S mingw-w64-x86_64-fribidi
            $ pacman -S mingw-w64-x86_64-libimagequant
            $ pacman -S mingw-w64-x86_64-fltk
-           $ pacman -S mingw64/mingw-w64-x86_64-ntldd-git
+           $ pacman -S mingw-w64-x86_64-ntldd-git
 
          Nota : Fermez l'interpréteur de commandes avant de passer à la
          suite.
 
-    Installer SDL_Pango et SDL_gfx pour l'environnement 64bit
+    Install SDL_Pango on the 64bit environment
 
-         SDL_Pango et SDL_gfx doivent être installés manuellement.
+         SDL_Pango should be installed manually.
 
          Cette fois-ci, utilisez le shell MinGW "64bit". Ouvrez le shell
          depuis le "Menu de Démarrage" -> "MSYS2 64bit" -> "MSYS2 MinGW
@@ -250,17 +249,6 @@ Compilation et installation
              $ patch -p0 < ../SDL_Pango-configure-extra-api.patch
              $ ./configure --prefix=/mingw64 && make && make install
 
-      SDL_gfx
-
-           Télécharger fichier source de SDL_gfx-2.0.25 depuis La page
-           SDL_gfx sur Sourceforge.net.
-
-           Réinstallez SDL_gfx comme suit.
-
-             $ tar zxvf SDL_gfx-2.0.25.tar.gz
-             $ cd SDL_gfx-2.0.25
-             $ ./configure --prefix=/mingw64 && make && make install
-
        Aller à la prochaine section "chaines d'outils MinGW 32bit (i686)", ou
        bien aller directement à la section "ImageMagick" si vous n'avez
        besoin que d'un environnement de travail 64bit.
@@ -276,9 +264,8 @@ Compilation et installation
 
     bibliothèques de dépendance 32bit (i686) pour Tux Paint
 
-         Vous pouvez installer les outils et bibliothèques nécessaires pour
-         la compilation de Tux Paint sur MSYS2/MINGW en utilisant "pacman",
-         sauf pour SDL_Pango et SDL_gfx.
+         You can install tools and libraries required for compiling Tux Paint
+         on MSYS2/MINGW using "pacman" except for SDL_Pango.
 
          "ntldd" est un petit outil qui examine les fichiers exécutables de
          windows en vue de lister les fichiers DLL (.dll) qui leur sont
@@ -289,7 +276,7 @@ Compilation et installation
          Config.". Vous pouvez ne pas l'installer si vous compilez seulement
          "Tux Paint".
 
-           $ pacman -S mingw-w64-i686-SDL_{image,mixer,ttf}
+           $ pacman -S mingw-w64-i686-SDL_{image,mixer,ttf,gfx}
            $ pacman -S mingw-w64-i686-librsvg
            $ pacman -S mingw-w64-i686-fribidi
            $ pacman -S mingw-w64-i686-libimagequant
@@ -299,9 +286,9 @@ Compilation et installation
          Nota : Fermez l'interpréteur de commandes avant de passer à la
          suite.
 
-    Installer SDL_Pango et SDL_gfx pour l'environnement 32bit
+    Install SDL_Pango on the 32bit environment
 
-         SDL_Pango et SDL_gfx doivent être installés manuellement.
+         SDL_Pango should be installed manually.
 
          Cette fois-ci, utilisez le shell MinGW "32bit". Ouvrez le shell
          depuis le "Menu de Démarrage" -> "MSYS2 64bit" -> "MSYS2 MinGW
@@ -324,17 +311,6 @@ Compilation et installation
              $ tar zxvf SDL_Pango-0.1.2.tar.gz
              $ cd SDL_Pango-0.1.2/
              $ patch -p0 < ../SDL_Pango-configure-extra-api.patch
-             $ ./configure --prefix=/mingw32 && make && make install
-
-      SDL_gfx
-
-           Télécharger fichier source de SDL_gfx-2.0.25 depuis La page
-           SDL_gfx sur Sourceforge.net.
-
-           Réinstallez SDL_gfx comme suit.
-
-             $ tar zxvf SDL_gfx-2.0.25.tar.gz
-             $ cd SDL_gfx-2.0.25
              $ ./configure --prefix=/mingw32 && make && make install
 
             -------------------------------------------------------
@@ -400,11 +376,26 @@ Compilation et installation
          Inno Setup est utilisé pour construire l'installeur exécutable de
          Tux Paint. Vous devez donc l'installer en premier.
 
+         Officiellement Inno Setup prend en compte des traductions dans
+         environ 20 langues. Cependant, un des points majeurs de Tux Paint
+         est qu'il supporte beaucoup de langues. Aussi, le script de mise au
+         point "tuxpaint.iss" qui sert pour construire le programme
+         d'installation est écrit en beaucoup plus de langues, y compris des
+         non-officielles qui sont disponibles sur "Inno Setup Translations".
+         Vous devez télécharger les fichiers de traduction (.isl) qui sont
+         requis et les mettre dans le répertoire "Languages" sous le
+         répertoire dans lequel Inno Setup est installé.
+
+         Before building an installer, edit the "tuxpaint.iss" file and
+         enable one of the lines starting with "#define BuildTarget=",
+         depending on the architecture of the installer you want to create.
+
          Alors, vous pouvez facilement construire un installateur exécutable
          en cliquant-droit sur l'icône "tuxpaint.iss" du répertoires "win32"
          et sélectionner "Compile" dans la liste. Cela prendra un certain
          temps, et éventuellement vous obtiendrez un fichier
-         "tuxpaint-X.Y.Z-win32-installer.exe" dans le même répertoire.
+         "tuxpaint-X.Y.Z-windows-<arch>-installer.exe" dans le même
+         répertoire.
 
             -------------------------------------------------------
 
@@ -413,9 +404,8 @@ Compilation et installation
          Double-cliquez sur l'exécutable du programme d'installation de Tux
          Paint (fichier .EXE) et suivez les instructions.
 
-         Tout d'abord, il vous sera demandé d'accepter la licence. (Il s'agit
-         de la licence publique générale GNU (GPL), qui est également
-         disponible en tant que "COPYING.txt".)
+         First, you will be asked to read the license. (It is the GNU General
+         Public License (GPL), which is also available as "COPYING.txt".)
 
          Il vous sera ensuite demandé si vous souhaitez installer des
          raccourcis à Tux Paint dans votre menu Démarrer de Windows et sur

@@ -6,7 +6,7 @@
           Copyright © 2002-2021 by various contributors; see AUTHORS.
                             http://www.tuxpaint.org/
 
-                               septiembre 5, 2021
+                                octubre 27, 2021
 
      ----------------------------------------------------------------------
 
@@ -289,7 +289,11 @@ Available Tools
 
                  Click the mouse and hold it to choose the starting point of
                  the line. As you move the mouse around, a thin 'rubber-band'
-                 line will show where the line will be drawn.
+                 line will show where the line will be drawn. At the bottom,
+                 you'll see the angle of your line, in degrees. A line going
+                 straight to the right is 0°, a line going straight up is
+                 90°, a line going straight left is 180°, a line going
+                 straight down is 270°, and so on.
 
                  Let go of the mouse to complete the line. A "sproing!" sound
                  will play.
@@ -341,7 +345,9 @@ Available Tools
                       Normal Shapes Mode
 
                               Now you can move the mouse around the canvas to
-                              rotate the shape.
+                              rotate the shape. The angle your shape is
+                              rotated will be shown at the bottom, in degrees
+                              (similar to the "Lines" tool, described above).
 
                               Click the mouse button again and the shape will
                               be drawn in the current color.
@@ -444,6 +450,8 @@ Available Tools
                  drawing with a color of your choice. Three fill options are
                  offered:
                     * Solid — click once to fill an area with a solid color.
+                    * Brush — click and drag to fill an area with a solid
+                      color using freehand painting.
                     * Linear — click and then drag to fill the area with
                       color that fades away (a gradient) towards where you
                       drag the mouse.
@@ -575,8 +583,10 @@ Available Tools
                         lower right of the list to erase the selected
                         picture. (You will be asked to confirm.)
 
-                        Note: As of version 0.9.22, the picture will be
-                        placed in your desktop's trash can, on Linux only.
+                        Note: On Linux (as of version 0.9.22) and Windows (as
+                        of version 0.9.27), the picture will be placed in
+                        your desktop's trash can / recycle bin (where you may
+                        recover and restore it, if you change your mind).
 
                       * Click the 'Export' button near the lower right to
                         export the image to your export folder. (e.g.,
