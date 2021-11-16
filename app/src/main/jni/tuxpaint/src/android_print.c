@@ -27,11 +27,13 @@
 #include "android_print.h"
 #include "jni.h"
 
+/* FIXME: Is this check still needed after the change from android/support/v4 to AndroidX 
+   and being Android 5 the minimum version we support? */
 // Since Print work is based on Java PrintHelper class, which may not be supported on some old versions
 int IsPrinterAvailable( void )
 {
 	JNIEnv *mEnv = Android_JNI_GetEnv();
-        jclass mPrintHelperClass = (*mEnv)->FindClass(mEnv, "android/support/v4/print/PrintHelper");
+        jclass mPrintHelperClass = (*mEnv)->FindClass(mEnv, "androidx/print/PrintHelper");
 
 	if (mPrintHelperClass == NULL)
 	return 0;
@@ -58,10 +60,10 @@ const char *SurfacePrint(SDL_Surface *surface)
 	jobject mBitMap = (*mEnv)->CallStaticObjectMethod(mEnv, mBitmapClass, mCreateMethod, mSurfaceArray, surface->w, surface->h, mConfig);
 
 	jobject mContext = (jobject)SDL_AndroidGetActivity();
-	jclass mPrintClass = (*mEnv)->FindClass(mEnv, "android/support/v4/print/PrintHelper");
+	jclass mPrintClass = (*mEnv)->FindClass(mEnv, "androidx/print/PrintHelper");
 	// sometimes android v4 support library may be not ready
 	if (mPrintClass == NULL)
-	return "There is no android v4 support library.";
+	return "There is no androidX support library.";
 	jmethodID mInitMethod = (*mEnv)->GetMethodID(mEnv, mPrintClass, "<init>", "(Landroid/content/Context;)V");
 	jobject mPrint = (*mEnv)->NewObject(mEnv, mPrintClass, mInitMethod, mContext);
 	jmethodID mPrintMethod = (*mEnv)->GetMethodID(mEnv, mPrintClass, "printBitmap", "(Ljava/lang/String;Landroid/graphics/Bitmap;)V");
