@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: November 4, 2021
+  Last updated: November 8, 2021
   $Id$
 */
 
@@ -227,6 +227,10 @@ void cartoon_click(magic_api * api, int which, int mode,
 {
   for (y = 0; y < canvas->h; y++)
     {
+      if (y % 10 == 0) {
+        api->update_progress_bar();
+      }
+
       for (x = 0; x < canvas->w; x++)
         {
           cartoon_apply_colors(api, last, x, y);
@@ -234,6 +238,10 @@ void cartoon_click(magic_api * api, int which, int mode,
     }
   for (y = 0; y < canvas->h; y++)
     {
+      if (y % 10 == 0) {
+        api->update_progress_bar();
+      }
+
       for (x = 0; x < canvas->w; x++)
         {
           cartoon_apply_outline(api, x, y);
@@ -246,6 +254,8 @@ void cartoon_click(magic_api * api, int which, int mode,
     }
   else
     {
+      api->playsound(cartoon_snd, 128, 255);
+
       SDL_BlitSurface(result_surf, NULL, canvas, NULL);
       update_rect->x = 0;
       update_rect->y = 0;

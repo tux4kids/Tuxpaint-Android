@@ -5,8 +5,9 @@
 
       Copyright &copie; 2002-2021 par divers contributeurs; voir AUTHORS.
                             http://www.tuxpaint.org/
+                           @TuxPaintTweets on Twitter
 
-                                octobre 27, 2021
+                               novembre 12, 2021
 
      ----------------------------------------------------------------------
 
@@ -1060,32 +1061,40 @@ Importer des images manuellement
 
      Les autres documents inclus avec Tux Paint (dans le répertoire "docs")
      incluent :
-       * Documentation sur l'outil 'Magie' ("magic-docs")
-         Documentation pour chacun des outils "Magic" actuellement installés.
-       * AUTHORS.txt
-         Liste des auteurs et contributeurs.
-       * CHANGES.txt
-         Résumé des changements entre chaque version de Tux Paint.
-       * COPYING.txt
-         Licencd de copie, la GNU General Public License (GPL)
-       * INSTALL.html
-         Instructions pour compiler et installer Tux Paint, le cas échéant.
-       * EXTENDING.html
-         Des instructions détaillées sur la création de pinceaux, de tampons,
-         d'images de démarrage et de modèles; et l'ajout de polices; et créer
-         un nouveau clavier virtuel et des méthodes de saisie.
-       * OPTIONS.html
-         Instructions détaillées sur les options en ligne de commande et les
-         fichiers de configuration, pour ceux qui ne veulent pas utiliser
-         l'outil Tux Paint Config.
-       * PNG.html
-         Remarques sur la création d'images bitmap au format PNG à utiliser
-         dans Tux Paint.
-       * SVG.html
-         Remarques sur la création d'images vectorielles au format SVG à
-         utiliser dans Tux Paint.
-       * SIGNALS.html
-         Informations sur les signaux POSIX auxquels répond Tux Paint.
+       * Using Tux Paint:
+            * OPTIONS.html
+              Instructions détaillées sur les options en ligne de commande et
+              les fichiers de configuration, pour ceux qui ne veulent pas
+              utiliser l'outil Tux Paint Config.
+            * Documentation sur l'outil 'Magie' ("magic-docs")
+              Documentation pour chacun des outils "Magic" actuellement
+              installés.
+       * How to extend Tux Paint:
+            * EXTENDING.html
+              Des instructions détaillées sur la création de pinceaux, de
+              tampons, d'images de démarrage et de modèles; et l'ajout de
+              polices; et créer un nouveau clavier virtuel et des méthodes de
+              saisie.
+            * PNG.html
+              Remarques sur la création d'images bitmap au format PNG à
+              utiliser dans Tux Paint.
+            * SVG.html
+              Remarques sur la création d'images vectorielles au format SVG à
+              utiliser dans Tux Paint.
+       * Technical information:
+            * INSTALL.html
+              Instructions pour compiler et installer Tux Paint, le cas
+              échéant.
+            * SIGNALS.html
+              Informations sur les signaux POSIX auxquels répond Tux Paint.
+       * Development history and license:
+            * AUTHORS.txt
+              Liste des auteurs et contributeurs.
+            * CHANGES.txt
+              Résumé des changements entre chaque version de Tux Paint.
+            * COPYING.txt
+              Tux Paint's software license, the GNU General Public License
+              (GPL)
 
      ----------------------------------------------------------------------
 
@@ -1097,7 +1106,6 @@ Importer des images manuellement
        * Mentionner des bogues, ou demander de nouvelles fonctionnalités via
          le système de suivi des bogues
        * Participer aux nombreuses listes de diffusion de Tux Paint
-       * Chatter avec les développeurs et d'autres utilisateurs via IRC
        * Contacter les développeurs directement
 
      Pour en savoir plus, visitez la page "Contact" du site officiel de Tux

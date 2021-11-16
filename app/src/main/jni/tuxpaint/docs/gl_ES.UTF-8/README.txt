@@ -5,8 +5,9 @@
 
     Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
+                           @TuxPaintTweets on Twitter
 
-                             27 de Outubro de 2021
+                             12 de Novembro de 2021
 
      ----------------------------------------------------------------------
 
@@ -1007,35 +1008,40 @@ Importar imaxes manualmente
 
      Outra documentación incluída con Tux Paint (que se atopa no
      cartafol/directorio «docs») inclúe:
-       * Documentación da ferramenta «Maxia» («magic-docs»)
-         Documentación para cada unha das ferramentas de «Maxia» instaladas
-         actualmente.
-       * AUTHORS.txt
-         Lista de autores e colaboradores.
-       * CHANGES.txt
-         Resumo do que cambiou entre as versións de Tux Paint.
-       * COPYING.txt
-         A licenza de software de Tux Paint, aLicenza Pública Xeral de GNU
-         (GPL)
-       * INSTALL.html
-         Instrucións para compilar e instalar Tux Paint, cando proceda.
-       * EXTENDING.html
-         Instrucións detalladas sobre a ampliación de Tux Paint: creación de
-         pinceis, selos, imaxes de inicio e modelos; engadir fontes; e crear
-         novos deseños de teclado en pantalla e métodos de entrada.
-       * OPTIONS.html
-         Instrucións detalladas sobre a liña de ordes e as opcións do
-         ficheiro de configuración para aqueles que non queiran usar a
-         ferramenta Tux Paint Config. para xestionar a configuración de Tux
-         Paint.
-       * PNG.html
-         Notas sobre a creación de imaxes de mapa de bits (ráster) en formato
-         PNG para usar en Tux Paint.
-       * SVG.html
-         Notas sobre a creación de imaxes vectoriais en formato SVG para usar
-         en Tux Paint.
-       * SIGNALS.html
-         Información sobre os sinais POSIX aos que responde Tux Paint.
+       * Using Tux Paint:
+            * OPTIONS.html
+              Instrucións detalladas sobre a liña de ordes e as opcións do
+              ficheiro de configuración para aqueles que non queiran usar a
+              ferramenta Tux Paint Config. para xestionar a configuración de
+              Tux Paint.
+            * Documentación da ferramenta «Maxia» («magic-docs»)
+              Documentación para cada unha das ferramentas de «Maxia»
+              instaladas actualmente.
+       * How to extend Tux Paint:
+            * EXTENDING.html
+              Instrucións detalladas sobre a ampliación de Tux Paint:
+              creación de pinceis, selos, imaxes de inicio e modelos; engadir
+              fontes; e crear novos deseños de teclado en pantalla e métodos
+              de entrada.
+            * PNG.html
+              Notas sobre a creación de imaxes de mapa de bits (ráster) en
+              formato PNG para usar en Tux Paint.
+            * SVG.html
+              Notas sobre a creación de imaxes vectoriais en formato SVG para
+              usar en Tux Paint.
+       * Technical information:
+            * INSTALL.html
+              Instrucións para compilar e instalar Tux Paint, cando proceda.
+            * SIGNALS.html
+              Información sobre os sinais POSIX aos que responde Tux Paint.
+       * Development history and license:
+            * AUTHORS.txt
+              Lista de autores e colaboradores.
+            * CHANGES.txt
+              Resumo do que cambiou entre as versións de Tux Paint.
+            * COPYING.txt
+              Tux Paint's software license, the GNU General Public License
+              (GPL)
 
      ----------------------------------------------------------------------
 
@@ -1047,7 +1053,6 @@ Importar imaxes manualmente
        * Informar dos erros ou solicitar novas funcións a través do sistema
          de seguimento de erros do proxecto
        * Participe nas distintas listas de correo do proxecto
-       * Converse con desenvolvedores e outros usuarios a través de IRC
        * Ou póñase en contacto directamente cos desenvolvedores
 
      Para obter máis información, visite a páxina «Contacto» do sitio web

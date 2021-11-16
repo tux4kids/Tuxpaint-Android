@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: October 24, 2021
+  Last updated: November 15, 2021
   $Id$
 */
 
@@ -64,7 +64,7 @@
 
 double colors_close(SDL_Surface * canvas, Uint32 c1, Uint32 c2);
 Uint32 blend(SDL_Surface * canvas, Uint32 draw_colr, Uint32 old_colr, double pct);
-void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched, int y_outside);
+void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched, int y_outside, Uint32 cnt);
 void draw_brush_fill_single(SDL_Surface * canvas, int x, int y, Uint32 draw_color, Uint8 * touched);
 
 
@@ -133,10 +133,10 @@ Uint32 blend(SDL_Surface * canvas, Uint32 draw_colr, Uint32 old_colr, double pct
 }
 
 void simulate_flood_fill(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched) {
-  simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, x, y, cur_colr, old_colr, x1, y1, x2, y2, touched, 0);
+  simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, x, y, cur_colr, old_colr, x1, y1, x2, y2, touched, 0, 0);
 }
 
-void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched, int y_outside)
+void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched, int y_outside, Uint32 cnt)
 {
   int fillL, fillR, narrowFillL, narrowFillR, i, outside;
   double in_line, closeness;
@@ -144,6 +144,10 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
   Uint32 px_colr;
   Uint8 touch_byt;
 
+  /* Don't blow up the stack! */
+  /* FIXME: Would be better to do this a more reliable way */
+  if (cnt >= 20000)
+    return;
 
   /* "Same" color?  No need to fill */
   if (!would_flood_fill(canvas, cur_colr, old_colr))
@@ -313,7 +317,7 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
           )
          )
         {
-          simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, i, y - 1, cur_colr, old_colr, x1, y1, x2, y2, touched, y_outside + 1);
+          simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, i, y - 1, cur_colr, old_colr, x1, y1, x2, y2, touched, y_outside + 1, cnt + 1);
         }
 
       px_colr = getpixels[last->format->BytesPerPixel] (last, i, y + 1);
@@ -325,7 +329,7 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
           )
          )
         {
-          simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, i, y + 1, cur_colr, old_colr, x1, y1, x2, y2, touched, y_outside + 1);
+          simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, i, y + 1, cur_colr, old_colr, x1, y1, x2, y2, touched, y_outside + 1, cnt + 1);
         }
     }
 }

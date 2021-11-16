@@ -8,7 +8,7 @@ http://www.tuxpaint.org/
 
 $Id$
 
-2021.November.4 (0.9.27)
+2021.November.15 (0.9.27)
   * New Magic Tools:
     ----------------
     * "Lightning" - Draws a bolt of lightning striking between
@@ -44,6 +44,10 @@ $Id$
     * "Blocks", "Cartoon", "Chalk", "Emboss", and "Halftone" can all now
        affect the entire image at once.
 
+    * More tools update progress bar while doing lots of work
+      (mostly full-screen mode).  More tools play their sound effects
+      when applying effects in full-screen mode.
+
   * Improvements to "Paint" and "Lines" tools:
     ------------------------------------------
     * Rotational brushes now supported.  Unlike "directional"
@@ -61,6 +65,8 @@ $Id$
     * Replaced the "arrow_compass_points" brush with a single
       arrow which can rotate at any angle, using the new
       "rotational" brush feature.
+
+    * Added "rotating dash" brush.
 
     * Small icons appear on brush selection buttons denoting
       when the brush is animated and/or directional.
@@ -187,6 +193,11 @@ $Id$
       on whether "simpleshapes" option is set) tools are selected
       (e.g., when returning from the "Open" dialog).
       (Closes https://sourceforge.net/p/tuxpaint/feature-requests/186/)
+
+    * Attempt to void crashing (by blowing up the stack) when doing
+      a flood-fill of a complicated shape on a large canvas
+      (e.g., `tuxpaint --3000x2000` with `starters/mosaic.svg`).
+      (h/t Yang for reporting, and Pere for confirming)
 
   * Ports & Building
     ----------------

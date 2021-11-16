@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - November 8, 2021
+  June 14, 2002 - November 15, 2021
 */
 
 #include "platform.h"
@@ -2071,7 +2071,7 @@ SDL_Joystick *joystick;
 
 static void mainloop(void);
 static void brush_draw(int x1, int y1, int x2, int y2, int update);
-static void blit_brush(int x, int y, int direction, int rotation, int * w, int * h);
+static void blit_brush(int x, int y, int direction, double rotation, int * w, int * h);
 static void stamp_draw(int x, int y);
 static void rec_undo_buffer(void);
 
@@ -6307,10 +6307,11 @@ static void draw_blinking_cursor(void)
  */
 static void brush_draw(int x1, int y1, int x2, int y2, int update)
 {
-  int dx, dy, y, frame_w, w, h;
+  int dx, dy, y, frame_w, w, h, sz;
   int orig_x1, orig_y1, orig_x2, orig_y2, tmp;
-  int direction, r;
+  int direction;
   float m, b;
+  double r;
 
   orig_x1 = x1;
   orig_y1 = y1;
@@ -6331,22 +6332,22 @@ static void brush_draw(int x1, int y1, int x2, int y2, int update)
 
 
   direction = BRUSH_DIRECTION_NONE;
-  r = 0;
+  r = -1.0;
   if (brushes_directional[cur_brush] || brushes_rotate[cur_brush])
     {
       r = brush_rotation(x1, y1, x2, y2);
 
       if (brushes_directional[cur_brush])
         {
-          r = r + 22;
-          if (r < 0)
-            r = r + 360;
+          r = r + 22.0;
+          if (r < 0.0)
+            r = r + 360.0;
           if (x1 != x2 || y1 != y2)
-            direction = (r / 45);
+            direction = (r / 45.0);
         }
       else
         {
-          r = 270 - r;
+          r = 270.0 - r;
         }
     }
 
@@ -6414,19 +6415,25 @@ static void brush_draw(int x1, int y1, int x2, int y2, int update)
 
   if (update)
     {
-      update_canvas(orig_x1 - (w >> 1), orig_y1 - (h >> 1), orig_x2 + (w >> 1), orig_y2 + (h >> 1));
+      sz = max(w,h);
+      update_canvas(orig_x1 - sz, orig_y1 - sz, orig_x2 + sz, orig_y2 + sz);
     }
 }
 
 
 /**
- * Reset the brush counter, such that the next
- * attempt to draw something is guaranteed to
- * do so, regardless of the brushe's spacing.
+ * Reset the brush counter, such that the next attempt to draw something
+ * is either (a) guaranteed to do so, regardless of the brush's spacing
+ * (for non-rotational brushes), or (b) requires the user to have moved
+ * far enough to get a good idea of the angle they're drawing
+ * (for rotational brushes).
  */
 void reset_brush_counter(void)
 {
-  brush_counter = 999;
+  if (img_cur_brush_rotate)
+    brush_counter = 0;
+  else
+    brush_counter = 999;
 }
 
 
@@ -6442,7 +6449,7 @@ void reset_brush_counter(void)
  * @param direction BRUSH_DIRECTION_... being drawn (for compass direction brushes)
  * @param rotation angle being drawn (for brushes which may rotate at any angle (0-360 degrees))
  */
-static void blit_brush(int x, int y, int direction, int rotation, int * w, int * h)
+static void blit_brush(int x, int y, int direction, double rotation, int * w, int * h)
 {
   SDL_Rect src, dest;
 
@@ -6515,7 +6522,7 @@ static void blit_brush(int x, int y, int direction, int rotation, int * w, int *
       src.w = img_cur_brush_w;
       src.h = img_cur_brush_h;
 
-      if (img_cur_brush_rotate)
+      if (img_cur_brush_rotate && rotation != -1.0 /* only if we're moving */)
         {
           SDL_Surface * rotated_brush;
 

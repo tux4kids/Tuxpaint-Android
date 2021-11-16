@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: September 21, 2021
+  Last updated: November 8, 2021
   $Id$
 */
 
@@ -272,7 +272,7 @@ void glasstile_click(magic_api * api, int which, int mode,
       update_rect->w = canvas->w;
       update_rect->h = canvas->h;
 
-      /* FIXME: Play sfx */
+      api->playsound(glasstile_snd, 128, 255);
     }
 }
 

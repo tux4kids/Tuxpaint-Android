@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: September 20, 2021
+  Last updated: November 8, 2021
   $Id$
 */
 
@@ -185,16 +185,18 @@ static void do_blur_pixel(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * c
 // Do the effect for the full image
 static void do_blur_full(void *ptr, SDL_Surface * canvas, SDL_Surface * last, int which)
 {
-
-  //magic_api * api = (magic_api *) ptr;
-
+  magic_api * api = (magic_api *) ptr;
   int x, y;
 
   for (y = 0; y < last->h; y++)
     {
+      if (y % 10 == 0) {
+        api->update_progress_bar();
+      }
+
       for (x = 0; x < last->w; x++)
         {
-          do_blur_pixel(ptr, which, canvas, last, x, y);
+          do_blur_pixel(api, which, canvas, last, x, y);
         }
     }
 }

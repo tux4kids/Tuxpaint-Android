@@ -6,7 +6,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2009 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: May 6, 2009
+  Last updated: May 6, 2021
   $Id$
 */
 
@@ -177,7 +177,6 @@ static int sharpen_grey(Uint8 r1, Uint8 g1, Uint8 b1)
 // Do the effect:
 static void do_sharpen_pixel(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
 {
-
   magic_api *api = (magic_api *) ptr;
 
   Uint8 r1, g1, b1;
@@ -239,16 +238,19 @@ static void do_sharpen_pixel(void *ptr, int which, SDL_Surface * canvas, SDL_Sur
 // Do the effect for the full image
 static void do_sharpen_full(void *ptr, SDL_Surface * canvas, SDL_Surface * last, int which)
 {
-
-  // magic_api * api = (magic_api *) ptr;
+  magic_api * api = (magic_api *) ptr;
 
   int x, y;
 
   for (y = 0; y < last->h; y++)
     {
+      if (y % 10 == 0) {
+        api->update_progress_bar();
+      }
+
       for (x = 0; x < last->w; x++)
         {
-          do_sharpen_pixel(ptr, which, canvas, last, x, y);
+          do_sharpen_pixel(api, which, canvas, last, x, y);
         }
     }
 }

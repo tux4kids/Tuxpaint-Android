@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: September 20, 2021
+  Last updated: November 8, 2021
   $Id$
 */
 
@@ -204,6 +204,10 @@ void emboss_click(magic_api * api, int which, int mode,
     emboss_drag(api, which, canvas, last, x, y, x, y, update_rect);
   } else {
     for (y = 0; y < canvas->h; y++) {
+      if (y % 10 == 0) {
+        api->update_progress_bar();
+      }
+
       for (x = 0; x < canvas->w; x++) {
         emboss_pixel(api, last, x, y, canvas);
       }

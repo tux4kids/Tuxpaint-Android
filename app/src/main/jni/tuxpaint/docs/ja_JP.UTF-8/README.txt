@@ -5,8 +5,9 @@
 
           Copyright © 2002-2021 by various contributors; "AUTHORS" 参照.
                             http://www.tuxpaint.org/
+                           @TuxPaintTweets on Twitter
 
-                                  2021年10月27日
+                                  2021年11月12日
 
      ----------------------------------------------------------------------
 
@@ -680,27 +681,32 @@ Tux Paint の起動
                                    その他のドキュメント
 
      このドキュメントの他、"docs" フォルダには、次のようなドキュメントがあります：
-       * 「まほう」ツールに関するドキュメント ("magic-docs")
-         インストールされている、それぞれの「まほう」ツールに関する説明。
-       * AUTHORS.txt
-         作者と協力者のリスト.
-       * CHANGES.txt
-         リリース毎の変更点の概要.
-       * COPYING.txt
-         Tux Paint ソフトウェアのライセンス GNU 一般公衆利用許諾 (GPL)
-       * INSTALL.html
-         コンパイル、インストールの手順.
-       * EXTENDING.html
-         ブラシ、はんこ、背景画像の作成方法、フォントを追加する方法、追加のスクリーンキーボードの作成、言語入力の追加など、Tux Paint
-         の拡張についての詳細説明。
-       * OPTIONS.html
-         コマンドライン、設定ファイルのオプションに関する詳細な情報。Tux Paint Config を使用したくない人向け。
-       * PNG.html
-         PNG 形式の画像を作成する方法。
-       * SVG.html
-         SVG 形式のヴェクタ画像を作成する方法。
-       * SIGNALS.html
-         Tux Paint が応答する POSIX シグナルに関する情報。
+       * Using Tux Paint:
+            * OPTIONS.html
+              コマンドライン、設定ファイルのオプションに関する詳細な情報。Tux Paint Config を使用したくない人向け。
+            * 「まほう」ツールに関するドキュメント ("magic-docs")
+              インストールされている、それぞれの「まほう」ツールに関する説明。
+       * How to extend Tux Paint:
+            * EXTENDING.html
+              ブラシ、はんこ、背景画像の作成方法、フォントを追加する方法、追加のスクリーンキーボードの作成、言語入力の追加など、Tux
+              Paint の拡張についての詳細説明。
+            * PNG.html
+              PNG 形式の画像を作成する方法。
+            * SVG.html
+              SVG 形式のヴェクタ画像を作成する方法。
+       * Technical information:
+            * INSTALL.html
+              コンパイル、インストールの手順.
+            * SIGNALS.html
+              Tux Paint が応答する POSIX シグナルに関する情報。
+       * Development history and license:
+            * AUTHORS.txt
+              作者と協力者のリスト.
+            * CHANGES.txt
+              リリース毎の変更点の概要.
+            * COPYING.txt
+              Tux Paint's software license, the GNU General Public License
+              (GPL)
 
      ----------------------------------------------------------------------
 
@@ -710,7 +716,6 @@ Tux Paint の起動
 
        * バグを発見した場合や機能追加の要望については、プロジェクトの バグトラッキングシステムから報告できます
        * プロジェクトに関する様々なメーリングリストに参加できます
-       * IRCで、開発者や他のユーザーとチャットできます
        * 開発者へ直接連絡することもできます
 
      もっとお知りになりたい場合、Tux Paint のウェブサイト の "連絡先" のページ

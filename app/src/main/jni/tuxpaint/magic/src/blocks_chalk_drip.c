@@ -1,6 +1,6 @@
 /*
   blocks_chalk_drip.c
-//
+
   Blocks, Chalk and Drip Magic Tools Plugin
   Tux Paint - A simple drawing program for children.
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: October 27, 2021
+  Last updated: November 8, 2021
   $Id$
 */
 
@@ -325,6 +325,10 @@ void blocks_chalk_drip_click(magic_api * api, int which, int mode,
     blocks_chalk_drip_drag(api, which, canvas, last, x, y, x, y, update_rect);
   } else /* MODE_FULLSCREEN */ {
     for (y = 0; y < canvas->h; y += EFFECT_REZ) {
+      if (y % 10 == 0) {
+        api->update_progress_bar();
+      }
+
       for (x = 0; x < canvas->w; x += EFFECT_REZ) {
         blocks_chalk_drip_linecb(api, which, canvas, last, x, y);
       }
@@ -333,6 +337,8 @@ void blocks_chalk_drip_click(magic_api * api, int which, int mode,
     update_rect->y = 0;
     update_rect->w = canvas->w;
     update_rect->h = canvas->h;
+
+    api->playsound(snd_effect[which], (x * 255) / canvas->w, 255);
   }
 }
 
