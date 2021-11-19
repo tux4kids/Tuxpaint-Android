@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: November 15, 2021
+  Last updated: November 17, 2021
   $Id$
 */
 
@@ -60,12 +60,122 @@
 #define WIDE_MATCH_THRESHOLD 3
 
 
+// #define USE_QUEUE
+
+#ifdef USE_QUEUE
+
+/* Queue for span filling
+   (https://en.wikipedia.org/wiki/Flood_fill#Span_Filling)
+*/
+
+#define QUEUE_SIZE_CHUNK 1024
+
+typedef struct queue_s {
+  int x1, x2, y, yd;
+} queue_t;
+
+queue_t * queue;
+int queue_size = 0, queue_start = 0, queue_end = 0;
+static unsigned char progbar_anim = 0;
+
+#endif
+
 /* Local function prototypes: */
 
 double colors_close(SDL_Surface * canvas, Uint32 c1, Uint32 c2);
 Uint32 blend(SDL_Surface * canvas, Uint32 draw_colr, Uint32 old_colr, double pct);
-void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched, int y_outside, Uint32 cnt);
+void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched, int y_outside);
 void draw_brush_fill_single(SDL_Surface * canvas, int x, int y, Uint32 draw_color, Uint8 * touched);
+#ifdef USE_QUEUE
+void init_queue(void);
+void add_to_queue(int x1, int x2, int y, int yd);
+int remove_from_queue(int * x1, int * x2, int * y, int * yd);
+void cleanup_queue(void);
+void track_extents_and_progbar(int x, int y, int * extent_x1, int * extent_y1, int * extent_x2, int * extent_y2, SDL_Surface * screen, SDL_Surface * canvas);
+#endif
+
+#ifdef USE_QUEUE
+void init_queue(void) {
+  queue_size = 0;
+  queue_start = 0;
+  queue_end = 0;
+
+  queue = (queue_t *) malloc(sizeof(queue_t) * QUEUE_SIZE_CHUNK);
+  if (queue == NULL)
+    {
+      fprintf(stderr, "Fill queue cannot be malloc()'d\n");
+      return;
+    }
+
+  queue_size = QUEUE_SIZE_CHUNK;
+}
+
+void add_to_queue(int x1, int x2, int y, int yd) {
+  /* Reallocate if we need more space */
+  if (queue_end + 1 > queue_size)
+    {
+      queue_t * tmp;
+      tmp = (queue_t *) realloc(queue, sizeof(queue_t) * (queue_size + QUEUE_SIZE_CHUNK));
+      if (tmp == NULL)
+        {
+          fprintf(stderr, "Fill queue cannot be realloc()'d\n");
+          return;
+        }
+      queue_size += QUEUE_SIZE_CHUNK;
+      queue = tmp;
+    }
+
+  queue[queue_end].x1 = x1;
+  queue[queue_end].x2 = x2;
+  queue[queue_end].y = y;
+  queue[queue_end].yd = yd;
+
+  queue_end++;
+}
+
+int remove_from_queue(int * x1, int * x2, int * y, int * yd) {
+  if (queue_start == queue_end)
+    return 0;
+
+  *x1 = queue[queue_start].x1;
+  *x2 = queue[queue_start].x2;
+  *y = queue[queue_start].y;
+  *yd = queue[queue_start].yd;
+
+  queue_start++;
+
+  return 1;
+}
+
+void cleanup_queue(void) {
+  if (queue != NULL)
+    free(queue);
+
+  queue_size = 0;
+  queue_start = 0;
+  queue_end = 0;
+}
+
+void track_extents_and_progbar(int x, int y, int * extent_x1, int * extent_y1, int * extent_x2, int * extent_y2, SDL_Surface * screen, SDL_Surface * canvas) {
+  if (x < *extent_x1)
+    *extent_x1 = x;
+  if (x > *extent_x2)
+    *extent_x2 = x;
+
+  if (y < *extent_y1)
+    *extent_y1 = y;
+  if (y > *extent_y2)
+    *extent_y2 = y;
+
+  progbar_anim++;
+  if ((progbar_anim % 4) == 0)
+    {
+      show_progress_bar(screen);
+      playsound(canvas, 1, SND_FILL, 1, x, SNDDIST_NEAR);
+    }
+}
+
+#endif
 
 
 /* Returns how similar colors 'c1' and 'c2' are */
@@ -132,22 +242,78 @@ Uint32 blend(SDL_Surface * canvas, Uint32 draw_colr, Uint32 old_colr, double pct
   return SDL_MapRGB(canvas->format, new_r, new_g, new_b);
 }
 
-void simulate_flood_fill(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched) {
-  simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, x, y, cur_colr, old_colr, x1, y1, x2, y2, touched, 0, 0);
+void simulate_flood_fill(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * extent_x1, int * extent_y1, int * extent_x2, int * extent_y2, Uint8 * touched) {
+#ifdef USE_QUEUE
+  int x1, x2, dy;
+
+  /* "Same" color?  No need to fill */
+  if (!would_flood_fill(canvas, cur_colr, old_colr))
+    return;
+
+  if (x < 0 || x >= canvas->w || y < 0 || y >= canvas->h)
+    return;
+
+  /* Don't re-visit the same pixel */
+  if (touched && touched[(y * canvas->w) + x])
+    return;
+
+  /* Queue up the first things to work on: */
+  init_queue();
+
+  add_to_queue(x, x, y, 1);
+  add_to_queue(x, x, y - 1, -1);
+
+  /* Do the work (possibly queuing more, as we go) */
+  while (remove_from_queue(&x1, &x2, &y, &dy))
+    {
+      x = x1;
+
+      if (Inside(x, y))
+        {
+          while (Inside(x - 1, y))
+            {
+              Set(x - 1, y);
+              track_extents_and_progbar(x - 1, y, extent_x1, extent_y1, extent_x2, extent_y2, screen, canvas);
+
+              x = x - 1;
+            }
+        }
+
+      if (x < x1)
+        add_to_queue(x, x1 - 1, y - dy, -dy);
+
+      while (x1 < x2)
+        {
+          Set(x1, y);
+          track_extents_and_progbar(x1, y, extent_x1, extent_y1, extent_x2, extent_y2, screen, canvas);
+
+          x1 = x1 + 1;
+        }
+
+      add_to_queue(x, x1 - 1, y + dy, dy);
+
+      if (x1 - 1 > x2)
+        add_to_queue(x2 + 1, x1 - 1, y - dy, -dy);
+
+      while (x1 < x2 && !Inside(x1, y))
+        x1++;
+
+      x = x1;
+    }
+
+  cleanup_queue();
+#else
+  simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, x, y, cur_colr, old_colr, extent_x1, extent_y1, extent_x2, extent_y2, touched, 0);
+#endif
 }
 
-void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched, int y_outside, Uint32 cnt)
+void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched, int y_outside)
 {
   int fillL, fillR, narrowFillL, narrowFillR, i, outside;
   double in_line, closeness;
   static unsigned char prog_anim;
   Uint32 px_colr;
   Uint8 touch_byt;
-
-  /* Don't blow up the stack! */
-  /* FIXME: Would be better to do this a more reliable way */
-  if (cnt >= 20000)
-    return;
 
   /* "Same" color?  No need to fill */
   if (!would_flood_fill(canvas, cur_colr, old_colr))
@@ -317,7 +483,7 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
           )
          )
         {
-          simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, i, y - 1, cur_colr, old_colr, x1, y1, x2, y2, touched, y_outside + 1, cnt + 1);
+          simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, i, y - 1, cur_colr, old_colr, x1, y1, x2, y2, touched, y_outside + 1);
         }
 
       px_colr = getpixels[last->format->BytesPerPixel] (last, i, y + 1);
@@ -329,7 +495,7 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
           )
          )
         {
-          simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, i, y + 1, cur_colr, old_colr, x1, y1, x2, y2, touched, y_outside + 1, cnt + 1);
+          simulate_flood_fill_outside_check(screen, texture, renderer, last, canvas, i, y + 1, cur_colr, old_colr, x1, y1, x2, y2, touched, y_outside + 1);
         }
     }
 }

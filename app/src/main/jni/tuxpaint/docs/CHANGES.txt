@@ -8,7 +8,7 @@ http://www.tuxpaint.org/
 
 $Id$
 
-2021.November.15 (0.9.27)
+2021.November.19 (0.9.27)
   * New Magic Tools:
     ----------------
     * "Lightning" - Draws a bolt of lightning striking between
@@ -24,6 +24,9 @@ $Id$
       2x2 image, repeating the original.  (Repeat for "compound eye"
       style effects!)
       (Closes https://sourceforge.net/p/tuxpaint/feature-requests/204/)
+
+    * "Reflection" - Create a reflection of part of the image,
+      below (as in a lake reflection), above, to the left, or to the right.
 
     * "Smooth Rainbow" - A smooth, gradient variation of the classic
       "Rainbow" Magic tool.
@@ -194,7 +197,7 @@ $Id$
       (e.g., when returning from the "Open" dialog).
       (Closes https://sourceforge.net/p/tuxpaint/feature-requests/186/)
 
-    * Attempt to void crashing (by blowing up the stack) when doing
+    * WIP - Attempt to void crashing (by blowing up the stack) when doing
       a flood-fill of a complicated shape on a large canvas
       (e.g., `tuxpaint --3000x2000` with `starters/mosaic.svg`).
       (h/t Yang for reporting, and Pere for confirming)
