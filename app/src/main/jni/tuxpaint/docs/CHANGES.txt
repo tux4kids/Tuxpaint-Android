@@ -197,10 +197,13 @@ $Id$
       (e.g., when returning from the "Open" dialog).
       (Closes https://sourceforge.net/p/tuxpaint/feature-requests/186/)
 
-    * WIP - Attempt to void crashing (by blowing up the stack) when doing
-      a flood-fill of a complicated shape on a large canvas
-      (e.g., `tuxpaint --3000x2000` with `starters/mosaic.svg`).
-      (h/t Yang for reporting, and Pere for confirming)
+    * Avoid possibility of crashing when doing a flood-fill of a
+      complicated shape on a large canvas (e.g., `tuxpaint --3000x2000`
+      with `starters/mosaic.svg`
+      + Replace recursion with a queue (span filling method)
+      + Call the progress bar animation updates and playsound() function
+        less frequently
+      h/t Yang for reporting & Pere for confirming
 
   * Ports & Building
     ----------------
