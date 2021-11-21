@@ -443,30 +443,30 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
   /* Continue filling upwards from this scanline */
 
   just_queued = 0;
-  for (i = narrowFillL; i <= narrowFillR; i++)
+  if (y > 0)
     {
-      px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, i, y - 1);
-      closeness = colors_close(global_canvas, px_colr, global_old_colr);
-      if (y > 0 &&
-          (
-           closeness < COLOR_MATCH_NARROW ||
-           (closeness < COLOR_MATCH_WIDE && y_outside < WIDE_MATCH_THRESHOLD)
-          )
-         )
+      for (i = narrowFillL; i <= narrowFillR; i++)
         {
-          if (!just_queued && (global_touched == NULL || !global_touched[((y - 1) * global_canvas->w) + i]))
+          px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, i, y - 1);
+          closeness = colors_close(global_canvas, px_colr, global_old_colr);
+          if (closeness < COLOR_MATCH_NARROW ||
+              (closeness < COLOR_MATCH_WIDE && y_outside < WIDE_MATCH_THRESHOLD)
+             )
             {
-              add_to_queue(i, y - 1, y_outside + 1);
-              just_queued = 1;
+              if (!just_queued && (global_touched == NULL || !global_touched[((y - 1) * global_canvas->w) + i]))
+                {
+                  add_to_queue(i, y - 1, y_outside + 1);
+                  just_queued = 1;
+                }
+              else
+                {
+                  just_queued = 0;
+                }
             }
           else
             {
               just_queued = 0;
             }
-        }
-      else
-        {
-          just_queued = 0;
         }
     }
 
@@ -474,30 +474,30 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen, SDL_Texture * textu
   /* Continue filling downwards from this scanline */
 
   just_queued = 0;
-  for (i = narrowFillL; i <= narrowFillR; i++)
+  if (y < global_canvas->h - 1)
     {
-      px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, i, y + 1);
-      closeness = colors_close(global_canvas, px_colr, global_old_colr);
-      if (y < global_canvas->h &&
-          (
-           closeness < COLOR_MATCH_NARROW ||
-           (closeness < COLOR_MATCH_WIDE && y_outside < WIDE_MATCH_THRESHOLD)
-          )
-         )
+      for (i = narrowFillL; i <= narrowFillR; i++)
         {
-          if (!just_queued && (global_touched == NULL || !global_touched[((y + 1) * global_canvas->w) + i]))
+          px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, i, y + 1);
+          closeness = colors_close(global_canvas, px_colr, global_old_colr);
+          if (closeness < COLOR_MATCH_NARROW ||
+              (closeness < COLOR_MATCH_WIDE && y_outside < WIDE_MATCH_THRESHOLD)
+             )
             {
-              add_to_queue(i, y + 1, y_outside + 1);
-              just_queued = 1;
+              if (!just_queued && (global_touched == NULL || !global_touched[((y + 1) * global_canvas->w) + i]))
+                {
+                  add_to_queue(i, y + 1, y_outside + 1);
+                  just_queued = 1;
+                }
+              else
+                {
+                  just_queued = 0;
+                }
             }
           else
             {
               just_queued = 0;
             }
-        }
-      else
-        {
-          just_queued = 0;
         }
     }
 }
