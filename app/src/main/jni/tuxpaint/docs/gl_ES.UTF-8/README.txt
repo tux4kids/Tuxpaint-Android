@@ -7,7 +7,7 @@
                             http://www.tuxpaint.org/
                            @TuxPaintTweets on Twitter
 
-                             12 de Novembro de 2021
+                             25 de Novembro de 2021
 
      ----------------------------------------------------------------------
 
