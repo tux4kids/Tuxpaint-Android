@@ -58,6 +58,7 @@ int blind_init(magic_api * api);
 int blind_get_tool_count(magic_api * api);
 SDL_Surface *blind_get_icon(magic_api * api, int which);
 char *blind_get_name(magic_api * api, int which);
+int blind_get_group(magic_api * api, int which);
 char *blind_get_description(magic_api * api, int which, int mode);
 int blind_requires_colors(magic_api * api, int which);
 void blind_release(magic_api * api, int which,
@@ -113,6 +114,11 @@ SDL_Surface *blind_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 char *blind_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext_noop("Blind"));
+}
+
+int blind_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PICTURE_DECORATIONS;
 }
 
 char *blind_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)

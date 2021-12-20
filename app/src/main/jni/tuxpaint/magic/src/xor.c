@@ -6,11 +6,7 @@
    
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
-  bill@newbreedsoftware.com
-  http://www.tuxpaint.org/
-  
-  Copyright (c) 2013 by Lukasz Dmitrowski
+  Copyright (c) 2013-2021 by Lukasz Dmitrowski
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -26,6 +22,8 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
+  
+  Last updated: September 21, 2021
 */
 
 #include <stdio.h>
@@ -41,6 +39,7 @@ int xor_init(magic_api * api);
 int xor_get_tool_count(magic_api * api);
 SDL_Surface *xor_get_icon(magic_api * api, int which);
 char *xor_get_name(magic_api * api, int which);
+int xor_get_group(magic_api * api, int which);
 char *xor_get_description(magic_api * api, int which, int mode);
 
 void xor_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -91,6 +90,11 @@ SDL_Surface *xor_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 char *xor_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Xor Colors")));
+}
+
+int xor_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_COLOR_FILTERS;
 }
 
 char *xor_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)

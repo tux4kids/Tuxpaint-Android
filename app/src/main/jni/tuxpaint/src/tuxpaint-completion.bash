@@ -3,7 +3,7 @@
 # Bill Kendrick <bill@newbreedsoftware.com>; http://www.tuxpaint.org/
 # Based on inkscape's completion file, by allali@univ-mlv.fr
 #
-# Last modified 2021-02-05
+# Last modified 2021-08-07
 #
 # $Id$
 
@@ -34,10 +34,12 @@ _tuxpaint()
 			-b --startblank --startlast \
 			--sound -q --nosound \
 			--stereo --nostereo \
+			--alllocalefonts --currentlocalefont \
 			-x --noquit --quit
 			-p --print --noprint \
 			--complexshapes -s --simpleshapes \
 			-m --mixedcase -u --uppercase \
+			--label --nolabel \
 			--fancycursors --nofancycursors \
 			--hidecursor --showcursor \
 			--mouse --keyboard \
@@ -66,6 +68,8 @@ _tuxpaint()
 			--savedir --datadir --exportdir \
 			--printdelay= \
 			--altprintmod --altprintalways --altprintnever \
+			--printcommand --altprintcommand \
+			--printcfg --noprintcfg \
 			--papersize \
 			-l --lang -L --locale \
 			--nosysconfig \

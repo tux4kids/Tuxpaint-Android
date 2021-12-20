@@ -64,14 +64,18 @@ static void
 del_trie(Node *root, int degree)
 {
   int i;
-    if (!root)
-        return;
-    for (i = 0; i < degree; i++)
-        del_trie(root->children[i], degree);
-    free(root);
+
+  if (!root)
+    return;
+  for (i = 0; i < degree; i++)
+    del_trie(root->children[i], degree);
+  free(root);
 }
 
 static void put_loop(ge_GIF *gif, uint16_t loop);
+
+#define OR_ABORT if (res == -1) { fprintf(stderr, "Cannot write to GIF\n"); return(NULL); }
+#define OR_ABORT2 if (res == -1) { fprintf(stderr, "Cannot write to GIF\n"); return; }
 
 ge_GIF *
 ge_new_gif(
@@ -80,6 +84,7 @@ ge_new_gif(
 )
 {
     int i, r, g, b, v;
+    ssize_t res;
     ge_GIF *gif = calloc(1, sizeof(*gif) + 2*width*height);
     if (!gif)
         goto no_gif;
@@ -93,21 +98,21 @@ ge_new_gif(
 #ifdef _WIN32
     setmode(gif->fd, O_BINARY);
 #endif
-    write(gif->fd, "GIF89a", 6);
-    write_num(gif->fd, width);
-    write_num(gif->fd, height);
-    write(gif->fd, (uint8_t []) {0xF0 | (depth-1), 0x00, 0x00}, 3);
+    res = write(gif->fd, "GIF89a", 6); OR_ABORT;
+    res = write_num(gif->fd, width); OR_ABORT;
+    res = write_num(gif->fd, height); OR_ABORT;
+    res = write(gif->fd, (uint8_t []) {0xF0 | (depth-1), 0x00, 0x00}, 3); OR_ABORT;
     if (palette) {
-        write(gif->fd, palette, 3 << depth);
+        res = write(gif->fd, palette, 3 << depth); OR_ABORT;
     } else if (depth <= 4) {
-        write(gif->fd, vga, 3 << depth);
+        res = write(gif->fd, vga, 3 << depth); OR_ABORT;
     } else {
-        write(gif->fd, vga, sizeof(vga));
+        res = write(gif->fd, vga, sizeof(vga)); OR_ABORT;
         i = 0x10;
         for (r = 0; r < 6; r++) {
             for (g = 0; g < 6; g++) {
                 for (b = 0; b < 6; b++) {
-                    write(gif->fd, (uint8_t []) {r*51, g*51, b*51}, 3);
+                    res = write(gif->fd, (uint8_t []) {r*51, g*51, b*51}, 3); OR_ABORT;
                     if (++i == 1 << depth)
                         goto done_gct;
                 }
@@ -115,7 +120,7 @@ ge_new_gif(
         }
         for (i = 1; i <= 24; i++) {
             v = i * 0xFF / 25;
-            write(gif->fd, (uint8_t []) {v, v, v}, 3);
+            res = write(gif->fd, (uint8_t []) {v, v, v}, 3); OR_ABORT;
         }
     }
 done_gct:
@@ -131,11 +136,13 @@ no_gif:
 static void
 put_loop(ge_GIF *gif, uint16_t loop)
 {
-    write(gif->fd, (uint8_t []) {'!', 0xFF, 0x0B}, 3);
-    write(gif->fd, "NETSCAPE2.0", 11);
-    write(gif->fd, (uint8_t []) {0x03, 0x01}, 2);
-    write_num(gif->fd, loop);
-    write(gif->fd, "\0", 1);
+    ssize_t res;
+
+    res = write(gif->fd, (uint8_t []) {'!', 0xFF, 0x0B}, 3); OR_ABORT2;
+    res = write(gif->fd, "NETSCAPE2.0", 11); OR_ABORT2;
+    res = write(gif->fd, (uint8_t []) {0x03, 0x01}, 2); OR_ABORT2;
+    res = write_num(gif->fd, loop); OR_ABORT2;
+    res = write(gif->fd, "\0", 1); OR_ABORT2;
 }
 
 /* Add packed key to buffer, updating offset and partial.
@@ -145,6 +152,8 @@ static void
 put_key(ge_GIF *gif, uint16_t key, int key_size)
 {
     int byte_offset, bit_offset, bits_to_write;
+    ssize_t res;
+
     byte_offset = gif->offset / 8;
     bit_offset = gif->offset % 8;
     gif->partial |= ((uint32_t) key) << bit_offset;
@@ -152,8 +161,8 @@ put_key(ge_GIF *gif, uint16_t key, int key_size)
     while (bits_to_write >= 8) {
         gif->buffer[byte_offset++] = gif->partial & 0xFF;
         if (byte_offset == 0xFF) {
-            write(gif->fd, "\xFF", 1);
-            write(gif->fd, gif->buffer, 0xFF);
+            res = write(gif->fd, "\xFF", 1); OR_ABORT2;
+            res = write(gif->fd, gif->buffer, 0xFF); OR_ABORT2;
             byte_offset = 0;
         }
         gif->partial >>= 8;
@@ -166,12 +175,14 @@ static void
 end_key(ge_GIF *gif)
 {
     int byte_offset;
+    ssize_t res;
+
     byte_offset = gif->offset / 8;
     if (gif->offset % 8)
         gif->buffer[byte_offset++] = gif->partial & 0xFF;
-    write(gif->fd, (uint8_t []) {byte_offset}, 1);
-    write(gif->fd, gif->buffer, byte_offset);
-    write(gif->fd, "\0", 1);
+    res = write(gif->fd, (uint8_t []) {byte_offset}, 1); OR_ABORT2;
+    res = write(gif->fd, gif->buffer, byte_offset); OR_ABORT2;
+    res = write(gif->fd, "\0", 1); OR_ABORT2;
     gif->offset = gif->partial = 0;
 }
 
@@ -180,14 +191,15 @@ put_image(ge_GIF *gif, uint16_t w, uint16_t h, uint16_t x, uint16_t y)
 {
     int nkeys, key_size, i, j;
     Node *node, *child, *root;
+    ssize_t res;
     int degree = 1 << gif->depth;
 
-    write(gif->fd, ",", 1);
-    write_num(gif->fd, x);
-    write_num(gif->fd, y);
-    write_num(gif->fd, w);
-    write_num(gif->fd, h);
-    write(gif->fd, (uint8_t []) {0x00, gif->depth}, 2);
+    res = write(gif->fd, ",", 1); OR_ABORT2;
+    res = write_num(gif->fd, x); OR_ABORT2;
+    res = write_num(gif->fd, y); OR_ABORT2;
+    res = write_num(gif->fd, w); OR_ABORT2;
+    res = write_num(gif->fd, h); OR_ABORT2;
+    res = write(gif->fd, (uint8_t []) {0x00, gif->depth}, 2); OR_ABORT2;
     root = node = new_trie(degree, &nkeys);
     key_size = gif->depth + 1;
     put_key(gif, degree, key_size); /* clear code */
@@ -258,9 +270,11 @@ get_bbox(ge_GIF *gif, uint16_t *w, uint16_t *h, uint16_t *x, uint16_t *y)
 static void
 set_delay(ge_GIF *gif, uint16_t d)
 {
-    write(gif->fd, (uint8_t []) {'!', 0xF9, 0x04, 0x04}, 4);
-    write_num(gif->fd, d);
-    write(gif->fd, "\0\0", 2);
+    ssize_t res;
+
+    res = write(gif->fd, (uint8_t []) {'!', 0xF9, 0x04, 0x04}, 4); OR_ABORT2;
+    res = write_num(gif->fd, d); OR_ABORT2;
+    res = write(gif->fd, "\0\0", 2); OR_ABORT2;
 }
 
 void
@@ -290,7 +304,9 @@ ge_add_frame(ge_GIF *gif, uint16_t delay)
 void
 ge_close_gif(ge_GIF* gif)
 {
-    write(gif->fd, ";", 1);
+    ssize_t res;
+
+    res = write(gif->fd, ";", 1); OR_ABORT2;
     close(gif->fd);
     free(gif);
 }

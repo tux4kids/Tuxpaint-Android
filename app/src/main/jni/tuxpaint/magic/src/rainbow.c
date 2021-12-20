@@ -4,7 +4,7 @@
   Rainbow Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: September 22, 2021
   $Id$
 */
 
@@ -63,7 +63,9 @@ static const int rainbow_hexes[NUM_RAINBOW_COLORS][3] = {
   {255, 0, 64}
 };
 
-static int rainbow_color;
+#define MIX_MAX 32
+
+static int rainbow_color, rainbow_mix;
 static Uint32 rainbow_rgb;
 static Mix_Chunk *rainbow_snd;
 
@@ -72,6 +74,7 @@ Uint32 rainbow_api_version(void);
 int rainbow_get_tool_count(magic_api * api);
 SDL_Surface *rainbow_get_icon(magic_api * api, int which);
 char *rainbow_get_name(magic_api * api, int which);
+int rainbow_get_group(magic_api * api, int which);
 char *rainbow_get_description(magic_api * api, int which, int mode);
 static void rainbow_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 
@@ -104,6 +107,7 @@ int rainbow_init(magic_api * api)
 
 
   rainbow_color = 0;
+  rainbow_mix = 0;
 
   snprintf(fname, sizeof(fname), "%ssounds/magic/rainbow.wav", api->data_directory);
   rainbow_snd = Mix_LoadWAV(fname);
@@ -114,7 +118,7 @@ int rainbow_init(magic_api * api)
 // We have multiple tools:
 int rainbow_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
 {
-  return (1);
+  return (2);
 }
 
 // Load our icons:
@@ -130,7 +134,17 @@ SDL_Surface *rainbow_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 // Return our names, localized:
 char *rainbow_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Rainbow")));
+  if (which == 0) {
+    return (strdup(gettext_noop("Rainbow")));
+  } else {
+    return (strdup(gettext_noop("Smooth Rainbow")));
+  }
+}
+
+// Return our group:
+int rainbow_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PAINTING;
 }
 
 // Return our descriptions, localized:
@@ -163,10 +177,33 @@ static void rainbow_linecb(void *ptr, int which ATTRIBUTE_UNUSED,
 void rainbow_drag(magic_api * api, int which, SDL_Surface * canvas,
                   SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
 {
-  rainbow_color = (rainbow_color + 1) % NUM_RAINBOW_COLORS;
+  Uint8 r1, g1, b1, r2, g2, b2;
+  int rc_tmp;
+
+  if (which == 1) {
+    rainbow_mix += 1;
+    if (rainbow_mix > MIX_MAX) {
+      rainbow_mix = 0;
+      rainbow_color = (rainbow_color + 1) % NUM_RAINBOW_COLORS;
+    }
+  } else {
+    rainbow_mix = 0;
+    rainbow_color = (rainbow_color + 1) % NUM_RAINBOW_COLORS;
+  }
+
+  r1 = rainbow_hexes[rainbow_color][0];
+  g1 = rainbow_hexes[rainbow_color][1];
+  b1 = rainbow_hexes[rainbow_color][2];
+
+  rc_tmp = (rainbow_color + 1) % NUM_RAINBOW_COLORS;
+  r2 = rainbow_hexes[rc_tmp][0];
+  g2 = rainbow_hexes[rc_tmp][1];
+  b2 = rainbow_hexes[rc_tmp][2];
+
   rainbow_rgb = SDL_MapRGB(canvas->format,
-                           rainbow_hexes[rainbow_color][0],
-                           rainbow_hexes[rainbow_color][1], rainbow_hexes[rainbow_color][2]);
+                           ((r1 * (MIX_MAX - rainbow_mix)) + (r2 * rainbow_mix)) / MIX_MAX,
+                           ((g1 * (MIX_MAX - rainbow_mix)) + (g2 * rainbow_mix)) / MIX_MAX,
+                           ((b1 * (MIX_MAX - rainbow_mix)) + (b2 * rainbow_mix)) / MIX_MAX);
 
   api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, rainbow_linecb);
 

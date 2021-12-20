@@ -6,7 +6,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2009 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: May 6, 2009
+  Last updated: May 6, 2021
   $Id$
 */
 
@@ -92,6 +92,7 @@ int sharpen_init(magic_api * api);
 int sharpen_get_tool_count(magic_api * api);
 SDL_Surface *sharpen_get_icon(magic_api * api, int which);
 char *sharpen_get_name(magic_api * api, int which);
+int sharpen_get_group(magic_api * api, int which);
 char *sharpen_get_description(magic_api * api, int which, int mode);
 static int sharpen_grey(Uint8 r1, Uint8 g1, Uint8 b1);
 static void do_sharpen_pixel(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
@@ -155,6 +156,12 @@ char *sharpen_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
   return (strdup(gettext_noop(sharpen_names[which])));
 }
 
+// Return our group (all the same):
+int sharpen_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_DISTORTS;
+}
+
 // Return our descriptions, localized:
 char *sharpen_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
 {
@@ -170,7 +177,6 @@ static int sharpen_grey(Uint8 r1, Uint8 g1, Uint8 b1)
 // Do the effect:
 static void do_sharpen_pixel(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
 {
-
   magic_api *api = (magic_api *) ptr;
 
   Uint8 r1, g1, b1;
@@ -232,16 +238,19 @@ static void do_sharpen_pixel(void *ptr, int which, SDL_Surface * canvas, SDL_Sur
 // Do the effect for the full image
 static void do_sharpen_full(void *ptr, SDL_Surface * canvas, SDL_Surface * last, int which)
 {
-
-  // magic_api * api = (magic_api *) ptr;
+  magic_api * api = (magic_api *) ptr;
 
   int x, y;
 
   for (y = 0; y < last->h; y++)
     {
+      if (y % 10 == 0) {
+        api->update_progress_bar();
+      }
+
       for (x = 0; x < last->w; x++)
         {
-          do_sharpen_pixel(ptr, which, canvas, last, x, y);
+          do_sharpen_pixel(api, which, canvas, last, x, y);
         }
     }
 }

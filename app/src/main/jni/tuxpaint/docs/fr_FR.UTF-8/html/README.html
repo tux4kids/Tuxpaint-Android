@@ -17,18 +17,19 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        version 0.9.26      </h1>
+        version 0.9.27      </h1>
 
       <h3>
         Un programme simple pour les enfants      </h3>
 
       <p>
-        Copyright &copie; 2002-2021 par divers contributeurs; voir AUTHORS.<br>
-        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
+        Copyright &copie; 2002-2021 par divers contributeurs; voir AUTHORS.<br/>
+        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a><br/>
+        <a href="https://twitter.com/TuxPaintTweets">@TuxPaintTweets on Twitter</a>
       </p>
 
       <p>
-        juin 28, 2021      </p>
+        novembre 25, 2021      </p>
     </center>
 
     <hr size="2"
@@ -409,6 +410,15 @@
                 Si vous maintenez le bouton de la souris enfoncé et déplacez la souris, elle dessine au fur et à mesure que vous vous déplacez.              </p>
 
               <p>
+                Cerains pinceaux sont animés &mdash; ils changent de forme lorsque vous dessinez. Un bon exemple est le pinceau 'grappe' livré avec Tux Paint. Ces pinceaux ont une icône avec une petite pellicule dessinée sur le bouton de sélection.              </p>
+
+              <p>
+                D'autres pinceaux sont directionnels &mdash; leur forme dépend de la direction dans laquelle vous dessinez. Un exemple est le pinceau flèche livré avec Tux Paint. Ces pinceaux ont une petite étoile à 8 branches sur leur icône du bouton de sékection.              </p>
+
+              <p>
+                Et enfin, certains pinceaux peuvent être = la fois directionnels <em>et</em> animés. Des exemples sont les pinceaux 'chat' et 'écureuil' livrés avec Tux Paint. Ces pinceaux ont à la fois une pellicule et une étoile à 8 branches sur leur icône.              </p>
+
+              <p>
                 Pendant que vous dessinez, un son est joué. Plus la brosse est grosse, plus le son est grave.              </p>
               <br clear="all">
 
@@ -499,10 +509,13 @@
                 Cet outil vous permet de dessiner des lignes droites à l'aide des différents pinceaux et couleurs que vous utilisez habituellement.              </p>
 
               <p>
-                Cliquez sur la souris et maintenez-la enfoncée pour choisir le point de départ de la ligne. Au fur et à mesure que vous déplacez la souris, une fine ligne «élastique» indiquera là où la ligne sera dessinée.              </p>
+                Click the mouse and hold it to choose the starting point of the line. As you move the mouse around, a thin 'rubber-band' line will show where the line will be drawn. At the bottom, you'll see the angle of your line, in degrees. A line going straight to the right is 0°, a line going straight up is 90°, a line going straight left is 180°, a line going straight down is 270°, and so on.              </p>
 
               <p>
                 Relâchez la souris pour terminer la ligne. On entend alors le son "sproing !".              </p>
+
+              <p>
+                Certains pinceaux sont animés, et montre un ensemble formes le long d'une ligne. D'autres sont directionnels et montre des formes différentes suivant l'angle du pinceau. Et enfin certains sont à la fois animés et directionnels. Voir "Paint", au-dessus, pour en savoir plus.              </p>
               <br clear="all">
 
               <p align="center">
@@ -566,7 +579,7 @@
 
                 <dd>
                   <p>
-                    Vous pouvez maintenant déplacer la souris sur le dessin pour faire pivoter la forme.                  </p>
+                    Now you can move the mouse around the canvas to rotate the shape. The angle your shape is rotated will be shown at the bottom, in degrees (similar to the "Lines" tool, described above).                  </p>
 
                   <p>
                     Cliquez à nouveau sur le bouton de la souris et la forme sera dessinée avec la couleur en cours.                  </p>
@@ -605,7 +618,7 @@
                 Choisissez une police (parmi les «Lettres» disponibles sur la droite) et une couleur (dans la palette de couleurs en bas). Cliquez sur l'écran et un curseur apparaîtra. Tapez un texte et il apparaîtra à l'écran.              </p>
 
               <p>
-                Appuyez sur <strong><code>[Enter]</code></strong> ou <strong><code>[Return]</code></strong> et le texte sera inclus dans l'image et le curseur se déplacera d'une ligne vers le bas.              </p>
+                Appuyez sur <b><code>[Entrée]</code></b> ou <b><code>[Retour]</code></b> et le texte sera inclus dans l'image et le curseur se déplacera d'une ligne vers le bas.              </p>
 
               <p>
                 Sinon, appuyez sur <strong><code>[Tab]</code></strong> et le texte sera inclus dans l'image, mais le curseur se déplacera vers la droite du texte, plutôt que vers le bas d'une ligne et vers la gauche. (Cela peut être utile pour créer une ligne de texte avec des couleurs, des polices, des styles et des tailles variés.)              </p>
@@ -689,7 +702,8 @@
               <p>
                 L'outil «Remplir» «remplit» une zone contiguë de votre dessin avec une couleur unie de votre choix. Trois options de remplissage sont offertes :                <ul>
                   <li><strong>Solide</strong> &mdash; cliquez une fois pour remplir une zone avec une couleur unie.</li>
-                  <li><strong>Linéaire</stronf>&mdash;cliquez et faites glisser pour remplir une zone avec une couleur qui s'atténue au fur et à mesure dans la direction où vous déplacez la souris.</li>
+                  <li><strong>Brush</strong> &mdash; click and drag to fill an area with a solid color using freehand painting.</li>
+                  <li><strong>Linéaire</strong>&mdash;cliquez et faites glisser pour remplir une zone avec une couleur qui s'atténue au fur et à mesure dans la direction où vous déplacez la souris.</li>
                   <li><strong>Radial</strong>&mdash;cliquez une fois pour remplir une zone avec une couleur qui s'atténue graduellement, à partir de l'endroit où vous avez cliqué.</li>
                 </ul>
               </p>
@@ -886,7 +900,7 @@
                       Cliquez sur le bouton marron "Effacer" (poubelle) en bas à droite de la liste pour effacer l'image sélectionnée. (Il vous sera demandé de confirmer.)                    </p>
 
                     <p>
-                      <strong>Remarque :</strong> à partir de la version 0.9.22, l'image sera placée dans la corbeille de votre bureau, uniquement sous Linux.                    </p>
+                      <strong>Note:</strong> On Linux (as of version 0.9.22) and Windows (as of version 0.9.27), the picture will be placed in your desktop's trash can / recycle bin (where you may recover and restore it, if you change your mind).                    </p>
                     <br clear="all">
                   </li>
 
@@ -1378,44 +1392,60 @@
     <blockquote>
       Les autres documents inclus avec Tux Paint (dans le répertoire "<code>docs</code>") incluent :      <ul>
         <li>
-          <a href="../magic-docs/html/index.html">Documentation sur l'outil 'Magie' ("<code>magic-docs</code>")</a><br>
-          Documentation pour chacun des outils "Magic" actuellement installés.        </li>
+          Using Tux Paint:          <ul>
+            <li>
+              <a href="OPTIONS.html">OPTIONS.html</a><br>
+              Instructions détaillées sur les options en ligne de commande et les fichiers de configuration, pour ceux qui ne veulent pas utiliser l'outil Tux Paint Config.            </li>
+
+            <li>
+              <a href="../magic-docs/html/index.html">Documentation sur l'outil 'Magie' ("<code>magic-docs</code>")</a><br>
+              Documentation pour chacun des outils "Magic" actuellement installés.            </li>
+          </ul>
+        </li>
 
         <li>
-          <a href="../../AUTHORS.txt">AUTHORS.txt</a><br>
-          Liste des auteurs et contributeurs.        </li>
+          How to extend Tux Paint:          <ul>
+            <li>
+              <a href="EXTENDING.html">EXTENDING.html</a><br>
+              Des instructions détaillées sur la création de pinceaux, de tampons, d'images de démarrage et de modèles; et l'ajout de polices; et créer un nouveau clavier virtuel et des méthodes de saisie.            </li>
+
+            <li>
+              <a href="PNG.html">PNG.html</a><br>
+              Remarques sur la création d'images bitmap au format PNG à utiliser dans Tux Paint.            </li>
+
+            <li>
+              <a href="SVG.html">SVG.html</a><br>
+              Remarques sur la création d'images vectorielles au format SVG à utiliser dans Tux Paint.            </li>
+          </ul>
+        </li>
 
         <li>
-          <a href="../../CHANGES.txt">CHANGES.txt</a><br>
-          Résumé des changements entre chaque version de Tux Paint.        </li>
+          Technical information:          <ul>
+            <li>
+              <a href="INSTALL.html">INSTALL.html</a><br>
+              Instructions pour compiler et installer Tux Paint, le cas échéant.            </li>
+
+            <li>
+              <a href="SIGNALS.html">SIGNALS.html</a><br>
+              Informations sur les signaux POSIX auxquels répond Tux Paint.            </li>
+          </ul>
+        </li>
 
         <li>
-          <a href="../../COPYING.txt">COPYING.txt</a><br>
-          Licencd de copie, la <em>GNU General Public License</em> (GPL)        </li>
+          Development history and license:          <ul>
+            <li>
+              <a href="../../AUTHORS.txt">AUTHORS.txt</a><br>
+              Liste des auteurs et contributeurs.            </li>
 
-        <li>
-          <a href="INSTALL.html">INSTALL.html</a><br>
-          Instructions pour compiler et installer Tux Paint, le cas échéant.        </li>
+            <li>
+              <a href="../../CHANGES.txt">CHANGES.txt</a><br>
+              Résumé des changements entre chaque version de Tux Paint.            </li>
 
-        <li>
-          <a href="EXTENDING.html">EXTENDING.html</a><br>
-          Des instructions détaillées sur la création de pinceaux, de tampons, d'images de démarrage et de modèles; et l'ajout de polices; et créer un nouveau clavier virtuel et des méthodes de saisie.        </li>
-
-        <li>
-          <a href="OPTIONS.html">OPTIONS.html</a><br>
-          Instructions détaillées sur les options en ligne de commande et les fichiers de configuration, pour ceux qui ne veulent pas utiliser l'outil Tux Paint Config.        </li>
-
-        <li>
-          <a href="PNG.html">PNG.html</a><br>
-          Remarques sur la création d'images bitmap au format PNG à utiliser dans Tux Paint.        </li>
-
-        <li>
-          <a href="SVG.html">SVG.html</a><br>
-          Remarques sur la création d'images vectorielles au format SVG à utiliser dans Tux Paint.        </li>
-
-        <li>
-          <a href="SIGNALS.html">SIGNALS.html</a><br>
-          Informations sur les signaux POSIX auxquels répond Tux Paint.        </li>
+            <li>
+              <a href="../../COPYING.txt">COPYING.txt</a><br>
+              Tux Paint's software license, the <cite>GNU General Public License</cite> (GPL)            </li>
+          </ul>
+        </li>
       </ul>
     </blockquote>
 
@@ -1433,7 +1463,6 @@
       <ul>
         <li>Mentionner des bogues, ou demander de nouvelles fonctionnalités via le système de suivi des bogues</li>
         <li>Participer aux nombreuses listes de diffusion de Tux Paint</li>
-        <li>Chatter avec les développeurs et d'autres utilisateurs via IRC</li>
         <li>Contacter les développeurs directement</li>
       </ul>
 

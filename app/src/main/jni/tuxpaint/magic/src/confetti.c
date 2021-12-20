@@ -1,3 +1,5 @@
+/* Last updated 2021-09-21 */
+
 #include <time.h>               //For time()
 
 #include "tp_magic_api.h"
@@ -27,6 +29,7 @@ int confetti_init(magic_api * api);
 int confetti_get_tool_count(magic_api * api);
 SDL_Surface *confetti_get_icon(magic_api * api, int which);
 char *confetti_get_name(magic_api * api, int which);
+int confetti_get_group(magic_api * api, int which);
 char *confetti_get_description(magic_api * api, int which, int mode);
 int confetti_requires_colors(magic_api * api, int which);
 void confetti_release(magic_api * api, int which,
@@ -85,6 +88,11 @@ SDL_Surface *confetti_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 char *confetti_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext_noop("Confetti"));
+}
+
+int confetti_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PAINTING;
 }
 
 char *confetti_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)

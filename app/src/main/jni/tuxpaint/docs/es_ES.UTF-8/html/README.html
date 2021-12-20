@@ -17,18 +17,19 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        versi&oacute;n 0.9.26      </h1>
+        versi&oacute;n 0.9.27      </h1>
 
       <h3>
         A simple drawing program for children      </h3>
 
       <p>
-        Copyright &copy; 2002-2021 by various contributors; see AUTHORS.<br>
-        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
+        Copyright &copy; 2002-2021 by various contributors; see AUTHORS.<br/>
+        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a><br/>
+        <a href="https://twitter.com/TuxPaintTweets">@TuxPaintTweets on Twitter</a>
       </p>
 
       <p>
-        junio 28, 2021      </p>
+        noviembre 25, 2021      </p>
     </center>
 
     <hr size="2"
@@ -409,6 +410,15 @@
                 If you hold the mouse button down, and move the mouse, it will draw as you move.              </p>
 
               <p>
+                Some brushes are animated &mdash; they change their shape as you draw them.  A good example of this is the vines brush that ships with Tux Paint.  These brushes will have a small "filmstrip" icon drawn on their Selector buttons.              </p>
+
+              <p>
+                Other brushes are directional &mdash; they will draw a different shape depending on what direction you are painting with them.  An example of this is the arrow brush that ships with Tux Paint.  These brushes have a small 8-way arrow icon drawn on their Selector buttons.              </p>
+
+              <p>
+                Finally, some brushes can be both direction <em>and</em> animated.  Examples of this are the cat and squirrel brushes that ship with Tux Paint.  These brushes will have both the "filmstrip" and 8-way arrow icons.              </p>
+
+              <p>
                 As you draw, a sound is played. The bigger the brush, the lower the pitch.              </p>
               <br clear="all">
 
@@ -499,10 +509,13 @@
                 This tool lets you draw straight lines using the various brushes and colors you normally use with the Paint Brush.              </p>
 
               <p>
-                Click the mouse and hold it to choose the starting point of the line. As you move the mouse around, a thin 'rubber-band' line will show where the line will be drawn.              </p>
+                Click the mouse and hold it to choose the starting point of the line. As you move the mouse around, a thin 'rubber-band' line will show where the line will be drawn. At the bottom, you'll see the angle of your line, in degrees. A line going straight to the right is 0°, a line going straight up is 90°, a line going straight left is 180°, a line going straight down is 270°, and so on.              </p>
 
               <p>
                 Let go of the mouse to complete the line. A "sproing!" sound will play.              </p>
+
+              <p>
+                Some brushes are animated, and will show a pattern of shapes along the line.  Others are directional, and will show a different shape depending on the angle of the brush.  And finally some are both animated and directional.  See "Paint", above, to learn more.              </p>
               <br clear="all">
 
               <p align="center">
@@ -566,7 +579,7 @@
 
                 <dd>
                   <p>
-                    Now you can move the mouse around the canvas to rotate the shape.                  </p>
+                    Now you can move the mouse around the canvas to rotate the shape. The angle your shape is rotated will be shown at the bottom, in degrees (similar to the "Lines" tool, described above).                  </p>
 
                   <p>
                     Click the mouse button again and the shape will be drawn in the current color.                  </p>
@@ -605,7 +618,7 @@
                 Choose a font (from the 'Letters' available on the right) and a color (from the color palette near the bottom). Click on the screen and a cursor will appear. Type text and it will show up on the screen.              </p>
 
               <p>
-                Press <strong><code>[Enter]</code></strong> or <strong><code>[Return]</code></strong> and the text will be drawn onto the picture and the cursor will move down one line.              </p>
+                Press <b><code>[Enter]</code></b> or <b><code>[Return]</code></b> and the text will be drawn onto the picture and the cursor will move down one line.              </p>
 
               <p>
                 Alternatively, press <strong><code>[Tab]</code></strong> and the text will be drawn onto the picture, but the cursor will move to the right of the text, rather than down a line, and to the left. (This can be useful to create a line of text with mixed colors, fonts, styles and sizes.)              </p>
@@ -689,6 +702,7 @@
               <p>
                 The 'Fill' tool 'flood-fills' a contiguous area of your drawing with a color of your choice.  Three fill options are offered:                <ul>
                   <li><strong>Solid</strong> &mdash; click once to fill an area with a solid color.</li>
+                  <li><strong>Brush</strong> &mdash; click and drag to fill an area with a solid color using freehand painting.</li>
                   <li><strong>Linear</strong> &mdash; click and then drag to fill the area with color that fades away (a gradient) towards where you drag the mouse.</li>
                   <li><strong>Radial</strong> &mdash; click once to fill an area with a color that fades away (a gradient) radially, centered on where you clicked.</li>
                 </ul>
@@ -886,7 +900,7 @@
                       Click the brown 'Erase' (trash can) button at the lower right of the list to erase the selected picture. (You will be asked to confirm.)                    </p>
 
                     <p>
-                      <strong>Note:</strong> As of version 0.9.22, the picture will be placed in your desktop's trash can, on Linux only.                    </p>
+                      <strong>Note:</strong> On Linux (as of version 0.9.22) and Windows (as of version 0.9.27), the picture will be placed in your desktop's trash can / recycle bin (where you may recover and restore it, if you change your mind).                    </p>
                     <br clear="all">
                   </li>
 
@@ -1378,44 +1392,60 @@
     <blockquote>
       Other documentation included with Tux Paint (found in the "<code>docs</code>" folder/directory) includes:      <ul>
         <li>
-          <a href="../magic-docs/html/index.html">'Magic' Tool Documentation ("<code>magic-docs</code>")</a><br>
-          Documentation for each of the currently-installed 'Magic' tools.        </li>
+          Using Tux Paint:          <ul>
+            <li>
+              <a href="OPTIONS.html">OPTIONS.html</a><br>
+              Detailed instructions on command-line and configuration-file options, for those who don't want to use the Tux Paint Config. tool to manage Tux Paint's configuration.            </li>
+
+            <li>
+              <a href="../magic-docs/html/index.html">'Magic' Tool Documentation ("<code>magic-docs</code>")</a><br>
+              Documentation for each of the currently-installed 'Magic' tools.            </li>
+          </ul>
+        </li>
 
         <li>
-          <a href="../../AUTHORS.txt">AUTHORS.txt</a><br>
-          List of authors and contributors.        </li>
+          How to extend Tux Paint:          <ul>
+            <li>
+              <a href="EXTENDING.html">EXTENDING.html</a><br>
+              Detailed instructions on extending Tux Paint: creating brushes, stamps, starters, and templates; adding fonts; and creating new on-screen keyboard layouts and input methods.            </li>
+
+            <li>
+              <a href="PNG.html">PNG.html</a><br>
+              Notes on creating PNG format bitmapped (raster) images for use in Tux Paint.            </li>
+
+            <li>
+              <a href="SVG.html">SVG.html</a><br>
+              Notes on creating SVG format vector images for use in Tux Paint.            </li>
+          </ul>
+        </li>
 
         <li>
-          <a href="../../CHANGES.txt">CHANGES.txt</a><br>
-          Summary of what has changed between releases of Tux Paint.        </li>
+          Technical information:          <ul>
+            <li>
+              <a href="INSTALL.html">INSTALL.html</a><br>
+              Instructions for compiling and installing Tux Paint, when applicable.            </li>
+
+            <li>
+              <a href="SIGNALS.html">SIGNALS.html</a><br>
+              Information about the POSIX signals that Tux Paint responds to.            </li>
+          </ul>
+        </li>
 
         <li>
-          <a href="../../COPYING.txt">COPYING.txt</a><br>
-          Tux Paint's software license, the <em>GNU General Public License</em> (GPL)        </li>
+          Development history and license:          <ul>
+            <li>
+              <a href="../../AUTHORS.txt">AUTHORS.txt</a><br>
+              List of authors and contributors.            </li>
 
-        <li>
-          <a href="INSTALL.html">INSTALL.html</a><br>
-          Instructions for compiling and installing Tux Paint, when applicable.        </li>
+            <li>
+              <a href="../../CHANGES.txt">CHANGES.txt</a><br>
+              Summary of what has changed between releases of Tux Paint.            </li>
 
-        <li>
-          <a href="EXTENDING.html">EXTENDING.html</a><br>
-          Detailed instructions on extending Tux Paint: creating brushes, stamps, starters, and templates; adding fonts; and creating new on-screen keyboard layouts and input methods.        </li>
-
-        <li>
-          <a href="OPTIONS.html">OPTIONS.html</a><br>
-          Detailed instructions on command-line and configuration-file options, for those who don't want to use the Tux Paint Config. tool to manage Tux Paint's configuration.        </li>
-
-        <li>
-          <a href="PNG.html">PNG.html</a><br>
-          Notes on creating PNG format bitmapped (raster) images for use in Tux Paint.        </li>
-
-        <li>
-          <a href="SVG.html">SVG.html</a><br>
-          Notes on creating SVG format vector images for use in Tux Paint.        </li>
-
-        <li>
-          <a href="SIGNALS.html">SIGNALS.html</a><br>
-          Information about the POSIX signals that Tux Paint responds to.        </li>
+            <li>
+              <a href="../../COPYING.txt">COPYING.txt</a><br>
+              Tux Paint's software license, the <cite>GNU General Public License</cite> (GPL)            </li>
+          </ul>
+        </li>
       </ul>
     </blockquote>
 
@@ -1433,7 +1463,6 @@
       <ul>
         <li>Report bugs or request new features via the project's bug-tracking system</li>
         <li>Participate in the various project mailing lists</li>
-        <li>Chat with developers and other users over IRC</li>
         <li>Contact the developers directly</li>
       </ul>
 

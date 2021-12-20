@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-13 21:06-0700\n"
-"PO-Revision-Date: 2021-05-02 13:23+0000\n"
+"POT-Creation-Date: 2021-11-25 01:12-0800\n"
+"PO-Revision-Date: 2021-11-19 08:50+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
-"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 19.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #. Response to Black (0, 0, 0) color selected
@@ -124,11 +124,11 @@ msgstr "Fölbrúnt!"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:177
+#: ../dirwalk.c:188
 msgid "qx"
 msgstr "qx"
 
-#: ../dirwalk.c:177
+#: ../dirwalk.c:188
 msgid "QX"
 msgstr "QX"
 
@@ -138,68 +138,76 @@ msgstr "QX"
 #. especially important for users who have scroll buttons disabled.
 #. Translators should do whatever is needed to put crummy fonts last.
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:202
+#: ../dirwalk.c:213
 msgid "oO"
 msgstr "oO"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:205
+#: ../dirwalk.c:216
 msgid ",.?!"
 msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:208
+#: ../dirwalk.c:219
 msgid "`%_@$~#{<(^&*"
 msgstr "€`%_@$~#{<(^&*"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:211
+#: ../dirwalk.c:222
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:214
+#: ../dirwalk.c:225
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:217
+#: ../dirwalk.c:228
 msgid "1Il|"
 msgstr "1Il|"
 
-#: ../dirwalk.c:221
+#: ../dirwalk.c:232
 msgid "<1>spare-1a"
 msgstr "aa"
 
-#: ../dirwalk.c:222
+#: ../dirwalk.c:233
 msgid "<1>spare-1b"
 msgstr "AA"
 
-#: ../dirwalk.c:223
+#: ../dirwalk.c:234
 msgid "<9>spare-9a"
 msgstr "ðéíóúþæö"
 
-#: ../dirwalk.c:224
+#: ../dirwalk.c:235
 msgid "<9>spare-9b"
 msgstr "ÐÉÍÓÚÞÆÖ"
 
-#: ../fill_tools.h:49
+#: ../fill_tools.h:50
 msgid "Solid"
 msgstr "Einlitt"
 
-#: ../fill_tools.h:50
+#: ../fill_tools.h:51
+msgid "Brush"
+msgstr "Pensill"
+
+#: ../fill_tools.h:52
 msgid "Linear"
 msgstr "Línulegt"
 
-#: ../fill_tools.h:51
+#: ../fill_tools.h:53
 msgid "Radial"
 msgstr "Frá miðju"
 
-#: ../fill_tools.h:55
+#: ../fill_tools.h:57
 msgid "Click to fill an area with a solid color."
 msgstr "Smelltu til að fylla svæðið með lit."
 
-#: ../fill_tools.h:56
+#: ../fill_tools.h:58
+msgid "Click and drag to fill an area by hand, using a brush."
+msgstr "Smelltu og dragðu til að fylla svæðið handvirkt með pensli."
+
+#: ../fill_tools.h:59
 msgid ""
 "Click and drag to fill an area with a linear gradient (from the chosen color "
 "to transparent)."
@@ -207,7 +215,7 @@ msgstr ""
 "Smelltu og dragðu músina til að fylla svæði með línulegum litstigli (deyfist "
 "úr völdum lit yfir í gegnsætt)."
 
-#: ../fill_tools.h:57
+#: ../fill_tools.h:60
 msgid ""
 "Click to fill an area with a radial gradient (from the chosen color to "
 "transparent)."
@@ -236,142 +244,159 @@ msgid "Good job!"
 msgstr "Vel gert!"
 
 #. Input Method: English mode
-#: ../im.c:74
+#: ../im.c:80
 msgid "English"
 msgstr "Enska"
 
 #. Input Method: Japanese Romanized Hiragana mode
-#: ../im.c:77
+#: ../im.c:83
 msgid "Hiragana"
 msgstr "Hiragana"
 
 #. Input Method: Japanese Romanized Katakana mode
-#: ../im.c:80
+#: ../im.c:86
 msgid "Katakana"
 msgstr "Katakana"
 
 #. Input Method: Korean Hangul 2-Bul mode
-#: ../im.c:83
+#: ../im.c:89
 msgid "Hangul"
 msgstr "Hangul"
 
 #. Input Method: Thai mode
-#: ../im.c:86
+#: ../im.c:92
 msgid "Thai"
 msgstr "Tælenska"
 
 #. Input Method: Traditional Chinese mode
-#: ../im.c:89
+#: ../im.c:95
 msgid "ZH_TW"
 msgstr "ZH_TW kínverska"
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:234 ../shapes.h:235
+#: ../shapes.h:238 ../shapes.h:239
 msgid "Square"
 msgstr "Ferningur"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:238 ../shapes.h:239
+#: ../shapes.h:242 ../shapes.h:243
 msgid "Rectangle"
 msgstr "Rétthyrningur"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:242 ../shapes.h:243
+#: ../shapes.h:246 ../shapes.h:247
 msgid "Circle"
 msgstr "Hringur"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:246 ../shapes.h:247
+#: ../shapes.h:250 ../shapes.h:251
 msgid "Ellipse"
 msgstr "Sporbaugur"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:250 ../shapes.h:251
+#: ../shapes.h:254 ../shapes.h:255
 msgid "Triangle"
 msgstr "Þríhyrningur"
 
 #. Pentagone shape tool (5 sides)
-#: ../shapes.h:254 ../shapes.h:255
+#: ../shapes.h:258 ../shapes.h:259
 msgid "Pentagon"
 msgstr "Fimmhyrningur"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:258 ../shapes.h:259
+#: ../shapes.h:262 ../shapes.h:263
 msgid "Rhombus"
 msgstr "Tígull"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:262 ../shapes.h:263
+#: ../shapes.h:266 ../shapes.h:267
 msgid "Octagon"
 msgstr "Átthyrningur"
 
 #. Triangle star (3 points star)
 #. Rhombus star (4 points star)
 #. Pentagone star (5 points star)
-#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
-#: ../shapes.h:278 ../shapes.h:281
+#: ../shapes.h:270 ../shapes.h:273 ../shapes.h:276 ../shapes.h:279
+#: ../shapes.h:282 ../shapes.h:285
 msgid "Star"
 msgstr "Stjarna"
 
 #. Description of a square
-#: ../shapes.h:289 ../shapes.h:290
+#: ../shapes.h:293 ../shapes.h:294
 msgid "A square is a rectangle with four equal sides."
 msgstr "Ferningur er rétthyrningur með fjórar jafnlangar hliðar."
 
 #. Description of a rectangle
-#: ../shapes.h:293 ../shapes.h:294
+#: ../shapes.h:297 ../shapes.h:298
 msgid "A rectangle has four sides and four right angles."
 msgstr "Rétthyrningur hefur fjórar hliðar og öll horn hornrétt."
 
 #. Description of a circle
-#: ../shapes.h:297 ../shapes.h:298
+#: ../shapes.h:301 ../shapes.h:302
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr "Hringur er ferill þar sem allir punktar eru í sömu fjarlægð frá miðju."
 
 #. Description of an ellipse
-#: ../shapes.h:301 ../shapes.h:302
+#: ../shapes.h:305 ../shapes.h:306
 msgid "An ellipse is a stretched circle."
 msgstr "Sporbaugur er teygður hringur"
 
 #. Description of a triangle
-#: ../shapes.h:305 ../shapes.h:306
+#: ../shapes.h:309 ../shapes.h:310
 msgid "A triangle has three sides."
 msgstr "Þríhyrningur hefur þrjár hliðar."
 
 #. Description of a pentagon
-#: ../shapes.h:309 ../shapes.h:310
+#: ../shapes.h:313 ../shapes.h:314
 msgid "A pentagon has five sides."
 msgstr "Fimmhyrningur hefur fimm hliðar."
 
 #. Description of a rhombus
-#: ../shapes.h:313 ../shapes.h:314
+#: ../shapes.h:317 ../shapes.h:318
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr ""
 "Tígull hefur fjórar jafnlangar hliðar, og andstæðar hliðar eru samsíða."
 
 #. Description of an octagon
-#: ../shapes.h:317 ../shapes.h:318
+#: ../shapes.h:321 ../shapes.h:322
 msgid "An octagon has eight equal sides."
 msgstr "Átthyrningur hefur átta hliðar."
 
-#: ../shapes.h:320 ../shapes.h:321
+#: ../shapes.h:324 ../shapes.h:325
 msgid "A star with 3 points."
 msgstr "Stjarna með 3 arma."
 
-#: ../shapes.h:322 ../shapes.h:323
+#: ../shapes.h:326 ../shapes.h:327
 msgid "A star with 4 points."
 msgstr "Stjarna með 4 arma."
 
-#: ../shapes.h:324 ../shapes.h:325
+#: ../shapes.h:328 ../shapes.h:329
 msgid "A star with 5 points."
 msgstr "Stjarna með 5 arma."
 
-#: ../shapes.h:372
+#: ../shapes.h:385
+msgid ""
+"Pick a shape. Click to start drawing, drag, and let go when it is the size "
+"and shape you want. Move around to rotate it, and click again to draw it."
+msgstr ""
+"Veldu form. Smelltu til að byrja að teikna, dragðu músina til, slepptu þegar "
+"það er af réttri stærð og lögun. Hreyfðu til að snúa forminu, og smelltu "
+"aftur til að teikna það."
+
+#: ../shapes.h:386
+msgid ""
+"Pick a shape. Click to start drawing, drag, and let go when it is the size "
+"and shape you want."
+msgstr ""
+"Veldu form. Smelltu til að byrja að teikna, dragðu músina til, slepptu þegar "
+"það er af réttri stærð og lögun."
+
+#: ../shapes.h:392
 msgid "Draw shapes from the center."
 msgstr "Teikna form frá miðju."
 
-#: ../shapes.h:373
+#: ../shapes.h:393
 msgid "Draw shapes from a corner."
 msgstr "Teikna form frá horni."
 
@@ -476,7 +501,7 @@ msgstr "Nýtt"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:8179
+#: ../tools.h:98 ../tuxpaint.c:8438
 msgid "Open"
 msgstr "Opna"
 
@@ -510,16 +535,7 @@ msgstr "Veldu mynd til að nota sem stimpil."
 msgid "Click to start drawing a line. Let go to complete it."
 msgstr "Smelltu til að byrja línu. Slepptu til að enda línuna."
 
-#: ../tools.h:125
-msgid ""
-"Pick a shape. Click to start drawing, drag, and let go when it is the size "
-"you want. Move around to rotate it, and click to draw it."
-msgstr ""
-"Veldu form. Smelltu til að byrja að teikna, dragðu músina til, slepptu þegar "
-"það er af réttri stærð. Hreyfðu til að snúa forminu, og smelltu til að "
-"teikna það."
-
-#: ../tools.h:129
+#: ../tools.h:128
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text."
@@ -527,7 +543,7 @@ msgstr ""
 "Veldu letur. Smelltu á myndina og þú getur byrjað að skrifa. Ýttu á [Enter] "
 "eða [Tab] til að ljúka texta."
 
-#: ../tools.h:133
+#: ../tools.h:132
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
@@ -539,60 +555,62 @@ msgstr ""
 "á texta sem fyrir er, þá getur þú fært textann, breytt honum og breytt "
 "útliti og stíl."
 
-#. Fill tool instructions
-#: ../tools.h:136
-msgid "Click in the picture to fill that area with color."
-msgstr "Smelltu og hreyfðu músina til að fylla svæðið með lit."
-
 #. Magic tool instruction
-#: ../tools.h:139
+#: ../tools.h:138
 msgid "Pick a magical effect to use on your drawing!"
 msgstr "Veldu galdraaðferð sem þú ætlar að nota á myndina!"
 
 #. Response to 'undo' action
-#: ../tools.h:142
+#: ../tools.h:141
 msgid "Undo!"
 msgstr "Hætta við!"
 
 #. Response to 'redo' action
-#: ../tools.h:145
+#: ../tools.h:144
 msgid "Redo!"
 msgstr "Gera aftur!"
 
 #. Eraser tool
-#: ../tools.h:148
+#: ../tools.h:147
 msgid "Eraser!"
 msgstr "Strokleður!"
 
 #. Response to 'start a new image' action
-#: ../tools.h:151
+#: ../tools.h:150
 msgid "Pick a color or picture with which to start a new drawing."
 msgstr "Veldu lit eða mynd sem þú ætlar að nota til að búa til nýja mynd."
 
 #. Response to 'open' action (while file dialog is being constructed)
-#: ../tools.h:154
+#: ../tools.h:153
 msgid "Open…"
 msgstr "Opna..."
 
 #. Response to 'save' action
-#: ../tools.h:157
+#: ../tools.h:156
 msgid "Your image has been saved!"
 msgstr "Búið að geyma myndina þína!"
 
 #. Response to 'print' action (while printing, or print dialog is being used)
-#: ../tools.h:160
+#: ../tools.h:159
 msgid "Printing…"
 msgstr "Prenta..."
 
 #. Response to 'quit' (exit) action
-#: ../tools.h:163
+#: ../tools.h:162
 msgid "Bye bye!"
 msgstr "Bless!"
 
 #. Instruction while using Line tool (after click, before release)
-#: ../tools.h:167
+#: ../tools.h:166
 msgid "Let go of the button to complete the line."
 msgstr "Slepptu hnappnum til að enda línuna."
+
+#: ../tools.h:167
+#, c-format
+msgid ""
+"Let go of the button to complete the line. (Your line's angle is %.0f "
+"degrees.)"
+msgstr "Slepptu hnappnum til að enda línuna. (Horn línunnar er %.0f gráður.)"
 
 #. Instruction while using Shape tool (after first click, before release)
 #: ../tools.h:170
@@ -604,225 +622,234 @@ msgstr "Haltu hnappnum niðri til að teygja formið."
 msgid "Move the mouse to rotate the shape. Click to draw it."
 msgstr "Hreyfðu músina til að snúa forminu. Smelltu til að teikna það."
 
+#: ../tools.h:174
+#, c-format
+msgid ""
+"Move the mouse to rotate the shape. Click to draw it. (It is rotated %d "
+"degrees.)"
+msgstr ""
+"Hreyfðu músina til að snúa forminu. Smelltu til að teikna það. (Það er snúið "
+"um %d gráður.)"
+
 #. Notification that 'New' action was aborted (current image would have been lost)
-#: ../tools.h:176
+#: ../tools.h:177
 msgid "OK then… Let’s keep drawing this one!"
 msgstr "Allt í lagi... Höldum þá áfram með þessa!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2190
+#: ../tuxpaint.c:2234
 msgid "Do you really want to quit?"
 msgstr "Viltu í alvöru hætta?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2193
+#: ../tuxpaint.c:2237
 msgid "Yes, I’m done!"
 msgstr "Já, ég er búin!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2196 ../tuxpaint.c:2223
+#: ../tuxpaint.c:2240 ../tuxpaint.c:2267
 msgid "No, take me back!"
 msgstr "Nei, ég vil halda áfram!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2200
+#: ../tuxpaint.c:2244
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Ef þú hættir, tapast myndin! Viltu geyma hana?"
 
-#: ../tuxpaint.c:2201 ../tuxpaint.c:2206
+#: ../tuxpaint.c:2245 ../tuxpaint.c:2250
 msgid "Yes, save it!"
 msgstr "Já, geyma hana!"
 
-#: ../tuxpaint.c:2202 ../tuxpaint.c:2207
+#: ../tuxpaint.c:2246 ../tuxpaint.c:2251
 msgid "No, don’t bother saving!"
 msgstr "Nei, ekki geyma þetta!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2205
+#: ../tuxpaint.c:2249
 msgid "Save your picture first?"
 msgstr "Geyma myndina fyrst?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2210
+#: ../tuxpaint.c:2254
 msgid "Can’t open that picture!"
 msgstr "Get ekki opnað þessa mynd!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2213 ../tuxpaint.c:2218 ../tuxpaint.c:2227 ../tuxpaint.c:2234
-#: ../tuxpaint.c:2243 ../tuxpaint.c:2248
+#: ../tuxpaint.c:2257 ../tuxpaint.c:2262 ../tuxpaint.c:2271 ../tuxpaint.c:2278
+#: ../tuxpaint.c:2287 ../tuxpaint.c:2292
 msgid "OK"
 msgstr "Í lagi"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2217
+#: ../tuxpaint.c:2261
 msgid "There are no saved files!"
 msgstr "Fann engar geymdar myndir!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2221
+#: ../tuxpaint.c:2265
 msgid "Print your picture now?"
 msgstr "Prenta myndina núna?"
 
-#: ../tuxpaint.c:2222
+#: ../tuxpaint.c:2266
 msgid "Yes, print it!"
 msgstr "Já, prentaðu hana!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2226
+#: ../tuxpaint.c:2270
 msgid "Your picture has been printed!"
 msgstr "Búið að prenta myndina þína!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2230
+#: ../tuxpaint.c:2274
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Því miður! Það var ekki hægt að prenta myndina þína!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2233
+#: ../tuxpaint.c:2277
 msgid "You can’t print yet!"
 msgstr "Þú getur ekki prentað strax!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2237
+#: ../tuxpaint.c:2281
 msgid "Erase this picture?"
 msgstr "Eyða myndinni?"
 
-#: ../tuxpaint.c:2238
+#: ../tuxpaint.c:2282
 msgid "Yes, erase it!"
 msgstr "Já, eyða henni!"
 
-#: ../tuxpaint.c:2239
+#: ../tuxpaint.c:2283
 msgid "No, don’t erase it!"
 msgstr "Nei, ekki eyða henni!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2242
+#: ../tuxpaint.c:2286
 msgid "Remember to use the left mouse button!"
 msgstr "Muna eftir að nota vinstri músarhnappinn!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2246
+#: ../tuxpaint.c:2290
 msgid "Your picture has been exported!"
 msgstr "Búið að flytja út myndina þína!"
 
-#: ../tuxpaint.c:2247
+#: ../tuxpaint.c:2291
 msgid "Your slideshow GIF has been exported!"
 msgstr "Búið að flytja út GIF-skyggnusýninguna þína!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2251
+#: ../tuxpaint.c:2295
 msgid "Sorry! Your picture could not be exported!"
 msgstr "Því miður! Það var ekki hægt að flytja út myndina þína!"
 
-#: ../tuxpaint.c:2252
+#: ../tuxpaint.c:2296
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "Því miður! Það var ekki hægt að flytja út GIF-skyggnusýninguna þína!"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2256
+#: ../tuxpaint.c:2300
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Veldu myndirnar sem þú vilt, og smelltu svo á \"Spila\"."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2465
+#: ../tuxpaint.c:2512
 msgid "Sound muted."
 msgstr "Slökkt á hljóði."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2470
+#: ../tuxpaint.c:2517
 msgid "Sound unmuted."
 msgstr "Kveikt á hljóði."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3247
+#: ../tuxpaint.c:3296
 msgid "Please wait…"
 msgstr "Bíddu aðeins..."
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:8182
+#: ../tuxpaint.c:8441
 msgid "Erase"
 msgstr "Eyða"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:8185
+#: ../tuxpaint.c:8444
 msgid "Slides"
 msgstr "Myndasýning"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:8188
+#: ../tuxpaint.c:8447
 msgid "Export"
 msgstr "Flytja út"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:8191
+#: ../tuxpaint.c:8450
 msgid "Back"
 msgstr "Til baka"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:8194
+#: ../tuxpaint.c:8453
 msgid "Play"
 msgstr "Spila"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:8197
+#: ../tuxpaint.c:8456
 msgid "GIF Export"
 msgstr "GIF-útflutningur"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:8200
+#: ../tuxpaint.c:8459
 msgid "Next"
 msgstr "Áfram"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8948
+#: ../tuxpaint.c:9267
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12589
+#: ../tuxpaint.c:12927
 msgid "Yes"
 msgstr "Já"
 
-#: ../tuxpaint.c:12593
+#: ../tuxpaint.c:12931
 msgid "No"
 msgstr "Nei"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:13732
+#: ../tuxpaint.c:14077
 msgid "Replace the picture with your changes?"
 msgstr "Skipta út eldri myndinni með þeirri nýju?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:13736
+#: ../tuxpaint.c:14081
 msgid "Yes, replace the old one!"
 msgstr "Já, skipta út þeirri gömlu!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:13740
+#: ../tuxpaint.c:14085
 msgid "No, save a new file!"
 msgstr "Nei, geyma nýja mynd!"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:15003
+#: ../tuxpaint.c:15349
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Veldu teikningu, og smelltu svo á 'Opna'."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:16429
+#: ../tuxpaint.c:16775
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr "Veldu 2 eða fleiri teikningar sem á að breyta í GIF-hreyfimynd."
 
-#: ../tuxpaint.c:24135
+#: ../tuxpaint.c:24552
 msgid "Select a color from your drawing."
 msgstr "Veldu lit úr teikningunni þinni."
 
-#: ../tuxpaint.c:24147
+#: ../tuxpaint.c:24564
 msgid "Pick a color."
 msgstr "Veldu lit."
 
@@ -842,19 +869,19 @@ msgstr "Teikniforrit fyrir krakka."
 msgid "Color Shift"
 msgstr "Litskipti"
 
-#: ../../magic/src/alien.c:72
+#: ../../magic/src/alien.c:76
 msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr "Smelltu og dragðu músina til að breyta litunum í hluta myndarinnar."
 
-#: ../../magic/src/alien.c:73
+#: ../../magic/src/alien.c:77
 msgid "Click to change the colors in your entire picture."
 msgstr "Smelltu og hreyfðu músina til að breyta litunum í allri myndinni."
 
-#: ../../magic/src/blind.c:115
+#: ../../magic/src/blind.c:116
 msgid "Blind"
 msgstr "Strimlar"
 
-#: ../../magic/src/blind.c:122
+#: ../../magic/src/blind.c:128
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
@@ -862,85 +889,97 @@ msgstr ""
 "Smelltu við jaðar myndarinnar til að draga strimlagluggatjöld fyrir myndina. "
 "Færðu músina þvert til að opna og loka gluggatjöldunum."
 
-#: ../../magic/src/blocks_chalk_drip.c:129
+#: ../../magic/src/blocks_chalk_drip.c:132
 msgid "Blocks"
 msgstr "Blokkir"
 
-#: ../../magic/src/blocks_chalk_drip.c:131
+#: ../../magic/src/blocks_chalk_drip.c:134
 msgid "Chalk"
 msgstr "Krít"
 
-#: ../../magic/src/blocks_chalk_drip.c:133
+#: ../../magic/src/blocks_chalk_drip.c:136
 msgid "Drip"
 msgstr "Leka"
 
-#: ../../magic/src/blocks_chalk_drip.c:142
+#: ../../magic/src/blocks_chalk_drip.c:154
 msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "Smelltu og dragðu músina til að gera myndina alla í blokkum."
 
-#: ../../magic/src/blocks_chalk_drip.c:144
+#: ../../magic/src/blocks_chalk_drip.c:158
+msgid "Click to make the entire picture blocky."
+msgstr "Smelltu til að gera myndina alla í blokkum."
+
+#: ../../magic/src/blocks_chalk_drip.c:165
 msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr "Smelltu og dragðu músina til að breyta myndinni í krítarmynd!"
 
-#: ../../magic/src/blocks_chalk_drip.c:146
+#: ../../magic/src/blocks_chalk_drip.c:169
+msgid "Click to turn the entire picture into a chalk drawing."
+msgstr "Smelltu til að breyta myndinni í krítarmynd."
+
+#: ../../magic/src/blocks_chalk_drip.c:174
 msgid "Click and drag the mouse around to make the picture drip."
 msgstr "Smelltu og dragðu músina til að láta myndina leka."
 
-#: ../../magic/src/blur.c:80
+#: ../../magic/src/blur.c:81
 msgid "Blur"
 msgstr "Móða"
 
-#: ../../magic/src/blur.c:84
+#: ../../magic/src/blur.c:89
 msgid "Click and drag the mouse around to blur the image."
 msgstr "Smelltu og dragðu músina til að gera myndina óskýrari."
 
-#: ../../magic/src/blur.c:85
+#: ../../magic/src/blur.c:90
 msgid "Click to blur the entire image."
 msgstr "Smelltu til að gera alla myndina óskýrari."
 
 #. Both are named "Bricks", at the moment:
-#: ../../magic/src/bricks.c:120
+#: ../../magic/src/bricks.c:121
 msgid "Bricks"
 msgstr "Múrsteinar"
 
-#: ../../magic/src/bricks.c:127
+#: ../../magic/src/bricks.c:134
 msgid "Click and drag to draw large bricks."
 msgstr "Smelltu og dragðu músina til að búa til stóra múrsteina."
 
-#: ../../magic/src/bricks.c:129
+#: ../../magic/src/bricks.c:136
 msgid "Click and drag to draw small bricks."
 msgstr "Smelltu og dragðu músina til að búa til litla múrsteina."
 
-#: ../../magic/src/calligraphy.c:124
+#: ../../magic/src/calligraphy.c:125
 msgid "Calligraphy"
 msgstr "Skrautritun"
 
-#: ../../magic/src/calligraphy.c:131
+#: ../../magic/src/calligraphy.c:138
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Smelltu og dragðu músina til að teikna eins og skrautskrift."
 
-#: ../../magic/src/cartoon.c:103
+#: ../../magic/src/cartoon.c:107
 msgid "Cartoon"
 msgstr "Teiknimynd"
 
-#: ../../magic/src/cartoon.c:109
+#: ../../magic/src/cartoon.c:121
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr "Smelltu og dragðu músina til að breyta myndinni í teiknimynd."
 
-#: ../../magic/src/checkerboard.c:99
+#: ../../magic/src/cartoon.c:125
+msgid "Click to turn the entire picture into a cartoon."
+msgstr "Smelltu til að breyta myndinni í teiknimynd."
+
+#: ../../magic/src/checkerboard.c:100
 msgid "Checkerboard"
 msgstr "Köflótt"
 
-#: ../../magic/src/checkerboard.c:106
+#: ../../magic/src/checkerboard.c:112
 msgid "Click and drag to fill the canvas with a checkerboard pattern."
 msgstr "Smelltu og dragðu músina til að búa til köflótta reiti."
 
-#: ../../magic/src/clone.c:132
+#: ../../magic/src/clone.c:133
 msgid "Clone"
 msgstr "Klóna"
 
-#: ../../magic/src/clone.c:138
+#: ../../magic/src/clone.c:145
 msgid ""
 "Click once to pick a spot to begin cloning. Click again and drag to clone "
 "that part of the picture."
@@ -948,150 +987,154 @@ msgstr ""
 "Smelltu einu sinni til að velja brett til að klóna. Smelltu og dragðu músina "
 "til að búa til afrit af þeim bletti."
 
-#: ../../magic/src/confetti.c:83
+#: ../../magic/src/confetti.c:86
 msgid "Confetti"
 msgstr "Pappírsskraut"
 
-#: ../../magic/src/confetti.c:88
+#: ../../magic/src/confetti.c:96
 msgid "Click to throw confetti!"
 msgstr "Smelltu til að kasta skrauti!"
 
-#: ../../magic/src/distortion.c:134
+#: ../../magic/src/distortion.c:135
 msgid "Distortion"
 msgstr "Afmynda"
 
-#: ../../magic/src/distortion.c:143
+#: ../../magic/src/distortion.c:152
 msgid "Click and drag the mouse to cause distortion in your picture."
 msgstr "Smelltu og dragðu músina til að afmynda hluta myndarinnar."
 
-#: ../../magic/src/emboss.c:101
+#: ../../magic/src/emboss.c:102
 msgid "Emboss"
 msgstr "Upphleypt"
 
-#: ../../magic/src/emboss.c:107
+#: ../../magic/src/emboss.c:114
 msgid "Click and drag the mouse to emboss the picture."
 msgstr "Smelltu og dragðu músina til að upphleypa myndina."
 
-#: ../../magic/src/fade_darken.c:114
+#: ../../magic/src/fade_darken.c:115
 msgid "Lighten"
 msgstr "Lýsa"
 
-#: ../../magic/src/fade_darken.c:116
+#: ../../magic/src/fade_darken.c:117
 msgid "Darken"
 msgstr "Dekkja"
 
-#: ../../magic/src/fade_darken.c:127
+#: ../../magic/src/fade_darken.c:134
 msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "Smelltu og dragðu músina til að gera hluta myndarinnar bjartari."
 
-#: ../../magic/src/fade_darken.c:129
+#: ../../magic/src/fade_darken.c:136
 msgid "Click to lighten your entire picture."
 msgstr "Smelltu til að gera myndina bjartari"
 
-#: ../../magic/src/fade_darken.c:134
+#: ../../magic/src/fade_darken.c:141
 msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "Smelltu og dragðu músina til að gera hluta myndarinnar dekkri."
 
-#: ../../magic/src/fade_darken.c:136
+#: ../../magic/src/fade_darken.c:143
 msgid "Click to darken your entire picture."
 msgstr "Smelltu til að gera myndina dekkri."
 
-#: ../../magic/src/fisheye.c:101
+#: ../../magic/src/fisheye.c:102
 msgid "Fisheye"
 msgstr "Fiskauga"
 
-#: ../../magic/src/fisheye.c:106
+#: ../../magic/src/fisheye.c:112
 msgid "Click on part of your picture to create a fisheye effect."
 msgstr "Smelltu á svæði á myndinni til að framkalla fiskauga-áhrif."
 
-#: ../../magic/src/flower.c:144
+#: ../../magic/src/flower.c:146
 msgid "Flower"
 msgstr "Blóm"
 
-#: ../../magic/src/flower.c:150
+#: ../../magic/src/flower.c:158
 msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
 msgstr "Smelltu og dragðu til að teikna blómstilk. Förum svo og klárum blómið."
 
-#: ../../magic/src/foam.c:114
+#: ../../magic/src/foam.c:115
 msgid "Foam"
 msgstr "Froða"
 
-#: ../../magic/src/foam.c:120
+#: ../../magic/src/foam.c:127
 msgid "Click and drag the mouse to cover an area with foamy bubbles."
 msgstr "Smelltu og dragðu músina yfir svæði til að þekja það með froðu."
 
-#: ../../magic/src/fold.c:103
+#: ../../magic/src/fold.c:104
 msgid "Fold"
 msgstr "Brot"
 
-#: ../../magic/src/fold.c:108
+#: ../../magic/src/fold.c:114
 msgid ""
 "Choose a background color and click to turn the corner of the page over."
 msgstr "Veldu bakgrunnslit og smelltu til að snúa við horni myndarinnar"
 
-#: ../../magic/src/fretwork.c:176
+#: ../../magic/src/fretwork.c:182
 msgid "Fretwork"
 msgstr "Mynstur"
 
-#: ../../magic/src/fretwork.c:182
-msgid "Click and drag to draw repetitive patterns. "
-msgstr "Smelltu og dragðu músina til að búa til endurtekin mynstur. "
+#: ../../magic/src/fretwork.c:188
+msgid "Click and drag to draw repetitive patterns."
+msgstr "Smelltu og dragðu músina til að teikna endurtekin mynstur."
 
-#: ../../magic/src/fretwork.c:184
+#: ../../magic/src/fretwork.c:190
 msgid "Click to surround your picture with repetitive patterns."
 msgstr ""
 "Smelltu til að ramma myndina inn myndina þína með endurteknum mynstrum."
 
-#: ../../magic/src/glasstile.c:104
+#: ../../magic/src/glasstile.c:105
 msgid "Glass Tile"
 msgstr "Glerflísar"
 
-#: ../../magic/src/glasstile.c:111
+#: ../../magic/src/glasstile.c:118
 msgid "Click and drag the mouse to put glass tile over your picture."
 msgstr "Smelltu og dragðu músina til að draga glerflísar yfir myndina."
 
-#: ../../magic/src/glasstile.c:113
+#: ../../magic/src/glasstile.c:120
 msgid "Click to cover your entire picture in glass tiles."
 msgstr "Smelltu til að brjóta myndina þína upp í glerflísar."
 
-#: ../../magic/src/grass.c:107
+#: ../../magic/src/grass.c:108
 msgid "Grass"
 msgstr "Gras"
 
-#: ../../magic/src/grass.c:113
+#: ../../magic/src/grass.c:120
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "Smelltu og dragðu músina til að teikna gras. Ekki gleyma drullunni!"
 
-#: ../../magic/src/halftone.c:35
+#: ../../magic/src/halftone.c:41
 msgid "Halftone"
 msgstr "Hálftónað"
 
-#: ../../magic/src/halftone.c:39
+#: ../../magic/src/halftone.c:50
 msgid "Click and drag to turn your drawing into a newspaper."
 msgstr "Smelltu og dragðu músina til að breyta myndinni þinni í dagblað."
 
-#: ../../magic/src/kalidescope.c:119
+#: ../../magic/src/halftone.c:51
+msgid "Click to turn your drawing into a newspaper."
+msgstr "Smelltu til að breyta myndinni þinni í dagblað."
+
+#: ../../magic/src/kalidescope.c:120
 msgid "Symmetric Left/Right"
 msgstr "Samhverft Vinstri/Hægri"
 
-#: ../../magic/src/kalidescope.c:123
+#: ../../magic/src/kalidescope.c:124
 msgid "Symmetric Up/Down"
 msgstr "Samhverft Efri/Neðri"
 
-#: ../../magic/src/kalidescope.c:127
+#: ../../magic/src/kalidescope.c:128
 msgid "Pattern"
 msgstr "Mynstur"
 
-#: ../../magic/src/kalidescope.c:131
+#: ../../magic/src/kalidescope.c:132
 msgid "Tiles"
 msgstr "Flísar"
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:135
+#: ../../magic/src/kalidescope.c:136
 msgid "Kaleidoscope"
 msgstr "Kviksjá"
 
-#: ../../magic/src/kalidescope.c:146
+#: ../../magic/src/kalidescope.c:154
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the left and right of your picture."
@@ -1099,7 +1142,7 @@ msgstr ""
 "Smelltu og dragðu músina til teikna með tveimur penslum sem eru samhverfir "
 "hægra og vinstri meginn á myndinni - um lóðréttan ás."
 
-#: ../../magic/src/kalidescope.c:152
+#: ../../magic/src/kalidescope.c:160
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the top and bottom of your picture."
@@ -1107,196 +1150,236 @@ msgstr ""
 "Smelltu og dragðu músina til teikna með tveimur penslum sem eru samhverfir "
 "um efri og neðri hluta myndarinnar - um láréttan ás."
 
-#: ../../magic/src/kalidescope.c:156
+#: ../../magic/src/kalidescope.c:164
 msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr "Smelltu og dragðu músina til að draga mynstur yfir myndina."
 
-#: ../../magic/src/kalidescope.c:160
+#: ../../magic/src/kalidescope.c:168
 msgid ""
 "Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
 msgstr "Smelltu og dragðu músina til teikna samhverft mynstur á myndina."
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:164
+#: ../../magic/src/kalidescope.c:172
 msgid ""
 "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgstr ""
 "Smelltu og dragðu músina til að teikna með samhverfum penslum (kviksjá)."
 
-#: ../../magic/src/light.c:103
+#: ../../magic/src/light.c:104
 msgid "Light"
 msgstr "Ljós"
 
-#: ../../magic/src/light.c:109
+#: ../../magic/src/light.c:116
 msgid "Click and drag to draw a beam of light on your picture."
 msgstr "Smelltu og dragðu til að teikna ljósgeisla á myndina þína."
 
-#: ../../magic/src/metalpaint.c:98
+#: ../../magic/src/lightning.c:78
+msgid "Lightning"
+msgstr "Elding"
+
+#: ../../magic/src/lightning.c:88
+msgid "Click, drag, and release to draw a lightning bolt between two points."
+msgstr ""
+"Smelltu, dragðu og slepptu til að teikna eldingu á milli tveggja punkta."
+
+#: ../../magic/src/metalpaint.c:99
 msgid "Metal Paint"
 msgstr "Málm-áferð"
 
-#: ../../magic/src/metalpaint.c:105
+#: ../../magic/src/metalpaint.c:112
 msgid "Click and drag the mouse to paint with a metallic color."
 msgstr "Smelltu og dragðu músina til að teikna með málmáferð."
 
-#: ../../magic/src/mirror_flip.c:110
+#: ../../magic/src/mirror_flip.c:111
 msgid "Mirror"
 msgstr "Spegla"
 
-#: ../../magic/src/mirror_flip.c:112
+#: ../../magic/src/mirror_flip.c:113
 msgid "Flip"
 msgstr "Fletta"
 
-#: ../../magic/src/mirror_flip.c:121
+#: ../../magic/src/mirror_flip.c:128
 msgid "Click to make a mirror image."
 msgstr "Smelltu til að gera spegilmynd."
 
-#: ../../magic/src/mirror_flip.c:123
+#: ../../magic/src/mirror_flip.c:130
 msgid "Click to flip the picture upside-down."
 msgstr "Smelltu til að setja myndina á hvolf."
 
-#: ../../magic/src/mosaic.c:96
+#: ../../magic/src/mosaic.c:97
 msgid "Mosaic"
 msgstr "Tígulsteinar"
 
-#: ../../magic/src/mosaic.c:100
+#: ../../magic/src/mosaic.c:105
 msgid ""
 "Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr ""
 "Smelltu og dragðu músina til að bæta við tígulsteina-áhrifum á hluta "
 "myndarinnar."
 
-#: ../../magic/src/mosaic.c:101
+#: ../../magic/src/mosaic.c:106
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "Smelltu til að bæta við tígulsteina-áhrifum á myndina þína."
 
-#: ../../magic/src/mosaic_shaped.c:132
+#: ../../magic/src/mosaic_shaped.c:133
 msgid "Square Mosaic"
 msgstr "Ferningslaga tígulsteinn"
 
-#: ../../magic/src/mosaic_shaped.c:133
+#: ../../magic/src/mosaic_shaped.c:134
 msgid "Hexagon Mosaic"
 msgstr "Sexhyrndur tígulsteinn"
 
-#: ../../magic/src/mosaic_shaped.c:134
+#: ../../magic/src/mosaic_shaped.c:135
 msgid "Irregular Mosaic"
 msgstr "Óreglulegur tígulsteinn"
 
-#: ../../magic/src/mosaic_shaped.c:140
+#: ../../magic/src/mosaic_shaped.c:141
 msgid ""
 "Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr ""
 "Smelltu og dragðu músina til að bæta við ferhyrndum mósaík-áhrifum á myndina."
 
-#: ../../magic/src/mosaic_shaped.c:141
+#: ../../magic/src/mosaic_shaped.c:142
 msgid "Click to add a square mosaic to your entire picture."
 msgstr ""
 "Smelltu og hreyfðu músina til að bæta við ferhyrndum tígulsteina-áhrifum á "
 "alla myndina þína."
 
-#: ../../magic/src/mosaic_shaped.c:145
+#: ../../magic/src/mosaic_shaped.c:146
 msgid ""
 "Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr ""
 "Smelltu og dragðu músina til að bæta við sexhyrndum tígulsteina-áhrifum á "
 "myndina."
 
-#: ../../magic/src/mosaic_shaped.c:146
+#: ../../magic/src/mosaic_shaped.c:147
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr ""
 "Smelltu til að bæta við sexhyrndum tígulsteina-áhrifum á alla myndina þína."
 
-#: ../../magic/src/mosaic_shaped.c:150
+#: ../../magic/src/mosaic_shaped.c:151
 msgid ""
 "Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr ""
 "Smelltu og dragðu músina til að bæta við óreglulegum tígulsteina-áhrifum á "
 "hluta myndarinnar."
 
-#: ../../magic/src/mosaic_shaped.c:151
+#: ../../magic/src/mosaic_shaped.c:152
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr ""
 "Smelltu til að bæta við óreglulegum tígulsteina-áhrifum á myndina þína."
 
-#: ../../magic/src/negative.c:94
+#: ../../magic/src/negative.c:73
 msgid "Negative"
 msgstr "Andhverfa"
 
-#: ../../magic/src/negative.c:101
+#: ../../magic/src/negative.c:74
+msgid "Opposite"
+msgstr "Andhverfa"
+
+#: ../../magic/src/negative.c:79
 msgid "Click and drag the mouse around to make your painting negative."
 msgstr "Smelltu og dragðu músina til að andhverfa litum myndarinnar."
 
-#: ../../magic/src/negative.c:103
+#: ../../magic/src/negative.c:80
 msgid "Click to turn your painting into its negative."
 msgstr "Smelltu til að andhverfa litum myndarinnar."
+
+#: ../../magic/src/negative.c:83
+msgid ""
+"Click and drag the mouse around to change colors to their opposites -- their "
+"complementary colors."
+msgstr ""
+"Smelltu og dragðu músina um til að breyta litum í andhverfu sína -- það er "
+"að segja gagnstæða liti."
+
+#: ../../magic/src/negative.c:84
+msgid ""
+"Click to turn all colors in your painting into their opposites -- their "
+"complementary colors."
+msgstr ""
+"Smelltu til að breyta öllum litum myndarinnar í andhverfu sína -- það er að "
+"segja gagnstæða liti."
 
 #: ../../magic/src/noise.c:66
 msgid "Noise"
 msgstr "Suð"
 
-#: ../../magic/src/noise.c:70
+#: ../../magic/src/noise.c:74
 msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr "Smelltu og dragðu músina til bæta við truflunum í myndina."
 
-#: ../../magic/src/noise.c:71
+#: ../../magic/src/noise.c:75
 msgid "Click to add noise to your entire picture."
 msgstr "Smelltu til bæta við óreglu í alla myndina."
 
-#: ../../magic/src/perspective.c:147
+#: ../../magic/src/perspective.c:151
 msgid "Perspective"
 msgstr "Sjónarhorn"
 
-#: ../../magic/src/perspective.c:148
+#: ../../magic/src/perspective.c:152
+msgid "Panels"
+msgstr "Spjöld"
+
+#: ../../magic/src/perspective.c:153
 msgid "Zoom"
 msgstr "Renna"
 
-#: ../../magic/src/perspective.c:153
+#: ../../magic/src/perspective.c:157
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "Smelltu á hornin og dragðu myndina til að teygja hana."
 
-#: ../../magic/src/perspective.c:156
+#: ../../magic/src/perspective.c:159
+msgid "Click to turn your picture into 2-by-2 panels."
+msgstr "Smelltu til að breyta myndinni þinni í 2 sinnum 2 spjöld."
+
+#: ../../magic/src/perspective.c:161
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgstr ""
 "Smelltu og dragðu músina upp til að renna að eða niður til að renna frá "
 "myndinni."
 
-#. Both are named "Pixels", at the moment:
-#: ../../magic/src/pixels.c:108
+#: ../../magic/src/pixels.c:107
 msgid "Pixels"
 msgstr "Mynddílar"
 
-#: ../../magic/src/pixels.c:114
+#: ../../magic/src/pixels.c:119
 msgid "Click and drag to draw large pixels."
 msgstr "Smelltu og dragðu músina til að búa til stóra mynddíla."
 
-#: ../../magic/src/puzzle.c:103
+#: ../../magic/src/puzzle.c:106
 msgid "Puzzle"
 msgstr "Púsluspil"
 
-#: ../../magic/src/puzzle.c:110
+#: ../../magic/src/puzzle.c:118
 msgid "Click the part of your picture where would you like a puzzle."
 msgstr ""
 "Smelltu á hluta myndarinnar sem þú vilt láta líta út eins og í púsluspili."
 
-#: ../../magic/src/puzzle.c:111
+#: ../../magic/src/puzzle.c:119
 msgid "Click to make a puzzle in fullscreen mode."
 msgstr "Smelltu til að búa til púsluspil yfir allan skjáinn."
 
-#: ../../magic/src/rails.c:129
+#: ../../magic/src/rails.c:131
 msgid "Rails"
 msgstr "Teinar"
 
-#: ../../magic/src/rails.c:134
+#: ../../magic/src/rails.c:141
 msgid "Click and drag to draw train track rails on your picture."
 msgstr ""
 "Smelltu og dragðu músina til að teikna járnbrautarteina á myndina þína."
 
-#: ../../magic/src/rainbow.c:133
+#: ../../magic/src/rainbow.c:138
 msgid "Rainbow"
 msgstr "Regnbogi"
 
-#: ../../magic/src/rainbow.c:139
+#: ../../magic/src/rainbow.c:140
+msgid "Smooth Rainbow"
+msgstr "Mjúkur regnbogi"
+
+#: ../../magic/src/rainbow.c:153
 msgid "You can draw in rainbow colors!"
 msgstr "Þú getur teiknað með regnboga-litum!"
 
@@ -1304,23 +1387,23 @@ msgstr "Þú getur teiknað með regnboga-litum!"
 msgid "Rain"
 msgstr "Regn"
 
-#: ../../magic/src/rain.c:72
+#: ../../magic/src/rain.c:76
 msgid "Click to place a rain drop onto your picture."
 msgstr "Smelltu til að setja regndropa á myndina þína."
 
-#: ../../magic/src/rain.c:73
+#: ../../magic/src/rain.c:77
 msgid "Click to cover your picture with rain drops."
 msgstr "Smelltu til að setja regndropa á alla myndina þína."
 
-#: ../../magic/src/realrainbow.c:98
+#: ../../magic/src/realrainbow.c:99
 msgid "Real Rainbow"
 msgstr "Raunverulegur regnbogi"
 
-#: ../../magic/src/realrainbow.c:100
+#: ../../magic/src/realrainbow.c:101
 msgid "ROYGBIV Rainbow"
 msgstr "RAGGBLF-regnbogi"
 
-#: ../../magic/src/realrainbow.c:108
+#: ../../magic/src/realrainbow.c:114
 msgid ""
 "Click where you want your rainbow to start, drag to where you want it to "
 "end, and then let go to draw a rainbow."
@@ -1328,27 +1411,35 @@ msgstr ""
 "Smelltu þar sem þú vilt að regnboginn byrji, dragðu þangað sem þú vilt að "
 "regnboginn endi, og slepptu músahnappnum til að teikna regnboga."
 
-#: ../../magic/src/ripples.c:102
+#: ../../magic/src/reflection.c:110
+msgid "Reflection"
+msgstr "Endurkast"
+
+#: ../../magic/src/reflection.c:120
+msgid "Click and drag the mouse around to add a reflection to your picture."
+msgstr "Smelltu og dragðu músina til að bæta speglun í myndina."
+
+#: ../../magic/src/ripples.c:103
 msgid "Ripples"
 msgstr "Gárur"
 
-#: ../../magic/src/ripples.c:108
+#: ../../magic/src/ripples.c:115
 msgid "Click to make ripples appear over your picture."
 msgstr "Smelltu til að gera gárur á myndina þína."
 
-#: ../../magic/src/rosette.c:115
+#: ../../magic/src/rosette.c:118
 msgid "Rosette"
 msgstr "Rósetta"
 
-#: ../../magic/src/rosette.c:117
+#: ../../magic/src/rosette.c:120
 msgid "Picasso"
 msgstr "Picasso"
 
-#: ../../magic/src/rosette.c:123
+#: ../../magic/src/rosette.c:131
 msgid "Click and start drawing your rosette."
 msgstr "Smelltu og byrjaðu að teikna rósettuna þína."
 
-#: ../../magic/src/rosette.c:125
+#: ../../magic/src/rosette.c:133
 msgid "You can draw just like Picasso!"
 msgstr "Þú getur teiknað eins og Picasso!"
 
@@ -1389,29 +1480,29 @@ msgstr "Smelltu og dragðu músina til að gera svart-hvítar skuggamyndir."
 msgid "Click to create a black and white silhouette of your entire picture."
 msgstr "Smelltu til að gera alla myndina að skuggamynd."
 
-#: ../../magic/src/shift.c:106
+#: ../../magic/src/shift.c:107
 msgid "Shift"
 msgstr "Hliðra"
 
-#: ../../magic/src/shift.c:112
+#: ../../magic/src/shift.c:119
 msgid "Click and drag to shift your picture around on the canvas."
 msgstr "Smelltu og dragðu músina til að færa myndina til á bakgrunninum."
 
-#: ../../magic/src/smudge.c:102
+#: ../../magic/src/smudge.c:103
 msgid "Smudge"
 msgstr "Fingramálun"
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:104
+#: ../../magic/src/smudge.c:105
 msgid "Wet Paint"
 msgstr "Blaut málning"
 
-#: ../../magic/src/smudge.c:111
+#: ../../magic/src/smudge.c:121
 msgid "Click and drag the mouse around to smudge the picture."
 msgstr "Smelltu og dragðu músina til að káma myndina."
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:113
+#: ../../magic/src/smudge.c:123
 msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr ""
 "Smelltu og dragðu músina til að líkja eftir málun með blautri málningu."
@@ -1432,6 +1523,16 @@ msgstr "Smelltu til bæta snjóboltum við myndina þína."
 msgid "Click to add snow flakes to your picture."
 msgstr "Smelltu til bæta snjókornum við myndina þína."
 
+#: ../../magic/src/stretch.c:107
+msgid "Stretch"
+msgstr "Teygja"
+
+#: ../../magic/src/stretch.c:119
+msgid ""
+"Click and drag to stretch part of your picture vertically or horizontally."
+msgstr ""
+"Smelltu og dragðu músina til að teygja hluta myndarinnar lárétt eða lóðrétt."
+
 #: ../../magic/src/string.c:129
 msgid "String edges"
 msgstr "Streng-jaðrar"
@@ -1444,7 +1545,7 @@ msgstr "Streng-horn"
 msgid "String 'V'"
 msgstr "Streng-V"
 
-#: ../../magic/src/string.c:147
+#: ../../magic/src/string.c:151
 msgid ""
 "Click and drag to draw string art. Drag top-bottom to draw less or more "
 "lines, left or right to make a bigger hole."
@@ -1453,11 +1554,11 @@ msgstr ""
 "og niður til að teikna færri eða fleiri línur, vinstri eða hægri til að gera "
 "stærri holu."
 
-#: ../../magic/src/string.c:150
+#: ../../magic/src/string.c:154
 msgid "Click and drag to draw arrows made of string art."
 msgstr "Smelltu og dragðu til að teikna strengjalistörvar."
 
-#: ../../magic/src/string.c:153
+#: ../../magic/src/string.c:157
 msgid "Draw string art arrows with free angles."
 msgstr "Teikna strengja-list-örvar með frjálsum hornum."
 
@@ -1494,23 +1595,23 @@ msgstr "Smelltu til að breyta myndinni þinni yfir í hvítt og lit sem þú ve
 msgid "Toothpaste"
 msgstr "Tannkrem"
 
-#: ../../magic/src/toothpaste.c:72
+#: ../../magic/src/toothpaste.c:76
 msgid "Click and drag to squirt toothpaste onto your picture."
 msgstr "Smelltu og dragðu músina til að sprauta tannkremi yfir myndina þína."
 
-#: ../../magic/src/tornado.c:153
+#: ../../magic/src/tornado.c:154
 msgid "Tornado"
 msgstr "Hvirfilvindur"
 
-#: ../../magic/src/tornado.c:159
+#: ../../magic/src/tornado.c:166
 msgid "Click and drag to draw a tornado funnel on your picture."
 msgstr "Smelltu og dragðu músina til að teikna hvirfilvind á myndina þína."
 
-#: ../../magic/src/tv.c:96
+#: ../../magic/src/tv.c:99
 msgid "TV"
 msgstr "Sjónvarp"
 
-#: ../../magic/src/tv.c:102
+#: ../../magic/src/tv.c:110
 msgid ""
 "Click and drag to make parts of your picture look like they are on "
 "television."
@@ -1518,19 +1619,19 @@ msgstr ""
 "Smelltu og dragðu músina til að láta hluta myndarinnar líta út eins og þeir "
 "séu í sjónvarpi."
 
-#: ../../magic/src/tv.c:105
+#: ../../magic/src/tv.c:113
 msgid "Click to make your picture look like it's on television."
 msgstr "Smelltu til að láta myndina líta út eins og hún sé sjónvarpsmynd."
 
-#: ../../magic/src/waves.c:104
+#: ../../magic/src/waves.c:111
 msgid "Waves"
 msgstr "Bylgjur"
 
-#: ../../magic/src/waves.c:106
+#: ../../magic/src/waves.c:113
 msgid "Wavelets"
 msgstr "Smábylgjur"
 
-#: ../../magic/src/waves.c:115
+#: ../../magic/src/waves.c:122
 msgid ""
 "Click to make the picture horizontally wavy. Click toward the top for "
 "shorter waves, the bottom for taller waves, the left for small waves, and "
@@ -1540,7 +1641,7 @@ msgstr ""
 "bylgjurnar styttri, neðarlega fyrir stærri bylgjur, til vinstri fyrir litlar "
 "bylgjur og til hægri fyrir langar bylgjur."
 
-#: ../../magic/src/waves.c:118
+#: ../../magic/src/waves.c:125
 msgid ""
 "Click to make the picture vertically wavy. Click toward the top for shorter "
 "waves, the bottom for taller waves, the left for small waves, and the right "
@@ -1550,17 +1651,20 @@ msgstr ""
 "bylgjurnar styttri, neðarlega fyrir stærri bylgjur, til vinstri fyrir litlar "
 "bylgjur og til hægri fyrir langar bylgjur."
 
-#: ../../magic/src/xor.c:93
+#: ../../magic/src/xor.c:92
 msgid "Xor Colors"
 msgstr "XOR Litir"
 
-#: ../../magic/src/xor.c:99
+#: ../../magic/src/xor.c:103
 msgid "Click and drag to draw a XOR effect"
 msgstr "Smelltu og dragðu músina til að búa til XOR áhrif."
 
-#: ../../magic/src/xor.c:101
+#: ../../magic/src/xor.c:105
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "Smelltu til að beita XOR áhrifum á alla myndina."
+
+#~ msgid "Click in the picture to fill that area with color."
+#~ msgstr "Smelltu og hreyfðu músina til að fylla svæðið með lit."
 
 #, fuzzy
 #~ msgid ""

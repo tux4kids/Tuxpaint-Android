@@ -1,12 +1,13 @@
                                    Tux Paint
-                                 versión 0.9.26
+                                 versión 0.9.27
 
   A simple drawing program for children
 
           Copyright © 2002-2021 by various contributors; see AUTHORS.
                             http://www.tuxpaint.org/
+                           @TuxPaintTweets on Twitter
 
-                                 junio 28, 2021
+                               noviembre 25, 2021
 
      ----------------------------------------------------------------------
 
@@ -219,6 +220,22 @@ Available Tools
                  If you hold the mouse button down, and move the mouse, it
                  will draw as you move.
 
+                 Some brushes are animated — they change their shape as you
+                 draw them. A good example of this is the vines brush that
+                 ships with Tux Paint. These brushes will have a small
+                 "filmstrip" icon drawn on their Selector buttons.
+
+                 Other brushes are directional — they will draw a different
+                 shape depending on what direction you are painting with
+                 them. An example of this is the arrow brush that ships with
+                 Tux Paint. These brushes have a small 8-way arrow icon drawn
+                 on their Selector buttons.
+
+                 Finally, some brushes can be both direction and animated.
+                 Examples of this are the cat and squirrel brushes that ship
+                 with Tux Paint. These brushes will have both the "filmstrip"
+                 and 8-way arrow icons.
+
                  As you draw, a sound is played. The bigger the brush, the
                  lower the pitch.
 
@@ -273,10 +290,20 @@ Available Tools
 
                  Click the mouse and hold it to choose the starting point of
                  the line. As you move the mouse around, a thin 'rubber-band'
-                 line will show where the line will be drawn.
+                 line will show where the line will be drawn. At the bottom,
+                 you'll see the angle of your line, in degrees. A line going
+                 straight to the right is 0°, a line going straight up is
+                 90°, a line going straight left is 180°, a line going
+                 straight down is 270°, and so on.
 
                  Let go of the mouse to complete the line. A "sproing!" sound
                  will play.
+
+                 Some brushes are animated, and will show a pattern of shapes
+                 along the line. Others are directional, and will show a
+                 different shape depending on the angle of the brush. And
+                 finally some are both animated and directional. See "Paint",
+                 above, to learn more.
 
      ----------------------------------------------------------------------
 
@@ -319,7 +346,9 @@ Available Tools
                       Normal Shapes Mode
 
                               Now you can move the mouse around the canvas to
-                              rotate the shape.
+                              rotate the shape. The angle your shape is
+                              rotated will be shown at the bottom, in degrees
+                              (similar to the "Lines" tool, described above).
 
                               Click the mouse button again and the shape will
                               be drawn in the current color.
@@ -422,6 +451,8 @@ Available Tools
                  drawing with a color of your choice. Three fill options are
                  offered:
                     * Solid — click once to fill an area with a solid color.
+                    * Brush — click and drag to fill an area with a solid
+                      color using freehand painting.
                     * Linear — click and then drag to fill the area with
                       color that fades away (a gradient) towards where you
                       drag the mouse.
@@ -553,8 +584,10 @@ Available Tools
                         lower right of the list to erase the selected
                         picture. (You will be asked to confirm.)
 
-                        Note: As of version 0.9.22, the picture will be
-                        placed in your desktop's trash can, on Linux only.
+                        Note: On Linux (as of version 0.9.22) and Windows (as
+                        of version 0.9.27), the picture will be placed in
+                        your desktop's trash can / recycle bin (where you may
+                        recover and restore it, if you change your mind).
 
                       * Click the 'Export' button near the lower right to
                         export the image to your export folder. (e.g.,
@@ -944,32 +977,39 @@ Importing Pictures Manually
 
      Other documentation included with Tux Paint (found in the "docs"
      folder/directory) includes:
-       * 'Magic' Tool Documentation ("magic-docs")
-         Documentation for each of the currently-installed 'Magic' tools.
-       * AUTHORS.txt
-         List of authors and contributors.
-       * CHANGES.txt
-         Summary of what has changed between releases of Tux Paint.
-       * COPYING.txt
-         Tux Paint's software license, the GNU General Public License (GPL)
-       * INSTALL.html
-         Instructions for compiling and installing Tux Paint, when
-         applicable.
-       * EXTENDING.html
-         Detailed instructions on extending Tux Paint: creating brushes,
-         stamps, starters, and templates; adding fonts; and creating new
-         on-screen keyboard layouts and input methods.
-       * OPTIONS.html
-         Detailed instructions on command-line and configuration-file
-         options, for those who don't want to use the Tux Paint Config. tool
-         to manage Tux Paint's configuration.
-       * PNG.html
-         Notes on creating PNG format bitmapped (raster) images for use in
-         Tux Paint.
-       * SVG.html
-         Notes on creating SVG format vector images for use in Tux Paint.
-       * SIGNALS.html
-         Information about the POSIX signals that Tux Paint responds to.
+       * Using Tux Paint:
+            * OPTIONS.html
+              Detailed instructions on command-line and configuration-file
+              options, for those who don't want to use the Tux Paint Config.
+              tool to manage Tux Paint's configuration.
+            * 'Magic' Tool Documentation ("magic-docs")
+              Documentation for each of the currently-installed 'Magic'
+              tools.
+       * How to extend Tux Paint:
+            * EXTENDING.html
+              Detailed instructions on extending Tux Paint: creating brushes,
+              stamps, starters, and templates; adding fonts; and creating new
+              on-screen keyboard layouts and input methods.
+            * PNG.html
+              Notes on creating PNG format bitmapped (raster) images for use
+              in Tux Paint.
+            * SVG.html
+              Notes on creating SVG format vector images for use in Tux
+              Paint.
+       * Technical information:
+            * INSTALL.html
+              Instructions for compiling and installing Tux Paint, when
+              applicable.
+            * SIGNALS.html
+              Information about the POSIX signals that Tux Paint responds to.
+       * Development history and license:
+            * AUTHORS.txt
+              List of authors and contributors.
+            * CHANGES.txt
+              Summary of what has changed between releases of Tux Paint.
+            * COPYING.txt
+              Tux Paint's software license, the GNU General Public License
+              (GPL)
 
      ----------------------------------------------------------------------
 
@@ -981,7 +1021,6 @@ Importing Pictures Manually
        * Report bugs or request new features via the project's bug-tracking
          system
        * Participate in the various project mailing lists
-       * Chat with developers and other users over IRC
        * Contact the developers directly
 
      To learn more, visit the "Contact" page of the official Tux Paint

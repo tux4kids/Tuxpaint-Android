@@ -1,10 +1,25 @@
                                    Tux Paint
-                  version 0.9.26 Questions fréquemment posées
+                  version 0.9.27 Questions fréquemment posées
 
       Copyright &copie; 2002-2021 par divers contributeurs; voir AUTHORS.
                             http://www.tuxpaint.org/
 
-                                  juin 2, 2021
+                                 août 29, 2021
+
+     ----------------------------------------------------------------------
+
+   +-----------------------------------+
+   |Table des matières                 |
+   |-----------------------------------|
+   |  * Liées au dessin                |
+   |  * Problèmes d'interface          |
+   |  * Impression                     |
+   |  * Sauvegarde                     |
+   |  * Problèmes audio                |
+   |  * Problèmes en mode plein écran  |
+   |  * Autres problèmes               |
+   |  * Aide / Contact                 |
+   +-----------------------------------+
 
      ----------------------------------------------------------------------
 
@@ -246,7 +261,7 @@ Impression
            paramètre du fichier de configuration.
 
            Ou utilisez Tux Paint Config. et assurez-vous que "Autoriser
-           l'impression" (sous "Impression") est vérifié.
+           l'impression" (sous "Impression") est coché.
 
      ----------------------------------------------------------------------
 
@@ -305,7 +320,7 @@ Sauvegarde
            le paramètre du fichier de configuration.
 
            Ou utilisez Tux Paint Config. et assurez-vous que "Demander avant
-           d'écraser" (sous "Sauvegarde") est vérifié.
+           d'écraser" (sous "Sauvegarde") est coché.
 
            Également voyez "Tux Paint sauvegarde toujours avec une nouvelle
            image !", ci-dessous.
@@ -331,9 +346,10 @@ Sauvegarde
            le paramètre du fichier de configuration.
 
            Ou utilisez Tux Paint Config. et assurez-vous que "Demander avant
-           d'écraser" (sous "Sauvegarde") est vérifié.
+           d'écraser" (sous "Sauvegarde") est coché.
 
-           Also, see "Tux Paint always saves over my old picture!", above.
+           Également voyez "Tux Paint sauvegarde en écrasant toujours mon
+           ancienne image !", ci-dessus.
 
      ----------------------------------------------------------------------
 
@@ -445,8 +461,8 @@ Problèmes audio
 
    Les effets sonores sont étranges
 
-           Cela pourrait avoir à voir avec la façon dont SDL et SDL_mixer ont
-           été initialisés. (Choix de la taille de la mémoire tampon.)
+           Cela pourrait avoir un lien avec la façon dont SDL et SDL_mixer
+           ont été initialisés. (Choix de la taille de la mémoire tampon.)
 
            Veuillez nous envoyer un e-mail avec des détails sur votre système
            utilisé. (Système d'exploitation et version, carte son, quelle

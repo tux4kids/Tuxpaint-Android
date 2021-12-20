@@ -1,7 +1,7 @@
 /*
  * Draws fretwork
  *
- * Last updated: 2019-08-29
+ * Last updated: 2021-09-20
  */
 
 #include "tp_magic_api.h"
@@ -62,6 +62,7 @@ int fretwork_init(magic_api * api);
 int fretwork_get_tool_count(magic_api * api);
 SDL_Surface *fretwork_get_icon(magic_api * api, int which);
 char *fretwork_get_name(magic_api * api, int which);
+int fretwork_get_group(magic_api * api, int which);
 char *fretwork_get_description(magic_api * api, int which, int mode);
 int fretwork_requires_colors(magic_api * api, int which);
 void fretwork_release(magic_api * api, int which,
@@ -175,6 +176,11 @@ SDL_Surface *fretwork_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
+int fretwork_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PAINTING;
+}
+
 char *fretwork_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext_noop("Fretwork"));
@@ -183,7 +189,7 @@ char *fretwork_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
 char *fretwork_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
-    return strdup(gettext_noop("Click and drag to draw repetitive patterns. "));
+    return strdup(gettext_noop("Click and drag to draw repetitive patterns."));
   else
     return strdup(gettext_noop("Click to surround your picture with repetitive patterns."));
 }

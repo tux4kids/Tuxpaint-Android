@@ -1,14 +1,14 @@
 Summary: A drawing program for young children
 Name: tuxpaint
-Version: 0.9.26
+Version: 0.9.27
 Release: 1
 License: GPL
 Group: Multimedia/Graphics
 URL: http://www.tuxpaint.org/
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: SDL >= 1.2.4 SDL_image SDL_mixer SDL_ttf SDL_Pango libpaper fribidi xdg-utils libimagequant
-BuildRequires: SDL-devel >= 1.2.4 SDL_image-devel SDL_mixer-devel SDL_ttf-devel SDL_Pango-devel
+Requires: SDL >= 1.2.4 SDL_image SDL_mixer SDL_ttf SDL_Pango SDL_gfx libpaper fribidi xdg-utils libimagequant
+BuildRequires: SDL-devel >= 1.2.4 SDL_image-devel SDL_mixer-devel SDL_ttf-devel SDL_Pango-devel SDL_gfx-devel
 BuildRequires: librsvg2-devel libpaper-devel fribidi-devel gperf gettext ImageMagick xdg-utils libimagequant-devel
 
 %description
@@ -40,7 +40,8 @@ make PREFIX=%{_prefix} DOC_PREFIX=%{_docdir}/tuxpaint/en linux_ARCH_CFLAGS=-I/us
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make ARCH_INSTALL="" PREFIX=%{_prefix} DESTDIR=$RPM_BUILD_ROOT \
+make ARCH_INSTALL="install-man install-importscript install-bash-completion" \
+     PREFIX=%{_prefix} DESTDIR=$RPM_BUILD_ROOT \
      DOC_PREFIX=$RPM_BUILD_ROOT%{_docdir}/tuxpaint \
      DEVDOC_PREFIX=$RPM_BUILD_ROOT%{_docdir}/tuxpaint/devel \
      install
@@ -88,17 +89,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/tuxpaint*.*
 %{_mandir}/*/man1/tuxpaint*.*
 %exclude %{_docdir}/tuxpaint/devel
-%exclude %{_docdir}/tuxpaint/Makefile
 
 %files devel
 %attr(755,root,root) %{_bindir}/tp-magic-config
 %defattr(644,root,root,755)
 %{_includedir}/tuxpaint/tp_magic_api.h
 %{_docdir}/tuxpaint/devel/*
-%{_docdir}/tuxpaint/Makefile
 %{_mandir}/man1/tp-magic-config.*
 
 %changelog
+* Thu Oct 07 2021 <shin1@wmail.plala.or.jp> -
+- Set version number 0.9.27
+- doc/Makefile no longer installed
+
 * Sun Dec 27 2020 <nbs@sonic.net> -
 - Set version number 0.9.26
 

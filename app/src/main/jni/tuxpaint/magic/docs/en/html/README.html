@@ -9,10 +9,10 @@ alink="#FF00FF">
 <center>
 <h1>Creating Tux Paint Magic Tool Plugins</h1>
 
-<p>Copyright 2007-2018 by various contributors; see AUTHORS.txt<br/>
+<p>Copyright 2007-2021 by various contributors; see AUTHORS.txt<br/>
 <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a></p>
 
-<p>July 5, 2007 - February 20, 2021</p>
+<p>July 5, 2007 - September 21, 2021</p>
 </center>
 
 <hr size=2 noshade>
@@ -264,6 +264,26 @@ then the names of your functions must begin with "<code><b>zoom_</b></code>"
   <br>
   <b>Note:</b> Called once for each Magic tool your plugin claims to
   contain (by your "<code>get_tool_count()</code>").<br>
+  <br>
+
+<li><code><b>int get_group(magic_api&nbsp;*&nbsp;api,
+  int&nbsp;which)</b></code><br>
+  Use this to group tools together within sections of the
+  'Magic' selector.  A number of groups are pre-defined within
+  an <code>enum</code> found in "<code>tp_magic_api.h</code>":
+  <ul>
+    <li><code>MAGIC_TYPE_DISTORTS</code> mdash; Tools that distort the shape of the image, like Blur, Emboss, and Ripples</li>
+    <li><code>MAGIC_TYPE_COLOR_FILTERS</code> mdash; Tools that mostly affect the colors of the image without distortion, like Darken, Negative, and Tint</li>
+    <li><code>MAGIC_TYPE_PICTURE_WARPS</code> mdash; Tools that warp or move the entire picture, like Shift, Flip, and Waves</li>
+    <li><code>MAGIC_TYPE_PAINTING</code> mdash; Tools that generally paint new content at the cursor position, like Grass, Bricks, and Rails</li>
+    <li><code>MAGIC_TYPE_PATTERN_PAINTING</code> mdash; Tools that paint in multiple places at once, like Kaleidoscope and the Symmetry tools</li>
+    <li><code>MAGIC_TYPE_PICTURE_DECORATIONS</code> mdash; Tools that apply decorations to the entire picture, like Blinds and Checkboard</li>
+    <li><code>MAGIC_TYPE_ARTISTIC</code> mdash; Special-purpose artistic tools, like Flower, the String tools, and the Rainbow-arc-drawing tools.</li>
+  </ul>
+  <b>Note:</b> Called once for each Magic tool your plugin claims to
+  contain (by your "<code>get_tool_count()</code>").<br>
+  <i>Note: Added to Tux&nbsp;Paint 0.9.27; Magic API version
+  '0x00000005'</i><br>
   <br>
 
 <li><code><b>SDL_Surface * get_icon(magic_api&nbsp;*&nbsp;api,

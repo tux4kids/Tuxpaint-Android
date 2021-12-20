@@ -4,7 +4,7 @@
   Waves Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -43,6 +43,7 @@ int waves_init(magic_api * api);
 int waves_get_tool_count(magic_api * api);
 SDL_Surface *waves_get_icon(magic_api * api, int which);
 char *waves_get_name(magic_api * api, int which);
+int waves_get_group(magic_api * api, int which);
 char *waves_get_description(magic_api * api, int which, int mode);
 void waves_drag(magic_api * api, int which, SDL_Surface * canvas,
                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
@@ -95,6 +96,12 @@ SDL_Surface *waves_get_icon(magic_api * api, int which)
     snprintf(fname, sizeof(fname), "%simages/magic/wavelet.png", api->data_directory);
 
   return (IMG_Load(fname));
+}
+
+// Return our group (both the same):
+int waves_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PICTURE_WARPS;
 }
 
 // Return our names, localized:

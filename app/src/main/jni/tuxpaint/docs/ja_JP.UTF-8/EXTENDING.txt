@@ -1,11 +1,11 @@
                                    Extending
                                    Tux Paint
-                                  バージョン 0.9.26
+                                  バージョン 0.9.27
 
           Copyright © 2002-2021 by various contributors; "AUTHORS" 参照.
                             http://www.tuxpaint.org/
 
-                                   2021年5月31日
+                                   2021年9月19日
 
      ----------------------------------------------------------------------
 
@@ -24,14 +24,14 @@
    |       * Stamp Descriptive Sound          |
    |       * Stamp Options                    |
    |       * Pre-Mirrored and Flipped Stamps  |
-   |  * Fonts                                 |
+   |  * フォント                                  |
    |  * 'Starters'                            |
    |       * Coloring-Book Style Starters     |
    |       * Scene-Style Starters             |
    |  * 'Templates'                           |
    |  * Translations                          |
    |  * Alternative Input Methods             |
-   |  * On-screen Keyboard                    |
+   |  * 画面キーボード                               |
    +------------------------------------------+
 
      ----------------------------------------------------------------------
@@ -212,17 +212,26 @@ Brushes
          Add a line containing the word "directional" to the brush's data
          file.
 
-    Animated Directional Brushes
+    Rotating Brushes
 
-         You may mix both animated and directional features into one brush.
-         Use both options ("frames=N" and "directional"), in separate lines
-         in the brush's ".dat" file.
+         As of Tux Paint version 0.9.27, you may now create rotating brushes.
+         As the brush is used, it is rotated 360 degrees, depending on the
+         direction the brush is going.
 
-         Lay the brush out so that each 3x3 set of directional shapes are
-         laid out across a wide PNG image. For example, if the brush is 30x30
-         and there are 5 frames, it would be 450x90. (The leftmost 150x90
-         pixels of the image represent the 9 direction shapes for the first
-         frame, for example.)
+         Add a line containing the word "rotate" to the brush's data file.
+
+    Animated Directional or Rotating Brushes
+
+         You may mix both animated and either directional or rotating
+         features into one brush. Use both options desired ("frames=N" and
+         "directional" or "rotate"), in separate lines in the brush's ".dat"
+         file.
+
+         For directional brushes, lay the brush out so that each 3x3 set of
+         directional shapes are laid out across a wide PNG image. For
+         example, if the brush is 30x30 and there are 5 frames, it would be
+         450x90. (The leftmost 150x90 pixels of the image represent the 9
+         direction shapes for the first frame, for example.)
 
      Place the brush image PNGs (and any data text files) in the "brushes"
      directory.
@@ -328,9 +337,11 @@ Stamps
          also create WAV or OGG files with the locale's label in the
          filename, in the form: "stamp_LOCALE.EXT"
 
-         "stamp.png"'s sound effect, when Tux Paint is run in Spanish mode,
-         would be "stamp.png". In French mode, "stamp_es.wav". In Brazilian
-         Portuguese mode, "stamp_fr.wav". And so on...
+         The sound effect that will be played when the stamp corresponding to
+         the image file "stamp.png" is selected, and when Tux Paint is using
+         the Spanish locale, would be "stamp_es.wav". Under the French
+         locale, it would be "stamp_fr.wav". Under the Brazilian Portuguese
+         locale, "stamp_pt_BR.wav". And so on...
 
          If no localized sound effect can be loaded, Tux Paint will attempt
          to load the 'default' sound file. (e.g., "stamp.wav")
@@ -357,10 +368,11 @@ Stamps
          files with both "_desc" and the locale's label in the filename, in
          the form: "stamp_desc_LOCALE.EXT"
 
-         "stamp.png"'s descriptive sound, when Tux Paint is run in Spanish
-         mode, would be "stamp_desc_es.wav". In French mode,
-         "stamp_desc_fr.wav". In Brazilian Portuguese mode,
-         "stamp_desc_pt_BR.wav". And so on...
+         The descriptive sound that will be played when the stamp
+         corresponding to the image file "stamp.png" is selected, and when
+         Tux Paint is using the Spanish locale, would be "stamp_desc_es.wav".
+         Under the French locale, it would be "stamp_desc_fr.wav". Under the
+         Brazilian Portuguese locale, "stamp_desc_pt_BR.wav". And so on...
 
          If no localized descriptive sound can be loaded, Tux Paint will
          attempt to load the 'default' sound file. (e.g., "stamp_desc.wav")
@@ -414,15 +426,28 @@ Stamps
              one of the following lines to the stamp's data file:
 
              Normal tinter — "tinter=normal" (the default)
-                     This is the normal tinting mode. (Hue range is ±18°, 27
-                     replace.)
-
-             'Any hue' tinter — "tinter=anyhue"
-                     This remaps all hues in the stamp. (Hue range is ±180°.)
+                     This is the normal tinting mode. First, the primary hue
+                     of the stamp is determined. (For example, a picture of a
+                     flower with a stem will have the petal color seen as the
+                     primary hue of the overall image.) Next, the most highly
+                     saturated part of the picture is found. With "normal
+                     tinter", the range of hue used to do this starts out
+                     within ±18° of the pimary hue found in step 1. (If none
+                     can be found, it widens the range by 50% and tries
+                     again.) Finally, the image is tinted. Anything falling
+                     within 50% of the range (e.g., ±27°) is altered to have
+                     the hue of the color chosen by the user.
 
              Narrow tinter — "tinter=narrow"
-                     This like the "anyhue" option, but with a narrower hue
-                     angle. (Hue range is ±6°, 9 replace.)
+                     This like the "normal" option described above, but
+                     starts a narrower hue range of ±6°. Anything found
+                     within 50% of the range (e.g. ±9°) is tinted. If too
+                     much of your stamp is being tinted, try this option.
+
+             'Any hue' tinter — "tinter=anyhue"
+                     This remaps all hues in the stamp. It works similarly to
+                     the "anyhue" and "narrow" options described above, but
+                     the hue range is ±180°.
 
              Vector tinter — "tinter=vector"
                      This maps 'black through white' to 'black through
@@ -445,7 +470,7 @@ Stamps
          To prevent a stamp from being mirrored horizontally, add the option
          "nomirror" to the stamp's data file.
 
-    Initial Stamp Size
+    スタンプサイズ
 
          By default, Tux Paint assumes that your stamp is sized appropriately
          for unscaled display on a 608x472 canvas. This was the original Tux
@@ -497,7 +522,7 @@ Stamps
 
      ----------------------------------------------------------------------
 
-Fonts
+フォント
 
      The fonts used by Tux Paint are TrueType Fonts (TTF).
 
@@ -740,7 +765,7 @@ Alternative Input Methods
 
      ----------------------------------------------------------------------
 
-On-screen Keyboard
+画面キーボード
 
      As of version 0.9.22, Tux Paint's 'Text' and 'Label' tools can present
      an on-screen keyboard that allows the pointer (via a mouse, eye-tracking

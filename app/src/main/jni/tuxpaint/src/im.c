@@ -43,6 +43,12 @@
 #include <wchar.h>
 #include <assert.h>
 #include "im.h"
+#include "i18n.h"
+#include "debug.h"
+
+#ifdef DEBUG
+#include <assert.h>
+#endif
 
 #ifdef __ANDROID__
 #include "android_mbstowcs.h"
@@ -97,7 +103,9 @@ static const char *const im_tip_text[NUM_IM_TIPS] = {
 * CONSTANTS
 */
 
-/* #define IM_DEBUG       1 */
+#ifdef DEBUG
+#define IM_DEBUG         1
+#endif
 
 #define MAX_SECTIONS     8      /* Maximum numbers of sections in *.im file */
 #define MAX_UNICODE_SEQ 16      /* Output of state machine, including NUL */
@@ -613,10 +621,10 @@ static int charmap_load(CHARMAP * cm, const char *path)
         default:
           if (charmap_add(cm, section, buf, unicode, flag))
             {
-              size_t i = 0;
-
 #ifndef __BEOS__
 #if defined __GLIBC__ && __GLIBC__ == 2 && __GLIBC_MINOR__ >=2 || __GLIBC__ > 2 || __APPLE__
+              size_t i = 0;
+
               fwprintf(stderr, L"Unable to add sequence '%ls', unicode ", buf);
               for (i = 0; i < wcslen(unicode); i++)
                 fwprintf(stderr, L"%04X ", (int)unicode[i]);
@@ -1438,7 +1446,6 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
     case SDLK_RSHIFT:
     case SDLK_LCTRL:
     case SDLK_RCTRL:
-    case SDLK_LALT:
     case SDLK_LGUI:
     case SDLK_RGUI:
     case SDLK_MENU:
@@ -1446,8 +1453,9 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
     case SDLK_APPLICATION:
       break;
 
-      /* Right-Alt mapped to mode-switch */
+      /* Left-Alt & Right-Alt mapped to mode-switch */
     case SDLK_RALT:
+    case SDLK_LALT:
       cm.section = ((cm.section + 1) % SEC_TOTAL);      /* Change section */
       im_softreset(im);         /* Soft reset */
 
@@ -1695,7 +1703,7 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
     case SDLK_APPLICATION:
       break;
 
-      /* Right-Alt mapped to mode-switch */
+      /* Left-Alt & Right-Alt mapped to mode-switch */
     case SDLK_LALT:
     case SDLK_RALT:
       cm.section = ((cm.section + 1) % SEC_TOTAL);      /* Change section */
@@ -1921,8 +1929,7 @@ void im_init(IM_DATA * im, int lang)
 
 #ifdef DEBUG
   assert(0 <= im->lang && im->lang < NUM_LANGS);
-  if (im_initialized)
-    printf("Initializing IM for %s...\n", lang_prefixes[im->lang]);
+  printf("Initializing IM for %s...\n", lang_prefixes[im->lang]);
 #endif
 
   /* Initialize the individual IM */

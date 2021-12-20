@@ -17,7 +17,7 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        version 0.9.26<br/>
+        version 0.9.27<br/>
         Documentation sur les signaux      </h1>
 
       <p>
@@ -44,8 +44,7 @@
           Tux Paint répond comme si le bouton "Quitter" était enfoncé, ou l'environnement de bureau a été invité à fermer Tux Paint (par exemple, en cliquant sur un bouton de fermeture de fenêtre, ou en appuyant sur <b><code>[Alt]</code></b> + <b><code>[F4]</code></b> sur la plupart des systèmes).        </p>
 
         <p>
-          Depuis l'interface principale, Tux Paint vous demandera si souhaitez quitter ou pas, et (sauf si remplacé par l'option autosave, par ex. "<code>--autosave</code>") si vous souhaitez enregistrer le dessin courant (s'il n'est pas enregistré), et si c'est le cas, et c'est une version modifiée d'un dessin existant (sauf si remplacé par les options pour écraser les images anciennes, ou bien sauvegarder avec un nouveau nom; par ex. "<code>--saveover</code>" ou "<code>--saveovernew</code>").
-vers un nouveau fichier.        </p>
+          Depuis l'interface principale, Tux Paint vous demandera si vous souhaitez quitter ou non, et (sauf si remplacé par l'option autosave, par ex. "<code>--autosave</code>") si vous souhaitez enregistrer le dessin courant (s'il n'est pas enregistré), et si c'est le cas, et c'est une version modifiée d'un dessin existant (sauf si remplacé par les options pour écraser les images anciennes, ou bien sauvegarder avec un nouveau nom (par ex. "<code>--saveover</code>" ou "<code>--saveovernew</code>") vers un nouveau fichier.        </p>
 
         <p>
           <b>Remarque :</b>Sur d'autres parties de l'interface, le signal est en fait interprété comme une demande de retour en arrière (par exemple, de la boîte de dialogue "Nouveau" pour revenir sur l'interface principale), comme si un bouton "Retour" dans Tux Paint a été cliqué, ou la touche <b><code>[Esc]</code></b> enfoncée.        </p>
@@ -66,7 +65,7 @@ vers un nouveau fichier.        </p>
           Ainsi, à partir de l'interface principale, Tux Paint devrait se fermer presque immédiatement, sans poser de questions.        </p>
 
         <p>
-          À partir d'autres parties de l'interface, malheureusement, Tux Paint ne reviendra que d'un niveau dans l'interface. Par conséquent, à ce moment, il peut être nécessaire d'envoyer ce signal à Tux Paint plusieurs fois, pour qu'il s'arrête complètement.        </p>
+          À partir d'autres parties de l'interface, malheureusement, Tux Paint ne reviendra que d'un niveau dans l'interface. Par conséquent, à ce moment, il peut être nécessaire d'envoyer ce signal à Tux Paint plusieurs fois pour qu'il s'arrête complètement.        </p>
 
         <p>
           Exemple: <code>killall -s SIGUSR1 tuxpaint</code>        </p>

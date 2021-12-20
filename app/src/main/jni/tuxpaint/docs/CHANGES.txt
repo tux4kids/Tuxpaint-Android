@@ -8,6 +8,235 @@ http://www.tuxpaint.org/
 
 $Id$
 
+2021.November.25 (0.9.27)
+  * New Magic Tools:
+    ----------------
+    * "Lightning" - Draws a bolt of lightning striking between
+      the start and end positions of a line.
+
+    * "Opposite" -- Change parts of the picture to their complementary
+      colors.  (Similar to "Negative", but instead of inverting the
+      Red, Green, and Blue components, it rotates the Hue 180 degrees
+      while leaving Saturation and Lightness alone.)
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/136/)
+
+    * "Panels" - Convert your picture to 4-panel-comic-style
+      2x2 image, repeating the original.  (Repeat for "compound eye"
+      style effects!)
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/204/)
+
+    * "Reflection" - Create a reflection of part of the image,
+      below (as in a lake reflection), above, to the left, or to the right.
+
+    * "Smooth Rainbow" - A smooth, gradient variation of the classic
+      "Rainbow" Magic tool.
+
+    * "Stretch" - Squish and stretch parts of your picture, giving a
+      fun-house mirror effect.
+
+  * Magic Tool Improvements:
+    ------------------------
+    * "Halftone" works much better, drawing large overlapping circles
+      of Cyan, Magenta, Yellow, and Black, based on the average
+      color of the area of the picture being replaced, to give a
+      "newsprint" effect.
+
+    * "TV" now breaks pixels into red/green/blue components,
+      rather than merely adding a 'scanline' effect.
+
+    * "Blocks", "Cartoon", "Chalk", "Emboss", and "Halftone" can all now
+       affect the entire image at once.
+
+    * More tools update progress bar while doing lots of work
+      (mostly full-screen mode).  More tools play their sound effects
+      when applying effects in full-screen mode.
+
+  * Improvements to "Paint" and "Lines" tools:
+    ------------------------------------------
+    * Rotational brushes now supported.  Unlike "directional"
+      brushes, in which a 3x3 grid representing the 8 cardinal
+      directions (45 degree steps) is used, only a single brush image
+      is required, and Tux Paint will rotate it between 0 and 360 degrees,
+      depending on the direction the mouse is going.  The brush's ".dat"
+      file should contain a line consisting of the word "rotate".
+      + Note: This adds a dependency on "SDL_gfx" library
+        (Homepage: https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/
+        SourceForge project page: https://sourceforge.net/projects/sdlgfx/)
+        as this feature use it's "rotozoomSurface()" and "SDL_gfxBlitRGBA()".
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/122/)
+
+    * Replaced the "arrow_compass_points" brush with a single
+      arrow which can rotate at any angle, using the new
+      "rotational" brush feature.
+
+    * Added "rotating dash" brush.
+
+    * Small icons appear on brush selection buttons denoting
+      when the brush is animated and/or directional.
+      (Closes https://sourceforge.net/p/tuxpaint/bugs/183/)
+
+  * Other Improvements:
+    -------------------
+    * New "Fill" tool mode: "Brush".  Similar to classic flood fill,
+      but only fills as you move the brush within the area to be
+      filled.
+
+    * Grouped similar Magic tools into sections.
+      (e.g., all of the distortions, versus painting tools, versus
+      full-image effects, etc.)
+
+      Use the left/right pagination buttons that now appear at the
+      bottom of the selector (similar to those used with Stamps tool)
+      to switch between groups.
+
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/201/
+      Note: Bumps `TP_MAGIC_API_VERSION` to 0x00000005.
+
+    * Initial support to place pictures deleted from the "Open" dialog
+      into the "Recycle Bin" on Windows.
+
+    * When drawing lines or rotating a shape, the angle of rotation
+      is shown (in the instructions at the bottom).
+
+  * Documentation updates:
+    ---------------------
+    * Ensured Tux Paint's built-in help ("tuxpaint --help"),
+      Unix manual ("man page"), and command-line option
+      tab-completion list, and "OPTIONS" documentation all cover
+      the full set of Tux Paint options.
+
+    * Reorganized the "Available Options" section of "OPTIONS"
+      documentation (to match the organization found in the UI
+      of "Tux Paint Config.")
+
+    * Reorganized the options listed in Tux Paint's man page,
+      to more closely (but not precisely) match the organization
+      noted above.
+
+    * tuxpaint(1) manpage is now managed & translatable via the
+      'tuxpaint-docs' project, just like the HTML & plaintext
+      documentation files (since 0.9.26).
+
+    * Documentation to the various Magic tools are also now
+      managed & translatable via the 'tuxpaint-docs' project.
+
+    * Added table of contents to some documentation
+      ("Options Documentation", "FAQ", "Installation Documentation",
+      and "Advanced Stamps 'How-To'").
+
+    * Moved Windows and macOS compilation instructions into main
+      "Installation Documentation" (docs/.../INSTALL...).
+
+    * Expanded explanation of how stamp tinting modes work
+      in "Extending Tux Paint" documentation.
+
+    * Documentation translation updates:
+      + French translation
+        Jacques Chion <jacques.chion@orange.fr>
+
+  * New Starters:
+    -------------
+    * Frog
+      Jeff Davidson, (Parkdale Elementary, Waco, TX; 2007)
+
+  * Localization Updates:
+    ---------------------
+    * Allowing Left [Alt] key for switching to Japanese input method
+      (for keyboards that lack a Right [Alt] key).
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Catalan translation
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * French translation
+      Jacques Chion <jacques.chion@orange.fr>
+
+    * Icelandic translation
+      Sveinn í Felli <sv1@fellsnet.is>
+
+    * Japanese translation
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Portuguese (Portugal) translation
+      Hugo Carvalho <hugokarvalho@hotmail.com>
+
+    * Ensure some locales have hints to find the best fonts
+      for the Text and Label tools:
+      + Greek
+      + Scottish Gaelic
+
+  * Bug Fixes:
+    ----------
+    * "Negative" magic tool did not play its sound when using
+      fullscreen (vs painting) mode. Fixed.
+
+    * "Zoom" magic tool icon had weird artifacting. Mended.
+
+    * "Halftone" magic tool had the "Zoom" tool's icon.
+
+    * Undo buffer canvases were not always the same dimensions
+      as the drawing surface, if buttonsize was adjusted.
+      (Adversely affected "Shift" magic tool.)
+
+    * Remove some old Win32-specific code to handle multibyte
+      characters, which could cause a crash bug when using the
+      on-screen keyboard under Windows.  (Older mingw/msys did
+      not supply a needed function.)
+      * h/t @Miyagi_Andel on Twitter for reporting the crash
+      * h/t Pere Pujal i Carabantes for confirming how to reproduce it
+      * TOYAMA Shin-ichi <shin1@wmail.plala.or.jp> dropped the old
+        code and rebuilt Tux Paint 0.9.26 for Win32 as 0.9.26-5
+      * Note: This means dropping support for Windows 2000 & XP
+      * (Also, remove Windows-only call to `_nl_locale_name()`,
+        and avoid crashing if our `mysetenv()` receives any NULL pointers.
+        T. Shin-Ichi & Bill K.)
+
+    * Always show the appropriate instructions at the bottom when the
+      "Fill" (depends on which sub-tool chosen) and "Shapes" (depends
+      on whether "simpleshapes" option is set) tools are selected
+      (e.g., when returning from the "Open" dialog).
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/186/)
+
+    * Avoid possibility of crashing when doing a flood-fill of a
+      complicated shape on a large canvas (e.g., `tuxpaint --3000x2000`
+      with `starters/mosaic.svg`
+      + Replace recursion with a queue (span filling method)
+      + Call the progress bar animation updates and playsound() function
+        less frequently
+      h/t Yang for reporting & Pere for confirming
+
+  * Ports & Building
+    ----------------
+    * Fix compilation error on Linux with HOST environment variable set.
+      Modifies the Makefile so it attempts to cross compile only when both
+      HOST and HOSTROOT environment variable (which are both required for
+      cross compilation) are set; avoid confusion when an unrelated
+      $HOST env. var. is set.
+      Mark K. Kim <markuskimius@gmail.com>
+
+    * Include "AppVersion" directive to Windows installer Inno Setup
+      recipe file (.iss).
+      Easton Pillay <https://sourceforge.net/u/jedieaston/profile/>
+
+    * Other Windows installer updates:
+      + Updated to Inno Setup 6
+      + 64-bit version now to be installed in the standard "Program Files"
+        folder on 64-bit architecture instead of "Program Files (x86)" as before.
+      + 64-bit installer will invoke uninstaller for existing old x86 mode
+        installation, if found.
+      + Updated translation files for the installer
+      + Added language specification to start menu shorcuts for which
+        translation is supported both for the web site and installer.
+      + Disabled start menu shortcut to outdated translations of README.html.
+      + Remove old OpenCandy stuff from Windows .iss file.
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Added shell script to build windows installer and portable zip archive.
+      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+
+    * Further work to remove compiler warnings.
+
+
 2021.June.28 (0.9.26)
   * New Features
     ------------

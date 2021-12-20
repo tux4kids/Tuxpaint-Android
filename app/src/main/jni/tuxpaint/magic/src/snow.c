@@ -6,7 +6,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2007 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: June 6, 2008
+  Last updated: September 20, 2021
   $Id$
 */
 
@@ -82,6 +82,7 @@ int snow_init(magic_api * api);
 int snow_get_tool_count(magic_api * api);
 SDL_Surface *snow_get_icon(magic_api * api, int which);
 char *snow_get_name(magic_api * api, int which);
+int snow_get_group(magic_api * api, int which);
 char *snow_get_description(magic_api * api, int which);
 static void do_snow(void *ptr, SDL_Surface * canvas, SDL_Surface * last, int which, int snowAmount);
 void snow_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -155,6 +156,11 @@ SDL_Surface *snow_get_icon(magic_api * api, int which)
 char *snow_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return (strdup(gettext_noop(snow_names[which])));
+}
+
+int snow_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PICTURE_DECORATIONS; /* Because we affect the whole image, and not just around the mouse */
 }
 
 // Return our descriptions, localized:

@@ -6,7 +6,7 @@
 
   Albert Cahalan <albert@users.sf.net>
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: September 20, 2021
   $Id$
 */
 
@@ -60,6 +60,7 @@ Uint32 bricks_api_version(void);
 int bricks_get_tool_count(magic_api * api);
 SDL_Surface *bricks_get_icon(magic_api * api, int which);
 char *bricks_get_name(magic_api * api, int which);
+int bricks_get_group(magic_api * api, int which);
 char *bricks_get_description(magic_api * api, int which, int mode);
 void bricks_drag(magic_api * api, int which, SDL_Surface * canvas,
                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
@@ -118,6 +119,12 @@ char *bricks_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
   /* Both are named "Bricks", at the moment: */
 
   return (strdup(gettext_noop("Bricks")));
+}
+
+// Return our group (both the same):
+int bricks_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PAINTING;
 }
 
 // Return our descriptions, localized:

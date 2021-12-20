@@ -4,7 +4,7 @@
   Metal Paint Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2008 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: July 8, 2008
+  Last updated: September 21, 2021
   $Id$
 */
 
@@ -43,6 +43,7 @@ int metalpaint_init(magic_api * api);
 int metalpaint_get_tool_count(magic_api * api);
 SDL_Surface *metalpaint_get_icon(magic_api * api, int which);
 char *metalpaint_get_name(magic_api * api, int which);
+int metalpaint_get_group(magic_api * api, int which);
 char *metalpaint_get_description(magic_api * api, int which, int mode);
 static void do_metalpaint(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 void metalpaint_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -96,6 +97,12 @@ SDL_Surface *metalpaint_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 char *metalpaint_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Metal Paint")));
+}
+
+// Return our groups:
+int metalpaint_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PAINTING;
 }
 
 // Return our descriptions, localized:

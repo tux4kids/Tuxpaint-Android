@@ -17,18 +17,19 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        バージョン 0.9.26      </h1>
+        バージョン 0.9.27      </h1>
 
       <h3>
         子供向けのシンプルなお絵かきプログラム      </h3>
 
       <p>
-        Copyright &copy; 2002-2021 by various contributors; "AUTHORS" 参照.<br>
-        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
+        Copyright &copy; 2002-2021 by various contributors; "AUTHORS" 参照.<br/>
+        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a><br/>
+        <a href="https://twitter.com/TuxPaintTweets">@TuxPaintTweets on Twitter</a>
       </p>
 
       <p>
-        2021年6月28日      </p>
+        2021年11月25日      </p>
     </center>
 
     <hr size="2"
@@ -409,6 +410,15 @@
                 ボタンを押したままマウスを動かすと、描画できます。              </p>
 
               <p>
+                アニメーションブラシ &mdash; 描画中に形状が変化します。例として、ブドウ形のブラシが挙げられます。このタイプのブラシの選択ボタンには、小さなフィルムのアイコンが付いています。              </p>
+
+              <p>
+                向きのあるブラシ &mdash; 描いている方向によって異なる形を描きます。 例として、Tux Paint に含まれる矢印ブラシがあります。 これらのブラシの選択ボタンには、小さな8方向の矢印のアイコンが付いています。              </p>
+
+              <p>
+                また、いくつかのブラシは、方向とアニメーションを併せ持ちます。例として、猫やリスのブラシがあります。このタイプのブラシの選択ボタンには、小さなフィルムと８方向の矢印のアイコンが付いています。              </p>
+
+              <p>
                 描画中にはサウンドが流れます。筆の大きさが大きいほど、低い音になります。              </p>
               <br clear="all">
 
@@ -499,10 +509,13 @@
                 様々な種類の筆と好きな色を使って直線を描くツールです。              </p>
 
               <p>
-                直線を描き始める位置でマウスをクリックして、そのままマウスを動かすと、描かれる直線が、「ゴム紐」のような薄い色の線で表示されます。              </p>
+                線を引き始めたい場所でクリックして、そのままマウスを動かすと、描かれる線の位置が細い「ゴムバンド」のような線で示され、画面の下には、線の角度が表示されます。右にまっすぐ伸びる線は0度、上にまっすぐ伸びる線は90度、左にまっすぐ伸びる線は180度、下にまっすぐ伸びる線は270度、という具合です。              </p>
 
               <p>
                 マウスを放すと、バネのような効果音とともに線が描画されます。              </p>
+
+              <p>
+                アニメーション対応のブラシでは、線に沿って形が変化します。 指向性のブラシでは、線の角度に応じて異なる形状を表示します。 さらに、アニメーションと指向性の両方を備えたブラシもあります。 詳しくは、上記の「ふで」の項をご覧ください。              </p>
               <br clear="all">
 
               <p align="center">
@@ -566,7 +579,7 @@
 
                 <dd>
                   <p>
-                    通常の動作では、上記の後、マウスを動かして図形を回転させます。                  </p>
+                    ここで、キャンバス上でマウスを動かして図形を回転させることができます。回転した図形の角度は画面の下に表示されます（「せん」ツールと同様）。                  </p>
 
                   <p>
                     最後にもう一度マウスをクリックして、図形が完成します。                  </p>
@@ -605,7 +618,7 @@
                 まず、右側のセレクタからフォントを、下部のパレットから色を選択します。画面をクリックするとカーソルが表示され、文字を入力することができます。              </p>
 
               <p>
-                <strong><code>[Enter]</code></strong>キー、または<strong><code>[Return]</code></strong>キーを押すと文字が描画され、カーソルが次の行に下がります。              </p>
+                <b><code>[Enter]</code></b>キー、または<b><code>[Return]</code></b>キーを押すと文字が描画され、カーソルが次の行に下がります。              </p>
 
               <p>
                 また、<strong><code>[Tab]</code></strong>キーを押すと、文字が描画された後、カーソルは、次の行ではなく、右側に移動します。これは、１行の中で異なったフォント、字体、フォントサイズ、色などを混在させたい場合に便利な方法です。              </p>
@@ -662,7 +675,7 @@
                 </dd>
 
                 <dt>
-                  <strong>On-screen Keyboard</strong>
+                  <strong>画面キーボード</strong>
                 </dt>
 
                 <dd>
@@ -689,6 +702,7 @@
               <p>
                 「ぬる」ツールは、描画の連続した領域を好きな色で塗りつぶします。以下の3 つの塗りつぶしオプションが用意されています：                <ul>
                   <li><strong>たんしょく</strong> &mdash; 領域を一つの色で塗りつぶします。</li>
+                  <li><strong>ふで</strong> &mdash; フリーハンドでドラッグして、領域を一つの色で塗りつぶします。</li>
                   <li><strong>せんけい</strong> &mdash; 領域をクリックしてからドラッグすると、ドラッグした方向に向かって色が薄くなるようにグラデーションをつけて塗りつぶします。</li>
                   <li><strong>ほうしゃ</strong> &mdash; クリックした場所を中心に周りに向かって放射状に色が薄くなるようにグラデーションをつけて塗りつぶします。</li>
                 </ul>
@@ -886,7 +900,7 @@
                       右下にある茶色の「けす」(ゴミ箱) ボタンで、選択した作品を削除します。(本当に削除して良いか確認されます)                    </p>
 
                     <p>
-                      <strong>注:</strong> バージョン 0.9.22 以降では、削除した作品は、デスクトップのゴミ箱に移動します（Linuxのみ）                    </p>
+                      <strong>注:</strong> Linux（バージョン 0.9.22以降）、Windows（バージョン 0.9.27以降）では、削除した作品は、デスクトップのゴミ箱に移動するので、後で元に戻すことができます。                    </p>
                     <br clear="all">
                   </li>
 
@@ -1378,44 +1392,60 @@
     <blockquote>
       このドキュメントの他、"<code>docs</code>" フォルダには、次のようなドキュメントがあります：      <ul>
         <li>
-          <a href="../magic-docs/html/index.html">「まほう」ツールに関するドキュメント ("<code>magic-docs</code>")</a><br>
-          インストールされている、それぞれの「まほう」ツールに関する説明。        </li>
+          Using Tux Paint:          <ul>
+            <li>
+              <a href="OPTIONS.html">OPTIONS.html</a><br>
+              コマンドライン、設定ファイルのオプションに関する詳細な情報。Tux Paint Config を使用したくない人向け。            </li>
+
+            <li>
+              <a href="../magic-docs/html/index.html">「まほう」ツールに関するドキュメント ("<code>magic-docs</code>")</a><br>
+              インストールされている、それぞれの「まほう」ツールに関する説明。            </li>
+          </ul>
+        </li>
 
         <li>
-          <a href="../../AUTHORS.txt">AUTHORS.txt</a><br>
-          作者と協力者のリスト.        </li>
+          How to extend Tux Paint:          <ul>
+            <li>
+              <a href="EXTENDING.html">EXTENDING.html</a><br>
+              ブラシ、はんこ、背景画像の作成方法、フォントを追加する方法、追加のスクリーンキーボードの作成、言語入力の追加など、Tux Paint の拡張についての詳細説明。            </li>
+
+            <li>
+              <a href="PNG.html">PNG.html</a><br>
+              PNG 形式の画像を作成する方法。            </li>
+
+            <li>
+              <a href="SVG.html">SVG.html</a><br>
+              SVG 形式のヴェクタ画像を作成する方法。            </li>
+          </ul>
+        </li>
 
         <li>
-          <a href="../../CHANGES.txt">CHANGES.txt</a><br>
-          リリース毎の変更点の概要.        </li>
+          Technical information:          <ul>
+            <li>
+              <a href="INSTALL.html">INSTALL.html</a><br>
+              コンパイル、インストールの手順.            </li>
+
+            <li>
+              <a href="SIGNALS.html">SIGNALS.html</a><br>
+              Tux Paint が応答する POSIX シグナルに関する情報。            </li>
+          </ul>
+        </li>
 
         <li>
-          <a href="../../COPYING.txt">COPYING.txt</a><br>
-          Tux Paint ソフトウェアのライセンス <em>GNU 一般公衆利用許諾</em> (GPL)        </li>
+          Development history and license:          <ul>
+            <li>
+              <a href="../../AUTHORS.txt">AUTHORS.txt</a><br>
+              作者と協力者のリスト.            </li>
 
-        <li>
-          <a href="INSTALL.html">INSTALL.html</a><br>
-          コンパイル、インストールの手順.        </li>
+            <li>
+              <a href="../../CHANGES.txt">CHANGES.txt</a><br>
+              リリース毎の変更点の概要.            </li>
 
-        <li>
-          <a href="EXTENDING.html">EXTENDING.html</a><br>
-          ブラシ、はんこ、背景画像の作成方法、フォントを追加する方法、追加のスクリーンキーボードの作成、言語入力の追加など、Tux Paint の拡張についての詳細説明。        </li>
-
-        <li>
-          <a href="OPTIONS.html">OPTIONS.html</a><br>
-          コマンドライン、設定ファイルのオプションに関する詳細な情報。Tux Paint Config を使用したくない人向け。        </li>
-
-        <li>
-          <a href="PNG.html">PNG.html</a><br>
-          PNG 形式の画像を作成する方法。        </li>
-
-        <li>
-          <a href="SVG.html">SVG.html</a><br>
-          SVG 形式のヴェクタ画像を作成する方法。        </li>
-
-        <li>
-          <a href="SIGNALS.html">SIGNALS.html</a><br>
-          Tux Paint が応答する POSIX シグナルに関する情報。        </li>
+            <li>
+              <a href="../../COPYING.txt">COPYING.txt</a><br>
+              Tux Paint's software license, the <cite>GNU General Public License</cite> (GPL)            </li>
+          </ul>
+        </li>
       </ul>
     </blockquote>
 
@@ -1433,7 +1463,6 @@
       <ul>
         <li>バグを発見した場合や機能追加の要望については、プロジェクトの バグトラッキングシステムから報告できます</li>
         <li>プロジェクトに関する様々なメーリングリストに参加できます</li>
-        <li>IRCで、開発者や他のユーザーとチャットできます</li>
         <li>開発者へ直接連絡することもできます</li>
       </ul>
 

@@ -6,7 +6,7 @@
   by Bill Kendrick <bill@newbreedsoftware.com>
   Math assistance by Jeff Newmiller <jdnewmil@dcn.davis.ca.us>
 
-  2009.04.02 - 2014.08.14
+  2009.04.02 - 2021.09.20
 
 FIXME:
 * Color/alpha art needs improvement.
@@ -35,6 +35,7 @@ int realrainbow_init(magic_api * api);
 int realrainbow_get_tool_count(magic_api * api);
 SDL_Surface *realrainbow_get_icon(magic_api * api, int which);
 char *realrainbow_get_name(magic_api * api, int which);
+int realrainbow_get_group(magic_api * api, int which);
 char *realrainbow_get_description(magic_api * api, int which, int mode);
 int realrainbow_modes(magic_api * api, int which);
 int realrainbow_requires_colors(magic_api * api, int which);
@@ -98,6 +99,11 @@ char *realrainbow_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
     return (strdup(gettext_noop("Real Rainbow")));
   else
     return (strdup(gettext_noop("ROYGBIV Rainbow")));
+}
+
+int realrainbow_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_ARTISTIC;
 }
 
 char *realrainbow_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,

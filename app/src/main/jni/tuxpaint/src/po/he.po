@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-13 21:06-0700\n"
+"POT-Creation-Date: 2021-11-25 01:12-0800\n"
 "PO-Revision-Date: 2009-05-10 21:45+0200\n"
 "Last-Translator: Jorge Mariano <jmariano@ymail.com>\n"
 "Language-Team: Hebrew <mdk-hebrew@iglu.org.il>\n"
@@ -129,11 +129,11 @@ msgstr "בז'!"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:177
+#: ../dirwalk.c:188
 msgid "qx"
 msgstr "qx"
 
-#: ../dirwalk.c:177
+#: ../dirwalk.c:188
 msgid "QX"
 msgstr "QX"
 
@@ -143,80 +143,92 @@ msgstr "QX"
 #. especially important for users who have scroll buttons disabled.
 #. Translators should do whatever is needed to put crummy fonts last.
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:202
+#: ../dirwalk.c:213
 msgid "oO"
 msgstr "oO"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:205
+#: ../dirwalk.c:216
 msgid ",.?!"
 msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:208
+#: ../dirwalk.c:219
 #, fuzzy
 #| msgid "`\\%_@$~#{}<>^&*"
 msgid "`%_@$~#{<(^&*"
 msgstr "`\\%_@$~#{}<>^&*"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:211
+#: ../dirwalk.c:222
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:214
+#: ../dirwalk.c:225
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:217
+#: ../dirwalk.c:228
 msgid "1Il|"
 msgstr "1Il|"
 
-#: ../dirwalk.c:221
+#: ../dirwalk.c:232
 msgid "<1>spare-1a"
 msgstr ""
 
-#: ../dirwalk.c:222
+#: ../dirwalk.c:233
 msgid "<1>spare-1b"
 msgstr ""
 
-#: ../dirwalk.c:223
+#: ../dirwalk.c:234
 msgid "<9>spare-9a"
 msgstr ""
 
-#: ../dirwalk.c:224
+#: ../dirwalk.c:235
 msgid "<9>spare-9b"
 msgstr ""
 
-#: ../fill_tools.h:49
+#: ../fill_tools.h:50
 msgid "Solid"
 msgstr ""
 
-#: ../fill_tools.h:50
+#: ../fill_tools.h:51
+#, fuzzy
+#| msgid "Brushes"
+msgid "Brush"
+msgstr "מברשות"
+
+#: ../fill_tools.h:52
 #, fuzzy
 #| msgid "Lines"
 msgid "Linear"
 msgstr "קווים"
 
-#: ../fill_tools.h:51
+#: ../fill_tools.h:53
 msgid "Radial"
 msgstr ""
 
-#: ../fill_tools.h:55
+#: ../fill_tools.h:57
 #, fuzzy
 #| msgid "Click in the picture to fill that area with color."
 msgid "Click to fill an area with a solid color."
 msgstr "לחצי בתוך התמונה למילוי האזור בצבע."
 
-#: ../fill_tools.h:56
+#: ../fill_tools.h:58
+#, fuzzy
+#| msgid "Click in the picture to fill that area with color."
+msgid "Click and drag to fill an area by hand, using a brush."
+msgstr "לחצי בתוך התמונה למילוי האזור בצבע."
+
+#: ../fill_tools.h:59
 msgid ""
 "Click and drag to fill an area with a linear gradient (from the chosen color "
 "to transparent)."
 msgstr ""
 
-#: ../fill_tools.h:57
+#: ../fill_tools.h:60
 msgid ""
 "Click to fill an area with a radial gradient (from the chosen color to "
 "transparent)."
@@ -243,141 +255,165 @@ msgid "Good job!"
 msgstr "עבודה טובה!"
 
 #. Input Method: English mode
-#: ../im.c:74
+#: ../im.c:80
 msgid "English"
 msgstr "אנגלית"
 
 #. Input Method: Japanese Romanized Hiragana mode
-#: ../im.c:77
+#: ../im.c:83
 msgid "Hiragana"
 msgstr "הירגנה"
 
 #. Input Method: Japanese Romanized Katakana mode
-#: ../im.c:80
+#: ../im.c:86
 msgid "Katakana"
 msgstr "קטקנה"
 
 #. Input Method: Korean Hangul 2-Bul mode
-#: ../im.c:83
+#: ../im.c:89
 msgid "Hangul"
 msgstr "הנגול"
 
 #. Input Method: Thai mode
-#: ../im.c:86
+#: ../im.c:92
 msgid "Thai"
 msgstr "תאילנדית"
 
 #. Input Method: Traditional Chinese mode
-#: ../im.c:89
+#: ../im.c:95
 msgid "ZH_TW"
 msgstr "ZH_TW"
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:234 ../shapes.h:235
+#: ../shapes.h:238 ../shapes.h:239
 msgid "Square"
 msgstr "ריבוע"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:238 ../shapes.h:239
+#: ../shapes.h:242 ../shapes.h:243
 msgid "Rectangle"
 msgstr "מלבן"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:242 ../shapes.h:243
+#: ../shapes.h:246 ../shapes.h:247
 msgid "Circle"
 msgstr "עיגול"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:246 ../shapes.h:247
+#: ../shapes.h:250 ../shapes.h:251
 msgid "Ellipse"
 msgstr "אליפסה"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:250 ../shapes.h:251
+#: ../shapes.h:254 ../shapes.h:255
 msgid "Triangle"
 msgstr "משולש"
 
 #. Pentagone shape tool (5 sides)
-#: ../shapes.h:254 ../shapes.h:255
+#: ../shapes.h:258 ../shapes.h:259
 msgid "Pentagon"
 msgstr "מחומש"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:258 ../shapes.h:259
+#: ../shapes.h:262 ../shapes.h:263
 msgid "Rhombus"
 msgstr "מעוין"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:262 ../shapes.h:263
+#: ../shapes.h:266 ../shapes.h:267
 msgid "Octagon"
 msgstr "מתומן"
 
 #. Triangle star (3 points star)
 #. Rhombus star (4 points star)
 #. Pentagone star (5 points star)
-#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
-#: ../shapes.h:278 ../shapes.h:281
+#: ../shapes.h:270 ../shapes.h:273 ../shapes.h:276 ../shapes.h:279
+#: ../shapes.h:282 ../shapes.h:285
 msgid "Star"
 msgstr ""
 
 #. Description of a square
-#: ../shapes.h:289 ../shapes.h:290
+#: ../shapes.h:293 ../shapes.h:294
 msgid "A square is a rectangle with four equal sides."
 msgstr "ריבוע הוא מלבן עם ארבע צלעות שוות."
 
 #. Description of a rectangle
-#: ../shapes.h:293 ../shapes.h:294
+#: ../shapes.h:297 ../shapes.h:298
 msgid "A rectangle has four sides and four right angles."
 msgstr "למלבן יש ארבע צלעות וארבע זוויות ישרות."
 
 #. Description of a circle
-#: ../shapes.h:297 ../shapes.h:298
+#: ../shapes.h:301 ../shapes.h:302
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr "עיגול הוא עקומה בה כל הנקודות הן במרחק שווה מהמרכז."
 
 #. Description of an ellipse
-#: ../shapes.h:301 ../shapes.h:302
+#: ../shapes.h:305 ../shapes.h:306
 msgid "An ellipse is a stretched circle."
 msgstr "אליפסה היא עיגול שנמתח."
 
 #. Description of a triangle
-#: ../shapes.h:305 ../shapes.h:306
+#: ../shapes.h:309 ../shapes.h:310
 msgid "A triangle has three sides."
 msgstr "למשולש יש שלוש צלעות."
 
 #. Description of a pentagon
-#: ../shapes.h:309 ../shapes.h:310
+#: ../shapes.h:313 ../shapes.h:314
 msgid "A pentagon has five sides."
 msgstr "למחומש יש חמש צלעות."
 
 #. Description of a rhombus
-#: ../shapes.h:313 ../shapes.h:314
+#: ../shapes.h:317 ../shapes.h:318
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr "למעוין יש ארבע צלעות שוות, וצלעות מנוגדות הן מקבילות."
 
 #. Description of an octagon
-#: ../shapes.h:317 ../shapes.h:318
+#: ../shapes.h:321 ../shapes.h:322
 msgid "An octagon has eight equal sides."
 msgstr "למתומן יש שמונה צלעות."
 
-#: ../shapes.h:320 ../shapes.h:321
+#: ../shapes.h:324 ../shapes.h:325
 msgid "A star with 3 points."
 msgstr ""
 
-#: ../shapes.h:322 ../shapes.h:323
+#: ../shapes.h:326 ../shapes.h:327
 msgid "A star with 4 points."
 msgstr ""
 
-#: ../shapes.h:324 ../shapes.h:325
+#: ../shapes.h:328 ../shapes.h:329
 msgid "A star with 5 points."
 msgstr ""
 
-#: ../shapes.h:372
+#: ../shapes.h:385
+#, fuzzy
+#| msgid ""
+#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
+#| "size you want. Move around to rotate it, and click to draw it."
+msgid ""
+"Pick a shape. Click to start drawing, drag, and let go when it is the size "
+"and shape you want. Move around to rotate it, and click again to draw it."
+msgstr ""
+"בחרי צורה. לחצי לבחירת המרכז, גררי, ואז עזבי אותה כשהיא בגודל הרצוי לך. "
+"הזיזי את העכבר כדי לסובב אותה, ואז לחצי כדי לצייר אותה."
+
+#: ../shapes.h:386
+#, fuzzy
+#| msgid ""
+#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
+#| "size you want. Move around to rotate it, and click to draw it."
+msgid ""
+"Pick a shape. Click to start drawing, drag, and let go when it is the size "
+"and shape you want."
+msgstr ""
+"בחרי צורה. לחצי לבחירת המרכז, גררי, ואז עזבי אותה כשהיא בגודל הרצוי לך. "
+"הזיזי את העכבר כדי לסובב אותה, ואז לחצי כדי לצייר אותה."
+
+#: ../shapes.h:392
 msgid "Draw shapes from the center."
 msgstr ""
 
-#: ../shapes.h:373
+#: ../shapes.h:393
 msgid "Draw shapes from a corner."
 msgstr ""
 
@@ -483,7 +519,7 @@ msgstr "חדש"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:8179
+#: ../tools.h:98 ../tuxpaint.c:8438
 msgid "Open"
 msgstr "פתיחה"
 
@@ -517,19 +553,7 @@ msgstr "בחרי חותמת להטביע בציור."
 msgid "Click to start drawing a line. Let go to complete it."
 msgstr "לחצי כדי להתחיל לצייר קו. שחררי כדי להשלים אותו."
 
-#: ../tools.h:125
-#, fuzzy
-#| msgid ""
-#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
-#| "size you want. Move around to rotate it, and click to draw it."
-msgid ""
-"Pick a shape. Click to start drawing, drag, and let go when it is the size "
-"you want. Move around to rotate it, and click to draw it."
-msgstr ""
-"בחרי צורה. לחצי לבחירת המרכז, גררי, ואז עזבי אותה כשהיא בגודל הרצוי לך. "
-"הזיזי את העכבר כדי לסובב אותה, ואז לחצי כדי לצייר אותה."
-
-#: ../tools.h:129
+#: ../tools.h:128
 #, fuzzy
 #| msgid ""
 #| "Choose a style of text. Click on your drawing and you can start typing."
@@ -538,7 +562,7 @@ msgid ""
 "Press [Enter] or [Tab] to complete the text."
 msgstr "בחרי סגנון טקסט.  לחצי על הציור, ואת יכולה להתחיל לכתוב."
 
-#: ../tools.h:133
+#: ../tools.h:132
 #, fuzzy
 #| msgid ""
 #| "Choose a style of text. Click on your drawing and you can start typing."
@@ -549,59 +573,62 @@ msgid ""
 "style."
 msgstr "בחרי סגנון טקסט.  לחצי על הציור, ואת יכולה להתחיל לכתוב."
 
-#. Fill tool instructions
-#: ../tools.h:136
-msgid "Click in the picture to fill that area with color."
-msgstr "לחצי בתוך התמונה למילוי האזור בצבע."
-
 #. Magic tool instruction
-#: ../tools.h:139
+#: ../tools.h:138
 msgid "Pick a magical effect to use on your drawing!"
 msgstr "בחרי אפקט קסום להפעיל על הציור!"
 
 #. Response to 'undo' action
-#: ../tools.h:142
+#: ../tools.h:141
 msgid "Undo!"
 msgstr "ביטול!"
 
 #. Response to 'redo' action
-#: ../tools.h:145
+#: ../tools.h:144
 msgid "Redo!"
 msgstr "שיחזור!"
 
 #. Eraser tool
-#: ../tools.h:148
+#: ../tools.h:147
 msgid "Eraser!"
 msgstr "מחק!"
 
 #. Response to 'start a new image' action
-#: ../tools.h:151
+#: ../tools.h:150
 msgid "Pick a color or picture with which to start a new drawing."
 msgstr "בחרי צבע או תמונה להתחיל איתם ציור חדש."
 
 #. Response to 'open' action (while file dialog is being constructed)
-#: ../tools.h:154
+#: ../tools.h:153
 msgid "Open…"
 msgstr "פתיחה..."
 
 #. Response to 'save' action
-#: ../tools.h:157
+#: ../tools.h:156
 msgid "Your image has been saved!"
 msgstr "התמונה שלך נשמרה!"
 
 #. Response to 'print' action (while printing, or print dialog is being used)
-#: ../tools.h:160
+#: ../tools.h:159
 msgid "Printing…"
 msgstr "מדפיס..."
 
 #. Response to 'quit' (exit) action
-#: ../tools.h:163
+#: ../tools.h:162
 msgid "Bye bye!"
 msgstr "להתראות!"
 
 #. Instruction while using Line tool (after click, before release)
-#: ../tools.h:167
+#: ../tools.h:166
 msgid "Let go of the button to complete the line."
+msgstr "שחררי את לחצן העכבר להשלמת את הקו."
+
+#: ../tools.h:167
+#, fuzzy, c-format
+#| msgid "Let go of the button to complete the line."
+msgid ""
+"Let go of the button to complete the line. (Your line's angle is %.0f "
+"degrees.)"
 msgstr "שחררי את לחצן העכבר להשלמת את הקו."
 
 #. Instruction while using Shape tool (after first click, before release)
@@ -614,233 +641,241 @@ msgstr "החזיקי את לחצן העכבר כדי למתוח את התמונ�
 msgid "Move the mouse to rotate the shape. Click to draw it."
 msgstr "הזיזי את העכבר לסיבוב הצורה. לחצי כדי לצייר אותה."
 
+#: ../tools.h:174
+#, fuzzy, c-format
+#| msgid "Move the mouse to rotate the shape. Click to draw it."
+msgid ""
+"Move the mouse to rotate the shape. Click to draw it. (It is rotated %d "
+"degrees.)"
+msgstr "הזיזי את העכבר לסיבוב הצורה. לחצי כדי לצייר אותה."
+
 #. Notification that 'New' action was aborted (current image would have been lost)
-#: ../tools.h:176
+#: ../tools.h:177
 msgid "OK then… Let’s keep drawing this one!"
 msgstr "בסדר... נמשיך לצייר את התמונה הזאת!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2190
+#: ../tuxpaint.c:2234
 msgid "Do you really want to quit?"
 msgstr "האם ברצונך לצאת?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2193
+#: ../tuxpaint.c:2237
 msgid "Yes, I’m done!"
 msgstr "כן, אני סיימתי!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2196 ../tuxpaint.c:2223
+#: ../tuxpaint.c:2240 ../tuxpaint.c:2267
 msgid "No, take me back!"
 msgstr "לא, תחזיר אותי!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2200
+#: ../tuxpaint.c:2244
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "יציאה ללא שמירה תגרום לאיבוד הציור שלך! האם לשמור אותו?"
 
-#: ../tuxpaint.c:2201 ../tuxpaint.c:2206
+#: ../tuxpaint.c:2245 ../tuxpaint.c:2250
 msgid "Yes, save it!"
 msgstr "כן, שמור אותו!"
 
-#: ../tuxpaint.c:2202 ../tuxpaint.c:2207
+#: ../tuxpaint.c:2246 ../tuxpaint.c:2251
 msgid "No, don’t bother saving!"
 msgstr "לא, אל תטרח לשמור!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2205
+#: ../tuxpaint.c:2249
 msgid "Save your picture first?"
 msgstr "האם קודם לשמור את התמונה שלך?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2210
+#: ../tuxpaint.c:2254
 msgid "Can’t open that picture!"
 msgstr "לא ניתן לפתוח תמונה זו!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2213 ../tuxpaint.c:2218 ../tuxpaint.c:2227 ../tuxpaint.c:2234
-#: ../tuxpaint.c:2243 ../tuxpaint.c:2248
+#: ../tuxpaint.c:2257 ../tuxpaint.c:2262 ../tuxpaint.c:2271 ../tuxpaint.c:2278
+#: ../tuxpaint.c:2287 ../tuxpaint.c:2292
 msgid "OK"
 msgstr "בסדר"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2217
+#: ../tuxpaint.c:2261
 msgid "There are no saved files!"
 msgstr "אין קבצים שמורים!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2221
+#: ../tuxpaint.c:2265
 msgid "Print your picture now?"
 msgstr "האם להדפיס את הציור עכשיו?"
 
-#: ../tuxpaint.c:2222
+#: ../tuxpaint.c:2266
 msgid "Yes, print it!"
 msgstr "כן, הדפס אותו!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2226
+#: ../tuxpaint.c:2270
 msgid "Your picture has been printed!"
 msgstr "הציור שלך הודפס!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2230
+#: ../tuxpaint.c:2274
 msgid "Sorry! Your picture could not be printed!"
 msgstr "הציור שלך לא הודפס!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2233
+#: ../tuxpaint.c:2277
 msgid "You can’t print yet!"
 msgstr "עדיין אין באפשרותך להדפיס!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2237
+#: ../tuxpaint.c:2281
 msgid "Erase this picture?"
 msgstr "למחוק ציור זה?"
 
-#: ../tuxpaint.c:2238
+#: ../tuxpaint.c:2282
 msgid "Yes, erase it!"
 msgstr "כן, מחק אותו!"
 
-#: ../tuxpaint.c:2239
+#: ../tuxpaint.c:2283
 msgid "No, don’t erase it!"
 msgstr "לא, אל תמחק אותו!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2242
+#: ../tuxpaint.c:2286
 msgid "Remember to use the left mouse button!"
 msgstr "זכרי להשתמש בכפתור השמאלי של העכבר!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2246
+#: ../tuxpaint.c:2290
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "הציור שלך הודפס!"
 
-#: ../tuxpaint.c:2247
+#: ../tuxpaint.c:2291
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "הציור שלך הודפס!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2251
+#: ../tuxpaint.c:2295
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "הציור שלך לא הודפס!"
 
-#: ../tuxpaint.c:2252
+#: ../tuxpaint.c:2296
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "הציור שלך לא הודפס!"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2256
+#: ../tuxpaint.c:2300
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "בחרי תמונה, ואז לחצי \"הצג\"."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2465
+#: ../tuxpaint.c:2512
 msgid "Sound muted."
 msgstr "קול מושתק."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2470
+#: ../tuxpaint.c:2517
 msgid "Sound unmuted."
 msgstr "קול לא מושתק."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3247
+#: ../tuxpaint.c:3296
 msgid "Please wait…"
 msgstr "אנא חכה..."
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:8182
+#: ../tuxpaint.c:8441
 msgid "Erase"
 msgstr "מחק"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:8185
+#: ../tuxpaint.c:8444
 msgid "Slides"
 msgstr "שקופיות"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:8188
+#: ../tuxpaint.c:8447
 msgid "Export"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:8191
+#: ../tuxpaint.c:8450
 msgid "Back"
 msgstr "חזרה"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:8194
+#: ../tuxpaint.c:8453
 msgid "Play"
 msgstr "הצג"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:8197
+#: ../tuxpaint.c:8456
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:8200
+#: ../tuxpaint.c:8459
 msgid "Next"
 msgstr "הבא"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8948
+#: ../tuxpaint.c:9267
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12589
+#: ../tuxpaint.c:12927
 msgid "Yes"
 msgstr "כן"
 
-#: ../tuxpaint.c:12593
+#: ../tuxpaint.c:12931
 msgid "No"
 msgstr "לא"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:13732
+#: ../tuxpaint.c:14077
 msgid "Replace the picture with your changes?"
 msgstr "החלף תמונה עם השינויים שעשית?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:13736
+#: ../tuxpaint.c:14081
 msgid "Yes, replace the old one!"
 msgstr "כן, החלף את הישנה!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:13740
+#: ../tuxpaint.c:14085
 msgid "No, save a new file!"
 msgstr "לא, שמור בקובץ חדש!"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:15003
+#: ../tuxpaint.c:15349
 msgid "Choose the picture you want, then click “Open”."
 msgstr "בחרי תמונה, ואז לחצי \"פתיחה\"."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:16429
+#: ../tuxpaint.c:16775
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
-#: ../tuxpaint.c:24135
+#: ../tuxpaint.c:24552
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:24147
+#: ../tuxpaint.c:24564
 msgid "Pick a color."
 msgstr "בחרי צבע."
 
@@ -860,49 +895,55 @@ msgstr "תוכנת ציור לילדים."
 msgid "Color Shift"
 msgstr "הזזה"
 
-#: ../../magic/src/alien.c:72
+#: ../../magic/src/alien.c:76
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to change the colors in parts of your picture."
 msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr "לחצי והזיזי את העכבר לשינוי הצבע של חלקים מהתמונה."
 
-#: ../../magic/src/alien.c:73
+#: ../../magic/src/alien.c:77
 msgid "Click to change the colors in your entire picture."
 msgstr "לחצי לשינוי הצבע של כל התמונה."
 
-#: ../../magic/src/blind.c:115
+#: ../../magic/src/blind.c:116
 #, fuzzy
 #| msgid "Alien"
 msgid "Blind"
 msgstr "חיזר"
 
-#: ../../magic/src/blind.c:122
+#: ../../magic/src/blind.c:128
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
 msgstr ""
 
-#: ../../magic/src/blocks_chalk_drip.c:129
+#: ../../magic/src/blocks_chalk_drip.c:132
 msgid "Blocks"
 msgstr "בלוקים"
 
-#: ../../magic/src/blocks_chalk_drip.c:131
+#: ../../magic/src/blocks_chalk_drip.c:134
 msgid "Chalk"
 msgstr "גיר"
 
-#: ../../magic/src/blocks_chalk_drip.c:133
+#: ../../magic/src/blocks_chalk_drip.c:136
 msgid "Drip"
 msgstr "טפטוף"
 
 # 'Blocky' is very difficult to translate to Hebrew.
-#: ../../magic/src/blocks_chalk_drip.c:142
+#: ../../magic/src/blocks_chalk_drip.c:154
 #, fuzzy
 #| msgid "Click and move the mouse around to make the picture blocky."
 msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "לחצי והזיזי את העכבר לאפקט בלוקים."
 
-#: ../../magic/src/blocks_chalk_drip.c:144
+#: ../../magic/src/blocks_chalk_drip.c:158
+#, fuzzy
+#| msgid "Click to sharpen the entire picture."
+msgid "Click to make the entire picture blocky."
+msgstr "לחצי לחידוד התמונה כולה."
+
+#: ../../magic/src/blocks_chalk_drip.c:165
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn the picture into a chalk drawing."
@@ -910,240 +951,260 @@ msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr "לחצי והזיזי את העכבר להפיכת התמונה לציור גיר."
 
-#: ../../magic/src/blocks_chalk_drip.c:146
+#: ../../magic/src/blocks_chalk_drip.c:169
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
+msgid "Click to turn the entire picture into a chalk drawing."
+msgstr "לחצי והזיזי את העכבר להפיכת התמונה לציור גיר."
+
+#: ../../magic/src/blocks_chalk_drip.c:174
 #, fuzzy
 #| msgid "Click and move the mouse around to make the picture drip."
 msgid "Click and drag the mouse around to make the picture drip."
 msgstr "לחצי והזיזי את העכבר כדי לגרום לתמונה לטפטף."
 
-#: ../../magic/src/blur.c:80
+#: ../../magic/src/blur.c:81
 msgid "Blur"
 msgstr "טשטוש"
 
-#: ../../magic/src/blur.c:84
+#: ../../magic/src/blur.c:89
 #, fuzzy
 #| msgid "Click and move the mouse around to blur the image."
 msgid "Click and drag the mouse around to blur the image."
 msgstr "לחצי והזיזי את העכבר מסביב כדי לטשטש את התמונה."
 
-#: ../../magic/src/blur.c:85
+#: ../../magic/src/blur.c:90
 msgid "Click to blur the entire image."
 msgstr "לחצי לטשטוש כל התמונה."
 
 # There is little distinction between 'block' and 'brick' in Hebrew.
 #. Both are named "Bricks", at the moment:
-#: ../../magic/src/bricks.c:120
+#: ../../magic/src/bricks.c:121
 msgid "Bricks"
 msgstr "לבנים"
 
-#: ../../magic/src/bricks.c:127
+#: ../../magic/src/bricks.c:134
 #, fuzzy
 #| msgid "Click and move to draw large bricks."
 msgid "Click and drag to draw large bricks."
 msgstr "לחצי והזיזי את העכבר לציור לבנים גדולות."
 
-#: ../../magic/src/bricks.c:129
+#: ../../magic/src/bricks.c:136
 #, fuzzy
 #| msgid "Click and move to draw small bricks."
 msgid "Click and drag to draw small bricks."
 msgstr "לחצי והזיזי את העכבר כדי לצייר לבנים קטנות."
 
-#: ../../magic/src/calligraphy.c:124
+#: ../../magic/src/calligraphy.c:125
 msgid "Calligraphy"
 msgstr "קליגרפיה"
 
-#: ../../magic/src/calligraphy.c:131
+#: ../../magic/src/calligraphy.c:138
 #, fuzzy
 #| msgid "Click and move the mouse around to draw in calligraphy."
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "לחצי והזיזי את העכבר לציור בקליגרפיה."
 
-#: ../../magic/src/cartoon.c:103
+#: ../../magic/src/cartoon.c:107
 msgid "Cartoon"
 msgstr "סרט מצוייר"
 
-#: ../../magic/src/cartoon.c:109
+#: ../../magic/src/cartoon.c:121
 #, fuzzy
 #| msgid "Click and move the mouse around to turn the picture into a cartoon."
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr "לחצי והזיזי את העכבר כדי להפוך את התמונה לסרט מצויר."
 
-#: ../../magic/src/checkerboard.c:99
+#: ../../magic/src/cartoon.c:125
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
+msgid "Click to turn the entire picture into a cartoon."
+msgstr "לחצי והזיזי את העכבר להפיכת התמונה לציור גיר."
+
+#: ../../magic/src/checkerboard.c:100
 msgid "Checkerboard"
 msgstr ""
 
-#: ../../magic/src/checkerboard.c:106
+#: ../../magic/src/checkerboard.c:112
 #, fuzzy
 #| msgid "Click and drag to draw string art aligned to the edges."
 msgid "Click and drag to fill the canvas with a checkerboard pattern."
 msgstr "לחצי וגררי לציור מסילת רכבת על התמונה."
 
-#: ../../magic/src/clone.c:132
+#: ../../magic/src/clone.c:133
 msgid "Clone"
 msgstr ""
 
-#: ../../magic/src/clone.c:138
+#: ../../magic/src/clone.c:145
 msgid ""
 "Click once to pick a spot to begin cloning. Click again and drag to clone "
 "that part of the picture."
 msgstr ""
 
-#: ../../magic/src/confetti.c:83
+#: ../../magic/src/confetti.c:86
 msgid "Confetti"
 msgstr "קונפטי"
 
-#: ../../magic/src/confetti.c:88
+#: ../../magic/src/confetti.c:96
 msgid "Click to throw confetti!"
 msgstr "לחצי לזריקת קונפטי!"
 
-#: ../../magic/src/distortion.c:134
+#: ../../magic/src/distortion.c:135
 msgid "Distortion"
 msgstr "עיוות"
 
-#: ../../magic/src/distortion.c:143
+#: ../../magic/src/distortion.c:152
 msgid "Click and drag the mouse to cause distortion in your picture."
 msgstr "לחצי וגררי עם העכבר לעיוות התמונה."
 
-#: ../../magic/src/emboss.c:101
+#: ../../magic/src/emboss.c:102
 msgid "Emboss"
 msgstr "תבליט"
 
-#: ../../magic/src/emboss.c:107
+#: ../../magic/src/emboss.c:114
 msgid "Click and drag the mouse to emboss the picture."
 msgstr "לחצי וגררי את העכבר ליצירת תבליט."
 
-#: ../../magic/src/fade_darken.c:114
+#: ../../magic/src/fade_darken.c:115
 msgid "Lighten"
 msgstr "מבהיר"
 
-#: ../../magic/src/fade_darken.c:116
+#: ../../magic/src/fade_darken.c:117
 msgid "Darken"
 msgstr "מכהה"
 
-#: ../../magic/src/fade_darken.c:127
+#: ../../magic/src/fade_darken.c:134
 #, fuzzy
 #| msgid "Click and move the mouse to lighten parts of your picture."
 msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "לחצי והזיזי את העכבר להבהרת חלקים מהתמונה."
 
-#: ../../magic/src/fade_darken.c:129
+#: ../../magic/src/fade_darken.c:136
 msgid "Click to lighten your entire picture."
 msgstr "לחצי להבהרת כל התמונה."
 
-#: ../../magic/src/fade_darken.c:134
+#: ../../magic/src/fade_darken.c:141
 #, fuzzy
 #| msgid "Click and move the mouse to darken parts of your picture."
 msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "לחצי והזיזי את העכבר להאפלת חלקים בתמונה."
 
-#: ../../magic/src/fade_darken.c:136
+#: ../../magic/src/fade_darken.c:143
 msgid "Click to darken your entire picture."
 msgstr "לחצי להאפלת כל התמונה."
 
-#: ../../magic/src/fisheye.c:101
+#: ../../magic/src/fisheye.c:102
 msgid "Fisheye"
 msgstr "עין הדג"
 
-#: ../../magic/src/fisheye.c:106
+#: ../../magic/src/fisheye.c:112
 msgid "Click on part of your picture to create a fisheye effect."
 msgstr "לחצי וגררי להזזת התמונה על בד הציור."
 
-#: ../../magic/src/flower.c:144
+#: ../../magic/src/flower.c:146
 msgid "Flower"
 msgstr "פרח"
 
-#: ../../magic/src/flower.c:150
+#: ../../magic/src/flower.c:158
 msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
 msgstr "לחצי וגררי כדי לצייר פרח. הפסיקי ללחוץ לסיום."
 
-#: ../../magic/src/foam.c:114
+#: ../../magic/src/foam.c:115
 msgid "Foam"
 msgstr "קצף"
 
-#: ../../magic/src/foam.c:120
+#: ../../magic/src/foam.c:127
 msgid "Click and drag the mouse to cover an area with foamy bubbles."
 msgstr "לחצי וגררי את העכבר לכיסוי אזור בבועות קצף."
 
-#: ../../magic/src/fold.c:103
+#: ../../magic/src/fold.c:104
 msgid "Fold"
 msgstr "כפל"
 
-#: ../../magic/src/fold.c:108
+#: ../../magic/src/fold.c:114
 msgid ""
 "Choose a background color and click to turn the corner of the page over."
 msgstr "בחרי צבע רקע ולחצי כדי להפוך את פינת העמוד."
 
-#: ../../magic/src/fretwork.c:176
+#: ../../magic/src/fretwork.c:182
 msgid "Fretwork"
 msgstr ""
 
-#: ../../magic/src/fretwork.c:182
+#: ../../magic/src/fretwork.c:188
 #, fuzzy
 #| msgid "Click and drag to draw string art aligned to the edges."
-msgid "Click and drag to draw repetitive patterns. "
+msgid "Click and drag to draw repetitive patterns."
 msgstr "לחצי וגררי לציור מסילת רכבת על התמונה."
 
-#: ../../magic/src/fretwork.c:184
+#: ../../magic/src/fretwork.c:190
 #, fuzzy
 #| msgid "Click to cover your picture with rain drops."
 msgid "Click to surround your picture with repetitive patterns."
 msgstr "לחצי לכיסוי התמונה בטיפות גשם."
 
-#: ../../magic/src/glasstile.c:104
+#: ../../magic/src/glasstile.c:105
 msgid "Glass Tile"
 msgstr "ריצוף זכוכית"
 
-#: ../../magic/src/glasstile.c:111
+#: ../../magic/src/glasstile.c:118
 msgid "Click and drag the mouse to put glass tile over your picture."
 msgstr "לחצי וגררי את העכבר לריצוף באריחי זכוכית על התמונה."
 
-#: ../../magic/src/glasstile.c:113
+#: ../../magic/src/glasstile.c:120
 msgid "Click to cover your entire picture in glass tiles."
 msgstr "לחצי לכיסוי כל התמונה באריחי זכוכית."
 
-#: ../../magic/src/grass.c:107
+#: ../../magic/src/grass.c:108
 msgid "Grass"
 msgstr "דשא"
 
 # Not sure it word used for 'dirt' is good.
-#: ../../magic/src/grass.c:113
+#: ../../magic/src/grass.c:120
 #, fuzzy
 #| msgid "Click and move to draw grass. Don’t forget the dirt!"
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "לחצי והזיזי את העכבר לציור דשא. לא לשכוח את העפר!"
 
-#: ../../magic/src/halftone.c:35
+#: ../../magic/src/halftone.c:41
 msgid "Halftone"
 msgstr ""
 
-#: ../../magic/src/halftone.c:39
+#: ../../magic/src/halftone.c:50
 #, fuzzy
 #| msgid "Click to turn your painting into its negative."
 msgid "Click and drag to turn your drawing into a newspaper."
 msgstr "לחצי להפיכת התמונה לתשליל שלה."
 
-#: ../../magic/src/kalidescope.c:119
+#: ../../magic/src/halftone.c:51
+#, fuzzy
+#| msgid "Click to turn your painting into its negative."
+msgid "Click to turn your drawing into a newspaper."
+msgstr "לחצי להפיכת התמונה לתשליל שלה."
+
+#: ../../magic/src/kalidescope.c:120
 msgid "Symmetric Left/Right"
 msgstr ""
 
-#: ../../magic/src/kalidescope.c:123
+#: ../../magic/src/kalidescope.c:124
 msgid "Symmetric Up/Down"
 msgstr ""
 
-#: ../../magic/src/kalidescope.c:127
+#: ../../magic/src/kalidescope.c:128
 msgid "Pattern"
 msgstr ""
 
-#: ../../magic/src/kalidescope.c:131
+#: ../../magic/src/kalidescope.c:132
 msgid "Tiles"
 msgstr ""
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:135
+#: ../../magic/src/kalidescope.c:136
 msgid "Kaleidoscope"
 msgstr "קליידוסקופ"
 
-#: ../../magic/src/kalidescope.c:146
+#: ../../magic/src/kalidescope.c:154
 #, fuzzy
 #| msgid ""
 #| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
@@ -1152,7 +1213,7 @@ msgid ""
 "the left and right of your picture."
 msgstr "לחצי וגררי את העכבר לציור במברשות סימטריות (קליידוסקופ)."
 
-#: ../../magic/src/kalidescope.c:152
+#: ../../magic/src/kalidescope.c:160
 #, fuzzy
 #| msgid ""
 #| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
@@ -1161,13 +1222,13 @@ msgid ""
 "the top and bottom of your picture."
 msgstr "לחצי וגררי את העכבר לציור במברשות סימטריות (קליידוסקופ)."
 
-#: ../../magic/src/kalidescope.c:156
+#: ../../magic/src/kalidescope.c:164
 #, fuzzy
 #| msgid "Click and drag the mouse to emboss the picture."
 msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr "לחצי וגררי את העכבר ליצירת תבליט."
 
-#: ../../magic/src/kalidescope.c:160
+#: ../../magic/src/kalidescope.c:168
 #, fuzzy
 #| msgid ""
 #| "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
@@ -1177,48 +1238,60 @@ msgid ""
 msgstr "לחצי וגררי את העכבר לציור במברשות סימטריות (קליידוסקופ)."
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:164
+#: ../../magic/src/kalidescope.c:172
 msgid ""
 "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgstr "לחצי וגררי את העכבר לציור במברשות סימטריות (קליידוסקופ)."
 
-#: ../../magic/src/light.c:103
+#: ../../magic/src/light.c:104
 msgid "Light"
 msgstr "בהיר"
 
-#: ../../magic/src/light.c:109
+#: ../../magic/src/light.c:116
 msgid "Click and drag to draw a beam of light on your picture."
 msgstr "לחצי וגררי לציור קרן אור על התמונה."
 
-#: ../../magic/src/metalpaint.c:98
+#: ../../magic/src/lightning.c:78
+#, fuzzy
+#| msgid "Lighten"
+msgid "Lightning"
+msgstr "מבהיר"
+
+#: ../../magic/src/lightning.c:88
+#, fuzzy
+#| msgid "Click and drag to draw a beam of light on your picture."
+msgid "Click, drag, and release to draw a lightning bolt between two points."
+msgstr "לחצי וגררי לציור קרן אור על התמונה."
+
+#: ../../magic/src/metalpaint.c:99
 msgid "Metal Paint"
 msgstr "צבע מתכתי"
 
-#: ../../magic/src/metalpaint.c:105
+#: ../../magic/src/metalpaint.c:112
 msgid "Click and drag the mouse to paint with a metallic color."
 msgstr "לחצי וגררי את העכבר לציור בצבעים מתכתיים."
 
-#: ../../magic/src/mirror_flip.c:110
+#: ../../magic/src/mirror_flip.c:111
 msgid "Mirror"
 msgstr "מראה"
 
-#: ../../magic/src/mirror_flip.c:112
+#: ../../magic/src/mirror_flip.c:113
 msgid "Flip"
 msgstr "היפוך"
 
-#: ../../magic/src/mirror_flip.c:121
+#: ../../magic/src/mirror_flip.c:128
 msgid "Click to make a mirror image."
 msgstr "לחצי ליצירת תמונת מראה."
 
-#: ../../magic/src/mirror_flip.c:123
+#: ../../magic/src/mirror_flip.c:130
 msgid "Click to flip the picture upside-down."
 msgstr "לחצי כדי להפוך את התמונה מלמעלה למטה."
 
-#: ../../magic/src/mosaic.c:96
+#: ../../magic/src/mosaic.c:97
 msgid "Mosaic"
 msgstr "פסיפס"
 
-#: ../../magic/src/mosaic.c:100
+#: ../../magic/src/mosaic.c:105
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
@@ -1226,27 +1299,27 @@ msgid ""
 "Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr "לחצי והזיזי את העכבר להוספת מראה פסיפס לתמונה."
 
-#: ../../magic/src/mosaic.c:101
+#: ../../magic/src/mosaic.c:106
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "לחצי להוספת מראה פסיפס לכל התמונה."
 
-#: ../../magic/src/mosaic_shaped.c:132
+#: ../../magic/src/mosaic_shaped.c:133
 #, fuzzy
 #| msgid "Square"
 msgid "Square Mosaic"
 msgstr "ריבוע"
 
-#: ../../magic/src/mosaic_shaped.c:133
+#: ../../magic/src/mosaic_shaped.c:134
 #, fuzzy
 #| msgid "Mosaic"
 msgid "Hexagon Mosaic"
 msgstr "פסיפס"
 
-#: ../../magic/src/mosaic_shaped.c:134
+#: ../../magic/src/mosaic_shaped.c:135
 msgid "Irregular Mosaic"
 msgstr ""
 
-#: ../../magic/src/mosaic_shaped.c:140
+#: ../../magic/src/mosaic_shaped.c:141
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
@@ -1254,13 +1327,13 @@ msgid ""
 "Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr "לחצי והזיזי את העכבר להוספת מראה פסיפס לתמונה."
 
-#: ../../magic/src/mosaic_shaped.c:141
+#: ../../magic/src/mosaic_shaped.c:142
 #, fuzzy
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "לחצי להוספת מראה פסיפס לכל התמונה."
 
-#: ../../magic/src/mosaic_shaped.c:145
+#: ../../magic/src/mosaic_shaped.c:146
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
@@ -1268,13 +1341,13 @@ msgid ""
 "Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr "לחצי והזיזי את העכבר להוספת מראה פסיפס לתמונה."
 
-#: ../../magic/src/mosaic_shaped.c:146
+#: ../../magic/src/mosaic_shaped.c:147
 #, fuzzy
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "לחצי להוספת מראה פסיפס לכל התמונה."
 
-#: ../../magic/src/mosaic_shaped.c:150
+#: ../../magic/src/mosaic_shaped.c:151
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
@@ -1282,98 +1355,133 @@ msgid ""
 "Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr "לחצי והזיזי את העכבר להוספת מראה פסיפס לתמונה."
 
-#: ../../magic/src/mosaic_shaped.c:151
+#: ../../magic/src/mosaic_shaped.c:152
 #, fuzzy
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "לחצי להוספת מראה פסיפס לכל התמונה."
 
-#: ../../magic/src/negative.c:94
+#: ../../magic/src/negative.c:73
 msgid "Negative"
 msgstr "תשליל"
 
-#: ../../magic/src/negative.c:101
+#: ../../magic/src/negative.c:74
+msgid "Opposite"
+msgstr ""
+
+#: ../../magic/src/negative.c:79
 #, fuzzy
 #| msgid "Click and move the mouse around to make your painting negative."
 msgid "Click and drag the mouse around to make your painting negative."
 msgstr "לחצי והזיזי את העכבר לציור תשליל."
 
-#: ../../magic/src/negative.c:103
+#: ../../magic/src/negative.c:80
 msgid "Click to turn your painting into its negative."
 msgstr "לחצי להפיכת התמונה לתשליל שלה."
+
+#: ../../magic/src/negative.c:83
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to change the color of parts of your "
+#| "picture."
+msgid ""
+"Click and drag the mouse around to change colors to their opposites -- their "
+"complementary colors."
+msgstr "לחצי והזיזי את העכבר לשינוי הצבע של חלקים מהתמונה."
+
+#: ../../magic/src/negative.c:84
+msgid ""
+"Click to turn all colors in your painting into their opposites -- their "
+"complementary colors."
+msgstr ""
 
 #: ../../magic/src/noise.c:66
 msgid "Noise"
 msgstr "רעש"
 
-#: ../../magic/src/noise.c:70
+#: ../../magic/src/noise.c:74
 #, fuzzy
 #| msgid "Click and move the mouse to add noise to parts of your picture."
 msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr "לחצי והזיזי את העכבר להאפלת חלקים בתמונה."
 
-#: ../../magic/src/noise.c:71
+#: ../../magic/src/noise.c:75
 msgid "Click to add noise to your entire picture."
 msgstr "לחצי להאפלת כל התמונה."
 
-#: ../../magic/src/perspective.c:147
+#: ../../magic/src/perspective.c:151
 msgid "Perspective"
 msgstr ""
 
-#: ../../magic/src/perspective.c:148
-msgid "Zoom"
+#: ../../magic/src/perspective.c:152
+msgid "Panels"
 msgstr ""
 
 #: ../../magic/src/perspective.c:153
+msgid "Zoom"
+msgstr ""
+
+#: ../../magic/src/perspective.c:157
 #, fuzzy
 #| msgid "Click and drag the mouse to emboss the picture."
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "לחצי וגררי את העכבר ליצירת תבליט."
 
-#: ../../magic/src/perspective.c:156
+#: ../../magic/src/perspective.c:159
+#, fuzzy
+#| msgid "Click to turn your painting into its negative."
+msgid "Click to turn your picture into 2-by-2 panels."
+msgstr "לחצי להפיכת התמונה לתשליל שלה."
+
+#: ../../magic/src/perspective.c:161
 #, fuzzy
 #| msgid "Click and drag to squirt toothpaste onto your picture."
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgstr "לחצי וגררי להזזת התמונה על בד הציור."
 
-#. Both are named "Pixels", at the moment:
-#: ../../magic/src/pixels.c:108
+#: ../../magic/src/pixels.c:107
 msgid "Pixels"
 msgstr ""
 
-#: ../../magic/src/pixels.c:114
+#: ../../magic/src/pixels.c:119
 #, fuzzy
 #| msgid "Click and move to draw large bricks."
 msgid "Click and drag to draw large pixels."
 msgstr "לחצי והזיזי את העכבר לציור לבנים גדולות."
 
-#: ../../magic/src/puzzle.c:103
+#: ../../magic/src/puzzle.c:106
 #, fuzzy
 msgid "Puzzle"
 msgstr "סגול!"
 
-#: ../../magic/src/puzzle.c:110
+#: ../../magic/src/puzzle.c:118
 msgid "Click the part of your picture where would you like a puzzle."
 msgstr "לחצי וגררי להזזת התמונה על בד הציור."
 
-#: ../../magic/src/puzzle.c:111
+#: ../../magic/src/puzzle.c:119
 #, fuzzy
 msgid "Click to make a puzzle in fullscreen mode."
 msgstr "לחצי ליצירת תמונת מראה."
 
-#: ../../magic/src/rails.c:129
+#: ../../magic/src/rails.c:131
 msgid "Rails"
 msgstr "מסילה"
 
-#: ../../magic/src/rails.c:134
+#: ../../magic/src/rails.c:141
 msgid "Click and drag to draw train track rails on your picture."
 msgstr "לחצי וגררי לציור מסילת רכבת על התמונה."
 
-#: ../../magic/src/rainbow.c:133
+#: ../../magic/src/rainbow.c:138
 msgid "Rainbow"
 msgstr "קשת בענן"
 
-#: ../../magic/src/rainbow.c:139
+#: ../../magic/src/rainbow.c:140
+#, fuzzy
+#| msgid "Rainbow"
+msgid "Smooth Rainbow"
+msgstr "קשת בענן"
+
+#: ../../magic/src/rainbow.c:153
 msgid "You can draw in rainbow colors!"
 msgstr "יש באפשרותך לצייר בצבעי הקשת!"
 
@@ -1381,25 +1489,25 @@ msgstr "יש באפשרותך לצייר בצבעי הקשת!"
 msgid "Rain"
 msgstr "גשם"
 
-#: ../../magic/src/rain.c:72
+#: ../../magic/src/rain.c:76
 msgid "Click to place a rain drop onto your picture."
 msgstr "לחצי לטיפטוף טיפת גשם על התמונה."
 
-#: ../../magic/src/rain.c:73
+#: ../../magic/src/rain.c:77
 msgid "Click to cover your picture with rain drops."
 msgstr "לחצי לכיסוי התמונה בטיפות גשם."
 
-#: ../../magic/src/realrainbow.c:98
+#: ../../magic/src/realrainbow.c:99
 msgid "Real Rainbow"
 msgstr "קשת בענן"
 
-#: ../../magic/src/realrainbow.c:100
+#: ../../magic/src/realrainbow.c:101
 #, fuzzy
 #| msgid "Real Rainbow"
 msgid "ROYGBIV Rainbow"
 msgstr "קשת בענן"
 
-#: ../../magic/src/realrainbow.c:108
+#: ../../magic/src/realrainbow.c:114
 msgid ""
 "Click where you want your rainbow to start, drag to where you want it to "
 "end, and then let go to draw a rainbow."
@@ -1407,27 +1515,38 @@ msgstr ""
 "לחץ במקום שבו תרצה להתחיל את קשת, גרור למקום שבו אתה רוצה את זה עד הסוף, "
 "ולאחר מכן אפשר ללכת צייר הקשת"
 
-#: ../../magic/src/ripples.c:102
+#: ../../magic/src/reflection.c:110
+msgid "Reflection"
+msgstr ""
+
+#: ../../magic/src/reflection.c:120
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+msgid "Click and drag the mouse around to add a reflection to your picture."
+msgstr "לחצי והזיזי את העכבר להוספת מראה פסיפס לתמונה."
+
+#: ../../magic/src/ripples.c:103
 msgid "Ripples"
 msgstr "אדוות"
 
-#: ../../magic/src/ripples.c:108
+#: ../../magic/src/ripples.c:115
 msgid "Click to make ripples appear over your picture."
 msgstr "לחצי להופעת אדוות על התמונה."
 
-#: ../../magic/src/rosette.c:115
+#: ../../magic/src/rosette.c:118
 msgid "Rosette"
 msgstr "תוברה"
 
-#: ../../magic/src/rosette.c:117
+#: ../../magic/src/rosette.c:120
 msgid "Picasso"
 msgstr "פיקאסו"
 
-#: ../../magic/src/rosette.c:123
+#: ../../magic/src/rosette.c:131
 msgid "Click and start drawing your rosette."
 msgstr "לחצי כדי להתחיל לצייר קו. שחררי כדי להשלים אותו."
 
-#: ../../magic/src/rosette.c:125
+#: ../../magic/src/rosette.c:133
 msgid "You can draw just like Picasso!"
 msgstr "יש באפשרותך לצייר בצבעי הקשת!"
 
@@ -1473,33 +1592,33 @@ msgstr "לחצי והזיזי את העכבר ליצירת צללית בשחור
 msgid "Click to create a black and white silhouette of your entire picture."
 msgstr "לחצי ליצירת צללית בשחור ולבן של כל התמונה."
 
-#: ../../magic/src/shift.c:106
+#: ../../magic/src/shift.c:107
 msgid "Shift"
 msgstr "הזזה"
 
-#: ../../magic/src/shift.c:112
+#: ../../magic/src/shift.c:119
 msgid "Click and drag to shift your picture around on the canvas."
 msgstr "לחצי וגררי להזזת התמונה על בד הציור."
 
-#: ../../magic/src/smudge.c:102
+#: ../../magic/src/smudge.c:103
 msgid "Smudge"
 msgstr "כתם"
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:104
+#: ../../magic/src/smudge.c:105
 #, fuzzy
 #| msgid "Metal Paint"
 msgid "Wet Paint"
 msgstr "צבע מתכתי"
 
-#: ../../magic/src/smudge.c:111
+#: ../../magic/src/smudge.c:121
 #, fuzzy
 #| msgid "Click and move the mouse around to smudge the picture."
 msgid "Click and drag the mouse around to smudge the picture."
 msgstr "לחצי והזיזי את העכבר להכתמת את התמונה."
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:113
+#: ../../magic/src/smudge.c:123
 #, fuzzy
 #| msgid "Click and move the mouse around to blur the image."
 msgid "Click and drag the mouse around to draw with wet, smudgy paint."
@@ -1521,6 +1640,17 @@ msgstr "לחצי להופעת אדוות על התמונה."
 msgid "Click to add snow flakes to your picture."
 msgstr "לחצי להופעת אדוות על התמונה."
 
+#: ../../magic/src/stretch.c:107
+msgid "Stretch"
+msgstr ""
+
+#: ../../magic/src/stretch.c:119
+#, fuzzy
+#| msgid "Click to make your picture look like it's on television."
+msgid ""
+"Click and drag to stretch part of your picture vertically or horizontally."
+msgstr "לחצי לכיסוי כל התמונה באריחי זכוכית."
+
 #: ../../magic/src/string.c:129
 msgid "String edges"
 msgstr "מחרוזת הקצוות"
@@ -1533,7 +1663,7 @@ msgstr "מחרוזת בפינה"
 msgid "String 'V'"
 msgstr "מחרוזת 'V'"
 
-#: ../../magic/src/string.c:147
+#: ../../magic/src/string.c:151
 #, fuzzy
 #| msgid ""
 #| "Click and drag to draw string art. Drag top-bottom to draw less or more "
@@ -1545,13 +1675,13 @@ msgstr ""
 "לחץ וגרור כדי לצייר את המחרוזת האמנות. גרור העליונה התחתונה לצייר קווים פחות "
 "או יותר, למרכז לפנות השורות למרכז ."
 
-#: ../../magic/src/string.c:150
+#: ../../magic/src/string.c:154
 #, fuzzy
 #| msgid "Click and drag to draw a beam of light on your picture."
 msgid "Click and drag to draw arrows made of string art."
 msgstr "לחצי וגררי לציור קרן אור על התמונה."
 
-#: ../../magic/src/string.c:153
+#: ../../magic/src/string.c:157
 msgid "Draw string art arrows with free angles."
 msgstr ""
 
@@ -1594,25 +1724,25 @@ msgstr "לחצי לקביעת סף לתמונה כולה, והפיכתה לצב�
 msgid "Toothpaste"
 msgstr "משחת שיניים"
 
-#: ../../magic/src/toothpaste.c:72
+#: ../../magic/src/toothpaste.c:76
 msgid "Click and drag to squirt toothpaste onto your picture."
 msgstr "לחצי וגררי להזזת התמונה על בד הציור."
 
-#: ../../magic/src/tornado.c:153
+#: ../../magic/src/tornado.c:154
 msgid "Tornado"
 msgstr ""
 
-#: ../../magic/src/tornado.c:159
+#: ../../magic/src/tornado.c:166
 #, fuzzy
 #| msgid "Click and drag to draw train track rails on your picture."
 msgid "Click and drag to draw a tornado funnel on your picture."
 msgstr "לחצי וגררי לציור מסילת רכבת על התמונה."
 
-#: ../../magic/src/tv.c:96
+#: ../../magic/src/tv.c:99
 msgid "TV"
 msgstr "טלוויזיה"
 
-#: ../../magic/src/tv.c:102
+#: ../../magic/src/tv.c:110
 #, fuzzy
 #| msgid "Click to make your picture look like it's on television."
 msgid ""
@@ -1620,19 +1750,19 @@ msgid ""
 "television."
 msgstr "לחצי לכיסוי כל התמונה באריחי זכוכית."
 
-#: ../../magic/src/tv.c:105
+#: ../../magic/src/tv.c:113
 msgid "Click to make your picture look like it's on television."
 msgstr "לחצי לכיסוי כל התמונה באריחי זכוכית."
 
-#: ../../magic/src/waves.c:104
+#: ../../magic/src/waves.c:111
 msgid "Waves"
 msgstr "גלים"
 
-#: ../../magic/src/waves.c:106
+#: ../../magic/src/waves.c:113
 msgid "Wavelets"
 msgstr "גלים"
 
-#: ../../magic/src/waves.c:115
+#: ../../magic/src/waves.c:122
 msgid ""
 "Click to make the picture horizontally wavy. Click toward the top for "
 "shorter waves, the bottom for taller waves, the left for small waves, and "
@@ -1641,7 +1771,7 @@ msgstr ""
 "לחצי ליצירת תמונה גלית. לחצי כלפי מעלה לגלים יותר קצרים, כלפי מטה לגלים יותר "
 "גבוהים, שמאלה לגלים קטנים וימינה לגלים ארוכים."
 
-#: ../../magic/src/waves.c:118
+#: ../../magic/src/waves.c:125
 msgid ""
 "Click to make the picture vertically wavy. Click toward the top for shorter "
 "waves, the bottom for taller waves, the left for small waves, and the right "
@@ -1650,23 +1780,26 @@ msgstr ""
 "לחצי ליצירת תמונה גלית. לחצי כלפי מעלה לגלים יותר קצרים, כלפי מטה לגלים יותר "
 "גבוהים, שמאלה לגלים קטנים וימינה לגלים ארוכים."
 
-#: ../../magic/src/xor.c:93
+#: ../../magic/src/xor.c:92
 #, fuzzy
 #| msgid "Colors"
 msgid "Xor Colors"
 msgstr "צבעים"
 
-#: ../../magic/src/xor.c:99
+#: ../../magic/src/xor.c:103
 #, fuzzy
 #| msgid "Click and drag to draw a beam of light on your picture."
 msgid "Click and drag to draw a XOR effect"
 msgstr "לחצי וגררי לציור קרן אור על התמונה."
 
-#: ../../magic/src/xor.c:101
+#: ../../magic/src/xor.c:105
 #, fuzzy
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "לחצי להוספת מראה פסיפס לכל התמונה."
+
+#~ msgid "Click in the picture to fill that area with color."
+#~ msgstr "לחצי בתוך התמונה למילוי האזור בצבע."
 
 #, fuzzy
 #~| msgid "Click and drag to draw a beam of light on your picture."

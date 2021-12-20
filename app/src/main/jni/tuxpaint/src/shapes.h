@@ -4,7 +4,7 @@
   For Tux Paint
   List of available shapes.
 
-  Copyright (c) 2002-2020 by Bill Kendrick and others
+  Copyright (c) 2002-2021 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,10 +23,14 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - August 15, 2020
+  June 14, 2002 - August 15, 2021
   $Id$
 */
 
+
+#ifndef gettext_noop
+#define gettext_noop(String) String
+#endif
 
 
 /* What shapes are available: */
@@ -368,6 +372,22 @@ const char *const shapemode_img_fnames[NUM_SHAPEMODES] = {
   DATA_PREFIX "images/ui/shapes_corner.png"
 };
 
+/* String shown when Shapes tool is selected;
+   one version for normal ("complex shapes"),
+   the other for simplified mode ("simple shapes") */
+enum {
+  SHAPE_COMPLEXITY_NORMAL,
+  SHAPE_COMPLEXITY_SIMPLE,
+  NUM_SHAPE_COMPLEXITIES
+};
+
+const char *const shape_tool_tips[NUM_SHAPE_COMPLEXITIES] = {
+  gettext_noop("Pick a shape. Click to start drawing, drag, and let go when it is the size and shape you want. Move around to rotate it, and click again to draw it."),
+  gettext_noop("Pick a shape. Click to start drawing, drag, and let go when it is the size and shape you want.")
+};
+
+/* Strings shown when switching between "from center"
+   and "from corner" modes */
 const char *const shapemode_tips[NUM_SHAPES] = {
   gettext_noop("Draw shapes from the center."),
   gettext_noop("Draw shapes from a corner."),

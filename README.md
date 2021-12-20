@@ -8,7 +8,7 @@ Tux Paint has been ported from SDL1 to SDL2.
 Thus Tux Paint-Android will try to port current Tux Paint to Android platform.
 At the start this Tux Paint source code was based on [tuxpaint-sdl2](http://sourceforge.net/p/tuxpaint-sdl2/code/ci/sdl2.0/tree/) 
 maintained by Pere Pujal i Carabantes with head commit b48c069b2ff6a0cabf82ec086ff6ef563eaaf3d3, now it has been synced back and forth several times.
-As it is currently(May 2020) it has been synced also with the work made in the official(SDL1.2 based) work.
+As it is currently(Nov 2021) it has been synced also with the work made in the official(SDL1.2 based) work.
 https://sourceforge.net/u/perepujal/tuxpaint/ci/sdl2.0/tree/
 
 The main work made by Jianwei Zhang on GSoC 2015 includes:
@@ -126,6 +126,8 @@ From **[official Library Requirements](http://www.tuxpaint.org/requirements/)**,
 * libPNG
 * libpaper (for POSIX printing)
 * gettext (for multilingual support)
+* libimagequant (from the pngquant2 project; for animated GIF slideshow export)
+* SDL_gfx, for rotating brushes
 
 For making Tux Paint working on Android, currently these libraries have been downloaded and built :
 
@@ -178,7 +180,7 @@ Build
 ========
 * Linux system
 * Android SDK
-    android-support-v4.jar from the sdk/extras/... directory, copy it into the libs directory
+    Starting november 2021, android-support-v4.jar is no more needed.
 * Android NDK (compiling tested with the 17c and 21 releases of the ndk tools)
 * Tuxpaint-Android source code
 * Eclipse & ADT (optional)

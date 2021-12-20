@@ -128,7 +128,7 @@ typedef struct magic_api_t {
   void (*putpixel)(SDL_Surface *, int, int, Uint32);
 
   /* XOR's the pixel at (x,y) location of the surface. */
-  Uint32 (*xorpixel)(SDL_Surface *, int, int);
+  void (*xorpixel)(SDL_Surface *, int, int);
 
   /* Asks Tux Paint to play a sound (one loaded via SDL_mixer library);
      the first value is for left/right panning (0 is left, 128 is center,
@@ -179,11 +179,22 @@ typedef struct magic_api_t {
    If Tux Paint deems you compatible, it will call your 'XYZ_init()' (etc.)
    and you will be active. */
 
-#define TP_MAGIC_API_VERSION 0x00000004
+#define TP_MAGIC_API_VERSION 0x00000005
 
 #ifndef ATTRIBUTE_UNUSED
 #define ATTRIBUTE_UNUSED __attribute__ ((__unused__))
 #endif /* ATTRIBUTE_UNUSED */
+
+/* Pre-defined Magic tool grouping codes */
+enum {
+  MAGIC_TYPE_DISTORTS,
+  MAGIC_TYPE_COLOR_FILTERS,
+  MAGIC_TYPE_PICTURE_WARPS,
+  MAGIC_TYPE_PAINTING,
+  MAGIC_TYPE_PATTERN_PAINTING,
+  MAGIC_TYPE_PICTURE_DECORATIONS,
+  MAGIC_TYPE_ARTISTIC
+};
 
 #endif
 

@@ -31,7 +31,8 @@ LOCAL_SRC_FILES := \
 	src/android_mbstowcs.c \
 	src/fill.c \
 	src/android_assets.c \
-	src/gifenc.c
+	src/gifenc.c\
+	src/sounds.c
 
 MY_CFLAGS:= -O0 -g -W -Wall -fno-common -ffloat-store \
 	-Wcast-align -Wredundant-decls \
@@ -41,7 +42,7 @@ MY_CFLAGS:= -O0 -g -W -Wall -fno-common -ffloat-store \
 	-Wstrict-aliasing=2 \
 	-include $(LOCAL_PATH)"/../tp-assets-fopen/tp_android_assets_fopen.h"
 
-MY_VER_VERSION :=0.9.26
+MY_VER_VERSION :=0.9.27
 MY_VER_DATE :=$(shell date +"%Y-%m-%d")
 MY_NOSOUNDFLAG := 
 # MY_NOSOUNDFLAG := -DNOSOUND
@@ -84,7 +85,7 @@ LOCAL_LDLIBS := \
 	-lz -llog -lGLESv1_CM -lGLESv2 -landroid \
 	$(NULL)
 
-LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango tuxpaint_intl tuxpaint_fribidi tuxpaint_png tuxpaint_rsvg tuxpaint_cairo tp_android_assets_fopen libimagequant
+LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango tuxpaint_intl tuxpaint_fribidi tuxpaint_png tuxpaint_rsvg tuxpaint_cairo tp_android_assets_fopen libimagequant SDL2_gfx
 
 include $(BUILD_SHARED_LIBRARY)
 

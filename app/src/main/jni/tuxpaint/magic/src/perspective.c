@@ -8,7 +8,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2019 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: August 29, 2019
+  Last updated: September 20, 2021
   $Id$
 */
 
@@ -54,6 +54,7 @@ int perspective_init(magic_api * api);
 int perspective_get_tool_count(magic_api * api);
 SDL_Surface *perspective_get_icon(magic_api * api, int which);
 char *perspective_get_name(magic_api * api, int which);
+int perspective_get_group(magic_api * api, int which);
 
 char *perspective_get_description(magic_api * api, int which, int mode);
 
@@ -114,6 +115,7 @@ float top_advc_y, right_advc_y, bottom_advc_y, left_advc_y;
 enum
 {
   TOOL_PERSPECTIVE,
+  TOOL_PANELS,
   TOOL_ZOOM,
   perspective_NUM_TOOLS
 };
@@ -134,28 +136,29 @@ static Mix_Chunk *perspective_snd_effect[perspective_NUM_TOOLS + 1];
 
 const char *perspective_snd_filenames[perspective_NUM_TOOLS + 1] = {
   "perspective.ogg",
+  "zoom_down.ogg", /* TODO: Could use a different sound */
   "zoom_up.ogg",
   "zoom_down.ogg",
 };
 
 const char *perspective_icon_filenames[perspective_NUM_TOOLS] = {
   "perspective.png",
+  "panels.png",
   "zoom.png",
 };
 
 const char *perspective_names[perspective_NUM_TOOLS] = {
   gettext_noop("Perspective"),
+  gettext_noop("Panels"),
   gettext_noop("Zoom"),
-
 };
 
 const char *perspective_descs[perspective_NUM_TOOLS] = {
   gettext_noop("Click on the corners and drag where you want to stretch the picture."),
 
+  gettext_noop("Click to turn your picture into 2-by-2 panels."),
 
   gettext_noop("Click and drag up to zoom in or drag down to zoom out the picture."),
-
-
 };
 
 Uint32 perspective_api_version(void)
@@ -195,6 +198,12 @@ SDL_Surface *perspective_get_icon(magic_api * api, int which)
 char *perspective_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return (strdup(gettext_noop(perspective_names[which])));
+}
+
+// Return our group (the same):
+int perspective_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_PICTURE_WARPS;
 }
 
 // Return our descriptions, localized:
@@ -358,8 +367,56 @@ void perspective_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
         old_h = new_h;
       }
       break;
+    case TOOL_PANELS:
+      {
+        SDL_Surface *scaled_surf;
+
+        scaled_surf = api->scale(canvas, canvas->w / 2, canvas->h / 2, 0);
+
+        /* Top left */
+        update_rect->x = 0;
+        update_rect->y = 0;
+        update_rect->w = scaled_surf->w; 
+        update_rect->h = scaled_surf->h;
+        SDL_BlitSurface(scaled_surf, NULL, canvas, update_rect);
+
+        /* Top right */
+        update_rect->x = scaled_surf->w;
+        update_rect->y = 0;
+        update_rect->w = scaled_surf->w; 
+        update_rect->h = scaled_surf->h;
+        SDL_BlitSurface(scaled_surf, NULL, canvas, update_rect);
+
+        /* Bottom left */
+        update_rect->x = 0;
+        update_rect->y = scaled_surf->h;
+        update_rect->w = scaled_surf->w; 
+        update_rect->h = scaled_surf->h;
+        SDL_BlitSurface(scaled_surf, NULL, canvas, update_rect);
+
+        /* Bottom right */
+        update_rect->x = scaled_surf->w;
+        update_rect->y = scaled_surf->h;
+        update_rect->w = scaled_surf->w; 
+        update_rect->h = scaled_surf->h;
+        SDL_BlitSurface(scaled_surf, NULL, canvas, update_rect);
+
+        update_rect->x = 0;
+        update_rect->y = 0;
+        update_rect->w = canvas->w; 
+        update_rect->h = canvas->h;
+
+        SDL_FreeSurface(scaled_surf);
+
+        api->playsound(perspective_snd_effect[which], 127, 255);
+      }
+      break;
     }
-  perspective_drag(api, which, canvas, last, x, y, x, y, update_rect);
+
+  if (which != TOOL_PANELS)
+    {
+      perspective_drag(api, which, canvas, last, x, y, x, y, update_rect);
+    }
 
 }
 
@@ -482,7 +539,6 @@ void perspective_preview(magic_api * api, int which ATTRIBUTE_UNUSED,
     }
 }
 
-// No setup happened:
 void perspective_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 {
   //Clean up sounds
@@ -506,8 +562,10 @@ void perspective_set_color(magic_api * api ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, U
 }
 
 // Use colors:
-int perspective_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int perspective_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
+  if (which == TOOL_PANELS)
+    return 0;
   return 1;
 }
 
@@ -546,9 +604,13 @@ void perspective_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE
   SDL_FreeSurface(canvas_back);
 }
 
-int perspective_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int perspective_modes(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
-  return (MODE_PAINT_WITH_PREVIEW);
+  if (which == TOOL_PANELS) {
+    return (MODE_FULLSCREEN);
+  } else {
+    return (MODE_PAINT_WITH_PREVIEW);
+  }
 }
 
 void perspective_line(void *ptr_to_api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,

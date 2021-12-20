@@ -25,7 +25,7 @@
 
   $Id$
 
-  June 14, 2002 - July 26, 2020
+  June 14, 2002 - October 25, 2021
 */
 
 #include <stdio.h>
@@ -989,15 +989,27 @@ static void set_langint_from_locale_string(const char *restrict loc)
  */
 static void mysetenv(const char *name, const char *value)
 {
-#ifdef HAVE_SETENV
-  setenv(name, value, 1);
-#else
-  int len = strlen(name) + 1 + strlen(value) + 1;
-  char *str = malloc(len);
-
-  sprintf(str, "%s=%s", name, value);
-  putenv(str);
+#ifndef HAVE_SETENV
+  int len;
+  char *str;
 #endif
+
+  if (name != NULL && value != NULL) {
+#ifdef HAVE_SETENV
+    setenv(name, value, 1);
+#else
+    len = strlen(name) + 1 + strlen(value) + 1;
+    str = malloc(len);
+
+    sprintf(str, "%s=%s", name, value);
+    putenv(str);
+#endif
+  } else {
+    fprintf(stderr, "WARNING: mysetenv() received a null pointer. name=%s, value=%s\n",
+      (name == NULL ? "NULL" : name),
+      (value == NULL ? "NULL" : value)
+    );
+  }
 }
 
 
@@ -1089,14 +1101,9 @@ static int set_current_language(const char *restrict loc, int * ptr_num_wished_l
 #endif
   textdomain("tuxpaint");
 
-#ifdef _WIN32
-  if (!*loc)
-    loc = _nl_locale_name(LC_MESSAGES, "");
-#else
   // NULL: Used to direct setlocale() to query the current
   // internationalised environment and return the name of the locale().
   loc = setlocale(LC_MESSAGES, NULL);
-#endif
 
   if (oldloc && loc && strcmp(oldloc, "") != 0 && strcmp(loc, oldloc) != 0)
     {

@@ -4,7 +4,7 @@
   For Tux Paint
   List of sound effects.
 
-  Copyright (c) 2002-2019 by Bill Kendrick and others
+  Copyright (c) 2002-2021 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 15, 2002 - September 12, 2019
+  June 15, 2002 - October 24, 2021
   $Id$
 */
 
@@ -72,44 +72,7 @@ enum
 };
 
 
-/* Sound file filenames: */
-
-/* FIXME: These should be moved to a .c file (sounds.c?) and extern'd here, to
-   avoid being stored multiple times, and to avoid compiler warning
-   -bjk 2007.07.17 */
-
-static const char *sound_fnames[NUM_SOUNDS] = {
-  DATA_PREFIX "sounds/harp.wav",
-  DATA_PREFIX "sounds/click.wav",
-  DATA_PREFIX "sounds/bleep.wav",
-  DATA_PREFIX "sounds/bubble.wav",
-  DATA_PREFIX "sounds/stamp.wav",
-  DATA_PREFIX "sounds/line_start.wav",
-  DATA_PREFIX "sounds/line_end.wav",
-  DATA_PREFIX "sounds/scroll.wav",
-  DATA_PREFIX "sounds/paint1.wav",
-  DATA_PREFIX "sounds/paint2.wav",
-  DATA_PREFIX "sounds/paint3.wav",
-  DATA_PREFIX "sounds/paint4.wav",
-  DATA_PREFIX "sounds/eraser1.wav",
-  DATA_PREFIX "sounds/eraser2.wav",
-  DATA_PREFIX "sounds/save.wav",
-  DATA_PREFIX "sounds/prompt.wav",
-  DATA_PREFIX "sounds/flip.wav",
-  DATA_PREFIX "sounds/mirror.wav",
-  DATA_PREFIX "sounds/keyclick.wav",
-  DATA_PREFIX "sounds/typewriterbell.wav",
-  DATA_PREFIX "sounds/return.wav",
-  DATA_PREFIX "sounds/shrink.wav",
-  DATA_PREFIX "sounds/grow.wav",
-  DATA_PREFIX "sounds/italic_on.wav",
-  DATA_PREFIX "sounds/italic_off.wav",
-  DATA_PREFIX "sounds/areyousure.wav",
-  DATA_PREFIX "sounds/youcannot.wav",
-  DATA_PREFIX "sounds/tuxok.wav",
-  DATA_PREFIX "sounds/thick.wav",
-  DATA_PREFIX "sounds/thin.wav",
-  DATA_PREFIX "sounds/fill.wav"
-};
+/* Sound file filenames (declared in "sounds.c"): */
+extern const char *sound_fnames[NUM_SOUNDS];
 
 #endif

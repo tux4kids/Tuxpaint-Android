@@ -65,8 +65,6 @@ static SDL_Surface *make24bitDIB(SDL_Surface * surf)
   pixfmt.Gloss = 0;
   pixfmt.Bloss = 0;
   pixfmt.Aloss = 0;
-  pixfmt.colorkey = 0;
-  pixfmt.alpha = 0;
 
   surf24 = SDL_ConvertSurface(surf, &pixfmt, SDL_SWSURFACE);
   surfDIB = SDL_CreateRGBSurface(SDL_SWSURFACE, surf24->w, surf24->h, 24,
@@ -320,7 +318,7 @@ int IsPrinterAvailable(void)
 /**
  * FIXME
  */
-const char *SurfacePrint(SDL_Surface * surf, const char *printcfg, int showdialog)
+const char *SurfacePrint(SDL_Window * window, SDL_Surface * surf, const char *printcfg, int showdialog)
 {
   const char *res = NULL;
   HWND hWnd;
@@ -328,6 +326,7 @@ const char *SurfacePrint(SDL_Surface * surf, const char *printcfg, int showdialo
   int nError;
   SDL_SysWMinfo wminfo;
   BITMAPINFOHEADER bmih;
+  BITMAPINFO bmi;
   SDL_Surface *surf24 = NULL;
   RECT rcDst;
   float sX, sY;
@@ -338,10 +337,10 @@ const char *SurfacePrint(SDL_Surface * surf, const char *printcfg, int showdialo
   int scaling = SCALE_TO_FIT;
 
   SDL_VERSION(&wminfo.version);
-  if (!SDL_GetWMInfo(&wminfo))
+  if (!SDL_GetWindowWMInfo(window, &wminfo))
     return "win32_print: SDL_GetWMInfo() failed.";
 
-  hWnd = wminfo.window;
+  hWnd = wminfo.info.win.window;
   if (!GetPrinterDC(hWnd, printcfg, showdialog))
     {
       ShowWindow(hWnd, SW_SHOWNORMAL);
@@ -464,12 +463,13 @@ const char *SurfacePrint(SDL_Surface * surf, const char *printcfg, int showdialo
     {
       SetStretchBltMode(hDCprinter, COLORONCOLOR);
 
+      bmi.bmiHeader = bmih;
       nError = StretchDIBits(hDCprinter, rcDst.left, rcDst.top,
                              rcDst.right - rcDst.left,
                              rcDst.bottom - rcDst.top,
                              0, 0, bmih.biWidth, bmih.biHeight,
-                             surf24->pixels, (BITMAPINFO *) & bmih, DIB_RGB_COLORS, SRCCOPY);
-      if (nError == GDI_ERROR)
+                             surf24->pixels, &bmi, DIB_RGB_COLORS, SRCCOPY);
+      if (nError == (int) GDI_ERROR)
         {
           res = "win32_print: StretchDIBits() failed.";
           goto error;
@@ -518,11 +518,13 @@ static HRESULT ReadRegistry(const char *key, const char *option, char *value, in
 {
   LONG res;
   HKEY hKey = NULL;
+  DWORD _size;
 
+  _size = size;
   res = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hKey);
   if (res != ERROR_SUCCESS)
     goto err_exit;
-  res = RegQueryValueEx(hKey, option, NULL, NULL, (LPBYTE) value, (LPDWORD) & size);
+  res = RegQueryValueEx(hKey, option, NULL, NULL, (LPBYTE) value, &_size);
   if (res != ERROR_SUCCESS)
     goto err_exit;
   res = ERROR_SUCCESS;
@@ -603,6 +605,7 @@ char *GetSystemFontDir(void)
  *
  * @return user's image dir
  */
+char *GetUserImageDir(void);
 char *GetUserImageDir(void)
 {
   char path[MAX_PATH];
@@ -624,7 +627,7 @@ char *GetUserImageDir(void)
 */
 static char *GetUserTempDir(void)
 {
-  char *temp = getenv("TEMP");
+  const char *temp = getenv("TEMP");
 
   if (!temp)
     {
@@ -659,6 +662,7 @@ static int g_bWindowActive = 0;
 /**
  * FIXME
  */
+LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
   int bEatKeystroke = 0;

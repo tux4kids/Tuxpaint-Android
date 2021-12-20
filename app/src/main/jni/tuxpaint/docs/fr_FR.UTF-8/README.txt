@@ -1,12 +1,13 @@
                                    Tux Paint
-                                 version 0.9.26
+                                 version 0.9.27
 
   Un programme simple pour les enfants
 
       Copyright &copie; 2002-2021 par divers contributeurs; voir AUTHORS.
                             http://www.tuxpaint.org/
+                           @TuxPaintTweets on Twitter
 
-                                 juin 28, 2021
+                               novembre 25, 2021
 
      ----------------------------------------------------------------------
 
@@ -235,6 +236,23 @@ Outils disponibles
                  la souris, elle dessine au fur et à mesure que vous vous
                  déplacez.
 
+                 Cerains pinceaux sont animés — ils changent de forme lorsque
+                 vous dessinez. Un bon exemple est le pinceau 'grappe' livré
+                 avec Tux Paint. Ces pinceaux ont une icône avec une petite
+                 pellicule dessinée sur le bouton de sélection.
+
+                 D'autres pinceaux sont directionnels — leur forme dépend de
+                 la direction dans laquelle vous dessinez. Un exemple est le
+                 pinceau flèche livré avec Tux Paint. Ces pinceaux ont une
+                 petite étoile à 8 branches sur leur icône du bouton de
+                 sékection.
+
+                 Et enfin, certains pinceaux peuvent être = la fois
+                 directionnels et animés. Des exemples sont les pinceaux
+                 'chat' et 'écureuil' livrés avec Tux Paint. Ces pinceaux ont
+                 à la fois une pellicule et une étoile à 8 branches sur leur
+                 icône.
+
                  Pendant que vous dessinez, un son est joué. Plus la brosse
                  est grosse, plus le son est grave.
 
@@ -293,13 +311,22 @@ Outils disponibles
                  l'aide des différents pinceaux et couleurs que vous utilisez
                  habituellement.
 
-                 Cliquez sur la souris et maintenez-la enfoncée pour choisir
-                 le point de départ de la ligne. Au fur et à mesure que vous
-                 déplacez la souris, une fine ligne «élastique» indiquera là
-                 où la ligne sera dessinée.
+                 Click the mouse and hold it to choose the starting point of
+                 the line. As you move the mouse around, a thin 'rubber-band'
+                 line will show where the line will be drawn. At the bottom,
+                 you'll see the angle of your line, in degrees. A line going
+                 straight to the right is 0°, a line going straight up is
+                 90°, a line going straight left is 180°, a line going
+                 straight down is 270°, and so on.
 
                  Relâchez la souris pour terminer la ligne. On entend alors
                  le son "sproing !".
+
+                 Certains pinceaux sont animés, et montre un ensemble formes
+                 le long d'une ligne. D'autres sont directionnels et montre
+                 des formes différentes suivant l'angle du pinceau. Et enfin
+                 certains sont à la fois animés et directionnels. Voir
+                 "Paint", au-dessus, pour en savoir plus.
 
      ----------------------------------------------------------------------
 
@@ -345,8 +372,10 @@ Outils disponibles
 
                       Mode normal
 
-                              Vous pouvez maintenant déplacer la souris sur
-                              le dessin pour faire pivoter la forme.
+                              Now you can move the mouse around the canvas to
+                              rotate the shape. The angle your shape is
+                              rotated will be shown at the bottom, in degrees
+                              (similar to the "Lines" tool, described above).
 
                               Cliquez à nouveau sur le bouton de la souris et
                               la forme sera dessinée avec la couleur en
@@ -367,8 +396,9 @@ Outils disponibles
                  bas). Cliquez sur l'écran et un curseur apparaîtra. Tapez un
                  texte et il apparaîtra à l'écran.
 
-                 Appuyez sur [Enter] ou [Return] et le texte sera inclus dans
-                 l'image et le curseur se déplacera d'une ligne vers le bas.
+                 Appuyez sur [Entrée] ou [Retour] et le texte sera inclus
+                 dans l'image et le curseur se déplacera d'une ligne vers le
+                 bas.
 
                  Sinon, appuyez sur [Tab] et le texte sera inclus dans
                  l'image, mais le curseur se déplacera vers la droite du
@@ -461,6 +491,8 @@ Outils disponibles
                  de remplissage sont offertes :
                     * Solide — cliquez une fois pour remplir une zone avec
                       une couleur unie.
+                    * Brush — click and drag to fill an area with a solid
+                      color using freehand painting.
                     * Linéaire—cliquez et faites glisser pour remplir une
                       zone avec une couleur qui s'atténue au fur et à mesure
                       dans la direction où vous déplacez la souris.
@@ -596,9 +628,10 @@ Outils disponibles
                         bas à droite de la liste pour effacer l'image
                         sélectionnée. (Il vous sera demandé de confirmer.)
 
-                        Remarque : à partir de la version 0.9.22, l'image
-                        sera placée dans la corbeille de votre bureau,
-                        uniquement sous Linux.
+                        Note: On Linux (as of version 0.9.22) and Windows (as
+                        of version 0.9.27), the picture will be placed in
+                        your desktop's trash can / recycle bin (where you may
+                        recover and restore it, if you change your mind).
 
                       * Cliquez sur le bouton "Exporter" près du coin
                         inférieur droit pour exporter l'image vers votre
@@ -1028,32 +1061,40 @@ Importer des images manuellement
 
      Les autres documents inclus avec Tux Paint (dans le répertoire "docs")
      incluent :
-       * Documentation sur l'outil 'Magie' ("magic-docs")
-         Documentation pour chacun des outils "Magic" actuellement installés.
-       * AUTHORS.txt
-         Liste des auteurs et contributeurs.
-       * CHANGES.txt
-         Résumé des changements entre chaque version de Tux Paint.
-       * COPYING.txt
-         Licencd de copie, la GNU General Public License (GPL)
-       * INSTALL.html
-         Instructions pour compiler et installer Tux Paint, le cas échéant.
-       * EXTENDING.html
-         Des instructions détaillées sur la création de pinceaux, de tampons,
-         d'images de démarrage et de modèles; et l'ajout de polices; et créer
-         un nouveau clavier virtuel et des méthodes de saisie.
-       * OPTIONS.html
-         Instructions détaillées sur les options en ligne de commande et les
-         fichiers de configuration, pour ceux qui ne veulent pas utiliser
-         l'outil Tux Paint Config.
-       * PNG.html
-         Remarques sur la création d'images bitmap au format PNG à utiliser
-         dans Tux Paint.
-       * SVG.html
-         Remarques sur la création d'images vectorielles au format SVG à
-         utiliser dans Tux Paint.
-       * SIGNALS.html
-         Informations sur les signaux POSIX auxquels répond Tux Paint.
+       * Using Tux Paint:
+            * OPTIONS.html
+              Instructions détaillées sur les options en ligne de commande et
+              les fichiers de configuration, pour ceux qui ne veulent pas
+              utiliser l'outil Tux Paint Config.
+            * Documentation sur l'outil 'Magie' ("magic-docs")
+              Documentation pour chacun des outils "Magic" actuellement
+              installés.
+       * How to extend Tux Paint:
+            * EXTENDING.html
+              Des instructions détaillées sur la création de pinceaux, de
+              tampons, d'images de démarrage et de modèles; et l'ajout de
+              polices; et créer un nouveau clavier virtuel et des méthodes de
+              saisie.
+            * PNG.html
+              Remarques sur la création d'images bitmap au format PNG à
+              utiliser dans Tux Paint.
+            * SVG.html
+              Remarques sur la création d'images vectorielles au format SVG à
+              utiliser dans Tux Paint.
+       * Technical information:
+            * INSTALL.html
+              Instructions pour compiler et installer Tux Paint, le cas
+              échéant.
+            * SIGNALS.html
+              Informations sur les signaux POSIX auxquels répond Tux Paint.
+       * Development history and license:
+            * AUTHORS.txt
+              Liste des auteurs et contributeurs.
+            * CHANGES.txt
+              Résumé des changements entre chaque version de Tux Paint.
+            * COPYING.txt
+              Tux Paint's software license, the GNU General Public License
+              (GPL)
 
      ----------------------------------------------------------------------
 
@@ -1065,7 +1106,6 @@ Importer des images manuellement
        * Mentionner des bogues, ou demander de nouvelles fonctionnalités via
          le système de suivi des bogues
        * Participer aux nombreuses listes de diffusion de Tux Paint
-       * Chatter avec les développeurs et d'autres utilisateurs via IRC
        * Contacter les développeurs directement
 
      Pour en savoir plus, visitez la page "Contact" du site officiel de Tux

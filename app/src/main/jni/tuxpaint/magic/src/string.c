@@ -1,7 +1,7 @@
 /*
  * Strings -- draws string art.
  *
- * Last modified: 2019-08-29
+ * Last modified: 2021-09-21
  */
 #include "tp_magic_api.h"
 #include "SDL_image.h"
@@ -59,6 +59,7 @@ void string_set_color(magic_api * api, Uint8 r, Uint8 g, Uint8 b);
 int string_get_tool_count(magic_api * api);
 SDL_Surface *string_get_icon(magic_api * api, int which);
 char *string_get_name(magic_api * api, int which);
+int string_get_group(magic_api * api, int which);
 char *string_get_description(magic_api * api, int which, int mode);
 int string_requires_colors(magic_api * api, int which);
 void string_release(magic_api * api, int which,
@@ -77,7 +78,7 @@ Uint32 string_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int string_modes( __attribute__ ((unused)) magic_api * api, int which)
+int string_modes(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   if (which == STRING_TOOL_FULL_BY_OFFSET)
     return (MODE_PAINT);
@@ -85,7 +86,7 @@ int string_modes( __attribute__ ((unused)) magic_api * api, int which)
     return (MODE_PAINT_WITH_PREVIEW);
 }
 
-void string_set_color( __attribute__ ((unused)) magic_api * api, Uint8 r, Uint8 g, Uint8 b)
+void string_set_color(magic_api * api ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b)
 {
   string_r = r;
   string_g = g;
@@ -94,7 +95,7 @@ void string_set_color( __attribute__ ((unused)) magic_api * api, Uint8 r, Uint8 
 
 
 
-int string_get_tool_count( __attribute__ ((unused)) magic_api * api)
+int string_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
 {
   return STRING_NUMTOOLS;
 }
@@ -120,8 +121,7 @@ SDL_Surface *string_get_icon(magic_api * api, int which)
 }
 
 
-char *string_get_name( __attribute__ ((unused)) magic_api * api, __attribute__ ((unused))
-                      int which)
+char *string_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   switch (which)
     {
@@ -136,8 +136,12 @@ char *string_get_name( __attribute__ ((unused)) magic_api * api, __attribute__ (
     }
 }
 
-char *string_get_description( __attribute__ ((unused)) magic_api * api, int which, __attribute__ ((unused))
-                             int mode)
+int string_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+{
+  return MAGIC_TYPE_ARTISTIC;
+}
+
+char *string_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   switch (which)
     {
@@ -154,8 +158,7 @@ char *string_get_description( __attribute__ ((unused)) magic_api * api, int whic
     }
 }
 
-int string_requires_colors( __attribute__ ((unused)) magic_api * api, __attribute__ ((unused))
-                           int which)
+int string_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
@@ -180,7 +183,7 @@ void string_release(magic_api * api, int which,
     }
 }
 
-int string_init( __attribute__ ((unused)) magic_api * api)
+int string_init(magic_api * api ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -196,7 +199,7 @@ int string_init( __attribute__ ((unused)) magic_api * api)
   return (1);
 }
 
-void string_shutdown( __attribute__ ((unused)) magic_api * api)
+void string_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 {
   int i = 0;
 
@@ -211,19 +214,14 @@ void string_shutdown( __attribute__ ((unused)) magic_api * api)
     }
 }
 
-void string_switchin( __attribute__ ((unused)) magic_api * api, __attribute__ ((unused))
-                     int which, __attribute__ ((unused))
-                     int mode, SDL_Surface * canvas, __attribute__ ((unused)) SDL_Surface * snapshot)
+void string_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED)
 {
   canvas_backup = SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h, canvas->format->BitsPerPixel,
                                        canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask,
                                        canvas->format->Amask);
 }
 
-void string_switchout( __attribute__ ((unused)) magic_api * api, __attribute__ ((unused))
-                      int which, __attribute__ ((unused))
-                      int mode, __attribute__ ((unused)) SDL_Surface * canvas,
-                      __attribute__ ((unused)) SDL_Surface * snapshot)
+void string_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * snapshot ATTRIBUTE_UNUSED)
 {
   SDL_FreeSurface(canvas_backup);
   canvas_backup = NULL;
@@ -232,8 +230,7 @@ void string_switchout( __attribute__ ((unused)) magic_api * api, __attribute__ (
 // Interactivity functions
 
 
-void string_callback(void *ptr, __attribute__ ((unused))
-                     int which, SDL_Surface * canvas, __attribute__ ((unused)) SDL_Surface * snapshot, int x, int y)
+void string_callback(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -241,8 +238,7 @@ void string_callback(void *ptr, __attribute__ ((unused))
 }
 
 
-void string_click(magic_api * api, int which, __attribute__ ((unused))
-                  int mode, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void string_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
 {
   SDL_BlitSurface(canvas, NULL, canvas_backup, NULL);
 
@@ -253,8 +249,7 @@ void string_click(magic_api * api, int which, __attribute__ ((unused))
   string_drag(api, which, canvas, snapshot, x, y, x, y, update_rect);
 }
 
-static void string_draw_full_by_offset(void *ptr, __attribute__ ((unused))
-                                       int which, SDL_Surface * canvas, __attribute__ ((unused)) SDL_Surface * snapshot,
+static void string_draw_full_by_offset(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED,
                                        int x, int y, SDL_Rect * update_rect)
 {
   magic_api *api = (magic_api *) ptr;
@@ -377,9 +372,7 @@ void string_draw_triangle_preview(magic_api * api, int which,
 }
 
 void string_draw_angle_preview(magic_api * api, int which,
-                               SDL_Surface * canvas, SDL_Surface * snapshot, __attribute__ ((unused))
-                               int ox, __attribute__ ((unused))
-                               int oy, int x, int y, SDL_Rect * update_rect)
+                               SDL_Surface * canvas, SDL_Surface * snapshot, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
 {
   int middle_x, middle_y;
   int dx, dy;
@@ -411,11 +404,8 @@ void string_draw_angle_preview(magic_api * api, int which,
 
 }
 
-void string_draw_angle(magic_api * api, __attribute__ ((unused))
-                       int which,
-                       SDL_Surface * canvas, __attribute__ ((unused)) SDL_Surface * snapshot, __attribute__ ((unused))
-                       int ox, __attribute__ ((unused))
-                       int oy, int x, int y, SDL_Rect * update_rect)
+void string_draw_angle(magic_api * api, int which ATTRIBUTE_UNUSED,
+                       SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
 {
   float first_arm_step_x, first_arm_step_y, second_arm_step_x, second_arm_step_y;
   int i;
@@ -445,8 +435,7 @@ void string_draw_angle(magic_api * api, __attribute__ ((unused))
     }
 }
 
-void string_draw_triangle(magic_api * api, __attribute__ ((unused))
-                          int which,
+void string_draw_triangle(magic_api * api, int which ATTRIBUTE_UNUSED,
                           SDL_Surface * canvas, SDL_Surface * snapshot, int ox, int oy, int x, int y,
                           SDL_Rect * update_rect)
 {

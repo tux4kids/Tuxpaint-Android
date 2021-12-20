@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-13 21:06-0700\n"
+"POT-Creation-Date: 2021-11-25 01:12-0800\n"
 "PO-Revision-Date: 2012-12-21 11:04+0530\n"
 "Last-Translator: \n"
 "Language-Team: Kashmiri-DV\n"
@@ -121,11 +121,11 @@ msgstr "बिज!"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:177
+#: ../dirwalk.c:188
 msgid "qx"
 msgstr "qx"
 
-#: ../dirwalk.c:177
+#: ../dirwalk.c:188
 msgid "QX"
 msgstr "QX"
 
@@ -135,80 +135,92 @@ msgstr "QX"
 #. especially important for users who have scroll buttons disabled.
 #. Translators should do whatever is needed to put crummy fonts last.
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:202
+#: ../dirwalk.c:213
 msgid "oO"
 msgstr "oO"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:205
+#: ../dirwalk.c:216
 msgid ",.?!"
 msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:208
+#: ../dirwalk.c:219
 #, fuzzy
 #| msgid "`\\%_@$~#{<(^&*"
 msgid "`%_@$~#{<(^&*"
 msgstr "`\\%_@$~#{<(^&*"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:211
+#: ../dirwalk.c:222
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:214
+#: ../dirwalk.c:225
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:217
+#: ../dirwalk.c:228
 msgid "1Il|"
 msgstr "1Il|"
 
-#: ../dirwalk.c:221
+#: ../dirwalk.c:232
 msgid "<1>spare-1a"
 msgstr "<1>  सुपयर-1a"
 
-#: ../dirwalk.c:222
+#: ../dirwalk.c:233
 msgid "<1>spare-1b"
 msgstr "<1> सुपयर-1b"
 
-#: ../dirwalk.c:223
+#: ../dirwalk.c:234
 msgid "<9>spare-9a"
 msgstr "<9> सुपयर-9a"
 
-#: ../dirwalk.c:224
+#: ../dirwalk.c:235
 msgid "<9>spare-9b"
 msgstr "<9> सुपयर-9a"
 
-#: ../fill_tools.h:49
+#: ../fill_tools.h:50
 msgid "Solid"
 msgstr ""
 
-#: ../fill_tools.h:50
+#: ../fill_tools.h:51
+#, fuzzy
+#| msgid "Brushes"
+msgid "Brush"
+msgstr "बुरुश"
+
+#: ../fill_tools.h:52
 #, fuzzy
 #| msgid "Lines"
 msgid "Linear"
 msgstr "लायनॆ"
 
-#: ../fill_tools.h:51
+#: ../fill_tools.h:53
 msgid "Radial"
 msgstr ""
 
-#: ../fill_tools.h:55
+#: ../fill_tools.h:57
 #, fuzzy
 #| msgid "Click in the picture to fill that area with color."
 msgid "Click to fill an area with a solid color."
 msgstr "सु रकबो रंग सॊत बरनॊ बापत कॊरीव तसविर मंज़ कोलोक."
 
-#: ../fill_tools.h:56
+#: ../fill_tools.h:58
+#, fuzzy
+#| msgid "Click in the picture to fill that area with color."
+msgid "Click and drag to fill an area by hand, using a brush."
+msgstr "सु रकबो रंग सॊत बरनॊ बापत कॊरीव तसविर मंज़ कोलोक."
+
+#: ../fill_tools.h:59
 msgid ""
 "Click and drag to fill an area with a linear gradient (from the chosen color "
 "to transparent)."
 msgstr ""
 
-#: ../fill_tools.h:57
+#: ../fill_tools.h:60
 msgid ""
 "Click to fill an area with a radial gradient (from the chosen color to "
 "transparent)."
@@ -235,141 +247,167 @@ msgid "Good job!"
 msgstr "असोल कॊम!"
 
 #. Input Method: English mode
-#: ../im.c:74
+#: ../im.c:80
 msgid "English"
 msgstr "अंगरॊज़"
 
 #. Input Method: Japanese Romanized Hiragana mode
-#: ../im.c:77
+#: ../im.c:83
 msgid "Hiragana"
 msgstr "हिरागाना"
 
 #. Input Method: Japanese Romanized Katakana mode
-#: ../im.c:80
+#: ../im.c:86
 msgid "Katakana"
 msgstr "काटाकाना"
 
 #. Input Method: Korean Hangul 2-Bul mode
-#: ../im.c:83
+#: ../im.c:89
 msgid "Hangul"
 msgstr "हांगुल"
 
 #. Input Method: Thai mode
-#: ../im.c:86
+#: ../im.c:92
 msgid "Thai"
 msgstr "थाय"
 
 #. Input Method: Traditional Chinese mode
-#: ../im.c:89
+#: ../im.c:95
 msgid "ZH_TW"
 msgstr "ZH_TW"
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:234 ../shapes.h:235
+#: ../shapes.h:238 ../shapes.h:239
 msgid "Square"
 msgstr "मुरबबा"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:238 ../shapes.h:239
+#: ../shapes.h:242 ../shapes.h:243
 msgid "Rectangle"
 msgstr "रिकटिंगेल"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:242 ../shapes.h:243
+#: ../shapes.h:246 ../shapes.h:247
 msgid "Circle"
 msgstr "गूल"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:246 ../shapes.h:247
+#: ../shapes.h:250 ../shapes.h:251
 msgid "Ellipse"
 msgstr "ईलीपोस"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:250 ../shapes.h:251
+#: ../shapes.h:254 ../shapes.h:255
 msgid "Triangle"
 msgstr "तरीकून"
 
 #. Pentagone shape tool (5 sides)
-#: ../shapes.h:254 ../shapes.h:255
+#: ../shapes.h:258 ../shapes.h:259
 msgid "Pentagon"
 msgstr "पीनटागान"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:258 ../shapes.h:259
+#: ../shapes.h:262 ../shapes.h:263
 msgid "Rhombus"
 msgstr "रूमबस"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:262 ../shapes.h:263
+#: ../shapes.h:266 ../shapes.h:267
 msgid "Octagon"
 msgstr "ऊकटागान"
 
 #. Triangle star (3 points star)
 #. Rhombus star (4 points star)
 #. Pentagone star (5 points star)
-#: ../shapes.h:266 ../shapes.h:269 ../shapes.h:272 ../shapes.h:275
-#: ../shapes.h:278 ../shapes.h:281
+#: ../shapes.h:270 ../shapes.h:273 ../shapes.h:276 ../shapes.h:279
+#: ../shapes.h:282 ../shapes.h:285
 msgid "Star"
 msgstr ""
 
 #. Description of a square
-#: ../shapes.h:289 ../shapes.h:290
+#: ../shapes.h:293 ../shapes.h:294
 msgid "A square is a rectangle with four equal sides."
 msgstr "अख मुरबबा छु अख च़ौर बराबर तरफ वौल रिकटिंगल."
 
 #. Description of a rectangle
-#: ../shapes.h:293 ../shapes.h:294
+#: ../shapes.h:297 ../shapes.h:298
 msgid "A rectangle has four sides and four right angles."
 msgstr "एिकोस रिकटिंगलस छॊ च़ॊर तरफ आसान तॊ च़ौर रायोट एिंगोल आसान."
 
 #. Description of a circle
-#: ../shapes.h:297 ../shapes.h:298
+#: ../shapes.h:301 ../shapes.h:302
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr "गूल छु अख किरीव आसान यॊतनस तमाम पुयंटन कुनूय फॊसली छु आसान मरकज़ पयॊठ."
 
 #. Description of an ellipse
-#: ../shapes.h:301 ../shapes.h:302
+#: ../shapes.h:305 ../shapes.h:306
 msgid "An ellipse is a stretched circle."
 msgstr "अख ईलोपोस छु अख फॊलावनो आमुत गूल."
 
 #. Description of a triangle
-#: ../shapes.h:305 ../shapes.h:306
+#: ../shapes.h:309 ../shapes.h:310
 msgid "A triangle has three sides."
 msgstr "तरीकूनस छॊ तरॊ तरफ आसान."
 
 #. Description of a pentagon
-#: ../shapes.h:309 ../shapes.h:310
+#: ../shapes.h:313 ../shapes.h:314
 msgid "A pentagon has five sides."
 msgstr "पींटागानस छॊ पॊंछ़ तरफ आसान."
 
 #. Description of a rhombus
-#: ../shapes.h:313 ../shapes.h:314
+#: ../shapes.h:317 ../shapes.h:318
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr "एिकोस रूमबसस छॊ च़ौर बराबर तरफ आसान,तॊ मुकाबल तरफ छॊस परलल आसान."
 
 #. Description of an octagon
-#: ../shapes.h:317 ../shapes.h:318
+#: ../shapes.h:321 ../shapes.h:322
 msgid "An octagon has eight equal sides."
 msgstr "एिकोस ऊकटागानस छॊ एॊठ बराबर तरफ आसान."
 
-#: ../shapes.h:320 ../shapes.h:321
+#: ../shapes.h:324 ../shapes.h:325
 msgid "A star with 3 points."
 msgstr ""
 
-#: ../shapes.h:322 ../shapes.h:323
+#: ../shapes.h:326 ../shapes.h:327
 msgid "A star with 4 points."
 msgstr ""
 
-#: ../shapes.h:324 ../shapes.h:325
+#: ../shapes.h:328 ../shapes.h:329
 msgid "A star with 5 points."
 msgstr ""
 
-#: ../shapes.h:372
+#: ../shapes.h:385
+#, fuzzy
+#| msgid ""
+#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
+#| "size you want. Move around to rotate it, and click to draw it."
+msgid ""
+"Pick a shape. Click to start drawing, drag, and let go when it is the size "
+"and shape you want. Move around to rotate it, and click again to draw it."
+msgstr ""
+"अख शकल तुलीव. मरकज़ तुलनी बापत कॊरीव कोलोक,डरिग कॊरीव, पतॊ तरियीव यलॊ यॊली यो "
+"तुहॊंदी  ज़रूरतोक सायज़ुक गछ़ॊ. गूल गूल नॊच़ोव यॊ गुमावनो बापत, तॊ कोलोक कॊरीव यो  डरा "
+"करनॊ बापत."
+
+#: ../shapes.h:386
+#, fuzzy
+#| msgid ""
+#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
+#| "size you want. Move around to rotate it, and click to draw it."
+msgid ""
+"Pick a shape. Click to start drawing, drag, and let go when it is the size "
+"and shape you want."
+msgstr ""
+"अख शकल तुलीव. मरकज़ तुलनी बापत कॊरीव कोलोक,डरिग कॊरीव, पतॊ तरियीव यलॊ यॊली यो "
+"तुहॊंदी  ज़रूरतोक सायज़ुक गछ़ॊ. गूल गूल नॊच़ोव यॊ गुमावनो बापत, तॊ कोलोक कॊरीव यो  डरा "
+"करनॊ बापत."
+
+#: ../shapes.h:392
 msgid "Draw shapes from the center."
 msgstr ""
 
-#: ../shapes.h:373
+#: ../shapes.h:393
 msgid "Draw shapes from a corner."
 msgstr ""
 
@@ -475,7 +513,7 @@ msgstr "नूव"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:8179
+#: ../tools.h:98 ../tuxpaint.c:8438
 msgid "Open"
 msgstr "खूलीव"
 
@@ -510,20 +548,7 @@ msgid "Click to start drawing a line. Let go to complete it."
 msgstr ""
 "अख लायोन डरा करोन शरू करनो बापत कॊरीव कोलोक. यलो तरॊयीव यो मुकमल करनॊ बापत."
 
-#: ../tools.h:125
-#, fuzzy
-#| msgid ""
-#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
-#| "size you want. Move around to rotate it, and click to draw it."
-msgid ""
-"Pick a shape. Click to start drawing, drag, and let go when it is the size "
-"you want. Move around to rotate it, and click to draw it."
-msgstr ""
-"अख शकल तुलीव. मरकज़ तुलनी बापत कॊरीव कोलोक,डरिग कॊरीव, पतॊ तरियीव यलॊ यॊली यो "
-"तुहॊंदी  ज़रूरतोक सायज़ुक गछ़ॊ. गूल गूल नॊच़ोव यॊ गुमावनो बापत, तॊ कोलोक कॊरीव यो  डरा "
-"करनॊ बापत."
-
-#: ../tools.h:129
+#: ../tools.h:128
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text."
@@ -531,7 +556,7 @@ msgstr ""
 "मतनुक अख सोटायील च़ॊरीव. पननॊ डरायींग पयोठ कॊरीव कोलोक तॊ तुहयो हयीकोव टायपींग शरू "
 "कॊरीथ. [एिंटर] या[टिब]   कॊरीव परीस मतन मुकमल करनॊ बापत."
 
-#: ../tools.h:133
+#: ../tools.h:132
 #, fuzzy
 #| msgid ""
 #| "Choose a style of text. Click on your drawing and you can start typing. "
@@ -549,59 +574,62 @@ msgstr ""
 "कॊरीथ तॊ अख मूजूद लिबोल कोलोक कॊरीथ हयोकोव तुहयो यो पकनॊवीथ,एिडीट कॊरीथ या अमयुक "
 "मतन सोटायील तबदिल कॊरीथ."
 
-#. Fill tool instructions
-#: ../tools.h:136
-msgid "Click in the picture to fill that area with color."
-msgstr "सु रकबो रंग सॊत बरनॊ बापत कॊरीव तसविर मंज़ कोलोक."
-
 #. Magic tool instruction
-#: ../tools.h:139
+#: ../tools.h:138
 msgid "Pick a magical effect to use on your drawing!"
 msgstr "पननॊ डरायोंग पयॊठ ईसतिमाल करनॊ बापत तुलीव अख जादूयी असर!"
 
 #. Response to 'undo' action
-#: ../tools.h:142
+#: ../tools.h:141
 msgid "Undo!"
 msgstr "अनडू!"
 
 #. Response to 'redo' action
-#: ../tools.h:145
+#: ../tools.h:144
 msgid "Redo!"
 msgstr "रीडू!"
 
 #. Eraser tool
-#: ../tools.h:148
+#: ../tools.h:147
 msgid "Eraser!"
 msgstr "ईरिज़र!"
 
 #. Response to 'start a new image' action
-#: ../tools.h:151
+#: ../tools.h:150
 msgid "Pick a color or picture with which to start a new drawing."
 msgstr "अख रंग या शकल तुलीव योम सॊत तुहयो अख नॊव डरायोंग शरू करॊन छॊ."
 
 #. Response to 'open' action (while file dialog is being constructed)
-#: ../tools.h:154
+#: ../tools.h:153
 msgid "Open…"
 msgstr "खूलोव…"
 
 #. Response to 'save' action
-#: ../tools.h:157
+#: ../tools.h:156
 msgid "Your image has been saved!"
 msgstr "तुहॊंज़ शकल आयो मोहफूज़ करनॊ!"
 
 #. Response to 'print' action (while printing, or print dialog is being used)
-#: ../tools.h:160
+#: ../tools.h:159
 msgid "Printing…"
 msgstr "परींट करान…"
 
 #. Response to 'quit' (exit) action
-#: ../tools.h:163
+#: ../tools.h:162
 msgid "Bye bye!"
 msgstr "बाय बाय!"
 
 #. Instruction while using Line tool (after click, before release)
-#: ../tools.h:167
+#: ../tools.h:166
 msgid "Let go of the button to complete the line."
+msgstr "लायोन मुकमल करनॊ बापत तरॊयीव बूटन यलॊ."
+
+#: ../tools.h:167
+#, fuzzy, c-format
+#| msgid "Let go of the button to complete the line."
+msgid ""
+"Let go of the button to complete the line. (Your line's angle is %.0f "
+"degrees.)"
 msgstr "लायोन मुकमल करनॊ बापत तरॊयीव बूटन यलॊ."
 
 #. Instruction while using Shape tool (after first click, before release)
@@ -614,233 +642,241 @@ msgstr "बुटन रॊटीव बंद शकल फिलावनो �
 msgid "Move the mouse to rotate the shape. Click to draw it."
 msgstr "शकल गुमावनॊ बापत पकनॊयीव मावुस. डरा करनॊ बापत कॊरीव कोलोक."
 
+#: ../tools.h:174
+#, fuzzy, c-format
+#| msgid "Move the mouse to rotate the shape. Click to draw it."
+msgid ""
+"Move the mouse to rotate the shape. Click to draw it. (It is rotated %d "
+"degrees.)"
+msgstr "शकल गुमावनॊ बापत पकनॊयीव मावुस. डरा करनॊ बापत कॊरीव कोलोक."
+
 #. Notification that 'New' action was aborted (current image would have been lost)
-#: ../tools.h:176
+#: ../tools.h:177
 msgid "OK then… Let’s keep drawing this one!"
 msgstr "OK तॊलो… पकॊव यॊ डरायींग रूज़व करान!"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2190
+#: ../tuxpaint.c:2234
 msgid "Do you really want to quit?"
 msgstr "कयाह तुहयो छॊव पॊज़ पॊठ रुकुन यछ़ान?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2193
+#: ../tuxpaint.c:2237
 msgid "Yes, I’m done!"
 msgstr "आ, मॊ मकलूव!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2196 ../tuxpaint.c:2223
+#: ../tuxpaint.c:2240 ../tuxpaint.c:2267
 msgid "No, take me back!"
 msgstr "ना,मॊ नॊयीव वापस!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2200
+#: ../tuxpaint.c:2244
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "अगर तुहयॊ रुकोव, तुहॊंज़ तसविर रावो!यो कॊरवाह मोहफूज़?"
 
-#: ../tuxpaint.c:2201 ../tuxpaint.c:2206
+#: ../tuxpaint.c:2245 ../tuxpaint.c:2250
 msgid "Yes, save it!"
 msgstr "आ, यॊ कॊरहून मोहफूज़!"
 
-#: ../tuxpaint.c:2202 ../tuxpaint.c:2207
+#: ../tuxpaint.c:2246 ../tuxpaint.c:2251
 msgid "No, don’t bother saving!"
 msgstr "ना, मोहफूज़ करनुक गम मॊ बॊरीव!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2205
+#: ../tuxpaint.c:2249
 msgid "Save your picture first?"
 msgstr "गुडे कॊरवा तसविर मॆहफूज़?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2210
+#: ../tuxpaint.c:2254
 msgid "Can’t open that picture!"
 msgstr "छु नॊ हिकान हु तसविर खूलीथ!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2213 ../tuxpaint.c:2218 ../tuxpaint.c:2227 ../tuxpaint.c:2234
-#: ../tuxpaint.c:2243 ../tuxpaint.c:2248
+#: ../tuxpaint.c:2257 ../tuxpaint.c:2262 ../tuxpaint.c:2271 ../tuxpaint.c:2278
+#: ../tuxpaint.c:2287 ../tuxpaint.c:2292
 msgid "OK"
 msgstr "OK"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2217
+#: ../tuxpaint.c:2261
 msgid "There are no saved files!"
 msgstr "अतो छॊ नॊ मोहफूज़  करनॊ आमोच़ फायलो?"
 
 #. Verification of print action
-#: ../tuxpaint.c:2221
+#: ../tuxpaint.c:2265
 msgid "Print your picture now?"
 msgstr "पननॊन तसविर कॊरीवो परोंट वॊन?"
 
-#: ../tuxpaint.c:2222
+#: ../tuxpaint.c:2266
 msgid "Yes, print it!"
 msgstr "आ, कॊरीव परींट!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2226
+#: ../tuxpaint.c:2270
 msgid "Your picture has been printed!"
 msgstr "तुहॊंज़ तसविर छॊ परींट करनॊ आमोच़!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2230
+#: ../tuxpaint.c:2274
 msgid "Sorry! Your picture could not be printed!"
 msgstr "मॊफी दीयोव!तुहॊंज़ तसविर हयोच नॊ परींट कॊरीथ!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2233
+#: ../tuxpaint.c:2277
 msgid "You can’t print yet!"
 msgstr "वॊन हयीकीव नॊ परींट कॊरीथ!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2237
+#: ../tuxpaint.c:2281
 msgid "Erase this picture?"
 msgstr "तसविर कॊरीव ईरिज़?"
 
-#: ../tuxpaint.c:2238
+#: ../tuxpaint.c:2282
 msgid "Yes, erase it!"
 msgstr "आ, कॊरीव ईरिज़!"
 
-#: ../tuxpaint.c:2239
+#: ../tuxpaint.c:2283
 msgid "No, don’t erase it!"
 msgstr "ना, यॊ मो कॊरीव ईरिज़!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2242
+#: ../tuxpaint.c:2286
 msgid "Remember to use the left mouse button!"
 msgstr "खुफुर मावुस बुटन ईसतिमाल करुन थियज़ोव याद!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2246
+#: ../tuxpaint.c:2290
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "तुहॊंज़ तसविर छॊ परींट करनॊ आमोच़!"
 
-#: ../tuxpaint.c:2247
+#: ../tuxpaint.c:2291
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "तुहॊंज़ तसविर छॊ परींट करनॊ आमोच़!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2251
+#: ../tuxpaint.c:2295
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "मॊफी दीयोव!तुहॊंज़ तसविर हयोच नॊ परींट कॊरीथ!"
 
-#: ../tuxpaint.c:2252
+#: ../tuxpaint.c:2296
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "मॊफी दीयोव!तुहॊंज़ तसविर हयोच नॊ परींट कॊरीथ!"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2256
+#: ../tuxpaint.c:2300
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "च़ॊरीव तसविर योम तुहयो ज़रूरत छॊ, पतॊ कॊरीव कोलोक “पेलि”."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2465
+#: ../tuxpaint.c:2512
 msgid "Sound muted."
 msgstr "मयूट करनॊ आमोच़ आवाज़"
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2470
+#: ../tuxpaint.c:2517
 msgid "Sound unmuted."
 msgstr "अनयूट करनॊ आमोच़ आवाज़"
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3247
+#: ../tuxpaint.c:3296
 msgid "Please wait…"
 msgstr "मॊहरबिनी  कॊरीथ पिरीव…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:8182
+#: ../tuxpaint.c:8441
 msgid "Erase"
 msgstr "ईरिज़"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:8185
+#: ../tuxpaint.c:8444
 msgid "Slides"
 msgstr "सोलायडे"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:8188
+#: ../tuxpaint.c:8447
 msgid "Export"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:8191
+#: ../tuxpaint.c:8450
 msgid "Back"
 msgstr "वापस"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:8194
+#: ../tuxpaint.c:8453
 msgid "Play"
 msgstr "पेली"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:8197
+#: ../tuxpaint.c:8456
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:8200
+#: ../tuxpaint.c:8459
 msgid "Next"
 msgstr "बयाख"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:8948
+#: ../tuxpaint.c:9267
 msgid "Aa"
 msgstr "आ"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12589
+#: ../tuxpaint.c:12927
 msgid "Yes"
 msgstr "आ"
 
-#: ../tuxpaint.c:12593
+#: ../tuxpaint.c:12931
 msgid "No"
 msgstr "ना"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:13732
+#: ../tuxpaint.c:14077
 msgid "Replace the picture with your changes?"
 msgstr "तुहॊंज़न तबदिलयन सान बदलाववाह तसविर ?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:13736
+#: ../tuxpaint.c:14081
 msgid "Yes, replace the old one!"
 msgstr "आ, परॊन अख बदलॊयोव!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:13740
+#: ../tuxpaint.c:14085
 msgid "No, save a new file!"
 msgstr "ना, मोहफूज़ कॊरीव अख नॊव फायोल!"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:15003
+#: ../tuxpaint.c:15349
 msgid "Choose the picture you want, then click “Open”."
 msgstr "च़ॊरीव तसविर युस तुहयो ज़रूरत छॊ, पतॊ कॊरीव कोलोक “खूलोव”."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:16429
+#: ../tuxpaint.c:16775
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
-#: ../tuxpaint.c:24135
+#: ../tuxpaint.c:24552
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:24147
+#: ../tuxpaint.c:24564
 msgid "Pick a color."
 msgstr "अख रंग तुलीव."
 
@@ -860,7 +896,7 @@ msgstr "अख डरायींग परुगराम बचन बाप�
 msgid "Color Shift"
 msgstr "कलर शोफटे"
 
-#: ../../magic/src/alien.c:72
+#: ../../magic/src/alien.c:76
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to change the colors in parts of your picture."
@@ -868,15 +904,15 @@ msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr ""
 "कोलकोक कॊरीव तॊ मावुस पकनॊयीव कलर तबदिल करनॊ बापत तुहॊंज़ो तसविर हॊंदीन हीसन मंज़."
 
-#: ../../magic/src/alien.c:73
+#: ../../magic/src/alien.c:77
 msgid "Click to change the colors in your entire picture."
 msgstr "पननॊ पूरी तसविर मंज़ रंग बदलावनो बापत कॊरीव कोलोक."
 
-#: ../../magic/src/blind.c:115
+#: ../../magic/src/blind.c:116
 msgid "Blind"
 msgstr "बोलायींड"
 
-#: ../../magic/src/blind.c:122
+#: ../../magic/src/blind.c:128
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
@@ -884,25 +920,31 @@ msgstr ""
 "पननॊ तसविर होंदीस सतहस कुन कॊरीव कोलोक वोंडू बोलायोंड अथ पयॊठ तरावनो बापत. खडा "
 "पकनॊयीव बोलायींड खूलनो या बंद करनॊ बापत."
 
-#: ../../magic/src/blocks_chalk_drip.c:129
+#: ../../magic/src/blocks_chalk_drip.c:132
 msgid "Blocks"
 msgstr "बुलाक"
 
-#: ../../magic/src/blocks_chalk_drip.c:131
+#: ../../magic/src/blocks_chalk_drip.c:134
 msgid "Chalk"
 msgstr "चाक"
 
-#: ../../magic/src/blocks_chalk_drip.c:133
+#: ../../magic/src/blocks_chalk_drip.c:136
 msgid "Drip"
 msgstr "डरोप"
 
-#: ../../magic/src/blocks_chalk_drip.c:142
+#: ../../magic/src/blocks_chalk_drip.c:154
 #, fuzzy
 #| msgid "Click and move the mouse around to make the picture blocky."
 msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "तसविर बुलाकी बनावनॊ बापत कॊरीव कोलोक तॊ पकनॊयीव मावुस ऊर यूर."
 
-#: ../../magic/src/blocks_chalk_drip.c:144
+#: ../../magic/src/blocks_chalk_drip.c:158
+#, fuzzy
+#| msgid "Click to sharpen the entire picture."
+msgid "Click to make the entire picture blocky."
+msgstr "तमाम तसविर तिज़ बनावनो बापत कॊरोव कोलोक."
+
+#: ../../magic/src/blocks_chalk_drip.c:165
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn the picture into a chalk drawing."
@@ -911,239 +953,261 @@ msgid ""
 msgstr ""
 "तसविर एिकोस चाक डरायींग मंज़ तबदिल करनॊ  बापत कॊरीव कोलोक तॊ पकनॊयीव मावुस ऊर यूर."
 
-#: ../../magic/src/blocks_chalk_drip.c:146
+#: ../../magic/src/blocks_chalk_drip.c:169
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
+msgid "Click to turn the entire picture into a chalk drawing."
+msgstr ""
+"तसविर एिकोस चाक डरायींग मंज़ तबदिल करनॊ  बापत कॊरीव कोलोक तॊ पकनॊयीव मावुस ऊर यूर."
+
+#: ../../magic/src/blocks_chalk_drip.c:174
 #, fuzzy
 #| msgid "Click and move the mouse around to make the picture drip."
 msgid "Click and drag the mouse around to make the picture drip."
 msgstr "तसविर डरोप बनावनॊ बापत कॊरीव कोलोक तॊ पकनॊयीव मावुस ऊर यूर."
 
-#: ../../magic/src/blur.c:80
+#: ../../magic/src/blur.c:81
 msgid "Blur"
 msgstr "गॊट कॊरीव"
 
-#: ../../magic/src/blur.c:84
+#: ../../magic/src/blur.c:89
 #, fuzzy
 #| msgid "Click and move the mouse around to blur the image."
 msgid "Click and drag the mouse around to blur the image."
 msgstr "तसविर गॊट बनावनॊ बापत कॊरीव कोलोक तॊ पकनॊयीव मावुस ऊर यूर."
 
-#: ../../magic/src/blur.c:85
+#: ../../magic/src/blur.c:90
 msgid "Click to blur the entire image."
 msgstr "तमाम ईमिज गॊट करनॊ बापत कॊरीव कोलोक."
 
 #. Both are named "Bricks", at the moment:
-#: ../../magic/src/bricks.c:120
+#: ../../magic/src/bricks.c:121
 msgid "Bricks"
 msgstr "बरीको"
 
-#: ../../magic/src/bricks.c:127
+#: ../../magic/src/bricks.c:134
 #, fuzzy
 #| msgid "Click and move to draw large bricks."
 msgid "Click and drag to draw large bricks."
 msgstr "कोलोक तॊ पकनॊयीव बजो बरीको डरा करनो बापत."
 
-#: ../../magic/src/bricks.c:129
+#: ../../magic/src/bricks.c:136
 #, fuzzy
 #| msgid "Click and move to draw small bricks."
 msgid "Click and drag to draw small bricks."
 msgstr "कोलोक तॊ पकनॊयीव लकचो बरीको डरा करनो बापत."
 
-#: ../../magic/src/calligraphy.c:124
+#: ../../magic/src/calligraphy.c:125
 msgid "Calligraphy"
 msgstr "किलोगराफी"
 
-#: ../../magic/src/calligraphy.c:131
+#: ../../magic/src/calligraphy.c:138
 #, fuzzy
 #| msgid "Click and move the mouse around to draw in calligraphy."
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "किलोगराफी डरा ईन करनॊ बापत कॊरीव कोलोक तॊ पकनॊयीव मावुस ऊर यूर."
 
-#: ../../magic/src/cartoon.c:103
+#: ../../magic/src/cartoon.c:107
 msgid "Cartoon"
 msgstr "काटून"
 
-#: ../../magic/src/cartoon.c:109
+#: ../../magic/src/cartoon.c:121
 #, fuzzy
 #| msgid "Click and move the mouse around to turn the picture into a cartoon."
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr "तसविर काटूनस मंज़ बदलावनो बापत कॊरीव कोलोक तॊ पकनॊयीव मावुस ऊर यूर."
 
-#: ../../magic/src/checkerboard.c:99
+#: ../../magic/src/cartoon.c:125
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
+msgid "Click to turn the entire picture into a cartoon."
+msgstr ""
+"तसविर एिकोस चाक डरायींग मंज़ तबदिल करनॊ  बापत कॊरीव कोलोक तॊ पकनॊयीव मावुस ऊर यूर."
+
+#: ../../magic/src/checkerboard.c:100
 msgid "Checkerboard"
 msgstr ""
 
-#: ../../magic/src/checkerboard.c:106
+#: ../../magic/src/checkerboard.c:112
 #, fuzzy
 #| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to fill the canvas with a checkerboard pattern."
 msgstr "कोलोक कॊरीव तॊ डरिग कॊरीव सोटरोंग आरटीक बनॊमीत तिर डरा करनो बापत."
 
-#: ../../magic/src/clone.c:132
+#: ../../magic/src/clone.c:133
 msgid "Clone"
 msgstr ""
 
-#: ../../magic/src/clone.c:138
+#: ../../magic/src/clone.c:145
 msgid ""
 "Click once to pick a spot to begin cloning. Click again and drag to clone "
 "that part of the picture."
 msgstr ""
 
-#: ../../magic/src/confetti.c:83
+#: ../../magic/src/confetti.c:86
 msgid "Confetti"
 msgstr "कनफिटो"
 
-#: ../../magic/src/confetti.c:88
+#: ../../magic/src/confetti.c:96
 msgid "Click to throw confetti!"
 msgstr "कनफिटो थरू करनॊ बापत कॊरीव कोलोक!"
 
-#: ../../magic/src/distortion.c:134
+#: ../../magic/src/distortion.c:135
 msgid "Distortion"
 msgstr "खरॊबी"
 
-#: ../../magic/src/distortion.c:143
+#: ../../magic/src/distortion.c:152
 msgid "Click and drag the mouse to cause distortion in your picture."
 msgstr "पननॊ तसविर मंज़ खरॊबी करनॊ बापत कॊरीव कोलोक तॊ डरिग मावुस."
 
-#: ../../magic/src/emboss.c:101
+#: ../../magic/src/emboss.c:102
 msgid "Emboss"
 msgstr "ईमबास"
 
-#: ../../magic/src/emboss.c:107
+#: ../../magic/src/emboss.c:114
 msgid "Click and drag the mouse to emboss the picture."
 msgstr "तसविर ईमबास करनॊ बापत कॊरीव कोलोक तॊ डरिग मावुस. "
 
-#: ../../magic/src/fade_darken.c:114
+#: ../../magic/src/fade_darken.c:115
 msgid "Lighten"
 msgstr "हलको करुन"
 
-#: ../../magic/src/fade_darken.c:116
+#: ../../magic/src/fade_darken.c:117
 msgid "Darken"
 msgstr "डारोक करुन"
 
-#: ../../magic/src/fade_darken.c:127
+#: ../../magic/src/fade_darken.c:134
 #, fuzzy
 #| msgid "Click and move the mouse to lighten parts of your picture."
 msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "कोलोक कॊरीव तॊ पकनॊयीव मावुस पननॊ तसविर हॊंद होसो हलको करनॊ बापत."
 
-#: ../../magic/src/fade_darken.c:129
+#: ../../magic/src/fade_darken.c:136
 msgid "Click to lighten your entire picture."
 msgstr "पनॊन तमाम तसविर हलको बनावनो बापत कॊरीव कोलोक."
 
-#: ../../magic/src/fade_darken.c:134
+#: ../../magic/src/fade_darken.c:141
 #, fuzzy
 #| msgid "Click and move the mouse to darken parts of your picture."
 msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "कोलोक कॊरीव तॊ पकनॊयीव मावुस पननॊ तसविर हॊंद होसो हलको करनॊ बापत."
 
-#: ../../magic/src/fade_darken.c:136
+#: ../../magic/src/fade_darken.c:143
 msgid "Click to darken your entire picture."
 msgstr "पनॊन तमाम तसविर डारीकबनावनो बापत कॊरीव कोलोक."
 
-#: ../../magic/src/fisheye.c:101
+#: ../../magic/src/fisheye.c:102
 msgid "Fisheye"
 msgstr "फीशआय"
 
-#: ../../magic/src/fisheye.c:106
+#: ../../magic/src/fisheye.c:112
 msgid "Click on part of your picture to create a fisheye effect."
 msgstr "पननॊ तसविर हॊंदीस होसस पयॊठ कॊरीव कोलोक अख फोशआय ईफिकटो बनावनो बापत."
 
-#: ../../magic/src/flower.c:144
+#: ../../magic/src/flower.c:146
 msgid "Flower"
 msgstr "पूश"
 
-#: ../../magic/src/flower.c:150
+#: ../../magic/src/flower.c:158
 msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
 msgstr "कोलोक तॊ डरिग  अख पूशो लुट डरा करनॊ बापत. वॊलीव पूश बनावुन करव खतम."
 
-#: ../../magic/src/foam.c:114
+#: ../../magic/src/foam.c:115
 msgid "Foam"
 msgstr "फूम"
 
-#: ../../magic/src/foam.c:120
+#: ../../magic/src/foam.c:127
 msgid "Click and drag the mouse to cover an area with foamy bubbles."
 msgstr "कोलोक  कॊरीव तॊ डरिग कॊरीव मावुस अख होसो फूम दार बुबडव सॊत कवर करनॊ बापत."
 
-#: ../../magic/src/fold.c:103
+#: ../../magic/src/fold.c:104
 msgid "Fold"
 msgstr "वॊटीव"
 
-#: ../../magic/src/fold.c:108
+#: ../../magic/src/fold.c:114
 msgid ""
 "Choose a background color and click to turn the corner of the page over."
 msgstr "अख बिकगरावुंड रंग च़ॊरीव तॊ कॊरीव कोलोक सफूक कुंज फोरनी बापत."
 
-#: ../../magic/src/fretwork.c:176
+#: ../../magic/src/fretwork.c:182
 msgid "Fretwork"
 msgstr ""
 
-#: ../../magic/src/fretwork.c:182
+#: ../../magic/src/fretwork.c:188
 #, fuzzy
 #| msgid "Click and drag to draw arrows made of string art."
-msgid "Click and drag to draw repetitive patterns. "
+msgid "Click and drag to draw repetitive patterns."
 msgstr "कोलोक कॊरीव तॊ डरिग कॊरीव सोटरोंग आरटीक बनॊमीत तिर डरा करनो बापत."
 
-#: ../../magic/src/fretwork.c:184
+#: ../../magic/src/fretwork.c:190
 #, fuzzy
 #| msgid "Click to cover your picture with rain drops."
 msgid "Click to surround your picture with repetitive patterns."
 msgstr "पननॊन तसविर रुद फीरीव सॊत बरनो बापत कॊरीव कोलोक."
 
-#: ../../magic/src/glasstile.c:104
+#: ../../magic/src/glasstile.c:105
 msgid "Glass Tile"
 msgstr "शिशो ऊनवान"
 
-#: ../../magic/src/glasstile.c:111
+#: ../../magic/src/glasstile.c:118
 msgid "Click and drag the mouse to put glass tile over your picture."
 msgstr ""
 "कोलोक  कॊरीव तॊ डरिग कॊरीव मावुस गोलास ऊनवान पननॊ तसविर पयोठ थावनॊ बापत."
 
-#: ../../magic/src/glasstile.c:113
+#: ../../magic/src/glasstile.c:120
 msgid "Click to cover your entire picture in glass tiles."
 msgstr "कोलोक कॊरीव पननॊन तमाम तसविक गोलासस मंज़ कवर करनॊ बापत."
 
-#: ../../magic/src/grass.c:107
+#: ../../magic/src/grass.c:108
 msgid "Grass"
 msgstr "गासो"
 
-#: ../../magic/src/grass.c:113
+#: ../../magic/src/grass.c:120
 #, fuzzy
 #| msgid "Click and move to draw grass. Don’t forget the dirt!"
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "कोलोक कॊरीव तॊ पकनॊयीव गोलास डरा करनॊ बापत. लछ़ यॊनी मॆशीथ गॊछ़वो!"
 
-#: ../../magic/src/halftone.c:35
+#: ../../magic/src/halftone.c:41
 msgid "Halftone"
 msgstr ""
 
-#: ../../magic/src/halftone.c:39
+#: ../../magic/src/halftone.c:50
 #, fuzzy
 #| msgid "Click to turn your painting into its negative."
 msgid "Click and drag to turn your drawing into a newspaper."
 msgstr "कोलोक कॊरीव पनॊन पिंटींग अमकोस नगिटोवस मंज़ तबदिल करनॊ बापत."
 
-#: ../../magic/src/kalidescope.c:119
+#: ../../magic/src/halftone.c:51
+#, fuzzy
+#| msgid "Click to turn your painting into its negative."
+msgid "Click to turn your drawing into a newspaper."
+msgstr "कोलोक कॊरीव पनॊन पिंटींग अमकोस नगिटोवस मंज़ तबदिल करनॊ बापत."
+
+#: ../../magic/src/kalidescope.c:120
 msgid "Symmetric Left/Right"
 msgstr "सोमोटरीक खुफुर /दॊछुन"
 
-#: ../../magic/src/kalidescope.c:123
+#: ../../magic/src/kalidescope.c:124
 msgid "Symmetric Up/Down"
 msgstr "सोमोटरीक हयुर /बुन"
 
-#: ../../magic/src/kalidescope.c:127
+#: ../../magic/src/kalidescope.c:128
 msgid "Pattern"
 msgstr ""
 
-#: ../../magic/src/kalidescope.c:131
+#: ../../magic/src/kalidescope.c:132
 msgid "Tiles"
 msgstr ""
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:135
+#: ../../magic/src/kalidescope.c:136
 msgid "Kaleidoscope"
 msgstr "कोलिडसकौप"
 
-#: ../../magic/src/kalidescope.c:146
+#: ../../magic/src/kalidescope.c:154
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the left and right of your picture."
@@ -1151,7 +1215,7 @@ msgstr ""
 "कोलोक कॊरीव तॊ डरिग कॊरीव मावुस दुयव बरिशव सॊत डरा करनॊ बापत यॊम ज़न सोमोटरीक "
 "आसन तुहॊंज़ी तसविर हॊंद खुफरो तॊ दुछनो तरफो."
 
-#: ../../magic/src/kalidescope.c:152
+#: ../../magic/src/kalidescope.c:160
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the top and bottom of your picture."
@@ -1159,13 +1223,13 @@ msgstr ""
 "कोलोक कॊरीव तॊ डरिग कॊरीव मावुस दुयव बरिशव सॊत डरा करनॊ बापत यॊम ज़न सोमोटरीक "
 "आसन तुहॊंज़ी तसविर हॊंद पयॊठ कॊन तॊ बुन कॊन."
 
-#: ../../magic/src/kalidescope.c:156
+#: ../../magic/src/kalidescope.c:164
 #, fuzzy
 #| msgid "Click and drag the mouse to emboss the picture."
 msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr "तसविर ईमबास करनॊ बापत कॊरीव कोलोक तॊ डरिग मावुस. "
 
-#: ../../magic/src/kalidescope.c:160
+#: ../../magic/src/kalidescope.c:168
 #, fuzzy
 #| msgid ""
 #| "Click and drag the mouse to draw with two brushes that are symmetric "
@@ -1178,48 +1242,60 @@ msgstr ""
 "आसन तुहॊंज़ी तसविर हॊंद खुफरो तॊ दुछनो तरफो."
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:164
+#: ../../magic/src/kalidescope.c:172
 msgid ""
 "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgstr "कोलोक कॊरीव तॊ डरिग कॊरीव मावुस बरिशव सॊत डरा करनॊ बापत (अख कलिडासकूप)"
 
-#: ../../magic/src/light.c:103
+#: ../../magic/src/light.c:104
 msgid "Light"
 msgstr "हलको"
 
-#: ../../magic/src/light.c:109
+#: ../../magic/src/light.c:116
 msgid "Click and drag to draw a beam of light on your picture."
 msgstr "कोलोक कॊरीव तॊ डरिग कॊरीव पननॊ तसविर पयॊठ अख गाछोच लय डरा करनो बापत."
 
-#: ../../magic/src/metalpaint.c:98
+#: ../../magic/src/lightning.c:78
+#, fuzzy
+#| msgid "Lighten"
+msgid "Lightning"
+msgstr "हलको करुन"
+
+#: ../../magic/src/lightning.c:88
+#, fuzzy
+#| msgid "Click and drag to draw a beam of light on your picture."
+msgid "Click, drag, and release to draw a lightning bolt between two points."
+msgstr "कोलोक कॊरीव तॊ डरिग कॊरीव पननॊ तसविर पयॊठ अख गाछोच लय डरा करनो बापत."
+
+#: ../../magic/src/metalpaint.c:99
 msgid "Metal Paint"
 msgstr "मीटल पिंट"
 
-#: ../../magic/src/metalpaint.c:105
+#: ../../magic/src/metalpaint.c:112
 msgid "Click and drag the mouse to paint with a metallic color."
 msgstr "कोलोक कॊरीव तॊ डरिग कॊरीव मावुस अको मीटलोक रंग सॊत पिंट करनॊ बापत."
 
-#: ../../magic/src/mirror_flip.c:110
+#: ../../magic/src/mirror_flip.c:111
 msgid "Mirror"
 msgstr "मीरर"
 
-#: ../../magic/src/mirror_flip.c:112
+#: ../../magic/src/mirror_flip.c:113
 msgid "Flip"
 msgstr "फीलोप"
 
-#: ../../magic/src/mirror_flip.c:121
+#: ../../magic/src/mirror_flip.c:128
 msgid "Click to make a mirror image."
 msgstr "अख मोरर ईमिज बनावनो बापत कॊरीव कोलोक."
 
-#: ../../magic/src/mirror_flip.c:123
+#: ../../magic/src/mirror_flip.c:130
 msgid "Click to flip the picture upside-down."
 msgstr "तसवीर तलुक पयोठ फोलोप करनॊ बापत कॊरीव कोलोक."
 
-#: ../../magic/src/mosaic.c:96
+#: ../../magic/src/mosaic.c:97
 msgid "Mosaic"
 msgstr "मूज़िक"
 
-#: ../../magic/src/mosaic.c:100
+#: ../../magic/src/mosaic.c:105
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
@@ -1228,23 +1304,23 @@ msgid ""
 msgstr ""
 "कोलोक कॊरीव तॊ पकनॊयीव मावुस पननॊ तसविर हॊंदीन होसन मूज़िक ईफीकटो दॊनी बापत."
 
-#: ../../magic/src/mosaic.c:101
+#: ../../magic/src/mosaic.c:106
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "पननॊ तमाम तसविर मूज़िक ईफीकटो दॊनी बापत कॊरीव कोलोक."
 
-#: ../../magic/src/mosaic_shaped.c:132
+#: ../../magic/src/mosaic_shaped.c:133
 msgid "Square Mosaic"
 msgstr "मूज़िक कॊरीव मोहफूज़"
 
-#: ../../magic/src/mosaic_shaped.c:133
+#: ../../magic/src/mosaic_shaped.c:134
 msgid "Hexagon Mosaic"
 msgstr "हीकज़ागान मूज़िक"
 
-#: ../../magic/src/mosaic_shaped.c:134
+#: ../../magic/src/mosaic_shaped.c:135
 msgid "Irregular Mosaic"
 msgstr "गॊरमुतवॊतीर मूज़िक"
 
-#: ../../magic/src/mosaic_shaped.c:140
+#: ../../magic/src/mosaic_shaped.c:141
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a square mosaic to parts of your picture."
@@ -1253,11 +1329,11 @@ msgid ""
 msgstr ""
 "कोलोक कॊरीव तॊ पकनॊयीव मावुस पननॊ तसविर हॊंदीन होसन  अख  सुकिर मूज़िक दॊनी बापत."
 
-#: ../../magic/src/mosaic_shaped.c:141
+#: ../../magic/src/mosaic_shaped.c:142
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "पननॊ तमाम तसविर सूकिर मूज़िक दॊनी बापत कॊरीव कोलोक."
 
-#: ../../magic/src/mosaic_shaped.c:145
+#: ../../magic/src/mosaic_shaped.c:146
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a hexagonal mosaic to parts of your "
@@ -1268,11 +1344,11 @@ msgstr ""
 "कोलोक कॊरीव तॊ पकनॊयीव मावुस पननॊ तसविर हॊंदीन होसन अख होकज़ागानल मूज़िक दॊनी "
 "बापत."
 
-#: ../../magic/src/mosaic_shaped.c:146
+#: ../../magic/src/mosaic_shaped.c:147
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "पननॊ तमाम तसविर होकज़ागानल मूज़िक दॊनी बापत कॊरीव कोलोक."
 
-#: ../../magic/src/mosaic_shaped.c:150
+#: ../../magic/src/mosaic_shaped.c:151
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add an irregular mosaic to parts of your "
@@ -1283,93 +1359,129 @@ msgstr ""
 "कोलोक कॊरीव तॊ पकनॊयीव मावुस पननॊ तसविर हॊंदीन होसन अख गॊरमुतवॊतीर मूज़िक दॊनी "
 "बापत."
 
-#: ../../magic/src/mosaic_shaped.c:151
+#: ../../magic/src/mosaic_shaped.c:152
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "पननॊ तमाम तसविर गॊरमुतवॊतीर मूज़िक दॊनी बापत कॊरीव कोलोक."
 
-#: ../../magic/src/negative.c:94
+#: ../../magic/src/negative.c:73
 msgid "Negative"
 msgstr "नगिटोव"
 
-#: ../../magic/src/negative.c:101
+#: ../../magic/src/negative.c:74
+msgid "Opposite"
+msgstr ""
+
+#: ../../magic/src/negative.c:79
 #, fuzzy
 #| msgid "Click and move the mouse around to make your painting negative."
 msgid "Click and drag the mouse around to make your painting negative."
 msgstr "कोलोक कॊरीव तॊ पकनॊयीव मावुस ऊर यूर पननॊन पिंटींग नगिटोव बनावनो बापत."
 
-#: ../../magic/src/negative.c:103
+#: ../../magic/src/negative.c:80
 msgid "Click to turn your painting into its negative."
 msgstr "कोलोक कॊरीव पनॊन पिंटींग अमकोस नगिटोवस मंज़ तबदिल करनॊ बापत."
+
+#: ../../magic/src/negative.c:83
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to change the color of parts of your "
+#| "picture."
+msgid ""
+"Click and drag the mouse around to change colors to their opposites -- their "
+"complementary colors."
+msgstr ""
+"कोलोक कॊरीव तॊ पकनॊयीव मावुस  ऊर यूर पननो तसविर  हॊंदन हीसन हूंद रंग बदलावनो बापत."
+
+#: ../../magic/src/negative.c:84
+msgid ""
+"Click to turn all colors in your painting into their opposites -- their "
+"complementary colors."
+msgstr ""
 
 #: ../../magic/src/noise.c:66
 msgid "Noise"
 msgstr "शौर"
 
-#: ../../magic/src/noise.c:70
+#: ../../magic/src/noise.c:74
 #, fuzzy
 #| msgid "Click and move the mouse to add noise to parts of your picture."
 msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr "कोलोक कॊरीव तॊ पकनॊयीव मावुस पननॊ तसविर हॊंदीन होसन  शौर दॊनी बापत."
 
-#: ../../magic/src/noise.c:71
+#: ../../magic/src/noise.c:75
 msgid "Click to add noise to your entire picture."
 msgstr "कोलोक कॊरीव पननॊ तमाम तसविरे शौर दीनी बापत."
 
-#: ../../magic/src/perspective.c:147
+#: ../../magic/src/perspective.c:151
 msgid "Perspective"
 msgstr "खयाल"
 
-#: ../../magic/src/perspective.c:148
+#: ../../magic/src/perspective.c:152
+msgid "Panels"
+msgstr ""
+
+#: ../../magic/src/perspective.c:153
 msgid "Zoom"
 msgstr "ज़ूम"
 
-#: ../../magic/src/perspective.c:153
+#: ../../magic/src/perspective.c:157
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "कुंजन पयॊठ कॊरीव कोलोक तॊ कॊरीव डरिग युत तुहयो तसविर फिलावोन छॊव यछ़ान."
 
-#: ../../magic/src/perspective.c:156
+#: ../../magic/src/perspective.c:159
+#, fuzzy
+#| msgid "Click to turn your painting into its negative."
+msgid "Click to turn your picture into 2-by-2 panels."
+msgstr "कोलोक कॊरीव पनॊन पिंटींग अमकोस नगिटोवस मंज़ तबदिल करनॊ बापत."
+
+#: ../../magic/src/perspective.c:161
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgstr ""
 "कोलोक  कॊरीव तॊ डरिग कॊरीव ज़ूम ईनस ताम या कॊरीव बुन कुन  डरिग तसविर ज़ूम आवुट करनॊ "
 "बापत."
 
-#. Both are named "Pixels", at the moment:
-#: ../../magic/src/pixels.c:108
+#: ../../magic/src/pixels.c:107
 msgid "Pixels"
 msgstr ""
 
-#: ../../magic/src/pixels.c:114
+#: ../../magic/src/pixels.c:119
 #, fuzzy
 #| msgid "Click and move to draw large bricks."
 msgid "Click and drag to draw large pixels."
 msgstr "कोलोक तॊ पकनॊयीव बजो बरीको डरा करनो बापत."
 
-#: ../../magic/src/puzzle.c:103
+#: ../../magic/src/puzzle.c:106
 msgid "Puzzle"
 msgstr "पज़ोल"
 
-#: ../../magic/src/puzzle.c:110
+#: ../../magic/src/puzzle.c:118
 msgid "Click the part of your picture where would you like a puzzle."
 msgstr "तसविर हुंद सू होसो कॊर हून कोलोक यॊतनस तुहयो पज़ोल यॊछ़ीव करुन."
 
-#: ../../magic/src/puzzle.c:111
+#: ../../magic/src/puzzle.c:119
 msgid "Click to make a puzzle in fullscreen mode."
 msgstr "पज़ोल फुल सीकरिन मूडस मंज़ करनॊ बापत कॊरीव कोलोक."
 
-#: ../../magic/src/rails.c:129
+#: ../../magic/src/rails.c:131
 msgid "Rails"
 msgstr "रिलो"
 
-#: ../../magic/src/rails.c:134
+#: ../../magic/src/rails.c:141
 msgid "Click and drag to draw train track rails on your picture."
 msgstr ""
 "कोलोक कॊरीव तॊ डरिग कॊरीव पननॊ तसविर पयॊठ टरिन टरिक रिलो डरा करनॊ बापत."
 
-#: ../../magic/src/rainbow.c:133
+#: ../../magic/src/rainbow.c:138
 msgid "Rainbow"
 msgstr "दनक"
 
-#: ../../magic/src/rainbow.c:139
+#: ../../magic/src/rainbow.c:140
+#, fuzzy
+#| msgid "Rainbow"
+msgid "Smooth Rainbow"
+msgstr "दनक"
+
+#: ../../magic/src/rainbow.c:153
 msgid "You can draw in rainbow colors!"
 msgstr "तुहयो हयोकोव दनक कॊन रंगन मंज़ डरा कॊरीथ."
 
@@ -1377,23 +1489,23 @@ msgstr "तुहयो हयोकोव दनक कॊन रंगन म�
 msgid "Rain"
 msgstr "बॊरीश"
 
-#: ../../magic/src/rain.c:72
+#: ../../magic/src/rain.c:76
 msgid "Click to place a rain drop onto your picture."
 msgstr "पननॊ तसवॊर पयॊठ अख रुद फयुर तरावनो बापत कॊरीव कोलोक."
 
-#: ../../magic/src/rain.c:73
+#: ../../magic/src/rain.c:77
 msgid "Click to cover your picture with rain drops."
 msgstr "पननॊन तसविर रुद फीरीव सॊत बरनो बापत कॊरीव कोलोक."
 
-#: ../../magic/src/realrainbow.c:98
+#: ../../magic/src/realrainbow.c:99
 msgid "Real Rainbow"
 msgstr "असलि दनक"
 
-#: ../../magic/src/realrainbow.c:100
+#: ../../magic/src/realrainbow.c:101
 msgid "ROYGBIV Rainbow"
 msgstr "ROYGBIV दनक"
 
-#: ../../magic/src/realrainbow.c:108
+#: ../../magic/src/realrainbow.c:114
 msgid ""
 "Click where you want your rainbow to start, drag to where you want it to "
 "end, and then let go to draw a rainbow."
@@ -1401,27 +1513,39 @@ msgstr ""
 "कोलोक कॊरीव ततॆनस यॊतनस तुहयो पनुन दनक शरू छॊव यछ़ान करुन,डरिग कॊरहून योतनस तुहयो यो "
 "अंद करुन छॊव यछ़ान, तॊ पतॊ तरिवहुन यलो दनक डरा करनॊ बापत."
 
-#: ../../magic/src/ripples.c:102
+#: ../../magic/src/reflection.c:110
+msgid "Reflection"
+msgstr ""
+
+#: ../../magic/src/reflection.c:120
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+msgid "Click and drag the mouse around to add a reflection to your picture."
+msgstr ""
+"कोलोक कॊरीव तॊ पकनॊयीव मावुस पननॊ तसविर हॊंदीन होसन मूज़िक ईफीकटो दॊनी बापत."
+
+#: ../../magic/src/ripples.c:103
 msgid "Ripples"
 msgstr "लॊहराह"
 
-#: ../../magic/src/ripples.c:108
+#: ../../magic/src/ripples.c:115
 msgid "Click to make ripples appear over your picture."
 msgstr "पननॊ तसविर पयॊठ लॊहरो ज़ॊहीर करनॊ बापत कॊरीव कोलोक."
 
-#: ../../magic/src/rosette.c:115
+#: ../../magic/src/rosette.c:118
 msgid "Rosette"
 msgstr "रूज़ीटो"
 
-#: ../../magic/src/rosette.c:117
+#: ../../magic/src/rosette.c:120
 msgid "Picasso"
 msgstr "पीकासू"
 
-#: ../../magic/src/rosette.c:123
+#: ../../magic/src/rosette.c:131
 msgid "Click and start drawing your rosette."
 msgstr "कोलोक कॊरीव तॊ कॊरीव शरू पननुन रुज़ीटो डरा करनो बापत."
 
-#: ../../magic/src/rosette.c:125
+#: ../../magic/src/rosette.c:133
 msgid "You can draw just like Picasso!"
 msgstr "तुहयो होकोव डरा कोरोथ बोलकुल पीकासू सॊंद पॊठ!"
 
@@ -1467,31 +1591,31 @@ msgstr "कोलोक कॊरीव तॊ पकनॊयीव माव�
 msgid "Click to create a black and white silhouette of your entire picture."
 msgstr "पननॊ तमाम तसविर हुंद अख करुहुन तॊ सफिद सोलहावुट बनावनो बापत कॊरोव कोलोक."
 
-#: ../../magic/src/shift.c:106
+#: ../../magic/src/shift.c:107
 msgid "Shift"
 msgstr "बदलियीव"
 
-#: ../../magic/src/shift.c:112
+#: ../../magic/src/shift.c:119
 msgid "Click and drag to shift your picture around on the canvas."
 msgstr "पनॊन तसविर किनवासस पयॊठ ऊर यूर  पकनावनो बापत कॊरीव कोलोक तॊ डरिग."
 
-#: ../../magic/src/smudge.c:102
+#: ../../magic/src/smudge.c:103
 msgid "Smudge"
 msgstr "दाग"
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:104
+#: ../../magic/src/smudge.c:105
 msgid "Wet Paint"
 msgstr "ऊदुर पिंट"
 
-#: ../../magic/src/smudge.c:111
+#: ../../magic/src/smudge.c:121
 #, fuzzy
 #| msgid "Click and move the mouse around to smudge the picture."
 msgid "Click and drag the mouse around to smudge the picture."
 msgstr "कोलोक कॊरीव तॊ पकनॊयीव मावुस ऊर यूर तसविर सुमज करनॊ बापत."
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:113
+#: ../../magic/src/smudge.c:123
 #, fuzzy
 #| msgid "Click and move the mouse around to draw with wet, smudgy paint."
 msgid "Click and drag the mouse around to draw with wet, smudgy paint."
@@ -1513,6 +1637,21 @@ msgstr "पननॊ तसविर पयॊठ अख शोनो बाल 
 msgid "Click to add snow flakes to your picture."
 msgstr "पननॊ तसविर पयॊठ अख शोनो थुस हूररावनो बापत कॊरीव कोलोक."
 
+#: ../../magic/src/stretch.c:107
+msgid "Stretch"
+msgstr ""
+
+#: ../../magic/src/stretch.c:119
+#, fuzzy
+#| msgid ""
+#| "Click and drag to make parts of your picture look like they are on "
+#| "television."
+msgid ""
+"Click and drag to stretch part of your picture vertically or horizontally."
+msgstr ""
+"कोलोक कॊरीव तॊ डरिग कॊरीव पननॊ तसविर हॊंद होसो तॊथ बासनावनॊ बापत ज़न तॊ तॊम "
+"टोलो वीजनस पयॊठ आसन."
+
 #: ../../magic/src/string.c:129
 msgid "String edges"
 msgstr "रज़ दॊनदरी"
@@ -1525,7 +1664,7 @@ msgstr "रज़ कुंज"
 msgid "String 'V'"
 msgstr "रज़ 'V'"
 
-#: ../../magic/src/string.c:147
+#: ../../magic/src/string.c:151
 msgid ""
 "Click and drag to draw string art. Drag top-bottom to draw less or more "
 "lines, left or right to make a bigger hole."
@@ -1533,11 +1672,11 @@ msgstr ""
 "कोलोक कॊरीव तॊ डरिग कॊरीव सीटरोंग आरट डरा करनॊ बापत.डरिग कॊरीव हयॊरी बुन कम या "
 "ज़यादो लायनी डरा करनो बापत, खुफूर या दुछुन अख बुड ज़दी बनावनो बापत."
 
-#: ../../magic/src/string.c:150
+#: ../../magic/src/string.c:154
 msgid "Click and drag to draw arrows made of string art."
 msgstr "कोलोक कॊरीव तॊ डरिग कॊरीव सोटरोंग आरटीक बनॊमीत तिर डरा करनो बापत."
 
-#: ../../magic/src/string.c:153
+#: ../../magic/src/string.c:157
 msgid "Draw string art arrows with free angles."
 msgstr "डरा कॊरीव यलॊ ज़ॊवयी दार सोटरोंग आरटीक बनॊमीत तिर."
 
@@ -1585,23 +1724,23 @@ msgstr ""
 msgid "Toothpaste"
 msgstr "दंद दवाह"
 
-#: ../../magic/src/toothpaste.c:72
+#: ../../magic/src/toothpaste.c:76
 msgid "Click and drag to squirt toothpaste onto your picture."
 msgstr "कोलोक कॊरीव तॊ डरिग कॊरीव पननॊ तसविर पयॊठ दंद दवाह तरावनॊ बापत."
 
-#: ../../magic/src/tornado.c:153
+#: ../../magic/src/tornado.c:154
 msgid "Tornado"
 msgstr "टूरनिडू"
 
-#: ../../magic/src/tornado.c:159
+#: ../../magic/src/tornado.c:166
 msgid "Click and drag to draw a tornado funnel on your picture."
 msgstr "कोलोक कॊरीव तॊ डरिग कॊरीव पननॊ तसविर पयॊठ अख टूरनिडू फनल डरा करनॊ बापत. "
 
-#: ../../magic/src/tv.c:96
+#: ../../magic/src/tv.c:99
 msgid "TV"
 msgstr "TV"
 
-#: ../../magic/src/tv.c:102
+#: ../../magic/src/tv.c:110
 msgid ""
 "Click and drag to make parts of your picture look like they are on "
 "television."
@@ -1609,19 +1748,19 @@ msgstr ""
 "कोलोक कॊरीव तॊ डरिग कॊरीव पननॊ तसविर हॊंद होसो तॊथ बासनावनॊ बापत ज़न तॊ तॊम "
 "टोलो वीजनस पयॊठ आसन."
 
-#: ../../magic/src/tv.c:105
+#: ../../magic/src/tv.c:113
 msgid "Click to make your picture look like it's on television."
 msgstr "कोलोक कॊरीव पनॊन तसविर तॊछ़ बासनावनो बापत ज़न तॊ यी टोलो वीजनस पयॊठ आसी."
 
-#: ../../magic/src/waves.c:104
+#: ../../magic/src/waves.c:111
 msgid "Waves"
 msgstr "लॊहरी"
 
-#: ../../magic/src/waves.c:106
+#: ../../magic/src/waves.c:113
 msgid "Wavelets"
 msgstr "लकचो लॊहरी"
 
-#: ../../magic/src/waves.c:115
+#: ../../magic/src/waves.c:122
 msgid ""
 "Click to make the picture horizontally wavy. Click toward the top for "
 "shorter waves, the bottom for taller waves, the left for small waves, and "
@@ -1630,7 +1769,7 @@ msgstr ""
 "पनॊन तसवीर ऊफकन विवी बनावनो बापत कॊरीव कोलोक. हयुर कुन कॊरीव कोलोक छ़ुचन लॊहरन "
 "बापत, च़ुक छु थज़न लॊहरन बापत,खुफूर लकचन लॊहरन बापत, तॊ दुछुन ज़िछन लॊहरन बापत."
 
-#: ../../magic/src/waves.c:118
+#: ../../magic/src/waves.c:125
 msgid ""
 "Click to make the picture vertically wavy. Click toward the top for shorter "
 "waves, the bottom for taller waves, the left for small waves, and the right "
@@ -1639,20 +1778,23 @@ msgstr ""
 "पनॊन तसवीर अमूदी  विवी बनावनो बापत कॊरीव कोलोक. हयुर कुन कॊरीव कोलोक छ़ुचन लॊहरन "
 "बापत, च़ुक छु थज़न लॊहरन बापत,खुफूर लकचन लॊहरन बापत, तॊ दुछुन ज़िछन लॊहरन बापत."
 
-#: ../../magic/src/xor.c:93
+#: ../../magic/src/xor.c:92
 #, fuzzy
 #| msgid "Colors"
 msgid "Xor Colors"
 msgstr "रंग"
 
-#: ../../magic/src/xor.c:99
+#: ../../magic/src/xor.c:103
 #, fuzzy
 #| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw a XOR effect"
 msgstr "कोलोक कॊरीव तॊ डरिग कॊरीव सोटरोंग आरटीक बनॊमीत तिर डरा करनो बापत."
 
-#: ../../magic/src/xor.c:101
+#: ../../magic/src/xor.c:105
 #, fuzzy
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "पननॊ तमाम तसविर मूज़िक ईफीकटो दॊनी बापत कॊरीव कोलोक."
+
+#~ msgid "Click in the picture to fill that area with color."
+#~ msgstr "सु रकबो रंग सॊत बरनॊ बापत कॊरीव तसविर मंज़ कोलोक."

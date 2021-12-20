@@ -1,12 +1,13 @@
                                    Tux Paint
-                                 versión 0.9.26
+                                 versión 0.9.27
 
   Un sinxelo programa de debuxo para cativos
 
     Copyright © 2002-2021 por varios colaboradores; vexa AUTHORS (AUTORES).
                             http://www.tuxpaint.org/
+                           @TuxPaintTweets on Twitter
 
-                               28 de Xuño de 2021
+                             25 de Novembro de 2021
 
      ----------------------------------------------------------------------
 
@@ -226,6 +227,22 @@ Ferramentas dispoñíbeis
                  Se mantén premido o botón do rato e move o rato, irá
                  debuxando a medida que se move.
 
+                 Some brushes are animated — they change their shape as you
+                 draw them. A good example of this is the vines brush that
+                 ships with Tux Paint. These brushes will have a small
+                 "filmstrip" icon drawn on their Selector buttons.
+
+                 Other brushes are directional — they will draw a different
+                 shape depending on what direction you are painting with
+                 them. An example of this is the arrow brush that ships with
+                 Tux Paint. These brushes have a small 8-way arrow icon drawn
+                 on their Selector buttons.
+
+                 Finally, some brushes can be both direction and animated.
+                 Examples of this are the cat and squirrel brushes that ship
+                 with Tux Paint. These brushes will have both the "filmstrip"
+                 and 8-way arrow icons.
+
                  Mentres debuxa, soa un son. Canto maior sexa o pincel, menor
                  será o ton.
 
@@ -281,11 +298,21 @@ Ferramentas dispoñíbeis
                  os diversos pinceis e cores que normalmente emprega co
                  pincel.
 
-                 Prema co rato e manteña o botón premido para escoller o
-                 punto de inicio da liña. Ao mover o rato, unha delgada liña
-                 |elástica» amosará onde se trazará a liña.
+                 Click the mouse and hold it to choose the starting point of
+                 the line. As you move the mouse around, a thin 'rubber-band'
+                 line will show where the line will be drawn. At the bottom,
+                 you'll see the angle of your line, in degrees. A line going
+                 straight to the right is 0°, a line going straight up is
+                 90°, a line going straight left is 180°, a line going
+                 straight down is 270°, and so on.
 
                  Solte o rato para completar a liña. Soará un «chimpo».
+
+                 Some brushes are animated, and will show a pattern of shapes
+                 along the line. Others are directional, and will show a
+                 different shape depending on the angle of the brush. And
+                 finally some are both animated and directional. See "Paint",
+                 above, to learn more.
 
      ----------------------------------------------------------------------
 
@@ -327,8 +354,10 @@ Ferramentas dispoñíbeis
 
                       Modo de formas normais
 
-                              Agora pode mover o rato arredor do lenzo para
-                              xirar a forma.
+                              Now you can move the mouse around the canvas to
+                              rotate the shape. The angle your shape is
+                              rotated will be shown at the bottom, in degrees
+                              (similar to the "Lines" tool, described above).
 
                               Prema de novo no botón do rato e a forma
                               debuxarase na cor actual.
@@ -348,8 +377,8 @@ Ferramentas dispoñíbeis
                  inferior). prema na pantalla e aparecerá un cursor. Escriba
                  un texto e aparecerá na pantalla.
 
-                 Prema [Enter] ou [Return] e o texto será debuxado na imaxe e
-                 o cursor moverase cara abaixo unha liña.
+                 Prema [Intro] ou [Retorno] e o texto será debuxado na imaxe
+                 e o cursor moverase cara abaixo unha liña.
 
                  Como alternativa, prema [Tab] e o texto será debuxado na
                  imaxe, mais o cursor moverase á dereita do texto, no canto
@@ -439,6 +468,8 @@ Ferramentas dispoñíbeis
                  recheo:
                     * Sólida: prema unha vez para encher unha área cunha cor
                       sólida.
+                    * Brush — click and drag to fill an area with a solid
+                      color using freehand painting.
                     * Lineal: prema e arrastra para encher a área cunha cor
                       que se esvae (un gradiente) cara a onde arrastra o
                       rato.
@@ -567,8 +598,10 @@ Ferramentas dispoñíbeis
                         parte inferior dereita da lista para borrar a imaxe
                         seleccionada. (Pediráselle que o confirme).
 
-                        Nota: A partir da versión 0.9.22, a imaxe colocarase
-                        no cesto do lixo do seu escritorio, só en Linux.
+                        Note: On Linux (as of version 0.9.22) and Windows (as
+                        of version 0.9.27), the picture will be placed in
+                        your desktop's trash can / recycle bin (where you may
+                        recover and restore it, if you change your mind).
 
                       * Prema no botón «Exportar» preto da parte inferior
                         dereita para exportar a imaxe ao cartafol de
@@ -975,35 +1008,40 @@ Importar imaxes manualmente
 
      Outra documentación incluída con Tux Paint (que se atopa no
      cartafol/directorio «docs») inclúe:
-       * Documentación da ferramenta «Maxia» («magic-docs»)
-         Documentación para cada unha das ferramentas de «Maxia» instaladas
-         actualmente.
-       * AUTHORS.txt
-         Lista de autores e colaboradores.
-       * CHANGES.txt
-         Resumo do que cambiou entre as versións de Tux Paint.
-       * COPYING.txt
-         A licenza de software de Tux Paint, aLicenza Pública Xeral de GNU
-         (GPL)
-       * INSTALL.html
-         Instrucións para compilar e instalar Tux Paint, cando proceda.
-       * EXTENDING.html
-         Instrucións detalladas sobre a ampliación de Tux Paint: creación de
-         pinceis, selos, imaxes de inicio e modelos; engadir fontes; e crear
-         novos deseños de teclado en pantalla e métodos de entrada.
-       * OPTIONS.html
-         Instrucións detalladas sobre a liña de ordes e as opcións do
-         ficheiro de configuración para aqueles que non queiran usar a
-         ferramenta Tux Paint Config. para xestionar a configuración de Tux
-         Paint.
-       * PNG.html
-         Notas sobre a creación de imaxes de mapa de bits (ráster) en formato
-         PNG para usar en Tux Paint.
-       * SVG.html
-         Notas sobre a creación de imaxes vectoriais en formato SVG para usar
-         en Tux Paint.
-       * SIGNALS.html
-         Información sobre os sinais POSIX aos que responde Tux Paint.
+       * Using Tux Paint:
+            * OPTIONS.html
+              Instrucións detalladas sobre a liña de ordes e as opcións do
+              ficheiro de configuración para aqueles que non queiran usar a
+              ferramenta Tux Paint Config. para xestionar a configuración de
+              Tux Paint.
+            * Documentación da ferramenta «Maxia» («magic-docs»)
+              Documentación para cada unha das ferramentas de «Maxia»
+              instaladas actualmente.
+       * How to extend Tux Paint:
+            * EXTENDING.html
+              Instrucións detalladas sobre a ampliación de Tux Paint:
+              creación de pinceis, selos, imaxes de inicio e modelos; engadir
+              fontes; e crear novos deseños de teclado en pantalla e métodos
+              de entrada.
+            * PNG.html
+              Notas sobre a creación de imaxes de mapa de bits (ráster) en
+              formato PNG para usar en Tux Paint.
+            * SVG.html
+              Notas sobre a creación de imaxes vectoriais en formato SVG para
+              usar en Tux Paint.
+       * Technical information:
+            * INSTALL.html
+              Instrucións para compilar e instalar Tux Paint, cando proceda.
+            * SIGNALS.html
+              Información sobre os sinais POSIX aos que responde Tux Paint.
+       * Development history and license:
+            * AUTHORS.txt
+              Lista de autores e colaboradores.
+            * CHANGES.txt
+              Resumo do que cambiou entre as versións de Tux Paint.
+            * COPYING.txt
+              Tux Paint's software license, the GNU General Public License
+              (GPL)
 
      ----------------------------------------------------------------------
 
@@ -1015,7 +1053,6 @@ Importar imaxes manualmente
        * Informar dos erros ou solicitar novas funcións a través do sistema
          de seguimento de erros do proxecto
        * Participe nas distintas listas de correo do proxecto
-       * Converse con desenvolvedores e outros usuarios a través de IRC
        * Ou póñase en contacto directamente cos desenvolvedores
 
      Para obter máis información, visite a páxina «Contacto» do sitio web
