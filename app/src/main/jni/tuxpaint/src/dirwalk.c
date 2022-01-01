@@ -85,7 +85,7 @@ void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer
 {
   dirlen = dirlen;
 
-#ifndef FORKED_FONTS && #defined __ANDROID__
+#if defined (__ANDROID__)
   while (i-- && !font_thread_aborted)
 #else
   while (i--)

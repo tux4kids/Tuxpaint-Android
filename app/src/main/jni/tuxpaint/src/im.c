@@ -54,6 +54,11 @@
 #include "android_mbstowcs.h"
 #endif
 
+#ifdef WIN32
+#include <windows.h>
+#define mbstowcs(wtok, tok, size) MultiByteToWideChar(CP_UTF8,0,tok,-1,wtok,size)
+#endif
+
 /* ***************************************************************************
 * I18N GETTEXT
 */

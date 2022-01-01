@@ -1,5 +1,5 @@
                                    Tux Paint
-                                 version 0.9.27
+                                 version 0.9.28
 
   Un programme simple pour les enfants
 

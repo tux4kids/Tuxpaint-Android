@@ -356,27 +356,8 @@ typedef struct safer_dirent
 #undef max
 #define mkdir(path,access)    _mkdir(path)
 
-static void mtw(wchar_t * wtok, char *tok, size_t size)
-{
-  /* workaround using iconv to get a functionallity somewhat approximate as mbstowcs() */
-  Uint16 *ui16;
-
-  ui16 = malloc(size);
-  char *wrptr = (char *)ui16;
-  size_t in, out, n;
-  iconv_t trans;
-
-  in = size;
-  out = size;
-  n = size / sizeof(wchar_t);
-
-  trans = iconv_open("WCHAR_T", "UTF-8");
-  iconv(trans, (char **)&tok, &in, &wrptr, &out);
-  *((wchar_t *) wrptr) = L'\0';
-  swprintf(wtok, n, L"%ls", ui16);
-  free(ui16);
-  iconv_close(trans);
-}
+#define mbstowcs(wtok, tok, size) MultiByteToWideChar(CP_UTF8,0,tok,-1,wtok,size)
+#define wcstombs(tok, wtok, size) WideCharToMultiByte(CP_UTF8,0,wtok,-1,tok,size,NULL,NULL)
 
 extern int win32_trash(const char *path);
 
@@ -6258,7 +6239,8 @@ static void mainloop(void)
       SDL_Delay(10);
     }
   while (!done);
-#ifndef FORKED_FONTS && #defined __ANDROID__
+
+#if defined (__ANDROID__)
   /* Closing Tux Paint before the end of font scanning resulted in crashes in the Android port */
   /* This is an abuse of font_thread_aborted, maybe it is better to use a new, more descriptive marker? */
   if(!font_thread_done)
@@ -18394,7 +18376,7 @@ static char *uppercase(const char *restrict const str)
       dest[i] = towupper(dest[i]);
     }
   while (dest[i++]);
-  wcstombs(ustr, dest, n);      /* at most n bytes written */
+  wcstombs(ustr, dest, n * 2);      /* at most n * 2 bytes written */
 
 #ifdef DEBUG
   printf(" ORIGINAL: %s\n" "UPPERCASE: %s\n\n", str, ustr);
@@ -23137,7 +23119,7 @@ static void load_info_about_label_surface(FILE * lfi)
       tmpstr = malloc(1024);
       wtmpstr = malloc(1024);
       fgets(tmpstr, 1024, lfi);
-      mtw(wtmpstr, tmpstr, 1024);
+      mbstowcs(wtmpstr, tmpstr, 1024);
       for (l = 0; l < new_node->save_texttool_len; l++)
         {
           new_node->save_texttool_str[l] = wtmpstr[l];

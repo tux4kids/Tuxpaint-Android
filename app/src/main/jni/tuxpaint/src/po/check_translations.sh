@@ -68,7 +68,7 @@ do
 
     if [ $stamps_directory_found -eq 1 ] ;
     then
-	echo -n Checking $stamps_directory/po/tuxpaint-stamps-$i
+	echo -n Checking $stamps_directory/po/tuxpaint-stamps-$i ...
 	if [ -e $stamps_directory/po/tuxpaint-stamps-$i ]
 	then echo OK  $stamps_directory/po/tuxpaint-stamps-$i
 	else echo _WARNING_ No stamps translation found
@@ -145,42 +145,42 @@ do
 
 	    if [ $tpconfig_directory_found ]
 	    then
-		echo -n Checking $langname in langs in tuxpaint-config2.cxx
+		echo -n Checking $langname in langs in tuxpaint-config2.cxx...
 		configlang=0
-		for item in `cat $tpconfig_directory/src/tuxpaint-config2.cxx|sed -n '/Use system/,/};/{/american/d;/NUM_LANGS/d;/gettext/d;/};/d;s/.*, "//g;s/"}.*//g;p}'`
+		for item in `cat $tpconfig_directory/src/tuxpaint-config2.cxx|sed -n '/default/,/};/{/american/d;/NUM_LANGS/d;/gettext/d;/};/d;s/.*, "//g;s/"}.*//g;p}'`
 		do
 		    if [ $item == $langname ]; then echo OK $item; configlang=1; break; fi
 		done
-		if [ $configlang -eq 0 ]; then echo _WARNING_ $langname is missing in lang in tuxpaint-config2.cxx; fi
+		if [ $configlang -eq 0 ]; then echo _WARNING_ $langname is missing in lang in $tpconfig_directory/src/tuxpaint-config2.cxx; fi
 	    fi
 
 	    echo -n Checking in the manpage...
 	    manlang=0
-	    for item in `cat ../manpage/tuxpaint.1|sed -n '/american-english/,/.RE/{/RE/d;/TP/d;/^-/d;s/|//g;p}'`
+	    for item in `cat ../../man/en/tuxpaint.1|sed -n '/american-english/,/.RE/{/RE/d;/TP/d;/^-/d;s/|//g;p}'`
 	    do
 		if [ $item == $langname ]; then echo OK $item; manlang=1; break; fi
 	    done
-	    if [ $manlang -eq 0 ]; then echo _WARNING_ $langname is missing in lang in ../manpage/tuxpaint.1; fi
+	    if [ $manlang -eq 0 ]; then echo _WARNING_ $langname is missing in lang in ../../man/en/tuxpaint.1; fi
 
 
 	    echo -n Checking LANGUAGE table in OPTIONS.html...
 	    OPTIONSlang=0
-	    for item in `cat ../../docs/html/OPTIONS.html|sed -n '/<td><code>english/,/table>/{/tr>/d;/table>/d;/nbsp/d;s/<td><code>//g;s/<\/code><\/td>//g;p}'`
+	    for item in `cat ../../docs/en/html/OPTIONS.html|sed -n '/<code>english/,/table>/{/tr>/d;/table>/d;/nbsp/d;s/<code>//g;s/<\/code>//g;p}'`
 	    do
 		if [ $item == $langname ]; then echo OK $item; OPTIONSlang=1; break; fi
 	    done
-	    if [ $OPTIONSlang -eq 0 ]; then echo _WARNING_ $langname is missing in "Available Options" in the lang=LANGUAGE table in ../../docs/html/OPTIONS.html; fi
+	    if [ $OPTIONSlang -eq 0 ]; then echo _WARNING_ $langname is missing in "Available Options" in the lang=LANGUAGE table in ../../docs/en/html/OPTIONS.html; fi
 
 
 
 
 	    echo -n Checking Locale Code in OPTIONS.html...
 	    OPTIONSlocale=0
-	    for item in `cat ../../docs/html/OPTIONS.html|sed -n '/<td>English/,/table>/{/tr>/d;/table>/d;/nbsp/d;s/<td><code>//g;s/<\/code>.*//g;/<td>/d;p}'`
+	    for item in `cat ../../docs/en/html/OPTIONS.html|sed -n '/Locale values and the languages they represent./,/table>/{/tr>/d;/table>/d;/nbsp/d;s/<code>//g;s/<\/code>.*//g;/<td>/d;p}'`
 	    do
 		if [ $item == $locale ]; then echo OK $item; OPTIONSlocale=1; break; fi
 	    done
-	    if [ $OPTIONSlocale -eq 0 ]; then echo _WARNING_ $locale is missing in the "Available Languages" table in the "Locale Code" field in ../../docs/html/OPTIONS.html; fi
+	    if [ $OPTIONSlocale -eq 0 ]; then echo _WARNING_ $locale is missing in the "Available Languages" table in the "Locale Code" field in ../../docs/en/html/OPTIONS.html; fi
 
 
 

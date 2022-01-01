@@ -1,5 +1,5 @@
                                    Tux Paint
-                                 versión 0.9.27
+                                 versión 0.9.28
 
   Un sinxelo programa de debuxo para cativos
 

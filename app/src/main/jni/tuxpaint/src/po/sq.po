@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-25 01:12-0800\n"
-"PO-Revision-Date: 2021-03-15 10:52+0200\n"
+"POT-Creation-Date: 2021-11-07 20:32-0800\n"
+"PO-Revision-Date: 2021-11-26 13:47+0200\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
 "Language-Team: none\n"
 "Language: sq\n"
@@ -187,10 +187,8 @@ msgid "Solid"
 msgstr "E plotë"
 
 #: ../fill_tools.h:51
-#, fuzzy
-#| msgid "Brushes"
 msgid "Brush"
-msgstr "Penela"
+msgstr "Penel"
 
 #: ../fill_tools.h:52
 msgid "Linear"
@@ -205,10 +203,10 @@ msgid "Click to fill an area with a solid color."
 msgstr "Klikoni që të mbushet një zonë me një ngjyrë të vetme."
 
 #: ../fill_tools.h:58
-#, fuzzy
-#| msgid "Click to fill an area with a solid color."
 msgid "Click and drag to fill an area by hand, using a brush."
-msgstr "Klikoni që të mbushet një zonë me një ngjyrë të vetme."
+msgstr ""
+"Klikoni dhe tërhiqeni, që të mbushni një zonë me dorë, duke përdorur një "
+"penel."
 
 #: ../fill_tools.h:59
 msgid ""
@@ -382,30 +380,21 @@ msgid "A star with 5 points."
 msgstr "Yll me 5 cepa."
 
 #: ../shapes.h:385
-#, fuzzy
-#| msgid ""
-#| "Pick a shape. Click to start drawing, drag, and let go when it is the "
-#| "size you want. Move around to rotate it, and click to draw it."
 msgid ""
 "Pick a shape. Click to start drawing, drag, and let go when it is the size "
 "and shape you want. Move around to rotate it, and click again to draw it."
 msgstr ""
-"Zgjidhni një formë. Klikoni që të fillohet të vizatohet, tërhiqeni, lëreni, "
-"kur është në madhësinë që dëshironi. Lëvizeni përqark, për ta rrotulluar, "
-"dhe klikoni mbi të që të vizatohet."
+"Zgjidhni një formë. Klikoni që të fillohet të vizatohet, tërhiqeni dhe "
+"lëreni, kur është në madhësinë dhe formën që dëshironi. Lëvizeni përqark, "
+"për ta rrotulluar, dhe klikoni sërish mbi të që të vizatohet."
 
 #: ../shapes.h:386
-#, fuzzy
-#| msgid ""
-#| "Pick a shape. Click to start drawing, drag, and let go when it is the "
-#| "size you want. Move around to rotate it, and click to draw it."
 msgid ""
 "Pick a shape. Click to start drawing, drag, and let go when it is the size "
 "and shape you want."
 msgstr ""
-"Zgjidhni një formë. Klikoni që të fillohet të vizatohet, tërhiqeni, lëreni, "
-"kur është në madhësinë që dëshironi. Lëvizeni përqark, për ta rrotulluar, "
-"dhe klikoni mbi të që të vizatohet."
+"Zgjidhni një formë. Klikoni që të fillohet të vizatohet, tërhiqeni dhe "
+"lëreni, kur është në madhësinë dhe formën që dëshironi."
 
 #: ../shapes.h:392
 msgid "Draw shapes from the center."
@@ -515,7 +504,7 @@ msgstr "I ri"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:8438
+#: ../tools.h:98 ../tuxpaint.c:8431
 msgid "Open"
 msgstr "Hap"
 
@@ -622,12 +611,13 @@ msgid "Let go of the button to complete the line."
 msgstr "Që të plotësohet vija, lëshojeni butonin."
 
 #: ../tools.h:167
-#, fuzzy, c-format
-#| msgid "Let go of the button to complete the line."
+#, c-format
 msgid ""
 "Let go of the button to complete the line. (Your line's angle is %.0f "
 "degrees.)"
-msgstr "Që të plotësohet vija, lëshojeni butonin."
+msgstr ""
+"Që të plotësohet vija, lëshojeni butonin. (Këndi i vijës tuaj është %.0f "
+"gradë.)"
 
 #. Instruction while using Shape tool (after first click, before release)
 #: ../tools.h:170
@@ -640,12 +630,13 @@ msgid "Move the mouse to rotate the shape. Click to draw it."
 msgstr "Që forma të rrotullohet, lëvizni miun. Për ta vizatuar, klikoni."
 
 #: ../tools.h:174
-#, fuzzy, c-format
-#| msgid "Move the mouse to rotate the shape. Click to draw it."
+#, c-format
 msgid ""
 "Move the mouse to rotate the shape. Click to draw it. (It is rotated %d "
 "degrees.)"
-msgstr "Që forma të rrotullohet, lëvizni miun. Për ta vizatuar, klikoni."
+msgstr ""
+"Që forma të rrotullohet, lëvizni miun. Për ta vizatuar, klikoni. "
+"(Rrotullohet me %d gradë.)"
 
 #. Notification that 'New' action was aborted (current image would have been lost)
 #: ../tools.h:177
@@ -782,92 +773,92 @@ msgid "Please wait…"
 msgstr "Ju lutemi, pritni…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:8441
+#: ../tuxpaint.c:8434
 msgid "Erase"
 msgstr "Fshije"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:8444
+#: ../tuxpaint.c:8437
 msgid "Slides"
 msgstr "Diapozitiva"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:8447
+#: ../tuxpaint.c:8440
 msgid "Export"
 msgstr "Eksportim"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:8450
+#: ../tuxpaint.c:8443
 msgid "Back"
 msgstr "Mbrapsht"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:8453
+#: ../tuxpaint.c:8446
 msgid "Play"
 msgstr "Luaje"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:8456
+#: ../tuxpaint.c:8449
 msgid "GIF Export"
 msgstr "Eksportim si GIF"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:8459
+#: ../tuxpaint.c:8452
 msgid "Next"
 msgstr "Pasuesi"
 
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:9267
+#: ../tuxpaint.c:9260
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12927
+#: ../tuxpaint.c:12920
 msgid "Yes"
 msgstr "Po"
 
-#: ../tuxpaint.c:12931
+#: ../tuxpaint.c:12924
 msgid "No"
 msgstr "Jo"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:14077
+#: ../tuxpaint.c:14070
 msgid "Replace the picture with your changes?"
 msgstr "Të zëvendësohet vizatimi me ndryshimet tuaja?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:14081
+#: ../tuxpaint.c:14074
 msgid "Yes, replace the old one!"
 msgstr "Po, zëvendësoje të vjetrin!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:14085
+#: ../tuxpaint.c:14078
 msgid "No, save a new file!"
 msgstr "Jo, ruaje në kartelë të re!"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:15349
+#: ../tuxpaint.c:15342
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Zgjidhni vizatimin që doni, mandej klikoni mbi “Hape”."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:16775
+#: ../tuxpaint.c:16768
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 "Përzgjidhni 2 ose më tepër vizatime, për t’i shndërruar në një GIF të "
 "animuar."
 
-#: ../tuxpaint.c:24552
+#: ../tuxpaint.c:24545
 msgid "Select a color from your drawing."
 msgstr "Përzgjidhni një ngjyrë prej vizatimit tuaj."
 
-#: ../tuxpaint.c:24564
+#: ../tuxpaint.c:24557
 msgid "Pick a color."
 msgstr "Zgjidhni një ngjyrë."
 
@@ -927,10 +918,8 @@ msgstr ""
 "Klikoni dhe tërhiqeni miun përqark, për ta bërë vizatimin si me kuadrate."
 
 #: ../../magic/src/blocks_chalk_drip.c:158
-#, fuzzy
-#| msgid "Click to sharpen the entire picture."
 msgid "Click to make the entire picture blocky."
-msgstr "Klikoni që të bëhen më i mprehtë krejt vizatimi."
+msgstr "Klikoni për ta bërë krejt vizatimin me blloqe."
 
 #: ../../magic/src/blocks_chalk_drip.c:165
 msgid ""
@@ -940,13 +929,8 @@ msgstr ""
 "me shkumës."
 
 #: ../../magic/src/blocks_chalk_drip.c:169
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgid "Click to turn the entire picture into a chalk drawing."
-msgstr ""
-"Klikoni dhe tërhiqeni miun përreth për ta kthyer vizatimin si të ishte bërë "
-"me shkumës."
+msgstr "Klikoni për ta kthyer vizatimin si të ishte bërë me shkumës."
 
 #: ../../magic/src/blocks_chalk_drip.c:174
 msgid "Click and drag the mouse around to make the picture drip."
@@ -995,13 +979,8 @@ msgstr ""
 "Klikoni dhe tërhiqeni miun përreth që të vizatohet brenda një karikature."
 
 #: ../../magic/src/cartoon.c:125
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgid "Click to turn the entire picture into a cartoon."
-msgstr ""
-"Klikoni dhe tërhiqeni miun përreth për ta kthyer vizatimin si të ishte bërë "
-"me shkumës."
+msgstr "Klikoni për ta kthyer tërë vizatimin në një karikaturë."
 
 #: ../../magic/src/checkerboard.c:100
 msgid "Checkerboard"
@@ -1119,10 +1098,8 @@ msgid "Fretwork"
 msgstr "Gdhendje"
 
 #: ../../magic/src/fretwork.c:188
-#, fuzzy
-#| msgid "Click and drag to draw repetitive patterns. "
 msgid "Click and drag to draw repetitive patterns."
-msgstr "Klikoni dhe tërhiqeni që të vizatohen rregullsi të përsëritura. "
+msgstr "Klikoni dhe tërhiqeni që të vizatohen rregullsi të përsëritura."
 
 #: ../../magic/src/fretwork.c:190
 msgid "Click to surround your picture with repetitive patterns."
@@ -1159,10 +1136,8 @@ msgid "Click and drag to turn your drawing into a newspaper."
 msgstr "Klikoni dhe tërhiqeni që vizatimi juaj të shndërrohet në një gazetë."
 
 #: ../../magic/src/halftone.c:51
-#, fuzzy
-#| msgid "Click and drag to turn your drawing into a newspaper."
 msgid "Click to turn your drawing into a newspaper."
-msgstr "Klikoni dhe tërhiqeni që vizatimi juaj të shndërrohet në një gazetë."
+msgstr "Klikoni që vizatimi juaj të shndërrohet në një gazetë."
 
 #: ../../magic/src/kalidescope.c:120
 msgid "Symmetric Left/Right"
@@ -1231,17 +1206,14 @@ msgstr ""
 "Klikoni dhe tërhiqeni miun që të vizatohet një tufë drite në vizatimin tuaj."
 
 #: ../../magic/src/lightning.c:78
-#, fuzzy
-#| msgid "Lighten"
 msgid "Lightning"
-msgstr "Ndriçoje"
+msgstr "Rrufe"
 
 #: ../../magic/src/lightning.c:88
-#, fuzzy
-#| msgid "Click and drag to draw a beam of light on your picture."
 msgid "Click, drag, and release to draw a lightning bolt between two points."
 msgstr ""
-"Klikoni dhe tërhiqeni miun që të vizatohet një tufë drite në vizatimin tuaj."
+"Klikoni, tërhiqeni dhe lëshojeni miun që të vizatohet një rrufe mes dy "
+"pikash."
 
 #: ../../magic/src/metalpaint.c:99
 msgid "Metal Paint"
@@ -1334,7 +1306,7 @@ msgstr "Negativ"
 
 #: ../../magic/src/negative.c:74
 msgid "Opposite"
-msgstr ""
+msgstr "E kundërta"
 
 #: ../../magic/src/negative.c:79
 msgid "Click and drag the mouse around to make your painting negative."
@@ -1347,22 +1319,20 @@ msgid "Click to turn your painting into its negative."
 msgstr "Klikoni që të shndërrohet vizatimi juaj në negativ."
 
 #: ../../magic/src/negative.c:83
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to change the color of parts of your "
-#| "picture."
 msgid ""
 "Click and drag the mouse around to change colors to their opposites -- their "
 "complementary colors."
 msgstr ""
-"Klikoni dhe tërhiqeni miun përqark që të ndryshohet ngjyra e pjesësh të "
-"vizatimit tuaj."
+"Klikoni dhe tërhiqeni miun përqark që të ndryshohen ngjyrat e kundërta -- "
+"ngjyrat e tyre komplementare."
 
 #: ../../magic/src/negative.c:84
 msgid ""
 "Click to turn all colors in your painting into their opposites -- their "
 "complementary colors."
 msgstr ""
+"Klikoni për t’i kthyer krejt ngjyrat në vizatimin tuaj në të kundërtat e "
+"tyre --ngjyrat e tyre komplementare."
 
 #: ../../magic/src/noise.c:66
 msgid "Noise"
@@ -1384,7 +1354,7 @@ msgstr "Perspektivë"
 
 #: ../../magic/src/perspective.c:152
 msgid "Panels"
-msgstr ""
+msgstr "Panele"
 
 #: ../../magic/src/perspective.c:153
 msgid "Zoom"
@@ -1395,10 +1365,8 @@ msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "Klikoni te cepat dhe tërhiqeni deri ku doni të shformohet vizatimi."
 
 #: ../../magic/src/perspective.c:159
-#, fuzzy
-#| msgid "Click to turn your painting into its negative."
 msgid "Click to turn your picture into 2-by-2 panels."
-msgstr "Klikoni që të shndërrohet vizatimi juaj në negativ."
+msgstr "Klikoni për ta kthyer vizatimin tuaj panele 2-herë-2."
 
 #: ../../magic/src/perspective.c:161
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
@@ -1439,10 +1407,8 @@ msgid "Rainbow"
 msgstr "Ylber"
 
 #: ../../magic/src/rainbow.c:140
-#, fuzzy
-#| msgid "Rainbow"
 msgid "Smooth Rainbow"
-msgstr "Ylber"
+msgstr "Ylber i Butë"
 
 #: ../../magic/src/rainbow.c:153
 msgid "You can draw in rainbow colors!"
@@ -1478,16 +1444,12 @@ msgstr ""
 
 #: ../../magic/src/reflection.c:110
 msgid "Reflection"
-msgstr ""
+msgstr "Pasqyrim"
 
 #: ../../magic/src/reflection.c:120
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgid "Click and drag the mouse around to add a reflection to your picture."
 msgstr ""
-"Klikoni dhe tërhiqeni miun që të shtohet një efekt mozaiku në pjesë të "
-"vizatimit tuaj."
+"Klikoni dhe tërhiqeni miun që te vizatimi juaj të shtohet një pasqyrmi."
 
 #: ../../magic/src/ripples.c:103
 msgid "Ripples"
@@ -1597,18 +1559,14 @@ msgstr "Klikoni që në vizatimin tuaj të shtohen flokë dëbore."
 
 #: ../../magic/src/stretch.c:107
 msgid "Stretch"
-msgstr ""
+msgstr "Tërheqje"
 
 #: ../../magic/src/stretch.c:119
-#, fuzzy
-#| msgid ""
-#| "Click and drag to make parts of your picture look like they are on "
-#| "television."
 msgid ""
 "Click and drag to stretch part of your picture vertically or horizontally."
 msgstr ""
-"Klikoni dhe tërhiqeni për t’i bërë pjesë të vizatimit tuaj të duken si të "
-"ishte në televizor."
+"Klikoni dhe tërhiqeni për ta tërhequr vizatimin tuaj vertikalisht ose "
+"horizontalisht."
 
 #: ../../magic/src/string.c:129
 msgid "String edges"

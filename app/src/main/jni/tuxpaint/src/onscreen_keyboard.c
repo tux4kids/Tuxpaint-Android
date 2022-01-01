@@ -53,7 +53,8 @@ static void print_composemap(osk_composenode * composemap, char *sp);
 
 #ifdef WIN32
 #include <windows.h>
-#define mbstowcs(wtok, tok, size) MultiByteToWideChar(CP_UTF8,MB_COMPOSITE,tok,-1,wtok,size)
+#define mbstowcs(wtok, tok, size) MultiByteToWideChar(CP_UTF8,0,tok,-1,wtok,size)
+#define wcstombs(tok, wtok, size) WideCharToMultiByte(CP_UTF8,0,wtok,-1,tok,size,NULL,NULL)
 #endif
 
 struct osk_keyboard *osk_create(char * layout_name, SDL_Surface * canvas,
@@ -214,6 +215,18 @@ static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layou
 
   layout = malloc(sizeof(osk_layout));
   layout->name = NULL;
+  layout->rows = NULL;
+  layout->width = 0;
+  layout->height = 0;
+  layout->fontpath = NULL;
+  layout->keys = NULL;
+  layout->keymap = NULL;
+  layout->composemap = NULL;
+  layout->keysymdefs = NULL;
+  layout->sizeofkeysymdefs = 0;
+  layout->bgcolor = def_bgcolor;
+  layout->fgcolor = def_fgcolor;
+  
   hlayout_loaded = 0;
 #ifdef DEBUG
   printf("load_layout %s\n", layout_name);
@@ -1817,9 +1830,12 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
           if (keyboard->composed_type == 1)
             wcstombs(event.text.text, keyboard->composed, 16);
           //          event.text.text = *keyboard->composed;
-          else
-            snprintf(event.text.text, 16, "%lc", keysym2unicode(mnemo2keysym(mnemo, keyboard), keyboard));
+          else{
+            //snprintf(event.text.text, 16, "%lc", keysym2unicode(mnemo2keysym(mnemo, keyboard), keyboard));
+	    int iwc = keysym2unicode(mnemo2keysym(mnemo, keyboard), keyboard);
+	    wcstombs(event.text.text, (wchar_t *) &iwc, 16);
           //event.text.text = keysym2unicode(mnemo2keysym(mnemo, keyboard), keyboard);
+	  }
 
           clear_dead_sticks(keyboard);
           event.type = SDL_TEXTINPUT;
