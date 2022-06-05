@@ -22,6 +22,9 @@
 #ifndef __IOS_H__
 #define __IOS_H__
 
+
+void apple_init(void);
+const char *apple_locale(void);
 const char *apple_fontsPath(void);
 const char *apple_preferencesPath(void);
 const char *apple_globalPreferencesPath(void);

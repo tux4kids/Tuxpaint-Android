@@ -19,11 +19,11 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Copyright (c) 2002-2021 by Bill Kendrick
+  Copyright (c) 2002-2022 by Bill Kendrick
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
-  June 14, 2002 - October 25, 2021
+  June 14, 2002 - February 9, 2022
   $Id$
 */
 
@@ -129,7 +129,7 @@ const char *const tool_tips[NUM_TOOLS] = {
 
   // Label tool instructions
   gettext_noop
-    ("Choose a style of text. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text. By using the selector button and clicking an existing label, you can move it, edit it and change its text style."),
+    ("Choose a style of text. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text. By using the selector button and clicking an existing label, you can move it, edit it, and change its text style."),
 
   // Fill tool instructions (defined in "fill_tools.h")
   "",
@@ -164,10 +164,11 @@ const char *const tool_tips[NUM_TOOLS] = {
 
 // Instruction while using Line tool (after click, before release)
 #define TIP_LINE_START gettext_noop("Let go of the button to complete the line.")
-#define TIP_LINE_MOVING gettext_noop("Let go of the button to complete the line. (Your line's angle is %.0f degrees.)")
+#define TIP_LINE_MOVING gettext_noop("Let go of the button to complete the line. (Your line’s angle is %.0f degrees.)")
 
 // Instruction while using Shape tool (after first click, before release)
 #define TIP_SHAPE_START gettext_noop("Hold the button to stretch the shape.")
+#define TIP_SHAPE_STRETCHING_UNLOCKED gettext_noop("Hold the button to stretch the shape. (It has an aspect ratio of \"%.2g:1\".)")
 
 // Instruction while finishing Shape tool (after release, during rotation step before second click)
 #define TIP_SHAPE_NEXT gettext_noop("Move the mouse to rotate the shape. Click to draw it.")
@@ -175,6 +176,26 @@ const char *const tool_tips[NUM_TOOLS] = {
 
 // Notification that 'New' action was aborted (current image would have been lost)
 #define TIP_NEW_ABORT gettext_noop("OK then… Let’s keep drawing this one!")
+
+// Instructions to show when the Label tool's selector mode is activated
+#define TIP_LABEL_SELECTOR_ENABLED gettext_noop("Clicking an existing label (or press [Tab] to cycle through them and [Enter] to choose). Then, you can move it, edit it, and change its text style.")
+
+// Instructions to show when a Label has been chosen with the selector
+#define TIP_LABEL_SELECTOR_LABEL_CHOSEN gettext_noop("Click in your picture if you wish to reposition this label, type to change the text, and use the options to change its text style. Press [Enter] or [Tab] when you're finished.")
+
+// Instructions to show when the Label tool's apply mode is activated
+#define TIP_LABEL_APPLIER_ENABLED gettext_noop("Clicking an existing label (or press [Tab] to cycle through them and [Enter] to choose) to permanently apply the text to the canvas.")
+
+// Instructions to show when choosing brushes, depending on the brush's feature (if there are none, show_brush_tip() will show the current tool's tip)
+#define TIP_BRUSH_CHOICE_ANM gettext_noop("This brush is animated; its shape changes as you draw!")
+#define TIP_BRUSH_CHOICE_DIR gettext_noop("This brush changes depending on the angle.")
+#define TIP_BRUSH_CHOICE_ANM_DIR gettext_noop("This brush changes depending on the angle, and is animated; its shape changes as you draw!")
+
+#define TIP_BRUSH_SPACING_ZERO gettext_noop("This brush's spacing is now 1 pixel!")
+#define TIP_BRUSH_SPACING_LESS gettext_noop("This brush's spacing is now about %1$d/%2$d the size of the brush shape.")
+#define TIP_BRUSH_SPACING_SAME gettext_noop("This brush's spacing is now about the size of the brush shape.")
+#define TIP_BRUSH_SPACING_MORE gettext_noop("This brush's spacing is now about %d times as big as the brush shape.")
+#define TIP_BRUSH_SPACING_MORE_FRAC gettext_noop("This brush's spacing is now about %1$d %2$d/%3$d times as big as the brush shape.")
 
 
 /* Tool icon filenames: */

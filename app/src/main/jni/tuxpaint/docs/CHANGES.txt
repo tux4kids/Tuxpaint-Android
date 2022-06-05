@@ -2,23 +2,307 @@ CHANGES.txt for Tux Paint
 
 Tux Paint - A simple drawing program for children.
 
-Copyright (c) 2002-2021
+Copyright (c) 2002-2022
 Various contributors (see below, and AUTHORS.txt)
 http://www.tuxpaint.org/
 
-$Id$
 
-2021.December.1 (0.9.28)
+2022.June.4 (0.9.28)
+  * Improvements to "Paint" and "Lines" tools:
+    ------------------------------------------
+    * Brush spacing may now be altered within Tux Paint.
+      + Note: A "nobrushspacing" simplifcation option is provided to
+        disable this feature; Tux Paint will continue using the brushes'
+        default spacings.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Many brushes have been given more reasonable default spacing
+      settings (e.g., star brush's new default spacing causes
+      individual stars to appear, rather than a 'smear').
+      Closes https://sourceforge.net/p/tuxpaint/bugs/243/
+      (h/t Areti Tsolakidou for the suggestion)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Instructions at the bottom note when a brush is directional,
+      animated, or both, when chosing a new brush.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to "Stamp" tool:
+    -----------------------------
+    * Stamp performance improvements
+      + Stamps are scaled before they are colorized or tinted,
+        to increase performance.
+      + The current stamp (in its current form: size, orientation,
+        and color) is cached, so it may be applied to the canvas
+        many times without having to re-render.
+        (No longer scaling and tinting every time you click.)
+      Closes https://sourceforge.net/p/tuxpaint/bugs/147/
+      (h/t Andre Anckaert)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to "Eraser" tool:
+    ------------------------------
+    * Outline for circle-shaped erasers is now also circular.
+      Closes https://sourceforge.net/p/tuxpaint/bugs/244/
+      (h/t Areti Tsolakidou for the suggestion)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to "Shapes" tool:
+    ------------------------------
+    * Added hexagon (6-sided polygon) and heptagon (7-sided) shapes.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Showing aspect ratio of shapes when stretching them.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Using floats more, allowing for proper heptagon support, as
+      well as a non-skewed starting angle for octagons (22.5 degrees).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to "Text" & "Label" tools:
+    ---------------------------------------
+    * Onscreen keyboard button sizes no longer restricted to
+      "the same size as other UI buttons" or "1/4th the size...",
+      and will now scale down from the full-size buttons to whatever
+      allows the full layout to fit within 90% of the canvas width
+      and 50% of the canvas height (picking the smallest size, to keep
+      square buttons for letters/numbers/symbols).
+      + Closes https://sourceforge.net/p/tuxpaint/feature-requests/212/
+        (h/t Anat Caspi)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * "Label" tool now offers a way to "apply" a label to the canvas
+      (as if it were 'painted' onto the drawing with the "Text" tool).
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/213/ 
+      Bill Kendrick <bill@newbreedsoftware.com>
+      & Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * Bugfix: Onscreen keyboard repositions itself to the top if you
+      use [Enter] to move the cursor down, and it begins overlapping
+      the keyboard.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Bugfix: Positioning and rendering of labels selected for editing
+      via [Tab] cycling & the [Enter] key now works as expected.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * More instructional text is shown (and sound effects play) when
+      using the Label tool.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to Color Picking:
+    ------------------------------
+    * A keyboard shortcut is now available for picking colors from
+      the canvas more quickly.  Hold either (left or right) [Ctrl] key
+      while clicking, and the color selector option will appear.
+      Release the mouse button over a color on the canvas to choose it
+      (or outside the canvas to abort).
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/209/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * A new color mixer has been added, allowing red (magenta-ish),
+      yellow, and blue (cyan-ish) primary colors, along with white
+      ("tint"), grey ("tone"), and black ("shade") to be added together to
+      form a desired color.  Undo/Redo is available!
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * The rainbow palette color picker now acts as a true
+      Hue/Saturation/Value picker, with the addition of a "value" slider.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * The crosshairs on the rainbow palette color picker are larger,
+      and scale up (or down) based on the UI size (--buttonsize setting).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Show a "pipette"-shaped mouse pointer when selecting a
+      color from the color palette, or the picture.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Don't play 'bubble' paint sound when color picker or selector
+      (or new mixer) are aborted (via their "Back" buttons or [Esc] key).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * New Magic Tools:
+    ----------------
+    * "Tile Zoom"; like the regular "Zoom", but tiles the results when
+      you scale down (similar to "Panels", but with non-integer scaling).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * "Rush"; similar to "Zoom", but the effect is blurred.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * New Brushes:
+    ------------
+    * "Dog" animated directional brush.
+      (Modified version of art from the "oneko" package by Tatsuya Kato.
+      https://github.com/tie/oneko)
+      Brushified by Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Other Improvements:
+    -------------------
+    * The up & down scroll buttons now auto-repeat if you click/tap and
+      hold them in the "Tools" section, and "Open", "New", and "Slideshow"
+      dialogs.  (For https://sourceforge.net/p/tuxpaint/feature-requests/173/)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * The "Slideshow" now begins by showing the most recent images
+      (the bottom of the list of saved images) rather than the oldest
+      (the top of the list).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Added an option to sort the "Open" and "Slideshow" dialogs
+      by newest-images-first, rather than the default oldest-first
+      (--reversesort setting).
+      (For https://sourceforge.net/p/tuxpaint/feature-requests/206/)
+      Pere Pujal i Carabantes <perepujal@gmail.com> and
+      Bill Kendrick <bill@newbreedsoftware.com>
+
   * Localization Updates:
     ---------------------
     * Albanian translation
       Besnik Bleta <besnik@programeshqip.org>
 
+    * Icelandic translation
+      Sveinn í Felli <sv1@fellsnet.is>
+
+    * Japanese translation
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Santali translation (Ol-Chiki)
+      Prasanta Hembram <prasantahembram720@gmail.com>
+
     * Slovak translation
       Jozef Říha <jose1711@gmail.com>
 
+    * Korean translation
+      Mark Kim <markuskimius@gmail.com>
+
+    * Portuguese (Portugal) translation
+      Hugo Carvalho <hugokarvalho@hotmail.com>
+
+    * Updated the Chinese (Traditional) subset font file that ships
+      with Tux Paint, based on the current translation strings.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Tux Paint for macOS can now localize the macOS menubar.
+      Mark Kim <markuskimius@gmail.com>
+
+    * Tux Paint for macOS can now detect the system language.
+      Mark Kim <markuskimius@gmail.com>
+
     * Updated `src/po/check_translations.sh` sanity-checking script
       so it properly finds the updated docs & other changes.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Bug Fixes:
+    ----------
+    * Fixed abnormal exit of threaded font scan which prevented enabling
+      text/label tools on some environment such as Rocky Linux 8.
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+  * Ports & Building:
+    -----------------
+    * Windows installer forces to uninstall before the installation if
+      version 0.9.27 and older is found.
+
+    * Windows installer will no longer show a dialogue to inform
+      user of uninstallation when "/VERYSILENT" switch is specified
+      (useful for automated installation/uninsta$llation processes).
+    * Pass the full path of locale directory to bindtextdomain().
+      Workaround to the issue that gettext() can not find translation
+      files after the update of MinGW/MSYS2 in January 2022.
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Initializing layout of onscreen keyboard (osk) to avoid undefined
+      behavior when changing keyboards.
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * Address issue with uppercase-only mode in Turkish locale.
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * Fixed a bug that can randomly crash Tux Paint when started in a language
+      with a input method map (*.im).
+      Mark Kim <markuskimius@gmail.com>
+
+    * Avoid leaking memory when loading Label text strings from a
+      saved drawing. (Affected Windows only.)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Avoid crashes when coming across unexpected Label data stored within
+      a saved PNG image.
+      (h/t Donny Sianipar for the report & sample image)
+      Bill Kendrick <bill@newbreedsoftware.com> and
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Adjust where libpaper gets init'd.
+      Reuben Thomas <https://sourceforge.net/u/rrt/>
+      (https://sourceforge.net/p/tuxpaint/bugs/250/)
+
+  * Ports & Building:
+    -----------------
+    * Release builds tarballs that denote SDL1.2 vs SDL2.0 branch.
+
+    * Windows
+      * Windows installer will no nlonger show a dialogue to inform
+        user of uninstallation when "/VERYSILENT" switch is specified
+        (useful for automated installation/uninsta$llation processes).
+        TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+      * Standard output and standard error are now redirected to the
+        files in User's save directory for example:
+        "C:\Users\<username>\AppData\Roaming\TuxPaint"
+        TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * macOS
+      Mark Kim <markuskimius@gmail.com>
+
+      * On macOS, use the CMD (⌘) key wherever CTRL is used on other OSes
+
+      * Use character class in macOS build script
+        (It appears \t is not compatible with certain versions of grep.)
+
+      * Remove install stages not needed on macOS
+
+      * When looking up paths of fonts, preferences, etc., macOS searches
+        two places, the system paths and the user paths under $HOME.
+        Now handling rare scenario where HOME is not set; if so,
+        now just searching the system path twice instead of searching the
+        system path followed by going into an undefined behavior
+        (possibly segfault crash).
+
+      * Fonts are now also looked for in the system preferences path,
+        /Library/Application Support/TuxPaint/fonts
+
+      * Fixed the issue with the backspace not working in text and label tools
+        when in certain language modes in macOS.  Mac keyboards have the DELETE
+        key where PC keyboards have the BACKSPACE key, and the two keys have
+        different keycodes, so the backspace requires special handling on the
+        macOS in programs writtens for the PC.
+
+      * Remove the `--openfolder` option when calling `bless` from Apple
+        Silicon.  This option is no longer valid on Apple Silicon as of the
+        March 2022 release of Xcode.
+
+      * Localization of SDL2.0 menu on macOS.
+
+  * Documentation updates:
+    ---------------------
+    * Added some styling, use of HTML semantic tags, call-outs for notes,
+      improved printed output, and other improvements to the README and
+      OPTIONS docs.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Magic Tool docs sort tools by localized names, include full
+      localized names in the "See also" references, corrected HTML docs
+      (and subsequent TXT conversions) character encoding (us-ascii -> UTF-8).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * macOS Apple Silicon and Universal Binary build instructions
+      Mark Kim <markuskimius@gmail.com>
+
+    * Compressed PNG images in documentation.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
 
 2021.November.25 (0.9.27)
   * New Magic Tools:
@@ -155,7 +439,7 @@ $Id$
     ---------------------
     * Allowing Left [Alt] key for switching to Japanese input method
       (for keyboards that lack a Right [Alt] key).
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Catalan translation
       Pere Pujal i Carabantes <perepujal@gmail.com>
@@ -167,7 +451,7 @@ $Id$
       Sveinn í Felli <sv1@fellsnet.is>
 
     * Japanese translation
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Portuguese (Portugal) translation
       Hugo Carvalho <hugokarvalho@hotmail.com>
@@ -196,7 +480,7 @@ $Id$
       not supply a needed function.)
       * h/t @Miyagi_Andel on Twitter for reporting the crash
       * h/t Pere Pujal i Carabantes for confirming how to reproduce it
-      * TOYAMA Shin-ichi <shin1@wmail.plala.or.jp> dropped the old
+      * TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp> dropped the old
         code and rebuilt Tux Paint 0.9.26 for Win32 as 0.9.26-5
       * Note: This means dropping support for Windows 2000 & XP
       * (Also, remove Windows-only call to `_nl_locale_name()`,
@@ -241,10 +525,10 @@ $Id$
         translation is supported both for the web site and installer.
       + Disabled start menu shortcut to outdated translations of README.html.
       + Remove old OpenCandy stuff from Windows .iss file.
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Added shell script to build windows installer and portable zip archive.
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Further work to remove compiler warnings.
 
@@ -301,7 +585,7 @@ $Id$
         Miguel Anxo Bouzada <mbouzada@gmail.com>
 
       + Japanese
-        TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+        TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Adding documentation that covers some of the
       environment variables that Tux Paint utilizes.
@@ -428,7 +712,7 @@ $Id$
       * Support for Mingw64 for 64-bit builds
       * Ability to find Mingw DLLs by examining EXEs
         (new shell script replaces hard-coded list in Makefile)
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
   * New Brushes
     -----------
@@ -501,7 +785,7 @@ $Id$
       Sveinn í Felli <sv1@fellsnet.is>
 
     * Japanese translation & Japanese README documentation
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Norwegian Bokmål translation
       Karl Ove Hufthammer <karl@huftis.org>
@@ -545,10 +829,10 @@ $Id$
       STDERR, rather than STDOUT.
 
     * Updates to build for Windows (using mingw/msys)
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Updates to 'spec' file for Linux RPM builds
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
   * Other Improvements
     ------------------
@@ -764,7 +1048,7 @@ $Id$
       Flavio Pastore <ironbishop@fsfe.org>
 
     * Japanese translation
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Korean translation
       Mark K. Kim <mkkim214@gmail.com>
@@ -1862,7 +2146,7 @@ $Id$
       + Plugin .so files were missing.
       + Separated devel packages in RPM spec.
       + Added dependency on SDL_Pango.
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Placing Tux Paint launcher icon ("tuxpaint.desktop") in
       'applications', rather than 'gnome/apps/Graphics', per Freedesktop.org
@@ -1950,7 +2234,7 @@ $Id$
 
     * Fixed issues where some strings not appearing under 'nopango'
       (at least on older Fedora CORE and RedHat).
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
 * New Starters:
     -------------
@@ -2318,7 +2602,7 @@ $Id$
       Flavio "Iron Bishop" Pastore <ironbishop@fsfe.org>
 
     * Japanese translation
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Mexican Spanish translation
       Ignacio Tike <itike0100@gmail.com>
@@ -2661,7 +2945,7 @@ $Id$
       Kevin Patrick Scannell <kscanne@gmail.com>
     
     * Japanese
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Lithuanian
       Gintaras Gostautas <gintaras@nes.lt>
@@ -2877,7 +3161,7 @@ $Id$
       Flavio "Iron Bishop" Pastore <ironbishop@fsfe.org>
 
     * Japanese
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Japanese font shipped in Tux Paint now includes common educational Kanji
 
@@ -2914,7 +3198,7 @@ $Id$
     * Including a scaled down version of the Japanese TrueType font (ja.ttf),
       that includes only the characters uses by Tux Paint.
       For info, see: fonts/locale/ja_docs/
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
   * Documentation Improvements:
     ---------------------------
@@ -2929,7 +3213,7 @@ $Id$
     * Ran source code through "indent -nbfda -npcs -npsl -bli0".
 
     * "DESTDIR" patch is no longer needed.
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
       
     * Split parts of "tuxpaint.c" into separate source files:
       + "compiler.h": Compiler-version-specific definitions.
@@ -3122,7 +3406,7 @@ $Id$
     ----------------------------
     * Added larger screen size support:
       1024x768, 1280x1024, 1400x1050, 1600x1200
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Arbitrary window sizes allowed (--XXXXxYYYY); useful for more modern
       displays (e.g., Mac monitors)
@@ -3286,12 +3570,12 @@ $Id$
       John Popplewell <john@johnnypops.demon.co.uk>
 
     * There's no longer a need to remove CVS-related things in 'tuxpaint.spec'.
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Added "test-option.sh" shell script, which can be used in Makefile
       for basic compiler option tests
       (e.g., is "-Wdeclaration-after-statement" available?)
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Created 'release' Makefile target, which generates a .tar.gz
       (sans CVS-related files) based on the clean source directory.
@@ -3355,13 +3639,13 @@ $Id$
     
     * Added "PKG_ROOT" variable to Makefile, and "tuxpaint.spec" file,
       for Tux Paint RPM building ease.
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Fixed to compile on old GLIBC system (such as RedHat-6.2)
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Fixes to RPM spec file
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
   
     * Enabled more compiler warnings, and updated code to prevent them.
       Albert Cahalan <albert@users.sf.net>
@@ -3468,7 +3752,7 @@ $Id$
       Tedi Heriyanto <tedi_h@gmx.net>
       
     * Japanese
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Korean
       Mark K. Kim <mkkim214@gmail.com>
@@ -3663,7 +3947,7 @@ $Id$
       Flavio Pastor <flavio.pastore@zonaitalia.it>
 
     * Updated Japanese translation.
-      TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Updated Korean translation.
       Mark K. Kim <mkkim214@gmail.com>
@@ -3943,7 +4227,7 @@ $Id$
     and you went to the 'Open' dialog.
   
   * Fixed prompt bug for larger window sizes
-    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+    TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
 
 2003.Jun.17 (0.9.11)
@@ -3971,7 +4255,7 @@ $Id$
     Mantas Kriauciunas <monte@mail.lt>
 
   * Set $OUTPUT_CHARSET for Japanese locale, to fix Win32 issue.
-    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+    TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
   * Lithuanian translation.
     Mantas Kriauciunas <monte@mail.lt>,
@@ -4069,7 +4353,7 @@ $Id$
     Karl Ove Hufthammer <karl@huftis.org>
 
   * Added Japanese translation to Tux Paint icon (tuxpaint.desktop)
-    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+    TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
   * Moved Makefile.beos into src/, to keep root directory less cluttered.
 
@@ -4090,7 +4374,7 @@ $Id$
   * Removed some debugging output that shouldn't have been kept in.
 
   * Locale-detection code made more robust.  (Check LC_MESSAGES, not LC_ALL)
-    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+    TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
   * Added support for some useful HTML escape sequences in stamp descriptions
     (e.g., "&acute;" for "�" ("a" with "'" over it))
@@ -4126,7 +4410,7 @@ $Id$
     selector on the right.
 
   * Fixed Japanese locale detection.
-    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+    TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
   * Stamp description translations can be encoded using UTF-8.
     Append ".utf8" to the locale code (e.g., "fr.utf8=...")
@@ -4138,7 +4422,7 @@ $Id$
 
 2003.January.26 (0.9.7)
   * Translated to Japanese!
-    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+    TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
   * Fixed translation bugs with some save-related prompts.
 
@@ -4162,10 +4446,10 @@ $Id$
     if it doesn't exist
 
   * Initial support for arbitrary window sizes.  (#define SVGA for 800x600)
-    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+    TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
   * Added a few new colors, renamed some old ones.
-    TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+    TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
   * Fixed text tool bug when hitting [Enter]/[Return] past bottom of canvas
 

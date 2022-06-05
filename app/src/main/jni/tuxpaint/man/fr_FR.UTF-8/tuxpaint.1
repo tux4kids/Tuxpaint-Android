@@ -1,5 +1,5 @@
-.\" tuxpaint.1 - 2021.11.25
-.TH TUXPAINT 1 "novembre 25, 2021" "0.9.28" "Tux Paint"
+.\" tuxpaint.1 - 2022.06.04
+.TH TUXPAINT 1 "juin  4, 2022" "0.9.28" "Tux Paint"
 .SH NAME
 tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 
@@ -70,6 +70,8 @@ tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 [\-\-noshapecontrols]
 .br
 [\-\-nolabel]
+.br
+[\-\-nobrushspacing]
 .br
 [\-\-newcolorslast]
 .br
@@ -155,6 +157,8 @@ tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 .br
 [\-\-autosave]
 .br
+[\-\-reversesort]
+.br
 [\-\-colorfile \fIFILE\fP]
 
 .TP 9
@@ -213,6 +217,8 @@ tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 .br
 [\-\-label]
 .br
+[\-\-brushspacing]
+.br
 [\-\-newcolorsfirst]
 .br
 [\-\-dontmirrorstamps]
@@ -230,6 +236,8 @@ tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 [\-\-save]
 .br
 [\-\-noautosave]
+.br
+[\-\-noreversesort]
 .br
 
 .TP 9
@@ -428,6 +436,11 @@ partir d'un coin, là où la souris a cliqué en premier.
 .B \-\-nolabel \-\-label
 Désactive (ou active) l'outil Étiquette, ce qui vous permet de créer un
 texte qui peut être modifié ou déplacé plus tard.
+
+.TP 8
+.B \-\-nobrushspacing \-\-brushspacing
+Disable or enable (default) the brush spacing option of the Paint and Lines
+tools, which allows you to override the default spacing of a brush.
 
 .SH OPTIONS - CONTROLLING TUX PAINT
 .l
@@ -716,6 +729,12 @@ est utilisé juste pour le fun, ou dans un environnement de tests.
 .B \-\-autosave \-\-noautosave
 Cette option --autosave empêche Tux Paint de vous demander si vous voulez
 sauvegarder l'image quand vous quittez, et suppose que vous le faites.
+
+.TP 8
+.B \-\-reversesort \-\-noautosave
+The --reversesort option causes Tux Paint's Open and Slideshow dialogs to
+display the oldest images at the top of the list (normally the newest
+appear at the top, and the oldest at the bottom.
 
 .SH OPTIONS - DATA FILES
 .l
@@ -1312,7 +1331,7 @@ Voyez la documentation venant avec Tux Paint pour d'autres instructions concerna
 
 L'endroit normal pour trouver les informations sur Tux Paint se trouve à
 .nh
-http://www.tuxpaint.org/.
+https://tuxpaint.org/.
 .hy
 
 .SH AUTHORS

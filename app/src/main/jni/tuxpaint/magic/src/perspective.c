@@ -2,13 +2,18 @@
   perspective.c
 
   perspective, stretches the plane of the image.
-  zoom, zooms in and out the image.
+  zoom & tile zoom, zooms in and out the image.
+  panels, turns the images into a 2x2 grid.
 
   Tux Paint - A simple drawing program for children.
 
-  Credits: Andrew Corcoran <akanewbie@gmail.com>
+  Original Zoom & Perspective
+  By Pere Pujal Carabantes
 
-  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
+  Panels, Tile mode of Zoom, and Rush
+  by Bill Kendrick
+
+  Copyright (c) 2014-2022
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -27,7 +32,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: September 20, 2021
+  Last updated: June 2, 2022
   $Id$
 */
 
@@ -116,7 +121,9 @@ enum
 {
   TOOL_PERSPECTIVE,
   TOOL_PANELS,
+  TOOL_TILEZOOM,
   TOOL_ZOOM,
+  TOOL_RUSH,
   perspective_NUM_TOOLS
 };
 
@@ -139,18 +146,23 @@ const char *perspective_snd_filenames[perspective_NUM_TOOLS + 1] = {
   "zoom_down.ogg", /* TODO: Could use a different sound */
   "zoom_up.ogg",
   "zoom_down.ogg",
+  "zoom_down.ogg", /* TODO: Could use a different sound */
 };
 
 const char *perspective_icon_filenames[perspective_NUM_TOOLS] = {
   "perspective.png",
   "panels.png",
+  "tilezoom.png",
   "zoom.png",
+  "rush.png",
 };
 
 const char *perspective_names[perspective_NUM_TOOLS] = {
   gettext_noop("Perspective"),
   gettext_noop("Panels"),
+  gettext_noop("Tile Zoom"),
   gettext_noop("Zoom"),
+  gettext_noop("Rush"),
 };
 
 const char *perspective_descs[perspective_NUM_TOOLS] = {
@@ -158,7 +170,11 @@ const char *perspective_descs[perspective_NUM_TOOLS] = {
 
   gettext_noop("Click to turn your picture into 2-by-2 panels."),
 
+  gettext_noop("Click and drag up to zoom in the picture. Drag down to zoom out and tile the picture."),
+
   gettext_noop("Click and drag up to zoom in or drag down to zoom out the picture."),
+
+  gettext_noop("Click and drag up to rush in or drag down to rush out the picture."),
 };
 
 Uint32 perspective_api_version(void)
@@ -282,14 +298,19 @@ void perspective_drag(magic_api * api, int which, SDL_Surface * canvas,
       }
       break;
     case TOOL_ZOOM:
+    case TOOL_RUSH:
+    case TOOL_TILEZOOM:
       {
         int x_distance, y_distance;
 
-        update_rect->x = update_rect->y = 0;
-        update_rect->w = canvas->w;
-        update_rect->h = canvas->h;
-
-        SDL_FillRect(canvas, update_rect, SDL_MapRGB(canvas->format, perspective_r, perspective_g, perspective_b));
+        if (which == TOOL_ZOOM || which == TOOL_RUSH)
+          {
+            update_rect->x = update_rect->y = 0;
+            update_rect->w = canvas->w;
+            update_rect->h = canvas->h;
+    
+            SDL_FillRect(canvas, update_rect, SDL_MapRGB(canvas->format, perspective_r, perspective_g, perspective_b));
+          }
 
         new_h = max(1, old_h + click_y - y);
         new_w = canvas->w * new_h / canvas->h;
@@ -360,7 +381,9 @@ void perspective_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 
       }
       break;
+    case TOOL_RUSH:
     case TOOL_ZOOM:
+    case TOOL_TILEZOOM:
       {
         click_x = x;
         click_y = y;
@@ -424,70 +447,167 @@ void perspective_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 void perspective_release(magic_api * api, int which,
                          SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
-  switch (which)
+  if (which == TOOL_PANELS)
+    return;
+
+  update_rect->x = update_rect->y = 0;
+  update_rect->w = canvas->w;
+  update_rect->h = canvas->h;
+
+  if (which == TOOL_ZOOM || which == TOOL_PERSPECTIVE)
+    SDL_FillRect(canvas, update_rect, SDL_MapRGB(canvas->format, perspective_r, perspective_g, perspective_b));
+
+  if (which == TOOL_PERSPECTIVE)
     {
-    case TOOL_PERSPECTIVE:
-      {
-        perspective_preview(api, which, canvas, last, x, y, update_rect, 0.5);
-      }
-      break;
+      perspective_preview(api, which, canvas, last, x, y, update_rect, 0.5);
+    }
+  else if (which == TOOL_RUSH)
+    {
+      int h1, h2, w, h, hh, x, y, dx1, dy1;
+      Uint8 r1, g1, b1, r2, g2, b2;
+      Uint32 r, g, b;
+      float pct;
+      SDL_Surface *scaled_surf;
 
-    case TOOL_ZOOM:
-      {
-        SDL_Surface *aux_surf;
-        SDL_Surface *scaled_surf;
+      if (new_h == canvas->h || new_h == 0)
+        {
+          SDL_BlitSurface(last, NULL, canvas, NULL);
+          return; /* Do nothing */
+        }
 
-        update_rect->x = update_rect->y = 0;
-        update_rect->w = canvas->w;
-        update_rect->h = canvas->h;
+      if (new_h > canvas->h * 1.5)
+        new_h = canvas->h * 1.5;
 
+      if (new_h < canvas->h)
+        {
+          h1 = new_h;
+          h2 = canvas->h;
+        }
+      else
+        {
+          h1 = canvas->h;
+          h2 = new_h;
+        }
+
+      SDL_BlitSurface(last, NULL, canvas, NULL);
+
+      for (h = 0; h < (h2 - h1); h++)
+        {
+          if ((h / 2) % 10 == 0)
+            api->update_progress_bar();
+
+//          if (new_h < canvas->h)
+            hh = h2 - h;
+//        else
+//          hh = new_h + h;
+
+          w = canvas->w * hh / canvas->h;
+          scaled_surf = api->scale(last, w, hh, 0);
+
+          dx1 = (canvas->w - scaled_surf->w) / 2;
+          dy1 = (canvas->h - scaled_surf->h) / 2;
+
+          for (y = 0; y < scaled_surf->h; y++)
+            {
+              if (dy1 + y >= 0 && dy1 + y < canvas->h)
+                {
+                  for (x = 0; x < scaled_surf->w; x++)
+                    {
+                      if (dx1 + x >= 0 && dx1 + x < canvas->w)
+                        {
+                          SDL_GetRGB(api->getpixel(scaled_surf, x, y), scaled_surf->format, &r1, &g1, &b1);
+                          SDL_GetRGB(api->getpixel(canvas, dx1 + x, dy1 + y), canvas->format, &r2, &g2, &b2);
+                          pct = (float) ((float) h / ((float) h2 - (float) h1));
+//                        if (new_h > canvas->h)
+//                          pct = 1.0 - pct;
+                          r = api->linear_to_sRGB((api->sRGB_to_linear(r1) * (1.0 - pct)) + (api->sRGB_to_linear(r2) * (pct)));
+                          g = api->linear_to_sRGB((api->sRGB_to_linear(g1) * (1.0 - pct)) + (api->sRGB_to_linear(g2) * (pct)));
+                          b = api->linear_to_sRGB((api->sRGB_to_linear(b1) * (1.0 - pct)) + (api->sRGB_to_linear(b2) * (pct)));
+
+                          api->putpixel(canvas, dx1 + x, dy1 + y, SDL_MapRGB(canvas->format, r, g, b));
+                        }
+                    }
+                }
+            }
+        }
+
+      update_rect->x = 0;
+      update_rect->y = 0;
+      update_rect->w = canvas->w;
+      update_rect->h = canvas->h;
+    }
+  else /* ZOOM & TILEZOOM */
+    {
+      SDL_Surface *aux_surf;
+      SDL_Surface *scaled_surf;
+
+      update_rect->x = update_rect->y = 0;
+      update_rect->w = canvas->w;
+      update_rect->h = canvas->h;
+
+      if (which == TOOL_ZOOM)
         SDL_FillRect(canvas, update_rect, SDL_MapRGB(canvas->format, perspective_r, perspective_g, perspective_b));
 
 
-        if (new_h < canvas->h)
-          {
-            scaled_surf = api->scale(canvas_back, new_w, new_h, 0);
-            update_rect->x = (canvas->w - new_w) / 2;
-            update_rect->y = (canvas->h - new_h) / 2;
-            update_rect->w = new_w;
-            update_rect->h = new_h;
-            SDL_BlitSurface(scaled_surf, NULL, canvas, update_rect);
-          }
-        else
-          {
-            int aux_h, aux_w;
+      if (new_h < canvas->h)
+        {
+          int xx, yy, x_span, y_span;
 
-            aux_h = canvas->h * canvas->h / new_h;
-            aux_w = canvas->w * aux_h / canvas->h;
+          scaled_surf = api->scale(canvas_back, new_w, new_h, 0);
 
-            update_rect->x = canvas->w / 2 - aux_w / 2;
-            update_rect->y = canvas->h / 2 - aux_h / 2;
-            update_rect->w = aux_w;
-            update_rect->h = aux_h;
+          if (which == TOOL_TILEZOOM && (new_w < canvas->w || new_h < canvas->h))
+            {
+              x_span = ceil(canvas->w / new_w);
+              y_span = ceil(canvas->h / new_h);
+            }
+          else
+            x_span = y_span = 0;
 
-            aux_surf = SDL_CreateRGBSurface(SDL_SWSURFACE,
-                                            aux_w,
-                                            aux_h,
-                                            canvas->format->BitsPerPixel,
-                                            canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, 0);
+          for (yy = -y_span; yy <= y_span; yy++)
+            {
+              for (xx = -x_span; xx <= x_span; xx++)
+                {
+                  update_rect->x = ((canvas->w - new_w) / 2) + (new_w * xx);
+                  update_rect->y = ((canvas->h - new_h) / 2) + (new_h * yy);
+                  update_rect->w = new_w;
+                  update_rect->h = new_h;
+                  SDL_BlitSurface(scaled_surf, NULL, canvas, update_rect);
+                }
+            }
+        }
+      else
+        {
+          int aux_h, aux_w;
 
-            SDL_BlitSurface(canvas_back, update_rect, aux_surf, NULL);
-            scaled_surf = api->scale(aux_surf, canvas->w, canvas->h, 0);
-            SDL_BlitSurface(scaled_surf, NULL, canvas, NULL);
-            SDL_FreeSurface(aux_surf);
-          }
-        SDL_FreeSurface(scaled_surf);
+          aux_h = canvas->h * canvas->h / new_h;
+          aux_w = canvas->w * aux_h / canvas->h;
 
-        update_rect->x = update_rect->y = 0;
-        update_rect->w = canvas->w;
-        update_rect->h = canvas->h;
+          update_rect->x = canvas->w / 2 - aux_w / 2;
+          update_rect->y = canvas->h / 2 - aux_h / 2;
+          update_rect->w = aux_w;
+          update_rect->h = aux_h;
 
-      }
-      break;
+          aux_surf = SDL_CreateRGBSurface(SDL_SWSURFACE,
+                                          aux_w,
+                                          aux_h,
+                                          canvas->format->BitsPerPixel,
+                                          canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, 0);
+
+          SDL_BlitSurface(canvas_back, update_rect, aux_surf, NULL);
+          scaled_surf = api->scale(aux_surf, canvas->w, canvas->h, 0);
+          SDL_BlitSurface(scaled_surf, NULL, canvas, NULL);
+          SDL_FreeSurface(aux_surf);
+        }
+      SDL_FreeSurface(scaled_surf);
+
+      update_rect->x = update_rect->y = 0;
+      update_rect->w = canvas->w;
+      update_rect->h = canvas->h;
+
     }
 }
 
-void perspective_preview(magic_api * api, int which ATTRIBUTE_UNUSED,
+void perspective_preview(magic_api * api, int which,
                          SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED,
                          int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect, float step)
 {
@@ -501,7 +621,10 @@ void perspective_preview(magic_api * api, int which ATTRIBUTE_UNUSED,
   update_rect->w = canvas->w;
   update_rect->h = canvas->h;
 
-  SDL_FillRect(canvas, update_rect, SDL_MapRGB(canvas->format, perspective_r, perspective_g, perspective_b));
+  if (which == TOOL_ZOOM)
+    SDL_FillRect(canvas, update_rect, SDL_MapRGB(canvas->format, perspective_r, perspective_g, perspective_b));
+  else if (which == TOOL_TILEZOOM || which == TOOL_RUSH)
+    SDL_FillRect(canvas, update_rect, SDL_MapRGB(canvas->format, 128, 128, 128));
 
   ox_distance = otop_right_x - otop_left_x;
   oy_distance = obottom_left_y - otop_left_y;
@@ -537,6 +660,35 @@ void perspective_preview(magic_api * api, int which ATTRIBUTE_UNUSED,
           api->putpixel(canvas, ax + dx - center_ofset_x, ay + dy - center_ofset_y, api->getpixel(canvas_back, i, j));
         }
     }
+
+  if (which == TOOL_TILEZOOM && new_w >= 2 && new_h >= 2)
+    {
+      int xx, yy, x_span, y_span;
+      SDL_Rect src_rect, dest_rect;
+
+      x_span = ceil(canvas->w / new_w);
+      y_span = ceil(canvas->h / new_h);
+
+      src_rect.x = -center_ofset_x;
+      src_rect.y = -center_ofset_y;
+      src_rect.w = new_w;
+      src_rect.h = new_h;
+
+      for (yy = -y_span; yy <= y_span; yy++)
+        {
+          for (xx = -x_span; xx <= x_span; xx++)
+            {
+              if (xx != 0 || yy != 0)
+                {
+                  dest_rect.x = ((canvas->w - new_w) / 2) + (new_w * xx);
+                  dest_rect.y = ((canvas->h - new_h) / 2) + (new_h * yy);
+                  dest_rect.w = new_w;
+                  dest_rect.h = new_h;
+                  SDL_BlitSurface(canvas, &src_rect, canvas, &dest_rect);
+                }
+            }
+        }
+    }
 }
 
 void perspective_shutdown(magic_api * api ATTRIBUTE_UNUSED)
@@ -564,7 +716,7 @@ void perspective_set_color(magic_api * api ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, U
 // Use colors:
 int perspective_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
-  if (which == TOOL_PANELS)
+  if (which == TOOL_PANELS || which == TOOL_TILEZOOM || which == TOOL_RUSH)
     return 0;
   return 1;
 }

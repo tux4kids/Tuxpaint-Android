@@ -2,17 +2,16 @@
                                  version 0.9.28
                          Documentation sur les signaux
 
-      Copyright &copie; 2019-2021 par divers contributeurs; voir AUTHORS.
-                            http://www.tuxpaint.org/
+        Copyright © 2019-2022 by divers contributeurs; see AUTHORS.txt.
+                             https://tuxpaint.org/
 
-                                  mars 9, 2021
-
-     ----------------------------------------------------------------------
+                                  juin 4, 2022
 
    Tux Paint répond aux signaux suivants (qui peuvent être envoyé au
    processus du programme via `kill` ou`killall`, par exemple).
 
-   SIGTERM (également, [Ctrl] + [C] depuis un terminal exécutant 'tuxpaint')
+   SIGTERM (également, [Control] + [C] depuis un terminal exécutant
+   'tuxpaint')
 
            Tux Paint répond comme si le bouton "Quitter" était enfoncé, ou
            l'environnement de bureau a été invité à fermer Tux Paint (par
@@ -28,13 +27,12 @@
            sauvegarder avec un nouveau nom (par ex. "--saveover" ou
            "--saveovernew") vers un nouveau fichier.
 
-           Remarque :Sur d'autres parties de l'interface, le signal est en
-           fait interprété comme une demande de retour en arrière (par
-           exemple, de la boîte de dialogue "Nouveau" pour revenir sur
-           l'interface principale), comme si un bouton "Retour" dans Tux
-           Paint a été cliqué, ou la touche [Esc] enfoncée.
-
            Exemple: killall tuxpaint
+
+           💡 Note: From other parts of the interface, the signal is currently
+           interpreted as a request to go back (e.g., from the "New" dialog
+           back to the main interface), as if a "Back" button in Tux Paint
+           were clicked, or the [Esc] was key pressed.
 
    SIGUSR1 & SIGUSR2
 
@@ -50,10 +48,9 @@
            Ainsi, à partir de l'interface principale, Tux Paint devrait se
            fermer presque immédiatement, sans poser de questions.
 
-           À partir d'autres parties de l'interface, malheureusement, Tux
-           Paint ne reviendra que d'un niveau dans l'interface. Par
-           conséquent, à ce moment, il peut être nécessaire d'envoyer ce
-           signal à Tux Paint plusieurs fois pour qu'il s'arrête
-           complètement.
-
            Exemple: killall -s SIGUSR1 tuxpaint
+
+           💡 Note: From other parts of the interface, unfortunately, Tux
+           Paint will go back one level in the interface. Therefore, at this
+           time, it may be necessary to send this signal to Tux Paint a few
+           times, for it to quit completely.

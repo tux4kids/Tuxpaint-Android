@@ -101,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 * Wed Dec 01 2021 <nbs@sonic.net> -
 - Set version number 0.9.28
 
-* Thu Oct 07 2021 <shin1@wmail.plala.or.jp> -
+* Thu Oct 07 2021 <dolphin6k@wmail.plala.or.jp> -
 - Set version number 0.9.27
 - doc/Makefile no longer installed
 
@@ -111,13 +111,13 @@ rm -rf $RPM_BUILD_ROOT
 * Mon Jun 22 2020 <nbs@sonic.net> -
 - Set version number 0.9.25
 
-* Fri May 1 2020 <shin1@wmail.plala.or.jp> -
+* Fri May 1 2020 <dolphin6k@wmail.plala.or.jp> -
 - Enabled using xdg-utils for installing icons.
 - Wrong date in %changelog
 - Re-organized %files section
 - Correct path for 'tp-magic-config --plugindocprefix'
 
-* Sat Mar 14 2020 <shin1@wmail.plala.or.jp> -
+* Sat Mar 14 2020 <dolphin6k@wmail.plala.or.jp> -
 - Disable target "install-xdg". Add ImageMagick for BuildReq.
 
 * Thu Sep 26 2019 <nbs@sonic.net> -
@@ -126,43 +126,43 @@ rm -rf $RPM_BUILD_ROOT
 * Sun Aug 19 2018 <nbs@sonic.net> -
 - Set version number 0.9.23
 
-* Mon Aug 20 2012 <shin1@wmail.plala.or.jp> -
+* Mon Aug 20 2012 <dolphin6k@wmail.plala.or.jp> -
 - Corrected 'Requires' and 'BuildRequires'
 
-* Wed Dec 07 2011 <shin1@wmail.plala.or.jp> -
+* Wed Dec 07 2011 <dolphin6k@wmail.plala.or.jp> -
 - Added bash-completion file
 
 * Wed Jul 1 2009 <nbs@sonic.net> -
 - Set version number 0.9.22
 
-* Sun May 24 2009 <shin1@wmail.plala.or.jp> -
+* Sun May 24 2009 <dolphin6k@wmail.plala.or.jp> -
 - For 0.9.21
 - Added dependency for fribidi
 
-* Tue Jun 17 2008 <shin1@wmail.plala.or.jp> -
+* Tue Jun 17 2008 <dolphin6k@wmail.plala.or.jp> -
 - Actually set Epoch number
 
 * Sat Apr 26 2008 <acahalan@gmail.com> -
 - DESTDIR is the standard name, not PKG_ROOT
 
-* Fri Mar 21 2008 <shin1@wmail.plala.or.jp> -
+* Fri Mar 21 2008 <dolphin6k@wmail.plala.or.jp> -
 - Set version number 0.9.20
 - Set Epoch number
 - Requirements added for -devel package.
 
-* Sun Mar 02 2008 <shin1@wmail.plala.or.jp> -
+* Sun Mar 02 2008 <dolphin6k@wmail.plala.or.jp> -
 - 0.9.19
 - Requires SDL_Pango
 - Included magic tools
 - Separated devel package
 
-* Fri Jun 01 2007  <shin1@wmail.plala.or.jp> -
+* Fri Jun 01 2007  <dolphin6k@wmail.plala.or.jp> -
 - Requires librsvg2 and libpaper
 
-* Fri Sep 08 2006  <shin1@wmail.plala.or.jp> -
+* Fri Sep 08 2006  <dolphin6k@wmail.plala.or.jp> -
 - New offical URL for tuxpaint (http://www.tuxpaint.org/).
 
-* Mon Aug 07 2006  <shin1@wmail.plala.or.jp> -
+* Mon Aug 07 2006  <dolphin6k@wmail.plala.or.jp> -
 - "DESTDIR" patch is no longer needed.
 
 * Thu Nov 03 2005  Richard June <rjune[AT]lumensoftware.com - 0:0.9.14-0.lumen.0
@@ -173,14 +173,14 @@ rm -rf $RPM_BUILD_ROOT
 - Set a proper %changelog entry
 
 
-* Thu Sep 15 2005  <shin1@wmail.plala.or.jp> -
+* Thu Sep 15 2005  <dolphin6k@wmail.plala.or.jp> -
 - Do not force install desktop icons when Gnome and/or KDE are not installed.
 
-* Sun Mar 27 2005  <shin1@wmail.plala.or.jp> -
+* Sun Mar 27 2005  <dolphin6k@wmail.plala.or.jp> -
 - Some hicolor icons not installed were removed from file list
 
 * Fri Jan 14 2005  <bill@newbreedsoftware.com> -
 - Changed Group from Amusements/Games to Multimedia/Graphics
 
-* Tue Sep 21 2004  <shin1@wmail.plala.or.jp> -
+* Tue Sep 21 2004  <dolphin6k@wmail.plala.or.jp> -
 - Initial build for version 0.9.14

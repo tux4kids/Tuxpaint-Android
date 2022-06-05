@@ -5,113 +5,206 @@
       Documentation sur PNG pour Tux Paint    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
         link="#0000FF"
         vlink="#FF0000"
         alink="#FF00FF">
-    <center>
-      <h1>
-        <img src="../../html/images/tuxpaint-title.png"
-            width="205"
-            height="210"
-            alt="Tux Paint"><br>
-        version 0.9.28<br/>
-        Documentation sur PNG pour Tux Paint      </h1>
+    <section class="outer">
+      <header>
+        <center>
+          <h1>
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.28<br/>
+            Documentation sur PNG pour Tux Paint          </h1>
+    
+          <p>
+            Copyright &copy; 2007-2022 by divers contributeurs; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+    
+          <p>
+            juin  4, 2022          </p>
+        </center>
+      </header>
+    </section>
+
+    <section class="indent">
+      <header>
+        <h1>À propos des PNG</h1>
+      </header>
 
       <p>
-        Copyright &copie; 2007-2021 par divers contributeurs; voir AUTHORS.<br>
-        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
-      </p>
-
-      <p>
-        mars  9, 2021      </p>
-    </center>
-
-    <hr>
-
-    <h2>À propos des PNG</h2>
-
-    <p>
-      PNG veut dire Portable Network Portable (format graphique portable pour réseau). C'est un standard ouvert, qui  n'est pas sous le poids des brevets (comme les GIF). C'est un format hautement compressé (mais pas "avec perte" comme les JPEG - la perte permet aux fichiers d'être plus petit, mais introduit des "erreurs" dans l'image lors de l'enregistrement), et prend en charge la couleur 24 bits (16,7 millions de couleurs) ainsi qu'un "canal alpha", c'est-à-dire que chaque pixel peut avoir un degré variable de transparence.    </p>
-
-    <p>
-      Pour plus d'informations, voir :  <a href="http://www.libpng.org/">http://www.libpng.org/</a>    </p>
-
-    <p>
-      Ces fonctionnalités (format ouvert, pas de perte, compression, transparence/alpha) en font le meileur choix pour Tux Paint (La prise en charge du format PNG par Tux Paint vient de la bibliothèque Open Source SDL_Image, qui à son tour l'a obtenue de la bibliothèque libPNG.)    </p>
-
-    <p>
-      La prise en charge de nombreuses couleurs permet aux images "tampons de caoutchouc" de qualité photo d'être utilisable dans Tux Paint, et la transparence alpha permet une haute qualité pour les pinceaux.    </p>
-
-    <h2>Comment créer des PNG</h2>
+        PNG veut dire Portable Network Portable (format graphique portable pour réseau). C'est un standard ouvert, qui  n'est pas sous le poids des brevets (comme les GIF). C'est un format hautement compressé (mais pas "avec perte" comme les JPEG - la perte permet aux fichiers d'être plus petit, mais introduit des "erreurs" dans l'image lors de l'enregistrement), et prend en charge la couleur 24 bits (16,7 millions de couleurs) ainsi qu'un "canal alpha", c'est-à-dire que chaque pixel peut avoir un degré variable de transparence.      </p>
   
-    <p>Ce qui suit est une très <em>brève</em>  liste de méthodes pour créer des PNG ou convertir des images existantes en PNG.
-    <h3>GIMP &amp; Krita</h3>
-    <p>
-      D'excellents outils pour créer des images PNG utilisables dans Tux Paint sont Gimp et Krita, tous deux programmes interactifs de dessin et d'édition de photos Open Source et de grande qualité.    </p>
+      <p>
+        Pour plus d'informations, voir :  <a href="http://www.libpng.org/">http://www.libpng.org/</a>      </p>
+  
+      <p>
+        Ces fonctionnalités (format ouvert, pas de perte, compression, transparence/alpha) en font le meileur choix pour Tux Paint (La prise en charge du format PNG par Tux Paint vient de la bibliothèque Open Source SDL_Image, qui à son tour l'a obtenue de la bibliothèque libPNG.)      </p>
+  
+      <p>
+        La prise en charge de nombreuses couleurs permet aux images "tampons de caoutchouc" de qualité photo d'être utilisable dans Tux Paint, et la transparence alpha permet une haute qualité pour les pinceaux.      </p>
+    </section>
 
-    <p>
-      Un des deux, ou les deux, sont probablement déjà installés sur votre système Linux. Sinon, ils sont certainement disponibles depuis le site de téléchargement de votre distribution. Sinon, ou pour en apprendre plus, visitez respectivement <a href="http://www.gimp.org/">http://www.gimp.org/</a> et <a href="http://www.krita.org/">http://www.krita.org/</a>.    </p>
-
-    <h3>Outils en ligne de commande</h3>
-
-    <h4>NetPBM</h4>
-    <p>
-      Les outils Bitmap portables (appelés généralement «NetPBM») sont une collection d'outils de ligne de commande Open Source qui convertissent vers et depuis différents formats tels que GIF, TIFF, BMP, PNG et beaucoup d'autres.    </p>
-
-    <p>
-      Ils sont probablement déjà installés sur votre système. Sinon, ils sont certainement disponibles depuis le site de téléchargement de votre distribution Linux. Sinon, ou pour en apprendre plus, visitez <a href="http://netpbm.sourceforge.net/">http://netpbm.sourceforge.net/</a>.    </p>
-
-    <h4>cjpeg/djpeg</h4>
-    <p>
-      Les programmes en ligne de commande "cjpeg" et "djpeg" font la conversion entre le format PNM (Portable Any Map) de NetPBM et les JPEG.
-      Ils sont probablement déjà installés sur votre système. Sinon, ils sont certainement disponibles depuis le site de téléchargement de votre distribution Linux. Sinon, ou pour en apprendre plus, visitez <a href="https://jpegclub.org/">https://jpegclub.org/</a>.    </p>
-
-    <h3>Utilisateurs de Windows</h3>
-    <ul>
-      <li>  <cite>CorelDRAW</cite>
+    <section class="indent">
+      <header>
+        <h2>Comment créer des PNG</h2>
+      </header>
+  
+      <p>Ce qui suit est une très <em>brève</em>  liste de méthodes pour créer des PNG ou convertir des images existantes en PNG.  
+      <dl>
+        <dt>GIMP &amp; Krita</dt>
+        <dd>
+          <p>
+            D'excellents outils pour créer des images PNG utilisables dans Tux Paint sont Gimp et Krita, tous deux programmes interactifs de dessin et d'édition de photos Open Source et de grande qualité.          </p>
+      
+          <p>
+            Un des deux, ou les deux, sont probablement déjà installés sur votre système Linux. Sinon, ils sont certainement disponibles depuis le site de téléchargement de votre distribution. Sinon, ou pour en apprendre plus, visitez respectivement <a href="http://www.gimp.org/">http://www.gimp.org/</a> et <a href="http://www.krita.org/">http://www.krita.org/</a>.          </p>
+        </dd>
+  
+        <dt>Outils en ligne de commande</dt>
+        <dd>
+          <dl>
+            <dt>NetPBM</dt>
+            <dd>
+              <p>
+                Les outils Bitmap portables (appelés généralement «NetPBM») sont une collection d'outils de ligne de commande Open Source qui convertissent vers et depuis différents formats tels que GIF, TIFF, BMP, PNG et beaucoup d'autres.              </p>
+          
+              <p>
+                Ils sont probablement déjà installés sur votre système. Sinon, ils sont certainement disponibles depuis le site de téléchargement de votre distribution Linux. Sinon, ou pour en apprendre plus, visitez <a href="http://netpbm.sourceforge.net/">http://netpbm.sourceforge.net/</a>.              </p>
+            </dd>
+        
+            <dt>cjpeg/djpeg</dt>
+            <dd>
+              <p>
+                Les programmes en ligne de commande "cjpeg" et "djpeg" font la conversion entre le format PNM (Portable Any Map) de NetPBM et les JPEG.          
+                Ils sont probablement déjà installés sur votre système. Sinon, ils sont certainement disponibles depuis le site de téléchargement de votre distribution Linux. Sinon, ou pour en apprendre plus, visitez <a href="https://jpegclub.org/">https://jpegclub.org/</a>.              </p>
+            </dd>
+          </dl>
+        </dd>
+  
+        <dt>Proprietary Software for Windows</dt>
+        <dd>
+          <ul>
+            <li>  <cite>CorelDRAW</cite>
   (Corel)
   &mdash;
   <a href="http://www.corel.com/">http://www.corel.com/</a>
-        <li>  <cite>Illustrator</cite>
+              <li>  <cite>Illustrator</cite>
   (Adobe)
   &mdash;
   <a href="http://www.adobe.com/products/illustrator.html">http://www.adobe.com/products/illustrator.html</a>
-        <li>  <cite>Paint Shop Pro</cite>
+              <li>  <cite>Paint Shop Pro</cite>
   (Corel)
   &mdash;
   <a href="https://www.paintshoppro.com/">https://www.paintshoppro.com/</a>
-        <li>  <cite>Photoshop</cite>
+              <li>  <cite>Photoshop</cite>
   (Adobe)
   &mdash;
   <a href="http://www.adobe.com/products/photoshop.html">http://www.adobe.com/products/photoshop.html</a>
-        <li>  <cite>PIXresizer</cite>
+              <li>  <cite>PIXresizer</cite>
   (Bluefive software)
   &mdash;
   <a href="http://bluefive.pair.com/pixresizer.htm">http://bluefive.pair.com/pixresizer.htm</a>
-      </ul>
-
-    <h3>Utilisateurs de Macintosh</h3>
-    <ul>
-      <li>  <cite>CorelDRAW</cite>
+            </ul>
+        </dd>
+  
+        <dt>Utilisateurs de Macintosh</dt>
+        <dd>
+          <ul>
+            <li>  <cite>CorelDRAW</cite>
   (Corel)
   &mdash;
   <a href="http://www.corel.com/">http://www.corel.com/</a>
-        <li>  <cite>GraphicConverter</cite>
+              <li>  <cite>GraphicConverter</cite>
   (Lemke Software)
   &mdash;
   <a href="https://www.lemkesoft.de/mac-fotobearbeitung-mac-diashow-mac-grafikprogramm-mac-bildbetrachter/">https://www.lemkesoft.de/mac-fotobearbeitung-mac-diashow-mac-grafikprogramm-mac-bildbetrachter/</a>
-        <li>  <cite>Illustrator</cite>
+              <li>  <cite>Illustrator</cite>
   (Adobe)
   &mdash;
   <a href="http://www.adobe.com/products/illustrator.html">http://www.adobe.com/products/illustrator.html</a>
-        <li>  <cite>Photoshop</cite>
+              <li>  <cite>Photoshop</cite>
   (Adobe)
   &mdash;
   <a href="http://www.adobe.com/products/photoshop.html">http://www.adobe.com/products/photoshop.html</a>
-      </ul>
+            </ul>
+        </dd>
+      </dl>
+    </section>
   </body>
 </html>
 

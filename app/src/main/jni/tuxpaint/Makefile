@@ -1,15 +1,16 @@
 # Tux Paint - A simple drawing program for children.
 
-# Copyright (c) 2002-2021
+# Copyright (c) 2002-2022
 # Various contributors (see AUTHORS.txt)
 # http://www.tuxpaint.org/
 
-# June 14, 2002 - December 1, 2021
+# June 14, 2002 - June 4, 2022
 
 
 # The version number, for release:
 
 VER_VERSION:=0.9.28
+VER_FLAVOR:="-sdl2"
 ifdef SOURCE_DATE_EPOCH
   VER_DATE=$(shell date -u -d "@$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u -r "$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u "+%Y-%m-%d")
 else
@@ -375,35 +376,40 @@ all:	tuxpaint translations magic-plugins tp-magic-config thumb-starters thumb-te
 	@echo
 	@echo "Done compiling."
 	@echo
-	@echo "Now run 'make install' with any options you ran 'make' with."
-	@echo "to install Tux Paint."
-	@echo
-	@echo "You may need superuser ('root') privileges, depending on"
-	@echo "where you're installing."
-	@echo "(Depending on your system, you either need to 'su' first,"
-	@echo "or run 'sudo make install'.)"
-	@echo
+	@if [ "x$(OS)" = "xmacos" ]; then \
+	    echo "Now run 'make install' to create the App Bundle ($(BUNDLE))."; \
+        echo; \
+    else \
+	    echo "Now run 'make install' with any options you ran 'make' with."; \
+	    echo "to install Tux Paint."; \
+	    echo; \
+	    echo "You may need superuser ('root') privileges, depending on"; \
+	    echo "where you're installing."; \
+	    echo "(Depending on your system, you either need to 'su' first,"; \
+	    echo "or run 'sudo make install'.)"; \
+	    echo; \
+    fi
 
 .PHONY: releaseclean
 releaseclean:
 	@echo
 	@echo "Cleaning release directory"
 	@echo
-	@rm -rf "build/tuxpaint-$(VER_VERSION)" "build/tuxpaint-$(VER_VERSION).tar.gz"
+	@rm -rf "build/tuxpaint-$(VER_VERSION)$(VER_FLAVOR)" "build/tuxpaint-$(VER_VERSION)$(VER_FLAVOR).tar.gz"
 	@-if [ -d build ] ; then rmdir build ; fi
 
 .PHONY: releasedir
-releasedir: build/tuxpaint-$(VER_VERSION)
+releasedir: build/tuxpaint-$(VER_VERSION)$(VER_FLAVOR)
 
 
-build/tuxpaint-$(VER_VERSION):
+build/tuxpaint-$(VER_VERSION)$(VER_FLAVOR):
 	@echo
 	@echo "Creating release directory"
 	@echo
-	@mkdir -p build/tuxpaint-$(VER_VERSION)
+	@mkdir -p build/tuxpaint-$(VER_VERSION)$(VER_FLAVOR)
 	@find . -follow \
 	     \( -wholename '*/.git' -o -name .gitignore -o -name .thumbs -o -name .cvsignore -o -name 'dummy.o' -o -name 'build' -o -name '.#*' \) \
-	     -prune -o -type f -exec cp --parents -vdp \{\} build/tuxpaint-$(VER_VERSION)/ \;
+	     -prune -o -type f -exec cp --parents -vdp \{\} build/tuxpaint-$(VER_VERSION)$(VER_FLAVOR)/ \;
 
 .PHONY: release
 release: releasedir
@@ -411,7 +417,7 @@ release: releasedir
 	@echo "Creating release tarball"
 	@echo
 	@cd build ; \
-	    tar -czvf tuxpaint-$(VER_VERSION).tar.gz tuxpaint-$(VER_VERSION)
+	    tar -czvf tuxpaint-$(VER_VERSION)$(VER_FLAVOR).tar.gz tuxpaint-$(VER_VERSION)$(VER_FLAVOR)
 
 # "make olpc" builds the program for an OLPC XO:
 MAGIC_GOOD:=blur blocks_chalk_drip bricks calligraphy fade_darken\
@@ -542,9 +548,9 @@ trans:
 
 ######
 
-windows_ARCH_INSTALL:=install-dlls install-tpconf-i18n
-macos_ARCH_INSTALL:=install-macbundle TuxPaint.dmg install-man install-importscript install-bash-completion
-ios_ARCH_INSTALL:=install-iosbundle install-man install-importscript install-bash-completion
+windows_ARCH_INSTALL:=
+macos_ARCH_INSTALL:=install-macbundle
+ios_ARCH_INSTALL:=install-iosbundle
 linux_ARCH_INSTALL:=install-xdg install-man install-importscript install-bash-completion
 ARCH_INSTALL:=$($(OS)_ARCH_INSTALL)
 
@@ -565,11 +571,30 @@ install:	install-bin install-data install-doc \
 	@echo "--------------------------------------------------------------"
 	@echo
 	@if [ "x$(OS)" = "xmacos" ]; then \
-		echo "All done! Now you can double click $(BUNDLE) to run the"; \
-		echo "program!!! TuxPaint.dmg has also been created for"; \
-		echo "distribution."; \
-		echo; \
-		echo "For more information, see $(DOC_PREFIX)/README.txt"; \
+        echo "The App Bundle has been created as $(BUNDLE)!  Now you can:"; \
+        echo; \
+        echo "  * Double click $(BUNDLE) to run the application."; \
+        echo "  * Sign the App Bundle."; \
+        echo "  * Run 'make TuxPaint.dmg' to create the DMG file for distribution."; \
+        echo; \
+        echo "Signing is optional for the Intel CPU build, or for the Apple Silicon build if"; \
+        echo "it is to be run only on the system on which it was built (e.g., for"; \
+        echo "development.)  The App Bundle must be signed if it is built to run natively on"; \
+        echo "the Apple Silicon and is distributed."; \
+        echo; \
+        echo "To sign the App Bundle, use the following command, where IDENTITY is your Apple"; \
+        echo "Developer ID if you have one, or a hyphen (-) to sign it ad-hoc:"; \
+        echo; \
+        echo "  codesign -s IDENTITY $(BUNDLE)"; \
+        echo; \
+        echo "If you are signing the App Bundle *and* creating the DMG, the DMG must be"; \
+        echo "created after signing to ensure the signed App Bundle is used to create the"; \
+        echo "DMG."; \
+        echo; \
+        echo "For the instruction on how to create the App Bundle as Universal, see"; \
+        echo "$(DOC_PREFIX)/[locale]/INSTALL.txt"; \
+        echo; \
+        echo "For usage, see $(DOC_PREFIX)/[locale]/README.txt"; \
 	else \
 		echo "All done! Now (preferably NOT as 'root' superuser),"; \
 		echo "you can type the command 'tuxpaint' to run the program!!!"; \
@@ -627,12 +652,12 @@ bdist-win32:
 		PREFIX:=./win32/bdist \
 		DATA_PREFIX:=data \
 		DOC_PREFIX:=docs \
-		LOCALE_PREFIX:=locale \
 		IM_PREFIX:=im \
 		CONFDIR:=. \
 		COMPLETIONDIR:=. \
 		INCLUDE_PREFIX:=plugins/include \
-		MAGIC_PREFIX:=plugins
+		MAGIC_PREFIX:=plugins \
+		ARCH_DEFS:=-DBDIST_WIN32
 	strip -s tuxpaint.exe
 	make install \
 		PREFIX:=./win32/bdist \
@@ -644,7 +669,8 @@ bdist-win32:
 		CONFDIR:=./win32/bdist \
 		COMPLETIONDIR:=./win32/bdist \
 		INCLUDE_PREFIX:=./win32/bdist/plugins/include \
-		MAGIC_PREFIX:=./win32/bdist/plugins
+		MAGIC_PREFIX:=./win32/bdist/plugins \
+		ARCH_INSTALL:=install-dlls install-tpconf-i18n
 
 # "make bdist-clean" deletes the 'bdist' directory
 .PHONY: bdist-clean
@@ -1104,7 +1130,7 @@ tuxpaint:	obj/tuxpaint.o obj/i18n.o obj/im.o obj/cursor.o obj/pixels.o \
 		$(ARCH_LIBS)
 	@echo
 	@echo "...Linking Tux Paint..."
-	$(CC) $(CFLAGS) $(LDFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(DEFS) \
+	$(CC) $(CFLAGS) $(LDFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-o tuxpaint $^ \
 		$(SDL_LIBS) $(SVG_LIB) $(ARCH_LINKS)
 	@$(RAD_CMD)
@@ -1140,7 +1166,7 @@ obj/tuxpaint.o:	src/tuxpaint.c \
 		$(ARCH_HEADERS)
 	@echo
 	@echo "...Compiling Tux Paint from source..."
-	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(SVG_CFLAGS) $(MOUSE_CFLAGS) $(DEFS) \
+	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(SVG_CFLAGS) $(MOUSE_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/tuxpaint.c -o obj/tuxpaint.o
 
 # Broke gperf|sed up into two steps so that it will fail properly if gperf is not installed; there's probably a more elegant solution -bjk 2009.11.20
@@ -1162,130 +1188,130 @@ obj/parse_step1.c:	src/parse.gperf
 obj/parse.o:	obj/parse.c src/parse.h src/compiler.h
 	@echo
 	@echo "...Compiling the command-line and config file parser..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c obj/parse.c -o obj/parse.o
 
 obj/i18n.o:	src/i18n.c src/i18n.h src/debug.h
-	@echo
-	@echo "...Compiling i18n support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(DEFS) \
+	echo
+	echo "...Compiling i18n support..."
+	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/i18n.c -o obj/i18n.o
 
 obj/im.o:	src/im.c src/im.h src/debug.h
 	@echo
 	@echo "...Compiling IM support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/im.c -o obj/im.o
 
 obj/get_fname.o:	src/get_fname.c src/get_fname.h src/debug.h
 	@echo
 	@echo "...Compiling filename support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/get_fname.c -o obj/get_fname.o
 
 obj/fonts.o:	src/fonts.c src/fonts.h src/dirwalk.h src/progressbar.h \
 		src/get_fname.h src/debug.h
 	@echo
 	@echo "...Compiling font support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/fonts.c -o obj/fonts.o
 
 obj/dirwalk.o:	src/dirwalk.c src/dirwalk.h src/progressbar.h src/fonts.h \
 		src/debug.h
 	@echo
 	@echo "...Compiling directory-walking support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/dirwalk.c -o obj/dirwalk.o
 
 obj/cursor.o:	src/cursor.c src/cursor.h src/debug.h
 	@echo
 	@echo "...Compiling cursor support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(MOUSE_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(MOUSE_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/cursor.c -o obj/cursor.o
 
 obj/pixels.o:	src/pixels.c src/pixels.h src/compiler.h src/debug.h
 	@echo
 	@echo "...Compiling pixel functions..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/pixels.c -o obj/pixels.o
 
 obj/gifenc.o:	src/gifenc.c src/gifenc.h
 	@echo
 	@echo "...Compiling animated GIF export libary..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/gifenc.c -o obj/gifenc.o
 
 obj/playsound.o:	src/playsound.c src/playsound.h \
 			src/compiler.h src/debug.h
 	@echo
 	@echo "...Compiling sound playback functions..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/playsound.c -o obj/playsound.o
 
 obj/fill.o:	src/fill.c src/fill.h \
 		src/rgblinear.h src/playsound.h src/pixels.h
 	@echo
 	@echo "...Compiling flood fill tool..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/fill.c -o obj/fill.o
 
 obj/progressbar.o:	src/progressbar.c src/progressbar.h \
 			src/compiler.h src/debug.h
 	@echo
 	@echo "...Compiling progress bar functions..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/progressbar.c -o obj/progressbar.o
 
 obj/rgblinear.o:	src/rgblinear.c src/rgblinear.h \
 			src/compiler.h src/debug.h
 	@echo
 	@echo "...Compiling RGB to Linear functions..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/rgblinear.c -o obj/rgblinear.o
 
 obj/sounds.o:	src/sounds.c src/sounds.h
 	@echo
 	@echo "...Compiling sound effect list..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/sounds.c -o obj/sounds.o
 
 
 obj/BeOS_print.o:	src/BeOS_print.cpp src/BeOS_print.h
 	@echo
 	@echo "...Compiling BeOS print support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/BeOS_print.cpp -o obj/BeOS_print.o
 
 obj/win32_print.o:	src/win32_print.c src/win32_print.h src/debug.h
 	@echo
 	@echo "...Compiling win32 print support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/win32_print.c -o obj/win32_print.o
 
 obj/win32_trash.o:	src/win32_trash.c src/debug.h
 	@echo
 	@echo "...Compiling win32 trash support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/win32_trash.c -o obj/win32_trash.o
 
 obj/postscript_print.o:	src/postscript_print.c \
 			src/postscript_print.h src/debug.h
 	@echo
 	@echo "...Compiling PostScript print support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/postscript_print.c -o obj/postscript_print.o
 
-obj/macos.o: src/macos.c src/macos.h src/platform.h src/debug.h
+obj/macos.o: src/macos.m src/macos.h src/platform.h src/debug.h
 	@echo
 	@echo "...Compiling macOS support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
-		-c src/macos.c -o obj/macos.o
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
+		-c src/macos.m -o obj/macos.o
 
-obj/ios.o: src/ios.c src/ios.h src/platform.h src/debug.h
+obj/ios.o: src/ios.m src/ios.h src/platform.h src/debug.h
 	@echo
 	@echo "...Compiling iOS support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
-		-c src/ios.c -o obj/ios.o
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
+		-c src/ios.m -o obj/ios.o
 
 obj/resource.o:	win32/resources.rc win32/resource.h
 	@echo
@@ -1296,7 +1322,7 @@ obj/onscreen_keyboard.o:	src/onscreen_keyboard.c src/onscreen_keyboard.h src/dir
 		src/get_fname.h src/debug.h
 	@echo
 	@echo "...Compiling on screen keyboard support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) \
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/onscreen_keyboard.c -o obj/onscreen_keyboard.o
 
 src/tp_magic_api.h:	src/tp_magic_api.h.in

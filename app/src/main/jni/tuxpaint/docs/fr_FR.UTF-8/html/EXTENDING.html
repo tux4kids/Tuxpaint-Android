@@ -5,297 +5,272 @@
       Extensions pour Tux Paint    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
         link="#0000FF"
         vlink="#FF0000"
         alink="#FF00FF">
-    <center>
-      <h1>
-        Extension<br>
-        <img src="../../html/images/tuxpaint-title.png"
-            width="205"
-            height="210"
-            alt="Tux Paint"><br>
-        version 0.9.28      </h1>
 
+    <!-- Title -->
+    <section class="outer">
+      <header>
+        <center>
+          <h1>
+            Extension<br>
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.28          </h1>
+    
+          <p>
+            Copyright &copy; 2002-2022 by divers contributeurs; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+    
+          <p>
+            juin  4, 2022          </p>
+        </center>
+      </header>
+
+      <table border="2"
+             cellspacing="0"
+             cellpadding="2"
+             summary="Table des matières"
+             align="center"
+             style="page-break-inside: avoid;">
+        <tr>
+          <th>
+            Table des matières          </th>
+        </tr>
+        <tr>
+          <td>
+            <ul>
+              <li><a href="#where_files_go">Où vont les fichiers</a>                <ul>
+                  <li><a href="#standard_files">Fichiers standards</a></li>                  <li><a href="#personal_files">Fichiers personnels</a></li>                </ul>
+              </li>
+              <li><a href="#brushes">Pinceaux</a>                <ul>
+                  <li><a href="#brush_options">Options de pinceau</a></li>                </ul>
+              </li>
+              <li><a href="#stamps">Tampons</a>                <ul>
+                  <li><a href="#stamps_images">Images des tampons</a></li>                  <li><a href="#description_text">Texte de description des tampons</a></li>                  <li><a href="#sound_effects">Effets sonores des tampons</a></li>                  <li><a href="#descriptive_sound">Son descriptif du tampon</a></li>                  <li><a href="#stamp_options">Options des tampons</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Mise en miroir et retournement</a></li>                </ul>
+              </li>
+              <li><a href="#fonts">Polices</a></li>              <li><a href="#starters">'Images de démarrage'</a>                <ul>
+                  <li><a href="#coloring_book_style">Images de démarrage avec style 'livre de coloriage'</a></li>                  <li><a href="#scene_style">Images de démarrage avec 'style scénique'</a></li>                </ul>
+              </li>
+              <li><a href="#templates">'Modèles'</a></li>              <li><a href="#translations">Traductions</a></li>              <li><a href="#input_methods">Méthodes alternatives de saisie</a></li>              <li><a href="#on_screen_keyboard">Clavier virtuel sur écran</a></li>            </ul>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="outer">
       <p>
-        Copyright &copie; 2002-2021 par divers contributeurs; voir AUTHORS.<br>
-        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
-      </p>
+        Si vous souhaitez ajouter ou modifier des éléments tels que des pinceaux, des images de démarrage, des tampons en caoutchouc et d'autres contenus utilisés par Tux Paint , vous pouvez le faire assez facilement en ajoutant, modifiant ou supprimant simplement des fichiers là où Tux Paint les recherche.      </p>
+  
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> You'll need to re-launch Tux Paint for the changes to take effect.      </p>
+    </section>
 
-      <p>
-        septembre 19, 2021      </p>
-    </center>
+    <section class="indent outer"><!-- H1: Where Files Go -->
+      <header>
+        <h1>
+          <a name="where_files_go"
+              id="where_files_go">Où vont les fichiers</a>
+        </h1>
+      </header>
 
-    <hr size="2"
-        noshade>
+      <section class="indent"><!-- H2: Standard Files -->
+        <header>
+          <h2>
+            <a name="standard_files"
+                id="standard_files">Fichiers standards</a>
+          </h2>
+        </header>
 
-    <table border="2"
-           cellspacing="0"
-           cellpadding="2"
-           summary="Table des matières">
-      <tr>
-        <th>
-          Table des matières        </th>
-      </tr>
-
-      <tr>
-        <td>
-          <ul>
-            <li>
-              <a href="#where_files_go">Où vont les fichiers</a>
-              <ul>
-                <li>
-                  <a href="#standard_files">Fichiers standards</a>
-                </li>
-
-                <li>
-                  <a href="#personal_files">Fichiers personnels</a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="#brushes">Pinceaux</a>
-              <ul>
-                <li>
-                  <a href="#brush_options">Options de pinceau</a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="#stamps">Tampons</a>
-              <ul>
-                <li>
-                  <a href="#stamps_images">Images des tampons</a>
-                </li>
-
-                <li>
-                  <a href="#description_text">Texte de description des tampons</a>
-                </li>
-
-                <li>
-                  <a href="#sound_effects">Effets sonores des tampons</a>
-                </li>
-
-                <li>
-                  <a href="#descriptive_sound">Son descriptif du tampon</a>
-                </li>
-
-                <li>
-                  <a href="#stamp_options">Options des tampons</a>
-                </li>
-
-                <li>
-                  <a href="#pre_mirroed_and_flipped_images">Mise en miroir et retournement</a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="#fonts">Polices</a>
-            </li>
-
-            <li>
-              <a href="#starters">'Images de démarrage'</a>
-              <ul>
-                <li>
-                  <a href="#coloring_book_style">Images de démarrage avec style 'livre de coloriage'</a>
-                </li>
-
-                <li>
-                  <a href="#scene_style">Images de démarrage avec 'style scénique'</a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="#templates">'Modèles'</a>
-            </li>
-
-            <li>
-              <a href="#translations">Traductions</a>
-            </li>
-
-            <li>
-              <a href="#input_methods">Méthodes alternatives de saisie</a>
-            </li>
-
-            <li>
-              <a href="#on_screen_keyboard">Clavier virtuel sur écran</a>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    </table>
-
-    <hr size="2"
-        noshade>
-
-    <p>
-      Si vous souhaitez ajouter ou modifier des éléments tels que des pinceaux, des images de démarrage, des tampons en caoutchouc et d'autres contenus utilisés par Tux Paint , vous pouvez le faire assez facilement en ajoutant, modifiant ou supprimant simplement des fichiers là où Tux Paint les recherche.    </p>
-
-    <p>
-      Remarque: vous devrez redémarrer Tux Paint pour que les modifications prennent effet.    </p>
-
-    <hr size="2"
-        noshade>
-
-    <h2>
-      <a name="where_files_go"
-          id="where_files_go">Où vont les fichiers</a>
-    </h2>
-
-    <blockquote>
-      <h3>
-        <a name="standard_files"
-            id="standard_files">Fichiers standards</a>
-      </h3>
-
-      <blockquote>
         <p>
           Tux Paint recherche ses différents fichiers de données dans son répertoire '<code>data</code>'.        </p>
 
-        <h4>
-          Linux et Unix        </h4>
+        <dl>
+          <dt><strong>Linux et Unix</strong></dt>
+          <dd>
+            <p>
+              L'emplacement de ce répertoire dépend de la valeur définie pour "<code>DATA_PREFIX</code>" lors de la construction de Tux Paint . Voir INSTALL. pour plus de détails.            </p>
+            <p>
+              Par défaut, ce répertoire est :              <blockquote>
+                <code>/usr/local/share/tuxpaint/</code>
+              </blockquote>
+            </p>
+            <p>
+              Si vous l'avez installé à partir d'un paquetage, c'est plutôt :              <blockquote>
+                <code>/usr/share/tuxpaint/</code>
+              </blockquote>
+            </p>
+          </dd>
 
-        <blockquote>
-          <p>
-            L'emplacement de ce répertoire dépend de la valeur définie pour "<code>DATA_PREFIX</code>" lors de la construction de Tux Paint . Voir INSTALL. pour plus de détails.          </p>
+          <dt><strong>Windows</strong></dt>
+          <dd>
+            <p>
+              Tux Paint recherche un répertoire appelé 'data' dans le même répertoire que l'exécutable. C'est le répertoire que l'installateur a utilisé lors de l'installation de Tux Paint, par exemple :              <blockquote>
+                <code style="white-space: nowrap;">C:\Program Files\TuxPaint\data</code>
+              </blockquote>
+            </p>
+          </dd>
 
-          <p>
-            Par défaut, ce répertoire est :          </p>
+          <dt><strong>macOS</strong></dt>
+          <dd>
+            <p>
+              Tux Paint stocke ses fichiers de données dans l'icône de l'application "Tux Paint" (qui est en fait un type spécial de dossier sur macOS &amp; Mac OS X avant lui). Les étapes suivantes expliquent comment accéder aux dossiers qu'il contient :            </p>
+            <ol>
+              <li>
+                Affichez un menu «contextuel» en maintenant la touche <b><code>[Control]</code></b> enfoncée et en cliquant sur l' icône Tux Paint dans le <cite>Finder</cite> . (Si vous avez une souris avec plus d'un bouton, vous pouvez simplement cliquer avec le bouton droit de la souris sur l'icône.)              </li>
+              <li>
+                Sélectionnez "Afficher le contenu" dans le menu qui apparaît. Une nouvelle fenêtre du <cite>Finder</cite> apparaîtra avec un dossier à l'intérieur appelé " Contents".              </li>
+              <li>
+                Ouvrez le dossier "Contents " et ouvrez le dossier "Resources" qui se trouve à l'intérieur.              </li>
+              <li>
+                Vous y trouverez divers sous-dossiers, tels que " starters", "stamps", " brushes", etc.  Ajouter du nouveau contenu à ces dossiers rendra celui-ci disponible pour tout utilisateur qui lance cette copie (icône) de Tux Paint .              </li>
+            </ol>
+            <p class="note">
+              <span title="Information">&#128161;</span>              <em>Remarque :</em> Si vous installez une version plus récente de Tux Paint et remplacez ou supprimez l'ancienne version, vous perdrez les modifications apportées avec les instructions ci-dessus, faites donc des sauvegardes de votre nouveau contenu (tampons,pinceaux, etc.).            </p>
+            <p>
+              Tux Paint recherche également les fichiers dans un dossier "Tux Paint" que vous pouvez placer dans votre dossier système "Application Support" (situé sous "Library" à la racine de votre système de fichiers) :              <blockquote>
+                <code style="white-space: nowrap;">/Library/Application Support/TuxPaint/</code>
+              </blockquote>
+            </p>
+            <p>
+              Lorsque vous passez à une version plus récente de Tux Paint , le contenu de ce dossier "TuxPaint" restera à la même place et restera accessible à tous les utilisateurs de Tux Paint .            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Standard Files -->
 
-          <blockquote>
-            <code>/usr/local/share/tuxpaint/</code>
-          </blockquote>
+      <section class="indent"><!-- H2: Personal Files -->
+        <header>
+          <h2>
+            <a name="personal_files"
+                id="personal_files">Fichiers personnels</a>
+          </h2>
+        </header>
 
-          <p>
-            Si vous l'avez installé à partir d'un paquetage, c'est plutôt :          </p>
-
-          <blockquote>
-            <code>/usr/share/tuxpaint/</code>
-          </blockquote>
-        </blockquote>
-
-        <h4>
-          Windows
-        </h4>
-
-        <blockquote>
-          <p>
-            Tux Paint recherche un répertoire appelé 'data' dans le même répertoire que l'exécutable. C'est le répertoire que l'installateur a utilisé lors de l'installation de Tux Paint, par exemple :          </p>
-
-          <blockquote>
-            <code style="white-space: nowrap;">C:\Program Files\TuxPaint\data</code>
-          </blockquote>
-        </blockquote>
-
-        <h4>
-          macOS
-        </h4>
-
-        <blockquote>
-          <p>
-            Tux Paint stocke ses fichiers de données dans l'icône de l'application "Tux Paint" (qui est en fait un type spécial de dossier sur macOS &amp; Mac OS X avant lui). Les étapes suivantes expliquent comment accéder aux dossiers qu'il contient :          </p>
-
-          <ol>
-            <li>Affichez un menu «contextuel» en maintenant la touche <b>[Control]</b> enfoncée et en cliquant sur l' icône Tux Paint dans le <cite>Finder</cite> . (Si vous avez une souris avec plus d'un bouton, vous pouvez simplement cliquer avec le bouton droit de la souris sur l'icône.)            </li>
-
-            <li>Sélectionnez "Afficher le contenu" dans le menu qui apparaît. Une nouvelle fenêtre du <cite>Finder</cite> apparaîtra avec un dossier à l'intérieur appelé " Contents".            </li>
-
-            <li>Ouvrez le dossier "Contents " et ouvrez le dossier "Resources" qui se trouve à l'intérieur.            </li>
-
-            <li>Vous y trouverez divers sous-dossiers, tels que " starters", "stamps", " brushes", etc.  Ajouter du nouveau contenu à ces dossiers rendra celui-ci disponible pour tout utilisateur qui lance cette copie (icône) de Tux Paint .            </li>
-          </ol>
-
-          <p>
-            <em>Remarque :</em> Si vous installez une version plus récente de Tux Paint et remplacez ou supprimez l'ancienne version, vous perdrez les modifications apportées avec les instructions ci-dessus, faites donc des sauvegardes de votre nouveau contenu (tampons,pinceaux, etc.).          </p>
-
-          <p>
-            Tux Paint recherche également les fichiers dans un dossier "Tux Paint" que vous pouvez placer dans votre dossier système "Application Support" (situé sous "Library" à la racine de votre système de fichiers) :          </p>
-
-          <blockquote>
-            <code style="white-space: nowrap;">/Library/Application Support/TuxPaint/</code>
-          </blockquote>
-
-          <p>
-            Lorsque vous passez à une version plus récente de Tux Paint , le contenu de ce dossier "TuxPaint" restera à la même place et restera accessible à tous les utilisateurs de Tux Paint .          </p>
-        </blockquote>
-      </blockquote>
-
-      <hr size="1"
-          noshade>
-
-      <h3>
-        <a name="personal_files"
-            id="personal_files">Fichiers personnels</a>
-      </h3>
-
-      <blockquote>
         <p>
           Vous pouvez également créer des pinceaux, des images de démarrage, des modèles et des polices dans votre propre répertoire où Tux Paint les retrouvera.        </p>
 
-        <h4>
-          Windows
-        </h4>
+        <dl>
+          <dt><strong>Windows</strong></dt>
+          <dd>
+            <p>
+              Votre dossier personnel Tux Paint est stocké dans votre dossier "Application Data". Par exemple, sur un Windows plus récent :
+              <blockquote>
+                <code style="white-space: nowrap;">C:\Documents and Settings\<i>(nom d'utilisateur)</i>\Application Data\TuxPaint\</code>
+              </blockquote>
+            </p>
+          </dd>
 
-        <blockquote>
-          <p>
-            Votre dossier personnel Tux Paint est stocké dans votre dossier "Application Data". Par exemple, sur un Windows plus récent :          </p>
+          <dt><strong>macOS</strong></dt>
+          <dd>
+            <p>
+              Votre dossier personnel Tux Paint est stocké dans votre dossier «Application Support» :              <blockquote>
+                <code style= "white-space: nowrap;">/Users/<i>(nom d'utilisateur)</i>/Library/Application Support/TuxPaint/</code>
+              </blockquote>
+            </p>
+          </dd>
 
-          <blockquote>
-            <code style="white-space: nowrap;">C:\Documents and Settings\<i>(nom d'utilisateur)</i>\Application Data\TuxPaint\</code>
-          </blockquote>
-        </blockquote>
-
-        <h4>
-          macOS
-        </h4>
-
-        <blockquote>
-          <p>
-            Votre dossier personnel Tux Paint est stocké dans votre dossier «Application Support» :          </p>
-
-          <blockquote>
-            <code style= "white-space: nowrap;">/Users/<i>(nom d'utilisateur)</i>/Library/Application Support/TuxPaint/</code>
-          </blockquote>
-        </blockquote>
-
-        <h4>
-          Linux et Unix</h4>
-
-        <blockquote>
-          <p>
-            Vos fichiers personnels Tux Paint vont dans un 'répertoire caché' que l'on trouve dans votre répertoire personnel "<code>$(HOME)/.tuxpaint/</code>" (également appelé "<code>~/.tuxpaint/</code>".          </p>
-
-          <p>
-            Autrement dit, si votre répertoire personnel est "<code>/home/tux</code>", alors votre répertoire Tux Paint est "<code>/home/tux/.tuxpaint/</code>".          </p>
-
-          <p>
-            N'oubliez pas le point (" <code>.</code>") avant le "<code>tuxpaint</code>" !          </p>
-        </blockquote>
+          <dt><strong>Linux et Unix</strong></dt>
+          <dd>
+            <p>
+              Vos fichiers personnels Tux Paint vont dans un 'répertoire caché' que l'on trouve dans votre répertoire personnel "<code>$(HOME)/.tuxpaint/</code>" (également appelé "<code>~/.tuxpaint/</code>".            </p>
+            <p>
+              Autrement dit, si votre répertoire personnel est "<code>/home/tux</code>", alors votre répertoire Tux Paint est "<code>/home/tux/.tuxpaint/</code>".            </p>
+            <p>
+              N'oubliez pas le point (" <code>.</code>") avant le "<code>tuxpaint</code>" !            </p>
+          </dd>
+        </dl>
 
         <p>
           Pour ajouter des pinceaux, des tampons, des 'images de démarrage',des modèles et des polices créez des sous-répertoires dans votre répertoire personnel Tux Paint nommés respectivement "<code><b>brushes</b></code>", "<code><b>stamps</b></code>", "<code><b>starters</b></code>", "<code><b>templates</b></code>", "<code><b>fonts</b></code>".        </p>
 
         <p>
           (Par exemple, si vous avez créé un pinceau nommé "<code>flower.png</code>", vous le mettrez dans "<code>~/.tuxpaint/brushes/</code>" sous Linux ou Unix.)        </p>
-      </blockquote>
-    </blockquote>
+      </section><!-- H2: Personal Files -->
+    </section><!-- H1: Where Files Go -->
 
-    <hr size="1"
-        noshade>
+    <section class="indent outer"><!-- H1: Brushes -->
+      <header>
+        <h1>
+          <a name="brushes"
+              id="brushes">Pinceaux</a>
+        </h1>
+      </header>
 
-    <h2>
-      <a name="brushes"
-          id="brushes">Pinceaux</a>
-    </h2>
-
-    <blockquote>
       <p>
         Les pinceaux utilisés pour dessiner avec les outils "Pinceau" et "Lignes" dans Tux Paint sont tout simplement des fichiers image PNG.      </p>
       <img src="../../html/images/brush_edit.png"
@@ -309,12 +284,14 @@
       <p>
         Les pixels en niveaux de gris dans le pinceau PNG seront dessinés en utilisant la couleur actuellement sélectionnée dans Tux Paint . Les pixels de couleur seront teintés.      </p>
 
-      <h3>
-        <a name="brush_options"
-            id="brush_options">Options de pinceau</a>
-      </h3>
+      <section><!-- H2: Brush Options -->
+        <header>
+          <h2>
+            <a name="brush_options"
+                id="brush_options">Options de pinceau</a>
+          </h2>
+        </header>
 
-      <blockquote>
         <p>
           Outre une une forme graphique, les pinceaux peuvent également recevoir d'autres attributs. Pour ce faire, vous devez créer un «fichier de données» pour brosse.        </p>
 
@@ -324,97 +301,81 @@
         <p>
           Le fichier porte le même nom que l'image PNG , mais une extension "<code>.dat</code>". (par exemple, le fichier de données "<code>brush.png</code>" est le fichier texte "<code>brush.dat</code>" qui se trouve dans le même répertoire.)        </p>
 
-        <h4>
-          Espacement des pinceaux        </h4>
+        <dl>
+          <dt><strong>Espacement des pinceaux</strong></dt>
+          <dd>
+            <p>
+              Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais spécifier l'espacement des pinceaux (c'est-à-dire la fréquence à laquelle ils sont dessinés). Par défaut, l'espacement correspond à la hauteur du pinceau, divisée par 4.            </p>
+            <p>
+              Ajoutez une ligne contenant la ligne "<code><b>spacing=<i>N</i></b></code>" au fichier de données du pinceau, où "<i>N</i>" est l'espacement souhaité pour le pinceau. (Plus le nombre est bas, plus le pinceau est dessiné souvent.)            </p>
+          </dd>
 
-        <blockquote>
-          <p>
-            Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais spécifier l'espacement des pinceaux (c'est-à-dire la fréquence à laquelle ils sont dessinés). Par défaut, l'espacement correspond à la hauteur du pinceau, divisée par 4.          </p>
+          <dt><strong>Pinceaux animés</strong></dt>
+          <dd>
+            <p>
+              Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais créer des pinceaux animés. Au fur et à mesure que le pinceau est utilisé, chaque image de l'animation est dessinée.            </p>
+            <p>
+              Disposez chaque trame sur une grande image PNG. Par exemple, si votre pinceau mesure 30x30 et que vous avez 5 trames, l'image doit être 150x30.            </p>
+            <p>
+              Ajoutez une ligne contenant la ligne "<code><b>frames=<i>N</i></b></code>" au fichier de données du pinceau, où"<i>N</i>" est le nombre d'images dans le pinceau.            </p>
+            <p class="note">
+              <span title="Configuration option">&#9881;</span>              <strong>Note:</strong> If you'd rather the frames be flipped through randomly, rather than sequentially, also add a line containing "<code><b>random</b></code>" to the brush's data file.            </p>
+          </dd>
 
-          <p>
-            Ajoutez une ligne contenant la ligne "<code><b>spacing=<i>N</i></b></code>" au fichier de données du pinceau, où "<i>N</i>" est l'espacement souhaité pour le pinceau. (Plus le nombre est bas, plus le pinceau est dessiné souvent.)          </p>
-        </blockquote>
+          <dt><strong>Pinceaux directionnels</strong></dt>
+          <dd>
+            <p>
+              Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais créer des pinceaux orientables. Au fur et à mesure que le pinceau est utilisé, différentes formes sont dessinées, en fonction de la direction du pinceau.            </p>
+            <p>
+              Les formes orientables sont divisées en carrés de 3x3 dans une image PNG. Par exemple, si votre pinceau fait 30x30, l'image doit être de 90x90 et chacune des formes orientables est placée dans une grille de 3x3. La région centrale n'est pas orientable. Le haut à droite est utilisé pour le mouvement vers le haut, et vers la droite. Etc ...            </p>
+            <p>
+              Ajoute une ligne contenant le mot "<code><b>directional</b></code>" au fichier de données brosse.            </p>
+          </dd>
 
-        <h4>
-          Pinceaux animés        </h4>
+          <dt><strong>Pinceaux tournants</strong></dt>
+          <dd>
+            <p>
+              Depuis la version 0.9.27 de Tux Paint , vous pouvez désormais créer des pinceaux tournants. Au fur et à mesure que le pinceau est utilisé, il tourne de 360 degrés, en fonction de la direction du pinceau.            </p>
+            <p>
+              Ajoute une ligne contenant le mot "<code><b>rotate</b></code>" au fichier de données brosse.            </p>
+          </dd>
 
-        <blockquote>
-          <p>
-            Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais créer des pinceaux animés. Au fur et à mesure que le pinceau est utilisé, chaque image de l'animation est dessinée.          </p>
-
-          <p>
-            Disposez chaque trame sur une grande image PNG. Par exemple, si votre pinceau mesure 30x30 et que vous avez 5 trames, l'image doit être 150x30.          </p>
-
-          <p>
-            Ajoutez une ligne contenant la ligne "<code><b>frames=<i>N</i></b></code>" au fichier de données du pinceau, où"<i>N</i>" est le nombre d'images dans le pinceau.          </p>
-
-          <p>
-            <b>Remarque :</b> si vous préférez que les images apparaissent de manière aléatoire plutôt que séquentielle, ajoutez en plus une ligne contenant "<code><b>random</b></code>" au fichier de données du pinceau.          </p>
-        </blockquote>
-
-        <h4>
-          Pinceaux directionnels        </h4>
-
-        <blockquote>
-          <p>
-            Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais créer des pinceaux orientables. Au fur et à mesure que le pinceau est utilisé, différentes formes sont dessinées, en fonction de la direction du pinceau.          </p>
-
-          <p>
-            Les formes orientables sont divisées en carrés de 3x3 dans une image PNG. Par exemple, si votre pinceau fait 30x30, l'image doit être de 90x90 et chacune des formes orientables est placée dans une grille de 3x3. La région centrale n'est pas orientable. Le haut à droite est utilisé pour le mouvement vers le haut, et vers la droite. Etc ...          </p>
-
-          <p>
-            Ajoute une ligne contenant le mot "<code><b>directional</b></code>" au fichier de données brosse.          </p>
-        </blockquote>
-
-        <h4>
-          Pinceaux tournants        </h4>
-
-        <blockquote>
-          <p>
-            Depuis la version 0.9.27 de Tux Paint , vous pouvez désormais créer des pinceaux tournants. Au fur et à mesure que le pinceau est utilisé, il tourne de 360 degrés, en fonction de la direction du pinceau.          </p>
-
-          <p>
-            Ajoute une ligne contenant le mot "<code><b>rotate</b></code>" au fichier de données brosse.          </p>
-        </blockquote>
-
-        <h4>
-          Pinceaux animés orientables ou tournants        </h4>
-
-        <blockquote>
-          <p>
-            Vous pouvez mélanger animation et orientation  (ou rotation) dans un même pinceau. Utilisez les deux options ("<code><b>frames=<i>N</i></b></code>" et "<code><b>directional</b></code>" ou "<code><b>rotate</b></code>) en deux lignes séparées dans le fichier "<code>.dat</code>" qui concerne le pinceau.          </p>
-
-          <p>
-            Pour les pinceaux directionnels, disposez le pinceau de manière à ce que chaque ensemble 3x3 de formes orientables soit disposé sur une grande image PNG. Par exemple, si le pinceau mesure 30x30 et qu'il y a 5 cadres, ce sera 450x90. (Les 150x90 pixels les plus à gauche de l'image représentent les 9 formes de direction pour la première image, par exemple).          </p>
-        </blockquote>
-      </blockquote>
+          <dt><strong>Pinceaux animés orientables ou tournants</strong></dt>
+          <dd>
+            <p>
+              Vous pouvez mélanger animation et orientation  (ou rotation) dans un même pinceau. Utilisez les deux options ("<code><b>frames=<i>N</i></b></code>" et "<code><b>directional</b></code>" ou "<code><b>rotate</b></code>) en deux lignes séparées dans le fichier "<code>.dat</code>" qui concerne le pinceau.            </p>
+            <p>
+              Pour les pinceaux directionnels, disposez le pinceau de manière à ce que chaque ensemble 3x3 de formes orientables soit disposé sur une grande image PNG. Par exemple, si le pinceau mesure 30x30 et qu'il y a 5 cadres, ce sera 450x90. (Les 150x90 pixels les plus à gauche de l'image représentent les 9 formes de direction pour la première image, par exemple).            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Brush Options -->
 
       <p>
         Placez les PNG de l'image du pinceau (et tous les fichiers texte de données) dans le répertoire "<code><b>brushes</b></code>".      </p>
 
-      <p>
-        Remarque: si vos nouveaux pinceaux se présentent tous sous forme de carrés ou de rectangles pleins, c'est que vous avez oublié d'utiliser la transparence alpha ! Consultez le fichier de documentation "PNG" pour plus d'informations et de conseils.      </p>
-      <br clear="all">
-    </blockquote>
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> If your new pinceaux all come out as solid squares or rectangles, it's because you forgot to use alpha transparency! See the 'PNG documentation' in Tux Paint for more information and tips.      </p>
+    </section><!-- H1: Brushes -->
 
-    <hr size="1"
-        noshade>
+    <section class="indent outer"><!-- H1: Stamps -->
+      <header>
+        <h1>
+          <a name="stamps"
+              id="stamps">Tampons</a>
+        </h1>
+      </header>
 
-    <h2>
-      <a name="stamps"
-          id="stamps">Tampons</a>
-    </h2>
-
-    <blockquote>
       <p>
         Tous les fichiers liés aux tampons vont dans le répertoire "<code><b>stamps</b></code>". Il est utile de créer des sous-sous-répertoires pour organiser les tampons. (Par exemple, vous pouvez avoir un dossier "<code>holidays</code>" avec "<code>halloween</code>" et "<code>christmas</code>" comme sous-dossiers.)      </p>
 
-      <h3>
-        <a name="stamps_images"
-            id="stamps_images">Images des tampons</a>
-      </h3>
+      <section><!-- H2: Stamp Images -->
+        <header>
+          <h2>
+            <a name="stamps_images"
+                id="stamps_images">Images des tampons</a>
+          </h2>
+        </header>
 
-      <blockquote>
         <p>
           Les tampons en caoutchouc dans Tux Paint peuvent être constitués d'un certain nombre de fichiers séparés. Le seul fichier requis est, bien entendu, l'image elle-même.        </p>
         <img src="../../html/images/stamp_edit.png"
@@ -431,121 +392,110 @@
         <p>
           Les SVG sont basés sur des vecteurs et seront mis à l'échelle de manière adéquate pour le canevas utilisé.        </p>
 
-        <p>
-        Remarque: si vos nouveaux des tampons basés sur PNG se présentent tous sous forme de carrés ou de rectangles pleins, c'est que vous avez oublié d'utiliser la transparence alpha ! Consultez le fichier de documentation "PNG" pour plus d'informations et de conseils.        </p>
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Note:</strong> If your new des tampons basés sur PNG all come out as solid squares or rectangles, it's because you forgot to use alpha transparency! See the 'PNG documentation' in Tux Paint for more information and tips.        </p>
 
-        <p>
-          Remarque: si vos nouveaux tampons SVG semblent avoir beaucoup de zones vides, assurez-vous que le «document» SVG n'est pas plus grand que la ou les formes qu'il contient. S'ils sont coupés, assurez-vous que le «document» est suffisamment grand pour contenir la ou les formes. Voir le fichier de documentation " SVG" pour plus d'informations et de conseils.        </p>
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Note:</strong> If your new SVG stamps seem to have a lot of whitespace, make sure the SVG 'document' is no larger than the shape(s) within. If they are being clipped, make sure the 'document' is large enough to contain the shape(s). See the 'SVG documentation' in Tux Paint for more information and tips.        </p>
 
-        <p>
-          <b>Utilisateurs avancés :</b> Le HOWTO Advanced Stamps décrit, en détail, comment créer des images PNG qui seront parfaitement mises à l'échelle lorsqu'elles seront utilisées comme tampons dans Tux Paint .        </p>
-        <br clear="all">
-      </blockquote>
+        <p class="note">
+          <span title="Configuration option">&#9881;</span>          <b>Utilisateurs avancés :</b> Le HOWTO Advanced Stamps décrit, en détail, comment créer des images PNG qui seront parfaitement mises à l'échelle lorsqu'elles seront utilisées comme tampons dans Tux Paint .        </p>
+      </section><!-- H2: Stamp Images -->
 
-      <hr size="1"
-          noshade>
+      <section><!-- H2: Stamp Descriptive Text -->
+        <header>
+          <h2>
+            <a name="description_text"
+                id="description_text">Texte de description des tampons</a>
+          </h2>
+        </header>
 
-      <h3>
-        <a name="description_text"
-            id="description_text">Texte de description des tampons</a>
-      </h3>
-
-      <blockquote>
         <p>
           Tux Paint affichera un texte descriptif quand un tampon est sélectionné. Le texte est mis dans fichier (avec texte simple) ayant le même nom que le PNG ou SVG, mais avec une extension "<code>.txt</code>".  (par exemple, "<code>stamp.png</code>" dont la description est "<code>stamp.txt</code>" est placée dans le même répertoire).        </p>
 
         <p>
           La première ligne du fichier texte sera utilisée comme description de l'image du tampon, en anglais américain. Il doit être encodé en UTF-8.        </p>
 
-        <h4>
-          Support pour la régionalisation        </h4>
+        <dl>
+          <dt><strong>Support pour la régionalisation</strong></dt>
+          <dd>
+            <p>
+              Des lignes supplémentaires peuvent être ajoutées au fichier texte pour fournir des traductions de la description, à afficher lorsque Tux Paint s'exécute dans une langue différente (comme le français ou l'espagnol).            </p>
+            <p>
+              Le début de la ligne doit correspondre au code de langue de la langue en question (par exemple, "<code>fr</code>" pour le français et "<code>zh_TW</code>" pour le chinois traditionnel), suivi de "<code>.utf8=</code>" et de la description traduite (codée en UTF-8).            </p>
+            <p>
+              <b>Pour les développeurs de Tux Paint :</b> Il y a des scripts dans le répertoire "<code>po</code>" pour convertir les fichiers texte au format PO (et inversement) pour une traduction facile vers différentes langues. Par conséquent, vous ne devez jamais ajouter ni modifier directement les traductions dans les fichiers "<code>.txt</code>".            </p>
+            <p>
+              Si aucune traduction n'est disponible pour la langue dans laquelle Tux Paint est en cours d'exécution, le texte anglais américain sera utilisé.            </p>
+          </dd>
 
-        <blockquote>
-          <p>
-            Des lignes supplémentaires peuvent être ajoutées au fichier texte pour fournir des traductions de la description, à afficher lorsque Tux Paint s'exécute dans une langue différente (comme le français ou l'espagnol).          </p>
+          <dt><strong>Utilisateurs de Windows</strong></dt>
+          <dd>
+            <p>
+              Utilisez <cite>NotePad</cite> ou <cite>WordPad</cite> pour modifier / créer ces fichiers. Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont une extension "<code>.txt</code>" à la fin du nom de fichier.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Descriptive Text -->
 
-          <p>
-            Le début de la ligne doit correspondre au code de langue de la langue en question (par exemple, "<code>fr</code>" pour le français et "<code>zh_TW</code>" pour le chinois traditionnel), suivi de "<code>.utf8=</code>" et de la description traduite (codée en UTF-8).          </p>
+      <section><!-- H2: Stamp Sound Effects -->
+        <header>
+          <h2>
+            <a name="sound_effects"
+                id="sound_effects">Effets sonores des tampons</a>
+          </h2>
+        </header>
 
-          <p>
-            <b>Pour les développeurs de Tux Paint :</b> Il y a des scripts dans le répertoire "<code>po</code>" pour convertir les fichiers texte au format PO (et inversement) pour une traduction facile vers différentes langues. Par conséquent, vous ne devez jamais ajouter ni modifier directement les traductions dans les fichiers "<code>.txt</code>".          </p>
-
-          <p>
-            Si aucune traduction n'est disponible pour la langue dans laquelle Tux Paint est en cours d'exécution, le texte anglais américain sera utilisé.          </p>
-        </blockquote>
-
-        <h4>Utilisateurs de Windows</h4>
-
-        <blockquote>
-          <p>
-            Utilisez <cite>NotePad</cite> ou <cite>WordPad</cite> pour modifier / créer ces fichiers. Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont une extension "<code>.txt</code>" à la fin du nom de fichier.          </p>
-        </blockquote>
-      </blockquote>
-
-      <hr size="1"
-          noshade>
-
-      <h3>
-        <a name="sound_effects"
-            id="sound_effects">Effets sonores des tampons</a>
-      </h3>
-
-      <blockquote>
         <p>
           Tux Paint peut jouer un effet sonore quand un tampon est choisi. Par exemple, le son d'un canard faisant coin-coin, ou un bref morceau de musique quand un instrument est choisi. Les fichiers doivent être aux formats "WAVE ("<code>.wav</code>")" ou OGG Vorbis ("<code>.ogg</code>"), et porter le même nom que l'image PNG ou SVG.( par ex., l'effet sonore "<code>stamp.ogg</code>" est le son du fichier "<code>stamp.svg</code>" qui est dans le même répertoire).        </p>
 
-        <h4>
-          Support pour la régionalisation        </h4>
+        <dl>
+          <dt><strong>Support pour la régionalisation</strong></dt>
+          <dd>
+            <p>
+              Pour les sons de différentes locales (par exemple, si le son est quelqu'un qui dit un mot, et que vous voulez des versions traduites du mot prononcé), créez également des fichiers WAV ou OGG avec l'étiquette de la locale dans le nom de fichier, sous la forme : "<code>stamp_LOCALE.EXT</code>"            </p>
+            <p>
+              L'effet sonore qui sera joué lorsque le tampon correspondant au fichier image "<code>stamp.png</code>" est choisi, et que Tux Paint utilise la langue espagnole, sera "<code>stamp_es.wav</code>". Avec la langue française, ce sera "<code>stamp_fr.wav</code>". Avec le portugais brésilien, "<code>stamp_pt_BR.wav</code>", etc ...            </p>
+            <p>
+              Si aucun effet sonore localisé ne peut être chargé, Tux Paint tentera de charger le fichier son «par défaut». (par exemple, "<code>stamp.wav</code>")            </p>
+          </dd>
+        </dl>
 
-        <blockquote>
-          <p>
-            Pour les sons de différentes locales (par exemple, si le son est quelqu'un qui dit un mot, et que vous voulez des versions traduites du mot prononcé), créez également des fichiers WAV ou OGG avec l'étiquette de la locale dans le nom de fichier, sous la forme : "<code>stamp_LOCALE.EXT</code>"          </p>
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Note:</strong> Also consider using descriptive sounds; see 'Son descriptif du tampon', below.        </p>
+      </section><!-- H2: Stamp Sound Effects -->
 
-          <p>
-            L'effet sonore qui sera joué lorsque le tampon correspondant au fichier image "<code>stamp.png</code>" est choisi, et que Tux Paint utilise la langue espagnole, sera "<code>stamp_es.wav</code>". Avec la langue française, ce sera "<code>stamp_fr.wav</code>". Avec le portugais brésilien, "<code>stamp_pt_BR.wav</code>", etc ...          </p>
+      <section><!-- H2: Stamp Descriptive Sound -->
+        <header>
+          <h2>
+            <a name="descriptive_sound"
+                id="descriptive_sound">Son descriptif du tampon</a>
+          </h2>
+        </header>
 
-          <p>
-            Si aucun effet sonore localisé ne peut être chargé, Tux Paint tentera de charger le fichier son «par défaut». (par exemple, "<code>stamp.wav</code>")          </p>
-        </blockquote>
-
-        <p>
-          Remarque : pour les sons descriptifs (pas les effets sonores, comme un bang ou un gazouillis d'oiseau), pensez à les utiliser; voir 'Son descriptif du tampon' ci-dessous.        </p>
-      </blockquote>
-
-      <hr size="1"
-          noshade>
-
-      <h3>
-        <a name="descriptive_sound"
-            id="descriptive_sound">Son descriptif du tampon</a>
-      </h3>
-
-      <blockquote>
         <p>
           Tux Paint peut également jouer un son descriptif quand on choisit un tampon. Par ex., une personne disant le mot "canard" quand on choisit un canard, ou le nom d'un instrument de musique quand on en choisit un. Les fichiers peuvent être au format "WAVE ("<code>.wav</code>")" ou "OGG Vorbis ("<code>.ogg</code>")", et on le même nom que l'image PNG ou SVG, avec "<code>_desc</code>" à la fin (par ex., le son descritid de "<code>stamp.svg</code>" est le fichier son "<code>stamp_desc.ogg</code>" dans le même répertoire).        </p>
 
-        <h4>
-          Support pour la régionalisation        </h4>
+        <dl>
+          <dt><strong>Support pour la régionalisation</strong></dt>
+          <dd>
+            <p>
+              Pour les descriptions dans différentes langues, créez également des fichiers WAV ou OGG avec <em>à la fois</em> "<code>_desc</code>" <em>et</em>  le libellé des paramètres régionaux dans le nom de fichier, sous la forme : "<code>stamp_desc_LOCALE.EXT</code>"            </p>
+            <p>
+              L'son descriptif qui sera joué lorsque le tampon correspondant au fichier image "<code>stamp.png</code>" est choisi, et que Tux Paint utilise la langue espagnole, sera "<code>stamp_desc_es.wav</code>". Avec la langue française, ce sera "<code>stamp_desc_fr.wav</code>". Avec le portugais brésilien, "<code>stamp_desc_pt_BR.wav</code>", etc ...            </p>
+            <p>
+              Si aucun son descriptif localisé ne peut être chargé, Tux Paint tentera de charger le fichier son «par défaut». (par exemple, "<code>stamp_desc.wav</code>")            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Descriptive Sound -->
 
-        <blockquote>
-          <p>
-            Pour les descriptions dans différentes langues, créez également des fichiers WAV ou OGG avec <em>à la fois</em> "<code>_desc</code>" <em>et</em>  le libellé des paramètres régionaux dans le nom de fichier, sous la forme : "<code>stamp_desc_LOCALE.EXT</code>"          </p>
+      <section><!-- H2: Stamp Options -->
+        <header>
+          <h2>
+            <a name="stamp_options"
+                id="stamp_options">Options des tampons</a>
+          </h2>
+        </header>
 
-            L'son descriptif qui sera joué lorsque le tampon correspondant au fichier image "<code>stamp.png</code>" est choisi, et que Tux Paint utilise la langue espagnole, sera "<code>stamp_desc_es.wav</code>". Avec la langue française, ce sera "<code>stamp_desc_fr.wav</code>". Avec le portugais brésilien, "<code>stamp_desc_pt_BR.wav</code>", etc ...
-          <p>
-            Si aucun son descriptif localisé ne peut être chargé, Tux Paint tentera de charger le fichier son «par défaut». (par exemple, "<code>stamp_desc.wav</code>")          </p>
-        </blockquote>
-      </blockquote>
-
-      <hr size="1"
-          noshade>
-
-      <h3>
-        <a name="stamp_options"
-            id="stamp_options">Options des tampons</a>
-      </h3>
-
-      <blockquote>
         <p>
           Outre une une forme graphique, un texte de description, un effet sonore et une description orale, les tampons peuvent également recevoir d'autres attributs. Pour ce faire, vous devez créer un «fichier de données» pour tampon.        </p>
 
@@ -555,138 +505,113 @@
         <p>
           Le fichier porte le même nom que l'image PNG ou SVG , mais une extension "<code>.dat</code>". (par exemple, le fichier de données "<code>stamp.png</code>" est le fichier texte "<code>stamp.dat</code>" qui se trouve dans le même répertoire.)        </p>
 
-        <h4>
-          Tampons colorés        </h4>
-
-        <blockquote>
-          <p>
-            Les tampons peuvent être soit "colorables"  soit '"teintables"          </p>
-
-          <h5>
-            Colorable          </h5>
-
-          <blockquote>
+        <dl>
+          <dt><strong>Tampons colorés</strong></dt>
+          <dd>
             <p>
-              Les tampons "colorables" fonctionnent comme des pinceaux - vous choisissez le tampon pour obtenir la forme, puis choisissez la couleur que vous voulez. (Les tampons de symboles, comme les tampons mathématiques et musicaux, en sont un exemple.)            </p>
+              Les tampons peuvent être soit "colorables"  soit '"teintables"            </p>
+            <dl>
+              <dt><strong>Colorable</strong></dt>
+              <dd>
+                <p>
+                  Les tampons "colorables" fonctionnent comme des pinceaux - vous choisissez le tampon pour obtenir la forme, puis choisissez la couleur que vous voulez. (Les tampons de symboles, comme les tampons mathématiques et musicaux, en sont un exemple.)                </p>
+                <p>
+                  Rien sur l'image d'origine n'est utilisé à l'exception de la transparence (du canal "alpha"). La couleur du tampon ressort unie.                </p>
+                <center>
+                  <img src="../../html/images/ex_colorable.png"
+                          width="74"
+                          height="92"
+                          alt="">
+                </center>
+                <p>
+                  Ajoute une ligne contenant le mot "<code><b>colorable</b></code>" au fichier de données tampon.                </p>
+              </dd>
 
+              <dt><strong>Teinté</strong></dt>
+              <dd>
+                <p>
+                  Les tampons «teintés» sont similaires aux tampons «colorables», sauf que les détails de l'image originale sont conservés. (Pour le dire techniquement, l'image d'origine est utilisée, mais sa teinte est modifiée en fonction de la couleur actuellement sélectionnée.)                </p>
+                <center>
+                  <img src="../../html/images/ex_tintable.png"
+                          width="151"
+                          height="78"
+                          alt="">
+                </center>
+                <p>
+                  Ajoute une ligne contenant le mot "<code><b>tintable</b></code>" au fichier de données tampon.                </p>
+              </dd>
+
+              <dt><strong>Options de teinture :</strong></dt>
+              <dd>
+                <p>
+                  En fonction du contenu de votre tampon, vous souhaiterez peut-être que Tux Paint utilise l'une des nombreuses méthodes pour le teinter. Ajoutez l'une des lignes suivantes au fichier de données du tampon :                </p>
+                <dl>
+                  <dt>
+                    Coloriage normal &mdash; "<code><b>tinter=normal</b></code>" (par défaut)                  </dt>
+                  <dd>
+                    C'est le mode normal de teinture. Tout d'abord, la teinte primaire du tampon est déterminée. (Par exemple, l'image d'une fleur avec sa tige aura la couleur des pétales considérée comme teinte primaire de l'ensemble de l'image). Puis on trouve la partie de l'image la plus saturée. Avec "le mode de teinture normal", l'étendue de la teinte utilisée pour faire cela démarre dans un angle de ±18° de la teinte primaire trouvée dans l'étape 1. (Si aucune n'est trouvée, ce sera dans une étendue de 50 %, puis on réessaie). Tout ce qui est à l'intérieur de l'étendue de 50 % (par ex. ±27°) est modifié pour avoir la teinte de la couleur choisie par l'utilisateur.                  </dd>
+                  <dt>
+                    Coloriage étroit &mdash; "<code><b>tinter=narrow</b></code>"
+                  </dt>
+                  <dd>
+                    C'est comme l'option "<code>normal</code>" décrite plus haut, mais avec une étendue de teinte plus faible de ±6°. Tout ce qui est trouvé dans l'étendue (par ex. ±9°) est teinté. Si une trop grande partie de vitre image est teintée, essayez cette option.                  </dd>
+                  <dt>
+                    Coloriage 'toutes tonalités' &mdash; "<code><b>tinter=anyhue</b></code>"
+                  </dt>
+                  <dd>
+                    Cela rempappe <em>toutes</em> les teintes du tampon. C'est pareil que les options "<code>anyhue</code>" et "<code>narrow</code>" décrites auparavant, mais l'étendu de teinte est ±180°.                  </dd>
+                  <dt>
+                    Coloriage vectoriel &mdash; "<code><b>tinter=vector</b></code>"
+                  </dt>
+                  <dd>
+                    Cela mappe «noir à blanc» à «noir à destination».                  </dd>
+                </dl>
+              </dd>
+            </dl>
+          </dd>
+
+          <dt><strong>Tampons inaltérables</strong></dt>
+          <dd>
             <p>
-              Rien sur l'image d'origine n'est utilisé à l'exception de la transparence (du canal "alpha"). La couleur du tampon ressort unie.            </p>
-
-            <center>
-              <img src="../../html/images/ex_colorable.png"
-                      width="74"
-                      height="92"
-                      alt="">
-            </center>
-
+              Par défaut, un tampon peut être retourné, affiché comme une image miroir, ou les deux. Cela se fait à l'aide des boutons de commande sous le sélecteur de tampon, en bas à droite de l'écran dans Tux Paint .            </p>
             <p>
-              Ajoute une ligne contenant le mot "<code><b>colorable</b></code>" au fichier de données tampon.            </p>
-          </blockquote>
-
-          <h5>
-            Teinté          </h5>
-
-          <blockquote>
+              Parfois, cela n'a pas de sens pour un timbre d'être retourné ou reflété; par exemple, des timbres de lettres ou de chiffres. Parfois, les tampons sont symétriques, il n'est donc pas utile de laisser l'utilisateur les retourner ou les refléter.            </p>
             <p>
-              Les tampons «teintés» sont similaires aux tampons «colorables», sauf que les détails de l'image originale sont conservés. (Pour le dire techniquement, l'image d'origine est utilisée, mais sa teinte est modifiée en fonction de la couleur actuellement sélectionnée.)            </p>
-
-            <center>
-              <img src="../../html/images/ex_tintable.png"
-                      width="151"
-                      height="78"
-                      alt="">
-            </center>
-
+              Pour empêcher un tampon d'être qui a été inversé verticalement, ajoutez une ligne contenant le mot «<code><b>noflip</b></code>» au fichier de données du tampon.            </p>
             <p>
-              Ajoute une ligne contenant le mot "<code><b>tintable</b></code>" au fichier de données tampon.            </p>
+              Pour empêcher un tampon d'être qui a été inversé horizontalement, ajoutez une ligne contenant le mot «<code><b>nomirror</b></code>» au fichier de données du tampon.            </p>
+          </dd>
 
-            <h6>
-              Options de teinture :            </h6>
+          <dt><strong>Taille initiale du tampon</strong></dt>
+          <dd>
+            <p>
+              Par défaut, Tux Paint suppose que votre tampon est dimensionné de manière appropriée pour un affichage non mis à l'échelle sur une toile de 608x472. Il s'agit de la taille originale de la toile pour Tux Paint , pour un écran 640x480. Tux Paint ajustera ensuite le tampon en fonction de la taille réelle du canevas et, si c'est activé, des contrôles de taille du tampon définis par l'utilisateur.            </p>
+            <p>
+              Si votre tampon est trop grand ou trop petit, vous pouvez spécifier un facteur d'échelle. Si votre tampon est 2,5 fois plus large (ou haut) qu'il devrait l'être, ajoutez une des options, représentant toutes le même réglage, à votre fichier de données du tampon.(Un signe égal,"<code>=</code>", peut être ajouté après le mot "<code>scale</code>".)            </p>
+            <ul>
+              <li>"<code><b>scale 40%</b></code>"</li>
+              <li>"<code><b>scale 5/2</b></code>"</li>
+              <li>"<code><b>scale 2.5</b></code>"</li>
+              <li>"<code><b>scale 2:5</b></code>"</li>
+            </ul>
+          </dd>
 
-            <blockquote>
-              <p>
-                En fonction du contenu de votre tampon, vous souhaiterez peut-être que Tux Paint utilise l'une des nombreuses méthodes pour le teinter. Ajoutez l'une des lignes suivantes au fichier de données du tampon :              </p>
+          <dt><strong>Utilisateurs de Windows</strong></dt>
+          <dd>
+            <p>
+              Utilisez <cite>NotePad</cite> ou <cite>WordPad</cite> pour modifier / créer ces fichiers. Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont une extension "<code>.txt</code>" à la fin du nom de fichier.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Options -->
 
-              <dl>
-                <dt>
-                  Coloriage normal &mdash; "<code><b>tinter=normal</b></code>" (par défaut)                </dt>
+      <section><!-- H2: Pre-Mirrored and Flipped Stamps -->
+        <header>
+          <h2>
+            <a name="pre_mirroed_and_flipped_images"
+                id="pre_mirroed_and_flipped_images">Mise en miroir et retournement</a>
+          </h2>
+        </header>
 
-                <dd>
-                  C'est le mode normal de teinture. Tout d'abord, la teinte primaire du tampon est déterminée. (Par exemple, l'image d'une fleur avec sa tige aura la couleur des pétales considérée comme teinte primaire de l'ensemble de l'image). Puis on trouve la partie de l'image la plus saturée. Avec "le mode de teinture normal", l'étendue de la teinte utilisée pour faire cela démarre dans un angle de ±18° de la teinte primaire trouvée dans l'étape 1. (Si aucune n'est trouvée, ce sera dans une étendue de 50 %, puis on réessaie). Tout ce qui est à l'intérieur de l'étendue de 50 % (par ex. ±27°) est modifié pour avoir la teinte de la couleur choisie par l'utilisateur.                </dd>
-
-                <dt>
-                  Coloriage étroit &mdash; "<code><b>tinter=narrow</b></code>"
-                </dt>
-
-                <dd>
-                  C'est comme l'option "<code>normal</code>" décrite plus haut, mais avec une étendue de teinte plus faible de ±6°. Tout ce qui est trouvé dans l'étendue (par ex. ±9°) est teinté. Si une trop grande partie de vitre image est teintée, essayez cette option.                </dd>
-
-                <dt>
-                  Coloriage 'toutes tonalités' &mdash; "<code><b>tinter=anyhue</b></code>"
-                </dt>
-
-                <dd>
-                  Cela rempappe <em>toutes</em> les teintes du tampon. C'est pareil que les options "<code>anyhue</code>" et "<code>narrow</code>" décrites auparavant, mais l'étendu de teinte est ±180°.                </dd>
-
-                <dt>
-                  Coloriage vectoriel &mdash; "<code><b>tinter=vector</b></code>"
-                </dt>
-
-                <dd>
-                  Cela mappe «noir à blanc» à «noir à destination».                </dd>
-              </dl>
-            </blockquote>
-          </blockquote>
-        </blockquote>
-
-        <h4>
-          Tampons inaltérables        </h4>
-
-        <blockquote>
-          <p>
-            Par défaut, un tampon peut être retourné, affiché comme une image miroir, ou les deux. Cela se fait à l'aide des boutons de commande sous le sélecteur de tampon, en bas à droite de l'écran dans Tux Paint .          </p>
-
-          <p>
-            Parfois, cela n'a pas de sens pour un timbre d'être retourné ou reflété; par exemple, des timbres de lettres ou de chiffres. Parfois, les tampons sont symétriques, il n'est donc pas utile de laisser l'utilisateur les retourner ou les refléter.          </p>
-
-          <p>
-            Pour empêcher un tampon d'être qui a été inversé verticalement, ajoutez une ligne contenant le mot «<code><b>noflip</b></code>» au fichier de données du tampon.          </p>
-
-          <p>
-            Pour empêcher un tampon d'être qui a été inversé horizontalement, ajoutez une ligne contenant le mot «<code><b>nomirror</b></code>» au fichier de données du tampon.          </p>
-        </blockquote>
-
-        <h4>
-          Taille initiale du tampon        </h4>
-
-        <blockquote>
-          <p>
-            Par défaut, Tux Paint suppose que votre tampon est dimensionné de manière appropriée pour un affichage non mis à l'échelle sur une toile de 608x472. Il s'agit de la taille originale de la toile pour Tux Paint , pour un écran 640x480. Tux Paint ajustera ensuite le tampon en fonction de la taille réelle du canevas et, si c'est activé, des contrôles de taille du tampon définis par l'utilisateur.          </p>
-
-          <p>
-            Si votre tampon est trop grand ou trop petit, vous pouvez spécifier un facteur d'échelle. Si votre tampon est 2,5 fois plus large (ou haut) qu'il devrait l'être, ajoutez une des options, représentant toutes le même réglage, à votre fichier de données du tampon.(Un signe égal,"<code>=</code>", peut être ajouté après le mot "<code>scale</code>".)          </p>
-          <ul>
-            <li>"<code><b>scale 40%</b></code>"</li>
-            <li>"<code><b>scale 5/2</b></code>"</li>
-            <li>"<code><b>scale 2.5</b></code>"</li>
-            <li>"<code><b>scale 2:5</b></code>"</li>
-          </ul>
-        </blockquote>
-
-        <h4>Utilisateurs de Windows</h4>
-
-        <blockquote>
-          <p>
-            Utilisez <cite>NotePad</cite> ou <cite>WordPad</cite> pour modifier / créer ces fichiers. Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont une extension "<code>.txt</code>" à la fin du nom de fichier.          </p>
-        </blockquote>
-      </blockquote>
-
-      <h3>
-        <a name="pre_mirroed_and_flipped_images"
-            id="pre_mirroed_and_flipped_images">Mise en miroir et retournement</a>
-      </h3>
-
-      <blockquote>
         <p>
           Dans certains cas, vous souhaiterez peut-être fournir une version pré-dessinée de l'image miroir, de l'image inversée ou même des deux d'un tampon. Par exemple, imaginez une photo d'un camion de pompiers avec les mots <cite> Service d'incendie </cite> écrits sur le côté. Vous ne voulez probablement pas que ce texte apparaisse à l'envers lorsque l'image est retournée !        </p>
 
@@ -699,20 +624,19 @@
         <p>
           Depuis Tux Paint 0.9.18, vous pouvez également fournir une image pré-retournée avec "<code><b>_flip</b></code>" dans le nom, et / ou une image qui est à la fois en miroir et retournée, en la nommant " <code><b>_mirror_flip</b></code>".        </p>
 
-        <p>
-          <b>Remarque :</b> Si l'utilisateur retourne et reflète une image, et qu'un "<code>_mirror_flip</code>" pré-dessiné n'existe pas, mais que "<code>_flip</code>" ou "<code>_mirror</code>" existe , il sera utilisé, et reflété ou retourné, selon le cas.        </p>
-      </blockquote>
-    </blockquote>
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Note:</strong> If the user flips and mirrors an image, and a pre-drawn "<code>_mirror_flip</code>" doesn't exist, but either "<code>_flip</code>" or "<code>_mirror</code>" does, it will be used, and mirrored or flipped, respectively.        </p>
+      </section><!-- H2: Pre-Mirrored and Flipped Stamps -->
+    </section><!-- H1: Stamps -->
 
-    <hr size="1"
-        noshade>
+    <section class="indent outer"><!-- H1: Fonts -->
+      <header>
+        <h1>
+          <a name="fonts"
+              id="fonts">Polices</a>
+        </h1>
+      </header>
 
-    <h2>
-      <a name="fonts"
-          id="fonts">Polices</a>
-    </h2>
-
-    <blockquote>
       <img src="../../html/images/fontsizes.png"
                   width="48"
                   height="48"
@@ -723,18 +647,16 @@
 
       <p>
         Placez-les simplement dans répertoire "<code><b>fonts</b></code>". Tux Paint chargera la police et fournira quatre tailles différentes dans le sélecteur «Lettres» lors de l'utilisation des outils "Texte" ou "Étiquette".      </p>
-      <br clear="all">
-    </blockquote>
+    </section><!-- H1: Fonts -->
 
-    <hr size="1"
-        noshade>
+    <section class="indent outer"><!-- H1: Starters -->
+      <header>
+        <h1>
+          <a name="starters"
+              id="starters">'Images de démarrage'</a>
+        </h1>
+      </header>
 
-    <h2>
-      <a name="starters"
-          id="starters">'Images de démarrage'</a>
-    </h2>
-
-    <blockquote>
       <img src="../../html/images/open_open.png"
                   width="48"
                   height="48"
@@ -746,25 +668,29 @@
       <p>
         Quand vous utilisez une 'image de démarrage', faites des modifications, puis la sauvegardez, l'image d'origine n'est pas écrasée. De plus, quand vous éditez votre nouvelle image, les contenus de 'l'image de démarrage' initiale peuvent l'affecter.      </p>
 
-      <h3>
-        <a name="coloring_book_style"
-            id="coloring_book_style">Images de démarrage avec style 'livre de coloriage'</a>
-      </h3>
+      <section><!-- H2: Coloring-Book Style Starters -->
+        <header>
+          <h2>
+            <a name="coloring_book_style"
+                id="coloring_book_style">Images de démarrage avec style 'livre de coloriage'</a>
+          </h2>
+        </header>
 
-      <blockquote>
         <p>
           Le type le plus élémentaire "d'image de démarrage" est similaire à une image dans un livre de coloriage. C'est le contour d'une forme que vous pouvez ensuite colorier et ajouter des détails. Dans Tux Paint , lorsque vous dessinez, tapez du texte ou des tampons, le contour reste «au-dessus» de ce que vous dessinez. Vous pouvez effacer des parties du dessin que vous avez faites, mais vous ne pouvez pas effacer le contour.        </p>
 
         <p>
           Pour créer ce type "d'image de départ", dessinez simplement une image noir et blanc avec contour dans un programme de dessin, et sauvegardez la en tant fichier PNG ou SVG. Si vous sauvegardez en PNG, vous pouvez optionellement rendre l'image noire et transparente, plutôt que noire et blanche, mais ceci (depuis Tux Paint 0.9.21) n'est pas requis.        </p>
-      </blockquote>
+      </section><!-- H2: Coloring-Book Style Starters -->
 
-      <h3>
-        <a name="scene_style"
-            id="scene_style">Images de démarrage avec 'style scénique'</a>
-      </h3>
+      <section><!-- H2: Scene-Style Starters -->
+        <header>
+          <h2>
+            <a name="scene_style"
+                id="scene_style">Images de démarrage avec 'style scénique'</a>
+          </h2>
+        </header>
 
-      <blockquote>
         <p>
           En plus de la superposition de style `` livre de coloriage '', vous pouvez également fournir une image d'arrière-plan séparée dans le cadre d'une "image de démarrage''. La superposition agit de la même manière : elle ne peut pas être dessinée, effacée ou affectée par les outils «Magie». Cependant, l'arrière-plan peut l'être !        </p>
 
@@ -776,7 +702,7 @@
 
         <p>
           Pour créer ce type d'image de départ, créez simplement une superposition (avec transparence) comme décrit ci-dessus et enregistrez-la au format PNG. Créez ensuite une autre image (sans transparence) et enregistrez-la avec le même nom de fichier, mais avec "<code>-back</code>" ajouté au nom. (par exemple, "<code>starter-back.png</code>" serait l'image d'arrière-plan de l'océan qui correspond à la superposition  ou au premier plan.)        </p>
-      </blockquote>
+      </section><!-- H2: Scene-Style Starters -->
 
       <p>
         Pour de meilleurs résultats, les images de démarrage doivent être de la même taille que la toile de Tux Paint . (Voir la section "Chargement d'autres images dans Tux Paint " du README pour plus de détails sur le dimensionnement.) Si ce n'est pas le cas, elles seront étirées, sans affecter la forme ("rapport hauteur / largeur"); cependant, des bavures peuvent être apparaître sur les bords.      </p>
@@ -784,20 +710,18 @@
       <p>
         Placez-les dans le répertoire "<code><b>starters</b></code>". Lorsque la boîte de dialogue «Nouveau» est accessible dans Tux Paint , les images de démarrage  apparaîtront avec l'écran qui apparaît, suivant les différents choix de couleurs unies.      </p>
 
-      <p>
-        <b>Remarque :</b>'Images de démarrage' sont 'attachés' aux images sauvegardées, via un petit fichier texte qui a le même nom que le fichier sauvegardé, mais avec "<code>.dat</code>" comme extension. Ceci permet de continuer de s'occuper du dessin, mais après avoir quitté Tux Paint, oi bien une autre image a été chargée, ou bien une nouvelle image a été créée (En d'autres termes, si vous basez un dessin sur un image de démarrage, il sera toujours changé par lui).      </p>
-      <br clear="all">
-    </blockquote>
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> 'Images de démarrage' are 'attached' to saved pictures, via a small text file that has the same name as the saved file, but with "<code>.dat</code>" as the extension. This allows it to continue to affect the drawing even after Tux Paint has been quit, or another picture is loaded or a new image is created. (In other words, if you base a drawing on a image de démarrage, it will always be affected by it.)      </p>
+    </section><!-- H1: Starters -->
 
-    <hr size="1"
-        noshade>
+    <section class="indent outer"><!-- H1: 'Templates' -->
+      <header>
+        <h1>
+          <a name="templates"
+              id="templates">'Modèles'</a>
+        </h1>
+      </header>
 
-    <h2>
-      <a name="templates"
-          id="templates">'Modèles'</a>
-    </h2>
-
-    <blockquote>
       <img src="../../html/images/open_open.png"
                   width="48"
                   height="48"
@@ -821,20 +745,19 @@
       <p>
         Placez-les dans le répertoire "<code><b>templates</b></code>". Lorsque la boîte de dialogue «Nouveau» est accessible dans Tux Paint , les images 'modèle'  apparaîtront avec l'écran qui apparaît, suivant les différents choix de couleurs unies.      </p>
 
-      <p>
-        <b>Remarque :</b>'Modèles' sont 'attachés' aux images sauvegardées, via un petit fichier texte qui a le même nom que le fichier sauvegardé, mais avec "<code>.dat</code>" comme extension. Ceci permet de continuer de s'occuper du dessin, mais après avoir quitté Tux Paint, oi bien une autre image a été chargée, ou bien une nouvelle image a été créée (En d'autres termes, si vous basez un dessin sur un image 'modèle', il sera toujours changé par lui).      </p>
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> 'Modèles' are 'attached' to saved pictures, via a small text file that has the same name as the saved file, but with "<code>.dat</code>" as the extension. This allows it to continue to affect the drawing even after Tux Paint has been quit, or another picture is loaded or a new image is created. (In other words, if you base a drawing on a image 'modèle', it will always be affected by it.)      </p>
       <br clear="all">
-    </blockquote>
+    </section><!-- H1: 'Templates' -->
 
-    <hr size="1"
-        noshade>
+    <section class="indent outer"><!-- H1: Translations -->
+      <header>
+        <h1>
+          <a name="translations"
+              id="translations">Traductions</a>
+        </h1>
+      </header>
 
-    <h2>
-      <a name="translations"
-          id="translations">Traductions</a>
-    </h2>
-
-    <blockquote>
       <p>
         Tux Paint supporte de nombreux langages, grâce à l'utilisation de la bibliothèque de localisation "gettext". (Voir OPTIONS pour savoir comment changer les paramètres régionaux dans Tux Paint .)      </p>
 
@@ -845,52 +768,49 @@
         Ouvrez le fichier nouvellement créé "<code>.po</code> - vous pouvez l'éditer à l'aide d'un éditeur de texte simple comme Emacs, Pico ou vi sur Linux ou NotePad sous Windows. Le texte anglais original utilisé dans Tux Paint se trouve dans les lignes commençant par "<code>msgid</code>". Entrez vos traductions de chacune de ces parties de texte dans les lignes vides "<code>msgstr</code>" directement sous les lignes "<code>msgid</code>" correspondantes . ( <i>Remarque</i> : ne supprimez pas les guillemets.)      </p>
 
       <p>
-        Exemple :      </p>
-
-      <blockquote>
-        <p>
+        Exemple :
+        <blockquote>
           <code>msgid "Smudge"<br>
           msgstr "<u>Manchar</u>"<br>
           <br>
           msgid "Click and drag to draw large bricks."<br>
           msgstr "<u>Haz clic y arrastra para dibujar ladrillos grandes.</u>"</code>
-        </p>
-      </blockquote>
+        </blockquote>
+      </p>
 
       <p>
-        De nombreux outils existent pour gérer les catalogues de traduction 'gettext', vous n'avez donc pas besoin de les éditer avec un éditeur de texte. En voici quelques uns :      </p>
-      <ul>
-        <li><a href="http://www.poedit.net/">Poedit</a></li>
-        <li><a href="https://wiki.gnome.org/Apps/Gtranslator">Gtranslator (GNOME Translator)</a></li>
-        <li><a href="https://virtaal.translatehouse.org/">Virtraal</a></li>
-        <li><a href="https://apps.kde.org/en/lokalize">Lokalize</a></li>
-      </ul>
+        De nombreux outils existent pour gérer les catalogues de traduction 'gettext', vous n'avez donc pas besoin de les éditer avec un éditeur de texte. En voici quelques uns :        <ul>
+          <li><a href="http://www.poedit.net/">Poedit</a></li>
+          <li><a href="https://wiki.gnome.org/Apps/Gtranslator">Gtranslator (GNOME Translator)</a></li>
+          <li><a href="https://virtaal.translatehouse.org/">Virtraal</a></li>
+          <li><a href="https://apps.kde.org/en/lokalize">Lokalize</a></li>
+        </ul>
+      </p>
 
-      <p>
-        Remarque: Il est préférable de toujours travailler avec le <i>dernier</i> modèle de catalogue de texte Tux Paint ("<code>tuxpaint.pot</code>"), car un nouveau texte est ajouté et l'ancien texte est parfois modifié. Le catalogue de textes de la prochaine version inédite de Tux Paint se trouve dans le référentiel Git de Tux Paint (voir : <a href="http://www.tuxpaint.org/download/source/git/">http://www.tuxpaint.org/download/source/git/</a> ), et sur le site Web de Tux Paint à <a href="http://www.tuxpaint.org/help/po/">http://www.tuxpaint.org/help/po/</a>.      </p>
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> It is best to always work off of the <i>latest</i> Tux Paint text catalog template ("<code>tuxpaint.pot</code>"), since new text is added, and old text is occasionally changed. The text catalog for the upcoming, unreleased version of Tux Paint can be found in Tux Paint's Git repository (see: <a href="https://tuxpaint.org/download/source/git/">https://tuxpaint.org/download/source/git/</a>), and on the Tux Paint website at <a href="https://tuxpaint.org/help/po/">https://tuxpaint.org/help/po/</a>.      </p>
 
       <p>
         Pour modifier une traduction existante, téléchargez le dernier fichier "<code>.po</code>" pour cette langue et modifiez-le comme décrit ci-dessus.      </p>
 
       <p>
-        Vous pouvez envoyer des fichiers de traduction nouveaux ou modifiés à Bill Kendrick , responsable du développement principal de Tux Paint , à : <a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a>, ou les poster sur la liste de diffusion "tuxpaint-i18n" (voir : <a href="http://www.tuxpaint.org/lists/">http://www.tuxpaint.org/lists/</a> ).      </p>
+        Vous pouvez envoyer des fichiers de traduction nouveaux ou modifiés à Bill Kendrick , responsable du développement principal de Tux Paint , à : <a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a>, ou les poster sur la liste de diffusion "tuxpaint-i18n" (voir : <a href="https://tuxpaint.org/lists/">https://tuxpaint.org/lists/</a> ).      </p>
 
       <p>
         Autrement, si vous avez un compte chez <a href="http://www.sourceforge.net/">SourceForge.net</a> , vous pouvez demander à être ajouté au projet "<code>tuxpaint</code>" et obtenir un accès en écriture au référentiel de code source Git afin que vous puissiez valider vos modifications directement.      </p>
 
-      <p>
-        <i>Remarque :</i> la prise en charge de nouveaux locales nécessite des ajouts au code source de Tux Paint ( "<code>/src/i18n.h</code>" et "<code>/src/i18n.c</code>"), et nécessite des mises à jour de <code>Makefile</code>, pour s'assurer que les fichiers "<code>.po</code>" sont compilés en fichiers "<code>.mo</code>", et utilisables pendant l'exécution.      </p>
-    </blockquote>
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> Support for new locales requires making additions to Tux Paint's source code ("<code>/src/i18n.h</code>" et "<code>/src/i18n.c</code>"), and requires updates to the <code>Makefile</code>, pour s'assurer que les fichiers "<code>.po</code>" sont compilés en fichiers "<code>.mo</code>", et utilisables pendant l'exécution.      </p>
+    </section><!-- H1: Translations -->
 
-    <hr size="1"
-        noshade>
+    <section class="indent outer"><!-- H1: Alternative Input Methods -->
+      <header>
+        <h1>
+          <a name="input_methods"
+              id="input_methods">Méthodes alternatives de saisie</a>
+        </h1>
+      </header>
 
-    <h2>
-      <a name="input_methods"
-          id="input_methods">Méthodes alternatives de saisie</a>
-    </h2>
-
-    <blockquote>
       <p>
         Les outils "Texte" et "Étiquette" de Tux Paint peuvent fournir des méthodes de saisie alternatives pour certaines langues. Par exemple, lorsque Tux Paint fonctionne avec un environnement local japonais, la touche droite <b><code>[Alt]</code></b> droit peut être pressée pour basculer entre les modes Latin, Romanized Hiragana et Romanized Katakana. Cela permet de saisir des caractères et des mots natifs dans l'outil "Texte" ou 'Étiquette' en tapant une ou plusieurs touches sur un clavier avec des caractères latins (par exemple, un clavier <i>US QWERTY</i> ).      </p>
 
@@ -915,10 +835,8 @@
         Commencez les sections de configuration de caractères supplémentaires avec une ligne contenant le mot «<code>section</code>».      </p>
 
       <p>
-        Exemple :      </p>
-
-      <blockquote>
-        <p>
+        Exemple :
+        <blockquote>
           <code># Hiragana<br>
           304B ka -<br>
           304C ga -<br>
@@ -933,37 +851,38 @@
           30AC ga -<br>
           30AD ki -<br>
           30AE gi -</code>
-        </p>
-      </blockquote>
+        </blockquote>
+      </p>
 
-      <p>
-        <i>Remarque</i>Les lignes vides du fichier "<code>.im</code>" sont ignorées, aussi bien que les lignes commençant par "<code>#</code>" -- ce peut être utilisé pour ajouter des commentaires, comme dans l'exemple ci-dessus.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> Blank lines within the "<code>.im</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example above.      </p>
 
-      <p>
-        <i>Remarque :</i> Les significations des indicateurs sont spécifiques à la langue et sont traitées par le code source spécifique à la langue dans "<code>src/im.c</code>". Par exemple, "<code>b</code>" est utilisé en coréen pour gérer Batchim, qui peut être reporté au caractère suivant.      </p>
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> Meanings of the flags are locale-specific, and are processed by the language-specific source code in "<code>src/im.c</code>". For example, "<code>b</code>" is used in Korean to handle Batchim, which may carry over to the next character.      </p>
 
-      <p>
-        <i>Remarque :</i> la prise en charge de nouveaux méthodes de saisie nécessite des ajouts au code source de Tux Paint ( "<code>/src/im.c</code>"), et nécessite des mises à jour de <code>Makefile</code>, pour s'assurer que les fichiers "<code>.im</code>" sont disponibles pour être utilisés lors de l'exécution du programme.      </p>
-    </blockquote>
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> Support for new méthodes de saisie requires making additions to Tux Paint's source code ("<code>/src/im.c</code>"), and requires updates to the <code>Makefile</code>, pour s'assurer que les fichiers "<code>.im</code>" sont disponibles pour être utilisés lors de l'exécution du programme.      </p>
+    </section><!-- H1: Alternative Input Methods -->
 
-    <hr size="1"
-        noshade>
+    <section class="indent outer"><!-- H1: On-screen Keyboard -->
+      <header>
+        <h1>
+          <a name="on_screen_keyboard"
+              id="on_screen_keyboard">Clavier virtuel sur écran</a>
+        </h1>
+      </header>
 
-    <h2>
-      <a name="on_screen_keyboard"
-          id="on_screen_keyboard">Clavier virtuel sur écran</a>
-    </h2>
-
-    <blockquote>
       <p>
         Depuis la version 0.9.22, les outils «Texte» et «Étiquette» de Tux Paint peuvent présenter un clavier à l'écran qui permet d'utiliser le pointeur (via une souris, des systèmes de suivi oculaire, etc.) pour saisir des caractères. Les fichiers qui décrivent la mise en page et les clés disponibles sont stockés dans le répertoire "<code>osk</code>" de Tux Paint . Chaque disposition de clavier est définie par un certain nombre de fichiers (dont certains peuvent être partagés par différentes dispositions).      </p>
       <p>
         Nous utiliserons le clavier QWERTY comme exemple :      </p>
       
-      <h3>
-        Fichier d'aperçu de la disposition ("<code>qwerty.layout</code>")      </h3>
+      <section><!-- H2: Layout overview file ("qwerty.layout") -->
+        <header>
+          <h2>
+            Fichier d'aperçu de la disposition ("<code>qwerty.layout</code>")          </h2>
+        </header>
 
-      <blockquote>
         <p>
           Il s'agit d'un fichier texte qui spécifie les autres fichiers utilisés pour décrire l'agencement et la disposition des touches.        </p>
 
@@ -977,17 +896,19 @@
           </p>
         </blockquote>
 
-        <p>
-        <i>Remarque</i>Les lignes vides du fichier "<code>.layout</code>" sont ignorées, aussi bien que les lignes commençant par "<code>#</code>" -- ce peut être utilisé pour ajouter des commentaires, comme dans l'exemple ci-dessus.        </p>
+        <p class="note">
+          <span title="Configuration option">&#9881;</span>          <strong>Note:</strong> Blank lines within the "<code>.layout</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example above.        </p>
 
         <p>
           La ligne "<code>keyboardlist</code>" décrit les dispositions vers lesquelles on bascule lorsque l'utilisateur clique sur les boutons gauche et droit du clavier. (Voir ci-dessous.)        </p>
-      </blockquote>
+      </section><!-- H2: Layout overview file ("qwerty.layout") -->
 
-      <h3>
-        Fichier de disposition du clavier (<code>qwerty.h_layout</code>")      </h3>
+      <section><!-- H2: Keyboard layout file ("qwerty.h_layout") -->
+        <header>
+          <h2>
+            Fichier de disposition du clavier (<code>qwerty.h_layout</code>")          </h2>
+        </header>
 
-      <blockquote>
         <p>
           Ceci décrit la taille du clavier (sous forme de grille L × H), et répertorie chaque touche avec son code numérique (voir le fichier "<code>keymap</code>", ci-dessous), la largeur à laquelle il doit être dessiné (généralement "<code>1.0</code>", pour en prendre un espace sur le clavier, mais dans l'exemple ci-dessous, notez que les touches "<code>TAB</code>" et "<code>SPACE</code>" sont beaucoup plus larges), le caractère ou le texte à afficher sur la touche, selon les touches de modification qui ont été enfoncées (une pour chacune : pas de modificateurs, <b><code>[Shift]</code></b> , <b><code>[AltGr]</code></b> et <b><code>[Shift]</code></b> + <b><code>[AltGr]</code></b> ), et enfin si la touche est affectée ou non par la touche <b><code>[CapsLock]</code></b> (utilisez "<code>1</code>") ou <b><code>[AltGr]</code></b> (alt graphiques alternatifs) (utilisez "<code>2</code>"), ou pas du tout (utilisez "<code>0</code>").        </p>
 
@@ -1055,12 +976,14 @@
             <code>2</code> —
                 disposition précédente (pour le réglage "<code>keyboardlist</code>" du fichier d'agencement)          </li>
         </ul>
-      </blockquote>
+      </section><!-- H2: Keyboard layout file ("qwerty.h_layout") -->
 
-      <h3>
-        Fichier keymap ("<code>us-intl-altgr-dead-keys.keymap</code>")      </h3>
+      <section><!-- H2: Keymap file ("us-intl-altgr-dead-keys.keymap") -->
+        <header>
+          <h2>
+            Fichier keymap ("<code>us-intl-altgr-dead-keys.keymap</code>")          </h2>
+        </header>
 
-      <blockquote>
         <p>
           Ce fichier définit quels codes de touches numériques (vus dans les fichiers de  disposition du clavier, tels que "<code>qwerty.h_layout</code>" décrits ci-dessus) doivent correspondre aux caractères réels qu'une application comme Tux Paint s'attend à recevoir lorsque des touches (par exemple, sur un clavier réel) sont enfoncées.        </p>
 
@@ -1104,35 +1027,37 @@
             ...<br></code>
           </p>
         </blockquote>
-      </blockquote>
+      </section><!-- H2: Keymap file ("us-intl-altgr-dead-keys.keymap") -->
 
-      <h3>
-        Fichier Composemap ("<code>en_US.UTF-8_Compose</code>")      </h3>
+      <section><!-- H2: Composemap file ("en_US.UTF-8_Compose") -->
+        <header>
+          <h2>
+            Fichier Composemap ("<code>en_US.UTF-8_Compose</code>")          </h2>
+        </header>
 
-      <blockquote>
         <p>
           Ce fichier décrit les caractères qui peuvent être composés avec plusieurs entrées. Par exemple, "<b><code>[Compose]</code></b>" suivi de "<b><code>[A]</code></b> " et "<b><code>[E]</code></b>" peut être utilisé pour créer le caractère "<code>æ</code>".        </p>
 
         <p>
           Le fichier fourni avec Tux Paint est basé sur le composemap anglais américain UTF-8 (Unicode) fourni avec le système <cite>X Window</cite> de X.Org . La version actuelle de la bibliothèque <b>Xlib</b> se trouve sur la  page Web à l' adresse <a href="https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html">https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html</a>.        </p>
-      </blockquote>
+      </section><!-- H2: Composemap file ("en_US.UTF-8_Compose") -->
 
-      <h3>
-        Fichier de définitions des Keysim ("<code>keysymdef.h</code>")      </h3>
+      <section><!-- H2: Keysym definitions file ("keysymdef.h") -->
+        <header>
+          <h2>
+            Fichier de définitions des Keysim ("<code>keysymdef.h</code>")          </h2>
+        </header>
 
-      <blockquote>
         <p>
           Ce fichier (qui est un fichier d'en-tête du langage de programmation <cite>C</cite> ) provient également du <cite>système X Window</cite> . Il définit les valeurs Unicode de chaque keycap (par exemple, "<code>XK_equal</code>" correspond à "<code>U+003D</code>", pour le caractère "<code>=</code>" ("<code>EQUALS SIGN</code>").        </p>
 
-        <p>
-          <b>Remarque :</b> Ce fichier n'est pas compilé avec Tux Paint, mais il est lu et analysé durant l'exécution de celui-ci.        </p>
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Note:</strong> This file is not compiled into Tux Paint, but is read and parsed at runtime.        </p>
 
         <p>
           Il est peu probable qu'une modification de ce fichier soit requise.        </p>
-      </blockquote>
-    </blockquote>
+      </section><!-- H2: Keysym definitions file ("keysymdef.h") -->
+    </section><!-- H1: On-screen Keyboard -->
 
-    <hr size="2"
-        noshade>
   </body>
 </html>

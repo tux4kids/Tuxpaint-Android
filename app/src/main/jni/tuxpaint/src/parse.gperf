@@ -120,6 +120,7 @@ help,                IMM(help)
 hidecursor,          POSBOOL(hide_cursor)
 keyboard,            POSBOOL(keymouse)
 label,               NEGBOOL(disable_label)
+brushspacing,        NEGBOOL(disable_brushspacing)
 lang,                MULTI(parsertmp_lang)
 locale,              MULTI(parsertmp_locale)
 lockfile,            POSBOOL(ok_to_use_lockfile)
@@ -138,6 +139,7 @@ print,               NEGBOOL(disable_print)
 printcfg,            POSBOOL(use_print_config)
 printcommand,        MULTI(printcommand)
 printdelay,          MULTI(print_delay)
+reversesort,         POSBOOL(reversesort)
 quit,                NEGBOOL(disable_quit)
 save,                NEGBOOL(disable_save)
 savedir,             MULTI(savedir)
@@ -303,5 +305,5 @@ void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const ch
     exit(53);
   }
 
-  memcpy(offset+(char*)tmpcfg, &opt, sizeof(char*)); /* FIXME: This causes a warning; should it be 'sizeof(char)', or do we need to have the warning suppressed? -bjk 2021.10.14 */
+  memcpy((char**) (offset + (char*) tmpcfg), &opt, sizeof(char*));
 }

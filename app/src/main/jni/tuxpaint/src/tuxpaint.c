@@ -3,7 +3,7 @@
 
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2021
+  Copyright (c) 2002-2022
   by various contributors; see AUTHORS.txt
   http://www.tuxpaint.org/
 
@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - November 15, 2021
+  June 14, 2002 - June 3, 2022
 */
 
 #include "platform.h"
@@ -350,7 +350,6 @@ typedef struct safer_dirent
 #include "win32_print.h"
 #include <io.h>
 #include <direct.h>
-#include <iconv.h>
 
 #undef min
 #undef max
@@ -364,9 +363,9 @@ extern int win32_trash(const char *path);
 #undef iswprint
 int iswprint(wchar_t wc)
 {
-	WORD t;
-	GetStringTypeW(CT_CTYPE1, &wc, 1, &t);
-	return (t & C1_DEFINED) && !(t & C1_CNTRL);
+  WORD t;
+  GetStringTypeW(CT_CTYPE1, &wc, 1, &t);
+  return (t & C1_DEFINED) && !(t & C1_CNTRL);
 }
 
 #endif /* WIN32 */
@@ -553,6 +552,18 @@ int iswprint(wchar_t wc)
 #include "compiler.h"
 
 
+/* Convert floats to fractions between (min/max) and ((max-min)/max)
+   (anything with smaller resolution will round up or down) */
+#define SLOPPY_FRAC_MIN (float) 1
+#define SLOPPY_FRAC_MAX (float) 10
+static void sloppy_frac(float f, int * numer, int * denom);
+
+
+static void select_label_node(int * old_x, int * old_y);
+static void apply_label_node(int old_x, int old_y);
+static void reposition_onscreen_keyboard(int y);
+
+
 /* EP added #ifndef __APPLE__ because macros are buggy (shifted by 1 byte), plus the function exists in SDL */
 #ifndef __APPLE__
 #if VIDEO_BPP==32
@@ -590,8 +601,13 @@ int iswprint(wchar_t wc)
 #endif
 #endif
 
+#if (SDL_MAJOR_VERSION < 2)
+  #define EVENT_FILTER_EVENT_TYPE const SDL_Event
+#else
+  #define EVENT_FILTER_EVENT_TYPE union SDL_Event
+#endif
 
-int TP_EventFilter(void *data, const SDL_Event * event);
+int TP_EventFilter(void *data, EVENT_FILTER_EVENT_TYPE * event);
 
 
 /* *INDENT-OFF* */
@@ -675,12 +691,12 @@ enum
   STARTER_SCENE
 };
 
+/* Modes of the "Label" tool */
 enum
 {
-  LABEL_OFF,
-  LABEL_LABEL,
-  LABEL_SELECT
-    /* , LABEL_ROTATE */
+  LABEL_LABEL,  /* Adding new label(s) */
+  LABEL_SELECT, /* "Select" button clicked; user is selecting a label to edit */
+  LABEL_APPLY   /* "Apply" button clicked; user is selecting a label to apply permanently to the canvas */
 };
 
 
@@ -691,6 +707,10 @@ static int NUM_COLORS;
 static Uint8 **color_hexes;
 static char **color_names;
 
+/* Special color options (from left-to-right (very last entry)) */
+#define COLOR_SELECTOR (NUM_COLORS - 3) /* Pick a color from the canvas */
+#define COLOR_PICKER (NUM_COLORS - 2) /* Pick a color from a palette */
+#define COLOR_MIXER (NUM_COLORS - 1) /* Mix colors together */
 
 /* Show debugging stuff: */
 
@@ -1124,7 +1144,7 @@ static void update_screen_rect(SDL_Rect * r)
 static int hit_test(const SDL_Rect * const r, unsigned x, unsigned y)
 {
   /* note the use of unsigned math: no need to check for negative */
-  return x - r->x < r->w && y - r->y < r->h;
+  return (x - (unsigned) r->x < (unsigned) r->w) && (y - (unsigned) r->y < (unsigned) r->h);
 }
 
 #define HIT(r) hit_test(&(r), event.button.x, event.button.y)
@@ -1331,7 +1351,7 @@ static int wheely = 1;
 static int keymouse = 0;
 static int no_button_distinction;
 static int button_down;
-static int scrolling;
+static int scrolling_selector, scrolling_tool, scrolling_dialog;
 
 static int promptless_save = SAVE_OVER_UNSET;
 static int _promptless_save_over, _promptless_save_over_ask, _promptless_save_over_new;
@@ -1343,6 +1363,7 @@ static int ok_to_use_lockfile = 1;
 static int start_blank;
 static int autosave_on_quit;
 static int no_prompt_on_quit = 0;
+static int reversesort = 0;
 
 static int dont_do_xor;
 static int dont_load_stamps;
@@ -1368,6 +1389,8 @@ static int starter_flipped;
 static int starter_personal;
 static int template_personal;
 static int starter_modified;
+
+static int disable_brushspacing;
 
 static Uint8 canvas_color_r, canvas_color_g, canvas_color_b;
 static Uint8 *touched;
@@ -1600,9 +1623,11 @@ static SDL_Surface *img_grow, *img_shrink;
 static SDL_Surface *img_magic_paint, *img_magic_fullscreen;
 static SDL_Surface *img_shapes_corner, *img_shapes_center;
 static SDL_Surface *img_bold, *img_italic;
-static SDL_Surface *img_label, *img_label_select;
-static SDL_Surface *img_color_picker, *img_color_picker_thumb, *img_paintwell, *img_color_sel;
-static int color_picker_x, color_picker_y;
+static SDL_Surface *img_label_select, *img_label_apply;
+static SDL_Surface *img_color_picker, *img_color_picker_thumb, *img_color_picker_val;
+static SDL_Surface *img_paintwell, *img_color_sel, *img_color_mix;
+static int color_picker_x, color_picker_y, color_picker_v;
+static int color_mixer_reset;
 
 static SDL_Surface *img_title_on, *img_title_off, *img_title_large_on, *img_title_large_off;
 static SDL_Surface *img_title_names[NUM_TITLES];
@@ -1744,83 +1769,12 @@ static SDL_Surface *render_text_w(TuxPaint_Font * restrict font, const wchar_t *
 
       SDLPango_SetDefaultColor(font->pango_context, &pango_color);
 
-      /* Convert from 16-bit UNICODE to UTF-8 encoded for SDL_Pango: */
+/* Convert from 16-bit UNICODE to UTF-8 encoded for SDL_Pango: */
 
-      utfstr_max = (sizeof(char) * 4 * (wcslen(str) + 1));
-      utfstr = (char *)malloc(utfstr_max);
-      memset(utfstr, 0, utfstr_max);
+utfstr_max = (sizeof(char) * 4 * (wcslen(str) + 1));
+utfstr = (char *)malloc(utfstr_max);
 
-      j = 0;
-      for (i = 0; i < wcslen(str); i++)
-        {
-          if (str[i] <= 0x0000007F)
-            {
-              /* Range: 0x00000000 - 0x0000007F:
-
-                 In:  00abcdef
-                 Out: 00abcdef */
-
-              utfstr[j++] = (str[i] & 0x7F);
-            }
-          else if (str[i] <= 0x000007FF)
-            {
-              /* Range: 0x00000080 - 0x000007FF:
-
-                 In:  00000abc defghijk
-                 Out: 110abcde 10fghijk */
-
-              utfstr[j++] = (((str[i] & 0x0700) >> 6) | /* -----abc -------- to ---abc-- */
-                             ((str[i] & 0x00C0) >> 6) | /* -------- de------ to ------de */
-                             (0xC0));                   /*                  add 110----- */
-
-              utfstr[j++] = (((str[i] & 0x003F)) |      /* -------- --fghijk to --fghijk */
-                             (0x80));                   /*                  add 10------ */
-            }
-#ifndef WIN32
-          else if (str[i] <= 0x0000FFFF)
-#else
-          /* str[i] is a wchar_t, which is only 16-bit on Windows, so
-             avoiding a "comparison is always true due to limited range
-             of data type" compile-time warning */
-          else
-#endif
-            {
-              /* Range: 0x00000800 - 0x0000FFFF:
-
-                 In:  abcdefgh ijklmnop
-                 Out: 1110abcd 10efghij 10klmnop */
-
-              utfstr[j++] = (((str[i] & 0xF000) >> 12) | /* abcd---- -------- to ----abcd */
-                             (0xE0));                    /*                  add 1110---- */
-              utfstr[j++] = (((str[i] & 0x0FC0) >> 6) |  /* ----efgh ij------ to --efghij */
-                             (0x80));                    /*                  add 10------ */
-              utfstr[j++] = (((str[i] & 0x003F)) |       /* -------- --klmnop to --klmnop */
-                             (0x80));                    /*                  add 10------ */
-            }
-#ifndef WIN32
-          else
-            {
-              /* Range: 0x00010000 - 0x001FFFFF:
-
-                 In:  000abcde fghijklm nopqrstu
-                 Out: 11110abc 10defghi 10jklmno 10pqrstu
-              */
-
-              utfstr[j++] = (((str[i] & 0x1C0000) >> 18) | /* ---abc-- -------- --------  to -----abc */
-                             (0xF0));                      /*                            add 11110000 */
-              utfstr[j++] = (((str[i] & 0x030000) >> 12) | /* ------de -------- --------  to --de---- */
-                             ((str[i] & 0x00F000) >> 12) | /* -------- fghi---- --------  to ----fghi */
-                             (0x80));                      /*                            add 10------ */
-              utfstr[j++] = (((str[i] & 0x000F00) >> 6) |  /* -------- ----jklm --------  to --jklm-- */
-                             ((str[i] & 0x0000C0) >> 6) |  /* -------- -------- no------  to ------no */
-                             (0x80));                      /*                            add 10------ */
-              utfstr[j++] = ((str[i] & 0x00003F) |         /* -------- -------- --pqrstu  to --prqstu */
-                             (0x80));                      /*                            add 10------ */
-            }
-#endif
-        }
-      utfstr[j] = '\0';
-
+wcstombs(utfstr, str, utfstr_max);
 
       SDLPango_SetText(font->pango_context, utfstr, -1);
       ret = SDLPango_CreateSurfaceDraw(font->pango_context);
@@ -1902,6 +1856,7 @@ static int max_stamps[MAX_STAMP_GROUPS];
 static stamp_type **stamp_data[MAX_STAMP_GROUPS];
 
 static SDL_Surface *active_stamp;
+static SDL_Surface * current_stamp_cached = NULL;
 
 
 /**
@@ -1939,7 +1894,8 @@ static SDL_Surface *img_shapes[NUM_SHAPES], *img_shape_names[NUM_SHAPES];
 static SDL_Surface *img_fills[NUM_FILLS], *img_fill_names[NUM_FILLS];
 static SDL_Surface *img_openlabels_open, *img_openlabels_erase,
   *img_openlabels_slideshow, *img_openlabels_back, *img_openlabels_play,
-  *img_openlabels_gif_export, *img_openlabels_pict_export, *img_openlabels_next;
+  *img_openlabels_gif_export, *img_openlabels_pict_export, *img_openlabels_next,
+  *img_mixerlabel_clear;
 
 static SDL_Surface *img_tux[NUM_TIP_TUX];
 
@@ -1980,6 +1936,12 @@ static int brush_counter, brush_frame;
 #define ERASER_MIN 5            /* Smaller than 5 will not render as a circle! */
 #define ERASER_MAX 128
 
+#define BRUSH_SPACING_SIZES 12  /* How many brush spacing options to provide
+                                   (max will represent BRUSH_SPACING_MAX_MULTIPLIER times the
+                                   max dimension of the brush; min will represent 1 pixel) */
+#define BRUSH_SPACING_MAX_MULTIPLIER 5 /* How far apart (in terms of a multiplier of a
+                                          brush's dimensions) the max brush spacing setting
+                                          represents */
 
 static unsigned cur_color;
 static int cur_tool, cur_brush, old_tool;
@@ -2035,7 +1997,7 @@ typedef enum
 
 #define NUM_EDGES 4
 
-static SDL_Event scrolltimer_event;
+static SDL_Event scrolltimer_selector_event, scrolltimer_tool_event, scrolltimer_dialog_event;
 
 int non_left_click_count = 0;
 
@@ -2068,6 +2030,7 @@ static SDL_Surface *do_loadimage(const char *const fname, int abort_on_error);
 static void draw_toolbar(void);
 static void draw_magic(void);
 static void draw_brushes(void);
+static void draw_brushes_spacing(void);
 static void draw_stamps(void);
 static void draw_shapes(void);
 static void draw_erasers(void);
@@ -2078,9 +2041,11 @@ static void draw_none(void);
 static void do_undo(void);
 static void do_redo(void);
 static void render_brush(void);
+static void show_brush_tip(void);
 static void _xorpixel(SDL_Surface * surf, int x, int y);
 static void line_xor(int x1, int y1, int x2, int y2);
 static void rect_xor(int x1, int y1, int x2, int y2);
+static void circle_xor(int x, int y, int sz);
 static void draw_blinking_cursor(void);
 static void hide_blinking_cursor(void);
 
@@ -2100,6 +2065,7 @@ static void update_stamp_xor(void);
 #endif
 
 static void set_active_stamp(void);
+static void clear_cached_stamp(void);
 
 static int calc_eraser_size(int which_eraser);
 static void do_eraser(int x, int y, int update);
@@ -2108,6 +2074,7 @@ static void disable_avail_tools(void);
 static void enable_avail_tools(void);
 static void reset_avail_tools(void);
 static int compare_dirent2s(struct dirent2 *f1, struct dirent2 *f2);
+static int compare_dirent2s_invert(struct dirent2 *f1, struct dirent2 *f2);
 static void redraw_tux_text(void);
 static void draw_tux_text(int which_tux, const char *const str, int want_right_to_left);
 static void draw_tux_text_ex(int which_tux, const char *const str, int want_right_to_left, Uint8 locale_text);
@@ -2167,7 +2134,19 @@ static int do_new_dialog(void);
 static int do_new_dialog_add_colors(SDL_Surface * *thumbs, int num_files, int *d_places, char * *d_names,
                                     char * *d_exts, int *white_in_palette);
 static int do_color_picker(void);
-static int do_color_sel(void);
+static void draw_color_picker_crosshairs(int color_picker_left, int color_picker_top, int color_picker_val_left, int color_picker_val_top);
+static void set_color_picker_crosshair_size(void);
+static void draw_color_picker_values(int l, int t);
+static void draw_color_picker_palette_and_values(int color_picker_left, int color_picker_top, int color_picker_val_left, int color_picker_val_top);
+static void render_color_picker_palette(void);
+static int do_color_sel(int temp_mode);
+static int do_color_mix(void);
+static void draw_color_mixer_blank_example(void);
+static void calc_color_mixer_average(float * out_h, float * out_s, float * out_v);
+static void draw_color_mixer_tooltip(void);
+static void draw_color_mix_undo_redo(void);
+static void render_color_button(int the_color, SDL_Surface * decoration, SDL_Surface * icon);
+static void handle_color_changed(void);
 
 static int do_slideshow(void);
 static void play_slideshow(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed);
@@ -2194,7 +2173,9 @@ static wchar_t *uppercase_w(const wchar_t * restrict const str);
 static char *textdir(const char *const str);
 static SDL_Surface *do_render_button_label(const char *const label);
 static void create_button_labels(void);
-static Uint32 scrolltimer_callback(Uint32 interval, void *param);
+static Uint32 scrolltimer_selector_callback(Uint32 interval, void *param);
+static Uint32 scrolltimer_tool_callback(Uint32 interval, void *param);
+static Uint32 scrolltimer_dialog_callback(Uint32 interval, void *param);
 static Uint32 drawtext_callback(Uint32 interval, void *param);
 static void control_drawtext_timer(Uint32 interval, const char *const text, Uint8 locale_text);
 static const char *great_str(void);
@@ -2267,6 +2248,23 @@ int safe_snprintf(char *str, size_t size, const char *format, ...);
 
 static int bypass_splash_wait;
 
+
+#define ANNIVERSARY
+
+#ifdef ANNIVERSARY
+
+#define NUM_CONFETTI 100
+
+typedef struct {
+  float x, y, xm, ym, ymm;
+  Uint32 color;
+} confetti_t;
+
+confetti_t confetti[NUM_CONFETTI];
+
+#endif
+
+
 /**
  * Wait for a keypress or mouse click.
  *
@@ -2276,11 +2274,33 @@ static void do_wait(int counter)
 {
   SDL_Event event;
   int done;
+#ifdef ANNIVERSARY
+  int i;
+  SDL_Surface * back_surf;
+  SDL_Rect r;
+#endif
 
   if (bypass_splash_wait)
     return;
 
   done = 0;
+
+#ifdef ANNIVERSARY
+  for (i = 0; i < NUM_CONFETTI; i++) {
+    confetti[i].x = rand() % screen->w;
+    confetti[i].y = rand() % screen->h;
+    confetti[i].xm = (rand() % 9) - 4;
+    confetti[i].ym = (rand() % 4);
+    confetti[i].ymm = ((rand() % 10) / 20) + 0.1;
+    confetti[i].color = SDL_MapRGB(screen->format,
+                                   (rand() % 128) + 96,
+                                   (rand() % 128) + 96,
+                                   (rand() % 128) + 96);
+  }
+
+  back_surf = SDL_DisplayFormat(screen);
+#endif
+
 
   do
     {
@@ -2306,10 +2326,42 @@ static void do_wait(int counter)
             }
         }
 
+#ifdef ANNIVERSARY
+      for (i = 0; i < NUM_CONFETTI; i++) {
+        r.x = confetti[i].x;
+        r.y = confetti[i].y;
+        r.w = 8;
+        r.h = 8;
+
+        SDL_BlitSurface(back_surf, &r, screen, &r);
+      }
+
+      for (i = 0; i < NUM_CONFETTI; i++) {
+        confetti[i].x += confetti[i].xm;
+        confetti[i].xm += (((rand() % 5) - 2) / 10);
+        confetti[i].y += confetti[i].ym;
+        confetti[i].ym += confetti[i].ymm;
+
+        r.x = confetti[i].x;
+        r.y = confetti[i].y;
+        r.w = 6 + (rand() % 2);
+        r.h = (r.y % 8) + 1;
+
+        SDL_FillRect(screen, &r, confetti[i].color);
+      }
+
+      SDL_Flip(screen);
+#endif
+
+
       counter--;
       SDL_Delay(100);
     }
   while (!done && counter > 0);
+
+#ifdef ANNIVERSARY
+  SDL_FreeSurface(back_surf);
+#endif
 }
 
 
@@ -2392,10 +2444,20 @@ enum
 
 int shape_reverse;
 
+on_screen_keyboard *new_kbd;
+SDL_Rect kbd_rect;
+
+#if (SDL_MAJOR_VERSION < 2)
+  #define TIMERID_NONE NULL
+#else
+  #define TIMERID_NONE 0
+#endif
 
 int brushflag, xnew, ynew, eraflag, lineflag, magicflag, keybd_flag, keybd_position, keyglobal, initial_y, gen_key_flag,
   ide, activeflag, old_x, old_y;
 int cur_thing;
+SDL_TimerID scrolltimer_dialog = TIMERID_NONE; /* Used by Open, Open->Slideshow, and New dialogs */
+Uint32 TP_SDL_MOUSEBUTTONSCROLL;
 
 /**
  * --- MAIN LOOP! ---
@@ -2414,11 +2476,8 @@ static void mainloop(void)
   int whicht = 0;
   int line_start_x = 0;
   int line_start_y = 0;
-  int j = 0;
   int stamp_size_selector_clicked = 0;
   int stamp_xored = 0;
-
-  unsigned int i = 0;
 
 #ifdef AUTOSAVE_GOING_BACKGROUND
   char *fname;
@@ -2426,8 +2485,8 @@ static void mainloop(void)
   FILE *fi;
 #endif
 
-  Uint32 TP_SDL_MOUSEBUTTONSCROLL = SDL_RegisterEvents(1);
-  SDL_TimerID scrolltimer = NULL;
+  TP_SDL_MOUSEBUTTONSCROLL = SDL_RegisterEvents(1);
+  SDL_TimerID scrolltimer_selector = TIMERID_NONE, scrolltimer_tool = TIMERID_NONE;
   SDL_Event event;
   SDLKey key;
   SDLMod mod;
@@ -2439,12 +2498,10 @@ static void mainloop(void)
   Uint16 key_unicode;
   SDLKey key_down;
 #endif
-  on_screen_keyboard *new_kbd;
-  SDL_Rect kbd_rect;
 
   float angle;
   char angle_tool_text[256]; // FIXME Consider malloc'ing
-
+  char stretch_tool_text[256]; // FIXME Consider malloc'ing
 
   num_things = num_brushes;
   thing_scroll = &brush_scroll;
@@ -2461,8 +2518,12 @@ static void mainloop(void)
   button_down = 0;
   last_cursor_blink = cur_toggle_count = 0;
   texttool_len = 0;
-  scrolling = 0;
-  scrolltimer = 0;
+  scrolling_selector = 0;
+  scrolltimer_selector = TIMERID_NONE;
+  scrolling_tool = 0;
+  scrolltimer_tool = TIMERID_NONE;
+  scrolling_dialog = 0;
+  scrolltimer_dialog = TIMERID_NONE;
   val_x = 0;
   val_y = 0;
   valhat_x = 0;
@@ -2587,6 +2648,7 @@ static void mainloop(void)
                       (key_unicode > ' ' && key_unicode < 127) ? (char)event.text.text : ' ',
                       iswprint(key_unicode) ? "" : "not ", (unsigned)key_down);
 #endif
+
               if (cur_tool == TOOL_STAMP)
                 {
                   SDL_Rect r_stamps_sizesel;
@@ -2926,7 +2988,7 @@ static void mainloop(void)
                   /* Handle key in text tool: */
 
                   if (((cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL) && cursor_x != -1 && cursor_y != -1) ||
-                      (cur_tool == TOOL_LABEL && cur_label == LABEL_SELECT))
+                      (cur_tool == TOOL_LABEL && (cur_label == LABEL_SELECT || cur_label == LABEL_APPLY)))
                     {
                       static int redraw = 0;
                       wchar_t *im_cp = im_data.s;
@@ -2979,8 +3041,14 @@ static void mainloop(void)
                       /* Queue each character to be displayed */
                       while (*im_cp)
                         {
+#ifdef __APPLE__
+                          /* Apple uses DEL for BACKSPACE */
+                          if (*im_cp == SDLK_DELETE) *im_cp = L'\b';
+#endif
+
                           if (*im_cp == L'\b')
                             {
+                              /* [Backspace] */
                               hide_blinking_cursor();
                               if (texttool_len > 0)
                                 {
@@ -3005,6 +3073,8 @@ static void mainloop(void)
                             }
                           else if (*im_cp == L'\r')
                             {
+                              /* [Enter]... */
+
                               int font_height;
 
                               font_height = TuxPaint_Font_FontHeight(getfonthandle(cur_font));
@@ -3012,6 +3082,8 @@ static void mainloop(void)
                               hide_blinking_cursor();
                               if (texttool_len > 0)
                                 {
+                                  /* [Enter] to finish entering text */
+
                                   rec_undo_buffer();
                                   do_render_cur_text(1);
                                   label_node_to_edit = NULL;
@@ -3038,17 +3110,25 @@ static void mainloop(void)
                                   cursor_x = cursor_left;
                                   cursor_y = min(cursor_y + font_height, canvas->h - font_height);
 
-                                  playsound(screen, 0, SND_RETURN, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
+                                  /* Reposition the on-screen keyboard if we begin typing over it */
+                                  update_canvas_ex(kbd_rect.x, kbd_rect.y, kbd_rect.x + kbd_rect.w,
+                                                   kbd_rect.y + kbd_rect.h, 0);
+                                  update_screen_rect(&kbd_rect);
+                                  reposition_onscreen_keyboard(cursor_y);
 
+                                  playsound(screen, 0, SND_RETURN, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
                                 }
                               else if (cur_tool == TOOL_LABEL && label_node_to_edit)
                                 {
+                                  /* [Enter] to finish erasing text from a pre-existing Label */
+
                                   rec_undo_buffer();
                                   have_to_rec_label_node = TRUE;
                                   add_label_node(0, 0, 0, 0, NULL);
                                   derender_node(&label_node_to_edit);
                                   label_node_to_edit = NULL;
-                                  /* playsound(screen, 0, SND_DELETE_LABEL, 0, SNDPOS_CENTER); *//* FIXME lack of specific sound */
+
+                                  playsound(screen, 0, SND_LINE_END, 0, SNDPOS_CENTER, SNDDIST_NEAR);
 
                                   if (been_saved)
                                     {
@@ -3062,61 +3142,63 @@ static void mainloop(void)
                                     }
                                 }
 
-                              /* Select a node to edit */
                               else if (cur_tool == TOOL_LABEL && cur_label == LABEL_SELECT)
                                 {
+                                  /* [Enter] to select a node to edit */
+
+                                  DEBUG_PRINTF("Searching for label @ (%d+3,%d+3)\n",
+                                               highlighted_label_node->save_x,
+                                               highlighted_label_node->save_y);
+
                                   label_node_to_edit =
                                     search_label_list(&highlighted_label_node, highlighted_label_node->save_x + 3,
                                                       highlighted_label_node->save_y + 3, 0);
+
                                   if (label_node_to_edit)
                                     {
-                                      cur_label = LABEL_LABEL;
-                                      cur_thing = label_node_to_edit->save_cur_font;
-                                      do_setcursor(cursor_insertion);
-                                      i = 0;
-                                      label_node_to_edit->is_enabled = FALSE;
-                                      derender_node(&label_node_to_edit);
-
-                                      texttool_len = select_texttool_len;
-                                      while (i < texttool_len)
-                                        {
-                                          texttool_str[i] = select_texttool_str[i];
-                                          i = i + 1;
-                                        }
-                                      texttool_str[i] = L'\0';
-                                      cur_color = select_color;
-                                      old_x = select_x;
-                                      old_y = select_y;
-                                      cur_font = select_cur_font;
-                                      text_state = select_text_state;
-                                      text_size = select_text_size;
-                                      for (j = 0; j < num_font_families; j++)
-                                        {
-                                          if (user_font_families[j] && user_font_families[j]->handle)
-                                            {
-                                              TuxPaint_Font_CloseFont(user_font_families[j]->handle);
-                                              user_font_families[j]->handle = NULL;
-                                            }
-                                        }
-                                      draw_fonts();
-                                      update_screen_rect(&r_toolopt);
-
-                                      cursor_x = old_x;
-                                      cursor_y = old_y;
-                                      cursor_left = old_x;
-
-                                      draw_colors(COLORSEL_REFRESH);
-                                      draw_fonts();
+                                      select_label_node(&old_x, &old_y);
+                                      DEBUG_PRINTF("Got a label: \"%ls\" @ (%d,%d)\n",
+                                                   label_node_to_edit->save_texttool_str, old_x, old_y);
+                                      DEBUG_PRINTF("Cursor now @ (%d,%d); width = %d\n",
+                                                   cursor_x, cursor_y, cursor_textwidth);
+                                      cursor_x = label_node_to_edit->save_x;
+                                      cursor_y = label_node_to_edit->save_y;
+                                      cursor_left = cursor_x;
+                                      DEBUG_PRINTF("Cursor now @ (%d,%d)\n", cursor_x, cursor_y);
                                     }
 
-
                                   do_render_cur_text(0);
+                                }
 
+                              else if (cur_tool == TOOL_LABEL && cur_label == LABEL_APPLY)
+                                {
+                                  /* [Enter] to select a node to apply it to the canvas */
+
+                                  label_node_to_edit =
+                                    search_label_list(&highlighted_label_node, highlighted_label_node->save_x + 3,
+                                                      highlighted_label_node->save_y + 3, 0);
+
+                                  if (label_node_to_edit)
+                                    {
+                                      reposition_onscreen_keyboard(old_y);
+                                      apply_label_node(highlighted_label_node->save_x, highlighted_label_node->save_y);
+                                      do_render_cur_text(0);
+                                    }
                                 }
                               else
                                 {
+                                  /* [Enter] with no text; just move insertion cursor down to the next 'line' */
+
                                   cursor_x = cursor_left;
                                   cursor_y = min(cursor_y + font_height, canvas->h - font_height);
+
+                                  /* Reposition the on-screen keyboard if we begin typing over it */
+                                  update_canvas_ex(kbd_rect.x, kbd_rect.y, kbd_rect.x + kbd_rect.w,
+                                                   kbd_rect.y + kbd_rect.h, 0);
+                                  update_screen_rect(&kbd_rect);
+                                  reposition_onscreen_keyboard(cursor_y);
+
+                                  playsound(screen, 0, SND_RETURN, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
                                 }
 
 #ifdef SPEECH
@@ -3129,9 +3211,12 @@ static void mainloop(void)
                             }
                           else if (*im_cp == L'\t')
                             {
+                              /* [Tab]... */
 
                               if (texttool_len > 0)
                                 {
+                                  /* [Tab] to finish entering text */
+
                                   rec_undo_buffer();
                                   do_render_cur_text(1);
                                   label_node_to_edit = NULL;
@@ -3154,15 +3239,20 @@ static void mainloop(void)
                                       draw_toolbar();
                                       update_screen_rect(&r_tools);
                                     }
+
+                                  playsound(screen, 0, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
                                 }
                               else if (cur_tool == TOOL_LABEL && label_node_to_edit)
                                 {
+                                  /* [Tab] to finish erasing text from a pre-existing Label */
+
                                   rec_undo_buffer();
                                   have_to_rec_label_node = TRUE;
                                   add_label_node(0, 0, 0, 0, NULL);
                                   derender_node(&label_node_to_edit);
                                   label_node_to_edit = NULL;
-                                  /* playsound(screen, 0, SND_DELETE_LABEL, 0, SNDPOS_CENTER); *//* FIXME lack of specific sound */
+
+                                  playsound(screen, 0, SND_LINE_END, 0, SNDPOS_CENTER, SNDDIST_NEAR);
 
                                   if (been_saved)
                                     {
@@ -3175,14 +3265,13 @@ static void mainloop(void)
                                       update_screen_rect(&r_tools);
                                     }
                                 }
-                              /* Cycle accross the nodes */
-                              else if (cur_tool == TOOL_LABEL && cur_label == LABEL_SELECT)
+                              else if (cur_tool == TOOL_LABEL && (cur_label == LABEL_SELECT || cur_label == LABEL_APPLY))
                                 {
+                                  /* [Tab] to cycle between the Labels (nodes) */
+
                                   cycle_highlighted_label_node();
                                   highlight_label_nodes();
                                 }
-
-
 
 #ifdef SPEECH
 #ifdef __APPLE__
@@ -3199,6 +3288,8 @@ static void mainloop(void)
                               if (!iswprint(*im_cp))
                                 break;
 #endif
+                              /* Printable characters... */
+
                               if (texttool_len < (sizeof(texttool_str) / sizeof(wchar_t)) - 1)
                                 {
                                   int old_cursor_textwidth = cursor_textwidth;
@@ -3304,8 +3395,6 @@ static void mainloop(void)
             {
               if (HIT(r_tools))
                 {
-
-
                   if (HIT(real_r_tools))
                     {
                       /* A tool on the left has been pressed! */
@@ -3424,45 +3513,26 @@ static void mainloop(void)
                                     {
                                       if (onscreen_keyboard_layout)
                                         kbd =
-                                          osk_create(onscreen_keyboard_layout, screen,
+                                          osk_create(onscreen_keyboard_layout, canvas,
                                                      img_btn_up, img_btn_down, img_btn_off,
                                                      img_btn_nav, img_btn_hold,
-                                                     img_oskdel, img_osktab, img_oskenter,
-                                                     img_oskcapslock, img_oskshift,
-                                                     img_btnsm_up, img_btnsm_down, img_btnsm_off,
-                                                     img_btnsm_nav, img_btnsm_hold,
-                                                     /* FIXME */
                                                      img_oskdel, img_osktab, img_oskenter,
                                                      img_oskcapslock, img_oskshift,
                                                      onscreen_keyboard_disable_change);
                                       else
                                         kbd =
-                                          osk_create(strdup("default.layout"), screen,
+                                          osk_create(strdup("default.layout"), canvas,
                                                      img_btn_up, img_btn_down, img_btn_off,
                                                      img_btn_nav, img_btn_hold,
                                                      img_oskdel, img_osktab, img_oskenter,
                                                      img_oskcapslock, img_oskshift,
-                                                     img_btnsm_up, img_btnsm_down, img_btnsm_off,
-                                                     img_btnsm_nav, img_btnsm_hold,
-                                                     /* FIXME */
-                                                     img_oskdel, img_osktab, img_oskenter,
-                                                     img_oskcapslock, img_oskshift,
                                                      onscreen_keyboard_disable_change);
                                     }
-                                  if (kbd == NULL)
-                                    {
-                                      fprintf(stderr, "kbd = NULL\n");
-                                    }
 
-                                  kbd_rect.x = button_w * 2 + (canvas->w - kbd->surface->w) / 2;
-                                  if (old_y > canvas->h / 2)
-                                    kbd_rect.y = 0;
+                                  if (kbd == NULL)
+                                    fprintf(stderr, "kbd = NULL\n");
                                   else
-                                    kbd_rect.y = canvas->h - kbd->surface->h;
-                                  kbd_rect.w = kbd->surface->w;
-                                  kbd_rect.h = kbd->surface->h;
-                                  SDL_BlitSurface(kbd->surface, &kbd->rect, screen, &kbd_rect);
-                                  update_screen_rect(&kbd_rect);
+                                    reposition_onscreen_keyboard(0);
                                 }
                               if (!font_thread_done)
                                 {
@@ -3764,24 +3834,56 @@ static void mainloop(void)
                       if (!done)
                         magic_switchin(canvas);
                     }
-                  else if ((event.button.y < r_tools.y + button_h / 2) && tool_scroll > 0)
-                    {
-                      tool_scroll -= gd_tools.cols;
-                      playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
-
-                      draw_toolbar();
-                      update_screen_rect(&r_tools);
-
-                    }
-                  else if ((event.button.y > real_r_tools.y + real_r_tools.h)
+                  else if (
+                    ((event.button.y < r_tools.y + button_h / 2) && tool_scroll > 0) ||
+                    ((event.button.y > real_r_tools.y + real_r_tools.h)
                            && (tool_scroll < NUM_TOOLS - buttons_tall * gd_tools.cols + gd_tools.cols))
-                    {
-                      tool_scroll += gd_tools.cols;
-                      draw_toolbar();
-                      playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+                  ) {
+                      /* Tool up or down scroll buttons */
 
-                      update_screen_rect(&r_tools);
+                      if (event.button.y < r_tools.y + button_h / 2)
+                        {
+                          /* Tool up scroll button */
+                          tool_scroll -= gd_tools.cols;
+                          playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
 
+                          draw_toolbar();
+                          update_screen_rect(&r_tools);
+                        }
+                      else
+                        {
+                          /* Tool down scroll button */
+                          tool_scroll += gd_tools.cols;
+                          draw_toolbar();
+                          playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+
+                          update_screen_rect(&r_tools);
+                        }
+
+                      if (!scrolling_tool && event.type == SDL_MOUSEBUTTONDOWN)
+                        {
+                          DEBUG_PRINTF("Starting scrolling\n");
+                          memcpy(&scrolltimer_tool_event, &event, sizeof(SDL_Event));
+                          scrolltimer_tool_event.type = TP_SDL_MOUSEBUTTONSCROLL;
+
+                          /*
+                          * We enable the timer subsystem only when needed (e.g., to use SDL_AddTimer() needed
+                          * for scrolling) then disable it immediately after (e.g., after the timer has fired or
+                          * after SDL_RemoveTimer()) because enabling the timer subsystem in SDL1 has a high
+                          * energy impact on the Mac.
+                          */
+
+                          scrolling_tool = 1;
+                          SDL_InitSubSystem(SDL_INIT_TIMER);
+                          scrolltimer_tool =
+                            SDL_AddTimer(REPEAT_SPEED, scrolltimer_tool_callback, (void *)&scrolltimer_tool_event);
+                        }
+                      else
+                        {
+                          DEBUG_PRINTF("Continuing scrolling\n");
+                          scrolltimer_tool =
+                            SDL_AddTimer(REPEAT_SPEED / 3, scrolltimer_tool_callback, (void *)&scrolltimer_tool_event);
+                        }
                     }
                 }
 
@@ -3818,13 +3920,13 @@ static void mainloop(void)
                         {
                           if (!disable_stamp_controls)
                             {
-                              /* was 2,2 before adding left/right stamp group buttons -bjk 2007.05.15 */
+                              /* Account for stamp controls and group changing (left/right) buttons */
                               gd_controls.rows = 3;
                               gd_controls.cols = 2;
                             }
                           else
                             {
-                              /* was left 0,0 before adding left/right stamp group buttons -bjk 2007.05.03 */
+                              /* Stamp controls are disabled; account for group changing (left/right) buttons */
                               gd_controls.rows = 1;
                               gd_controls.cols = 2;
                             }
@@ -3833,6 +3935,7 @@ static void mainloop(void)
                         {
                           if (!disable_stamp_controls)
                             {
+                              /* Account for text controls */
                               gd_controls.rows = 2;
                               gd_controls.cols = 2;
                             }
@@ -3841,11 +3944,13 @@ static void mainloop(void)
                         {
                           if (!disable_stamp_controls)
                             {
+                              /* Account for text controls and label selection button */
                               gd_controls.rows = 3;
                               gd_controls.cols = 2;
                             }
                           else
                             {
+                              /* Text controls disabled; only account for label selection button */
                               gd_controls.rows = 1;
                               gd_controls.cols = 2;
                             }
@@ -3855,11 +3960,13 @@ static void mainloop(void)
                         {
                           if (!disable_magic_controls)
                             {
+                              /* Account for magic controls and group changing (left/right) buttons */
                               gd_controls.rows = 2;
                               gd_controls.cols = 2;
                             }
                           else
                             {
+                              /* Magic controls are disabled; account for group changing (left/right) buttons */
                               gd_controls.rows = 1;
                               gd_controls.cols = 2;
                             }
@@ -3869,6 +3976,17 @@ static void mainloop(void)
                         {
                           if (!disable_shape_controls)
                             {
+                              /* Account for shape controls (corner- vs center-based expansion) */
+                              gd_controls.rows = 1;
+                              gd_controls.cols = 2;
+                            }
+                        }
+
+                      else if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
+                        {
+                          if (!disable_brushspacing)
+                            {
+                              /* Account for brush spacing */
                               gd_controls.rows = 1;
                               gd_controls.cols = 2;
                             }
@@ -3907,10 +4025,12 @@ static void mainloop(void)
 
                       if (HIT(r_items))
                         {
+                          /* A selection button was clicked... */
                           which = GRIDHIT_GD(r_items, gd_items) + *thing_scroll;
 
                           if (which < num_things)
                             {
+                              /* ...and there was something there to click */
                               toolopt_changed = 1;
 #ifndef NOSOUND
                               if (cur_tool != TOOL_STAMP || stamp_data[stamp_group][which]->ssnd == NULL)
@@ -3924,7 +4044,10 @@ static void mainloop(void)
                         }
                       else if (HIT(r_controls))
                         {
+                          /* Controls were clicked */
+
                           which = GRIDHIT_GD(r_controls, gd_controls);
+
                           if (cur_tool == TOOL_STAMP)
                             {
                               /* Stamp controls! */
@@ -4045,6 +4168,8 @@ static void mainloop(void)
                             }
                           else if (cur_tool == TOOL_MAGIC)
                             {
+                              /* Magic controls */
+
                               int grp;
                               int cur;
 
@@ -4087,7 +4212,7 @@ static void mainloop(void)
                                   update_screen_rect(&r_toolopt);
 
                                   draw_colors(magics[magic_group][cur_thing].colors);
-    
+
                                   if (magics[magic_group][cur_thing].colors)
                                     magic_funcs[magics[magic_group][cur_thing].handle_idx].set_color(magic_api_struct,
                                                                                                      color_hexes[cur_color][0],
@@ -4099,7 +4224,7 @@ static void mainloop(void)
                                   playsound(screen, 0, SND_CLICK, 0, SNDPOS_CENTER, SNDDIST_NEAR);
                                 }
                               else
-                                { 
+                                {
                                   /* Magic controls! */
                                   if (which == 3 && magics[grp][cur].avail_modes & MODE_FULLSCREEN)
                                     {
@@ -4141,7 +4266,7 @@ static void mainloop(void)
                               /* Shape controls! */
                               shape_mode = which;
                               draw_shapes();
-			      update_screen_rect(&r_toolopt);
+                              update_screen_rect(&r_toolopt);
                               draw_tux_text(TUX_GREAT, shapemode_tips[shape_mode], 1);
                               playsound(screen, 0, SND_CLICK, 0, SNDPOS_RIGHT, SNDDIST_NEAR);
                               update_screen_rect(&r_tuxarea);
@@ -4233,10 +4358,9 @@ static void mainloop(void)
                                     }
                                 }
                             }
-
-                          /* Label controls! */
                           else if (cur_tool == TOOL_LABEL)
                             {
+                              /* Label controls! */
                               int control_sound = -1;
 
                               if (which & 4)
@@ -4270,7 +4394,7 @@ static void mainloop(void)
                                       /* One of the middle buttons: */
                                       if (which & 1)
                                         {
-                                          /*  right button: Italic: */
+                                          /* right button: Italic: */
                                           if (text_state & TTF_STYLE_ITALIC)
                                             {
                                               text_state &= ~TTF_STYLE_ITALIC;
@@ -4304,9 +4428,10 @@ static void mainloop(void)
                                       /* One of the top buttons: */
                                       if (which & 1)
                                         {
-                                          /* Select button: */
+                                          /* Top right: Select button: */
                                           if (cur_label == LABEL_SELECT)
                                             {
+                                              /* Already in label select mode; turn it off */
                                               cur_label = LABEL_LABEL;
                                               update_canvas(0, 0, WINDOW_WIDTH - r_ttoolopt.w, (button_h * buttons_tall) + r_ttoolopt.h);
                                               if (onscreen_keyboard)
@@ -4320,9 +4445,12 @@ static void mainloop(void)
                                                   SDL_StartTextInput();
 
                                                 }
+                                              draw_tux_text(TUX_GREAT, tool_tips[TOOL_LABEL], 1);
+                                              playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
                                             }
                                           else
                                             {
+                                              /* Want to select a label */
                                               if (are_labels())
                                                 {
                                                   update_canvas_ex_r(kbd_rect.x - r_ttools.w, kbd_rect.y,
@@ -4342,13 +4470,66 @@ static void mainloop(void)
                                                       have_to_rec_label_node = TRUE;
                                                       add_label_node(0, 0, 0, 0, NULL);
                                                       label_node_to_edit = NULL;
-
                                                     }
 
                                                   cur_label = LABEL_SELECT;
                                                   highlight_label_nodes();
+
+                                                  draw_tux_text(TUX_GREAT, TIP_LABEL_SELECTOR_ENABLED, 1);
+                                                  playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
                                                 }
                                             }
+                                          toolopt_changed = 1;
+                                        }
+                                      else
+                                        {
+                                          /* Top left: "Apply" label */
+                                          if (cur_label == LABEL_APPLY)
+                                            {
+                                              /* Already in label apply mode; turn it off */
+                                              cur_label = LABEL_LABEL;
+                                              update_canvas(0, 0, WINDOW_WIDTH - r_ttoolopt.w, (button_h * buttons_tall) + r_ttoolopt.h);
+                                              if (onscreen_keyboard)
+                                                {
+                                                  SDL_BlitSurface(kbd->surface, &kbd->rect, screen, &kbd_rect);
+                                                  update_screen_rect(&kbd_rect);
+                                                }
+
+                                              draw_tux_text(TUX_GREAT, tool_tips[TOOL_LABEL], 1);
+                                              playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
+                                            }
+                                          else
+                                            {
+                                              /* Want to apply a label */
+                                              if (are_labels())
+                                                {
+                                                  update_canvas_ex_r(kbd_rect.x - r_ttools.w, kbd_rect.y,
+                                                                     kbd_rect.x + kbd_rect.w, kbd_rect.y + kbd_rect.h,
+                                                                     1);
+                                                  if (texttool_len > 0)
+                                                    {
+                                                      rec_undo_buffer();
+                                                      do_render_cur_text(1);
+                                                      texttool_len = 0;
+                                                      cursor_textwidth = 0;
+                                                      label_node_to_edit = NULL;
+                                                    }
+                                                  else if (label_node_to_edit)
+                                                    {
+                                                      rec_undo_buffer();
+                                                      have_to_rec_label_node = TRUE;
+                                                      add_label_node(0, 0, 0, 0, NULL);
+                                                      label_node_to_edit = NULL;
+                                                    }
+
+                                                  cur_label = LABEL_APPLY;
+                                                  highlight_label_nodes();
+
+                                                  draw_tux_text(TUX_GREAT, TIP_LABEL_APPLIER_ENABLED, 1);
+                                                  playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
+                                                }
+                                            }
+
                                           toolopt_changed = 1;
                                         }
                                     }
@@ -4379,12 +4560,90 @@ static void mainloop(void)
                                 }
                               draw_fonts();
                               update_screen_rect(&r_toolopt);
+                            }
+                          else if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
+                            {
+                              /* Brush spacing */
 
+                              int prev_size, chosen, new_size, frame_w, w, h, control_sound;
+
+                              prev_size = brushes_spacing[cur_brush];
+                              chosen = ((BRUSH_SPACING_SIZES + 1) * (event.button.x - r_ttoolopt.x)) / r_ttoolopt.w;
+
+                              frame_w = img_brushes[cur_brush]->w / abs(brushes_frames[cur_brush]);
+                              w = frame_w / (brushes_directional[cur_brush] ? 3 : 1);
+                              h = img_brushes[cur_brush]->h / (brushes_directional[cur_brush] ? 3 : 1);
+
+                              /* Spacing ranges from 0px to "N x the max dimension of the brush"
+                                 (so a 48x48 brush would have a spacing of 48 if the center option is chosen) */
+                              new_size = (chosen * max(w, h) * BRUSH_SPACING_MAX_MULTIPLIER) / BRUSH_SPACING_SIZES;
+
+                              if (new_size != prev_size)
+                                {
+                                  char tmp_tip[256];
+                                  int numer, denom;
+
+                                  brushes_spacing[cur_brush] = new_size;
+                                  draw_brushes_spacing();
+                                  update_screen_rect(&r_toolopt);
+
+                                  if (new_size < prev_size)
+                                    control_sound = SND_SHRINK;
+                                  else
+                                    control_sound = SND_GROW;
+
+                                  if (new_size == 0)
+                                    {
+                                      draw_tux_text(TUX_GREAT, TIP_BRUSH_SPACING_ZERO, 1);
+                                    }
+                                  else if (new_size / max(w, h) == 1)
+                                    {
+                                      draw_tux_text(TUX_GREAT, TIP_BRUSH_SPACING_SAME, 1);
+                                    }
+                                  else if (new_size > max(w, h))
+                                    {
+                                      double ratio, i, f;
+
+                                      ratio = (float) new_size / (float) max(w, h);
+                                      f = modf(ratio, &i);
+
+                                      if (f > (SLOPPY_FRAC_MAX - SLOPPY_FRAC_MIN) / SLOPPY_FRAC_MAX)
+                                        {
+                                          i++;
+                                          f = 0.0;
+                                        }
+                                      else if (f < SLOPPY_FRAC_MIN / SLOPPY_FRAC_MAX)
+                                        {
+                                          f = 0.0;
+                                        }
+
+                                      if (f == 0.0)
+                                        {
+                                          snprintf(tmp_tip, sizeof(tmp_tip), gettext(TIP_BRUSH_SPACING_MORE), (int) i);
+                                        }
+                                      else
+                                        {
+                                          sloppy_frac(f, &numer, &denom);
+
+                                          snprintf(tmp_tip, sizeof(tmp_tip), gettext(TIP_BRUSH_SPACING_MORE_FRAC), (int) i, numer, denom);
+                                        }
+
+                                      draw_tux_text(TUX_GREAT, tmp_tip, 1);
+                                    }
+                                  else if (new_size < max(w, h))
+                                    {
+                                      sloppy_frac((float) new_size / (float) max(w, h), &numer, &denom);
+                                      snprintf(tmp_tip, sizeof(tmp_tip), gettext(TIP_BRUSH_SPACING_LESS), numer, denom);
+                                      draw_tux_text(TUX_GREAT, tmp_tip, 1);
+                                    }
+
+                                  playsound(screen, 0, control_sound, 0, SNDPOS_CENTER, SNDDIST_NEAR);
+                                }
                             }
                         }
                       else
                         {
-                          /* scroll button */
+                          /* Scroll buttons */
                           int is_upper = event.button.y < r_toolopt.y + button_h / 2;
 
                           if ((is_upper && *thing_scroll > 0)   /* upper arrow */
@@ -4395,17 +4654,17 @@ static void mainloop(void)
                               do_draw = 1;
                               playsound(screen, 1, SND_SCROLL, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
 
-                              if (scrolltimer != NULL)
+                              if (scrolltimer_selector != TIMERID_NONE)
                                 {
-                                  SDL_RemoveTimer(scrolltimer);
-                                  scrolltimer = NULL;
+                                  SDL_RemoveTimer(scrolltimer_selector);
+                                  scrolltimer_selector = TIMERID_NONE;
                                 }
 
-                              if (!scrolling && event.type == SDL_MOUSEBUTTONDOWN)
+                              if (!scrolling_selector && event.type == SDL_MOUSEBUTTONDOWN)
                                 {
                                   DEBUG_PRINTF("Starting scrolling\n");
-                                  memcpy(&scrolltimer_event, &event, sizeof(SDL_Event));
-                                  scrolltimer_event.type = TP_SDL_MOUSEBUTTONSCROLL;
+                                  memcpy(&scrolltimer_selector_event, &event, sizeof(SDL_Event));
+                                  scrolltimer_selector_event.type = TP_SDL_MOUSEBUTTONSCROLL;
 
                                   /*
                                   * We enable the timer subsystem only when needed (e.g., to use SDL_AddTimer() needed
@@ -4414,29 +4673,29 @@ static void mainloop(void)
                                   * energy impact on the Mac.
                                   */
 
-                                  scrolling = 1;
+                                  scrolling_selector = 1;
                                   SDL_InitSubSystem(SDL_INIT_TIMER);
-                                  scrolltimer =
-                                    SDL_AddTimer(REPEAT_SPEED, scrolltimer_callback, (void *)&scrolltimer_event);
+                                  scrolltimer_selector =
+                                    SDL_AddTimer(REPEAT_SPEED, scrolltimer_selector_callback, (void *)&scrolltimer_selector_event);
                                 }
                               else
                                 {
                                   DEBUG_PRINTF("Continuing scrolling\n");
-                                  scrolltimer =
-                                    SDL_AddTimer(REPEAT_SPEED / 3, scrolltimer_callback, (void *)&scrolltimer_event);
+                                  scrolltimer_selector =
+                                    SDL_AddTimer(REPEAT_SPEED / 3, scrolltimer_selector_callback, (void *)&scrolltimer_selector_event);
                                 }
 
                               if (*thing_scroll == 0 || *thing_scroll / gd_items.cols ==  num_rows_needed - gd_items.rows)
                                 {
                                   do_setcursor(cursor_arrow);
-                                  if (scrolling)
+                                  if (scrolling_selector)
                                     {
-                                      if (scrolltimer != NULL)
+                                      if (scrolltimer_selector != TIMERID_NONE)
                                         {
-                                          SDL_RemoveTimer(scrolltimer);
-                                          scrolltimer = NULL;
+                                          SDL_RemoveTimer(scrolltimer_selector);
+                                          scrolltimer_selector = TIMERID_NONE;
                                         }
-                                      scrolling = 0;
+                                      scrolling_selector = 0;
                                       SDL_QuitSubSystem(SDL_INIT_TIMER);
                                     }
                                 }
@@ -4452,7 +4711,10 @@ static void mainloop(void)
                           render_brush();
 
                           if (do_draw)
-                            draw_brushes();
+                            {
+                              draw_brushes();
+                              show_brush_tip();
+                            }
                         }
                       else if (cur_tool == TOOL_ERASER)
                         {
@@ -4570,7 +4832,7 @@ static void mainloop(void)
                           /* Enable or disable color selector: */
                           draw_colors(stamp_colorable(cur_stamp[stamp_group])
                                       || stamp_tintable(cur_stamp[stamp_group]));
-                          if (!scrolling)
+                          if (!scrolling_selector)
                             {
                               stamp_xor(canvas->w / 2, canvas->h / 2);
                               stamp_xored = 1;
@@ -4649,20 +4911,32 @@ static void mainloop(void)
 
                       if (whichc >= 0 && whichc < NUM_COLORS)
                         {
+                          int old_color;
+
+                          old_color = cur_color;
                           cur_color = whichc;
                           draw_tux_text(TUX_KISS, color_names[cur_color], 1);
 
-                          if (cur_color == (unsigned)(NUM_COLORS - 1) || cur_color == (unsigned)(NUM_COLORS - 2))
+                          if (cur_color == (unsigned) COLOR_PICKER || cur_color == (unsigned) COLOR_SELECTOR || cur_color == (unsigned) COLOR_MIXER)
                             {
+                              int chose_color;
+
                               disable_avail_tools();
                               draw_toolbar();
                               draw_colors(COLORSEL_CLOBBER_WIPE);
                               draw_none();
 
-                              if (cur_color == (unsigned)(NUM_COLORS - 1))
-                                do_color_picker();
-                              else
-                                do_color_sel();
+                              chose_color = 0;
+                              if (cur_color == (unsigned) COLOR_PICKER)
+                                chose_color = do_color_picker();
+                              else if (cur_color == (unsigned) COLOR_SELECTOR)
+                                chose_color = do_color_sel(0);
+                              else if (cur_color == (unsigned) COLOR_MIXER)
+                                {
+                                  chose_color = do_color_mix();
+                                  if (!chose_color)
+                                    cur_color = old_color;
+                                }
 
                               if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
                                 {
@@ -4701,7 +4975,10 @@ static void mainloop(void)
                               else if (cur_tool == TOOL_FILL)
                                 draw_fills();
 
-                              playsound(screen, 1, SND_BUBBLE, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+                              if (chose_color)
+                                playsound(screen, 1, SND_BUBBLE, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+                              else
+                                playsound(screen, 1, SND_CLICK, 1, SNDPOS_CENTER, SNDDIST_NEAR);
 
                               SDL_Flip(screen);
                             }
@@ -4712,286 +4989,304 @@ static void mainloop(void)
                               playsound(screen, 1, SND_BUBBLE, 1, event.button.x, SNDDIST_NEAR);
                             }
 
-                          render_brush();
-
-
-                          if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
-                            do_render_cur_text(0);
-                          else if (cur_tool == TOOL_MAGIC)
-                            magic_funcs[magics[magic_group][cur_magic[magic_group]].handle_idx].set_color(
-                              magic_api_struct,
-                              color_hexes[cur_color][0],
-                              color_hexes[cur_color][1],
-                              color_hexes[cur_color][2]);
+                          handle_color_changed();
                         }
                     }
                 }
               else if (HIT(r_canvas) && valid_click(event.button.button) && keyglobal == 0)
                 {
-                  /* Draw something! */
-                  old_x = event.button.x - r_canvas.x;
-                  old_y = event.button.y - r_canvas.y;
-                  /* if (old_y < r_canvas.h/2) */
-                  /* { */
-                  /*            keybd_position = 0; */
-                  /* } */
-                  /* else */
-                  /* { */
-                  /*            keybd_position = 1; */
-                  /* } */
+                  const Uint8 * kbd_state;
 
-                  if (been_saved)
+                  kbd_state = SDL_GetKeyboardState(NULL);
+
+                  if ((kbd_state[SDL_SCANCODE_LCTRL] || kbd_state[SDL_SCANCODE_RCTRL]) && colors_are_selectable)
                     {
-                      been_saved = 0;
+                      int chose_color;
 
-                      if (!disable_save)
-                        tool_avail[TOOL_SAVE] = 1;
+                      /* Holding [Ctrl] while clicking; switch to temp-mode color selector! */
+                      chose_color = do_color_sel(1);
 
-                      draw_toolbar();
-                      update_screen_rect(&r_tools);
-                    }
+                      draw_cur_tool_tip();
+                      draw_colors(COLORSEL_FORCE_REDRAW);
 
-                  if (cur_tool == TOOL_BRUSH)
-                    {
-                      /* Start painting! */
-                      if (!emulate_button_pressed)
-                        rec_undo_buffer();
-
-                      /* (Arbitrarily large, so we draw once now) */
-                      reset_brush_counter();
-
-                      /* brush_draw(old_x, old_y, old_x, old_y, 1); fixes SF #1934883? */
-                      playsound(screen, 0, paintsound(img_cur_brush_w), 1, event.button.x, SNDDIST_NEAR);
-
-                      if (mouseaccessibility)
-                        emulate_button_pressed = !emulate_button_pressed;
-                    }
-                  else if (cur_tool == TOOL_LINES)
-                    {
-                      /* Start a line! */
-
-                      if (!emulate_button_pressed)
+                      if (chose_color)
                         {
-                          rec_undo_buffer();
+                          playsound(screen, 1, SND_BUBBLE, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+                          cur_color = COLOR_SELECTOR;
+                          handle_color_changed();
+                        }
+                      else
+                        playsound(screen, 1, SND_CLICK, 1, SNDPOS_CENTER, SNDDIST_NEAR);
 
-                          line_start_x = old_x;
-                          line_start_y = old_y;
+                      SDL_Flip(screen);
+                    }
+                  else
+                    {
+                      /* Draw something! */
+                      old_x = event.button.x - r_canvas.x;
+                      old_y = event.button.y - r_canvas.y;
+                      /* if (old_y < r_canvas.h/2) */
+                      /* { */
+                      /*            keybd_position = 0; */
+                      /* } */
+                      /* else */
+                      /* { */
+                      /*            keybd_position = 1; */
+                      /* } */
+
+                      if (been_saved)
+                        {
+                          been_saved = 0;
+
+                          if (!disable_save)
+                            tool_avail[TOOL_SAVE] = 1;
+
+                          draw_toolbar();
+                          update_screen_rect(&r_tools);
+                        }
+
+                      if (cur_tool == TOOL_BRUSH)
+                        {
+                          /* Start painting! */
+                          if (!emulate_button_pressed)
+                            rec_undo_buffer();
 
                           /* (Arbitrarily large, so we draw once now) */
                           reset_brush_counter();
 
-                          /* brush_draw(old_x, old_y, old_x, old_y, 1); fixes sf #1934883? */
+                          /* brush_draw(old_x, old_y, old_x, old_y, 1); fixes SF #1934883? */
+                          playsound(screen, 0, paintsound(img_cur_brush_w), 1, event.button.x, SNDDIST_NEAR);
 
-                          playsound(screen, 1, SND_LINE_START, 1, event.button.x, SNDDIST_NEAR);
-                          draw_tux_text(TUX_BORED, TIP_LINE_START, 1);
-                        }
-                      if (mouseaccessibility)
-                        emulate_button_pressed = !emulate_button_pressed;
-                    }
-                  else if (cur_tool == TOOL_SHAPES)
-                    {
-                      if (shape_tool_mode == SHAPE_TOOL_MODE_DONE)
-                        {
-                          /* Start drawing a shape! */
-
-                          rec_undo_buffer();
-
-                          shape_start_x = old_x;
-                          shape_start_y = old_y;
-
-                          shape_tool_mode = SHAPE_TOOL_MODE_STRETCH;
-
-                          playsound(screen, 1, SND_LINE_START, 1, event.button.x, SNDDIST_NEAR);
-                          draw_tux_text(TUX_BORED, TIP_SHAPE_START, 1);
                           if (mouseaccessibility)
-                            emulate_button_pressed = 1;
-                        }
-                      else if (shape_tool_mode == SHAPE_TOOL_MODE_ROTATE)
-                        {
-                          /* Draw the shape with the brush! */
-
-                          /* Only draw here in mouse accessibility mode as there IS a mouse */
-                          /* See #300881 for the reasons that this is deplaced to draw in mouse release */
-                          if (mouseaccessibility)
-                            {
-                              /* (Arbitrarily large...) */
-                              reset_brush_counter();
-
-                              playsound(screen, 1, SND_LINE_END, 1, event.button.x, SNDDIST_NEAR);
-                              do_shape(shape_start_x, shape_start_y, shape_current_x, shape_current_y,
-                                       shape_rotation(shape_start_x, shape_start_y,
-                                                      event.button.x - r_canvas.x, event.button.y - r_canvas.y), 1);
-
-                              shape_tool_mode = SHAPE_TOOL_MODE_DONE;
-                              draw_tux_text(TUX_GREAT, shape_tool_tips[simple_shapes ? SHAPE_COMPLEXITY_SIMPLE : SHAPE_COMPLEXITY_NORMAL], 1);
-                            }
-                        }
-                      else if (shape_tool_mode == SHAPE_TOOL_MODE_STRETCH)
-                        /* Only reached in accessibility mode */
-                        emulate_button_pressed = 0;
-                    }
-                  else if (cur_tool == TOOL_MAGIC)
-                    {
-                      int grp;
-                      int cur;
-
-                      grp = magic_group;
-                      cur = cur_magic[grp];
-
-                      if (!emulate_button_pressed)
-                        {
-                          int undo_ctr;
-                          SDL_Surface *last;
-
-                          /* Start doing magic! */
-
-                          /* These switchout/in are here for Magic tools that abuse the canvas
-                             by drawing widgets on them; you don't want the widgets recorded as part
-                             of the canvas in the undo buffer!
-                             HOWEVER, as Pere noted in 2010.March, this causes many 'normal' Magic
-                             tools to not work right, because they lose their record of the 'original'
-                             canvas, before the user started using the tool (e.g., Rails, Perspective, Zoom).
-                             FIXME: Some in-between solution is needed (a 'clean up the canvas'/'dirty the canvas'
-                             pair of functions for the widgety abusers?) -bjk 2010.03.22 */
-
-                          /* magic_switchout(canvas); *//* <-- FIXME: I dislike this -bjk 2009.10.13 */
-                          rec_undo_buffer();
-                          /* magic_switchin(canvas); *//* <-- FIXME: I dislike this -bjk 2009.10.13 */
-
-                          if (cur_undo > 0)
-                            undo_ctr = cur_undo - 1;
-                          else
-                            undo_ctr = NUM_UNDO_BUFS - 1;
-
-                          last = undo_bufs[undo_ctr];
-
-                          update_rect.x = 0;
-                          update_rect.y = 0;
-                          update_rect.w = 0;
-                          update_rect.h = 0;
-
-                          reset_touched();
-
-                          magic_funcs[magics[grp][cur].handle_idx].click(magic_api_struct,
-                                                                         magics[grp][cur].idx,
-                                                                         magics[grp][cur].mode,
-                                                                         canvas, last, old_x, old_y, &update_rect);
-
-                          draw_tux_text(TUX_GREAT, magics[grp][cur].tip[magic_modeint(magics[grp][cur].mode)], 1);
-
-                          update_canvas(update_rect.x, update_rect.y,
-                                        update_rect.x + update_rect.w, update_rect.y + update_rect.h);
-                        }
-
-                      if (mouseaccessibility)
-                        {
-                          if (magics[grp][cur].mode != MODE_FULLSCREEN && magics[grp][cur].mode != MODE_ONECLICK)     /* Note: some non-fullscreen tools are also click-only (not click-and-drag) -bjk 2011.04.26 */
                             emulate_button_pressed = !emulate_button_pressed;
                         }
-                    }
-                  else if (cur_tool == TOOL_ERASER)
-                    {
-                      /* Erase! */
-                      if (!emulate_button_pressed)
-                        rec_undo_buffer();
-
-                      do_eraser(old_x, old_y, 1);
-
-                      if (mouseaccessibility)
-                        emulate_button_pressed = !emulate_button_pressed;
-                    }
-                  else if (cur_tool == TOOL_FILL)
-                    {
-                      Uint32 draw_color, canv_color;
-
-                      /* Fill */
-
-                      draw_color = SDL_MapRGB(canvas->format,
-                                     color_hexes[cur_color][0],
-                                     color_hexes[cur_color][1],
-                                     color_hexes[cur_color][2]);
-                      canv_color = getpixels[canvas->format->BytesPerPixel] (canvas, old_x, old_y);
-
-                      fill_x = old_x;
-                      fill_y = old_y;
-
-                      if (would_flood_fill(canvas, draw_color, canv_color))
+                      else if (cur_tool == TOOL_LINES)
                         {
-                          int x1, y1, x2, y2;
-                          SDL_Surface * last;
-                          int undo_ctr;
+                          /* Start a line! */
 
-                          /* We only bother recording an undo buffer
-                             (which may kill our redos) if we're about
-                             to actually change the picture */
-                          rec_undo_buffer();
-                          x1 = x2 = old_x;
-                          y1 = y2 = old_y;
-
-                          if (cur_undo > 0)
-                            undo_ctr = cur_undo - 1;
-                          else
-                            undo_ctr = NUM_UNDO_BUFS - 1;
-
-                          last = undo_bufs[undo_ctr];
-
-
-                          for (y1 = 0; y1 < canvas->h; y1++) {
-                            for (x1 = 0; x1 < canvas->w; x1++) {
-                              sim_flood_touched[(y1 * canvas->w) + x1] = 0;
-                            }
-                          }
-
-                          if (cur_fill == FILL_FLOOD)
+                          if (!emulate_button_pressed)
                             {
-                              /* Flood fill a solid color */
-                              do_flood_fill(screen, texture, renderer, last, canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2, sim_flood_touched);
+                              rec_undo_buffer();
 
-                              update_canvas(x1, y1, x2, y2);
+                              line_start_x = old_x;
+                              line_start_y = old_y;
+
+                              /* (Arbitrarily large, so we draw once now) */
+                              reset_brush_counter();
+
+                              /* brush_draw(old_x, old_y, old_x, old_y, 1); fixes sf #1934883? */
+
+                              playsound(screen, 1, SND_LINE_START, 1, event.button.x, SNDDIST_NEAR);
+                              draw_tux_text(TUX_BORED, TIP_LINE_START, 1);
                             }
-                          else
-                            {
-                              SDL_Surface * tmp_canvas;
-
-                              tmp_canvas = SDL_CreateRGBSurface(canvas->flags,
-                                canvas->w, canvas->h, canvas->format->BitsPerPixel,
-                                canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
-                              SDL_BlitSurface(canvas, NULL, tmp_canvas, NULL);
-
-                              simulate_flood_fill(screen, texture, renderer, last, tmp_canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2, sim_flood_touched);
-                              SDL_FreeSurface(tmp_canvas);
-
-                              sim_flood_x1 = x1;
-                              sim_flood_y1 = y1;
-                              sim_flood_x2 = x2;
-                              sim_flood_y2 = y2;
-
-                              if (cur_fill == FILL_GRADIENT_RADIAL)
-                                {
-                                  /* Radial gradient */
-                                  draw_radial_gradient(canvas, sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2,
-                                    old_x, old_y, draw_color, sim_flood_touched);
-                                }
-                              else if (cur_fill == FILL_GRADIENT_LINEAR)
-                                {
-                                  /* Start a linear gradient */
-                                  draw_linear_gradient(canvas, canvas, sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2,
-                                    fill_x, fill_y, old_x, old_y + 1, draw_color, sim_flood_touched);
-                                  fill_drag_started = 1;
-                                }
-                              else if (cur_fill == FILL_BRUSH)
-                                {
-                                  /* Start painting within the fill area */
-                                  draw_brush_fill(canvas, sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2,
-                                    fill_x, fill_y, old_x, old_y, draw_color, sim_flood_touched, &x1, &y1, &x2, &y2);
-                                }
-
-                              update_canvas(x1, y1, x2, y2);
-                            }
-
-                            draw_tux_text(TUX_GREAT, fill_tips[cur_fill], 1);
+                          if (mouseaccessibility)
+                            emulate_button_pressed = !emulate_button_pressed;
                         }
-                    }
+                      else if (cur_tool == TOOL_SHAPES)
+                        {
+                          if (shape_tool_mode == SHAPE_TOOL_MODE_DONE)
+                            {
+                              /* Start drawing a shape! */
+
+                              rec_undo_buffer();
+
+                              shape_start_x = old_x;
+                              shape_start_y = old_y;
+
+                              shape_tool_mode = SHAPE_TOOL_MODE_STRETCH;
+
+                              playsound(screen, 1, SND_LINE_START, 1, event.button.x, SNDDIST_NEAR);
+                              draw_tux_text(TUX_BORED, TIP_SHAPE_START, 1);
+                              if (mouseaccessibility)
+                                emulate_button_pressed = 1;
+                            }
+                          else if (shape_tool_mode == SHAPE_TOOL_MODE_ROTATE)
+                            {
+                              /* Draw the shape with the brush! */
+
+                              /* Only draw here in mouse accessibility mode as there IS a mouse */
+                              /* See #300881 for the reasons that this is deplaced to draw in mouse release */
+                              if (mouseaccessibility)
+                                {
+                                  /* (Arbitrarily large...) */
+                                  reset_brush_counter();
+
+                                  playsound(screen, 1, SND_LINE_END, 1, event.button.x, SNDDIST_NEAR);
+                                  do_shape(shape_start_x, shape_start_y, shape_current_x, shape_current_y,
+                                           shape_rotation(shape_start_x, shape_start_y,
+                                                          event.button.x - r_canvas.x, event.button.y - r_canvas.y), 1);
+
+                                  shape_tool_mode = SHAPE_TOOL_MODE_DONE;
+                                  draw_tux_text(TUX_GREAT, shape_tool_tips[simple_shapes ? SHAPE_COMPLEXITY_SIMPLE : SHAPE_COMPLEXITY_NORMAL], 1);
+                                }
+                            }
+                          else if (shape_tool_mode == SHAPE_TOOL_MODE_STRETCH)
+                            /* Only reached in accessibility mode */
+                            emulate_button_pressed = 0;
+                        }
+                      else if (cur_tool == TOOL_MAGIC)
+                        {
+                          int grp;
+                          int cur;
+
+                          grp = magic_group;
+                          cur = cur_magic[grp];
+
+                          if (!emulate_button_pressed)
+                            {
+                              int undo_ctr;
+                              SDL_Surface *last;
+
+                              /* Start doing magic! */
+
+                              /* These switchout/in are here for Magic tools that abuse the canvas
+                                 by drawing widgets on them; you don't want the widgets recorded as part
+                                 of the canvas in the undo buffer!
+                                 HOWEVER, as Pere noted in 2010.March, this causes many 'normal' Magic
+                                 tools to not work right, because they lose their record of the 'original'
+                                 canvas, before the user started using the tool (e.g., Rails, Perspective, Zoom).
+                                 FIXME: Some in-between solution is needed (a 'clean up the canvas'/'dirty the canvas'
+                                 pair of functions for the widgety abusers?) -bjk 2010.03.22 */
+
+                              /* magic_switchout(canvas); *//* <-- FIXME: I dislike this -bjk 2009.10.13 */
+                              rec_undo_buffer();
+                              /* magic_switchin(canvas); *//* <-- FIXME: I dislike this -bjk 2009.10.13 */
+
+                              if (cur_undo > 0)
+                                undo_ctr = cur_undo - 1;
+                              else
+                                undo_ctr = NUM_UNDO_BUFS - 1;
+
+                              last = undo_bufs[undo_ctr];
+
+                              update_rect.x = 0;
+                              update_rect.y = 0;
+                              update_rect.w = 0;
+                              update_rect.h = 0;
+
+                              reset_touched();
+
+                              magic_funcs[magics[grp][cur].handle_idx].click(magic_api_struct,
+                                                                             magics[grp][cur].idx,
+                                                                             magics[grp][cur].mode,
+                                                                             canvas, last, old_x, old_y, &update_rect);
+
+                              draw_tux_text(TUX_GREAT, magics[grp][cur].tip[magic_modeint(magics[grp][cur].mode)], 1);
+
+                              update_canvas(update_rect.x, update_rect.y,
+                                            update_rect.x + update_rect.w, update_rect.y + update_rect.h);
+                            }
+
+                          if (mouseaccessibility)
+                            {
+                              if (magics[grp][cur].mode != MODE_FULLSCREEN && magics[grp][cur].mode != MODE_ONECLICK)     /* Note: some non-fullscreen tools are also click-only (not click-and-drag) -bjk 2011.04.26 */
+                                emulate_button_pressed = !emulate_button_pressed;
+                            }
+                        }
+                      else if (cur_tool == TOOL_ERASER)
+                        {
+                          /* Erase! */
+                          if (!emulate_button_pressed)
+                            rec_undo_buffer();
+
+                          do_eraser(old_x, old_y, 1);
+
+                          if (mouseaccessibility)
+                            emulate_button_pressed = !emulate_button_pressed;
+                        }
+                      else if (cur_tool == TOOL_FILL)
+                        {
+                          Uint32 draw_color, canv_color;
+
+                          /* Fill */
+
+                          draw_color = SDL_MapRGB(canvas->format,
+                                         color_hexes[cur_color][0],
+                                         color_hexes[cur_color][1],
+                                         color_hexes[cur_color][2]);
+                          canv_color = getpixels[canvas->format->BytesPerPixel] (canvas, old_x, old_y);
+
+                          fill_x = old_x;
+                          fill_y = old_y;
+
+                          if (would_flood_fill(canvas, draw_color, canv_color))
+                            {
+                              int x1, y1, x2, y2;
+                              SDL_Surface * last;
+                              int undo_ctr;
+
+                              /* We only bother recording an undo buffer
+                                 (which may kill our redos) if we're about
+                                 to actually change the picture */
+                              rec_undo_buffer();
+                              x1 = x2 = old_x;
+                              y1 = y2 = old_y;
+
+                              if (cur_undo > 0)
+                                undo_ctr = cur_undo - 1;
+                              else
+                                undo_ctr = NUM_UNDO_BUFS - 1;
+
+                              last = undo_bufs[undo_ctr];
+
+
+                              for (y1 = 0; y1 < canvas->h; y1++) {
+                                for (x1 = 0; x1 < canvas->w; x1++) {
+                                  sim_flood_touched[(y1 * canvas->w) + x1] = 0;
+                                }
+                              }
+
+                              if (cur_fill == FILL_FLOOD)
+                                {
+                                  /* Flood fill a solid color */
+                                  do_flood_fill(screen, texture, renderer, last, canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2, sim_flood_touched);
+
+                                  update_canvas(x1, y1, x2, y2);
+                                }
+                              else
+                                {
+                                  SDL_Surface * tmp_canvas;
+
+                                  tmp_canvas = SDL_CreateRGBSurface(canvas->flags,
+                                    canvas->w, canvas->h, canvas->format->BitsPerPixel,
+                                    canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
+                                  SDL_BlitSurface(canvas, NULL, tmp_canvas, NULL);
+
+                                  simulate_flood_fill(screen, texture, renderer, last, tmp_canvas, old_x, old_y, draw_color, canv_color, &x1, &y1, &x2, &y2, sim_flood_touched);
+                                  SDL_FreeSurface(tmp_canvas);
+
+                                  sim_flood_x1 = x1;
+                                  sim_flood_y1 = y1;
+                                  sim_flood_x2 = x2;
+                                  sim_flood_y2 = y2;
+
+                                  if (cur_fill == FILL_GRADIENT_RADIAL)
+                                    {
+                                      /* Radial gradient */
+                                      draw_radial_gradient(canvas, sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2,
+                                        old_x, old_y, draw_color, sim_flood_touched);
+                                    }
+                                  else if (cur_fill == FILL_GRADIENT_LINEAR)
+                                    {
+                                      /* Start a linear gradient */
+                                      draw_linear_gradient(canvas, canvas, sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2,
+                                        fill_x, fill_y, old_x, old_y + 1, draw_color, sim_flood_touched);
+                                      fill_drag_started = 1;
+                                    }
+                                  else if (cur_fill == FILL_BRUSH)
+                                    {
+                                      /* Start painting within the fill area */
+                                      draw_brush_fill(canvas, sim_flood_x1, sim_flood_y1, sim_flood_x2, sim_flood_y2,
+                                        fill_x, fill_y, old_x, old_y, draw_color, sim_flood_touched, &x1, &y1, &x2, &y2);
+                                    }
+
+                                  update_canvas(x1, y1, x2, y2);
+                                }
+
+                                draw_tux_text(TUX_GREAT, fill_tips[cur_fill], 1);
+                            }
+                        }
+                    
                   else if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
                     {
                       if (onscreen_keyboard && !kbd)
@@ -5004,130 +5299,72 @@ static void mainloop(void)
                       /* Text and Label Tools! */
                       if (cur_tool == TOOL_LABEL && cur_label == LABEL_SELECT)
                         {
-                          label_node_to_edit = search_label_list(&highlighted_label_node, old_x, old_y, 0);
-                          if (label_node_to_edit)
+                              /* Click to select a node to edit */
+
+                              DEBUG_PRINTF("Searching for label @ (%d,%d)\n", old_x, old_y);
+
+                              label_node_to_edit = search_label_list(&highlighted_label_node, old_x, old_y, 0);
+
+                              if (label_node_to_edit)
+                                {
+                                  DEBUG_PRINTF("Got a label: \"%ls\" @ (%d,%d)\n",
+                                               label_node_to_edit->save_texttool_str, old_x, old_y);
+                                  DEBUG_PRINTF("Cursor now @ (%d,%d); width = %d\n",
+                                               cursor_x, cursor_y, cursor_textwidth);
+                                  select_label_node(&old_x, &old_y);
+                                }
+                            }
+                          else if (cur_tool == TOOL_LABEL && cur_label == LABEL_APPLY)
                             {
-                              cur_label = LABEL_LABEL;
-                              cur_thing = label_node_to_edit->save_cur_font;
-                              do_setcursor(cursor_insertion);
-                              i = 0;
-                              label_node_to_edit->is_enabled = FALSE;
-                              derender_node(&label_node_to_edit);
+                              /* Click to select a node to apply it to the canvas */
 
-                              texttool_len = select_texttool_len;
-                              while (i < texttool_len)
-                                {
-                                  texttool_str[i] = select_texttool_str[i];
-                                  i = i + 1;
-                                }
-                              texttool_str[i] = L'\0';
-                              cur_color = select_color;
-                              old_x = select_x;
-                              old_y = select_y;
-                              cur_font = select_cur_font;
-                              text_state = select_text_state;
-                              text_size = select_text_size;
-                              // int j;
-                              for (j = 0; j < num_font_families; j++)
-                                {
-                                  if (user_font_families[j] && user_font_families[j]->handle)
-                                    {
-                                      TuxPaint_Font_CloseFont(user_font_families[j]->handle);
-                                      user_font_families[j]->handle = NULL;
-                                    }
-                                }
-                              draw_fonts();
-                              update_screen_rect(&r_toolopt);
-                              if (onscreen_keyboard && kbd)
-                                {
-                                  if (old_y < r_canvas.h / 2)
-                                    kbd_rect.y = r_canvas.h - kbd->surface->h;
-                                  else
-                                    kbd_rect.y = 0;
+                              label_node_to_edit = search_label_list(&highlighted_label_node, old_x, old_y, 0);
+                              if (label_node_to_edit)
+                                apply_label_node(old_x, old_y);
+                            }
+                          else
+                            hide_blinking_cursor();
 
-                                  SDL_BlitSurface(kbd->surface, &kbd->rect, screen, &kbd_rect);
+
+
+                          if (cursor_x != -1 && cursor_y != -1)
+                            {
+                              /*
+                                 if (texttool_len > 0)
+                                 {
+                                 rec_undo_buffer();
+                                 do_render_cur_text(1);
+                                 texttool_len = 0;
+                                 }
+                               */
+                            }
+                          if (onscreen_keyboard && kbd && HIT(kbd_rect) && !(cur_tool == TOOL_LABEL && (cur_label == LABEL_SELECT || cur_label == LABEL_APPLY)))
+                            {
+                              new_kbd = osk_clicked(kbd, old_x - kbd_rect.x + r_canvas.x, old_y - kbd_rect.y + r_canvas.y);
+                              /* keyboard has changed, erase the old, note that the old kbd has yet been freed. */
+                              if (new_kbd != kbd)
+                                {
+                                  kbd = new_kbd;
+                                  update_canvas_ex(kbd_rect.x, kbd_rect.y, kbd_rect.x + kbd_rect.w, kbd_rect.y + kbd_rect.h,
+                                                   0);
+                                  /* set kbd_rect dimensions according to the new keyboard */
+                                  reposition_onscreen_keyboard(-1);
+                                }
+                              SDL_BlitSurface(kbd->surface, &kbd->rect, screen, &kbd_rect);
+                              update_screen_rect(&kbd_rect);
+                            }
+                          else
+                            {
+                              cursor_x = old_x;
+                              cursor_y = old_y;
+                              cursor_left = old_x;
+
+                              if (onscreen_keyboard && !(cur_tool == TOOL_LABEL && (cur_label == LABEL_SELECT || cur_label == LABEL_APPLY)))
+                                {
+                                  update_canvas_ex(kbd_rect.x, kbd_rect.y, kbd_rect.x + kbd_rect.w,
+                                                   kbd_rect.y + kbd_rect.h, 0);
                                   update_screen_rect(&kbd_rect);
-                                }
-
-                              if (onscreen_keyboard && !kbd)
-                                {
-                                  r_tir.y = (float)old_y / render_scale;
-                                  SDL_SetTextInputRect(&r_tir);
-                                  SDL_StartTextInput();
-                                }
-                              do_render_cur_text(0);
-                              draw_colors(COLORSEL_REFRESH);
-                              draw_fonts();
-                            }
-
-                        }
-                      else
-                        hide_blinking_cursor();
-
-
-
-                      if (cursor_x != -1 && cursor_y != -1)
-                        {
-                          /*
-                             if (texttool_len > 0)
-                             {
-                             rec_undo_buffer();
-                             do_render_cur_text(1);
-                             texttool_len = 0;
-                             }
-                           */
-                        }
-                      if (onscreen_keyboard && kbd && HIT(kbd_rect)
-                          && !(cur_tool == TOOL_LABEL && cur_label == LABEL_SELECT))
-                        {
-                          new_kbd = osk_clicked(kbd, old_x - kbd_rect.x + r_canvas.x, old_y - kbd_rect.y + r_canvas.y);
-                          /* keyboard has changed, erase the old, note that the old kbd has yet been freed. */
-                          if (new_kbd != kbd)
-                            {
-                              kbd = new_kbd;
-                              update_canvas_ex(kbd_rect.x, kbd_rect.y, kbd_rect.x + kbd_rect.w, kbd_rect.y + kbd_rect.h,
-                                               0);
-                              /* set kbd_rect dimensions according to the new keyboard */
-                              kbd_rect.x = button_w * 2 + (canvas->w - kbd->surface->w) / 2;
-                              if (kbd_rect.y != 0)
-                                kbd_rect.y = canvas->h - kbd->surface->h;
-                              kbd_rect.w = kbd->surface->w;
-                              kbd_rect.h = kbd->surface->h;
-                            }
-                          SDL_BlitSurface(kbd->surface, &kbd->rect, screen, &kbd_rect);
-                          update_screen_rect(&kbd_rect);
-                        }
-                      else
-                        {
-                          cursor_x = old_x;
-                          cursor_y = old_y;
-                          cursor_left = old_x;
-
-                          if (onscreen_keyboard && kbd && !(cur_tool == TOOL_LABEL && cur_label == LABEL_SELECT))
-                            {
-                              if (old_y < r_canvas.h / 2)
-                                {
-                                  if (kbd_rect.y != r_canvas.h - kbd->surface->h)
-                                    {
-                                      update_canvas_ex(kbd_rect.x, kbd_rect.y, kbd_rect.x + kbd_rect.w,
-                                                       kbd_rect.y + kbd_rect.h, 0);
-                                      update_screen_rect(&kbd_rect);
-                                      kbd_rect.y = r_canvas.h - kbd->surface->h;
-                                      SDL_BlitSurface(kbd->surface, &kbd->rect, screen, &kbd_rect);
-                                      update_screen_rect(&kbd_rect);
-                                    }
-                                }
-                              else
-                                {
-                                  if (kbd_rect.y != 0)
-                                    {
-                                      update_canvas_ex(kbd_rect.x, kbd_rect.y, kbd_rect.x + kbd_rect.w,
-                                                       kbd_rect.y + kbd_rect.h, 0);
-                                      update_screen_rect(&kbd_rect);
-                                      kbd_rect.y = 0;
-                                      SDL_BlitSurface(kbd->surface, &kbd->rect, screen, &kbd_rect);
-                                      update_screen_rect(&kbd_rect);
-                                    }
+                                  reposition_onscreen_keyboard(old_y);
                                 }
                             }
 
@@ -5137,13 +5374,13 @@ static void mainloop(void)
                               SDL_SetTextInputRect(&r_tir);
                               SDL_StartTextInput();
                             }
+                        
+
+                          do_render_cur_text(0);
                         }
-
-                      do_render_cur_text(0);
-                    }
-
-                  button_down = 1;
-                }
+		    }
+                      button_down = 1;
+                   }
               else if (HIT(r_sfx) && valid_click(event.button.button))
                 {
                   /* A sound player button on the lower left has been pressed! */
@@ -5173,8 +5410,8 @@ static void mainloop(void)
 #ifdef __ANDROID__
               start_motion_convert(event);
 #endif
-            }
-
+            
+	}
           else if (event.type == SDL_MOUSEWHEEL && wheely)
             {
               int most = 14;
@@ -5197,7 +5434,7 @@ static void mainloop(void)
                   cur_tool == TOOL_FILL)
                 {
 
-                  /* Left tools scroll */
+                  /* Left tools scroll (via scroll wheel) */
                   if (hit_test(&r_tools, xpos, ypos) && NUM_TOOLS > most + TOOLOFFSET)
                     {
                       int is_upper = (event.wheel.y > 0);
@@ -5244,7 +5481,7 @@ static void mainloop(void)
                       update_screen_rect(&r_tools);
                     }
 
-                  /* Right tool options scroll */
+                  /* Right tool options scroll (via scroll wheel) */
                   else
                     {
                       grid_dims gd_controls;    /* might become 2-by-2 */
@@ -5310,6 +5547,14 @@ static void mainloop(void)
                       else if (cur_tool == TOOL_SHAPES)
                         {
                           if (!disable_shape_controls)
+                            {
+                              gd_controls.rows = 1;
+                              gd_controls.cols = 2;
+                            }
+                        }
+                      else if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
+                        {
+                          if (!disable_brushspacing)
                             {
                               gd_controls.rows = 1;
                               gd_controls.cols = 2;
@@ -5458,18 +5703,32 @@ static void mainloop(void)
             }
           else if (event.type == SDL_MOUSEBUTTONUP)
             {
-              if (scrolling)
+              if (scrolling_selector)
                 {
-                  if (scrolltimer != NULL)
+                  if (scrolltimer_selector != TIMERID_NONE)
                     {
-                      SDL_RemoveTimer(scrolltimer);
-                      scrolltimer = NULL;
+                      SDL_RemoveTimer(scrolltimer_selector);
+                      scrolltimer_selector = TIMERID_NONE;
                     }
-                  scrolling = 0;
+                  scrolling_selector = 0;
                   SDL_QuitSubSystem(SDL_INIT_TIMER);
 
-                  /* printf("Killing scrolling\n"); */
+                  DEBUG_PRINTF("Killing selector scrolling\n");
                 }
+
+              else if (scrolling_tool)
+                {
+                  if (scrolltimer_tool != TIMERID_NONE)
+                    {
+                      SDL_RemoveTimer(scrolltimer_tool);
+                      scrolltimer_tool = TIMERID_NONE;
+                    }
+                  scrolling_tool = 0;
+                  SDL_QuitSubSystem(SDL_INIT_TIMER);
+
+                  DEBUG_PRINTF("Killing tool scrolling\n");
+                }
+
               /* Erase the xor drawed at click */
               else if (cur_tool == TOOL_STAMP && stamp_xored && event.button.button < 4)
                 {
@@ -5643,7 +5902,8 @@ static void mainloop(void)
                                         update_rect.x + update_rect.w, update_rect.y + update_rect.h);
                         }
                     }
-                  else if (cur_tool == TOOL_TEXT || (cur_tool == TOOL_LABEL && cur_label != LABEL_SELECT))
+                  else if (onscreen_keyboard &&
+                           (cur_tool == TOOL_TEXT || (cur_tool == TOOL_LABEL && cur_label != LABEL_SELECT && cur_label != LABEL_APPLY)))
                     {
                       if (onscreen_keyboard && kbd)
                         {
@@ -5761,6 +6021,8 @@ static void mainloop(void)
                 }
               else if (HIT(r_toolopt))
                 {
+                  int control_rows = 0, num_places;
+
                   /* mouse cursor code
                      WARNING: this must be kept in sync with the mouse-click
                      and mouse-click code. (it isn't, currently!) */
@@ -5774,32 +6036,36 @@ static void mainloop(void)
                     {
                     }
 
-		  int control_rows = 0;
+                  /* This if/if/if block is awful -bjk 2022.01.19 */
                   if (cur_tool == TOOL_STAMP && !disable_stamp_controls)
-		    control_rows = 3;
+                    control_rows = 3;
+
                   if (cur_tool == TOOL_LABEL)
                     {
-		      control_rows = 1;
+                      control_rows = 1;
                       if (!disable_stamp_controls)
-			control_rows = 3;
+                        control_rows = 3;
                     }
 
                   if (cur_tool == TOOL_TEXT && !disable_stamp_controls)
-		    control_rows = 2;
+                    control_rows = 2;
                   if (cur_tool == TOOL_MAGIC)
                     {
-		      control_rows = 1;
+                      control_rows = 1;
                       if (!disable_magic_controls)
                         control_rows = 2;
                     }
                   if (cur_tool == TOOL_SHAPES && !disable_shape_controls)
-		    control_rows = 1;
-		  int num_places = buttons_tall * gd_toolopt.cols - control_rows * gd_toolopt.cols;
+                    control_rows = 1;
+                  if ((cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES) && !disable_brushspacing)
+                    control_rows = 1;
+
+                  num_places = buttons_tall * gd_toolopt.cols - control_rows * gd_toolopt.cols;
 
                   if (num_things > num_places)
                     {
                       /* Are there scroll buttons? */
-		      num_places = num_places - gd_toolopt.cols; /* Two scroll buttons occupy one row */
+                      num_places = num_places - gd_toolopt.cols; /* Two scroll buttons occupy one row */
                       if (event.button.y < r_ttoolopt.h + img_scroll_up->h)
                         {
                           /* Up button; is it available? */
@@ -5824,6 +6090,8 @@ static void mainloop(void)
                         {
                           /* One of the selectors: */
 
+                          /* FIXME: Also show "cursor_hand" when touching controls (stamp size, brush spacing, etc.!) (See below) -bjk 2022.01.19 */
+
                           which = ((event.button.y - r_ttoolopt.h - img_scroll_up->h) / button_h) * 2 + (event.button.x - (WINDOW_WIDTH - r_ttoolopt.w)) / button_w;
 
                           if (which < num_things)
@@ -5835,6 +6103,8 @@ static void mainloop(void)
                   else
                     {
                       /* No scroll buttons - must be a selector: */
+
+                      /* FIXME: Also show "cursor_hand" when touching controls (stamp size, brush spacing, etc.!) (See above) -bjk 2022.01.19 */
 
                       which = ((event.button.y - r_ttoolopt.h) / button_h) * 2 + (event.button.x - (WINDOW_WIDTH - r_ttoolopt.w)) / button_w;
 
@@ -5871,11 +6141,13 @@ static void mainloop(void)
                   else if (cur_tool == TOOL_LABEL)
                     {
                       if (cur_label == LABEL_LABEL)
-                        if (onscreen_keyboard && HIT(kbd_rect))
-                          do_setcursor(cursor_hand);
-                        else
-                          do_setcursor(cursor_insertion);
-                      else if (cur_label == LABEL_SELECT)
+                        {
+                          if (onscreen_keyboard && HIT(kbd_rect))
+                            do_setcursor(cursor_hand);
+                          else
+                            do_setcursor(cursor_insertion);
+                        }
+                      else if (cur_label == LABEL_SELECT || cur_label == LABEL_APPLY)
                         {
                           if (search_label_list(&current_label_node, event.button.x - r_ttools.w, event.button.y, 1))
                             do_setcursor(cursor_hand);
@@ -6000,7 +6272,16 @@ static void mainloop(void)
                       eraser_draw(old_x, old_y, new_x, new_y);
 
                       sz = calc_eraser_size(cur_eraser);
-                      rect_xor(new_x - sz / 2, new_y - sz / 2, new_x + sz / 2, new_y + sz / 2);
+                      if (cur_eraser >= NUM_ERASERS / 2)
+                        {
+                          /* Circle eraser */
+                          circle_xor(new_x, new_y, sz / 2);
+                        }
+                      else
+                        {
+                          /* Square eraser */
+                          rect_xor(new_x - sz / 2, new_y - sz / 2, new_x + sz / 2, new_y + sz / 2);
+                        }
                     }
                   else if (cur_tool == TOOL_FILL && cur_fill == FILL_GRADIENT_LINEAR && fill_drag_started)
                     {
@@ -6055,7 +6336,6 @@ static void mainloop(void)
 
                   /* Moving: Draw XOR where stamp/eraser will apply: */
 
-
                   if (cur_tool == TOOL_STAMP)
                     {
                       w = active_stamp->w;
@@ -6083,6 +6363,7 @@ static void mainloop(void)
                     {
                       if (cur_tool == TOOL_STAMP)
                         {
+                          /* Stamp */
                           stamp_xor(old_x, old_y);
 
                           update_screen(old_x - (CUR_STAMP_W + 1) / 2 + r_canvas.x,
@@ -6090,10 +6371,18 @@ static void mainloop(void)
                                         old_x + (CUR_STAMP_W + 1) / 2 + r_canvas.x,
                                         old_y + (CUR_STAMP_H + 1) / 2 + r_canvas.y);
                         }
-
                       else
                         {
-                          rect_xor(old_x - w / 2, old_y - h / 2, old_x + w / 2, old_y + h / 2);
+                          if (cur_tool == TOOL_ERASER && cur_eraser >= NUM_ERASERS / 2)
+                            {
+                              /* Circle eraser */
+                              circle_xor(old_x, old_y, calc_eraser_size(cur_eraser) / 2);
+                            }
+                          else
+                            {
+                              /* Otherwise (square eraser) */
+                              rect_xor(old_x - w / 2, old_y - h / 2, old_x + w / 2, old_y + h / 2);
+                            }
 
                           update_screen(old_x - w / 2 + r_canvas.x,
                                         old_y - h / 2 + r_canvas.y,
@@ -6105,6 +6394,7 @@ static void mainloop(void)
                     {
                       if (cur_tool == TOOL_STAMP)
                         {
+                          /* Stamp */
                           stamp_xor(new_x, new_y);
 
                           update_screen(old_x - (CUR_STAMP_W + 1) / 2 + r_canvas.x,
@@ -6114,13 +6404,23 @@ static void mainloop(void)
                         }
                       else
                         {
-                          rect_xor(new_x - w / 2, new_y - h / 2, new_x + w / 2, new_y + h / 2);
+                          if (cur_tool == TOOL_ERASER && cur_eraser >= NUM_ERASERS / 2)
+                            {
+                              /* Circle eraser */
+                              circle_xor(new_x, new_y, calc_eraser_size(cur_eraser) / 2);
+                            }
+                          else
+                            {
+                              /* Otherwise (square eraser) */
+                              rect_xor(new_x - w / 2, new_y - h / 2, new_x + w / 2, new_y + h / 2);
+                            }
 
                           update_screen(new_x - w / 2 + r_canvas.x,
                                         new_y - h / 2 + r_canvas.y,
                                         new_x + w / 2 + r_canvas.x, new_y + h / 2 + r_canvas.y);
                         }
                     }
+
                   if (cur_tool == TOOL_STAMP && HIT(r_toolopt) && event.motion.y > r_toolopt.h
                       && event.motion.state == SDL_PRESSED && stamp_size_selector_clicked)
                     {
@@ -6182,25 +6482,54 @@ static void mainloop(void)
                         }
                     }
                 }
-              else if (cur_tool == TOOL_SHAPES && shape_tool_mode == SHAPE_TOOL_MODE_ROTATE)
+              else if (cur_tool == TOOL_SHAPES)
                 {
-                  int deg;
+                  if (shape_tool_mode == SHAPE_TOOL_MODE_STRETCH && !shape_locked[cur_shape])
+                    {
+                      float aspect;
+                      int w, h;
 
-                  deg = shape_rotation(shape_start_x, shape_start_y, old_x, old_y);
-                  do_shape(shape_start_x, shape_start_y, shape_current_x, shape_current_y, deg, 0);
+                      w = abs(shape_start_x - new_x);
+                      h = abs(shape_start_y - new_y);
 
-                  deg = shape_rotation(shape_start_x, shape_start_y, new_x, new_y);
-                  do_shape(shape_start_x, shape_start_y, shape_current_x, shape_current_y, deg, 0);
 
-                  deg = -deg;
-                  if (deg < 0)
-                    deg += 360;
+                      if (w < 2 || h < 2)
+                        aspect = 0;
+                      else if (w > h)
+                        aspect = (float) w / (float) h;
+                      else
+                        aspect = (float) h / (float) w;
 
-                  snprintf(angle_tool_text, sizeof(angle_tool_text), gettext(TIP_SHAPE_ROTATING), deg);
-                  draw_tux_text(TUX_BORED, angle_tool_text, 1);
+                      if (aspect == 0 || aspect >= 100)
+                        {
+                          draw_tux_text(TUX_BORED, TIP_SHAPE_START, 1);
+                        }
+                      else
+                        {
+                          snprintf(stretch_tool_text, sizeof(stretch_tool_text), gettext(TIP_SHAPE_STRETCHING_UNLOCKED), aspect);
+                          draw_tux_text(TUX_BORED, stretch_tool_text, 1);
+                        }
+                    }
+                  else if (shape_tool_mode == SHAPE_TOOL_MODE_ROTATE)
+                    {
+                      int deg;
 
-                  /* FIXME: Do something less intensive! */
-                  SDL_Flip(screen);
+                      deg = shape_rotation(shape_start_x, shape_start_y, old_x, old_y);
+                      do_shape(shape_start_x, shape_start_y, shape_current_x, shape_current_y, deg, 0);
+
+                      deg = shape_rotation(shape_start_x, shape_start_y, new_x, new_y);
+                      do_shape(shape_start_x, shape_start_y, shape_current_x, shape_current_y, deg, 0);
+
+                      deg = -deg;
+                      if (deg < 0)
+                        deg += 360;
+
+                      snprintf(angle_tool_text, sizeof(angle_tool_text), gettext(TIP_SHAPE_ROTATING), deg);
+                      draw_tux_text(TUX_BORED, angle_tool_text, 1);
+
+                      /* FIXME: Do something less intensive! */
+                      SDL_Flip(screen);
+                    }
                 }
 
               old_x = new_x;
@@ -6210,7 +6539,7 @@ static void mainloop(void)
             }
         }
 
-      if (cur_tool == TOOL_TEXT || (cur_tool == TOOL_LABEL && cur_label != LABEL_SELECT))
+      if (cur_tool == TOOL_TEXT || (cur_tool == TOOL_LABEL && cur_label != LABEL_SELECT && cur_label != LABEL_APPLY))
         {
           /* if (onscreen_keyboard) */
           /*   osk_clicked(kbd, old_x, old_y); */
@@ -6548,9 +6877,9 @@ static void blit_brush(int x, int y, int direction, double rotation, int * w, in
               dest.y = dest.y - (img_cur_brush_h >> 1) + (rotated_brush->h >> 1);
               dest.w = rotated_brush->w;
               dest.h = rotated_brush->h;
-   
+
               SDL_BlitSurface(rotated_brush, &src, canvas, &dest);
-    
+
               SDL_FreeSurface(rotated_brush);
             }
         }
@@ -6947,7 +7276,6 @@ static void tint_surface(SDL_Surface * tmp_surf, SDL_Surface * surf_ptr)
 }
 
 
-
 /**
  * Draw the current stamp onto the canvas.
  *
@@ -6957,101 +7285,114 @@ static void tint_surface(SDL_Surface * tmp_surf, SDL_Surface * surf_ptr)
 static void stamp_draw(int x, int y)
 {
   SDL_Rect dest;
-  SDL_Surface *tmp_surf, *surf_ptr, *final_surf;
+  SDL_Surface *scaled_surf, *tmp_surf, *surf_ptr;
   Uint32 amask;
   Uint8 r, g, b, a;
-  int xx, yy, dont_free_tmp_surf, base_x, base_y;
+  int xx, yy, base_x, base_y;
+  int dont_free_tmp_surf, dont_free_scaled_surf;
 
-  Uint32(*getpixel) (SDL_Surface *, int, int);
-  void (*putpixel) (SDL_Surface *, int, int, Uint32);
-
-  surf_ptr = active_stamp;
-
-  getpixel = getpixels[surf_ptr->format->BytesPerPixel];
-
-
-  /* Create a temp surface to play with: */
-
-  if (stamp_colorable(cur_stamp[stamp_group]) || stamp_tintable(cur_stamp[stamp_group]))
+  if (current_stamp_cached == NULL)
     {
-      amask = ~(surf_ptr->format->Rmask | surf_ptr->format->Gmask | surf_ptr->format->Bmask);
+      Uint32(*getpixel) (SDL_Surface *, int, int);
+      void (*putpixel) (SDL_Surface *, int, int, Uint32);
 
-      tmp_surf =
-        SDL_CreateRGBSurface(SDL_SWSURFACE,
-                             surf_ptr->w,
-                             surf_ptr->h,
-                             surf_ptr->format->BitsPerPixel,
-                             surf_ptr->format->Rmask, surf_ptr->format->Gmask, surf_ptr->format->Bmask, amask);
+      /* Shrink or grow it! */
+      scaled_surf = thumbnail(active_stamp, CUR_STAMP_W, CUR_STAMP_H, 0);
+      dont_free_scaled_surf = 0;
 
-      if (tmp_surf == NULL)
+
+      surf_ptr = scaled_surf;
+
+      getpixel = getpixels[surf_ptr->format->BytesPerPixel];
+
+      /* Create a temp surface to play with: */
+      if (stamp_colorable(cur_stamp[stamp_group]) || stamp_tintable(cur_stamp[stamp_group]))
         {
-          fprintf(stderr, "\nError: Can't render the colored stamp!\n"
-                  "The Simple DirectMedia Layer error that occurred was:\n" "%s\n\n", SDL_GetError());
+          amask = ~(surf_ptr->format->Rmask | surf_ptr->format->Gmask | surf_ptr->format->Bmask);
 
-          cleanup();
-          exit(1);
-        }
+          tmp_surf =
+            SDL_CreateRGBSurface(SDL_SWSURFACE,
+                                 surf_ptr->w,
+                                 surf_ptr->h,
+                                 surf_ptr->format->BitsPerPixel,
+                                 surf_ptr->format->Rmask, surf_ptr->format->Gmask, surf_ptr->format->Bmask, amask);
 
-      dont_free_tmp_surf = 0;
-    }
-  else
-    {
-      /* Not altering color; no need to create temp surf if we don't use it! */
-
-      tmp_surf = NULL;
-      dont_free_tmp_surf = 1;
-    }
-
-  if (tmp_surf != NULL)
-    putpixel = putpixels[tmp_surf->format->BytesPerPixel];
-  else
-    putpixel = NULL;
-
-
-  /* Alter the stamp's color, if needed: */
-
-  if (stamp_colorable(cur_stamp[stamp_group]) && tmp_surf != NULL)
-    {
-      /* Render the stamp in the chosen color: */
-
-      /* FIXME: It sucks to render this EVERY TIME.  Why not just when
-         they pick the color, or pick the stamp, like with brushes? */
-
-      /* Render the stamp: */
-
-      SDL_LockSurface(surf_ptr);
-      SDL_LockSurface(tmp_surf);
-
-      for (yy = 0; yy < surf_ptr->h; yy++)
-        {
-          for (xx = 0; xx < surf_ptr->w; xx++)
+          if (tmp_surf == NULL)
             {
-              SDL_GetRGBA(getpixel(surf_ptr, xx, yy), surf_ptr->format, &r, &g, &b, &a);
+              fprintf(stderr, "\nError: Can't render the colored stamp!\n"
+                      "The Simple DirectMedia Layer error that occurred was:\n" "%s\n\n", SDL_GetError());
 
-              putpixel(tmp_surf, xx, yy,
-                       SDL_MapRGBA(tmp_surf->format,
-                                   color_hexes[cur_color][0], color_hexes[cur_color][1], color_hexes[cur_color][2], a));
+              cleanup();
+              exit(1);
             }
+
+          dont_free_tmp_surf = 0;
+        }
+      else
+        {
+          /* Not altering color; no need to create temp surf if we don't use it! */
+
+          tmp_surf = NULL;
+          dont_free_tmp_surf = 1;
         }
 
-      SDL_UnlockSurface(tmp_surf);
-      SDL_UnlockSurface(surf_ptr);
-    }
-  else if (stamp_tintable(cur_stamp[stamp_group]))
-    {
-      if (stamp_data[stamp_group][cur_stamp[stamp_group]]->tinter == TINTER_VECTOR)
-        vector_tint_surface(tmp_surf, surf_ptr);
+      if (tmp_surf != NULL)
+        putpixel = putpixels[tmp_surf->format->BytesPerPixel];
       else
-        tint_surface(tmp_surf, surf_ptr);
+        putpixel = NULL;
+
+
+      /* Alter the stamp's color, if needed: */
+
+      if (stamp_colorable(cur_stamp[stamp_group]) && tmp_surf != NULL)
+        {
+          /* Render the stamp in the chosen color: */
+
+          /* FIXME: It sucks to render this EVERY TIME.  Why not just when
+             they pick the color, or pick the stamp, like with brushes? */
+
+          /* Render the stamp: */
+
+          SDL_LockSurface(surf_ptr);
+          SDL_LockSurface(tmp_surf);
+
+          for (yy = 0; yy < surf_ptr->h; yy++)
+            {
+              for (xx = 0; xx < surf_ptr->w; xx++)
+                {
+                  SDL_GetRGBA(getpixel(surf_ptr, xx, yy), surf_ptr->format, &r, &g, &b, &a);
+
+                  putpixel(tmp_surf, xx, yy,
+                           SDL_MapRGBA(tmp_surf->format,
+                                       color_hexes[cur_color][0], color_hexes[cur_color][1], color_hexes[cur_color][2], a));
+                }
+            }
+
+          SDL_UnlockSurface(tmp_surf);
+          SDL_UnlockSurface(surf_ptr);
+        }
+      else if (stamp_tintable(cur_stamp[stamp_group]))
+        {
+          /* Tintable */
+          if (stamp_data[stamp_group][cur_stamp[stamp_group]]->tinter == TINTER_VECTOR)
+            vector_tint_surface(tmp_surf, surf_ptr);
+          else
+            tint_surface(tmp_surf, surf_ptr);
+        }
+      else
+        {
+          /* No color change, just use it! */
+          tmp_surf = surf_ptr;
+        }
+
+      current_stamp_cached = SDL_DisplayFormatAlpha(tmp_surf);
     }
   else
     {
-      /* No color change, just use it! */
-      tmp_surf = surf_ptr;
+      tmp_surf = current_stamp_cached;
+      dont_free_tmp_surf = 1;
+      dont_free_scaled_surf = 1;
     }
-
-  /* Shrink or grow it! */
-  final_surf = thumbnail(tmp_surf, CUR_STAMP_W, CUR_STAMP_H, 0);
 
   /* Where it will go? */
   base_x = x - (CUR_STAMP_W + 1) / 2;
@@ -7060,7 +7401,7 @@ static void stamp_draw(int x, int y)
   /* And blit it! */
   dest.x = base_x;
   dest.y = base_y;
-  SDL_BlitSurface(final_surf, NULL, canvas, &dest);     /* FIXME: Conditional jump or move depends on uninitialised value(s) */
+  SDL_BlitSurface(tmp_surf, NULL, canvas, &dest);     /* FIXME: Conditional jump or move depends on uninitialised value(s) */
 
   update_canvas(x - (CUR_STAMP_W + 1) / 2,
                 y - (CUR_STAMP_H + 1) / 2, x + (CUR_STAMP_W + 1) / 2, y + (CUR_STAMP_H + 1) / 2);
@@ -7070,7 +7411,8 @@ static void stamp_draw(int x, int y)
   if (!dont_free_tmp_surf)
     SDL_FreeSurface(tmp_surf);
 
-  SDL_FreeSurface(final_surf);
+  if (!dont_free_scaled_surf)
+    SDL_FreeSurface(scaled_surf);
 }
 
 
@@ -7141,6 +7483,7 @@ void show_version(int details)
 
   printf("\nBuilt with these options:\n");
 
+  printf("  SDL version %d.%d.%d\n", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
 
   /* Quality reductions: */
 
@@ -7307,6 +7650,7 @@ void show_usage(int exitcode)
           "  [--nomagiccontrols | --magiccontrols]\n"
           "  [--noshapecontrols | --shapecontrols]\n"
           "  [--nolabel | --label]\n"
+          "  [--nobrushspacing | --brushspacing]\n"
           "  [--newcolorsfirst | --newcolorslast]\n"
           "\n"
           " Languages:\n"
@@ -7335,6 +7679,7 @@ void show_usage(int exitcode)
           "  [--savedir DIRECTORY]\n"
           "  [--nosave | --save]\n"
           "  [--autosave | --noautosave]\n"
+          "  [--reversesort | --noreversesort]\n"
           "\n"
           " Data:\n"
           "  [--nolockfile]\n"
@@ -7411,8 +7756,8 @@ static unsigned compute_default_scale_factor(double ratio)
  * @param locale UI's locale, for loading localized text (ignored)
  */
 static void loadbrush_callback(SDL_Surface * screen,
-                               SDL_Texture * texture,
-                               SDL_Renderer * renderer,
+                               __attribute__((unused)) SDL_Texture * texture,
+                               __attribute__((unused)) SDL_Renderer * renderer,
                                const char *restrict const dir,
                                unsigned dirlen, tp_ftw_str * files, unsigned i, const char *restrict const locale)
 {
@@ -7763,6 +8108,23 @@ static void loadstamp_finisher(stamp_type * sd, unsigned w, unsigned h, double r
 
 
 /**
+ * Clear the currently-cached stamp image
+ * (what we blit to the canvas, so the stamp in its
+ * current orientation, scale, and color), since we'll
+ * need to generate something new based on a change
+ * (a new size, color, orientation, or a completely
+ * different stamp)
+ */
+static void clear_cached_stamp(void)
+{
+  if (current_stamp_cached != NULL)
+    {
+      SDL_FreeSurface(current_stamp_cached);
+      current_stamp_cached = NULL;
+    }
+}
+
+/**
  * FIXME
  */
 /* Note: must have read the *.dat file before calling this */
@@ -8007,6 +8369,8 @@ static void set_active_stamp(void)
 #ifdef DEBUG
   printf("\n\n");
 #endif
+
+  clear_cached_stamp();
 }
 
 /**
@@ -8372,8 +8736,8 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
  * @param locale UI's locale, for loading localized text (ignored)
  */
 static void loadstamp_callback(SDL_Surface * screen,
-                               SDL_Texture * texture,
-                               SDL_Renderer * renderer,
+                               __attribute__((unused)) SDL_Texture * texture,
+                               __attribute__((unused)) SDL_Renderer * renderer,
                                const char *restrict const dir,
                                unsigned dirlen, tp_ftw_str * files, unsigned i, const char *restrict const locale)
 {
@@ -8775,6 +9139,9 @@ static void create_button_labels(void)
 
   /* Slideshow: 'Next' button, to load next slide (image) */
   img_openlabels_next = do_render_button_label(gettext_noop("Next"));
+
+  /* Color mixer dialog: 'Clear' button, to reset the mixed color */
+  img_mixerlabel_clear = do_render_button_label(gettext_noop("Clear"));
 }
 
 
@@ -9214,7 +9581,7 @@ static void draw_magic(void)
 
       grp = magic_group;
       cur = cur_magic[magic_group];
- 
+
 
       /* Show paint button: */
 
@@ -9363,6 +9730,11 @@ static void draw_brushes(void)
 
   /* Space for buttons, was 14 */
   most = (buttons_tall * gd_toolopt.cols) - TOOLOFFSET;
+  if (!disable_brushspacing)
+    {
+      /* Make room for spacing controls */
+      most -= 2;
+    }
 
   /* Do we need scrollbars? */
 
@@ -9462,8 +9834,57 @@ static void draw_brushes(void)
             }
         }
     }
+
+  if (!disable_brushspacing)
+    draw_brushes_spacing();
 }
 
+static void draw_brushes_spacing(void)
+{
+  int i, frame_w, w, h, size_at;
+  float x_per, y_per;
+  int xx, yy;
+  SDL_Surface *btn, *blnk;
+  SDL_Rect dest;
+
+  frame_w = img_brushes[cur_brush]->w / abs(brushes_frames[cur_brush]);
+  w = frame_w / (brushes_directional[cur_brush] ? 3 : 1);
+  h = img_brushes[cur_brush]->h / (brushes_directional[cur_brush] ? 3 : 1);
+
+  /* Spacing ranges from 0px to "N x the max dimension of the brush"
+     (so a 48x48 brush would have a spacing of 48 if the center option is chosen) */
+  size_at = (BRUSH_SPACING_SIZES * brushes_spacing[cur_brush]) / (max(w, h) * BRUSH_SPACING_MAX_MULTIPLIER);
+
+  x_per = (float)r_ttoolopt.w / BRUSH_SPACING_SIZES;
+  y_per = (float)button_h / BRUSH_SPACING_SIZES;
+
+  for (i = 0; i < BRUSH_SPACING_SIZES; i++)
+    {
+      xx = ceil(x_per);
+      yy = ceil(y_per * i);
+
+      if (i <= size_at)
+        btn = thumbnail(img_btn_down, xx, yy, 0);
+      else
+        btn = thumbnail(img_btn_up, xx, yy, 0);
+
+      blnk = thumbnail(img_btn_off, xx, button_h - yy, 0);
+
+      /* FIXME: Check for NULL! */
+
+
+      dest.x = (WINDOW_WIDTH - r_ttoolopt.w) + (i * x_per);
+      dest.y = (button_h * buttons_tall + r_ttools.h) - button_h;
+      SDL_BlitSurface(blnk, NULL, screen, &dest);
+
+      dest.x = (WINDOW_WIDTH - r_ttoolopt.w) + (i * x_per);
+      dest.y = (button_h * buttons_tall + r_ttools.h) - (y_per * i);
+      SDL_BlitSurface(btn, NULL, screen, &dest);
+
+      SDL_FreeSurface(btn);
+      SDL_FreeSurface(blnk);
+    }
+}
 
 /**
  * FIXME
@@ -9523,9 +9944,6 @@ static void draw_fonts(void)
 
       dest.x = WINDOW_WIDTH - r_ttoolopt.w;
       dest.y = r_ttoolopt.h + off_y + (((most - gd_toolopt.cols) / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
-
-      /*      if (!disable_stamp_controls)
-	      dest.y = dest.y - (button_h * 2); */
 
       if (font_scroll < num_font_families - (most - gd_toolopt.cols) - TOOLOFFSET)
         {
@@ -9624,50 +10042,60 @@ static void draw_fonts(void)
 
   /* Draw text controls: */
 
+  /* Label controls, if in label tool (always!) */
+
+  if (cur_tool == TOOL_LABEL)
+    {
+      /* "Apply Label" button */
+      dest.x = WINDOW_WIDTH - r_ttoolopt.w;
+      dest.y = r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
+      if (cur_label == LABEL_APPLY)
+        SDL_BlitSurface(img_btn_down, NULL, screen, &dest);
+      else
+        {
+          if (are_labels())
+            SDL_BlitSurface(img_btn_up, NULL, screen, &dest);
+          else
+            SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
+        }
+
+      dest.x = WINDOW_WIDTH - r_ttoolopt.w + (button_w - img_label_apply->w) / 2;
+      dest.y = (r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h) + (button_h - img_label_apply->h) / 2);
+
+      SDL_BlitSurface(img_label_apply, NULL, screen, &dest);
+
+
+      /* "Select Label" button */
+      dest.x = WINDOW_WIDTH - button_w;
+      dest.y = r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
+
+      if (cur_label == LABEL_SELECT)
+        SDL_BlitSurface(img_btn_down, NULL, screen, &dest);
+      else
+        {
+          if (are_labels())
+            SDL_BlitSurface(img_btn_up, NULL, screen, &dest);
+          else
+            SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
+        }
+
+
+      dest.x = WINDOW_WIDTH - button_w + (button_w - img_label_select->w) / 2;
+      dest.y = (r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h) + (button_h - img_label_select->h) / 2);
+
+      SDL_BlitSurface(img_label_select, NULL, screen, &dest);
+
+      most = most + gd_toolopt.cols;
+    }
+
+
+  /* Size, italic, and bold, only appear when not UI is not being simplified */
   if (!disable_stamp_controls)
     {
       SDL_Surface *button_color;
       SDL_Surface *button_body;
 
-      if (cur_tool == TOOL_LABEL)
-        {
-
-          /* disabling rotation as I am not sure how this should be implemented */
-          dest.x = WINDOW_WIDTH - r_ttoolopt.w;
-          dest.y = r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
-          SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
-
-          /* if(cur_label == LABEL_ROTATE) */
-          /*   SDL_BlitSurface(img_btn_down, NULL, screen, &dest); */
-          /* else */
-          /*   SDL_BlitSurface(img_btn_up, NULL, screen, &dest); */
-
-          /* dest.x = WINDOW_WIDTH - r_ttoolopt.w + (48 - img_label->w) / 2; */
-          /* dest.y = (40 + ((4 + TOOLOFFSET / 2) * 48) + (48 - img_label->h) / 2); */
-
-          /* SDL_BlitSurface(img_label, NULL, screen, &dest); */
-
-          dest.x = WINDOW_WIDTH - button_w;
-          dest.y = r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
-
-          if (cur_label == LABEL_SELECT)
-            SDL_BlitSurface(img_btn_down, NULL, screen, &dest);
-
-          else
-            {
-              if (are_labels())
-                SDL_BlitSurface(img_btn_up, NULL, screen, &dest);
-              else
-                SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
-            }
-
-
-          dest.x = WINDOW_WIDTH - button_w + (button_w - img_label_select->w) / 2;
-          dest.y = (r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h) + (button_h - img_label_select->h) / 2);
-
-          SDL_BlitSurface(img_label_select, NULL, screen, &dest);
-	  most = most + gd_toolopt.cols;
-        }
+      // label_ctrl_y = r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
 
       /* Show bold button: */
 
@@ -9701,7 +10129,7 @@ static void draw_fonts(void)
       SDL_BlitSurface(img_italic, NULL, screen, &dest);
 
       most = most + gd_toolopt.cols;
-      // printf("most %d\n", most);
+
 
       /* Show shrink button: */
 
@@ -9749,31 +10177,6 @@ static void draw_fonts(void)
 
       SDL_BlitSurface(button_color, NULL, img_grow, NULL);
       SDL_BlitSurface(img_grow, NULL, screen, &dest);
-    }
-  else
-    {
-      if (cur_tool == TOOL_LABEL)
-        {
-          dest.x = WINDOW_WIDTH - r_ttoolopt.w;
-          dest.y = r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
-
-          SDL_BlitSurface(img_btn_up, NULL, screen, &dest);
-
-          dest.x = WINDOW_WIDTH - r_ttoolopt.w + (button_w - img_label->w) / 2;
-          dest.y = (r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h) + (button_h - img_label->h) / 2);
-
-          SDL_BlitSurface(img_label, NULL, screen, &dest);
-
-          dest.x = WINDOW_WIDTH - button_w;
-          dest.y = r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
-
-          SDL_BlitSurface(img_btn_up, NULL, screen, &dest);
-
-          dest.x = WINDOW_WIDTH - button_w + (button_w - img_label_select->w) / 2;
-          dest.y = (r_ttoolopt.h + ((most / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h) + (button_h - img_label_select->h) / 2);
-
-          SDL_BlitSurface(img_label_select, NULL, screen, &dest);
-        }
     }
 }
 
@@ -10160,7 +10563,7 @@ static void draw_shapes(void)
           SDL_BlitSurface(img_shapes[shape], NULL, screen, &dest);
 
           dest.x = ((i % 2) * button_w) + (4 * button_w) / ORIGINAL_BUTTON_SIZE + WINDOW_WIDTH - r_ttoolopt.w + ((40 * button_w) / ORIGINAL_BUTTON_SIZE - img_shape_names[shape]->w) / 2;
-	  dest.y = ((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - img_shape_names[shape]->h) + off_y;
+          dest.y = ((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - img_shape_names[shape]->h) + off_y;
 
           SDL_BlitSurface(img_shape_names[shape], NULL, screen, &dest);
         }
@@ -10459,7 +10862,7 @@ static void draw_fills(void)
           SDL_BlitSurface(img_fills[i], NULL, screen, &dest);
 
           dest.x = ((i % 2) * button_w) + (4 * button_w) / ORIGINAL_BUTTON_SIZE + WINDOW_WIDTH - r_ttoolopt.w + ((40 * button_w) / ORIGINAL_BUTTON_SIZE - img_fill_names[i]->w) / 2;
-	  dest.y = ((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - img_fill_names[i]->h) + off_y;
+          dest.y = ((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - img_fill_names[i]->h) + off_y;
 
           SDL_BlitSurface(img_fill_names[i], NULL, screen, &dest);
         }
@@ -11066,6 +11469,32 @@ static void render_brush(void)
 
 
 /**
+ * Show a tool tip, for when the brush choice has changed
+ */
+static void show_brush_tip(void) {
+  if (img_cur_brush_rotate || img_cur_brush_directional)
+    {
+      if (abs(img_cur_brush_frames) > 1)
+        {
+          draw_tux_text(TUX_GREAT, TIP_BRUSH_CHOICE_ANM_DIR, 1);
+        }
+      else
+        {
+          draw_tux_text(TUX_GREAT, TIP_BRUSH_CHOICE_DIR, 1);
+        }
+    }
+  else if (abs(img_cur_brush_frames) > 1)
+    {
+      draw_tux_text(TUX_GREAT, TIP_BRUSH_CHOICE_ANM, 1);
+    }
+  else
+    {
+      draw_tux_text(TUX_GREAT, tool_tips[cur_tool], 1);
+    }
+}
+
+
+/**
  * FIXME
  */
 /* Draw a XOR line: */
@@ -11146,9 +11575,12 @@ static void line_xor(int x1, int y1, int x2, int y2)
 
 
 /**
- * FIXME
+ * Draw a XOR rectangle on the canvas.
+ * @param x1 left edge
+ * @param y1 top edge
+ * @param x2 right edge
+ * @param y2 bottom edge
  */
-/* Draw a XOR rectangle: */
 static void rect_xor(int x1, int y1, int x2, int y2)
 {
   if (x1 < 0)
@@ -11179,6 +11611,33 @@ static void rect_xor(int x1, int y1, int x2, int y2)
   line_xor(x2, y1, x2, y2);
   line_xor(x2, y2, x1, y2);
   line_xor(x1, y2, x1, y1);
+}
+
+
+/**
+ * Draw a XOR circle on the canvas.
+ * @param x center x position
+ * @param y center y position
+ * @param sz size (radius)
+ */
+static void circle_xor(int x, int y, int sz)
+{
+  int xx, yy, sz2;
+
+  /* h/t http://groups.csail.mit.edu/graphics/classes/6.837/F98/Lecture6/circle.html */
+
+  sz2 = sz * sz;
+
+  xorpixel(x, y + sz);
+  xorpixel(x, y - sz);
+
+  for (xx = 1; xx < sz; xx++) {
+    yy = sqrt(sz2 - (xx * xx) + 0.5);
+    xorpixel(x + xx, y + yy);
+    xorpixel(x + xx, y - yy);
+    xorpixel(x - xx, y + yy);
+    xorpixel(x - xx, y - yy);
+  }
 }
 
 
@@ -11277,7 +11736,16 @@ static void do_eraser(int x, int y, int update)
     {
       update_canvas(x - sz / 2, y - sz / 2, x + sz / 2, y + sz / 2);
 
-      rect_xor(x - sz / 2, y - sz / 2, x + sz / 2, y + sz / 2);
+      if (cur_eraser >= NUM_ERASERS / 2)
+        {
+          /* Circle eraser */
+          circle_xor(x, y, sz / 2);
+        }
+      else
+        {
+          /* Square eraser */
+          rect_xor(x - sz / 2, y - sz / 2, x + sz / 2, y + sz / 2);
+        }
 
 #ifdef __APPLE__
       /* Prevent ghosted eraser outlines from remaining on the screen in windowed mode */
@@ -11497,6 +11965,16 @@ static int compare_dirent2s(struct dirent2 *f1, struct dirent2 *f2)
     return (strcmp(f1->f.d_name, f2->f.d_name));
   else
     return (f1->place - f2->place);
+}
+
+
+/**
+ * FIXME
+ */
+/* For qsort() call in do_open()... */
+static int compare_dirent2s_invert(struct dirent2 *f1, struct dirent2 *f2)
+{
+  return compare_dirent2s(f2, f1);
 }
 
 
@@ -13026,7 +13504,9 @@ static void load_current(void)
   SDL_Surface *tmp, *org_surf;
   char *fname;
   char ftmp[1024];
+#ifdef AUTOSAVE_GOING_BACKGROUND
   FILE *fi;
+#endif
 
   int found_autosaved = 0;
 
@@ -13310,6 +13790,7 @@ static int do_prompt_image_flash_snd(const char *const text,
                                 screen->format->Rmask,
                                 screen->format->Gmask, screen->format->Bmask, screen->format->Amask);
 
+  SDL_FillRect(backup, NULL, SDL_MapRGBA(backup->format, 255, 255, 255, 255));
   SDL_BlitSurface(screen, NULL, backup, NULL);
 
   for (w = 0; w <= r_ttools.w; w = w + 2)
@@ -13332,9 +13813,7 @@ static int do_prompt_image_flash_snd(const char *const text,
         SDL_Delay(1);
 
       if (w == r_ttools.w - 2)
-	{
         SDL_BlitSurface(backup, NULL, screen, NULL);
-	}
     }
 
   SDL_FreeSurface(backup);
@@ -13363,7 +13842,7 @@ static int do_prompt_image_flash_snd(const char *const text,
           dest.y = 94 / button_scale + r_ttools.w / button_scale - (w - 4) + i + PROMPTOFFSETY;
           dest.w = (PROMPT_W - r_ttools.w * 2) + (w - 4) * 2;
           dest.h = (w - 4) * 2;
-	  dest.y = canvas->h / 2 - dest.h / 2 + i + 2;
+          dest.y = canvas->h / 2 - dest.h / 2 + i + 2;
           SDL_BlitSurface(alpha_surf, NULL, screen, &dest);
         }
 
@@ -13578,14 +14057,14 @@ static int do_prompt_image_flash_snd(const char *const text,
               if (event.button.x >= btn_left && event.button.x < btn_left + img_yes->w)
                 {
                   if (event.button.y >= dest_back.y + dest_back.h - 4 - button_h - 4 - button_h &&
-		      event.button.y < dest_back.y + dest_back.h - 4 - button_h - 4 - button_h + img_yes->h)
+                      event.button.y < dest_back.y + dest_back.h - 4 - button_h - 4 - button_h + img_yes->h)
                     {
                       ans = 1;
                       done = 1;
                     }
                   else if (strlen(btn_no) != 0 &&
                            event.button.y >= dest_back.y + dest_back.h - 4 - button_h &&
-			   event.button.y < dest_back.y + dest_back.h - 4 - button_h + img_no->h)
+                           event.button.y < dest_back.y + dest_back.h - 4 - button_h + img_no->h)
                     {
                       ans = 0;
                       done = 1;
@@ -13600,7 +14079,7 @@ static int do_prompt_image_flash_snd(const char *const text,
                     event.button.y < dest_back.y + dest_back.h - 4 - button_h - 4 - button_h + img_yes->h) ||
                    (strlen(btn_no) != 0 &&
                     event.button.y >=  dest_back.y + dest_back.h - 4 - button_h &&
-		    event.button.y < dest_back.y + dest_back.h - 4 - button_h + img_no->h)))
+                    event.button.y < dest_back.y + dest_back.h - 4 - button_h + img_no->h)))
                 {
                   do_setcursor(cursor_hand);
                 }
@@ -13726,6 +14205,7 @@ static void cleanup(void)
       free(stamp_data[j]);
     }
   free_surface(&active_stamp);
+  free_surface(&current_stamp_cached);
 
   free_surface_array(img_brushes, num_brushes);
   free_surface_array(img_brushes_thumbs, num_brushes);
@@ -13758,6 +14238,8 @@ static void cleanup(void)
   free_surface(&img_openlabels_next);
   free_surface(&img_openlabels_play);
   free_surface(&img_openlabels_gif_export);
+
+  free_surface(&img_mixerlabel_clear);
 
   free_surface(&img_progress);
 
@@ -13833,6 +14315,9 @@ static void cleanup(void)
 
   free_surface(&img_bold);
   free_surface(&img_italic);
+
+  free_surface(&img_label_select);
+  free_surface(&img_label_apply);
 
   free_surface_array(undo_bufs, NUM_UNDO_BUFS);
 
@@ -13960,6 +14445,7 @@ static void cleanup(void)
   free_cursor(&cursor_wand);
   free_cursor(&cursor_insertion);
   free_cursor(&cursor_rotate);
+  free_cursor(&cursor_pipette);
 
   for (i = 0; i < NUM_COLORS; i++)
     {
@@ -14076,8 +14562,8 @@ static void free_surface_array(SDL_Surface * surface_array[], int count)
 /* Draw a shape! */
 static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush)
 {
-  int side, angle_skip, init_ang, rx, ry, rmax, x1, y1, x2, y2, xp, yp, xv, yv, old_brush, step;
-  float a1, a2, rotn_rad;
+  int side, rx, ry, rmax, x1, y1, x2, y2, xp, yp, xv, yv, old_brush, step;
+  float a1, a2, rotn_rad, init_ang, angle_skip;
   int xx, yy, offx, offy, max_x, max_y;
 
 
@@ -14123,14 +14609,14 @@ static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush)
   if (use_brush)
     {
       old_brush = cur_brush;
-      cur_brush = shape_brush;  /* Now only semi-ludgy! */
+      cur_brush = shape_brush;  /* Now only semi-kludgy! */
       render_brush();
     }
 
 
   /* Draw the shape: */
 
-  angle_skip = 360 / shape_sides[cur_shape];
+  angle_skip = 360.0 / (float) shape_sides[cur_shape];
 
   init_ang = shape_init_ang[cur_shape];
 
@@ -14149,8 +14635,8 @@ static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush)
       max_y = 0;
       for (side = 0; side < shape_sides[cur_shape]; side++)
         {
-          a1 = (angle_skip * side + init_ang) * M_PI / 180;
-          a2 = (angle_skip * (side + 1) + init_ang) * M_PI / 180;
+          a1 = (angle_skip * side + init_ang) * M_PI / 180.0;
+          a2 = (angle_skip * (side + 1) + init_ang) * M_PI / 180.0;
           x1 = (int)(cos(a1) * rx);
           y1 = (int)(-sin(a1) * ry);
 
@@ -14393,6 +14879,7 @@ static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush)
     {
       cur_brush = old_brush;
       render_brush();
+      show_brush_tip();
     }
 }
 
@@ -14469,7 +14956,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
 {
   int scroll;
   char *fname;
-  char tmp[1024];
+  char tmp[FILENAME_MAX + 16];
   SDL_Surface *thm;
   FILE *fi;
 
@@ -14506,7 +14993,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
                                   PROMPT_SAVE_OVER_NO,
                                   img_save_over, NULL, NULL, SND_AREYOUSURE,
                                   (TOOL_SAVE % 2) * button_w + button_w / 2,
-				  (TOOL_SAVE / 2) * button_h + r_ttools.h + button_h / 2 - tool_scroll * button_h / gd_tools.cols + scroll) == 0)
+                                  (TOOL_SAVE / 2) * button_h + r_ttools.h + button_h / 2 - tool_scroll * button_h / gd_tools.cols + scroll) == 0)
             {
               /* No - Let's save a new picture! */
 
@@ -14793,7 +15280,11 @@ static void do_png_embed_data(png_structp png_ptr)
   struct label_node *current_node;
   char *char_stream, *line;
   size_t dat_size, char_stream_sz, line_sz;
-
+#ifdef WIN32
+  wchar_t wtmpchar;
+  char tmpstr[16];
+  size_t nbtmpstr;
+#endif
 
   /* Starter foreground */
   if (img_starter)
@@ -15020,47 +15511,21 @@ static void do_png_embed_data(png_structp png_ptr)
         {
           if (current_node->is_enabled == TRUE && current_node->save_texttool_len > 0)
             {
-
+              fprintf(lfi, "%u\n", current_node->save_texttool_len);
+              for (i = 0; i < current_node->save_texttool_len; i++)
+                {
 #ifdef WIN32
-              iconv_t trans;
-              wchar_t *wch;
-	      char *ch;
-              char *conv, *conv2;
-              size_t in, out;
-
-              conv = malloc(255);
-              trans = iconv_open("UTF-8", "WCHAR_T");
-
-              fprintf(lfi, "%u\n", current_node->save_texttool_len);
-              for (i = 0; i < current_node->save_texttool_len; i++)
-                {
-                  conv2 = conv;
-                  in = 2;
-                  out = 10;
-                  wch = &current_node->save_texttool_str[i];
-		  ch = (char *)wch;
-                  iconv(trans, &ch, &in, &conv, &out);
-                  conv[0] = '\0';
-                  fprintf(lfi, "%s", conv2);
-                }
+                  wtmpchar = current_node->save_texttool_str[i];
+                  nbtmpstr = WideCharToMultiByte(CP_UTF8, 0, &wtmpchar, 1, tmpstr, 16, NULL, NULL);
+                  tmpstr[nbtmpstr] = '\0';
+                  fprintf(lfi, "%s", tmpstr);
 #elif defined(__ANDROID__)
-              fprintf(lfi, "%u\n", current_node->save_texttool_len);
-
-              for (i = 0; i < current_node->save_texttool_len; i++)
-                {
                   fprintf(lfi, "%d ", (int)current_node->save_texttool_str[i]);
-                }
 #else
-              fprintf(lfi, "%u\n", current_node->save_texttool_len);
-
-              for (i = 0; i < current_node->save_texttool_len; i++)
-                {
                   fprintf(lfi, "%lc", (wint_t) current_node->save_texttool_str[i]);
-                }
 #endif
-
+                }
               fprintf(lfi, "\n");
-
 
               fprintf(lfi, "%u\n", current_node->save_color.r);
               fprintf(lfi, "%u\n", current_node->save_color.g);
@@ -15338,7 +15803,7 @@ static int do_quit(int tool)
       done = do_prompt_snd(PROMPT_QUIT_TXT,
                            PROMPT_QUIT_YES, PROMPT_QUIT_NO, SND_AREYOUSURE,
                            (TOOL_QUIT % 2) * button_w + button_w / 2,
-			   (TOOL_QUIT / 2) * button_h + r_ttools.h + button_h / 2 - tool_scroll * button_h / gd_tools.cols + scroll);
+                           (TOOL_QUIT / 2) * button_h + r_ttools.h + button_h / 2 - tool_scroll * button_h / gd_tools.cols + scroll);
     }
   else
     {
@@ -15532,7 +15997,10 @@ static int do_open(void)
 
       /* Sort: */
 
-      qsort(fs, num_files_in_dirs, sizeof(struct dirent2), (int (*)(const void *, const void *))compare_dirent2s);
+      if (!reversesort)
+        qsort(fs, num_files_in_dirs, sizeof(struct dirent2), (int (*)(const void *, const void *))compare_dirent2s);
+      else
+        qsort(fs, num_files_in_dirs, sizeof(struct dirent2), (int (*)(const void *, const void *))compare_dirent2s_invert);
 
 
       /* Read directory of images and build thumbnails: */
@@ -15743,8 +16211,8 @@ static int do_open(void)
         {
           do_prompt_snd(PROMPT_OPEN_NOFILES_TXT, PROMPT_OPEN_NOFILES_YES, "",
                         SND_YOUCANNOT,
-			(TOOL_OPEN % 2) * button_w + button_w / 2,
-			(TOOL_OPEN / 2) * button_h + r_ttools.h + button_h / 2 - tool_scroll * button_h / gd_tools.cols);
+                        (TOOL_OPEN % 2) * button_w + button_w / 2,
+                        (TOOL_OPEN / 2) * button_h + r_ttools.h + button_h / 2 - tool_scroll * button_h / gd_tools.cols);
         }
       else
         {
@@ -16018,7 +16486,8 @@ static int do_open(void)
                           want_erase = 1;
                         }
                     }
-                  else if (event.type == SDL_MOUSEBUTTONDOWN && valid_click(event.button.button))
+                  else if ((event.type == SDL_MOUSEBUTTONDOWN && valid_click(event.button.button)) ||
+                           event.type == TP_SDL_MOUSEBUTTONSCROLL)
                     {
                       if (event.button.x >= r_ttools.w && event.button.x < WINDOW_WIDTH - r_ttoolopt.w &&
                           event.button.y >= img_scroll_up->h && event.button.y < (button_h * buttons_tall + r_ttools.h) - button_h)
@@ -16053,40 +16522,78 @@ static int do_open(void)
                       else if (event.button.x >= (WINDOW_WIDTH - img_scroll_up->w) / 2 &&
                                event.button.x <= (WINDOW_WIDTH + img_scroll_up->w) / 2)
                         {
-                          if (event.button.y < img_scroll_up->h)
+                          if (event.button.y < img_scroll_up->h ||
+                              (event.button.y >= (button_h * buttons_tall + r_ttools.h) - button_h &&
+                               event.button.y < (button_h * buttons_tall + r_ttools.h) - img_scroll_up->h))
                             {
-                              /* Up scroll button: */
+                              /* Up or down scroll button in Open dialog: */
 
-                              if (cur > 0)
+                              if (event.button.y < img_scroll_up->h)
                                 {
-                                  cur = cur - 4;
-                                  update_list = 1;
-                                  playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+                                  /* Up scroll button in Open dialog: */
 
-                                  if (cur == 0)
-                                    do_setcursor(cursor_arrow);
+                                  if (cur > 0)
+                                    {
+                                      cur = cur - 4;
+                                      update_list = 1;
+                                      playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+
+                                      if (cur == 0)
+                                        do_setcursor(cursor_arrow);
+                                    }
+
+                                  if (which >= cur + 16)
+                                    which = which - 4;
+                                }
+                              else if (event.button.y >= (button_h * buttons_tall + r_ttools.h) - button_h &&
+                                       event.button.y < (button_h * buttons_tall + r_ttools.h) - img_scroll_up->h)
+                                {
+                                  /* Down scroll button in Open dialog: */
+
+                                  if (cur < num_files - 16)
+                                    {
+                                      cur = cur + 4;
+                                      update_list = 1;
+                                      playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+
+                                      if (cur >= num_files - 16)
+                                        do_setcursor(cursor_arrow);
+                                    }
+
+                                  if (which < cur)
+                                    which = which + 4;
                                 }
 
-                              if (which >= cur + 16)
-                                which = which - 4;
-                            }
-                          else if (event.button.y >= (button_h * buttons_tall + r_ttools.h) - button_h &&
-                                   event.button.y < (button_h * buttons_tall + r_ttools.h) - img_scroll_up->h)
-                            {
-                              /* Down scroll button: */
-
-                              if (cur < num_files - 16)
+                              if (scrolltimer_dialog != TIMERID_NONE)
                                 {
-                                  cur = cur + 4;
-                                  update_list = 1;
-                                  playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
-
-                                  if (cur >= num_files - 16)
-                                    do_setcursor(cursor_arrow);
+                                  SDL_RemoveTimer(scrolltimer_dialog);
+                                  scrolltimer_dialog = TIMERID_NONE;
                                 }
 
-                              if (which < cur)
-                                which = which + 4;
+                              if (!scrolling_dialog && event.type == SDL_MOUSEBUTTONDOWN)
+                                {
+                                  DEBUG_PRINTF("Starting scrolling\n");
+                                  memcpy(&scrolltimer_dialog_event, &event, sizeof(SDL_Event));
+                                  scrolltimer_dialog_event.type = TP_SDL_MOUSEBUTTONSCROLL;
+
+                                  /*
+                                  * We enable the timer subsystem only when needed (e.g., to use SDL_AddTimer() needed
+                                  * for scrolling) then disable it immediately after (e.g., after the timer has fired or
+                                  * after SDL_RemoveTimer()) because enabling the timer subsystem in SDL1 has a high
+                                  * energy impact on the Mac.
+                                  */
+
+                                  scrolling_dialog = 1;
+                                  SDL_InitSubSystem(SDL_INIT_TIMER);
+                                  scrolltimer_dialog =
+                                    SDL_AddTimer(REPEAT_SPEED, scrolltimer_dialog_callback, (void *)&scrolltimer_dialog_event);
+                                }
+                              else
+                                {
+                                  DEBUG_PRINTF("Continuing scrolling\n");
+                                  scrolltimer_dialog =
+                                    SDL_AddTimer(REPEAT_SPEED / 3, scrolltimer_dialog_callback, (void *)&scrolltimer_dialog_event);
+                                }
                             }
                         }
                       else if (event.button.x >= r_ttools.w && event.button.x < r_ttools.w + button_w &&
@@ -16143,12 +16650,6 @@ static int do_open(void)
                       start_motion_convert(event);
 #endif	      
                     }
-                  else if (event.type == SDL_MOUSEBUTTONUP)
-                    {
-#ifdef __ANDROID__
-                      stop_motion_convert(event);
-#endif
-                    }
                   else if (event.type == SDL_MOUSEWHEEL && wheely)
                     {
                       /* Scroll wheel! */
@@ -16204,7 +16705,7 @@ static int do_open(void)
                                  event.button.x < (WINDOW_WIDTH - r_ttoolopt.w)) ||
                                 (event.button.x >= (WINDOW_WIDTH - r_ttoolopt.w - button_w - button_w - button_w) &&
                                  event.button.x < (WINDOW_WIDTH - button_w - r_ttoolopt.w) &&
-				 /* Both "Erase" and "Export" only work on our own files... */
+                                /* Both "Erase" and "Export" only work on our own files... */
                                  d_places[which] != PLACE_STARTERS_DIR &&
                                  d_places[which] != PLACE_PERSONAL_STARTERS_DIR)) &&
                                event.button.y >= (button_h * buttons_tall + r_ttools.h) - button_h &&
@@ -16239,6 +16740,24 @@ static int do_open(void)
                       oldpos_y = event.button.y;
                     }
 
+                  else if (event.type == SDL_MOUSEBUTTONUP)
+                    {
+#ifdef __ANDROID__
+                      stop_motion_convert(event);
+#endif
+                      if (scrolling_dialog)
+                        {
+                          if (scrolltimer_dialog != TIMERID_NONE)
+                            {
+                              SDL_RemoveTimer(scrolltimer_dialog);
+                              scrolltimer_dialog = TIMERID_NONE;
+                            }
+                          scrolling_dialog = 0;
+                          SDL_QuitSubSystem(SDL_INIT_TIMER);
+                          DEBUG_PRINTF("Killing dialog scrolling\n");
+                        }
+                    }
+
                   else if (event.type == SDL_JOYAXISMOTION)
                     handle_joyaxismotion(event, &motioner, &val_x, &val_y);
 
@@ -16250,7 +16769,7 @@ static int do_open(void)
 
                   else if (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP)
                     handle_joybuttonupdown(event, oldpos_x, oldpos_y);
-                }
+                } /* while (SDL_PollEvent(&event)) */
 
               if (motioner | hatmotioner)
                 handle_motioners(oldpos_x, oldpos_y, motioner, hatmotioner, old_hat_ticks, val_x, val_y, valhat_x,
@@ -16380,7 +16899,7 @@ static int do_open(void)
                     do_prompt_snd(PROMPT_PICT_EXPORT_FAILED_TXT, PROMPT_EXPORT_YES, "", SND_YOUCANNOT, screen->w / 2, screen->h / 2);
 
                   draw_tux_text(TUX_BORED, instructions, 1);
-		  update_list = 1;
+                  update_list = 1;
                 }
             }
           while (!done);
@@ -16629,7 +17148,10 @@ static int do_slideshow(void)
 
   /* Sort: */
 
-  qsort(fs, num_files_in_dir, sizeof(struct dirent2), (int (*)(const void *, const void *))compare_dirent2s);
+  if (!reversesort)
+    qsort(fs, num_files_in_dir, sizeof(struct dirent2), (int (*)(const void *, const void *))compare_dirent2s);
+  else
+    qsort(fs, num_files_in_dir, sizeof(struct dirent2), (int (*)(const void *, const void *))compare_dirent2s_invert);
 
 
   /* Read directory of images and build thumbnails: */
@@ -16810,8 +17332,24 @@ static int do_slideshow(void)
   instructions = textdir(TUX_TIP_SLIDESHOW);
   draw_tux_text(TUX_BORED, instructions, 1);
 
-  /* NOTE: cur is now set above; if file_id'th file is found, it's
-     set to that file's index; otherwise, we default to '0' */
+  /* Focus us around the newest images, as it's highly likely the
+     user wants to make a slideshow out of more recent images (vs. very
+     old ones) */
+  if (!reversesort)
+    {
+      /* Default sort puts newest at the top, oldest at the bottom,
+         so start at the end */
+      which = num_files - 1;
+      cur = ((num_files - 16) / 4) * 4;
+      if (cur < 0)
+        cur = 0;
+    }
+  else
+    {
+      /* "reversesort" option puts oldest at the top, so start there */
+      which = 0;
+      cur = 0;
+    }
 
   update_list = 1;
 
@@ -16823,7 +17361,6 @@ static int do_slideshow(void)
   speed = 5;
 
   do_setcursor(cursor_arrow);
-
 
   do
     {
@@ -17032,7 +17569,8 @@ static int do_slideshow(void)
                   playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
                 }
             }
-          else if (event.type == SDL_MOUSEBUTTONDOWN && valid_click(event.button.button))
+          else if ((event.type == SDL_MOUSEBUTTONDOWN && valid_click(event.button.button)) ||
+                   event.type == TP_SDL_MOUSEBUTTONSCROLL)
             {
               if (event.button.x >= r_ttools.w && event.button.x < WINDOW_WIDTH - r_ttoolopt.w &&
                   event.button.y >= img_scroll_up->h && event.button.y < (button_h * buttons_tall + r_ttools.h - button_h))
@@ -17076,41 +17614,80 @@ static int do_slideshow(void)
               else if (event.button.x >= (WINDOW_WIDTH - img_scroll_up->w) / 2 &&
                        event.button.x <= (WINDOW_WIDTH + img_scroll_up->w) / 2)
                 {
-                  if (event.button.y < img_scroll_up->h)
+                  if (event.button.y < img_scroll_up->h ||
+                      (event.button.y >= (button_h * buttons_tall + r_ttools.h - button_h) &&
+                               event.button.y < (button_h * buttons_tall + r_ttools.h - img_scroll_down->h))
+                     )
                     {
-                      /* Up scroll button: */
+                      /* Up or Down scroll button in Slideshow dialog: */
 
-                      if (cur > 0)
+                      if (event.button.y < img_scroll_up->h)
                         {
-                          cur = cur - 4;
-                          update_list = 1;
-                          playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+                          /* Up scroll button: */
 
-                          if (cur == 0)
-                            do_setcursor(cursor_arrow);
+                          if (cur > 0)
+                            {
+                              cur = cur - 4;
+                              update_list = 1;
+                              playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+
+                              if (cur == 0)
+                                do_setcursor(cursor_arrow);
+                            }
+
+                          if (which >= cur + 16)
+                            which = which - 4;
                         }
+                      else if (event.button.y >= (button_h * buttons_tall + r_ttools.h - button_h) &&
+                               event.button.y < (button_h * buttons_tall + r_ttools.h - img_scroll_down->h))
+                        {
+                          /* Down scroll button: */
 
-                      if (which >= cur + 16)
-                        which = which - 4;
+                          if (cur < num_files - 16)
+                            {
+                              cur = cur + 4;
+                              update_list = 1;
+                              playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+
+                              if (cur >= num_files - 16)
+                                do_setcursor(cursor_arrow);
+                            }
+
+                          if (which < cur)
+                            which = which + 4;
+                        }
                     }
-                  else if (event.button.y >= (button_h * buttons_tall + r_ttools.h - button_h) &&
-                           event.button.y < (button_h * buttons_tall + r_ttools.h - img_scroll_down->h))
+
+                  if (scrolltimer_dialog != TIMERID_NONE)
                     {
-                      /* Down scroll button: */
-
-                      if (cur < num_files - 16)
-                        {
-                          cur = cur + 4;
-                          update_list = 1;
-                          playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
-
-                          if (cur >= num_files - 16)
-                            do_setcursor(cursor_arrow);
-                        }
-
-                      if (which < cur)
-                        which = which + 4;
+                      SDL_RemoveTimer(scrolltimer_dialog);
+                      scrolltimer_dialog = TIMERID_NONE;
                     }
+
+                  if (!scrolling_dialog && event.type == SDL_MOUSEBUTTONDOWN)
+                    {
+                      DEBUG_PRINTF("Starting scrolling\n");
+                      memcpy(&scrolltimer_dialog_event, &event, sizeof(SDL_Event));
+                      scrolltimer_dialog_event.type = TP_SDL_MOUSEBUTTONSCROLL;
+
+                      /*
+                      * We enable the timer subsystem only when needed (e.g., to use SDL_AddTimer() needed
+                      * for scrolling) then disable it immediately after (e.g., after the timer has fired or
+                      * after SDL_RemoveTimer()) because enabling the timer subsystem in SDL1 has a high
+                      * energy impact on the Mac.
+                      */
+
+                      scrolling_dialog = 1;
+                      SDL_InitSubSystem(SDL_INIT_TIMER);
+                      scrolltimer_dialog =
+                        SDL_AddTimer(REPEAT_SPEED, scrolltimer_dialog_callback, (void *)&scrolltimer_dialog_event);
+                    }
+                  else
+                    {
+                      DEBUG_PRINTF("Continuing scrolling\n");
+                      scrolltimer_dialog =
+                        SDL_AddTimer(REPEAT_SPEED / 3, scrolltimer_dialog_callback, (void *)&scrolltimer_dialog_event);
+                  }
                 }
               else if (event.button.x >= r_ttools.w && event.button.x < r_ttools.w + button_w &&
                        event.button.y >= (button_h * buttons_tall + r_ttools.h) - button_h &&
@@ -17186,18 +17763,18 @@ static int do_slideshow(void)
                   playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
 
                   if (num_selected < 2)
-		    {
-	              /* None selected? Too dangerous to automatically select all (like we do for slideshow playback).
-		         Only 1 selected?  No point in saving as GIF.
+                    {
+                      /* None selected? Too dangerous to automatically select all (like we do for slideshow playback).
+                         Only 1 selected?  No point in saving as GIF.
                       */
                       freeme = textdir(gettext_noop("Select 2 or more drawings to turn into an animated GIF."));
                       draw_tux_text(TUX_BORED, freeme, 1);
                       free(freeme);
 
                       control_drawtext_timer(2000, instructions, 0); /* N.B. It will draw instructions, regardless */
-		    }
-		  else
-		    {
+                    }
+                  else
+                    {
                       export_successful = export_gif(selected, num_selected, dirname, d_names, d_exts, speed);
 
                       /* Redraw entire screen, after export: */
@@ -17219,7 +17796,7 @@ static int do_slideshow(void)
                       SDL_Flip(screen);
 
                       update_list = 1;
-		    }
+                    }
                 }
               else if (event.button.x >= (WINDOW_WIDTH - r_ttoolopt.w - button_w) &&
                        event.button.x < (WINDOW_WIDTH - r_ttoolopt.w) &&
@@ -17234,12 +17811,6 @@ static int do_slideshow(void)
                 }
 #ifdef __ANDROID__
               start_motion_convert(event);
-#endif
-            }
-          else if (event.type == SDL_MOUSEBUTTONUP)
-            {
-#ifdef __ANDROID__
-              stop_motion_convert(event);
 #endif
             }
           else if (event.type == SDL_MOUSEWHEEL && wheely)
@@ -17327,6 +17898,26 @@ static int do_slideshow(void)
               oldpos_x = event.button.x;
               oldpos_y = event.button.y;
             }
+
+          else if (event.type == SDL_MOUSEBUTTONUP)
+            {
+#ifdef __ANDROID__
+              stop_motion_convert(event);
+#endif
+
+              if (scrolling_dialog)
+                {
+                  if (scrolltimer_dialog != TIMERID_NONE)
+                    {
+                      SDL_RemoveTimer(scrolltimer_dialog);
+                      scrolltimer_dialog = TIMERID_NONE;
+                    }
+                  scrolling_dialog = 0;
+                  SDL_QuitSubSystem(SDL_INIT_TIMER);
+                  DEBUG_PRINTF("Killing dialog scrolling\n");
+                }
+            }
+
           else if (event.type == SDL_JOYAXISMOTION)
             handle_joyaxismotion(event, &motioner, &val_x, &val_y);
 
@@ -17347,8 +17938,8 @@ static int do_slideshow(void)
                     {
                       draw_tux_text(TUX_BORED, instructions, 1);
                     }
-		}
-	    }
+                }
+            }
         }
 
       if (motioner | hatmotioner)
@@ -18000,7 +18591,7 @@ static void print_image(void)
                               PROMPT_PRINT_NOW_NO,
                               img_printer, NULL, NULL, SND_AREYOUSURE,
                               (TOOL_PRINT % 2) * button_w + button_w / 2,
-			      (TOOL_PRINT / 2) * button_h + r_ttools.h + button_h / 2 - tool_scroll * button_h / gd_tools.cols + scroll))
+                              (TOOL_PRINT / 2) * button_h + r_ttools.h + button_h / 2 - tool_scroll * button_h / gd_tools.cols + scroll))
         {
           do_print();
 
@@ -18203,7 +18794,7 @@ static void do_render_cur_text(int do_blit)
     }
   else                          /* Erase the stalle letter . */
     {
-      if (cur_label != LABEL_SELECT)
+      if (cur_label != LABEL_SELECT && cur_label != LABEL_APPLY)
         {
           update_canvas_ex_r(old_dest.x - r_ttools.w, old_dest.y, old_dest.x + old_dest.w, old_dest.y + old_dest.h, 0);
           old_dest.x = old_dest.y = old_dest.w = old_dest.h = 0;
@@ -18481,19 +19072,59 @@ static char *textdir(const char *const str)
 /**
  * FIXME
  */
-/* Scroll Timer */
-static Uint32 scrolltimer_callback(Uint32 interval, void *param)
+/* Scroll Timer for Tools */
+static Uint32 scrolltimer_selector_callback(Uint32 interval, void *param)
 {
-  /* printf("scrolltimer_callback(%d) -- ", interval); */
-  if (scrolling)
+  /* printf("scrolltimer_selector_callback(%d) -- ", interval); */
+  if (scrolling_selector)
     {
-      DEBUG_PRINTF("(Still scrolling)\n");
+      DEBUG_PRINTF("(Still scrolling selector)\n");
       SDL_PushEvent((SDL_Event *) param);
       return interval;
     }
   else
     {
-      DEBUG_PRINTF("(all done scrolling)\n");
+      DEBUG_PRINTF("(all done scrolling selector)\n");
+      return 0;
+    }
+}
+
+/**
+ * FIXME
+ */
+/* Scroll Timer for Selector */
+static Uint32 scrolltimer_tool_callback(Uint32 interval, void *param)
+{
+  /* printf("scrolltimer_tool_callback(%d)\n", interval); */
+  if (scrolling_tool)
+    {
+      DEBUG_PRINTF("(Still scrolling tool)\n");
+      SDL_PushEvent((SDL_Event *) param);
+      return interval;
+    }
+  else
+    {
+      DEBUG_PRINTF("(all done scrolling tool)\n");
+      return 0;
+    }
+}
+
+
+/**
+ * FIXME
+ */
+/* Scroll Timer for Dialogs (Open & New) */
+static Uint32 scrolltimer_dialog_callback(Uint32 interval, void *param)
+{
+  if (scrolling_dialog)
+    {
+      DEBUG_PRINTF("(Still scrolling dialog)\n");
+      SDL_PushEvent((SDL_Event *) param);
+      return interval;
+    }
+  else
+    {
+      DEBUG_PRINTF("(all done scrolling dialog)\n");
       return 0;
     }
 }
@@ -20013,17 +20644,17 @@ static void load_magic_plugins(void)
                                       if (group < MAX_MAGIC_GROUPS)
                                         {
                                           idx = num_magics[group];
-    
+
                                           magics[group][idx].idx = i;
                                           magics[group][idx].place = plc;
                                           magics[group][idx].handle_idx = num_plugin_files;
                                           magics[group][idx].group = group;
                                           magics[group][idx].name =
                                             magic_funcs[num_plugin_files].get_name(magic_api_struct, i);
-    
+
                                           magics[group][idx].avail_modes =
                                             magic_funcs[num_plugin_files].modes(magic_api_struct, i);
-    
+
                                           for (j = 0; j < MAX_MODES; j++)
                                             {
                                               magics[group][idx].tip[j] = NULL;
@@ -20050,7 +20681,7 @@ static void load_magic_plugins(void)
                                                                                                     MODE_PAINT_WITH_PREVIEW);
                                                 }
                                             }
-    
+
                                           magics[group][idx].colors =
                                             magic_funcs[num_plugin_files].requires_colors(magic_api_struct, i);
                                           if (magics[group][idx].avail_modes & MODE_PAINT)
@@ -20061,18 +20692,18 @@ static void load_magic_plugins(void)
                                             magics[group][idx].mode = MODE_PAINT_WITH_PREVIEW;
                                           else
                                             magics[group][idx].mode = MODE_FULLSCREEN;
-   
+
                                           icon_tmp = magic_funcs[num_plugin_files].get_icon(magic_api_struct, i);
                                           if (icon_tmp != NULL)
-                                            { 
+                                            {
                                               magics[group][idx].img_icon = thumbnail(icon_tmp, 40 * button_w / ORIGINAL_BUTTON_SIZE, 30 * button_h / ORIGINAL_BUTTON_SIZE, 1);
                                               SDL_FreeSurface(icon_tmp);
-    
+
 #ifdef DEBUG
                                               printf("-- %s\n", magics[group][idx].name);
                                               printf("avail_modes = %d\n", magics[group][idx].avail_modes);
 #endif
-        
+
                                               num_magics[group]++;
                                               num_magics_total++;
                                             }
@@ -20526,6 +21157,7 @@ static int do_new_dialog(void)
 
   /* Sort: */
 
+  /* (N.B. "New" dialog not affected by 'reversesort' option) */
   qsort(fs, num_files_in_dirs, sizeof(struct dirent2), (int (*)(const void *, const void *))compare_dirent2s);
 
 
@@ -21075,7 +21707,8 @@ static int do_new_dialog(void)
                   playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
                 }
             }
-          else if (event.type == SDL_MOUSEBUTTONDOWN && valid_click(event.button.button))
+          else if ((event.type == SDL_MOUSEBUTTONDOWN && valid_click(event.button.button)) ||
+                   event.type == TP_SDL_MOUSEBUTTONSCROLL)
             {
               if (event.button.x >= r_ttools.w && event.button.x < WINDOW_WIDTH - r_ttoolopt.w &&
                   event.button.y >= img_scroll_up->h && event.button.y < (button_h * buttons_tall + r_ttools.h - button_h))
@@ -21106,40 +21739,79 @@ static int do_new_dialog(void)
               else if (event.button.x >= (WINDOW_WIDTH - img_scroll_up->w) / 2 &&
                        event.button.x <= (WINDOW_WIDTH + img_scroll_up->w) / 2)
                 {
-                  if (event.button.y < img_scroll_up->h)
+                  if (event.button.y < img_scroll_up->h ||
+                      (event.button.y >= (button_h * buttons_tall + r_ttools.h - button_h) &&
+                       event.button.y < (button_h * buttons_tall + r_ttools.h - img_scroll_up->h))
+                     )
                     {
-                      /* Up scroll button: */
+                      /* Up or Down scroll button in New dialog: */
 
-                      if (cur > 0)
+                      if (event.button.y < img_scroll_up->h)
                         {
-                          cur = cur - 4;
-                          update_list = 1;
-                          playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+                          /* Up scroll button: */
 
-                          if (cur == 0)
-                            do_setcursor(cursor_arrow);
+                          if (cur > 0)
+                            {
+                              cur = cur - 4;
+                              update_list = 1;
+                              playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+
+                              if (cur == 0)
+                                do_setcursor(cursor_arrow);
+                            }
+
+                          if (which >= cur + 16)
+                            which = which - 4;
+                        }
+                      else if (event.button.y >= (button_h * buttons_tall + r_ttools.h - button_h) &&
+                               event.button.y < (button_h * buttons_tall + r_ttools.h - img_scroll_up->h))
+                        {
+                          /* Down scroll button: */
+
+                          if (cur < num_files - 16)
+                            {
+                              cur = cur + 4;
+                              update_list = 1;
+                              playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+
+                              if (cur >= num_files - 16)
+                                do_setcursor(cursor_arrow);
+                            }
+
+                          if (which < cur)
+                            which = which + 4;
                         }
 
-                      if (which >= cur + 16)
-                        which = which - 4;
-                    }
-                  else if (event.button.y >= (button_h * buttons_tall + r_ttools.h - button_h) &&
-                           event.button.y < (button_h * buttons_tall + r_ttools.h - img_scroll_up->h))
-                    {
-                      /* Down scroll button: */
-
-                      if (cur < num_files - 16)
+                      if (scrolltimer_dialog != TIMERID_NONE)
                         {
-                          cur = cur + 4;
-                          update_list = 1;
-                          playsound(screen, 1, SND_SCROLL, 1, SNDPOS_CENTER, SNDDIST_NEAR);
-
-                          if (cur >= num_files - 16)
-                            do_setcursor(cursor_arrow);
+                          SDL_RemoveTimer(scrolltimer_dialog);
+                          scrolltimer_dialog = TIMERID_NONE;
                         }
 
-                      if (which < cur)
-                        which = which + 4;
+                      if (!scrolling_dialog && event.type == SDL_MOUSEBUTTONDOWN)
+                        {
+                          DEBUG_PRINTF("Starting scrolling\n");
+                          memcpy(&scrolltimer_dialog_event, &event, sizeof(SDL_Event));
+                          scrolltimer_dialog_event.type = TP_SDL_MOUSEBUTTONSCROLL;
+
+                          /*
+                          * We enable the timer subsystem only when needed (e.g., to use SDL_AddTimer() needed
+                          * for scrolling) then disable it immediately after (e.g., after the timer has fired or
+                          * after SDL_RemoveTimer()) because enabling the timer subsystem in SDL1 has a high
+                          * energy impact on the Mac.
+                          */
+
+                          scrolling_dialog = 1;
+                          SDL_InitSubSystem(SDL_INIT_TIMER);
+                          scrolltimer_dialog =
+                            SDL_AddTimer(REPEAT_SPEED, scrolltimer_dialog_callback, (void *)&scrolltimer_dialog_event);
+                              }
+                      else
+                        {
+                          DEBUG_PRINTF("Continuing scrolling\n");
+                          scrolltimer_dialog =
+                            SDL_AddTimer(REPEAT_SPEED / 3, scrolltimer_dialog_callback, (void *)&scrolltimer_dialog_event);
+                        }
                     }
                 }
               else if (event.button.x >= r_ttools.w && event.button.x < r_ttools.w + button_w &&
@@ -21164,12 +21836,6 @@ static int do_new_dialog(void)
                 }
 #ifdef __ANDROID__
               start_motion_convert(event);
-#endif
-            }
-          else if (event.type == SDL_MOUSEBUTTONUP)
-            {
-#ifdef __ANDROID__
-              stop_motion_convert(event);
 #endif
             }
           else if (event.type == SDL_MOUSEWHEEL && wheely)
@@ -21257,6 +21923,25 @@ static int do_new_dialog(void)
 
               oldpos_x = event.button.x;
               oldpos_y = event.button.y;
+            }
+
+          else if (event.type == SDL_MOUSEBUTTONUP)
+            {
+#ifdef __ANDROID__
+              stop_motion_convert(event);
+#endif
+
+              if (scrolling_dialog)
+                {
+                  if (scrolltimer_dialog != TIMERID_NONE)
+                    {
+                      SDL_RemoveTimer(scrolltimer_dialog);
+                      scrolltimer_dialog = TIMERID_NONE;
+                    }
+                  scrolling_dialog = 0;
+                  SDL_QuitSubSystem(SDL_INIT_TIMER);
+                  DEBUG_PRINTF("Killing dialog scrolling\n");
+                }
             }
 
           else if (event.type == SDL_JOYAXISMOTION)
@@ -21437,9 +22122,14 @@ static int do_new_dialog(void)
 
           /* Launch color picker if they chose that: */
 
-          if (which == NUM_COLORS - 1)
+          if (which == COLOR_PICKER)
             {
               if (do_color_picker() == 0)
+                return (0);
+            }
+          else if (which == COLOR_MIXER)
+            {
+              if (do_color_mix() == 0)
                 return (0);
             }
 
@@ -21525,7 +22215,7 @@ static int do_new_dialog_add_colors(SDL_Surface * *thumbs, int num_files, int *d
     {
       added = 0;
 
-      if (j < NUM_COLORS - 1)
+      if (j < COLOR_PICKER)
         {
           if (j == -1 ||        /* (short circuit) */
               color_hexes[j][0] != 255 ||       /* Ignore white, we'll have already added it */
@@ -21560,11 +22250,18 @@ static int do_new_dialog_add_colors(SDL_Surface * *thumbs, int num_files, int *d
               *white_in_palette = j;
             }
         }
-      else
+      else if (j == COLOR_PICKER)
         {
           /* Color picker: */
 
           thumbs[num_files] = thumbnail(img_color_picker, THUMB_W - 20, THUMB_H - 20, 0);
+          added = 1;
+        }
+      else if (j == COLOR_MIXER)
+        {
+          /* Color mixer: */
+
+          thumbs[num_files] = thumbnail(img_color_mix, THUMB_W - 20, THUMB_H - 20, 0);
           added = 1;
         }
 
@@ -21616,9 +22313,17 @@ static Uint8 magic_touched(int x, int y)
 }
 
 /**
- * FIXME
+ * Allow the user to select a color from one of the
+ * pixels within their picture.
+ *
+ * @param boolean temp_mode - whether to only appear
+ *   while a shortcut key is being held
+ *   (if not, the mouse will be positioned at the bottom
+ *   center, the UI will show a "Back" button, and wait
+ *   for a color to be clicked in the canvas, or the "Back"
+ *   button to be clicked)
  */
-static int do_color_sel(void)
+static int do_color_sel(int temp_mode)
 {
 #ifndef NO_PROMPT_SHADOWS
   SDL_Surface *alpha_surf;
@@ -21634,27 +22339,28 @@ static int do_color_sel(void)
   int done, chose;
   int back_left, back_top;
   int color_sel_x = 0, color_sel_y = 0;
-  int want_animated_popups = 1;
-  SDL_Surface *tmp_btn_up, *tmp_btn_down;
-
-  Uint32(*getpixel_tmp_btn_up) (SDL_Surface *, int, int);
-  Uint32(*getpixel_tmp_btn_down) (SDL_Surface *, int, int);
-  Uint32(*getpixel_img_paintwell) (SDL_Surface *, int, int);
-  Uint32(*getpixel_img_color_picker) (SDL_Surface *, int, int);
+  int want_animated_popups;
   Uint8 r, g, b;
-  double rh, gh, bh;
   SDL_Event event;
   SDLKey key;
   SDL_Rect r_color_sel;
   SDL_Rect color_example_dest;
   SDL_Surface *backup;
   SDL_Rect r_color_picker;
+  Uint32(*getpixel_img_color_picker) (SDL_Surface *, int, int);
+
+  if (!temp_mode)
+    {
+      want_animated_popups = 1;
+    }
+  else
+    {
+      want_animated_popups = 0;
+    }
 
   val_x = val_y = motioner = 0;
   valhat_x = valhat_y = hatmotioner = 0;
 
-  /* FIXME this is the first step to make animated popups optional,
-     to be removed from here when implemented in a more general way */
 
   hide_blinking_cursor();
 
@@ -21747,12 +22453,10 @@ static int do_color_sel(void)
 
   /* Determine spot for example color: */
 
-
   color_example_dest.x = r_color_sel.x + 2;
   color_example_dest.y = r_color_sel.y + 2;
   color_example_dest.w = r_color_sel.w - button_w - 8;
   color_example_dest.h = r_color_sel.h - 4;
-
 
   SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, 0, 0, 0));
 
@@ -21770,29 +22474,42 @@ static int do_color_sel(void)
 
 
 
-  /* Draw current color picker color: */
+  if (!temp_mode)
+    {
+      /* Draw current color picker color: */
 
-  SDL_FillRect(screen, &color_example_dest,
-               SDL_MapRGB(screen->format,
-                          color_hexes[NUM_COLORS - 2][0],
-                          color_hexes[NUM_COLORS - 2][1], color_hexes[NUM_COLORS - 2][2]));
+      SDL_FillRect(screen, &color_example_dest,
+                   SDL_MapRGB(screen->format,
+                              color_hexes[COLOR_SELECTOR][0],
+                              color_hexes[COLOR_SELECTOR][1],
+                              color_hexes[COLOR_SELECTOR][2]));
 
+      /* Show "Back" button */
+      back_left = r_color_sel.x + r_color_sel.w - button_w - 4;
+      back_top = r_color_sel.y;
 
+      dest.x = back_left;
+      dest.y = back_top;
 
-  /* Show "Back" button */
+      SDL_BlitSurface(img_back, NULL, screen, &dest);
 
-  back_left = r_color_sel.x + r_color_sel.w - button_w - 4;
-  back_top = r_color_sel.y;
+      dest.x = back_left + (img_back->w - img_openlabels_back->w) / 2;
+      dest.y = back_top + img_back->h - img_openlabels_back->h;
+      SDL_BlitSurface(img_openlabels_back, NULL, screen, &dest);
+    }
+  else
+    {
+      int mx, my;
 
-  dest.x = back_left;
-  dest.y = back_top;
+      /* Temp mode: Grab color from canvas under the mouse immediately
+         (let the motion-handling code in the loop below do it for us!) */
+      SDL_GetMouseState(&mx, &my);
+      SDL_WarpMouse(mx - 1, my); /* Need to move to a different spot, or no events occur */
+      SDL_WarpMouse(mx, my);
 
-  SDL_BlitSurface(img_back, NULL, screen, &dest);
-
-  dest.x = back_left + (img_back->w - img_openlabels_back->w) / 2;
-  dest.y = back_top + img_back->h - img_openlabels_back->h;
-  SDL_BlitSurface(img_openlabels_back, NULL, screen, &dest);
-
+      /* These will be unused in this mode: */
+      back_left = back_top = 0;
+    }
 
 
   /* Blit canvas on screen */
@@ -21809,8 +22526,11 @@ static int do_color_sel(void)
 #ifndef __ANDROID__
   /* FIXME: Strangely, this SDL_WarpMouse makes further event.button.x/y to be 0 on Android, thus making the selector unresponsive.
      Needs testing on other operating sistems with touchscreen.  */
-  SDL_WarpMouse(r_color_sel.x + r_color_sel.w / 2, r_color_sel.y + r_color_sel.h / 2);
+
+  if (!temp_mode)
+    SDL_WarpMouse(r_color_sel.x + r_color_sel.w / 2, r_color_sel.y + r_color_sel.h / 2);
 #endif
+
   do
     {
       while (SDL_PollEvent(&event))
@@ -21838,6 +22558,7 @@ static int do_color_sel(void)
 
               if (key == SDLK_ESCAPE)
                 {
+                  /* Hit [Escape]; abort (in either full UI or temporary mode) */
                   chose = 0;
                   done = 1;
                 }
@@ -21848,7 +22569,7 @@ static int do_color_sel(void)
                   event.button.x < r_canvas.x + r_canvas.w &&
                   event.button.y >= r_canvas.y && event.button.y < r_canvas.y + r_canvas.h)
                 {
-                  /* Picked a color! */
+                  /* Picked a color in the canvas, and released! */
 
                   chose = 1;
                   done = 1;
@@ -21859,14 +22580,26 @@ static int do_color_sel(void)
                   color_sel_x = x;
                   color_sel_y = y;
                 }
-              else if (event.button.x >= back_left &&
-                       event.button.x < back_left + img_back->w &&
-                       event.button.y >= back_top && event.button.y < back_top + img_back->h)
+              else
                 {
-                  /* Decided to go Back */
+                  if (!temp_mode)
+                    {
+                      if (event.button.x >= back_left &&
+                          event.button.x < back_left + img_back->w &&
+                          event.button.y >= back_top && event.button.y < back_top + img_back->h)
+                        {
+                          /* Full UI mode: Decided to go Back; abort */
 
-                  chose = 0;
-                  done = 1;
+                          chose = 0;
+                          done = 1;
+                        }
+                    }
+                  else
+                    {
+                      /* Temp mode: Released outside of canvas; abort */
+                      chose = 0;
+                      done = 1;
+                    }
                 }
             }
           else if (event.type == SDL_MOUSEMOTION)
@@ -21875,9 +22608,9 @@ static int do_color_sel(void)
                   event.button.x < r_canvas.x + r_canvas.w &&
                   event.button.y >= r_canvas.y && event.button.y < r_canvas.y + r_canvas.h)
                 {
-                  /* Hovering over the colors! */
+                  /* Hovering over the canvas! */
 
-                  do_setcursor(cursor_hand);
+                  do_setcursor(cursor_pipette);
 
 
                   /* Show a big solid example of the color: */
@@ -21896,27 +22629,33 @@ static int do_color_sel(void)
                 }
               else
                 {
-                  /* Revert to current color picker color, so we know what it was,
-                     and what we'll get if we go Back: */
+                  /* Outside the canvas... */
 
-                  SDL_FillRect(screen, &color_example_dest,
-                               SDL_MapRGB(screen->format,
-                                          color_hexes[NUM_COLORS - 2][0],
-                                          color_hexes[NUM_COLORS - 2][1], color_hexes[NUM_COLORS - 2][2]));
+                  if (!temp_mode)
+                    {
+                      /* Revert to current color picker color, so we know what it was,
+                         and what we'll get if we go Back: */
 
-                  SDL_UpdateRect(screen,
-                                 color_example_dest.x,
-                                 color_example_dest.y, color_example_dest.w, color_example_dest.h);
+                      SDL_FillRect(screen, &color_example_dest,
+                                   SDL_MapRGB(screen->format,
+                                              color_hexes[COLOR_SELECTOR][0],
+                                              color_hexes[COLOR_SELECTOR][1],
+                                              color_hexes[COLOR_SELECTOR][2]));
+
+                      SDL_UpdateRect(screen,
+                                     color_example_dest.x,
+                                     color_example_dest.y, color_example_dest.w, color_example_dest.h);
 
 
-                  /* Change cursor to arrow (or hand, if over Back): */
+                      /* Change cursor to arrow (or hand, if over Back): */
 
-                  if (event.button.x >= back_left &&
-                      event.button.x < back_left + img_back->w &&
-                      event.button.y >= back_top && event.button.y < back_top + img_back->h)
-                    do_setcursor(cursor_hand);
-                  else
-                    do_setcursor(cursor_arrow);
+                      if (event.button.x >= back_left &&
+                          event.button.x < back_left + img_back->w &&
+                          event.button.y >= back_top && event.button.y < back_top + img_back->h)
+                        do_setcursor(cursor_hand);
+                      else
+                        do_setcursor(cursor_arrow);
+                    }
                 }
 
               oldpos_x = event.motion.x;
@@ -21950,87 +22689,20 @@ static int do_color_sel(void)
       getpixel_img_color_picker = getpixels[canvas->format->BytesPerPixel];
       SDL_GetRGB(getpixel_img_color_picker(canvas, color_sel_x, color_sel_y), canvas->format, &r, &g, &b);
 
-      color_hexes[NUM_COLORS - 2][0] = r;
-      color_hexes[NUM_COLORS - 2][1] = g;
-      color_hexes[NUM_COLORS - 2][2] = b;
+      color_hexes[COLOR_SELECTOR][0] = r;
+      color_hexes[COLOR_SELECTOR][1] = g;
+      color_hexes[COLOR_SELECTOR][2] = b;
 
-
-      /* Re-render color picker to show the current color it contains: */
-
-      tmp_btn_up = thumbnail(img_btn_up, color_button_w, color_button_h, 0);
-      tmp_btn_down = thumbnail(img_btn_down, color_button_w, color_button_h, 0);
-      img_color_btn_off = thumbnail(img_btn_off, color_button_w, color_button_h, 0);
-
-      getpixel_tmp_btn_up = getpixels[tmp_btn_up->format->BytesPerPixel];
-      getpixel_tmp_btn_down = getpixels[tmp_btn_down->format->BytesPerPixel];
-      getpixel_img_paintwell = getpixels[img_paintwell->format->BytesPerPixel];
-
-      rh = sRGB_to_linear_table[color_hexes[NUM_COLORS - 2][0]];
-      gh = sRGB_to_linear_table[color_hexes[NUM_COLORS - 2][1]];
-      bh = sRGB_to_linear_table[color_hexes[NUM_COLORS - 2][2]];
-
-
-
-      SDL_LockSurface(img_color_btns[NUM_COLORS - 2]);
-      SDL_LockSurface(img_color_btns[NUM_COLORS - 2 + NUM_COLORS]);
-
-      for (y = 0; y < tmp_btn_up->h /* 48 */ ; y++)
-        {
-          for (x = 0; x < tmp_btn_up->w; x++)
-            {
-              double ru, gu, bu, rd, gd, bd, aa;
-              Uint8 a;
-
-              SDL_GetRGB(getpixel_tmp_btn_up(tmp_btn_up, x, y), tmp_btn_up->format, &r, &g, &b);
-
-              ru = sRGB_to_linear_table[r];
-              gu = sRGB_to_linear_table[g];
-              bu = sRGB_to_linear_table[b];
-              SDL_GetRGB(getpixel_tmp_btn_down(tmp_btn_down, x, y), tmp_btn_down->format, &r, &g, &b);
-
-              rd = sRGB_to_linear_table[r];
-              gd = sRGB_to_linear_table[g];
-              bd = sRGB_to_linear_table[b];
-              SDL_GetRGBA(getpixel_img_paintwell(img_paintwell, x, y), img_paintwell->format, &r, &g, &b, &a);
-
-              aa = a / 255.0;
-
-              if (a == 255)
-                {
-                  putpixels[img_color_btns[NUM_COLORS - 2]->format->BytesPerPixel]
-                    (img_color_btns[NUM_COLORS - 2], x, y,
-                     SDL_MapRGB(img_color_btns[i]->format,
-                                linear_to_sRGB(rh * aa + ru * (1.0 - aa)),
-                                linear_to_sRGB(gh * aa + gu * (1.0 - aa)), linear_to_sRGB(bh * aa + bu * (1.0 - aa))));
-
-                  putpixels[img_color_btns[NUM_COLORS - 2 + NUM_COLORS]->format->BytesPerPixel]
-                    (img_color_btns[NUM_COLORS - 2 + NUM_COLORS], x, y,
-                     SDL_MapRGB(img_color_btns[i + NUM_COLORS]->format,
-                                linear_to_sRGB(rh * aa + rd * (1.0 - aa)),
-                                linear_to_sRGB(gh * aa + gd * (1.0 - aa)), linear_to_sRGB(bh * aa + bd * (1.0 - aa))));
-                }
-            }
-        }
-
-      SDL_UnlockSurface(img_color_btns[NUM_COLORS - 2]);
-      SDL_UnlockSurface(img_color_btns[NUM_COLORS - 2 + NUM_COLORS]);
-
-      dest.x = (img_color_btns[NUM_COLORS - 2]->w - img_color_sel->w) / 2;
-      dest.y = (img_color_btns[NUM_COLORS - 2]->h - img_color_sel->h) / 2;
-      dest.w = img_color_sel->w;
-      dest.h = img_color_sel->h;
-      SDL_BlitSurface(img_color_sel, NULL, img_color_btns[NUM_COLORS - 2], &dest);
-
-      dest.x = (img_color_btns[NUM_COLORS - 2 + NUM_COLORS]->w - img_color_sel->w) / 2;
-      dest.y = (img_color_btns[NUM_COLORS - 2 + NUM_COLORS]->h - img_color_sel->h) / 2;
-      SDL_BlitSurface(img_color_sel, NULL, img_color_btns[NUM_COLORS - 2 + NUM_COLORS], &dest);
+      /* Re-render color selector to show the current color it contains: */
+      render_color_button(COLOR_SELECTOR, NULL, img_color_sel);
     }
 
   return (chose);
 }
 
 /**
- * FIXME
+ * Display a large prompt, allowing the user to pick a
+ * color from a large palette.
  */
 static int do_color_picker(void)
 {
@@ -22043,29 +22715,34 @@ static int do_color_picker(void)
   int ox, oy;
   int val_x, val_y, motioner;
   int valhat_x, valhat_y, hatmotioner;
-  SDL_Surface *tmp_btn_up, *tmp_btn_down;
   int stop;
-
-  Uint32(*getpixel_tmp_btn_up) (SDL_Surface *, int, int);
-  Uint32(*getpixel_tmp_btn_down) (SDL_Surface *, int, int);
-  Uint32(*getpixel_img_paintwell) (SDL_Surface *, int, int);
   Uint32(*getpixel_img_color_picker) (SDL_Surface *, int, int);
   Uint8 r, g, b;
-  double rh, gh, bh;
   int done, chose;
   SDL_Event event;
   SDLKey key;
   int color_picker_left, color_picker_top;
-  int back_left, back_top;
+  int color_picker_val_left, color_picker_val_top;
+  int back_left, back_top, done_left, done_top;
   SDL_Rect color_example_dest;
   SDL_Surface *backup;
   SDL_Rect r_color_picker;
   SDL_Rect r_final;
   val_x = val_y = motioner = 0;
   valhat_x = valhat_y = hatmotioner = 0;
+  int old_cp_x, old_cp_y, old_cp_v;
+  int last_motion_within_val_slider;
+
+  /* Remember old choices, in case we hit [Back] */
+  old_cp_x = color_picker_x;
+  old_cp_y = color_picker_y;
+  old_cp_v = color_picker_v;
+
   hide_blinking_cursor();
 
+
   do_setcursor(cursor_hand);
+  getpixel_img_color_picker = getpixels[img_color_picker->format->BytesPerPixel];
 
 
   /* Draw button box: */
@@ -22122,7 +22799,7 @@ static int do_color_picker(void)
       for (i = 8; i > 0; i = i - 2)
         {
           dest.x = r_final.x + i - 4;
-	  dest.y = r_final.y + i - 4;
+          dest.y = r_final.y + i - 4;
           dest.w = r_final.w + 8;
           dest.h = r_final.h + 16;
 
@@ -22146,6 +22823,8 @@ static int do_color_picker(void)
 
   /* Draw color palette: */
 
+  render_color_picker_palette();
+
   color_picker_left = r_final.x;
   color_picker_top = r_final.y;
 
@@ -22160,42 +22839,19 @@ static int do_color_picker(void)
   r_color_picker.h = dest.h;
 
 
-  /* Draw last color position: */
+  /* Draw values: */
 
-  dest.x = color_picker_x + color_picker_left - 3;
-  dest.y = color_picker_y + color_picker_top - 1;
-  dest.w = 7;
-  dest.h = 3;
+  color_picker_val_left = color_picker_left + img_color_picker->w + 2;
+  color_picker_val_top = color_picker_top;
 
-  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 0, 0, 0));
-
-  dest.x = color_picker_x + color_picker_left - 1;
-  dest.y = color_picker_y + color_picker_top - 3;
-  dest.w = 3;
-  dest.h = 7;
-
-  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 0, 0, 0));
-
-  dest.x = color_picker_x + color_picker_left - 2;
-  dest.y = color_picker_y + color_picker_top;
-  dest.w = 5;
-  dest.h = 1;
-
-  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));
-
-  dest.x = color_picker_x + color_picker_left;
-  dest.y = color_picker_y + color_picker_top - 2;
-  dest.w = 1;
-  dest.h = 5;
-
-  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));
+  draw_color_picker_values(color_picker_val_left, color_picker_val_top);
 
 
   /* Determine spot for example color: */
 
-  color_example_dest.x = color_picker_left + img_color_picker->w + 2;
+  color_example_dest.x = color_picker_left + img_color_picker->w + 2 + img_back->w + 2;
   color_example_dest.y = color_picker_top + 2;
-  color_example_dest.w = r_final.w / 2 - 2;
+  color_example_dest.w = r_final.w / 2 - 2 - img_back->w - 2;
   color_example_dest.h = r_final.h / 2 - 4;
 
 
@@ -22218,15 +22874,15 @@ static int do_color_picker(void)
 
   SDL_FillRect(screen, &color_example_dest,
                SDL_MapRGB(screen->format,
-                          color_hexes[NUM_COLORS - 1][0],
-                          color_hexes[NUM_COLORS - 1][1], color_hexes[NUM_COLORS - 1][2]));
+                          color_hexes[COLOR_PICKER][0],
+                          color_hexes[COLOR_PICKER][1],
+                          color_hexes[COLOR_PICKER][2]));
 
 
 
   /* Show "Back" button */
 
-  back_left =
-    (((PROMPT_W - 96 * 2) + w * 2 - img_color_picker->w) - img_back->w) / 2 + color_picker_left + img_color_picker->w;
+  back_left = r_final.x + r_final.w - img_back->w - 2;
   back_top = color_picker_top + img_color_picker->h - img_back->h - 2;
 
   dest.x = back_left;
@@ -22239,7 +22895,37 @@ static int do_color_picker(void)
   SDL_BlitSurface(img_openlabels_back, NULL, screen, &dest);
 
 
+  /* Show "Done" button */
+  done_left = back_left - img_yes->w - 2;
+  done_top = back_top;
+
+  dest.x = done_left;
+  dest.y = done_top;
+
+  SDL_BlitSurface(img_yes, NULL, screen, &dest);
+
   SDL_Flip(screen);
+
+
+  /* Draw crosshairs */
+
+  /* (N.B. - We do this the first time _after_ flipping the entire screen,
+     so we avoid updating parts of the screen where the crosshairs
+     extend past the rainbow rectangle or value slider, since this
+     function does not (yet) do any clipping) */
+  draw_color_picker_crosshairs(color_picker_left, color_picker_top, color_picker_val_left, color_picker_val_top);
+
+  dest.x = color_picker_left;
+  dest.y = color_picker_top;
+  dest.w = img_color_picker->w;
+  dest.h = img_color_picker->h;
+  SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+
+  dest.x = color_picker_val_left;
+  dest.y = color_picker_val_top;
+  dest.w = img_back->w;
+  dest.h = img_color_picker_val->h;
+  SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
 
 
   /* Let the user pick a color, or go back: */
@@ -22247,7 +22933,7 @@ static int do_color_picker(void)
   done = 0;
   chose = 0;
   x = y = 0;
-  SDL_WarpMouse(back_left + button_w / 2, back_top - button_w / 2);
+  last_motion_within_val_slider = 0;
 
   do
     {
@@ -22284,18 +22970,68 @@ static int do_color_picker(void)
             {
               if (event.button.x >= color_picker_left &&
                   event.button.x < color_picker_left + img_color_picker->w &&
-                  event.button.y >= color_picker_top && event.button.y < color_picker_top + img_color_picker->h)
+                  event.button.y >= color_picker_top &&
+                  event.button.y < color_picker_top + img_color_picker->h)
                 {
                   /* Picked a color! */
-
-                  chose = 1;
-                  done = 1;
 
                   x = event.button.x - color_picker_left;
                   y = event.button.y - color_picker_top;
 
                   color_picker_x = x;
                   color_picker_y = y;
+
+                  /* Update (entire) color box */
+                  SDL_GetRGB(getpixel_img_color_picker(img_color_picker, x, y), img_color_picker->format, &r, &g, &b);
+
+                  SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, r, g, b));
+
+                  SDL_UpdateRect(screen,
+                                 color_example_dest.x, color_example_dest.y,
+                                 color_example_dest.w, color_example_dest.h);
+
+
+                  /* Reposition hue/sat crosshair */
+                  dest.x = color_picker_left;
+                  dest.y = color_picker_top;
+                  SDL_BlitSurface(img_color_picker, NULL, screen, &dest);
+                  draw_color_picker_crosshairs(color_picker_left, color_picker_top, color_picker_val_left, color_picker_val_top);
+                  SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+                }
+              else if (event.button.x >= color_picker_val_left &&
+                       event.button.y >= color_picker_val_top &&
+                       event.button.x <= color_picker_val_left + img_back->w &&
+                       event.button.y <= color_picker_val_top + img_color_picker_val->h)
+                {
+                  /* Picked a value from the slider */
+
+                  y = event.button.y - color_picker_val_top;
+                  color_picker_v = y;
+
+                  /* Re-render the palette with the new value */
+                  render_color_picker_palette();
+
+                  /* Update (entire) color box */
+                  SDL_GetRGB(getpixel_img_color_picker(img_color_picker, color_picker_x, color_picker_y), img_color_picker->format, &r, &g, &b);
+
+                  SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, r, g, b));
+
+                  SDL_UpdateRect(screen,
+                                 color_example_dest.x, color_example_dest.y,
+                                 color_example_dest.w, color_example_dest.h);
+
+
+                  /* Redraw hue/sat palette, and val slider, and redraw crosshairs */
+                  draw_color_picker_palette_and_values(color_picker_left, color_picker_top, color_picker_val_left, color_picker_val_top);
+                }
+              else if (event.button.x >= done_left &&
+                       event.button.x < done_left + img_yes->w &&
+                       event.button.y >= done_top && event.button.y < done_top + img_yes->h)
+                {
+                  /* Accepting color */
+
+                  chose = 1;
+                  done = 1;
                 }
               else if (event.button.x >= back_left &&
                        event.button.x < back_left + img_back->w &&
@@ -22309,52 +23045,107 @@ static int do_color_picker(void)
             }
           else if (event.type == SDL_MOUSEMOTION)
             {
-              if (event.button.x >= color_picker_left &&
-                  event.button.x < color_picker_left + img_color_picker->w &&
-                  event.button.y >= color_picker_top && event.button.y < color_picker_top + img_color_picker->h)
+              if (event.button.x >= color_picker_val_left &&
+                       event.button.y >= color_picker_val_top &&
+                       event.button.x <= color_picker_val_left + img_back->w &&
+                       event.button.y <= color_picker_val_top + img_color_picker_val->h)
                 {
-                  /* Hovering over the colors! */
+                  int tmp_color_picker_v;
+
+                  /* Hovering over a value from the slider */
 
                   do_setcursor(cursor_hand);
 
+                  y = event.button.y - color_picker_val_top;
+                  tmp_color_picker_v = color_picker_v;
+                  color_picker_v = y;
+
+                  /* Re-render the palette with the new value */
+                  render_color_picker_palette();
+                  color_picker_v = tmp_color_picker_v;
 
                   /* Show a big solid example of the color: */
 
                   x = event.button.x - color_picker_left;
                   y = event.button.y - color_picker_top;
 
-                  getpixel_img_color_picker = getpixels[img_color_picker->format->BytesPerPixel];
-                  SDL_GetRGB(getpixel_img_color_picker(img_color_picker, x, y), img_color_picker->format, &r, &g, &b);
+                  SDL_GetRGB(getpixel_img_color_picker(img_color_picker, color_picker_x, color_picker_y), img_color_picker->format, &r, &g, &b);
 
-                  SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, r, g, b));
+                  dest.x = color_example_dest.x + color_example_dest.w / 4;
+                  dest.y = color_example_dest.y + color_example_dest.h / 4;
+                  dest.w = color_example_dest.w / 2;
+                  dest.h = color_example_dest.h / 2;
 
-                  SDL_UpdateRect(screen,
-                                 color_example_dest.x,
-                                 color_example_dest.y, color_example_dest.w, color_example_dest.h);
+                  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
+
+                  SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+
+
+                  /* Redraw hue/sat palette, and val slider, and redraw crosshairs */
+                  draw_color_picker_palette_and_values(color_picker_left, color_picker_top, color_picker_val_left, color_picker_val_top);
+
+                  last_motion_within_val_slider = 1;
                 }
               else
                 {
-                  /* Revert to current color picker color, so we know what it was,
-                     and what we'll get if we go Back: */
+                  if (last_motion_within_val_slider)
+                    {
+                      render_color_picker_palette();
+                      draw_color_picker_palette_and_values(color_picker_left, color_picker_top, color_picker_val_left, color_picker_val_top);
+                      last_motion_within_val_slider = 0;
+                    }
 
-                  SDL_FillRect(screen, &color_example_dest,
-                               SDL_MapRGB(screen->format,
-                                          color_hexes[NUM_COLORS - 1][0],
-                                          color_hexes[NUM_COLORS - 1][1], color_hexes[NUM_COLORS - 1][2]));
+                  if (event.button.x >= color_picker_left &&
+                      event.button.x < color_picker_left + img_color_picker->w &&
+                      event.button.y >= color_picker_top && event.button.y < color_picker_top + img_color_picker->h)
+                    {
+                      /* Hovering over the colors! */
 
-                  SDL_UpdateRect(screen,
-                                 color_example_dest.x,
-                                 color_example_dest.y, color_example_dest.w, color_example_dest.h);
+                      do_setcursor(cursor_pipette);
 
 
-                  /* Change cursor to arrow (or hand, if over Back): */
+                      /* Show a big solid example of the color: */
 
-                  if (event.button.x >= back_left &&
-                      event.button.x < back_left + img_back->w &&
-                      event.button.y >= back_top && event.button.y < back_top + img_back->h)
-                    do_setcursor(cursor_hand);
+                      x = event.button.x - color_picker_left;
+                      y = event.button.y - color_picker_top;
+
+                      SDL_GetRGB(getpixel_img_color_picker(img_color_picker, x, y), img_color_picker->format, &r, &g, &b);
+
+                      dest.x = color_example_dest.x + color_example_dest.w / 4;
+                      dest.y = color_example_dest.y + color_example_dest.h / 4;
+                      dest.w = color_example_dest.w / 2;
+                      dest.h = color_example_dest.h / 2;
+
+                      SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
+
+                      SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+                    }
                   else
-                    do_setcursor(cursor_arrow);
+                    {
+                      /* Revert to current color picker color */
+
+                      SDL_GetRGB(getpixel_img_color_picker(img_color_picker, color_picker_x, color_picker_y),
+                                 img_color_picker->format, &r, &g, &b);
+
+                      SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, r, g, b));
+
+                      SDL_UpdateRect(screen,
+                                     color_example_dest.x, color_example_dest.y,
+                                     color_example_dest.w, color_example_dest.h);
+
+                      /* Change cursor to arrow (or hand, if over Back or Done): */
+
+                      if (event.button.x >= back_left &&
+                          event.button.x < back_left + img_back->w &&
+                          event.button.y >= back_top && event.button.y < back_top + img_back->h)
+                        do_setcursor(cursor_hand);
+                      else if (event.button.x >= done_left &&
+                               event.button.x < done_left + img_yes->w &&
+                               event.button.y >= done_top && event.button.y < done_top + img_yes->h)
+                        do_setcursor(cursor_hand);
+                      else
+                        do_setcursor(cursor_arrow);
+                    }
                 }
 
               oldpos_x = event.motion.x;
@@ -22381,84 +23172,25 @@ static int do_color_picker(void)
   while (!done);
 
 
-  /* Set the new color: */
-
   if (chose)
     {
-      getpixel_img_color_picker = getpixels[img_color_picker->format->BytesPerPixel];
-      SDL_GetRGB(getpixel_img_color_picker(img_color_picker, x, y), img_color_picker->format, &r, &g, &b);
+      /* Set the new color: */
+      SDL_GetRGB(getpixel_img_color_picker(img_color_picker, color_picker_x, color_picker_y), img_color_picker->format, &r, &g, &b);
 
-      color_hexes[NUM_COLORS - 1][0] = r;
-      color_hexes[NUM_COLORS - 1][1] = g;
-      color_hexes[NUM_COLORS - 1][2] = b;
+      color_hexes[COLOR_PICKER][0] = r;
+      color_hexes[COLOR_PICKER][1] = g;
+      color_hexes[COLOR_PICKER][2] = b;
 
 
       /* Re-render color picker to show the current color it contains: */
-
-      tmp_btn_up = thumbnail(img_btn_up, color_button_w, color_button_h, 0);
-      tmp_btn_down = thumbnail(img_btn_down, color_button_w, color_button_h, 0);
-      img_color_btn_off = thumbnail(img_btn_off, color_button_w, color_button_h, 0);
-
-      getpixel_tmp_btn_up = getpixels[tmp_btn_up->format->BytesPerPixel];
-      getpixel_tmp_btn_down = getpixels[tmp_btn_down->format->BytesPerPixel];
-      getpixel_img_paintwell = getpixels[img_paintwell->format->BytesPerPixel];
-
-      rh = sRGB_to_linear_table[color_hexes[NUM_COLORS - 1][0]];
-      gh = sRGB_to_linear_table[color_hexes[NUM_COLORS - 1][1]];
-      bh = sRGB_to_linear_table[color_hexes[NUM_COLORS - 1][2]];
-      SDL_BlitSurface(tmp_btn_down, NULL, img_color_btns[NUM_COLORS - 1], NULL);
-      SDL_BlitSurface(tmp_btn_up, NULL, img_color_btns[NUM_COLORS - 1 + NUM_COLORS], NULL);
-
-      SDL_LockSurface(img_color_btns[NUM_COLORS - 1]);
-      SDL_LockSurface(img_color_btns[NUM_COLORS - 1 + NUM_COLORS]);
-
-      for (y = 0; y < tmp_btn_up->h /* 48 */ ; y++)
-        {
-          for (x = 0; x < tmp_btn_up->w; x++)
-            {
-              double ru, gu, bu, rd, gd, bd, aa;
-              Uint8 a;
-
-              SDL_GetRGB(getpixel_tmp_btn_up(tmp_btn_up, x, y), tmp_btn_up->format, &r, &g, &b);
-
-              ru = sRGB_to_linear_table[r];
-              gu = sRGB_to_linear_table[g];
-              bu = sRGB_to_linear_table[b];
-              SDL_GetRGB(getpixel_tmp_btn_down(tmp_btn_down, x, y), tmp_btn_down->format, &r, &g, &b);
-
-              rd = sRGB_to_linear_table[r];
-              gd = sRGB_to_linear_table[g];
-              bd = sRGB_to_linear_table[b];
-              SDL_GetRGBA(getpixel_img_paintwell(img_paintwell, x, y), img_paintwell->format, &r, &g, &b, &a);
-
-              aa = a / 255.0;
-
-              putpixels[img_color_btns[NUM_COLORS - 1]->format->BytesPerPixel]
-                (img_color_btns[NUM_COLORS - 1], x, y,
-                 getpixels[img_color_picker_thumb->format->BytesPerPixel] (img_color_picker_thumb, x, y));
-              putpixels[img_color_btns[NUM_COLORS - 1 + NUM_COLORS]->format->BytesPerPixel]
-                (img_color_btns[NUM_COLORS - 1 + NUM_COLORS], x, y,
-                 getpixels[img_color_picker_thumb->format->BytesPerPixel] (img_color_picker_thumb, x, y));
-
-              if (a == 255)
-                {
-                  putpixels[img_color_btns[NUM_COLORS - 1]->format->BytesPerPixel]
-                    (img_color_btns[NUM_COLORS - 1], x, y,
-                     SDL_MapRGB(img_color_btns[i]->format,
-                                linear_to_sRGB(rh * aa + ru * (1.0 - aa)),
-                                linear_to_sRGB(gh * aa + gu * (1.0 - aa)), linear_to_sRGB(bh * aa + bu * (1.0 - aa))));
-
-                  putpixels[img_color_btns[NUM_COLORS - 1 + NUM_COLORS]->format->BytesPerPixel]
-                    (img_color_btns[NUM_COLORS - 1 + NUM_COLORS], x, y,
-                     SDL_MapRGB(img_color_btns[i + NUM_COLORS]->format,
-                                linear_to_sRGB(rh * aa + rd * (1.0 - aa)),
-                                linear_to_sRGB(gh * aa + gd * (1.0 - aa)), linear_to_sRGB(bh * aa + bd * (1.0 - aa))));
-                }
-            }
-        }
-
-      SDL_UnlockSurface(img_color_btns[NUM_COLORS - 1]);
-      SDL_UnlockSurface(img_color_btns[NUM_COLORS - 1 + NUM_COLORS]);
+      render_color_button(COLOR_PICKER, img_color_picker_thumb, NULL);
+    }
+  else
+    {
+      /* Set crosshairs to the existing color */
+      color_picker_x = old_cp_x;
+      color_picker_y = old_cp_y;
+      color_picker_v = old_cp_v;
     }
 
 
@@ -22470,6 +23202,1201 @@ static int do_color_picker(void)
   return (chose);
 }
 
+
+static void draw_color_picker_palette_and_values(int color_picker_left, int color_picker_top, int color_picker_val_left, int color_picker_val_top) {
+  SDL_Rect dest;
+
+  draw_color_picker_values(color_picker_val_left, color_picker_val_top);
+
+  dest.x = color_picker_left;
+  dest.y = color_picker_top;
+  SDL_BlitSurface(img_color_picker, NULL, screen, &dest);
+  SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+
+  draw_color_picker_crosshairs(color_picker_left, color_picker_top, color_picker_val_left, color_picker_val_top);
+
+  dest.x = color_picker_val_left;
+  dest.y = color_picker_val_top;
+  dest.w = img_back->w;
+  dest.h = img_color_picker_val->h;
+  SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+
+  dest.x = color_picker_left;
+  dest.y = color_picker_top;
+  dest.w = img_color_picker->w;
+  dest.h = img_color_picker->h;
+  SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+}
+
+static void render_color_picker_palette(void)
+{
+  int x, y;
+  Uint8 r, g, b;
+  void (*putpixel) (SDL_Surface *, int, int, Uint32);
+  SDL_Event event;
+
+  putpixel = putpixels[img_color_picker->format->BytesPerPixel];
+  for (y = 0; y < img_color_picker->h; y++)
+    {
+      for (x = 0; x < img_color_picker->w; x++)
+        {
+          hsvtorgb((((float) y * 360.0) / ((float) img_color_picker->h)),
+                   ((float) x / ((float) img_color_picker->w)),
+                   1.0 - (((float) color_picker_v) / ((float) img_color_picker_val->h)),
+                   &r, &g, &b);
+          putpixel(img_color_picker, x, y,
+                   SDL_MapRGBA(img_color_picker->format, r, g, b, 255));
+        }
+    }
+
+  while (SDL_PollEvent(&event) && event.type == SDL_MOUSEMOTION)
+    {
+      /* Eat further motion events that may've been generated while
+         we re-rendered the palette (so we don't spin tons of cycles
+         rendering it more than we really need) */
+    }
+
+  SDL_PushEvent(&event);
+}
+
+
+/* Length & thickness should be odd numbers, so the
+   center of the crosshair is positioned precisely */
+int CROSSHAIR_LENGTH, CROSSHAIR_THICKNESS, CROSSHAIR_BORDER;
+
+static void set_color_picker_crosshair_size(void) {
+  CROSSHAIR_LENGTH = (int) (11 * button_scale);
+  CROSSHAIR_LENGTH /= 2;
+  CROSSHAIR_LENGTH *= 2;
+  CROSSHAIR_LENGTH++;
+
+  if (CROSSHAIR_LENGTH < 3)
+    CROSSHAIR_LENGTH = 3;
+
+
+  CROSSHAIR_THICKNESS = (int) (button_scale);
+  CROSSHAIR_THICKNESS /= 2;
+  CROSSHAIR_THICKNESS *= 2;
+  CROSSHAIR_THICKNESS++;
+
+  if (CROSSHAIR_THICKNESS < 1)
+    CROSSHAIR_THICKNESS = 1;
+
+  CROSSHAIR_BORDER = CROSSHAIR_THICKNESS / 2;
+  if (CROSSHAIR_BORDER < 1)
+    CROSSHAIR_BORDER = 1;
+
+  DEBUG_PRINTF("Crosshair will be %d in size, with %d thickness, and a %d border\n",
+               CROSSHAIR_LENGTH, CROSSHAIR_THICKNESS, CROSSHAIR_BORDER);
+}
+
+static void draw_color_picker_crosshairs(int color_picker_left, int color_picker_top, int color_picker_val_left, int color_picker_val_top)
+{
+  SDL_Rect dest;
+  int ctr_x;
+
+  /* Hue/Saturation (the big rectangle) */
+
+  dest.x = color_picker_x + color_picker_left - (CROSSHAIR_LENGTH - 1) / 2 - CROSSHAIR_BORDER;
+  dest.y = color_picker_y + color_picker_top - (CROSSHAIR_THICKNESS - 1) / 2 - CROSSHAIR_BORDER;
+  dest.w = CROSSHAIR_LENGTH + CROSSHAIR_BORDER * 2;
+  dest.h = CROSSHAIR_THICKNESS + CROSSHAIR_BORDER * 2;
+
+  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 0, 0, 0));
+
+  dest.x = color_picker_x + color_picker_left - (CROSSHAIR_THICKNESS - 1) / 2 - CROSSHAIR_BORDER;
+  dest.y = color_picker_y + color_picker_top - (CROSSHAIR_LENGTH - 1) / 2 - CROSSHAIR_BORDER;
+  dest.w = CROSSHAIR_THICKNESS + CROSSHAIR_BORDER * 2;
+  dest.h = CROSSHAIR_LENGTH + CROSSHAIR_BORDER * 2;
+
+  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 0, 0, 0));
+
+
+  dest.x = color_picker_x + color_picker_left - (CROSSHAIR_LENGTH - 1) / 2;
+  dest.y = color_picker_y + color_picker_top - (CROSSHAIR_THICKNESS - 1) / 2;
+  dest.w = CROSSHAIR_LENGTH;
+  dest.h = CROSSHAIR_THICKNESS;
+
+  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));
+
+  dest.x = color_picker_x + color_picker_left - (CROSSHAIR_THICKNESS - 1) / 2;
+  dest.y = color_picker_y + color_picker_top - (CROSSHAIR_LENGTH - 1) / 2;
+  dest.w = CROSSHAIR_THICKNESS;
+  dest.h = CROSSHAIR_LENGTH;
+
+  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));
+
+
+
+  /* Value (the slider) */
+
+  ctr_x = color_picker_val_left + img_back->w / 2;
+
+  dest.x = ctr_x - (CROSSHAIR_LENGTH - 1) / 2 - CROSSHAIR_BORDER;
+  dest.y = color_picker_v + color_picker_val_top - (CROSSHAIR_THICKNESS - 1) / 2 - CROSSHAIR_BORDER;
+  dest.w = CROSSHAIR_LENGTH + CROSSHAIR_BORDER * 2;
+  dest.h = CROSSHAIR_THICKNESS + CROSSHAIR_BORDER * 2;
+
+  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 0, 0, 0));
+
+  dest.x = ctr_x - (CROSSHAIR_THICKNESS - 1) / 2 - CROSSHAIR_BORDER;
+  dest.y = color_picker_v + color_picker_val_top - (CROSSHAIR_LENGTH - 1) / 2 - CROSSHAIR_BORDER;
+  dest.w = CROSSHAIR_THICKNESS + CROSSHAIR_BORDER * 2;
+  dest.h = CROSSHAIR_LENGTH + CROSSHAIR_BORDER * 2;
+
+  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 0, 0, 0));
+
+
+  dest.x = ctr_x - (CROSSHAIR_LENGTH - 1) / 2;
+  dest.y = color_picker_v + color_picker_val_top - (CROSSHAIR_THICKNESS - 1) / 2;
+  dest.w = CROSSHAIR_LENGTH;
+  dest.h = CROSSHAIR_THICKNESS;
+
+  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));
+
+  dest.x = ctr_x - (CROSSHAIR_THICKNESS - 1) / 2;
+  dest.y = color_picker_v + color_picker_val_top - (CROSSHAIR_LENGTH - 1) / 2;
+  dest.w = CROSSHAIR_THICKNESS;
+  dest.h = CROSSHAIR_LENGTH;
+
+  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));
+}
+
+
+static void draw_color_picker_values(int l, int t)
+{
+  SDL_Rect dest;
+
+  dest.x = l;
+  dest.y = t;
+  dest.w = img_color_picker_val->w;
+  dest.h = img_color_picker_val->h;
+
+  SDL_BlitSurface(img_color_picker_val, NULL, screen, &dest);
+  SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+}
+
+
+enum {
+  COLOR_MIXER_BTN_RED,
+  COLOR_MIXER_BTN_YELLOW,
+  COLOR_MIXER_BTN_BLUE,
+  COLOR_MIXER_BTN_WHITE,
+  COLOR_MIXER_BTN_GREY,
+  COLOR_MIXER_BTN_BLACK,
+#define NUM_MIXER_COLORS (COLOR_MIXER_BTN_BLACK + 1)
+  COLOR_MIXER_BTN_UNDO,
+  COLOR_MIXER_BTN_REDO,
+  COLOR_MIXER_BTN_CLEAR,
+  COLOR_MIXER_BTN_USE,
+  COLOR_MIXER_BTN_BACK,
+  NUM_COLOR_MIXER_BTNS
+};
+
+SDL_Rect color_example_dest;
+int color_mix_btn_lefts[NUM_COLOR_MIXER_BTNS], color_mix_btn_tops[NUM_COLOR_MIXER_BTNS];
+
+/* Hue (degrees 0-360, or -1 for N/A), Saturation (0.0-1.0), Value (0.0-1.0) */
+float mixer_hsv[NUM_MIXER_COLORS][3] = {
+  { 330.0, 1.0, 0.9 }, /* Red (Magenta-ish) */
+  { 60.0, 1.0, 0.9 }, /* Yellow */
+  { 210.0, 1.0, 0.9 }, /* Blue (Cyan-ish) */
+  { -1, 0.0, 1.0 }, /* White */
+  { -1, 0.0, 0.5 }, /* Grey */
+  { -1, 0.0, 0.0 } /* Black */
+};
+
+
+const char * color_mixer_color_names[NUM_MIXER_COLORS] = {
+  /* Descriptions (names) of the color mixer tool's primary colors and shades */
+  gettext_noop("red"),
+  gettext_noop("yellow"),
+  gettext_noop("blue"),
+  gettext_noop("white"),
+  gettext_noop("grey"),
+  gettext_noop("black")
+};
+
+const char * color_mixer_color_tips[] = {
+  /* Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.) */
+  gettext_noop("Your color is %1$s %2$s."),
+  gettext_noop("Your color is %1$s %2$s and %3$s %4$s."),
+  gettext_noop("Your color is %1$s %2$s, %3$s %4$s, and %5$s %6$s."),
+  gettext_noop("Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, and %7$s %8$s."),
+  gettext_noop("Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, and %9$s %10$s."),
+  gettext_noop("Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s, and %11$s %12$s.")
+};
+
+
+int color_mixer_color_counts[NUM_MIXER_COLORS];
+
+#define NUM_COLOR_MIX_UNDO_BUFS 20
+int color_mix_cur_undo, color_mix_oldest_undo, color_mix_newest_undo;
+int mixer_undo_buf[NUM_COLOR_MIX_UNDO_BUFS];
+
+/**
+ * Display a large prompt, allowing the user to mix
+ * colors together from hues and black/grey/white.
+ */
+static int do_color_mix(void)
+{
+  int i, btn_clicked;
+#ifndef NO_PROMPT_SHADOWS
+  SDL_Surface *alpha_surf;
+#endif
+  int cell_w, cell_h;
+  SDL_Rect dest;
+  int w;
+  int ox, oy;
+  int val_x, val_y, motioner;
+  int valhat_x, valhat_y, hatmotioner;
+  int stop;
+  Uint8 new_r, new_g, new_b;
+  float h, s, v;
+  Uint8 r, g, b;
+  int done, chose;
+  SDL_Event event;
+  SDLKey key;
+  SDL_Surface *backup;
+  SDL_Rect r_final;
+  int old_color_mixer_reset;
+  val_x = val_y = motioner = 0;
+  valhat_x = valhat_y = hatmotioner = 0;
+  hide_blinking_cursor();
+
+  do_setcursor(cursor_hand);
+
+
+  /* Draw button box: */
+
+  playsound(screen, 0, SND_PROMPT, 1, SNDPOS_RIGHT, 128);
+
+  backup = SDL_CreateRGBSurface(screen->flags, screen->w, screen->h,
+                                screen->format->BitsPerPixel,
+                                screen->format->Rmask,
+                                screen->format->Gmask, screen->format->Bmask, screen->format->Amask);
+
+  SDL_BlitSurface(screen, NULL, backup, NULL);
+
+  ox = screen->w - color_button_w / 2;
+  oy = r_colors.y + r_colors.h / 2;
+
+  cell_w = img_back->w + 2;
+  cell_h = img_back->h + 2;
+
+  /* Area for the dialog window */
+  r_final.x = r_canvas.x + (r_canvas.w - (cell_w * 6)) / 2 - 4;
+  r_final.y = ((r_canvas.h - (cell_w * 4)) / 2) - 2;
+  r_final.w = (cell_w * 6);
+  r_final.h = (cell_h * 4);
+
+  stop = r_final.h / 2 + 6 + 4;
+
+  for (w = 0; w <= stop; w = w + 4)
+    {
+      dest.x = ox - ((ox -r_final.x) * w) / stop;
+      dest.y = oy - ((oy -r_final.y) * w) / stop;
+      dest.w = w * 4;
+      dest.h = w * 2;
+
+      SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255 - (int)(w / button_scale) , 255 -(int)( w / button_scale), 255 - (int)(w / button_scale)));
+
+      SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+      if (w % 16 == 0)
+        SDL_Delay(1);
+    }
+
+  SDL_BlitSurface(backup, NULL, screen, NULL);
+
+#ifndef NO_PROMPT_SHADOWS
+  alpha_surf = SDL_CreateRGBSurface(SDL_SWSURFACE,
+                                    r_final.w + 8,
+                                    r_final.h + 16,
+                                    screen->format->BitsPerPixel,
+                                    screen->format->Rmask,
+                                    screen->format->Gmask, screen->format->Bmask, screen->format->Amask);
+
+  if (alpha_surf != NULL)
+    {
+      SDL_FillRect(alpha_surf, NULL, SDL_MapRGB(alpha_surf->format, 0, 0, 0));
+      SDL_SetSurfaceAlphaMod(alpha_surf, 64);
+
+      for (i = 8; i > 0; i = i - 2)
+        {
+          dest.x = r_final.x + i - 4;
+          dest.y = r_final.y + i - 4;
+          dest.w = r_final.w + 8;
+          dest.h = r_final.h + 16;
+
+          SDL_BlitSurface(alpha_surf, NULL, screen, &dest);
+        }
+
+      SDL_FreeSurface(alpha_surf);
+    }
+#endif
+
+
+  /* Draw prompt box: */
+
+  w = w - 6;
+  dest.x = r_final.x - 2;
+  dest.w = r_final.w + 4;
+  dest.h = w * 2;
+  dest.y = r_final.y - 2;
+  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));
+
+
+  /* Determine spot for example color: */
+
+  color_example_dest.x = r_final.x + (cell_w) * 4;
+  color_example_dest.y = r_final.y + 2;
+  color_example_dest.w = cell_w * 2;
+  color_example_dest.h = cell_h * 2;
+
+  SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, 0, 0, 0));
+
+  color_example_dest.x += 2;
+  color_example_dest.y += 2;
+  color_example_dest.w -= 4;
+  color_example_dest.h -= 4;
+
+  SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, 255, 255, 255));
+
+  color_example_dest.x += 2;
+  color_example_dest.y += 2;
+  color_example_dest.w -= 4;
+  color_example_dest.h -= 4;
+
+
+  /* Draw current color mixer color: */
+  if (color_mixer_reset)
+    {
+      draw_color_mixer_blank_example();
+    }
+  else
+    {
+      SDL_FillRect(screen, &color_example_dest,
+                   SDL_MapRGB(screen->format,
+                              color_hexes[COLOR_MIXER][0],
+                              color_hexes[COLOR_MIXER][1],
+                              color_hexes[COLOR_MIXER][2]));
+    }
+
+  rgbtohsv(color_hexes[COLOR_MIXER][0], color_hexes[COLOR_MIXER][1], color_hexes[COLOR_MIXER][2], &h, &s, &v);
+  if (s == 0)
+    {
+      /* Current color is totally greyscale; set hue to "N/A" */
+      h = -1;
+    }
+
+  /* Draw colors */
+  for (i = 0; i < NUM_MIXER_COLORS; i++)
+    {
+      float tmp_v;
+
+      color_mix_btn_lefts[i] = r_final.x + ((i % 3) * cell_w) + 2;
+      color_mix_btn_tops[i] = r_final.y + ((i / 3) * cell_h) + 2;
+
+      dest.x = color_mix_btn_lefts[i];
+      dest.y = color_mix_btn_tops[i];
+      dest.w = cell_w - 2;
+      dest.h = cell_h - 2;
+
+      tmp_v = mixer_hsv[i][2];
+      if (tmp_v >= 0.05)
+        tmp_v -= 0.05;
+
+      hsvtorgb(mixer_hsv[i][0], mixer_hsv[i][1], tmp_v, &r, &g, &b);
+      SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
+    }
+
+  /* Draw "Undo" & "Redo" buttons */
+
+  color_mix_btn_lefts[COLOR_MIXER_BTN_UNDO] = r_final.x + (cell_w * 0) + 2;
+  color_mix_btn_tops[COLOR_MIXER_BTN_UNDO] = r_final.y + (cell_h * 3) + 2;
+
+  color_mix_btn_lefts[COLOR_MIXER_BTN_REDO] = r_final.x + (cell_w * 1) + 2;
+  color_mix_btn_tops[COLOR_MIXER_BTN_REDO] = r_final.y + (cell_h * 3) + 2;
+
+  draw_color_mix_undo_redo();
+
+
+
+  /* Show "Clear" button */
+
+  color_mix_btn_lefts[COLOR_MIXER_BTN_CLEAR] = r_final.x + (cell_w * 2) + 2;
+  color_mix_btn_tops[COLOR_MIXER_BTN_CLEAR] = r_final.y + (cell_h * 3) + 2;
+
+  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_CLEAR];
+  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_CLEAR];
+  SDL_BlitSurface(img_erase, NULL, screen, &dest);
+
+  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_CLEAR] + (img_back->w - img_mixerlabel_clear->w) / 2;
+  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_CLEAR] + img_back->h - img_mixerlabel_clear->h;
+  SDL_BlitSurface(img_mixerlabel_clear, NULL, screen, &dest);
+
+
+  /* Show "Back" button */
+
+  color_mix_btn_lefts[COLOR_MIXER_BTN_BACK] = r_final.x + (cell_w * 4) + 2;
+  color_mix_btn_tops[COLOR_MIXER_BTN_BACK] = r_final.y + (cell_h * 3) + 2;
+
+  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_BACK];
+  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_BACK];
+  SDL_BlitSurface(img_back, NULL, screen, &dest);
+
+  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_BACK] + (img_back->w - img_openlabels_back->w) / 2;
+  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_BACK] + img_back->h - img_openlabels_back->h;
+  SDL_BlitSurface(img_openlabels_back, NULL, screen, &dest);
+
+  /* Show "OK" button */
+
+  color_mix_btn_lefts[COLOR_MIXER_BTN_USE] = r_final.x + (cell_w * 5) + 2;
+  color_mix_btn_tops[COLOR_MIXER_BTN_USE] = r_final.y + (cell_h * 3) + 2;
+
+  if (!color_mixer_reset)
+    {
+      /* Only draw "OK" button when we can accept! */
+      dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_USE];
+      dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_USE];
+      SDL_BlitSurface(img_yes, NULL, screen, &dest);
+    }
+
+  SDL_Flip(screen);
+
+  if (color_mixer_reset)
+    {
+      for (i = 0; i < NUM_MIXER_COLORS; i++)
+        color_mixer_color_counts[i] = 0;
+    }
+
+  done = 0;
+  chose = 0;
+  old_color_mixer_reset = color_mixer_reset;
+
+
+
+  /* Let the user pick a color, or go back: */
+  do
+    {
+      while (SDL_PollEvent(&event))
+        {
+          if (event.type == SDL_QUIT)
+            {
+              chose = 0;
+              done = 1;
+            }
+          else if (event.type == SDL_WINDOWEVENT)
+            {
+              handle_active(&event);
+            }
+          else if (event.type == SDL_KEYUP)
+            {
+              key = event.key.keysym.sym;
+
+              handle_keymouse(key, SDL_KEYUP, 24, NULL, NULL);
+            }
+          else if (event.type == SDL_KEYDOWN)
+            {
+              key = event.key.keysym.sym;
+
+              handle_keymouse(key, SDL_KEYDOWN, 24, NULL, NULL);
+
+              if (key == SDLK_ESCAPE)
+                {
+                  chose = 0;
+                  done = 1;
+                }
+            }
+          else if (event.type == SDL_MOUSEMOTION)
+            {
+              /* Motion; change mouse pointer shape based on active UI buttons */
+
+              btn_clicked = -1;
+              for (i = 0; i < NUM_COLOR_MIXER_BTNS && btn_clicked == -1; i++)
+                {
+                  if (event.button.x >= color_mix_btn_lefts[i] &&
+                      event.button.x < color_mix_btn_lefts[i] + img_back->w &&
+                      event.button.y >= color_mix_btn_tops[i] &&
+                      event.button.y < color_mix_btn_tops[i] + img_back->h)
+                    {
+                      btn_clicked = i;
+                    }
+                }
+
+              if ((btn_clicked >= 0 && btn_clicked < NUM_MIXER_COLORS) ||
+                  btn_clicked == COLOR_MIXER_BTN_CLEAR ||
+                  (btn_clicked == COLOR_MIXER_BTN_USE && !color_mixer_reset) ||
+                  btn_clicked == COLOR_MIXER_BTN_BACK ||
+                  (btn_clicked == COLOR_MIXER_BTN_UNDO && color_mix_cur_undo != color_mix_oldest_undo) ||
+                  (btn_clicked == COLOR_MIXER_BTN_REDO && color_mix_cur_undo != color_mix_newest_undo)
+                 )
+                {
+                  do_setcursor(cursor_hand);
+                }
+              else
+                {
+                  do_setcursor(cursor_arrow);
+                }
+            }
+          else if (event.type == SDL_MOUSEBUTTONUP && valid_click(event.button.button))
+            {
+              /* Released a click, determine what action to take! */
+
+              /* Did they click any of the actual buttons? */
+              btn_clicked = -1;
+              for (i = 0; i < NUM_COLOR_MIXER_BTNS && btn_clicked == -1; i++)
+                {
+                  if (event.button.x >= color_mix_btn_lefts[i] &&
+                      event.button.x < color_mix_btn_lefts[i] + img_back->w &&
+                      event.button.y >= color_mix_btn_tops[i] &&
+                      event.button.y < color_mix_btn_tops[i] + img_back->h)
+                    {
+                      btn_clicked = i;
+                    }
+                }
+
+              if (btn_clicked >= 0 && btn_clicked < NUM_MIXER_COLORS)
+                {
+                  /* Clicked a color! */
+
+                  if (color_mixer_reset)
+                    {
+                      /* Starting fresh; add the chosen paint 100% */
+                      h = mixer_hsv[btn_clicked][0];
+                      s = mixer_hsv[btn_clicked][1];
+                      v = mixer_hsv[btn_clicked][2];
+
+                      color_mixer_reset = 0;
+
+                      /* We can draw the "OK" button now! */
+                      dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_USE];
+                      dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_USE];
+                      dest.w = cell_w;
+                      dest.h = cell_h;
+                      SDL_BlitSurface(img_yes, NULL, screen, &dest);
+                      SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+
+                      color_mixer_color_counts[btn_clicked]++;
+                    }
+                  else
+                    {
+                      /* Blending in some color */
+
+                      color_mixer_color_counts[btn_clicked]++;
+
+                      calc_color_mixer_average(&h, &s, &v);
+                    }
+
+                  /* Record into undo buffer */
+
+                  mixer_undo_buf[color_mix_cur_undo] = btn_clicked;
+                  color_mix_cur_undo = (color_mix_cur_undo + 1) % NUM_COLOR_MIX_UNDO_BUFS;
+                  if (color_mix_cur_undo == color_mix_oldest_undo)
+                    color_mix_oldest_undo = (color_mix_oldest_undo + 1) % NUM_COLOR_MIX_UNDO_BUFS;
+                  color_mix_newest_undo = color_mix_cur_undo;
+
+                  draw_color_mix_undo_redo();
+
+
+                  /* Show the new color */
+
+                  hsvtorgb(h, s, v, &new_r, &new_g, &new_b);
+
+                  SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, new_r, new_g, new_b));
+                  SDL_UpdateRect(screen, color_example_dest.x, color_example_dest.y, color_example_dest.w, color_example_dest.h);
+
+                  /* Draw the tooltip and play a sound */
+                  draw_color_mixer_tooltip();
+
+                  playsound(screen, 1, SND_BUBBLE, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+                }
+              else if (btn_clicked == COLOR_MIXER_BTN_BACK)
+                {
+                  /* Decided to go Back */
+
+                  chose = 0;
+                  done = 1;
+                }
+              else if (btn_clicked == COLOR_MIXER_BTN_USE && !color_mixer_reset)
+                {
+                  /* Decided to use this color */
+                  chose = 1;
+                  done = 1;
+                }
+              else if (btn_clicked == COLOR_MIXER_BTN_CLEAR)
+                {
+                  /* Decided to clear the color choice & start over */
+
+                  color_mixer_reset = 1;
+
+                  /* Wipe undo buffer */
+                  color_mix_cur_undo = color_mix_oldest_undo = color_mix_newest_undo = 0;
+                  draw_color_mix_undo_redo();
+
+                  /* Clear color usage counts */
+                  for (i = 0; i < NUM_MIXER_COLORS; i++)
+                    color_mixer_color_counts[i] = 0;
+
+                  draw_tux_text(TUX_BORED, color_names[COLOR_MIXER], 1);
+
+                  /* Erase the "OK" button! */
+                  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_USE];
+                  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_USE];
+                  dest.w = cell_w;
+                  dest.h = cell_h;
+
+                  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));
+                  SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+
+                  draw_color_mixer_blank_example();
+
+#ifndef NOSOUND
+                  if (!mute && use_sound)
+                    {
+                      if (!Mix_Playing(0))
+                        {
+                          eraser_sound = (eraser_sound + 1) % 2;
+
+                          playsound(screen, 0, SND_ERASER1 + eraser_sound, 0, SNDPOS_CENTER, SNDDIST_NEAR);
+                        }
+                    }
+#endif
+                }
+              else if (btn_clicked == COLOR_MIXER_BTN_UNDO && color_mix_cur_undo != color_mix_oldest_undo)
+                {
+                  int tot_count;
+
+                  /* Undo! */
+                  color_mix_cur_undo--;
+                  if (color_mix_cur_undo < 0)
+                    color_mix_cur_undo = NUM_COLOR_MIX_UNDO_BUFS - 1;
+
+                  color_mixer_color_counts[mixer_undo_buf[color_mix_cur_undo]]--;
+
+                  tot_count = 0;
+                  for (i = 0; i < NUM_MIXER_COLORS; i++)
+                    tot_count += color_mixer_color_counts[i];
+
+                  if (tot_count > 0)
+                    {
+                      /* Still have some paint on there */
+                      calc_color_mixer_average(&h, &s, &v);
+
+                      hsvtorgb(h, s, v, &new_r, &new_g, &new_b);
+
+                      SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, new_r, new_g, new_b));
+                      SDL_UpdateRect(screen, color_example_dest.x, color_example_dest.y, color_example_dest.w, color_example_dest.h);
+
+                      draw_color_mixer_tooltip();
+                    }
+                  else
+                    {
+                      /* Back to the very beginning; show blank */
+                      color_mixer_reset = 1;
+                      draw_color_mixer_blank_example();
+
+                      /* Erase the "OK" button! */
+                      dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_USE];
+                      dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_USE];
+                      dest.w = cell_w;
+                      dest.h = cell_h;
+
+                      SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));
+                      SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+
+                      draw_tux_text(TUX_BORED, color_names[COLOR_MIXER], 1);
+                    }
+
+                  playsound(screen, 1, SND_CLICK, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+                  draw_color_mix_undo_redo();
+                }
+              else if (btn_clicked == COLOR_MIXER_BTN_REDO && color_mix_cur_undo != color_mix_newest_undo)
+                {
+                  /* Redo! */
+                  color_mixer_color_counts[mixer_undo_buf[color_mix_cur_undo]]++;
+
+                  calc_color_mixer_average(&h, &s, &v);
+
+                  hsvtorgb(h, s, v, &new_r, &new_g, &new_b);
+
+                  SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, new_r, new_g, new_b));
+                  SDL_UpdateRect(screen, color_example_dest.x, color_example_dest.y, color_example_dest.w, color_example_dest.h);
+
+                  if (color_mixer_reset == 1)
+                    {
+                      /* Bringing back the first color */
+                      color_mixer_reset = 0;
+
+                      /* Draw "OK" */
+                      dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_USE];
+                      dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_USE];
+                      dest.w = cell_w;
+                      dest.h = cell_h;
+                      SDL_BlitSurface(img_yes, NULL, screen, &dest);
+                      SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+                    }
+
+                  color_mix_cur_undo = (color_mix_cur_undo + 1) % NUM_COLOR_MIX_UNDO_BUFS;
+
+                  playsound(screen, 1, SND_CLICK, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+                  draw_color_mix_undo_redo();
+
+                  draw_color_mixer_tooltip();
+                }
+            }
+          else if (event.type == SDL_JOYAXISMOTION)
+            handle_joyaxismotion(event, &motioner, &val_x, &val_y);
+
+          else if (event.type == SDL_JOYHATMOTION)
+            handle_joyhatmotion(event, oldpos_x, oldpos_y, &valhat_x, &valhat_y, &hatmotioner, &old_hat_ticks);
+
+          else if (event.type == SDL_JOYBALLMOTION)
+            handle_joyballmotion(event, oldpos_x, oldpos_y);
+
+          else if (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP)
+            handle_joybuttonupdown(event, oldpos_x, oldpos_y);
+        }
+
+      if (motioner | hatmotioner)
+        handle_motioners(oldpos_x, oldpos_y, motioner, hatmotioner, old_hat_ticks, val_x, val_y, valhat_x, valhat_y);
+
+      SDL_Delay(10);
+    }
+  while (!done);
+
+
+  /* Set the new color: */
+
+  if (chose)
+    {
+      color_hexes[COLOR_MIXER][0] = new_r;
+      color_hexes[COLOR_MIXER][1] = new_g;
+      color_hexes[COLOR_MIXER][2] = new_b;
+
+
+      /* Re-render color mixer to show the current color it contains: */
+      render_color_button(COLOR_MIXER, NULL, img_color_mix);
+    }
+  else
+    {
+      color_mixer_reset = old_color_mixer_reset;
+    }
+
+  /* Remove the prompt: */
+
+  update_canvas(0, 0, canvas->w, canvas->h);
+
+
+  return (chose);
+}
+
+
+
+
+/**
+ * Draw a pattern over the color mixer sample,
+ * for when no color has been chosen.
+ */
+static void draw_color_mixer_blank_example(void) {
+  int w;
+  SDL_Rect dest;
+
+  SDL_FillRect(screen, &color_example_dest,
+               SDL_MapRGB(screen->format, 192, 192, 192));
+
+  for (w = 0; w < color_example_dest.w; w += 4)
+    {
+      dest.x = color_example_dest.x + w;
+      dest.y = color_example_dest.y;
+      dest.w = 2;
+      dest.h = color_example_dest.h;
+
+      SDL_FillRect(screen, &dest,
+                   SDL_MapRGB(screen->format, 128, 128, 128));
+    }
+
+  SDL_UpdateRect(screen, color_example_dest.x, color_example_dest.y, color_example_dest.w, color_example_dest.h);
+}
+
+
+/**
+ * Take the colors chosen in the mixer, in their various
+ * proportions, and calculate an HSV value for the
+ * final color
+ */
+static void calc_color_mixer_average(float * out_h, float * out_s, float * out_v) {
+  float h, s, v;
+  float circ_mean_avg_sin, circ_mean_avg_cos;
+  int i, tot_count, tot_count_hue;
+  float sat, val;
+
+  tot_count = tot_count_hue = 0;
+  circ_mean_avg_sin = circ_mean_avg_cos = 0.0;
+  sat = val = 0.0;
+
+  for (i = 0; i < NUM_MIXER_COLORS; i++)
+    {
+      tot_count += color_mixer_color_counts[i];
+
+      if (mixer_hsv[i][0] != -1)
+        {
+          tot_count_hue += color_mixer_color_counts[i];
+
+          circ_mean_avg_sin += (sin(mixer_hsv[i][0] * M_PI / 180.0) * color_mixer_color_counts[i]);
+          circ_mean_avg_cos += (cos(mixer_hsv[i][0] * M_PI / 180.0) * color_mixer_color_counts[i]);
+        }
+
+       sat += mixer_hsv[i][1] * (color_mixer_color_counts[i]);
+       val += mixer_hsv[i][2] * (color_mixer_color_counts[i]);
+    }
+
+  if (tot_count_hue == 0)
+    {
+      /* None of the colors we mixed has any hue! */
+      h = -1;
+    }
+  else
+    {
+      /* Average all the hues we have */
+      circ_mean_avg_sin /= tot_count_hue;
+      circ_mean_avg_cos /= tot_count_hue;
+
+      h = atan2(circ_mean_avg_sin, circ_mean_avg_cos) * 180.0 / M_PI;
+      if (h < 0.0)
+        h += 360.0;
+      else if (h >= 360.0)
+        h -= 360.0;
+    }
+
+  /* Average the saturation and values */
+
+  s = sat / tot_count;
+  v = val / tot_count;
+
+  *out_h = h;
+  *out_s = s;
+  *out_v = v;
+}
+
+/**
+ * Draw the undo & redo buttons of the color mixer,
+ * making the buttons appear clickable ("up") or not ("off"),
+ * depending on the state of the color mixer's undo buffer
+ */
+static void draw_color_mix_undo_redo(void) {
+  SDL_Rect dest;
+  SDL_Surface * icon_label_color, * tmp_surf;
+
+  /* Show "Undo" button */
+
+  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_UNDO];
+  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_UNDO];
+
+  if (color_mix_cur_undo != color_mix_oldest_undo)
+    {
+      SDL_BlitSurface(img_btn_up, NULL, screen, &dest);
+      icon_label_color = img_black;
+    }
+  else
+    {
+      SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
+      icon_label_color = img_grey;
+    }
+
+  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_UNDO] + (img_back->w - img_tools[TOOL_UNDO]->w) / 2;
+  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_UNDO];
+
+  tmp_surf = SDL_DisplayFormatAlpha(img_tools[TOOL_UNDO]);
+  SDL_BlitSurface(icon_label_color, NULL, tmp_surf, NULL);
+  SDL_BlitSurface(tmp_surf, NULL, screen, &dest);
+  SDL_FreeSurface(tmp_surf);
+
+  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_UNDO] + (img_back->w - img_tool_names[TOOL_UNDO]->w) / 2;
+  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_UNDO] + img_back->h - img_tool_names[TOOL_UNDO]->h;
+
+  tmp_surf = SDL_DisplayFormatAlpha(img_tool_names[TOOL_UNDO]);
+  SDL_BlitSurface(icon_label_color, NULL, tmp_surf, NULL);
+  SDL_BlitSurface(tmp_surf, NULL, screen, &dest);
+  SDL_FreeSurface(tmp_surf);
+
+  SDL_UpdateRect(screen, color_mix_btn_lefts[COLOR_MIXER_BTN_UNDO], color_mix_btn_tops[COLOR_MIXER_BTN_UNDO], img_back->w, img_back->h);
+
+
+  /* Show "Redo" button */
+
+  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_REDO];
+  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_REDO];
+
+  if (color_mix_cur_undo != color_mix_newest_undo)
+    {
+      SDL_BlitSurface(img_btn_up, NULL, screen, &dest);
+      icon_label_color = img_black;
+    }
+  else
+    {
+      SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
+      icon_label_color = img_grey;
+    }
+
+  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_REDO] + (img_back->w - img_tools[TOOL_REDO]->w) / 2;
+  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_REDO];
+
+  tmp_surf = SDL_DisplayFormatAlpha(img_tools[TOOL_REDO]);
+  SDL_BlitSurface(icon_label_color, NULL, tmp_surf, NULL);
+  SDL_BlitSurface(tmp_surf, NULL, screen, &dest);
+  SDL_FreeSurface(tmp_surf);
+
+  dest.x = color_mix_btn_lefts[COLOR_MIXER_BTN_REDO] + (img_back->w - img_tool_names[TOOL_REDO]->w) / 2;
+  dest.y = color_mix_btn_tops[COLOR_MIXER_BTN_REDO] + img_back->h - img_tool_names[TOOL_REDO]->h;
+
+  tmp_surf = SDL_DisplayFormatAlpha(img_tool_names[TOOL_REDO]);
+  SDL_BlitSurface(icon_label_color, NULL, tmp_surf, NULL);
+  SDL_BlitSurface(tmp_surf, NULL, screen, &dest);
+  SDL_FreeSurface(tmp_surf);
+
+  SDL_UpdateRect(screen, color_mix_btn_lefts[COLOR_MIXER_BTN_REDO], color_mix_btn_tops[COLOR_MIXER_BTN_REDO], img_back->w, img_back->h);
+}
+
+
+/**
+ * Show a tooltip describing the color the user has mixed
+ */
+static void draw_color_mixer_tooltip(void) {
+  int i, num_colors_used, tot_count;
+  char tip_txt[1024];
+  char tip_txt_proportions[NUM_MIXER_COLORS][64];
+  int used_colors_color[NUM_MIXER_COLORS], used_colors_amount[NUM_MIXER_COLORS];
+
+  num_colors_used = 0;
+  tot_count = 0;
+  for (i = 0; i < NUM_MIXER_COLORS; i++)
+    {
+      if (color_mixer_color_counts[i])
+        {
+          used_colors_color[num_colors_used] = i;
+          used_colors_amount[num_colors_used] = color_mixer_color_counts[i];
+          num_colors_used++;
+
+          tot_count += color_mixer_color_counts[i];
+        }
+    }
+
+  if (num_colors_used == 1)
+    {
+      if (used_colors_amount[0] == 1)
+        {
+          snprintf(tip_txt, sizeof(tip_txt), gettext(color_mixer_color_tips[0]),
+                   /* Color mixer; e.g., "Your color is entirely grey." */ gettext("entirely"),
+                   gettext(color_mixer_color_names[used_colors_color[0]]));
+        }
+      else
+        {
+          snprintf(tip_txt_proportions[0], sizeof(tip_txt_proportions[0]),
+                   "%1$s (%2$d/%3$d)",
+                   gettext("entirely"),
+                   used_colors_amount[0], used_colors_amount[0]);
+
+          snprintf(tip_txt, sizeof(tip_txt), gettext(color_mixer_color_tips[0]),
+                   tip_txt_proportions[0],
+                   gettext(color_mixer_color_names[used_colors_color[0]]));
+        }
+    }
+  else
+    {
+      for (i = 0; i < num_colors_used; i++)
+        {
+          int factor, best_factor;
+
+          best_factor = 0;
+          for (factor = 2; factor <= used_colors_amount[i]; factor++)
+            {
+              if ((used_colors_amount[i] % factor) == 0 && (tot_count % factor) == 0)
+                best_factor = factor;
+            }
+
+          if (best_factor)
+            {
+              snprintf(tip_txt_proportions[i], sizeof(tip_txt_proportions[i]),
+                       "%d/%d (%d/%d)",
+                       used_colors_amount[i], tot_count,
+                       (int) (used_colors_amount[i] / best_factor), (int) (tot_count / best_factor));
+            }
+          else
+            {
+              snprintf(tip_txt_proportions[i], sizeof(tip_txt_proportions[i]),
+                       "%d/%d", used_colors_amount[i], tot_count);
+            }
+        }
+
+      tip_txt[0] = '\0'; /* Just in case! */
+      if (num_colors_used == 2)
+        {
+          snprintf(tip_txt, sizeof(tip_txt), gettext(color_mixer_color_tips[num_colors_used - 1]),
+                   tip_txt_proportions[0], gettext(color_mixer_color_names[used_colors_color[0]]),
+                   tip_txt_proportions[1], gettext(color_mixer_color_names[used_colors_color[1]]));
+        }
+      else if (num_colors_used == 3)
+        {
+          snprintf(tip_txt, sizeof(tip_txt), gettext(color_mixer_color_tips[num_colors_used - 1]),
+                   tip_txt_proportions[0], gettext(color_mixer_color_names[used_colors_color[0]]),
+                   tip_txt_proportions[1], gettext(color_mixer_color_names[used_colors_color[1]]),
+                   tip_txt_proportions[2], gettext(color_mixer_color_names[used_colors_color[2]]));
+        }
+      else if (num_colors_used == 4)
+        {
+          snprintf(tip_txt, sizeof(tip_txt), gettext(color_mixer_color_tips[num_colors_used - 1]),
+                   tip_txt_proportions[0], gettext(color_mixer_color_names[used_colors_color[0]]),
+                   tip_txt_proportions[1], gettext(color_mixer_color_names[used_colors_color[1]]),
+                   tip_txt_proportions[2], gettext(color_mixer_color_names[used_colors_color[2]]),
+                   tip_txt_proportions[3], gettext(color_mixer_color_names[used_colors_color[3]]));
+        }
+      else if (num_colors_used == 5)
+        {
+          snprintf(tip_txt, sizeof(tip_txt), gettext(color_mixer_color_tips[num_colors_used - 1]),
+                   tip_txt_proportions[0], gettext(color_mixer_color_names[used_colors_color[0]]),
+                   tip_txt_proportions[1], gettext(color_mixer_color_names[used_colors_color[1]]),
+                   tip_txt_proportions[2], gettext(color_mixer_color_names[used_colors_color[2]]),
+                   tip_txt_proportions[3], gettext(color_mixer_color_names[used_colors_color[3]]),
+                   tip_txt_proportions[4], gettext(color_mixer_color_names[used_colors_color[4]]));
+        }
+      else if (num_colors_used == 6)
+        {
+          snprintf(tip_txt, sizeof(tip_txt), gettext(color_mixer_color_tips[num_colors_used - 1]),
+                   tip_txt_proportions[0], gettext(color_mixer_color_names[used_colors_color[0]]),
+                   tip_txt_proportions[1], gettext(color_mixer_color_names[used_colors_color[1]]),
+                   tip_txt_proportions[2], gettext(color_mixer_color_names[used_colors_color[2]]),
+                   tip_txt_proportions[3], gettext(color_mixer_color_names[used_colors_color[3]]),
+                   tip_txt_proportions[4], gettext(color_mixer_color_names[used_colors_color[4]]),
+                   tip_txt_proportions[5], gettext(color_mixer_color_names[used_colors_color[5]]));
+        }
+    }
+
+  draw_tux_text(TUX_GREAT, tip_txt, 1);
+}
+
+/**
+ * Render an interactive color button (selector, picker, mixer)
+ * with their current color.
+ *
+ * @param int the_color - the color within the palette (e.g., COLOR_PICKER) (its RGB values will be grabbed via global color_hexes[], and the new button will be rendered into the appropriate img_color_btns[])
+ * @param SDL_Surface * decoration - a decoration bitmap to be applied to the button (or NULL if none) (e.g., the color picker rainbow that appears around the color picker button's paintwell)
+ */
+static void render_color_button(int the_color, SDL_Surface * decoration, SDL_Surface * icon) {
+  SDL_Surface *tmp_btn_up, *tmp_btn_down;
+  SDL_Rect dest;
+  double rh, gh, bh;
+  int x, y;
+  Uint32(*getpixel_tmp_btn_up) (SDL_Surface *, int, int);
+  Uint32(*getpixel_tmp_btn_down) (SDL_Surface *, int, int);
+  Uint32(*getpixel_img_paintwell) (SDL_Surface *, int, int);
+
+  tmp_btn_up = thumbnail(img_btn_up, color_button_w, color_button_h, 0);
+  tmp_btn_down = thumbnail(img_btn_down, color_button_w, color_button_h, 0);
+  img_color_btn_off = thumbnail(img_btn_off, color_button_w, color_button_h, 0); /* FIXME: Need to free? */
+
+  getpixel_tmp_btn_up = getpixels[tmp_btn_up->format->BytesPerPixel];
+  getpixel_tmp_btn_down = getpixels[tmp_btn_down->format->BytesPerPixel];
+  getpixel_img_paintwell = getpixels[img_paintwell->format->BytesPerPixel];
+
+  rh = sRGB_to_linear_table[color_hexes[the_color][0]];
+  gh = sRGB_to_linear_table[color_hexes[the_color][1]];
+  bh = sRGB_to_linear_table[color_hexes[the_color][2]];
+
+  SDL_LockSurface(img_color_btns[the_color]);
+  SDL_LockSurface(img_color_btns[the_color + NUM_COLORS]);
+
+  for (y = 0; y < tmp_btn_up->h; y++)
+    {
+      for (x = 0; x < tmp_btn_up->w; x++)
+        {
+          double ru, gu, bu, rd, gd, bd, aa;
+          Uint8 a, r, g, b;
+
+          SDL_GetRGB(getpixel_tmp_btn_up(tmp_btn_up, x, y), tmp_btn_up->format, &r, &g, &b);
+
+          ru = sRGB_to_linear_table[r];
+          gu = sRGB_to_linear_table[g];
+          bu = sRGB_to_linear_table[b];
+          SDL_GetRGB(getpixel_tmp_btn_down(tmp_btn_down, x, y), tmp_btn_down->format, &r, &g, &b);
+
+          rd = sRGB_to_linear_table[r];
+          gd = sRGB_to_linear_table[g];
+          bd = sRGB_to_linear_table[b];
+          SDL_GetRGBA(getpixel_img_paintwell(img_paintwell, x, y), img_paintwell->format, &r, &g, &b, &a);
+
+          aa = a / 255.0;
+
+          if (decoration != NULL)
+            {
+              putpixels[img_color_btns[the_color]->format->BytesPerPixel]
+                (img_color_btns[the_color], x, y,
+                 getpixels[decoration->format->BytesPerPixel] (decoration, x, y));
+              putpixels[img_color_btns[the_color + NUM_COLORS]->format->BytesPerPixel]
+                (img_color_btns[the_color + NUM_COLORS], x, y,
+                 getpixels[decoration->format->BytesPerPixel] (decoration, x, y));
+            }
+
+          if (a == 255)
+            {
+              putpixels[img_color_btns[the_color]->format->BytesPerPixel]
+                (img_color_btns[the_color], x, y,
+                 SDL_MapRGB(img_color_btns[the_color]->format,
+                            linear_to_sRGB(rh * aa + ru * (1.0 - aa)),
+                            linear_to_sRGB(gh * aa + gu * (1.0 - aa)), linear_to_sRGB(bh * aa + bu * (1.0 - aa))));
+
+              putpixels[img_color_btns[the_color + NUM_COLORS]->format->BytesPerPixel]
+                (img_color_btns[the_color + NUM_COLORS], x, y,
+                 SDL_MapRGB(img_color_btns[the_color + NUM_COLORS]->format,
+                            linear_to_sRGB(rh * aa + rd * (1.0 - aa)),
+                            linear_to_sRGB(gh * aa + gd * (1.0 - aa)), linear_to_sRGB(bh * aa + bd * (1.0 - aa))));
+            }
+        }
+    }
+
+  SDL_UnlockSurface(img_color_btns[the_color]);
+  SDL_UnlockSurface(img_color_btns[the_color + NUM_COLORS]);
+
+  SDL_FreeSurface(tmp_btn_up);
+  SDL_FreeSurface(tmp_btn_down);
+
+  if (icon != NULL)
+    {
+      /* Apply pipette to color selector entries */
+      dest.x = (img_color_btns[the_color]->w - icon->w) / 2;
+      dest.y = (img_color_btns[the_color]->h - icon->h) / 2;
+      dest.w = icon->w;
+      dest.h = icon->h;
+      SDL_BlitSurface(icon, NULL, img_color_btns[the_color], &dest);
+
+      dest.x = (img_color_btns[the_color + NUM_COLORS]->w - icon->w) / 2;
+      dest.y = (img_color_btns[the_color + NUM_COLORS]->h - icon->h) / 2;
+      SDL_BlitSurface(icon, NULL, img_color_btns[the_color + NUM_COLORS], &dest);
+    }
+}
+
+
+/**
+ * Things to do whenever a color is changed
+ * (either by selecting a color, using the color selector in full-UI mode,
+ * using the color picker (palette), or using the shortcut key to
+ * use color selector in temp-mode.
+ */
+static void handle_color_changed(void) {
+  render_brush();
+
+
+  if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
+    do_render_cur_text(0);
+  else if (cur_tool == TOOL_MAGIC)
+    magic_funcs[magics[magic_group][cur_magic[magic_group]].handle_idx].set_color(
+      magic_api_struct,
+      color_hexes[cur_color][0],
+      color_hexes[cur_color][1],
+      color_hexes[cur_color][2]);
+  else if (cur_tool == TOOL_STAMP)
+    clear_cached_stamp();
+}
 
 /**
  * FIXME
@@ -22586,6 +24513,9 @@ static void add_label_node(int w, int h, Uint16 x, Uint16 y, SDL_Surface * label
       new_node->save_texttool_str[i] = texttool_str[i];
       i = i + 1;
     }
+  new_node->save_texttool_str[i] = L'\0';
+  // printf("New node's text is: \"%ls\"\n", new_node->save_texttool_str);
+
   new_node->save_color.r = color_hexes[cur_color][0];
   new_node->save_color.g = color_hexes[cur_color][1];
   new_node->save_color.b = color_hexes[cur_color][2];
@@ -22701,27 +24631,28 @@ static struct label_node *search_label_list(struct label_node **ref_head, Uint16
           select_texttool_str[u] = tmp_node->save_texttool_str[u];
           u = u + 1;
         }
+      select_texttool_str[u] = L'\0';
 
       for (k = 0; k < NUM_COLORS; k++)
         {
           if ((color_hexes[k][0] == tmp_node->save_color.r) &&
               (color_hexes[k][1] == tmp_node->save_color.g) &&
-              (color_hexes[k][2] == tmp_node->save_color.b) && (k < NUM_COLORS - 1))
+              (color_hexes[k][2] == tmp_node->save_color.b) && (k < COLOR_PICKER))
             {
               select_color = k;
               cur_color = k;
               break;
             }
 
-          if (k == NUM_COLORS - 1)
+          if (k == COLOR_PICKER)
             {
-              cur_color = NUM_COLORS - 1;
-              select_color = NUM_COLORS - 1;
+              cur_color = COLOR_PICKER;
+              select_color = COLOR_PICKER;
               color_hexes[select_color][0] = tmp_node->save_color.r;
               color_hexes[select_color][1] = tmp_node->save_color.g;
               color_hexes[select_color][2] = tmp_node->save_color.b;
-              SDL_LockSurface(img_color_btns[NUM_COLORS - 1]);
-              SDL_LockSurface(img_color_btns[NUM_COLORS - 1 + NUM_COLORS]);
+              SDL_LockSurface(img_color_btns[COLOR_PICKER]);
+              SDL_LockSurface(img_color_btns[COLOR_PICKER + NUM_COLORS]);
 
               for (j = 0; j < 48 /* 48 */ ; j++)
                 {
@@ -22731,19 +24662,19 @@ static struct label_node *search_label_list(struct label_node **ref_head, Uint16
                                   img_paintwell->format, &r, &g, &b, &a);
                       if (a == 255)
                         {
-                          putpixels[img_color_btns[NUM_COLORS - 1]->format->BytesPerPixel]
-                            (img_color_btns[NUM_COLORS - 1], i, j,
-                             SDL_MapRGB(img_color_btns[NUM_COLORS - 1]->format,
+                          putpixels[img_color_btns[COLOR_PICKER]->format->BytesPerPixel]
+                            (img_color_btns[COLOR_PICKER], i, j,
+                             SDL_MapRGB(img_color_btns[COLOR_PICKER]->format,
                                         tmp_node->save_color.r, tmp_node->save_color.g, tmp_node->save_color.b));
-                          putpixels[img_color_btns[NUM_COLORS - 1 + NUM_COLORS]->format->BytesPerPixel]
-                            (img_color_btns[NUM_COLORS - 1 + NUM_COLORS], i, j,
-                             SDL_MapRGB(img_color_btns[NUM_COLORS - 1 + NUM_COLORS]->format,
+                          putpixels[img_color_btns[COLOR_PICKER + NUM_COLORS]->format->BytesPerPixel]
+                            (img_color_btns[COLOR_PICKER + NUM_COLORS], i, j,
+                             SDL_MapRGB(img_color_btns[COLOR_PICKER + NUM_COLORS]->format,
                                         tmp_node->save_color.r, tmp_node->save_color.g, tmp_node->save_color.b));
                         }
                     }
                 }
-              SDL_UnlockSurface(img_color_btns[NUM_COLORS - 1]);
-              SDL_UnlockSurface(img_color_btns[NUM_COLORS - 1 + NUM_COLORS]);
+              SDL_UnlockSurface(img_color_btns[COLOR_PICKER]);
+              SDL_UnlockSurface(img_color_btns[COLOR_PICKER + NUM_COLORS]);
 
               draw_colors(COLORSEL_CLOBBER);
               render_brush();   /* FIXME: render_brush should be called at the start of Brush and Line tools? */
@@ -23059,7 +24990,6 @@ static void load_info_about_label_surface(FILE * lfi)
   int tmp_scale_h;
   SDL_Surface *label_node_surface, *label_node_surface_aux;
   float new_text_size;
-
   int k;
   unsigned l;
   unsigned tmp_pos;
@@ -23076,10 +25006,15 @@ static void load_info_about_label_surface(FILE * lfi)
   int tmp_fscanf_return;
   char *tmp_fgets_return;
   Uint8 a;
+#ifdef WIN32
+  wchar_t *wtmpstr;
+#endif
+  char *tmpstr;
 
   /* Clear label surface */
 
   SDL_FillRect(label, NULL, SDL_MapRGBA(label->format, 0, 0, 0, 0));
+
 
   /* Clear all info related to label surface */
 
@@ -23091,11 +25026,33 @@ static void load_info_about_label_surface(FILE * lfi)
 
   if (lfi == NULL)
     return;
+
+
+  /* Read count of label nodes: */
   tmp_fscanf_return = fscanf(lfi, "%d\n", &list_ctr);
+
+  if (list_ctr <= 0)
+    {
+      fprintf(stderr, "Unexpected! Count of label notes is <= 0 (%d)!\n", list_ctr);
+      fclose(lfi);
+      return;
+    }
+
+  /* Read saved canvas width/height, so we can scale to the current canvas
+     (in case it changed due to window size / fullscreen resolution changes,
+     larger UI button size, etc. */
   tmp_fscanf_return = fscanf(lfi, "%d\n", &tmp_scale_w);
   tmp_fscanf_return = fscanf(lfi, "%d\n\n", &tmp_scale_h);
   (void)tmp_fscanf_return;
 
+  if (tmp_scale_w <= 0 || tmp_scale_h <= 0)
+    {
+      fprintf(stderr, "Unexpected! Saved canvas dimensions %d x %d!\n", tmp_scale_w, tmp_scale_h);
+      fclose(lfi);
+      return;
+    }
+
+  /* Calculate canvas aspect ratios & such */
   old_width = tmp_scale_w;
   old_height = tmp_scale_h;
   new_width = r_canvas.w;
@@ -23107,24 +25064,36 @@ static void load_info_about_label_surface(FILE * lfi)
   else
     new_to_old_ratio = (float)new_height / old_height;
 
+#ifdef WIN32
+  wtmpstr = malloc(1024);
+#endif
+  tmpstr = malloc(1024);
+
+  /* Read the labels' text: */
+
   for (k = 0; k < list_ctr; k++)
     {
       new_node = malloc(sizeof(struct label_node));
 
-      tmp_fscanf_return = fscanf(lfi, "%u\n", &new_node->save_texttool_len);
-#ifdef WIN32
-      char *tmpstr;
-      wchar_t *wtmpstr;
+      new_node->save_texttool_len = atoi(fgets(tmpstr, 5, lfi));
 
-      tmpstr = malloc(1024);
-      wtmpstr = malloc(1024);
-      fgets(tmpstr, 1024, lfi);
+#ifdef DEBUG
+      printf("Reading %d wide chars\n", new_node->save_texttool_len); fflush(stdout);
+#endif
+
+      if (new_node->save_texttool_len >= 1024)
+        {
+          fprintf(stderr, "Unexpected! Saved text length is >= 1024 (%u!)\n", new_node->save_texttool_len);
+          free(new_node);
+#ifdef WIN32
+      /* Using fancy "%[]" operator to scan until the end of a line */
+      tmp_fscanf_return = fscanf(lfi, "%[^\n]\n", tmpstr);
       mbstowcs(wtmpstr, tmpstr, 1024);
       for (l = 0; l < new_node->save_texttool_len; l++)
-        {
-          new_node->save_texttool_str[l] = wtmpstr[l];
-        }
-
+        new_node->save_texttool_str[l] = wtmpstr[l];
+      new_node->save_texttool_str[l] = L'\0';
+      free(tmpstr);
+      free(wtmpstr);
 #elif defined(__ANDROID__)
       wchar_t tmp_char;
       for (l = 0; l < new_node->save_texttool_len; l++)
@@ -23134,123 +25103,174 @@ static void load_info_about_label_surface(FILE * lfi)
         }
       fscanf(lfi, "\n");
 #else
-      wchar_t tmp_char;
-      for (l = 0; l < new_node->save_texttool_len; l++)
-        {
-          tmp_fscanf_return = fscanf(lfi, "%lc", &tmp_char);
-          new_node->save_texttool_str[l] = tmp_char;
-        }
-      tmp_fscanf_return = fscanf(lfi, "\n");
+      /* Using fancy "%[]" operator to scan until the end of a line */
+      tmp_fscanf_return = fscanf(lfi, "%l[^\n]\n", new_node->save_texttool_str);
 #endif
-      tmp_fscanf_return = fscanf(lfi, "%u\n", &l);
-      new_node->save_color.r = (Uint8) l;
-      tmp_fscanf_return = fscanf(lfi, "%u\n", &l);
-      new_node->save_color.g = (Uint8) l;
-      tmp_fscanf_return = fscanf(lfi, "%u\n", &l);
-      new_node->save_color.b = (Uint8) l;
-      tmp_fscanf_return = fscanf(lfi, "%d\n", &new_node->save_width);
-      tmp_fscanf_return = fscanf(lfi, "%d\n", &new_node->save_height);
-      tmp_fscanf_return = fscanf(lfi, "%d\n", &tmp_pos);
-      old_pos = (int)tmp_pos;
-
-      if (new_ratio < old_ratio)
-        {
-          new_pos = (old_pos * new_to_old_ratio);
-          tmp_pos = new_pos;
-          new_node->save_x = tmp_pos;
-          tmp_fscanf_return = fscanf(lfi, "%d\n", &tmp_pos);
-          old_pos = (int)tmp_pos;
-          new_pos = old_pos * new_to_old_ratio + (new_height - old_height * new_to_old_ratio) / 2;
-          tmp_pos = new_pos;
-          new_node->save_y = tmp_pos;
-        }
-      else
-        {
-          new_pos = (old_pos * new_to_old_ratio) + (new_width - old_width * new_to_old_ratio) / 2;
-          tmp_pos = new_pos;
-          new_node->save_x = tmp_pos;
-          tmp_fscanf_return = fscanf(lfi, "%d\n", &tmp_pos);
-          old_pos = (int)tmp_pos;
-          new_pos = (old_pos * new_to_old_ratio);
-          tmp_pos = new_pos;
-          new_node->save_y = tmp_pos;
-        }
 
 #ifdef DEBUG
-      printf("Original label size %dx%d\n", new_node->save_width, new_node->save_height);
+      printf("Read: \"%ls\"\n", new_node->save_texttool_str); fflush(stdout);
+#endif
+          fclose(lfi);
+          return;
+        }
+      else
+        {
+#ifdef WIN32
+          /* Using fancy "%[]" operator to scan until the end of a line */
+          tmp_fscanf_return = fscanf(lfi, "%[^\n]\n", tmpstr);
+          mbstowcs(wtmpstr, tmpstr, 1024);
+          for (l = 0; l < new_node->save_texttool_len; l++)
+            new_node->save_texttool_str[l] = wtmpstr[l];
+          new_node->save_texttool_str[l] = L'\0';
+#else
+          /* Using fancy "%[]" operator to scan until the end of a line */
+          tmp_fscanf_return = fscanf(lfi, "%l[^\n]\n", new_node->save_texttool_str);
 #endif
 
-      tmp_fscanf_return = fscanf(lfi, "%d\n", &new_node->save_cur_font);
-      new_node->save_cur_font = 0;
+#ifdef DEBUG
+          printf("Read: \"%ls\"\n", new_node->save_texttool_str); fflush(stdout);
+#endif
 
-      new_node->save_font_type = malloc(64);
-      tmp_fgets_return = fgets(new_node->save_font_type, 64, lfi);
-      (void)tmp_fgets_return;
+          /* Read the label's color (RGB) */
+          tmp_fscanf_return = fscanf(lfi, "%u\n", &l);
+          new_node->save_color.r = (Uint8) l;
+          tmp_fscanf_return = fscanf(lfi, "%u\n", &l);
+          new_node->save_color.g = (Uint8) l;
+          tmp_fscanf_return = fscanf(lfi, "%u\n", &l);
+          new_node->save_color.b = (Uint8) l;
 
-      tmp_fscanf_return = fscanf(lfi, "%d\n", &new_node->save_text_state);
-      tmp_fscanf_return = fscanf(lfi, "%u\n", &new_node->save_text_size);
+          /* Read the label's position */
+          tmp_fscanf_return = fscanf(lfi, "%d\n", &new_node->save_width);
+          tmp_fscanf_return = fscanf(lfi, "%d\n", &new_node->save_height);
+          tmp_fscanf_return = fscanf(lfi, "%d\n", &tmp_pos);
+          old_pos = (int)tmp_pos;
 
-      label_node_surface = SDL_CreateRGBSurface(screen->flags,
-                                                new_node->save_width,
-                                                new_node->save_height,
-                                                screen->format->BitsPerPixel,
-                                                screen->format->Rmask,
-                                                screen->format->Gmask, screen->format->Bmask, TPAINT_AMASK);
+          if (new_ratio < old_ratio)
+            {
+              new_pos = (old_pos * new_to_old_ratio);
+              tmp_pos = new_pos;
+              new_node->save_x = tmp_pos;
+              tmp_fscanf_return = fscanf(lfi, "%d\n", &tmp_pos);
+              old_pos = (int)tmp_pos;
+              new_pos = old_pos * new_to_old_ratio + (new_height - old_height * new_to_old_ratio) / 2;
+              tmp_pos = new_pos;
+              new_node->save_y = tmp_pos;
+            }
+          else
+            {
+              new_pos = (old_pos * new_to_old_ratio) + (new_width - old_width * new_to_old_ratio) / 2;
+              tmp_pos = new_pos;
+              new_node->save_x = tmp_pos;
+              tmp_fscanf_return = fscanf(lfi, "%d\n", &tmp_pos);
+              old_pos = (int)tmp_pos;
+              new_pos = (old_pos * new_to_old_ratio);
+              tmp_pos = new_pos;
+              new_node->save_y = tmp_pos;
+            }
 
-      SDL_LockSurface(label_node_surface);
-      for (x = 0; x < new_node->save_width; x++)
-        for (y = 0; y < new_node->save_height; y++)
-          {
-            a = fgetc(lfi);
-            putpixels[label_node_surface->format->BytesPerPixel] (label_node_surface, x, y,
-                                                                  SDL_MapRGBA(label_node_surface->format,
-                                                                              new_node->save_color.r,
-                                                                              new_node->save_color.g,
-                                                                              new_node->save_color.b, a));
-          }
-      SDL_UnlockSurface(label_node_surface);
+#ifdef DEBUG
+          printf("Original label size %dx%d\n", new_node->save_width, new_node->save_height);
+#endif
+          if (new_node->save_width > 8192 || new_node->save_height > 8192)
+            {
+              fprintf(stderr, "Unexpected! Save dimensions are (%u x %u!)\n", new_node->save_width, new_node->save_height);
+              free(new_node);
+              free(tmpstr);
+#ifdef WIN32
+              free(wtmpstr);
+#endif
+              fclose(lfi);
+              return;
+           }
 
-      new_text_size = (float)new_node->save_text_size * new_to_old_ratio;
-      label_node_surface_aux =
-        zoom(label_node_surface, label_node_surface->w * new_to_old_ratio, label_node_surface->h * new_to_old_ratio);
-      SDL_FreeSurface(label_node_surface);
-      new_node->label_node_surface = label_node_surface_aux;
-      new_node->label_node_surface->refcount++;
-      SDL_FreeSurface(label_node_surface_aux);
+          /* Read the label's font */
+          tmp_fscanf_return = fscanf(lfi, "%d\n", &new_node->save_cur_font);
+          /* FIXME: This seems wrong! -bjk 2022.04.02 */
+          new_node->save_cur_font = 0;
 
-      if ((unsigned)new_text_size > MAX_TEXT_SIZE)      /* Here we reach the limits when scaling the font size */
-        new_node->save_text_size = MAX_TEXT_SIZE;
-      else if ((unsigned)new_text_size > MIN_TEXT_SIZE)
-        new_node->save_text_size = floor(new_text_size + 0.5);
-      else
-        new_node->save_text_size = MIN_TEXT_SIZE;
+          new_node->save_font_type = malloc(64);
+          tmp_fgets_return = fgets(new_node->save_font_type, 64, lfi);
+          (void)tmp_fgets_return;
 
+          /* Read the label's state (italic &/or bold), and size */
+          tmp_fscanf_return = fscanf(lfi, "%d\n", &new_node->save_text_state);
+          tmp_fscanf_return = fscanf(lfi, "%u\n", &new_node->save_text_size);
 
-      new_node->save_undoid = 255;      /* A value that cur_undo will likely never reach */
-      new_node->is_enabled = TRUE;
-      new_node->disables = NULL;
-      new_node->next_to_down_label_node = NULL;
-      new_node->next_to_up_label_node = NULL;
-      tmp_fscanf_return = fscanf(lfi, "\n");
+          /* Read the bitmap data stored under the label */
+          /* (The final PNG, when saved, includes the labels, as applied
+             to the canvas. But we need to be able to edit/move/remove them,
+             so we need to know what went _behind_ them) */
+          label_node_surface = SDL_CreateRGBSurface(screen->flags,
+                                                    new_node->save_width,
+                                                    new_node->save_height,
+                                                    screen->format->BitsPerPixel,
+                                                    screen->format->Rmask,
+                                                    screen->format->Gmask, screen->format->Bmask, TPAINT_AMASK);
 
-      if (current_label_node == NULL)
-        {
-          current_label_node = new_node;
-          start_label_node = current_label_node;
+          SDL_LockSurface(label_node_surface);
+          for (x = 0; x < new_node->save_width; x++)
+            for (y = 0; y < new_node->save_height; y++)
+              {
+                a = fgetc(lfi);
+                putpixels[label_node_surface->format->BytesPerPixel] (label_node_surface, x, y,
+                                                                      SDL_MapRGBA(label_node_surface->format,
+                                                                                  new_node->save_color.r,
+                                                                                  new_node->save_color.g,
+                                                                                  new_node->save_color.b, a));
+              }
+          SDL_UnlockSurface(label_node_surface);
+
+          /* Set the label's size, in proportion to any canvas size differences */
+          new_text_size = (float)new_node->save_text_size * new_to_old_ratio;
+
+          /* Scale the backbuffer, in proportion... */
+          label_node_surface_aux =
+            zoom(label_node_surface, label_node_surface->w * new_to_old_ratio, label_node_surface->h * new_to_old_ratio);
+          SDL_FreeSurface(label_node_surface);
+          new_node->label_node_surface = label_node_surface_aux;
+          new_node->label_node_surface->refcount++;
+          SDL_FreeSurface(label_node_surface_aux);
+
+          if ((unsigned)new_text_size > MAX_TEXT_SIZE)      /* Here we reach the limits when scaling the font size */
+            new_node->save_text_size = MAX_TEXT_SIZE;
+          else if ((unsigned)new_text_size > MIN_TEXT_SIZE)
+            new_node->save_text_size = floor(new_text_size + 0.5);
+          else
+            new_node->save_text_size = MIN_TEXT_SIZE;
+
+          new_node->save_undoid = 255;      /* A value that cur_undo will likely never reach */
+          new_node->is_enabled = TRUE;
+          new_node->disables = NULL;
+          new_node->next_to_down_label_node = NULL;
+          new_node->next_to_up_label_node = NULL;
+          tmp_fscanf_return = fscanf(lfi, "\n");
+
+          /* Link the labels together, for navigating between them */
+          if (current_label_node == NULL)
+            {
+              current_label_node = new_node;
+              start_label_node = current_label_node;
+            }
+          else
+            {
+              new_node->next_to_down_label_node = current_label_node;
+              current_label_node->next_to_up_label_node = new_node;
+              current_label_node = new_node;
+            }
+
+          highlighted_label_node = current_label_node;
+          simply_render_node(current_label_node);
         }
-      else
-        {
-          new_node->next_to_down_label_node = current_label_node;
-          current_label_node->next_to_up_label_node = new_node;
-          current_label_node = new_node;
-        }
-
-      highlighted_label_node = current_label_node;
-      simply_render_node(current_label_node);
-
     }
+
   first_label_node_in_redo_stack = NULL;
   fclose(lfi);
+
+  free(tmpstr);
+#ifdef WIN32
+  free(wtmpstr);
+#endif
+
 
   if (font_thread_done)
     set_label_fonts();
@@ -23489,20 +25509,26 @@ static void cycle_highlighted_label_node()
     {
       aux_node = highlighted_label_node->next_to_down_label_node;
       if (aux_node == NULL)
-        aux_node = current_label_node;
-      if (aux_node->is_enabled)
-        highlighted_label_node = aux_node;
-      else
-        while (aux_node->is_enabled == FALSE && aux_node != highlighted_label_node)
-          {
-            aux_node = aux_node->next_to_down_label_node;
-            if (aux_node == NULL)
-              aux_node = current_label_node;
-            if (aux_node->is_enabled)
-              highlighted_label_node = aux_node;
-          }
-    }
+        {
+          aux_node = current_label_node;
+        }
 
+      if (aux_node->is_enabled)
+        {
+          highlighted_label_node = aux_node;
+        }
+      else
+        {
+          while (aux_node->is_enabled == FALSE && aux_node != highlighted_label_node)
+            {
+              aux_node = aux_node->next_to_down_label_node;
+              if (aux_node == NULL)
+                aux_node = current_label_node;
+              if (aux_node->is_enabled)
+                highlighted_label_node = aux_node;
+            }
+        }
+    }
 }
 
 /**
@@ -24473,6 +26499,8 @@ static void setup_config(char *argv[])
   /* FIXME: most of this is not required before starting the font scanner */
 
 #ifdef PAPER_H
+  paperinit();
+
   if (tmpcfg_cmd.papersize && !strcmp(tmpcfg_cmd.papersize, "help"))
     show_available_papersizes(0);
 #endif
@@ -24480,7 +26508,9 @@ static void setup_config(char *argv[])
 #define SETBOOL(x) do{ if(tmpcfg.x) x = (tmpcfg.x==PARSE_YES); }while(0)
   SETBOOL(all_locale_fonts);
   SETBOOL(autosave_on_quit);
+  SETBOOL(reversesort);
   SETBOOL(disable_label);
+  SETBOOL(disable_brushspacing);
   SETBOOL(disable_magic_controls);
   SETBOOL(disable_shape_controls);
   SETBOOL(disable_print);
@@ -25101,11 +27131,13 @@ static void setup_colors(void)
     }
 
 
+  /* Add room for dynamic color options at the end of the list: */
+
+  color_hexes = (Uint8 **) realloc(color_hexes, sizeof(Uint8 *) * (NUM_COLORS + 3));
+  color_names = (char **)realloc(color_names, sizeof(char *) * (NUM_COLORS + 3));
+
   /* Add "Color Select" color: */
 
-  color_hexes = (Uint8 **) realloc(color_hexes, sizeof(Uint8 *) * (NUM_COLORS + 1));
-
-  color_names = (char **)realloc(color_names, sizeof(char *) * (NUM_COLORS + 1));
   color_names[NUM_COLORS] = strdup(gettext("Select a color from your drawing."));
   color_hexes[NUM_COLORS] = (Uint8 *) malloc(sizeof(Uint8) * 3);
   color_hexes[NUM_COLORS][0] = 0;
@@ -25114,19 +27146,26 @@ static void setup_colors(void)
   NUM_COLORS++;
 
   /* Add "Color Picker" color: */
-
-  color_hexes = (Uint8 **) realloc(color_hexes, sizeof(Uint8 *) * (NUM_COLORS + 1));
-
-  color_names = (char **)realloc(color_names, sizeof(char *) * (NUM_COLORS + 1));
-  color_names[NUM_COLORS] = strdup(gettext("Pick a color."));
+  /* (This is an attempt to describe an HSV color picker in extremely basic terms!) */
+  color_names[NUM_COLORS] = strdup(gettext("Pick a color. Hues go top to bottom. Saturation/intensity goes left (pale) to right (pure). Value (lightness/darkness): grey bar."));
   color_hexes[NUM_COLORS] = (Uint8 *) malloc(sizeof(Uint8) * 3);
-  color_hexes[NUM_COLORS][0] = 0;
-  color_hexes[NUM_COLORS][1] = 0;
-  color_hexes[NUM_COLORS][2] = 0;
-  color_picker_x = 0;
-  color_picker_y = 0;
+  color_hexes[NUM_COLORS][0] = 255;
+  color_hexes[NUM_COLORS][1] = 255;
+  color_hexes[NUM_COLORS][2] = 255;
+  color_picker_x = 0; /* Saturation */
+  color_picker_y = 0; /* Hue */
+  color_picker_v = 0; /* Value */
   NUM_COLORS++;
 
+  /* Add "Color Mixer" color: */
+  /* (The terms 'tint', 'tone', and 'shade' relate to combining white, grey, or black paint (respectively) to another color) */
+  color_names[NUM_COLORS] = strdup(gettext("Click the primary colors (red, yellow, and blue), white (to tint), grey (to tone), and black (to shade), to mix together a new color."));
+  color_hexes[NUM_COLORS] = (Uint8 *) malloc(sizeof(Uint8) * 3);
+  color_hexes[NUM_COLORS][0] = 255;
+  color_hexes[NUM_COLORS][1] = 255;
+  color_hexes[NUM_COLORS][2] = 255;
+  color_mixer_reset = 1;
+  NUM_COLORS++;
 }
 
 /* ================================================================================== */
@@ -25213,7 +27252,7 @@ static void do_lock_file(void)
   free(lock_fname);
 }
 
-int TP_EventFilter(void *data, const SDL_Event * event)
+int TP_EventFilter(__attribute__((unused)) void *data, EVENT_FILTER_EVENT_TYPE * event)
 /**
  * FIXME
  */
@@ -25357,7 +27396,9 @@ static void setup(void)
 
       for (i = 0; i < SDL_NumJoysticks(); i++)
         {
-          fprintf(stderr, " %d: %s\n", i, SDL_JoystickName(i));
+          SDL_Joystick *joystick = SDL_JoystickOpen(i);
+
+          fprintf(stderr, " %d: %s\n", i, SDL_JoystickName(joystick));
         }
 
       SDL_Quit();
@@ -25626,7 +27667,7 @@ static void setup(void)
 #else
       window_screen = SDL_CreateWindow("Tux Paint",
                                        SDL_WINDOWPOS_UNDEFINED,
-                                       SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, NULL);
+                                       SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, 0 /* no flags */);
       /*    screen = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT,
          s
          VIDEO_BPP, SDL_SWSURFACE); */
@@ -25675,6 +27716,7 @@ static void setup(void)
   /* (Need to do this after native screen resolution is handled) */
 
   setup_screen_layout();
+  set_color_picker_crosshair_size();
 
   /* Set window icon and caption: */
 
@@ -25859,6 +27901,8 @@ static void setup(void)
 #endif
 
   cursor_hand = get_cursor(hand_bits, hand_mask_bits, hand_width, hand_height, 12 / scale, 1 / scale);
+
+  cursor_pipette = get_cursor(pipette_bits, pipette_mask_bits, pipette_width, pipette_height, 2 / scale, 20 / scale);
 
   cursor_wand = get_cursor(wand_bits, wand_mask_bits, wand_width, wand_height, 4 / scale, 4 / scale);
 
@@ -26062,8 +28106,8 @@ static void setup(void)
   img_bold = loadimagerb(DATA_PREFIX "images/ui/bold.png");
   img_italic = loadimagerb(DATA_PREFIX "images/ui/italic.png");
 
-  img_label = loadimagerb(DATA_PREFIX "images/tools/label.png");
   img_label_select = loadimagerb(DATA_PREFIX "images/tools/label_select.png");
+  img_label_apply = loadimagerb(DATA_PREFIX "images/tools/label_apply.png");
 
   show_progress_bar(screen);
 
@@ -26087,6 +28131,7 @@ static void setup(void)
   img_scroll_up_off = loadimagerb(DATA_PREFIX "images/ui/scroll_up_off.png");
   img_scroll_down_off = loadimagerb(DATA_PREFIX "images/ui/scroll_down_off.png");
   img_color_sel = loadimagerb(DATA_PREFIX "images/ui/csel.png");
+  img_color_mix = loadimagerb(DATA_PREFIX "images/ui/cmix.png");
 
 #ifdef LOW_QUALITY_COLOR_SELECTOR
   img_paintcan = loadimage(DATA_PREFIX "images/ui/paintcan.png");
@@ -26107,23 +28152,21 @@ static void setup(void)
             kbd = NULL;
           else
             kbd =
-              osk_create(onscreen_keyboard_layout, screen,                                                      img_btn_up, img_btn_down, img_btn_off,
-                                                     img_btn_nav, img_btn_hold,
-                                                     img_oskdel, img_osktab, img_oskenter,
-                                                     img_oskcapslock, img_oskshift,
-img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
-                         img_btnsm_hold, img_oskdel, img_osktab, img_oskenter, img_oskcapslock, img_oskshift,
+              osk_create(onscreen_keyboard_layout, canvas,
+                         img_btn_up, img_btn_down, img_btn_off,
+                         img_btn_nav, img_btn_hold,
+                         img_oskdel, img_osktab, img_oskenter,
+                         img_oskcapslock, img_oskshift,
                          onscreen_keyboard_disable_change);
         }
       else
         {
           kbd =
-            osk_create(strdup("default.layout"), screen,                                                      img_btn_up, img_btn_down, img_btn_off,
-                                                     img_btn_nav, img_btn_hold,
-                                                     img_oskdel, img_osktab, img_oskenter,
-                                                     img_oskcapslock, img_oskshift,
-img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
-                       img_btnsm_hold, img_oskdel, img_osktab, img_oskenter, img_oskcapslock, img_oskshift,
+            osk_create(strdup("default.layout"), canvas,
+                       img_btn_up, img_btn_down, img_btn_off,
+                       img_btn_nav, img_btn_hold,
+                       img_oskdel, img_osktab, img_oskenter,
+                       img_oskcapslock, img_oskshift,
                        onscreen_keyboard_disable_change);
         }
     }
@@ -26243,6 +28286,7 @@ img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
   show_progress_bar(screen);
 
   img_color_picker = loadimagerb(DATA_PREFIX "images/ui/color_picker.png");
+  img_color_picker_val = loadimagerb(DATA_PREFIX "images/ui/color_picker_val.png");
 
   /* Create toolbox and selector labels: */
 
@@ -26345,7 +28389,7 @@ img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
               double gh = sRGB_to_linear_table[color_hexes[i][1]];
               double bh = sRGB_to_linear_table[color_hexes[i][2]];
 
-              if (i == NUM_COLORS - 1)
+              if (i == COLOR_PICKER)
                 {
                   putpixels[img_color_btns[i]->format->BytesPerPixel]
                     (img_color_btns[i], x, y,
@@ -26355,7 +28399,7 @@ img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
                      getpixels[img_color_picker_thumb->format->BytesPerPixel] (img_color_picker_thumb, x, y));
                 }
 
-              if (i < NUM_COLORS - 1 || a == 255)
+              if (i < COLOR_PICKER || a == 255)
                 {
                   putpixels[img_color_btns[i]->format->BytesPerPixel]
                     (img_color_btns[i], x, y,
@@ -26375,13 +28419,23 @@ img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
   for (i = 0; i < NUM_COLORS * 2; i++)
     {
       SDL_UnlockSurface(img_color_btns[i]);
-      if (i == NUM_COLORS - 2 || i == 2 * NUM_COLORS - 2)
+      if (i == COLOR_SELECTOR || i == COLOR_SELECTOR + NUM_COLORS)
         {
+          /* Color selector; draw pipette */
           dest.x = (img_color_btns[i]->w - img_color_sel->w) / 2;
           dest.y = (img_color_btns[i]->h - img_color_sel->h) / 2;
           dest.w = img_color_sel->w;
           dest.h = img_color_sel->h;
           SDL_BlitSurface(img_color_sel, NULL, img_color_btns[i], &dest);
+        }
+      else if (i == COLOR_MIXER || i == COLOR_MIXER + NUM_COLORS)
+        {
+          /* Color mixer; draw palette */
+          dest.x = (img_color_btns[i]->w - img_color_mix->w) / 2;
+          dest.y = (img_color_btns[i]->h - img_color_mix->h) / 2;
+          dest.w = img_color_mix->w;
+          dest.h = img_color_mix->h;
+          SDL_BlitSurface(img_color_mix, NULL, img_color_btns[i], &dest);
         }
     }
 
@@ -26414,6 +28468,10 @@ img_btnsm_up, img_btnsm_down, img_btnsm_off, img_btnsm_nav,
   /* Set up signal for no-questions-asked remote closing of app */
   signal(SIGUSR1, signal_handler);
   signal(SIGUSR2, signal_handler);
+#endif
+
+#ifdef __APPLE__
+  apple_init();
 #endif
 }
 
@@ -26461,6 +28519,8 @@ static void claim_to_be_ready(void)
   cur_undo = 0;
   oldest_undo = 0;
   newest_undo = 0;
+
+  color_mix_cur_undo = color_mix_oldest_undo = color_mix_newest_undo = 0;
 
   cur_tool = TOOL_BRUSH;
   cur_color = COLOR_BLACK;
@@ -26571,6 +28631,16 @@ int main(int argc, char *argv[])
 
   chdir_to_binary(argv[0]);
   setup_config(argv);
+
+#ifdef WIN32
+#ifndef DEBUG
+  char stdout_win32[255], stderr_win32[255];
+  safe_snprintf(stdout_win32, 255, "%s/stdout.txt", savedir);
+  safe_snprintf(stderr_win32, 255, "%s/stderr.txt", savedir);
+  freopen(stdout_win32, "w", stdout);    /* redirect stdout to a file */
+  freopen(stderr_win32, "w", stderr);    /* redirect stderr to a file */
+#endif
+#endif
 
 #ifdef DEBUG
   CLOCK_ASM(time2);
@@ -27165,6 +29235,7 @@ static void handle_joybuttonupdownscl(SDL_Event event, int oldpos_x, int oldpos_
     SDL_PushEvent(&ev);
 }
 
+#ifdef __ANDROID__
 /*
  * When moving on some cases of supporting scroll wheel, including
  * the coming SDL_MOUSEMOTION events will be converted to SDL_MOUSEWHEEL
@@ -27199,7 +29270,6 @@ static void start_motion_convert(SDL_Event event)
   motion_dx = motion_dy = 0;
 }
 
-#ifdef __ANDROID__
 static void stop_motion_convert(SDL_Event event)
 {
   if (event.type != SDL_MOUSEBUTTONUP)
@@ -27477,7 +29547,7 @@ static int export_gif(int *selected, int num_selected, char *dirname, char **d_n
               /* FIXME Abort? */
             }
 
-	  /* Record the raw RGB into a big strip, to be quantized and sliced later */
+          /* Record the raw RGB into a big strip, to be quantized and sliced later */
           for (y = 0; y < overall_h; y++) {
             for (x = 0; x < overall_w; x++) {
               SDL_GetRGBA(getpixels[screen->format->BytesPerPixel](screen, x, y), screen->format, &r, &g, &b, &a);
@@ -27490,7 +29560,7 @@ static int export_gif(int *selected, int num_selected, char *dirname, char **d_n
           }
 
           SDL_Flip(screen);
-	  done = export_gif_monitor_events();
+          done = export_gif_monitor_events();
         }
 
 
@@ -27499,17 +29569,17 @@ static int export_gif(int *selected, int num_selected, char *dirname, char **d_n
           /* Quantize to max 256 (8bpp) colors and generate a suitable palette */
           liq_handle = liq_attr_create();
           input_image = liq_image_create_rgba(liq_handle, bitmap, overall_w, num_selected * overall_h, 0);
-	  liq_set_max_colors(liq_handle, 256);
+          liq_set_max_colors(liq_handle, 256);
 
           show_progress_bar(screen);
-	  done = export_gif_monitor_events();
+          done = export_gif_monitor_events();
 
 #if LIQ_VERSION >= 20800
-	  qtiz_status = liq_image_quantize(input_image, liq_handle, &quantization_result);
-	  done = (qtiz_status != LIQ_OK);
+          qtiz_status = liq_image_quantize(input_image, liq_handle, &quantization_result);
+          done = (qtiz_status != LIQ_OK);
 #else
-	  quantization_result = liq_quantize_image(liq_handle, input_image);
-	  done = (quantization_result == NULL);
+          quantization_result = liq_quantize_image(liq_handle, input_image);
+          done = (quantization_result == NULL);
 #endif
           if (!done) {
             // Use libimagequant to make new image pixels from the palette
@@ -27521,7 +29591,7 @@ static int export_gif(int *selected, int num_selected, char *dirname, char **d_n
             palette = liq_get_palette(quantization_result);
             free(bitmap);
 
-	    for (j = 0; j < (int) palette->count; j++) {
+            for (j = 0; j < (int) palette->count; j++) {
               gif_palette[j * 3 + 0] = palette->entries[j].r;
               gif_palette[j * 3 + 1] = palette->entries[j].g;
               gif_palette[j * 3 + 2] = palette->entries[j].b;
@@ -27543,22 +29613,22 @@ static int export_gif(int *selected, int num_selected, char *dirname, char **d_n
                 ge_add_frame(gif, gif_speed);
 
                 show_progress_bar(screen);
-	        done = export_gif_monitor_events();
+                done = export_gif_monitor_events();
               }
 
             /* Close the GIF */
             ge_close_gif(gif);
           } else {
             fprintf(stderr, "Quantization failed\n");
-	    done = 1;
-	  }
+            done = 1;
+          }
 
           if (done)
             {
               /* Aborted; discard the partially-saved GIF */
               unlink(gif_fname);
-	    }
-	}
+            }
+        }
     }
   else
     {
@@ -27763,3 +29833,210 @@ int safe_snprintf(char *str, size_t size, const char *format, ...) {
   str[size - 1] = '\0';
   return r;
 }
+
+static void sloppy_frac(float f, int * numer, int * denom) {
+  int n, d, fr, i, gcd, n_over_d_100;
+
+  fr = round(f * 100.0);
+
+  *numer = 0;
+  *denom = 1;
+
+  for (d = SLOPPY_FRAC_MIN; d <= SLOPPY_FRAC_MAX; d++)
+    {
+      for (n = 1; n < d; n++)
+        {
+          n_over_d_100 = ((n * 100) / d);
+          if (n_over_d_100 >= fr &&
+              n_over_d_100 < (fr + ((SLOPPY_FRAC_MIN * 100) / SLOPPY_FRAC_MAX)))
+            {
+              *numer = n;
+              *denom = d;
+            }
+        }
+    }
+
+  gcd = 1;
+  for (i = 1; i <= *numer && i <= *denom; i++)
+    {
+      if ((*numer % i) == 0 && (*denom % i) == 0)
+        gcd = i;
+    }
+
+  *numer /= gcd;
+  *denom /= gcd;
+}
+
+
+/**
+ * Selet a chosen Label node.
+ *
+ * @param int * old_x, old_y -- Pointers to feed the position of the chosen label
+ */
+static void select_label_node(int * old_x, int * old_y) {
+  unsigned int i;
+  int j;
+
+  /* Switch back into label entry mode */
+  cur_label = LABEL_LABEL;
+
+  /* Set font selector to the font used by this label */
+  cur_thing = label_node_to_edit->save_cur_font;
+
+  /* Disable the label node; we'll be replacing it (or removing it) */
+  label_node_to_edit->is_enabled = FALSE;
+  derender_node(&label_node_to_edit);
+
+  /* Copy the label's text into the active text input */
+  i = 0;
+  texttool_len = select_texttool_len;
+  while (i < texttool_len)
+    {
+      texttool_str[i] = select_texttool_str[i];
+      i = i + 1;
+    }
+  texttool_str[i] = L'\0';
+
+  cur_color = select_color;
+
+  /* Send back the position of the selected label */
+  *old_x = select_x;
+  *old_y = select_y;
+
+  /* Set active text input's attributes (font, italic/bold, size) */
+  cur_font = select_cur_font;
+  text_state = select_text_state;
+  text_size = select_text_size;
+
+  /* ??? */
+  for (j = 0; j < num_font_families; j++)
+    {
+      if (user_font_families[j] && user_font_families[j]->handle)
+        {
+          TuxPaint_Font_CloseFont(user_font_families[j]->handle);
+          user_font_families[j]->handle = NULL;
+        }
+    }
+
+  update_screen_rect(&r_toolopt);
+
+  /* Redraw color palette, fonts, and text controls */
+  draw_colors(COLORSEL_REFRESH);
+  draw_fonts();
+
+  /* Set mouse pointer (cursor) shape to the text insertion bar */
+  do_setcursor(cursor_insertion);
+
+  update_canvas_ex_r(0, 0, canvas->w, canvas->h, 1);
+
+  /* We have chosen a label; show some instructional text (Tux tip)
+     and play a success sound */
+  draw_tux_text(TUX_GREAT, TIP_LABEL_SELECTOR_LABEL_CHOSEN, 1);
+  playsound(screen, 1, SND_TUXOK, 1, select_x, SNDDIST_NEAR);
+}
+
+
+/**
+ * Apply a Label node to the canvas, and remove the node.
+ *
+ * FIXME: WIP
+ *
+ * @param int old_x, old_y - For insertion point cursor positioning
+ *
+ * Side effects:
+ *  * Unsets `label_node_to_edit`
+ *  * Sets Label tool mode back to `LABEL_LABEL`
+ *  * Sets `have_to_rec_label_node`
+ *  * Clears `been_saved` & sets `tool_avail[TOOL_SAVE]` (unless `disable_save` was set)
+ *  * Redraws toolbar
+ *  * Redraws fonts & text controls
+ *  * Redraws color palette
+ *  * Sets insertion point cursor location (`cursor_x`, `cursor_y`)
+ *  * Displays Label tool's main instructions (Tux tip)
+ */
+static void apply_label_node(int old_x, int old_y) {
+  cursor_x = old_x;
+  cursor_y = old_y;
+  cursor_left = old_x;
+  SDL_Rect rect;
+
+  /* Capture into Undo buffer */
+  rec_undo_buffer();
+
+  /* Apply the text the canvas */
+  do_render_cur_text(1);
+
+  /* Switch to normal label adding mode;
+     Update label control buttons */
+  cur_label = LABEL_LABEL;
+  draw_colors(COLORSEL_REFRESH);
+  draw_fonts();
+  update_screen_rect(&r_toolopt);
+
+  have_to_rec_label_node = TRUE;
+
+  /* [Best way to explain this?] */
+  rect.x = label_node_to_edit->save_x;
+  rect.y = label_node_to_edit->save_y;
+  rect.w = label_node_to_edit->save_width;
+  rect.h = label_node_to_edit->save_height;
+
+  SDL_BlitSurface(label_node_to_edit->label_node_surface, NULL, canvas, &rect);
+  label_node_to_edit->is_enabled = FALSE;
+
+  /* [Best way to explain this?] */
+  add_label_node(0, 0, 0, 0, NULL);
+  derender_node(&label_node_to_edit);
+  label_node_to_edit = NULL;
+
+  /* [Best way to explain this?] */
+  texttool_len = 0;
+  cursor_textwidth = 0;
+
+  /* Make "Save" button available after this change (if appropriate) */
+  if (been_saved)
+    {
+      been_saved = 0;
+
+      if (!disable_save)
+        tool_avail[TOOL_SAVE] = 1;
+
+      draw_toolbar();
+      update_screen_rect(&r_tools);
+    }
+
+  /* Back to normal "how to use Label tool" tip; play sound */
+  update_canvas_ex_r(rect.x, rect.y, rect.w, rect.h, 1);
+
+  draw_tux_text(TUX_GREAT, tool_tips[TOOL_LABEL], 1);
+  playsound(screen, 1, SND_RETURN, 1, cursor_x, SNDDIST_NEAR);
+}
+
+
+/**
+ * Size & position the onscreen keyboard.
+ *
+ * @param int y -- If -1, don't reposition vertically; otherwise, if y
+ *   is in top half of canvas, put keyboard on bottom & vice-versa
+ */
+static void reposition_onscreen_keyboard(int y) {
+  if (onscreen_keyboard && kbd)
+    {
+      kbd_rect.x = button_w * 2 + (canvas->w - kbd->surface->w) / 2;
+
+      if (y != -1)
+        {
+          if (y < r_canvas.h / 2)
+            kbd_rect.y = r_canvas.h - kbd->surface->h;
+          else
+            kbd_rect.y = 0;
+        }
+
+      kbd_rect.w = kbd->surface->w;
+      kbd_rect.h = kbd->surface->h;
+
+      SDL_BlitSurface(kbd->surface, &kbd->rect, screen, &kbd_rect);
+      update_screen_rect(&kbd_rect);
+    }
+}
+

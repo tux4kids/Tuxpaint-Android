@@ -4,7 +4,7 @@
   For Tux Paint
   Bitmapped mouse pointer (cursor)
 
-  Copyright (c) 2002-2007 by Bill Kendrick and others
+  Copyright (c) 2002-2022 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - May 15, 2007
+  June 14, 2002 - January 25, 2022
   $Id$
 */
 
@@ -65,9 +65,13 @@
 #include "arrow.xbm"
 #include "arrow-mask.xbm"
 
+#include "pipette.xbm"
+#include "pipette-mask.xbm"
+
 extern SDL_Cursor *cursor_hand, *cursor_arrow, *cursor_watch,
   *cursor_up, *cursor_down, *cursor_tiny, *cursor_crosshair,
-  *cursor_brush, *cursor_wand, *cursor_insertion, *cursor_rotate;
+  *cursor_brush, *cursor_wand, *cursor_insertion, *cursor_rotate,
+  *cursor_pipette;
 
 extern int no_fancy_cursors, hide_cursor;
 

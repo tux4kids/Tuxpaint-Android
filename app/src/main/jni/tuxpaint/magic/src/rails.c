@@ -1,4 +1,4 @@
-/* Last modified: 2021-09-21 */
+/* Last modified: 2022-05-19 */
 #include "tp_magic_api.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
@@ -58,7 +58,8 @@ void rails_shutdown(magic_api * api);
 void rails_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void rails_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 inline unsigned int rails_get_segment(int x, int y);
-inline void rails_extract_coords_from_segment(unsigned int segment, Sint16 * x, Sint16 * y);
+#define POINT_TYPE typeof(((SDL_Rect *)NULL)->x)
+inline void rails_extract_coords_from_segment(unsigned int segment, POINT_TYPE * x, POINT_TYPE * y);
 static void rails_flip(void *ptr, SDL_Surface * dest, SDL_Surface * src);
 static void rails_flip_flop(void *ptr, SDL_Surface * dest, SDL_Surface * src);
 static void rails_rotate(void *ptr, SDL_Surface * dest, SDL_Surface * src, unsigned int direction);
@@ -228,7 +229,7 @@ inline unsigned int rails_get_segment(int x, int y)
 
 }
 
-inline void rails_extract_coords_from_segment(unsigned int segment, Sint16 * x, Sint16 * y)
+inline void rails_extract_coords_from_segment(unsigned int segment, POINT_TYPE * x, POINT_TYPE * y)
 {                               //extracts the coords of the beginning and the segment
   *x = ((segment % rails_segments_x) - 1) * img_w;      //useful to set update_rect as small as possible
   *y = (int)(segment / rails_segments_x) * img_h;
@@ -237,8 +238,7 @@ inline void rails_extract_coords_from_segment(unsigned int segment, Sint16 * x, 
 static void rails_flip(void *ptr, SDL_Surface * dest, SDL_Surface * src)
 {
   magic_api *api = (magic_api *) ptr;
-
-  Sint16 x, y;
+  POINT_TYPE x, y;
 
   for (x = 0; x < dest->w; x++)
     for (y = 0; y < dest->h; y++)
@@ -248,7 +248,7 @@ static void rails_flip(void *ptr, SDL_Surface * dest, SDL_Surface * src)
 static void rails_flip_flop(void *ptr, SDL_Surface * dest, SDL_Surface * src)
 {
   magic_api *api = (magic_api *) ptr;
-  Sint16 x, y;
+  POINT_TYPE x, y;
 
   for (x = 0; x < dest->w; x++)
     for (y = 0; y < dest->h; y++)
@@ -259,7 +259,7 @@ static void rails_rotate(void *ptr, SDL_Surface * dest, SDL_Surface * src, unsig
 //src and dest must have same size
 {
   magic_api *api = (magic_api *) ptr;
-  Sint16 x, y;
+  POINT_TYPE x, y;
 
   if (direction)                //rotate -90 degs
     {

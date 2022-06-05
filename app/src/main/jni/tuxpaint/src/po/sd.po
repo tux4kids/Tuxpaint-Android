@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-25 01:12-0800\n"
+"POT-Creation-Date: 2022-06-02 21:16-0700\n"
 "PO-Revision-Date: 2013-01-09 14:39+0530\n"
 "Last-Translator: Chandrakant Dhutadmal\n"
 "Language-Team: Sindhi-PA\n"
@@ -276,108 +276,173 @@ msgstr "ٿائي"
 msgid "ZH_TW"
 msgstr "ZH_TW"
 
+#. Add menu items
+#: ../macos.m:56
+#, fuzzy
+#| msgid "Tux Paint"
+msgid "About Tux Paint"
+msgstr "ٽڪس رنگ"
+
+#: ../macos.m:61
+#, fuzzy
+#| msgid "Tux Paint"
+msgid "Hide Tux Paint"
+msgstr "ٽڪس رنگ"
+
+#: ../macos.m:64
+msgid "Hide Others"
+msgstr ""
+
+#: ../macos.m:67
+msgid "Show All"
+msgstr ""
+
+#: ../macos.m:71
+#, fuzzy
+#| msgid "Tux Paint"
+msgid "Quit Tux Paint"
+msgstr "ٽڪس رنگ"
+
+#. Put menu into the menubar
+#: ../macos.m:101 ../macos.m:109
+msgid "Window"
+msgstr ""
+
+#. "Minimize" item
+#: ../macos.m:104
+msgid "Minimize"
+msgstr ""
+
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:238 ../shapes.h:239
+#: ../shapes.h:266 ../shapes.h:267
 msgid "Square"
 msgstr "چوُرس"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:242 ../shapes.h:243
+#: ../shapes.h:270 ../shapes.h:271
 msgid "Rectangle"
 msgstr "گوني ڪُنڊ چوَڪنڊو"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:246 ../shapes.h:247
+#: ../shapes.h:274 ../shapes.h:275
 msgid "Circle"
 msgstr "گولُ"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:250 ../shapes.h:251
+#: ../shapes.h:278 ../shapes.h:279
 msgid "Ellipse"
 msgstr "بيضوي"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:254 ../shapes.h:255
+#: ../shapes.h:282 ../shapes.h:283
 msgid "Triangle"
 msgstr "ٽڪنڊو"
 
-#. Pentagone shape tool (5 sides)
-#: ../shapes.h:258 ../shapes.h:259
+#. Pentagon shape tool (5 sides)
+#: ../shapes.h:286 ../shapes.h:287
 msgid "Pentagon"
 msgstr "پنج ڪنڊو"
 
-#. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:262 ../shapes.h:263
-msgid "Rhombus"
-msgstr "مُعينُ"
+#. Hexagon shape tool (6 sides)
+#: ../shapes.h:290 ../shapes.h:291
+#, fuzzy
+#| msgid "Hexagon Mosaic"
+msgid "Hexagon"
+msgstr "چهڪنڊي ٽڪرين جي جڙتڪاري"
+
+#. Heptagon (aka septagon) shape tool (7 sides)
+#: ../shapes.h:294 ../shapes.h:295
+#, fuzzy
+#| msgid "Hexagon Mosaic"
+msgid "Heptagon"
+msgstr "چهڪنڊي ٽڪرين جي جڙتڪاري"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:266 ../shapes.h:267
+#: ../shapes.h:298 ../shapes.h:299
 msgid "Octagon"
 msgstr "اًٺڪُنڊوُ"
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:302 ../shapes.h:303
+msgid "Rhombus"
+msgstr "مُعينُ"
 
 #. Triangle star (3 points star)
 #. Rhombus star (4 points star)
 #. Pentagone star (5 points star)
-#: ../shapes.h:270 ../shapes.h:273 ../shapes.h:276 ../shapes.h:279
-#: ../shapes.h:282 ../shapes.h:285
+#: ../shapes.h:306 ../shapes.h:309 ../shapes.h:312 ../shapes.h:315
+#: ../shapes.h:318 ../shapes.h:321
 msgid "Star"
 msgstr ""
 
 #. Description of a square
-#: ../shapes.h:293 ../shapes.h:294
+#: ../shapes.h:329 ../shapes.h:330
 msgid "A square is a rectangle with four equal sides."
 msgstr "چورس چؤطرف سمان پاسن سان گوني ڪنڊ چوَڪنڊو آهي"
 
 #. Description of a rectangle
-#: ../shapes.h:297 ../shapes.h:298
+#: ../shapes.h:333 ../shapes.h:334
 msgid "A rectangle has four sides and four right angles."
 msgstr "گوني ڪنڊ چوَڪنڊي جا چار پاسا ۽ چار گوني ڪنڊ آهن۔"
 
 #. Description of a circle
-#: ../shapes.h:301 ../shapes.h:302
+#: ../shapes.h:337 ../shapes.h:338
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr "گولُ هڪ موڙ آهي جنهن جا سڀ نقطا مرڪز کان سمان دوريءَ تي آهن۔"
 
 #. Description of an ellipse
-#: ../shapes.h:305 ../shapes.h:306
+#: ../shapes.h:341 ../shapes.h:342
 msgid "An ellipse is a stretched circle."
 msgstr "بيضوي شڪل ڊگهيڙيل گول آهي"
 
 #. Description of a triangle
-#: ../shapes.h:309 ../shapes.h:310
+#: ../shapes.h:345 ../shapes.h:346
 msgid "A triangle has three sides."
 msgstr "ٽڪنڊي جا ٽي پاسا آهن۔"
 
 #. Description of a pentagon
-#: ../shapes.h:313 ../shapes.h:314
+#: ../shapes.h:349 ../shapes.h:350
 msgid "A pentagon has five sides."
 msgstr "پنج ڪنڊي جا پنج پاسا آهن۔"
 
-#. Description of a rhombus
-#: ../shapes.h:317 ../shapes.h:318
-msgid "A rhombus has four equal sides, and opposite sides are parallel."
-msgstr "مُعينُ جا چار سمان پاسا ۽ اُنهن جي سامهون پورو وڇوٽ ليڪون آهن۔"
+#. Description of a hexagon
+#: ../shapes.h:353 ../shapes.h:354
+#, fuzzy
+#| msgid "A pentagon has five sides."
+msgid "A hexagon has six sides."
+msgstr "پنج ڪنڊي جا پنج پاسا آهن۔"
+
+#. Description of a heptagon
+#: ../shapes.h:357 ../shapes.h:358
+#, fuzzy
+#| msgid "A pentagon has five sides."
+msgid "A heptagon has seven sides."
+msgstr "پنج ڪنڊي جا پنج پاسا آهن۔"
 
 #. Description of an octagon
-#: ../shapes.h:321 ../shapes.h:322
+#: ../shapes.h:361 ../shapes.h:362
 msgid "An octagon has eight equal sides."
 msgstr "اَٺڪنڊي جا اٺ سمان پاسا آهن۔"
 
-#: ../shapes.h:324 ../shapes.h:325
+#. Description of a rhombus
+#: ../shapes.h:365 ../shapes.h:366
+msgid "A rhombus has four equal sides, and opposite sides are parallel."
+msgstr "مُعينُ جا چار سمان پاسا ۽ اُنهن جي سامهون پورو وڇوٽ ليڪون آهن۔"
+
+#: ../shapes.h:368 ../shapes.h:369
 msgid "A star with 3 points."
 msgstr ""
 
-#: ../shapes.h:326 ../shapes.h:327
+#: ../shapes.h:370 ../shapes.h:371
 msgid "A star with 4 points."
 msgstr ""
 
-#: ../shapes.h:328 ../shapes.h:329
+#: ../shapes.h:372 ../shapes.h:373
 msgid "A star with 5 points."
 msgstr ""
 
-#: ../shapes.h:385
+#: ../shapes.h:433
 #, fuzzy
 #| msgid ""
 #| "Pick a shape. Click to pick the center, drag, then let go when it is the "
@@ -390,7 +455,7 @@ msgstr ""
 "اين تائين وڃڻ ڏيو۔ ان کي گول گهمڻ لاءِ اُن مٿان گهمايو، اين نقش رهڻ لاءِ ڪلڪ "
 "ڪريو۔"
 
-#: ../shapes.h:386
+#: ../shapes.h:434
 #, fuzzy
 #| msgid ""
 #| "Pick a shape. Click to pick the center, drag, then let go when it is the "
@@ -403,11 +468,11 @@ msgstr ""
 "اين تائين وڃڻ ڏيو۔ ان کي گول گهمڻ لاءِ اُن مٿان گهمايو، اين نقش رهڻ لاءِ ڪلڪ "
 "ڪريو۔"
 
-#: ../shapes.h:392
+#: ../shapes.h:440
 msgid "Draw shapes from the center."
 msgstr ""
 
-#: ../shapes.h:393
+#: ../shapes.h:441
 msgid "Draw shapes from a corner."
 msgstr ""
 
@@ -513,7 +578,7 @@ msgstr "نئون "
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:8438
+#: ../tools.h:98 ../tuxpaint.c:8787
 msgid "Open"
 msgstr "کوليو"
 
@@ -565,8 +630,8 @@ msgstr ""
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
-"and clicking an existing label, you can move it, edit it and change its text "
-"style."
+"and clicking an existing label, you can move it, edit it, and change its "
+"text style."
 msgstr ""
 "متن جو نمونو چونڊيو۔ پنهنجي نقش تي ڪلڪ ڪريو ۽ توهين ٽائيپ شروع ڪري سگهو ٿا۔ "
 "متن پورو ڪرڻ لاءِ (داڙم ڪريو) يا (ٽيب) دٻايو۔ چونڊ جو بٽڻ اِستعمال ڪرڻ ۽ نڪري "
@@ -627,7 +692,7 @@ msgstr "ليڪ پوري ٿيڻ لاءِ بٽڻ وڃڻ ڏيو"
 #, fuzzy, c-format
 #| msgid "Let go of the button to complete the line."
 msgid ""
-"Let go of the button to complete the line. (Your line's angle is %.0f "
+"Let go of the button to complete the line. (Your line’s angle is %.0f "
 "degrees.)"
 msgstr "ليڪ پوري ٿيڻ لاءِ بٽڻ وڃڻ ڏيو"
 
@@ -636,12 +701,19 @@ msgstr "ليڪ پوري ٿيڻ لاءِ بٽڻ وڃڻ ڏيو"
 msgid "Hold the button to stretch the shape."
 msgstr "آڪاريە ڦهلائڻ لاءِ بٽڻ جهليو"
 
+#: ../tools.h:171
+#, fuzzy, c-format
+#| msgid "Hold the button to stretch the shape."
+msgid ""
+"Hold the button to stretch the shape. (It has an aspect ratio of \"%.2g:1\".)"
+msgstr "آڪاريە ڦهلائڻ لاءِ بٽڻ جهليو"
+
 #. Instruction while finishing Shape tool (after release, during rotation step before second click)
-#: ../tools.h:173
+#: ../tools.h:174
 msgid "Move the mouse to rotate the shape. Click to draw it."
 msgstr "آڪار گول گهمائڻ لاءِ مائوس هلايو۔ اهو نقش ڪڍڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../tools.h:174
+#: ../tools.h:175
 #, fuzzy, c-format
 #| msgid "Move the mouse to rotate the shape. Click to draw it."
 msgid ""
@@ -650,234 +722,387 @@ msgid ""
 msgstr "آڪار گول گهمائڻ لاءِ مائوس هلايو۔ اهو نقش ڪڍڻ لاءِ ڪلڪ ڪريو۔"
 
 #. Notification that 'New' action was aborted (current image would have been lost)
-#: ../tools.h:177
+#: ../tools.h:178
 msgid "OK then… Let’s keep drawing this one!"
 msgstr "ٺيڪ پوءِ اسين هي نقش رکون!"
 
+#. Instructions to show when the Label tool's selector mode is activated
+#: ../tools.h:181
+msgid ""
+"Clicking an existing label (or press [Tab] to cycle through them and [Enter] "
+"to choose). Then, you can move it, edit it, and change its text style."
+msgstr ""
+
+#. Instructions to show when a Label has been chosen with the selector
+#: ../tools.h:184
+msgid ""
+"Click in your picture if you wish to reposition this label, type to change "
+"the text, and use the options to change its text style. Press [Enter] or "
+"[Tab] when you're finished."
+msgstr ""
+
+#. Instructions to show when the Label tool's apply mode is activated
+#: ../tools.h:187
+msgid ""
+"Clicking an existing label (or press [Tab] to cycle through them and [Enter] "
+"to choose) to permanently apply the text to the canvas."
+msgstr ""
+
+#. Instructions to show when choosing brushes, depending on the brush's feature (if there are none, show_brush_tip() will show the current tool's tip)
+#: ../tools.h:190
+msgid "This brush is animated; its shape changes as you draw!"
+msgstr ""
+
+#: ../tools.h:191
+msgid "This brush changes depending on the angle."
+msgstr ""
+
+#: ../tools.h:192
+msgid ""
+"This brush changes depending on the angle, and is animated; its shape "
+"changes as you draw!"
+msgstr ""
+
+#: ../tools.h:194
+msgid "This brush's spacing is now 1 pixel!"
+msgstr ""
+
+#: ../tools.h:195
+#, c-format
+msgid ""
+"This brush's spacing is now about %1$d/%2$d the size of the brush shape."
+msgstr ""
+
+#: ../tools.h:196
+msgid "This brush's spacing is now about the size of the brush shape."
+msgstr ""
+
+#: ../tools.h:197
+#, c-format
+msgid "This brush's spacing is now about %d times as big as the brush shape."
+msgstr ""
+
+#: ../tools.h:198
+#, c-format
+msgid ""
+"This brush's spacing is now about %1$d %2$d/%3$d times as big as the brush "
+"shape."
+msgstr ""
+
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2234
+#: ../tuxpaint.c:2267
 msgid "Do you really want to quit?"
 msgstr "ڇا توهين سچ پچ ڇڏي نڪري وڃڻ چاهيو ٿا؟"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2237
+#: ../tuxpaint.c:2270
 msgid "Yes, I’m done!"
 msgstr "ها، منهنجو ٿي ويو!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2240 ../tuxpaint.c:2267
+#: ../tuxpaint.c:2273 ../tuxpaint.c:2300
 msgid "No, take me back!"
 msgstr "نە، مونکي واپس کڻو!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2244
+#: ../tuxpaint.c:2277
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "اگر توهين ڇڏي نڪري ويندا تە پنهنجي تصيوير وڃائي ڇڏيندا؟"
 
-#: ../tuxpaint.c:2245 ../tuxpaint.c:2250
+#: ../tuxpaint.c:2278 ../tuxpaint.c:2283
 msgid "Yes, save it!"
 msgstr "ها، اها سانڍيو!"
 
-#: ../tuxpaint.c:2246 ../tuxpaint.c:2251
+#: ../tuxpaint.c:2279 ../tuxpaint.c:2284
 msgid "No, don’t bother saving!"
 msgstr "نە، مونکي سانڍڻ جي پرواهە ناهي!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2249
+#: ../tuxpaint.c:2282
 msgid "Save your picture first?"
 msgstr "پهرين پنهنجي تصوير سانڍيندا؟"
 
 #. Error opening picture
-#: ../tuxpaint.c:2254
+#: ../tuxpaint.c:2287
 msgid "Can’t open that picture!"
 msgstr "اُها تصوير نٿا کولي سگهو!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2257 ../tuxpaint.c:2262 ../tuxpaint.c:2271 ../tuxpaint.c:2278
-#: ../tuxpaint.c:2287 ../tuxpaint.c:2292
+#: ../tuxpaint.c:2290 ../tuxpaint.c:2295 ../tuxpaint.c:2304 ../tuxpaint.c:2311
+#: ../tuxpaint.c:2320 ../tuxpaint.c:2325
 msgid "OK"
 msgstr "ٺيڪ آهي"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2261
+#: ../tuxpaint.c:2294
 msgid "There are no saved files!"
 msgstr "فائلون سانڍيل ناهن!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2265
+#: ../tuxpaint.c:2298
 msgid "Print your picture now?"
 msgstr "پنهنجي تصوير ڇاپيندا!"
 
-#: ../tuxpaint.c:2266
+#: ../tuxpaint.c:2299
 msgid "Yes, print it!"
 msgstr "ها، ها ڇاپيو!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2270
+#: ../tuxpaint.c:2303
 msgid "Your picture has been printed!"
 msgstr "توهانجي تصوير ڇاپي ويئي آهي!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2274
+#: ../tuxpaint.c:2307
 msgid "Sorry! Your picture could not be printed!"
 msgstr "معاف ڪجو! توهانجي تصوير نە ڇاپجي سگهي!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2277
+#: ../tuxpaint.c:2310
 msgid "You can’t print yet!"
 msgstr "اڃا توهين نٿا ڇاپي سگهو!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2281
+#: ../tuxpaint.c:2314
 msgid "Erase this picture?"
 msgstr "اِها تصوير ميساري ڇڏيندا؟"
 
-#: ../tuxpaint.c:2282
+#: ../tuxpaint.c:2315
 msgid "Yes, erase it!"
 msgstr "ها، اِها ميساري ڇڏيو!"
 
-#: ../tuxpaint.c:2283
+#: ../tuxpaint.c:2316
 msgid "No, don’t erase it!"
 msgstr "نە، اها نە ميساريو!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2286
+#: ../tuxpaint.c:2319
 msgid "Remember to use the left mouse button!"
 msgstr "مائوس جو کاٻو بٽڻ اِستعمال ڪرڻ ياد رکو!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2290
+#: ../tuxpaint.c:2323
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "توهانجي تصوير ڇاپي ويئي آهي!"
 
-#: ../tuxpaint.c:2291
+#: ../tuxpaint.c:2324
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "توهانجي تصوير ڇاپي ويئي آهي!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2295
+#: ../tuxpaint.c:2328
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "معاف ڪجو! توهانجي تصوير نە ڇاپجي سگهي!"
 
-#: ../tuxpaint.c:2296
+#: ../tuxpaint.c:2329
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "معاف ڪجو! توهانجي تصوير نە ڇاپجي سگهي!"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2300
+#: ../tuxpaint.c:2333
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "توهانکي جيڪا تصوير کپي اُها چونڊيو، اُن بعد هلايو تي ڪلڪ ڪريو۔"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2512
+#: ../tuxpaint.c:2554
 msgid "Sound muted."
 msgstr "آواز اڻ اُچاريل ڪيو ويو۔"
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2517
+#: ../tuxpaint.c:2559
 msgid "Sound unmuted."
 msgstr "آواز اُچاريل ڪيو ويو۔"
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3296
+#: ../tuxpaint.c:3344
 msgid "Please wait…"
 msgstr "مهرباني ڪري ترسو۔۔۔"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:8441
+#: ../tuxpaint.c:8790
 msgid "Erase"
 msgstr "ميساري ڇڏيو"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:8444
+#: ../tuxpaint.c:8793
 msgid "Slides"
 msgstr "سلائڊ"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:8447
+#: ../tuxpaint.c:8796
 msgid "Export"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:8450
+#: ../tuxpaint.c:8799
 msgid "Back"
 msgstr "پٺتي"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:8453
+#: ../tuxpaint.c:8802
 msgid "Play"
 msgstr "هلايو"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:8456
+#: ../tuxpaint.c:8805
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:8459
+#: ../tuxpaint.c:8808
 msgid "Next"
 msgstr "اڳتي"
 
+#. Color mixer dialog: 'Clear' button, to reset the mixed color
+#: ../tuxpaint.c:8811
+msgid "Clear"
+msgstr ""
+
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:9267
+#: ../tuxpaint.c:9670
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12927
+#: ../tuxpaint.c:13390
 msgid "Yes"
 msgstr "ها"
 
-#: ../tuxpaint.c:12931
+#: ../tuxpaint.c:13394
 msgid "No"
 msgstr "نە"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:14077
+#: ../tuxpaint.c:14547
 msgid "Replace the picture with your changes?"
 msgstr "پنهنجي تبديلين سان تصوير مٽائيندا؟"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:14081
+#: ../tuxpaint.c:14551
 msgid "Yes, replace the old one!"
 msgstr "ها، پراڻي مٽايو!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:14085
+#: ../tuxpaint.c:14555
 msgid "No, save a new file!"
 msgstr "نە، نئين فائيل سانڍيو!"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:15349
+#: ../tuxpaint.c:15805
 msgid "Choose the picture you want, then click “Open”."
 msgstr "توهانکي جيڪا تصوير کپي اُها چونڊيو، اُن بعد کوليو ڪلڪ ڪريو۔"
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:16775
+#: ../tuxpaint.c:17343
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
-#: ../tuxpaint.c:24552
+#. Descriptions (names) of the color mixer tool's primary colors and shades
+#: ../tuxpaint.c:22878
+msgid "red"
+msgstr ""
+
+#: ../tuxpaint.c:22879
+#, fuzzy
+#| msgid "Yellow!"
+msgid "yellow"
+msgstr "پيلو!"
+
+#: ../tuxpaint.c:22880
+#, fuzzy
+#| msgid "Sky blue!"
+msgid "blue"
+msgstr "آسماني!"
+
+#: ../tuxpaint.c:22881
+#, fuzzy
+#| msgid "White!"
+msgid "white"
+msgstr "اَڇو!"
+
+#: ../tuxpaint.c:22882
+msgid "grey"
+msgstr ""
+
+#: ../tuxpaint.c:22883
+#, fuzzy
+#| msgid "Black!"
+msgid "black"
+msgstr "ڪارو!"
+
+#. Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.)
+#: ../tuxpaint.c:22888
+#, c-format
+msgid "Your color is %1$s %2$s."
+msgstr ""
+
+#: ../tuxpaint.c:22889
+#, c-format
+msgid "Your color is %1$s %2$s and %3$s %4$s."
+msgstr ""
+
+#: ../tuxpaint.c:22890
+#, c-format
+msgid "Your color is %1$s %2$s, %3$s %4$s, and %5$s %6$s."
+msgstr ""
+
+#: ../tuxpaint.c:22891
+#, c-format
+msgid "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, and %7$s %8$s."
+msgstr ""
+
+#: ../tuxpaint.c:22892
+#, c-format
+msgid ""
+"Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, and %9$s %10$s."
+msgstr ""
+
+#: ../tuxpaint.c:22893
+#, c-format
+msgid ""
+"Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s, and "
+"%11$s %12$s."
+msgstr ""
+
+#. Color mixer; e.g., "Your color is entirely grey."
+#: ../tuxpaint.c:23654 ../tuxpaint.c:23661
+msgid "entirely"
+msgstr ""
+
+#. Add "Color Select" color:
+#: ../tuxpaint.c:26566
 msgid "Select a color from your drawing."
 msgstr ""
 
-#: ../tuxpaint.c:24564
-msgid "Pick a color."
-msgstr "رنگ چونڊيو۔"
+#. Add "Color Picker" color:
+#. (This is an attempt to describe an HSV color picker in extremely basic terms!)
+#: ../tuxpaint.c:26575
+msgid ""
+"Pick a color. Hues go top to bottom. Saturation/intensity goes left (pale) "
+"to right (pure). Value (lightness/darkness): grey bar."
+msgstr ""
+
+#. Add "Color Mixer" color:
+#. (The terms 'tint', 'tone', and 'shade' relate to combining white, grey, or black paint (respectively) to another color)
+#: ../tuxpaint.c:26587
+msgid ""
+"Click the primary colors (red, yellow, and blue), white (to tint), grey (to "
+"tone), and black (to shade), to mix together a new color."
+msgstr ""
 
 #: ../tuxpaint.desktop.in.h:1
 msgid "Tux Paint"
@@ -1126,17 +1351,17 @@ msgid ""
 "Choose a background color and click to turn the corner of the page over."
 msgstr "صفحي جي ڪنڊ موڙڻ لاءِ پس منظر جو رنگ چونڊيو ۽ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/fretwork.c:182
+#: ../../magic/src/fretwork.c:183
 msgid "Fretwork"
 msgstr ""
 
-#: ../../magic/src/fretwork.c:188
+#: ../../magic/src/fretwork.c:189
 #, fuzzy
 #| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw repetitive patterns."
 msgstr "پوئڻ جي ڪلا سان تير رچڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/fretwork.c:190
+#: ../../magic/src/fretwork.c:191
 #, fuzzy
 #| msgid "Click to cover your picture with rain drops."
 msgid "Click to surround your picture with repetitive patterns."
@@ -1403,30 +1628,56 @@ msgstr "پنهنجي تصوير جي حصن ۾ شورُ شامل ڪرڻ لاءِ
 msgid "Click to add noise to your entire picture."
 msgstr "پنهنجي سموريءَ تصوير ۾ شور شامل ڪريو۔"
 
-#: ../../magic/src/perspective.c:151
+#: ../../magic/src/perspective.c:161
 msgid "Perspective"
 msgstr "منظرُ"
 
-#: ../../magic/src/perspective.c:152
+#: ../../magic/src/perspective.c:162
 msgid "Panels"
 msgstr ""
 
-#: ../../magic/src/perspective.c:153
+#: ../../magic/src/perspective.c:163
+#, fuzzy
+#| msgid "Zoom"
+msgid "Tile Zoom"
+msgstr "زوم"
+
+#: ../../magic/src/perspective.c:164
 msgid "Zoom"
 msgstr "زوم"
 
-#: ../../magic/src/perspective.c:157
+#: ../../magic/src/perspective.c:165
+msgid "Rush"
+msgstr ""
+
+#: ../../magic/src/perspective.c:169
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "توهين جيڏانهن تصوير ڦهلائڻ چاهيو ٿا اُنهن ڪنڊن تي ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/perspective.c:159
+#: ../../magic/src/perspective.c:171
 #, fuzzy
 #| msgid "Click to turn your painting into its negative."
 msgid "Click to turn your picture into 2-by-2 panels."
 msgstr "پنهنجي چترڪاري نگيٽو ۾ بدلائڻ لاءِ ڪل ڪريو۔"
 
-#: ../../magic/src/perspective.c:161
+#: ../../magic/src/perspective.c:173
+#, fuzzy
+#| msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgid ""
+"Click and drag up to zoom in the picture. Drag down to zoom out and tile the "
+"picture."
+msgstr ""
+"تصوير جي اندر زوم ڪرڻ لاءِ ڪلڪ ڪريو ۽ مٿي گهليو ۽ ٻاهر زوم ڪرڻ لاءِ هيٺ گهليو۔"
+
+#: ../../magic/src/perspective.c:175
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr ""
+"تصوير جي اندر زوم ڪرڻ لاءِ ڪلڪ ڪريو ۽ مٿي گهليو ۽ ٻاهر زوم ڪرڻ لاءِ هيٺ گهليو۔"
+
+#: ../../magic/src/perspective.c:177
+#, fuzzy
+#| msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgid "Click and drag up to rush in or drag down to rush out the picture."
 msgstr ""
 "تصوير جي اندر زوم ڪرڻ لاءِ ڪلڪ ڪريو ۽ مٿي گهليو ۽ ٻاهر زوم ڪرڻ لاءِ هيٺ گهليو۔"
 
@@ -1452,11 +1703,11 @@ msgstr "پنهنجي تصوير جي جنهن حصي ۾ توهين مونجها�
 msgid "Click to make a puzzle in fullscreen mode."
 msgstr "سموريءَ اِسڪرن جي ڍنگ ۾ مونجهارو رچڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/rails.c:131
+#: ../../magic/src/rails.c:132
 msgid "Rails"
 msgstr "پٽا"
 
-#: ../../magic/src/rails.c:141
+#: ../../magic/src/rails.c:142
 msgid "Click and drag to draw train track rails on your picture."
 msgstr "پنهنجي تصوير ۽ ريل جي پٽن جو نقش رچڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
@@ -1778,6 +2029,9 @@ msgstr "پوئڻ جي ڪلا سان تير رچڻ لاءِ ڪلڪ ڪريو ۽ گ
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "پنهنجي سموريءَ تصوير ۾ ٽڪرين جي جڙتڪاريءَ جو اَثر شامل ڪرڻ لاءِ۔"
+
+#~ msgid "Pick a color."
+#~ msgstr "رنگ چونڊيو۔"
 
 #~ msgid "Click in the picture to fill that area with color."
 #~ msgstr "رنگ سان اُهو حصا ڀرڻ لاءِ تصوير ۾ ڪلڪ ڪريو۔"

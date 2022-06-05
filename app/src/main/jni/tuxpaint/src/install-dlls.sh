@@ -6,9 +6,11 @@ find_depends(){
     dllname=`basename $dllpath`
     if ! grep -q $dllname dlllist; then
       echo $dllpath >> dlllist
-      echo -n .
-      cp $dllpath $DESTDIR/
-      find_depends $dllpath
+      if [ ! -f $DESTDIR/$dllname ]; then
+          echo -n .
+	  cp $dllpath $DESTDIR/
+	  find_depends $dllpath
+      fi
     fi
   done
 }

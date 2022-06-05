@@ -4,7 +4,7 @@
   For Tux Paint
   Language-related functions
 
-  Copyright (c) 2002-2020 by Bill Kendrick and others
+  Copyright (c) 2002-2022 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -25,7 +25,7 @@
 
   $Id$
 
-  June 14, 2002 - October 25, 2021
+  June 14, 2002 - February 9, 2022
 */
 
 #include <stdio.h>
@@ -33,6 +33,7 @@
 #include <string.h>
 #include <libintl.h>
 #include <locale.h>
+#include "platform.h"
 #include "i18n.h"
 #include "debug.h"
 
@@ -71,6 +72,12 @@ static char *android_locale()
   return android_locale_buf;
 }
 #endif
+#if defined(__MACOS__)
+#include "macos.h"
+#elif defined(__IOS__)
+#include "ios.h"
+#endif
+
 
 /* Globals: */
 
@@ -814,7 +821,7 @@ static void ctype_utf8(void)
 }
 
 /**
- * For a given language, return its local, or exit with a usage error.
+ * For a given language, return its locale, or exit with a usage error.
  *
  * @param langstr Name of language (e.g., "german")
  * @return Locale (e.g., "de_DE.UTF-8")
@@ -834,6 +841,53 @@ static const char *language_to_locale(const char *langstr)
   show_lang_usage(59);
   return NULL;
 }
+
+
+#if defined(__APPLE__)
+
+/**
+ * For a given locale, return the known locale that matches it closest, or exit
+ * with a usage error.
+ *
+ * @param  inlocale       Name of some locale (e.g., "ko_US")
+ * @return Known locale.  (e.g., "ko_KR.UTF-8")
+ */
+static const char *locale_to_closest_locale(const char *inlocale)
+{
+  const int numlocale = sizeof(language_to_locale_array) / sizeof(language_to_locale_array[0]);
+  const char* outlocale = NULL;
+  int outlocale_score = 0;
+  int i = 0;
+  int j = 0;
+
+  /* find the locale with the longest string match */
+  for (i = 0; i < numlocale; i++)
+    {
+      const char* candidate = language_to_locale_array[i].locale;
+
+      for (j = 0; j < (int) strlen(inlocale) && j < (int) strlen(candidate); j++)
+        {
+          if(inlocale[j] != candidate[j]) break;
+        }
+
+      if (j > outlocale_score)
+        {
+          outlocale = candidate;
+          outlocale_score = j;
+        }
+    }
+
+  /* locale must match at least two characters */
+  if (outlocale_score < 2)
+    {
+      outlocale = "";
+    }
+
+  return outlocale;
+}
+
+#endif
+
 
 /**
  * Set language ("langint" global) based on a given locale;
@@ -1094,7 +1148,24 @@ static int set_current_language(const char *restrict loc, int * ptr_num_wished_l
 
   DEBUG_PRINTF("Locale AFTER is: %s\n", setlocale(LC_ALL, NULL));     //EP
 
+#ifdef BDIST_WIN32
+  // FIXME: After the update of MinGW/MSYS2 in January 2022, gettext() no longer find
+  //        translation (.mo) files unless dirname is specified by full path.
+  //
+  //                      -- 2022/02/02: Shin-ichi TOYAMA & Pere Pujal i Carabantes
+  char curdir[256];
+  char f[512];
+  getcwd(curdir, sizeof(curdir));
+  snprintf(f, sizeof(f), "%s%s", curdir, "\\locale");
+#ifdef DEBUG
+  printf("Current directory at launchtime: %s\n", curdir);
+  printf("Localedir is set to: %s\n", f);
+#endif
+  bindtextdomain("tuxpaint", f);
+#else
   bindtextdomain("tuxpaint", LOCALEDIR);
+#endif
+
   /* Old version of glibc does not have bind_textdomain_codeset() */
 #if defined(_WIN32) || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 2) || __GLIBC__ > 2 || defined(__NetBSD__) || __APPLE__
   bind_textdomain_codeset("tuxpaint", "UTF-8");
@@ -1230,6 +1301,14 @@ int setup_i18n(const char *restrict lang, const char *restrict locale, int * num
           show_locale_usage(stdout, "tuxpaint");
           exit(0);
         }
+    }
+  else
+    {
+      #if defined(__APPLE__)
+        locale = locale_to_closest_locale(apple_locale());
+      #else
+        locale = "";
+      #endif
     }
 
   if (lang)

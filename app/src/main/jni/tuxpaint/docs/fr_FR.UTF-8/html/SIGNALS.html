@@ -5,71 +5,143 @@
       Documentation sur les signaux pour Tux Paint    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
         link="#0000FF"
         vlink="#FF0000"
         alink="#FF00FF">
-    <center>
-      <h1>
-        <img src="../../html/images/tuxpaint-title.png"
-            width="205"
-            height="210"
-            alt="Tux Paint"><br>
-        version 0.9.28<br/>
-        Documentation sur les signaux      </h1>
+    <section class="outer">
+      <center>
+        <header>
+          <h1>
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.28<br/>
+            Documentation sur les signaux          </h1>
 
+          <p>
+            Copyright &copy; 2019-2022 by divers contributeurs; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+    
+          <p>
+            juin  4, 2022          </p>
+        </header>
+      </center>
+    </section>
+
+    <section>
       <p>
-        Copyright &copie; 2019-2021 par divers contributeurs; voir AUTHORS.<br>
-        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
-      </p>
-
-      <p>
-        mars  9, 2021      </p>
-    </center>
-
-    <hr>
-
-    <p>
-      Tux Paint répond aux signaux suivants (qui peuvent être envoyé au processus du programme via `<code>kill</code>` ou`<code>killall</code>`, par exemple).    </p>
-
-    <dl>
-      <dt>
-        <code>SIGTERM</code>
-        (également, <b><code>[Ctrl]</code></b> + <b><code>[C]</code></b> depuis un terminal exécutant '<code>tuxpaint</code>')      </dt>
-
-      <dd>
-        <p>
-          Tux Paint répond comme si le bouton "Quitter" était enfoncé, ou l'environnement de bureau a été invité à fermer Tux Paint (par exemple, en cliquant sur un bouton de fermeture de fenêtre, ou en appuyant sur <b><code>[Alt]</code></b> + <b><code>[F4]</code></b> sur la plupart des systèmes).        </p>
-
-        <p>
-          Depuis l'interface principale, Tux Paint vous demandera si vous souhaitez quitter ou non, et (sauf si remplacé par l'option autosave, par ex. "<code>--autosave</code>") si vous souhaitez enregistrer le dessin courant (s'il n'est pas enregistré), et si c'est le cas, et c'est une version modifiée d'un dessin existant (sauf si remplacé par les options pour écraser les images anciennes, ou bien sauvegarder avec un nouveau nom (par ex. "<code>--saveover</code>" ou "<code>--saveovernew</code>") vers un nouveau fichier.        </p>
-
-        <p>
-          <b>Remarque :</b>Sur d'autres parties de l'interface, le signal est en fait interprété comme une demande de retour en arrière (par exemple, de la boîte de dialogue "Nouveau" pour revenir sur l'interface principale), comme si un bouton "Retour" dans Tux Paint a été cliqué, ou la touche <b><code>[Esc]</code></b> enfoncée.        </p>
-
-        <p>
-          Exemple: <code>killall tuxpaint</code>        </p>
-      </dd>
-
-      <dt>
-        <code>SIGUSR1</code> &amp; <code>SIGUSR2</code>
-      </dt>
-
-      <dd>
-        <p>
-          Tux Paint répond en définissant son option "autosave" (comme si cela avait été lancé avec "<code>--autosave</code>"), aussi bien que l'option pour toujours sauvegarder de nouvelles images (comme si c'était lancé avec "<code>--saveovernew</code>"), dans le cas de la réception d'un signal <code>SIGUSR1</code>, ou bien d'écraser les images existantes (comme si cela avait lancé avec "<code>--saveover</code>") dans le cas où on recevait <code>SIGUSR2</code>. Alors Tux Paint envoie à lui-même le signal <code>SIGTERM</code>, pour une tentative de quitter (Voir ci-dessus.)        </p>
-
-        <p>
-          Ainsi, à partir de l'interface principale, Tux Paint devrait se fermer presque immédiatement, sans poser de questions.        </p>
-
-        <p>
-          À partir d'autres parties de l'interface, malheureusement, Tux Paint ne reviendra que d'un niveau dans l'interface. Par conséquent, à ce moment, il peut être nécessaire d'envoyer ce signal à Tux Paint plusieurs fois pour qu'il s'arrête complètement.        </p>
-
-        <p>
-          Exemple: <code>killall -s SIGUSR1 tuxpaint</code>        </p>
-      </dd>
-    </dl>
+        Tux Paint répond aux signaux suivants (qui peuvent être envoyé au processus du programme via `<code>kill</code>` ou`<code>killall</code>`, par exemple).      </p>
+  
+      <dl>
+        <dt>
+          <code>SIGTERM</code>
+          (également, <b><code>[Control]</code></b> + <b><code>[C]</code></b> depuis un terminal exécutant '<code>tuxpaint</code>')        </dt>
+  
+        <dd>
+          <p>
+            Tux Paint répond comme si le bouton "Quitter" était enfoncé, ou l'environnement de bureau a été invité à fermer Tux Paint (par exemple, en cliquant sur un bouton de fermeture de fenêtre, ou en appuyant sur <b><code>[Alt]</code></b> + <b><code>[F4]</code></b> sur la plupart des systèmes).          </p>
+  
+          <p>
+            Depuis l'interface principale, Tux Paint vous demandera si vous souhaitez quitter ou non, et (sauf si remplacé par l'option autosave, par ex. "<code>--autosave</code>") si vous souhaitez enregistrer le dessin courant (s'il n'est pas enregistré), et si c'est le cas, et c'est une version modifiée d'un dessin existant (sauf si remplacé par les options pour écraser les images anciennes, ou bien sauvegarder avec un nouveau nom (par ex. "<code>--saveover</code>" ou "<code>--saveovernew</code>") vers un nouveau fichier.          </p>
+  
+          <p>
+            Exemple: <code>killall tuxpaint</code>          </p>
+  
+          <p class="note">
+            <span title="Information">&#128161;</span>            <strong>Note:</strong> From other parts of the interface, the signal is currently interpreted as a request to go back (e.g., from the "New" dialog back to the main interface), as if a "Back" button in Tux Paint were clicked, or the <b><code>[Esc]</code></b> was key pressed.          </p>
+        </dd>
+  
+        <dt>
+          <code>SIGUSR1</code> &amp; <code>SIGUSR2</code>
+        </dt>
+  
+        <dd>
+          <p>
+            Tux Paint répond en définissant son option "autosave" (comme si cela avait été lancé avec "<code>--autosave</code>"), aussi bien que l'option pour toujours sauvegarder de nouvelles images (comme si c'était lancé avec "<code>--saveovernew</code>"), dans le cas de la réception d'un signal <code>SIGUSR1</code>, ou bien d'écraser les images existantes (comme si cela avait lancé avec "<code>--saveover</code>") dans le cas où on recevait <code>SIGUSR2</code>. Alors Tux Paint envoie à lui-même le signal <code>SIGTERM</code>, pour une tentative de quitter (Voir ci-dessus.)          </p>
+  
+          <p>
+            Ainsi, à partir de l'interface principale, Tux Paint devrait se fermer presque immédiatement, sans poser de questions.          </p>
+  
+          <p>
+            Exemple: <code>killall -s SIGUSR1 tuxpaint</code>          </p>
+  
+          <p class="note">
+            <span title="Information">&#128161;</span>            <strong>Note:</strong> From other parts of the interface, unfortunately, Tux Paint will go back one level in the interface.  Therefore, at this time, it may be necessary to send this signal to Tux Paint a few times, for it to quit completely.          </p>
+        </dd>
+      </dl>
+    </section>
   </body>
 </html>

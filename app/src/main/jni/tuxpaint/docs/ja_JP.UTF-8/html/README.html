@@ -5,1494 +5,1612 @@
       はじめにお読み下さい - Tux Paint ドキュメント    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
         link="#0000FF"
         vlink="#FF0000"
         alink="#FF00FF">
-    <center>
-      <h1>
-        <img src="../../html/images/tuxpaint-title.png"
-            width="205"
-            height="210"
-            alt="Tux Paint"><br>
-        バージョン 0.9.28      </h1>
 
-      <h3>
-        子供向けのシンプルなお絵かきプログラム      </h3>
+    <!-- Title -->
+    <section class="outer">
+      <header>
+        <center>
+          <h1 style="page-break-before: avoid;">
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            バージョン 0.9.28          </h1>
 
-      <p>
-        Copyright &copy; 2002-2021 by various contributors; "AUTHORS" 参照.<br/>
-        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a><br/>
-        <a href="https://twitter.com/TuxPaintTweets">@TuxPaintTweets on Twitter</a>
-      </p>
+          <h3 align="center">
+            子供向けのシンプルなお絵かきプログラム          </h3>
 
-      <p>
-        2021年11月25日      </p>
-    </center>
+          <p>
+            Copyright &copy; 2002-2022 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br/>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a><br/>
+            <a href="https://twitter.com/TuxPaintTweets">@TuxPaintTweets（ツイッター）</a><br/>
+            <a href="https://tuxpaint.tumblr.com/">Tux Paint（Tumblr）</a>
+          </p>
 
-    <hr size="2"
-        noshade>
+          <p>
+            2022年6月 4日          </p>
+        </center>
+      </header>
+      <table border="2"
+       cellspacing="0"
+       cellpadding="2"
+       summary="目次"
+       align="center"
+       style="page-break-inside: avoid;">
+  <tr>
+    <th>
+      目次    </th>
+  </tr>
 
-    <table border="2"
-           cellspacing="0"
-           cellpadding="2"
-           summary="目次">
-      <tr>
-        <th>
-          目次        </th>
-      </tr>
-
-      <tr>
-        <td>
-          <ul>
-            <li>
-              <a href="#about">Tux Paint について</a>
-            </li>
-
-            <li>
-              <a href="#using">Tux Paint の使い方</a>
-              <ul>
-                <li>
-                  <a href="#using_loading">Tux Paint の起動</a>
+  <tr>
+    <td>
+      <ul>
+        <li><a href="#about">Tux Paint について</a></li>        <li><a href="#using">Tux Paint の使い方</a>          <ul>
+            <li><a href="#using_loading">Tux Paint の起動</a></li>            <li><a href="#using_title">起動画面</a></li>            <li><a href="#using_main">メインの画面</a></li>            <li><a href="#using_tools">各種のツール</a>              <ul>
+                <li><a href="#using_tools_drawing">描画ツール</a>                  <ul>
+                    <li><a href="#using_tools_drawing_paint">ペイントブラシ「ふで」</a></li>                    <li><a href="#using_tools_drawing_stamp">「はんこ」ツール</a></li>                    <li><a href="#using_tools_drawing_lines">「せん」ツール</a></li>                    <li><a href="#using_tools_drawing_shapes">「かたち」ツール</a></li>                    <li><a href="#using_tools_drawing_text_and_label">「もじ」ツール、「ラベル」ツール</a></li>                    <li><a href="#using_tools_drawing_fill">「ぬる」ツール</a></li>                    <li><a href="#using_tools_drawing_magic">「まほう」ツール（特殊効果）</a></li>                    <li><a href="#using_tools_drawing_eraser">けしゴム</a></li>                  </ul>
                 </li>
-
-                <li>
-                  <a href="#using_title">起動画面</a>
-                </li>
-
-                <li>
-                  <a href="#using_main">メインの画面</a>
-                </li>
-
-                <li>
-                  <a href="#using_tools">各種のツール</a>
-                  <ul>
-                    <li>
-                      <a href="#using_tools_drawing">描画ツール</a>
-                    </li>
-
-                    <li>
-                      <a href="#using_tools_other">そのほかの操作</a>
-                    </li>
-                  </ul>
+                <li><a href="#using_tools_other">そのほかの操作</a>                  <ul>
+                    <li><a href="#using_tools_other_undo_and_redo">「とりけし」と「やりなおし」</a></li>                    <li><a href="#using_tools_other_new">「さいしょから」</a></li>                    <li><a href="#using_tools_other_open">「ひらく」</a></li>                    <li><a href="#using_tools_other_save">「セーブ」</a></li>                    <li><a href="#using_tools_other_print">「いんさつ」</a></li>                    <li><a href="#using_tools_other_open_slides">「スライドショー」</a></li>                    <li><a href="#using_tools_other_quit">プログラムの終了</a></li>                    <li><a href="#using_tools_other_sound_muting">効果音を消すには</a></li>                  </ul>
                 </li>
               </ul>
             </li>
-
-            <li>
-              <a href="#loading_into">他の画像の Tux Paint への読み込み</a>
-            </li>
-
-            <li>
-              <a href="#further">その他のドキュメント</a>
-            </li>
-
-            <li>
-              <a href="#help">お問い合わせ先</a>
-            </li>
-
-            <li>
-              <a href="#participate">プロジェクトへの参加</a>
-            </li>
           </ul>
+        </li>
+        <li><a href="#loading_into">他の画像の Tux Paint への読み込み</a></li>        <li><a href="#further">その他のドキュメント</a></li>        <li><a href="#help">お問い合わせ先</a></li>        <li><a href="#participate">プロジェクトへの参加</a></li>      </ul>
+    </td>
+  </tr>
+</table>
+    </section>
+    <!-- Title -->
+
+    <section class="outer">
+  <header>
+    <h1 id="about">
+      Tux Paint について    </h1>
+  </header>
+
+  <section class="indent">
+    <header>
+      <h2>
+        "Tux Paint" とは？      </h2>
+    <header>
+
+    <p>
+      Tux Paint は、３歳以上の小さな子供向けにデザインされたフリーのお絵かきソフトです。シンプルで使いやすい操作方法と楽しい効果音を備え、マスコットキャラクターが子供たちの案内役を務めます。空っぽのキャンバスと様々な描画ツールが、子供たちの創造力をかき立てます。    </p>
+  </section>
+
+  <section class="indent">
+    <header>
+      <h2>
+        著作権      </h2>
+    </header>
+
+    <p>
+      Tux Paint は、オープンソースのプロジェクトで、GNUの一般公衆利用許諾（GPL）基づき公開されているフリーソフトウェアです。このソフトウェアは無料で、プログラムのソースコードが利用可能です。（これにより、誰でも、機能を追加したり、不具合を修正したり、プログラムの一部を自分のGPLソフトウェアに使用することができます。）    </p>
+
+    <p>
+      ライセンスの全文は、<a href="../COPYING.txt">COPYING.txt</a>をお読みください。    </p>
+  </section>
+
+  <section class="indent">
+    <header>
+      <h2>
+        特長      </h2>
+    </header>
+
+    <dl>
+      <div class="keeptogether">
+        <dt>
+          <strong>簡単に、そして楽しく</strong>
+        </dt>
+
+        <dd>
+          Tux Paint は、一般向けの描画ツールではなく、小さな子供のためのシンプルなお絵かきソフトとなることを目指して、<em>楽しく容易に使えるように</em>作られています。効果音とマスコットキャラクターが、プログラムの操作をわかりやすく教えてくれるとともに、ユーザーを楽しませてくれます。また、大きくて見やすいイラスト調のマウスポインターを採用しています。        </dd>
+      </div>
+
+      <div class="keeptogether">
+        <dt>
+          <strong>拡張性</strong>
+        </dt>
+
+        <dd>
+          Tux Paint は、機能を拡張することができます。「ふで」や「はんこ」は、追加や削除が可能です。例えば、授業では、様々な生き物の画像を追加しておいて、生徒に生態系を描かせるといったことができます。それぞれの「はんこ」には、選択時に流れる音声、表示される説明文を設定できます。        </dd>
+      </div>
+
+      <div class="keeptogether">
+        <dt>
+          <strong>移植性</strong>
+        </dt>
+
+        <dd>
+          Tux Paint は、Windows, Macintosh, Linux など、様々なプラットフォームに移植されており、どのプラットフォームでも見た目や使い方は変わりません。Tux Paint は、Pentium 133のような旧式のシステムでもうまく動作し、さらに遅いシステムでも動作するように構築することもできます。        </dd>
+      </div>
+
+      <div class="keeptogether">
+        <dt>
+          <strong>簡単な操作</strong>
+        </dt>
+
+        <dd>
+          ユーザーは、コンピューターの複雑な機能に直接触れる必要がありません。描画中の作品は、プログラム終了時に保存され、再開時に表示されます。作品を保存するために、ファイル名をつけたりキーボードを使う必要はありません。保存された作品は、縮小画像の一覧から選択するだけで読み込むことができ、コンピューターの他のファイルにアクセスすることはありません。        </dd>
+      </div>
+    </dl>
+  </section>
+</section>
+
+    <!-- Using -->
+    <section class="outer">
+      <header>
+        <h1 id="using">
+          Tux Paint の使い方        </h1>
+      </header>
+
+      <section class="outer">
+  <header>
+    <h2 id="using_loading">
+      Tux Paint の起動    </h2>
+  </header>
+
+  <section class="indent">
+    <header>
+      <h3>
+        Linux または Unix のユーザー      </h3>
+    <header>
+
+    <p>
+      KDE あるいは GNOME のメニューの「グラフィックス」以下に、起動アイコンが設定されているはずです。    </p>
+
+    <div class="keeptogether">
+      <p>
+        その他、シェルプロンプト（例: "<code>$</code>"）で次のコマンドを実行する方法があります:      </p>
+
+      <blockquote>
+        <code>$ tuxpaint</code>
+      </blockquote>
+    </div>
+
+    <p>
+      エラーが発生した場合は、端末にその内容が表示されます。（標準エラー出力）    </p>
+  </section>
+
+  <section class="indent">
+    <header>
+      <h3>
+        Windows のユーザー      </h3>
+    </header>
+
+    <table border="0"
+           cellspacing="0"
+           cellpadding="4"
+           bgcolor="#AAAAFF"
+           align="right"
+           summary="">
+      <tr>
+        <td align="center">
+          <img src="../../html/images/icon-win32.png"
+              width="32"
+              height="32"
+              alt="[Tux Paint アイコン]"><br>
+          Tux Paint
         </td>
       </tr>
     </table>
 
-    <hr size="2"
-        noshade>
+    <p>
+      インストーラーを用いて Tux Paint をインストールする際、スタート・メニューやデスクトップにショートカットを作成するかどうかが選択できます。ショートカットを作成していれば、これらのアイコンから簡単に Tux Paint を起動できます。    </p>
 
-    <h1>
-      <a name="about"
-          id="about">Tux Paint について</a>
-    </h1>
+    <p>
+      ポータブル版（ZIPファイル版）をダウンロードして Tux Paint をインストールした場合や、インストーラーでショートカットを作成しなかった場合は、"<code>Tux Paint</code>"のフォルダにある "<code>tuxpaint.exe</code>" のアイコンをダブルクリックします。    </p>
 
-    <blockquote>
-      <h2>
-        "Tux Paint" とは？      </h2>
+    <p>
+      インストーラーを用いた場合、「Tux Paint」のフォルダは、通常、"C:\Program Files\" に配置されます。（インストール時に、これを変更することもできます）    </p>
 
-      <blockquote>
+    <p>
+      ZIP ファイルを用いた場合、「Tux Paint」のフォルダは、任意の場所に配置できます。    </p>
+  </section>
+
+  <section class="indent">
+    <header>
+      <h3>
+        macOS のユーザー      </h3>
+    </header>
+
+    <p>
+      "<code>Tux Paint</code>" のアイコンをダブルクリックします。    </p>
+  </section>
+</section>
+      <section class="outer indent">
+  <div class="keeptogether">
+    <header>
+      <div class="screenshot-right">
+        <img src="../../html/images/tuxpaint-title.jpg"
+           width="324"
+           height="254"
+           alt="[起動画面]">
+      </div>
+      <h2 id="using_title">
+        起動画面      </h2>
+    </header>
+
+    <p>
+      Tux Paint を起動すると、タイトル画面が表示されます。    </p>
+  </div>
+
+  <p>
+    プログラムの読み込みが完了すると、何かキーを押すかマウスのクリックにより次に進みます。（タイトル画面は、約5秒後に自動的に閉じます）  </p>
+
+  <div class="screenshot-right-after"></div>
+</section>
+      <section class="outer indent">
+  <div class="keeptogether">
+    <header>
+      <h2 id="using_main">
+        メインの画面      </h2>
+    </header>
+
+    <p>
+      メインの画面は、次の各部に分けられます:    </p>
+  </div>
+
+  <dl>
+    <div class="keeptogether">
+      <!-- FIXME: Update screenshot to add "Fill" tool -->
+      <div class="screenshot-right">
+        <img src="../../html/images/tools.jpg"
+           width="324"
+           height="254"
+           alt=
+           "[どうぐ: ふで, はんこ, せん, かたち, もじ, まほう, ラベル, とりけし, やりなおし, けしゴム, さいしょから, ひらく, セーブ, いんさつ, やめる]">
+      </div>
+      <dt>
+        <strong>左側: ツールバー「どうぐ」</strong>
+      </dt>
+
+      <dd>
         <p>
-          Tux Paint は、３歳以上の小さな子供向けにデザインされたフリーのお絵かきソフトです。シンプルで使いやすい操作方法と楽しい効果音を備え、マスコットキャラクターが子供たちの案内役を務めます。空っぽのキャンバスと様々な描画ツールが、子供たちの創造力をかき立てます。        </p>
-      </blockquote>
+          ツールバーには、描画や編集を行うためのアイコンがあります。        </p>
+      </dd>
+    </div>
 
-      <h2>
-        ライセンス:      </h2>
+    <div class="screenshot-right-after"></div>
 
-      <blockquote>
+    <div class="keeptogether">
+      <div class="screenshot-right">
+        <img src="../../html/images/canvas.jpg"
+           width="324"
+           height="254"
+           alt="[描画キャンバス]">
+      </div>
+
+      <dt>
+        <strong>中央部: 描画キャンバス</strong>
+      </dt>
+
+      <dd>
         <p>
-          Tux Paint は、オープンソースのプロジェクトで、GNUの一般公衆利用許諾（GPL）基づき公開されているフリーソフトウェアです。このソフトウェアは無料で、プログラムのソースコードが利用可能です。（これにより、誰でも、機能を追加したり、不具合を修正したり、プログラムの一部を自分のGPLソフトウェアに使用することができます。）        </p>
+          中央部の最も広い領域が描画キャンバスです。ここが絵を描く部分になります！        </p>
 
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>注:</strong> 描画キャンバスのサイズは、Tux Paint のウィンドウサイズに応じて変わります。Tux Paint のウィンドウサイズは、<em>Tux Paint 設定ツール</em>を用いて変更できます。その他の方法については、<a href="OPTIONS.html"><em>各種設定について</em></a>のドキュメントを参照してください。        </p>
+      </dd>
+    </div>
+
+    <div class="screenshot-right-after"></div>
+
+    <div class="keeptogether">
+      <div class="screenshot-right">
+        <img src="../../html/images/selector.jpg"
+           width="324"
+           height="254"
+           alt=
+           "[セレクタ - ふで、もじ、かたち、はんこ]">
+      </div>
+
+      <dt>
+        <strong>右側: セレクタ</strong>
+      </dt>
+
+      <dd>
         <p>
-          ライセンスの全文は、<a href="../COPYING.txt">COPYING.txt</a>をお読みください。        </p>
-      </blockquote>
+          セレクタに表示される内容は、使用しているツールに応じて変わります。例えば、「ふで」ツールでは、様々な種類の筆が表示され、「はんこ」ツールでは、はんこの画像が表示されます。        </p>
+      </dd>
+    </div>
 
-      <h2>
-        目指していること:      </h2>
+    <div class="screenshot-right-after"></div>
 
-      <blockquote>
-        <dl>
-          <dt>
-            <strong>簡単に、そして楽しく</strong>
-          </dt>
+    <div class="keeptogether">
+      <div class="screenshot-right">
+        <img src="../../html/images/colors.jpg"
+           width="324"
+           height="254"
+           alt=
+           "[いろ - いろ - くろ、しろ、あか、ぴんく、おれんじ、きいろ、みどり、みずいろ、あお、むらさき、ちゃいろ、はいいろ]">
+      </div>
 
-          <dd>
-            Tux Paint は、一般向けの描画ツールではなく、小さな子供のためのシンプルなお絵かきソフトとなることを目指して、<em>楽しく容易に使えるように</em>作られています。効果音とマスコットキャラクターが、プログラムの操作をわかりやすく教えてくれるとともに、ユーザーを楽しませてくれます。また、大きくて見やすいイラスト調のマウスポインターを採用しています。          </dd>
+      <dt>
+        <strong>下部: カラーパレット「いろ」</strong>
+      </dt>
 
-          <dt>
-            <strong>拡張性</strong>
-          </dt>
-
-          <dd>
-            Tux Paint は、機能を拡張することができます。「ふで」や「はんこ」は、追加や削除が可能です。例えば、授業では、様々な生き物の画像を追加しておいて、生徒に生態系を描かせるといったことができます。それぞれの「はんこ」には、選択時に流れる音声、表示される説明文を設定できます。          </dd>
-
-          <dt>
-            <strong>移植性</strong>
-          </dt>
-
-          <dd>
-            Tux Paint は、Windows, Macintosh, Linux など、様々なプラットフォームに移植されており、どのプラットフォームでも見た目や使い方は変わりません。Tux Paint は、Pentium 133のような旧式のシステムでもうまく動作し、さらに遅いシステムでも動作するように構築することもできます。          </dd>
-
-          <dt>
-            <strong>簡単な操作</strong>
-          </dt>
-
-          <dd>
-            ユーザーは、コンピューターの複雑な機能に直接触れる必要がありません。描画中の作品は、プログラム終了時に保存され、再開時に表示されます。作品を保存するために、ファイル名をつけたりキーボードを使う必要はありません。保存された作品は、縮小画像の一覧から選択するだけで読み込むことができ、コンピューターの他のファイルにアクセスすることはありません。          </dd>
-        </dl>
-      </blockquote>
-    </blockquote>
-
-    <hr size="2"
-        noshade>
-
-    <h1>
-      <a name="using"
-          id="using">Tux Paint の使い方</a>
-    </h1>
-
-    <blockquote>
-      <h2>
-        <a name="using_loading"
-            id="using_loading">Tux Paint の起動</a>
-      </h2>
-
-      <blockquote>
-        <h3>
-          Linux または Unix のユーザー        </h3>
-
-        <blockquote>
-          <p>
-            KDE あるいは GNOME のメニューの「グラフィックス」以下に、起動アイコンが設定されているはずです。          </p>
-
-          <p>
-            その他、シェルプロンプト（例："<code>$</code>"）で次のコマンドを実行する方法があります：          </p>
-
-          <blockquote>
-            <code>$ tuxpaint</code>
-          </blockquote>
-
-          <p>
-            エラーが発生した場合は、端末にその内容が表示されます。（標準エラー出力）          </p>
-        </blockquote>
-
-        <hr size="1"
-            noshade>
-
-        <h3>
-          Windows のユーザー        </h3>
-
-        <blockquote>
-          <table border="0"
-                 cellspacing="0"
-                 cellpadding="4"
-                 bgcolor="#AAAAFF"
-                 align="right"
-                 summary="">
-            <tr>
-              <td align="center">
-                <img src="../../html/images/icon-win32.png"
-                    width="32"
-                    height="32"
-                    alt="[Tux Paint アイコン]"><br>
-                Tux Paint
-              </td>
-            </tr>
-          </table>
-
-          <p>
-            インストーラーを用いて Tux Paint をインストールする際、スタート・メニューやデスクトップにショートカットを作成するかどうかが選択できます。ショートカットを作成していれば、これらのアイコンから簡単に Tux Paint を起動できます。          </p>
-
-          <p>
-            ポータブル版（ZIPファイル版）をダウンロードして Tux Paint をインストールした場合や、インストーラーでショートカットを作成しなかった場合は、"<code>Tux Paint</code>"のフォルダにある "<code>tuxpaint.exe</code>" のアイコンをダブルクリックします。          </p>
-
-          <p>
-            インストーラーを用いた場合、「Tux Paint」のフォルダは、通常、"C:\Program Files\" に配置されます。（インストール時に、これを変更することもできます）          </p>
-
-          <p>
-            ZIP ファイルを用いた場合、「Tux Paint」のフォルダは、任意の場所に配置できます。          </p>
-          <br clear="all">
-        </blockquote>
-
-        <hr size="1"
-            noshade>
-
-        <h3>
-          macOS のユーザー        </h3>
-
-        <blockquote>
-          <p>
-            "<code>Tux Paint</code>" のアイコンをダブルクリックします。          </p>
-        </blockquote>
-      </blockquote>
-
-      <hr size="1"
-          noshade>
-
-      <h2>
-        <a name="using_title"
-            id="using_title">起動画面</a>
-      </h2>
-
-      <blockquote>
+      <dd>
         <p>
-          Tux Paint を起動すると、タイトル画面が表示されます。        </p>
+          使用中のツールが色をサポートしている場合、画面の下部付近に色の選択肢がパレットで表示されます。このパレットをクリックして色を選択すると、その色がツールで使用されます。(例えば、「ふで」ツールでは選択したブラシで描く色として、「ぬる」ツールでは画像の領域を塗りつぶす色として使用します)。        </p>
 
-        <p align="center">
-          <img src="../../html/images/tuxpaint-title.jpg"
-             width="324"
-             height="254"
-             alt="[起動画面]">
+        <div class="screenshot-right-after"></div>
+
+        <img src="../../html/images/colors_special.png"
+            width="105"
+            height="48"
+            alt=""
+            align="right">
+        <p id="special_color_options">
+          右端には色に関する3つの特別なオプションがあります。          <ul>
+            <li>
+              <strong>スポイト</strong><br/>
+              スポイトを使えば、絵の中から色を選ぶことができます。<br/>
+              （この機能を使うためのショートカットキーがあります; 以降を参照）            </li>
+            <li>
+              <strong>レインボーパレット</strong><br/>
+              レインボーパレットは、色相、彩度、明度を選択することで、任意の色を選ぶことができます。              左側のボックスには、 数百段階の色相 &mdash; 上部の赤から下部の紫まで &mdash; が、数百段階の彩度 &mdash; 左側の淡い色から右側の純色まで &mdash; で表示されます。縦のグレーの領域では、数百段階で、明度 &mdash; 上部が最も明るく、下部が最も暗い &mdash; を選ぶことができます。<br/>
+              緑色のチェックボタンをクリックして色を確定します。「もどる」ボタンをクリックすると、色を選択せずにポップアップを終了します。              <div class="screenshot-center">
+                <img src="../../html/images/colors_rainbow_palette.png"
+                  width="542"
+                  height="291"
+                  alt="" />
+              </div>
+            </li>
+            <li>
+              <strong>カラーミキサー</strong><br/>
+              絵の具のパレットのようなアイコンの「カラーミキサー」では、加法混色の三原色 &mdash; 赤、青、黄と、白（色合い）、グレー（色調）、黒（濃淡）を混ぜて色を作成することができます。<br/>
+              どのボタンも複数回クリックできます（例えば、赤 + 赤 + 黄 とクリックすると、赤橙色になります）。混合された色の比率は画面下部に表示されます。<br/>
+              「さいしょから」ボタンをクリックすると、最初からやり直す（色がない状態に戻す）ことができます。また、間違えた場合は、手順を何回でも取り消したり、やり直したりすることができます（最初からやり直す必要はありません）。<br/>
+              緑色のチェックボタンをクリックして色を確定します。「もどる」ボタンをクリックすると、色を選択せずにポップアップを終了します。              <div class="screenshot-center">
+                <img src="../../html/images/colors_mixer.png"
+                  width="420"
+                  height="320"
+                  alt="" />
+              </div>
+            </li>
+          </ul>
         </p>
 
+        <p class="note">
+          <span title="Keyboard shortcut">&#9000;</span>          使用中のツールが色をサポートしている場合、「スポイト」機能に素早くアクセスするためのショートカットを使用することができます。<b><code>[Control]</code></b> キーを押しながらマウスをクリックしたままカーソルを動かすと、マウスカーソルの下にある色が表示されます。キャンバス全体をドラッグして欲しい色が見つかったところでマウスボタンを離すと、カーソルの下にある色が選択されます。マウスをキャンバスの外（例えば「どうぐ」の部分）で離すと、色の選択は変更されません。        </p>
+
+        <p class="note">
+          <span title="Configuration option">&#9881;</span>          <strong>注:</strong> カラーパレットの色は好みに応じて変更できます。変更方法については、"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。        </p>
+      </dd>
+    </div>
+
+    <div class="keeptogether">
+      <div class="screenshot-right">
+        <img src="../../html/images/tips.jpg"
+           width="324"
+           height="254"
+           alt=
+           "(「かたち」ツールの使い方を説明している例)">
+      </div>
+
+      <dt>
+        <strong>最下部: ヘルプエリア</strong>
+      </dt>
+
+      <dd>
         <p>
-          プログラムの読み込みが完了すると、何かキーを押すかマウスのクリックにより次に進みます。（タイトル画面は、約5秒後に自動的に閉じます）        </p>
-      </blockquote>
+          画面の一番下の部分では、Linux ペンギンの <em>Tux</em> が、様々なヒントや関連情報をご提供します。        </p>
+      </dd>
+    </div>
 
-      <hr size="1"
-          noshade>
+    <div class="screenshot-right-after"></div>
+  </dl>
+</section>
 
-      <h2>
-        <a name="using_main"
-            id="using_main">メインの画面</a>
-      </h2>
+      <!-- Using: Tools -->
+      <section class="outer">
+        <header>
+          <h2 id="using_tools">
+            各種のツール          </h2>
+        </header>
+
+        <!-- Using: Tools: Drawing -->
+        <section>
+          <header>
+            <h3 id="using_tools_drawing">
+              描画ツール            </h3>
+          </header>
+
+          <dl>
+            <dt id="using_tools_drawing_paint">
+  <strong>ペイントブラシ「ふで」</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_paint.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    右側のセレクタから筆の種類を、下のパレットから色を選んで、フリーハンドで描画します。  </p>
+
+  <p>
+    ボタンを押したままマウスを動かすと、描画できます。  </p>
+
+  <p>
+    アニメーションブラシ &mdash; 描画中に形状が変化します。例として、ブドウ形のブラシが挙げられます。このタイプのブラシの選択ボタンには、小さなフィルムのアイコンが付いています。  </p>
+
+  <p>
+    向きのあるブラシ &mdash; 描いている方向によって異なる形を描きます。 例として、Tux Paint に含まれる矢印ブラシがあります。 これらのブラシの選択ボタンには、小さな8方向の矢印のアイコンが付いています。  </p>
+
+  <p>
+    また、いくつかのブラシは、方向とアニメーションを併せ持ちます。例として、猫やリスのブラシがあります。このタイプのブラシの選択ボタンには、小さなフィルムと８方向の矢印のアイコンが付いています。  </p>
+
+  <p>
+    描画中にはサウンドが流れます。筆の大きさが大きいほど、低い音になります。  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/ex_paint.png"
+       width="120"
+       height="95"
+       alt="">
+  </div>
+
+  <strong>Brush Spacing</strong>
+  <blockquote>
+    <p>
+      「ふで」でキャンバスに描画する際の間隔を変更できます。標準で、いくつかのブラシ (足跡や花など) は重ならないように十分な間隔を空けてあります。他のブラシ (基本的な円形のものなど) は狭い間隔で連続した線になるように設定されています。    </p>
+    <p>
+      描画の間隔は、右下にある三角形になったバーの列をクリックすることで変更できます。長いバーが広い間隔に対応します。描画間隔は、「ふで」を使用するツール（「ふで」ツールと「せん」ツール）の両方に影響します。    </p>
+    <div class="screenshot-center">
+      <img src=
+      "../../html/images/tool_slider.png"
+         width="96"
+         height="48"
+         alt="">
+    </div>
+    <p class="note">
+      <span title="Configuration option">&#9881;</span>      <strong>注:</strong> "<code>nobrushspacing</code>" オプションが設定されると、描画間隔の調整が無効になります。詳しくは"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。    </p>
+  </blockquote>
+</dd>
+            <dt id="using_tools_drawing_stamp">
+  <strong>「はんこ」ツール</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_stamp.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    「はんこ」ツールは、スタンプやステッカーを集めたようなものです。馬や木、月など、あらかじめ用意された様々な写真やイラストを絵に貼り付けることができます。  </p>
+
+  <p>
+    マウスのカーソル動きに応じて画像の輪郭が表示され、貼り付け位置と大きさがわかります。  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/ex_stamps.png"
+       width="182"
+       height="156"
+       alt="">
+  </div>
+  <img src=
+  "../../html/images/tool_stamp_categories.png"
+      width="96"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    スタンプは、動物、植物、宇宙、乗り物、人物といった多くのカテゴリに分類されています。セレクタの左右の矢印のボタンを使ってカテゴリを切り替えることができます。  </p>
+
+  <p>
+    スタンプを絵に貼り付ける前に、以下の様々な効果を適用することができます（スタンプの種類によって異なります）:  </p>
+
+  <ul>
+    <li>スタンプには色をつけることができるものがあります。その場合、カラーパレットが有効になり、スタンプを絵に貼り付ける前に色を選ぶことができます。    </li>
+
+    <li>スタンプは、右下の三角形のバーの中をクリックすることで、縮小・拡大することができます。    </li>
+
+    <li>多くのスタンプは、右下の操作ボタンを使って、上下・左右に反転させることができます。    </li>
+  </ul>
+
+  <div class="screenshot-center">
+    <img src=
+    "../../html/images/tool_stamp_controls.png"
+       width="96"
+       height="96"
+       alt="">
+  </div>
+  <img src="../../html/images/tool_sfx.png"
+      width="48"
+      height="24"
+      alt=""
+      align="right">
+  <p>
+    個々のスタンプごとに効果音を設定することができます。画面下部の左側のヘルプエリア（Linux ペンギン "<em>Tux</em>"の近く）にあるボタンを押すと、効果音を再生することができます。  </p>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>注:</strong> "<code>nostampcontrols</code>" オプションが設定されると、スタンプの拡大・縮小、反転が無効になります。詳しくは"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。  </p>
+</dd>
+            <dt id="using_tools_drawing_lines">
+  <strong>「せん」ツール</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_lines.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    様々な種類の筆と好きな色を使って直線を描くツールです。  </p>
+
+  <p>
+    線を引き始めたい場所でクリックして、そのままマウスを動かすと、描かれる線の位置が細い「ゴムバンド」のような線で示され、画面の下には、線の角度が表示されます。右にまっすぐ伸びる線は0度、上にまっすぐ伸びる線は90度、左にまっすぐ伸びる線は180度、下にまっすぐ伸びる線は270度、という具合です。  </p>
+
+  <p>
+    マウスを放すと、バネのような効果音とともに線が描画されます。  </p>
+
+  <p>
+    アニメーション対応のブラシでは、線に沿って形が変化します。 指向性のブラシでは、線の角度に応じて異なる形状を表示します。 さらに、アニメーションと指向性の両方を備えたブラシもあります。 詳しくは、上記の「ふで」の項をご覧ください。  </p>
+
+  <p>
+    線に沿って形が並んだり、連続した線になったりと、それぞれの「ふで」毎に異なる描画間隔が設定されており、この間隔は変更することができます。詳しくは、上の "ペイントブラシ「ふで」" のセクションを参照して下さい。  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/ex_lines.png"
+       width="76"
+       height="103"
+       alt="">
+  </div>
+</dd>
+            <dt id="using_tools_drawing_shapes">
+  <strong>「かたち」ツール</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_shapes.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    簡単な図形を描きます。  </p>
+
+  <p>
+    まず、円、正方形、楕円など、描きたい図形を、右側のセレクタから選択します。  </p>
+
+  <p>
+    右下のオプションボタンで「かたち」ツールの動作を選択します:  </p>
+
+  <dl>
+    <dt>
+      <strong>真ん中から広げる</strong>
+    </dt>
+
+    <dd>
+      最初にクリックした位置を中心として図形を拡大します。      <br/>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        バージョン 0.9.24 までは、このような動作だけでした。      </p>
+    </dd>
+
+    <dt>
+      <strong>角から広げる</strong>
+    </dt>
+
+    <dd>
+      最初にクリックした位置を左上の角として図形を拡大します。これは、他の多くのお絵かきソフトの標準的な動作です。      <p class="note">
+        <span title="Version variation">&#128220;</span>        このオプションは、バージョン 0.9.25 以降で追加されました。      </p>
+    </dd>
+  </dl>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>注:</strong> "<code>noshapecontrols</code>" オプションをつけて起動するなどして、「かたち」ツールの動作の制御を無効にした場合、オプションボタンは表示されず、真ん中から図形を広げる動作になります。  </p>
+
+  <p>
+    図形を描くには、キャンバス上でマウスをクリックし、そのままマウスを動かして図形を広げます。楕円や長方形のように縦横比を変えられる図形と、正方形や円のように縦横比を変えられない図形があります。  </p>
+
+  <p>
+    比率を変更できる図形の場合は、下部に図形の長短の比率が表示されます。例えば 、正方形（縦と横が同じ長さ）の場合は「1：1」、横が縦の2倍または縦が横の2倍の場合は「2：1」といった具合です。  </p>
+
+  <p>
+    図形を広げ終わったらマウスを放します。  </p>
+
+  <dl>
+    <dt>
+      <strong>通常の動作</strong>
+    </dt>
+
+    <dd>
+      <p>
+        ここで、キャンバス上でマウスを動かして図形を回転させることができます。回転した図形の角度は画面の下に表示されます（「せん」ツールと同様）。      </p>
+
+      <p>
+        最後にもう一度マウスをクリックして、図形が完成します。      </p>
+    </dd>
+
+    <dt>
+      <strong>簡易描画モード</strong>
+    </dt>
+
+    <dd>
+      簡易描画モードが設定されている場合、図形を回転させる手順は省略され、マウスを放した時点で図形が描画されます。      <p class="note">
+        <span title="Configuration option">&#9881;</span>        "簡易描画モード" ("<code>simpleshapes</code>") についての詳細は、<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。      </p>
+    </dd>
+  </dl>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/ex_shapes.png"
+       width="177"
+       height="104"
+       alt="">
+  </div>
+</dd>
+            <dt id="using_tools_drawing_text_and_label">
+  <strong>「もじ」ツール、「ラベル」ツール</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_text.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    まず、右側のセレクタからフォントを、下部のパレットから色を選択します。さらに、テキストに太字や斜体のスタイルを適用することもできます。画面をクリックするとカーソルが表示され、文字を入力することができます。(入力した文字がキャンバスに反映される前に、フォント、色、スタイルを変更することができます)  </p>
+
+  <p>
+    <b><code>[Enter]</code></b>キー、または<b><code>[Return]</code></b>キーを押すと文字が描画され、カーソルが次の行に下がります。  </p>
+
+  <p>
+    また、<strong><code>[Tab]</code></strong>キーを押すと、文字が描画された後、カーソルは、次の行ではなく、右側に移動します。これは、１行の中で異なったフォント、字体、フォントサイズ、色などを混在させたい場合に便利な方法です。  </p>
+
+  <p>
+    文字の入力中に別の場所をクリックすると、入力内容を維持したまま、文字を貼り付ける位置をクリックした位置に移動させ、文字入力を続けることができます。  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/ex_text.png"
+       width="139"
+       height="69"
+       alt="">
+  </div>
+
+  <dl>
+    <dt>
+      <strong>「もじ」ツールと「ラベル」ツールの違い</strong>
+    </dt>
+
+    <dd>
+      <p>
+        <strong>「もじ」</strong>ツールは、Tux Paint に以前からある文字入力ツールです。このツールで入力した文字列は絵と一体化するため、後から文字列の内容を編集したり、動かしたりすることはできません。一方、絵と一体化することで、上から塗りつぶしたり、「よごす」「そめる」「うきぼり」といった<strong>「まほう」</strong>ツールの効果で修正を加えることができます。      </p>
+
+      <p>
+        Tux Paint バージョン 0.9.22 で追加された<strong>「ラベル」</strong>ツールでは、文字は絵から「浮いて」おり、文字列の内容、位置、フォント、色などの情報は個別に記録されます。これにより、「ラベル」は後から移動や編集が可能です。      </p>
+
+      <p>
+        ラベルを編集するには、ラベルと指が描かれた「ラベル選択」ボタンをクリックします。図面内のすべてのラベルがハイライト表示されるので、編集したいラベルをクリックするか、<strong><code>[Tab]</code></strong> キーでラベルの選択を順に切り替えて、編集したいラベルで <strong><code>[Enter]</code></strong> キーか <strong><code>[Return]</code></strong> キーを押すと、そのラベルを編集できます。（<strong><code>[Backspace]</code></strong> キーで文字を消したり、追加で文字を入力したり、キャンバス内をクリックしてラベルの位置を変えたり、パレット内をクリックしてラベルの文字の色を変えたり、など）。      </p>
+
+      <p>
+        ラベルと手のひらが描かれた「貼り付け」ボタンをクリックすると、<strong>もじ</strong>ツールを使って文字を書き加えたかのように、ラベルをキャンバスに固定することができます。(この機能は Tux Paint version 0.9.28 で追加されました。) 作品のすべてのラベルがハイライト表示されるので、ラベルを編集する場合と同じように、ラベルを選択します。選択したラベルは削除され、文字がキャンバスに直接書き込まれます。      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>「ラベル」</strong>ツールは、<em>Tux Paint 設定ツール</em>や、"<code>nolabel</code>"オプションにより、無効にすることができます。      </p>
+    </dd>
+
+    <dt>
+      <strong>多言語文字入力</strong>
+    </dt>
+
+    <dd>
+      <p>
+        Tux Paint では、様々な言語の文字を入力することができます。たいていのラテン文字（<em>A</em>-<em>Z</em>, <em>ñ</em>, <em>è</em> など）は、直接入力できます。また、いくつかの言語では、入力モードを切り替えて、複数のキーの組み合わせを用いて文字を入力する必要があります。      </p>
+
+      <p>
+        Tux Paint が、個別の入力モードがサポートされている言語に設定されている場合、特定のキーを押下することで、入力モードを切り替えることができます。      </p>
+
+      <p>
+        サポートされている言語、入力方式、切り替えキーは以下のとおりです。      </p>
+
+      <ul>
+        <li>日本語— ローマ字入力方式のひらがな、カタカナ— 右<code><b>[Alt]</b></code> キー または 左<code><b>[Alt]</b></code> キー        </li>
+
+        <li>ハングル— 2-Bul入力方式— 右<code><b>[Alt]</b></code> キー または 左<code><b>[Alt]</b></code> キー        </li>
+
+        <li>繁体中文— 右<code><b>[Alt]</b></code> キー または 左<code><b>[Alt]</b></code> キー キー        </li>
+
+        <li>タイ語— 右<code><b>[Alt]</b></code> キー        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>注:</strong> 大抵のフォントには全ての言語の全ての文字は含まれていません。このため、入力したい文字が含まれるフォントに変更する必要がある場合があります。      </p>
+
+    </dd>
+
+    <dt>
+      <strong>画面キーボード</strong>
+    </dt>
+
+    <dd>
+      <p>
+        「もじ」ツールや「ラベル」ツールで使える、オプションの「スクリーンキーボード」では、キーボードレイアウトを変えたり、文字の合成（例: "a "と "e "を "æ "に合成）を行うことができます。      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        詳細については "<a href="OPTIONS.html"><em>各種設定について</em></a>" と "<a href="EXTENDING.html"><em>Tux Paintの拡張</em></a>" のドキュメントを参照してください。      </p>
+    </dd>
+  </dl>
+</dd>
+            <dt id="using_tools_drawing_fill">
+  <strong>「ぬる」ツール</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_fill.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    「ぬる」ツールは、描画の連続した領域を好きな色で塗りつぶします。以下の3 つの塗りつぶしオプションが用意されています:    <ul>
+      <li><strong>たんしょく</strong> &mdash; 領域を一つの色で塗りつぶします。</li>
+      <li><strong>ふで</strong> &mdash; フリーハンドでドラッグして、領域を一つの色で塗りつぶします。</li>
+      <li><strong>せんけい</strong> &mdash; 領域をクリックしてからドラッグすると、ドラッグした方向に向かって色が薄くなるようにグラデーションをつけて塗りつぶします。</li>
+      <li><strong>ほうしゃ</strong> &mdash; クリックした場所を中心に周りに向かって放射状に色が薄くなるようにグラデーションをつけて塗りつぶします。</li>
+    </ul>
+  </p>
+
+  <p class="note">
+    <span title="Version variation">&#128220;</span>    <strong>注:</strong> Tux Paint 0.9.24 より前のバージョンでは、このツールは「まほう」ツールのひとつでした。（「まほう」ツールについては、以下をご覧ください）    Tux Paint 0.9.26 より前のバージョンでは、「たんしょく」の塗りつぶし方法しかありませんでした。  </p>
+</dd>
+            <dt id="using_tools_drawing_magic">
+  <strong>「まほう」ツール（特殊効果）</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_magic.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    「まほう」ツールは、様々な特殊なツールを集めたものです。右側のセレクタで、「まほう」の効果を選択することができます。効果を適用する方法は、クリック＋ドラッグ、単なるクリックなど、ツールごとに様々です。  </p>
+
+  <p>
+    クリック＋ドラッグを使用するツールの場合、右側のセレクタの下部左側にある「描画」を表すボタンが有効になります。１クリックで画面全体に効果を及ぼすツールの場合、右側の「画面全体」を表すボタンが有効になります。  </p>
+
+  <p>
+    「magic-docs」フォルダ内のドキュメント<a href="../magic-docs/html/index.html">「まほう」ツールの一覧</a>もお読みください。  </p>
+</dd>
+            <dt id="using_tools_drawing_eraser">
+  <strong>けしゴム</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_eraser.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    このツールは「ふで」ツールに似ています。クリック（または、クリック＋ドラッグ）をした部分が消されます。（消した部分は、白あるいはその他の色、また、レイヤーキャンバスなど、絵によって異なる状態に戻ります。）  </p>
+
+  <p>
+    いくつもの大きさの正方形と円形の消しゴムがあります。  </p>
+
+  <p>
+    正方形の輪郭がマウスカーソルの位置に表示され、絵のどの部分が消されるかを示します。  </p>
+
+  <p>
+    消している間、「キュッキュッ」と擦って消す効果音が流れます。  </p>
+</dd>
+          </dl>
+        </section>
+        <!-- Using: Tools: Drawing -->
+
+        <!-- Using: Tools: Other -->
+        <section>
+          <header>
+            <h3 id="using_tools_other">
+              そのほかの操作            </h3>
+          </header>
+
+          <dl>
+            <dt id="using_tools_other_undo_and_redo">
+  <strong>「とりけし」と「やりなおし」</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_redo.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <img src="../../html/images/tool_undo.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+
+  <p>
+    「とりけし」ボタンをクリックすると、直前に行った操作が取り消されます。いくつもの操作をさかのぼって取り消すことができます！  </p>
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <strong>注:</strong> キーボードで <b><code>[Control / &#8984;]</code></b> + <code><b>[Z]</b></code> を押してもとりけしできます。  </p>
+
+  <p>
+    「やりなおし」ボタンをクリックすると、「とりけし」ボタンで取り消した操作を元に戻すことができます。  </p>
+
+  <p>
+    「とりけし」操作の後、描画を行っていなければ、取り消した全ての操作を元に戻せます！  </p>
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <strong>注:</strong> キーボードで <b><code>[Control / &#8984;]</code></b> + <code><b>[R]</b></code> を押してもやりなおしできます。  </p>
+</dd>
+            <dt id="using_tools_other_new">
+  <strong>「さいしょから」</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_new.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    「さいしょから」のボタンを押すと、新規に絵を描き始めることができます。ダイアログ画面が表示され、キャンバスの背景色やレイヤー画像（後述）を選べます。  </p>
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <strong>注:</strong> キーボードで <b><code>[Control / &#8984;]</code></b> + <code><b>[N]</b></code> を押しても新規作成ができます。  </p>
+
+  <strong>単色のキャンバス</strong>
+  <blockquote>
+    <p>
+      あらかじめ用意されている背景色のほか、レインボーパレットやカラーミキサーで色を選択することができます。これらは、絵を描くときにキャンバスの下に表示されるカラーパレットにあるオプションと同じように操作します。詳細は <a href="#special_color_options">メインの画面 &gt; 下部: カラーパレット「いろ」 &gt; 色に関する特別なオプション</a> を参照。    </p>
+  </blockquote>
+
+  <strong>レイヤー画像</strong>
+  <blockquote>
+    <p>
+      レイヤー画像には、塗り絵のページのようなもの（白黒の線で描かれ、色を塗ることができる）や、前景レイヤーと背景レイヤーに挟まれた部分に絵を描ける３Ｄ画像のようなものがあります。    </p>
+
+    <p>
+      また、このほかに、背景レイヤーだけの画像も用意されています。    </p>
+
+    <p>
+      「消しゴム」ツールを使用すると、元のレイヤー画像が消されずに残ります。また、マジックツールの「反転」と「ミラー」は、レイヤー画像も反転させます。    </p>
+
+    <p>
+      レイヤー画像は、その上に絵を描いて保存すると新しい絵として保存され、元々のレイヤー画像自体は上書きされないので、後で（「さいしょから」ダイアログからアクセスして）何度でも使うことができます。    </p>
+  </blockquote>
+</dd>
+            <dt id="using_tools_other_open">
+  <strong>「ひらく」</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_open.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    「ひらく」をクリックすると、保存されている全ての作品のリストが表示されます。リストが画面に収まりきらない場合は、上下の矢印のボタンでリストをスクロールできます。  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/open_dialog.jpg"
+       width="194"
+       height="152"
+       alt="">
+  </div>
+
+  <p>
+    まず、絵をクリックして選択します…
+    <ul>
+      <li>
+        <img src="../../html/images/open_open.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          左下にある緑色の「ひらく」ボタンで、選択した作品を読み込みます。        </p>
+
+        <p>
+          (または、開きたい作品をダブルクリックします）        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          絵を開く時に、それまで描いていた絵が保存されていなければ、保存するかどうかを確認します。（「<a href="#save">セーブ</a>」の項を参照）        </p>
+
+        <div class="screenshot-right-after"></div>
+      </li>
+
+      <li>
+        <img src="../../html/images/open_erase.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          右下にある茶色の「けす」(ゴミ箱) ボタンで、選択した作品を削除します。(本当に削除して良いか確認されます)        </p>
+
+        <p class="note">
+          <span title="Version variation">&#128220;</span>          <strong>注:</strong> Linux（バージョン 0.9.22以降）、Windows（バージョン 0.9.27以降）では、削除した作品は、デスクトップのゴミ箱に移動するので、後で元に戻すことができます。        </p>
+        <div class="screenshot-right-after"></div>
+      </li>
+
+      <li clear="all">
+        <img src="../../html/images/open_export.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          「かきだす」のボタンをクリックすると、ユーザーの標準の画像フォルダ（例: "<code>~/Pictures/TuxPaint/</code>")に画像を出力します。        </p>
+        <div class="screenshot-right-after"></div>
+      </li>
+    </ul>
+  </p>
+
+  <p>
+    「ひらく」の画面からは、以下のこともできます:    <ul>
+      <li>
+        <img src="../../html/images/open_slides.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          左側の一番下にある青色の「スライド」のボタンを押すと、スライドショーモードになります。詳しくは「<a href="#slides">スライドショー</a>」の項を参照。        </p>
+        <div class="screenshot-right-after"></div>
+      </li>
+
+      <li>
+        <img src="../../html/images/open_back.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          右下にある赤色の「もどる」ボタンを押すと、絵を描く画面に戻ります。        </p>
+        <div class="screenshot-right-after"></div>
+      </li>
+    </ul>
+  </p>
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <strong>注:</strong> キーボードで <b><code>[Control / &#8984;]</code></b> + <code><b>[O]</b></code> を押しても「ひらく」ダイアログを表示できます。  </p>
+</dd>
+            <dt id="using_tools_other_save">
+  <strong>「セーブ」</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_save.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    描画中の作品を保存します。  </p>
+
+  <p>
+    一度も保存していない作品の場合、作品のリストに新しく追加されます。(つまり、新しいファイルを作成します)  </p>
+
+  <p class="note">
+    <span title="Information">&#128161;</span>    <strong>注:</strong> ファイル名の入力などを求めることはなく、カメラのシャッター音の効果音とともに、単に作品を保存します。  </p>
+
+  <p>
+    一度保存操作をした後や、「ひらく」コマンドで読みこんだ作品の場合、以前のバージョンを上書きするか、新しく追加して保存するかを確認します。  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/saveover.png"
+       width="177"
+       height="110"
+       alt="">
+  </div>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>注:</strong> "<code>saveover</code>" オプション、または "<code>saveovernew</code>" オプションのどちらかが設定されている場合は、確認なしに保存されます。詳しくは"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。)  </p>
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <strong>注:</strong> キーボードで <b><code>[Control / &#8984;]</code></b> + <code><b>[S]</b></code> を押しても作品を保存できます。  </p>
+</dd>
+            <dt id="using_tools_other_print">
+  <strong>「いんさつ」</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_print.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    このボタンを押して作品を印刷します！  </p>
+
+  <p>
+    多くのプラットフォームでは、<b><code>[Alt]</code></b> key (Mac では <b><code>[Option]</code></b> キー) を押しながら「いんさつ」ボタンを押すと、プリンターの設定画面が開きます。この機能は、フルスクリーンモードでは動作しない点に注意して下さい。  </p>
+
+  <dl>
+    <dt>
+      <strong>印刷の無効化</strong>
+    </dt>
+
+    <dd>
+      <p>
+        オプションで "<code>noprint</code>" を設定すれば、「いんさつ」のボタンを無効にすることができます。      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。      </p>
+    </dd>
+
+    <dt>
+      <strong>印刷機能の制限</strong>
+    </dt>
+
+    <dd>
+      <p>
+        オプションで "<code>printdelay</code>" を設定すれば、設定に応じた一定の時間ごとに１回だけしか印刷できなくなります。      </p>
+
+      <p>
+        例えば、設定ファイルで "<code>printdelay=60</code>2" と設定すれば、1分間に1回だけ印刷ができます。      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。      </p>
+    </dd>
+
+    <dt>
+      <strong>印刷コマンド</strong>
+    </dt>
+
+    <dd>
+      <p>
+        <em>(Linux 及び Unix の場合のみ)</em>
+      </p>
+
+      <p>
+        Tux Paint は、PostScript 形式の印刷データを作成し、外部プログラムに渡して印刷を行います。標準の設定では、以下のコマンドが使用されます:      </p>
 
       <blockquote>
-        メインの画面は、次の各部に分けられます：        <dl>
-          <dt>
-            <strong>左側: ツールバー「どうぐ」</strong>
-          </dt>
-
-          <dd>
-            <p>
-              ツールバーには、描画や編集を行うためのアイコンがあります。            </p>
-            <!-- FIXME: Update screenshot to add "Fill" tool -->
-
-            <p align="center">
-              <img src="../../html/images/tools.jpg"
-                 width="324"
-                 height="254"
-                 alt=
-                 "[どうぐ: ふで, はんこ, せん, かたち, もじ, まほう, ラベル, とりけし, やりなおし, けしゴム, さいしょから, ひらく, セーブ, いんさつ, やめる]">
-            </p>
-          </dd>
-
-          <dt>
-            <strong>中央部: 描画キャンバス</strong>
-          </dt>
-
-          <dd>
-            <p>
-              中央部の最も広い領域が描画キャンバスです。ここが絵を描く部分になります！            </p>
-
-            <p align="center">
-              <img src="../../html/images/canvas.jpg"
-                 width="324"
-                 height="254"
-                 alt="[描画キャンバス]">
-            </p>
-
-            <p>
-              <strong>注:</strong> 描画キャンバスのサイズは、Tux Paint のウィンドウサイズに応じて変わります。Tux Paint のウィンドウサイズは、<em>Tux Paint 設定ツール</em>を用いて変更できます。その他の方法については、<a href="OPTIONS.html"><em>各種設定について</em></a>のドキュメントを参照してください。            </p>
-          </dd>
-
-          <dt>
-            <strong>右側: セレクタ</strong>
-          </dt>
-
-          <dd>
-            <p>
-              セレクタに表示される内容は、使用しているツールに応じて変わります。例えば、「ふで」ツールでは、様々な種類の筆が表示され、「はんこ」ツールでは、はんこの画像が表示されます。            </p>
-
-            <p align="center">
-              <img src="../../html/images/selector.jpg"
-                 width="324"
-                 height="254"
-                 alt=
-                 "[セレクタ - ふで、もじ、かたち、はんこ]">
-            </p>
-          </dd>
-
-          <dt>
-            <strong>下部: カラーパレット「いろ」</strong>
-          </dt>
-
-          <dd>
-            <p>
-              キャンバスの下側には、描画色を選択するためのカラーパレットがあります。            </p>
-
-            <p align="center">
-              <img src="../../html/images/colors.jpg"
-                 width="324"
-                 height="254"
-                 alt=
-                 "[いろ - いろ - くろ、しろ、あか、ぴんく、おれんじ、きいろ、みどり、みずいろ、あお、むらさき、ちゃいろ、はいいろ]">
-            </p>
-
-            <p>
-              右端には色についての２つの特別なオプションがあります。スポイトの形をした「カラーピッカー」は描いている絵の中から色を選ぶことができます。また、「レインボーパレット」では、何千もの色から描画色を選ぶことができます。            </p>
-
-            <p>
-              （<strong>注:</strong> カラーパレットの色は好みに応じて変更できます。変更方法については、"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。）            </p>
-          </dd>
-
-          <dt>
-            <strong>最下部: ヘルプエリア</strong>
-          </dt>
-
-          <dd>
-            <p>
-              画面の一番下の部分では、Linux ペンギンの <em>Tux</em> が、様々なヒントや関連情報をご提供します。            </p>
-
-            <p align="center">
-              <img src="../../html/images/tips.jpg"
-                 width="324"
-                 height="254"
-                 alt=
-                 "(「かたち」ツールの使い方を説明している例)">
-            </p>
-          </dd>
-        </dl>
+        <code>lpr</code>
       </blockquote>
 
-      <hr size="1"
-          noshade>
+      <p>
+        このコマンドは、設定ファイルの "<code>printcommand</code>" オプションを設定することで変更できます。      </p>
 
-      <h2>
-        <a name="using_tools"
-            id="using_tools">各種のツール</a>
-      </h2>
+      <p>
+        フルスクリーンモードでなければ "<b><code>[Alt]</code></b>" キーを押しながら「いんさつ」ボタンを押すと、別の印刷プログラムを起動することができます。標準の設定では、KDE のグラフィカルな印刷ダイアログである、以下のプログラムが使用されます:      </p>
 
       <blockquote>
-        <h3>
-          <a name="using_tools_drawing"
-              id="using_tools_drawing">描画ツール</a>
-        </h3>
-
-        <blockquote>
-          <dl>
-            <dt>
-              <strong>ペイントブラシ「ふで」</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_paint.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                右側のセレクタから筆の種類を、下のパレットから色を選んで、フリーハンドで描画します。              </p>
-
-              <p>
-                ボタンを押したままマウスを動かすと、描画できます。              </p>
-
-              <p>
-                アニメーションブラシ &mdash; 描画中に形状が変化します。例として、ブドウ形のブラシが挙げられます。このタイプのブラシの選択ボタンには、小さなフィルムのアイコンが付いています。              </p>
-
-              <p>
-                向きのあるブラシ &mdash; 描いている方向によって異なる形を描きます。 例として、Tux Paint に含まれる矢印ブラシがあります。 これらのブラシの選択ボタンには、小さな8方向の矢印のアイコンが付いています。              </p>
-
-              <p>
-                また、いくつかのブラシは、方向とアニメーションを併せ持ちます。例として、猫やリスのブラシがあります。このタイプのブラシの選択ボタンには、小さなフィルムと８方向の矢印のアイコンが付いています。              </p>
-
-              <p>
-                描画中にはサウンドが流れます。筆の大きさが大きいほど、低い音になります。              </p>
-              <br clear="all">
-
-              <p align="center">
-                <img src="../../html/images/ex_paint.png"
-                   width="120"
-                   height="95"
-                   alt="">
-              </p>
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>「はんこ」ツール</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_stamp.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                「はんこ」ツールは、スタンプやステッカーを集めたようなものです。馬や木、月など、あらかじめ用意された様々な写真やイラストを絵に貼り付けることができます。              </p>
-
-              <p>
-                マウスのカーソル動きに応じて画像の輪郭が表示され、貼り付け位置と大きさがわかります。              </p>
-
-              <p align="center">
-                <img src="../../html/images/ex_stamps.png"
-                   width="182"
-                   height="156"
-                   alt="">
-              </p>
-              <img src=
-              "../../html/images/tool_stamp_categories.png"
-                  width="96"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                スタンプは、動物、植物、宇宙、乗り物、人物といった多くのカテゴリに分類されています。セレクタの左右の矢印のボタンを使ってカテゴリを切り替えることができます。              </p>
-
-              <p>
-                スタンプを絵に貼り付ける前に、以下の様々な効果を適用することができます（スタンプの種類によって異なります）：              </p>
-
-              <ul>
-                <li>スタンプには色をつけることができるものがあります。その場合、カラーパレットが有効になり、スタンプを絵に貼り付ける前に色を選ぶことができます。                </li>
-
-                <li>スタンプは、右下の三角形のバーの中をクリックすることで、縮小・拡大することができます。                </li>
-
-                <li>多くのスタンプは、右下の操作ボタンを使って、上下・左右に反転させることができます。                </li>
-              </ul>
-
-              <p align="center">
-                <img src=
-                "../../html/images/tool_stamp_controls.png"
-                   width="96"
-                   height="96"
-                   alt="">
-              </p>
-              <img src="../../html/images/tool_sfx.png"
-                  width="48"
-                  height="24"
-                  alt=""
-                  align="right">
-              <p>
-                個々のスタンプごとに効果音を設定することができます。画面下部の左側のヘルプエリア（Linux ペンギン "<em>Tux</em>"の近く）にあるボタンを押すと、効果音を再生することができます。              </p>
-
-              <p>
-                （<strong>注:</strong> "<code>nostampcontrols</code>" オプションが設定されると、スタンプの拡大・縮小、反転が無効になります。詳しくは"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。）              </p>
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>「せん」ツール</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_lines.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                様々な種類の筆と好きな色を使って直線を描くツールです。              </p>
-
-              <p>
-                線を引き始めたい場所でクリックして、そのままマウスを動かすと、描かれる線の位置が細い「ゴムバンド」のような線で示され、画面の下には、線の角度が表示されます。右にまっすぐ伸びる線は0度、上にまっすぐ伸びる線は90度、左にまっすぐ伸びる線は180度、下にまっすぐ伸びる線は270度、という具合です。              </p>
-
-              <p>
-                マウスを放すと、バネのような効果音とともに線が描画されます。              </p>
-
-              <p>
-                アニメーション対応のブラシでは、線に沿って形が変化します。 指向性のブラシでは、線の角度に応じて異なる形状を表示します。 さらに、アニメーションと指向性の両方を備えたブラシもあります。 詳しくは、上記の「ふで」の項をご覧ください。              </p>
-              <br clear="all">
-
-              <p align="center">
-                <img src="../../html/images/ex_lines.png"
-                   width="76"
-                   height="103"
-                   alt="">
-              </p>
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>「かたち」ツール</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_shapes.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                簡単な図形を描きます。              </p>
-
-              <p>
-                まず、円、正方形、楕円など、描きたい図形を、右側のセレクタから選択します。              </p>
-
-              <p>
-                右下のオプションボタンで「かたち」ツールの動作を選択します：              </p>
-
-              <dl>
-                <dt>
-                  <strong>真ん中から広げる</strong>
-                </dt>
-
-                <dd>
-                  最初にクリックした位置を中心として図形を拡大します。（Tux Paint バージョン 0.9.24 までは、この動作しかありませんでした。）                </dd>
-
-                <dt>
-                  <strong>角から広げる</strong>
-                </dt>
-
-                <dd>
-                  最初にクリックした位置を左上の角として図形を拡大します。これは、他の多くのお絵かきソフトの標準的な動作です。（Tux Paint バージョン 0.9.25 以降で追加されたオプション）                </dd>
-              </dl>
-
-              <p>
-                <strong>注:</strong> "<code>noshapecontrols</code>" オプションをつけて起動するなどして、「かたち」ツールの動作の制御を無効にした場合、オプションボタンは表示されず、真ん中から図形を広げる動作になります。              </p>
-
-              <p>
-                図形を描くには、キャンバス上でマウスをクリックし、そのままマウスを動かして図形を広げます。楕円や長方形のように縦横比を変えられる図形と、正方形や円のように縦横比を変えられない図形があります。              </p>
-
-              <p>
-                図形を広げ終わったらマウスを放します。              </p>
-
-              <dl>
-                <dt>
-                  <strong>通常の動作</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    ここで、キャンバス上でマウスを動かして図形を回転させることができます。回転した図形の角度は画面の下に表示されます（「せん」ツールと同様）。                  </p>
-
-                  <p>
-                    最後にもう一度マウスをクリックして、図形が完成します。                  </p>
-                </dd>
-
-                <dt>
-                  <strong>簡易描画モード</strong>
-                </dt>
-
-                <dd>
-                  簡易図形モード("<code>simpleshapes</code>" オプション)が設定されている場合、図形を回転させる手順は省略され、マウスを放した時点で図形が描画されます。                </dd>
-              </dl>
-              <br clear="all">
-
-              <p align="center">
-                <img src="../../html/images/ex_shapes.png"
-                   width="177"
-                   height="104"
-                   alt="">
-              </p>
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>「もじ」ツール、「ラベル」ツール</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_text.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                まず、右側のセレクタからフォントを、下部のパレットから色を選択します。画面をクリックするとカーソルが表示され、文字を入力することができます。              </p>
-
-              <p>
-                <b><code>[Enter]</code></b>キー、または<b><code>[Return]</code></b>キーを押すと文字が描画され、カーソルが次の行に下がります。              </p>
-
-              <p>
-                また、<strong><code>[Tab]</code></strong>キーを押すと、文字が描画された後、カーソルは、次の行ではなく、右側に移動します。これは、１行の中で異なったフォント、字体、フォントサイズ、色などを混在させたい場合に便利な方法です。              </p>
-
-              <p>
-                文字の入力中に別の場所をクリックすると、入力内容を維持したまま、文字を貼り付ける位置をクリックした位置に移動させ、文字入力を続けることができます。              </p>
-
-              <p align="center">
-                <img src="../../html/images/ex_text.png"
-                   width="139"
-                   height="69"
-                   alt="">
-              </p>
-
-              <dl>
-                <dt>
-                  <strong>「もじ」ツールと「ラベル」ツールの違い</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    <strong>「もじ」</strong>ツールは、Tux Paint に以前からある文字入力ツールです。このツールで入力した文字列は絵と一体化するため、後から文字列の内容を編集したり、動かしたりすることはできません。一方、絵と一体化することで、上から塗りつぶしたり、「よごす」「そめる」「うきぼり」といった<strong>「まほう」</strong>ツールの効果で修正を加えることができます。                  </p>
-
-                  <p>
-                    Tux Paint バージョン 0.9.22 で追加された<strong>「ラベル」</strong>ツールでは、文字は絵から「浮いて」おり、文字列の内容、位置、フォント、色などの情報は個別に記録されます。これにより、「ラベル」は後から移動や編集が可能です。                  </p>
-
-                  <p>
-                    <strong>「ラベル」</strong>ツールは、<em>Tux Paint 設定ツール</em>や、"<code>nolabel</code>"オプションにより、無効にすることができます。                  </p>
-                </dd>
-
-                <dt>
-                  <strong>多言語文字入力</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    Tux Paint では、様々な言語の文字を入力することができます。たいていのラテン文字（<em>A</em>-<em>Z</em>, <em>ñ</em>, <em>è</em> など）は、直接入力できます。また、いくつかの言語では、入力モードを切り替えて、複数のキーの組み合わせを用いて文字を入力する必要があります。                  </p>
-
-                  <p>
-                    Tux Paint が、個別の入力モードがサポートされている言語に設定されている場合、特定のキーを押下することで、入力モードを切り替えることができます。                  </p>
-
-                  <p>
-                    個別の入力モードがサポートされている言語と、入力モード切替キーは以下のとおりです。<strong>注：</strong> 大抵のフォントには全ての言語の全ての文字は含まれていません。このため、入力したい文字が含まれるフォントに変更する必要がある場合があります。                  </p>
-
-                  <ul>
-                    <li>日本語— ローマ字入力方式のひらがな、カタカナ— 右<code><b>[Alt]</b></code> キー                    </li>
-
-                    <li>ハングル— 2-Bul入力方式— 右<code><b>[Alt]</b></code> キー または 左<code><b>[Alt]</b></code> キー                    </li>
-
-                    <li>繁体中文— 右<code><b>[Alt]</b></code> キー または 左<code><b>[Alt]</b></code> キー キー                    </li>
-
-                    <li>タイ語— 右<code><b>[Alt]</b></code> キー                    </li>
-                  </ul>
-                </dd>
-
-                <dt>
-                  <strong>画面キーボード</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    テキストツールやラベルツールで使えるオプションの「スクリーンキーボード」では、キーボードレイアウトを変えたり、文字の合成（例："a "と "e "を "æ "に合成）を行うことができます。詳細については、「<a href="OPTIONS.html"><em>各種設定について</em></a>」と「<a href="EXTENDING.html"><em>Tux Paintの拡張</em></a>」のドキュメントを参照してください。                  </p>
-                </dd>
-              </dl>
-            </dd>
-
-            <dd>
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>「ぬる」ツール</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_fill.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                「ぬる」ツールは、描画の連続した領域を好きな色で塗りつぶします。以下の3 つの塗りつぶしオプションが用意されています：                <ul>
-                  <li><strong>たんしょく</strong> &mdash; 領域を一つの色で塗りつぶします。</li>
-                  <li><strong>ふで</strong> &mdash; フリーハンドでドラッグして、領域を一つの色で塗りつぶします。</li>
-                  <li><strong>せんけい</strong> &mdash; 領域をクリックしてからドラッグすると、ドラッグした方向に向かって色が薄くなるようにグラデーションをつけて塗りつぶします。</li>
-                  <li><strong>ほうしゃ</strong> &mdash; クリックした場所を中心に周りに向かって放射状に色が薄くなるようにグラデーションをつけて塗りつぶします。</li>
-                </ul>
-              </p>
-
-              <p>
-                注: Tux Paint 0.9.24 より前のバージョンでは、このツールは「まほう」ツールのひとつでした。（「まほう」ツールについては、以下をご覧ください）                注: Tux Paint 0.9.26 より前のバージョンでは、「たんしょく」の塗りつぶし方法しかありませんでした。              </p>
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>「まほう」ツール（特殊効果）</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_magic.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                「まほう」ツールは、様々な特殊なツールを集めたものです。右側のセレクタで、「まほう」の効果を選択することができます。効果を適用する方法は、クリック＋ドラッグ、単なるクリックなど、ツールごとに様々です。              </p>
-
-              <p>
-                クリック＋ドラッグを使用するツールの場合、右側のセレクタの下部左側にある「描画」を表すボタンが有効になります。１クリックで画面全体に効果を及ぼすツールの場合、右側の「画面全体」を表すボタンが有効になります。              </p>
-              <br clear="all">
-
-              <p>
-                「magic-docs」フォルダ内のドキュメント<a href="../magic-docs/html/index.html">「まほう」ツールの一覧</a>もお読みください。              </p>
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>けしゴム</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_eraser.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                このツールは「ふで」ツールに似ています。クリック（または、クリック＋ドラッグ）をした部分が消されます。（消した部分は、白あるいはその他の色、また、レイヤーキャンバスなど、絵によって異なる状態に戻ります。）              </p>
-
-              <p>
-                いくつもの大きさの正方形と円形の消しゴムがあります。              </p>
-
-              <p>
-                正方形の輪郭がマウスカーソルの位置に表示され、絵のどの部分が消されるかを示します。              </p>
-
-              <p>
-                消している間、「キュッキュッ」と擦って消す効果音が流れます。              </p>
-              <br clear="all">
-            </dd>
-          </dl>
-        </blockquote>
-
-        <hr size="1"
-            noshade>
-
-        <h3>
-          <a name="using_tools_other"
-              id="using_tools_other">そのほかの操作</a>
-        </h3>
-
-        <blockquote>
-          <dl>
-            <dt>
-              <strong>「とりけし」</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_undo.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                このツールをクリックすると、直前に行った操作が取り消されます。いくつもの操作をさかのぼって取り消すことができます！              </p>
-
-              <p>
-                <strong>注:</strong> キーボードで <b><code>[Control]</code></b> + <code><b>[Z]</b></code> を押しても取り消しできます。              </p>
-              <br clear="all">
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>「やりなおし」</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_redo.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                このツールをクリックすると、「とりけし」ボタンで取り消した操作を元に戻すことができます。              </p>
-
-              <p>
-                「とりけし」操作の後、描画を行っていなければ、取り消した全ての操作を元に戻せます！              </p>
-
-              <p>
-                <strong>注:</strong> キーボードで <b><code>[Control]</code></b> + <code><b>[R]</b></code> を押してもやりなおしできます。              </p>
-              <br clear="all">
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>「さいしょから」</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_new.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                「さいしょから」のボタンを押すと、新規に絵を描き始めることができます。ダイアログ画面が表示され、キャンバスの背景色やレイヤー画像（後述）を選べます。              </p>
-
-              <p>
-                <strong>注:</strong> キーボードで <b><code>[Control]</code></b> + <code><b>[N]</b></code> を押しても新規作成ができます。              </p>
-              <strong>レイヤー画像</strong>
-              <blockquote>
-                <p>
-                  レイヤー画像には、塗り絵のページのようなもの（白黒の線で描かれ、色を塗ることができる）や、前景レイヤーと背景レイヤーに挟まれた部分に絵を描ける３Ｄ画像のようなものがあります。                </p>
-
-                <p>
-                  また、このほかに、背景レイヤーだけの画像も用意されています。                </p>
-
-                <p>
-                  「消しゴム」ツールを使用すると、元のレイヤー画像が消されずに残ります。また、マジックツールの「反転」と「ミラー」は、レイヤー画像も反転させます。                </p>
-
-                <p>
-                  レイヤー画像は、その上に絵を描いて保存すると新しい絵として保存され、元々のレイヤー画像自体は上書きされないので、後で（「さいしょから」ダイアログからアクセスして）何度でも使うことができます。                </p>
-              </blockquote>
-              <br clear="all">
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>「ひらく」</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_open.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                「ひらく」をクリックすると、保存されている全ての作品のリストが表示されます。リストが画面に収まりきらない場合は、上下の矢印のボタンでリストをスクロールできます。              </p>
-              <br clear="all">
-
-              <p align="center">
-                <img src="../../html/images/open_dialog.jpg"
-                   width="194"
-                   height="152"
-                   alt="">
-              </p>
-
-              <p>
-                まず、絵をクリックして選択します…              </p>
-
-              <blockquote>
-                <ul>
-                  <li>
-                    <img src="../../html/images/open_open.png"
-                        width="48"
-                        height="48"
-                        alt=""
-                        align="right">
-                    <p>
-                      左下にある緑色の「ひらく」ボタンで、選択した作品を読み込みます。                    </p>
-
-                    <p>
-                      (または、開きたい作品をダブルクリックします）                    </p>
-                    <br clear="all">
-                  </li>
-
-                  <li>
-                    <img src="../../html/images/open_erase.png"
-                        width="48"
-                        height="48"
-                        alt=""
-                        align="right">
-                    <p>
-                      右下にある茶色の「けす」(ゴミ箱) ボタンで、選択した作品を削除します。(本当に削除して良いか確認されます)                    </p>
-
-                    <p>
-                      <strong>注:</strong> Linux（バージョン 0.9.22以降）、Windows（バージョン 0.9.27以降）では、削除した作品は、デスクトップのゴミ箱に移動するので、後で元に戻すことができます。                    </p>
-                    <br clear="all">
-                  </li>
-
-                  <li>
-                    <img src="../../html/images/open_export.png"
-                        width="48"
-                        height="48"
-                        alt=""
-                        align="right">
-                    <p>
-                      「かきだす」のボタンをクリックすると、ユーザーの標準の画像フォルダ（例："<code>~/Pictures/TuxPaint/</code>")に画像を出力します。                    </p>
-                    <br clear="all">
-                  </li>
-
-                  <li>
-                    <img src="../../html/images/open_slides.png"
-                        width="48"
-                        height="48"
-                        alt=""
-                        align="right">
-                    <p>
-                      左側の一番下にある青色の「スライドショー」のボタンを押すと、スライドショーモードになります。詳しくは「<a href="#slides">スライドショー</a>」の項をごらん下さい。                    </p>
-                    <br clear="all">
-                  </li>
-
-                  <li>
-                    <img src="../../html/images/open_back.png"
-                        width="48"
-                        height="48"
-                        alt=""
-                        align="right">
-                    <p>
-                      右下にある赤色の「もどる」ボタンを押すと、絵を描く画面に戻ります。                    </p>
-                    <br clear="all">
-                  </li>
-                </ul>
-              </blockquote>
-
-              <p>
-                絵を開く時に、それまで描いていた絵が保存されていなければ、保存するかどうかを確認します。(「<a href="#save">セーブ</a>」の項を参照。)              </p>
-
-              <p>
-                <strong>注:</strong> キーボードで <b><code>[Control]</code></b> + <code><b>[O]</b></code> を押しても「ひらく」ダイアログを表示できます。              </p>
-              <br clear="all">
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong><a name="save"
-                 id="save">「セーブ」</a></strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_save.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                描画中の作品を保存します。              </p>
-
-              <p>
-                一度も保存していない作品の場合、作品のリストに新しく追加されます。(つまり、新しいファイルを作成します)              </p>
-
-              <p>
-                <strong>注:</strong> ファイル名の入力などを求めることはなく、カメラのシャッター音の効果音とともに、単に作品を保存します。              </p>
-
-              <p>
-                一度保存操作をした後や、「ひらく」コマンドで読みこんだ作品の場合、以前のバージョンを上書きするか、新しく追加して保存するかを確認します。              </p>
-
-              <p align="center">
-                <img src="../../html/images/saveover.png"
-                   width="177"
-                   height="110"
-                   alt="">
-              </p>
-
-              <p>
-                <strong>注:</strong> "<code>saveover</code>" オプション、または "<code>saveovernew</code>" オプションのどちらかが設定されている場合は、確認なしに保存されます。詳しくは"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。)              </p>
-
-              <p>
-                <strong>注:</strong> キーボードで <b><code>[Control]</code></b> + <code><b>[S]</b></code> を押しても作品を保存できます。              </p>
-              <br clear="all">
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>「いんさつ」</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_print.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                このボタンを押して作品を印刷します！              </p>
-
-              <p>
-                多くのプラットフォームでは、<b><code>[Alt]</code></b> key (Mac では <b><code>[Option]</code></b> キー) を押しながら「いんさつ」ボタンを押すと、プリンターの設定画面が開きます。この機能は、フルスクリーンモードでは動作しない点に注意して下さい。              </p>
-
-              <dl>
-                <dt>
-                  <strong>印刷の無効化</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    オプションで "<code>noprint</code>" を設定すれば、「いんさつ」のボタンを無効にすることができます。                  </p>
-
-                  <p>
-                    詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。                  </p>
-                </dd>
-
-                <dt>
-                  <strong>印刷機能の制限</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    オプションで "<code>printdelay</code>" を設定すれば、設定に応じた一定の時間ごとに１回だけしか印刷できなくなります。                  </p>
-
-                  <p>
-                    例えば、設定ファイルで "<code>printdelay=60</code>2" と設定すれば、1分間に1回だけ印刷ができます。                  </p>
-
-                  <p>
-                    詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。                  </p>
-                </dd>
-
-                <dt>
-                  <strong>印刷コマンド</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    <em>(Linux 及び Unix の場合のみ)</em>
-                  </p>
-
-                  <p>
-                    Tux Paint は、PostScript 形式の印刷データを作成し、外部プログラムに渡して印刷を行います。標準の設定では、以下のコマンドが使用されます：                  </p>
-
-                  <blockquote>
-                    <code>lpr</code>
-                  </blockquote>
-
-                  <p>
-                    このコマンドは、設定ファイルの "<code>printcommand</code>" オプションを設定することで変更できます。                  </p>
-
-                  <p>
-                    フルスクリーンモードでなければ "<b><code>[Alt]</code></b>" キーを押しながら「いんさつ」ボタンを押すと、別の印刷プログラムを起動することができます。標準の設定では、KDE のグラフィカルな印刷ダイアログである、以下のプログラムが使用されます：                  </p>
-
-                  <blockquote>
-                    <code>kprinter</code>
-                  </blockquote>
-
-                  <p>
-                    このコマンドは、設定ファイルの "<code>altprintcommand</code>" オプションを設定することで変更できます。                  </p>
-
-                  <p>
-                    詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。                  </p>
-                </dd>
-
-                <dt>
-                  <strong>プリンターの設定</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    <em>(Windows 及び macOS)</em>
-                  </p>
-
-                  <p>
-                    標準の設定では、「いんさつ」ボタンを押すと、通常使うプリンターに出力されます。                  </p>
-
-                  <p>
-                    フルスクリーンモードでなければ、<b><code>[Alt]</code></b> (または <b><code>[Option]</code></b>) キーを押しながら「いんさつ」ボタンを押すと、オペレーションシステム標準の印刷ダイアログが表示され、出力先などの設定を変更することができます。                  </p>
-
-                  <p>
-                    "<code>printcfg</code>" オプションを設定すれば、プリンターの設定の変更を保存することができます。                  </p>
-
-                  <p>
-                    "<code>printcfg</code>" オプションを設定すると、プリンターの設定は、ユーザーの個人フォルダの "<code>printcfg.cfg</code>" から読み込まれ、変更した設定はこのファイルに保存されます。                  </p>
-
-                  <p>
-                    詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。                  </p>
-                </dd>
-
-                <dt>
-                  <strong>印刷ダイアログのオプション</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    標準の設定では、印刷ダイアログは、<b><code>[Alt]</code></b> (または <b><code>[Option]</code></b>) キーを押しながら「いんさつ」ボタンを押した場合にのみ表示されます（Linux/Unixでは、"<code>lpr</code>" の代わりに "<code>altprintcommand</code>"; すなわち "<code>kprinter</code>" が起動します。）                  </p>
-
-                  <p>
-                    この印刷ダイアログの動作は、設定により変更できます。毎回必ず印刷ダイアログを表示させるには、コマンドラインで "<code>--altprintalways</code>" を指定するか、設定ファイルで "<code>altprint=always</code>" を指定します。反対に、"<code>--altprintnever</code>" または "<code>altprint=never</code>" を指定することで、"<b><code>[Alt]</code></b>" (または "<b><code>[Option]</code></b>2) キーの効果を無効にできます。                  </p>
-
-                  <p>
-                    詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。                  </p>
-                </dd>
-              </dl>
-              <br clear="all">
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <a name="slides"
-                  id="slides"><strong>「スライドショー」</strong></a>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/open_slides.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                「スライドショー」の機能は、「ひらく」ダイアログから利用できます。タックスペイントの中で、簡単なアニメーションや画像のスライドショーを再生することができます。また、選択した画像を元にアニメーションGIFを書き出すこともできます。              </p>
-
-              <dl>
-                <dt>
-                  <strong>画像を選ぶ</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    「スライド」セクションに入ると、「ひらく」ダイアログと同じように、保存したファイルの一覧が表示されます。                  </p>
-
-                  <p>
-                    次に、スライドショーで表示したい作品を、一つずつクリックして選択します。それぞれの画像の上に、スライドショーで表示される順番を表す数字が示されます。                  </p>
-
-                  <p>
-                    選択された画像をもう一度クリックすると、選択を解除し、スライドショーから除外します。同じ画像もう一度クリックすると、をリストの最後に追加できます。                  </p>
-                </dd>
-
-                <dt>
-                  <strong>再生スピードの設定</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    画面左下「かいし」の隣にあるのスライドバーで、スライドショーやアニメーションGIFのスピードを調節できます。 スライドバーを一番左に設定すると、スライドショーの自動進行が無効になり、次のスライドに進むにはクリックが必要になります。（以下をご確認下さい）                  </p>
-
-                  <p>
-                    <strong>注:</strong> 最も遅いスピードに設定するとスライドの自動進行が無効になります。１枚ずつ手動でスライドを進めたい場合に、この設定を用いてください。（この動作はアニメーションGIFには適用されません）                  </p>
-                </dd>
-
-                <dt>
-                  <strong>Tux Paint 上での再生</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    Tux Paint上でスライドショーを再生するには、「かいし」ボタンをクリックして下さい。(注: 作品を一つも選択していない場合、全ての作品が表示されます。)                  </p>
-
-                  <p>
-                    スライドショーの実行中は、<b><code>[Space]</code></b> キー、<b><code>[Enter]</code></b> キー、<b><code>[Return]</code></b> キー、<b><code>[右矢印]</code></b> キーのいずれかを押すか、または、画面左下の "つぎへ" ボタンのクリックすれば、手動で次のスライドに進みます。<b><code>[左矢印]</code></b> キーを押すと前のスライドに戻ります。                  </p>
-
-                  <p>
-                    <b><code>[Escape]</code></b> キーを押すか、右下の「もどる」ボタンをクリックすると、スライドショーを終了し、作品選択の画面に戻ります。                  </p>
-                </dd>
-
-                <dt>
-                  <strong>アニメーションGIFの書き出し</strong>
-                </dt>
-
-                <dd>
-                  <p>
-                    <img src=
-                    "../../html/images/open_slides_export_gif.png"
-                       width="48"
-                       height="48"
-                       alt=""
-                       align="right">
-                       右下の「かきだす」ボタンをクリックすると、選択した画像を元にアニメーションGIFファイルを生成します。                  </p>
-
-                  <p>
-                    <strong>注:</strong> 少なくとも２つの画像を選択する必要があります。（画像を１枚だけ書き出す場合は、「ひらく」ダイアログの「かきだす」オプションを用います）。１枚も画像を選択していない場合は、アニメーションGIFは生成されません。                  </p>
-
-                  <p>
-                    アニメーションGIFの生成中に <b><code>[Escape]</code></b> キーを押すと、処理を中断して「スライドショー」ダイアログに戻ります。                  </p>
-                  <br clear="all">
-                </dd>
-              </dl>
-
-              <p>
-                さらに「もどる」ボタンをクリックすれば、「ひらく」ダイアログに戻ります。              </p>
-              <br clear="all">
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>プログラムの終了</strong>
-            </dt>
-
-            <dd>
-              <img src="../../html/images/tool_quit.png"
-                  width="48"
-                  height="48"
-                  alt=""
-                  align="right">
-              <p>
-                「やめる」ボタンを押すか、Tux Paint のウィンドウを閉じるか、<b><code>[Escape]</code></b> キーを押せば、Tux Paint が終了します。              </p>
-
-              <p>
-                その際、本当に終了するかどうかを確認されます。              </p>
-
-              <p>
-                作品を保存していない状態で終了しようとした場合は、絵を保存するかどうかを訪ねられます。さらに、新規に作成した作品でなければ、以前のバージョンを上書きするかどうかを確認されます。(上記の <a href="#save">「セーブ」</a>の項をご覧下さい。)              </p>
-
-              <p>
-                <strong>注:</strong> "<code>startblank</code>" オプションが設定されている場合を除き、終了時に保存した作品は、次に Tux Paint を起動するときに自動的に読み込まれます。              </p>
-
-              <p>
-                <strong>注:</strong> 「やめる」ボタンと <b><code>[Escape]</code></b> キーによるプログラム終了は、"<code>noquit</code>" オプションで無効にできます。              </p>
-
-              <p>
-                この場合、タイトルバーの「閉じる」ボタンか、<b><code>[Alt]</code></b> + <b><code>[F4]</code></b> キーで終了することができます。              </p>
-
-              <p>
-                また、上記のどちらの方法も使えない場合、<b><code>[Shift]</code></b> + <b><code>[Control]</code></b> + <b><code>[Escape]</code></b> のキーの組み合わせで終了できます。              </p>
-
-              <p>
-                詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。              </p>
-              <br clear="all">
-
-              <hr size="1">
-            </dd>
-
-            <dt>
-              <strong>効果音を消すには</strong>
-            </dt>
-
-            <dd>
-              <p>
-                今のところ画面上には消音のためのボタンはありませんが、<b><code>[Alt]</code></b> + <b><code>[S]</code></b> キーを押すと効果音は無効になり、もう一度押すと有効になります。              </p>
-
-              <p>
-                なお、"<code>nosound</code>" オプションによって効果音が無効にされている場合は、<b><code>[Alt]</code></b> + <b><code>[S]</code></b> キーによる効果音の操作はできません。（親や先生が効果音を無効にすれば、この操作で音を出すことはできないということです）              </p>
-            </dd>
-          </dl>
-        </blockquote>
+        <code>kprinter</code>
       </blockquote>
+
+      <p>
+        このコマンドは、設定ファイルの "<code>altprintcommand</code>" オプションを設定することで変更できます。      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。      </p>
+    </dd>
+
+    <dt>
+      <strong>プリンターの設定</strong>
+    </dt>
+
+    <dd>
+      <p>
+        <em>(Windows 及び macOS)</em>
+      </p>
+
+      <p>
+        標準の設定では、「いんさつ」ボタンを押すと、通常使うプリンターに出力されます。      </p>
+
+      <p>
+        フルスクリーンモードでなければ、<b><code>[Alt]</code></b> (または <b><code>[Option]</code></b>) キーを押しながら「いんさつ」ボタンを押すと、オペレーションシステム標準の印刷ダイアログが表示され、出力先などの設定を変更することができます。      </p>
+
+      <p>
+        "<code>printcfg</code>" オプションを設定すれば、プリンターの設定の変更を保存することができます。      </p>
+
+      <p>
+        "<code>printcfg</code>" オプションを設定すると、プリンターの設定は、ユーザーの個人フォルダの "<code>printcfg.cfg</code>" から読み込まれ、変更した設定はこのファイルに保存されます。      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。      </p>
+    </dd>
+
+    <dt>
+      <strong>印刷ダイアログのオプション</strong>
+    </dt>
+
+    <dd>
+      <p>
+        標準の設定では、印刷ダイアログは、<b><code>[Alt]</code></b> (または <b><code>[Option]</code></b>) キーを押しながら「いんさつ」ボタンを押した場合にのみ表示されます（Linux/Unixでは、"<code>lpr</code>" の代わりに "<code>altprintcommand</code>"; すなわち "<code>kprinter</code>" が起動します。）      </p>
+
+      <p>
+        この印刷ダイアログの動作は、設定により変更できます。毎回必ず印刷ダイアログを表示させるには、コマンドラインで "<code>--altprintalways</code>" を指定するか、設定ファイルで "<code>altprint=always</code>" を指定します。反対に、"<code>--altprintnever</code>" または "<code>altprint=never</code>" を指定することで、"<b><code>[Alt]</code></b>" (または "<b><code>[Option]</code></b>2) キーの効果を無効にできます。      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。      </p>
+    </dd>
+  </dl>
+</dd>
+            <dt id="using_tools_other_open_slides">
+  <strong>「スライドショー」</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/open_slides.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    「スライドショー」の機能は、「ひらく」ダイアログから利用できます。タックスペイントの中で、簡単なアニメーションや画像のスライドショーを再生することができます。また、選択した画像を元にアニメーションGIFを書き出すこともできます。  </p>
+
+  <dl>
+    <dt>
+      <strong>画像を選ぶ</strong>
+    </dt>
+
+    <dd>
+      <p>
+        「スライド」セクションに入ると、「ひらく」ダイアログと同じように、保存したファイルの一覧が表示されます。      </p>
+
+      <p>
+        次に、スライドショーで表示したい作品を、一つずつクリックして選択します。それぞれの画像の上に、スライドショーで表示される順番を表す数字が示されます。      </p>
+
+      <p>
+        選択された画像をもう一度クリックすると、選択を解除し、スライドショーから除外します。同じ画像もう一度クリックすると、をリストの最後に追加できます。      </p>
+    </dd>
+
+    <dt>
+      <strong>再生スピードの設定</strong>
+    </dt>
+
+    <dd>
+      <p>
+        画面左下「かいし」の隣にあるのスライドバーで、スライドショーやアニメーションGIFのスピードを調節できます。 スライドバーを一番左に設定すると、スライドショーの自動進行が無効になり、次のスライドに進むにはクリックが必要になります。（以下をご確認下さい）      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>注:</strong> 最も遅いスピードに設定するとスライドの自動進行が無効になります。１枚ずつ手動でスライドを進めたい場合に、この設定を用いてください。（この動作はアニメーションGIFには適用されません）      </p>
+
+      <div class="screenshot-center">
+        <img src=
+        "../../html/images/tool_slider.png"
+           width="96"
+           height="48"
+           alt="">
+      </div>
+    </dd>
+
+    <dt>
+      <strong>Tux Paint 上での再生</strong>
+    </dt>
+
+    <dd>
+      <p>
+        Tux Paint 内でスライドショーを再生するには「かいし」ボタンをクリックします。      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>注:</strong> 作品を一つも選択していない場合、保存されている<em>全て</em>の作品がスライドショーで表示されます！      </p>
+
+      <p>
+        スライドショーの実行中は、<b><code>[Space]</code></b> キー、<b><code>[Enter]</code></b> キー、<b><code>[Return]</code></b> キー、<b><code>[右矢印]</code></b> キーのいずれかを押すか、または、画面左下の "つぎへ" ボタンのクリックすれば、手動で次のスライドに進みます。<b><code>[左矢印]</code></b> キーを押すと前のスライドに戻ります。      </p>
+
+      <p>
+        <b><code>[Escape]</code></b> キーを押すか、右下の「もどる」ボタンをクリックすると、スライドショーを終了し、作品選択の画面に戻ります。      </p>
+    </dd>
+
+    <dt>
+      <strong>アニメーションGIFの書き出し</strong>
+    </dt>
+
+    <dd>
+      <p>
+        <img src=
+        "../../html/images/open_slides_export_gif.png"
+           width="48"
+           height="48"
+           alt=""
+           align="right">
+           右下の「かきだす」ボタンをクリックすると、選択した画像を元にアニメーションGIFファイルを生成します。      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>注:</strong> 少なくとも２つの画像を選択する必要があります。（画像を１枚だけ書き出す場合は、「ひらく」ダイアログの「かきだす」オプションを用います）。１枚も画像を選択していない場合、アニメーションGIFは<em>生成されません</em>。      </p>
+
+      <p>
+        アニメーションGIFの生成中に <b><code>[Escape]</code></b> キーを押すと、処理を中断して「スライドショー」ダイアログに戻ります。      </p>
+    </dd>
+  </dl>
+
+  <p>
+    さらに「もどる」ボタンをクリックすれば、「ひらく」ダイアログに戻ります。  </p>
+</dd>
+            <dt id="using_tools_other_quit">
+  <strong>プログラムの終了</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_quit.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    「やめる」ボタンを押すか、Tux Paint のウィンドウを閉じるか、<b><code>[Escape]</code></b> キーを押せば、Tux Paint が終了します。  </p>
+
+  <p>
+    その際、本当に終了するかどうかを確認されます。  </p>
+
+  <p>
+    作品を保存していない状態で終了しようとした場合は、絵を保存するかどうかを訪ねられます。さらに、新規に作成した作品でなければ、以前のバージョンを上書きするか、新しく保存するかを確認されます。(上記の「<a href="#save">セーブ</a>」の項をご覧下さい。)  </p>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>注:</strong> "<code>startblank</code>" オプションが設定されている場合を除き、終了時に保存した作品は、次に Tux Paint を起動するときに自動的に読み込まれます。  </p>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>注:</strong> 「やめる」ボタンと <b><code>[Escape]</code></b> キーによるプログラム終了は、"<code>noquit</code>" オプションで無効にできます。  </p>
+
+  <p>
+    この場合、タイトルバーの「閉じる」ボタンか、<b><code>[Alt]</code></b> + <b><code>[F4]</code></b> キーで終了することができます。  </p>
+
+  <p>
+    また、上記のどちらの方法も使えない場合、<b><code>[Shift]</code></b> + <b><code>[Control / &#8984;]</code></b> + <b><code>[Escape]</code></b> のキーの組み合わせで終了できます。  </p>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。  </p>
+</dd>
+            <dt id="using_tools_other_sound_muting">
+  <strong>効果音を消すには</strong>
+</dt>
+
+<dd>
+  <p>
+    今のところ画面上には消音のためのボタンはありませんが、<b><code>[Alt]</code></b> + <b><code>[S]</code></b> キーを押すと効果音は無効になり、もう一度押すと有効になります。  </p>
+
+  <p>
+    なお、"<code>nosound</code>" オプションによって効果音が無効にされている場合は、<b><code>[Alt]</code></b> + <b><code>[S]</code></b> キーによる効果音の操作はできません。（親や先生が効果音を無効にすれば、この操作で音を出すことはできないということです）  </p>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    詳細は "<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。  </p>
+</dd>
+          </dl>
+        </section>
+        <!-- Using: Tools: Other -->
+
+      </section>
+      <!-- Using: Tools -->
+
+    </section>
+    <!-- Using -->
+
+    <section class="outer indent">
+  <header>
+    <h1 id="loading_into">
+      他の画像の Tux Paint への読み込み    </h1>
+  </header>
+
+  <p>
+    Tux Paint の「ひらく」ダイアログでは、Tux Paint で作成した画像だけが表示されます。その他の画像や写真を読み込んで編集するにはどのようにすれば良いでしょうか？  </p>
+
+  <p>
+    そのための方法は簡単で、画像ファイルを PNG (Portable Network Graphic) 形式に変換して、Tux Paint で作成した画像が保存されている "<code>saved</code>" フォルダにコピーします。（標準では以下のフォルダ）:  </p>
+
+  <dl>
+    <dt>
+      <strong>Windows 10, 8, 7, Vista</strong>
+    </dt>
+
+    <dd>
+      各ユーザーの "<code>AppData</code>" フォルダ。例: "<code>C:\Users\<em>username</em>\AppData\Roaming\TuxPaint\saved\</code>"。    </dd>
+
+    <dt>
+      <strong>Windows 2000, XP</strong>
+    </dt>
+
+    <dd>
+      各ユーザーの "<code>Application Data</code>" フォルダ。例: "<code>C:\Documents and Settings\<em>username</em>\Application Data\TuxPaint\saved\</code>"。    </dd>
+
+    <dt>
+      <strong>macOS</strong>
+    </dt>
+
+    <dd>
+      各ユーザーの "<code>Library</code>" フォルダ。例: "<code>/Users/<em>username</em>/Library/Application Support/Tux Paint/saved/</code>"。    </dd>
+
+    <dt>
+      <strong>Linux/Unix</strong>
+    </dt>
+
+    <dd>
+      各ユーザーのホームディレクトリ("<code>$HOME</code>")の隠しディレクトリ "<code>.tuxpaint</code>" 以下 ― 例: "<code>/home/<em>username</em>/.tuxpaint/saved/</code>"。    </dd>
+  </dl>
+
+  <p class="note">
+    <span title="Information">&#128161;</span>    <strong>注:</strong> Tux Paint で作成した画像を<em>他のアプリケーションを使って</em>開く場合も、これらのフォルダからになります。しかしながら、「ひらく」ダイアログの「かきだす」の機能を使えば、Tux Paint で作成した画像を、もっと簡単で安全にアクセスできるフォルダにコピーすることができます。  </p>
+
+  <h2>
+    "<code>tuxpaint-import</code>" スクリプトを使う  </h2>
+
+  <blockquote>
+    <p>
+      Linux と Unix では、Tux Paint と同時に、シェルスクリプト "<code>tuxpaint-import</code>" がインストールされています。このスクリプトは、NetPBM のツール ("<code>anytopnm</code>") を用いて画像を変換し、 Tux Paint のキャンバスに合うように画像サイズを変更 ("<code>pnmscale</code>") し、PNG 形式に変換 ("<code>pnmtopng</code>") します。    </p>
+
+    <p>
+      また、このスクリプトは、"<code>date</code>" コマンドを使用して、Tux Paint が保存するファイル名に用いる日付と時刻を取得します。(作品を保存したり開いたりするときに、ファイル名を聞かれることはない、ということを思い出してください！)    </p>
+
+    <p>
+      スクリプトの使用法は簡単で、コマンドプロンプトで、取り込みたい画像のファイル名を引数として実行するだけです。    </p>
+
+    <p>
+      ファイルは変換された後、Tux Paint の "<code>saved</code>" ディレクトリに格納されます。    </p>
+    <p class="note">
+      <span title="Information">&#128161;</span>      <strong>注:</strong> 例えばお子さんなど、他のユーザーのために変換作業を行う場合は、<em>そのユーザーのアカウントで</em>コマンドを実行する必要があります。    </p>
+
+    <p>
+      Example:    </p>
+
+    <blockquote>
+      <code>$ <strong>tuxpaint-import おばあちゃん.jpg</strong><br>
+      おばあちゃん.jpg -&gt;
+      /home/username/.tuxpaint/saved/20211231012359.png<br>
+      jpegtopnm: WRITING A PPM FILE</code>
     </blockquote>
 
-    <hr size="2"
-        noshade>
+    <p>
+      1行目 ("<code>tuxpaint-import おばあちゃん.jpg</code>") が実行するコマンドで、続く2行がプログラムの実行中の出力です。    </p>
 
-    <h1>
-      <a name="loading_into"
-          id="loading_into">他の画像の Tux Paint への読み込み</a>
-    </h1>
+    <p>
+      これで、Tux Paint を起動して、「ひらく」ダイアログから変換した画像を開くことができます。後は、アイコンをダブルクリックするだけです！    </p>
+  </blockquote>
+
+  <h2>
+    手動での取り込み  </h2>
+
+  <blockquote>
+    <p>
+      Windows、MacOS、BeOS、そして Haiku のユーザーは、手動で変換作業を行う必要があります。    </p>
+
+    <p>
+      変換したい画像ファイルの読み込み、PNG 形式ファイルでの保存に対応した画像処理プログラムを起動します。(推奨されるソフトウェア、その他の情報については、"<a href="PNG.html">PNG.html</a>" をお読みください。)    </p>
+
+    <p>
+      Tux Paint で、描画キャンパスと異なる大きさの画像を読み込む場合、キャンバスに合うように拡大・縮小されます。    </p>
+
+    <p>
+      画像が引き伸ばされたりぼやけたりしないようにするには、キャンパスの大きさに合うようにサイズを変更します。キャンパスの大きさは、Tux Paint のウィンドウサイズや、フルスクリーン動作時の画面解像度に依存します。(<strong>注:</strong> 標準の解像度は 800x600 です)。 以下の "イメージサイズの計算方法" をごらんください。    </p>
+
+    <p>
+      画像は PNG 形式で保存してください。また、以下のように、Tux Paint における命名規則である、現在の日付と時刻を用いたファイル名を使用することを強くお勧めします。    </p>
+
+    <blockquote>
+      <code><strong>YYYYMMDDhhmmss</strong>.png</code>
+    </blockquote>
+
+    <ul>
+      <li><code>YYYY</code> = 年</li>
+      <li><code>MM</code> = 月 (2桁, "01"-"12")</li>
+      <li><code>DD</code> = 日 (2桁, "01"-"31")</li>
+      <li><code>HH</code> = 時 (2桁, 24時間表示, "00"-"23")</li>
+      <li><code>mm</code> = 分 (2桁, "00"-"59")</li>
+      <li><code>ss</code> = 秒 (2桁, "00"-"59")</li>
+    </ul>
+
+    <p>
+      例: 2021年7月31日 午前11時5分であれば、<code>20210731110500.png</code> のようになります。    </p>
+
+    <p>
+      PNG ファイルを Tux Paint の "<code>saved</code>" ディレクトリにコピーします。（上記参照）    </p>
+
+    <h3>
+      イメージサイズの計算方法    </h3>
 
     <blockquote>
       <p>
-        Tux Paint の「ひらく」ダイアログでは、Tux Paint で作成した画像だけが表示されます。その他の画像や写真を読み込んで編集するにはどのようにすれば良いでしょうか？      </p>
+        "<code>buttonsize</code>" のオプションが追加されたため、この部分は全面的に書き直す必要があります。とりあえずは、タックスペイントで作成した画像のサイズ（ピクセル幅と高さ）を調べて、取り込む画像をそれに合わせて拡大縮小してみてください。      </p>
+    </blockquote>
+  </blockquote>
+</section>
+    <section class="outer indent">
+  <header>
+    <h1 id="further">
+      その他のドキュメント    </h1>
+  </header>
 
-      <p>
-        そのための方法は簡単で、画像ファイルを PNG (Portable Network Graphic) 形式に変換して、Tux Paint で作成した画像が保存されている "<code>saved</code>" フォルダにコピーします。（標準では以下のフォルダ）：      </p>
+  <p>
+    このドキュメントの他、"<code>docs</code>" フォルダには、次のようなドキュメントがあります:    <dl>
+      <dt>
+        Tux Paint の使用:      </dt>
+      <dd>
+        <ul>
+          <li>
+            <a href="OPTIONS.html">OPTIONS.html</a><br>
+            コマンドライン、設定ファイルのオプションに関する詳細な情報。Tux Paint Config を使用したくない人向け。          </li>
 
-      <dl>
-        <dt>
-          <strong>Windows 10, 8, 7, Vista</strong>
-        </dt>
+          <li>
+            <a href="../magic-docs/html/index.html">「まほう」ツールに関するドキュメント ("<code>magic-docs</code>")</a><br>
+            インストールされている、それぞれの「まほう」ツールに関する説明。          </li>
+        </ul>
+      </dd>
 
-        <dd>
-          各ユーザーの "<code>AppData</code>" フォルダ。例: "<code>C:\Users\<em>username</em>\AppData\Roaming\TuxPaint\saved\</code>"。        </dd>
+      <dt>
+        Tux Paint の拡張:      </dt>
+      <dd>
+        <ul>
+          <li>
+            <a href="EXTENDING.html">EXTENDING.html</a><br>
+            ブラシ、はんこ、背景画像の作成方法、フォントを追加する方法、追加のスクリーンキーボードの作成、言語入力の追加など、Tux Paint の拡張についての詳細説明。          </li>
 
-        <dt>
-          <strong>Windows 2000, XP</strong>
-        </dt>
+          <li>
+            <a href="PNG.html">PNG.html</a><br>
+            PNG 形式の画像を作成する方法。          </li>
 
-        <dd>
-          各ユーザーの "<code>Application Data</code>" フォルダ。例: "<code>C:\Documents and Settings\<em>username</em>\Application Data\TuxPaint\saved\</code>"。        </dd>
+          <li>
+            <a href="SVG.html">SVG.html</a><br>
+            SVG 形式のヴェクタ画像を作成する方法。          </li>
+        </ul>
+      </dd>
 
-        <dt>
-          <strong>macOS</strong>
-        </dt>
+      <dt>
+        技術情報:      </dt>
+      <dd>
+        <ul>
+          <li>
+            <a href="INSTALL.html">INSTALL.html</a><br>
+            コンパイル、インストールの手順.          </li>
 
-        <dd>
-          各ユーザーの "<code>Library</code>" フォルダ。例: "<code>/Users/<em>username</em>/Library/Application Support/Tux Paint/saved/</code>"。        </dd>
+          <li>
+            <a href="SIGNALS.html">SIGNALS.html</a><br>
+            Tux Paint が応答する POSIX シグナルに関する情報。          </li>
+        </ul>
+      </dd>
 
-        <dt>
-          <strong>Linux/Unix</strong>
-        </dt>
+      <dt>
+        開発の記録及びライセンス:      </dt>
+      <dd>
+        <ul>
+          <li>
+            <a href="../../AUTHORS.txt">AUTHORS.txt</a><br>
+            作者と協力者のリスト.          </li>
 
-        <dd>
-          各ユーザーのホームディレクトリ("<code>$HOME</code>")の隠しディレクトリ "<code>.tuxpaint</code>" 以下 ― 例: "<code>/home/<em>username</em>/.tuxpaint/saved/</code>"。        </dd>
-      </dl>
+          <li>
+            <a href="../../CHANGES.txt">CHANGES.txt</a><br>
+            リリース毎の変更点の概要.          </li>
 
-      <p>
-        <strong>注:</strong> Tux Paint で作成した画像を<em>他のアプリケーションを使って</em>開く場合も、これらのフォルダからになります。しかしながら、「ひらく」ダイアログの「かきだす」の機能を使えば、Tux Paint で作成した画像を、もっと簡単で安全にアクセスできるフォルダにコピーすることができます。      </p>
+          <li>
+            <a href="../../COPYING.txt">COPYING.txt</a><br>
+            Tux Paint ソフトウェアのライセンス <cite>GNU 一般公衆利用許諾</cite> (GPL)          </li>
+        </ul>
+      </dd>
+    </dl>
+  </p>
+</section>
+    <section class="outer indent">
+  <header>
+    <h1 id="help">
+      お問い合わせ先    </h1>
+  </header>
 
-      <h2>
-        "<code>tuxpaint-import</code>" スクリプトを使う      </h2>
+  <p>
+    お困りのことがある場合、Tux Paint の開発者や他のユーザーとコミュニケーションをとるための多くの方法があります。    <ul>
+      <li>バグを発見した場合や機能追加の要望については、プロジェクトの バグトラッキングシステムから報告できます</li>
+      <li>プロジェクトに関する様々なメーリングリストに参加できます</li>
+      <li>開発者へ直接連絡することもできます</li>
+    </ul>
+  </p>
 
-      <blockquote>
-        <p>
-          Linux と Unix では、Tux Paint と同時に、シェルスクリプト "<code>tuxpaint-import</code>" がインストールされています。このスクリプトは、NetPBM のツール ("<code>anytopnm</code>") を用いて画像を変換し、 Tux Paint のキャンバスに合うように画像サイズを変更 ("<code>pnmscale</code>") し、PNG 形式に変換 ("<code>pnmtopng</code>") します。        </p>
+  <p>
+    もっとお知りになりたい場合、Tux Paint のウェブサイト の "連絡先" のページ (<a href="https://tuxpaint.org/contact/">https://tuxpaint.org/contact/</a>) をごらん下さい  </p>
+</section>
+    <section class="outer indent">
+  <header>
+    <h1 id="participate">
+      プロジェクトへの参加    </h1>
+  </header>
 
-        <p>
-          また、このスクリプトは、"<code>date</code>" コマンドを使用して、Tux Paint が保存するファイル名に用いる日付と時刻を取得します。(作品を保存したり開いたりするときに、ファイル名を聞かれることはない、ということを思い出してください！)        </p>
+  <p>
+    タックスペイントはボランティアベースのプロジェクトであり、様々な形でのご協力を受け付けています。
+    <ul>
+      <li>Tux Paint の翻訳の作成</li>
+      <li>既存の翻訳の改善</li>
+      <li>アートワークの作成 (スタンプ、背景画像、ペイントブラシなど)</li>
+      <li>機能の追加や改良、「まほう」ツールの作成</li>
+      <li>学習教材の作成</li>
+      <li>宣伝や、他の Tux Paint ユーザーのサポート</li>
+    </ul>
+  </p>
 
-        <p>
-          スクリプトの使用法は簡単で、コマンドプロンプトで、取り込みたい画像のファイル名を引数として実行するだけです。        </p>
+  <p>
+    もっとお知りになりたい場合、Tux Paint のウェブサイト の "私たちにご協力を" のページ (<a href="https://tuxpaint.org/help/">https://tuxpaint.org/help/</a>) をごらん下さい  </p>
+</section>
 
-        <p>
-          画像は変換された後、Tux Paint の "<code>saved</code>" フォルダにコピーされます。(注: 例えばお子さんなど、他のユーザーのために変換作業を行う場合は、<em>そのユーザーのアカウントで</em>コマンドを実行する必要があります。)        </p>
-
-        <p>
-          Example:        </p>
-
-        <blockquote>
-          <code>$ <strong>tuxpaint-import おばあちゃん.jpg</strong><br>
-          おばあちゃん.jpg -&gt;
-          /home/username/.tuxpaint/saved/20211231012359.png<br>
-          jpegtopnm: WRITING A PPM FILE</code>
-        </blockquote>
-
-        <p>
-          1行目 ("<code>tuxpaint-import おばあちゃん.jpg</code>") が実行するコマンドで、続く2行がプログラムの実行中の出力です。        </p>
-
-        <p>
-          これで、Tux Paint を起動して、「ひらく」ダイアログから変換した画像を開くことができます。後は、アイコンをダブルクリックするだけです！        </p>
-      </blockquote>
-
-      <h2>
-        手動での取り込み      </h2>
-
-      <blockquote>
-        <p>
-          Windows、MacOS、BeOS、そして Haiku のユーザーは、手動で変換作業を行う必要があります。        </p>
-
-        <p>
-          変換したい画像ファイルの読み込み、PNG 形式ファイルでの保存に対応した画像処理プログラムを起動します。(推奨されるソフトウェア、その他の情報については、"<a href="PNG.html">PNG.html</a>" をお読みください。)        </p>
-
-        <p>
-          Tux Paint で、描画キャンパスと異なる大きさの画像を読み込む場合、キャンバスに合うように拡大・縮小されます。        </p>
-
-        <p>
-          画像が引き伸ばされたりぼやけたりしないようにするには、キャンパスの大きさに合うようにサイズを変更します。キャンパスの大きさは、Tux Paint のウィンドウサイズや、フルスクリーン動作時の画面解像度に依存します。(<strong>注:</strong> 標準の解像度は 800x600 です)。 以下の "イメージサイズの計算方法" をごらんください。        </p>
-
-        <p>
-          画像は PNG 形式で保存してください。また、以下のように、Tux Paint における命名規則である、現在の日付と時刻を用いたファイル名を使用することを強くお勧めします。        </p>
-
-        <blockquote>
-          <code><strong>YYYYMMDDhhmmss</strong>.png</code>
-        </blockquote>
+    <footer>
+      <section class="outer">
+        <header>
+          <h1>
+            商標について</a>
+          </h1>
+        </header>
 
         <ul>
-          <li><code>YYYY</code> = 年</li>
-          <li><code>MM</code> = 月 (2桁, "01"-"12")</li>
-          <li><code>DD</code> = 日 (2桁, "01"-"31")</li>
-          <li><code>HH</code> = 時 (2桁, 24時間表示, "00"-"23")</li>
-          <li><code>mm</code> = 分 (2桁, "00"-"59")</li>
-          <li><code>ss</code> = 秒 (2桁, "00"-"59")</li>
+          <li>"Linux" は Linus Torvalds の登録商標です。</li>
+          <li>"Microsoft" および "Windows" は、Microsoft 社の登録商標です。</li>
+          <li>"Apple" および "macOS" は Apple 社の登録商標です。</li>
+          <li>"Twitter" は、Twitter 社の登録商標です。</li>
+          <li>"Tumblr" は Tumblr 社の登録商標です。</li>
         </ul>
-
-        <p>
-          例：2021年7月31日 午前11時5分であれば、<code>20210731110500.png</code> のようになります。        </p>
-
-        <p>
-          PNG ファイルを Tux Paint の "<code>saved</code>" ディレクトリにコピーします。（上記参照）        </p>
-
-        <h3>
-          イメージサイズの計算方法        </h3>
-
-        <blockquote>
-          <p>
-            This part of the documentation needs to be rewritten, since the new "<code>buttonsize</code>" option was added. For now, try drawing and saving an image within Tux Paint, then determine what size (pixel width and height) it came out to, and try to match that when scaling the picture(s) you're importing into Tux Paint.          </p>
-        </blockquote>
-      </blockquote>
-    </blockquote>
-
-    <hr size="2"
-        noshade>
-
-    <h1>
-      <a name="further"
-          id="further">その他のドキュメント</a>
-    </h1>
-
-    <blockquote>
-      このドキュメントの他、"<code>docs</code>" フォルダには、次のようなドキュメントがあります：      <ul>
-        <li>
-          Using Tux Paint:          <ul>
-            <li>
-              <a href="OPTIONS.html">OPTIONS.html</a><br>
-              コマンドライン、設定ファイルのオプションに関する詳細な情報。Tux Paint Config を使用したくない人向け。            </li>
-
-            <li>
-              <a href="../magic-docs/html/index.html">「まほう」ツールに関するドキュメント ("<code>magic-docs</code>")</a><br>
-              インストールされている、それぞれの「まほう」ツールに関する説明。            </li>
-          </ul>
-        </li>
-
-        <li>
-          How to extend Tux Paint:          <ul>
-            <li>
-              <a href="EXTENDING.html">EXTENDING.html</a><br>
-              ブラシ、はんこ、背景画像の作成方法、フォントを追加する方法、追加のスクリーンキーボードの作成、言語入力の追加など、Tux Paint の拡張についての詳細説明。            </li>
-
-            <li>
-              <a href="PNG.html">PNG.html</a><br>
-              PNG 形式の画像を作成する方法。            </li>
-
-            <li>
-              <a href="SVG.html">SVG.html</a><br>
-              SVG 形式のヴェクタ画像を作成する方法。            </li>
-          </ul>
-        </li>
-
-        <li>
-          Technical information:          <ul>
-            <li>
-              <a href="INSTALL.html">INSTALL.html</a><br>
-              コンパイル、インストールの手順.            </li>
-
-            <li>
-              <a href="SIGNALS.html">SIGNALS.html</a><br>
-              Tux Paint が応答する POSIX シグナルに関する情報。            </li>
-          </ul>
-        </li>
-
-        <li>
-          Development history and license:          <ul>
-            <li>
-              <a href="../../AUTHORS.txt">AUTHORS.txt</a><br>
-              作者と協力者のリスト.            </li>
-
-            <li>
-              <a href="../../CHANGES.txt">CHANGES.txt</a><br>
-              リリース毎の変更点の概要.            </li>
-
-            <li>
-              <a href="../../COPYING.txt">COPYING.txt</a><br>
-              Tux Paint's software license, the <cite>GNU General Public License</cite> (GPL)            </li>
-          </ul>
-        </li>
-      </ul>
-    </blockquote>
-
-    <hr size="2"
-        noshade>
-
-    <h1>
-      <a name="help"
-          id="help">お問い合わせ先</a>
-    </h1>
-
-    <blockquote>
-      <p>
-        お困りのことがある場合、Tux Paint の開発者や他のユーザーとコミュニケーションをとるための多くの方法があります。      </p>
-      <ul>
-        <li>バグを発見した場合や機能追加の要望については、プロジェクトの バグトラッキングシステムから報告できます</li>
-        <li>プロジェクトに関する様々なメーリングリストに参加できます</li>
-        <li>開発者へ直接連絡することもできます</li>
-      </ul>
-
-      <p>
-        もっとお知りになりたい場合、Tux Paint のウェブサイト の "連絡先" のページ (<a href="http://tuxpaint.org/contact/">http://tuxpaint.org/contact/</a>) をごらん下さい      </p>
-    </blockquote>
-
-    <hr size="2"
-        noshade>
-
-    <h1>
-      <a name="participate"
-          id="participate">プロジェクトへの参加</a>
-    </h1>
-
-    <blockquote>
-      <p>
-        タックスペイントはボランティア主導のプロジェクトであり、様々な形でのご協力を受け付けています。      </p>
-
-      <ul>
-        <li>Tux Paint の翻訳の作成</li>
-        <li>既存の翻訳の改善</li>
-        <li>アートワークの作成 (スタンプ、背景画像、ペイントブラシなど)</li>
-        <li>機能の追加や改良、「まほう」ツールの作成</li>
-        <li>学習教材の作成</li>
-        <li>宣伝や、他の Tux Paint ユーザーのサポート</li>
-      </ul>
-
-      <p>
-        もっとお知りになりたい場合、Tux Paint のウェブサイト の "私たちにご協力を" のページ (<a href="http://tuxpaint.org/help/">http://tuxpaint.org/help/</a>) をごらん下さい      </p>
-    </blockquote>
+      </section>
+    </footer>
   </body>
 </html>

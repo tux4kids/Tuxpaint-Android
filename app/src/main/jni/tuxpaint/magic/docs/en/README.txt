@@ -1,9 +1,9 @@
                      Creating Tux Paint Magic Tool Plugins
 
-          Copyright 2007-2021 by various contributors; see AUTHORS.txt
-                            http://www.tuxpaint.org/
+          Copyright 2007-2022 by various contributors; see AUTHORS.txt
+                             https://tuxpaint.org/
 
-                       July 5, 2007 - September 21, 2021
+                        July 5, 2007 - January 20, 2022
 
      ----------------------------------------------------------------------
 
@@ -966,12 +966,12 @@ Example Code
 Getting Help
 
      For more information, check the Tux Paint website:
-     http://www.tuxpaint.org/, and the Simple DirectMedia Layer library
-     website: http://www.libsdl.org/.
+     https://tuxpaint.org/, and the Simple DirectMedia Layer library website:
+     http://www.libsdl.org/.
 
      Additionally, other Tux Paint developers and users can be found on the
      "tuxpaint-devel" and "tuxpaint-users" mailing lists:
-     http://www.tuxpaint.org/lists/.
+     https://tuxpaint.org/lists/.
 
      ----------------------------------------------------------------------
 

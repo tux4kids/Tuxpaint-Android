@@ -1,5 +1,5 @@
-#define DEBUG
-#define VERBOSE
+//#define DEBUG
+//#define VERBOSE
 
 /*
 * Enable verbose logging if requested on platforms that support it.

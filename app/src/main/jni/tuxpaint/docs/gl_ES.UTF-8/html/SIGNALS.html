@@ -5,71 +5,143 @@
       Documentación de sinais de Tux Paint    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
         link="#0000FF"
         vlink="#FF0000"
         alink="#FF00FF">
-    <center>
-      <h1>
-        <img src="../../html/images/tuxpaint-title.png"
-            width="205"
-            height="210"
-            alt="Tux Paint"><br>
-        versión 0.9.28<br/>
-        Documentación de sinais      </h1>
+    <section class="outer">
+      <center>
+        <header>
+          <h1>
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            versión 0.9.28<br/>
+            Documentación de sinais          </h1>
 
+          <p>
+            Copyright &copy; 2019-2022 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+    
+          <p>
+             4 de Xuño de 2022          </p>
+        </header>
+      </center>
+    </section>
+
+    <section>
       <p>
-        Copyright &copy; 2019-2021 por varios colaboradores; vexa AUTHORS (AUTORES).<br>
-        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
-      </p>
-
-      <p>
-         9 de Marzo de 2021      </p>
-    </center>
-
-    <hr>
-
-    <p>
-      Tux Paint responde aos seguintes sinais (que poden enviarse ao proceso do programa a través de «<code>kill</code>» ou «<code>killall</code>», por exemplo).    </p>
-
-    <dl>
-      <dt>
-        <code>SIGTERM</code>
-        (tamén, <b><code>[Ctrl]</code></b> + <b><code>[C]</code></b> dende un terminal executando «<code>tuxpaint</code>»)      </dt>
-
-      <dd>
-        <p>
-          Tux Paint responde coma se se premese o botón «Saír» ou se lle dixera ao contorno de escritorio que peche Tux Paint (por exemplo, premendo nun botón de peche da xanela ou premendo <b><code>[Alt]</code></b> + <b><code>[F4]</code></b> na maioría dos sistemas).        </p>
-
-        <p>
-          Dende a interface principal, Tux Paint preguntará se quere ou non saír e (a non ser que sexa anulado pol a opción de gardado automático, p. ex.: «<code>--autosave</code>x) se quere gardar o debuxo actual (se non está gardado) , e se é así, e é unha versión modificada dun debuxo existente (a non ser que sexa anulado polas opcións de gardar sobre imaxes antigas ou gardar sempre imaxes novas; por exemplo, «<code>--saveover</code>« e «<code>--saveovernew</code>», respectivamente), se quere ou non sobreescribir o debuxo existente ou gardalo nun novo ficheiro.        </p>
-
-        <p>
-          <b>Nota:</b> Dende outras partes da interface, o sinal interprétase actualmente como unha solicitude de retroceso (por exemplo, dende o diálogo «Novo» de volta á interface principal), coma se se premera un botón «Atrás» en Tux Paint ou se premera a tecla <b><code>[Esc]</code></b>.        </p>
-
-        <p>
-          Exemplo: <code>killall tuxpaint</code>        </p>
-      </dd>
-
-      <dt>
-        <code>SIGUSR1</code> &amp; <code>SIGUSR2</code>
-      </dt>
-
-      <dd>
-        <p>
-          Tux Paint responde axustando a súa opción de gardar automaticamente (coma se fora publicada con «<code>--autosave</code>»), así como a opción de gardar sempre novas imaxes (coma se se publicase con «<code>--saveovernew</code>») no caso de recibir un sinal de <code>SIGUSR1</code> ou de gardar sempre sobre a imaxe existente (coma se se publicase con «<code>--saveover</code>») no caso de recibir <code>SIGUSR2</code>. Entón Tux Paint envíase a sí mesmo un sinal de <code>SIGTERM</code>, nun intento de saír. (Ver arriba.)        </p>
-
-        <p>
-          Así, dende a interface principal, Tux Paint debería saír case de inmediato, sen facer preguntas.        </p>
-
-        <p>
-          <b>Nota:</b> Dende outras partes da interface, por desgraza, Tux Paint retrocederá un nivel na interface. Polo tanto, neste momento pode que sexa necesario enviar este sinal a Tux Paint unhas cantas veces para que saia completamente.        </p>
-
-        <p>
-          Exemplo: <code>killall -s SIGUSR1 tuxpaint</code>        </p>
-      </dd>
-    </dl>
+        Tux Paint responde aos seguintes sinais (que poden enviarse ao proceso do programa a través de «<code>kill</code>» ou «<code>killall</code>», por exemplo).      </p>
+  
+      <dl>
+        <dt>
+          <code>SIGTERM</code>
+          (tamén, <b><code>[Control]</code></b> + <b><code>[C]</code></b> dende un terminal executando «<code>tuxpaint</code>»)        </dt>
+  
+        <dd>
+          <p>
+            Tux Paint responde coma se se premese o botón «Saír» ou se lle dixera ao contorno de escritorio que peche Tux Paint (por exemplo, premendo nun botón de peche da xanela ou premendo <b><code>[Alt]</code></b> + <b><code>[F4]</code></b> na maioría dos sistemas).          </p>
+  
+          <p>
+            Dende a interface principal, Tux Paint preguntará se quere ou non saír e (a non ser que sexa anulado pol a opción de gardado automático, p. ex.: «<code>--autosave</code>x) se quere gardar o debuxo actual (se non está gardado) , e se é así, e é unha versión modificada dun debuxo existente (a non ser que sexa anulado polas opcións de gardar sobre imaxes antigas ou gardar sempre imaxes novas; por exemplo, «<code>--saveover</code>« e «<code>--saveovernew</code>», respectivamente), se quere ou non sobreescribir o debuxo existente ou gardalo nun novo ficheiro.          </p>
+  
+          <p>
+            Exemplo: <code>killall tuxpaint</code>          </p>
+  
+          <p class="note">
+            <span title="Information">&#128161;</span>            <strong>Note:</strong> From other parts of the interface, the signal is currently interpreted as a request to go back (e.g., from the "New" dialog back to the main interface), as if a "Back" button in Tux Paint were clicked, or the <b><code>[Esc]</code></b> was key pressed.          </p>
+        </dd>
+  
+        <dt>
+          <code>SIGUSR1</code> &amp; <code>SIGUSR2</code>
+        </dt>
+  
+        <dd>
+          <p>
+            Tux Paint responde axustando a súa opción de gardar automaticamente (coma se fora publicada con «<code>--autosave</code>»), así como a opción de gardar sempre novas imaxes (coma se se publicase con «<code>--saveovernew</code>») no caso de recibir un sinal de <code>SIGUSR1</code> ou de gardar sempre sobre a imaxe existente (coma se se publicase con «<code>--saveover</code>») no caso de recibir <code>SIGUSR2</code>. Entón Tux Paint envíase a sí mesmo un sinal de <code>SIGTERM</code>, nun intento de saír. (Ver arriba.)          </p>
+  
+          <p>
+            Así, dende a interface principal, Tux Paint debería saír case de inmediato, sen facer preguntas.          </p>
+  
+          <p>
+            Exemplo: <code>killall -s SIGUSR1 tuxpaint</code>          </p>
+  
+          <p class="note">
+            <span title="Information">&#128161;</span>            <strong>Note:</strong> From other parts of the interface, unfortunately, Tux Paint will go back one level in the interface.  Therefore, at this time, it may be necessary to send this signal to Tux Paint a few times, for it to quit completely.          </p>
+        </dd>
+      </dl>
+    </section>
   </body>
 </html>

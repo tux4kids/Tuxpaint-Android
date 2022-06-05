@@ -21,5 +21,5 @@ Difference between original are,
      bug) are removed.
   b) All Kanji data not used in TuxPaint are removed.
 
-Contributed by TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+Contributed by TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 

@@ -6,7 +6,7 @@
   (for non-Windows, non-BeOS platforms, e.g. Linux and macOS)
   (moved from tuxpaint.c in 0.9.17)
 
-  Copyright (c) 2009 by Bill Kendrick and others
+  Copyright (c) 2022 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -36,7 +36,7 @@
     implied warranty.
 
 
-  June 24, 2007 - January 29, 2009
+  June 24, 2007 - April 29, 2022
   $Id$
 */
 
@@ -101,8 +101,6 @@ int do_ps_save(FILE * fi,
 
 
   /* Determine paper size: */
-
-  paperinit();                  // FIXME: Should we do this at startup? -bjk 2007.06.25
 
   if (pprsize == NULL)
     {

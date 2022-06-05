@@ -5,113 +5,206 @@
       Documentación PNG de Tux Paint    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
         link="#0000FF"
         vlink="#FF0000"
         alink="#FF00FF">
-    <center>
-      <h1>
-        <img src="../../html/images/tuxpaint-title.png"
-            width="205"
-            height="210"
-            alt="Tux Paint"><br>
-        versión 0.9.28<br/>
-        Documentación PNG      </h1>
+    <section class="outer">
+      <header>
+        <center>
+          <h1>
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            versión 0.9.28<br/>
+            Documentación PNG          </h1>
+    
+          <p>
+            Copyright &copy; 2007-2022 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+    
+          <p>
+             4 de Xuño de 2022          </p>
+        </center>
+      </header>
+    </section>
+
+    <section class="indent">
+      <header>
+        <h1>Sobre os PNG</h1>
+      </header>
 
       <p>
-        Copyright &copy; 2007-2021 por varios colaboradores; vexa AUTHORS (AUTORES).<br>
-        <a href="http://www.tuxpaint.org/">http://www.tuxpaint.org/</a>
-      </p>
-
-      <p>
-         9 de Marzo de 2021      </p>
-    </center>
-
-    <hr>
-
-    <h2>Sobre os PNG</h2>
-
-    <p>
-      PNG é o formato de Gráficos de Rede Portátiles. É un estándar aberto, non lastrado polas patentes (como os GIF). É un formato moi comprimido (aínda que non é «con perda» como os JPEG: a perda permite que os ficheiros sexan moito máis pequenos, mais introduce «erros» na imaxe cando se gardan) e admite cores de 24 bits (16,7 millóns de cores), así como unha «canle alfa» completo, é dicir, cada píxel pode ter un grao de transparencia variábel.    </p>
-
-    <p>
-      Para obter máis información, visite:<a href="http://www.libpng.org/">http://www.libpng.org/</a>    </p>
-
-    <p>
-      Estas características (apertura, perda, compresión, transparencia/alfa) convérteno na mellor opción para Tux Paint. (A compatibilidade de Tux Paint co formato PNG procede da biblioteca de código aberto SDL_Image, que á súa vez a obtén da biblioteca libPNG.)    </p>
-
-    <p>
-      A compatibilidade con moitas cores permite utilizar imaxes de «selo de caucho» de calidade fotográfica en Tux Paint e a transparencia alfa permite pinceis de alta calidade.    </p>
-
-    <h2>Como facer imaxes PNG</h2>
+        PNG é o formato de Gráficos de Rede Portátiles. É un estándar aberto, non lastrado polas patentes (como os GIF). É un formato moi comprimido (aínda que non é «con perda» como os JPEG: a perda permite que os ficheiros sexan moito máis pequenos, mais introduce «erros» na imaxe cando se gardan) e admite cores de 24 bits (16,7 millóns de cores), así como unha «canle alfa» completo, é dicir, cada píxel pode ter un grao de transparencia variábel.      </p>
   
-    <p>A continuación amosarase unha lista moi <em>breve</em> de xeitos de crear PNG ou converter as imaxes existentes a PNG.
-    <h3>GIMP &amp; Krita</h3>
-    <p>
-      GIMP e Krita son dúas excelentes ferramentas coas que crear imaxes PNG para usar en Tux Paint , ambos son programas de debuxo interactivo e edición de fotos de código aberto de alta calidade.    </p>
+      <p>
+        Para obter máis información, visite:<a href="http://www.libpng.org/">http://www.libpng.org/</a>      </p>
+  
+      <p>
+        Estas características (apertura, perda, compresión, transparencia/alfa) convérteno na mellor opción para Tux Paint. (A compatibilidade de Tux Paint co formato PNG procede da biblioteca de código aberto SDL_Image, que á súa vez a obtén da biblioteca libPNG.)      </p>
+  
+      <p>
+        A compatibilidade con moitas cores permite utilizar imaxes de «selo de caucho» de calidade fotográfica en Tux Paint e a transparencia alfa permite pinceis de alta calidade.      </p>
+    </section>
 
-    <p>
-      É probábel que un ou ambos xa estean instalados no seu sistema. Se non, deberían estar dispoñíbeis no repositorio de software da súa distribución Linux. Se non é así, ou para obter máis información, visite <a href="http://www.gimp.org/">http://www.gimp.org/</a> e <a href="http://www.krita.org/">http://www.krita.org/</a> respectivamente.    </p>
-
-    <h3>Ferramentas da liña de ordes</h3>
-
-    <h4>NetPBM</h4>
-    <p>
-      As ferramentas de Mapas de bits Portátil –Portable Bitmap– (coñecidas colectivamente como «NetPBM») son unha colección de ferramentas de liña de ordes de código aberto que converten a e dende varios formatos, incluíndo GIF, TIFF, BMP, PNG e moitos máis.     </p>
-
-    <p>
-      É posíbel que xa estea instalado no seu sistema. Se non, estarán dispoñíbeis no repositorio de software da súa distribución Linux. Se non é así, ou para saber máis, visite <a href="http://netpbm.sourceforge.net/">http://netpbm.sourceforge.net/</a>.    </p>
-
-    <h4>cjpeg/djpeg</h4>
-    <p>
-      Os programas de liña de ordes «cjpeg» e «djpeg» converten entre o formato NetPBM Calquera mapa portátil –Portable Any Map– (PNM) e os JPEG.
-      É posíbel que xa estea instalado no seu sistema. Se non, estarán dispoñíbeis no repositorio de software da súa distribución Linux. Se non é así, ou para saber máis, visite <a href="https://jpegclub.org/">https://jpegclub.org/</a>.    </p>
-
-    <h3>Usuarios de Windows</h3>
-    <ul>
-      <li>  <cite>CorelDRAW</cite>
+    <section class="indent">
+      <header>
+        <h2>Como facer imaxes PNG</h2>
+      </header>
+  
+      <p>A continuación amosarase unha lista moi <em>breve</em> de xeitos de crear PNG ou converter as imaxes existentes a PNG.  
+      <dl>
+        <dt>GIMP &amp; Krita</dt>
+        <dd>
+          <p>
+            GIMP e Krita son dúas excelentes ferramentas coas que crear imaxes PNG para usar en Tux Paint , ambos son programas de debuxo interactivo e edición de fotos de código aberto de alta calidade.          </p>
+      
+          <p>
+            É probábel que un ou ambos xa estean instalados no seu sistema. Se non, deberían estar dispoñíbeis no repositorio de software da súa distribución Linux. Se non é así, ou para obter máis información, visite <a href="http://www.gimp.org/">http://www.gimp.org/</a> e <a href="http://www.krita.org/">http://www.krita.org/</a> respectivamente.          </p>
+        </dd>
+  
+        <dt>Ferramentas da liña de ordes</dt>
+        <dd>
+          <dl>
+            <dt>NetPBM</dt>
+            <dd>
+              <p>
+                As ferramentas de Mapas de bits Portátil –Portable Bitmap– (coñecidas colectivamente como «NetPBM») son unha colección de ferramentas de liña de ordes de código aberto que converten a e dende varios formatos, incluíndo GIF, TIFF, BMP, PNG e moitos máis.               </p>
+          
+              <p>
+                É posíbel que xa estea instalado no seu sistema. Se non, estarán dispoñíbeis no repositorio de software da súa distribución Linux. Se non é así, ou para saber máis, visite <a href="http://netpbm.sourceforge.net/">http://netpbm.sourceforge.net/</a>.              </p>
+            </dd>
+        
+            <dt>cjpeg/djpeg</dt>
+            <dd>
+              <p>
+                Os programas de liña de ordes «cjpeg» e «djpeg» converten entre o formato NetPBM Calquera mapa portátil –Portable Any Map– (PNM) e os JPEG.          
+                É posíbel que xa estea instalado no seu sistema. Se non, estarán dispoñíbeis no repositorio de software da súa distribución Linux. Se non é así, ou para saber máis, visite <a href="https://jpegclub.org/">https://jpegclub.org/</a>.              </p>
+            </dd>
+          </dl>
+        </dd>
+  
+        <dt>Proprietary Software for Windows</dt>
+        <dd>
+          <ul>
+            <li>  <cite>CorelDRAW</cite>
   (Corel)
   &mdash;
   <a href="http://www.corel.com/">http://www.corel.com/</a>
-        <li>  <cite>Illustrator</cite>
+              <li>  <cite>Illustrator</cite>
   (Adobe)
   &mdash;
   <a href="http://www.adobe.com/products/illustrator.html">http://www.adobe.com/products/illustrator.html</a>
-        <li>  <cite>Paint Shop Pro</cite>
+              <li>  <cite>Paint Shop Pro</cite>
   (Corel)
   &mdash;
   <a href="https://www.paintshoppro.com/">https://www.paintshoppro.com/</a>
-        <li>  <cite>Photoshop</cite>
+              <li>  <cite>Photoshop</cite>
   (Adobe)
   &mdash;
   <a href="http://www.adobe.com/products/photoshop.html">http://www.adobe.com/products/photoshop.html</a>
-        <li>  <cite>PIXresizer</cite>
+              <li>  <cite>PIXresizer</cite>
   (Bluefive software)
   &mdash;
   <a href="http://bluefive.pair.com/pixresizer.htm">http://bluefive.pair.com/pixresizer.htm</a>
-      </ul>
-
-    <h3>Usuarios de Macintosh</h3>
-    <ul>
-      <li>  <cite>CorelDRAW</cite>
+            </ul>
+        </dd>
+  
+        <dt>Usuarios de Macintosh</dt>
+        <dd>
+          <ul>
+            <li>  <cite>CorelDRAW</cite>
   (Corel)
   &mdash;
   <a href="http://www.corel.com/">http://www.corel.com/</a>
-        <li>  <cite>GraphicConverter</cite>
+              <li>  <cite>GraphicConverter</cite>
   (Lemke Software)
   &mdash;
   <a href="https://www.lemkesoft.de/mac-fotobearbeitung-mac-diashow-mac-grafikprogramm-mac-bildbetrachter/">https://www.lemkesoft.de/mac-fotobearbeitung-mac-diashow-mac-grafikprogramm-mac-bildbetrachter/</a>
-        <li>  <cite>Illustrator</cite>
+              <li>  <cite>Illustrator</cite>
   (Adobe)
   &mdash;
   <a href="http://www.adobe.com/products/illustrator.html">http://www.adobe.com/products/illustrator.html</a>
-        <li>  <cite>Photoshop</cite>
+              <li>  <cite>Photoshop</cite>
   (Adobe)
   &mdash;
   <a href="http://www.adobe.com/products/photoshop.html">http://www.adobe.com/products/photoshop.html</a>
-      </ul>
+            </ul>
+        </dd>
+      </dl>
+    </section>
   </body>
 </html>
 

@@ -6,7 +6,7 @@
 # if successful
 #
 # for Tux Paint
-# by TOYAMA Shin-ichi <shin1@wmail.plala.or.jp>
+# by TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by

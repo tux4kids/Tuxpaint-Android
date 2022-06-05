@@ -14,6 +14,7 @@ struct cfginfo
   const char *colorfile;
   const char *datadir;
   const char *disable_label;
+  const char *disable_brushspacing;
   const char *disable_magic_controls;
   const char *disable_shape_controls;
   const char *disable_print;
@@ -47,6 +48,7 @@ struct cfginfo
   const char *colors_rows;
   const char *print_delay;
   const char *printcommand;
+  const char *reversesort;
 //  const char *promptless_save;
   const char *_promptless_save_over;
   const char *_promptless_save_over_new;

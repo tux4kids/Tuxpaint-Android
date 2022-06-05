@@ -2,7 +2,7 @@
   im.c
 
   Input method handling
-  Copyright (c) 2007-2019 by Mark K. Kim and others
+  Copyright (c) 2007-2022 by Mark K. Kim and others
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -455,6 +455,7 @@ static int sm_add(STATE_MACHINE * sm, char *seq, const wchar_t * unicode, char f
           return 1;
         }
       sm_init(next->state);
+      sm_found = next->state;
 
       /* Increase store for next time, if necessary */
       if (++(sm->next_size) >= sm->next_maxsize)
@@ -465,8 +466,6 @@ static int sm_add(STATE_MACHINE * sm, char *seq, const wchar_t * unicode, char f
               return 1;
             }
         }
-
-      sm_found = next->state;
     }
 
   /* Recurse */
@@ -756,7 +755,9 @@ static int im_event_c(IM_DATA * im, SDL_Event event)
     }
 
   //im->s[1] = L'\0';
+#ifdef IM_DEBUG
   printf("im->s %ls, event.text.text %s\n", im->s, event.text.text);
+#endif
   im->buf[0] = L'\0';
 
   return 0;

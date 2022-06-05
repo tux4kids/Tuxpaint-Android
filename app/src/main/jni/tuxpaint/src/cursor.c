@@ -4,7 +4,7 @@
   For Tux Paint
   Bitmapped mouse pointer (cursor)
 
-  Copyright (c) 2002-2007 by Bill Kendrick and others
+  Copyright (c) 2002-2022 by Bill Kendrick and others
   bill@newbreedsoftware.com
   http://www.tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - May 15, 2007
+  June 14, 2002 - February 5, 2022
   $Id$
 */
 
@@ -34,7 +34,8 @@
 
 SDL_Cursor *cursor_hand, *cursor_arrow, *cursor_watch,
   *cursor_up, *cursor_down, *cursor_tiny, *cursor_crosshair,
-  *cursor_brush, *cursor_wand, *cursor_insertion, *cursor_rotate;
+  *cursor_brush, *cursor_wand, *cursor_insertion, *cursor_rotate,
+  *cursor_pipette;
 
 #ifdef NOKIA_770
 int hide_cursor = 1;
@@ -81,6 +82,8 @@ void do_setcursor(SDL_Cursor * c)
   UNUSED(tiny_mask_bits);
   UNUSED(arrow_bits);
   UNUSED(arrow_mask_bits);
+  UNUSED(pipette_bits);
+  UNUSED(pipette_mask_bits);
 
   if (!hide_cursor && !no_fancy_cursors)
     SDL_SetCursor(c);

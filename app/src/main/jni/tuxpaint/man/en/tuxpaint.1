@@ -1,5 +1,5 @@
-.\" tuxpaint.1 - 2021.11.25
-.TH TUXPAINT 1 "November 25, 2021" "0.9.28" "Tux Paint"
+.\" tuxpaint.1 - 2022.06.04
+.TH TUXPAINT 1 "June  4, 2022" "0.9.28" "Tux Paint"
 .SH NAME
 tuxpaint -- "Tux Paint", a drawing program for young children.
 
@@ -70,6 +70,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-noshapecontrols]
 .br
 [\-\-nolabel]
+.br
+[\-\-nobrushspacing]
 .br
 [\-\-newcolorslast]
 .br
@@ -155,6 +157,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 .br
 [\-\-autosave]
 .br
+[\-\-reversesort]
+.br
 [\-\-colorfile \fIFILE\fP]
 
 .TP 9
@@ -213,6 +217,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 .br
 [\-\-label]
 .br
+[\-\-brushspacing]
+.br
 [\-\-newcolorsfirst]
 .br
 [\-\-dontmirrorstamps]
@@ -230,6 +236,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-save]
 .br
 [\-\-noautosave]
+.br
+[\-\-noreversesort]
 .br
 
 .TP 9
@@ -418,6 +426,11 @@ initially clicked.
 .B \-\-nolabel \-\-label
 Disable or enable (default) the Label tool, which lets you create text
 which can be altered or moved later.
+
+.TP 8
+.B \-\-nobrushspacing \-\-brushspacing
+Disable or enable (default) the brush spacing option of the Paint and Lines
+tools, which allows you to override the default spacing of a brush.
 
 .SH OPTIONS - CONTROLLING TUX PAINT
 .l
@@ -688,6 +701,12 @@ test environment.
 .B \-\-autosave \-\-noautosave
 The --autosave option prevents Tux Paint from asking whether you want to
 save the current picture when quitting, and assumes you do.
+
+.TP 8
+.B \-\-reversesort \-\-noautosave
+The --reversesort option causes Tux Paint's Open and Slideshow dialogs to
+display the oldest images at the top of the list (normally the newest
+appear at the top, and the oldest at the bottom.
 
 .SH OPTIONS - DATA FILES
 .l
@@ -1272,7 +1291,7 @@ See the documentation that comes with Tux Paint for further instructions on usin
 
 The canonical place to find Tux Paint information is at
 .nh
-http://www.tuxpaint.org/.
+https://tuxpaint.org/.
 .hy
 
 .SH AUTHORS

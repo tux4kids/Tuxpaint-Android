@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-25 01:12-0800\n"
+"POT-Creation-Date: 2022-06-02 21:16-0700\n"
 "PO-Revision-Date: 2021-09-02 07:45+0000\n"
 "Last-Translator: kiolalis <kiolalis@gmail.com>\n"
 "Language-Team: \n"
@@ -278,67 +278,118 @@ msgstr "Ταϋλανδέζικα"
 msgid "ZH_TW"
 msgstr "Κινέζικα"
 
+#. Add menu items
+#: ../macos.m:56
+#, fuzzy
+#| msgid "Tux Paint"
+msgid "About Tux Paint"
+msgstr "Tux Paint"
+
+#: ../macos.m:61
+#, fuzzy
+#| msgid "Tux Paint"
+msgid "Hide Tux Paint"
+msgstr "Tux Paint"
+
+#: ../macos.m:64
+msgid "Hide Others"
+msgstr ""
+
+#: ../macos.m:67
+msgid "Show All"
+msgstr ""
+
+#: ../macos.m:71
+#, fuzzy
+#| msgid "Tux Paint"
+msgid "Quit Tux Paint"
+msgstr "Tux Paint"
+
+#. Put menu into the menubar
+#: ../macos.m:101 ../macos.m:109
+msgid "Window"
+msgstr ""
+
+#. "Minimize" item
+#: ../macos.m:104
+msgid "Minimize"
+msgstr ""
+
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:238 ../shapes.h:239
+#: ../shapes.h:266 ../shapes.h:267
 msgid "Square"
 msgstr "Τετράγωνο"
 
 #. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:242 ../shapes.h:243
+#: ../shapes.h:270 ../shapes.h:271
 msgid "Rectangle"
 msgstr "Ορθογώνιο"
 
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:246 ../shapes.h:247
+#: ../shapes.h:274 ../shapes.h:275
 msgid "Circle"
 msgstr "Κύκλος"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:250 ../shapes.h:251
+#: ../shapes.h:278 ../shapes.h:279
 msgid "Ellipse"
 msgstr "Έλλειψη"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:254 ../shapes.h:255
+#: ../shapes.h:282 ../shapes.h:283
 msgid "Triangle"
 msgstr "Τρίγωνο"
 
-#. Pentagone shape tool (5 sides)
-#: ../shapes.h:258 ../shapes.h:259
+#. Pentagon shape tool (5 sides)
+#: ../shapes.h:286 ../shapes.h:287
 msgid "Pentagon"
 msgstr "Πεντάγωνο"
 
-#. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:262 ../shapes.h:263
-msgid "Rhombus"
-msgstr "Ρόμβος"
+#. Hexagon shape tool (6 sides)
+#: ../shapes.h:290 ../shapes.h:291
+#, fuzzy
+#| msgid "Hexagon Mosaic"
+msgid "Hexagon"
+msgstr "Εξαγωνικό μωσαϊκό"
+
+#. Heptagon (aka septagon) shape tool (7 sides)
+#: ../shapes.h:294 ../shapes.h:295
+#, fuzzy
+#| msgid "Hexagon Mosaic"
+msgid "Heptagon"
+msgstr "Εξαγωνικό μωσαϊκό"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:266 ../shapes.h:267
+#: ../shapes.h:298 ../shapes.h:299
 msgid "Octagon"
 msgstr "Οκτάγωνο"
+
+#. Rhombus shape tool (4 sides, not at right angles)
+#: ../shapes.h:302 ../shapes.h:303
+msgid "Rhombus"
+msgstr "Ρόμβος"
 
 #. Triangle star (3 points star)
 #. Rhombus star (4 points star)
 #. Pentagone star (5 points star)
-#: ../shapes.h:270 ../shapes.h:273 ../shapes.h:276 ../shapes.h:279
-#: ../shapes.h:282 ../shapes.h:285
+#: ../shapes.h:306 ../shapes.h:309 ../shapes.h:312 ../shapes.h:315
+#: ../shapes.h:318 ../shapes.h:321
 msgid "Star"
 msgstr "Αστέρι"
 
 #. Description of a square
-#: ../shapes.h:293 ../shapes.h:294
+#: ../shapes.h:329 ../shapes.h:330
 msgid "A square is a rectangle with four equal sides."
 msgstr "Το τετράγωνο είναι ορθογώνιο με τις τέσσερις πλευρές ίσες."
 
 #. Description of a rectangle
-#: ../shapes.h:297 ../shapes.h:298
+#: ../shapes.h:333 ../shapes.h:334
 msgid "A rectangle has four sides and four right angles."
 msgstr ""
 "Το ορθογώνιο παραλληλόγραμμο έχει τέσσερις πλευρές και τέσσερις ορθές γωνίες."
 
 #. Description of a circle
-#: ../shapes.h:301 ../shapes.h:302
+#: ../shapes.h:337 ../shapes.h:338
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr ""
@@ -346,45 +397,59 @@ msgstr ""
 "από το κέντρο."
 
 #. Description of an ellipse
-#: ../shapes.h:305 ../shapes.h:306
+#: ../shapes.h:341 ../shapes.h:342
 msgid "An ellipse is a stretched circle."
 msgstr "Η έλλειψη είναι ένας τεντωμένος κύκλος."
 
 #. Description of a triangle
-#: ../shapes.h:309 ../shapes.h:310
+#: ../shapes.h:345 ../shapes.h:346
 msgid "A triangle has three sides."
 msgstr "Το τρίγωνο έχει τρεις πλευρές."
 
 #. Description of a pentagon
-#: ../shapes.h:313 ../shapes.h:314
+#: ../shapes.h:349 ../shapes.h:350
 msgid "A pentagon has five sides."
 msgstr "Το πεντάγωνο έχει πέντε πλευρές."
 
+#. Description of a hexagon
+#: ../shapes.h:353 ../shapes.h:354
+#, fuzzy
+#| msgid "A pentagon has five sides."
+msgid "A hexagon has six sides."
+msgstr "Το πεντάγωνο έχει πέντε πλευρές."
+
+#. Description of a heptagon
+#: ../shapes.h:357 ../shapes.h:358
+#, fuzzy
+#| msgid "A pentagon has five sides."
+msgid "A heptagon has seven sides."
+msgstr "Το πεντάγωνο έχει πέντε πλευρές."
+
+#. Description of an octagon
+#: ../shapes.h:361 ../shapes.h:362
+msgid "An octagon has eight equal sides."
+msgstr "Ένα κανονικό οκτάγωνο έχει οκτώ ίσες πλευρές."
+
 #. Description of a rhombus
-#: ../shapes.h:317 ../shapes.h:318
+#: ../shapes.h:365 ../shapes.h:366
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr ""
 "Ένας ρόμβος έχει τέσσερις ίσες πλευρές και οι απέναντι πλευρές είναι "
 "παράλληλες."
 
-#. Description of an octagon
-#: ../shapes.h:321 ../shapes.h:322
-msgid "An octagon has eight equal sides."
-msgstr "Ένα κανονικό οκτάγωνο έχει οκτώ ίσες πλευρές."
-
-#: ../shapes.h:324 ../shapes.h:325
+#: ../shapes.h:368 ../shapes.h:369
 msgid "A star with 3 points."
 msgstr "Αστέρι με 3 βαθμούς."
 
-#: ../shapes.h:326 ../shapes.h:327
+#: ../shapes.h:370 ../shapes.h:371
 msgid "A star with 4 points."
 msgstr "Αστέρι με 4 βαθμούς."
 
-#: ../shapes.h:328 ../shapes.h:329
+#: ../shapes.h:372 ../shapes.h:373
 msgid "A star with 5 points."
 msgstr "Αστέρι με 5 βαθμούς."
 
-#: ../shapes.h:385
+#: ../shapes.h:433
 #, fuzzy
 #| msgid ""
 #| "Pick a shape. Click to pick the center, drag, then let go when it is the "
@@ -398,7 +463,7 @@ msgstr ""
 "Κίνησε το ποντίκι γύρω για να περιστρέψεις το σχήμα και κάνε κλικ για να "
 "ζωγραφιστεί."
 
-#: ../shapes.h:386
+#: ../shapes.h:434
 #, fuzzy
 #| msgid ""
 #| "Pick a shape. Click to pick the center, drag, then let go when it is the "
@@ -412,11 +477,11 @@ msgstr ""
 "Κίνησε το ποντίκι γύρω για να περιστρέψεις το σχήμα και κάνε κλικ για να "
 "ζωγραφιστεί."
 
-#: ../shapes.h:392
+#: ../shapes.h:440
 msgid "Draw shapes from the center."
 msgstr ""
 
-#: ../shapes.h:393
+#: ../shapes.h:441
 msgid "Draw shapes from a corner."
 msgstr ""
 
@@ -522,7 +587,7 @@ msgstr "Νέο"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:8438
+#: ../tools.h:98 ../tuxpaint.c:8787
 msgid "Open"
 msgstr "Άνοιγμα"
 
@@ -568,11 +633,17 @@ msgstr ""
 "Πάτησε [Enter] ή [Tab] για να ολοκληρώσεις το κείμενο."
 
 #: ../tools.h:132
+#, fuzzy
+#| msgid ""
+#| "Choose a style of text. Click on your drawing and you can start typing. "
+#| "Press [Enter] or [Tab] to complete the text. By using the selector button "
+#| "and clicking an existing label, you can move it, edit it and change its "
+#| "text style."
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
-"and clicking an existing label, you can move it, edit it and change its text "
-"style."
+"and clicking an existing label, you can move it, edit it, and change its "
+"text style."
 msgstr ""
 "Διάλεξε στυλ κειμένου. Κάνε κλικ στη ζωγραφιά σου και άρχισε να γράφεις. "
 "Πάτησε [Enter] ή [Tab] για να ολοκληρώσεις το κείμενο. Χρησιμοποιώντας το "
@@ -633,7 +704,7 @@ msgstr "Άφησε το πλήκτρο του ποντικιού για να ο�
 #, fuzzy, c-format
 #| msgid "Let go of the button to complete the line."
 msgid ""
-"Let go of the button to complete the line. (Your line's angle is %.0f "
+"Let go of the button to complete the line. (Your line’s angle is %.0f "
 "degrees.)"
 msgstr "Άφησε το πλήκτρο του ποντικιού για να ολοκληρωθεί η γραμμή."
 
@@ -642,13 +713,20 @@ msgstr "Άφησε το πλήκτρο του ποντικιού για να ο�
 msgid "Hold the button to stretch the shape."
 msgstr "Κράτησε πατημένο το πλήκτρο του ποντικιού για να τεντώσεις το σχήμα."
 
+#: ../tools.h:171
+#, fuzzy, c-format
+#| msgid "Hold the button to stretch the shape."
+msgid ""
+"Hold the button to stretch the shape. (It has an aspect ratio of \"%.2g:1\".)"
+msgstr "Κράτησε πατημένο το πλήκτρο του ποντικιού για να τεντώσεις το σχήμα."
+
 #. Instruction while finishing Shape tool (after release, during rotation step before second click)
-#: ../tools.h:173
+#: ../tools.h:174
 msgid "Move the mouse to rotate the shape. Click to draw it."
 msgstr ""
 "Κίνησε το ποντίκι για να περιστρέψεις το σχήμα. Κάνε κλικ για να σχεδιαστεί."
 
-#: ../tools.h:174
+#: ../tools.h:175
 #, fuzzy, c-format
 #| msgid "Move the mouse to rotate the shape. Click to draw it."
 msgid ""
@@ -658,234 +736,387 @@ msgstr ""
 "Κίνησε το ποντίκι για να περιστρέψεις το σχήμα. Κάνε κλικ για να σχεδιαστεί."
 
 #. Notification that 'New' action was aborted (current image would have been lost)
-#: ../tools.h:177
+#: ../tools.h:178
 msgid "OK then… Let’s keep drawing this one!"
 msgstr "Εντάξει λοιπόν… Ας συνεχίσουμε τη σχεδίαση του ίδιου!"
 
+#. Instructions to show when the Label tool's selector mode is activated
+#: ../tools.h:181
+msgid ""
+"Clicking an existing label (or press [Tab] to cycle through them and [Enter] "
+"to choose). Then, you can move it, edit it, and change its text style."
+msgstr ""
+
+#. Instructions to show when a Label has been chosen with the selector
+#: ../tools.h:184
+msgid ""
+"Click in your picture if you wish to reposition this label, type to change "
+"the text, and use the options to change its text style. Press [Enter] or "
+"[Tab] when you're finished."
+msgstr ""
+
+#. Instructions to show when the Label tool's apply mode is activated
+#: ../tools.h:187
+msgid ""
+"Clicking an existing label (or press [Tab] to cycle through them and [Enter] "
+"to choose) to permanently apply the text to the canvas."
+msgstr ""
+
+#. Instructions to show when choosing brushes, depending on the brush's feature (if there are none, show_brush_tip() will show the current tool's tip)
+#: ../tools.h:190
+msgid "This brush is animated; its shape changes as you draw!"
+msgstr ""
+
+#: ../tools.h:191
+msgid "This brush changes depending on the angle."
+msgstr ""
+
+#: ../tools.h:192
+msgid ""
+"This brush changes depending on the angle, and is animated; its shape "
+"changes as you draw!"
+msgstr ""
+
+#: ../tools.h:194
+msgid "This brush's spacing is now 1 pixel!"
+msgstr ""
+
+#: ../tools.h:195
+#, c-format
+msgid ""
+"This brush's spacing is now about %1$d/%2$d the size of the brush shape."
+msgstr ""
+
+#: ../tools.h:196
+msgid "This brush's spacing is now about the size of the brush shape."
+msgstr ""
+
+#: ../tools.h:197
+#, c-format
+msgid "This brush's spacing is now about %d times as big as the brush shape."
+msgstr ""
+
+#: ../tools.h:198
+#, c-format
+msgid ""
+"This brush's spacing is now about %1$d %2$d/%3$d times as big as the brush "
+"shape."
+msgstr ""
+
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2234
+#: ../tuxpaint.c:2267
 msgid "Do you really want to quit?"
 msgstr "Σίγουρα θέλεις να βγεις από το πρόγραμμα;"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2237
+#: ../tuxpaint.c:2270
 msgid "Yes, I’m done!"
 msgstr "Ναι, τελείωσα!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2240 ../tuxpaint.c:2267
+#: ../tuxpaint.c:2273 ../tuxpaint.c:2300
 msgid "No, take me back!"
 msgstr "Όχι δεν έχω τελειώσει ακόμα!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2244
+#: ../tuxpaint.c:2277
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Αν βγεις από το πρόγραμμα, θα χαθεί η εικόνα σου! Να αποθηκευτεί;"
 
-#: ../tuxpaint.c:2245 ../tuxpaint.c:2250
+#: ../tuxpaint.c:2278 ../tuxpaint.c:2283
 msgid "Yes, save it!"
 msgstr "Ναι, αποθήκευσέ την!"
 
-#: ../tuxpaint.c:2246 ../tuxpaint.c:2251
+#: ../tuxpaint.c:2279 ../tuxpaint.c:2284
 msgid "No, don’t bother saving!"
 msgstr "Όχι, μην ασχοληθείς με την αποθήκευση!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2249
+#: ../tuxpaint.c:2282
 msgid "Save your picture first?"
 msgstr "Να αποθηκευτεί η εικόνα σου πρώτα;"
 
 #. Error opening picture
-#: ../tuxpaint.c:2254
+#: ../tuxpaint.c:2287
 msgid "Can’t open that picture!"
 msgstr "Δεν μπορώ να ανοίξω αυτή τη ζωγραφιά!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2257 ../tuxpaint.c:2262 ../tuxpaint.c:2271 ../tuxpaint.c:2278
-#: ../tuxpaint.c:2287 ../tuxpaint.c:2292
+#: ../tuxpaint.c:2290 ../tuxpaint.c:2295 ../tuxpaint.c:2304 ../tuxpaint.c:2311
+#: ../tuxpaint.c:2320 ../tuxpaint.c:2325
 msgid "OK"
 msgstr "Εντάξει"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2261
+#: ../tuxpaint.c:2294
 msgid "There are no saved files!"
 msgstr "Δεν υπάρχουν αποθηκευμένα αρχεία!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2265
+#: ../tuxpaint.c:2298
 msgid "Print your picture now?"
 msgstr "Να εκτυπώσω τη ζωγραφιά σου;"
 
-#: ../tuxpaint.c:2266
+#: ../tuxpaint.c:2299
 msgid "Yes, print it!"
 msgstr "Ναι, εκτύπωσέ την!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2270
+#: ../tuxpaint.c:2303
 msgid "Your picture has been printed!"
 msgstr "Η εικόνα σου εκτυπώθηκε!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2274
+#: ../tuxpaint.c:2307
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Λυπάμαι! Δεν ήταν δυνατή η εκτύπωση της ζωγραφιάς σου!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2277
+#: ../tuxpaint.c:2310
 msgid "You can’t print yet!"
 msgstr "Δεν μπορείς να εκτυπώσεις ακόμη!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2281
+#: ../tuxpaint.c:2314
 msgid "Erase this picture?"
 msgstr "Να διαγραψω αυτήν την εικόνα;"
 
-#: ../tuxpaint.c:2282
+#: ../tuxpaint.c:2315
 msgid "Yes, erase it!"
 msgstr "Ναι, διάγραψέ την!"
 
-#: ../tuxpaint.c:2283
+#: ../tuxpaint.c:2316
 msgid "No, don’t erase it!"
 msgstr "Όχι, μην τη διαγράφεις!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2286
+#: ../tuxpaint.c:2319
 msgid "Remember to use the left mouse button!"
 msgstr "Προσοχή, πρέπει να χρησιμοποιείς το αριστερό πλήκτρο του ποντικιού!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2290
+#: ../tuxpaint.c:2323
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "Η εικόνα σου εκτυπώθηκε!"
 
-#: ../tuxpaint.c:2291
+#: ../tuxpaint.c:2324
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "Η εικόνα σου εκτυπώθηκε!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2295
+#: ../tuxpaint.c:2328
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "Λυπάμαι! Δεν ήταν δυνατή η εκτύπωση της ζωγραφιάς σου!"
 
-#: ../tuxpaint.c:2296
+#: ../tuxpaint.c:2329
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "Λυπάμαι! Δεν ήταν δυνατή η εκτύπωση της ζωγραφιάς σου!"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2300
+#: ../tuxpaint.c:2333
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Διάλεξε τη ζωγραφιά που θέλεις και μετά πάτησε 'Αναπαραγωγή'."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2512
+#: ../tuxpaint.c:2554
 msgid "Sound muted."
 msgstr "Χωρίς ήχο."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2517
+#: ../tuxpaint.c:2559
 msgid "Sound unmuted."
 msgstr "Με ήχο."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3296
+#: ../tuxpaint.c:3344
 msgid "Please wait…"
 msgstr "Παρακαλώ περιμένετε..."
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:8441
+#: ../tuxpaint.c:8790
 msgid "Erase"
 msgstr "Διαγραφή"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:8444
+#: ../tuxpaint.c:8793
 msgid "Slides"
 msgstr "Προβολή διαφανειών."
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:8447
+#: ../tuxpaint.c:8796
 msgid "Export"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:8450
+#: ../tuxpaint.c:8799
 msgid "Back"
 msgstr "Προηγούμενο"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:8453
+#: ../tuxpaint.c:8802
 msgid "Play"
 msgstr "Αναπαραγωγή"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:8456
+#: ../tuxpaint.c:8805
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:8459
+#: ../tuxpaint.c:8808
 msgid "Next"
 msgstr "Επόμενο"
 
+#. Color mixer dialog: 'Clear' button, to reset the mixed color
+#: ../tuxpaint.c:8811
+msgid "Clear"
+msgstr ""
+
 #. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:9267
+#: ../tuxpaint.c:9670
 msgid "Aa"
 msgstr "Αα"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:12927
+#: ../tuxpaint.c:13390
 msgid "Yes"
 msgstr "Ναι"
 
-#: ../tuxpaint.c:12931
+#: ../tuxpaint.c:13394
 msgid "No"
 msgstr "Όχι"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:14077
+#: ../tuxpaint.c:14547
 msgid "Replace the picture with your changes?"
 msgstr "Να αντικαταστήσω τη ζωγραφιά με τις αλλαγές που έκανες;"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:14081
+#: ../tuxpaint.c:14551
 msgid "Yes, replace the old one!"
 msgstr "Ναι, αντικατάστησε την παλιά ζωγραφιά!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:14085
+#: ../tuxpaint.c:14555
 msgid "No, save a new file!"
 msgstr "Όχι, κάνε αποθήκευση σε νέο αρχείο!"
 
 #. Let user choose an image:
 #. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:15349
+#: ../tuxpaint.c:15805
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Διάλεξε τη ζωγραφιά που θέλεις και μετά πάτησε 'Άνοιγμα'."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:16775
+#: ../tuxpaint.c:17343
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
-#: ../tuxpaint.c:24552
+#. Descriptions (names) of the color mixer tool's primary colors and shades
+#: ../tuxpaint.c:22878
+msgid "red"
+msgstr ""
+
+#: ../tuxpaint.c:22879
+#, fuzzy
+#| msgid "Yellow!"
+msgid "yellow"
+msgstr "Κίτρινο!"
+
+#: ../tuxpaint.c:22880
+#, fuzzy
+#| msgid "Sky blue!"
+msgid "blue"
+msgstr "Μπλέ του ουρανού!"
+
+#: ../tuxpaint.c:22881
+#, fuzzy
+#| msgid "White!"
+msgid "white"
+msgstr "Άσπρο!"
+
+#: ../tuxpaint.c:22882
+msgid "grey"
+msgstr ""
+
+#: ../tuxpaint.c:22883
+#, fuzzy
+#| msgid "Black!"
+msgid "black"
+msgstr "Μαύρο!"
+
+#. Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.)
+#: ../tuxpaint.c:22888
+#, c-format
+msgid "Your color is %1$s %2$s."
+msgstr ""
+
+#: ../tuxpaint.c:22889
+#, c-format
+msgid "Your color is %1$s %2$s and %3$s %4$s."
+msgstr ""
+
+#: ../tuxpaint.c:22890
+#, c-format
+msgid "Your color is %1$s %2$s, %3$s %4$s, and %5$s %6$s."
+msgstr ""
+
+#: ../tuxpaint.c:22891
+#, c-format
+msgid "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, and %7$s %8$s."
+msgstr ""
+
+#: ../tuxpaint.c:22892
+#, c-format
+msgid ""
+"Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, and %9$s %10$s."
+msgstr ""
+
+#: ../tuxpaint.c:22893
+#, c-format
+msgid ""
+"Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s, and "
+"%11$s %12$s."
+msgstr ""
+
+#. Color mixer; e.g., "Your color is entirely grey."
+#: ../tuxpaint.c:23654 ../tuxpaint.c:23661
+msgid "entirely"
+msgstr ""
+
+#. Add "Color Select" color:
+#: ../tuxpaint.c:26566
 msgid "Select a color from your drawing."
 msgstr "Επίλεξε ένα χρώμα από τη ζωγραφιά σου."
 
-#: ../tuxpaint.c:24564
-msgid "Pick a color."
-msgstr "Δάλεξε ένα χρώμα."
+#. Add "Color Picker" color:
+#. (This is an attempt to describe an HSV color picker in extremely basic terms!)
+#: ../tuxpaint.c:26575
+msgid ""
+"Pick a color. Hues go top to bottom. Saturation/intensity goes left (pale) "
+"to right (pure). Value (lightness/darkness): grey bar."
+msgstr ""
+
+#. Add "Color Mixer" color:
+#. (The terms 'tint', 'tone', and 'shade' relate to combining white, grey, or black paint (respectively) to another color)
+#: ../tuxpaint.c:26587
+msgid ""
+"Click the primary colors (red, yellow, and blue), white (to tint), grey (to "
+"tone), and black (to shade), to mix together a new color."
+msgstr ""
 
 #: ../tuxpaint.desktop.in.h:1
 msgid "Tux Paint"
@@ -1131,17 +1362,17 @@ msgstr ""
 "Διάλεξε χρώμα για το φόντο και κάνε κλικ για να γυρίσεις τη γωνία της "
 "σελίδας."
 
-#: ../../magic/src/fretwork.c:182
+#: ../../magic/src/fretwork.c:183
 msgid "Fretwork"
 msgstr "Ανάγλυφο"
 
-#: ../../magic/src/fretwork.c:188
+#: ../../magic/src/fretwork.c:189
 #, fuzzy
 #| msgid "Click and drag to draw repetitive patterns. "
 msgid "Click and drag to draw repetitive patterns."
 msgstr "Κάνε κλικ και σύρε για να σχεδιάσεις επαναλαμβανόμενα μοτίβα."
 
-#: ../../magic/src/fretwork.c:190
+#: ../../magic/src/fretwork.c:191
 msgid "Click to surround your picture with repetitive patterns."
 msgstr ""
 "Κάνε κλικ για να περιστοιχίσεις τη ζωγραφιά σου με επαναλαμβανόμενα μοτίβα."
@@ -1402,31 +1633,59 @@ msgstr ""
 msgid "Click to add noise to your entire picture."
 msgstr "Κάνε κλικ για να προσθέσεις παράσιτα σε ολόκληρη τη ζωραφιά σου."
 
-#: ../../magic/src/perspective.c:151
+#: ../../magic/src/perspective.c:161
 msgid "Perspective"
 msgstr "Προοπτική"
 
-#: ../../magic/src/perspective.c:152
+#: ../../magic/src/perspective.c:162
 msgid "Panels"
 msgstr ""
 
-#: ../../magic/src/perspective.c:153
+#: ../../magic/src/perspective.c:163
+#, fuzzy
+#| msgid "Zoom"
+msgid "Tile Zoom"
+msgstr "Εστίαση"
+
+#: ../../magic/src/perspective.c:164
 msgid "Zoom"
 msgstr "Εστίαση"
 
-#: ../../magic/src/perspective.c:157
+#: ../../magic/src/perspective.c:165
+msgid "Rush"
+msgstr ""
+
+#: ../../magic/src/perspective.c:169
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr ""
 "Κάνε κλικ στις γωνίες και σύρε το ποντίκι για να επεκτήνεις τη ζωγραφιά."
 
-#: ../../magic/src/perspective.c:159
+#: ../../magic/src/perspective.c:171
 #, fuzzy
 #| msgid "Click to turn your painting into its negative."
 msgid "Click to turn your picture into 2-by-2 panels."
 msgstr "Κάνε κλικ για να μετατρέψεις τη ζωγραφιά σου σε αρνητικό."
 
-#: ../../magic/src/perspective.c:161
+#: ../../magic/src/perspective.c:173
+#, fuzzy
+#| msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgid ""
+"Click and drag up to zoom in the picture. Drag down to zoom out and tile the "
+"picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να εστιάσεις ή να απομακρυνθείς από τη "
+"ζωγραφιά σου."
+
+#: ../../magic/src/perspective.c:175
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgstr ""
+"Κάνε κλικ και σύρε το ποντίκι για να εστιάσεις ή να απομακρυνθείς από τη "
+"ζωγραφιά σου."
+
+#: ../../magic/src/perspective.c:177
+#, fuzzy
+#| msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+msgid "Click and drag up to rush in or drag down to rush out the picture."
 msgstr ""
 "Κάνε κλικ και σύρε το ποντίκι για να εστιάσεις ή να απομακρυνθείς από τη "
 "ζωγραφιά σου."
@@ -1455,11 +1714,11 @@ msgid "Click to make a puzzle in fullscreen mode."
 msgstr ""
 "Κάνε κλικ για να φτιάξεις μια σπαζοκεφαλιά σε λειτουργία πλήρους οθόνης."
 
-#: ../../magic/src/rails.c:131
+#: ../../magic/src/rails.c:132
 msgid "Rails"
 msgstr "Ράγες τρένου"
 
-#: ../../magic/src/rails.c:141
+#: ../../magic/src/rails.c:142
 msgid "Click and drag to draw train track rails on your picture."
 msgstr ""
 "Κάνε κλικ και σύρε το ποντίκι για να σχεδιάσεις ράγες διαδρομής τρένων στη "
@@ -1788,6 +2047,9 @@ msgstr "Κάνε κλικ και σύρε το ποντίκι για να σχε
 #: ../../magic/src/xor.c:105
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "Κάνε κλικ για να σχεδιάσεις ένα XOR εφέ σε ολόκληρη τη ζωγραφιά σου."
+
+#~ msgid "Pick a color."
+#~ msgstr "Δάλεξε ένα χρώμα."
 
 #~ msgid "Click in the picture to fill that area with color."
 #~ msgstr "Κάνε κλικ στη ζωγραφιά για να γεμίσεις μια περιοχή με χρώμα."
