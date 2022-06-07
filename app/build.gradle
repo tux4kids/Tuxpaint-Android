@@ -12,13 +12,13 @@ android {
     aaptOptions {
         ignoreAssetsPattern "nonexisting.file"
     }
-    compileSdkVersion 29
+    compileSdkVersion 32
     defaultConfig {
         if (buildAsApplication) {
             applicationId "org.tuxpaint"
         }
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 32
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
