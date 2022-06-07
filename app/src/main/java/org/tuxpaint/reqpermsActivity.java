@@ -1,18 +1,13 @@
 package org.tuxpaint;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Locale;
-
+import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.app.*;
 import android.content.pm.PackageManager;
-import android.view.WindowManager.LayoutParams;
-import android.view.WindowManager;
 
 
 /* reqpermsActivity */
@@ -24,27 +19,34 @@ public class reqpermsActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	Log.v(TAG, "onCreate()");
-	super.onCreate(savedInstanceState);
+		Log.v(TAG, "onCreate()");
+		super.onCreate(savedInstanceState);
 
-	this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
-	setContentView(R.layout.reqperms);
-
-	understoodButton = (Button)this.findViewById(R.id.buttonUnderstood);
-
-	understoodButton.setOnClickListener(new View.OnClickListener() {
-		public void onClick(View buttonView) {
-		    finish();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+			this.requestPermissions(new String[]{ android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.BLUETOOTH_CONNECT }, 2);
+		} else {
+			this.requestPermissions(new String[]{ android.Manifest.permission.WRITE_EXTERNAL_STORAGE }, 2);
 		}
-	    });
+		setContentView(R.layout.reqperms);
+
+		understoodButton = (Button)this.findViewById(R.id.buttonUnderstood);
+
+		understoodButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View buttonView) {
+				finish();
+			}
+		});
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
 					   String[] permissions, int[] grantResults) {
-	if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-	    finish();
-	}
+		if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+					&& this.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+				finish();
+			}
+		}
     }
 
     protected void onDestroy() {

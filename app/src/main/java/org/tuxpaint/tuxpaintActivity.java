@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.libsdl.app.SDLActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.content.res.AssetManager;
@@ -20,15 +21,23 @@ public class tuxpaintActivity extends SDLActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "onCreate()");
-	super.onCreate(savedInstanceState);
-	mgr = getResources().getAssets();
-	managertojni(mgr);
-	if (android.os.Build.VERSION.SDK_INT > 22) {
-	    if (this.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-		Intent intent = new Intent(this, reqpermsActivity.class);
-		this.startActivity(intent);
-	    }
-	}
+
+        if (android.os.Build.VERSION.SDK_INT > 22) {
+            if (this.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(this, reqpermsActivity.class);
+                this.startActivity(intent);
+            }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (this.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(this, reqpermsActivity.class);
+                this.startActivity(intent);
+            }
+        }
+
+        super.onCreate(savedInstanceState);
+        mgr = getResources().getAssets();
+        managertojni(mgr);
     }
 
     static {
