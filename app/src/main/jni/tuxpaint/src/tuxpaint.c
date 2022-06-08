@@ -888,6 +888,14 @@ static void setup_normal_screen_layout(void)
     setup_normal_screen_layout();
   }
 
+#ifdef __ANDROID__
+  /* On Android the buttons can end up way too small on newer high density screens. */
+  if ((float)button_w / (float)WINDOW_WIDTH < 0.045) {
+    button_scale += 0.25;
+    setup_normal_screen_layout();
+  }
+#endif
+
   gd_tools.rows = buttons_tall;
   gd_toolopt.rows = buttons_tall;
 
