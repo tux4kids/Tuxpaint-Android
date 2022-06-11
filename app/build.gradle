@@ -1,4 +1,4 @@
-def buildAsLibrary = project.hasProperty('BUILD_AS_LIBRARY');
+def buildAsLibrary = project.hasProperty('BUILD_AS_LIBRARY')
 def buildAsApplication = !buildAsLibrary
 if (buildAsApplication) {
     apply plugin: 'com.android.application'
@@ -9,9 +9,6 @@ else {
 
 android {
 
-    aaptOptions {
-        ignoreAssetsPattern "nonexisting.file"
-    }
     compileSdkVersion 32
     defaultConfig {
         if (buildAsApplication) {
@@ -32,6 +29,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    androidResources {
+        ignoreAssetsPattern 'nonexisting.file'
+    }
+    lint {
+        abortOnError false
+    }
     if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
         sourceSets.main {
             jniLibs.srcDir 'libs'
@@ -43,17 +46,14 @@ android {
         }
        
     }
-    lintOptions {
-        abortOnError false
-    }
-    
+
     if (buildAsLibrary) {
         libraryVariants.all { variant ->
             variant.outputs.each { output ->
                 def outputFile = output.outputFile
                 if (outputFile != null && outputFile.name.endsWith(".aar")) {
-                    def fileName = "org.libsdl.app.aar";
-                    output.outputFile = new File(outputFile.parent, fileName);
+                    def fileName = "org.libsdl.app.aar"
+                    output.outputFile = new File(outputFile.parent, fileName)
                 }
             }
         }
