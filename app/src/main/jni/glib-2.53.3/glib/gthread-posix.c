@@ -44,7 +44,7 @@
  * Tux Paint seems to continue working fine with this change.
  * Pere 2017-07-24
  */
-#define HAVE_PTHREAD_COND_TIMEDWAIT_RELATIVE_NP
+//#define HAVE_PTHREAD_COND_TIMEDWAIT_RELATIVE_NP
 
 
 
