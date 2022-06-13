@@ -44,8 +44,9 @@
  * Tux Paint seems to continue working fine with this change.
  * Pere 2017-07-24
  */
-//#define HAVE_PTHREAD_COND_TIMEDWAIT_RELATIVE_NP
-
+#ifndef __aarch64__
+#define HAVE_PTHREAD_COND_TIMEDWAIT_RELATIVE_NP
+#endif
 
 
 #include "config.h"
