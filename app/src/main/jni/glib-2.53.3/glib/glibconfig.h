@@ -74,7 +74,6 @@ typedef unsigned long gsize;
 #define G_MINSSIZE	G_MINLONG
 #define G_MAXSSIZE	G_MAXLONG
 #else
-G_GNUC_EXTENSION typedef unsigned long long guint64;
 #define GLIB_SIZEOF_VOID_P 4
 #define GLIB_SIZEOF_LONG   4
 #define GLIB_SIZEOF_SIZE_T 4
