@@ -1,3 +1,5 @@
+<img align="left" width="80" height="80" src="https://github.com/tux4kids/Tuxpaint-Android/blob/master/app/src/main/ic_launcher-playstore.png" alt="app icon">
+
 Tux Paint-Android
 ================
 This is Tux Paint on Android.
@@ -186,7 +188,24 @@ Build
 * Eclipse & ADT (optional)
 * Git (optional)
 
-Install&Run
+Android Studio
+=============
+This application has been tested and will build in Android Studio (last test on Chipmunk, 2021.2.1 patch 1).
+Steps to run in Android Studio:
+* Open Android Studio
+* File -> New -> Project From Version Control...
+* Paste in this repository URL if you've setup github already, otherwise setup github
+* In Android Studio `Build Variants` window, select variant and target ABI if applicable
+* Run -> Edit Configurations...
+* Select `APK from app bundle` for `Deploy` to avoid library build
+
+You should be able to now make the project and run it on any device, as well as generate signed bundles / apk.
+If for whatever reason the gradle build copy fails to bring in the assets, the manual way is still available:
+* Create folder `app/src/main/assets`
+* Copy `app/src/main/jni/tuxpaint/data` folder to `app/src/main/assets/data`
+* Copy `app/src/main/jni/tuxpaint/src/tuxpaint.cfg-android` to `app/src/main/assets/etc/tuxpaint.cfg`
+
+Install & Run
 =============
 If you want to (re)fill the assets dir run:
 ```
