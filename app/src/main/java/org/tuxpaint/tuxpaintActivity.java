@@ -22,22 +22,25 @@ public class tuxpaintActivity extends SDLActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "onCreate()");
 
-        if (android.os.Build.VERSION.SDK_INT > 22) {
+        boolean requestPermissions = false;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (this.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                Intent intent = new Intent(this, reqpermsActivity.class);
-                this.startActivity(intent);
+                requestPermissions = true;
             }
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (this.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                Intent intent = new Intent(this, reqpermsActivity.class);
-                this.startActivity(intent);
+                requestPermissions = true;
             }
         }
-
-        super.onCreate(savedInstanceState);
-        mgr = getResources().getAssets();
-        managertojni(mgr);
+        if (requestPermissions) {
+            Intent intent = new Intent(this, reqpermsActivity.class);
+            this.startActivity(intent);
+        } else {
+            super.onCreate(savedInstanceState);
+            mgr = getResources().getAssets();
+            managertojni(mgr);
+        }
     }
 
     static {
