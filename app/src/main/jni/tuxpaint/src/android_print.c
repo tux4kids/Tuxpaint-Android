@@ -24,6 +24,7 @@
 // https://developer.android.com/reference/android/support/v4/print/PrintHelper.html
 // https://developer.android.com/training/printing/photos.html
 
+#include "../../SDL2/src/core/android/SDL_android.h"
 #include "android_print.h"
 #include "jni.h"
 

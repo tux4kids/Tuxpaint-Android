@@ -1,3 +1,6 @@
+#define _BSD_SOURCE 1
+
+#include <stdio.h>
 #include <SDL.h>
 #include "tp_android_assets_fopen.h"
 
