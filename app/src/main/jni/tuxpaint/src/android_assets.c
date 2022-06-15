@@ -15,15 +15,17 @@
   (See COPYING.txt)
 */
 
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
 #include "android_assets.h"
 
 AAssetManager * asset_manager = NULL;
 
 AAssetDir * open_asset_dir(char * dirname)
 {
-  return(AAssetManager_openDir(asset_manager, dirname));
-
+  return AAssetManager_openDir(asset_manager, dirname);
 }
+
 void load_assets_dir(char * dirname, tp_ftw_str ** ffilenames, unsigned  * num_file_names)
 {
   AAssetDir* assetDir = AAssetManager_openDir(asset_manager, dirname);

@@ -57,6 +57,23 @@ G_GNUC_EXTENSION typedef unsigned long long guint64;
 #define G_GINT64_FORMAT "lli"
 #define G_GUINT64_FORMAT "llu"
 
+#ifdef __aarch64__
+#define GLIB_SIZEOF_VOID_P 8
+#define GLIB_SIZEOF_LONG   8
+#define GLIB_SIZEOF_SIZE_T 8
+#define GLIB_SIZEOF_SSIZE_T 8
+
+typedef signed long gssize;
+typedef unsigned long gsize;
+#define G_GSIZE_MODIFIER "l"
+#define G_GSSIZE_MODIFIER "l"
+#define G_GSIZE_FORMAT "lu"
+#define G_GSSIZE_FORMAT "li"
+
+#define G_MAXSIZE	G_MAXULONG
+#define G_MINSSIZE	G_MINLONG
+#define G_MAXSSIZE	G_MAXLONG
+#else
 #define GLIB_SIZEOF_VOID_P 4
 #define GLIB_SIZEOF_LONG   4
 #define GLIB_SIZEOF_SIZE_T 4
@@ -72,6 +89,7 @@ typedef unsigned int gsize;
 #define G_MAXSIZE	G_MAXUINT
 #define G_MINSSIZE	G_MININT
 #define G_MAXSSIZE	G_MAXINT
+#endif
 
 typedef gint64 goffset;
 #define G_MINOFFSET	G_MININT64
@@ -140,6 +158,10 @@ typedef unsigned int guintptr;
 #define G_HAVE_GNUC_VARARGS 1
 #define G_HAVE_GROWING_STACK 0
 
+#ifndef __aarch64__
+typedef unsigned int guintptr;
+#endif
+
 #define G_HAVE_GNUC_VISIBILITY 1
 #if defined(__SUNPRO_C) && (__SUNPRO_C >= 0x590)
 #define G_GNUC_INTERNAL __attribute__((visibility("hidden")))
@@ -168,18 +190,32 @@ typedef unsigned int guintptr;
 #define GUINT64_TO_LE(val)	((guint64) (val))
 #define GINT64_TO_BE(val)	((gint64) GUINT64_SWAP_LE_BE (val))
 #define GUINT64_TO_BE(val)	(GUINT64_SWAP_LE_BE (val))
+#ifdef __aarch64__
+#define GLONG_TO_LE(val)	((glong) GINT64_TO_LE (val))
+#define GULONG_TO_LE(val)	((gulong) GUINT64_TO_LE (val))
+#define GLONG_TO_BE(val)	((glong) GINT64_TO_BE (val))
+#define GULONG_TO_BE(val)	((gulong) GUINT64_TO_BE (val))
+#else
 #define GLONG_TO_LE(val)	((glong) GINT32_TO_LE (val))
 #define GULONG_TO_LE(val)	((gulong) GUINT32_TO_LE (val))
 #define GLONG_TO_BE(val)	((glong) GINT32_TO_BE (val))
 #define GULONG_TO_BE(val)	((gulong) GUINT32_TO_BE (val))
+#endif
 #define GINT_TO_LE(val)		((gint) GINT32_TO_LE (val))
 #define GUINT_TO_LE(val)	((guint) GUINT32_TO_LE (val))
 #define GINT_TO_BE(val)		((gint) GINT32_TO_BE (val))
 #define GUINT_TO_BE(val)	((guint) GUINT32_TO_BE (val))
+#ifdef __aarch64__
+#define GSIZE_TO_LE(val)	((gsize) GUINT64_TO_LE (val))
+#define GSSIZE_TO_LE(val)	((gssize) GINT64_TO_LE (val))
+#define GSIZE_TO_BE(val)	((gsize) GUINT64_TO_BE (val))
+#define GSSIZE_TO_BE(val)	((gssize) GINT64_TO_BE (val))
+#else
 #define GSIZE_TO_LE(val)	((gsize) GUINT32_TO_LE (val))
 #define GSSIZE_TO_LE(val)	((gssize) GINT32_TO_LE (val))
 #define GSIZE_TO_BE(val)	((gsize) GUINT32_TO_BE (val))
 #define GSSIZE_TO_BE(val)	((gssize) GINT32_TO_BE (val))
+#endif
 #define G_BYTE_ORDER G_LITTLE_ENDIAN
 
 #define GLIB_SYSDEF_POLLIN =1

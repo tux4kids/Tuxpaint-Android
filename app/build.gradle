@@ -8,18 +8,16 @@ else {
 }
 
 android {
-
     compileSdkVersion 32
     defaultConfig {
-        if (buildAsApplication) {
-            applicationId "org.tuxpaint"
-        }
         minSdkVersion 21
         targetSdkVersion 32
+        versionCode 3
+        versionName "0.9.28.3"
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
-                abiFilters 'armeabi-v7a'
+                abiFilters 'armeabi-v7a', 'arm64-v8a'
             }
         }
     }
@@ -27,6 +25,21 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "store"
+    productFlavors {
+        playStore {
+            if (buildAsApplication) {
+                dimension "store"
+                applicationId "org.tuxpaint.android"
+            }
+        }
+        offPlayStore {
+            if (buildAsApplication) {
+                dimension "store"
+                applicationId "org.tuxpaint"
+            }
         }
     }
     androidResources {
@@ -59,6 +72,19 @@ android {
         }
     }
 }
+
+task copyDataFiles(type: Copy) {
+    from('src/main/jni/tuxpaint/data') {
+        include '**/*.*'
+    }
+    destinationDir(new File('src/main/assets/data'))
+}
+task copyConfigFile(type: Copy) {
+    from 'src/main/jni/tuxpaint/src/tuxpaint.cfg-android'
+    into 'src/main/assets/etc'
+    rename 'tuxpaint.cfg-android', 'tuxpaint.cfg'
+}
+preBuild.dependsOn copyDataFiles,copyConfigFile
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')

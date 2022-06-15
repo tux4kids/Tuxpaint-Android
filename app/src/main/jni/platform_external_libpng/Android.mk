@@ -38,7 +38,9 @@ common_CFLAGS := -std=gnu89 #-fvisibility=hidden ## -fomit-frame-pointer
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
 common_SRC_FILES += $(my_src_files_arm)
 endif
-
+ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
+common_SRC_FILES += $(my_src_files_arm)
+endif
 
 # For the host
 # =====================================================

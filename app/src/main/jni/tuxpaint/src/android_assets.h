@@ -44,6 +44,8 @@ void load_from_assets(SDL_Surface * screen, SDL_Texture *texture, SDL_Renderer *
 				  unsigned dirlen, tp_ftw_str * files,
 				  unsigned count, const char *restrict const locale) );
 
+void load_assets_dir(char * dirname, tp_ftw_str ** ffilenames, unsigned  * num_file_names);
+
 JNIEXPORT jboolean  Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv * env, jclass clazz, jobject  mgr);
 
 
