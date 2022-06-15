@@ -8,7 +8,6 @@ else {
 }
 
 android {
-
     compileSdkVersion 32
     defaultConfig {
         minSdkVersion 21
@@ -73,6 +72,19 @@ android {
         }
     }
 }
+
+task copyDataFiles(type: Copy) {
+    from('src/main/jni/tuxpaint/data') {
+        include '**/*.*'
+    }
+    destinationDir(new File('src/main/assets/data'))
+}
+task copyConfigFile(type: Copy) {
+    from 'src/main/jni/tuxpaint/src/tuxpaint.cfg-android'
+    into 'src/main/assets/etc'
+    rename 'tuxpaint.cfg-android', 'tuxpaint.cfg'
+}
+preBuild.dependsOn copyDataFiles,copyConfigFile
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
