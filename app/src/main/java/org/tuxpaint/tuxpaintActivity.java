@@ -36,11 +36,11 @@ public class tuxpaintActivity extends SDLActivity {
         if (requestPermissions) {
             Intent intent = new Intent(this, reqpermsActivity.class);
             this.startActivity(intent);
-        } else {
-            super.onCreate(savedInstanceState);
-            mgr = getResources().getAssets();
-            managertojni(mgr);
         }
+
+        super.onCreate(savedInstanceState);
+        mgr = getResources().getAssets();
+        managertojni(mgr);
     }
 
     static {
