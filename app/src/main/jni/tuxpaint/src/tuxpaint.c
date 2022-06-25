@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - June 3, 2022
+  June 14, 2002 - June 14, 2022
 */
 
 #include "platform.h"
@@ -23670,6 +23670,14 @@ static int do_color_mix(void)
       for (i = 0; i < NUM_MIXER_COLORS; i++)
         color_mixer_color_counts[i] = 0;
     }
+  else
+    {
+      new_r = color_hexes[COLOR_MIXER][0];
+      new_g = color_hexes[COLOR_MIXER][1];
+      new_b = color_hexes[COLOR_MIXER][2];
+    }
+
+
 
   done = 0;
   chose = 0;
@@ -25087,30 +25095,9 @@ static void load_info_about_label_surface(FILE * lfi)
           fprintf(stderr, "Unexpected! Saved text length is >= 1024 (%u!)\n", new_node->save_texttool_len);
           free(new_node);
 #ifdef WIN32
-      /* Using fancy "%[]" operator to scan until the end of a line */
-      tmp_fscanf_return = fscanf(lfi, "%[^\n]\n", tmpstr);
-      mbstowcs(wtmpstr, tmpstr, 1024);
-      for (l = 0; l < new_node->save_texttool_len; l++)
-        new_node->save_texttool_str[l] = wtmpstr[l];
-      new_node->save_texttool_str[l] = L'\0';
-      free(tmpstr);
-      free(wtmpstr);
-#elif defined(__ANDROID__)
-      wchar_t tmp_char;
-      for (l = 0; l < new_node->save_texttool_len; l++)
-        {
-          fscanf(lfi, "%d ", &tmp_char);
-          new_node->save_texttool_str[l] = tmp_char;
-        }
-      fscanf(lfi, "\n");
-#else
-      /* Using fancy "%[]" operator to scan until the end of a line */
-      tmp_fscanf_return = fscanf(lfi, "%l[^\n]\n", new_node->save_texttool_str);
+          free(wtmpstr);
 #endif
-
-#ifdef DEBUG
-      printf("Read: \"%ls\"\n", new_node->save_texttool_str); fflush(stdout);
-#endif
+          free(tmpstr);
           fclose(lfi);
           return;
         }
@@ -25123,6 +25110,14 @@ static void load_info_about_label_surface(FILE * lfi)
           for (l = 0; l < new_node->save_texttool_len; l++)
             new_node->save_texttool_str[l] = wtmpstr[l];
           new_node->save_texttool_str[l] = L'\0';
+#elif defined(__ANDROID__)
+      wchar_t tmp_char;
+      for (l = 0; l < new_node->save_texttool_len; l++)
+        {
+          fscanf(lfi, "%d ", &tmp_char);
+          new_node->save_texttool_str[l] = tmp_char;
+        }
+      fscanf(lfi, "\n");
 #else
           /* Using fancy "%[]" operator to scan until the end of a line */
           tmp_fscanf_return = fscanf(lfi, "%l[^\n]\n", new_node->save_texttool_str);
@@ -26578,17 +26573,16 @@ static void setup_config(char *argv[])
   if (tmpcfg.button_size)
     {
       if (strstr(tmpcfg.button_size, "auto"))
-	button_size_auto = 1;
+        button_size_auto = 1;
       else
-	{
-	  button_size_auto = 0; /* raw size */
-	  if (strtof(tmpcfg.button_size, NULL) < 24 || strtof(tmpcfg.button_size, NULL) > 192)
-	    {
-	      fprintf(stderr, "Button size (now %s) must be between 24 and 192.\n", tmpcfg.button_size);
-	      exit(1);
-	    }
-	  button_scale = strtof(tmpcfg.button_size, NULL) / ORIGINAL_BUTTON_SIZE;
-	}
+        {
+          if (strtof(tmpcfg.button_size, NULL) < 24 || strtof(tmpcfg.button_size, NULL) > 192)
+            {
+              fprintf(stderr, "Button size (now %s) must be between 24 and 192.\n", tmpcfg.button_size);
+              exit(1);
+            }
+          button_scale = strtof(tmpcfg.button_size, NULL) / ORIGINAL_BUTTON_SIZE;
+        }
     }
   else
     button_scale = 1;

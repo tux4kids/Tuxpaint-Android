@@ -1,14 +1,18 @@
 #!/bin/sh
+cd $(dirname "$0")
 
-cp POTFILES.in.in POTFILES.in
-ls ../../magic/src/*.c | cut -b 4- >> POTFILES.in
+sed -e 's/^/..\//' POTFILES.in.in > POTFILES.in
+ls ../../magic/src/*.c >> POTFILES.in
 
-intltool-update --pot
-msguniq tuxpaint.pot > temp.tmp && mv -f temp.tmp tuxpaint.pot
+xgettext \
+  --package-name=tuxpaint \
+  --files-from=POTFILES.in \
+  --from-code=UTF-8 \
+  --keyword=gettext_noop \
+  --add-comments \
+  --output=tuxpaint.pot
+
 for i in *.po ; do
   echo $i
   msgmerge --update --previous --backup=none $i tuxpaint.pot
 done
-cd ..
-intltool-merge -d -u po tuxpaint.desktop.in tuxpaint.desktop
-cd po

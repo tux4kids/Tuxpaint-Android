@@ -5,6 +5,8 @@
 stamps_directory=../../../tuxpaint-stamps
 tpconfig_directory=../../../tuxpaint-config
 
+## FIXME: Check src/po/LINGUAS
+
 
 
 NUMBER_OF_LANGUAGES=0

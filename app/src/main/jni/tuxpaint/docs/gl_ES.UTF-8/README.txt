@@ -1,5 +1,5 @@
                                    Tux Paint
-                                 versión 0.9.28
+                                 versión 0.9.29
 
                    Un sinxelo programa de debuxo para cativos
 
@@ -8,7 +8,7 @@
                            @TuxPaintTweets on Twitter
                               Tux Paint on Tumblr
 
-                               4 de Xuño de 2022
+                               14 de Xuño de 2022
 
          +-----------------------------------------------------------+
          |Índice                                                     |

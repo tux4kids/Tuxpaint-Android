@@ -1,5 +1,5 @@
                                    Tux Paint
-                                 version 0.9.28
+                                 version 0.9.29
                         Documentation sur l'installation
 
         Copyright © 2002-2022 by divers contributeurs; see AUTHORS.txt.
@@ -612,11 +612,10 @@ Linux/Unix
 
 macOS
 
-   janvier 20, 2022 Mark Kim <markuskimius@gmail.com>
+   juin 5, 2022 Mark Kim <markuskimius@gmail.com>
 
-   Tux Paint 0.9.22, et avant, devrait être construit avec Xcode IDE. À
-   partir de la version 0.9.23, cependant, Tux Paint pour macOS est construit
-   comme si c'était une application Linux.
+   Starting with Tux Paint 0.9.23, Tux Paint for macOS is built as though it
+   were a Linux application.
 
   Prérequis
 
@@ -640,11 +639,11 @@ macOS
      * libpng
      * librsvg
      * libsdl
-     * libsdl_image
-     * libsdl_mixer
-     * libsdl_pango
-     * libsdl_ttf
-     * libsdl_gfx
+     * libsdl2_image
+     * libsdl2_mixer
+     * libsdl2_pango^*
+     * libsdl2_ttf
+     * libsdl2_gfx
      * pkgconfig
      * zlib
    ... mais vous devriez installer tout paquet requis par la dernière version
@@ -663,6 +662,17 @@ macOS
      $ cd libimagequant/imagequant-sys
      $ cargo build --release # Must use cargo from MacPorts
      $ sudo make PREFIX=/opt/local install
+
+    sdl2_pango
+
+   sdl2_pango is not available from MacPorts as of this writing. It can be
+   installed from the source code as follows. It should be installed to
+   /opt/local (same as MacPorts) for the library to be included in
+   TuxPaint.dmg.
+
+     $ git clone https://github.com/markuskimius/SDL2_Pango.git
+     $ cd SDL2_Pango
+     $ ./configure --prefix=/opt/local && make && sudo make install
 
    ATTENTION :Posséder des outils Unix à côté de MacPorts et Xcode, tels que
    Fink ou Brew, vous empêchera de créer un programme portable. V"rifiez que
@@ -845,8 +855,8 @@ macOS
 
    Enlevez "TuxPaint.app" du dossier "Applications". Les fichiers de données
    les fichiers de configuration, les tampons et les images sauvegardées
-   peuvent être trouvées dans "Bibliothèque/Support d'Application/Tux Paint"
-   (pour tous les utilisateurs) et "/Users/USERNAME/Library/Application
+   peuvent être trouvées dans "/Library/Application Support/TuxPaint" (pour
+   tous les utilisateurs) et "/Users/USERNAME/Library/Application
    Support/TuxPaint" pour les utilisateurs individuels.
 
 Linux
