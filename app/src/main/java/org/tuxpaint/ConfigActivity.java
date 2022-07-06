@@ -450,6 +450,12 @@ public class ConfigActivity extends Activity {
 	    e1.printStackTrace();
 	}
 
+	String externalPath = external.getAbsolutePath();
+	String externalExportPath = externalPath;
+	int foundIndex = externalExportPath.indexOf("/Android");
+	if (foundIndex > -1) {
+		externalExportPath = externalExportPath.substring(0, foundIndex) + "/Pictures/TuxPaint";
+	}
 
 	autosave = props.getProperty("autosave", "no");
 	sound = props.getProperty("sound", "no");
@@ -457,9 +463,9 @@ public class ConfigActivity extends Activity {
 	saveover = props.getProperty("saveover", "ask");
 	startblank = props.getProperty("startblank", "no");
 	newcolorsfirst = props.getProperty("newcolorsfirst", "yes");
-	savedir = props.getProperty("savedir", external.getAbsolutePath());
-	datadir = props.getProperty("datadir", external.getAbsolutePath());
-	exportdir = props.getProperty("exportdir", external.getAbsolutePath());
+	savedir = props.getProperty("savedir", externalPath);
+	datadir = props.getProperty("datadir", externalPath);
+	exportdir = props.getProperty("exportdir", externalExportPath);
 	lang = props.getProperty("lang", "en");
 	sysfonts = props.getProperty("sysfonts", "no");
 	print = props.getProperty("print", "no");

@@ -26406,6 +26406,12 @@ static void setup_config(char *argv[])
       picturesdir = GetUserImageDir();
 #elif __APPLE__
       picturesdir = strdup(apple_picturesPath());
+#elif __ANDROID__
+      picturesdir = strdup(SDL_AndroidGetExternalStoragePath());
+      char* substring = strstr(picturesdir, "/Android");
+      if (substring != NULL) {
+        strcpy(substring, "/Pictures");
+      }
 #else
       picturesdir = get_xdg_user_dir("PICTURES", "Pictures");
 #endif

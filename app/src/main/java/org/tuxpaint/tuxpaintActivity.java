@@ -30,6 +30,7 @@ public class tuxpaintActivity extends SDLActivity {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (this.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                isRequestingBluetoothPermission = true;
                 requestPermissions = true;
             }
         }

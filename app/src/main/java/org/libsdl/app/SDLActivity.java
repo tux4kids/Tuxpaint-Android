@@ -98,6 +98,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
     protected static int mCurrentOrientation;
     protected static Locale mCurrentLocale;
+    protected boolean isRequestingBluetoothPermission = false;
 
     // Handle the state of the native layer
     public enum NativeState {
@@ -281,7 +282,11 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
         mClipboardHandler = new SDLClipboardHandler();
 
-        mHIDDeviceManager = HIDDeviceManager.acquire(this);
+        // Bluetooth will fail on higher Android versions when starting while requesting
+        // the permissions. Skip it on the first run and let it come later.
+        if (!isRequestingBluetoothPermission) {
+            mHIDDeviceManager = HIDDeviceManager.acquire(this);
+        }
 
         // Set up the surface
         mSurface = new SDLSurface(getApplication());
