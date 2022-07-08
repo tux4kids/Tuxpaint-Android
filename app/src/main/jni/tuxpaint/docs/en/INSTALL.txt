@@ -1,5 +1,5 @@
                                    Tux Paint
-                                 version 0.9.29
+                                 version 0.9.28
                            Installation Documentation
 
         Copyright © 2002-2022 by various contributors; see AUTHORS.txt.
@@ -592,10 +592,11 @@ Linux/Unix
 
 macOS
 
-   June 5, 2022 Mark Kim <markuskimius@gmail.com>
+   January 20, 2022 Mark Kim <markuskimius@gmail.com>
 
-   Starting with Tux Paint 0.9.23, Tux Paint for macOS is built as though it
-   were a Linux application.
+   Tux Paint 0.9.22 and earlier required building Tux Paint from the Xcode
+   IDE. Starting with 0.9.23, however, Tux Paint for macOS is built as though
+   it were a Linux application.
 
   Prerequisites
 
@@ -619,11 +620,11 @@ macOS
      * libpng
      * librsvg
      * libsdl
-     * libsdl2_image
-     * libsdl2_mixer
-     * libsdl2_pango^*
-     * libsdl2_ttf
-     * libsdl2_gfx
+     * libsdl_image
+     * libsdl_mixer
+     * libsdl_pango
+     * libsdl_ttf
+     * libsdl_gfx
      * pkgconfig
      * zlib
    ... but you should install any package that is required by the latest
@@ -643,17 +644,6 @@ macOS
      $ cd libimagequant/imagequant-sys
      $ cargo build --release # Must use cargo from MacPorts
      $ sudo make PREFIX=/opt/local install
-
-    sdl2_pango
-
-   sdl2_pango is not available from MacPorts as of this writing. It can be
-   installed from the source code as follows. It should be installed to
-   /opt/local (same as MacPorts) for the library to be included in
-   TuxPaint.dmg.
-
-     $ git clone https://github.com/markuskimius/SDL2_Pango.git
-     $ cd SDL2_Pango
-     $ ./configure --prefix=/opt/local && make && sudo make install
 
    WARNING: Having any UNIX-like toolset installed on your Mac besides
    MacPorts and Xcode, such as Fink or Brew, will prevent your app bundle
@@ -831,7 +821,7 @@ macOS
 
    Delete "TuxPaint.app" from the "Applications" folder. Data files,
    including the configuration files, stamps, and saved pictures, may be
-   found in "/Library/Application Support/TuxPaint" (all users) and
+   found in "Library/Application Support/TuxPaint" (all users) and
    "/Users/USERNAME/Library/Application Support/TuxPaint" (individual users).
 
 Linux

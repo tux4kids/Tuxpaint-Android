@@ -1,5 +1,5 @@
                                    Tux Paint
-                                 versión 0.9.29
+                                 versión 0.9.28
 
                      A simple drawing program for children
 
@@ -8,7 +8,7 @@
                            @TuxPaintTweets on Twitter
                               Tux Paint on Tumblr
 
-                                 junio 14, 2022
+                                 junio 4, 2022
 
              +----------------------------------------------------+
              |Table of Contents                                   |

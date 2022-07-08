@@ -87,7 +87,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            versión 0.9.29<br/>
+            versión 0.9.28<br/>
             Documentación da instalación          </h1>
 
           <p>
@@ -925,13 +925,13 @@
           </h2>
           <p style="font-size: small;">
             <em>
-               5 de Xuño de 2022              Mark Kim &lt;<a href="mailto:markuskimius@gmail.com">markuskimius@gmail.com</a>&gt;
+              20 de Xaneiro de 2022              Mark Kim &lt;<a href="mailto:markuskimius@gmail.com">markuskimius@gmail.com</a>&gt;
             </em>
           </p>
         </header>
 
         <p>
-          Starting with Tux Paint 0.9.23, Tux Paint for macOS is built as though it were a Linux application.        </p>
+          Tux Paint 0.9.22 and earlier required building Tux Paint from the Xcode IDE. Starting with 0.9.23, however, Tux Paint for macOS is built as though it were a Linux application.        </p>
 
         <section class="indent"><!-- H3: Prerequisites -->
           <header>
@@ -958,11 +958,11 @@
               <li><code>libpng</code></li>
               <li><code>librsvg</code></li>
               <li><code>libsdl</code></li>
-              <li><code>libsdl2_image</code></li>
-              <li><code>libsdl2_mixer</code></li>
-              <li><code>libsdl2_pango</code><sup>*</sup></li>
-              <li><code>libsdl2_ttf</code></li>
-              <li><code>libsdl2_gfx</code></li>
+              <li><code>libsdl_image</code></li>
+              <li><code>libsdl_mixer</code></li>
+              <li><code>libsdl_pango</code></li>
+              <li><code>libsdl_ttf</code></li>
+              <li><code>libsdl_gfx</code></li>
               <li><code>pkgconfig</code></li>
               <li><code>zlib</code></li>
             </ul>
@@ -989,24 +989,6 @@
               </blockquote>
             </p>
           </section><!-- H4: libimagequant -->
-
-          <section class="indent"><!-- H4: sdl2_pango -->
-            <header>
-              <h4>
-                sdl2_pango
-              </h4>
-            </header>
-
-            <p>
-              <code>sdl2_pango</code> is not available from MacPorts as of this writing. It can be installed from the source code as follows. It should be installed to <code>/opt/local</code> (same as MacPorts) for the library to be included in <code>TuxPaint.dmg</code>.              <blockquote>
-                <code>
-                  $ git clone https://github.com/markuskimius/SDL2_Pango.git<br/>
-                  $ cd SDL2_Pango<br/>
-                  $ ./configure --prefix=/opt/local &amp;&amp; make &amp;&amp; sudo make install
-                </code>
-              </blockquote>
-            </p>
-          </section><!-- H4: sdl2_pango -->
 
           <p>
             <strong>WARNING:</strong> Having any UNIX-like toolset installed on your Mac besides MacPorts and Xcode, such as Fink or Brew, will prevent your app bundle from being portable. Be sure Fink and Brew are not accessible from your build environment.          </p>
@@ -1212,7 +1194,7 @@
         </header>
 
         <p>
-          Delete "<code>TuxPaint.app</code>" from the "Applications" folder. Data files, including the configuration files, stamps, and saved pictures, may be found in "<code style="white-space: nowrap;">/Library/Application Support/TuxPaint</code>" (all users) and "<code style="white-space: nowrap;">/Users/<i>USERNAME</i>/Library/Application Support/TuxPaint</code>" (individual users).        </p>
+          Delete "<code>TuxPaint.app</code>" from the "Applications" folder. Data files, including the configuration files, stamps, and saved pictures, may be found in "<code style="white-space: nowrap;">Library/Application Support/TuxPaint</code>" (all users) and "<code style="white-space: nowrap;">/Users/<i>USERNAME</i>/Library/Application Support/TuxPaint</code>" (individual users).        </p>
       </section><!-- H2: macOS -->
 
       <section class="indent"><!-- H2: Linux -->
