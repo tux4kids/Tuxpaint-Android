@@ -12,13 +12,18 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 7
-        versionName "0.9.29.1"
+        versionCode 9
+        versionName "0.9.28.8"
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
                 abiFilters 'armeabi-v7a', 'arm64-v8a'
             }
+        }
+    }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
         }
     }
     buildTypes {

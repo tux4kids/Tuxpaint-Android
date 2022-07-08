@@ -29,6 +29,7 @@
 #define ASSETS_STAMPS_DIR "stamps/cartoon/tux"
 
 AAssetDir * open_asset_dir(char * dirname);
+char* get_nativelibdir();
 
 void load_brushes_from_assets(SDL_Surface * screen, SDL_Texture *texture, SDL_Renderer *renderer, const char * dirname, void (*fn) (SDL_Surface * screen,
 				  SDL_Texture * texture,
@@ -48,5 +49,6 @@ void load_assets_dir(char * dirname, tp_ftw_str ** ffilenames, unsigned  * num_f
 
 JNIEXPORT jboolean  Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv * env, jclass clazz, jobject  mgr);
 
+JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv * env, jclass clazz, jstring path);
 
 #endif

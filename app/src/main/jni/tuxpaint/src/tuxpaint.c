@@ -20338,8 +20338,7 @@ static void load_magic_plugins(void)
 	{
 #if defined (__ANDROID__)
 	  /* Need this at runtime as Android installs on different locations depending on the user */
-	  place = strdup(SDL_AndroidGetInternalStoragePath());
-	  strcpy(strstr(place, "/files"), "/lib/");
+      place = strdup(get_nativelibdir());
 #else
 	  place = strdup(MAGIC_PREFIX);
 #endif
