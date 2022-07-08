@@ -16,6 +16,7 @@ public class tuxpaintActivity extends SDLActivity {
     private static final String TAG = "Tux Paint";
     private static AssetManager mgr;
     private static native boolean managertojni(AssetManager mgr);
+    private static native void setnativelibdir(String path);
 
 
     @Override
@@ -42,6 +43,7 @@ public class tuxpaintActivity extends SDLActivity {
         super.onCreate(savedInstanceState);
         mgr = getResources().getAssets();
         managertojni(mgr);
+        setnativelibdir(getApplicationInfo().nativeLibraryDir + "/");
     }
 
     static {

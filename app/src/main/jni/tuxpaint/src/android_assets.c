@@ -20,10 +20,16 @@
 #include "android_assets.h"
 
 AAssetManager * asset_manager = NULL;
+char* nativelibdir = NULL;
 
 AAssetDir * open_asset_dir(char * dirname)
 {
   return AAssetManager_openDir(asset_manager, dirname);
+}
+
+char* get_nativelibdir()
+{
+    return nativelibdir;
 }
 
 void load_assets_dir(char * dirname, tp_ftw_str ** ffilenames, unsigned  * num_file_names)
@@ -70,6 +76,12 @@ JNIEXPORT jboolean Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv * env,
     return 1;
 }
 
+JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv * env, jclass clazz, jstring path)
+{
+  const char *cpath = (*env)->GetStringUTFChars(env, path, NULL);
+  nativelibdir = strdup(cpath);
+  (*env)->ReleaseStringUTFChars(env, path, cpath);
+}
 
 
 void load_brushes_from_assets(SDL_Surface * screen, SDL_Texture *texture, SDL_Renderer *renderer, const char * dirname, void (*fn) (SDL_Surface * screen,
