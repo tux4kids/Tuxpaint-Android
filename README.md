@@ -2,7 +2,10 @@
 
 Tux Paint-Android
 ================
-This is Tux Paint on Android.
+This is [Tux Paint](https://tuxpaint.org/) on Android.
+
+
+Tux Paint is a free, award-winning drawing program for children ages 3 to 12 (for example, preschool and K-6). Tux Paint is used in schools around the world as a computer literacy drawing activity. It combines an easy-to-use interface, fun sound effects, and an encouraging cartoon mascot who guides children as they use the program.
 
 Background
 ==========
