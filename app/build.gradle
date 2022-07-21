@@ -12,8 +12,6 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 9
-        versionName "0.9.28.8"
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
@@ -38,6 +36,8 @@ android {
             if (buildAsApplication) {
                 dimension "store"
                 applicationId "org.tuxpaint.android"
+                versionCode 9
+                versionName "0.9.28.8"
             }
         }
         offPlayStore {
