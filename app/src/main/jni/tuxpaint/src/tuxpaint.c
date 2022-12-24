@@ -27542,6 +27542,7 @@ static void setup(void)
 #endif
 
       renderer = SDL_CreateRenderer(window_screen, -1, 0);
+      SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
       if (native_screensize)
         {
@@ -27557,7 +27558,6 @@ static void setup(void)
               window_scale_w = 501.f / ww;
               window_scale_h = 481.f / hh;
 
-	      SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
               if (window_scale_w > window_scale_h)
                 {
                   /* Keep things squared */
