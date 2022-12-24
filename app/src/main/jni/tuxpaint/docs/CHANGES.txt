@@ -7,7 +7,7 @@ Various contributors (see below, and AUTHORS.txt)
 http://www.tuxpaint.org/
 
 
-2022.June.4 (0.9.28)
+2022.December.23 (0.9.29)
   * Improvements to "Paint" and "Lines" tools:
     ------------------------------------------
     * Brush spacing may now be altered within Tux Paint.
@@ -199,6 +199,13 @@ http://www.tuxpaint.org/
     * Fixed abnormal exit of threaded font scan which prevented enabling
       text/label tools on some environment such as Rocky Linux 8.
       TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Mend crash bug in "Paint" and "Radial Gradient" modes of Fill tool.
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+      with Bill Kendrick <bill@newbreedsoftware.com>
+      Closes https://sourceforge.net/p/tuxpaint/bugs/269
+      (h/t Miyagi Andel for reporting & Shin-ichi TOYAMA for pinpointing
+      the issue)
 
   * Ports & Building:
     -----------------
