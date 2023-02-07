@@ -3,10 +3,10 @@
 
 各種設定について
 
-         Copyright © 2002-2022 by various contributors; AUTHORS.txt 参照.
+         Copyright © 2002-2023 by various contributors; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                   2022年6月 4日
+                                   2023年1月 2日
 
                       +---------------------------------+
                       |目次                               |
@@ -111,6 +111,11 @@ Windows のユーザー
               * 768x1024
               * 1600x1200
 
+           💡 If only one display is available, and Tux Paint is being run in
+           windowed (not fullscreen) mode, and the chosen window size exceeds
+           the capabilities of the display, Tux Paint will fall back to the
+           display's dimensions.
+
    orient=portrait
 
            ウィンドウの幅と高さの設定を入れ替えます。これは、タブレットパソコンのような縦型のディスプレイでウィンドウを回転させる際に便利なオプションです。
@@ -163,6 +168,10 @@ Windows のユーザー
 
            SIZE
            の値は24から192までのピクセル値で指定します。ほとんどのボタンは正方形となっており、この設定はボタンの幅と高さの両方に影響します。
+
+           SIZEの値として "auto"
+           を指定すると、タックスペイントのウィンドウ（またはフルスクリーンディスプレイ）のサイズに基づいて、適切なボタンサイズが選択されます。(デフォルトの画面サイズ
+           800x600 の場合、ボタンサイズはデフォルトの "48" になります。)
 
            💡 注:
            選択されたボタンのサイズが大きすぎて画面内に必要なすべてのインターフェースが表示しきれない場合は、できる限り大きなボタンサイズが使用されます。(その旨がstderrに出力されます)
@@ -316,6 +325,17 @@ Windows のユーザー
            ⚙ 注: システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nostampcontrols=no"
            または "stampcontrols=yes"
            を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "--stampcontrols"
+           で変更できます。
+
+   nostamprotation=yes
+
+           はんこを回転させるステップを省略し、１回のクリックで通常の向きにはんこを配置します。
+
+           📜 注: はんこの回転機能は Tux Paint バージョン 0.9.29 で追加されました。
+
+           ⚙ 注: システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "nostamprotation=no"
+           または "stamprotation=yes"
+           を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "--stamprotation"
            で変更できます。
 
    nomagiccontrols=yes
@@ -935,7 +955,7 @@ Windows のユーザー
 
   カラーパレットファイル
 
-     colorfile=FILENAME
+     colorfile=ファイル名
 
              お好みのカラーパレットを記述した簡単なテキストファイルを作成して、そのファイル名を "colorfile"
              オプションで指定すれば、標準のカラーパレットを置き換えることができます。
@@ -1174,6 +1194,7 @@ Windows のユーザー
      --nooutlines
      --nostamps
      --nostampcontrols
+     --nostamprotation
      --nomagiccontrols
      --noshapecontrols
      --nolabel
@@ -1247,6 +1268,7 @@ Windows のユーザー
      --outlines
      --stamps
      --stampcontrols
+     --stamprotation
      --magiccontrols
      --shapecontrols
      --label

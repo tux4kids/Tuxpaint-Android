@@ -39,7 +39,8 @@ int progress_bar_disabled, prog_bar_ctr;
  *
  * @param screen Screen surface
  */
-void show_progress_bar_(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer)
+void show_progress_bar_(SDL_Surface * screen, SDL_Texture * texture,
+                        SDL_Renderer * renderer)
 {
   SDL_Rect dest, src, r;
   int x;
@@ -51,34 +52,36 @@ void show_progress_bar_(SDL_Surface * screen, SDL_Texture * texture, SDL_Rendere
 
   newtime = SDL_GetTicks();
   if (newtime > oldtime + 15)   /* trying not to eat some serious CPU time! */
+  {
+    for (x = 0; x < screen->w; x = x + 65)
     {
-      for (x = 0; x < screen->w; x = x + 65)
-        {
-          src.x = 65 - (prog_bar_ctr % 65);
-          src.y = 0;
-          src.w = 65;
-          src.h = 24;
+      src.x = 65 - (prog_bar_ctr % 65);
+      src.y = 0;
+      src.w = 65;
+      src.h = 24;
 
-          dest.x = x;
-          dest.y = screen->h - 24;
+      dest.x = x;
+      dest.y = screen->h - 24;
 
-          SDL_BlitSurface(img_progress, &src, screen, &dest);
-        }
-
-      prog_bar_ctr++;
-
-      r.x = 0;
-      r.y = screen->h - 24;
-      r.w = screen->w;
-      r.h = 24;
-
-      SDL_UpdateTexture(texture, &r, screen->pixels + ((screen->h - 24) * screen->pitch), screen->pitch);
-
-      /* Docs says one should clear the renderer, even if this means a refresh of the whole thing. */
-      SDL_RenderClear(renderer);
-      SDL_RenderCopy(renderer, texture, NULL, NULL);
-      SDL_RenderPresent(renderer);
+      SDL_BlitSurface(img_progress, &src, screen, &dest);
     }
+
+    prog_bar_ctr++;
+
+    r.x = 0;
+    r.y = screen->h - 24;
+    r.w = screen->w;
+    r.h = 24;
+
+    SDL_UpdateTexture(texture, &r,
+                      screen->pixels + ((screen->h - 24) * screen->pitch),
+                      screen->pitch);
+
+    /* Docs says one should clear the renderer, even if this means a refresh of the whole thing. */
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderPresent(renderer);
+  }
   oldtime = newtime;
 
 

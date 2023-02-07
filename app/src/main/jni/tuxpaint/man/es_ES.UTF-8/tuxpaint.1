@@ -1,5 +1,5 @@
-.\" tuxpaint.1 - 2022.06.04
-.TH TUXPAINT 1 "junio  4, 2022" "0.9.29" "Tux Paint"
+.\" tuxpaint.1 - 2023.01.02
+.TH TUXPAINT 1 "enero  2, 2023" "0.9.29" "Tux Paint"
 .SH NAME
 tuxpaint -- "Tux Paint", a drawing program for young children.
 
@@ -19,7 +19,7 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 .br
 [\-\-orient=portrait]
 .br
-[\-\-buttonsize SIZE]
+[\-\-buttonsize SIZE | \-\-buttonsize auto]
 .br
 [\-\-startblank]
 .br
@@ -64,6 +64,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-nostamps]
 .br
 [\-\-nostampcontrols]
+.br
+[\-\-nostamprotation]
 .br
 [\-\-nomagiccontrols]
 .br
@@ -211,6 +213,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 .br
 [\-\-stampcontrols]
 .br
+[\-\-stamprotation]
+.br
 [\-\-magiccontrols]
 .br
 [\-\-shapecontrols]
@@ -335,10 +339,11 @@ Disable or enable (default) stereo panning support.
 
 .SS INTERFACE SIZE
 .TP 8
-.B \-\-buttonsize \fISIZE\fP
+.B \-\-buttonsize \fISIZE\fP \-\-buttonsize auto
 Adjust the size of the buttons in \fITux Paint\fP's user interface, between
 24 and 192 pixels (48 is the default, and suitable for displays with 96 to
-120dpi pixel density).
+120dpi pixel density). Use "auto" to have \fITux Paint\fP choose a button
+size based on \fITux Paint\fP's window/display size.
 
 .TP 8
 .B \-\-colorsrows=\fIROWS\fP
@@ -408,6 +413,11 @@ Paint takes to load, and reduce the amount of RAM it requires.
 Disable or enable (default) buttons to control stamps.  Controls include
 mirror, flip, shrink and grow.  (Note: Not all stamps will be controllable
 in all ways.)
+
+.TP 8
+.B \-\-nostamprotation \-\-stamprotation
+Disable or enable (default) the rotation step when placing a stamp in the
+drawing.
 
 .TP 8
 .B \-\-nomagiccontrols \-\-magiccontrols

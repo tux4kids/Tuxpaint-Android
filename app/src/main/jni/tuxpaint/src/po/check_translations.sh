@@ -5,8 +5,6 @@
 stamps_directory=../../../tuxpaint-stamps
 tpconfig_directory=../../../tuxpaint-config
 
-## FIXME: Check src/po/LINGUAS
-
 
 
 NUMBER_OF_LANGUAGES=0
@@ -110,7 +108,7 @@ do
     done
     if [ $CHECK -eq 0 ]
     then
-	echo _WARNING_ $LANG is missing in lang_prefixes in i18n.c
+	echo _WARNING_ $LANG is missing in \"lang_prefixes\" in \"i18n.c\"
     fi
   # end of lang_prefixes
 
@@ -121,9 +119,9 @@ do
     aux=0
     cat ../i18n.c|sed -n '/language_to_locale_array\[\]/,/};/{/language_to_locale/d;/american/d;/};/d;s/\"}.*//g;s/\"//g;s/{//g;s/,//g;p}'|while read
     do
+        # N.B., $REPLY is fed by the `read` above
 	langaux=`echo $REPLY|sed 's/.* //g'`
 	lang1=`echo $langaux|sed 's/_.*//g'`
-    #echo reply $REPLY
 	locale=`echo $REPLY|sed 's/.* //g;s/.UTF-8//g;'`
 
 	if [ $LANG == $lang1 ] || [ $LANG == `echo $langaux|sed 's/.UTF-8.*//g'` ]
@@ -141,7 +139,7 @@ do
 #if echo $item|grep $langname; then echo $langname $item; fi 
 		if [ $item == $langname ]; then echo OK $item; show_lang_usage=1; break; fi 
 	    done
-	    if [ $show_lang_usage -eq 0 ]; then echo _WARNING_ $langname is missing in show_lang_usage in i18n.c; fi
+	    if [ $show_lang_usage -eq 0 ]; then echo _WARNING_ $langname is missing in \"show_lang_usage\" in \"i18n.c\"; fi
 
 
 
@@ -149,11 +147,11 @@ do
 	    then
 		echo -n Checking $langname in langs in tuxpaint-config2.cxx...
 		configlang=0
-		for item in `cat $tpconfig_directory/src/tuxpaint-config2.cxx|sed -n '/default/,/};/{/american/d;/NUM_LANGS/d;/gettext/d;/};/d;s/.*, "//g;s/"}.*//g;p}'`
+		for item in `grep "/\* lang \*/" $tpconfig_directory/src/tuxpaint-config2.cxx | sed -e 's/.*, "\(.*\)".*/\1/'`
 		do
 		    if [ $item == $langname ]; then echo OK $item; configlang=1; break; fi
 		done
-		if [ $configlang -eq 0 ]; then echo _WARNING_ $langname is missing in lang in $tpconfig_directory/src/tuxpaint-config2.cxx; fi
+		if [ $configlang -eq 0 ]; then echo _WARNING_ $langname is missing in \"lang\" in \"$tpconfig_directory/src/tuxpaint-config2.cxx\"; fi
 	    fi
 
 	    echo -n Checking in the manpage...
@@ -162,27 +160,24 @@ do
 	    do
 		if [ $item == $langname ]; then echo OK $item; manlang=1; break; fi
 	    done
-	    if [ $manlang -eq 0 ]; then echo _WARNING_ $langname is missing in lang in ../../man/en/tuxpaint.1; fi
+	    if [ $manlang -eq 0 ]; then echo _WARNING_ $langname is missing in \"lang\" in \"../../man/en/tuxpaint.1\"; fi
 
 
 	    echo -n Checking LANGUAGE table in OPTIONS.html...
 	    OPTIONSlang=0
-	    for item in `cat ../../docs/en/html/OPTIONS.html|sed -n '/<code>english/,/table>/{/tr>/d;/table>/d;/nbsp/d;s/<code>//g;s/<\/code>//g;p}'`
+	    for item in `grep "<\!-- lang_arg -->" ../../docs/en/html/OPTIONS.html | sed -e 's/.*code>\(.*\)<\/code>.*$/\1/'`
 	    do
-		if [ $item == $langname ]; then echo OK $item; OPTIONSlang=1; break; fi
+		if [ "$item" == "$langname" ]; then echo OK $item; OPTIONSlang=1; break; fi
 	    done
-	    if [ $OPTIONSlang -eq 0 ]; then echo _WARNING_ $langname is missing in "Available Options" in the lang=LANGUAGE table in ../../docs/en/html/OPTIONS.html; fi
-
-
-
+	    if [ $OPTIONSlang -eq 0 ]; then echo _WARNING_ $langname is missing in \"Available Options\" in the \"lang=LANGUAGE\" table in ../../docs/en/html/OPTIONS.html; fi
 
 	    echo -n Checking Locale Code in OPTIONS.html...
 	    OPTIONSlocale=0
-	    for item in `cat ../../docs/en/html/OPTIONS.html|sed -n '/Locale values and the languages they represent./,/table>/{/tr>/d;/table>/d;/nbsp/d;s/<code>//g;s/<\/code>.*//g;/<td>/d;p}'`
+	    for item in `grep "<\!-- locale_code -->" ../../docs/en/html/OPTIONS.html | sed -e 's/.*code>\(.*\)<\/code>.*$/\1/'`
 	    do
 		if [ $item == $locale ]; then echo OK $item; OPTIONSlocale=1; break; fi
 	    done
-	    if [ $OPTIONSlocale -eq 0 ]; then echo _WARNING_ $locale is missing in the "Available Languages" table in the "Locale Code" field in ../../docs/en/html/OPTIONS.html; fi
+	    if [ $OPTIONSlocale -eq 0 ]; then echo _WARNING_ $locale is missing in the \"Available Languages\" table in the \"Locale Code\" field in ../../docs/en/html/OPTIONS.html; fi
 
 
 
@@ -196,11 +191,13 @@ do
 #echo $item $locale
 		if [ $item == $locale ] ; then echo OK $locale; show_locale_usage=1; fi
 	    done
-	    if [ $show_locale_usage -eq 0 ]; then echo _WARNING_ $locale is missing in show_locale_usage in i18n.c; fi
+	    if [ $show_locale_usage -eq 0 ]; then echo _WARNING_ $locale is missing in \"show_locale_usage\" in \"i18n.c\"; fi
 
 
 
-
+            echo -n Checking LINGUAS for $LANG ...
+            grep -q "$LANG" LINGUAS
+	    if [ $? -eq 1 ]; then echo _WARNING_ $LANG is missing from \"LINGUAS\"; else echo OK $LANG; fi
 	fi
     done
 

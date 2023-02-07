@@ -62,7 +62,7 @@
   section.indent dl p {
     margin-left: 0;
   }
-  p + ul {
+  p + ul, p + ol {
     margin-left: 2em;
   }
 
@@ -95,14 +95,14 @@
             子供向けのシンプルなお絵かきプログラム          </h3>
 
           <p>
-            Copyright &copy; 2002-2022 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br/>
+            Copyright &copy; 2002-2023 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br/>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a><br/>
             <a href="https://twitter.com/TuxPaintTweets">@TuxPaintTweets（ツイッター）</a><br/>
             <a href="https://tuxpaint.tumblr.com/">Tux Paint（Tumblr）</a>
           </p>
 
           <p>
-            2022年6月14日          </p>
+            2023年1月 4日          </p>
         </center>
       </header>
       <table border="2"
@@ -560,7 +560,33 @@
     「はんこ」ツールは、スタンプやステッカーを集めたようなものです。馬や木、月など、あらかじめ用意された様々な写真やイラストを絵に貼り付けることができます。  </p>
 
   <p>
-    マウスのカーソル動きに応じて画像の輪郭が表示され、貼り付け位置と大きさがわかります。  </p>
+    マウスを動かすと、スタンプが押される位置と大きさを示す輪郭線が表示されるので、押したい場所でクリックします。  </p>
+
+  <dl>
+    <dt>
+      <strong>標準の動作</strong>
+    </dt>
+
+    <dd>
+      <p>
+        続いて、キャンバス内でマウスを動かすと、スタンプが回転します。      </p>
+
+      <p>
+        最後にもう一度マウスをクリックすると、スタンプが押されます。      </p>
+    </dd>
+
+    <dt>
+      <strong>簡易モード</strong>
+    </dt>
+
+    <dd>
+      "スタンプの回転" オプションが無効化されている場合、回転の手順は省略され、マウスを放した時点でスタンプ押されます。      <p class="note">
+        <span title="Configuration option">&#9881;</span>        ""スタンプの回転"" ("<code>stamprotation</code>") についての詳細は、<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。      </p>
+    </dd>
+  </dl>
+
+  <p class="note">
+    <span title="Version variation">&#128220;</span>    <strong>注:</strong> はんこの回転機能は Tux Paint バージョン 0.9.29 で追加されました。  </p>
 
   <div class="screenshot-center">
     <img src="../../html/images/ex_stamps.png"
@@ -874,6 +900,10 @@
 
   <p>
     消している間、「キュッキュッ」と擦って消す効果音が流れます。  </p>
+
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <b><code>[X]</code></b> キーを押しながらマウスをクリックすると、小さな丸い消しゴムをすばやく使うことができます（もじ/ラベルツール選択時、はんこや図形の回転中、インタラクティブなまほうツールを使用している間は無効です）。マウスを離すと、選択中のツールに戻ります。  </p>
 </dd>
           </dl>
         </section>
@@ -1006,7 +1036,7 @@
           右下にある茶色の「けす」(ゴミ箱) ボタンで、選択した作品を削除します。(本当に削除して良いか確認されます)        </p>
 
         <p class="note">
-          <span title="Version variation">&#128220;</span>          <strong>注:</strong> Linux（バージョン 0.9.22以降）、Windows（バージョン 0.9.27以降）では、削除した作品は、デスクトップのゴミ箱に移動するので、後で元に戻すことができます。        </p>
+          <span title="Version variation">&#128220;</span>          <strong>注:</strong> Linux（バージョン 0.9.22以降）、Windows（バージョン 0.9.27以降）、macOS（バージョン 0.9.29以降）では、削除した作品は、デスクトップのゴミ箱に移動するので、後で元に戻すことができます。        </p>
         <div class="screenshot-right-after"></div>
       </li>
 
@@ -1419,7 +1449,7 @@
       <span title="Information">&#128161;</span>      <strong>注:</strong> 例えばお子さんなど、他のユーザーのために変換作業を行う場合は、<em>そのユーザーのアカウントで</em>コマンドを実行する必要があります。    </p>
 
     <p>
-      Example:    </p>
+      例:    </p>
 
     <blockquote>
       <code>$ <strong>tuxpaint-import おばあちゃん.jpg</strong><br>

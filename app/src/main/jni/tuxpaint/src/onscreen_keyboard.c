@@ -1,8 +1,8 @@
 /*
   onscreen_keyboard.c
 
-  Copyright (c) 2022
-  http://www.tuxpaint.org/
+  Copyright (c) 2011-2022
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -18,6 +18,8 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
+
+  Last modified: December 11, 2022
 */
 
 #include "debug.h"
@@ -59,7 +61,8 @@ static void draw_keyboard(on_screen_keyboard * keyboard);
 static osk_key *find_key(on_screen_keyboard * keyboard, int x, int y);
 static void set_key(osk_key * orig, osk_key * dest, int firsttime);
 static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name);
-static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layout_name);
+static struct osk_layout *load_layout(on_screen_keyboard * keyboard,
+                                      char *layout_name);
 
 #ifdef DEBUG_OSK_COMPOSEMAP
 static void print_composemap(osk_composenode * composemap, char *sp);
@@ -79,22 +82,27 @@ static SDL_Surface *SDL_DisplayFormatAlpha(SDL_Surface * surface)
   return (tmp);
 }
 
-struct osk_keyboard *osk_create(char * layout_name, SDL_Surface * canvas,
-                                SDL_Surface * BLANK_button_up, SDL_Surface * BLANK_button_down,
-                                SDL_Surface * BLANK_button_off, SDL_Surface * BLANK_button_nav,
+struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
+                                SDL_Surface * BLANK_button_up,
+                                SDL_Surface * BLANK_button_down,
+                                SDL_Surface * BLANK_button_off,
+                                SDL_Surface * BLANK_button_nav,
                                 SDL_Surface * BLANK_button_hold,
-                                SDL_Surface * BLANK_oskdel, SDL_Surface * BLANK_osktab, SDL_Surface * BLANK_oskenter,
-                                SDL_Surface * BLANK_oskcapslock, SDL_Surface * BLANK_oskshift,
+                                SDL_Surface * BLANK_oskdel,
+                                SDL_Surface * BLANK_osktab,
+                                SDL_Surface * BLANK_oskenter,
+                                SDL_Surface * BLANK_oskcapslock,
+                                SDL_Surface * BLANK_oskshift,
                                 int disable_change)
 {
-  SDL_Surface * surface;
-  SDL_Surface * button_up, * button_down;
-  SDL_Surface * button_off, * button_nav;
-  SDL_Surface * button_hold;
-  SDL_Surface * oskdel, * osktab, * oskenter;
-  SDL_Surface * oskcapslock, * oskshift;
-  osk_layout * layout;
-  on_screen_keyboard * keyboard;
+  SDL_Surface *surface;
+  SDL_Surface *button_up, *button_down;
+  SDL_Surface *button_off, *button_nav;
+  SDL_Surface *button_hold;
+  SDL_Surface *oskdel, *osktab, *oskenter;
+  SDL_Surface *oskcapslock, *oskshift;
+  osk_layout *layout;
+  on_screen_keyboard *keyboard;
   int layout_avail_width, layout_avail_height;
 
   keyboard = malloc(sizeof(on_screen_keyboard));
@@ -104,16 +112,17 @@ struct osk_keyboard *osk_create(char * layout_name, SDL_Surface * canvas,
   keyboard->disable_change = disable_change;
   layout = load_layout(keyboard, layout_name);
   if (!layout)
+  {
+    fprintf(stderr, "Error trying to load the required layout %s\n",
+            layout_name);
+    layout = load_layout(keyboard, strdup("default.layout"));
+    if (!layout)
     {
-      fprintf(stderr, "Error trying to load the required layout %s\n", layout_name);
-      layout = load_layout(keyboard, strdup("default.layout"));
-      if (!layout)
-        {
-          fprintf(stderr, "Error trying to load the default layout\n");
-          return NULL;
-        }
-      fprintf(stderr, "Loaded the default layout instead.\n");
+      fprintf(stderr, "Error trying to load the default layout\n");
+      return NULL;
     }
+    fprintf(stderr, "Loaded the default layout instead.\n");
+  }
 
 #ifdef OSK_DEBUG
   printf("w %i, h %i\n", layout->width, layout->height);
@@ -122,75 +131,78 @@ struct osk_keyboard *osk_create(char * layout_name, SDL_Surface * canvas,
   layout_avail_width = (canvas->w * 0.9);
   layout_avail_height = (canvas->h * 0.5);
 
-  if (layout->width * BLANK_button_up->w >= layout_avail_width || /* Don't allow it to be > 90% of the width of the canvas */
-      layout->height * BLANK_button_up->h >= layout_avail_height /* Don't allow it to be > 50% of the height of the canvas */) {
-      /* Full-size buttons too large, resize to fit */
-      float max_w, max_h;
-      float scale_w, scale_h;
+  if (layout->width * BLANK_button_up->w >= layout_avail_width ||       /* Don't allow it to be > 90% of the width of the canvas */
+      layout->height * BLANK_button_up->h >= layout_avail_height
+      /* Don't allow it to be > 50% of the height of the canvas */ )
+  {
+    /* Full-size buttons too large, resize to fit */
+    float max_w, max_h;
+    float scale_w, scale_h;
 
 #ifdef OSK_DEBUG
-      printf("%d x %d layout of %d x %d buttons won't fit within %d x %d pixel area...\n",
-        layout->width, layout->height,
-        BLANK_button_up->w, BLANK_button_up->h,
-        layout_avail_width, layout_avail_height);
+    printf
+      ("%d x %d layout of %d x %d buttons won't fit within %d x %d pixel area...\n",
+       layout->width, layout->height, BLANK_button_up->w, BLANK_button_up->h,
+       layout_avail_width, layout_avail_height);
 #endif
 
-      max_w = (float) layout_avail_width / (float) layout->width;
-      max_h = (float) layout_avail_height / (float) layout->height;
+    max_w = (float) layout_avail_width / (float) layout->width;
+    max_h = (float) layout_avail_height / (float) layout->height;
 
 #ifdef OSK_DEBUG
-      printf("...want (%d / %d) x (%d x %d) = %.2f x %.2f buttons...\n",
-        layout_avail_width, layout->width,
-        layout_avail_height, layout->height,
-        max_w, max_h);
+    printf("...want (%d / %d) x (%d x %d) = %.2f x %.2f buttons...\n",
+           layout_avail_width, layout->width,
+           layout_avail_height, layout->height, max_w, max_h);
 #endif
 
-      if (max_w > max_h)
-        max_w = max_h;
-      if (max_h > max_w)
-        max_h = max_w;
+    if (max_w > max_h)
+      max_w = max_h;
+    if (max_h > max_w)
+      max_h = max_w;
 
-      scale_w = (float) max_w / (float) BLANK_button_up->w;
-      scale_h = (float) max_h / (float) BLANK_button_up->h;
+    scale_w = (float) max_w / (float) BLANK_button_up->w;
+    scale_h = (float) max_h / (float) BLANK_button_up->h;
 
 #ifdef OSK_DEBUG
-      printf("...so scaling by w=%.2f & h=%.2f\n",
-        scale_w, scale_h);
+    printf("...so scaling by w=%.2f & h=%.2f\n", scale_w, scale_h);
 #endif
 
-      button_up = zoomSurface(BLANK_button_up, scale_w, scale_h, 1);
-      button_down = zoomSurface(BLANK_button_down, scale_w, scale_h, 1);
-      button_off = zoomSurface(BLANK_button_off, scale_w, scale_h, 1);
-      button_nav = zoomSurface(BLANK_button_nav, scale_w, scale_h, 1);
-      button_hold = zoomSurface(BLANK_button_hold, scale_w, scale_h, 1);
-      oskdel = zoomSurface(BLANK_oskdel, scale_w, scale_h, 1);
-      osktab = zoomSurface(BLANK_osktab, scale_w, scale_h, 1);
-      oskenter = zoomSurface(BLANK_oskenter, scale_w, scale_h, 1);
-      oskcapslock = zoomSurface(BLANK_oskcapslock, scale_w, scale_h, 1);
-      oskshift = zoomSurface(BLANK_oskshift, scale_w, scale_h, 1);
-  } else {
-      button_up = SDL_DisplayFormatAlpha(BLANK_button_up);
-      button_down = SDL_DisplayFormatAlpha(BLANK_button_down);
-      button_off = SDL_DisplayFormatAlpha(BLANK_button_off);
-      button_nav = SDL_DisplayFormatAlpha(BLANK_button_nav);
-      button_hold = SDL_DisplayFormatAlpha(BLANK_button_hold);
-      oskdel = SDL_DisplayFormatAlpha(BLANK_oskdel);
-      osktab = SDL_DisplayFormatAlpha(BLANK_osktab);
-      oskenter = SDL_DisplayFormatAlpha(BLANK_oskenter);
-      oskcapslock = SDL_DisplayFormatAlpha(BLANK_oskcapslock);
-      oskshift = SDL_DisplayFormatAlpha(BLANK_oskshift);
+    button_up = zoomSurface(BLANK_button_up, scale_w, scale_h, 1);
+    button_down = zoomSurface(BLANK_button_down, scale_w, scale_h, 1);
+    button_off = zoomSurface(BLANK_button_off, scale_w, scale_h, 1);
+    button_nav = zoomSurface(BLANK_button_nav, scale_w, scale_h, 1);
+    button_hold = zoomSurface(BLANK_button_hold, scale_w, scale_h, 1);
+    oskdel = zoomSurface(BLANK_oskdel, scale_w, scale_h, 1);
+    osktab = zoomSurface(BLANK_osktab, scale_w, scale_h, 1);
+    oskenter = zoomSurface(BLANK_oskenter, scale_w, scale_h, 1);
+    oskcapslock = zoomSurface(BLANK_oskcapslock, scale_w, scale_h, 1);
+    oskshift = zoomSurface(BLANK_oskshift, scale_w, scale_h, 1);
+  }
+  else
+  {
+    button_up = SDL_DisplayFormatAlpha(BLANK_button_up);
+    button_down = SDL_DisplayFormatAlpha(BLANK_button_down);
+    button_off = SDL_DisplayFormatAlpha(BLANK_button_off);
+    button_nav = SDL_DisplayFormatAlpha(BLANK_button_nav);
+    button_hold = SDL_DisplayFormatAlpha(BLANK_button_hold);
+    oskdel = SDL_DisplayFormatAlpha(BLANK_oskdel);
+    osktab = SDL_DisplayFormatAlpha(BLANK_osktab);
+    oskenter = SDL_DisplayFormatAlpha(BLANK_oskenter);
+    oskcapslock = SDL_DisplayFormatAlpha(BLANK_oskcapslock);
+    oskshift = SDL_DisplayFormatAlpha(BLANK_oskshift);
   }
 
   surface = SDL_CreateRGBSurface(canvas->flags,
                                  layout->width * button_up->w,
                                  layout->height * button_up->h,
                                  canvas->format->BitsPerPixel,
-                                 canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, 0);
+                                 canvas->format->Rmask, canvas->format->Gmask,
+                                 canvas->format->Bmask, 0);
   if (!surface)
-    {
-      fprintf(stderr, "Error creating the onscreen keyboard surface\n");
-      return NULL;
-    }
+  {
+    fprintf(stderr, "Error creating the onscreen keyboard surface\n");
+    return NULL;
+  }
   //  keyboard->name = layout_name;
   keyboard->canvas_ptr = canvas;
   keyboard->layout = layout;
@@ -238,7 +250,8 @@ struct osk_keyboard *osk_create(char * layout_name, SDL_Surface * canvas,
   keyboard->BLANK_oskshift = BLANK_oskshift;
 
   SDL_FillRect(surface, NULL,
-               SDL_MapRGB(surface->format, keyboard->layout->bgcolor.r, keyboard->layout->bgcolor.g,
+               SDL_MapRGB(surface->format, keyboard->layout->bgcolor.r,
+                          keyboard->layout->bgcolor.g,
                           keyboard->layout->bgcolor.b));
 
   keybd_prepare(keyboard);
@@ -247,7 +260,8 @@ struct osk_keyboard *osk_create(char * layout_name, SDL_Surface * canvas,
   return keyboard;
 }
 
-static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layout_name)
+static struct osk_layout *load_layout(on_screen_keyboard * keyboard,
+                                      char *layout_name)
 {
   FILE *fi;
   int hlayout_loaded;
@@ -270,46 +284,47 @@ static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layou
   layout->sizeofkeysymdefs = 0;
   layout->bgcolor = def_bgcolor;
   layout->fgcolor = def_fgcolor;
-  
+
   hlayout_loaded = 0;
 #ifdef OSK_DEBUG
   printf("load_layout %s\n", layout_name);
 #endif
   filename = malloc(sizeof(char) * 255);
   if (layout_name != NULL)
+  {
+    keyboard->name = strdup(layout_name);
+    /* Try full path */
+    fi = fopen(layout_name, "r");
+    if (fi == NULL)
     {
-      keyboard->name = strdup(layout_name);
-      /* Try full path */
-      fi = fopen(layout_name, "r");
-      if (fi == NULL)
-        {
-          /* Try with DATA_PREFIX */
+      /* Try with DATA_PREFIX */
 
-          snprintf(filename, 255, "%sosk/%s", DATA_PREFIX, layout_name);
-          fi = fopen(filename, "r");
-          if (fi == NULL)
-            {
-              fprintf(stderr, "Can't open either %s nor %s\n", layout_name, filename);
-              /* Fallback to default */
-              snprintf(filename, 255, "%sosk/default.layout", DATA_PREFIX);
-              fi = fopen(filename, "r");
-              keyboard->name = strdup("default.layout");
-            }
-        }
-    }
-  else
-    {
-      snprintf(filename, 255, "%sosk/default.layout", DATA_PREFIX);
+      snprintf(filename, 255, "%sosk/%s", DATA_PREFIX, layout_name);
       fi = fopen(filename, "r");
-      keyboard->name = strdup("default.layout");
+      if (fi == NULL)
+      {
+        fprintf(stderr, "Can't open either %s nor %s\n", layout_name,
+                filename);
+        /* Fallback to default */
+        snprintf(filename, 255, "%sosk/default.layout", DATA_PREFIX);
+        fi = fopen(filename, "r");
+        keyboard->name = strdup("default.layout");
+      }
     }
+  }
+  else
+  {
+    snprintf(filename, 255, "%sosk/default.layout", DATA_PREFIX);
+    fi = fopen(filename, "r");
+    keyboard->name = strdup("default.layout");
+  }
 
   free(filename);
   if (fi == NULL)
-    {
-      fprintf(stderr, "Can't load the on screen keyboard layout\n");
-      return NULL;
-    }
+  {
+    fprintf(stderr, "Can't load the on screen keyboard layout\n");
+    return NULL;
+  }
 
 
   line = malloc(sizeof(char) * 1024);
@@ -317,52 +332,52 @@ static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layou
   value = malloc(sizeof(char) * 255);
 
   while (!feof(fi))
+  {
+    tmp_ptr = fgets(line, 1023, fi);
+
+    if (is_blank_or_comment(line))
+      continue;
+
+    sscanf(line, "%s %s", key, value);
+    if (strcmp("layout", key) == 0 && !hlayout_loaded)
     {
-      tmp_ptr = fgets(line, 1023, fi);
-
-      if (is_blank_or_comment(line))
-        continue;
-
-      sscanf(line, "%s %s", key, value);
-      if (strcmp("layout", key) == 0 && !hlayout_loaded)
-        {
 #ifdef OSK_DEBUG
-          printf("layout found: %s\n", value);
+      printf("layout found: %s\n", value);
 #endif
 
-          load_hlayout(layout, value);
-          hlayout_loaded = 1;
-        }
-      else if (strncmp("keymap", key, 6) == 0)
-        {
-#ifdef OSK_DEBUG
-          printf("keymap found: %s\n", value);
-#endif
-          load_keymap(layout, value);
-        }
-      else if (strncmp("composemap", key, 10) == 0)
-        {
-#ifdef OSK_DEBUG
-          printf("composemap found: %s\n", value);
-#endif
-          load_composemap(layout, value);
-        }
-      else if (strncmp("keysymdefs", key, 10) == 0)
-        {
-          load_keysymdefs(layout, value);
-        }
-      else if (strncmp("keyboardlist", key, 12) == 0)
-        {
-          strcpy(value, &line[13]);
-          keyboard->keyboard_list = strdup(value);
-        }
-
-#ifdef OSK_DEBUG
-      printf("key %s, value %s\n", key, value);
-#endif
-      key[0] = '\0';
-      value[0] = '\0';
+      load_hlayout(layout, value);
+      hlayout_loaded = 1;
     }
+    else if (strncmp("keymap", key, 6) == 0)
+    {
+#ifdef OSK_DEBUG
+      printf("keymap found: %s\n", value);
+#endif
+      load_keymap(layout, value);
+    }
+    else if (strncmp("composemap", key, 10) == 0)
+    {
+#ifdef OSK_DEBUG
+      printf("composemap found: %s\n", value);
+#endif
+      load_composemap(layout, value);
+    }
+    else if (strncmp("keysymdefs", key, 10) == 0)
+    {
+      load_keysymdefs(layout, value);
+    }
+    else if (strncmp("keyboardlist", key, 12) == 0)
+    {
+      strcpy(value, &line[13]);
+      keyboard->keyboard_list = strdup(value);
+    }
+
+#ifdef OSK_DEBUG
+    printf("key %s, value %s\n", key, value);
+#endif
+    key[0] = '\0';
+    value[0] = '\0';
+  }
 
 
 
@@ -402,19 +417,20 @@ void load_hlayout(osk_layout * layout, char *hlayout_name)
   /* Try full path */
   fi = fopen(hlayout_name, "r");
   if (fi == NULL)
-    {
-      /* Try with DATA_PREFIX */
+  {
+    /* Try with DATA_PREFIX */
 
-      snprintf(filename, 255, "%sosk/%s", DATA_PREFIX, hlayout_name);
-      fi = fopen(filename, "r");
-      if (fi == NULL)
-        {
-          fprintf(stderr, "Can't open either %s nor %s\n", hlayout_name, filename);
-          layout->keys = NULL;
-          free(filename);
-          return;
-        }
+    snprintf(filename, 255, "%sosk/%s", DATA_PREFIX, hlayout_name);
+    fi = fopen(filename, "r");
+    if (fi == NULL)
+    {
+      fprintf(stderr, "Can't open either %s nor %s\n", hlayout_name,
+              filename);
+      layout->keys = NULL;
+      free(filename);
+      return;
     }
+  }
 
   free(filename);
 
@@ -433,123 +449,127 @@ void load_hlayout(osk_layout * layout, char *hlayout_name)
 
 
   while (!feof(fi))
+  {
+    if (width && height && !allocated)
     {
-      if (width && height && !allocated)
-        {
-          layout->keys = malloc(height * sizeof(osk_key *));
-          layout->keys[0] = malloc(width * sizeof(osk_key));
+      layout->keys = malloc(height * sizeof(osk_key *));
+      layout->keys[0] = malloc(width * sizeof(osk_key));
 
-          for (i = 0; i < width; i++)
-            {
-              layout->keys[0][i].width = 0;
-              layout->keys[0][i].plain_label = NULL;
-              layout->keys[line_number][i].top_label = NULL;
-              layout->keys[line_number][i].altgr_label = NULL;
-              layout->keys[line_number][i].shift_altgr_label = NULL;
-            }
-          layout->width = width;
-          layout->height = height;
+      for (i = 0; i < width; i++)
+      {
+        layout->keys[0][i].width = 0;
+        layout->keys[0][i].plain_label = NULL;
+        layout->keys[line_number][i].top_label = NULL;
+        layout->keys[line_number][i].altgr_label = NULL;
+        layout->keys[line_number][i].shift_altgr_label = NULL;
+      }
+      layout->width = width;
+      layout->height = height;
 
 #ifdef OSK_DEBUG
-          printf("w %i, h %i\n", layout->width, layout->height);
+      printf("w %i, h %i\n", layout->width, layout->height);
 #endif
-          allocated = 1;
-        }
-
-      tmp_ptr = fgets(line, 1023, fi);
-
-      if (is_blank_or_comment(line))
-        continue;
-
-      if (strncmp(line, "WIDTH", 5) == 0)
-        sscanf(line, "%s %i", key, &width);
-
-      else if (strncmp(line, "HEIGHT", 5) == 0)
-        sscanf(line, "%s %i", key, &height);
-
-      else if (strncmp(line, "FONTPATH", 8) == 0)
-        {
-#ifdef OSK_DEBUG
-          printf("linefont %s\n", line);
-#endif
-          sscanf(line, "%s %s", key, fontpath);
-          if (!is_blank_or_comment(fontpath))
-            have_fontpath = 1;
-        }
-      else if (strncmp(line, "FGCOLOR", 5) == 0)
-        {
-#ifdef OSK_DEBUG
-          printf("linefont %s\n", line);
-#endif
-          sscanf(line, "%s %i %i %i", key, &r, &g, &b);
-          if (r > 0 && r < 256 && g > 0 && g < 256 && b > 0 && b < 256)
-            {
-              layout->fgcolor.r = r;
-              layout->fgcolor.g = g;
-              layout->fgcolor.b = b;
-              r = g = b = 256;
-            }
-        }
-      else if (strncmp(line, "BGCOLOR", 5) == 0)
-        {
-#ifdef OSK_DEBUG
-          printf("linefont %s\n", line);
-#endif
-          sscanf(line, "%s %i %i %i", key, &r, &g, &b);
-          if (r > 0 && r < 256 && g > 0 && g < 256 && b > 0 && b < 256)
-            {
-              layout->bgcolor.r = r;
-              layout->bgcolor.g = g;
-              layout->bgcolor.b = b;
-              r = g = b = 256;
-            }
-        }
-      else if (strncmp(line, "NEWLINE", 7) == 0)
-        {
-          line_number++;
-          key_number = 0;
-          layout->keys[line_number] = malloc(width * sizeof(osk_key));
-          for (i = 0; i < width; i++)
-            {
-              layout->keys[line_number][i].width = 0;
-              layout->keys[line_number][i].plain_label = NULL;
-              layout->keys[line_number][i].top_label = NULL;
-              layout->keys[line_number][i].altgr_label = NULL;
-              layout->keys[line_number][i].shift_altgr_label = NULL;
-            }
-        }
-      else if (width && height && allocated && strncmp(line, "KEY ", 4) == 0 && key_number < width)
-        {
-          plain_label = malloc(sizeof(char) * 64);
-          top_label = malloc(sizeof(char) * 64);
-          altgr_label = malloc(sizeof(char) * 64);
-          shift_altgr_label = malloc(sizeof(char) * 64);
-
-          sscanf(line,
-                 "%s %i %i.%i %s %s %s %s %i",
-                 key,
-                 &keycode,
-                 &key_width, &key_width_decimal, plain_label, top_label, altgr_label, shift_altgr_label, &shiftcaps);
-          layout->keys[line_number][key_number].keycode = keycode;
-          layout->keys[line_number][key_number].width = (float)0.1 *key_width_decimal + key_width;
-
-          layout->keys[line_number][key_number].plain_label = plain_label;
-          layout->keys[line_number][key_number].top_label = top_label;
-          layout->keys[line_number][key_number].altgr_label = altgr_label;
-          layout->keys[line_number][key_number].shift_altgr_label = shift_altgr_label;
-          layout->keys[line_number][key_number].shiftcaps = shiftcaps;
-          layout->keys[line_number][key_number].stick = 0;
-          key_number++;
-        }
+      allocated = 1;
     }
+
+    tmp_ptr = fgets(line, 1023, fi);
+
+    if (is_blank_or_comment(line))
+      continue;
+
+    if (strncmp(line, "WIDTH", 5) == 0)
+      sscanf(line, "%s %i", key, &width);
+
+    else if (strncmp(line, "HEIGHT", 5) == 0)
+      sscanf(line, "%s %i", key, &height);
+
+    else if (strncmp(line, "FONTPATH", 8) == 0)
+    {
+#ifdef OSK_DEBUG
+      printf("linefont %s\n", line);
+#endif
+      sscanf(line, "%s %s", key, fontpath);
+      if (!is_blank_or_comment(fontpath))
+        have_fontpath = 1;
+    }
+    else if (strncmp(line, "FGCOLOR", 5) == 0)
+    {
+#ifdef OSK_DEBUG
+      printf("linefont %s\n", line);
+#endif
+      sscanf(line, "%s %i %i %i", key, &r, &g, &b);
+      if (r > 0 && r < 256 && g > 0 && g < 256 && b > 0 && b < 256)
+      {
+        layout->fgcolor.r = r;
+        layout->fgcolor.g = g;
+        layout->fgcolor.b = b;
+        r = g = b = 256;
+      }
+    }
+    else if (strncmp(line, "BGCOLOR", 5) == 0)
+    {
+#ifdef OSK_DEBUG
+      printf("linefont %s\n", line);
+#endif
+      sscanf(line, "%s %i %i %i", key, &r, &g, &b);
+      if (r > 0 && r < 256 && g > 0 && g < 256 && b > 0 && b < 256)
+      {
+        layout->bgcolor.r = r;
+        layout->bgcolor.g = g;
+        layout->bgcolor.b = b;
+        r = g = b = 256;
+      }
+    }
+    else if (strncmp(line, "NEWLINE", 7) == 0)
+    {
+      line_number++;
+      key_number = 0;
+      layout->keys[line_number] = malloc(width * sizeof(osk_key));
+      for (i = 0; i < width; i++)
+      {
+        layout->keys[line_number][i].width = 0;
+        layout->keys[line_number][i].plain_label = NULL;
+        layout->keys[line_number][i].top_label = NULL;
+        layout->keys[line_number][i].altgr_label = NULL;
+        layout->keys[line_number][i].shift_altgr_label = NULL;
+      }
+    }
+    else if (width && height && allocated && strncmp(line, "KEY ", 4) == 0
+             && key_number < width)
+    {
+      plain_label = malloc(sizeof(char) * 64);
+      top_label = malloc(sizeof(char) * 64);
+      altgr_label = malloc(sizeof(char) * 64);
+      shift_altgr_label = malloc(sizeof(char) * 64);
+
+      sscanf(line,
+             "%s %i %i.%i %s %s %s %s %i",
+             key,
+             &keycode,
+             &key_width, &key_width_decimal, plain_label, top_label,
+             altgr_label, shift_altgr_label, &shiftcaps);
+      layout->keys[line_number][key_number].keycode = keycode;
+      layout->keys[line_number][key_number].width =
+        (float) 0.1 *key_width_decimal + key_width;
+
+      layout->keys[line_number][key_number].plain_label = plain_label;
+      layout->keys[line_number][key_number].top_label = top_label;
+      layout->keys[line_number][key_number].altgr_label = altgr_label;
+      layout->keys[line_number][key_number].shift_altgr_label =
+        shift_altgr_label;
+      layout->keys[line_number][key_number].shiftcaps = shiftcaps;
+      layout->keys[line_number][key_number].stick = 0;
+      key_number++;
+    }
+  }
 
   if (have_fontpath)
     layout->fontpath = fontpath;
   else
-    {
-      free(fontpath);
-      layout->fontpath = NULL;
-    }
+  {
+    free(fontpath);
+    layout->fontpath = NULL;
+  }
 
   free(line);
   free(key);
@@ -587,19 +607,19 @@ void load_keymap(osk_layout * layout, char *keymap_name)
   /* Try full path */
   fi = fopen(keymap_name, "r");
   if (fi == NULL)
-    {
-      /* Try with DATA_PREFIX */
+  {
+    /* Try with DATA_PREFIX */
 
-      snprintf(filename, 255, "%sosk/%s", DATA_PREFIX, keymap_name);
-      fi = fopen(filename, "r");
-      if (fi == NULL)
-        {
-          fprintf(stderr, "Can't open either %s nor %s\n", keymap_name, filename);
-          layout->keys = NULL;
-          free(filename);
-          return;
-        }
+    snprintf(filename, 255, "%sosk/%s", DATA_PREFIX, keymap_name);
+    fi = fopen(filename, "r");
+    if (fi == NULL)
+    {
+      fprintf(stderr, "Can't open either %s nor %s\n", keymap_name, filename);
+      layout->keys = NULL;
+      free(filename);
+      return;
     }
+  }
 
   free(filename);
 
@@ -607,53 +627,55 @@ void load_keymap(osk_layout * layout, char *keymap_name)
   layout->keymap = malloc(256 * sizeof(osk_keymap));
 
   for (i = 0; i < 256; i++)
-    {
-      layout->keymap[i].plain = NULL;
-      layout->keymap[i].caps = NULL;
-      layout->keymap[i].altgr = NULL;
-      layout->keymap[i].shiftaltgr = NULL;
-    }
+  {
+    layout->keymap[i].plain = NULL;
+    layout->keymap[i].caps = NULL;
+    layout->keymap[i].altgr = NULL;
+    layout->keymap[i].shiftaltgr = NULL;
+  }
 
 
   while (!feof(fi))
+  {
+    tmp_ptr = fgets(line, 1023, fi);
+
+    if (is_blank_or_comment(line))
+      continue;
+
+    ksname1 = malloc(sizeof(char) * 64);
+    ksname2 = malloc(sizeof(char) * 64);
+    ksname3 = malloc(sizeof(char) * 64);
+    ksname4 = malloc(sizeof(char) * 64);
+    ksname1[0] = '\0';
+    ksname2[0] = '\0';
+    ksname3[0] = '\0';
+    ksname4[0] = '\0';
+
+    /* FIXME: Why is the us-intl keymap duplicating the two first entries of every keycode? */
+    /* And why is the arabic keymap using the 5th and 6th entries as plain/shifted keys? */
+    readed =
+      sscanf(line, "keycode %i = %s %s %s %s", &keycode, ksname1, ksname2,
+             ksname3, ksname4);
+
+    if (readed == 5 && keycode > 8 && keycode < 256)
     {
-      tmp_ptr = fgets(line, 1023, fi);
-
-      if (is_blank_or_comment(line))
-        continue;
-
-      ksname1 = malloc(sizeof(char) * 64);
-      ksname2 = malloc(sizeof(char) * 64);
-      ksname3 = malloc(sizeof(char) * 64);
-      ksname4 = malloc(sizeof(char) * 64);
-      ksname1[0] = '\0';
-      ksname2[0] = '\0';
-      ksname3[0] = '\0';
-      ksname4[0] = '\0';
-
-      /* FIXME: Why is the us-intl keymap duplicating the two first entries of every keycode? */
-      /* And why is the arabic keymap using the 5th and 6th entries as plain/shifted keys? */
-      readed = sscanf(line, "keycode %i = %s %s %s %s", &keycode, ksname1, ksname2, ksname3, ksname4);
-
-      if (readed == 5 && keycode > 8 && keycode < 256)
-        {
-          layout->keymap[keycode].plain = ksname1;
-          layout->keymap[keycode].caps = ksname2;
-          layout->keymap[keycode].altgr = ksname3;
-          layout->keymap[keycode].shiftaltgr = ksname4;
-        }
-      else
-        {
-          free(ksname1);
-          free(ksname2);
-          free(ksname3);
-          free(ksname4);
-          layout->keymap[keycode].plain = NULL;
-          layout->keymap[keycode].caps = NULL;
-          layout->keymap[keycode].altgr = NULL;
-          layout->keymap[keycode].shiftaltgr = NULL;
-        }
+      layout->keymap[keycode].plain = ksname1;
+      layout->keymap[keycode].caps = ksname2;
+      layout->keymap[keycode].altgr = ksname3;
+      layout->keymap[keycode].shiftaltgr = ksname4;
     }
+    else
+    {
+      free(ksname1);
+      free(ksname2);
+      free(ksname3);
+      free(ksname4);
+      layout->keymap[keycode].plain = NULL;
+      layout->keymap[keycode].caps = NULL;
+      layout->keymap[keycode].altgr = NULL;
+      layout->keymap[keycode].shiftaltgr = NULL;
+    }
+  }
 
   free(line);
   fclose(fi);
@@ -673,7 +695,8 @@ void load_keymap(osk_layout * layout, char *keymap_name)
 }
 
 /* Scans a line of keysyms and result and classifies them. */
-static void gettokens(char *line, char *delim, char **pointer, osk_composenode * composenode, osk_layout * layout)
+static void gettokens(char *line, char *delim, char **pointer,
+                      osk_composenode * composenode, osk_layout * layout)
 {
   int i;
   char *tok;
@@ -688,73 +711,76 @@ static void gettokens(char *line, char *delim, char **pointer, osk_composenode *
     return;
 
   if (tok[0] == ':')            /* End of precompose keysyms, next will be the result in UTF-8. */
+  {
+    free(tok);
+    tok = strdup(strtok_r(line, ": \"\t", pointer));
+
+    mbstowcs(wtok, tok, 255);
+
+    result = wcsdup(wtok);
+    /* printf("->%ls<-\n", wtok); */
+    free(wtok);
+    free(tok);
+    composenode->result = result;
+    return;
+  }
+  else
+  {
+    if (composenode->size == 0)
     {
-      free(tok);
-      tok = strdup(strtok_r(line, ": \"\t", pointer));
+      composenode->size = 1;
+      auxnode = malloc(sizeof(osk_composenode));
+      composenode->childs = malloc(sizeof(osk_composenode *));
+      composenode->childs[0] = auxnode;
+      mbstowcs(wtok, tok, 254); /* <<< CRASH */
+      composenode->childs[0]->keysym = wcsdup(wtok);
+      composenode->childs[0]->result = NULL;
+      composenode->childs[0]->size = 0;
 
-      mbstowcs(wtok, tok, 255);
+      /* printf("size %d, keysym %ls => ", composenode->size, composenode->childs[0]->keysym); */
 
-      result = wcsdup(wtok);
-      /* printf("->%ls<-\n", wtok); */
+      gettokens(NULL, delim, pointer, composenode->childs[0], layout);
       free(wtok);
       free(tok);
-      composenode->result = result;
       return;
     }
-  else
+    else
     {
-      if (composenode->size == 0)
+      for (i = 0; i < composenode->size; i++)
+      {
+        mbstowcs(wtok, tok, 255);
+        if (wcscmp(composenode->childs[i]->keysym, wtok) == 0)
         {
-          composenode->size = 1;
-          auxnode = malloc(sizeof(osk_composenode));
-          composenode->childs = malloc(sizeof(osk_composenode *));
-          composenode->childs[0] = auxnode;
-          mbstowcs(wtok, tok, 254);     /* <<< CRASH */
-          composenode->childs[0]->keysym = wcsdup(wtok);
-          composenode->childs[0]->result = NULL;
-          composenode->childs[0]->size = 0;
 
-          /* printf("size %d, keysym %ls => ", composenode->size, composenode->childs[0]->keysym); */
+          /* printf("Size %d, keysym %ls =>", composenode->size, composenode->childs[i]->keysym); */
 
-          gettokens(NULL, delim, pointer, composenode->childs[0], layout);
-          free(wtok);
+          gettokens(NULL, delim, pointer, composenode->childs[i], layout);
           free(tok);
+          free(wtok);
           return;
         }
-      else
-        {
-          for (i = 0; i < composenode->size; i++)
-            {
-              mbstowcs(wtok, tok, 255);
-              if (wcscmp(composenode->childs[i]->keysym, wtok) == 0)
-                {
-
-                  /* printf("Size %d, keysym %ls =>", composenode->size, composenode->childs[i]->keysym); */
-
-                  gettokens(NULL, delim, pointer, composenode->childs[i], layout);
-                  free(tok);
-                  free(wtok);
-                  return;
-                }
-            }
-        }
-
-      composenode->size = composenode->size + 1;
-      composenode->childs = realloc(composenode->childs, composenode->size * sizeof(osk_composenode *));
-
-      mbstowcs(wtok, tok, 255);
-      auxnode = malloc(sizeof(osk_composenode));
-      composenode->childs[composenode->size - 1] = auxnode;     //malloc(sizeof(osk_composenode));
-      composenode->childs[composenode->size - 1]->keysym = wtok;
-      composenode->childs[composenode->size - 1]->result = NULL;
-      composenode->childs[composenode->size - 1]->size = 0;
-
-      /* printf("size %d, keysym %ls =>", composenode->size, composenode->childs[composenode->size - 1]->keysym); */
-
-      gettokens(NULL, delim, pointer, composenode->childs[composenode->size - 1], layout);
-      free(tok);
-      return;
+      }
     }
+
+    composenode->size = composenode->size + 1;
+    composenode->childs =
+      realloc(composenode->childs,
+              composenode->size * sizeof(osk_composenode *));
+
+    mbstowcs(wtok, tok, 255);
+    auxnode = malloc(sizeof(osk_composenode));
+    composenode->childs[composenode->size - 1] = auxnode;       //malloc(sizeof(osk_composenode));
+    composenode->childs[composenode->size - 1]->keysym = wtok;
+    composenode->childs[composenode->size - 1]->result = NULL;
+    composenode->childs[composenode->size - 1]->size = 0;
+
+    /* printf("size %d, keysym %ls =>", composenode->size, composenode->childs[composenode->size - 1]->keysym); */
+
+    gettokens(NULL, delim, pointer,
+              composenode->childs[composenode->size - 1], layout);
+    free(tok);
+    return;
+  }
 }
 
 
@@ -775,19 +801,20 @@ static void load_composemap(osk_layout * layout, char *composemap_name)
   /* Try full path */
   fi = fopen(composemap_name, "r");
   if (fi == NULL)
-    {
-      /* Try with DATA_PREFIX */
+  {
+    /* Try with DATA_PREFIX */
 
-      snprintf(filename, 255, "%sosk/%s", DATA_PREFIX, composemap_name);
-      fi = fopen(filename, "r");
-      if (fi == NULL)
-        {
-          fprintf(stderr, "Can't open either %s nor %s\n", composemap_name, filename);
-          layout->keys = NULL;
-          free(filename);
-          return;
-        }
+    snprintf(filename, 255, "%sosk/%s", DATA_PREFIX, composemap_name);
+    fi = fopen(filename, "r");
+    if (fi == NULL)
+    {
+      fprintf(stderr, "Can't open either %s nor %s\n", composemap_name,
+              filename);
+      layout->keys = NULL;
+      free(filename);
+      return;
     }
+  }
 
   free(filename);
 
@@ -799,14 +826,14 @@ static void load_composemap(osk_layout * layout, char *composemap_name)
   line = malloc(1024 * sizeof(char));
 
   while (!feof(fi))
-    {
-      tmp_ptr = fgets(line, 1023, fi);
+  {
+    tmp_ptr = fgets(line, 1023, fi);
 
-      if (is_blank_or_comment(line))
-        continue;
+    if (is_blank_or_comment(line))
+      continue;
 
-      gettokens(line, (char *)">< \t", pointer, layout->composemap, layout);
-    }
+    gettokens(line, (char *) ">< \t", pointer, layout->composemap, layout);
+  }
 
   fclose(fi);
   free(line);
@@ -829,29 +856,29 @@ static void print_composemap(osk_composenode * composemap, char *sp)
   printf("%d ==> ", composemap->size);
 #endif
   if (composemap->size == 0)
-    {
+  {
 #ifdef OSK_DEBUG
-      printf("result %ls\n", composemap->result);
+    printf("result %ls\n", composemap->result);
 #endif
-      return;
-    }
+    return;
+  }
   if (sp)
-    {
-      sprintf(space, "%s\t", sp);
-    }
+  {
+    sprintf(space, "%s\t", sp);
+  }
   else
-    {
-      sprintf(space, " ");
-    }
+  {
+    sprintf(space, " ");
+  }
 #ifdef OSK_DEBUG
   printf("%s", space);
 #endif
 
   for (i = 0; i < composemap->size; i++)
-    {
-      print_composemap(composemap->childs[i], space);
-      //      free(space);
-    }
+  {
+    print_composemap(composemap->childs[i], space);
+    //      free(space);
+  }
   /* for (i = 0; i < composemap->size; i++) */
   /*   { */
   /*     printf("aaa %ls, ", composemap->keysym); */
@@ -883,19 +910,20 @@ static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name)
   /* Try full path */
   fi = fopen(keysymdefs_name, "r");
   if (fi == NULL)
-    {
-      /* Try with DATA_PREFIX */
+  {
+    /* Try with DATA_PREFIX */
 
-      snprintf(filename, 255, "%sosk/%s", DATA_PREFIX, keysymdefs_name);
-      fi = fopen(filename, "r");
-      if (fi == NULL)
-        {
-          fprintf(stderr, "Can't open either %s nor %s\n", keysymdefs_name, filename);
-          layout->keysymdefs = NULL;
-          free(filename);
-          return;
-        }
+    snprintf(filename, 255, "%sosk/%s", DATA_PREFIX, keysymdefs_name);
+    fi = fopen(filename, "r");
+    if (fi == NULL)
+    {
+      fprintf(stderr, "Can't open either %s nor %s\n", keysymdefs_name,
+              filename);
+      layout->keysymdefs = NULL;
+      free(filename);
+      return;
     }
+  }
 
   free(filename);
 
@@ -905,21 +933,23 @@ static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name)
   line = malloc(1024 * sizeof(wchar_t));
 
   while (!feof(fi))
-    {
-      tmp_ptr = fgets(line, 1023, fi);
-      if (strncmp("#define XK_", line, 11) != 0)
-        continue;
+  {
+    tmp_ptr = fgets(line, 1023, fi);
+    if (strncmp("#define XK_", line, 11) != 0)
+      continue;
 
-      layout->sizeofkeysymdefs = i;
-      layout->keysymdefs = realloc(layout->keysymdefs, sizeof(keysymdefs) * (i + 1));
+    layout->sizeofkeysymdefs = i;
+    layout->keysymdefs =
+      realloc(layout->keysymdefs, sizeof(keysymdefs) * (i + 1));
 
-      /* Some keysyms doesn't correspond to any unicode value, ej. BackSpace */
-      layout->keysymdefs[i].unicode = 0;
-      layout->keysymdefs[i].mnemo = malloc(sizeof(char) * 128);
-      sscanf(line, "#define XK_%s %x /* U+%x",
-             layout->keysymdefs[i].mnemo, &layout->keysymdefs[i].keysym, &layout->keysymdefs[i].unicode);
-      i++;
-    }
+    /* Some keysyms doesn't correspond to any unicode value, ej. BackSpace */
+    layout->keysymdefs[i].unicode = 0;
+    layout->keysymdefs[i].mnemo = malloc(sizeof(char) * 128);
+    sscanf(line, "#define XK_%s %x /* U+%x",
+           layout->keysymdefs[i].mnemo, &layout->keysymdefs[i].keysym,
+           &layout->keysymdefs[i].unicode);
+    i++;
+  }
 
   fclose(fi);
   free(line);
@@ -943,10 +973,10 @@ static int mnemo2keysym(char *mnemo, on_screen_keyboard * keyboard)
   unsigned int i;
 
   for (i = 0; i < keyboard->layout->sizeofkeysymdefs; i++)
-    {
-      if (strcmp(mnemo, keyboard->layout->keysymdefs[i].mnemo) == 0)
-        return (keyboard->layout->keysymdefs[i].keysym);
-    }
+  {
+    if (strcmp(mnemo, keyboard->layout->keysymdefs[i].mnemo) == 0)
+      return (keyboard->layout->keysymdefs[i].keysym);
+  }
   i = 0;
 
   /* Perhaps the mnemo is in UXXXX format? */
@@ -974,7 +1004,8 @@ static int keysym2unicode(int keysym, on_screen_keyboard * keyboard)
    * This software is in the public domain. Share and enjoy!
    */
   /* first check for Latin-1 characters (1:1 mapping) */
-  if ((keysym >= 0x0020 && keysym <= 0x007e) || (keysym >= 0x00a0 && keysym <= 0x00ff))
+  if ((keysym >= 0x0020 && keysym <= 0x007e)
+      || (keysym >= 0x00a0 && keysym <= 0x00ff))
     return keysym;
 
   /* also check for directly encoded 24-bit UCS characters */
@@ -992,65 +1023,67 @@ static int keysym2unicode(int keysym, on_screen_keyboard * keyboard)
 
 
 /* Searches in the tree for composing stuff */
-static void get_composed_keysym(on_screen_keyboard * keyboard, osk_composenode * composenode, wchar_t * keysym)
+static void get_composed_keysym(on_screen_keyboard * keyboard,
+                                osk_composenode * composenode,
+                                wchar_t *keysym)
 {
   int i;
 
   /* If there is not a compose table return the keysym */
   if (!composenode)
-    {
-      if (keyboard->composed)
-        free(keyboard->composed);
-      keyboard->composed = wcsdup(keysym);
-      keyboard->composed_type = 0;
-      return;
-    }
+  {
+    if (keyboard->composed)
+      free(keyboard->composed);
+    keyboard->composed = wcsdup(keysym);
+    keyboard->composed_type = 0;
+    return;
+  }
 
   /* If there is a compose table, lookup for matches */
   for (i = 0; i < composenode->size; i++)
+  {
+    /* If matches, set either the result or the next node */
+    if (wcscmp(composenode->childs[i]->keysym, keysym) == 0)
     {
-      /* If matches, set either the result or the next node */
-      if (wcscmp(composenode->childs[i]->keysym, keysym) == 0)
-        {
-          if (composenode->childs[i]->result)
-            {
-              if (keyboard->composed)
-                free(keyboard->composed);
-              keyboard->composed = wcsdup(composenode->childs[i]->result);
-              keyboard->composing = keyboard->layout->composemap;
-              /* The result in the Compose files from xorg is yet in unicode */
-              keyboard->composed_type = 1;
-              return;
-            }
-          else
-            {
-              if (keyboard->composed)
-                free(keyboard->composed);
-              keyboard->composed = NULL;
-              keyboard->composing = composenode->childs[i];
-              return;
-            }
-        }
+      if (composenode->childs[i]->result)
+      {
+        if (keyboard->composed)
+          free(keyboard->composed);
+        keyboard->composed = wcsdup(composenode->childs[i]->result);
+        keyboard->composing = keyboard->layout->composemap;
+        /* The result in the Compose files from xorg is yet in unicode */
+        keyboard->composed_type = 1;
+        return;
+      }
+      else
+      {
+        if (keyboard->composed)
+          free(keyboard->composed);
+        keyboard->composed = NULL;
+        keyboard->composing = composenode->childs[i];
+        return;
+      }
     }
+  }
 
   /* No matches found, if we were in the middle of a sequence, reset the compose stuff,
      if we were in the beginning node, set the keysym */
 
   if (keyboard->layout->composemap == composenode)
-    {
-      if (keyboard->composed)
-        free(keyboard->composed);
-      keyboard->composed = wcsdup(keysym);
-      keyboard->composed_type = 0;
-    }
+  {
+    if (keyboard->composed)
+      free(keyboard->composed);
+    keyboard->composed = wcsdup(keysym);
+    keyboard->composed_type = 0;
+  }
   else                          /* reset */
-    {
-      keyboard->composing = keyboard->layout->composemap;
-      if (keyboard->composed)
-        free(keyboard->composed);
-      keyboard->composed = NULL;
-      keyboard->composed_type = 0;
-    }
+  {
+    keyboard->composing = keyboard->layout->composemap;
+    if (keyboard->composed)
+      free(keyboard->composed);
+    keyboard->composed = NULL;
+    keyboard->composed_type = 0;
+  }
 }
 
 
@@ -1063,14 +1096,14 @@ static int is_blank_or_comment(char *line)
   if (strlen(line) == 0)
     return 0;
   while (line[i] != '\n')
-    {
-      if (line[i] == '#')
-        return 1;
-      else if (line[i] == ' ' || line[i] == '\t')
-        i++;
-      else
-        return 0;
-    }
+  {
+    if (line[i] == '#')
+      return 1;
+    else if (line[i] == ' ' || line[i] == '\t')
+      i++;
+    else
+      return 0;
+  }
   return 1;
 }
 
@@ -1101,60 +1134,66 @@ static void keybd_prepare(on_screen_keyboard * keyboard)
 {
   char *fontname;
   int font_height;
-  
+
   /* Pick a height (e.g., 16pt for small (24x24), 32pt for large (48x48) buttons) */
   font_height = ((keyboard->button_up->h * 2) / 3);
-  
+
   fontname = malloc(sizeof(char) * 255);
   if (keyboard->osk_fonty == NULL)
+  {
+
+    if (keyboard->layout->fontpath)
     {
-      
-      if (keyboard->layout->fontpath)
-        {
-          /* First try if it is an absolute path */
-          keyboard->osk_fonty = TTF_OpenFont(keyboard->layout->fontpath, font_height);
-          if (keyboard->osk_fonty == NULL)
-            {
-              /* Now trying if it is relative to DATA_PREFIX/fonts/ */
-              snprintf(fontname, 255, "%s/fonts/%s", DATA_PREFIX, keyboard->layout->fontpath);
-
-              keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
-              if (keyboard->osk_fonty == NULL)
-                {
-                  /* Perhaps it is relative to DATA_PREFIX only? */
-                  snprintf(fontname, 255, "%s/%s", DATA_PREFIX, keyboard->layout->fontpath);
-                  keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
-                  if (keyboard->osk_fonty == NULL)
-                    {
-                      /* Or to DATA_PREFIX/fonts/locale/ ? */
-                      snprintf(fontname, 255, "%s/fonts/locale/%s", DATA_PREFIX, keyboard->layout->fontpath);
-                      keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
-                    }
-                }
-            }
-        }
-
+      /* First try if it is an absolute path */
+      keyboard->osk_fonty =
+        TTF_OpenFont(keyboard->layout->fontpath, font_height);
       if (keyboard->osk_fonty == NULL)
+      {
+        /* Now trying if it is relative to DATA_PREFIX/fonts/ */
+        snprintf(fontname, 255, "%s/fonts/%s", DATA_PREFIX,
+                 keyboard->layout->fontpath);
+
+        keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+        if (keyboard->osk_fonty == NULL)
         {
-          /* Going with the default */
-          sprintf(fontname, "%s/fonts/FreeSansBold.ttf", DATA_PREFIX);
+          /* Perhaps it is relative to DATA_PREFIX only? */
+          snprintf(fontname, 255, "%s/%s", DATA_PREFIX,
+                   keyboard->layout->fontpath);
           keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+          if (keyboard->osk_fonty == NULL)
+          {
+            /* Or to DATA_PREFIX/fonts/locale/ ? */
+            snprintf(fontname, 255, "%s/fonts/locale/%s", DATA_PREFIX,
+                     keyboard->layout->fontpath);
+            keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+          }
         }
-
-      if (keyboard->osk_fonty == NULL)
-        {
-          fprintf(stderr, "\nError: Can't open the font!\n"
-                  "The Simple DirectMedia Layer error that occurred was:\n" "%s\n\n", SDL_GetError());
-          free(fontname);
-          exit(1);
-        }
-
-      free(fontname);
+      }
     }
+
+    if (keyboard->osk_fonty == NULL)
+    {
+      /* Going with the default */
+      sprintf(fontname, "%s/fonts/FreeSansBold.ttf", DATA_PREFIX);
+      keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+    }
+
+    if (keyboard->osk_fonty == NULL)
+    {
+      fprintf(stderr, "\nError: Can't open the font!\n"
+              "The Simple DirectMedia Layer error that occurred was:\n"
+              "%s\n\n", SDL_GetError());
+      free(fontname);
+      exit(1);
+    }
+
+    free(fontname);
+  }
 }
 
 
-static void apply_surface(int x, int y, SDL_Surface * source, SDL_Surface * destination, SDL_Rect * clip)
+static void apply_surface(int x, int y, SDL_Surface * source,
+                          SDL_Surface * destination, SDL_Rect * clip)
 {
   SDL_Rect offset;
 
@@ -1206,42 +1245,43 @@ static SDL_Surface *stretch_surface(SDL_Surface * orig, int width)
                               width,
                               orig->h,
                               orig->format->BitsPerPixel,
-                              orig->format->Rmask, orig->format->Gmask, orig->format->Bmask, 0);
+                              orig->format->Rmask, orig->format->Gmask,
+                              orig->format->Bmask, 0);
 
   SDL_BlitSurface(orig, NULL, dest, NULL);
   rect.y = 0;
 
   if (width > orig->w)
-    {
-      rect.x = width - orig->w;
-      rect.h = orig->h;
-      rect.w = orig->w;
-      SDL_BlitSurface(orig, NULL, dest, &rect);
+  {
+    rect.x = width - orig->w;
+    rect.h = orig->h;
+    rect.w = orig->w;
+    SDL_BlitSurface(orig, NULL, dest, &rect);
 
-      rect.w = 1;
-      for (i = orig->w / 2; i < width - orig->w / 2; i++)
-        {
-          rect.x = i;
-          SDL_BlitSurface(orig, &orig_rect, dest, &rect);
-        }
+    rect.w = 1;
+    for (i = orig->w / 2; i < width - orig->w / 2; i++)
+    {
+      rect.x = i;
+      SDL_BlitSurface(orig, &orig_rect, dest, &rect);
     }
+  }
   else if (width < orig->w)
+  {
+    rect.y = 0;
+    rect.w = 1;
+    rect.h = dest->h;
+
+    orig_rect.y = 0;
+    orig_rect.w = 1;
+    orig_rect.h = orig->h;
+
+    for (i = 0; i <= width / 2; i++)
     {
-      rect.y = 0;
-      rect.w = 1;
-      rect.h = dest->h;
-
-      orig_rect.y = 0;
-      orig_rect.w = 1;
-      orig_rect.h = orig->h;
-
-      for (i = 0; i <= width / 2; i++)
-        {
-          rect.x = dest->w - i;
-          orig_rect.x = orig->w - i;
-          SDL_BlitSurface(orig, &orig_rect, dest, &rect);
-        }
+      rect.x = dest->w - i;
+      orig_rect.x = orig->w - i;
+      SDL_BlitSurface(orig, &orig_rect, dest, &rect);
     }
+  }
 
   return dest;
 }
@@ -1259,23 +1299,23 @@ static void draw_keyboard(on_screen_keyboard * keyboard)
   accumulated_height = 0;
 
   for (j = 0; j < keyboard->layout->height; j++)
+  {
+    accumulated_width = 0;
+    for (i = 0; i < keyboard->layout->width; i++)
     {
-      accumulated_width = 0;
-      for (i = 0; i < keyboard->layout->width; i++)
-        {
-          if (keyboard->layout->keys[j][i].width)
-            {
+      if (keyboard->layout->keys[j][i].width)
+      {
 
-              keyboard->layout->keys[j][i].row = j;
-              keyboard->layout->keys[j][i].x = accumulated_width;
-              keyboard->layout->keys[j][i].y = accumulated_height;
+        keyboard->layout->keys[j][i].row = j;
+        keyboard->layout->keys[j][i].x = accumulated_width;
+        keyboard->layout->keys[j][i].y = accumulated_height;
 
-              draw_key(keyboard->layout->keys[j][i], keyboard, 0);
-            }
-          accumulated_width += (keyboard->layout->keys[j][i].width * key_width);
-        }
-      accumulated_height += key_height;
+        draw_key(keyboard->layout->keys[j][i], keyboard, 0);
+      }
+      accumulated_width += (keyboard->layout->keys[j][i].width * key_width);
     }
+    accumulated_height += key_height;
+  }
 
   /* draw_key(keyboard->keymodifiers.shift, keyboard, 0); */
   /* draw_key(keyboard->keymodifiers.altgr, keyboard, 0); */
@@ -1296,28 +1336,40 @@ static void draw_key(osk_key key, on_screen_keyboard * keyboard, int hot)
   snprintf(text, 6, "%s", key.plain_label);
 
   if (strncmp("NULL", text, 4) != 0 && key.keycode != 0)
+  {
+    if (hot)
+      skey =
+        stretch_surface(keyboard->button_down,
+                        key.width * keyboard->button_down->w);
+
+    else if (key.stick)
+      skey =
+        stretch_surface(keyboard->button_hold,
+                        key.width * keyboard->button_hold->w);
+
+    else
     {
-      if (hot)
-        skey = stretch_surface(keyboard->button_down, key.width * keyboard->button_down->w);
-
-      else if (key.stick)
-        skey = stretch_surface(keyboard->button_hold, key.width * keyboard->button_hold->w);
-
+      if (key.keycode == 1 || key.keycode == 2)
+      {
+        if (keyboard->disable_change)
+          skey =
+            stretch_surface(keyboard->button_off,
+                            key.width * keyboard->button_off->w);
+        else
+          skey =
+            stretch_surface(keyboard->button_nav,
+                            key.width * keyboard->button_nav->w);
+      }
       else
-        {
-          if (key.keycode == 1 || key.keycode == 2)
-            {
-              if (keyboard->disable_change)
-                skey = stretch_surface(keyboard->button_off, key.width * keyboard->button_off->w);
-              else
-                skey = stretch_surface(keyboard->button_nav, key.width * keyboard->button_nav->w);
-            }
-          else
-            skey = stretch_surface(keyboard->button_up, key.width * keyboard->button_up->w);
-        }
+        skey =
+          stretch_surface(keyboard->button_up,
+                          key.width * keyboard->button_up->w);
     }
+  }
   else
-    skey = stretch_surface(keyboard->button_off, key.width * keyboard->button_off->w);
+    skey =
+      stretch_surface(keyboard->button_off,
+                      key.width * keyboard->button_off->w);
 
   apply_surface(key.x, key.y, skey, keyboard->surface, NULL);
 
@@ -1345,88 +1397,92 @@ static void label_key(osk_key key, on_screen_keyboard * keyboard)
     text = strdup(key.plain_label);
 
   else if (modstate == KMOD_SHIFT)
-    {
-      text = strdup(key.top_label);
-    }
+  {
+    text = strdup(key.top_label);
+  }
 
   else if (modstate == KMOD_RALT)
-    {
-      text = strdup(key.altgr_label);
-    }
+  {
+    text = strdup(key.altgr_label);
+  }
 
   else if (modstate == KMOD_CAPS)
-    {
-      if (key.shiftcaps == 1)
-        text = strdup(key.top_label);
+  {
+    if (key.shiftcaps == 1)
+      text = strdup(key.top_label);
 
-      else
-        text = strdup(key.plain_label);
-    }
+    else
+      text = strdup(key.plain_label);
+  }
 
   /* Now the combined ones */
   else if (modstate & KMOD_RALT && modstate & KMOD_SHIFT)
-    {
-      if (modstate & KMOD_CAPS)
-        {
-          if (key.shiftcaps)
-            text = strdup(key.altgr_label);
-          else
-            text = strdup(key.shift_altgr_label);
-        }
-      else
-        {
-          text = strdup(key.shift_altgr_label);
-        }
-    }
-
-  else if (modstate & KMOD_RALT && modstate & KMOD_CAPS && !(modstate & KMOD_SHIFT))
+  {
+    if (modstate & KMOD_CAPS)
     {
       if (key.shiftcaps)
-        text = strdup(key.shift_altgr_label);
-      else
         text = strdup(key.altgr_label);
+      else
+        text = strdup(key.shift_altgr_label);
     }
+    else
+    {
+      text = strdup(key.shift_altgr_label);
+    }
+  }
+
+  else if (modstate & KMOD_RALT && modstate & KMOD_CAPS
+           && !(modstate & KMOD_SHIFT))
+  {
+    if (key.shiftcaps)
+      text = strdup(key.shift_altgr_label);
+    else
+      text = strdup(key.altgr_label);
+  }
 
   else if (modstate & KMOD_SHIFT && modstate & KMOD_CAPS)
-    {
-      if (key.shiftcaps == 1)
-        text = strdup(key.plain_label);
-      else
-        text = strdup(key.top_label);
-    }
+  {
+    if (key.shiftcaps == 1)
+      text = strdup(key.plain_label);
+    else
+      text = strdup(key.top_label);
+  }
 
   if (strncmp("DELETE", text, 6) == 0)
-    {
-      apply_surface(key.x, key.y, keyboard->oskdel, keyboard->surface, NULL);
-    }
+  {
+    apply_surface(key.x, key.y, keyboard->oskdel, keyboard->surface, NULL);
+  }
 
   else if (strncmp("TAB", text, 3) == 0)
-    {
-      apply_surface(key.x, key.y, keyboard->osktab, keyboard->surface, NULL);
-    }
+  {
+    apply_surface(key.x, key.y, keyboard->osktab, keyboard->surface, NULL);
+  }
 
   else if (strncmp("ENTER", text, 5) == 0)
-    {
-      apply_surface(key.x, key.y, keyboard->oskenter, keyboard->surface, NULL);
-    }
+  {
+    apply_surface(key.x, key.y, keyboard->oskenter, keyboard->surface, NULL);
+  }
 
   else if (strncmp("CAPSLOCK", text, 8) == 0)
-    {
-      apply_surface(key.x, key.y, keyboard->oskcapslock, keyboard->surface, NULL);
-    }
+  {
+    apply_surface(key.x, key.y, keyboard->oskcapslock, keyboard->surface,
+                  NULL);
+  }
 
   else if (strncmp("SHIFT", text, 5) == 0)
-    {
-      apply_surface(key.x, key.y, keyboard->oskshift, keyboard->surface, NULL);
-    }
+  {
+    apply_surface(key.x, key.y, keyboard->oskshift, keyboard->surface, NULL);
+  }
 
   else if (strncmp("SPACE", text, 5) != 0 && strncmp("NULL", text, 4) != 0)
-    {
-      messager = TTF_RenderUTF8_Blended(keyboard->osk_fonty, text, keyboard->layout->fgcolor);
+  {
+    messager =
+      TTF_RenderUTF8_Blended(keyboard->osk_fonty, text,
+                             keyboard->layout->fgcolor);
 
-      apply_surface(key.x + 5, key.y, messager, keyboard->surface, NULL);
-      SDL_FreeSurface(messager);
-    }
+    apply_surface(key.x + 5, key.y, messager, keyboard->surface, NULL);
+    SDL_FreeSurface(messager);
+  }
   free(text);
 }
 
@@ -1438,16 +1494,18 @@ static osk_key *find_key(on_screen_keyboard * keyboard, int x, int y)
 
   key = NULL;
   for (j = 0; j < keyboard->layout->height; j++)
-    {
-      if (keyboard->layout->keys[j][0].y < y && keyboard->layout->keys[j][0].y + keyboard->button_up->h > y)
-        for (i = 0; i < keyboard->layout->width; i++)
-          if (keyboard->layout->keys[j][i].x < x &&
-              keyboard->layout->keys[j][i].x + keyboard->layout->keys[j][i].width * keyboard->button_up->w > x)
-            {
-              key = &keyboard->layout->keys[j][i];
-              return key;
-            }
-    }
+  {
+    if (keyboard->layout->keys[j][0].y < y
+        && keyboard->layout->keys[j][0].y + keyboard->button_up->h > y)
+      for (i = 0; i < keyboard->layout->width; i++)
+        if (keyboard->layout->keys[j][i].x < x &&
+            keyboard->layout->keys[j][i].x +
+            keyboard->layout->keys[j][i].width * keyboard->button_up->w > x)
+        {
+          key = &keyboard->layout->keys[j][i];
+          return key;
+        }
+  }
 
   return NULL;
 }
@@ -1457,45 +1515,45 @@ static osk_key *find_key(on_screen_keyboard * keyboard, int x, int y)
 static void set_key(osk_key * orig, osk_key * dest, int firsttime)
 {
   if (orig == NULL)
-    {
-      dest->keycode = 0;
-      dest->row = 0;
-      dest->x = 0;
-      dest->y = 0;
-      dest->width = 0;
-      if (!firsttime && dest->plain_label != NULL)
-        free(dest->plain_label);
-      dest->plain_label = NULL;
-      if (!firsttime && dest->top_label != NULL)
-        free(dest->top_label);
-      dest->top_label = NULL;
-      if (!firsttime && dest->altgr_label != NULL)
-        free(dest->altgr_label);
-      dest->altgr_label = NULL;
-      dest->shiftcaps = 0;
-    }
+  {
+    dest->keycode = 0;
+    dest->row = 0;
+    dest->x = 0;
+    dest->y = 0;
+    dest->width = 0;
+    if (!firsttime && dest->plain_label != NULL)
+      free(dest->plain_label);
+    dest->plain_label = NULL;
+    if (!firsttime && dest->top_label != NULL)
+      free(dest->top_label);
+    dest->top_label = NULL;
+    if (!firsttime && dest->altgr_label != NULL)
+      free(dest->altgr_label);
+    dest->altgr_label = NULL;
+    dest->shiftcaps = 0;
+  }
   else
-    {
-      dest->keycode = orig->keycode;
-      dest->row = orig->row;
-      dest->x = orig->x;
-      dest->y = orig->y;
-      dest->width = orig->width;
+  {
+    dest->keycode = orig->keycode;
+    dest->row = orig->row;
+    dest->x = orig->x;
+    dest->y = orig->y;
+    dest->width = orig->width;
 
-      if (dest->plain_label != NULL)
-        free(dest->plain_label);
-      dest->plain_label = strdup(orig->plain_label);
+    if (dest->plain_label != NULL)
+      free(dest->plain_label);
+    dest->plain_label = strdup(orig->plain_label);
 
-      if (dest->top_label != NULL)
-        free(dest->top_label);
-      dest->top_label = strdup(orig->top_label);
+    if (dest->top_label != NULL)
+      free(dest->top_label);
+    dest->top_label = strdup(orig->top_label);
 
-      if (dest->altgr_label != NULL)
-        free(dest->altgr_label);
-      dest->altgr_label = strdup(orig->altgr_label);
+    if (dest->altgr_label != NULL)
+      free(dest->altgr_label);
+    dest->altgr_label = strdup(orig->altgr_label);
 
-      dest->shiftcaps = orig->shiftcaps;
-    }
+    dest->shiftcaps = orig->shiftcaps;
+  }
 }
 
 static char *find_keysym(osk_key key, on_screen_keyboard * keyboard)
@@ -1517,60 +1575,62 @@ static char *find_keysym(osk_key key, on_screen_keyboard * keyboard)
     keysym = keysyms.plain;
 
   else if (modstate == KMOD_SHIFT)
-    {
-      keysym = keysyms.caps;
-    }
+  {
+    keysym = keysyms.caps;
+  }
 
   else if (modstate == KMOD_RALT)
-    {
-      keysym = keysyms.altgr;
-    }
+  {
+    keysym = keysyms.altgr;
+  }
 
   else if (modstate == KMOD_CAPS)
-    {
-      if (key.shiftcaps == 1)
-        keysym = keysyms.caps;
-      else
-        keysym = keysyms.plain;
-    }
+  {
+    if (key.shiftcaps == 1)
+      keysym = keysyms.caps;
+    else
+      keysym = keysyms.plain;
+  }
 
   /* Now the combined ones */
   else if (modstate & KMOD_RALT && modstate & KMOD_SHIFT)
-    {
-      if (modstate & KMOD_CAPS)
-        {
-          if (key.shiftcaps)
-            keysym = keysyms.altgr;
-          else
-            keysym = keysyms.shiftaltgr;
-        }
-      else
-        {
-          keysym = keysyms.shiftaltgr;
-        }
-    }
-
-  else if (modstate & KMOD_RALT && modstate & KMOD_CAPS && !(modstate & KMOD_SHIFT))
+  {
+    if (modstate & KMOD_CAPS)
     {
       if (key.shiftcaps)
-        keysym = keysyms.shiftaltgr;
-      else
         keysym = keysyms.altgr;
+      else
+        keysym = keysyms.shiftaltgr;
     }
+    else
+    {
+      keysym = keysyms.shiftaltgr;
+    }
+  }
+
+  else if (modstate & KMOD_RALT && modstate & KMOD_CAPS
+           && !(modstate & KMOD_SHIFT))
+  {
+    if (key.shiftcaps)
+      keysym = keysyms.shiftaltgr;
+    else
+      keysym = keysyms.altgr;
+  }
 
   else if (modstate & KMOD_SHIFT && modstate & KMOD_CAPS)
-    {
-      if (key.shiftcaps == 1)
-        keysym = keysyms.plain;
-      else
-        keysym = keysyms.caps;
-    }
+  {
+    if (key.shiftcaps == 1)
+      keysym = keysyms.plain;
+    else
+      keysym = keysyms.caps;
+  }
 
   return (keysym);
 }
 
 /* We lose the SDL ModState by leaving and entering the tuxpaint window, so using a custom state */
-static int handle_keymods(char *keysym, osk_key * key, on_screen_keyboard * keyboard)
+static int handle_keymods(char *keysym, osk_key * key,
+                          on_screen_keyboard * keyboard)
 {
   SDL_Keymod mod;
   SDL_Event ev;
@@ -1578,74 +1638,75 @@ static int handle_keymods(char *keysym, osk_key * key, on_screen_keyboard * keyb
   mod = keyboard->modifiers;
 
   if (strncmp("Shift", keysym, 5) == 0)
+  {
+    if (mod & KMOD_SHIFT)
     {
-      if (mod & KMOD_SHIFT)
-        {
-          keyboard->modifiers = mod & 0xFFF0;
-          key->stick = 0;
-          keyboard->kmdf.shift->stick = 0;
-        }
-      else
-        {
-          keyboard->modifiers = mod | KMOD_SHIFT;
-          key->stick = 1;
-          keyboard->kmdf.shift = key;
-        }
-      return 1;
+      keyboard->modifiers = mod & 0xFFF0;
+      key->stick = 0;
+      keyboard->kmdf.shift->stick = 0;
     }
+    else
+    {
+      keyboard->modifiers = mod | KMOD_SHIFT;
+      key->stick = 1;
+      keyboard->kmdf.shift = key;
+    }
+    return 1;
+  }
   else if (strncmp("Alt_L", keysym, 5) == 0)
-    {
-      ev.key.keysym.sym = SDLK_LALT;
-      ev.text.text[0] = 0;    // FIXME is 0 the right value here?
-      ev.type = SDL_KEYDOWN;
-      SDL_PushEvent(&ev);
-      ev.type = SDL_KEYUP;
-      SDL_PushEvent(&ev);
+  {
+    ev.key.keysym.sym = SDLK_LALT;
+    ev.text.text[0] = 0;        // FIXME is 0 the right value here?
+    ev.type = SDL_KEYDOWN;
+    SDL_PushEvent(&ev);
+    ev.type = SDL_KEYUP;
+    SDL_PushEvent(&ev);
 
-      return 1;
-    }
+    return 1;
+  }
 
   /* Seems ISO_Level3_Shift and ISO_Next_Group are used too for right Alt */
   else if (strncmp("ISO_Level3_Shift", keysym, 16) == 0 ||
-           strncmp("ISO_Next_Group", keysym, 14) == 0 || strncmp("ALT_R", keysym, 5) == 0)
+           strncmp("ISO_Next_Group", keysym, 14) == 0
+           || strncmp("ALT_R", keysym, 5) == 0)
+  {
+    if (mod & KMOD_RALT)
     {
-      if (mod & KMOD_RALT)
-        {
-          keyboard->modifiers = mod & 0xF0FF;
-          keyboard->kmdf.altgr->stick = 0;
-        }
-      else
-        {
-          keyboard->modifiers = mod | KMOD_RALT;
-          key->stick = 1;
-          keyboard->kmdf.altgr = key;
-
-          return 1;
-        }
-      return 0;
+      keyboard->modifiers = mod & 0xF0FF;
+      keyboard->kmdf.altgr->stick = 0;
     }
-
-  else if (strncmp("Caps_Lock", keysym, 9) == 0)
+    else
     {
-      if (mod & KMOD_CAPS)
-        {
-          keyboard->modifiers = mod & 0x0FFF;
-          key->stick = 0;
-        }
-      else
-        {
-          keyboard->modifiers = mod | KMOD_CAPS;
-          key->stick = 1;
-        }
-
+      keyboard->modifiers = mod | KMOD_RALT;
+      key->stick = 1;
+      keyboard->kmdf.altgr = key;
 
       return 1;
     }
+    return 0;
+  }
+
+  else if (strncmp("Caps_Lock", keysym, 9) == 0)
+  {
+    if (mod & KMOD_CAPS)
+    {
+      keyboard->modifiers = mod & 0x0FFF;
+      key->stick = 0;
+    }
+    else
+    {
+      keyboard->modifiers = mod | KMOD_CAPS;
+      key->stick = 1;
+    }
+
+
+    return 1;
+  }
 
   if (mod & KMOD_CAPS)
-    {
-      keyboard->modifiers = KMOD_CAPS;
-    }
+  {
+    keyboard->modifiers = KMOD_CAPS;
+  }
   else
     keyboard->modifiers = KMOD_NONE;
 
@@ -1675,25 +1736,25 @@ static void set_dead_sticks(osk_key * key, on_screen_keyboard * keyboard)
 static void clear_dead_sticks(on_screen_keyboard * keyboard)
 {
   if (keyboard->kmdf.dead)
-    {
-      keyboard->kmdf.dead->stick = 0;
-      keyboard->kmdf.dead = NULL;
-    }
+  {
+    keyboard->kmdf.dead->stick = 0;
+    keyboard->kmdf.dead = NULL;
+  }
   if (keyboard->kmdf.dead2)
-    {
-      keyboard->kmdf.dead2->stick = 0;
-      keyboard->kmdf.dead2 = NULL;
-    }
+  {
+    keyboard->kmdf.dead2->stick = 0;
+    keyboard->kmdf.dead2 = NULL;
+  }
   if (keyboard->kmdf.dead3)
-    {
-      keyboard->kmdf.dead3->stick = 0;
-      keyboard->kmdf.dead3 = NULL;
-    }
+  {
+    keyboard->kmdf.dead3->stick = 0;
+    keyboard->kmdf.dead3 = NULL;
+  }
   if (keyboard->kmdf.dead4)
-    {
-      keyboard->kmdf.dead4->stick = 0;
-      keyboard->kmdf.dead4 = NULL;
-    }
+  {
+    keyboard->kmdf.dead4->stick = 0;
+    keyboard->kmdf.dead4 = NULL;
+  }
 }
 
 struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
@@ -1718,215 +1779,217 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
   key = find_key(keyboard, x, y);
 
   if (key)
+  {
+    /* First the reserved keycodes */
+    /* Select next or previous keyboard */
+    if (key->keycode == 1 || key->keycode == 2)
     {
-      /* First the reserved keycodes */
-      /* Select next or previous keyboard */
-      if (key->keycode == 1 || key->keycode == 2)
+      if (keyboard->disable_change)
+      {
+        //      free(key);
+        return (keyboard);
+      }
+
+      aux_list = strdup(keyboard->keyboard_list);
+      aux_list_ptr = aux_list;
+
+#ifdef OSK_DEBUG
+      printf("auxlist: %s\n", aux_list);
+      printf("kn %s\n", keyboard->name);
+#endif
+
+      if (key->keycode == 1)
+      {
+        for (i = 0;; i++, aux_list = NULL)
         {
-          if (keyboard->disable_change)
-            {
-              //      free(key);
-              return (keyboard);
-            }
+          name = strtok(aux_list, " \n\r\t");
 
-          aux_list = strdup(keyboard->keyboard_list);
-          aux_list_ptr = aux_list;
+          if (i == 0)
+            aux_name = name;
 
-#ifdef OSK_DEBUG
-          printf("auxlist: %s\n", aux_list);
-          printf("kn %s\n", keyboard->name);
-#endif
-
-          if (key->keycode == 1)
-            {
-              for (i = 0;; i++, aux_list = NULL)
-                {
-                  name = strtok(aux_list, " \n\r\t");
-
-                  if (i == 0)
-                    aux_name = name;
-
-                  if (strcmp(name, keyboard->name) == 0)
-                    {
-                      name = strtok(NULL, " \n\r\t");
-                      if (name == NULL)
-                        name = aux_name;
-                      break;
-                    }
-                }
-            }
-          else
-            {
-              aux_name = NULL;
-              for (i = 0;; i++, aux_list = NULL)
-                {
-                  name = strtok(aux_list, " \n\r\t");
-
-                  if (name == NULL)
-                    {
-                      name = aux_name;
-                      break;
-                    }
-
-                  if (strstr(name, keyboard->name))
-                    {
-                      name = aux_name;
-                      if (name != NULL)
-                        break;
-                    }
-
-                  aux_name = name;
-                }
-            }
-
-
-          new_keyboard =
-            osk_create(name, keyboard->canvas_ptr,
-                       keyboard->BLANK_button_up, keyboard->BLANK_button_down,
-                       keyboard->BLANK_button_off, keyboard->BLANK_button_nav,
-                       keyboard->BLANK_button_hold,
-                       keyboard->BLANK_oskdel, keyboard->BLANK_osktab,
-                       keyboard->BLANK_oskenter, keyboard->BLANK_oskcapslock,
-                       keyboard->BLANK_oskshift,
-                       keyboard->disable_change);
-
-          free(aux_list_ptr);
-
-          if (new_keyboard == NULL)
-            {
-              //      free(key);
-              return (keyboard);        /* Don't break here, at least the old keyboard should work */
-            }
-          else
-            {
-              free(new_keyboard->keyboard_list);
-              new_keyboard->keyboard_list = strdup(keyboard->keyboard_list);
-              //      free(key);
-              osk_free(keyboard);
-              return (new_keyboard);
-            }
+          if (strcmp(name, keyboard->name) == 0)
+          {
+            name = strtok(NULL, " \n\r\t");
+            if (name == NULL)
+              name = aux_name;
+            break;
+          }
         }
-
-
-      keysym = find_keysym(*key, keyboard);
-      if (!keysym)
-        {
-          return (keyboard);
-        }
-
-      draw_key(*key, keyboard, 1);
-
-      if (handle_keymods(keysym, key, keyboard))
-        {
-          return (keyboard);    /* no more processing is needed */
-        }
-
-      wkeysym = malloc(sizeof(wchar_t) * (strlen(keysym) + 1));
-
-      mbsrtowcs(wkeysym, (const char **)&keysym, strlen(keysym) + 1, NULL);
-
-#ifdef OSK_DEBUG
-      printf("wkeysym %ls %i\n\n", wkeysym, (int)wcslen(wkeysym));
-#endif
-
-
-      get_composed_keysym(keyboard, keyboard->composing, wkeysym);
-
-      if (keyboard->composed)
-        {
-          keyboard->last_key_pressed = key;
-          set_key(NULL, &keyboard->keymodifiers.compose, 0);
-          ks = keyboard->composed;
-
-#ifdef OSK_DEBUG
-          printf("keysym found %ls\n", ks);
-#endif
-
-          mnemo = malloc(sizeof(char) * 32);
-          snprintf(mnemo, 31, "%ls", ks);
-
-          if (wcsncmp(L"Return", ks, 6) == 0)
-            {
-              event.key.keysym.sym = SDLK_RETURN;
-              event.text.text[0] = '\r';
-              event.text.text[1] = '\0';
-            }
-          else if (wcsncmp(L"Tab", ks, 3) == 0 || wcsncmp(L"ISO_Left_Tab", ks, 12) == 0)
-            {
-              event.key.keysym.sym = SDLK_TAB;
-              event.text.text[0] = '\t';
-              event.text.text[1] = '\0';
-            }
-          else if (wcsncmp(L"BackSpace", ks, 9) == 0)
-            {
-              event.key.keysym.sym = SDLK_BACKSPACE;
-              event.text.text[0] = '\b';
-              event.text.text[1] = '\0';
-            }
-          else if (wcsncmp(L"NoSymbol", ks, 8) == 0)
-            {
-              return (keyboard);
-            }
-          else
-            {
-              int len;
-
-              if (keyboard->composed_type == 1)
-                {
-#ifdef OSK_DEBUG
-                  printf("Composed_type = 1: \"%ls\"\n", keyboard->composed);
-#endif
-                  len = wcstombs(event.text.text, keyboard->composed, 16);
-                }
-              else
-                {
-                  int iwc;
-                  wchar_t buf[2];
-
-                  iwc = keysym2unicode(mnemo2keysym(mnemo, keyboard), keyboard);
-                  buf[0] = (wchar_t) iwc;
-                  buf[1] = L'\0';
-
-#ifdef OSK_DEBUG
-                  printf("iwc as buf = \"%ls\"\n", buf);
-#endif
-                  len = wcstombs(event.text.text, buf, 16);
-                }
-
-#ifdef OSK_DEBUG
-              printf("len = %d\n", len);
-              printf("event.text.text = \"%s\"\n", event.text.text);
-#endif
-            }
-
-          clear_dead_sticks(keyboard);
-          event.type = SDL_TEXTINPUT;
-          SDL_PushEvent(&event);
-          free(mnemo);
-        }
+      }
       else
+      {
+        aux_name = NULL;
+        for (i = 0;; i++, aux_list = NULL)
         {
-          if (keyboard->composing == keyboard->layout->composemap)
-            {
-#ifdef OSK_DEBUG
-              printf("compose sequence resetted\n");
-#endif
-              set_key(NULL, &keyboard->keymodifiers.compose, 0);
-              keyboard->last_key_pressed = key;
-              clear_dead_sticks(keyboard);
-            }
-          else
-            {
-              set_key(key, &keyboard->keymodifiers.compose, 0);
-#ifdef OSK_DEBUG
-              printf("still composing\n");
-#endif
-              set_dead_sticks(key, keyboard);
-              /* Fixme: Would be nice if we can highlight next available-to-compose keys, but how? */
-            }
+          name = strtok(aux_list, " \n\r\t");
+
+          if (name == NULL)
+          {
+            name = aux_name;
+            break;
+          }
+
+          if (strstr(name, keyboard->name))
+          {
+            name = aux_name;
+            if (name != NULL)
+              break;
+          }
+
+          aux_name = name;
         }
-      free(wkeysym);
+      }
+
+
+      new_keyboard =
+        osk_create(name, keyboard->canvas_ptr,
+                   keyboard->BLANK_button_up, keyboard->BLANK_button_down,
+                   keyboard->BLANK_button_off, keyboard->BLANK_button_nav,
+                   keyboard->BLANK_button_hold,
+                   keyboard->BLANK_oskdel, keyboard->BLANK_osktab,
+                   keyboard->BLANK_oskenter, keyboard->BLANK_oskcapslock,
+                   keyboard->BLANK_oskshift, keyboard->disable_change);
+
+      free(aux_list_ptr);
+
+      if (new_keyboard == NULL)
+      {
+        //      free(key);
+        return (keyboard);      /* Don't break here, at least the old keyboard should work */
+      }
+      else
+      {
+        free(new_keyboard->keyboard_list);
+        new_keyboard->keyboard_list = strdup(keyboard->keyboard_list);
+        //      free(key);
+        osk_free(keyboard);
+        return (new_keyboard);
+      }
     }
+
+
+    keysym = find_keysym(*key, keyboard);
+    if (!keysym)
+    {
+      return (keyboard);
+    }
+
+    draw_key(*key, keyboard, 1);
+
+    if (handle_keymods(keysym, key, keyboard))
+    {
+      return (keyboard);        /* no more processing is needed */
+    }
+
+    wkeysym = malloc(sizeof(wchar_t) * (strlen(keysym) + 1));
+
+    mbsrtowcs(wkeysym, (const char **) &keysym, strlen(keysym) + 1, NULL);
+
+#ifdef OSK_DEBUG
+    printf("wkeysym %ls %i\n\n", wkeysym, (int) wcslen(wkeysym));
+#endif
+
+
+    get_composed_keysym(keyboard, keyboard->composing, wkeysym);
+
+    if (keyboard->composed)
+    {
+      keyboard->last_key_pressed = key;
+      set_key(NULL, &keyboard->keymodifiers.compose, 0);
+      ks = keyboard->composed;
+
+#ifdef OSK_DEBUG
+      printf("keysym found %ls\n", ks);
+#endif
+
+      mnemo = malloc(sizeof(char) * 32);
+      snprintf(mnemo, 31, "%ls", ks);
+
+      if (wcsncmp(L"Return", ks, 6) == 0)
+      {
+        event.key.keysym.sym = SDLK_RETURN;
+        event.text.text[0] = '\r';
+        event.text.text[1] = '\0';
+      }
+      else if (wcsncmp(L"Tab", ks, 3) == 0
+               || wcsncmp(L"ISO_Left_Tab", ks, 12) == 0)
+      {
+        event.key.keysym.sym = SDLK_TAB;
+        event.text.text[0] = '\t';
+        event.text.text[1] = '\0';
+      }
+      else if (wcsncmp(L"BackSpace", ks, 9) == 0)
+      {
+        event.key.keysym.sym = SDLK_BACKSPACE;
+        event.text.text[0] = '\b';
+        event.text.text[1] = '\0';
+      }
+      else if (wcsncmp(L"NoSymbol", ks, 8) == 0)
+      {
+        return (keyboard);
+      }
+      else
+      {
+        int len;
+
+        if (keyboard->composed_type == 1)
+        {
+#ifdef OSK_DEBUG
+          printf("Composed_type = 1: \"%ls\"\n", keyboard->composed);
+#endif
+          len = wcstombs(event.text.text, keyboard->composed, 16);
+        }
+        else
+        {
+          int iwc;
+          wchar_t buf[2];
+
+          iwc = keysym2unicode(mnemo2keysym(mnemo, keyboard), keyboard);
+          buf[0] = (wchar_t) iwc;
+          buf[1] = L'\0';
+
+#ifdef OSK_DEBUG
+          printf("iwc as buf = \"%ls\"\n", buf);
+#endif
+          len = wcstombs(event.text.text, buf, 16);
+        }
+
+#ifdef OSK_DEBUG
+        printf("len = %d\n", len);
+        printf("event.text.text = \"%s\"\n", event.text.text);
+#else
+        len = len; /* Avoid 'set but not used' warning */
+#endif
+      }
+
+      clear_dead_sticks(keyboard);
+      event.type = SDL_TEXTINPUT;
+      SDL_PushEvent(&event);
+      free(mnemo);
+    }
+    else
+    {
+      if (keyboard->composing == keyboard->layout->composemap)
+      {
+#ifdef OSK_DEBUG
+        printf("compose sequence resetted\n");
+#endif
+        set_key(NULL, &keyboard->keymodifiers.compose, 0);
+        keyboard->last_key_pressed = key;
+        clear_dead_sticks(keyboard);
+      }
+      else
+      {
+        set_key(key, &keyboard->keymodifiers.compose, 0);
+#ifdef OSK_DEBUG
+        printf("still composing\n");
+#endif
+        set_dead_sticks(key, keyboard);
+        /* Fixme: Would be nice if we can highlight next available-to-compose keys, but how? */
+      }
+    }
+    free(wkeysym);
+  }
 
   return (keyboard);
 }
@@ -1937,10 +2000,10 @@ void osk_released(on_screen_keyboard * keyboard)
 
   key = keyboard->last_key_pressed;
   if (key)
-    {
-      draw_key(*key, keyboard, 0);
-      //    free(key);
-    }
+  {
+    draw_key(*key, keyboard, 0);
+    //    free(key);
+  }
   keyboard->last_key_pressed = NULL;
   draw_keyboard(keyboard);
 }
@@ -1951,16 +2014,16 @@ static void free_keymap(osk_keymap * keymap)
   int i;
 
   for (i = 0; i < 256; i++)
-    {
-      if (keymap[i].plain)
-        free(keymap[i].plain);
-      if (keymap[i].caps)
-        free(keymap[i].caps);
-      if (keymap[i].altgr)
-        free(keymap[i].altgr);
-      if (keymap[i].shiftaltgr)
-        free(keymap[i].shiftaltgr);
-    }
+  {
+    if (keymap[i].plain)
+      free(keymap[i].plain);
+    if (keymap[i].caps)
+      free(keymap[i].caps);
+    if (keymap[i].altgr)
+      free(keymap[i].altgr);
+    if (keymap[i].shiftaltgr)
+      free(keymap[i].shiftaltgr);
+  }
   free(keymap);
 }
 
@@ -1969,10 +2032,10 @@ static void free_composemap(osk_composenode * composenode)
   int i;
 
   for (i = 0; i < composenode->size; i++)
-    {
-      free_composemap(composenode->childs[i]);
-      free(composenode->childs[i]);
-    }
+  {
+    free_composemap(composenode->childs[i]);
+    free(composenode->childs[i]);
+  }
   if (composenode->result)
     free(composenode->result);
   else
@@ -1995,21 +2058,21 @@ static void free_keys(osk_layout * layout)
   int i, j;
 
   for (j = 0; j < layout->height; j++)
+  {
+    for (i = 0; i < layout->width; i++)
     {
-      for (i = 0; i < layout->width; i++)
-        {
-          if (layout->keys[j][i].plain_label)
-            free(layout->keys[j][i].plain_label);
-          if (layout->keys[j][i].top_label)
-            free(layout->keys[j][i].top_label);
-          if (layout->keys[j][i].altgr_label)
-            free(layout->keys[j][i].altgr_label);
-          if (layout->keys[j][i].shift_altgr_label)
-            free(layout->keys[j][i].shift_altgr_label);
+      if (layout->keys[j][i].plain_label)
+        free(layout->keys[j][i].plain_label);
+      if (layout->keys[j][i].top_label)
+        free(layout->keys[j][i].top_label);
+      if (layout->keys[j][i].altgr_label)
+        free(layout->keys[j][i].altgr_label);
+      if (layout->keys[j][i].shift_altgr_label)
+        free(layout->keys[j][i].shift_altgr_label);
 
-        }
-      free(layout->keys[j]);
     }
+    free(layout->keys[j]);
+  }
   free(layout->keys);
 }
 

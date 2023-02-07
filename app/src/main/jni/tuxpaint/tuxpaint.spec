@@ -4,12 +4,12 @@ Version: 0.9.29
 Release: 1
 License: GPL
 Group: Multimedia/Graphics
-URL: http://www.tuxpaint.org/
-Source0: %{name}-%{version}.tar.gz
+URL: https://tuxpaint.org/
+Source0: %{name}-%{version}-sdl2.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: SDL >= 1.2.4 SDL_image SDL_mixer SDL_ttf SDL_Pango SDL_gfx libpaper fribidi xdg-utils libimagequant
-BuildRequires: SDL-devel >= 1.2.4 SDL_image-devel SDL_mixer-devel SDL_ttf-devel SDL_Pango-devel SDL_gfx-devel
-BuildRequires: librsvg2-devel libpaper-devel fribidi-devel gperf gettext ImageMagick xdg-utils libimagequant-devel
+Requires: SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango SDL2_gfx libpaper fribidi xdg-utils libimagequant
+BuildRequires: SDL2-devel SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel SDL2_Pango-devel SDL2_gfx-devel
+BuildRequires: librsvg2-devel libpaper-devel fribidi-devel gperf gettext >= 0.19.7 ImageMagick xdg-utils libimagequant-devel
 
 %description
 "Tux Paint" is a drawing program for young children.
@@ -26,14 +26,14 @@ such as sound effects.
 Summary: development files for tuxpaint plugins.
 Group: Development/Libraries
 Requires: tuxpaint = %{version}
-Requires: SDL-devel >= 1.2.4 SDL_image-devel SDL_mixer-devel SDL_ttf-devel SDL_Pango-devel
+Requires: SDL2-devel SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel SDL2_Pango-devel
 Requires: librsvg2-devel libpaper-devel fribidi-devel gperf
 
 %description devel
 development files for tuxpaint plugins.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-sdl2
 
 %build
 make PREFIX=%{_prefix} DOC_PREFIX=%{_docdir}/tuxpaint/en linux_ARCH_CFLAGS=-I/usr/include/imagequant
@@ -98,6 +98,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/tp-magic-config.*
 
 %changelog
+* Sun Dec 11 2022 <nbs@sonic.net> -
+- Updated URL to HTTPS
+
+* Wed Jun 29 2022 <dolphin6k@wmail.plala.or.jp> -
+- Changed library requirements from SDL to SDL2
+- Adapted to the change of naming rule of tar ball.
+
+* Wed Jun 29 2022 <dolphin6k@wmail.plala.or.jp> -
+- Set minimum version requirement for gettext
+
 * Tue Jun 14 2022 <nbs@sonic.net> -
 - Set version number 0.9.29
 

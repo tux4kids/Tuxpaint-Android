@@ -24,6 +24,7 @@ struct cfginfo
   const char *disable_stamp_controls;
   const char *dont_do_xor;
   const char *dont_load_stamps;
+  const char *no_stamp_rotation;
   const char *exportdir;
   const char *fullscreen;
   const char *grab_input;
@@ -94,5 +95,5 @@ struct cfginfo
 
 #define CFGINFO_MAXOFFSET  (sizeof(struct cfginfo))
 
-extern void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const char *opt,
-                             const char *restrict src);
+extern void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str,
+                             const char *opt, const char *restrict src);

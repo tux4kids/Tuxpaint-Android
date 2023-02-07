@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014 Richard Hughes <richard@hughsie.com> -->
+<!-- Copyright 2019-2022 Endless OS Foundation LLC -->
+<component type="desktop">
+  <id>org.tuxpaint.Tuxpaint</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <name>Tux Paint</name>
+  <summary>A drawing program for children</summary>
+  <description>
+    <p>
+      Tux Paint is a free, award-winning drawing program for children ages 3 to
+      12.
+      Tux Paint is used in schools around the world as a computer literacy
+      drawing activity.
+      It combines an easy-to-use interface, fun sound effects, and an
+      encouraging cartoon mascot who guides children as they use the program.
+    </p>
+    <p>
+      Kids are presented with a blank canvas and a variety of drawing tools to
+      help them be creative.
+    </p>
+  </description>
+  <developer_name>New Breed Software et al.</developer_name>
+  <url type="homepage">https://tuxpaint.org/</url>
+  <url type="bugtracker">https://sourceforge.net/p/tuxpaint/_list/tickets</url>
+  <url type="faq">https://tuxpaint.org/docs/en/html/FAQ.html</url>
+  <url type="help">https://tuxpaint.org/docs/</url>
+  <!-- TODO: https: donation URL -->
+  <url type="donation">http://www.newbreedsoftware.com/donate/</url>
+  <url type="translate">https://tuxpaint.org/help/po/</url>
+  <url type="contact">https://tuxpaint.org/contact/</url>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://tuxpaint.org/screenshots/starter-coloringbook.png</image>
+      <caption>The Magic tool is a set of special effects</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://tuxpaint.org/screenshots/example_simple.png</image>
+      <caption>The Paint Brush tool lets you draw freehand, using various brushes and colors</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://tuxpaint.org/screenshots/example_space.png</image>
+      <caption>The Stamp tool is like a set of rubber stamps or stickers</caption>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="0.9.28" date="2022-06-04">
+      <description>
+        <p>Tux Paint's Color palette includes a new Color Mixer option, which allows users to combine different proportions of primary colors (red, yellow, and blue) and shades (white, grey, and black) to create new colors, similar to mixing paints.</p>
+        <p>The Color Picker option, which previously offered a static palette of around sixty-five thousand color choices, now supports separate hue, saturation, and value settings, allowing users to choose from over sixteen million colors.</p>
+        <p>Also, a keyboard shortcut is now available for quick access to the Color Selector — the "pipette" tool used for picking colors from the current drawing.</p>
+        <p>The Paint and Lines tools now provide a way to adjust the spacing of brushes, allowing dotted lines or smearing effects to be made. Many brushes have been given better default spacing values, as well.</p>
+        <p>Two new variations of the Zoom Magic Tool, Tile Zoom and Rush, have been added. When shrinking a drawing with Tile Zoom, it replicates the drawing across the canvas in tiles, rather than filling the canvas with a solid background color. The Rush tool blurs the results.</p>
+        <p>Tux Paint's Shapes tool now offers hexagon (6-sided) and heptagon (7-sided) polygons. For shapes which can be stretched (rectangle, oval, etc.), the aspect ratio of the shape is displayed at the bottom while you make your adjustments. Instructional information shown while using some other tools has also been expanded.</p>
+        <p>Keyboard shortcuts, such as [Control]+[S] to save a drawing, are now accessed with the more traditional [⌘ Command] key when using Tux Paint on macOS. Sizing of Tux Paint's built-in on-screen keyboard has been improved. The look and feel of the user documentation has been improved.</p>
+      </description>
+    </release>
+    <release version="0.9.27" date="2021-11-25">
+      <description>
+        <p>Tux Paint's Paint and Line tools now support brushes that rotate based on the angle of the stroke. This new rotation feature, as well as the older directional and animated brush features, are now visually indicated by the brush shape selector. Additionally, the Fill tool now offers a freehand painting mode for interactively coloring within a confined area.</p>
+        <p>Six new Magic tools have been added to Tux Paint. Panels shrinks and duplicates the drawing into a 2-by-2 grid, which is useful for making four-panel comics. Opposite produces complementary colors. Lightning interactively draws a lightning bolt. Reflection creates a lake-like reflection on the drawing. Stretch stretches and squashes the picture like a fun-house mirror. Lastly, Smooth Rainbow provides a more gradual variation of Tux Paint's classic Rainbow tool.</p>
+        <p>A number of existing Magic tools have been updated, as well. Improvements were made to Halftone, which simulates photographs on newsprint; Cartoon, which makes an image look like a cartoon drawing; and TV, which simulates a television screen. Additionally, Cartoon and Halftone, along with Blocks, Chalk, and Emboss, now offer the ability to alter the entire image at once!</p>
+        <p>Finally, Magic tools are now grouped into collections of similar effects — painting, distorts, color filters, picture warps, pattern painting, artistic, and picture decorations — making it easier to find the tool you need.</p>
+      </description>
+    </release>
+    <release version="0.9.26" date="2021-06-26">
+      <description>
+        <p>Tux Paint's Fill tool now offers options to fill an area with color gradients. The "Radial" fill creates a circular gradient centered around the mouse click, while the "Linear" fill allows the interactive creation of gradients at different angles and sizes.</p>
+        <p>New Magic tools have been added to Tux Paint: "Pixels" makes it easier to create retro-gaming style pixel art, "Checkerboard" fills the entire canvas with a check pattern, and "Clone" allows duplicating parts of the picture via brush strokes.</p>
+        <p>Tux Paint's user documentation has been overhauled, making localization easier. Parties interested in helping with localization are encouraged to contact the Tux Paint team.</p>
+        <p>Finally, a new pair of accessibility options have been added. The entire user interface can now be enlarged benefiting users with impaired vision, and making the program more suitable to very high density displays. This feature, along with a new option to re-organize the color palette, can also be helpful to users of coarse input devices, such as eye-gaze tracking systems.</p>
+      </description>
+    </release>
+    <release version="0.9.25" date="2020-12-30">
+      <description>
+        <p>A major improvement has been made to the Shapes tool, which now provides options to choose whether shapes are drawn from the center or a corner, making it easier to use in any situation.</p>
+        <p>The on-screen keyboard, an accessibility feature optionally available when using the Text and Label tools, now appears larger on bigger displays; helpful for users of coarser input devices, such as eye-tracking systems.</p>
+        <p>The Eraser tool adds new, smaller eraser sizes, and applies smoother, contiguous strokes when the pointer is moved quickly.</p>
+        <p>Finally, this newest version adds options to export individual drawings and GIF animations, making it easy to share pictures, cartoons, and slideshows with others.</p>
+      </description>
+    </release>
+    <release version="0.9.24" date="2020-05-31">
+      <description>
+        <p>The latest version has promoted the "Fill" tool, previously found under the "Magic" section of Tux Paint, to the main toolbar, where it's easier to find. It also includes some performance improvements during start-up and when bringing up the "New" drawing dialog. The solid background colors can also be placed at the end of that dialog, allowing emphasis of template images.</p>
+        <p>Tux Paint also now makes it possible to disable stereo sound, which can benefit users with a hearing impairment, or in situations where only one speaker is available.</p>
+      </description>
+    </release>
+    <release version="0.9.23" date="2018-09-02">
+      <description>
+        <p>New in this version are a "color picker", which allows any color within a drawing to be chosen using the pointer, and a set of three-, four-, and five-pointed star shapes.</p>
+        <p>The latest version also incorporates a number of new translations, bringing the number of supported languages up to nearly 130: Bengali, Bodo, Dogri, Kabyle, Urdu, and Devanagari and Perso-Arabic variations of Kashmiri and Sindhi. Thirty other translations have been updated, as well.</p>
+      </description>
+    </release>
+    <release version="0.9.22" date="2014-08-23"/>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">none</content_attribute>
+    <content_attribute id="violence-fantasy">none</content_attribute>
+    <content_attribute id="violence-realistic">none</content_attribute>
+    <content_attribute id="violence-bloodshed">none</content_attribute>
+    <content_attribute id="violence-sexual">none</content_attribute>
+    <content_attribute id="violence-desecration">none</content_attribute>
+    <content_attribute id="violence-slavery">none</content_attribute>
+    <content_attribute id="violence-worship">none</content_attribute>
+    <content_attribute id="drugs-alcohol">none</content_attribute>
+    <content_attribute id="drugs-narcotics">none</content_attribute>
+    <content_attribute id="drugs-tobacco">none</content_attribute>
+    <content_attribute id="sex-nudity">none</content_attribute>
+    <content_attribute id="sex-themes">none</content_attribute>
+    <content_attribute id="sex-homosexuality">none</content_attribute>
+    <content_attribute id="sex-prostitution">none</content_attribute>
+    <content_attribute id="sex-adultery">none</content_attribute>
+    <content_attribute id="sex-appearance">none</content_attribute>
+    <content_attribute id="language-profanity">none</content_attribute>
+    <content_attribute id="language-humor">none</content_attribute>
+    <content_attribute id="language-discrimination">none</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
+    <content_attribute id="social-info">none</content_attribute>
+    <content_attribute id="social-audio">none</content_attribute>
+    <content_attribute id="social-location">none</content_attribute>
+    <content_attribute id="social-contacts">none</content_attribute>
+    <content_attribute id="money-purchasing">none</content_attribute>
+    <content_attribute id="money-gambling">none</content_attribute>
+  </content_rating>
+  <update_contact>tuxpaint-devel@lists.sourceforge.net</update_contact>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+    <display_length compare="ge">medium</display_length>
+  </recommends>
+  <requires>
+    <display_length compare="ge">small</display_length>
+  </requires>
+  <translation type="gettext">tuxpaint</translation>
+  <launchable type="desktop-id">tuxpaint.desktop</launchable>
+  <provides>
+    <!--
+    The ID previously used by Fedora (and possibly other distros) which added the metainfo downstream
+    https://src.fedoraproject.org/rpms/tuxpaint/blob/f36/f/tuxpaint.spec#_107
+    -->
+    <id>tuxpaint.desktop</id>
+  </provides>
+</component>

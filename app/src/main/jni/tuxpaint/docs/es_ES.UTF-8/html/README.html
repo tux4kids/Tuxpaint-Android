@@ -62,7 +62,7 @@
   section.indent dl p {
     margin-left: 0;
   }
-  p + ul {
+  p + ul, p + ol {
     margin-left: 2em;
   }
 
@@ -95,14 +95,14 @@
             A simple drawing program for children          </h3>
 
           <p>
-            Copyright &copy; 2002-2022 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br/>
+            Copyright &copy; 2002-2023 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br/>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a><br/>
             <a href="https://twitter.com/TuxPaintTweets">@TuxPaintTweets on Twitter</a><br/>
             <a href="https://tuxpaint.tumblr.com/">Tux Paint on Tumblr</a>
           </p>
 
           <p>
-            junio 14, 2022          </p>
+            enero  4, 2023          </p>
         </center>
       </header>
       <table border="2"
@@ -449,7 +449,7 @@
         </p>
 
         <p class="note">
-          <span title="Keyboard shortcut">&#9000;</span>          When the active tool supports colors, a shortcut may be used to access the "color picker" option more quickly. Hold the <b><code>[Control]</code></b> key while clicking, and the color under the mouse cursor will be shown at the bottom. You may drag around to canvas to find the color you want. When you release the mouse button, the color under the cursor will be selected. If you release the mouse outside of the canvas (e.g., over the "Tools" area), the color selection will be left unchanged. (This is similar to clicking the"Back" button that's available when bringing up the "color picker" option via its button the color palette.)        </p>
+          <span title="Keyboard shortcut">&#9000;</span>          When the active tool supports colors, a shortcut may be used for quick access to the "color picker" option. Hold the <b><code>[Control]</code></b> key while clicking, and the color under the mouse cursor will be shown at the bottom. You may drag around to canvas to find the color you want. When you release the mouse button, the color under the cursor will be selected. If you release the mouse outside of the canvas (e.g., over the "Tools" area), the color selection will be left unchanged. (This is similar to clicking the "Back" button that's available when bringing up the "color picker" option via its button the color palette.)        </p>
 
         <p class="note">
           <span title="Configuration option">&#9881;</span>          <strong>Note:</strong> You can define your own colors for Tux Paint. See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation.        </p>
@@ -560,7 +560,33 @@
     The Stamp tool is like a set of rubber stamps or stickers. It lets you paste pre-drawn or photographic images (like a picture of a horse, or a tree, or the moon) in your picture.  </p>
 
   <p>
-    As you move the mouse around the canvas, an outline follows the mouse, showing where the stamp will be placed, and how big it will be. Click to place the stamp.  </p>
+    As you move the mouse around the canvas, an outline follows the mouse, showing where the stamp will be placed, and how big it will be. Click on the canvas where you wish to place the stamp.  </p>
+
+  <dl>
+    <dt>
+      <strong>Normal Stamps Mode</strong>
+    </dt>
+
+    <dd>
+      <p>
+        Now you can move the mouse around the canvas to rotate the stamp.      </p>
+
+      <p>
+        Click the mouse button again and the stamp will be added to the drawing.      </p>
+    </dd>
+
+    <dt>
+      <strong>Simple Stamps Mode</strong>
+    </dt>
+
+    <dd>
+      If "stamp rotation" option is disabled, the stamp will be drawn on the canvas when you let go of the mouse button. (There's no rotation step.)      <p class="note">
+        <span title="Configuration option">&#9881;</span>        See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation to learn about the "stamp rotation" ("<code>stamprotation</code>") option.      </p>
+    </dd>
+  </dl>
+
+  <p class="note">
+    <span title="Version variation">&#128220;</span>    <strong>Note:</strong> The stamp rotation feature was added to Tux Paint in version 0.9.29.  </p>
 
   <div class="screenshot-center">
     <img src="../../html/images/ex_stamps.png"
@@ -874,6 +900,10 @@
 
   <p>
     As you erase, a 'squeaky clean' eraser wiping sound is played.  </p>
+
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    Hold the <b><code>[X]</code></b> key while clicking for quick access to a small round eraser (not available when the Text or Label tools are selected, when you're in the process of rotating a stamp or shape, or when using an interactive magic tool). Release the mouse to return to your currently-selected tool.  </p>
 </dd>
           </dl>
         </section>
@@ -1006,7 +1036,7 @@
           Click the brown 'Erase' (trash can) button at the lower right of the list to erase the selected picture. (You will be asked to confirm.)        </p>
 
         <p class="note">
-          <span title="Version variation">&#128220;</span>          <strong>Note:</strong> On Linux (as of version 0.9.22) and Windows (as of version 0.9.27), the picture will be placed in your desktop's trash can / recycle bin (where you may recover and restore it, if you change your mind).        </p>
+          <span title="Version variation">&#128220;</span>          <strong>Note:</strong> On Linux (as of version 0.9.22), Windows (as of version 0.9.27), and macOS (as of version 0.9.29), the picture will be placed in your desktop's trash can / recycle bin (where you may recover and restore it, if you change your mind).        </p>
         <div class="screenshot-right-after"></div>
       </li>
 

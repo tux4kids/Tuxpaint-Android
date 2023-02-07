@@ -2,6 +2,32 @@
 //#define VERBOSE
 
 /*
+  Enable fontconfig debugging.  The value of this variable, which must be a
+  string, but is interpreted as a number, and each bit within that value
+  controls different debugging messages.  (from
+  https://www.freedesktop.org/software/fontconfig/fontconfig-user.html#DEBUG)
+
+  Name         Value    Meaning
+  ---------------------------------------------------------
+  MATCH            1    Brief information about font matching
+  MATCHV           2    Extensive font matching information
+  EDIT             4    Monitor match/test/edit execution
+  FONTSET          8    Track loading of font information at startup
+  CACHE           16    Watch cache files being written
+  CACHEV          32    Extensive cache file writing information
+  PARSE           64    (no longer in use)
+  SCAN           128    Watch font files being scanned to build caches
+  SCANV          256    Verbose font file scanning information
+  MEMORY         512    Monitor fontconfig memory usage
+  CONFIG        1024    Monitor which config files are loaded
+  LANGSET       2048    Dump char sets used to construct lang values
+  MATCH2        4096    Display font-matching transformation in patterns
+*/
+#if defined(DEBUG) && defined(VERBOSE)
+#define FC_DEBUG "1025"
+#endif
+
+/*
 * Enable verbose logging if requested on platforms that support it.
 *
 * Verbose logging adds metadata to printf, including the source file location

@@ -6,9 +6,9 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
-  http://www.tuxpaint.org/
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -25,8 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: September 21, 2021
-  $Id$
+  Last updated: January 25, 2023
 */
 
 #include <stdio.h>
@@ -43,7 +42,8 @@
 #define gettext_noop(String) String
 #endif
 
-void rain_click(magic_api *, int, int, SDL_Surface *, SDL_Surface *, int, int, SDL_Rect *);
+void rain_click(magic_api *, int, int, SDL_Surface *, SDL_Surface *, int, int,
+                SDL_Rect *);
 
 static const int rain_SIZE = 30;
 static const int rain_AMOUNT = 200;
@@ -84,19 +84,25 @@ SDL_Surface *rain_get_icon(magic_api * api, int which);
 char *rain_get_name(magic_api * api, int which);
 int rain_get_group(magic_api * api, int which);
 char *rain_get_description(magic_api * api, int which, int mode);
-static void do_rain_drop(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
-static void rain_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
+static void do_rain_drop(void *ptr, int which, SDL_Surface * canvas,
+                         SDL_Surface * last, int x, int y);
+static void rain_linecb(void *ptr, int which, SDL_Surface * canvas,
+                        SDL_Surface * last, int x, int y);
 void rain_drag(magic_api * api, int which, SDL_Surface * canvas,
-               SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
-void rain_click(magic_api * api, int which, int mode,
-                SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
-void rain_release(magic_api * api, int which,
-                  SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
+               SDL_Surface * last, int ox, int oy, int x, int y,
+               SDL_Rect * update_rect);
+void rain_click(magic_api * api, int which, int mode, SDL_Surface * canvas,
+                SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
+void rain_release(magic_api * api, int which, SDL_Surface * canvas,
+                  SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 void rain_shutdown(magic_api * api);
-void rain_set_color(magic_api * api, Uint8 r, Uint8 g, Uint8 b);
+void rain_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                    SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 int rain_requires_colors(magic_api * api, int which);
-void rain_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
-void rain_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
+void rain_switchin(magic_api * api, int which, int mode,
+                   SDL_Surface * canvas);
+void rain_switchout(magic_api * api, int which, int mode,
+                    SDL_Surface * canvas);
 int rain_modes(magic_api * api, int which);
 
 Uint32 rain_api_version(void)
@@ -108,9 +114,9 @@ Uint32 rain_api_version(void)
 static int rain_inRainShape(double x, double y, double r)
 {
   if (sqrt(x * x + y * y) < (r * pow(cos(atan2(x, y)), 10.0)))
-    {
-      return 1;
-    }
+  {
+    return 1;
+  }
   return 0;
 }
 
@@ -122,10 +128,11 @@ int rain_init(magic_api * api)
 
   //Load sounds
   for (i = 0; i < rain_NUM_TOOLS; i++)
-    {
-      snprintf(fname, sizeof(fname), "%ssounds/magic/%s", api->data_directory, rain_snd_filenames[i]);
-      rain_snd_effect[i] = Mix_LoadWAV(fname);
-    }
+  {
+    snprintf(fname, sizeof(fname), "%ssounds/magic/%s", api->data_directory,
+             rain_snd_filenames[i]);
+    rain_snd_effect[i] = Mix_LoadWAV(fname);
+  }
 
   return (1);
 }
@@ -140,7 +147,8 @@ SDL_Surface *rain_get_icon(magic_api * api, int which)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/%s", api->data_directory, rain_icon_filenames[which]);
+  snprintf(fname, sizeof(fname), "%simages/magic/%s", api->data_directory,
+           rain_icon_filenames[which]);
   return (IMG_Load(fname));
 }
 
@@ -157,13 +165,15 @@ int rain_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
 }
 
 // Return our descriptions, localized:
-char *rain_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
+char *rain_get_description(magic_api * api ATTRIBUTE_UNUSED, int which,
+                           int mode)
 {
   return (strdup(gettext_noop(rain_descs[which][mode - 1])));
 }
 
 // Do the effect:
-static void do_rain_drop(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,
+static void do_rain_drop(void *ptr, int which ATTRIBUTE_UNUSED,
+                         SDL_Surface * canvas,
                          SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
@@ -172,54 +182,59 @@ static void do_rain_drop(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * ca
   Uint8 r, g, b;
 
   for (yy = y - rain_SIZE / 2; yy < y + rain_SIZE / 2; yy++)
+  {
+    for (xx = x - rain_SIZE; xx < x + rain_SIZE; xx++)
     {
-      for (xx = x - rain_SIZE; xx < x + rain_SIZE; xx++)
-        {
-          if (rain_inRainShape(xx - x, yy - y + rain_SIZE / 2, rain_SIZE))
-            {
-              //api->rgbtohsv(rain_r, rain_g, rain_b, &h, &s, &v);
-              //api->hsvtorgb(h, s, rain_weights[(yy-y)*((rain_SIZE*2) -1)+(xx-x)], &r, &g, &b);
-              SDL_GetRGB(api->getpixel(canvas, xx, yy), canvas->format, &r, &g, &b);
-              api->putpixel(canvas, xx, yy, SDL_MapRGB(canvas->format, clamp(0, r - 50, 255),
-                                                       clamp(0, g - 50, 255), clamp(0, b + 200, 255)));
-            }
-        }
+      if (rain_inRainShape(xx - x, yy - y + rain_SIZE / 2, rain_SIZE))
+      {
+        //api->rgbtohsv(rain_r, rain_g, rain_b, &h, &s, &v);
+        //api->hsvtorgb(h, s, rain_weights[(yy-y)*((rain_SIZE*2) -1)+(xx-x)], &r, &g, &b);
+        SDL_GetRGB(api->getpixel(canvas, xx, yy), canvas->format, &r, &g, &b);
+        api->putpixel(canvas, xx, yy,
+                      SDL_MapRGB(canvas->format, clamp(0, r - 50, 255),
+                                 clamp(0, g - 50, 255), clamp(0, b + 200,
+                                                              255)));
+      }
     }
+  }
 
 }
 
-static void rain_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
+static void rain_linecb(void *ptr, int which, SDL_Surface * canvas,
+                        SDL_Surface * last, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   SDL_Rect rect;
 
   if (rand() % 10 == 0)
-    {
-      rain_click(api, which, MODE_PAINT, canvas, last,
-                 x + (rand() % rain_SIZE * 2) - rain_SIZE, y + (rand() % rain_SIZE * 2) - rain_SIZE, &rect);
-    }
+  {
+    rain_click(api, which, MODE_PAINT, canvas, last,
+               x + (rand() % rain_SIZE * 2) - rain_SIZE,
+               y + (rand() % rain_SIZE * 2) - rain_SIZE, &rect);
+  }
 }
 
 // Affect the canvas on drag:
 void rain_drag(magic_api * api, int which, SDL_Surface * canvas,
-               SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+               SDL_Surface * last, int ox, int oy, int x, int y,
+               SDL_Rect * update_rect)
 {
-  api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, rain_linecb);
+  api->line((void *) api, which, canvas, last, ox, oy, x, y, 1, rain_linecb);
 
   if (ox > x)
-    {
-      int tmp = ox;
+  {
+    int tmp = ox;
 
-      ox = x;
-      x = tmp;
-    }
+    ox = x;
+    x = tmp;
+  }
   if (oy > y)
-    {
-      int tmp = oy;
+  {
+    int tmp = oy;
 
-      oy = y;
-      y = tmp;
-    }
+    oy = y;
+    y = tmp;
+  }
 
   update_rect->x = ox - rain_SIZE * 2;
   update_rect->y = oy - rain_SIZE * 2;
@@ -229,43 +244,48 @@ void rain_drag(magic_api * api, int which, SDL_Surface * canvas,
 
 // Affect the canvas on click:
 void rain_click(magic_api * api, int which, int mode,
-                SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+                SDL_Surface * canvas, SDL_Surface * last, int x, int y,
+                SDL_Rect * update_rect)
 {
 
   if (mode == MODE_PAINT)
-    {
-      do_rain_drop(api, which, canvas, last, x, y);
+  {
+    do_rain_drop(api, which, canvas, last, x, y);
 
-      update_rect->x = x - rain_SIZE;
-      update_rect->y = y - rain_SIZE;
-      update_rect->w = rain_SIZE * 2;
-      update_rect->h = rain_SIZE * 2;
+    update_rect->x = x - rain_SIZE;
+    update_rect->y = y - rain_SIZE;
+    update_rect->w = rain_SIZE * 2;
+    update_rect->h = rain_SIZE * 2;
 
-      api->playsound(rain_snd_effect[which], (x * 255) / canvas->w, 255);
-    }
+    api->playsound(rain_snd_effect[which], (x * 255) / canvas->w, 255);
+  }
   else
+  {
+
+    int i;
+
+    for (i = 0; i < rain_AMOUNT; i++)
     {
-
-      int i;
-
-      for (i = 0; i < rain_AMOUNT; i++)
-        {
-          do_rain_drop(api, which, canvas, last, rand() % canvas->w, rand() % canvas->h);
-        }
-
-      update_rect->x = 0;
-      update_rect->y = 0;
-      update_rect->w = canvas->w;
-      update_rect->h = canvas->h;
-
-      api->playsound(rain_snd_effect[which], 128, 255);
+      do_rain_drop(api, which, canvas, last, rand() % canvas->w,
+                   rand() % canvas->h);
     }
+
+    update_rect->x = 0;
+    update_rect->y = 0;
+    update_rect->w = canvas->w;
+    update_rect->h = canvas->h;
+
+    api->playsound(rain_snd_effect[which], 128, 255);
+  }
 }
 
 // Affect the canvas on release:
-void rain_release(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                  int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void rain_release(magic_api * api ATTRIBUTE_UNUSED,
+                  int which ATTRIBUTE_UNUSED,
+                  SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                  SDL_Surface * last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
+                  int y ATTRIBUTE_UNUSED,
+                  SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -276,33 +296,36 @@ void rain_shutdown(magic_api * api ATTRIBUTE_UNUSED)
   int i;
 
   for (i = 0; i < rain_NUM_TOOLS; i++)
+  {
+    if (rain_snd_effect[i] != NULL)
     {
-      if (rain_snd_effect[i] != NULL)
-        {
-          Mix_FreeChunk(rain_snd_effect[i]);
-        }
+      Mix_FreeChunk(rain_snd_effect[i]);
     }
+  }
 }
 
 // Record the color from Tux Paint:
-void rain_set_color(magic_api * api ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
-                    Uint8 b ATTRIBUTE_UNUSED)
+void rain_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                    SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
 {
 }
 
 // Use colors:
-int rain_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rain_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
 
-void rain_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+void rain_switchin(magic_api * api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
                    SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void rain_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+void rain_switchout(magic_api * api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
                     SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }

@@ -1,11 +1,9 @@
 README.txt for "tuxpaint-ttf-japanese-minimal"
 Japanese TrueType Font (TTF) for Tux Paint (includes only required chars.)
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.newbreedsoftware.com/tuxpaint/
+https://tuxpaint.org/
 
-August 12, 2006 - August 12, 2006
+December 9, 2022- December 9, 2022
 
 
 This font is required to run Tux Paint in Japanese.
@@ -14,12 +12,13 @@ This font is required to run Tux Paint in Japanese.
 This font contains only the characters needed to display the strings
 found in Tux Paint.
 
-This is a custumized subset of Sazanami-Gothic.ttf for TuxPaint.
-Difference between original are, 
+This is a custumized subset of GenJyuuGothic-P-Normal-Subset.ttf for TuxPaint.
+Only the following glyphs are included in this subset.
 
-  a) Bitmap data which prevent correct rendering (due to SDL_ttf
-     bug) are removed.
-  b) All Kanji data not used in TuxPaint are removed.
+  * ASCII characters
+  * Characters for the onscreen keyboard
+  * Japanese Hiragana, Katakana and basic symbols.
+  * Educational level Kanji for primary school
 
 Contributed by TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 

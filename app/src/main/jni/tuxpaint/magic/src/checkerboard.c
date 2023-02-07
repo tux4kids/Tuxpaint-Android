@@ -7,8 +7,8 @@
   By Bill Kendrick
   Based on `blind.c` by Pere Pujal Carabantes
 
-  Copyright (c) 2021
-  http://www.tuxpaint.org/
+  Copyright (c) 2021-2023
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -24,6 +24,8 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
+
+  Last updated: January 25, 2023
 */
 
 #include "tp_magic_api.h"
@@ -37,7 +39,8 @@ Mix_Chunk *checkerboard_snd;
 
 // Prototypes
 Uint32 checkerboard_api_version(void);
-void checkerboard_set_color(magic_api * api, Uint8 r, Uint8 g, Uint8 b);
+void checkerboard_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                            SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 int checkerboard_init(magic_api * api);
 int checkerboard_get_tool_count(magic_api * api);
 SDL_Surface *checkerboard_get_icon(magic_api * api, int which);
@@ -46,15 +49,22 @@ int checkerboard_get_group(magic_api * api, int which);
 char *checkerboard_get_description(magic_api * api, int which, int mode);
 int checkerboard_requires_colors(magic_api * api, int which);
 void checkerboard_release(magic_api * api, int which,
-                   SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
+                          SDL_Surface * canvas, SDL_Surface * snapshot, int x,
+                          int y, SDL_Rect * update_rect);
 void checkerboard_shutdown(magic_api * api);
-void checkerboard_paint_checkerboard(void *ptr_to_api, int which_tool, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
+void checkerboard_paint_checkerboard(void *ptr_to_api, int which_tool,
+                                     SDL_Surface * canvas,
+                                     SDL_Surface * snapshot, int x, int y);
 void checkerboard_drag(magic_api * api, int which, SDL_Surface * canvas,
-                SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect);
+                       SDL_Surface * snapshot, int ox, int oy, int x, int y,
+                       SDL_Rect * update_rect);
 void checkerboard_click(magic_api * api, int which, int mode,
-                 SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
-void checkerboard_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
-void checkerboard_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
+                        SDL_Surface * canvas, SDL_Surface * last, int x,
+                        int y, SDL_Rect * update_rect);
+void checkerboard_switchin(magic_api * api, int which, int mode,
+                           SDL_Surface * canvas);
+void checkerboard_switchout(magic_api * api, int which, int mode,
+                            SDL_Surface * canvas);
 int checkerboard_modes(magic_api * api, int which);
 
 //                              Housekeeping functions
@@ -64,8 +74,10 @@ Uint32 checkerboard_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void checkerboard_set_color(magic_api * api ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b)       //get the colors from API and store it in structure
+void checkerboard_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                            SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
 {
+  //get the colors from API and store it in structure
   checkerboard_r = r;
   checkerboard_g = g;
   checkerboard_b = b;
@@ -75,7 +87,8 @@ int checkerboard_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/checkerboard.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/checkerboard.ogg",
+           api->data_directory);
   checkerboard_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -86,40 +99,50 @@ int checkerboard_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
   return 1;
 }
 
-SDL_Surface *checkerboard_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *checkerboard_get_icon(magic_api * api,
+                                   int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/checkerboard.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/checkerboard.png",
+           api->data_directory);
 
   return (IMG_Load(fname));
 }
 
-char *checkerboard_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *checkerboard_get_name(magic_api * api ATTRIBUTE_UNUSED,
+                            int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext_noop("Checkerboard"));
 }
 
-int checkerboard_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int checkerboard_get_group(magic_api * api ATTRIBUTE_UNUSED,
+                           int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_DECORATIONS;
 }
 
-char *checkerboard_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *checkerboard_get_description(magic_api * api ATTRIBUTE_UNUSED,
+                                   int which ATTRIBUTE_UNUSED,
+                                   int mode ATTRIBUTE_UNUSED)
 {
   return
     strdup(gettext_noop
            ("Click and drag to fill the canvas with a checkerboard pattern."));
 }
 
-int checkerboard_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int checkerboard_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
+                                 int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-void checkerboard_release(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                   int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void checkerboard_release(magic_api * api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED,
+                          SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                          SDL_Surface * snapshot ATTRIBUTE_UNUSED,
+                          int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED,
+                          SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -130,10 +153,10 @@ void checkerboard_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 
 // Interactivity functions
 
-void checkerboard_drag(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,
-                SDL_Surface * snapshot,
-                int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
-                int x, int y, SDL_Rect * update_rect)
+void checkerboard_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
+                       SDL_Surface * canvas, SDL_Surface * snapshot,
+                       int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
+                       int x, int y, SDL_Rect * update_rect)
 {
   int sz, xx, yy;
   Uint8 draw_start, draw_row, draw_cell;
@@ -142,9 +165,13 @@ void checkerboard_drag(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface 
 
   SDL_BlitSurface(snapshot, NULL, canvas, NULL);
 
-  sz = max(10, max(abs(x - checkerboard_start_x), abs(y - checkerboard_start_y)));
+  sz =
+    max(10,
+        max(abs(x - checkerboard_start_x), abs(y - checkerboard_start_y)));
 
-  colr = SDL_MapRGB(canvas->format, checkerboard_r, checkerboard_g, checkerboard_b);
+  colr =
+    SDL_MapRGB(canvas->format, checkerboard_r, checkerboard_g,
+               checkerboard_b);
 
   draw_start = 1;
   if (x < checkerboard_start_x)
@@ -154,11 +181,14 @@ void checkerboard_drag(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface 
 
   /* From the mouse Y position down... */
   draw_row = draw_start;
-  for (yy = checkerboard_start_y; yy <= canvas->h; yy += sz) {
+  for (yy = checkerboard_start_y; yy <= canvas->h; yy += sz)
+  {
     /* From the mouse X position right... */
     draw_cell = draw_row;
-    for (xx = checkerboard_start_x; xx <= canvas->w; xx += sz) {
-      if (draw_cell) {
+    for (xx = checkerboard_start_x; xx <= canvas->w; xx += sz)
+    {
+      if (draw_cell)
+      {
         dest.x = xx;
         dest.y = yy;
         dest.w = sz;
@@ -170,8 +200,10 @@ void checkerboard_drag(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface 
 
     /* From the mouse X position left... */
     draw_cell = !draw_row;
-    for (xx = checkerboard_start_x - sz; xx > -sz; xx -= sz) {
-      if (draw_cell) {
+    for (xx = checkerboard_start_x - sz; xx > -sz; xx -= sz)
+    {
+      if (draw_cell)
+      {
         dest.x = xx;
         dest.y = yy;
         dest.w = sz;
@@ -186,11 +218,14 @@ void checkerboard_drag(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface 
 
   /* From the mouse Y position up... */
   draw_row = !draw_start;
-  for (yy = checkerboard_start_y - sz; yy > -sz; yy -= sz) {
+  for (yy = checkerboard_start_y - sz; yy > -sz; yy -= sz)
+  {
     /* From the mouse X position right... */
     draw_cell = draw_row;
-    for (xx = checkerboard_start_x; xx <= canvas->w; xx += sz) {
-      if (draw_cell) {
+    for (xx = checkerboard_start_x; xx <= canvas->w; xx += sz)
+    {
+      if (draw_cell)
+      {
         dest.x = xx;
         dest.y = yy;
         dest.w = sz;
@@ -202,8 +237,10 @@ void checkerboard_drag(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface 
 
     /* From the mouse X position left... */
     draw_cell = !draw_row;
-    for (xx = checkerboard_start_x - sz; xx > -sz; xx -= sz) {
-      if (draw_cell) {
+    for (xx = checkerboard_start_x - sz; xx > -sz; xx -= sz)
+    {
+      if (draw_cell)
+      {
         dest.x = xx;
         dest.y = yy;
         dest.w = sz;
@@ -225,27 +262,32 @@ void checkerboard_drag(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface 
   api->playsound(checkerboard_snd, 128, 255);
 }
 
-void checkerboard_click(magic_api * api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                 SDL_Surface * canvas, SDL_Surface * last,
-                 int x, int y,
-                 SDL_Rect * update_rect)
+void checkerboard_click(magic_api * api, int which ATTRIBUTE_UNUSED,
+                        int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas,
+                        SDL_Surface * last, int x, int y,
+                        SDL_Rect * update_rect)
 {
   checkerboard_start_x = x;
   checkerboard_start_y = y;
   checkerboard_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void checkerboard_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void checkerboard_switchin(magic_api * api ATTRIBUTE_UNUSED,
+                           int which ATTRIBUTE_UNUSED,
+                           int mode ATTRIBUTE_UNUSED,
+                           SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void checkerboard_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void checkerboard_switchout(magic_api * api ATTRIBUTE_UNUSED,
+                            int which ATTRIBUTE_UNUSED,
+                            int mode ATTRIBUTE_UNUSED,
+                            SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int checkerboard_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int checkerboard_modes(magic_api * api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }

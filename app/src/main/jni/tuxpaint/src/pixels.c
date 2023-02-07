@@ -37,19 +37,21 @@ static void putpixel8(SDL_Surface * surface, int x, int y, Uint32 pixel)
   Uint8 *p;
 
   /* Assuming the X/Y values are within the bounds of this surface... */
-  if (likely(likely((unsigned)x < (unsigned)surface->w) && likely((unsigned)y < (unsigned)surface->h)))
-    {
-      // Set a pointer to the exact location in memory of the pixel
-      p = (Uint8 *) (((Uint8 *) surface->pixels) +      /* Start: beginning of RAM */
-                     (y * surface->pitch) +     /* Go down Y lines */
-                     x);        /* Go in X pixels */
+  if (likely
+      (likely((unsigned) x < (unsigned) surface->w)
+       && likely((unsigned) y < (unsigned) surface->h)))
+  {
+    // Set a pointer to the exact location in memory of the pixel
+    p = (Uint8 *) (((Uint8 *) surface->pixels) +        /* Start: beginning of RAM */
+                   (y * surface->pitch) +       /* Go down Y lines */
+                   x);          /* Go in X pixels */
 
 
-      /* Set the (correctly-sized) piece of data in the surface's RAM
-       *          to the pixel value sent in: */
+    /* Set the (correctly-sized) piece of data in the surface's RAM
+     *          to the pixel value sent in: */
 
-      *p = pixel;
-    }
+    *p = pixel;
+  }
 }
 
 /* Draw a single pixel into the surface: */
@@ -58,19 +60,21 @@ static void putpixel16(SDL_Surface * surface, int x, int y, Uint32 pixel)
   Uint8 *p;
 
   /* Assuming the X/Y values are within the bounds of this surface... */
-  if (likely(likely((unsigned)x < (unsigned)surface->w) && likely((unsigned)y < (unsigned)surface->h)))
-    {
-      // Set a pointer to the exact location in memory of the pixel
-      p = (Uint8 *) (((Uint8 *) surface->pixels) +      /* Start: beginning of RAM */
-                     (y * surface->pitch) +     /* Go down Y lines */
-                     (x * 2));  /* Go in X pixels */
+  if (likely
+      (likely((unsigned) x < (unsigned) surface->w)
+       && likely((unsigned) y < (unsigned) surface->h)))
+  {
+    // Set a pointer to the exact location in memory of the pixel
+    p = (Uint8 *) (((Uint8 *) surface->pixels) +        /* Start: beginning of RAM */
+                   (y * surface->pitch) +       /* Go down Y lines */
+                   (x * 2));    /* Go in X pixels */
 
 
-      /* Set the (correctly-sized) piece of data in the surface's RAM
-       *          to the pixel value sent in: */
+    /* Set the (correctly-sized) piece of data in the surface's RAM
+     *          to the pixel value sent in: */
 
-      *(Uint16 *) p = pixel;
-    }
+    *(Uint16 *) p = pixel;
+  }
 }
 
 /* Draw a single pixel into the surface: */
@@ -79,31 +83,33 @@ static void putpixel24(SDL_Surface * surface, int x, int y, Uint32 pixel)
   Uint8 *p;
 
   /* Assuming the X/Y values are within the bounds of this surface... */
-  if (likely(likely((unsigned)x < (unsigned)surface->w) && likely((unsigned)y < (unsigned)surface->h)))
+  if (likely
+      (likely((unsigned) x < (unsigned) surface->w)
+       && likely((unsigned) y < (unsigned) surface->h)))
+  {
+    // Set a pointer to the exact location in memory of the pixel
+    p = (Uint8 *) (((Uint8 *) surface->pixels) +        /* Start: beginning of RAM */
+                   (y * surface->pitch) +       /* Go down Y lines */
+                   (x * 3));    /* Go in X pixels */
+
+
+    /* Set the (correctly-sized) piece of data in the surface's RAM
+     *          to the pixel value sent in: */
+
+    if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
     {
-      // Set a pointer to the exact location in memory of the pixel
-      p = (Uint8 *) (((Uint8 *) surface->pixels) +      /* Start: beginning of RAM */
-                     (y * surface->pitch) +     /* Go down Y lines */
-                     (x * 3));  /* Go in X pixels */
-
-
-      /* Set the (correctly-sized) piece of data in the surface's RAM
-       *          to the pixel value sent in: */
-
-      if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
-        {
-          p[0] = (pixel >> 16) & 0xff;
-          p[1] = (pixel >> 8) & 0xff;
-          p[2] = pixel & 0xff;
-        }
-      else
-        {
-          p[0] = pixel & 0xff;
-          p[1] = (pixel >> 8) & 0xff;
-          p[2] = (pixel >> 16) & 0xff;
-        }
-
+      p[0] = (pixel >> 16) & 0xff;
+      p[1] = (pixel >> 8) & 0xff;
+      p[2] = pixel & 0xff;
     }
+    else
+    {
+      p[0] = pixel & 0xff;
+      p[1] = (pixel >> 8) & 0xff;
+      p[2] = (pixel >> 16) & 0xff;
+    }
+
+  }
 }
 
 /* Draw a single pixel into the surface: */
@@ -112,19 +118,21 @@ static void putpixel32(SDL_Surface * surface, int x, int y, Uint32 pixel)
   Uint8 *p;
 
   /* Assuming the X/Y values are within the bounds of this surface... */
-  if (likely(likely((unsigned)x < (unsigned)surface->w) && likely((unsigned)y < (unsigned)surface->h)))
-    {
-      // Set a pointer to the exact location in memory of the pixel
-      p = (Uint8 *) (((Uint8 *) surface->pixels) +      /* Start: beginning of RAM */
-                     (y * surface->pitch) +     /* Go down Y lines */
-                     (x * 4));  /* Go in X pixels */
+  if (likely
+      (likely((unsigned) x < (unsigned) surface->w)
+       && likely((unsigned) y < (unsigned) surface->h)))
+  {
+    // Set a pointer to the exact location in memory of the pixel
+    p = (Uint8 *) (((Uint8 *) surface->pixels) +        /* Start: beginning of RAM */
+                   (y * surface->pitch) +       /* Go down Y lines */
+                   (x * 4));    /* Go in X pixels */
 
 
-      /* Set the (correctly-sized) piece of data in the surface's RAM
-       *          to the pixel value sent in: */
+    /* Set the (correctly-sized) piece of data in the surface's RAM
+     *          to the pixel value sent in: */
 
-      *(Uint32 *) p = pixel;    // 32-bit display
-    }
+    *(Uint32 *) p = pixel;      // 32-bit display
+  }
 }
 
 /* Get a pixel: */
@@ -133,9 +141,9 @@ static Uint32 getpixel8(SDL_Surface * surface, int x, int y)
   Uint8 *p;
 
   /* get the X/Y values within the bounds of this surface */
-  if (unlikely((unsigned)x > (unsigned)surface->w - 1u))
+  if (unlikely((unsigned) x > (unsigned) surface->w - 1u))
     x = (x < 0) ? 0 : surface->w - 1;
-  if (unlikely((unsigned)y > (unsigned)surface->h - 1u))
+  if (unlikely((unsigned) y > (unsigned) surface->h - 1u))
     y = (y < 0) ? 0 : surface->h - 1;
 
   /* Set a pointer to the exact location in memory of the pixel
@@ -159,9 +167,9 @@ static Uint32 getpixel16(SDL_Surface * surface, int x, int y)
   Uint8 *p;
 
   /* get the X/Y values within the bounds of this surface */
-  if (unlikely((unsigned)x > (unsigned)surface->w - 1u))
+  if (unlikely((unsigned) x > (unsigned) surface->w - 1u))
     x = (x < 0) ? 0 : surface->w - 1;
-  if (unlikely((unsigned)y > (unsigned)surface->h - 1u))
+  if (unlikely((unsigned) y > (unsigned) surface->h - 1u))
     y = (y < 0) ? 0 : surface->h - 1;
 
   /* Set a pointer to the exact location in memory of the pixel
@@ -186,9 +194,9 @@ static Uint32 getpixel24(SDL_Surface * surface, int x, int y)
   Uint32 pixel;
 
   /* get the X/Y values within the bounds of this surface */
-  if (unlikely((unsigned)x > (unsigned)surface->w - 1u))
+  if (unlikely((unsigned) x > (unsigned) surface->w - 1u))
     x = (x < 0) ? 0 : surface->w - 1;
-  if (unlikely((unsigned)y > (unsigned)surface->h - 1u))
+  if (unlikely((unsigned) y > (unsigned) surface->h - 1u))
     y = (y < 0) ? 0 : surface->h - 1;
 
   /* Set a pointer to the exact location in memory of the pixel
@@ -219,9 +227,9 @@ static Uint32 getpixel32(SDL_Surface * surface, int x, int y)
   Uint8 *p;
 
   /* get the X/Y values within the bounds of this surface */
-  if (unlikely((unsigned)x > (unsigned)surface->w - 1u))
+  if (unlikely((unsigned) x > (unsigned) surface->w - 1u))
     x = (x < 0) ? 0 : surface->w - 1;
-  if (unlikely((unsigned)y > (unsigned)surface->h - 1u))
+  if (unlikely((unsigned) y > (unsigned) surface->h - 1u))
     y = (y < 0) ? 0 : surface->h - 1;
 
   /* Set a pointer to the exact location in memory of the pixel
@@ -239,11 +247,11 @@ static Uint32 getpixel32(SDL_Surface * surface, int x, int y)
   return *(Uint32 *) p;         // 32-bit display
 }
 
-void (*putpixels[]) (SDL_Surface *, int, int, Uint32) =
-{
-putpixel8, putpixel8, putpixel16, putpixel24, putpixel32};
+void (*putpixels[])(SDL_Surface *, int, int, Uint32) = {
+  putpixel8, putpixel8, putpixel16, putpixel24, putpixel32
+};
 
 
-Uint32(*getpixels[])(SDL_Surface *, int, int) =
-{
-getpixel8, getpixel8, getpixel16, getpixel24, getpixel32};
+Uint32(*getpixels[])(SDL_Surface *, int, int) = {
+  getpixel8, getpixel8, getpixel16, getpixel24, getpixel32
+};

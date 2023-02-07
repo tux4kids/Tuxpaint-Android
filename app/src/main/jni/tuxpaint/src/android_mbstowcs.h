@@ -31,6 +31,6 @@ Anyway, using our own implementation of "mbstowcs" can fix this problem.
 #undef mbsrtowcs
 
 // redefine mbstowcs function
-size_t mbstowcs(wchar_t * __restrict pwcs, const char * __restrict s, size_t n);
+size_t mbstowcs(wchar_t *__restrict pwcs, const char *__restrict s, size_t n);
 
 #endif

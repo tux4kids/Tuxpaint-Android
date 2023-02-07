@@ -1,7 +1,7 @@
-/* android_print.h */  
-  
-/* printing support for Tux Paint */ 
-  
+/* android_print.h */
+
+/* printing support for Tux Paint */
+
 /*
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -17,15 +17,15 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
-*/ 
-  
+*/
+
 
 #ifndef __ANDROID_PRINT_H__
 #define __ANDROID_PRINT_H__
-  
+
 #include "SDL.h"
 
-extern const char *SurfacePrint(SDL_Surface *surface);
+extern const char *SurfacePrint(SDL_Surface * surface);
 extern int IsPrinterAvailable(void);
- 
-#endif	/* __ANDROID_PRINT__ */
+
+#endif /* __ANDROID_PRINT__ */

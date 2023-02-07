@@ -4,9 +4,9 @@
   Light Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
-  http://www.tuxpaint.org/
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -23,8 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: September 21, 2021
-  $Id$
+  Last updated: January 25, 2023
 */
 
 #include <stdio.h>
@@ -47,18 +46,23 @@ SDL_Surface *light_get_icon(magic_api * api, int which);
 char *light_get_name(magic_api * api, int which);
 int light_get_group(magic_api * api, int which);
 char *light_get_description(magic_api * api, int which, int mode);
-static void do_light(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
+static void do_light(void *ptr, int which, SDL_Surface * canvas,
+                     SDL_Surface * last, int x, int y);
 void light_drag(magic_api * api, int which, SDL_Surface * canvas,
-                SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
-void light_click(magic_api * api, int which, int mode,
-                 SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
-void light_release(magic_api * api, int which,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
+                SDL_Surface * last, int ox, int oy, int x, int y,
+                SDL_Rect * update_rect);
+void light_click(magic_api * api, int which, int mode, SDL_Surface * canvas,
+                 SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
+void light_release(magic_api * api, int which, SDL_Surface * canvas,
+                   SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 void light_shutdown(magic_api * api);
-void light_set_color(magic_api * api, Uint8 r, Uint8 g, Uint8 b);
+void light_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                     SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 int light_requires_colors(magic_api * api, int which);
-void light_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
-void light_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
+void light_switchin(magic_api * api, int which, int mode,
+                    SDL_Surface * canvas);
+void light_switchout(magic_api * api, int which, int mode,
+                     SDL_Surface * canvas);
 int light_modes(magic_api * api, int which);
 
 
@@ -73,10 +77,12 @@ int light_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/light1.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/light1.ogg",
+           api->data_directory);
   light1_snd = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/light2.ogg", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/light2.ogg",
+           api->data_directory);
   light2_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -93,33 +99,41 @@ SDL_Surface *light_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/light.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/light.png",
+           api->data_directory);
 
   return (IMG_Load(fname));
 }
 
 // Return our names, localized:
-char *light_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *light_get_name(magic_api * api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Light")));
 }
 
 // Return our groups:
-int light_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int light_get_group(magic_api * api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
 
 // Return our descriptions, localized:
-char *light_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *light_get_description(magic_api * api ATTRIBUTE_UNUSED,
+                            int which ATTRIBUTE_UNUSED,
+                            int mode ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Click and drag to draw a beam of light on your picture.")));
+  return (strdup
+          (gettext_noop
+           ("Click and drag to draw a beam of light on your picture.")));
 }
 
 // Do the effect:
 
-static void do_light(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED,
-                     int x, int y)
+static void do_light(void *ptr, int which ATTRIBUTE_UNUSED,
+                     SDL_Surface * canvas,
+                     SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int xx, yy;
@@ -129,86 +143,89 @@ static void do_light(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas
   float adj;
 
   for (yy = -8; yy < 8; yy++)
+  {
+    for (xx = -8; xx < 8; xx++)
     {
-      for (xx = -8; xx < 8; xx++)
+      if (api->in_circle(xx, yy, 8))
+      {
+        pix = api->getpixel(canvas, x + xx, y + yy);
+
+        SDL_GetRGB(pix, canvas->format, &r, &g, &b);
+
+        adj = (7.99 - sqrt(abs(xx * yy))) / 128.0;
+
+        api->rgbtohsv(r, g, b, &h, &s, &v);
+
+        v = min((float) 1.0, v + adj);
+
+        if (light_h == -1 && h == -1)
         {
-          if (api->in_circle(xx, yy, 8))
-            {
-              pix = api->getpixel(canvas, x + xx, y + yy);
-
-              SDL_GetRGB(pix, canvas->format, &r, &g, &b);
-
-              adj = (7.99 - sqrt(abs(xx * yy))) / 128.0;
-
-              api->rgbtohsv(r, g, b, &h, &s, &v);
-
-              v = min((float)1.0, v + adj);
-
-              if (light_h == -1 && h == -1)
-                {
-                  new_h = -1;
-                  new_s = 0;
-                  new_v = v;
-                }
-              else if (light_h == -1)
-                {
-                  new_h = h;
-                  new_s = max(0.0, s - adj / 2.0);
-                  new_v = v;
-                }
-              else if (h == -1)
-                {
-                  new_h = light_h;
-                  new_s = max(0.0, light_s - adj / 2.0);
-                  new_v = v;
-                }
-              else
-                {
-                  new_h = (light_h + h) / 2;
-                  new_s = max(0.0, s - adj / 2.0);
-                  new_v = v;
-                }
-
-              api->hsvtorgb(new_h, new_s, new_v, &r, &g, &b);
-
-              api->putpixel(canvas, x + xx, y + yy, SDL_MapRGB(canvas->format, r, g, b));
-            }
+          new_h = -1;
+          new_s = 0;
+          new_v = v;
         }
+        else if (light_h == -1)
+        {
+          new_h = h;
+          new_s = max(0.0, s - adj / 2.0);
+          new_v = v;
+        }
+        else if (h == -1)
+        {
+          new_h = light_h;
+          new_s = max(0.0, light_s - adj / 2.0);
+          new_v = v;
+        }
+        else
+        {
+          new_h = (light_h + h) / 2;
+          new_s = max(0.0, s - adj / 2.0);
+          new_v = v;
+        }
+
+        api->hsvtorgb(new_h, new_s, new_v, &r, &g, &b);
+
+        api->putpixel(canvas, x + xx, y + yy,
+                      SDL_MapRGB(canvas->format, r, g, b));
+      }
     }
+  }
 }
 
 // Affect the canvas on drag:
 void light_drag(magic_api * api, int which, SDL_Surface * canvas,
-                SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+                SDL_Surface * last, int ox, int oy, int x, int y,
+                SDL_Rect * update_rect)
 {
-  api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_light);
+  api->line((void *) api, which, canvas, last, ox, oy, x, y, 1, do_light);
 
   if (ox > x)
-    {
-      int tmp = ox;
+  {
+    int tmp = ox;
 
-      ox = x;
-      x = tmp;
-    }
+    ox = x;
+    x = tmp;
+  }
   if (oy > y)
-    {
-      int tmp = oy;
+  {
+    int tmp = oy;
 
-      oy = y;
-      y = tmp;
-    }
+    oy = y;
+    y = tmp;
+  }
 
   update_rect->x = ox - 8;
   update_rect->y = oy - 8;
   update_rect->w = (x + 8) - update_rect->x;
-  update_rect->h = (y + 8) - update_rect->h;
+  update_rect->h = (y + 8) - update_rect->y;
 
   api->playsound(light1_snd, (x * 255) / canvas->w, 255);
 }
 
 // Affect the canvas on click:
 void light_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                 SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+                 SDL_Surface * canvas, SDL_Surface * last, int x, int y,
+                 SDL_Rect * update_rect)
 {
   light_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
@@ -216,7 +233,8 @@ void light_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 // Affect the canvas on release:
 void light_release(magic_api * api, int which ATTRIBUTE_UNUSED,
                    SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED,
-                   int x, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                   int x, int y ATTRIBUTE_UNUSED,
+                   SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   api->playsound(light2_snd, (x * 255) / canvas->w, 255);
 }
@@ -231,23 +249,27 @@ void light_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void light_set_color(magic_api * api, Uint8 r, Uint8 g, Uint8 b)
+void light_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                     SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
 {
   api->rgbtohsv(r, g, b, &light_h, &light_s, &light_v);
 }
 
 // Use colors:
-int light_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int light_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-void light_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+void light_switchin(magic_api * api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
                     SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void light_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+void light_switchout(magic_api * api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
                      SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }

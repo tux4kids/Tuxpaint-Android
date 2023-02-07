@@ -129,9 +129,8 @@
 /* h/t https://tutel.me/c/programming/questions/45349079/how+to+use+__attribute__fallthrough+correctly+in+gcc */
 #ifndef FALLTHROUGH
 #if defined(__GNUC__) && __GNUC__ >= 7
- #define FALL_THROUGH __attribute__ ((fallthrough))
+#define FALL_THROUGH __attribute__ ((fallthrough))
 #else
- #define FALL_THROUGH ((void)0)
+#define FALL_THROUGH ((void)0)
 #endif /* __GNUC__ >= 7 */
 #endif
-

@@ -1,9 +1,7 @@
 README.txt for "tuxpaint-ttf-hindi"
 Hindi TrueType Font (TTF) for Tux Paint
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.newbreedsoftware.com/tuxpaint/
+https://tuxpaint.org/
 
 June 11, 2004 - June 19, 2004
 

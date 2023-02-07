@@ -43,11 +43,11 @@ unsigned char linear_to_sRGB(float linear)
 
   slot = linear * 4096.0 + 0.5;
   if (slot > 4095)
-    {
-      if (linear > 0.5)
-        slot = 4095;
-      else
-        slot = 0;
-    }
+  {
+    if (linear > 0.5)
+      slot = 4095;
+    else
+      slot = 0;
+  }
   return linear_to_sRGB_table[slot];
 }

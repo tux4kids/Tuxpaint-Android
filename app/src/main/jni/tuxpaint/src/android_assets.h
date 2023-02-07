@@ -18,7 +18,7 @@
 
 #define TP_ANDROID_ASSETS
 #include <jni.h>
-#include "debug.h"   
+#include "debug.h"
 #include "dirwalk.h"
 #include "progressbar.h"
 #include <android/asset_manager.h>
@@ -28,27 +28,43 @@
 #define ASSETS_BRUSHES_DIR "data/brushes"
 #define ASSETS_STAMPS_DIR "stamps/cartoon/tux"
 
-AAssetDir * open_asset_dir(char * dirname);
-char* get_nativelibdir();
+AAssetDir *open_asset_dir(char *dirname);
+char *get_nativelibdir();
 
-void load_brushes_from_assets(SDL_Surface * screen, SDL_Texture *texture, SDL_Renderer *renderer, const char * dirname, void (*fn) (SDL_Surface * screen,
-				  SDL_Texture * texture,
-				  SDL_Renderer * renderer,
-				  const char *restrict const dir,
-				  unsigned dirlen, tp_ftw_str * files,
-				  unsigned count, const char *restrict const locale) );
+void load_brushes_from_assets(SDL_Surface * screen, SDL_Texture * texture,
+                              SDL_Renderer * renderer, const char *dirname,
+                              void (*fn)(SDL_Surface * screen,
+                                         SDL_Texture * texture,
+                                         SDL_Renderer * renderer,
+                                         const char *restrict const dir,
+                                         unsigned dirlen, tp_ftw_str * files,
+                                         unsigned count,
+                                         const char *restrict const locale));
 
-void load_from_assets(SDL_Surface * screen, SDL_Texture *texture, SDL_Renderer *renderer, const char * dirname, void (*fn) (SDL_Surface * screen,
-				  SDL_Texture * texture,
-				  SDL_Renderer * renderer,
-				  const char *restrict const dir,
-				  unsigned dirlen, tp_ftw_str * files,
-				  unsigned count, const char *restrict const locale) );
+void load_from_assets(SDL_Surface * screen, SDL_Texture * texture,
+                      SDL_Renderer * renderer, const char *dirname,
+                      void (*fn)(SDL_Surface * screen, SDL_Texture * texture,
+                                 SDL_Renderer * renderer,
+                                 const char *restrict const dir,
+                                 unsigned dirlen, tp_ftw_str * files,
+                                 unsigned count,
+                                 const char *restrict const locale));
 
-void load_assets_dir(char * dirname, tp_ftw_str ** ffilenames, unsigned  * num_file_names);
+void load_assets_dir(char *dirname, tp_ftw_str ** ffilenames,
+                     unsigned *num_file_names);
 
-JNIEXPORT jboolean  Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv * env, jclass clazz, jobject  mgr);
+JNIEXPORT jboolean Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv *
+                                                                   env,
+                                                                   jclass
+                                                                   clazz,
+                                                                   jobject
+                                                                   mgr);
 
-JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv * env, jclass clazz, jstring path);
+JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv *
+                                                                  env,
+                                                                  jclass
+                                                                  clazz,
+                                                                  jstring
+                                                                  path);
 
 #endif

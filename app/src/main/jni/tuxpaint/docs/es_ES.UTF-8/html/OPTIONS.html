@@ -62,7 +62,7 @@
   section.indent dl p {
     margin-left: 0;
   }
-  p + ul {
+  p + ul, p + ol {
     margin-left: 2em;
   }
 
@@ -95,12 +95,12 @@
             Options Documentation          </h2>
 
           <p>
-            Copyright &copy; 2002-2022 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2002-2023 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            junio  4, 2022          </p>
+            enero  2, 2023          </p>
         </center>
       </header>
 
@@ -298,6 +298,9 @@
         <li>1600x1200
         </li>
       </ul>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        If only one display is available, and Tux Paint is being run in windowed (not fullscreen) mode, and the chosen window size exceeds the capabilities of the display, Tux Paint will fall back to the display's dimensions.      </p>
     </dd>
 
     <dt>
@@ -379,6 +382,9 @@
 
       <p>
         The <i>SIZE</i> value should be presented in pixels, and can be anything between 24 and 192, inclusive. Most buttons are square, and this will affect their width and height.      </p>
+
+      <p>
+        A value of "<code>auto</code>" may be provided, and Tux Paint will choose a suitable button size based on the size of Tux Paint's window (or fullscreen display).  (For the default screen size of 800x600, it will be the default button size: "48".)      </p>
 
       <p class="note">
         <span title="Information">&#128161;</span>        <strong>Note:</strong> If the chosen button size would cause the buttons to be too large for all required UI elements to appear under Tux Paint's chosen window size, the largest possible button size will be used. (A note will appear in <code>stderr</code>.)      </p>
@@ -622,6 +628,19 @@
     </dd>
 
     <dt>
+      <code><b>nostamprotation=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This disables the rotation step of the <b>Stamps</b> tool, immediately placing the stamp in its regular orientation (with any flipping or mirroring applied) on the first click.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The stamp rotation feature was added to Tux Paint in version 0.9.29.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nostamprotation=no</code>" or "<code>stamprotation=yes</code>". In both cases, may be overridden by the command-line option "<code>--stamprotation</code>".      </p>
+    </dd>
+
+    <dt>
       <code><b>nomagiccontrols=yes</b></code>
     </dt>
 
@@ -694,639 +713,639 @@
                summary=
                "Possible values for 'lang' language setting">
             <tr>
-    <td><code>english</code></td>
-    <td><code>american-english</code></td>
+    <td><!-- lang_arg --><code>english</code></td>
+    <td><!-- lang_arg --><code>american-english</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>acholi</code></td>
-    <td><code>acoli</code></td>
+    <td><!-- lang_arg --><code>acholi</code></td>
+    <td><!-- lang_arg --><code>acoli</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>afrikaans</code></td>
+    <td><!-- lang_arg --><code>afrikaans</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>akan</code></td>
-    <td><code>twi-fante</code></td>
+    <td><!-- lang_arg --><code>akan</code></td>
+    <td><!-- lang_arg --><code>twi-fante</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>albanian</code></td>
+    <td><!-- lang_arg --><code>albanian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>amharic</code></td>
+    <td><!-- lang_arg --><code>amharic</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>arabic</code></td>
+    <td><!-- lang_arg --><code>arabic</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>aragones</code></td>
+    <td><!-- lang_arg --><code>aragones</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>armenian</code></td>
-    <td><code>hayeren</code></td>
+    <td><!-- lang_arg --><code>armenian</code></td>
+    <td><!-- lang_arg --><code>hayeren</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>assamese</code></td>
+    <td><!-- lang_arg --><code>assamese</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>asturian</code></td>
+    <td><!-- lang_arg --><code>asturian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>australian-english</code></td>
+    <td><!-- lang_arg --><code>australian-english</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>azerbaijani</code></td>
+    <td><!-- lang_arg --><code>azerbaijani</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bambara</code></td>
+    <td><!-- lang_arg --><code>bambara</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>basque</code></td>
-    <td><code>euskara</code></td>
+    <td><!-- lang_arg --><code>basque</code></td>
+    <td><!-- lang_arg --><code>euskara</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>belarusian</code></td>
-    <td><code>bielaruskaja</code></td>
+    <td><!-- lang_arg --><code>belarusian</code></td>
+    <td><!-- lang_arg --><code>bielaruskaja</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bengali</code></td>
+    <td><!-- lang_arg --><code>bengali</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bodo</code></td>
+    <td><!-- lang_arg --><code>bodo</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bokmal</code></td>
+    <td><!-- lang_arg --><code>bokmal</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bosnian</code></td>
+    <td><!-- lang_arg --><code>bosnian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>brazilian-portuguese</code></td>
-    <td><code>portugues-brazilian</code></td>
-    <td><code>brazilian</code></td>
+    <td><!-- lang_arg --><code>brazilian-portuguese</code></td>
+    <td><!-- lang_arg --><code>portugues-brazilian</code></td>
+    <td><!-- lang_arg --><code>brazilian</code></td>
   </tr>
     <tr>
-    <td><code>breton</code></td>
-    <td><code>brezhoneg</code></td>
+    <td><!-- lang_arg --><code>breton</code></td>
+    <td><!-- lang_arg --><code>brezhoneg</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>british-english</code></td>
-    <td><code>british</code></td>
+    <td><!-- lang_arg --><code>british-english</code></td>
+    <td><!-- lang_arg --><code>british</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bulgarian</code></td>
+    <td><!-- lang_arg --><code>bulgarian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>canadian-english</code></td>
+    <td><!-- lang_arg --><code>canadian-english</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>catalan</code></td>
-    <td><code>catala</code></td>
+    <td><!-- lang_arg --><code>catalan</code></td>
+    <td><!-- lang_arg --><code>catala</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>chinese</code></td>
-    <td><code>simplified-chinese</code></td>
+    <td><!-- lang_arg --><code>chinese</code></td>
+    <td><!-- lang_arg --><code>simplified-chinese</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>croatian</code></td>
-    <td><code>hrvatski</code></td>
+    <td><!-- lang_arg --><code>croatian</code></td>
+    <td><!-- lang_arg --><code>hrvatski</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>czech</code></td>
-    <td><code>cesky</code></td>
+    <td><!-- lang_arg --><code>czech</code></td>
+    <td><!-- lang_arg --><code>cesky</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>danish</code></td>
-    <td><code>dansk</code></td>
+    <td><!-- lang_arg --><code>danish</code></td>
+    <td><!-- lang_arg --><code>dansk</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code></code></td>
-    <td><code>dogri</code></td>
+    <td><!-- lang_arg --><code></code></td>
+    <td><!-- lang_arg --><code>dogri</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>dutch</code></td>
-    <td><code>nederlands</code></td>
+    <td><!-- lang_arg --><code>dutch</code></td>
+    <td><!-- lang_arg --><code>nederlands</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>esperanto</code></td>
+    <td><!-- lang_arg --><code>esperanto</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>estonian</code></td>
+    <td><!-- lang_arg --><code>estonian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>faroese</code></td>
+    <td><!-- lang_arg --><code>faroese</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>finnish</code></td>
-    <td><code>suomi</code></td>
+    <td><!-- lang_arg --><code>finnish</code></td>
+    <td><!-- lang_arg --><code>suomi</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>french</code></td>
-    <td><code>francais</code></td>
+    <td><!-- lang_arg --><code>french</code></td>
+    <td><!-- lang_arg --><code>francais</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>fula</code></td>
-    <td><code>fulah</code></td>
-    <td><code>pulaar-fulfulde</code></td>
+    <td><!-- lang_arg --><code>fula</code></td>
+    <td><!-- lang_arg --><code>fulah</code></td>
+    <td><!-- lang_arg --><code>pulaar-fulfulde</code></td>
   </tr>
     <tr>
-    <td><code>gaelic</code></td>
-    <td><code>gaidhlig</code></td>
-    <td><code>irish-gaelic</code></td>
+    <td><!-- lang_arg --><code>gaelic</code></td>
+    <td><!-- lang_arg --><code>gaidhlig</code></td>
+    <td><!-- lang_arg --><code>irish-gaelic</code></td>
   </tr>
     <tr>
-    <td><code>galician</code></td>
-    <td><code>galego</code></td>
+    <td><!-- lang_arg --><code>galician</code></td>
+    <td><!-- lang_arg --><code>galego</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>georgian</code></td>
+    <td><!-- lang_arg --><code>georgian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>german</code></td>
-    <td><code>deutsch</code></td>
+    <td><!-- lang_arg --><code>german</code></td>
+    <td><!-- lang_arg --><code>deutsch</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>greek</code></td>
+    <td><!-- lang_arg --><code>greek</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>gronings</code></td>
-    <td><code>zudelk-veenkelonioals</code></td>
+    <td><!-- lang_arg --><code>gronings</code></td>
+    <td><!-- lang_arg --><code>zudelk-veenkelonioals</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>gujarati</code></td>
+    <td><!-- lang_arg --><code>gujarati</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>hebrew</code></td>
+    <td><!-- lang_arg --><code>hebrew</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>hindi</code></td>
+    <td><!-- lang_arg --><code>hindi</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>hungarian</code></td>
-    <td><code>magyar</code></td>
+    <td><!-- lang_arg --><code>hungarian</code></td>
+    <td><!-- lang_arg --><code>magyar</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>icelandic</code></td>
-    <td><code>islenska</code></td>
+    <td><!-- lang_arg --><code>icelandic</code></td>
+    <td><!-- lang_arg --><code>islenska</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>indonesian</code></td>
-    <td><code>bahasa-indonesia</code></td>
+    <td><!-- lang_arg --><code>indonesian</code></td>
+    <td><!-- lang_arg --><code>bahasa-indonesia</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>inuktitut</code></td>
+    <td><!-- lang_arg --><code>inuktitut</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>italian</code></td>
-    <td><code>italiano</code></td>
+    <td><!-- lang_arg --><code>italian</code></td>
+    <td><!-- lang_arg --><code>italiano</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>japanese</code></td>
+    <td><!-- lang_arg --><code>japanese</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>kabyle</code></td>
+    <td><!-- lang_arg --><code>kabyle</code></td>
     <td></td>
-    <td><code>kabylian</code></td>
+    <td><!-- lang_arg --><code>kabylian</code></td>
   </tr>
     <tr>
-    <td><code>kannada</code></td>
+    <td><!-- lang_arg --><code>kannada</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>kashmiri-devanagari</code></td>
+    <td><!-- lang_arg --><code>kashmiri-devanagari</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>kashmiri-perso-arabic</code></td>
+    <td><!-- lang_arg --><code>kashmiri-perso-arabic</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>khmer</code></td>
+    <td><!-- lang_arg --><code>khmer</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>kiga</code></td>
-    <td><code>chiga</code></td>
+    <td><!-- lang_arg --><code>kiga</code></td>
+    <td><!-- lang_arg --><code>chiga</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>kinyarwanda</code></td>
+    <td><!-- lang_arg --><code>kinyarwanda</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>klingon</code></td>
-    <td><code>tlhIngan</code></td>
+    <td><!-- lang_arg --><code>klingon</code></td>
+    <td><!-- lang_arg --><code>tlhIngan</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>konkani-devanagari</code></td>
+    <td><!-- lang_arg --><code>konkani-devanagari</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>konkani-roman</code></td>
+    <td><!-- lang_arg --><code>konkani-roman</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>korean</code></td>
+    <td><!-- lang_arg --><code>korean</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>kurdish</code></td>
+    <td><!-- lang_arg --><code>kurdish</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>latvian</code></td>
+    <td><!-- lang_arg --><code>latvian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>lithuanian</code></td>
-    <td><code>lietuviu</code></td>
+    <td><!-- lang_arg --><code>lithuanian</code></td>
+    <td><!-- lang_arg --><code>lietuviu</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>luganda</code></td>
+    <td><!-- lang_arg --><code>luganda</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>luxembourgish</code></td>
-    <td><code>letzebuergesch</code></td>
+    <td><!-- lang_arg --><code>luxembourgish</code></td>
+    <td><!-- lang_arg --><code>letzebuergesch</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>macedonian</code></td>
+    <td><!-- lang_arg --><code>macedonian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>maithili</code></td>
+    <td><!-- lang_arg --><code>maithili</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>malay</code></td>
+    <td><!-- lang_arg --><code>malay</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>malayalam</code></td>
+    <td><!-- lang_arg --><code>malayalam</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>manipuri-bengali</code></td>
+    <td><!-- lang_arg --><code>manipuri-bengali</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>manipuri-meitei-mayek</code></td>
+    <td><!-- lang_arg --><code>manipuri-meitei-mayek</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>marathi</code></td>
+    <td><!-- lang_arg --><code>marathi</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>mexican-spanish</code></td>
-    <td><code>espanol-mejicano</code></td>
-    <td><code>mexican</code></td>
+    <td><!-- lang_arg --><code>mexican-spanish</code></td>
+    <td><!-- lang_arg --><code>espanol-mejicano</code></td>
+    <td><!-- lang_arg --><code>mexican</code></td>
   </tr>
     <tr>
-    <td><code>mongolian</code></td>
+    <td><!-- lang_arg --><code>mongolian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ndebele</code></td>
+    <td><!-- lang_arg --><code>ndebele</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>nepali</code></td>
+    <td><!-- lang_arg --><code>nepali</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>northern-sotho</code></td>
-    <td><code>sesotho-sa-leboa</code></td>
+    <td><!-- lang_arg --><code>northern-sotho</code></td>
+    <td><!-- lang_arg --><code>sesotho-sa-leboa</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>norwegian</code></td>
-    <td><code>nynorsk</code></td>
-    <td><code>norsk</code></td>
+    <td><!-- lang_arg --><code>norwegian</code></td>
+    <td><!-- lang_arg --><code>nynorsk</code></td>
+    <td><!-- lang_arg --><code>norsk</code></td>
   </tr>
     <tr>
-    <td><code>occitan</code></td>
+    <td><!-- lang_arg --><code>occitan</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>odia</code></td>
-    <td><code>oriya</code></td>
+    <td><!-- lang_arg --><code>odia</code></td>
+    <td><!-- lang_arg --><code>oriya</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ojibwe</code></td>
-    <td><code>ojibway</code></td>
+    <td><!-- lang_arg --><code>ojibwe</code></td>
+    <td><!-- lang_arg --><code>ojibway</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>persian</code></td>
+    <td><!-- lang_arg --><code>persian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>polish</code></td>
-    <td><code>polski</code></td>
+    <td><!-- lang_arg --><code>polish</code></td>
+    <td><!-- lang_arg --><code>polski</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>portuguese</code></td>
-    <td><code>portugues</code></td>
+    <td><!-- lang_arg --><code>portuguese</code></td>
+    <td><!-- lang_arg --><code>portugues</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>punjabi</code></td>
-    <td><code>panjabi</code></td>
+    <td><!-- lang_arg --><code>punjabi</code></td>
+    <td><!-- lang_arg --><code>panjabi</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>romanian</code></td>
+    <td><!-- lang_arg --><code>romanian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>russian</code></td>
-    <td><code>russkiy</code></td>
+    <td><!-- lang_arg --><code>russian</code></td>
+    <td><!-- lang_arg --><code>russkiy</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sanskrit</code></td>
+    <td><!-- lang_arg --><code>sanskrit</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>santali-devanagari</code></td>
+    <td><!-- lang_arg --><code>santali-devanagari</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>santali-ol-chiki</code></td>
+    <td><!-- lang_arg --><code>santali-ol-chiki</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>scottish</code></td>
-    <td><code>ghaidhlig</code></td>
-    <td><code>scottish-gaelic</code></td>
+    <td><!-- lang_arg --><code>scottish</code></td>
+    <td><!-- lang_arg --><code>ghaidhlig</code></td>
+    <td><!-- lang_arg --><code>scottish-gaelic</code></td>
   </tr>
     <tr>
-    <td><code>serbian</code></td>
+    <td><!-- lang_arg --><code>serbian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>serbian-latin</code></td>
+    <td><!-- lang_arg --><code>serbian-latin</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>shuswap</code></td>
-    <td><code>secwepemctin</code></td>
+    <td><!-- lang_arg --><code>shuswap</code></td>
+    <td><!-- lang_arg --><code>secwepemctin</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sindhi-devanagari</code></td>
+    <td><!-- lang_arg --><code>sindhi-devanagari</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sindhi-perso-arabic</code></td>
+    <td><!-- lang_arg --><code>sindhi-perso-arabic</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>slovak</code></td>
+    <td><!-- lang_arg --><code>slovak</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>slovenian</code></td>
-    <td><code>slovensko</code></td>
+    <td><!-- lang_arg --><code>slovenian</code></td>
+    <td><!-- lang_arg --><code>slovensko</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>songhay</code></td>
+    <td><!-- lang_arg --><code>songhay</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>southafrican-english</code></td>
+    <td><!-- lang_arg --><code>southafrican-english</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>spanish</code></td>
-    <td><code>espanol</code></td>
+    <td><!-- lang_arg --><code>spanish</code></td>
+    <td><!-- lang_arg --><code>espanol</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sundanese</code></td>
+    <td><!-- lang_arg --><code>sundanese</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>swahili</code></td>
+    <td><!-- lang_arg --><code>swahili</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>swedish</code></td>
-    <td><code>svenska</code></td>
+    <td><!-- lang_arg --><code>swedish</code></td>
+    <td><!-- lang_arg --><code>svenska</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>tagalog</code></td>
+    <td><!-- lang_arg --><code>tagalog</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>tamil</code></td>
+    <td><!-- lang_arg --><code>tamil</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>telugu</code></td>
+    <td><!-- lang_arg --><code>telugu</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>thai</code></td>
+    <td><!-- lang_arg --><code>thai</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>tibetan</code></td>
+    <td><!-- lang_arg --><code>tibetan</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>traditional-chinese</code></td>
+    <td><!-- lang_arg --><code>traditional-chinese</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>turkish</code></td>
+    <td><!-- lang_arg --><code>turkish</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>twi</code></td>
+    <td><!-- lang_arg --><code>twi</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ukrainian</code></td>
+    <td><!-- lang_arg --><code>ukrainian</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>urdu</code></td>
+    <td><!-- lang_arg --><code>urdu</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>venda</code></td>
+    <td><!-- lang_arg --><code>venda</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>venetian</code></td>
-    <td><code>veneto</code></td>
+    <td><!-- lang_arg --><code>venetian</code></td>
+    <td><!-- lang_arg --><code>veneto</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>vietnamese</code></td>
+    <td><!-- lang_arg --><code>vietnamese</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>walloon</code></td>
-    <td><code>walon</code></td>
+    <td><!-- lang_arg --><code>walloon</code></td>
+    <td><!-- lang_arg --><code>walon</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>welsh</code></td>
-    <td><code>cymraeg</code></td>
+    <td><!-- lang_arg --><code>welsh</code></td>
+    <td><!-- lang_arg --><code>cymraeg</code></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>wolof</code></td>
+    <td><!-- lang_arg --><code>wolof</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>xhosa</code></td>
+    <td><!-- lang_arg --><code>xhosa</code></td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>miahuatlan-zapotec</code></td>
+    <td><!-- lang_arg --><code>miahuatlan-zapotec</code></td>
     <td></td>
-    <td><code>zapotec</code></td>
+    <td><!-- lang_arg --><code>zapotec</code></td>
   </tr>
     <tr>
-    <td><code>zulu</code></td>
+    <td><!-- lang_arg --><code>zulu</code></td>
     <td></td>
-    <td><code>zulu</code></td>
+    <td><!-- lang_arg --><code>zulu</code></td>
   </tr>
           </table>
       </blockquote>
@@ -2297,6 +2316,7 @@
           --nooutlines<br>
           --nostamps<br>
           --nostampcontrols<br>
+          --nostamprotation<br>
           --nomagiccontrols<br>
           --noshapecontrols<br>
           --nolabel<br>
@@ -2375,6 +2395,7 @@
           --outlines<br>
           --stamps<br>
           --stampcontrols<br>
+          --stamprotation<br>
           --magiccontrols<br>
           --shapecontrols<br>
           --label<br>
@@ -2511,775 +2532,775 @@
           </tr>
 
             <tr>
-    <td><code>C</code></td>
+    <td><!-- locale_code --><code>C</code></td>
     <td></td>
     <td>English</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ach_UG</code></td>
+    <td><!-- locale_code --><code>ach_UG</code></td>
     <td>Acoli</td>
     <td>Acholi</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>af_ZA</code></td>
+    <td><!-- locale_code --><code>af_ZA</code></td>
     <td></td>
     <td>Afrikaans</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ak_GH</code></td>
+    <td><!-- locale_code --><code>ak_GH</code></td>
     <td></td>
     <td>Akan</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>am_ET</code></td>
+    <td><!-- locale_code --><code>am_ET</code></td>
     <td></td>
     <td>Amharic</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>an_ES</code></td>
+    <td><!-- locale_code --><code>an_ES</code></td>
     <td></td>
     <td>Aragones</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ar_SA</code></td>
+    <td><!-- locale_code --><code>ar_SA</code></td>
     <td></td>
     <td>Arabic</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>as_IN</code></td>
+    <td><!-- locale_code --><code>as_IN</code></td>
     <td></td>
     <td>Assamese</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ast_ES</code></td>
+    <td><!-- locale_code --><code>ast_ES</code></td>
     <td></td>
     <td>Asturian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>az_AZ</code></td>
+    <td><!-- locale_code --><code>az_AZ</code></td>
     <td></td>
     <td>Azerbaijani</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bm_ML</code></td>
+    <td><!-- locale_code --><code>bm_ML</code></td>
     <td></td>
     <td>Bambara</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bn_IN</code></td>
+    <td><!-- locale_code --><code>bn_IN</code></td>
     <td></td>
     <td>Bengali</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>be_BY</code></td>
+    <td><!-- locale_code --><code>be_BY</code></td>
     <td>Bielaruskaja</td>
     <td>Belarusian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bg_BG</code></td>
+    <td><!-- locale_code --><code>bg_BG</code></td>
     <td></td>
     <td>Bulgarian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bo_CN (*)</code></td>
+    <td><!-- locale_code --><code>bo_CN (*)</code></td>
     <td></td>
     <td>Tibetan</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>br_FR</code></td>
+    <td><!-- locale_code --><code>br_FR</code></td>
     <td>Brezhoneg</td>
     <td>Breton</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>brx_IN</code></td>
+    <td><!-- locale_code --><code>brx_IN</code></td>
     <td></td>
     <td>Bodo</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>bs_BA</code></td>
+    <td><!-- locale_code --><code>bs_BA</code></td>
     <td></td>
     <td>Bosnian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ca_ES</code></td>
+    <td><!-- locale_code --><code>ca_ES</code></td>
     <td>Català</td>
     <td>Catalan</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ca_ES@valencia</code></td>
+    <td><!-- locale_code --><code>ca_ES@valencia</code></td>
     <td>Valencia</td>
     <td>Valencian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>cgg_UG</code></td>
+    <td><!-- locale_code --><code>cgg_UG</code></td>
     <td>Chiga</td>
     <td>Kiga</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>cs_CZ</code></td>
+    <td><!-- locale_code --><code>cs_CZ</code></td>
     <td>Cesky</td>
     <td>Czech</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>cy_GB</code></td>
+    <td><!-- locale_code --><code>cy_GB</code></td>
     <td>Cymraeg</td>
     <td>Welsh</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>da_DK</code></td>
+    <td><!-- locale_code --><code>da_DK</code></td>
     <td>Dansk</td>
     <td>Danish</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>de_DE</code></td>
+    <td><!-- locale_code --><code>de_DE</code></td>
     <td>Deutsch</td>
     <td>German</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>doi_IN</code></td>
+    <td><!-- locale_code --><code>doi_IN</code></td>
     <td></td>
     <td>Dogri</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>et_EE</code></td>
+    <td><!-- locale_code --><code>et_EE</code></td>
     <td></td>
     <td>Estonian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>el_GR (*)</code></td>
+    <td><!-- locale_code --><code>el_GR (*)</code></td>
     <td></td>
     <td>Greek</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>en_AU</code></td>
+    <td><!-- locale_code --><code>en_AU</code></td>
     <td></td>
     <td>Australian English</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>en_CA</code></td>
+    <td><!-- locale_code --><code>en_CA</code></td>
     <td></td>
     <td>Canadian English</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>en_GB</code></td>
+    <td><!-- locale_code --><code>en_GB</code></td>
     <td></td>
     <td>British English</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>en_ZA</code></td>
+    <td><!-- locale_code --><code>en_ZA</code></td>
     <td></td>
     <td>South African English</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>eo</code></td>
+    <td><!-- locale_code --><code>eo</code></td>
     <td></td>
     <td>Esperanto</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>es_ES</code></td>
+    <td><!-- locale_code --><code>es_ES</code></td>
     <td>Español</td>
     <td>Spanish</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>es_MX</code></td>
+    <td><!-- locale_code --><code>es_MX</code></td>
     <td>Español-Mejicano</td>
     <td>Mexican Spanish</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>eu_ES</code></td>
+    <td><!-- locale_code --><code>eu_ES</code></td>
     <td>Euskara</td>
     <td>Basque</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>fa_IR</code></td>
+    <td><!-- locale_code --><code>fa_IR</code></td>
     <td></td>
     <td>Persian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ff_SN</code></td>
+    <td><!-- locale_code --><code>ff_SN</code></td>
     <td>Fulah</td>
     <td>Fula</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>fi_FI</code></td>
+    <td><!-- locale_code --><code>fi_FI</code></td>
     <td>Suomi</td>
     <td>Finnish</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>fo_FO</code></td>
+    <td><!-- locale_code --><code>fo_FO</code></td>
     <td></td>
     <td>Faroese</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>fr_FR</code></td>
+    <td><!-- locale_code --><code>fr_FR</code></td>
     <td>Français</td>
     <td>French</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ga_IE</code></td>
+    <td><!-- locale_code --><code>ga_IE</code></td>
     <td>Gàidhlig</td>
     <td>Irish Gaelic</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>gd_GB</code></td>
+    <td><!-- locale_code --><code>gd_GB</code></td>
     <td>Ghaidhlig</td>
     <td>Scottish Gaelic</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>gl_ES</code></td>
+    <td><!-- locale_code --><code>gl_ES</code></td>
     <td>Galego</td>
     <td>Galician</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>gos_NL</code></td>
+    <td><!-- locale_code --><code>gos_NL</code></td>
     <td>Zudelk Veenkelonioals</td>
     <td>Gronings</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>gu_IN</code></td>
+    <td><!-- locale_code --><code>gu_IN</code></td>
     <td></td>
     <td>Gujarati</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>he_IL (*)</code></td>
+    <td><!-- locale_code --><code>he_IL (*)</code></td>
     <td></td>
     <td>Hebrew</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>hi_IN (*)</code></td>
+    <td><!-- locale_code --><code>hi_IN (*)</code></td>
     <td></td>
     <td>Hindi</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>hr_HR</code></td>
+    <td><!-- locale_code --><code>hr_HR</code></td>
     <td>Hrvatski</td>
     <td>Croatian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>hu_HU</code></td>
+    <td><!-- locale_code --><code>hu_HU</code></td>
     <td>Magyar</td>
     <td>Hungarian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>hy_AM</code></td>
+    <td><!-- locale_code --><code>hy_AM</code></td>
     <td>Hayeren</td>
     <td>Armenian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>id_ID</code></td>
+    <td><!-- locale_code --><code>id_ID</code></td>
     <td>Bahasa Indonesia</td>
     <td>Indonesian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>is_IS</code></td>
+    <td><!-- locale_code --><code>is_IS</code></td>
     <td>Íslenska</td>
     <td>Icelandic</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>it_IT</code></td>
+    <td><!-- locale_code --><code>it_IT</code></td>
     <td>Italiano</td>
     <td>Italian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>iu_CA</code></td>
+    <td><!-- locale_code --><code>iu_CA</code></td>
     <td></td>
     <td>Inuktitut</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ja_JP (*)</code></td>
+    <td><!-- locale_code --><code>ja_JP (*)</code></td>
     <td></td>
     <td>Japanese</td>
     <td>right [Alt] or left [Alt]</td>
   </tr>
     <tr>
-    <td><code>ka_GE</code></td>
+    <td><!-- locale_code --><code>ka_GE</code></td>
     <td></td>
     <td>Georgian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>kab</code></td>
+    <td><!-- locale_code --><code>kab</code></td>
     <td></td>
     <td>Kabyle</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>km_KH</code></td>
+    <td><!-- locale_code --><code>km_KH</code></td>
     <td></td>
     <td>Khmer</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>kn_IN</code></td>
+    <td><!-- locale_code --><code>kn_IN</code></td>
     <td></td>
     <td>Kannada</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ko_KR (*)</code></td>
+    <td><!-- locale_code --><code>ko_KR (*)</code></td>
     <td></td>
     <td>Korean</td>
     <td>right [Alt] or left [Alt]</td>
   </tr>
     <tr>
-    <td><code>kok_IN</code></td>
+    <td><!-- locale_code --><code>kok_IN</code></td>
     <td></td>
     <td>Konkani (Devanagari)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>kok@roman</code></td>
+    <td><!-- locale_code --><code>kok@roman</code></td>
     <td></td>
     <td>Konkani (Roman)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ks_IN@devanagari</code></td>
+    <td><!-- locale_code --><code>ks_IN@devanagari</code></td>
     <td></td>
     <td>Kashmiri (Devanagari)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ks_IN</code></td>
+    <td><!-- locale_code --><code>ks_IN</code></td>
     <td></td>
     <td>Kashmiri (Perso-Arabic)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ku_TR</code></td>
+    <td><!-- locale_code --><code>ku_TR</code></td>
     <td></td>
     <td>Kurdish</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>lb_LU</code></td>
+    <td><!-- locale_code --><code>lb_LU</code></td>
     <td>Letzebuergesch</td>
     <td>Luxembourgish</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>lg_UG</code></td>
+    <td><!-- locale_code --><code>lg_UG</code></td>
     <td></td>
     <td>Luganda</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>lt_LT</code></td>
+    <td><!-- locale_code --><code>lt_LT</code></td>
     <td>Lietuviu</td>
     <td>Lithuanian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>lv_LV</code></td>
+    <td><!-- locale_code --><code>lv_LV</code></td>
     <td></td>
     <td>Latvian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>mk_MK</code></td>
+    <td><!-- locale_code --><code>mk_MK</code></td>
     <td></td>
     <td>Macedonian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>mai_IN</code></td>
+    <td><!-- locale_code --><code>mai_IN</code></td>
     <td></td>
     <td>Maithili</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ml_IN</code></td>
+    <td><!-- locale_code --><code>ml_IN</code></td>
     <td></td>
     <td>Malayalam</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>mn_MN</code></td>
+    <td><!-- locale_code --><code>mn_MN</code></td>
     <td></td>
     <td>Mongolian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>mni_IN</code></td>
+    <td><!-- locale_code --><code>mni_IN</code></td>
     <td></td>
     <td>Manipuri (Bengali)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>mni@meiteimayek</code></td>
+    <td><!-- locale_code --><code>mni@meiteimayek</code></td>
     <td></td>
     <td>Manipuri (Meitei Mayek)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>mr_IN</code></td>
+    <td><!-- locale_code --><code>mr_IN</code></td>
     <td></td>
     <td>Marathi</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ms_MY</code></td>
+    <td><!-- locale_code --><code>ms_MY</code></td>
     <td></td>
     <td>Malay</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>nb_NO</code></td>
+    <td><!-- locale_code --><code>nb_NO</code></td>
     <td>Norsk (bokmål)</td>
     <td>Norwegian Bokmål</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ne_NP</code></td>
+    <td><!-- locale_code --><code>ne_NP</code></td>
     <td>Nepali</td>
     <td></td>
     <td></td>
   </tr>
     <tr>
-    <td><code>nl_NL</code></td>
+    <td><!-- locale_code --><code>nl_NL</code></td>
     <td></td>
     <td>Dutch</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>nn_NO</code></td>
+    <td><!-- locale_code --><code>nn_NO</code></td>
     <td>Norsk (nynorsk)</td>
     <td>Norwegian Nynorsk</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>nr_ZA</code></td>
+    <td><!-- locale_code --><code>nr_ZA</code></td>
     <td></td>
     <td>Ndebele</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>nso_ZA</code></td>
+    <td><!-- locale_code --><code>nso_ZA</code></td>
     <td>Sesotho sa Leboa</td>
     <td>Northern Sotho</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>oc_FR</code></td>
+    <td><!-- locale_code --><code>oc_FR</code></td>
     <td></td>
     <td>Occitan</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>oj_CA</code></td>
+    <td><!-- locale_code --><code>oj_CA</code></td>
     <td>Ojibwe</td>
     <td>Ojibway</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>pa_IN</code></td>
+    <td><!-- locale_code --><code>pa_IN</code></td>
     <td></td>
     <td>Punjabi</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>or_IN</code></td>
+    <td><!-- locale_code --><code>or_IN</code></td>
     <td>Odia</td>
     <td>Oriya</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>pl_PL</code></td>
+    <td><!-- locale_code --><code>pl_PL</code></td>
     <td>Polski</td>
     <td>Polish</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>pt_BR</code></td>
+    <td><!-- locale_code --><code>pt_BR</code></td>
     <td>Portugês Brazileiro</td>
     <td>Brazilian Portuguese</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>pt_PT</code></td>
+    <td><!-- locale_code --><code>pt_PT</code></td>
     <td>Portugês</td>
     <td>Portuguese</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ro_RO</code></td>
+    <td><!-- locale_code --><code>ro_RO</code></td>
     <td></td>
     <td>Romanian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ru_RU</code></td>
+    <td><!-- locale_code --><code>ru_RU</code></td>
     <td>Russkiy</td>
     <td>Russian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>rw_RW</code></td>
+    <td><!-- locale_code --><code>rw_RW</code></td>
     <td></td>
     <td>Kinyarwanda</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sa_IN</code></td>
+    <td><!-- locale_code --><code>sa_IN</code></td>
     <td></td>
     <td>Sanskrit</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sat_IN</code></td>
+    <td><!-- locale_code --><code>sat_IN</code></td>
     <td></td>
     <td>Santali (Devanagari)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sat@olchiki</code></td>
+    <td><!-- locale_code --><code>sat@olchiki</code></td>
     <td></td>
     <td>Santali (Ol-Chikii)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>shs_CA</code></td>
+    <td><!-- locale_code --><code>shs_CA</code></td>
     <td>Secwepemctin</td>
     <td>Shuswap</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>si_LK</code></td>
+    <td><!-- locale_code --><code>si_LK</code></td>
     <td></td>
     <td>Sinhala</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sd_IN@devanagari</code></td>
+    <td><!-- locale_code --><code>sd_IN@devanagari</code></td>
     <td></td>
     <td>Sindhi (Devanagari)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sd_IN</code></td>
+    <td><!-- locale_code --><code>sd_IN</code></td>
     <td></td>
     <td>Sindhi</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sk_SK</code></td>
+    <td><!-- locale_code --><code>sk_SK</code></td>
     <td></td>
     <td>Slovak</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sl_SI</code></td>
+    <td><!-- locale_code --><code>sl_SI</code></td>
     <td></td>
     <td>Slovenian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>son</code></td>
+    <td><!-- locale_code --><code>son</code></td>
     <td></td>
     <td>Songhay</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sq_AL</code></td>
+    <td><!-- locale_code --><code>sq_AL</code></td>
     <td></td>
     <td>Albanian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sr_YU</code></td>
+    <td><!-- locale_code --><code>sr_YU</code></td>
     <td></td>
     <td>Serbian (cyrillic)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sr_RS@latin</code></td>
+    <td><!-- locale_code --><code>sr_RS@latin</code></td>
     <td></td>
     <td>Serbian (latin)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>su_ID</code></td>
+    <td><!-- locale_code --><code>su_ID</code></td>
     <td></td>
     <td>Sundanese</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sv_SE</code></td>
+    <td><!-- locale_code --><code>sv_SE</code></td>
     <td>Svenska</td>
     <td>Swedish</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>sw_TZ</code></td>
+    <td><!-- locale_code --><code>sw_TZ</code></td>
     <td></td>
     <td>Swahili</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ta_IN (*)</code></td>
+    <td><!-- locale_code --><code>ta_IN (*)</code></td>
     <td></td>
     <td>Tamil</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>te_IN (*)</code></td>
+    <td><!-- locale_code --><code>te_IN (*)</code></td>
     <td></td>
     <td>Telugu</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>th_TH (*)</code></td>
+    <td><!-- locale_code --><code>th_TH (*)</code></td>
     <td></td>
     <td>Thai</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>tl_PH (*)</code></td>
+    <td><!-- locale_code --><code>tl_PH (*)</code></td>
     <td></td>
     <td>Tagalog</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>tlh</code></td>
+    <td><!-- locale_code --><code>tlh</code></td>
     <td>tlhIngan</td>
     <td>Klingon</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>tr_TR</code></td>
+    <td><!-- locale_code --><code>tr_TR</code></td>
     <td></td>
     <td>Turkish</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>tw_GH</code></td>
+    <td><!-- locale_code --><code>tw_GH</code></td>
     <td></td>
     <td>Twi</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>uk_UA</code></td>
+    <td><!-- locale_code --><code>uk_UA</code></td>
     <td></td>
     <td>Ukrainian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ur_IN</code></td>
+    <td><!-- locale_code --><code>ur_IN</code></td>
     <td></td>
     <td>Urdu</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>ve_ZA</code></td>
+    <td><!-- locale_code --><code>ve_ZA</code></td>
     <td></td>
     <td>Venda</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>vec</code></td>
+    <td><!-- locale_code --><code>vec</code></td>
     <td>Venèto</td>
     <td>Venetian</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>vi_VN</code></td>
+    <td><!-- locale_code --><code>vi_VN</code></td>
     <td></td>
     <td>Vietnamese</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>wa_BE</code></td>
+    <td><!-- locale_code --><code>wa_BE</code></td>
     <td></td>
     <td>Walloon</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>wo_SN</code></td>
+    <td><!-- locale_code --><code>wo_SN</code></td>
     <td></td>
     <td>Wolof</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>xh_ZA</code></td>
+    <td><!-- locale_code --><code>xh_ZA</code></td>
     <td></td>
     <td>Xhosa</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>zh_CN (*)</code></td>
+    <td><!-- locale_code --><code>zh_CN (*)</code></td>
     <td></td>
     <td>Chinese (Simplified)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>zh_TW (*)</code></td>
+    <td><!-- locale_code --><code>zh_TW (*)</code></td>
     <td></td>
     <td>Chinese (Traditional)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>zam</code></td>
+    <td><!-- locale_code --><code>zam</code></td>
     <td></td>
     <td>Zapotec (Miahuatlan)</td>
     <td></td>
   </tr>
     <tr>
-    <td><code>zu_ZA</code></td>
+    <td><!-- locale_code --><code>zu_ZA</code></td>
     <td></td>
     <td>Zulu</td>
     <td></td>

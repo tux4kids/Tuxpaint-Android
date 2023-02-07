@@ -4,9 +4,9 @@
   Fill tool
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2022 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
-  http://www.tuxpaint.org/
+  https://tuxpaint.org/
 
   Flood fill code based on Wikipedia example:
   http://www.wikipedia.org/wiki/Flood_fill/C_example
@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: October 18, 2021
+  Last updated: December 11, 2022
   $Id$
 */
 
@@ -37,17 +37,26 @@
 #include "SDL.h"
 
 int would_flood_fill(SDL_Surface * canvas, Uint32 cur_colr, Uint32 old_colr);
-void do_flood_fill(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched);
-void simulate_flood_fill(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, SDL_Surface * last, SDL_Surface * canvas, int x, int y, Uint32 cur_colr, Uint32 old_colr, int * x1, int * y1, int * x2, int * y2, Uint8 * touched);
+void do_flood_fill(SDL_Surface * screen, SDL_Texture * texture,
+                   SDL_Renderer * renderer, SDL_Surface * last,
+                   SDL_Surface * canvas, int x, int y, Uint32 cur_colr,
+                   Uint32 old_colr, int *x1, int *y1, int *x2, int *y2,
+                   Uint8 * touched);
+void simulate_flood_fill(SDL_Surface * screen, SDL_Texture * texture,
+                         SDL_Renderer * renderer, SDL_Surface * last,
+                         SDL_Surface * canvas, int x, int y, Uint32 cur_colr,
+                         Uint32 old_colr, int *x1, int *y1, int *x2, int *y2,
+                         Uint8 * touched);
 void draw_linear_gradient(SDL_Surface * canvas, SDL_Surface * last,
-  int x_left, int y_top, int x_right, int y_bottom,
-  int x1, int y1, int x2, int y2, Uint32 draw_color, Uint8 * touched);
-void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top, int x_right, int y_bottom,
-  int x, int y, Uint32 draw_color, Uint8 * touched);
-void draw_brush_fill(SDL_Surface * canvas,
-  int x_left, int y_top, int x_right, int y_bottom,
-  int x1, int y1, int x2, int y2, Uint32 draw_color, Uint8 * touched,
-  int * up_x1, int * up_y1, int * up_x2, int * up_y2);
+                          int x_left, int y_top, int x_right, int y_bottom,
+                          int x1, int y1, int x2, int y2, Uint32 draw_color,
+                          Uint8 * touched);
+void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top,
+                          int x_right, int y_bottom, int x, int y,
+                          Uint32 draw_color, Uint8 * touched);
+void draw_brush_fill(SDL_Surface * canvas, int x_left, int y_top, int x_right,
+                     int y_bottom, int x1, int y1, int x2, int y2,
+                     Uint32 draw_color, Uint8 * touched, int *up_x1,
+                     int *up_y1, int *up_x2, int *up_y2);
 
 #endif
-

@@ -1,8 +1,8 @@
 /*
   dirwalk.h
 
-  Copyright (c) 2009
-  http://www.tuxpaint.org/
+  Copyright (c) 2009-2022
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
+  Last updated: December 11, 2022
   $Id$
 */
 
@@ -45,14 +46,23 @@ typedef struct tp_ftw_str
 } tp_ftw_str;
 
 
-void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer,
-                       const char *restrict const dir, unsigned dirlen, tp_ftw_str * files, unsigned i,
+void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture,
+                       SDL_Renderer * renderer,
+                       const char *restrict const dir, unsigned dirlen,
+                       tp_ftw_str * files, unsigned i,
                        const char *restrict const locale);
 int compare_ftw_str(const void *v1, const void *v2);
-void tp_ftw(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, char *restrict const dir,
-            unsigned dirlen, int rsrc, void (*fn) (SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer,
-                                                   const char *restrict const dir, unsigned dirlen, tp_ftw_str * files,
-                                                   unsigned count, const char *restrict const locale),
+void tp_ftw(SDL_Surface * screen, SDL_Texture * texture,
+            SDL_Renderer * renderer, char *restrict const dir,
+            unsigned dirlen, int rsrc, void (*fn)(SDL_Surface * screen,
+                                                  SDL_Texture * texture,
+                                                  SDL_Renderer * renderer,
+                                                  const char *restrict const
+                                                  dir, unsigned dirlen,
+                                                  tp_ftw_str * files,
+                                                  unsigned count,
+                                                  const char *restrict const
+                                                  locale),
             const char *restrict const locale);
 
 #endif

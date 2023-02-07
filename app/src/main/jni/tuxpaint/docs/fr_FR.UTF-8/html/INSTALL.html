@@ -62,7 +62,7 @@
   section.indent dl p {
     margin-left: 0;
   }
-  p + ul {
+  p + ul, p + ol {
     margin-left: 2em;
   }
 
@@ -96,7 +96,7 @@
           </p>
 
           <p>
-            juin  4, 2022          </p>
+            septembre 23, 2022          </p>
         </center>
       </header>
 
@@ -149,29 +149,24 @@
           Tux Paint nécessite la bibliothèque de couches DirectMedia simple (libSDL), une bibliothèque de programmation multimédia Open Source disponible sous la Licence publique générale limitée GNU (LGPL).        </p>
 
         <p>
-          Avec libSDL, Tux Paint dépend d'un certain nombre d'autres bibliothèques 'd'aide' SDL : SDL_Image (pour les fichiers graphiques), SDL_gfx (pour certaines fonctions graphiques, comme la rotation), SDL_TTF et (en option) SDL_Pango (pour la prise en charge des polices True Type) et, éventuellement, SDL_Mixer (pour les effets sonores).        </p>
+          Along with libSDL, Tux Paint depends on a number of other SDL 'helper' libraries: SDL_Image (for graphics files), SDL_gfx (for some graphical functions, like rotation), SDL_TTF and (optionally) SDL2_Pango (for True Type Font support) and, optionally, SDL_Mixer (for sound effects).        </p>
 
-        <dl>
-          <dt><strong>Linux/Unix</strong></dt>
-          <dd>
-            <p>
-              Les bibliothèques SDL sont disponibles en tant que code source, ou en tant que paquets RPM ou Debian pour diverses distributions de Linux. Ils peuvent être téléchargés à partir de :            </p>
-            <ul>
-              <li>libSDL: <a href="http://www.libsdl.org/">http://www.libsdl.org/</a></li>
-              <li>SDL_Image: <a href="http://www.libsdl.org/projects/SDL_image/">http://www.libsdl.org/projects/SDL_image/</a></li>
-              <li>SDL_gfx: <a href="https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/">https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/</a> (<a href="https://sourceforge.net/projects/sdlgfx/">https://sourceforge.net/projects/sdlgfx/</a>)</li>
-              <li>SDL_TTF: <a href="http://www.libsdl.org/projects/SDL_ttf/">http://www.libsdl.org/projects/SDL_ttf/</a></li>
-              <li>SDL_Pango: <a href="http://sourceforge.net/projects/sdlpango/">http://sourceforge.net/projects/sdlpango/</a> (optionnel)</li>
-              <li>SDL_Mixer: <a href="http://www.libsdl.org/projects/SDL_mixer/">http://www.libsdl.org/projects/SDL_mixer/</a> (optionnel)</li>
-            </ul>
+        <p>
+          Les bibliothèques SDL sont disponibles en tant que code source, ou en tant que paquets RPM ou Debian pour diverses distributions de Linux. Ils peuvent être téléchargés à partir de :        </p>
+        <ul>
+          <li>libSDL: <a href="http://www.libsdl.org/">http://www.libsdl.org/</a></li>
+          <li>SDL_image: <a href="https://github.com/libsdl-org/SDL_image">https://github.com/libsdl-org/SDL_image</a></li>
+          <li>SDL_gfx: <a href="https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/">https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/</a> (<a href="https://sourceforge.net/projects/sdlgfx/">https://sourceforge.net/projects/sdlgfx/</a>)</li>
+          <li>SDL_ttf: <a href="https://github.com/libsdl-org/SDL_ttf">https://github.com/libsdl-org/SDL_ttf</a></li>
+          <li>SDL2_Pango: <a href="https://github.com/markuskimius/SDL2_Pango">https://github.com/markuskimius/SDL2_Pango</a> (optionnel)</li>
+          <li>SDL_mixer: <a href="https://github.com/libsdl-org/SDL_mixer">https://github.com/libsdl-org/SDL_mixer</a> (optionnel)</li>
+        </ul>
 
-            <p>
-              Elles sont aussi parmi les paquets inclus dans votre distribution (par ex. sur le media d'installation, ou via la maintenance de vos logiciels comme la commande <code>apt</code> de Debian).            </p>
+        <p>
+          Elles sont aussi parmi les paquets inclus dans votre distribution (par ex. sur le media d'installation, ou via la maintenance de vos logiciels comme la commande <code>apt</code> de Debian).        </p>
 
-            <p class="note">
-              <span title="Information">&#128161;</span>              <strong>Note:</strong> When installing libraries from packages, be sure to ALSO install the development versions of the packages. (For example, install both "<code>SDL-1.2.4.rpm</code>" <em>and</em> "<code>SDL-1.2.4-devel.rpm</code>".)            </p>
-          </dd>
-        </dl>
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Note:</strong> When installing libraries from packages, be sure to ALSO install the development versions of the packages. (For example, install both "<code>SDL2-2.24.0.rpm</code>" <em>and</em> "<code>SDL2-devel-2.24.0.rpm</code>".)        </p>
       </section><!-- H2: Simple DirectMedia Layer library (libSDL) -->
 
       <section class="indent"><!-- H2: Other Libraries -->
@@ -301,7 +296,7 @@
 
           <p style="font-size: small;">
             <em>
-              mai 16, 2022              Shin-ichi TOYAMA dolphin6k@wmail.plala.or.jp &lt;<a href="mailto:dolphin6k@wmail.plala.or.jp">dolphin6k@wmail.plala.or.jp</a>&gt;
+              juillet 10, 2022              Shin-ichi TOYAMA &lt;<a href="mailto:dolphin6k@wmail.plala.or.jp">dolphin6k@wmail.plala.or.jp</a>&gt;
             </em>
           </p>
         </header>
@@ -317,32 +312,42 @@
           <p>
             Beaucoup d'outils et de bibliothèques sont nécessaires pour élaborer Tux Paint. Le système de gestion de paquet "<code>pacman</code>" apporte une aide pour installer automatiquement, en résolvant les dépendances nombreuses.          </p>
 
-          <p>
-            Téléchargez le dernier environnement MSYS2 à partir de <a href="https://sourceforge.net/projects/msys2/files/Base/">https://sourceforge.net/projects/msys2/files/Base/</a> et installez-le où vous voulez (par défaut "<code>C:\msys64</code>")          </p>
-          <p>
-            Ouvrez le shell MSYS2 via le "Menu de Démarrage" -&gt;"MSYS2 64bit" -&gt; "MSTS2 MSYS" et exécutez la commande suivante (pressez <b><code>[Entrée]</code></b> ou <b><code>[Retour]</code></b> pour accepter par défaut toutes les questions) :
-            <blockquote>
-              <code>
-                pacman -Syu
-              </code>
-            </blockquote>
-          </p>
+          <section class="indent"><!-- H4: MSYS2 -->
+            <header>
+              <h4>MYSYS2</h4>
+            </header>
 
-          <p>
-            Ceci mettra à jour tout le système et la fenêtre de se fermera automatiquement. Répétez les étapes précédentes encore une fois pour finaliser le process restant de mise à jour.          </p>
-
-          <p>
-            Sous le shell MSYS2, exécutez la commande suivante pour installer outils basiques pour le développement :            <blockquote>
-              <code>
-                pacman -S make automake-wrapper autoconf-wrapper libtool git zip patch gperf
-              </code>
-            </blockquote>
-          </p>
-
-          <p>
-            <i>
-              Allez à la prochaine section "<a href="#64bit">chaînes d'outils MinGW 64bit (x86_64) </a>", ou bien à la section "<a href="#32bit">chaînes d'outils MinGW 32bit (i686)</a>" si vous ne voulez qu'un environnement de travail 32bit.            </i>
-          </p>
+            <p>
+              Téléchargez le dernier environnement MSYS2 à partir de <a href="https://www.msys2.org/">https://www.msys2.org/</a> et installez-le où vous voulez (par défaut "<code>C:\msys64</code>")            </p>
+            <p>
+              Open the MSYS2 shell from the "Start Menu" -&gt; "MSYS2 64bit" -&gt; "MSYS2 MSYS" and execute following command:              <blockquote>
+                <code>
+                  $ yes "" | pacman -Syu
+                </code>
+              </blockquote>
+            </p>
+    
+            <p>
+              This will update core system and the window will close automatically.  Open the msys2 shell again and execute following command to finish remaining updating process.              <blockquote>
+                <code>
+                  $ yes "" | pacman -Syu
+                </code>
+              </blockquote>
+            </p>
+    
+            <p>
+              Sous le shell MSYS2, exécutez la commande suivante pour installer outils basiques pour le développement :              <blockquote>
+                <code>
+                  $ yes "" | pacman -S make automake-wrapper autoconf-wrapper libtool git zip patch gperf dos2unix
+                </code>
+              </blockquote>
+            </p>
+    
+            <p>
+              <i>
+                Allez à la prochaine section "<a href="#64bit">chaînes d'outils MinGW 64bit (x86_64) </a>", ou bien à la section "<a href="#32bit">chaînes d'outils MinGW 32bit (i686)</a>" si vous ne voulez qu'un environnement de travail 32bit.              </i>
+            </p>
+          </section>
 
                       <hr size="1" noshade width="75%" />
             <section class="indent"><!-- H4: MinGW...compiler and tools -->
@@ -356,7 +361,7 @@
               <p>
                 Sous le shell MSYS2, exécutez la commande suivante pour installer 64bit compiler and basic development tools :                <blockquote>
                   <code>
-                    pacman -S mingw-w64-x86_64-{gcc,pkgconf,ntldd-git}
+                    $ yes "" | pacman -S mingw-w64-x86_64-{gcc,pkgconf,ntldd-git}
                   </code>
                 </blockquote>
               </p>
@@ -371,18 +376,14 @@
               </header>
 
               <p>
-                You can install tools and libraries required for compiling Tux Paint and Tux Paint Config on MSYS2/MINGW using "<code>pacman</code>" except for SDL_mixer, SDL_Pango and libunibreak.              </p>
+                You can install tools and libraries required for compiling Tux Paint and Tux Paint Config on MSYS2/MINGW using "<code>pacman</code>" except for SDL2_Pango and libunibreak.              </p>
               <p>
                 FLTK is a cross-platform GUI toolkit used by "Tux Paint Config". You can skip installing it if you are <em>only</em> building "Tux Paint".              </p>
               <p>
                 <blockquote>
                   <code>
                     $ pacman -S mingw-w64-x86_64-SDL_{image,ttf,gfx}<br/>
-                    $ pacman -S mingw-w64-x86_64-libvorbis<br/>
-                    $ pacman -S mingw-w64-x86_64-librsvg<br/>
-                    $ pacman -S mingw-w64-x86_64-fribidi<br/>
-                    $ pacman -S mingw-w64-x86_64-libimagequant<br/>
-                    $ pacman -S mingw-w64-x86_64-fltk<br/>
+                    $ pacman -S mingw-w64-x86_64-{librsvg,fribidi,libimagequant,fltk}<br/>
                   </code>
                 </blockquote>
               </p>
@@ -390,59 +391,32 @@
                 <span title="Information">&#128161;</span>                <strong>Nota : </strong>Fermez l'interpréteur de commandes avant de passer à la suite.              </p>
             </section><!-- H4: ...dependency libraries for Tux Paint -->
 
-            <section class="indent"><!-- H4: Install SDL_Pango... -->
+            <section class="indent"><!-- H4: Install SDL2_Pango... -->
               <header>
                 <h4>
-                  Install SDL_mixer, SDL_Pango and libunibreak on the 64bit environment                </h4>
+                  Install SDL2_Pango and libunibreak on the 64bit environment                </h4>
               </header>
 
               <p>
-                SDL_mixer, SDL_Pango and libunibreak should be installed manually.              </p>
+                SDL2_Pango and libunibreak should be installed manually.              </p>
               <p>
                 Cette fois-ci, utilisez le shell MinGW "64bit". Ouvrez le shell depuis le "Menu de Démarrage" -&gt; "MSYS2 64bit" -&gt; "MSYS2 MinGW 64-bit"              </p>
 
-              <section class="indent"><!-- H5: SDL_mixer -->
+              <section class="indent"><!-- H5: SDL2_Pango -->
                 <header>
-                  <h5>SDL_mixer</h5>
+                  <h5>SDL2_Pango</h5>
                 </header>
 
                 <p>
-                  Télécharger <a href="https://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-1.2.12.tar.gz">fichier source de SDL_mixer-1.2.12</a> depuis <a href="https://www.libsdl.org/projects/SDL_mixer/">SDL_mixer's page</a>.                </p>
-                <p>
-                  Build and install SDL_mixer as follows.                  <blockquote>
+                  You can fetch the source code from the Mark K. Kim's git repositry, compile and install it as follows.                  <blockquote>
                     <code>
-                      $ tar zxvf SDL_mixer-1.2.12.tar.gz<br/>
-                      $ cd SDL_mixer-1.2.12/<br/>
-                      $ ./configure --prefix=/mingw64  &amp;&amp; make &amp;&amp; make install
+                      $ git clone https://github.com/markuskimius/SDL2_Pango<br/>
+                      $ cd SDL2_Pango<br/>
+                      $ ./configure --prefix=/mingw64 &amp;&amp; make &amp;&amp; make install<br/>
                     </code>
                   </blockquote>
                 </p>
-              </section><!-- H5: SDL_mixer -->
-
-              <section class="indent"><!-- H5: SDL_Pango -->
-                <header>
-                  <h5>SDL_Pango</h5>
-                </header>
-
-                <p>
-                  Tout d'abord, vous devrez préparer l'archive source et un patch qui est requis, dans le même répertoire.                  <ul>
-                    <li>
-                      Télécharger <a href="https://sourceforge.net/projects/sdlpango/files/SDL_Pango/0.1.2/SDL_Pango-0.1.2.tar.gz/download">fichier source de SDL_Pango-0.1.2</a> depuis <a href="https://sourceforge.net/projects/sdlpango/">La page SDL_Pango sur Sourceforge.net</a>.                    </li>
-                    <li>
-                      Télécharger <a href="http://johnnypops.co.uk/tuxpaint/SDL_Pango-configure-extra-api.patch">un fichier patch</a> depuis <a href="http://www.johnnypops.co.uk/tuxpaint/">La page web de John Popplewell traitant des "instructions pour la compilation de Tux Paint - MinGW/MSYS"</a>.                      (Ceci ajoute une fonctionnalité supplémentaire (requise) à SDL_Pango.)                    </li>
-                  </ul>
-                </p>
-                <p>
-                  Compiler et installer SDL_Pango comme suit.                  <blockquote>
-                    <code>
-                      $ tar zxvf SDL_Pango-0.1.2.tar.gz<br/>
-                      $ cd SDL_Pango-0.1.2/<br/>
-                      $ patch -p0 &lt; ../SDL_Pango-configure-extra-api.patch<br/>
-                      $ ./configure --prefix=/mingw64  &amp;&amp; make &amp;&amp; make install
-                    </code>
-                  </blockquote>
-                </p>
-              </section><!-- H5: SDL_Pango -->
+              </section><!-- H5: SDL2_Pango -->
 
               <section class="indent"><!-- H5: libunibreak -->
                 <header>
@@ -467,7 +441,7 @@
                     Aller à la prochaine section "<a href="#32bit">chaines d'outils MinGW 32bit (i686)</a>", ou bien aller directement à la section "<a href="#imagemagick">ImageMagick</a>" si vous n'avez besoin que d'un environnement de travail 64bit.                  </i>
                 </p>
                 
-            </section><!-- H4: Install SDL_Pango... -->
+            </section><!-- H4: Install SDL2_Pango... -->
 
                         <hr size="1" noshade width="75%" />
             <section class="indent"><!-- H4: MinGW...compiler and tools -->
@@ -481,7 +455,7 @@
               <p>
                 Sous le shell MSYS2, exécutez la commande suivante pour installer 32bit compiler and basic development tools :                <blockquote>
                   <code>
-                    pacman -S mingw-w64-i686-{gcc,pkgconf,ntldd-git}
+                    $ yes "" | pacman -S mingw-w64-i686-{gcc,pkgconf,ntldd-git}
                   </code>
                 </blockquote>
               </p>
@@ -496,18 +470,14 @@
               </header>
 
               <p>
-                You can install tools and libraries required for compiling Tux Paint and Tux Paint Config on MSYS2/MINGW using "<code>pacman</code>" except for SDL_mixer, SDL_Pango and libunibreak.              </p>
+                You can install tools and libraries required for compiling Tux Paint and Tux Paint Config on MSYS2/MINGW using "<code>pacman</code>" except for SDL2_Pango and libunibreak.              </p>
               <p>
                 FLTK is a cross-platform GUI toolkit used by "Tux Paint Config". You can skip installing it if you are <em>only</em> building "Tux Paint".              </p>
               <p>
                 <blockquote>
                   <code>
                     $ pacman -S mingw-w64-i686-SDL_{image,ttf,gfx}<br/>
-                    $ pacman -S mingw-w64-i686-libvorbis<br/>
-                    $ pacman -S mingw-w64-i686-librsvg<br/>
-                    $ pacman -S mingw-w64-i686-fribidi<br/>
-                    $ pacman -S mingw-w64-i686-libimagequant<br/>
-                    $ pacman -S mingw-w64-i686-fltk<br/>
+                    $ pacman -S mingw-w64-i686-{librsvg,fribidi,libimagequant,fltk}<br/>
                   </code>
                 </blockquote>
               </p>
@@ -515,59 +485,32 @@
                 <span title="Information">&#128161;</span>                <strong>Nota : </strong>Fermez l'interpréteur de commandes avant de passer à la suite.              </p>
             </section><!-- H4: ...dependency libraries for Tux Paint -->
 
-            <section class="indent"><!-- H4: Install SDL_Pango... -->
+            <section class="indent"><!-- H4: Install SDL2_Pango... -->
               <header>
                 <h4>
-                  Install SDL_mixer, SDL_Pango and libunibreak on the 32bit environment                </h4>
+                  Install SDL2_Pango and libunibreak on the 32bit environment                </h4>
               </header>
 
               <p>
-                SDL_mixer, SDL_Pango and libunibreak should be installed manually.              </p>
+                SDL2_Pango and libunibreak should be installed manually.              </p>
               <p>
                 Cette fois-ci, utilisez le shell MinGW "32bit". Ouvrez le shell depuis le "Menu de Démarrage" -&gt; "MSYS2 64bit" -&gt; "MSYS2 MinGW 32-bit"              </p>
 
-              <section class="indent"><!-- H5: SDL_mixer -->
+              <section class="indent"><!-- H5: SDL2_Pango -->
                 <header>
-                  <h5>SDL_mixer</h5>
+                  <h5>SDL2_Pango</h5>
                 </header>
 
                 <p>
-                  Télécharger <a href="https://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-1.2.12.tar.gz">fichier source de SDL_mixer-1.2.12</a> depuis <a href="https://www.libsdl.org/projects/SDL_mixer/">SDL_mixer's page</a>.                </p>
-                <p>
-                  Build and install SDL_mixer as follows.                  <blockquote>
+                  You can fetch the source code from the Mark K. Kim's git repositry, compile and install it as follows.                  <blockquote>
                     <code>
-                      $ tar zxvf SDL_mixer-1.2.12.tar.gz<br/>
-                      $ cd SDL_mixer-1.2.12/<br/>
-                      $ ./configure --prefix=/mingw32  &amp;&amp; make &amp;&amp; make install
+                      $ git clone https://github.com/markuskimius/SDL2_Pango<br/>
+                      $ cd SDL2_Pango<br/>
+                      $ ./configure --prefix=/mingw32 &amp;&amp; make &amp;&amp; make install<br/>
                     </code>
                   </blockquote>
                 </p>
-              </section><!-- H5: SDL_mixer -->
-
-              <section class="indent"><!-- H5: SDL_Pango -->
-                <header>
-                  <h5>SDL_Pango</h5>
-                </header>
-
-                <p>
-                  Tout d'abord, vous devrez préparer l'archive source et un patch qui est requis, dans le même répertoire.                  <ul>
-                    <li>
-                      Télécharger <a href="https://sourceforge.net/projects/sdlpango/files/SDL_Pango/0.1.2/SDL_Pango-0.1.2.tar.gz/download">fichier source de SDL_Pango-0.1.2</a> depuis <a href="https://sourceforge.net/projects/sdlpango/">La page SDL_Pango sur Sourceforge.net</a>.                    </li>
-                    <li>
-                      Télécharger <a href="http://johnnypops.co.uk/tuxpaint/SDL_Pango-configure-extra-api.patch">un fichier patch</a> depuis <a href="http://www.johnnypops.co.uk/tuxpaint/">La page web de John Popplewell traitant des "instructions pour la compilation de Tux Paint - MinGW/MSYS"</a>.                      (Ceci ajoute une fonctionnalité supplémentaire (requise) à SDL_Pango.)                    </li>
-                  </ul>
-                </p>
-                <p>
-                  Compiler et installer SDL_Pango comme suit.                  <blockquote>
-                    <code>
-                      $ tar zxvf SDL_Pango-0.1.2.tar.gz<br/>
-                      $ cd SDL_Pango-0.1.2/<br/>
-                      $ patch -p0 &lt; ../SDL_Pango-configure-extra-api.patch<br/>
-                      $ ./configure --prefix=/mingw32  &amp;&amp; make &amp;&amp; make install
-                    </code>
-                  </blockquote>
-                </p>
-              </section><!-- H5: SDL_Pango -->
+              </section><!-- H5: SDL2_Pango -->
 
               <section class="indent"><!-- H5: libunibreak -->
                 <header>
@@ -588,7 +531,7 @@
               </section><!-- H5: libunibreak -->
 
               
-            </section><!-- H4: Install SDL_Pango... -->
+            </section><!-- H4: Install SDL2_Pango... -->
 
                     </section><!-- H3: Compiling Set-Up -->
 
@@ -602,7 +545,7 @@
           <p>
             <a href="https://imagemagick.org">ImageMagick</a> est un ensemble d'outils en ligne de commande pour créer, éditer, composer ou convertir des images bitmap, et qui supporte un grand nombre de formats d'image. Tux Paint utilise deux fonctions ("convert" et "composite") pour générer des vignettes pour les images de démarrage et des modèles durant le process de compilation.          </p>
           <p>
-            L'utilisation des binaires officiels tirés de "<a href="https://imagemagick.org/script/download.php#windowsand">Versions binaires pour Windows</a>" est recommandée car les commandes installées avec "<code>pacman</code>" sur MinGW/MSYS ne fonctionnent pas comme elles devraient !          </p>
+            Using official binary release available from "<a href="https://imagemagick.org/script/download.php#windows">Windows Binary Release</a>" is recommended, due to the commands installed with "<code>pacman</code>" on MinGW/MSYS not working as expected!          </p>
           <p>
             N'oubliez pas de cocher "Installer les utilitaires hérités (par ex. convert)" pour l'installation, car le processus de compilation de Tux Paint les utilise.          </p>
           <p>
@@ -616,31 +559,114 @@
             Vous pouvez rendre ceci permanent en ajoutant ce qui précède à votre fichier de configuration du shell BASH, "<code>~/.bash_profile</code>".          </p>
         </section><!-- H3: ImageMagick -->
 
-        <section class="indent"><!-- H3: Tux Paint -->
+        <section class="indent"><!-- H3: Tux Paint & Tux Paint Config. -->
           <header>
-            <h3>Tux Paint</h3>
+            <h3>Tux Paint &amp; Tux Paint Config.</h3>
           </header>
 
           <p>
-            Vous pouvez compiler des binaires 64bit en utilisant le shell MSYS2 64bit, et des binaires 32bit en utilisant le shell MSYS2 32bit.          </p>
+            You can compile 64-bit binaries using "MSYS2 64bit" shell, and 32-bit binaries using "MSYS2 32bit" shell, respectively.          </p>
           <ul>
             <li>
               Choisissez "MSYS2 64bit" -&gt; "MSYS2 MinGW 64-bit" dans le "Menu de Démarrage" pour ouvrir le shell 64bit.            </li>
             <li>
               Choisissez "MSYS2 64bit" -&gt; "MSYS2 MinGW 32-bit" dans le "Menu de Démarrage" pour ouvrir le shell 32bit.            </li>
           </ul>
-          <p>
-            Compilez Tux Paint avec la commande suivante :            <blockquote>
-              <code>
-                $ make bdist-win32
-              </code>
-            </blockquote>
-          </p>
-          <p class="note">
-            <span title="Information">&#128161;</span>            <strong>Nota : </strong>À ce stade, vous voudrez compiler "Tux Paint Config". Pour Windows, il peut être ainsi inclus avec "Tux Paint", si vous faites une version officielle (ou de test).La compilation ira chercher un répertoire nommé "<code>tuxpaint-config</code>" (sans numéro de version, par ex voir "<code>tuxpaint-config-X.Y.Z</code>"). Voir le fichier INSTALL.txt de "Tux Paint Config" pour les détails.          </p>
+
+          <section class="indent"><!-- H4: Tux Paint Config. -->
+            <header>
+              <h4>Tux Paint Config.</h4>
+            </header>
+            <p>
+              "Tux Paint Config" is a useful graphical tool for tweaking Tux Paint's behavior. You have to build this component before compiling Tux Paint if you want to have it included in your package.            </p>
+            <p>
+              You can use either (a) a stable tar-ball release, or (b) the developing source tree.              <ol type="a">
+                <li>
+                  Using stable tar-ball release:                  <ul>
+                    <li>
+                      <a href="https://sourceforge.net/projects/tuxpaint/files/tuxpaint-config/">Download a source tar-ball</a>
+                    </li>
+                    <li>
+                      Expand the tar-ball and change the directory name so that the final packaging process can find related files.                      <blockquote>
+                        <code>
+                          $ tar zxvf tuxpaint-config-A.B.C.tar.gz<br/>
+                          $ mv tuxpaint-config-A.B.C tuxpaint-config<br/>
+                        </code>
+                      </blockquote>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Using the developing source tree:                  <ul>
+                    <li>
+                      Fetch the developing source tree from git repository:                      <blockquote>
+                        <code>
+                          $ git clone https://git.code.sf.net/p/tuxpaint/tuxpaint-config tuxpaint-config
+                        </code>
+                      </blockquote>
+                    </li>
+                  </ul>
+                </li>
+              </ol>
+            </p>
+            <p>
+              Now you can build Tux Paint Config. as follows:              <blockquote>
+                <code>
+                  $ cd tuxpaint-config<br/>
+                  $ make win32<br/>
+                </code>
+              </blockquote>
+            </p>
+          </section><!-- H4: Tux Paint Config. -->
+
+          <section class="indent"><!-- H4: Tux Paint -->
+            <header>
+              <h4>Tux Paint</h4>
+            </header>
+
+            <p>
+              You can use either (a) a stable tar-ball release, or (b) the developing source tree.              <ol type="a">
+                <li>
+                  Using stable tar-ball release:                  <ul>
+                    <li>
+                      <a href="https://sourceforge.net/projects/tuxpaint/files/tuxpaint/">Download a source tar-ball</a>
+                    </li>
+                    <li>
+                      Expand the tar-ball and change the directory name so that the final packaging process can find related files.                      <blockquote>
+                        <code>
+                          $ tar zxvf tuxpaint-A.B.C-sdl2.tar.gz<br/>
+                          $ mv tuxpaint-A.B.C-sdl2 tuxpaint-sdl2<br/>
+                        </code>
+                      </blockquote>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Using the developing source tree:                  <ul>
+                    <li>
+                      Fetch the developing source tree from git repository:                      <blockquote>
+                        <code>
+                          $ git clone -b sdl2.0 https://git.code.sf.net/p/tuxpaint/tuxpaint tuxpaint-sdl2
+                        </code>
+                      </blockquote>
+                    </li>
+                  </ul>
+                </li>
+              </ol>
+            </p>
+            <p>
+              Now you can build Tux Paint as follows:              <blockquote>
+                <code>
+                  $ cd tuxpaint-sdl2<br/>
+                  $ make bdist-win32<br/>
+                </code>
+              </blockquote>
+            </p>
+          </section><!-- H4: Tux Paint -->
+
           <p>
             Tous les fichiers nécessaires pour démarrer Tux Paint (et Tux Paint Config) sont rassemblés dans le répertoire de la distribution binaire "<code>bdist</code>", répertoire situé sous "<code>win32</code>3. Vous pouvez les démarrer en double-cliquant leurs fichiers exéctutables (<code>.exe</code>) dans le répertoire "<code>bdist</code>".          </p>
-        </section><!-- H3: Tux Paint -->
+        </section><!-- H3: Tux Paint & Tux Paint Config. -->
 
         <section class="indent"><!-- H3: Building the Tux Paint Windows Installer -->
           <header>
@@ -655,7 +681,7 @@
           <p>
             Before building an installer, edit the "<code>tuxpaint.iss</code>" file and enable one of the lines starting with "<code>#define BuildTarget=</code>", depending on the architecture of the installer you want to create.          </p>
           <p>
-            Alors, vous pouvez facilement construire un installateur exécutable en cliquant-droit sur l'icône "<code>tuxpaint.iss</code>" du répertoires "<code>win32</code>" et sélectionner "Compile" dans la liste. Cela prendra un certain temps, et éventuellement vous obtiendrez un fichier "<code>tuxpaint-<i>X.Y.Z</i>-windows-&lt;arch&gt;-installer.exe</code>" dans le même répertoire.          </p>
+            Alors, vous pouvez facilement construire un installateur exécutable en cliquant-droit sur l'icône "<code>tuxpaint.iss</code>" du répertoires "<code>win32</code>" et sélectionner "Compile" dans la liste. Cela prendra un certain temps, et éventuellement vous obtiendrez un fichier "<code>tuxpaint-<i>X.Y.Z</i>-windows-sdl2.0-&lt;arch&gt;-installer.exe</code>" dans le même répertoire.          </p>
         </section><!-- H3: Building the Tux Paint Windows Installer -->
 
         <section class="indent"><!-- H3: Running the Tux Paint Windows Installer -->
@@ -727,7 +753,7 @@
           </header>
 
           <p>
-            Si, lorsque vous double-cliquez sur le raccourci pour lancer le jeu, rien ne se passe, c'est probablement parce que certaines des options en lignes de commande sont erronées. Ouvrez un explorateur comme avant et recherchez un fichier appelé "<code>stderr.txt</code>" dans le dossier TuxPaint.          </p>
+            If, when you double-click on the shortcut to run Tux Paint, nothing happens, it is probably because some of these command-line options are wrong. Open an Explorer, and look for a file called "<code>stderr.txt</code>" in your personal saving folder for TuxPaint which is normaly "C:\Users\<i>username</i>\AppData\Roaming\TuxPaint".          </p>
 
           <p>
             Il contiendra une description de ce qui n'allait pas. Habituellement, ce sera simplement dû à une casse de caractère incorrecte (majuscule 'Z' à la place de 'z' minuscule) ou un '-' (tiret) manquant (en trop).          </p>
@@ -942,7 +968,7 @@
           <p>
             Bien Tux Paint puisse être construit sans Xcode IDE, ce dernier est toujours nécessaire. <a href="https://developer.apple.com/xcode/ide/">Téléchargez le = partir de l' the App Store</a>, et lancez le une fois pour accepter ses accords de licence. Vous pouvez aussi installer les outils de ligne de commande de Xcode en tapant la commande :            <blockquote>
               <code>
-                xcode-select --install
+                $ xcode-select --install
               </code>
             </blockquote>
           </p>
@@ -957,7 +983,7 @@
               <li><code>libpaper</code></li>
               <li><code>libpng</code></li>
               <li><code>librsvg</code></li>
-              <li><code>libsdl</code></li>
+              <li><code>libsdl2</code></li>
               <li><code>libsdl2_image</code></li>
               <li><code>libsdl2_mixer</code></li>
               <li><code>libsdl2_pango</code><sup>*</sup></li>

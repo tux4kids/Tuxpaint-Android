@@ -19,25 +19,26 @@
 #include <android/asset_manager_jni.h>
 #include "android_assets.h"
 
-AAssetManager * asset_manager = NULL;
-char* nativelibdir = NULL;
+AAssetManager *asset_manager = NULL;
+char *nativelibdir = NULL;
 
-AAssetDir * open_asset_dir(char * dirname)
+AAssetDir *open_asset_dir(char *dirname)
 {
   return AAssetManager_openDir(asset_manager, dirname);
 }
 
-char* get_nativelibdir()
+char *get_nativelibdir()
 {
-    return nativelibdir;
+  return nativelibdir;
 }
 
-void load_assets_dir(char * dirname, tp_ftw_str ** ffilenames, unsigned  * num_file_names)
+void load_assets_dir(char *dirname, tp_ftw_str ** ffilenames,
+                     unsigned *num_file_names)
 {
-  AAssetDir* assetDir = AAssetManager_openDir(asset_manager, dirname);
-  const char* filename = (const char*)NULL;
-  tp_ftw_str * filenames = NULL;
-  
+  AAssetDir *assetDir = AAssetManager_openDir(asset_manager, dirname);
+  const char *filename = (const char *) NULL;
+  tp_ftw_str *filenames = NULL;
+
   unsigned max_file_names = 0;
   int fulllen = 0;
   *num_file_names = 0;
@@ -46,7 +47,7 @@ void load_assets_dir(char * dirname, tp_ftw_str ** ffilenames, unsigned  * num_f
   while ((filename = AAssetDir_getNextFileName(assetDir)) != NULL)
   {
     char *cp;
-    
+
     fulllen = strlen(filename) + 1;
 
     if (*num_file_names == max_file_names)
@@ -66,7 +67,12 @@ void load_assets_dir(char * dirname, tp_ftw_str ** ffilenames, unsigned  * num_f
   *ffilenames = filenames;
 }
 
-JNIEXPORT jboolean Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv * env, jclass clazz, jobject  mgr)
+JNIEXPORT jboolean Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv *
+                                                                   env,
+                                                                   jclass
+                                                                   clazz,
+                                                                   jobject
+                                                                   mgr)
 {
   asset_manager = AAssetManager_fromJava(env, mgr);
 
@@ -76,7 +82,12 @@ JNIEXPORT jboolean Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv * env,
     return 1;
 }
 
-JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv * env, jclass clazz, jstring path)
+JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv *
+                                                                  env,
+                                                                  jclass
+                                                                  clazz,
+                                                                  jstring
+                                                                  path)
 {
   const char *cpath = (*env)->GetStringUTFChars(env, path, NULL);
   nativelibdir = strdup(cpath);
@@ -84,21 +95,24 @@ JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv * env, 
 }
 
 
-void load_brushes_from_assets(SDL_Surface * screen, SDL_Texture *texture, SDL_Renderer *renderer, const char * dirname, void (*fn) (SDL_Surface * screen,
-				  SDL_Texture * texture,
-				  SDL_Renderer * renderer,
-				  const char *restrict const dir,
-				  unsigned dirlen, tp_ftw_str * files,
-				  unsigned count, const char *restrict const locale))
+void load_brushes_from_assets(SDL_Surface * screen, SDL_Texture * texture,
+                              SDL_Renderer * renderer, const char *dirname,
+                              void (*fn)(SDL_Surface * screen,
+                                         SDL_Texture * texture,
+                                         SDL_Renderer * renderer,
+                                         const char *restrict const dir,
+                                         unsigned dirlen, tp_ftw_str * files,
+                                         unsigned count,
+                                         const char *restrict const locale))
 {
   unsigned num_file_names = 0;
-  char * dir = "data/brushes";
+  char *dir = "data/brushes";
   char buf[TP_FTW_PATHSIZE];
   unsigned dirlen = strlen(dirname);
 
   memcpy(buf, dir, dirlen);
 
-  tp_ftw_str * filenames = NULL;
+  tp_ftw_str *filenames = NULL;
 
   load_assets_dir(dirname, &filenames, &num_file_names);
   fn(screen, texture, renderer, dir, dirlen, filenames, num_file_names, NULL);
@@ -107,12 +121,14 @@ void load_brushes_from_assets(SDL_Surface * screen, SDL_Texture *texture, SDL_Re
 
 
 
-void load_from_assets(SDL_Surface * screen, SDL_Texture *texture, SDL_Renderer *renderer, const char * dirname, void (*fn) (SDL_Surface * screen,
-				  SDL_Texture * texture,
-				  SDL_Renderer * renderer,
-				  const char *restrict const dir,
-				  unsigned dirlen, tp_ftw_str * files,
-				  unsigned count, const char *restrict const locale))
+void load_from_assets(SDL_Surface * screen, SDL_Texture * texture,
+                      SDL_Renderer * renderer, const char *dirname,
+                      void (*fn)(SDL_Surface * screen, SDL_Texture * texture,
+                                 SDL_Renderer * renderer,
+                                 const char *restrict const dir,
+                                 unsigned dirlen, tp_ftw_str * files,
+                                 unsigned count,
+                                 const char *restrict const locale))
 {
   unsigned num_file_names = 0;
   // char * dir = "data/stamps/cartoon/tux";
@@ -121,8 +137,9 @@ void load_from_assets(SDL_Surface * screen, SDL_Texture *texture, SDL_Renderer *
 
   memcpy(buf, dirname, dirlen);
 
-  tp_ftw_str * filenames = NULL;
+  tp_ftw_str *filenames = NULL;
 
   load_assets_dir(dirname, &filenames, &num_file_names);
-  fn(screen, texture, renderer, dirname, dirlen, filenames, num_file_names, NULL);
+  fn(screen, texture, renderer, dirname, dirlen, filenames, num_file_names,
+     NULL);
 }

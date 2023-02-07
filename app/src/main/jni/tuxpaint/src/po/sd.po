@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-14 00:59-0700\n"
+"POT-Creation-Date: 2023-01-29 21:54-0800\n"
 "PO-Revision-Date: 2013-01-09 14:39+0530\n"
 "Last-Translator: Chandrakant Dhutadmal\n"
 "Language-Team: Sindhi-PA\n"
@@ -121,106 +121,107 @@ msgstr "ڀدو ميرو!"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:188
+#: ../dirwalk.c:204
 msgid "qx"
 msgstr "qx"
 
-#: ../dirwalk.c:188
+#: ../dirwalk.c:205
 msgid "QX"
 msgstr "QX"
 
-#. TODO: weight specification
-#. Now we score fonts to ensure that the best ones will be placed at
-#. the top of the list. The user will see them first. This sorting is
-#. especially important for users who have scroll buttons disabled.
-#. Translators should do whatever is needed to put crummy fonts last.
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:213
+#: ../dirwalk.c:234
 msgid "oO"
 msgstr "oO"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:216
+#: ../dirwalk.c:240
 msgid ",.?!"
 msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:219
+#: ../dirwalk.c:245
 #, fuzzy
 #| msgid "`\\%_@$~#{<(^&*"
 msgid "`%_@$~#{<(^&*"
 msgstr "`\\%_@$~#{<(^&*"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:222
+#: ../dirwalk.c:250
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:225
+#: ../dirwalk.c:255
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:228
+#: ../dirwalk.c:260
 msgid "1Il|"
 msgstr "1Il|"
 
-#: ../dirwalk.c:232
+#. If neccessary, translate any of following strings using at least
+#. two locale specific characters required to render your language.
+#. Then, the scores for those fonts having such characters will increase.
+#.
+#. You can use two different weight for scoring, 1 or 9, according
+#. to the importance.
+#: ../dirwalk.c:272
 msgid "<1>spare-1a"
-msgstr "سوتو پوتو -1a"
+msgstr ""
 
-#: ../dirwalk.c:233
+#: ../dirwalk.c:274
 msgid "<1>spare-1b"
-msgstr "سوتو توٽو -1b"
+msgstr ""
 
-#: ../dirwalk.c:234
+#: ../dirwalk.c:276
 msgid "<9>spare-9a"
-msgstr "سوتو پوتو-9a"
+msgstr ""
 
-#: ../dirwalk.c:235
+#: ../dirwalk.c:278
 msgid "<9>spare-9b"
-msgstr "سوتو پوتو-9b"
-
-#: ../fill_tools.h:50
-msgid "Solid"
 msgstr ""
 
 #: ../fill_tools.h:51
+msgid "Solid"
+msgstr ""
+
+#: ../fill_tools.h:52
 #, fuzzy
 #| msgid "Brushes"
 msgid "Brush"
 msgstr "برش"
 
-#: ../fill_tools.h:52
+#: ../fill_tools.h:53
 #, fuzzy
 #| msgid "Lines"
 msgid "Linear"
 msgstr "ليڪون"
 
-#: ../fill_tools.h:53
+#: ../fill_tools.h:54
 msgid "Radial"
 msgstr ""
 
-#: ../fill_tools.h:57
+#: ../fill_tools.h:58
 #, fuzzy
 #| msgid "Click in the picture to fill that area with color."
 msgid "Click to fill an area with a solid color."
 msgstr "رنگ سان اُهو حصا ڀرڻ لاءِ تصوير ۾ ڪلڪ ڪريو۔"
 
-#: ../fill_tools.h:58
+#: ../fill_tools.h:59
 #, fuzzy
 #| msgid "Click in the picture to fill that area with color."
 msgid "Click and drag to fill an area by hand, using a brush."
 msgstr "رنگ سان اُهو حصا ڀرڻ لاءِ تصوير ۾ ڪلڪ ڪريو۔"
 
-#: ../fill_tools.h:59
+#: ../fill_tools.h:61
 msgid ""
 "Click and drag to fill an area with a linear gradient (from the chosen color "
 "to transparent)."
 msgstr ""
 
-#: ../fill_tools.h:60
+#: ../fill_tools.h:63
 msgid ""
 "Click to fill an area with a radial gradient (from the chosen color to "
 "transparent)."
@@ -247,81 +248,81 @@ msgid "Good job!"
 msgstr "واهە جو ڪم!  "
 
 #. Input Method: English mode
-#: ../im.c:80
+#: ../im.c:88
 msgid "English"
 msgstr "انگريزي"
 
 #. Input Method: Japanese Romanized Hiragana mode
-#: ../im.c:83
+#: ../im.c:91
 msgid "Hiragana"
 msgstr "هيراگانا"
 
 #. Input Method: Japanese Romanized Katakana mode
-#: ../im.c:86
+#: ../im.c:94
 msgid "Katakana"
 msgstr "ڪٽڪانا"
 
 #. Input Method: Korean Hangul 2-Bul mode
-#: ../im.c:89
+#: ../im.c:97
 msgid "Hangul"
 msgstr "هنگُل"
 
 #. Input Method: Thai mode
-#: ../im.c:92
+#: ../im.c:100
 msgid "Thai"
 msgstr "ٿائي"
 
 #. Input Method: Traditional Chinese mode
-#: ../im.c:95
+#: ../im.c:103
 msgid "ZH_TW"
 msgstr "ZH_TW"
 
 #. Add menu items
-#: ../macos.m:56
+#: ../macos.m:58
 #, fuzzy
 #| msgid "Tux Paint"
 msgid "About Tux Paint"
 msgstr "ٽڪس رنگ"
 
-#: ../macos.m:61
+#: ../macos.m:63
 #, fuzzy
 #| msgid "Tux Paint"
 msgid "Hide Tux Paint"
 msgstr "ٽڪس رنگ"
 
-#: ../macos.m:64
+#: ../macos.m:66
 msgid "Hide Others"
 msgstr ""
 
-#: ../macos.m:67
+#: ../macos.m:69
 msgid "Show All"
 msgstr ""
 
-#: ../macos.m:71
+#: ../macos.m:73
 #, fuzzy
 #| msgid "Tux Paint"
 msgid "Quit Tux Paint"
 msgstr "ٽڪس رنگ"
 
 #. Put menu into the menubar
-#: ../macos.m:101 ../macos.m:109
+#: ../macos.m:103 ../macos.m:111
 msgid "Window"
 msgstr ""
 
 #. "Minimize" item
-#: ../macos.m:104
+#: ../macos.m:106
 msgid "Minimize"
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:8 ../tuxpaint.desktop.in:3
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:8 ../tuxpaint.desktop.in:3
 msgid "Tux Paint"
 msgstr "ٽڪس رنگ"
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:9 ../tuxpaint.desktop.in:10
-msgid "A drawing program for children."
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:9 ../tuxpaint.desktop.in:10
+msgid "A drawing program for children"
 msgstr "ٻارن لاءِ چترڪلا جو پروگرام "
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:11
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:11
 msgid ""
 "Tux Paint is a free, award-winning drawing program for children ages 3 to "
 "12. Tux Paint is used in schools around the world as a computer literacy "
@@ -330,30 +331,30 @@ msgid ""
 "program."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:19
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:19
 msgid ""
 "Kids are presented with a blank canvas and a variety of drawing tools to "
 "help them be creative."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:24
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:24
 msgid "New Breed Software et al."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:36
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:36
 msgid "The Magic tool is a set of special effects"
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:40
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:40
 msgid ""
 "The Paint Brush tool lets you draw freehand, using various brushes and colors"
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:44
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:44
 msgid "The Stamp tool is like a set of rubber stamps or stickers"
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:50
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:50
 msgid ""
 "Tux Paint's Color palette includes a new Color Mixer option, which allows "
 "users to combine different proportions of primary colors (red, yellow, and "
@@ -361,7 +362,7 @@ msgid ""
 "mixing paints."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:51
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:51
 msgid ""
 "The Color Picker option, which previously offered a static palette of around "
 "sixty-five thousand color choices, now supports separate hue, saturation, "
@@ -369,21 +370,21 @@ msgid ""
 "colors."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:52
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:52
 msgid ""
 "Also, a keyboard shortcut is now available for quick access to the Color "
 "Selector — the \"pipette\" tool used for picking colors from the current "
 "drawing."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:53
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:53
 msgid ""
 "The Paint and Lines tools now provide a way to adjust the spacing of "
 "brushes, allowing dotted lines or smearing effects to be made. Many brushes "
 "have been given better default spacing values, as well."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:54
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:54
 msgid ""
 "Two new variations of the Zoom Magic Tool, Tile Zoom and Rush, have been "
 "added. When shrinking a drawing with Tile Zoom, it replicates the drawing "
@@ -391,7 +392,7 @@ msgid ""
 "background color. The Rush tool blurs the results."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:55
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:55
 msgid ""
 "Tux Paint's Shapes tool now offers hexagon (6-sided) and heptagon (7-sided) "
 "polygons. For shapes which can be stretched (rectangle, oval, etc.), the "
@@ -400,7 +401,7 @@ msgid ""
 "has also been expanded."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:56
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:56
 msgid ""
 "Keyboard shortcuts, such as [Control]+[S] to save a drawing, are now "
 "accessed with the more traditional [⌘ Command] key when using Tux Paint on "
@@ -408,7 +409,7 @@ msgid ""
 "The look and feel of the user documentation has been improved."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:61
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:61
 msgid ""
 "Tux Paint's Paint and Line tools now support brushes that rotate based on "
 "the angle of the stroke. This new rotation feature, as well as the older "
@@ -417,7 +418,7 @@ msgid ""
 "painting mode for interactively coloring within a confined area."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:62
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:62
 msgid ""
 "Six new Magic tools have been added to Tux Paint. Panels shrinks and "
 "duplicates the drawing into a 2-by-2 grid, which is useful for making four-"
@@ -428,7 +429,7 @@ msgid ""
 "of Tux Paint's classic Rainbow tool."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:63
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:63
 msgid ""
 "A number of existing Magic tools have been updated, as well. Improvements "
 "were made to Halftone, which simulates photographs on newsprint; Cartoon, "
@@ -437,7 +438,7 @@ msgid ""
 "Chalk, and Emboss, now offer the ability to alter the entire image at once!"
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:64
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:64
 msgid ""
 "Finally, Magic tools are now grouped into collections of similar effects — "
 "painting, distorts, color filters, picture warps, pattern painting, "
@@ -445,7 +446,7 @@ msgid ""
 "need."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:69
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:69
 msgid ""
 "Tux Paint's Fill tool now offers options to fill an area with color "
 "gradients. The \"Radial\" fill creates a circular gradient centered around "
@@ -453,7 +454,7 @@ msgid ""
 "of gradients at different angles and sizes."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:70
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:70
 msgid ""
 "New Magic tools have been added to Tux Paint: \"Pixels\" makes it easier to "
 "create retro-gaming style pixel art, \"Checkerboard\" fills the entire "
@@ -461,14 +462,14 @@ msgid ""
 "picture via brush strokes."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:71
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:71
 msgid ""
 "Tux Paint's user documentation has been overhauled, making localization "
 "easier. Parties interested in helping with localization are encouraged to "
 "contact the Tux Paint team."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:72
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:72
 msgid ""
 "Finally, a new pair of accessibility options have been added. The entire "
 "user interface can now be enlarged benefiting users with impaired vision, "
@@ -478,34 +479,34 @@ msgid ""
 "systems."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:77
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:77
 msgid ""
 "A major improvement has been made to the Shapes tool, which now provides "
 "options to choose whether shapes are drawn from the center or a corner, "
 "making it easier to use in any situation."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:78
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:78
 msgid ""
 "The on-screen keyboard, an accessibility feature optionally available when "
 "using the Text and Label tools, now appears larger on bigger displays; "
 "helpful for users of coarser input devices, such as eye-tracking systems."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:79
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:79
 msgid ""
 "The Eraser tool adds new, smaller eraser sizes, and applies smoother, "
 "contiguous strokes when the pointer is moved quickly."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:80
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:80
 msgid ""
 "Finally, this newest version adds options to export individual drawings and "
 "GIF animations, making it easy to share pictures, cartoons, and slideshows "
 "with others."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:85
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:85
 msgid ""
 "The latest version has promoted the \"Fill\" tool, previously found under "
 "the \"Magic\" section of Tux Paint, to the main toolbar, where it's easier "
@@ -515,21 +516,21 @@ msgid ""
 "images."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:86
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:86
 msgid ""
 "Tux Paint also now makes it possible to disable stereo sound, which can "
 "benefit users with a hearing impairment, or in situations where only one "
 "speaker is available."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:91
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:91
 msgid ""
 "New in this version are a \"color picker\", which allows any color within a "
 "drawing to be chosen using the pointer, and a set of three-, four-, and five-"
 "pointed star shapes."
 msgstr ""
 
-#: ../org.tuxpaint.Tuxpaint.metainfo.xml.in:92
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:92
 msgid ""
 "The latest version also incorporates a number of new translations, bringing "
 "the number of supported languages up to nearly 130: Bengali, Bodo, Dogri, "
@@ -609,64 +610,62 @@ msgstr "چورس چؤطرف سمان پاسن سان گوني ڪنڊ چوَڪ�
 msgid "A rectangle has four sides and four right angles."
 msgstr "گوني ڪنڊ چوَڪنڊي جا چار پاسا ۽ چار گوني ڪنڊ آهن۔"
 
-#. Description of a circle
-#: ../shapes.h:337 ../shapes.h:338
+#: ../shapes.h:338 ../shapes.h:340
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
 msgstr "گولُ هڪ موڙ آهي جنهن جا سڀ نقطا مرڪز کان سمان دوريءَ تي آهن۔"
 
 #. Description of an ellipse
-#: ../shapes.h:341 ../shapes.h:342
+#: ../shapes.h:343 ../shapes.h:344
 msgid "An ellipse is a stretched circle."
 msgstr "بيضوي شڪل ڊگهيڙيل گول آهي"
 
 #. Description of a triangle
-#: ../shapes.h:345 ../shapes.h:346
+#: ../shapes.h:347 ../shapes.h:348
 msgid "A triangle has three sides."
 msgstr "ٽڪنڊي جا ٽي پاسا آهن۔"
 
 #. Description of a pentagon
-#: ../shapes.h:349 ../shapes.h:350
+#: ../shapes.h:351 ../shapes.h:352
 msgid "A pentagon has five sides."
 msgstr "پنج ڪنڊي جا پنج پاسا آهن۔"
 
 #. Description of a hexagon
-#: ../shapes.h:353 ../shapes.h:354
+#: ../shapes.h:355 ../shapes.h:356
 #, fuzzy
 #| msgid "A pentagon has five sides."
 msgid "A hexagon has six sides."
 msgstr "پنج ڪنڊي جا پنج پاسا آهن۔"
 
 #. Description of a heptagon
-#: ../shapes.h:357 ../shapes.h:358
+#: ../shapes.h:359 ../shapes.h:360
 #, fuzzy
 #| msgid "A pentagon has five sides."
 msgid "A heptagon has seven sides."
 msgstr "پنج ڪنڊي جا پنج پاسا آهن۔"
 
 #. Description of an octagon
-#: ../shapes.h:361 ../shapes.h:362
+#: ../shapes.h:363 ../shapes.h:364
 msgid "An octagon has eight equal sides."
 msgstr "اَٺڪنڊي جا اٺ سمان پاسا آهن۔"
 
-#. Description of a rhombus
-#: ../shapes.h:365 ../shapes.h:366
+#: ../shapes.h:368 ../shapes.h:370
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
 msgstr "مُعينُ جا چار سمان پاسا ۽ اُنهن جي سامهون پورو وڇوٽ ليڪون آهن۔"
 
-#: ../shapes.h:368 ../shapes.h:369
+#: ../shapes.h:372 ../shapes.h:373
 msgid "A star with 3 points."
 msgstr ""
 
-#: ../shapes.h:370 ../shapes.h:371
+#: ../shapes.h:374 ../shapes.h:375
 msgid "A star with 4 points."
 msgstr ""
 
-#: ../shapes.h:372 ../shapes.h:373
+#: ../shapes.h:376 ../shapes.h:377
 msgid "A star with 5 points."
 msgstr ""
 
-#: ../shapes.h:433
+#: ../shapes.h:439
 #, fuzzy
 #| msgid ""
 #| "Pick a shape. Click to pick the center, drag, then let go when it is the "
@@ -679,7 +678,7 @@ msgstr ""
 "اين تائين وڃڻ ڏيو۔ ان کي گول گهمڻ لاءِ اُن مٿان گهمايو، اين نقش رهڻ لاءِ ڪلڪ "
 "ڪريو۔"
 
-#: ../shapes.h:434
+#: ../shapes.h:441
 #, fuzzy
 #| msgid ""
 #| "Pick a shape. Click to pick the center, drag, then let go when it is the "
@@ -692,11 +691,11 @@ msgstr ""
 "اين تائين وڃڻ ڏيو۔ ان کي گول گهمڻ لاءِ اُن مٿان گهمايو، اين نقش رهڻ لاءِ ڪلڪ "
 "ڪريو۔"
 
-#: ../shapes.h:440
+#: ../shapes.h:447
 msgid "Draw shapes from the center."
 msgstr ""
 
-#: ../shapes.h:441
+#: ../shapes.h:448
 msgid "Draw shapes from a corner."
 msgstr ""
 
@@ -802,7 +801,7 @@ msgstr "نئون "
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:98 ../tuxpaint.c:8859
+#: ../tools.h:98 ../tuxpaint.c:9957
 msgid "Open"
 msgstr "کوليو"
 
@@ -1013,289 +1012,290 @@ msgid ""
 "shape."
 msgstr ""
 
+#. Instructions to show when rotating stamps
+#: ../tools.h:201
+#, fuzzy
+#| msgid "Move the mouse to rotate the shape. Click to draw it."
+msgid "Drag the mouse to rotate the stamp. Click to draw it."
+msgstr "آڪار گول گهمائڻ لاءِ مائوس هلايو۔ اهو نقش ڪڍڻ لاءِ ڪلڪ ڪريو۔"
+
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2339
+#: ../tuxpaint.c:2461
 msgid "Do you really want to quit?"
 msgstr "ڇا توهين سچ پچ ڇڏي نڪري وڃڻ چاهيو ٿا؟"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2342
+#: ../tuxpaint.c:2464
 msgid "Yes, I’m done!"
 msgstr "ها، منهنجو ٿي ويو!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2345 ../tuxpaint.c:2372
+#: ../tuxpaint.c:2467 ../tuxpaint.c:2494
 msgid "No, take me back!"
 msgstr "نە، مونکي واپس کڻو!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2349
+#: ../tuxpaint.c:2471
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "اگر توهين ڇڏي نڪري ويندا تە پنهنجي تصيوير وڃائي ڇڏيندا؟"
 
-#: ../tuxpaint.c:2350 ../tuxpaint.c:2355
+#: ../tuxpaint.c:2472 ../tuxpaint.c:2477
 msgid "Yes, save it!"
 msgstr "ها، اها سانڍيو!"
 
-#: ../tuxpaint.c:2351 ../tuxpaint.c:2356
+#: ../tuxpaint.c:2473 ../tuxpaint.c:2478
 msgid "No, don’t bother saving!"
 msgstr "نە، مونکي سانڍڻ جي پرواهە ناهي!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2354
+#: ../tuxpaint.c:2476
 msgid "Save your picture first?"
 msgstr "پهرين پنهنجي تصوير سانڍيندا؟"
 
 #. Error opening picture
-#: ../tuxpaint.c:2359
+#: ../tuxpaint.c:2481
 msgid "Can’t open that picture!"
 msgstr "اُها تصوير نٿا کولي سگهو!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2362 ../tuxpaint.c:2367 ../tuxpaint.c:2376 ../tuxpaint.c:2383
-#: ../tuxpaint.c:2392 ../tuxpaint.c:2397
+#: ../tuxpaint.c:2484 ../tuxpaint.c:2489 ../tuxpaint.c:2498 ../tuxpaint.c:2505
+#: ../tuxpaint.c:2514 ../tuxpaint.c:2519
 msgid "OK"
 msgstr "ٺيڪ آهي"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2366
+#: ../tuxpaint.c:2488
 msgid "There are no saved files!"
 msgstr "فائلون سانڍيل ناهن!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2370
+#: ../tuxpaint.c:2492
 msgid "Print your picture now?"
 msgstr "پنهنجي تصوير ڇاپيندا!"
 
-#: ../tuxpaint.c:2371
+#: ../tuxpaint.c:2493
 msgid "Yes, print it!"
 msgstr "ها، ها ڇاپيو!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2375
+#: ../tuxpaint.c:2497
 msgid "Your picture has been printed!"
 msgstr "توهانجي تصوير ڇاپي ويئي آهي!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2379
+#: ../tuxpaint.c:2501
 msgid "Sorry! Your picture could not be printed!"
 msgstr "معاف ڪجو! توهانجي تصوير نە ڇاپجي سگهي!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2382
+#: ../tuxpaint.c:2504
 msgid "You can’t print yet!"
 msgstr "اڃا توهين نٿا ڇاپي سگهو!"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2386
+#: ../tuxpaint.c:2508
 msgid "Erase this picture?"
 msgstr "اِها تصوير ميساري ڇڏيندا؟"
 
-#: ../tuxpaint.c:2387
+#: ../tuxpaint.c:2509
 msgid "Yes, erase it!"
 msgstr "ها، اِها ميساري ڇڏيو!"
 
-#: ../tuxpaint.c:2388
+#: ../tuxpaint.c:2510
 msgid "No, don’t erase it!"
 msgstr "نە، اها نە ميساريو!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2391
+#: ../tuxpaint.c:2513
 msgid "Remember to use the left mouse button!"
 msgstr "مائوس جو کاٻو بٽڻ اِستعمال ڪرڻ ياد رکو!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2395
+#: ../tuxpaint.c:2517
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
 msgstr "توهانجي تصوير ڇاپي ويئي آهي!"
 
-#: ../tuxpaint.c:2396
+#: ../tuxpaint.c:2518
 #, fuzzy
 #| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
 msgstr "توهانجي تصوير ڇاپي ويئي آهي!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2400
+#: ../tuxpaint.c:2522
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
 msgstr "معاف ڪجو! توهانجي تصوير نە ڇاپجي سگهي!"
 
-#: ../tuxpaint.c:2401
+#: ../tuxpaint.c:2523
 #, fuzzy
 #| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "معاف ڪجو! توهانجي تصوير نە ڇاپجي سگهي!"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2405
+#: ../tuxpaint.c:2527
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "توهانکي جيڪا تصوير کپي اُها چونڊيو، اُن بعد هلايو تي ڪلڪ ڪريو۔"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2626
+#: ../tuxpaint.c:2839
 msgid "Sound muted."
 msgstr "آواز اڻ اُچاريل ڪيو ويو۔"
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2631
+#: ../tuxpaint.c:2844
 msgid "Sound unmuted."
 msgstr "آواز اُچاريل ڪيو ويو۔"
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3416
+#: ../tuxpaint.c:3743
 msgid "Please wait…"
 msgstr "مهرباني ڪري ترسو۔۔۔"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:8862
+#: ../tuxpaint.c:9960
 msgid "Erase"
 msgstr "ميساري ڇڏيو"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:8865
+#: ../tuxpaint.c:9963
 msgid "Slides"
 msgstr "سلائڊ"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:8868
+#: ../tuxpaint.c:9966
 msgid "Export"
 msgstr ""
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:8871
+#: ../tuxpaint.c:9969
 msgid "Back"
 msgstr "پٺتي"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:8874
+#: ../tuxpaint.c:9972
 msgid "Play"
 msgstr "هلايو"
 
-#. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:8877
+#: ../tuxpaint.c:9976
 msgid "GIF Export"
 msgstr ""
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:8880
+#: ../tuxpaint.c:9979
 msgid "Next"
 msgstr "اڳتي"
 
 #. Color mixer dialog: 'Clear' button, to reset the mixed color
-#: ../tuxpaint.c:8883
+#: ../tuxpaint.c:9982
 msgid "Clear"
 msgstr ""
 
-#. Label for 'Letters' buttons (font selector, down the right when the Text tool is being used); used to show the difference between font faces
-#: ../tuxpaint.c:9742
+#. Use the localized label string (e.g., "あぁ" in Japanese)
+#: ../tuxpaint.c:10917 ../tuxpaint.c:10919 ../tuxpaint.c:10920
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:13462
+#: ../tuxpaint.c:14943
 msgid "Yes"
 msgstr "ها"
 
-#: ../tuxpaint.c:13466
+#: ../tuxpaint.c:14947
 msgid "No"
 msgstr "نە"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:14619
+#: ../tuxpaint.c:16141
 msgid "Replace the picture with your changes?"
 msgstr "پنهنجي تبديلين سان تصوير مٽائيندا؟"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:14623
+#: ../tuxpaint.c:16145
 msgid "Yes, replace the old one!"
 msgstr "ها، پراڻي مٽايو!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:14627
+#: ../tuxpaint.c:16149
 msgid "No, save a new file!"
 msgstr "نە، نئين فائيل سانڍيو!"
 
-#. Let user choose an image:
-#. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:15877
+#: ../tuxpaint.c:17504
 msgid "Choose the picture you want, then click “Open”."
 msgstr "توهانکي جيڪا تصوير کپي اُها چونڊيو، اُن بعد کوليو ڪلڪ ڪريو۔"
 
-#. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
-#. Only 1 selected?  No point in saving as GIF.
-#.
-#: ../tuxpaint.c:17415
+#: ../tuxpaint.c:19239
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 
 #. Descriptions (names) of the color mixer tool's primary colors and shades
-#: ../tuxpaint.c:22950
+#: ../tuxpaint.c:25397
 msgid "red"
 msgstr ""
 
-#: ../tuxpaint.c:22951
+#: ../tuxpaint.c:25398
 #, fuzzy
 #| msgid "Yellow!"
 msgid "yellow"
 msgstr "پيلو!"
 
-#: ../tuxpaint.c:22952
+#: ../tuxpaint.c:25399
 #, fuzzy
 #| msgid "Sky blue!"
 msgid "blue"
 msgstr "آسماني!"
 
-#: ../tuxpaint.c:22953
+#: ../tuxpaint.c:25400
 #, fuzzy
 #| msgid "White!"
 msgid "white"
 msgstr "اَڇو!"
 
-#: ../tuxpaint.c:22954
+#: ../tuxpaint.c:25401
 msgid "grey"
 msgstr ""
 
-#: ../tuxpaint.c:22955
+#: ../tuxpaint.c:25402
 #, fuzzy
 #| msgid "Black!"
 msgid "black"
 msgstr "ڪارو!"
 
 #. Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.)
-#: ../tuxpaint.c:22960
+#: ../tuxpaint.c:25407
 #, c-format
 msgid "Your color is %1$s %2$s."
 msgstr ""
 
-#: ../tuxpaint.c:22961
+#: ../tuxpaint.c:25408
 #, c-format
 msgid "Your color is %1$s %2$s and %3$s %4$s."
 msgstr ""
 
-#: ../tuxpaint.c:22962
+#: ../tuxpaint.c:25409
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, and %5$s %6$s."
 msgstr ""
 
-#: ../tuxpaint.c:22963
+#: ../tuxpaint.c:25411
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, and %7$s %8$s."
 msgstr ""
 
-#: ../tuxpaint.c:22964
+#: ../tuxpaint.c:25413
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, and %9$s %10$s."
 msgstr ""
 
-#: ../tuxpaint.c:22965
+#: ../tuxpaint.c:25415
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s, and "
@@ -1303,42 +1303,31 @@ msgid ""
 msgstr ""
 
 #. Color mixer; e.g., "Your color is entirely grey."
-#: ../tuxpaint.c:23727 ../tuxpaint.c:23734
+#: ../tuxpaint.c:26251 ../tuxpaint.c:26258
 msgid "entirely"
 msgstr ""
 
-#. Add "Color Select" color:
-#: ../tuxpaint.c:26644
+#: ../tuxpaint.c:29517
 msgid "Select a color from your drawing."
 msgstr ""
 
-#. Add "Color Picker" color:
-#. (This is an attempt to describe an HSV color picker in extremely basic terms!)
-#: ../tuxpaint.c:26653
+#: ../tuxpaint.c:29528
 msgid ""
 "Pick a color. Hues go top to bottom. Saturation/intensity goes left (pale) "
 "to right (pure). Value (lightness/darkness): grey bar."
 msgstr ""
 
-#. Add "Color Mixer" color:
-#. (The terms 'tint', 'tone', and 'shade' relate to combining white, grey, or black paint (respectively) to another color)
-#: ../tuxpaint.c:26665
+#: ../tuxpaint.c:29542
 msgid ""
 "Click the primary colors (red, yellow, and blue), white (to tint), grey (to "
 "tone), and black (to shade), to mix together a new color."
 msgstr ""
 
-#: ../tuxpaint.desktop.in:6
-#, fuzzy
-#| msgid "Tux Paint"
-msgid "tuxpaint"
-msgstr "ٽڪس رنگ"
-
 #: ../tuxpaint.desktop.in:9
 msgid "Drawing program"
 msgstr "چترڪلا جو پروگرام"
 
-#: ../../magic/src/alien.c:68
+#: ../../magic/src/alien.c:67
 msgid "Color Shift"
 msgstr "رنگ ڦيرائڻ"
 
@@ -1353,11 +1342,11 @@ msgstr "پنهنجي تصوير جي حصن جا رنگ بدلائڻ لاءِ ڪ
 msgid "Click to change the colors in your entire picture."
 msgstr "پنهنجي سموريءَ تصوير جا رنگ بدلائڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/blind.c:116
+#: ../../magic/src/blind.c:129
 msgid "Blind"
 msgstr "تسدو"
 
-#: ../../magic/src/blind.c:128
+#: ../../magic/src/blind.c:144
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
@@ -1365,31 +1354,31 @@ msgstr ""
 "ان تي دريءَ جا پردا ڏيڻ لاءِ پنهنجي تصوير جي ڪنار ڏانهن ڪلڪ ڪريو۔ پردا کولڻ يا "
 "بند ڪرڻ لاءِ عمودي نموني هلايو۔"
 
-#: ../../magic/src/blocks_chalk_drip.c:132
+#: ../../magic/src/blocks_chalk_drip.c:145
 msgid "Blocks"
 msgstr "بلاڪ"
 
-#: ../../magic/src/blocks_chalk_drip.c:134
+#: ../../magic/src/blocks_chalk_drip.c:147
 msgid "Chalk"
 msgstr "ليڪن وارو نقش"
 
-#: ../../magic/src/blocks_chalk_drip.c:136
+#: ../../magic/src/blocks_chalk_drip.c:149
 msgid "Drip"
 msgstr "بوند"
 
-#: ../../magic/src/blocks_chalk_drip.c:154
+#: ../../magic/src/blocks_chalk_drip.c:171
 #, fuzzy
 #| msgid "Click and move the mouse around to make the picture blocky."
 msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "بلاڪن واري تصوير بڻائڻ لاءِ ڪلڪ ڪريو اين جي چوطرف مائوس هلايو۔"
 
-#: ../../magic/src/blocks_chalk_drip.c:158
+#: ../../magic/src/blocks_chalk_drip.c:176
 #, fuzzy
 #| msgid "Click to sharpen the entire picture."
 msgid "Click to make the entire picture blocky."
 msgstr "پنهنجي سموري تصوير تکي ڪرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/blocks_chalk_drip.c:165
+#: ../../magic/src/blocks_chalk_drip.c:185
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn the picture into a chalk drawing."
@@ -1397,215 +1386,245 @@ msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr "ليڪن واري نقش ۾ تصوير بدلائڻ لاءِ ڪلڪ ڪريو ۽ اين جي چوطرف مائوس هلايو "
 
-#: ../../magic/src/blocks_chalk_drip.c:169
+#: ../../magic/src/blocks_chalk_drip.c:191
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn the picture into a chalk drawing."
 msgid "Click to turn the entire picture into a chalk drawing."
 msgstr "ليڪن واري نقش ۾ تصوير بدلائڻ لاءِ ڪلڪ ڪريو ۽ اين جي چوطرف مائوس هلايو "
 
-#: ../../magic/src/blocks_chalk_drip.c:174
+#: ../../magic/src/blocks_chalk_drip.c:200
 #, fuzzy
 #| msgid "Click and move the mouse around to make the picture drip."
 msgid "Click and drag the mouse around to make the picture drip."
 msgstr "تصوير بوند رچڻ لاءِ ڪلڪ ڪريو ۽ اُن جي چوطرف مائوس هلايو۔"
 
-#: ../../magic/src/blur.c:81
+#: ../../magic/src/blocks_chalk_drip.c:204
+#, fuzzy
+#| msgid "Click to sharpen the entire picture."
+msgid "Click to make the entire picture drip."
+msgstr "پنهنجي سموري تصوير تکي ڪرڻ لاءِ ڪلڪ ڪريو۔"
+
+#: ../../magic/src/blur.c:84
 msgid "Blur"
 msgstr "ڌنڌلو"
 
-#: ../../magic/src/blur.c:89
+#: ../../magic/src/blur.c:92
 #, fuzzy
 #| msgid "Click and move the mouse around to blur the image."
 msgid "Click and drag the mouse around to blur the image."
 msgstr "عڪس ڌنڌلو ڪرڻ لاءِ ڪلڪ ڪريو ۽ اُن جي چؤطرف مائوس هلايو۔ "
 
-#: ../../magic/src/blur.c:90
+#: ../../magic/src/blur.c:93
 msgid "Click to blur the entire image."
 msgstr "سمورو عڪس ڌنڌلو ڪرڻ لاءِ ڪلڪ ڪريو۔ "
 
 #. Both are named "Bricks", at the moment:
-#: ../../magic/src/bricks.c:121
+#: ../../magic/src/bricks.c:129
 msgid "Bricks"
 msgstr "سِرون"
 
-#: ../../magic/src/bricks.c:134
+#: ../../magic/src/bricks.c:144
 #, fuzzy
 #| msgid "Click and move to draw large bricks."
 msgid "Click and drag to draw large bricks."
 msgstr "وڏيون سرون رچڻ لاءِ ڪلڪ ڪريو ۽ هلايو۔"
 
-#: ../../magic/src/bricks.c:136
+#: ../../magic/src/bricks.c:146
 #, fuzzy
 #| msgid "Click and move to draw small bricks."
 msgid "Click and drag to draw small bricks."
 msgstr "ننڍيون سرون رچڻ لاءِ ڪلڪ ڪريو ۽ هلايو۔"
 
-#: ../../magic/src/calligraphy.c:125
+#: ../../magic/src/calligraphy.c:135
 msgid "Calligraphy"
 msgstr "خوش نويسي۔"
 
-#: ../../magic/src/calligraphy.c:138
+#: ../../magic/src/calligraphy.c:152
 #, fuzzy
 #| msgid "Click and move the mouse around to draw in calligraphy."
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "خوش نويسيءَ ۾ نقش رچڻ لاءِ ڪلڪ ڪريو ۽ اُن جي چوطرف ماءوس هلايو۔"
 
-#: ../../magic/src/cartoon.c:107
+#: ../../magic/src/cartoon.c:116
 msgid "Cartoon"
 msgstr "ڪارٽون"
 
-#: ../../magic/src/cartoon.c:121
+#: ../../magic/src/cartoon.c:134
 #, fuzzy
 #| msgid "Click and move the mouse around to turn the picture into a cartoon."
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr "تصوير ڪارٽون ۾ بدلائڻ لاءِ ڪلڪ ڪريو ڪريو ۽ اُن جي چوطرف مائوس هلايو۔"
 
-#: ../../magic/src/cartoon.c:125
+#: ../../magic/src/cartoon.c:140
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn the picture into a chalk drawing."
 msgid "Click to turn the entire picture into a cartoon."
 msgstr "ليڪن واري نقش ۾ تصوير بدلائڻ لاءِ ڪلڪ ڪريو ۽ اين جي چوطرف مائوس هلايو "
 
-#: ../../magic/src/checkerboard.c:100
+#: ../../magic/src/checkerboard.c:116
 msgid "Checkerboard"
 msgstr ""
 
-#: ../../magic/src/checkerboard.c:112
+#: ../../magic/src/checkerboard.c:131
 #, fuzzy
 #| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to fill the canvas with a checkerboard pattern."
 msgstr "پوئڻ جي ڪلا سان تير رچڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/clone.c:133
+#: ../../magic/src/clone.c:142
 msgid "Clone"
 msgstr ""
 
-#: ../../magic/src/clone.c:145
+#: ../../magic/src/clone.c:159
 msgid ""
 "Click once to pick a spot to begin cloning. Click again and drag to clone "
 "that part of the picture."
 msgstr ""
 
-#: ../../magic/src/confetti.c:86
+#: ../../magic/src/confetti.c:103
 msgid "Confetti"
 msgstr "رنگين پنن جون ٽڪريون"
 
-#: ../../magic/src/confetti.c:96
+#: ../../magic/src/confetti.c:116
 msgid "Click to throw confetti!"
 msgstr "رنگين پنن جون ٽڪريون اُڇلائڻ لاءِ ڪلڪ ڪريو!"
 
-#: ../../magic/src/distortion.c:135
+#: ../../magic/src/distortion.c:145
 msgid "Distortion"
 msgstr "ڦِڏائي"
 
-#: ../../magic/src/distortion.c:152
+#: ../../magic/src/distortion.c:166
 msgid "Click and drag the mouse to cause distortion in your picture."
 msgstr "پنهنجي تصوير ۾ ڦِڏائي آڻڻ لاءِ ڪلڪ ڪريو ۽ مائوس گهليو۔"
 
-#: ../../magic/src/emboss.c:102
+#: ../../magic/src/emboss.c:110
 msgid "Emboss"
 msgstr "ايمبوس"
 
-#: ../../magic/src/emboss.c:114
+#: ../../magic/src/emboss.c:127
 msgid "Click and drag the mouse to emboss the picture."
 msgstr "تصوير ايمبوس ڪرڻ لاءِ ڪلڪ ڪريو ۽ ماءوس گهليو۔"
 
-#: ../../magic/src/fade_darken.c:115
+#: ../../magic/src/emboss.c:129
+#, fuzzy
+#| msgid "Click to sharpen the entire picture."
+msgid "Click to emboss the entire picture."
+msgstr "پنهنجي سموري تصوير تکي ڪرڻ لاءِ ڪلڪ ڪريو۔"
+
+#: ../../magic/src/fade_darken.c:126
 msgid "Lighten"
 msgstr "روشن ڪيل"
 
-#: ../../magic/src/fade_darken.c:117
+#: ../../magic/src/fade_darken.c:128
 msgid "Darken"
 msgstr "اوُنداهو ڪيل"
 
-#: ../../magic/src/fade_darken.c:134
+#: ../../magic/src/fade_darken.c:149
 #, fuzzy
 #| msgid "Click and move the mouse to lighten parts of your picture."
 msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "پنهنجي تصوير جا حصا روشن ڪرڻ لاءِ ڪلڪ ڪريو ۽ مائوس هلايو۔"
 
-#: ../../magic/src/fade_darken.c:136
+#: ../../magic/src/fade_darken.c:151
 msgid "Click to lighten your entire picture."
 msgstr "پنهنجي سموري تصوير روشن ڪرق لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/fade_darken.c:141
+#: ../../magic/src/fade_darken.c:158
 #, fuzzy
 #| msgid "Click and move the mouse to darken parts of your picture."
 msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "پنهنجي تصوير جا حصا اونداها ڪرڻ لاءِ ڪلڪ ڪريو ۽ مائوس هلايو۔"
 
-#: ../../magic/src/fade_darken.c:143
+#: ../../magic/src/fade_darken.c:160
 msgid "Click to darken your entire picture."
 msgstr "پنهنجي سموري تصوير اونداهي ڪرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/fisheye.c:102
+#: ../../magic/src/fisheye.c:114
 msgid "Fisheye"
 msgstr "مڃيءَ جي اَکي"
 
-#: ../../magic/src/fisheye.c:112
+#: ../../magic/src/fisheye.c:129
 msgid "Click on part of your picture to create a fisheye effect."
 msgstr "مڃيءَ جي اک جو اثر خلقڻ لاءِ پنهنجي تصوير جو حصو ڪلڪ ڪريو۔"
 
-#: ../../magic/src/flower.c:146
+#: ../../magic/src/flower.c:163
 msgid "Flower"
 msgstr "گُلُ"
 
-#: ../../magic/src/flower.c:158
+#: ../../magic/src/flower.c:180
 msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
 msgstr "گل جي ڏانڊيءَ جو نقش ڪڍڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔ گل پورو ٿيڻ ڏيو۔"
 
-#: ../../magic/src/foam.c:115
+#: ../../magic/src/foam.c:133
 msgid "Foam"
 msgstr "گجيِ"
 
-#: ../../magic/src/foam.c:127
+#: ../../magic/src/foam.c:150
 msgid "Click and drag the mouse to cover an area with foamy bubbles."
 msgstr "گجيءَ جي بلبلن سان حصو ڀرڻ لاءِ ڪلڪ ڪريو ۽ مائوس گهليو۔"
 
-#: ../../magic/src/fold.c:104
+#: ../../magic/src/fold.c:127
 msgid "Fold"
 msgstr "موڙُ"
 
-#: ../../magic/src/fold.c:114
+#: ../../magic/src/fold.c:142
 msgid ""
 "Choose a background color and click to turn the corner of the page over."
 msgstr "صفحي جي ڪنڊ موڙڻ لاءِ پس منظر جو رنگ چونڊيو ۽ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/fretwork.c:183
+#: ../../magic/src/fretwork.c:211
 msgid "Fretwork"
 msgstr ""
 
-#: ../../magic/src/fretwork.c:189
+#: ../../magic/src/fretwork.c:219
 #, fuzzy
 #| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw repetitive patterns."
 msgstr "پوئڻ جي ڪلا سان تير رچڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/fretwork.c:191
+#: ../../magic/src/fretwork.c:223
 #, fuzzy
 #| msgid "Click to cover your picture with rain drops."
 msgid "Click to surround your picture with repetitive patterns."
 msgstr "پنهنجي تصوير برسات جي بوندن سان ڀرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/glasstile.c:105
+#: ../../magic/src/glasstile.c:114
 msgid "Glass Tile"
 msgstr "شيشي جي ٿائل"
 
-#: ../../magic/src/glasstile.c:118
+#: ../../magic/src/glasstile.c:131
 msgid "Click and drag the mouse to put glass tile over your picture."
 msgstr "پنهنجي تصوير مٿان شيشي جي ٿائل رکڻ لاءِ ڪلڪ ڪريو ۽ مائوس گهليو۔"
 
-#: ../../magic/src/glasstile.c:120
+#: ../../magic/src/glasstile.c:135
 msgid "Click to cover your entire picture in glass tiles."
 msgstr "شيشي جي ٿاءلن ۾ سموري تصوير ڀرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/grass.c:108
+#: ../../magic/src/googlyeyes.c:21
+msgid "large googly eye"
+msgstr ""
+
+#: ../../magic/src/googlyeyes.c:22
+msgid "small googly eye"
+msgstr ""
+
+#: ../../magic/src/googlyeyes.c:161
+msgid "Google Eyes"
+msgstr ""
+
+#: ../../magic/src/googlyeyes.c:175
+#, c-format
+msgid ""
+"Click to place a %s, then drag and release to make it look that direction."
+msgstr ""
+
+#: ../../magic/src/grass.c:116
 msgid "Grass"
 msgstr "گاهُە"
 
-#: ../../magic/src/grass.c:120
+#: ../../magic/src/grass.c:133
 #, fuzzy
 #| msgid "Click and move to draw grass. Don’t forget the dirt!"
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
@@ -1627,47 +1646,47 @@ msgstr "پنهنجي چترڪاري نگيٽو ۾ بدلائڻ لاءِ ڪل ڪ�
 msgid "Click to turn your drawing into a newspaper."
 msgstr "پنهنجي چترڪاري نگيٽو ۾ بدلائڻ لاءِ ڪل ڪريو۔"
 
-#: ../../magic/src/kalidescope.c:120
+#: ../../magic/src/kalidescope.c:128
 msgid "Symmetric Left/Right"
 msgstr "هم ميوان کاٻو/ ساڄو"
 
-#: ../../magic/src/kalidescope.c:124
+#: ../../magic/src/kalidescope.c:132
 msgid "Symmetric Up/Down"
 msgstr "هم ميزان مٿي/ هيٺِ"
 
-#: ../../magic/src/kalidescope.c:128
+#: ../../magic/src/kalidescope.c:136
 msgid "Pattern"
 msgstr ""
 
-#: ../../magic/src/kalidescope.c:132
+#: ../../magic/src/kalidescope.c:140
 msgid "Tiles"
 msgstr ""
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:136
+#: ../../magic/src/kalidescope.c:144
 msgid "Kaleidoscope"
 msgstr "سَئربين"
 
-#: ../../magic/src/kalidescope.c:154
+#: ../../magic/src/kalidescope.c:164
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the left and right of your picture."
 msgstr ""
 "اُنهن ٻن برشن سان پنهنجي تصوير جو نقش ڪڍو جيڪي کڍٻي ۽ ساڄي پاسي هم ميزان آهن۔"
 
-#: ../../magic/src/kalidescope.c:160
+#: ../../magic/src/kalidescope.c:170
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the top and bottom of your picture."
 msgstr "اُنهن ٻن برشن سان پنهنجي تصوير جو نقش ڪڍو جيڪي مٿ ۽ تر ۾ هم ميزان آهن۔"
 
-#: ../../magic/src/kalidescope.c:164
+#: ../../magic/src/kalidescope.c:176
 #, fuzzy
 #| msgid "Click and drag the mouse to emboss the picture."
 msgid "Click and drag the mouse to draw a pattern across the picture."
 msgstr "تصوير ايمبوس ڪرڻ لاءِ ڪلڪ ڪريو ۽ ماءوس گهليو۔"
 
-#: ../../magic/src/kalidescope.c:168
+#: ../../magic/src/kalidescope.c:182
 #, fuzzy
 #| msgid ""
 #| "Click and drag the mouse to draw with two brushes that are symmetric "
@@ -1678,61 +1697,77 @@ msgid ""
 msgstr ""
 "اُنهن ٻن برشن سان پنهنجي تصوير جو نقش ڪڍو جيڪي کڍٻي ۽ ساڄي پاسي هم ميزان آهن۔"
 
-#. KAL_BOTH
-#: ../../magic/src/kalidescope.c:172
+#: ../../magic/src/kalidescope.c:188
 msgid ""
 "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgstr "هم ميزان برشن سان نقش ڪڍڻ لاءِ ڪلڪ ڪريو ۽ مائوس گهليو (سئربين)"
 
-#: ../../magic/src/light.c:104
+#: ../../magic/src/light.c:112
 msgid "Light"
 msgstr "روشني"
 
-#: ../../magic/src/light.c:116
+#: ../../magic/src/light.c:129
 msgid "Click and drag to draw a beam of light on your picture."
 msgstr "پنهنجي تصوير تي روشنيءَ سان تروي جو نقش ڪڍڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/lightning.c:78
+#: ../../magic/src/lightning.c:90
 #, fuzzy
 #| msgid "Lighten"
 msgid "Lightning"
 msgstr "روشن ڪيل"
 
-#: ../../magic/src/lightning.c:88
+#: ../../magic/src/lightning.c:105
 #, fuzzy
 #| msgid "Click and drag to draw a beam of light on your picture."
 msgid "Click, drag, and release to draw a lightning bolt between two points."
 msgstr "پنهنجي تصوير تي روشنيءَ سان تروي جو نقش ڪڍڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/metalpaint.c:99
+#: ../../magic/src/maze.c:114
+msgid "Maze"
+msgstr ""
+
+#: ../../magic/src/maze.c:128
+#, fuzzy
+#| msgid "Click and drag to draw train track rails on your picture."
+msgid "Click and drag to paint a maze on your picture."
+msgstr "پنهنجي تصوير ۽ ريل جي پٽن جو نقش رچڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
+
+#: ../../magic/src/maze.c:130
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
+msgid "Click to turn your entire picture into a maze."
+msgstr "ليڪن واري نقش ۾ تصوير بدلائڻ لاءِ ڪلڪ ڪريو ۽ اين جي چوطرف مائوس هلايو "
+
+#: ../../magic/src/metalpaint.c:108
 msgid "Metal Paint"
 msgstr "معدني رنگ"
 
-#: ../../magic/src/metalpaint.c:112
+#: ../../magic/src/metalpaint.c:125
 msgid "Click and drag the mouse to paint with a metallic color."
 msgstr "معدني رنگ سان رڱڻ لاءِ ڪلڪ ڪريو ۽ مائوس گهليو۔"
 
-#: ../../magic/src/mirror_flip.c:111
+#: ../../magic/src/mirror_flip.c:118
 msgid "Mirror"
 msgstr "درسني"
 
-#: ../../magic/src/mirror_flip.c:113
+#: ../../magic/src/mirror_flip.c:120
 msgid "Flip"
 msgstr "اُڇل"
 
-#: ../../magic/src/mirror_flip.c:128
+#: ../../magic/src/mirror_flip.c:137
 msgid "Click to make a mirror image."
 msgstr "درسنيءَ جو عڪس رچڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/mirror_flip.c:130
+#: ../../magic/src/mirror_flip.c:139
 msgid "Click to flip the picture upside-down."
 msgstr "تصوير کي مٿان هيٺ اُڇل ڏيارڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/mosaic.c:97
+#: ../../magic/src/mosaic.c:103
 msgid "Mosaic"
 msgstr "ٽڪرين جي جڙتڪاري"
 
-#: ../../magic/src/mosaic.c:105
+#: ../../magic/src/mosaic.c:112
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
@@ -1741,23 +1776,23 @@ msgid ""
 msgstr ""
 "پنهنجي تصوير جي حصن ۾ ٽڪرين جي جڙتڪاريءَ جو اثر شامل ڪرڻ لاءِ ڪلڪ ڪريو ۽ هلايو۔"
 
-#: ../../magic/src/mosaic.c:106
+#: ../../magic/src/mosaic.c:113
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "پنهنجي سموريءَ تصوير ۾ ٽڪرين جي جڙتڪاريءَ جو اَثر شامل ڪرڻ لاءِ۔"
 
-#: ../../magic/src/mosaic_shaped.c:133
+#: ../../magic/src/mosaic_shaped.c:146
 msgid "Square Mosaic"
 msgstr "چورس ٽڪرين جي جڙتڪاري"
 
-#: ../../magic/src/mosaic_shaped.c:134
+#: ../../magic/src/mosaic_shaped.c:147
 msgid "Hexagon Mosaic"
 msgstr "چهڪنڊي ٽڪرين جي جڙتڪاري"
 
-#: ../../magic/src/mosaic_shaped.c:135
+#: ../../magic/src/mosaic_shaped.c:148
 msgid "Irregular Mosaic"
 msgstr "بي ترتيب ٽڪرين جي جڙتڪاري"
 
-#: ../../magic/src/mosaic_shaped.c:141
+#: ../../magic/src/mosaic_shaped.c:155
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a square mosaic to parts of your picture."
@@ -1767,11 +1802,11 @@ msgstr ""
 "پنهنجي تصوير جي حصن ۾ چوَرس ٽڪرين جي جڙت ڪري شامل ڪرڻ لاءِ ڪلڪ ڪريو ۽ مائوس "
 "هلايو۔"
 
-#: ../../magic/src/mosaic_shaped.c:142
+#: ../../magic/src/mosaic_shaped.c:156
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "پنهنجي سموري تصوير ۾ چورس ٽڪرين جي جڙتڪاري شامل ڪرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/mosaic_shaped.c:146
+#: ../../magic/src/mosaic_shaped.c:161
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a hexagonal mosaic to parts of your "
@@ -1782,11 +1817,11 @@ msgstr ""
 "پنهنجي تصوير جي حصن ۾ جهڪنڊي ٽڪرين جي جڙتڪاري شامل ڪرق لاءِ ڪلڪ ڪريو ۽ مائوس "
 "هلايو۔"
 
-#: ../../magic/src/mosaic_shaped.c:147
+#: ../../magic/src/mosaic_shaped.c:162
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "پنهنجي سموريءَ تصوير ۾ ڇهڪنڊن ٽڪرين جي جڙتڪاري شامل ڪرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/mosaic_shaped.c:151
+#: ../../magic/src/mosaic_shaped.c:167
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add an irregular mosaic to parts of your "
@@ -1797,29 +1832,29 @@ msgstr ""
 "پنهنجي تصوير جي حصن ۾ بي ترتيب ٽڪرين جي جڙتڪاري شامل ڪرڻ لاءِ ڪلڪ ڪريو ۽ "
 "مائوس هلايو۔"
 
-#: ../../magic/src/mosaic_shaped.c:152
+#: ../../magic/src/mosaic_shaped.c:168
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "پنهنجي سموريءِ تصوير ۾ بي ترتيب ٽڪرين جي جڙتڪاري شامل ڪرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/negative.c:73
+#: ../../magic/src/negative.c:79
 msgid "Negative"
 msgstr "نگيِٽِو"
 
-#: ../../magic/src/negative.c:74
+#: ../../magic/src/negative.c:80
 msgid "Opposite"
 msgstr ""
 
-#: ../../magic/src/negative.c:79
+#: ../../magic/src/negative.c:86
 #, fuzzy
 #| msgid "Click and move the mouse around to make your painting negative."
 msgid "Click and drag the mouse around to make your painting negative."
 msgstr "پنهنجي چترڪاريءَ جو نگيٽِوِ بڻائڻ لاءِ ڪلڪ ڪريو ۽ اُن جي چوطرف مائوس هلايو۔"
 
-#: ../../magic/src/negative.c:80
+#: ../../magic/src/negative.c:87
 msgid "Click to turn your painting into its negative."
 msgstr "پنهنجي چترڪاري نگيٽو ۾ بدلائڻ لاءِ ڪل ڪريو۔"
 
-#: ../../magic/src/negative.c:83
+#: ../../magic/src/negative.c:90
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to change the color of parts of your "
@@ -1830,13 +1865,13 @@ msgid ""
 msgstr ""
 "پنهنجي تصوير جي حصن جو رنگ بدلائڻ لاءِ اُنهن مٿان ڪلڪ ڪريو ۽ مائوس هلايو۔"
 
-#: ../../magic/src/negative.c:84
+#: ../../magic/src/negative.c:92
 msgid ""
 "Click to turn all colors in your painting into their opposites -- their "
 "complementary colors."
 msgstr ""
 
-#: ../../magic/src/noise.c:66
+#: ../../magic/src/noise.c:65
 msgid "Noise"
 msgstr "شورُ"
 
@@ -1850,39 +1885,39 @@ msgstr "پنهنجي تصوير جي حصن ۾ شورُ شامل ڪرڻ لاءِ
 msgid "Click to add noise to your entire picture."
 msgstr "پنهنجي سموريءَ تصوير ۾ شور شامل ڪريو۔"
 
-#: ../../magic/src/perspective.c:161
+#: ../../magic/src/perspective.c:170
 msgid "Perspective"
 msgstr "منظرُ"
 
-#: ../../magic/src/perspective.c:162
+#: ../../magic/src/perspective.c:171
 msgid "Panels"
 msgstr ""
 
-#: ../../magic/src/perspective.c:163
+#: ../../magic/src/perspective.c:172
 #, fuzzy
 #| msgid "Zoom"
 msgid "Tile Zoom"
 msgstr "زوم"
 
-#: ../../magic/src/perspective.c:164
+#: ../../magic/src/perspective.c:173
 msgid "Zoom"
 msgstr "زوم"
 
-#: ../../magic/src/perspective.c:165
+#: ../../magic/src/perspective.c:174
 msgid "Rush"
 msgstr ""
 
-#: ../../magic/src/perspective.c:169
+#: ../../magic/src/perspective.c:179
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "توهين جيڏانهن تصوير ڦهلائڻ چاهيو ٿا اُنهن ڪنڊن تي ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/perspective.c:171
+#: ../../magic/src/perspective.c:181
 #, fuzzy
 #| msgid "Click to turn your painting into its negative."
 msgid "Click to turn your picture into 2-by-2 panels."
 msgstr "پنهنجي چترڪاري نگيٽو ۾ بدلائڻ لاءِ ڪل ڪريو۔"
 
-#: ../../magic/src/perspective.c:173
+#: ../../magic/src/perspective.c:184
 #, fuzzy
 #| msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgid ""
@@ -1891,59 +1926,59 @@ msgid ""
 msgstr ""
 "تصوير جي اندر زوم ڪرڻ لاءِ ڪلڪ ڪريو ۽ مٿي گهليو ۽ ٻاهر زوم ڪرڻ لاءِ هيٺ گهليو۔"
 
-#: ../../magic/src/perspective.c:175
+#: ../../magic/src/perspective.c:187
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgstr ""
 "تصوير جي اندر زوم ڪرڻ لاءِ ڪلڪ ڪريو ۽ مٿي گهليو ۽ ٻاهر زوم ڪرڻ لاءِ هيٺ گهليو۔"
 
-#: ../../magic/src/perspective.c:177
+#: ../../magic/src/perspective.c:190
 #, fuzzy
 #| msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgid "Click and drag up to rush in or drag down to rush out the picture."
 msgstr ""
 "تصوير جي اندر زوم ڪرڻ لاءِ ڪلڪ ڪريو ۽ مٿي گهليو ۽ ٻاهر زوم ڪرڻ لاءِ هيٺ گهليو۔"
 
-#: ../../magic/src/pixels.c:107
+#: ../../magic/src/pixels.c:114
 msgid "Pixels"
 msgstr ""
 
-#: ../../magic/src/pixels.c:119
+#: ../../magic/src/pixels.c:129
 #, fuzzy
 #| msgid "Click and move to draw large bricks."
 msgid "Click and drag to draw large pixels."
 msgstr "وڏيون سرون رچڻ لاءِ ڪلڪ ڪريو ۽ هلايو۔"
 
-#: ../../magic/src/puzzle.c:106
+#: ../../magic/src/puzzle.c:116
 msgid "Puzzle"
 msgstr "مونجهارو"
 
-#: ../../magic/src/puzzle.c:118
+#: ../../magic/src/puzzle.c:132
 msgid "Click the part of your picture where would you like a puzzle."
 msgstr "پنهنجي تصوير جي جنهن حصي ۾ توهين مونجهارو چاهيو ٿا، اُتي ڪلڪ ڪريو۔"
 
-#: ../../magic/src/puzzle.c:119
+#: ../../magic/src/puzzle.c:133
 msgid "Click to make a puzzle in fullscreen mode."
 msgstr "سموريءَ اِسڪرن جي ڍنگ ۾ مونجهارو رچڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/rails.c:132
+#: ../../magic/src/rails.c:159
 msgid "Rails"
 msgstr "پٽا"
 
-#: ../../magic/src/rails.c:142
+#: ../../magic/src/rails.c:174
 msgid "Click and drag to draw train track rails on your picture."
 msgstr "پنهنجي تصوير ۽ ريل جي پٽن جو نقش رچڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/rainbow.c:138
+#: ../../magic/src/rainbow.c:148
 msgid "Rainbow"
 msgstr "اِنڊلٺ"
 
-#: ../../magic/src/rainbow.c:140
+#: ../../magic/src/rainbow.c:152
 #, fuzzy
 #| msgid "Rainbow"
 msgid "Smooth Rainbow"
 msgstr "اِنڊلٺ"
 
-#: ../../magic/src/rainbow.c:153
+#: ../../magic/src/rainbow.c:168
 msgid "You can draw in rainbow colors!"
 msgstr "توهين انڊلٺ جي رنگن ۾ نقش ڪڍي سگهو ٿا!"
 
@@ -1959,15 +1994,15 @@ msgstr "پنهنجي تصوير ۾ برسات جي بوند رکڻ لاءِ ڪل
 msgid "Click to cover your picture with rain drops."
 msgstr "پنهنجي تصوير برسات جي بوندن سان ڀرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/realrainbow.c:99
+#: ../../magic/src/realrainbow.c:115
 msgid "Real Rainbow"
 msgstr "حقيقي اِنڊلٺ"
 
-#: ../../magic/src/realrainbow.c:101
+#: ../../magic/src/realrainbow.c:117
 msgid "ROYGBIV Rainbow"
 msgstr "ROYGBIV اِنڊلٺ"
 
-#: ../../magic/src/realrainbow.c:114
+#: ../../magic/src/realrainbow.c:132
 msgid ""
 "Click where you want your rainbow to start, drag to where you want it to "
 "end, and then let go to draw a rainbow."
@@ -1975,11 +2010,11 @@ msgstr ""
 "توهين ايتي ڪلڪ ڪريو جتان اِنڊلٺ شروع ڪرڻ چاهيو ٿا، اوستائين گهليو جتي پوري "
 "ڪرڻ چاهيو ٿا، ۽ پوءِ اِنڊلٺ جو نقش ٺهڻ ڏيو۔"
 
-#: ../../magic/src/reflection.c:110
+#: ../../magic/src/reflection.c:117
 msgid "Reflection"
 msgstr ""
 
-#: ../../magic/src/reflection.c:120
+#: ../../magic/src/reflection.c:132
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse to add a mosaic effect to parts of your picture."
@@ -1987,39 +2022,51 @@ msgid "Click and drag the mouse around to add a reflection to your picture."
 msgstr ""
 "پنهنجي تصوير جي حصن ۾ ٽڪرين جي جڙتڪاريءَ جو اثر شامل ڪرڻ لاءِ ڪلڪ ڪريو ۽ هلايو۔"
 
-#: ../../magic/src/ripples.c:103
+#: ../../magic/src/ripples.c:111
 msgid "Ripples"
 msgstr "ڇوليون"
 
-#: ../../magic/src/ripples.c:115
+#: ../../magic/src/ripples.c:127
 msgid "Click to make ripples appear over your picture."
 msgstr "پنهنجي تصوير ۾ ڇوليون نظر اچڻ جي رچنا ڪرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/rosette.c:118
+#: ../../magic/src/rivulet.c:143
+msgid "Rivulet"
+msgstr ""
+
+#: ../../magic/src/rivulet.c:156
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+msgid "Click and drag downward to add water rivulets to your drawing"
+msgstr ""
+"پنهنجي تصوير جي حصن ۾ ٽڪرين جي جڙتڪاريءَ جو اثر شامل ڪرڻ لاءِ ڪلڪ ڪريو ۽ هلايو۔"
+
+#: ../../magic/src/rosette.c:131
 msgid "Rosette"
 msgstr "ربين جو گُلُ"
 
-#: ../../magic/src/rosette.c:120
+#: ../../magic/src/rosette.c:133
 msgid "Picasso"
 msgstr "پڪاسو"
 
-#: ../../magic/src/rosette.c:131
+#: ../../magic/src/rosette.c:146
 msgid "Click and start drawing your rosette."
 msgstr "ڪلڪ ڪريو ۽ پنهنجي ربين جي گل جو نقس ڪڍڻ شروع ڪريو"
 
-#: ../../magic/src/rosette.c:133
+#: ../../magic/src/rosette.c:148
 msgid "You can draw just like Picasso!"
 msgstr "توهين بلڪل پڪاسو جيان تصوير ٺاهي سگهو ٿا!"
 
-#: ../../magic/src/sharpen.c:76
+#: ../../magic/src/sharpen.c:75
 msgid "Edges"
 msgstr "ڪناريون"
 
-#: ../../magic/src/sharpen.c:77
+#: ../../magic/src/sharpen.c:76
 msgid "Sharpen"
 msgstr "تکو"
 
-#: ../../magic/src/sharpen.c:78
+#: ../../magic/src/sharpen.c:77
 msgid "Silhouette"
 msgstr "پس منظر جو خاڪو"
 
@@ -2043,67 +2090,66 @@ msgstr "پنهنجي تصوير جا حصا تِکا ڪرڻ لاءِ ڪلڪ ڪر
 msgid "Click to sharpen the entire picture."
 msgstr "پنهنجي سموري تصوير تکي ڪرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/sharpen.c:86
+#: ../../magic/src/sharpen.c:87
 #, fuzzy
 #| msgid "Click and move the mouse to create a black and white silhouette."
 msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr "پس منظر جو خاڪو ڪارو ۽ اَڇو خلقڻ لاءِ ڪلڪ ڪريو ۽ ماءوس هلايو۔"
 
-#: ../../magic/src/sharpen.c:87
+#: ../../magic/src/sharpen.c:89
 msgid "Click to create a black and white silhouette of your entire picture."
 msgstr "پنهنجي سموريءَ تصوير جي پس منظر جو خاڪو ڪارو ۽ اَڇو خلقڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/shift.c:107
+#: ../../magic/src/shift.c:115
 msgid "Shift"
 msgstr "ڦيرائي رکو"
 
-#: ../../magic/src/shift.c:119
+#: ../../magic/src/shift.c:132
 msgid "Click and drag to shift your picture around on the canvas."
 msgstr "پنهنجي تصوير ڪينواس تي ڦيرائي رکڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/smudge.c:103
+#: ../../magic/src/smudge.c:110
 msgid "Smudge"
 msgstr "لينگهو"
 
 #. if (which == 1)
-#: ../../magic/src/smudge.c:105
+#: ../../magic/src/smudge.c:112
 msgid "Wet Paint"
 msgstr "آلو رنگ"
 
-#: ../../magic/src/smudge.c:121
+#: ../../magic/src/smudge.c:131
 #, fuzzy
 #| msgid "Click and move the mouse around to smudge the picture."
 msgid "Click and drag the mouse around to smudge the picture."
 msgstr "تصوير تي لينگها ڪڍڻ لاءِ اين مٿان ڪلڪ ڪريو ۽ مائوس هلايو۔"
 
-#. if (which == 1)
-#: ../../magic/src/smudge.c:123
+#: ../../magic/src/smudge.c:135
 #, fuzzy
 #| msgid "Click and move the mouse around to draw with wet, smudgy paint."
 msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr "آلي ۽ لينگهن واري رنگ سان نقش ڪڍڻ لاءِ ڪلڪ ڪريو ۽ مائوس هلايو۔"
 
-#: ../../magic/src/snow.c:71
+#: ../../magic/src/snow.c:70
 msgid "Snow Ball"
 msgstr "برف جو گولو"
 
-#: ../../magic/src/snow.c:72
+#: ../../magic/src/snow.c:71
 msgid "Snow Flake"
 msgstr "برف جي پرت"
 
-#: ../../magic/src/snow.c:76
+#: ../../magic/src/snow.c:75
 msgid "Click to add snow balls to your picture."
 msgstr "پنهنجي تصوير ۾ برف جا گولا شامل ڪرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/snow.c:77
+#: ../../magic/src/snow.c:76
 msgid "Click to add snow flakes to your picture."
 msgstr "پنهنجي تصوير ۾ برف جون پرتون شامل ڪرڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/stretch.c:107
+#: ../../magic/src/stretch.c:120
 msgid "Stretch"
 msgstr ""
 
-#: ../../magic/src/stretch.c:119
+#: ../../magic/src/stretch.c:135
 #, fuzzy
 #| msgid ""
 #| "Click and drag to make parts of your picture look like they are on "
@@ -2112,19 +2158,19 @@ msgid ""
 "Click and drag to stretch part of your picture vertically or horizontally."
 msgstr "پنهنجي تصوير تي واچوڙي واري قيف جو نقش ڪڍڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/string.c:129
+#: ../../magic/src/string.c:145
 msgid "String edges"
 msgstr "ڪناريون پوئيو"
 
-#: ../../magic/src/string.c:132
+#: ../../magic/src/string.c:148
 msgid "String corner"
 msgstr "ڪنڊ پوئيو"
 
-#: ../../magic/src/string.c:135
+#: ../../magic/src/string.c:151
 msgid "String 'V'"
 msgstr "'V' پوئيو"
 
-#: ../../magic/src/string.c:151
+#: ../../magic/src/string.c:169
 msgid ""
 "Click and drag to draw string art. Drag top-bottom to draw less or more "
 "lines, left or right to make a bigger hole."
@@ -2132,19 +2178,70 @@ msgstr ""
 "پوئڻ جي ڪلا رچڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔ ٿوريون يا گهڻيون ليڪون پائڻ لاءِ مٿ - "
 "تر گهليو، وڌيڪ وڏا ٽنگ بڻائڻ لاءِ کاٻي يا ساڄي پاسي گهليو۔"
 
-#: ../../magic/src/string.c:154
+#: ../../magic/src/string.c:174
 msgid "Click and drag to draw arrows made of string art."
 msgstr "پوئڻ جي ڪلا سان تير رچڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/string.c:157
+#: ../../magic/src/string.c:177
 msgid "Draw string art arrows with free angles."
 msgstr "بي روڪ ڪنڊن سان پوئڻ جي ڪلا وارن نيرن جا نقش ڪڍو۔"
 
-#: ../../magic/src/tint.c:74
+#: ../../magic/src/swirls.c:30
+#, fuzzy
+#| msgid "Circle"
+msgid "Circles"
+msgstr "گولُ"
+
+#: ../../magic/src/swirls.c:31
+msgid "Rays"
+msgstr ""
+
+#: ../../magic/src/swirls.c:32
+msgid "Fur"
+msgstr ""
+
+#: ../../magic/src/swirls.c:37
+#, fuzzy
+#| msgid ""
+#| "Click and drag to make parts of your picture look like they are on "
+#| "television."
+msgid ""
+"Click and drag to transform parts of your picture to circular brushstrokes."
+msgstr "پنهنجي تصوير تي واچوڙي واري قيف جو نقش ڪڍڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
+
+#: ../../magic/src/swirls.c:38
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
+msgid "Click to turn your entire picture into circular brushstrokes."
+msgstr "ليڪن واري نقش ۾ تصوير بدلائڻ لاءِ ڪلڪ ڪريو ۽ اين جي چوطرف مائوس هلايو "
+
+#: ../../magic/src/swirls.c:41
+#, fuzzy
+#| msgid ""
+#| "Click and drag to make parts of your picture look like they are on "
+#| "television."
+msgid "Click and drag to transform parts of your picture to brushstroke rays."
+msgstr "پنهنجي تصوير تي واچوڙي واري قيف جو نقش ڪڍڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
+
+#: ../../magic/src/swirls.c:42
+#, fuzzy
+#| msgid ""
+#| "Click and move the mouse around to turn the picture into a chalk drawing."
+msgid "Click to turn your entire picture into brushstroke rays."
+msgstr "ليڪن واري نقش ۾ تصوير بدلائڻ لاءِ ڪلڪ ڪريو ۽ اين جي چوطرف مائوس هلايو "
+
+#: ../../magic/src/swirls.c:45
+#, fuzzy
+#| msgid "Click and drag to draw train track rails on your picture."
+msgid "Click and drag to add fur to your picture."
+msgstr "پنهنجي تصوير ۽ ريل جي پٽن جو نقش رچڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
+
+#: ../../magic/src/tint.c:73
 msgid "Tint"
 msgstr "هلڪو رنگ"
 
-#: ../../magic/src/tint.c:75
+#: ../../magic/src/tint.c:74
 msgid "Color & White"
 msgstr "رنگين ۽ ڪارو"
 
@@ -2162,7 +2259,7 @@ msgstr ""
 msgid "Click to change the color of your entire picture."
 msgstr "پنهنجي سموريءَ تصوير جو رنگ بدلائڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/tint.c:81
+#: ../../magic/src/tint.c:82
 #, fuzzy
 #| msgid ""
 #| "Click and move the mouse around to turn parts of your picture into white "
@@ -2174,49 +2271,49 @@ msgstr ""
 "پنهنجي تصوير جي جن حصن ۾ پنهنجي پسند جو اڇو ۽ ٻيو ڪو رنگ بدلائي رکڻ چاهيو ٿا "
 "اُنهن مٿان ڪلڪ ڪريو ۽ مائوس هلايو۔"
 
-#: ../../magic/src/tint.c:82
+#: ../../magic/src/tint.c:84
 msgid "Click to turn your entire picture into white and a color you choose."
 msgstr "پنهنجي سموري تصور اَڇي ۽ پنهنجي پسند جي رنگ ۾ بدلائڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/toothpaste.c:68
+#: ../../magic/src/toothpaste.c:67
 msgid "Toothpaste"
 msgstr "ٽوٿپيشٽ"
 
-#: ../../magic/src/toothpaste.c:76
+#: ../../magic/src/toothpaste.c:75
 msgid "Click and drag to squirt toothpaste onto your picture."
 msgstr "پنهنجي تصوير تي پچڪاريءَ جيان ٽوٿپيشٽ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/tornado.c:154
+#: ../../magic/src/tornado.c:168
 msgid "Tornado"
 msgstr "واچوڙو"
 
-#: ../../magic/src/tornado.c:166
+#: ../../magic/src/tornado.c:185
 msgid "Click and drag to draw a tornado funnel on your picture."
 msgstr "پنهنجي تصوير تي واچوڙي واري قيف جو نقش ڪڍڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/tv.c:99
+#: ../../magic/src/tv.c:111
 msgid "TV"
 msgstr "ٽي۔وي"
 
-#: ../../magic/src/tv.c:110
+#: ../../magic/src/tv.c:125
 msgid ""
 "Click and drag to make parts of your picture look like they are on "
 "television."
 msgstr "پنهنجي تصوير تي واچوڙي واري قيف جو نقش ڪڍڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/tv.c:113
+#: ../../magic/src/tv.c:130
 msgid "Click to make your picture look like it's on television."
 msgstr "پنهنجي تصوري ٽيلوزن تي هجڻ جهڙي بڻائڻ لاءِ ڪلڪ ڪريو۔"
 
-#: ../../magic/src/waves.c:111
+#: ../../magic/src/waves.c:122
 msgid "Waves"
 msgstr "لهرون"
 
-#: ../../magic/src/waves.c:113
+#: ../../magic/src/waves.c:124
 msgid "Wavelets"
 msgstr "ڇول"
 
-#: ../../magic/src/waves.c:122
+#: ../../magic/src/waves.c:134
 msgid ""
 "Click to make the picture horizontally wavy. Click toward the top for "
 "shorter waves, the bottom for taller waves, the left for small waves, and "
@@ -2225,7 +2322,7 @@ msgstr ""
 "َتصوير ايفقي لهرن واري رچڻ لاءِ ڪلڪ ڪريو۔ گهٽ اوچين لهرن لاءِ مٿ۔ تي، اوچين "
 "لهرن لاءِ تر تي ننڍين لهرن لاءِ کاٻي پاسي ۽ ڊگهين لهرن لاءِ ساڄي پاسي ڪلڪ ڪريو۔"
 
-#: ../../magic/src/waves.c:125
+#: ../../magic/src/waves.c:137
 msgid ""
 "Click to make the picture vertically wavy. Click toward the top for shorter "
 "waves, the bottom for taller waves, the left for small waves, and the right "
@@ -2234,23 +2331,28 @@ msgstr ""
 "تصوير عموي لهرن واري رچڻ لاءِ ڪلڪ ڪريو۔ گهٽ اوچين لهرن لاءِ مٿ تي، اوچين لهرن "
 "لاءِ تر تي، ننڍين لهرن لاءِ کاٻي پاسي ۽ ڊگهين لهرن لاءِ ساڄي پاسي ڪلڪ ڪريو۔"
 
-#: ../../magic/src/xor.c:92
+#: ../../magic/src/xor.c:100
 #, fuzzy
 #| msgid "Colors"
 msgid "Xor Colors"
 msgstr "رنگ"
 
-#: ../../magic/src/xor.c:103
+#: ../../magic/src/xor.c:113
 #, fuzzy
 #| msgid "Click and drag to draw arrows made of string art."
 msgid "Click and drag to draw a XOR effect"
 msgstr "پوئڻ جي ڪلا سان تير رچڻ لاءِ ڪلڪ ڪريو ۽ گهليو۔"
 
-#: ../../magic/src/xor.c:105
+#: ../../magic/src/xor.c:117
 #, fuzzy
 #| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "پنهنجي سموريءَ تصوير ۾ ٽڪرين جي جڙتڪاريءَ جو اَثر شامل ڪرڻ لاءِ۔"
+
+#, fuzzy
+#~| msgid "Tux Paint"
+#~ msgid "tuxpaint"
+#~ msgstr "ٽڪس رنگ"
 
 #~ msgid "Pick a color."
 #~ msgstr "رنگ چونڊيو۔"

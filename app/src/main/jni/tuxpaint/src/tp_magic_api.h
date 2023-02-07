@@ -165,6 +165,11 @@ typedef struct magic_api_t {
      'w' and 'h' elements to confirm the actual size) */
   SDL_Surface * (*scale)(SDL_Surface *, int, int, int);
 
+  /* Returns a new surface containing the rotated/scaled contents of
+     an input surface, rotated to r degrees, scaled to the w dimension and keeping its aspect ratio. */
+
+  SDL_Surface * (*rotate_scale)(SDL_Surface *, int, int);
+
   /* Returns whether a particular position of the canvas has been labeled
      as 'touched,' since the mouse was first clicked; this function ALSO
      assigns the position as touched, until the next time the mouse is
@@ -179,7 +184,7 @@ typedef struct magic_api_t {
    If Tux Paint deems you compatible, it will call your 'XYZ_init()' (etc.)
    and you will be active. */
 
-#define TP_MAGIC_API_VERSION 0x00000005
+#define TP_MAGIC_API_VERSION 0x00000007
 
 #ifndef ATTRIBUTE_UNUSED
 #define ATTRIBUTE_UNUSED __attribute__ ((__unused__))

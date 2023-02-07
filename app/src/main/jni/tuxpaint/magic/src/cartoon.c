@@ -4,9 +4,9 @@
   Cartoon Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
-  http://www.tuxpaint.org/
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -23,8 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: November 8, 2021
-  $Id$
+  Last updated: January 25, 2023
 */
 
 #include <stdio.h>
@@ -39,7 +38,7 @@
 /* Our globals: */
 
 static Mix_Chunk *cartoon_snd;
-SDL_Surface * result_surf;
+SDL_Surface *result_surf;
 
 #define OUTLINE_THRESH 48
 
@@ -51,20 +50,27 @@ SDL_Surface *cartoon_get_icon(magic_api * api, int which);
 char *cartoon_get_name(magic_api * api, int which);
 int cartoon_get_group(magic_api * api, int which);
 char *cartoon_get_description(magic_api * api, int which, int mode);
-void cartoon_apply_colors(magic_api * api, SDL_Surface * surf, int xx, int yy);
+void cartoon_apply_colors(magic_api * api, SDL_Surface * surf, int xx,
+                          int yy);
 void cartoon_apply_outline(magic_api * api, int xx, int yy);
-static void do_cartoon(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
+static void do_cartoon(void *ptr, int which, SDL_Surface * canvas,
+                       SDL_Surface * last, int x, int y);
 void cartoon_drag(magic_api * api, int which, SDL_Surface * canvas,
-                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
-void cartoon_click(magic_api * api, int which, int mode,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
-void cartoon_release(magic_api * api, int which,
-                     SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
+                  SDL_Surface * last, int ox, int oy, int x, int y,
+                  SDL_Rect * update_rect);
+void cartoon_click(magic_api * api, int which, int mode, SDL_Surface * canvas,
+                   SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
+void cartoon_release(magic_api * api, int which, SDL_Surface * canvas,
+                     SDL_Surface * last, int x, int y,
+                     SDL_Rect * update_rect);
 void cartoon_shutdown(magic_api * api);
-void cartoon_set_color(magic_api * api, Uint8 r, Uint8 g, Uint8 b);
+void cartoon_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                       SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 int cartoon_requires_colors(magic_api * api, int which);
-void cartoon_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
-void cartoon_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
+void cartoon_switchin(magic_api * api, int which, int mode,
+                      SDL_Surface * canvas);
+void cartoon_switchout(magic_api * api, int which, int mode,
+                       SDL_Surface * canvas);
 int cartoon_modes(magic_api * api, int which);
 
 
@@ -74,7 +80,8 @@ int cartoon_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/cartoon.wav", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/cartoon.wav",
+           api->data_directory);
   cartoon_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -96,39 +103,48 @@ SDL_Surface *cartoon_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/cartoon.png", api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/cartoon.png",
+           api->data_directory);
 
   return (IMG_Load(fname));
 }
 
 // Return our names, localized:
-char *cartoon_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *cartoon_get_name(magic_api * api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Cartoon")));
 }
 
 // Return our groups
-int cartoon_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int cartoon_get_group(magic_api * api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_COLOR_FILTERS;
 }
 
 // Return our descriptions, localized:
-char *cartoon_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+char *cartoon_get_description(magic_api * api ATTRIBUTE_UNUSED,
+                              int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
-    {
-      return (strdup(gettext_noop("Click and drag the mouse around to turn the picture into a cartoon.")));
-    }
+  {
+    return (strdup
+            (gettext_noop
+             ("Click and drag the mouse around to turn the picture into a cartoon.")));
+  }
   else
-    {
-      return (strdup(gettext_noop("Click to turn the entire picture into a cartoon.")));
-    }
+  {
+    return (strdup
+            (gettext_noop
+             ("Click to turn the entire picture into a cartoon.")));
+  }
 }
 
 // Do the effect:
 
-void cartoon_apply_colors(magic_api * api, SDL_Surface * surf, int xx, int yy) {
+void cartoon_apply_colors(magic_api * api, SDL_Surface * surf, int xx, int yy)
+{
   Uint8 r, g, b;
   float hue, sat, val;
 
@@ -149,125 +165,143 @@ void cartoon_apply_colors(magic_api * api, SDL_Surface * surf, int xx, int yy) {
   sat = floor(sat * 4) / 4;
 
   api->hsvtorgb(hue, sat, val, &r, &g, &b);
-  api->putpixel(result_surf, xx, yy, SDL_MapRGB(result_surf->format, r, g, b));
+  api->putpixel(result_surf, xx, yy,
+                SDL_MapRGB(result_surf->format, r, g, b));
 }
 
 
-void cartoon_apply_outline(magic_api * api, int xx, int yy) {
+void cartoon_apply_outline(magic_api * api, int xx, int yy)
+{
   Uint8 r, g, b;
   Uint8 r1, g1, b1, r2, g2, b2;
 
-  SDL_GetRGB(api->getpixel(result_surf, xx, yy), result_surf->format, &r, &g, &b);
-  SDL_GetRGB(api->getpixel(result_surf, xx + 1, yy), result_surf->format, &r1, &g1, &b1);
-  SDL_GetRGB(api->getpixel(result_surf, xx + 1, yy + 1), result_surf->format, &r2, &g2, &b2);
+  SDL_GetRGB(api->getpixel(result_surf, xx, yy), result_surf->format, &r, &g,
+             &b);
+  SDL_GetRGB(api->getpixel(result_surf, xx + 1, yy), result_surf->format, &r1,
+             &g1, &b1);
+  SDL_GetRGB(api->getpixel(result_surf, xx + 1, yy + 1), result_surf->format,
+             &r2, &g2, &b2);
 
   if (abs(((r + g + b) / 3) - (r1 + g1 + b1) / 3) > OUTLINE_THRESH
       || abs(((r + g + b) / 3) - (r2 + g2 + b2) / 3) >
       OUTLINE_THRESH || abs(r - r1) > OUTLINE_THRESH
       || abs(g - g1) > OUTLINE_THRESH
       || abs(b - b1) > OUTLINE_THRESH
-      || abs(r - r2) > OUTLINE_THRESH || abs(g - g2) > OUTLINE_THRESH || abs(b - b2) > OUTLINE_THRESH)
-    {
-      api->putpixel(result_surf, xx - 1, yy, SDL_MapRGB(result_surf->format, 0, 0, 0));
-      api->putpixel(result_surf, xx, yy - 1, SDL_MapRGB(result_surf->format, 0, 0, 0));
-      api->putpixel(result_surf, xx - 1, yy - 1, SDL_MapRGB(result_surf->format, 0, 0, 0));
-    }
+      || abs(r - r2) > OUTLINE_THRESH || abs(g - g2) > OUTLINE_THRESH
+      || abs(b - b2) > OUTLINE_THRESH)
+  {
+    api->putpixel(result_surf, xx - 1, yy,
+                  SDL_MapRGB(result_surf->format, 0, 0, 0));
+    api->putpixel(result_surf, xx, yy - 1,
+                  SDL_MapRGB(result_surf->format, 0, 0, 0));
+    api->putpixel(result_surf, xx - 1, yy - 1,
+                  SDL_MapRGB(result_surf->format, 0, 0, 0));
+  }
 }
 
 
-static void do_cartoon(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+static void do_cartoon(void *ptr, int which ATTRIBUTE_UNUSED,
+                       SDL_Surface * canvas,
+                       SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int xx, yy;
 
   for (yy = y - 16; yy < y + 16; yy = yy + 1)
+  {
+    for (xx = x - 16; xx < x + 16; xx = xx + 1)
     {
-      for (xx = x - 16; xx < x + 16; xx = xx + 1)
-        {
-          if (api->in_circle(xx - x, yy - y, 16))
-            {
-              api->putpixel(canvas, xx, yy, api->getpixel(result_surf, xx, yy));
-            }
-        }
+      if (api->in_circle(xx - x, yy - y, 16))
+      {
+        api->putpixel(canvas, xx, yy, api->getpixel(result_surf, xx, yy));
+      }
     }
+  }
 }
 
 // Affect the canvas on drag:
 void cartoon_drag(magic_api * api, int which, SDL_Surface * canvas,
-                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+                  SDL_Surface * last, int ox, int oy, int x, int y,
+                  SDL_Rect * update_rect)
 {
   if (ox > x)
-    {
-      int tmp = ox;
+  {
+    int tmp = ox;
 
-      ox = x;
-      x = tmp;
-    }
+    ox = x;
+    x = tmp;
+  }
   if (oy > y)
-    {
-      int tmp = oy;
+  {
+    int tmp = oy;
 
-      oy = y;
-      y = tmp;
-    }
+    oy = y;
+    y = tmp;
+  }
 
-  api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_cartoon);
+  api->line((void *) api, which, canvas, last, ox, oy, x, y, 1, do_cartoon);
 
   update_rect->x = ox - 16;
   update_rect->y = oy - 16;
   update_rect->w = (x + 16) - update_rect->x;
-  update_rect->h = (y + 16) - update_rect->h;
+  update_rect->h = (y + 16) - update_rect->y;
 
   api->playsound(cartoon_snd, (x * 255) / canvas->w, 255);
 }
 
 // Affect the canvas on click:
 void cartoon_click(magic_api * api, int which, int mode,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+                   SDL_Surface * canvas, SDL_Surface * last, int x, int y,
+                   SDL_Rect * update_rect)
 {
   for (y = 0; y < canvas->h; y++)
+  {
+    if (y % 10 == 0)
     {
-      if (y % 10 == 0) {
-        api->update_progress_bar();
-      }
-
-      for (x = 0; x < canvas->w; x++)
-        {
-          cartoon_apply_colors(api, last, x, y);
-        }
+      api->update_progress_bar();
     }
+
+    for (x = 0; x < canvas->w; x++)
+    {
+      cartoon_apply_colors(api, last, x, y);
+    }
+  }
   for (y = 0; y < canvas->h; y++)
+  {
+    if (y % 10 == 0)
     {
-      if (y % 10 == 0) {
-        api->update_progress_bar();
-      }
-
-      for (x = 0; x < canvas->w; x++)
-        {
-          cartoon_apply_outline(api, x, y);
-        }
+      api->update_progress_bar();
     }
+
+    for (x = 0; x < canvas->w; x++)
+    {
+      cartoon_apply_outline(api, x, y);
+    }
+  }
 
   if (mode == MODE_PAINT)
-    {
-      cartoon_drag(api, which, canvas, last, x, y, x, y, update_rect);
-    }
+  {
+    cartoon_drag(api, which, canvas, last, x, y, x, y, update_rect);
+  }
   else
-    {
-      api->playsound(cartoon_snd, 128, 255);
+  {
+    api->playsound(cartoon_snd, 128, 255);
 
-      SDL_BlitSurface(result_surf, NULL, canvas, NULL);
-      update_rect->x = 0;
-      update_rect->y = 0;
-      update_rect->w = canvas->w;
-      update_rect->h = canvas->h;
-    }
+    SDL_BlitSurface(result_surf, NULL, canvas, NULL);
+    update_rect->x = 0;
+    update_rect->y = 0;
+    update_rect->w = canvas->w;
+    update_rect->h = canvas->h;
+  }
 }
 
 // Affect the canvas on release:
-void cartoon_release(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void cartoon_release(magic_api * api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED,
+                     SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface * last ATTRIBUTE_UNUSED,
+                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED,
+                     SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -279,39 +313,46 @@ void cartoon_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void cartoon_set_color(magic_api * api ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
-                       Uint8 b ATTRIBUTE_UNUSED)
+void cartoon_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                       SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
 {
 }
 
 // Use colors:
-int cartoon_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int cartoon_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
+                            int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void cartoon_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+void cartoon_switchin(magic_api * api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
                       SDL_Surface * canvas)
 {
   Uint32 amask;
 
-  amask = ~(canvas->format->Rmask | canvas->format->Gmask | canvas->format->Bmask);
+  amask =
+    ~(canvas->format->Rmask | canvas->format->Gmask | canvas->format->Bmask);
 
   result_surf = SDL_CreateRGBSurface(SDL_SWSURFACE,
                                      canvas->w,
                                      canvas->h,
                                      canvas->format->BitsPerPixel,
-                                     canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, amask);
+                                     canvas->format->Rmask,
+                                     canvas->format->Gmask,
+                                     canvas->format->Bmask, amask);
 }
 
-void cartoon_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+void cartoon_switchout(magic_api * api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
                        SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
   if (result_surf != NULL)
     SDL_FreeSurface(result_surf);
 }
 
-int cartoon_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int cartoon_modes(magic_api * api ATTRIBUTE_UNUSED,
+                  int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
 }

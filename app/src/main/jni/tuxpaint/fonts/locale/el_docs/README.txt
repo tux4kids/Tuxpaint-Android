@@ -1,9 +1,7 @@
 README.txt for "tuxpaint-ttf-greek"
 Greek TrueType Font (TTF) for Tux Paint
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.newbreedsoftware.com/tuxpaint/
+https://tuxpaint.org/
 
 January 13, 2003 - January 13, 2003
 

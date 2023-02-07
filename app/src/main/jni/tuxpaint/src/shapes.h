@@ -4,9 +4,9 @@
   For Tux Paint
   List of available shapes.
 
-  Copyright (c) 2002-2021 by Bill Kendrick and others
+  Copyright (c) 2002-2022 by Bill Kendrick and others
   bill@newbreedsoftware.com
-  http://www.tuxpaint.org/
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - January 21, 2022
+  June 14, 2002 - December 11, 2022
   $Id$
 */
 
@@ -118,8 +118,8 @@ const int shape_locked[NUM_SHAPES] = {
   0,                            /* Hexagon */
   0,                            /* Heptagon */
   0,                            /* Heptagon */
-  1,                            /* Octagon */ /* FIXME: Consider unlocking? -bjk 2022.01.21 */
-  1,                            /* Octagon */ /* FIXME: Consider unlocking? -bjk 2022.01.21 */
+  1,                            /* Octagon *//* FIXME: Consider unlocking? -bjk 2022.01.21 */
+  1,                            /* Octagon *//* FIXME: Consider unlocking? -bjk 2022.01.21 */
   0,                            /* Rhombus */
   0,                            /* Rhombus */
   0,                            /* 3 points star */
@@ -334,8 +334,10 @@ const char *const shape_tips[NUM_SHAPES] = {
   gettext_noop("A rectangle has four sides and four right angles."),
 
   // Description of a circle
-  gettext_noop("A circle is a curve where all points have the same distance from the center."),
-  gettext_noop("A circle is a curve where all points have the same distance from the center."),
+  gettext_noop
+    ("A circle is a curve where all points have the same distance from the center."),
+  gettext_noop
+    ("A circle is a curve where all points have the same distance from the center."),
 
   // Description of an ellipse
   gettext_noop("An ellipse is a stretched circle."),
@@ -362,8 +364,10 @@ const char *const shape_tips[NUM_SHAPES] = {
   gettext_noop("An octagon has eight equal sides."),
 
   // Description of a rhombus
-  gettext_noop("A rhombus has four equal sides, and opposite sides are parallel."),
-  gettext_noop("A rhombus has four equal sides, and opposite sides are parallel."),
+  gettext_noop
+    ("A rhombus has four equal sides, and opposite sides are parallel."),
+  gettext_noop
+    ("A rhombus has four equal sides, and opposite sides are parallel."),
 
   gettext_noop("A star with 3 points."),
   gettext_noop("A star with 3 points."),
@@ -423,15 +427,18 @@ const char *const shapemode_img_fnames[NUM_SHAPEMODES] = {
 /* String shown when Shapes tool is selected;
    one version for normal ("complex shapes"),
    the other for simplified mode ("simple shapes") */
-enum {
+enum
+{
   SHAPE_COMPLEXITY_NORMAL,
   SHAPE_COMPLEXITY_SIMPLE,
   NUM_SHAPE_COMPLEXITIES
 };
 
 const char *const shape_tool_tips[NUM_SHAPE_COMPLEXITIES] = {
-  gettext_noop("Pick a shape. Click to start drawing, drag, and let go when it is the size and shape you want. Move around to rotate it, and click again to draw it."),
-  gettext_noop("Pick a shape. Click to start drawing, drag, and let go when it is the size and shape you want.")
+  gettext_noop
+    ("Pick a shape. Click to start drawing, drag, and let go when it is the size and shape you want. Move around to rotate it, and click again to draw it."),
+  gettext_noop
+    ("Pick a shape. Click to start drawing, drag, and let go when it is the size and shape you want.")
 };
 
 /* Strings shown when switching between "from center"

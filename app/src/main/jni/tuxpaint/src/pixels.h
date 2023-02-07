@@ -32,7 +32,7 @@
 
 #include "SDL.h"
 
-extern void (*putpixels[]) (SDL_Surface *, int, int, Uint32);
+extern void (*putpixels[])(SDL_Surface *, int, int, Uint32);
 extern Uint32(*getpixels[]) (SDL_Surface *, int, int);
 
 #endif

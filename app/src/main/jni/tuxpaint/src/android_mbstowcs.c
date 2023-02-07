@@ -30,58 +30,67 @@
 #include <string.h>
 
 // This implementation may be simple, but can work fine for all of Android devices
-size_t mbstowcs(wchar_t * __restrict pwcs, const char * __restrict s, size_t n){
-	int length = strnlen (s, n);
-	// w is the index of pwcs, s is the index of s
-	int w = 0, c = 0;
+size_t mbstowcs(wchar_t *__restrict pwcs, const char *__restrict s, size_t n)
+{
+  int length = strnlen(s, n);
+  // w is the index of pwcs, s is the index of s
+  int w = 0, c = 0;
 
-	while (1) {
-		pwcs[w] = '\0';
-		char first = s[c];
-		int len = 0;
-		if ((first & 0x80) == 0) {
-			pwcs[w] = (wchar_t)s[c];
-			len = 1;
-		}
-		else if ((first & 0xe0) == 0xc0) {
-			pwcs[w] |= first & 0x1f;
-			pwcs[w] <<= 6;
-			pwcs[w] |= s[c+1] & 0x3f;
-			len = 2;
-		}
-		else if ((first & 0xf0) == 0xe0) {
-			pwcs[w] |= first & 0x0f;
-			pwcs[w] <<= 6;
-			pwcs[w] |= s[c+1] & 0x3f;
-			pwcs[w] <<= 6;
-			pwcs[w] |= s[c+2] & 0x3f;
-			len = 3;
-		}
-		else if ((first & 0xf8) == 0xf0) {
-			pwcs[w] |= first & 0x07;
-			pwcs[w] <<= 6;
-			pwcs[w] |= s[c+1] & 0x3f;
-			pwcs[w] <<= 6;
-			pwcs[w] |= s[c+2] & 0x3f;
-			pwcs[w] <<= 6;
-			pwcs[w] |= s[c+3] & 0x3f;
-			len = 4;
-		}
-		else {
-			return -1;
-		}
+  while (1)
+  {
+    pwcs[w] = '\0';
+    char first = s[c];
+    int len = 0;
+    if ((first & 0x80) == 0)
+    {
+      pwcs[w] = (wchar_t) s[c];
+      len = 1;
+    }
+    else if ((first & 0xe0) == 0xc0)
+    {
+      pwcs[w] |= first & 0x1f;
+      pwcs[w] <<= 6;
+      pwcs[w] |= s[c + 1] & 0x3f;
+      len = 2;
+    }
+    else if ((first & 0xf0) == 0xe0)
+    {
+      pwcs[w] |= first & 0x0f;
+      pwcs[w] <<= 6;
+      pwcs[w] |= s[c + 1] & 0x3f;
+      pwcs[w] <<= 6;
+      pwcs[w] |= s[c + 2] & 0x3f;
+      len = 3;
+    }
+    else if ((first & 0xf8) == 0xf0)
+    {
+      pwcs[w] |= first & 0x07;
+      pwcs[w] <<= 6;
+      pwcs[w] |= s[c + 1] & 0x3f;
+      pwcs[w] <<= 6;
+      pwcs[w] |= s[c + 2] & 0x3f;
+      pwcs[w] <<= 6;
+      pwcs[w] |= s[c + 3] & 0x3f;
+      len = 4;
+    }
+    else
+    {
+      return -1;
+    }
 
-		c += len;
-		w++;
+    c += len;
+    w++;
 
-		if (c > length){
-			pwcs[w] = '\0';
-			return -1;
-		}
-		if (c == length){
-			pwcs[w] = '\0';
-			return w;
-		}
-	}
+    if (c > length)
+    {
+      pwcs[w] = '\0';
+      return -1;
+    }
+    if (c == length)
+    {
+      pwcs[w] = '\0';
+      return w;
+    }
+  }
 
 }

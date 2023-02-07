@@ -4,9 +4,9 @@
   For Tux Paint
   Language-related functions
 
-  Copyright (c) 2002-2020 by Bill Kendrick and others
+  Copyright (c) 2002-2022 by Bill Kendrick and others
   bill@newbreedsoftware.com
-  http://www.tuxpaint.org/
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 
   $Id$
   
-  June 14, 2002 - July 26, 2020
+  June 14, 2002 - December 11, 2022
 */
 
 
@@ -206,7 +206,9 @@ extern w_langs wished_langs[255];
 /* Function prototypes: */
 
 int get_current_language(void);
-int setup_i18n(const char *restrict lang, const char *restrict locale, int * ptr_num_wished_languages) MUST_CHECK;
+int setup_i18n(const char *restrict lang, const char *restrict locale,
+               int *ptr_num_wished_languages) MUST_CHECK;
+void mysetenv(const char *name, const char *value);
 
 #ifdef NO_SDLPANGO
      int smash_i18n(void) MUST_CHECK;

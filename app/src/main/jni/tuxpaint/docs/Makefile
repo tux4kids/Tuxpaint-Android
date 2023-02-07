@@ -7,7 +7,7 @@
 # Bill Kendrick
 # bill@newbreedsoftware.com
 # 
-# Sept. 4, 2005 - September 18, 2021
+# Sept. 4, 2005 - October 18, 2022
 
 LINKS_OPTIONS:=-dump -codepage utf8
 LINKS:=links $(LINKS_OPTIONS)

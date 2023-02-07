@@ -4,9 +4,9 @@
   Mirror and Flip Magic Tools Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2021 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
-  http://www.tuxpaint.org/
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -23,8 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: September 20, 2021
-  $Id$
+  Last updated: January 25, 2023
 */
 
 #include <stdio.h>
@@ -52,11 +51,15 @@ SDL_Surface *mirror_flip_get_icon(magic_api *, int);
 char *mirror_flip_get_name(magic_api *, int);
 int mirror_flip_get_group(magic_api *, int);
 char *mirror_flip_get_description(magic_api *, int, int);
-void mirror_flip_drag(magic_api *, int, SDL_Surface *, SDL_Surface *, int, int, int, int, SDL_Rect *);
-void mirror_flip_release(magic_api *, int, SDL_Surface *, SDL_Surface *, int, int, int, int, SDL_Rect *);
-void mirror_flip_click(magic_api *, int, int, SDL_Surface *, SDL_Surface *, int, int, SDL_Rect *);
+void mirror_flip_drag(magic_api *, int, SDL_Surface *, SDL_Surface *, int,
+                      int, int, int, SDL_Rect *);
+void mirror_flip_release(magic_api *, int, SDL_Surface *, SDL_Surface *, int,
+                         int, int, int, SDL_Rect *);
+void mirror_flip_click(magic_api *, int, int, SDL_Surface *, SDL_Surface *,
+                       int, int, SDL_Rect *);
 void mirror_flip_shutdown(magic_api *);
-void mirror_flip_set_color(magic_api *, Uint8, Uint8, Uint8);
+void mirror_flip_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                           SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 int mirror_flip_requires_colors(magic_api *, int);
 void mirror_flip_switchin(magic_api *, int, int, SDL_Surface *);
 void mirror_flip_switchout(magic_api *, int, int, SDL_Surface *);
@@ -67,10 +70,12 @@ int mirror_flip_init(magic_api * api)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/mirror.wav", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/mirror.wav",
+           api->data_directory);
   snd_effects[TOOL_MIRROR] = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/flip.wav", api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/flip.wav",
+           api->data_directory);
   snd_effects[TOOL_FLIP] = Mix_LoadWAV(fname);
 
   return (1);
@@ -93,13 +98,15 @@ SDL_Surface *mirror_flip_get_icon(magic_api * api, int which)
   char fname[1024];
 
   if (which == TOOL_MIRROR)
-    {
-      snprintf(fname, sizeof(fname), "%simages/magic/mirror.png", api->data_directory);
-    }
+  {
+    snprintf(fname, sizeof(fname), "%simages/magic/mirror.png",
+             api->data_directory);
+  }
   else if (which == TOOL_FLIP)
-    {
-      snprintf(fname, sizeof(fname), "%simages/magic/flip.png", api->data_directory);
-    }
+  {
+    snprintf(fname, sizeof(fname), "%simages/magic/flip.png",
+             api->data_directory);
+  }
 
   return (IMG_Load(fname));
 }
@@ -116,13 +123,15 @@ char *mirror_flip_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 }
 
 // Return our group (the same):
-int mirror_flip_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int mirror_flip_get_group(magic_api * api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_WARPS;
 }
 
 // Return our descriptions, localized:
-char *mirror_flip_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *mirror_flip_get_description(magic_api * api ATTRIBUTE_UNUSED, int which,
+                                  int mode ATTRIBUTE_UNUSED)
 {
   if (which == TOOL_MIRROR)
     return (strdup(gettext_noop("Click to make a mirror image.")));
@@ -134,19 +143,23 @@ char *mirror_flip_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, i
 
 // We affect the whole canvas, so only do things on click, not drag:
 void mirror_flip_drag(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED,
+                      SDL_Surface * canvas ATTRIBUTE_UNUSED,
                       SDL_Surface * last ATTRIBUTE_UNUSED,
                       int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
-                      int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                      int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED,
+                      SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   // No-op
 }
 
 void mirror_flip_release(magic_api * api ATTRIBUTE_UNUSED,
-                         int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED,
+                         SDL_Surface * canvas ATTRIBUTE_UNUSED,
                          SDL_Surface * last ATTRIBUTE_UNUSED,
                          int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
-                         int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                         int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED,
+                         SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   // No-op
 }
@@ -154,45 +167,46 @@ void mirror_flip_release(magic_api * api ATTRIBUTE_UNUSED,
 // Affect the canvas on click:
 void mirror_flip_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
                        SDL_Surface * canvas, SDL_Surface * last,
-                       int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect)
+                       int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED,
+                       SDL_Rect * update_rect)
 {
   int xx, yy;
   SDL_Rect src, dest;
 
   if (which == TOOL_MIRROR)
+  {
+    for (xx = 0; xx < canvas->w; xx++)
     {
-      for (xx = 0; xx < canvas->w; xx++)
-        {
-          src.x = xx;
-          src.y = 0;
-          src.w = 1;
-          src.h = canvas->h;
+      src.x = xx;
+      src.y = 0;
+      src.w = 1;
+      src.h = canvas->h;
 
-          dest.x = canvas->w - xx - 1;
-          dest.y = 0;
+      dest.x = canvas->w - xx - 1;
+      dest.y = 0;
 
-          SDL_BlitSurface(last, &src, canvas, &dest);
-        }
-
-      api->special_notify(SPECIAL_MIRROR);
+      SDL_BlitSurface(last, &src, canvas, &dest);
     }
+
+    api->special_notify(SPECIAL_MIRROR);
+  }
   else if (which == TOOL_FLIP)
+  {
+    for (yy = 0; yy < canvas->h; yy++)
     {
-      for (yy = 0; yy < canvas->h; yy++)
-        {
-          src.x = 0;
-          src.y = yy;
-          src.w = canvas->w;
-          src.h = 1;
+      src.x = 0;
+      src.y = yy;
+      src.w = canvas->w;
+      src.h = 1;
 
-          dest.x = 0;
-          dest.y = canvas->h - yy - 1;
+      dest.x = 0;
+      dest.y = canvas->h - yy - 1;
 
-          SDL_BlitSurface(last, &src, canvas, &dest);
-        }
-
-      api->special_notify(SPECIAL_FLIP);
+      SDL_BlitSurface(last, &src, canvas, &dest);
     }
+
+    api->special_notify(SPECIAL_FLIP);
+  }
 
   update_rect->x = 0;
   update_rect->y = 0;
@@ -212,28 +226,34 @@ void mirror_flip_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // We don't use colors:
-void mirror_flip_set_color(magic_api * api ATTRIBUTE_UNUSED,
-                           Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED)
+void mirror_flip_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                           SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
 {
 }
 
 // We don't use colors:
-int mirror_flip_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int mirror_flip_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
+                                int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
 void mirror_flip_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                          int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                          int which ATTRIBUTE_UNUSED,
+                          int mode ATTRIBUTE_UNUSED,
+                          SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 void mirror_flip_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                           int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                           int which ATTRIBUTE_UNUSED,
+                           int mode ATTRIBUTE_UNUSED,
+                           SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int mirror_flip_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int mirror_flip_modes(magic_api * api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED)
 {
   return (MODE_FULLSCREEN);
 }

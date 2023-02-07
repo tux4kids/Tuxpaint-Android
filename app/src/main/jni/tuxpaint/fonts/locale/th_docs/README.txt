@@ -1,9 +1,7 @@
 README.txt for "tuxpaint-ttf-thai"
 Thai TrueType Font (TTF) for Tux Paint
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.newbreedsoftware.com/tuxpaint/
+https://tuxpaint.org/
 
 July 14, 2005 - July 14, 2005
 

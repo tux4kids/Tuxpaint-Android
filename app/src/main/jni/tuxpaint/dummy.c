@@ -11,7 +11,7 @@ static TYPE x UNUSED;
 #endif
 
 #ifdef SYMBOL
-static int exists UNUSED = ! !SYMBOL;
+static int exists UNUSED = !!SYMBOL;
 #endif
 
 int main(int argc UNUSED, char *argv[]UNUSED)

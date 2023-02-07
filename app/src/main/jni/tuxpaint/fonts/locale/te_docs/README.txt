@@ -1,9 +1,7 @@
 README.txt for "tuxpaint-ttf-telugu"
 Telugu TrueType Font (TTF) for Tux Paint
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.tuxpaint.org/
+https://tuxpaint.org/
 
 April 24, 2007 - April 24, 2007
 

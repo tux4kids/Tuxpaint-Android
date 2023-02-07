@@ -2,7 +2,7 @@
   macos.m
 
   Copyright (c) 2021-2022
-  http://www.tuxpaint.org/
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -18,6 +18,8 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
+
+  Last updated: December 11, 2022
 */
 
 #import <stdio.h>
@@ -221,3 +223,19 @@ const char *apple_picturesPath(void)
     return p;
 }
 
+
+int apple_trash(const char *path)
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithUTF8String:path]];
+    NSURL *trash = nil;
+    NSError *error = nil;
+
+    [manager trashItemAtURL:url resultingItemURL:&trash error:&error];
+    if(error) {
+        DEBUG_PRINTF("%s\n", [[error localizedDescription] UTF8String]);
+        return -1;
+    }
+
+    return 0;
+}

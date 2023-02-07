@@ -1,9 +1,9 @@
 # tuxpaint(1) completion 
 # put this file in /etc/bash_completion.d/ 
-# Bill Kendrick <bill@newbreedsoftware.com>; http://www.tuxpaint.org/
+# Bill Kendrick <bill@newbreedsoftware.com>; https://tuxpaint.org/
 # Based on inkscape's completion file, by allali@univ-mlv.fr
 #
-# Last modified 2022-05-15
+# Last modified 2022-12-11
 #
 # $Id$
 
@@ -30,7 +30,7 @@ _tuxpaint()
 			--native \
 			--disablescreensaver --allowscreensaver \
 			--orient=landscape --orient=portrait \
-			--buttonsize \
+			--buttonsize --buttonsize=48 --buttonsize=auto \
 			-b --startblank --startlast \
 			--sound -q --nosound \
 			--stereo --nostereo \
@@ -55,6 +55,7 @@ _tuxpaint()
                         --colorsrows=3 \
 			--sysfonts --nosysfonts \
 			--nostampcontrols --stampcontrols \
+			--nostamprotation --stamprotation \
 			--nomagiccontrols --magiccontrols \
 			--noshapecontrols --shapecontrols \
 			--mirrorstamps --dontmirrorstamps \

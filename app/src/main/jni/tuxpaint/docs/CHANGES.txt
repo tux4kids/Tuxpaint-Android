@@ -2,21 +2,83 @@ CHANGES.txt for Tux Paint
 
 Tux Paint - A simple drawing program for children.
 
-Copyright (c) 2002-2022
+Copyright (c) 2002-2023
 Various contributors (see below, and AUTHORS.txt)
-http://www.tuxpaint.org/
+https://tuxpaint.org/
 
 
-2022.June.14 (0.9.29)
-  * Bug Fixes:
-    ----------
-    * Opening and immediately dismissing Color Mixer could cause
-      an unexpected color to be chosen.
-      h/t @kentonyanamin on Twitter for reporting.
-      Closes https://sourceforge.net/p/tuxpaint/bugs/251/
+2023.February.7 (0.9.29)
+  * Improvements to "Stamp" tool:
+    -----------------------------
+    * Stamps may now be rotated.
+      Use the "stamprotation=no" option to disable.
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+  * New Magic Tools:
+    ----------------
+    * "Googly Eyes"; place eyeballs in your drawing.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      (Sound effect licensed as Creative Commons 0 by
+      https://freesound.org/people/MrFossy/)
+
+    * "Maze"; draw a maze pattern over part or all of your drawing.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      (Sound effect licensed as Creative Commons 0 by
+      Julian Evans, https://www.julianevans.info/)
+
+    * "Circles" and "Rays" -- convert the image into circular or ray
+      brushstrokes, and [WIP] "Fur" -- add fur to a picture.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      (Inspired by "Night Sky Scene [Pen Parallax]" Scratch Project
+      by -HexaScape- <https://scratch.mit.edu/users/-HexaScape->)
+
+      [WIP] - Fur icon needed
+
+      ("Circles" and "Rays" sound effects based on Richard Wagner's
+      "Ride of the Valkyries", recording licensed as Creative Commons
+      Attribution 3.0 Unported (CC BY 3.0), and conducted by,
+      Philip Milman <https://pmmusic.pro/>)
+
+      ("Fur" sound effected licensed as Creative Commons 0 (CC0 1.0)
+      by https://freesound.org/people/Kawgrim/)
+
+    * "Bloom" - Apply a glowing light bloom effect to the image.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      (Sound effected licensed as Creative Commons 0 (CC0 1.0)
+      by https://freesound.org/people/kentnelson64/)
+
+    * [WIP] "Rivulet"; apply rivulets of water to the canvas
+      - needs better icon
+      - needs sound effect
+      - effect needs improvement
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to Magic Tools:
+    ----------------------------
+    * Better performance from "Rush" (by using SDL_gfx rotozoom)
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * "Zoom" and "Perspective" background colors change
+      immediately when you select new colors.
+      Bill Kendrick <bill@newbreedsoftware.com>
 
   * Other Improvements:
     -------------------
+    * A keyboard shortcut is now available for quickly accessing
+      a small eraser.  Hold the [X] key while clicking, and drag
+      around the picture to erase.  (Not available if in the process
+      of rotating a stamp or shape, or when Text or Label tool are
+      active.)  Release the mouse to return to normal operation.
+
+      (Eventually, this could be utilized when we can support
+      the recognition of a drawing tablet stylus' "eraser" tip;
+      see https://sourceforge.net/p/tuxpaint/feature-requests/8/)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * When deleting a file on macOS, move the file to trash instead of deleting
+      the file permanently.
+      Mark Kim <markuskimius@gmail.com>
+
     * Automatic button size option ("buttonsize=auto"), to scale button
       size reasonably based on window size / fullscreen resolution.
       (For https://sourceforge.net/p/tuxpaint/feature-requests/218/)
@@ -27,8 +89,119 @@ http://www.tuxpaint.org/
       native size.  (SDL2.0)
       TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
+    * If only one display is available, when running in windowed mode
+      and asking for Tux Paint to appear in a width and/or height larger
+      than the display's dimensions, Tux Paint will fall back to
+      the maximum(s) the display is capable of.
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/113/)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Changed default UI font from Bitstream Vera to DejaVu Sans.
+      h/t Mark Kim <markuskimius@gmail.com>
+
+    * Update Tux Paint Magic API so `set_color()` functions can
+      alter the canvas.  (Utilized by "Zoom" and "Perspective", so far.)
+      Note: Bumps `TP_MAGIC_API_VERSION` to 0x00000007.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Bug Fixes:
+    ----------
+    * Always creating 24-bit canvases, in an attempt to avoid blending
+      artifacts, e.g., when applying brush strokes using the Paint tool.
+      (Previously, we were using the display's color depth and masks,
+      which seemed to work fine under SDL1.2, but does not under SDL2.)
+      Closes https://sourceforge.net/p/tuxpaint/bugs/259/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * SDL1.2 supported "SDL_VIDEO_WINDOW_POS" environment variable,
+      but SDL2 does not; so reimplemented it ourselves. (See ENVARS docs.)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Mended issue that prevented pop-up prompt's drop-shadows
+      from rendering (under SDL2).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Opening and immediately dismissing Color Mixer could cause
+      an unexpected color to be chosen.
+      h/t @kentonyanamin on Twitter for reporting.
+      Closes https://sourceforge.net/p/tuxpaint/bugs/251/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Line shape could report "360 degrees", which should be "0 degrees".
+      h/t Karl Ove Hufthammer <karl@huftis.org> for the report
+      Closes https://sourceforge.net/p/tuxpaint/bugs/255/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Some Magic tools did not change descriptions when switching
+      from paint to full-canvas mode.
+      + Emboss
+      + Drip
+      h/t Karl Ove Hufthammer <karl@huftis.org> for the reports
+      (https://sourceforge.net/p/tuxpaint/bugs/256/
+      https://sourceforge.net/p/tuxpaint/bugs/257/)
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+      & Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Full-screen Drip magic effect didn't work well
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+      Closes https://sourceforge.net/p/tuxpaint/bugs/256/
+
+    * Receive clicks when Tux Paint window is regaining focus
+      (via "SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH"), which is how
+      the earlier SDL1.2 versions worked.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Various Magic tools miscalculated which part of canvas
+      needed updating in their paint modes; mended.
+      (Bricks, Cartoon, Clone, Distortion, Emboss, Glass Tile,
+      Light, Metal Paint, Negative, and Pixels.)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Some brushes' initial spacing was not acheivable after
+      changing the spacing.  Now 'nudging' back to the default
+      when chosing the spacing option that's closest to the default.
+      (h/t Pere for pointing this out)
+      (Also, some tweaks to the spacing UI)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Mend crash bug in "Paint" and "Radial Gradient" modes of Fill tool.
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+      with Bill Kendrick <bill@newbreedsoftware.com>
+      Closes https://sourceforge.net/p/tuxpaint/bugs/269
+      (h/t Miyagi Andel for reporting & Shin-ichi TOYAMA for pinpointing
+      the issue)
+
+    * Mend crash bug in "perspective.c" Magic tools.
+      (Perspective, Panels, Timezoom, Zoom, Rush)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Disallow using Ctrl-Z shortcut while drawing or rotating shapes
+      or shapes, to avoid unexpected results.
+      Closes https://sourceforge.net/p/tuxpaint/bugs/239/
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * Scaling of button labels often caused them to stretch wider
+      than they should have.  Corrected 'keep aspect ration' option
+      in zoom().  [Note: That should be replaced with an SDL2_gfx call!]
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Text from unfinished "Label" tool input would appear after
+      creating a New image or Opening an existing one.  Mended.
+      Closes https://sourceforge.net/p/tuxpaint/bugs/246/
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+      and Bill Kendrick <bill@newbreedsoftware.com>
+
   * Ports & Building:
     -----------------
+    * Processed PNG images through `pngout` to increase some compression
+      (also corrects some warnings being reported by libpng (via SDL_image);
+      h/t Tim Dickson, closes https://sourceforge.net/p/tuxpaint/bugs/252/)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Automatically update macOS build version from the command line
+      at build time.
+      Mark Kim <markuskimius@gmail.com>
+
     * Change name of Tux Paint config. files from ".conf" to ".cfg"
       on Windows.
       TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
@@ -36,6 +209,12 @@ http://www.tuxpaint.org/
     * Merge "tuxpaint.desktop" file at build time (rather than as a
       manual step)
       (See https://sourceforge.net/u/wjjjjt/tuxpaint/ci/b4aa697474e1cc60b6faac80297cc66a602f54fd/)
+      Will Thompson <https://sourceforge.net/u/wjjjjt/profile/>
+
+    * Use RHEL 7-compatible appdata filename
+      + Rename metainfo file to appdata
+      + Fix detection of xdg-icon-resource
+      (See https://sourceforge.net/u/wjjjjt/tuxpaint/ci/4120af3b5f78ad69819b35ec821974081194c475/)
       Will Thompson <https://sourceforge.net/u/wjjjjt/profile/>
 
     * Adding "2DGraphics" (and hence "Graphics") and "KidsGame" (and hence
@@ -56,15 +235,125 @@ http://www.tuxpaint.org/
       Richard Hughes <https://sourceforge.net/u/hughsie/profile/>
       and Will Thompson <https://sourceforge.net/u/wjjjjt/profile/>
 
+    * Various Android port updates
+      * FIXME: Pere & Terrence, can you enumerate them here???
+      * Changing Android save paths to now default to the 'external' dir from the device itself.
+        https://github.com/tux4kids/Tuxpaint-Android/pull/18
+      Terrence Sheflin <terrence.sheflin@gmail.com>
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * SDL2.0 version: Compatibility with SDL2_Pango 0.1.3.
+      Mark Kim <markuskimius@gmail.com>
+
+    * New tool, "test-png", which exercises libpng library on
+      a set of PNG image files, allowing us to find those which
+      cause Tux Paint (via SDL_image, in turn via libpng) to
+      report back warnings to STDERR.
+      h/t Tim Dickson, per https://sourceforge.net/p/tuxpaint/bugs/252/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Updated `src/po/check_translations.sh` sanity-checking script
+      to check `src/po/LINGUAS` file.  Also, OPTION docs and
+      Tux Paint Config. source updated to make the script's job easier.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Cleaned up .c and .h source files using `indent`:
+      find . -name "*.c" -or -name "*.h" -exec  indent -nbfda -npcs -npsl -bli0 --no-tabs {} \;
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Cleaned up some compile-time warnings that cropped up in SDL2 branch.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * On Windows, run "tuxpaint-config" with the same privileges as
+      the installer app
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Pango loads Tux Paint-supplied fonts on macOS.
+      Previously Pango loaded system-supplied fonts instead, which
+      could lead to fonts not rendering in a human-readable text.
+      This change fixes https://sourceforge.net/p/tuxpaint/bugs/265/
+      Mark Kim <markuskimius@gmail.com>
+
+    * More fonts for the text and label tools on the macOS.
+      Enabled forked fonts so more fonts are available for use with the
+      text and label tools on the macOS.  This is particularly noticible
+      with localized fonts because only a few localized fonts may exist
+      on the system so missing even a single font can lead to inability to
+      type in a localized language at all.  It's unclear why forked fonts
+      were disabled to start on the macOS but it appears to be reliable
+      now so it's now been enabled to take advantage of its benefits.
+      Mark Kim <markuskimius@gmail.com>
+
+    * Speed up macOS app bundle build time.
+      Fixed a typo that was causing the macOS app bundle build time to be
+      unnecessarily long.  The app buildle build time is now ~20x faster.
+      Mark Kim <markuskimius@gmail.com>
+
+    * Add missing dependencies in Makefile which result in build failures
+      when building with the --shuffle flag for GNU make.
+      Philipp Rösner <rndxelement@protonmail.com>
+
   * Documentation updates:
     ---------------------
-    * Update macOS build instructions for SDL2.0.
+    * New "Quickstart Guide" document added.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Magic tool API documentation updated to match other docs,
+      and allow for localization.  (Maintained in "tuxpaint-docs" repo.)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Example Magic tool source file ("tp_magic_example.c")
+      now allows for localization.  (Maintained in "tuxpaint-docs" repo.)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Updated macOS build instructions for SDL2.0.
       Mark Kim <markuskimius@gmail.com>
+
+    * "--verbose-version" now shows whether SDL2_Pango is being used.
+      Bill Kendrick <bill@newbreedsoftware.com>
 
   * Localization Updates:
     ---------------------
+    * Allowing translators to provide strings that help score fonts
+      based on their support for the locale, and placing them higher
+      in the Text and Label tools' font selector.
+      Albert Cahalan <acahalan@gmail.com>
+      and TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Bulgarian
+      Vankata453 <https://sourceforge.net/u/vankata453>
+
     * Catalan translation
       Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * French translation
+      Jacques Chion <jacques.chion@orange.fr>
+
+    * Icelandic translation
+      Sveinn í Felli <sv1@fellsnet.is>
+
+    * Japanese translation
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Japanese documentation
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Japanese font updated
+      A subset of Genjyuu Gothic: http://jikasei.me/font/genjyuu/
+      Added by TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Norwegian Nynorsk translation
+      Karl Ove Hufthammer <karl@huftis.org>
+
+    * Portuguese (Portugal) translation
+      Hugo Carvalho <hugokarvalho@hotmail.com>
+
+    * Punjabi translation
+      A S Alam <aalam@satluj.org>
+
+    * Korean translation
+      Mark Kim <markuskimius@gmail.com>
 
 2022.June.4 (0.9.28)
   * Improvements to "Paint" and "Lines" tools:
@@ -954,17 +1243,17 @@ http://www.tuxpaint.org/
     * Correct issue that prevented Tux Paint from lauching on Mac OS X 10.7.
       (See https://sourceforge.net/p/tuxpaint/tuxpaint/ci/d2ef2e17d1962111d0f6f91394dce81e8706d48b/
       and https://stackoverflow.com/questions/20206985/xcode-linking-against-applicationservices-framework-with-sdk-10-9-causes-10-7)
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Reduce launch time by calling progress bar less frequently
       while loading stamps.
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Ability to bring up the print dialog from the macOS build was
       removed in Tux Paint 0.9.23 to support the new build mechanism.
       It has been re-added.  To access it, option-click the print icon,
       or configure Tux Paint to always bring up the dialog upon print.
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Made sure "New" dialog created correct thumbnail subdirectories
       for personal Starters & Templates (e.g., ~/.tuxpaint/starters/thumbs/)
@@ -982,7 +1271,7 @@ http://www.tuxpaint.org/
     ----
     * Verbose debugging, and "DEBUG_PRINTF()" macro now available;
       see debugging options in INSTALL.txt.
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
   * Notes:
     ------
@@ -1110,7 +1399,7 @@ http://www.tuxpaint.org/
       TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Korean translation
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Norwegian translation
       Karl Ove Hufthammer
@@ -1160,11 +1449,11 @@ http://www.tuxpaint.org/
     ----------------
     * Rewrote the macOS build system to be more Linux-like, with no XCode IDE.
       Build for older releases of macOS / Mac OS X (10.6 and later).
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Mac install creates a DMG
       Robert Buj Gelonch <rbuj@users.sf.net>
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Allow override override build date (in order to make builds reproducible)
       ("SOURCE_DATE_EPOCH")
@@ -2236,7 +2525,7 @@ http://www.tuxpaint.org/
     * Makefile edited so that Tux Paint can be installed in the absence
       of gettext in the system.
       Arunodai Vudem <arunvudem@gmail.com>
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Making Magic Tool source throw fewer compiler warnings.
 
@@ -2286,7 +2575,7 @@ http://www.tuxpaint.org/
       shipped along with tuxpaint code. Inclusion error message has been added
       for missing libpaper.
       Arunodai Vudem <arunvudem@gmail.com>
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * "Uppercase only" option support for builds that use Pango to render text.
       (Note: Needs help in some/many? locales.)
@@ -2782,7 +3071,7 @@ http://www.tuxpaint.org/
       and Japanese (Romanized Hiragana and Romanized Katakana) input methods.
       (Should be extensible to other languages.)
       (Addresses SourceForge Bug #1070414)
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Stamps now supports SVG vector-based graphics!
       (Only SVG versions of stamps are loaded, when both PNG and SVG
@@ -3225,7 +3514,7 @@ http://www.tuxpaint.org/
     * Japanese font shipped in Tux Paint now includes common educational Kanji
 
     * Korean
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Polish documentation
       Pawel Polak <sf_paul@users.sourceforge.net>
@@ -3359,7 +3648,7 @@ http://www.tuxpaint.org/
 
     * Source files and documentation files tagged with CVS Id tags
       for easier version tracking.
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
   * Locale update:
     --------------
@@ -3814,7 +4103,7 @@ http://www.tuxpaint.org/
       TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Korean
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Lithuanian
       Gintaras Go?tautas <gintaras@nes.lt>
@@ -3941,7 +4230,7 @@ http://www.tuxpaint.org/
       Bill Kendrick <bill@newbreedsoftware.com>
 
     * Korean README.txt documentation added, in both EUC-KR and UTF-8 formats.
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Serbian translation created.
       Aleksandar Jelenak <jelenak@netlinkplus.net>
@@ -4009,7 +4298,7 @@ http://www.tuxpaint.org/
       TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
     * Updated Korean translation.
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Updated Malay translation.
       Muhammad Najmi Ahmad Zabidi <mnajem@linuxmail.org>
@@ -4091,7 +4380,7 @@ http://www.tuxpaint.org/
       John Popplewell <john@johnnypops.demon.co.uk>
 
     * Updated Makefile for easier install.
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Cleaned up desktop entry file.
       Karl Ove Hufthammer <karl@huftis.org>
@@ -4123,7 +4412,7 @@ http://www.tuxpaint.org/
       Mark K. Kim & John Popplewell
   
     * Fixed security issue with permissions to Tux Paint docs directory.
-      Mark K. Kim <mkkim214@gmail.com>
+      Mark K. Kim <markuskimius@gmail.com>
 
     * Fixed 'savedir' bug.  (Was dropping filenames)
 
@@ -4304,7 +4593,7 @@ http://www.tuxpaint.org/
   * Right-to-left language support (for Hebrew, for example).
 
   * Updated Korean translations.
-    Mark K. Kim <mkkim214@gmail.com>
+    Mark K. Kim <markuskimius@gmail.com>
 
   * UTF-8 support in the Text Tool!
     Robert Glowczynski <robertg@software.com.pl>,
@@ -4583,7 +4872,7 @@ http://www.tuxpaint.org/
   * UTF-8 support working.
 
   * Korean translation completed!
-    Mark K. Kim <mkkim214@gmail.com>
+    Mark K. Kim <markuskimius@gmail.com>
 
   * Fixed errors in 'uninstall' target in Makefile
 
@@ -4641,7 +4930,7 @@ http://www.tuxpaint.org/
     T�r�k G�bor <gabo@linuxmania.hu>
 
   * Partly translated to Korean.  PO file in an unusable charset, though...
-    Mark K. Kim <mkkim214@gmail.com>
+    Mark K. Kim <markuskimius@gmail.com>
 
   * Supports locale-specific fonts for languages that need Unicode.
     e.g., Korean will use "ko.ttf", if found, for translated strings.

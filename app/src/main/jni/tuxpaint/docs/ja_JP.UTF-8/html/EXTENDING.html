@@ -62,7 +62,7 @@
   section.indent dl p {
     margin-left: 0;
   }
-  p + ul {
+  p + ul, p + ol {
     margin-left: 2em;
   }
 
@@ -121,7 +121,7 @@
               <li><a href="#brushes">Brushes</a>                <ul>
                   <li><a href="#brush_options">Brush Options</a></li>                </ul>
               </li>
-              <li><a href="#stamps">Stamps</a>                <ul>
+              <li><a href="#stamps">はんこ</a>                <ul>
                   <li><a href="#stamps_images">Stamp Images</a></li>                  <li><a href="#description_text">Stamp Descriptive Text</a></li>                  <li><a href="#sound_effects">Stamp Sound Effects</a></li>                  <li><a href="#descriptive_sound">Stamp Descriptive Sound</a></li>                  <li><a href="#stamp_options">Stamp Options</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Pre-Mirrored and Flipped Stamps</a></li>                </ul>
               </li>
               <li><a href="#fonts">フォント</a></li>              <li><a href="#starters">'Starters'</a>                <ul>
@@ -361,7 +361,7 @@
       <header>
         <h1>
           <a name="stamps"
-              id="stamps">Stamps</a>
+              id="stamps">はんこ</a>
         </h1>
       </header>
 
@@ -768,7 +768,7 @@
         Open the newly-created "<code>.po</code>" file — you can edit in a <i>plain</i> text edtior, such as Emacs, Pico or VI on Linux, or NotePad on Windows. The original English text used in Tux Paint is listed in lines starting with "<code>msgid</code>". Enter your translations of each of these pieces of text in the empty "<code>msgstr</code>" lines directly below the corresponding "<code>msgid</code>" lines. (<i>Note:</i> Do not remove the quotes.)      </p>
 
       <p>
-        Example:
+        例:
         <blockquote>
           <code>msgid "Smudge"<br>
           msgstr "<u>Manchar</u>"<br>
@@ -835,7 +835,7 @@
         Start additional character mapping sections with a line containign the word "<code>section</code>".      </p>
 
       <p>
-        Example:
+        例:
         <blockquote>
           <code># Hiragana<br>
           304B ka -<br>

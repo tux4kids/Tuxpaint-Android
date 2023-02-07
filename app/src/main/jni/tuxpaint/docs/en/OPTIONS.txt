@@ -3,10 +3,10 @@
 
 Options Documentation
 
-        Copyright © 2002-2022 by various contributors; see AUTHORS.txt.
+        Copyright © 2002-2023 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                  June 4, 2022
+                                January 2, 2023
 
                 +---------------------------------------------+
                 |Table of Contents                            |
@@ -126,6 +126,11 @@ Video/Sound
               * 768x1024
               * 1600x1200
 
+           💡 If only one display is available, and Tux Paint is being run in
+           windowed (not fullscreen) mode, and the chosen window size exceeds
+           the capabilities of the display, Tux Paint will fall back to the
+           display's dimensions.
+
    orient=portrait
 
            Swaps the width/height options given to Tux Paint, useful for
@@ -193,6 +198,11 @@ Video/Sound
            The SIZE value should be presented in pixels, and can be anything
            between 24 and 192, inclusive. Most buttons are square, and this
            will affect their width and height.
+
+           A value of "auto" may be provided, and Tux Paint will choose a
+           suitable button size based on the size of Tux Paint's window (or
+           fullscreen display). (For the default screen size of 800x600, it
+           will be the default button size: "48".)
 
            💡 Note: If the chosen button size would cause the buttons to be
            too large for all required UI elements to appear under Tux Paint's
@@ -388,6 +398,20 @@ Simplification
            overridden by the user's configuration file using
            "nostampcontrols=no" or "stampcontrols=yes". In both cases, may be
            overridden by the command-line option "--stampcontrols".
+
+   nostamprotation=yes
+
+           This disables the rotation step of the Stamps tool, immediately
+           placing the stamp in its regular orientation (with any flipping or
+           mirroring applied) on the first click.
+
+           📜 Note: The stamp rotation feature was added to Tux Paint in
+           version 0.9.29.
+
+           ⚙ Note: If used in a system-wide configuration file, may be
+           overridden by the user's configuration file using
+           "nostamprotation=no" or "stamprotation=yes". In both cases, may be
+           overridden by the command-line option "--stamprotation".
 
    nomagiccontrols=yes
 
@@ -1379,6 +1403,7 @@ Joystick
      --nooutlines
      --nostamps
      --nostampcontrols
+     --nostamprotation
      --nomagiccontrols
      --noshapecontrols
      --nolabel
@@ -1453,6 +1478,7 @@ Joystick
      --outlines
      --stamps
      --stampcontrols
+     --stamprotation
      --magiccontrols
      --shapecontrols
      --label

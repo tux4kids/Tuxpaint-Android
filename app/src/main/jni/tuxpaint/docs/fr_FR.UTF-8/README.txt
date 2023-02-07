@@ -3,12 +3,12 @@
 
                       Un programme simple pour les enfants
 
-        Copyright © 2002-2022 by divers contributeurs; see AUTHORS.txt.
+        Copyright © 2002-2023 by divers contributeurs; see AUTHORS.txt.
                              https://tuxpaint.org/
                            @TuxPaintTweets on Twitter
                               Tux Paint on Tumblr
 
-                                 juin 14, 2022
+                                janvier 4, 2023
 
           +----------------------------------------------------------+
           |Table des matières                                        |
@@ -236,14 +236,14 @@ Lancement de Tux Paint
                 "Back" button to dismiss the pop-up without picking a new
                 color.
 
-           ⌨ When the active tool supports colors, a shortcut may be used to
-           access the "color picker" option more quickly. Hold the [Control]
-           key while clicking, and the color under the mouse cursor will be
-           shown at the bottom. You may drag around to canvas to find the
-           color you want. When you release the mouse button, the color under
-           the cursor will be selected. If you release the mouse outside of
-           the canvas (e.g., over the "Tools" area), the color selection will
-           be left unchanged. (This is similar to clicking the"Back" button
+           ⌨ When the active tool supports colors, a shortcut may be used for
+           quick access to the "color picker" option. Hold the [Control] key
+           while clicking, and the color under the mouse cursor will be shown
+           at the bottom. You may drag around to canvas to find the color you
+           want. When you release the mouse button, the color under the
+           cursor will be selected. If you release the mouse outside of the
+           canvas (e.g., over the "Tools" area), the color selection will be
+           left unchanged. (This is similar to clicking the "Back" button
            that's available when bringing up the "color picker" option via
            its button the color palette.)
 
@@ -315,8 +315,28 @@ Outils disponibles
            ou photographiques (comme l'image d'un cheval, d'un arbre ou de la
            lune) dans votre dessin.
 
-           Lorsque vous déplacez la souris sur le canevas, une forme suit la
-           souris, indiquant où le tampon sera placé, ainsi que sa taille.
+           As you move the mouse around the canvas, an outline follows the
+           mouse, showing where the stamp will be placed, and how big it will
+           be. Click on the canvas where you wish to place the stamp.
+
+                Normal Stamps Mode
+
+                        Now you can move the mouse around the canvas to
+                        rotate the stamp.
+
+                        Click the mouse button again and the stamp will be
+                        added to the drawing.
+
+                Simple Stamps Mode
+                        If "stamp rotation" option is disabled, the stamp
+                        will be drawn on the canvas when you let go of the
+                        mouse button. (There's no rotation step.)
+
+                        ⚙ See the "Options" documentation to learn about the
+                        "stamp rotation" ("stamprotation") option.
+
+           📜 Note: The stamp rotation feature was added to Tux Paint in
+           version 0.9.29.
 
            Il peut y avoir de nombreuses catégories de timbres (par ex.
            animaux, plantes, espace extra-atmosphérique, véhicules,
@@ -598,6 +618,12 @@ Outils disponibles
 
            Au fur et à mesure que vous effacez, un grincement est émis.
 
+           ⌨ Hold the [X] key while clicking for quick access to a small
+           round eraser (not available when the Text or Label tools are
+           selected, when you're in the process of rotating a stamp or shape,
+           or when using an interactive magic tool). Release the mouse to
+           return to your currently-selected tool.
+
   Autres contrôles
 
    "Undo" and "Redo" Commands
@@ -683,10 +709,11 @@ Outils disponibles
                 droite de la liste pour effacer l'image sélectionnée. (Il
                 vous sera demandé de confirmer.)
 
-                📜 Note: On Linux (as of version 0.9.22) and Windows (as of
-                version 0.9.27), the picture will be placed in your desktop's
-                trash can / recycle bin (where you may recover and restore
-                it, if you change your mind).
+                📜 Note: On Linux (as of version 0.9.22), Windows (as of
+                version 0.9.27), and macOS (as of version 0.9.29), the
+                picture will be placed in your desktop's trash can / recycle
+                bin (where you may recover and restore it, if you change your
+                mind).
 
               * Cliquez sur le bouton "Exporter" près du coin inférieur droit
                 pour exporter l'image vers votre dossier d'exportation. (par

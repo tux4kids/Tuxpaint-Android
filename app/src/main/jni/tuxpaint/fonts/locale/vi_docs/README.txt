@@ -1,9 +1,7 @@
 README.txt for "tuxpaint-ttf-vietnamese"
 Vietnamese TrueType Font (TTF) for Tux Paint
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.newbreedsoftware.com/tuxpaint/
+https://tuxpaint.org/
 
 April 15, 2004 - April 15, 2004
 

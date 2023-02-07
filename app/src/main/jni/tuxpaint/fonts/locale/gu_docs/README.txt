@@ -1,9 +1,7 @@
 README.txt for "tuxpaint-ttf-gujarati"
 Hindi TrueType Font (TTF) for Tux Paint
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.tuxpaint.org/
+https://tuxpaint.org/
 
 October 12, 2006 - October 12, 2006
 

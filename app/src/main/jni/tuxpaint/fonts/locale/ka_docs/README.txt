@@ -1,9 +1,7 @@
 README.txt for "tuxpaint-ttf-georgian"
 Georgian TrueType Font (TTF) for Tux Paint
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.newbreedsoftware.com/tuxpaint/
+https://tuxpaint.org/
 
 March 24, 2005 - March 24, 2005
 

@@ -1,9 +1,7 @@
 README.txt for "tuxpaint-ttf-tamil"
 Tamil TrueType Font (TTF) for Tux Paint
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.tuxpaint.org/
+https://tuxpaint.org/
 
 December 5, 2002 - April 24, 2007
 

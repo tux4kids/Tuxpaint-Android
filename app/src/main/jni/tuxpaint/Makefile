@@ -1,10 +1,10 @@
 # Tux Paint - A simple drawing program for children.
 
-# Copyright (c) 2002-2022
+# Copyright (c) 2002-2023
 # Various contributors (see AUTHORS.txt)
-# http://www.tuxpaint.org/
+# https://tuxpaint.org/
 
-# June 14, 2002 - June 14, 2022
+# June 14, 2002 - January 25, 2023
 
 
 # The version number, for release:
@@ -16,7 +16,7 @@ ifdef SOURCE_DATE_EPOCH
 else
   VER_DATE=$(shell date "+%Y-%m-%d")
 endif
-MAGIC_API_VERSION:=0x00000005
+MAGIC_API_VERSION:=0x00000007
 
 # Need to know the OS
 
@@ -189,10 +189,10 @@ FRIBIDI_LIB:=$(shell $(PKG_CONFIG) --libs fribidi)
 FRIBIDI_CFLAGS:=$(shell $(PKG_CONFIG) --cflags fribidi)
 
 windows_ARCH_LINKS:=-lgdi32 -lcomdlg32 $(PNG) -lz -lwinspool -lshlwapi $(FRIBIDI_LIB) -liconv -limagequant -mwindows
-macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant -lSDLmain -Wl,-framework,AppKit -Wl,-framework,Cocoa
+macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant -lSDLmain -Wl,-framework,AppKit -Wl,-framework,Cocoa $(shell $(PKG_CONFIG) --libs pangoft2)
 ios_ARCH_LINKS=$(FRIBIDI_LIB) -limagequant -ljpeg -lbz2 $(shell $(PKG_CONFIG) --libs freetype2 libtiff-4 libwebp libffi harfbuzz libmpg123 ogg vorbisenc vorbisidec libxml-2.0 pangoft2 libpcre)
 beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(PAPER_LIB) $(STDC_LIB) -limagequant
-linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
+linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant $(shell $(PKG_CONFIG) --libs pangoft2)
 ARCH_LINKS:=$($(OS)_ARCH_LINKS)
 
 windows_ARCH_HEADERS:=src/win32_print.h
@@ -244,7 +244,6 @@ MAGIC_PREFIX:=$(DESTDIR)$(LIBDIR)/lib$(LIBDIRSUFFIX)/tuxpaint/plugins
 
 # Docs and man page:
 DOC_PREFIX:=$(DESTDIR)$(PREFIX)/share/doc/tuxpaint-$(VER_VERSION)
-DEVDOC_PREFIX:=$(DESTDIR)$(PREFIX)/share/doc/tuxpaint-$(VER_VERSION)/tuxpaint-dev
 MAN_PREFIX:=$(DESTDIR)$(PREFIX)/share/man
 DEVMAN_PREFIX:=$(DESTDIR)$(PREFIX)/share/man
 
@@ -294,6 +293,7 @@ NOSOUNDFLAG:=$(if $(SDL_MIXER_LIB),,-DNOSOUND$(warning -lSDL2_Mixer failed, no s
 
 # SDL Pango is needed to render complex scripts like Thai and Arabic
 SDL2_PANGO_LIB:=$(call linktest,SDL2_Pango,-lSDL2_Pango,$(SDL_LIBS))
+SDL2_PANGO_CFLAGS:=$(shell $(PKG_CONFIG) --cflags SDL2_Pango)
 NOPANGOFLAG:=$(if $(SDL2_PANGO_LIB),,-DNO_SDLPANGO$(warning -lSDL2_Pango failed, no scripts for you!))
 
 SDL_LIBS+=$(SDL_MIXER_LIB) $(SDL2_PANGO_LIB)
@@ -313,6 +313,9 @@ NOSVGFLAG:=$(if $(SVG_LIB),,-DNOSVG$(warning No SVG for you!))
 
 # SVG support uses libcairo1
 OLDSVGFLAG:=$(if $(filter -lsvg-cairo,$(SVG_LIB)),-DOLD_SVG,)
+
+
+PNG_CFLAGS:=$(shell $(PKG_CONFIG) libpng --cflags)
 
 
 ifeq ($(hack),1)
@@ -341,6 +344,7 @@ CFLAGS:=$(CPPFLAGS) $(OPTFLAGS) -W -Wall -fno-common -ffloat-store \
 	-Waggregate-return \
 	-Wstrict-prototypes -Wmissing-prototypes \
 	$(shell src/test-option.sh -Wstrict-aliasing=2) \
+    $(SDL2_PANGO_CFLAGS) \
 	$(ARCH_CFLAGS)
 
 DEFS:=-DVER_DATE=\"$(VER_DATE)\" -DVER_VERSION=\"$(VER_VERSION)\" \
@@ -450,7 +454,7 @@ INSTALLED_MODIRS:=$(patsubst trans/%.mo,$(LOCALE_PREFIX)/%/LC_MESSAGES,$(MOFILES
 
 $(INSTALLED_MODIRS): $(LOCALE_PREFIX)/%/LC_MESSAGES: trans/%.mo
 	install -d -m 755 $@
-$(INSTALLED_MOFILES): $(LOCALE_PREFIX)/%/LC_MESSAGES/tuxpaint.mo: trans/%.mo
+$(INSTALLED_MOFILES): $(LOCALE_PREFIX)/%/LC_MESSAGES/tuxpaint.mo: trans/%.mo $(INSTALLED_MODIRS)
 	install -m 644 $< $@
 
 .PHONY: uninstall-i18n
@@ -529,13 +533,13 @@ endif
 
 # Build the translation files for gettext
 
-$(MOFILES): trans/%.mo: src/po/%.po  
+$(MOFILES): trans/%.mo: src/po/%.po
 	msgfmt -o $@ $<
 
 %.desktop: %.desktop.in $(POTFILES)
 	msgfmt --desktop -d src/po --template $< -o $@
 
-%.metainfo.xml: %.metainfo.xml.in $(POTFILES)
+%.appdata.xml: %.appdata.xml.in $(POTFILES)
 	msgfmt --xml -d src/po --template $< -o $@
 
 .PHONY: translations
@@ -547,7 +551,7 @@ translations: trans
 	@echo "Install gettext to run Tux Paint in non-U.S. English modes."
 	@echo "--------------------------------------------------------------"
 else
-translations: trans $(MOFILES) src/tuxpaint.desktop src/org.tuxpaint.Tuxpaint.metainfo.xml
+translations: trans $(MOFILES) src/tuxpaint.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
 endif
 
 trans:
@@ -582,28 +586,42 @@ install:	install-bin install-data install-doc \
 	@if [ "x$(OS)" = "xmacos" ]; then \
         echo "The App Bundle has been created as $(BUNDLE)!  Now you can:"; \
         echo; \
-        echo "  * Double click $(BUNDLE) to run the application."; \
-        echo "  * Sign the App Bundle."; \
-        echo "  * Run 'make TuxPaint.dmg' to create the DMG file for distribution."; \
+        echo "  * Double click $(BUNDLE) to run the application,"; \
+        echo "  * sign the App Bundle (see below),"; \
+        echo "  * build the universal App Bundle (see below),"; \
+        echo "  * and/or run 'make TuxPaint.dmg' to create the DMG file for distribution."; \
         echo; \
+        echo "For usage, see $(DOC_PREFIX)/[locale]/README.txt"; \
+        echo; \
+        echo "SIGNING THE APP BUNDLE"; \
+        echo "----------------------"; \
         echo "Signing is optional for the Intel CPU build, or for the Apple Silicon build if"; \
         echo "it is to be run only on the system on which it was built (e.g., for"; \
         echo "development.)  The App Bundle must be signed if it is built to run natively on"; \
         echo "the Apple Silicon and is distributed."; \
         echo; \
-        echo "To sign the App Bundle, use the following command, where IDENTITY is your Apple"; \
+        echo "To sign the App Bundle, use the following commands, where IDENTITY is your Apple"; \
         echo "Developer ID if you have one, or a hyphen (-) to sign it ad-hoc:"; \
         echo; \
+        echo "  codesign --remove-signature $(BUNDLE)  # to remove any existing signature"; \
         echo "  codesign -s IDENTITY $(BUNDLE)"; \
         echo; \
-        echo "If you are signing the App Bundle *and* creating the DMG, the DMG must be"; \
-        echo "created after signing to ensure the signed App Bundle is used to create the"; \
-        echo "DMG."; \
+        echo "If you are building the universal Apple Bundle, sign the App Bundle *after*"; \
+        echo "building the universal App Bundle."; \
         echo; \
-        echo "For the instruction on how to create the App Bundle as Universal, see"; \
-        echo "$(DOC_PREFIX)/[locale]/INSTALL.txt"; \
+        echo "BUILDING THE UNIVERSAL APP BUNDLE"; \
+        echo "---------------------------------"; \
+        echo "Building the universal App Bundle involves building Tux Paint on the x86 machine"; \
+        echo "and also on the arm64 machine, then combining the two App Bundles using the supplied"; \
+        echo "script, 'macos/build-universal.sh'.  Name the two App Bundles 'TuxPaint-x86_64.app'"; \
+        echo "and 'TuxPaint-arm64.app' before running the script; the universal app bundle will be"; \
+        echo "named 'TuxPaint.app'."; \
         echo; \
-        echo "For usage, see $(DOC_PREFIX)/[locale]/README.txt"; \
+        echo "However, if your aim is to build a portable App Bundle, some extra effort will be needed."; \
+        echo "to make the code work on older versions of macOS than on those in which the bundles were"; \
+        echo "built.  There are a few options on how to do this.  Please see the details in:"; \
+        echo; \
+        echo "  $(DOC_PREFIX)/[locale]/INSTALL.txt"; \
 	else \
 		echo "All done! Now (preferably NOT as 'root' superuser),"; \
 		echo "you can type the command 'tuxpaint' to run the program!!!"; \
@@ -615,7 +633,7 @@ install:	install-bin install-data install-doc \
 	@echo "Visit Tux Paint's home page for more information, updates"
 	@echo "and to learn how you can help out!"
 	@echo
-	@echo "  http://www.tuxpaint.org/"
+	@echo "  https://tuxpaint.org/"
 	@echo
 	@echo "Enjoy!"
 	@echo
@@ -636,7 +654,7 @@ install-magic-plugins:
 			$(DATA_PREFIX)/sounds/magic/*.ogg
 
 .PHONY: install-magic-plugins
-install-magic-plugin-dev:	src/tp_magic_api.h
+install-magic-plugin-dev:	src/tp_magic_api.h install-bin
 	@echo
 	@echo "...Installing Magic Tool plug-in development files and docs..."
 	@cp tp-magic-config $(BIN_PREFIX)
@@ -644,9 +662,6 @@ install-magic-plugin-dev:	src/tp_magic_api.h
 	@install -d $(INCLUDE_PREFIX)/tuxpaint
 	@cp src/tp_magic_api.h $(INCLUDE_PREFIX)/tuxpaint
 	@chmod a+r,g-w,o-w $(INCLUDE_PREFIX)/tuxpaint/tp_magic_api.h
-	@install -d $(DEVDOC_PREFIX)
-	@cp -R magic/docs/* $(DEVDOC_PREFIX)
-	@chmod a=rX,g=rX,u=rwX $(DEVDOC_PREFIX)
 
 # Installs the various parts for the MinGW/MSYS development/testing environment.
 
@@ -712,9 +727,10 @@ clean:
 	@-rm -f templates/.thumbs/*.png
 	@if [ -d templates/.thumbs ]; then rmdir templates/.thumbs; fi
 	@-if [ "x$(BUNDLE)" != "x" ]; then rm -rf $(BUNDLE); fi
-	@-rm -f TuxPaint.dmg temp.dmg; rm -rf magic/*.dSYM Resources
+	@-rm -f TuxPaint.dmg temp.dmg {macos,ios}/Info.plist; rm -rf magic/*.dSYM Resources
 	@-rm -f dlllist a.exe
 	@-rm -f win32/Preprocessed.iss win32/tuxpaint-*.zip win32/tuxpaint-*.exe
+	@-rm -f test-png
 	@echo
 
 # "make uninstall" should remove the various parts from their
@@ -722,7 +738,7 @@ clean:
 # are the same as they were when you installed, of course!!!
 .PHONY: uninstall
 uninstall:	uninstall-i18n
-	-rm $(METAINFO_PREFIX)/org.tuxpaint.Tuxpaint.metainfo.xml
+	-rm $(METAINFO_PREFIX)/org.tuxpaint.Tuxpaint.appdata.xml
 	-rm /usr/share/applications/tuxpaint.desktop
 	-rm /usr/share/pixmaps/tuxpaint.png
 	-rm $(ICON_PREFIX)/tuxpaint.png
@@ -742,7 +758,6 @@ uninstall:	uninstall-i18n
 	-rm -r $(MAGIC_PREFIX)
 	-rm -r $(INCLUDE_PREFIX)/tuxpaint
 	-rm $(BIN_PREFIX)/tp-magic-config
-	-rm -r $(DEVDOC_PREFIX)
 	-if [ "x$(BUNDLE)" != "x" ]; then \
 	  rm -rf $(BUNDLE); \
 	fi
@@ -795,7 +810,7 @@ install-example-stamps:
 STARTERS:=$(wildcard starters/*.*)
 INSTALLED_STARTERS:=$(patsubst %,$(DATA_PREFIX)/%,$(STARTERS))
 
-$(INSTALLED_STARTERS): $(DATA_PREFIX)/%: %
+$(INSTALLED_STARTERS): $(DATA_PREFIX)/%: % install-example-starters-dirs
 	install -m 644 $< $@
 
 install-example-starters-dirs:
@@ -836,7 +851,7 @@ $(THUMB_STARTERS):
 		convert $(CONVERT_OPTS) $(STARTER_NAME) $@ 2> /dev/null || ( echo "($@ failed)" ; rm $@ ) ; \
 	fi
 
-$(INSTALLED_THUMB_STARTERS): $(DATA_PREFIX)/%: %
+$(INSTALLED_THUMB_STARTERS): $(DATA_PREFIX)/%: % install-example-starters-dirs
 	@install -D -m 644 $< $@ || ( echo "NO THUMB $<" )
 
 .PHONY: echo-thumb-starters
@@ -861,7 +876,7 @@ install-thumb-starters: echo-install-thumb-starters $(INSTALLED_THUMB_STARTERS)
 TEMPLATES:=$(wildcard templates/*.*)
 INSTALLED_TEMPLATES:=$(patsubst %,$(DATA_PREFIX)/%,$(TEMPLATES))
 
-$(INSTALLED_TEMPLATES): $(DATA_PREFIX)/%: %
+$(INSTALLED_TEMPLATES): $(DATA_PREFIX)/%: % install-example-template-dirs
 	install -m 644 $< $@
 
 install-example-template-dirs:
@@ -939,10 +954,10 @@ install-nokia770:
 # FIXME: No way to install SVG icons using `xdg-icon-resource`
 # (see https://bugs.launchpad.net/ubuntu/+source/xdg-utils/+bug/790449)
 .PHONY: install-xdg
-install-xdg: src/tuxpaint.desktop src/org.tuxpaint.Tuxpaint.metainfo.xml
+install-xdg: src/tuxpaint.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
 	@echo
 	@echo "...Installing launcher icon into desktop environment..."
-	@if [ "x$(shell which xdg-icon-resource install)" != "x" ]; then \
+	@if [ "x$(shell which xdg-icon-resource)" != "x" ]; then \
 	  xdg-icon-resource install --size 192 data/images/icon192x192.png tux4kids-tuxpaint ; \
 	  xdg-icon-resource install --size 128 data/images/icon128x128.png tux4kids-tuxpaint ; \
 	  xdg-icon-resource install --size 96 data/images/icon96x96.png tux4kids-tuxpaint ; \
@@ -960,7 +975,7 @@ install-xdg: src/tuxpaint.desktop src/org.tuxpaint.Tuxpaint.metainfo.xml
 	@if [ "x$(shell which update-desktop-database)" != "x" ]; then \
 	  update-desktop-database ; \
 	fi
-	install --mode=0644 -t $(METAINFO_PREFIX) src/org.tuxpaint.Tuxpaint.metainfo.xml
+	install --mode=0644 -Dt $(METAINFO_PREFIX) src/org.tuxpaint.Tuxpaint.appdata.xml
 
 # Install the PNG icon (for KDE desktop, etc.)
 # and the 24-color 32x32 XPM (for other Window managers):
@@ -1012,7 +1027,7 @@ install-haiku:
 
 # Install the import script:
 .PHONY: install-importscript
-install-importscript:
+install-importscript: install-bin
 	@echo
 	@echo "...Installing 'tuxpaint-import' script..."
 	@cp src/tuxpaint-import.sh $(BIN_PREFIX)/tuxpaint-import
@@ -1107,6 +1122,7 @@ install-macbundle:
 	@install -d -m 755 $(BUNDLE)/Contents/lib
 	@install -m 755 tuxpaint $(BUNDLE)/Contents/MacOS
 	@install -m 644 macos/PkgInfo $(BUNDLE)/Contents
+	@VER_VERSION=$(VER_VERSION)$(VER_FLAVOR) macos/template.sh macos/Info.plist.shdoc > macos/Info.plist
 	@install -m 644 macos/Info.plist $(BUNDLE)/Contents
 	@install -m 644 macos/tuxpaint.icns $(BUNDLE)/Contents/Resources
 	@macos/build-app.sh
@@ -1116,13 +1132,14 @@ install-macbundle:
 install-iosbundle:
 	@echo
 	@echo "...Installing iOS App Bundle Support Files..."
-	install -m 755 tuxpaint $(BUNDLE)
-	install -m 644 ios/PkgInfo $(BUNDLE)
-	install -m 644 ios/Info.plist $(BUNDLE)
-	install -m 644 ios/tuxpaint.icns $(BUNDLE)
-	install -m 644 ios/tuxpaint.cfg $(BUNDLE)
-	install -m 644 ios/Splash.png $(BUNDLE)
-	ibtool --compile $(BUNDLE)/Splash.storyboardc ios/Splash.storyboard
+	@install -m 755 tuxpaint $(BUNDLE)
+	@install -m 644 ios/PkgInfo $(BUNDLE)
+	@VER_VERSION=$(VER_VERSION)$(VER_FLAVOR) ios/template.sh ios/Info.plist.shdoc > ios/Info.plist
+	@install -m 644 ios/Info.plist $(BUNDLE)
+	@install -m 644 ios/tuxpaint.icns $(BUNDLE)
+	@install -m 644 ios/tuxpaint.cfg $(BUNDLE)
+	@install -m 644 ios/Splash.png $(BUNDLE)
+	@ibtool --compile $(BUNDLE)/Splash.storyboardc ios/Splash.storyboard
 
 
 # Create DMG for macOS
@@ -1393,10 +1410,14 @@ SHARED_FLAGS:=-shared -fpic -lm
 MAGIC_C:=$(wildcard magic/src/*.c)
 MAGIC_SO:=$(patsubst magic/src/%.c,magic/%.$(SO_TYPE),$(MAGIC_C))
 
-$(MAGIC_SO): magic/%.$(SO_TYPE): magic/src/%.c  
+$(MAGIC_SO): magic/%.$(SO_TYPE): magic/src/%.c src/tp_magic_api.h
 	$(CC) $(MAGIC_CFLAGS) $(LDFLAGS) $(SHARED_FLAGS) -o $@ $< $(PLUGIN_LIBS)
 # Probably should separate the various flags like the following:
 #	$(CC) $(PLUG_CPPFLAGS) $(PLUG_CFLAGS) $(PLUG_LDFLAGS) -o $@ $< $(PLUG_LIBS)
 
 .PHONY: magic-plugins
 magic-plugins:	src/tp_magic_api.h $(MAGIC_SO)
+
+test-png:	src/test-png.c
+	$(CC) $(PNG_CFLAGS) src/test-png.c -o test-png $(PNG)
+

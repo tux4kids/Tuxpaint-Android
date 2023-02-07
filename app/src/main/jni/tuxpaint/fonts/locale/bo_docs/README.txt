@@ -1,9 +1,7 @@
 README.txt for "tuxpaint-ttf-tibetan"
 Tibetan TrueType Font (TTF) for Tux Paint
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.newbreedsoftware.com/tuxpaint/
+https://tuxpaint.org/
 
 March 29, 2006 - March 29, 2006
 

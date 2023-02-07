@@ -1,9 +1,7 @@
 README.txt for "tuxpaint-ttf-hebrew"
 Hebrew TrueType Font (TTF) for Tux Paint
 
-Bill Kendrick
-bill@newbreedsoftware.com
-http://www.newbreedsoftware.com/tuxpaint/
+https://tuxpaint.org/
 
 August 5, 2003 - August 5, 2003
 
