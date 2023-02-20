@@ -80,6 +80,7 @@ struct cfginfo
   const char *joystick_button_selectshapestool;
   const char *joystick_button_selecttexttool;
   const char *joystick_button_selectlabeltool;
+  const char *joystick_button_selectfilltool;
   const char *joystick_button_selectmagictool;
   const char *joystick_button_undo;
   const char *joystick_button_redo;

@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - January 25, 2023
+  June 14, 2002 - February 19, 2023
 */
 
 #include "platform.h"
@@ -150,6 +150,33 @@ static scaleparams scaletable[] = {
   {32, 1},                      /* 32 */
   {48, 1},                      /* 48 */
 };
+
+enum {
+  STARTER_TEMPLATE_SCALE_MODE_NONE, /* smear or apply background color */
+  STARTER_TEMPLATE_SCALE_MODE_HORIZ, /* allow zooming in (cropping left/right) if image is wider than the canvas */
+  STARTER_TEMPLATE_SCALE_MODE_VERT, /* allow zooming in (cropping top/bottom) if image is taller than the canvas */
+  STARTER_TEMPLATE_SCALE_MODE_BOTH /* allow zooming in (cropping anything) if canvas is smaller in either/both dimensions */
+};
+
+enum {
+  STARTER_TEMPLATE_GRAVITY_HORIZ_CENTER,
+  STARTER_TEMPLATE_GRAVITY_HORIZ_LEFT,
+  STARTER_TEMPLATE_GRAVITY_HORIZ_RIGHT
+};
+
+enum {
+  STARTER_TEMPLATE_GRAVITY_VERT_CENTER,
+  STARTER_TEMPLATE_GRAVITY_VERT_TOP,
+  STARTER_TEMPLATE_GRAVITY_VERT_BOTTOM
+};
+
+typedef struct starter_template_options_s {
+  int scale_mode;
+  int h_gravity;
+  int v_gravity;
+  int smear;
+  int bkgd_color[3];
+} starter_template_options_t;
 
 
 /* Macros: */
@@ -1187,11 +1214,8 @@ static int grid_hit_gd(const SDL_Rect * const r, unsigned x, unsigned y,
   unsigned col = (x - r->x) / item_w;
   unsigned row = (y - r->y) / item_h;
 
-#ifdef DEBUG
-  /* FIXME: Send to stderr, not stdout? */
-  printf("%d,%d resolves to %d,%d in a %dx%d grid, index is %d\n", x, y, col,
+  DEBUG_PRINTF("%d,%d resolves to %d,%d in a %dx%d grid, index is %d\n", x, y, col,
          row, gd->cols, gd->rows, col + row * gd->cols);
-#endif
   if (col >= gd->cols || row >= gd->rows)
     return -1;
   return col + row * gd->cols;
@@ -1336,6 +1360,7 @@ static int joystick_button_selectlinestool = 255;
 static int joystick_button_selectshapestool = 255;
 static int joystick_button_selecttexttool = 255;
 static int joystick_button_selectlabeltool = 255;
+static int joystick_button_selectfilltool = 255;
 static int joystick_button_selectmagictool = 255;
 static int joystick_button_undo = 255;
 static int joystick_button_redo = 255;
@@ -1406,6 +1431,7 @@ static int disable_magic_controls;
 static int disable_shape_controls;
 
 static int shape_mode = SHAPEMODE_CENTER;
+static int stamp_rotation_ctrl = 0;
 
 static int starter_mirrored;
 static int starter_flipped;
@@ -1641,7 +1667,7 @@ static SDL_Surface *img_btnsm_up, *img_btnsm_off, *img_btnsm_down,
 static SDL_Surface *img_btn_nav, *img_btnsm_nav;
 static SDL_Surface *img_brush_anim, *img_brush_dir;
 static SDL_Surface *img_prev, *img_next;
-static SDL_Surface *img_mirror, *img_flip;
+static SDL_Surface *img_mirror, *img_flip, *img_rotate;
 static SDL_Surface *img_dead40x40;
 static SDL_Surface *img_black, *img_grey;
 static SDL_Surface *img_yes, *img_no;
@@ -1714,10 +1740,7 @@ static SDL_Surface *render_text(TuxPaint_Font * restrict font,
   {
     sdl_color_to_pango_color(color, &pango_color);
 
-#ifdef DEBUG
-    printf("Calling SDLPango_SetText(\"%s\")\n", str);
-    fflush(stdout);
-#endif
+    DEBUG_PRINTF("Calling SDLPango_SetText(\"%s\")\n", str);
 
 #ifdef __ANDROID__
     /* FIXME This extrange workaround helps in getting the translations working
@@ -1733,10 +1756,7 @@ static SDL_Surface *render_text(TuxPaint_Font * restrict font,
 
   if (font->typ == FONT_TYPE_TTF)
   {
-#ifdef DEBUG
-    printf("Calling TTF_RenderUTF8_Blended(\"%s\")\n", str);
-    fflush(stdout);
-#endif
+    DEBUG_PRINTF("Calling TTF_RenderUTF8_Blended(\"%s\")\n", str);
 
     ret = TTF_RenderUTF8_Blended(font->ttf_font, str, color);
   }
@@ -2178,6 +2198,7 @@ static void free_surface_array(SDL_Surface * surface_array[], int count);
 static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush);
 static int shape_rotation(int ctr_x, int ctr_y, int ox, int oy);
 static int brush_rotation(int ctr_x, int ctr_y, int ox, int oy);
+static int stamp_rotation(int ctr_x, int ctr_y, int ox, int oy);
 static int do_save(int tool, int dont_show_success_results, int autosave);
 static int do_png_save(FILE * fi, const char *const fname, SDL_Surface * surf,
                        int embed);
@@ -2247,7 +2268,9 @@ static char *uppercase(const char *restrict const str);
 static wchar_t *uppercase_w(const wchar_t *restrict const str);
 static char *textdir(const char *const str);
 static SDL_Surface *do_render_button_label(const char *const label);
+#if 0
 static SDL_Surface * crop_surface(SDL_Surface * surf);
+#endif
 static void create_button_labels(void);
 static Uint32 scrolltimer_selector_callback(Uint32 interval, void *param);
 static Uint32 scrolltimer_tool_callback(Uint32 interval, void *param);
@@ -2825,10 +2848,7 @@ static void mainloop(void)
 #ifndef NOSOUND
           if (use_sound)
           {
-#ifdef DEBUG
-            printf("modstate at mainloop %d, mod %d\n", SDL_GetModState(),
-                   mod);
-#endif
+            DEBUG_PRINTF("modstate at mainloop %d, mod %d\n", SDL_GetModState(), mod);
 
             mute = !mute;
             Mix_HaltChannel(-1);
@@ -4147,7 +4167,11 @@ static void mainloop(void)
               if (!disable_stamp_controls)
               {
                 /* Account for stamp controls and group changing (left/right) buttons */
-                gd_controls.rows = 3;
+                if (!no_stamp_rotation) {
+                  gd_controls.rows = 4;
+                } else {
+                  gd_controls.rows = 3;
+                }
                 gd_controls.cols = 2;
               }
               else
@@ -4279,6 +4303,11 @@ static void mainloop(void)
 
               if (cur_tool == TOOL_STAMP)
               {
+                if (no_stamp_rotation && which > 1) {
+                  /* No column for stamp rotation control, pretend the lower buttons are lower */
+                  which += 2;
+                }
+
                 if (stamp_tool_mode == STAMP_TOOL_MODE_ROTATE)
                 {
                   stamp_xor(stamp_place_x, stamp_place_y);
@@ -4289,33 +4318,10 @@ static void mainloop(void)
                 /* Stamp controls! */
                 int control_sound = -1;
 
-                if (which == 4 || which == 5)
+                if (which == 6 || which == 7)
                 {
                   /* Grow/Shrink Controls: */
-#ifdef OLD_STAMP_GROW_SHRINK
-                  if (which == 5)
-                  {
-                    /* Bottom right button: Grow: */
-                    if (stamp_data[stamp_group][cur_stamp[stamp_group]]->size
-                        < MAX_STAMP_SIZE)
-                    {
-                      stamp_data[stamp_group][cur_stamp[stamp_group]]->size++;
-                      control_sound = SND_GROW;
-                    }
-                  }
-                  else
-                  {
-                    /* Bottom left button: Shrink: */
-                    if (stamp_data[stamp_group][cur_stamp[stamp_group]]->size
-                        > MIN_STAMP_SIZE)
-                    {
-                      stamp_data[stamp_group][cur_stamp[stamp_group]]->size--;
-                      control_sound = SND_SHRINK;
-                    }
-                  }
-#else
                   int old_size;
-
 #ifdef DEBUG
                   float choice;
 #endif
@@ -4330,12 +4336,9 @@ static void mainloop(void)
                            (WINDOW_WIDTH - r_ttoolopt.w))) / r_ttoolopt.w) +
                     MIN_STAMP_SIZE;
 
-#ifdef DEBUG
-                  printf("Old size = %d, Chose %0.4f, New size =%d\n",
-                         old_size, choice,
-                         stamp_data[stamp_group][cur_stamp
-                                                 [stamp_group]]->size);
-#endif
+                  DEBUG_PRINTF("Old size = %d, Chose %0.4f, New size =%d\n",
+                               old_size, choice,
+                               stamp_data[stamp_group][cur_stamp[stamp_group]]->size);
 
                   if (stamp_data[stamp_group][cur_stamp[stamp_group]]->size <
                       old_size)
@@ -4344,12 +4347,11 @@ static void mainloop(void)
                     if (stamp_data[stamp_group][cur_stamp[stamp_group]]->size
                         > old_size)
                     control_sound = SND_GROW;
-#endif
                 }
-                else if (which == 2 || which == 3)
+                else if (which == 4 || which == 5)
                 {
                   /* Mirror/Flip Controls: */
-                  if (which == 3)
+                  if (which == 5)
                   {
                     /* Top right button: Flip: */
                     if (stamp_data[stamp_group]
@@ -4375,6 +4377,15 @@ static void mainloop(void)
                       control_sound = SND_MIRROR;
                     }
                   }
+                }
+                else if (which == 2 && !no_stamp_rotation)
+                {
+                  stamp_rotation_ctrl = !stamp_rotation_ctrl;
+                  control_sound = SND_FLIP;
+                }
+                else if (which == 3)
+                {
+                  /* No-op */
                 }
                 else
                 {
@@ -5161,11 +5172,9 @@ static void mainloop(void)
               if (stamp_data[stamp_group][cur_stamp[stamp_group]]->stxt !=
                   NULL)
               {
-#ifdef DEBUG
-                printf
+                DEBUG_PRINTF
                   ("stamp_data[stamp_group][cur_stamp[stamp_group]]->stxt = %s\n",
                    stamp_data[stamp_group][cur_stamp[stamp_group]]->stxt);
-#endif
 
                 draw_tux_text_ex(TUX_GREAT,
                                  stamp_data[stamp_group][cur_stamp
@@ -5950,13 +5959,14 @@ static void mainloop(void)
             {
               if (!disable_stamp_controls)
               {
-                /* was 2,2 before adding left/right stamp group buttons -bjk 2007.05.15 */
-                gd_controls.rows = 3;
+                if (!no_stamp_rotation)
+                  gd_controls.rows = 4;
+                else
+                  gd_controls.rows = 3;
                 gd_controls.cols = 2;
               }
               else
               {
-                /* was left 0,0 before adding left/right stamp group buttons -bjk 2007.05.03 */
                 gd_controls.rows = 1;
                 gd_controls.cols = 2;
               }
@@ -6210,11 +6220,11 @@ static void mainloop(void)
               if (old_x >= 0 && old_y >= 0 && old_x <= r_canvas.w
                   && old_y <= r_canvas.h)
               {
-                if (!no_stamp_rotation)
+                if (!no_stamp_rotation && stamp_rotation_ctrl)
                 {
-                  int mouse_warp_x;
-
                   /* Going through stamp rotation step, first */
+#if 0
+                  int mouse_warp_x;
 
                   /* Warp mouse to the far right of the stamp,
                      where we'll start at 0-degrees of rotation
@@ -6224,12 +6234,15 @@ static void mainloop(void)
                     mouse_warp_x = WINDOW_WIDTH - r_ttoolopt.w - 1;
 
                   SDL_WarpMouse(mouse_warp_x, old_y);
+#endif
                   do_setcursor(cursor_rotate);
 
                   stamp_tool_mode = STAMP_TOOL_MODE_ROTATE;
                   stamp_place_x = old_x;
                   stamp_place_y = old_y;
-                  draw_tux_text(TUX_GREAT, TIP_STAMPS_ROTATING, 1);
+                  snprintf(angle_tool_text, sizeof(angle_tool_text),
+                           gettext(TIP_STAMPS_ROTATING), 0);
+                  draw_tux_text(TUX_GREAT, angle_tool_text, 1);
                 }
                 else
                 {
@@ -6261,7 +6274,7 @@ static void mainloop(void)
               rec_undo_buffer();
               playsound(screen, 1, SND_STAMP, 1, stamp_place_x, SNDDIST_NEAR);
               int stamp_angle_rotation =
-                360 - brush_rotation(stamp_place_x, stamp_place_y, old_x,
+                360 - stamp_rotation(stamp_place_x, stamp_place_y, old_x,
                                      old_y);
 
               stamp_draw(stamp_place_x, stamp_place_y, stamp_angle_rotation);
@@ -6590,7 +6603,12 @@ static void mainloop(void)
 
           /* This if/if/if block is awful -bjk 2022.01.19 */
           if (cur_tool == TOOL_STAMP && !disable_stamp_controls)
-            control_rows = 3;
+          {
+            if (!no_stamp_rotation)
+              control_rows = 4;
+            else
+              control_rows = 3;
+          }
 
           if (cur_tool == TOOL_LABEL)
           {
@@ -6954,10 +6972,13 @@ static void mainloop(void)
             {
               if (stamp_tool_mode == STAMP_TOOL_MODE_ROTATE)
               {
+                int deg;
+
                 stamp_xor(stamp_place_x, stamp_place_y);
-                update_stamp_xor((360 -
-                                  brush_rotation(stamp_place_x, stamp_place_y,
-                                                 new_x, new_y)) % 360);
+
+                deg = (360 - stamp_rotation(stamp_place_x, stamp_place_y, new_x, new_y)) % 360;
+
+                update_stamp_xor(deg);
                 stamp_xor(stamp_place_x, stamp_place_y);
 
                 /* The half of maximum size the stamp could have when rotating. */
@@ -6968,6 +6989,10 @@ static void mainloop(void)
                               stamp_place_y - half_bigbox + r_canvas.y,
                               stamp_place_x + half_bigbox + r_canvas.x,
                               stamp_place_y + half_bigbox + r_canvas.y);
+
+                snprintf(angle_tool_text, sizeof(angle_tool_text),
+                         gettext(TIP_STAMPS_ROTATING), deg);
+                draw_tux_text(TUX_GREAT, angle_tool_text, 1);
               }
               else if (stamp_xored_rt)
               {
@@ -7062,11 +7087,8 @@ static void mainloop(void)
                      (WINDOW_WIDTH - r_ttoolopt.w))) / r_toolopt.w) +
               MIN_STAMP_SIZE;
 
-#ifdef DEBUG
-            printf("Old size = %d, Chose %0.4f, New size =%d\n", old_size,
-                   choice,
-                   stamp_data[stamp_group][cur_stamp[stamp_group]]->size);
-#endif
+            DEBUG_PRINTF("Old size = %d, Chose %0.4f, New size =%d\n", old_size, choice,
+                         stamp_data[stamp_group][cur_stamp[stamp_group]]->size);
 
             if (stamp_data[stamp_group][cur_stamp[stamp_group]]->size !=
                 old_size)
@@ -7907,18 +7929,12 @@ static void tint_surface(SDL_Surface * tmp_surf, SDL_Surface * surf_ptr)
   {
     initial_hue = tint_part_1(work, surf_ptr);
 
-#ifdef DEBUG
-    /* FIXME: To stderr, not stdout? */
-    printf("initial_hue = %f\n", initial_hue);
-#endif
+    DEBUG_PRINTF("initial_hue = %f\n", initial_hue);
 
     key_color_ptr =
       find_most_saturated(initial_hue, work, width * height, &hue_range);
 
-#ifdef DEBUG
-    /* FIXME: To stderr, not stdout? */
-    printf("key_color_ptr = %d\n", (int) (intptr_t) key_color_ptr);     //EP added (intptr_t) to avoid warning on x64
-#endif
+    DEBUG_PRINTF("key_color_ptr = %d\n", (int) (intptr_t) key_color_ptr);     //EP added (intptr_t) to avoid warning on x64
 
     if (key_color_ptr)
     {
@@ -8124,11 +8140,7 @@ static void rec_undo_buffer(void)
 
   newest_undo = cur_undo;
 
-#ifdef DEBUG
-  /* FIXME: Stderr instead of stdout? */
-  printf("DRAW: Current=%d  Oldest=%d  Newest=%d\n", cur_undo, oldest_undo,
-         newest_undo);
-#endif
+  DEBUG_PRINTF("DRAW: Current=%d  Oldest=%d  Newest=%d\n", cur_undo, oldest_undo, newest_undo);
 
 
   /* Update toolbar buttons, if needed: */
@@ -8268,12 +8280,6 @@ void show_version(int details)
 #endif
 
 
-  /* Old code used */
-
-#ifdef OLD_STAMP_GROW_SHRINK
-  printf("  Old-style stamp size UI  (OLD_STAMP_GROW_SHRINK)\n");
-#endif
-
   printf("  Data directory (DATA_PREFIX) = %s\n", DATA_PREFIX);
   printf("  Plugin directory (MAGIC_PREFIX) = %s\n", MAGIC_PREFIX);
   printf("  Doc directory (DOC_PREFIX) = %s\n", DOC_PREFIX);
@@ -8400,7 +8406,7 @@ void show_usage(int exitcode)
           "  [--joystick-buttons-ignore=BUTTON1,BUTTON2,...]\n"
           "  [--joystick-btn-COMMAND=BUTTON]\n"
           /* Find these in "src/parse.gperf" & "src/tuxpaint-completion.bash" */
-          "    (commands: escape, brush, stamp, lines, shapes, text, label, magic,\n"
+          "    (commands: escape, brush, stamp, lines, shapes, text, label, fill, magic,\n"
           "    undo, redo, eraser, new, open, save, pgsetup, print)\n"
           "\n",
           progname);
@@ -8701,10 +8707,7 @@ static void loadstamp_finisher(stamp_type * sd, unsigned w, unsigned h,
   unsigned int lower = 0;
   unsigned mid;
 
-#ifdef DEBUG
-  printf("Finishing %s for %dx%d (ratio=%0.4f)\n", sd->stampname, w, h,
-         ratio);
-#endif
+  DEBUG_PRINTF("Finishing %s for %dx%d (ratio=%0.4f)\n", sd->stampname, w, h, ratio);
 
   /* If Tux Paint is in mirror-image-by-default mode, mirror, if we can: */
   if (mirrorstamps && sd->mirrorable)
@@ -8723,9 +8726,8 @@ static void loadstamp_finisher(stamp_type * sd, unsigned w, unsigned h,
     /* By default, Tux Paint allowed stamps to be, at max, 2x as wide OR 2x as tall as canvas; scaled that back to 1.5 -bjk 2011.01.08 */
     if (pw < canvas->w * 1.5 && ph < canvas->h * 1)
     {
-#ifdef DEBUG
-      printf("Upper at %d with proposed size %dx%d (wide)\n", upper, pw, ph);
-#endif
+      DEBUG_PRINTF("Upper at %d with proposed size %dx%d (wide)\n", upper, pw, ph);
+
       if (pw > canvas->w)
       {
         underscanned_upper = upper - 1;
@@ -8738,9 +8740,8 @@ static void loadstamp_finisher(stamp_type * sd, unsigned w, unsigned h,
     }
     if (pw < canvas->w * 1 && ph < canvas->h * 1.5)
     {
-#ifdef DEBUG
-      printf("Upper at %d with proposed size %dx%d (tall)\n", upper, pw, ph);
-#endif
+      DEBUG_PRINTF("Upper at %d with proposed size %dx%d (tall)\n", upper, pw, ph);
+
       if (ph > canvas->h)
       {
         underscanned_upper = upper - 1;
@@ -8754,9 +8755,8 @@ static void loadstamp_finisher(stamp_type * sd, unsigned w, unsigned h,
 #else
     if (pw <= canvas->w * 1 && ph <= canvas->h * 1)
     {
-#ifdef DEBUG
-      printf("Upper at %d with proposed size %dx%d\n", upper, pw, ph);
-#endif
+      DEBUG_PRINTF("Upper at %d with proposed size %dx%d\n", upper, pw, ph);
+
       underscanned_upper = upper;
       break;
     }
@@ -8775,9 +8775,7 @@ static void loadstamp_finisher(stamp_type * sd, unsigned w, unsigned h,
 
     if (pw * ph > 20)
     {
-#ifdef DEBUG
-      printf("Lower at %d with proposed size %dx%d\n", lower, pw, ph);
-#endif
+      DEBUG_PRINTF("Lower at %d with proposed size %dx%d\n", lower, pw, ph);
       break;
     }
   }
@@ -8814,20 +8812,14 @@ static void loadstamp_finisher(stamp_type * sd, unsigned w, unsigned h,
   sd->size = mid;
   sd->max = upper;
 
-#ifdef DEBUG
-  printf("Final min=%d, size=%d, max=%d\n", lower, mid, upper);
-#endif
+  DEBUG_PRINTF("Final min=%d, size=%d, max=%d\n", lower, mid, upper);
 
   if (stamp_size_override != -1)
   {
     sd->size = (((upper - lower) * stamp_size_override) / 10) + lower;
-#ifdef DEBUG
-    printf("...but adjusting size to %d\n", sd->size);
-#endif
+    DEBUG_PRINTF("...but adjusting size to %d\n", sd->size);
   }
-#ifdef DEBUG
-  printf("\n");
-#endif
+  DEBUG_PRINTF("\n");
 }
 
 
@@ -8865,9 +8857,7 @@ static void set_active_stamp(void)
 
   memcpy(buf, sd->stampname, len);
 
-#ifdef DEBUG
-  printf("\nset_active_stamp()\n");
-#endif
+  DEBUG_PRINTF("\nset_active_stamp()\n");
 
   /* Look for pre-mirrored and pre-flipped version: */
 
@@ -8878,9 +8868,7 @@ static void set_active_stamp(void)
   {
     /* Want mirrored and flipped, both */
 
-#ifdef DEBUG
-    printf("want both mirrored & flipped\n");
-#endif
+    DEBUG_PRINTF("want both mirrored & flipped\n");
 
     if (!sd->no_premirrorflip)
     {
@@ -8899,9 +8887,7 @@ static void set_active_stamp(void)
 
     if (active_stamp != NULL)
     {
-#ifdef DEBUG
-      printf("found a _mirror_flip!\n");
-#endif
+      DEBUG_PRINTF("found a _mirror_flip!\n");
 
       needs_mirror = 0;
       needs_flip = 0;
@@ -8911,9 +8897,7 @@ static void set_active_stamp(void)
       /* Couldn't get one that was both, look for _mirror then _flip and
          flip or mirror it: */
 
-#ifdef DEBUG
-      printf("didn't find a _mirror_flip\n");
-#endif
+      DEBUG_PRINTF("didn't find a _mirror_flip\n");
 
       if (!sd->no_premirror)
       {
@@ -8931,9 +8915,7 @@ static void set_active_stamp(void)
 
       if (active_stamp != NULL)
       {
-#ifdef DEBUG
-        printf("found a _mirror!\n");
-#endif
+        DEBUG_PRINTF("found a _mirror!\n");
         needs_mirror = 0;
       }
       else
@@ -8941,9 +8923,7 @@ static void set_active_stamp(void)
         /* Couldn't get one that was just pre-mirrored, look for a
            pre-flipped */
 
-#ifdef DEBUG
-        printf("didn't find a _mirror, either\n");
-#endif
+        DEBUG_PRINTF("didn't find a _mirror, either\n");
 
         if (!sd->no_preflip)
         {
@@ -8961,16 +8941,12 @@ static void set_active_stamp(void)
 
         if (active_stamp != NULL)
         {
-#ifdef DEBUG
-          printf("found a _flip!\n");
-#endif
+          DEBUG_PRINTF("found a _flip!\n");
           needs_flip = 0;
         }
         else
         {
-#ifdef DEBUG
-          printf("didn't find a _flip, either\n");
-#endif
+          DEBUG_PRINTF("didn't find a _flip, either\n");
         }
       }
     }
@@ -8979,9 +8955,7 @@ static void set_active_stamp(void)
   {
     /* Want flipped only */
 
-#ifdef DEBUG
-    printf("want flipped only\n");
-#endif
+    DEBUG_PRINTF("want flipped only\n");
 
 #ifndef NOSVG
     memcpy(buf + len, "_flip.svg", 10);
@@ -8996,25 +8970,19 @@ static void set_active_stamp(void)
 
     if (active_stamp != NULL)
     {
-#ifdef DEBUG
-      printf("found a _flip!\n");
-#endif
+      DEBUG_PRINTF("found a _flip!\n");
       needs_flip = 0;
     }
     else
     {
-#ifdef DEBUG
-      printf("didn't find a _flip\n");
-#endif
+      DEBUG_PRINTF("didn't find a _flip\n");
     }
   }
   else if (sd->mirrored && !sd->no_premirror)
   {
     /* Want mirrored only */
 
-#ifdef DEBUG
-    printf("want mirrored only\n");
-#endif
+    DEBUG_PRINTF("want mirrored only\n");
 
 #ifndef NOSVG
     memcpy(buf + len, "_mirror.svg", 12);
@@ -9029,16 +8997,12 @@ static void set_active_stamp(void)
 
     if (active_stamp != NULL)
     {
-#ifdef DEBUG
-      printf("found a _mirror!\n");
-#endif
+      DEBUG_PRINTF("found a _mirror!\n");
       needs_mirror = 0;
     }
     else
     {
-#ifdef DEBUG
-      printf("didn't find a _mirror\n");
-#endif
+      DEBUG_PRINTF("didn't find a _mirror\n");
     }
   }
 
@@ -9048,9 +9012,7 @@ static void set_active_stamp(void)
 
   if (!active_stamp)
   {
-#ifdef DEBUG
-    printf("loading normal\n");
-#endif
+    DEBUG_PRINTF("loading normal\n");
 
 #ifndef NOSVG
     memcpy(buf + len, ".svg", 5);
@@ -9076,23 +9038,17 @@ static void set_active_stamp(void)
 
   if (needs_mirror)
   {
-#ifdef DEBUG
-    printf("mirroring\n");
-#endif
+    DEBUG_PRINTF("mirroring\n");
     active_stamp = mirror_surface(active_stamp);
   }
 
   if (needs_flip)
   {
-#ifdef DEBUG
-    printf("flipping\n");
-#endif
+    DEBUG_PRINTF("flipping\n");
     active_stamp = flip_surface(active_stamp);
   }
 
-#ifdef DEBUG
-  printf("\n\n");
-#endif
+  DEBUG_PRINTF("\n\n");
 
   clear_cached_stamp();
 }
@@ -9110,9 +9066,7 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
   unsigned w;
   unsigned h;
 
-#ifdef DEBUG
-  printf("\nget_stamp_thumb()\n");
-#endif
+  DEBUG_PRINTF("\nget_stamp_thumb()\n");
 
   memcpy(buf, sd->stampname, len);
 
@@ -9178,9 +9132,7 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
   /* first see if we can re-use an existing thumbnail */
   if (sd->thumbnail)
   {
-#ifdef DEBUG
-    printf("have an sd->thumbnail\n");
-#endif
+    DEBUG_PRINTF("have an sd->thumbnail\n");
 
     if (sd->thumb_mirrored_flipped == sd->flipped &&
         sd->thumb_mirrored_flipped == sd->mirrored &&
@@ -9189,9 +9141,7 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
     {
       /* It's already the way we want */
 
-#ifdef DEBUG
-      printf("mirrored == flipped == thumb_mirrored_flipped [bye]\n");
-#endif
+      DEBUG_PRINTF("mirrored == flipped == thumb_mirrored_flipped [bye]\n");
 
       return;
     }
@@ -9208,9 +9158,7 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
 
   if (sd->mirrored && sd->flipped)
   {
-#ifdef DEBUG
-    printf("want mirrored & flipped\n");
-#endif
+    DEBUG_PRINTF("want mirrored & flipped\n");
 
     if (!sd->no_premirrorflip)
     {
@@ -9228,18 +9176,15 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
 
     if (bigimg)
     {
-#ifdef DEBUG
-      printf("found a _mirror_flip!\n");
-#endif
+      DEBUG_PRINTF("found a _mirror_flip!\n");
 
       need_mirror = 0;
       need_flip = 0;
     }
     else
     {
-#ifdef DEBUG
-      printf("didn't find a mirror_flip\n");
-#endif
+      DEBUG_PRINTF("didn't find a mirror_flip\n");
+
       sd->no_premirrorflip = 1;
 
       if (!sd->no_premirror)
@@ -9258,17 +9203,13 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
 
       if (bigimg)
       {
-#ifdef DEBUG
-        printf("found a _mirror\n");
-#endif
+        DEBUG_PRINTF("found a _mirror\n");
 
         need_mirror = 0;
       }
       else
       {
-#ifdef DEBUG
-        printf("didn't find a mirror\n");
-#endif
+        DEBUG_PRINTF("didn't find a mirror\n");
 
         if (!sd->no_preflip)
         {
@@ -9286,9 +9227,7 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
 
         if (bigimg)
         {
-#ifdef DEBUG
-          printf("found a _flip\n");
-#endif
+          DEBUG_PRINTF("found a _flip\n");
 
           need_flip = 0;
         }
@@ -9297,9 +9236,7 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
   }
   else if (sd->mirrored && !sd->no_premirror)
   {
-#ifdef DEBUG
-    printf("want mirrored only\n");
-#endif
+    DEBUG_PRINTF("want mirrored only\n");
 
     memcpy(buf + len, "_mirror.png", 12);
     bigimg = do_loadimage(buf, 0);
@@ -9314,24 +9251,18 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
 
     if (bigimg)
     {
-#ifdef DEBUG
-      printf("found a _mirror!\n");
-#endif
+      DEBUG_PRINTF("found a _mirror!\n");
       need_mirror = 0;
     }
     else
     {
-#ifdef DEBUG
-      printf("didn't find a mirror\n");
-#endif
+      DEBUG_PRINTF("didn't find a mirror\n");
       sd->no_premirror = 1;
     }
   }
   else if (sd->flipped && !sd->no_preflip)
   {
-#ifdef DEBUG
-    printf("want flipped only\n");
-#endif
+    DEBUG_PRINTF("want flipped only\n");
 
     memcpy(buf + len, "_flip.png", 10);
     bigimg = do_loadimage(buf, 0);
@@ -9346,16 +9277,12 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
 
     if (bigimg)
     {
-#ifdef DEBUG
-      printf("found a _flip!\n");
-#endif
+      DEBUG_PRINTF("found a _flip!\n");
       need_flip = 0;
     }
     else
     {
-#ifdef DEBUG
-      printf("didn't find a flip\n");
-#endif
+      DEBUG_PRINTF("didn't find a flip\n");
       sd->no_preflip = 1;
     }
   }
@@ -9365,9 +9292,7 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
 
   if (!bigimg)
   {
-#ifdef DEBUG
-    printf("loading normal...\n");
-#endif
+    DEBUG_PRINTF("loading normal...\n");
 
     memcpy(buf + len, ".png", 5);
     bigimg = do_loadimage(buf, 0);
@@ -9409,17 +9334,13 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
 
   if (need_mirror)
   {
-#ifdef DEBUG
-    printf("mirroring\n");
-#endif
+    DEBUG_PRINTF("mirroring\n");
     sd->thumbnail = mirror_surface(sd->thumbnail);
   }
 
   if (need_flip)
   {
-#ifdef DEBUG
-    printf("flipping\n");
-#endif
+    DEBUG_PRINTF("flipping\n");
     sd->thumbnail = flip_surface(sd->thumbnail);
   }
 
@@ -9435,9 +9356,7 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
   sd->thumb_mirrored = sd->mirrored;
   sd->thumb_flipped = sd->flipped;
 
-#ifdef DEBUG
-  printf("\n\n");
-#endif
+  DEBUG_PRINTF("\n\n");
 
 
   /* Finish up, if we need to: */
@@ -9468,10 +9387,8 @@ static void loadstamp_callback(SDL_Surface * screen,
                                unsigned i, const char *restrict const locale)
 {
   (void) locale;
-#ifdef DEBUG
-  /* FIXME: Stderr instead of stdout? */
-  printf("loadstamp_callback (%d): %s\n", i, dir);
-#endif
+
+  DEBUG_PRINTF("loadstamp_callback (%d): %s\n", i, dir);
 
   if (num_stamps[stamp_group] > 0)
   {
@@ -9494,17 +9411,11 @@ static void loadstamp_callback(SDL_Surface * screen,
     if (slashcount <= stamp_group_dir_depth)
     {
       stamp_group++;
-#ifdef DEBUG
-      /* FIXME: Stderr instead of stdout? */
-      printf("\n...counts as a new group! now: %d\n", stamp_group);
-#endif
+      DEBUG_PRINTF("\n...counts as a new group! now: %d\n", stamp_group);
     }
     else
     {
-#ifdef DEBUG
-      /* FIXME: Stderr instead of stdout? */
-      printf("...is still part of group %d\n", stamp_group);
-#endif
+      DEBUG_PRINTF("...is still part of group %d\n", stamp_group);
     }
   }
 
@@ -9708,52 +9619,34 @@ static int generate_fontconfig_cache_real(void)
   SDL_Surface *tmp_surf;
   SDL_Color black = { 0, 0, 0, 0 };
 
-#ifdef DEBUG
-  printf("-- Hello from generate_fontconfig_cache() (thread # %d)\n",
-         SDL_ThreadID());
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("-- Hello from generate_fontconfig_cache() (thread # %d)\n", SDL_ThreadID());
 
   tmp_font = TuxPaint_Font_OpenFont(PANGO_DEFAULT_FONT, NULL, 12);
 
   if (tmp_font != NULL)
   {
-#ifdef DEBUG
-    printf("-- Generated a font.\n");
-    fflush(stdout);
-#endif
+    DEBUG_PRINTF("-- Generated a font.\n");
     tmp_surf = render_text(tmp_font, "Test", black);
     if (tmp_surf != NULL)
     {
-#ifdef DEBUG
-      printf("-- Generated a surface\n");
-      fflush(stdout);
-#endif
+      DEBUG_PRINTF("-- Generated a surface\n");
       SDL_FreeSurface(tmp_surf);
     }
     else
     {
-#ifdef DEBUG
-      printf("-- Failed to make a surface!\n");
-      fflush(stdout);
-#endif
+      DEBUG_PRINTF("-- Failed to make a surface!\n");
     }
     TuxPaint_Font_CloseFont(tmp_font);
   }
   else
   {
-#ifdef DEBUG
-    printf("-- Failed to generate a font!\n");
-    fflush(stdout);
-#endif
+    DEBUG_PRINTF("-- Failed to generate a font!\n");
   }
 
   fontconfig_thread_done = 1;
 
-#ifdef DEBUG
-  printf("-- generate_fontconfig_cache() is done\n");
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("-- generate_fontconfig_cache() is done\n");
+
   return (0);
 }
 
@@ -9833,15 +9726,16 @@ static SDL_Surface *do_render_button_label(const char *const label)
   tmp_surf1 = render_text(myfont, upstr, black);
   free(upstr);
 
-  // FIXME: CROP LABELS
   tmp_surf = tmp_surf1;
-  /*
+
+  // FIXME: CROP LABELS
+#if 0
   tmp_surf = crop_surface(tmp_surf1);
   if(tmp_surf == NULL)
     return NULL;
 
   SDL_FreeSurface(tmp_surf1);
-  */
+#endif
 
   DEBUG_PRINTF("Rendered as: %d x %d\n", tmp_surf->w, tmp_surf->h);
 
@@ -9861,6 +9755,7 @@ static SDL_Surface *do_render_button_label(const char *const label)
   return surf;
 }
 
+#if 0
 static SDL_Surface * crop_surface(SDL_Surface * surf) {
   int top, bottom, left, right, x, y, w, h;
   Uint8 r, g, b, a, r1, g1, b1, a1;
@@ -9922,6 +9817,7 @@ static SDL_Surface * crop_surface(SDL_Surface * surf) {
 
   return new_surf;
 }
+#endif
 
 /**
  * FIXME
@@ -11166,15 +11062,23 @@ static void draw_stamps(void)
 
   /* How many can we show? */
 
-  most = (buttons_tall * gd_toolopt.cols) - gd_toolopt.cols - gd_toolopt.cols - gd_toolopt.cols - TOOLOFFSET;   /* was 10 and 14, before left/right controls -bjk 2007.05.03 */
-  if (disable_stamp_controls)
+  if (!disable_stamp_controls) {
+    if (!no_stamp_rotation) {
+      most = (buttons_tall * gd_toolopt.cols) - gd_toolopt.cols - gd_toolopt.cols - gd_toolopt.cols - gd_toolopt.cols - TOOLOFFSET;
+    } else {
+      most = (buttons_tall * gd_toolopt.cols) - gd_toolopt.cols - gd_toolopt.cols - gd_toolopt.cols - TOOLOFFSET;
+    }
+  } else {
     most = (buttons_tall * gd_toolopt.cols) - gd_toolopt.cols - TOOLOFFSET;
+  }
 
 
   /* Do we need scrollbars? */
 
   if (num_stamps[stamp_group] > most + TOOLOFFSET)
   {
+    /* Yes, need scrollbars */
+
     off_y = img_scroll_up->h;
     max = (most - gd_toolopt.cols) + TOOLOFFSET;
 
@@ -11192,10 +11096,11 @@ static void draw_stamps(void)
 
 
     dest.x = WINDOW_WIDTH - r_ttoolopt.w;
-    dest.y = r_ttoolopt.h + off_y + (((most + 2) / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h); /* was 6, before left/right controls -bjk 2007.05.03 */
+    dest.y = r_ttoolopt.h + off_y + (((most + 2) / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
 
-    if (!disable_stamp_controls)
-      dest.y = dest.y - (button_h * 2);
+    if (!disable_stamp_controls) {
+      dest.y -= (button_h * 2);
+    }
 
     if (stamp_scroll[stamp_group] <
         num_stamps[stamp_group] - (most - 2) - TOOLOFFSET)
@@ -11209,6 +11114,8 @@ static void draw_stamps(void)
   }
   else
   {
+    /* No, do not need scrollbars */
+
     off_y = 0;
     max = most + TOOLOFFSET;
   }
@@ -11262,7 +11169,6 @@ static void draw_stamps(void)
 
   /* Draw stamp group buttons (prev/next): */
 
-
   /* Show prev button: */
 
   button_color = img_black;
@@ -11305,11 +11211,52 @@ static void draw_stamps(void)
 
   if (!disable_stamp_controls)
   {
+    if (!no_stamp_rotation) {
+      /* Show rotation button */
+
+      dest.x = WINDOW_WIDTH - r_ttoolopt.w;
+      dest.y =
+        r_ttoolopt.h +
+        ((most + gd_toolopt.cols + TOOLOFFSET) / gd_toolopt.cols * button_h);
+
+      if (stamp_rotation_ctrl)
+        button_body = img_btn_down;
+      else
+        button_body = img_btn_up;
+
+      SDL_BlitSurface(button_body, NULL, screen, &dest);
+
+      dest.x = WINDOW_WIDTH - (button_w * 2) + (button_w - img_rotate->w) / 2;
+      dest.y =
+        (r_ttoolopt.h +
+         ((most + gd_toolopt.cols + TOOLOFFSET) / gd_toolopt.cols * button_h) +
+         (button_h - img_rotate->h) / 2);
+
+      SDL_BlitSurface(img_black, NULL, img_rotate, NULL);
+      SDL_BlitSurface(img_rotate, NULL, screen, &dest);
+
+      /* No-op button */
+
+      dest.x = WINDOW_WIDTH - r_ttoolopt.w + button_w;
+      dest.y =
+        r_ttoolopt.h +
+        ((most + gd_toolopt.cols + TOOLOFFSET) / gd_toolopt.cols * button_h);
+
+      SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
+
+
+      /* Push other buttons down */
+      off_y = button_h;
+    } else {
+      off_y = 0;
+    } /* !no_stamp_rotation */
+
+
     /* Show mirror button: */
 
     dest.x = WINDOW_WIDTH - r_ttoolopt.w;
     dest.y =
-      r_ttoolopt.h +
+      r_ttoolopt.h + off_y +
       ((most + gd_toolopt.cols + TOOLOFFSET) / gd_toolopt.cols * button_h);
 
     if (stamp_data[stamp_group][cur_stamp[stamp_group]]->mirrorable)
@@ -11334,7 +11281,7 @@ static void draw_stamps(void)
 
     dest.x = WINDOW_WIDTH - r_ttoolopt.w + (button_w - img_mirror->w) / 2;
     dest.y =
-      (r_ttoolopt.h +
+      (r_ttoolopt.h + off_y +
        ((most + gd_toolopt.cols + TOOLOFFSET) / gd_toolopt.cols * button_h) +
        (button_h - img_mirror->h) / 2);
 
@@ -11345,7 +11292,7 @@ static void draw_stamps(void)
 
     dest.x = WINDOW_WIDTH - button_w;
     dest.y =
-      r_ttoolopt.h +
+      r_ttoolopt.h + off_y +
       ((most + gd_toolopt.cols + TOOLOFFSET) / gd_toolopt.cols * button_h);
 
     if (stamp_data[stamp_group][cur_stamp[stamp_group]]->flipable)
@@ -11370,68 +11317,14 @@ static void draw_stamps(void)
 
     dest.x = WINDOW_WIDTH - button_w + (button_w - img_flip->w) / 2;
     dest.y =
-      (r_ttoolopt.h +
+      (r_ttoolopt.h + off_y +
        ((most + gd_toolopt.cols + TOOLOFFSET) / gd_toolopt.cols * button_h) +
        (button_h - img_flip->h) / 2);
 
     SDL_BlitSurface(button_color, NULL, img_flip, NULL);
     SDL_BlitSurface(img_flip, NULL, screen, &dest);
 
-
-#ifdef OLD_STAMP_GROW_SHRINK
-    /* Show shrink button: */
-
-    dest.x = WINDOW_WIDTH - r_ttoolopt.w;
-    dest.y = 40 + ((6 + TOOLOFFSET / 2) * button_h);
-
-    if (stamp_data[stamp_group][cur_stamp[stamp_group]]->size >
-        MIN_STAMP_SIZE)
-    {
-      button_color = img_black;
-      button_body = img_btn_up;
-    }
-    else
-    {
-      button_color = img_grey;
-      button_body = img_btn_off;
-    }
-    SDL_BlitSurface(button_body, NULL, screen, &dest);
-
-    dest.x = WINDOW_WIDTH - r_ttoolopt.w + (button_w - img_shrink->w) / 2;
-    dest.y =
-      (40 + ((6 + TOOLOFFSET / 2) * button_h) +
-       (button_h - img_shrink->h) / 2);
-
-    SDL_BlitSurface(button_color, NULL, img_shrink, NULL);
-    SDL_BlitSurface(img_shrink, NULL, screen, &dest);
-
-
-    /* Show grow button: */
-
-    dest.x = WINDOW_WIDTH - button_w;
-    dest.y = 40 + ((6 + TOOLOFFSET / 2) * button_h);
-
-    if (stamp_data[stamp_group][cur_stamp[stamp_group]]->size <
-        MAX_STAMP_SIZE)
-    {
-      button_color = img_black;
-      button_body = img_btn_up;
-    }
-    else
-    {
-      button_color = img_grey;
-      button_body = img_btn_off;
-    }
-    SDL_BlitSurface(button_body, NULL, screen, &dest);
-
-    dest.x = WINDOW_WIDTH - button_w + (button_w - img_grow->w) / 2;
-    dest.y =
-      (40 + ((6 + TOOLOFFSET / 2) * button_h) + (button_h - img_grow->h) / 2);
-
-    SDL_BlitSurface(button_color, NULL, img_grow, NULL);
-    SDL_BlitSurface(img_grow, NULL, screen, &dest);
-
-#else
+    /* Stamp size control: */
     sizes = MAX_STAMP_SIZE - MIN_STAMP_SIZE + 1;        /* +1 for SF Bug #1668235 -bjk 2011.01.08 */
     size_at =
       (stamp_data[stamp_group][cur_stamp[stamp_group]]->size -
@@ -11457,21 +11350,20 @@ static void draw_stamps(void)
       dest.x = (WINDOW_WIDTH - r_ttoolopt.w) + (i * x_per);
       dest.y =
         (((most + gd_toolopt.cols + gd_toolopt.cols + gd_toolopt.cols +
-           TOOLOFFSET) / gd_toolopt.cols * button_h)) - 8 * button_scale;
+           TOOLOFFSET) / gd_toolopt.cols * button_h)) - 8 * button_scale + off_y;
       SDL_BlitSurface(blnk, NULL, screen, &dest);
 
       dest.x = (WINDOW_WIDTH - r_ttoolopt.w) + (i * x_per);
       dest.y =
         (((most + gd_toolopt.cols + gd_toolopt.cols + gd_toolopt.cols +
            gd_toolopt.cols + TOOLOFFSET) / gd_toolopt.cols * button_h)) -
-        8 * button_scale - (y_per * i);
+        8 * button_scale - (y_per * i) + off_y;
       SDL_BlitSurface(btn, NULL, screen, &dest);
 
       SDL_FreeSurface(btn);
       SDL_FreeSurface(blnk);
     }
-#endif
-  }
+  } /* !disable_stamp_controls */
 
   redraw_tux_text();
 }
@@ -12398,10 +12290,7 @@ static void do_undo(void)
     been_saved = 0;
   }
 
-#ifdef DEBUG
-  printf("UNDO: Current=%d  Oldest=%d  Newest=%d\n", cur_undo, oldest_undo,
-         newest_undo);
-#endif
+  DEBUG_PRINTF("UNDO: Current=%d  Oldest=%d  Newest=%d\n", cur_undo, oldest_undo, newest_undo);
 }
 
 
@@ -12429,9 +12318,8 @@ static void do_redo(void)
 
     cur_undo = (cur_undo + 1) % NUM_UNDO_BUFS;
 
-#ifdef DEBUG
-    printf("BLITTING: %d\n", cur_undo);
-#endif
+    DEBUG_PRINTF("BLITTING: %d\n", cur_undo);
+
     do_redo_label_node();
     SDL_BlitSurface(undo_bufs[cur_undo], NULL, canvas, NULL);
 
@@ -12441,10 +12329,7 @@ static void do_redo(void)
     been_saved = 0;
   }
 
-#ifdef DEBUG
-  printf("REDO: Current=%d  Oldest=%d  Newest=%d\n", cur_undo, oldest_undo,
-         newest_undo);
-#endif
+  DEBUG_PRINTF("REDO: Current=%d  Oldest=%d  Newest=%d\n", cur_undo, oldest_undo, newest_undo);
 
 
   if (((cur_undo + 1) % NUM_UNDO_BUFS) == newest_undo)
@@ -13063,9 +12948,7 @@ static void enable_avail_tools(void)
 /* For qsort() call in do_open()... */
 static int compare_dirent2s(struct dirent2 *f1, struct dirent2 *f2)
 {
-#ifdef DEBUG
-  printf("compare_dirents: %s\t%s\n", f1->f.d_name, f2->f.d_name);
-#endif
+  DEBUG_PRINTF("compare_dirents: %s\t%s\n", f1->f.d_name, f2->f.d_name);
 
   if (f1->place == f2->place)
     return (strcmp(f1->f.d_name, f2->f.d_name));
@@ -14213,6 +14096,325 @@ static void autoscale_copy_smear_free(SDL_Surface * src, SDL_Surface * dst,
 
 
 /**
+ * Copy an image, scaling and smearing, as needed, into a new surface.
+ * Free the original surface.
+ *
+ * @param SDL_Surface * src -- source surface (will be freed by this function!)
+ * @param SDL_Surface * dst -- destination surface
+ * @param int SDCALL(*blit) -- function for blitting; "NondefectiveBlit" or "SDL_BlitSurface"
+ * @param starter_template_options_t opts -- options (loaded from ".dat" file) describing strategies to take
+ */
+static void autoscale_copy_scale_or_smear_free(SDL_Surface * src, SDL_Surface * dst,
+                                               int SDLCALL(*blit) (SDL_Surface * src,
+                                                                   const SDL_Rect * srcrect,
+                                                                   SDL_Surface * dst,
+                                                                   SDL_Rect * dstrect),
+                                               starter_template_options_t opts) {
+  int new_w, new_h;
+  float src_aspect, dst_aspect;
+
+  new_w = src->w;
+  new_h = src->h;
+
+  src_aspect = (float) src->w / (float) src->h;
+  dst_aspect = (float) dst->w / (float) dst->h;
+
+  if (src_aspect > dst_aspect) {
+    DEBUG_PRINTF("Image (%d x %d) is of a wider aspect (%0.5f) than canvas (%d x %d) (%0.5f)\n", src->w, src->h, src_aspect, dst->w, dst->h, dst_aspect);
+    if (opts.scale_mode == STARTER_TEMPLATE_SCALE_MODE_HORIZ ||
+        opts.scale_mode == STARTER_TEMPLATE_SCALE_MODE_BOTH) {
+      new_h = dst->h;
+      new_w = dst->h * src_aspect;
+      DEBUG_PRINTF("Okay to crop left/right. Keeping aspect; scaling to %d x %d\n", new_w, new_h);
+    }
+  } else if (src_aspect < dst_aspect) {
+    DEBUG_PRINTF("Image (%d x %d) is of a taller aspect (%0.5f) than canvas (%d x %d) (%0.5f)\n", src->w, src->h, src_aspect, dst->w, dst->h, dst_aspect);
+    if (opts.scale_mode == STARTER_TEMPLATE_SCALE_MODE_VERT ||
+        opts.scale_mode == STARTER_TEMPLATE_SCALE_MODE_BOTH) {
+      new_w = dst->w;
+      new_h = dst->w / src_aspect;
+      DEBUG_PRINTF("Okay to crop top/bottom. Keeping aspect; scaling to %d x %d\n", new_w, new_h);
+    }
+  } else {
+    DEBUG_PRINTF("Image (%d x %d) is the same aspect as canvas (%d x %d) (%0.05f)\n", src->w, src->h, dst->w, dst->h, src_aspect);
+  }
+
+
+  /* Scale and crop based on any aspect-ratio-keeping adjustments */
+  if (new_w != src->w || new_h != src->h) {
+    SDL_Surface * scaled, * src1;
+    SDL_Rect src_rect;
+
+    /* Scale, keeping aspect, which will cause extra content that needs cropping */
+
+    DEBUG_PRINTF("Scaling from %d x %d to %d x %d\n", src->w, src->h, new_w, new_h);
+
+    scaled = thumbnail2(src, new_w, new_h, 0 /* keep aspect */, 1 /* keep alpha */);
+    if (scaled == NULL) {
+      fprintf(stderr, "Failed to scale an image!\n");
+      return;
+    }
+
+    /* Create a new surface to blit (crop) into */
+    src1 = SDL_CreateRGBSurface(src->flags,  /* SDL_SWSURFACE, */
+                                dst->w, dst->h, src->format->BitsPerPixel,
+                                src->format->Rmask, src->format->Gmask,
+                                src->format->Bmask, src->format->Amask);
+    if (src1 == NULL) {
+      fprintf(stderr, "Failed to create a surface!\n");
+      return;
+    }
+
+    SDL_FreeSurface(src);
+    src = src1;
+
+    /* Place the new image onto the dest */
+    if (opts.h_gravity == STARTER_TEMPLATE_GRAVITY_HORIZ_LEFT) {
+      src_rect.x = 0;
+    } else if (opts.h_gravity == STARTER_TEMPLATE_GRAVITY_HORIZ_RIGHT) {
+      src_rect.x = scaled->w - dst->w;
+    } else /* opts.h_gravity == STARTER_TEMPLATE_GRAVITY_HORIZ_CENTER */ {
+      src_rect.x = (scaled->w - dst->w) / 2;
+    }
+
+    if (opts.v_gravity == STARTER_TEMPLATE_GRAVITY_VERT_TOP) {
+      src_rect.y = 0;
+    } else if (opts.v_gravity == STARTER_TEMPLATE_GRAVITY_VERT_BOTTOM) {
+      src_rect.y = scaled->h - dst->h;
+    } else /* opts.v_gravity == STARTER_TEMPLATE_GRAVITY_VERT_CENTER */ {
+      src_rect.y = (scaled->h - dst->h) / 2;
+    }
+
+    src_rect.w = scaled->w;
+    src_rect.h = scaled->h;
+
+    DEBUG_PRINTF("Blitting scaled image (%d x %d) into new 'src' image (%d x %d) at (%d,%d) %d x %d\n",
+                 scaled->w, scaled->h, src->w, src->h, src_rect.x, src_rect.y, src_rect.w, src_rect.h);
+
+    SDL_BlitSurface(scaled, &src_rect, src, NULL);
+  }
+
+
+  if (src->w != dst->w || src->h != dst->h) {
+    DEBUG_PRINTF("Fitting %d x %d onto %d x %d canvas\n", src->w, src->h, dst->w, dst->h);
+
+    if (opts.smear) {
+      autoscale_copy_smear_free(src, dst, blit);
+      /* Note: autoscale_copy_smear_free() calls SDL_FreeSurface(src)! */
+    } else {
+      SDL_Surface * scaled;
+      SDL_Rect dst_rect;
+
+      if (src->w != dst->w || src->h != dst->h) {
+        if (src->w / (float) dst->w > src->h / (float) dst->h) {
+          DEBUG_PRINTF("Scaling from %d x %d to %d x %d\n", src->w, src->h, dst->w, src->h * dst->w / src->w);
+          scaled = thumbnail(src, dst->w, src->h * dst->w / src->w, 0);
+        } else {
+          DEBUG_PRINTF("Scaling from %d x %d to %d x %d\n", src->w, src->h, src->w * dst->h / src->h, dst->h);
+          scaled = thumbnail(src, src->w * dst->h / src->h, dst->h, 0);
+        }
+      }
+
+      SDL_FreeSurface(src);
+
+      if (scaled == NULL) {
+        fprintf(stderr, "Failed to scale an image!\n");
+        return;
+      }
+
+      DEBUG_PRINTF("Centering on a background color\n");
+
+      SDL_FillRect(dst, NULL, SDL_MapRGB(dst->format, opts.bkgd_color[0], opts.bkgd_color[1], opts.bkgd_color[2]));
+
+      dst_rect.x = (dst->w - scaled->w) / 2;
+      dst_rect.y = (dst->h - scaled->h) / 2;
+      dst_rect.w = scaled->w;
+      dst_rect.h = scaled->h;
+
+      SDL_BlitSurface(scaled, NULL, dst, &dst_rect);
+
+      SDL_FreeSurface(scaled);
+    }
+  } else {
+    DEBUG_PRINTF("No smearing or background needed\n");
+
+    autoscale_copy_smear_free(src, dst, blit);
+    // SDL_FreeSurface(src);
+  }
+}
+
+
+/**
+ * Attempt to open a starter/template image's options (".dat")
+ * file and read the settings into an options structure.
+ *
+ * @param char * dirname -- directory source of image
+ * @param char * img_id -- basename of image
+ * @param starter_template_options_t * opts -- pointer to options struct to fill
+ */
+static void get_starter_template_options(char * dirname, char * img_id, starter_template_options_t * opts) {
+  char fname[256], buf[256];
+  char * arg;
+  FILE * fi;
+
+  /* Set defaults for all options (in case file missing, or file doesn't specify certain options) */
+  opts->scale_mode = STARTER_TEMPLATE_SCALE_MODE_NONE;
+  opts->h_gravity = STARTER_TEMPLATE_GRAVITY_HORIZ_CENTER;
+  opts->v_gravity = STARTER_TEMPLATE_GRAVITY_VERT_CENTER;
+  opts->smear = 1;
+  opts->bkgd_color[0] = 255;
+  opts->bkgd_color[1] = 255;
+  opts->bkgd_color[2] = 255;
+
+  /* Attempt to open the file */
+  safe_snprintf(fname, sizeof(fname), "%s/%s.dat", dirname, img_id);
+  fi = fopen(fname, "r");
+  if (fi == NULL) {
+    return;
+  }
+
+  while (!feof(fi)) {
+    if (fgets(buf, sizeof(buf), fi))
+    {
+      if (!feof(fi))
+      {
+        strip_trailing_whitespace(buf);
+
+        if (buf[0] == '\0' || buf[0] == '#') {
+          continue;
+        }
+
+        arg = strchr(buf, '=');
+        if (arg) {
+          *arg++ = '\0';
+        } else {
+          fprintf(stderr, "Don't understand line in '%s': '%s'\n", fname, buf);
+          continue;
+        }
+
+        if (strcmp(buf, "allowscale") == 0) {
+          if (strcmp(arg, "horizontal") == 0) {
+            opts->scale_mode = STARTER_TEMPLATE_SCALE_MODE_HORIZ;
+          } else if (strcmp(arg, "vertical") == 0) {
+            opts->scale_mode = STARTER_TEMPLATE_SCALE_MODE_VERT;
+          } else if (strcmp(arg, "both") == 0) {
+            opts->scale_mode = STARTER_TEMPLATE_SCALE_MODE_BOTH;
+          } else if (strcmp(arg, "none") == 0) {
+            opts->scale_mode = STARTER_TEMPLATE_SCALE_MODE_NONE;
+          } else {
+            fprintf(stderr, "Unknown 'autoscale' option in '%s': '%s'\n", fname, arg);
+          }
+        } else if (strcmp(buf, "gravity") == 0) {
+          if (strcmp(arg, "top") == 0) {
+            opts->h_gravity = STARTER_TEMPLATE_GRAVITY_HORIZ_CENTER;
+            opts->v_gravity = STARTER_TEMPLATE_GRAVITY_VERT_TOP;
+          } else if (strcmp(arg, "bottom") == 0) {
+            opts->h_gravity = STARTER_TEMPLATE_GRAVITY_HORIZ_CENTER;
+            opts->v_gravity = STARTER_TEMPLATE_GRAVITY_VERT_BOTTOM;
+          } else if (strcmp(arg, "left") == 0) {
+            opts->h_gravity = STARTER_TEMPLATE_GRAVITY_HORIZ_LEFT;
+            opts->v_gravity = STARTER_TEMPLATE_GRAVITY_VERT_CENTER;
+          } else if (strcmp(arg, "right") == 0) {
+            opts->h_gravity = STARTER_TEMPLATE_GRAVITY_HORIZ_RIGHT;
+            opts->v_gravity = STARTER_TEMPLATE_GRAVITY_VERT_CENTER;
+          } else if (strcmp(arg, "top-left") == 0) {
+            opts->h_gravity = STARTER_TEMPLATE_GRAVITY_HORIZ_LEFT;
+            opts->v_gravity = STARTER_TEMPLATE_GRAVITY_VERT_TOP;
+          } else if (strcmp(arg, "bottom-left") == 0) {
+            opts->h_gravity = STARTER_TEMPLATE_GRAVITY_HORIZ_LEFT;
+            opts->v_gravity = STARTER_TEMPLATE_GRAVITY_VERT_BOTTOM;
+          } else if (strcmp(arg, "top-right") == 0) {
+            opts->h_gravity = STARTER_TEMPLATE_GRAVITY_HORIZ_RIGHT;
+            opts->v_gravity = STARTER_TEMPLATE_GRAVITY_VERT_TOP;
+          } else if (strcmp(arg, "bottom-right") == 0) {
+            opts->h_gravity = STARTER_TEMPLATE_GRAVITY_HORIZ_RIGHT;
+            opts->v_gravity = STARTER_TEMPLATE_GRAVITY_VERT_BOTTOM;
+          } else if (strcmp(arg, "center") == 0) {
+            opts->h_gravity = STARTER_TEMPLATE_GRAVITY_HORIZ_CENTER;
+            opts->v_gravity = STARTER_TEMPLATE_GRAVITY_VERT_CENTER;
+          } else {
+            fprintf(stderr, "Unknown 'autoscale' option in '%s': '%s'\n", fname, arg);
+          }
+        } else if (strcmp(buf, "background") == 0) {
+          if (strcmp(arg, "smear") == 0) {
+            opts->smear = 1;
+          } else {
+            int count;
+            char tmp_str[256];
+
+            opts->smear = 0;
+
+            /* FIXME: This and setup_colors() needs to be modularized -bjk 2023.02.10 */
+
+            if (arg[0] == '#')
+            {
+              /* Hex form */
+
+              sscanf(arg + 1, "%s %n", tmp_str, &count);
+
+              if (strlen(tmp_str) == 6)
+              {
+                DEBUG_PRINTF("6 digit hex ('%s')\n", arg);
+
+                /* Byte (#rrggbb) form */
+
+                opts->bkgd_color[0] =
+                  (hex2dec(tmp_str[0]) << 4) + hex2dec(tmp_str[1]);
+                opts->bkgd_color[1] =
+                  (hex2dec(tmp_str[2]) << 4) + hex2dec(tmp_str[3]);
+                opts->bkgd_color[2] =
+                  (hex2dec(tmp_str[4]) << 4) + hex2dec(tmp_str[5]);
+              }
+              else if (strlen(tmp_str) == 3)
+              {
+                DEBUG_PRINTF("3 digit hex ('%s')\n", arg);
+
+                /* Nybble (#rgb) form */
+
+                opts->bkgd_color[0] =
+                  (hex2dec(tmp_str[0]) << 4) + hex2dec(tmp_str[0]);
+                opts->bkgd_color[1] =
+                  (hex2dec(tmp_str[1]) << 4) + hex2dec(tmp_str[1]);
+                opts->bkgd_color[2] =
+                  (hex2dec(tmp_str[2]) << 4) + hex2dec(tmp_str[2]);
+              } else {
+                fprintf(stderr, "Don't understand color hex '%s'\n", arg);
+              }
+            }
+            else
+            {
+              DEBUG_PRINTF("Integers ('%s')\n", arg);
+
+              /* Assume int form */
+
+              sscanf(arg, "%hu %hu %hu %n",
+                         (short unsigned int *) &(opts->bkgd_color[0]),
+                         (short unsigned int *) &(opts->bkgd_color[1]),
+                         (short unsigned int *) &(opts->bkgd_color[2]),
+                         &count);
+            }
+
+            DEBUG_PRINTF("Background color: %d,%d,%d\n", opts->bkgd_color[0], opts->bkgd_color[1], opts->bkgd_color[2]);
+          }
+        } else {
+          fprintf(stderr, "Unrecognized option in '%s': '%s' (set to '%s')\n", fname, buf, arg);
+          continue;
+        }
+      }
+    }
+  }
+  fclose(fi);
+
+  /* FIXME: It might be worth reporting warnings for these situations: */
+  /* N.B. If 'allowscale=both', then background options are meaningless;
+     we could report that here (e.g., to stderr) -bjk 2023.02.10 */
+  /* N.B. Certain 'gravity' options don't make sense based on the
+     'allowscale' option (e.g., if "vertical", then gravities that
+     include 'left' or 'right' are meaningless) -bjk 2023.02.12 */
+}
+
+
+/**
  * FIXME
  */
 static void load_starter_id(char *saved_id, FILE * fil)
@@ -14283,10 +14485,7 @@ static void load_starter_id(char *saved_id, FILE * fil)
         tmp_ptr = fgets(template_id, sizeof(template_id), fi);
         template_id[strlen(template_id) - 1] = '\0';
         tmp = fscanf(fi, "%d", &template_personal);
-#ifdef DEBUG
-        printf("template = %s\n (Personal=%d)", template_id,
-               template_personal);
-#endif
+        DEBUG_PRINTF("template = %s\n (Personal=%d)", template_id, template_personal);
       }
       if (!feof(fi) && color_tag == 'M')
       {
@@ -14349,6 +14548,8 @@ static void load_starter(char *img_id)
   char *dirname;
   char fname[256];
   SDL_Surface *tmp_surf;
+  starter_template_options_t template_options;
+
 
   /* Determine path to starter files: */
 
@@ -14509,7 +14710,10 @@ static void load_starter(char *img_id)
     //    SDL_SetAlpha(tmp_surf, SDL_RLEACCEL, SDL_ALPHA_OPAQUE);
     //SDL_SetSurfaceBlendMode(tmp_surf, SDL_BLENDMODE_BLEND);
 
-    autoscale_copy_smear_free(tmp_surf, img_starter, NondefectiveBlit);
+    get_starter_template_options(dirname, img_id, &template_options);
+
+    autoscale_copy_scale_or_smear_free(tmp_surf, img_starter, NondefectiveBlit, template_options);
+
     //    SDL_SetAlpha(img_starter, SDL_RLEACCEL, SDL_ALPHA_OPAQUE);
     SDL_SetSurfaceBlendMode(img_starter, SDL_BLENDMODE_BLEND);
 
@@ -14528,8 +14732,8 @@ static void load_starter(char *img_id)
                                             canvas->format->Rmask,
                                             canvas->format->Gmask,
                                             canvas->format->Bmask, 0);
-
-    autoscale_copy_smear_free(tmp_surf, img_starter_bkgd, SDL_BlitSurface);
+ 
+    autoscale_copy_scale_or_smear_free(tmp_surf, img_starter_bkgd, SDL_BlitSurface, template_options);
   }
 
   free(dirname);
@@ -14544,6 +14748,7 @@ static void load_template(char *img_id)
   char *dirname;
   char fname[256];
   SDL_Surface *tmp_surf;
+  starter_template_options_t template_options;
 
   /* Determine path to starter files: */
 
@@ -14595,6 +14800,9 @@ static void load_template(char *img_id)
     SDL_FreeSurface(tmp_surf);
   }
 
+  /* Get template's options */
+  get_starter_template_options(dirname, img_id, &template_options);
+
 
   /* Scale if needed... */
 
@@ -14611,7 +14819,7 @@ static void load_template(char *img_id)
                                             canvas->format->Gmask,
                                             canvas->format->Bmask, 0);
 
-    autoscale_copy_smear_free(tmp_surf, img_starter_bkgd, SDL_BlitSurface);
+    autoscale_copy_scale_or_smear_free(tmp_surf, img_starter_bkgd, SDL_BlitSurface, template_options);
   }
 
   free(dirname);
@@ -14717,6 +14925,7 @@ static void load_current(void)
     else
     {
       org_surf = SDL_DisplayFormat(tmp);
+      DEBUG_PRINTF("Smearing canvas @ 4\n");
       autoscale_copy_smear_free(tmp, canvas, SDL_BlitSurface);
 
       /* First we run this for compatibility, then we will chek if
@@ -14738,6 +14947,11 @@ static void load_current(void)
       }
 
       load_embedded_data(fname, org_surf);
+
+      /* FIXME: Consider using the new
+         autoscale_copy_smear_or_scale_free() based on the starter/template
+         file's options? (Will need to do here, rather than first thing,
+         above) -bjk 2023.02.09 */
     }
 
     free(fname);
@@ -15443,6 +15657,7 @@ static void cleanup(void)
 
   free_surface(&img_mirror);
   free_surface(&img_flip);
+  free_surface(&img_rotate);
 
   free_surface(&img_title_on);
   free_surface(&img_title_off);
@@ -15555,27 +15770,21 @@ static void cleanup(void)
 
   if (medium_font != NULL)
   {
-#ifdef DEBUG
-    printf("cleanup: medium font\n");   //EP
-#endif
+    DEBUG_PRINTF("cleanup: medium font\n");   //EP
     TuxPaint_Font_CloseFont(medium_font);
     medium_font = NULL;
   }
 
   if (small_font != NULL)
   {
-#ifdef DEBUG
-    printf("cleanup: small font\n");    //EP
-#endif
+    DEBUG_PRINTF("cleanup: small font\n");    //EP
     TuxPaint_Font_CloseFont(small_font);
     small_font = NULL;
   }
 
   if (large_font != NULL)
   {
-#ifdef DEBUG
-    printf("cleanup: large font\n");    //EP
-#endif
+    DEBUG_PRINTF("cleanup: large font\n");    //EP
     TuxPaint_Font_CloseFont(large_font);
     large_font = NULL;
   }
@@ -16126,14 +16335,18 @@ static int shape_rotation(int ctr_x, int ctr_y, int ox, int oy)
 /**
  * FIXME
  */
-/* What angle is the mouse away from a brush drag or line draw? */
+/* What angle (degrees) is the mouse away from a brush drag, line draw, or stamp placement? */
 static int brush_rotation(int ctr_x, int ctr_y, int ox, int oy)
 {
-  int deg;
+  return (atan2(oy - ctr_y, ox - ctr_x) * 180 / M_PI);
+}
 
-  deg = (atan2(oy - ctr_y, ox - ctr_x) * 180 / M_PI);
-
-  return (deg);
+/* What angle (degrees) is the mouse away from a stamp placement (keep at zero if within stamp's bounding box!) */
+static int stamp_rotation(int ctr_x, int ctr_y, int ox, int oy)
+{
+  if (abs(ctr_x - ox) <= CUR_STAMP_W / 2 && abs(ctr_y - oy) <= CUR_STAMP_H / 2)
+    return (0);
+  return brush_rotation(ctr_x, ctr_y, ox, oy);
 }
 
 
@@ -16509,9 +16722,8 @@ static void do_png_embed_data(png_structp png_ptr)
   /* Starter foreground */
   if (img_starter)
   {
-#ifdef DEBUG
-    printf("Saving starter... %d\n", (int) (intptr_t) img_starter);     //EP added (intptr_t) to avoid warning on x64
-#endif
+    DEBUG_PRINTF("Saving starter... %d\n", (int) (intptr_t) img_starter);     //EP added (intptr_t) to avoid warning on x64
+
     sbk_pixs = malloc(img_starter->h * img_starter->w * 4);
     compressedLen = compressBound(img_starter->h * img_starter->w * 4);
 
@@ -16621,9 +16833,7 @@ static void do_png_embed_data(png_structp png_ptr)
     if (SDL_MUSTLOCK(img_starter_bkgd))
       SDL_UnlockSurface(img_starter_bkgd);
 
-#ifdef DEBUG
-    printf("%d \n", (int) compressedLen);
-#endif
+    DEBUG_PRINTF("%d \n", (int) compressedLen);
 
     compress(compressed_data, &compressedLen, sbk_pixs,
              img_starter_bkgd->h * img_starter_bkgd->w * 3);
@@ -16631,9 +16841,8 @@ static void do_png_embed_data(png_structp png_ptr)
     set_chunk_data(&chunk_data, &chunk_data_len,
                    img_starter_bkgd->w * img_starter_bkgd->h * 3,
                    compressed_data, compressedLen);
-#ifdef DEBUG
-    printf("%d \n", (int) compressedLen);
-#endif
+
+    DEBUG_PRINTF("%d \n", (int) compressedLen);
 
 
     tuxpaint_chunks[2].data = (png_byte *) chunk_data;
@@ -16809,10 +17018,8 @@ static void do_png_embed_data(png_structp png_ptr)
         fprintf(lfi, "\n\n");
       }
       current_node = current_node->next_to_up_label_node;
-#ifdef DEBUG
-      printf("cur %p, red %p\n", current_node,
-             first_label_node_in_redo_stack);
-#endif
+
+      DEBUG_PRINTF("cur %p, red %p\n", current_node, first_label_node_in_redo_stack);
     }
 
 #ifdef fmemopen_alternative
@@ -17479,11 +17686,7 @@ static int do_open(void)
     }
 
 
-
-#ifdef DEBUG
-    printf("%d saved files were found!\n", num_files);
-#endif
-
+    DEBUG_PRINTF("%d saved files were found!\n", num_files);
 
 
     if (num_files == 0)
@@ -18369,6 +18572,7 @@ static int do_open(void)
             starter_flipped = 0;
             starter_personal = 0;
 
+            DEBUG_PRINTF("Smearing canvas @ 5\n");
             org_surf = SDL_DisplayFormat(img);  /* Keep a copy of the original image
                                                    unscaled to send to load_embedded_data */
             autoscale_copy_smear_free(img, canvas, SDL_BlitSurface);
@@ -18405,6 +18609,11 @@ static int do_open(void)
               load_template(template_id);
 
             load_embedded_data(fname, org_surf);
+
+            /* FIXME: Consider using the new
+               autoscale_copy_smear_or_scale_free() based on the starter/template
+               file's options? (Will need to do here, rather than first thing,
+               above) -bjk 2023.02.09 */
 
             reset_avail_tools();
 
@@ -18745,9 +18954,8 @@ static int do_slideshow(void)
     }
   }
 
-#ifdef DEBUG
-  printf("%d saved files were found!\n", num_files);
-#endif
+  DEBUG_PRINTF("%d saved files were found!\n", num_files);
+
   /* Let user choose images: */
 
   /* Instructions for Slideshow file dialog */
@@ -19528,6 +19736,7 @@ static void play_slideshow(int *selected, int num_selected, char *dirname,
 
       if (img != NULL)
       {
+        DEBUG_PRINTF("Smearing starter @ 6 (slideshow)\n");
         autoscale_copy_smear_free(img, screen, SDL_BlitSurface);
 
         safe_strncpy(file_id, d_names[which], sizeof(file_id));
@@ -20101,9 +20310,7 @@ static void print_image(void)
   scroll =
     (NUM_TOOLS > buttons_tall * gd_tools.cols) ? img_scroll_down->h : 0;
 
-#ifdef DEBUG
-  printf("Current time = %d\n", cur_time);
-#endif
+  DEBUG_PRINTF("Current time = %d\n", cur_time);
 
   if (cur_time >= last_print_time + print_delay)
   {
@@ -20318,6 +20525,7 @@ static void do_render_cur_text(int do_blit)
       unicodeIn[i] = (FriBidiChar) texttool_str[i];
 
     int maxlevel = fribidi_log2vis(unicodeIn, texttool_len, &baseDir, unicodeOut, 0, 0, 0);
+    maxlevel = maxlevel; // FIXME: Avoiding "unused variable" warning.  Note: if we remove it, baseDir isn't used either! -bjk 2023.02.12
 
     /* FIXME: If we determine that some new text was RtoL, we should
        reposition the text */
@@ -20528,9 +20736,8 @@ static char *uppercase(const char *restrict const str)
   while (dest[i++]);
   wcstombs(ustr, dest, n * 2);  /* at most n * 2 bytes written */
 
-#ifdef DEBUG
-  printf(" ORIGINAL: %s\n" "UPPERCASE: %s\n\n", str, ustr);
-#endif
+  DEBUG_PRINTF(" ORIGINAL: %s\n" "UPPERCASE: %s\n\n", str, ustr);
+
   return ustr;
 }
 
@@ -20569,9 +20776,7 @@ static char *textdir(const char *const str)
   unsigned i, j;
   unsigned char c1, c2, c3, c4;
 
-#ifdef DEBUG
-  printf("ORIG_DIR: %s\n", str);
-#endif
+  DEBUG_PRINTF("ORIG_DIR: %s\n", str);
 
   dstr = malloc(strlen(str) + 5);
 
@@ -20620,9 +20825,7 @@ static char *textdir(const char *const str)
     strcpy((char *) dstr, str); /* safe; malloc'd to a sufficient size */
   }
 
-#ifdef DEBUG
-  printf("L2R_DIR: %s\n", dstr);
-#endif
+  DEBUG_PRINTF("L2R_DIR: %s\n", dstr);
 
   return ((char *) dstr);
 }
@@ -21404,16 +21607,12 @@ static SDL_Surface *load_svg(const char *file)
   svg_cairo_status_t res;
 
 
-#ifdef DEBUG
-  printf("Attempting to load \"%s\" as an SVG\n", file);
-#endif
+  DEBUG_PRINTF("Attempting to load \"%s\" as an SVG\n", file);
 
   /* Create the SVG cairo stuff: */
   if (svg_cairo_create(&scr) != SVG_CAIRO_STATUS_SUCCESS)
   {
-#ifdef DEBUG
-    printf("svg_cairo_create() failed\n");
-#endif
+    fprintf(stderr, "svg_cairo_create(%s) failed on\n", file);
     return (NULL);
   }
 
@@ -21421,24 +21620,19 @@ static SDL_Surface *load_svg(const char *file)
   if (svg_cairo_parse(scr, file) != SVG_CAIRO_STATUS_SUCCESS)
   {
     svg_cairo_destroy(scr);
-#ifdef DEBUG
-    printf("svg_cairo_parse(%s) failed\n", file);
-#endif
+    fprintf(stderr, "svg_cairo_parse(%s) failed\n", file);
     return (NULL);
   }
 
   /* Get the natural size of the SVG */
   svg_cairo_get_size(scr, &rwidth, &rheight);
-#ifdef DEBUG
-  printf("svg_get_size(): %d x %d\n", rwidth, rheight);
-#endif
+
+  DEBUG_PRINTF("svg_get_size(): %d x %d\n", rwidth, rheight);
 
   if (rwidth == 0 || rheight == 0)
   {
     svg_cairo_destroy(scr);
-#ifdef DEBUG
-    printf("SVG %s had 0 width or height!\n", file);
-#endif
+    fprintf(stderr, "SVG %s had 0 width or height!\n", file);
     return (NULL);
   }
 
@@ -21456,9 +21650,7 @@ static SDL_Surface *load_svg(const char *file)
   width = ((float) rwidth * scale);
   height = ((float) rheight * scale);
 
-#ifdef DEBUG
-  printf("scaling to %d x %d (%f scale)\n", width, height, scale);
-#endif
+  DEBUG_PRINTF("scaling to %d x %d (%f scale)\n", width, height, scale);
 
   /* scanline width */
   stride = width * btpp;
@@ -21466,11 +21658,9 @@ static SDL_Surface *load_svg(const char *file)
   /* Allocate space for an image: */
   image = calloc(stride * height, 1);
 
-#ifdef DEBUG
-  printf
+  DEBUG_PRINTF
     ("calling cairo_image_surface_create_for_data(..., CAIRO_FORMAT_ARGB32, %d(w), %d(h), %d(stride))\n",
      width, height, stride);
-#endif
 
   /* Create the cairo surface with the adjusted width and height */
 
@@ -21481,9 +21671,7 @@ static SDL_Surface *load_svg(const char *file)
   if (cr == NULL)
   {
     svg_cairo_destroy(scr);
-#ifdef DEBUG
-    printf("cairo_create() failed\n");
-#endif
+    fprintf(stderr, "cairo_create(%s) failed\n", file);
     return (NULL);
   }
 
@@ -21500,9 +21688,7 @@ static SDL_Surface *load_svg(const char *file)
 
   if (res != SVG_CAIRO_STATUS_SUCCESS)
   {
-#ifdef DEBUG
-    printf("svg_cairo_render() failed\n");
-#endif
+    fprintf(stderr, "svg_cairo_render(%s) failed\n");
     return (NULL);
   }
 
@@ -21521,9 +21707,7 @@ static SDL_Surface *load_svg(const char *file)
 
   if (sdl_surface_tmp == NULL)
   {
-#ifdef DEBUG
-    printf("SDL_CreateRGBSurfaceFrom() failed\n");
-#endif
+    fprintf(stderr, "SDL_CreateRGBSurfaceFrom(%s) failed\n", file);
     return (NULL);
   }
 
@@ -21534,16 +21718,12 @@ static SDL_Surface *load_svg(const char *file)
 
   if (sdl_surface == NULL)
   {
-#ifdef DEBUG
-    printf("SDL_DisplayFormatAlpha() failed\n");
-#endif
+    fprintf(stderr, "SDL_DisplayFormatAlpha(%s) failed\n", file);
     return (NULL);
   }
 
-#ifdef DEBUG
-  printf("SDL surface from %d x %d SVG is %d x %d\n", rwidth, rheight,
+  DEBUG_PRINTF("SDL surface from %d x %d SVG is %d x %d\n", rwidth, rheight,
          sdl_surface->w, sdl_surface->h);
-#endif
 
   return (sdl_surface);
 }
@@ -21569,9 +21749,7 @@ static SDL_Surface *_load_svg(const char *file)
   SDL_Surface *sdl_surface, *sdl_surface_tmp;
   Uint32 rmask, gmask, bmask, amask;
 
-#ifdef DEBUG
-  printf("load_svg(%s)\n", file);
-#endif
+  DEBUG_PRINTF("load_svg(%s)\n", file);
 
   /* Create an RSVG Handle from the SVG file: */
 
@@ -21580,9 +21758,7 @@ static SDL_Surface *_load_svg(const char *file)
   rsvg_handle = rsvg_handle_new_from_file(file, &gerr);
   if (rsvg_handle == NULL)
   {
-#ifdef DEBUG
-    fprintf(stderr, "rsvg_handle_new_from_file() failed\n");
-#endif
+    fprintf(stderr, "rsvg_handle_new_from_file(%s) failed\n", file);
     return (NULL);
   }
 
@@ -21590,25 +21766,19 @@ static SDL_Surface *_load_svg(const char *file)
   rwidth = dimensions.width;
   rheight = dimensions.height;
 
-#ifdef DEBUG
-  printf("SVG is %d x %d\n", rwidth, rheight);
-#endif
+  DEBUG_PRINTF("SVG is %d x %d\n", rwidth, rheight);
 
 
   /* Pick best scale to render to (for the canvas in this instance of Tux Paint) */
 
   scale = pick_best_scape(rwidth, rheight, r_canvas.w, r_canvas.h);
 
-#ifdef DEBUG
-  printf("best scale is %.4f\n", scale);
-#endif
+  DEBUG_PRINTF("best scale is %.4f\n", scale);
 
   width = ((float) rwidth * scale);
   height = ((float) rheight * scale);
 
-#ifdef DEBUG
-  printf("scaling to %d x %d (%f scale)\n", width, height, scale);
-#endif
+  DEBUG_PRINTF("scaling to %d x %d (%f scale)\n", width, height, scale);
 
   /* scanline width */
   stride = width * btpp;
@@ -21617,9 +21787,7 @@ static SDL_Surface *_load_svg(const char *file)
   image = calloc(stride * height, 1);
   if (image == NULL)
   {
-#ifdef DEBUG
-    fprintf(stderr, "Unable to allocate image buffer\n");
-#endif
+    fprintf(stderr, "Unable to allocate image buffer for %s\n", file);
     rsvg_handle_close(rsvg_handle, &gerr);
     return (NULL);
   }
@@ -21710,10 +21878,7 @@ static SDL_Surface *_load_svg(const char *file)
   }
 
 
-#ifdef DEBUG
-  printf("SDL surface from %d x %d SVG is %d x %d\n", rwidth, rheight,
-         sdl_surface->w, sdl_surface->h);
-#endif
+  DEBUG_PRINTF("SDL surface from %d x %d SVG is %d x %d\n", rwidth, rheight, sdl_surface->w, sdl_surface->h);
 
 
   /* Clean up: */
@@ -21750,19 +21915,14 @@ static float pick_best_scape(unsigned int orig_w, unsigned int orig_h,
 
   aspect = (float) orig_w / (float) orig_h;
 
-#ifdef DEBUG
-  printf("trying to fit %d x %d (aspect: %.4f) into %d x %d\n", orig_w,
-         orig_h, aspect, max_w, max_h);
-#endif
+  DEBUG_PRINTF("trying to fit %d x %d (aspect: %.4f) into %d x %d\n", orig_w, orig_h, aspect, max_w, max_h);
 
   wscale = (float) max_w / (float) orig_w;
   hscale = (float) max_h / (float) orig_h;
 
-#ifdef DEBUG
-  printf("max_w / orig_w = wscale: %.4f\n", wscale);
-  printf("max_h / orig_h = hscale: %.4f\n", hscale);
-  printf("\n");
-#endif
+  DEBUG_PRINTF("max_w / orig_w = wscale: %.4f\n", wscale);
+  DEBUG_PRINTF("max_h / orig_h = hscale: %.4f\n", hscale);
+  DEBUG_PRINTF("\n");
 
   if (aspect >= 1)
   {
@@ -21770,21 +21930,17 @@ static float pick_best_scape(unsigned int orig_w, unsigned int orig_h,
 
     scale = wscale;
 
-#ifdef DEBUG
-    printf("Wider-than-tall.  Using wscale.\n");
-    printf("new size would be: %d x %d\n", (int) ((float) orig_w * scale),
+    DEBUG_PRINTF("Wider-than-tall.  Using wscale.\n");
+    DEBUG_PRINTF("new size would be: %d x %d\n", (int) ((float) orig_w * scale),
            (int) ((float) orig_h * scale));
-#endif
 
     if ((float) orig_h * scale > (float) max_h)
     {
       scale = hscale;
 
-#ifdef DEBUG
-      printf("Too tall!  Using hscale!\n");
-      printf("new size would be: %d x %d\n", (int) ((float) orig_w * scale),
+      DEBUG_PRINTF("Too tall!  Using hscale!\n");
+      DEBUG_PRINTF("new size would be: %d x %d\n", (int) ((float) orig_w * scale),
              (int) ((float) orig_h * scale));
-#endif
     }
   }
   else
@@ -21793,29 +21949,22 @@ static float pick_best_scape(unsigned int orig_w, unsigned int orig_h,
 
     scale = hscale;
 
-#ifdef DEBUG
-    printf("Taller-than-wide.  Using hscale.\n");
-    printf("new size would be: %d x %d\n", (int) ((float) orig_w * scale),
+    DEBUG_PRINTF("Taller-than-wide.  Using hscale.\n");
+    DEBUG_PRINTF("new size would be: %d x %d\n", (int) ((float) orig_w * scale),
            (int) ((float) orig_h * scale));
-#endif
 
     if ((float) orig_w * scale > (float) max_w)
     {
       scale = wscale;
 
-#ifdef DEBUG
-      printf("Too wide!  Using wscale!\n");
-      printf("new size would be: %d x %d\n", (int) ((float) orig_w * scale),
+      DEBUG_PRINTF("Too wide!  Using wscale!\n");
+      DEBUG_PRINTF("new size would be: %d x %d\n", (int) ((float) orig_w * scale),
              (int) ((float) orig_h * scale));
-#endif
     }
   }
 
-
-#ifdef DEBUG
-  printf("\n");
-  printf("Final scale: %.4f\n", scale);
-#endif
+  DEBUG_PRINTF("\n");
+  DEBUG_PRINTF("Final scale: %.4f\n", scale);
 
   return (scale);
 }
@@ -21950,11 +22099,8 @@ static void load_magic_plugins(void)
     else
       continue;                 /* Huh? */
 
-#ifdef DEBUG
-    printf("\n");
-    printf("Loading magic plug-ins from %s\n", place);
-    fflush(stdout);
-#endif
+    DEBUG_PRINTF("\n");
+    DEBUG_PRINTF("Loading magic plug-ins from %s\n", place);
 
     /* Gather list of files (for sorting): */
 
@@ -22027,10 +22173,7 @@ static void load_magic_plugins(void)
 
             if (magic_handle[num_plugin_files] != NULL)
             {
-#ifdef DEBUG
-              printf("loading: %s\n", fname);
-              fflush(stdout);
-#endif
+              DEBUG_PRINTF("loading: %s\n", fname);
 
               safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname,
                             "get_tool_count");
@@ -22112,48 +22255,46 @@ static void load_magic_plugins(void)
               magic_funcs[num_plugin_files].switchout =
                 SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
-#ifdef DEBUG
               //EP added (intptr_t) to avoid warning on x64 on all lines below
-              printf("get_tool_count = 0x%x\n",
+              DEBUG_PRINTF("get_tool_count = 0x%x\n",
                      (int) (intptr_t)
                      magic_funcs[num_plugin_files].get_tool_count);
-              printf("get_group = 0x%x\n",
+              DEBUG_PRINTF("get_group = 0x%x\n",
                      (int) (intptr_t)
                      magic_funcs[num_plugin_files].get_group);
-              printf("get_name = 0x%x\n",
+              DEBUG_PRINTF("get_name = 0x%x\n",
                      (int) (intptr_t) magic_funcs[num_plugin_files].get_name);
-              printf("get_icon = 0x%x\n",
+              DEBUG_PRINTF("get_icon = 0x%x\n",
                      (int) (intptr_t) magic_funcs[num_plugin_files].get_icon);
-              printf("get_description = 0x%x\n",
+              DEBUG_PRINTF("get_description = 0x%x\n",
                      (int) (intptr_t)
                      magic_funcs[num_plugin_files].get_description);
-              printf("requires_colors = 0x%x\n",
+              DEBUG_PRINTF("requires_colors = 0x%x\n",
                      (int) (intptr_t)
                      magic_funcs[num_plugin_files].requires_colors);
-              printf("modes = 0x%x\n",
+              DEBUG_PRINTF("modes = 0x%x\n",
                      (int) (intptr_t) magic_funcs[num_plugin_files].modes);
-              printf("set_color = 0x%x\n",
+              DEBUG_PRINTF("set_color = 0x%x\n",
                      (int) (intptr_t)
                      magic_funcs[num_plugin_files].set_color);
-              printf("init = 0x%x\n",
+              DEBUG_PRINTF("init = 0x%x\n",
                      (int) (intptr_t) magic_funcs[num_plugin_files].init);
-              printf("api_version = 0x%x\n",
+              DEBUG_PRINTF("api_version = 0x%x\n",
                      (int) (intptr_t)
                      magic_funcs[num_plugin_files].api_version);
-              printf("shutdown = 0x%x\n",
+              DEBUG_PRINTF("shutdown = 0x%x\n",
                      (int) (intptr_t) magic_funcs[num_plugin_files].shutdown);
-              printf("click = 0x%x\n",
+              DEBUG_PRINTF("click = 0x%x\n",
                      (int) (intptr_t) magic_funcs[num_plugin_files].click);
-              printf("drag = 0x%x\n",
+              DEBUG_PRINTF("drag = 0x%x\n",
                      (int) (intptr_t) magic_funcs[num_plugin_files].drag);
-              printf("release = 0x%x\n",
+              DEBUG_PRINTF("release = 0x%x\n",
                      (int) (intptr_t) magic_funcs[num_plugin_files].release);
-              printf("switchin = 0x%x\n",
+              DEBUG_PRINTF("switchin = 0x%x\n",
                      (int) (intptr_t) magic_funcs[num_plugin_files].switchin);
-              printf("switchout = 0x%x\n",
+              DEBUG_PRINTF("switchout = 0x%x\n",
                      (int) (intptr_t)
                      magic_funcs[num_plugin_files].switchout);
-#endif
 
               err = 0;
 
@@ -22370,11 +22511,9 @@ static void load_magic_plugins(void)
                                     30 * button_h / ORIGINAL_BUTTON_SIZE, 1);
                         SDL_FreeSurface(icon_tmp);
 
-#ifdef DEBUG
-                        printf("-- %s\n", magics[group][idx].name);
-                        printf("avail_modes = %d\n",
+                        DEBUG_PRINTF("-- %s\n", magics[group][idx].name);
+                        DEBUG_PRINTF("avail_modes = %d\n",
                                magics[group][idx].avail_modes);
-#endif
 
                         num_magics[group]++;
                         num_magics_total++;
@@ -22421,12 +22560,9 @@ static void load_magic_plugins(void)
     qsort(magics[i], num_magics[i], sizeof(magic_t), magic_sort);
   }
 
-#ifdef DEBUG
-  printf("Loaded %d magic tools from %d plug-in files\n", num_magics_total,
+  DEBUG_PRINTF("Loaded %d magic tools from %d plug-in files\n", num_magics_total,
          num_plugin_files);
-  printf("\n");
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("\n");
 }
 
 
@@ -23203,12 +23339,10 @@ static int do_new_dialog(void)
   }
 
 
-#ifdef DEBUG
-  printf("%d files and colors were found!\n", num_files);
-  printf
+  DEBUG_PRINTF("%d files and colors were found!\n", num_files);
+  DEBUG_PRINTF
     ("first_color = %d\nfirst_starter = %d\nfirst_template = %d\nnum_files = %d\n\n",
      first_color, first_starter, first_template, num_files);
-#endif
 
 
   /* Let user choose a color or image: */
@@ -23801,6 +23935,7 @@ static int do_new_dialog(void)
         starter_personal = 0;
         starter_modified = 0;
 
+        DEBUG_PRINTF("Smearing canvas @ 7\n");
         autoscale_copy_smear_free(img, canvas, SDL_BlitSurface);
 
         cur_undo = 0;
@@ -23860,6 +23995,7 @@ static int do_new_dialog(void)
         free_surface(&img_starter_bkgd);
         template_personal = 0;
 
+        DEBUG_PRINTF("Smearing template @ 8\n");
         autoscale_copy_smear_free(img, canvas, SDL_BlitSurface);
 
         cur_undo = 0;
@@ -27256,10 +27392,7 @@ static void load_info_about_label_surface(FILE * lfi)
 
     new_node->save_texttool_len = atoi(fgets(tmpstr, 5, lfi));
 
-#ifdef DEBUG
-    printf("Reading %d wide chars\n", new_node->save_texttool_len);
-    fflush(stdout);
-#endif
+    DEBUG_PRINTF("Reading %d wide chars\n", new_node->save_texttool_len);
 
     if (new_node->save_texttool_len >= 1024)
     {
@@ -27296,10 +27429,7 @@ static void load_info_about_label_surface(FILE * lfi)
         fscanf(lfi, "%l[^\n]\n", new_node->save_texttool_str);
 #endif
 
-#ifdef DEBUG
-      printf("Read: \"%ls\"\n", new_node->save_texttool_str);
-      fflush(stdout);
-#endif
+      DEBUG_PRINTF("Read: \"%ls\"\n", new_node->save_texttool_str);
 
       /* Read the label's color (RGB) */
       tmp_fscanf_return = fscanf(lfi, "%u\n", &l);
@@ -27342,10 +27472,9 @@ static void load_info_about_label_surface(FILE * lfi)
         new_node->save_y = tmp_pos;
       }
 
-#ifdef DEBUG
-      printf("Original label size %dx%d\n", new_node->save_width,
+      DEBUG_PRINTF("Original label size %dx%d\n", new_node->save_width,
              new_node->save_height);
-#endif
+
       if (new_node->save_width > 8192 || new_node->save_height > 8192)
       {
         fprintf(stderr, "Unexpected! Save dimensions are (%u x %u!)\n",
@@ -27483,27 +27612,21 @@ static void set_label_fonts()
         if (node->save_font_type[c] == '\n')
           node->save_font_type[c] = '\0';
 
-#ifdef DEBUG
-      printf("ttffont A%sA\n", ttffont);
-      printf("font_type B%sB\n", node->save_font_type);
-#endif
+      DEBUG_PRINTF("ttffont A%sA\n", ttffont);
+      DEBUG_PRINTF("font_type B%sB\n", node->save_font_type);
 
       if (strcmp(node->save_font_type, ttffont) == 0)
 
       {
-#ifdef DEBUG
-        printf("Font matched %s !!!\n", ttffont);
-#endif
+        DEBUG_PRINTF("Font matched %s !!!\n", ttffont);
         node->save_cur_font = i;
         break;
       }
       else if (strstr(ttffont, node->save_font_type)
                || strstr(node->save_font_type, ttffont))
       {
-#ifdef DEBUG
-        printf("setting %s as replacement",
+        DEBUG_PRINTF("setting %s as replacement",
                TTF_FontFaceFamilyName(getfonthandle(i)->ttf_font));
-#endif
         node->save_cur_font = i;
       }
     }
@@ -27953,10 +28076,8 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
   png_uint_32 ww, hh;
   png_uint_32 i, j;
 
-#ifdef DEBUG
-  printf("Loading embedded data...\n");
-  printf("%s\n", fname);
-#endif
+  DEBUG_PRINTF("Loading embedded data...\n");
+  DEBUG_PRINTF("%s\n", fname);
 
   fp = fopen(fname, "rb");
   if (!fp)
@@ -27978,9 +28099,7 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
   }
   else
   {
-#ifdef DEBUG
-    printf("%s\n", fname);
-#endif
+    DEBUG_PRINTF("%s\n", fname);
 
     info_ptr = png_create_info_struct(png_ptr);
     if (info_ptr == NULL)
@@ -28005,9 +28124,8 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
 
     num_unknowns = (int) png_get_unknown_chunks(png_ptr, info_ptr, &unknowns);
 
-#ifdef DEBUG
-    printf("num_unknowns %i\n", num_unknowns);
-#endif
+    DEBUG_PRINTF("num_unknowns %i\n", num_unknowns);
+
     if (num_unknowns)
     {
       have_label_delta = have_label_data = have_background = have_foreground =
@@ -28022,15 +28140,12 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
          blured when scaled one) */
       for (u = 0; u < num_unknowns; u++)
       {
-#ifdef DEBUG
-        printf("%s, %d\n", unknowns[u].name, (int) unknowns[u].size);
-#endif
+        DEBUG_PRINTF("%s, %d\n", unknowns[u].name, (int) unknowns[u].size);
 
         if (chunk_is_valid("tpDT", unknowns[u]))
         {
-#ifdef DEBUG
-          printf("Valid tpDT\n");
-#endif
+          DEBUG_PRINTF("Valid tpDT\n");
+
           fi = fmemopen(unknowns[u].data, unknowns[u].size, "r");
           if (fi == NULL)
           {
@@ -28093,9 +28208,7 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
         {
           if (chunk_is_valid("tpLD", unknowns[u]))
           {
-#ifdef DEBUG
-            printf("Valid tpLD\n");
-#endif
+            DEBUG_PRINTF("Valid tpLD\n");
 
             unc_buff =
               get_chunk_data(fp, fname, png_ptr, info_ptr, "tpLD",
@@ -28155,9 +28268,7 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
           /* Label Data */
           if (!disable_label && chunk_is_valid("tpLL", unknowns[u]))
           {
-#ifdef DEBUG
-            printf("Valid tpLL\n");
-#endif
+            DEBUG_PRINTF("Valid tpLL\n");
 
             unc_buff =
               get_chunk_data(fp, fname, png_ptr, info_ptr, "tpLL",
@@ -28190,17 +28301,18 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
 
             free(unc_buff);
             ldata = TRUE;
-#ifdef DEBUG
-            printf("Out of label data\n");
-#endif
+            DEBUG_PRINTF("Out of label data\n");
           }
         }
       }
+
       /* Apply the original canvas */
-      if (ldelta && ldata)
+      if (ldelta && ldata) {
+        DEBUG_PRINTF("Smearing org_surf @ 9\n");
         autoscale_copy_smear_free(org_surf, canvas, SDL_BlitSurface);
-      else
+      } else {
         SDL_FreeSurface(org_surf);
+      }
 
       /* Third run, back and foreground */
       if (have_background || have_foreground)
@@ -28238,9 +28350,7 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
             }
             SDL_LockSurface(aux_surf);
 
-#ifdef DEBUG
-            printf("Bkgd!!!\n");
-#endif
+            DEBUG_PRINTF("Bkgd!!!\n");
             for (j = 0; j < hh; j++)
               for (i = 0; i < ww; i++)
                 putpixels[aux_surf->format->BytesPerPixel] (aux_surf, i, j,
@@ -28274,6 +28384,10 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
                                                       canvas->format->Bmask,
                                                       0);
 
+              /* FIXME: How to handle starter/template scaling/smearing
+                 options!? -bjk 2023.02.10 */
+
+              DEBUG_PRINTF("Smearing embedded bkgd @ 10\n");
               autoscale_copy_smear_free(aux_surf, img_starter_bkgd,
                                         SDL_BlitSurface);
             }
@@ -28283,9 +28397,7 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
           if ((starter_modified || !img_starter)
               && chunk_is_valid("tpFG", unknowns[u]))
           {
-#ifdef DEBUG
-            printf("Frgd!!!\n");
-#endif
+            DEBUG_PRINTF("Frgd!!!\n");
 
             unc_buff =
               get_chunk_data(fp, fname, png_ptr, info_ptr, "tpFG",
@@ -28355,8 +28467,13 @@ void load_embedded_data(char *fname, SDL_Surface * org_surf)
             /* 3rd arg ignored for RGBA surfaces */
             //      SDL_SetAlpha(aux_surf, SDL_RLEACCEL, SDL_ALPHA_OPAQUE);
             SDL_SetSurfaceBlendMode(aux_surf, SDL_BLENDMODE_NONE);
+
+            /* FIXME: How to handle starter/template scaling/smearing
+               options!? -bjk 2023.02.10 */
+            DEBUG_PRINTF("Smearing embedded foreground @ 11\n");
             autoscale_copy_smear_free(aux_surf, img_starter,
                                       NondefectiveBlit);
+
             //      SDL_SetAlpha(img_starter, SDL_ALPHA_OPAQUE);
             SDL_SetSurfaceBlendMode(img_starter, SDL_BLENDMODE_NONE);
 
@@ -29116,6 +29233,20 @@ static void setup_config(char *argv[])
     joystick_button_selectlabeltool =
       strtof(tmpcfg.joystick_button_selectlabeltool, NULL);
   }
+  if (tmpcfg.joystick_button_selectfilltool)
+  {
+    if (strtof(tmpcfg.joystick_button_selectfilltool, NULL) < 0
+        || strtof(tmpcfg.joystick_button_selectfilltool, NULL) > 254)
+    {
+      /* FIXME: Find better exit code */
+      fprintf(stderr,
+              "Joystick button fill tool shortcurt (now %s)  must be between 0 and 254",
+              tmpcfg.joystick_button_selectfilltool);
+      exit(1);
+    }
+    joystick_button_selectfilltool =
+      strtof(tmpcfg.joystick_button_selectfilltool, NULL);
+  }
   if (tmpcfg.joystick_button_selectmagictool)
   {
     if (strtof(tmpcfg.joystick_button_selectmagictool, NULL) < 0
@@ -29270,11 +29401,9 @@ static void setup_config(char *argv[])
     onscreen_keyboard = TRUE;
   }
 
-#ifdef DEBUG
-  printf("\n\nPromptless save:\nask: %d\nnew: %d\nover: %d\n\n",
+  DEBUG_PRINTF("\n\nPromptless save:\nask: %d\nnew: %d\nover: %d\n\n",
          _promptless_save_over_ask, _promptless_save_over_new,
          _promptless_save_over);
-#endif
 
   if (_promptless_save_over_ask)
   {
@@ -29405,6 +29534,8 @@ static void setup_colors(void)
 
               max = max + per;
             }
+
+            /* FIXME: This and get_starter_template_options() needs to be modularized -bjk 2023.02.10 */
 
             while (str[strlen(str) - 1] == '\n'
                    || str[strlen(str) - 1] == '\r')
@@ -29808,20 +29939,15 @@ static void setup(void)
   else
   {
     SDL_JoystickEventState(SDL_ENABLE);
-#ifdef DEBUG
-    printf("Number of Axes: %d\n", SDL_JoystickNumAxes(joystick));
-    printf("Number of Buttons: %d\n", SDL_JoystickNumButtons(joystick));
-    printf("Number of Balls: %d\n", SDL_JoystickNumBalls(joystick));
-    printf("Number of Hats: %d\n", SDL_JoystickNumHats(joystick));
-#endif
+    DEBUG_PRINTF("Number of Axes: %d\n", SDL_JoystickNumAxes(joystick));
+    DEBUG_PRINTF("Number of Buttons: %d\n", SDL_JoystickNumButtons(joystick));
+    DEBUG_PRINTF("Number of Balls: %d\n", SDL_JoystickNumBalls(joystick));
+    DEBUG_PRINTF("Number of Hats: %d\n", SDL_JoystickNumHats(joystick));
   }
 
 
 #ifndef NOSOUND
-#ifdef DEBUG
-  printf("Initializing sound...\n");
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("Initializing sound...\n");
 #ifndef WIN32
   if (use_sound && Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024) < 0)
 #else
@@ -29853,17 +29979,13 @@ static void setup(void)
 #endif
 
 
-#ifdef DEBUG
-  printf("Enabling key repeat...\n");
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("Enabling key repeat...\n");
+
   /* Set-up Key-Repeat: */
   //  SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-#ifdef DEBUG
-  printf("Initializing TTF...\n");
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("Initializing TTF...\n");
+
   /* Init TTF stuff: */
   if (TTF_Init() < 0)
   {
@@ -29877,10 +29999,7 @@ static void setup(void)
   }
 
 
-#ifdef DEBUG
-  printf("Setting up colors...\n");
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("Setting up colors...\n");
   setup_colors();
 
 
@@ -30048,13 +30167,12 @@ static void setup(void)
   if (!fullscreen)
   {
     int win_x = SDL_WINDOWPOS_UNDEFINED, win_y = SDL_WINDOWPOS_UNDEFINED;
-    int found_capable_display, max_scrn_w, max_scrn_h;
-    int num_displays, num_modes, i, res;
+    int max_scrn_w, max_scrn_h;
+    int num_displays, i, res;
     SDL_DisplayMode mode;
 
     /* Query all displays to ensure that, if we only have on display,
        that Tux Paint's window will not be larger than it */
-    found_capable_display = 0;
     max_scrn_w = -1;
     max_scrn_h = -1;
 
@@ -30071,7 +30189,6 @@ static void setup(void)
         } else {
           if (mode.w >= WINDOW_WIDTH && mode.h >= WINDOW_HEIGHT) {
             /* Found a display capable of the chosen window size */
-            found_capable_display = 1;
           } else {
             if (mode.w >= max_scrn_w)
               max_scrn_w = mode.w;
@@ -30275,10 +30392,7 @@ static void setup(void)
 
   fontconfig_thread_done = 0;
 
-#ifdef DEBUG
-  printf("Spawning Pango thread\n");
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("Spawning Pango thread\n");
 
   fontconfig_thread =
     SDL_CreateThread(generate_fontconfig_cache, "fontconfig_thread", NULL);
@@ -30289,13 +30403,11 @@ static void setup(void)
   }
   else
   {
-#ifdef DEBUG
-    printf("Thread spawned\n");
-    fflush(stdout);
-#endif
+    DEBUG_PRINTF("Thread spawned\n");
+
     if (generate_fontconfig_cache_spinner(screen))      /* returns 1 if aborted */
     {
-      printf("Pango thread aborted!\n");
+      fprintf(stderr, "Pango thread aborted!\n");
       fflush(stdout);
       // FIXME SDL2
       //      SDL_KillThread(fontconfig_thread);
@@ -30303,19 +30415,13 @@ static void setup(void)
       exit(0);
       /* FIXME: Let's be more graceful about exiting (e.g., clean up lockfile!) -bjk 2010.04.27 */
     }
-#ifdef DEBUG
-    printf("Done generating cache\n");
-    fflush(stdout);
-#endif
+    DEBUG_PRINTF("Done generating cache\n");
   }
 
 
 #ifdef FORKED_FONTS
   /* NOW we can fork our own font scanner stuff, and let it run in the bgkd -bjk 2010.04.27 */
-#ifdef DEBUG
-  printf("Now running font scanner\n");
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("Now running font scanner\n");
   run_font_scanner(screen, texture, renderer,
                    lang_prefixes[get_current_language()]);
 #endif
@@ -30348,9 +30454,7 @@ static void setup(void)
   SDL_BlitSurface(tmp_surf, NULL, screen, &dest);
   SDL_FreeSurface(tmp_surf);
 
-#ifdef DEBUG
-  printf("%s\n", tmp_str);
-#endif
+  DEBUG_PRINTF("%s\n", tmp_str);
 
   safe_snprintf(tmp_str, sizeof(tmp_str),
                 "© 2002–2021 Bill Kendrick et al.");
@@ -30421,9 +30525,7 @@ static void setup(void)
   canvas_width = WINDOW_WIDTH - r_ttools.w - r_ttoolopt.w;
   canvas_height = (button_h * buttons_tall) + r_ttools.h;
 
-#ifdef DEBUG
-  printf("Canvas size is %d x %d\n", canvas_width, canvas_height);
-#endif
+  DEBUG_PRINTF("Canvas size is %d x %d\n", canvas_width, canvas_height);
 
   /* Per https://wiki.libsdl.org/SDL_CreateRGBSurface,
    * the flags are unused and should be set to 0
@@ -30579,6 +30681,7 @@ static void setup(void)
 
   img_mirror = loadimagerb(DATA_PREFIX "images/ui/mirror.png");
   img_flip = loadimagerb(DATA_PREFIX "images/ui/flip.png");
+  img_rotate = loadimagerb(DATA_PREFIX "images/ui/rotate.png");
 
   img_open = loadimagerb(DATA_PREFIX "images/ui/open.png");
   img_erase = loadimagerb(DATA_PREFIX "images/ui/erase.png");
@@ -31212,17 +31315,11 @@ int main(int argc, char *argv[])
   /* must start ASAP, but depends on locale which in turn needs the config */
 #ifdef NO_SDLPANGO
   /* Only fork it now if we're not planning on creating a thread to handle fontconfig stuff -bjk 2010.04.27 */
-#ifdef DEBUG
-  printf("Running font scanner\n");
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("Running font scanner\n");
   run_font_scanner(screen, texture, renderer,
                    lang_prefixes[get_current_language()]);
 #else
-#ifdef DEBUG
-  printf("NOT running font scanner\n");
-  fflush(stdout);
-#endif
+  DEBUG_PRINTF("NOT running font scanner\n");
 #endif
 #endif
 
@@ -31245,12 +31342,10 @@ int main(int argc, char *argv[])
   /* Set up! */
   setup();
 
-#ifdef DEBUG
-  printf("Seconds in early start-up: %.3f\n",
+  DEBUG_PRINTF("Seconds in early start-up: %.3f\n",
          (double) (time2 - time1) / CLOCK_SPEED);
-  printf("Seconds in late start-up:  %.3f\n",
+  DEBUG_PRINTF("Seconds in late start-up:  %.3f\n",
          (double) (time2 - time1) / CLOCK_SPEED);
-#endif
 
 
 #if defined(DEBUG) && !defined(NO_SDLPANGO)
@@ -31326,9 +31421,7 @@ static int trash(char *path)
     return (unlink(path));
   }
 
-#ifdef DEBUG
-  printf("trash: basename=%s", basename(path)); /* EP */
-#endif
+  DEBUG_PRINTF("trash: basename=%s", basename(path)); /* EP */
   safe_strncpy(fname, basename(path), sizeof(fname));
 
   if (!file_exists(path))
@@ -31732,6 +31825,7 @@ static void handle_joybuttonupdownscl(SDL_Event event, int oldpos_x,
              event.button.button == joystick_button_selectshapestool ||
              event.button.button == joystick_button_selecttexttool ||
              event.button.button == joystick_button_selectlabeltool ||
+             event.button.button == joystick_button_selectfilltool ||
              event.button.button == joystick_button_selectmagictool ||
              event.button.button == joystick_button_selecterasertool)
 
@@ -31778,6 +31872,13 @@ static void handle_joybuttonupdownscl(SDL_Event event, int oldpos_x,
           real_r_tools.y + TOOL_LABEL / 2 * button_h + button_h / 2;
       }
 
+      else if (event.button.button == joystick_button_selectfilltool)
+      {
+        ev.button.x = (TOOL_FILL % 2) * button_w + button_w / 2;
+        ev.button.y =
+          real_r_tools.y + TOOL_FILL / 2 * button_h + button_h / 2;
+      }
+
       else if (event.button.button == joystick_button_selectmagictool)
       {
         ev.button.x = (TOOL_MAGIC % 2) * button_w + button_w / 2;
@@ -31820,9 +31921,7 @@ static void handle_joybuttonupdownscl(SDL_Event event, int oldpos_x,
     ev.button.state = SDL_RELEASED;
   }
 
-#ifdef DEBUG
-  printf("result %d %d\n", ev.button.x, ev.button.y);
-#endif
+  DEBUG_PRINTF("result %d %d\n", ev.button.x, ev.button.y);
 
   /* See if it's a button we ignore */
 
@@ -32154,6 +32253,7 @@ static int export_gif(int *selected, int num_selected, char *dirname,
 
       if (img != NULL)
       {
+        DEBUG_PRINTF("Smearing image @ 12 (GIF export)\n");
         autoscale_copy_smear_free(img, screen, SDL_BlitSurface);
 
         safe_strncpy(file_id, d_names[which], sizeof(file_id));

@@ -51,6 +51,8 @@
     padding: 0.5em;
     display: inline-block;
     margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
   section.outer {
     padding-bottom: 1em;
@@ -562,76 +564,93 @@
   <p>
     As you move the mouse around the canvas, an outline follows the mouse, showing where the stamp will be placed, and how big it will be. Click on the canvas where you wish to place the stamp.  </p>
 
-  <dl>
-    <dt>
-      <strong>Normal Stamps Mode</strong>
-    </dt>
-
-    <dd>
-      <p>
-        Now you can move the mouse around the canvas to rotate the stamp.      </p>
-
-      <p>
-        Click the mouse button again and the stamp will be added to the drawing.      </p>
-    </dd>
-
-    <dt>
-      <strong>Simple Stamps Mode</strong>
-    </dt>
-
-    <dd>
-      If "stamp rotation" option is disabled, the stamp will be drawn on the canvas when you let go of the mouse button. (There's no rotation step.)      <p class="note">
-        <span title="Configuration option">&#9881;</span>        See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation to learn about the "stamp rotation" ("<code>stamprotation</code>") option.      </p>
-    </dd>
-  </dl>
-
-  <p class="note">
-    <span title="Version variation">&#128220;</span>    <strong>Note:</strong> The stamp rotation feature was added to Tux Paint in version 0.9.29.  </p>
-
   <div class="screenshot-center">
     <img src="../../html/images/ex_stamps.png"
        width="182"
        height="156"
        alt="">
   </div>
-  <img src=
-  "../../html/images/tool_stamp_categories.png"
-      width="96"
-      height="48"
-      alt=""
-      align="right">
-  <p>
-    Pode haber numerosas categorías de selos (por exemplo, animais, plantas, espazo exterior, vehículos, persoas, etc.). Use as frechas esquerda e dereita preto da parte inferior do selector para percorrer as coleccións.  </p>
 
-  <p>
-    Antes de «estampar» unha imaxe no seu debuxo, ás veces pódense aplicar varios efectos (dependendo do selo):  </p>
+  <dl>
+    <dt>
+      <strong>Stamp Categories</strong>
+    </dt>
 
-  <ul>
-    <li>Algúns selos pódense colorea ou matizar. Se a paleta de cores baixo o lenzo está activada, pode premer nas cores para cambiar o ton ou a cor do selo antes de colocalo na imaxe.    </li>
+    <dd>
+      <img src="../../html/images/tool_stamp_categories.png"
+        width="96"
+        height="48"
+        alt=""
+        align="right">
+      Pode haber numerosas categorías de selos (por exemplo, animais, plantas, espazo exterior, vehículos, persoas, etc.). Use as frechas esquerda e dereita preto da parte inferior do selector para percorrer as coleccións.    </dd>
 
-    <li>Os selos poden reducirse e expandirse premendo dentro da serie de barras de forma triangular na parte inferior dereita; canto maior sexa a barra, máis grande aparecerá o selo na súa imaxe.    </li>
+    <dt>
+      <strong>Stamp Rotation</strong>
+    </dt>
 
-    <li>Moitos selos poden inverterse verticalmente ou amosarse como unha imaxe reflectida, usando os botóns de control na parte inferior dereita.    </li>
-  </ul>
+    <dd>
+      <img src="../../html/images/tool_stamp_rotation.png"
+          width="48"
+          height="48"
+          alt=""
+          align="right">
+      <p>
+        Using the rotation toggle button near the bottom right, you can enable a rotation step when placing stamps.  Once you've placed the stamp, choose the angle to rotate it by moving the mouse around the canvas.  Click the mouse button again and the stamp will be added to the drawing.      </p>
 
-  <div class="screenshot-center">
-    <img src=
-    "../../html/images/tool_stamp_controls.png"
-       width="96"
-       height="96"
-       alt="">
-  </div>
-  <img src="../../html/images/tool_sfx.png"
-      width="48"
-      height="24"
-      alt=""
-      align="right">
-  <p>
-    Diferentes selos poden ter diferentes efectos sonoros e/ou sons descritivos (falados). Os botóns da área de axuda na parte inferior esquerda (preto de <em>Tux</em>, o pingüín de Linux) permiten reproducir de novo os efectos de son e os sons descritivos para o selo seleccionado nese momento.  </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If "stamp rotation" option is disabled, the stamp will be drawn on the canvas when you let go of the mouse button. (There's no rotation step.)        See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation to learn about the "stamp rotation" ("<code>stamprotation</code>") option.      </p>
 
-  <p class="note">
-    <span title="Configuration option">&#9881;</span>    <strong>Note</strong>: If the "<code>nostampcontrols</code>" option is set, Tux Paint won't display the Mirror, Flip, Shrink and Grow controls for stamps. See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation.  </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The stamp rotation feature was added to Tux Paint in version 0.9.29.      </p>
+    </dd>
+
+
+    <dt>
+      <strong>Stamp Controls</strong>
+    </dt>
+
+    <dd>
+      <img src="../../html/images/tool_stamp_controls.png"
+        width="96"
+        height="96"
+        alt=""
+        align="right">
+
+      <p>
+        Antes de «estampar» unha imaxe no seu debuxo, ás veces pódense aplicar varios efectos (dependendo do selo):      </p>
+
+      <ul>
+        <li>
+          Algúns selos pódense colorea ou matizar. Se a paleta de cores baixo o lenzo está activada, pode premer nas cores para cambiar o ton ou a cor do selo antes de colocalo na imaxe.        </li>
+
+        <li>
+          Os selos poden reducirse e expandirse premendo dentro da serie de barras de forma triangular na parte inferior dereita; canto maior sexa a barra, máis grande aparecerá o selo na súa imaxe.        </li>
+
+        <li>
+          Moitos selos poden inverterse verticalmente ou amosarse como unha imaxe reflectida, usando os botóns de control na parte inferior dereita.        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note</strong>: If the "<code>nostampcontrols</code>" option is set, Tux Paint won't display the Rotation, Mirror, Flip, or sizing controls for stamps. See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation.      </p>
+
+    </dd>
+
+    <dt>
+      <strong>Stamp Sounds</strong>
+    </dt>
+
+    <dd>
+      <img src="../../html/images/tool_sfx.png"
+        width="48"
+        height="24"
+        alt=""
+        align="right">
+      <p>
+        Diferentes selos poden ter diferentes efectos sonoros e/ou sons descritivos (falados). Os botóns da área de axuda na parte inferior esquerda (preto de <em>Tux</em>, o pingüín de Linux) permiten reproducir de novo os efectos de son e os sons descritivos para o selo seleccionado nese momento.      </p>
+    </dd>
+  </dl>
 </dd>
+
             <dt id="using_tools_drawing_lines">
   <strong>Ferramenta «Liñas»</strong>
 </dt>

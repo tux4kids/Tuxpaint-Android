@@ -319,53 +319,64 @@ Outils disponibles
            mouse, showing where the stamp will be placed, and how big it will
            be. Click on the canvas where you wish to place the stamp.
 
-                Normal Stamps Mode
+                Stamp Categories
+                        Il peut y avoir de nombreuses catégories de timbres
+                        (par ex. animaux, plantes, espace
+                        extra-atmosphérique, véhicules, personnes, etc.).
+                        Utilisez les flèches gauche et droite pour parcourir
+                        les différentes collections.
 
-                        Now you can move the mouse around the canvas to
-                        rotate the stamp.
+                Stamp Rotation
 
-                        Click the mouse button again and the stamp will be
-                        added to the drawing.
+                        Using the rotation toggle button near the bottom
+                        right, you can enable a rotation step when placing
+                        stamps. Once you've placed the stamp, choose the
+                        angle to rotate it by moving the mouse around the
+                        canvas. Click the mouse button again and the stamp
+                        will be added to the drawing.
 
-                Simple Stamps Mode
-                        If "stamp rotation" option is disabled, the stamp
-                        will be drawn on the canvas when you let go of the
-                        mouse button. (There's no rotation step.)
+                        ⚙ Note: If "stamp rotation" option is disabled, the
+                        stamp will be drawn on the canvas when you let go of
+                        the mouse button. (There's no rotation step.) See the
+                        "Options" documentation to learn about the "stamp
+                        rotation" ("stamprotation") option.
 
-                        ⚙ See the "Options" documentation to learn about the
-                        "stamp rotation" ("stamprotation") option.
+                        📜 Note: The stamp rotation feature was added to Tux
+                        Paint in version 0.9.29.
 
-           📜 Note: The stamp rotation feature was added to Tux Paint in
-           version 0.9.29.
+                Stamp Controls
 
-           Il peut y avoir de nombreuses catégories de timbres (par ex.
-           animaux, plantes, espace extra-atmosphérique, véhicules,
-           personnes, etc.). Utilisez les flèches gauche et droite pour
-           parcourir les différentes collections.
+                        Avant de `` tamponner '' une image sur votre dessin,
+                        différents effets peuvent parfois être appliqués (en
+                        fonction du tampon) :
 
-           Avant de `` tamponner '' une image sur votre dessin, différents
-           effets peuvent parfois être appliqués (en fonction du tampon) :
+                           * Certains tampons peuvent être colorés ou
+                             teintés. Si la palette de couleurs sous le
+                             canevas est activée, vous pouvez cliquer sur les
+                             couleurs pour changer la teinte ou la couleur du
+                             tampon avant de le placer dans le dessin.
+                           * Les tampons peuvent être rétrécis et agrandis,
+                             en cliquant dans l'ensemble de barres (de forme
+                             triangulaire) en bas à droite; plus la barre est
+                             grande, plus le tampon apparaîtra grand sur
+                             votre dessin.
+                           * De nombreux tampons peuvent être retournés
+                             verticalement ou affichés sous forme d'image
+                             miroir à l'aide des boutons de commande en bas à
+                             droite.
 
-              * Certains tampons peuvent être colorés ou teintés. Si la
-                palette de couleurs sous le canevas est activée, vous pouvez
-                cliquer sur les couleurs pour changer la teinte ou la couleur
-                du tampon avant de le placer dans le dessin.
-              * Les tampons peuvent être rétrécis et agrandis, en cliquant
-                dans l'ensemble de barres (de forme triangulaire) en bas à
-                droite; plus la barre est grande, plus le tampon apparaîtra
-                grand sur votre dessin.
-              * De nombreux tampons peuvent être retournés verticalement ou
-                affichés sous forme d'image miroir à l'aide des boutons de
-                commande en bas à droite.
+                        ⚙ Note: If the "nostampcontrols" option is set, Tux
+                        Paint won't display the Rotation, Mirror, Flip, or
+                        sizing controls for stamps. See the "Options"
+                        documentation.
 
-           Les tampons peuvent avoir un effet sonore et / ou une description
-           orale (parlés). Les boutons en bas à gauche (près de Tux, le
-           pingouin Linux) vous permettent de rejouer les effets sonores et
-           la description du tampon actuellement sélectionné.
+                Stamp Sounds
 
-           ⚙ Note: If the "nostampcontrols" option is set, Tux Paint won't
-           display the Mirror, Flip, Shrink and Grow controls for stamps. See
-           the "Options" documentation.
+                        Les tampons peuvent avoir un effet sonore et / ou une
+                        description orale (parlés). Les boutons en bas à
+                        gauche (près de Tux, le pingouin Linux) vous
+                        permettent de rejouer les effets sonores et la
+                        description du tampon actuellement sélectionné.
 
    Outil "Lignes"
 

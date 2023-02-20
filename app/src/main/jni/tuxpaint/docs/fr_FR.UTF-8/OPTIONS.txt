@@ -6,7 +6,7 @@ Documentation sur les options
         Copyright © 2002-2023 by divers contributeurs; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                janvier 2, 2023
+                                février 19, 2023
 
     +---------------------------------------------------------------------+
     |Table des matières                                                   |
@@ -55,18 +55,11 @@ Utilisateurs de Linux et Unix
 
   Fichier de configuration pour l'ensemble du système
 
-   Avant la lecture de ce fichier, un fichier de configuration à l'échelle du
-   système est lu. (Par défaut, cette configuration n'a pas de paramètres
-   activés.) Il se trouve ici :
+   Before this file is read, a system-wide configuration file is read. (By
+   default, this configuration has no settings enabled.) It is normally
+   located at:
 
      /etc/tuxpaint/tuxpaint.conf
-
-   Vous pouvez désactiver complètement la lecture de ce fichier, en laissant
-   les paramètres par défaut (qui peuvent ensuite être remplacés par votre
-   fichier ".tuxpaintrc" et / ou vos arguments de ligne de commande) en
-   utilisant l'option de ligne de commande :
-
-     --nosysconfig
 
 Utilisateurs de macOS
 
@@ -76,20 +69,34 @@ Utilisateurs de macOS
 
   Fichier de configuration pour l'ensemble du système
 
-   Avant la lecture de ce fichier, un fichier de configuration à l'échelle du
-   système est lu. (Par défaut, cette configuration n'a pas de paramètres
-   activés.) Il se trouve ici :
+   Before this file is read, a system-wide configuration file is read. (By
+   default, this configuration has no settings enabled.) It is normally
+   located at:
 
      /Library/Application Support/TuxPaint/tuxpaint.cfg
 
 Utilisateurs de Windows
 
-   Le fichier que vous devez créer s'appelle "tuxpaint.cfg" et il doit être
-   placé dans dans le dossier de Tux Paint.
+   The file you should create is called "tuxpaint.cfg" and it should be
+   placed in in your personal AppData folder: C:\Users\nom
+   d'utilisateur\AppData\Roaming\TuxPaint\
 
    Vous pouvez utiliser NotePad ou WordPad pour créer ce fichier.
    Assurez-vous de l'enregistrer en tant que texte brut et assurez-vous que
    le nom de fichier ne contient pas ".txt" à la fin ...
+
+  Fichier de configuration pour l'ensemble du système
+
+   Before this file is read, a system-wide configuration file is read. (By
+   default, this configuration has no settings enabled.) It is normally
+   located at:
+
+     C:\Program Files\Tuxpaint
+
+   ⚙ You can disable reading of this file altogether, leaving the settings as
+   defaults (which can then be overridden by your personal config. file
+   and/or command-line arguments) by using the command-line option
+   "--nosysconfig".
 
                               Options disponibles
 
@@ -1370,6 +1377,11 @@ Joystick
              Sélectionne le numéro du bouton du joystick, comme vu par SDL,
              qui sera un raccourci pour sélectionner sélectionne l'outil
              Étiquette.
+
+     joystick-btn-fill=BUTTON NUMBER
+
+             Sélectionne le numéro du bouton du joystick, comme vu par SDL,
+             qui sera un raccourci pour sélectionner select the fill tool.
 
      joystick-btn-magic=BUTTON NUMBER
 

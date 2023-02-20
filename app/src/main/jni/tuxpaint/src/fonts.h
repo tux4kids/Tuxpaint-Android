@@ -44,6 +44,7 @@
 #endif
 
 #define PANGO_DEFAULT_FONT "DejaVu Sans"
+//#define PANGO_DEFAULT_FONT "OpenDyslexicAlta"
 
 #include "compiler.h"
 

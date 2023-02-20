@@ -51,6 +51,8 @@
     padding: 0.5em;
     display: inline-block;
     margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
   section.outer {
     padding-bottom: 1em;
@@ -93,12 +95,12 @@
             バージョン 0.9.29          </h1>
     
           <p>
-            Copyright &copy; 2002-2022 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
+            Copyright &copy; 2002-2023 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
     
           <p>
-            2022年6月 4日          </p>
+            2023年2月12日          </p>
         </center>
       </header>
 
@@ -125,9 +127,12 @@
                   <li><a href="#stamps_images">Stamp Images</a></li>                  <li><a href="#description_text">Stamp Descriptive Text</a></li>                  <li><a href="#sound_effects">Stamp Sound Effects</a></li>                  <li><a href="#descriptive_sound">Stamp Descriptive Sound</a></li>                  <li><a href="#stamp_options">Stamp Options</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Pre-Mirrored and Flipped Stamps</a></li>                </ul>
               </li>
               <li><a href="#fonts">フォント</a></li>              <li><a href="#starters">'Starters'</a>                <ul>
-                  <li><a href="#coloring_book_style">Coloring-Book Style Starters</a></li>                  <li><a href="#scene_style">Scene-Style Starters</a></li>                </ul>
+                  <li><a href="#coloring_book_style">Coloring-Book Style Starters</a></li>                  <li><a href="#scene_style">Scene-Style Starters</a></li>                  <li><a href="#starter_options">Starter Options</a></li>                </ul>
               </li>
-              <li><a href="#templates">'Templates'</a></li>              <li><a href="#translations">Translations</a></li>              <li><a href="#input_methods">Alternative Input Methods</a></li>              <li><a href="#on_screen_keyboard">画面キーボード</a></li>            </ul>
+              <li><a href="#templates">'Templates'</a>                <ul>
+                  <li><a href="#template_options">Template Options</a></li>                </ul>
+              </li>
+              <li><a href="#translations">Translations</a></li>              <li><a href="#input_methods">Alternative Input Methods</a></li>              <li><a href="#on_screen_keyboard">画面キーボード</a></li>            </ul>
           </td>
         </tr>
       </table>
@@ -712,6 +717,190 @@
 
       <p class="note">
         <span title="Information">&#128161;</span>        <strong>Note:</strong> 'Starters' are 'attached' to saved pictures, via a small text file that has the same name as the saved file, but with "<code>.dat</code>" as the extension. This allows it to continue to affect the drawing even after Tux Paint has been quit, or another picture is loaded or a new image is created. (In other words, if you base a drawing on a 'starter' image, it will always be affected by it.)      </p>
+
+      <section><!-- H2: Starter Options -->
+        <header>
+          <h2>
+            <a name="starter_options"
+                id="starter_options">Starter Options</a>
+          </h2>
+        </header>
+
+        <p>
+          Aside from an image, starters can also be given other attributes. To do this, you need to create a 'data file' for the starter.          (Note: Tux Paint prior to version 0.9.29 did not support starter options.)        </p>
+
+        <p>
+          A starter's data file is simply a plain ASCII text file containing the options for the starter.        </p>
+
+        <p>
+          The file has the same name as the  image, but a "<code>.dat</code>" extension. (e.g., "<code>starter.png</code>"'s data file is the text file "<code>starter.dat</code>", found in the same directory.)        </p>
+
+        <dl>
+          <dt><strong>allowscale</strong></dt>
+          <dd><!-- allowscale -->
+            <p>
+              When a starter image is a different aspect ratio (width-to-height proportions) than Tux Paint's canvas, by default it will be scaled to fit entirely within the canvas, without stretching the starter (changing its aspect ratio); for example, a square starter on a portrait-shaped canvas will be placed in the center of the canvas.  By default, Tux Paint will then take the strip of pixels at the edges of the starter and stretch them to the edges of the canvas, "smearing" it.            </p>
+
+            <center>
+              <img src="../../html/images/smear-wide.png"
+                      width="320"
+                      height="153"
+                      alt=""
+                      valign="middle" />
+              <img src="../../html/images/smear-tall.png"
+                      width="216"
+                      height="320"
+                      alt=""
+                      valign="middle" />
+            </center>
+
+            <p>
+              If it's acceptable for the starter image to be cropped in one or both directions, the "<code><b>allowscale</b></code>" may be used to tell Tux Paint which behavior to allow:            </p>
+            <ul>
+              <li><!-- allowscale=horizontal -->
+                <img src="../../html/images/allowscale-horizontal.png"
+                    width="108"
+                    height="160"
+                    alt=""
+                    align="right">
+                For starters where it's <em>alright to crop the left and right edges</em>, but the top and bottom edges must be retained, use "<code><b>allowscale=horizontal</b></code>".                <ul>
+                  <li>
+                    If the starter's aspect ratio is wider than that of the canvas, it will be scaled to fit the height of the canvas, and the left and right will be cropped.                  </li>
+                  <li>
+                    If the starter's aspect ratio is taller than that of the canvas, it will be scaled to fit the height of the canvas, and no cropping will occur, and the left and right edges will be smeared.                  </li>
+                </ul>
+                <br clear="all" />
+              </li><!-- allowscale=horizontal -->
+
+              <li><!-- allowscale=vertical -->
+                <img src="../../html/images/allowscale-vertical.png"
+                    width="240"
+                    height="115"
+                    alt=""
+                    align="right">
+                For starters where it's <em>alright to crop the top and bottom edges</em>, but the left and right edges must be retained, use "<code><b>allowscale=vertical</b></code>".                <ul>
+                  <li>
+                    If the starter's aspect ratio is taller than that of the canvas, it will be scaled to fit the width of the canvas, and the top and bottom will be cropped.                  </li>
+                  <li>
+                    If the starter's aspect ratio is wider than that of the canvas, it will be scaled to fit the width of the canvas, and no cropping will occur, and the top and bottom edges will be smeared.                  </li>
+                </ul>
+                <br clear="all" />
+              </li><!-- allowscale=vertical -->
+
+              <li><!-- allowscale=both -->
+                If it's acceptable to crop either the top and bottom or the left and right, use "<code><b>allowscale=both</b></code>". Contents from starter will always fill the canvas, regardless of how its aspect ratio compares to that of the canvas.              </li><!-- allowscale=both -->
+
+              <li><!-- allowscale=none -->
+                The default behavior is to not allow cropping. This may be specified explicitly with "<code><b>allowscale=none</b></code>".              </li><!-- allowscale=none -->
+            </ul>
+          </dd><!-- allowscale -->
+
+          <dt><strong>background</strong></dt>
+          <dd><!-- background -->
+            <p>
+              This option allows you to specify how Tux Paint should fill the rest of the canvas, when the starter does not fit in one or the other direction.  By default, as described above, Tux Paint will "smear" the pixels from the edges of the starter.  (This can be specified explicitly with "<code><b>background=smear</b></code>".)            </p>
+            <p>
+              You can instead specify a solid background color (e.g., white for a 'coloring-book' style starter, with "<code><b>background=#fff</b></code>").            </p>
+            <p>
+              各行の色は、３つの十進数の組み（例: "<code>255 68 136</code>"）、あるいは、3つの16 進数の組からなる6桁または3桁の表記（例: "<code>#ff4488</code>" または "<code>#F48</code>”）で指定します。            </p>
+            <p>
+              See the <a href="OPTIONS.html#colorfile">"Color Palette File" section of "Options documentation"</a> for further details.            </p>
+          </dd><!-- background -->
+
+          <dt><strong>gravity</strong></dt>
+          <dd><!-- gravity -->
+            <p>
+              This option allows you to specify how Tux Paint should position a starter, when it is being cropped in one or the other direction.  By default, Tux Paint will place the center of the starter within the canvas. (This can be specified explicitly with "<code><b>gravity=center</b></code>".)            </p>
+            <p>
+              For example, if the top center of the starter contains the most important content, you can specify "<code><b>gravity=top</b></code>".  Or, if the bottom right is important, specify "<code><b>gravity=bottom-right</b></code>".            </p>
+
+            <p>
+              The available options are:              <ul>
+                <li><code><b>center</b></code> &mdash; prefer the center (the default)</li>
+                <li><code><b>top</b></code> &mdash; prefer the top center</li>
+                <li><code><b>bottom</b></code> &mdash; prefer the bottom center</li>
+                <li><code><b>left</b></code> &mdash; prefer the left center</li>
+                <li><code><b>right</b></code> &mdash; prefer the right center</li>
+                <li><code><b>top-left</b></code> &mdash; prefer the top left</li>
+                <li><code><b>top-right</b></code> &mdash; prefer the top right</li>
+                <li><code><b>bottom-left</b></code> &mdash; prefer the bottom left</li>
+                <li><code><b>bottom-right</b></code> &mdash; prefer the bottom right</li>
+              </ul>
+            </p>
+
+                          <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-center-landscape.png"
+                    width="160"
+                    height="72"
+                    alt="[ Landscape-shaped image of a horizon with the sun in the middle and a building on the right. ]"
+                    title="Landscape-shaped image of a horizon with the sun in the middle and a building on the right."
+                    valign="middle" />
+                  <figcaption style="font-size: smaller;">
+                    <p>Focusing on the center of a starter image stretched to fit the width of the canvas.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-center-portrait.png"
+                    width="84"
+                    height="160"
+                    alt="[ Portrait-shaped image of a horizon with the sun in the middle and the left side of building on the right. ]"
+                    title="Portrait-shaped image of a horizon with the sun in the middle and the left side of building on the right."
+                    valign="middle" />
+                  <figcaption style="font-size: smaller;">
+                    <p>Focusing on the center of a starter image stretched to fit the height of the canvas.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-top-landscape.png"
+                    width="160"
+                    height="72"
+                    alt="[ Landscape-shaped image of the sky with the sun at the bottom and the top of building on the right. ]"
+                    title="Landscape-shaped image of the sky with the sun at the bottom and the top of building on the right."
+                    valign="middle" />
+                  <figcaption style="font-size: smaller;">
+                    <p>Focusing on the top of a starter image stretched to fit the width of the canvas.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-bottom-landscape.png"
+                    width="160"
+                    height="72"
+                    alt="[ Landscape-shaped image of the ground with the sun at the top. ]"
+                    title="Landscape-shaped image of the ground with the sun at the top."
+                    valign="middle" />
+                  <figcaption style="font-size: smaller;">
+                    <p>Focusing on the bottom of a starter image stretched to fit the width of the canvas.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-right-portrait.png"
+                    width="84"
+                    height="160"
+                    alt="[ Portrait-shaped image of a horizon with the sun on the left and a building in the center. ]"
+                    title="Portrait-shaped image of a horizon with the sun on the left and a building in the center."
+                    valign="middle" />
+                  <figcaption style="font-size: smaller;">
+                    <p>Focusing on the right of a starter image stretched to fit the height of the canvas.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                        </dd><!-- gravity -->
+        </dl>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Note:</strong> Templates (described below) may also have options files, and currently support all of the same options as starters.        </p>
+        <br clear="all">
+      </section><!-- H2: Starter Options -->
+
     </section><!-- H1: Starters -->
 
     <section class="indent outer"><!-- H1: 'Templates' -->
@@ -748,6 +937,19 @@
       <p class="note">
         <span title="Information">&#128161;</span>        <strong>Note:</strong> 'Templates' are 'attached' to saved pictures, via a small text file that has the same name as the saved file, but with "<code>.dat</code>" as the extension. This allows it to continue to affect the drawing even after Tux Paint has been quit, or another picture is loaded or a new image is created. (In other words, if you base a drawing on a 'template' image, it will always be affected by it.)      </p>
       <br clear="all">
+
+      <section><!-- H2: Template Options -->
+        <header>
+          <h2>
+            <a name="template_options"
+                id="template_options">Template Options</a>
+          </h2>
+        </header>
+
+        <p>
+          Like 'starters', a configuration file may be specified that defines how Tux Paint should behave when applying 'template' images to the canvas when they do not have identical proportions (aspect ratio). See "Starter Options", above.          (Note: Tux Paint prior to version 0.9.29 did not support template options.)        </p>
+      </section><!-- H2: Template Options -->
+
     </section><!-- H1: 'Templates' -->
 
     <section class="indent outer"><!-- H1: Translations -->
@@ -759,7 +961,7 @@
       </header>
 
       <p>
-        Tux Paint supports numerous languages, thanks to use of the "gettext" localization library. (See "Options documentation" for how to change locales in Tux Paint.)      </p>
+        Tux Paint supports numerous languages, thanks to use of the "gettext" localization library. (See <a href="OPTIONS.html#languages">the "Languages" section of "Options documentation"</a> for how to change locales in Tux Paint.)      </p>
 
       <p>
         To translate Tux Paint to a new language, copy the translation template file, "<code>tuxpaint.pot</code>" (found in Tux Paint's source code, in the folder "<code>src/po/</code>"). Rename the copy as a "<code>.po</code>" file, with an appropriate name for the locale you're translating to (e.g., "<code>es.po</code>" for Spanish; or "<code>pt_BR.po</code>" for Brazilian Portuguese, versus "<code>pt.po</code>" or "<code>pt_PT.po</code>" for Portuguese spoken in Portugal.)      </p>

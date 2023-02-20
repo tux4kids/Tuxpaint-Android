@@ -192,7 +192,7 @@ windows_ARCH_LINKS:=-lgdi32 -lcomdlg32 $(PNG) -lz -lwinspool -lshlwapi $(FRIBIDI
 macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant -lSDLmain -Wl,-framework,AppKit -Wl,-framework,Cocoa $(shell $(PKG_CONFIG) --libs pangoft2)
 ios_ARCH_LINKS=$(FRIBIDI_LIB) -limagequant -ljpeg -lbz2 $(shell $(PKG_CONFIG) --libs freetype2 libtiff-4 libwebp libffi harfbuzz libmpg123 ogg vorbisenc vorbisidec libxml-2.0 pangoft2 libpcre)
 beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(PAPER_LIB) $(STDC_LIB) -limagequant
-linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant $(shell $(PKG_CONFIG) --libs pangoft2)
+linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
 ARCH_LINKS:=$($(OS)_ARCH_LINKS)
 
 windows_ARCH_HEADERS:=src/win32_print.h

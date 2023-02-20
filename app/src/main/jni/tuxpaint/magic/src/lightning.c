@@ -3,7 +3,7 @@
   Draws a lightning strike between the click
   and drag+release positions.
 
-  Last updated: January 25, 2023
+  Last updated: February 12, 2023
 */
 
 #include <stdio.h>
@@ -301,8 +301,8 @@ void lightning_draw_bolt(void *ptr, SDL_Surface * canvas,
 }
 
 
-void lightning_set_color(magic_api * api, int which, SDL_Surface * canvas,
-                         SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
+void lightning_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                         SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   api->rgbtohsv(r, g, b, &lightning_h, &lightning_s, &lightning_v);
 }

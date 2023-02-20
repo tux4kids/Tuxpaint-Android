@@ -1,6 +1,6 @@
 /* halftone.c
 
-  Last updated: January 25, 2023
+  Last updated: February 12, 2023
 */
 
 
@@ -278,8 +278,8 @@ void halftone_release(magic_api * api ATTRIBUTE_UNUSED,
 {
 }
 
-void halftone_set_color(magic_api * api, int which, SDL_Surface * canvas,
-                        SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
+void halftone_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                        SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 

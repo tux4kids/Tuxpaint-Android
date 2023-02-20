@@ -7,7 +7,7 @@
    Inspired by "Night Sky Scene [Pen Parallax]" Scratch Project
    by -HexaScape- <https://scratch.mit.edu/users/-HexaScape->
 
-   Last updated: January 30, 2023
+   Last updated: February 16, 2023
 */
 
 #include <stdio.h>
@@ -50,7 +50,7 @@ char * swirl_descriptions[NUM_SWIRL_TOOLS][2] = {
 char * swirl_icon_filenames[NUM_SWIRL_TOOLS] = {
   "swirls_circles.png",
   "swirls_rays.png",
-  "swirls_rays.png" // FIXME
+  "swirls_fur.png"
 };
 
 char * swirl_sfx_filenames[NUM_SWIRL_TOOLS] = {

@@ -310,52 +310,60 @@ Available Tools
            mouse, showing where the stamp will be placed, and how big it will
            be. Click on the canvas where you wish to place the stamp.
 
-                Normal Stamps Mode
+                Stamp Categories
+                        There can be numerous categories of stamps (e.g.,
+                        animals, plants, outer space, vehicles, people,
+                        etc.). Use the Left and Right arrows near the bottom
+                        of the Selector to cycle through the collections.
 
-                        Now you can move the mouse around the canvas to
-                        rotate the stamp.
+                Stamp Rotation
 
-                        Click the mouse button again and the stamp will be
-                        added to the drawing.
+                        Using the rotation toggle button near the bottom
+                        right, you can enable a rotation step when placing
+                        stamps. Once you've placed the stamp, choose the
+                        angle to rotate it by moving the mouse around the
+                        canvas. Click the mouse button again and the stamp
+                        will be added to the drawing.
 
-                Simple Stamps Mode
-                        If "stamp rotation" option is disabled, the stamp
-                        will be drawn on the canvas when you let go of the
-                        mouse button. (There's no rotation step.)
+                        ⚙ Note: If "stamp rotation" option is disabled, the
+                        stamp will be drawn on the canvas when you let go of
+                        the mouse button. (There's no rotation step.) See the
+                        "Options" documentation to learn about the "stamp
+                        rotation" ("stamprotation") option.
 
-                        ⚙ See the "Options" documentation to learn about the
-                        "stamp rotation" ("stamprotation") option.
+                        📜 Note: The stamp rotation feature was added to Tux
+                        Paint in version 0.9.29.
 
-           📜 Note: The stamp rotation feature was added to Tux Paint in
-           version 0.9.29.
+                Stamp Controls
 
-           There can be numerous categories of stamps (e.g., animals, plants,
-           outer space, vehicles, people, etc.). Use the Left and Right
-           arrows near the bottom of the Selector to cycle through the
-           collections.
+                        Prior to 'stamping' an image onto your drawing,
+                        various effects can sometimes be applied (depending
+                        on the stamp):
 
-           Prior to 'stamping' an image onto your drawing, various effects
-           can sometimes be applied (depending on the stamp):
+                           * Some stamps can be colored or tinted. If the
+                             color palette below the canvas is activated, you
+                             can click the colors to change the tint or color
+                             of the stamp before placing it in the picture.
+                           * Stamps can be shrunk and expanded, by clicking
+                             within the triangular-shaped series of bars at
+                             the bottom right; the larger the bar, the larger
+                             the stamp will appear in your picture.
+                           * Many stamps may be flipped vertically, or
+                             displayed as a mirror-image, using the control
+                             buttons at the bottom right.
 
-              * Some stamps can be colored or tinted. If the color palette
-                below the canvas is activated, you can click the colors to
-                change the tint or color of the stamp before placing it in
-                the picture.
-              * Stamps can be shrunk and expanded, by clicking within the
-                triangular-shaped series of bars at the bottom right; the
-                larger the bar, the larger the stamp will appear in your
-                picture.
-              * Many stamps may be flipped vertically, or displayed as a
-                mirror-image, using the control buttons at the bottom right.
+                        ⚙ Note: If the "nostampcontrols" option is set, Tux
+                        Paint won't display the Rotation, Mirror, Flip, or
+                        sizing controls for stamps. See the "Options"
+                        documentation.
 
-           Different stamps can have different sound effects and/or
-           descriptive (spoken) sounds. Buttons in the Help Area at the lower
-           left (near Tux, the Linux penguin) allow you to re-play the sound
-           effects and descriptive sounds for the currently-selected stamp.
+                Stamp Sounds
 
-           ⚙ Note: If the "nostampcontrols" option is set, Tux Paint won't
-           display the Mirror, Flip, Shrink and Grow controls for stamps. See
-           the "Options" documentation.
+                        Different stamps can have different sound effects
+                        and/or descriptive (spoken) sounds. Buttons in the
+                        Help Area at the lower left (near Tux, the Linux
+                        penguin) allow you to re-play the sound effects and
+                        descriptive sounds for the currently-selected stamp.
 
    "Lines" Tool
 

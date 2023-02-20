@@ -119,7 +119,7 @@ static void imm_copying(void)
 #line 95 "src/parse.gperf"
 struct cfg;
 
-#define TOTAL_KEYWORDS 100
+#define TOTAL_KEYWORDS 101
 #define MIN_WORD_LENGTH 4
 #define MAX_WORD_LENGTH 32
 #define MIN_HASH_VALUE 18
@@ -148,7 +148,7 @@ hash (register const char *str, register size_t len)
       234, 234, 234, 234, 234, 234, 234, 234, 234, 234,
       234, 234, 234, 234, 234, 234, 234, 234, 234, 234,
       234, 234, 234, 234, 234, 234, 234,  55,  85, 111,
-      105,  10,   5,   5, 110,  35, 234,   0,  10,  15,
+      105,  10,  30,   5, 110,  35, 234,   0,  10,  15,
        15,  10,  70, 234,  80,   5,   0,  75,  15, 100,
        15,  10, 234, 234, 234, 234, 234, 234
     };
@@ -227,7 +227,7 @@ in_word_set (register const char *str, register size_t len)
       {"",0},
 #line 179 "src/parse.gperf"
       {"joystick-hat-slowness", MULTI(joystick_hat_slowness)},
-#line 194 "src/parse.gperf"
+#line 195 "src/parse.gperf"
       {"joystick-btn-save",     MULTI(joystick_button_save)},
 #line 184 "src/parse.gperf"
       {"joystick-btn-lines",    MULTI(joystick_button_selectlinestool)},
@@ -243,9 +243,9 @@ in_word_set (register const char *str, register size_t len)
       {"",0},
 #line 114 "src/parse.gperf"
       {"dontmirrorstamps",    NEGBOOL(mirrorstamps)},
-#line 193 "src/parse.gperf"
+#line 194 "src/parse.gperf"
       {"joystick-btn-open",     MULTI(joystick_button_open)},
-#line 197 "src/parse.gperf"
+#line 198 "src/parse.gperf"
       {"joystick-buttons-ignore",    MULTI(joystick_buttons_ignore)},
 #line 159 "src/parse.gperf"
       {"startlast",           NEGBOOL(start_blank)},
@@ -270,7 +270,9 @@ in_word_set (register const char *str, register size_t len)
       {"stampsize",           MULTI(stamp_size_override)},
 #line 163 "src/parse.gperf"
       {"usage",               IMM(usage)},
-      {"",0}, {"",0},
+      {"",0},
+#line 188 "src/parse.gperf"
+      {"joystick-btn-fill",     MULTI(joystick_button_selectfilltool)},
 #line 127 "src/parse.gperf"
       {"magiccontrols",       NEGBOOL(disable_magic_controls)},
 #line 124 "src/parse.gperf"
@@ -306,7 +308,7 @@ in_word_set (register const char *str, register size_t len)
       {"",0}, {"",0}, {"",0},
 #line 106 "src/parse.gperf"
       {"buttondistinction",   NEGBOOL(no_button_distinction)},
-#line 196 "src/parse.gperf"
+#line 197 "src/parse.gperf"
       {"joystick-btn-print",    MULTI(joystick_button_print)},
       {"",0},
 #line 117 "src/parse.gperf"
@@ -326,7 +328,7 @@ in_word_set (register const char *str, register size_t len)
       {"print",               NEGBOOL(disable_print)},
 #line 135 "src/parse.gperf"
       {"orient",              MULTI(rotate_orientation)},
-#line 189 "src/parse.gperf"
+#line 190 "src/parse.gperf"
       {"joystick-btn-undo",     MULTI(joystick_button_undo)},
 #line 134 "src/parse.gperf"
       {"newcolorslast",       POSBOOL(new_colors_last)},
@@ -335,11 +337,11 @@ in_word_set (register const char *str, register size_t len)
       {"",0},
 #line 103 "src/parse.gperf"
       {"altprintmod",         MULTI(alt_print_command_default)},
-#line 190 "src/parse.gperf"
+#line 191 "src/parse.gperf"
       {"joystick-btn-redo",     MULTI(joystick_button_redo)},
 #line 139 "src/parse.gperf"
       {"printcfg",            POSBOOL(use_print_config)},
-#line 191 "src/parse.gperf"
+#line 192 "src/parse.gperf"
       {"joystick-btn-eraser",   MULTI(joystick_button_selecterasertool)},
 #line 164 "src/parse.gperf"
       {"verbose-version",     IMM(verbose_version)},
@@ -374,7 +376,7 @@ in_word_set (register const char *str, register size_t len)
 #line 177 "src/parse.gperf"
       {"joystick-threshold",  MULTI(joystick_lowthreshold)},
       {"",0}, {"",0},
-#line 192 "src/parse.gperf"
+#line 193 "src/parse.gperf"
       {"joystick-btn-new",      MULTI(joystick_button_new)},
 #line 172 "src/parse.gperf"
       {"onscreen-keyboard",   POSBOOL(onscreen_keyboard)},
@@ -391,7 +393,7 @@ in_word_set (register const char *str, register size_t len)
       {"",0}, {"",0}, {"",0},
 #line 167 "src/parse.gperf"
       {"windowed",            NEGBOOL(fullscreen)},
-#line 188 "src/parse.gperf"
+#line 189 "src/parse.gperf"
       {"joystick-btn-magic",    MULTI(joystick_button_selectmagictool)},
       {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
 #line 123 "src/parse.gperf"
@@ -399,11 +401,8 @@ in_word_set (register const char *str, register size_t len)
       {"",0},
 #line 115 "src/parse.gperf"
       {"exportdir",           MULTI(exportdir)},
-      {"",0}, {"",0},
-#line 110 "src/parse.gperf"
-      {"currentlocalefont",   NEGBOOL(all_locale_fonts)},
-      {"",0}, {"",0},
-#line 195 "src/parse.gperf"
+      {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
+#line 196 "src/parse.gperf"
       {"joystick-btn-pgsetup",  MULTI(joystick_button_pagesetup)},
 #line 148 "src/parse.gperf"
       {"saveovernew",         POSBOOL(_promptless_save_over_new)},
@@ -417,8 +416,10 @@ in_word_set (register const char *str, register size_t len)
       {"",0}, {"",0}, {"",0},
 #line 171 "src/parse.gperf"
       {"mouse-accessibility", POSBOOL(mouseaccessibility)},
+      {"",0}, {"",0},
+#line 110 "src/parse.gperf"
+      {"currentlocalefont",   NEGBOOL(all_locale_fonts)},
       {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
-      {"",0}, {"",0}, {"",0},
 #line 150 "src/parse.gperf"
       {"showcursor",          NEGBOOL(hide_cursor)},
       {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0}, {"",0},
@@ -449,7 +450,7 @@ in_word_set (register const char *str, register size_t len)
     }
   return 0;
 }
-#line 198 "src/parse.gperf"
+#line 199 "src/parse.gperf"
 
 
 void parse_one_option(struct cfginfo *restrict tmpcfg, const char *str, const char *opt, const char *restrict src)

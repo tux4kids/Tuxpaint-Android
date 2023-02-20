@@ -51,6 +51,8 @@
     padding: 0.5em;
     display: inline-block;
     margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
   section.outer {
     padding-bottom: 1em;
@@ -562,76 +564,93 @@
   <p>
     マウスを動かすと、スタンプが押される位置と大きさを示す輪郭線が表示されるので、押したい場所でクリックします。  </p>
 
-  <dl>
-    <dt>
-      <strong>標準の動作</strong>
-    </dt>
-
-    <dd>
-      <p>
-        続いて、キャンバス内でマウスを動かすと、スタンプが回転します。      </p>
-
-      <p>
-        最後にもう一度マウスをクリックすると、スタンプが押されます。      </p>
-    </dd>
-
-    <dt>
-      <strong>簡易モード</strong>
-    </dt>
-
-    <dd>
-      "スタンプの回転" オプションが無効化されている場合、回転の手順は省略され、マウスを放した時点でスタンプ押されます。      <p class="note">
-        <span title="Configuration option">&#9881;</span>        ""スタンプの回転"" ("<code>stamprotation</code>") についての詳細は、<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。      </p>
-    </dd>
-  </dl>
-
-  <p class="note">
-    <span title="Version variation">&#128220;</span>    <strong>注:</strong> はんこの回転機能は Tux Paint バージョン 0.9.29 で追加されました。  </p>
-
   <div class="screenshot-center">
     <img src="../../html/images/ex_stamps.png"
        width="182"
        height="156"
        alt="">
   </div>
-  <img src=
-  "../../html/images/tool_stamp_categories.png"
-      width="96"
-      height="48"
-      alt=""
-      align="right">
-  <p>
-    スタンプは、動物、植物、宇宙、乗り物、人物といった多くのカテゴリに分類されています。セレクタの左右の矢印のボタンを使ってカテゴリを切り替えることができます。  </p>
 
-  <p>
-    スタンプを絵に貼り付ける前に、以下の様々な効果を適用することができます（スタンプの種類によって異なります）:  </p>
+  <dl>
+    <dt>
+      <strong>スタンプの分類</strong>
+    </dt>
 
-  <ul>
-    <li>スタンプには色をつけることができるものがあります。その場合、カラーパレットが有効になり、スタンプを絵に貼り付ける前に色を選ぶことができます。    </li>
+    <dd>
+      <img src="../../html/images/tool_stamp_categories.png"
+        width="96"
+        height="48"
+        alt=""
+        align="right">
+      スタンプは、動物、植物、宇宙、乗り物、人物といった多くのカテゴリに分類されています。セレクタの左右の矢印のボタンを使ってカテゴリを切り替えることができます。    </dd>
 
-    <li>スタンプは、右下の三角形のバーの中をクリックすることで、縮小・拡大することができます。    </li>
+    <dt>
+      <strong>"スタンプの回転"</strong>
+    </dt>
 
-    <li>多くのスタンプは、右下の操作ボタンを使って、上下・左右に反転させることができます。    </li>
-  </ul>
+    <dd>
+      <img src="../../html/images/tool_stamp_rotation.png"
+          width="48"
+          height="48"
+          alt=""
+          align="right">
+      <p>
+        右下のトグルボタンを使って、スタンプを配置する際の回転を有効にすることができます。 スタンプを配置したらキャンバス上でマウスを動かして回転させる角度を選びます。 もう一度マウスボタンをクリックすると、スタンプが追加されます。      </p>
 
-  <div class="screenshot-center">
-    <img src=
-    "../../html/images/tool_stamp_controls.png"
-       width="96"
-       height="96"
-       alt="">
-  </div>
-  <img src="../../html/images/tool_sfx.png"
-      width="48"
-      height="24"
-      alt=""
-      align="right">
-  <p>
-    個々のスタンプごとに効果音を設定することができます。画面下部の左側のヘルプエリア（Linux ペンギン "<em>Tux</em>"の近く）にあるボタンを押すと、効果音を再生することができます。  </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>注:</strong>"スタンプの回転" オプションが無効化されている場合、回転の手順は省略され、マウスを放した時点でスタンプが確定します。        ""スタンプの回転"" ("<code>stamprotation</code>") についての詳細は、<a href="OPTIONS.html"><em>各種設定について</em></a>" のドキュメントを参照して下さい。      </p>
 
-  <p class="note">
-    <span title="Configuration option">&#9881;</span>    <strong>注:</strong> "<code>nostampcontrols</code>" オプションが設定されると、スタンプの拡大・縮小、反転が無効になります。詳しくは"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。  </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>注:</strong> はんこの回転機能は Tux Paint バージョン 0.9.29 で追加されました。      </p>
+    </dd>
+
+
+    <dt>
+      <strong>スタンプの操作</strong>
+    </dt>
+
+    <dd>
+      <img src="../../html/images/tool_stamp_controls.png"
+        width="96"
+        height="96"
+        alt=""
+        align="right">
+
+      <p>
+        スタンプを絵に貼り付ける前に、以下の様々な効果を適用することができます（スタンプの種類によって異なります）:      </p>
+
+      <ul>
+        <li>
+          スタンプには色をつけることができるものがあります。その場合、カラーパレットが有効になり、スタンプを絵に貼り付ける前に色を選ぶことができます。        </li>
+
+        <li>
+          スタンプは、右下の三角形のバーの中をクリックすることで、縮小・拡大することができます。        </li>
+
+        <li>
+          多くのスタンプは、右下の操作ボタンを使って、上下・左右に反転させることができます。        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>注:</strong> "<code>nostampcontrols</code>" オプションが設定されると、スタンプの回転、拡大・縮小、反転が無効になります。詳しくは"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。      </p>
+
+    </dd>
+
+    <dt>
+      <strong>スタンプの効果音</strong>
+    </dt>
+
+    <dd>
+      <img src="../../html/images/tool_sfx.png"
+        width="48"
+        height="24"
+        alt=""
+        align="right">
+      <p>
+        個々のスタンプごとに効果音を設定することができます。画面下部の左側のヘルプエリア（Linux ペンギン "<em>Tux</em>"の近く）にあるボタンを押すと、効果音を再生することができます。      </p>
+    </dd>
+  </dl>
 </dd>
+
             <dt id="using_tools_drawing_lines">
   <strong>「せん」ツール</strong>
 </dt>

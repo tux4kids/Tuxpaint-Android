@@ -51,6 +51,8 @@
     padding: 0.5em;
     display: inline-block;
     margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
   section.outer {
     padding-bottom: 1em;
@@ -100,7 +102,7 @@
           </p>
 
           <p>
-            2023年1月 2日          </p>
+            2023年2月19日          </p>
         </center>
       </header>
 
@@ -177,22 +179,15 @@
           </header>
 
           <p>
-            上記のユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）          </p>
+            ユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）          </p>
 
           <blockquote>
             <code>/etc/tuxpaint/tuxpaint.conf</code>
           </blockquote>
-
-          <p>
-            以下のコマンドラインオプションを指定すると、システム全体の設定ファイルは無視され、設定ファイル "<code>.tuxpaintrc</code>" やコマンドラインオプションによる変更のみが反映されます。          </p>
-
-          <blockquote>
-            <code>--nosysconfig</code>
-          </blockquote>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: Linux and Unix Users -->
 
-      <section><!-- H2: macOS Users -->
+      <section class="indent"><!-- H2: macOS Users -->
         <header>
           <h2>
             macOS のユーザー          </h2>
@@ -208,7 +203,7 @@
           </header>
 
           <p>
-            上記のユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）          </p>
+            ユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）          </p>
 
           <blockquote>
             <code>/Library/Application Support/TuxPaint/tuxpaint.cfg</code>
@@ -216,19 +211,38 @@
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: macOS Users -->
 
-      <section><!-- H2: Windows Users -->
+      <section class="indent"><!-- H2: Windows Users -->
         <header>
           <h2>
             Windows のユーザー          </h2>
         </header>
 
         <p>
-          設定ファイルは、Tux Paint をインストールしたフォルダに "<code><b>tuxpaint.cfg</b></code>" というファイル名で作成します。        </p>
+          ユーザー毎の設定ファイルは、個人用データのフォルダ <code>C:\Users\username\AppData\Roaming\TuxPaint\</code> 内に "<code><b>tuxpaint.cfg</b></code>" というファイル名で作成します。        </p>
 
         <p>
           設定ファイルはメモ帳やワードパッドで作成できますが、必ずテキストファイルとして保存するよう注意して下さい。また、ファイル名に ".txt" という拡張子をつけないようにします。        </p>
-      </section><!-- H2: macOS Users -->
-    </section>
+
+        <section class="indent"><!-- H3: System-Wide Configuration File -->
+          <header>
+            <h3>
+              システム全体の設定ファイル            </h3>
+          </header>
+
+          <p>
+            ユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）          </p>
+
+          <blockquote>
+            <code>C:\Program Files\Tuxpaint</code>
+          </blockquote>
+
+          </p>
+        </section><!-- H3: System-Wide Configuration File -->
+      </section><!-- H2: Windows Users -->
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        コマンドラインオプション "<code>--nosysconfig</code>" 用いると、システム全体の設定ファイルは無視され、ユーザー毎の設定ファイルやコマンドラインオプションによる変更のみが反映されます。      </p>
+    </section><!-- H1: Configuration File -->
 
     <section class="outer"><!-- H1: Available Options -->
       <div class="keeptogether">
@@ -300,7 +314,7 @@
       </ul>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        If only one display is available, and Tux Paint is being run in windowed (not fullscreen) mode, and the chosen window size exceeds the capabilities of the display, Tux Paint will fall back to the display's dimensions.      </p>
+        <span title="Information">&#128161;</span>        利用可能なディスプレイが１つのみでタックスペイントが（フルスクリーンではなく）ウィンドウモードで実行されており、ウィンドウサイズの設定がディスプレイサイズより大きい場合、ウィンドウサイズは強制的にディスプレイサイズに合わせられます。      </p>
     </dd>
 
     <dt>
@@ -1857,7 +1871,7 @@
 
 <section>
   <header>
-    <h3>カラーパレットファイル</h3>
+    <h3 id="colorfile">カラーパレットファイル</h3>
   </header>
 
   <dl>
@@ -2161,6 +2175,15 @@
     </dd>
 
     <dt>
+      <code><b>joystick-btn-fill=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        ジョイスティックの BUTTON NUMBER で設定したボタンに "「ぬる」ツール" へのショートカットを割り当てます。      </p>
+    </dd>
+
+    <dt>
       <code><b>joystick-btn-magic=<i>BUTTON NUMBER</i></b></code>
     </dt>
 
@@ -2245,7 +2268,7 @@
   </section>
       </section><!-- H1: Available Options -->
 
-    <section><!-- H1: Overriding System Config. Options -->
+    <section class="outer"><!-- H1: Overriding System Config. Options -->
       <header>
         <h1 id="overriding">
           システム全体の設定を上書きする        </h1>
@@ -2275,7 +2298,7 @@
       </blockquote>
     </section><!-- H1: Overriding System Config. Options -->
 
-    <section><!-- H1: Command-Line Options -->
+    <section class="outer"><!-- H1: Command-Line Options -->
       <header>
         <h1 id="command_line">
           コマンドラインオプション        </h1>
@@ -2498,7 +2521,7 @@
       </section><!-- H2: Command-Line Informational Options -->
     </section><!-- H1: Command-Line Options -->
 
-    <section><!-- H1: Choosing a Different Language -->
+    <section class="outer"><!-- H1: Choosing a Different Language -->
       <header>
         <h1 id="different_language">
           使用する言語の選択        </h1>

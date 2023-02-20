@@ -313,53 +313,63 @@ Ferramentas dispoñíbeis
            mouse, showing where the stamp will be placed, and how big it will
            be. Click on the canvas where you wish to place the stamp.
 
-                Normal Stamps Mode
+                Stamp Categories
+                        Pode haber numerosas categorías de selos (por
+                        exemplo, animais, plantas, espazo exterior,
+                        vehículos, persoas, etc.). Use as frechas esquerda e
+                        dereita preto da parte inferior do selector para
+                        percorrer as coleccións.
 
-                        Now you can move the mouse around the canvas to
-                        rotate the stamp.
+                Stamp Rotation
 
-                        Click the mouse button again and the stamp will be
-                        added to the drawing.
+                        Using the rotation toggle button near the bottom
+                        right, you can enable a rotation step when placing
+                        stamps. Once you've placed the stamp, choose the
+                        angle to rotate it by moving the mouse around the
+                        canvas. Click the mouse button again and the stamp
+                        will be added to the drawing.
 
-                Simple Stamps Mode
-                        If "stamp rotation" option is disabled, the stamp
-                        will be drawn on the canvas when you let go of the
-                        mouse button. (There's no rotation step.)
+                        ⚙ Note: If "stamp rotation" option is disabled, the
+                        stamp will be drawn on the canvas when you let go of
+                        the mouse button. (There's no rotation step.) See the
+                        "Options" documentation to learn about the "stamp
+                        rotation" ("stamprotation") option.
 
-                        ⚙ See the "Options" documentation to learn about the
-                        "stamp rotation" ("stamprotation") option.
+                        📜 Note: The stamp rotation feature was added to Tux
+                        Paint in version 0.9.29.
 
-           📜 Note: The stamp rotation feature was added to Tux Paint in
-           version 0.9.29.
+                Stamp Controls
 
-           Pode haber numerosas categorías de selos (por exemplo, animais,
-           plantas, espazo exterior, vehículos, persoas, etc.). Use as
-           frechas esquerda e dereita preto da parte inferior do selector
-           para percorrer as coleccións.
+                        Antes de «estampar» unha imaxe no seu debuxo, ás
+                        veces pódense aplicar varios efectos (dependendo do
+                        selo):
 
-           Antes de «estampar» unha imaxe no seu debuxo, ás veces pódense
-           aplicar varios efectos (dependendo do selo):
+                           * Algúns selos pódense colorea ou matizar. Se a
+                             paleta de cores baixo o lenzo está activada,
+                             pode premer nas cores para cambiar o ton ou a
+                             cor do selo antes de colocalo na imaxe.
+                           * Os selos poden reducirse e expandirse premendo
+                             dentro da serie de barras de forma triangular na
+                             parte inferior dereita; canto maior sexa a
+                             barra, máis grande aparecerá o selo na súa
+                             imaxe.
+                           * Moitos selos poden inverterse verticalmente ou
+                             amosarse como unha imaxe reflectida, usando os
+                             botóns de control na parte inferior dereita.
 
-              * Algúns selos pódense colorea ou matizar. Se a paleta de cores
-                baixo o lenzo está activada, pode premer nas cores para
-                cambiar o ton ou a cor do selo antes de colocalo na imaxe.
-              * Os selos poden reducirse e expandirse premendo dentro da
-                serie de barras de forma triangular na parte inferior
-                dereita; canto maior sexa a barra, máis grande aparecerá o
-                selo na súa imaxe.
-              * Moitos selos poden inverterse verticalmente ou amosarse como
-                unha imaxe reflectida, usando os botóns de control na parte
-                inferior dereita.
+                        ⚙ Note: If the "nostampcontrols" option is set, Tux
+                        Paint won't display the Rotation, Mirror, Flip, or
+                        sizing controls for stamps. See the "Options"
+                        documentation.
 
-           Diferentes selos poden ter diferentes efectos sonoros e/ou sons
-           descritivos (falados). Os botóns da área de axuda na parte
-           inferior esquerda (preto de Tux, o pingüín de Linux) permiten
-           reproducir de novo os efectos de son e os sons descritivos para o
-           selo seleccionado nese momento.
+                Stamp Sounds
 
-           ⚙ Note: If the "nostampcontrols" option is set, Tux Paint won't
-           display the Mirror, Flip, Shrink and Grow controls for stamps. See
-           the "Options" documentation.
+                        Diferentes selos poden ter diferentes efectos sonoros
+                        e/ou sons descritivos (falados). Os botóns da área de
+                        axuda na parte inferior esquerda (preto de Tux, o
+                        pingüín de Linux) permiten reproducir de novo os
+                        efectos de son e os sons descritivos para o selo
+                        seleccionado nese momento.
 
    Ferramenta «Liñas»
 

@@ -3,7 +3,7 @@
 # Bill Kendrick <bill@newbreedsoftware.com>; https://tuxpaint.org/
 # Based on inkscape's completion file, by allali@univ-mlv.fr
 #
-# Last modified 2022-12-11
+# Last modified 2023-02-18
 #
 # $Id$
 
@@ -94,6 +94,7 @@ _tuxpaint()
 			--joystick-btn-shapes\
 			--joystick-btn-text \
 			--joystick-btn-label \
+			--joystick-btn-fill \
 			--joystick-btn-magic \
 			--joystick-btn-undo \
 			--joystick-btn-redo \

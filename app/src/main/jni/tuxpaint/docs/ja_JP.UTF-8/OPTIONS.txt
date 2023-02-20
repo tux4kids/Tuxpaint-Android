@@ -6,7 +6,7 @@
          Copyright © 2002-2023 by various contributors; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                   2023年1月 2日
+                                   2023年2月19日
 
                       +---------------------------------+
                       |目次                               |
@@ -50,14 +50,9 @@ Linux 及び Unix のユーザー
 
   システム全体の設定ファイル
 
-   上記のユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）
+   ユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）
 
      /etc/tuxpaint/tuxpaint.conf
-
-   以下のコマンドラインオプションを指定すると、システム全体の設定ファイルは無視され、設定ファイル ".tuxpaintrc"
-   やコマンドラインオプションによる変更のみが反映されます。
-
-     --nosysconfig
 
 macOS のユーザー
 
@@ -66,16 +61,26 @@ macOS のユーザー
 
   システム全体の設定ファイル
 
-   上記のユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）
+   ユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）
 
      /Library/Application Support/TuxPaint/tuxpaint.cfg
 
 Windows のユーザー
 
-   設定ファイルは、Tux Paint をインストールしたフォルダに "tuxpaint.cfg" というファイル名で作成します。
+   ユーザー毎の設定ファイルは、個人用データのフォルダ C:\Users\username\AppData\Roaming\TuxPaint\ 内に
+   "tuxpaint.cfg" というファイル名で作成します。
 
    設定ファイルはメモ帳やワードパッドで作成できますが、必ずテキストファイルとして保存するよう注意して下さい。また、ファイル名に ".txt"
    という拡張子をつけないようにします。
+
+  システム全体の設定ファイル
+
+   ユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）
+
+     C:\Program Files\Tuxpaint
+
+   ⚙ コマンドラインオプション "--nosysconfig"
+   用いると、システム全体の設定ファイルは無視され、ユーザー毎の設定ファイルやコマンドラインオプションによる変更のみが反映されます。
 
                                    利用可能なオプション
 
@@ -111,10 +116,8 @@ Windows のユーザー
               * 768x1024
               * 1600x1200
 
-           💡 If only one display is available, and Tux Paint is being run in
-           windowed (not fullscreen) mode, and the chosen window size exceeds
-           the capabilities of the display, Tux Paint will fall back to the
-           display's dimensions.
+           💡
+           利用可能なディスプレイが１つのみでタックスペイントが（フルスクリーンではなく）ウィンドウモードで実行されており、ウィンドウサイズの設定がディスプレイサイズより大きい場合、ウィンドウサイズは強制的にディスプレイサイズに合わせられます。
 
    orient=portrait
 
@@ -1104,6 +1107,10 @@ Windows のユーザー
      joystick-btn-label=BUTTON NUMBER
 
              ジョイスティックの BUTTON NUMBER で設定したボタンに "「ラベル」ツール" へのショートカットを割り当てます。
+
+     joystick-btn-fill=BUTTON NUMBER
+
+             ジョイスティックの BUTTON NUMBER で設定したボタンに "「ぬる」ツール" へのショートカットを割り当てます。
 
      joystick-btn-magic=BUTTON NUMBER
 

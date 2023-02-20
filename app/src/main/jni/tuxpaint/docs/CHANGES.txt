@@ -7,12 +7,15 @@ Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
 
-2023.February.7 (0.9.29)
+2023.February.19 (0.9.29)
   * Improvements to "Stamp" tool:
     -----------------------------
     * Stamps may now be rotated.
-      Use the "stamprotation=no" option to disable.
-      Pere Pujal i Carabantes <perepujal@gmail.com>
+      Use the "stamprotation=no" option to disable entirely,
+      or the control to enable/disable (if stamp controls are
+      not disabled).
+      Pere Pujal i Carabantes <perepujal@gmail.com> (feature)
+      Bill Kendrick <bill@newbreedsoftware.com> (on/off control)
 
   * New Magic Tools:
     ----------------
@@ -27,12 +30,10 @@ https://tuxpaint.org/
       Julian Evans, https://www.julianevans.info/)
 
     * "Circles" and "Rays" -- convert the image into circular or ray
-      brushstrokes, and [WIP] "Fur" -- add fur to a picture.
+      brushstrokes, and "Fur" -- add fur to a picture.
       Bill Kendrick <bill@newbreedsoftware.com>
       (Inspired by "Night Sky Scene [Pen Parallax]" Scratch Project
       by -HexaScape- <https://scratch.mit.edu/users/-HexaScape->)
-
-      [WIP] - Fur icon needed
 
       ("Circles" and "Rays" sound effects based on Richard Wagner's
       "Ride of the Valkyries", recording licensed as Creative Commons
@@ -61,6 +62,26 @@ https://tuxpaint.org/
     * "Zoom" and "Perspective" background colors change
       immediately when you select new colors.
       Bill Kendrick <bill@newbreedsoftware.com>
+
+  * New Starter
+    -----------
+    * Space_draw.svg by Ingrid Illa Terrier
+
+  * Starter and Template Improvements
+    ---------------------------------
+    * Now possible to set scaling and smearing options for
+      each starter or template image.  A ".dat" file can be
+      created which describes whether it's okay to scale and crop
+      the image's top/bottom and/or left/right, and if not both,
+      whether to smear the sides of the starter/template to the
+      edges of the canvas (the prior behavior, and the default),
+      or use a specific solid color background.  When scaling,
+      gravity may be specified, to ensure that a particular side or
+      corner of the starter or template is included.
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/190/
+      Bill Kendrick <bill@newbreedsoftware.com>
+      with suggestions from Albert Cahalan <acahalan@gmail.com>
+      and Pere Pujal i Carabantes <perepujal@gmail.com>
 
   * Other Improvements:
     -------------------
@@ -102,6 +123,10 @@ https://tuxpaint.org/
     * Update Tux Paint Magic API so `set_color()` functions can
       alter the canvas.  (Utilized by "Zoom" and "Perspective", so far.)
       Note: Bumps `TP_MAGIC_API_VERSION` to 0x00000007.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Joystick button to activate "Fill" tool added.
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/199/)
       Bill Kendrick <bill@newbreedsoftware.com>
 
   * Bug Fixes:

@@ -1,7 +1,7 @@
 /*
   Folds the picture down from the corners.
 
-  Last updated: January 25, 2023
+  Last updated: February 12, 2023
 */
 
 //optimized version soon :)
@@ -85,8 +85,8 @@ Uint32 fold_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void fold_set_color(magic_api * api, int which, SDL_Surface * canvas,
-                     SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
+void fold_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   //get the colors from API and store it in structure
   fold_r = r;

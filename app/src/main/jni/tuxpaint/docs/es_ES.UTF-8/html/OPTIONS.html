@@ -51,6 +51,8 @@
     padding: 0.5em;
     display: inline-block;
     margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
   section.outer {
     padding-bottom: 1em;
@@ -100,7 +102,7 @@
           </p>
 
           <p>
-            enero  2, 2023          </p>
+            febrero 19, 2023          </p>
         </center>
       </header>
 
@@ -177,22 +179,15 @@
           </header>
 
           <p>
-            Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is located at:          </p>
+            Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is normally located at:          </p>
 
           <blockquote>
             <code>/etc/tuxpaint/tuxpaint.conf</code>
           </blockquote>
-
-          <p>
-            You can disable reading of this file altogether, leaving the settings as defaults (which can then be overridden by your "<code>.tuxpaintrc</code>" file and/or command-line arguments) by using the command-line option:          </p>
-
-          <blockquote>
-            <code>--nosysconfig</code>
-          </blockquote>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: Linux and Unix Users -->
 
-      <section><!-- H2: macOS Users -->
+      <section class="indent"><!-- H2: macOS Users -->
         <header>
           <h2>
             macOS Users          </h2>
@@ -208,7 +203,7 @@
           </header>
 
           <p>
-            Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is located at:          </p>
+            Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is normally located at:          </p>
 
           <blockquote>
             <code>/Library/Application Support/TuxPaint/tuxpaint.cfg</code>
@@ -216,19 +211,38 @@
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: macOS Users -->
 
-      <section><!-- H2: Windows Users -->
+      <section class="indent"><!-- H2: Windows Users -->
         <header>
           <h2>
             Windows Users          </h2>
         </header>
 
         <p>
-          The file you should create is called "<code><b>tuxpaint.cfg</b></code>" and it should be placed in Tux Paint's folder.        </p>
+          The file you should create is called "<code><b>tuxpaint.cfg</b></code>" and it should be placed in in your personal AppData folder: <code>C:\Users\username\AppData\Roaming\TuxPaint\</code>        </p>
 
         <p>
           You can use NotePad or WordPad to create this file. Be sure to save it as Plain Text, and make sure the filename doesn't have ".txt" at the end...        </p>
-      </section><!-- H2: macOS Users -->
-    </section>
+
+        <section class="indent"><!-- H3: System-Wide Configuration File -->
+          <header>
+            <h3>
+              System-Wide Configuration File            </h3>
+          </header>
+
+          <p>
+            Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is normally located at:          </p>
+
+          <blockquote>
+            <code>C:\Program Files\Tuxpaint</code>
+          </blockquote>
+
+          </p>
+        </section><!-- H3: System-Wide Configuration File -->
+      </section><!-- H2: Windows Users -->
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        You can disable reading of this file altogether, leaving the settings as defaults (which can then be overridden by your personal config. file and/or command-line arguments) by using the command-line option "<code>--nosysconfig</code>".      </p>
+    </section><!-- H1: Configuration File -->
 
     <section class="outer"><!-- H1: Available Options -->
       <div class="keeptogether">
@@ -1857,7 +1871,7 @@
 
 <section>
   <header>
-    <h3>Color Palette File</h3>
+    <h3 id="colorfile">Color Palette File</h3>
   </header>
 
   <dl>
@@ -2161,6 +2175,15 @@
     </dd>
 
     <dt>
+      <code><b>joystick-btn-fill=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select the fill tool.      </p>
+    </dd>
+
+    <dt>
       <code><b>joystick-btn-magic=<i>BUTTON NUMBER</i></b></code>
     </dt>
 
@@ -2245,7 +2268,7 @@
   </section>
       </section><!-- H1: Available Options -->
 
-    <section><!-- H1: Overriding System Config. Options -->
+    <section class="outer"><!-- H1: Overriding System Config. Options -->
       <header>
         <h1 id="overriding">
           Overriding System Config. Options        </h1>
@@ -2275,7 +2298,7 @@
       </blockquote>
     </section><!-- H1: Overriding System Config. Options -->
 
-    <section><!-- H1: Command-Line Options -->
+    <section class="outer"><!-- H1: Command-Line Options -->
       <header>
         <h1 id="command_line">
           Command-Line Options        </h1>
@@ -2498,7 +2521,7 @@
       </section><!-- H2: Command-Line Informational Options -->
     </section><!-- H1: Command-Line Options -->
 
-    <section><!-- H1: Choosing a Different Language -->
+    <section class="outer"><!-- H1: Choosing a Different Language -->
       <header>
         <h1 id="different_language">
           Choosing a Different Language        </h1>

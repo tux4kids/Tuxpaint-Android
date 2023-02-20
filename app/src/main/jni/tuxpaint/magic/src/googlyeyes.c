@@ -3,7 +3,7 @@
    Draws a googly eye at the click position, and looks
    towards where you drag+release.
 
-  Last updated: January 25, 2023
+  Last updated: February 12, 2023
 */
 
 #include <stdio.h>
@@ -20,6 +20,10 @@ int sizes[NUM_SIZES] = { 100, 50 };
 char * size_names[NUM_SIZES] = {
   gettext_noop("large googly eye"),
   gettext_noop("small googly eye")
+};
+char * img_filenames[NUM_SIZES] = {
+  "googlyeyes.png",
+  "googlyeyes-sm.png"
 };
 
 Mix_Chunk *snd_effect = NULL;
@@ -145,12 +149,12 @@ int googlyeyes_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 
-SDL_Surface *googlyeyes_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *googlyeyes_get_icon(magic_api * api, int which)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/googlyeyes.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/%s",
+           api->data_directory, img_filenames[which]);
 
   return (IMG_Load(fname));
 }
@@ -291,8 +295,8 @@ googlyeyes_release(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
 }
 
 
-void googlyeyes_set_color(magic_api * api, int which, SDL_Surface * canvas,
-                          SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
+void googlyeyes_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                          SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 

@@ -6,7 +6,7 @@ Options Documentation
         Copyright © 2002-2023 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                 enero 2, 2023
+                                febrero 19, 2023
 
                 +---------------------------------------------+
                 |Table of Contents                            |
@@ -54,15 +54,10 @@ Linux and Unix Users
   System-Wide Configuration File
 
    Before this file is read, a system-wide configuration file is read. (By
-   default, this configuration has no settings enabled.) It is located at:
+   default, this configuration has no settings enabled.) It is normally
+   located at:
 
      /etc/tuxpaint/tuxpaint.conf
-
-   You can disable reading of this file altogether, leaving the settings as
-   defaults (which can then be overridden by your ".tuxpaintrc" file and/or
-   command-line arguments) by using the command-line option:
-
-     --nosysconfig
 
 macOS Users
 
@@ -73,17 +68,32 @@ macOS Users
   System-Wide Configuration File
 
    Before this file is read, a system-wide configuration file is read. (By
-   default, this configuration has no settings enabled.) It is located at:
+   default, this configuration has no settings enabled.) It is normally
+   located at:
 
      /Library/Application Support/TuxPaint/tuxpaint.cfg
 
 Windows Users
 
    The file you should create is called "tuxpaint.cfg" and it should be
-   placed in Tux Paint's folder.
+   placed in in your personal AppData folder:
+   C:\Users\username\AppData\Roaming\TuxPaint\
 
    You can use NotePad or WordPad to create this file. Be sure to save it as
    Plain Text, and make sure the filename doesn't have ".txt" at the end...
+
+  System-Wide Configuration File
+
+   Before this file is read, a system-wide configuration file is read. (By
+   default, this configuration has no settings enabled.) It is normally
+   located at:
+
+     C:\Program Files\Tuxpaint
+
+   ⚙ You can disable reading of this file altogether, leaving the settings as
+   defaults (which can then be overridden by your personal config. file
+   and/or command-line arguments) by using the command-line option
+   "--nosysconfig".
 
                                Available Options
 
@@ -1302,6 +1312,11 @@ Joystick
 
              Selects the joystick button number, as seen by SDL, that will be
              a shortcut to select the label tool.
+
+     joystick-btn-fill=BUTTON NUMBER
+
+             Selects the joystick button number, as seen by SDL, that will be
+             a shortcut to select the fill tool.
 
      joystick-btn-magic=BUTTON NUMBER
 

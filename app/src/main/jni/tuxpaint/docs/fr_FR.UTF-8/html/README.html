@@ -51,6 +51,8 @@
     padding: 0.5em;
     display: inline-block;
     margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
   section.outer {
     padding-bottom: 1em;
@@ -562,76 +564,93 @@
   <p>
     As you move the mouse around the canvas, an outline follows the mouse, showing where the stamp will be placed, and how big it will be. Click on the canvas where you wish to place the stamp.  </p>
 
-  <dl>
-    <dt>
-      <strong>Normal Stamps Mode</strong>
-    </dt>
-
-    <dd>
-      <p>
-        Now you can move the mouse around the canvas to rotate the stamp.      </p>
-
-      <p>
-        Click the mouse button again and the stamp will be added to the drawing.      </p>
-    </dd>
-
-    <dt>
-      <strong>Simple Stamps Mode</strong>
-    </dt>
-
-    <dd>
-      If "stamp rotation" option is disabled, the stamp will be drawn on the canvas when you let go of the mouse button. (There's no rotation step.)      <p class="note">
-        <span title="Configuration option">&#9881;</span>        See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation to learn about the "stamp rotation" ("<code>stamprotation</code>") option.      </p>
-    </dd>
-  </dl>
-
-  <p class="note">
-    <span title="Version variation">&#128220;</span>    <strong>Note:</strong> The stamp rotation feature was added to Tux Paint in version 0.9.29.  </p>
-
   <div class="screenshot-center">
     <img src="../../html/images/ex_stamps.png"
        width="182"
        height="156"
        alt="">
   </div>
-  <img src=
-  "../../html/images/tool_stamp_categories.png"
-      width="96"
-      height="48"
-      alt=""
-      align="right">
-  <p>
-    Il peut y avoir de nombreuses catégories de timbres (par ex. animaux, plantes, espace extra-atmosphérique, véhicules, personnes, etc.). Utilisez les flèches gauche et droite pour parcourir les différentes collections.  </p>
 
-  <p>
-    Avant de `` tamponner '' une image sur votre dessin, différents effets peuvent parfois être appliqués (en fonction du tampon) :  </p>
+  <dl>
+    <dt>
+      <strong>Stamp Categories</strong>
+    </dt>
 
-  <ul>
-    <li>Certains tampons peuvent être colorés ou teintés. Si la palette de couleurs sous le canevas est activée, vous pouvez cliquer sur les couleurs pour changer la teinte ou la couleur du tampon avant de le placer dans le dessin.    </li>
+    <dd>
+      <img src="../../html/images/tool_stamp_categories.png"
+        width="96"
+        height="48"
+        alt=""
+        align="right">
+      Il peut y avoir de nombreuses catégories de timbres (par ex. animaux, plantes, espace extra-atmosphérique, véhicules, personnes, etc.). Utilisez les flèches gauche et droite pour parcourir les différentes collections.    </dd>
 
-    <li>Les tampons peuvent être rétrécis et agrandis, en cliquant dans l'ensemble de barres (de forme triangulaire) en bas à droite; plus la barre est grande, plus le tampon apparaîtra grand sur votre dessin.    </li>
+    <dt>
+      <strong>Stamp Rotation</strong>
+    </dt>
 
-    <li>De nombreux tampons peuvent être retournés verticalement ou affichés sous forme d'image miroir à l'aide des boutons de commande en bas à droite.    </li>
-  </ul>
+    <dd>
+      <img src="../../html/images/tool_stamp_rotation.png"
+          width="48"
+          height="48"
+          alt=""
+          align="right">
+      <p>
+        Using the rotation toggle button near the bottom right, you can enable a rotation step when placing stamps.  Once you've placed the stamp, choose the angle to rotate it by moving the mouse around the canvas.  Click the mouse button again and the stamp will be added to the drawing.      </p>
 
-  <div class="screenshot-center">
-    <img src=
-    "../../html/images/tool_stamp_controls.png"
-       width="96"
-       height="96"
-       alt="">
-  </div>
-  <img src="../../html/images/tool_sfx.png"
-      width="48"
-      height="24"
-      alt=""
-      align="right">
-  <p>
-    Les tampons peuvent avoir un effet sonore et / ou une description orale (parlés). Les boutons en bas à gauche (près de Tux, le pingouin Linux) vous permettent de rejouer les effets sonores et la description du tampon actuellement sélectionné.  </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If "stamp rotation" option is disabled, the stamp will be drawn on the canvas when you let go of the mouse button. (There's no rotation step.)        See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation to learn about the "stamp rotation" ("<code>stamprotation</code>") option.      </p>
 
-  <p class="note">
-    <span title="Configuration option">&#9881;</span>    <strong>Note</strong>: If the "<code>nostampcontrols</code>" option is set, Tux Paint won't display the Mirror, Flip, Shrink and Grow controls for stamps. See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation.  </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The stamp rotation feature was added to Tux Paint in version 0.9.29.      </p>
+    </dd>
+
+
+    <dt>
+      <strong>Stamp Controls</strong>
+    </dt>
+
+    <dd>
+      <img src="../../html/images/tool_stamp_controls.png"
+        width="96"
+        height="96"
+        alt=""
+        align="right">
+
+      <p>
+        Avant de `` tamponner '' une image sur votre dessin, différents effets peuvent parfois être appliqués (en fonction du tampon) :      </p>
+
+      <ul>
+        <li>
+          Certains tampons peuvent être colorés ou teintés. Si la palette de couleurs sous le canevas est activée, vous pouvez cliquer sur les couleurs pour changer la teinte ou la couleur du tampon avant de le placer dans le dessin.        </li>
+
+        <li>
+          Les tampons peuvent être rétrécis et agrandis, en cliquant dans l'ensemble de barres (de forme triangulaire) en bas à droite; plus la barre est grande, plus le tampon apparaîtra grand sur votre dessin.        </li>
+
+        <li>
+          De nombreux tampons peuvent être retournés verticalement ou affichés sous forme d'image miroir à l'aide des boutons de commande en bas à droite.        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note</strong>: If the "<code>nostampcontrols</code>" option is set, Tux Paint won't display the Rotation, Mirror, Flip, or sizing controls for stamps. See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation.      </p>
+
+    </dd>
+
+    <dt>
+      <strong>Stamp Sounds</strong>
+    </dt>
+
+    <dd>
+      <img src="../../html/images/tool_sfx.png"
+        width="48"
+        height="24"
+        alt=""
+        align="right">
+      <p>
+        Les tampons peuvent avoir un effet sonore et / ou une description orale (parlés). Les boutons en bas à gauche (près de Tux, le pingouin Linux) vous permettent de rejouer les effets sonores et la description du tampon actuellement sélectionné.      </p>
+    </dd>
+  </dl>
 </dd>
+
             <dt id="using_tools_drawing_lines">
   <strong>Outil "Lignes"</strong>
 </dt>
