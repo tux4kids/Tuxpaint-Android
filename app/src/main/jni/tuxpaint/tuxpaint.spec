@@ -36,14 +36,13 @@ development files for tuxpaint plugins.
 %setup -q -n %{name}-%{version}-sdl2
 
 %build
-make PREFIX=%{_prefix} DOC_PREFIX=%{_docdir}/tuxpaint/en linux_ARCH_CFLAGS=-I/usr/include/imagequant
+make PREFIX=%{_prefix} DOC_PREFIX=%{_docdir}/tuxpaint/en linux_ARCH_CFLAGS='-I/usr/include/imagequant -I/usr/include/freetype2'
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make ARCH_INSTALL="install-man install-importscript install-bash-completion" \
      PREFIX=%{_prefix} DESTDIR=$RPM_BUILD_ROOT \
      DOC_PREFIX=$RPM_BUILD_ROOT%{_docdir}/tuxpaint \
-     DEVDOC_PREFIX=$RPM_BUILD_ROOT%{_docdir}/tuxpaint/devel \
      install
 
 export XDG_DATA_DIRS=$RPM_BUILD_ROOT%{_datadir}
@@ -61,6 +60,9 @@ xdg-icon-resource install --mode system --noupdate --size 16 data/images/icon16x
 cp src/tuxpaint.desktop ./tux4kids-tuxpaint.desktop
 xdg-desktop-menu install --mode system --noupdate tux4kids-tuxpaint.desktop
 rm ./tux4kids-tuxpaint.desktop
+
+rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/tuxpaint/outdated
+rm -rf $RPM_BUILD_ROOT%{_datadir}/tuxpaint/fonts/locale/zh_tw_docs
 
 %post
 update-desktop-database
@@ -88,16 +90,27 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/locale/*/LC_MESSAGES/tuxpaint.mo
 %{_mandir}/man1/tuxpaint*.*
 %{_mandir}/*/man1/tuxpaint*.*
-%exclude %{_docdir}/tuxpaint/devel
+%exclude %{_docdir}/tuxpaint/*/MAGIC-API.txt
+%exclude %{_docdir}/tuxpaint/*/tp_magic_example.c
+%exclude %{_docdir}/tuxpaint/*/html/MAGIC-API.html
+%exclude %{_docdir}/tuxpaint/*/html/tp_magic_example.c
 
 %files devel
 %attr(755,root,root) %{_bindir}/tp-magic-config
 %defattr(644,root,root,755)
 %{_includedir}/tuxpaint/tp_magic_api.h
-%{_docdir}/tuxpaint/devel/*
 %{_mandir}/man1/tp-magic-config.*
+%{_docdir}/tuxpaint/*/MAGIC-API.txt
+%{_docdir}/tuxpaint/*/tp_magic_example.c
+%{_docdir}/tuxpaint/*/html/MAGIC-API.html
+%{_docdir}/tuxpaint/*/html/tp_magic_example.c
 
 %changelog
+* Fri Mar 10 2023 <dolphin6k@wmail.plala.or.jp>
+- Magic docs to go the main package
+- Magid devel docs to go the devel package
+- Excluded outdated docs.
+
 * Sun Dec 11 2022 <nbs@sonic.net> -
 - Updated URL to HTTPS
 

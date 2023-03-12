@@ -3,7 +3,7 @@
    Draws a googly eye at the click position, and looks
    towards where you drag+release.
 
-  Last updated: February 12, 2023
+  Last updated: February 27, 2023
 */
 
 #include <stdio.h>
@@ -17,9 +17,9 @@
 
 #define NUM_SIZES 2
 int sizes[NUM_SIZES] = { 100, 50 };
-char * size_names[NUM_SIZES] = {
-  gettext_noop("large googly eye"),
-  gettext_noop("small googly eye")
+char * googlyeyes_descr[NUM_SIZES] = {
+  "Click to place a large googly eye, then drag and release to make it look that direction.",
+  "Click to place a small googly eye, then drag and release to make it look that direction."
 };
 char * img_filenames[NUM_SIZES] = {
   "googlyeyes.png",
@@ -162,7 +162,7 @@ SDL_Surface *googlyeyes_get_icon(magic_api * api, int which)
 char *googlyeyes_get_name(magic_api * api ATTRIBUTE_UNUSED,
                          int which ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext("Google Eyes"));
+  return strdup(gettext("Googly Eyes"));
 }
 
 int googlyeyes_get_group(magic_api * api ATTRIBUTE_UNUSED,
@@ -175,10 +175,7 @@ char *googlyeyes_get_description(magic_api * api ATTRIBUTE_UNUSED,
                                 int which ATTRIBUTE_UNUSED,
                                 int mode ATTRIBUTE_UNUSED)
 {
-  char tmp[512];
-  sprintf(tmp, gettext("Click to place a %s, then drag and release to make it look that direction."), gettext(size_names[which]));
-
-  return strdup(tmp);
+  return strdup(gettext(googlyeyes_descr[which]));
 }
 
 int googlyeyes_requires_colors(magic_api * api ATTRIBUTE_UNUSED,

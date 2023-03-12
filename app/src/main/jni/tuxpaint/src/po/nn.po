@@ -1,19 +1,19 @@
 # Translation of Tux Paint to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2014, 2015, 2017, 2020, 2021, 2022.
+# Karl Ove Hufthammer <karl@huftis.org>, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2014, 2015, 2017, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-18 14:24-0800\n"
-"PO-Revision-Date: 2022-07-04 20:59+0200\n"
+"POT-Creation-Date: 2023-03-07 00:49-0800\n"
+"PO-Revision-Date: 2023-02-26 15:44+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 22.12.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Response to Black (0, 0, 0) color selected
@@ -180,32 +180,36 @@ msgstr ""
 msgid "<9>spare-9b"
 msgstr ""
 
-#: ../fill_tools.h:51
+#: ../fill_tools.h:52
 msgid "Solid"
 msgstr "Einsfarga"
 
-#: ../fill_tools.h:52
+#: ../fill_tools.h:53
 msgid "Brush"
 msgstr "Pensel"
 
-#: ../fill_tools.h:53
+#: ../fill_tools.h:54
 msgid "Linear"
 msgstr "Lineær"
 
-#: ../fill_tools.h:54
+#: ../fill_tools.h:55
 msgid "Radial"
 msgstr "Radiell"
 
-#: ../fill_tools.h:58
+#: ../fill_tools.h:56
+msgid "Shaped"
+msgstr "Form­tilpassa"
+
+#: ../fill_tools.h:60
 msgid "Click to fill an area with a solid color."
 msgstr "Trykk for å fylla heile området med fargen frå målingbøtta."
 
-#: ../fill_tools.h:59
+#: ../fill_tools.h:61
 msgid "Click and drag to fill an area by hand, using a brush."
 msgstr ""
 "Hald inne knappen og flytt rundt for å fylla området for hand med ein pensel."
 
-#: ../fill_tools.h:61
+#: ../fill_tools.h:63
 msgid ""
 "Click and drag to fill an area with a linear gradient (from the chosen color "
 "to transparent)."
@@ -213,13 +217,21 @@ msgstr ""
 "Trykk for å fylla området med ein lineær fargeovergang (frå den valde fargen "
 "til gjennomsiktig)."
 
-#: ../fill_tools.h:63
+#: ../fill_tools.h:65
 msgid ""
 "Click to fill an area with a radial gradient (from the chosen color to "
 "transparent)."
 msgstr ""
 "Trykk for å fylla området med ein radiell fargeovergang (frå den valde "
 "fargen til gjennomsiktig)."
+
+#: ../fill_tools.h:67
+msgid ""
+"Click to fill an area with a shaped gradient (from the chosen color to "
+"transparent)."
+msgstr ""
+"Trykk for å fylla området med ein fargeovergang (frå den valde fargen til "
+"gjennomsiktig) som følgjer forma."
 
 #. Congratulations #1
 #: ../great.h:37
@@ -857,7 +869,7 @@ msgstr "Ny"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:97 ../tuxpaint.c:9858
+#: ../tools.h:97 ../tuxpaint.c:9914
 msgid "Open"
 msgstr "Opna"
 
@@ -1084,280 +1096,277 @@ msgstr ""
 
 #. Instructions to show when rotating stamps
 #: ../tools.h:200
-#, fuzzy, c-format
-#| msgid ""
-#| "Move the mouse to rotate the shape. Click to draw it. (It is rotated %d "
-#| "degrees.)"
+#, c-format
 msgid ""
 "Drag the mouse to rotate the stamp. Click to draw it. (It is rotated %d "
 "degrees.)"
 msgstr ""
-"Flytt på musa for å dreia figuren, og trykk så for å teikna han. (Han er "
+"Flytt på musa for å dreia stempelet, og trykk så for å teikna det. (Det er "
 "dreia %d gradar.)"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2483
+#: ../tuxpaint.c:2487
 msgid "Do you really want to quit?"
 msgstr "Er du sikker på at du vil avslutta?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2486
+#: ../tuxpaint.c:2490
 msgid "Yes, I’m done!"
 msgstr "Ja, eg er ferdig!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2489 ../tuxpaint.c:2516
+#: ../tuxpaint.c:2493 ../tuxpaint.c:2520
 msgid "No, take me back!"
 msgstr "Nei, eg vil teikna meir!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2493
+#: ../tuxpaint.c:2497
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Du mistar teikninga viss du avsluttar. Vil du lagra ho først?"
 
-#: ../tuxpaint.c:2494 ../tuxpaint.c:2499
+#: ../tuxpaint.c:2498 ../tuxpaint.c:2503
 msgid "Yes, save it!"
 msgstr "Ja, lagra ho!"
 
-#: ../tuxpaint.c:2495 ../tuxpaint.c:2500
+#: ../tuxpaint.c:2499 ../tuxpaint.c:2504
 msgid "No, don’t bother saving!"
 msgstr "Nei, ikkje lagra ho!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2498
+#: ../tuxpaint.c:2502
 msgid "Save your picture first?"
 msgstr "Vil du lagra teikninga først?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2503
+#: ../tuxpaint.c:2507
 msgid "Can’t open that picture!"
 msgstr "Klarte ikkje opna teikninga."
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2506 ../tuxpaint.c:2511 ../tuxpaint.c:2520 ../tuxpaint.c:2527
-#: ../tuxpaint.c:2536 ../tuxpaint.c:2541
+#: ../tuxpaint.c:2510 ../tuxpaint.c:2515 ../tuxpaint.c:2524 ../tuxpaint.c:2531
+#: ../tuxpaint.c:2540 ../tuxpaint.c:2545
 msgid "OK"
 msgstr "OK"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2510
+#: ../tuxpaint.c:2514
 msgid "There are no saved files!"
 msgstr "Det finst ingen lagra teikningar."
 
 #. Verification of print action
-#: ../tuxpaint.c:2514
+#: ../tuxpaint.c:2518
 msgid "Print your picture now?"
 msgstr "Er du sikker på at du vil skriva ut teikninga?"
 
-#: ../tuxpaint.c:2515
+#: ../tuxpaint.c:2519
 msgid "Yes, print it!"
 msgstr "Ja, skriv ho ut!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2519
+#: ../tuxpaint.c:2523
 msgid "Your picture has been printed!"
 msgstr "Teikninga er no skriven ut."
 
 #. We got an error printing
-#: ../tuxpaint.c:2523
+#: ../tuxpaint.c:2527
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Klarte ikkje skriva ut teikninga."
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2526
+#: ../tuxpaint.c:2530
 msgid "You can’t print yet!"
 msgstr "Du kan ikkje skriva ut enno."
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2530
+#: ../tuxpaint.c:2534
 msgid "Erase this picture?"
 msgstr "Vil du verkeleg sletta teikninga?"
 
-#: ../tuxpaint.c:2531
+#: ../tuxpaint.c:2535
 msgid "Yes, erase it!"
 msgstr "Ja, slett ho!"
 
-#: ../tuxpaint.c:2532
+#: ../tuxpaint.c:2536
 msgid "No, don’t erase it!"
 msgstr "Nei, ikkje slett ho!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2535
+#: ../tuxpaint.c:2539
 msgid "Remember to use the left mouse button!"
 msgstr "Hugs å bruka venstre museknapp!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2539
+#: ../tuxpaint.c:2543
 msgid "Your picture has been exported!"
 msgstr "Teikninga er no eksportert."
 
-#: ../tuxpaint.c:2540
+#: ../tuxpaint.c:2544
 msgid "Your slideshow GIF has been exported!"
 msgstr "GIF-animasjonen er no eksportert."
 
 #. We got an error exporting
-#: ../tuxpaint.c:2544
+#: ../tuxpaint.c:2548
 msgid "Sorry! Your picture could not be exported!"
 msgstr "Klarte ikkje eksportera teikninga."
 
-#: ../tuxpaint.c:2545
+#: ../tuxpaint.c:2549
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "Klarte ikkje eksportera GIF-animasjonen."
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2549
+#: ../tuxpaint.c:2553
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Vel teikningane du vil ha, og trykk så på «Køyr»."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2858
+#: ../tuxpaint.c:2868
 msgid "Sound muted."
 msgstr "Lyd slått av."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2863
+#: ../tuxpaint.c:2873
 msgid "Sound unmuted."
 msgstr "Lyd slått på."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3762
+#: ../tuxpaint.c:3772
 msgid "Please wait…"
 msgstr "Vent litt …"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:9861
+#: ../tuxpaint.c:9917
 msgid "Erase"
 msgstr "Slett"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:9864
+#: ../tuxpaint.c:9920
 msgid "Slides"
 msgstr "Lysbilete"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:9867
+#: ../tuxpaint.c:9923
 msgid "Export"
 msgstr "Eksporter"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:9870
+#: ../tuxpaint.c:9926
 msgid "Back"
 msgstr "Tilbake"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:9873
+#: ../tuxpaint.c:9929
 msgid "Play"
 msgstr "Køyr"
 
-#: ../tuxpaint.c:9877
+#: ../tuxpaint.c:9933
 msgid "GIF Export"
 msgstr "GIF-eksport"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:9880
+#: ../tuxpaint.c:9936
 msgid "Next"
 msgstr "Neste"
 
 #. Color mixer dialog: 'Clear' button, to reset the mixed color
-#: ../tuxpaint.c:9883
+#: ../tuxpaint.c:9939
 msgid "Clear"
 msgstr "Tøm"
 
 #. Use the localized label string (e.g., "あぁ" in Japanese)
-#: ../tuxpaint.c:10818 ../tuxpaint.c:10820 ../tuxpaint.c:10821
+#: ../tuxpaint.c:10874 ../tuxpaint.c:10876 ../tuxpaint.c:10877
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:15166
+#: ../tuxpaint.c:15218
 msgid "Yes"
 msgstr "Ja!"
 
-#: ../tuxpaint.c:15170
+#: ../tuxpaint.c:15222
 msgid "No"
 msgstr "Nei!"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:16363
+#: ../tuxpaint.c:16463
 msgid "Replace the picture with your changes?"
 msgstr "Vil du byta ut den gamle teikninga med den nye?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:16367
+#: ../tuxpaint.c:16467
 msgid "Yes, replace the old one!"
 msgstr "Ja, byt ut den gamle!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:16371
+#: ../tuxpaint.c:16471
 msgid "No, save a new file!"
 msgstr "Nei, lagra som ei ny teikning!"
 
-#: ../tuxpaint.c:17716
+#: ../tuxpaint.c:17816
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Vel ei teikning, og trykk så «Opna»."
 
-#: ../tuxpaint.c:19456
+#: ../tuxpaint.c:19556
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr ""
 "Vel to eller fleire teikningar for å gjera dei om til ei animert GIF-"
 "biletfil."
 
 #. Descriptions (names) of the color mixer tool's primary colors and shades
-#: ../tuxpaint.c:25542
+#: ../tuxpaint.c:25824
 msgid "red"
 msgstr "raud"
 
-#: ../tuxpaint.c:25543
+#: ../tuxpaint.c:25825
 msgid "yellow"
 msgstr "gul"
 
-#: ../tuxpaint.c:25544
+#: ../tuxpaint.c:25826
 msgid "blue"
 msgstr "blå"
 
-#: ../tuxpaint.c:25545
+#: ../tuxpaint.c:25827
 msgid "white"
 msgstr "kvit"
 
-#: ../tuxpaint.c:25546
+#: ../tuxpaint.c:25828
 msgid "grey"
 msgstr "grå"
 
-#: ../tuxpaint.c:25547
+#: ../tuxpaint.c:25829
 msgid "black"
 msgstr "svart"
 
 #. Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.)
-#: ../tuxpaint.c:25552
+#: ../tuxpaint.c:25834
 #, c-format
 msgid "Your color is %1$s %2$s."
 msgstr "Fargen er %1$s %2$s."
 
-#: ../tuxpaint.c:25553
+#: ../tuxpaint.c:25835
 #, c-format
 msgid "Your color is %1$s %2$s and %3$s %4$s."
 msgstr "Fargen er %1$s %2$s og %3$s %4$s."
 
-#: ../tuxpaint.c:25554
+#: ../tuxpaint.c:25836
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, and %5$s %6$s."
 msgstr "Fargen er %1$s %2$s, %3$s %4$s og %5$s %6$s."
 
-#: ../tuxpaint.c:25556
+#: ../tuxpaint.c:25838
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, and %7$s %8$s."
 msgstr "Fargen er %1$s %2$s, %3$s %4$s, %5$s %6$s og %7$s %8$s."
 
-#: ../tuxpaint.c:25558
+#: ../tuxpaint.c:25840
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, and %9$s %10$s."
 msgstr "Fargen er %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s og %9$s %10$s."
 
-#: ../tuxpaint.c:25560
+#: ../tuxpaint.c:25842
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s, and "
@@ -1367,15 +1376,15 @@ msgstr ""
 "%12$s."
 
 #. Color mixer; e.g., "Your color is entirely grey."
-#: ../tuxpaint.c:26396 ../tuxpaint.c:26403
+#: ../tuxpaint.c:26680 ../tuxpaint.c:26687
 msgid "entirely"
 msgstr "heilt"
 
-#: ../tuxpaint.c:29657
+#: ../tuxpaint.c:29941
 msgid "Select a color from your drawing."
 msgstr "Vel ein farge frå teikninga."
 
-#: ../tuxpaint.c:29668
+#: ../tuxpaint.c:29952
 msgid ""
 "Pick a color. Hues go top to bottom. Saturation/intensity goes left (pale) "
 "to right (pure). Value (lightness/darkness): grey bar."
@@ -1384,7 +1393,7 @@ msgstr ""
 "endrar seg frå bleik (til venstre) til fargesterk (til høgre). Lysstyrke "
 "(lys/mørk): grå stolpe."
 
-#: ../tuxpaint.c:29682
+#: ../tuxpaint.c:29966
 msgid ""
 "Click the primary colors (red, yellow, and blue), white (to tint), grey (to "
 "tone), and black (to shade), to mix together a new color."
@@ -1463,23 +1472,18 @@ msgstr "Trykk for å gjera heile teikninga drypande."
 
 #: ../../magic/src/bloom.c:114
 msgid "Bloom"
-msgstr ""
+msgstr "Glød"
 
 #: ../../magic/src/bloom.c:127
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgid ""
 "Click and drag to apply a glowing \"bloom\" effect to parts of your image."
 msgstr ""
-"Hald inne knappen og flytt rundt for å leggja ein mosaikk på delar av "
+"Hald inne knappen og flytt rundt for å leggja ein glødeffekt på delar av "
 "teikninga."
 
 #: ../../magic/src/bloom.c:129
-#, fuzzy
-#| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to apply a glowing \"bloom\" effect to your entire image."
-msgstr "Trykk for å leggja ein mosaikk på heile teikninga."
+msgstr "Trykk for å leggja ein glødeffekt på heile teikninga."
 
 #: ../../magic/src/blur.c:84
 msgid "Blur"
@@ -1549,6 +1553,26 @@ msgstr ""
 "Trykk først for å velja kor du vil klona frå. Trykk så ein annan plass og "
 "dra for å klona teikninga."
 
+#: ../../magic/src/colorsep.c:35
+msgid "3D Glasses"
+msgstr "3D-briller"
+
+#: ../../magic/src/colorsep.c:36
+msgid "Color Sep."
+msgstr "Skil fargar"
+
+#: ../../magic/src/colorsep.c:39
+msgid ""
+"Click and drag left and right to separate your picture's red and cyan, to "
+"make anaglyphs you can view with 3D glasses!"
+msgstr ""
+"Hald inne knappen og flytt til venstre og høgre for å skilja raud- og "
+"cyanfargane, for å laga ei 3D-teikning du kan sjå med 3D-briller!"
+
+#: ../../magic/src/colorsep.c:40
+msgid "Click and drag to separate your picture's colors."
+msgstr "Hald inne knappen og flytt rundt for å skilja fargane i teikninga."
+
 #: ../../magic/src/confetti.c:103
 msgid "Confetti"
 msgstr "Konfetti"
@@ -1577,31 +1601,120 @@ msgstr "Hald inne knappen og flytt rundt for å gjera teikninga om til relieff."
 msgid "Click to emboss the entire picture."
 msgstr "Trykk for å gjera heile teikninga om til relieff."
 
-#: ../../magic/src/fade_darken.c:126
+#: ../../magic/src/fade_darken.c:47
 msgid "Lighten"
 msgstr "Lysare"
 
-#: ../../magic/src/fade_darken.c:128
+#: ../../magic/src/fade_darken.c:48
 msgid "Darken"
 msgstr "Mørkare"
 
-#: ../../magic/src/fade_darken.c:149
+#: ../../magic/src/fade_darken.c:49
+msgid "Desaturate"
+msgstr ""
+
+#: ../../magic/src/fade_darken.c:50
+msgid "Saturate"
+msgstr ""
+
+#: ../../magic/src/fade_darken.c:51
+#, fuzzy
+#| msgid "Xor Colors"
+msgid "Remove Color"
+msgstr "XELLER-fargar"
+
+#: ../../magic/src/fade_darken.c:52
+#, fuzzy
+#| msgid "Separate Colors"
+msgid "Keep Color"
+msgstr "Skil fargar"
+
+#: ../../magic/src/fade_darken.c:57
 msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr ""
 "Hald inne knappen og flytt rundt for å gjera delar av teikninga lysare."
 
-#: ../../magic/src/fade_darken.c:151
+#: ../../magic/src/fade_darken.c:58
 msgid "Click to lighten your entire picture."
 msgstr "Trykk for å gjera heile teikninga lysare."
 
-#: ../../magic/src/fade_darken.c:158
+#: ../../magic/src/fade_darken.c:61
 msgid "Click and drag the mouse to darken parts of your picture."
 msgstr ""
 "Hald inne knappen og flytt rundt for å gjera delar av teikninga mørkare."
 
-#: ../../magic/src/fade_darken.c:160
+#: ../../magic/src/fade_darken.c:62
 msgid "Click to darken your entire picture."
 msgstr "Trykk for å gjera heile teikninga mørkare."
+
+#: ../../magic/src/fade_darken.c:65
+#, fuzzy
+#| msgid "Click and drag the mouse to darken parts of your picture."
+msgid "Click and drag the mouse to desaturate parts of your picture."
+msgstr ""
+"Hald inne knappen og flytt rundt for å gjera delar av teikninga mørkare."
+
+#: ../../magic/src/fade_darken.c:66
+#, fuzzy
+#| msgid "Click to darken your entire picture."
+msgid "Click to desaturate your entire picture."
+msgstr "Trykk for å gjera heile teikninga mørkare."
+
+#: ../../magic/src/fade_darken.c:69
+#, fuzzy
+#| msgid "Click and drag the mouse to sharpen parts of your picture."
+msgid "Click and drag the mouse to saturate parts of your picture."
+msgstr "Hald inne knappen og flytt rundt for å gjera teikninga skarpare."
+
+#: ../../magic/src/fade_darken.c:70
+#, fuzzy
+#| msgid "Click to darken your entire picture."
+msgid "Click to saturate your entire picture."
+msgstr "Trykk for å gjera heile teikninga mørkare."
+
+#: ../../magic/src/fade_darken.c:73
+#, fuzzy
+#| msgid "Click and drag the mouse to trace edges in parts of your picture."
+msgid ""
+"Click and drag the mouse to entirely desaturate parts of your picture that "
+"match the chosen color."
+msgstr "Hald inne knappen og flytt rundt for å markera kantane i teikninga."
+
+#: ../../magic/src/fade_darken.c:74
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse around to turn parts of your picture into white "
+#| "and a color you choose."
+msgid ""
+"Click to entirely desaturate your the parts of your picture that match the "
+"chosen color."
+msgstr ""
+"Hald inne knappen og flytt rundt for å gjera delar av teikninga kvit og ein "
+"farge du vel."
+
+#: ../../magic/src/fade_darken.c:77
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse around to turn parts of your picture into white "
+#| "and a color you choose."
+msgid ""
+"Click and drag the mouse to entirely desaturate parts of your picture that "
+"don't match the chosen color."
+msgstr ""
+"Hald inne knappen og flytt rundt for å gjera delar av teikninga kvit og ein "
+"farge du vel."
+
+#: ../../magic/src/fade_darken.c:78
+#, fuzzy
+#| msgid ""
+#| "Click and drag the mouse around to turn parts of your picture into white "
+#| "and a color you choose."
+msgid ""
+"Click to entirely desaturate your the parts of your picture that don't match "
+"the chosen color."
+msgstr ""
+"Hald inne knappen og flytt rundt for å gjera delar av teikninga kvit og ein "
+"farge du vel."
 
 #: ../../magic/src/fisheye.c:113
 msgid "Fisheye"
@@ -1665,23 +1778,11 @@ msgstr ""
 msgid "Click to cover your entire picture in glass tiles."
 msgstr "Trykk for å dekkja heile teikninga med glasfliser."
 
-#: ../../magic/src/googlyeyes.c:21
-msgid "large googly eye"
-msgstr ""
-
-#: ../../magic/src/googlyeyes.c:22
-msgid "small googly eye"
-msgstr ""
-
 #: ../../magic/src/googlyeyes.c:165
-msgid "Google Eyes"
-msgstr ""
-
-#: ../../magic/src/googlyeyes.c:179
-#, c-format
-msgid ""
-"Click to place a %s, then drag and release to make it look that direction."
-msgstr ""
+#, fuzzy
+#| msgid "Google Eyes"
+msgid "Googly Eyes"
+msgstr "Stireauge"
 
 #: ../../magic/src/grass.c:116
 msgid "Grass"
@@ -1702,6 +1803,37 @@ msgstr "Hald inne knappen og flytt rundt for å gjera teikninga om til ei avis."
 #: ../../magic/src/halftone.c:51
 msgid "Click to turn your drawing into a newspaper."
 msgstr "Trykk for å gjera heile teikninga om til ei avis."
+
+#: ../../magic/src/kaleidoscope_lens.c:39
+#, fuzzy
+#| msgid "Kaleidoscope"
+msgid "Kaleido-4"
+msgstr "Kaleidoskop"
+
+#: ../../magic/src/kaleidoscope_lens.c:40
+#, fuzzy
+#| msgid "Kaleidoscope"
+msgid "Kaleido-6"
+msgstr "Kaleidoskop"
+
+#: ../../magic/src/kaleidoscope_lens.c:41
+#, fuzzy
+#| msgid "Kaleidoscope"
+msgid "Kaleido-8"
+msgstr "Kaleidoskop"
+
+#: ../../magic/src/kaleidoscope_lens.c:45
+#: ../../magic/src/kaleidoscope_lens.c:46
+#: ../../magic/src/kaleidoscope_lens.c:47
+#, fuzzy
+#| msgid ""
+#| "Click and drag to make parts of your picture look like they are on "
+#| "television."
+msgid ""
+"Click and drag around your picture to look through it with a kaleidoscope!"
+msgstr ""
+"Hald inne knappen og flytt rundt for å få teikninga til å sjå ut som ho vert "
+"vist på TV."
 
 #: ../../magic/src/kalidescope.c:128
 msgid "Symmetric Left/Right"
@@ -1780,20 +1912,15 @@ msgstr ""
 
 #: ../../magic/src/maze.c:114
 msgid "Maze"
-msgstr ""
+msgstr "Labyrint"
 
 #: ../../magic/src/maze.c:128
-#, fuzzy
-#| msgid "Click and drag to draw train track rails on your picture."
 msgid "Click and drag to paint a maze on your picture."
-msgstr "Hald inne knappen og flytt rundt for å teikna jernbanelinjer."
+msgstr "Hald inne knappen og flytt rundt for å teikna ein labyrint."
 
 #: ../../magic/src/maze.c:130
-#, fuzzy
-#| msgid "Click to turn the entire picture into a cartoon."
 msgid "Click to turn your entire picture into a maze."
-msgstr ""
-"Trykk for å gjera fargane klarare og strekane tydelegare på heile teikninga."
+msgstr "Trykk for å gjera heile teikninga om til ein labyrint."
 
 #: ../../magic/src/metalpaint.c:108
 msgid "Metal Paint"
@@ -2193,57 +2320,41 @@ msgid "Draw string art arrows with free angles."
 msgstr "Hald inne knappen og flytt rundt for å teikna trådpiler."
 
 #: ../../magic/src/swirls.c:30
-#, fuzzy
-#| msgid "Circle"
 msgid "Circles"
-msgstr "Sirkel"
+msgstr "Sirklar"
 
 #: ../../magic/src/swirls.c:31
 msgid "Rays"
-msgstr ""
+msgstr "Strålar"
 
 #: ../../magic/src/swirls.c:32
 msgid "Fur"
-msgstr ""
+msgstr "Pels"
 
 #: ../../magic/src/swirls.c:37
-#, fuzzy
-#| msgid ""
-#| "Click and drag to stretch part of your picture vertically or horizontally."
 msgid ""
 "Click and drag to transform parts of your picture to circular brushstrokes."
 msgstr ""
-"Hald inne knappen og flytt rundt å strekkja på delar av teikninga bortover "
-"eller oppover."
+"Hald inne knappen og flytt rundt å gjera delar av teikninga om til sirkulære "
+"penselstrok."
 
 #: ../../magic/src/swirls.c:38
-#, fuzzy
-#| msgid "Click to turn the entire picture into a cartoon."
 msgid "Click to turn your entire picture into circular brushstrokes."
-msgstr ""
-"Trykk for å gjera fargane klarare og strekane tydelegare på heile teikninga."
+msgstr "Trykk for å gjera heile teikninga om til sirkulære penselstrok."
 
 #: ../../magic/src/swirls.c:41
-#, fuzzy
-#| msgid ""
-#| "Click and drag to stretch part of your picture vertically or horizontally."
 msgid "Click and drag to transform parts of your picture to brushstroke rays."
 msgstr ""
-"Hald inne knappen og flytt rundt å strekkja på delar av teikninga bortover "
-"eller oppover."
+"Hald inne knappen og flytt rundt å gjera delar av teikninga om til strålar "
+"av penselstrok."
 
 #: ../../magic/src/swirls.c:42
-#, fuzzy
-#| msgid "Click to turn the entire picture into a cartoon."
 msgid "Click to turn your entire picture into brushstroke rays."
-msgstr ""
-"Trykk for å gjera fargane klarare og strekane tydelegare på heile teikninga."
+msgstr "Trykk for å gjera heile teikninga om til strålar av penselstrok."
 
 #: ../../magic/src/swirls.c:45
-#, fuzzy
-#| msgid "Click and drag to draw train track rails on your picture."
 msgid "Click and drag to add fur to your picture."
-msgstr "Hald inne knappen og flytt rundt for å teikna jernbanelinjer."
+msgstr "Hald inne knappen og flytt rundt for å teikna pels."
 
 #: ../../magic/src/tint.c:73
 msgid "Tint"
@@ -2347,6 +2458,19 @@ msgstr "Hald inne knappen og flytt rundt for å teikna med ein XELLER-effekt."
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "Trykk for å leggja ein XELLER-effekt på heile teikninga."
 
+#~ msgid "large googly eye"
+#~ msgstr "stort auge som stirar"
+
+#~ msgid "small googly eye"
+#~ msgstr "lite auge som stirar"
+
+#, c-format
+#~ msgid ""
+#~ "Click to place a %s, then drag and release to make it look that direction."
+#~ msgstr ""
+#~ "Trykk for å leggja til eit stort auge som stirar. Hald inne knappen og "
+#~ "flytt rundt for velja kor auget skal stira."
+
 #, fuzzy
 #~| msgid "Move the mouse to rotate the shape. Click to draw it."
 #~ msgid "Drag the mouse to rotate the stamp. Click to draw it."
@@ -2445,9 +2569,6 @@ msgstr "Trykk for å leggja ein XELLER-effekt på heile teikninga."
 #~ msgid "Click to give your entire picture an \"alien\" appearance."
 #~ msgstr ""
 #~ "Trykk for å få heile teikninga til å sjå ut som ho kom frå verdsrommet."
-
-#~ msgid "Separate Colors"
-#~ msgstr "Skil fargar"
 
 #, fuzzy
 #~ msgid "Click and move the mouse to add noise to the image."

@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - February 19, 2023
+  June 14, 2002 - March 7, 2023
 */
 
 #include "platform.h"
@@ -1690,6 +1690,7 @@ static SDL_Surface *img_label_select, *img_label_apply;
 static SDL_Surface *img_color_picker, *img_color_picker_thumb,
   *img_color_picker_val;
 static SDL_Surface *img_paintwell, *img_color_sel, *img_color_mix;
+static SDL_Surface *img_color_grab;
 static int color_picker_x, color_picker_y, color_picker_v;
 static int color_mixer_reset;
 
@@ -2198,6 +2199,7 @@ static void free_surface_array(SDL_Surface * surface_array[], int count);
 static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush);
 static int shape_rotation(int ctr_x, int ctr_y, int ox, int oy);
 static int brush_rotation(int ctr_x, int ctr_y, int ox, int oy);
+static int stamp_will_rotate(int ctr_x, int ctr_y, int ox, int oy);
 static int stamp_rotation(int ctr_x, int ctr_y, int ox, int oy);
 static int do_save(int tool, int dont_show_success_results, int autosave);
 static int do_png_save(FILE * fi, const char *const fname, SDL_Surface * surf,
@@ -2214,13 +2216,14 @@ static int do_new_dialog(void);
 static int do_new_dialog_add_colors(SDL_Surface * *thumbs, int num_files,
                                     int *d_places, char * *d_names,
                                     char * *d_exts, int *white_in_palette);
-static int do_color_picker(void);
+static int do_color_picker(int prev_color);
 static void draw_color_picker_crosshairs(int color_picker_left,
                                          int color_picker_top,
                                          int color_picker_val_left,
                                          int color_picker_val_top);
 static void set_color_picker_crosshair_size(void);
 static void draw_color_picker_values(int l, int t);
+static void draw_color_grab_btn(SDL_Rect dest, int c);
 static void draw_color_picker_palette_and_values(int color_picker_left,
                                                  int color_picker_top,
                                                  int color_picker_val_left,
@@ -2563,9 +2566,9 @@ int shape_reverse;
 enum
 {
   STAMP_TOOL_MODE_PLACE,
-  STAMP_TOOL_MODE_ROTATE,
-  STAMP_TOOL_MODE_DONE
+  STAMP_TOOL_MODE_ROTATE
 };
+#define STAMP_XOR_LINE_UNSET INT_MIN
 on_screen_keyboard *new_kbd;
 SDL_Rect kbd_rect;
 
@@ -2589,7 +2592,7 @@ static void mainloop(void)
 {
   int done, val_x, val_y, valhat_x, valhat_y, new_x, new_y,
     shape_tool_mode, shape_start_x, shape_start_y, shape_current_x,
-    shape_current_y, old_stamp_group, which;
+    shape_current_y, shape_ctr_x, shape_ctr_y, old_stamp_group, which;
   int num_things;
   int *thing_scroll;
   int do_draw;
@@ -2606,6 +2609,10 @@ static void mainloop(void)
   int stamp_place_x = 0;
   int stamp_place_y = 0;
   int stamp_tool_mode = STAMP_TOOL_MODE_PLACE;
+#ifdef EXPERIMENT_STAMP_ROTATION_LINE
+  int stamp_xor_line_old_x = STAMP_XOR_LINE_UNSET;
+  int stamp_xor_line_old_y = STAMP_XOR_LINE_UNSET;
+#endif
 
 #ifdef AUTOSAVE_GOING_BACKGROUND
   char *fname;
@@ -2644,6 +2651,8 @@ static void mainloop(void)
   shape_start_y = 0;
   shape_current_x = 0;
   shape_current_y = 0;
+  shape_ctr_x = 0;
+  shape_ctr_y = 0;
   shape_tool_mode = SHAPE_TOOL_MODE_DONE;
   stamp_tool_mode = STAMP_TOOL_MODE_PLACE;
   button_down = 0;
@@ -5209,7 +5218,7 @@ static void mainloop(void)
             {
               cur_shape = cur_thing;
 
-              /* Remove ghost previews an reset the tool */
+              /* Remove ghost previews and reset the tool */
               if (shape_tool_mode != SHAPE_TOOL_MODE_DONE)
               {
                 shape_tool_mode = SHAPE_TOOL_MODE_DONE;
@@ -5291,7 +5300,7 @@ static void mainloop(void)
 
                 chose_color = 0;
                 if (cur_color == (unsigned) COLOR_PICKER)
-                  chose_color = do_color_picker();
+                  chose_color = do_color_picker(old_color);
                 else if (cur_color == (unsigned) COLOR_SELECTOR)
                   chose_color = do_color_sel(0);
                 else if (cur_color == (unsigned) COLOR_MIXER)
@@ -5495,6 +5504,8 @@ static void mainloop(void)
 
                 shape_start_x = old_x;
                 shape_start_y = old_y;
+                shape_ctr_x = old_x;
+                shape_ctr_y = old_y;
 
                 shape_tool_mode = SHAPE_TOOL_MODE_STRETCH;
 
@@ -5518,8 +5529,8 @@ static void mainloop(void)
                   playsound(screen, 1, SND_LINE_END, 1, event.button.x,
                             SNDDIST_NEAR);
                   do_shape(shape_start_x, shape_start_y, shape_current_x,
-                           shape_current_y, shape_rotation(shape_start_x,
-                                                           shape_start_y,
+                           shape_current_y, shape_rotation(shape_ctr_x,
+                                                           shape_ctr_y,
                                                            event.button.x -
                                                            r_canvas.x,
                                                            event.button.y -
@@ -5697,6 +5708,11 @@ static void mainloop(void)
                                          sim_flood_x2, sim_flood_y2, old_x,
                                          old_y, draw_color,
                                          sim_flood_touched);
+                  }
+                  else if (cur_fill == FILL_GRADIENT_SHAPED)
+                  {
+                    /* Shaped gradient */
+                    draw_shaped_gradient(canvas, draw_color, sim_flood_touched);
                   }
                   else if (cur_fill == FILL_GRADIENT_LINEAR)
                   {
@@ -6234,12 +6250,19 @@ static void mainloop(void)
                     mouse_warp_x = WINDOW_WIDTH - r_ttoolopt.w - 1;
 
                   SDL_WarpMouse(mouse_warp_x, old_y);
-#endif
+
                   do_setcursor(cursor_rotate);
+#endif
+                  do_setcursor(cursor_hand);
 
                   stamp_tool_mode = STAMP_TOOL_MODE_ROTATE;
                   stamp_place_x = old_x;
                   stamp_place_y = old_y;
+#ifdef EXPERIMENT_STAMP_ROTATION_LINE
+                  stamp_xor_line_old_x = STAMP_XOR_LINE_UNSET;
+                  stamp_xor_line_old_y = STAMP_XOR_LINE_UNSET;
+#endif
+
                   snprintf(angle_tool_text, sizeof(angle_tool_text),
                            gettext(TIP_STAMPS_ROTATING), 0);
                   draw_tux_text(TUX_GREAT, angle_tool_text, 1);
@@ -6329,6 +6352,14 @@ static void mainloop(void)
                 shape_current_x = event.button.x - r_canvas.x;
                 shape_current_y = event.button.y - r_canvas.y;
 
+                if (shape_mode == SHAPEMODE_CENTER) {
+                  shape_ctr_x = shape_start_x;
+                  shape_ctr_y = shape_start_y;
+                } else {
+                  shape_ctr_x = shape_start_x + (shape_current_x - shape_start_x) / 2;
+                  shape_ctr_y = shape_start_y + (shape_current_y - shape_start_y) / 2;
+                }
+
                 if (!simple_shapes && !shape_no_rotate[cur_shape])
                 {
                   shape_tool_mode = SHAPE_TOOL_MODE_ROTATE;
@@ -6340,7 +6371,7 @@ static void mainloop(void)
                             shape_current_y) * (shape_start_y -
                                                 shape_current_y));
 
-                  SDL_WarpMouse(shape_current_x + r_ttools.w, shape_start_y);
+                  SDL_WarpMouse(shape_ctr_x + (shape_current_x - shape_ctr_x) * 1.05 + r_canvas.x, shape_ctr_y + r_canvas.y);
                   do_setcursor(cursor_rotate);
 
 
@@ -6355,7 +6386,7 @@ static void mainloop(void)
 
                   do_shape(shape_start_x, shape_start_y,
                            shape_current_x, shape_current_y,
-                           shape_rotation(shape_start_x, shape_start_y,
+                           shape_rotation(shape_ctr_x, shape_ctr_y,
                                           shape_current_x, shape_current_y),
                            0);
 
@@ -6394,8 +6425,8 @@ static void mainloop(void)
                 playsound(screen, 1, SND_LINE_END, 1, event.button.x,
                           SNDDIST_NEAR);
                 do_shape(shape_start_x, shape_start_y, shape_current_x,
-                         shape_current_y, shape_rotation(shape_start_x,
-                                                         shape_start_y,
+                         shape_current_y, shape_rotation(shape_ctr_x,
+                                                         shape_ctr_y,
                                                          event.button.x -
                                                          r_canvas.x,
                                                          event.button.y -
@@ -6704,10 +6735,15 @@ static void mainloop(void)
             do_setcursor(cursor_brush);
           else if (cur_tool == TOOL_STAMP)
           {
-            if (stamp_tool_mode != STAMP_TOOL_MODE_ROTATE)
+            if (stamp_tool_mode != STAMP_TOOL_MODE_ROTATE) {
               do_setcursor(cursor_tiny);
-            else
-              do_setcursor(cursor_rotate);
+            } else {
+              if (stamp_will_rotate(new_x, new_y, stamp_place_x, stamp_place_y)) {
+                do_setcursor(cursor_rotate);
+              } else {
+                do_setcursor(cursor_hand);
+              }
+            }
           }
           else if (cur_tool == TOOL_LINES || cur_tool == TOOL_FILL)
             do_setcursor(cursor_crosshair);
@@ -6975,20 +7011,45 @@ static void mainloop(void)
                 int deg;
 
                 stamp_xor(stamp_place_x, stamp_place_y);
+#ifdef EXPERIMENT_STAMP_ROTATION_LINE
+                /* Erase old stamp rotation angle XOR'd line */
+                /* FIXME: Needs also be erased in other situations! */
+                if (stamp_xor_line_old_x != STAMP_XOR_LINE_UNSET && stamp_xor_line_old_y != STAMP_XOR_LINE_UNSET) {
+                  if (stamp_will_rotate(stamp_place_x, stamp_place_y, stamp_xor_line_old_x, stamp_xor_line_old_y)) {
+                    line_xor(stamp_place_x, stamp_place_y, stamp_xor_line_old_x, stamp_xor_line_old_y);
+                  }
+                }
+#endif
 
                 deg = (360 - stamp_rotation(stamp_place_x, stamp_place_y, new_x, new_y)) % 360;
-
                 update_stamp_xor(deg);
-                stamp_xor(stamp_place_x, stamp_place_y);
 
+                stamp_xor(stamp_place_x, stamp_place_y);
+#ifdef EXPERIMENT_STAMP_ROTATION_LINE
+                /* Erase old stamp rotation angle XOR'd line */
+                if (stamp_will_rotate(stamp_place_x, stamp_place_y, new_x, new_y)) {
+                  line_xor(stamp_place_x, stamp_place_y, new_x, new_y);
+                  stamp_xor_line_old_x = new_x;
+                  stamp_xor_line_old_y = new_y;
+                } else {
+                  stamp_xor_line_old_x = STAMP_XOR_LINE_UNSET;
+                  stamp_xor_line_old_y = STAMP_XOR_LINE_UNSET;
+                }
+#endif
+
+#ifndef EXPERIMENT_STAMP_ROTATION_LINE
                 /* The half of maximum size the stamp could have when rotating. */
                 int half_bigbox =
                   sqrt((CUR_STAMP_W + 1) * (CUR_STAMP_W + 1) +
                        (CUR_STAMP_H + 1) * (CUR_STAMP_H + 1)) / 2;
-                update_screen(stamp_place_x - half_bigbox + r_canvas.x,
-                              stamp_place_y - half_bigbox + r_canvas.y,
-                              stamp_place_x + half_bigbox + r_canvas.x,
-                              stamp_place_y + half_bigbox + r_canvas.y);
+                update_screen(min(min(new_x, old_x), stamp_place_x - half_bigbox) + r_canvas.x,
+                              min(min(new_y, old_y), stamp_place_y - half_bigbox) + r_canvas.y,
+                              max(max(new_x, old_x), stamp_place_x + half_bigbox) + r_canvas.x,
+                              max(max(new_y, old_y), stamp_place_y + half_bigbox) + r_canvas.y);
+#else
+                /* FIXME: Be smarter about this */
+                SDL_UpdateRect(screen, 0, 0, screen->w, screen->h);
+#endif
 
                 snprintf(angle_tool_text, sizeof(angle_tool_text),
                          gettext(TIP_STAMPS_ROTATING), deg);
@@ -7167,11 +7228,11 @@ static void mainloop(void)
           {
             int deg;
 
-            deg = shape_rotation(shape_start_x, shape_start_y, old_x, old_y);
+            deg = shape_rotation(shape_ctr_x, shape_ctr_y, old_x, old_y);
             do_shape(shape_start_x, shape_start_y, shape_current_x,
                      shape_current_y, deg, 0);
 
-            deg = shape_rotation(shape_start_x, shape_start_y, new_x, new_y);
+            deg = shape_rotation(shape_ctr_x, shape_ctr_y, new_x, new_y);
             do_shape(shape_start_x, shape_start_y, shape_current_x,
                      shape_current_y, deg, 0);
 
@@ -15968,6 +16029,9 @@ static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush)
   float a1, a2, rotn_rad, init_ang, angle_skip;
   int xx, yy, offx, offy, max_x, max_y;
 
+  if (ny < sy) {
+    rotn = (rotn + 180) % 360;
+  }
 
   /* Determine radius/shape of the shape to draw: */
 
@@ -16117,25 +16181,44 @@ static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush)
     {
       rotn_rad = rotn * M_PI / 180;
 
-      xp = (x1 + offx) * cos(rotn_rad) - (y1 + offy) * sin(rotn_rad);
-      yp = (x1 + offx) * sin(rotn_rad) + (y1 + offy) * cos(rotn_rad);
+      if (shape_mode == SHAPEMODE_CENTER) {
+        xp = (x1 + offx) * cos(rotn_rad) - (y1 + offy) * sin(rotn_rad);
+        yp = (x1 + offx) * sin(rotn_rad) + (y1 + offy) * cos(rotn_rad);
+    
+        x1 = xp - offx;
+        y1 = yp - offy;
+    
+        xp = (x2 + offx) * cos(rotn_rad) - (y2 + offy) * sin(rotn_rad);
+        yp = (x2 + offx) * sin(rotn_rad) + (y2 + offy) * cos(rotn_rad);
+    
+        x2 = xp - offx;
+        y2 = yp - offy;
+    
+        xp = (xv + offx) * cos(rotn_rad) - (yv + offy) * sin(rotn_rad);
+        yp = (xv + offx) * sin(rotn_rad) + (yv + offy) * cos(rotn_rad);
+    
+        xv = xp - offx;
+        yv = yp - offy;
+      } else {
+        xp = x1 * cos(rotn_rad) - y1 * sin(rotn_rad);
+        yp = x1 * sin(rotn_rad) + y1 * cos(rotn_rad);
 
-      x1 = xp - offx;
-      y1 = yp - offy;
+        x1 = xp;
+        y1 = yp;
+    
+        xp = x2 * cos(rotn_rad) - y2 * sin(rotn_rad);
+        yp = x2 * sin(rotn_rad) + y2 * cos(rotn_rad);
+    
+        x2 = xp;
+        y2 = yp;
+    
+        xp = xv * cos(rotn_rad) - yv * sin(rotn_rad);
+        yp = xv * sin(rotn_rad) + yv * cos(rotn_rad);
 
-      xp = (x2 + offx) * cos(rotn_rad) - (y2 + offy) * sin(rotn_rad);
-      yp = (x2 + offx) * sin(rotn_rad) + (y2 + offy) * cos(rotn_rad);
-
-      x2 = xp - offx;
-      y2 = yp - offy;
-
-      xp = (xv + offx) * cos(rotn_rad) - (yv + offy) * sin(rotn_rad);
-      yp = (xv + offx) * sin(rotn_rad) + (yv + offy) * cos(rotn_rad);
-
-      xv = xp - offx;
-      yv = yp - offy;
+        xv = xp;
+        yv = yp;
+      }
     }
-
 
     /* Center the line around the center of the shape: */
 
@@ -16222,23 +16305,43 @@ static void do_shape(int sx, int sy, int nx, int ny, int rotn, int use_brush)
         {
           rotn_rad = rotn * M_PI / 180;
 
-          xp = (x1 + offx) * cos(rotn_rad) - (y1 + offy) * sin(rotn_rad);
-          yp = (x1 + offx) * sin(rotn_rad) + (y1 + offy) * cos(rotn_rad);
-
-          x1 = xp - offx;
-          y1 = yp - offy;
-
-          xp = (x2 + offx) * cos(rotn_rad) - (y2 + offy) * sin(rotn_rad);
-          yp = (x2 + offx) * sin(rotn_rad) + (y2 + offy) * cos(rotn_rad);
-
-          x2 = xp - offx;
-          y2 = yp - offy;
-
-          xp = (xv + offx) * cos(rotn_rad) - (yv + offy) * sin(rotn_rad);
-          yp = (xv + offx) * sin(rotn_rad) + (yv + offy) * cos(rotn_rad);
-
-          xv = xp - offx;
-          yv = yp - offy;
+          if (shape_mode == SHAPEMODE_CENTER) {
+            xp = (x1 + offx) * cos(rotn_rad) - (y1 + offy) * sin(rotn_rad);
+            yp = (x1 + offx) * sin(rotn_rad) + (y1 + offy) * cos(rotn_rad);
+  
+            x1 = xp - offx;
+            y1 = yp - offy;
+  
+            xp = (x2 + offx) * cos(rotn_rad) - (y2 + offy) * sin(rotn_rad);
+            yp = (x2 + offx) * sin(rotn_rad) + (y2 + offy) * cos(rotn_rad);
+  
+            x2 = xp - offx;
+            y2 = yp - offy;
+  
+            xp = (xv + offx) * cos(rotn_rad) - (yv + offy) * sin(rotn_rad);
+            yp = (xv + offx) * sin(rotn_rad) + (yv + offy) * cos(rotn_rad);
+  
+            xv = xp - offx;
+            yv = yp - offy;
+          } else {
+            xp = x1 * cos(rotn_rad) - y1 * sin(rotn_rad);
+            yp = x1 * sin(rotn_rad) + y1 * cos(rotn_rad);
+    
+            x1 = xp;
+            y1 = yp;
+        
+            xp = x2 * cos(rotn_rad) - y2 * sin(rotn_rad);
+            yp = x2 * sin(rotn_rad) + y2 * cos(rotn_rad);
+        
+            x2 = xp;
+            y2 = yp;
+        
+            xp = xv * cos(rotn_rad) - yv * sin(rotn_rad);
+            yp = xv * sin(rotn_rad) + yv * cos(rotn_rad);
+    
+            xv = xp;
+            yv = yp;
+          }
         }
 
 
@@ -16341,11 +16444,17 @@ static int brush_rotation(int ctr_x, int ctr_y, int ox, int oy)
   return (atan2(oy - ctr_y, ox - ctr_x) * 180 / M_PI);
 }
 
+static int stamp_will_rotate(int ctr_x, int ctr_y, int ox, int oy)
+{
+  return ((abs(ctr_x - ox) > button_w / 2) || (abs(ctr_y - oy) > button_h / 2));
+}
+
 /* What angle (degrees) is the mouse away from a stamp placement (keep at zero if within stamp's bounding box!) */
 static int stamp_rotation(int ctr_x, int ctr_y, int ox, int oy)
 {
-  if (abs(ctr_x - ox) <= CUR_STAMP_W / 2 && abs(ctr_y - oy) <= CUR_STAMP_H / 2)
+  if (!stamp_will_rotate(ctr_x, ctr_y, ox, oy))
     return (0);
+
   return brush_rotation(ctr_x, ctr_y, ox, oy);
 }
 
@@ -24043,7 +24152,7 @@ static int do_new_dialog(void)
 
       if (which == COLOR_PICKER)
       {
-        if (do_color_picker() == 0)
+        if (do_color_picker(-1) == 0)
           return (0);
       }
       else if (which == COLOR_MIXER)
@@ -24756,7 +24865,7 @@ static void do_quick_eraser(void) {
  * Display a large prompt, allowing the user to pick a
  * color from a large palette.
  */
-static int do_color_picker(void)
+static int do_color_picker(int prev_color)
 {
 #ifndef NO_PROMPT_SHADOWS
   int i;
@@ -24775,6 +24884,9 @@ static int do_color_picker(void)
   SDLKey key;
   int color_picker_left, color_picker_top;
   int color_picker_val_left, color_picker_val_top;
+  int prev_color_left, prev_color_top;
+  int pipette_left, pipette_top;
+  int mixer_left, mixer_top;
   int back_left, back_top, done_left, done_top;
   SDL_Rect color_example_dest;
   SDL_Surface *backup;
@@ -24940,6 +25052,58 @@ static int do_color_picker(void)
                           color_hexes[COLOR_PICKER][2]));
 
 
+  /* Draw buttons to pull colors from other sources: */
+
+  /* (Color buckets) */
+
+  prev_color_left = r_final.x + r_final.w - (img_back->w + 2) * 3;
+  prev_color_top = color_picker_top + img_color_picker->h - (img_back->h + 2) * 2;
+
+  if (prev_color != -1 && prev_color < NUM_DEFAULT_COLORS) {
+    dest.x = prev_color_left;
+    dest.y = prev_color_top;
+    dest.w = img_back->w;
+    dest.h = img_back->h;
+
+    draw_color_grab_btn(dest, prev_color);
+  }
+
+
+  /* (Pipette) */
+
+  pipette_left = r_final.x + r_final.w - (img_back->w + 2) * 2;
+  pipette_top = color_picker_top + img_color_picker->h - (img_back->h + 2) * 2;
+
+  dest.x = pipette_left;
+  dest.y = pipette_top;
+  dest.w = img_back->w;
+  dest.h = img_back->h;
+
+  draw_color_grab_btn(dest, NUM_DEFAULT_COLORS);
+
+  dest.x = pipette_left + (img_back->w - img_color_sel->w) / 2;
+  dest.y = pipette_top + (img_back->h - img_color_sel->h) / 2;
+
+  SDL_BlitSurface(img_color_sel, NULL, screen, &dest);
+
+
+  /* (Mixer) */
+
+  mixer_left = r_final.x + r_final.w - (img_back->w + 2);
+  mixer_top = color_picker_top + img_color_picker->h - (img_back->h + 2) * 2;
+
+  dest.x = mixer_left;
+  dest.y = mixer_top;
+  dest.w = img_back->w;
+  dest.h = img_back->h;
+
+  draw_color_grab_btn(dest, NUM_DEFAULT_COLORS + 2);
+
+  dest.x = mixer_left + (img_back->w - img_color_mix->w) / 2;
+  dest.y = mixer_top + (img_back->h - img_color_mix->h) / 2;
+
+  SDL_BlitSurface(img_color_mix, NULL, screen, &dest);
+
 
   /* Show "Back" button */
 
@@ -24948,6 +25112,8 @@ static int do_color_picker(void)
 
   dest.x = back_left;
   dest.y = back_top;
+  dest.w = img_back->w;
+  dest.h = img_back->h;
 
   SDL_BlitSurface(img_back, NULL, screen, &dest);
 
@@ -25118,6 +25284,72 @@ static int do_color_picker(void)
           chose = 0;
           done = 1;
         }
+        else if ((event.button.x >= prev_color_left &&
+                  event.button.x < prev_color_left + img_back->w &&
+                  event.button.y >= prev_color_top &&
+                  event.button.y < prev_color_top + img_back->h &&
+                  prev_color != -1 && prev_color < NUM_DEFAULT_COLORS) ||
+                 (event.button.x >= pipette_left &&
+                  event.button.x < pipette_left + img_back->w &&
+                  event.button.y >= pipette_top &&
+                  event.button.y < pipette_top + img_back->h) ||
+                 (event.button.x >= mixer_left &&
+                  event.button.x < mixer_left + img_back->w &&
+                  event.button.y >= mixer_top &&
+                  event.button.y < mixer_top + img_back->h))
+        {
+          int c;
+          float h, s, v;
+
+          if (event.button.x >= prev_color_left &&
+              event.button.x < prev_color_left + img_back->w &&
+              event.button.y >= prev_color_top &&
+              event.button.y < prev_color_top + img_back->h) {
+            /* Switch to the chosen bucket color */
+            c = prev_color; 
+          } else if (event.button.x >= pipette_left &&
+                     event.button.x < pipette_left + img_back->w &&
+                     event.button.y >= pipette_top &&
+                     event.button.y < pipette_top + img_back->h) {
+            /* Pipette */
+            c = NUM_DEFAULT_COLORS;
+          } else {
+            /* Mixer */
+            c = NUM_DEFAULT_COLORS + 2;
+          }
+
+          /* Convert the chosen color to HSV & reposition crosshairs */
+          rgbtohsv(color_hexes[c][0], color_hexes[c][1], color_hexes[c][2],
+                   &h, &s, &v);
+  
+          color_picker_v = (img_color_picker_val->h * (1.0 - v));
+          color_picker_x = (img_color_picker->w * s);
+          color_picker_y = (img_color_picker->h * (h / 360.0));
+
+          /* Re-render the palette with the new value */
+          render_color_picker_palette();
+
+          /* Update (entire) color box */
+          SDL_GetRGB(getpixel_img_color_picker
+                     (img_color_picker, color_picker_x, color_picker_y),
+                     img_color_picker->format, &r, &g, &b);
+
+          SDL_FillRect(screen, &color_example_dest,
+                       SDL_MapRGB(screen->format, r, g, b));
+
+          SDL_UpdateRect(screen,
+                         color_example_dest.x, color_example_dest.y,
+                         color_example_dest.w, color_example_dest.h);
+
+
+          /* Redraw hue/sat palette, and val slider, and redraw crosshairs */
+          draw_color_picker_palette_and_values(color_picker_left,
+                                               color_picker_top,
+                                               color_picker_val_left,
+                                               color_picker_val_top);
+
+          playsound(screen, 1, SND_BUBBLE, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+        }
       }
       else if (event.type == SDL_MOUSEMOTION)
       {
@@ -25227,6 +25459,20 @@ static int do_color_picker(void)
                 event.button.x < back_left + img_back->w &&
                 event.button.y >= back_top
                 && event.button.y < back_top + img_back->h)
+              do_setcursor(cursor_hand);
+            else if ((event.button.x >= prev_color_left &&
+                      event.button.x < prev_color_left + img_back->w &&
+                      event.button.y >= prev_color_top &&
+                      event.button.y < prev_color_top + img_back->h &&
+                      prev_color != -1 && prev_color < NUM_DEFAULT_COLORS) ||
+                     (event.button.x >= pipette_left &&
+                      event.button.x < pipette_left + img_back->w &&
+                      event.button.y >= pipette_top &&
+                      event.button.y < pipette_top + img_back->h) ||
+                     (event.button.x >= mixer_left &&
+                      event.button.x < mixer_left + img_back->w &&
+                      event.button.y >= mixer_top &&
+                      event.button.y < mixer_top + img_back->h))
               do_setcursor(cursor_hand);
             else if (event.button.x >= done_left &&
                      event.button.x < done_left + img_yes->w &&
@@ -25496,6 +25742,51 @@ static void draw_color_picker_values(int l, int t)
 }
 
 
+static void draw_color_grab_btn(SDL_Rect dest, int c) {
+  int x, y;
+  Uint8 cr, cg, cb, r, g, b, a, tmp;
+  Uint32(*getpixel_btn) (SDL_Surface *, int, int);
+  Uint32(*getpixel_scrn) (SDL_Surface *, int, int);
+  void (*putpixel_scrn) (SDL_Surface *, int, int, Uint32);
+  SDL_Rect outline_dest;
+
+  for (y = -1; y <= 1; y++) {
+    for (x = -1; x <= 1; x++) {
+      outline_dest.x = dest.x + x;
+      outline_dest.y = dest.y + y;
+      outline_dest.w = dest.w;
+      outline_dest.h = dest.h;
+
+      SDL_BlitSurface(img_color_grab, NULL, screen, &outline_dest);
+    }
+  }
+
+  cr = color_hexes[c][0];
+  cg = color_hexes[c][1];
+  cb = color_hexes[c][2];
+
+  getpixel_btn = getpixels[img_color_grab->format->BytesPerPixel];
+  getpixel_scrn = getpixels[img_color_grab->format->BytesPerPixel];
+  putpixel_scrn = putpixels[screen->format->BytesPerPixel];
+
+  SDL_LockSurface(screen);
+  SDL_LockSurface(img_color_grab);
+  for (y = 0; y < dest.h && y < img_color_grab->h; y++) {
+    for (x = 0; x < dest.w && x < img_color_grab->w; x++) {
+      SDL_GetRGBA(getpixel_btn(img_color_grab, x, y), img_color_grab->format, &tmp, &tmp, &tmp, &a);
+      SDL_GetRGBA(getpixel_scrn(screen, dest.x + x, dest.y + y), screen->format, &r, &g, &b, &tmp);
+
+      r = ((cr * a) + (r * (255 - a))) / 255;
+      g = ((cg * a) + (g * (255 - a))) / 255;
+      b = ((cb * a) + (b * (255 - a))) / 255;
+
+      putpixel_scrn(screen, x + dest.x, y + dest.y, SDL_MapRGB(screen->format, r, g, b));
+    }
+  }
+  SDL_UnlockSurface(screen);
+  SDL_UnlockSurface(img_color_grab);
+}
+
 enum
 {
   COLOR_MIXER_BTN_RED,
@@ -25608,6 +25899,7 @@ static int do_color_mix(void)
 
   cell_w = img_back->w + 2;
   cell_h = img_back->h + 2;
+
 
   /* Area for the dialog window */
   r_final.x = r_canvas.x + (r_canvas.w - (cell_w * 6)) / 2 - 4;
@@ -25882,7 +26174,8 @@ static int do_color_mix(void)
             (btn_clicked == COLOR_MIXER_BTN_UNDO
              && color_mix_cur_undo != color_mix_oldest_undo)
             || (btn_clicked == COLOR_MIXER_BTN_REDO
-                && color_mix_cur_undo != color_mix_newest_undo))
+                && color_mix_cur_undo != color_mix_newest_undo)
+           )
         {
           do_setcursor(cursor_hand);
         }
@@ -30457,7 +30750,7 @@ static void setup(void)
   DEBUG_PRINTF("%s\n", tmp_str);
 
   safe_snprintf(tmp_str, sizeof(tmp_str),
-                "© 2002–2021 Bill Kendrick et al.");
+                "© 2002–2023 Bill Kendrick, et al.");
   tmp_surf = render_text(medium_font, tmp_str, black);
   dest.x = 10;
   dest.y = WINDOW_HEIGHT - img_progress->h - (tmp_surf->h * 2);
@@ -30743,6 +31036,7 @@ static void setup(void)
     loadimagerb(DATA_PREFIX "images/ui/scroll_down_off.png");
   img_color_sel = loadimagerb(DATA_PREFIX "images/ui/csel.png");
   img_color_mix = loadimagerb(DATA_PREFIX "images/ui/cmix.png");
+  img_color_grab = loadimagerb(DATA_PREFIX "images/ui/color_grab.png");
 
 #ifdef LOW_QUALITY_COLOR_SELECTOR
   img_paintcan = loadimage(DATA_PREFIX "images/ui/paintcan.png");

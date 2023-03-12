@@ -7,7 +7,7 @@ Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
 
-2023.February.19 (0.9.29)
+2023.March.9 (0.9.29)
   * Improvements to "Stamp" tool:
     -----------------------------
     * Stamps may now be rotated.
@@ -48,11 +48,36 @@ https://tuxpaint.org/
       (Sound effected licensed as Creative Commons 0 (CC0 1.0)
       by https://freesound.org/people/kentnelson64/)
 
-    * [WIP] "Rivulet"; apply rivulets of water to the canvas
-      - needs better icon
-      - needs sound effect
-      - effect needs improvement
+    * "Color Sep." (color separation) and "3D Glasses" - Separate the
+      colors of the image, e.g. Red vs Cyan, as in anaglyphic
+      "3D glasses" images.
       Bill Kendrick <bill@newbreedsoftware.com>
+      ("3D Glasses" sound effected licensed as Creative Commons 0 (CC0 1.0)
+      by https://freesound.org/people/Zarkonnen/;
+      "Color Sep." sound effect licensed as Creative Commons
+      Attribution 4.0 International (CC BY 4.0)
+      by https://freesound.org/people/juskiddink/)
+
+    * "Saturate" & "Desaturate" - Increase or decrease color saturation.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      (Sounds based on "can lid.wav", Creative Commons 0 (CC0 1.0)
+      by https://freesound.org/people/Saltbearer/)
+
+    * "Keep Color" & "Remove Color" - Completely desaturate
+      parts of the picture, based on the chosen color.
+      "Keep" keeps the saturation intact if the colors match;
+      while "Remove" desaturates parts of the image that match the
+      chosen color.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      (Sounds based on "Ethnic drums » ethnic beat6.wav" and "...7.wav",
+      Creative Commons 0 (CC0 1.0) by https://freesound.org/people/tootoos24/)
+
+    * "Kaleido-4", "-6", and "-8" -- Kaleidoscopic lens effects.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      (Sounds based on "Xylophone chromatic descending passages improv",
+      "Xylophone scale descent improv", & "Xylophone chromatic passages improv",
+      licensed as Creative Commons Attribution 4.0 International (CC BY 4.0)
+      by https://freesound.org/people/Ustym_Petrovych/)
 
   * Improvements to Magic Tools:
     ----------------------------
@@ -61,7 +86,34 @@ https://tuxpaint.org/
 
     * "Zoom" and "Perspective" background colors change
       immediately when you select new colors.
-      Bill Kendrick <bill@newbreedsoftware.com>
+      Bill Kendrick <bill@newbreedsofware.com>
+
+  * Improvements to Fill tool:
+    --------------------------
+    * Shaped fill tool (similar to radial gradient, but
+      follows the shape of the object).
+      Bill Kendrick <bill@newbreedsofware.com>
+      (Based on http://www.codersnotes.com/notes/signed-distance-fields/
+      by Richard Mitton)
+
+  * Improvements to Shape tool:
+    ---------------------------
+    * Rotation of corner-stretched shapes are around their center,
+      rather than orbiting a corner.
+      Bill Kendrick <bill@newbreedsofware.com>
+
+    * Stretching a shape upwards rotates it 180-degrees
+      (e.g., stretching the triangle downwards makes an up-pointing
+      triangle (^), as before; but stretching it upwards now makes
+      a down-pointing triangle (v))
+      Bill Kendrick <bill@newbreedsofware.com>
+
+  * Improvements to Color selection:
+    --------------------------------
+    * The rainbow palette color picker allows you to switch to the
+      chosen built-in color, the pipette (color selector) color, or the
+      color mixer's color, and make adjustments using its hue, saturation,
+      and value controls.
 
   * New Starter
     -----------
@@ -322,6 +374,11 @@ https://tuxpaint.org/
   * Documentation updates:
     ---------------------
     * New "Quickstart Guide" document added.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * "Troubleshooting" document added (work-in-progress, and
+      mostly for developer use when getting info. from users
+      experiencing problems)
       Bill Kendrick <bill@newbreedsoftware.com>
 
     * Magic tool API documentation updated to match other docs,

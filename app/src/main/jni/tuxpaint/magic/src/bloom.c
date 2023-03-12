@@ -3,7 +3,7 @@
    Applies a "bloom" effect to the image.
    (https://en.wikipedia.org/wiki/Bloom_(shader_effect))
 
-   Last updated: February 7, 2023
+   Last updated: February 27, 2023
 */
 
 #include <stdio.h>
@@ -19,7 +19,7 @@
 #define BLOOM_PAINT_RADIUS 24
 
 /* Overall weight to apply the sampled pixels */
-#define BLOOM_WEIGHT_CONST 0.025
+#define BLOOM_WEIGHT_CONST 0.05
 
 /* Length of spike shape */
 #define BLOOM_SPIKE_LENGTH 5

@@ -4,7 +4,7 @@
   Fill tool -- tool variations (for selector)
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2022 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: December 11, 2022
+  Last updated: March 7, 2023
   $Id$
 */
 
@@ -44,6 +44,7 @@ enum
   FILL_BRUSH,
   FILL_GRADIENT_LINEAR,
   FILL_GRADIENT_RADIAL,
+  FILL_GRADIENT_SHAPED,
   NUM_FILLS
 };
 
@@ -51,7 +52,8 @@ const char *const fill_names[NUM_FILLS] = {
   gettext_noop("Solid"),
   gettext_noop("Brush"),
   gettext_noop("Linear"),
-  gettext_noop("Radial")
+  gettext_noop("Radial"),
+  gettext_noop("Shaped")
 };
 
 const char *const fill_tips[NUM_FILLS] = {
@@ -60,14 +62,17 @@ const char *const fill_tips[NUM_FILLS] = {
   gettext_noop
     ("Click and drag to fill an area with a linear gradient (from the chosen color to transparent)."),
   gettext_noop
-    ("Click to fill an area with a radial gradient (from the chosen color to transparent).")
+    ("Click to fill an area with a radial gradient (from the chosen color to transparent)."),
+  gettext_noop
+    ("Click to fill an area with a shaped gradient (from the chosen color to transparent).")
 };
 
 const char *const fill_img_fnames[NUM_FILLS] = {
   DATA_PREFIX "images/fills/solid.png",
   DATA_PREFIX "images/fills/brush.png",
   DATA_PREFIX "images/fills/gradient_linear.png",
-  DATA_PREFIX "images/fills/gradient_radial.png"
+  DATA_PREFIX "images/fills/gradient_radial.png",
+  DATA_PREFIX "images/fills/gradient_shaped.png"
 };
 
 #endif

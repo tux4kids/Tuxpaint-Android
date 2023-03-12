@@ -4,7 +4,7 @@
   Fill tool
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2022 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: December 11, 2022
+  Last updated: February 26, 2023
   $Id$
 */
 
@@ -54,6 +54,7 @@ void draw_linear_gradient(SDL_Surface * canvas, SDL_Surface * last,
 void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top,
                           int x_right, int y_bottom, int x, int y,
                           Uint32 draw_color, Uint8 * touched);
+void draw_shaped_gradient(SDL_Surface * canvas, Uint32 draw_color, Uint8 * touched);
 void draw_brush_fill(SDL_Surface * canvas, int x_left, int y_top, int x_right,
                      int y_bottom, int x1, int y1, int x2, int y2,
                      Uint32 draw_color, Uint8 * touched, int *up_x1,

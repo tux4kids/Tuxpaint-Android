@@ -4,7 +4,7 @@
   Fill tool
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2022 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: December 23, 2022
+  Last updated: February 26, 2023
   $Id$
 */
 
@@ -72,6 +72,21 @@ typedef struct queue_s
 queue_t *queue;
 int queue_size = 0, queue_end = 0;
 
+typedef struct sdf_point_s
+{
+  int dx, dy;
+} sdf_point;
+
+sdf_point sdf_pt_inside = { 0, 0 };
+sdf_point sdf_pt_empty = { 9999, 9999 };
+
+typedef struct sdf_grid_s
+{
+  sdf_point * * grid;
+  int w, h;
+} sdf_grid;
+
+
 /* Local function prototypes: */
 
 SDL_Surface *global_screen, *global_last, *global_canvas;
@@ -94,6 +109,15 @@ void init_queue(void);
 void add_to_queue(int x, int y, int y_outside);
 int remove_from_queue(int *x, int *y, int *y_outside);
 void cleanup_queue(void);
+void sdf_pt_get(sdf_grid * g, int x, int y, sdf_point * p);
+void sdf_pt_put(sdf_grid * g, int x, int y, sdf_point p);
+int sdf_distsq(sdf_point p);
+void sdf_compare(sdf_grid * g, sdf_point * p, int x, int y, int offsetx, int offsety);
+int malloc_sdf_grid(sdf_grid * g, int w, int h);
+void free_sdf_grid(sdf_grid * g);
+void sdf_fill_bitmask_to_sdf_grids(Uint8 * bitmask, int w, int h, sdf_grid * g1, sdf_grid * g2);
+void sdf_generate(sdf_grid * g);
+
 
 void init_queue(void)
 {
@@ -335,7 +359,6 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
   if ((global_prog_anim % 8) == 0)
   {
     show_progress_bar_(screen, texture, renderer);
-
   }
 
   if ((global_prog_anim % 800) == 1)    /* Always lay sound _once_ */
@@ -813,4 +836,253 @@ void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top,
         }
     }
   }
+}
+
+/* Signed Distance Field functions --------------------------------------
+   Based on `8ssedt` example code by Richard Mitton <http://www.codersnotes.com/about/>, 2009
+   Converted to C for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>, 2023
+*/
+
+void sdf_pt_get(sdf_grid * g, int x, int y, sdf_point * p)
+{
+  if (x >= 0 && x < g->w && y >= 0 && y < g->h) {
+    memcpy(p, &(g->grid[y][x]), sizeof(sdf_point));
+  } else {
+    memcpy(p, &(sdf_pt_empty), sizeof(sdf_point));
+  }
+}
+
+void sdf_pt_put(sdf_grid * g, int x, int y, sdf_point p)
+{
+  memcpy(&(g->grid[y][x]), &p, sizeof(sdf_point));
+}
+
+int sdf_distsq(sdf_point p)
+{
+  return ((p.dx * p.dx) + (p.dy * p.dy));
+}
+
+void sdf_compare(sdf_grid * g, sdf_point * p, int x, int y, int offsetx, int offsety)
+{
+  sdf_point other;
+
+  sdf_pt_get(g, x + offsetx, y + offsety, &other);
+  other.dx += offsetx;
+  other.dy += offsety;
+
+  if (sdf_distsq(other) < sdf_distsq(*p)) {
+    p->dx = other.dx;
+    p->dy = other.dy;
+  }
+}
+
+int malloc_sdf_grid(sdf_grid * g, int w, int h) {
+  int i, abort;
+
+  g->w = w;
+  g->h = h;
+  g->grid = (sdf_point * *) malloc(h * sizeof(sdf_point *));
+  if (g->grid == NULL) {
+    fprintf(stderr, "malloc_sdf_grid() cannot malloc() g->grid!\n");
+    free(g);
+    return 0;
+  }
+
+  for (i = 0; i < h; i++) {
+    g->grid[i] = NULL;
+  }
+
+  abort = 0;
+  for (i = 0; i < h && !abort; i++) {
+    g->grid[i] = (sdf_point *) malloc(w * sizeof(sdf_point));
+    if (g->grid[i] == NULL) {
+      abort = 1;
+    }
+  }
+
+  if (abort) {
+    fprintf(stderr, "malloc_sdf_grid() cannot malloc() g->grid[]!\n");
+    free_sdf_grid(g);
+    return 0;
+  }
+
+  return 1;
+}
+
+void free_sdf_grid(sdf_grid * g) {
+  int i;
+
+  for (i = 0; i < g->h; i++) {
+    if (g->grid[i] != NULL) {
+      free(g->grid[i]);
+    }
+  }
+  free(g->grid);
+}
+
+
+void sdf_fill_bitmask_to_sdf_grids(Uint8 * bitmask, int w, int h, sdf_grid * g1, sdf_grid * g2) {
+  int x, y;
+
+  for (y = 0; y < h; y++) {
+    for (x = 0; x < w; x++) {
+      if (bitmask[y * w + x]) {
+        sdf_pt_put(g1, x, y, sdf_pt_inside);
+        sdf_pt_put(g2, x, y, sdf_pt_empty);
+      } else {
+        sdf_pt_put(g1, x, y, sdf_pt_empty);
+        sdf_pt_put(g2, x, y, sdf_pt_inside);
+      }
+    }
+  }
+}
+
+
+void sdf_generate(sdf_grid * g) {
+  int x, y;
+  sdf_point p;
+
+  /* Pass 0 */
+  for (y = 0; y < g->h; y++) {
+    for (x = 0; x < g->w; x++) {
+      sdf_pt_get(g, x, y, &p);
+      sdf_compare(g, &p, x, y, -1,  0);
+      sdf_compare(g, &p, x, y,  0, -1);
+      sdf_compare(g, &p, x, y, -1, -1);
+      sdf_compare(g, &p, x, y,  1, -1);
+      sdf_pt_put(g, x, y, p);
+    }
+
+    for (x = g->w - 1; x >= 0; x--) {
+      sdf_pt_get(g, x, y, &p);
+      sdf_compare(g, &p, x, y,  1, 0);
+      sdf_pt_put(g, x, y, p);
+    }
+  }
+
+  /* Pass 1 */
+  for (y = g->h - 1; y >= 0; y--) {
+    for (x = g->w - 1; x >= 0; x--) {
+      sdf_pt_get(g, x, y, &p);
+      sdf_compare(g, &p, x, y,  1, 0);
+      sdf_compare(g, &p, x, y,  0, 1);
+      sdf_compare(g, &p, x, y, -1, 1);
+      sdf_compare(g, &p, x, y,  1, 1);
+      sdf_pt_put(g, x, y, p);
+    }
+
+    for (x = 0; x < g->w; x++) {
+      sdf_pt_get(g, x, y, &p);
+      sdf_compare(g, &p, x, y, -1, 0);
+      sdf_pt_put(g, x, y, p);
+    }
+  }
+}
+
+/* End of Signed Distance Field functions ------------------------------- */
+
+
+void draw_shaped_gradient(SDL_Surface * canvas, Uint32 draw_color, Uint8 * touched)
+{
+  Uint32 old_colr, new_colr;
+  int xx, yy;
+  int pix_idx;
+  float ratio;
+  Uint8 draw_r, draw_g, draw_b, old_r, old_g, old_b, new_r, new_g, new_b;
+  Uint8 * bitmask;
+  sdf_grid g1, g2;
+
+  /* Create space for bitmask (based on `touched`) and SDF output
+     large enough for the area being filled */
+  bitmask = (Uint8 *) malloc(sizeof(Uint8) * canvas->w * canvas->h);
+  if (bitmask == NULL) {
+    return;
+  }
+
+  if (!malloc_sdf_grid(&g1, canvas->w, canvas->h)) {
+    free(bitmask);
+    return;
+  }
+  if (!malloc_sdf_grid(&g2, canvas->w, canvas->h)) {
+    free(bitmask);
+    free_sdf_grid(&g1);
+    return;
+  }
+
+
+  /* Convert the `touched` values into a bitmask to feed into the SDF routines */
+  for (yy = 0; yy < canvas->h; yy++) {
+    for (xx = 0; xx < canvas->w; xx++) {
+      /* Converting 0-255 to 0/1 */
+      bitmask[yy * canvas->w + xx] = (touched[(yy * canvas->w) + xx] >= 128);
+    }
+  }
+
+  /* Compute the Signed Distance Field (we'll use as an alpha mask) */
+
+  sdf_fill_bitmask_to_sdf_grids(bitmask, canvas->w, canvas->h, &g1, &g2);
+  sdf_generate(&g1);
+  sdf_generate(&g2);
+
+  /* Get our target color */
+  SDL_GetRGB(draw_color, canvas->format, &draw_r, &draw_g, &draw_b);
+
+  /* Traverse the flood-filled zone */
+  for (yy = 0; yy < canvas->h; yy++)
+  {
+    for (xx = 0; xx <= canvas->w; xx++)
+    {
+      /* Only alter the pixels within the flood itself */
+      pix_idx = (yy * canvas->w) + xx;
+
+      if (pix_idx >= 0 && pix_idx < canvas->w * canvas->h)
+        {
+          if (touched[pix_idx])
+          {
+            sdf_point p;
+            double dist1, dist2, dist;
+
+            sdf_pt_get(&g1, xx, yy, &p);
+            dist1 = sqrt(sdf_distsq(p));
+
+            sdf_pt_get(&g2, xx, yy, &p);
+            dist2 = sqrt(sdf_distsq(p));
+
+            dist = dist1 - dist2;
+
+            /* Determine the distance from the click point */
+            ratio = ((float) ((dist * 10) + 255)) / 255.0; // Magic numbers :-( -bjk 2023.02.25
+            if (ratio < 0.0)
+              ratio = 0.0;
+            else if (ratio > 1.0)
+              ratio = 1.0;
+
+            /* Get the old color, and blend it (with a distance-based ratio) with the target color */
+            old_colr =
+              getpixels[canvas->format->BytesPerPixel] (canvas, xx, yy);
+            SDL_GetRGB(old_colr, canvas->format, &old_r, &old_g, &old_b);
+
+            /* Apply fuzziness at any antialiased edges we detected */
+            ratio = (ratio * ((float) touched[pix_idx] / 255.0));
+
+            new_r =
+              (Uint8) (((float) old_r) * ratio +
+                       ((float) draw_r * (1.00 - ratio)));
+            new_g =
+              (Uint8) (((float) old_g) * ratio +
+                       ((float) draw_g * (1.00 - ratio)));
+            new_b =
+              (Uint8) (((float) old_b) * ratio +
+                       ((float) draw_b * (1.00 - ratio)));
+
+            new_colr = SDL_MapRGB(canvas->format, new_r, new_g, new_b);
+            putpixels[canvas->format->BytesPerPixel] (canvas, xx, yy, new_colr);
+          }
+        }
+    }
+  }
+
+  free(bitmask);
+  free_sdf_grid(&g1);
+  free_sdf_grid(&g2);
 }
