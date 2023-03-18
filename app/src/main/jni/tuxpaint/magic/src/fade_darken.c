@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: March 7, 2023
+  Last updated: March 13, 2023
 */
 
 #include <stdio.h>
@@ -71,11 +71,11 @@ char * tool_descriptions[NUM_TOOLS][2] = {
   },
   {
    gettext_noop("Click and drag the mouse to entirely desaturate parts of your picture that match the chosen color."),
-   gettext_noop("Click to entirely desaturate your the parts of your picture that match the chosen color."),
+   gettext_noop("Click to entirely desaturate the parts of your picture that match the chosen color."),
   },
   {
    gettext_noop("Click and drag the mouse to entirely desaturate parts of your picture that don't match the chosen color."),
-   gettext_noop("Click to entirely desaturate your the parts of your picture that don't match the chosen color."),
+   gettext_noop("Click to entirely desaturate the parts of your picture that don't match the chosen color."),
   },
 };
 

@@ -265,6 +265,7 @@
     <p xml:lang="is">Tux Paint er frjálst, margverðlaunað teikniforrit fyrir börn á aldrinum 3 til 12 ára. Tux Paint er notað í skólum um víða veröld sem tölvutengd sköpunarupplifun. Það sameinar einfalt og auðlært viðmót, skemmtilegar hljóðbrellur og uppörvandi teiknimyndafígúru sem leiðbeinir börnunum við notkun hugbúnaðarins.</p>
     <p xml:lang="fr">Tux Paint est un programme de dessin libre, conçu pour les jeunes enfants âgés de 3 ans à 12, et qui a remporté de nombreux prix. Tux Paint est utilisé dans des écoles partout dans le monde comme activité d'apprentissage de dessin par ordinateur. Il possède une interface simple à utiliser, des effets sonores amusants, et une mascotte dessinée qui encourage et aide les enfants lorsqu'ils utilisent le programme.</p>
     <p xml:lang="ca">Tux Paint és un guardonat programa de dibuix, lliure i gratuït per a nenes i nens de 3 a 12 anys. Es fa servir en escoles d'arreu del món com a eina d'aprenentatge de dibuix per ordinador. Combina una interfície fàcil d'usar, divertits efectes de so i una mascota que anima i guia la quitxalla mentre el fan servir. </p>
+    <p xml:lang="bg">"Рисуване с Тъкс" е безплатна, награждавана програма за рисуване, за деца от 3 до 12 години. "Рисуване с Тъкс" се използва в училища около света за предоставяне на рисувателна дейност, обогатяваща компютърната грамотност. Съчетава лесен за използване интерфейс, забавни звукови ефекти и насърчаващ анимиран талисман, който помага на децата при използване на програмата.</p>
     <p>
       Kids are presented with a blank canvas and a variety of drawing tools to
       help them be creative.
@@ -276,6 +277,7 @@
     <p xml:lang="is">Krakkarnir byrja með auðan myndflöt og ýmis verkfæri sem hvetja þau til sköpunar.</p>
     <p xml:lang="fr">Pour mettre en valeur la créativité de l'enfant, le logiciel fournit un canevas et un ensemble d'outils pour dessiner.</p>
     <p xml:lang="ca">Presenta un llenç en blanc i una multitud d'eines de dibuix per ajudar en la creativitat.</p>
+    <p xml:lang="bg">Децата за предоставени с празно платно и разнообразие от инструменти за рисуване, които им помагат да използват въображението си.</p>
   </description>
   <developer_name>New Breed Software et al.</developer_name>
   <developer_name xml:lang="pt">New Breed Software et al.</developer_name>
@@ -285,12 +287,11 @@
   <developer_name xml:lang="is">New Breed Software og fleiri.</developer_name>
   <developer_name xml:lang="fr">New Breed Software et autres.</developer_name>
   <developer_name xml:lang="ca">New Breed Software et al.</developer_name>
+  <developer_name xml:lang="bg">"New Breed Software" и други.</developer_name>
   <url type="homepage">https://tuxpaint.org/</url>
   <url type="bugtracker">https://sourceforge.net/p/tuxpaint/_list/tickets</url>
   <url type="faq">https://tuxpaint.org/docs/en/html/FAQ.html</url>
   <url type="help">https://tuxpaint.org/docs/</url>
-  <!-- TODO: https: donation URL -->
-  <url type="donation">http://www.newbreedsoftware.com/donate/</url>
   <url type="translate">https://tuxpaint.org/help/po/</url>
   <url type="contact">https://tuxpaint.org/contact/</url>
   <screenshots>
@@ -304,6 +305,7 @@
       <caption xml:lang="is">'Galdra'-verkfærið er með úrvali af sjónbrellum</caption>
       <caption xml:lang="fr">L'outil 'Magie' est un ensemble d'effets spéciaux</caption>
       <caption xml:lang="ca">L'eina Màgic és una col·lecció d'efectes especials</caption>
+      <caption xml:lang="bg">Инструментът за магии е комплект от специални ефекти</caption>
     </screenshot>
     <screenshot>
       <image type="source">https://tuxpaint.org/screenshots/example_simple.png</image>
@@ -315,6 +317,7 @@
       <caption xml:lang="is">Penslatólið gerir kleift að teikna fríhendismyndir með ýmsum penslum og litum</caption>
       <caption xml:lang="fr">L'outil 'Peindre' vous permet de dessiner à main levée, à l'aide de différents pinceaux et couleurs</caption>
       <caption xml:lang="ca">L'eina Pinta serveix per pintar a mà alçada fent servir els diferents pinzells i colors</caption>
+      <caption xml:lang="bg">Четката позволява рисуване на свободна ръка, използвайки разнообразни видове четки и цветове</caption>
     </screenshot>
     <screenshot>
       <image type="source">https://tuxpaint.org/screenshots/example_space.png</image>
@@ -326,9 +329,23 @@
       <caption xml:lang="is">Stilmplatólið er eins og heilt sett af gúmmístimplum eða límmiðum</caption>
       <caption xml:lang="fr">L'outil 'Tampon' fournit un ensemble de tampons caoutchouc ou d'autocollants</caption>
       <caption xml:lang="ca">L'eina Estampa serveix per inserir imatges al dibuix</caption>
+      <caption xml:lang="bg">Инструментът за печати е комплект от гумени печати и стикери</caption>
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.9.29" date="2023-03-15">
+      <description>
+        <p>Fifteen new magic tools have been added: Maze, Googly Eyes, Fur, Circles, Rays, 3D Glasses, Color Sep., Saturate, Desaturate, Remove Color, Keep Color, Kaleido-4, Kaleido-6, Kaleido-8, and Bloom.</p>
+        <p>Stamps may be rotated before being applied to the canvas.</p>
+        <p>Shapes tool, in drag-from-corner mode, has been improved.</p>
+        <p>Fill tool now offers a shaped gradient (bevel) mode.</p>
+        <p>A quick Eraser mode is be accessed via keyboard shortcut.</p>
+        <p>The rainbow palette (HSV color picker) can now load the built-in color, or the colors from the pipette tool or color mixer.</p>
+        <p>Starter and Template images can specify how they should stretch, to avoid smearing when the canvas aspect ratio differs from that of the image.</p>
+        <p>The "buttonsize" configuration option now offers an "auto" setting.</p>
+        <p>A quick start guide has been added.</p>
+      </description>
+    </release>
     <release version="0.9.28" date="2022-06-04">
       <description>
         <p>Tux Paint's Color palette includes a new Color Mixer option, which allows users to combine different proportions of primary colors (red, yellow, and blue) and shades (white, grey, and black) to create new colors, similar to mixing paints.</p>
@@ -337,30 +354,35 @@
         <p xml:lang="ja">Tux Paint のカラーパレットには、新たに「カラーミキサー」オプションが加わり、絵の具を混ぜるように、異なる割合の原色（赤、黄、青）とシェード（白、グレー、黒）を組み合わせて、新しい色を作り出すことができるようになりました。</p>
         <p xml:lang="fr">La palette de couleur de Tux Paint inclut une nouvelle option de mélange de couleurs, permettant à l'utilisateur de combiner différentes proportions de couleurs primaires (rouge, jaune et bleu) et d'ombres (blanc, gris et noir) en vue de créer de nouvelles couleurs, semblables à des mélanges de peinture.</p>
         <p xml:lang="ca">La paleta de colors inclou una nova opció per mesclar els colors que permet combinar els colors primaris(magenta, groc i cian) en diferents proporcions i tons(blanc, gris i negre) per crear nous colors com si es barregessin pintures.</p>
+        <p xml:lang="bg">Цветовата палитра на "Рисуване с Тъкс" съдържа нова опция за смесване на цвят, която позволява на потребителите да съчетават различни съотношения от основни цветове (червено, жълто и синьо) и сенки (бели, сиви и черни) за създаване на нови цветове, подобно на смесване на бои.</p>
         <p>The Color Picker option, which previously offered a static palette of around sixty-five thousand color choices, now supports separate hue, saturation, and value settings, allowing users to choose from over sixteen million colors.</p>
         <p xml:lang="pt">A opção Seletor de cores, que anteriormente oferecia uma paleta estática de cerca de sessenta e cinco mil escolhas de cores, suporta agora tonalidade separada, saturação, e definições de valores, permitindo aos utilizadores escolher entre mais de dezasseis milhões de cores.</p>
         <p xml:lang="nn">I den tradisjonelle fargeveljaren, som før viste ein palett på rundt sekstifem tusen fargar, kan du no velja fargenyanse, fargemetting og lysstyrke direkte, noko som gjev tilgang til over seksten millionar fargar.</p>
         <p xml:lang="ja">カラーピッカーは、従来は約6万5千色の固定パレットでしたが、色相、彩度、明度の個別設定に対応し、1600万色以上の色を選択できるようになりました。</p>
         <p xml:lang="fr">L'option sélecteur de couleur, qui auparavant offrait une palette statique avec un choix de 65 000 couleurs, possède maintenant la possibilité de choisir des valeurs de teinte, de saturation permettant à l'utilisateur de choisir parmi plus de 16 millions de couleurs.</p>
         <p xml:lang="ca">L'eina de tria de colors, que previament oferia una paleta estàtica d'uns seixanta-cinc mil colors ara ofereix to, saturació i valor per separat, permetent triar entre setze milions de colors.</p>
+        <p xml:lang="bg">Пипетката, която преди предлагаше постоянна палитра, съдържаща около 65 хиляди избора на цветове, сега поддържа отделни настройки за нюанс, насищане и стойност, които позволяват на потребителите да избират от над 16 милиона цвята.</p>
         <p>Also, a keyboard shortcut is now available for quick access to the Color Selector — the "pipette" tool used for picking colors from the current drawing.</p>
         <p xml:lang="pt">Além disso, está agora disponível uma tecla de atalho para acesso rápido ao Seletor de cores - a ferramenta "pipeta" utilizada para escolher cores do desenho atual.</p>
         <p xml:lang="nn">Det finst no ein snøggtast for tilgang til «pipetten» som lèt deg henta fargar frå teikninga.</p>
         <p xml:lang="ja">また、カラーセレクター（絵の中から色を抽出するためのピペットツール）に素早くアクセスするためのキーボードショートカットが利用できるようになりました。</p>
         <p xml:lang="fr">Également, un raccourci clavier est disponible pour avoir rapidement accès au sélecteur de couleur -- l'outil "pipette" pour choisir une couleur à partir du dessin en cours.</p>
         <p xml:lang="ca">També s'ha afegit una drecera de teclat per accedir al selector de color(comptagotes) per agafar colors del dibuix.</p>
+        <p xml:lang="bg">Също, пряк път на клавиатурата вече е наличен за бърз достъп към селектора на цвят - пипетката, използвана за избор на цвят от текущата рисунка.</p>
         <p>The Paint and Lines tools now provide a way to adjust the spacing of brushes, allowing dotted lines or smearing effects to be made. Many brushes have been given better default spacing values, as well.</p>
         <p xml:lang="pt">As ferramentas de Pintura e Linhas proporcionam agora uma forma de ajustar o espaçamento dos pincéis, permitindo a realização de linhas pontilhadas ou efeitos de manchas. Muitos pincéis foram também dotados de melhores valores de espaçamento padrão.</p>
         <p xml:lang="nn">I målings- og linjeverktøya kan du no endra avstanden mellom penselstrøka, for å laga prikka linjer eller utgniings­effektar. Mange av penslane har òg fått betre standardavstand.</p>
         <p xml:lang="ja">「ふで」ツールと「せん」ツールでは、描画の間隔を調整する方法が追加され、点線やスミアの効果を作ることができるようになりました。また、多くのブラシでデフォルトの間隔が改善されました。</p>
         <p xml:lang="fr">Les outils 'Peindre' et 'Lignes' fournissent maintenant un moyen d'ajuster l'espacement des pinceaux, et d'avoir des lignes pointillées ou avec des effets de traînée. De plus beaucoup de pinceaux ont une meilleure valeur d'espacement.</p>
         <p xml:lang="ca">Ara les eines Pinta i Línies permeten ajustar l'espaiat dels pinzells, permetent línies de punts i superposicions. També s'ha ajustat els valors per defecte de molts altres pinzells. </p>
+        <p xml:lang="bg">Инструментите за боя и линии вече предлагат начин за регулиране на разстоянието на четките, както и позволяват пунктирани линии или размазващи ефекти да бъдат създадени. Също, много видове четки може да са получили по-добри стойности за разстояние по подразбиране.</p>
         <p>Two new variations of the Zoom Magic Tool, Tile Zoom and Rush, have been added. When shrinking a drawing with Tile Zoom, it replicates the drawing across the canvas in tiles, rather than filling the canvas with a solid background color. The Rush tool blurs the results.</p>
         <p xml:lang="pt">Duas novas variações da Ferramenta de Magia Zoom, Agrupar ampliação e Apressar, foram adicionadas. Ao encolher um desenho com o Agrupar ampliação, este replica o desenho através da tela em mosaicos, em vez de encher a tela com uma cor de fundo sólida. A ferramenta Apressar desfoca os resultados.</p>
         <p xml:lang="nn">Det er lagt til to nye variantar av dei magiske forstørrings­verktøya – flisforstørring og hastverk. Når du krympar ei teikning med flisforstørring, vert det laga små kopiar av teikninga bortover og nedover, i staden for å fylla den ledige plassen med ein farge. Hastverk-verktøyet gjer biletet uklart (rørslesløring).</p>
         <p xml:lang="ja">「まほう」ツールの「ズーム」に、「タイルズーム」と「ワープ」の2つのバリエーションが追加されました。「タイルズーム」は、キャンバスを背景色で塗りつぶすのではなく、キャンバス全体にタイル状に描画を複製します。ラッシュツールは、ズーム後に結果をぼかします。</p>
         <p xml:lang="fr">Deux nouvelles variantes de l'outil 'Zoom', "Zoom tuile" et "Rush", sont apparues. Quand on dézoome avec "Zoom tuile", il reproduit le dessin en plusieurs tuiles sur la toile, plutôt que remplir la toile avec une couleur noir unie. L'outil "Rush" zoome et dézoome en ajoutant un effet de flou.</p>
         <p xml:lang="ca">Màgic, s'ha afegit dues noves variants de l'eina Zoom, Zoom mosaic i Zoom lliscat, Quan es redueixla imatge amb Zoom mosaic, aquesta es replica arreu en comptes de omplir la resta del dibuis amb el color de fons. Zoom lliscat desenfoca els resultats.</p>
+        <p xml:lang="bg">Два нови варианта на "магическия" инструмент за увеличаване - увеличаване на плочки и "Втурване", са добавени. При свиване на рисунка с инструмента за увеличаване на плочки, репликира се рисунката на платното в плочки, вместо платното да се запълни с плътен цвят за фон. Инструментът за "Втурване" размазва резултатите.</p>
         <p>Tux Paint's Shapes tool now offers hexagon (6-sided) and heptagon (7-sided) polygons. For shapes which can be stretched (rectangle, oval, etc.), the aspect ratio of the shape is displayed at the bottom while you make your adjustments. Instructional information shown while using some other tools has also been expanded.</p>
         <p xml:lang="pt">A ferramenta Formas do Tux Paint oferece agora polígonos hexagonais (6 lados) e heptagonais (7 lados). Para formas que podem ser esticadas (retângulo, oval, etc.), a relação de aspeto da forma é exibida na parte inferior enquanto faz os seus ajustes. A informação instrutiva mostrada durante a utilização de algumas outras ferramentas foi também expandida.</p>
         <p xml:lang="pa">ਟੱਕਸ ਪੇਂਟ ਦਾ ਸ਼ਕਲਾਂ ਬਨਾਉਣ ਵਾਲਾ ਟੂਲ ਛੇ-ਭੁਜੀ (5-ਬਾਹੀਆਂ) ਅਤੇ ਸੱਤ-ਭੁਜੀ (7 ਬਾਹੀਆਂ) ਬਹੁ-ਭੁਜਾਂ ਬਣਾਉਣ ਲਈ ਮਦਦਗਾਰ ਹੈ। ਸ਼ਕਲਾਂ, ਜੋ ਕਿ ਖਿੱਚਿਆਂ ਜਾ ਸਕਦੀਆਂ (ਜਿਵੇਂ ਚਤੁਰਭੁਜ, ਅੰਡਾਕਾਰ ਆਦਿ), ਲਈ ਜਦੋਂ ਵੀ ਤੁਸੀਂ ਤਬਦੀਲੀ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹੋ ਤਾਂ ਸ਼ਕਲ ਦੇ ਅਨੁਸਾਰੀ ਅਨੁਪਾਤ ਨੂੰ ਹੇਠਾਂ ਦਿਖਾਇਆ ਜਾਂਦਾ ਹੈ। ਢਾਂਚਾ ਜਾਣਕਾਰੀ ਦਿਖਾਈ ਜਾਂਦੀ ਹੈ, ਜਦ ਕਿ ਕੁਝ ਹੋਰ ਟੂਲਾਂ ਵਿੱਚ ਵਾਧਾ ਵੀ ਕੀਤਾ ਗਿਆ ਹੈ।</p>
@@ -368,12 +390,14 @@
         <p xml:lang="ja">「かたち」ツールで、六角形と七角形が描けるようになりました。長方形、楕円など、引き伸ばせる図形は、下部に縦横比を表示しながら調整できるようになりました。その他、一部のツールで表示される操作説明も充実させました。</p>
         <p xml:lang="fr">L'outil 'Formes' offre maintenant de nouveaux polygones : hexagone (6 côtés) et heptagone (7 côtés). Pour les formes qui peuvent être agrandies (rectangle, ovale, etc ...), le rapport h/l est affiché en bas lorsque vous faites la modification.Des informations  sont également montrées pour d'autres outils.</p>
         <p xml:lang="ca">L'eina Formes ara ofereix hexàgon(6 cares) i heptàgon(7 cares). Les formes que es poden estirar informen a baix de la seva proporció. S'ha expandit també altres instruccions mostrades mentre es fa servir l'eina.</p>
+        <p xml:lang="bg">Инструментът за геометрични фигури вече предлага шестоъгълници и седмоъгълници. За геометрични фигури, които могат да бъдат разтегнати (правоъгълник, овал и други), пропорциите на фигурата са показани най-отдолу, докато се извършват промени. Инструкциите, показвани при използване на някои други инструменти, също са обогатени.</p>
         <p>Keyboard shortcuts, such as [Control]+[S] to save a drawing, are now accessed with the more traditional [⌘ Command] key when using Tux Paint on macOS. Sizing of Tux Paint's built-in on-screen keyboard has been improved. The look and feel of the user documentation has been improved.</p>
         <p xml:lang="pt">Teclas de atalho, tais como [Control]+[S] para guardar um desenho, são agora acedidos com a tecla mais tradicional [⌘ Command] quando se usa o Tux Paint no macOS. O dimensionamento do teclado Tux Paint incorporado no ecrã foi melhorado. O aspeto da documentação do utilizador foi melhorado.</p>
         <p xml:lang="nn">Snøggtastar, som «Ctrl + S» for lagring av teikninga, er no tilgjengeleg med den meir tradisjonelle «⌘»-tasten (kommando­tasten) på macOS. Storleiken på det innebygde skjerm­tastaturet er òg forbetra, og det same er hjelpefilene.</p>
         <p xml:lang="ja">macOS で Tux Paint を使用する場合、[Control]+[S] による図面の保存などのキーボードショートカットは、より標準的な [⌘ Command] キーでアクセスするようになりました。タックスペイントに内蔵された画面キーボードのサイズ調整が改良されました。ユーザードキュメントの見映えが改善されました。</p>
         <p xml:lang="fr">Des raccourcis clavier, tels que [Control]+[S] pour sauvegarder un dessin, sont maintenant accessibles avec la touche plus classique [commande ⌘] en utilisant Tux Paint avec macOS. La taille du clavier virtuel a été améliorée. La convivialité de la documentation utilisateur a été améliorée.</p>
         <p xml:lang="ca">Les dreceres de teclat, com [Control]+[S] per desar, ara en macOS s'accedeixen amb [⌘ Command]. La mida del teclat de pantalla integrat s'ha millorat i la documentació s'ha millorat.</p>
+        <p xml:lang="bg">Преки пътища на клавиатурата, като [Control]+[S] за запазване на рисунка, вече могат да се достъпват с по-традиционния [⌘ Command] клавиш, при използване на "Рисуване с Тъкс" на macOS. Размерът на вградената екранна клавиатура е подобрен, както и изгледът и удобството на потребителската документация.</p>
       </description>
     </release>
     <release version="0.9.27" date="2021-11-25">
@@ -384,24 +408,28 @@
         <p xml:lang="ja">「ふで」ツールと「せん」ツールは、線を描く角度に応じて回転するブラシをサポートするようになりました。この新しい回転機能は、これまでの方向を持つブラシやアニメーションするブラシと同様に、セレクタ上でわかりやすくに表示されるようになりました。また、塗りつぶしツールにはフリーハンドモードが追加され、塗りつぶしたい範囲にインタラクティブに色を塗ることができるようになりました。</p>
         <p xml:lang="fr">Les outils "Peindre" et "Ligne" comportent maintenant des pinceaux qui peuvent tourner suivant l'angle de déplacement. Cette nouvelle possibilité, tout comme les anciennes possibilité  d'animation et de direction du pinceau, sont maintenant indiquées dans le sélecteur de formes du pinceau. De plus, l'outil "Remplir" offre maintenant un mode de peinture à main levée pour colorier de manière interactive une aire déterminée.</p>
         <p xml:lang="ca">Les eines Pinta i Línies tenen pinzells que giren segons l'angle del traç. Aquesta nova característica, així com l'antiga de pinzells direccionals i la de pinzells animats es mostren visualment en el selector de pinzells. A més, l'eina Emplena ara ofereix un mode de pintat a mà alçada dintre d'una àrea confinada.</p>
+        <p xml:lang="bg">Инструментите за рисуване с боя, както и инструментите за линии в "Рисуване с Тъкс", вече поддържат четки, които се завъртат въз основа на ъгъла на щриха. Тази нова ротационна функция, както и старите функции за насочване и анимиране на четка, вече са визуално посочени от селектора за форма на четка. Допълнително, инструментът за запълване вече предлага режим за рисуване със свободна ръка, за интерактивно оцветяване в ограничени зони.</p>
         <p>Six new Magic tools have been added to Tux Paint. Panels shrinks and duplicates the drawing into a 2-by-2 grid, which is useful for making four-panel comics. Opposite produces complementary colors. Lightning interactively draws a lightning bolt. Reflection creates a lake-like reflection on the drawing. Stretch stretches and squashes the picture like a fun-house mirror. Lastly, Smooth Rainbow provides a more gradual variation of Tux Paint's classic Rainbow tool.</p>
         <p xml:lang="pt">Seis novas ferramentas de Magia foram adicionadas ao Tux Paint. Painéis encolhem e duplicam o desenho numa grelha 2 por 2, que é útil para fazer banda desenhada de quatro painéis. Oposto produz cores complementares. Relâmpago interativo desenha um relâmpago. Reflexão cria uma reflexão em forma de lago sobre o desenho. Esticar, estica o desenho como um espelho de uma casa divertida. Finalmente, o Arco-íris suave proporciona uma variação mais gradual da ferramenta clássica do Tux Paint Arco-íris.</p>
         <p xml:lang="nn">Seks nye magiske verktøy er lagde til: «Panel» krympar og lagar kopiar i eit 2 × 2-rutenett, som er nyttig for å laga teikneserie­ruter. «Motsett» gjer fargar om til komplementær­fargar. «Lyn» lèt deg teikna lyn. «Refleksjon» lèt deg laga vasspegling av teikninga. «Strekk» strekkjer og krympar teikninga, som i eit spegelhus på tivoli. «Jamn regnboge» er ein jamnare variant av det klassiske regnboge­verktøyet.</p>
         <p xml:lang="ja">6つの新しい「まほう」ツールが追加されました。「パネル」は、描画を 2×2 のグリッドに縮小して複製するので、4 コマ漫画の作成に便利です。「いろはんてん」は補色を生成します。「いなずま」 は、稲妻をインタラクティブに描画します。「はんしゃ」は、湖のような反射を描画します。「のびちぢみ」は、絵を伸ばしたり縮めたりすることができます。「なめらかなにじ」は、以前からある「にじ」ツールよりもスムーズなグラデーションの虹を描きます。</p>
         <p xml:lang="fr">Six nouveaux outils de "Magie" ont été ajoutés. 'Panneaux" contracte le dessin et le reproduit ensuite sur une grille de 2x2, ce qui est utile pour concevoir des B.D. sur quatre panneaux. "Complément" donne la couleur complémentaire. "Éclair" dessine un éclair de manière interactive. "Reflet" crée un reflet du dessin comme sur un lac. "Étirer" pour étirer et déformer l'image comme un miroir de foire. Et enfin, "Arc-en-ciel doux" fournit une variation plus douce que l'outil arc-en-ciel classique.</p>
         <p xml:lang="ca">S'ha afegit sis noves eines Màgiques. Panells encongeix i duplica el dibuix en una graella de 2x2, útil pe fer un còmic de quatre panells. Oposat produeix colors complementaris. Llamp dibuixa llamps interactivament. Reflexió crea una reflexió com la d'un llac. Estira estira i comprimeix la imatge com en una casa de miralls. Finalment, Colors suaus és una versió gradual de Colors de l'arc.</p>
+        <p xml:lang="bg">Шест нови "магически" инструмента са добавени към "Рисуване с Тъкс". "Панелите" смаляват и удвояват рисунката в 2-по-2 решетки, което е полезно при създаването на комикси с четири панела. "Обратно" произвежда допълващи се цветове. "Светкавица" интерактивно рисува светкавица. "Отражение" създава подобно на езеро отражение върху рисунката. "Разтягане" разтяга и смачква картината като на криво огледало. На последно място, "Гладка дъга" е постепенен вариант на класическия инструмент за дъга в "Рисуване с Тъкс".</p>
         <p>A number of existing Magic tools have been updated, as well. Improvements were made to Halftone, which simulates photographs on newsprint; Cartoon, which makes an image look like a cartoon drawing; and TV, which simulates a television screen. Additionally, Cartoon and Halftone, along with Blocks, Chalk, and Emboss, now offer the ability to alter the entire image at once!</p>
         <p xml:lang="pt">Foram também atualizadas várias ferramentas de Magia existentes. Foram feitos melhoramentos em Meio tom, que simula fotografias em papel de jornal; Desenho animado, que faz uma imagem parecer um desenho animado; e TV, que simula um ecrã de televisão. Além disso, Desenho animado e Meio tom, juntamente com Blocos, Giz e Relevo, oferecem agora a possibilidade de alterar toda a imagem de uma só vez!</p>
         <p xml:lang="nn">I tillegg er fleire eldre magiske verktøy oppdaterte. Forbetringar er gjorde for «Raster», som simulerer fotografi i aviser, «Forsterk», som gjer at teikningar ser ut som teikneseriar og «Fjernsyn», som simulerer ein (eldre) fjernsyns­skjerm. Det er òg no mogleg å køyra «Forsterk», «Raster» og «Blokk», «Krit» og «Relieff» på heile teikninga på ein gong.</p>
         <p xml:lang="ja">また、既存の「まほう」ツールの多くが改良されました。新聞紙に写真を貼ったような「ハーフトーン」、漫画のような画像にする「まんが」、テレビ画面のような「テレビ」などが改良されました。さらに、「まんが」「ハーフトーン」「ブロック」「チョーク」「うきぼり」では、画像全体を一度に変更できるようになりました。</p>
         <p xml:lang="fr">Un certain nombre d'outils "Magie" ont été mis à jour. Des améliorations ont été apportées à "Photogravure" qui simule des photographies sur un journal; "B.D." qui fait que l'image ressemble  à une bande dessinée et "TV' qui fait que l'image ressemble à une télévision ancienne. De plus, "B.D." et "Photogravure", tout comme "Blocs", "Craie" et "Relief" ont maintenant la possibilité de traiter l'image entière d'un seul coup !</p>
         <p xml:lang="ca">També s'ha actualitzat vàries eines Màgiques. S'ha millorat Semitons que simula fotografies d'un diari. Solidifica que transforma la imatge a colors sòlids, com en un còmic, i TV que emula una pantalla de televisió. A més, Solidifica i Semitons, així com Quadrets, Guix i Relleu ara poden alterar tota la imatge d'un cop!</p>
+        <p xml:lang="bg">Определен брой съществуващи "магически" инструменти също за надградени. Подобрения са направени при "Полутон", който симулира снимки на вестникарска хартия; "Анимация", който прави картината за изглежда като анимационна рисунка; и "Телевизор", който симулира телевизионен екран. Допълнително, "Анимация" и "Полутон", както и "Блокове", "Тебешир" и "Релеф", вече предлагат възможността за промяна на цялата картина наведнъж!</p>
         <p>Finally, Magic tools are now grouped into collections of similar effects — painting, distorts, color filters, picture warps, pattern painting, artistic, and picture decorations — making it easier to find the tool you need.</p>
         <p xml:lang="pt">Finalmente, as ferramentas de Magia estão agora agrupadas em coleções de efeitos semelhantes - pintura, distorções, filtros de cor, distorção de desenhos, pintura de padrões, artística e decoração de desenhos - tornando mais fácil encontrar a ferramenta de que necessita.</p>
         <p xml:lang="nn">Og til slutt er magiverktøya no grupperte i samlingar av liknande effektar – målingar, forvrenging, fargefilter, heilteikning-forvrenging, mønster­måling, kunst og pynt – slik at det vert lettare å finna verktøyet du treng.</p>
         <p xml:lang="ja">「まほう」ツールは、効果の特徴ごとにグループ分けされて、使いたいツールを簡単に見つけることができるようになりました。</p>
         <p xml:lang="fr">Pour finir, les outils 'Magie' sont regroupés en ensembles ayant des effets similaires - peindre, distorsions, filtres couleurs, déformations, motifs, art et décorations -- rendant plus facile la recherche de l'outil nécessaire.</p>
         <p xml:lang="ca">Finalment, les eines Màguiques s'han agrupat per funcionalitat, pintat, distorsions, filtres de color, deformacions, patrons, artístic i decoracions, fent més fàcil trobar l'eina que es cerca.</p>
+        <p xml:lang="bg">Последно, "магическите" инструменти са вече групирани по колекции със сходни ефекти - за рисуване, за изкривяване, за цветни филтри, за изкривяване на картини, за рисуване на шаблони, артистичен и за декорация на картини, правейки намирането на необходимия инструмент по-лесно.</p>
       </description>
     </release>
     <release version="0.9.26" date="2021-06-26">
@@ -412,24 +440,28 @@
         <p xml:lang="ja">塗りつぶしツールに、グラデーションで領域を塗りつぶすオプションが追加されました。「ほうしゃ」は、クリック位置を中心とした放射状のグラデーションを作成し、「リニア」は、さまざまな方向や大きさのグラデーションをインタラクティブに作成できます。</p>
         <p xml:lang="fr">L'outil 'Remplir' offre maintenant des options pour remplir une surface avec un gradient de couleur. L'option 'Radial' crée un gradient circulaire centré autour du clic de la souris, tandis que l'option 'Linéaire' permet de manière interactive la création de gradients d'angles et de tailles différents.</p>
         <p xml:lang="ca">L'eina Emplena ara ofereix opcions per omplir una àrea amb gradients de color. L'emplenat "Radial" crea un gradient circular centrat on s'ha fet clic i l'emplenat "Lineal" permet la creació de gradients de angles i mides diferents.</p>
+        <p xml:lang="bg">Инструментът за запълване на "Рисуване с Тъкс" вече предлага опции за запълване на площ с цветови градиенти. "Радиалното" запълване създава кръгъл градиент, центриран около позицията на мишката при кликване, докато "Линейното" запълване позволява интерактивното създаване на градиенти под различни ъгли и размери.</p>
         <p>New Magic tools have been added to Tux Paint: "Pixels" makes it easier to create retro-gaming style pixel art, "Checkerboard" fills the entire canvas with a check pattern, and "Clone" allows duplicating parts of the picture via brush strokes.</p>
         <p xml:lang="pt">Novas ferramentas de Magia foram adicionadas ao Tux Paint: "Píxeis" facilita a criação de arte píxel de estilo retro-jogo, "Xadrez" preenche toda a tela com um padrão de verificação, e "Clonar" permite duplicar partes da imagem através de pinceladas.</p>
         <p xml:lang="nn">Det er lagt til nokre nye magiske verktøy: «Pikslar» gjer det lettare å laga piksel­kunst i retrostil, «Sjakkbrett» fyller heile teikninga med eit sjakkbrett­mønster og «Klon» lèt deg kopiera delar av teikninga med ein pensel.</p>
         <p xml:lang="ja">新しい「まほう」ツールが追加されました。「ピクセル」はレトロゲーム風のピクセルアートを簡単に作成でき、「チェッカーボード」はキャンバス全体をチェック柄で塗りつぶし、「クローン」はマウス操作で絵の一部を複製することが可能です。</p>
         <p xml:lang="fr">De nouveaux outils 'Magie' ont été ajoutés : "Pixels" rend plus facile la création d'images de style retro-gaming, "Dalier" remplit la toile avec un damier, et "Clone" permet la duplication de parties de l'image avec des coups de pinceaux.</p>
         <p xml:lang="ca">S'ha afegit noves eines Màgiques: amb "Píxels" és més fàcil crear dibuixos píxel-art com els dels videojocs antics, "Escacs" omple el dibuix amb un tauler d'escacs, i "Clona" permet duplicar parts del dibuix a pinzellades.</p>
+        <p xml:lang="bg">Нови "магически" инструменти са добавени към "Рисуване с Тъкс": "Пиксели" прави създаването на рисунки в пиксели в стила на ретро-игри по-лесно, "Шахматна дъска" запълва цялото платно с образ на шахматна дъска, и "Копие" позволява дублиране на части от рисунката чрез щрихи.</p>
         <p>Tux Paint's user documentation has been overhauled, making localization easier. Parties interested in helping with localization are encouraged to contact the Tux Paint team.</p>
         <p xml:lang="pt">A documentação do utilizador do Tux Paint foi revista, tornando a localização mais fácil. As partes interessadas em ajudar na localização são encorajadas a contactar a equipa do Tux Paint.</p>
         <p xml:lang="nn">Hjelpefilene har fått ei overhaling, som òg gjer det lettare å omsetja ho til nye språk. Er du interessert i å hjelpa til, ta kontakt med Tux Paint-utviklarane.</p>
         <p xml:lang="ja">ユーザードキュメントが一新され、各種言語への翻訳がより簡単になりました。翻訳にご興味のある方は、タックスペイントチームまでご連絡ください。</p>
         <p xml:lang="fr">La documentation de Tux Paint a été revue, rendant la localisation plus facile. Ceux qui sont intéressés pour nous aider sont invités à prendre contact avec l'équipe de Tux Paint.</p>
         <p xml:lang="ca">La documentació s'ha retreballat, fent més senzilla la feina de localització. Qui vulgui ajudar en la localització està encoratjat a posar-se en contacte amb l'equip del Tux Paint.</p>
+        <p xml:lang="bg">Потребителската документация на "Рисуване с Тъкс" е преработена, което прави локализацията по-лесна. Тези, които желаят да помогнат с локализиране, са насърчени да се свържат с екипа на "Рисуване с Тъкс".</p>
         <p>Finally, a new pair of accessibility options have been added. The entire user interface can now be enlarged benefiting users with impaired vision, and making the program more suitable to very high density displays. This feature, along with a new option to re-organize the color palette, can also be helpful to users of coarse input devices, such as eye-gaze tracking systems.</p>
         <p xml:lang="pt">Finalmente, foi adicionado um novo par de opções de acessibilidade. Toda a interface do utilizador pode agora ser alargada, beneficiando os utilizadores com deficiência visual, e tornando o programa mais adequado a ecrãs de densidade muito elevada. Esta funcionalidade, juntamente com uma nova opção para reorganizar a paleta de cores, também pode ser útil aos utilizadores de dispositivos ásperos, tais como sistemas de rastreio ocular.</p>
         <p xml:lang="nn">Og til slutt er det nokre forbetringar som gjeld universell utforming. Heile brukar­grensesnittet kan no forstørrast, noko som gjer programmet lettare å bruka for personar med synsvanskar eller på skjermar med høg oppløysing. Denne funksjonen, saman med den nye mogleg­heita for å reorganisera farge­paletten, kan òg vera nyttig for brukarar med unøyaktige styre­einingar, for eksempel dei som brukar augestyring.</p>
         <p xml:lang="ja">新しいアクセシビリティオプションが追加されました。ユーザーインターフェース全体を拡大表示できるようになり、昨今の高解像度ディスプレイにおいても視力の弱いユーザーに適したソフトウェアになっています。この機能は、カラーパレットを再構成する新しいオプションとともに、視線追跡システムのような、細かい操作が難しい入力デバイスを利用するユーザーにも役立ちます。</p>
         <p xml:lang="fr">Pour finir, de nouvelles options concernant l'accessibilité ont été ajoutées Toute l'interface utilisateur a été agrandie pour les utilisateurs qui ont des problèmes de vision,  et le programme a été modifié pour avoir un affichage à très haute densité. Cette possibilité, en parallèle avec l'option pour réorganiser la palette de couleurs, peut être utile aux utilisateurs ayant un dispositif de pointage imprécis, comme les systèmes avec suivi oculaire.</p>
         <p xml:lang="ca">Finalment, s'ha afegit un parell d'opcions d'accessibilitat. La interfície d'usuari es pot expandir beneficiant usuaris amb problemes de visió, i fent el programa més apte en pantalles d'alta densitat. Aquesta característica, juntament amb una nova opció per reorganitzar la paleta de colors pot ajudar qui utilitzi punters amb poca precisió, com els ratolins que es fan anar amb la mirada.</p>
+        <p xml:lang="bg">Последно, нов чифт от опции за достъпност са добавени. Целият потребителски интерфейс може вече да бъде уголемен, в полза на потребители с увредено зрение и позволявайки на програмата да бъде по-подходяща за дисплеи с много висока плътност. Тази функция, заедно с новата опция за реорганизиране на цветовата палитра, може да бъде в полза на потребители с груби входящи устройства, като например системи за контрол чрез поглед.</p>
       </description>
     </release>
     <release version="0.9.25" date="2020-12-30">
@@ -440,18 +472,21 @@
         <p xml:lang="ja">図形ツールの大きな改良点として、図形を中心から描くか端から描くかを選択できるようになり、あらゆる場面で使いやすくなりました。</p>
         <p xml:lang="fr">Une amélioration majeure a été apportée à l'outil 'Formes', qui permet de choisir si les formes sont dessinées depuis le centre ou un coin, facilitant ainsi son usage dans toutes les situations.</p>
         <p xml:lang="ca">L'eina Formes s'ha millorat, ara presenta opcions per triar si la forma es dibuixa des del centre o des d'una cantonada, fent més senzill de fer-la servir en totes les situacions.</p>
+        <p xml:lang="bg">Главно подобрение е направено за инструмента за геометрични фигури, който вече предоставя опции за избор дали фигурите ще бъдат рисувани от центъра или от ъгъл, правейки лесно използването му във всяка ситуация.</p>
         <p>The on-screen keyboard, an accessibility feature optionally available when using the Text and Label tools, now appears larger on bigger displays; helpful for users of coarser input devices, such as eye-tracking systems.</p>
         <p xml:lang="pt">O teclado no ecrã, uma funcionalidade de acessibilidade disponível opcionalmente quando se utilizam as ferramentas de Texto e Etiqueta, aparece agora maior em ecrãs maiores; útil para utilizadores de dispositivos mais ásperos, tais como sistemas de rastreio ocular.</p>
         <p xml:lang="nn">Skjermtastaturet, som er tilgjengeleg når du brukar tekst- og merkelapp­verktøya, vert no vist større på nokre skjermar. Dette er nyttig for brukarar med unøyaktige styre­einingar, for eksempel dei som brukar augestyring.</p>
         <p xml:lang="ja">画面キーボードは画面のサイズに応じて大きく表示されるようになり、視線入力システムなどの細かい操作が難しい入力デバイスを利用するユーザーにとって使いやすくなりました。</p>
         <p xml:lang="fr">Le clavier virtuel, disponible sur option quand on utilise les outils "Texte" et "Étiquette" , apparaît plus grand sur des écrans plus grand; c'est utile avec des des dispositifs d'entrée moins précis, tels que systèmes pilotés avec les yeux.</p>
         <p xml:lang="ca">El teclat en pantalla, una característica d'accessibilitat disponible en les eines Text i Etiquetes, ara és més gran en pantalles grans. Útil per qui utilitzi punters amb poca precisió, com els ratolins que es fan anar amb la mirada.</p>
+        <p xml:lang="bg">Екранната клавиатура, функция за достъпност, налична по избор при използване на инструментите за текст и етикети, вече изглежда по-голяма на по-големи дисплеи; в полза на потребители с груби входящи устройства, като например системи за контрол чрез поглед.</p>
         <p>The Eraser tool adds new, smaller eraser sizes, and applies smoother, contiguous strokes when the pointer is moved quickly.</p>
         <p xml:lang="pt">A ferramenta Borracha adiciona novos tamanhos de borracha mais pequenos, e aplica traços mais suaves e contíguos quando o ponteiro é movido rapidamente.</p>
         <p xml:lang="nn">Viskelêrverktøyet har no nokre nye og mindre storleikar, som gjev jamnare strøk når du flyttar penselen raskt.</p>
         <p xml:lang="ja">「けしゴム」ツールには、新たに小さな消しゴムサイズが追加され、ポインターを素早く動かしたときに、より滑らかで連続した動きをするようになりました。</p>
         <p xml:lang="fr">Le nouvel outil 'Gomme' vient avec des tailles plus petites, et permet d'appliquer des touches rapprochées plus douces quand le pointeur est bougé de manière rapide.</p>
         <p xml:lang="ca">L'eina Esborra afegeix noves gomes, més petites, i esborra més suaument quan el ratolí es mou ràpid.</p>
+        <p xml:lang="bg">Гумичката съдържа нови, по-малки размери, и прилага по-гладки, съседни щрихи, когато курсора е преместен бързо.</p>
         <p>Finally, this newest version adds options to export individual drawings and GIF animations, making it easy to share pictures, cartoons, and slideshows with others.</p>
         <p xml:lang="pt">Finalmente, esta versão mais recente adiciona opções para exportar desenhos individuais e animações GIF, facilitando a partilha de desenhos, desenhos animados e apresentações de diapositivos com outros.</p>
         <p xml:lang="pa">ਆਖਰ ਵਿੱਚ, ਇਹ ਨਵੇਂ ਵਰਜ਼ਨ ਵਿੱਚ ਇਕੱਲੀਆਂ ਡਰਾਇੰਗਾਂ ਤੇ GIF ਐਨੀਮੇਸ਼ਨਾਂ ਨੂੰ ਐਕਸਪੋਰਟ ਕਰਨ ਦੀ ਚੋਣ ਜੋੜੀ ਗਈ ਹੈ, ਜਿਸ ਨਾਲ ਤਸਵੀਰਾਂ, ਕਾਰਟੂਨਾਂ ਤੇ ਸਲਾਈਡ-ਸ਼ੋਅ ਹੋਰਾਂ ਨਾਲ ਸਾਂਝਾ ਕਰਨਾ ਸੌਖਾ ਹੋ ਗਿਆ ਹੈ।</p>
@@ -459,6 +494,7 @@
         <p xml:lang="ja">最新バージョンでは、個々の作品やGIFアニメーションをエクスポートするオプションが追加され、作品を簡単に他の人と共有することができます。</p>
         <p xml:lang="fr">Et enfin, cette nouvelle version ajoute des options pour exporter des dessins et des animations GIF, facilitant ainsi le parage d'images, de B.D. et de diaporamas.</p>
         <p xml:lang="ca">Finalment, aquesta nova versió afegeix opcions per exportar dibuixos individuals i animacions GIF, fent més fàcil compartir dibuixos, còmics i presentacions de diapositives amb els altres.</p>
+        <p xml:lang="bg">Последно, тази най-нова версия добавя опции за експортиране на отделни рисунки и GIF анимации, правейки лесно споделянето на картини, анимации и слайд шоута с други.</p>
       </description>
     </release>
     <release version="0.9.24" date="2020-05-31">
@@ -469,6 +505,7 @@
         <p xml:lang="ja">これまでは「まほう」ツールに含まれていた塗りつぶしツールを、見つけやすくなるよう、メインのツールバーに移動しました。また、起動時や「さいしょから」ダイアログを表示する際のパフォーマンスの改善も行われています。また、「さいしょから」ダイアログで様々なテンプレート画像の方を目立たせたい場合には、単色のキャンバスを末尾に配置することができるようになりました。</p>
         <p xml:lang="fr">La dernière version met en avant l'outil "Remplir", que l'on trouvait auparavant dans la partie "Magie" de Tux Paint, et on le trouve dans la barre d'outil principale où il est plus facile d'accès. Elle inclut aussi quelques améliorations de performance au démarrage et lorsque l'on fait appel à la commande "Nouveau". Les couleurs unies peuvent être mises à la fin du dialogue pour permettre d'accéder directement aux images modèles.</p>
         <p xml:lang="ca">La darrera versió ha promogut l'eina "Emplena" amb les eines principals, previament estava dins les eines Màgiques. També inclou millores en l'arrencada i en obrir el diàleg de dibuix "Nou". Els colors sòlids es poden situar al final del diàleg, enfatitzant les imatges.</p>
+        <p xml:lang="bg">Последната версия премества инструмента за запълване, по-рано намиращ се при секцията за "Магия" в "Рисуване с Тъкс", към главната лента с инструменти, където е по-лесен за намиране. Също включва някои подобрения на производителността по време на стартиране и при показване на диалога за нова рисунка. Плътните цветове за фон също могат да бъдат поставени към края на този диалог, позволявайки подчертаване на шаблонни изображения.</p>
         <p>Tux Paint also now makes it possible to disable stereo sound, which can benefit users with a hearing impairment, or in situations where only one speaker is available.</p>
         <p xml:lang="pt">O Tux Paint também permite agora desativar o som estéreo, o que pode beneficiar os utilizadores com uma deficiência auditiva, ou em situações em que apenas está disponível uma coluna.</p>
         <p xml:lang="pa">ਟੱਕਸ ਪੇਂਟ ਨੇ ਹੁਣ ਸਟੀਰਿਓ ਸਾਊਂਢ ਨੂੰ ਅਸਮਰੱਥ ਕਰਨਾ ਸੰਭਵ ਕੀਤਾ ਹੈ, ਜਿਸ ਨਾਲ ਬੋਲੇ ਵਰਤੋਂਕਾਰਾਂ ਨੂੰ ਜਾਂ ਜਿੱਥੇ ਸਿਰਫ਼ ਇੱਕ ਸਪੀਕਰ ਮੌਜੂਦ ਹੋਵੇ, ਉੱਥੇ ਫਾਇਦਾ ਹੋ ਸਕਦਾ ਹੈ।</p>
@@ -476,6 +513,7 @@
         <p xml:lang="ja">また、聴覚に障害のあるユーザーや、スピーカーが1つしかない場合に有効な、ステレオサウンドの無効化も可能になりました。</p>
         <p xml:lang="fr">Il est possible maintenant de désactiver la stéréophonie, ce qui rend service à ceux qui ont des problèmes d'audition, ou bien lorsqu'il n' a qu'un seul haut-parleur.</p>
         <p xml:lang="ca">Ara també és possible desactivar el so estèreo, pot beneficiar ususaris amb problemes d'audició o en situacions on només hi ha disponible un sol altaveu.</p>
+        <p xml:lang="bg">“Рисуване с Тъкс" също вече позволява деактивирането на стерео звук, което може да бъде от полза на потребители със слухово увреждане, или в ситуации, където само един говорител е наличен.</p>
       </description>
     </release>
     <release version="0.9.23" date="2018-09-02">
@@ -486,12 +524,14 @@
         <p xml:lang="ja">このバージョンでは、マウスを用いて画像の中の任意の色を選択できる「カラーピッカー」と、「かたち」ツールに、三芒星、四芒星、五芒星が新たに追加されています。</p>
         <p xml:lang="fr">Nouvellement dans cette version sont une " pipette à couleur ", qui permet de choisir toute couleur dans un dessin, et un ensemble d'étoiles à trois, quatre et cinq branches.</p>
         <p xml:lang="ca">En aquesta versió hi ha un selector de color nou que permet triar qualsevol color existent al dibuix, i estrelles de tres, quatre i cinc puntes en l'eina Formes.</p>
+        <p xml:lang="bg">Нови в тази версия са пипетката, която позволява всеки цвят в рисунка да бъде избран чрез курсора, и набор от трилъчеви, четирилъчеви и петолъчни звезди.</p>
         <p>The latest version also incorporates a number of new translations, bringing the number of supported languages up to nearly 130: Bengali, Bodo, Dogri, Kabyle, Urdu, and Devanagari and Perso-Arabic variations of Kashmiri and Sindhi. Thirty other translations have been updated, as well.</p>
         <p xml:lang="pt">A última versão incorpora também uma série de novas traduções, elevando o número de idiomas suportados para quase 130: Bengali, Bodo, Dogri, Kabyle, Urdu, e Devanagari e variações perso-arábicas de Kashmiri e Sindhi. Trinta outras traduções foram também atualizadas.</p>
         <p xml:lang="nn">Denne versjonen er òg omsett til fleire nye språk: bengali, bodo, dogri, kabylsk, urdu og devanagari- og persiske variantar av kasjmiri og sindhi. Talet på (delvis) støtta språk er no nesten 130. I tillegg er 30 gamle omsetjingar oppdaterte.</p>
         <p xml:lang="ja">また、最新版では、対応する言語は130近くまで増えました。新たに翻訳が追加された言語は、ベンガル語、ボド語、ドグリ語、カビル語、ウルドゥー語、また、デーヴァナーガリー及びペルソ・アラビア語バリエーションのカシミール語、そしてシンド語です。その他にも、30種類の翻訳が更新されました。</p>
         <p xml:lang="fr">La dernière version comprend également de nouvelles traductions, portant ainsi le nombre de langues supportées à presque 130 : Bengali, Bodo, Dogri, Kabyle, Urdu et Devanagari , ainsi que des variations Perso-Arabic du Kashmiri et du Sindhi. Trente autres traductions ont été mises à jour.</p>
         <p xml:lang="ca">La darrera versió incorpora també un bon nombre de traduccions noves, pujant fins a prop de 130 el nombre de llenguatges suportats: Bengalí, Bodo, Dogri, Cabil, Urdú i Devanagari i Perso-Aràbic variants de Caixmir i Sindhi.S'ha actualitzat també trenta altres llengues.</p>
+        <p xml:lang="bg">Последната версия също включва брой нови преводи, привеждайки броят на поддържаните езици до около 130; бенгалски, бодо, догри, кабилски, урду и деванагари и персо-арабски варианти на кашимирски и синдхи. 30 други превода също са актуализирани.</p>
       </description>
     </release>
     <release version="0.9.22" date="2014-08-23"/>

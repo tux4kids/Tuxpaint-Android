@@ -1,10 +1,10 @@
                                    Tux Paint
                   version 0.9.29 Questions fréquemment posées
 
-        Copyright © 2002-2022 by divers contributeurs; see AUTHORS.txt.
+        Copyright © 2002-2023 by divers contributeurs; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                  juin 4, 2022
+                                 mars 16, 2023
 
      ----------------------------------------------------------------------
 
@@ -61,22 +61,6 @@ Liées au dessin
            Modifiez / supprimez l'option "nostamps" ou remplacez-la par
            "--stamps" sur la ligne de commande ou "nostamps=no" ou
            "stamps=yes" dans un des fichiers de configuration.
-
-   L'outil magique "Remplir" semble mauvais
-
-           Tux Paint compare probablement les couleurs exactes des pixels
-           lors du remplissage. C'est plus rapide, mais semble pire. Exécutez
-           la commande "tuxpaint --verbose-version" à partir d'une ligne de
-           commande, et vous devriez voir, parmi les autres résultats: "Low
-           Quality Flood Fill enabled".
-
-           Pour changer cela, vous devez reconstruire Tux Paint à partir des
-           sources. Assurez-vous de supprimer ou de commenter toute ligne qui
-           dit :
-
-             #define LOW_QUALITY_FLOOD_FILL
-
-           dans le fichier "tuxpaint.c" du répertoire "src".
 
    Les contours des tampons sont toujours des rectangles
 

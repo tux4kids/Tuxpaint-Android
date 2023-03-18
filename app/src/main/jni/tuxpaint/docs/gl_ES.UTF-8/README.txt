@@ -5,10 +5,8 @@
 
         Copyright © 2002-2023 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
-                           @TuxPaintTweets on Twitter
-                              Tux Paint on Tumblr
 
-                              4 de Xaneiro de 2023
+                              16 de Marzo de 2023
 
          +-----------------------------------------------------------+
          |Índice                                                     |
@@ -54,15 +52,6 @@ Que é «Tux Paint»?
    variedade de ferramentas de debuxo para axudar ao seu cativo a ser
    creativo.
 
-Licenza
-
-   Tux Paint é un proxecto de código aberto, software libre publicado baixo a
-   licenza pública xeral GNU (GPL). É de balde e o «código fonte» detrás do
-   programa está dispoñíbel. (Isto permite a outras persoas engadir funcións,
-   corrixir erros e usar partes do programa no seu propio software GPL).
-
-   Consulte o texto completo da licenza GPL en COPYING.txt.
-
 Objectives
 
    Doado e divertido
@@ -93,6 +82,53 @@ Objectives
            crear nomes de ficheiro nin usar o teclado. A apertura dunha imaxe
            faise seleccionándoa nunha colección de miniaturas. O acceso a
            outros ficheiros da computadora está restrinxido.
+
+Licenza
+
+   Tux Paint é un proxecto de código aberto, software libre publicado baixo a
+   licenza pública xeral GNU (GPL). É de balde e o «código fonte» detrás do
+   programa está dispoñíbel. (Isto permite a outras persoas engadir funcións,
+   corrixir erros e usar partes do programa no seu propio software GPL).
+
+   Consulte o texto completo da licenza GPL en COPYING.txt.
+
+What's New in Tux Paint version 0.9.29?
+
+   Stamp tool update
+           Stamps may be rotated before being applied to the canvas
+
+   Shapes tool update
+           Improvements to Shapes tool behavior when using the "from the
+           corner" stretching mode
+
+   New Fill tool
+           A shaped gradient mode has been added to the Fill tool
+
+   Fifteen new Magic tools
+           Maze, Googly Eyes, Fur, Circles, Rays, 3D Glasses, Color Sep.,
+           Saturate, Desaturate, Remove Color, Keep Color, Kaleido-4,
+           Kaleido-6, Kaleido-8, Bloom
+
+   Eraser shortcut
+           A keyboard shortcut is available for quick access to the Eraser
+           tool
+
+   Rainbow Palette update
+           The chosen built-in color, Color Picker (pipette tool) color, or
+           Color Mixer color can be loaded into the Rainbow Palette dialog
+
+   Quick Start Guide created
+           A new Quick Start Guide explains the basic usage of Tux Paint
+
+   Other changes
+              * Drawings removed using the Open dialog's Erase button are
+                moved to the system's Trash can on macOS
+              * Starter and Template images offer scaling, to avoid smearing
+                on the edges
+              * The "buttonsize" interface size option now offers an "auto"
+                option
+
+   See CHANGES.txt for the complete list of changes.
 
                                 Uso de Tux Paint
 
@@ -1154,10 +1190,25 @@ Importar imaxes manualmente
    Para obter máis información, visite a páxina «Colabora connosco» do sitio
    web oficial de Tux Paint: https://tuxpaint.org/help/
 
+                  Follow the Tux Paint project on social media
+
+   Tux Paint maintains a presence on a variety of social media networks,
+   where we post updates and artwork.
+     * Join the Tux Paint page on Facebook
+     * Follow @TuxPaintDevs on Instagram
+     * Follow @tuxpaint@floss.social on Mastodon
+     * Follow u/TuxPaintDevs on Reddit
+     * Follow Tux Paint on Tumblr
+     * Follow @TuxPaintTweets on Twitter
+
                                Trademark notices
 
      * "Linux" is a registered trademark of Linus Torvalds.
      * "Microsoft" and "Windows" are registered trademarks of Microsoft Corp.
      * "Apple" and "macOS" are registered trademarks of Apple Inc.
-     * "Twitter" is a registered trademark of Twitter, Inc.
+     * "Facebook" and "Instagram" are registered trademarks of Meta
+       Platforms, Inc.
+     * "Mastodon" is a registered trademark of Mastodon gGmbH.
+     * "Reddit" is a registered trademark of Reddit, Inc.
      * "Tumblr" is a registered trademark of Tumblr, Inc.
+     * "Twitter" is a registered trademark of Twitter, Inc.

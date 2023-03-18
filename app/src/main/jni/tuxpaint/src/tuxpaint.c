@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - March 7, 2023
+  June 14, 2002 - March 15, 2023
 */
 
 #include "platform.h"
@@ -4127,7 +4127,6 @@ static void mainloop(void)
                */
 
               scrolling_tool = 1;
-              SDL_InitSubSystem(SDL_INIT_TIMER);
               scrolltimer_tool =
                 SDL_AddTimer(REPEAT_SPEED, scrolltimer_tool_callback,
                              (void *) &scrolltimer_tool_event);
@@ -5021,7 +5020,6 @@ static void mainloop(void)
                    */
 
                   scrolling_selector = 1;
-                  SDL_InitSubSystem(SDL_INIT_TIMER);
                   scrolltimer_selector =
                     SDL_AddTimer(REPEAT_SPEED, scrolltimer_selector_callback,
                                  (void *) &scrolltimer_selector_event);
@@ -5048,7 +5046,6 @@ static void mainloop(void)
                       scrolltimer_selector = TIMERID_NONE;
                     }
                     scrolling_selector = 0;
-                    SDL_QuitSubSystem(SDL_INIT_TIMER);
                   }
                 }
               }
@@ -6190,7 +6187,6 @@ static void mainloop(void)
             scrolltimer_selector = TIMERID_NONE;
           }
           scrolling_selector = 0;
-          SDL_QuitSubSystem(SDL_INIT_TIMER);
 
           DEBUG_PRINTF("Killing selector scrolling\n");
         }
@@ -6203,7 +6199,6 @@ static void mainloop(void)
             scrolltimer_tool = TIMERID_NONE;
           }
           scrolling_tool = 0;
-          SDL_QuitSubSystem(SDL_INIT_TIMER);
 
           DEBUG_PRINTF("Killing tool scrolling\n");
         }
@@ -15240,30 +15235,66 @@ static int do_prompt_image_flash_snd(const char *const text,
   SDL_FillRect(backup, NULL, SDL_MapRGBA(backup->format, 255, 255, 255, 255));
   SDL_BlitSurface(screen, NULL, backup, NULL);
 
-  for (w = 0; w <= r_ttools.w; w = w + 2)
+  /*
+  * This loop creates an animation effect of the dialog box popping up.  To
+  * ensure the animation plays at the same speed regardless of the platform and
+  * resource available at the time, capture the rate at which each frame is
+  * being drawn and draw the next frame at the adaptive rate.
+  */
   {
-    oox = ox - w;
-    ooy = oy - w;
+    Uint32 anim_ms = 120;
+    Uint32 last_ms = SDL_GetTicks();
 
-    nx = PROMPT_LEFT + r_ttools.w - w + PROMPTOFFSETX;
-    ny = 2 + canvas->h / 2 - w;
+    w = 0;
 
-    dest.x = ((nx * w) + (oox * (r_ttools.w - w))) / r_ttools.w;
-    dest.y = ((ny * w) + (ooy * (r_ttools.w - w))) / r_ttools.w;
-    dest.w = (PROMPT_W - r_ttools.w * 2) + w * 2;
-    dest.h = w * 2;
-    SDL_FillRect(screen, &dest,
-                 SDL_MapRGB(screen->format, 224 - (int) (w / button_scale),
-                            224 - (int) (w / button_scale),
-                            244 - (int) (w / button_scale)));
+    while(w <= r_ttools.w)
+    {
+      Uint32 next_ms = 0;
+      Uint32 dw = 0;
 
-    SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+      oox = ox - w;
+      ooy = oy - w;
 
-    if ((w % 8) == 0)
-      SDL_Delay(1);
+      nx = PROMPT_LEFT + r_ttools.w - w + PROMPTOFFSETX;
+      ny = 2 + canvas->h / 2 - w;
 
-    if (w == r_ttools.w - 2)
-      SDL_BlitSurface(backup, NULL, screen, NULL);
+      dest.x = ((nx * w) + (oox * (r_ttools.w - w))) / r_ttools.w;
+      dest.y = ((ny * w) + (ooy * (r_ttools.w - w))) / r_ttools.w;
+      dest.w = (PROMPT_W - r_ttools.w * 2) + w * 2;
+      dest.h = w * 2;
+      SDL_FillRect(screen, &dest,
+                   SDL_MapRGB(screen->format, 224 - (int) (w / button_scale),
+                              224 - (int) (w / button_scale),
+                              244 - (int) (w / button_scale)));
+
+      SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+
+      /* Calculate the amount by which to move to the next animation frame */
+      if(w < r_ttools.w-2) {
+        while(1) {
+          next_ms = SDL_GetTicks();
+          dw = ((next_ms - last_ms) * r_ttools.w + r_tools.w/2) / anim_ms;
+          if(dw) break;
+
+          /* This platform is so fast that there is no new frame to draw.
+           * Yield some time then recalculate the next frame. */
+          SDL_Delay(1);
+        }
+        w += dw;
+        w = min(w, r_ttools.w-2);
+        last_ms = next_ms;
+      }
+      else if(w == r_ttools.w-2) {
+        /* Draw the dialog box. The dialog box is drawn 1 frame before the last
+         * frame because the last frame draws the top and left borders.  We
+         * also skip a frame for artistic reasons. */
+        SDL_BlitSurface(backup, NULL, screen, NULL);
+        w += 2;
+      }
+      else {
+        w += 2;
+      }
+    }
   }
 
   SDL_FreeSurface(backup);
@@ -18220,15 +18251,7 @@ static int do_open(void)
                          sizeof(SDL_Event));
                   scrolltimer_dialog_event.type = TP_SDL_MOUSEBUTTONSCROLL;
 
-                  /*
-                   * We enable the timer subsystem only when needed (e.g., to use SDL_AddTimer() needed
-                   * for scrolling) then disable it immediately after (e.g., after the timer has fired or
-                   * after SDL_RemoveTimer()) because enabling the timer subsystem in SDL1 has a high
-                   * energy impact on the Mac.
-                   */
-
                   scrolling_dialog = 1;
-                  SDL_InitSubSystem(SDL_INIT_TIMER);
                   scrolltimer_dialog =
                     SDL_AddTimer(REPEAT_SPEED, scrolltimer_dialog_callback,
                                  (void *) &scrolltimer_dialog_event);
@@ -18441,7 +18464,6 @@ static int do_open(void)
                 scrolltimer_dialog = TIMERID_NONE;
               }
               scrolling_dialog = 0;
-              SDL_QuitSubSystem(SDL_INIT_TIMER);
               DEBUG_PRINTF("Killing dialog scrolling\n");
             }
           }
@@ -19443,15 +19465,7 @@ static int do_slideshow(void)
             memcpy(&scrolltimer_dialog_event, &event, sizeof(SDL_Event));
             scrolltimer_dialog_event.type = TP_SDL_MOUSEBUTTONSCROLL;
 
-            /*
-             * We enable the timer subsystem only when needed (e.g., to use SDL_AddTimer() needed
-             * for scrolling) then disable it immediately after (e.g., after the timer has fired or
-             * after SDL_RemoveTimer()) because enabling the timer subsystem in SDL1 has a high
-             * energy impact on the Mac.
-             */
-
             scrolling_dialog = 1;
-            SDL_InitSubSystem(SDL_INIT_TIMER);
             scrolltimer_dialog =
               SDL_AddTimer(REPEAT_SPEED, scrolltimer_dialog_callback,
                            (void *) &scrolltimer_dialog_event);
@@ -19716,7 +19730,6 @@ static int do_slideshow(void)
             scrolltimer_dialog = TIMERID_NONE;
           }
           scrolling_dialog = 0;
-          SDL_QuitSubSystem(SDL_INIT_TIMER);
           DEBUG_PRINTF("Killing dialog scrolling\n");
         }
       }
@@ -23792,7 +23805,6 @@ static int do_new_dialog(void)
                */
 
               scrolling_dialog = 1;
-              SDL_InitSubSystem(SDL_INIT_TIMER);
               scrolltimer_dialog =
                 SDL_AddTimer(REPEAT_SPEED, scrolltimer_dialog_callback,
                              (void *) &scrolltimer_dialog_event);
@@ -23945,7 +23957,6 @@ static int do_new_dialog(void)
             scrolltimer_dialog = TIMERID_NONE;
           }
           scrolling_dialog = 0;
-          SDL_QuitSubSystem(SDL_INIT_TIMER);
           DEBUG_PRINTF("Killing dialog scrolling\n");
         }
       }
@@ -30162,7 +30173,7 @@ static void setup(void)
   if (joystick_dev != -1)
     do_lock_file();
 
-  init_flags = SDL_INIT_VIDEO | SDL_INIT_JOYSTICK;
+  init_flags = SDL_INIT_VIDEO | SDL_INIT_JOYSTICK | SDL_INIT_TIMER;
   if (use_sound)
     init_flags |= SDL_INIT_AUDIO;
   if (!fullscreen)

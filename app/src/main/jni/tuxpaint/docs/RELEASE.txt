@@ -1,5 +1,5 @@
 Release checklist for Tux Paint
-Last updated 2022-12-24 -bjk
+Last updated 2023-03-16 -bjk
 
 During development
 ------------------
@@ -31,7 +31,7 @@ a .tar.gz source tarball, and making the tarball available for download.
      * docs/CHANGES.txt
 
    * Metainfo file: (add entry for new version's changes)
-     * org.tuxpaint.Tuxpaint.appdata.xml.in
+     * src/org.tuxpaint.Tuxpaint.appdata.xml.in
 
    * Other Documentation
 
@@ -39,6 +39,13 @@ a .tar.gz source tarball, and making the tarball available for download.
      is now maintained in a separate source-code repository,
      "tuxpaint-docs".  Updates should be made there, and
      then copied over to the "tuxpaint" repository.
+
+     No matter what else might need to happen, these always need updating
+     ahead of a new release:
+
+     * Update version number in doc-src/include.php
+     * Update What's New section in doc-src/README/README-whatsnew.php
+       (things worth mentioning in the press release on the website)
 
      Here, be sure to run "make" in "docs/", to produce plaintext
      alternatives of the HTML files.
@@ -50,7 +57,10 @@ a .tar.gz source tarball, and making the tarball available for download.
      * docs/en/html/ADVANCED-STAMPS-HOWTO.html
 
    * Manual page (manpage)
-     * src/manpage/tuxpaint.1
+
+     NOTE: Also maintained in "tuxpaint-docs" now; see above.
+
+     * man/tuxpaint.1
 
  * Rebuild 'tuxpaint.desktop' by running "update-po.sh" in "src/po/"
 
@@ -113,6 +123,8 @@ Website updates
  * List new features on https://tuxpaint.org/features/
 
  * Add any new requirements to https://tuxpaint.org/requirements/
+
+ * Create a press release under https://tuxpaint.org/latest/
 
 Announcements
 -------------

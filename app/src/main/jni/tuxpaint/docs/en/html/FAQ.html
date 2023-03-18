@@ -20,12 +20,12 @@
         version 0.9.29        Frequently Asked Questions      </h1>
 
       <p>
-        Copyright &copy; 2002-2022 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        Copyright &copy; 2002-2023 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
       <p>
-        June  4, 2022      </p>
+        March 16, 2023      </p>
     </center>
 
     <hr size="2"
@@ -105,26 +105,6 @@
 
         <p>
           Either change/remove the "nostamps" option, or you can override it with "<code>--stamps</code>" on the command line or either "<code>nostamps=no</code>" or "<code>stamps=yes</code>" in a configuration file.        </p>
-      </dd>
-
-      <dt>
-        The "Fill" Tool Looks Bad      </dt>
-
-      <dd>
-        <p>
-          Tux Paint is probably comparing exact pixel colors when filling. This is faster, but looks worse. Run the command "<code>tuxpaint --verbose-version</code>" from a command line, and you should see, amongst the other output: "Low Quality Flood Fill enabled".        </p>
-
-        <p>
-          To change this, you must rebuild Tux Paint from source. Be sure to remove or comment out any line that says:        </p>
-
-        <blockquote>
-          <p>
-            <code>#define LOW_QUALITY_FLOOD_FILL</code>
-          </p>
-        </blockquote>
-
-        <p>
-          in the "tuxpaint.c" file in the "src" directory.        </p>
       </dd>
 
       <dt>

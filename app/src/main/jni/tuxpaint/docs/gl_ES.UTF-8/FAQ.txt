@@ -1,10 +1,10 @@
                                    Tux Paint
                     versión 0.9.29 Preguntas máis frecuentes
 
-        Copyright © 2002-2022 by varios colaboradores; see AUTHORS.txt.
+        Copyright © 2002-2023 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               4 de Xuño de 2022
+                              16 de Marzo de 2023
 
      ----------------------------------------------------------------------
 
@@ -59,21 +59,6 @@ Relacionado co debuxo
            Cambie ou elimine a opción «nostamps» ou pode anulala con
            «--stamps» na liña de ordes ou con «nostamps=no» ou »stamps=yes»
            nun ficheiro de configuración.
-
-   A ferramenta «Encher» vese mal
-
-           Tux Paint probabelmente estea a comparar as cores exactas dos
-           píxeles ao encher. Isto é máis rápido, pero ten un aspecto peor.
-           Execute a orde «tuxpaint --verbose-version» dende unha liña de
-           ordes e debe ver, entre outras saídas: «Low Quality Flood Fill
-           enabled».
-
-           Para cambialo, debe volver compilar Tux Paint dende o código
-           fonte. Asegúrese de eliminar ou comentar calquera liña que diga:
-
-             #define LOW_QUALITY_FLOOD_FILL
-
-           no ficheiro «tuxpaint.c» no directorio «src».
 
    Os contornos do selo son sempre rectángulos
 

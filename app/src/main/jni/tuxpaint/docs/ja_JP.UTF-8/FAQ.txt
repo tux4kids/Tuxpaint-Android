@@ -1,10 +1,10 @@
                                    Tux Paint
                     バージョン 0.9.29 Frequently Asked Questions
 
-         Copyright © 2002-2022 by various contributors; AUTHORS.txt 参照.
+         Copyright © 2002-2023 by various contributors; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                   2022年6月 4日
+                                   2023年3月16日
 
      ----------------------------------------------------------------------
 
@@ -56,20 +56,6 @@ Drawing-related
            Either change/remove the "nostamps" option, or you can override it
            with "--stamps" on the command line or either "nostamps=no" or
            "stamps=yes" in a configuration file.
-
-   The "Fill" Tool Looks Bad
-
-           Tux Paint is probably comparing exact pixel colors when filling.
-           This is faster, but looks worse. Run the command "tuxpaint
-           --verbose-version" from a command line, and you should see,
-           amongst the other output: "Low Quality Flood Fill enabled".
-
-           To change this, you must rebuild Tux Paint from source. Be sure to
-           remove or comment out any line that says:
-
-             #define LOW_QUALITY_FLOOD_FILL
-
-           in the "tuxpaint.c" file in the "src" directory.
 
    Stamp outlines are always rectangles
 
