@@ -19,10 +19,9 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  $Id$
 */
 
-/* Jan. 17, 2003 */
+/* Jan. 17, 2003 - March 18, 2023 */
 
 #include "BeOS_print.h"
 
@@ -82,8 +81,6 @@ BBitmap *SurfaceToBBitmap(SDL_Surface * surf)
   pixfmt.Gloss = 0;
   pixfmt.Bloss = 0;
   pixfmt.Aloss = 0;
-  pixfmt.colorkey = 0;
-  pixfmt.alpha = 0;
 
   surf32 = SDL_ConvertSurface(surf, &pixfmt, SDL_SWSURFACE);
 

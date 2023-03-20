@@ -1,5 +1,5 @@
 /*
-  blocks_chalk_drip.c
+  blocks_etc.c
 
   Blocks, Chalk and Drip Magic Tools Plugin
   Tux Paint - A simple drawing program for children.
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 12, 2023
+  Last updated: March 19, 2023
 */
 
 #include <stdio.h>
@@ -52,38 +52,38 @@ static Mix_Chunk *snd_effect[NUM_TOOLS];
 
 /* Our function prototypes: */
 
-int blocks_chalk_drip_init(magic_api * api);
-Uint32 blocks_chalk_drip_api_version(void);
-int blocks_chalk_drip_get_tool_count(magic_api * api);
-SDL_Surface *blocks_chalk_drip_get_icon(magic_api * api, int which);
-char *blocks_chalk_drip_get_name(magic_api * api, int which);
-int blocks_chalk_drip_get_group(magic_api * api, int which);
-char *blocks_chalk_drip_get_description(magic_api * api, int which, int mode);
-static void blocks_chalk_drip_linecb(void *ptr, int which,
+int blocks_etc_init(magic_api * api);
+Uint32 blocks_etc_api_version(void);
+int blocks_etc_get_tool_count(magic_api * api);
+SDL_Surface *blocks_etc_get_icon(magic_api * api, int which);
+char *blocks_etc_get_name(magic_api * api, int which);
+int blocks_etc_get_group(magic_api * api, int which);
+char *blocks_etc_get_description(magic_api * api, int which, int mode);
+static void blocks_etc_linecb(void *ptr, int which,
                                      SDL_Surface * canvas, SDL_Surface * last,
                                      int x, int y);
-void blocks_chalk_drip_drag(magic_api * api, int which, SDL_Surface * canvas,
+void blocks_etc_drag(magic_api * api, int which, SDL_Surface * canvas,
                             SDL_Surface * last, int ox, int oy, int x, int y,
                             SDL_Rect * update_rect);
-void blocks_chalk_drip_click(magic_api * api, int which, int mode,
+void blocks_etc_click(magic_api * api, int which, int mode,
                              SDL_Surface * canvas, SDL_Surface * last, int x,
                              int y, SDL_Rect * update_rect);
-void blocks_chalk_drip_release(magic_api * api, int which,
+void blocks_etc_release(magic_api * api, int which,
                                SDL_Surface * canvas, SDL_Surface * last,
                                int x, int y, SDL_Rect * update_rect);
-void blocks_chalk_drip_shutdown(magic_api * api);
-void blocks_chalk_drip_set_color(magic_api * api, int which, SDL_Surface * canvas,
+void blocks_etc_shutdown(magic_api * api);
+void blocks_etc_set_color(magic_api * api, int which, SDL_Surface * canvas,
                                  SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
-int blocks_chalk_drip_requires_colors(magic_api * api, int which);
-void blocks_chalk_drip_switchin(magic_api * api, int which, int mode,
+int blocks_etc_requires_colors(magic_api * api, int which);
+void blocks_etc_switchin(magic_api * api, int which, int mode,
                                 SDL_Surface * canvas);
-void blocks_chalk_drip_switchout(magic_api * api, int which, int mode,
+void blocks_etc_switchout(magic_api * api, int which, int mode,
                                  SDL_Surface * canvas);
-int blocks_chalk_drip_modes(magic_api * api, int which);
+int blocks_etc_modes(magic_api * api, int which);
 
 
 
-int blocks_chalk_drip_init(magic_api * api)
+int blocks_etc_init(magic_api * api)
 {
   char fname[1024];
 
@@ -102,20 +102,20 @@ int blocks_chalk_drip_init(magic_api * api)
   return (1);
 }
 
-Uint32 blocks_chalk_drip_api_version(void)
+Uint32 blocks_etc_api_version(void)
 {
   return (TP_MAGIC_API_VERSION);
 }
 
 
 // We have multiple tools:
-int blocks_chalk_drip_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int blocks_etc_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
 {
   return (NUM_TOOLS);
 }
 
 // Load our icons:
-SDL_Surface *blocks_chalk_drip_get_icon(magic_api * api, int which)
+SDL_Surface *blocks_etc_get_icon(magic_api * api, int which)
 {
   char fname[1024];
 
@@ -139,7 +139,7 @@ SDL_Surface *blocks_chalk_drip_get_icon(magic_api * api, int which)
 }
 
 // Return our names, localized:
-char *blocks_chalk_drip_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *blocks_etc_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   if (which == TOOL_BLOCKS)
     return (strdup(gettext_noop("Blocks")));
@@ -152,14 +152,14 @@ char *blocks_chalk_drip_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 }
 
 // Return our group (all the same):
-int blocks_chalk_drip_get_group(magic_api * api ATTRIBUTE_UNUSED,
+int blocks_etc_get_group(magic_api * api ATTRIBUTE_UNUSED,
                                 int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
 }
 
 // Return our descriptions, localized:
-char *blocks_chalk_drip_get_description(magic_api * api ATTRIBUTE_UNUSED,
+char *blocks_etc_get_description(magic_api * api ATTRIBUTE_UNUSED,
                                         int which, int mode)
 {
   if (which == TOOL_BLOCKS)
@@ -210,7 +210,7 @@ char *blocks_chalk_drip_get_description(magic_api * api ATTRIBUTE_UNUSED,
 
 // Do the effect:
 
-static void blocks_chalk_drip_linecb(void *ptr, int which,
+static void blocks_etc_linecb(void *ptr, int which,
                                      SDL_Surface * canvas, SDL_Surface * last,
                                      int x, int y)
 {
@@ -331,12 +331,12 @@ static void blocks_chalk_drip_linecb(void *ptr, int which,
 }
 
 // Affect the canvas on drag:
-void blocks_chalk_drip_drag(magic_api * api, int which, SDL_Surface * canvas,
+void blocks_etc_drag(magic_api * api, int which, SDL_Surface * canvas,
                             SDL_Surface * last, int ox, int oy, int x, int y,
                             SDL_Rect * update_rect)
 {
   api->line((void *) api, which, canvas, last, ox, oy, x, y, 1,
-            blocks_chalk_drip_linecb);
+            blocks_etc_linecb);
 
   if (ox > x)
   {
@@ -362,13 +362,13 @@ void blocks_chalk_drip_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void blocks_chalk_drip_click(magic_api * api, int which, int mode,
+void blocks_etc_click(magic_api * api, int which, int mode,
                              SDL_Surface * canvas, SDL_Surface * last, int x,
                              int y, SDL_Rect * update_rect)
 {
   if (mode == MODE_PAINT)
   {
-    blocks_chalk_drip_drag(api, which, canvas, last, x, y, x, y, update_rect);
+    blocks_etc_drag(api, which, canvas, last, x, y, x, y, update_rect);
   }
   else                          /* MODE_FULLSCREEN */
   {
@@ -382,7 +382,7 @@ void blocks_chalk_drip_click(magic_api * api, int which, int mode,
         }
         for (x = 0; x < canvas->w; x += EFFECT_REZ)
         {
-          blocks_chalk_drip_linecb(api, which, canvas, last, x, y);
+          blocks_etc_linecb(api, which, canvas, last, x, y);
         }
       }
     }
@@ -398,7 +398,7 @@ void blocks_chalk_drip_click(magic_api * api, int which, int mode,
         }
         for (x = 0; x < canvas->w; x += EFFECT_REZ)
         {
-          blocks_chalk_drip_linecb(api, which, canvas, last, x, y);
+          blocks_etc_linecb(api, which, canvas, last, x, y);
         }
       }
     }
@@ -412,7 +412,7 @@ void blocks_chalk_drip_click(magic_api * api, int which, int mode,
 }
 
 // Affect the canvas on release:
-void blocks_chalk_drip_release(magic_api * api ATTRIBUTE_UNUSED,
+void blocks_etc_release(magic_api * api ATTRIBUTE_UNUSED,
                                int which ATTRIBUTE_UNUSED,
                                SDL_Surface * canvas ATTRIBUTE_UNUSED,
                                SDL_Surface * last ATTRIBUTE_UNUSED,
@@ -422,7 +422,7 @@ void blocks_chalk_drip_release(magic_api * api ATTRIBUTE_UNUSED,
 }
 
 // No setup happened:
-void blocks_chalk_drip_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void blocks_etc_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 {
   if (snd_effect[0] != NULL)
     Mix_FreeChunk(snd_effect[0]);
@@ -432,33 +432,33 @@ void blocks_chalk_drip_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void blocks_chalk_drip_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
+void blocks_etc_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
                                  SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // Use colors:
-int blocks_chalk_drip_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
+int blocks_etc_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
                                       int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void blocks_chalk_drip_switchin(magic_api * api ATTRIBUTE_UNUSED,
+void blocks_etc_switchin(magic_api * api ATTRIBUTE_UNUSED,
                                 int which ATTRIBUTE_UNUSED,
                                 int mode ATTRIBUTE_UNUSED,
                                 SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void blocks_chalk_drip_switchout(magic_api * api ATTRIBUTE_UNUSED,
+void blocks_etc_switchout(magic_api * api ATTRIBUTE_UNUSED,
                                  int which ATTRIBUTE_UNUSED,
                                  int mode ATTRIBUTE_UNUSED,
                                  SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int blocks_chalk_drip_modes(magic_api * api ATTRIBUTE_UNUSED, int which)
+int blocks_etc_modes(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   if (which == TOOL_BLOCKS || TOOL_CHALK)
   {

@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - March 15, 2023
+  June 14, 2002 - March 19, 2023
 */
 
 #include "platform.h"
@@ -9367,7 +9367,7 @@ static void get_stamp_thumb(stamp_type * sd, int process_sound)
 
   w = 40;
   h = 40;
-  int ww = (40 * button_h) / ORIGINAL_BUTTON_SIZE;
+  int ww = (40 * button_w) / ORIGINAL_BUTTON_SIZE;
   int hh = (40 * button_h) / ORIGINAL_BUTTON_SIZE;
   if (bigimg)
   {
@@ -11911,12 +11911,16 @@ static SDL_Surface *thumbnail2(SDL_Surface * src, int max_x, int max_y,
   }
   else
   {
-    DEBUG_PRINTF("thumbnail2() asked for %d x %d => %d x %d, with aspect\n", src->w, src->h, max_x, max_y);
+    float scale_factor;
+    int sx, sy;
 
-    yscale = (float) ((float) src->h / (float) max_y);
-    xscale = (float) ((float) src->w / (float) max_x);
-    if (yscale > xscale)
-      xscale = yscale;
+    scale_factor = pick_best_scape(src->w, src->h, max_x, max_y);
+
+    sx = ((float) src->w * scale_factor);
+    sy = ((float) src->h * scale_factor);
+
+    yscale = (float) ((float) src->h / (float) sy);
+    xscale = (float) ((float) src->w / (float) sx);
   }
 
   new_x = (int) ((float) src->w / xscale);

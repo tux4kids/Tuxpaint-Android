@@ -7,7 +7,7 @@ Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
 
-2023.March.16 (0.9.29) ### RC1
+2023.March.19 (0.9.29) ### RC2
   * Improvements to "Stamp" tool:
     -----------------------------
     * Stamps may now be rotated.
@@ -194,6 +194,11 @@ https://tuxpaint.org/
       Closes https://sourceforge.net/p/tuxpaint/bugs/259/
       Bill Kendrick <bill@newbreedsoftware.com>
 
+    * Magic tools with very long filenames/function names did not load
+      on some Android systems.  Affected new Kaleido-* tools, but also
+      Blocks, Chalk, and Drip (hence this being listed as a bug fix).
+      h/t Pere for discovering this.
+
     * SDL1.2 supported "SDL_VIDEO_WINDOW_POS" environment variable,
       but SDL2 does not; so reimplemented it ourselves. (See ENVARS docs.)
       Bill Kendrick <bill@newbreedsoftware.com>
@@ -374,6 +379,9 @@ https://tuxpaint.org/
     * Add missing dependencies in Makefile which result in build failures
       when building with the --shuffle flag for GNU make.
       Philipp Rösner <rndxelement@protonmail.com>
+
+    * Correction to allow Haiku printing code to compile again
+      Luc 'Begasus' Schrijvers <begasus@gmail.com>
 
   * Documentation updates:
     ---------------------
