@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - March 19, 2023
+  June 14, 2002 - March 21, 2023
 */
 
 #include "platform.h"
@@ -20137,6 +20137,23 @@ static void wait_for_sfx(void)
 /* XOR-based outline of rubber stamp shapes
    (unused if LOW_QUALITY_STAMP_OUTLINE is #defined) */
 
+#if 0
+#define STIPLE_W 10
+#define STIPLE_H 10
+static char stiple[] =
+"8844221100"
+"8844221100"
+"1100884422"
+"1100884422"
+"4422110088"
+"4422110088"
+"0088442211"
+"0088442211"
+"2211008844"
+"2211008844"
+;
+#endif
+
 #if 1
 #define STIPLE_W 5
 #define STIPLE_H 5
@@ -20303,7 +20320,25 @@ static void stamp_xor(int x, int y)
       sy = y + yy - stamp_outline_h / 2;
       if (stiple[sx % STIPLE_W + sy % STIPLE_H * STIPLE_W] != '8')
         continue;
+
       xorpixel(sx, sy);
+
+      if (xx < stamp_outline_w - 1) {
+        if (stiple[(sx + 1) % STIPLE_W + sy % STIPLE_H * STIPLE_W] != '8') {
+          xorpixel(sx + 1, sy);
+        }
+      }
+      if (yy < stamp_outline_h - 1) {
+        if (stiple[sx % STIPLE_W + (sy + 1) % STIPLE_H * STIPLE_W] != '8') {
+          xorpixel(sx, sy + 1);
+        }
+
+        if (xx < stamp_outline_w - 1) {
+          if (stiple[(sx + 1) % STIPLE_W + (sy + 1) % STIPLE_H * STIPLE_W] != '8') {
+            xorpixel(sx + 1, sy + 1);
+          }
+        }
+      }
     }
   }
   SDL_UnlockSurface(screen);
@@ -24390,7 +24425,7 @@ static int do_color_sel(int temp_mode)
   int stepx, stepy;
   int number_of_steps = 20;
   int i, dx, dy;
-  int done, chose;
+  int done, chose, mouse_was_down;
   int back_left, back_top;
   int color_sel_x = 0, color_sel_y = 0;
   int want_animated_popups;
@@ -24593,6 +24628,8 @@ static int do_color_sel(int temp_mode)
                   r_color_sel.y + r_color_sel.h / 2);
 #endif
 
+  mouse_was_down = temp_mode;
+
   do
   {
     while (SDL_PollEvent(&event))
@@ -24625,47 +24662,54 @@ static int do_color_sel(int temp_mode)
           done = 1;
         }
       }
-      else if (event.type == SDL_MOUSEBUTTONUP
-               && valid_click(event.button.button))
+      else if (event.type == SDL_MOUSEBUTTONDOWN)
       {
-        if (event.button.x >= r_canvas.x &&
-            event.button.x < r_canvas.x + r_canvas.w &&
-            event.button.y >= r_canvas.y
-            && event.button.y < r_canvas.y + r_canvas.h)
+        mouse_was_down = 1;
+      }
+      else if (event.type == SDL_MOUSEBUTTONUP)
+      {
+        if (valid_click(event.button.button && mouse_was_down))
         {
-          /* Picked a color in the canvas, and released! */
-
-          chose = 1;
-          done = 1;
-
-          x = event.button.x - r_canvas.x;
-          y = event.button.y - r_canvas.y;
-
-          color_sel_x = x;
-          color_sel_y = y;
-        }
-        else
-        {
-          if (!temp_mode)
+          if (event.button.x >= r_canvas.x &&
+              event.button.x < r_canvas.x + r_canvas.w &&
+              event.button.y >= r_canvas.y
+              && event.button.y < r_canvas.y + r_canvas.h)
           {
-            if (event.button.x >= back_left &&
-                event.button.x < back_left + img_back->w &&
-                event.button.y >= back_top
-                && event.button.y < back_top + img_back->h)
+            /* Picked a color in the canvas, and released! */
+  
+            chose = 1;
+            done = 1;
+  
+            x = event.button.x - r_canvas.x;
+            y = event.button.y - r_canvas.y;
+  
+            color_sel_x = x;
+            color_sel_y = y;
+          }
+          else
+          {
+            if (!temp_mode)
             {
-              /* Full UI mode: Decided to go Back; abort */
-
+              if (event.button.x >= back_left &&
+                  event.button.x < back_left + img_back->w &&
+                  event.button.y >= back_top
+                  && event.button.y < back_top + img_back->h)
+              {
+                /* Full UI mode: Decided to go Back; abort */
+  
+                chose = 0;
+                done = 1;
+              }
+            }
+            else
+            {
+              /* Temp mode: Released outside of canvas; abort */
               chose = 0;
               done = 1;
             }
           }
-          else
-          {
-            /* Temp mode: Released outside of canvas; abort */
-            chose = 0;
-            done = 1;
-          }
         }
+        mouse_was_down = 0;
       }
       else if (event.type == SDL_MOUSEMOTION)
       {

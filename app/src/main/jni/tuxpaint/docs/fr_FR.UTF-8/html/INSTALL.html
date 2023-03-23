@@ -93,12 +93,12 @@
             Documentation sur l'installation          </h1>
 
           <p>
-            Copyright &copy; 2002-2022 by divers contributeurs; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2002-2023 by divers contributeurs; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            septembre 23, 2022          </p>
+            mars 23, 2023          </p>
         </center>
       </header>
 
@@ -636,8 +636,8 @@
                     <li>
                       Expand the tar-ball and change the directory name so that the final packaging process can find related files.                      <blockquote>
                         <code>
-                          $ tar zxvf tuxpaint-A.B.C-sdl2.tar.gz<br/>
-                          $ mv tuxpaint-A.B.C-sdl2 tuxpaint-sdl2<br/>
+                          $ tar zxvf tuxpaint-A.B.C.tar.gz<br/>
+                          $ mv tuxpaint-A.B.C tuxpaint<br/>
                         </code>
                       </blockquote>
                     </li>
@@ -648,7 +648,7 @@
                     <li>
                       Fetch the developing source tree from git repository:                      <blockquote>
                         <code>
-                          $ git clone -b sdl2.0 https://git.code.sf.net/p/tuxpaint/tuxpaint tuxpaint-sdl2
+                          $ git clone https://git.code.sf.net/p/tuxpaint/tuxpaint tuxpaint
                         </code>
                       </blockquote>
                     </li>
@@ -659,7 +659,7 @@
             <p>
               Now you can build Tux Paint as follows:              <blockquote>
                 <code>
-                  $ cd tuxpaint-sdl2<br/>
+                  $ cd tuxpaint<br/>
                   $ make bdist-win32<br/>
                 </code>
               </blockquote>
@@ -683,7 +683,7 @@
           <p>
             Before building an installer, edit the "<code>tuxpaint.iss</code>" file and enable one of the lines starting with "<code>#define BuildTarget=</code>", depending on the architecture of the installer you want to create.          </p>
           <p>
-            Alors, vous pouvez facilement construire un installateur exécutable en cliquant-droit sur l'icône "<code>tuxpaint.iss</code>" du répertoires "<code>win32</code>" et sélectionner "Compile" dans la liste. Cela prendra un certain temps, et éventuellement vous obtiendrez un fichier "<code>tuxpaint-<i>X.Y.Z</i>-windows-sdl2.0-&lt;arch&gt;-installer.exe</code>" dans le même répertoire.          </p>
+            Alors, vous pouvez facilement construire un installateur exécutable en cliquant-droit sur l'icône "<code>tuxpaint.iss</code>" du répertoires "<code>win32</code>" et sélectionner "Compile" dans la liste. Cela prendra un certain temps, et éventuellement vous obtiendrez un fichier "<code>tuxpaint-<i>X.Y.Z</i>-windows-&lt;arch&gt;-installer.exe</code>" dans le même répertoire.          </p>
         </section><!-- H3: Building the Tux Paint Windows Installer -->
 
         <section class="indent"><!-- H3: Running the Tux Paint Windows Installer -->

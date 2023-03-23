@@ -111,8 +111,8 @@ What's New in Tux Paint version 0.9.29?
 
    Fifteen new Magic tools
            Maze, Googly Eyes, Fur, Circles, Rays, 3D Glasses, Color Sep.,
-           Saturate, Desaturate, Remove Color, Keep Color, Kaleido-4,
-           Kaleido-6, Kaleido-8, Bloom
+           Double Vision, Saturate, Desaturate, Remove Color, Keep Color,
+           Kaleido-4, Kaleido-6, Kaleido-8, Bloom
 
    Eraser shortcut
            A keyboard shortcut is available for quick access to the Eraser

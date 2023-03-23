@@ -2,10 +2,10 @@
                                  versión 0.9.29
                            Installation Documentation
 
-        Copyright © 2002-2022 by various contributors; see AUTHORS.txt.
+        Copyright © 2002-2023 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                              septiembre 23, 2022
+                                 marzo 23, 2023
 
              +----------------------------------------------------+
              |Table of Contents                                   |
@@ -359,18 +359,18 @@ Windows
           * Expand the tar-ball and change the directory name so that the
             final packaging process can find related files.
 
-              $ tar zxvf tuxpaint-A.B.C-sdl2.tar.gz
-              $ mv tuxpaint-A.B.C-sdl2 tuxpaint-sdl2
+              $ tar zxvf tuxpaint-A.B.C.tar.gz
+              $ mv tuxpaint-A.B.C tuxpaint
 
     b. Using the developing source tree:
           * Fetch the developing source tree from git repository:
 
-              $ git clone -b sdl2.0
-              https://git.code.sf.net/p/tuxpaint/tuxpaint tuxpaint-sdl2
+              $ git clone https://git.code.sf.net/p/tuxpaint/tuxpaint
+              tuxpaint
 
    Now you can build Tux Paint as follows:
 
-     $ cd tuxpaint-sdl2
+     $ cd tuxpaint
      $ make bdist-win32
 
    All the files needed for starting Tux Paint (and Tux Paint Config.) are
@@ -398,8 +398,7 @@ Windows
    Then, you can easily build an executable installer by right-clicking on
    the "tuxpaint.iss" icon in the "win32" directory and selecting "Compile"
    on the list. It will run for a while, and eventually you will find a
-   "tuxpaint-X.Y.Z-windows-sdl2.0-<arch>-installer.exe" file in the same
-   directory.
+   "tuxpaint-X.Y.Z-windows-<arch>-installer.exe" file in the same directory.
 
   Running the Tux Paint Windows Installer
 

@@ -7,7 +7,7 @@ Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
 
-2023.March.19 (0.9.29) ### RC2
+2023.March.23 (0.9.29) ### RC2
   * Improvements to "Stamp" tool:
     -----------------------------
     * Stamps may now be rotated.
@@ -16,6 +16,10 @@ https://tuxpaint.org/
       not disabled).
       Pere Pujal i Carabantes <perepujal@gmail.com> (feature)
       Bill Kendrick <bill@newbreedsoftware.com> (on/off control)
+
+    * Outline while placing & rotating stamp is now thicker.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      h/t Pere for reporting this & Albert for explaining things.
 
   * New Magic Tools:
     ----------------
@@ -57,6 +61,13 @@ https://tuxpaint.org/
       "Color Sep." sound effect licensed as Creative Commons
       Attribution 4.0 International (CC BY 4.0)
       by https://freesound.org/people/juskiddink/)
+
+    * "Double Vision" - separate and blend (50/50) the image,
+      simulating double vision.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/221/)
+      (Sound effect licensed as Creative Commons 0 (CC0 1.0)
+      by https://freesound.org/people/nomiqbomi/)
 
     * "Saturate" & "Desaturate" - Increase or decrease color saturation.
       Bill Kendrick <bill@newbreedsoftware.com>
@@ -118,6 +129,13 @@ https://tuxpaint.org/
   * New Starter
     -----------
     * Space_draw.svg by Ingrid Illa Terrier
+
+  * New Template
+    ------------
+    * rainbow_gradient.png by Bill Kendrick
+      [Hint: Start a new picture, paint over the entire thing
+      with black, then use eraser to 'scratch away' and expose
+      the rainbow!]
 
   * Starter and Template Improvements
     ---------------------------------
@@ -199,6 +217,13 @@ https://tuxpaint.org/
       Blocks, Chalk, and Drip (hence this being listed as a bug fix).
       h/t Pere for discovering this.
 
+    * On touch devices, the color pipette tool could easilly be
+      immediately dismissed due to the 'button up' event happening
+      right where the "Back" dismissal/cancel button appeared.
+      Now only pays attention to 'release' if the button was down.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      h/t Pere for reporting this.
+
     * SDL1.2 supported "SDL_VIDEO_WINDOW_POS" environment variable,
       but SDL2 does not; so reimplemented it ourselves. (See ENVARS docs.)
       Bill Kendrick <bill@newbreedsoftware.com>
@@ -276,6 +301,9 @@ https://tuxpaint.org/
       Closes https://sourceforge.net/p/tuxpaint/bugs/246/
       Pere Pujal i Carabantes <perepujal@gmail.com>
       and Bill Kendrick <bill@newbreedsoftware.com>
+
+    * On-screen keyboard would crash Tux Paint on Android; mended.
+      Pere Pujal i Carabantes <perepujal@gmail.com>
 
   * Ports & Building:
     -----------------

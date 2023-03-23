@@ -5,7 +5,7 @@ Release: 1
 License: GPL
 Group: Multimedia/Graphics
 URL: https://tuxpaint.org/
-Source0: %{name}-%{version}-sdl2.tar.gz
+Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango SDL2_gfx libpaper fribidi xdg-utils libimagequant
 BuildRequires: SDL2-devel SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel SDL2_Pango-devel SDL2_gfx-devel
@@ -33,7 +33,7 @@ Requires: librsvg2-devel libpaper-devel fribidi-devel gperf
 development files for tuxpaint plugins.
 
 %prep
-%setup -q -n %{name}-%{version}-sdl2
+%setup -q
 
 %build
 make PREFIX=%{_prefix} DOC_PREFIX=%{_docdir}/tuxpaint/en linux_ARCH_CFLAGS='-I/usr/include/imagequant -I/usr/include/freetype2'
@@ -106,6 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/tuxpaint/*/html/tp_magic_example.c
 
 %changelog
+* Wed Mar 22 2023 <dolphin6k@wmail.plala.or.jp>
+- Removed suffix "-sdl2" from the release tar ball.
+
 * Fri Mar 10 2023 <dolphin6k@wmail.plala.or.jp>
 - Magic docs to go the main package
 - Magid devel docs to go the devel package

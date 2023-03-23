@@ -1,7 +1,7 @@
 /*
   onscreen_keyboard.c
 
-  Copyright (c) 2011-2022
+  Copyright (c) 2011-2023
   https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last modified: December 11, 2022
+  Last modified: March 23, 2023
 */
 
 #include "debug.h"
@@ -1166,8 +1166,22 @@ static void keybd_prepare(on_screen_keyboard * keyboard)
             snprintf(fontname, 255, "%s/fonts/locale/%s", DATA_PREFIX,
                      keyboard->layout->fontpath);
             keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
-          }
-        }
+	    if (keyboard->osk_fonty == NULL)
+	    {
+	      /* Fonts are in assets "data" dir in Android builds */
+	      snprintf(fontname, 255, "data/fonts/%s",
+		       keyboard->layout->fontpath);
+	      keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+	      if (keyboard->osk_fonty == NULL)
+	      {
+		/* Fonts are in assets "data" dir in Android builds, checking locale dir */
+		snprintf(fontname, 255, "data/fonts/locale/%s",
+			 keyboard->layout->fontpath);
+		keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+	      }
+	    }
+	  }
+	}
       }
     }
 
@@ -1176,6 +1190,13 @@ static void keybd_prepare(on_screen_keyboard * keyboard)
       /* Going with the default */
       sprintf(fontname, "%s/fonts/FreeSansBold.ttf", DATA_PREFIX);
       keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+
+      if (keyboard->osk_fonty == NULL)
+      {
+      /* Also for Android */
+      sprintf(fontname, "data/fonts/FreeSansBold.ttf");
+      keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+      }
     }
 
     if (keyboard->osk_fonty == NULL)
