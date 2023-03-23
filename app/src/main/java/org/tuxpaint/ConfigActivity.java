@@ -38,6 +38,7 @@ public class ConfigActivity extends Activity {
    	String[] printdelays = null;
         String[] buttonsizes = null;
         String[] colors_rows = null;
+        String[] osklayouts = null;
 	private Properties props = null;
 	private Properties propsback = null;
     String locLanguage = null;
@@ -64,6 +65,7 @@ public class ConfigActivity extends Activity {
         String buttonsize = null;
         String colorsrows = null;
         String lang = null;
+        String osklayout = null;
         boolean cancel = false;
 
 	EditText savedirView = null;
@@ -83,6 +85,7 @@ public class ConfigActivity extends Activity {
         ToggleButton orientToggle = null;
         Spinner buttonsizeSpinner = null;
         Spinner colorsrowsSpinner = null;
+        Spinner osklayoutSpinner = null;
     Button okButton = null;
     Button cancelButton = null;
         AssetManager mgr;
@@ -407,6 +410,26 @@ public class ConfigActivity extends Activity {
 					}
                 });
 
+		osklayouts = getResources().getStringArray(R.array.osklayouts);
+		indexpd = 0;
+		for (; indexpd != osklayouts.length; indexpd++){
+			if (osklayouts[indexpd].compareTo(osklayout) == 0)
+				break;
+		}
+		if(indexpd==osklayouts.length)
+		    indexpd = 0;
+                osklayoutSpinner = (Spinner) findViewById(R.id.spinnerOsklayout);
+		osklayoutSpinner.setSelection(indexpd);
+		osklayoutSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+					public void onItemSelected(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						osklayout = osklayouts[arg2];
+					}
+					public void onNothingSelected(AdapterView<?> arg0) {
+					}
+                });
+
 	}
 
     @Override
@@ -474,8 +497,9 @@ public class ConfigActivity extends Activity {
 	orient = props.getProperty("orient", "landscape");
 	buttonsize = props.getProperty("buttonsize", "48");
 	colorsrows = props.getProperty("colorsrows", "1");
+	osklayout = props.getProperty("onscreen-keyboard-layout", "SYSTEM");
 	    	 
-	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient + " " + buttonsize + " " + colorsrows);
+	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient + " " + buttonsize + " " + colorsrows + " " + osklayout);
     }
 
     private void save () {
@@ -498,6 +522,7 @@ public class ConfigActivity extends Activity {
 	props.put("orient", orient);
 	props.put("buttonsize", buttonsize);
 	props.put("colorsrows", colorsrows);
+	props.put("onscreen-keyboard-layout", osklayout);
 
 	try {
 	    OutputStream	out = new FileOutputStream(cfg);
