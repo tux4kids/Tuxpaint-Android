@@ -66,6 +66,7 @@ public class ConfigActivity extends Activity {
         String colorsrows = null;
         String lang = null;
         String osklayout = null;
+        String stamprotation = null;
         boolean cancel = false;
 
 	EditText savedirView = null;
@@ -86,6 +87,7 @@ public class ConfigActivity extends Activity {
         Spinner buttonsizeSpinner = null;
         Spinner colorsrowsSpinner = null;
         Spinner osklayoutSpinner = null;
+        ToggleButton stamprotationToggle = null;
     Button okButton = null;
     Button cancelButton = null;
         AssetManager mgr;
@@ -353,6 +355,20 @@ public class ConfigActivity extends Activity {
 			}
 		});
 
+	stamprotationToggle = (ToggleButton)this.findViewById(R.id.toggleStamprotation);
+		if (stamprotation.compareTo("yes") == 0)
+			stamprotationToggle.setChecked(true);
+		else
+			stamprotationToggle.setChecked(false);
+		stamprotationToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked)
+					stamprotation = "yes";
+				else
+					stamprotation = "no";
+			}
+		});
+
 		okButton = (Button)this.findViewById(R.id.buttonOk);
 
 		okButton.setOnClickListener(new View.OnClickListener() {
@@ -498,8 +514,9 @@ public class ConfigActivity extends Activity {
 	buttonsize = props.getProperty("buttonsize", "48");
 	colorsrows = props.getProperty("colorsrows", "1");
 	osklayout = props.getProperty("onscreen-keyboard-layout", "SYSTEM");
+	stamprotation = props.getProperty("stamprotation", "yes");
 	    	 
-	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient + " " + buttonsize + " " + colorsrows + " " + osklayout);
+	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient + " " + buttonsize + " " + colorsrows + " " + osklayout + " " + stamprotation);
     }
 
     private void save () {
@@ -523,6 +540,7 @@ public class ConfigActivity extends Activity {
 	props.put("buttonsize", buttonsize);
 	props.put("colorsrows", colorsrows);
 	props.put("onscreen-keyboard-layout", osklayout);
+	props.put("stamprotation", stamprotation);
 
 	try {
 	    OutputStream	out = new FileOutputStream(cfg);
