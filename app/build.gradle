@@ -8,10 +8,10 @@ else {
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
@@ -44,8 +44,8 @@ android {
             if (buildAsApplication) {
                 dimension "store"
                 applicationId "org.tuxpaint"
-                versionCode 9287
-                versionName "0.9.29-RC1"
+                versionCode 9288
+                versionName "0.9.29-RC2"
             }
         }
     }
