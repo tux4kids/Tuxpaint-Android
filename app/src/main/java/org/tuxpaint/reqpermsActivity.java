@@ -22,7 +22,7 @@ public class reqpermsActivity extends Activity {
 		Log.v(TAG, "onCreate()");
 		super.onCreate(savedInstanceState);
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
 			this.requestPermissions(new String[]{ android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.BLUETOOTH_CONNECT }, 2);
 		} else {
 			this.requestPermissions(new String[]{ android.Manifest.permission.WRITE_EXTERNAL_STORAGE }, 2);

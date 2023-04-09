@@ -24,7 +24,7 @@ public class tuxpaintActivity extends SDLActivity {
         Log.v(TAG, "onCreate()");
 
         boolean requestPermissions = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
             if (this.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions = true;
             }

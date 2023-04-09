@@ -11,6 +11,7 @@ import java.util.Properties;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -105,7 +106,7 @@ public class ConfigActivity extends Activity {
 	conf = res.getConfiguration();
 	localeback = conf.locale;
 
-	if (android.os.Build.VERSION.SDK_INT > 22) {
+	if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
 	    if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 		this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
 	    }
