@@ -98,7 +98,7 @@
           </p>
 
           <p>
-            March 23, 2023          </p>
+            March 29, 2023          </p>
         </center>
       </header>
 
@@ -120,7 +120,7 @@
                   <li><a href="#req-libsdl">Simple DirectMedia Layer library (libSDL)</a></li>                  <li><a href="#req-other-libs">Other Libraries</a></li>                </ul>
               </li>
               <li><a href="#compiling">Compiling and Installation</a>                <ul>
-                  <li><a href="#compiling-windows">Windows</a></li>                  <li><a href="#compiling-linux">Linux/Unix</a></li>                  <li><a href="#compiling-macos">macOS</a></li>                </ul>
+                  <li><a href="#compiling-windows">Windows</a></li>                  <li><a href="#compiling-linux">Linux/Unix</a></li>                  <li><a href="#compiling-macos">macOS</a></li>                  <li><a href="#compiling-android">Android</a></li>                </ul>
               </li>
               <li><a href="#debugging">Debugging</a></li>              <li><a href="#uninstalling">Uninstalling Tux Paint</a>                <ul>
                   <li><a href="#uninstalling-windows">Windows</a></li>                  <li><a href="#uninstalling-macOS">macOS</a></li>                  <li><a href="#uninstalling-linux">Linux</a></li>                </ul>
@@ -1142,7 +1142,7 @@
               Building for Apple Silicon            </h3>
           </header>
 
-          <p>macOS for Applie Silicon requires all native Apple Silicon applications be signed, even if it is signed "ad-hoc" (anonymously).  Because of this, compilers that produce native Apple Silicon applications sign all produced binaries and libraries as a part of the compilation process.<sup>*</sup>  However, the Tux Paint compilation process modifies the libraries to be modular (using <code>install_name_tool</code>) so they can be added into the application bundle, which has the unfortunate side effect of breaking the signature.  This can be addressed by signing the application bundle ad-hoc (example below) or using your own Apple Developer Identity if you have one.  The DMG file, if needed, must be created after signing the App Bundle so the DMG file is created with signed App Bundle:            <blockquote>
+          <p>macOS for Apple Silicon requires all native Apple Silicon applications be signed, even if it is signed "ad-hoc" (anonymously).  Because of this, compilers that produce native Apple Silicon applications sign all produced binaries and libraries as a part of the compilation process.<sup>*</sup>  However, the Tux Paint compilation process modifies the libraries to be modular (using <code>install_name_tool</code>) so they can be added into the application bundle, which has the unfortunate side effect of breaking the signature.  This can be addressed by signing the application bundle ad-hoc (example below) or using your own Apple Developer Identity if you have one.  The DMG file, if needed, must be created after signing the App Bundle so the DMG file is created with signed App Bundle:            <blockquote>
               <code>
                 $ codesign -s - TuxPaint.app<br/>
                 $ make TuxPaint.dmg
@@ -1176,6 +1176,71 @@
         </section><!-- H3: Building a Universal Binary -->
 
       </section><!-- H2: macOS -->
+
+      <section class="indent"><!-- H2: Android -->
+        <header>
+          <h2>
+            <a name="compiling-macos" id="compiling-android">
+              Android            </a>
+          </h2>
+          <p style="font-size: small;">
+            <em>
+              March 29, 2023              Pere Pujal i Carabantes &lt;<a href="mailto:perepujal@gmail.com">perepujal@gmail.com</a>&gt;
+              (Edited by Bill Kendrick)
+            </em>
+          </p>
+        </header>
+
+        <p>
+          As of March 2023, the Android build of Tux Paint is maintained in a separate code repository at GitHub: <a href="https://github.com/tux4kids/Tuxpaint-Android">https://github.com/tux4kids/Tuxpaint-Android</a>.  Detailed instructions are there; this acts as an overview.        </p>
+
+        <section class="indent"><!-- H3: Prerequisites -->
+          <header>
+            <h3>
+              Prerequisites            </h3>
+          </header>
+
+          <p>You will need recent versions of:            <ul>
+              <li>
+                <a href="https://gradle.org/">Gradle</a> &mdash; build automation tool              </li>
+              <li>
+                <a href="https://developer.android.com/studio">Android Studio (Software Development Kit (SDK))</a> &mdash; to support Android app development (Java)              </li>
+              <li>
+                <a href="https://developer.android.com/ndk">Android Native Development Kit (NDK)</a> &mdash; to support native development in C/C++              </li>
+            </ul>
+          </p>
+
+          <p>
+            To compile the latest Tux Paint, one has to sync the main SourceForge project's <code>tuxpaint</code> Git repository with the GitHub project's <code>TuxPaint-Android</code> Git repository.  (Pere uses a shell script that backs up the <code>app/src/main/jni/tuxpaint</code> directory in the <code>Tuxpaint-Android</code> GitHub repo and makes a build of SourceForge's <code>tuxpaint</code> to generate translations and other things that are not autogenerated in the Android builds, and then copies the SourceForge <code>tuxpaint</code> back to <code>Tuxpaint-Android</code>.) (FIXME: It should be checked-in somewhere. For now, see <a href="https://sourceforge.net/p/tuxpaint/feature-requests/224/">https://sourceforge.net/p/tuxpaint/feature-requests/224/</a>)          </p>
+
+          <p>
+            For it to run you need the <code>tuxpaint</code> and <code>Tuxpaint-Android</code> sources one next to one another, and the script in the directory containing both.          </p>
+
+          <p>
+            Fill the <code>app/src/main/assets</code> directory by running <code>cd app/src/main/jni/tuxpaint &amp;&amp; ./mkzip_assets.sh</code>          </p>
+        </section><!-- H3: Prerequisites -->
+
+        <section class="indent"><!-- H3: Building -->
+          <header>
+            <h3>
+              Building            </h3>
+          </header>
+
+          <p>
+            The Gradle build generates some variants: PlayStore, debugPlayStore, offPlayStore and debugoffPlayStore. You must sign the non-debug ones to be able to install them. (FIXME: Link to info on how to sign.) (Note: "playStore" ones are intended to be uploaded to Google Play; this is currently managed by Terrence Sheflin &mdash;March 2023. "offPlayStore" is the flavor that we distribute as APK files on the Tux Paint website and SourceForge file hosting, and is the variant built by the F-Droid app. repository.)          </p>
+
+          <p>
+            To trigger a build from F-droid, it suffices to tag a commit and push it to GitHub. That doesn't guarantee the build will succeed though, so Pere usually runs a local F-droid server to test the build and eventually adapt the F-droid's build receipt before pushing the tag to GitHub.          </p>
+
+          <p>
+            The builds Pere distributes are all made with that local F-droid server. It has the advantage of packing the sources and logs, and signing the APK. Most importantly, it uses the same tools F-Droid will use to build Tux Paint, so you can detect problems beforehand.          </p>
+
+          <p>
+            The receipt Pere uses for F-Droid builds is in the metadata dir of <a href="https://gitlab.com/fdroid/fdroiddata">https://gitlab.com/fdroid/fdroiddata</a>.  The F-Droid server code is at <a href="https://gitlab.com/fdroid/fdroidserver">https://gitlab.com/fdroid/fdroidserver</a>.  To generate the server you will need 1GB free on disk. Run the <code>makebuildserver</code> tool they provide, then, from the root of <code>fdroiddata</code>, run <code>../fdroidserver/fdroid build --server org.tuxpaint:NNNN</code> (NNNN = version, e.g. 9288)          </p>
+
+        </section><!-- H3: Building -->
+
+      </section><!-- H2: Android -->
 
     </section><!-- H1: Compiling and Installation -->
 

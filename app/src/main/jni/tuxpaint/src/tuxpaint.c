@@ -6228,7 +6228,13 @@ static void mainloop(void)
           {
             if (stamp_tool_mode == STAMP_TOOL_MODE_PLACE)
             {
-              if (old_x >= 0 && old_y >= 0 && old_x <= r_canvas.w
+	       /* Updating the screen to draw the outlines in touchscreens where there could be touch without previous drag. */
+	      update_screen(old_x - (CUR_STAMP_W + 1) / 2 + r_canvas.x,
+			    old_y - (CUR_STAMP_H + 1) / 2 + r_canvas.y,
+			    old_x + (CUR_STAMP_W + 1) / 2 + r_canvas.x,
+			    old_y + (CUR_STAMP_H + 1) / 2 + r_canvas.y);
+
+	      if (old_x >= 0 && old_y >= 0 && old_x <= r_canvas.w
                   && old_y <= r_canvas.h)
               {
                 if (!no_stamp_rotation && stamp_rotation_ctrl)

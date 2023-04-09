@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 22:40+0900\n"
-"PO-Revision-Date: 2017-10-15 11:04+0200\n"
+"POT-Creation-Date: 2023-04-01 16:47-0700\n"
+"PO-Revision-Date: 2023-03-30 14:41+0200\n"
 "Last-Translator: Willem Heppe <heppew@yahoo.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. Response to Black (0, 0, 0) color selected
 #: ../colors.h:86
@@ -27,12 +27,12 @@ msgstr "Zwart!"
 #. Response to Dark grey (128, 128, 128) color selected
 #: ../colors.h:89
 msgid "Dark grey! Some people spell it “dark gray”."
-msgstr "Donkergrijs!"
+msgstr "Donkergrijs."
 
 #. Response to Light grey (192, 192, 192) color selected
 #: ../colors.h:92
 msgid "Light grey! Some people spell it “light gray”."
-msgstr "Lichtgrijs!"
+msgstr "Lichtgrijs."
 
 #. Response to White (255, 255, 255) color selected
 #: ../colors.h:95
@@ -169,55 +169,45 @@ msgstr "1Il|"
 #. to the importance.
 #: ../dirwalk.c:272
 msgid "<1>spare-1a"
-msgstr ""
+msgstr "<1>reserve-1a"
 
 #: ../dirwalk.c:274
 msgid "<1>spare-1b"
-msgstr ""
+msgstr "<1>reserve-1b"
 
 #: ../dirwalk.c:276
 msgid "<9>spare-9a"
-msgstr ""
+msgstr "<9>reserve-9a"
 
 #: ../dirwalk.c:278
 msgid "<9>spare-9b"
-msgstr ""
+msgstr "<9>reserve-9b"
 
 #: ../fill_tools.h:52
 msgid "Solid"
-msgstr ""
+msgstr "Vast"
 
 #: ../fill_tools.h:53
-#, fuzzy
-#| msgid "Brushes"
 msgid "Brush"
-msgstr "Penselen"
+msgstr "Penseel"
 
 #: ../fill_tools.h:54
-#, fuzzy
-#| msgid "Lines"
 msgid "Linear"
-msgstr "Lijnen"
+msgstr "Lineair"
 
 #: ../fill_tools.h:55
 msgid "Radial"
-msgstr ""
+msgstr "Radiaal"
 
 #: ../fill_tools.h:56
-#, fuzzy
-#| msgid "Shapes"
 msgid "Shaped"
-msgstr "Vormen"
+msgstr "Gevormd"
 
 #: ../fill_tools.h:60
-#, fuzzy
-#| msgid "Click in the picture to fill that area with color."
 msgid "Click to fill an area with a solid color."
 msgstr "Klik in de tekening om dat gebied met kleur te vullen."
 
 #: ../fill_tools.h:61
-#, fuzzy
-#| msgid "Click in the picture to fill that area with color."
 msgid "Click and drag to fill an area by hand, using a brush."
 msgstr "Klik in de tekening om dat gebied met kleur te vullen."
 
@@ -226,16 +216,18 @@ msgid ""
 "Click and drag to fill an area with a linear gradient (from the chosen color "
 "to transparent)."
 msgstr ""
+"Klik en sleep om het vlak te vullen met een lineair verloop (van de gekozen "
+"kleur naar transparant)."
 
 #: ../fill_tools.h:65
 msgid ""
 "Click to fill an area with a radial gradient (from the chosen color to "
 "transparent)."
 msgstr ""
+"Klik om het vlak te vullen met een radiaal verloop (van de gekozen kleur "
+"naar transparant)."
 
 #: ../fill_tools.h:67
-#, fuzzy
-#| msgid "Click in the picture to fill that area with color."
 msgid ""
 "Click to fill an area with a shaped gradient (from the chosen color to "
 "transparent)."
@@ -293,46 +285,41 @@ msgstr "ZH_TW"
 
 #. Add menu items
 #: ../macos.m:58
-#, fuzzy
-#| msgid "Tux Paint"
 msgid "About Tux Paint"
-msgstr "Tux Paint"
+msgstr "Over Tux Paint"
 
 #: ../macos.m:63
-#, fuzzy
-#| msgid "Tux Paint"
 msgid "Hide Tux Paint"
-msgstr "Tux Paint"
+msgstr "Verberg Tux Paint"
 
 #: ../macos.m:66
 msgid "Hide Others"
-msgstr ""
+msgstr "Verberg Andere"
 
 #: ../macos.m:69
 msgid "Show All"
-msgstr ""
+msgstr "Toon alles"
 
 #: ../macos.m:73
-#, fuzzy
-#| msgid "Tux Paint"
 msgid "Quit Tux Paint"
-msgstr "Tux Paint"
+msgstr "Verlaat Tux Paint"
 
 #. Put menu into the menubar
 #: ../macos.m:103 ../macos.m:111
 msgid "Window"
-msgstr ""
+msgstr "Venster"
 
 #. "Minimize" item
 #: ../macos.m:106
 msgid "Minimize"
-msgstr ""
+msgstr "Verklein"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:8 ../tuxpaint.desktop.in:3
 msgid "Tux Paint"
 msgstr "Tux Paint"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:9 ../tuxpaint.desktop.in:10
+#: ../tuxpaint-fullscreen.desktop.in:10
 msgid "A drawing program for children"
 msgstr "Een tekenprogramma voor kinderen"
 
@@ -344,29 +331,369 @@ msgid ""
 "and an encouraging cartoon mascot who guides children as they use the "
 "program."
 msgstr ""
+"Tux Paint is een gratis, prijzenwinnend tekenprogramma voor kinderen van 3 "
+"tot 12 jaar. Tux Paint wordt gebruikt in scholen over de hele wereld als een "
+"computerkennis tekenactiviteit. Het combineert een eenvoudig te gebruiken "
+"interface, geluidseffecten en een aanmoedigende cartoon mascotte die de "
+"kinderen begeleid tijdens het gebruik van het programma."
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:19
 msgid ""
 "Kids are presented with a blank canvas and a variety of drawing tools to "
 "help them be creative."
 msgstr ""
+"Kinderen krijgen een leeg canvas en een variëteit aan tekenmiddelen om de te "
+"helpen creatief te zijn."
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:24
 msgid "New Breed Software et al."
-msgstr ""
+msgstr "New Breed Software et anderen."
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:34
-msgid "The Magic tool is a set of special effects"
+msgid "Tux Paint comes with numerous pre-drawn coloring-book style images"
 msgstr ""
+"Tux Paint komt met een aantal voorgetekende kleurboekstijl afbeeldingen"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:38
 msgid ""
 "The Paint Brush tool lets you draw freehand, using various brushes and colors"
 msgstr ""
+"De penseel laat je uit vrije hand tekenen met gebruik van verscheidene "
+"penselen en kleuren"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:42
 msgid "The Stamp tool is like a set of rubber stamps or stickers"
+msgstr "De Stempel is als een verzameling stempels of stickers "
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:48
+msgid ""
+"Fifteen new magic tools have been added: Maze, Googly Eyes, Fur, Circles, "
+"Rays, 3D Glasses, Color Sep., Saturate, Desaturate, Remove Color, Keep "
+"Color, Kaleido-4, Kaleido-6, Kaleido-8, and Bloom."
 msgstr ""
+"Vijftien nieuwe magische gereedschappen zijn toegevoegd: Doolhof, Oogjes, "
+"Vacht, Cirkels, Stralen, 3D Brillen, Kleur Sep., Verzadig, Onverzadig, "
+"Verwijder Kleur, Behoud Kleur, Kaleido-4, Kaleido-6, Kaleido-8 en Bloem."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:49
+msgid "Stamps may be rotated before being applied to the canvas."
+msgstr ""
+"Stempels mogen gedraaid worden voor ze aan het canvas worden toegevoegd."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:50
+msgid "Shapes tool, in drag-from-corner mode, has been improved."
+msgstr "Vormen, in sleep-vanuit-hoek modus, is verbeterd."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:51
+msgid "Fill tool now offers a shaped gradient (bevel) mode."
+msgstr "Vul gereedschap biedt nu een gevormd verloop (bevel) modus."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:52
+msgid "A quick Eraser mode is be accessed via keyboard shortcut."
+msgstr ""
+"Een snelle Gummer modus kan via een toetsenbord sneltoets worden uitgevoerd."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:53
+msgid ""
+"The rainbow palette (HSV color picker) can now load the built-in color, or "
+"the colors from the pipette tool or color mixer."
+msgstr ""
+"Een regenboogpalet (HSV kleurenkiezer) kan nu de ingebouwde kleur laden, of "
+"de kleuren van de pipet-tool of de kleurenmixer. "
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:54
+msgid ""
+"Starter and Template images can specify how they should stretch, to avoid "
+"smearing when the canvas aspect ratio differs from that of the image."
+msgstr ""
+"Starter en Template afbeeldingen bevatten specificatie hoe er uitgerekt moet "
+"worden om vervaging te vermijden als de canvas verhouding afwijkt van die "
+"van de afbeelding. "
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:55
+msgid "The \"buttonsize\" configuration option now offers an \"auto\" setting."
+msgstr "De \"knopgrootte\" instellingoptie biedt nu een \"auto\"-instelling."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:56
+msgid "A quick start guide has been added."
+msgstr "Een snelstart handleiding is toegevoegd."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:61
+msgid ""
+"Tux Paint's Color palette includes a new Color Mixer option, which allows "
+"users to combine different proportions of primary colors (red, yellow, and "
+"blue) and shades (white, grey, and black) to create new colors, similar to "
+"mixing paints."
+msgstr ""
+"Tux Paint's Kleurpalet bevat een nieuwe Kleurmixer-optie, die het mogelijk "
+"maakt dat gebruikers verschillende delen van de primaire kleuren (rood, geel "
+"en blauw) en schaduwen (wit, grijs en zwart) combineren m nieuwe kleuren te "
+"maken, vergelijkbaar met mengen van verf. "
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:62
+msgid ""
+"The Color Picker option, which previously offered a static palette of around "
+"sixty-five thousand color choices, now supports separate hue, saturation, "
+"and value settings, allowing users to choose from over sixteen million "
+"colors."
+msgstr ""
+"De Kleurkiezen-optie, die voorheen een statisch palet van ongeveer "
+"vijenzestigduizend kleurkeuzes bood, ondersteunt nu onafhankelijke tint, "
+"verzadiging en waardeinstellingen, waarmee gebruikers kunnen kiezen uit meer "
+"dan 16 miljoen kleuren."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:63
+msgid ""
+"Also, a keyboard shortcut is now available for quick access to the Color "
+"Selector — the \"pipette\" tool used for picking colors from the current "
+"drawing."
+msgstr ""
+"Een sneltoets is nu ook beschikbaar voor snelle toegang tot de Kleurkiezer - "
+"de \"pipet\"-tool gebruikt voor kiezen van kleuren van de huidige tekening."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:64
+msgid ""
+"The Paint and Lines tools now provide a way to adjust the spacing of "
+"brushes, allowing dotted lines or smearing effects to be made. Many brushes "
+"have been given better default spacing values, as well."
+msgstr ""
+"De Schilder en Lijnenwerktuigen bieden nu de mogelijkheid om de ruimte "
+"tussen de penseelstreken aan te passen, waarmee stippellijnen en "
+"smeereffecten gemaakt kunnen worden. Veel penseelstreken hebben een betere "
+"standaard ruimte-waarde gekregen."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:65
+msgid ""
+"Two new variations of the Zoom Magic Tool, Tile Zoom and Rush, have been "
+"added. When shrinking a drawing with Tile Zoom, it replicates the drawing "
+"across the canvas in tiles, rather than filling the canvas with a solid "
+"background color. The Rush tool blurs the results."
+msgstr ""
+"Twee nieuwe variaties van de Zoom Magisch Gereedschap, de TegelZoom en de "
+"Vervaging zijn toegevoegd. Als een tekening met de TegelZoom wordt "
+"verkleind, dan wordt de tekening over het canvas herhaald in tegels, anders "
+"dan het canvas vullen met een vaste achtergrondkleur. De Vervaging vervaagt "
+"het resultaat."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:66
+msgid ""
+"Tux Paint's Shapes tool now offers hexagon (6-sided) and heptagon (7-sided) "
+"polygons. For shapes which can be stretched (rectangle, oval, etc.), the "
+"aspect ratio of the shape is displayed at the bottom while you make your "
+"adjustments. Instructional information shown while using some other tools "
+"has also been expanded."
+msgstr ""
+"Tux Paint's Vormen tool biedt nu hexagon (6-zijdig) en heptagon (zeven-"
+"zijdig) veelhoeken. Vormen die uitgerekt kunnen worden (rechthoek, ovaal, "
+"etc.), de beeldverhouding van de vorm wordt onderin getoond als je "
+"aanpassingen maakt. Informatief-getoonde informatie is ook uitgebreid voor "
+"andere tools.   "
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:67
+msgid ""
+"Keyboard shortcuts, such as [Control]+[S] to save a drawing, are now "
+"accessed with the more traditional [⌘ Command] key when using Tux Paint on "
+"macOS. Sizing of Tux Paint's built-in on-screen keyboard has been improved. "
+"The look and feel of the user documentation has been improved."
+msgstr ""
+"Sneltoetsen, zoals [Control]+[S] om een tekening te bewaren zijn nu "
+"toegankelijk met een meer traditionele [⌘ Command] toets als Tux Paint op "
+"macOS wordt gebruikt. Formaat van Tux Paint's ingebouwde op-scherm "
+"toetsenbord is verbeterd. De look en feel van de gebruikerdocumentatie is "
+"verbeterd."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:72
+msgid ""
+"Tux Paint's Paint and Line tools now support brushes that rotate based on "
+"the angle of the stroke. This new rotation feature, as well as the older "
+"directional and animated brush features, are now visually indicated by the "
+"brush shape selector. Additionally, the Fill tool now offers a freehand "
+"painting mode for interactively coloring within a confined area."
+msgstr ""
+"Tux Paint's Schilder en Lijn tools ondersteunen nu penselen die draaien "
+"gebaseerd op de hoek van de streek. Deze nieuwe rotatieoptie, als ook de "
+"oudere directionele en geanimeerde penseelopties, zijn nu zichtbaar in de "
+"penseelvormselector. Bovendien biedt de Vultool nu vrijehandschilder modus "
+"voor interactief kleuren binnen een afgeschermd gebied. "
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:73
+msgid ""
+"Six new Magic tools have been added to Tux Paint. Panels shrinks and "
+"duplicates the drawing into a 2-by-2 grid, which is useful for making four-"
+"panel comics. Opposite produces complementary colors. Lightning "
+"interactively draws a lightning bolt. Reflection creates a lake-like "
+"reflection on the drawing. Stretch stretches and squashes the picture like a "
+"fun-house mirror. Lastly, Smooth Rainbow provides a more gradual variation "
+"of Tux Paint's classic Rainbow tool."
+msgstr ""
+"Zes nieuwe Magische-tools zijn toegevoegd aan Tux Paint. Panelen krimpen en "
+"dupliceren de tekening in een 2-bij-2 rooster, dat handig is om vier-paneel "
+"cartoons te maken. Tegenovergesteld maakt complementaire kleuren. Bliksem "
+"teken interactief een bliksemflits. Spiegeling maakt een meer-achtige "
+"spiegeling in de tekening. Uitstrek strekt uit en perst samen de afbeelding "
+"zoals in een lachspiegel. En als laatste, Zachte Regenboog biedt een meer "
+"geleidelijke verandering van de Tux Paint's klassieke Regenboog tool."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:74
+msgid ""
+"A number of existing Magic tools have been updated, as well. Improvements "
+"were made to Halftone, which simulates photographs on newsprint; Cartoon, "
+"which makes an image look like a cartoon drawing; and TV, which simulates a "
+"television screen. Additionally, Cartoon and Halftone, along with Blocks, "
+"Chalk, and Emboss, now offer the ability to alter the entire image at once!"
+msgstr ""
+"Een aantal bestaande Magische tools zijn ook aangepast. Verbeteringen zijn "
+"uitgevoerd bij Halftoon, die foto's simuleert op nieuwafdrukken; Cartoon, "
+"die een afbeelding maakt die lijkt op een cartoontekening; en TV, dat een "
+"televisiescherm simuleert. Bovendien, Cartoon zowel als Halftoon , samen met "
+"Blokken, Krijt, en Reliëf bieden nu de mogelijkheid om de gehele afbeelding "
+"tegelijk aan te passen!"
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:75
+msgid ""
+"Finally, Magic tools are now grouped into collections of similar effects — "
+"painting, distorts, color filters, picture warps, pattern painting, "
+"artistic, and picture decorations — making it easier to find the tool you "
+"need."
+msgstr ""
+"Als laatste Magische tools zijn nu gegroepeerd in verzamelingen van "
+"gelijksoortige effecten - verven, vervorming, kleurfilters, "
+"beeldvervormingen, patroonschilderen, artistiek en beelddecoraties - "
+"waardoor je makkelijker je tool kan vinden."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:80
+msgid ""
+"Tux Paint's Fill tool now offers options to fill an area with color "
+"gradients. The \"Radial\" fill creates a circular gradient centered around "
+"the mouse click, while the \"Linear\" fill allows the interactive creation "
+"of gradients at different angles and sizes."
+msgstr ""
+"Tux Paint's Vul tool biedt nu de mogelijkheid om een vlak te vullen met "
+"kleuroverloop. De \"Radiaal\" vulling maakt een cirkelvormige overloop "
+"gecentreerd rond de muisklik, terwijl de \"Lineair\" vulling overloop maakt "
+"in verschillende hoeken en groottes."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:81
+msgid ""
+"New Magic tools have been added to Tux Paint: \"Pixels\" makes it easier to "
+"create retro-gaming style pixel art, \"Checkerboard\" fills the entire "
+"canvas with a check pattern, and \"Clone\" allows duplicating parts of the "
+"picture via brush strokes."
+msgstr ""
+"Nieuwe Magische tools zijn toegevoegd aan Tux Paint: \"Pixels\" maakt het "
+"makkelijker om retro-gamingstijl kunst te maken, \"Dambord\" vult het gehele "
+"canvas met een dambordpatroon, en \"Kloon\" maakt het mogelijk om delen van "
+"de afbeelding te dupliceren met penseelstreken."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:82
+msgid ""
+"Tux Paint's user documentation has been overhauled, making localization "
+"easier. Parties interested in helping with localization are encouraged to "
+"contact the Tux Paint team."
+msgstr ""
+"Tux Paint's gebruikerdocumentatie is verbeterd, waarmee vertaling "
+"makkelijker wordt. Geïnteresseerde partijen worden aangemoedigd om contact "
+"op te nemen met Tux Paint om mee te helpen."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:83
+msgid ""
+"Finally, a new pair of accessibility options have been added. The entire "
+"user interface can now be enlarged benefiting users with impaired vision, "
+"and making the program more suitable to very high density displays. This "
+"feature, along with a new option to re-organize the color palette, can also "
+"be helpful to users of coarse input devices, such as eye-gaze tracking "
+"systems."
+msgstr ""
+"Tot slot is een nieuw paar toegankelijkheidsopties toegevoegd. De gehele "
+"gebruikerinterface kan nu vergroot worden voor mensen met gezichtsbeperking "
+"en maakt he programma meer geschikt voor beeldschermen met hoge dichtheid. "
+"Deze optie, samen met de optie om het kleurpalet te reorganiseren, is handig "
+"voor gebruikers met minder verfijnd invoerapparaten, zoals oog-volgsystemen."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:88
+msgid ""
+"A major improvement has been made to the Shapes tool, which now provides "
+"options to choose whether shapes are drawn from the center or a corner, "
+"making it easier to use in any situation."
+msgstr ""
+"Een grote verbetering is gemaakt in de Vormentool, die nu opties biedt om te "
+"kiezen uit vormen tekenen vanuit het midden of vanuit een hoek, dat "
+"makkelijker is om in iedere situatie te gebruiken."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:89
+msgid ""
+"The on-screen keyboard, an accessibility feature optionally available when "
+"using the Text and Label tools, now appears larger on bigger displays; "
+"helpful for users of coarser input devices, such as eye-tracking systems."
+msgstr ""
+"Het schermtoetsenbord, een toegankelijkheidsoptie beschikbaar bij Tekst en "
+"Labeltools, toont groter op grotere schermen; handig voor gebruikers met een "
+"minder verfijnd invoerapparaat zoals oogvolgsystemen."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:90
+msgid ""
+"The Eraser tool adds new, smaller eraser sizes, and applies smoother, "
+"contiguous strokes when the pointer is moved quickly."
+msgstr ""
+"De Gumtool bevat nu ook kleinere gumvlakken, en is met soepeler, continue "
+"streken toegepast als de pointer snel beweegt."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:91
+msgid ""
+"Finally, this newest version adds options to export individual drawings and "
+"GIF animations, making it easy to share pictures, cartoons, and slideshows "
+"with others."
+msgstr ""
+"Tot slot heeft deze nieuwe versie opties om individuele tekeningen en GIF "
+"animaties te exporteren, waarmee het eenvoudiger is om afbeeldingen, "
+"cartoons en diavoorstellingen met anderen te delen."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:96
+msgid ""
+"The latest version has promoted the \"Fill\" tool, previously found under "
+"the \"Magic\" section of Tux Paint, to the main toolbar, where it's easier "
+"to find. It also includes some performance improvements during start-up and "
+"when bringing up the \"New\" drawing dialog. The solid background colors can "
+"also be placed at the end of that dialog, allowing emphasis of template "
+"images."
+msgstr ""
+"De laatste versie heeft de \"Vul\"-tool verplaatst naar de hoofdbalk. Deze "
+"was eerder onder de \"Magic\" sectie van Tux Paint. Het heeft ook wat "
+"performanceverbeteringen bij start-up en de \"Nieuw\"tekening dialoog. De "
+"gevulde achtergrondkleuren kunnen ook aan het einde van de dialoog geplaatst "
+"worden, met nadruk op de template afbeeldingen."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:97
+msgid ""
+"Tux Paint also now makes it possible to disable stereo sound, which can "
+"benefit users with a hearing impairment, or in situations where only one "
+"speaker is available."
+msgstr ""
+"Tux Paint maakt het nu ook mogelijk om stereo uit te zetten, waarmee "
+"gebruikers met een gehoorbeperking kunnen profiteren, of in situaties waarin "
+"alleen 1 speaker beschikbaar is."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:102
+msgid ""
+"New in this version are a \"color picker\", which allows any color within a "
+"drawing to be chosen using the pointer, and a set of three-, four-, and five-"
+"pointed star shapes."
+msgstr ""
+"Nieuw in deze versie zijn en \"kleurkiezer\", die het mogelijk maakt om "
+"iedere kleur in de tekening te kiezen met gebruik van de pointer, en een set "
+"van drie-, vier- en vijfpuntige stervormen."
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:103
+msgid ""
+"The latest version also incorporates a number of new translations, bringing "
+"the number of supported languages up to nearly 130: Bengali, Bodo, Dogri, "
+"Kabyle, Urdu, and Devanagari and Perso-Arabic variations of Kashmiri and "
+"Sindhi. Thirty other translations have been updated, as well."
+msgstr ""
+"De laatste versie omvat ook een aantal nieuwe vertalingen, waarmee het "
+"aantal ondersteunde talen loopt tot bijna 130: Bengali, Bodo, Dogri, Kabyle, "
+"Urdu en Devangari en Perso-Arabische variaties van Kashmiri en Sindhi. "
+"Dertig andere vertalingen zijn ook bijgewerkt."
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
 #: ../shapes.h:266 ../shapes.h:267
@@ -400,17 +727,13 @@ msgstr "Vijfhoek"
 
 #. Hexagon shape tool (6 sides)
 #: ../shapes.h:290 ../shapes.h:291
-#, fuzzy
-#| msgid "Hexagon Mosaic"
 msgid "Hexagon"
-msgstr "Zeshoek mozaïek"
+msgstr "Zeshoek"
 
 #. Heptagon (aka septagon) shape tool (7 sides)
 #: ../shapes.h:294 ../shapes.h:295
-#, fuzzy
-#| msgid "Hexagon Mosaic"
 msgid "Heptagon"
-msgstr "Zeshoek mozaïek"
+msgstr "Zevenhoek"
 
 #. Octagon shape tool (8 sides)
 #: ../shapes.h:298 ../shapes.h:299
@@ -464,17 +787,13 @@ msgstr "Een vijfhoek heeft vijf zijden."
 
 #. Description of a hexagon
 #: ../shapes.h:355 ../shapes.h:356
-#, fuzzy
-#| msgid "A pentagon has five sides."
 msgid "A hexagon has six sides."
-msgstr "Een vijfhoek heeft vijf zijden."
+msgstr "Een zeshoek heeft zes zijden."
 
 #. Description of a heptagon
 #: ../shapes.h:359 ../shapes.h:360
-#, fuzzy
-#| msgid "A pentagon has five sides."
 msgid "A heptagon has seven sides."
-msgstr "Een vijfhoek heeft vijf zijden."
+msgstr "Een zevenhoek heeft zeven zijden."
 
 #. Description of an octagon
 #: ../shapes.h:363 ../shapes.h:364
@@ -500,38 +819,29 @@ msgid "A star with 5 points."
 msgstr "Een ster met 5 punten."
 
 #: ../shapes.h:439
-#, fuzzy
-#| msgid ""
-#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
-#| "size you want. Move around to rotate it, and click to draw it."
 msgid ""
 "Pick a shape. Click to start drawing, drag, and let go when it is the size "
 "and shape you want. Move around to rotate it, and click again to draw it."
 msgstr ""
-"Kies een vorm. Klik om het midden van de vorm aan te geven, sleep en laat "
-"los als de juiste grootte is bereikt. Beweeg nog in het rond om de vorm te "
+"Kies een vorm. Klik om de tekening te starten, sleep en laat los als de "
+"juiste grootte en vorm is bereikt. Beweeg nog in het rond om de vorm te "
 "draaien en klik om hem te tekenen."
 
 #: ../shapes.h:441
-#, fuzzy
-#| msgid ""
-#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
-#| "size you want. Move around to rotate it, and click to draw it."
 msgid ""
 "Pick a shape. Click to start drawing, drag, and let go when it is the size "
 "and shape you want."
 msgstr ""
-"Kies een vorm. Klik om het midden van de vorm aan te geven, sleep en laat "
-"los als de juiste grootte is bereikt. Beweeg nog in het rond om de vorm te "
-"draaien en klik om hem te tekenen."
+"Kies een vorm. Klik om de tekening te starten, sleep en laat los als de "
+"juiste grootte en vorm is bereikt."
 
 #: ../shapes.h:447
 msgid "Draw shapes from the center."
-msgstr ""
+msgstr "Teken vormen vanuit het midden."
 
 #: ../shapes.h:448
 msgid "Draw shapes from a corner."
-msgstr ""
+msgstr "Teken vormen vanuit de hoek."
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:57
@@ -577,8 +887,6 @@ msgstr "Toverij"
 
 #. Title of fill selector (buttons down the right for fill tool)
 #: ../titles.h:81
-#, fuzzy
-#| msgid "Fill"
 msgid "Fills"
 msgstr "Opvullen"
 
@@ -635,7 +943,7 @@ msgstr "Nieuw"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:97 ../tuxpaint.c:9909
+#: ../tools.h:97 ../tuxpaint.c:9915
 msgid "Open"
 msgstr "Openen"
 
@@ -678,12 +986,6 @@ msgstr ""
 "typen. Druk op [Enter] of [Tab] om de tekst te voltooien."
 
 #: ../tools.h:131
-#, fuzzy
-#| msgid ""
-#| "Choose a style of text. Click on your drawing and you can start typing. "
-#| "Press [Enter] or [Tab] to complete the text. By using the selector button "
-#| "and clicking an existing label, you can move it, edit it and change its "
-#| "text style."
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
@@ -747,12 +1049,12 @@ msgid "Let go of the button to complete the line."
 msgstr "Laat de muisknop los om de lijn af te sluiten."
 
 #: ../tools.h:166
-#, fuzzy, c-format
-#| msgid "Let go of the button to complete the line."
+#, c-format
 msgid ""
 "Let go of the button to complete the line. (Your line’s angle is %.0f "
 "degrees.)"
-msgstr "Laat de muisknop los om de lijn af te sluiten."
+msgstr ""
+"Laat de muisknop los om de lijn af te sluiten. (Je lijnhoek is %.0f graden.)"
 
 #. Instruction while using Shape tool (after first click, before release)
 #: ../tools.h:169
@@ -760,29 +1062,31 @@ msgid "Hold the button to stretch the shape."
 msgstr "Houd de muisknop ingedrukt en beweeg om de vorm uit te rekken."
 
 #: ../tools.h:170
-#, fuzzy, c-format
-#| msgid "Hold the button to stretch the shape."
+#, c-format
 msgid ""
 "Hold the button to stretch the shape. (It has an aspect ratio of \"%.2g:1\".)"
-msgstr "Houd de muisknop ingedrukt en beweeg om de vorm uit te rekken."
+msgstr ""
+"Houd de muisknop ingedrukt en beweeg om de vorm uit te rekken. (Het heeft "
+"een beeldverhouding van \"%.2g:1\".)"
 
 #. Instruction while finishing Shape tool (after release, during rotation step before second click)
 #: ../tools.h:173
 msgid "Move the mouse to rotate the shape. Click to draw it."
-msgstr "Beweeg de muis om de vorm te draaien. Klik als je tevreden bent."
+msgstr "Beweeg de muis om de vorm te draaien. Klik om te tekenen."
 
 #: ../tools.h:174
-#, fuzzy, c-format
-#| msgid "Move the mouse to rotate the shape. Click to draw it."
+#, c-format
 msgid ""
 "Move the mouse to rotate the shape. Click to draw it. (It is rotated %d "
 "degrees.)"
-msgstr "Beweeg de muis om de vorm te draaien. Klik als je tevreden bent."
+msgstr ""
+"Beweeg de muis om de vorm te draaien. Klik om te tekenen. (Het is %d graden "
+"gedraaid.)"
 
 #. Notification that 'New' action was aborted (current image would have been lost)
 #: ../tools.h:177
 msgid "OK then… Let’s keep drawing this one!"
-msgstr "OK… Dan gaan we verder met deze!"
+msgstr "OK… Laten we deze tekenen!"
 
 #. Instructions to show when the Label tool's selector mode is activated
 #: ../tools.h:180
@@ -790,6 +1094,9 @@ msgid ""
 "Clicking an existing label (or press [Tab] to cycle through them and [Enter] "
 "to choose). Then, you can move it, edit it, and change its text style."
 msgstr ""
+"Klik een bestaand label (of druk op [Tab] om om hierdoor de draaien en "
+"[Enter] om te kiezen). Dan kan je het verplaatsen, aanpassen en tekststijl "
+"wijzigen."
 
 #. Instructions to show when a Label has been chosen with the selector
 #: ../tools.h:183
@@ -798,6 +1105,9 @@ msgid ""
 "the text, and use the options to change its text style. Press [Enter] or "
 "[Tab] when you're finished."
 msgstr ""
+"Klik in je afbeelding als je het label wil verplaatsen, type om de tekst te "
+"veranderen en de opties om de tekststijl te wijzigen. Druk op [Enter] of "
+"[Tab] als je klaar bent."
 
 #. Instructions to show when the Label tool's apply mode is activated
 #: ../tools.h:186
@@ -805,40 +1115,49 @@ msgid ""
 "Clicking an existing label (or press [Tab] to cycle through them and [Enter] "
 "to choose) to permanently apply the text to the canvas."
 msgstr ""
+"Klik een bestaand label (of druk op [Tab] om om hierdoor de draaien en "
+"[Enter] om te kiezen) om permanent tekst op het canvas aan te brengen."
 
 #. Instructions to show when choosing brushes, depending on the brush's feature (if there are none, show_brush_tip() will show the current tool's tip)
 #: ../tools.h:189
 msgid "This brush is animated; its shape changes as you draw!"
-msgstr ""
+msgstr "Deze penseel is geanimeerd; de vorm wijzigt als je tekent!"
 
 #: ../tools.h:190
 msgid "This brush changes depending on the angle."
-msgstr ""
+msgstr "Deze penseel wijzigt afhankelijk van de hoek."
 
 #: ../tools.h:191
 msgid ""
 "This brush changes depending on the angle, and is animated; its shape "
 "changes as you draw!"
 msgstr ""
+"Deze penseel wijzigt afhankelijk van de hoek, en is geanimeerd; de vorm "
+"verandert tijdens het tekenen!"
 
 #: ../tools.h:193
 msgid "This brush's spacing is now 1 pixel!"
-msgstr ""
+msgstr "Deze penseel's afstand is nu 1 pixel!"
 
 #: ../tools.h:194
 #, c-format
 msgid ""
 "This brush's spacing is now about %1$d/%2$d the size of the brush shape."
 msgstr ""
+"Deze penseel's afstand is nu ongeveer %1$d/%2$d de grootte van de "
+"penseelvorm."
 
 #: ../tools.h:195
 msgid "This brush's spacing is now about the size of the brush shape."
 msgstr ""
+"Deze penseel's afstand is nu  ongeveer de grootte van de vorm van de penseel."
 
 #: ../tools.h:196
 #, c-format
 msgid "This brush's spacing is now about %d times as big as the brush shape."
 msgstr ""
+"Deze penseel's afstand is nu ongeveer %d keer zo groot als de vorm van het "
+"penseel."
 
 #: ../tools.h:197
 #, c-format
@@ -846,15 +1165,18 @@ msgid ""
 "This brush's spacing is now about %1$d %2$d/%3$d times as big as the brush "
 "shape."
 msgstr ""
+"Deze penseel's afstand is nu ongeveer %1$d %2$d/%3$d keer zo groot als de "
+"vorm van het penseel."
 
 #. Instructions to show when rotating stamps
 #: ../tools.h:200
-#, fuzzy, c-format
-#| msgid "Move the mouse to rotate the shape. Click to draw it."
+#, c-format
 msgid ""
 "Drag the mouse to rotate the stamp. Click to draw it. (It is rotated %d "
 "degrees.)"
-msgstr "Beweeg de muis om de vorm te draaien. Klik als je tevreden bent."
+msgstr ""
+"Beweeg de muis om de stempel te draaien. Klik om te tekenen. (Het is %d "
+"graden gedaaid.)"
 
 #. Prompt to confirm user wishes to quit
 #: ../tuxpaint.c:2487
@@ -949,29 +1271,21 @@ msgstr "Onthoud dat je de linker muisknop dient te gebruiken!"
 
 #. Confirmation of successful (we hope) image export
 #: ../tuxpaint.c:2543
-#, fuzzy
-#| msgid "Your picture has been printed!"
 msgid "Your picture has been exported!"
-msgstr "De tekening is afgedrukt!"
+msgstr "De tekening is geëxporteerd!"
 
 #: ../tuxpaint.c:2544
-#, fuzzy
-#| msgid "Your picture has been printed!"
 msgid "Your slideshow GIF has been exported!"
-msgstr "De tekening is afgedrukt!"
+msgstr "De diavoorstelling GIF is geëxporteerd!"
 
 #. We got an error exporting
 #: ../tuxpaint.c:2548
-#, fuzzy
-#| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your picture could not be exported!"
-msgstr "Sorry! De tekening is niet afgedrukt!"
+msgstr "Sorry! Je tekening is niet geëxporteerd!"
 
 #: ../tuxpaint.c:2549
-#, fuzzy
-#| msgid "Sorry! Your picture could not be printed!"
 msgid "Sorry! Your slideshow GIF could not be exported!"
-msgstr "Sorry! De tekening is niet afgedrukt!"
+msgstr "Sorry! Je diavoorstelling GIF is niet geëxporteerd!"
 
 #. Slideshow instructions
 #: ../tuxpaint.c:2553
@@ -994,175 +1308,178 @@ msgid "Please wait…"
 msgstr "Even geduld…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:9912
+#: ../tuxpaint.c:9918
 msgid "Erase"
 msgstr "Uitgommen"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:9915
+#: ../tuxpaint.c:9921
 msgid "Slides"
 msgstr "Dia's"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:9918
+#: ../tuxpaint.c:9924
 msgid "Export"
-msgstr ""
+msgstr "Export"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:9921
+#: ../tuxpaint.c:9927
 msgid "Back"
 msgstr "Terug"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:9924
+#: ../tuxpaint.c:9930
 msgid "Play"
 msgstr "Afspelen"
 
-#: ../tuxpaint.c:9928
+#: ../tuxpaint.c:9934
 msgid "GIF Export"
-msgstr ""
+msgstr "GIF Export"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:9931
+#: ../tuxpaint.c:9937
 msgid "Next"
 msgstr "Volgende"
 
 #. Color mixer dialog: 'Clear' button, to reset the mixed color
-#: ../tuxpaint.c:9934
+#: ../tuxpaint.c:9940
 msgid "Clear"
-msgstr ""
+msgstr "Wissen"
 
 #. Use the localized label string (e.g., "あぁ" in Japanese)
-#: ../tuxpaint.c:10869 ../tuxpaint.c:10871 ../tuxpaint.c:10872
+#: ../tuxpaint.c:10875 ../tuxpaint.c:10877 ../tuxpaint.c:10878
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:15217
+#: ../tuxpaint.c:15223
 msgid "Yes"
 msgstr "Ja"
 
-#: ../tuxpaint.c:15221
+#: ../tuxpaint.c:15227
 msgid "No"
 msgstr "Nee"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:16498
+#: ../tuxpaint.c:16504
 msgid "Replace the picture with your changes?"
 msgstr "De tekening vervangen met de wijzigingen?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:16502
+#: ../tuxpaint.c:16508
 msgid "Yes, replace the old one!"
 msgstr "Ja, vervang de oude!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:16506
+#: ../tuxpaint.c:16512
 msgid "No, save a new file!"
 msgstr "Nee, opslaan in een nieuw bestand!"
 
-#: ../tuxpaint.c:17851
+#: ../tuxpaint.c:17857
 msgid "Choose the picture you want, then click “Open”."
 msgstr "Kies de tekening die je wilt en klik dan op “Openen”."
 
-#: ../tuxpaint.c:19574
+#: ../tuxpaint.c:19580
 msgid "Select 2 or more drawings to turn into an animated GIF."
-msgstr ""
+msgstr "Kies 2 of meer tekeningen om in een geanimeerde GIF te veranderen."
 
 #. Descriptions (names) of the color mixer tool's primary colors and shades
-#: ../tuxpaint.c:25883
+#: ../tuxpaint.c:25889
 msgid "red"
-msgstr ""
+msgstr "rood"
 
-#: ../tuxpaint.c:25884
-#, fuzzy
-#| msgid "Yellow!"
+#: ../tuxpaint.c:25890
 msgid "yellow"
-msgstr "Geel!"
+msgstr "geel"
 
-#: ../tuxpaint.c:25885
-#, fuzzy
-#| msgid "Sky blue!"
+#: ../tuxpaint.c:25891
 msgid "blue"
-msgstr "Hemelsblauw!"
+msgstr "blauw"
 
-#: ../tuxpaint.c:25886
-#, fuzzy
-#| msgid "White!"
+#: ../tuxpaint.c:25892
 msgid "white"
-msgstr "Wit!"
+msgstr "wit"
 
-#: ../tuxpaint.c:25887
-msgid "grey"
-msgstr ""
-
-#: ../tuxpaint.c:25888
-#, fuzzy
-#| msgid "Black!"
-msgid "black"
-msgstr "Zwart!"
-
-#. Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.)
 #: ../tuxpaint.c:25893
-#, c-format
-msgid "Your color is %1$s %2$s."
-msgstr ""
+msgid "grey"
+msgstr "grijs"
 
 #: ../tuxpaint.c:25894
+msgid "black"
+msgstr "zwart"
+
+#. Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.)
+#: ../tuxpaint.c:25899
+#, c-format
+msgid "Your color is %1$s %2$s."
+msgstr "Je kleur is %1$s %2$s."
+
+#: ../tuxpaint.c:25900
 #, c-format
 msgid "Your color is %1$s %2$s and %3$s %4$s."
-msgstr ""
+msgstr "Je kleur is %1$s %2$s en %3$s %4$s."
 
-#: ../tuxpaint.c:25895
+#: ../tuxpaint.c:25901
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, and %5$s %6$s."
-msgstr ""
+msgstr "Je kleur is %1$s %2$s, %3$s %4$s en %5$s %6$s."
 
-#: ../tuxpaint.c:25897
+#: ../tuxpaint.c:25903
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, and %7$s %8$s."
-msgstr ""
+msgstr "Je kleur is %1$s %2$s, %3$s %4$s, %5$s %6$s en %7$s %8$s."
 
-#: ../tuxpaint.c:25899
+#: ../tuxpaint.c:25905
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, and %9$s %10$s."
-msgstr ""
+msgstr "Je kleur is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s en %9$s %10$s."
 
-#: ../tuxpaint.c:25901
+#: ../tuxpaint.c:25907
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s, and "
 "%11$s %12$s."
 msgstr ""
+"Je kleur is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s en %11$s "
+"%12$s."
 
 #. Color mixer; e.g., "Your color is entirely grey."
-#: ../tuxpaint.c:26739 ../tuxpaint.c:26746
+#: ../tuxpaint.c:26745 ../tuxpaint.c:26752
 msgid "entirely"
-msgstr ""
+msgstr "geheel"
 
-#: ../tuxpaint.c:30000
+#: ../tuxpaint.c:30006
 msgid "Select a color from your drawing."
 msgstr "Kies een kleur uit je tekening."
 
-#: ../tuxpaint.c:30011
+#: ../tuxpaint.c:30017
 msgid ""
 "Pick a color. Hues go top to bottom. Saturation/intensity goes left (pale) "
 "to right (pure). Value (lightness/darkness): grey bar."
 msgstr ""
+"Kies een kleur. Tint gaat van boven naar beneden. Verzadiging/intensiteit "
+"gaat van links (bleek) naar rechts (puur). Waarde (helderheid/donkerte): "
+"grijze balk."
 
-#: ../tuxpaint.c:30025
+#: ../tuxpaint.c:30031
 msgid ""
 "Click the primary colors (red, yellow, and blue), white (to tint), grey (to "
 "tone), and black (to shade), to mix together a new color."
 msgstr ""
+"Klik de primaire kleuren (rood, geel en blauw), wit (voor tint), grijs (voor "
+"toon) en zwart (voor schaduw) om nieuwe kleur te mengen."
 
-#: ../tuxpaint.desktop.in:9
+#: ../tuxpaint.desktop.in:9 ../tuxpaint-fullscreen.desktop.in:9
 msgid "Drawing program"
 msgstr "Tekenprogramma"
+
+#: ../tuxpaint-fullscreen.desktop.in:3
+msgid "Tux Paint (Fullscreen)"
+msgstr ""
 
 #: ../../magic/src/alien.c:67
 msgid "Color Shift"
@@ -1205,52 +1522,43 @@ msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "Klik en sleep de muis om de tekening geblokt te maken."
 
 #: ../../magic/src/blocks_etc.c:176
-#, fuzzy
-#| msgid "Click to sharpen the entire picture."
 msgid "Click to make the entire picture blocky."
-msgstr "Klik om overgangen in je hele tekening te verscherpen."
+msgstr "Klik om je hele tekening geblokt te maken."
 
 #: ../../magic/src/blocks_etc.c:185
 msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr ""
-"Klik en sleep de muis om de tekening te veranderen in een krijttekening!"
+"Klik en sleep de muis om de tekening te veranderen in een krijttekening."
 
 #: ../../magic/src/blocks_etc.c:191
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgid "Click to turn the entire picture into a chalk drawing."
 msgstr ""
-"Klik en sleep de muis om de tekening te veranderen in een krijttekening!"
+"Klik en sleep de muis om de tekening te veranderen in een krijttekening."
 
 #: ../../magic/src/blocks_etc.c:200
 msgid "Click and drag the mouse around to make the picture drip."
-msgstr "Klik en sleep de muis om daar de tekening te laten druipen!"
+msgstr "Klik en sleep de muis om daar de tekening te laten druipen."
 
 #: ../../magic/src/blocks_etc.c:204
-#, fuzzy
-#| msgid "Click to sharpen the entire picture."
 msgid "Click to make the entire picture drip."
-msgstr "Klik om overgangen in je hele tekening te verscherpen."
+msgstr "Klik om de hele afbeelding te druppelen."
 
 #: ../../magic/src/bloom.c:114
 msgid "Bloom"
-msgstr ""
+msgstr "Bloem"
 
 #: ../../magic/src/bloom.c:127
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgid ""
 "Click and drag to apply a glowing \"bloom\" effect to parts of your image."
-msgstr "Klik en sleep de muis om de tekening deels te bedekken met mozaïek."
+msgstr ""
+"Klik en sleep de muis om op delen van de tekening  een glimmende \"bloem\"-"
+"effect toe te passen."
 
 #: ../../magic/src/bloom.c:129
-#, fuzzy
-#| msgid "Click to add a mosaic effect to your entire picture."
 msgid "Click to apply a glowing \"bloom\" effect to your entire image."
-msgstr "Klik om de hele tekening te bedekken met mozaïek."
+msgstr ""
+"Klik om op de hele tekening een glimmende \"bloem\"-effect toe te passen."
 
 #: ../../magic/src/blur.c:84
 msgid "Blur"
@@ -1294,66 +1602,56 @@ msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr "Klik en sleep de muis om daar de tekening te veranderen in een strip."
 
 #: ../../magic/src/cartoon.c:140
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgid "Click to turn the entire picture into a cartoon."
-msgstr ""
-"Klik en sleep de muis om de tekening te veranderen in een krijttekening!"
+msgstr "Klik de hele afbeelding in een cartoon te veranderen."
 
 #: ../../magic/src/checkerboard.c:116
 msgid "Checkerboard"
-msgstr ""
+msgstr "Dambord"
 
 #: ../../magic/src/checkerboard.c:131
-#, fuzzy
-#| msgid "Click and drag to draw repetitive patterns. "
 msgid "Click and drag to fill the canvas with a checkerboard pattern."
-msgstr "Klik en sleep om zich herhalende patronen te tekenen."
+msgstr "Klik en sleep om het canvas met een dambordpatroon te vullen."
 
 #: ../../magic/src/clone.c:142
 msgid "Clone"
-msgstr ""
+msgstr "Kloon"
 
 #: ../../magic/src/clone.c:159
 msgid ""
 "Click once to pick a spot to begin cloning. Click again and drag to clone "
 "that part of the picture."
 msgstr ""
+"Klik eenmaal om een plaats te selecteren om klonen te beginnen. Klik "
+"nogmaals en sleep om dat deel van de afbeelding te klonen."
 
 #: ../../magic/src/colorsep.c:38
-#, fuzzy
-#| msgid "Glass Tile"
 msgid "3D Glasses"
-msgstr "Glastegel"
+msgstr "3D-bril"
 
 #: ../../magic/src/colorsep.c:39
-#, fuzzy
-#| msgid "Color Shift"
 msgid "Color Sep."
-msgstr "Kleurverschuiving"
+msgstr "Kleurscheid."
 
 #: ../../magic/src/colorsep.c:40
 msgid "Double Vision"
-msgstr ""
+msgstr "Dubbel zicht"
 
 #: ../../magic/src/colorsep.c:44
 msgid ""
 "Click and drag left and right to separate your picture's red and cyan, to "
 "make anaglyphs you can view with 3D glasses!"
 msgstr ""
+"Klik en sleep links en rechts om rood en cyaan in je tekening te scheiden, "
+"om anaglyphs te maken die je kan bekijken met een 3D-bril!"
 
 #: ../../magic/src/colorsep.c:45
-#, fuzzy
-#| msgid "Click and drag to draw train track rails on your picture."
 msgid "Click and drag to separate your picture's colors."
-msgstr "Klik en sleep met de muis een spoorrails in je tekening."
+msgstr "Klik en sleep om kleuren in je tekening te scheiden."
 
 #: ../../magic/src/colorsep.c:46
-#, fuzzy
-#| msgid "Click and drag to draw large bricks."
 msgid "Click and drag to simulate double vision."
-msgstr "Klik en sleep om de grote stenen te tekenen."
+msgstr "Klik en sleep om dubbel zicht te simuleren."
 
 #: ../../magic/src/confetti.c:103
 msgid "Confetti"
@@ -1361,7 +1659,7 @@ msgstr "Confetti"
 
 #: ../../magic/src/confetti.c:116
 msgid "Click to throw confetti!"
-msgstr "Klik om confetti te gooien"
+msgstr "Klik om confetti te gooien!"
 
 #: ../../magic/src/distortion.c:145
 msgid "Distortion"
@@ -1380,10 +1678,8 @@ msgid "Click and drag the mouse to emboss the picture."
 msgstr "Klik en sleep de muis om in de tekening een reliëf te maken."
 
 #: ../../magic/src/emboss.c:129
-#, fuzzy
-#| msgid "Click to sharpen the entire picture."
 msgid "Click to emboss the entire picture."
-msgstr "Klik om overgangen in je hele tekening te verscherpen."
+msgstr "Klik om reliëf in je hele tekening toe te voegen."
 
 #: ../../magic/src/fade_darken.c:47
 msgid "Lighten"
@@ -1395,23 +1691,19 @@ msgstr "Verdonkeren"
 
 #: ../../magic/src/fade_darken.c:49
 msgid "Desaturate"
-msgstr ""
+msgstr "Onverzadig"
 
 #: ../../magic/src/fade_darken.c:50
 msgid "Saturate"
-msgstr ""
+msgstr "Verzadig"
 
 #: ../../magic/src/fade_darken.c:51
-#, fuzzy
-#| msgid "Xor Colors"
 msgid "Remove Color"
-msgstr "Xor-kleuren"
+msgstr "Verwijder Kleur"
 
 #: ../../magic/src/fade_darken.c:52
-#, fuzzy
-#| msgid "Colors"
 msgid "Keep Color"
-msgstr "Kleuren"
+msgstr "Behoud de Kleur"
 
 #: ../../magic/src/fade_darken.c:57
 msgid "Click and drag the mouse to lighten parts of your picture."
@@ -1430,72 +1722,52 @@ msgid "Click to darken your entire picture."
 msgstr "Klik om de hele tekening donkerder te maken."
 
 #: ../../magic/src/fade_darken.c:65
-#, fuzzy
-#| msgid "Click and drag the mouse to darken parts of your picture."
 msgid "Click and drag the mouse to desaturate parts of your picture."
-msgstr "Klik en sleep de muis om daar de tekening donkerder te maken."
+msgstr "Klik en sleep de muis om delen van de tekening minder te verzadigen."
 
 #: ../../magic/src/fade_darken.c:66
-#, fuzzy
-#| msgid "Click to darken your entire picture."
 msgid "Click to desaturate your entire picture."
-msgstr "Klik om de hele tekening donkerder te maken."
+msgstr "Klik om de hele tekening  minder te verzadigen."
 
 #: ../../magic/src/fade_darken.c:69
-#, fuzzy
-#| msgid "Click and drag the mouse to sharpen parts of your picture."
 msgid "Click and drag the mouse to saturate parts of your picture."
-msgstr "Klik en sleep de muis om overgangen in je tekening te verscherpen."
+msgstr "Klik en sleep de muis om delen van je tekening te verzadigen."
 
 #: ../../magic/src/fade_darken.c:70
-#, fuzzy
-#| msgid "Click to darken your entire picture."
 msgid "Click to saturate your entire picture."
-msgstr "Klik om de hele tekening donkerder te maken."
+msgstr "Klik om de hele tekening te verzadigen."
 
 #: ../../magic/src/fade_darken.c:73
-#, fuzzy
-#| msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgid ""
 "Click and drag the mouse to entirely desaturate parts of your picture that "
 "match the chosen color."
-msgstr "Klik en sleep de muis om randen in je tekening te vinden."
+msgstr ""
+"Klik en sleep de muis om delen van je afbeelding, die niet passen bij de "
+"gekozen kleur, geheel te onverzadigen."
 
 #: ../../magic/src/fade_darken.c:74
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to turn parts of your picture into white "
-#| "and a color you choose."
 msgid ""
 "Click to entirely desaturate the parts of your picture that match the chosen "
 "color."
 msgstr ""
-"Klik en sleep de muis om daar de tekening te veranderen in wit en een kleur "
-"naar keuze."
+"Klik om delen van je afbeelding, die niet passen bij de gekozen kleur, "
+"geheel te onverzadigen."
 
 #: ../../magic/src/fade_darken.c:77
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to turn parts of your picture into white "
-#| "and a color you choose."
 msgid ""
 "Click and drag the mouse to entirely desaturate parts of your picture that "
 "don't match the chosen color."
 msgstr ""
-"Klik en sleep de muis om daar de tekening te veranderen in wit en een kleur "
-"naar keuze."
+"Klik en sleep de muis om om delen van je afbeelding, die niet passen bij de "
+"gekozen kleur, geheel te onverzadigen."
 
 #: ../../magic/src/fade_darken.c:78
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to turn parts of your picture into white "
-#| "and a color you choose."
 msgid ""
 "Click to entirely desaturate the parts of your picture that don't match the "
 "chosen color."
 msgstr ""
-"Klik en sleep de muis om daar de tekening te veranderen in wit en een kleur "
-"naar keuze."
+"Klik om delen van je afbeelding, die niet passen bij de gekozen kleur, "
+"geheel te onverzadigen."
 
 #: ../../magic/src/fisheye.c:113
 msgid "Fisheye"
@@ -1538,8 +1810,6 @@ msgid "Fretwork"
 msgstr "Knipkunst"
 
 #: ../../magic/src/fretwork.c:219
-#, fuzzy
-#| msgid "Click and drag to draw repetitive patterns. "
 msgid "Click and drag to draw repetitive patterns."
 msgstr "Klik en sleep om zich herhalende patronen te tekenen."
 
@@ -1561,7 +1831,7 @@ msgstr "Klik om de hele tekening te bedekken met glastegels."
 
 #: ../../magic/src/googlyeyes.c:165
 msgid "Googly Eyes"
-msgstr ""
+msgstr "Oogjes"
 
 #: ../../magic/src/grass.c:116
 msgid "Grass"
@@ -1580,39 +1850,28 @@ msgid "Click and drag to turn your drawing into a newspaper."
 msgstr "Klik en sleep om uw tekening om te vormen in een krant."
 
 #: ../../magic/src/halftone.c:51
-#, fuzzy
-#| msgid "Click and drag to turn your drawing into a newspaper."
 msgid "Click to turn your drawing into a newspaper."
-msgstr "Klik en sleep om uw tekening om te vormen in een krant."
+msgstr "Klik en sleep om uw tekening om te vormen naar een krant."
 
 #: ../../magic/src/kaleidox.c:39
-#, fuzzy
-#| msgid "Kaleidoscope"
 msgid "Kaleido-4"
-msgstr "Caleidoscoop"
+msgstr "Caleido-4"
 
 #: ../../magic/src/kaleidox.c:40
-#, fuzzy
-#| msgid "Kaleidoscope"
 msgid "Kaleido-6"
-msgstr "Caleidoscoop"
+msgstr "Caleido-6"
 
 #: ../../magic/src/kaleidox.c:41
-#, fuzzy
-#| msgid "Kaleidoscope"
 msgid "Kaleido-8"
-msgstr "Caleidoscoop"
+msgstr "Caleido-8"
 
 #: ../../magic/src/kaleidox.c:45 ../../magic/src/kaleidox.c:46
 #: ../../magic/src/kaleidox.c:47
-#, fuzzy
-#| msgid ""
-#| "Click and drag to make parts of your picture look like they are on "
-#| "television."
 msgid ""
 "Click and drag around your picture to look through it with a kaleidoscope!"
 msgstr ""
-"Klik en sleep om delen van de tekening op een televisiebeeld te laten lijken."
+"Klik en sleep door je tekening om het te laten lijken of je door een "
+"kaleidoscoop kijkt!"
 
 #: ../../magic/src/kalidescope.c:128
 msgid "Symmetric Left/Right"
@@ -1679,34 +1938,25 @@ msgid "Click and drag to draw a beam of light on your picture."
 msgstr "Klik en teken met de muis een lichtbundel in je tekening."
 
 #: ../../magic/src/lightning.c:90
-#, fuzzy
-#| msgid "Lighten"
 msgid "Lightning"
-msgstr "Oplichten"
+msgstr "Bliksem"
 
 #: ../../magic/src/lightning.c:105
-#, fuzzy
-#| msgid "Click and drag to draw a beam of light on your picture."
 msgid "Click, drag, and release to draw a lightning bolt between two points."
-msgstr "Klik en teken met de muis een lichtbundel in je tekening."
+msgstr ""
+"Klik, sleep en laat los om een bliksemflits tussen twee punten te tekenen."
 
 #: ../../magic/src/maze.c:114
 msgid "Maze"
-msgstr ""
+msgstr "Doolhof"
 
 #: ../../magic/src/maze.c:128
-#, fuzzy
-#| msgid "Click and drag to draw train track rails on your picture."
 msgid "Click and drag to paint a maze on your picture."
-msgstr "Klik en sleep met de muis een spoorrails in je tekening."
+msgstr "Klik en sleep om een doolhof in je tekening te schilderen."
 
 #: ../../magic/src/maze.c:130
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgid "Click to turn your entire picture into a maze."
-msgstr ""
-"Klik en sleep de muis om de tekening te veranderen in een krijttekening!"
+msgstr "Klik om de tekening te veranderen in een doolhof."
 
 #: ../../magic/src/metalpaint.c:108
 msgid "Metal Paint"
@@ -1726,7 +1976,7 @@ msgstr "Omkeren"
 
 #: ../../magic/src/mirror_flip.c:137
 msgid "Click to make a mirror image."
-msgstr "Klik om een spiegelbeeld te maken!"
+msgstr "Klik om een spiegelbeeld te maken."
 
 #: ../../magic/src/mirror_flip.c:139
 msgid "Click to flip the picture upside-down."
@@ -1797,7 +2047,7 @@ msgstr "Negatief"
 
 #: ../../magic/src/negative.c:80
 msgid "Opposite"
-msgstr ""
+msgstr "Tegenovergestelde"
 
 #: ../../magic/src/negative.c:86
 msgid "Click and drag the mouse around to make your painting negative."
@@ -1808,20 +2058,20 @@ msgid "Click to turn your painting into its negative."
 msgstr "Klik om van de tekening een negatief beeld te maken."
 
 #: ../../magic/src/negative.c:90
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to change the color of parts of your "
-#| "picture."
 msgid ""
 "Click and drag the mouse around to change colors to their opposites -- their "
 "complementary colors."
-msgstr "Klik en sleep de muis om daar de kleur van je tekening te veranderen."
+msgstr ""
+"Klik en sleep de muis om daar de kleur van je tekening te veranderen in het "
+"tegenovergestelde - de complementaire kleur."
 
 #: ../../magic/src/negative.c:92
 msgid ""
 "Click to turn all colors in your painting into their opposites -- their "
 "complementary colors."
 msgstr ""
+"Klik om alle kleuren in je schilderij in in hun tegenovergestelde - de "
+"complementaire kleuren - te veranderen."
 
 #: ../../magic/src/noise.c:65
 msgid "Noise"
@@ -1841,13 +2091,11 @@ msgstr "Perspectief"
 
 #: ../../magic/src/perspective.c:171
 msgid "Panels"
-msgstr ""
+msgstr "Panelen"
 
 #: ../../magic/src/perspective.c:172
-#, fuzzy
-#| msgid "Zoom"
 msgid "Tile Zoom"
-msgstr "Zoomen"
+msgstr "Tegel-zoomen"
 
 #: ../../magic/src/perspective.c:173
 msgid "Zoom"
@@ -1855,26 +2103,22 @@ msgstr "Zoomen"
 
 #: ../../magic/src/perspective.c:174
 msgid "Rush"
-msgstr ""
+msgstr "Vervagen"
 
 #: ../../magic/src/perspective.c:179
 msgid "Click on the corners and drag where you want to stretch the picture."
 msgstr "Klik op de hoeken en sleep waar u de afbeelding wilt uitrekken."
 
 #: ../../magic/src/perspective.c:181
-#, fuzzy
-#| msgid "Click to turn your painting into its negative."
 msgid "Click to turn your picture into 2-by-2 panels."
-msgstr "Klik om van de tekening een negatief beeld te maken."
+msgstr "Klik om van de tekening een beeld te maken van 2-bij-2 panelen."
 
 #: ../../magic/src/perspective.c:184
-#, fuzzy
-#| msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgid ""
 "Click and drag up to zoom in the picture. Drag down to zoom out and tile the "
 "picture."
 msgstr ""
-"Klik en sleep omhoog om in te zoomen of omlaag om uit zoomen in de "
+"Klik en sleep omhoog om in te zoomen of omlaag om uit zoomen en tegel de "
 "afbeelding."
 
 #: ../../magic/src/perspective.c:187
@@ -1884,22 +2128,18 @@ msgstr ""
 "afbeelding."
 
 #: ../../magic/src/perspective.c:190
-#, fuzzy
-#| msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgid "Click and drag up to rush in or drag down to rush out the picture."
 msgstr ""
-"Klik en sleep omhoog om in te zoomen of omlaag om uit zoomen in de "
+"Klik en sleep omhoog om in te vervagen of omlaag om uit vervagen in de "
 "afbeelding."
 
 #: ../../magic/src/pixels.c:114
 msgid "Pixels"
-msgstr ""
+msgstr "Pixels"
 
 #: ../../magic/src/pixels.c:129
-#, fuzzy
-#| msgid "Click and drag to draw large bricks."
 msgid "Click and drag to draw large pixels."
-msgstr "Klik en sleep om de grote stenen te tekenen."
+msgstr "Klik en sleep om de grote pixels te tekenen."
 
 #: ../../magic/src/puzzle.c:116
 msgid "Puzzle"
@@ -1921,6 +2161,18 @@ msgstr "Spoorrails"
 msgid "Click and drag to draw train track rails on your picture."
 msgstr "Klik en sleep met de muis een spoorrails in je tekening."
 
+#: ../../magic/src/rainbow.c:148
+msgid "Rainbow"
+msgstr "Regenboog"
+
+#: ../../magic/src/rainbow.c:152
+msgid "Smooth Rainbow"
+msgstr "Zachte regenboog"
+
+#: ../../magic/src/rainbow.c:168
+msgid "You can draw in rainbow colors!"
+msgstr "Je kan in regenboog-kleuren tekenen!"
+
 #: ../../magic/src/rain.c:68
 msgid "Rain"
 msgstr "Regen"
@@ -1932,20 +2184,6 @@ msgstr "Klik op de plaats waar je regendruppels wil laten vallen."
 #: ../../magic/src/rain.c:77
 msgid "Click to cover your picture with rain drops."
 msgstr "Klik en bedek je tekening met regendruppels."
-
-#: ../../magic/src/rainbow.c:148
-msgid "Rainbow"
-msgstr "Regenboog"
-
-#: ../../magic/src/rainbow.c:152
-#, fuzzy
-#| msgid "Rainbow"
-msgid "Smooth Rainbow"
-msgstr "Regenboog"
-
-#: ../../magic/src/rainbow.c:168
-msgid "You can draw in rainbow colors!"
-msgstr "Je kan in regenboog-kleuren tekenen!"
 
 #: ../../magic/src/realrainbow.c:115
 msgid "Real Rainbow"
@@ -1965,14 +2203,11 @@ msgstr ""
 
 #: ../../magic/src/reflection.c:117
 msgid "Reflection"
-msgstr ""
+msgstr "Weerspiegeling"
 
 #: ../../magic/src/reflection.c:132
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgid "Click and drag the mouse around to add a reflection to your picture."
-msgstr "Klik en sleep de muis om de tekening deels te bedekken met mozaïek."
+msgstr "Klik en sleep de muis om reflectie aan de tekening toe te voegen."
 
 #: ../../magic/src/ripples.c:111
 msgid "Ripples"
@@ -2077,17 +2312,14 @@ msgstr "Klik en laat sneeuwvlokken vallen op je tekening."
 
 #: ../../magic/src/stretch.c:120
 msgid "Stretch"
-msgstr ""
+msgstr "Uitrekken"
 
 #: ../../magic/src/stretch.c:135
-#, fuzzy
-#| msgid ""
-#| "Click and drag to make parts of your picture look like they are on "
-#| "television."
 msgid ""
 "Click and drag to stretch part of your picture vertically or horizontally."
 msgstr ""
-"Klik en sleep om delen van de tekening op een televisiebeeld te laten lijken."
+"Klik en sleep om delen van de tekening verticaal of horizontaal uit te "
+"rekken."
 
 #: ../../magic/src/string.c:145
 msgid "String edges"
@@ -2118,59 +2350,41 @@ msgid "Draw string art arrows with free angles."
 msgstr "Teken pijlen met tekstkunst met vrije hoeken."
 
 #: ../../magic/src/swirls.c:30
-#, fuzzy
-#| msgid "Circle"
 msgid "Circles"
-msgstr "Cirkel"
+msgstr "Cirkels"
 
 #: ../../magic/src/swirls.c:31
 msgid "Rays"
-msgstr ""
+msgstr "Stralen"
 
 #: ../../magic/src/swirls.c:32
 msgid "Fur"
-msgstr ""
+msgstr "Vacht"
 
 #: ../../magic/src/swirls.c:37
-#, fuzzy
-#| msgid ""
-#| "Click and drag to make parts of your picture look like they are on "
-#| "television."
 msgid ""
 "Click and drag to transform parts of your picture to circular brushstrokes."
 msgstr ""
-"Klik en sleep om delen van de tekening op een televisiebeeld te laten lijken."
+"Klik en sleep om delen van de tekening naar rondlopende penseelstreken te "
+"veranderen."
 
 #: ../../magic/src/swirls.c:38
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgid "Click to turn your entire picture into circular brushstrokes."
-msgstr ""
-"Klik en sleep de muis om de tekening te veranderen in een krijttekening!"
+msgstr "Klik om je hele plaatje in rondlopende penseelstreken te veranderen."
 
 #: ../../magic/src/swirls.c:41
-#, fuzzy
-#| msgid ""
-#| "Click and drag to make parts of your picture look like they are on "
-#| "television."
 msgid "Click and drag to transform parts of your picture to brushstroke rays."
 msgstr ""
-"Klik en sleep om delen van de tekening op een televisiebeeld te laten lijken."
+"Klik en sleep om delen van de tekening naar penseelstreek stralen te "
+"veranderen."
 
 #: ../../magic/src/swirls.c:42
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgid "Click to turn your entire picture into brushstroke rays."
-msgstr ""
-"Klik en sleep de muis om de tekening te veranderen in een krijttekening!"
+msgstr "Klik om de gehele tekening te veranderen in penseelstreek stralen."
 
 #: ../../magic/src/swirls.c:45
-#, fuzzy
-#| msgid "Click and drag to draw train track rails on your picture."
 msgid "Click and drag to add fur to your picture."
-msgstr "Klik en sleep met de muis een spoorrails in je tekening."
+msgstr "Klik en sleep om vacht in je tekening toe te voegen."
 
 #: ../../magic/src/tint.c:73
 msgid "Tint"
@@ -2266,11 +2480,11 @@ msgstr "Xor-kleuren"
 
 #: ../../magic/src/xor.c:113
 msgid "Click and drag to draw a XOR effect"
-msgstr "Klik en sleep om een XOR-effect te tekenen."
+msgstr "Klik en sleep om een XOR-effect te tekenen"
 
 #: ../../magic/src/xor.c:117
 msgid "Click to draw a XOR effect on the whole picture"
-msgstr "Klik om in de hele afbeelding een XOR-effect te tekenen."
+msgstr "Klik om in de hele afbeelding een XOR-effect te tekenen"
 
 #, fuzzy
 #~| msgid "Move the mouse to rotate the shape. Click to draw it."

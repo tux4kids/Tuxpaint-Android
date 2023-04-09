@@ -6,7 +6,7 @@
         Copyright © 2002-2023 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                 marzo 16, 2023
+                                 abril 2, 2023
 
              +----------------------------------------------------+
              |Table of Contents                                   |
@@ -104,7 +104,7 @@ What's New in Tux Paint version 0.9.29?
    New Fill tool
            A shaped gradient mode has been added to the Fill tool
 
-   Fifteen new Magic tools
+   Sixteen new Magic tools
            Maze, Googly Eyes, Fur, Circles, Rays, 3D Glasses, Color Sep.,
            Double Vision, Saturate, Desaturate, Remove Color, Keep Color,
            Kaleido-4, Kaleido-6, Kaleido-8, Bloom

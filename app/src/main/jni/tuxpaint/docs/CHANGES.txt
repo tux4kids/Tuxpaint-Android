@@ -7,7 +7,7 @@ Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
 
-2023.March.23 (0.9.29) ### RC2
+2023.April.2 (0.9.29)
   * Improvements to "Stamp" tool:
     -----------------------------
     * Stamps may now be rotated.
@@ -336,6 +336,12 @@ https://tuxpaint.org/
       FreeDesktop systems (e.g., Linux)
       Will Thompson <https://sourceforge.net/u/wjjjjt/profile/>
 
+    * Add "tuxpaint-fullscreen.desktop", which launches Tux Paint
+      with "--fullscreen=native" option on Freedesktop.org environments
+      (similar to the fullscreen launcher we've had for Windows)
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/227/; h/t Aaron Wolf)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
     * Remove "intltool" dependency. (Thanks to this, no need for
       "tuxpaint.desktop.in".  It involved rewriting "update-po.sh"
       to invoke 'xgettext' and 'msgfmt' rather than 'intltool' commands.)
@@ -429,8 +435,13 @@ https://tuxpaint.org/
       now allows for localization.  (Maintained in "tuxpaint-docs" repo.)
       Bill Kendrick <bill@newbreedsoftware.com>
 
-    * Updated macOS build instructions for SDL2.0.
+    * Updated macOS build instructions for SDL2.0 (INSTALL docs).
       Mark Kim <markuskimius@gmail.com>
+
+    * Added an overview of building for Android (INSTALL docs).
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+      (Edited by Bill Kendrick)
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/224/
 
     * "--verbose-version" now shows whether SDL2_Pango is being used.
       Bill Kendrick <bill@newbreedsoftware.com>
@@ -449,8 +460,20 @@ https://tuxpaint.org/
     * Catalan translation
       Pere Pujal i Carabantes <perepujal@gmail.com>
 
+    * Dutch translation
+      Willem Heppe <heppew@yahoo.com>
+
     * French translation
       Jacques Chion <jacques.chion@orange.fr>
+
+    * Gaelic (Irish) translation
+      Kevin Scannell <kscanne@gmail.com>
+
+    * Georgian translation
+      Gia Shervashidze <giasher@gmail.com>
+
+    * Gujarati translation
+      Kartik Mistry <kartik.mistry@gmail.com>
 
     * Icelandic translation
       Sveinn í Felli <sv1@fellsnet.is>
@@ -465,6 +488,9 @@ https://tuxpaint.org/
       A subset of Genjyuu Gothic: http://jikasei.me/font/genjyuu/
       Added by TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
 
+    * Korean translation
+      Mark Kim <markuskimius@gmail.com>
+
     * Norwegian Nynorsk translation
       Karl Ove Hufthammer <karl@huftis.org>
 
@@ -474,8 +500,8 @@ https://tuxpaint.org/
     * Punjabi translation
       A S Alam <aalam@satluj.org>
 
-    * Korean translation
-      Mark Kim <markuskimius@gmail.com>
+    * Ukrainian translation
+      Yuri Chornoivan <yurchor@ukr.net>
 
 2022.June.4 (0.9.28)
   * Improvements to "Paint" and "Lines" tools:
@@ -1505,7 +1531,7 @@ https://tuxpaint.org/
       Yannis Kaskamanidis <kiolalis@gmail.com>
 
     * Gujarati translation
-      Kartik Mistry <kartik.mistry@gmail.com>,
+      Kartik Mistry <kartik.mistry@gmail.com>
 
     * Icelandic translation
       Sveinn í Felli <sv1@fellsnet.is>

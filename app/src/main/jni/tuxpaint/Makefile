@@ -4,12 +4,12 @@
 # Various contributors (see AUTHORS.txt)
 # https://tuxpaint.org/
 
-# June 14, 2002 - March 22, 2023
+# June 14, 2002 - April 1, 2023
 
 
 # The version number, for release:
 
-VER_VERSION:=0.9.29-rc2
+VER_VERSION:=0.9.29
 # We are always SDL2 now, so don't need "-sdl2"
 VER_FLAVOR:=""
 ifdef SOURCE_DATE_EPOCH
@@ -552,7 +552,7 @@ translations: trans
 	@echo "Install gettext to run Tux Paint in non-U.S. English modes."
 	@echo "--------------------------------------------------------------"
 else
-translations: trans $(MOFILES) src/tuxpaint.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
+translations: trans $(MOFILES) src/tuxpaint.desktop src/tuxpaint-fullscreen.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
 endif
 
 trans:
@@ -741,6 +741,7 @@ clean:
 uninstall:	uninstall-i18n
 	-rm $(METAINFO_PREFIX)/org.tuxpaint.Tuxpaint.appdata.xml
 	-rm /usr/share/applications/tuxpaint.desktop
+	-rm /usr/share/applications/tuxpaint-fullscreen.desktop
 	-rm /usr/share/pixmaps/tuxpaint.png
 	-rm $(ICON_PREFIX)/tuxpaint.png
 	-rm $(X11_ICON_PREFIX)/tuxpaint.xpm
@@ -771,9 +772,18 @@ uninstall:	uninstall-i18n
 	  xdg-icon-resource uninstall --size 32 tux4kids-tuxpaint ; \
 	  xdg-icon-resource uninstall --size 22 tux4kids-tuxpaint ; \
 	  xdg-icon-resource uninstall --size 16 tux4kids-tuxpaint ; \
+	  xdg-icon-resource uninstall --size 192 tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource uninstall --size 128 tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource uninstall --size 96 tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource uninstall --size 64 tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource uninstall --size 48 tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource uninstall --size 32 tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource uninstall --size 22 tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource uninstall --size 16 tux4kids-tuxpaint-fullscreen ; \
 	fi
 	@if [ "x$(shell which xdg-desktop-menu)" != "x" ]; then \
 	  xdg-desktop-menu uninstall tux4kids-tuxpaint.desktop ; \
+	  xdg-desktop-menu uninstall tux4kids-tuxpaint-fullscreen.desktop ; \
 	fi
 	-if [ "x$(shell which update-desktop-database)" != "x" ]; then \
 	  update-desktop-database; \
@@ -955,7 +965,7 @@ install-nokia770:
 # FIXME: No way to install SVG icons using `xdg-icon-resource`
 # (see https://bugs.launchpad.net/ubuntu/+source/xdg-utils/+bug/790449)
 .PHONY: install-xdg
-install-xdg: src/tuxpaint.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
+install-xdg: src/tuxpaint.desktop src/tuxpaint-fullscreen.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
 	@echo
 	@echo "...Installing launcher icon into desktop environment..."
 	@if [ "x$(shell which xdg-icon-resource)" != "x" ]; then \
@@ -967,11 +977,22 @@ install-xdg: src/tuxpaint.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
 	  xdg-icon-resource install --size 32 data/images/icon32x32.png tux4kids-tuxpaint ; \
 	  xdg-icon-resource install --size 22 data/images/icon22x22.png tux4kids-tuxpaint ; \
 	  xdg-icon-resource install --size 16 data/images/icon16x16.png tux4kids-tuxpaint ; \
+	  xdg-icon-resource install --size 192 data/images/icon192x192.png tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource install --size 128 data/images/icon128x128.png tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource install --size 96 data/images/icon96x96.png tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource install --size 64 data/images/icon64x64.png tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource install --size 48 data/images/icon48x48.png tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource install --size 32 data/images/icon32x32.png tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource install --size 22 data/images/icon22x22.png tux4kids-tuxpaint-fullscreen ; \
+	  xdg-icon-resource install --size 16 data/images/icon16x16.png tux4kids-tuxpaint-fullscreen ; \
 	fi
 	@if [ "x$(shell which xdg-desktop-menu)" != "x" ]; then \
 	  cp src/tuxpaint.desktop ./tux4kids-tuxpaint.desktop ; \
 	  xdg-desktop-menu install tux4kids-tuxpaint.desktop ; \
 	  rm ./tux4kids-tuxpaint.desktop ; \
+	  cp src/tuxpaint-fullscreen.desktop ./tux4kids-tuxpaint-fullscreen.desktop ; \
+	  xdg-desktop-menu install tux4kids-tuxpaint-fullscreen.desktop ; \
+	  rm ./tux4kids-tuxpaint-fullscreen.desktop ; \
 	fi
 	@if [ "x$(shell which update-desktop-database)" != "x" ]; then \
 	  update-desktop-database ; \
