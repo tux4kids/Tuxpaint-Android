@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-03-01 19:14+0100\n"
+"POT-Creation-Date: 2023-04-10 11:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pl\n"
@@ -18,11 +18,11 @@ msgstr ""
 "== 0)) && (!((n == 1)))) && (((n % 10) >= 0 && (n % 10) <= 1))) || (((0 "
 "== 0)) && (((n % 10) >= 5 && (n % 10) <= 9)))) || (((0 == 0)) && (((n % "
 "100) >= 12 && (n % 100) <= 14)))) ? 2 : (((n == 1)) && ((0 == 0))) ? 0 : "
-"3)\n"
+"3);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.12.1\n"
 
 #. Data and save directories
 msgctxt "Data_dir"
@@ -192,6 +192,25 @@ msgctxt "Colors_rows"
 msgid "Number of rows for the buttons palette"
 msgstr ""
 
+#. What OnScreen keyboard layout to use
+msgctxt "Osk_layout"
+msgid "On screen keyboard layout"
+msgstr ""
+
+#. Stamp rotation
+msgctxt "Stamp_rotation"
+msgid "Stamp rotation"
+msgstr ""
+
+#, fuzzy
+msgctxt "Stamp_rotation_enabled"
+msgid "Allow stamp rotation"
+msgstr "Zezwól na drukowanie"
+
+msgctxt "Stamp_rotation_disabled"
+msgid "Do not rotate stamps"
+msgstr ""
+
 #. Ok and Cancel buttons
 msgctxt "ok"
 msgid "Save and quit"
@@ -202,10 +221,11 @@ msgid "Discard changes"
 msgstr ""
 
 #. Request for permissions text and button
+#, fuzzy
 msgctxt "Request_motivation"
 msgid ""
-"Tux Paint needs storage access in order to save your drawings and to "
-"operate properly."
+"Tux Paint needs storage and Bluetooth access in order to save your "
+"drawings and to operate properly."
 msgstr ""
 
 msgctxt "request_understood"
