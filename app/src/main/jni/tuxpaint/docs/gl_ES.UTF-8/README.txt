@@ -1,12 +1,12 @@
                                    Tux Paint
-                                 versión 0.9.29
+                                 versión 0.9.30
 
                    Un sinxelo programa de debuxo para cativos
 
         Copyright © 2002-2023 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               2 de Abril de 2023
+                               9 de Maio de 2023
 
          +-----------------------------------------------------------+
          |Índice                                                     |
@@ -92,41 +92,18 @@ Licenza
 
    Consulte o texto completo da licenza GPL en COPYING.txt.
 
-What's New in Tux Paint version 0.9.29?
+What's New in Tux Paint version 0.9.30?
 
-   Stamp tool update
-           Stamps may be rotated before being applied to the canvas
+   Magic Tool sizes
+           Many Magic Tools will now offer an option to adjust the size of
+           the effect. For example, thinner lines in the symmetry painting
+           tools, finer or coarser application of effects like blur, or a
+           wider range of shapes. (This feature may be deactivated using the
+           "nomagicsizes" simplification option.)
 
-   Shapes tool update
-           Improvements to Shapes tool behavior when using the "from the
-           corner" stretching mode
-
-   New Fill tool
-           A shaped gradient mode has been added to the Fill tool
-
-   Sixteen new Magic tools
-           Maze, Googly Eyes, Fur, Circles, Rays, 3D Glasses, Color Sep.,
-           Double Vision, Saturate, Desaturate, Remove Color, Keep Color,
-           Kaleido-4, Kaleido-6, Kaleido-8, Bloom
-
-   Eraser shortcut
-           A keyboard shortcut is available for quick access to the Eraser
-           tool
-
-   Rainbow Palette update
-           The chosen built-in color, Color Picker (pipette tool) color, or
-           Color Mixer color can be loaded into the Rainbow Palette dialog
-
-   Quick Start Guide created
-           A new Quick Start Guide explains the basic usage of Tux Paint
-
-   Other changes
-              * Drawings removed using the Open dialog's Erase button are
-                moved to the system's Trash can on macOS
-              * Starter and Template images offer scaling, to avoid smearing
-                on the edges
-              * The "buttonsize" interface size option now offers an "auto"
-                option
+   Word-wrapped button labels
+           When possible, longer labels shown on Tux Paint's UI buttons will
+           be word-wrapped, to help improve legibility.
 
    See CHANGES.txt for the complete list of changes.
 
@@ -459,7 +436,7 @@ Ferramentas dispoñíbeis
                         method of most other traditional drawing software.
 
                         📜 This option was added starting with Tux Paint
-                        version 0.9.25.)
+                        version 0.9.25.
 
            ⚙ Nota: Se os controis de forma están desactivados (p. ex.: coa
            opción «noshapecontrols»), non se presentarán os controis e
@@ -633,11 +610,39 @@ Ferramentas dispoñíbeis
            arredor da imaxe e/ou simplemente premer na imaxe unha vez para
            aplicar o efecto.
 
-           Se a ferramenta pode usarse premendo e arrastrando, estará
-           dispoñíbel un botón de «pintura» á esquerda, baixo a lista de
-           ferramentas Maxia na parte dereita da pantalla. Se a ferramenta
-           pode afectar toda a imaxe á vez, haberá un botón «imaxe completa»
-           á dereita.
+           Magic Controls
+
+             Se a ferramenta pode usarse premendo e arrastrando, estará
+             dispoñíbel un botón de «pintura» á esquerda, baixo a lista de
+             ferramentas Maxia na parte dereita da pantalla. Se a ferramenta
+             pode afectar toda a imaxe á vez, haberá un botón «imaxe
+             completa» á dereita.
+
+             ⚙ Note: If the "nomagiccontrols" option is set, Tux Paint won't
+             display the painting or entire picture controls. See the
+             "Options" documentation.
+
+             💡 If the magic controls are disabled, the Magic plugin may make
+             separate tools available, one for painting and one that affects
+             the entire pictre.
+
+           Magic Sizing
+
+             Some tools offer different sizing options. If so, a slider will
+             appear at the bottom right side of the screen. This may affect
+             the radius of a special effect (e.g., Darken) or painted object
+             (e.g., Patterns), or other attributes (e.g., large versus small
+             Brick shapes).
+
+             ⚙ Note: If the "nomagicsizes" option is set, Tux Paint won't
+             display the sizing controls. See the "Options" documentation.
+
+             💡 If the sizing option is disabled, the Magic plugin may simply
+             offer a default size (e.g., Patterns), or it may make separate
+             tools available with different pre-set sizes (e.g., Bricks and
+             Googly Eyes).
+
+             📜 This option was added starting with Tux Paint version 0.9.30.
 
            Consulte as instrucións de cada ferramenta Máxica (no cartafol
            «magic-docs»).
@@ -1211,4 +1216,4 @@ Importar imaxes manualmente
      * "Mastodon" is a registered trademark of Mastodon gGmbH.
      * "Reddit" is a registered trademark of Reddit, Inc.
      * "Tumblr" is a registered trademark of Tumblr, Inc.
-     * "Twitter" is a registered trademark of Twitter, Inc.
+     * "Twitter" is a registered trademark of X Corp.

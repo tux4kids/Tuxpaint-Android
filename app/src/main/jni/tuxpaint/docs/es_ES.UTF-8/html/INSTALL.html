@@ -89,7 +89,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            versi&oacute;n 0.9.29<br/>
+            versi&oacute;n 0.9.30<br/>
             Installation Documentation          </h1>
 
           <p>
@@ -98,7 +98,7 @@
           </p>
 
           <p>
-            marzo 29, 2023          </p>
+            abril 30, 2023          </p>
         </center>
       </header>
 
@@ -120,7 +120,7 @@
                   <li><a href="#req-libsdl">Simple DirectMedia Layer library (libSDL)</a></li>                  <li><a href="#req-other-libs">Other Libraries</a></li>                </ul>
               </li>
               <li><a href="#compiling">Compiling and Installation</a>                <ul>
-                  <li><a href="#compiling-windows">Windows</a></li>                  <li><a href="#compiling-linux">Linux/Unix</a></li>                  <li><a href="#compiling-macos">macOS</a></li>                  <li><a href="#compiling-android">Android</a></li>                </ul>
+                  <li><a href="#compiling-windows">Windows</a></li>                  <li><a href="#compiling-linux">Linux/Unix</a></li>                  <li><a href="#compiling-macos">macOS</a></li>                  <li><a href="#compiling-android">Android</a></li>                  <li><a href="#compiling-haiku">Haiku</a></li>                </ul>
               </li>
               <li><a href="#debugging">Debugging</a></li>              <li><a href="#uninstalling">Uninstalling Tux Paint</a>                <ul>
                   <li><a href="#uninstalling-windows">Windows</a></li>                  <li><a href="#uninstalling-macOS">macOS</a></li>                  <li><a href="#uninstalling-linux">Linux</a></li>                </ul>
@@ -151,7 +151,7 @@
           Tux Paint requires the Simple DirectMedia Layer Library (libSDL), an Open Source multimedia programming library available under the GNU Lesser General Public License (LGPL).        </p>
 
         <p>
-          Along with libSDL, Tux Paint depends on a number of other SDL 'helper' libraries: SDL_Image (for graphics files), SDL_gfx (for some graphical functions, like rotation), SDL_TTF and (optionally) SDL2_Pango (for True Type Font support) and, optionally, SDL_Mixer (for sound effects).        </p>
+          Along with libSDL, Tux Paint depends on a number of other SDL 'helper' libraries: SDL_Image (for graphics files), SDL_gfx (for some graphical functions, like rotation), SDL_TTF and SDL2_Pango (for True Type Font support) and, optionally, SDL_Mixer (for sound effects).        </p>
 
         <p>
           The SDL libraries are available as source-code, or as RPM or Debian packages for various distributions of Linux. They can be downloaded from:        </p>
@@ -160,7 +160,7 @@
           <li>SDL_image: <a href="https://github.com/libsdl-org/SDL_image">https://github.com/libsdl-org/SDL_image</a></li>
           <li>SDL_gfx: <a href="https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/">https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/</a> (<a href="https://sourceforge.net/projects/sdlgfx/">https://sourceforge.net/projects/sdlgfx/</a>)</li>
           <li>SDL_ttf: <a href="https://github.com/libsdl-org/SDL_ttf">https://github.com/libsdl-org/SDL_ttf</a></li>
-          <li>SDL2_Pango: <a href="https://github.com/markuskimius/SDL2_Pango">https://github.com/markuskimius/SDL2_Pango</a> (optional)</li>
+          <li>SDL2_Pango: <a href="https://github.com/markuskimius/SDL2_Pango">https://github.com/markuskimius/SDL2_Pango</a></li>
           <li>SDL_mixer: <a href="https://github.com/libsdl-org/SDL_mixer">https://github.com/libsdl-org/SDL_mixer</a> (optional)</li>
         </ul>
 
@@ -289,6 +289,8 @@
       <p>
         Tux Paint is released under the GNU General Public License (GPL) (see "COPYING.txt" for details), and therefore the 'source code' to the program is available freely.      </p>
 
+      <hr size="2" noshade width="90%" />
+
       <section class="indent"><!-- H2: Windows -->
         <header>
           <h2>
@@ -322,29 +324,29 @@
             <p>
               Download the latest MSYS2 environment from <a href="https://www.msys2.org/">https://www.msys2.org/</a> and install it where you'd like (the default is "<code>C:\msys64</code>")            </p>
             <p>
-              Open the MSYS2 shell from the "Start Menu" -&gt; "MSYS2 64bit" -&gt; "MSYS2 MSYS" and execute following command:              <blockquote>
+              Open the MSYS2 shell from the "Start Menu" &rarr; "MSYS2 64bit" &rarr; "MSYS2 MSYS" and execute following command:              <blockquote>
                 <code>
-                  $ yes "" | pacman -Syu
+                  $ <strong>yes</strong> "" | <strong>pacman</strong> -Syu
                 </code>
               </blockquote>
             </p>
-    
+
             <p>
               This will update core system and the window will close automatically.  Open the msys2 shell again and execute following command to finish remaining updating process.              <blockquote>
                 <code>
-                  $ yes "" | pacman -Syu
+                  $ <strong>yes</strong> "" | <strong>pacman</strong> -Syu
                 </code>
               </blockquote>
             </p>
-    
+
             <p>
               Within the MSYS2 shell, run the following command to install basic development tools:              <blockquote>
                 <code>
-                  $ yes "" | pacman -S make automake-wrapper autoconf-wrapper libtool git zip patch gperf dos2unix
+                  $ <strong>yes</strong> "" | <strong>pacman</strong> -S make automake-wrapper autoconf-wrapper libtool git zip patch gperf dos2unix
                 </code>
               </blockquote>
             </p>
-    
+
             <p>
               <i>
                 Proceed to the next "<a href="#64bit">MinGW 64bit (x86_64) toolchains</a>" section, or skip to the "<a href="#32bit">MinGW 32bit (i686) toolchains</a>" section if you need only a 32bit build environment.              </i>
@@ -363,7 +365,7 @@
               <p>
                 Within the MSYS2 shell, run the following command to install 64bit compiler and basic development tools:                <blockquote>
                   <code>
-                    $ yes "" | pacman -S mingw-w64-x86_64-{gcc,pkgconf,ntldd-git}
+                    $ <strong>yes</strong> "" | <strong>pacman</strong> -S mingw-w64-x86_64-{gcc,pkgconf,ntldd-git}
                   </code>
                 </blockquote>
               </p>
@@ -384,8 +386,8 @@
               <p>
                 <blockquote>
                   <code>
-                    $ pacman -S mingw-w64-x86_64-SDL_{image,ttf,gfx}<br/>
-                    $ pacman -S mingw-w64-x86_64-{librsvg,fribidi,libimagequant,fltk}<br/>
+                    $ <strong>pacman</strong> -S mingw-w64-x86_64-SDL_{image,ttf,gfx}<br/>
+                    $ <strong>pacman</strong> -S mingw-w64-x86_64-{librsvg,fribidi,libimagequant,fltk}<br/>
                   </code>
                 </blockquote>
               </p>
@@ -402,7 +404,7 @@
               <p>
                 SDL2_Pango and libunibreak should be installed manually.              </p>
               <p>
-                This time, use the MinGW "64bit" shell. Open the shell from the "Start Menu" -&gt; "MSYS2 64bit" -&gt; "MSYS2 MinGW 64-bit"              </p>
+                This time, use the MinGW "64bit" shell. Open the shell from the "Start Menu" &rarr; "MSYS2 64bit" &rarr; "MSYS2 MinGW 64-bit"              </p>
 
               <section class="indent"><!-- H5: SDL2_Pango -->
                 <header>
@@ -412,9 +414,9 @@
                 <p>
                   You can fetch the source code from the Mark K. Kim's git repositry, compile and install it as follows.                  <blockquote>
                     <code>
-                      $ git clone https://github.com/markuskimius/SDL2_Pango<br/>
-                      $ cd SDL2_Pango<br/>
-                      $ ./configure --prefix=/mingw64 &amp;&amp; make &amp;&amp; make install<br/>
+                      $ <strong>git</strong> clone https://github.com/markuskimius/SDL2_Pango<br/>
+                      $ <strong>cd</strong> SDL2_Pango<br/>
+                      $ <strong>./configure</strong> --prefix=/mingw64 &amp;&amp; <strong>make</strong> &amp;&amp; <strong>make</strong> install<br/>
                     </code>
                   </blockquote>
                 </p>
@@ -430,9 +432,9 @@
                 <p>
                   You can fetch the source code from the git repositry and compile it as follows.                  <blockquote>
                     <code>
-                      $ git clone https://github.com/adah1972/libunibreak libunibreak<br/>
-                      $ cd libunibreak<br/>
-                      $ ./augogen.sh --prefix=/mingw64  &amp;&amp; make &amp;&amp; make install
+                      $ <strong>git</strong> clone https://github.com/adah1972/libunibreak libunibreak<br/>
+                      $ <strong>cd</strong> libunibreak<br/>
+                      $ <strong>./augogen.sh</strong> --prefix=/mingw64 &amp;&amp; <strong>make</strong> &amp;&amp; <strong>make</strong> install
                     </code>
                   </blockquote>
                 </p>
@@ -457,7 +459,7 @@
               <p>
                 Within the MSYS2 shell, run the following command to install 32bit compiler and basic development tools:                <blockquote>
                   <code>
-                    $ yes "" | pacman -S mingw-w64-i686-{gcc,pkgconf,ntldd-git}
+                    $ <strong>yes</strong> "" | <strong>pacman</strong> -S mingw-w64-i686-{gcc,pkgconf,ntldd-git}
                   </code>
                 </blockquote>
               </p>
@@ -478,8 +480,8 @@
               <p>
                 <blockquote>
                   <code>
-                    $ pacman -S mingw-w64-i686-SDL_{image,ttf,gfx}<br/>
-                    $ pacman -S mingw-w64-i686-{librsvg,fribidi,libimagequant,fltk}<br/>
+                    $ <strong>pacman</strong> -S mingw-w64-i686-SDL_{image,ttf,gfx}<br/>
+                    $ <strong>pacman</strong> -S mingw-w64-i686-{librsvg,fribidi,libimagequant,fltk}<br/>
                   </code>
                 </blockquote>
               </p>
@@ -496,7 +498,7 @@
               <p>
                 SDL2_Pango and libunibreak should be installed manually.              </p>
               <p>
-                This time, use the MinGW "32bit" shell. Open the shell from the "Start Menu" -&gt; "MSYS2 64bit" -&gt; "MSYS2 MinGW 32-bit"              </p>
+                This time, use the MinGW "32bit" shell. Open the shell from the "Start Menu" &rarr; "MSYS2 64bit" &rarr; "MSYS2 MinGW 32-bit"              </p>
 
               <section class="indent"><!-- H5: SDL2_Pango -->
                 <header>
@@ -506,9 +508,9 @@
                 <p>
                   You can fetch the source code from the Mark K. Kim's git repositry, compile and install it as follows.                  <blockquote>
                     <code>
-                      $ git clone https://github.com/markuskimius/SDL2_Pango<br/>
-                      $ cd SDL2_Pango<br/>
-                      $ ./configure --prefix=/mingw32 &amp;&amp; make &amp;&amp; make install<br/>
+                      $ <strong>git</strong> clone https://github.com/markuskimius/SDL2_Pango<br/>
+                      $ <strong>cd</strong> SDL2_Pango<br/>
+                      $ <strong>./configure</strong> --prefix=/mingw32 &amp;&amp; <strong>make</strong> &amp;&amp; <strong>make</strong> install<br/>
                     </code>
                   </blockquote>
                 </p>
@@ -524,9 +526,9 @@
                 <p>
                   You can fetch the source code from the git repositry and compile it as follows.                  <blockquote>
                     <code>
-                      $ git clone https://github.com/adah1972/libunibreak libunibreak<br/>
-                      $ cd libunibreak<br/>
-                      $ ./augogen.sh --prefix=/mingw32  &amp;&amp; make &amp;&amp; make install
+                      $ <strong>git</strong> clone https://github.com/adah1972/libunibreak libunibreak<br/>
+                      $ <strong>cd</strong> libunibreak<br/>
+                      $ <strong>./augogen.sh</strong> --prefix=/mingw32 &amp;&amp; <strong>make</strong> &amp;&amp; <strong>make</strong> install
                     </code>
                   </blockquote>
                 </p>
@@ -553,7 +555,7 @@
           <p>
             Add the path to the directory in which ImageMagick is installed at the top of your "PATH" environment variable. For example:            <blockquote>
               <code>
-                $ export PATH=/c/Program\ Files/ImageMagick-7.0.10-Q16-HDRI:$PATH
+                $ <strong>export</strong> PATH=/c/Program\ Files/ImageMagick-7.0.10-Q16-HDRI:$PATH
               </code>
             </blockquote>
           </p>
@@ -570,9 +572,9 @@
             You can compile 64-bit binaries using "MSYS2 64bit" shell, and 32-bit binaries using "MSYS2 32bit" shell, respectively.          </p>
           <ul>
             <li>
-              Select "MSYS2 64bit" -&gt; "MSYS2 MinGW 64-bit" from the "Start Menu" to open the 64bit shell.            </li>
+              Select "MSYS2 64bit" &rarr; "MSYS2 MinGW 64-bit" from the "Start Menu" to open the 64bit shell.            </li>
             <li>
-              Select "MSYS2 64bit" -&gt; "MSYS2 MinGW 32-bit" from the "Start Menu" to open the 32bit shell.            </li>
+              Select "MSYS2 64bit" &rarr; "MSYS2 MinGW 32-bit" from the "Start Menu" to open the 32bit shell.            </li>
           </ul>
 
           <section class="indent"><!-- H4: Tux Paint Config. -->
@@ -591,8 +593,8 @@
                     <li>
                       Expand the tar-ball and change the directory name so that the final packaging process can find related files.                      <blockquote>
                         <code>
-                          $ tar zxvf tuxpaint-config-A.B.C.tar.gz<br/>
-                          $ mv tuxpaint-config-A.B.C tuxpaint-config<br/>
+                          $ <strong>tar</strong> zxvf tuxpaint-config-A.B.C.tar.gz<br/>
+                          $ <strong>mv</strong> tuxpaint-config-A.B.C tuxpaint-config<br/>
                         </code>
                       </blockquote>
                     </li>
@@ -603,7 +605,7 @@
                     <li>
                       Fetch the developing source tree from git repository:                      <blockquote>
                         <code>
-                          $ git clone https://git.code.sf.net/p/tuxpaint/tuxpaint-config tuxpaint-config
+                          $ <strong>git</strong> clone https://git.code.sf.net/p/tuxpaint/tuxpaint-config tuxpaint-config
                         </code>
                       </blockquote>
                     </li>
@@ -614,8 +616,8 @@
             <p>
               Now you can build Tux Paint Config. as follows:              <blockquote>
                 <code>
-                  $ cd tuxpaint-config<br/>
-                  $ make win32<br/>
+                  $ <strong>cd</strong> tuxpaint-config<br/>
+                  $ <strong>make</strong> win32<br/>
                 </code>
               </blockquote>
             </p>
@@ -636,8 +638,8 @@
                     <li>
                       Expand the tar-ball and change the directory name so that the final packaging process can find related files.                      <blockquote>
                         <code>
-                          $ tar zxvf tuxpaint-A.B.C.tar.gz<br/>
-                          $ mv tuxpaint-A.B.C tuxpaint<br/>
+                          $ <strong>tar</strong> zxvf tuxpaint-A.B.C.tar.gz<br/>
+                          $ <strong>mv</strong> tuxpaint-A.B.C tuxpaint<br/>
                         </code>
                       </blockquote>
                     </li>
@@ -648,7 +650,7 @@
                     <li>
                       Fetch the developing source tree from git repository:                      <blockquote>
                         <code>
-                          $ git clone https://git.code.sf.net/p/tuxpaint/tuxpaint tuxpaint
+                          $ <strong>git</strong> clone https://git.code.sf.net/p/tuxpaint/tuxpaint tuxpaint
                         </code>
                       </blockquote>
                     </li>
@@ -659,8 +661,8 @@
             <p>
               Now you can build Tux Paint as follows:              <blockquote>
                 <code>
-                  $ cd tuxpaint<br/>
-                  $ make bdist-win32<br/>
+                  $ <strong>cd</strong> tuxpaint<br/>
+                  $ <strong>make</strong> bdist-win32<br/>
                 </code>
               </blockquote>
             </p>
@@ -762,6 +764,8 @@
         </section><!-- H3: If Something Goes Wrong -->
       </section><!-- H2: Windows -->
 
+      <hr size="2" noshade width="90%" />
+
       <section class="indent"><!-- H2: Linux/Unux -->
         <header>
           <h2>
@@ -784,7 +788,7 @@
 
           <blockquote>
             <code>
-              $ make
+              $ <strong>make</strong>
             </code>
           </blockquote>
         </section><!-- H3: Compiling -->
@@ -799,25 +803,10 @@
             To disable SVG support (e.g., if your system is not currently supported by the Cairo library or other SVG-related dependencies), you can run "<code>make</code>" with "<code style="white-space: nowrap;">SVG_LIB= SVG_CFLAGS= NOSVGFLAG=NOSVG</code>" added:
           <blockquote>
             <code>
-              $ make SVG_LIB= SVG_CFLAGS=
+              $ <strong>make</strong> SVG_LIB= SVG_CFLAGS=
             </code>
           </blockquote>
         </section><!-- H3: Disabling SVG support... -->
-
-        <section class="indent"><!-- H3: Disabling Pango support... -->
-          <header>
-            <h3>
-              Disabling Pango support (and hence Pango, Cairo, etc. dependencies):            </h3>
-          </header>
-
-          <p class="note">
-            <span title="Version variation">&#128220;</span>            Prior to version 0.9.18, Tux Paint used the <code>libSDL_ttf</code> library for rendering text using TrueType Fonts.  Since 0.9.18, <code>libSDL_Pango</code> is used, as it has much greater support for internationalization. However, if you wish to disable the use of SDL_Pango, you may do so running "<code>make</code>" with "<code>SDL_PANGO_LIB=</code>" added:          </p>
-          <blockquote>
-            <code>
-              $ make SDL_PANGO_LIB=
-            </code>
-          </blockquote>
-        </section><!-- H3: Disabling Pango support... -->
 
         <section class="indent"><!-- H3: Disabling Sound at Compile-time -->
           <header>
@@ -829,7 +818,7 @@
             If you don't have a sound card, or would prefer to build the program with no sound support (and therefore without a the <code>SDL_mixer</code> dependency), you can run "<code>make</code>" with "<code>SDL_MIXER_LIB=</code>" added:          </p>
           <blockquote>
             <code>
-              $ make SDL_MIXER_LIB=
+              $ <strong>make</strong> SDL_MIXER_LIB=
             </code>
           </blockquote>
         </section><!-- H3: Disabling Sound at Compile-time -->
@@ -865,7 +854,7 @@
 
           <blockquote>
             <code>
-              $ su
+              $ <strong>su</strong>
             </code>
           </blockquote>
 
@@ -874,7 +863,7 @@
 
           <blockquote>
             <code>
-              # make install
+              # <strong>make</strong> install
             </code>
           </blockquote>
 
@@ -883,7 +872,7 @@
 
           <blockquote>
             <code>
-              # exit
+              # <strong>exit</strong>
             </code>
           </blockquote>
 
@@ -892,7 +881,7 @@
 
           <blockquote>
             <code>
-              $ sudo make install
+              $ <strong>sudo make</strong> install
             </code>
           </blockquote>
 
@@ -941,9 +930,11 @@
 
             <p class="note">
               <span title="Information">&#128161;</span>              <strong>Note:</strong> This list is out of date.  See "<code>Makefile</code>" and "<code>Makefile-i18n</code>" for a complete list.            </p>
-          </section class="indent"><!-- H4: Changing Where Things Go -->
+          </section><!-- H4: Changing Where Things Go -->
         </section><!-- H3: Installing -->
       </section><!-- H2: Linux/Unux -->
+
+      <hr size="2" noshade width="90%" />
 
       <section class="indent"><!-- H2: macOS -->
         <header>
@@ -970,7 +961,7 @@
           <p>
             Although Tux Paint is built without the Xcode IDE, Xcode itself is still required to build Tux Paint. <a href="https://developer.apple.com/xcode/ide/">Download it from the App Store</a>, and launch it once to accept its license agreements. You may also need to install the Xcode command line tools using the command:            <blockquote>
               <code>
-                $ xcode-select --install
+                $ <strong>xcode-select</strong> --install
               </code>
             </blockquote>
           </p>
@@ -1008,11 +999,11 @@
             <p>
               <code>libimagequant</code> is not available from MacPorts as of this writing. It can be installed from the source code as follows. It should be installed to <code>/opt/local</code> (same as MacPorts) for the library to be included in <code>TuxPaint.dmg</code>.              <blockquote>
                 <code>
-                  $ sudo port install rust cargo<br/>
-                  $ git clone https://github.com/ImageOptim/libimagequant.git<br/>
-                  $ cd libimagequant/imagequant-sys<br/>
-                  $ cargo build --release       # Must use cargo from MacPorts<br/>
-                  $ sudo make PREFIX=/opt/local install
+                  $ <strong>sudo port</strong> install rust cargo<br/>
+                  $ <strong>git</strong> clone https://github.com/ImageOptim/libimagequant.git<br/>
+                  $ <strong>cd</strong> libimagequant/imagequant-sys<br/>
+                  $ <strong>cargo</strong> build --release # Must use cargo from MacPorts<br/>
+                  $ <strong>sudo make</strong> PREFIX=/opt/local install
                 </code>
               </blockquote>
             </p>
@@ -1028,9 +1019,9 @@
             <p>
               <code>sdl2_pango</code> is not available from MacPorts as of this writing. It can be installed from the source code as follows. It should be installed to <code>/opt/local</code> (same as MacPorts) for the library to be included in <code>TuxPaint.dmg</code>.              <blockquote>
                 <code>
-                  $ git clone https://github.com/markuskimius/SDL2_Pango.git<br/>
-                  $ cd SDL2_Pango<br/>
-                  $ ./configure --prefix=/opt/local &amp;&amp; make &amp;&amp; sudo make install
+                  $ <strong>git</strong> clone https://github.com/markuskimius/SDL2_Pango.git<br/>
+                  $ <strong>cd</strong> SDL2_Pango<br/>
+                  $ <strong>./configure</strong> --prefix=/opt/local &amp;&amp; make &amp;&amp; sudo make install
                 </code>
               </blockquote>
             </p>
@@ -1049,8 +1040,8 @@
           <p>
             Simply, run:            <blockquote>
               <code>
-                % make<br/>
-                % make install
+                % <strong>make</strong><br/>
+                % <strong>make</strong> install
               </code>
             </blockquote>
             ... to create the <code>TuxPaint.app</code> application bundle that can be run in-place or copied to <code>/Applications</code>.            To create the DMG file for distribution, use 'make TuxPaint.dmg'.          </p>
@@ -1124,7 +1115,7 @@
           <p>
             Then uninstall all MacPorts packages:            <blockquote>
               <code>
-                $ sudo port -fp uninstall installed
+                $ <strong>sudo port</strong> -fp uninstall installed
               </code>
             </blockquote>
           </p>
@@ -1144,14 +1135,14 @@
 
           <p>macOS for Apple Silicon requires all native Apple Silicon applications be signed, even if it is signed "ad-hoc" (anonymously).  Because of this, compilers that produce native Apple Silicon applications sign all produced binaries and libraries as a part of the compilation process.<sup>*</sup>  However, the Tux Paint compilation process modifies the libraries to be modular (using <code>install_name_tool</code>) so they can be added into the application bundle, which has the unfortunate side effect of breaking the signature.  This can be addressed by signing the application bundle ad-hoc (example below) or using your own Apple Developer Identity if you have one.  The DMG file, if needed, must be created after signing the App Bundle so the DMG file is created with signed App Bundle:            <blockquote>
               <code>
-                $ codesign -s - TuxPaint.app<br/>
-                $ make TuxPaint.dmg
+                $ <strong>codesign</strong> -s - TuxPaint.app<br/>
+                $ <strong>make</strong> TuxPaint.dmg
               </code>
             </blockquote>
             <sup>*</sup> For more information on the code signing requirements on the Apple Silicon, see <a href="https://developer.apple.com/documentation/macos-release-notes/macos-big-sur-11_0_1-universal-apps-release-notes#:~:text=New%20in%20macOS,pass%20through%20Gatekeeper">https://developer.apple.com/documentation/macos-release-notes/macos-big-sur-11_0_1-universal-apps-release-notes#:~:text=New%20in%20macOS,pass%20through%20Gatekeeper</a>.          </p>
-          <p>If you get an error that the application bundle is already signed, remove it before signing::            <blockquote>
+          <p>If you get an error that the application bundle is already signed, remove it before signing:            <blockquote>
               <code>
-                $ codesign --remove-signature TuxPaint.app
+                $ <strong>codesign</strong> --remove-signature TuxPaint.app
               </code>
             </blockquote>
           </p>
@@ -1167,15 +1158,17 @@
           <p>
             To build Tux Paint as a Universal Binary, compile Tux Paint for the Intel CPU and the Apple Silicon separately first.  Then rename the app bundle for the Intel CPU to TuxPaint-x86_64.app, and the bundle for the Apple Silicon to TuxPaint-arm64.app, copy the app bundle from the Intel machine to the Apple Silicon machine, then use the provided <code>build-universal.sh</code> script to combine the two application bundles as below.  The produced bundle must be signed (see "Building for Apple Silicon" above for more details).  The DMG file, if required, must be built after the signing:            <blockquote>
               <code>
-                $ macos/build-universal.sh<br/>
-                $ codesign -s - TuxPaint.app <br/>
-                $ make TuxPaint.dmg
+                $ <strong>macos/build-universal.sh</strong><br/>
+                $ <strong>codesign</strong> -s - TuxPaint.app <br/>
+                $ <strong>make</strong> TuxPaint.dmg
               </code>
             </blockquote>
           </p>
         </section><!-- H3: Building a Universal Binary -->
 
       </section><!-- H2: macOS -->
+
+      <hr size="2" noshade width="90%" />
 
       <section class="indent"><!-- H2: Android -->
         <header>
@@ -1241,6 +1234,106 @@
         </section><!-- H3: Building -->
 
       </section><!-- H2: Android -->
+
+      <hr size="2" noshade width="90%" />
+
+      <section class="indent"><!-- H2: Haiku -->
+        <header>
+          <h2>
+            <a name="compiling-macos" id="compiling-haiku">
+              Haiku            </a>
+          </h2>
+          <p style="font-size: small;">
+            <em>
+              mayo  7, 2023              Luc Schrijvers &lt;<a href="mailto:begasus@gmail.com">begasus@gmail.com</a>&gt;
+              (Edited by Bill Kendrick)
+            </em>
+          </p>
+        </header>
+
+        <section class="indent"><!-- H3: Prerequisites -->
+          <header>
+            <h3>
+              Prerequisites            </h3>
+          </header>
+
+          <p>
+            Install the required develop packages in Terminal:            <dl>
+              <dt>32-bit:</dt>
+              <dd>
+                <code>
+                  <strong>pkgman</strong> install
+                    xcairo_x86_devel
+                    fribidi_x86_devel
+                    gdk_pixbuf_x86_devel
+                    libiconv_x86_devel
+                    libimagequant_x86_devel
+                    gettext_x86_libintl
+                    libpaper_x86_devel
+                    pango_x86_devel
+                    libpng16_x86_devel
+                    librsvg_x86_devel
+                    libsdl2_x86_devel
+                    sdl2_image_x86_devel
+                    sdl2_gfx_x86_devel
+                    sdl2_mixer_x86_devel
+                    sdl2_pango_x86_devel
+                    sdl2_ttf_x86_devel
+                    zlib_x86_devel
+                </code>
+              </dd>
+              <dt>64-bit:</dt>
+                <dd>
+                  <code>
+                    <strong>pkgman</strong> install
+                      xcairo_devel
+                      fribidi_devel
+                      gdk_pixbuf_devel
+                      libiconv_devel
+                      libimagequant_devel
+                      gettext_libintl
+                      libpaper_devel
+                      pango_devel
+                      libpng16_devel
+                      librsvg_devel
+                      libsdl2_devel
+                      sdl2_image_devel
+                      sdl2_gfx_devel
+                      sdl2_mixer_devel
+                      sdl2_pango_devel
+                      sdl2_ttf_devel
+                      zlib_devel
+                  </code>
+                </dd>
+              </dt>
+            </dl>
+          </p>
+
+          <p>
+            For 32-bit you need to switch to the new compiler (currently <code>gcc</code> 11.2.0) with <code>setarch x86</code>          </p>
+        </section><!-- H3: Prerequisites -->
+
+        <section class="indent"><!-- H3: Building -->
+          <header>
+            <h3>
+              Building            </h3>
+          </header>
+          <p>
+            <code><strong>make</strong> PREFIX=/boot/home/config/non-packaged</code>
+          </p>
+        </section><!-- H3: Building -->
+
+        <section class="indent"><!-- H3: Tux Paint Stamps -->
+          <header>
+            <h3>
+              Tux Paint Stamps            </h3>
+          </header>
+          <p>
+            <code><strong>make</strong> install-all DATA_PREFIX=/boot/home/config/non-packaged/share/tuxpaint/</code>
+          </p>
+        </section><!-- H3: Tux Paint Stamps -->
+
+      </section><!-- H2: Haiku -->
 
     </section><!-- H1: Compiling and Installation -->
 

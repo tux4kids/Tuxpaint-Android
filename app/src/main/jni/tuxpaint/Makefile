@@ -4,12 +4,12 @@
 # Various contributors (see AUTHORS.txt)
 # https://tuxpaint.org/
 
-# June 14, 2002 - April 1, 2023
+# June 14, 2002 - May 9, 2023
 
 
 # The version number, for release:
 
-VER_VERSION:=0.9.29
+VER_VERSION:=0.9.30
 # We are always SDL2 now, so don't need "-sdl2"
 VER_FLAVOR:=""
 ifdef SOURCE_DATE_EPOCH
@@ -17,7 +17,7 @@ ifdef SOURCE_DATE_EPOCH
 else
   VER_DATE=$(shell date "+%Y-%m-%d")
 endif
-MAGIC_API_VERSION:=0x00000007
+MAGIC_API_VERSION:=0x00000008
 
 # Need to know the OS
 
@@ -295,7 +295,6 @@ NOSOUNDFLAG:=$(if $(SDL_MIXER_LIB),,-DNOSOUND$(warning -lSDL2_Mixer failed, no s
 # SDL Pango is needed to render complex scripts like Thai and Arabic
 SDL2_PANGO_LIB:=$(call linktest,SDL2_Pango,-lSDL2_Pango,$(SDL_LIBS))
 SDL2_PANGO_CFLAGS:=$(shell $(PKG_CONFIG) --cflags SDL2_Pango)
-NOPANGOFLAG:=$(if $(SDL2_PANGO_LIB),,-DNO_SDLPANGO$(warning -lSDL2_Pango failed, no scripts for you!))
 
 SDL_LIBS+=$(SDL_MIXER_LIB) $(SDL2_PANGO_LIB)
 
@@ -355,7 +354,7 @@ DEFS:=-DVER_DATE=\"$(VER_DATE)\" -DVER_VERSION=\"$(VER_VERSION)\" \
 	-DIMDIR=\"$(patsubst $(DESTDIR)%,%,$(IM_PREFIX))/\" \
 	-DCONFDIR=\"$(patsubst $(DESTDIR)%,%,$(CONFDIR))/\" \
 	-DMAGIC_PREFIX=\"$(patsubst $(DESTDIR)%,%,$(MAGIC_PREFIX))/\" \
-	$(NOSOUNDFLAG) $(NOSVGFLAG) $(OLDSVGFLAG) $(NOPANGOFLAG) \
+	$(NOSOUNDFLAG) $(NOSVGFLAG) $(OLDSVGFLAG) \
 	$(MAEMOFLAG)
 
 DEBUG_FLAGS:=
@@ -859,7 +858,7 @@ $(THUMB_STARTERS):
 		convert $(CONVERT_OPTS) obj/tmp_$(notdir $(STARTER_NAME)).png $@ 2> /dev/null ; \
 		rm obj/tmp_$(notdir $(STARTER_NAME)).png ; \
 	else \
-		convert $(CONVERT_OPTS) $(STARTER_NAME) $@ 2> /dev/null || ( echo "($@ failed)" ; rm $@ ) ; \
+		convert $(CONVERT_OPTS) $(STARTER_NAME) $@ 2> /dev/null || ( echo "($@ failed)" ; rm -f $@ ) ; \
 	fi
 
 $(INSTALLED_THUMB_STARTERS): $(DATA_PREFIX)/%: % install-example-starters-dirs
@@ -914,7 +913,7 @@ TEMPLATE_NAME=$(or $(wildcard $(subst templates/.thumbs,templates,$(@:-t.png=.sv
 $(THUMB_TEMPLATES):
 	@printf "."
 	@mkdir -p templates/.thumbs
-	@convert $(CONVERT_OPTS) $(TEMPLATE_NAME) $@ 2> /dev/null || ( echo "($@ failed)" ; rm $@ ) ; \
+	@convert $(CONVERT_OPTS) $(TEMPLATE_NAME) $@ 2> /dev/null || ( echo "($@ failed)" ; rm -f $@ ) ; \
 
 $(INSTALLED_THUMB_TEMPLATES): $(DATA_PREFIX)/%: %
 	@install -D -m 644 $< $@ || ( echo "NO THUMB $<" )
@@ -1182,7 +1181,7 @@ tuxpaint:	obj/tuxpaint.o obj/i18n.o obj/im.o obj/cursor.o obj/pixels.o \
 	@echo "...Linking Tux Paint..."
 	$(CC) $(CFLAGS) $(LDFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-o tuxpaint $^ \
-		$(SDL_LIBS) $(SVG_LIB) $(ARCH_LINKS)
+		$(SDL_LIBS) $(SVG_LIB) $(ARCH_LINKS) -lm
 	@$(RAD_CMD)
 	@$(RSRC_CMD)
 	@$(MIMESET_CMD)

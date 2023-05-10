@@ -35,10 +35,11 @@
 /* Our globals: */
 
 static Mix_Chunk *emboss_snd;
+static int emboss_radius = 16;
 
 // Prototypes
 Uint32 emboss_api_version(void);
-int emboss_init(magic_api * api);
+int emboss_init(magic_api * api, Uint32 disabled_features);
 int emboss_get_tool_count(magic_api * api);
 SDL_Surface *emboss_get_icon(magic_api * api, int which);
 char *emboss_get_name(magic_api * api, int which);
@@ -46,26 +47,25 @@ int emboss_get_group(magic_api * api, int which);
 char *emboss_get_description(magic_api * api, int which, int mode);
 
 void emboss_drag(magic_api * api, int which, SDL_Surface * canvas,
-                 SDL_Surface * last, int ox, int oy, int x, int y,
-                 SDL_Rect * update_rect);
+                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 
 void emboss_click(magic_api * api, int which, int mode,
-                  SDL_Surface * canvas, SDL_Surface * last, int x, int y,
-                  SDL_Rect * update_rect);
+                  SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 
 void emboss_release(magic_api * api, int which,
-                    SDL_Surface * canvas, SDL_Surface * last, int x, int y,
-                    SDL_Rect * update_rect);
+                    SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 
 void emboss_shutdown(magic_api * api);
 void emboss_set_color(magic_api * api, int which, SDL_Surface * canvas,
                       SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 int emboss_requires_colors(magic_api * api, int which);
-void emboss_switchin(magic_api * api, int which, int mode,
-                     SDL_Surface * canvas);
-void emboss_switchout(magic_api * api, int which, int mode,
-                      SDL_Surface * canvas);
+void emboss_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
+void emboss_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int emboss_modes(magic_api * api, int which);
+Uint8 emboss_accepted_sizes(magic_api * api, int which, int mode);
+Uint8 emboss_default_size(magic_api * api, int which, int mode);
+void emboss_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
+                     SDL_Rect * update_rect);
 
 
 Uint32 emboss_api_version(void)
@@ -75,12 +75,11 @@ Uint32 emboss_api_version(void)
 
 
 // No setup required:
-int emboss_init(magic_api * api)
+int emboss_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/emboss.ogg",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/emboss.ogg", api->data_directory);
   emboss_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -97,34 +96,28 @@ SDL_Surface *emboss_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/emboss.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/emboss.png", api->data_directory);
 
   return (IMG_Load(fname));
 }
 
 // Return our names, localized:
-char *emboss_get_name(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED)
+char *emboss_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Emboss")));
 }
 
 // Return our groups:
-int emboss_get_group(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED)
+int emboss_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
 }
 
 // Return our descriptions, localized:
-char *emboss_get_description(magic_api * api ATTRIBUTE_UNUSED,
-                             int which ATTRIBUTE_UNUSED, int mode)
+char *emboss_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
-    return (strdup
-            (gettext_noop
-             ("Click and drag the mouse to emboss the picture.")));
+    return (strdup(gettext_noop("Click and drag the mouse to emboss the picture.")));
   else
     return (strdup(gettext_noop("Click to emboss the entire picture.")));
 }
@@ -132,8 +125,7 @@ char *emboss_get_description(magic_api * api ATTRIBUTE_UNUSED,
 
 // Do the effect (single pixel; used by do_emboss() (painted circle)
 // and emboss_click() when in fullscreen mode):
-static void emboss_pixel(void *ptr, SDL_Surface * last, int x, int y,
-                         SDL_Surface * canvas)
+static void emboss_pixel(void *ptr, SDL_Surface * last, int x, int y, SDL_Surface * canvas)
 {
   magic_api *api = (magic_api *) ptr;
   Uint8 r1, g1, b1, r2, g2, b2;
@@ -164,17 +156,16 @@ static void emboss_pixel(void *ptr, SDL_Surface * last, int x, int y,
 
 
 // Do the effect (a circle around a touch point):
-static void do_emboss(void *ptr, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas, SDL_Surface * last, int x, int y)
+static void do_emboss(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int xx, yy;
 
-  for (yy = -16; yy < 16; yy++)
+  for (yy = -emboss_radius; yy < emboss_radius; yy++)
   {
-    for (xx = -16; xx < 16; xx++)
+    for (xx = -emboss_radius; xx < emboss_radius; xx++)
     {
-      if (api->in_circle(xx, yy, 16))
+      if (api->in_circle(xx, yy, emboss_radius))
       {
         if (!api->touched(x + xx, y + yy))
         {
@@ -187,10 +178,9 @@ static void do_emboss(void *ptr, int which ATTRIBUTE_UNUSED,
 
 // Affect the canvas on drag:
 void emboss_drag(magic_api * api, int which, SDL_Surface * canvas,
-                 SDL_Surface * last, int ox, int oy, int x, int y,
-                 SDL_Rect * update_rect)
+                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
 {
-  api->line((void *) api, which, canvas, last, ox, oy, x, y, 1, do_emboss);
+  api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_emboss);
 
   if (ox > x)
   {
@@ -207,18 +197,17 @@ void emboss_drag(magic_api * api, int which, SDL_Surface * canvas,
     y = tmp;
   }
 
-  update_rect->x = ox - 16;
-  update_rect->y = oy - 16;
-  update_rect->w = (x + 16) - update_rect->x;
-  update_rect->h = (y + 16) - update_rect->y;
+  update_rect->x = ox - emboss_radius;
+  update_rect->y = oy - emboss_radius;
+  update_rect->w = (x + emboss_radius) - update_rect->x;
+  update_rect->h = (y + emboss_radius) - update_rect->y;
 
   api->playsound(emboss_snd, (x * 255) / canvas->w, 255);
 }
 
 // Affect the canvas on click:
 void emboss_click(magic_api * api, int which, int mode,
-                  SDL_Surface * canvas, SDL_Surface * last, int x, int y,
-                  SDL_Rect * update_rect)
+                  SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
   if (mode == MODE_PAINT)
   {
@@ -251,8 +240,7 @@ void emboss_release(magic_api * api ATTRIBUTE_UNUSED,
                     int which ATTRIBUTE_UNUSED,
                     SDL_Surface * canvas ATTRIBUTE_UNUSED,
                     SDL_Surface * last ATTRIBUTE_UNUSED,
-                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED,
-                    SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -264,31 +252,51 @@ void emboss_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void emboss_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                      SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void emboss_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+                      Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
+                      SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // Use colors:
-int emboss_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
-                           int which ATTRIBUTE_UNUSED)
+int emboss_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
 void emboss_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 void emboss_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 int emboss_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
+}
+
+
+Uint8 emboss_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+{
+  if (mode == MODE_PAINT)
+    return 8;
+  else
+    return 0;
+}
+
+Uint8 emboss_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+{
+  return 4;
+}
+
+void emboss_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
+                     SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+{
+  emboss_radius = size * 4;
 }

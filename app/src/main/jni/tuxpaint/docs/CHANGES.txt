@@ -6,6 +6,191 @@ Copyright (c) 2002-2023
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
+2023.May.9 (0.9.30)
+  * Improvements to Stamp tool:
+    ---------------------------
+    * Avoid playing English descriptive sound for a stamp
+      stamp when not running in an English locale.
+      Closes https://sourceforge.net/p/tuxpaint/bugs/261/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to Shape tool:
+    ---------------------------
+    * Octagon allows aspect ratio change
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Slight improvement to shape calculations
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to Magic tools:
+    ----------------------------
+    * Support for sizes in Magic tools via the plugin API.
+      (Closes https://sourceforge.net/p/tuxpaint/feature-requests/220/)
+      + Adds a new UI element for setting sizes in the Magic tool.
+      + May be disabled with the "nomagicsizes" option.
+      + Plugins' "init()" functions are sent a new "disabled_features"
+        argument containing bitmask of Magic-relevant disabled features
+        (so far Magic controls & the new Magic sizes feature).
+      + Note: Bumps `TP_MAGIC_API_VERSION` to 0x00000008.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Various Magic tools now support sizing options:
+      + Blocks, Chalk, Drip
+      + Bloom
+      + Blur
+      + Bricks
+      + Cartoon
+      + Clone
+      + Confetti
+      + Darken, Lighten
+      + Distortion
+      + Emboss
+      + Fisheye
+      + Flower
+      + Foam
+      + Googly Eyes
+      + Kaleidoscope, Symmetric L/R & U/D, Pattern, Tiles
+      + Light
+      + Metal Paint
+      + Mosaic
+      + Negative & Opposite
+      + Noise
+      + Pixels
+      + Puzzle
+      + Rain
+      + Rainbow & Smooth Rainbow
+      + Remove Color, Keep Color
+      + Ripples
+      + Rosette, Picasso
+      + Saturate, Desaturate
+      + Sharpen, Edges, Silhouette
+      + Smudge, Wet Paint
+      + Tint, Color & White
+      + Toothpaste
+      + TV
+      + Xor Colors
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * String 'V' and String corner magic tools preview with XOR effect.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Clone performance improved.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Foam bubbles now always appear circular.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * New Foam sound effect.
+      (Sound effect licensed as Creative Commons 0 by
+      https://freesound.org/people/ristooooo1)
+
+    * TV offers a new "TV (Bright)" variation
+      (the original was always too dim, but has been utilized by
+      people as an artistic way to darken an image, so don't want
+      to take away the 'classic' variation).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Mosaic (shaped) tools: more progress bar feedback.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Blind: Remove entire-picture ("fullscreen") mode; it wasn't
+      particularly useful.
+      h/t Pere
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Light: Better shape to the effect.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * New Magic Tools:
+    ----------------
+    * Rainbow Cycle: Changes colors each time you use it
+      (similar to Rainbow and Smooth Rainbow, but only changes
+      between strokes).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Other Improvements:
+    -------------------
+    * Word-wrap long button labels, for better readability.
+      (h/t Jozef Riha for the idea.)
+      Helps https://sourceforge.net/p/tuxpaint/bugs/131/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Slightly more verbose output from "--verbose-version"
+      (shows when certain features are enabled; not just disabled)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * SDL_VIDEO_WINDOW_POS environment variable is now recognized
+      when running Tux Paint in fullscreen mode (useful for positioning
+      Tux Paint on a particular monitor).
+      Closes https://sourceforge.net/p/tuxpaint/bugs/277/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Starter and Template Improvements
+    ---------------------------------
+    * More starters have smearing disabled (world maps & "skyline-sf-dusk")
+      (h/t Anna-Cornelia Queen)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Bug Fixes:
+    ----------
+    * Don't try to load a blank-named template during slideshow playback.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Color palette would still show previously-selected color as active
+      when returning from the temporary color pipette ([Ctrl] + click).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Update maximum button size calculation to account for Stamp
+      rotation button added in 0.9.29.  (Otherwise you could end up
+      seeing no stamps between the up/down scroll buttons!)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Some button sizes could cause buttons to render with gaps
+      (e.g. 90 and 91), where 'garbage' graphics could appear.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Ports & Building:
+    -----------------
+    * Created "src/indent.sh", to run 'indent' against source files.
+      Ran it during 0.9.30 development.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Now requiring "SDL2_Pango" library all the time (no longer
+      builds without it).  Motivation: Without it, many scripts
+      (e.g. Japanese, Thai, Arabic) did not render properly.
+      Closes https://sourceforge.net/p/tuxpaint/bugs/268/
+      (h/t Pere for confirming the situation.)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Documentation updates:
+    ----------------------
+    * Haiku build instructions added to INSTALL docs.
+      Luc 'Begasus' Schrijvers <begasus@gmail.com>
+
+    * Added screenshot examples of each Magic tool.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Localization Updates:
+    ---------------------
+    * Chinese (Simplified) translation
+      臧传明 <qdeduos@163.com>
+
+    * French translation
+      Jacques Chion <jacques.chion@orange.fr>
+
+    * Icelandic translation
+      Sveinn í Felli <sv1@fellsnet.is>
+
+    * Japanese translation
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Slovak translation
+      Jozef Říha <jose1711@gmail.com>
+
+    * Songhay translation
+      Abdoul Cisse <abdoulseydou@hotmail.com>
+      Mohomodou Houssouba <mh@songhay.org>
+      Songhay localisation and dictionary project <https://www.songhay.org/>
 
 2023.April.2 (0.9.29)
   * Improvements to "Stamp" tool:

@@ -49,8 +49,7 @@ static int old_sound[4] = { -1, -1, -1, -1 };
  *   (low values, near the top of the window, are quieter), or
  *   SNDDIST_NEAR for full volume
  */
-void playsound(SDL_Surface * screen, int chan, int s, int override, int x,
-               int y)
+void playsound(SDL_Surface * screen, int chan, int s, int override, int x, int y)
 {
 #ifndef NOSOUND
   int left, dist;
@@ -109,8 +108,7 @@ void playsound(SDL_Surface * screen, int chan, int s, int override, int x,
         left = (255 - dist) / 2;
       }
 #ifdef DEBUG
-      printf("Panning of sound #%d in channel %d, left=%d, right=%d\n", s,
-             chan, left, (255 - dist) - left);
+      printf("Panning of sound #%d in channel %d, left=%d, right=%d\n", s, chan, left, (255 - dist) - left);
       fflush(stdout);
 #endif
       Mix_SetPanning(chan, left, (255 - dist) - left);

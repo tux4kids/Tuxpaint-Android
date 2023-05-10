@@ -19,8 +19,7 @@ int MoveFileToRecycleBin(const TCHAR * fullPathName)
   fileOp.hwnd = NULL;
   fileOp.wFunc = FO_DELETE;
   fileOp.pTo = NULL;
-  fileOp.fFlags =
-    FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_SILENT | FOF_ALLOWUNDO;
+  fileOp.fFlags = FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_SILENT | FOF_ALLOWUNDO;
   return SHFileOperation(&fileOp);
 }
 

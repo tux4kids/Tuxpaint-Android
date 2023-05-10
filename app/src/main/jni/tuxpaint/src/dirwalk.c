@@ -1,7 +1,7 @@
 /*
   dirwalk.c
 
-  Copyright (c) 2009-2022
+  Copyright (c) 2009-2023
   https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last modified: December 11, 2022
+  Last modified: April 30, 2023
 */
 
 #include <stdio.h>
@@ -82,8 +82,7 @@ extern char *strcasestr(const char *haystack, const char *needle);
 void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture,
                        SDL_Renderer * renderer,
                        const char *restrict const dir, unsigned dirlen,
-                       tp_ftw_str * files, unsigned i,
-                       const char *restrict const locale)
+                       tp_ftw_str * files, unsigned i, const char *restrict const locale)
 {
   dirlen = dirlen;
 
@@ -153,10 +152,8 @@ void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture,
       }
       if (font)
       {
-        const char *restrict const family =
-          TuxPaint_Font_FontFaceFamilyName(font);
-        const char *restrict const style =
-          TuxPaint_Font_FontFaceStyleName(font);
+        const char *restrict const family = TuxPaint_Font_FontFaceFamilyName(font);
+        const char *restrict const style = TuxPaint_Font_FontFaceStyleName(font);
 
 
 #ifdef DEBUG
@@ -165,22 +162,19 @@ void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture,
           int numfaces = TTF_FontFaces(font->ttf_font);
 
           if (numfaces != 1)
-            printf("%s:%d - Found %d faces in %s, %s, %s\n", __FILE__,
-                   __LINE__, numfaces, files[i].str, family, style);
+            printf("%s:%d - Found %d faces in %s, %s, %s\n", __FILE__, __LINE__, numfaces, files[i].str, family, style);
 
-          printf("%s:%d - success: tpf: 0x%x tpf->ttf_font: 0x%x\n", __FILE__, __LINE__, (unsigned int) (intptr_t) font, (unsigned int) (intptr_t) font->ttf_font);     //EP added (intptr_t) to avoid warning on x64
+          printf("%s:%d - success: tpf: 0x%x tpf->ttf_font: 0x%x\n", __FILE__, __LINE__, (unsigned int)(intptr_t) font, (unsigned int)(intptr_t) font->ttf_font);       //EP added (intptr_t) to avoid warning on x64
         }
-#ifndef NO_SDLPANGO
         else
+        {
           printf("%s:%d - success: tpf: 0x%x tpf->pango_context: 0x%x\n",
-                 __FILE__, __LINE__, (unsigned int) (intptr_t) font,
-                 (unsigned int) (intptr_t) font->pango_context);
-#endif
+                 __FILE__, __LINE__, (unsigned int)(intptr_t) font, (unsigned int)(intptr_t) font->pango_context);
+        }
 #endif
 
         // These fonts crash Tux Paint via a library bug.
-        int blacklisted = !strcmp("Zapfino", family)
-          || !strcmp("Elvish Ring NFI", family);
+        int blacklisted = !strcmp("Zapfino", family) || !strcmp("Elvish Ring NFI", family);
 
         // First, the blacklist. We list font families that can crash Tux Paint
         // via bugs in the SDL_ttf library. We also test fonts to be sure that
@@ -201,8 +195,7 @@ void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture,
         // impossible for a user to type ASCII letters.
         //
         // Most translators should use scoring instead.
-        if (!charset_works(font, gettext("qx"))
-            || !charset_works(font, gettext("QX")))
+        if (!charset_works(font, gettext("qx")) || !charset_works(font, gettext("QX")))
           blacklisted = 1;
 
         if (!blacklisted)
@@ -210,12 +203,9 @@ void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture,
           if (num_font_styles == num_font_styles_max)
           {
             num_font_styles_max = num_font_styles_max * 5 / 4 + 30;
-            user_font_styles =
-              realloc(user_font_styles,
-                      num_font_styles_max * sizeof *user_font_styles);
+            user_font_styles = realloc(user_font_styles, num_font_styles_max * sizeof *user_font_styles);
           }
-          user_font_styles[num_font_styles] =
-            malloc(sizeof *user_font_styles[num_font_styles]);
+          user_font_styles[num_font_styles] = malloc(sizeof *user_font_styles[num_font_styles]);
           user_font_styles[num_font_styles]->directory = strdup(dir);
           user_font_styles[num_font_styles]->filename = files[i].str;   // steal it (mark NULL below)
           user_font_styles[num_font_styles]->family = strdup(family);
@@ -230,52 +220,46 @@ void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture,
           // Translators should do whatever is needed to put crummy fonts last.
 
           user_font_styles[num_font_styles]->score +=
-            charset_works(
-              font, /* distinct uppercase and lowercase (e.g., 'o' vs. 'O') */ gettext("oO")
+            charset_works(font, /* distinct uppercase and lowercase (e.g., 'o' vs. 'O') */ gettext("oO")
             );
 
           // common punctuation (e.g., '?', '!', '.', ',', etc.)
           user_font_styles[num_font_styles]->score +=
-            charset_works(
-              font, /* common punctuation (e.g., '?', '!', '.', ',', etc.) */ gettext(",.?!")
+            charset_works(font, /* common punctuation (e.g., '?', '!', '.', ',', etc.) */ gettext(",.?!")
             );
 
           user_font_styles[num_font_styles]->score +=
-            charset_works(
-              font, /* uncommon punctuation (e.g., '@', '#', '*', etc.) */ gettext("`\%_@$~#{<(^&*")
+            charset_works(font, /* uncommon punctuation (e.g., '@', '#', '*', etc.) */ gettext("`\%_@$~#{<(^&*")
             );
 
           user_font_styles[num_font_styles]->score +=
-            charset_works(
-              font, /* digits (e.g., '0', '1' and '7') */ gettext("017")
+            charset_works(font, /* digits (e.g., '0', '1' and '7') */ gettext("017")
             );
 
           user_font_styles[num_font_styles]->score +=
-            charset_works(
-              font, /* distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero)) */ gettext("O0")
+            charset_works(font, /* distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero)) */
+                          gettext("O0")
             );
 
           user_font_styles[num_font_styles]->score +=
-            charset_works(
-            font, /* distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye)) */ gettext("1Il|")
-          );
+            charset_works(font,
+                          /* distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye)) */
+                          gettext("1Il|")
+            );
 
           // Translation spares
-	  
+
           user_font_styles[num_font_styles]->score +=
-	    // If neccessary, translate any of following strings using at least
-	    // two locale specific characters required to render your language.
-	    // Then, the scores for those fonts having such characters will increase.
-	    //
-	    // You can use two different weight for scoring, 1 or 9, according
-	    // to the importance.
+            // If neccessary, translate any of following strings using at least
+            // two locale specific characters required to render your language.
+            // Then, the scores for those fonts having such characters will increase.
+            //
+            // You can use two different weight for scoring, 1 or 9, according
+            // to the importance.
             charset_works(font, gettext("<1>spare-1a"));
-          user_font_styles[num_font_styles]->score +=
-            charset_works(font, gettext("<1>spare-1b"));
-          user_font_styles[num_font_styles]->score +=
-            charset_works(font, gettext("<9>spare-9a")) * 9;
-          user_font_styles[num_font_styles]->score +=
-            charset_works(font, gettext("<9>spare-9b")) * 9;
+          user_font_styles[num_font_styles]->score += charset_works(font, gettext("<1>spare-1b"));
+          user_font_styles[num_font_styles]->score += charset_works(font, gettext("<9>spare-9a")) * 9;
+          user_font_styles[num_font_styles]->score += charset_works(font, gettext("<9>spare-9b")) * 9;
 
 // this really should be dynamic, avoiding the need for a special build
 #ifdef OLPC_XO
@@ -292,8 +276,7 @@ void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture,
         else
         {
 #ifdef DEBUG
-          fprintf(stderr, "Font is too defective: %s, %s, %s\n", files[i].str,
-                  family, style);
+          fprintf(stderr, "Font is too defective: %s, %s, %s\n", files[i].str, family, style);
 #endif
         }
         TuxPaint_Font_CloseFont(font);
@@ -349,9 +332,7 @@ void tp_ftw(SDL_Surface * screen, SDL_Texture * texture,
                                                   dir, unsigned dirlen,
                                                   tp_ftw_str * files,
                                                   unsigned count,
-                                                  const char *restrict const
-                                                  locale),
-            const char *restrict const locale)
+                                                  const char *restrict const locale), const char *restrict const locale)
 {
   DIR *d;
   unsigned num_file_names = 0;
@@ -362,6 +343,7 @@ void tp_ftw(SDL_Surface * screen, SDL_Texture * texture,
   tp_ftw_str *dir_names = NULL;
   int d_namlen;
   int add_rsrc;
+
 #ifdef __ANDROID__
   unsigned dlen;
 #endif
@@ -532,12 +514,10 @@ void tp_ftw(SDL_Surface * screen, SDL_Texture * texture,
 #else
 #ifdef __ANDROID__
     if (dlen != dirlen)         /* First case only happens in Android files coming from assets */
-      fn(screen, texture, renderer, di, dlen, file_names, num_file_names,
-         locale);
+      fn(screen, texture, renderer, di, dlen, file_names, num_file_names, locale);
     else
 #endif
-      fn(screen, texture, renderer, dir, dirlen, file_names, num_file_names,
-         locale);
+      fn(screen, texture, renderer, dir, dirlen, file_names, num_file_names, locale);
 #endif
   }
 
@@ -546,10 +526,8 @@ void tp_ftw(SDL_Surface * screen, SDL_Texture * texture,
     qsort(dir_names, num_dir_names, sizeof *dir_names, compare_ftw_str);
     while (num_dir_names--)
     {
-      memcpy(dir + dirlen, dir_names[num_dir_names].str,
-             dir_names[num_dir_names].len + 1);
-      tp_ftw(screen, texture, renderer, dir,
-             dirlen + dir_names[num_dir_names].len, rsrc, fn, locale);
+      memcpy(dir + dirlen, dir_names[num_dir_names].str, dir_names[num_dir_names].len + 1);
+      tp_ftw(screen, texture, renderer, dir, dirlen + dir_names[num_dir_names].len, rsrc, fn, locale);
       free(dir_names[num_dir_names].str);
     }
     free(dir_names);

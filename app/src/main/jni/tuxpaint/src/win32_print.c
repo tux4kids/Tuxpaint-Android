@@ -68,8 +68,7 @@ static SDL_Surface *make24bitDIB(SDL_Surface * surf)
 
   surf24 = SDL_ConvertSurface(surf, &pixfmt, SDL_SWSURFACE);
   surfDIB = SDL_CreateRGBSurface(SDL_SWSURFACE, surf24->w, surf24->h, 24,
-                                 pixfmt.Rmask, pixfmt.Gmask, pixfmt.Bmask,
-                                 pixfmt.Amask);
+                                 pixfmt.Rmask, pixfmt.Gmask, pixfmt.Bmask, pixfmt.Amask);
 
   linesize = surf24->w * 3;     // Flip top2bottom
   dst = surfDIB->pixels;
@@ -105,8 +104,7 @@ static int GetDefaultPrinterStrings(char *device, char *driver, char *output)
     return 0;
 
   if (((dev = strtok(buff, ",")) != NULL) &&
-      ((drv = strtok(NULL, ", ")) != NULL)
-      && ((out = strtok(NULL, ", ")) != NULL))
+      ((drv = strtok(NULL, ", ")) != NULL) && ((out = strtok(NULL, ", ")) != NULL))
   {
     if (device)
       strcpy(device, dev);
@@ -145,8 +143,7 @@ static HANDLE LoadCustomPrinterHDEVMODE(HWND hWnd, const char *filepath)
   if (!OpenPrinter(device, &hPrinter, NULL))
     goto err_exit;
 
-  sizeof_devmode =
-    (int) DocumentProperties(hWnd, hPrinter, device, NULL, NULL, 0);
+  sizeof_devmode = (int)DocumentProperties(hWnd, hPrinter, device, NULL, NULL, 0);
 
   if (!sizeof_devmode)
     goto err_exit;
@@ -159,8 +156,7 @@ static HANDLE LoadCustomPrinterHDEVMODE(HWND hWnd, const char *filepath)
   if (!devmode)
     goto err_exit;
 
-  res =
-    DocumentProperties(hWnd, hPrinter, device, devmode, NULL, DM_OUT_BUFFER);
+  res = DocumentProperties(hWnd, hPrinter, device, devmode, NULL, DM_OUT_BUFFER);
   if (res != IDOK)
     goto err_exit;
 
@@ -170,9 +166,7 @@ static HANDLE LoadCustomPrinterHDEVMODE(HWND hWnd, const char *filepath)
     goto err_exit;
   fclose(fp);
 
-  res =
-    DocumentProperties(hWnd, hPrinter, device, devmode, devmode,
-                       DM_IN_BUFFER | DM_OUT_BUFFER);
+  res = DocumentProperties(hWnd, hPrinter, device, devmode, devmode, DM_IN_BUFFER | DM_OUT_BUFFER);
   if (res != IDOK)
     goto err_exit;
 
@@ -195,8 +189,7 @@ err_exit:
 /**
  * FIXME
  */
-static int SaveCustomPrinterHDEVMODE(HWND hWnd, const char *filepath,
-                                     HANDLE hDevMode)
+static int SaveCustomPrinterHDEVMODE(HWND hWnd, const char *filepath, HANDLE hDevMode)
 {
   FILE *fp = NULL;
 
@@ -208,7 +201,7 @@ static int SaveCustomPrinterHDEVMODE(HWND hWnd, const char *filepath,
     int block_written;
     char devname[dmDeviceNameSize];
 
-    strcpy(devname, (const char *) devmode->dmDeviceName);
+    strcpy(devname, (const char *)devmode->dmDeviceName);
     fwrite(devname, 1, sizeof(devname), fp);
     block_written = fwrite(devmode, 1, block_size, fp);
     GlobalUnlock(hDevMode);
@@ -272,8 +265,7 @@ static int GetCustomPrinterDC(HWND hWnd, const char *printcfg, int show)
   {
     DEVMODE *devmode = (DEVMODE *) GlobalLock(pd.hDevMode);
 
-    hDCprinter =
-      CreateDC(NULL, (const char *) devmode->dmDeviceName, NULL, devmode);
+    hDCprinter = CreateDC(NULL, (const char *)devmode->dmDeviceName, NULL, devmode);
     GlobalUnlock(pd.hDevMode);
     GlobalFree(pd.hDevMode);
   }
@@ -326,8 +318,7 @@ int IsPrinterAvailable(void)
 /**
  * FIXME
  */
-const char *SurfacePrint(SDL_Window * window, SDL_Surface * surf,
-                         const char *printcfg, int showdialog)
+const char *SurfacePrint(SDL_Window * window, SDL_Surface * surf, const char *printcfg, int showdialog)
 {
   const char *res = NULL;
   HWND hWnd;
@@ -424,17 +415,17 @@ const char *SurfacePrint(SDL_Window * window, SDL_Surface * surf,
 
       if (width < pageWidth && height < pageHeight)
       {
-        float dW = (float) pageWidth / width;
-        float dH = (float) pageHeight / height;
+        float dW = (float)pageWidth / width;
+        float dH = (float)pageHeight / height;
 
         if (dW < dH)
         {
           width = pageWidth;
-          height = (int) ((height * dW * (sY / sX)) + 0.5f);
+          height = (int)((height * dW * (sY / sX)) + 0.5f);
         }
         else
         {
-          width = (int) ((width * dH * (sX / sY)) + 0.5f);
+          width = (int)((width * dH * (sX / sY)) + 0.5f);
           height = pageHeight;
         }
       }
@@ -476,9 +467,8 @@ const char *SurfacePrint(SDL_Window * window, SDL_Surface * surf,
     nError = StretchDIBits(hDCprinter, rcDst.left, rcDst.top,
                            rcDst.right - rcDst.left,
                            rcDst.bottom - rcDst.top,
-                           0, 0, bmih.biWidth, bmih.biHeight,
-                           surf24->pixels, &bmi, DIB_RGB_COLORS, SRCCOPY);
-    if (nError == (int) GDI_ERROR)
+                           0, 0, bmih.biWidth, bmih.biHeight, surf24->pixels, &bmi, DIB_RGB_COLORS, SRCCOPY);
+    if (nError == (int)GDI_ERROR)
     {
       res = "win32_print: StretchDIBits() failed.";
       goto error;
@@ -523,8 +513,7 @@ error:
 /*
   Read access to Windows Registry
 */
-static HRESULT ReadRegistry(const char *key, const char *option, char *value,
-                            int size)
+static HRESULT ReadRegistry(const char *key, const char *option, char *value, int size)
 {
   LONG res;
   HKEY hKey = NULL;
@@ -573,8 +562,7 @@ char *GetDefaultSaveDir(const char *suffix)
 {
   char prefix[MAX_PATH];
   char path[2 * MAX_PATH];
-  const char *key =
-    "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders";
+  const char *key = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders";
   const char *option = "AppData";
   HRESULT hr = S_OK;
 
@@ -598,8 +586,7 @@ char *GetDefaultSaveDir(const char *suffix)
 char *GetSystemFontDir(void)
 {
   char path[MAX_PATH];
-  const char *key =
-    "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders";
+  const char *key = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders";
   const char *option = "Fonts";
   HRESULT hr = S_OK;
 
@@ -621,8 +608,7 @@ char *GetUserImageDir(void);
 char *GetUserImageDir(void)
 {
   char path[MAX_PATH];
-  const char *key =
-    "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders";
+  const char *key = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders";
   const char *option = "My Pictures";
   HRESULT hr = S_OK;
 
@@ -675,8 +661,7 @@ static int g_bWindowActive = 0;
 /**
  * FIXME
  */
-LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam,
-                                      LPARAM lParam);
+LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
   int bEatKeystroke = 0;
@@ -690,8 +675,7 @@ LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
   case WM_KEYDOWN:
   case WM_KEYUP:
     {
-      bEatKeystroke = g_bWindowActive && ((p->vkCode == VK_LWIN)
-                                          || (p->vkCode == VK_RWIN));
+      bEatKeystroke = g_bWindowActive && ((p->vkCode == VK_LWIN) || (p->vkCode == VK_RWIN));
       break;
     }
   }
@@ -708,9 +692,7 @@ int InstallKeyboardHook(void)
 {
   if (g_hKeyboardHook)
     return -1;
-  g_hKeyboardHook =
-    SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc,
-                     GetModuleHandle(NULL), 0);
+  g_hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, GetModuleHandle(NULL), 0);
   return g_hKeyboardHook ? 0 : -2;
 }
 

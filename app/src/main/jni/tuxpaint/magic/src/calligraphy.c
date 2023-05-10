@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 12, 2023
+  Last updated: April 19, 2023
 */
 
 #include <stdio.h>
@@ -49,10 +49,9 @@ static SDL_Surface *calligraphy_brush, *calligraphy_colored_brush;
 
 /* Local Function Prototypes */
 static Point2D calligraphy_PointOnCubicBezier(Point2D * cp, float t);
-static void calligraphy_ComputeBezier(Point2D * cp, int numberOfPoints,
-                                      Point2D * curve);
+static void calligraphy_ComputeBezier(Point2D * cp, int numberOfPoints, Point2D * curve);
 static float calligraphy_dist(float x1, float y1, float x2, float y2);
-int calligraphy_init(magic_api * api);
+int calligraphy_init(magic_api * api, Uint32 disabled_features);
 Uint32 calligraphy_api_version(void);
 int calligraphy_get_tool_count(magic_api * api);
 SDL_Surface *calligraphy_get_icon(magic_api * api, int which);
@@ -60,36 +59,34 @@ char *calligraphy_get_name(magic_api * api, int which);
 int calligraphy_get_group(magic_api * api, int which);
 char *calligraphy_get_description(magic_api * api, int which, int mode);
 void calligraphy_drag(magic_api * api, int which, SDL_Surface * canvas,
-                      SDL_Surface * last, int ox, int oy, int x, int y,
-                      SDL_Rect * update_rect);
+                      SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 void calligraphy_click(magic_api * api, int which, int mode,
-                       SDL_Surface * canvas, SDL_Surface * last, int x, int y,
-                       SDL_Rect * update_rect);
+                       SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 void calligraphy_release(magic_api * api, int which, SDL_Surface * canvas,
-                         SDL_Surface * last, int x, int y,
-                         SDL_Rect * update_rect);
+                         SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 void calligraphy_shutdown(magic_api * api);
 void calligraphy_set_color(magic_api * api, int which, SDL_Surface * canvas,
                            SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 int calligraphy_requires_colors(magic_api * api, int which);
-void calligraphy_switchin(magic_api * api, int which, int mode,
-                          SDL_Surface * canvas);
-void calligraphy_switchout(magic_api * api, int which, int mode,
-                           SDL_Surface * canvas);
+void calligraphy_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
+void calligraphy_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int calligraphy_modes(magic_api * api, int which);
+Uint8 calligraphy_accepted_sizes(magic_api * api, int which, int mode);
+Uint8 calligraphy_default_size(magic_api * api, int which, int mode);
+void calligraphy_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
+                          SDL_Rect * update_rect);
 
-// No setup required:
-int calligraphy_init(magic_api * api)
+
+
+int calligraphy_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/calligraphy.ogg",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/calligraphy.ogg", api->data_directory);
 
   calligraphy_snd = Mix_LoadWAV(fname);
 
-  snprintf(fname, sizeof(fname), "%simages/magic/calligraphy_brush.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/calligraphy_brush.png", api->data_directory);
 
   calligraphy_brush = IMG_Load(fname);
   calligraphy_colored_brush = NULL;
@@ -123,40 +120,33 @@ SDL_Surface *calligraphy_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/calligraphy.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/calligraphy.png", api->data_directory);
   return (IMG_Load(fname));
 }
 
 // Return our name, localized:
-char *calligraphy_get_name(magic_api * api ATTRIBUTE_UNUSED,
-                           int which ATTRIBUTE_UNUSED)
+char *calligraphy_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Calligraphy")));
 }
 
 // Return our group
-int calligraphy_get_group(magic_api * api ATTRIBUTE_UNUSED,
-                          int which ATTRIBUTE_UNUSED)
+int calligraphy_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
 
 // Return our description, localized:
 char *calligraphy_get_description(magic_api * api ATTRIBUTE_UNUSED,
-                                  int which ATTRIBUTE_UNUSED,
-                                  int mode ATTRIBUTE_UNUSED)
+                                  int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return (strdup
-          (gettext_noop
-           ("Click and drag the mouse around to draw in calligraphy.")));
+  return (strdup(gettext_noop("Click and drag the mouse around to draw in calligraphy.")));
 }
 
 
 void calligraphy_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
                       SDL_Surface * canvas,
-                      SDL_Surface * last ATTRIBUTE_UNUSED, int ox, int oy,
-                      int x, int y, SDL_Rect * update_rect)
+                      SDL_Surface * last ATTRIBUTE_UNUSED, int ox, int oy, int x, int y, SDL_Rect * update_rect)
 {
   Point2D *curve;
   int i, n_points, thick, new_thick;
@@ -196,9 +186,7 @@ void calligraphy_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
                      calligraphy_control_points[2].x,
                      calligraphy_control_points[2].y) +
     calligraphy_dist(calligraphy_control_points[2].x,
-                     calligraphy_control_points[2].y,
-                     calligraphy_control_points[3].x,
-                     calligraphy_control_points[3].y);
+                     calligraphy_control_points[2].y, calligraphy_control_points[3].x, calligraphy_control_points[3].y);
 
   if (n_points == 0)
     return;                     // No-op; not any points to plot
@@ -212,8 +200,7 @@ void calligraphy_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
 
   for (i = 0; i < n_points - 1; i++)
   {
-    thick =
-      ((new_thick * i) + (calligraphy_old_thick * (n_points - i))) / n_points;
+    thick = ((new_thick * i) + (calligraphy_old_thick * (n_points - i))) / n_points;
 
 
     /* The new way, using an antialiased brush bitmap */
@@ -282,8 +269,7 @@ void calligraphy_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
 void calligraphy_click(magic_api * api ATTRIBUTE_UNUSED,
                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
                        SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                       SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y,
-                       SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                       SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   calligraphy_old_thick = 8;
   calligraphy_last_time = 0;
@@ -303,8 +289,7 @@ void calligraphy_release(magic_api * api ATTRIBUTE_UNUSED,
                          int which ATTRIBUTE_UNUSED,
                          SDL_Surface * canvas ATTRIBUTE_UNUSED,
                          SDL_Surface * last ATTRIBUTE_UNUSED,
-                         int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED,
-                         SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                         int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -321,7 +306,8 @@ void calligraphy_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 
 // We don't use colors
 void calligraphy_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                           SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                           SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
+                           SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   int x, y;
   Uint8 a;
@@ -337,9 +323,7 @@ void calligraphy_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surf
   if (calligraphy_colored_brush != NULL)
     SDL_FreeSurface(calligraphy_colored_brush);
 
-  amask =
-    ~(calligraphy_brush->format->Rmask | calligraphy_brush->format->
-      Gmask | calligraphy_brush->format->Bmask);
+  amask = ~(calligraphy_brush->format->Rmask | calligraphy_brush->format->Gmask | calligraphy_brush->format->Bmask);
 
   calligraphy_colored_brush =
     SDL_CreateRGBSurface(SDL_SWSURFACE,
@@ -347,8 +331,7 @@ void calligraphy_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surf
                          calligraphy_brush->h,
                          calligraphy_brush->format->BitsPerPixel,
                          calligraphy_brush->format->Rmask,
-                         calligraphy_brush->format->Gmask,
-                         calligraphy_brush->format->Bmask, amask);
+                         calligraphy_brush->format->Gmask, calligraphy_brush->format->Bmask, amask);
 
   if (calligraphy_colored_brush == NULL)
     return;                     // FIXME: Error!
@@ -361,13 +344,10 @@ void calligraphy_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surf
   {
     for (x = 0; x < calligraphy_brush->w; x++)
     {
-      SDL_GetRGBA(api->getpixel(calligraphy_brush, x, y),
-                  calligraphy_brush->format, &r, &g, &b, &a);
+      SDL_GetRGBA(api->getpixel(calligraphy_brush, x, y), calligraphy_brush->format, &r, &g, &b, &a);
 
       api->putpixel(calligraphy_colored_brush, x, y,
-                    SDL_MapRGBA(calligraphy_colored_brush->format,
-                                calligraphy_r, calligraphy_g, calligraphy_b,
-                                a));
+                    SDL_MapRGBA(calligraphy_colored_brush->format, calligraphy_r, calligraphy_g, calligraphy_b, a));
     }
   }
 
@@ -376,8 +356,7 @@ void calligraphy_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surf
 }
 
 // We don't use colors
-int calligraphy_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
-                                int which ATTRIBUTE_UNUSED)
+int calligraphy_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
@@ -432,8 +411,7 @@ static Point2D calligraphy_PointOnCubicBezier(Point2D * cp, float t)
  <sizeof(Point2D) numberOfPoints>
 */
 
-static void calligraphy_ComputeBezier(Point2D * cp, int numberOfPoints,
-                                      Point2D * curve)
+static void calligraphy_ComputeBezier(Point2D * cp, int numberOfPoints, Point2D * curve)
 {
   float dt;
   int i;
@@ -454,21 +432,34 @@ static float calligraphy_dist(float x1, float y1, float x2, float y2)
 }
 
 void calligraphy_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                          int which ATTRIBUTE_UNUSED,
-                          int mode ATTRIBUTE_UNUSED,
-                          SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                          int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 void calligraphy_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                           int which ATTRIBUTE_UNUSED,
-                           int mode ATTRIBUTE_UNUSED,
-                           SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                           int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int calligraphy_modes(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED)
+int calligraphy_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
+}
+
+
+Uint8 calligraphy_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                                 int mode ATTRIBUTE_UNUSED)
+{
+  return 0;
+}
+
+Uint8 calligraphy_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+{
+  return 0;
+}
+
+void calligraphy_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                          SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+                          Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+{
 }

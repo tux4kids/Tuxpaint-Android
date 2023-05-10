@@ -1,11 +1,11 @@
                                    Tux Paint
-                                 versión 0.9.29
+                                 versión 0.9.30
                           Documentación da instalación
 
         Copyright © 2002-2023 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                              29 de Marzo de 2023
+                              30 de Abril de 2023
 
              +----------------------------------------------------+
              |Índice                                              |
@@ -18,6 +18,7 @@
              |       * Linux/Unix                                 |
              |       * macOS                                      |
              |       * Android                                    |
+             |       * Haiku                                      |
              |  * Debugging                                       |
              |  * Uninstalling Tux Paint                          |
              |       * Windows                                    |
@@ -35,8 +36,8 @@ Simple DirectMedia Layer library (libSDL)
 
    Along with libSDL, Tux Paint depends on a number of other SDL 'helper'
    libraries: SDL_Image (for graphics files), SDL_gfx (for some graphical
-   functions, like rotation), SDL_TTF and (optionally) SDL2_Pango (for True
-   Type Font support) and, optionally, SDL_Mixer (for sound effects).
+   functions, like rotation), SDL_TTF and SDL2_Pango (for True Type Font
+   support) and, optionally, SDL_Mixer (for sound effects).
 
    As bibliotecas SDL están dispoñíbeis como código fonte ou como paquetes
    RPM ou Debian para varias distribucións de Linux. Pódense descargar dende:
@@ -47,7 +48,7 @@ Simple DirectMedia Layer library (libSDL)
        https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/
        (https://sourceforge.net/projects/sdlgfx/)
      * SDL_ttf: https://github.com/libsdl-org/SDL_ttf
-     * SDL2_Pango: https://github.com/markuskimius/SDL2_Pango (opcional)
+     * SDL2_Pango: https://github.com/markuskimius/SDL2_Pango
      * SDL_mixer: https://github.com/libsdl-org/SDL_mixer (opcional)
 
    Normalmente tamén están dispoñíbeis xunto coa súa distribución de Linux
@@ -141,6 +142,8 @@ Simple DirectMedia Layer library (libSDL)
    «COPYING.txt» para máis detalles) e, polo tanto, o «código fonte» do
    programa está dispoñíbel libremente.
 
+       ------------------------------------------------------------------
+
 Windows
 
    10 de Xullo de 2022 Shin-ichi TOYAMA <dolphin6k@wmail.plala.or.jp>
@@ -160,8 +163,8 @@ Windows
    Download the latest MSYS2 environment from https://www.msys2.org/ and
    install it where you'd like (the default is "C:\msys64")
 
-   Open the MSYS2 shell from the "Start Menu" -> "MSYS2 64bit" -> "MSYS2
-   MSYS" and execute following command:
+   Open the MSYS2 shell from the "Start Menu" → "MSYS2 64bit" → "MSYS2 MSYS"
+   and execute following command:
 
      $ yes "" | pacman -Syu
 
@@ -213,7 +216,7 @@ Windows
    SDL2_Pango and libunibreak should be installed manually.
 
    This time, use the MinGW "64bit" shell. Open the shell from the "Start
-   Menu" -> "MSYS2 64bit" -> "MSYS2 MinGW 64-bit"
+   Menu" → "MSYS2 64bit" → "MSYS2 MinGW 64-bit"
 
       SDL2_Pango
 
@@ -271,7 +274,7 @@ Windows
    SDL2_Pango and libunibreak should be installed manually.
 
    This time, use the MinGW "32bit" shell. Open the shell from the "Start
-   Menu" -> "MSYS2 64bit" -> "MSYS2 MinGW 32-bit"
+   Menu" → "MSYS2 64bit" → "MSYS2 MinGW 32-bit"
 
       SDL2_Pango
 
@@ -322,9 +325,9 @@ Windows
    You can compile 64-bit binaries using "MSYS2 64bit" shell, and 32-bit
    binaries using "MSYS2 32bit" shell, respectively.
 
-     * Select "MSYS2 64bit" -> "MSYS2 MinGW 64-bit" from the "Start Menu" to
+     * Select "MSYS2 64bit" → "MSYS2 MinGW 64-bit" from the "Start Menu" to
        open the 64bit shell.
-     * Select "MSYS2 64bit" -> "MSYS2 MinGW 32-bit" from the "Start Menu" to
+     * Select "MSYS2 64bit" → "MSYS2 MinGW 32-bit" from the "Start Menu" to
        open the 32bit shell.
 
     Tux Paint Config.
@@ -462,6 +465,8 @@ Windows
    maiúsculas e minúsculas incorrectas (maiúsculas «Z» no canto de minúsculas
    «z») ou a falta (ou exceso) de «-» (guións).
 
+       ------------------------------------------------------------------
+
 Linux/Unix
 
   Compilación:
@@ -484,17 +489,6 @@ Linux/Unix
    NOSVGFLAG=NOSVG»:
 
      $ make SVG_LIB= SVG_CFLAGS=
-
-  Desactivar a compatibilidade de «Pango» (e, polo tanto, as dependencias de
-  «Pango, Cairo, etc.»:
-
-   📜 Antes da versión 0.9.18, Tux Paint utilizaba a biblioteca libSDL_ttf
-   para renderizar texto usando tipos de letra TrueType. Dende o 0.9.18 úsase
-   libSDL_Pango, xa que ten unha mellor compatibilidade coa
-   internacionalización. Non obstante, se quere desactivar o uso de
-   SDL_Pango, pode facelo executando «make» engadindo «SDL_PANGO_LIB=»:
-
-     $ make SDL_PANGO_LIB=
 
   Disabling Sound at Compile-time
 
@@ -591,6 +585,8 @@ Linux/Unix
 
    💡 Note: This list is out of date. See "Makefile" and "Makefile-i18n" for a
    complete list.
+
+       ------------------------------------------------------------------
 
 macOS
 
@@ -780,7 +776,7 @@ macOS
    https://developer.apple.com/documentation/macos-release-notes/macos-big-sur-11_0_1-universal-apps-release-notes#:~:text=New%20in%20macOS,pass%20through%20Gatekeeper.
 
    If you get an error that the application bundle is already signed, remove
-   it before signing::
+   it before signing:
 
      $ codesign --remove-signature TuxPaint.app
 
@@ -802,6 +798,8 @@ macOS
      $ macos/build-universal.sh
      $ codesign -s - TuxPaint.app
      $ make TuxPaint.dmg
+
+       ------------------------------------------------------------------
 
 Android
 
@@ -865,6 +863,44 @@ Android
    need 1GB free on disk. Run the makebuildserver tool they provide, then,
    from the root of fdroiddata, run ../fdroidserver/fdroid build --server
    org.tuxpaint:NNNN (NNNN = version, e.g. 9288)
+
+       ------------------------------------------------------------------
+
+Haiku
+
+   7 de Maio de 2023 Luc Schrijvers <begasus@gmail.com> (Edited by Bill
+   Kendrick)
+
+  Prerequisites
+
+   Install the required develop packages in Terminal:
+
+   32-bit:
+           pkgman install xcairo_x86_devel fribidi_x86_devel
+           gdk_pixbuf_x86_devel libiconv_x86_devel libimagequant_x86_devel
+           gettext_x86_libintl libpaper_x86_devel pango_x86_devel
+           libpng16_x86_devel librsvg_x86_devel libsdl2_x86_devel
+           sdl2_image_x86_devel sdl2_gfx_x86_devel sdl2_mixer_x86_devel
+           sdl2_pango_x86_devel sdl2_ttf_x86_devel zlib_x86_devel
+
+   64-bit:
+           pkgman install xcairo_devel fribidi_devel gdk_pixbuf_devel
+           libiconv_devel libimagequant_devel gettext_libintl libpaper_devel
+           pango_devel libpng16_devel librsvg_devel libsdl2_devel
+           sdl2_image_devel sdl2_gfx_devel sdl2_mixer_devel sdl2_pango_devel
+           sdl2_ttf_devel zlib_devel
+
+   For 32-bit you need to switch to the new compiler (currently gcc 11.2.0)
+   with setarch x86
+
+  Building
+
+   make PREFIX=/boot/home/config/non-packaged
+
+  Tux Paint Stamps
+
+   make install-all
+   DATA_PREFIX=/boot/home/config/non-packaged/share/tuxpaint/
 
                                    Debugging
 

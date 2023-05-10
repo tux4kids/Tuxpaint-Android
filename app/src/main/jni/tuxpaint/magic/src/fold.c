@@ -1,7 +1,7 @@
 /*
   Folds the picture down from the corners.
 
-  Last updated: February 12, 2023
+  Last updated: April 18, 2023
 */
 
 //optimized version soon :)
@@ -13,8 +13,6 @@
 #include "tp_magic_api.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
-
-#define FOLD_LEN 80
 
 #ifdef __ANDROID__
 #define inline static
@@ -32,25 +30,19 @@ SDL_Surface *fold_surface_src, *fold_surface_dst;
 
 
 void fold_draw(magic_api * api, int which,
-               SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-               SDL_Rect * update_rect);
-static void fold_erase(void *ptr, int which, SDL_Surface * canvas,
-                       SDL_Surface * last, int x, int y);
+               SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
+static void fold_erase(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 void translate_coords(SDL_Surface * canvas, int angle);
 SDL_Surface *rotate(magic_api * api, SDL_Surface * canvas, int angle);
 void fold_draw(magic_api * api, int which,
-               SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-               SDL_Rect * update_rect);
-static void fold_print_line(void *ptr, int which, SDL_Surface * canvas,
-                            SDL_Surface * last, int x, int y);
-static void fold_print_dark_line(void *ptr, int which, SDL_Surface * canvas,
-                                 SDL_Surface * last, int x, int y);
-void translate_xy(SDL_Surface * canvas, int x, int y, int *a, int *b,
-                  int rotation);
+               SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
+static void fold_print_line(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
+static void fold_print_dark_line(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
+void translate_xy(SDL_Surface * canvas, int x, int y, int *a, int *b, int rotation);
 Uint32 fold_api_version(void);
 void fold_set_color(magic_api * api, int which, SDL_Surface * canvas,
                     SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
-int fold_init(magic_api * api);
+int fold_init(magic_api * api, Uint32 disabled_features);
 int fold_get_tool_count(magic_api * api);
 SDL_Surface *fold_get_icon(magic_api * api, int which);
 char *fold_get_name(magic_api * api, int which);
@@ -58,27 +50,25 @@ int fold_get_group(magic_api * api, int which);
 char *fold_get_description(magic_api * api, int which, int mode);
 int fold_requires_colors(magic_api * api, int which);
 void fold_release(magic_api * api, int which,
-                  SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-                  SDL_Rect * update_rect);
+                  SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
 void fold_shutdown(magic_api * api);
 void fold_click(magic_api * ptr, int which, int mode,
-                SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-                SDL_Rect * update_rect);
+                SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
 void fold_preview(magic_api * api, int which, SDL_Surface * canvas,
-                  SDL_Surface * snapshot, int ox, int oy, int x, int y,
-                  SDL_Rect * update_rect);
+                  SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 int fold_modes(magic_api * api, int which);
 
 //                              Housekeeping functions
 
 void fold_drag(magic_api * api, int which, SDL_Surface * canvas,
-               SDL_Surface * snapshot, int ox, int oy, int x, int y,
-               SDL_Rect * update_rect);
-void fold_switchin(magic_api * api, int which, int mode,
-                   SDL_Surface * canvas);
+               SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect);
+void fold_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
 inline Uint8 fold_what_corner(int x, int y, SDL_Surface * canvas);
-void fold_switchout(magic_api * api, int which, int mode,
-                    SDL_Surface * canvas);
+void fold_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
+Uint8 fold_accepted_sizes(magic_api * api, int which, int mode);
+Uint8 fold_default_size(magic_api * api, int which, int mode);
+void fold_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
+                   SDL_Rect * update_rect);
 
 Uint32 fold_api_version(void)
 {
@@ -86,7 +76,8 @@ Uint32 fold_api_version(void)
 }
 
 void fold_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                    SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
+                    SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   //get the colors from API and store it in structure
   fold_r = r;
@@ -94,12 +85,11 @@ void fold_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED
   fold_b = b;
 }
 
-int fold_init(magic_api * api)
+int fold_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/fold.wav",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/fold.wav", api->data_directory);
   fold_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -110,48 +100,37 @@ int fold_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
   return 1;
 }
 
-SDL_Surface *fold_get_icon(magic_api * api ATTRIBUTE_UNUSED,
-                           int which ATTRIBUTE_UNUSED)
+SDL_Surface *fold_get_icon(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/fold.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/fold.png", api->data_directory);
 
   return (IMG_Load(fname));
 }
 
-char *fold_get_name(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED)
+char *fold_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (gettext_noop("Fold"));
 }
 
-int fold_get_group(magic_api * api ATTRIBUTE_UNUSED,
-                   int which ATTRIBUTE_UNUSED)
+int fold_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_WARPS;
 }
 
-char *fold_get_description(magic_api * api ATTRIBUTE_UNUSED,
-                           int which ATTRIBUTE_UNUSED,
-                           int mode ATTRIBUTE_UNUSED)
+char *fold_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return
-    strdup(gettext_noop
-           ("Choose a background color and click to turn the corner of the page over."));
+  return strdup(gettext_noop("Choose a background color and click to turn the corner of the page over."));
 }
 
-int fold_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
-                         int which ATTRIBUTE_UNUSED)
+int fold_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }                               //selected color will be a "backpage" color
 
 
-static void fold_shadow(void *ptr, int which ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas, SDL_Surface * temp, int x,
-                        int y)
+static void fold_shadow(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * temp, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   Uint8 r, g, b, a;
@@ -161,14 +140,11 @@ static void fold_shadow(void *ptr, int which ATTRIBUTE_UNUSED,
                                           max(r - 160 + fold_shadow_value * 4,
                                               0),
                                           max(g - 160 + fold_shadow_value * 4,
-                                              0),
-                                          max(b - 160 + fold_shadow_value * 4,
-                                              0), a));
+                                              0), max(b - 160 + fold_shadow_value * 4, 0), a));
 }
 
 void fold_draw(magic_api * api, int which,
-               SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-               SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+               SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   float right_step_x, right_step_y, left_step_x, left_step_y;
   float dist_x, dist_y;
@@ -179,17 +155,16 @@ void fold_draw(magic_api * api, int which,
   temp =
     SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
                          canvas->format->BitsPerPixel, canvas->format->Rmask,
-                         canvas->format->Gmask, canvas->format->Bmask,
-                         canvas->format->Amask);
+                         canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
   SDL_BlitSurface(canvas, 0, temp, 0);
 
-  right_step_x = (float) (x - left_arm_x) / (float) (left_arm_x - fold_ox);
-  right_step_y = (float) (y - left_arm_y) / (float) (left_arm_x - fold_ox);
-  left_step_x = (float) (x - right_arm_x) / (float) (right_arm_y - fold_oy);
-  left_step_y = (float) (y - right_arm_y) / (float) (right_arm_y - fold_oy);
+  right_step_x = (float)(x - left_arm_x) / (float)(left_arm_x - fold_ox);
+  right_step_y = (float)(y - left_arm_y) / (float)(left_arm_x - fold_ox);
+  left_step_x = (float)(x - right_arm_x) / (float)(right_arm_y - fold_oy);
+  left_step_y = (float)(y - right_arm_y) / (float)(right_arm_y - fold_oy);
 
-  left_y = (float) right_arm_y / left_arm_x * (left_arm_x - canvas->w);
-  right_x = (float) left_arm_x / right_arm_y * (right_arm_y - canvas->h);
+  left_y = (float)right_arm_y / left_arm_x * (left_arm_x - canvas->w);
+  right_x = (float)left_arm_x / right_arm_y * (right_arm_y - canvas->h);
 
   for (w = 0; w < canvas->w; w += 0.5)
   {
@@ -197,8 +172,7 @@ void fold_draw(magic_api * api, int which,
     {
       dist_x = right_step_x * w + left_step_x * h;
       dist_y = right_step_y * w + left_step_y * h;
-      api->putpixel(canvas, x - dist_x, y - dist_y,
-                    api->getpixel(temp, w, h));
+      api->putpixel(canvas, x - dist_x, y - dist_y, api->getpixel(temp, w, h));
     }
   }
 
@@ -207,71 +181,58 @@ void fold_draw(magic_api * api, int which,
   if (left_arm_x > canvas->w)
   {
     for (h = 0; h <= right_arm_y; h++)
-      api->line((void *) api, which, canvas, snapshot, canvas->w, left_y - h,
-                -1, right_arm_y - h, 1, fold_erase);
+      api->line((void *)api, which, canvas, snapshot, canvas->w, left_y - h, -1, right_arm_y - h, 1, fold_erase);
   }
   else if (right_arm_y > canvas->h)
   {
     for (w = 0; w <= left_arm_x; w++)
-      api->line((void *) api, which, canvas, snapshot, left_arm_x - w, 0,
-                right_x - w, canvas->h + 1, 1, fold_erase);
+      api->line((void *)api, which, canvas, snapshot, left_arm_x - w, 0, right_x - w, canvas->h + 1, 1, fold_erase);
   }
   else
     for (w = 0; w <= min(left_arm_x, right_arm_y); w++) // The -1 values are because api->line 
-      api->line((void *) api, which, canvas, snapshot, left_arm_x - w, 0, -1,
-                right_arm_y - w, 1, fold_erase);
+      api->line((void *)api, which, canvas, snapshot, left_arm_x - w, 0, -1, right_arm_y - w, 1, fold_erase);
 
   SDL_BlitSurface(canvas, 0, temp, 0);
 
   // Shadows
   if (left_arm_x > canvas->w)
   {
-    for (fold_shadow_value = 0; fold_shadow_value < 40;
-         fold_shadow_value += 1)
-      api->line((void *) api, which, canvas, temp, canvas->w,
-                left_y - fold_shadow_value, 0,
-                right_arm_y - fold_shadow_value, 1, fold_shadow);
+    for (fold_shadow_value = 0; fold_shadow_value < 40; fold_shadow_value += 1)
+      api->line((void *)api, which, canvas, temp, canvas->w,
+                left_y - fold_shadow_value, 0, right_arm_y - fold_shadow_value, 1, fold_shadow);
 
   }
   else if (right_arm_y > canvas->h)
   {
-    for (fold_shadow_value = 0; fold_shadow_value < 40;
-         fold_shadow_value += 1)
-      api->line((void *) api, which, canvas, temp,
-                left_arm_x - fold_shadow_value, 0,
-                right_x - fold_shadow_value, canvas->h, 1, fold_shadow);
+    for (fold_shadow_value = 0; fold_shadow_value < 40; fold_shadow_value += 1)
+      api->line((void *)api, which, canvas, temp,
+                left_arm_x - fold_shadow_value, 0, right_x - fold_shadow_value, canvas->h, 1, fold_shadow);
 
   }
 
   else
-    for (fold_shadow_value = 0; fold_shadow_value < 40;
-         fold_shadow_value += 1)
-      api->line((void *) api, which, canvas, temp,
-                left_arm_x - fold_shadow_value, 0, 0,
-                right_arm_y - fold_shadow_value, 1, fold_shadow);
+    for (fold_shadow_value = 0; fold_shadow_value < 40; fold_shadow_value += 1)
+      api->line((void *)api, which, canvas, temp,
+                left_arm_x - fold_shadow_value, 0, 0, right_arm_y - fold_shadow_value, 1, fold_shadow);
 
   SDL_BlitSurface(canvas, 0, temp, 0);
 
   for (fold_shadow_value = 0; fold_shadow_value < 40; fold_shadow_value += 1)
   {
-    if (fold_shadow_value * left_step_x > x
-        || fold_shadow_value * right_step_y > y)
+    if (fold_shadow_value * left_step_x > x || fold_shadow_value * right_step_y > y)
       break;
 
     dist_x = fold_shadow_value * (right_step_x + left_step_x);
     dist_y = fold_shadow_value * (right_step_y + left_step_y);
-    api->line((void *) api, which, canvas, temp,
+    api->line((void *)api, which, canvas, temp,
               left_arm_x + fold_shadow_value * right_step_x,
               fold_shadow_value * right_step_y,
-              fold_shadow_value * left_step_x,
-              right_arm_y + fold_shadow_value * left_step_y, 1, fold_shadow);
+              fold_shadow_value * left_step_x, right_arm_y + fold_shadow_value * left_step_y, 1, fold_shadow);
   }
 
-  api->line((void *) api, which, canvas, snapshot, x, y, right_arm_x,
-            right_arm_y, 1, fold_print_line);
-  api->line((void *) api, which, canvas, snapshot, x, y, left_arm_x,
-            left_arm_y, 1, fold_print_line);
-  api->line((void *) api, which, canvas, snapshot, left_arm_x, left_arm_y,
+  api->line((void *)api, which, canvas, snapshot, x, y, right_arm_x, right_arm_y, 1, fold_print_line);
+  api->line((void *)api, which, canvas, snapshot, x, y, left_arm_x, left_arm_y, 1, fold_print_line);
+  api->line((void *)api, which, canvas, snapshot, left_arm_x, left_arm_y,
             right_arm_x, right_arm_y, 1, fold_print_dark_line);
 
 }
@@ -286,14 +247,12 @@ SDL_Surface *rotate(magic_api * api, SDL_Surface * canvas, int angle)
     temp =
       SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
                            canvas->format->BitsPerPixel,
-                           canvas->format->Rmask, canvas->format->Gmask,
-                           canvas->format->Bmask, canvas->format->Amask);
+                           canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
   else
     temp =
       SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->h, canvas->w,
                            canvas->format->BitsPerPixel,
-                           canvas->format->Rmask, canvas->format->Gmask,
-                           canvas->format->Bmask, canvas->format->Amask);
+                           canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
   switch (angle)
   {
@@ -360,8 +319,7 @@ void translate_coords(SDL_Surface * canvas, int angle)
   }
 }
 
-void translate_xy(SDL_Surface * canvas, int x, int y, int *a, int *b,
-                  int rotation)
+void translate_xy(SDL_Surface * canvas, int x, int y, int *a, int *b, int rotation)
 {
   switch (rotation)
   {
@@ -381,8 +339,7 @@ void translate_xy(SDL_Surface * canvas, int x, int y, int *a, int *b,
 }
 
 void fold_release(magic_api * api, int which,
-                  SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-                  SDL_Rect * update_rect)
+                  SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
 {
   int a, b;
   SDL_Surface *temp, *temp2;
@@ -466,8 +423,7 @@ inline Uint8 fold_what_corner(int x, int y, SDL_Surface * canvas)
 
 
 static void fold_print_line(void *ptr, int which ATTRIBUTE_UNUSED,
-                            SDL_Surface * canvas, SDL_Surface * last, int x,
-                            int y)
+                            SDL_Surface * canvas, SDL_Surface * last, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -475,9 +431,7 @@ static void fold_print_line(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 static void fold_print_dark_line(void *ptr, int which ATTRIBUTE_UNUSED,
-                                 SDL_Surface * canvas,
-                                 SDL_Surface * last ATTRIBUTE_UNUSED, int x,
-                                 int y)
+                                 SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -485,18 +439,15 @@ static void fold_print_dark_line(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 static void fold_erase(void *ptr, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas,
-                       SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                       SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
-  api->putpixel(canvas, x, y,
-                SDL_MapRGB(canvas->format, fold_r, fold_g, fold_b));
+  api->putpixel(canvas, x, y, SDL_MapRGB(canvas->format, fold_r, fold_g, fold_b));
 }
 
 void fold_click(magic_api * ptr, int which, int mode ATTRIBUTE_UNUSED,
-                SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-                SDL_Rect * update_rect)
+                SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -526,8 +477,7 @@ void fold_click(magic_api * ptr, int which, int mode ATTRIBUTE_UNUSED,
 
 void fold_preview(magic_api * api, int which, SDL_Surface * canvas,
                   SDL_Surface * snapshot, int ox ATTRIBUTE_UNUSED,
-                  int oy ATTRIBUTE_UNUSED, int x, int y,
-                  SDL_Rect * update_rect)
+                  int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
 {
   int middle_point_x;
   int middle_point_y;
@@ -542,67 +492,49 @@ void fold_preview(magic_api * api, int which, SDL_Surface * canvas,
   switch (corner)
   {
   case 1:                      //Right Upper                   
-    right_arm_x =
-      fold_ox - (fold_ox - middle_point_x) -
-      middle_point_y * middle_point_y / (fold_ox - middle_point_x);
+    right_arm_x = fold_ox - (fold_ox - middle_point_x) - middle_point_y * middle_point_y / (fold_ox - middle_point_x);
     right_arm_y = fold_oy;
 
     left_arm_x = fold_ox;
     left_arm_y =
       fold_oy - (fold_oy - middle_point_y) - (fold_ox -
-                                              middle_point_x) * (fold_ox -
-                                                                 middle_point_x)
-      / (fold_oy - middle_point_y);
+                                              middle_point_x) * (fold_ox - middle_point_x) / (fold_oy - middle_point_y);
     break;
 
   case 2:                      //LU
     right_arm_x = fold_ox;
-    right_arm_y =
-      middle_point_y + middle_point_x * middle_point_x / middle_point_y;
+    right_arm_y = middle_point_y + middle_point_x * middle_point_x / middle_point_y;
 
-    left_arm_x =
-      middle_point_x + middle_point_y * middle_point_y / middle_point_x;
+    left_arm_x = middle_point_x + middle_point_y * middle_point_y / middle_point_x;
     left_arm_y = fold_oy;
     break;
 
   case 3:                      //LL
-    right_arm_x =
-      middle_point_x + (fold_oy - middle_point_y) * (fold_oy -
-                                                     middle_point_y) /
-      middle_point_x;
+    right_arm_x = middle_point_x + (fold_oy - middle_point_y) * (fold_oy - middle_point_y) / middle_point_x;
     right_arm_y = fold_oy;
 
     left_arm_x = fold_ox;
     left_arm_y =
       fold_oy - (fold_oy - middle_point_y) - (fold_ox -
-                                              middle_point_x) * (fold_ox -
-                                                                 middle_point_x)
-      / (fold_oy - middle_point_y);
+                                              middle_point_x) * (fold_ox - middle_point_x) / (fold_oy - middle_point_y);
     break;
 
   case 4:                      //RL
     right_arm_x = fold_ox;
     right_arm_y =
       fold_oy - (fold_oy - middle_point_y) - (fold_ox -
-                                              middle_point_x) * (fold_ox -
-                                                                 middle_point_x)
-      / (fold_oy - middle_point_y);
+                                              middle_point_x) * (fold_ox - middle_point_x) / (fold_oy - middle_point_y);
 
     left_arm_x =
       fold_ox - (fold_ox - middle_point_x) - (fold_oy -
-                                              middle_point_y) * (fold_oy -
-                                                                 middle_point_y)
-      / (fold_ox - middle_point_x);
+                                              middle_point_y) * (fold_oy - middle_point_y) / (fold_ox - middle_point_x);
     left_arm_y = fold_oy;
     break;
   }
 
-  api->line((void *) api, which, canvas, snapshot, x, y, right_arm_x,
-            right_arm_y, 1, fold_print_line);
-  api->line((void *) api, which, canvas, snapshot, x, y, left_arm_x,
-            left_arm_y, 1, fold_print_line);
-  api->line((void *) api, which, canvas, snapshot, left_arm_x, left_arm_y,
-            right_arm_x, right_arm_y, 1, fold_print_line);
+  api->line((void *)api, which, canvas, snapshot, x, y, right_arm_x, right_arm_y, 1, fold_print_line);
+  api->line((void *)api, which, canvas, snapshot, x, y, left_arm_x, left_arm_y, 1, fold_print_line);
+  api->line((void *)api, which, canvas, snapshot, left_arm_x, left_arm_y, right_arm_x, right_arm_y, 1, fold_print_line);
 
   update_rect->x = update_rect->y = 0;
   update_rect->w = canvas->w;
@@ -610,8 +542,7 @@ void fold_preview(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 void fold_drag(magic_api * api, int which, SDL_Surface * canvas,
-               SDL_Surface * snapshot, int ox, int oy, int x, int y,
-               SDL_Rect * update_rect)
+               SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
 {
   // Avoid division by zero when calculating the preview
   x = clamp(2, x, canvas->w - 2);
@@ -620,18 +551,33 @@ void fold_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 void fold_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 void fold_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 int fold_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT_WITH_PREVIEW);
+}
+
+
+Uint8 fold_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+{
+  return 0;
+}
+
+Uint8 fold_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+{
+  return 0;
+}
+
+void fold_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+                   Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+{
 }

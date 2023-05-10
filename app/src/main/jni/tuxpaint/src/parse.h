@@ -16,6 +16,7 @@ struct cfginfo
   const char *disable_label;
   const char *disable_brushspacing;
   const char *disable_magic_controls;
+  const char *disable_magic_sizes;
   const char *disable_shape_controls;
   const char *disable_print;
   const char *disable_quit;

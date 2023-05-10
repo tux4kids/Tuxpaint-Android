@@ -68,18 +68,17 @@
 
 static int f2int(float f)
 {
-  return ((int) f);
+  return ((int)f);
 }
 
 static int f2dec(float f)
 {
-  return (int) ((f - f2int(f)) * 100);
+  return (int)((f - f2int(f)) * 100);
 }
 
 /* Actually save the PostScript data to the file stream: */
 int do_ps_save(FILE * fi,
-               const char *restrict const fname, SDL_Surface * surf,
-               const char *restrict pprsize, int is_pipe)
+               const char *restrict const fname, SDL_Surface * surf, const char *restrict pprsize, int is_pipe)
 {
   const struct paper *ppr;
   int img_w = surf->w;
@@ -93,8 +92,7 @@ int do_ps_save(FILE * fi,
   Uint8 r, g, b;
   char buf[256];
 
-  Uint32(*getpixel) (SDL_Surface *, int, int) =
-    getpixels[surf->format->BytesPerPixel];
+  Uint32(*getpixel) (SDL_Surface *, int, int) = getpixels[surf->format->BytesPerPixel];
   int printed_img_w, printed_img_h;
   time_t t = time(NULL);
   int rotate;
@@ -148,8 +146,7 @@ int do_ps_save(FILE * fi,
   ppr_h = paperpsheight(ppr);
 
 #ifdef DEBUG
-  printf("Paper is %d x %d (%.2f\" x %.2f\")\n", ppr_w, ppr_h,
-         (float) ppr_w / 72.0, (float) ppr_h / 72.0);
+  printf("Paper is %d x %d (%.2f\" x %.2f\")\n", ppr_w, ppr_h, (float)ppr_w / 72.0, (float)ppr_h / 72.0);
 #endif
 
   paperdone();                  // FIXME: Should we do this at quit? -bjk 2007.06.25
@@ -157,8 +154,7 @@ int do_ps_save(FILE * fi,
 
   /* Determine whether it's best to rotate the image: */
 
-  if ((ppr_w >= ppr_h && img_w >= img_h)
-      || (ppr_w <= ppr_h && img_w <= img_h))
+  if ((ppr_w >= ppr_h && img_w >= img_h) || (ppr_w <= ppr_h && img_w <= img_h))
   {
     rotate = 0;
     r_img_w = img_w;
@@ -180,16 +176,13 @@ int do_ps_save(FILE * fi,
 
   /* Determine scale: */
 
-  scale =
-    my_min(((float) (ppr_w - (MARGIN * 2)) / (float) r_img_w),
-           ((float) (ppr_h - (MARGIN * 2)) / (float) r_img_h));
+  scale = my_min(((float)(ppr_w - (MARGIN * 2)) / (float)r_img_w), ((float)(ppr_h - (MARGIN * 2)) / (float)r_img_h));
 
   printed_img_w = r_img_w * scale;
   printed_img_h = r_img_h * scale;
 
 #ifdef DEBUG
-  printf("Scaling image by %.2f (to %d x %d)\n", scale, printed_img_w,
-         printed_img_h);
+  printf("Scaling image by %.2f (to %d x %d)\n", scale, printed_img_w, printed_img_h);
 #endif
 
 
@@ -215,8 +208,7 @@ int do_ps_save(FILE * fi,
 
   fprintf(fi, "%%%%Pages: 1\n");
 
-  fprintf(fi, "%%%%BoundingBox: 0 0 %d %d\n", (int) (ppr_w + 0.5),
-          (int) (ppr_h + 0.5));
+  fprintf(fi, "%%%%BoundingBox: 0 0 %d %d\n", (int)(ppr_w + 0.5), (int)(ppr_h + 0.5));
 
   fprintf(fi, "%%%%EndComments\n");
 
@@ -235,23 +227,20 @@ int do_ps_save(FILE * fi,
 
   fprintf(fi, "%%%%Page: 1 1\n");
 
-  fprintf(fi, "<< /PageSize [ %d %d ] /ImagingBBox null >> setpagedevice\n",
-          ppr_w, ppr_h);
+  fprintf(fi, "<< /PageSize [ %d %d ] /ImagingBBox null >> setpagedevice\n", ppr_w, ppr_h);
 
   fprintf(fi, "gsave\n");
 
   /* 'translate' moves the user space origin to a new position with
      respect to the current page, leaving the orientation of the axes and
      the unit lengths unchanged. */
-  fprintf(fi, "%d.%02d %d.%02d translate\n", f2int(tlate_x), f2dec(tlate_x),
-          f2int(tlate_y), f2dec(tlate_y));
+  fprintf(fi, "%d.%02d %d.%02d translate\n", f2int(tlate_x), f2dec(tlate_x), f2int(tlate_y), f2dec(tlate_y));
 
   /* 'scale' modiﬁes the unit lengths independently along the current
      x and y axes, leaving the origin location and the orientation of the
      axes unchanged. */
   fprintf(fi, "%d.%02d %d.%02d scale\n",
-          f2int(printed_img_w), f2dec(printed_img_w), f2int(printed_img_h),
-          f2dec(printed_img_h));
+          f2int(printed_img_w), f2dec(printed_img_w), f2int(printed_img_h), f2dec(printed_img_h));
 
   /* Rotate the image */
   if (rotate)

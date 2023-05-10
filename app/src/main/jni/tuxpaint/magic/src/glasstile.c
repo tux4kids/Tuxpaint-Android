@@ -23,7 +23,10 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 12, 2023
+  Last updated: April 22, 2023
+
+  TODO:
+  * Support sizing options
 */
 
 #include <stdio.h>
@@ -39,32 +42,31 @@ static Mix_Chunk *glasstile_snd;
 
 // Prototypes
 Uint32 glasstile_api_version(void);
-int glasstile_init(magic_api * api);
+int glasstile_init(magic_api * api, Uint32 disabled_features);
 int glasstile_get_tool_count(magic_api * api);
 SDL_Surface *glasstile_get_icon(magic_api * api, int which);
 char *glasstile_get_name(magic_api * api, int which);
 int glasstile_get_group(magic_api * api, int which);
 char *glasstile_get_description(magic_api * api, int which, int mode);
-static void do_glasstile(void *ptr, int which, SDL_Surface * canvas,
-                         SDL_Surface * last, int x, int y);
+static void do_glasstile(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 void glasstile_drag(magic_api * api, int which, SDL_Surface * canvas,
-                    SDL_Surface * last, int ox, int oy, int x, int y,
-                    SDL_Rect * update_rect);
+                    SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 void glasstile_click(magic_api * api, int which, int mode,
-                     SDL_Surface * canvas, SDL_Surface * last, int x, int y,
-                     SDL_Rect * update_rect);
+                     SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 void glasstile_release(magic_api * api, int which, SDL_Surface * canvas,
-                       SDL_Surface * last, int x, int y,
-                       SDL_Rect * update_rect);
+                       SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 void glasstile_shutdown(magic_api * api);
 void glasstile_set_color(magic_api * api, int which, SDL_Surface * canvas,
                          SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 int glasstile_requires_colors(magic_api * api, int which);
-void glasstile_switchin(magic_api * api, int which, int mode,
-                        SDL_Surface * canvas);
-void glasstile_switchout(magic_api * api, int which, int mode,
-                         SDL_Surface * canvas);
+void glasstile_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
+void glasstile_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int glasstile_modes(magic_api * api, int which);
+Uint8 glasstile_accepted_sizes(magic_api * api, int which, int mode);
+Uint8 glasstile_default_size(magic_api * api, int which, int mode);
+void glasstile_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
+                        SDL_Rect * update_rect);
+
 
 Uint32 glasstile_api_version(void)
 {
@@ -76,12 +78,11 @@ static int glasstile_hit_xsize;
 static int glasstile_hit_ysize;
 
 // No setup required:
-int glasstile_init(magic_api * api)
+int glasstile_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/glasstile.ogg",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/glasstile.ogg", api->data_directory);
   glasstile_snd = Mix_LoadWAV(fname);
 
   glasstile_hit = NULL;
@@ -101,45 +102,35 @@ SDL_Surface *glasstile_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/glasstile.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/glasstile.png", api->data_directory);
 
   return (IMG_Load(fname));
 }
 
 // Return our names, localized:
-char *glasstile_get_name(magic_api * api ATTRIBUTE_UNUSED,
-                         int which ATTRIBUTE_UNUSED)
+char *glasstile_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext_noop("Glass Tile")));
 }
 
 // Return our groups
-int glasstile_get_group(magic_api * api ATTRIBUTE_UNUSED,
-                        int which ATTRIBUTE_UNUSED)
+int glasstile_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
 }
 
 // Return our descriptions, localized:
-char *glasstile_get_description(magic_api * api ATTRIBUTE_UNUSED,
-                                int which ATTRIBUTE_UNUSED, int mode)
+char *glasstile_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
-    return (strdup
-            (gettext_noop
-             ("Click and drag the mouse to put glass tile over your picture.")));
+    return (strdup(gettext_noop("Click and drag the mouse to put glass tile over your picture.")));
   else
-    return (strdup
-            (gettext_noop
-             ("Click to cover your entire picture in glass tiles.")));
+    return (strdup(gettext_noop("Click to cover your entire picture in glass tiles.")));
 }
 
 // Do the effect:
 
-static void do_glasstile(void *ptr, int which ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas, SDL_Surface * last, int x,
-                         int y)
+static void do_glasstile(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int xx, yy, xl, xr, yt, yb;
@@ -173,14 +164,10 @@ static void do_glasstile(void *ptr, int which ATTRIBUTE_UNUSED,
   {
     for (xx = -GT_SIZE; xx < GT_SIZE; xx = xx + 2)
     {
-      SDL_GetRGB(api->getpixel(last, x + xx, y + yy), last->format, &r1, &g1,
-                 &b1);
-      SDL_GetRGB(api->getpixel(last, x + xx + 1, y + yy), last->format, &r2,
-                 &g2, &b2);
-      SDL_GetRGB(api->getpixel(last, x + xx, y + yy + 1), last->format, &r3,
-                 &g3, &b3);
-      SDL_GetRGB(api->getpixel(last, x + xx + 1, y + yy + 1), last->format,
-                 &r4, &g4, &b4);
+      SDL_GetRGB(api->getpixel(last, x + xx, y + yy), last->format, &r1, &g1, &b1);
+      SDL_GetRGB(api->getpixel(last, x + xx + 1, y + yy), last->format, &r2, &g2, &b2);
+      SDL_GetRGB(api->getpixel(last, x + xx, y + yy + 1), last->format, &r3, &g3, &b3);
+      SDL_GetRGB(api->getpixel(last, x + xx + 1, y + yy + 1), last->format, &r4, &g4, &b4);
 
       r = (r1 + r2 + r3 + r4) >> 2;
       g = (g1 + g2 + g3 + g4) >> 2;
@@ -226,10 +213,9 @@ static void do_glasstile(void *ptr, int which ATTRIBUTE_UNUSED,
 
 // Affect the canvas on drag:
 void glasstile_drag(magic_api * api, int which, SDL_Surface * canvas,
-                    SDL_Surface * last, int ox, int oy, int x, int y,
-                    SDL_Rect * update_rect)
+                    SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
 {
-  api->line((void *) api, which, canvas, last, ox, oy, x, y, 1, do_glasstile);
+  api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_glasstile);
 
   update_rect->x = 0;
   update_rect->y = 0;
@@ -262,8 +248,7 @@ void glasstile_drag(magic_api * api, int which, SDL_Surface * canvas,
 
 // Affect the canvas on click:
 void glasstile_click(magic_api * api, int which, int mode,
-                     SDL_Surface * canvas, SDL_Surface * last, int x, int y,
-                     SDL_Rect * update_rect)
+                     SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
   int xx, yy;
 
@@ -272,10 +257,10 @@ void glasstile_click(magic_api * api, int which, int mode,
     glasstile_hit_ysize = (canvas->h / GT_SIZE) + 1;
     glasstile_hit_xsize = (canvas->w / GT_SIZE) + 1;
 
-    glasstile_hit = (int * *) malloc(sizeof(int *) * glasstile_hit_ysize);
+    glasstile_hit = (int * *)malloc(sizeof(int *) * glasstile_hit_ysize);
 
     for (yy = 0; yy < glasstile_hit_ysize; yy++)
-      glasstile_hit[yy] = (int *) malloc(sizeof(int) * glasstile_hit_xsize);
+      glasstile_hit[yy] = (int *)malloc(sizeof(int) * glasstile_hit_xsize);
   }
 
   for (yy = 0; yy < glasstile_hit_ysize; yy++)
@@ -304,8 +289,7 @@ void glasstile_release(magic_api * api ATTRIBUTE_UNUSED,
                        int which ATTRIBUTE_UNUSED,
                        SDL_Surface * canvas ATTRIBUTE_UNUSED,
                        SDL_Surface * last ATTRIBUTE_UNUSED,
-                       int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED,
-                       SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                       int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -329,33 +313,48 @@ void glasstile_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void glasstile_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                         SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void glasstile_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                         SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+                         Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
+                         SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // Use colors:
-int glasstile_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
-                              int which ATTRIBUTE_UNUSED)
+int glasstile_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
 void glasstile_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 void glasstile_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                         int which ATTRIBUTE_UNUSED,
-                         int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                         int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int glasstile_modes(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED)
+int glasstile_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
+}
+
+
+Uint8 glasstile_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+{
+  /* TODO - We should support sizing! -bjk 2023.04.22 */
+  return 0;
+}
+
+Uint8 glasstile_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+{
+  return 0;
+}
+
+void glasstile_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                        SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+                        Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+{
 }

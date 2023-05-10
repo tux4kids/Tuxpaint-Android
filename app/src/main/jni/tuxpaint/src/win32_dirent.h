@@ -71,5 +71,4 @@ extern struct dirent *readdir(struct DIR *pDir);
 typedef int (*selectCB)(const struct dirent *);
 typedef int (*comparCB)(const void *, const void *);
 extern int alphasort(const void *a, const void *b);
-extern int scandir(const char *dir, struct dirent ***namelist,
-                   selectCB select, comparCB compar);
+extern int scandir(const char *dir, struct dirent ***namelist, selectCB select, comparCB compar);

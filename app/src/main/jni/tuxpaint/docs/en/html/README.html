@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.29          </h1>
+            version 0.9.30          </h1>
 
           <h3 align="center">
             A simple drawing program for children          </h3>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            April  2, 2023          </p>
+            May  9, 2023          </p>
         </center>
       </header>
       <table border="2"
@@ -215,50 +215,17 @@
   <section class="indent">
     <header>
       <h2>
-        What's New in Tux Paint version 0.9.29?      </h2>
+        What's New in Tux Paint version 0.9.30?      </h2>
     </header>
 
     <dl>
-  <dt><strong>Stamp</strong> tool update</dt>
+  <dt>Magic Tool sizes</dt>
   <dd>
-    <a href="#using_tools_drawing_stamp">Stamps</a> may be rotated before being applied to the canvas  </dd>
-
-  <dt><strong>Shapes</strong> tool update</dt>
+    Many <a href="#using_tools_drawing_magic">Magic Tools</a> will now offer an option to adjust the size of the effect. For example, thinner lines in the symmetry painting tools, finer or coarser application of effects like blur, or a wider range of shapes. (This feature may be deactivated using the <a href="OPTIONS.html#video_sound">"<code>nomagicsizes</code>" simplification option</a>.)  </dd>
+  <dt>Word-wrapped button labels</dt>
   <dd>
-    Improvements to <a href="#using_tools_drawing_shapes">Shapes tool</a> behavior when using the "from the corner" stretching mode  </dd>
-
-  <dt>New <strong>Fill</strong> tool</dt>
-  <dd>
-    A shaped gradient mode has been added to the <a href="#using_tools_drawing_fill">Fill tool</a>  </dd>
-
-  <dt>Sixteen new <strong>Magic</strong> tools  <dd>
-    Maze, Googly Eyes, Fur, Circles, Rays, 3D Glasses, Color Sep., Double Vision, Saturate, Desaturate, Remove Color, Keep Color, Kaleido-4, Kaleido-6, Kaleido-8, Bloom  </dd>
-
-  <dt><strong>Eraser</strong> shortcut</dt>
-  <dd>
-    A keyboard shortcut is available for quick access to the <a href="#using_tools_drawing_eraser">Eraser</a> tool  </dd>
-
-  <dt><strong>Rainbow Palette</strong> update</dt>
-  <dd>
-    The chosen built-in color, Color Picker (pipette tool) color, or Color Mixer color can be loaded into the <a href="#special_color_options">Rainbow Palette dialog</a>  </dd>
-
-  <dt><strong>Quick Start Guide</strong> created</dt>
-  <dd>
-    A new <a href="tuxpaint-quickstart-guide.html">Quick Start Guide</a> explains the basic usage of Tux Paint  </dd>
-
-  <dt>Other changes</dt>
-  <dd>
-    <ul>
-      <li>
-        Drawings removed using the <a href="#using_tools_other_open">Open dialog's</a> <strong>Erase</strong> button are moved to the system's Trash can on macOS      </li>
-      <li>
-        <a href="EXTENDING.html#starters">Starter</a> and <a href="EXTENDING.html#templates">Template</a> images offer scaling, to avoid smearing on the edges      </li>
-      <li>
-        The <a href="OPTIONS.html#video_sound">"<code>buttonsize</code>" interface size option</a> now offers an "auto" option      </li>
-    </ul>
-  </dd>
+    When possible, longer labels shown on Tux Paint's UI buttons will be word-wrapped, to help improve legibility.  </dd>
 </dl>
-
 
     <p>
       See <a href="../../CHANGES.txt">CHANGES.txt</a> for the complete list of changes.    </p>
@@ -775,7 +742,7 @@
 
     <dd>
       The shape will extend with one corner starting from where you initially clicked. This is the default method of most other traditional drawing software.      <p class="note">
-        <span title="Version variation">&#128220;</span>        This option was added starting with  Tux Paint version 0.9.25.)      </p>
+        <span title="Version variation">&#128220;</span>        This option was added starting with  Tux Paint version 0.9.25.      </p>
     </dd>
   </dl>
 
@@ -949,8 +916,42 @@
   <p>
     The Magic tool is actually a set of special tools. Select one of the 'magic' effects from the selector on the right. Then, depending on the tool, you can either click and drag around the picture, and/or simply click the picture once, to apply the effect.  </p>
 
-  <p>
-    If the tool can be used by clicking and dragging, a 'painting' button will be available on the left, below the list of Magic tools on the right side of the screen. If the tool can affect the entire picture at once, an 'entire picture' button will be available on the right.  </p>
+  <strong>Magic Controls</strong>
+  <blockquote>
+    <p>
+      If the tool can be used by clicking and dragging, a 'painting' button will be available on the left, below the list of Magic tools on the right side of the screen. If the tool can affect the entire picture at once, an 'entire picture' button will be available on the right.    </p>
+    <div class="screenshot-center">
+      <img src=
+      "../../html/images/tool_magic_controls.png"
+         width="96"
+         height="48"
+         alt="">
+    </div>
+    <p class="note">
+      <span title="Configuration option">&#9881;</span>      <strong>Note</strong>: If the "<code>nomagiccontrols</code>" option is set, Tux Paint won't display the painting or entire picture controls. See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation.    </p>
+    <p class="note">
+      <span title="Information">&#128161;</span>      If the magic controls are disabled, the Magic plugin may make separate tools available, one for painting and one that affects the entire pictre.    </p>
+  </blockquote>
+
+  <strong>Magic Sizing</strong>
+  <blockquote>
+    <p>
+      Some tools offer different sizing options. If so, a slider will appear at the bottom right side of the screen. This may affect the radius of a special effect (e.g., Darken) or painted object (e.g., Patterns), or other attributes (e.g., large versus small Brick shapes).    </p>
+
+    <div class="screenshot-center">
+      <img src=
+      "../../html/images/tool_slider.png"
+         width="96"
+         height="48"
+         alt="">
+    </div>
+    <p class="note">
+      <span title="Configuration option">&#9881;</span>      <strong>Note</strong>: If the "<code>nomagicsizes</code>" option is set, Tux Paint won't display the sizing controls. See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation.    </p>
+    <p class="note">
+      <span title="Information">&#128161;</span>      If the sizing option is disabled, the Magic plugin may simply offer a default size (e.g., Patterns), or it may make separate tools available with different pre-set sizes (e.g., Bricks and Googly Eyes).    </p>
+    <p class="note">
+      <span title="Version variation">&#128220;</span>      This option was added starting with  Tux Paint version 0.9.30.    </p>
+  </blockquote>
 
   <p>
     See the <a href="../magic-docs/html/index.html">instructions for each Magic tool</a> (in the 'magic-docs' folder).  </p>
@@ -1747,7 +1748,7 @@
           <li>"Mastodon" is a registered trademark of Mastodon gGmbH.</li>
           <li>"Reddit" is a registered trademark of Reddit, Inc.</li>
           <li>"Tumblr" is a registered trademark of Tumblr, Inc.</li>
-          <li>"Twitter" is a registered trademark of Twitter, Inc.</li>
+          <li>"Twitter" is a registered trademark of X Corp.</li>
         </ul>
       </section>
     </footer>

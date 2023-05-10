@@ -1,7 +1,7 @@
 /* tp_magic_example.c
 
    An example of a "Magic" tool plugin for Tux Paint
-   19 de Outubro de 2022
+   13 de Abril de 2023
 */
 
 
@@ -82,8 +82,12 @@ const char *tool_descriptions[NUM_TOOLS] = {
 /* Sound effects: */
 Mix_Chunk *sound_effects[NUM_TOOLS];
 
-/* The current color (an "RGB" -- red, green, blue -- value) the user has selected in Tux Paint: */
+/* The current color (an "RGB" -- red, green, blue -- value) the user has
+selected in Tux Paint (for tool 1): */
 Uint8 example_r, example_g, example_b;
+
+/* The size the user has selected in Tux Paint (for tool 2): */
+Uint8 example_size;
 
 
 /* Our local function prototypes: */
@@ -140,7 +144,7 @@ released, aka deallocated) when the user quits Tux Paint, when our
 example_shutdown() function is called.
 */
 
-int example_init(magic_api * api)
+int example_init(magic_api * api, Uint32 disabled_features)
 {
   int i;
   char filename[1024];
@@ -309,6 +313,7 @@ char *example_get_description(magic_api * api, int which, int mode)
   return (strdup(our_desc_localized));
 }
 
+
 // Report whether we accept colors
 
 int example_requires_colors(magic_api * api, int which)
@@ -330,6 +335,25 @@ int example_modes(magic_api * api, int which)
   */
 
   return MODE_PAINT;
+}
+
+
+// Report whether the tools offer sizing options
+
+Uint8 example_accepted_sizes(magic_api * api, int which, int mode)
+{
+  if (which == TOOL_ONE)
+    return 1;
+  else
+    return 4;
+}
+
+
+// Return our default sizing option
+
+Uint8 example_default_size(magic_api * api, int which, int mode)
+{
+  return 1;
 }
 
 
@@ -393,9 +417,15 @@ example_drag(magic_api * api, int which,
   coordinates along the line, as well as other useful things (which of our
   'Magic' tools is being used and the current and snapshot canvases).
   */
+  SDL_LockSurface(snapshot);
+  SDL_LockSurface(canvas);
+
   api->line((void *) api, which, canvas, snapshot,
             old_x, old_y, x, y, 1,
             example_line_callback);
+
+  SDL_UnlockSurface(canvas);
+  SDL_UnlockSurface(snapshot);
 
   /*
   If we need to, swap the X and/or Y values, so that the coordinates
@@ -426,10 +456,17 @@ example_drag(magic_api * api, int which,
   canvas has been modified and should be updated.
   */
 
-  update_rect->x = old_x - 4;
-  update_rect->y = old_y - 4;
-  update_rect->w = (x + 4) - update_rect->x;
-  update_rect->h = (y + 4) - update_rect->y;
+  if (which == TOOL_ONE) {
+    update_rect->x = old_x;
+    update_rect->y = old_y;
+    update_rect->w = (x - old_x) + 1;
+    update_rect->h = (y - old_y) + 1;
+  } else {
+    update_rect->x = old_x - example_size;
+    update_rect->y = old_y - example_size;
+    update_rect->w = (x + example_size) - update_rect->x + 1;
+    update_rect->h = (y + example_size) - update_rect->y + 1;
+  }
 
   /*
   Play the appropriate sound effect
@@ -442,7 +479,6 @@ example_drag(magic_api * api, int which,
   what speaker to play the sound in. (So the sound will pan from speaker
   to speaker as you drag the mouse around the canvas!)
   */
-
   api->playsound(sound_effects[which],
     (x * 255) / canvas->w, /* Left/right pan */
     255 /* Near/far distance (loudness) */);
@@ -466,7 +502,7 @@ example_release(magic_api * api, int which,
 /*
 Accept colors
 
-When any of our 'Magig' tools are activated by the user, if that tool
+When any of our 'Magic' tools are activated by the user, if that tool
 accepts colors, the current color selection is sent to us.
 
 Additionally, if one of our color-accepting tools is active when the user
@@ -475,7 +511,7 @@ changes their chosen, we'll be informed of that as well.
 The color comes in as RGB (red, green, and blue) values from 0 (darkest) to
 255 (brightest).
 */
-void example_set_color(magic_api * api, Uint8 r, Uint8 g, Uint8 b)
+void example_set_color(magic_api * api, int which, SDL_Surface * canvas, SDL_Surface * snapshot, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
 {
   /*
   We simply store the RGB values in the global variables we declared at
@@ -485,6 +521,29 @@ void example_set_color(magic_api * api, Uint8 r, Uint8 g, Uint8 b)
   example_r = r;
   example_g = g;
   example_b = b;
+}
+
+
+/*
+Accept sizes
+
+When any of our 'Magic' tools are activated by the user, if that tool
+offer's sizes, the current size selection is sent to us.
+
+Additionally, if the user changes the tool's size, we'll be informed of
+that as well.
+
+The size comes in as an unsigned integer (Uint8) between 1 and the value
+returned by our example_accepted_sizes() function during setup.
+*/
+void example_set_size(magic_api * api, int which, SDL_Surface * canvas, SDL_Surface * snapshot, Uint8 size, SDL_Rect * update_rect)
+{
+  /*
+  Store the new size into the global variable we declared at the top of
+  this file.
+  */
+
+  example_size = size * 4;
 }
 
 
@@ -548,13 +607,13 @@ void example_line_callback(void *pointer, int which, SDL_Surface * canvas,
   else if (which == TOOL_TWO)
   {
     /*
-    Tool number 2 copies an 8x8 square of pixels from the opposite side of
-    the canvas and puts it under the cursor.
+    Tool number 2 copies a square of pixels (of the size chosen by the user)
+    from the opposite side of the canvas and puts it under the cursor.
     */
 
-    for (yy = -4; yy < 4; yy++)
+    for (yy = -example_size; yy < example_size; yy++)
     {
-      for (xx = -4; xx < 4; xx++)
+      for (xx = -example_size; xx < example_size; xx++)
       {
         api->putpixel(canvas, x + xx, y + yy,
                       api->getpixel(snapshot,

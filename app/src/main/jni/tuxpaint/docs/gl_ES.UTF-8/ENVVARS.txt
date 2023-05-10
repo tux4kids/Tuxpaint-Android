@@ -1,11 +1,11 @@
                                    Tux Paint
-                                 versión 0.9.29
+                                 versión 0.9.30
                      Documentación de variábeis de contorno
 
-        Copyright © 2021-2022 by varios colaboradores; see AUTHORS.txt.
+        Copyright © 2021-2023 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               4 de Xuño de 2022
+                               5 de Maio de 2023
 
      ----------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ Variábeis de contorno relacionadas co idioma
 Variábeisbles de contorno relacionadas co que se amosa
 
    A seguir amósanse algunhas das variábeis de contorno compatíbeis con
-   Simple DirectMedia Layer (libSD) — que Tux Paint utiliza para amosar
+   Simple DirectMedia Layer (libSDL) — que Tux Paint utiliza para amosar
    gráficos, reproducir sons e recibir entrada do rato, teclado e joystick —
    e que poden ser útiles para os usuarios de Tux Paint.
 
@@ -92,6 +92,9 @@ Variábeisbles de contorno relacionadas co que se amosa
 
    SDL_VIDEO_WINDOW_POS
 
-           Requests where to position Tux Paint's window. Normally set to
-           "center" by Tux Paint itself, unless the environment variable is
-           already set (e.g., to "nopref", meaning "no preference").
+           Requests where to position Tux Paint's window, and can be used to
+           specify what display to place a fullscreen Tux Paint in a
+           multi-monitor configuration. If not set, or set to "nopref"
+           (meaning "no preference"), Simple DirectMedia Layer (libSDL)
+           decides. Can be set to an X,Y coordinate (e.g. 200,100), or
+           "center" (meaning "center").

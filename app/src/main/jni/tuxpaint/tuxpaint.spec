@@ -1,6 +1,6 @@
 Summary: A drawing program for young children
 Name: tuxpaint
-Version: 0.9.29
+Version: 0.9.30
 Release: 1
 License: GPL
 Group: Multimedia/Graphics
@@ -106,6 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/tuxpaint/*/html/tp_magic_example.c
 
 %changelog
+* Mon Apr 04 2023 <nbs@sonic.net> -
+- Set version number 0.9.30
+
 * Wed Mar 22 2023 <dolphin6k@wmail.plala.or.jp>
 - Removed suffix "-sdl2" from the release tar ball.
 

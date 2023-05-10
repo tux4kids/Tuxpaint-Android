@@ -19,8 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 6, 2023
-  $Id$
+  Last updated: April 30, 2023
 */
 
 #ifndef FONTS_H
@@ -38,10 +37,7 @@
 
 #include "SDL.h"
 #include "SDL_ttf.h"
-
-#ifndef NO_SDLPANGO
 #include "SDL2_Pango.h"
-#endif
 
 #define PANGO_DEFAULT_FONT "DejaVu Sans"
 //#define PANGO_DEFAULT_FONT "OpenDyslexicAlta"
@@ -52,28 +48,6 @@
 #if !defined(FORKED_FONTS) && !defined(WIN32)
 #include "SDL_thread.h"
 #include "SDL_mutex.h"
-#else
-/* This shouldn't really be here :-)
- * Move into 'fonts.c' and the code in 'tuxpaint.c' 
- * that uses this lot should be put into 'fonts.c' as well.
- */
-
-#ifdef NO_SDLPANGO
-/* Only kill SDL_thread stuff when we're not using Pango, because we need it to let fontconfig make its cache (takes a long time the first time) -bjk 2010.04.27 */
-#define SDL_CreateThread(fn,vp) (void*)(long)(fn(vp))
-#define SDL_WaitThread(tid,rcp) do{(void)tid;(void)rcp;}while(0)
-#define SDL_Thread int
-#define SDL_mutex int
-#define SDL_CreateMutex() 0     // creates in released state
-#define SDL_DestroyMutex(lock)
-#ifndef SDL_mutexP
-#define SDL_mutexP(lock)        // take lock
-#endif
-#ifndef SDL_mutexV
-#define SDL_mutexV(lock)        // release lock
-#endif
-#endif
-
 #endif
 
 extern SDL_Thread *font_thread;
@@ -86,29 +60,18 @@ extern int font_socket_fd;
 extern int no_system_fonts;
 extern int all_locale_fonts;
 
-/* FIXME: SDL_ttf is up to 2.0.8, so we can probably fully remove this;
-   -bjk 2007.06.05 */
-/*
-TTF_Font *BUGFIX_TTF_OpenFont206(const char *const file, int ptsize);
-#define TTF_OpenFont    BUGFIX_TTF_OpenFont206
-*/
-
 
 /* Stuff that wraps either SDL_Pango or SDL_TTF for font rendering: */
 
 enum
 {
-#ifndef NO_SDLPANGO
   FONT_TYPE_PANGO,
-#endif
   FONT_TYPE_TTF
 };
 
 typedef struct TuxPaint_Font_s
 {
-#ifndef NO_SDLPANGO
   SDLPango_Context *pango_context;
-#endif
   int typ;
   TTF_Font *ttf_font;
   int height;
@@ -121,10 +84,8 @@ int TuxPaint_Font_FontHeight(TuxPaint_Font * tpf);
 #ifdef FORKED_FONTS
 void reliable_write(int fd, const void *buf, size_t count);
 void run_font_scanner(SDL_Surface * screen, SDL_Texture * texture,
-                      SDL_Renderer * renderer,
-                      const char *restrict const locale);
-void receive_some_font_info(SDL_Surface * screen, SDL_Texture * texture,
-                            SDL_Renderer * renderer);
+                      SDL_Renderer * renderer, const char *restrict const locale);
+void receive_some_font_info(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer);
 #endif
 
 //////////////////////////////////////////////////////////////////////
@@ -192,21 +153,13 @@ TuxPaint_Font *getfonthandle(int desire);
 
 int charset_works(TuxPaint_Font * font, const char *s);
 
-TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
-                                      const char *ttffilename, int size);
+TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc, const char *ttffilename, int size);
 void TuxPaint_Font_CloseFont(TuxPaint_Font * tpf);
 const char *TuxPaint_Font_FontFaceFamilyName(TuxPaint_Font * tpf);
 const char *TuxPaint_Font_FontFaceStyleName(TuxPaint_Font * tpf);
-
-#ifdef NO_SDLPANGO
-TuxPaint_Font *load_locale_font(TuxPaint_Font * fallback, int size);
-#else
-void sdl_color_to_pango_color(SDL_Color sdl_color,
-                              SDLPango_Matrix * pango_color);
-#endif
+void sdl_color_to_pango_color(SDL_Color sdl_color, SDLPango_Matrix * pango_color);
 
 int load_user_fonts(SDL_Surface * screen, SDL_Texture * texture,
-                    SDL_Renderer * renderer, void *vp,
-                    const char *restrict const locale);
+                    SDL_Renderer * renderer, void *vp, const char *restrict const locale);
 
 #endif

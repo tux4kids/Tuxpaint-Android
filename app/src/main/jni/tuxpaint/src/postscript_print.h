@@ -79,8 +79,7 @@
 #ifdef PRINTMETHOD_PS
 
 int do_ps_save(FILE * fi,
-               const char *restrict const fname, SDL_Surface * surf,
-               const char *restrict pprsize, int is_pipe);
+               const char *restrict const fname, SDL_Surface * surf, const char *restrict pprsize, int is_pipe);
 
 #endif
 

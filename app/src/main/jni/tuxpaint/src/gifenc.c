@@ -44,6 +44,7 @@ typedef struct Node Node;
 static Node *new_node(uint16_t key, int degree)
 {
   Node *node = calloc(1, sizeof(*node) + degree * sizeof(Node *));
+
   if (node)
     node->key = key;
   return node;
@@ -52,6 +53,7 @@ static Node *new_node(uint16_t key, int degree)
 static Node *new_trie(int degree, int *nkeys)
 {
   Node *root = new_node(0, degree);
+
   /* Create nodes for single pixels. */
   for (*nkeys = 0; *nkeys < degree; (*nkeys)++)
     root->children[*nkeys] = new_node(*nkeys, degree);
@@ -75,12 +77,12 @@ static void put_loop(ge_GIF * gif, uint16_t loop);
 #define OR_ABORT if (res == -1) { fprintf(stderr, "Cannot write to GIF\n"); return(NULL); }
 #define OR_ABORT2 if (res == -1) { fprintf(stderr, "Cannot write to GIF\n"); return; }
 
-ge_GIF *ge_new_gif(const char *fname, uint16_t width, uint16_t height,
-                   uint8_t * palette, int depth, int loop)
+ge_GIF *ge_new_gif(const char *fname, uint16_t width, uint16_t height, uint8_t * palette, int depth, int loop)
 {
   int i, r, g, b, v;
   ssize_t res;
   ge_GIF *gif = calloc(1, sizeof(*gif) + 2 * width * height);
+
   if (!gif)
     goto no_gif;
   gif->w = width;
@@ -225,8 +227,7 @@ static void end_key(ge_GIF * gif)
   gif->offset = gif->partial = 0;
 }
 
-static void
-put_image(ge_GIF * gif, uint16_t w, uint16_t h, uint16_t x, uint16_t y)
+static void put_image(ge_GIF * gif, uint16_t w, uint16_t h, uint16_t x, uint16_t y)
 {
   int nkeys, key_size, i, j;
   Node *node, *child, *root;
@@ -255,6 +256,7 @@ put_image(ge_GIF * gif, uint16_t w, uint16_t h, uint16_t x, uint16_t y)
     for (j = x; j < x + w; j++)
     {
       uint8_t pixel = gif->frame[i * gif->w + j] & (degree - 1);
+
       child = node->children[pixel];
       if (child)
       {
@@ -286,11 +288,11 @@ put_image(ge_GIF * gif, uint16_t w, uint16_t h, uint16_t x, uint16_t y)
   del_trie(root, degree);
 }
 
-static int
-get_bbox(ge_GIF * gif, uint16_t * w, uint16_t * h, uint16_t * x, uint16_t * y)
+static int get_bbox(ge_GIF * gif, uint16_t * w, uint16_t * h, uint16_t * x, uint16_t * y)
 {
   int i, j, k;
   int left, right, top, bottom;
+
   left = gif->w;
   right = 0;
   top = gif->h;

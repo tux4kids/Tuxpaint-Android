@@ -17,16 +17,16 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        version 0.9.29<br/>
+        version 0.9.30<br/>
         Environment Variables Documentation      </h1>
 
       <p>
-        Copyright &copy; 2021-2022 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        Copyright &copy; 2021-2023 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
       <p>
-        June  4, 2022      </p>
+        May  5, 2023      </p>
     </center>
 
     <hr>
@@ -110,7 +110,7 @@
       Display-related environment variables    </h2>
 
     <p>
-      The following are a few of the environment variables supported by Simple DirectMedia Layer (libSD) &mdash; which Tux Paint utilizes for displaying graphics, playing sounds, and receiving mouse, keyboard, and joystick input &mdash; and which may be useful to users of Tux Paint.
+      The following are a few of the environment variables supported by Simple DirectMedia Layer (libSDL) &mdash; which Tux Paint utilizes for displaying graphics, playing sounds, and receiving mouse, keyboard, and joystick input &mdash; and which may be useful to users of Tux Paint.
     <dl>
       <dt>
         <code>SDL_VIDEO_ALLOW_SCREENSAVER</code>
@@ -124,7 +124,7 @@
       </dt>
       <dd>
         <p>
-          Requests where to position Tux Paint's window. Normally set to "<code>center</code>" by Tux Paint itself, unless the environment variable is already set (e.g., to "<code>nopref</code>", meaning "no preference").        </p>
+          Requests where to position Tux Paint's window, and can be used to specify what display to place a fullscreen Tux Paint in a multi-monitor configuration. If not set, or set to "<code>nopref</code>" (meaning "no preference"), Simple DirectMedia Layer (libSDL) decides. Can be set to an <code>X,Y</code> coordinate (e.g. <code>200,100</code>), or "<code>center</code>" (meaning "center").        </p>
       </dd>
 
     </dl>

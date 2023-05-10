@@ -88,6 +88,7 @@ const char *exportdir;
 char *get_fname(const char *const name, int kind)
 {
   char f[512];
+
   // const char *restrict const dir;
   const char *dir;
 

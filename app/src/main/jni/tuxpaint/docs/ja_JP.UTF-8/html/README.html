@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            バージョン 0.9.29          </h1>
+            バージョン 0.9.30          </h1>
 
           <h3 align="center">
             子供向けのシンプルなお絵かきプログラム          </h3>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            2023年4月 2日          </p>
+            2023年5月 9日          </p>
         </center>
       </header>
       <table border="2"
@@ -215,50 +215,17 @@
   <section class="indent">
     <header>
       <h2>
-        Tux Paint バージョン 0.9.29 での変更点      </h2>
+        Tux Paint バージョン 0.9.30 での変更点      </h2>
     </header>
 
     <dl>
-  <dt><strong>「はんこ」</strong>ツールの変更</dt>
+  <dt>「まほう」ツールのサイズ変更機能</dt>
   <dd>
-    <a href="#using_tools_drawing_stamp">はんこ</a> は、キャンバスに貼り付ける前に回転できるようになりました  </dd>
-
-  <dt><strong>「かたち」</strong>ツールの変更</dt>
+    多くの<a href="#using_tools_drawing_magic">「まほう」ツール</a>に、効果の大きさを調整するオプションが追加されました。例えば、「さゆうたいしょう」の描画ツールで線を細くしたり、「ぼかす」ツールでの効果を細かくしたり粗くしたり、描画オブジェクトの大きさを細かく変更することができます。(この機能は、簡略化オプション<a href="OPTIONS.html#video_sound">"nomagicsizes"</a>を使って無効化することができます)  </dd>
+  <dt>ボタンのラベルの折り返し</dt>
   <dd>
-    <a href="#using_tools_drawing_shapes">「かたち」ツール</a>で「角から広げる」モードでの動作を改善しました  </dd>
-
-  <dt><strong>「ぬる」</strong>ツールの追加</dt>
-  <dd>
-    <a href="#using_tools_drawing_fill">「ぬる」ツール</a>に、領域の輪郭に合わせてグラデーションをつけるモードが追加されました。  </dd>
-
-  <dt>16個の新たな<strong>「まほう」</strong>ツールの追加  <dd>
-    「めいろ」, 「めだま」, 「けがわ」, 「えんけい」, 「ほうしゃ」, 「りったいメガネ」, 「いろぶんかい」, 「ふくし」, 「ほうわ」, 「ひほうわ」, 「だっしょく」, 「いろのこし」, 「まんげきょう4」, 「まんげきょう6」, 「まんげきょう8」, 「かがやき」  </dd>
-
-  <dt><strong>けしゴム</strong> のショートカット</dt>
-  <dd>
-    <a href="#using_tools_drawing_eraser">「けしゴム」</a>ツールに素早くアクセスできるキーボードショートカットが利用できるようになりました  </dd>
-
-  <dt><strong>「レインボーパレット」</strong>の変更</dt>
-  <dd>
-    組み込みのカラーパレットやスポイト又はカラーミキサーで選んだ色を<a href="#special_color_options">「レインボーパレット」ダイアログ</a>に読み込むことができるようになりました  </dd>
-
-  <dt><strong>クイックスタートガイド</strong></dt>
-  <dd>
-    新たなドキュメント<a href="tuxpaint-quickstart-guide.html">「クイックスタートガイド」</a>では、Tux Paint の基本的な使い方を説明しています  </dd>
-
-  <dt>その他の変更点</dt>
-  <dd>
-    <ul>
-      <li>
-        macOS 版でも<a href="#using_tools_other_open">「ひらく」ダイアログ</a>の<strong>「けす」</strong>ボタンで削除した作品が「ゴミ箱」に入るようになりました      </li>
-      <li>
-        <a href="EXTENDING.html#starters">スターター画像</a>と<a href="EXTENDING.html#templates">テンプレート画像</a>に、画面に合わせた拡大縮小のオプションを設定できるようになりました      </li>
-      <li>
-        ユーザーインターフェースの<a href="OPTIONS.html#video_sound">"<code>buttonsize</code>" に、自動選択のオプションが追加されました      </li>
-    </ul>
-  </dd>
+    Tux Paint のユーザーインターフェースボタンのラベルの文字列が長い場合、読みやすくするために折り返し表示ができるようになりました。  </dd>
 </dl>
-
 
     <p>
       全ての変更点については、<a href="../../CHANGES.txt">CHANGES.txt</a> をお読みください。    </p>
@@ -949,8 +916,42 @@
   <p>
     「まほう」ツールは、様々な特殊なツールを集めたものです。右側のセレクタで、「まほう」の効果を選択することができます。効果を適用する方法は、クリック＋ドラッグ、単なるクリックなど、ツールごとに様々です。  </p>
 
-  <p>
-    クリック＋ドラッグを使用するツールの場合、右側のセレクタの下部左側にある「描画」を表すボタンが有効になります。１クリックで画面全体に効果を及ぼすツールの場合、右側の「画面全体」を表すボタンが有効になります。  </p>
+  <strong>「まほう」効果の制御</strong>
+  <blockquote>
+    <p>
+      クリック＋ドラッグを使用するツールの場合、右側のセレクタの下部左側にある「描画モード」を表すボタンが有効になります。１クリックで画面全体に効果を及ぼすツールの場合、右側の「全画面モード」を表すボタンが有効になります。    </p>
+    <div class="screenshot-center">
+      <img src=
+      "../../html/images/tool_magic_controls.png"
+         width="96"
+         height="48"
+         alt="">
+    </div>
+    <p class="note">
+      <span title="Configuration option">&#9881;</span>      <strong>注:</strong> "<code>nomagiccontrols</code>" オプションが設定されると、「描画モード」「全画面モード」の選択ボタンが無効になります。詳しくは"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。    </p>
+    <p class="note">
+      <span title="Information">&#128161;</span>      「まほう」効果の制御が無効にされた場合、いくつかの「まほう」プラグインは「描画モード」「全画面モード」に対応するツールに分かれて利用できるようになります。    </p>
+  </blockquote>
+
+  <strong>「まほう」サイズの制御</strong>
+  <blockquote>
+    <p>
+      「まほう」ツールの中には描画のサイズや効果が及ぶ幅の大きさを変更できるものがあり、その場合、画面の右下にスライダーボタンが表示されます。    </p>
+
+    <div class="screenshot-center">
+      <img src=
+      "../../html/images/tool_slider.png"
+         width="96"
+         height="48"
+         alt="">
+    </div>
+    <p class="note">
+      <span title="Configuration option">&#9881;</span>      <strong>注:</strong> "<code>nomagicsizes</code>" オプションが設定されると、サイズを変更スライダーのボタンが無効になります。詳しくは"<a href="OPTIONS.html"><em>各種設定について</em></a>"のドキュメントを参照してください。    </p>
+    <p class="note">
+      <span title="Information">&#128161;</span>      サイズ変更が無効にされると、単にツールごとの標準のサイズに固定される場合と、例えば「れんが」や「めだま」などいくつかのプラグインのように、異なるサイズのツールが追加される場合があります。    </p>
+    <p class="note">
+      <span title="Version variation">&#128220;</span>      このオプションは、バージョン 0.9.30 以降で追加されました。    </p>
+  </blockquote>
 
   <p>
     「magic-docs」フォルダ内のドキュメント<a href="../magic-docs/html/index.html">「まほう」ツールの一覧</a>もお読みください。  </p>
@@ -1747,7 +1748,7 @@
           <li>"Mastodon" は Mastodon gGmbH の登録商標です。</li>
           <li>"Reddit" は、Reddit 社の登録商標です。</li>
           <li>"Tumblr" は Tumblr 社の登録商標です。</li>
-          <li>"Twitter" は、Twitter 社の登録商標です。</li>
+          <li>"Twitter" は、X 社の登録商標です。</li>
         </ul>
       </section>
     </footer>

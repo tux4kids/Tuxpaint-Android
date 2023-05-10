@@ -82,7 +82,7 @@ sdf_point sdf_pt_empty = { 9999, 9999 };
 
 typedef struct sdf_grid_s
 {
-  sdf_point * * grid;
+  sdf_point **grid;
   int w, h;
 } sdf_grid;
 
@@ -96,14 +96,10 @@ int global_extent_x1, global_extent_y1, global_extent_x2, global_extent_y2;
 int global_prog_anim;
 
 double colors_close(SDL_Surface * canvas, Uint32 c1, Uint32 c2);
-Uint32 blend(SDL_Surface * canvas, Uint32 draw_colr, Uint32 old_colr,
-             double pct);
+Uint32 blend(SDL_Surface * canvas, Uint32 draw_colr, Uint32 old_colr, double pct);
 void simulate_flood_fill_outside_check(SDL_Surface * screen,
-                                       SDL_Texture * texture,
-                                       SDL_Renderer * renderer, int x, int y,
-                                       int y_outside);
-void draw_brush_fill_single(SDL_Surface * canvas, int x, int y,
-                            Uint32 draw_color, Uint8 * touched);
+                                       SDL_Texture * texture, SDL_Renderer * renderer, int x, int y, int y_outside);
+void draw_brush_fill_single(SDL_Surface * canvas, int x, int y, Uint32 draw_color, Uint8 * touched);
 
 void init_queue(void);
 void add_to_queue(int x, int y, int y_outside);
@@ -140,9 +136,8 @@ void add_to_queue(int x, int y, int y_outside)
   if (queue_end + 1 > queue_size)
   {
     queue_t *tmp;
-    tmp =
-      (queue_t *) realloc(queue,
-                          sizeof(queue_t) * (queue_size + QUEUE_SIZE_CHUNK));
+
+    tmp = (queue_t *) realloc(queue, sizeof(queue_t) * (queue_size + QUEUE_SIZE_CHUNK));
     if (tmp == NULL)
     {
       fprintf(stderr, "Fill queue cannot be realloc()'d\n");
@@ -256,25 +251,22 @@ int would_flood_fill(SDL_Surface * canvas, Uint32 cur_colr, Uint32 old_colr)
 void do_flood_fill(SDL_Surface * screen, SDL_Texture * texture,
                    SDL_Renderer * renderer, SDL_Surface * last,
                    SDL_Surface * canvas, int x, int y, Uint32 cur_colr,
-                   Uint32 old_colr, int *x1, int *y1, int *x2, int *y2,
-                   Uint8 * touched)
+                   Uint32 old_colr, int *x1, int *y1, int *x2, int *y2, Uint8 * touched)
 {
-  simulate_flood_fill(screen, texture, renderer, last, canvas, x, y, cur_colr,
-                      old_colr, x1, y1, x2, y2, touched);
+  simulate_flood_fill(screen, texture, renderer, last, canvas, x, y, cur_colr, old_colr, x1, y1, x2, y2, touched);
 }
 
 
-Uint32 blend(SDL_Surface * canvas, Uint32 draw_colr, Uint32 old_colr,
-             double pct)
+Uint32 blend(SDL_Surface * canvas, Uint32 draw_colr, Uint32 old_colr, double pct)
 {
   Uint8 old_r, old_g, old_b, draw_r, draw_g, draw_b, new_r, new_g, new_b;
 
   SDL_GetRGB(draw_colr, canvas->format, &draw_r, &draw_g, &draw_b);
   SDL_GetRGB(old_colr, canvas->format, &old_r, &old_g, &old_b);
 
-  new_r = (Uint8) (((float) old_r) * (1.00 - pct) + ((float) draw_r * pct));
-  new_g = (Uint8) (((float) old_g) * (1.00 - pct) + ((float) draw_g * pct));
-  new_b = (Uint8) (((float) old_b) * (1.00 - pct) + ((float) draw_b * pct));
+  new_r = (Uint8) (((float)old_r) * (1.00 - pct) + ((float)draw_r * pct));
+  new_g = (Uint8) (((float)old_g) * (1.00 - pct) + ((float)draw_g * pct));
+  new_b = (Uint8) (((float)old_b) * (1.00 - pct) + ((float)draw_b * pct));
 
   return SDL_MapRGB(canvas->format, draw_r, draw_g, draw_b);
   return SDL_MapRGB(canvas->format, new_r, new_g, new_b);
@@ -308,8 +300,7 @@ void simulate_flood_fill(SDL_Surface * screen, SDL_Texture * texture,
   /* Do the work (possibly queuing more, as we go) */
   while (remove_from_queue(&x, &y, &y_outside))
   {
-    simulate_flood_fill_outside_check(screen, texture, renderer, x, y,
-                                      y_outside);
+    simulate_flood_fill_outside_check(screen, texture, renderer, x, y, y_outside);
   }
   cleanup_queue();
 
@@ -320,9 +311,7 @@ void simulate_flood_fill(SDL_Surface * screen, SDL_Texture * texture,
 }
 
 void simulate_flood_fill_outside_check(SDL_Surface * screen,
-                                       SDL_Texture * texture,
-                                       SDL_Renderer * renderer, int x, int y,
-                                       int y_outside)
+                                       SDL_Texture * texture, SDL_Renderer * renderer, int x, int y, int y_outside)
 {
   int fillL, fillR, narrowFillL, narrowFillR, i, outside, just_queued;
   double in_line, closeness;
@@ -374,9 +363,7 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
 
   /* Find left side, filling along the way */
 
-  px_colr =
-    getpixels[global_last->format->BytesPerPixel] (global_last,
-                                                   fillL /* - 1 */ , y);
+  px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, fillL /* - 1 */ , y);
   in_line = colors_close(global_canvas, px_colr, global_old_colr);
   outside = 0;
   while (in_line < COLOR_MATCH_WIDE && outside < WIDE_MATCH_THRESHOLD)
@@ -399,17 +386,12 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
       global_touched[(y * global_canvas->w) + fillL] = touch_byt;
     }
 
-    px_colr =
-      getpixels[global_last->format->BytesPerPixel] (global_last, fillL, y);
+    px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, fillL, y);
     putpixels[global_canvas->format->BytesPerPixel] (global_canvas, fillL, y,
-                                                     blend(global_canvas,
-                                                           global_cur_colr,
-                                                           px_colr,
-                                                           (1.0 - in_line)));
+                                                     blend(global_canvas, global_cur_colr, px_colr, (1.0 - in_line)));
     fillL--;
 
-    px_colr =
-      getpixels[global_last->format->BytesPerPixel] (global_last, fillL, y);
+    px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, fillL, y);
 
     if (fillL >= 0)
     {
@@ -432,13 +414,9 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
       global_touched[(y * global_canvas->w) + fillL] = touch_byt;
     }
 
-    px_colr =
-      getpixels[global_last->format->BytesPerPixel] (global_last, fillL, y);
+    px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, fillL, y);
     putpixels[global_canvas->format->BytesPerPixel] (global_canvas, fillL, y,
-                                                     blend(global_canvas,
-                                                           global_cur_colr,
-                                                           px_colr,
-                                                           (1.0 - in_line)));
+                                                     blend(global_canvas, global_cur_colr, px_colr, (1.0 - in_line)));
   }
 
 
@@ -452,8 +430,7 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
 
   /* Find right side, filling along the way */
 
-  px_colr =
-    getpixels[global_last->format->BytesPerPixel] (global_last, fillR + 1, y);
+  px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, fillR + 1, y);
   in_line = colors_close(global_canvas, px_colr, global_old_colr);
   outside = 0;
   while (in_line < COLOR_MATCH_WIDE && outside < WIDE_MATCH_THRESHOLD)
@@ -476,17 +453,12 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
       global_touched[(y * global_canvas->w) + fillR] = touch_byt;
     }
 
-    px_colr =
-      getpixels[global_last->format->BytesPerPixel] (global_last, fillR, y);
+    px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, fillR, y);
     putpixels[global_canvas->format->BytesPerPixel] (global_canvas, fillR, y,
-                                                     blend(global_canvas,
-                                                           global_cur_colr,
-                                                           px_colr,
-                                                           (1.0 - in_line)));
+                                                     blend(global_canvas, global_cur_colr, px_colr, (1.0 - in_line)));
     fillR++;
 
-    px_colr =
-      getpixels[global_last->format->BytesPerPixel] (global_last, fillR, y);
+    px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, fillR, y);
 
     if (fillR < global_canvas->w)
     {
@@ -509,13 +481,9 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
       global_touched[(y * global_canvas->w) + fillR] = touch_byt;
     }
 
-    px_colr =
-      getpixels[global_last->format->BytesPerPixel] (global_last, fillR, y);
+    px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, fillR, y);
     putpixels[global_canvas->format->BytesPerPixel] (global_canvas, fillR, y,
-                                                     blend(global_canvas,
-                                                           global_cur_colr,
-                                                           px_colr,
-                                                           (1.0 - in_line)));
+                                                     blend(global_canvas, global_cur_colr, px_colr, (1.0 - in_line)));
   }
 
   if (fillR > global_extent_x2)
@@ -533,15 +501,11 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
   {
     for (i = narrowFillL; i <= narrowFillR; i++)
     {
-      px_colr =
-        getpixels[global_last->format->BytesPerPixel] (global_last, i, y - 1);
+      px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, i, y - 1);
       closeness = colors_close(global_canvas, px_colr, global_old_colr);
-      if (closeness < COLOR_MATCH_NARROW ||
-          (closeness < COLOR_MATCH_WIDE && y_outside < WIDE_MATCH_THRESHOLD))
+      if (closeness < COLOR_MATCH_NARROW || (closeness < COLOR_MATCH_WIDE && y_outside < WIDE_MATCH_THRESHOLD))
       {
-        if (!just_queued
-            && (global_touched == NULL
-                || !global_touched[((y - 1) * global_canvas->w) + i]))
+        if (!just_queued && (global_touched == NULL || !global_touched[((y - 1) * global_canvas->w) + i]))
         {
           add_to_queue(i, y - 1, y_outside + 1);
           just_queued = 1;
@@ -566,15 +530,11 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
   {
     for (i = narrowFillL; i <= narrowFillR; i++)
     {
-      px_colr =
-        getpixels[global_last->format->BytesPerPixel] (global_last, i, y + 1);
+      px_colr = getpixels[global_last->format->BytesPerPixel] (global_last, i, y + 1);
       closeness = colors_close(global_canvas, px_colr, global_old_colr);
-      if (closeness < COLOR_MATCH_NARROW ||
-          (closeness < COLOR_MATCH_WIDE && y_outside < WIDE_MATCH_THRESHOLD))
+      if (closeness < COLOR_MATCH_NARROW || (closeness < COLOR_MATCH_WIDE && y_outside < WIDE_MATCH_THRESHOLD))
       {
-        if (!just_queued
-            && (global_touched == NULL
-                || !global_touched[((y + 1) * global_canvas->w) + i]))
+        if (!just_queued && (global_touched == NULL || !global_touched[((y + 1) * global_canvas->w) + i]))
         {
           add_to_queue(i, y + 1, y_outside + 1);
           just_queued = 1;
@@ -595,8 +555,7 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
 
 void draw_linear_gradient(SDL_Surface * canvas, SDL_Surface * last,
                           int x_left, int y_top, int x_right, int y_bottom,
-                          int x1, int y1, int x2, int y2, Uint32 draw_color,
-                          Uint8 * touched)
+                          int x1, int y1, int x2, int y2, Uint32 draw_color, Uint8 * touched)
 {
   Uint32 old_colr, new_colr;
   int xx, yy;
@@ -643,17 +602,11 @@ void draw_linear_gradient(SDL_Surface * canvas, SDL_Surface * last,
         }
 
         /* Apply fuzziness at any antialiased edges we detected */
-        ratio = (ratio * ((float) touched[yy * canvas->w + xx] / 255.0));
+        ratio = (ratio * ((float)touched[yy * canvas->w + xx] / 255.0));
 
-        new_r =
-          (Uint8) (((float) old_r) * ratio +
-                   ((float) draw_r * (1.0 - ratio)));
-        new_g =
-          (Uint8) (((float) old_g) * ratio +
-                   ((float) draw_g * (1.0 - ratio)));
-        new_b =
-          (Uint8) (((float) old_b) * ratio +
-                   ((float) draw_b * (1.0 - ratio)));
+        new_r = (Uint8) (((float)old_r) * ratio + ((float)draw_r * (1.0 - ratio)));
+        new_g = (Uint8) (((float)old_g) * ratio + ((float)draw_g * (1.0 - ratio)));
+        new_b = (Uint8) (((float)old_b) * ratio + ((float)draw_b * (1.0 - ratio)));
 
         new_colr = SDL_MapRGB(canvas->format, new_r, new_g, new_b);
         putpixels[canvas->format->BytesPerPixel] (canvas, xx, yy, new_colr);
@@ -662,8 +615,7 @@ void draw_linear_gradient(SDL_Surface * canvas, SDL_Surface * last,
   }
 }
 
-void draw_brush_fill_single(SDL_Surface * canvas, int x, int y,
-                            Uint32 draw_color, Uint8 * touched)
+void draw_brush_fill_single(SDL_Surface * canvas, int x, int y, Uint32 draw_color, Uint8 * touched)
 {
   int xx, yy;
   int pix;
@@ -675,13 +627,12 @@ void draw_brush_fill_single(SDL_Surface * canvas, int x, int y,
       pix = ((y + yy) * canvas->w) + (x + xx);
 
       if (pix >= 0 && pix < canvas->w * canvas->h)
+      {
+        if ((xx * xx) + (yy * yy) < (16 * 16) && touched[pix])
         {
-          if ((xx * xx) + (yy * yy) < (16 * 16) && touched[pix])
-            {
-            putpixels[canvas->format->BytesPerPixel] (canvas, x + xx, y + yy,
-                                                      draw_color);
-          }
+          putpixels[canvas->format->BytesPerPixel] (canvas, x + xx, y + yy, draw_color);
         }
+      }
     }
   }
 }
@@ -690,8 +641,7 @@ void draw_brush_fill(SDL_Surface * canvas,
                      int x_left ATTRIBUTE_UNUSED, int y_top ATTRIBUTE_UNUSED,
                      int x_right ATTRIBUTE_UNUSED,
                      int y_bottom ATTRIBUTE_UNUSED, int x1, int y1, int x2,
-                     int y2, Uint32 draw_color, Uint8 * touched, int *up_x1,
-                     int *up_y1, int *up_x2, int *up_y2)
+                     int y2, Uint32 draw_color, Uint8 * touched, int *up_x1, int *up_y1, int *up_x2, int *up_y2)
 {
   int dx, dy;
   int y;
@@ -709,7 +659,7 @@ void draw_brush_fill(SDL_Surface * canvas,
 
   if (dx != 0)
   {
-    m = ((float) dy) / ((float) dx);
+    m = ((float)dy) / ((float)dx);
     b = y1 - m * x1;
 
     if (x2 >= x1)
@@ -770,8 +720,7 @@ void draw_brush_fill(SDL_Surface * canvas,
 }
 
 void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top,
-                          int x_right, int y_bottom, int x, int y,
-                          Uint32 draw_color, Uint8 * touched)
+                          int x_right, int y_bottom, int x, int y, Uint32 draw_color, Uint8 * touched)
 {
   Uint32 old_colr, new_colr;
   int xx, yy;
@@ -800,40 +749,33 @@ void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top,
       pix = (yy * canvas->w) + xx;
 
       if (pix >= 0 && pix < canvas->w * canvas->h)
+      {
+        if (touched[pix])
         {
-          if (touched[pix])
+          /* Determine the distance from the click point */
+          xd = fabs((float)(xx - x));
+          yd = fabs((float)(yy - y));
+          dist = sqrt(xd * xd + yd * yd);
+          if (dist < rad)
           {
-            /* Determine the distance from the click point */
-            xd = fabs((float) (xx - x));
-            yd = fabs((float) (yy - y));
-            dist = sqrt(xd * xd + yd * yd);
-            if (dist < rad)
-            {
-              ratio = (dist / rad);
+            ratio = (dist / rad);
 
-              /* Get the old color, and blend it (with a distance-based ratio) with the target color */
-              old_colr =
-                getpixels[canvas->format->BytesPerPixel] (canvas, xx, yy);
-              SDL_GetRGB(old_colr, canvas->format, &old_r, &old_g, &old_b);
+            /* Get the old color, and blend it (with a distance-based ratio) with the target color */
+            old_colr = getpixels[canvas->format->BytesPerPixel] (canvas, xx, yy);
+            SDL_GetRGB(old_colr, canvas->format, &old_r, &old_g, &old_b);
 
-              /* Apply fuzziness at any antialiased edges we detected */
-              ratio = (ratio * ((float) touched[pix] / 255.0));
+            /* Apply fuzziness at any antialiased edges we detected */
+            ratio = (ratio * ((float)touched[pix] / 255.0));
 
-              new_r =
-                (Uint8) (((float) old_r) * ratio +
-                         ((float) draw_r * (1.00 - ratio)));
-              new_g =
-                (Uint8) (((float) old_g) * ratio +
-                         ((float) draw_g * (1.00 - ratio)));
-              new_b =
-                (Uint8) (((float) old_b) * ratio +
-                         ((float) draw_b * (1.00 - ratio)));
+            new_r = (Uint8) (((float)old_r) * ratio + ((float)draw_r * (1.00 - ratio)));
+            new_g = (Uint8) (((float)old_g) * ratio + ((float)draw_g * (1.00 - ratio)));
+            new_b = (Uint8) (((float)old_b) * ratio + ((float)draw_b * (1.00 - ratio)));
 
-              new_colr = SDL_MapRGB(canvas->format, new_r, new_g, new_b);
-              putpixels[canvas->format->BytesPerPixel] (canvas, xx, yy, new_colr);
-            }
+            new_colr = SDL_MapRGB(canvas->format, new_r, new_g, new_b);
+            putpixels[canvas->format->BytesPerPixel] (canvas, xx, yy, new_colr);
           }
         }
+      }
     }
   }
 }
@@ -845,9 +787,12 @@ void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top,
 
 void sdf_pt_get(sdf_grid * g, int x, int y, sdf_point * p)
 {
-  if (x >= 0 && x < g->w && y >= 0 && y < g->h) {
+  if (x >= 0 && x < g->w && y >= 0 && y < g->h)
+  {
     memcpy(p, &(g->grid[y][x]), sizeof(sdf_point));
-  } else {
+  }
+  else
+  {
     memcpy(p, &(sdf_pt_empty), sizeof(sdf_point));
   }
 }
@@ -870,37 +815,44 @@ void sdf_compare(sdf_grid * g, sdf_point * p, int x, int y, int offsetx, int off
   other.dx += offsetx;
   other.dy += offsety;
 
-  if (sdf_distsq(other) < sdf_distsq(*p)) {
+  if (sdf_distsq(other) < sdf_distsq(*p))
+  {
     p->dx = other.dx;
     p->dy = other.dy;
   }
 }
 
-int malloc_sdf_grid(sdf_grid * g, int w, int h) {
+int malloc_sdf_grid(sdf_grid * g, int w, int h)
+{
   int i, abort;
 
   g->w = w;
   g->h = h;
-  g->grid = (sdf_point * *) malloc(h * sizeof(sdf_point *));
-  if (g->grid == NULL) {
+  g->grid = (sdf_point * *)malloc(h * sizeof(sdf_point *));
+  if (g->grid == NULL)
+  {
     fprintf(stderr, "malloc_sdf_grid() cannot malloc() g->grid!\n");
     free(g);
     return 0;
   }
 
-  for (i = 0; i < h; i++) {
+  for (i = 0; i < h; i++)
+  {
     g->grid[i] = NULL;
   }
 
   abort = 0;
-  for (i = 0; i < h && !abort; i++) {
+  for (i = 0; i < h && !abort; i++)
+  {
     g->grid[i] = (sdf_point *) malloc(w * sizeof(sdf_point));
-    if (g->grid[i] == NULL) {
+    if (g->grid[i] == NULL)
+    {
       abort = 1;
     }
   }
 
-  if (abort) {
+  if (abort)
+  {
     fprintf(stderr, "malloc_sdf_grid() cannot malloc() g->grid[]!\n");
     free_sdf_grid(g);
     return 0;
@@ -909,11 +861,14 @@ int malloc_sdf_grid(sdf_grid * g, int w, int h) {
   return 1;
 }
 
-void free_sdf_grid(sdf_grid * g) {
+void free_sdf_grid(sdf_grid * g)
+{
   int i;
 
-  for (i = 0; i < g->h; i++) {
-    if (g->grid[i] != NULL) {
+  for (i = 0; i < g->h; i++)
+  {
+    if (g->grid[i] != NULL)
+    {
       free(g->grid[i]);
     }
   }
@@ -921,15 +876,21 @@ void free_sdf_grid(sdf_grid * g) {
 }
 
 
-void sdf_fill_bitmask_to_sdf_grids(Uint8 * bitmask, int w, int h, sdf_grid * g1, sdf_grid * g2) {
+void sdf_fill_bitmask_to_sdf_grids(Uint8 * bitmask, int w, int h, sdf_grid * g1, sdf_grid * g2)
+{
   int x, y;
 
-  for (y = 0; y < h; y++) {
-    for (x = 0; x < w; x++) {
-      if (bitmask[y * w + x]) {
+  for (y = 0; y < h; y++)
+  {
+    for (x = 0; x < w; x++)
+    {
+      if (bitmask[y * w + x])
+      {
         sdf_pt_put(g1, x, y, sdf_pt_inside);
         sdf_pt_put(g2, x, y, sdf_pt_empty);
-      } else {
+      }
+      else
+      {
         sdf_pt_put(g1, x, y, sdf_pt_empty);
         sdf_pt_put(g2, x, y, sdf_pt_inside);
       }
@@ -938,40 +899,47 @@ void sdf_fill_bitmask_to_sdf_grids(Uint8 * bitmask, int w, int h, sdf_grid * g1,
 }
 
 
-void sdf_generate(sdf_grid * g) {
+void sdf_generate(sdf_grid * g)
+{
   int x, y;
   sdf_point p;
 
   /* Pass 0 */
-  for (y = 0; y < g->h; y++) {
-    for (x = 0; x < g->w; x++) {
+  for (y = 0; y < g->h; y++)
+  {
+    for (x = 0; x < g->w; x++)
+    {
       sdf_pt_get(g, x, y, &p);
-      sdf_compare(g, &p, x, y, -1,  0);
-      sdf_compare(g, &p, x, y,  0, -1);
+      sdf_compare(g, &p, x, y, -1, 0);
+      sdf_compare(g, &p, x, y, 0, -1);
       sdf_compare(g, &p, x, y, -1, -1);
-      sdf_compare(g, &p, x, y,  1, -1);
+      sdf_compare(g, &p, x, y, 1, -1);
       sdf_pt_put(g, x, y, p);
     }
 
-    for (x = g->w - 1; x >= 0; x--) {
+    for (x = g->w - 1; x >= 0; x--)
+    {
       sdf_pt_get(g, x, y, &p);
-      sdf_compare(g, &p, x, y,  1, 0);
+      sdf_compare(g, &p, x, y, 1, 0);
       sdf_pt_put(g, x, y, p);
     }
   }
 
   /* Pass 1 */
-  for (y = g->h - 1; y >= 0; y--) {
-    for (x = g->w - 1; x >= 0; x--) {
+  for (y = g->h - 1; y >= 0; y--)
+  {
+    for (x = g->w - 1; x >= 0; x--)
+    {
       sdf_pt_get(g, x, y, &p);
-      sdf_compare(g, &p, x, y,  1, 0);
-      sdf_compare(g, &p, x, y,  0, 1);
+      sdf_compare(g, &p, x, y, 1, 0);
+      sdf_compare(g, &p, x, y, 0, 1);
       sdf_compare(g, &p, x, y, -1, 1);
-      sdf_compare(g, &p, x, y,  1, 1);
+      sdf_compare(g, &p, x, y, 1, 1);
       sdf_pt_put(g, x, y, p);
     }
 
-    for (x = 0; x < g->w; x++) {
+    for (x = 0; x < g->w; x++)
+    {
       sdf_pt_get(g, x, y, &p);
       sdf_compare(g, &p, x, y, -1, 0);
       sdf_pt_put(g, x, y, p);
@@ -989,21 +957,24 @@ void draw_shaped_gradient(SDL_Surface * canvas, Uint32 draw_color, Uint8 * touch
   int pix_idx;
   float ratio;
   Uint8 draw_r, draw_g, draw_b, old_r, old_g, old_b, new_r, new_g, new_b;
-  Uint8 * bitmask;
+  Uint8 *bitmask;
   sdf_grid g1, g2;
 
   /* Create space for bitmask (based on `touched`) and SDF output
      large enough for the area being filled */
   bitmask = (Uint8 *) malloc(sizeof(Uint8) * canvas->w * canvas->h);
-  if (bitmask == NULL) {
+  if (bitmask == NULL)
+  {
     return;
   }
 
-  if (!malloc_sdf_grid(&g1, canvas->w, canvas->h)) {
+  if (!malloc_sdf_grid(&g1, canvas->w, canvas->h))
+  {
     free(bitmask);
     return;
   }
-  if (!malloc_sdf_grid(&g2, canvas->w, canvas->h)) {
+  if (!malloc_sdf_grid(&g2, canvas->w, canvas->h))
+  {
     free(bitmask);
     free_sdf_grid(&g1);
     return;
@@ -1011,8 +982,10 @@ void draw_shaped_gradient(SDL_Surface * canvas, Uint32 draw_color, Uint8 * touch
 
 
   /* Convert the `touched` values into a bitmask to feed into the SDF routines */
-  for (yy = 0; yy < canvas->h; yy++) {
-    for (xx = 0; xx < canvas->w; xx++) {
+  for (yy = 0; yy < canvas->h; yy++)
+  {
+    for (xx = 0; xx < canvas->w; xx++)
+    {
       /* Converting 0-255 to 0/1 */
       bitmask[yy * canvas->w + xx] = (touched[(yy * canvas->w) + xx] >= 128);
     }
@@ -1036,49 +1009,42 @@ void draw_shaped_gradient(SDL_Surface * canvas, Uint32 draw_color, Uint8 * touch
       pix_idx = (yy * canvas->w) + xx;
 
       if (pix_idx >= 0 && pix_idx < canvas->w * canvas->h)
+      {
+        if (touched[pix_idx])
         {
-          if (touched[pix_idx])
-          {
-            sdf_point p;
-            double dist1, dist2, dist;
+          sdf_point p;
+          double dist1, dist2, dist;
 
-            sdf_pt_get(&g1, xx, yy, &p);
-            dist1 = sqrt(sdf_distsq(p));
+          sdf_pt_get(&g1, xx, yy, &p);
+          dist1 = sqrt(sdf_distsq(p));
 
-            sdf_pt_get(&g2, xx, yy, &p);
-            dist2 = sqrt(sdf_distsq(p));
+          sdf_pt_get(&g2, xx, yy, &p);
+          dist2 = sqrt(sdf_distsq(p));
 
-            dist = dist1 - dist2;
+          dist = dist1 - dist2;
 
-            /* Determine the distance from the click point */
-            ratio = ((float) ((dist * 10) + 255)) / 255.0; // Magic numbers :-( -bjk 2023.02.25
-            if (ratio < 0.0)
-              ratio = 0.0;
-            else if (ratio > 1.0)
-              ratio = 1.0;
+          /* Determine the distance from the click point */
+          ratio = ((float)((dist * 10) + 255)) / 255.0; // Magic numbers :-( -bjk 2023.02.25
+          if (ratio < 0.0)
+            ratio = 0.0;
+          else if (ratio > 1.0)
+            ratio = 1.0;
 
-            /* Get the old color, and blend it (with a distance-based ratio) with the target color */
-            old_colr =
-              getpixels[canvas->format->BytesPerPixel] (canvas, xx, yy);
-            SDL_GetRGB(old_colr, canvas->format, &old_r, &old_g, &old_b);
+          /* Get the old color, and blend it (with a distance-based ratio) with the target color */
+          old_colr = getpixels[canvas->format->BytesPerPixel] (canvas, xx, yy);
+          SDL_GetRGB(old_colr, canvas->format, &old_r, &old_g, &old_b);
 
-            /* Apply fuzziness at any antialiased edges we detected */
-            ratio = (ratio * ((float) touched[pix_idx] / 255.0));
+          /* Apply fuzziness at any antialiased edges we detected */
+          ratio = (ratio * ((float)touched[pix_idx] / 255.0));
 
-            new_r =
-              (Uint8) (((float) old_r) * ratio +
-                       ((float) draw_r * (1.00 - ratio)));
-            new_g =
-              (Uint8) (((float) old_g) * ratio +
-                       ((float) draw_g * (1.00 - ratio)));
-            new_b =
-              (Uint8) (((float) old_b) * ratio +
-                       ((float) draw_b * (1.00 - ratio)));
+          new_r = (Uint8) (((float)old_r) * ratio + ((float)draw_r * (1.00 - ratio)));
+          new_g = (Uint8) (((float)old_g) * ratio + ((float)draw_g * (1.00 - ratio)));
+          new_b = (Uint8) (((float)old_b) * ratio + ((float)draw_b * (1.00 - ratio)));
 
-            new_colr = SDL_MapRGB(canvas->format, new_r, new_g, new_b);
-            putpixels[canvas->format->BytesPerPixel] (canvas, xx, yy, new_colr);
-          }
+          new_colr = SDL_MapRGB(canvas->format, new_r, new_g, new_b);
+          putpixels[canvas->format->BytesPerPixel] (canvas, xx, yy, new_colr);
         }
+      }
     }
   }
 

@@ -4,7 +4,7 @@
   For Tux Paint
   Language-related functions
 
-  Copyright (c) 2002-2022 by Bill Kendrick and others
+  Copyright (c) 2002-2023 by Bill Kendrick and others
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -23,9 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  $Id$
-
-  June 14, 2002 - December 11, 2022
+  June 14, 2002 - April 30, 2023
 */
 
 #include <stdio.h>
@@ -64,16 +62,12 @@ static char *android_locale()
   static char android_locale_buf[32];
   JNIEnv *mEnv = Android_JNI_GetEnv();
   jclass mLocaleClass = (*mEnv)->FindClass(mEnv, "java/util/Locale");
-  jmethodID mGetDefaultMethod =
-    (*mEnv)->GetStaticMethodID(mEnv, mLocaleClass, "getDefault",
-                               "()Ljava/util/Locale;");
-  jobject mLocaleObject =
-    (*mEnv)->CallStaticObjectMethod(mEnv, mLocaleClass, mGetDefaultMethod);
-  jmethodID mToStringMethod =
-    (*mEnv)->GetMethodID(mEnv, mLocaleClass, "toString",
-                         "()Ljava/lang/String;");
-  jstring mLocaleString =
-    (*mEnv)->CallObjectMethod(mEnv, mLocaleObject, mToStringMethod);
+  jmethodID mGetDefaultMethod = (*mEnv)->GetStaticMethodID(mEnv, mLocaleClass, "getDefault",
+                                                           "()Ljava/util/Locale;");
+  jobject mLocaleObject = (*mEnv)->CallStaticObjectMethod(mEnv, mLocaleClass, mGetDefaultMethod);
+  jmethodID mToStringMethod = (*mEnv)->GetMethodID(mEnv, mLocaleClass, "toString",
+                                                   "()Ljava/lang/String;");
+  jstring mLocaleString = (*mEnv)->CallObjectMethod(mEnv, mLocaleObject, mToStringMethod);
   const char *locale = (*mEnv)->GetStringUTFChars(mEnv, mLocaleString, 0);
 
   strcpy(android_locale_buf, locale);
@@ -260,11 +254,8 @@ static int lang_use_right_to_left[] = {
   -1
 };
 
-/* FIXME: */
+/* FIXME: Remove! (We now require SDL_Pango all the time, so this is unnecessary -bjk 2023.04.30) */
 static int lang_use_right_to_left_word[] = {
-#ifdef NO_SDLPANGO
-  LANG_HE,
-#endif
   -1
 };
 
@@ -494,9 +485,7 @@ static void show_lang_usage(int exitcode)
   const char *const prg = "tuxpaint";
 
   /* FIXME: All this should REALLY be array-based!!! */
-  fprintf(f,
-          "\n" "Usage: %s [--lang LANGUAGE]\n" "\n"
-          "LANGUAGE may be one of:\n"
+  fprintf(f, "\n" "Usage: %s [--lang LANGUAGE]\n" "\n" "LANGUAGE may be one of:\n"
 /* C */ "  english      american-english\n"
 /* ach */ "  acholi       acoli\n"
 /* af */ "  afrikaans\n"
@@ -774,8 +763,7 @@ static void show_locale_usage(FILE * f, const char *const prg)
           "  wa_BE   (Walloon)\n"
           "  wo_SN   (Wolof)\n"
           "  cy_GB   (Welsh        Cymraeg)\n"
-          "  xh_ZA   (Xhosa)\n" "  zam     (Zapoteco-Miahuatlan)\n"
-          "  zu_ZA   (Zulu)\n" "\n", prg);
+          "  xh_ZA   (Xhosa)\n" "  zam     (Zapoteco-Miahuatlan)\n" "  zu_ZA   (Zulu)\n" "\n", prg);
 }
 
 /**
@@ -819,13 +807,12 @@ static void ctype_utf8(void)
 #ifndef _WIN32
   /* FIXME: should this iterate over more locales?
      A zapotec speaker may have es_MX.UTF-8 available but not have en_US.UTF-8 for example */
-  const char *names[] =
-    { "en_US.UTF8", "en_US.UTF-8", "UTF8", "UTF-8", "C.UTF-8" };
+  const char *names[] = { "en_US.UTF8", "en_US.UTF-8", "UTF8", "UTF-8", "C.UTF-8" };
   int i = sizeof(names) / sizeof(names[0]);
 
   for (;;)
   {
-    if (iswprint((wchar_t) 0xf7))       // division symbol -- which is in Latin-1 :-/
+    if (iswprint((wchar_t)0xf7))        // division symbol -- which is in Latin-1 :-/
       return;
     if (--i < 0)
       break;
@@ -844,8 +831,7 @@ static void ctype_utf8(void)
  */
 static const char *language_to_locale(const char *langstr)
 {
-  int i =
-    sizeof language_to_locale_array / sizeof language_to_locale_array[0];
+  int i = sizeof language_to_locale_array / sizeof language_to_locale_array[0];
 
   while (i--)
   {
@@ -871,8 +857,7 @@ static const char *language_to_locale(const char *langstr)
  */
 static const char *locale_to_closest_locale(const char *inlocale)
 {
-  const int numlocale =
-    sizeof(language_to_locale_array) / sizeof(language_to_locale_array[0]);
+  const int numlocale = sizeof(language_to_locale_array) / sizeof(language_to_locale_array[0]);
   const char *outlocale = NULL;
   int outlocale_score = 0;
   int i = 0;
@@ -883,8 +868,7 @@ static const char *locale_to_closest_locale(const char *inlocale)
   {
     const char *candidate = language_to_locale_array[i].locale;
 
-    for (j = 0; j < (int) strlen(inlocale) && j < (int) strlen(candidate);
-         j++)
+    for (j = 0; j < (int)strlen(inlocale) && j < (int)strlen(candidate); j++)
     {
       if (inlocale[j] != candidate[j])
         break;
@@ -964,8 +948,7 @@ static void set_langint_from_locale_string(const char *restrict loc)
       for (i = 0; i < NUM_LANGS && found == 0; i++)
       {
         // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
-        if (len_baseloc == strlen(lang_prefixes[i])
-            && !strncasecmp(straux, lang_prefixes[i], len_baseloc))
+        if (len_baseloc == strlen(lang_prefixes[i]) && !strncasecmp(straux, lang_prefixes[i], len_baseloc))
         {
           langint = i;
           found = 1;
@@ -980,8 +963,7 @@ static void set_langint_from_locale_string(const char *restrict loc)
     for (i = 0; i < NUM_LANGS && found == 0; i++)
     {
       // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
-      if (len_baseloc == strlen(lang_prefixes[i])
-          && !strncasecmp(straux, lang_prefixes[i], len_baseloc))
+      if (len_baseloc == strlen(lang_prefixes[i]) && !strncasecmp(straux, lang_prefixes[i], len_baseloc))
       {
         langint = i;
         found = 1;
@@ -1001,8 +983,7 @@ static void set_langint_from_locale_string(const char *restrict loc)
     for (i = 0; i < NUM_LANGS && found == 0; i++)
     {
       // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
-      if (len_baseloc == strlen(lang_prefixes[i]) &&
-          !strncasecmp(straux, lang_prefixes[i], strlen(lang_prefixes[i])))
+      if (len_baseloc == strlen(lang_prefixes[i]) && !strncasecmp(straux, lang_prefixes[i], strlen(lang_prefixes[i])))
       {
         langint = i;
         found = 1;
@@ -1018,8 +999,7 @@ static void set_langint_from_locale_string(const char *restrict loc)
   for (i = 0; i < NUM_LANGS && found == 0; i++)
   {
     // Case-insensitive (both "pt_BR" and "pt_br" work, etc.)
-    if (len_baseloc == strlen(lang_prefixes[i])
-        && !strncasecmp(baseloc, lang_prefixes[i], strlen(lang_prefixes[i])))
+    if (len_baseloc == strlen(lang_prefixes[i]) && !strncasecmp(baseloc, lang_prefixes[i], strlen(lang_prefixes[i])))
     {
       langint = i;
       found = 1;
@@ -1099,8 +1079,7 @@ void mysetenv(const char *name, const char *value)
  * @return The Y-nudge value for font rendering in the language.
  */
 
-static int set_current_language(const char *restrict loc,
-                                int *ptr_num_wished_langs)
+static int set_current_language(const char *restrict loc, int *ptr_num_wished_langs)
 {
   int i;
   int j = 0;
@@ -1137,8 +1116,7 @@ static int set_current_language(const char *restrict loc,
         env = getenv("LC_MESSAGES");
         if (env != NULL && env[0] != '\0')
         {
-          DEBUG_PRINTF("Language via LC_MESSAGES: %s\n",
-                       getenv("LC_MESSAGES"));
+          DEBUG_PRINTF("Language via LC_MESSAGES: %s\n", getenv("LC_MESSAGES"));
           mysetenv("LANGUAGE", getenv("LC_MESSAGES"));
         }
         else
@@ -1182,6 +1160,7 @@ static int set_current_language(const char *restrict loc,
   //                      -- 2022/02/02: Shin-ichi TOYAMA & Pere Pujal i Carabantes
   char curdir[256];
   char f[512];
+
   getcwd(curdir, sizeof(curdir));
   snprintf(f, sizeof(f), "%s%s", curdir, "\\locale");
 #ifdef DEBUG
@@ -1255,12 +1234,9 @@ static int set_current_language(const char *restrict loc,
       set_langint_from_locale_string(env_language_lang);
       wished_langs[j].langint = langint;
       wished_langs[j].lang_prefix = lang_prefixes[langint];
-      wished_langs[j].need_own_font =
-        search_int_array(langint, lang_use_own_font);
-      wished_langs[j].need_right_to_left =
-        search_int_array(langint, lang_use_right_to_left);
-      wished_langs[j].need_right_to_left_word =
-        search_int_array(langint, lang_use_right_to_left_word);
+      wished_langs[j].need_own_font = search_int_array(langint, lang_use_own_font);
+      wished_langs[j].need_right_to_left = search_int_array(langint, lang_use_right_to_left);
+      wished_langs[j].need_right_to_left_word = search_int_array(langint, lang_use_right_to_left_word);
       for (i = 0; lang_y_nudge[i][0] != -1; i++)
       {
         // printf("lang_y_nudge[%d][0] = %d\n", i, lang_y_nudge[i][0]);
@@ -1294,15 +1270,13 @@ static int set_current_language(const char *restrict loc,
 
 #ifdef DEBUG
   fprintf(stderr, "DEBUG: Language is %s (%d) %s/%s\n",
-          lang_prefix, langint, need_right_to_left ? "(RTL)" : "",
-          need_right_to_left_word ? "(RTL words)" : "");
+          lang_prefix, langint, need_right_to_left ? "(RTL)" : "", need_right_to_left_word ? "(RTL words)" : "");
   fflush(stderr);
 #endif
 
   free(oldloc);
 
-  DEBUG_PRINTF("lang_prefixes[%d] is \"%s\"\n", get_current_language(),
-               lang_prefixes[get_current_language()]);
+  DEBUG_PRINTF("lang_prefixes[%d] is \"%s\"\n", get_current_language(), lang_prefixes[get_current_language()]);
 
   *ptr_num_wished_langs = num_wished_langs;
 
@@ -1321,8 +1295,7 @@ static int set_current_language(const char *restrict loc,
  * @param int * a place to return the number of languages we want to use, when scanning stamp descriptions 
  * @return Y-nudge
  */
-int setup_i18n(const char *restrict lang, const char *restrict locale,
-               int *num_wished_langs)
+int setup_i18n(const char *restrict lang, const char *restrict locale, int *num_wished_langs)
 {
   DEBUG_PRINTF("lang %p, locale %p\n", lang, locale);
   DEBUG_PRINTF("lang \"%s\", locale \"%s\"\n", lang, locale);
@@ -1356,14 +1329,3 @@ int setup_i18n(const char *restrict lang, const char *restrict locale,
     locale = "";
   return set_current_language(locale, num_wished_langs);
 }
-
-#ifdef NO_SDLPANGO
-/**
- * FIXME
- */
-int smash_i18n(void)
-{
-  int tmp;
-  return set_current_language("C", &tmp);
-}
-#endif

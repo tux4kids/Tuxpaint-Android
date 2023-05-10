@@ -84,7 +84,7 @@ struct dirent *readdir(struct DIR *pDir)
   if (pDir->hFind)
 
   {
-    strcpy(pDir->de.d_name, (const char *) pDir->wfd.cFileName);
+    strcpy(pDir->de.d_name, (const char *)pDir->wfd.cFileName);
     if (!FindNextFile(pDir->hFind, &pDir->wfd))
 
     {
@@ -107,9 +107,7 @@ struct dirent *readdir(struct DIR *pDir)
  */
 int alphasort(const void *a, const void *b)
 {
-  return (strcmp
-          ((*(const struct dirent **) a)->d_name,
-           (*(const struct dirent **) b)->d_name));
+  return (strcmp((*(const struct dirent **)a)->d_name, (*(const struct dirent **)b)->d_name));
 }
 
 /**
@@ -126,15 +124,11 @@ static int addToList(int i, struct dirent ***namelist, struct dirent *entry)
   int size;
   struct dirent *block;
 
-  *namelist =
-    (struct dirent **) realloc((void *) (*namelist),
-                               (size_t) ((i + 1) * sizeof(struct dirent *)));
+  *namelist = (struct dirent **)realloc((void *)(*namelist), (size_t)((i + 1) * sizeof(struct dirent *)));
   if (*namelist == NULL)
     return -1;
-  size =
-    (((char *) &entry->d_name) - ((char *) entry)) + strlen(entry->d_name) +
-    1;
-  block = (struct dirent *) malloc(size);
+  size = (((char *)&entry->d_name) - ((char *)entry)) + strlen(entry->d_name) + 1;
+  block = (struct dirent *)malloc(size);
   if (block == NULL)
     return -1;
   (*namelist)[i] = block;
@@ -151,8 +145,7 @@ static int addToList(int i, struct dirent ***namelist, struct dirent *entry)
  * @param compar Callback for sorting items in the list (via qsort()).
  * @return Count of items, or -1 on error.
  */
-int scandir(const char *dir, struct dirent ***namelist, selectCB select,
-            comparCB compar)
+int scandir(const char *dir, struct dirent ***namelist, selectCB select, comparCB compar)
 {
   DIR *pDir;
   int count;
@@ -173,7 +166,6 @@ int scandir(const char *dir, struct dirent ***namelist, selectCB select,
   if (count <= 0)
     return -1;
   if (compar != NULL)
-    qsort((void *) (*namelist), (size_t) count, sizeof(struct dirent *),
-          compar);
+    qsort((void *)(*namelist), (size_t)count, sizeof(struct dirent *), compar);
   return count;
 }

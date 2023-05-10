@@ -1,12 +1,12 @@
                                    Tux Paint
-                                 versión 0.9.29
+                                 versión 0.9.30
 
 Documentación de opcións
 
         Copyright © 2002-2023 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                              16 de Marzo de 2023
+                               9 de Maio de 2023
 
              +----------------------------------------------------+
              |Índice                                              |
@@ -446,6 +446,18 @@ Simplificación
            overridden by the user's configuration file using
            "nomagiccontrols=no" or "magiccontrols=yes". In both cases, may be
            overridden by the command-line option "--magiccontrols".
+
+   nomagicsizes=yes
+
+           Some Magic tools offer various size settings. This option disables
+           the sizing control, and only provides the tools' default sizes.
+           (Some plugins may offer additional variations of a Magic tool, to
+           make a few sizes possible, e.g. "Bricks" and "Googly Eyes".)
+
+           ⚙ Note: If used in a system-wide configuration file, may be
+           overridden by the user's configuration file using
+           "nomagicsizes=no" or "magicsizes=yes". In both cases, may be
+           overridden by the command-line option "--magicsizes".
 
    noshapecontrols=yes
 

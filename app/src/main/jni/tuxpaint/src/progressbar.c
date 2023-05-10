@@ -39,8 +39,7 @@ int progress_bar_disabled, prog_bar_ctr;
  *
  * @param screen Screen surface
  */
-void show_progress_bar_(SDL_Surface * screen, SDL_Texture * texture,
-                        SDL_Renderer * renderer)
+void show_progress_bar_(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer)
 {
   SDL_Rect dest, src, r;
   int x;
@@ -73,9 +72,7 @@ void show_progress_bar_(SDL_Surface * screen, SDL_Texture * texture,
     r.w = screen->w;
     r.h = 24;
 
-    SDL_UpdateTexture(texture, &r,
-                      screen->pixels + ((screen->h - 24) * screen->pitch),
-                      screen->pitch);
+    SDL_UpdateTexture(texture, &r, screen->pixels + ((screen->h - 24) * screen->pitch), screen->pitch);
 
     /* Docs says one should clear the renderer, even if this means a refresh of the whole thing. */
     SDL_RenderClear(renderer);

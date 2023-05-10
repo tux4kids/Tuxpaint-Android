@@ -156,15 +156,12 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
                                 SDL_Surface * BLANK_oskdel,
                                 SDL_Surface * BLANK_osktab,
                                 SDL_Surface * BLANK_oskenter,
-                                SDL_Surface * BLANK_oskcapslock,
-                                SDL_Surface * BLANK_oskshift,
-                                int disable_change);
+                                SDL_Surface * BLANK_oskcapslock, SDL_Surface * BLANK_oskshift, int disable_change);
 
 struct osk_layout *osk_load_layout(char *layout_name);
 
 void osk_get_layout_data(char *layout_name, int *layout_w, int *layout_h,
-                         char *layout_buttons, char *layout_labels,
-                         char *layout_keycodes);
+                         char *layout_buttons, char *layout_labels, char *layout_keycodes);
 void osk_reset(on_screen_keyboard * osk);
 struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y);
 void osk_released(on_screen_keyboard * osk);

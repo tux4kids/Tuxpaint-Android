@@ -184,5 +184,10 @@ enum {
   MAGIC_TYPE_ARTISTIC
 };
 
+/* Magic-relevant Tux Paint features (which may be reported as disabled) */
+
+#define MAGIC_FEATURE_CONTROL 0x00000001
+#define MAGIC_FEATURE_SIZE 0x00000002
+
 #endif
 

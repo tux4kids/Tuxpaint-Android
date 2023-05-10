@@ -7,9 +7,14 @@
 # Bill Kendrick
 # bill@newbreedsoftware.com
 # 
-# Sept. 4, 2005 - October 18, 2022
+# Sept. 4, 2005 - May 2, 2023
 
-LINKS_OPTIONS:=-dump -codepage utf8
+# FIXME: Japanese does not wordwrap in many cases, leading to very long
+# lines in the TXT output.  Post-processing with `fmt` doesn't look like
+# it would help, because it doesn't know how to wrap Japanese, either.
+# -bjk 2023.05.02
+
+LINKS_OPTIONS:=-dump -codepage utf8 -width 80
 LINKS:=links $(LINKS_OPTIONS)
 
 EN_HTMLFILES:=$(wildcard en/html/*.html)

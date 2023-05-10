@@ -258,7 +258,7 @@ static void wcs_lshift(wchar_t *s, size_t count)
 */
 static void wcs_pull(wchar_t *s, size_t count)
 {
-  int peg = (int) wcslen(s) - (int) count;
+  int peg = (int)wcslen(s) - (int)count;
 
   if (peg < 0)
     peg = 0;
@@ -311,7 +311,7 @@ static void sm_free(STATE_MACHINE * sm)
   {
     int i = 0;
 
-    for (i = 0; i < (int) sm->next_maxsize; i++)
+    for (i = 0; i < (int)sm->next_maxsize; i++)
     {
       STATE_MACHINE *next_state = sm->next[i].state;
 
@@ -358,8 +358,7 @@ static STATE_MACHINE *sm_search_shallow(STATE_MACHINE * sm, char key)
   SM_WITH_KEY smk = { key, NULL };
   SM_WITH_KEY *smk_found;
 
-  smk_found =
-    bsearch(&smk, sm->next, sm->next_size, sizeof(SM_WITH_KEY), swk_compare);
+  smk_found = bsearch(&smk, sm->next, sm->next_size, sizeof(SM_WITH_KEY), swk_compare);
 
   if (!smk_found)
     return NULL;
@@ -381,10 +380,9 @@ static STATE_MACHINE *sm_search_shallow(STATE_MACHINE * sm, char key)
 * @return         Found unicode character sequence output of the last state.
 */
 static const wchar_t *sm_search(STATE_MACHINE * start, wchar_t *key,
-                                int *matched, STATE_MACHINE ** penult,
-                                STATE_MACHINE ** end)
+                                int *matched, STATE_MACHINE ** penult, STATE_MACHINE ** end)
 {
-  STATE_MACHINE *sm = sm_search_shallow(start, (char) *key);
+  STATE_MACHINE *sm = sm_search_shallow(start, (char)*key);
   const wchar_t *unicode;
 
   /* No match - stop recursion */
@@ -418,8 +416,7 @@ static void sm_sort_shallow(STATE_MACHINE * sm)
 /**
 * Add a single sequence-to-unicode path to the state machine.
 */
-static int sm_add(STATE_MACHINE * sm, char *seq, const wchar_t *unicode,
-                  char flag)
+static int sm_add(STATE_MACHINE * sm, char *seq, const wchar_t *unicode, char flag)
 {
   STATE_MACHINE *sm_found = sm_search_shallow(sm, seq[0]);
 
@@ -432,10 +429,10 @@ static int sm_add(STATE_MACHINE * sm, char *seq, const wchar_t *unicode,
 
       fprintf(stderr, "Unicode sequence ");
       for (i = 0; i < wcslen(sm->output); i++)
-        fprintf(stderr, "%04X ", (int) sm->output[i]);
+        fprintf(stderr, "%04X ", (int)sm->output[i]);
       fprintf(stderr, " already defined, overriding with ");
       for (i = 0; i < wcslen(unicode); i++)
-        fprintf(stderr, "%04X ", (int) unicode[i]);
+        fprintf(stderr, "%04X ", (int)unicode[i]);
       fprintf(stderr, "\n");
     }
     wcscpy(sm->output, unicode);
@@ -446,7 +443,7 @@ static int sm_add(STATE_MACHINE * sm, char *seq, const wchar_t *unicode,
   /* The key doesn't exist yet */
   if (!sm_found)
   {
-    int index = (int) sm->next_size;
+    int index = (int)sm->next_size;
     SM_WITH_KEY *next = &sm->next[index];
 
     /* Add the key */
@@ -516,8 +513,7 @@ static int charmap_init(CHARMAP * cm)
 *
 * @return        0 if no error, 1 if error.
 */
-static int charmap_add(CHARMAP * cm, int section, char *seq,
-                       const wchar_t *unicode, char *flag)
+static int charmap_add(CHARMAP * cm, int section, char *seq, const wchar_t *unicode, char *flag)
 {
   if (section >= MAX_SECTIONS)
   {
@@ -528,7 +524,7 @@ static int charmap_add(CHARMAP * cm, int section, char *seq,
   /* For now, we only utilize one-character flags */
   if (strlen(flag) > 1)
   {
-    fprintf(stderr, "%04X: Multi-character flag, truncated.\n", (int) (intptr_t) unicode);      //EP added (intptr_t) to avoid warning on x64
+    fprintf(stderr, "%04X: Multi-character flag, truncated.\n", (int)(intptr_t) unicode);       //EP added (intptr_t) to avoid warning on x64
   }
 
   return sm_add(&cm->sections[section], seq, unicode, flag[0]);
@@ -635,7 +631,7 @@ static int charmap_load(CHARMAP * cm, const char *path)
 
         fwprintf(stderr, L"Unable to add sequence '%ls', unicode ", buf);
         for (i = 0; i < wcslen(unicode); i++)
-          fwprintf(stderr, L"%04X ", (int) unicode[i]);
+          fwprintf(stderr, L"%04X ", (int)unicode[i]);
         fwprintf(stderr, L"in section %d\n", section);
 #endif
 #endif
@@ -679,15 +675,13 @@ static const wchar_t *charmap_search(CHARMAP * cm, wchar_t *s)
 
   /* Determine the starting state based on the charmap's active section */
   section = cm->section;
-  if (!IN_RANGE(0, section, (int) ARRAYLEN(cm->sections)))
+  if (!IN_RANGE(0, section, (int)ARRAYLEN(cm->sections)))
     section = 0;
   start = &cm->sections[section];
 
   cm->match_state = NULL;
   cm->match_state_prev = NULL;
-  unicode =
-    sm_search(start, s, &cm->match_count, &cm->match_state_prev,
-              &cm->match_state);
+  unicode = sm_search(start, s, &cm->match_count, &cm->match_state_prev, &cm->match_state);
 
   /**
   * Determine whether the match is final.  A match is considered to be final
@@ -701,7 +695,7 @@ static const wchar_t *charmap_search(CHARMAP * cm, wchar_t *s)
   * final state we possibly can.
   */
   cm->match_is_final = 0;
-  if (cm->match_count < (int) wcslen(s))
+  if (cm->match_count < (int)wcslen(s))
   {
     cm->match_is_final = 1;
   }
@@ -713,7 +707,7 @@ static const wchar_t *charmap_search(CHARMAP * cm, wchar_t *s)
     cm->match_is_final = 1;
     cm->match_stats |= MATCH_STAT_NOMOSTATES;
   }
-  if (cm->match_count == (int) wcslen(s))
+  if (cm->match_count == (int)wcslen(s))
   {
     cm->match_stats |= MATCH_STAT_NOMOBUF;
   }
@@ -830,8 +824,7 @@ int im_read(IM_DATA * im, SDL_Event event)
     redraw = im_event_c(im, event);
 
 #ifdef IM_DEBUG
-  wprintf(L"* [%8ls] [%8ls] %2d %2d (%2d)\n", im->s, im->buf, wcslen(im->s),
-          wcslen(im->buf), im->redraw);
+  wprintf(L"* [%8ls] [%8ls] %2d %2d (%2d)\n", im->s, im->buf, wcslen(im->s), wcslen(im->buf), im->redraw);
 #endif
 
   return redraw;
@@ -983,8 +976,7 @@ static int im_event_zh_tw(IM_DATA * im, SDL_Event event)
 
     if (charmap_load(&cm, lang_file))
     {
-      fprintf(stderr, "Unable to load %s, defaulting to im_event_c\n",
-              lang_file);
+      fprintf(stderr, "Unable to load %s, defaulting to im_event_c\n", lang_file);
       im->lang = LANG_DEFAULT;
       return im_event_c(im, event);
     }
@@ -1001,7 +993,7 @@ static int im_event_zh_tw(IM_DATA * im, SDL_Event event)
 
 
   /* Discard redraw characters, so they can be redrawn */
-  if ((int) wcslen(im->s) < im->redraw)
+  if ((int)wcslen(im->s) < im->redraw)
     im->redraw = wcslen(im->s);
   wcs_lshift(im->s, (wcslen(im->s) - im->redraw));
 
@@ -1055,8 +1047,7 @@ static int im_event_zh_tw(IM_DATA * im, SDL_Event event)
 
     /* Actual character processing */
   default:
-    if (event.type == SDL_TEXTINPUT || ks.sym == SDLK_BACKSPACE
-        || ks.sym == SDLK_RETURN || ks.sym == SDLK_TAB)
+    if (event.type == SDL_TEXTINPUT || ks.sym == SDLK_BACKSPACE || ks.sym == SDLK_RETURN || ks.sym == SDLK_TAB)
     {
       /* English mode */
       if (cm.section == SEC_ENGLISH)
@@ -1081,8 +1072,7 @@ static int im_event_zh_tw(IM_DATA * im, SDL_Event event)
           const wchar_t *us = charmap_search(&cm, im->buf);
 
 #ifdef IM_DEBUG
-          wprintf(L"  [%8ls] [%8ls] %2d %2d\n", im->s, im->buf, wcslen(im->s),
-                  wcslen(im->buf));
+          wprintf(L"  [%8ls] [%8ls] %2d %2d\n", im->s, im->buf, wcslen(im->s), wcslen(im->buf));
 #endif
 
           /* Match was found? */
@@ -1122,7 +1112,7 @@ static int im_event_zh_tw(IM_DATA * im, SDL_Event event)
               cm.match_is_final = 0;
             }
             /* If the matched characters didn't consume all, it's own state */
-            else if ((size_t) cm.match_count != wcslen(im->buf))
+            else if ((size_t)cm.match_count != wcslen(im->buf))
             {
 #ifdef IM_DEBUG
               wprintf(L"    2b (%2d)\n", cm.match_count);
@@ -1209,8 +1199,7 @@ static int im_event_th(IM_DATA * im, SDL_Event event)
 
     if (charmap_load(&cm, lang_file))
     {
-      fprintf(stderr, "Unable to load %s, defaulting to im_event_c\n",
-              lang_file);
+      fprintf(stderr, "Unable to load %s, defaulting to im_event_c\n", lang_file);
       im->lang = LANG_DEFAULT;
       return im_event_c(im, event);
     }
@@ -1227,7 +1216,7 @@ static int im_event_th(IM_DATA * im, SDL_Event event)
 
 
   /* Discard redraw characters, so they can be redrawn */
-  if ((int) wcslen(im->s) < im->redraw)
+  if ((int)wcslen(im->s) < im->redraw)
     im->redraw = wcslen(im->s);
   wcs_lshift(im->s, (wcslen(im->s) - im->redraw));
 
@@ -1304,8 +1293,7 @@ static int im_event_th(IM_DATA * im, SDL_Event event)
         const wchar_t *us = charmap_search(&cm, im->buf);
 
 #ifdef IM_DEBUG
-        wprintf(L"  [%8ls] [%8ls] %2d %2d\n", im->s, im->buf, wcslen(im->s),
-                wcslen(im->buf));
+        wprintf(L"  [%8ls] [%8ls] %2d %2d\n", im->s, im->buf, wcslen(im->s), wcslen(im->buf));
 #endif
 
         /* Match was found? */
@@ -1345,7 +1333,7 @@ static int im_event_th(IM_DATA * im, SDL_Event event)
             cm.match_is_final = 0;
           }
           /* If the matched characters didn't consume all, it's own state */
-          else if ((size_t) cm.match_count != wcslen(im->buf))
+          else if ((size_t)cm.match_count != wcslen(im->buf))
           {
 #ifdef IM_DEBUG
             wprintf(L"    2b (%2d)\n", cm.match_count);
@@ -1431,8 +1419,7 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
 
     if (charmap_load(&cm, lang_file))
     {
-      fprintf(stderr, "Unable to load %s, defaulting to im_event_c\n",
-              lang_file);
+      fprintf(stderr, "Unable to load %s, defaulting to im_event_c\n", lang_file);
       im->lang = LANG_DEFAULT;
       return im_event_c(im, event);
     }
@@ -1449,7 +1436,7 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
 
 
   /* Discard redraw characters, so they can be redrawn */
-  if ((int) wcslen(im->s) < im->redraw)
+  if ((int)wcslen(im->s) < im->redraw)
     im->redraw = wcslen(im->s);
   wcs_lshift(im->s, (wcslen(im->s) - im->redraw));
 
@@ -1506,8 +1493,7 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
 
     /* Actual character processing */
   default:
-    if (event.type == SDL_TEXTINPUT || ks.sym == SDLK_BACKSPACE
-        || ks.sym == SDLK_RETURN || ks.sym == SDLK_TAB)
+    if (event.type == SDL_TEXTINPUT || ks.sym == SDLK_BACKSPACE || ks.sym == SDLK_RETURN || ks.sym == SDLK_TAB)
     {
       /* English mode */
       if (cm.section == SEC_ENGLISH)
@@ -1532,8 +1518,7 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
           const wchar_t *us = charmap_search(&cm, im->buf);
 
 #ifdef IM_DEBUG
-          wprintf(L"  [%8ls] [%8ls] %2d %2d\n", im->s, im->buf, wcslen(im->s),
-                  wcslen(im->buf));
+          wprintf(L"  [%8ls] [%8ls] %2d %2d\n", im->s, im->buf, wcslen(im->s), wcslen(im->buf));
 #endif
 
           /* Match was found? */
@@ -1573,7 +1558,7 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
               cm.match_is_final = 0;
             }
             /* If the matched characters didn't consume all, it's own state */
-            else if ((size_t) cm.match_count != wcslen(im->buf))
+            else if ((size_t)cm.match_count != wcslen(im->buf))
             {
 #ifdef IM_DEBUG
               wprintf(L"    2b (%2d)\n", cm.match_count);
@@ -1628,15 +1613,14 @@ static int im_event_ko_isvowel(CHARMAP * cm, wchar_t c)
 
   /* Determine the starting state based on the charmap's active section */
   section = cm->section;
-  if (!IN_RANGE(0, section, (int) ARRAYLEN(cm->sections)))
+  if (!IN_RANGE(0, section, (int)ARRAYLEN(cm->sections)))
     section = 0;
   start = &cm->sections[section];
 
-  next = sm_search_shallow(start, (char) c);
+  next = sm_search_shallow(start, (char)c);
   unicode = next ? next->output : NULL;
 
-  return (unicode && wcslen(unicode) == 1 && 0x314F <= unicode[0]
-          && unicode[0] <= 0x3163);
+  return (unicode && wcslen(unicode) == 1 && 0x314F <= unicode[0] && unicode[0] <= 0x3163);
 }
 
 
@@ -1685,8 +1669,7 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
 
     if (charmap_load(&cm, lang_file))
     {
-      fprintf(stderr, "Unable to load %s, defaulting to im_event_c\n",
-              lang_file);
+      fprintf(stderr, "Unable to load %s, defaulting to im_event_c\n", lang_file);
       im->lang = LANG_DEFAULT;
       return im_event_c(im, event);
     }
@@ -1703,7 +1686,7 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
 
 
   /* Discard redraw characters, so they can be redrawn */
-  if ((int) wcslen(im->s) < im->redraw)
+  if ((int)wcslen(im->s) < im->redraw)
     im->redraw = wcslen(im->s);
   wcs_lshift(im->s, (wcslen(im->s) - im->redraw));
 
@@ -1758,8 +1741,7 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
 
     /* Actual character processing */
   default:
-    if (event.type == SDL_TEXTINPUT || ks.sym == SDLK_BACKSPACE
-        || ks.sym == SDLK_RETURN || ks.sym == SDLK_TAB)
+    if (event.type == SDL_TEXTINPUT || ks.sym == SDLK_BACKSPACE || ks.sym == SDLK_RETURN || ks.sym == SDLK_TAB)
     {
       /* English mode */
       if (cm.section == SEC_ENGLISH)
@@ -1783,8 +1765,7 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
           const wchar_t *us = charmap_search(&cm, bp);
 
 #ifdef IM_DEBUG
-          wprintf(L"  [%8ls] [%8ls] %2d %2d\n", im->s, im->buf, wcslen(im->s),
-                  wcslen(im->buf));
+          wprintf(L"  [%8ls] [%8ls] %2d %2d\n", im->s, im->buf, wcslen(im->s), wcslen(im->buf));
 #endif
 
           /* Match was found? */
@@ -1876,7 +1857,7 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
               cm.match_is_final = 0;
             }
             /* If the matched characters didn't consume all, it's own state */
-            else if ((size_t) cm.match_count != wcslen(bp))
+            else if ((size_t)cm.match_count != wcslen(bp))
             {
 #ifdef IM_DEBUG
               wprintf(L"    2b (%2d)\n", cm.match_count);

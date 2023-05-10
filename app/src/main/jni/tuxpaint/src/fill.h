@@ -40,24 +40,19 @@ int would_flood_fill(SDL_Surface * canvas, Uint32 cur_colr, Uint32 old_colr);
 void do_flood_fill(SDL_Surface * screen, SDL_Texture * texture,
                    SDL_Renderer * renderer, SDL_Surface * last,
                    SDL_Surface * canvas, int x, int y, Uint32 cur_colr,
-                   Uint32 old_colr, int *x1, int *y1, int *x2, int *y2,
-                   Uint8 * touched);
+                   Uint32 old_colr, int *x1, int *y1, int *x2, int *y2, Uint8 * touched);
 void simulate_flood_fill(SDL_Surface * screen, SDL_Texture * texture,
                          SDL_Renderer * renderer, SDL_Surface * last,
                          SDL_Surface * canvas, int x, int y, Uint32 cur_colr,
-                         Uint32 old_colr, int *x1, int *y1, int *x2, int *y2,
-                         Uint8 * touched);
+                         Uint32 old_colr, int *x1, int *y1, int *x2, int *y2, Uint8 * touched);
 void draw_linear_gradient(SDL_Surface * canvas, SDL_Surface * last,
                           int x_left, int y_top, int x_right, int y_bottom,
-                          int x1, int y1, int x2, int y2, Uint32 draw_color,
-                          Uint8 * touched);
+                          int x1, int y1, int x2, int y2, Uint32 draw_color, Uint8 * touched);
 void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top,
-                          int x_right, int y_bottom, int x, int y,
-                          Uint32 draw_color, Uint8 * touched);
+                          int x_right, int y_bottom, int x, int y, Uint32 draw_color, Uint8 * touched);
 void draw_shaped_gradient(SDL_Surface * canvas, Uint32 draw_color, Uint8 * touched);
 void draw_brush_fill(SDL_Surface * canvas, int x_left, int y_top, int x_right,
                      int y_bottom, int x1, int y1, int x2, int y2,
-                     Uint32 draw_color, Uint8 * touched, int *up_x1,
-                     int *up_y1, int *up_x2, int *up_y2);
+                     Uint32 draw_color, Uint8 * touched, int *up_x1, int *up_y1, int *up_x2, int *up_y2);
 
 #endif

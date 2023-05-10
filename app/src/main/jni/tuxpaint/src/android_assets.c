@@ -32,15 +32,15 @@ char *get_nativelibdir()
   return nativelibdir;
 }
 
-void load_assets_dir(char *dirname, tp_ftw_str ** ffilenames,
-                     unsigned *num_file_names)
+void load_assets_dir(char *dirname, tp_ftw_str ** ffilenames, unsigned *num_file_names)
 {
   AAssetDir *assetDir = AAssetManager_openDir(asset_manager, dirname);
-  const char *filename = (const char *) NULL;
+  const char *filename = (const char *)NULL;
   tp_ftw_str *filenames = NULL;
 
   unsigned max_file_names = 0;
   int fulllen = 0;
+
   *num_file_names = 0;
 
 
@@ -67,12 +67,7 @@ void load_assets_dir(char *dirname, tp_ftw_str ** ffilenames,
   *ffilenames = filenames;
 }
 
-JNIEXPORT jboolean Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv *
-                                                                   env,
-                                                                   jclass
-                                                                   clazz,
-                                                                   jobject
-                                                                   mgr)
+JNIEXPORT jboolean Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv * env, jclass clazz, jobject mgr)
 {
   asset_manager = AAssetManager_fromJava(env, mgr);
 
@@ -82,14 +77,10 @@ JNIEXPORT jboolean Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv *
     return 1;
 }
 
-JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv *
-                                                                  env,
-                                                                  jclass
-                                                                  clazz,
-                                                                  jstring
-                                                                  path)
+JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv * env, jclass clazz, jstring path)
 {
   const char *cpath = (*env)->GetStringUTFChars(env, path, NULL);
+
   nativelibdir = strdup(cpath);
   (*env)->ReleaseStringUTFChars(env, path, cpath);
 }
@@ -102,8 +93,7 @@ void load_brushes_from_assets(SDL_Surface * screen, SDL_Texture * texture,
                                          SDL_Renderer * renderer,
                                          const char *restrict const dir,
                                          unsigned dirlen, tp_ftw_str * files,
-                                         unsigned count,
-                                         const char *restrict const locale))
+                                         unsigned count, const char *restrict const locale))
 {
   unsigned num_file_names = 0;
   char *dir = "data/brushes";
@@ -127,10 +117,10 @@ void load_from_assets(SDL_Surface * screen, SDL_Texture * texture,
                                  SDL_Renderer * renderer,
                                  const char *restrict const dir,
                                  unsigned dirlen, tp_ftw_str * files,
-                                 unsigned count,
-                                 const char *restrict const locale))
+                                 unsigned count, const char *restrict const locale))
 {
   unsigned num_file_names = 0;
+
   // char * dir = "data/stamps/cartoon/tux";
   char buf[TP_FTW_PATHSIZE];
   unsigned dirlen = strlen(dirname);
@@ -140,6 +130,5 @@ void load_from_assets(SDL_Surface * screen, SDL_Texture * texture,
   tp_ftw_str *filenames = NULL;
 
   load_assets_dir(dirname, &filenames, &num_file_names);
-  fn(screen, texture, renderer, dirname, dirlen, filenames, num_file_names,
-     NULL);
+  fn(screen, texture, renderer, dirname, dirlen, filenames, num_file_names, NULL);
 }

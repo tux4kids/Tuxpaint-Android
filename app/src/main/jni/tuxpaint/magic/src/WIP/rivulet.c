@@ -26,15 +26,11 @@
 // #define DEBUG_ANGLE
 
 Mix_Chunk *snd_effect = NULL;
-SDL_Surface * rivulet_img_brush_add = NULL,
-  * rivulet_img_brush_alpha = NULL,
-  * rivulet_img_brush_sub = NULL,
-  * rivulet_img_angles = NULL;
-SDL_Surface * rivulet_snapshot = NULL;
+SDL_Surface *rivulet_img_brush_add = NULL,
+  *rivulet_img_brush_alpha = NULL, *rivulet_img_brush_sub = NULL, *rivulet_img_angles = NULL;
+SDL_Surface *rivulet_snapshot = NULL;
 int riv_x, riv_y;
-Uint8 * riv_radii = NULL,
-  * riv_alpha = NULL,
-  * riv_angles = NULL;
+Uint8 *riv_radii = NULL, *riv_alpha = NULL, *riv_angles = NULL;
 
 Uint32 rivulet_api_version(void);
 int rivulet_init(magic_api * api);
@@ -47,22 +43,16 @@ int rivulet_requires_colors(magic_api * api, int which);
 int rivulet_modes(magic_api * api, int which);
 void rivulet_shutdown(magic_api * api);
 void rivulet_click(magic_api * api, int which, int mode,
-                     SDL_Surface * canvas, SDL_Surface * snapshot, int x,
-                     int y, SDL_Rect * update_rect);
+                   SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
 void rivulet_set_color(magic_api * api, int which, SDL_Surface * canvas,
                        SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 void rivulet_drag(magic_api * api, int which, SDL_Surface * canvas,
-                    SDL_Surface * snapshot, int ox, int oy, int x, int y,
-                    SDL_Rect * update_rect);
-void rivulet_line_callback_drag(void *ptr, int which, SDL_Surface * canvas,
-                                  SDL_Surface * snapshot, int x, int y);
+                  SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect);
+void rivulet_line_callback_drag(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
 void rivulet_release(magic_api * api, int which, SDL_Surface * canvas,
-                       SDL_Surface * snapshot, int x, int y,
-                       SDL_Rect * update_rect);
-void rivulet_switchin(magic_api * api, int which, int mode,
-                        SDL_Surface * canvas);
-void rivulet_switchout(magic_api * api, int which, int mode,
-                         SDL_Surface * canvas);
+                     SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
+void rivulet_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
+void rivulet_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void zero_riv_arrays(SDL_Surface * canvas);
 
 
@@ -82,8 +72,7 @@ int rivulet_init(magic_api * api)
 
   /* Load our images */
 
-  snprintf(fname, sizeof(fname), "%simages/magic/rivulet-brush-add.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/rivulet-brush-add.png", api->data_directory);
   rivulet_img_brush_add = IMG_Load(fname);
   if (rivulet_img_brush_add == NULL)
   {
@@ -91,8 +80,7 @@ int rivulet_init(magic_api * api)
     return 0;
   }
 
-  snprintf(fname, sizeof(fname), "%simages/magic/rivulet-brush-alpha.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/rivulet-brush-alpha.png", api->data_directory);
   rivulet_img_brush_alpha = IMG_Load(fname);
   if (rivulet_img_brush_alpha == NULL)
   {
@@ -100,8 +88,7 @@ int rivulet_init(magic_api * api)
     return 0;
   }
 
-  snprintf(fname, sizeof(fname), "%simages/magic/rivulet-brush-sub.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/rivulet-brush-sub.png", api->data_directory);
   rivulet_img_brush_sub = IMG_Load(fname);
   if (rivulet_img_brush_sub == NULL)
   {
@@ -109,8 +96,7 @@ int rivulet_init(magic_api * api)
     return 0;
   }
 
-  snprintf(fname, sizeof(fname), "%simages/magic/rivulet-angles.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/rivulet-angles.png", api->data_directory);
   rivulet_img_angles = IMG_Load(fname);
   if (rivulet_img_angles == NULL)
   {
@@ -131,39 +117,32 @@ SDL_Surface *rivulet_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/rivulet.png",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%simages/magic/rivulet.png", api->data_directory);
 
   return (IMG_Load(fname));
 }
 
-char *rivulet_get_name(magic_api * api ATTRIBUTE_UNUSED,
-                         int which ATTRIBUTE_UNUSED)
+char *rivulet_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext("Rivulet"));
 }
 
-int rivulet_get_group(magic_api * api ATTRIBUTE_UNUSED,
-                        int which ATTRIBUTE_UNUSED)
+int rivulet_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
 }
 
-char *rivulet_get_description(magic_api * api ATTRIBUTE_UNUSED,
-                                int which ATTRIBUTE_UNUSED,
-                                int mode ATTRIBUTE_UNUSED)
+char *rivulet_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return(gettext("Click and drag downward to add water rivulets to your drawing"));
+  return (gettext("Click and drag downward to add water rivulets to your drawing"));
 }
 
-int rivulet_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
-                              int which ATTRIBUTE_UNUSED)
+int rivulet_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-int rivulet_modes(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED)
+int rivulet_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MODE_PAINT;
 }
@@ -198,8 +177,7 @@ void rivulet_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 
 void
 rivulet_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-                SDL_Rect * update_rect)
+              SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
 {
   riv_x = x;
   riv_y = y - 1;
@@ -208,10 +186,10 @@ rivulet_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
     return;
 
   if (snd_effect != NULL)
-    {
-      api->stopsound();
-      api->playsound(snd_effect, (x * 255) / canvas->w, 255);
-    }
+  {
+    api->stopsound();
+    api->playsound(snd_effect, (x * 255) / canvas->w, 255);
+  }
 
   rivulet_drag(api, which, canvas, snapshot, x, y, x, y, update_rect);
 }
@@ -219,8 +197,8 @@ rivulet_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 
 void
 rivulet_drag(magic_api * api ATTRIBUTE_UNUSED, int which, SDL_Surface * canvas,
-               SDL_Surface * snapshot, int ox ATTRIBUTE_UNUSED,
-               int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+             SDL_Surface * snapshot, int ox ATTRIBUTE_UNUSED,
+             int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
 {
   int old_riv_x, old_riv_y;
 
@@ -243,8 +221,7 @@ rivulet_drag(magic_api * api ATTRIBUTE_UNUSED, int which, SDL_Surface * canvas,
   riv_x = x;
   riv_y = y;
 
-  api->line((void *) api, which, canvas, snapshot, old_riv_x, old_riv_y, riv_x, riv_y, 1,
-            rivulet_line_callback_drag);
+  api->line((void *)api, which, canvas, snapshot, old_riv_x, old_riv_y, riv_x, riv_y, 1, rivulet_line_callback_drag);
 
   /* FIXME */
   update_rect->x = 0;
@@ -254,11 +231,8 @@ rivulet_drag(magic_api * api ATTRIBUTE_UNUSED, int which, SDL_Surface * canvas,
 }
 
 
-void
-rivulet_release(magic_api * api, int which ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                  int x, int y, /* ignored and reused in a for-loop */
-                  SDL_Rect * update_rect)
+void rivulet_release(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y,  /* ignored and reused in a for-loop */
+                     SDL_Rect * update_rect)
 {
   int src_x, src_y, idx;
   double radius, angle_deg, angle_rad;
@@ -294,12 +268,13 @@ rivulet_release(magic_api * api, int which ATTRIBUTE_UNUSED,
       api->putpixel(canvas, x, y, SDL_MapRGB(canvas->format, v, 64, 64));
 #else
 
-      radius = ((double) riv_radii[idx]);
+      radius = ((double)riv_radii[idx]);
       alpha = riv_alpha[idx] / 2;
 
-      if (radius != 0.0) {
+      if (radius != 0.0)
+      {
         /* Angle is stored as 0-255 (so 256 would be 360 degrees) */
-        angle_deg = ((((double) riv_angles[idx]) / 256.0) * 360.0);
+        angle_deg = ((((double)riv_angles[idx]) / 256.0) * 360.0);
 
         angle_rad = (angle_deg * M_PI) / 180.0;
 
@@ -343,11 +318,9 @@ void rivulet_set_color(magic_api * api, int which, SDL_Surface * canvas,
 
 
 void rivulet_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
-                                  SDL_Surface * canvas,
-                                  SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                                  int x, int y)
+                                SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
-  magic_api * api;
+  magic_api *api;
   SDL_Rect dest;
   int w, h, half_w, half_h, idx;
   int src_x, src_y, dest_x, dest_y;
@@ -374,19 +347,23 @@ void rivulet_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
 
 
   /* Adjust the displacement maps */
-  for (src_y = 0; src_y <= h; src_y++) {
+  for (src_y = 0; src_y <= h; src_y++)
+  {
     dest_y = (y - half_h) + src_y;
-    if (dest_y >= 0 && dest_y < canvas->h) {
-      for (src_x = 0; src_x < w; src_x++) {
+    if (dest_y >= 0 && dest_y < canvas->h)
+    {
+      for (src_x = 0; src_x < w; src_x++)
+      {
         dest_x = (x - half_w) + src_x;
-        if (dest_x >= 0 && dest_x < canvas->w) {
+        if (dest_x >= 0 && dest_x < canvas->w)
+        {
           idx = (dest_y * canvas->w) + dest_x;
 
           /* Add alpha */
           pix = api->getpixel(rivulet_img_brush_alpha, src_x, src_y);
           SDL_GetRGB(pix, rivulet_img_brush_alpha->format, &intensity, &tmp, &tmp);
 
-          alpha = ((int) riv_alpha[idx] + (int) (intensity));
+          alpha = ((int)riv_alpha[idx] + (int)(intensity));
           if (alpha > 255)
             alpha = 255;
           riv_alpha[idx] = (Uint8) alpha;
@@ -394,17 +371,17 @@ void rivulet_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
 
           /* Apply radius brush to radius displacement map */
           if (alpha > 0)
-            {
-              pix = api->getpixel(rivulet_img_brush_add, src_x, src_y);
-              SDL_GetRGB(pix, rivulet_img_brush_add->format, &intensity, &tmp, &tmp);
+          {
+            pix = api->getpixel(rivulet_img_brush_add, src_x, src_y);
+            SDL_GetRGB(pix, rivulet_img_brush_add->format, &intensity, &tmp, &tmp);
 
-              radius = ((int) riv_radii[idx] + (int) intensity - 128);
-              if (radius < 0)
-                radius = 0;
-              if (radius > 255)
-                radius = 255;
-              riv_radii[idx] = radius;
-            }
+            radius = ((int)riv_radii[idx] + (int)intensity - 128);
+            if (radius < 0)
+              radius = 0;
+            if (radius > 255)
+              radius = 255;
+            riv_radii[idx] = radius;
+          }
 
 
           /* Apply angle brush to angle displacement map */
@@ -419,58 +396,54 @@ void rivulet_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 void rivulet_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas)
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
 {
   if (riv_radii == NULL)
+  {
+    riv_radii = (Uint8 *) malloc(sizeof(Uint8) * canvas->w * canvas->h);
+    if (riv_radii == NULL)
     {
-      riv_radii = (Uint8 *) malloc(sizeof(Uint8) * canvas->w * canvas->h);
-      if (riv_radii == NULL)
-        {
-          fprintf(stderr, "rivulet: Cannot malloc() riv_radii!\n");
-          return;
-        }
-
-      riv_alpha = (Uint8 *) malloc(sizeof(Uint8) * canvas->w * canvas->h);
-      if (riv_alpha == NULL)
-        {
-          free(riv_radii);
-          riv_radii = NULL;
-
-          fprintf(stderr, "rivulet: Cannot malloc() riv_alpha!\n");
-          return;
-        }
-
-      riv_angles = (Uint8 *) malloc(sizeof(Uint8) * canvas->w * canvas->h);
-      if (riv_angles == NULL)
-        {
-          free(riv_radii);
-          riv_radii = NULL;
-
-          free(riv_alpha);
-          riv_alpha = NULL;
-
-          fprintf(stderr, "rivulet: Cannot malloc() riv_angles!\n");
-          return;
-        }
+      fprintf(stderr, "rivulet: Cannot malloc() riv_radii!\n");
+      return;
     }
+
+    riv_alpha = (Uint8 *) malloc(sizeof(Uint8) * canvas->w * canvas->h);
+    if (riv_alpha == NULL)
+    {
+      free(riv_radii);
+      riv_radii = NULL;
+
+      fprintf(stderr, "rivulet: Cannot malloc() riv_alpha!\n");
+      return;
+    }
+
+    riv_angles = (Uint8 *) malloc(sizeof(Uint8) * canvas->w * canvas->h);
+    if (riv_angles == NULL)
+    {
+      free(riv_radii);
+      riv_radii = NULL;
+
+      free(riv_alpha);
+      riv_alpha = NULL;
+
+      fprintf(stderr, "rivulet: Cannot malloc() riv_angles!\n");
+      return;
+    }
+  }
 
   zero_riv_arrays(canvas);
 
   if (rivulet_snapshot == NULL)
     rivulet_snapshot = SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
-                         canvas->format->BitsPerPixel, canvas->format->Rmask,
-                         canvas->format->Gmask, canvas->format->Bmask,
-                         canvas->format->Amask);
+                                            canvas->format->BitsPerPixel, canvas->format->Rmask,
+                                            canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
   if (rivulet_snapshot != NULL)
     SDL_BlitSurface(canvas, NULL, rivulet_snapshot, NULL);
 }
 
 void rivulet_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                         int which ATTRIBUTE_UNUSED,
-                         int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
   zero_riv_arrays(canvas);
 }

@@ -1,5 +1,5 @@
-.\" tuxpaint.1 - 2023.04.02
-.TH TUXPAINT 1 "2023年4月 2日" "0.9.29" "Tux Paint"
+.\" tuxpaint.1 - 2023.05.09
+.TH TUXPAINT 1 "2023年5月 9日" "0.9.30" "Tux Paint"
 .SH NAME
 tuxpaint -- "Tux Paint", a drawing program for young children.
 
@@ -68,6 +68,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-nostamprotation]
 .br
 [\-\-nomagiccontrols]
+.br
+[\-\-nomagicsizes]
 .br
 [\-\-noshapecontrols]
 .br
@@ -216,6 +218,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-stamprotation]
 .br
 [\-\-magiccontrols]
+.br
+[\-\-magicsizes]
 .br
 [\-\-shapecontrols]
 .br
@@ -425,6 +429,11 @@ Disable or enable (default) buttons to control Magic tools.  Controls
 include controlling whether a Magic tool is used like a paint brush, or if
 it affects the entire image at once.  (Note: Not all Magic tools will be
 controllable.)
+
+.TP 8
+.B \-\-nomagicsizes \-\-magicsizes
+Disable or enable (default) Magic size controls.  (Note: Not all Magic
+tools offer size controls.)
 
 .TP 8
 .B \-\-noshapecontrols \-\-shapecontrols
@@ -1308,7 +1317,8 @@ https://tuxpaint.org/.
 .hy
 
 .SH AUTHORS
-Lead developer and project manager: Bill Kendrick.nh
+Lead developer and project manager: Bill Kendrick
+.nh
 <bill@newbreedsoftware.com>.
 .hy
 
@@ -1334,7 +1344,7 @@ Besnik Bleta,
 Denis Bodor,
 Rahul Borade,
 Yacine Bouklif,
-Miguel Bouzada,
+Miguel Anxo Bouzada,
 René Brandenburger,
 Herman Bruyninckx,
 Lucie Burianova,
@@ -1342,12 +1352,14 @@ Laurentiu Buzdugan,
 
 Albert Cahalan,
 Pere Pujal i Carabantes,
+Hugo Carvalho,
 Felipe Castro,
 Ouychai Chaita,
 Zdenek Chalupský,
 Wei-Lun Chao,
 Jacques Chion,
 Ankit Choudary,
+Yuri Chornoivan,
 Abdoul Cisse,
 Urska Colner,
 Adam 'akanewbie' Corcoran,
@@ -1510,6 +1522,7 @@ Sebastian Rasmussen,
 Robert Readman,
 Leandro Regueiro,
 Samir Ribić,
+Jozef Říha,
 Simona Riva,
 Robin Rosenberg,
 Ilir Rugova,
@@ -1557,9 +1570,9 @@ Darrell Walisser,
 Frank Weng,
 
 Damian Yerrick,
-yurchor,
 
 Muhammad Najmi Ahmad Zabidi,
+臧传明,
 Eugene Zelenko,
 Martin Zhekov,
 and

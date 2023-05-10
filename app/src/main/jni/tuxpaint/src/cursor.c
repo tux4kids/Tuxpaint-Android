@@ -34,8 +34,7 @@
 
 SDL_Cursor *cursor_hand, *cursor_arrow, *cursor_watch,
   *cursor_up, *cursor_down, *cursor_tiny, *cursor_crosshair,
-  *cursor_brush, *cursor_wand, *cursor_insertion, *cursor_rotate,
-  *cursor_pipette;
+  *cursor_brush, *cursor_wand, *cursor_insertion, *cursor_rotate, *cursor_pipette;
 
 #ifdef NOKIA_770
 int hide_cursor = 1;

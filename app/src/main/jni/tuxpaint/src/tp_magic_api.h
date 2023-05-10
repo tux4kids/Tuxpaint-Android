@@ -184,7 +184,7 @@ typedef struct magic_api_t {
    If Tux Paint deems you compatible, it will call your 'XYZ_init()' (etc.)
    and you will be active. */
 
-#define TP_MAGIC_API_VERSION 0x00000007
+#define TP_MAGIC_API_VERSION 0x00000008
 
 #ifndef ATTRIBUTE_UNUSED
 #define ATTRIBUTE_UNUSED __attribute__ ((__unused__))
@@ -200,6 +200,11 @@ enum {
   MAGIC_TYPE_PICTURE_DECORATIONS,
   MAGIC_TYPE_ARTISTIC
 };
+
+/* Magic-relevant Tux Paint features (which may be reported as disabled) */
+
+#define MAGIC_FEATURE_CONTROL 0x00000001
+#define MAGIC_FEATURE_SIZE 0x00000002
 
 #endif
 

@@ -1,11 +1,11 @@
                                    Tux Paint
-                                 version 0.9.29
+                                 version 0.9.30
                 Documentation sur les variables d'environnement
 
-        Copyright © 2021-2022 by divers contributeurs; see AUTHORS.txt.
+        Copyright © 2021-2023 by divers contributeurs; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                  juin 4, 2022
+                                  mai 5, 2023
 
      ----------------------------------------------------------------------
 
@@ -85,7 +85,7 @@ Variables d'environnement relatives aux langues
 Variables d'environnement en rapport avec l'affichage
 
    Ce qui suit donne quelques variables d'environnement supportées par Simple
-   DirectMedia Layer (libSD) — que Tux Paint utilise pour l'affichage des
+   DirectMedia Layer (libSDL) — que Tux Paint utilise pour l'affichage des
    dessins, pour jouer des sons et traiter les saisies de la souris, du
    clavier et du joystick — et qui peuvent être utiles aux utilisateurs de
    Tux Paint.
@@ -99,7 +99,9 @@ Variables d'environnement en rapport avec l'affichage
 
    SDL_VIDEO_WINDOW_POS
 
-           Indique où positionner la fenêtre de Tux Paint. Normalement
-           positionnée à "center" par Tux Paint lui-même, à moins que la
-           variable d'environnement n'ait déjà une valeur (par ex. "nopref"
-           signifie pas de préférence).
+           Requests where to position Tux Paint's window, and can be used to
+           specify what display to place a fullscreen Tux Paint in a
+           multi-monitor configuration. If not set, or set to "nopref"
+           (meaning "no preference"), Simple DirectMedia Layer (libSDL)
+           decides. Can be set to an X,Y coordinate (e.g. 200,100), or
+           "center" (meaning "center").

@@ -34,17 +34,14 @@
 int IsPrinterAvailable(void)
 {
   JNIEnv *mEnv = Android_JNI_GetEnv();
-  jclass mPrintHelperClass =
-    (*mEnv)->FindClass(mEnv, "androidx/print/PrintHelper");
+  jclass mPrintHelperClass = (*mEnv)->FindClass(mEnv, "androidx/print/PrintHelper");
 
   if (mPrintHelperClass == NULL)
     return 0;
 
-  jmethodID mSupportMethod =
-    (*mEnv)->GetStaticMethodID(mEnv, mPrintHelperClass, "systemSupportsPrint",
-                               "()Z");
-  jboolean support =
-    (*mEnv)->CallStaticBooleanMethod(mEnv, mPrintHelperClass, mSupportMethod);
+  jmethodID mSupportMethod = (*mEnv)->GetStaticMethodID(mEnv, mPrintHelperClass, "systemSupportsPrint",
+                                                        "()Z");
+  jboolean support = (*mEnv)->CallStaticBooleanMethod(mEnv, mPrintHelperClass, mSupportMethod);
 
   return support ? 1 : 0;
 }
@@ -56,49 +53,41 @@ const char *SurfacePrint(SDL_Surface * surface)
 {
   JNIEnv *mEnv = Android_JNI_GetEnv();
   jclass mBitmapClass = (*mEnv)->FindClass(mEnv, "android/graphics/Bitmap");
-  jmethodID mCreateMethod =
-    (*mEnv)->GetStaticMethodID(mEnv, mBitmapClass, "createBitmap",
-                               "([IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;");
-  jintArray mSurfaceArray =
-    (*mEnv)->NewIntArray(mEnv, surface->w * surface->h);
-  (*mEnv)->SetIntArrayRegion(mEnv, mSurfaceArray, 0, surface->w * surface->h,
-                             surface->pixels);
-  jclass mConfigClass =
-    (*mEnv)->FindClass(mEnv, "android/graphics/Bitmap$Config");
-  jfieldID mConfigField =
-    (*mEnv)->GetStaticFieldID(mEnv, mConfigClass, "ARGB_8888",
-                              "Landroid/graphics/Bitmap$Config;");
-  jobject mConfig =
-    (*mEnv)->GetStaticObjectField(mEnv, mConfigClass, mConfigField);
-  jobject mBitMap =
-    (*mEnv)->CallStaticObjectMethod(mEnv, mBitmapClass, mCreateMethod,
-                                    mSurfaceArray, surface->w, surface->h,
-                                    mConfig);
+  jmethodID mCreateMethod = (*mEnv)->GetStaticMethodID(mEnv, mBitmapClass, "createBitmap",
+                                                       "([IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;");
+  jintArray mSurfaceArray = (*mEnv)->NewIntArray(mEnv, surface->w * surface->h);
+
+  (*mEnv)->SetIntArrayRegion(mEnv, mSurfaceArray, 0, surface->w * surface->h, surface->pixels);
+  jclass mConfigClass = (*mEnv)->FindClass(mEnv, "android/graphics/Bitmap$Config");
+  jfieldID mConfigField = (*mEnv)->GetStaticFieldID(mEnv, mConfigClass, "ARGB_8888",
+                                                    "Landroid/graphics/Bitmap$Config;");
+  jobject mConfig = (*mEnv)->GetStaticObjectField(mEnv, mConfigClass, mConfigField);
+  jobject mBitMap = (*mEnv)->CallStaticObjectMethod(mEnv, mBitmapClass, mCreateMethod,
+                                                    mSurfaceArray, surface->w, surface->h,
+                                                    mConfig);
 
   jobject mContext = (jobject) SDL_AndroidGetActivity();
   jclass mPrintClass = (*mEnv)->FindClass(mEnv, "androidx/print/PrintHelper");
+
   // sometimes android v4 support library may be not ready
   if (mPrintClass == NULL)
     return "There is no androidX support library.";
   jmethodID mInitMethod = (*mEnv)->GetMethodID(mEnv, mPrintClass, "<init>",
                                                "(Landroid/content/Context;)V");
-  jobject mPrint =
-    (*mEnv)->NewObject(mEnv, mPrintClass, mInitMethod, mContext);
-  jmethodID mPrintMethod =
-    (*mEnv)->GetMethodID(mEnv, mPrintClass, "printBitmap",
-                         "(Ljava/lang/String;Landroid/graphics/Bitmap;)V");
+  jobject mPrint = (*mEnv)->NewObject(mEnv, mPrintClass, mInitMethod, mContext);
+  jmethodID mPrintMethod = (*mEnv)->GetMethodID(mEnv, mPrintClass, "printBitmap",
+                                                "(Ljava/lang/String;Landroid/graphics/Bitmap;)V");
 
   /* Thanks to n.collins for the explaination on the int signature
      on https://stackoverflow.com/questions/13468041/android-how-to-call-java-method-from-jni-with-int-and-int-parameters  --Pere */
-  jmethodID msetScaleMode =
-    (*mEnv)->GetMethodID(mEnv, mPrintClass, "setScaleMode", "(I)V");
-  jfieldID mScaleModeField =
-    (*mEnv)->GetStaticFieldID(mEnv, mPrintClass, "SCALE_MODE_FIT", "I");
-  jint mScaleModeInt =
-    (*mEnv)->GetStaticIntField(mEnv, mPrintClass, mScaleModeField);
+  jmethodID msetScaleMode = (*mEnv)->GetMethodID(mEnv, mPrintClass, "setScaleMode", "(I)V");
+  jfieldID mScaleModeField = (*mEnv)->GetStaticFieldID(mEnv, mPrintClass, "SCALE_MODE_FIT", "I");
+  jint mScaleModeInt = (*mEnv)->GetStaticIntField(mEnv, mPrintClass, mScaleModeField);
+
   (*mEnv)->CallVoidMethod(mEnv, mPrint, msetScaleMode, mScaleModeInt);
 
   jstring mString = (*mEnv)->NewStringUTF(mEnv, "TuxPaint");
+
   (*mEnv)->CallVoidMethod(mEnv, mPrint, mPrintMethod, mString, mBitMap);
 
   // clean up

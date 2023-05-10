@@ -59,12 +59,9 @@ const char *const fill_names[NUM_FILLS] = {
 const char *const fill_tips[NUM_FILLS] = {
   gettext_noop("Click to fill an area with a solid color."),
   gettext_noop("Click and drag to fill an area by hand, using a brush."),
-  gettext_noop
-    ("Click and drag to fill an area with a linear gradient (from the chosen color to transparent)."),
-  gettext_noop
-    ("Click to fill an area with a radial gradient (from the chosen color to transparent)."),
-  gettext_noop
-    ("Click to fill an area with a shaped gradient (from the chosen color to transparent).")
+  gettext_noop("Click and drag to fill an area with a linear gradient (from the chosen color to transparent)."),
+  gettext_noop("Click to fill an area with a radial gradient (from the chosen color to transparent)."),
+  gettext_noop("Click to fill an area with a shaped gradient (from the chosen color to transparent).")
 };
 
 const char *const fill_img_fnames[NUM_FILLS] = {

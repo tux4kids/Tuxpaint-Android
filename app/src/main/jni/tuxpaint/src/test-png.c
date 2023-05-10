@@ -57,9 +57,7 @@ int main(int argc, char *argv[])
   /* Open each PNG image!... */
   for (i = 1; i < argc; i++)
   {
-    printf
-      ("%5d ------------------------------------------------------------------\n",
-       i);
+    printf("%5d ------------------------------------------------------------------\n", i);
     printf("%s\n", argv[i]);
     fflush(stdout);
 
@@ -134,8 +132,7 @@ int main(int argc, char *argv[])
       }
 
       /* Fill alpha channel if there is none */
-      if (ctype == PNG_COLOR_TYPE_RGB ||
-          ctype == PNG_COLOR_TYPE_GRAY || ctype == PNG_COLOR_TYPE_PALETTE)
+      if (ctype == PNG_COLOR_TYPE_RGB || ctype == PNG_COLOR_TYPE_GRAY || ctype == PNG_COLOR_TYPE_PALETTE)
       {
         png_set_filler(png, 0xFF, PNG_FILLER_AFTER);
       }
@@ -163,8 +160,7 @@ int main(int argc, char *argv[])
         rows[y] = (png_byte *) malloc(png_get_rowbytes(png, info));
         if (!rows[y])
         {
-          fprintf(stderr,
-                  "Failed to malloc() space for image data row #%d!\n", y);
+          fprintf(stderr, "Failed to malloc() space for image data row #%d!\n", y);
           exit(1);
         }
       }

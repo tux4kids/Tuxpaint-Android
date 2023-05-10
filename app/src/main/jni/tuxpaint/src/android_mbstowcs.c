@@ -33,6 +33,7 @@
 size_t mbstowcs(wchar_t *__restrict pwcs, const char *__restrict s, size_t n)
 {
   int length = strnlen(s, n);
+
   // w is the index of pwcs, s is the index of s
   int w = 0, c = 0;
 
@@ -41,9 +42,10 @@ size_t mbstowcs(wchar_t *__restrict pwcs, const char *__restrict s, size_t n)
     pwcs[w] = '\0';
     char first = s[c];
     int len = 0;
+
     if ((first & 0x80) == 0)
     {
-      pwcs[w] = (wchar_t) s[c];
+      pwcs[w] = (wchar_t)s[c];
       len = 1;
     }
     else if ((first & 0xe0) == 0xc0)

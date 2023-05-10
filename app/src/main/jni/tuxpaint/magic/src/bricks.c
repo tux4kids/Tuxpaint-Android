@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 12, 2023
+  Last updated: April 19, 2023
 */
 
 #include <stdio.h>
@@ -49,13 +49,14 @@ enum
 
 static Mix_Chunk *brick_snd;
 static Uint8 bricks_r, bricks_g, bricks_b;
+static int brick_two_tools = 0;
+static int brick_size = TOOL_LARGEBRICKS;
 
 
 /* Local function prototype: */
 
-static void do_brick(magic_api * api, SDL_Surface * canvas, int x, int y,
-                     int w, int h);
-int bricks_init(magic_api * api);
+static void do_brick(magic_api * api, SDL_Surface * canvas, int x, int y, int w, int h);
+int bricks_init(magic_api * api, Uint32 disabled_features);
 Uint32 bricks_api_version(void);
 int bricks_get_tool_count(magic_api * api);
 SDL_Surface *bricks_get_icon(magic_api * api, int which);
@@ -63,8 +64,7 @@ char *bricks_get_name(magic_api * api, int which);
 int bricks_get_group(magic_api * api, int which);
 char *bricks_get_description(magic_api * api, int which, int mode);
 void bricks_drag(magic_api * api, int which, SDL_Surface * canvas,
-                 SDL_Surface * last, int ox, int oy, int x, int y,
-                 SDL_Rect * update_rect);
+                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 void bricks_click(magic_api * api, int which, int mode, SDL_Surface * canvas,
                   SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 void bricks_release(magic_api * api, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);        //An empty function. Is there a purpose to this? Ask moderator.
@@ -72,20 +72,26 @@ void bricks_shutdown(magic_api * api);
 void bricks_set_color(magic_api * api, int which, SDL_Surface * canvas,
                       SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 int bricks_requires_colors(magic_api * api, int which);
-void bricks_switchin(magic_api * api, int which, int mode,
-                     SDL_Surface * canvas);
-void bricks_switchout(magic_api * api, int which, int mode,
-                      SDL_Surface * canvas);
+void bricks_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
+void bricks_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int bricks_modes(magic_api * api, int which);
+Uint8 bricks_accepted_sizes(magic_api * api, int which, int mode);
+Uint8 bricks_default_size(magic_api * api, int which, int mode);
+void bricks_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
+                     SDL_Rect * update_rect);
 
 // No setup required:
-int bricks_init(magic_api * api)
+int bricks_init(magic_api * api, Uint32 disabled_features)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/brick.wav",
-           api->data_directory);
+  snprintf(fname, sizeof(fname), "%ssounds/magic/brick.wav", api->data_directory);
   brick_snd = Mix_LoadWAV(fname);
+
+  if (disabled_features & MAGIC_FEATURE_SIZE)
+    brick_two_tools = 1;
+  else
+    brick_two_tools = 0;
 
   return (1);
 }
@@ -98,7 +104,10 @@ Uint32 bricks_api_version(void)
 // We have multiple tools:
 int bricks_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
 {
-  return (NUM_TOOLS);
+  if (brick_two_tools)
+    return (NUM_TOOLS);
+  else
+    return 1;
 }
 
 // Load our icons:
@@ -108,21 +117,18 @@ SDL_Surface *bricks_get_icon(magic_api * api, int which)
 
   if (which == TOOL_LARGEBRICKS)
   {
-    snprintf(fname, sizeof(fname), "%simages/magic/largebrick.png",
-             api->data_directory);
+    snprintf(fname, sizeof(fname), "%simages/magic/largebrick.png", api->data_directory);
   }
   else if (which == TOOL_SMALLBRICKS)
   {
-    snprintf(fname, sizeof(fname), "%simages/magic/smallbrick.png",
-             api->data_directory);
+    snprintf(fname, sizeof(fname), "%simages/magic/smallbrick.png", api->data_directory);
   }
 
   return (IMG_Load(fname));
 }
 
 // Return our names, localized:
-char *bricks_get_name(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED)
+char *bricks_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   /* Both are named "Bricks", at the moment: */
 
@@ -130,28 +136,32 @@ char *bricks_get_name(magic_api * api ATTRIBUTE_UNUSED,
 }
 
 // Return our group (both the same):
-int bricks_get_group(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED)
+int bricks_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
 
 // Return our descriptions, localized:
-char *bricks_get_description(magic_api * api ATTRIBUTE_UNUSED, int which,
-                             int mode ATTRIBUTE_UNUSED)
+char *bricks_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
-  if (which == TOOL_LARGEBRICKS)
-    return (strdup(gettext_noop("Click and drag to draw large bricks.")));
-  else if (which == TOOL_SMALLBRICKS)
-    return (strdup(gettext_noop("Click and drag to draw small bricks.")));
+  if (brick_two_tools)
+  {
+    if (which == TOOL_LARGEBRICKS)
+      return (strdup(gettext_noop("Click and drag to draw large bricks.")));
+    else if (which == TOOL_SMALLBRICKS)
+      return (strdup(gettext_noop("Click and drag to draw small bricks.")));
+  }
+  else
+  {
+    return (strdup(gettext_noop("Click and drag to draw bricks.")));
+  }
 
   return (NULL);
 }
 
 // Do the effect:
 
-static void do_bricks(void *ptr, int which, SDL_Surface * canvas,
-                      SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+static void do_bricks(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -170,7 +180,7 @@ static void do_bricks(void *ptr, int which, SDL_Surface * canvas,
   static int y_count;
   unsigned char *mybrick;
 
-  if (which == TOOL_LARGEBRICKS)
+  if ((brick_two_tools && which == TOOL_LARGEBRICKS) || (brick_two_tools == 0 && brick_size == TOOL_LARGEBRICKS))
   {
     vertical_joint = 4;         // between a brick and the one above/below
     horizontal_joint = 4;       // between a brick and the one to the side
@@ -198,8 +208,7 @@ static void do_bricks(void *ptr, int which, SDL_Surface * canvas,
 
   mybrick = map + brick_x + 1 + (brick_y + 1) * x_count;
 
-  if ((unsigned) x < (unsigned) canvas->w
-      && (unsigned) y < (unsigned) canvas->h && !*mybrick)
+  if ((unsigned)x < (unsigned)canvas->w && (unsigned)y < (unsigned)canvas->h && !*mybrick)
   {
     int my_x = brick_x * nominal_width;
     int my_w = specified_width;
@@ -220,8 +229,7 @@ static void do_bricks(void *ptr, int which, SDL_Surface * canvas,
       my_x -= nominal_width;
       my_w = specified_length;
     }
-    do_brick(api, canvas, my_x, brick_y * nominal_height, my_w,
-             specified_height);
+    do_brick(api, canvas, my_x, brick_y * nominal_height, my_w, specified_height);
 
 
     // FIXME:
@@ -241,10 +249,9 @@ static void do_bricks(void *ptr, int which, SDL_Surface * canvas,
 
 // Affect the canvas on drag:
 void bricks_drag(magic_api * api, int which, SDL_Surface * canvas,
-                 SDL_Surface * last, int ox, int oy, int x, int y,
-                 SDL_Rect * update_rect)
+                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
 {
-  api->line((void *) api, which, canvas, last, ox, oy, x, y, 1, do_bricks);
+  api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_bricks);
 
   if (ox > x)
   {
@@ -273,8 +280,7 @@ void bricks_drag(magic_api * api, int which, SDL_Surface * canvas,
 
 // Affect the canvas on click:
 void bricks_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * last, int x, int y,
-                  SDL_Rect * update_rect)
+                  SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
   bricks_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
@@ -283,8 +289,7 @@ void bricks_release(magic_api * api ATTRIBUTE_UNUSED,
                     int which ATTRIBUTE_UNUSED,
                     SDL_Surface * canvas ATTRIBUTE_UNUSED,
                     SDL_Surface * last ATTRIBUTE_UNUSED,
-                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED,
-                    SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -296,8 +301,9 @@ void bricks_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void bricks_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                      SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void bricks_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                      Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   bricks_r = r;
   bricks_g = g;
@@ -305,29 +311,21 @@ void bricks_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
 }
 
 // Use colors:
-int bricks_requires_colors(magic_api * api ATTRIBUTE_UNUSED,
-                           int which ATTRIBUTE_UNUSED)
+int bricks_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-static void do_brick(magic_api * api, SDL_Surface * canvas, int x, int y,
-                     int w, int h)
+static void do_brick(magic_api * api, SDL_Surface * canvas, int x, int y, int w, int h)
 {
   SDL_Rect dest;
 
   // brick color: 127,76,73
-  double ran_r = rand() / (double) RAND_MAX;
-  double ran_g = rand() / (double) RAND_MAX;
-  double base_r =
-    api->sRGB_to_linear(bricks_r) * 1.5 + api->sRGB_to_linear(127) * 5.0 +
-    ran_r;
-  double base_g =
-    api->sRGB_to_linear(bricks_g) * 1.5 + api->sRGB_to_linear(76) * 5.0 +
-    ran_g;
-  double base_b =
-    api->sRGB_to_linear(bricks_b) * 1.5 + api->sRGB_to_linear(73) * 5.0 +
-    (ran_r + ran_g * 2.0) / 3.0;
+  double ran_r = rand() / (double)RAND_MAX;
+  double ran_g = rand() / (double)RAND_MAX;
+  double base_r = api->sRGB_to_linear(bricks_r) * 1.5 + api->sRGB_to_linear(127) * 5.0 + ran_r;
+  double base_g = api->sRGB_to_linear(bricks_g) * 1.5 + api->sRGB_to_linear(76) * 5.0 + ran_g;
+  double base_b = api->sRGB_to_linear(bricks_b) * 1.5 + api->sRGB_to_linear(73) * 5.0 + (ran_r + ran_g * 2.0) / 3.0;
 
   Uint8 r = api->linear_to_sRGB(base_r / 7.5);
   Uint8 g = api->linear_to_sRGB(base_g / 7.5);
@@ -348,18 +346,41 @@ static void do_brick(magic_api * api, SDL_Surface * canvas, int x, int y,
 }
 
 void bricks_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 void bricks_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 int bricks_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
+}
+
+
+Uint8 bricks_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+{
+  return 2;
+}
+
+Uint8 bricks_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+{
+  return 2;
+}
+
+void bricks_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
+                     SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+{
+  if (size == 1)
+  {
+    brick_size = TOOL_SMALLBRICKS;
+  }
+  else
+  {                             // 2
+    brick_size = TOOL_LARGEBRICKS;
+  }
 }

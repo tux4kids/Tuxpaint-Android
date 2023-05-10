@@ -1,7 +1,7 @@
 /*
   fonts.c
 
-  Copyright (c) 2009-2022
+  Copyright (c) 2009-2023
   https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last modified: December 11, 2022
+  Last modified: April 30, 2023
 */
 
 #include <stdio.h>
@@ -119,8 +119,6 @@ static const char *problemFontExtensions[] = {
 SDL_Thread *font_thread;
 #endif
 
-#ifndef NO_SDLPANGO
-
 #include "SDL2_Pango.h"
 #if !defined(SDL_PANGO_H)
 #error "---------------------------------------------------"
@@ -128,8 +126,6 @@ SDL_Thread *font_thread;
 #error "to get the development package, as well!"
 #error "(e.g., 'libsdl-pango1-dev.rpm')"
 #error "---------------------------------------------------"
-#endif
-
 #endif
 
 
@@ -142,6 +138,7 @@ int all_locale_fonts;
 volatile long font_thread_done;
 volatile long font_thread_aborted;
 volatile long waiting_for_fonts;
+
 #ifdef FORKED_FONTS
 static int font_scanner_pid;
 #endif
@@ -167,63 +164,16 @@ static void reliable_read(int fd, void *buf, size_t count);
 #endif
 
 
-#ifdef NO_SDLPANGO
-TuxPaint_Font *load_locale_font(TuxPaint_Font * fallback, int size)
-{
-  TuxPaint_Font *ret = NULL;
-
-  if (!need_own_font)
-  {
-    return fallback;
-  }
-  else
-  {
-    char str[128];
-
-    snprintf(str, sizeof(str), "%sfonts/locale/%s.ttf", DATA_PREFIX,
-             lang_prefix);
-
-    ret = TuxPaint_Font_OpenFont("", str, size);
-
-#ifdef __APPLE__
-    if (!ret)
-    {
-      snprintf(str, sizeof(str), "%sfonts/%s.ttf", DATA_PREFIX, lang_prefix);
-      ret = TuxPaint_Font_OpenFont("", str, size);
-    }
-
-    if (!ret)
-    {
-      snprintf(str, sizeof(str), "/Library/Fonts/%s.ttf", lang_prefix);
-      ret = TuxPaint_Font_OpenFont("", str, size);
-    }
-
-    if (!ret)
-    {
-      snprintf(str, sizeof(str), "%s/%s.ttf", apple_fontsPath(), lang_prefix);
-      ret = TuxPaint_Font_OpenFont("", str, size);
-    }
-#endif
-
-    return ret ? ret : fallback;
-  }
-}
-#endif // ifdef NO_SDLPANGO
-
-
 void TuxPaint_Font_CloseFont(TuxPaint_Font * tpf)
 {
 #ifdef DEBUG
-  printf("%s:%d - TuxPaint_Font_CloseFont step 1 (%p)\n", __FILE__, __LINE__,
-         tpf);
+  printf("%s:%d - TuxPaint_Font_CloseFont step 1 (%p)\n", __FILE__, __LINE__, tpf);
 #endif
   if (!tpf)
     return;
 
-#ifndef NO_SDLPANGO
 #ifdef DEBUG
-  printf("%s:%d - TuxPaint_Font_CloseFont step 2 (%p, %d)\n", __FILE__,
-         __LINE__, tpf->pango_context, tpf->typ);
+  printf("%s:%d - TuxPaint_Font_CloseFont step 2 (%p, %d)\n", __FILE__, __LINE__, tpf->pango_context, tpf->typ);
 #endif
   if (tpf->typ == FONT_TYPE_PANGO)
     if (tpf->pango_context)
@@ -233,11 +183,9 @@ void TuxPaint_Font_CloseFont(TuxPaint_Font * tpf)
 #endif
       tpf->pango_context = NULL;
     }
-#endif
 
 #ifdef DEBUG
-  printf("%s:%d - TuxPaint_Font_CloseFont step 3 (%p, %d)\n", __FILE__,
-         __LINE__, tpf->ttf_font, tpf->typ);
+  printf("%s:%d - TuxPaint_Font_CloseFont step 3 (%p, %d)\n", __FILE__, __LINE__, tpf->ttf_font, tpf->typ);
   fflush(stdout);
 #endif
   if (tpf->typ == FONT_TYPE_TTF)
@@ -256,24 +204,18 @@ void TuxPaint_Font_CloseFont(TuxPaint_Font * tpf)
   free(tpf);
 }
 
-TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
-                                      const char *ttffilename, int size)
+TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc, const char *ttffilename, int size)
 {
   TTF_Font *ttf_font;
   TuxPaint_Font *tpf = NULL;
   char *familyname;
   int i;
-
-#ifndef NO_SDLPANGO
   char desc[1024];
-#endif
 
 #ifdef DEBUG
-  printf("%s:%d - OpenFont(pango:\"%s\", ttf:\"%s\")\n", __FILE__, __LINE__,
-         pangodesc, ttffilename);
+  printf("%s:%d - OpenFont(pango:\"%s\", ttf:\"%s\")\n", __FILE__, __LINE__, pangodesc, ttffilename);
 #endif
 
-#ifndef NO_SDLPANGO
   if (pangodesc != NULL && pangodesc[0] != '\0')
   {
     tpf = (TuxPaint_Font *) malloc(sizeof(TuxPaint_Font));
@@ -282,16 +224,15 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
     tpf->desc = strdup(desc);
 
 #ifdef DEBUG
-    printf("%s:%d - Creating Pango context: \"%s\"\n", __FILE__, __LINE__,
-           desc);
+    printf("%s:%d - Creating Pango context: \"%s\"\n", __FILE__, __LINE__, desc);
 #endif
 
 #ifdef __APPLE__
     /*
-    * SDLPango_CreateContext_GivenFontDesc() defaults to ASCII character set
-    * (at least on the macOS) unless the CHARSET environment varaible is set.
-    * May also want to set on non-macOS platforms, also.
-    */
+     * SDLPango_CreateContext_GivenFontDesc() defaults to ASCII character set
+     * (at least on the macOS) unless the CHARSET environment varaible is set.
+     * May also want to set on non-macOS platforms, also.
+     */
 
     mysetenv("CHARSET", "UTF-8");
 #endif
@@ -317,7 +258,6 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
 
     return (tpf);
   }
-#endif // #ifndef NO_SDLPANGO
 
 
   /* -- Did not, at this point, load the font using SDL_Pango -- */
@@ -325,8 +265,7 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
   if (ttffilename != NULL && ttffilename[0] != '\0')
   {
 #ifdef DEBUG
-    printf("%s:%d - Considering loading TTF \"%s\"\n", __FILE__, __LINE__,
-           ttffilename);
+    printf("%s:%d - Considering loading TTF \"%s\"\n", __FILE__, __LINE__, ttffilename);
     fflush(stdout);
 #endif
 
@@ -336,8 +275,7 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
       if (!strcmp(ttffilename, problemFonts[i++]))
       {
 #ifdef DEBUG
-        fprintf(stderr, "Notice: Skipping problematic font: \"%s\"\n",
-                ttffilename);
+        fprintf(stderr, "Notice: Skipping problematic font: \"%s\"\n", ttffilename);
 #endif
         return NULL;            /* bail on known problematic fonts that cause TTF_OpenFont to crash */
       }
@@ -349,9 +287,7 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
       if (strstr(ttffilename, problemFontExtensions[i++]))
       {
 #ifdef DEBUG
-        fprintf(stderr,
-                "Notice: Skipping font with problematic extension: \"%s\"\n",
-                ttffilename);
+        fprintf(stderr, "Notice: Skipping font with problematic extension: \"%s\"\n", ttffilename);
 #endif
         return NULL;            /* bail on known problematic font types that cause TTF_OpenFont to crash */
       }
@@ -361,13 +297,12 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
 
     if (ttf_font == NULL)
     {
-      fprintf(stderr, "Cannot open TTF font '%s' (size %d)\n", ttffilename,
-              size);
+      fprintf(stderr, "Cannot open TTF font '%s' (size %d)\n", ttffilename, size);
       return NULL;
     }
 
     familyname = TTF_FontFaceFamilyName(ttf_font);      /* N.B.: I don't believe we're supposed to free() this... -bjk 2021.10.26 */
-    (void) familyname;          // avoid compiler complaints if NO_SDLPANGO is set, or ALWAYS_LOAD_FONT_WITH_PANGO is not set, and DEBUG is not set
+    (void)familyname;           // avoid compiler complaints if ALWAYS_LOAD_FONT_WITH_PANGO is not set, and DEBUG is not set
 
 #ifdef DEBUG
     printf("%s:%d - Loaded %s (\"%s\")\n", __FILE__, __LINE__, ttffilename,
@@ -378,7 +313,6 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
 
 /* This is currently disabled, as it is under construction (and may be moot under SDL2) -bjk 2021.10.28 */
 #ifdef ALWAYS_LOAD_FONT_WITH_PANGO
-#ifndef NO_SDLPANGO
     /* -- Try loading the font with Pango, instead! */
     tpf = TuxPaint_Font_OpenFont(familyname, "", size);
     if (tpf != NULL)
@@ -394,7 +328,6 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
       TTF_CloseFont(ttf_font);
       return (tpf);
     }
-#endif // #ifndef NO_SDLPANGO
 #endif
 
 
@@ -406,8 +339,7 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc,
     tpf->desc = strdup(ttffilename);
 
 #ifdef DEBUG
-    printf("%s:%d - Succeeded loading %s via SDL_ttf\n", __FILE__, __LINE__,
-           ttffilename);
+    printf("%s:%d - Succeeded loading %s via SDL_ttf\n", __FILE__, __LINE__, ttffilename);
 #endif
     tpf->height = TTF_FontHeight(tpf->ttf_font);
 
@@ -614,9 +546,7 @@ static void groupfonts_range(style_info ** base, int count)
   if (num_font_families == num_font_families_max)
   {
     num_font_families_max = num_font_families_max * 5 / 4 + 30;
-    user_font_families =
-      realloc(user_font_families,
-              num_font_families_max * sizeof *user_font_families);
+    user_font_families = realloc(user_font_families, num_font_families_max * sizeof *user_font_families);
   }
 
   fi = calloc(1, sizeof *fi);
@@ -633,8 +563,7 @@ static void groupfonts_range(style_info ** base, int count)
     {
 #if 0
 // THREADED_FONTS
-      printf("too many boldness levels, discarding: %s, %s\n",
-             base[i]->family, base[i]->style);
+      printf("too many boldness levels, discarding: %s, %s\n", base[i]->family, base[i]->style);
 #endif
       continue;
     }
@@ -644,11 +573,9 @@ static void groupfonts_range(style_info ** base, int count)
     {
 #if 0
 // THREADED_FONTS
-      printf("duplicates, discarding: %s, %s\n", base[i]->family,
-             base[i]->style);
+      printf("duplicates, discarding: %s, %s\n", base[i]->family, base[i]->style);
       printf("b %d, spot %d\n", b, spot);
-      printf("occupancy %p %p %p %p\n", fi->filename[0], fi->filename[1],
-             fi->filename[2], fi->filename[3]);
+      printf("occupancy %p %p %p %p\n", fi->filename[0], fi->filename[1], fi->filename[2], fi->filename[3]);
 #endif
       continue;
     }
@@ -872,8 +799,7 @@ static void parse_font_style(style_info * si)
     si->boldness = 1;
 
   // we'll count both TrueType and OpenType
-  si->truetype = !!strcasestr(si->filename, ".ttf")
-    || !!strcasestr(si->filename, ".otf");
+  si->truetype = !!strcasestr(si->filename, ".ttf") || !!strcasestr(si->filename, ".otf");
 }
 
 
@@ -911,8 +837,7 @@ static void groupfonts(void)
   while (i--)
     parse_font_style(user_font_styles[i]);
 
-  qsort(user_font_styles, num_font_styles, sizeof user_font_styles[0],
-        compar_fontgroup);
+  qsort(user_font_styles, num_font_styles, sizeof user_font_styles[0], compar_fontgroup);
   //printf("groupfonts() qsort(user_font_styles...)\n");
   //fflush(stdout);
 
@@ -945,8 +870,7 @@ static void groupfonts(void)
   free(user_font_styles);
   user_font_styles = NULL;      // just to catch bugs
 
-  qsort(user_font_families, num_font_families, sizeof user_font_families[0],
-        compar_fontkiller);
+  qsort(user_font_families, num_font_families, sizeof user_font_families[0], compar_fontkiller);
   low = 0;
   for (;;)
   {
@@ -958,15 +882,13 @@ static void groupfonts(void)
     {
       if (++high >= num_font_families)
         break;
-      if (strcmp
-          (user_font_families[low]->family, user_font_families[high]->family))
+      if (strcmp(user_font_families[low]->family, user_font_families[high]->family))
         break;
     }
     dupe_markdown_range(user_font_families + low, high - low);
     low = high;
   }
-  qsort(user_font_families, num_font_families, sizeof user_font_families[0],
-        compar_fontscore);
+  qsort(user_font_families, num_font_families, sizeof user_font_families[0], compar_fontscore);
   //printf("groupfonts() qsort(user_font_families 2...)\n");
   //fflush(stdout);
   if (num_font_families > 0 && user_font_families[0]->score < 0)
@@ -975,8 +897,7 @@ static void groupfonts(void)
 // THREADED_FONTS
   printf("Trim starting with %d families\n", num_font_families);
 #endif
-  while (num_font_families > 1
-         && user_font_families[num_font_families - 1]->score < 0)
+  while (num_font_families > 1 && user_font_families[num_font_families - 1]->score < 0)
   {
     i = --num_font_families;
     free(user_font_families[i]->directory);
@@ -1002,9 +923,7 @@ static void groupfonts(void)
 
 static void loadfonts_locale_filter(SDL_Surface * screen,
                                     SDL_Texture * texture,
-                                    SDL_Renderer * renderer,
-                                    const char *const dir,
-                                    const char *restrict const locale)
+                                    SDL_Renderer * renderer, const char *const dir, const char *restrict const locale)
 {
   char buf[TP_FTW_PATHSIZE];
   unsigned dirlen = strlen(dir);
@@ -1012,27 +931,23 @@ static void loadfonts_locale_filter(SDL_Surface * screen,
   DEBUG_PRINTF("Loading fonts from [%s]\n", dir);
 
   memcpy(buf, dir, dirlen);
-  tp_ftw(screen, texture, renderer, buf, dirlen, 1, loadfont_callback,
-         locale);
+  tp_ftw(screen, texture, renderer, buf, dirlen, 1, loadfont_callback, locale);
 }
 
-static void loadfonts(SDL_Surface * screen, SDL_Texture * texture,
-                      SDL_Renderer * renderer, const char *const dir)
+static void loadfonts(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, const char *const dir)
 {
   loadfonts_locale_filter(screen, texture, renderer, dir, NULL);
 }
 
 
 /* static */ int load_user_fonts(SDL_Surface * screen, SDL_Texture * texture,
-                                 SDL_Renderer * renderer, void *vp,
-                                 const char *restrict const locale)
+                                 SDL_Renderer * renderer, void *vp, const char *restrict const locale)
 {
   char *homedirdir;
 
-  (void) vp;                    // junk passed by threading library
+  (void)vp;                     // junk passed by threading library
 
-  loadfonts_locale_filter(screen, texture, renderer, DATA_PREFIX "fonts",
-                          locale);
+  loadfonts_locale_filter(screen, texture, renderer, DATA_PREFIX "fonts", locale);
 
   if (!no_system_fonts)
   {
@@ -1049,21 +964,13 @@ static void loadfonts(SDL_Surface * screen, SDL_Texture * texture,
     char buffer[B_PATH_NAME_LENGTH + B_FILE_NAME_LENGTH];
     status_t result;
 
-    result =
-      find_directory(B_SYSTEM_FONTS_DIRECTORY, volume, false, buffer,
-                     sizeof(buffer));
+    result = find_directory(B_SYSTEM_FONTS_DIRECTORY, volume, false, buffer, sizeof(buffer));
     loadfonts(screen, texture, renderer, buffer);
-    result =
-      find_directory(B_SYSTEM_NONPACKAGED_FONTS_DIRECTORY, volume, false,
-                     buffer, sizeof(buffer));
+    result = find_directory(B_SYSTEM_NONPACKAGED_FONTS_DIRECTORY, volume, false, buffer, sizeof(buffer));
     loadfonts(screen, texture, renderer, buffer);
-    result =
-      find_directory(B_USER_FONTS_DIRECTORY, volume, false, buffer,
-                     sizeof(buffer));
+    result = find_directory(B_USER_FONTS_DIRECTORY, volume, false, buffer, sizeof(buffer));
     loadfonts(screen, texture, renderer, buffer);
-    result =
-      find_directory(B_USER_NONPACKAGED_FONTS_DIRECTORY, volume, false,
-                     buffer, sizeof(buffer));
+    result = find_directory(B_USER_NONPACKAGED_FONTS_DIRECTORY, volume, false, buffer, sizeof(buffer));
     loadfonts(screen, texture, renderer, buffer);
 #elif defined(__APPLE__)
     loadfonts(screen, texture, renderer, "/System/Library/Fonts");
@@ -1102,8 +1009,7 @@ static void loadfonts(SDL_Surface * screen, SDL_Texture * texture,
 #endif
 
 #ifdef __APPLE__
-  homedirdir =
-    malloc(snprintf(NULL, 0, "%s/fonts", apple_globalPreferencesPath()) + 1);
+  homedirdir = malloc(snprintf(NULL, 0, "%s/fonts", apple_globalPreferencesPath()) + 1);
   if (homedirdir)
   {
     sprintf(homedirdir, "%s/fonts", apple_globalPreferencesPath());
@@ -1113,8 +1019,7 @@ static void loadfonts(SDL_Surface * screen, SDL_Texture * texture,
 #endif
 
 #ifdef DEBUG
-  printf("%s:%d - Grouping %d fonts...\n", __FILE__, __LINE__,
-         num_font_styles);
+  printf("%s:%d - Grouping %d fonts...\n", __FILE__, __LINE__, num_font_styles);
   fflush(stdout);
 #endif
 
@@ -1135,8 +1040,7 @@ static void loadfonts(SDL_Surface * screen, SDL_Texture * texture,
 #ifdef FORKED_FONTS
 
 void run_font_scanner(SDL_Surface * screen, SDL_Texture * texture,
-                      SDL_Renderer * renderer,
-                      const char *restrict const locale)
+                      SDL_Renderer * renderer, const char *restrict const locale)
 {
   int sv[2];
   int size, i;
@@ -1202,8 +1106,7 @@ void run_font_scanner(SDL_Surface * screen, SDL_Texture * texture,
   buf = malloc(size);
   walk = buf;
 #ifdef DEBUG
-  printf("%s:%d - Sending %u bytes with %u families.\n", __FILE__, __LINE__,
-         size, num_font_families);
+  printf("%s:%d - Sending %u bytes with %u families.\n", __FILE__, __LINE__, size, num_font_families);
 #endif
   *walk++ = num_font_families & 0xffu;
   *walk++ = num_font_families >> 8u;
@@ -1272,8 +1175,7 @@ void run_font_scanner(SDL_Surface * screen, SDL_Texture * texture,
 }
 
 
-void receive_some_font_info(SDL_Surface * screen, SDL_Texture * texture,
-                            SDL_Renderer * renderer)
+void receive_some_font_info(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer)
 {
   char *buf = NULL;
   unsigned buf_size = 0;
@@ -1298,7 +1200,7 @@ void receive_some_font_info(SDL_Surface * screen, SDL_Texture * texture,
     rc = read(font_socket_fd, buf + buf_fill, buf_size - buf_fill);
 #ifdef DEBUG
     printf("%s:%d - read: fd=%d buf_fill=%u buf_size=%u rc=%ld\n", __FILE__,
-           __LINE__, font_socket_fd, buf_fill, buf_size, (long int) rc);
+           __LINE__, font_socket_fd, buf_fill, buf_size, (long int)rc);
 #endif
 
     if (rc == -1)
@@ -1339,11 +1241,10 @@ void receive_some_font_info(SDL_Surface * screen, SDL_Texture * texture,
 
   show_progress_bar_(screen, texture, renderer);
   walk = buf;
-  num_font_families = *(unsigned char *) walk++;
-  num_font_families += *(unsigned char *) walk++ << 8u;
+  num_font_families = *(unsigned char *)walk++;
+  num_font_families += *(unsigned char *)walk++ << 8u;
 #ifdef DEBUG
-  printf("%s:%d - Got %u bytes with %u families.\n", __FILE__, __LINE__,
-         buf_fill, num_font_families);
+  printf("%s:%d - Got %u bytes with %u families.\n", __FILE__, __LINE__, buf_fill, num_font_families);
 #endif
   user_font_families = malloc(num_font_families * sizeof *user_font_families);
 
@@ -1409,8 +1310,7 @@ TuxPaint_Font *getfonthandle(int desire)
   if (fi == NULL)
   {
 #ifdef DEBUG
-    printf("%s:%d - getfonthandle(%d) points to a NULL family\n", __FILE__,
-           __LINE__, desire);
+    printf("%s:%d - getfonthandle(%d) points to a NULL family\n", __FILE__, __LINE__, desire);
     fflush(stdout);
 #endif
     return NULL;
@@ -1419,8 +1319,7 @@ TuxPaint_Font *getfonthandle(int desire)
   if (fi->filename != NULL)
   {
 #ifdef DEBUG
-    printf("%s:%d - Setting 'name' to fi->filename[%d (0x%x)]\n", __FILE__,
-           __LINE__, (int) text_state, (int) text_state);
+    printf("%s:%d - Setting 'name' to fi->filename[%d (0x%x)]\n", __FILE__, __LINE__, (int)text_state, (int)text_state);
     fflush(stdout);
 #endif
 
@@ -1444,8 +1343,7 @@ TuxPaint_Font *getfonthandle(int desire)
   if (fi->handle)
   {
 #ifdef DEBUG
-    printf("%s:%d - fi->handle was set (0x%x)\n", __FILE__, __LINE__,
-           (int) (intptr_t) fi->handle);
+    printf("%s:%d - fi->handle was set (0x%x)\n", __FILE__, __LINE__, (int)(intptr_t) fi->handle);
 
     fflush(stdout);
 #endif
@@ -1458,61 +1356,36 @@ TuxPaint_Font *getfonthandle(int desire)
 #endif
 
 
-/* FIXME: Doesn't make sense; fi->handle is NULL! -bjk 2007.07.17
-
-#ifndef NO_SDLPANGO
-
-  if (fi->handle->typ == FONT_TYPE_PANGO)
+  if (!name)
   {
-    snprintf(description, sizeof(description), "%s%s%s", fi->family,
-      (text_state ^ TTF_STYLE_ITALIC ? " italic" : ""),
-      (text_state ^ TTF_STYLE_BOLD ? " bold" : ""));
-
-    pathname = (char *) "";
-
-#ifdef DEBUG
-    printf("getfonthandle(%d) asking SDL_Pango for %s\n", desire, description);
-#endif
+    name = fi->filename[text_state ^ TTF_STYLE_ITALIC];
+    missing = text_state & TTF_STYLE_ITALIC;
   }
-#endif
-*/
-
-/* FIXME: Doesn't make sense; fi->handle is NULL! -bjk 2007.07.17
-  if (fi->handle->typ == FONT_TYPE_TTF)
-*/
+  if (!name)
   {
-    if (!name)
-    {
-      name = fi->filename[text_state ^ TTF_STYLE_ITALIC];
-      missing = text_state & TTF_STYLE_ITALIC;
-    }
-    if (!name)
-    {
-      name = fi->filename[text_state ^ TTF_STYLE_BOLD];
-      missing = text_state & TTF_STYLE_BOLD;
-    }
-    if (!name)
-    {
-      name = fi->filename[text_state ^ (TTF_STYLE_ITALIC | TTF_STYLE_BOLD)];
-      missing = text_state & (TTF_STYLE_ITALIC | TTF_STYLE_BOLD);
-    }
-    if (!name)
-    {
+    name = fi->filename[text_state ^ TTF_STYLE_BOLD];
+    missing = text_state & TTF_STYLE_BOLD;
+  }
+  if (!name)
+  {
+    name = fi->filename[text_state ^ (TTF_STYLE_ITALIC | TTF_STYLE_BOLD)];
+    missing = text_state & (TTF_STYLE_ITALIC | TTF_STYLE_BOLD);
+  }
+  if (!name)
+  {
 #ifdef DEBUG
-      printf("%s:%d - name is still NULL\n", __FILE__, __LINE__);
-      fflush(stdout);
+    printf("%s:%d - name is still NULL\n", __FILE__, __LINE__);
+    fflush(stdout);
 #endif
-      return (NULL);
-    }
-
-    pathname = alloca(strlen(fi->directory) + 1 + strlen(name) + 1);
-    sprintf(pathname, "%s/%s", fi->directory, name);
-
-    strcpy(description, "");
+    return (NULL);
   }
 
-  fi->handle =
-    TuxPaint_Font_OpenFont(description, pathname, text_sizes[text_size]);
+  pathname = alloca(strlen(fi->directory) + 1 + strlen(name) + 1);
+  sprintf(pathname, "%s/%s", fi->directory, name);
+
+  strcpy(description, "");
+
+  fi->handle = TuxPaint_Font_OpenFont(description, pathname, text_sizes[text_size]);
   // if the font doesn't load, we die -- it did load OK before though
 
   if (fi->handle == NULL)
@@ -1536,18 +1409,15 @@ TuxPaint_Font *getfonthandle(int desire)
     }
 
 #ifdef DEBUG
-    printf("%s:%d - calling TTF_SetFontStyle(0x%x)\n", __FILE__, __LINE__,
-           missing);
+    printf("%s:%d - calling TTF_SetFontStyle(0x%x)\n", __FILE__, __LINE__, missing);
     fflush(stdout);
 #endif
 
     TTF_SetFontStyle(fi->handle->ttf_font, missing);
   }
 
-#ifndef NO_SDLPANGO
   if (fi->handle->typ == FONT_TYPE_PANGO)
     printf("%s:%d - It's a Pango context...\n", __FILE__, __LINE__);
-#endif
 
   return fi->handle;
 }
@@ -1557,8 +1427,7 @@ TuxPaint_Font *getfonthandle(int desire)
 static int was_bad_font;
 
 // see if two font surfaces are the same
-static int do_surfcmp(const SDL_Surface * const *const v1,
-                      const SDL_Surface * const *const v2)
+static int do_surfcmp(const SDL_Surface * const *const v1, const SDL_Surface * const *const v2)
 {
   const SDL_Surface *const s1 = *v1;
   const SDL_Surface *const s2 = *v2;
@@ -1572,8 +1441,7 @@ static int do_surfcmp(const SDL_Surface * const *const v1,
     fprintf(stderr, "s1==s2?\n");
     return 0;
   }
-  if (!s1 || !s2 || !s1->w || !s2->w || !s1->h || !s2->h || !s1->format
-      || !s2->format)
+  if (!s1 || !s2 || !s1->w || !s2->w || !s1->h || !s2->h || !s1->format || !s2->format)
   {
     /* One or the other or both SDL_Surfaces were invalid!? */
     was_bad_font = 1;
@@ -1596,11 +1464,12 @@ static int do_surfcmp(const SDL_Surface * const *const v1,
   /* Otherwise, compare the pixels in the surfaces
      (using `memcmp()`) */
   {
-    const char *const c1 = (char *const) s1->pixels;
-    const char *const c2 = (char *const) s2->pixels;
+    const char *const c1 = (char *const)s1->pixels;
+    const char *const c2 = (char *const)s2->pixels;
 
     width = s1->format->BytesPerPixel * s1->w;
-    if (width == s1->pitch) {
+    if (width == s1->pitch)
+    {
       /* Same width, just compare scanline */
       return memcmp(c1, c2, width * s1->h);
     }
@@ -1625,7 +1494,8 @@ static int surfcmp(const void *s1, const void *s2)
 {
   int diff = do_surfcmp(s1, s2);
 
-  if (!diff) {
+  if (!diff)
+  {
 #ifdef DEBUG
     printf("surfcmp found two identical renders!\n");
 #endif
@@ -1638,9 +1508,7 @@ static int surfcmp(const void *s1, const void *s2)
 int charset_works(TuxPaint_Font * font, const char *s)
 {
   SDL_Color black = { 0, 0, 0, 0 };
-#ifndef NO_SDLPANGO
   SDLPango_Matrix pango_color;
-#endif
   SDL_Surface **surfs = malloc(strlen(s) * sizeof surfs[0]);
   unsigned count = 0;
   int ret = 0;
@@ -1660,7 +1528,6 @@ int charset_works(TuxPaint_Font * font, const char *s)
     while ((*s & 0xc0u) == 0x80u);      // assume safe input
     c[offset++] = '\0';
 
-#ifndef NO_SDLPANGO
     if (font->typ == FONT_TYPE_PANGO)
     {
       sdl_color_to_pango_color(black, &pango_color);
@@ -1668,7 +1535,6 @@ int charset_works(TuxPaint_Font * font, const char *s)
       SDLPango_SetText(font->pango_context, c, -1);
       tmp_surf = SDLPango_CreateSurfaceDraw(font->pango_context);
     }
-#endif
 
     if (font->typ == FONT_TYPE_TTF)
     {
@@ -1708,8 +1574,7 @@ int TuxPaint_Font_FontHeight(TuxPaint_Font * tpf)
   if (tpf == NULL)
   {
 #ifdef DEBUG
-    printf("%s:%d - TuxPaint_Font_FontHeight() received NULL\n", __FILE__,
-           __LINE__);
+    printf("%s:%d - TuxPaint_Font_FontHeight() received NULL\n", __FILE__, __LINE__);
     fflush(stdout);
 #endif
     return (1);
@@ -1723,29 +1588,25 @@ const char *TuxPaint_Font_FontFaceFamilyName(TuxPaint_Font * tpf)
   if (tpf == NULL)
   {
 #ifdef DEBUG
-    printf("%s:%d - TuxPaint_Font_FontFaceFamilyName() received NULL\n",
-           __FILE__, __LINE__);
+    printf("%s:%d - TuxPaint_Font_FontFaceFamilyName() received NULL\n", __FILE__, __LINE__);
     fflush(stdout);
 #endif
     return ("");
   }
 
-#ifndef NO_SDLPANGO
   if (tpf->typ == FONT_TYPE_PANGO)
   {
-    (void) (tpf);
+    (void)(tpf);
     /* FIXME */
 
     return ("");
   }
-#endif
 
   if (tpf->typ == FONT_TYPE_TTF)
     return (TTF_FontFaceFamilyName(tpf->ttf_font));
 
 #ifdef DEBUG
-  printf("%s:%d - TuxPaint_Font_FontFaceFamilyName() is confused\n", __FILE__,
-         __LINE__);
+  printf("%s:%d - TuxPaint_Font_FontFaceFamilyName() is confused\n", __FILE__, __LINE__);
 #endif
 
   return ("");
@@ -1756,39 +1617,32 @@ const char *TuxPaint_Font_FontFaceStyleName(TuxPaint_Font * tpf)
   if (tpf == NULL)
   {
 #ifdef DEBUG
-    printf("%s:%d - TuxPaint_Font_FontFaceStyleName() received NULL\n",
-           __FILE__, __LINE__);
+    printf("%s:%d - TuxPaint_Font_FontFaceStyleName() received NULL\n", __FILE__, __LINE__);
     fflush(stdout);
 #endif
     return ("");
   }
 
-#ifndef NO_SDLPANGO
   if (tpf->typ == FONT_TYPE_PANGO)
   {
-    (void) (tpf);
+    (void)(tpf);
     /* FIXME */
 
     return ("");
   }
-#endif
 
   if (tpf->typ == FONT_TYPE_TTF)
     return (TTF_FontFaceStyleName(tpf->ttf_font));
 
 #ifdef DEBUG
-  printf("%s:%d - TuxPaint_Font_FontFaceStyleName() is confused\n", __FILE__,
-         __LINE__);
+  printf("%s:%d - TuxPaint_Font_FontFaceStyleName() is confused\n", __FILE__, __LINE__);
 #endif
 
   return ("");
 }
 
 
-#ifndef NO_SDLPANGO
-
-void sdl_color_to_pango_color(SDL_Color sdl_color,
-                              SDLPango_Matrix * pango_color)
+void sdl_color_to_pango_color(SDL_Color sdl_color, SDLPango_Matrix * pango_color)
 {
   Uint8 pc[4][4];
 
@@ -1814,5 +1668,3 @@ void sdl_color_to_pango_color(SDL_Color sdl_color,
 
   memcpy(pango_color, pc, 16);
 }
-
-#endif

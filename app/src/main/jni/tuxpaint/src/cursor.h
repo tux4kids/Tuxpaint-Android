@@ -70,8 +70,7 @@
 
 extern SDL_Cursor *cursor_hand, *cursor_arrow, *cursor_watch,
   *cursor_up, *cursor_down, *cursor_tiny, *cursor_crosshair,
-  *cursor_brush, *cursor_wand, *cursor_insertion, *cursor_rotate,
-  *cursor_pipette;
+  *cursor_brush, *cursor_wand, *cursor_insertion, *cursor_rotate, *cursor_pipette;
 
 extern int no_fancy_cursors, hide_cursor;
 

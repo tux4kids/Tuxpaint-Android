@@ -1,12 +1,12 @@
                                    Tux Paint
-                                 version 0.9.29
+                                 version 0.9.30
 
 Magic Tool Plugin API Documentation
 
         Copyright © 2007-2023 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                 enero 25, 2023
+                                 abril 13, 2023
 
              +----------------------------------------------------+
              |Table of Contents                                   |
@@ -177,7 +177,7 @@ Magic Tool Plugin API Documentation
 
            Note: Called once by Tux Paint, at startup. It is called first.
 
-   int init(magic_api * api)
+   int init(magic_api * api, Uint32 disabled_features)
 
            The plugin should do any initialization here. Return '1' if
            initialization was successful, or '0' if not (and Tux Paint will
@@ -187,6 +187,23 @@ Magic Tool Plugin API Documentation
            "api_version()", if Tux Paint believes your plugin to be
            compatible.
 
+           The disabled_features value contains bits set for any Tux Paint
+           features relevant to Magic tools which have been disabled in this
+           session. Test using the C bitwise 'and' operator, '&'. The
+           features are defined in tp_magic_api.h:
+              * MAGIC_FEATURE_CONTROL: Magic tool controls (paint vs
+                fullscreen) (--nomagiccontrols)
+              * MAGIC_FEATURE_SIZE: Magic tool size (--nomagicsizes)
+           Your Magic tool(s) may wish to react differently depending on
+           whether one or more features have been disabled. (For example, the
+           "Brick" Magic tool always offered two tool variations: large and
+           small. With the addition of the size feature, only one tool is
+           necessary. However, with the size option disabled, the plugin is
+           able to revert back to providing two separate tools.)
+
+           Note: Changed most recently in Tux Paint 0.9.30; Magic API version
+           0x00000008.
+
    int get_tool_count(magic_api * api)
 
            This should return the number of Magic tools this plugin provides
@@ -194,6 +211,10 @@ Magic Tool Plugin API Documentation
 
            Note: Called once by Tux Paint, at startup. It is called after
            your "init()", if it succeeded.
+
+           Note: You may wish to resond differently, based on whether certain
+           features have been disabled (e.g., 'paint' versus 'entire picture'
+           controls, or 'Magic sizes' controls).
 
    int modes(magic_api * api, int which)
 
@@ -295,6 +316,36 @@ Magic Tool Plugin API Documentation
            Note: Called once for each Magic tool your plugin claims to
            contain (by your "get_tool_count()").
 
+   Uint8 accepted_sizes(magic_api * api, int which, int mode)
+
+           Return how many size variations the 'Magic' tool accepts, in the
+           given mode (i.e., 'MODE_PAINT' or 'MODE_FULLSCREEN). Return a '0'
+           if the 'Magic' tool should not offer sizing options. Returning '1'
+           is the same as returning '0'.
+
+           Note: For each Magic tool your plugin claims to contain (reported
+           by your "get_tool_count()" function), this function will be called
+           for each mode the tool claims to support (reported by your
+           "modes()" function).
+
+           Note: Added to Tux Paint 0.9.30; Magic API version 0x00000008.
+
+   Uint8 default_size(magic_api * api, int which, int mode)
+
+           Return the default size the 'Magic' tool should start out with, in
+           the given mode. This will be the default setting for the tool the
+           first time it is used during a Tux Paint session. If Tux Paint is
+           being invoked with the sizing option disabled, this will be the
+           only size requested by Tux Paint. Return a number between '1' and
+           the amount you returned in accepted_sizes().
+
+           Note: For each Magic tool your plugin claims to contain (reported
+           by your "get_tool_count()" function), this function will be called
+           for each mode the tool claims to support (reported by your
+           "modes()" function).
+
+           Note: Added to Tux Paint 0.9.30; Magic API version 0x00000008.
+
    void shutdown(magic_api * api)
 
            The plugin should do any cleanup here. If you allocated any memory
@@ -366,6 +417,20 @@ Magic Tool Plugin API Documentation
 
            Note: Changed most recently in Tux Paint 0.9.29; Magic API version
            0x00000007.
+
+   void set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
+   SDL_Surface * last, Uint8 size, SDL_Rect * update_rect)
+
+           Tux Paint will call this function to inform the plugin of the
+           'Magic' tool size option chosen. (It will be called whenever one
+           of the plugin's Magic tools that accept sizes becomes active, and
+           whenever the user picks a new size while such a tool is currently
+           active.)
+
+           Generally, Magic tools will not alter the canvas in any way when
+           receiving an updated size, but it is possible.
+
+           Note: Added to Tux Paint 0.9.30; Magic API version 0x00000008.
 
    void click(magic_api * api, int which, int mode, SDL_Surface * snapshot,
    SDL_Surface * canvas, int x, int y, SDL_Rect * update_rect)
@@ -518,7 +583,7 @@ Tux Paint Functions and Data
 
    char * tp_version
            A string containing the version of Tux Paint that's running (e.g.,
-           "0.9.29").
+           "0.9.30").
 
    int canvas_w
    int canvas_h
@@ -663,7 +728,7 @@ Constant Defintions in "tp_magic_api.h"
            your plugin is compatible.
 
            Note: This version number does not correspond to Tux Paint's own
-           release number (e.g., "0.9.29"). The API will not change every
+           release number (e.g., "0.9.30"). The API will not change every
            time a new version of Tux Paint is released, which means plugins
            compiled for earlier versions of Tux Paint will often run under
            newer versions.
@@ -690,7 +755,8 @@ Linux and other Unix-like Platforms
    As a stand-alone command, using the GNU C Compiler and BASH shell, for
    example:
 
-     $ gcc -shared `tp-magic-config --cflags` my_plugin.c -o my_plugin.so
+     $ gcc -shared -fpic `tp-magic-config --cflags` my_plugin.c -o
+     my_plugin.so
 
    Note: The characters around the "tp-magic-config" command are a
    grave/backtick/backquote ("`"), and not an apostrophe/single-quote ("'").
@@ -975,10 +1041,16 @@ macOS
 
      * alpha: See "RGBA"
      * &: See "ampersand"
-     * ampersand: "&". A symbol in C that allows you to refer to the memory
-       address of a variable; that is, a pointer. (For example, consider "int
-       i;". Later, "&i" refers to the memory where "i" is stored, not the
-       value of "i" itself; it is a 'pointer to "i"'.) See also: "star"
+     * ampersand (pointers): "&". A symbol in C that allows you to refer to
+       the memory address of a variable; that is, a pointer. (For example,
+       consider "int i;". Later, "&i" refers to the memory where "i" is
+       stored, not the value of "i" itself; it is a 'pointer to "i"'.) See
+       also: "star"
+     * ampersand (bitwise operator): "&". A symbol in C that acts as a
+       bitwise "and" operator. Only bits set in both values will be returned.
+       For example, "11 & 6" compares the binary values '1011' to '0110'.
+       Only the bit in the 2's place is set, so the result is 2 ('0010'). See
+       also: "bit"
      * API: Application Programming Interface. TBD
      * argument: A value sent to a function.
      * arrow: "->". A symbol in C that references an element within a pointer

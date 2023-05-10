@@ -61,8 +61,7 @@ static void draw_keyboard(on_screen_keyboard * keyboard);
 static osk_key *find_key(on_screen_keyboard * keyboard, int x, int y);
 static void set_key(osk_key * orig, osk_key * dest, int firsttime);
 static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name);
-static struct osk_layout *load_layout(on_screen_keyboard * keyboard,
-                                      char *layout_name);
+static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layout_name);
 
 #ifdef DEBUG_OSK_COMPOSEMAP
 static void print_composemap(osk_composenode * composemap, char *sp);
@@ -91,9 +90,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
                                 SDL_Surface * BLANK_oskdel,
                                 SDL_Surface * BLANK_osktab,
                                 SDL_Surface * BLANK_oskenter,
-                                SDL_Surface * BLANK_oskcapslock,
-                                SDL_Surface * BLANK_oskshift,
-                                int disable_change)
+                                SDL_Surface * BLANK_oskcapslock, SDL_Surface * BLANK_oskshift, int disable_change)
 {
   SDL_Surface *surface;
   SDL_Surface *button_up, *button_down;
@@ -113,8 +110,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
   layout = load_layout(keyboard, layout_name);
   if (!layout)
   {
-    fprintf(stderr, "Error trying to load the required layout %s\n",
-            layout_name);
+    fprintf(stderr, "Error trying to load the required layout %s\n", layout_name);
     layout = load_layout(keyboard, strdup("default.layout"));
     if (!layout)
     {
@@ -142,17 +138,15 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
 #ifdef OSK_DEBUG
     printf
       ("%d x %d layout of %d x %d buttons won't fit within %d x %d pixel area...\n",
-       layout->width, layout->height, BLANK_button_up->w, BLANK_button_up->h,
-       layout_avail_width, layout_avail_height);
+       layout->width, layout->height, BLANK_button_up->w, BLANK_button_up->h, layout_avail_width, layout_avail_height);
 #endif
 
-    max_w = (float) layout_avail_width / (float) layout->width;
-    max_h = (float) layout_avail_height / (float) layout->height;
+    max_w = (float)layout_avail_width / (float)layout->width;
+    max_h = (float)layout_avail_height / (float)layout->height;
 
 #ifdef OSK_DEBUG
     printf("...want (%d / %d) x (%d x %d) = %.2f x %.2f buttons...\n",
-           layout_avail_width, layout->width,
-           layout_avail_height, layout->height, max_w, max_h);
+           layout_avail_width, layout->width, layout_avail_height, layout->height, max_w, max_h);
 #endif
 
     if (max_w > max_h)
@@ -160,8 +154,8 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
     if (max_h > max_w)
       max_h = max_w;
 
-    scale_w = (float) max_w / (float) BLANK_button_up->w;
-    scale_h = (float) max_h / (float) BLANK_button_up->h;
+    scale_w = (float)max_w / (float)BLANK_button_up->w;
+    scale_h = (float)max_h / (float)BLANK_button_up->h;
 
 #ifdef OSK_DEBUG
     printf("...so scaling by w=%.2f & h=%.2f\n", scale_w, scale_h);
@@ -196,8 +190,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
                                  layout->width * button_up->w,
                                  layout->height * button_up->h,
                                  canvas->format->BitsPerPixel,
-                                 canvas->format->Rmask, canvas->format->Gmask,
-                                 canvas->format->Bmask, 0);
+                                 canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, 0);
   if (!surface)
   {
     fprintf(stderr, "Error creating the onscreen keyboard surface\n");
@@ -251,8 +244,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
 
   SDL_FillRect(surface, NULL,
                SDL_MapRGB(surface->format, keyboard->layout->bgcolor.r,
-                          keyboard->layout->bgcolor.g,
-                          keyboard->layout->bgcolor.b));
+                          keyboard->layout->bgcolor.g, keyboard->layout->bgcolor.b));
 
   keybd_prepare(keyboard);
 
@@ -260,8 +252,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
   return keyboard;
 }
 
-static struct osk_layout *load_layout(on_screen_keyboard * keyboard,
-                                      char *layout_name)
+static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layout_name)
 {
   FILE *fi;
   int hlayout_loaded;
@@ -303,8 +294,7 @@ static struct osk_layout *load_layout(on_screen_keyboard * keyboard,
       fi = fopen(filename, "r");
       if (fi == NULL)
       {
-        fprintf(stderr, "Can't open either %s nor %s\n", layout_name,
-                filename);
+        fprintf(stderr, "Can't open either %s nor %s\n", layout_name, filename);
         /* Fallback to default */
         snprintf(filename, 255, "%sosk/default.layout", DATA_PREFIX);
         fi = fopen(filename, "r");
@@ -424,8 +414,7 @@ void load_hlayout(osk_layout * layout, char *hlayout_name)
     fi = fopen(filename, "r");
     if (fi == NULL)
     {
-      fprintf(stderr, "Can't open either %s nor %s\n", hlayout_name,
-              filename);
+      fprintf(stderr, "Can't open either %s nor %s\n", hlayout_name, filename);
       layout->keys = NULL;
       free(filename);
       return;
@@ -534,8 +523,7 @@ void load_hlayout(osk_layout * layout, char *hlayout_name)
         layout->keys[line_number][i].shift_altgr_label = NULL;
       }
     }
-    else if (width && height && allocated && strncmp(line, "KEY ", 4) == 0
-             && key_number < width)
+    else if (width && height && allocated && strncmp(line, "KEY ", 4) == 0 && key_number < width)
     {
       plain_label = malloc(sizeof(char) * 64);
       top_label = malloc(sizeof(char) * 64);
@@ -546,17 +534,14 @@ void load_hlayout(osk_layout * layout, char *hlayout_name)
              "%s %i %i.%i %s %s %s %s %i",
              key,
              &keycode,
-             &key_width, &key_width_decimal, plain_label, top_label,
-             altgr_label, shift_altgr_label, &shiftcaps);
+             &key_width, &key_width_decimal, plain_label, top_label, altgr_label, shift_altgr_label, &shiftcaps);
       layout->keys[line_number][key_number].keycode = keycode;
-      layout->keys[line_number][key_number].width =
-        (float) 0.1 *key_width_decimal + key_width;
+      layout->keys[line_number][key_number].width = (float)0.1 *key_width_decimal + key_width;
 
       layout->keys[line_number][key_number].plain_label = plain_label;
       layout->keys[line_number][key_number].top_label = top_label;
       layout->keys[line_number][key_number].altgr_label = altgr_label;
-      layout->keys[line_number][key_number].shift_altgr_label =
-        shift_altgr_label;
+      layout->keys[line_number][key_number].shift_altgr_label = shift_altgr_label;
       layout->keys[line_number][key_number].shiftcaps = shiftcaps;
       layout->keys[line_number][key_number].stick = 0;
       key_number++;
@@ -653,9 +638,7 @@ void load_keymap(osk_layout * layout, char *keymap_name)
 
     /* FIXME: Why is the us-intl keymap duplicating the two first entries of every keycode? */
     /* And why is the arabic keymap using the 5th and 6th entries as plain/shifted keys? */
-    readed =
-      sscanf(line, "keycode %i = %s %s %s %s", &keycode, ksname1, ksname2,
-             ksname3, ksname4);
+    readed = sscanf(line, "keycode %i = %s %s %s %s", &keycode, ksname1, ksname2, ksname3, ksname4);
 
     if (readed == 5 && keycode > 8 && keycode < 256)
     {
@@ -695,8 +678,7 @@ void load_keymap(osk_layout * layout, char *keymap_name)
 }
 
 /* Scans a line of keysyms and result and classifies them. */
-static void gettokens(char *line, char *delim, char **pointer,
-                      osk_composenode * composenode, osk_layout * layout)
+static void gettokens(char *line, char *delim, char **pointer, osk_composenode * composenode, osk_layout * layout)
 {
   int i;
   char *tok;
@@ -763,9 +745,7 @@ static void gettokens(char *line, char *delim, char **pointer,
     }
 
     composenode->size = composenode->size + 1;
-    composenode->childs =
-      realloc(composenode->childs,
-              composenode->size * sizeof(osk_composenode *));
+    composenode->childs = realloc(composenode->childs, composenode->size * sizeof(osk_composenode *));
 
     mbstowcs(wtok, tok, 255);
     auxnode = malloc(sizeof(osk_composenode));
@@ -776,8 +756,7 @@ static void gettokens(char *line, char *delim, char **pointer,
 
     /* printf("size %d, keysym %ls =>", composenode->size, composenode->childs[composenode->size - 1]->keysym); */
 
-    gettokens(NULL, delim, pointer,
-              composenode->childs[composenode->size - 1], layout);
+    gettokens(NULL, delim, pointer, composenode->childs[composenode->size - 1], layout);
     free(tok);
     return;
   }
@@ -808,8 +787,7 @@ static void load_composemap(osk_layout * layout, char *composemap_name)
     fi = fopen(filename, "r");
     if (fi == NULL)
     {
-      fprintf(stderr, "Can't open either %s nor %s\n", composemap_name,
-              filename);
+      fprintf(stderr, "Can't open either %s nor %s\n", composemap_name, filename);
       layout->keys = NULL;
       free(filename);
       return;
@@ -832,7 +810,7 @@ static void load_composemap(osk_layout * layout, char *composemap_name)
     if (is_blank_or_comment(line))
       continue;
 
-    gettokens(line, (char *) ">< \t", pointer, layout->composemap, layout);
+    gettokens(line, (char *)">< \t", pointer, layout->composemap, layout);
   }
 
   fclose(fi);
@@ -917,8 +895,7 @@ static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name)
     fi = fopen(filename, "r");
     if (fi == NULL)
     {
-      fprintf(stderr, "Can't open either %s nor %s\n", keysymdefs_name,
-              filename);
+      fprintf(stderr, "Can't open either %s nor %s\n", keysymdefs_name, filename);
       layout->keysymdefs = NULL;
       free(filename);
       return;
@@ -939,15 +916,13 @@ static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name)
       continue;
 
     layout->sizeofkeysymdefs = i;
-    layout->keysymdefs =
-      realloc(layout->keysymdefs, sizeof(keysymdefs) * (i + 1));
+    layout->keysymdefs = realloc(layout->keysymdefs, sizeof(keysymdefs) * (i + 1));
 
     /* Some keysyms doesn't correspond to any unicode value, ej. BackSpace */
     layout->keysymdefs[i].unicode = 0;
     layout->keysymdefs[i].mnemo = malloc(sizeof(char) * 128);
     sscanf(line, "#define XK_%s %x /* U+%x",
-           layout->keysymdefs[i].mnemo, &layout->keysymdefs[i].keysym,
-           &layout->keysymdefs[i].unicode);
+           layout->keysymdefs[i].mnemo, &layout->keysymdefs[i].keysym, &layout->keysymdefs[i].unicode);
     i++;
   }
 
@@ -1004,8 +979,7 @@ static int keysym2unicode(int keysym, on_screen_keyboard * keyboard)
    * This software is in the public domain. Share and enjoy!
    */
   /* first check for Latin-1 characters (1:1 mapping) */
-  if ((keysym >= 0x0020 && keysym <= 0x007e)
-      || (keysym >= 0x00a0 && keysym <= 0x00ff))
+  if ((keysym >= 0x0020 && keysym <= 0x007e) || (keysym >= 0x00a0 && keysym <= 0x00ff))
     return keysym;
 
   /* also check for directly encoded 24-bit UCS characters */
@@ -1023,9 +997,7 @@ static int keysym2unicode(int keysym, on_screen_keyboard * keyboard)
 
 
 /* Searches in the tree for composing stuff */
-static void get_composed_keysym(on_screen_keyboard * keyboard,
-                                osk_composenode * composenode,
-                                wchar_t *keysym)
+static void get_composed_keysym(on_screen_keyboard * keyboard, osk_composenode * composenode, wchar_t *keysym)
 {
   int i;
 
@@ -1145,43 +1117,37 @@ static void keybd_prepare(on_screen_keyboard * keyboard)
     if (keyboard->layout->fontpath)
     {
       /* First try if it is an absolute path */
-      keyboard->osk_fonty =
-        TTF_OpenFont(keyboard->layout->fontpath, font_height);
+      keyboard->osk_fonty = TTF_OpenFont(keyboard->layout->fontpath, font_height);
       if (keyboard->osk_fonty == NULL)
       {
         /* Now trying if it is relative to DATA_PREFIX/fonts/ */
-        snprintf(fontname, 255, "%s/fonts/%s", DATA_PREFIX,
-                 keyboard->layout->fontpath);
+        snprintf(fontname, 255, "%s/fonts/%s", DATA_PREFIX, keyboard->layout->fontpath);
 
         keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
         if (keyboard->osk_fonty == NULL)
         {
           /* Perhaps it is relative to DATA_PREFIX only? */
-          snprintf(fontname, 255, "%s/%s", DATA_PREFIX,
-                   keyboard->layout->fontpath);
+          snprintf(fontname, 255, "%s/%s", DATA_PREFIX, keyboard->layout->fontpath);
           keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
           if (keyboard->osk_fonty == NULL)
           {
             /* Or to DATA_PREFIX/fonts/locale/ ? */
-            snprintf(fontname, 255, "%s/fonts/locale/%s", DATA_PREFIX,
-                     keyboard->layout->fontpath);
+            snprintf(fontname, 255, "%s/fonts/locale/%s", DATA_PREFIX, keyboard->layout->fontpath);
             keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
-	    if (keyboard->osk_fonty == NULL)
-	    {
-	      /* Fonts are in assets "data" dir in Android builds */
-	      snprintf(fontname, 255, "data/fonts/%s",
-		       keyboard->layout->fontpath);
-	      keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
-	      if (keyboard->osk_fonty == NULL)
-	      {
-		/* Fonts are in assets "data" dir in Android builds, checking locale dir */
-		snprintf(fontname, 255, "data/fonts/locale/%s",
-			 keyboard->layout->fontpath);
-		keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
-	      }
-	    }
-	  }
-	}
+            if (keyboard->osk_fonty == NULL)
+            {
+              /* Fonts are in assets "data" dir in Android builds */
+              snprintf(fontname, 255, "data/fonts/%s", keyboard->layout->fontpath);
+              keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+              if (keyboard->osk_fonty == NULL)
+              {
+                /* Fonts are in assets "data" dir in Android builds, checking locale dir */
+                snprintf(fontname, 255, "data/fonts/locale/%s", keyboard->layout->fontpath);
+                keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+              }
+            }
+          }
+        }
       }
     }
 
@@ -1193,17 +1159,16 @@ static void keybd_prepare(on_screen_keyboard * keyboard)
 
       if (keyboard->osk_fonty == NULL)
       {
-      /* Also for Android */
-      sprintf(fontname, "data/fonts/FreeSansBold.ttf");
-      keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
+        /* Also for Android */
+        sprintf(fontname, "data/fonts/FreeSansBold.ttf");
+        keyboard->osk_fonty = TTF_OpenFont(fontname, font_height);
       }
     }
 
     if (keyboard->osk_fonty == NULL)
     {
       fprintf(stderr, "\nError: Can't open the font!\n"
-              "The Simple DirectMedia Layer error that occurred was:\n"
-              "%s\n\n", SDL_GetError());
+              "The Simple DirectMedia Layer error that occurred was:\n" "%s\n\n", SDL_GetError());
       free(fontname);
       exit(1);
     }
@@ -1213,8 +1178,7 @@ static void keybd_prepare(on_screen_keyboard * keyboard)
 }
 
 
-static void apply_surface(int x, int y, SDL_Surface * source,
-                          SDL_Surface * destination, SDL_Rect * clip)
+static void apply_surface(int x, int y, SDL_Surface * source, SDL_Surface * destination, SDL_Rect * clip)
 {
   SDL_Rect offset;
 
@@ -1266,8 +1230,7 @@ static SDL_Surface *stretch_surface(SDL_Surface * orig, int width)
                               width,
                               orig->h,
                               orig->format->BitsPerPixel,
-                              orig->format->Rmask, orig->format->Gmask,
-                              orig->format->Bmask, 0);
+                              orig->format->Rmask, orig->format->Gmask, orig->format->Bmask, 0);
 
   SDL_BlitSurface(orig, NULL, dest, NULL);
   rect.y = 0;
@@ -1359,38 +1322,26 @@ static void draw_key(osk_key key, on_screen_keyboard * keyboard, int hot)
   if (strncmp("NULL", text, 4) != 0 && key.keycode != 0)
   {
     if (hot)
-      skey =
-        stretch_surface(keyboard->button_down,
-                        key.width * keyboard->button_down->w);
+      skey = stretch_surface(keyboard->button_down, key.width * keyboard->button_down->w);
 
     else if (key.stick)
-      skey =
-        stretch_surface(keyboard->button_hold,
-                        key.width * keyboard->button_hold->w);
+      skey = stretch_surface(keyboard->button_hold, key.width * keyboard->button_hold->w);
 
     else
     {
       if (key.keycode == 1 || key.keycode == 2)
       {
         if (keyboard->disable_change)
-          skey =
-            stretch_surface(keyboard->button_off,
-                            key.width * keyboard->button_off->w);
+          skey = stretch_surface(keyboard->button_off, key.width * keyboard->button_off->w);
         else
-          skey =
-            stretch_surface(keyboard->button_nav,
-                            key.width * keyboard->button_nav->w);
+          skey = stretch_surface(keyboard->button_nav, key.width * keyboard->button_nav->w);
       }
       else
-        skey =
-          stretch_surface(keyboard->button_up,
-                          key.width * keyboard->button_up->w);
+        skey = stretch_surface(keyboard->button_up, key.width * keyboard->button_up->w);
     }
   }
   else
-    skey =
-      stretch_surface(keyboard->button_off,
-                      key.width * keyboard->button_off->w);
+    skey = stretch_surface(keyboard->button_off, key.width * keyboard->button_off->w);
 
   apply_surface(key.x, key.y, skey, keyboard->surface, NULL);
 
@@ -1452,8 +1403,7 @@ static void label_key(osk_key key, on_screen_keyboard * keyboard)
     }
   }
 
-  else if (modstate & KMOD_RALT && modstate & KMOD_CAPS
-           && !(modstate & KMOD_SHIFT))
+  else if (modstate & KMOD_RALT && modstate & KMOD_CAPS && !(modstate & KMOD_SHIFT))
   {
     if (key.shiftcaps)
       text = strdup(key.shift_altgr_label);
@@ -1486,8 +1436,7 @@ static void label_key(osk_key key, on_screen_keyboard * keyboard)
 
   else if (strncmp("CAPSLOCK", text, 8) == 0)
   {
-    apply_surface(key.x, key.y, keyboard->oskcapslock, keyboard->surface,
-                  NULL);
+    apply_surface(key.x, key.y, keyboard->oskcapslock, keyboard->surface, NULL);
   }
 
   else if (strncmp("SHIFT", text, 5) == 0)
@@ -1497,9 +1446,7 @@ static void label_key(osk_key key, on_screen_keyboard * keyboard)
 
   else if (strncmp("SPACE", text, 5) != 0 && strncmp("NULL", text, 4) != 0)
   {
-    messager =
-      TTF_RenderUTF8_Blended(keyboard->osk_fonty, text,
-                             keyboard->layout->fgcolor);
+    messager = TTF_RenderUTF8_Blended(keyboard->osk_fonty, text, keyboard->layout->fgcolor);
 
     apply_surface(key.x + 5, key.y, messager, keyboard->surface, NULL);
     SDL_FreeSurface(messager);
@@ -1516,12 +1463,10 @@ static osk_key *find_key(on_screen_keyboard * keyboard, int x, int y)
   key = NULL;
   for (j = 0; j < keyboard->layout->height; j++)
   {
-    if (keyboard->layout->keys[j][0].y < y
-        && keyboard->layout->keys[j][0].y + keyboard->button_up->h > y)
+    if (keyboard->layout->keys[j][0].y < y && keyboard->layout->keys[j][0].y + keyboard->button_up->h > y)
       for (i = 0; i < keyboard->layout->width; i++)
         if (keyboard->layout->keys[j][i].x < x &&
-            keyboard->layout->keys[j][i].x +
-            keyboard->layout->keys[j][i].width * keyboard->button_up->w > x)
+            keyboard->layout->keys[j][i].x + keyboard->layout->keys[j][i].width * keyboard->button_up->w > x)
         {
           key = &keyboard->layout->keys[j][i];
           return key;
@@ -1629,8 +1574,7 @@ static char *find_keysym(osk_key key, on_screen_keyboard * keyboard)
     }
   }
 
-  else if (modstate & KMOD_RALT && modstate & KMOD_CAPS
-           && !(modstate & KMOD_SHIFT))
+  else if (modstate & KMOD_RALT && modstate & KMOD_CAPS && !(modstate & KMOD_SHIFT))
   {
     if (key.shiftcaps)
       keysym = keysyms.shiftaltgr;
@@ -1650,8 +1594,7 @@ static char *find_keysym(osk_key key, on_screen_keyboard * keyboard)
 }
 
 /* We lose the SDL ModState by leaving and entering the tuxpaint window, so using a custom state */
-static int handle_keymods(char *keysym, osk_key * key,
-                          on_screen_keyboard * keyboard)
+static int handle_keymods(char *keysym, osk_key * key, on_screen_keyboard * keyboard)
 {
   SDL_Keymod mod;
   SDL_Event ev;
@@ -1688,8 +1631,7 @@ static int handle_keymods(char *keysym, osk_key * key,
 
   /* Seems ISO_Level3_Shift and ISO_Next_Group are used too for right Alt */
   else if (strncmp("ISO_Level3_Shift", keysym, 16) == 0 ||
-           strncmp("ISO_Next_Group", keysym, 14) == 0
-           || strncmp("ALT_R", keysym, 5) == 0)
+           strncmp("ISO_Next_Group", keysym, 14) == 0 || strncmp("ALT_R", keysym, 5) == 0)
   {
     if (mod & KMOD_RALT)
     {
@@ -1904,10 +1846,10 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
 
     wkeysym = malloc(sizeof(wchar_t) * (strlen(keysym) + 1));
 
-    mbsrtowcs(wkeysym, (const char **) &keysym, strlen(keysym) + 1, NULL);
+    mbsrtowcs(wkeysym, (const char **)&keysym, strlen(keysym) + 1, NULL);
 
 #ifdef OSK_DEBUG
-    printf("wkeysym %ls %i\n\n", wkeysym, (int) wcslen(wkeysym));
+    printf("wkeysym %ls %i\n\n", wkeysym, (int)wcslen(wkeysym));
 #endif
 
 
@@ -1932,8 +1874,7 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
         event.text.text[0] = '\r';
         event.text.text[1] = '\0';
       }
-      else if (wcsncmp(L"Tab", ks, 3) == 0
-               || wcsncmp(L"ISO_Left_Tab", ks, 12) == 0)
+      else if (wcsncmp(L"Tab", ks, 3) == 0 || wcsncmp(L"ISO_Left_Tab", ks, 12) == 0)
       {
         event.key.keysym.sym = SDLK_TAB;
         event.text.text[0] = '\t';
@@ -1966,7 +1907,7 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
           wchar_t buf[2];
 
           iwc = keysym2unicode(mnemo2keysym(mnemo, keyboard), keyboard);
-          buf[0] = (wchar_t) iwc;
+          buf[0] = (wchar_t)iwc;
           buf[1] = L'\0';
 
 #ifdef OSK_DEBUG
@@ -1979,7 +1920,7 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
         printf("len = %d\n", len);
         printf("event.text.text = \"%s\"\n", event.text.text);
 #else
-        len = len; /* Avoid 'set but not used' warning */
+        len = len;              /* Avoid 'set but not used' warning */
 #endif
       }
 

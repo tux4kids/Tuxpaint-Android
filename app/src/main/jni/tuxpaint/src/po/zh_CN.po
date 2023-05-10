@@ -6,6 +6,7 @@
 # Ijeal <tomorrow1881@sohu.com>, 2008. (inactive)"Fretwork"
 # hackergene <hackergene@gmail.com>, 2014.
 # Never Min <nevermin@gmail.com>, 2017.
+# 臧传明<qdeduos@163.com>, 20230407.
 #
 # Special note from lark: Because it is for children, the translation
 # should not be cold.
@@ -14,15 +15,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-01 16:47-0700\n"
-"PO-Revision-Date: 2017-12-27 16:57+0800\n"
+"POT-Creation-Date: 2023-05-02 00:00-0700\n"
+"PO-Revision-Date: 2023-04-07 09:13+0800\n"
 "Last-Translator: hackergene <hackergene@gmail.com>\n"
 "Language-Team: hackergene <hackergene@gmail.com>\n"
-"Language: zh_cn\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. Response to Black (0, 0, 0) color selected
 #: ../colors.h:86
@@ -32,12 +33,12 @@ msgstr "黑色！"
 #. Response to Dark grey (128, 128, 128) color selected
 #: ../colors.h:89
 msgid "Dark grey! Some people spell it “dark gray”."
-msgstr "深灰色！"
+msgstr "深灰色。"
 
 #. Response to Light grey (192, 192, 192) color selected
 #: ../colors.h:92
 msgid "Light grey! Some people spell it “light gray”."
-msgstr "浅灰色！"
+msgstr "浅灰色。"
 
 #. Response to White (255, 255, 255) color selected
 #: ../colors.h:95
@@ -128,43 +129,41 @@ msgstr "米色！"
 #. impossible for a user to type ASCII letters.
 #.
 #. Most translators should use scoring instead.
-#: ../dirwalk.c:204
+#: ../dirwalk.c:198
 msgid "qx"
 msgstr "小写"
 
-#: ../dirwalk.c:205
+#: ../dirwalk.c:198
 msgid "QX"
 msgstr "大写"
 
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:234
+#: ../dirwalk.c:223
 msgid "oO"
 msgstr "oO"
 
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:240
+#: ../dirwalk.c:228
 msgid ",.?!"
 msgstr ",.?!"
 
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:245
-#, fuzzy
-#| msgid "`\\%_@$~#{<(^&*"
+#: ../dirwalk.c:232
 msgid "`%_@$~#{<(^&*"
 msgstr "`\\%_@$~#{<(^&*"
 
 #. digits (e.g., '0', '1' and '7')
-#: ../dirwalk.c:250
+#: ../dirwalk.c:236
 msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:255
+#: ../dirwalk.c:241
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:260
+#: ../dirwalk.c:247
 msgid "1Il|"
 msgstr "1Il|"
 
@@ -174,75 +173,63 @@ msgstr "1Il|"
 #.
 #. You can use two different weight for scoring, 1 or 9, according
 #. to the importance.
-#: ../dirwalk.c:272
+#: ../dirwalk.c:259
 msgid "<1>spare-1a"
-msgstr ""
+msgstr "<1>备用-1a"
 
-#: ../dirwalk.c:274
+#: ../dirwalk.c:260
 msgid "<1>spare-1b"
-msgstr ""
+msgstr "<1>备用-1b"
 
-#: ../dirwalk.c:276
+#: ../dirwalk.c:261
 msgid "<9>spare-9a"
-msgstr ""
+msgstr "<9>备用-9a"
 
-#: ../dirwalk.c:278
+#: ../dirwalk.c:262
 msgid "<9>spare-9b"
-msgstr ""
+msgstr "<9>备用-9b"
 
 #: ../fill_tools.h:52
 msgid "Solid"
-msgstr ""
+msgstr "纯色"
 
 #: ../fill_tools.h:53
-#, fuzzy
-#| msgid "Brushes"
 msgid "Brush"
 msgstr "刷子"
 
 #: ../fill_tools.h:54
-#, fuzzy
-#| msgid "Lines"
 msgid "Linear"
-msgstr "线条"
+msgstr "线性"
 
 #: ../fill_tools.h:55
 msgid "Radial"
-msgstr ""
+msgstr "径向"
 
 #: ../fill_tools.h:56
-#, fuzzy
-#| msgid "Shapes"
 msgid "Shaped"
 msgstr "图形"
 
 #: ../fill_tools.h:60
-#, fuzzy
-#| msgid "Click in the picture to fill that area with color."
 msgid "Click to fill an area with a solid color."
-msgstr "单击图片用颜色填充区域。"
+msgstr "单击图片用纯色填充区域。"
 
 #: ../fill_tools.h:61
-#, fuzzy
-#| msgid "Click in the picture to fill that area with color."
 msgid "Click and drag to fill an area by hand, using a brush."
-msgstr "单击图片用颜色填充区域。"
+msgstr "单击并拖动以使用笔刷手动填充区域。"
 
-#: ../fill_tools.h:63
+#: ../fill_tools.h:62
 msgid ""
 "Click and drag to fill an area with a linear gradient (from the chosen color "
 "to transparent)."
-msgstr ""
+msgstr "单击并拖动以使用线性渐变填充区域（从选定的颜色到透明）。"
 
-#: ../fill_tools.h:65
+#: ../fill_tools.h:63
 msgid ""
 "Click to fill an area with a radial gradient (from the chosen color to "
 "transparent)."
-msgstr ""
+msgstr "单击以使用径向渐变填充区域（从选定的颜色到透明）。"
 
-#: ../fill_tools.h:67
-#, fuzzy
-#| msgid "Click in the picture to fill that area with color."
+#: ../fill_tools.h:64
 msgid ""
 "Click to fill an area with a shaped gradient (from the chosen color to "
 "transparent)."
@@ -266,7 +253,7 @@ msgstr "坚持！"
 #. Congratulations #4
 #: ../great.h:46
 msgid "Good job!"
-msgstr "干得漂亮！"
+msgstr "干得好！"
 
 #. Input Method: English mode
 #: ../im.c:88
@@ -300,40 +287,34 @@ msgstr "中文繁体"
 
 #. Add menu items
 #: ../macos.m:58
-#, fuzzy
-#| msgid "Tux Paint"
 msgid "About Tux Paint"
-msgstr "Tux Paint"
+msgstr "关于 Tux Paint"
 
 #: ../macos.m:63
-#, fuzzy
-#| msgid "Tux Paint"
 msgid "Hide Tux Paint"
-msgstr "Tux Paint"
+msgstr "隐藏 Tux Paint"
 
 #: ../macos.m:66
 msgid "Hide Others"
-msgstr ""
+msgstr "隐藏其他"
 
 #: ../macos.m:69
 msgid "Show All"
-msgstr ""
+msgstr "显示所有"
 
 #: ../macos.m:73
-#, fuzzy
-#| msgid "Tux Paint"
 msgid "Quit Tux Paint"
-msgstr "Tux Paint"
+msgstr "退出 Tux Paint"
 
 #. Put menu into the menubar
 #: ../macos.m:103 ../macos.m:111
 msgid "Window"
-msgstr ""
+msgstr "窗口"
 
 #. "Minimize" item
 #: ../macos.m:106
 msgid "Minimize"
-msgstr ""
+msgstr "最小化"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:8 ../tuxpaint.desktop.in:3
 msgid "Tux Paint"
@@ -342,7 +323,7 @@ msgstr "Tux Paint"
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:9 ../tuxpaint.desktop.in:10
 #: ../tuxpaint-fullscreen.desktop.in:10
 msgid "A drawing program for children"
-msgstr "孩子的绘图程序。"
+msgstr "儿童绘图程序"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:11
 msgid ""
@@ -352,112 +333,141 @@ msgid ""
 "and an encouraging cartoon mascot who guides children as they use the "
 "program."
 msgstr ""
+"Tux Paint是一个免费的、屡获殊荣的绘画项目，面向3至12岁的儿童。Tux Paint在世界"
+"各地的学校被用作一种计算机扫盲绘画活动。它结合了一个易于使用的界面、有趣的音"
+"效和一个鼓励孩子们使用该程序的卡通吉祥物。"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:19
 msgid ""
 "Kids are presented with a blank canvas and a variety of drawing tools to "
 "help them be creative."
-msgstr ""
+msgstr "给孩子们一张空白画布和各种绘图工具，帮助他们发挥创造力。"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:24
 msgid "New Breed Software et al."
-msgstr ""
+msgstr "New Breed Software et al."
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:34
 msgid "Tux Paint comes with numerous pre-drawn coloring-book style images"
-msgstr ""
+msgstr "Tux Paint提供了许多预先绘制的配色书风格的图像"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:38
 msgid ""
 "The Paint Brush tool lets you draw freehand, using various brushes and colors"
-msgstr ""
+msgstr "使用“绘制笔刷”工具可以使用各种笔刷和颜色徒手绘制"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:42
 msgid "The Stamp tool is like a set of rubber stamps or stickers"
-msgstr ""
+msgstr "Stamp工具就像一套橡皮图章或贴纸"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:48
+msgid "Many Magic tools now offer size settings."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:49
+msgid "Button labels word-wrap when possible (improves legibility)."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:54
 msgid ""
 "Fifteen new magic tools have been added: Maze, Googly Eyes, Fur, Circles, "
 "Rays, 3D Glasses, Color Sep., Saturate, Desaturate, Remove Color, Keep "
 "Color, Kaleido-4, Kaleido-6, Kaleido-8, and Bloom."
 msgstr ""
+"增加了15个新的魔法工具：迷宫、金鱼眼、毛皮、圆圈、射线、3D眼镜、Color Sept.、"
+"饱和、去饱和、去除颜色、保持颜色、Kaleido-4、Kaleido-6、Kaleidoc-8和Bloom。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:49
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:55
 msgid "Stamps may be rotated before being applied to the canvas."
-msgstr ""
+msgstr "印章可以在应用到画布之前进行旋转。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:50
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:56
 msgid "Shapes tool, in drag-from-corner mode, has been improved."
-msgstr ""
+msgstr "“形状”工具在从角点拖动模式下得到了改进。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:51
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:57
 msgid "Fill tool now offers a shaped gradient (bevel) mode."
-msgstr ""
+msgstr "填充工具现在提供了一个成形的渐变（斜边）模式。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:52
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:58
 msgid "A quick Eraser mode is be accessed via keyboard shortcut."
-msgstr ""
+msgstr "可以通过键盘快捷键访问快速橡皮擦模式。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:53
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:59
 msgid ""
 "The rainbow palette (HSV color picker) can now load the built-in color, or "
 "the colors from the pipette tool or color mixer."
 msgstr ""
+"彩虹调色板（HSV颜色选择器）现在可以加载内置的颜色，或者从移液管工具或颜色混合"
+"器加载颜色。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:54
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:60
 msgid ""
 "Starter and Template images can specify how they should stretch, to avoid "
 "smearing when the canvas aspect ratio differs from that of the image."
 msgstr ""
-
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:55
-msgid "The \"buttonsize\" configuration option now offers an \"auto\" setting."
-msgstr ""
-
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:56
-msgid "A quick start guide has been added."
-msgstr ""
+"Starter和Template图像可以指定它们应该如何拉伸，以避免画布纵横比与图像纵横比不"
+"同时出现涂抹。"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:61
+msgid "The \"buttonsize\" configuration option now offers an \"auto\" setting."
+msgstr "“buttonsize”配置选项现在提供“auto”设置。"
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:62
+msgid "A quick start guide has been added."
+msgstr "已添加快速入门指南。"
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:67
 msgid ""
 "Tux Paint's Color palette includes a new Color Mixer option, which allows "
 "users to combine different proportions of primary colors (red, yellow, and "
 "blue) and shades (white, grey, and black) to create new colors, similar to "
 "mixing paints."
 msgstr ""
+"Tux Paint的调色板包括一个新的颜色混合器选项，它允许用户将不同比例的原色（红"
+"色、黄色和蓝色）和色调（白色、灰色和黑色）组合起来，以创建新的颜色，类似于混"
+"合颜料。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:62
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:68
 msgid ""
 "The Color Picker option, which previously offered a static palette of around "
 "sixty-five thousand color choices, now supports separate hue, saturation, "
 "and value settings, allowing users to choose from over sixteen million "
 "colors."
 msgstr ""
+"“颜色选择器”选项以前提供约6.5万种颜色的静态调色板，现在支持单独的色调、饱和度"
+"和值设置，允许用户从1600多万种颜色中进行选择。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:63
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:69
 msgid ""
 "Also, a keyboard shortcut is now available for quick access to the Color "
 "Selector — the \"pipette\" tool used for picking colors from the current "
 "drawing."
 msgstr ""
+"此外，现在可以使用键盘快捷键快速访问“颜色选择器”，即用于从当前图形中拾取颜色"
+"的“移液管”工具。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:64
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:70
 msgid ""
 "The Paint and Lines tools now provide a way to adjust the spacing of "
 "brushes, allowing dotted lines or smearing effects to be made. Many brushes "
 "have been given better default spacing values, as well."
 msgstr ""
+"“绘制”和“线条”工具现在提供了一种调整笔刷间距的方法，允许生成虚线或涂抹效果。"
+"许多笔刷也被赋予了更好的默认间距值。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:65
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:71
 msgid ""
 "Two new variations of the Zoom Magic Tool, Tile Zoom and Rush, have been "
 "added. When shrinking a drawing with Tile Zoom, it replicates the drawing "
 "across the canvas in tiles, rather than filling the canvas with a solid "
 "background color. The Rush tool blurs the results."
 msgstr ""
+"Zoom Magic Tool的两个新变体，Tile Zoom和Rush，已经添加。使用平铺缩放缩小图形"
+"时，它会在画布上以平铺的方式复制图形，而不是用纯色填充画布。Rush工具模糊了结"
+"果。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:66
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:72
 msgid ""
 "Tux Paint's Shapes tool now offers hexagon (6-sided) and heptagon (7-sided) "
 "polygons. For shapes which can be stretched (rectangle, oval, etc.), the "
@@ -465,16 +475,22 @@ msgid ""
 "adjustments. Instructional information shown while using some other tools "
 "has also been expanded."
 msgstr ""
+"Tux Paint的“形状”工具现在提供六边形（6边）和七边形（7边）多边形。对于可以拉伸"
+"的形状（矩形、椭圆形等），在进行调整时，形状的纵横比会显示在底部。使用其他一"
+"些工具时显示的说明信息也得到了扩展。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:67
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:73
 msgid ""
 "Keyboard shortcuts, such as [Control]+[S] to save a drawing, are now "
 "accessed with the more traditional [⌘ Command] key when using Tux Paint on "
 "macOS. Sizing of Tux Paint's built-in on-screen keyboard has been improved. "
 "The look and feel of the user documentation has been improved."
 msgstr ""
+"在macOS上使用Tux Paint时，现在可以使用更传统的[命令]键访问键盘快捷键，如"
+"[Control]+[S]来保存图形。Tux Paint内置屏幕键盘的尺寸有所改进。用户文档的外观"
+"和感觉都得到了改进。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:72
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:78
 msgid ""
 "Tux Paint's Paint and Line tools now support brushes that rotate based on "
 "the angle of the stroke. This new rotation feature, as well as the older "
@@ -482,8 +498,11 @@ msgid ""
 "brush shape selector. Additionally, the Fill tool now offers a freehand "
 "painting mode for interactively coloring within a confined area."
 msgstr ""
+"Tux Paint的“绘制”和“线”工具现在支持基于笔划角度旋转的笔刷。这个新的旋转功能，"
+"以及旧的方向和动画笔刷功能，现在由笔刷形状选择器直观地指示。此外，“填充”工具"
+"现在提供了一种徒手绘制模式，用于在受限区域内进行交互式着色。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:73
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:79
 msgid ""
 "Six new Magic tools have been added to Tux Paint. Panels shrinks and "
 "duplicates the drawing into a 2-by-2 grid, which is useful for making four-"
@@ -493,8 +512,12 @@ msgid ""
 "fun-house mirror. Lastly, Smooth Rainbow provides a more gradual variation "
 "of Tux Paint's classic Rainbow tool."
 msgstr ""
+"Tux Paint中添加了六个新的魔术工具。面板将图形缩小并复制到2乘2的网格中，这对于"
+"制作四面板漫画很有用。相反会产生互补色。闪电以交互方式绘制闪电。反射在图形上"
+"创建湖泊状的反射。拉伸拉伸和挤压图片就像一个有趣的房子镜子。最后，Smooth "
+"Rainbow提供了Tux Paint经典Rainbow工具的一个更渐变的变体。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:74
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:80
 msgid ""
 "A number of existing Magic tools have been updated, as well. Improvements "
 "were made to Halftone, which simulates photographs on newsprint; Cartoon, "
@@ -502,39 +525,51 @@ msgid ""
 "television screen. Additionally, Cartoon and Halftone, along with Blocks, "
 "Chalk, and Emboss, now offer the ability to alter the entire image at once!"
 msgstr ""
+"许多现有的魔术工具也进行了更新。对半色调进行了改进，它模拟新闻纸上的照片；卡"
+"通，使图像看起来像一幅卡通画；以及模拟电视屏幕的电视。此外，卡通和半色调，以"
+"及方块、粉笔和浮雕，现在可以同时更改整个图像！"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:75
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:81
 msgid ""
 "Finally, Magic tools are now grouped into collections of similar effects — "
 "painting, distorts, color filters, picture warps, pattern painting, "
 "artistic, and picture decorations — making it easier to find the tool you "
 "need."
 msgstr ""
+"最后，魔术工具现在被分为类似效果的集合——绘画、扭曲、滤色器、图片扭曲、图案绘"
+"画、艺术和图片装饰——使您更容易找到所需的工具。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:80
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:86
 msgid ""
 "Tux Paint's Fill tool now offers options to fill an area with color "
 "gradients. The \"Radial\" fill creates a circular gradient centered around "
 "the mouse click, while the \"Linear\" fill allows the interactive creation "
 "of gradients at different angles and sizes."
 msgstr ""
+"Tux Paint的“填充”工具现在提供了使用颜色渐变填充区域的选项。“径向”填充创建以鼠"
+"标单击为中心的圆形渐变，而“线性”填充允许以不同角度和大小交互式创建渐变。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:81
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:87
 msgid ""
 "New Magic tools have been added to Tux Paint: \"Pixels\" makes it easier to "
 "create retro-gaming style pixel art, \"Checkerboard\" fills the entire "
 "canvas with a check pattern, and \"Clone\" allows duplicating parts of the "
 "picture via brush strokes."
 msgstr ""
+"Tux Paint中添加了新的魔术工具：“Pixels”使创建复古游戏风格的像素艺术变得更容"
+"易，“Checkerboard”用格子图案填充整个画布，“Clone”允许通过画笔笔划复制图片的部"
+"分。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:82
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:88
 msgid ""
 "Tux Paint's user documentation has been overhauled, making localization "
 "easier. Parties interested in helping with localization are encouraged to "
 "contact the Tux Paint team."
 msgstr ""
+"Tux Paint的用户文档经过了彻底修改，使本地化变得更加容易。鼓励有兴趣帮助本地化"
+"的各方联系Tux Paint团队。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:83
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:89
 msgid ""
 "Finally, a new pair of accessibility options have been added. The entire "
 "user interface can now be enlarged benefiting users with impaired vision, "
@@ -543,35 +578,46 @@ msgid ""
 "be helpful to users of coarse input devices, such as eye-gaze tracking "
 "systems."
 msgstr ""
+"最后，添加了一对新的可访问性选项。现在可以放大整个用户界面，使视力受损的用户"
+"受益，并使该程序更适合非常高密度的显示器。这一功能，以及重新组织调色板的新选"
+"项，也有助于使用粗略输入设备（如眼睛注视跟踪系统）的用户。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:88
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:94
 msgid ""
 "A major improvement has been made to the Shapes tool, which now provides "
 "options to choose whether shapes are drawn from the center or a corner, "
 "making it easier to use in any situation."
 msgstr ""
+"对“形状”工具进行了重大改进，该工具现在提供了选择形状是从中心绘制还是从角绘制"
+"的选项，使其在任何情况下都更容易使用。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:89
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:95
 msgid ""
 "The on-screen keyboard, an accessibility feature optionally available when "
 "using the Text and Label tools, now appears larger on bigger displays; "
 "helpful for users of coarser input devices, such as eye-tracking systems."
 msgstr ""
+"屏幕键盘是使用文本和标签工具时可选的辅助功能，现在在更大的显示器上显示得更"
+"大；有助于诸如眼睛跟踪系统之类的粗略输入设备的用户。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:90
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:96
 msgid ""
 "The Eraser tool adds new, smaller eraser sizes, and applies smoother, "
 "contiguous strokes when the pointer is moved quickly."
 msgstr ""
+"橡皮擦工具添加新的、更小的橡皮擦大小，并在指针快速移动时应用更平滑、连续的笔"
+"划。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:91
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:97
 msgid ""
 "Finally, this newest version adds options to export individual drawings and "
 "GIF animations, making it easy to share pictures, cartoons, and slideshows "
 "with others."
 msgstr ""
+"最后，这个最新版本添加了导出单个绘图和GIF动画的选项，使您可以轻松地与他人共享"
+"图片、卡通和幻灯片。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:96
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:102
 msgid ""
 "The latest version has promoted the \"Fill\" tool, previously found under "
 "the \"Magic\" section of Tux Paint, to the main toolbar, where it's easier "
@@ -580,187 +626,185 @@ msgid ""
 "also be placed at the end of that dialog, allowing emphasis of template "
 "images."
 msgstr ""
+"最新版本将之前在Tux Paint的“魔术”部分找到的“填充”工具提升到了主工具栏，在那里"
+"更容易找到。它还包括在启动期间和打开“新建”绘图对话框时的一些性能改进。实心背"
+"景色也可以放置在该对话框的末尾，从而可以强调模板图像。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:97
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:103
 msgid ""
 "Tux Paint also now makes it possible to disable stereo sound, which can "
 "benefit users with a hearing impairment, or in situations where only one "
 "speaker is available."
 msgstr ""
+"Tux Paint现在还可以禁用立体声，这可以让听力受损的用户受益，或者在只有一个扬声"
+"器可用的情况下受益。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:102
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:108
 msgid ""
 "New in this version are a \"color picker\", which allows any color within a "
 "drawing to be chosen using the pointer, and a set of three-, four-, and five-"
 "pointed star shapes."
 msgstr ""
+"此版本中新增了“颜色选择器”，它允许使用指针选择图形中的任何颜色，以及一组三"
+"尖、四尖和五尖星形。"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:103
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:109
 msgid ""
 "The latest version also incorporates a number of new translations, bringing "
 "the number of supported languages up to nearly 130: Bengali, Bodo, Dogri, "
 "Kabyle, Urdu, and Devanagari and Perso-Arabic variations of Kashmiri and "
 "Sindhi. Thirty other translations have been updated, as well."
 msgstr ""
+"最新版本还包含了一些新的翻译，使支持的语言数量达到近130种：孟加拉语、博多语、"
+"多格里语、卡比尔语、乌尔都语，以及克什米尔语和信德语的天成文书（Devanagari）"
+"和佩尔索阿拉伯语变体。其他30个译本也得到了更新。"
 
 #. Square shape tool (4 equally-lengthed sides at right angles)
-#: ../shapes.h:266 ../shapes.h:267
+#: ../shapes.h:265 ../shapes.h:266
 msgid "Square"
-msgstr "矩形"
-
-#. Rectangle shape tool (4 sides at right angles)
-#: ../shapes.h:270 ../shapes.h:271
-msgid "Rectangle"
 msgstr "正方形"
 
+#. Rectangle shape tool (4 sides at right angles)
+#: ../shapes.h:269 ../shapes.h:270
+msgid "Rectangle"
+msgstr "长方形"
+
 #. Circle shape tool (X radius and Y radius are the same)
-#: ../shapes.h:274 ../shapes.h:275
+#: ../shapes.h:273 ../shapes.h:274
 msgid "Circle"
 msgstr "圆形"
 
 #. Ellipse shape tool (X radius and Y radius may differ)
-#: ../shapes.h:278 ../shapes.h:279
+#: ../shapes.h:277 ../shapes.h:278
 msgid "Ellipse"
 msgstr "椭圆"
 
 #. Triangle shape tool (3 sides)
-#: ../shapes.h:282 ../shapes.h:283
+#: ../shapes.h:281 ../shapes.h:282
 msgid "Triangle"
 msgstr "三角形"
 
 #. Pentagon shape tool (5 sides)
-#: ../shapes.h:286 ../shapes.h:287
+#: ../shapes.h:285 ../shapes.h:286
 msgid "Pentagon"
-msgstr "五角形"
+msgstr "五边形"
 
 #. Hexagon shape tool (6 sides)
-#: ../shapes.h:290 ../shapes.h:291
-#, fuzzy
-#| msgid "Hexagon Mosaic"
+#: ../shapes.h:289 ../shapes.h:290
 msgid "Hexagon"
-msgstr "六边形马赛克"
+msgstr "六边形"
 
 #. Heptagon (aka septagon) shape tool (7 sides)
-#: ../shapes.h:294 ../shapes.h:295
-#, fuzzy
-#| msgid "Hexagon Mosaic"
+#: ../shapes.h:293 ../shapes.h:294
 msgid "Heptagon"
-msgstr "六边形马赛克"
+msgstr "七边形"
 
 #. Octagon shape tool (8 sides)
-#: ../shapes.h:298 ../shapes.h:299
+#: ../shapes.h:297 ../shapes.h:298
 msgid "Octagon"
-msgstr "八角形"
+msgstr "八边形"
 
 #. Rhombus shape tool (4 sides, not at right angles)
-#: ../shapes.h:302 ../shapes.h:303
+#: ../shapes.h:301 ../shapes.h:302
 msgid "Rhombus"
 msgstr "菱形"
 
 #. Triangle star (3 points star)
 #. Rhombus star (4 points star)
-#. Pentagone star (5 points star)
-#: ../shapes.h:306 ../shapes.h:309 ../shapes.h:312 ../shapes.h:315
-#: ../shapes.h:318 ../shapes.h:321
+#. Pentagon star (5 points star)
+#: ../shapes.h:305 ../shapes.h:306 ../shapes.h:309 ../shapes.h:310
+#: ../shapes.h:313 ../shapes.h:314
 msgid "Star"
 msgstr "星星"
 
 #. Description of a square
-#: ../shapes.h:329 ../shapes.h:330
+#: ../shapes.h:322 ../shapes.h:323
 msgid "A square is a rectangle with four equal sides."
 msgstr "正方形是四条边长度都相等的矩形。"
 
 #. Description of a rectangle
-#: ../shapes.h:333 ../shapes.h:334
+#: ../shapes.h:326 ../shapes.h:327
 msgid "A rectangle has four sides and four right angles."
-msgstr "正方形有四条边四个直角。"
+msgstr "矩形有四条边和四个直角。"
 
-#: ../shapes.h:338 ../shapes.h:340
+#. Description of a circle
+#: ../shapes.h:330 ../shapes.h:331
 msgid ""
 "A circle is a curve where all points have the same distance from the center."
-msgstr "圆形的边上任意一点到中心的距离都相同。"
+msgstr "圆上任意一点到圆心的距离都相同。"
 
 #. Description of an ellipse
-#: ../shapes.h:343 ../shapes.h:344
+#: ../shapes.h:334 ../shapes.h:335
 msgid "An ellipse is a stretched circle."
-msgstr "椭圆是被拉变形的圆。"
+msgstr "椭圆是被拉伸的圆。"
 
 #. Description of a triangle
-#: ../shapes.h:347 ../shapes.h:348
+#: ../shapes.h:338 ../shapes.h:339
 msgid "A triangle has three sides."
 msgstr "三角形有三条边。"
 
 #. Description of a pentagon
-#: ../shapes.h:351 ../shapes.h:352
+#: ../shapes.h:342 ../shapes.h:343
 msgid "A pentagon has five sides."
-msgstr "五角形有五条边。"
+msgstr "五边形有五条边。"
 
 #. Description of a hexagon
-#: ../shapes.h:355 ../shapes.h:356
-#, fuzzy
-#| msgid "A pentagon has five sides."
+#: ../shapes.h:346 ../shapes.h:347
 msgid "A hexagon has six sides."
-msgstr "五角形有五条边。"
+msgstr "六边形有六条边。"
 
 #. Description of a heptagon
-#: ../shapes.h:359 ../shapes.h:360
-#, fuzzy
-#| msgid "A pentagon has five sides."
+#: ../shapes.h:350 ../shapes.h:351
 msgid "A heptagon has seven sides."
-msgstr "五角形有五条边。"
+msgstr "七角形有七条边。"
 
 #. Description of an octagon
-#: ../shapes.h:363 ../shapes.h:364
+#: ../shapes.h:354 ../shapes.h:355
 msgid "An octagon has eight equal sides."
-msgstr "八角形有八条边。"
+msgstr "八边形有八条边。"
 
-#: ../shapes.h:368 ../shapes.h:370
+#. Description of a rhombus
+#: ../shapes.h:358 ../shapes.h:359
 msgid "A rhombus has four equal sides, and opposite sides are parallel."
-msgstr "菱形的四边都相等，对着的边平行。"
+msgstr "菱形的四边相等，对边平行。"
 
-#: ../shapes.h:372 ../shapes.h:373
+#. Description of triangle star (3 points star)
+#: ../shapes.h:362 ../shapes.h:363
 msgid "A star with 3 points."
-msgstr "星星有三个点"
+msgstr "一颗有三个顶点的星星。"
 
-#: ../shapes.h:374 ../shapes.h:375
+#. Description of rhombus star (4 points star)
+#: ../shapes.h:366 ../shapes.h:367
 msgid "A star with 4 points."
-msgstr "星星有四个点"
+msgstr "一颗有四个顶点的星星。"
 
-#: ../shapes.h:376 ../shapes.h:377
+#. Description of pentagon star (5 points star)
+#: ../shapes.h:370 ../shapes.h:371
 msgid "A star with 5 points."
-msgstr "星星有五个点"
+msgstr "一颗有五个顶点的星星。"
 
-#: ../shapes.h:439
-#, fuzzy
-#| msgid ""
-#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
-#| "size you want. Move around to rotate it, and click to draw it."
+#: ../shapes.h:433
 msgid ""
 "Pick a shape. Click to start drawing, drag, and let go when it is the size "
 "and shape you want. Move around to rotate it, and click again to draw it."
 msgstr ""
-"选择一个形状。单击选中中心然后拖动，当大小是你所需要的时候就放开。光标移动就"
-"可以旋转它，单击就绘制完成。"
+"选择一个形状。单击以开始绘制、拖动，然后在它达到所需的大小和形状时放手。四处"
+"移动以旋转它，然后再次单击以绘制它。"
 
-#: ../shapes.h:441
-#, fuzzy
-#| msgid ""
-#| "Pick a shape. Click to pick the center, drag, then let go when it is the "
-#| "size you want. Move around to rotate it, and click to draw it."
+#: ../shapes.h:434
 msgid ""
 "Pick a shape. Click to start drawing, drag, and let go when it is the size "
 "and shape you want."
 msgstr ""
-"选择一个形状。单击选中中心然后拖动，当大小是你所需要的时候就放开。光标移动就"
-"可以旋转它，单击就绘制完成。"
+"选择一个形状。单击以开始绘制、拖动，然后在它达到所需的大小和形状时放手。"
 
-#: ../shapes.h:447
+#: ../shapes.h:440
 msgid "Draw shapes from the center."
-msgstr ""
+msgstr "从中心绘制形状。"
 
-#: ../shapes.h:448
+#: ../shapes.h:441
 msgid "Draw shapes from a corner."
-msgstr ""
+msgstr "从一个角落绘制形状。"
 
 #. Title of tool selector (buttons down the left)
 #: ../titles.h:57
@@ -806,8 +850,6 @@ msgstr "魔法"
 
 #. Title of fill selector (buttons down the right for fill tool)
 #: ../titles.h:81
-#, fuzzy
-#| msgid "Fill"
 msgid "Fills"
 msgstr "填充"
 
@@ -864,7 +906,7 @@ msgstr "新建"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:97 ../tuxpaint.c:9915
+#: ../tools.h:97 ../tuxpaint.c:9520
 msgid "Open"
 msgstr "打开"
 
@@ -886,12 +928,12 @@ msgstr "退出"
 #. Paint tool instructions
 #: ../tools.h:114
 msgid "Pick a color and a brush shape to draw with."
-msgstr "请挑选喜欢的颜色和毛刷形状来作画吧！"
+msgstr "请挑选喜欢的颜色和毛刷形状来作画吧。"
 
 #. Stamp tool instructions
 #: ../tools.h:117
 msgid "Pick a picture to stamp around your drawing."
-msgstr "选择图章点缀你的画吧！"
+msgstr "选择图章点缀你的画吧。"
 
 #. Line tool instructions
 #: ../tools.h:120
@@ -905,12 +947,6 @@ msgid ""
 msgstr "选择文字的样式。在绘制的图片上单击就可以开始输入文字。"
 
 #: ../tools.h:131
-#, fuzzy
-#| msgid ""
-#| "Choose a style of text. Click on your drawing and you can start typing. "
-#| "Press [Enter] or [Tab] to complete the text. By using the selector button "
-#| "and clicking an exist label, you can move it, edit it and change its text "
-#| "style."
 msgid ""
 "Choose a style of text. Click on your drawing and you can start typing. "
 "Press [Enter] or [Tab] to complete the text. By using the selector button "
@@ -946,7 +982,7 @@ msgstr "选择印在画周围的图片或颜色。"
 #. Response to 'open' action (while file dialog is being constructed)
 #: ../tools.h:152
 msgid "Open…"
-msgstr "打开..."
+msgstr "打开…"
 
 #. Response to 'save' action
 #: ../tools.h:155
@@ -956,7 +992,7 @@ msgstr "图片已存！"
 #. Response to 'print' action (while printing, or print dialog is being used)
 #: ../tools.h:158
 msgid "Printing…"
-msgstr "正在打印哦..."
+msgstr "正在打印中…"
 
 #. Response to 'quit' (exit) action
 #: ../tools.h:161
@@ -970,7 +1006,9 @@ msgstr "我们按按钮来完成线条吧。"
 
 #: ../tools.h:166
 #, fuzzy, c-format
-#| msgid "Let go of the button to complete the line."
+#| msgid ""
+#| "Let go of the button to complete the line. (Your line’s angle is %.0f "
+#| "degrees.)"
 msgid ""
 "Let go of the button to complete the line. (Your line’s angle is %.0f "
 "degrees.)"
@@ -983,7 +1021,9 @@ msgstr "按住按钮来缩放。"
 
 #: ../tools.h:170
 #, fuzzy, c-format
-#| msgid "Hold the button to stretch the shape."
+#| msgid ""
+#| "Hold the button to stretch the shape. (It has an aspect ratio of "
+#| "\"%.2g:1\".)"
 msgid ""
 "Hold the button to stretch the shape. (It has an aspect ratio of \"%.2g:1\".)"
 msgstr "按住按钮来缩放。"
@@ -995,7 +1035,9 @@ msgstr "移动鼠标来旋转形状。单击就可以画出它。"
 
 #: ../tools.h:174
 #, fuzzy, c-format
-#| msgid "Move the mouse to rotate the shape. Click to draw it."
+#| msgid ""
+#| "Move the mouse to rotate the shape. Click to draw it. (It is rotated %d "
+#| "degrees.)"
 msgid ""
 "Move the mouse to rotate the shape. Click to draw it. (It is rotated %d "
 "degrees.)"
@@ -1012,6 +1054,8 @@ msgid ""
 "Clicking an existing label (or press [Tab] to cycle through them and [Enter] "
 "to choose). Then, you can move it, edit it, and change its text style."
 msgstr ""
+"单击现有标签（或按[Tab]在其中循环，然后按[Enter]进行选择）。然后，您可以移"
+"动、编辑和更改其文本样式。"
 
 #. Instructions to show when a Label has been chosen with the selector
 #: ../tools.h:183
@@ -1020,367 +1064,369 @@ msgid ""
 "the text, and use the options to change its text style. Press [Enter] or "
 "[Tab] when you're finished."
 msgstr ""
+"如果要重新定位此标签，请单击图片，键入以更改文本，并使用选项更改其文本样式。"
+"完成后按[Enter]或[Tab]。"
 
 #. Instructions to show when the Label tool's apply mode is activated
 #: ../tools.h:186
 msgid ""
 "Clicking an existing label (or press [Tab] to cycle through them and [Enter] "
 "to choose) to permanently apply the text to the canvas."
-msgstr ""
+msgstr "单击现有标签（或按[Tab]循环浏览，按[Enter]选择）将文本永久应用于画布。"
 
 #. Instructions to show when choosing brushes, depending on the brush's feature (if there are none, show_brush_tip() will show the current tool's tip)
 #: ../tools.h:189
 msgid "This brush is animated; its shape changes as you draw!"
-msgstr ""
+msgstr "此笔刷已设置动画；它的形状会随着你的画而改变！"
 
 #: ../tools.h:190
 msgid "This brush changes depending on the angle."
-msgstr ""
+msgstr "此笔刷会根据角度而变化。"
 
 #: ../tools.h:191
 msgid ""
 "This brush changes depending on the angle, and is animated; its shape "
 "changes as you draw!"
-msgstr ""
+msgstr "该笔刷会根据角度进行更改，并设置动画；它的形状会随着你的画而改变！"
 
 #: ../tools.h:193
 msgid "This brush's spacing is now 1 pixel!"
-msgstr ""
+msgstr "这个笔刷的间距现在是1像素！"
 
 #: ../tools.h:194
 #, c-format
 msgid ""
 "This brush's spacing is now about %1$d/%2$d the size of the brush shape."
-msgstr ""
+msgstr "此笔刷的间距现在约为笔刷形状大小的 %1$d/%2$d。"
 
 #: ../tools.h:195
 msgid "This brush's spacing is now about the size of the brush shape."
-msgstr ""
+msgstr "这个笔刷的间距现在大约是笔刷形状的大小。"
 
 #: ../tools.h:196
 #, c-format
 msgid "This brush's spacing is now about %d times as big as the brush shape."
-msgstr ""
+msgstr "这个笔刷的间距现在大约是笔刷形状的 %d 倍。"
 
 #: ../tools.h:197
 #, c-format
 msgid ""
 "This brush's spacing is now about %1$d %2$d/%3$d times as big as the brush "
 "shape."
-msgstr ""
+msgstr "此笔刷的间距现在约为笔刷形状的 %1$d%2$d/%3$d 倍。"
 
 #. Instructions to show when rotating stamps
 #: ../tools.h:200
 #, fuzzy, c-format
-#| msgid "Move the mouse to rotate the shape. Click to draw it."
+#| msgid ""
+#| "Drag the mouse to rotate the stamp. Click to draw it. (It is rotated %d "
+#| "degrees.)"
 msgid ""
 "Drag the mouse to rotate the stamp. Click to draw it. (It is rotated %d "
 "degrees.)"
 msgstr "移动鼠标来旋转形状。单击就可以画出它。"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2487
+#: ../tuxpaint.c:2422
 msgid "Do you really want to quit?"
 msgstr "你真的要退出吗？"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2490
+#: ../tuxpaint.c:2425
 msgid "Yes, I’m done!"
 msgstr "OK！画完了！"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2493 ../tuxpaint.c:2520
+#: ../tuxpaint.c:2428 ../tuxpaint.c:2455
 msgid "No, take me back!"
 msgstr "不，我要返回！"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2497
+#: ../tuxpaint.c:2432
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "如果你退出了，你会丢掉你的图片！保存起来吗？"
 
-#: ../tuxpaint.c:2498 ../tuxpaint.c:2503
+#: ../tuxpaint.c:2433 ../tuxpaint.c:2438
 msgid "Yes, save it!"
-msgstr "是的，保存！"
+msgstr "是的，保存它！"
 
-#: ../tuxpaint.c:2499 ../tuxpaint.c:2504
+#: ../tuxpaint.c:2434 ../tuxpaint.c:2439
 msgid "No, don’t bother saving!"
-msgstr "不，现在不存。"
+msgstr "不，现在不保存！"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2502
+#: ../tuxpaint.c:2437
 msgid "Save your picture first?"
 msgstr "先保存你的图片？"
 
 #. Error opening picture
-#: ../tuxpaint.c:2507
+#: ../tuxpaint.c:2442
 msgid "Can’t open that picture!"
-msgstr "打不开那个图片啊！"
+msgstr "打不开那个图片！"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2510 ../tuxpaint.c:2515 ../tuxpaint.c:2524 ../tuxpaint.c:2531
-#: ../tuxpaint.c:2540 ../tuxpaint.c:2545
+#: ../tuxpaint.c:2445 ../tuxpaint.c:2450 ../tuxpaint.c:2459 ../tuxpaint.c:2466
+#: ../tuxpaint.c:2475 ../tuxpaint.c:2480
 msgid "OK"
 msgstr "好的"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2514
+#: ../tuxpaint.c:2449
 msgid "There are no saved files!"
-msgstr "没有保存过的文件啊！"
+msgstr "没有保存过的文件！"
 
 #. Verification of print action
-#: ../tuxpaint.c:2518
+#: ../tuxpaint.c:2453
 msgid "Print your picture now?"
 msgstr "现在打印你的图片吗？"
 
-#: ../tuxpaint.c:2519
+#: ../tuxpaint.c:2454
 msgid "Yes, print it!"
 msgstr "是的，打印！"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2523
+#: ../tuxpaint.c:2458
 msgid "Your picture has been printed!"
 msgstr "你的图片被打印出来了！"
 
 #. We got an error printing
-#: ../tuxpaint.c:2527
+#: ../tuxpaint.c:2462
 msgid "Sorry! Your picture could not be printed!"
 msgstr "抱歉！您的图片无法保存！"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2530
+#: ../tuxpaint.c:2465
 msgid "You can’t print yet!"
 msgstr "你还不能打印耶！"
 
 #. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2534
+#: ../tuxpaint.c:2469
 msgid "Erase this picture?"
 msgstr "删除这个图片吗？"
 
-#: ../tuxpaint.c:2535
+#: ../tuxpaint.c:2470
 msgid "Yes, erase it!"
 msgstr "是的，擦掉！"
 
-#: ../tuxpaint.c:2536
+#: ../tuxpaint.c:2471
 msgid "No, don’t erase it!"
 msgstr "不，不要擦掉！"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2539
+#: ../tuxpaint.c:2474
 msgid "Remember to use the left mouse button!"
 msgstr "记住使用鼠标左键!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2543
-#, fuzzy
-#| msgid "Your picture has been printed!"
+#: ../tuxpaint.c:2478
 msgid "Your picture has been exported!"
 msgstr "你的图片被打印出来了！"
 
-#: ../tuxpaint.c:2544
-#, fuzzy
-#| msgid "Your picture has been printed!"
+#: ../tuxpaint.c:2479
 msgid "Your slideshow GIF has been exported!"
 msgstr "你的图片被打印出来了！"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2548
-#, fuzzy
-#| msgid "Sorry! Your picture could not be printed!"
+#: ../tuxpaint.c:2483
 msgid "Sorry! Your picture could not be exported!"
 msgstr "抱歉！您的图片无法保存！"
 
-#: ../tuxpaint.c:2549
-#, fuzzy
-#| msgid "Sorry! Your picture could not be printed!"
+#: ../tuxpaint.c:2484
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "抱歉！您的图片无法保存！"
 
 #. Slideshow instructions
-#: ../tuxpaint.c:2553
+#: ../tuxpaint.c:2488
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "选择你要打开的图片，然后点击“打开”。"
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2868
+#: ../tuxpaint.c:2797
 msgid "Sound muted."
 msgstr "静音。"
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2873
+#: ../tuxpaint.c:2802
 msgid "Sound unmuted."
 msgstr "取消静音。"
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3772
+#: ../tuxpaint.c:3647
 msgid "Please wait…"
-msgstr "请等待..."
+msgstr "请等待…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:9918
+#: ../tuxpaint.c:9523
 msgid "Erase"
 msgstr "擦出"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:9921
+#: ../tuxpaint.c:9526
 msgid "Slides"
 msgstr "幻灯片"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:9924
+#: ../tuxpaint.c:9529
 msgid "Export"
-msgstr ""
+msgstr "导出"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:9927
+#: ../tuxpaint.c:9532
 msgid "Back"
-msgstr "退回"
+msgstr "返回"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:9930
+#: ../tuxpaint.c:9535
 msgid "Play"
 msgstr "播放"
 
-#: ../tuxpaint.c:9934
+#. Slideshow: 'GIF Export' button, to create an animated GIF
+#: ../tuxpaint.c:9538
 msgid "GIF Export"
-msgstr ""
+msgstr "GIF 导出"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:9937
+#: ../tuxpaint.c:9541
 msgid "Next"
 msgstr "下一个"
 
 #. Color mixer dialog: 'Clear' button, to reset the mixed color
-#: ../tuxpaint.c:9940
+#: ../tuxpaint.c:9544
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #. Use the localized label string (e.g., "あぁ" in Japanese)
-#: ../tuxpaint.c:10875 ../tuxpaint.c:10877 ../tuxpaint.c:10878
+#: ../tuxpaint.c:10482 ../tuxpaint.c:10485 ../tuxpaint.c:10486
 msgid "Aa"
 msgstr "文字"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:15223
+#: ../tuxpaint.c:14378
 msgid "Yes"
 msgstr "是的"
 
-#: ../tuxpaint.c:15227
+#: ../tuxpaint.c:14382
 msgid "No"
 msgstr "不要"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:16504
+#: ../tuxpaint.c:15649
 msgid "Replace the picture with your changes?"
-msgstr "确定要更改图片？"
+msgstr "确定要替换图片？"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:16508
+#: ../tuxpaint.c:15653
 msgid "Yes, replace the old one!"
 msgstr "是的，替换原来的图片！"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:16512
+#: ../tuxpaint.c:15657
 msgid "No, save a new file!"
-msgstr "不，保存到新文件"
+msgstr "不，保存到新文件！"
 
-#: ../tuxpaint.c:17857
+#. Let user choose an image:
+#. Instructions for 'Open' file dialog
+#: ../tuxpaint.c:16923
 msgid "Choose the picture you want, then click “Open”."
 msgstr "选择你要打开的图片，然后点击“打开”。"
 
-#: ../tuxpaint.c:19580
+#. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
+#. Only 1 selected?  No point in saving as GIF.
+#.
+#: ../tuxpaint.c:18512
 msgid "Select 2 or more drawings to turn into an animated GIF."
-msgstr ""
+msgstr "选择2个或多个图形以转换为动画GIF。"
 
 #. Descriptions (names) of the color mixer tool's primary colors and shades
-#: ../tuxpaint.c:25889
+#: ../tuxpaint.c:24507
 msgid "red"
-msgstr ""
+msgstr "红色"
 
-#: ../tuxpaint.c:25890
-#, fuzzy
-#| msgid "Yellow!"
+#: ../tuxpaint.c:24508
 msgid "yellow"
-msgstr "黄色！"
+msgstr "黄色"
 
-#: ../tuxpaint.c:25891
-#, fuzzy
-#| msgid "Sky blue!"
+#: ../tuxpaint.c:24509
 msgid "blue"
-msgstr "天蓝色！"
+msgstr "天蓝色"
 
-#: ../tuxpaint.c:25892
-#, fuzzy
-#| msgid "White!"
+#: ../tuxpaint.c:24510
 msgid "white"
-msgstr "白色！"
+msgstr "白色"
 
-#: ../tuxpaint.c:25893
+#: ../tuxpaint.c:24511
 msgid "grey"
-msgstr ""
+msgstr "灰色"
 
-#: ../tuxpaint.c:25894
-#, fuzzy
-#| msgid "Black!"
+#: ../tuxpaint.c:24512
 msgid "black"
-msgstr "黑色！"
+msgstr "黑色"
 
 #. Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.)
-#: ../tuxpaint.c:25899
+#: ../tuxpaint.c:24517
 #, c-format
 msgid "Your color is %1$s %2$s."
-msgstr ""
+msgstr "你的颜色是 %1$s %2$s 。"
 
-#: ../tuxpaint.c:25900
+#: ../tuxpaint.c:24518
 #, c-format
 msgid "Your color is %1$s %2$s and %3$s %4$s."
-msgstr ""
+msgstr "你的颜色是 %1$s %2$s 和 %3$s %4$s。"
 
-#: ../tuxpaint.c:25901
+#: ../tuxpaint.c:24519
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, and %5$s %6$s."
-msgstr ""
+msgstr "你的颜色是 %1$s %2$s, %3$s %4$s，和 %5$s %6$s。"
 
-#: ../tuxpaint.c:25903
+#: ../tuxpaint.c:24520
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, and %7$s %8$s."
-msgstr ""
+msgstr "你的颜色是 %1$s %2$s, %3$s %4$s, %5$s %6$s， 和 %7$s %8$s。"
 
-#: ../tuxpaint.c:25905
+#: ../tuxpaint.c:24521
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, and %9$s %10$s."
 msgstr ""
+"你的颜色是 %1$s %2$s， %3$s %4$s， %5$s %6$s， %7$s %8$s， 和 %9$s %10$s。"
 
-#: ../tuxpaint.c:25907
+#: ../tuxpaint.c:24522
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s, and "
 "%11$s %12$s."
 msgstr ""
+"你的颜色是 %1$s %2$s， %3$s %4$s， %5$s %6$s， %7$s %8$s， %9$s %10$s， 和 "
+"%11$s %12$s。"
 
 #. Color mixer; e.g., "Your color is entirely grey."
-#: ../tuxpaint.c:26745 ../tuxpaint.c:26752
+#: ../tuxpaint.c:25302 ../tuxpaint.c:25307
 msgid "entirely"
-msgstr ""
+msgstr "完全"
 
-#: ../tuxpaint.c:30006
+#. Add "Color Select" color:
+#: ../tuxpaint.c:28397
 msgid "Select a color from your drawing."
 msgstr "从绘画中选择一种颜色。"
 
-#: ../tuxpaint.c:30017
+#: ../tuxpaint.c:28408
 msgid ""
 "Pick a color. Hues go top to bottom. Saturation/intensity goes left (pale) "
 "to right (pure). Value (lightness/darkness): grey bar."
 msgstr ""
+"选择一种颜色。色调从上到下。饱和度/强度从左（淡）向右（纯）。值（亮度/暗"
+"度）：灰色条。"
 
-#: ../tuxpaint.c:30031
+#: ../tuxpaint.c:28422
 msgid ""
 "Click the primary colors (red, yellow, and blue), white (to tint), grey (to "
 "tone), and black (to shade), to mix together a new color."
 msgstr ""
+"单击原色（红色、黄色和蓝色）、白色（要着色）、灰色（要色调）和黑色（要阴"
+"影），将新颜色混合在一起。"
 
 #: ../tuxpaint.desktop.in:9 ../tuxpaint-fullscreen.desktop.in:9
 msgid "Drawing program"
@@ -1388,243 +1434,204 @@ msgstr "绘图程序"
 
 #: ../tuxpaint-fullscreen.desktop.in:3
 msgid "Tux Paint (Fullscreen)"
-msgstr ""
+msgstr "Tux Paint（全屏）"
 
 #: ../../magic/src/alien.c:67
 msgid "Color Shift"
 msgstr "曝光"
 
-#: ../../magic/src/alien.c:76
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to change the colors in parts of your picture."
+#: ../../magic/src/alien.c:75
 msgid "Click and drag the mouse to change the colors in parts of your picture."
 msgstr "单击然后移动鼠标将图片变成驳裂的效果。"
 
-#: ../../magic/src/alien.c:77
+#: ../../magic/src/alien.c:76
 msgid "Click to change the colors in your entire picture."
 msgstr "单击然后移动鼠标将图片变成粉笔画。"
 
-#: ../../magic/src/blind.c:129
+#: ../../magic/src/blind.c:126
 msgid "Blind"
 msgstr "百叶窗"
 
-#: ../../magic/src/blind.c:144
+#: ../../magic/src/blind.c:138
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
 msgstr "点击你画的边缘，有百叶窗效果。上下移动，打开或关闭百叶窗。"
 
-#: ../../magic/src/blocks_etc.c:145
+#: ../../magic/src/blocks_etc.c:136
 msgid "Blocks"
 msgstr "拼块"
 
-#: ../../magic/src/blocks_etc.c:147
+#: ../../magic/src/blocks_etc.c:138
 msgid "Chalk"
 msgstr "粉笔"
 
-#: ../../magic/src/blocks_etc.c:149
+#: ../../magic/src/blocks_etc.c:140
 msgid "Drip"
 msgstr "水滴"
 
-#: ../../magic/src/blocks_etc.c:171
-#, fuzzy
-#| msgid "Click and move the mouse around to make the picture blocky."
+#: ../../magic/src/blocks_etc.c:158
 msgid "Click and drag the mouse around to make the picture blocky."
 msgstr "单击然后移动鼠标将图片变成驳裂的效果。"
 
-#: ../../magic/src/blocks_etc.c:176
-#, fuzzy
-#| msgid "Click to sharpen the entire picture."
+#: ../../magic/src/blocks_etc.c:162
 msgid "Click to make the entire picture blocky."
-msgstr "单击锐化整个画面"
+msgstr "单击锐化整个画面。"
 
-#: ../../magic/src/blocks_etc.c:185
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn the picture into a chalk drawing."
+#: ../../magic/src/blocks_etc.c:169
 msgid ""
 "Click and drag the mouse around to turn the picture into a chalk drawing."
 msgstr "单击然后移动鼠标将图片变成粉笔画。"
 
-#: ../../magic/src/blocks_etc.c:191
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn the picture into a chalk drawing."
+#: ../../magic/src/blocks_etc.c:173
 msgid "Click to turn the entire picture into a chalk drawing."
-msgstr "单击然后移动鼠标将图片变成粉笔画。"
+msgstr "单击可将整个图片变成粉笔画。"
 
-#: ../../magic/src/blocks_etc.c:200
-#, fuzzy
-#| msgid "Click and move the mouse around to make the picture drip."
+#: ../../magic/src/blocks_etc.c:180
 msgid "Click and drag the mouse around to make the picture drip."
 msgstr "单击然后移动鼠标将图片变成水滴图。"
 
-#: ../../magic/src/blocks_etc.c:204
-#, fuzzy
-#| msgid "Click to sharpen the entire picture."
+#: ../../magic/src/blocks_etc.c:184
 msgid "Click to make the entire picture drip."
-msgstr "单击锐化整个画面"
+msgstr "单击锐化整个画面。"
 
-#: ../../magic/src/bloom.c:114
+#: ../../magic/src/bloom.c:107
 msgid "Bloom"
-msgstr ""
+msgstr "开花"
 
-#: ../../magic/src/bloom.c:127
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+#: ../../magic/src/bloom.c:119
 msgid ""
 "Click and drag to apply a glowing \"bloom\" effect to parts of your image."
 msgstr "单击然后移动鼠标为你的图画部分添加马赛克效果。"
 
-#: ../../magic/src/bloom.c:129
-#, fuzzy
-#| msgid "Click to add a mosaic effect to your entire picture."
+#: ../../magic/src/bloom.c:123
 msgid "Click to apply a glowing \"bloom\" effect to your entire image."
 msgstr "单击为你的整张图画添加马赛克效果。"
 
-#: ../../magic/src/blur.c:84
+#: ../../magic/src/blur.c:85
 msgid "Blur"
 msgstr "模糊"
 
-#: ../../magic/src/blur.c:92
-#, fuzzy
-#| msgid "Click and move the mouse around to blur the image."
+#: ../../magic/src/blur.c:93
 msgid "Click and drag the mouse around to blur the image."
 msgstr "单击然后移动鼠标，将图片变模糊。"
 
-#: ../../magic/src/blur.c:93
+#: ../../magic/src/blur.c:94
 msgid "Click to blur the entire image."
 msgstr "单击做出镜子中的效果。"
 
 #. Both are named "Bricks", at the moment:
-#: ../../magic/src/bricks.c:129
+#: ../../magic/src/bricks.c:135
 msgid "Bricks"
 msgstr "拼块"
 
-#: ../../magic/src/bricks.c:144
-#, fuzzy
-#| msgid "Click and move to draw large bricks."
+#: ../../magic/src/bricks.c:150
 msgid "Click and drag to draw large bricks."
-msgstr "单击然后移动来画火花。"
+msgstr "单击并拖动以绘制大型砖块。"
 
-#: ../../magic/src/bricks.c:146
-#, fuzzy
-#| msgid "Click and move to draw small bricks."
+#: ../../magic/src/bricks.c:152
 msgid "Click and drag to draw small bricks."
-msgstr "单击然后移动来画火花。"
+msgstr "单击并拖动以绘制小型砖块。"
 
-#: ../../magic/src/calligraphy.c:135
+#: ../../magic/src/bricks.c:156
+#, fuzzy
+#| msgid "Click and drag to draw large bricks."
+msgid "Click and drag to draw bricks."
+msgstr "单击并拖动以绘制大型砖块。"
+
+#: ../../magic/src/calligraphy.c:130
 msgid "Calligraphy"
 msgstr "书法"
 
-#: ../../magic/src/calligraphy.c:152
-#, fuzzy
-#| msgid "Click and move the mouse around to draw in calligraphy."
+#: ../../magic/src/calligraphy.c:143
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "单击然后移动鼠标来绘制相片底片。"
 
-#: ../../magic/src/cartoon.c:116
+#: ../../magic/src/cartoon.c:111
 msgid "Cartoon"
 msgstr "卡通"
 
-#: ../../magic/src/cartoon.c:134
-#, fuzzy
-#| msgid "Click and move the mouse around to turn the picture into a cartoon."
+#: ../../magic/src/cartoon.c:125
 msgid "Click and drag the mouse around to turn the picture into a cartoon."
 msgstr "单击然后移动鼠标将图片变成粉笔画。"
 
-#: ../../magic/src/cartoon.c:140
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn the picture into a chalk drawing."
+#: ../../magic/src/cartoon.c:129
 msgid "Click to turn the entire picture into a cartoon."
 msgstr "单击然后移动鼠标将图片变成粉笔画。"
 
-#: ../../magic/src/checkerboard.c:116
+#: ../../magic/src/checkerboard.c:114
 msgid "Checkerboard"
-msgstr ""
+msgstr "棋盘"
 
-#: ../../magic/src/checkerboard.c:131
-#, fuzzy
-#| msgid "Click and drag to draw repetitive patterns. "
+#: ../../magic/src/checkerboard.c:125
 msgid "Click and drag to fill the canvas with a checkerboard pattern."
-msgstr "点击和拖拽来重复图样"
+msgstr "点击和拖拽来重复图样。"
 
-#: ../../magic/src/clone.c:142
+#: ../../magic/src/clone.c:138
 msgid "Clone"
-msgstr ""
+msgstr "克隆"
 
-#: ../../magic/src/clone.c:159
+#: ../../magic/src/clone.c:152
 msgid ""
 "Click once to pick a spot to begin cloning. Click again and drag to clone "
 "that part of the picture."
-msgstr ""
+msgstr "单击一次以选择一个位置开始克隆。再次单击并拖动以克隆图片的该部分。"
 
-#: ../../magic/src/colorsep.c:38
-#, fuzzy
-#| msgid "Glass Tile"
+#: ../../magic/src/colorsep.c:39
 msgid "3D Glasses"
 msgstr "玻璃瓦"
 
-#: ../../magic/src/colorsep.c:39
-#, fuzzy
-#| msgid "Color Shift"
-msgid "Color Sep."
-msgstr "曝光"
-
 #: ../../magic/src/colorsep.c:40
-msgid "Double Vision"
-msgstr ""
+msgid "Color Sep."
+msgstr "曝光。"
 
-#: ../../magic/src/colorsep.c:44
+#: ../../magic/src/colorsep.c:41
+msgid "Double Vision"
+msgstr "双瞳"
+
+#: ../../magic/src/colorsep.c:46
 msgid ""
 "Click and drag left and right to separate your picture's red and cyan, to "
 "make anaglyphs you can view with 3D glasses!"
 msgstr ""
+"单击并向左和向右拖动以分离图片的红色和青色，从而制作可以使用3D眼镜观看的浮"
+"雕！"
 
-#: ../../magic/src/colorsep.c:45
-#, fuzzy
-#| msgid "Click and drag to draw train track rails on your picture."
+#: ../../magic/src/colorsep.c:47
 msgid "Click and drag to separate your picture's colors."
-msgstr "单击然后移动鼠标在画面上画出火车铁路"
+msgstr "单击然后移动鼠标在画面上画出火车铁路。"
 
-#: ../../magic/src/colorsep.c:46
-#, fuzzy
-#| msgid "Click and move to draw large bricks."
+#: ../../magic/src/colorsep.c:48
 msgid "Click and drag to simulate double vision."
 msgstr "单击然后移动来画火花。"
 
-#: ../../magic/src/confetti.c:103
+#: ../../magic/src/confetti.c:101
 msgid "Confetti"
 msgstr "五彩纸屑"
 
-#: ../../magic/src/confetti.c:116
+#: ../../magic/src/confetti.c:111
 msgid "Click to throw confetti!"
 msgstr "点击抛出五彩纸屑！"
 
-#: ../../magic/src/distortion.c:145
+#: ../../magic/src/distortion.c:141
 msgid "Distortion"
 msgstr "变形"
 
-#: ../../magic/src/distortion.c:166
+#: ../../magic/src/distortion.c:158
 msgid "Click and drag the mouse to cause distortion in your picture."
 msgstr "单击然后移动鼠标将图片变形。"
 
-#: ../../magic/src/emboss.c:110
+#: ../../magic/src/emboss.c:107
 msgid "Emboss"
 msgstr "凸起"
 
-#: ../../magic/src/emboss.c:127
+#: ../../magic/src/emboss.c:120
 msgid "Click and drag the mouse to emboss the picture."
 msgstr "单击然后移动鼠标将图片凸起。"
 
-#: ../../magic/src/emboss.c:129
-#, fuzzy
-#| msgid "Click to sharpen the entire picture."
+#: ../../magic/src/emboss.c:122
 msgid "Click to emboss the entire picture."
-msgstr "单击锐化整个画面"
+msgstr "单击锐化整个画面。"
 
 #: ../../magic/src/fade_darken.c:47
 msgid "Lighten"
@@ -1636,27 +1643,21 @@ msgstr "变暗"
 
 #: ../../magic/src/fade_darken.c:49
 msgid "Desaturate"
-msgstr ""
+msgstr "不饱和度"
 
 #: ../../magic/src/fade_darken.c:50
 msgid "Saturate"
-msgstr ""
+msgstr "饱和度"
 
 #: ../../magic/src/fade_darken.c:51
-#, fuzzy
-#| msgid "Xor Colors"
 msgid "Remove Color"
 msgstr "随机色"
 
 #: ../../magic/src/fade_darken.c:52
-#, fuzzy
-#| msgid "Colors"
 msgid "Keep Color"
 msgstr "颜色"
 
 #: ../../magic/src/fade_darken.c:57
-#, fuzzy
-#| msgid "Click and move the mouse to lighten parts of your picture."
 msgid "Click and drag the mouse to lighten parts of your picture."
 msgstr "单击然后移动鼠标，使图片部分变亮。"
 
@@ -1664,148 +1665,138 @@ msgstr "单击然后移动鼠标，使图片部分变亮。"
 msgid "Click to lighten your entire picture."
 msgstr "单击使图片整体变亮。"
 
-#: ../../magic/src/fade_darken.c:61
-#, fuzzy
-#| msgid "Click and move the mouse to darken parts of your picture."
+#: ../../magic/src/fade_darken.c:60
 msgid "Click and drag the mouse to darken parts of your picture."
 msgstr "单击然后移动鼠标，使图片部分变暗。"
 
-#: ../../magic/src/fade_darken.c:62
+#: ../../magic/src/fade_darken.c:61
 msgid "Click to darken your entire picture."
 msgstr "单击使图片整体变暗。"
 
-#: ../../magic/src/fade_darken.c:65
-#, fuzzy
-#| msgid "Click and move the mouse to darken parts of your picture."
+#: ../../magic/src/fade_darken.c:63
 msgid "Click and drag the mouse to desaturate parts of your picture."
 msgstr "单击然后移动鼠标，使图片部分变暗。"
 
-#: ../../magic/src/fade_darken.c:66
-#, fuzzy
-#| msgid "Click to darken your entire picture."
+#: ../../magic/src/fade_darken.c:64
 msgid "Click to desaturate your entire picture."
 msgstr "单击使图片整体变暗。"
 
-#: ../../magic/src/fade_darken.c:69
-#, fuzzy
-#| msgid "Click and move the mouse to sharpen parts of your picture."
+#: ../../magic/src/fade_darken.c:66
 msgid "Click and drag the mouse to saturate parts of your picture."
 msgstr "单击然后移动鼠标锐化部分图画。"
 
-#: ../../magic/src/fade_darken.c:70
-#, fuzzy
-#| msgid "Click to darken your entire picture."
+#: ../../magic/src/fade_darken.c:67
 msgid "Click to saturate your entire picture."
 msgstr "单击使图片整体变暗。"
 
-#: ../../magic/src/fade_darken.c:73
-#, fuzzy
-#| msgid "Click and move the mouse to trace edges in parts of your picture."
+#: ../../magic/src/fade_darken.c:69
 msgid ""
 "Click and drag the mouse to entirely desaturate parts of your picture that "
 "match the chosen color."
 msgstr "单击然后移动鼠标跟踪部分图画的边缘。"
 
-#: ../../magic/src/fade_darken.c:74
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn parts of your picture into white "
-#| "and a color you choose."
+#: ../../magic/src/fade_darken.c:70
 msgid ""
 "Click to entirely desaturate the parts of your picture that match the chosen "
 "color."
-msgstr "单击然后滑动鼠标改变你的画面颜色。"
+msgstr "单击然后拖动鼠标改变你的画面颜色。"
 
-#: ../../magic/src/fade_darken.c:77
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn parts of your picture into white "
-#| "and a color you choose."
+#: ../../magic/src/fade_darken.c:74
 msgid ""
 "Click and drag the mouse to entirely desaturate parts of your picture that "
 "don't match the chosen color."
-msgstr "单击然后滑动鼠标改变你的画面颜色。"
+msgstr "单击然后拖动鼠标改变你的画面颜色。"
 
-#: ../../magic/src/fade_darken.c:78
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn parts of your picture into white "
-#| "and a color you choose."
+#: ../../magic/src/fade_darken.c:75
 msgid ""
 "Click to entirely desaturate the parts of your picture that don't match the "
 "chosen color."
-msgstr "单击然后滑动鼠标改变你的画面颜色。"
+msgstr "单击然后拖动鼠标改变你的画面颜色。"
 
-#: ../../magic/src/fisheye.c:113
+#: ../../magic/src/fisheye.c:111
 msgid "Fisheye"
 msgstr "鱼眼效果"
 
-#: ../../magic/src/fisheye.c:128
+#: ../../magic/src/fisheye.c:121
 msgid "Click on part of your picture to create a fisheye effect."
 msgstr "单击然后移动鼠标画一个花柄。让我们画一朵花。"
 
-#: ../../magic/src/flower.c:163
+#: ../../magic/src/flower.c:200
 msgid "Flower"
 msgstr "花朵"
 
-#: ../../magic/src/flower.c:180
+#: ../../magic/src/flower.c:212
 msgid "Click and drag to draw a flower stalk. Let go to finish the flower."
 msgstr "单击然后移动鼠标画一个花柄。让我们画一朵花。"
 
-#: ../../magic/src/foam.c:133
+#: ../../magic/src/foam.c:120
 msgid "Foam"
 msgstr "泡泡"
 
-#: ../../magic/src/foam.c:150
+#: ../../magic/src/foam.c:132
 msgid "Click and drag the mouse to cover an area with foamy bubbles."
-msgstr "单击然后移动鼠标用泡泡覆盖一片区域"
+msgstr "单击然后移动鼠标用泡泡覆盖一片区域。"
 
-#: ../../magic/src/fold.c:127
+#: ../../magic/src/fold.c:114
 msgid "Fold"
 msgstr "折叠"
 
-#: ../../magic/src/fold.c:142
+#: ../../magic/src/fold.c:124
 msgid ""
 "Choose a background color and click to turn the corner of the page over."
-msgstr "选择背景颜色，点击将画面对角折叠"
+msgstr "选择背景颜色，点击将画面对角折叠。"
 
-#: ../../magic/src/fretwork.c:211
+#: ../../magic/src/fretwork.c:195
 msgid "Fretwork"
 msgstr "浮雕效果"
 
-#: ../../magic/src/fretwork.c:219
-#, fuzzy
-#| msgid "Click and drag to draw repetitive patterns. "
+#: ../../magic/src/fretwork.c:201
 msgid "Click and drag to draw repetitive patterns."
-msgstr "点击和拖拽来重复图样"
+msgstr "点击和拖拽来重复图样。"
 
-#: ../../magic/src/fretwork.c:223
+#: ../../magic/src/fretwork.c:203
 msgid "Click to surround your picture with repetitive patterns."
-msgstr "点击让这些重复图样围绕你的画"
+msgstr "点击让这些重复图样围绕你的画。"
 
-#: ../../magic/src/glasstile.c:114
+#: ../../magic/src/glasstile.c:113
 msgid "Glass Tile"
 msgstr "玻璃瓦"
 
-#: ../../magic/src/glasstile.c:131
+#: ../../magic/src/glasstile.c:126
 msgid "Click and drag the mouse to put glass tile over your picture."
 msgstr "单击然后移动鼠标在你的图片上放玻璃瓦。"
 
-#: ../../magic/src/glasstile.c:135
+#: ../../magic/src/glasstile.c:128
 msgid "Click to cover your entire picture in glass tiles."
 msgstr "单击将整幅图片覆盖玻璃瓦。"
 
-#: ../../magic/src/googlyeyes.c:165
-msgid "Googly Eyes"
+#: ../../magic/src/googlyeyes.c:24
+msgid ""
+"Click to place a large googly eye, then drag and release to make it look "
+"that direction."
 msgstr ""
 
-#: ../../magic/src/grass.c:116
+#: ../../magic/src/googlyeyes.c:25
+msgid ""
+"Click to place a small googly eye, then drag and release to make it look "
+"that direction."
+msgstr ""
+
+#: ../../magic/src/googlyeyes.c:205
+msgid "Googly Eyes"
+msgstr "金鱼眼"
+
+#: ../../magic/src/googlyeyes.c:222
+msgid ""
+"Click to place a googly eye, then drag and release to make it look that "
+"direction."
+msgstr ""
+
+#: ../../magic/src/grass.c:111
 msgid "Grass"
 msgstr "草"
 
-#: ../../magic/src/grass.c:133
-#, fuzzy
-#| msgid "Click and move to draw grass. Don’t forget the dirt!"
+#: ../../magic/src/grass.c:123
 msgid "Click and drag to draw grass. Don’t forget the dirt!"
 msgstr "单击然后移动来画草。不要忘了泥土！"
 
@@ -1815,90 +1806,75 @@ msgstr "中间色"
 
 #: ../../magic/src/halftone.c:50
 msgid "Click and drag to turn your drawing into a newspaper."
-msgstr "点击拖拽画面，使其变成报纸效果。"
+msgstr "单击并拖动可以将绘图变成报纸。"
 
 #: ../../magic/src/halftone.c:51
-#, fuzzy
-#| msgid "Click and drag to turn your drawing into a newspaper."
 msgid "Click to turn your drawing into a newspaper."
-msgstr "点击拖拽画面，使其变成报纸效果。"
+msgstr "单击可将您的绘图变成报纸。"
 
-#: ../../magic/src/kaleidox.c:39
-#, fuzzy
-#| msgid "Kaleidoscope"
+#: ../../magic/src/kaleidox.c:40
 msgid "Kaleido-4"
 msgstr "万花筒"
 
-#: ../../magic/src/kaleidox.c:40
-#, fuzzy
-#| msgid "Kaleidoscope"
+#: ../../magic/src/kaleidox.c:41
 msgid "Kaleido-6"
 msgstr "万花筒"
 
-#: ../../magic/src/kaleidox.c:41
-#, fuzzy
-#| msgid "Kaleidoscope"
+#: ../../magic/src/kaleidox.c:42
 msgid "Kaleido-8"
 msgstr "万花筒"
 
-#: ../../magic/src/kaleidox.c:45 ../../magic/src/kaleidox.c:46
-#: ../../magic/src/kaleidox.c:47
-#, fuzzy
-#| msgid ""
-#| "Click and drag to make parts of your picture look like they are on "
-#| "television."
+#: ../../magic/src/kaleidox.c:46 ../../magic/src/kaleidox.c:47
+#: ../../magic/src/kaleidox.c:48
 msgid ""
 "Click and drag around your picture to look through it with a kaleidoscope!"
-msgstr "点击拖动鼠标，使你的作品看起来像在电视里一样。"
+msgstr "点击并拖动您的图片，即可使用万花筒进行浏览！"
 
-#: ../../magic/src/kalidescope.c:128
+#: ../../magic/src/kalidescope.c:127
 msgid "Symmetric Left/Right"
 msgstr "均衡 左/右"
 
-#: ../../magic/src/kalidescope.c:132
+#: ../../magic/src/kalidescope.c:131
 msgid "Symmetric Up/Down"
 msgstr "均衡 上/下"
 
-#: ../../magic/src/kalidescope.c:136
+#: ../../magic/src/kalidescope.c:135
 msgid "Pattern"
 msgstr "图案"
 
-#: ../../magic/src/kalidescope.c:140
+#: ../../magic/src/kalidescope.c:139
 msgid "Tiles"
 msgstr "瓦片"
 
 #. KAL_BOTH
-#: ../../magic/src/kalidescope.c:144
+#: ../../magic/src/kalidescope.c:143
 msgid "Kaleidoscope"
 msgstr "万花筒"
 
-#: ../../magic/src/kalidescope.c:164
+#: ../../magic/src/kalidescope.c:161
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the left and right of your picture."
-msgstr "单击然后滑动鼠标，使用两只对称的画笔在你的画纸上的左右两侧作画。"
+msgstr "单击并拖动鼠标，使用两个在图片左右两侧对称的笔刷进行绘制。"
 
-#: ../../magic/src/kalidescope.c:170
+#: ../../magic/src/kalidescope.c:167
 msgid ""
 "Click and drag the mouse to draw with two brushes that are symmetric across "
 "the top and bottom of your picture."
-msgstr "单击然后滑动鼠标，使用两只对称的画笔在你的画纸上的上下两侧作画。"
+msgstr "单击并拖动鼠标，使用两个在图片顶部和底部对称的笔刷进行绘制。"
 
-#: ../../magic/src/kalidescope.c:176
+#: ../../magic/src/kalidescope.c:171
 msgid "Click and drag the mouse to draw a pattern across the picture."
-msgstr "单击然后滑动鼠标在画质上画一个图案。"
+msgstr "单击然后拖动鼠标在画质上画一个图案。"
 
-#: ../../magic/src/kalidescope.c:182
-#, fuzzy
-#| msgid ""
-#| "Click and drag the mouse to draw a pattern plus its symmetric across the "
-#| "picture."
+#: ../../magic/src/kalidescope.c:175
 msgid ""
 "Click and drag the mouse to draw a pattern that is symmetric across the "
 "picture."
-msgstr "单击然后滑动鼠标，画一对对称图案。"
+msgstr "单击然后拖动鼠标，画一对对称图案。"
 
-#: ../../magic/src/kalidescope.c:188
+#. KAL_BOTH
+#: ../../magic/src/kalidescope.c:179
 msgid ""
 "Click and drag the mouse to draw with symmetric brushes (a kaleidoscope)."
 msgstr "单击然后移动鼠标用对称的画笔（一个万花筒）画图。"
@@ -1907,329 +1883,290 @@ msgstr "单击然后移动鼠标用对称的画笔（一个万花筒）画图。
 msgid "Light"
 msgstr "光"
 
-#: ../../magic/src/light.c:129
+#: ../../magic/src/light.c:124
 msgid "Click and drag to draw a beam of light on your picture."
-msgstr "单击然后移动鼠标在你的图画上画一束光。"
+msgstr "单击并拖动可以在图片上绘制一束光。"
 
-#: ../../magic/src/lightning.c:90
-#, fuzzy
-#| msgid "Lighten"
+#: ../../magic/src/lightning.c:84
 msgid "Lightning"
 msgstr "变亮"
 
-#: ../../magic/src/lightning.c:105
-#, fuzzy
-#| msgid "Click and drag to draw a beam of light on your picture."
+#: ../../magic/src/lightning.c:94
 msgid "Click, drag, and release to draw a lightning bolt between two points."
-msgstr "单击然后移动鼠标在你的图画上画一束光。"
+msgstr "单击、拖动并释放以在两个点之间绘制闪电。"
 
-#: ../../magic/src/maze.c:114
+#: ../../magic/src/maze.c:110
 msgid "Maze"
-msgstr ""
+msgstr "迷宫"
 
-#: ../../magic/src/maze.c:128
-#, fuzzy
-#| msgid "Click and drag to draw train track rails on your picture."
+#: ../../magic/src/maze.c:121
 msgid "Click and drag to paint a maze on your picture."
-msgstr "单击然后移动鼠标在画面上画出火车铁路"
+msgstr "单击然后移动鼠标在画面上画出火车铁路。"
 
-#: ../../magic/src/maze.c:130
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn the picture into a chalk drawing."
+#: ../../magic/src/maze.c:123
 msgid "Click to turn your entire picture into a maze."
 msgstr "单击然后移动鼠标将图片变成粉笔画。"
 
-#: ../../magic/src/metalpaint.c:108
+#: ../../magic/src/metalpaint.c:104
 msgid "Metal Paint"
 msgstr "金属质感"
 
-#: ../../magic/src/metalpaint.c:125
+#: ../../magic/src/metalpaint.c:117
 msgid "Click and drag the mouse to paint with a metallic color."
 msgstr "单击然后移动鼠标画金属质感效果。"
 
-#: ../../magic/src/mirror_flip.c:118
+#: ../../magic/src/mirror_flip.c:115
 msgid "Mirror"
 msgstr "镜子"
 
-#: ../../magic/src/mirror_flip.c:120
+#: ../../magic/src/mirror_flip.c:117
 msgid "Flip"
 msgstr "翻转"
 
-#: ../../magic/src/mirror_flip.c:137
+#: ../../magic/src/mirror_flip.c:132
 msgid "Click to make a mirror image."
 msgstr "单击做出镜像。"
 
-#: ../../magic/src/mirror_flip.c:139
+#: ../../magic/src/mirror_flip.c:134
 msgid "Click to flip the picture upside-down."
 msgstr "点击使图片上下翻转。"
 
-#: ../../magic/src/mosaic.c:103
+#: ../../magic/src/mosaic.c:102
 msgid "Mosaic"
 msgstr "马赛克"
 
-#: ../../magic/src/mosaic.c:112
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+#: ../../magic/src/mosaic.c:110
 msgid ""
 "Click and drag the mouse to add a mosaic effect to parts of your picture."
 msgstr "单击然后移动鼠标为你的图画部分添加马赛克效果。"
 
-#: ../../magic/src/mosaic.c:113
+#: ../../magic/src/mosaic.c:111
 msgid "Click to add a mosaic effect to your entire picture."
 msgstr "单击为你的整张图画添加马赛克效果。"
 
-#: ../../magic/src/mosaic_shaped.c:146
+#: ../../magic/src/mosaic_shaped.c:138
 msgid "Square Mosaic"
 msgstr "矩形马赛克"
 
-#: ../../magic/src/mosaic_shaped.c:147
+#: ../../magic/src/mosaic_shaped.c:139
 msgid "Hexagon Mosaic"
 msgstr "六边形马赛克"
 
-#: ../../magic/src/mosaic_shaped.c:148
+#: ../../magic/src/mosaic_shaped.c:140
 msgid "Irregular Mosaic"
 msgstr "不规则马赛克"
 
-#: ../../magic/src/mosaic_shaped.c:155
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to add a square mosaic to parts of your picture."
+#: ../../magic/src/mosaic_shaped.c:146
 msgid ""
 "Click and drag the mouse to add a square mosaic to parts of your picture."
 msgstr "单击然后移动鼠标为你的图画部分添加马赛克效果。"
 
-#: ../../magic/src/mosaic_shaped.c:156
+#: ../../magic/src/mosaic_shaped.c:147
 msgid "Click to add a square mosaic to your entire picture."
 msgstr "单击为你的整张图画添加马赛克效果。"
 
-#: ../../magic/src/mosaic_shaped.c:161
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to add a hexagonal mosaic to parts of your "
-#| "picture."
+#: ../../magic/src/mosaic_shaped.c:151
 msgid ""
 "Click and drag the mouse to add a hexagonal mosaic to parts of your picture."
 msgstr "单击然后移动鼠标为你的图画部分添加六边形马赛克效果。"
 
-#: ../../magic/src/mosaic_shaped.c:162
+#: ../../magic/src/mosaic_shaped.c:152
 msgid "Click to add a hexagonal mosaic to your entire picture."
 msgstr "单击为你的整张图画添加六边形马赛克效果。"
 
-#: ../../magic/src/mosaic_shaped.c:167
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to add an irregular mosaic to parts of your "
-#| "picture."
+#: ../../magic/src/mosaic_shaped.c:156
 msgid ""
 "Click and drag the mouse to add an irregular mosaic to parts of your picture."
 msgstr "单击然后移动鼠标为你的图画部分添加不规则马赛克效果。"
 
-#: ../../magic/src/mosaic_shaped.c:168
+#: ../../magic/src/mosaic_shaped.c:157
 msgid "Click to add an irregular mosaic to your entire picture."
 msgstr "单击为你的整张图画添加不规则马赛克效果。"
 
-#: ../../magic/src/negative.c:79
+#: ../../magic/src/negative.c:78
 msgid "Negative"
 msgstr "底片"
 
-#: ../../magic/src/negative.c:80
+#: ../../magic/src/negative.c:79
 msgid "Opposite"
-msgstr ""
+msgstr "反色"
 
-#: ../../magic/src/negative.c:86
-#, fuzzy
-#| msgid "Click and move the mouse around to make your painting negative."
+#: ../../magic/src/negative.c:84
 msgid "Click and drag the mouse around to make your painting negative."
-msgstr "单击然后移动鼠标制作画面底片"
+msgstr "单击然后移动鼠标制作画面底片。"
+
+#: ../../magic/src/negative.c:85
+msgid "Click to turn your painting into its negative."
+msgstr "单击使你的画变为底片。"
 
 #: ../../magic/src/negative.c:87
-msgid "Click to turn your painting into its negative."
-msgstr "单击使你的画变为底片"
-
-#: ../../magic/src/negative.c:90
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to change the color of parts of your "
-#| "picture."
 msgid ""
 "Click and drag the mouse around to change colors to their opposites -- their "
 "complementary colors."
-msgstr "单击然后滑动鼠标改变画面颜色。"
+msgstr "单击并拖动鼠标可以将颜色更改为相反的颜色，即互补色。"
 
-#: ../../magic/src/negative.c:92
+#: ../../magic/src/negative.c:88
 msgid ""
 "Click to turn all colors in your painting into their opposites -- their "
 "complementary colors."
-msgstr ""
+msgstr "单击可将绘画中的所有颜色转换为它们的互补色。"
 
 #: ../../magic/src/noise.c:65
 msgid "Noise"
 msgstr "噪声"
 
-#: ../../magic/src/noise.c:74
-#, fuzzy
-#| msgid "Click and move the mouse to add noise to parts of your picture."
+#: ../../magic/src/noise.c:73
 msgid "Click and drag the mouse to add noise to parts of your picture."
 msgstr "单击然后移动鼠标，将图片变模糊。"
 
-#: ../../magic/src/noise.c:75
+#: ../../magic/src/noise.c:74
 msgid "Click to add noise to your entire picture."
 msgstr "单击然后移动鼠标将图片变成驳裂的效果。"
 
-#: ../../magic/src/perspective.c:170
+#: ../../magic/src/perspective.c:165
 msgid "Perspective"
 msgstr "透镜"
 
-#: ../../magic/src/perspective.c:171
+#: ../../magic/src/perspective.c:166
 msgid "Panels"
-msgstr ""
+msgstr "面板"
 
-#: ../../magic/src/perspective.c:172
-#, fuzzy
-#| msgid "Zoom"
+#: ../../magic/src/perspective.c:167
 msgid "Tile Zoom"
 msgstr "缩小"
 
-#: ../../magic/src/perspective.c:173
+#: ../../magic/src/perspective.c:168
 msgid "Zoom"
 msgstr "缩小"
 
-#: ../../magic/src/perspective.c:174
+#: ../../magic/src/perspective.c:169
 msgid "Rush"
-msgstr ""
+msgstr "快速移动"
 
-#: ../../magic/src/perspective.c:179
+#: ../../magic/src/perspective.c:173
 msgid "Click on the corners and drag where you want to stretch the picture."
-msgstr "单击画面角落然后将其拉拽到你想要的位置"
+msgstr "单击画面角落然后将其拉拽到你想要的位置。"
 
-#: ../../magic/src/perspective.c:181
-#, fuzzy
-#| msgid "Click to turn your painting into its negative."
+#: ../../magic/src/perspective.c:175
 msgid "Click to turn your picture into 2-by-2 panels."
-msgstr "单击使你的画变为底片"
+msgstr "单击使你的画变为底片。"
 
-#: ../../magic/src/perspective.c:184
-#, fuzzy
-#| msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+#: ../../magic/src/perspective.c:177
 msgid ""
 "Click and drag up to zoom in the picture. Drag down to zoom out and tile the "
 "picture."
 msgstr "单击然后向上拖拽放大，向下拖拽缩小。"
 
-#: ../../magic/src/perspective.c:187
+#: ../../magic/src/perspective.c:179
 msgid "Click and drag up to zoom in or drag down to zoom out the picture."
 msgstr "单击然后向上拖拽放大，向下拖拽缩小。"
 
-#: ../../magic/src/perspective.c:190
-#, fuzzy
-#| msgid "Click and drag up to zoom in or drag down to zoom out the picture."
+#: ../../magic/src/perspective.c:181
 msgid "Click and drag up to rush in or drag down to rush out the picture."
 msgstr "单击然后向上拖拽放大，向下拖拽缩小。"
 
 #: ../../magic/src/pixels.c:114
 msgid "Pixels"
-msgstr ""
+msgstr "像素"
 
-#: ../../magic/src/pixels.c:129
-#, fuzzy
-#| msgid "Click and move to draw large bricks."
+#: ../../magic/src/pixels.c:126
 msgid "Click and drag to draw large pixels."
-msgstr "单击然后移动来画火花。"
+msgstr "单击并拖动以绘制大像素。"
 
-#: ../../magic/src/puzzle.c:116
+#: ../../magic/src/puzzle.c:111
 msgid "Puzzle"
 msgstr "拼图"
 
-#: ../../magic/src/puzzle.c:132
+#: ../../magic/src/puzzle.c:123
 msgid "Click the part of your picture where would you like a puzzle."
 msgstr "单击你想要画面变为拼图部位。"
 
-#: ../../magic/src/puzzle.c:133
+#: ../../magic/src/puzzle.c:124
 msgid "Click to make a puzzle in fullscreen mode."
 msgstr "单击进入制作拼图全屏模式。"
 
-#: ../../magic/src/rails.c:159
+#: ../../magic/src/rails.c:150
 msgid "Rails"
 msgstr "铁路"
 
-#: ../../magic/src/rails.c:174
+#: ../../magic/src/rails.c:160
 msgid "Click and drag to draw train track rails on your picture."
-msgstr "单击然后移动鼠标在画面上画出火车铁路"
+msgstr "单击然后移动鼠标在画面上画出火车铁路。"
 
-#: ../../magic/src/rainbow.c:148
+#: ../../magic/src/rainbow.c:154
 msgid "Rainbow"
 msgstr "彩虹"
 
-#: ../../magic/src/rainbow.c:152
+#: ../../magic/src/rainbow.c:158
+msgid "Smooth Rainbow"
+msgstr "光滑的彩虹"
+
+#: ../../magic/src/rainbow.c:162
 #, fuzzy
 #| msgid "Rainbow"
-msgid "Smooth Rainbow"
+msgid "Rainbow Cycle"
 msgstr "彩虹"
 
-#: ../../magic/src/rainbow.c:168
+#: ../../magic/src/rainbow.c:175
 msgid "You can draw in rainbow colors!"
-msgstr "你可以用彩虹的颜色画图耶！"
+msgstr "你可以用彩虹的颜色画图哦！"
 
-#: ../../magic/src/rain.c:68
+#: ../../magic/src/rain.c:67
 msgid "Rain"
 msgstr "雨点"
 
-#: ../../magic/src/rain.c:76
+#: ../../magic/src/rain.c:75
 msgid "Click to place a rain drop onto your picture."
-msgstr "单击在画面上画雨点"
+msgstr "单击在画面上画雨点。"
 
-#: ../../magic/src/rain.c:77
+#: ../../magic/src/rain.c:76
 msgid "Click to cover your picture with rain drops."
-msgstr "单击在画面上布满雨滴"
+msgstr "单击在画面上布满雨滴。"
 
-#: ../../magic/src/realrainbow.c:115
+#: ../../magic/src/realrainbow.c:105
 msgid "Real Rainbow"
 msgstr "真实的彩虹"
 
-#: ../../magic/src/realrainbow.c:117
+#: ../../magic/src/realrainbow.c:107
 msgid "ROYGBIV Rainbow"
 msgstr "七彩虹"
 
-#: ../../magic/src/realrainbow.c:132
+#: ../../magic/src/realrainbow.c:120
 msgid ""
 "Click where you want your rainbow to start, drag to where you want it to "
 "end, and then let go to draw a rainbow."
-msgstr "单击选择彩虹的起始位置，滑动鼠标到彩虹的终止位置，这样就画出一道彩虹了"
-
-#: ../../magic/src/reflection.c:117
-msgid "Reflection"
 msgstr ""
+"单击选择彩虹的起始位置，拖动鼠标到彩虹的终止位置，这样就画出一道彩虹了。"
 
-#: ../../magic/src/reflection.c:132
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse to add a mosaic effect to parts of your picture."
+#: ../../magic/src/reflection.c:114
+msgid "Reflection"
+msgstr "反射"
+
+#: ../../magic/src/reflection.c:125
 msgid "Click and drag the mouse around to add a reflection to your picture."
 msgstr "单击然后移动鼠标为你的图画部分添加马赛克效果。"
 
-#: ../../magic/src/ripples.c:111
+#: ../../magic/src/ripples.c:109
 msgid "Ripples"
 msgstr "波纹"
 
-#: ../../magic/src/ripples.c:127
+#: ../../magic/src/ripples.c:121
 msgid "Click to make ripples appear over your picture."
-msgstr "单击用波纹覆盖你的图画。"
+msgstr "单击在你的图片上画出波纹。"
 
-#: ../../magic/src/rosette.c:131
+#: ../../magic/src/rosette.c:128
 msgid "Rosette"
 msgstr "玫瑰花饰"
 
-#: ../../magic/src/rosette.c:133
+#: ../../magic/src/rosette.c:130
 msgid "Picasso"
 msgstr "毕加索风格"
 
-#: ../../magic/src/rosette.c:146
+#: ../../magic/src/rosette.c:141
 msgid "Click and start drawing your rosette."
 msgstr "点击开始画玫瑰花饰。"
 
-#: ../../magic/src/rosette.c:148
+#: ../../magic/src/rosette.c:143
 msgid "You can draw just like Picasso!"
 msgstr "你可以像毕加索一样作画！"
 
@@ -2245,43 +2182,37 @@ msgstr "锐化"
 msgid "Silhouette"
 msgstr "侧面影象"
 
-#: ../../magic/src/sharpen.c:82
-#, fuzzy
-#| msgid "Click and move the mouse to trace edges in parts of your picture."
+#: ../../magic/src/sharpen.c:81
 msgid "Click and drag the mouse to trace edges in parts of your picture."
 msgstr "单击然后移动鼠标跟踪部分图画的边缘。"
 
-#: ../../magic/src/sharpen.c:83
+#: ../../magic/src/sharpen.c:82
 msgid "Click to trace edges in your entire picture."
 msgstr "单击跟踪整个图画。"
 
-#: ../../magic/src/sharpen.c:84
-#, fuzzy
-#| msgid "Click and move the mouse to sharpen parts of your picture."
+#: ../../magic/src/sharpen.c:83
 msgid "Click and drag the mouse to sharpen parts of your picture."
 msgstr "单击然后移动鼠标锐化部分图画。"
 
-#: ../../magic/src/sharpen.c:85
+#: ../../magic/src/sharpen.c:84
 msgid "Click to sharpen the entire picture."
-msgstr "单击锐化整个画面"
+msgstr "单击锐化整个画面。"
 
-#: ../../magic/src/sharpen.c:87
-#, fuzzy
-#| msgid "Click and move the mouse to create a black and white silhouette."
+#: ../../magic/src/sharpen.c:85
 msgid "Click and drag the mouse to create a black and white silhouette."
 msgstr "单击然后移动鼠标创建一个黑白侧面影象。"
 
-#: ../../magic/src/sharpen.c:89
+#: ../../magic/src/sharpen.c:86
 msgid "Click to create a black and white silhouette of your entire picture."
 msgstr "单击创建整个图片的黑白侧面影象。"
 
-#: ../../magic/src/shift.c:115
+#: ../../magic/src/shift.c:112
 msgid "Shift"
 msgstr "移动"
 
-#: ../../magic/src/shift.c:132
+#: ../../magic/src/shift.c:124
 msgid "Click and drag to shift your picture around on the canvas."
-msgstr "单击在画纸上拖动光标移动你的图画。"
+msgstr "单击并拖动可以在画布上移动图片。"
 
 #: ../../magic/src/smudge.c:110
 msgid "Smudge"
@@ -2292,124 +2223,99 @@ msgstr "烟熏处理"
 msgid "Wet Paint"
 msgstr "湿画"
 
-#: ../../magic/src/smudge.c:131
-#, fuzzy
-#| msgid "Click and move the mouse around to smudge the picture."
+#: ../../magic/src/smudge.c:128
 msgid "Click and drag the mouse around to smudge the picture."
 msgstr "单击然后移动鼠标使图片有烟熏效果。"
 
-#: ../../magic/src/smudge.c:135
-#, fuzzy
-#| msgid "Click and move the mouse around to draw with wet, smudgy paint."
+#. if (which == 1)
+#: ../../magic/src/smudge.c:130
 msgid "Click and drag the mouse around to draw with wet, smudgy paint."
 msgstr "单击然后移动鼠标使托有潮湿、烟熏效果。"
 
-#: ../../magic/src/snow.c:70
+#: ../../magic/src/snow.c:76
 msgid "Snow Ball"
 msgstr "雪球"
 
-#: ../../magic/src/snow.c:71
+#: ../../magic/src/snow.c:77
 msgid "Snow Flake"
 msgstr "雪片"
 
-#: ../../magic/src/snow.c:75
+#: ../../magic/src/snow.c:81
 msgid "Click to add snow balls to your picture."
 msgstr "单击在图片中添加雪球。"
 
-#: ../../magic/src/snow.c:76
+#: ../../magic/src/snow.c:82
 msgid "Click to add snow flakes to your picture."
 msgstr "单击在图片中添加雪片。"
 
-#: ../../magic/src/stretch.c:120
+#: ../../magic/src/stretch.c:118
 msgid "Stretch"
-msgstr ""
+msgstr "伸展"
 
-#: ../../magic/src/stretch.c:135
-#, fuzzy
-#| msgid ""
-#| "Click and drag to make parts of your picture look like they are on "
-#| "television."
+#: ../../magic/src/stretch.c:128
 msgid ""
 "Click and drag to stretch part of your picture vertically or horizontally."
-msgstr "点击拖动鼠标，使你的作品看起来像在电视里一样。"
+msgstr "单击并拖动可以垂直或水平拉伸图片的一部分。"
 
-#: ../../magic/src/string.c:145
+#: ../../magic/src/string.c:136
 msgid "String edges"
 msgstr "边缘条纹化"
 
-#: ../../magic/src/string.c:148
+#: ../../magic/src/string.c:139
 msgid "String corner"
 msgstr "角落条纹化"
 
-#: ../../magic/src/string.c:151
+#: ../../magic/src/string.c:142
 msgid "String 'V'"
 msgstr "条纹'V'"
 
-#: ../../magic/src/string.c:169
+#: ../../magic/src/string.c:158
 msgid ""
 "Click and drag to draw string art. Drag top-bottom to draw less or more "
 "lines, left or right to make a bigger hole."
 msgstr ""
-"单击滑动鼠标进行条纹创作。滑动上下按钮以增加或减少线条，左右按钮改变粗细。"
+"单击拖动鼠标进行条纹创作。滑动上下按钮以增加或减少线条，左右按钮改变粗细。"
 
-#: ../../magic/src/string.c:174
+#: ../../magic/src/string.c:161
 msgid "Click and drag to draw arrows made of string art."
-msgstr "单击然后滑动鼠标画一些箭。"
+msgstr "单击并拖动以绘制艺术箭头。"
 
-#: ../../magic/src/string.c:177
+#: ../../magic/src/string.c:164
 msgid "Draw string art arrows with free angles."
-msgstr "使用不同的角度来创作简头"
-
-#: ../../magic/src/swirls.c:30
-#, fuzzy
-#| msgid "Circle"
-msgid "Circles"
-msgstr "圆形"
+msgstr "使用不同的角度来创作箭。"
 
 #: ../../magic/src/swirls.c:31
-msgid "Rays"
-msgstr ""
+msgid "Circles"
+msgstr "圆圈"
 
 #: ../../magic/src/swirls.c:32
-msgid "Fur"
-msgstr ""
+msgid "Rays"
+msgstr "射线"
 
-#: ../../magic/src/swirls.c:37
-#, fuzzy
-#| msgid ""
-#| "Click and drag to make parts of your picture look like they are on "
-#| "television."
-msgid ""
-"Click and drag to transform parts of your picture to circular brushstrokes."
-msgstr "点击拖动鼠标，使你的作品看起来像在电视里一样。"
+#: ../../magic/src/swirls.c:33
+msgid "Fur"
+msgstr "毛皮"
 
 #: ../../magic/src/swirls.c:38
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn the picture into a chalk drawing."
+msgid ""
+"Click and drag to transform parts of your picture to circular brushstrokes."
+msgstr "单击并拖动可以将图片的一部分转换为圆形画笔。"
+
+#: ../../magic/src/swirls.c:39
 msgid "Click to turn your entire picture into circular brushstrokes."
-msgstr "单击然后移动鼠标将图片变成粉笔画。"
+msgstr "单击可将您的整个图片变成圆形画笔。"
 
 #: ../../magic/src/swirls.c:41
-#, fuzzy
-#| msgid ""
-#| "Click and drag to make parts of your picture look like they are on "
-#| "television."
 msgid "Click and drag to transform parts of your picture to brushstroke rays."
-msgstr "点击拖动鼠标，使你的作品看起来像在电视里一样。"
+msgstr "单击并拖动鼠标可以将图片部分区域转换为笔画射线。"
 
 #: ../../magic/src/swirls.c:42
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn the picture into a chalk drawing."
 msgid "Click to turn your entire picture into brushstroke rays."
-msgstr "单击然后移动鼠标将图片变成粉笔画。"
+msgstr "单击可将整个图片转换为笔触光线。"
 
-#: ../../magic/src/swirls.c:45
-#, fuzzy
-#| msgid "Click and drag to draw train track rails on your picture."
+#: ../../magic/src/swirls.c:44
 msgid "Click and drag to add fur to your picture."
-msgstr "单击然后移动鼠标在画面上画出火车铁路"
+msgstr "单击然后移动鼠标在画面上画出火车铁路。"
 
 #: ../../magic/src/tint.c:73
 msgid "Tint"
@@ -2417,34 +2323,26 @@ msgstr "滤镜处理"
 
 #: ../../magic/src/tint.c:74
 msgid "Color & White"
-msgstr "彩色&黑白"
+msgstr "彩色 & 黑白"
 
-#: ../../magic/src/tint.c:79
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to change the color of parts of your "
-#| "picture."
+#: ../../magic/src/tint.c:78
 msgid ""
 "Click and drag the mouse around to change the color of parts of your picture."
-msgstr "单击然后滑动鼠标改变画面颜色。"
+msgstr "单击然后拖动鼠标改变画面颜色。"
 
-#: ../../magic/src/tint.c:80
+#: ../../magic/src/tint.c:79
 msgid "Click to change the color of your entire picture."
 msgstr "单击改变整幅画面颜色。"
 
-#: ../../magic/src/tint.c:82
-#, fuzzy
-#| msgid ""
-#| "Click and move the mouse around to turn parts of your picture into white "
-#| "and a color you choose."
+#: ../../magic/src/tint.c:80
 msgid ""
 "Click and drag the mouse around to turn parts of your picture into white and "
 "a color you choose."
-msgstr "单击然后滑动鼠标改变你的画面颜色。"
+msgstr "单击然后拖动鼠标改变你的画面颜色。"
 
-#: ../../magic/src/tint.c:84
+#: ../../magic/src/tint.c:81
 msgid "Click to turn your entire picture into white and a color you choose."
-msgstr "单击然后滑动鼠标改变你的整个画面颜色。"
+msgstr "单击然后拖动鼠标改变你的整个画面颜色。"
 
 #: ../../magic/src/toothpaste.c:67
 msgid "Toothpaste"
@@ -2454,37 +2352,41 @@ msgstr "牙膏"
 msgid "Click and drag to squirt toothpaste onto your picture."
 msgstr "单击并拖动在图画上喷出牙膏。"
 
-#: ../../magic/src/tornado.c:168
+#: ../../magic/src/tornado.c:152
 msgid "Tornado"
 msgstr "龙卷风"
 
-#: ../../magic/src/tornado.c:185
+#: ../../magic/src/tornado.c:164
 msgid "Click and drag to draw a tornado funnel on your picture."
-msgstr "单击和滑动鼠标画龙卷风。"
+msgstr "单击和拖动鼠标画龙卷风。"
 
-#: ../../magic/src/tv.c:110
+#: ../../magic/src/tv.c:117
 msgid "TV"
 msgstr "电视机"
 
-#: ../../magic/src/tv.c:124
+#: ../../magic/src/tv.c:119
+msgid "TV (Bright)"
+msgstr ""
+
+#: ../../magic/src/tv.c:130
 msgid ""
 "Click and drag to make parts of your picture look like they are on "
 "television."
 msgstr "点击拖动鼠标，使你的作品看起来像在电视里一样。"
 
-#: ../../magic/src/tv.c:129
+#: ../../magic/src/tv.c:132
 msgid "Click to make your picture look like it's on television."
 msgstr "单击使你的图画看起来像在电视机里。"
 
-#: ../../magic/src/waves.c:122
+#: ../../magic/src/waves.c:118
 msgid "Waves"
 msgstr "波浪"
 
-#: ../../magic/src/waves.c:124
+#: ../../magic/src/waves.c:120
 msgid "Wavelets"
 msgstr "小波"
 
-#: ../../magic/src/waves.c:134
+#: ../../magic/src/waves.c:129
 msgid ""
 "Click to make the picture horizontally wavy. Click toward the top for "
 "shorter waves, the bottom for taller waves, the left for small waves, and "
@@ -2493,7 +2395,7 @@ msgstr ""
 "单击使你的图画起水平波纹。单击顶部画低波纹，单击底部画高波纹，单击左面画小波"
 "纹，单击右面画长波纹。"
 
-#: ../../magic/src/waves.c:137
+#: ../../magic/src/waves.c:132
 msgid ""
 "Click to make the picture vertically wavy. Click toward the top for shorter "
 "waves, the bottom for taller waves, the left for small waves, and the right "
@@ -2502,36 +2404,14 @@ msgstr ""
 "单击使你的图画起垂直波纹。单击顶部画低波纹，单击底部画高波纹，单击左面画小波"
 "纹，单击右面画长波纹。"
 
-#: ../../magic/src/xor.c:100
+#: ../../magic/src/xor.c:99
 msgid "Xor Colors"
 msgstr "随机色"
 
-#: ../../magic/src/xor.c:113
+#: ../../magic/src/xor.c:110
 msgid "Click and drag to draw a XOR effect"
-msgstr "单击然后拖动鼠标使画面填充随机色效果。"
+msgstr "单击然后拖动鼠标以绘制随机色效果"
 
-#: ../../magic/src/xor.c:117
+#: ../../magic/src/xor.c:112
 msgid "Click to draw a XOR effect on the whole picture"
-msgstr "单击然后拖动鼠标使整个画面填充随机色效果。"
-
-#, fuzzy
-#~| msgid "Move the mouse to rotate the shape. Click to draw it."
-#~ msgid "Drag the mouse to rotate the stamp. Click to draw it."
-#~ msgstr "移动鼠标来旋转形状。单击就可以画出它。"
-
-#, fuzzy
-#~| msgid ""
-#~| "Click and move the mouse to add a mosaic effect to parts of your picture."
-#~ msgid "Click and drag downward to add water rivulets to your drawing"
-#~ msgstr "单击然后移动鼠标为你的图画部分添加马赛克效果。"
-
-#, fuzzy
-#~| msgid "Tux Paint"
-#~ msgid "tuxpaint"
-#~ msgstr "Tux Paint"
-
-#~ msgid "Pick a color."
-#~ msgstr "选择一种颜色。"
-
-#~ msgid "Click in the picture to fill that area with color."
-#~ msgstr "单击图片用颜色填充区域。"
+msgstr "单击然后拖动鼠标使整个画面填充随机色效果"
