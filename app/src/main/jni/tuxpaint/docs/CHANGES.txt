@@ -6,7 +6,7 @@ Copyright (c) 2002-2023
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
-2023.May.9 (0.9.30)
+2023.May.12 (0.9.30)
   * Improvements to Stamp tool:
     ---------------------------
     * Avoid playing English descriptive sound for a stamp
@@ -148,6 +148,10 @@ https://tuxpaint.org/
     * Some button sizes could cause buttons to render with gaps
       (e.g. 90 and 91), where 'garbage' graphics could appear.
       Bill Kendrick <bill@newbreedsoftware.com>
+
+    * On Haiku, read config from the correct location
+      ({home}/config/settings/TuxPaint/tuxpaint.cfg)
+      Luc 'Begasus' Schrijvers <begasus@gmail.com>
 
   * Ports & Building:
     -----------------

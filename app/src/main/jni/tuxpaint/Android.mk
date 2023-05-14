@@ -42,7 +42,7 @@ MY_CFLAGS:= -O0 -g -W -Wall -fno-common -ffloat-store \
 	-Wstrict-aliasing=2 \
 	-include $(LOCAL_PATH)"/../tp-assets-fopen/tp_android_assets_fopen.h"
 
-MY_VER_VERSION :=0.9.29
+MY_VER_VERSION := 0.9.30-rc1
 MY_VER_DATE :=$(shell date +"%Y-%m-%d")
 MY_NOSOUNDFLAG := 
 # MY_NOSOUNDFLAG := -DNOSOUND

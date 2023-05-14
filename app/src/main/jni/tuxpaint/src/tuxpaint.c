@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - May 9, 2023
+  June 14, 2002 - May 12, 2023
 */
 
 #include "platform.h"
@@ -1969,8 +1969,10 @@ static int brush_counter, brush_frame;
 
 #define NUM_ERASERS 16          /* How many sizes of erasers
                                    (from ERASER_MIN to _MAX as squares, then again
-                                   from ERASER_MIN to _MAX as circles; best if a
-                                   multiple of 4, since selector is 2 buttons across) */
+                                   from ERASER_MIN to _MAX as circles;
+                                   must be a multiple of 2;
+                                   best if a multiple of 4, since selector is 2 buttons across) */
+#define NUM_ERASER_SIZES (NUM_ERASERS / 2)
 #define ERASER_MIN 5            /* Smaller than 5 will not render as a circle! */
 #define ERASER_MAX 128
 
@@ -6582,7 +6584,7 @@ static void mainloop(void)
             eraser_draw(old_x, old_y, new_x, new_y);
 
             sz = calc_eraser_size(cur_eraser);
-            if (cur_eraser >= NUM_ERASERS / 2)
+            if (cur_eraser >= NUM_ERASER_SIZES)
             {
               /* Circle eraser */
               circle_xor(new_x, new_y, sz / 2);
@@ -6651,16 +6653,16 @@ static void mainloop(void)
           }
           else
           {
-            if (cur_eraser < NUM_ERASERS / 2)
+            if (cur_eraser < NUM_ERASER_SIZES)
             {
               w = (ERASER_MIN +
-                   (((NUM_ERASERS / 2) - cur_eraser - 1) * ((ERASER_MAX - ERASER_MIN) / ((NUM_ERASERS / 2) - 1))));
+                   ((NUM_ERASER_SIZES - cur_eraser - 1) * ((ERASER_MAX - ERASER_MIN) / (NUM_ERASER_SIZES - 1))));
             }
             else
             {
               w = (ERASER_MIN +
-                   (((NUM_ERASERS / 2) - (cur_eraser - NUM_ERASERS / 2) - 1) *
-                    ((ERASER_MAX - ERASER_MIN) / ((NUM_ERASERS / 2) - 1))));
+                   ((NUM_ERASER_SIZES - (cur_eraser - NUM_ERASERS / 2) - 1) *
+                    ((ERASER_MAX - ERASER_MIN) / (NUM_ERASER_SIZES - 1))));
             }
 
             h = w;
@@ -11232,7 +11234,7 @@ static void draw_erasers(void)
       {
         /* Square */
 
-        sz = (2 + (((NUM_ERASERS / 2) - 1 - i) * (38 / ((NUM_ERASERS / 2) - 1)))) * button_scale;
+        sz = (2 + ((NUM_ERASER_SIZES - 1 - i) * (38 / (NUM_ERASER_SIZES - 1)))) * button_scale;
 
         x = ((i % 2) * button_w) + WINDOW_WIDTH - r_ttoolopt.w + 24 * button_scale - sz / 2;
         y = ((j / 2) * button_h) + r_ttoolopt.h + 24 * button_scale - sz / 2 + off_y;
@@ -11269,7 +11271,7 @@ static void draw_erasers(void)
       {
         /* Circle */
 
-        sz = (2 + (((NUM_ERASERS / 2) - 1 - (i - NUM_ERASERS / 2)) * (38 / ((NUM_ERASERS / 2) - 1)))) * button_scale;
+        sz = (2 + ((NUM_ERASER_SIZES - 1 - (i - NUM_ERASERS / 2)) * (38 / (NUM_ERASER_SIZES - 1)))) * button_scale;
 
         x = ((i % 2) * button_w) + WINDOW_WIDTH - r_ttoolopt.w + 24 * button_scale - sz / 2;
         y = ((j / 2) * button_h) + 40 * button_scale + 24 * button_scale - sz / 2 + off_y;
@@ -12193,11 +12195,10 @@ static void circle_xor(int x, int y, int sz)
 
 static int calc_eraser_size(int which_eraser)
 {
-#define NUM_SIZES (NUM_ERASERS / 2)
-  if (which_eraser >= NUM_SIZES)
-    which_eraser -= NUM_SIZES;
+  if (which_eraser >= NUM_ERASER_SIZES)
+    which_eraser -= NUM_ERASER_SIZES;
 
-  return (((NUM_SIZES - 1 - which_eraser) * ((ERASER_MAX - ERASER_MIN) / (NUM_SIZES - 1))) + ERASER_MIN);
+  return (((NUM_ERASER_SIZES - 1 - which_eraser) * ((ERASER_MAX - ERASER_MIN) / (NUM_ERASER_SIZES - 1))) + ERASER_MIN);
 }
 
 /**
@@ -12212,7 +12213,7 @@ static void do_eraser(int x, int y, int update)
 
   sz = calc_eraser_size(cur_eraser);
 
-  if (cur_eraser < NUM_SIZES)
+  if (cur_eraser < NUM_ERASER_SIZES)
   {
     /* Square eraser: */
 
@@ -27660,7 +27661,7 @@ static void setup_config(char *argv[])
   safe_snprintf(str, sizeof(str), "%s/tuxpaint.cfg", savedir);  /* FIXME */
 #elif defined(__BEOS__) || defined(__HAIKU__)
   /* BeOS: Use a "tuxpaint.cfg" file: */
-  strcpy(str, "tuxpaint.cfg");  /* safe; sufficient size */
+  safe_snprintf(str, sizeof(str), "%s/config/settings/TuxPaint/tuxpaint.cfg", home);
 #elif defined(__APPLE__)
   /* macOS, iOS: Use a "tuxpaint.cfg" file in the Tux Paint application support folder */
   safe_snprintf(str, sizeof(str), "%s/tuxpaint.cfg", apple_preferencesPath());
