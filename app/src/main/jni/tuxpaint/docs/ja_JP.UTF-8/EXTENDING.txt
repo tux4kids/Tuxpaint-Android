@@ -32,6 +32,7 @@
                   |  * Translations                          |
                   |  * Alternative Input Methods             |
                   |  * 画面キーボード                               |
+                  |  * Magic Tools                           |
                   +------------------------------------------+
 
    If you wish to add or change things like Brushes, Starters, Rubber Stamps,
@@ -1033,3 +1034,14 @@ Keysym definitions file ("keysymdef.h")
    at runtime.
 
    It is unlikely that any modification will be required of this file.
+
+                                  Magic Tools
+
+   Tux Paint's Magic tools are pieces of software, external to the main Tux
+   Paint application, that are loaded as "plugins" at runtime, and interact
+   with the program using a defined Application Programming Interface (API).
+   The plugins that ship with Tux Paint (as well as Tux Paint itself) are
+   written in the C programming language.
+
+   Consult the Magic Tool Plugin API Documentation to learn how to write your
+   own.

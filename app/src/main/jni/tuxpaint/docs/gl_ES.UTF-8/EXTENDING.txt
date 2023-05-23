@@ -32,6 +32,7 @@
         |  * Traducións                                                |
         |  * Métodos de entrada alternativos                           |
         |  * Teclado en pantalla                                       |
+        |  * Magic Tools                                               |
         +--------------------------------------------------------------+
 
    Se quere engadir ou cambiar cousas como pinceis, imaxes de comezo, selos
@@ -1064,3 +1065,14 @@ Ficheiro de definición Keysym («keysymdef.h»)
    at runtime.
 
    É pouco probábel que se precise algunha modificación neste ficheiro.
+
+                                  Magic Tools
+
+   Tux Paint's Magic tools are pieces of software, external to the main Tux
+   Paint application, that are loaded as "plugins" at runtime, and interact
+   with the program using a defined Application Programming Interface (API).
+   The plugins that ship with Tux Paint (as well as Tux Paint itself) are
+   written in the C programming language.
+
+   Consult the Magic Tool Plugin API Documentation to learn how to write your
+   own.

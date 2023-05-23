@@ -6,7 +6,7 @@
          Copyright © 2002-2023 by various contributors; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                   2023年5月 9日
+                                   2023年5月18日
 
                     +-------------------------------------+
                     |目次                                   |
@@ -768,6 +768,8 @@ Tux Paint の起動
                 コンパイル、インストールの手順.
               * SIGNALS.html
                 Tux Paint が応答する POSIX シグナルに関する情報。
+              * MAGIC-API.html
+                プラグインAPIを用いた独自の「まほう」ツールの作成
 
    開発の記録及びライセンス:
               * AUTHORS.txt

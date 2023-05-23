@@ -6,7 +6,7 @@
         Copyright © 2002-2023 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                  mayo 9, 2023
+                                 mayo 18, 2023
 
              +----------------------------------------------------+
              |Table of Contents                                   |
@@ -1132,6 +1132,8 @@ Importing Pictures Manually
               * SIGNALS.html
                 Information about the POSIX signals that Tux Paint responds
                 to.
+              * MAGIC-API.html
+                Creating new Magic tools using Tux Paint's plugin API.
 
    Development history and license:
               * AUTHORS.txt

@@ -6,7 +6,7 @@ Copyright (c) 2002-2023
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
-2023.May.12 (0.9.30)
+2023.May.18 (0.9.30)
   * Improvements to Stamp tool:
     ---------------------------
     * Avoid playing English descriptive sound for a stamp
@@ -152,6 +152,11 @@ https://tuxpaint.org/
     * On Haiku, read config from the correct location
       ({home}/config/settings/TuxPaint/tuxpaint.cfg)
       Luc 'Begasus' Schrijvers <begasus@gmail.com>
+
+    * Cartoon magic tool would always apply the effect at the bottom
+      right, and also move improperly.  Mended.
+      h/t @Miyagi_Andel on Twitter for the bug report.
+      Bill Kendrick <bill@newbreedsoftware.com>
 
   * Ports & Building:
     -----------------

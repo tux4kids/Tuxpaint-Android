@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 12, 2023
+  Last updated: May 16, 2023
 */
 
 #include <stdio.h>
@@ -203,6 +203,8 @@ static void do_cartoon(void *ptr, int which ATTRIBUTE_UNUSED,
 void cartoon_drag(magic_api * api, int which, SDL_Surface * canvas,
                   SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
 {
+  api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_cartoon);
+
   if (ox > x)
   {
     int tmp = ox;
@@ -218,8 +220,6 @@ void cartoon_drag(magic_api * api, int which, SDL_Surface * canvas,
     y = tmp;
   }
 
-  api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_cartoon);
-
   update_rect->x = ox - cartoon_radius;
   update_rect->y = oy - cartoon_radius;
   update_rect->w = (x + cartoon_radius) - update_rect->x;
@@ -232,28 +232,30 @@ void cartoon_drag(magic_api * api, int which, SDL_Surface * canvas,
 void cartoon_click(magic_api * api, int which, int mode,
                    SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
-  for (y = 0; y < canvas->h; y++)
+  int effect_x, effect_y;
+
+  for (effect_y = 0; effect_y < canvas->h; effect_y++)
   {
-    if (y % 10 == 0)
+    if (effect_y % 10 == 0)
     {
       api->update_progress_bar();
     }
 
-    for (x = 0; x < canvas->w; x++)
+    for (effect_x = 0; effect_x < canvas->w; effect_x++)
     {
-      cartoon_apply_colors(api, last, x, y);
+      cartoon_apply_colors(api, last, effect_x, effect_y);
     }
   }
-  for (y = 0; y < canvas->h; y++)
+  for (effect_y = 0; effect_y < canvas->h; effect_y++)
   {
-    if (y % 10 == 0)
+    if (effect_y % 10 == 0)
     {
       api->update_progress_bar();
     }
 
-    for (x = 0; x < canvas->w; x++)
+    for (effect_x = 0; effect_x < canvas->w; effect_x++)
     {
-      cartoon_apply_outline(api, x, y);
+      cartoon_apply_outline(api, effect_x, effect_y);
     }
   }
 

@@ -6,7 +6,7 @@
         Copyright © 2002-2023 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               9 de Maio de 2023
+                               18 de Maio de 2023
 
          +-----------------------------------------------------------+
          |Índice                                                     |
@@ -1159,6 +1159,8 @@ Importar imaxes manualmente
                 proceda.
               * SIGNALS.html
                 Información sobre os sinais POSIX aos que responde Tux Paint.
+              * MAGIC-API.html
+                Creating new Magic tools using Tux Paint's plugin API.
 
    Development history and license:
               * AUTHORS.txt
