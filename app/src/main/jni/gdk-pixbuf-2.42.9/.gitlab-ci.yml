@@ -1,0 +1,182 @@
+stages:
+  - build
+  - analysis
+  - docs
+  - deploy
+
+# Common variables
+variables:
+  CCACHE_DIR: _ccache
+  COMMON_MESON_FLAGS: "-Dwerror=true -Dglib:werror=false"
+  LOADERS_FLAGS: "-Dpng=enabled -Djpeg=enabled -Dtiff=enabled"
+  MESON_TEST_TIMEOUT_MULTIPLIER: 3
+  FEDORA_IMAGE: "registry.gitlab.gnome.org/gnome/gdk-pixbuf/fedora:v4"
+
+.only-default:
+  only:
+    - branches
+  except:
+    - tags
+
+.build-linux:
+  extends: .only-default
+  before_script:
+    - mkdir -p _ccache
+  script:
+    - meson setup ${COMMON_MESON_FLAGS} ${LOADERS_FLAGS} ${BUILD_OPTS} _build .
+    - meson compile -C _build
+    - .gitlab/scripts/run-tests.sh _build
+  artifacts:
+    when: always
+    name: "gdk-pixbuf-${CI_JOB_NAME}-${CI_COMMIT_REF_NAME}"
+    paths:
+      - "${CI_PROJECT_DIR}/_build/meson-logs"
+      - "${CI_PROJECT_DIR}/_build/report-${CI_JOB_NAME}.xml"
+    reports:
+      junit:
+        - "${CI_PROJECT_DIR}/_build/report-${CI_JOB_NAME}.xml"
+  cache:
+    key: "$CI_JOB_NAME"
+    paths:
+      - _ccache/
+
+style-check-diff:
+  extends: .only-default
+  image: $FEDORA_IMAGE
+  stage: .pre
+  allow_failure: true
+  script:
+    - .gitlab/scripts/run-style-check-diff.sh
+
+meson-fedora-x86_64:
+  stage: build
+  extends: .build-linux
+  image: ${FEDORA_IMAGE}
+  needs: []
+
+macos:
+  stage: build
+  needs: []
+  only:
+    - branches@GNOME/gdk-pixbuf
+  except:
+    - tags
+  tags:
+    - macos
+  before_script:
+    - pip3 install --user meson==0.56.2
+    - pip3 install --user ninja
+    - export PATH=/Users/gitlabrunner/Library/Python/3.7/bin:$PATH
+  script:
+    - meson setup -Dintrospection=disabled -Dinstalled_tests=false -Dman=false -Dgtk_doc=false _build
+    - meson compile -C _build
+  artifacts:
+    when: always
+    paths:
+      - "${CI_PROJECT_DIR}/_build/meson-logs"
+  allow_failure: true
+
+msys2-mingw64:
+  stage: build
+  needs: []
+  tags:
+    - win32-ps
+  variables:
+    MSYSTEM: "MINGW64"
+    CHERE_INVOKING: "yes"
+  script:
+    - C:\msys64\usr\bin\pacman --noconfirm -Syyuu
+    - C:\msys64\usr\bin\bash -lc "bash -x ./.gitlab/ci/test-msys2.sh"
+  artifacts:
+    name: "gdk-pixbuf-${env:CI_JOB_NAME}-${env:CI_COMMIT_REF_NAME}"
+    when: always
+    paths:
+      - _build/meson-logs
+
+release-build:
+  stage: build
+  extends: .build-linux
+  image: ${FEDORA_IMAGE}
+  needs: []
+  variables:
+    BUILD_OPTS: "-Dbuildtype=release"
+
+reference:
+  stage: docs
+  image: ${FEDORA_IMAGE}
+  needs: []
+  variables:
+    BUILD_OPTS: "-Dbuildtype=release -Dgtk_doc=true"
+  script:
+    - meson setup ${COMMON_MESON_FLAGS} ${LOADERS_FLAGS} ${BUILD_OPTS} _build .
+    - meson compile -C _build
+    - mkdir -p _reference
+    - mv _build/docs/gdk-pixbuf/ _reference/gdk-pixbuf/
+    - mv _build/docs/gdk-pixdata/ _reference/gdk-pixdata/
+  artifacts:
+    when: on_success
+    paths:
+      - _reference
+
+static-scan:
+  image: $FEDORA_IMAGE
+  stage: analysis
+  needs: []
+  variables:
+    BUILD_OPTS: "--buildtype=debug"
+  script:
+    - meson setup ${COMMON_MESON_FLAGS} ${LOADERS_FLAGS} ${BUILD_OPTS} _scan_build
+    - ninja -C _scan_build scan-build
+  artifacts:
+    paths:
+      - _scan_build/meson-logs
+  allow_failure: true
+
+# Run tests with the address sanitizer. We need to turn off introspection,
+# since it is incompatible with asan
+asan-build:
+  image: $FEDORA_IMAGE
+  tags: [ asan ]
+  stage: analysis
+  needs: []
+  variables:
+  script:
+    - CC=clang meson setup --buildtype=debugoptimized -Db_sanitize=address -Db_lundef=false -Dintrospection=disabled _build
+    - meson compile -C _build
+    - .gitlab/scripts/run-tests.sh _build
+  artifacts:
+    paths:
+      - _build/meson-logs
+  allow_failure: true
+
+release-dist:
+  stage: build
+  image: ${FEDORA_IMAGE}
+  needs: []
+  variables:
+    BUILD_OPTS: "-Dbuildtype=release -Dgtk_doc=true"
+  script:
+    - meson ${COMMON_MESON_FLAGS} ${LOADERS_FLAGS} ${BUILD_OPTS} _build .
+    - meson compile -C _build
+    - meson dist -C _build
+    - tar -c -J -f _build/gdk-pixbuf-docs-${CI_COMMIT_TAG}.tar.xz _build/docs/gdk-pixbuf/
+    - tar -c -J -f _build/gdk-pixdata-docs-${CI_COMMIT_TAG}.tar.xz _build/docs/gdk-pixdata/
+  artifacts:
+    when: on_success
+    paths:
+      - _build/meson-dist/gdk-pixbuf-${CI_COMMIT_TAG}.tar.xz
+      - _build/gdk-pixbuf-docs-${CI_COMMIT_TAG}.tar.xz
+      - _build/gdk-pixdata-docs-${CI_COMMIT_TAG}.tar.xz
+  only:
+    - tags
+
+pages:
+  stage: deploy
+  needs: [reference]
+  script:
+    - mv _reference public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

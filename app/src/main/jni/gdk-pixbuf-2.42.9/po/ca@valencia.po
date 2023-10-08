@@ -1,0 +1,1205 @@
+# Catalan translation of GTK+.
+# Copyright © 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006
+#    Free Software Foundation, Inc.
+#
+# Recull de termes
+#
+# Trough      - regata. Es refereix a la barra d'una barra de desplaçament,
+#               sobre la qual llisca. Una altra alternativa seria «pista» o
+#               «carril».
+# Thumb       - lliscador. Es refereix al control que s'arrossega o es fa
+#               lliscar al llarg de la regata de la barra de desplaçament.
+# Scroll box  - lliscador. El mateix que «thumb»
+# Stepper     - desplaçador. Cadascuna de les fletxes dels extrems de la barra
+#               de desplaçament. Fent-hi clic es desplaça el lliscador.
+# Scale thumb - lliscador d'escalat. «A scale consists of a track with a thumb,
+#               much like a scrollbar.
+#               It is used to select a value in a given range. The user may drag
+#               the thumb across the scale track to adjust the value» .
+#               Vegeu http://wiki.mozilla.org/XUL:Slider_Tag
+#
+# Ivan Vilata i Balaguer <ivan@selidor.net>, 1999, 2000.
+# Softcatala <gnome@softcatala.net>, 2000, 2001, 2002.
+# Jordi Mallach <jordi@sindominio.net>, 2002, 2003, 2004, 2005, 2006.
+# Mireia Farrús <mifarrus@hotmail.com>, 2003.
+# Josep Puigdemont <josep.puigdemont@gmail.com>, 2005, 2006.
+# David Planella <david.planella@gmail.com>, 2008, 2009, 2010.
+# Gil Forcada <gilforcada@guifi.net>, 2012, 2013.
+# Carles Ferrando Garcia <carles.ferrando@gmail.com>, 2015.
+# Jordi Serratosa <jordis@softcatala.cat>, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: gtk+ 2.8.2\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gdk-"
+"pixbuf&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2017-09-10 06:41+0000\n"
+"PO-Revision-Date: 2017-03-20 21:26+0100\n"
+"Last-Translator: Xavi Ivars <xavi.ivars@gmail.com>\n"
+"Language-Team: Catalan <Catalan <info@softcatala.org>>\n"
+"Language: ca-valencia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.8.9\n"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:156 gdk-pixbuf/gdk-pixbuf-io.c:1070
+#: gdk-pixbuf/gdk-pixbuf-io.c:1330
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "No s'ha pogut obrir el fitxer «%s»: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:169 gdk-pixbuf/gdk-pixbuf-io.c:955
+#, c-format
+msgid "Image file '%s' contains no data"
+msgstr "El fitxer gràfic «%s» no conté dades"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:207
+#, c-format
+msgid ""
+"Failed to load animation '%s': reason not known, probably a corrupt "
+"animation file"
+msgstr ""
+"No es pot carregar l'animació «%s»: se'n desconeix el motiu; probablement es "
+"tracta d'un fitxer d'animació malmés"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:275 gdk-pixbuf/gdk-pixbuf-io.c:1106
+#: gdk-pixbuf/gdk-pixbuf-io.c:1382
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"No es pot carregar la imatge «%s»: se'n desconeix el motiu; probablement es "
+"tracta d'un fitxer d'imatge malmés"
+
+#: gdk-pixbuf/gdk-pixbuf.c:166
+msgid "Number of Channels"
+msgstr "Nombre de canals"
+
+#: gdk-pixbuf/gdk-pixbuf.c:167
+msgid "The number of samples per pixel"
+msgstr "El nombre de mostres per píxel"
+
+#: gdk-pixbuf/gdk-pixbuf.c:176
+msgid "Colorspace"
+msgstr "Espai de color"
+
+#: gdk-pixbuf/gdk-pixbuf.c:177
+msgid "The colorspace in which the samples are interpreted"
+msgstr "L'espai de color on les mostres s'interpreten"
+
+#: gdk-pixbuf/gdk-pixbuf.c:185
+msgid "Has Alpha"
+msgstr "Té alfa"
+
+#: gdk-pixbuf/gdk-pixbuf.c:186
+msgid "Whether the pixbuf has an alpha channel"
+msgstr "Si el pixbuf té una canal alfa"
+
+#: gdk-pixbuf/gdk-pixbuf.c:199
+msgid "Bits per Sample"
+msgstr "Bits per mostra"
+
+#: gdk-pixbuf/gdk-pixbuf.c:200
+msgid "The number of bits per sample"
+msgstr "El nombre de bits per mostra"
+
+#: gdk-pixbuf/gdk-pixbuf.c:209
+msgid "Width"
+msgstr "Amplària"
+
+#: gdk-pixbuf/gdk-pixbuf.c:210
+msgid "The number of columns of the pixbuf"
+msgstr "El nombre de columnes de pixbuf"
+
+#: gdk-pixbuf/gdk-pixbuf.c:219
+msgid "Height"
+msgstr "Alçària"
+
+#: gdk-pixbuf/gdk-pixbuf.c:220
+msgid "The number of rows of the pixbuf"
+msgstr "El nombre de files de pixbuf"
+
+#: gdk-pixbuf/gdk-pixbuf.c:236
+msgid "Rowstride"
+msgstr "Amplària fila"
+
+#: gdk-pixbuf/gdk-pixbuf.c:237
+msgid ""
+"The number of bytes between the start of a row and the start of the next row"
+msgstr ""
+"El nombre de bits entre el començament d'una fila i el començament de la "
+"següent"
+
+#: gdk-pixbuf/gdk-pixbuf.c:246
+msgid "Pixels"
+msgstr "Píxels"
+
+#: gdk-pixbuf/gdk-pixbuf.c:247
+msgid "A pointer to the pixel data of the pixbuf"
+msgstr "Un punter a les dades del píxel de pixbuf"
+
+#: gdk-pixbuf/gdk-pixbuf.c:261
+msgid "Pixel Bytes"
+msgstr "Bytes del píxel"
+
+#: gdk-pixbuf/gdk-pixbuf.c:262
+msgid "Readonly pixel data"
+msgstr "Dades del píxel de només lectura"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:775
+#, c-format
+msgid "Unable to load image-loading module: %s: %s"
+msgstr "No és possible carregar el mòdul per a la càrrega d'imatges: %s: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:790
+#, c-format
+msgid ""
+"Image-loading module %s does not export the proper interface; perhaps it's "
+"from a different gdk-pixbuf version?"
+msgstr ""
+"El mòdul %s per carregar imatges no exporta la interfície adequada: potser "
+"és d'una versió de gdk-pixbuf diferent?"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:799 gdk-pixbuf/gdk-pixbuf-io.c:842
+#, c-format
+msgid "Image type '%s' is not supported"
+msgstr "El tipus d'imatge «%s» no està implementat"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:927
+#, c-format
+msgid "Couldn't recognize the image file format for file '%s'"
+msgstr "No s'ha pogut reconèixer el format gràfic del fitxer «%s»"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:935
+msgid "Unrecognized image file format"
+msgstr "No es coneix el format del fitxer gràfic"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:1117
+#, c-format
+msgid "Failed to load image '%s': %s"
+msgstr "No s'ha pogut carregar la imatge «%s»: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2143 gdk-pixbuf/io-gdip-utils.c:838
+#, c-format
+msgid "Error writing to image file: %s"
+msgstr "S'ha produït un error en escriure al fitxer d'imatge: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2185 gdk-pixbuf/gdk-pixbuf-io.c:2306
+#, c-format
+msgid "This build of gdk-pixbuf does not support saving the image format: %s"
+msgstr "Este muntatge de gdk-pixbuf no permet guardar el format d'imatge: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2216
+msgid "Insufficient memory to save image to callback"
+msgstr "No hi ha memòria suficient per guardar la imatge a la crida de retorn"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2229
+msgid "Failed to open temporary file"
+msgstr "No s'ha pogut obrir el fitxer temporal"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2252
+msgid "Failed to read from temporary file"
+msgstr "No s'ha pogut llegir el fitxer temporal"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2462
+#, c-format
+msgid "Failed to open '%s' for writing: %s"
+msgstr "No s'ha pogut obrir «%s» per a l'escriptura: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2488
+#, c-format
+msgid ""
+"Failed to close '%s' while writing image, all data may not have been saved: "
+"%s"
+msgstr ""
+"No s'ha pogut guardar «%s» en escriure la imatge, és probable que no s'hagen "
+"guardat totes les dades: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2709 gdk-pixbuf/gdk-pixbuf-io.c:2761
+msgid "Insufficient memory to save image into a buffer"
+msgstr ""
+"No hi ha memòria suficient per guardar la imatge en una memòria intermèdia"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2807
+msgid "Error writing to image stream"
+msgstr "S'ha produït un error en escriure al flux d'imatge"
+
+#: gdk-pixbuf/gdk-pixbuf-loader.c:382
+#, c-format
+msgid ""
+"Internal error: Image loader module '%s' failed to complete an operation, "
+"but didn't give a reason for the failure"
+msgstr ""
+"Error intern: El carregador d'imatge «%s» no ha pogut acabar una operació, "
+"però no ha donat cap raó per a la fallada"
+
+#: gdk-pixbuf/gdk-pixbuf-loader.c:424
+#, c-format
+msgid "Incremental loading of image type '%s' is not supported"
+msgstr "No està implementada la càrrega incremental del tipus d'imatge «%s»"
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:161
+msgid "Loop"
+msgstr "Bucle"
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:162
+msgid "Whether the animation should loop when it reaches the end"
+msgstr "Si l'animació cal que es repetisca quan arriba al final"
+
+#: gdk-pixbuf/gdk-pixdata.c:165
+msgid "Image header corrupt"
+msgstr "La capçalera de la imatge està malmesa"
+
+#: gdk-pixbuf/gdk-pixdata.c:170
+msgid "Image format unknown"
+msgstr "El format de la imatge és desconegut"
+
+#: gdk-pixbuf/gdk-pixdata.c:175 gdk-pixbuf/gdk-pixdata.c:467
+#: gdk-pixbuf/gdk-pixdata.c:477 gdk-pixbuf/gdk-pixdata.c:573
+msgid "Image pixel data corrupt"
+msgstr "Les dades de píxels de la imatge estan malmeses"
+
+#: gdk-pixbuf/gdk-pixdata.c:489
+#, c-format
+msgid "failed to allocate image buffer of %u byte"
+msgid_plural "failed to allocate image buffer of %u bytes"
+msgstr[0] "no s'ha pogut assignar una memòria intermèdia d'imatge de %u byte"
+msgstr[1] "no s'ha pogut assignar una memòria intermèdia d'imatge de %u bytes"
+
+#: gdk-pixbuf/io-ani.c:242
+msgid "Unexpected icon chunk in animation"
+msgstr "Bloc d'icona inesperat en l'animació"
+
+#: gdk-pixbuf/io-ani.c:340 gdk-pixbuf/io-ani.c:398 gdk-pixbuf/io-ani.c:424
+#: gdk-pixbuf/io-ani.c:447 gdk-pixbuf/io-ani.c:474 gdk-pixbuf/io-ani.c:561
+msgid "Invalid header in animation"
+msgstr "La capçalera de l'animació no és vàlida"
+
+#: gdk-pixbuf/io-ani.c:350 gdk-pixbuf/io-ani.c:372 gdk-pixbuf/io-ani.c:456
+#: gdk-pixbuf/io-ani.c:483 gdk-pixbuf/io-ani.c:534 gdk-pixbuf/io-ani.c:606
+msgid "Not enough memory to load animation"
+msgstr "No hi ha memòria suficient per carregar l'animació"
+
+#: gdk-pixbuf/io-ani.c:390 gdk-pixbuf/io-ani.c:416 gdk-pixbuf/io-ani.c:435
+msgid "Malformed chunk in animation"
+msgstr "Bloc erroni en l'animació"
+
+#: gdk-pixbuf/io-ani.c:628
+msgid "ANI image was truncated or incomplete."
+msgstr "Imatge ANI truncada o incompleta."
+
+#: gdk-pixbuf/io-ani.c:669
+msgctxt "image format"
+msgid "Windows animated cursor"
+msgstr "Cursor animat de Windows"
+
+#: gdk-pixbuf/io-bmp.c:227 gdk-pixbuf/io-bmp.c:265 gdk-pixbuf/io-bmp.c:372
+#: gdk-pixbuf/io-bmp.c:399 gdk-pixbuf/io-bmp.c:424 gdk-pixbuf/io-bmp.c:459
+#: gdk-pixbuf/io-bmp.c:481 gdk-pixbuf/io-bmp.c:558
+msgid "BMP image has bogus header data"
+msgstr "La imatge BMP conté dades de capçalera errònies"
+
+#: gdk-pixbuf/io-bmp.c:238 gdk-pixbuf/io-bmp.c:494
+msgid "Not enough memory to load bitmap image"
+msgstr "No hi ha memòria suficient per carregar la imatge de mapa de bits"
+
+#: gdk-pixbuf/io-bmp.c:329
+msgid "BMP image has unsupported header size"
+msgstr "La imatge BMP té una mida de capçalera no permesa"
+
+#: gdk-pixbuf/io-bmp.c:339
+msgid "BMP image has unsupported depth"
+msgstr "La imatge BMP té una profunditat no permesa"
+
+#: gdk-pixbuf/io-bmp.c:354
+msgid "BMP image has oversize palette"
+msgstr "La imatge BMP té una paleta massa gran"
+
+# Topdown és un BMP amb la primera "scanline" al principi del fitxer. jm
+#: gdk-pixbuf/io-bmp.c:386
+msgid "Topdown BMP images cannot be compressed"
+msgstr "No es poden comprimir les imatges BMP «topdown»"
+
+#: gdk-pixbuf/io-bmp.c:411
+msgid "BMP image width too large"
+msgstr "L'amplària de la imatge BMP és massa gran"
+
+#: gdk-pixbuf/io-bmp.c:782 gdk-pixbuf/io-png.c:528 gdk-pixbuf/io-pnm.c:721
+msgid "Premature end-of-file encountered"
+msgstr "S'ha trobat un final de fitxer abans d'hora"
+
+#: gdk-pixbuf/io-bmp.c:1310
+#, c-format
+msgid "Error while decoding colormap"
+msgstr "S'ha produït un error mentre es descodificava el mapa de colors"
+
+#: gdk-pixbuf/io-bmp.c:1373 gdk-pixbuf/io-bmp.c:1385
+msgid "Image is too wide for BMP format."
+msgstr "La imatge és massa ampla pel format BMP"
+
+#: gdk-pixbuf/io-bmp.c:1418
+msgid "Couldn't allocate memory for saving BMP file"
+msgstr "No s'ha pogut obtindre memòria per guardar el fitxer BMP"
+
+#: gdk-pixbuf/io-bmp.c:1459
+msgid "Couldn't write to BMP file"
+msgstr "No s'ha pogut escriure al fitxer BMP"
+
+#: gdk-pixbuf/io-bmp.c:1512 gdk-pixbuf/io-gdip-bmp.c:83
+msgctxt "image format"
+msgid "BMP"
+msgstr "BMP"
+
+#: gdk-pixbuf/io-gdip-emf.c:61
+msgctxt "image format"
+msgid "EMF"
+msgstr "EMF"
+
+#: gdk-pixbuf/io-gdip-gif.c:81 gdk-pixbuf/io-gif.c:1728
+msgctxt "image format"
+msgid "GIF"
+msgstr "GIF"
+
+#: gdk-pixbuf/io-gdip-ico.c:60 gdk-pixbuf/io-ico.c:1415
+msgctxt "image format"
+msgid "Windows icon"
+msgstr "Icona de Windows"
+
+#: gdk-pixbuf/io-gdip-jpeg.c:54 gdk-pixbuf/io-jpeg.c:1357
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value '%s' could not be "
+"parsed."
+msgstr ""
+"La qualitat de JPEG ha de ser un valor entre 0 i 100; el valor «%s» no es "
+"pot analitzar."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:69 gdk-pixbuf/io-jpeg.c:1373
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value '%d' is not allowed."
+msgstr ""
+"La qualitat JPEG ha de ser un valor entre 0 i 100; el valor «%d» no és "
+"permés."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:147 gdk-pixbuf/io-jpeg.c:1657
+msgctxt "image format"
+msgid "JPEG"
+msgstr "JPEG"
+
+#: gdk-pixbuf/io-gdip-tiff.c:83 gdk-pixbuf/io-tiff.c:1038
+msgctxt "image format"
+msgid "TIFF"
+msgstr "TIFF"
+
+#: gdk-pixbuf/io-gdip-utils.c:155
+#, c-format
+msgid "Could not allocate memory: %s"
+msgstr "No s'ha pogut assignar memòria: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:180 gdk-pixbuf/io-gdip-utils.c:294
+#: gdk-pixbuf/io-gdip-utils.c:334
+#, c-format
+msgid "Could not create stream: %s"
+msgstr "No s'ha pogut crear el flux: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:194
+#, c-format
+msgid "Could not seek stream: %s"
+msgstr "No s'ha pogut buscar en el flux: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:206
+#, c-format
+msgid "Could not read from stream: %s"
+msgstr "No s'ha pogut llegir el flux: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:618
+msgid "Couldn't load bitmap"
+msgstr "No s'ha pogut carregar el mapa de bits"
+
+#: gdk-pixbuf/io-gdip-utils.c:774
+msgid "Couldn't load metafile"
+msgstr "No s'ha pogut carregar el metafitxer"
+
+#: gdk-pixbuf/io-gdip-utils.c:879
+msgid "Unsupported image format for GDI+"
+msgstr "El GDI+ no funciona amb este format d'imatge"
+
+#: gdk-pixbuf/io-gdip-utils.c:886
+msgid "Couldn't save"
+msgstr "No s'ha pogut guardar"
+
+#: gdk-pixbuf/io-gdip-wmf.c:60
+msgctxt "image format"
+msgid "WMF"
+msgstr "WMF"
+
+#: gdk-pixbuf/io-gif.c:221
+#, c-format
+msgid "Failure reading GIF: %s"
+msgstr "No s'ha pogut llegir el GIF: %s"
+
+#: gdk-pixbuf/io-gif.c:496 gdk-pixbuf/io-gif.c:1503 gdk-pixbuf/io-gif.c:1677
+msgid "GIF file was missing some data (perhaps it was truncated somehow?)"
+msgstr ""
+"Al fitxer GIF li falten algunes dades (potser s'han truncat d'alguna manera)"
+
+#: gdk-pixbuf/io-gif.c:505
+#, c-format
+msgid "Internal error in the GIF loader (%s)"
+msgstr "Error intern en el carregador de GIF (%s)"
+
+#: gdk-pixbuf/io-gif.c:579
+msgid "Stack overflow"
+msgstr "Sobreeiximent de la pila"
+
+#: gdk-pixbuf/io-gif.c:639
+msgid "GIF image loader cannot understand this image."
+msgstr "El carregador d'imatges GIF no entén esta imatge."
+
+#: gdk-pixbuf/io-gif.c:668
+msgid "Bad code encountered"
+msgstr "S'ha trobat un codi incorrecte"
+
+#: gdk-pixbuf/io-gif.c:678
+msgid "Circular table entry in GIF file"
+msgstr "Entrada de taula circular al fitxer GIF"
+
+#: gdk-pixbuf/io-gif.c:866 gdk-pixbuf/io-gif.c:1489 gdk-pixbuf/io-gif.c:1542
+#: gdk-pixbuf/io-gif.c:1665
+msgid "Not enough memory to load GIF file"
+msgstr "No hi ha memòria suficient per carregar el fitxer GIF"
+
+#: gdk-pixbuf/io-gif.c:960
+msgid "Not enough memory to composite a frame in GIF file"
+msgstr "No hi ha memòria suficient per compondre un marc al fitxer GIF"
+
+#: gdk-pixbuf/io-gif.c:1132
+msgid "GIF image is corrupt (incorrect LZW compression)"
+msgstr "La imatge GIF està malmesa (la compressió LZW és incorrecte)"
+
+#: gdk-pixbuf/io-gif.c:1182
+msgid "File does not appear to be a GIF file"
+msgstr "El fitxer no pareix ser un fitxer GIF"
+
+#: gdk-pixbuf/io-gif.c:1194
+#, c-format
+msgid "Version %s of the GIF file format is not supported"
+msgstr "No s'ha implementat la versió %s del format del fitxer GIF"
+
+#: gdk-pixbuf/io-gif.c:1241
+msgid "Resulting GIF image has zero size"
+msgstr "La imatge GIF generada ocupa zero bytes"
+
+#: gdk-pixbuf/io-gif.c:1320
+msgid ""
+"GIF image has no global colormap, and a frame inside it has no local "
+"colormap."
+msgstr ""
+"La imatge GIF no té mapa de color global, i un marc de dins no té mapa de "
+"color local."
+
+#: gdk-pixbuf/io-gif.c:1565
+msgid "GIF image was truncated or incomplete."
+msgstr "Imatge GIF truncada o incompleta."
+
+#: gdk-pixbuf/io-gif.c:1572
+msgid "Not all frames of the GIF image were loaded."
+msgstr "No s'han pogut carregar tots els fotogrames de la imatge GIF."
+
+#: gdk-pixbuf/io-icns.c:358
+#, c-format
+msgid "Error reading ICNS image: %s"
+msgstr "S'ha produït un error en llegir la imatge ICNS: %s"
+
+#: gdk-pixbuf/io-icns.c:375 gdk-pixbuf/io-icns.c:452
+msgid "Could not decode ICNS file"
+msgstr "No s'ha pogut descodificar el fitxer ICNS"
+
+#: gdk-pixbuf/io-icns.c:511
+msgctxt "image format"
+msgid "MacOS X icon"
+msgstr "Icona de Mac OS X"
+
+#: gdk-pixbuf/io-ico.c:237 gdk-pixbuf/io-ico.c:251 gdk-pixbuf/io-ico.c:343
+#: gdk-pixbuf/io-ico.c:424 gdk-pixbuf/io-ico.c:449
+#, c-format
+msgid "Invalid header in icon (%s)"
+msgstr "La capçalera de la icona no és vàlida (%s)"
+
+#: gdk-pixbuf/io-ico.c:267 gdk-pixbuf/io-ico.c:353 gdk-pixbuf/io-ico.c:459
+#: gdk-pixbuf/io-ico.c:502 gdk-pixbuf/io-ico.c:530
+msgid "Not enough memory to load icon"
+msgstr "No hi ha memòria suficient per carregar la icona"
+
+#: gdk-pixbuf/io-ico.c:384
+msgid "Invalid header in icon"
+msgstr "La capçalera de la icona no és vàlida"
+
+#: gdk-pixbuf/io-ico.c:385
+msgid "Compressed icons are not supported"
+msgstr "Les icones comprimides no estan implementades"
+
+#: gdk-pixbuf/io-ico.c:487
+msgid "Unsupported icon type"
+msgstr "Tipus d'icona no implementada"
+
+#: gdk-pixbuf/io-ico.c:579
+msgid "Not enough memory to load ICO file"
+msgstr "No hi ha memòria suficient per carregar el fitxer ICO"
+
+#: gdk-pixbuf/io-ico.c:625
+msgid "ICO image was truncated or incomplete."
+msgstr "Imatge ICO truncada o incompleta."
+
+#: gdk-pixbuf/io-ico.c:1073
+msgid "Image too large to be saved as ICO"
+msgstr "La imatge és massa gran per guardar-la com a ICO"
+
+#: gdk-pixbuf/io-ico.c:1084
+msgid "Cursor hotspot outside image"
+msgstr "Lloc calent del cursor fora de la imatge"
+
+#: gdk-pixbuf/io-ico.c:1107
+#, c-format
+msgid "Unsupported depth for ICO file: %d"
+msgstr "No es permet una profunditat per al fitxer ICO: %d"
+
+#: gdk-pixbuf/io-jasper.c:73
+msgid "Couldn't allocate memory for stream"
+msgstr "No s'ha pogut assignar memòria per al flux"
+
+#: gdk-pixbuf/io-jasper.c:124
+msgid "Couldn't decode image"
+msgstr "No s'ha pogut descodificar la imatge"
+
+#: gdk-pixbuf/io-jasper.c:142
+msgid "Transformed JPEG2000 has zero width or height"
+msgstr "El JPEG 2000 transformat té amplària o alçària zero"
+
+#: gdk-pixbuf/io-jasper.c:158
+msgid "Image type currently not supported"
+msgstr "El tipus d'imatge no està implementat actualment"
+
+#: gdk-pixbuf/io-jasper.c:170 gdk-pixbuf/io-jasper.c:178
+msgid "Couldn't allocate memory for color profile"
+msgstr "No s'ha pogut assignar memòria per al perfil de color"
+
+#: gdk-pixbuf/io-jasper.c:204
+msgid "Insufficient memory to open JPEG 2000 file"
+msgstr "No hi ha memòria suficient per obrir el fitxer JPEG 2000"
+
+#: gdk-pixbuf/io-jasper.c:283
+msgid "Couldn't allocate memory to buffer image data"
+msgstr ""
+"No s'ha pogut assignar memòria per ubicar les dades d'imatge a la memòria "
+"intermèdia"
+
+#: gdk-pixbuf/io-jasper.c:327
+msgctxt "image format"
+msgid "JPEG 2000"
+msgstr "JPEG 2000"
+
+#: gdk-pixbuf/io-jpeg.c:125
+#, c-format
+msgid "Error interpreting JPEG image file (%s)"
+msgstr "S'ha produït un error en interpretar el fitxer gràfic JPEG (%s)"
+
+#: gdk-pixbuf/io-jpeg.c:633
+msgid ""
+"Insufficient memory to load image, try exiting some applications to free "
+"memory"
+msgstr ""
+"La memòria per carregar la imatge és insuficient, proveu d'eixir d'algunes "
+"aplicacions per alliberar memòria"
+
+#: gdk-pixbuf/io-jpeg.c:706 gdk-pixbuf/io-jpeg.c:917
+#, c-format
+msgid "Unsupported JPEG color space (%s)"
+msgstr "Espai de color JPEG no implementat (%s)"
+
+#: gdk-pixbuf/io-jpeg.c:817 gdk-pixbuf/io-jpeg.c:1116 gdk-pixbuf/io-jpeg.c:1464
+#: gdk-pixbuf/io-jpeg.c:1474
+msgid "Couldn't allocate memory for loading JPEG file"
+msgstr "No es pot obtindre memòria per carregar el fitxer JPEG"
+
+#: gdk-pixbuf/io-jpeg.c:1073
+msgid "Transformed JPEG has zero width or height."
+msgstr "El JPEG transformat té amplària o alçària zero."
+
+#: gdk-pixbuf/io-jpeg.c:1100
+#, c-format
+msgid "Unsupported number of color components (%d)"
+msgstr "Número de components de color no implementat (%d)"
+
+#: gdk-pixbuf/io-jpeg.c:1394
+#, c-format
+msgid ""
+"JPEG x-dpi must be a value between 1 and 65535; value '%s' is not allowed."
+msgstr ""
+"JPEG x-dpi ha de tindre un valor entre 1 i 65535; el valor «%s» no és permés."
+
+#: gdk-pixbuf/io-jpeg.c:1415
+#, c-format
+msgid ""
+"JPEG y-dpi must be a value between 1 and 65535; value '%s' is not allowed."
+msgstr ""
+"JPEG y-dpi ha de tindre un valor entre 1 i 65535; el valor «%s» no és permés."
+
+#: gdk-pixbuf/io-jpeg.c:1429
+#, c-format
+msgid "Color profile has invalid length '%u'."
+msgstr "La llargada del perfil de color no és vàlida «%u»."
+
+#: gdk-pixbuf/io-png.c:53
+msgid "Bits per channel of PNG image is invalid."
+msgstr "Els bits per canal de la imatge PNG no són vàlids."
+
+#: gdk-pixbuf/io-png.c:134 gdk-pixbuf/io-png.c:666
+msgid "Transformed PNG has zero width or height."
+msgstr "El PNG transformat té amplària o alçària zero."
+
+#: gdk-pixbuf/io-png.c:142
+msgid "Bits per channel of transformed PNG is not 8."
+msgstr "Els bits per canal del PNG transformat no són 8."
+
+#: gdk-pixbuf/io-png.c:151
+msgid "Transformed PNG not RGB or RGBA."
+msgstr "El PNG transformat no és RGB o RGBA."
+
+#: gdk-pixbuf/io-png.c:160
+msgid "Transformed PNG has unsupported number of channels, must be 3 or 4."
+msgstr ""
+"El PNG transformat té un nombre no implementat de canals, ha de ser 3 o 4."
+
+#: gdk-pixbuf/io-png.c:181
+#, c-format
+msgid "Fatal error in PNG image file: %s"
+msgstr "Error fatal al fitxer d'imatge PNG: %s"
+
+#: gdk-pixbuf/io-png.c:318
+msgid "Insufficient memory to load PNG file"
+msgstr "No hi ha memòria suficient per carregar el fitxer PNG"
+
+#: gdk-pixbuf/io-png.c:679
+#, c-format
+msgid ""
+"Insufficient memory to store a %lu by %lu image; try exiting some "
+"applications to reduce memory usage"
+msgstr ""
+"No hi ha suficient memòria per emmagatzemar una imatge de %lu per %lu. "
+"Eixiu d'algunes aplicacions per alliberar memòria"
+
+#: gdk-pixbuf/io-png.c:755
+msgid "Fatal error reading PNG image file"
+msgstr "Error fatal en llegir el fitxer gràfic PNG"
+
+#: gdk-pixbuf/io-png.c:804
+#, c-format
+msgid "Fatal error reading PNG image file: %s"
+msgstr "Error fatal en llegir el fitxer gràfic PNG: %s"
+
+#: gdk-pixbuf/io-png.c:896
+msgid ""
+"Keys for PNG text chunks must have at least 1 and at most 79 characters."
+msgstr ""
+"Les claus per als blocs text de PNG han de tindre entre 1 i 79 caràcters."
+
+#: gdk-pixbuf/io-png.c:905
+msgid "Keys for PNG text chunks must be ASCII characters."
+msgstr "Les claus per als blocs text de PNG han de ser caràcters ASCII."
+
+#: gdk-pixbuf/io-png.c:919 gdk-pixbuf/io-tiff.c:802
+#, c-format
+msgid "Color profile has invalid length %d."
+msgstr "El perfil de color té una llargada no vàlida (%d)."
+
+#: gdk-pixbuf/io-png.c:932
+#, c-format
+msgid ""
+"PNG compression level must be a value between 0 and 9; value '%s' could not "
+"be parsed."
+msgstr ""
+"El nivell de compressió de PNG ha de ser un valor entre 0 i 9; el valor «%s» "
+"no es pot analitzar."
+
+#: gdk-pixbuf/io-png.c:945
+#, c-format
+msgid ""
+"PNG compression level must be a value between 0 and 9; value '%d' is not "
+"allowed."
+msgstr ""
+"El nivell de compressió de PNG ha de ser un valor entre 0 i 9; el valor «%d» "
+"no és permés."
+
+#: gdk-pixbuf/io-png.c:964
+#, c-format
+msgid "PNG x-dpi must be greater than zero; value '%s' is not allowed."
+msgstr ""
+"PNG x-dpi ha de tindre un valor major de zero; el valor «%s» no és permés."
+
+#: gdk-pixbuf/io-png.c:984
+#, c-format
+msgid "PNG y-dpi must be greater than zero; value '%s' is not allowed."
+msgstr ""
+"PNG y-dpi ha de tindre un valor major de zero; el valor «%s» no és permés."
+
+#: gdk-pixbuf/io-png.c:1033
+#, c-format
+msgid "Value for PNG text chunk %s cannot be converted to ISO-8859-1 encoding."
+msgstr ""
+"El valor per al fragment de text PNG %s no es pot convertir a la codificació "
+"ISO-8859-1."
+
+#: gdk-pixbuf/io-png.c:1218
+msgctxt "image format"
+msgid "PNG"
+msgstr "PNG"
+
+#: gdk-pixbuf/io-pnm.c:246
+msgid "PNM loader expected to find an integer, but didn't"
+msgstr "El carregador PNM esperava trobar un enter, però no l'ha trobat"
+
+#: gdk-pixbuf/io-pnm.c:278
+msgid "PNM file has an incorrect initial byte"
+msgstr "El fitxer PNM té un byte inicial incorrecte"
+
+#: gdk-pixbuf/io-pnm.c:308
+msgid "PNM file is not in a recognized PNM subformat"
+msgstr "El fitxer PNM no és en un subformat reconegut"
+
+#: gdk-pixbuf/io-pnm.c:333
+msgid "PNM file has an invalid width"
+msgstr "El fitxer PNM té una amplària no vàlida"
+
+#: gdk-pixbuf/io-pnm.c:341
+msgid "PNM file has an image width of 0"
+msgstr "El fitxer PNM té una amplària d'imatge de 0"
+
+#: gdk-pixbuf/io-pnm.c:362
+msgid "PNM file has an invalid height"
+msgstr "El fitxer PNM té una alçària no vàlida"
+
+#: gdk-pixbuf/io-pnm.c:370
+msgid "PNM file has an image height of 0"
+msgstr "El fitxer PNM té una alçària d'imatge zero"
+
+#: gdk-pixbuf/io-pnm.c:393
+msgid "Maximum color value in PNM file is 0"
+msgstr "El valor màxim de color al fitxer PNM és zero"
+
+#: gdk-pixbuf/io-pnm.c:401
+msgid "Maximum color value in PNM file is too large"
+msgstr "El valor màxim de color al fitxer PNM és massa alt"
+
+#: gdk-pixbuf/io-pnm.c:441 gdk-pixbuf/io-pnm.c:471 gdk-pixbuf/io-pnm.c:516
+msgid "Raw PNM image type is invalid"
+msgstr "El tipus d'imatge PNM en brut no és vàlid"
+
+#: gdk-pixbuf/io-pnm.c:666
+msgid "PNM image loader does not support this PNM subformat"
+msgstr "El carregador d'imatges PNM no permet este subformat PNM"
+
+#: gdk-pixbuf/io-pnm.c:753 gdk-pixbuf/io-pnm.c:980
+msgid "Raw PNM formats require exactly one whitespace before sample data"
+msgstr ""
+"Els formats PNM en brut requereixen exactament un espai en blanc abans de "
+"les dades de mostra"
+
+#: gdk-pixbuf/io-pnm.c:780
+msgid "Cannot allocate memory for loading PNM image"
+msgstr "No es pot obtindre memòria per carregar la imatge PNM"
+
+#: gdk-pixbuf/io-pnm.c:830
+msgid "Insufficient memory to load PNM context struct"
+msgstr "No hi ha memòria suficient per carregar l'estructura de context PNM"
+
+#: gdk-pixbuf/io-pnm.c:881
+msgid "Unexpected end of PNM image data"
+msgstr "Final inesperat de les dades de la imatge PNM"
+
+#: gdk-pixbuf/io-pnm.c:1009
+msgid "Insufficient memory to load PNM file"
+msgstr "No hi ha memòria suficient per carregar el fitxer PNM"
+
+#: gdk-pixbuf/io-pnm.c:1093
+msgctxt "image format"
+msgid "PNM/PBM/PGM/PPM"
+msgstr "PNM/PBM/PGM/PPM"
+
+#: gdk-pixbuf/io-qtif.c:126
+msgid "Input file descriptor is NULL."
+msgstr "El descriptor del fitxer d'entrada és nul."
+
+#: gdk-pixbuf/io-qtif.c:141
+msgid "Failed to read QTIF header"
+msgstr "Ha fallat la lectura de la capçalera QTIF"
+
+#: gdk-pixbuf/io-qtif.c:150 gdk-pixbuf/io-qtif.c:187 gdk-pixbuf/io-qtif.c:454
+#, c-format
+msgid "QTIF atom size too large (%d byte)"
+msgid_plural "QTIF atom size too large (%d bytes)"
+msgstr[0] "La mida de l'àtom QTIF és massa gran (%d byte)"
+msgstr[1] "La mida de l'àtom QTIF és massa gran (%d bytes)"
+
+#: gdk-pixbuf/io-qtif.c:173
+#, c-format
+msgid "Failed to allocate %d byte for file read buffer"
+msgid_plural "Failed to allocate %d bytes for file read buffer"
+msgstr[0] ""
+"No s'han pogut assignar %d byte per a la memòria intermèdia del fitxer de "
+"lectura"
+msgstr[1] ""
+"No s'han pogut assignar %d bytes per a la memòria intermèdia del fitxer de "
+"lectura"
+
+#: gdk-pixbuf/io-qtif.c:201
+#, c-format
+msgid "File error when reading QTIF atom: %s"
+msgstr "S'ha produït un error de fitxer en llegir l'àtom QTIF: %s"
+
+#: gdk-pixbuf/io-qtif.c:238
+#, c-format
+msgid "Failed to skip the next %d byte with seek()."
+msgid_plural "Failed to skip the next %d bytes with seek()."
+msgstr[0] "No s'ha pogut ometre el següent %d byte amb la crida seek()."
+msgstr[1] "No s'han pogut ometre els següents %d bytes amb la crida seek()."
+
+#: gdk-pixbuf/io-qtif.c:265
+msgid "Failed to allocate QTIF context structure."
+msgstr "No s'ha pogut obtindre memòria per al context de l'estructura QTIF."
+
+#: gdk-pixbuf/io-qtif.c:325
+msgid "Failed to create GdkPixbufLoader object."
+msgstr "No s'ha pogut crear l'objecte GdkPixbufLoader."
+
+#: gdk-pixbuf/io-qtif.c:429
+msgid "Failed to find an image data atom."
+msgstr "No s'ha trobat un àtom de dades d'imatge."
+
+#: gdk-pixbuf/io-qtif.c:613
+msgctxt "image format"
+msgid "QuickTime"
+msgstr "QuickTime"
+
+#: gdk-pixbuf/io-tga.c:333
+msgid "Cannot allocate colormap"
+msgstr "No es pot assignar el mapa de colors"
+
+#: gdk-pixbuf/io-tga.c:358
+msgid "Cannot allocate new pixbuf"
+msgstr "No es pot ubicar una memòria de píxels nova"
+
+#: gdk-pixbuf/io-tga.c:506
+msgid "Unexpected bitdepth for colormap entries"
+msgstr "Profunditat de bit inesperada per a les entrades del mapa de color"
+
+#: gdk-pixbuf/io-tga.c:522
+msgid "Pseudocolor image does not contain a colormap"
+msgstr "La imatge amb pseudocolors no conté un mapa de colors"
+
+#: gdk-pixbuf/io-tga.c:565
+msgid "Cannot allocate TGA header memory"
+msgstr "No es pot obtindre memòria per les capçaleres TGA"
+
+#: gdk-pixbuf/io-tga.c:596
+msgid "TGA image has invalid dimensions"
+msgstr "La imatge TGA té unes dimensions no vàlides"
+
+#: gdk-pixbuf/io-tga.c:602 gdk-pixbuf/io-tga.c:609
+msgid "TGA image type not supported"
+msgstr "El tipus d'imatge TGA no està permés"
+
+#: gdk-pixbuf/io-tga.c:634
+msgid "Cannot allocate memory for TGA context struct"
+msgstr "No es pot obtindre memòria per al context de l'estructura TGA"
+
+#: gdk-pixbuf/io-tga.c:695
+msgid "TGA image was truncated or incomplete."
+msgstr "Imatge TGA està truncada o incompleta."
+
+#: gdk-pixbuf/io-tga.c:747
+msgctxt "image format"
+msgid "Targa"
+msgstr "Targa"
+
+#: gdk-pixbuf/io-tiff.c:108
+msgid "Could not get image width (bad TIFF file)"
+msgstr "No es pot obtindre l'amplària de la imatge (fitxer TIFF incorrecte)"
+
+#: gdk-pixbuf/io-tiff.c:116
+msgid "Could not get image height (bad TIFF file)"
+msgstr "No es pot obtindre l'alçària de la imatge (fitxer TIFF incorrecte)"
+
+#: gdk-pixbuf/io-tiff.c:124
+msgid "Width or height of TIFF image is zero"
+msgstr "L'amplària o l'alçària de la imatge TIFF és zero"
+
+#: gdk-pixbuf/io-tiff.c:132 gdk-pixbuf/io-tiff.c:142
+msgid "Dimensions of TIFF image too large"
+msgstr "Les dimensions de la imatge TIFF són massa grans"
+
+#: gdk-pixbuf/io-tiff.c:168 gdk-pixbuf/io-tiff.c:180 gdk-pixbuf/io-tiff.c:536
+msgid "Insufficient memory to open TIFF file"
+msgstr "No hi ha memòria suficient per obrir el fitxer TIFF"
+
+#: gdk-pixbuf/io-tiff.c:278
+msgid "Failed to load RGB data from TIFF file"
+msgstr "No s'han pogut carregar les dades RGB des del fitxer TIFF"
+
+#: gdk-pixbuf/io-tiff.c:340
+msgid "Failed to open TIFF image"
+msgstr "No s'ha pogut obrir la imatge TIFF"
+
+#: gdk-pixbuf/io-tiff.c:474 gdk-pixbuf/io-tiff.c:486
+msgid "Failed to load TIFF image"
+msgstr "No s'ha pogut carregar la imatge TIFF"
+
+#: gdk-pixbuf/io-tiff.c:711
+msgid "Failed to save TIFF image"
+msgstr "No s'ha pogut guardar la imatge TIFF"
+
+#: gdk-pixbuf/io-tiff.c:772
+msgid "TIFF compression doesn't refer to a valid codec."
+msgstr "La compressió TIFF no es refereix a un còdec vàlid."
+
+#: gdk-pixbuf/io-tiff.c:817
+msgid "TIFF bits-per-sample doesn't contain a supported value."
+msgstr "Els bits per mostra de la imatge TIFF no contenen cap valor suportat. "
+
+#: gdk-pixbuf/io-tiff.c:898
+msgid "Failed to write TIFF data"
+msgstr "No s'han pogut escriure dades TIFF"
+
+#: gdk-pixbuf/io-tiff.c:916
+#, c-format
+msgid "TIFF x-dpi must be greater than zero; value '%s' is not allowed."
+msgstr ""
+"TIFF x-dpi ha de tindre un valor major de zero; el valor «%s» no és permés."
+
+#: gdk-pixbuf/io-tiff.c:928
+#, c-format
+msgid "TIFF y-dpi must be greater than zero; value '%s' is not allowed."
+msgstr ""
+"TIFF x-dpi ha de tindre un valor major de zero; el valor «%s» no és permés."
+
+#: gdk-pixbuf/io-tiff.c:969
+msgid "Couldn't write to TIFF file"
+msgstr "No s'ha pogut escriure al fitxer TIFF"
+
+#: gdk-pixbuf/io-xbm.c:318
+msgid "Invalid XBM file"
+msgstr "El fitxer XBM no és vàlid"
+
+#: gdk-pixbuf/io-xbm.c:328
+msgid "Insufficient memory to load XBM image file"
+msgstr "No hi ha memòria suficient per carregar el fitxer gràfic XBM"
+
+#: gdk-pixbuf/io-xbm.c:476
+msgid "Failed to write to temporary file when loading XBM image"
+msgstr "No s'ha pogut escriure al fitxer temporal en carregar la imatge XBM"
+
+#: gdk-pixbuf/io-xbm.c:515
+msgctxt "image format"
+msgid "XBM"
+msgstr "XBM"
+
+#: gdk-pixbuf/io-xpm.c:469
+msgid "No XPM header found"
+msgstr "No s'ha trobat la capçalera XPM"
+
+#: gdk-pixbuf/io-xpm.c:478
+msgid "Invalid XPM header"
+msgstr "La capçalera XPM no és vàlida"
+
+#: gdk-pixbuf/io-xpm.c:486
+msgid "XPM file has image width <= 0"
+msgstr "El fitxer XPM té una amplària d'imatge menor o igual que 0"
+
+#: gdk-pixbuf/io-xpm.c:494
+msgid "XPM file has image height <= 0"
+msgstr "El fitxer XPM té una alçària d'imatge menor o igual que 0"
+
+#: gdk-pixbuf/io-xpm.c:502
+msgid "XPM has invalid number of chars per pixel"
+msgstr "XPM té un nombre de caràcters per píxel no vàlid"
+
+#: gdk-pixbuf/io-xpm.c:511
+msgid "XPM file has invalid number of colors"
+msgstr "El fitxer XPM té un nombre de colors no vàlid"
+
+#: gdk-pixbuf/io-xpm.c:523 gdk-pixbuf/io-xpm.c:532 gdk-pixbuf/io-xpm.c:584
+msgid "Cannot allocate memory for loading XPM image"
+msgstr "No es pot obtindre memòria per carregar la imatge XPM"
+
+#: gdk-pixbuf/io-xpm.c:546
+msgid "Cannot read XPM colormap"
+msgstr "No es pot llegir el mapa de color d'XPM"
+
+#: gdk-pixbuf/io-xpm.c:778
+msgid "Failed to write to temporary file when loading XPM image"
+msgstr "No s'ha pogut escriure al fitxer temporal en carregar la imatge XPM"
+
+#: gdk-pixbuf/io-xpm.c:817
+msgctxt "image format"
+msgid "XPM"
+msgstr "XPM"
+
+#~ msgid "Couldn't allocate memory for header"
+#~ msgstr "No es pot obtenir memòria per a la capçalera"
+
+#~ msgid "Couldn't allocate memory for context buffer"
+#~ msgstr ""
+#~ "No s'ha pogut assignar memòria per al context de la memòria intermèdia"
+
+#~ msgid "Image has invalid width and/or height"
+#~ msgstr "La imatge té una amplada i/o alçada no vàlida"
+
+#~ msgid "Image has unsupported bpp"
+#~ msgstr "La imatge té uns bpp no permesos"
+
+#~ msgid "Image has unsupported number of %d-bit planes"
+#~ msgstr "La imatge té un nombre de plànols de %d bits no compatible"
+
+#~ msgid "Couldn't create new pixbuf"
+#~ msgstr "No s'ha pogut crear una memòria intermèdia de píxels nova"
+
+#~ msgid "Couldn't allocate memory for line data"
+#~ msgstr "No s'ha pogut assignar memòria per a les dades de la línia"
+
+#~ msgid "Couldn't allocate memory for PCX image"
+#~ msgstr "No es pot obtenir memòria per a la imatge PCX"
+
+#~ msgid "Didn't get all lines of PCX image"
+#~ msgstr "No s'han obtingut totes les línies de la imatge PCX"
+
+#~ msgid "No palette found at end of PCX data"
+#~ msgstr "No s'ha trobat cap paleta al final de les dades PCX"
+
+#~ msgctxt "image format"
+#~ msgid "PCX"
+#~ msgstr "PCX"
+
+#~ msgid "Transformed pixbuf has zero width or height."
+#~ msgstr "La memòria de píxels transformada té amplada o alçada zero."
+
+#~ msgctxt "image format"
+#~ msgid "GdkPixdata"
+#~ msgstr "GdkPixdata"
+
+#~ msgid "RAS image has bogus header data"
+#~ msgstr "La imatge RAS té dades de capçalera erronis"
+
+#~ msgid "RAS image has unknown type"
+#~ msgstr "La imatge RAS és de tipus desconegut"
+
+#~ msgid "unsupported RAS image variation"
+#~ msgstr "Variació d'imatge RAS no implementada"
+
+#~ msgid "Not enough memory to load RAS image"
+#~ msgstr "No hi ha memòria suficient per carregar la imatge RAS"
+
+#~ msgctxt "image format"
+#~ msgid "Sun raster"
+#~ msgstr "Sun raster"
+
+#~ msgid "Cannot allocate memory for IOBuffer struct"
+#~ msgstr "No es pot obtenir memòria per a l'estructura IOBuffer"
+
+#~ msgid "Cannot allocate memory for IOBuffer data"
+#~ msgstr "No es pot obtenir memòria per les dades de l'IOBuffer"
+
+#~ msgid "Cannot realloc IOBuffer data"
+#~ msgstr "No es pot reubicar memòria per les dades de l'IOBuffer"
+
+#~ msgid "Cannot allocate temporary IOBuffer data"
+#~ msgstr "No es poden assignar les dades temporals de l'IOBuffer"
+
+#~ msgid "Image is corrupted or truncated"
+#~ msgstr "La imatge està malmesa o truncada"
+
+#~ msgid "Cannot allocate colormap structure"
+#~ msgstr "No es pot assignar l'estructura del mapa de colors"
+
+#~ msgid "Excess data in file"
+#~ msgstr "Excés de dades al fitxer"
+
+#~ msgid "Image has zero width"
+#~ msgstr "La imatge té una amplada zero"
+
+#~ msgid "Image has zero height"
+#~ msgstr "La imatge té una alçada zero"
+
+#~ msgid "Not enough memory to load image"
+#~ msgstr "No hi ha memòria suficient per carregar la imatge"
+
+#~ msgid "Couldn't save the rest"
+#~ msgstr "No s'ha pogut desar la resta"
+
+#~ msgctxt "image format"
+#~ msgid "WBMP"
+#~ msgstr "WBMP"
+
+#~ msgid "The ANI image format"
+#~ msgstr "El format d'imatge ANI"
+
+#~ msgid "The BMP image format"
+#~ msgstr "El format d'imatge BMP"
+
+#~ msgid "The EMF image format"
+#~ msgstr "El format d'imatge EMF"
+
+#~ msgid "The GIF image format"
+#~ msgstr "El format d'imatge GIF"
+
+#~ msgid "The ICO image format"
+#~ msgstr "El format d'imatge ICO"
+
+#~ msgid "The JPEG image format"
+#~ msgstr "El format d'imatge JPEG"
+
+#~ msgid "The WMF image format"
+#~ msgstr "El format d'imatge WMF"
+
+#~ msgid "The ICNS image format"
+#~ msgstr "El format d'imatge ICNS"
+
+#~ msgid "Icon has zero width"
+#~ msgstr "L'amplada de la icona és zero"
+
+#~ msgid "Icon has zero height"
+#~ msgstr "L'alçada de la icona és zero"
+
+#~ msgid "The JPEG 2000 image format"
+#~ msgstr "El format d'imatge JPEG 2000"
+
+#~ msgid "The PCX image format"
+#~ msgstr "El format d'imatge PCX"
+
+#~ msgid "The PNG image format"
+#~ msgstr "El format d'imatge PNG"
+
+#~ msgid "The PNM/PBM/PGM/PPM image format family"
+#~ msgstr "La família de format d'imatge PNM/PBM/PGM/PPM"
+
+#~ msgid "The QTIF image format"
+#~ msgstr "El format d'imatge QTIF"
+
+#~ msgid "The Sun raster image format"
+#~ msgstr "El format d'imatge Sun raster"
+
+#~ msgid "The Targa image format"
+#~ msgstr "El format d'imatge Targa"
+
+#~ msgid "The TIFF image format"
+#~ msgstr "El format d'imatge TIFF"
+
+#~ msgid "The WBMP image format"
+#~ msgstr "El format d'imatge WBMP"
+
+#~ msgid "The XBM image format"
+#~ msgstr "El format d'imatge XBM"
+
+#~ msgid "The XPM image format"
+#~ msgstr "El format d'imatge XPM"

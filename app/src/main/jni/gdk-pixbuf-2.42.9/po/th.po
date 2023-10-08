@@ -1,0 +1,940 @@
+# Thai translation for gtk+.
+# Copyright (C) 2003-2014 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gtk+ package.
+# Paisa Seeluangsawat <paisa@users.sf.net>, 2003, 2004.
+# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2005-2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gtk+\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtk"
+"%2b&keywords=I18N+L10N&component=gdk\n"
+"POT-Creation-Date: 2014-03-03 05:58+0000\n"
+"PO-Revision-Date: 2014-03-03 17:36+0700\n"
+"Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
+"Language-Team: Thai <thai-l10n@googlegroups.com>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../gdk-pixbuf/gdk-pixbuf-animation.c:158 ../gdk-pixbuf/gdk-pixbuf-io.c:1077
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:1333
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "เปิดแฟ้ม '%s' ไม่สำเร็จ: %s"
+
+#: ../gdk-pixbuf/gdk-pixbuf-animation.c:171 ../gdk-pixbuf/gdk-pixbuf-io.c:962
+#, c-format
+msgid "Image file '%s' contains no data"
+msgstr "แฟ้มรูปภาพ '%s' ไม่มีข้อมูล"
+
+#: ../gdk-pixbuf/gdk-pixbuf-animation.c:210
+#, c-format
+msgid ""
+"Failed to load animation '%s': reason not known, probably a corrupt "
+"animation file"
+msgstr ""
+"เปิดแฟ้มภาพเคลื่อนไหว '%s' ไม่สำเร็จ: ไม่แน่ใจว่าเพราะอะไร แต่อาจเป็นเพราะแฟ้มเสียหาย"
+
+#: ../gdk-pixbuf/gdk-pixbuf-animation.c:278 ../gdk-pixbuf/gdk-pixbuf-io.c:1113
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:1385
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "เปิดแฟ้มรูปภาพ '%s' ไม่สำเร็จ: ไม่แน่ใจว่าเพราะอะไร แต่อาจเป็นเพราะแฟ้มเสียหาย"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:774
+#, c-format
+msgid "Unable to load image-loading module: %s: %s"
+msgstr "ไม่สามารถเปิดมอดูลสำหรับอ่านรูปภาพ: %s: %s"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:789
+#, c-format
+msgid ""
+"Image-loading module %s does not export the proper interface; perhaps it's "
+"from a different gdk-pixbuf version?"
+msgstr ""
+"มอดูล %s ซึ่งใช้สำหรับอ่านรูปภาพ ไม่ได้ส่งออกอินเทอร์เฟซที่ต้องการ เป็นไปได้ว่ามาจาก gdk-"
+"pixbuf ที่ต่างรุ่นกัน"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:798 ../gdk-pixbuf/gdk-pixbuf-io.c:849
+#, c-format
+msgid "Image type '%s' is not supported"
+msgstr "ไม่รองรับรูปภาพชนิด '%s'"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:934
+#, c-format
+msgid "Couldn't recognize the image file format for file '%s'"
+msgstr "ไม่รู้จักชนิดรูปภาพของแฟ้ม '%s'"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:942
+msgid "Unrecognized image file format"
+msgstr "ไม่รู้จักชนิดของแฟ้มรูปภาพ"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:1124
+#, c-format
+msgid "Failed to load image '%s': %s"
+msgstr "อ่านรูปภาพ '%s' ไม่สำเร็จ: %s"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:2022 ../gdk-pixbuf/io-gdip-utils.c:835
+#, c-format
+msgid "Error writing to image file: %s"
+msgstr "เกิดข้อผิดพลาดขณะเขียนแฟ้มรูปภาพ: %s"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:2064 ../gdk-pixbuf/gdk-pixbuf-io.c:2185
+#, c-format
+msgid "This build of gdk-pixbuf does not support saving the image format: %s"
+msgstr "คนคอมไพล์ gdk-pixbuf ไม่ได้เลือกรองรับการบันทึกแฟ้มชนิด: %s"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:2095
+msgid "Insufficient memory to save image to callback"
+msgstr "หน่วยความจำไม่พอสำหรับบันทึกข้อมูลภาพผ่านฟังก์ชันเรียกกลับ"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:2108
+msgid "Failed to open temporary file"
+msgstr "เปิดแฟ้มชั่วคราวไม่สำเร็จ"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:2131
+msgid "Failed to read from temporary file"
+msgstr "อ่านแฟ้มชั่วคราวไม่สำเร็จ"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:2375
+#, c-format
+msgid "Failed to open '%s' for writing: %s"
+msgstr "เปิดเขียน '%s' ไม่สำเร็จ: %s"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:2401
+#, c-format
+msgid ""
+"Failed to close '%s' while writing image, all data may not have been saved: "
+"%s"
+msgstr "ไม่สามารถปิดแฟ้ม '%s' ขณะเขียนรูปภาพ ข้อมูลอาจจะไม่ถูกบันทึก: %s"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:2622 ../gdk-pixbuf/gdk-pixbuf-io.c:2674
+msgid "Insufficient memory to save image into a buffer"
+msgstr "หน่วยความจำไม่พอที่จะบันทึกรูปภาพลงในบัฟเฟอร์"
+
+#: ../gdk-pixbuf/gdk-pixbuf-io.c:2720
+msgid "Error writing to image stream"
+msgstr "เกิดข้อผิดพลาดขณะเขียนสตรีมรูปภาพ"
+
+#: ../gdk-pixbuf/gdk-pixbuf-loader.c:384
+#, c-format
+msgid ""
+"Internal error: Image loader module '%s' failed to complete an operation, "
+"but didn't give a reason for the failure"
+msgstr ""
+"ข้อผิดพลาดภายใน: มอดูลโหลดรูปภาพ '%s' ดำเนินการบางอย่างไม่สำเร็จ แต่ไม่ได้ระบุสาเหตุ"
+
+#: ../gdk-pixbuf/gdk-pixbuf-loader.c:426
+#, c-format
+msgid "Incremental loading of image type '%s' is not supported"
+msgstr "ไม่รองรับการอ่านรูปภาพชนิด '%s' แบบเพิ่มทีละส่วน"
+
+#: ../gdk-pixbuf/gdk-pixdata.c:158
+msgid "Image header corrupt"
+msgstr "ส่วนหัวของแฟ้มรูปภาพเสียหาย"
+
+#: ../gdk-pixbuf/gdk-pixdata.c:163
+msgid "Image format unknown"
+msgstr "ไม่รู้จักชนิดของรูปภาพ"
+
+#: ../gdk-pixbuf/gdk-pixdata.c:168 ../gdk-pixbuf/gdk-pixdata.c:500
+msgid "Image pixel data corrupt"
+msgstr "ข้อมูลพิกเซลในแฟ้มเสีย"
+
+#: ../gdk-pixbuf/gdk-pixdata.c:444
+#, c-format
+msgid "failed to allocate image buffer of %u byte"
+msgid_plural "failed to allocate image buffer of %u bytes"
+msgstr[0] "จัดสรรเนื้อที่ %u ไบต์เพื่อเป็นบัฟเฟอร์รูปภาพไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-ani.c:242
+msgid "Unexpected icon chunk in animation"
+msgstr "พบชิ้นไอคอนเกินมาในภาพเคลื่อนไหว"
+
+#: ../gdk-pixbuf/io-ani.c:340 ../gdk-pixbuf/io-ani.c:398
+#: ../gdk-pixbuf/io-ani.c:424 ../gdk-pixbuf/io-ani.c:447
+#: ../gdk-pixbuf/io-ani.c:474 ../gdk-pixbuf/io-ani.c:561
+msgid "Invalid header in animation"
+msgstr "ข้อมูลส่วนหัวของภาพเคลื่อนไหวเสีย"
+
+#: ../gdk-pixbuf/io-ani.c:350 ../gdk-pixbuf/io-ani.c:372
+#: ../gdk-pixbuf/io-ani.c:456 ../gdk-pixbuf/io-ani.c:483
+#: ../gdk-pixbuf/io-ani.c:534 ../gdk-pixbuf/io-ani.c:606
+msgid "Not enough memory to load animation"
+msgstr "หน่วยความจำไม่พอที่จะอ่านภาพเคลื่อนไหว"
+
+#: ../gdk-pixbuf/io-ani.c:390 ../gdk-pixbuf/io-ani.c:416
+#: ../gdk-pixbuf/io-ani.c:435
+msgid "Malformed chunk in animation"
+msgstr "ส่วนของภาพเคลื่อนไหวเสีย"
+
+#: ../gdk-pixbuf/io-ani.c:628
+msgid "ANI image was truncated or incomplete."
+msgstr "รูปภาพ ANI ถูกตัดตอนหรือไม่สมบูรณ์"
+
+#: ../gdk-pixbuf/io-ani.c:669
+msgid "The ANI image format"
+msgstr "แฟ้มรูปภาพชนิด ANI"
+
+#: ../gdk-pixbuf/io-bmp.c:227 ../gdk-pixbuf/io-bmp.c:264
+#: ../gdk-pixbuf/io-bmp.c:335 ../gdk-pixbuf/io-bmp.c:367
+#: ../gdk-pixbuf/io-bmp.c:390 ../gdk-pixbuf/io-bmp.c:493
+msgid "BMP image has bogus header data"
+msgstr "รูปภาพ BMP มีข้อมูลส่วนหัวที่ใช้ไม่ได้"
+
+#: ../gdk-pixbuf/io-bmp.c:238 ../gdk-pixbuf/io-bmp.c:430
+msgid "Not enough memory to load bitmap image"
+msgstr "หน่วยความจำไม่พอที่จะอ่านรูปภาพบิตแมป"
+
+#: ../gdk-pixbuf/io-bmp.c:316
+msgid "BMP image has unsupported header size"
+msgstr "รูปภาพ BMP มีขนาดข้อมูลส่วนหัวที่ไม่รองรับ"
+
+#: ../gdk-pixbuf/io-bmp.c:354
+msgid "Topdown BMP images cannot be compressed"
+msgstr "ภาพ BMP ที่ไล่เส้นจากบนลงล่าง ไม่สามารถบีบอัดข้อมูลได้"
+
+#: ../gdk-pixbuf/io-bmp.c:714 ../gdk-pixbuf/io-pnm.c:705
+msgid "Premature end-of-file encountered"
+msgstr "พบ end-of-file ก่อนที่ควร"
+
+#: ../gdk-pixbuf/io-bmp.c:1326
+msgid "Couldn't allocate memory for saving BMP file"
+msgstr "หน่วยความจำไม่พอสำหรับบันทึกแฟ้มรูปภาพ BMP"
+
+#: ../gdk-pixbuf/io-bmp.c:1367
+msgid "Couldn't write to BMP file"
+msgstr "เขียนแฟ้ม BMP ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-bmp.c:1420 ../gdk-pixbuf/io-gdip-bmp.c:80
+msgid "The BMP image format"
+msgstr "แฟ้มรูปภาพชนิด BMP"
+
+#: ../gdk-pixbuf/io-gdip-emf.c:57
+msgid "The EMF image format"
+msgstr "แฟ้มรูปภาพชนิด EMF"
+
+#: ../gdk-pixbuf/io-gdip-gif.c:78 ../gdk-pixbuf/io-gif.c:1718
+msgid "The GIF image format"
+msgstr "แฟ้มรูปภาพชนิด GIF"
+
+#: ../gdk-pixbuf/io-gdip-ico.c:57 ../gdk-pixbuf/io-ico.c:1269
+msgid "The ICO image format"
+msgstr "แฟ้มรูปภาพชนิด ICO"
+
+#: ../gdk-pixbuf/io-gdip-jpeg.c:51 ../gdk-pixbuf/io-jpeg.c:1249
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value '%s' could not be "
+"parsed."
+msgstr "คุณภาพของรูปภาพ JPEG ต้องอยู่ระหว่าง 0 และ 100  ค่า '%s' ไม่สามารถตีความได้"
+
+#: ../gdk-pixbuf/io-gdip-jpeg.c:66 ../gdk-pixbuf/io-jpeg.c:1265
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value '%d' is not allowed."
+msgstr "คุณภาพของรูปภาพ JPEG ต้องอยู่ระหว่าง 0 และ 100  ค่า '%d' ที่ตั้งใช้ไม่ได้"
+
+#: ../gdk-pixbuf/io-gdip-jpeg.c:134 ../gdk-pixbuf/io-jpeg.c:1478
+msgid "The JPEG image format"
+msgstr "แฟ้มรูปภาพชนิด JPEG"
+
+#: ../gdk-pixbuf/io-gdip-tiff.c:80 ../gdk-pixbuf/io-tiff.c:786
+msgid "The TIFF image format"
+msgstr "แฟ้มรูปภาพชนิด TIFF"
+
+#: ../gdk-pixbuf/io-gdip-utils.c:152
+#, c-format
+msgid "Could not allocate memory: %s"
+msgstr "ไม่สามารถจองหน่วยความจำ: %s"
+
+#: ../gdk-pixbuf/io-gdip-utils.c:177 ../gdk-pixbuf/io-gdip-utils.c:291
+#: ../gdk-pixbuf/io-gdip-utils.c:331
+#, c-format
+msgid "Could not create stream: %s"
+msgstr "ไม่สามารถสร้างสตรีม: %s"
+
+#: ../gdk-pixbuf/io-gdip-utils.c:191
+#, c-format
+msgid "Could not seek stream: %s"
+msgstr "ไม่สามารถเลื่อนตำแหน่งในสตรีม: %s"
+
+#: ../gdk-pixbuf/io-gdip-utils.c:203
+#, c-format
+msgid "Could not read from stream: %s"
+msgstr "ไม่สามารถอ่านข้อมูลจากสตรีม: %s"
+
+#: ../gdk-pixbuf/io-gdip-utils.c:615
+msgid "Couldn't load bitmap"
+msgstr "โหลดบิตแมปไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-gdip-utils.c:771
+msgid "Couldn't load metafile"
+msgstr "โหลด metafile ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-gdip-utils.c:876
+msgid "Unsupported image format for GDI+"
+msgstr "พบชนิดรูปภาพที่ GDI+ ไม่รองรับ"
+
+#: ../gdk-pixbuf/io-gdip-utils.c:883
+msgid "Couldn't save"
+msgstr "บันทึกไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-gdip-wmf.c:56
+msgid "The WMF image format"
+msgstr "แฟ้มรูปภาพชนิด WMF"
+
+#: ../gdk-pixbuf/io-gif.c:220
+#, c-format
+msgid "Failure reading GIF: %s"
+msgstr "อ่านรูปภาพ GIF ไม่สำเร็จ: %s"
+
+#: ../gdk-pixbuf/io-gif.c:494 ../gdk-pixbuf/io-gif.c:1500
+#: ../gdk-pixbuf/io-gif.c:1667
+msgid "GIF file was missing some data (perhaps it was truncated somehow?)"
+msgstr "แฟ้ม GIF นี้ขาดข้อมูลบางส่วน (อาจจะคัดลอกแฟ้มมาไม่ครบแฟ้ม)"
+
+#: ../gdk-pixbuf/io-gif.c:503
+#, c-format
+msgid "Internal error in the GIF loader (%s)"
+msgstr "เกิดข้อผิดพลาดในตัวโหลดรูปภาพ GIF (%s)"
+
+#: ../gdk-pixbuf/io-gif.c:577
+msgid "Stack overflow"
+msgstr "Stack overflow"
+
+#: ../gdk-pixbuf/io-gif.c:637
+msgid "GIF image loader cannot understand this image."
+msgstr "ตัวโหลดรูปภาพ GIF ไม่เข้าใจรูปภาพนี้"
+
+#: ../gdk-pixbuf/io-gif.c:666
+msgid "Bad code encountered"
+msgstr "พบโค้ดเสีย"
+
+#: ../gdk-pixbuf/io-gif.c:676
+msgid "Circular table entry in GIF file"
+msgstr "ตารางในแฟ้ม GIF มีรายการที่อ้างวกหลับมาถึงตัวเอง"
+
+#: ../gdk-pixbuf/io-gif.c:864 ../gdk-pixbuf/io-gif.c:1486
+#: ../gdk-pixbuf/io-gif.c:1539 ../gdk-pixbuf/io-gif.c:1655
+msgid "Not enough memory to load GIF file"
+msgstr "หน่วยความจำไม่พอที่จะอ่านรูปภาพ GIF"
+
+#: ../gdk-pixbuf/io-gif.c:958
+msgid "Not enough memory to composite a frame in GIF file"
+msgstr "หน่วยความจำไม่พอที่จะสร้างเฟรมในแฟ้ม GIF"
+
+#: ../gdk-pixbuf/io-gif.c:1130
+msgid "GIF image is corrupt (incorrect LZW compression)"
+msgstr "แฟ้ม GIF เสียหาย (การบีบอัดแบบ LZW ไม่ถูกต้อง)"
+
+#: ../gdk-pixbuf/io-gif.c:1180
+msgid "File does not appear to be a GIF file"
+msgstr "ดูเหมือนว่านี่ไม่ใช่แฟ้ม GIF"
+
+#: ../gdk-pixbuf/io-gif.c:1192
+#, c-format
+msgid "Version %s of the GIF file format is not supported"
+msgstr "ไม่รองรับแฟ้ม GIF รุ่น %s"
+
+#: ../gdk-pixbuf/io-gif.c:1239
+msgid "Resulting GIF image has zero size"
+msgstr "รูปภาพ GIF ผลลัพธ์มีขนาดเป็นศูนย์"
+
+#: ../gdk-pixbuf/io-gif.c:1318
+msgid ""
+"GIF image has no global colormap, and a frame inside it has no local "
+"colormap."
+msgstr "รูปภาพ GIF ไม่มีตารางสีส่วนกลาง และเฟรมข้างในไม่มีตารางสีเฉพาะเฟรม"
+
+#: ../gdk-pixbuf/io-gif.c:1562
+msgid "GIF image was truncated or incomplete."
+msgstr "รูปภาพ GIF ถูกตัดตอนหรือไม่สมบูรณ์"
+
+#: ../gdk-pixbuf/io-icns.c:347
+#, c-format
+msgid "Error reading ICNS image: %s"
+msgstr "เกิดข้อผิดพลาดขณะอ่านแฟ้มรูปภาพ ICNS: %s"
+
+#: ../gdk-pixbuf/io-icns.c:364
+msgid "Could not decode ICNS file"
+msgstr "ไม่สามารถอ่านรหัสแฟ้ม ICNS"
+
+#: ../gdk-pixbuf/io-icns.c:397
+msgid "The ICNS image format"
+msgstr "แฟ้มรูปภาพชนิด ICNS"
+
+#: ../gdk-pixbuf/io-ico.c:226 ../gdk-pixbuf/io-ico.c:240
+#: ../gdk-pixbuf/io-ico.c:289 ../gdk-pixbuf/io-ico.c:300
+#: ../gdk-pixbuf/io-ico.c:393
+msgid "Invalid header in icon"
+msgstr "ข้อมูลส่วนหัวของไอคอนเสีย"
+
+#: ../gdk-pixbuf/io-ico.c:255 ../gdk-pixbuf/io-ico.c:310
+#: ../gdk-pixbuf/io-ico.c:403 ../gdk-pixbuf/io-ico.c:456
+#: ../gdk-pixbuf/io-ico.c:486
+msgid "Not enough memory to load icon"
+msgstr "หน่วยความจำไม่พอที่จะอ่านไอคอน"
+
+#: ../gdk-pixbuf/io-ico.c:336
+msgid "Compressed icons are not supported"
+msgstr "ไม่รองรับไอคอนแบบที่ถูกบีบอัด"
+
+#: ../gdk-pixbuf/io-ico.c:356
+msgid "Icon has zero width"
+msgstr "ไอคอนมีความกว้างศูนย์"
+
+#: ../gdk-pixbuf/io-ico.c:366
+msgid "Icon has zero height"
+msgstr "ไอคอนมีความสูงศูนย์"
+
+#: ../gdk-pixbuf/io-ico.c:441
+msgid "Unsupported icon type"
+msgstr "ไม่รองรับไอคอนชนิดนี้"
+
+#: ../gdk-pixbuf/io-ico.c:535
+msgid "Not enough memory to load ICO file"
+msgstr "หน่วยความจำไม่พอที่จะอ่านแฟ้ม ICO"
+
+#: ../gdk-pixbuf/io-ico.c:1000
+msgid "Image too large to be saved as ICO"
+msgstr "รูปภาพใหญ่เกินไปสำหรับแฟ้มชนิด ICO"
+
+#: ../gdk-pixbuf/io-ico.c:1011
+msgid "Cursor hotspot outside image"
+msgstr "จุดเล็งของเคอร์เซอร์อยู่นอกรูปภาพ"
+
+#: ../gdk-pixbuf/io-ico.c:1034
+#, c-format
+msgid "Unsupported depth for ICO file: %d"
+msgstr "ความลึกที่ไม่รองรับสำหรับแฟ้ม ICO: %d"
+
+#: ../gdk-pixbuf/io-jasper.c:73
+msgid "Couldn't allocate memory for stream"
+msgstr "ไม่สามารถจองหน่วยความจำสำหรับสตรีม"
+
+#: ../gdk-pixbuf/io-jasper.c:103
+msgid "Couldn't decode image"
+msgstr "ไม่สามารถอ่านรหัสภาพ"
+
+#: ../gdk-pixbuf/io-jasper.c:121
+msgid "Transformed JPEG2000 has zero width or height"
+msgstr "รูปภาพ JPEG2000 ที่แปลงมามีความกว้างหรือความสูงเป็นศูนย์"
+
+#: ../gdk-pixbuf/io-jasper.c:135
+msgid "Image type currently not supported"
+msgstr "ยังไม่รองรับรูปภาพชนิดนี้"
+
+#: ../gdk-pixbuf/io-jasper.c:147 ../gdk-pixbuf/io-jasper.c:155
+msgid "Couldn't allocate memory for color profile"
+msgstr "ไม่สามารถจองหน่วยความจำสำหรับโพรไฟล์สี"
+
+#: ../gdk-pixbuf/io-jasper.c:181
+msgid "Insufficient memory to open JPEG 2000 file"
+msgstr "หน่วยความจำไม่พอจะเปิดแฟ้ม JPEG 2000"
+
+#: ../gdk-pixbuf/io-jasper.c:260
+msgid "Couldn't allocate memory to buffer image data"
+msgstr "ไม่สามารถจองหน่วยความจำสำหรับพักข้อมูลภาพ"
+
+#: ../gdk-pixbuf/io-jasper.c:304
+msgid "The JPEG 2000 image format"
+msgstr "แฟ้มรูปภาพชนิด JPEG 2000"
+
+#: ../gdk-pixbuf/io-jpeg.c:124
+#, c-format
+msgid "Error interpreting JPEG image file (%s)"
+msgstr "เกิดข้อผิดพลาดขณะแจงข้อมูลแฟ้มรูปภาพ JPEG (%s)"
+
+#: ../gdk-pixbuf/io-jpeg.c:597
+msgid ""
+"Insufficient memory to load image, try exiting some applications to free "
+"memory"
+msgstr "หน่วยความจำไม่พอสำหรับอ่านรูปภาพ กรุณาลองปิดโปรแกรมอื่นๆ เพื่อคืนความจำที่ถูกใช้อยู่"
+
+#: ../gdk-pixbuf/io-jpeg.c:645 ../gdk-pixbuf/io-jpeg.c:858
+#, c-format
+msgid "Unsupported JPEG color space (%s)"
+msgstr "ไม่รองรับห้วงสีนี้สำหรับ JPEG (%s)"
+
+#: ../gdk-pixbuf/io-jpeg.c:757 ../gdk-pixbuf/io-jpeg.c:1037
+#: ../gdk-pixbuf/io-jpeg.c:1308 ../gdk-pixbuf/io-jpeg.c:1318
+msgid "Couldn't allocate memory for loading JPEG file"
+msgstr "หน่วยความจำไม่พอสำหรับอ่านรูปภาพ JPEG นี้"
+
+#: ../gdk-pixbuf/io-jpeg.c:1011
+msgid "Transformed JPEG has zero width or height."
+msgstr "รูปภาพ JPEG ที่แปลงมามีความกว้างหรือความสูงเป็นศูนย์"
+
+#: ../gdk-pixbuf/io-jpeg.c:1279
+#, c-format
+msgid "Color profile has invalid length '%u'."
+msgstr "โพรไฟล์สีมีความยาว '%u' ซึ่งไม่ถูกต้อง"
+
+#: ../gdk-pixbuf/io-pcx.c:184
+msgid "Couldn't allocate memory for header"
+msgstr "หน่วยความจำไม่พอสำหรับข้อมูลส่วนหัว"
+
+#: ../gdk-pixbuf/io-pcx.c:199 ../gdk-pixbuf/io-pcx.c:557
+msgid "Couldn't allocate memory for context buffer"
+msgstr "หน่วยความจำไม่พอสำหรับ context buffer"
+
+#: ../gdk-pixbuf/io-pcx.c:598
+msgid "Image has invalid width and/or height"
+msgstr "รูปภาพมีค่าความกว้าง และ/หรือ ความสูงที่ไม่ถูกต้อง"
+
+#: ../gdk-pixbuf/io-pcx.c:610 ../gdk-pixbuf/io-pcx.c:671
+msgid "Image has unsupported bpp"
+msgstr "รูปภาพมีค่าบิตต่อพิกเซลที่ไม่รองรับ"
+
+#: ../gdk-pixbuf/io-pcx.c:615 ../gdk-pixbuf/io-pcx.c:623
+#, c-format
+msgid "Image has unsupported number of %d-bit planes"
+msgstr "ไม่รองรับจำนวนของระนาบ %d บิตนี้"
+
+#: ../gdk-pixbuf/io-pcx.c:639
+msgid "Couldn't create new pixbuf"
+msgstr "สร้างพิกซ์บัฟใหม่ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-pcx.c:647
+msgid "Couldn't allocate memory for line data"
+msgstr "หน่วยความจำไม่พอสำหรับข้อมูลเส้นนอนของภาพ"
+
+#: ../gdk-pixbuf/io-pcx.c:654
+msgid "Couldn't allocate memory for PCX image"
+msgstr "หน่วยความจำไม่พอสำหรับรูปภาพ PCX"
+
+#: ../gdk-pixbuf/io-pcx.c:701
+msgid "Didn't get all lines of PCX image"
+msgstr "ได้รับเส้นภาพของรูปภาพ PCX ไม่ครบ"
+
+#: ../gdk-pixbuf/io-pcx.c:708
+msgid "No palette found at end of PCX data"
+msgstr "ไม่พบจานสีตรงท้ายข้อมูล PCX"
+
+#: ../gdk-pixbuf/io-pcx.c:753
+msgid "The PCX image format"
+msgstr "แฟ้มรูปภาพชนิด PCX"
+
+#: ../gdk-pixbuf/io-pixdata.c:146
+msgid "Transformed pixbuf has zero width or height."
+msgstr "พิกซ์บัฟที่แปลงมามีความกว้างหรือความสูงเป็นศูนย์"
+
+#: ../gdk-pixbuf/io-pixdata.c:184
+msgid "The GdkPixdata format"
+msgstr "รูปแบบ GdkPixdata"
+
+#: ../gdk-pixbuf/io-png.c:53
+msgid "Bits per channel of PNG image is invalid."
+msgstr "รูปภาพ PNG มีค่าบิตต่อช่องที่ใช้ไม่ได้"
+
+#: ../gdk-pixbuf/io-png.c:134 ../gdk-pixbuf/io-png.c:640
+msgid "Transformed PNG has zero width or height."
+msgstr "รูปภาพ PNG ที่แปลงมามีความกว้างหรือความสูงเป็นศูนย์"
+
+#: ../gdk-pixbuf/io-png.c:142
+msgid "Bits per channel of transformed PNG is not 8."
+msgstr "ค่าบิตต่อช่องของ PNG ที่แปลงมาไม่ใช่ 8"
+
+#: ../gdk-pixbuf/io-png.c:151
+msgid "Transformed PNG not RGB or RGBA."
+msgstr "PNG ที่แปลงมาไม่ใช่ RGP หรือ RGBA"
+
+#: ../gdk-pixbuf/io-png.c:160
+msgid "Transformed PNG has unsupported number of channels, must be 3 or 4."
+msgstr "PNG ที่แปลงมามีจำนวนช่องที่ไม่รองรับ มันควรจะเป็น 3 หรือ 4"
+
+#: ../gdk-pixbuf/io-png.c:181
+#, c-format
+msgid "Fatal error in PNG image file: %s"
+msgstr "มีข้อผิดพลาดร้ายแรงในแฟ้มรูปภาพ PNG: %s"
+
+#: ../gdk-pixbuf/io-png.c:314
+msgid "Insufficient memory to load PNG file"
+msgstr "หน่วยความจำไม่พอที่จะอ่านแฟ้ม PNG"
+
+#: ../gdk-pixbuf/io-png.c:655
+#, c-format
+msgid ""
+"Insufficient memory to store a %lu by %lu image; try exiting some "
+"applications to reduce memory usage"
+msgstr ""
+"หน่วยความจำไม่พอที่จะเก็บรูปภาพขนาด %lux%lu กรุณาปิดโปรแกรมที่ไม่ใช้แล้ว "
+"เพื่อจะได้มีหน่วยความจำว่างเพิ่มขึ้น"
+
+#: ../gdk-pixbuf/io-png.c:718
+msgid "Fatal error reading PNG image file"
+msgstr "เกิดข้อผิดพลาดร้ายแรงขณะอ่านแฟ้มรูปภาพ PNG"
+
+#: ../gdk-pixbuf/io-png.c:767
+#, c-format
+msgid "Fatal error reading PNG image file: %s"
+msgstr "มีข้อผิดพลาดร้ายแรงขณะอ่านแฟ้มรูปภาพ PNG: %s"
+
+#: ../gdk-pixbuf/io-png.c:857
+msgid ""
+"Keys for PNG text chunks must have at least 1 and at most 79 characters."
+msgstr "คีย์ของชิ้นข้อความใน PNG ต้องมีระหว่าง 1 ถึง 79 ตัวอักษร"
+
+#: ../gdk-pixbuf/io-png.c:866
+msgid "Keys for PNG text chunks must be ASCII characters."
+msgstr "คีย์ของชิ้นข้อความใน PNG ต้องใช้ตัวอักษร ASCII"
+
+#: ../gdk-pixbuf/io-png.c:880 ../gdk-pixbuf/io-tiff.c:665
+#, c-format
+msgid "Color profile has invalid length %d."
+msgstr "โพรไฟล์สีมีความยาว %d ซึ่งไม่ถูกต้อง"
+
+#: ../gdk-pixbuf/io-png.c:893
+#, c-format
+msgid ""
+"PNG compression level must be a value between 0 and 9; value '%s' could not "
+"be parsed."
+msgstr "ระดับการบีบอัดข้อมูล PNG ต้องอยู่ระหว่าง 0 ถึง 9  ค่า '%s' ที่ตั้งใช้ไม่ได้"
+
+#: ../gdk-pixbuf/io-png.c:906
+#, c-format
+msgid ""
+"PNG compression level must be a value between 0 and 9; value '%d' is not "
+"allowed."
+msgstr "ระดับการบีบอัดข้อมูล PNG ต้องอยู่ระหว่าง 0 ถึง 9  ค่า '%d' ที่ตั้งใช้ไม่ได้"
+
+#: ../gdk-pixbuf/io-png.c:954
+#, c-format
+msgid "Value for PNG text chunk %s cannot be converted to ISO-8859-1 encoding."
+msgstr "แปลงค่าของชิ้นข้อความใน PNG (%s) ไปเป็น ISO-8859-1 ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-png.c:1117
+msgid "The PNG image format"
+msgstr "แฟ้มรูปภาพชนิด PNG"
+
+#: ../gdk-pixbuf/io-pnm.c:246
+msgid "PNM loader expected to find an integer, but didn't"
+msgstr "ตัวโหลด PNM ควรจะพบเลขจำนวนเต็มตัวหนึ่ง แต่ไม่พบ"
+
+#: ../gdk-pixbuf/io-pnm.c:278
+msgid "PNM file has an incorrect initial byte"
+msgstr "แฟ้ม PNM มีไบต์แรกที่ไม่ถูกต้อง"
+
+#: ../gdk-pixbuf/io-pnm.c:308
+msgid "PNM file is not in a recognized PNM subformat"
+msgstr "แฟ้ม PNM นี้ไม่ตรงกับรูปแบบ PNM ย่อยใดๆ ที่รองรับ"
+
+#: ../gdk-pixbuf/io-pnm.c:333
+msgid "PNM file has an image width of 0"
+msgstr "แฟ้มรูปภาพ PNM มีความกว้างเป็นศูนย์"
+
+#: ../gdk-pixbuf/io-pnm.c:354
+msgid "PNM file has an image height of 0"
+msgstr "แฟ้มรูปภาพ PNM มีความสูงเป็นศูนย์"
+
+#: ../gdk-pixbuf/io-pnm.c:377
+msgid "Maximum color value in PNM file is 0"
+msgstr "แฟ้ม PNM มีค่าจำนวนสีมากสุดเป็น 0"
+
+#: ../gdk-pixbuf/io-pnm.c:385
+msgid "Maximum color value in PNM file is too large"
+msgstr "แฟ้ม PNM มีค่าจำนวนสีมากสุดที่ใหญ่เกินไป"
+
+#: ../gdk-pixbuf/io-pnm.c:425 ../gdk-pixbuf/io-pnm.c:455
+#: ../gdk-pixbuf/io-pnm.c:500
+msgid "Raw PNM image type is invalid"
+msgstr "ชนิดของรูปภาพ Raw PNM ไม่ถูกต้อง"
+
+#: ../gdk-pixbuf/io-pnm.c:650
+msgid "PNM image loader does not support this PNM subformat"
+msgstr "ตัวโหลดรูปภาพ PNM ไม่รองรับรูปแบบ PNM ย่อยนี้"
+
+#: ../gdk-pixbuf/io-pnm.c:737 ../gdk-pixbuf/io-pnm.c:964
+msgid "Raw PNM formats require exactly one whitespace before sample data"
+msgstr "รูปแบบ Raw PNM บังคับว่าต้อมีช่องว่างหนึ่งตัวก่อนข้อมูลตัวอย่าง"
+
+#: ../gdk-pixbuf/io-pnm.c:764
+msgid "Cannot allocate memory for loading PNM image"
+msgstr "หน่วยความจำไม่พอสำหรับอ่านรูปภาพ PNM"
+
+#: ../gdk-pixbuf/io-pnm.c:814
+msgid "Insufficient memory to load PNM context struct"
+msgstr "หน่วยความจำไม่พอสำหรับโครงสร้างข้อมูล PNM context"
+
+#: ../gdk-pixbuf/io-pnm.c:865
+msgid "Unexpected end of PNM image data"
+msgstr "ข้อมูล PNM จบก่อนที่ควร"
+
+#: ../gdk-pixbuf/io-pnm.c:993
+msgid "Insufficient memory to load PNM file"
+msgstr "หน่วยความจำไม่พอที่จะอ่านแฟ้ม PNM"
+
+#: ../gdk-pixbuf/io-pnm.c:1077
+msgid "The PNM/PBM/PGM/PPM image format family"
+msgstr "แฟ้มรูปภาพตระกูล PNM/PBM/PGM/PPM"
+
+#: ../gdk-pixbuf/io-qtif.c:126
+msgid "Input file descriptor is NULL."
+msgstr "file descriptor ขาเข้าเป็น NULL"
+
+#: ../gdk-pixbuf/io-qtif.c:141
+msgid "Failed to read QTIF header"
+msgstr "อ่านข้อมูลส่วนหัว QTIF ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-qtif.c:150 ../gdk-pixbuf/io-qtif.c:187
+#: ../gdk-pixbuf/io-qtif.c:454
+#, c-format
+msgid "QTIF atom size too large (%d byte)"
+msgid_plural "QTIF atom size too large (%d bytes)"
+msgstr[0] "ขนาดอะตอม QTIF ใหญ่เกินไป (%d ไบต์)"
+
+#: ../gdk-pixbuf/io-qtif.c:173
+#, c-format
+msgid "Failed to allocate %d byte for file read buffer"
+msgid_plural "Failed to allocate %d bytes for file read buffer"
+msgstr[0] "จัดสรรเนื้อที่ %d ไบต์เพื่อเป็นบัฟเฟอร์สำหรับอ่านแฟ้มไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-qtif.c:201
+#, c-format
+msgid "File error when reading QTIF atom: %s"
+msgstr "เกิดข้อผิดพลาดขณะอ่านอะตอม QTIF: %s"
+
+#: ../gdk-pixbuf/io-qtif.c:238
+#, c-format
+msgid "Failed to skip the next %d byte with seek()."
+msgid_plural "Failed to skip the next %d bytes with seek()."
+msgstr[0] "ข้าม %d ไบต์ถัดไปด้วย seek() ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-qtif.c:265
+msgid "Failed to allocate QTIF context structure."
+msgstr "จัดสรรหน่วยความจำสำหรับโครงสร้าง QTIF context ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-qtif.c:325
+msgid "Failed to create GdkPixbufLoader object."
+msgstr "สร้างอ็อบเจกต์ GdkPixbufLoader ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-qtif.c:429
+msgid "Failed to find an image data atom."
+msgstr "หาอะตอมข้อมูลของรูปภาพไม่พบ"
+
+#: ../gdk-pixbuf/io-qtif.c:613
+msgid "The QTIF image format"
+msgstr "แฟ้มรูปภาพชนิด TIFF"
+
+#: ../gdk-pixbuf/io-ras.c:123
+msgid "RAS image has bogus header data"
+msgstr "รูปภาพ RAS มีข้อมูลส่วนหัวไม่ถูกต้อง"
+
+#: ../gdk-pixbuf/io-ras.c:145
+msgid "RAS image has unknown type"
+msgstr "รูปภาพ RAS มีชนิดที่ไม่รู้จัก"
+
+#: ../gdk-pixbuf/io-ras.c:153
+msgid "unsupported RAS image variation"
+msgstr "ไม่รองรับรูปภาพ RAS ชนิดย่อยนี้"
+
+#: ../gdk-pixbuf/io-ras.c:168 ../gdk-pixbuf/io-ras.c:197
+msgid "Not enough memory to load RAS image"
+msgstr "หน่วยความจำไม่พอที่จะอ่านรูปภาพ RAS"
+
+#: ../gdk-pixbuf/io-ras.c:542
+msgid "The Sun raster image format"
+msgstr "แฟ้มรูปภาพแบบราสเตอร์ของ Sun"
+
+#: ../gdk-pixbuf/io-tga.c:151
+msgid "Cannot allocate memory for IOBuffer struct"
+msgstr "หน่วยความจำไม่พอสำหรับโครงสร้งข้อมูล IOBuffer"
+
+#: ../gdk-pixbuf/io-tga.c:170
+msgid "Cannot allocate memory for IOBuffer data"
+msgstr "หน่วยความจำไม่พอสำหรับข้อมูล IOBuffer"
+
+#: ../gdk-pixbuf/io-tga.c:181
+msgid "Cannot realloc IOBuffer data"
+msgstr "realloc ข้อมูล IOBuffer ไม่สำเร็จ"
+
+# FIXME: What does this really mean?
+#: ../gdk-pixbuf/io-tga.c:211
+msgid "Cannot allocate temporary IOBuffer data"
+msgstr "หน่วยความจำไม่พอสำหรับข้อมูลชั่วคราวของ IOBuffer"
+
+#: ../gdk-pixbuf/io-tga.c:339
+msgid "Cannot allocate new pixbuf"
+msgstr "หน่วยความจำไม่พอสำหรับพิกซ์บัฟใหม่"
+
+#: ../gdk-pixbuf/io-tga.c:678
+msgid "Image is corrupted or truncated"
+msgstr "รูปภาพเสียหายหรือถูกตัดตอน"
+
+#: ../gdk-pixbuf/io-tga.c:685
+msgid "Cannot allocate colormap structure"
+msgstr "หน่วยความจำไม่พอสำหรับโครงสร้างข้อมูลตารางสี"
+
+#: ../gdk-pixbuf/io-tga.c:692
+msgid "Cannot allocate colormap entries"
+msgstr "หน่วยความจำไม่พอสำหรับรายการในตารางสี"
+
+#: ../gdk-pixbuf/io-tga.c:714
+msgid "Unexpected bitdepth for colormap entries"
+msgstr "รายการในตารางสีมีความลึกสีที่ไม่รองรับ"
+
+#: ../gdk-pixbuf/io-tga.c:732
+msgid "Cannot allocate TGA header memory"
+msgstr "หน่วยความจำไม่พอสำหรับข้อมูลส่วนหัวของ TGA"
+
+#: ../gdk-pixbuf/io-tga.c:765
+msgid "TGA image has invalid dimensions"
+msgstr "รูปภาพ TGA มีขนาดกว้างยาวไม่ถูกต้อง"
+
+#: ../gdk-pixbuf/io-tga.c:771 ../gdk-pixbuf/io-tga.c:780
+#: ../gdk-pixbuf/io-tga.c:790 ../gdk-pixbuf/io-tga.c:800
+#: ../gdk-pixbuf/io-tga.c:807
+msgid "TGA image type not supported"
+msgstr "พบชนิดรูปภาพ TGA ที่ไม่รองรับ"
+
+#: ../gdk-pixbuf/io-tga.c:854
+msgid "Cannot allocate memory for TGA context struct"
+msgstr "หน่วยความจำไม่พอสำหรับโครงสร้างข้อมูล TGA context"
+
+#: ../gdk-pixbuf/io-tga.c:919
+msgid "Excess data in file"
+msgstr "แฟ้มมีข้อมูลเกิน"
+
+#: ../gdk-pixbuf/io-tga.c:1000
+msgid "The Targa image format"
+msgstr "แฟ้มรูปภาพชนิด Targa"
+
+#: ../gdk-pixbuf/io-tiff.c:102
+msgid "Could not get image width (bad TIFF file)"
+msgstr "อ่านค่าความกว้างรูปภาพไม่สำเร็จ (แฟ้ม TIFF เสีย)"
+
+#: ../gdk-pixbuf/io-tiff.c:110
+msgid "Could not get image height (bad TIFF file)"
+msgstr "อ่านค่าความสูงรูปภาพไม่สำเร็จ (แฟ้ม TIFF เสีย)"
+
+#: ../gdk-pixbuf/io-tiff.c:118
+msgid "Width or height of TIFF image is zero"
+msgstr "ความกว้างหรือความสูงของรูปภาพชนิด TIFF เป็นศูนย์"
+
+#: ../gdk-pixbuf/io-tiff.c:127 ../gdk-pixbuf/io-tiff.c:136
+msgid "Dimensions of TIFF image too large"
+msgstr "รูปภาพ TIFF มีขนาดกว้างยาวที่ใหญ่เกินไป"
+
+#: ../gdk-pixbuf/io-tiff.c:160 ../gdk-pixbuf/io-tiff.c:172
+#: ../gdk-pixbuf/io-tiff.c:489
+msgid "Insufficient memory to open TIFF file"
+msgstr "หน่วยความจำไม่พอจะเปิดแฟ้ม TIFF"
+
+#: ../gdk-pixbuf/io-tiff.c:234
+msgid "Failed to load RGB data from TIFF file"
+msgstr "อ่านค่า RGB จากแฟ้ม TIFF ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-tiff.c:291
+msgid "Failed to open TIFF image"
+msgstr "เปิดรูปภาพ TIFF ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-tiff.c:425 ../gdk-pixbuf/io-tiff.c:438
+msgid "Failed to load TIFF image"
+msgstr "โหลดรูปภาพ TIFF ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-tiff.c:621
+msgid "Failed to save TIFF image"
+msgstr "บันทึกรูปภาพ TIFF ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-tiff.c:654
+msgid "TIFF compression doesn't refer to a valid codec."
+msgstr "การบีบอัด TIFF ไม่ได้อ้างอิงถึงตัวอ่านและลงรหัสที่ใช้การได้"
+
+#: ../gdk-pixbuf/io-tiff.c:694
+msgid "Failed to write TIFF data"
+msgstr "เขียนข้อมูล TIFF ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-tiff.c:731
+msgid "Couldn't write to TIFF file"
+msgstr "เขียนแฟ้ม TIFF ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-wbmp.c:243
+msgid "Image has zero width"
+msgstr "รูปภาพมีความกว้างเป็นศูนย์"
+
+#: ../gdk-pixbuf/io-wbmp.c:261
+msgid "Image has zero height"
+msgstr "รูปภาพมีความสูงเป็นศูนย์"
+
+#: ../gdk-pixbuf/io-wbmp.c:272
+msgid "Not enough memory to load image"
+msgstr "หน่วยความจำไม่พอที่จะโหลดรูปภาพ"
+
+#: ../gdk-pixbuf/io-wbmp.c:331
+msgid "Couldn't save the rest"
+msgstr "บันทึกที่เหลือไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-wbmp.c:372
+msgid "The WBMP image format"
+msgstr "แฟ้มรูปภาพชนิด WBMP"
+
+#: ../gdk-pixbuf/io-xbm.c:302
+msgid "Invalid XBM file"
+msgstr "แฟ้ม XBM ใช้ไม่ได้"
+
+#: ../gdk-pixbuf/io-xbm.c:312
+msgid "Insufficient memory to load XBM image file"
+msgstr "หน่วยความจำไม่พอจะอ่านแฟ้มรูปภาพ XBM"
+
+#: ../gdk-pixbuf/io-xbm.c:460
+msgid "Failed to write to temporary file when loading XBM image"
+msgstr "เขียนลงแฟ้มชั่วคราวไม่สำเร็จ ขณะอ่านรูปภาพ XBM"
+
+#: ../gdk-pixbuf/io-xbm.c:499
+msgid "The XBM image format"
+msgstr "แฟ้มรูปภาพชนิด XBM"
+
+#: ../gdk-pixbuf/io-xpm.c:467
+msgid "No XPM header found"
+msgstr "ไม่พบข้อมูลส่วนหัว XPM"
+
+#: ../gdk-pixbuf/io-xpm.c:476
+msgid "Invalid XPM header"
+msgstr "ข้อมูลส่วนหัว XBM ผิดพลาด"
+
+#: ../gdk-pixbuf/io-xpm.c:484
+msgid "XPM file has image width <= 0"
+msgstr "แฟ้ม XPM มีค่าความกว้างรูปภาพน้อยกว่าศูนย์"
+
+#: ../gdk-pixbuf/io-xpm.c:492
+msgid "XPM file has image height <= 0"
+msgstr "แฟ้ม XPM มีค่าความสูงรูปภาพน้อยกว่าศูนย์"
+
+#: ../gdk-pixbuf/io-xpm.c:500
+msgid "XPM has invalid number of chars per pixel"
+msgstr "แฟ้ม XPM ตั้งค่าไบต์ต่อพิกเซลที่ใช้ไม่ได้"
+
+#: ../gdk-pixbuf/io-xpm.c:509
+msgid "XPM file has invalid number of colors"
+msgstr "แฟ้ม XPM ตั้งค่าจำนวนสีที่ใช้ไม่ได้"
+
+#: ../gdk-pixbuf/io-xpm.c:521 ../gdk-pixbuf/io-xpm.c:530
+#: ../gdk-pixbuf/io-xpm.c:582
+msgid "Cannot allocate memory for loading XPM image"
+msgstr "หน่วยความจำไม่พอสำหรับอ่านรูปภาพ XPM"
+
+#: ../gdk-pixbuf/io-xpm.c:544
+msgid "Cannot read XPM colormap"
+msgstr "อ่านตารางสีของ XPM ไม่สำเร็จ"
+
+#: ../gdk-pixbuf/io-xpm.c:776
+msgid "Failed to write to temporary file when loading XPM image"
+msgstr "เขียนลงแฟ้มชั่วคราวไม่สำเร็จ ขณะอ่านรูปภาพ XBM"
+
+#: ../gdk-pixbuf/io-xpm.c:815
+msgid "The XPM image format"
+msgstr "แฟ้มรูปภาพชนิด XPM"
+
+#~ msgid "Unsupported animation type"
+#~ msgstr "ไม่รู้จักชนิดของภาพเคลื่อนไหว"
+
+#~ msgid "TIFFClose operation failed"
+#~ msgstr "คำสั่ง TIFFClose ทำงานไม่สำเร็จ"
+
+#~ msgid "Couldn't allocate memory for paletted data"
+#~ msgstr "หน่วยความจำไม่พอสำหรับข้อมูลจุดภาพ"

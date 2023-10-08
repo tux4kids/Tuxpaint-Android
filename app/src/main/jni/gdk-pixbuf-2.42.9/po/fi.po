@@ -1,0 +1,1237 @@
+# gtk+ finnish translation
+# Copyright (C) 2003-2009 Free Software Foundation, Inc.
+# Mikko Rauhala <mjr@iki.fi>, 1999
+# Sami Pesonen <sampeson@iki.fi> 2004
+# Pauli Virtanen, 2000-2005
+# Ilkka Tuohela <hile@iki.fi>, 2005-2009
+# Tommi Vainikainen <thv@iki.fi>, 2009-2011
+# Timo Jyrinki <timo.jyrinki@iki.fi>, 2010.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2009, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gtk+\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gdk-pixbuf/issues\n"
+"POT-Creation-Date: 2020-11-10 02:27+0000\n"
+"PO-Revision-Date: 2021-08-31 15:22+0300\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:175 gdk-pixbuf/gdk-pixbuf-io.c:1125
+#: gdk-pixbuf/gdk-pixbuf-io.c:1387
+#, c-format
+msgid "Failed to open file “%s”: %s"
+msgstr "Tiedoston “%s” avaus epäonnistui: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:188 gdk-pixbuf/gdk-pixbuf-io.c:992
+#, c-format
+msgid "Image file “%s” contains no data"
+msgstr "Kuvatiedostossa “%s” ei ole sisältöä"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:226
+#, c-format
+msgid ""
+"Failed to load animation “%s”: reason not known, probably a corrupt "
+"animation file"
+msgstr ""
+"Animaation “%s” lataus epäonnistui: syy tuntematon, luultavasti vioittunut "
+"animaatiotiedosto"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:294 gdk-pixbuf/gdk-pixbuf-io.c:1161
+#: gdk-pixbuf/gdk-pixbuf-io.c:1439
+#, c-format
+msgid ""
+"Failed to load image “%s”: reason not known, probably a corrupt image file"
+msgstr ""
+"Kuvan “%s” lataus epäonnistui: syy tuntematon, luultavasti vioittunut "
+"kuvatiedosto"
+
+#: gdk-pixbuf/gdk-pixbuf.c:237
+msgid "Number of Channels"
+msgstr "Kanavien määrä"
+
+#: gdk-pixbuf/gdk-pixbuf.c:238
+#, fuzzy
+#| msgid "XPM has invalid number of chars per pixel"
+msgid "The number of samples per pixel"
+msgstr "XPM-tiedostossa on väärä määrä merkkejä kuvapistettä kohden"
+
+#: gdk-pixbuf/gdk-pixbuf.c:247
+msgid "Colorspace"
+msgstr "Väriavaruus"
+
+#: gdk-pixbuf/gdk-pixbuf.c:248
+msgid "The colorspace in which the samples are interpreted"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:256
+msgid "Has Alpha"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:257
+msgid "Whether the pixbuf has an alpha channel"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:270
+msgid "Bits per Sample"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:271
+msgid "The number of bits per sample"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:280
+msgid "Width"
+msgstr "Leveys"
+
+#: gdk-pixbuf/gdk-pixbuf.c:281
+msgid "The number of columns of the pixbuf"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:290
+msgid "Height"
+msgstr "Korkeus"
+
+#: gdk-pixbuf/gdk-pixbuf.c:291
+msgid "The number of rows of the pixbuf"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:307
+msgid "Rowstride"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:308
+msgid ""
+"The number of bytes between the start of a row and the start of the next row"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:317
+msgid "Pixels"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:318
+msgid "A pointer to the pixel data of the pixbuf"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:332
+msgid "Pixel Bytes"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf.c:333
+msgid "Readonly pixel data"
+msgstr ""
+
+# , c-format
+#: gdk-pixbuf/gdk-pixbuf-io.c:812
+#, c-format
+msgid "Unable to load image-loading module: %s: %s"
+msgstr "Ei voi ladata kuvanlatausmoduulia: %s: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:827
+#, fuzzy, c-format
+#| msgid ""
+#| "Image-loading module %s does not export the proper interface; perhaps "
+#| "it's from a different gdk-pixbuf version?"
+msgid ""
+"Image-loading module %s does not export the proper interface; perhaps it’s "
+"from a different gdk-pixbuf version?"
+msgstr ""
+"Kuvanlatausmoduuli %s ei vienyt oikeaa rajapintaa. Ehkäpä se on toisesta gdk-"
+"pixbuf:n versiosta?"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:836 gdk-pixbuf/gdk-pixbuf-io.c:879
+#, c-format
+msgid "Image type “%s” is not supported"
+msgstr "Kuvatyyppi “%s” ei ole tuettu"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:964
+#, c-format
+msgid "Couldn’t recognize the image file format for file “%s”"
+msgstr "Ei voitu tunnistaa tiedoston ”%s” kuvatiedostomuotoa"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:972
+msgid "Unrecognized image file format"
+msgstr "Tuntematon kuvatiedostomuoto"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:1172
+#, c-format
+msgid "Failed to load image “%s”: %s"
+msgstr "Kuvan “%s” lataaminen epäonnistui: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2242 gdk-pixbuf/io-gdip-utils.c:840
+#, c-format
+msgid "Error writing to image file: %s"
+msgstr "Virhe kuvatiedoston kirjoittamisessa: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2284 gdk-pixbuf/gdk-pixbuf-io.c:2405
+#, c-format
+msgid "This build of gdk-pixbuf does not support saving the image format: %s"
+msgstr "Tämä käännetty versio gdk-pixbufista ei voi tallentaa muodossa: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2315
+msgid "Insufficient memory to save image to callback"
+msgstr "Liian vähän muistia kuvan tallentamiseksi paluukutsuun"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2328
+msgid "Failed to open temporary file"
+msgstr "Väliaikaistiedoston avaaminen epäonnistui"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2351
+msgid "Failed to read from temporary file"
+msgstr "Väliaikaistiedostosta lukeminen epäonnistui"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2561
+#, fuzzy, c-format
+#| msgid "Failed to open '%s' for writing: %s"
+msgid "Failed to open “%s” for writing: %s"
+msgstr "Tiedoston ”%s” avaaminen kirjoitusta varten epäonnistui: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2587
+#, fuzzy, c-format
+#| msgid ""
+#| "Failed to close '%s' while writing image, all data may not have been "
+#| "saved: %s"
+msgid ""
+"Failed to close “%s” while writing image, all data may not have been saved: "
+"%s"
+msgstr ""
+"Tiedoston ”%s” sulkeminen epäonnistui kirjoittaessa kuvaa, joten kaikki data "
+"ei ole välttämättä tallentunut: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2808 gdk-pixbuf/gdk-pixbuf-io.c:2860
+msgid "Insufficient memory to save image into a buffer"
+msgstr "Liian vähän muistia kuvan tallentamiseksi puskuriin"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2906
+msgid "Error writing to image stream"
+msgstr "Virhe kirjoitettaessa kuvavirtaan"
+
+#: gdk-pixbuf/gdk-pixbuf-loader.c:406
+#, fuzzy, c-format
+#| msgid ""
+#| "Internal error: Image loader module '%s' failed to complete an operation, "
+#| "but didn't give a reason for the failure"
+msgid ""
+"Internal error: Image loader module “%s” failed to complete an operation, "
+"but didn’t give a reason for the failure"
+msgstr ""
+"Sisäinen virhe: Kuvanlatainmoduuli ”%s” ei onnistunut lataamaan kuvaa "
+"loppuun eikä ilmoittanut virheen syytä"
+
+#: gdk-pixbuf/gdk-pixbuf-loader.c:448
+#, fuzzy, c-format
+#| msgid "Incremental loading of image type '%s' is not supported"
+msgid "Incremental loading of image type “%s” is not supported"
+msgstr "Kuvatyypin ”%s” kasvavaa latausta ei tueta."
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:162
+msgid "Loop"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:163
+msgid "Whether the animation should loop when it reaches the end"
+msgstr ""
+
+#: gdk-pixbuf/gdk-pixdata.c:165
+msgid "Image header corrupt"
+msgstr "Kuvan otsikko vioittunut"
+
+#: gdk-pixbuf/gdk-pixdata.c:170
+msgid "Image format unknown"
+msgstr "Tuntematon kuvamuoto"
+
+#: gdk-pixbuf/gdk-pixdata.c:175 gdk-pixbuf/gdk-pixdata.c:470
+#: gdk-pixbuf/gdk-pixdata.c:480 gdk-pixbuf/gdk-pixdata.c:576
+msgid "Image pixel data corrupt"
+msgstr "Kuvapistetiedot viallisia"
+
+#: gdk-pixbuf/gdk-pixdata.c:492
+#, c-format
+msgid "failed to allocate image buffer of %u byte"
+msgid_plural "failed to allocate image buffer of %u bytes"
+msgstr[0] "yhden tavun kokoisen kuvapuskurin varaaminen epäonnistui"
+msgstr[1] "%u tavun kokoisen kuvapuskurin varaaminen epäonnistui"
+
+#: gdk-pixbuf/io-ani.c:239
+msgid "Unexpected icon chunk in animation"
+msgstr "Odottamaton kuvakelohko animaatiossa"
+
+#: gdk-pixbuf/io-ani.c:337 gdk-pixbuf/io-ani.c:395 gdk-pixbuf/io-ani.c:421
+#: gdk-pixbuf/io-ani.c:444 gdk-pixbuf/io-ani.c:471 gdk-pixbuf/io-ani.c:558
+msgid "Invalid header in animation"
+msgstr "Virheellinen otsake animaatiossa"
+
+#: gdk-pixbuf/io-ani.c:347 gdk-pixbuf/io-ani.c:369 gdk-pixbuf/io-ani.c:453
+#: gdk-pixbuf/io-ani.c:480 gdk-pixbuf/io-ani.c:531 gdk-pixbuf/io-ani.c:607
+msgid "Not enough memory to load animation"
+msgstr "Ei tarpeeksi muistia animaation lataamiseksi"
+
+#: gdk-pixbuf/io-ani.c:387 gdk-pixbuf/io-ani.c:413 gdk-pixbuf/io-ani.c:432
+msgid "Malformed chunk in animation"
+msgstr "Viallinen lohko animaatiossa"
+
+#: gdk-pixbuf/io-ani.c:629
+#, fuzzy
+#| msgid "GIF image was truncated or incomplete."
+msgid "ANI image was truncated or incomplete."
+msgstr "GIF-kuva oli typistynyt tai vaillinainen."
+
+#: gdk-pixbuf/io-ani.c:670
+msgctxt "image format"
+msgid "Windows animated cursor"
+msgstr ""
+
+#: gdk-pixbuf/io-bmp.c:231 gdk-pixbuf/io-bmp.c:269 gdk-pixbuf/io-bmp.c:376
+#: gdk-pixbuf/io-bmp.c:403 gdk-pixbuf/io-bmp.c:428 gdk-pixbuf/io-bmp.c:463
+#: gdk-pixbuf/io-bmp.c:485 gdk-pixbuf/io-bmp.c:563
+msgid "BMP image has bogus header data"
+msgstr "BMP-kuvan otsake on viallinen"
+
+#: gdk-pixbuf/io-bmp.c:242 gdk-pixbuf/io-bmp.c:498
+msgid "Not enough memory to load bitmap image"
+msgstr "Ei tarpeeksi muistia bittikarttakuvan lataamiseen"
+
+#: gdk-pixbuf/io-bmp.c:333
+msgid "BMP image has unsupported header size"
+msgstr "BMP-kuvan otsakkeen tätä kokoa ei tueta"
+
+#: gdk-pixbuf/io-bmp.c:343
+msgid "BMP image has unsupported depth"
+msgstr "BMP-kuvan syvyyttä ei tueta"
+
+#: gdk-pixbuf/io-bmp.c:358
+#, fuzzy
+#| msgid "BMP image has bogus header data"
+msgid "BMP image has oversize palette"
+msgstr "BMP-kuvan otsake on viallinen"
+
+#: gdk-pixbuf/io-bmp.c:390
+msgid "Topdown BMP images cannot be compressed"
+msgstr "Ylhäältä-alas-muotoisia BMP-kuvia ei voi pakata"
+
+#: gdk-pixbuf/io-bmp.c:415
+msgid "BMP image width too large"
+msgstr "BMP-kuvan leveys on liian suuri"
+
+#: gdk-pixbuf/io-bmp.c:792 gdk-pixbuf/io-png.c:564 gdk-pixbuf/io-pnm.c:722
+#: gdk-pixbuf/io-pnm.c:879
+msgid "Premature end-of-file encountered"
+msgstr "Havaitsi ennenaikaisen tiedoston lopun"
+
+#: gdk-pixbuf/io-bmp.c:1313
+#, c-format
+msgid "Error while decoding colormap"
+msgstr ""
+
+#: gdk-pixbuf/io-bmp.c:1376 gdk-pixbuf/io-bmp.c:1388
+msgid "Image is too wide for BMP format."
+msgstr "Kuva on liian leveä BMP-muotoon."
+
+#: gdk-pixbuf/io-bmp.c:1421
+msgid "Couldn’t allocate memory for saving BMP file"
+msgstr "Muistia ei voitu varata BMP-kuvan tallentamiseksi"
+
+#: gdk-pixbuf/io-bmp.c:1462
+msgid "Couldn’t write to BMP file"
+msgstr "BMP-tiedostoon ei voitu kirjoittaa"
+
+#: gdk-pixbuf/io-bmp.c:1515 gdk-pixbuf/io-gdip-bmp.c:83
+msgctxt "image format"
+msgid "BMP"
+msgstr "BMP"
+
+#: gdk-pixbuf/io-gdip-emf.c:61
+msgctxt "image format"
+msgid "EMF"
+msgstr "EMF"
+
+#: gdk-pixbuf/io-gdip-gif.c:81 gdk-pixbuf/io-gif.c:1043
+msgctxt "image format"
+msgid "GIF"
+msgstr "GIF"
+
+#: gdk-pixbuf/io-gdip-ico.c:60 gdk-pixbuf/io-ico.c:1412
+msgctxt "image format"
+msgid "Windows icon"
+msgstr "Windows-kuvake"
+
+#: gdk-pixbuf/io-gdip-jpeg.c:54 gdk-pixbuf/io-jpeg.c:1382
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value “%s” could not be "
+"parsed."
+msgstr "JPEG-laadun täytyy olla välillä 0-100. Arvoa “%s” ei voitu tulkita."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:69 gdk-pixbuf/io-jpeg.c:1398
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value “%d” is not allowed."
+msgstr "JPEG-laadun täytyy olla välillä 0-100. Arvo “%d” ei käy."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:147 gdk-pixbuf/io-jpeg.c:1682
+msgctxt "image format"
+msgid "JPEG"
+msgstr "JPEG"
+
+#: gdk-pixbuf/io-gdip-tiff.c:83 gdk-pixbuf/io-tiff.c:1086
+msgctxt "image format"
+msgid "TIFF"
+msgstr "TIFF"
+
+#: gdk-pixbuf/io-gdip-utils.c:155
+#, c-format
+msgid "Could not allocate memory: %s"
+msgstr "Muistia ei voitu varata: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:180 gdk-pixbuf/io-gdip-utils.c:294
+#: gdk-pixbuf/io-gdip-utils.c:334
+#, c-format
+msgid "Could not create stream: %s"
+msgstr "Virtaa ei voitu luoda: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:194
+#, c-format
+msgid "Could not seek stream: %s"
+msgstr "Virrassa ei voitu siirtyä: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:206
+#, c-format
+msgid "Could not read from stream: %s"
+msgstr "Virrasta ei voitu lukea: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:620
+msgid "Couldn’t load bitmap"
+msgstr "Bittikarttaa ei voitu ladata"
+
+#: gdk-pixbuf/io-gdip-utils.c:776
+msgid "Couldn’t load metafile"
+msgstr "Metatiedostoa ei voitu ladata"
+
+#: gdk-pixbuf/io-gdip-utils.c:881
+msgid "Unsupported image format for GDI+"
+msgstr "GDI+ ei tue tätä kuvamuotoa"
+
+#: gdk-pixbuf/io-gdip-utils.c:888
+msgid "Couldn’t save"
+msgstr "Ei voitu tallentaa"
+
+#: gdk-pixbuf/io-gdip-wmf.c:60
+msgctxt "image format"
+msgid "WMF"
+msgstr "WMF"
+
+#: gdk-pixbuf/io-gif.c:158
+#, c-format
+msgid "Failure reading GIF: %s"
+msgstr "GIF:n luku epäonnistui: %s"
+
+#: gdk-pixbuf/io-gif.c:381 gdk-pixbuf/io-gif.c:854 gdk-pixbuf/io-gif.c:907
+#: gdk-pixbuf/io-gif.c:980
+msgid "Not enough memory to load GIF file"
+msgstr "Ei tarpeeksi muistia GIF-kuvan lataamiseksi"
+
+#: gdk-pixbuf/io-gif.c:507
+msgid "GIF image is corrupt (incorrect LZW compression)"
+msgstr "GIF-kuva on vioittunut (viallinen LZW-pakkaus)"
+
+#: gdk-pixbuf/io-gif.c:536
+msgid "File does not appear to be a GIF file"
+msgstr "Tiedosto ei vaikuta olevan GIF-tiedosto"
+
+#: gdk-pixbuf/io-gif.c:551
+#, c-format
+msgid "Version %s of the GIF file format is not supported"
+msgstr "GIF-tiedostomuodon versiota %s ei tueta"
+
+#: gdk-pixbuf/io-gif.c:586
+#, fuzzy
+#| msgid "Image has zero width"
+msgid "Resulting GIF image has zero size"
+msgstr "Kuvan leveys on nolla"
+
+#: gdk-pixbuf/io-gif.c:664
+msgid ""
+"GIF image has no global colormap, and a frame inside it has no local "
+"colormap."
+msgstr ""
+"GIF-kuvalla ei ole yleistä värikarttaa, ja sen kehyksellä ei ole paikallista "
+"värikarttaa."
+
+#: gdk-pixbuf/io-gif.c:867 gdk-pixbuf/io-gif.c:992
+msgid "GIF file was missing some data (perhaps it was truncated somehow?)"
+msgstr ""
+"GIF-tiedostosta puuttuu joitakin osia (ehkä se on typistynyt jotenkin?)"
+
+#: gdk-pixbuf/io-gif.c:926
+msgid "GIF image was truncated or incomplete."
+msgstr "GIF-kuva oli typistynyt tai vaillinainen."
+
+#: gdk-pixbuf/io-gif.c:933
+msgid "Not all frames of the GIF image were loaded."
+msgstr "GIF-kuvan kaikkia kuvakehyksiä ei ladattu."
+
+#: gdk-pixbuf/io-icns.c:363
+#, c-format
+msgid "Error reading ICNS image: %s"
+msgstr "Virhe luettaessa ICNS-kuvaa: %s"
+
+#: gdk-pixbuf/io-icns.c:380 gdk-pixbuf/io-icns.c:461
+msgid "Could not decode ICNS file"
+msgstr "ICNS-kuva ei voitu tulkita"
+
+#: gdk-pixbuf/io-icns.c:517
+msgctxt "image format"
+msgid "MacOS X icon"
+msgstr "MacOS X -kuvake"
+
+#: gdk-pixbuf/io-ico.c:238 gdk-pixbuf/io-ico.c:252 gdk-pixbuf/io-ico.c:342
+#: gdk-pixbuf/io-ico.c:426 gdk-pixbuf/io-ico.c:451
+#, fuzzy, c-format
+#| msgid "Invalid header in icon"
+msgid "Invalid header in icon (%s)"
+msgstr "Virheellinen otsake kuvakkeessa"
+
+#: gdk-pixbuf/io-ico.c:268 gdk-pixbuf/io-ico.c:355 gdk-pixbuf/io-ico.c:461
+#: gdk-pixbuf/io-ico.c:504 gdk-pixbuf/io-ico.c:532
+msgid "Not enough memory to load icon"
+msgstr "Ei tarpeeksi muistia kuvakkeen lataamiseksi"
+
+#: gdk-pixbuf/io-ico.c:386
+msgid "Invalid header in icon"
+msgstr "Virheellinen otsake kuvakkeessa"
+
+#: gdk-pixbuf/io-ico.c:387
+msgid "Compressed icons are not supported"
+msgstr "Pakattuja kuvakkeita ei tueta"
+
+#: gdk-pixbuf/io-ico.c:489
+msgid "Unsupported icon type"
+msgstr "Tukematon kuvaketyyppi"
+
+#: gdk-pixbuf/io-ico.c:583
+msgid "Not enough memory to load ICO file"
+msgstr "Ei tarpeeksi muistia ICO-tiedoston lataamiseksi"
+
+#: gdk-pixbuf/io-ico.c:629
+#, fuzzy
+#| msgid "GIF image was truncated or incomplete."
+msgid "ICO image was truncated or incomplete."
+msgstr "GIF-kuva oli typistynyt tai vaillinainen."
+
+#: gdk-pixbuf/io-ico.c:1070
+msgid "Image too large to be saved as ICO"
+msgstr "Kuva on liian suuri ICO-muodossa tallentamiseksi"
+
+#: gdk-pixbuf/io-ico.c:1081
+msgid "Cursor hotspot outside image"
+msgstr "Kohdistimen kohdistuspaikka kuvan ulkopuolella"
+
+#: gdk-pixbuf/io-ico.c:1104
+#, c-format
+msgid "Unsupported depth for ICO file: %d"
+msgstr "Värisyvyys, jota ICO-tiedostot eivät tue: %d"
+
+#: gdk-pixbuf/io-jpeg.c:129
+#, c-format
+msgid "Error interpreting JPEG image file (%s)"
+msgstr "Virhe tulkatessa JPEG-kuvaa (%s)"
+
+#: gdk-pixbuf/io-jpeg.c:637
+msgid ""
+"Insufficient memory to load image, try exiting some applications to free "
+"memory"
+msgstr ""
+"Liian vähän muistia kuvan lataamiseksi. Sulje joitakin sovelluksia "
+"vapauttaaksesi muistia"
+
+#: gdk-pixbuf/io-jpeg.c:710 gdk-pixbuf/io-jpeg.c:947
+#, c-format
+msgid "Unsupported JPEG color space (%s)"
+msgstr "Tukematon JPEG-väriavaruus (%s)"
+
+#: gdk-pixbuf/io-jpeg.c:825 gdk-pixbuf/io-jpeg.c:1142 gdk-pixbuf/io-jpeg.c:1489
+#: gdk-pixbuf/io-jpeg.c:1499
+msgid "Couldn’t allocate memory for loading JPEG file"
+msgstr "Muistia ei voitu varata JPEG-kuvan lataamiseksi"
+
+#: gdk-pixbuf/io-jpeg.c:1100
+msgid "Transformed JPEG has zero width or height."
+msgstr "Muunnetun JPEG-kuvan leveys tai korkeus on nolla."
+
+#: gdk-pixbuf/io-jpeg.c:1126
+#, fuzzy, c-format
+#| msgid "Unsupported JPEG color space (%s)"
+msgid "Unsupported number of color components (%d)"
+msgstr "Tukematon JPEG-väriavaruus (%s)"
+
+#: gdk-pixbuf/io-jpeg.c:1419
+#, fuzzy, c-format
+#| msgid ""
+#| "JPEG quality must be a value between 0 and 100; value '%d' is not allowed."
+msgid ""
+"JPEG x-dpi must be a value between 1 and 65535; value “%s” is not allowed."
+msgstr "JPEG-laadun täytyy olla välillä 0-100. Arvo ”%d” ei käy."
+
+#: gdk-pixbuf/io-jpeg.c:1440
+#, fuzzy, c-format
+#| msgid ""
+#| "JPEG quality must be a value between 0 and 100; value '%d' is not allowed."
+msgid ""
+"JPEG y-dpi must be a value between 1 and 65535; value “%s” is not allowed."
+msgstr "JPEG-laadun täytyy olla välillä 0-100. Arvo ”%d” ei käy."
+
+#: gdk-pixbuf/io-jpeg.c:1454
+#, fuzzy, c-format
+#| msgid "Color profile has invalid length %d."
+msgid "Color profile has invalid length “%u”."
+msgstr "Väriprofiili on virheellisen mittainen %d."
+
+#: gdk-pixbuf/io-png.c:63
+msgid "Bits per channel of PNG image is invalid."
+msgstr "PNG-kuvassa on väärä määrä bittejä kanavaa kohden."
+
+#: gdk-pixbuf/io-png.c:144 gdk-pixbuf/io-png.c:703
+msgid "Transformed PNG has zero width or height."
+msgstr "Muunnetun PNG-kuvan leveys tai korkeus on nolla."
+
+#: gdk-pixbuf/io-png.c:152
+msgid "Bits per channel of transformed PNG is not 8."
+msgstr "Muunnetussa PNG-kuvassa ei ole 8 bittiä kanavaa kohden."
+
+#: gdk-pixbuf/io-png.c:161
+msgid "Transformed PNG not RGB or RGBA."
+msgstr "Muunnettu PNG ei ole RGB tai RGBA."
+
+#: gdk-pixbuf/io-png.c:170
+msgid "Transformed PNG has unsupported number of channels, must be 3 or 4."
+msgstr ""
+"Muunnetussa PNG-kuvassa on tukematon määrä kanavia; täytyy olla 3 tai 4."
+
+#: gdk-pixbuf/io-png.c:191
+#, c-format
+msgid "Fatal error in PNG image file: %s"
+msgstr "Vakava virhe ladatessa PNG-kuvatiedostoa: %s"
+
+#: gdk-pixbuf/io-png.c:329
+msgid "Insufficient memory to load PNG file"
+msgstr "Liian vähän muistia PNG-tiedoston lataamiseksi"
+
+#: gdk-pixbuf/io-png.c:498 gdk-pixbuf/io-png.c:519
+msgid "Couldn’t allocate memory for loading PNG"
+msgstr "Muistia ei voitu varata PNG-kuvan lataamiseksi"
+
+#: gdk-pixbuf/io-png.c:716
+#, fuzzy, c-format
+#| msgid ""
+#| "Insufficient memory to store a %ld by %ld image; try exiting some "
+#| "applications to reduce memory usage"
+msgid ""
+"Insufficient memory to store a %lu by %lu image; try exiting some "
+"applications to reduce memory usage"
+msgstr ""
+"Liian vähän muistia %ldx%ld-kokoisen kuvan säilytykseen. Sulje joitakin "
+"sovelluksia vähentääksesi muistin käyttöä."
+
+#: gdk-pixbuf/io-png.c:791
+msgid "Fatal error reading PNG image file"
+msgstr "Vakava virhe lukiessa PNG-kuvatiedostoa"
+
+#: gdk-pixbuf/io-png.c:840
+#, c-format
+msgid "Fatal error reading PNG image file: %s"
+msgstr "Vakava virhe ladatessa PNG-kuvatiedostoa: %s"
+
+#: gdk-pixbuf/io-png.c:937
+#, fuzzy, c-format
+#| msgid ""
+#| "Keys for PNG text chunks must have at least 1 and at most 79 characters."
+msgid ""
+"Invalid key “%s”. Keys for PNG text chunks must have at least 1 and at most "
+"79 characters."
+msgstr ""
+"PNG text -lohkojen avainten täytyy sisältää vähintään 1 ja enintään 79 "
+"merkkiä."
+
+#: gdk-pixbuf/io-png.c:950
+#, fuzzy, c-format
+#| msgid "Keys for PNG text chunks must be ASCII characters."
+msgid "Invalid key “%s”. Keys for PNG text chunks must be ASCII characters."
+msgstr "PNG text -lohkojen avainten täytyy olla ASCII-merkkejä."
+
+#: gdk-pixbuf/io-png.c:980
+#, fuzzy, c-format
+#| msgid ""
+#| "Value for PNG text chunk %s cannot be converted to ISO-8859-1 encoding."
+msgid ""
+"Value for PNG text chunk '%s' cannot be converted to ISO-8859-1 encoding."
+msgstr "PNG text -lohkon %s arvoa ei voi muuntaa ISO-8859-1-merkistöön."
+
+#: gdk-pixbuf/io-png.c:992
+#, fuzzy, c-format
+#| msgid "Color profile has invalid length %d."
+msgid "Color profile has invalid length %d"
+msgstr "Väriprofiili on virheellisen mittainen %d."
+
+#: gdk-pixbuf/io-png.c:1004
+#, fuzzy, c-format
+#| msgid ""
+#| "PNG compression level must be a value between 0 and 9; value '%d' is not "
+#| "allowed."
+msgid ""
+"PNG compression level must be a value between 0 and 9; value “%s” is invalid"
+msgstr ""
+"PNG-tiedoston pakkaustason tulee olla arvo väliltä 0-9. Arvo ”%d” ei ole "
+"sallittu."
+
+#: gdk-pixbuf/io-png.c:1018
+#, fuzzy, c-format
+#| msgid ""
+#| "JPEG quality must be a value between 0 and 100; value '%d' is not allowed."
+msgid "PNG %s must be greater than zero; value “%s” is not allowed"
+msgstr "JPEG-laadun täytyy olla välillä 0-100. Arvo ”%d” ei käy."
+
+#: gdk-pixbuf/io-png.c:1246
+msgctxt "image format"
+msgid "PNG"
+msgstr "PNG"
+
+#: gdk-pixbuf/io-pnm.c:247
+#, fuzzy
+#| msgid "PNM loader expected to find an integer, but didn't"
+msgid "PNM loader expected to find an integer, but didn’t"
+msgstr "PNM-latain oletti saavansa kokonaisluvun, muttei saanut"
+
+#: gdk-pixbuf/io-pnm.c:279
+msgid "PNM file has an incorrect initial byte"
+msgstr "PNM-tiedoston alkutavu on väärä"
+
+#: gdk-pixbuf/io-pnm.c:309
+msgid "PNM file is not in a recognized PNM subformat"
+msgstr "PNM-tiedosto ei ole tunnettua PNM-alimuotoa"
+
+#: gdk-pixbuf/io-pnm.c:334
+msgid "PNM file has an invalid width"
+msgstr "PNM-tiedoston leveys on virheellinen"
+
+#: gdk-pixbuf/io-pnm.c:342
+msgid "PNM file has an image width of 0"
+msgstr "PNM-tiedoston kuvan leveys on 0"
+
+#: gdk-pixbuf/io-pnm.c:363
+msgid "PNM file has an invalid height"
+msgstr "PNM-tiedoston korkeus on virheellinen"
+
+#: gdk-pixbuf/io-pnm.c:371
+msgid "PNM file has an image height of 0"
+msgstr "PNM-tiedoston kuvan korkeus on 0"
+
+#: gdk-pixbuf/io-pnm.c:394
+msgid "Maximum color value in PNM file is 0"
+msgstr "Suurin väriarvo PNM-tiedostossa on 0"
+
+#: gdk-pixbuf/io-pnm.c:402
+msgid "Maximum color value in PNM file is too large"
+msgstr "Suurin väriarvo PNM-tiedostossa on liian suuri"
+
+#: gdk-pixbuf/io-pnm.c:442 gdk-pixbuf/io-pnm.c:472 gdk-pixbuf/io-pnm.c:517
+msgid "Raw PNM image type is invalid"
+msgstr "Raaka PNM -kuvatyyppi on väärä"
+
+#: gdk-pixbuf/io-pnm.c:667
+msgid "PNM image loader does not support this PNM subformat"
+msgstr "PNM-kuvanlatain ei tue tätä PNM-alimuotoa"
+
+#: gdk-pixbuf/io-pnm.c:754 gdk-pixbuf/io-pnm.c:991
+msgid "Raw PNM formats require exactly one whitespace before sample data"
+msgstr "Raa'at PNM-muodot vaativat täsmälleen yhden välin ennen otosdataa"
+
+#: gdk-pixbuf/io-pnm.c:781
+msgid "Cannot allocate memory for loading PNM image"
+msgstr "Ei voi varata muistia PNM-kuvan lataamiseksi"
+
+#: gdk-pixbuf/io-pnm.c:835
+msgid "Insufficient memory to load PNM context struct"
+msgstr "Liian vähän muistia PNM-kontekstirakenteen lataamiseksi"
+
+#: gdk-pixbuf/io-pnm.c:892
+msgid "Unexpected end of PNM image data"
+msgstr "Odottamaton PNM-kuvadatan loppu"
+
+#: gdk-pixbuf/io-pnm.c:1020
+msgid "Insufficient memory to load PNM file"
+msgstr "Liian vähän muistia PNM-tiedoston lataamiseksi"
+
+#: gdk-pixbuf/io-pnm.c:1103
+msgctxt "image format"
+msgid "PNM/PBM/PGM/PPM"
+msgstr "PNM/PBM/PGM/PPM"
+
+#: gdk-pixbuf/io-qtif.c:126
+msgid "Input file descriptor is NULL."
+msgstr "Syötetiedostokahva on NULL."
+
+#: gdk-pixbuf/io-qtif.c:141
+msgid "Failed to read QTIF header"
+msgstr "QTIF-otsakkeen luku epäonnistui"
+
+#: gdk-pixbuf/io-qtif.c:150 gdk-pixbuf/io-qtif.c:187 gdk-pixbuf/io-qtif.c:449
+#, fuzzy, c-format
+msgid "QTIF atom size too large (%d byte)"
+msgid_plural "QTIF atom size too large (%d bytes)"
+msgstr[0] "QTIF-atomikoko on liian suuri (%d tavua)"
+msgstr[1] "QTIF-atomikoko on liian suuri (%d tavua)"
+
+#: gdk-pixbuf/io-qtif.c:173
+#, fuzzy, c-format
+msgid "Failed to allocate %d byte for file read buffer"
+msgid_plural "Failed to allocate %d bytes for file read buffer"
+msgstr[0] "%d tavun kokoisen tiedostonlukupuskurin varaaminen epäonnistui"
+msgstr[1] "%d tavun kokoisen tiedostonlukupuskurin varaaminen epäonnistui"
+
+#: gdk-pixbuf/io-qtif.c:201
+#, c-format
+msgid "File error when reading QTIF atom: %s"
+msgstr "Tiedostovirhe luettaessa QTIF-atomia: %s"
+
+#: gdk-pixbuf/io-qtif.c:238
+#, fuzzy, c-format
+msgid "Failed to skip the next %d byte with seek()."
+msgid_plural "Failed to skip the next %d bytes with seek()."
+msgstr[0] "Seuraavien %d tavun ohittaminen seek()-funktiolla epäonnistui."
+msgstr[1] "Seuraavien %d tavun ohittaminen seek()-funktiolla epäonnistui."
+
+#: gdk-pixbuf/io-qtif.c:269
+msgid "Failed to allocate QTIF context structure."
+msgstr "Ei voi varata muistia QTIF-kontekstirakenteelle."
+
+#: gdk-pixbuf/io-qtif.c:329
+msgid "Failed to create GdkPixbufLoader object."
+msgstr "GdbPixbufLoader-olion luominen epäonnistui."
+
+#: gdk-pixbuf/io-qtif.c:424
+msgid "Failed to find an image data atom."
+msgstr "Kuvadata-atomia ei löytynyt."
+
+#: gdk-pixbuf/io-qtif.c:599
+msgctxt "image format"
+msgid "QuickTime"
+msgstr "QuickTime"
+
+#: gdk-pixbuf/io-tga.c:346
+#, fuzzy
+#| msgid "Cannot allocate colormap entries"
+msgid "Cannot allocate colormap"
+msgstr "Ei voi varata värikartan kohtia"
+
+#: gdk-pixbuf/io-tga.c:371
+msgid "Cannot allocate new pixbuf"
+msgstr "Ei voi varata uutta kuvapuskuria"
+
+#: gdk-pixbuf/io-tga.c:519
+msgid "Unexpected bitdepth for colormap entries"
+msgstr "Odottamaton värikartan kohtien bittisyvyys"
+
+#: gdk-pixbuf/io-tga.c:535
+msgid "Pseudocolor image does not contain a colormap"
+msgstr ""
+
+#: gdk-pixbuf/io-tga.c:578
+msgid "Cannot allocate TGA header memory"
+msgstr "Ei voi varata TGA-otsakkeen muistia"
+
+#: gdk-pixbuf/io-tga.c:609
+msgid "TGA image has invalid dimensions"
+msgstr "TGA-kuvan mitat ovat virheelliset"
+
+#: gdk-pixbuf/io-tga.c:615 gdk-pixbuf/io-tga.c:622
+msgid "TGA image type not supported"
+msgstr "TGA-kuvatyyppi ei tuettu"
+
+#: gdk-pixbuf/io-tga.c:650
+msgid "Cannot allocate memory for TGA context struct"
+msgstr "Ei voi varata muistia TGA-kontekstirakenteelle"
+
+#: gdk-pixbuf/io-tga.c:712
+#, fuzzy
+#| msgid "GIF image was truncated or incomplete."
+msgid "TGA image was truncated or incomplete."
+msgstr "GIF-kuva oli typistynyt tai vaillinainen."
+
+#: gdk-pixbuf/io-tga.c:764
+msgctxt "image format"
+msgid "Targa"
+msgstr "Targa"
+
+#: gdk-pixbuf/io-tiff.c:116
+msgid "Could not get image width (bad TIFF file)"
+msgstr "Ei voitu hakea kuvan leveyttä (viallinen TIFF-tiedosto)"
+
+#: gdk-pixbuf/io-tiff.c:124
+msgid "Could not get image height (bad TIFF file)"
+msgstr "Ei voitu hakea kuvan korkeutta (viallinen TIFF-tiedosto)"
+
+#: gdk-pixbuf/io-tiff.c:132
+msgid "Width or height of TIFF image is zero"
+msgstr "TIFF-kuvan korkeus tai leveys on nolla"
+
+#: gdk-pixbuf/io-tiff.c:140 gdk-pixbuf/io-tiff.c:150
+msgid "Dimensions of TIFF image too large"
+msgstr "TIFF-kuvan mitat ovat liian suuret"
+
+#: gdk-pixbuf/io-tiff.c:176 gdk-pixbuf/io-tiff.c:188 gdk-pixbuf/io-tiff.c:584
+msgid "Insufficient memory to open TIFF file"
+msgstr "Liian vähän muistia TIFF-tiedoston avaamiseksi"
+
+#: gdk-pixbuf/io-tiff.c:286
+msgid "Failed to load RGB data from TIFF file"
+msgstr "RGB-datan lataus TIFF-tiedostosta epäonnistui"
+
+#: gdk-pixbuf/io-tiff.c:377
+msgid "Failed to open TIFF image"
+msgstr "TIFF-tiedoston avaus epäonnistui"
+
+#: gdk-pixbuf/io-tiff.c:515 gdk-pixbuf/io-tiff.c:527
+msgid "Failed to load TIFF image"
+msgstr "TIFF-tiedoston lataus epäonnistui"
+
+#: gdk-pixbuf/io-tiff.c:759
+msgid "Failed to save TIFF image"
+msgstr "TIFF-kuvan tallennus epäonnistui"
+
+#: gdk-pixbuf/io-tiff.c:820
+msgid "TIFF compression doesn’t refer to a valid codec."
+msgstr "TIFF-pakkaus ei viittaa kelvolliseen koodekkiin."
+
+#: gdk-pixbuf/io-tiff.c:850
+#, c-format
+msgid "Color profile has invalid length %d."
+msgstr "Väriprofiili on virheellisen mittainen %d."
+
+#: gdk-pixbuf/io-tiff.c:865
+msgid "TIFF bits-per-sample doesn’t contain a supported value."
+msgstr ""
+
+#: gdk-pixbuf/io-tiff.c:946
+msgid "Failed to write TIFF data"
+msgstr "TIFF-tietojen kirjoitus epäonnistui"
+
+#: gdk-pixbuf/io-tiff.c:964
+#, fuzzy, c-format
+#| msgid ""
+#| "JPEG quality must be a value between 0 and 100; value '%d' is not allowed."
+msgid "TIFF x-dpi must be greater than zero; value “%s” is not allowed."
+msgstr "JPEG-laadun täytyy olla välillä 0-100. Arvo ”%d” ei käy."
+
+#: gdk-pixbuf/io-tiff.c:976
+#, fuzzy, c-format
+#| msgid ""
+#| "JPEG quality must be a value between 0 and 100; value '%d' is not allowed."
+msgid "TIFF y-dpi must be greater than zero; value “%s” is not allowed."
+msgstr "JPEG-laadun täytyy olla välillä 0-100. Arvo ”%d” ei käy."
+
+#: gdk-pixbuf/io-tiff.c:1017
+msgid "Couldn’t write to TIFF file"
+msgstr "TIFF-tiedostoon ei voitu kirjoittaa"
+
+#: gdk-pixbuf/io-xbm.c:320
+msgid "Invalid XBM file"
+msgstr "Virheellinen XBM-tiedosto"
+
+#: gdk-pixbuf/io-xbm.c:331
+msgid "Insufficient memory to load XBM image file"
+msgstr "Liian vähän muistia XBM-tiedoston lataamiseksi"
+
+#: gdk-pixbuf/io-xbm.c:482
+msgid "Failed to write to temporary file when loading XBM image"
+msgstr "Väliaikaistiedoston kirjoittaminen epäonnistui XBM-kuvaa ladatessa"
+
+#: gdk-pixbuf/io-xbm.c:521
+msgctxt "image format"
+msgid "XBM"
+msgstr "XBM"
+
+#: gdk-pixbuf/io-xpm.c:472
+msgid "No XPM header found"
+msgstr "XPM-otsikkoa ei löytynyt"
+
+#: gdk-pixbuf/io-xpm.c:481 gdk-pixbuf/io-xpm.c:507
+msgid "Invalid XPM header"
+msgstr "Virheellinen XPM-otsikko"
+
+#: gdk-pixbuf/io-xpm.c:489
+msgid "XPM file has image width <= 0"
+msgstr "XPM-tiedoston kuvan leveys on <= 0"
+
+#: gdk-pixbuf/io-xpm.c:497
+msgid "XPM file has image height <= 0"
+msgstr "XPM-tiedoston kuvan korkeus on <= 0"
+
+#: gdk-pixbuf/io-xpm.c:514
+msgid "XPM has invalid number of chars per pixel"
+msgstr "XPM-tiedostossa on väärä määrä merkkejä kuvapistettä kohden"
+
+#: gdk-pixbuf/io-xpm.c:523
+msgid "XPM file has invalid number of colors"
+msgstr "XPM-tiedostossa on väärä määrä värejä"
+
+#: gdk-pixbuf/io-xpm.c:535 gdk-pixbuf/io-xpm.c:544 gdk-pixbuf/io-xpm.c:593
+msgid "Cannot allocate memory for loading XPM image"
+msgstr "Muistia ei voi varata XPM-kuvan lataamiseksi"
+
+#: gdk-pixbuf/io-xpm.c:558
+msgid "Cannot read XPM colormap"
+msgstr "XPM-värikarttaa ei voi lukea"
+
+#: gdk-pixbuf/io-xpm.c:610
+#, fuzzy
+#| msgid "Dimensions of TIFF image too large"
+msgid "Dimensions do not match data"
+msgstr "TIFF-kuvan mitat ovat liian suuret"
+
+#: gdk-pixbuf/io-xpm.c:806
+msgid "Failed to write to temporary file when loading XPM image"
+msgstr "Väliaikaistiedoston kirjoittaminen epäonnistui XPM-kuvaa ladatessa"
+
+#: gdk-pixbuf/io-xpm.c:845
+msgctxt "image format"
+msgid "XPM"
+msgstr "XPM"
+
+#~ msgid "Internal error in the GIF loader (%s)"
+#~ msgstr "Sisäinen virhe GIF-lataimessa (%s)"
+
+#~ msgid "Bad code encountered"
+#~ msgstr "Havaitsi virheellisen koodin"
+
+#~ msgid "Stack overflow"
+#~ msgstr "Pinon ylivuoto"
+
+#~ msgid "GIF image loader cannot understand this image."
+#~ msgstr "GIF-kuvanlukija ei ymmärrä tätä kuvaa."
+
+#~ msgid "Circular table entry in GIF file"
+#~ msgstr "GIF-tiedostossa on taulukkokehämerkintä"
+
+#~ msgid "Not enough memory to composite a frame in GIF file"
+#~ msgstr "Muisti ei riitä GIF-kuvassa olevan kehyksen muodostamiseksi"
+
+#, fuzzy
+#~| msgid "Couldn't allocate memory for stream"
+#~ msgid "Couldn’t allocate memory for stream"
+#~ msgstr "Muistin varaus virtaa varten epäonnistui"
+
+#, fuzzy
+#~| msgid "Couldn't decode image"
+#~ msgid "Couldn’t decode image"
+#~ msgstr "Kuvaa ei voitu tulkita"
+
+#~ msgid "Transformed JPEG2000 has zero width or height"
+#~ msgstr "Muunnetun JPEG 2000 -kuvan leveys tai korkeus on nolla"
+
+#~ msgid "Image type currently not supported"
+#~ msgstr "Kuvatyyppi ei ole tuettu"
+
+#, fuzzy
+#~| msgid "Couldn't allocate memory for color profile"
+#~ msgid "Couldn’t allocate memory for color profile"
+#~ msgstr "Muistia ei voitu varata väriprofiilille"
+
+#~ msgid "Insufficient memory to open JPEG 2000 file"
+#~ msgstr "Liian vähän muistia JPEG 2000 -tiedoston avaamiseksi"
+
+#, fuzzy
+#~| msgid "Couldn't allocate memory to buffer image data"
+#~ msgid "Couldn’t allocate memory to buffer image data"
+#~ msgstr "Muistin varaus kuvatiedon puskurointia varten epäonnistui"
+
+#~ msgctxt "image format"
+#~ msgid "JPEG 2000"
+#~ msgstr "JPEG 2000"
+
+#, fuzzy
+#~| msgid ""
+#~| "PNG compression level must be a value between 0 and 9; value '%s' could "
+#~| "not be parsed."
+#~ msgid ""
+#~ "PNG compression level must be a value between 0 and 9; value “%s” could "
+#~ "not be parsed."
+#~ msgstr ""
+#~ "PNG-tiedoston pakkaustason tulee olla arvo väliltä 0-9. Arvoa ”%s” ei "
+#~ "voitu tulkita."
+
+#, fuzzy
+#~| msgid ""
+#~| "JPEG quality must be a value between 0 and 100; value '%d' is not "
+#~| "allowed."
+#~ msgid "PNG y-dpi must be greater than zero; value “%s” is not allowed."
+#~ msgstr "JPEG-laadun täytyy olla välillä 0-100. Arvo ”%d” ei käy."
+
+#~ msgid "Couldn't allocate memory for header"
+#~ msgstr "Muistin varaus otsikkoa varten epäonnistui"
+
+#~ msgid "Couldn't allocate memory for context buffer"
+#~ msgstr "Muistin varaus kontekstipuskuria varten epäonnistui"
+
+#~ msgid "Image has invalid width and/or height"
+#~ msgstr "Kuvan leveys tai korkeus on virheellinen"
+
+#~ msgid "Image has unsupported bpp"
+#~ msgstr "Kuvan bpp ei ole tuettu"
+
+#~ msgid "Image has unsupported number of %d-bit planes"
+#~ msgstr "Kuvan %d-bittisten tasojen määrä ei ole tuettu"
+
+#~ msgid "Couldn't create new pixbuf"
+#~ msgstr "Uuden pixbufin luonti epäonnistui"
+
+#~ msgid "Couldn't allocate memory for line data"
+#~ msgstr "Muistin varaus rividataa varten epäonnistui"
+
+#~ msgid "Couldn't allocate memory for PCX image"
+#~ msgstr "Muistin varaus PCX-kuvaa varten epäonnistui"
+
+#~ msgid "Didn't get all lines of PCX image"
+#~ msgstr "Kaikkia PCX-kuvan rivejä ei saatu"
+
+#~ msgid "No palette found at end of PCX data"
+#~ msgstr "Palettia ei löytynyt PCX-datan lopusta."
+
+#~ msgctxt "image format"
+#~ msgid "PCX"
+#~ msgstr "PCX"
+
+#, fuzzy
+#~ msgid "Transformed pixbuf has zero width or height."
+#~ msgstr "Muunnetun PNG-kuvan leveys tai korkeus on nolla."
+
+#, fuzzy
+#~ msgctxt "image format"
+#~ msgid "GdkPixdata"
+#~ msgstr "GIF-kuvamuoto"
+
+#~ msgid "RAS image has bogus header data"
+#~ msgstr "RAS-kuvan otsakedata on viallista"
+
+#~ msgid "RAS image has unknown type"
+#~ msgstr "RAS-kuvan tyyppi on tuntematon"
+
+#~ msgid "unsupported RAS image variation"
+#~ msgstr "tukematon RAS-kuvan muunnelma"
+
+#~ msgid "Not enough memory to load RAS image"
+#~ msgstr "Ei tarpeeksi muistia RAS-kuvan lataamiseen"
+
+#~ msgid "Cannot allocate memory for IOBuffer struct"
+#~ msgstr "Ei voi varata muistia IOBuffer-tietorakenteelle"
+
+#~ msgid "Cannot allocate memory for IOBuffer data"
+#~ msgstr "Ei voi varata muistia IOBuffer-datalle"
+
+#~ msgid "Cannot realloc IOBuffer data"
+#~ msgstr "Ei voi varata uudelleen IOBuffer-dataa"
+
+#~ msgid "Cannot allocate temporary IOBuffer data"
+#~ msgstr "Ei voi varata tilapäistä IOBuffer-dataa"
+
+#~ msgid "Image is corrupted or truncated"
+#~ msgstr "Kuva on viallinen tai typistynyt"
+
+#~ msgid "Cannot allocate colormap structure"
+#~ msgstr "Ei voi varata värikarttarakennetta"
+
+#~ msgid "Excess data in file"
+#~ msgstr "Ylimääräistä dataa tiedostossa"
+
+#~ msgid "Image has zero width"
+#~ msgstr "Kuvan leveys on nolla"
+
+#~ msgid "Image has zero height"
+#~ msgstr "Kuvan korkeus on nolla"
+
+#~ msgid "Not enough memory to load image"
+#~ msgstr "Ei tarpeeksi muistia kuvan lataamiseen"
+
+#~ msgid "Couldn't save the rest"
+#~ msgstr "Ei voitu tallentaa loppua"
+
+#~ msgctxt "image format"
+#~ msgid "WBMP"
+#~ msgstr "WBMP"
+
+#~ msgid "Unsupported animation type"
+#~ msgstr "Tukematon animaatiotyyppi"
+
+#~ msgid "The ANI image format"
+#~ msgstr "ANI-kuvamuoto"
+
+#~ msgid "The BMP image format"
+#~ msgstr "BMP-kuvamuoto"
+
+#~ msgid "The EMF image format"
+#~ msgstr "EMF-kuvamuoto"
+
+#~ msgid "The GIF image format"
+#~ msgstr "GIF-kuvamuoto"
+
+#~ msgid "The ICO image format"
+#~ msgstr "ICO-kuvamuoto"
+
+#~ msgid "The JPEG image format"
+#~ msgstr "JPEG-kuvamuoto"
+
+#~ msgid "The WMF image format"
+#~ msgstr "WMF-kuvamuoto"
+
+#~ msgid "The ICNS image format"
+#~ msgstr "ICNS-kuvamuoto"
+
+#~ msgid "Icon has zero width"
+#~ msgstr "Kuvakkeen leveys on nolla"
+
+#~ msgid "Icon has zero height"
+#~ msgstr "Kuvakkeen korkeus on nolla"
+
+#~ msgid "The JPEG 2000 image format"
+#~ msgstr "JPEG 2000 -kuvamuoto"
+
+#~ msgid "The PCX image format"
+#~ msgstr "PCX-kuvamuoto"
+
+#~ msgid "The PNG image format"
+#~ msgstr "PNG-kuvamuoto"
+
+#~ msgid "The PNM/PBM/PGM/PPM image format family"
+#~ msgstr "PNM/PBM/PGM/PPM-kuvamuotoperhe"
+
+#~ msgid "The QTIF image format"
+#~ msgstr "QTIF-kuvamuoto"
+
+#~ msgid "The Sun raster image format"
+#~ msgstr "Sun-rasterikuvamuoto"
+
+#~ msgid "The Targa image format"
+#~ msgstr "Targa-kuvamuoto"
+
+#~ msgid "TIFFClose operation failed"
+#~ msgstr "TIFFClose-toiminto epäonnistui"
+
+#~ msgid "The TIFF image format"
+#~ msgstr "TIFF-kuvamuoto"
+
+#~ msgid "The WBMP image format"
+#~ msgstr "WBMP-kuvamuoto"
+
+#~ msgid "The XBM image format"
+#~ msgstr "XBM-kuvamuoto"
+
+#~ msgid "The XPM image format"
+#~ msgstr "XPM-kuvamuoto"
+
+#~ msgid "Couldn't allocate memory for paletted data"
+#~ msgstr "Muistin varaus palettidataa varten epäonnistui"

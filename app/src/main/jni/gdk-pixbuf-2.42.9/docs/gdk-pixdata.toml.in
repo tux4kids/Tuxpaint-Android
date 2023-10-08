@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2021 GNOME Foundation
+#
+# SPDX-License-Identifier: CC0-1.0
+
+[library]
+name = "gdk-pixdata"
+version = "@VERSION@"
+browse_url = "https://gitlab.gnome.org/GNOME/gdk-pixbuf/"
+repository_url = "https://gitlab.gnome.org/GNOME/gdk-pixbuf.git"
+website_url = "https://www.gtk.org"
+authors = "GTK Development Team"
+license = "GPL-2.1-or-later"
+description = "Inline image data"
+dependencies = [ "gobject", "gio", "gdk-pixbuf" ]
+devhelp = true
+search_index = true
+
+  [dependencies.gobject]
+  name = "GObject"
+  description = "The base type system library"
+  docs_url = "https://developer.gnome.org/gobject/stable"
+
+  [dependencies.gio]
+  name = "GIO"
+  description = "GObject Interfaces and Objects"
+  docs_url = "https://developer.gnome.org/gio/stable"
+
+  [dependencies."gdk-pixbuf"]
+  name = "GdkPixbuf"
+  description = "Image loading library"
+  docs_url = "../gdk-pixbuf/index.html"
+
+[theme]
+name = "basic"
+show_index_summary = true
+
+[source-location]
+base_url = "https://gitlab.gnome.org/GNOME/gdk-pixbuf/-/blob/master/"
+
+[extra]
+urlmap_file = "urlmap.js"

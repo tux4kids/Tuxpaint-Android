@@ -1,0 +1,1142 @@
+# Basque translation of gdk-pixbuf.
+# Copyright (C) 1999, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
+#
+# Joseba Bidaurrazaga van Dierdonck <gcpbivaj@lg.ehu.es>, 1999-2000.
+# Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2004.
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018.
+# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2019, 2021.
+#
+msgid ""
+msgstr "Project-Id-Version: gdk-pixbuf master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gdk-pixbuf/issues\n"
+"POT-Creation-Date: 2021-01-10 12:23+0000\n"
+"PO-Revision-Date: 2021-04-05 10:00+0100\n"
+"Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
+"Language-Team: Basque <librezale@librezale.eus>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:175 gdk-pixbuf/gdk-pixbuf-io.c:1125
+#: gdk-pixbuf/gdk-pixbuf-io.c:1387
+#, c-format
+msgid "Failed to open file “%s”: %s"
+msgstr "Ezin izan da “%s“ fitxategia ireki: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:188 gdk-pixbuf/gdk-pixbuf-io.c:992
+#, c-format
+msgid "Image file “%s” contains no data"
+msgstr "“%s“ irudi-fitxategiak ez du daturik"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:226
+#, c-format
+msgid ""
+"Failed to load animation “%s”: reason not known, probably a corrupt "
+"animation file"
+msgstr "Ezin izan da “%s“ animazioa kargatu: arrazoia ez dakigu, beharbada hondatutako animazio-fitxategia izango da"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:294 gdk-pixbuf/gdk-pixbuf-io.c:1161
+#: gdk-pixbuf/gdk-pixbuf-io.c:1439
+#, c-format
+msgid ""
+"Failed to load image “%s”: reason not known, probably a corrupt image file"
+msgstr "Ezin izan da “%s“ irudia kargatu: arrazoia ez dakigu, beharbada hondatutako irudi-fitxategia izango da"
+
+#: gdk-pixbuf/gdk-pixbuf.c:237
+msgid "Number of Channels"
+msgstr "Kanal kopurua"
+
+#: gdk-pixbuf/gdk-pixbuf.c:238
+msgid "The number of samples per pixel"
+msgstr "Lagin kopurua pixeleko"
+
+#: gdk-pixbuf/gdk-pixbuf.c:247
+msgid "Colorspace"
+msgstr "Kolore-espazioa"
+
+#: gdk-pixbuf/gdk-pixbuf.c:248
+msgid "The colorspace in which the samples are interpreted"
+msgstr "Laginak interpretatzen diren kolore-espazioa"
+
+#: gdk-pixbuf/gdk-pixbuf.c:256
+msgid "Has Alpha"
+msgstr "Alfa dauka"
+
+#: gdk-pixbuf/gdk-pixbuf.c:257
+msgid "Whether the pixbuf has an alpha channel"
+msgstr "Pixbuf-ek alfa kanala duen ala ez adierazten du"
+
+#: gdk-pixbuf/gdk-pixbuf.c:270
+msgid "Bits per Sample"
+msgstr "Lagin bakoitzeko bitak"
+
+#: gdk-pixbuf/gdk-pixbuf.c:271
+msgid "The number of bits per sample"
+msgstr "Lagin bakoitzeko bit-kopurua"
+
+#: gdk-pixbuf/gdk-pixbuf.c:280
+msgid "Width"
+msgstr "Zabalera"
+
+#: gdk-pixbuf/gdk-pixbuf.c:281
+msgid "The number of columns of the pixbuf"
+msgstr "Pixbuf-eko zutabe-kopurua"
+
+#: gdk-pixbuf/gdk-pixbuf.c:290
+msgid "Height"
+msgstr "Altuera"
+
+#: gdk-pixbuf/gdk-pixbuf.c:291
+msgid "The number of rows of the pixbuf"
+msgstr "Pixbuf-eko errenkada-kopurua"
+
+#: gdk-pixbuf/gdk-pixbuf.c:307
+msgid "Rowstride"
+msgstr "Errenkada-luzera"
+
+#: gdk-pixbuf/gdk-pixbuf.c:308
+msgid ""
+"The number of bytes between the start of a row and the start of the next row"
+msgstr "Errenkada baten hasieratik hurrengo errenkadaren hasierara arte dagoen byte kopurua"
+
+#: gdk-pixbuf/gdk-pixbuf.c:317
+msgid "Pixels"
+msgstr "Pixelak"
+
+#: gdk-pixbuf/gdk-pixbuf.c:318
+msgid "A pointer to the pixel data of the pixbuf"
+msgstr "Pixbuf-eko pixel-datuetarako erakuslea"
+
+#: gdk-pixbuf/gdk-pixbuf.c:332
+msgid "Pixel Bytes"
+msgstr "Pixelaren byteak"
+
+#: gdk-pixbuf/gdk-pixbuf.c:333
+msgid "Readonly pixel data"
+msgstr "Pixelen datuak irakurtzekosoilik"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:812
+#, c-format
+msgid "Unable to load image-loading module: %s: %s"
+msgstr "Ezin da irudiak kargatzeko modulua kargatu: %s: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:827
+#, c-format
+msgid ""
+"Image-loading module %s does not export the proper interface; perhaps it’s "
+"from a different gdk-pixbuf version?"
+msgstr "%s irudiak kargatzeko moduluak ez du interfaze egokia esportatzen; agian beste gdk-pixbuf bertsio batekoa da?"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:836 gdk-pixbuf/gdk-pixbuf-io.c:879
+#, c-format
+msgid "Image type “%s” is not supported"
+msgstr "“%s“ motako irudia ez dira onartzen"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:964
+#, c-format
+msgid "Couldn’t recognize the image file format for file “%s”"
+msgstr "Ezin izan da “%s“ fitxategiaren irudi-formatua ezagutu"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:972
+msgid "Unrecognized image file format"
+msgstr "Irudi-fitxategiaren formatu ezezaguna"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:1172
+#, c-format
+msgid "Failed to load image “%s”: %s"
+msgstr "Huts egin du “%s“ irudia kargatzean: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2242 gdk-pixbuf/io-gdip-utils.c:840
+#, c-format
+msgid "Error writing to image file: %s"
+msgstr "Errorea irudi-fitxategia idaztean: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2284 gdk-pixbuf/gdk-pixbuf-io.c:2405
+#, c-format
+msgid "This build of gdk-pixbuf does not support saving the image format: %s"
+msgstr "gdk-pixbuf-en bertsio honek ez du irudi-formatu hau gordetzea onartzen: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2315
+msgid "Insufficient memory to save image to callback"
+msgstr "Ez dago irudi-fitxategia atzeradeian gordetzeko behar adina memoria"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2328
+msgid "Failed to open temporary file"
+msgstr "Huts egin du aldi baterako fitxategia irekitzean"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2351
+msgid "Failed to read from temporary file"
+msgstr "Huts egin du aldi baterako fitxategitik irakurtzean"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2561
+#, c-format
+msgid "Failed to open “%s” for writing: %s"
+msgstr "Huts egin du “%s“ idazteko irekitzean: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2587
+#, c-format
+msgid ""
+"Failed to close “%s” while writing image, all data may not have been saved: "
+"%s"
+msgstr "Ezin izan da “%s“ itxi irudia idatzi bitartean, baliteke datu guztiak ez gorde izana: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2808 gdk-pixbuf/gdk-pixbuf-io.c:2860
+msgid "Insufficient memory to save image into a buffer"
+msgstr "Ez dago irudi-fitxategia bufferrean gordetzeko behar adina memoria"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2906
+msgid "Error writing to image stream"
+msgstr "Errorea irudi-korrontean idaztean"
+
+#: gdk-pixbuf/gdk-pixbuf-loader.c:406
+#, c-format
+msgid ""
+"Internal error: Image loader module “%s” failed to complete an operation, "
+"but didn’t give a reason for the failure"
+msgstr "Barne-errorea: “%s“ irudi kargatzailearen moduluak ezin izan du eragiketa burutu, baina ez du hutsegitearen arrazoirik eman"
+
+#: gdk-pixbuf/gdk-pixbuf-loader.c:448
+#, c-format
+msgid "Incremental loading of image type “%s” is not supported"
+msgstr "“%s“ motako irudien kargatze inkrementala ez da onartzen"
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:162
+msgid "Loop"
+msgstr "Begizta"
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:163
+msgid "Whether the animation should loop when it reaches the end"
+msgstr "Animazioa begizta batean errepikatuko den amaierara iristean edo ez"
+
+#: gdk-pixbuf/gdk-pixdata.c:165
+msgid "Image header corrupt"
+msgstr "Irudi-goiburua hondatuta"
+
+#: gdk-pixbuf/gdk-pixdata.c:170
+msgid "Image format unknown"
+msgstr "Irudi-formatu ezezaguna"
+
+#: gdk-pixbuf/gdk-pixdata.c:175 gdk-pixbuf/gdk-pixdata.c:470
+#: gdk-pixbuf/gdk-pixdata.c:480 gdk-pixbuf/gdk-pixdata.c:576
+msgid "Image pixel data corrupt"
+msgstr "Irudiko pixelen datuak hondatuta"
+
+#: gdk-pixbuf/gdk-pixdata.c:492
+#, c-format
+msgid "failed to allocate image buffer of %u byte"
+msgid_plural "failed to allocate image buffer of %u bytes"
+msgstr[0] "huts egin du irudiaren bufferra byte %u-ekin esleitzean"
+msgstr[1] "huts egin du irudiaren bufferra %u byte-rekin esleitzean"
+
+#: gdk-pixbuf/io-ani.c:239
+msgid "Unexpected icon chunk in animation"
+msgstr "Ustekabeko ikono-puska animazioan"
+
+#: gdk-pixbuf/io-ani.c:337 gdk-pixbuf/io-ani.c:395 gdk-pixbuf/io-ani.c:421
+#: gdk-pixbuf/io-ani.c:444 gdk-pixbuf/io-ani.c:471 gdk-pixbuf/io-ani.c:558
+msgid "Invalid header in animation"
+msgstr "Goiburu baliogabea animazioan"
+
+#: gdk-pixbuf/io-ani.c:347 gdk-pixbuf/io-ani.c:369 gdk-pixbuf/io-ani.c:453
+#: gdk-pixbuf/io-ani.c:480 gdk-pixbuf/io-ani.c:531 gdk-pixbuf/io-ani.c:607
+msgid "Not enough memory to load animation"
+msgstr "Ez dago animazioa kargatzeko adina memoria"
+
+#: gdk-pixbuf/io-ani.c:387 gdk-pixbuf/io-ani.c:413 gdk-pixbuf/io-ani.c:432
+msgid "Malformed chunk in animation"
+msgstr "Gaizki osatutako puska animazioan"
+
+#: gdk-pixbuf/io-ani.c:629
+msgid "ANI image was truncated or incomplete."
+msgstr "ANI irudia trunkatuta edo osatu gabe zegoen."
+
+#: gdk-pixbuf/io-ani.c:670
+msgctxt "image format"
+msgid "Windows animated cursor"
+msgstr "Leihoaren kurtsore animatua"
+
+#: gdk-pixbuf/io-bmp.c:231 gdk-pixbuf/io-bmp.c:269 gdk-pixbuf/io-bmp.c:376
+#: gdk-pixbuf/io-bmp.c:403 gdk-pixbuf/io-bmp.c:428 gdk-pixbuf/io-bmp.c:463
+#: gdk-pixbuf/io-bmp.c:485 gdk-pixbuf/io-bmp.c:563
+msgid "BMP image has bogus header data"
+msgstr "BMP irudiak goiburu-datu akastunak ditu"
+
+#: gdk-pixbuf/io-bmp.c:242 gdk-pixbuf/io-bmp.c:498
+msgid "Not enough memory to load bitmap image"
+msgstr "Ez dago bit-mapen irudia kargatzeko adina memoria"
+
+#: gdk-pixbuf/io-bmp.c:333
+msgid "BMP image has unsupported header size"
+msgstr "BMP irudiaren goiburu-tamaina ez da onartzen"
+
+#: gdk-pixbuf/io-bmp.c:343
+msgid "BMP image has unsupported depth"
+msgstr "BMP irudiaren onartu gabeko sakonera du"
+
+#: gdk-pixbuf/io-bmp.c:358
+msgid "BMP image has oversize palette"
+msgstr "BMP irudiak gehiegizko tamainako paleta du"
+
+#: gdk-pixbuf/io-bmp.c:390
+msgid "Topdown BMP images cannot be compressed"
+msgstr "BMP 'Topdown' irudiak ezin dira konprimatu"
+
+#: gdk-pixbuf/io-bmp.c:415
+msgid "BMP image width too large"
+msgstr "BMP irudiaren zabalera handiegia"
+
+#: gdk-pixbuf/io-bmp.c:792 gdk-pixbuf/io-png.c:564 gdk-pixbuf/io-pnm.c:722
+#: gdk-pixbuf/io-pnm.c:879
+msgid "Premature end-of-file encountered"
+msgstr "Fitxategiaren amaiera uste baino lehen aurkitu da"
+
+#: gdk-pixbuf/io-bmp.c:1313
+#, c-format
+msgid "Error while decoding colormap"
+msgstr "Errorea kolore-mapa deskodetzean"
+
+#: gdk-pixbuf/io-bmp.c:1376 gdk-pixbuf/io-bmp.c:1388
+msgid "Image is too wide for BMP format."
+msgstr "Irudia handiegia da BMP formaturako."
+
+#: gdk-pixbuf/io-bmp.c:1421
+msgid "Couldn’t allocate memory for saving BMP file"
+msgstr "Ezin izan da BMP fitxategia gordetzeko memoriarik esleitu"
+
+#: gdk-pixbuf/io-bmp.c:1462
+msgid "Couldn’t write to BMP file"
+msgstr "Ezin izan da BMP fitxategian idatzi"
+
+#: gdk-pixbuf/io-bmp.c:1515 gdk-pixbuf/io-gdip-bmp.c:83
+msgctxt "image format"
+msgid "BMP"
+msgstr "BMP"
+
+#: gdk-pixbuf/io-gdip-emf.c:61
+msgctxt "image format"
+msgid "EMF"
+msgstr "EMF"
+
+#: gdk-pixbuf/io-gdip-gif.c:81 gdk-pixbuf/io-gif.c:1037
+msgctxt "image format"
+msgid "GIF"
+msgstr "GIF"
+
+#: gdk-pixbuf/io-gdip-ico.c:60 gdk-pixbuf/io-ico.c:1412
+msgctxt "image format"
+msgid "Windows icon"
+msgstr "Windows-eko ikonoa"
+
+#: gdk-pixbuf/io-gdip-jpeg.c:54 gdk-pixbuf/io-jpeg.c:1382
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value “%s” could not be "
+"parsed."
+msgstr "JPEG kalitatearen balioak 0 eta 100 artean egon behar du; “%s“ balioa ezin izan da analizatu."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:69 gdk-pixbuf/io-jpeg.c:1398
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value “%d” is not allowed."
+msgstr "JPEG kalitatearen balioak 0 eta 100 artean egon behar du; “%d“ balioa ez da onartzen."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:147 gdk-pixbuf/io-jpeg.c:1682
+msgctxt "image format"
+msgid "JPEG"
+msgstr "JPEG"
+
+#: gdk-pixbuf/io-gdip-tiff.c:83 gdk-pixbuf/io-tiff.c:1086
+msgctxt "image format"
+msgid "TIFF"
+msgstr "TIFF"
+
+#: gdk-pixbuf/io-gdip-utils.c:155
+#, c-format
+msgid "Could not allocate memory: %s"
+msgstr "Ezin izan da memoria esleitu: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:180 gdk-pixbuf/io-gdip-utils.c:294
+#: gdk-pixbuf/io-gdip-utils.c:334
+#, c-format
+msgid "Could not create stream: %s"
+msgstr "Ezin izan da korrontea sortu: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:194
+#, c-format
+msgid "Could not seek stream: %s"
+msgstr "Ezin izan da korrontea bilatu: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:206
+#, c-format
+msgid "Could not read from stream: %s"
+msgstr "Ezin izan da korrontearentzako irakurri: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:620
+msgid "Couldn’t load bitmap"
+msgstr "Ezin izan da bit-mapa kargatu"
+
+#: gdk-pixbuf/io-gdip-utils.c:776
+msgid "Couldn’t load metafile"
+msgstr "Ezin izan da metafitxategia kargatu"
+
+#: gdk-pixbuf/io-gdip-utils.c:881
+msgid "Unsupported image format for GDI+"
+msgstr "Onartu gabeko irudi-formatua GDI+entzako"
+
+#: gdk-pixbuf/io-gdip-utils.c:888
+msgid "Couldn’t save"
+msgstr "Ezin izan da gorde"
+
+#: gdk-pixbuf/io-gdip-wmf.c:60
+msgctxt "image format"
+msgid "WMF"
+msgstr "WMF"
+
+#: gdk-pixbuf/io-gif.c:158
+#, c-format
+msgid "Failure reading GIF: %s"
+msgstr "Ezin izan da GIF irakurri: %s"
+
+#: gdk-pixbuf/io-gif.c:381 gdk-pixbuf/io-gif.c:848 gdk-pixbuf/io-gif.c:901
+#: gdk-pixbuf/io-gif.c:974
+msgid "Not enough memory to load GIF file"
+msgstr "Ez dago GIF fitxategia kargatzeko adina memoria"
+
+#: gdk-pixbuf/io-gif.c:507
+msgid "GIF image is corrupt (incorrect LZW compression)"
+msgstr "GIF irudia hondatuta dago (LZW konpresio okerra)"
+
+#: gdk-pixbuf/io-gif.c:543
+msgid "File does not appear to be a GIF file"
+msgstr "Fitxategiak ez dirudi GIF fitxategia"
+
+#: gdk-pixbuf/io-gif.c:558
+#, c-format
+msgid "Version %s of the GIF file format is not supported"
+msgstr "GIF fitxategi-formatuaren %s bertsioa ez da onartzen"
+
+#: gdk-pixbuf/io-gif.c:587
+msgid "Resulting GIF image has zero size"
+msgstr "Emaitzako GIF irudiaren tamaina zero da"
+
+#: gdk-pixbuf/io-gif.c:657
+msgid ""
+"GIF image has no global colormap, and a frame inside it has no local "
+"colormap."
+msgstr "GIF irudiak ez du kolore-mapa orokorrik, eta bere barruko markoak ez du kolore-mapa lokalik."
+
+#: gdk-pixbuf/io-gif.c:861 gdk-pixbuf/io-gif.c:986
+msgid "GIF file was missing some data (perhaps it was truncated somehow?)"
+msgstr "GIF fitxategian datu batzuk falta dira (agian nolabait trunkatuta zegoen?)"
+
+#: gdk-pixbuf/io-gif.c:920
+msgid "GIF image was truncated or incomplete."
+msgstr "GIF irudia trunkatuta edo osatu gabe zegoen."
+
+#: gdk-pixbuf/io-gif.c:927
+msgid "Not all frames of the GIF image were loaded."
+msgstr "Ez dira GIF irudiaren fotograma guztiak kargatu."
+
+#: gdk-pixbuf/io-icns.c:363
+#, c-format
+msgid "Error reading ICNS image: %s"
+msgstr "Errorea ICNS irudia irakurtzean: %s"
+
+#: gdk-pixbuf/io-icns.c:380 gdk-pixbuf/io-icns.c:461
+msgid "Could not decode ICNS file"
+msgstr "Ezin izan da ICNS fitxategia deskodetu"
+
+#: gdk-pixbuf/io-icns.c:517
+msgctxt "image format"
+msgid "MacOS X icon"
+msgstr "MacOS X-eko ikonoa"
+
+#: gdk-pixbuf/io-ico.c:238 gdk-pixbuf/io-ico.c:252 gdk-pixbuf/io-ico.c:342
+#: gdk-pixbuf/io-ico.c:426 gdk-pixbuf/io-ico.c:451
+#, c-format
+msgid "Invalid header in icon (%s)"
+msgstr "Goiburu baliogabea ikonoan (%s)"
+
+#: gdk-pixbuf/io-ico.c:268 gdk-pixbuf/io-ico.c:355 gdk-pixbuf/io-ico.c:461
+#: gdk-pixbuf/io-ico.c:504 gdk-pixbuf/io-ico.c:532
+msgid "Not enough memory to load icon"
+msgstr "Ez dago ikonoa kargatzeko adina memoria"
+
+#: gdk-pixbuf/io-ico.c:386
+msgid "Invalid header in icon"
+msgstr "Goiburu baliogabea ikonoan"
+
+#: gdk-pixbuf/io-ico.c:387
+msgid "Compressed icons are not supported"
+msgstr "Konprimitutako ikonoak ez dira onartzen"
+
+#: gdk-pixbuf/io-ico.c:489
+msgid "Unsupported icon type"
+msgstr "Onartzen ez den ikono-mota"
+
+#: gdk-pixbuf/io-ico.c:583
+msgid "Not enough memory to load ICO file"
+msgstr "Ez dago ICO fitxategia kargatzeko adina memoria"
+
+#: gdk-pixbuf/io-ico.c:629
+msgid "ICO image was truncated or incomplete."
+msgstr "ICO irudia trunkatuta edo osatu gabe zegoen."
+
+#: gdk-pixbuf/io-ico.c:1070
+msgid "Image too large to be saved as ICO"
+msgstr "Irudia handiegia da ICO gisa gordetzeko"
+
+#: gdk-pixbuf/io-ico.c:1081
+msgid "Cursor hotspot outside image"
+msgstr "Kurtsorearen puntu-beroa iruditik kanpo"
+
+#: gdk-pixbuf/io-ico.c:1104
+#, c-format
+msgid "Unsupported depth for ICO file: %d"
+msgstr "ICO fitxategiko kolore-sakonera ez da onartzen: %d"
+
+#: gdk-pixbuf/io-jpeg.c:129
+#, c-format
+msgid "Error interpreting JPEG image file (%s)"
+msgstr "Errorea JPEG irudi-fitxategia (%s) interpretatzen"
+
+#: gdk-pixbuf/io-jpeg.c:637
+msgid ""
+"Insufficient memory to load image, try exiting some applications to free "
+"memory"
+msgstr "Ez dago nahikoa memoria irudia kargatzeko, saiatu aplikazio batzuetatik irteten memoria libratzeko"
+
+#: gdk-pixbuf/io-jpeg.c:710 gdk-pixbuf/io-jpeg.c:947
+#, c-format
+msgid "Unsupported JPEG color space (%s)"
+msgstr "Onartzen ez den JPEGren kolore-area (%s)"
+
+#: gdk-pixbuf/io-jpeg.c:825 gdk-pixbuf/io-jpeg.c:1142 gdk-pixbuf/io-jpeg.c:1489
+#: gdk-pixbuf/io-jpeg.c:1499
+msgid "Couldn’t allocate memory for loading JPEG file"
+msgstr "Ezin izan da memoriarik esleitu JPEG fitxategia kargatzeko"
+
+#: gdk-pixbuf/io-jpeg.c:1100
+msgid "Transformed JPEG has zero width or height."
+msgstr "Bihurtutako JPEGren zabalera edo altuera zero da."
+
+#: gdk-pixbuf/io-jpeg.c:1126
+#, c-format
+msgid "Unsupported number of color components (%d)"
+msgstr "Onartzen ez den kolore-osagaien kopurua (%d)"
+
+#: gdk-pixbuf/io-jpeg.c:1419
+#, c-format
+msgid ""
+"JPEG x-dpi must be a value between 1 and 65535; value “%s” is not allowed."
+msgstr "JPEG 'x-dpi'-ren balioa 1 eta 65535 artean egon behar du; “%s“ balioa ez da onartzen."
+
+#: gdk-pixbuf/io-jpeg.c:1440
+#, c-format
+msgid ""
+"JPEG y-dpi must be a value between 1 and 65535; value “%s” is not allowed."
+msgstr "JPEG 'y-dpi'-ren balioa 1 eta 65535 artean egon behar du; “%s“ balioa ez da onartzen."
+
+#: gdk-pixbuf/io-jpeg.c:1454
+#, c-format
+msgid "Color profile has invalid length “%u”."
+msgstr "Kolore-profilak luzera baliogabea du: “%u“."
+
+#: gdk-pixbuf/io-png.c:63
+msgid "Bits per channel of PNG image is invalid."
+msgstr "PNG irudiaren kanal bakoitzeko bitak baliogabeak dira."
+
+#: gdk-pixbuf/io-png.c:144 gdk-pixbuf/io-png.c:703
+msgid "Transformed PNG has zero width or height."
+msgstr "Bihurtutako PNGren zabalera edo altuera zero da."
+
+#: gdk-pixbuf/io-png.c:152
+msgid "Bits per channel of transformed PNG is not 8."
+msgstr "Bihurtutako PNGren kanal bakoitzeko bitak ez dira 8."
+
+#: gdk-pixbuf/io-png.c:161
+msgid "Transformed PNG not RGB or RGBA."
+msgstr "Bihurtutako PNG ez da RGB edo RGBA."
+
+#: gdk-pixbuf/io-png.c:170
+msgid "Transformed PNG has unsupported number of channels, must be 3 or 4."
+msgstr "Bihurtutako PNGk duen kanal-kopurua ez da onartzen; 3 edo 4 izan behar ditu."
+
+#: gdk-pixbuf/io-png.c:191
+#, c-format
+msgid "Fatal error in PNG image file: %s"
+msgstr "Errore larria PNG irudi-fitxategian: %s"
+
+#: gdk-pixbuf/io-png.c:329
+msgid "Insufficient memory to load PNG file"
+msgstr "Ez dago PNG fitxategia kargatzeko adina memoria"
+
+#: gdk-pixbuf/io-png.c:498 gdk-pixbuf/io-png.c:519
+msgid "Couldn’t allocate memory for loading PNG"
+msgstr "Ezin izan da PNG fitxategia kargatzeko memoriarik esleitu"
+
+#: gdk-pixbuf/io-png.c:716
+#, c-format
+msgid ""
+"Insufficient memory to store a %lu by %lu image; try exiting some "
+"applications to reduce memory usage"
+msgstr "Ez dago %2$lu irudiak %1$lu bat gordetzeko adina memoria; saiatu aplikazio batzuetatik irteten memoria-erabilera murrizteko"
+
+#: gdk-pixbuf/io-png.c:791
+msgid "Fatal error reading PNG image file"
+msgstr "Errore larria PNG irudi-fitxategia irakurtzean"
+
+#: gdk-pixbuf/io-png.c:840
+#, c-format
+msgid "Fatal error reading PNG image file: %s"
+msgstr "Errore larria PNG irudi-fitxategia irakurtzean: %s"
+
+#: gdk-pixbuf/io-png.c:937
+#, c-format
+msgid ""
+"Invalid key “%s”. Keys for PNG text chunks must have at least 1 and at most "
+"79 characters."
+msgstr "“%s” gako baliogabea. PNG testu-puskek gutxienez karaktere bat eta gehienez 79 karaktere eduki behar dituzte."
+
+#: gdk-pixbuf/io-png.c:950
+#, c-format
+msgid "Invalid key “%s”. Keys for PNG text chunks must be ASCII characters."
+msgstr "“%s” gako baliogabea. PNG testu-puskek ASCII karaktereak izan behar dute.."
+
+#: gdk-pixbuf/io-png.c:980
+#, c-format
+msgid ""
+"Value for PNG text chunk '%s' cannot be converted to ISO-8859-1 encoding."
+msgstr "'%s' PNG testu-puskaren balioa ezin da bihurtu ISO-8859-1 kodeketara."
+
+#: gdk-pixbuf/io-png.c:992
+#, c-format
+msgid "Color profile has invalid length %d"
+msgstr "Kolore-profilak luzera baliogabea du: %d."
+
+#: gdk-pixbuf/io-png.c:1004
+#, c-format
+msgid ""
+"PNG compression level must be a value between 0 and 9; value “%s” is invalid"
+msgstr "PNG konpresioaren balioak 0 eta 9 artean egon behar du; “%s“ balioa baliogabea da."
+
+#: gdk-pixbuf/io-png.c:1018
+#, c-format
+msgid "PNG %s must be greater than zero; value “%s” is not allowed"
+msgstr "%s PNGak zero baino handiagoa izan behar du; “%s” balioa ez da onartzen"
+
+#: gdk-pixbuf/io-png.c:1246
+msgctxt "image format"
+msgid "PNG"
+msgstr "PNG"
+
+#: gdk-pixbuf/io-pnm.c:247
+msgid "PNM loader expected to find an integer, but didn’t"
+msgstr "PNM kargatzaileak osokoa aurkitzea espero zuen, baina ez du aurkitu"
+
+#: gdk-pixbuf/io-pnm.c:279
+msgid "PNM file has an incorrect initial byte"
+msgstr "PNM fitxategiak hasierako byte okerra du"
+
+#: gdk-pixbuf/io-pnm.c:309
+msgid "PNM file is not in a recognized PNM subformat"
+msgstr "PNM fitxategiak ez du PNM azpiformatu ezaguna"
+
+#: gdk-pixbuf/io-pnm.c:334
+msgid "PNM file has an invalid width"
+msgstr "PNM fitxategiak baliogabeko zabalera du"
+
+#: gdk-pixbuf/io-pnm.c:342
+msgid "PNM file has an image width of 0"
+msgstr "PNM fitxategiaren irudi-zabalera 0 da"
+
+#: gdk-pixbuf/io-pnm.c:363
+msgid "PNM file has an invalid height"
+msgstr "PNM fitxategiak baliogabeko altuera du"
+
+#: gdk-pixbuf/io-pnm.c:371
+msgid "PNM file has an image height of 0"
+msgstr "PNM fitxategiaren irudi-altuera 0 da"
+
+#: gdk-pixbuf/io-pnm.c:394
+msgid "Maximum color value in PNM file is 0"
+msgstr "PNM fitxategian kolorearen gehienezko balioa 0 da"
+
+#: gdk-pixbuf/io-pnm.c:402
+msgid "Maximum color value in PNM file is too large"
+msgstr "PNM fitxategiko kolorearen gehienezko balioa handiegia da"
+
+#: gdk-pixbuf/io-pnm.c:442 gdk-pixbuf/io-pnm.c:472 gdk-pixbuf/io-pnm.c:517
+msgid "Raw PNM image type is invalid"
+msgstr "PNM irudi-mota gordina baliogabea da"
+
+#: gdk-pixbuf/io-pnm.c:667
+msgid "PNM image loader does not support this PNM subformat"
+msgstr "PNM irudi kargatzaileak ez du PNM azpiformatu hau onartzen"
+
+#: gdk-pixbuf/io-pnm.c:754 gdk-pixbuf/io-pnm.c:991
+msgid "Raw PNM formats require exactly one whitespace before sample data"
+msgstr "PNM formatu gordinek zuriune bat behar dute lagin-informazioaren aurretik"
+
+#: gdk-pixbuf/io-pnm.c:781
+msgid "Cannot allocate memory for loading PNM image"
+msgstr "Ezin da PNM irudia kargatzeko memoriarik esleitu"
+
+#: gdk-pixbuf/io-pnm.c:835
+msgid "Insufficient memory to load PNM context struct"
+msgstr "Ez dago PNM testuinguru-egitura kargatzeko adina memoria"
+
+#: gdk-pixbuf/io-pnm.c:892
+msgid "Unexpected end of PNM image data"
+msgstr "PNM irudi-datuen ustekabeko amaiera"
+
+#: gdk-pixbuf/io-pnm.c:1020
+msgid "Insufficient memory to load PNM file"
+msgstr "Ez dago PNM fitxategia kargatzeko behar adina memoria"
+
+#: gdk-pixbuf/io-pnm.c:1103
+msgctxt "image format"
+msgid "PNM/PBM/PGM/PPM"
+msgstr "PNM/PBM/PGM/PPM"
+
+#: gdk-pixbuf/io-qtif.c:126
+msgid "Input file descriptor is NULL."
+msgstr "Sarrerako fitxategiaren deskriptorea NULL da."
+
+#: gdk-pixbuf/io-qtif.c:141
+msgid "Failed to read QTIF header"
+msgstr "Huts egin du QTIF goiburukoa irakurtzean"
+
+#: gdk-pixbuf/io-qtif.c:150 gdk-pixbuf/io-qtif.c:187 gdk-pixbuf/io-qtif.c:449
+#, c-format
+msgid "QTIF atom size too large (%d byte)"
+msgid_plural "QTIF atom size too large (%d bytes)"
+msgstr[0] "QTIF elementuaren tamaina handiegia da (%d byte)"
+msgstr[1] "QTIF elementuaren tamaina handiegia da (%d byte)"
+
+#: gdk-pixbuf/io-qtif.c:173
+#, c-format
+msgid "Failed to allocate %d byte for file read buffer"
+msgid_plural "Failed to allocate %d bytes for file read buffer"
+msgstr[0] "Huts egin du %d byte esleitzean fitxategia irakurtzeko bufferrarentzako"
+msgstr[1] "Huts egin du %d byte esleitzean fitxategia irakurtzeko bufferrarentzako"
+
+#: gdk-pixbuf/io-qtif.c:201
+#, c-format
+msgid "File error when reading QTIF atom: %s"
+msgstr "Fitxategiaren errorea QTIF elementua irakurtzean: %s"
+
+#: gdk-pixbuf/io-qtif.c:238
+#, c-format
+msgid "Failed to skip the next %d byte with seek()."
+msgid_plural "Failed to skip the next %d bytes with seek()."
+msgstr[0] "Huts egin du hurrengo %d byte saltatzean seek() funtzioarekin."
+msgstr[1] "Huts egin du hurrengo %d byte saltatzean seek() funtzioarekin."
+
+#: gdk-pixbuf/io-qtif.c:269
+msgid "Failed to allocate QTIF context structure."
+msgstr "Huts egin du QTIFen testuinguru-egitura esleitzean."
+
+#: gdk-pixbuf/io-qtif.c:329
+msgid "Failed to create GdkPixbufLoader object."
+msgstr "Huts egin du GdkPixbufLoader objektua sortzean."
+
+#: gdk-pixbuf/io-qtif.c:424
+msgid "Failed to find an image data atom."
+msgstr "Huts egin du irudiaren datuen elementu bat bilatzean."
+
+#: gdk-pixbuf/io-qtif.c:599
+msgctxt "image format"
+msgid "QuickTime"
+msgstr "QuickTime"
+
+#: gdk-pixbuf/io-tga.c:346
+msgid "Cannot allocate colormap"
+msgstr "Ezin da kolore-mapa esleitu"
+
+#: gdk-pixbuf/io-tga.c:371
+msgid "Cannot allocate new pixbuf"
+msgstr "Ezin da pixbuf berria esleitu"
+
+#: gdk-pixbuf/io-tga.c:519
+msgid "Unexpected bitdepth for colormap entries"
+msgstr "Kolore-maparen sarreren ustekabeko bit-sakonera"
+
+#: gdk-pixbuf/io-tga.c:535
+msgid "Pseudocolor image does not contain a colormap"
+msgstr "Irudiaren sasikoloreak ez dauka kolore-maparik"
+
+#: gdk-pixbuf/io-tga.c:578
+msgid "Cannot allocate TGA header memory"
+msgstr "Ezin da TGAren goiburu-memoriarik esleitu"
+
+#: gdk-pixbuf/io-tga.c:609
+msgid "TGA image has invalid dimensions"
+msgstr "TGA irudiak tamaina baliogabeak ditu"
+
+#: gdk-pixbuf/io-tga.c:615 gdk-pixbuf/io-tga.c:622
+msgid "TGA image type not supported"
+msgstr "TGA irudi-mota ez da onartzen"
+
+#: gdk-pixbuf/io-tga.c:650
+msgid "Cannot allocate memory for TGA context struct"
+msgstr "Ezin da TGAren testuinguru-egiturarako memoriarik esleitu"
+
+#: gdk-pixbuf/io-tga.c:712
+msgid "TGA image was truncated or incomplete."
+msgstr "TGA irudia trunkatuta edo osatu gabe zegoen."
+
+#: gdk-pixbuf/io-tga.c:764
+msgctxt "image format"
+msgid "Targa"
+msgstr "Targa"
+
+#: gdk-pixbuf/io-tiff.c:116
+msgid "Could not get image width (bad TIFF file)"
+msgstr "Ezin izan da irudiaren zabalera lortu (TIFF fitxategi hondatua)"
+
+#: gdk-pixbuf/io-tiff.c:124
+msgid "Could not get image height (bad TIFF file)"
+msgstr "Ezin izan da irudiaren altuera lortu (TIFF fitxategi hondatua)"
+
+#: gdk-pixbuf/io-tiff.c:132
+msgid "Width or height of TIFF image is zero"
+msgstr "TIFF irudiaren zabalera edo altuera zero da"
+
+#: gdk-pixbuf/io-tiff.c:140 gdk-pixbuf/io-tiff.c:150
+msgid "Dimensions of TIFF image too large"
+msgstr "TIFF irudiaren neurriak handiegiak dira"
+
+#: gdk-pixbuf/io-tiff.c:176 gdk-pixbuf/io-tiff.c:188 gdk-pixbuf/io-tiff.c:584
+msgid "Insufficient memory to open TIFF file"
+msgstr "Ez dago TIFF fitxategia irekitzeko behar adina memoria"
+
+#: gdk-pixbuf/io-tiff.c:286
+msgid "Failed to load RGB data from TIFF file"
+msgstr "Ezin izan dira RGB datuak kargatu TIFF fitxategitik"
+
+#: gdk-pixbuf/io-tiff.c:377
+msgid "Failed to open TIFF image"
+msgstr "Ezin izan da TIFF irudia ireki"
+
+#: gdk-pixbuf/io-tiff.c:515 gdk-pixbuf/io-tiff.c:527
+msgid "Failed to load TIFF image"
+msgstr "Ezin izan da TIFF irudia kargatu"
+
+#: gdk-pixbuf/io-tiff.c:759
+msgid "Failed to save TIFF image"
+msgstr "Ezin izan da TIFF irudia gorde"
+
+#: gdk-pixbuf/io-tiff.c:820
+msgid "TIFF compression doesn’t refer to a valid codec."
+msgstr "TIFF konpresioak ez du baliozko koderik adierazten."
+
+#: gdk-pixbuf/io-tiff.c:850
+#, c-format
+msgid "Color profile has invalid length %d."
+msgstr "Kolore-profilak luzera baliogabea du: %d."
+
+#: gdk-pixbuf/io-tiff.c:865
+msgid "TIFF bits-per-sample doesn’t contain a supported value."
+msgstr "TIFF 'bits-per-sample' (bit lagineko) ez dauka onartutako baliorik."
+
+#: gdk-pixbuf/io-tiff.c:946
+msgid "Failed to write TIFF data"
+msgstr "Ezin izan da TIFF irudia idatzi"
+
+#: gdk-pixbuf/io-tiff.c:964
+#, c-format
+msgid "TIFF x-dpi must be greater than zero; value “%s” is not allowed."
+msgstr "TIFF 'x-dpi'-ren balioa zero baino handiagoa izan behar du; “%s“ balioa ez da onartzen."
+
+#: gdk-pixbuf/io-tiff.c:976
+#, c-format
+msgid "TIFF y-dpi must be greater than zero; value “%s” is not allowed."
+msgstr "TIFF 'y-dpi'-ren balioa zero baino handiagoa izan behar du; “%s“ balioa ez da onartzen."
+
+#: gdk-pixbuf/io-tiff.c:1017
+msgid "Couldn’t write to TIFF file"
+msgstr "Ezin izan da TIFF fitxategian idatzi"
+
+#: gdk-pixbuf/io-xbm.c:320
+msgid "Invalid XBM file"
+msgstr "XBM fitxategi baliogabea"
+
+#: gdk-pixbuf/io-xbm.c:331
+msgid "Insufficient memory to load XBM image file"
+msgstr "Ez dago XBM irudi-fitxategia kargatzeko behar adina memoria"
+
+#: gdk-pixbuf/io-xbm.c:482
+msgid "Failed to write to temporary file when loading XBM image"
+msgstr "Ezin izan da aldi baterako fitxategian idatzi XBM irudia kargatzean"
+
+#: gdk-pixbuf/io-xbm.c:521
+msgctxt "image format"
+msgid "XBM"
+msgstr "XBM"
+
+#: gdk-pixbuf/io-xpm.c:472
+msgid "No XPM header found"
+msgstr "Ez da XPM goibururik aurkitu"
+
+#: gdk-pixbuf/io-xpm.c:481 gdk-pixbuf/io-xpm.c:507
+msgid "Invalid XPM header"
+msgstr "XPM goiburu baliogabea"
+
+#: gdk-pixbuf/io-xpm.c:489
+msgid "XPM file has image width <= 0"
+msgstr "XPM fitxategiaren irudi-zabalera <= 0 da"
+
+#: gdk-pixbuf/io-xpm.c:497
+msgid "XPM file has image height <= 0"
+msgstr "XPM fitxategiaren irudi-altuera <= 0 da"
+
+#: gdk-pixbuf/io-xpm.c:514
+msgid "XPM has invalid number of chars per pixel"
+msgstr "XPMk pixel bakoitzeko karaktere-kopuru baliogabea du"
+
+#: gdk-pixbuf/io-xpm.c:523
+msgid "XPM file has invalid number of colors"
+msgstr "XPM fitxategiak kolore-kopuru baliogabea du"
+
+#: gdk-pixbuf/io-xpm.c:535 gdk-pixbuf/io-xpm.c:544 gdk-pixbuf/io-xpm.c:593
+msgid "Cannot allocate memory for loading XPM image"
+msgstr "Ezin da XPM irudia kargatzeko memoriarik esleitu"
+
+#: gdk-pixbuf/io-xpm.c:558
+msgid "Cannot read XPM colormap"
+msgstr "Ezin da XPMren kolore-mapa irakurri"
+
+#: gdk-pixbuf/io-xpm.c:610
+msgid "Dimensions do not match data"
+msgstr "Dimentsioak ez datoz bat datuekin"
+
+#: gdk-pixbuf/io-xpm.c:806
+msgid "Failed to write to temporary file when loading XPM image"
+msgstr "Ezin izan da aldi baterako fitxategian idatzi XPM irudia kargatzean"
+
+#: gdk-pixbuf/io-xpm.c:845
+msgctxt "image format"
+msgid "XPM"
+msgstr "XPM"
+
+#~ msgid "Internal error in the GIF loader (%s)"
+#~ msgstr "Barne-errorea GIF kargatzailean (%s)"
+
+#~ msgid "Bad code encountered"
+#~ msgstr "Kode okerra aurkitu da"
+
+#~ msgid "Stack overflow"
+#~ msgstr "Pila-gainezkatzea"
+
+#~ msgid "GIF image loader cannot understand this image."
+#~ msgstr "GIF irudi kargatzaileak ezin du irudi hau ulertu."
+
+#~ msgid "Circular table entry in GIF file"
+#~ msgstr "Taula-sarrera zirkularra GIF fitxategian"
+
+#~ msgid "Not enough memory to composite a frame in GIF file"
+#~ msgstr "Ez dago GIF fitxategian markoa konposatzeko adina memoria"
+
+#~ msgid "Couldn’t allocate memory for stream"
+#~ msgstr "Ezin izan da korronterako memoriarik esleitu"
+
+#~ msgid "Couldn’t decode image"
+#~ msgstr "Ezin izan da irudia deskodetu"
+
+#~ msgid "Transformed JPEG2000 has zero width or height"
+#~ msgstr "Bihurtutako JPEG2000ren zabalera edo altuera zero da."
+
+#~ msgid "Image type currently not supported"
+#~ msgstr "Irudi mota ez da onartzen"
+
+#~ msgid "Couldn’t allocate memory for color profile"
+#~ msgstr "Ezin izan da kolore-profilarentzako memoriarik esleitu"
+
+#~ msgid "Insufficient memory to open JPEG 2000 file"
+#~ msgstr "Ez dago JPEG 2000 fitxategia irekitzeko behar adina memoria"
+
+#~ msgid "Couldn’t allocate memory to buffer image data"
+#~ msgstr "Ezin izan da irudiaren datuen bufferrerako memoriarik esleitu"
+
+#~ msgctxt "image format"
+#~ msgid "JPEG 2000"
+#~ msgstr "JPEG 2000"
+
+#~ msgid ""
+#~ "PNG compression level must be a value between 0 and 9; value “%s” could "
+#~ "not be parsed."
+#~ msgstr ""
+#~ "PNG konpresioaren balioak 0 eta 9 artean egon behar du; “%s“ balioa ezin "
+#~ "izan da analizatu."
+
+#~ msgid "PNG y-dpi must be greater than zero; value “%s” is not allowed."
+#~ msgstr ""
+#~ "PNG 'y-dpi'-ren balioa zero baino handiagoa izan behar du; “%s“ balioa ez "
+#~ "da onartzen."
+
+#~ msgid "Transformed pixbuf has zero width or height."
+#~ msgstr "Bihurtutako pixbuf-en zabalera edo altuera zero da."
+
+#~ msgctxt "image format"
+#~ msgid "GdkPixdata"
+#~ msgstr "GdkPixdata"
+
+#~ msgid "Cannot allocate memory for IOBuffer struct"
+#~ msgstr "Ezin zaio IOBuffer-en egiturari memoriarik esleitu"
+
+#~ msgid "Cannot allocate memory for IOBuffer data"
+#~ msgstr "Ezin zaie IOBuffer-en datuei memoriarik esleitu"
+
+#~ msgid "Cannot realloc IOBuffer data"
+#~ msgstr "Ezin dira IOBuffer-en datuak berriro esleitu"
+
+#~ msgid "Cannot allocate temporary IOBuffer data"
+#~ msgstr "Ezin dira IOBuffer-en aldi baterako datuak esleitu"
+
+#~ msgid "Excess data in file"
+#~ msgstr "Fitxategian datu gehiegi daude"
+
+#~ msgid "Couldn't allocate memory for header"
+#~ msgstr "Ezin da goibururako memoriarik esleitu"
+
+#~ msgid "Couldn't allocate memory for context buffer"
+#~ msgstr "Ezin da testuinguru-bufferrerako memoriarik esleitu"
+
+#~ msgid "Image has invalid width and/or height"
+#~ msgstr "Irudiak altuera edota zabalera baliogabea du"
+
+#~ msgid "Image has unsupported bpp"
+#~ msgstr "Irudiak onartzen ez den bpp du"
+
+#~ msgid "Image has unsupported number of %d-bit planes"
+#~ msgstr "Irudiak onartu gabeko %d bit plano kopurua du"
+
+#~ msgid "Couldn't create new pixbuf"
+#~ msgstr "Ezin da pixbuf berria sortu"
+
+#~ msgid "Couldn't allocate memory for line data"
+#~ msgstr "Ezin da lerroko datuentzako memoriarik esleitu"
+
+#~ msgid "Couldn't allocate memory for PCX image"
+#~ msgstr "Ezin da PCX irudiarentzako memoriarik esleitu"
+
+#~ msgid "Didn't get all lines of PCX image"
+#~ msgstr "Ez dira PCX irudiko marra guztiak lortu"
+
+#~ msgid "No palette found at end of PCX data"
+#~ msgstr "PCX datuen amaieran ez da paletarik aurkitu"
+
+#~ msgctxt "image format"
+#~ msgid "PCX"
+#~ msgstr "PCX"
+
+#~ msgid "RAS image has bogus header data"
+#~ msgstr "RAS irudiak goiburu-datu akastunak ditu"
+
+#~ msgid "RAS image has unknown type"
+#~ msgstr "RAS irudiak mota ezezaguna du"
+
+#~ msgid "unsupported RAS image variation"
+#~ msgstr "onartzen ez den RAS irudi-aldaera"
+
+#~ msgid "Not enough memory to load RAS image"
+#~ msgstr "Ez dago RAS irudia kargatzeko behar adina memoria"
+
+#~ msgctxt "image format"
+#~ msgid "Sun raster"
+#~ msgstr "Sun raster"
+
+#~ msgid "Image is corrupted or truncated"
+#~ msgstr "Irudia trunkatuta edo hondatuta dago"
+
+#~ msgid "Cannot allocate colormap structure"
+#~ msgstr "Ezin da kolore-maparen egitura esleitu"
+
+#~ msgid "Image has zero width"
+#~ msgstr "Irudiaren zabalera zero da"
+
+#~ msgid "Image has zero height"
+#~ msgstr "Irudiaren altuera zero da"
+
+#~ msgid "Not enough memory to load image"
+#~ msgstr "Ez dago irudia kargatzeko behar adina memoria"
+
+#~ msgid "Couldn't save the rest"
+#~ msgstr "Ezin izan da gainerakoa gorde"
+
+#~ msgctxt "image format"
+#~ msgid "WBMP"
+#~ msgstr "WBMP"
+
+#~ msgid "The ANI image format"
+#~ msgstr "ANI irudi-formatua"
+
+#~ msgid "The BMP image format"
+#~ msgstr "BMP irudi-formatua"
+
+#~ msgid "The EMF image format"
+#~ msgstr "EMF irudi-formatua"
+
+#~ msgid "The GIF image format"
+#~ msgstr "GIF irudi-formatua"
+
+#~ msgid "The ICO image format"
+#~ msgstr "ICO irudi-formatua"
+
+#~ msgid "The JPEG image format"
+#~ msgstr "JPEG irudi-formatua"
+
+#~ msgid "The TIFF image format"
+#~ msgstr "TIFF irudi-formatua"
+
+#~ msgid "The WMF image format"
+#~ msgstr "WMF irudi-formatua"
+
+#~ msgid "The ICNS image format"
+#~ msgstr "ICNS irudi-formatua"
+
+#~ msgid "Icon has zero width"
+#~ msgstr "Ikonoaren zabalera zero da"
+
+#~ msgid "Icon has zero height"
+#~ msgstr "Ikonoaren altuera zero da"
+
+#~ msgid "The JPEG 2000 image format"
+#~ msgstr "JPEG 2000 irudi-formatua"
+
+#~ msgid "The PCX image format"
+#~ msgstr "PCX irudi-formatua"
+
+#~ msgid "The PNG image format"
+#~ msgstr "PNG irudi-formatua"
+
+#~ msgid "The PNM/PBM/PGM/PPM image format family"
+#~ msgstr "PNM/PBM/PGM/PPM irudi-formatuen familia"
+
+#~ msgid "The QTIF image format"
+#~ msgstr "QTIF irudi-formatua"
+
+#~ msgid "The Sun raster image format"
+#~ msgstr "Sun bilbe-irudiaren formatua"
+
+#~ msgid "The Targa image format"
+#~ msgstr "Targa irudi-formatua"
+
+#~ msgid "The WBMP image format"
+#~ msgstr "WBMP irudi-formatua"
+
+#~ msgid "The XBM image format"
+#~ msgstr "XBM irudi-formatua"
+
+#~ msgid "The XPM image format"
+#~ msgstr "XPM irudi-formatua"
+
+#~ msgid "Unsupported animation type"
+#~ msgstr "Onartzen ez den animazio-mota"
+
+#~ msgid "TIFFClose operation failed"
+#~ msgstr "TIFFClose eragiketak huts egin du"

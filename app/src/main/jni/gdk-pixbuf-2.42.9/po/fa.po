@@ -1,0 +1,1137 @@
+# Persian translation of gtk+.
+# Copyright (C) 2000, 2002, 2003, 2004, 2005 Sharif FarsiWeb, Inc.
+# Roozbeh Pournader <roozbeh@farsiweb.info>, 2000, 2002, 2003, 2004, 2005.
+# Meelad Zakaria <meelad@bamdad.org>, 2005.
+# Danial Behzadi <dani.behzi@ubuntu.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gtk+ 2.6\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gdk-pixbuf/issues\n"
+"POT-Creation-Date: 2022-07-11 14:00+0000\n"
+"PO-Revision-Date: 2022-07-12 14:53+0430\n"
+"Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
+"Language-Team: Persian <farsi@lists.sharif.edu>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.1\n"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:185 gdk-pixbuf/gdk-pixbuf-io.c:1130
+#: gdk-pixbuf/gdk-pixbuf-io.c:1403
+#, c-format
+msgid "Failed to open file “%s”: %s"
+msgstr "شکست در گشودن پروندهٔ «%s»: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:198 gdk-pixbuf/gdk-pixbuf-io.c:991
+#, c-format
+msgid "Image file “%s” contains no data"
+msgstr "پروندهٔ تصویری «%s» شامل هیچ داده‌ای نیست"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:236
+#, c-format
+msgid ""
+"Failed to load animation “%s”: reason not known, probably a corrupt animation "
+"file"
+msgstr ""
+"شکست در بار کردن پویانمایی «%s»: دلیل نامعلوم، احتمالاً پروندهٔ پویانمایی خراب"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:304 gdk-pixbuf/gdk-pixbuf-io.c:1166
+#: gdk-pixbuf/gdk-pixbuf-io.c:1455
+#, c-format
+msgid "Failed to load image “%s”: reason not known, probably a corrupt image file"
+msgstr "شکست در بار کردن تصویر «%s»: دلیل نامعلوم، احتمالاً پروندهٔ تصویری خراب"
+
+#: gdk-pixbuf/gdk-pixbuf.c:248
+msgid "Number of Channels"
+msgstr "تعداد کانال‌ها"
+
+#: gdk-pixbuf/gdk-pixbuf.c:249
+msgid "The number of samples per pixel"
+msgstr "تعداد نمونه‌ها بر پیکسل"
+
+#: gdk-pixbuf/gdk-pixbuf.c:264
+msgid "Colorspace"
+msgstr "فضای رنگی"
+
+#: gdk-pixbuf/gdk-pixbuf.c:265
+msgid "The colorspace in which the samples are interpreted"
+msgstr "فضای رنگی‌ای که نمونه‌ها در آن تفسیر می‌شوند"
+
+#: gdk-pixbuf/gdk-pixbuf.c:277
+msgid "Has Alpha"
+msgstr "آلفا دارد"
+
+#: gdk-pixbuf/gdk-pixbuf.c:278
+msgid "Whether the pixbuf has an alpha channel"
+msgstr "این که pixbuf کانال آلفا دارد یا نه"
+
+#: gdk-pixbuf/gdk-pixbuf.c:291
+msgid "Bits per Sample"
+msgstr "بیت در نمونه"
+
+#: gdk-pixbuf/gdk-pixbuf.c:292
+msgid "The number of bits per sample"
+msgstr "تعداد بیت‌ها در نمونه"
+
+#: gdk-pixbuf/gdk-pixbuf.c:305
+msgid "Width"
+msgstr "پهنا"
+
+#: gdk-pixbuf/gdk-pixbuf.c:306
+msgid "The number of columns of the pixbuf"
+msgstr "تعداد ستون‌های pixbuf"
+
+#: gdk-pixbuf/gdk-pixbuf.c:319
+msgid "Height"
+msgstr "بلندا"
+
+#: gdk-pixbuf/gdk-pixbuf.c:320
+msgid "The number of rows of the pixbuf"
+msgstr "تعداد ردیف‌های pixbuf"
+
+#: gdk-pixbuf/gdk-pixbuf.c:337
+msgid "Rowstride"
+msgstr "گام ردیف"
+
+#: gdk-pixbuf/gdk-pixbuf.c:338
+msgid ""
+"The number of bytes between the start of a row and the start of the next row"
+msgstr "تعداد بایت‌ها بین شروع یک ردیف و شروع ردیف بعدی"
+
+#: gdk-pixbuf/gdk-pixbuf.c:351
+msgid "Pixels"
+msgstr "پیکسل"
+
+#: gdk-pixbuf/gdk-pixbuf.c:352
+msgid "A pointer to the pixel data of the pixbuf"
+msgstr "اشاره‌گری به داده‌های پیکسلی pixbuf"
+
+#: gdk-pixbuf/gdk-pixbuf.c:366
+msgid "Pixel Bytes"
+msgstr "بایت پیکسلی"
+
+#: gdk-pixbuf/gdk-pixbuf.c:367
+msgid "Readonly pixel data"
+msgstr "داده‌های پیکسلی فقط خواندنی"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:808
+#, c-format
+msgid "Unable to load image-loading module: %s: %s"
+msgstr "نمی‌توان پیمانهٔ تصویربارکن را بار کرد: %s: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:825
+#, c-format
+msgid ""
+"Image-loading module %s does not export the proper interface; perhaps it’s from "
+"a different gdk-pixbuf version?"
+msgstr ""
+"پیمانهٔ بار کردن تصویر %s رابط مناسب را صادر نمی‌کند؛ شاید از نگارش دیگری از gdk-"
+"pixbuf است؟"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:835 gdk-pixbuf/gdk-pixbuf-io.c:878
+#, c-format
+msgid "Image type “%s” is not supported"
+msgstr "گونهٔ تصویری «%s» پشتیبانی نمی‌شود"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:963
+#, c-format
+msgid "Couldn’t recognize the image file format for file “%s”"
+msgstr "نتوانست قالب پروندهٔ تصویری را برای پروندهٔ «%s» تشخیص دهد"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:971
+msgid "Unrecognized image file format"
+msgstr "قالب پروندهٔ تصویری ناشناخته"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:1177
+#, c-format
+msgid "Failed to load image “%s”: %s"
+msgstr "شکست در بار کردن تصویر «%s»: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2245 gdk-pixbuf/io-gdip-utils.c:840
+#, c-format
+msgid "Error writing to image file: %s"
+msgstr "خطا در نوشتن در پروندهٔ تصویر: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2287 gdk-pixbuf/gdk-pixbuf-io.c:2408
+#, c-format
+msgid "This build of gdk-pixbuf does not support saving the image format: %s"
+msgstr "این ساخت gdk-pixbuf از ذخیرهٔ این قالب تصویری پشتیبانی نمی‌کند: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2318
+msgid "Insufficient memory to save image to callback"
+msgstr "حافظهٔ ناکافی برای ذخیرهٔ تصویر به پاسخ"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2331
+msgid "Failed to open temporary file"
+msgstr "گشودن پروندهٔ موقت شکست خورد"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2354
+msgid "Failed to read from temporary file"
+msgstr "خواندن از پروندهٔ موقت شکست خورد"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2576
+#, c-format
+msgid "Failed to open “%s” for writing: %s"
+msgstr "شکست در گشودن پروندهٔ «%s» برای نوشتن: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2602
+#, c-format
+msgid ""
+"Failed to close “%s” while writing image, all data may not have been saved: %s"
+msgstr ""
+"شکست در بستن «%s» هنگام نوشتن تصویر. ممکن است تمامی داده‌ها ذخیره نشده باشند: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2836 gdk-pixbuf/gdk-pixbuf-io.c:2891
+msgid "Insufficient memory to save image into a buffer"
+msgstr "حافظه برای ذخیره کردن تصویر در میان‌گیر کافی نیست"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2937
+msgid "Error writing to image stream"
+msgstr "خطا در نوشتن روی جریان تصویر"
+
+#: gdk-pixbuf/gdk-pixbuf-loader.c:416
+#, c-format
+msgid ""
+"Internal error: Image loader module “%s” failed to complete an operation, but "
+"didn’t give a reason for the failure"
+msgstr ""
+"خطای داخلی: پیمانهٔ بارکنندهٔ تصویر «%s» در تکیمل یک عملیات شکست خورد، ولی دلیلی "
+"برای شکست اعلام نکرد"
+
+#: gdk-pixbuf/gdk-pixbuf-loader.c:458
+#, c-format
+msgid "Incremental loading of image type “%s” is not supported"
+msgstr "بار کردن افزایشی گونهٔ تصویری «%s» پشتیبانی نمی‌شود"
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:162
+msgid "Loop"
+msgstr "حلقه"
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:163
+msgid "Whether the animation should loop when it reaches the end"
+msgstr "این که پونمایی باید هنگام رسیدن به پایان حلقه بزند یا نه"
+
+#: gdk-pixbuf/gdk-pixdata.c:178
+msgid "Image header corrupt"
+msgstr "سرصفحهٔ تصویر خراب است"
+
+#: gdk-pixbuf/gdk-pixdata.c:183
+msgid "Image format unknown"
+msgstr "قالب تصویر نامعلوم است"
+
+#: gdk-pixbuf/gdk-pixdata.c:188 gdk-pixbuf/gdk-pixdata.c:491
+#: gdk-pixbuf/gdk-pixdata.c:501 gdk-pixbuf/gdk-pixdata.c:597
+msgid "Image pixel data corrupt"
+msgstr "داده‌های نقطه‌ای تصویر خراب است"
+
+#: gdk-pixbuf/gdk-pixdata.c:513
+#, c-format
+msgid "failed to allocate image buffer of %u byte"
+msgid_plural "failed to allocate image buffer of %u bytes"
+msgstr[0] "شکست در تخصیص میانگیر تصویر %Iu بایتی"
+
+#: gdk-pixbuf/io-ani.c:239
+msgid "Unexpected icon chunk in animation"
+msgstr "تکه ‌نقشک غیرمنتظره در پویانمایی"
+
+#: gdk-pixbuf/io-ani.c:337 gdk-pixbuf/io-ani.c:395 gdk-pixbuf/io-ani.c:421
+#: gdk-pixbuf/io-ani.c:444 gdk-pixbuf/io-ani.c:471 gdk-pixbuf/io-ani.c:558
+msgid "Invalid header in animation"
+msgstr "سرصفحهٔ نامعتبر در پویانمایی"
+
+#: gdk-pixbuf/io-ani.c:347 gdk-pixbuf/io-ani.c:369 gdk-pixbuf/io-ani.c:453
+#: gdk-pixbuf/io-ani.c:480 gdk-pixbuf/io-ani.c:531 gdk-pixbuf/io-ani.c:607
+msgid "Not enough memory to load animation"
+msgstr "حافظه برای بار کردن پویانمایی کافی نیست"
+
+#: gdk-pixbuf/io-ani.c:387 gdk-pixbuf/io-ani.c:413 gdk-pixbuf/io-ani.c:432
+msgid "Malformed chunk in animation"
+msgstr "تکهٔ معیوب در پویانمایی"
+
+#: gdk-pixbuf/io-ani.c:629
+msgid "ANI image was truncated or incomplete."
+msgstr "تصویر ANI قطع شده یا ناقص است."
+
+#: gdk-pixbuf/io-ani.c:670
+msgctxt "image format"
+msgid "Windows animated cursor"
+msgstr "مکان‌نمای پویا پنجره"
+
+#: gdk-pixbuf/io-bmp.c:231 gdk-pixbuf/io-bmp.c:269 gdk-pixbuf/io-bmp.c:376
+#: gdk-pixbuf/io-bmp.c:403 gdk-pixbuf/io-bmp.c:428 gdk-pixbuf/io-bmp.c:463
+#: gdk-pixbuf/io-bmp.c:485 gdk-pixbuf/io-bmp.c:563
+msgid "BMP image has bogus header data"
+msgstr "داده‌های سرصفحهٔ تصویر BMP جعلی است"
+
+#: gdk-pixbuf/io-bmp.c:242 gdk-pixbuf/io-bmp.c:498
+msgid "Not enough memory to load bitmap image"
+msgstr "حافظه برای بار کردن تصویر نقشه‌بیتی کافی نیست"
+
+#: gdk-pixbuf/io-bmp.c:333
+msgid "BMP image has unsupported header size"
+msgstr "اندازهٔ سرصفحهٔ تصویر BMP پشتیبانی نمی‌شود"
+
+#: gdk-pixbuf/io-bmp.c:343
+msgid "BMP image has unsupported depth"
+msgstr "تصویر BMP عمق پشتیبانی نشده‌ای دارد"
+
+#: gdk-pixbuf/io-bmp.c:358
+msgid "BMP image has oversize palette"
+msgstr "تصویر BMP تختهٔ بیش از اندازه‌ای دارد"
+
+#: gdk-pixbuf/io-bmp.c:390
+msgid "Topdown BMP images cannot be compressed"
+msgstr "تصاویر BMP ازبالا‌به‌پایین نمی‌توانند فشرده باشند"
+
+#: gdk-pixbuf/io-bmp.c:415
+msgid "BMP image width too large"
+msgstr "پهنای بیش از حد زیاد تصویر BMP"
+
+#: gdk-pixbuf/io-bmp.c:792 gdk-pixbuf/io-png.c:564 gdk-pixbuf/io-pnm.c:722
+#: gdk-pixbuf/io-pnm.c:879
+msgid "Premature end-of-file encountered"
+msgstr "پیش از موقع به پایان پرونده برخورد شد"
+
+#: gdk-pixbuf/io-bmp.c:1313
+msgid "Error while decoding colormap"
+msgstr "خطا هنگام رمزگشایی نقشهٔ رنگی"
+
+#: gdk-pixbuf/io-bmp.c:1376 gdk-pixbuf/io-bmp.c:1388
+msgid "Image is too wide for BMP format."
+msgstr "تصویر برای قالب BMP بیش از حد پهن است."
+
+#: gdk-pixbuf/io-bmp.c:1421
+msgid "Couldn’t allocate memory for saving BMP file"
+msgstr "نمی‌توان برای ذخیره کردن پروندهٔ JPEG حافظه تخصیص داد"
+
+#: gdk-pixbuf/io-bmp.c:1462
+msgid "Couldn’t write to BMP file"
+msgstr "نمی‌توان روی پروندهٔ BMP نوشت"
+
+#: gdk-pixbuf/io-bmp.c:1515 gdk-pixbuf/io-gdip-bmp.c:83
+msgctxt "image format"
+msgid "BMP"
+msgstr "BMP"
+
+#: gdk-pixbuf/io-gdip-emf.c:61
+msgctxt "image format"
+msgid "EMF"
+msgstr "EMF"
+
+#: gdk-pixbuf/io-gdip-gif.c:81 gdk-pixbuf/io-gif.c:1037
+msgctxt "image format"
+msgid "GIF"
+msgstr "GIF"
+
+#: gdk-pixbuf/io-gdip-ico.c:60 gdk-pixbuf/io-ico.c:1412
+msgctxt "image format"
+msgid "Windows icon"
+msgstr "نقشک ویندوز"
+
+#: gdk-pixbuf/io-gdip-jpeg.c:54 gdk-pixbuf/io-jpeg.c:1391
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value “%s” could not be parsed."
+msgstr "کیفیت JPEG باید مقداری بین ۰ و ۱۰۰ باشد. مقدار «%s» نتوانست تجزیه شود."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:69 gdk-pixbuf/io-jpeg.c:1407
+#, c-format
+msgid "JPEG quality must be a value between 0 and 100; value “%d” is not allowed."
+msgstr "کیفیت JPEG باید مقداری بین ۰ و ۱۰۰ باشد. مقدار «%Id» مجاز نیست."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:147 gdk-pixbuf/io-jpeg.c:1691
+msgctxt "image format"
+msgid "JPEG"
+msgstr "JPEG"
+
+#: gdk-pixbuf/io-gdip-tiff.c:83 gdk-pixbuf/io-tiff.c:1087
+msgctxt "image format"
+msgid "TIFF"
+msgstr "TIFF"
+
+#: gdk-pixbuf/io-gdip-utils.c:155
+#, c-format
+msgid "Could not allocate memory: %s"
+msgstr "نتوانست حافظه تخصیص دهد: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:180 gdk-pixbuf/io-gdip-utils.c:294
+#: gdk-pixbuf/io-gdip-utils.c:334
+#, c-format
+msgid "Could not create stream: %s"
+msgstr "نتوانست جریان را ایجاد کند: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:194
+#, c-format
+msgid "Could not seek stream: %s"
+msgstr "نتوانست جریان را بجوید: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:206
+#, c-format
+msgid "Could not read from stream: %s"
+msgstr "نتوانست از بالادست بخواند: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:620
+msgid "Couldn’t load bitmap"
+msgstr "نتوانست نقشهٔ بیتی را بار کند"
+
+#: gdk-pixbuf/io-gdip-utils.c:776
+msgid "Couldn’t load metafile"
+msgstr "نتوانست فراپرونده را بار کند"
+
+#: gdk-pixbuf/io-gdip-utils.c:881
+msgid "Unsupported image format for GDI+"
+msgstr "قالب تصویر پشتیبانی نشده برای ‪GDI+"
+
+#: gdk-pixbuf/io-gdip-utils.c:888
+msgid "Couldn’t save"
+msgstr "نتوانست ذخیره کند"
+
+#: gdk-pixbuf/io-gdip-wmf.c:60
+msgctxt "image format"
+msgid "WMF"
+msgstr "WMF"
+
+#: gdk-pixbuf/io-gif.c:158
+#, c-format
+msgid "Failure reading GIF: %s"
+msgstr "شکست در خواندن GIF: %s"
+
+#: gdk-pixbuf/io-gif.c:381 gdk-pixbuf/io-gif.c:848 gdk-pixbuf/io-gif.c:901
+#: gdk-pixbuf/io-gif.c:974
+msgid "Not enough memory to load GIF file"
+msgstr "حافظه برای بار کردن پروندهٔ GIF کافی نیست"
+
+#: gdk-pixbuf/io-gif.c:507
+msgid "GIF image is corrupt (incorrect LZW compression)"
+msgstr "تصویر GIF خراب است (فشرده‌سازی LZW غلط)"
+
+#: gdk-pixbuf/io-gif.c:543
+msgid "File does not appear to be a GIF file"
+msgstr "پرونده به‌نظر یک پروندهٔ GIF نمی‌رسد"
+
+#: gdk-pixbuf/io-gif.c:558
+#, c-format
+msgid "Version %s of the GIF file format is not supported"
+msgstr "نسخهٔ %s از قالب پروندهٔ GIF پشتیبانی نمی‌شود"
+
+#: gdk-pixbuf/io-gif.c:587
+msgid "Resulting GIF image has zero size"
+msgstr "تصویر جیف نتیجه اندازهٔ صفر دارد"
+
+#: gdk-pixbuf/io-gif.c:657
+msgid ""
+"GIF image has no global colormap, and a frame inside it has no local colormap."
+msgstr ""
+"تصویر GIF نقشه‌رنگ سراسری‌ای ندارد، و یکی از چارچوب‌های داخل آن نقشه‌رنگ محلی ندارد."
+
+#: gdk-pixbuf/io-gif.c:861 gdk-pixbuf/io-gif.c:986
+msgid "GIF file was missing some data (perhaps it was truncated somehow?)"
+msgstr ""
+"بعضی از داده‌های پروندهٔ GIF مفقود شده‌اند (شاید پرونده به شکلی قطع شده است؟)‏"
+
+#: gdk-pixbuf/io-gif.c:920
+msgid "GIF image was truncated or incomplete."
+msgstr "تصویر GIF قطع شده یا ناقص است."
+
+#: gdk-pixbuf/io-gif.c:927
+msgid "Not all frames of the GIF image were loaded."
+msgstr "تمامی قاب‌های تصویر جیف بار نشده‌اند."
+
+#: gdk-pixbuf/io-icns.c:363
+#, c-format
+msgid "Error reading ICNS image: %s"
+msgstr "خطا در خواندن تصویر ICNS: %s"
+
+#: gdk-pixbuf/io-icns.c:380 gdk-pixbuf/io-icns.c:461
+msgid "Could not decode ICNS file"
+msgstr "نتوانست پروندهٔ ICNS را رمزگشایی کند"
+
+#: gdk-pixbuf/io-icns.c:517
+msgctxt "image format"
+msgid "MacOS X icon"
+msgstr "نقشک مک‌اواس ده"
+
+#: gdk-pixbuf/io-ico.c:238 gdk-pixbuf/io-ico.c:252 gdk-pixbuf/io-ico.c:342
+#: gdk-pixbuf/io-ico.c:426 gdk-pixbuf/io-ico.c:451
+#, c-format
+msgid "Invalid header in icon (%s)"
+msgstr "سرایند نامعتبر در نقشک (%s)"
+
+#: gdk-pixbuf/io-ico.c:268 gdk-pixbuf/io-ico.c:355 gdk-pixbuf/io-ico.c:461
+#: gdk-pixbuf/io-ico.c:504 gdk-pixbuf/io-ico.c:532
+msgid "Not enough memory to load icon"
+msgstr "حافظهٔ ناکافی برای بار کردن نقشک"
+
+#: gdk-pixbuf/io-ico.c:386
+msgid "Invalid header in icon"
+msgstr "سرایند نامعتبر در نقشک"
+
+#: gdk-pixbuf/io-ico.c:387
+msgid "Compressed icons are not supported"
+msgstr "نقشک‌های فشرده‌شده پشتیبانی نمی‌شوند"
+
+#: gdk-pixbuf/io-ico.c:489
+msgid "Unsupported icon type"
+msgstr "گونهٔ نقشک پشتیانی نشده"
+
+#: gdk-pixbuf/io-ico.c:583
+msgid "Not enough memory to load ICO file"
+msgstr "حافظه برای بار کردن پروندهٔ ICO کافی نیست"
+
+#: gdk-pixbuf/io-ico.c:629
+msgid "ICO image was truncated or incomplete."
+msgstr "تصویر ICO قطع شده یا ناقص است."
+
+#: gdk-pixbuf/io-ico.c:1070
+msgid "Image too large to be saved as ICO"
+msgstr "تصویر برای ذخیره شدن به‌عنوان ICO خیلی بزرگ است"
+
+#: gdk-pixbuf/io-ico.c:1081
+msgid "Cursor hotspot outside image"
+msgstr "کانون مکان‌نما خارج از تصویر است"
+
+#: gdk-pixbuf/io-ico.c:1104
+#, c-format
+msgid "Unsupported depth for ICO file: %d"
+msgstr "عمق پشتیبانی‌نشده برای پروندهٔ ICO: %Id"
+
+#: gdk-pixbuf/io-jpeg.c:129
+#, c-format
+msgid "Error interpreting JPEG image file (%s)"
+msgstr "خطا در تفسیر پروندهٔ JPEG ‏(%s)"
+
+#: gdk-pixbuf/io-jpeg.c:638
+msgid ""
+"Insufficient memory to load image, try exiting some applications to free memory"
+msgstr ""
+"حافظه برای بار کردن تصویر کافی نیست، برای آزاد کردن حافظه خروج از بعضی برنامه‌ها "
+"را امتحان کنید"
+
+#: gdk-pixbuf/io-jpeg.c:711 gdk-pixbuf/io-jpeg.c:956
+#, c-format
+msgid "Unsupported JPEG color space (%s)"
+msgstr "فضای رنگ JPEG پشتیبانی نمی‌شود (%s)"
+
+#: gdk-pixbuf/io-jpeg.c:834 gdk-pixbuf/io-jpeg.c:1151 gdk-pixbuf/io-jpeg.c:1498
+#: gdk-pixbuf/io-jpeg.c:1508
+msgid "Couldn’t allocate memory for loading JPEG file"
+msgstr "نتوانست برای بار کردن پروندهٔ JPEG حافظه تخصیص دهد"
+
+#: gdk-pixbuf/io-jpeg.c:1109
+msgid "Transformed JPEG has zero width or height."
+msgstr "پروندهٔ JPEG تبدیل شده پهنا یا بلندای صفر دارد."
+
+#: gdk-pixbuf/io-jpeg.c:1135
+#, c-format
+msgid "Unsupported number of color components (%d)"
+msgstr "تعداد مولفه‌های رنگی پشتیبانی نشده (%Id)"
+
+#: gdk-pixbuf/io-jpeg.c:1428
+#, c-format
+msgid "JPEG x-dpi must be a value between 1 and 65535; value “%s” is not allowed."
+msgstr ""
+"نقطه در اینچ افقی JPEG باید مقداری بین ۱ و ۶۵۵۳۵ باشد. مقدار «%s» مجاز نیست."
+
+#: gdk-pixbuf/io-jpeg.c:1449
+#, c-format
+msgid "JPEG y-dpi must be a value between 1 and 65535; value “%s” is not allowed."
+msgstr ""
+"نقطه در اینچ عمودی JPEG باید مقداری بین ۱ و ۶۵۵۳۵ باشد. مقدار «%s» مجاز نیست."
+
+#: gdk-pixbuf/io-jpeg.c:1463
+#, c-format
+msgid "Color profile has invalid length “%u”."
+msgstr "نمایهٔ رنگی طولی نامعتبر دارد «%Iu»."
+
+#: gdk-pixbuf/io-png.c:63
+msgid "Bits per channel of PNG image is invalid."
+msgstr "بیت بر کانال تصویر PNG نامعتبر است."
+
+#: gdk-pixbuf/io-png.c:144 gdk-pixbuf/io-png.c:703
+msgid "Transformed PNG has zero width or height."
+msgstr "عرض یا ارتفاع PNG تبدیل‌شده صفر است."
+
+#: gdk-pixbuf/io-png.c:152
+msgid "Bits per channel of transformed PNG is not 8."
+msgstr "بیت بر کانال PNG تبدیل‌شده، ۸ نیست."
+
+#: gdk-pixbuf/io-png.c:161
+msgid "Transformed PNG not RGB or RGBA."
+msgstr "PNG تبدیل‌شده RGB یا RGBA نیست."
+
+#: gdk-pixbuf/io-png.c:170
+msgid "Transformed PNG has unsupported number of channels, must be 3 or 4."
+msgstr "تعداد کانالهای PNG تبدیل‌شده پشتیبانی نمی‌شود، باید ۳ یا ۴ تا باشد."
+
+#: gdk-pixbuf/io-png.c:191
+#, c-format
+msgid "Fatal error in PNG image file: %s"
+msgstr "خطای مهلک در پروندهٔ تصویر PNG‏: %s"
+
+#: gdk-pixbuf/io-png.c:329
+msgid "Insufficient memory to load PNG file"
+msgstr "حافظه برای بار کردن پروندهٔ PNG کافی نیست"
+
+#: gdk-pixbuf/io-png.c:498 gdk-pixbuf/io-png.c:519
+msgid "Couldn’t allocate memory for loading PNG"
+msgstr "نمی‌توان برای بار کردن پروندهٔ PNG حافظه تخصیص داد"
+
+#: gdk-pixbuf/io-png.c:716
+#, c-format
+msgid ""
+"Insufficient memory to store a %lu by %lu image; try exiting some applications "
+"to reduce memory usage"
+msgstr ""
+"حافظهٔ ناکافی برای نگه‌داری یک تصویر %lu در %lu. برای کاهش مصرف حافظه،‌ بستن برخی "
+"برنامه‌ها را بیازمایید"
+
+#: gdk-pixbuf/io-png.c:791
+msgid "Fatal error reading PNG image file"
+msgstr "خطای مهلک در خواندن پروندهٔ تصویری PNG"
+
+#: gdk-pixbuf/io-png.c:840
+#, c-format
+msgid "Fatal error reading PNG image file: %s"
+msgstr "خطای مهلک در خواندن پروندهٔ تصویری PNG‏: %s"
+
+#: gdk-pixbuf/io-png.c:937
+#, c-format
+msgid ""
+"Invalid key “%s”. Keys for PNG text chunks must have at least 1 and at most 79 "
+"characters."
+msgstr ""
+"کلید نامعتبر «%s». کلیدها برای تکه‌های متنی PNG باید کمینه ۱ و بیشینه ۷۹ نویسه "
+"داشته باشند."
+
+#: gdk-pixbuf/io-png.c:950
+#, c-format
+msgid "Invalid key “%s”. Keys for PNG text chunks must be ASCII characters."
+msgstr ""
+"کلید نامعتبر «%s». کلیدها برای تکه‌های متنی PNG باید کمینه نویسه‌های اسکی باشند."
+
+#: gdk-pixbuf/io-png.c:980
+#, c-format
+msgid "Value for PNG text chunk '%s' cannot be converted to ISO-8859-1 encoding."
+msgstr "مقدار تکهٔ متنی PNG «%s» را نمی‌توان به کدگذاری ISO-8859-1 تبدیل کرد."
+
+#: gdk-pixbuf/io-png.c:992
+#, c-format
+msgid "Color profile has invalid length %d"
+msgstr "نمایهٔ رنگی طولی نامعتبر دارد «%Id»"
+
+#: gdk-pixbuf/io-png.c:1004
+#, c-format
+msgid ""
+"PNG compression level must be a value between 0 and 9; value “%s” is invalid"
+msgstr "سطح فشردگی PNG باید مقداری بین ۰ و ۹ باشد. مقدار «%s» نامعتبر است"
+
+#: gdk-pixbuf/io-png.c:1018
+#, c-format
+msgid "PNG %s must be greater than zero; value “%s” is not allowed"
+msgstr "%s PNG باید بزرگ‌تر از صفر باشد. مقدار «%s» مجاز نیست"
+
+#: gdk-pixbuf/io-png.c:1246
+msgctxt "image format"
+msgid "PNG"
+msgstr "PNG"
+
+#: gdk-pixbuf/io-pnm.c:247
+msgid "PNM loader expected to find an integer, but didn’t"
+msgstr "بارکنندهٔ PNM انتظار یافتن عددی صحیح داشت، ولی نیافت"
+
+#: gdk-pixbuf/io-pnm.c:279
+msgid "PNM file has an incorrect initial byte"
+msgstr "بایت ابتدایی پروندهٔ PNM نادرست است"
+
+#: gdk-pixbuf/io-pnm.c:309
+msgid "PNM file is not in a recognized PNM subformat"
+msgstr "پروندهٔ PNM در زیرقالب شناخته‌شده‌ای از PNM نیست"
+
+#: gdk-pixbuf/io-pnm.c:334
+msgid "PNM file has an invalid width"
+msgstr "پروندهٔ PNM پهنایی نامعتبر دارد"
+
+#: gdk-pixbuf/io-pnm.c:342
+msgid "PNM file has an image width of 0"
+msgstr "عرض تصویر پروندهٔ PNM صفر است"
+
+#: gdk-pixbuf/io-pnm.c:363
+msgid "PNM file has an invalid height"
+msgstr "پروندهٔ PNM بلندایی نامعتبر دارد"
+
+#: gdk-pixbuf/io-pnm.c:371
+msgid "PNM file has an image height of 0"
+msgstr "ارتفاع تصویر پروندهٔ PNM صفر است"
+
+#: gdk-pixbuf/io-pnm.c:394
+msgid "Maximum color value in PNM file is 0"
+msgstr "حداکثر مقدار رنگ در پروندهٔ PNM صفر است"
+
+#: gdk-pixbuf/io-pnm.c:402
+msgid "Maximum color value in PNM file is too large"
+msgstr "مقدار حداکثر رنگ در پروندهٔ PNM خیلی بزرگ است"
+
+#: gdk-pixbuf/io-pnm.c:442 gdk-pixbuf/io-pnm.c:472 gdk-pixbuf/io-pnm.c:517
+msgid "Raw PNM image type is invalid"
+msgstr "نوع تصویر PNM خام نامعتبر است"
+
+#: gdk-pixbuf/io-pnm.c:667
+msgid "PNM image loader does not support this PNM subformat"
+msgstr "بارکنندهٔ تصویر PNM از این زیرقالب پشتیبانی نمی‌کند"
+
+#: gdk-pixbuf/io-pnm.c:754 gdk-pixbuf/io-pnm.c:991
+msgid "Raw PNM formats require exactly one whitespace before sample data"
+msgstr "قالبهای PNM خام به دقیقاً یک فاصلهٔ خالی قبل از داده‌های نمونه نیاز دارند"
+
+#: gdk-pixbuf/io-pnm.c:781
+msgid "Cannot allocate memory for loading PNM image"
+msgstr "نمی‌توان برای بار کردن تصویر PNM حافظه تخصیص داد"
+
+#: gdk-pixbuf/io-pnm.c:835
+msgid "Insufficient memory to load PNM context struct"
+msgstr "حافظه برای بار کردن ساختار زمینهٔ PNM کافی نیست"
+
+#: gdk-pixbuf/io-pnm.c:892
+msgid "Unexpected end of PNM image data"
+msgstr "پایان غیرمنتظرهٔ داده‌های تصویر PNM"
+
+#: gdk-pixbuf/io-pnm.c:1020
+msgid "Insufficient memory to load PNM file"
+msgstr "حافظه برای بار کردن پروندهٔ PNM کافی نیست"
+
+#: gdk-pixbuf/io-pnm.c:1103
+msgctxt "image format"
+msgid "PNM/PBM/PGM/PPM"
+msgstr "PNM/PBM/PGM/PPM"
+
+#: gdk-pixbuf/io-qtif.c:126
+msgid "Input file descriptor is NULL."
+msgstr "شرح‌دهندهٔ پروندهٔ ورودی NULL است."
+
+#: gdk-pixbuf/io-qtif.c:141
+msgid "Failed to read QTIF header"
+msgstr "شکست در خواندن سرایند QTIF"
+
+#: gdk-pixbuf/io-qtif.c:150 gdk-pixbuf/io-qtif.c:187 gdk-pixbuf/io-qtif.c:449
+#, c-format
+msgid "QTIF atom size too large (%d byte)"
+msgid_plural "QTIF atom size too large (%d bytes)"
+msgstr[0] "اندازهٔ اتم QTIF بیش از حد زیاد است (%Id بایت)"
+
+#: gdk-pixbuf/io-qtif.c:173
+#, c-format
+msgid "Failed to allocate %d byte for file read buffer"
+msgid_plural "Failed to allocate %d bytes for file read buffer"
+msgstr[0] "شکست در تخصیص %Id بایت برای میانگیر خواندن پرونده"
+
+#: gdk-pixbuf/io-qtif.c:201
+#, c-format
+msgid "File error when reading QTIF atom: %s"
+msgstr "خطای پرونده هنگام خواندن اتم QTIF: %s"
+
+#: gdk-pixbuf/io-qtif.c:238
+#, c-format
+msgid "Failed to skip the next %d byte with seek()."
+msgid_plural "Failed to skip the next %d bytes with seek()."
+msgstr[0] "شکست در پرش از %Id بایت بعدی با ‪seek()‬."
+
+#: gdk-pixbuf/io-qtif.c:269
+msgid "Failed to allocate QTIF context structure."
+msgstr "شکست در تخصیص ساختار بافتار QTIF."
+
+#: gdk-pixbuf/io-qtif.c:329
+msgid "Failed to create GdkPixbufLoader object."
+msgstr "شکست در ایجاد شی GdkPixbufLoader."
+
+#: gdk-pixbuf/io-qtif.c:424
+msgid "Failed to find an image data atom."
+msgstr "شکست در یافتن یک اتم دادهٔ تصویر."
+
+#: gdk-pixbuf/io-qtif.c:599
+msgctxt "image format"
+msgid "QuickTime"
+msgstr "QuickTime"
+
+#: gdk-pixbuf/io-tga.c:346
+msgid "Cannot allocate colormap"
+msgstr "نمی‌توان نگاشت رنگ را تخصیص داد"
+
+#: gdk-pixbuf/io-tga.c:371
+msgid "Cannot allocate new pixbuf"
+msgstr "نمی‌توان pixbuf جدید تخصیص داد"
+
+#: gdk-pixbuf/io-tga.c:519
+msgid "Unexpected bitdepth for colormap entries"
+msgstr "عمق بیتی غیرمنتظره برای مدخلهای نقشه‌رنگ"
+
+#: gdk-pixbuf/io-tga.c:535
+msgid "Pseudocolor image does not contain a colormap"
+msgstr "تصویر شبه‌رنگ شامل نقشهٔ رنگی نیست"
+
+#: gdk-pixbuf/io-tga.c:578
+msgid "Cannot allocate TGA header memory"
+msgstr "نمی‌توان حافظهٔ سرصفحهٔ TGA را تخصیص داد"
+
+#: gdk-pixbuf/io-tga.c:609
+msgid "TGA image has invalid dimensions"
+msgstr "ابعاد پروندهٔ TGA نامعتبر است"
+
+#: gdk-pixbuf/io-tga.c:615 gdk-pixbuf/io-tga.c:622
+msgid "TGA image type not supported"
+msgstr "تصویر نوع TGA پشتیبانی نمی‌شود"
+
+#: gdk-pixbuf/io-tga.c:650
+msgid "Cannot allocate memory for TGA context struct"
+msgstr "نمی‌توان برای ساختار زمینهٔ TGA حافظه تخصیص داد"
+
+#: gdk-pixbuf/io-tga.c:712
+msgid "TGA image was truncated or incomplete."
+msgstr "تصویر TGA قطع شده یا ناقص است."
+
+#: gdk-pixbuf/io-tga.c:764
+msgctxt "image format"
+msgid "Targa"
+msgstr "Targa"
+
+#: gdk-pixbuf/io-tiff.c:117
+msgid "Could not get image width (bad TIFF file)"
+msgstr "نمی‌توان عرض تصویر را گرفت (پروندهٔ TIFF خراب)"
+
+#: gdk-pixbuf/io-tiff.c:125
+msgid "Could not get image height (bad TIFF file)"
+msgstr "نمی‌توان ارتفاع تصویر را گرفت (پروندهٔ TIFF خراب)"
+
+#: gdk-pixbuf/io-tiff.c:133
+msgid "Width or height of TIFF image is zero"
+msgstr "عرض یا ارتفاع تصویر TIFF صفر است"
+
+#: gdk-pixbuf/io-tiff.c:141 gdk-pixbuf/io-tiff.c:151
+msgid "Dimensions of TIFF image too large"
+msgstr "ابعاد تصویر TIFF خیلی بزرگ است"
+
+#: gdk-pixbuf/io-tiff.c:177 gdk-pixbuf/io-tiff.c:189 gdk-pixbuf/io-tiff.c:585
+msgid "Insufficient memory to open TIFF file"
+msgstr "حافظه برای بار کردن پروندهٔ TIFF کافی نیست"
+
+#: gdk-pixbuf/io-tiff.c:287
+msgid "Failed to load RGB data from TIFF file"
+msgstr "نمی‌توان داده‌های RGB را از پروندهٔ TIFF بار کرد"
+
+#: gdk-pixbuf/io-tiff.c:378
+msgid "Failed to open TIFF image"
+msgstr "گشودن پروندهٔ TIFF شکست خورد"
+
+#: gdk-pixbuf/io-tiff.c:516 gdk-pixbuf/io-tiff.c:528
+msgid "Failed to load TIFF image"
+msgstr "بار کردن پروندهٔ TIFF شکست خورد"
+
+#: gdk-pixbuf/io-tiff.c:760
+msgid "Failed to save TIFF image"
+msgstr "شکست در ذخیرهٔ تصویر TIFF"
+
+#: gdk-pixbuf/io-tiff.c:821
+msgid "TIFF compression doesn’t refer to a valid codec."
+msgstr "فشرده‌سازی تیف به رمزینهٔ معتبری اشاره نمی‌کند."
+
+#: gdk-pixbuf/io-tiff.c:851
+#, c-format
+msgid "Color profile has invalid length %d."
+msgstr "نمایهٔ رنگی طولی نامعتبر دارد «%Id»."
+
+#: gdk-pixbuf/io-tiff.c:866
+msgid "TIFF bits-per-sample doesn’t contain a supported value."
+msgstr "بیت بر نمونهٔ تیف شامل مقدار پشتیبانی‌شده‌ای نیست."
+
+#: gdk-pixbuf/io-tiff.c:947
+msgid "Failed to write TIFF data"
+msgstr "شکست در نوشتن دادهٔ TIFF"
+
+#: gdk-pixbuf/io-tiff.c:965
+#, c-format
+msgid "TIFF x-dpi must be greater than zero; value “%s” is not allowed."
+msgstr "نقطه در اینچ افقی TIFF باید بزرگ‌تر از صفر باشد. مقدار «%s» مجاز نیست."
+
+#: gdk-pixbuf/io-tiff.c:977
+#, c-format
+msgid "TIFF y-dpi must be greater than zero; value “%s” is not allowed."
+msgstr "نقطه در اینچ عمودی TIFF باید بزرگ‌تر از صفر باشد. مقدار «%s» مجاز نیست."
+
+#: gdk-pixbuf/io-tiff.c:1018
+msgid "Couldn’t write to TIFF file"
+msgstr "نمی‌توان روی پروندهٔ TIFF نوشت"
+
+#: gdk-pixbuf/io-xbm.c:320
+msgid "Invalid XBM file"
+msgstr "پروندهٔ XBM نامعتبر"
+
+#: gdk-pixbuf/io-xbm.c:331
+msgid "Insufficient memory to load XBM image file"
+msgstr "حافظه برای بار کردن پروندهٔ تصویری XBM کافی نیست"
+
+#: gdk-pixbuf/io-xbm.c:482
+msgid "Failed to write to temporary file when loading XBM image"
+msgstr "نوشتن پروندهٔ موقت هنگام بار کردن تصویر XNM شکست خورد"
+
+#: gdk-pixbuf/io-xbm.c:521
+msgctxt "image format"
+msgid "XBM"
+msgstr "XBM"
+
+#: gdk-pixbuf/io-xpm.c:472
+msgid "No XPM header found"
+msgstr "سرصفحهٔ XPM یافت نشد"
+
+#: gdk-pixbuf/io-xpm.c:481 gdk-pixbuf/io-xpm.c:507
+msgid "Invalid XPM header"
+msgstr "سزایند XPM نامعتبر"
+
+#: gdk-pixbuf/io-xpm.c:489
+msgid "XPM file has image width <= 0"
+msgstr "عرض تصویر پروندهٔ XPM کمتر یا مساوی صفر است"
+
+#: gdk-pixbuf/io-xpm.c:497
+msgid "XPM file has image height <= 0"
+msgstr "ارتفاع تصویر پروندهٔ XPM کمتر یا مساوی صفر است"
+
+#: gdk-pixbuf/io-xpm.c:514
+msgid "XPM has invalid number of chars per pixel"
+msgstr "تعداد نویسه بر نقطهٔ XPM نامعتبر است"
+
+#: gdk-pixbuf/io-xpm.c:523
+msgid "XPM file has invalid number of colors"
+msgstr "تعداد رنگهای پروندهٔ XPM نامعتبر است"
+
+#: gdk-pixbuf/io-xpm.c:535 gdk-pixbuf/io-xpm.c:544 gdk-pixbuf/io-xpm.c:593
+msgid "Cannot allocate memory for loading XPM image"
+msgstr "نمی‌توان برای بار کردن تصویر XPM حافظه تخصیص داد"
+
+#: gdk-pixbuf/io-xpm.c:558
+msgid "Cannot read XPM colormap"
+msgstr "نمی‌توان نقشه‌رنگ XPM را خواند"
+
+#: gdk-pixbuf/io-xpm.c:610
+msgid "Dimensions do not match data"
+msgstr "ابعاد با داده مطابق نیستند"
+
+#: gdk-pixbuf/io-xpm.c:806
+msgid "Failed to write to temporary file when loading XPM image"
+msgstr "نوشتن در پروندهٔ موقت هنگام بار کردن تصویر XPM شکست خورد"
+
+#: gdk-pixbuf/io-xpm.c:845
+msgctxt "image format"
+msgid "XPM"
+msgstr "XPM"
+
+#~ msgid "Unsupported animation type"
+#~ msgstr "پویانمایی از نوع پشتیبانی‌نشده"
+
+#~ msgid "The ANI image format"
+#~ msgstr "قالب تصویر ANI"
+
+#~ msgid "The BMP image format"
+#~ msgstr "قالب تصویر BMP"
+
+#, fuzzy
+#~ msgid "The EMF image format"
+#~ msgstr "قالب تصویر BMP"
+
+#~ msgid "The GIF image format"
+#~ msgstr "قالب تصویر GIF"
+
+#~ msgid "The ICO image format"
+#~ msgstr "قالب تصویر ICO"
+
+#~ msgid "The JPEG image format"
+#~ msgstr "قالب تصویر JPEG"
+
+#, fuzzy
+#~ msgid "The WMF image format"
+#~ msgstr "قالب تصویری WBMP"
+
+#, c-format
+#~ msgid "Internal error in the GIF loader (%s)"
+#~ msgstr "خطای داخلی در بارگذار GIF (%s)"
+
+#~ msgid "Stack overflow"
+#~ msgstr "سرریز پشته"
+
+#~ msgid "GIF image loader cannot understand this image."
+#~ msgstr "بارکننده‌ی تصویر GIF نمی‌تواند این تصویر را بفهمد."
+
+#~ msgid "Bad code encountered"
+#~ msgstr "برخورد با کد بد"
+
+#~ msgid "Circular table entry in GIF file"
+#~ msgstr "مدخل دوری جدول در پرونده‌ی GIF"
+
+#, fuzzy
+#~ msgid "Not enough memory to composite a frame in GIF file"
+#~ msgstr "حافظه برای بار کردن پرونده‌ی GIF کافی نیست"
+
+#, fuzzy
+#~ msgid "The ICNS image format"
+#~ msgstr "قالب تصویر ICO"
+
+#~ msgid "Icon has zero width"
+#~ msgstr "عرض شمایل صفر است"
+
+#~ msgid "Icon has zero height"
+#~ msgstr "ارتفاع شمایل صفر است"
+
+#, fuzzy
+#~ msgid "Couldn't allocate memory for stream"
+#~ msgstr "نمی‌توان برای سرصفحه حافظه تخصیص داد"
+
+#, fuzzy
+#~ msgid "Couldn't decode image"
+#~ msgstr "نمی‌توان نام پرونده را تبدیل کرد"
+
+#, fuzzy
+#~ msgid "Transformed JPEG2000 has zero width or height"
+#~ msgstr "عرض یا ارتفاع PNG تبدیل‌شده صفر است."
+
+#, fuzzy
+#~ msgid "Image type currently not supported"
+#~ msgstr "تصویر نوع «%s» پشتیبانی نمی‌شود"
+
+#, fuzzy
+#~ msgid "Couldn't allocate memory for color profile"
+#~ msgstr "نمی‌توان برای بار کردن پرونده‌ی JPEG حافظه تخصیص داد"
+
+#, fuzzy
+#~ msgid "Insufficient memory to open JPEG 2000 file"
+#~ msgstr "حافظه برای بار کردن پرونده‌ی TIFF کافی نیست"
+
+#, fuzzy
+#~ msgid "Couldn't allocate memory to buffer image data"
+#~ msgstr "نمی‌توان برای داده‌های خط حافظه تخصیص داد"
+
+#, fuzzy
+#~ msgid "The JPEG 2000 image format"
+#~ msgstr "قالب تصویر JPEG"
+
+#~ msgid "Couldn't allocate memory for header"
+#~ msgstr "نمی‌توان برای سرصفحه حافظه تخصیص داد"
+
+#~ msgid "Couldn't allocate memory for context buffer"
+#~ msgstr "نمی‌توان برای میانگیر زمینه حافظه تخصیص داد"
+
+#~ msgid "Image has invalid width and/or height"
+#~ msgstr "ارتفاع و/یا عرض تصویر نامعتبر است"
+
+#~ msgid "Image has unsupported bpp"
+#~ msgstr "‏bpp تصویر پشتیبانی نمی‌شود"
+
+#, c-format
+#~ msgid "Image has unsupported number of %d-bit planes"
+#~ msgstr "تعداد صفحه‌های %Idبیتی تصویر پشتیبانی نمی‌شود"
+
+#~ msgid "Couldn't create new pixbuf"
+#~ msgstr "نمی‌توان pixbuf ایجاد کرد"
+
+#~ msgid "Couldn't allocate memory for line data"
+#~ msgstr "نمی‌توان برای داده‌های خط حافظه تخصیص داد"
+
+#, fuzzy
+#~ msgid "Couldn't allocate memory for PCX image"
+#~ msgstr "نمی‌توان برای سرصفحه حافظه تخصیص داد"
+
+#~ msgid "Didn't get all lines of PCX image"
+#~ msgstr "همه‌ی خطهای تصویر PCX گرفته نشد"
+
+#~ msgid "No palette found at end of PCX data"
+#~ msgstr "در انتهای داده‌های PCX تخته‌رنگی یافته نشد"
+
+#~ msgid "The PCX image format"
+#~ msgstr "قالب تصویر PCX"
+
+#, fuzzy
+#~ msgid "Transformed pixbuf has zero width or height."
+#~ msgstr "عرض یا ارتفاع PNG تبدیل‌شده صفر است."
+
+#, fuzzy
+#~ msgid "The GdkPixdata format"
+#~ msgstr "قالب تصویر GIF"
+
+#, fuzzy, c-format
+#~ msgid ""
+#~ "PNG compression level must be a value between 0 and 9; value '%s' could not "
+#~ "be parsed."
+#~ msgstr "کیفیت JPEG باید مقداری بین ۰ و ۱۰۰ باشد؛ مقدار «%s» قابل درک نیست."
+
+#~ msgid "The PNG image format"
+#~ msgstr "قالب تصویر PNG"
+
+#~ msgid "The PNM/PBM/PGM/PPM image format family"
+#~ msgstr "خانواده‌ی قالبهای تصویر PNM/PBM/PGM/PPM"
+
+#, fuzzy
+#~ msgid "The QTIF image format"
+#~ msgstr "قالب تصویر TIFF"
+
+#~ msgid "RAS image has bogus header data"
+#~ msgstr "داده‌های سرصفحه‌ای تصویر RAS جعلی است"
+
+#~ msgid "RAS image has unknown type"
+#~ msgstr "نوع تصویر RAS نامعلوم است"
+
+#~ msgid "unsupported RAS image variation"
+#~ msgstr "این شکل از تصاویر RAS پشتیبانی نمی‌شوند"
+
+#~ msgid "Not enough memory to load RAS image"
+#~ msgstr "حافظه برای بار کردن تصویر RAS کافی نیست"
+
+#~ msgid "Cannot allocate memory for IOBuffer struct"
+#~ msgstr "نمی‌توان برای ساختار IOBuffer حافظه تخصیص داد"
+
+#~ msgid "Cannot allocate memory for IOBuffer data"
+#~ msgstr "نمی‌توان برای داده‌های IOBuffer حافظه تخصیص داد"
+
+#~ msgid "Cannot realloc IOBuffer data"
+#~ msgstr "نمی‌توان داده‌های IOBuffer را بازتخصیص کرد"
+
+#~ msgid "Cannot allocate temporary IOBuffer data"
+#~ msgstr "نمی‌توان داده‌های موقت IOBuffer را تخصیص داد"
+
+#, fuzzy
+#~ msgid "Image is corrupted or truncated"
+#~ msgstr "تصویر GIF قطع شده یا ناقص است."
+
+#~ msgid "Cannot allocate colormap structure"
+#~ msgstr "نمی‌توان ساختار نقشه‌رنگ تخصیص داد"
+
+#~ msgid "Excess data in file"
+#~ msgstr "داده‌های اضافی در پرونده"
+
+#~ msgid "The Targa image format"
+#~ msgstr "قالب تصویر تارگا"
+
+#~ msgid "TIFFClose operation failed"
+#~ msgstr "عملیات TIFFClose شکست خورد"
+
+#~ msgid "The TIFF image format"
+#~ msgstr "قالب تصویر TIFF"
+
+#~ msgid "Image has zero height"
+#~ msgstr "ارتفاع تصویر صفر است"
+
+#~ msgid "Not enough memory to load image"
+#~ msgstr "حافظه برای بار کردن تصویر کافی نیست"
+
+#~ msgid "Couldn't save the rest"
+#~ msgstr "نمی‌توان بقیه را ذخیره کرد"
+
+#~ msgid "The WBMP image format"
+#~ msgstr "قالب تصویری WBMP"
+
+#~ msgid "The XBM image format"
+#~ msgstr "قالب تصویر XBM"
+
+#~ msgid "The XPM image format"
+#~ msgstr "قالب تصویر XPM"
+
+#~ msgid "Couldn't allocate memory for paletted data"
+#~ msgstr "نمی‌توان برای داده‌های تخته‌رنگ‌شده حافظه تخصیص داد"

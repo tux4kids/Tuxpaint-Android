@@ -1,0 +1,997 @@
+# gtk+ ko.po
+# This file is distributed under the same license as the gdk-pixbuf package.
+#
+# Sung-Hyun Nam <namsh@lgic.co.kr>, 1998
+# Changwoo Ryu <cwryu@debian.org>, 2002-2013, 2015-2017.
+# Gwan-gyeong Mun <elongbug@gmail.com>, 2018-2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gdk-pixbuf\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gdk-pixbuf/issues\n"
+"POT-Creation-Date: 2021-03-13 17:26+0000\n"
+"PO-Revision-Date: 2021-03-15 12:03+0200\n"
+"Last-Translator: Gwan-gyeong Mun <elongbug@gmail.com>\n"
+"Language-Team: Gnome Korea <gnome-kr@googlegroups.com>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:175 gdk-pixbuf/gdk-pixbuf-io.c:1127
+#: gdk-pixbuf/gdk-pixbuf-io.c:1389
+#, c-format
+msgid "Failed to open file “%s”: %s"
+msgstr "파일 “%s” 열기 실패: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:188 gdk-pixbuf/gdk-pixbuf-io.c:994
+#, c-format
+msgid "Image file “%s” contains no data"
+msgstr "이미지 파일 “%s”에 데이터가 없습니다"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:226
+#, c-format
+msgid ""
+"Failed to load animation “%s”: reason not known, probably a corrupt "
+"animation file"
+msgstr ""
+"애니메이션 이미지 “%s” 읽기 실패: 이유를 알 수 없습니다. 아마 애니메이션 이미"
+"지 파일이 깨졌을 겁니다"
+
+#: gdk-pixbuf/gdk-pixbuf-animation.c:294 gdk-pixbuf/gdk-pixbuf-io.c:1163
+#: gdk-pixbuf/gdk-pixbuf-io.c:1441
+#, c-format
+msgid ""
+"Failed to load image “%s”: reason not known, probably a corrupt image file"
+msgstr ""
+"이미지 “%s” 읽기 실패: 이유를 알 수 없습니다. 아마 이미지 파일이 깨졌을 겁니"
+"다"
+
+#: gdk-pixbuf/gdk-pixbuf.c:237
+msgid "Number of Channels"
+msgstr "채널 수"
+
+#: gdk-pixbuf/gdk-pixbuf.c:238
+msgid "The number of samples per pixel"
+msgstr "픽셀당 샘플 수"
+
+#: gdk-pixbuf/gdk-pixbuf.c:247
+msgid "Colorspace"
+msgstr "컬러스페이스"
+
+#: gdk-pixbuf/gdk-pixbuf.c:248
+msgid "The colorspace in which the samples are interpreted"
+msgstr "샘플을 해석할 컬러스페이스"
+
+#: gdk-pixbuf/gdk-pixbuf.c:256
+msgid "Has Alpha"
+msgstr "알파 있음"
+
+#: gdk-pixbuf/gdk-pixbuf.c:257
+msgid "Whether the pixbuf has an alpha channel"
+msgstr "픽셀버퍼에 알파 채널이 있는지 여부"
+
+#: gdk-pixbuf/gdk-pixbuf.c:270
+msgid "Bits per Sample"
+msgstr "샘플당 비트 수"
+
+#: gdk-pixbuf/gdk-pixbuf.c:271
+msgid "The number of bits per sample"
+msgstr "샘플당 비트 수"
+
+#: gdk-pixbuf/gdk-pixbuf.c:280
+msgid "Width"
+msgstr "너비"
+
+#: gdk-pixbuf/gdk-pixbuf.c:281
+msgid "The number of columns of the pixbuf"
+msgstr "픽셀버퍼의 열 수"
+
+#: gdk-pixbuf/gdk-pixbuf.c:290
+msgid "Height"
+msgstr "높이"
+
+#: gdk-pixbuf/gdk-pixbuf.c:291
+msgid "The number of rows of the pixbuf"
+msgstr "픽셀버퍼의 행 수"
+
+#: gdk-pixbuf/gdk-pixbuf.c:307
+msgid "Rowstride"
+msgstr "행 크기"
+
+#: gdk-pixbuf/gdk-pixbuf.c:308
+msgid ""
+"The number of bytes between the start of a row and the start of the next row"
+msgstr "행의 시작에서 다음 행 시작까지의 바이트 수"
+
+#: gdk-pixbuf/gdk-pixbuf.c:317
+msgid "Pixels"
+msgstr "픽셀"
+
+#: gdk-pixbuf/gdk-pixbuf.c:318
+msgid "A pointer to the pixel data of the pixbuf"
+msgstr "픽셀버퍼의 픽셀 데이터에 대한 포인터"
+
+#: gdk-pixbuf/gdk-pixbuf.c:332
+msgid "Pixel Bytes"
+msgstr "픽셀 바이트"
+
+#: gdk-pixbuf/gdk-pixbuf.c:333
+msgid "Readonly pixel data"
+msgstr "읽기 전용 픽셀 데이터"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:814
+#, c-format
+msgid "Unable to load image-loading module: %s: %s"
+msgstr "이미지 읽기 모듈을 읽을 수 없습니다: %s: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:829
+#, c-format
+msgid ""
+"Image-loading module %s does not export the proper interface; perhaps it’s "
+"from a different gdk-pixbuf version?"
+msgstr ""
+"%s 이미지 읽기 모듈이 올바른 인터페이스를 내놓지 않습니다. 아마 다른 gdk-"
+"pixbuf 버전의 모듈로 보입니다."
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:838 gdk-pixbuf/gdk-pixbuf-io.c:881
+#, c-format
+msgid "Image type “%s” is not supported"
+msgstr "이미지 형식 “%s”을(를) 지원하지 않습니다"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:966
+#, c-format
+msgid "Couldn’t recognize the image file format for file “%s”"
+msgstr "파일 “%s”의 이미지 파일 형식을 알 수 없습니다"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:974
+msgid "Unrecognized image file format"
+msgstr "알 수 없는 이미지 파일 형식"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:1174
+#, c-format
+msgid "Failed to load image “%s”: %s"
+msgstr "이미지 “%s” 읽기 실패: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2244 gdk-pixbuf/io-gdip-utils.c:840
+#, c-format
+msgid "Error writing to image file: %s"
+msgstr "이미지 파일을 쓰는 중 오류가 발생했습니다: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2286 gdk-pixbuf/gdk-pixbuf-io.c:2407
+#, c-format
+msgid "This build of gdk-pixbuf does not support saving the image format: %s"
+msgstr "gdk-pixbuf의 이 빌드에서는 이미지 형식 저장을 지원하지 않습니다: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2317
+msgid "Insufficient memory to save image to callback"
+msgstr "콜백에 이미지를 저장하기에는 메모리가 부족합니다"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2330
+msgid "Failed to open temporary file"
+msgstr "임시 파일을 여는데 실패했습니다"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2353
+msgid "Failed to read from temporary file"
+msgstr "임시 파일을 읽는데 실패했습니다"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2563
+#, c-format
+msgid "Failed to open “%s” for writing: %s"
+msgstr "쓰기 용 “%s” 열기 실패: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2589
+#, c-format
+msgid ""
+"Failed to close “%s” while writing image, all data may not have been saved: "
+"%s"
+msgstr ""
+"이미지를 저장하는 동안 “%s”을(를) 닫는데 실패했습니다. 모든 데이터를 저장하"
+"지 않았을 겁니다: %s"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2810 gdk-pixbuf/gdk-pixbuf-io.c:2862
+msgid "Insufficient memory to save image into a buffer"
+msgstr "버퍼에 이미지를 저장하기에는 메모리가 부족합니다"
+
+#: gdk-pixbuf/gdk-pixbuf-io.c:2908
+msgid "Error writing to image stream"
+msgstr "이미지 스트림을 쓰는 중 오류가 발생했습니다"
+
+#: gdk-pixbuf/gdk-pixbuf-loader.c:406
+#, c-format
+msgid ""
+"Internal error: Image loader module “%s” failed to complete an operation, "
+"but didn’t give a reason for the failure"
+msgstr ""
+"내부 오류: 이미지 읽어 들이기 모듈 “%s”이(가) 작업 완료에 실패했지만, 실패한 "
+"이유를 넘겨주지 않았습니다"
+
+#: gdk-pixbuf/gdk-pixbuf-loader.c:448
+#, c-format
+msgid "Incremental loading of image type “%s” is not supported"
+msgstr "“%s” 타입의 이미지에서는 점진적 읽어 들이기를 지원하지 않습니다"
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:162
+msgid "Loop"
+msgstr "반복"
+
+#: gdk-pixbuf/gdk-pixbuf-simple-anim.c:163
+msgid "Whether the animation should loop when it reaches the end"
+msgstr "애니메이션이 끝나면 처음부터 반복할지 여부"
+
+#: gdk-pixbuf/gdk-pixdata.c:165
+msgid "Image header corrupt"
+msgstr "잘못된 이미지 헤더"
+
+#: gdk-pixbuf/gdk-pixdata.c:170
+msgid "Image format unknown"
+msgstr "알 수 없는 이미지 형식"
+
+#: gdk-pixbuf/gdk-pixdata.c:175 gdk-pixbuf/gdk-pixdata.c:470
+#: gdk-pixbuf/gdk-pixdata.c:480 gdk-pixbuf/gdk-pixdata.c:576
+msgid "Image pixel data corrupt"
+msgstr "잘못된 이미지 픽셀 데이터"
+
+#: gdk-pixbuf/gdk-pixdata.c:492
+#, c-format
+msgid "failed to allocate image buffer of %u byte"
+msgid_plural "failed to allocate image buffer of %u bytes"
+msgstr[0] "이미지 버퍼에 %u 바이트를 할당하는데 실패"
+
+#: gdk-pixbuf/io-ani.c:239
+msgid "Unexpected icon chunk in animation"
+msgstr "움직이는 이미지 안에 뜻밖의 아이콘 부분이 있습니다"
+
+#: gdk-pixbuf/io-ani.c:337 gdk-pixbuf/io-ani.c:395 gdk-pixbuf/io-ani.c:421
+#: gdk-pixbuf/io-ani.c:444 gdk-pixbuf/io-ani.c:471 gdk-pixbuf/io-ani.c:558
+msgid "Invalid header in animation"
+msgstr "움직이는 이미지의 헤더가 잘못되었습니다"
+
+#: gdk-pixbuf/io-ani.c:347 gdk-pixbuf/io-ani.c:369 gdk-pixbuf/io-ani.c:453
+#: gdk-pixbuf/io-ani.c:480 gdk-pixbuf/io-ani.c:531 gdk-pixbuf/io-ani.c:607
+msgid "Not enough memory to load animation"
+msgstr "애니메이션을 읽어 들이는데 메모리가 부족합니다"
+
+#: gdk-pixbuf/io-ani.c:387 gdk-pixbuf/io-ani.c:413 gdk-pixbuf/io-ani.c:432
+msgid "Malformed chunk in animation"
+msgstr "움직이는 이미지에 잘못된 부분이 있습니다"
+
+#: gdk-pixbuf/io-ani.c:629
+msgid "ANI image was truncated or incomplete."
+msgstr "ANI 이미지가 잘려져 있거나 불완전합니다."
+
+#: gdk-pixbuf/io-ani.c:670
+msgctxt "image format"
+msgid "Windows animated cursor"
+msgstr "윈도우 애니메이션 커서"
+
+#: gdk-pixbuf/io-bmp.c:231 gdk-pixbuf/io-bmp.c:269 gdk-pixbuf/io-bmp.c:376
+#: gdk-pixbuf/io-bmp.c:403 gdk-pixbuf/io-bmp.c:428 gdk-pixbuf/io-bmp.c:463
+#: gdk-pixbuf/io-bmp.c:485 gdk-pixbuf/io-bmp.c:563
+msgid "BMP image has bogus header data"
+msgstr "BMP 이미지의 헤더 데이터가 잘못되었습니다"
+
+#: gdk-pixbuf/io-bmp.c:242 gdk-pixbuf/io-bmp.c:498
+msgid "Not enough memory to load bitmap image"
+msgstr "비트맵 이미지를 읽을 메모리가 충분하지 않습니다"
+
+#: gdk-pixbuf/io-bmp.c:333
+msgid "BMP image has unsupported header size"
+msgstr "BMP 이미지가 지원되지 않는 헤더 크기를 가지고 있습니다"
+
+#: gdk-pixbuf/io-bmp.c:343
+msgid "BMP image has unsupported depth"
+msgstr "BMP 이미지가 지원되지 않는 색깊이를 가지고 있습니다"
+
+#: gdk-pixbuf/io-bmp.c:358
+msgid "BMP image has oversize palette"
+msgstr "BMP 이미지의 팔레트가 너무 큽니다"
+
+#: gdk-pixbuf/io-bmp.c:390
+msgid "Topdown BMP images cannot be compressed"
+msgstr "톱다운 BMP 이미지는 압축할 수 없습니다"
+
+#: gdk-pixbuf/io-bmp.c:415
+msgid "BMP image width too large"
+msgstr "BMP 이미지 너비가 너무 큽니다"
+
+#: gdk-pixbuf/io-bmp.c:792 gdk-pixbuf/io-png.c:564 gdk-pixbuf/io-pnm.c:722
+#: gdk-pixbuf/io-pnm.c:879
+msgid "Premature end-of-file encountered"
+msgstr "파일이 갑작스럽게 끝났습니다"
+
+#: gdk-pixbuf/io-bmp.c:1313
+#, c-format
+msgid "Error while decoding colormap"
+msgstr "컬러맵을 디코딩하는데 오류"
+
+#: gdk-pixbuf/io-bmp.c:1376 gdk-pixbuf/io-bmp.c:1388
+msgid "Image is too wide for BMP format."
+msgstr "이미지가 BMP 포맷으로는 너무 넓습니다."
+
+#: gdk-pixbuf/io-bmp.c:1421
+msgid "Couldn’t allocate memory for saving BMP file"
+msgstr "BMP 파일을 저장하는데 필요한 메모리 할당을 할 수 없습니다"
+
+#: gdk-pixbuf/io-bmp.c:1462
+msgid "Couldn’t write to BMP file"
+msgstr "BMP 파일에 쓸 수 없습니다"
+
+#: gdk-pixbuf/io-bmp.c:1515 gdk-pixbuf/io-gdip-bmp.c:83
+msgctxt "image format"
+msgid "BMP"
+msgstr "BMP"
+
+#: gdk-pixbuf/io-gdip-emf.c:61
+msgctxt "image format"
+msgid "EMF"
+msgstr "EMF"
+
+#: gdk-pixbuf/io-gdip-gif.c:81 gdk-pixbuf/io-gif.c:1037
+msgctxt "image format"
+msgid "GIF"
+msgstr "GIF"
+
+#: gdk-pixbuf/io-gdip-ico.c:60 gdk-pixbuf/io-ico.c:1412
+msgctxt "image format"
+msgid "Windows icon"
+msgstr "윈도우 아이콘"
+
+#: gdk-pixbuf/io-gdip-jpeg.c:54 gdk-pixbuf/io-jpeg.c:1382
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value “%s” could not be "
+"parsed."
+msgstr ""
+"JPEG 화질은 0에서 100 사이의 값이어야 합니다. “%s” 값을 분석할 수 없습니다."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:69 gdk-pixbuf/io-jpeg.c:1398
+#, c-format
+msgid ""
+"JPEG quality must be a value between 0 and 100; value “%d” is not allowed."
+msgstr ""
+"JPEG 화질은 0에서 100 사이의 값이어야 합니다. “%d” 값은 쓸 수 없습니다."
+
+#: gdk-pixbuf/io-gdip-jpeg.c:147 gdk-pixbuf/io-jpeg.c:1682
+msgctxt "image format"
+msgid "JPEG"
+msgstr "JPEG"
+
+#: gdk-pixbuf/io-gdip-tiff.c:83 gdk-pixbuf/io-tiff.c:1086
+msgctxt "image format"
+msgid "TIFF"
+msgstr "TIFF"
+
+#: gdk-pixbuf/io-gdip-utils.c:155
+#, c-format
+msgid "Could not allocate memory: %s"
+msgstr "메모리를 할당할 수 없습니다: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:180 gdk-pixbuf/io-gdip-utils.c:294
+#: gdk-pixbuf/io-gdip-utils.c:334
+#, c-format
+msgid "Could not create stream: %s"
+msgstr "스트림을 만들 수 없습니다: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:194
+#, c-format
+msgid "Could not seek stream: %s"
+msgstr "스트림에서 이동할 수 없습니다: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:206
+#, c-format
+msgid "Could not read from stream: %s"
+msgstr "스트림을 읽을 수 없습니다: %s"
+
+#: gdk-pixbuf/io-gdip-utils.c:620
+msgid "Couldn’t load bitmap"
+msgstr "비트맵을 읽어 들일 수 없습니다"
+
+#: gdk-pixbuf/io-gdip-utils.c:776
+msgid "Couldn’t load metafile"
+msgstr "메타파일을 읽어 들일 수 없습니다"
+
+#: gdk-pixbuf/io-gdip-utils.c:881
+msgid "Unsupported image format for GDI+"
+msgstr "GDI+에서 지원하지 않는 이미지 형식"
+
+#: gdk-pixbuf/io-gdip-utils.c:888
+msgid "Couldn’t save"
+msgstr "저장할 수 없습니다"
+
+#: gdk-pixbuf/io-gdip-wmf.c:60
+msgctxt "image format"
+msgid "WMF"
+msgstr "WMF"
+
+#: gdk-pixbuf/io-gif.c:158
+#, c-format
+msgid "Failure reading GIF: %s"
+msgstr "GIF 읽는 중 실패: %s"
+
+#: gdk-pixbuf/io-gif.c:381 gdk-pixbuf/io-gif.c:848 gdk-pixbuf/io-gif.c:901
+#: gdk-pixbuf/io-gif.c:974
+msgid "Not enough memory to load GIF file"
+msgstr "GIF 파일을 읽는데 메모리가 충분하지 않습니다"
+
+#: gdk-pixbuf/io-gif.c:507
+msgid "GIF image is corrupt (incorrect LZW compression)"
+msgstr "GIF 이미지가 잘못되었습니다(잘못된 LZW 압축)"
+
+#: gdk-pixbuf/io-gif.c:543
+msgid "File does not appear to be a GIF file"
+msgstr "GIF 파일이 아닌 것 같습니다"
+
+#: gdk-pixbuf/io-gif.c:558
+#, c-format
+msgid "Version %s of the GIF file format is not supported"
+msgstr "GIF 파일 형식의 버전 %s은(는) 지원되지 않습니다."
+
+#: gdk-pixbuf/io-gif.c:587
+msgid "Resulting GIF image has zero size"
+msgstr "결과 GIF 이미지의 크기가 0입니다"
+
+#: gdk-pixbuf/io-gif.c:657
+msgid ""
+"GIF image has no global colormap, and a frame inside it has no local "
+"colormap."
+msgstr "GIF 이미지에 전체 컬러맵이 없고, 프레임 내부에 부분 컬러맵이 없습니다."
+
+#: gdk-pixbuf/io-gif.c:861 gdk-pixbuf/io-gif.c:986
+msgid "GIF file was missing some data (perhaps it was truncated somehow?)"
+msgstr "GIF 파일에 데이터가 부족합니다(중간에 잘린 파일?)"
+
+#: gdk-pixbuf/io-gif.c:920
+msgid "GIF image was truncated or incomplete."
+msgstr "GIF 이미지가 잘려져 있거나 불완전합니다."
+
+#: gdk-pixbuf/io-gif.c:927
+msgid "Not all frames of the GIF image were loaded."
+msgstr "GIF 이미지의 모든 프레임을 읽어들이지 못했습니다."
+
+#: gdk-pixbuf/io-icns.c:363
+#, c-format
+msgid "Error reading ICNS image: %s"
+msgstr "ICNS 이미지를 읽어들이는데 오류: %s"
+
+#: gdk-pixbuf/io-icns.c:380 gdk-pixbuf/io-icns.c:461
+msgid "Could not decode ICNS file"
+msgstr "ICNS 파일을 디코딩할 수 없습니다"
+
+#: gdk-pixbuf/io-icns.c:517
+msgctxt "image format"
+msgid "MacOS X icon"
+msgstr "MacOS X 아이콘"
+
+#: gdk-pixbuf/io-ico.c:238 gdk-pixbuf/io-ico.c:252 gdk-pixbuf/io-ico.c:342
+#: gdk-pixbuf/io-ico.c:426 gdk-pixbuf/io-ico.c:451
+#, c-format
+msgid "Invalid header in icon (%s)"
+msgstr "아이콘(%s)의 헤더가 잘못되었습니다"
+
+#: gdk-pixbuf/io-ico.c:268 gdk-pixbuf/io-ico.c:355 gdk-pixbuf/io-ico.c:461
+#: gdk-pixbuf/io-ico.c:504 gdk-pixbuf/io-ico.c:532
+msgid "Not enough memory to load icon"
+msgstr "아이콘을 읽어 들이는데 메모리가 부족합니다"
+
+#: gdk-pixbuf/io-ico.c:386
+msgid "Invalid header in icon"
+msgstr "아이콘의 헤더가 잘못되었습니다"
+
+#: gdk-pixbuf/io-ico.c:387
+msgid "Compressed icons are not supported"
+msgstr "압축된 아이콘은 지원하지 않습니다"
+
+#: gdk-pixbuf/io-ico.c:489
+msgid "Unsupported icon type"
+msgstr "지원하지 않는 아이콘 형식"
+
+#: gdk-pixbuf/io-ico.c:583
+msgid "Not enough memory to load ICO file"
+msgstr "ICO 파일을 읽는데 메모리가 충분하지 않습니다"
+
+#: gdk-pixbuf/io-ico.c:629
+msgid "ICO image was truncated or incomplete."
+msgstr "ICO 이미지가 잘려져 있거나 불완전합니다."
+
+#: gdk-pixbuf/io-ico.c:1070
+msgid "Image too large to be saved as ICO"
+msgstr "이미지를 ICO로 저장하기에는 너무 큽니다"
+
+#: gdk-pixbuf/io-ico.c:1081
+msgid "Cursor hotspot outside image"
+msgstr "핫스폿이 이미지 바깥에 있습니다"
+
+#: gdk-pixbuf/io-ico.c:1104
+#, c-format
+msgid "Unsupported depth for ICO file: %d"
+msgstr "ICO 파일에서 지원하지 않는 색상 모드: %d"
+
+#: gdk-pixbuf/io-jpeg.c:129
+#, c-format
+msgid "Error interpreting JPEG image file (%s)"
+msgstr "JPEG 파일 해석 중 오류 (%s)"
+
+#: gdk-pixbuf/io-jpeg.c:637
+msgid ""
+"Insufficient memory to load image, try exiting some applications to free "
+"memory"
+msgstr ""
+"이미지를 읽어 들이기에 메모리가 부족합니다.  메모리를 확보하려면 실행중인 프"
+"로그램을 끝내보십시오"
+
+#: gdk-pixbuf/io-jpeg.c:710 gdk-pixbuf/io-jpeg.c:947
+#, c-format
+msgid "Unsupported JPEG color space (%s)"
+msgstr "지원하지 않는 JPEG 색 공간 (%s)"
+
+#: gdk-pixbuf/io-jpeg.c:825 gdk-pixbuf/io-jpeg.c:1142 gdk-pixbuf/io-jpeg.c:1489
+#: gdk-pixbuf/io-jpeg.c:1499
+msgid "Couldn’t allocate memory for loading JPEG file"
+msgstr "JPEG 파일을 읽어 들일 때 필요한 메모리를 할당하지 못했습니다"
+
+#: gdk-pixbuf/io-jpeg.c:1100
+msgid "Transformed JPEG has zero width or height."
+msgstr "변환된 JPEG의 너비나 높이가 0입니다."
+
+#: gdk-pixbuf/io-jpeg.c:1126
+#, c-format
+msgid "Unsupported number of color components (%d)"
+msgstr "지원하지 않는 색 구성 요소 개수 (%d)"
+
+#: gdk-pixbuf/io-jpeg.c:1419
+#, c-format
+msgid ""
+"JPEG x-dpi must be a value between 1 and 65535; value “%s” is not allowed."
+msgstr ""
+"JPEG x-dpi는 1에서 65535 사이의 값이어야 합니다. “%s” 값은 쓸 수 없습니다."
+
+#: gdk-pixbuf/io-jpeg.c:1440
+#, c-format
+msgid ""
+"JPEG y-dpi must be a value between 1 and 65535; value “%s” is not allowed."
+msgstr ""
+"JPEG y-dpi는 1에서 65535 사이의 값이어야 합니다. “%s” 값은 쓸 수 없습니다."
+
+#: gdk-pixbuf/io-jpeg.c:1454
+#, c-format
+msgid "Color profile has invalid length “%u”."
+msgstr "색 프로파일의 길이가(“%u”) 올바르지 않습니다."
+
+#: gdk-pixbuf/io-png.c:63
+msgid "Bits per channel of PNG image is invalid."
+msgstr "PNG 이미지의 채널 당 비트수가 잘못되었습니다."
+
+#: gdk-pixbuf/io-png.c:144 gdk-pixbuf/io-png.c:703
+msgid "Transformed PNG has zero width or height."
+msgstr "변환된 PNG의 너비나 높이가 0입니다."
+
+#: gdk-pixbuf/io-png.c:152
+msgid "Bits per channel of transformed PNG is not 8."
+msgstr "변환된 PNG의 채널 당 비트수가 8이 아닙니다."
+
+#: gdk-pixbuf/io-png.c:161
+msgid "Transformed PNG not RGB or RGBA."
+msgstr "변환된 PNG가 RGB나 RGBA 형식이 아닙니다."
+
+#: gdk-pixbuf/io-png.c:170
+msgid "Transformed PNG has unsupported number of channels, must be 3 or 4."
+msgstr "변환된 PNG의 채널 수를 지원하지 않습니다. 3이나 4가 되어야 합니다."
+
+#: gdk-pixbuf/io-png.c:191
+#, c-format
+msgid "Fatal error in PNG image file: %s"
+msgstr "PNG 이미지 파일에서 치명적인 오류: %s"
+
+#: gdk-pixbuf/io-png.c:329
+msgid "Insufficient memory to load PNG file"
+msgstr "PNG 파일을 읽어들이는데 메모리가 부족합니다"
+
+#: gdk-pixbuf/io-png.c:498 gdk-pixbuf/io-png.c:519
+msgid "Couldn’t allocate memory for loading PNG"
+msgstr "PNG 파일을 읽어 들일 때 필요한 메모리를 할당하지 못했습니다"
+
+#: gdk-pixbuf/io-png.c:716
+#, c-format
+msgid ""
+"Insufficient memory to store a %lu by %lu image; try exiting some "
+"applications to reduce memory usage"
+msgstr ""
+"폭 %lu 높이 %lu의 이미지를 저장할 메모리가 부족합니다. 메모리를 확보하려면 실"
+"행중인 프로그램을 끝내보십시오"
+
+#: gdk-pixbuf/io-png.c:791
+msgid "Fatal error reading PNG image file"
+msgstr "PNG 이미지 파일을 읽어들이는데 치명적인 오류"
+
+#: gdk-pixbuf/io-png.c:840
+#, c-format
+msgid "Fatal error reading PNG image file: %s"
+msgstr "PNG 이미지 파일을 읽어들이는데 치명적인 오류: %s"
+
+#: gdk-pixbuf/io-png.c:937
+#, c-format
+msgid ""
+"Invalid key “%s”. Keys for PNG text chunks must have at least 1 and at most "
+"79 characters."
+msgstr ""
+"“%s” 키가 잘못되었습니다. PNG 텍스트 부분의 키에서는 최소 1 최대 79 문자까지 "
+"쓸 수 있습니다."
+
+#: gdk-pixbuf/io-png.c:950
+#, c-format
+msgid "Invalid key “%s”. Keys for PNG text chunks must be ASCII characters."
+msgstr ""
+"“%s” 키가 잘못되었습니다. PNG 텍스트 부분의 키는 아스키 문자로 되어 있어야 합"
+"니다."
+
+#: gdk-pixbuf/io-png.c:980
+#, c-format
+msgid ""
+"Value for PNG text chunk '%s' cannot be converted to ISO-8859-1 encoding."
+msgstr "PNG 텍스트 부분 '%s'의 값을 ISO-8859-1 인코딩으로 변환할 수 없습니다."
+
+#: gdk-pixbuf/io-png.c:992
+#, c-format
+msgid "Color profile has invalid length %d"
+msgstr "색 프로파일의 길이가 (%d) 올바르지 않습니다."
+
+#: gdk-pixbuf/io-png.c:1004
+#, c-format
+msgid ""
+"PNG compression level must be a value between 0 and 9; value “%s” is invalid"
+msgstr ""
+"PNG 압축 단계는 0에서 9 사이의 값이어야 합니다. “%s” 값을 쓸 수 없습니다."
+
+#: gdk-pixbuf/io-png.c:1018
+#, c-format
+msgid "PNG %s must be greater than zero; value “%s” is not allowed"
+msgstr "PNG %s은(는) 0보다 큰 값이어야 합니다. “%s” 값은 쓸 수 없습니다."
+
+#: gdk-pixbuf/io-png.c:1246
+msgctxt "image format"
+msgid "PNG"
+msgstr "PNG"
+
+#: gdk-pixbuf/io-pnm.c:247
+msgid "PNM loader expected to find an integer, but didn’t"
+msgstr ""
+"PNM 읽어 들이기에서 정수가 나와야 하는 상황에서, 정수가 나오지 않았습니다"
+
+#: gdk-pixbuf/io-pnm.c:279
+msgid "PNM file has an incorrect initial byte"
+msgstr "PNM 파일의 최초 바이트가 올바르지 못합니다"
+
+#: gdk-pixbuf/io-pnm.c:309
+msgid "PNM file is not in a recognized PNM subformat"
+msgstr "PNM 파일이 인식 가능한 PNM 서브포맷에 맞지 않습니다"
+
+#: gdk-pixbuf/io-pnm.c:334
+msgid "PNM file has an invalid width"
+msgstr "PNM 파일의 이미지 너비가 잘못되었습니다"
+
+#: gdk-pixbuf/io-pnm.c:342
+msgid "PNM file has an image width of 0"
+msgstr "PNM 파일의 이미지 너비가 0입니다"
+
+#: gdk-pixbuf/io-pnm.c:363
+msgid "PNM file has an invalid height"
+msgstr "PNM 파일의 이미지 높이가 잘못되었습니다"
+
+#: gdk-pixbuf/io-pnm.c:371
+msgid "PNM file has an image height of 0"
+msgstr "PNM 파일의 이미지 높이가 0입니다"
+
+#: gdk-pixbuf/io-pnm.c:394
+msgid "Maximum color value in PNM file is 0"
+msgstr "PNM 파일의 최대 색 값이 0입니다"
+
+#: gdk-pixbuf/io-pnm.c:402
+msgid "Maximum color value in PNM file is too large"
+msgstr "PNM 파일의 최대 색 값이 너무 큽니다"
+
+#: gdk-pixbuf/io-pnm.c:442 gdk-pixbuf/io-pnm.c:472 gdk-pixbuf/io-pnm.c:517
+msgid "Raw PNM image type is invalid"
+msgstr "로우 PNM 이미지 형식이 잘못되었습니다"
+
+#: gdk-pixbuf/io-pnm.c:667
+msgid "PNM image loader does not support this PNM subformat"
+msgstr "PNM 이미지 읽어 들이기가 이 PNM 서브포맷을 지원하지 않습니다"
+
+#: gdk-pixbuf/io-pnm.c:754 gdk-pixbuf/io-pnm.c:991
+msgid "Raw PNM formats require exactly one whitespace before sample data"
+msgstr "로우 PNM 형식에서는 견본 데이터 앞에 정확히 한 개의 공백이 와야 합니다"
+
+#: gdk-pixbuf/io-pnm.c:781
+msgid "Cannot allocate memory for loading PNM image"
+msgstr "PNM 이미지를 읽어들이는데 필요한 메모리를 할당할 수 없습니다"
+
+#: gdk-pixbuf/io-pnm.c:835
+msgid "Insufficient memory to load PNM context struct"
+msgstr "PNM 컨텍스트 구조를 읽어들이는데 메모리가 부족합니다"
+
+#: gdk-pixbuf/io-pnm.c:892
+msgid "Unexpected end of PNM image data"
+msgstr "PNM 이미지 데이터가 갑자기 끝났습니다"
+
+#: gdk-pixbuf/io-pnm.c:1020
+msgid "Insufficient memory to load PNM file"
+msgstr "PNM 파일 읽는데 메모리 부족"
+
+#: gdk-pixbuf/io-pnm.c:1103
+msgctxt "image format"
+msgid "PNM/PBM/PGM/PPM"
+msgstr "PNM/PBM/PGM/PPM"
+
+#: gdk-pixbuf/io-qtif.c:126
+msgid "Input file descriptor is NULL."
+msgstr "입력 파일 디스크립터가 NULL입니다."
+
+#: gdk-pixbuf/io-qtif.c:141
+msgid "Failed to read QTIF header"
+msgstr "QTIF 헤더를 읽는데 실패"
+
+#: gdk-pixbuf/io-qtif.c:150 gdk-pixbuf/io-qtif.c:187 gdk-pixbuf/io-qtif.c:449
+#, c-format
+msgid "QTIF atom size too large (%d byte)"
+msgid_plural "QTIF atom size too large (%d bytes)"
+msgstr[0] "QTIF 아톰 크기가 너무 큽니다 (%d 바이트)"
+
+#: gdk-pixbuf/io-qtif.c:173
+#, c-format
+msgid "Failed to allocate %d byte for file read buffer"
+msgid_plural "Failed to allocate %d bytes for file read buffer"
+msgstr[0] "파일 읽기 버퍼에 %d 바이트를 할당하는데 실패"
+
+#: gdk-pixbuf/io-qtif.c:201
+#, c-format
+msgid "File error when reading QTIF atom: %s"
+msgstr "GIF 아톰을 읽는 중 파일 오류: %s"
+
+#: gdk-pixbuf/io-qtif.c:238
+#, c-format
+msgid "Failed to skip the next %d byte with seek()."
+msgid_plural "Failed to skip the next %d bytes with seek()."
+msgstr[0] "seek()을 이용해 다음 %d 바이트 위치로 이동하는데 실패."
+
+#: gdk-pixbuf/io-qtif.c:269
+msgid "Failed to allocate QTIF context structure."
+msgstr "QTIF 컨텍스트 구조를 할당하는데 실패."
+
+#: gdk-pixbuf/io-qtif.c:329
+msgid "Failed to create GdkPixbufLoader object."
+msgstr "GdkPixbufLoader 오브젝트를 만드는데 실패."
+
+#: gdk-pixbuf/io-qtif.c:424
+msgid "Failed to find an image data atom."
+msgstr "이미지 데이터 아톰을 찾는데 실패."
+
+#: gdk-pixbuf/io-qtif.c:599
+msgctxt "image format"
+msgid "QuickTime"
+msgstr "QuickTime"
+
+#: gdk-pixbuf/io-tga.c:346
+msgid "Cannot allocate colormap"
+msgstr "컬러맵을 할당할 수 없습니다"
+
+#: gdk-pixbuf/io-tga.c:371
+msgid "Cannot allocate new pixbuf"
+msgstr "새 픽스버퍼를 할당할 수 없습니다"
+
+#: gdk-pixbuf/io-tga.c:519
+msgid "Unexpected bitdepth for colormap entries"
+msgstr "지원하지 않는 컬러맵 항목의 색상 모드"
+
+#: gdk-pixbuf/io-tga.c:535
+msgid "Pseudocolor image does not contain a colormap"
+msgstr "가상 컬러 이미지에 컬러맵이 들어있지 않습니다."
+
+#: gdk-pixbuf/io-tga.c:578
+msgid "Cannot allocate TGA header memory"
+msgstr "TGA 헤더 메모리를 할당할 수 없습니다"
+
+#: gdk-pixbuf/io-tga.c:609
+msgid "TGA image has invalid dimensions"
+msgstr "TGA 이미지의 크기가 잘못되었습니다"
+
+#: gdk-pixbuf/io-tga.c:615 gdk-pixbuf/io-tga.c:622
+msgid "TGA image type not supported"
+msgstr "TGA 이미지 형식은 지원하지 않습니다"
+
+#: gdk-pixbuf/io-tga.c:650
+msgid "Cannot allocate memory for TGA context struct"
+msgstr "TGA 컨텍스트 구조에 필요한 메모리를 할당할 수 없습니다"
+
+#: gdk-pixbuf/io-tga.c:712
+msgid "TGA image was truncated or incomplete."
+msgstr "TGA 이미지가 잘려져 있거나 불완전합니다."
+
+#: gdk-pixbuf/io-tga.c:764
+msgctxt "image format"
+msgid "Targa"
+msgstr "Targa"
+
+#: gdk-pixbuf/io-tiff.c:116
+msgid "Could not get image width (bad TIFF file)"
+msgstr "이미지 너비를 얻을 수 없습니다(틀린 TIFF 파일)"
+
+#: gdk-pixbuf/io-tiff.c:124
+msgid "Could not get image height (bad TIFF file)"
+msgstr "이미지 높이를 얻을 수 없습니다(틀린 TIFF 파일)"
+
+#: gdk-pixbuf/io-tiff.c:132
+msgid "Width or height of TIFF image is zero"
+msgstr "TIFF 이미지의 너비나 높이가 0입니다"
+
+#: gdk-pixbuf/io-tiff.c:140 gdk-pixbuf/io-tiff.c:150
+msgid "Dimensions of TIFF image too large"
+msgstr "TIFF 이미지의 크기가 너무 큽니다"
+
+#: gdk-pixbuf/io-tiff.c:176 gdk-pixbuf/io-tiff.c:188 gdk-pixbuf/io-tiff.c:584
+msgid "Insufficient memory to open TIFF file"
+msgstr "TIFF 파일 여는데 메모리 부족"
+
+#: gdk-pixbuf/io-tiff.c:286
+msgid "Failed to load RGB data from TIFF file"
+msgstr "TIFF 파일에서 RGB 데이터 읽기 실패"
+
+#: gdk-pixbuf/io-tiff.c:377
+msgid "Failed to open TIFF image"
+msgstr "TIFF 이미지 열기 실패"
+
+#: gdk-pixbuf/io-tiff.c:515 gdk-pixbuf/io-tiff.c:527
+msgid "Failed to load TIFF image"
+msgstr "TIFF 이미지를 읽어들이는데 실패"
+
+#: gdk-pixbuf/io-tiff.c:759
+msgid "Failed to save TIFF image"
+msgstr "TIFF 이미지를 저장하는데 실패"
+
+#: gdk-pixbuf/io-tiff.c:820
+msgid "TIFF compression doesn’t refer to a valid codec."
+msgstr "TIFF 압축이 가리키는 코덱이 올바르지 않습니다."
+
+#: gdk-pixbuf/io-tiff.c:850
+#, c-format
+msgid "Color profile has invalid length %d."
+msgstr "색 프로파일의 길이가 (%d) 올바르지 않습니다."
+
+#: gdk-pixbuf/io-tiff.c:865
+msgid "TIFF bits-per-sample doesn’t contain a supported value."
+msgstr "TIFF 샘플당 비트 수 값이 지원하는 값이 아닙니다."
+
+#: gdk-pixbuf/io-tiff.c:946
+msgid "Failed to write TIFF data"
+msgstr "TIFF 데이터를 쓰는데 실패"
+
+#: gdk-pixbuf/io-tiff.c:964
+#, c-format
+msgid "TIFF x-dpi must be greater than zero; value “%s” is not allowed."
+msgstr "TIFF x-dpi는 0보다 큰 값이어야 합니다. “%s” 값은 쓸 수 없습니다."
+
+#: gdk-pixbuf/io-tiff.c:976
+#, c-format
+msgid "TIFF y-dpi must be greater than zero; value “%s” is not allowed."
+msgstr "TIFF y-dpi는 0보다 큰 값이어야 합니다. “%s” 값은 쓸 수 없습니다."
+
+#: gdk-pixbuf/io-tiff.c:1017
+msgid "Couldn’t write to TIFF file"
+msgstr "TIFF 파일에 쓸 수 없습니다"
+
+#: gdk-pixbuf/io-xbm.c:320
+msgid "Invalid XBM file"
+msgstr "잘못된 XBM 파일"
+
+#: gdk-pixbuf/io-xbm.c:331
+msgid "Insufficient memory to load XBM image file"
+msgstr "XBM 이미지 파일을 읽어 들이기에 메모리가 부족합니다"
+
+#: gdk-pixbuf/io-xbm.c:482
+msgid "Failed to write to temporary file when loading XBM image"
+msgstr "XBM 이미지를 읽어들이는데 임시 파일을 쓸 수 없습니다"
+
+#: gdk-pixbuf/io-xbm.c:521
+msgctxt "image format"
+msgid "XBM"
+msgstr "XBM"
+
+#: gdk-pixbuf/io-xpm.c:472
+msgid "No XPM header found"
+msgstr "XPM 헤더를 찾을 수 없습니다"
+
+#: gdk-pixbuf/io-xpm.c:481 gdk-pixbuf/io-xpm.c:507
+msgid "Invalid XPM header"
+msgstr "잘못된 XPM 헤더"
+
+#: gdk-pixbuf/io-xpm.c:489
+msgid "XPM file has image width <= 0"
+msgstr "XPM 파일의 이미지 너비가 0보다 같거나 작습니다"
+
+#: gdk-pixbuf/io-xpm.c:497
+msgid "XPM file has image height <= 0"
+msgstr "XPM 파일의 이미지 높이가 0보다 같거나 작습니다"
+
+#: gdk-pixbuf/io-xpm.c:514
+msgid "XPM has invalid number of chars per pixel"
+msgstr "XPM 파일이 잘못된 픽셀당 문자 수를 가지고 있습니다"
+
+#: gdk-pixbuf/io-xpm.c:523
+msgid "XPM file has invalid number of colors"
+msgstr "XPM 파일이 잘못된 색 개수를 가지고 있습니다"
+
+#: gdk-pixbuf/io-xpm.c:535 gdk-pixbuf/io-xpm.c:544 gdk-pixbuf/io-xpm.c:593
+msgid "Cannot allocate memory for loading XPM image"
+msgstr "XPM 이미지를 읽어들이는데 필요한 메모리를 할당할 수 없습니다"
+
+#: gdk-pixbuf/io-xpm.c:558
+msgid "Cannot read XPM colormap"
+msgstr "XPM 컬러맵을 읽을 수 없습니다"
+
+#: gdk-pixbuf/io-xpm.c:610
+msgid "Dimensions do not match data"
+msgstr "이미지 크기가 픽셀 데이터와 일치하지 않습니다"
+
+#: gdk-pixbuf/io-xpm.c:806
+msgid "Failed to write to temporary file when loading XPM image"
+msgstr "XPM 이미지를 읽어들이는데 임시 파일을 쓸 수 없습니다"
+
+#: gdk-pixbuf/io-xpm.c:845
+msgctxt "image format"
+msgid "XPM"
+msgstr "XPM"
+
+#~ msgid "Internal error in the GIF loader (%s)"
+#~ msgstr "GIF 읽기에서 내부 오류 (%s)"
+
+#~ msgid "Bad code encountered"
+#~ msgstr "잘못된 코드 발견"
+
+#~ msgid "Stack overflow"
+#~ msgstr "스택 넘침"
+
+#~ msgid "GIF image loader cannot understand this image."
+#~ msgstr "GIF 이미지 읽기에서 이 이미지를 이해할 수 없습니다."
+
+#~ msgid "Circular table entry in GIF file"
+#~ msgstr "GIF 파일에 순환 테이블 항목"
+
+#~ msgid "Not enough memory to composite a frame in GIF file"
+#~ msgstr "GIF 파일의 프레임을 만드는데 메모리가 충분하지 않습니다"
+
+#~ msgid "Couldn’t allocate memory for stream"
+#~ msgstr "스트림에 필요한 메모리를 할당할 수 없습니다"
+
+#~ msgid "Couldn’t decode image"
+#~ msgstr "이미지를 디코딩할 수 없습니다"
+
+#~ msgid "Transformed JPEG2000 has zero width or height"
+#~ msgstr "변환된 JPEG 2000의 너비나 높이가 0입니다."
+
+#~ msgid "Image type currently not supported"
+#~ msgstr "이미지 형식을 현재 지원하지 않습니다"
+
+#~ msgid "Couldn’t allocate memory for color profile"
+#~ msgstr "컬러 프로파일에 필요한 메모리를 할당할 수 없습니다"
+
+#~ msgid "Insufficient memory to open JPEG 2000 file"
+#~ msgstr "JPEG 2000 파일 여는데 메모리 부족"
+
+#~ msgid "Couldn’t allocate memory to buffer image data"
+#~ msgstr "이미지 데이터를 버퍼링 하는데 사용할 메모리를 할당할 수 없습니다"
+
+#~ msgctxt "image format"
+#~ msgid "JPEG 2000"
+#~ msgstr "JPEG 2000"
+
+#~ msgid ""
+#~ "PNG compression level must be a value between 0 and 9; value “%s” could "
+#~ "not be parsed."
+#~ msgstr ""
+#~ "PNG 압축 단계는 0에서 9 사이의 값이어야 합니다. “%s” 값을 분석할 수 없습니"
+#~ "다."
+
+#~ msgid "PNG y-dpi must be greater than zero; value “%s” is not allowed."
+#~ msgstr "PNG y-dpi는 0보다 큰 값이어야 합니다. “%s” 값은 쓸 수 없습니다."

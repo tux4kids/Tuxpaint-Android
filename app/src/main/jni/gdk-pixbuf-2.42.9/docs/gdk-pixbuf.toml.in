@@ -1,0 +1,129 @@
+# SPDX-FileCopyrightText: 2021 GNOME Foundation
+#
+# SPDX-License-Identifier: CC0-1.0
+
+[library]
+name = "gdk-pixbuf"
+version = "@VERSION@"
+browse_url = "https://gitlab.gnome.org/GNOME/gdk-pixbuf/"
+repository_url = "https://gitlab.gnome.org/GNOME/gdk-pixbuf.git"
+website_url = "https://www.gtk.org"
+authors = "GTK Development Team"
+license = "GPL-2.1-or-later"
+description = "Image loading library"
+dependencies = [ "gobject", "gio" ]
+devhelp = true
+search_index = true
+
+  [dependencies.gobject]
+  name = "GObject"
+  description = "The base type system library"
+  docs_url = "https://developer.gnome.org/gobject/stable"
+
+  [dependencies.gio]
+  name = "GIO"
+  description = "GObject Interfaces and Objects"
+  docs_url = "https://developer.gnome.org/gio/stable"
+
+[theme]
+name = "basic"
+show_index_summary = true
+
+[source-location]
+base_url = "https://gitlab.gnome.org/GNOME/gdk-pixbuf/-/blob/master/"
+
+[extra]
+urlmap_file = "urlmap.js"
+content_images = [
+  'apple-red-1a.png',
+  'apple-red-2c.png',
+  'composite.png',
+  'gnome-gmush-1.png',
+]
+content_files = [
+  'scaling-compositing.md',
+]
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_0_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_2_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_4_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_6_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_8_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_10_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_12_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_14_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_16_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_18_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_20_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_22_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_24_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_26_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_28_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_30_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_32_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_34_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_36_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_38_FOR"
+hidden = true
+
+[[object]]
+name = "PIXBUF_DEPRECATED_IN_2_40_FOR"
+hidden = true
