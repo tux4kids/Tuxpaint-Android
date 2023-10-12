@@ -27,6 +27,9 @@ fi
 
 if [ $RUN = true ]
 then
+    stamps_version="2023.07.20"
+    stampsversion=`echo $stamps_version|sed "s/\./-/g"`
+
     if [ -d tmpzip ]
     then
 	rm -rf tmpzip
@@ -53,7 +56,15 @@ then
 	cp -r templates tmpzip/data/templates &&\
 	mkdir tmpzip/etc && \
 	cp src/tuxpaint.cfg-android tmpzip/etc/tuxpaint.cfg && \
+	wget -O tuxpaint-stamps-$stamps_version.tar.gz https://sourceforge.net/projects/tuxpaint/files/tuxpaint-stamps/$stampsversion/tuxpaint-stamps-$stamps_version.tar.gz/download &&
+	tar xfz tuxpaint-stamps-$stamps_version.tar.gz &&
+	cd tuxpaint-stamps-$stamps_version &&
+	../join_subdirs.sh &&
+	cd .. &&
 	mkdir -p ../../assets && \
 	mv tmpzip/* ../../assets/ && \
-	rmdir tmpzip
+	cp -r tuxpaint-stamps-$stamps_version/tmpzip/stamps/* ../../assets/stamps/ && \
+	rmdir tmpzip && \
+	rm -rf tuxpaint-stamps-$stamps_version && \
+	rm tuxpaint-stamps-$stamps_version.tar.gz
 fi
