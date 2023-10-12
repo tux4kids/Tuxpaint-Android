@@ -8,6 +8,7 @@ else {
 }
 
 android {
+    namespace 'org.tuxpaint'
     compileSdkVersion 33
     defaultConfig {
         minSdkVersion 21
@@ -15,7 +16,7 @@ android {
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
-                abiFilters 'armeabi-v7a', 'arm64-v8a'
+                abiFilters 'arm64-v8a'
             }
         }
     }
@@ -96,4 +97,5 @@ preBuild.dependsOn copyDataFiles,copyConfigFile
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "androidx.print:print:1.0.0"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 }
