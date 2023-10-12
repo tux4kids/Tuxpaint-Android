@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: March 7, 2023
+  Last updated: July 1, 2023
   $Id$
 */
 
@@ -71,5 +71,7 @@ const char *const fill_img_fnames[NUM_FILLS] = {
   DATA_PREFIX "images/fills/gradient_radial.png",
   DATA_PREFIX "images/fills/gradient_shaped.png"
 };
+
+#define TIP_FILL_LINEAR_MOVING gettext_noop("Click and drag to fill an area with a linear gradient (from the chosen color to transparent). (Your gradient’s angle is %.0f degrees.)")
 
 #endif

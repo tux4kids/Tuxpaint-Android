@@ -3,7 +3,7 @@
 # Bill Kendrick <bill@newbreedsoftware.com>; https://tuxpaint.org/
 # Based on inkscape's completion file, by allali@univ-mlv.fr
 #
-# Last modified 2023-04-12
+# Last modified 2023-06-01
 #
 # $Id$
 
@@ -26,6 +26,7 @@ _tuxpaint()
 			-v --version -vv --verbose-version \
 			-c --copying \
 			-u --usage \
+			--listfonts \
 			-w --windowed -f --fullscreen \
 			--native \
 			--disablescreensaver --allowscreensaver \
@@ -53,12 +54,14 @@ _tuxpaint()
                         --newcolorsfirst --newcolorslast \
                         --colorsrows=1 --colorsrows=2 \
                         --colorsrows=3 \
+			--uifont --uifont=default \
 			--sysfonts --nosysfonts \
 			--nostampcontrols --stampcontrols \
 			--nostamprotation --stamprotation \
 			--nomagiccontrols --magiccontrols \
 			--nomagicsizes --magicsizes \
 			--noshapecontrols --shapecontrols \
+			--notemplateexport --templateexport \
 			--mirrorstamps --dontmirrorstamps \
 			--stampsize=0 --stampsize=1 \
 			--stampsize=2 --stampsize=3 \
@@ -67,6 +70,7 @@ _tuxpaint()
 			--stampsize=8 --stampsize=9 --stampsize=default \
 			--saveoverask --saveover --saveovernew \
 			--nosave --save \
+			--noerase --erase \
 			--autosave --noautosave \
 			--savedir --datadir --exportdir \
 			--reversesort --noreversesort \

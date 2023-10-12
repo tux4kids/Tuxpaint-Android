@@ -17,15 +17,15 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        version 0.9.30        Questions fréquemment posées      </h1>
+        version 0.9.31        Questions fréquemment posées      </h1>
 
       <p>
-        Copyright &copy; 2002-2023 by divers contributeurs; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        Copyright &copy; 2002-2023 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
       <p>
-        mars 16, 2023      </p>
+        juillet 20, 2023      </p>
     </center>
 
     <hr size="2"
@@ -161,27 +161,7 @@
         Les images de la boîte de dialogue "Ouvrir" ne sont pas jolies      </dt>
 
       <dd>
-        "Miniatures de faible qualité" a été probablement activé. Voir: "Les vignettes de tampon dans le sélecteur de tampon ne sont pas jolies", ci-dessus.      </dd>
-
-      <dt>
-        Les boutons du sélecteur de couleurs sont des carrés affreux, pas de jolis boutons !      </dt>
-
-      <dd>
-        <p>
-          Tux Paint a probablement été compilé avec les jolis boutons de sélection de couleur désactivés. Exécutez la commande: "<code>tuxpaint --verbose-version</code>" à partir d'une ligne de commande. Si, parmi les résultats, vous voyez le texte: "Low Quality Color Selector enabled", c'est ce qui se passe.        </p>
-
-        <p>
-          Pour changer cela, vous devez reconstruire Tux Paint à partir des sources. Assurez-vous de supprimer ou de commenter toute ligne qui dit :        </p>
-
-        <blockquote>
-          <p>
-            <code>#define LOW_QUALITY_COLOR_SELECTOR</code>
-          </p>
-        </blockquote>
-
-        <p>
-          dans le fichier "tuxpaint.c" du répertoire "src".        </p>
-      </dd>
+        "Miniatures de faible qualité" a été probablement activé. Voir : "Les vignettes de tampon dans le sélecteur de tampon ne sont pas jolies", ci-dessus.      </dd>
 
       <dt>
         Tout le texte est en majuscule !      </dt>
@@ -699,6 +679,28 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
           Par défaut, Tux Paint regarde d'abord les fichiers de configuration pour les options.        </p>
 
         <ul>
+
+          <li>
+            <i>Windows</i>
+            <p>
+              Sous Windows, Tux Paint examine d'abord le fichier de configuration :            </p>
+
+            <blockquote>
+              <p>
+                <code>tuxpaint.cfg</code>
+              </p>
+            </blockquote>
+
+            <p>
+              Et finalement, toutes les options envoyées en tant qu'arguments de ligne de commande sont utilisées.            </p>
+          </li>
+
+          <li>
+            <i>macOS</i>
+            <p>
+                          </p>
+          </li>
+
           <li>
             <i>Unix et Linux</i>
             <p>
@@ -724,18 +726,9 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
           </li>
 
           <li>
-            <i>Windows</i>
+            <i>Haiku</i>
             <p>
-              Sous Windows, Tux Paint examine d'abord le fichier de configuration :            </p>
-
-            <blockquote>
-              <p>
-                <code>tuxpaint.cfg</code>
-              </p>
-            </blockquote>
-
-            <p>
-              Et finalement, toutes les options envoyées en tant qu'arguments de ligne de commande sont utilisées.            </p>
+                          </p>
           </li>
         </ul>
 
@@ -770,7 +763,7 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
         </blockquote>
 
         <p>
-          Les utilisateurs Linux et Unix peuvent également désactiver le fichier de configuration à l'échelle du système en incluant l'argument de ligne de commande suivant :        </p>
+          Les utilisateurs Linux et Unix peuvent également désactiver le fichier de configuration à l'échelle du système en incluant l'argument de ligne de commande suivant :                  </p>
 
         <blockquote>
           <p>

@@ -1,7 +1,7 @@
 /* tp_magic_example.c
 
    An example of a "Magic" tool plugin for Tux Paint
-   2023年4月13日
+   4月 13, 2023
 */
 
 

@@ -17,10 +17,10 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        version 0.9.30        'Guide pratique" pour les tampons de haute qualité      </h1>
+        version 0.9.31        'Guide pratique" pour les tampons de haute qualité      </h1>
 
       <p>
-        Copyright &copy; 2006-2022 by Albert Cahalan et d'autres; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        Copyright &copy; 2006-2022 by Albert Cahalan et d'autres; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
@@ -149,7 +149,7 @@
         Importez votre image dans votre éditeur d'image. Si vous n'avez pas encore recadré votre image, vous pouvez trouver que votre éditeur est très lent. Faites une rotation et recadrer l'image comme vous voulez. Sauvegardez l'image -- choisissez tout format supportant les calques, les masques, alpha, etc... Les utilisateurs de <a href="http://www.gimp.org/">GIMP</a> choisiront le format XCF, et les utilisateurs de Adobe Photoshop choisiront PSD, à titre d'exemple.      </p>
 
       <p>
-        Si vous avez effectué une rotation et un recadrage de votre image,  applatissez-la. Vous n'avez besoin que d'un seul calque RGB <i> sans masque ou canal alpha</i>.      </p>
+        Si vous avez effectué une rotation et un recadrage de votre image,  aplatissez la. Vous n'avez besoin que d'un seul calque RGB <i> sans masque ou canal alpha</i>.      </p>
 
       <p>
         Ouvrez la boîte de dialogue qui concerne les calques. Reproduisez une couche plusieurs fois. Du haut jusqu'en bas vous aurez besoin de quelque chose comme cela :      </p>
@@ -180,7 +180,7 @@
 
     <blockquote>
       <p>
-        Prenez l'habitude de faire un <b>[Control]</b>-clic et un <b>[Alt]</b>-clic sur les images-vignettes dans la boîte de dialogue des calques. Vous devez le faire pour vérifier ce que vous voyez et ce que vous éditez. Parfois vous éditerez des choses que vous ne pouvez pas voir. Par exemple, vous pouvez éditer le masque du masque WIP, tout en regardant l'image non modifiée. Faites attention à ne pas vous tromper. Vérifiez toujours que vous éditez ce qu'il faut.      </p>
+        Prenez l'habitude de faire un <b>[Control]</b>-clic et un <b>[Alt]</b>-clic sur les images-vignettes dans la boîte de dialogue des calques. Vous devez le faire pour contrôler ce que vous voyez avec ce que vous éditez. Parfois vous éditerez des choses que vous ne pouvez pas voir. Par exemple, vous pouvez éditer le masque du masque WIP, tout en regardant l'image non modifiée. Faites attention à ne pas vous tromper. Vérifiez toujours que vous éditez ce qu'il faut.      </p>
 
       <p>
         Définissez une image non-modifiée comme étant celle que vous voulez afficher (celle du haut est la plus facile). Définissez le masque WIP comme étant ce que vous allez éditer. À un moment donné, vous devriez agrandir l'image à environ 400 % (chaque pixel de l'image est vu et représenté par un bloc de 4x4 pixels sur votre écran.      </p>
@@ -237,14 +237,14 @@ déposez cette couleur dans la sélection, supprimant ainsi la plupart des pixel
         <li>composite sur magenta (masque activé)</li>
         <li>original (calque supérieur ou inférieur)</li>
         <li>composite sur l'original (masque activé)</li>
-        <li>calque WIP brut (masque <strong>désactivé</strong></li>
+        <li>calque WIP brut (masque <strong>désactivé</strong>)</li>
       </ul>
 
       <p>
         Pour réduire les accidents, vous souhaiterez peut-être sélectionner uniquement les pixels qui ne sont pas gris dans le masque. (Sélectionnez par couleur dans le masque, choisissez le noir, ajoutez le mode, choisissez le blanc, inversez. Ou bien : sélectionnez tout, sélectionnez par couleur dans le masque, soustrayez le mode, choisissez le noir, choisissez le blanc.) Si vous faites cela, vous voudrez probablement élargir un peu la sélection et / ou masquer la ligne "fourmis rampantes" qui marque la sélection.      </p>
 
       <p>
-        Use the clone tool and the brush tool. Vary the opacity as needed. Use small round brushes mostly, perhaps 3x3 or 5x5, fuzzy or not. (It is generally nice to pair up fuzzy brushes with 100% opacity and non-fuzzy brushes with about 70% opacity.) Unusual drawing modes can be helpful with semi-transparent objects.      </p>
+        Utilisez l'outil de clonage et l'outil de pinceau. Faites varier l'opacité selon vos besoins. Utilisez principalement des petites brosses rondes, peut-être de 3x3 ou 5x5, floues ou non. (Il est généralement agréable d'associer des pinceaux flous 100 % opaques et des pinceaux non flous environ 70 % opaques). On peut utiliser des modes de dessin inhabituels avec des objets semi-transparents.      </p>
 
       <p>
         Le but est de supprimer la frange de bord, à la fois à l'intérieur et à l'extérieur de l'objet. La frange intérieure, visible lorsque l'objet est composé de magenta ou de vert, doit être supprimée pour des raisons évidentes. La frange extérieure doit également être supprimée car elle deviendra visible lorsque l'image sera réduite. À titre d'exemple, considérons une région avec 2x2 de pixels au bord d'un objet aux arêtes vives. La moitié gauche est noire et opaque à 0%. La moitié droite est blanche et 100% opaque. Autrement dit, nous avons un objet blanc sur fond noir. Lorsque Tux Paint redimensionne cela à 50% (une zone de 1 x 1 pixel), le résultat sera un pixel opaque gris à 50%. Le résultat correct devrait être un pixel blanc opaque à 50%. Pour obtenir ce résultat, nous devrions peindre les pixels noirs. Ils comptent, bien qu'ils soient à 0 % d'opacité.      </p>
@@ -263,7 +263,7 @@ déposez cette couleur dans la sélection, supprimant ainsi la plupart des pixel
 
     <blockquote>
       <p>
-        It is very easy to ruin your hard work. Image editors can silently destroy pixels in 0% opaque areas. The conditions under which this happens may vary from version to version. If you are very trusting, you can try saving your image directly as a PNG. Be sure to read it back in again to verify that the 0% opaque areas didn't turn black or white, which would create fringes when Tux Paint scales the image down. If you need to scale your image to save space (and hide your mistakes), you are almost certain to destroy all the 0% opaque areas. So here is a better way...      </p>
+        Il est très facile de gâcher votre travail, lui qui vous a demandé beaucoup d'efforts. Les éditeurs d'images peuvent détruire silencieusement les pixels dans les zones à 0% opacité . Les conditions dans lesquelles cela se produit peuvent varier d'une version à l'autre. Si vous êtes très confiant, vous pouvez essayer d'enregistrer votre image directement au format PNG. Assurez-vous de le relire pour vérifier que les zones à 0% opacité ne deviennent ni noires ni blanches, ce qui créerait des franges lorsque Tux Paint réduira l'image. Si vous devez redimensionner votre image pour gagner de la place (et cacher vos erreurs), vous êtes presque certain de détruire toutes les zones à 0% opacité. Alors, voici une meilleure façon...      </p>
 
       <h3>
         Une façon sûre pour sauvegarder      </h3>
@@ -279,7 +279,7 @@ déposez cette couleur dans la sélection, supprimant ainsi la plupart des pixel
           Vous pouvez fermer l'image du masque.        </p>
 
         <p>
-          Pour revenir à l'image multicouche, sélectionnez maintenant le calque WIP. Comme vous l'avez fait avec le masque, faites-le glisser de la boîte de dialogue des calques vers la barre d'outils. Vous devriez obtenir une image monocouche de vos données WIP. Si le masque est venu aussi, débarrassez-vous-en. Vous devriez voir l'objet et les environs peints, sans aucune vignette de masque dans la boîte de dialogue des calques. Si vous avez mis à l'échelle le masque, mettez cette image à l'échelle exactement de la même manière. Enregistrez cette image en tant que pixmap portable NetPBM ("<code>.ppm</code>"). (Remarque : <code>.ppm</code>, <code>.pgm</code>.) (Si vous choisissez le format RAW PPM, le deuxième octet du fichier doit être le chiffre ASCII «6», octet hexadécimal 0x36.)        </p>
+          Pour revenir à l'image multicouche, sélectionnez maintenant le calque WIP. Comme vous l'avez fait avec le masque, faites-le glisser de la boîte de dialogue des calques vers la barre d'outils. Vous devriez obtenir une image monocouche de vos données WIP. Si le masque est venu aussi, débarrassez-vous-en. Vous devriez voir l'objet et les environs peints, sans aucune vignette de masque dans la boîte de dialogue des calques. Si vous avez mis à l'échelle le masque, mettez cette image à l'échelle exactement de la même manière. Enregistrez cette image en tant que pixmap portable NetPBM ("<code>.ppm</code>"). (Remarque : <code>.ppm</code>, pas <code>.pgm</code>.) (Si vous choisissez le format RAW PPM, le deuxième octet du fichier doit être le chiffre ASCII «6», octet hexadécimal 0x36.)        </p>
 
         <p>
           Vous devez maintenant fusionner les deux fichiers en un seul. Faites cela avec la commande <a href="http://netpbm.sourceforge.net/">pnmtopng</a>, comme ceci :        </p>

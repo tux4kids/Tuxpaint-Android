@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Copyright (c) 2002-2022 by Bill Kendrick
+  Copyright (c) 2002-2023 by Bill Kendrick
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 

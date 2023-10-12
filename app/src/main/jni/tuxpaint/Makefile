@@ -4,15 +4,19 @@
 # Various contributors (see AUTHORS.txt)
 # https://tuxpaint.org/
 
-# June 14, 2002 - May 18, 2023
+# June 14, 2002 - July 20, 2023
 
 
 # The version number, for release:
 
-VER_VERSION:=0.9.30
+VER_VERSION:=0.9.31
 
 # We are always SDL2 now, so don't need "-sdl2"
 VER_FLAVOR:=""
+
+# Set to yes if you don't want to install in current live system
+# this affects icons and other desktop related files
+PACKAGE_ONLY:=no
 
 ifdef SOURCE_DATE_EPOCH
   VER_DATE=$(shell date -u -d "@$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u -r "$(SOURCE_DATE_EPOCH)" "+%Y-%m-%d" 2>/dev/null || date -u "+%Y-%m-%d")
@@ -266,6 +270,7 @@ endif
 
 # Icons and launchers:
 ICON_PREFIX:=$(DESTDIR)$(PREFIX)/share/pixmaps
+NEWICON_PREFIX:=$(DESTDIR)$(PREFIX)/share/icons/hicolor
 X11_ICON_PREFIX:=$(DESTDIR)$(PREFIX)/share/pixmaps
 
 # Appstream metainfo
@@ -294,11 +299,16 @@ SDL_LIBS+=$(call linktest,libpng,$(PNG),)
 SDL_MIXER_LIB:=$(call linktest,SDL2_mixer,-lSDL2_mixer,$(SDL_LIBS))
 NOSOUNDFLAG:=$(if $(SDL_MIXER_LIB),,-DNOSOUND$(warning -lSDL2_Mixer failed, no sound for you!))
 
-# SDL Pango is needed to render complex scripts like Thai and Arabic
+# SDL2_Pango is used to render text (and is needed for complex scripts like Thai and Arabic)
 SDL2_PANGO_LIB:=$(call linktest,SDL2_Pango,-lSDL2_Pango,$(SDL_LIBS))
 SDL2_PANGO_CFLAGS:=$(shell $(PKG_CONFIG) --cflags SDL2_Pango)
 
-SDL_LIBS+=$(SDL_MIXER_LIB) $(SDL2_PANGO_LIB)
+# Pango itself is needed for direct and indirect access to some Pango functions
+PANGO_LIB:=$(call linktest,pango,-lpango,$(SDL_LIBS))
+PANGO_LIB+=$(call linktest,pangoft2,-lpangoft2,$(SDL_LIBS))
+PANGO_CFLAGS:=$(shell $(PKG_CONFIG) --cflags pango)
+
+SDL_LIBS+=$(SDL_MIXER_LIB) $(SDL2_PANGO_LIB) $(PANGO_LIB)
 
 SDL_CFLAGS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --cflags)
 
@@ -319,20 +329,22 @@ OLDSVGFLAG:=$(if $(filter -lsvg-cairo,$(SVG_LIB)),-DOLD_SVG,)
 
 PNG_CFLAGS:=$(shell $(PKG_CONFIG) libpng --cflags)
 
+CONVERT:=./convert-wrapper.sh
 
 ifeq ($(hack),1)
 hack:
 	@echo 'SDL2_PANGO_LIB is' $(SDL2_PANGO_LIB)
-	@echo 'SDL_MIXER_LIB is' $(SDL_MIXER_LIB)
-	@echo 'SVG_LIB       is' $(SVG_LIB)
-	@echo 'SDL_LIBS      is' $(SDL_LIBS)
-	@echo 'SDL_CFLAGS    is' $(SDL_CFLAGS)
-	@echo 'SVG_CFLAGS    is' $(SVG_CFLAGS)
-	@echo 'PAPER_LIB     is' $(PAPER_LIB)
-	@echo 'PNG           is' $(PNG)
-	@echo 'LDFLAGS       is' $(LDFLAGS)
-	@echo 'CFLAGS        is' $(CFLAGS)
-	@echo 'CPPFLAGS      is' $(CPPFLAGS)
+	@echo 'PANGO_LIB      is' $(PANGO_LIB)
+	@echo 'SDL_MIXER_LIB  is' $(SDL_MIXER_LIB)
+	@echo 'SVG_LIB        is' $(SVG_LIB)
+	@echo 'SDL_LIBS       is' $(SDL_LIBS)
+	@echo 'SDL_CFLAGS     is' $(SDL_CFLAGS)
+	@echo 'SVG_CFLAGS     is' $(SVG_CFLAGS)
+	@echo 'PAPER_LIB      is' $(PAPER_LIB)
+	@echo 'PNG            is' $(PNG)
+	@echo 'LDFLAGS        is' $(LDFLAGS)
+	@echo 'CFLAGS         is' $(CFLAGS)
+	@echo 'CPPFLAGS       is' $(CPPFLAGS)
 endif
 
 # The entire set of CFLAGS:
@@ -346,7 +358,8 @@ CFLAGS:=$(CPPFLAGS) $(OPTFLAGS) -W -Wall -fno-common -ffloat-store \
 	-Waggregate-return \
 	-Wstrict-prototypes -Wmissing-prototypes \
 	$(shell src/test-option.sh -Wstrict-aliasing=2) \
-    $(SDL2_PANGO_CFLAGS) \
+	$(PANGO_CFLAGS) \
+	$(SDL2_PANGO_CFLAGS) \
 	$(ARCH_CFLAGS)
 
 DEFS:=-DVER_DATE=\"$(VER_DATE)\" -DVER_VERSION=\"$(VER_VERSION)\" \
@@ -368,7 +381,7 @@ MOUSE_CFLAGS:=-Isrc/$(MOUSEDIR) -D$(CURSOR_SHAPES)_CURSOR_SHAPES
 # are 132x80.  On larger screens, they will be bigger (since the New dialog
 # is always 4x4 thumbnails); therefore, generating larger thumbs, which can
 # be still be scaled down fairly quickly (esp. complicated SVG ones).
-CONVERT_OPTS:=-alpha Background -alpha Off +depth -resize !264x160 -background white -interlace none
+CONVERT_OPTS:=-alpha Background -alpha Off +depth -resize "!264x160" -background white -interlace none
 
 .SUFFIXES:
 
@@ -536,6 +549,7 @@ endif
 # Build the translation files for gettext
 
 $(MOFILES): trans/%.mo: src/po/%.po
+	@-mkdir -p trans
 	msgfmt -o $@ $<
 
 %.desktop: %.desktop.in $(POTFILES)
@@ -553,20 +567,19 @@ translations: trans
 	@echo "Install gettext to run Tux Paint in non-U.S. English modes."
 	@echo "--------------------------------------------------------------"
 else
-translations: trans $(MOFILES) src/tuxpaint.desktop src/tuxpaint-fullscreen.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
+translations: $(MOFILES) src/tuxpaint.desktop src/tuxpaint-fullscreen.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
 endif
-
-trans:
-	@echo
-	@echo "...Preparing translation files..."
-	@mkdir trans
 
 ######
 
 windows_ARCH_INSTALL:=
 macos_ARCH_INSTALL:=install-macbundle
 ios_ARCH_INSTALL:=install-iosbundle
-linux_ARCH_INSTALL:=install-xdg install-man install-importscript install-bash-completion
+ifeq ($(PACKAGE_ONLY),yes)
+	linux_ARCH_INSTALL:=install-pkgxdg install-man install-importscript install-bash-completion
+else
+	linux_ARCH_INSTALL:=install-xdg install-man install-importscript install-bash-completion
+endif
 ARCH_INSTALL:=$($(OS)_ARCH_INSTALL)
 
 # "make install" installs all of the various parts
@@ -589,27 +602,10 @@ install:	install-bin install-data install-doc \
         echo "The App Bundle has been created as $(BUNDLE)!  Now you can:"; \
         echo; \
         echo "  * Double click $(BUNDLE) to run the application,"; \
-        echo "  * sign the App Bundle (see below),"; \
         echo "  * build the universal App Bundle (see below),"; \
         echo "  * and/or run 'make TuxPaint.dmg' to create the DMG file for distribution."; \
         echo; \
         echo "For usage, see $(DOC_PREFIX)/[locale]/README.txt"; \
-        echo; \
-        echo "SIGNING THE APP BUNDLE"; \
-        echo "----------------------"; \
-        echo "Signing is optional for the Intel CPU build, or for the Apple Silicon build if"; \
-        echo "it is to be run only on the system on which it was built (e.g., for"; \
-        echo "development.)  The App Bundle must be signed if it is built to run natively on"; \
-        echo "the Apple Silicon and is distributed."; \
-        echo; \
-        echo "To sign the App Bundle, use the following commands, where IDENTITY is your Apple"; \
-        echo "Developer ID if you have one, or a hyphen (-) to sign it ad-hoc:"; \
-        echo; \
-        echo "  codesign --remove-signature $(BUNDLE)  # to remove any existing signature"; \
-        echo "  codesign -s IDENTITY $(BUNDLE)"; \
-        echo; \
-        echo "If you are building the universal Apple Bundle, sign the App Bundle *after*"; \
-        echo "building the universal App Bundle."; \
         echo; \
         echo "BUILDING THE UNIVERSAL APP BUNDLE"; \
         echo "---------------------------------"; \
@@ -857,10 +853,10 @@ $(THUMB_STARTERS):
 	@if [ "x" != "x"$(STARTER_BACK_NAME) ] ; \
 	then \
 		composite $(STARTER_NAME) $(STARTER_BACK_NAME) obj/tmp_$(notdir $(STARTER_NAME)).png ; \
-		convert $(CONVERT_OPTS) obj/tmp_$(notdir $(STARTER_NAME)).png $@ 2> /dev/null ; \
+		$(CONVERT) $(CONVERT_OPTS) obj/tmp_$(notdir $(STARTER_NAME)).png $@ 2> /dev/null ; \
 		rm obj/tmp_$(notdir $(STARTER_NAME)).png ; \
 	else \
-		convert $(CONVERT_OPTS) $(STARTER_NAME) $@ 2> /dev/null || ( echo "($@ failed)" ; rm -f $@ ) ; \
+		$(CONVERT) $(CONVERT_OPTS) $(STARTER_NAME) $@ 2> /dev/null || ( echo "($@ failed)" ; rm -f $@ ) ; \
 	fi
 
 $(INSTALLED_THUMB_STARTERS): $(DATA_PREFIX)/%: % install-example-starters-dirs
@@ -915,7 +911,7 @@ TEMPLATE_NAME=$(or $(wildcard $(subst templates/.thumbs,templates,$(@:-t.png=.sv
 $(THUMB_TEMPLATES):
 	@printf "."
 	@mkdir -p templates/.thumbs
-	@convert $(CONVERT_OPTS) $(TEMPLATE_NAME) $@ 2> /dev/null || ( echo "($@ failed)" ; rm -f $@ ) ; \
+	@$(CONVERT) $(CONVERT_OPTS) $(TEMPLATE_NAME) $@ 2> /dev/null || ( echo "($@ failed)" ; rm -f $@ ) ; \
 
 $(INSTALLED_THUMB_TEMPLATES): $(DATA_PREFIX)/%: %
 	@install -D -m 644 $< $@ || ( echo "NO THUMB $<" )
@@ -965,9 +961,27 @@ install-nokia770:
 # Install a launcher icon in the Linux desktop environment's (freedesktop.org) menus...
 # FIXME: No way to install SVG icons using `xdg-icon-resource`
 # (see https://bugs.launchpad.net/ubuntu/+source/xdg-utils/+bug/790449)
+# if package_only, then install to destdir locations rather than live system
+.PHONY: install-pkgxdg
+install-pkgxdg: src/tuxpaint.desktop src/tuxpaint-fullscreen.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
+	@mkdir -p $(DESTDIR)$(PREFIX)/share/applications
+	cp -a src/tuxpaint.desktop $(DESTDIR)$(PREFIX)/share/applications/
+	cp -a src/tuxpaint-fullscreen.desktop $(DESTDIR)$(PREFIX)/share/applications/
+	mkdir -p $(NEWICON_PREFIX)/{16x16,22x22,32x32,48x48,64x64,96x96,128x128,192x192}/apps
+	mkdir -p $(METAINFO_PREFIX)
+	cp -a data/images/icon16x16.png $(NEWICON_PREFIX)/16x16/apps/tuxpaint.png
+	cp -a data/images/icon22x22.png $(NEWICON_PREFIX)/22x22/apps/tuxpaint.png
+	cp -a data/images/icon32x32.png $(NEWICON_PREFIX)/32x32/apps/tuxpaint.png
+	cp -a data/images/icon48x48.png $(NEWICON_PREFIX)/48x48/apps/tuxpaint.png
+	cp -a data/images/icon64x64.png $(NEWICON_PREFIX)/64x64/apps/tuxpaint.png
+	cp -a data/images/icon96x96.png $(NEWICON_PREFIX)/96x96/apps/tuxpaint.png
+	cp -a data/images/icon128x128.png $(NEWICON_PREFIX)/128x128/apps/tuxpaint.png
+	cp -a data/images/icon192x192.png $(NEWICON_PREFIX)/192x192/apps/tuxpaint.png
+	install --mode=0644 -Dt $(METAINFO_PREFIX) src/org.tuxpaint.Tuxpaint.appdata.xml
+
 .PHONY: install-xdg
 install-xdg: src/tuxpaint.desktop src/tuxpaint-fullscreen.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
-	@echo
+	@echo ""
 	@echo "...Installing launcher icon into desktop environment..."
 	@if [ "x$(shell which xdg-icon-resource)" != "x" ]; then \
 	  xdg-icon-resource install --size 192 data/images/icon192x192.png tux4kids-tuxpaint ; \
@@ -999,19 +1013,23 @@ install-xdg: src/tuxpaint.desktop src/tuxpaint-fullscreen.desktop src/org.tuxpai
 	  update-desktop-database ; \
 	fi
 	install --mode=0644 -Dt $(METAINFO_PREFIX) src/org.tuxpaint.Tuxpaint.appdata.xml
+#do package path related stuff, ie use destdir
 
 # Install the PNG icon (for KDE desktop, etc.)
 # and the 24-color 32x32 XPM (for other Window managers):
+# if package-only was yes, we already did this. so do nothing.
 .PHONY: install-icon
 install-icon:
-	@echo
-	@echo "...Installing launcher icon graphics..."
-	@install -d $(ICON_PREFIX)
-	@cp data/images/icon.png $(ICON_PREFIX)/tuxpaint.png
-	@chmod 644 $(ICON_PREFIX)/tuxpaint.png
-	@install -d $(X11_ICON_PREFIX)
-	@cp data/images/icon32x32.xpm $(X11_ICON_PREFIX)/tuxpaint.xpm
-	@chmod 644 $(X11_ICON_PREFIX)/tuxpaint.xpm
+	@if [ "x$(PACKAGE_ONLY)" != "xyes" ]; then \
+	  echo; \
+	  echo "...Installing launcher icon graphics..."; \
+	  install -d $(ICON_PREFIX); \
+	  cp data/images/icon.png $(ICON_PREFIX)/tuxpaint.png; \
+	  chmod 644 $(ICON_PREFIX)/tuxpaint.png; \
+	  install -d $(X11_ICON_PREFIX); \
+	  cp data/images/icon32x32.xpm $(X11_ICON_PREFIX)/tuxpaint.xpm; \
+	  chmod 644 $(X11_ICON_PREFIX)/tuxpaint.xpm; \
+	fi
 
 
 # Install the program:
@@ -1264,7 +1282,7 @@ obj/fonts.o:	src/fonts.c src/fonts.h src/dirwalk.h src/progressbar.h \
 		src/get_fname.h src/debug.h
 	@echo
 	@echo "...Compiling font support..."
-	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
+	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/fonts.c -o obj/fonts.o
 
 obj/dirwalk.o:	src/dirwalk.c src/dirwalk.h src/progressbar.h src/fonts.h \

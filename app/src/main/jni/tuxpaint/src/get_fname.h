@@ -1,7 +1,7 @@
 /*
   get_fname.h
 
-  Copyright (c) 2009-2022
+  Copyright (c) 2009-2023
   https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -19,8 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last modified: December 11, 2022
-  $Id$
+  Last modified: June 8, 2023
 */
 
 #ifndef GET_FNAME_H
@@ -41,5 +40,8 @@ enum
 
 char *get_fname(const char *const name, int kind);
 
+/* Prefix for templates exported within Tux Paint (via Open dialog),
+   so we can delete them (via New dialog) */
+#define EXPORTED_TEMPLATE_PREFIX "exported"
 
 #endif

@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 19, 2023
+  Last updated: July 1, 2023
 */
 
 #include <stdio.h>
@@ -44,6 +44,7 @@ static Mix_Chunk *calligraphy_snd;
 static Point2D calligraphy_control_points[4];
 static int calligraphy_r, calligraphy_g, calligraphy_b;
 static int calligraphy_old_thick;
+static int callig_size;
 static Uint32 calligraphy_last_time;
 static SDL_Surface *calligraphy_brush, *calligraphy_colored_brush;
 
@@ -201,6 +202,9 @@ void calligraphy_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
   for (i = 0; i < n_points - 1; i++)
   {
     thick = ((new_thick * i) + (calligraphy_old_thick * (n_points - i))) / n_points;
+    thick = thick * callig_size / 4;
+    if (thick < 4)
+      thick = 4;
 
 
     /* The new way, using an antialiased brush bitmap */
@@ -450,16 +454,17 @@ int calligraphy_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
 Uint8 calligraphy_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
                                  int mode ATTRIBUTE_UNUSED)
 {
-  return 0;
+  return 4;
 }
 
 Uint8 calligraphy_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return 0;
+  return 2;
 }
 
 void calligraphy_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
                           SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                          Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                          Uint8 size, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
+  callig_size = size;
 }

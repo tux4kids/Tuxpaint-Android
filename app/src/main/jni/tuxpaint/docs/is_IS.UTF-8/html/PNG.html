@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Tux Paint PNG Documentation    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+    <section class="outer">
+      <header>
+        <center>
+          <h1>
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.31<br/>
+            PNG Documentation          </h1>
+    
+          <p>
+            Copyright &copy; 2007-2022 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+    
+          <p>
+            júní  4, 2022          </p>
+        </center>
+      </header>
+    </section>
+
+    <section class="indent">
+      <header>
+        <h1>About PNGs</h1>
+      </header>
+
+      <p>
+        PNG is the Portable Network Graphic format.  It is an open standard, not burdened by patents (like GIFs).  It is a highly compressed format (though not "lossy" like JPEGs - lossiness allows files to be much smaller, but introduces 'mistakes' in the image when saved), and supports 24-bit color (16.7 million colors) as well as a full "alpha channel" - that is, each pixel can have a varying degree of transparency.      </p>
+  
+      <p>
+        For more information, visit: <a href="http://www.libpng.org/">http://www.libpng.org/</a>      </p>
+  
+      <p>
+        These features (openness, losslessness, compression, transparency/alpha) make it the best choice for Tux Paint.  (Tux Paint's support for the PNG format comes from the Open Source SDL_Image library, which in turn gets it from the libPNG library.)      </p>
+  
+      <p>
+        Support for many colors allows photo-quality "rubber stamp" images to be used in Tux Paint, and alpha transparency allows for high-quality brushes.      </p>
+    </section>
+
+    <section class="indent">
+      <header>
+        <h2>How To Make PNGs</h2>
+      </header>
+  
+      <p>The following is a very <em>brief</em> list of ways to create PNGs or convert existing images into PNGs.  
+      <dl>
+        <dt>GIMP &amp; Krita</dt>
+        <dd>
+          <p>
+            Excellent tools with which to create PNG images for use in Tux Paint are GIMP and Krita, both high-quality Open Source interactive drawing and photo editing programs.          </p>
+      
+          <p>
+            It is likely that one or both are already installed on your system. If not, they should be readily available from your Linux distribution's software repository.  If not, or to learn more, visit <a href="http://www.gimp.org/">http://www.gimp.org/</a> and <a href="http://www.krita.org/">http://www.krita.org/</a>, respectively.          </p>
+        </dd>
+  
+        <dt>Command-line Tools</dt>
+        <dd>
+          <dl>
+            <dt>NetPBM</dt>
+            <dd>
+              <p>
+                The Portable Bitmap tools (collectively known as "NetPBM") is a collection of Open Source command-line tools which convert to and from various formats, including GIF, TIFF, BMP, PNG, and many more.              </p>
+          
+              <p>
+                It is possible that it's already installed on your system. If not, they it be readily available from your Linux distribution's software repository.  If not, or to learn more, visit <a href="http://netpbm.sourceforge.net/">http://netpbm.sourceforge.net/</a>.              </p>
+            </dd>
+        
+            <dt>cjpeg/djpeg</dt>
+            <dd>
+              <p>
+                The "cjpeg" and "djpeg" command-line programs convert between the NetPBM Portable Any Map (PNM) format and JPEGs.          
+                It is possible that it's already installed on your system. If not, they it be readily available from your Linux distribution's software repository.  If not, or to learn more, visit <a href="https://jpegclub.org/">https://jpegclub.org/</a>.              </p>
+            </dd>
+          </dl>
+        </dd>
+  
+        <dt>Proprietary Software for Windows</dt>
+        <dd>
+          <ul>
+            <li>  <cite>CorelDRAW</cite>
+  (Corel)
+  &mdash;
+  <a href="http://www.corel.com/">http://www.corel.com/</a>
+              <li>  <cite>Illustrator</cite>
+  (Adobe)
+  &mdash;
+  <a href="http://www.adobe.com/products/illustrator.html">http://www.adobe.com/products/illustrator.html</a>
+              <li>  <cite>Paint Shop Pro</cite>
+  (Corel)
+  &mdash;
+  <a href="https://www.paintshoppro.com/">https://www.paintshoppro.com/</a>
+              <li>  <cite>Photoshop</cite>
+  (Adobe)
+  &mdash;
+  <a href="http://www.adobe.com/products/photoshop.html">http://www.adobe.com/products/photoshop.html</a>
+              <li>  <cite>PIXresizer</cite>
+  (Bluefive software)
+  &mdash;
+  <a href="http://bluefive.pair.com/pixresizer.htm">http://bluefive.pair.com/pixresizer.htm</a>
+            </ul>
+        </dd>
+  
+        <dt>Macintosh Users</dt>
+        <dd>
+          <ul>
+            <li>  <cite>CorelDRAW</cite>
+  (Corel)
+  &mdash;
+  <a href="http://www.corel.com/">http://www.corel.com/</a>
+              <li>  <cite>GraphicConverter</cite>
+  (Lemke Software)
+  &mdash;
+  <a href="https://www.lemkesoft.de/mac-fotobearbeitung-mac-diashow-mac-grafikprogramm-mac-bildbetrachter/">https://www.lemkesoft.de/mac-fotobearbeitung-mac-diashow-mac-grafikprogramm-mac-bildbetrachter/</a>
+              <li>  <cite>Illustrator</cite>
+  (Adobe)
+  &mdash;
+  <a href="http://www.adobe.com/products/illustrator.html">http://www.adobe.com/products/illustrator.html</a>
+              <li>  <cite>Photoshop</cite>
+  (Adobe)
+  &mdash;
+  <a href="http://www.adobe.com/products/photoshop.html">http://www.adobe.com/products/photoshop.html</a>
+            </ul>
+        </dd>
+      </dl>
+    </section>
+  </body>
+</html>
+

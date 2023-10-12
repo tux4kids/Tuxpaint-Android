@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.30          </h1>
+            version 0.9.31          </h1>
 
           <h2>
             Magic Tool Plugin API Documentation          </h2>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            April 13, 2023          </p>
+            July 17, 2023          </p>
         </center>
       </header>
 
@@ -599,7 +599,7 @@
           <dl>
             <dt><code><b>char * tp_version</b></code></dt>
             <dd>
-              A string containing the version of Tux Paint that's running (e.g., "0.9.30").            </dd>
+              A string containing the version of Tux Paint that's running (e.g., "0.9.31").            </dd>
 
             <dt>
               <code><b>int canvas_w</b></code><br/>
@@ -746,7 +746,7 @@
             <p>
               It should be referenced by your magic tool's "<code>api_version()</code>" function, to inform the running copy of Tux Paint whether or not your plugin is compatible.            </p>
             <p>
-              <b>Note:</b> This version number does not correspond to Tux Paint's own release number (e.g., "0.9.30").  The API will not change every time a new version of Tux Paint is released, which means plugins compiled for earlier versions of Tux Paint will often run under newer versions.            </p>
+              <b>Note:</b> This version number does not correspond to Tux Paint's own release number (e.g., "0.9.31").  The API will not change every time a new version of Tux Paint is released, which means plugins compiled for earlier versions of Tux Paint will often run under newer versions.            </p>
           </dd>
 
           <dt>
@@ -1066,7 +1066,7 @@
             Create arrays of "<code>NUM_TOOLS</code>" length to contain effect-specific data.            <blockquote><code>
               char * my_plugin_snd_filenames[NUM_TOOLS] = {<br>
               &nbsp;&nbsp;&nbsp;&nbsp;"one.ogg", "another.ogg", "yet_another.ogg" };<br>
-              Mix_Chunk * my_plugin_snds[NUM_TOOLS]") ?>;
+              Mix_Chunk * my_plugin_snds[NUM_TOOLS]");
             </code></blockquote>
           </li>
 
@@ -1080,7 +1080,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;/* Becomes, for example, "/usr/share/tuxpaint/sounds/magic/one.ogg" */<br>
               <br>
               &nbsp;&nbsp;&nbsp;&nbsp;snprintf(fname, sizeof(fname), "%s/sounds/magic/%<!-- -->s",<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;api->data_prefix, my_plugin_snd_filenames[i]);<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;api-&gt;data_prefix, my_plugin_snd_filenames[i]);<br>
               <br>
               &nbsp;&nbsp;&nbsp;&nbsp;my_plugin_snds[i] = Mix_LoadWAV(fname);<br>
               }
@@ -1138,7 +1138,7 @@
         <h1 id="glossary">
           Glossary        </h1>
       </header>
-
+      
       <ul>
         <li>
           <b>alpha:</b>

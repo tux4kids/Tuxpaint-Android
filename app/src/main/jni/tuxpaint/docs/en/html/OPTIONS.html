@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.30          </h1>
+            version 0.9.31          </h1>
 
           <h2>
             Options Documentation          </h2>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            May 18, 2023          </p>
+            July 20, 2023          </p>
         </center>
       </header>
 
@@ -704,11 +704,37 @@
 
     <dd>
       <p>
-        Disables the brush spacing option of the <b>Paint</b> and <b>Lines</b> tools. The brushes' default spacings will be used.      </p>
+        Disables the <a href="README.html#brush_spacing">brush spacing</a> option of the <a href="README.html#using_tools_drawing_paint"><b>Paint</b></a> and <a href="using_tools_drawing_lines"><b>Lines</b></a> tools. The brushes' default spacings will be used.      </p>
       <p class="note">
         <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The brush spacing option was added to Tux Paint's user interface in version 0.9.28. For more information on brush spacing, see <a href="EXTENDING.html">EXTENDING.html</a>      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nobrushspacing=no</code>" or "<code>brushspacing=yes</code>". In both cases, may be overridden by the command-line option "<code>--brushspacing</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>notemplateexport=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disables the ability to create a new <a href="README.html#using_tools_other_new">Template</a> image (based on a saved drawing) from within the <a href="README.html#using_tools_other_open"><strong>Open</strong></a> dialog.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The Template creation feature was added to Tux Paint in version 0.9.31.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>notemplateexport=no</code>" or "<code>templateexport=yes</code>". In both cases, may be overridden by the command-line option "<code>--templateexport</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>noerase=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disables the ability to erase saved drawings via the "Erase" button on the <a href="README.html#using_tools_other_open"><strong>Open</strong></a> dialog, or exported <a href="README.html#using_tools_other_new">Template</a> images (based on a saved drawing) via the "Erase" button on the <a href="README.html#using_tools_other_new">New</a> dialog. Useful to prevent users from erasing work, especially combined with the <a href="#saving"><code>--saveovernew</code></a> option.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> This option was added to Tux Paint in version 0.9.31.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>noerase=no</code>" or "<code>erase=yes</code>". In both cases, may be overridden by the command-line option "<code>--erase</code>".      </p>
     </dd>
   </dl>
 </section>
@@ -1407,7 +1433,7 @@
 
 <section>
   <header>
-    <h3>Fonts</h3>
+    <h3 id="fonts">Fonts</h3>
   </header>
 
   <dl>
@@ -1434,6 +1460,18 @@
         To load all locale-specific fonts (the old behavior), set this option.      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>alllocalefonts=no</code>" or "<code>currentlocalefont=yes</code>". In both cases, may be overridden by the command-line option "<code>--currentlocalefont</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>uifont=FONT NAME</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This option causes Tux Paint to attempt to load fonts (for use in the <b>Text</b> tool) from your operating system. Normally, Tux Paint will only load the ones that came bundled with Tux Paint.      </p>
+
+      <p>
+        Specify "<code>default</code>" to let Tux Paint use its default font, "DejaVu Sans" (its standard behavior).      </p>
     </dd>
   </dl>
 </section>
@@ -1974,7 +2012,7 @@
         </li>
 
         <li>To click-and-drag, hold one of the 'click' keys (e.g., [Insert]), and use the movement keys (e.g., [Left]).          <p class="note">
-            <span title="Information">&#128161;</span>            ><strong>Note:</strong> The "mouse accessibility" feature works with the keyboard mouse controls. With both options enabled, painting tools can be used to draw by pressing a 'click' key to start clicking, movement keys to move around (which will draw), and another 'click' key to end the click (stop drawing).          </p>
+            <span title="Information">&#128161;</span>            <strong>Note:</strong> The "mouse accessibility" feature works with the keyboard mouse controls. With both options enabled, painting tools can be used to draw by pressing a 'click' key to start clicking, movement keys to move around (which will draw), and another 'click' key to end the click (stop drawing).          </p>
         </li>
 
         <li>A regular mouse and/or joystick may still be used (so you can, e.g., move with the mouse, and click with the keyboard, or vice-versa)        </li>
@@ -2352,8 +2390,10 @@
           --nostampcontrols<br>
           --nostamprotation<br>
           --nomagiccontrols<br>
+          --nomagicsizes<br>
           --noshapecontrols<br>
           --nolabel<br>
+          --nobrushspacing<br>
           --newcolorslast<br>
           --mouse-accessibility<br>
           --onscreen-keyboard<br>
@@ -2383,6 +2423,7 @@
           --joystick-btn-print<br>
           --joystick-buttons-ignore<br>
           --sysfonts<br>
+          --uifont=<i>FONT NAME</i><br>
           --alllocalefonts<br>
           --mirrorstamps<br>
           --stampsize=<i>SIZE</i><br>
@@ -2431,11 +2472,14 @@
           --stampcontrols<br>
           --stamprotation<br>
           --magiccontrols<br>
+          --magicsizes<br>
           --shapecontrols<br>
           --label<br>
+          --brushspacing<br>
           --newcolorsfirst<br>
           --nosysfonts<br>
           --currentlocalefont<br>
+          --uifont=default<br>
           --dontmirrorstamps<br>
           --stampsize=default<br>
           --mouse<br>

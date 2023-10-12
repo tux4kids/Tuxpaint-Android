@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: UTF-8 -*-
 # Copyright: Song Huang <song@song.idv.tw>
 # License: GUN GPL

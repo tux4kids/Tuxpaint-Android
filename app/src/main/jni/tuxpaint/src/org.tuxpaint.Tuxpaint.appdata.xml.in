@@ -4,7 +4,7 @@
 <component type="desktop">
   <id>org.tuxpaint.Tuxpaint</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-3.0+</project_license>
+  <project_license>GPL-2.0+</project_license>
   <name>Tux Paint</name>
   <summary>A drawing program for children</summary>
   <description>
@@ -43,6 +43,17 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.9.31" date="2023-07-20">
+      <description>
+        <p>New Magic tools: Loops, Ribbon, Smooth, and Squiggles.</p>
+        <p>Eraser tool now offers fuzzy (soft-edged) erasers.</p>
+        <p>Turn saved drawings into Templates (found in the New dialog) from within Tux Paint itself (via the Open dialog). (They may subsequently be deleted from the New dialog.)</p>
+        <p>"Erase" option to remove saved drawings from the Open dialog and exported templates from the New dialog may be disabled, via "noerase" configuration option.</p>
+        <p>Specify the user interface font, via "uifont" configuration option. (List available fonts with "--listfonts" on the command-line.)</p>
+        <p>Different (default) user interface fonts are once again used for under different locales.</p>
+        <p>Minor improvements to the selection buttons for the 'special' colors (pipette, HSV picker, and color mixer).</p>
+      </description>
+    </release>
     <release version="0.9.30" date="2023-05-14">
       <description>
         <p>Many Magic tools now offer size settings.</p>

@@ -1,100 +1,106 @@
                                    Tux Paint
-                                 versión 0.9.30
-                     Documentación de variábeis de contorno
+                                versión 0.9.31
+                    Documentación de variábeis de contorno
 
         Copyright © 2021-2023 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
                                5 de Maio de 2023
 
-     ----------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-   Tux Paint comprende unha serie de variábeis de contorno, ben directamente
-   ou indirectamente polas bibliotecas que emprega.
+Tux Paint comprende unha serie de variábeis de contorno, ben directamente ou
+indirectamente polas bibliotecas que emprega.
 
 Variábeis de contorno relacionadas co almacenamento
 
-   HOME
+HOME
 
-           Especifica o «directorio persoal» do usuario, que se usa para
-           localizar outros ficheiros ou directorios. Nalgúns casos, úsase
-           como parte dunha situación alternativa, cando non se configuran
-           outras variábeis de contorno (noutros lugares desta
-           documentación). Ás veces, a localización a empregar pode ser
-           anulada polas opcións fornecidas na liña de ordes ou a través do
-           ficheiro de configuración de Tux Paint. Consulte a documentación
-           de «OPCIÓNS» (OPTIONS) para máis detalles.
+    Especifica o «directorio persoal» do usuario, que se usa para localizar
+    outros ficheiros ou directorios. Nalgúns casos, úsase como parte dunha
+    situación alternativa, cando non se configuran outras variábeis de contorno
+    (noutros lugares desta documentación). Ás veces, a localización a empregar
+    pode ser anulada polas opcións fornecidas na liña de ordes ou a través do
+    ficheiro de configuración de Tux Paint. Consulte a documentación de
+    «OPCIÓNS» (OPTIONS) para máis detalles.
 
-           Algúns exemplos de onde se usa «$HOME» inclúen:
+    Algúns exemplos de onde se usa «$HOME» inclúen:
 
-              * A localización do ficheiro de configuración de Tux Paint
-              * A base de onde Tux Paint garda e carga os debuxos dos
-                usuarios
-              * A localización da colección privada de ficheiros de datos dun
-                usuario — selos, pinceis, etc. — (fronte aos dispoñíbeis no
-                sistema)
+      + A localización do ficheiro de configuración de Tux Paint
+      + A base de onde Tux Paint garda e carga os debuxos dos usuarios
+      + A localización da colección privada de ficheiros de datos dun usuario —
+        selos, pinceis, etc. — (fronte aos dispoñíbeis no sistema)
 
-   XDG_CONFIG_HOME
 
-           On Linux and other platforms where the X Desktop Group standards
-           are used, the location of the user's configuration files.
-           Specifically, where to find "user-dirs.dirs", where the
-           "XDG_PICTURES_DIR" might be defined. It is used for exporting
-           drawings and animated GIFs. Generally it's set to something like
-           "$HOME/Pictures/". If not specified, Tux Paint checks in the
-           directory "$HOME/.config/". If the configuration cannot be found,
-           Tux Paint simply exports drawings and GIFs to "$HOME".
+XDG_CONFIG_HOME
 
-   XDG_DATA_HOME
+    On Linux and other platforms where the X Desktop Group standards are used,
+    the location of the user's configuration files. Specifically, where to find
+    "user-dirs.dirs", where the "XDG_PICTURES_DIR" might be defined. It is used
+    for exporting drawings and animated GIFs. Generally it's set to something
+    like "$HOME/Pictures/". If not specified, Tux Paint checks in the directory
+    "$HOME/.config/". If the configuration cannot be found, Tux Paint simply
+    exports drawings and GIFs to "$HOME".
 
-           On Linux and other platforms where the X Desktop Group standards
-           are used, the location of the user's data directories.
-           Specifically, where to find the "Trash" directory. It is used when
-           deleting images from Tux Paint's "Open" dialog. If not set, the
-           location "$HOME/.local/share/Trash/" is used, if available. If
-           not, images are simply deleted, rather than moved anywhere.
 
-   TEMP
 
-           Especifica a localización onde se poden crear ficheiros temporais.
-           Só o usa Tux Paint nos sistemas operativos Microsoft Windows.
-           Emprega «userdata» se non se define.
+XDG_DATA_HOME
+
+    On Linux and other platforms where the X Desktop Group standards are used,
+    the location of the user's data directories. Specifically, where to find
+    the "Trash" directory. It is used when deleting images from Tux Paint's
+    "Open" dialog. If not set, the location "$HOME/.local/share/Trash/" is
+    used, if available. If not, images are simply deleted, rather than moved
+    anywhere.
+
+
+
+TEMP
+
+    Especifica a localización onde se poden crear ficheiros temporais. Só o usa
+    Tux Paint nos sistemas operativos Microsoft Windows. Emprega «userdata» se
+    non se define.
 
 Variábeis de contorno relacionadas co idioma
 
-   LANG
+LANG
+LANGUAGE
+LC_ALL
+LC_MESSAGES
 
-   LANGUAGE
+    Specify the language Tux Paint should utilize in its user interface.
+    Overridde by the "--lang" and "--locale" command-line options or their
+    configuration file counterparts. The "LANGUAGE" environment variable is
+    used, if set. If not, "LC_ALL" is used as a fallback. Then "LC_MESSAGES",
+    and finally "LANG".
 
-   LC_ALL
 
-   LC_MESSAGES
 
-           Specify the language Tux Paint should utilize in its user
-           interface. Overridde by the "--lang" and "--locale" command-line
-           options or their configuration file counterparts. The "LANGUAGE"
-           environment variable is used, if set. If not, "LC_ALL" is used as
-           a fallback. Then "LC_MESSAGES", and finally "LANG".
 
 Variábeisbles de contorno relacionadas co que se amosa
 
-   A seguir amósanse algunhas das variábeis de contorno compatíbeis con
-   Simple DirectMedia Layer (libSDL) — que Tux Paint utiliza para amosar
-   gráficos, reproducir sons e recibir entrada do rato, teclado e joystick —
-   e que poden ser útiles para os usuarios de Tux Paint.
+A seguir amósanse algunhas das variábeis de contorno compatíbeis con Simple
+DirectMedia Layer (libSDL) — que Tux Paint utiliza para amosar gráficos,
+reproducir sons e recibir entrada do rato, teclado e joystick — e que poden ser
+útiles para os usuarios de Tux Paint.
 
-   SDL_VIDEO_ALLOW_SCREENSAVER
+SDL_VIDEO_ALLOW_SCREENSAVER
 
-           Especifica se Tux Paint debería permitir a execución dun protector
-           de pantalla. Pode ser definido como «1» (verdadeiro) polo propio
-           Tux Paint emitindo a opción de liña de ordes «--allowscreensaver»
-           ou o seu equivaente no ficheiro de configuración.
+    Especifica se Tux Paint debería permitir a execución dun protector de
+    pantalla. Pode ser definido como «1» (verdadeiro) polo propio Tux Paint
+    emitindo a opción de liña de ordes «--allowscreensaver» ou o seu equivaente
+    no ficheiro de configuración.
 
-   SDL_VIDEO_WINDOW_POS
 
-           Requests where to position Tux Paint's window, and can be used to
-           specify what display to place a fullscreen Tux Paint in a
-           multi-monitor configuration. If not set, or set to "nopref"
-           (meaning "no preference"), Simple DirectMedia Layer (libSDL)
-           decides. Can be set to an X,Y coordinate (e.g. 200,100), or
-           "center" (meaning "center").
+
+SDL_VIDEO_WINDOW_POS
+
+    Requests where to position Tux Paint's window, and can be used to specify
+    what display to place a fullscreen Tux Paint in a multi-monitor
+    configuration. If not set, or set to "nopref" (meaning "no preference"),
+    Simple DirectMedia Layer (libSDL) decides. Can be set to an X,Y coordinate
+    (e.g. 200,100), or "center" (meaning "center").
+
+
+
+

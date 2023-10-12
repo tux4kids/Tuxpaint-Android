@@ -6,6 +6,231 @@ Copyright (c) 2002-2023
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
+2023.October.5 (0.9.32)
+  * Other Improvements:
+    -------------------
+    * Simplify macOS building by signing macOS app bundle anonymously by
+      default.
+      Mark Kim <markuskimius@gmail.com>
+
+  * Localization Updates:
+    ---------------------
+    * Bulgarian
+      Note: Does an overhaul of most of the translations to replace more
+      polite, plural verb forms, with singular, spoken forms.
+      Vankata453 <https://sourceforge.net/u/vankata453>
+
+    * French translation
+      Jacques Chion <jacques.chion@orange.fr>
+
+    * French documentation
+      Jacques Chion <jacques.chion@orange.fr>
+
+    * Portuguese (Portugal) translation
+      Hugo Carvalho <hugokarvalho@hotmail.com>
+
+2023.July.20 (0.9.31)
+  * New Magic Tools:
+    ----------------
+    * Loops - Draw loop-the-loops.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      Sound effect CC-BY 4.0 by
+      https://freesound.org/people/Jagadamba/
+
+    * Ribbon - Paints a flowing, fixed-length ribbon.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      Sound effect CC-BY 3.0 by
+      https://freesound.org/people/CosmicEmbers/
+
+    * Smooth - Freehand paintbrush with a smoothing effect (Bezier curve)
+      h/t Pere for the idea
+      Bill Kendrick <bill@newbreedsoftware.com>
+      Sound effect CC-BY 4.0 by
+      https://freesound.org/people/PercyFrench/
+
+    * Squiggles - Draw squiggly shapes.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      Sound effect CC0 (public domain)
+      by https://freesound.org/people/Tomoyo%20Ichijouji/
+
+  * Improvements to Magic tools:
+    ----------------------------
+    * Calligraphy offers size (thickness) options.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      h/t abruh for the idea
+
+  * Improvements to Eraser tool:
+    ----------------------------
+    * Fuzzy round erasers
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to Fill tool:
+    --------------------------
+    * When using the Linear Gradient fill tool, the angle of the
+      gradient is now is shown (in the instructions at the bottom).
+      Bill Kendrick <bill@newbreedsoftware.com>
+      h/t Miyagi Andel for the idea
+
+  * Other Improvements:
+    -------------------
+    * Saved pictures can, from the Open dialog, be copied into
+      the user's templates directory, and used as backgrounds
+      for other drawings by selecting it from the New dialog.
+      + If the original image has already been exported as a template,
+        it will not be re-saved.  We check, in this order:
+        - identical filename prefix (based on original saved picture)
+        - identical file sizes (bytes)
+        - identical image dimensions (pixels)
+        - identical image data (CRC checksum)
+      + Templates created from saved drawings in Tux Paint can
+        be removed via a new "Erase" option that will appear when
+        such templates are selected from the "New" dialog. [See below]
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/236/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * "Erase" controls may be disabled via a new simplification
+      configuration setting, "noerase".  This removes the ability
+      to delete:
+      + saved images from the "Open" dialog, and
+      + templates, from the "New" dialog
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Ability to specify a font for Tux Paint's UI (button labels,
+      dialog boxes, Tux tip text at the bottom), "uifont".
+      + Notes:
+        - The requested font & actual font loaded will be echo'd to STDOUT.
+        - Be aware of spaces; wrap in quotes (") or escape with backslash (\)
+          when needed, when using the "--uifont=..." command-line option.
+      + Tux Paint can list available fonts to STDOUT (and then exits) if
+        given the command-line option "--listfonts".
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/146/
+      Bill Kendrick <bill@newbreedsoftware.com>
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Different default fonts once again used on a per-locale basis.
+      (This returns us to how Tux Paint behaved when we used
+      SDL_ttf to directly load fonts for the UI, and used TTF font files
+      that we ship in the `fonts/locale/` directory.  We now ask Pango,
+      via FontConfig, to look there for fonts.)
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/240/
+      Bill Kendrick <bill@newbreedsoftware.com> (code)
+      h/t Mark Kim & TOYAMA Shin-ichi
+
+    * Made it easier to tell when color picker (HSV palette)
+      is the currently-selected color.
+      https://sourceforge.net/p/tuxpaint/bugs/279/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Documentation updates:
+    ----------------------
+    * Added a "Controlling Tux Paint" section to README
+      (covers mice/etc., tablets and touchscreens, joysticks,
+      and keyboard accessibility mode).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Using `w3m` (rather than `links`) to generated plain text
+      alternatives to HTML documentation.  (It handles word-wrapping
+      Japanese text properly.)  Using a small PHP script to handle
+      forbidden wrapping (e.g., no full-stop "。" at the beginning
+      of lines, etc.) when processing Japanese docs.
+      h/t TOYAMA Shin-ichi
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Bug Fixes:
+    ----------
+    * In some window size / button size combinations, Eraser
+      scroll buttons were missing, and button clicks inaccurate.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Improved Eraser XOR outline when using Ctrl-Z & Ctrl-R
+      for Undo/Redo, and Eraser and Stamp XOR outlines when
+      using click+X for quick eraser access.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * When specifying "datadir", Tux Paint's "New" dialog
+      was able to present templates found in that directory,
+      but would attempt to load from whatever the user's
+      "savedir" was, instead.  It was also unable to create
+      a ".thumbs" subdirectory & store thumbnails there.
+      h/t Giancarlo Orru for reporting the main part of this bug.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Exported drawings (to e.g. ~/Pictures) would contain extraneous
+      data beyond the end of the data (copied from the original PNG).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Shell expansion (via wordexp()) of configuration options containing
+      spaces (e.g., `printcommand=ps2pdf - - > $HOME/print.pdf`) would
+      fail & cause a crash.  It now shows an error and recommends adding
+      quotes. (e.g., `printcommand="ps2pdf - - > $HOME/print.pdf"`).
+      + Tux Paint Config. 0.0.22 wraps certain options in quotes now
+      + Tux Paint 0.0.31 will trim quotes, when wordexp() is not used
+        (e.g., Windows)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Mended bad rendering of color picker (HSV palette) button when
+      selecting a Label text with a color not found in built-in colors,
+      and mend unwanted outline around the chosen color in the
+      color selector (pipette), color picker (HSV palette) and
+      color mixer buttons.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Localization Updates:
+    ---------------------
+    * Catalan translation
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * French translation
+      Jacques Chion <jacques.chion@orange.fr>
+
+    * Icelandic translation
+      Sveinn í Felli <sv1@fellsnet.is>
+
+    * Icelandic documentation
+      Sveinn í Felli <sv1@fellsnet.is>
+
+    * Japanese translation
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Japanese documentation
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Russian translaton
+      Olesya Gerasimenko <translation-team@basealt.ru>
+
+    * Updated the Chinese (Traditional) subset font file that ships
+      with Tux Paint, based on the current translation strings.
+      (Updated Python script to explicitly use `python2` these days.)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Ports & Building:
+    -----------------
+    * Ensure `trans` dir. exists, for parallel builds (`make -j`)
+      Bill Kendrick <bill@newbreedsoftware.com>
+      h/t bkw @ slackbuilds
+
+    * A new `PACKAGE_ONLY` variable to Makefile can be used to
+      place launcher icon files into $(DESTDIR)$(PREFIX), rather
+      than using `xdg-...` tools to install them.  (Avoids polluting
+      local filesystem while generating packages, e.g. for Slackware Linux)
+      Tim Dickson <dickson.tim@googlemail.com>
+
+    * When generating thumbnails for Starters & Templates, create a
+      "inkscape" shellscript, which simply does "exit 1", and add the
+      current directory to the beginning of the $PATH variable.
+      This will prevent ImageMagick's "convert" utility from using
+      Inkscape, if installed, and fallback to "rsvgconvert".
+      (When building Slackware packages, it was noticed that FontConfig
+      was running and generating a cache, which was unexpected.)
+      Tim Dickson <dickson.tim@googlemail.com>
+
+    * WIP Replaced deprecated RSVG library calls.
+      https://sourceforge.net/p/tuxpaint/bugs/278/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Removed LOW_QUALITY_COLOR_SELECTOR compile-time option
+      Bill Kendrick <bill@newbreedsoftware.com>
+
 2023.May.18 (0.9.30)
   * Improvements to Stamp tool:
     ---------------------------

@@ -10,6 +10,7 @@ LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../libimagequant \
 	$(LOCAL_PATH)/src \
 	$(LOCAL_PATH)/src/mouse \
+	$(LOCAL_PATH)/../fribidi-1.0.13 \
 	$(NULL)
 
 LOCAL_SRC_FILES := \
@@ -42,14 +43,14 @@ MY_CFLAGS:= -O0 -g -W -Wall -fno-common -ffloat-store \
 	-Wstrict-aliasing=2 \
 	-include $(LOCAL_PATH)"/../tp-assets-fopen/tp_android_assets_fopen.h"
 
-MY_VER_VERSION := 0.9.30
+MY_VER_VERSION := 0.9.31
 MY_VER_DATE :=$(shell date +"%Y-%m-%d")
 MY_NOSOUNDFLAG := 
 # MY_NOSOUNDFLAG := -DNOSOUND
 MY_NOPANGOFLAG := 
 # MY_NOPANGOFLAG :=  -DNO_SDLPANGO
-MY_NOSVGFLAG := 
-# MY_NOSVGFLAG := -DNOSVG
+# MY_NOSVGFLAG := 
+MY_NOSVGFLAG := -DNOSVG
 MY_INTERNAL_DIR := "/data/data/org.tuxpaint/"
 MY_ASSETS_DIR := ""
 # Data:
@@ -85,7 +86,7 @@ LOCAL_LDLIBS := \
 	-lz -llog -lGLESv1_CM -lGLESv2 -landroid \
 	$(NULL)
 
-LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango tuxpaint_intl tuxpaint_fribidi tuxpaint_png tuxpaint_rsvg tuxpaint_cairo tp_android_assets_fopen libimagequant SDL2_gfx
+LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango tuxpaint_intl tuxpaint_fribidi tuxpaint_png tuxpaint_rsvg tuxpaint_cairo tp_android_assets_fopen libimagequant SDL2_gfx tuxpaint_pango tuxpaint_fontconfig tuxpaint_glib
 
 include $(BUILD_SHARED_LIBRARY)
 

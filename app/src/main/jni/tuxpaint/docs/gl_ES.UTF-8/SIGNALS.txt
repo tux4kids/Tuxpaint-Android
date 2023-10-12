@@ -1,5 +1,5 @@
                                    Tux Paint
-                                 versión 0.9.30
+                                versión 0.9.31
                             Documentación de sinais
 
         Copyright © 2019-2022 by varios colaboradores; see AUTHORS.txt.
@@ -7,49 +7,52 @@
 
                                4 de Xuño de 2022
 
-   Tux Paint responde aos seguintes sinais (que poden enviarse ao proceso do
-   programa a través de «kill» ou «killall», por exemplo).
+Tux Paint responde aos seguintes sinais (que poden enviarse ao proceso do
+programa a través de «kill» ou «killall», por exemplo).
 
-   SIGTERM (tamén, [Control] + [C] dende un terminal executando «tuxpaint»)
+SIGTERM (tamén, [Control] + [C] dende un terminal executando «tuxpaint»)
 
-           Tux Paint responde coma se se premese o botón «Saír» ou se lle
-           dixera ao contorno de escritorio que peche Tux Paint (por exemplo,
-           premendo nun botón de peche da xanela ou premendo [Alt] + [F4] na
-           maioría dos sistemas).
+    Tux Paint responde coma se se premese o botón «Saír» ou se lle dixera ao
+    contorno de escritorio que peche Tux Paint (por exemplo, premendo nun botón
+    de peche da xanela ou premendo [Alt] + [F4] na maioría dos sistemas).
 
-           Dende a interface principal, Tux Paint preguntará se quere ou non
-           saír e (a non ser que sexa anulado pol a opción de gardado
-           automático, p. ex.: «--autosavex) se quere gardar o debuxo actual
-           (se non está gardado) , e se é así, e é unha versión modificada
-           dun debuxo existente (a non ser que sexa anulado polas opcións de
-           gardar sobre imaxes antigas ou gardar sempre imaxes novas; por
-           exemplo, «--saveover« e «--saveovernew», respectivamente), se
-           quere ou non sobreescribir o debuxo existente ou gardalo nun novo
-           ficheiro.
+    Dende a interface principal, Tux Paint preguntará se quere ou non saír e (a
+    non ser que sexa anulado pol a opción de gardado automático, p. ex.:
+    «--autosavex) se quere gardar o debuxo actual (se non está gardado) , e se
+    é así, e é unha versión modificada dun debuxo existente (a non ser que sexa
+    anulado polas opcións de gardar sobre imaxes antigas ou gardar sempre
+    imaxes novas; por exemplo, «--saveover« e «--saveovernew»,
+    respectivamente), se quere ou non sobreescribir o debuxo existente ou
+    gardalo nun novo ficheiro.
 
-           Exemplo: killall tuxpaint
+    Exemplo: killall tuxpaint
 
-           💡 Note: From other parts of the interface, the signal is currently
-           interpreted as a request to go back (e.g., from the "New" dialog
-           back to the main interface), as if a "Back" button in Tux Paint
-           were clicked, or the [Esc] was key pressed.
+    💡 Note: From other parts of the interface, the signal is currently
+    interpreted as a request to go back (e.g., from the "New" dialog back to
+    the main interface), as if a "Back" button in Tux Paint were clicked, or
+    the [Esc] was key pressed.
 
-   SIGUSR1 & SIGUSR2
 
-           Tux Paint responde axustando a súa opción de gardar
-           automaticamente (coma se fora publicada con «--autosave»), así
-           como a opción de gardar sempre novas imaxes (coma se se publicase
-           con «--saveovernew») no caso de recibir un sinal de SIGUSR1 ou de
-           gardar sempre sobre a imaxe existente (coma se se publicase con
-           «--saveover») no caso de recibir SIGUSR2. Entón Tux Paint envíase
-           a sí mesmo un sinal de SIGTERM, nun intento de saír. (Ver arriba.)
 
-           Así, dende a interface principal, Tux Paint debería saír case de
-           inmediato, sen facer preguntas.
+SIGUSR1 & SIGUSR2
 
-           Exemplo: killall -s SIGUSR1 tuxpaint
+    Tux Paint responde axustando a súa opción de gardar automaticamente (coma
+    se fora publicada con «--autosave»), así como a opción de gardar sempre
+    novas imaxes (coma se se publicase con «--saveovernew») no caso de recibir
+    un sinal de SIGUSR1 ou de gardar sempre sobre a imaxe existente (coma se se
+    publicase con «--saveover») no caso de recibir SIGUSR2. Entón Tux Paint
+    envíase a sí mesmo un sinal de SIGTERM, nun intento de saír. (Ver arriba.)
 
-           💡 Note: From other parts of the interface, unfortunately, Tux
-           Paint will go back one level in the interface. Therefore, at this
-           time, it may be necessary to send this signal to Tux Paint a few
-           times, for it to quit completely.
+    Así, dende a interface principal, Tux Paint debería saír case de inmediato,
+    sen facer preguntas.
+
+    Exemplo: killall -s SIGUSR1 tuxpaint
+
+    💡 Note: From other parts of the interface, unfortunately, Tux Paint will go
+    back one level in the interface. Therefore, at this time, it may be
+    necessary to send this signal to Tux Paint a few times, for it to quit
+    completely.
+
+
+
+

@@ -92,15 +92,15 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.30          </h1>
+            version 0.9.31          </h1>
     
           <p>
-            Copyright &copy; 2002-2023 by divers contributeurs; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2002-2023 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
     
           <p>
-            février 12, 2023          </p>
+            mai 29, 2023          </p>
         </center>
       </header>
 
@@ -127,12 +127,12 @@
                   <li><a href="#stamps_images">Images des tampons</a></li>                  <li><a href="#description_text">Texte de description des tampons</a></li>                  <li><a href="#sound_effects">Effets sonores des tampons</a></li>                  <li><a href="#descriptive_sound">Son descriptif du tampon</a></li>                  <li><a href="#stamp_options">Options des tampons</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Mise en miroir et retournement</a></li>                </ul>
               </li>
               <li><a href="#fonts">Polices</a></li>              <li><a href="#starters">'Images de démarrage'</a>                <ul>
-                  <li><a href="#coloring_book_style">Images de démarrage avec style 'livre de coloriage'</a></li>                  <li><a href="#scene_style">Images de démarrage avec 'style scénique'</a></li>                  <li><a href="#starter_options">Starter Options</a></li>                </ul>
+                  <li><a href="#coloring_book_style">Images de démarrage avec style 'livre de coloriage'</a></li>                  <li><a href="#scene_style">Images de démarrage avec 'style scénique'</a></li>                  <li><a href="#starter_options">Options d'image de démarrage</a></li>                </ul>
               </li>
               <li><a href="#templates">'Modèles'</a>                <ul>
-                  <li><a href="#template_options">Template Options</a></li>                </ul>
+                  <li><a href="#template_options">Options des images Modèle</a></li>                </ul>
               </li>
-              <li><a href="#translations">Traductions</a></li>              <li><a href="#input_methods">Méthodes alternatives de saisie</a></li>              <li><a href="#on_screen_keyboard">Clavier virtuel sur écran</a></li>              <li><a href="#magic_tools">Magic Tools</a></li>            </ul>
+              <li><a href="#translations">Traductions</a></li>              <li><a href="#input_methods">Méthodes alternatives de saisie</a></li>              <li><a href="#on_screen_keyboard">Clavier virtuel sur écran</a></li>              <li><a href="#magic_tools">Outils 'Magie'</a></li>            </ul>
           </td>
         </tr>
       </table>
@@ -143,7 +143,7 @@
         Si vous souhaitez ajouter ou modifier des éléments tels que des pinceaux, des images de démarrage, des tampons en caoutchouc et d'autres contenus utilisés par Tux Paint , vous pouvez le faire assez facilement en ajoutant, modifiant ou supprimant simplement des fichiers là où Tux Paint les recherche.      </p>
   
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> You'll need to re-launch Tux Paint for the changes to take effect.      </p>
+        <span title="Information">&#128161;</span>        <strong> Remarque : </strong>vous devrez redémarrer Tux Paint pour que les modifications prennent effet.      </p>
     </section>
 
     <section class="indent outer"><!-- H1: Where Files Go -->
@@ -304,15 +304,15 @@
           Un fichier de données de brush's est simplement un fichier texte ASCII contenant les options pour le brush.        </p>
 
         <p>
-          Le fichier porte le même nom que l'image PNG , mais une extension "<code>.dat</code>". (par exemple, le fichier de données "<code>brush.png</code>" est le fichier texte "<code>brush.dat</code>" qui se trouve dans le même répertoire.)        </p>
+          Le fichier porte le même nom que l'image PNG , mais une extension "<code>.dat</code>". (par exemple, le fichier de données "<code>brosse.png</code>" est le fichier texte "<code>brosse.dat</code>" qui se trouve dans le même répertoire.)        </p>
 
         <dl>
           <dt><strong>Espacement des pinceaux</strong></dt>
           <dd>
             <p>
-              Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais spécifier l'espacement des pinceaux (c'est-à-dire la fréquence à laquelle ils sont dessinés). Par défaut, l'espacement correspond à la hauteur du pinceau, divisée par 4.            </p>
+              Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais spécifier l'espacement des coups de pinceaux (c'est-à-dire la fréquence à laquelle ils sont dessinés). Par défaut, l'espacement correspond à la hauteur du pinceau, divisée par 4.            </p>
             <p>
-              Ajoutez une ligne contenant la ligne "<code><b>spacing=<i>N</i></b></code>" au fichier de données du pinceau, où "<i>N</i>" est l'espacement souhaité pour le pinceau. (Plus le nombre est bas, plus le pinceau est dessiné souvent.)            </p>
+              Ajoutez une ligne contenant la ligne "<code><b>spacing=<i>N</i></b></code>" au fichier de données du pinceau, où "<i>N</i>" est l'espacement souhaité pour les coups de  pinceau. (Plus le nombre est bas, plus le pinceau est dessiné souvent.)            </p>
           </dd>
 
           <dt><strong>Pinceaux animés</strong></dt>
@@ -324,7 +324,7 @@
             <p>
               Ajoutez une ligne contenant la ligne "<code><b>frames=<i>N</i></b></code>" au fichier de données du pinceau, où"<i>N</i>" est le nombre d'images dans le pinceau.            </p>
             <p class="note">
-              <span title="Configuration option">&#9881;</span>              <strong>Note:</strong> If you'd rather the frames be flipped through randomly, rather than sequentially, also add a line containing "<code><b>random</b></code>" to the brush's data file.            </p>
+              <span title="Configuration option">&#9881;</span>              <strong>Remarque :</strong> si vous préférez que les images apparaissent de manière aléatoire plutôt que séquentielle, ajoutez en plus une ligne contenant "<code><b>random</b></code>" au fichier de données du pinceau.            </p>
           </dd>
 
           <dt><strong>Pinceaux directionnels</strong></dt>
@@ -340,7 +340,7 @@
           <dt><strong>Pinceaux tournants</strong></dt>
           <dd>
             <p>
-              Depuis la version 0.9.27 de Tux Paint , vous pouvez désormais créer des pinceaux tournants. Au fur et à mesure que le pinceau est utilisé, il tourne de 360 degrés, en fonction de la direction du pinceau.            </p>
+              Depuis la version 0.9.27 de Tux Paint , vous pouvez désormais créer des pinceaux tournants. Au fur et à mesure que le pinceau est utilisé, il tourne sur 360 degrés, en fonction de la direction du pinceau.            </p>
             <p>
               Ajoute une ligne contenant le mot "<code><b>rotate</b></code>" au fichier de données brosse.            </p>
           </dd>
@@ -359,7 +359,7 @@
         Placez les PNG de l'image du pinceau (et tous les fichiers texte de données) dans le répertoire "<code><b>brushes</b></code>".      </p>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> If your new pinceaux all come out as solid squares or rectangles, it's because you forgot to use alpha transparency! See the 'PNG documentation' in Tux Paint for more information and tips.      </p>
+        <span title="Information">&#128161;</span>        <strong>Remarque : </strong> si vos nouveaux pinceaux se présentent tous sous forme de carrés ou de rectangles pleins, c'est que vous avez oublié d'utiliser la transparence alpha ! Consultez le fichier de documentation "PNG" pour plus d'informations et de conseils.      </p>
     </section><!-- H1: Brushes -->
 
     <section class="indent outer"><!-- H1: Stamps -->
@@ -398,10 +398,10 @@
           Les SVG sont basés sur des vecteurs et seront mis à l'échelle de manière adéquate pour le canevas utilisé.        </p>
 
         <p class="note">
-          <span title="Information">&#128161;</span>          <strong>Note:</strong> If your new des tampons basés sur PNG all come out as solid squares or rectangles, it's because you forgot to use alpha transparency! See the 'PNG documentation' in Tux Paint for more information and tips.        </p>
+          <span title="Information">&#128161;</span>          <strong>Remarque : </strong> si vos nouveaux des tampons basés sur PNG se présentent tous sous forme de carrés ou de rectangles pleins, c'est que vous avez oublié d'utiliser la transparence alpha ! Consultez le fichier de documentation "PNG" pour plus d'informations et de conseils.        </p>
 
         <p class="note">
-          <span title="Information">&#128161;</span>          <strong>Note:</strong> If your new SVG stamps seem to have a lot of whitespace, make sure the SVG 'document' is no larger than the shape(s) within. If they are being clipped, make sure the 'document' is large enough to contain the shape(s). See the 'SVG documentation' in Tux Paint for more information and tips.        </p>
+          <span title="Information">&#128161;</span>          <strong>Remarque : </strong>si vos nouveaux tampons SVG semblent avoir beaucoup de zones vides, assurez-vous que le «document» SVG n'est pas plus grand que la ou les formes qu'il contient. S'ils sont coupés, assurez-vous que le «document» est suffisamment grand pour contenir la ou les formes. Voir le fichier de documentation " SVG" pour plus d'informations et de conseils.        </p>
 
         <p class="note">
           <span title="Configuration option">&#9881;</span>          <b>Utilisateurs avancés :</b> Le HOWTO Advanced Stamps décrit, en détail, comment créer des images PNG qui seront parfaitement mises à l'échelle lorsqu'elles seront utilisées comme tampons dans Tux Paint .        </p>
@@ -466,7 +466,7 @@
         </dl>
 
         <p class="note">
-          <span title="Information">&#128161;</span>          <strong>Note:</strong> Also consider using descriptive sounds; see 'Son descriptif du tampon', below.        </p>
+          <span title="Information">&#128161;</span>          <strong>Remarque : </strong> Pensez à utiliser les descriptions sonores; voir 'Son descriptif du tampon' ci-dessous.        </p>
       </section><!-- H2: Stamp Sound Effects -->
 
       <section><!-- H2: Stamp Descriptive Sound -->
@@ -478,17 +478,17 @@
         </header>
 
         <p>
-          Tux Paint peut également jouer un son descriptif quand on choisit un tampon. Par ex., une personne disant le mot "canard" quand on choisit un canard, ou le nom d'un instrument de musique quand on en choisit un. Les fichiers peuvent être au format "WAVE ("<code>.wav</code>")" ou "OGG Vorbis ("<code>.ogg</code>")", et on le même nom que l'image PNG ou SVG, avec "<code>_desc</code>" à la fin (par ex., le son descritid de "<code>stamp.svg</code>" est le fichier son "<code>stamp_desc.ogg</code>" dans le même répertoire).        </p>
+          Tux Paint peut également émettre une description sonore quand on choisit un tampon. Par ex., une personne disant le mot "canard" quand on choisit un canard, ou le nom d'un instrument de musique quand on en choisit un. Les fichiers peuvent être au format "WAVE ("<code>.wav</code>")" ou "OGG Vorbis ("<code>.ogg</code>")", et on le même nom que l'image PNG ou SVG, avec "<code>_desc</code>" à la fin (par ex., le son descritid de "<code>stamp.svg</code>" est le fichier son "<code>stamp_desc.ogg</code>" dans le même répertoire).        </p>
 
         <dl>
           <dt><strong>Support pour la régionalisation</strong></dt>
           <dd>
             <p>
-              Pour les descriptions dans différentes langues, créez également des fichiers WAV ou OGG avec <em>à la fois</em> "<code>_desc</code>" <em>et</em>  le libellé des paramètres régionaux dans le nom de fichier, sous la forme : "<code>stamp_desc_LOCALE.EXT</code>"            </p>
+              Pour les descriptions sonores dans différentes langues, créez également des fichiers WAV ou OGG avec <em>à la fois</em> "<code>_desc</code>" <em>et</em>  le libellé des paramètres régionaux dans le nom de fichier, sous la forme : "<code>stamp_desc_LOCALE.EXT</code>"            </p>
             <p>
-              L'son descriptif qui sera joué lorsque le tampon correspondant au fichier image "<code>stamp.png</code>" est choisi, et que Tux Paint utilise la langue espagnole, sera "<code>stamp_desc_es.wav</code>". Avec la langue française, ce sera "<code>stamp_desc_fr.wav</code>". Avec le portugais brésilien, "<code>stamp_desc_pt_BR.wav</code>", etc ...            </p>
+              L'description sonore qui sera joué lorsque le tampon correspondant au fichier image "<code>stamp.png</code>" est choisi, et que Tux Paint utilise la langue espagnole, sera "<code>stamp_desc_es.wav</code>". Avec la langue française, ce sera "<code>stamp_desc_fr.wav</code>". Avec le portugais brésilien, "<code>stamp_desc_pt_BR.wav</code>", etc ...            </p>
             <p>
-              Si aucun son descriptif localisé ne peut être chargé, Tux Paint tentera de charger le fichier son «par défaut». (par exemple, "<code>stamp_desc.wav</code>")            </p>
+              Si aucun description sonore localisé ne peut être chargé, Tux Paint tentera de charger le fichier son «par défaut». (par exemple, "<code>stamp_desc.wav</code>")            </p>
           </dd>
         </dl>
       </section><!-- H2: Stamp Descriptive Sound -->
@@ -590,7 +590,7 @@
           <dt><strong>Taille initiale du tampon</strong></dt>
           <dd>
             <p>
-              Par défaut, Tux Paint suppose que votre tampon est dimensionné de manière appropriée pour un affichage non mis à l'échelle sur une toile de 608x472. Il s'agit de la taille originale de la toile pour Tux Paint , pour un écran 640x480. Tux Paint ajustera ensuite le tampon en fonction de la taille réelle du canevas et, si c'est activé, des contrôles de taille du tampon définis par l'utilisateur.            </p>
+              Par défaut, Tux Paint suppose que votre tampon est dimensionné de manière appropriée pour un affichage non mis à l'échelle sur un canevas de 608x472. Il s'agit de la taille originale du canevas pour Tux Paint , pour un écran 640x480. Tux Paint ajustera ensuite le tampon en fonction de la taille réelle du canevas et, si c'est activé, des contrôles de taille du tampon définis par l'utilisateur.            </p>
             <p>
               Si votre tampon est trop grand ou trop petit, vous pouvez spécifier un facteur d'échelle. Si votre tampon est 2,5 fois plus large (ou haut) qu'il devrait l'être, ajoutez une des options, représentant toutes le même réglage, à votre fichier de données du tampon.(Un signe égal,"<code>=</code>", peut être ajouté après le mot "<code>scale</code>".)            </p>
             <ul>
@@ -630,7 +630,7 @@
           Depuis Tux Paint 0.9.18, vous pouvez également fournir une image pré-retournée avec "<code><b>_flip</b></code>" dans le nom, et / ou une image qui est à la fois en miroir et retournée, en la nommant " <code><b>_mirror_flip</b></code>".        </p>
 
         <p class="note">
-          <span title="Information">&#128161;</span>          <strong>Note:</strong> If the user flips and mirrors an image, and a pre-drawn "<code>_mirror_flip</code>" doesn't exist, but either "<code>_flip</code>" or "<code>_mirror</code>" does, it will be used, and mirrored or flipped, respectively.        </p>
+          <span title="Information">&#128161;</span>          <strong>Remarque :</strong> Si l'utilisateur retourne et reflète une image, et qu'un "<code>_mirror_flip</code>" pré-dessiné n'existe pas, mais que "<code>_flip</code>" ou "<code>_mirror</code>" existe , il sera utilisé, et reflété ou retourné, selon le cas.        </p>
       </section><!-- H2: Pre-Mirrored and Flipped Stamps -->
     </section><!-- H1: Stamps -->
 
@@ -700,7 +700,7 @@
           En plus de la superposition de style `` livre de coloriage '', vous pouvez également fournir une image d'arrière-plan séparée dans le cadre d'une "image de démarrage''. La superposition agit de la même manière : elle ne peut pas être dessinée, effacée ou affectée par les outils «Magie». Cependant, l'arrière-plan peut l'être !        </p>
 
         <p>
-          Lorsque l'outil «Gomme» est utilisé sur une image basée sur ce type d'image de démarrage, plutôt que de transformer la toile en une couleur unie, telle que le blanc, il renvoie cette partie de la toile à l'image d'arrière-plan d'origine à partir de image de démarrage.        </p>
+          Lorsque l'outil «Gomme» est utilisé sur une image basée sur ce type d'image de démarrage, plutôt que de transformer le canevas en une couleur unie, telle que le blanc, il restaure cette partie du canevas avec l'image d'arrière-plan d'origine à partir de image de démarrage.        </p>
 
         <p>
           En créant à la fois une superposition et un arrière-plan, vous pouvez créer une «image de démarrage» qui simule la profondeur. Imaginez un arrière-plan qui montre l'océan et une superposition qui est l'image d'un récif. Vous pouvez ensuite dessiner (ou tamponner) des poissons sur l'image. Ils apparaîtront dans l'océan, mais jamais «devant» le récif.        </p>
@@ -710,24 +710,24 @@
       </section><!-- H2: Scene-Style Starters -->
 
       <p>
-        Pour de meilleurs résultats, les images de démarrage doivent être de la même taille que la toile de Tux Paint . (Voir la section "Chargement d'autres images dans Tux Paint " du README pour plus de détails sur le dimensionnement.) Si ce n'est pas le cas, elles seront étirées, sans affecter la forme ("rapport hauteur / largeur"); cependant, des bavures peuvent être apparaître sur les bords.      </p>
+        Pour de meilleurs résultats, les images de démarrage doivent être de la même taille que le canevas de Tux Paint . (Voir la section "Chargement d'autres images dans Tux Paint " du README pour plus de détails sur le dimensionnement.) Si ce n'est pas le cas, elles seront étirées, sans affecter la forme ("rapport hauteur / largeur"); cependant, des bavures peuvent être apparaître sur les bords.      </p>
 
       <p>
         Placez-les dans le répertoire "<code><b>starters</b></code>". Lorsque la boîte de dialogue «Nouveau» est accessible dans Tux Paint , les images de démarrage  apparaîtront avec l'écran qui apparaît, suivant les différents choix de couleurs unies.      </p>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> 'Images de démarrage' are 'attached' to saved pictures, via a small text file that has the same name as the saved file, but with "<code>.dat</code>" as the extension. This allows it to continue to affect the drawing even after Tux Paint has been quit, or another picture is loaded or a new image is created. (In other words, if you base a drawing on a image de démarrage, it will always be affected by it.)      </p>
+        <span title="Information">&#128161;</span>        <strong>Remarque  :</strong>Les 'Images de démarrage' sont 'attachés' aux images sauvegardées, via un petit fichier texte qui a le même nom que le fichier sauvegardé, mais avec "<code>.dat</code>" comme extension. Ceci permet de continuer de s'occuper du dessin, mais après avoir quitté Tux Paint, oi bien une autre image a été chargée, ou bien une nouvelle image a été créée (En d'autres termes, si vous basez un dessin sur un image de démarrage, il sera toujours changé par lui).      </p>
 
       <section><!-- H2: Starter Options -->
         <header>
           <h2>
             <a name="starter_options"
-                id="starter_options">Starter Options</a>
+                id="starter_options">Options d'image de démarrage</a>
           </h2>
         </header>
 
         <p>
-          Outre une an image, les starters peuvent également recevoir d'autres attributs. Pour ce faire, vous devez créer un «fichier de données» pour starter.          (Note: Tux Paint prior to version 0.9.29 did not support starter options.)        </p>
+          Outre une une image, les 'Images de démarrage' peuvent également recevoir d'autres attributs. Pour ce faire, vous devez créer un «fichier de données» pour image de 'Départ'.          (Note : Tux Paint avant la version 0.9.29 ne supporte pas options de démarrage.)        </p>
 
         <p>
           Un fichier de données de starter's est simplement un fichier texte ASCII contenant les options pour le starter.        </p>
@@ -739,7 +739,7 @@
           <dt><strong>allowscale</strong></dt>
           <dd><!-- allowscale -->
             <p>
-              When a starter image is a different aspect ratio (width-to-height proportions) than Tux Paint's canvas, by default it will be scaled to fit entirely within the canvas, without stretching the starter (changing its aspect ratio); for example, a square starter on a portrait-shaped canvas will be placed in the center of the canvas.  By default, Tux Paint will then take the strip of pixels at the edges of the starter and stretch them to the edges of the canvas, "smearing" it.            </p>
+              Quand une image de démarrage a un ratio d'aspect (proportion largeur/hauteur) différent de celui du canevas de Tux Paint, elle sera dimensionnée pour remplir entièrement le canevas sans l'étirer (en changeant le ratio d'aspect); par exemple une image carrée sur un canevas de format portrait sera placée au centre de ce canevas. Par défaur, Tux Paint prend la bande de pixels aux bords de l'image et l'étend jusqu'aux bords du canevas, en "l'étalant".            </p>
 
             <center>
               <img src="../../html/images/smear-wide.png"
@@ -755,7 +755,7 @@
             </center>
 
             <p>
-              If it's acceptable for the starter image to be cropped in one or both directions, the "<code><b>allowscale</b></code>" may be used to tell Tux Paint which behavior to allow:            </p>
+              Si l'image de démarrage peut être rognée dans une ou les deux directions, "<code><b>allowscale</b></code>" peut être utilisé pour dire à Tux Paint quel comportement est permis :            </p>
             <ul>
               <li><!-- allowscale=horizontal -->
                 <img src="../../html/images/allowscale-horizontal.png"
@@ -763,11 +763,11 @@
                     height="160"
                     alt=""
                     align="right">
-                For starters where it's <em>alright to crop the left and right edges</em>, but the top and bottom edges must be retained, use "<code><b>allowscale=horizontal</b></code>".                <ul>
+                Pour les images pour lesquelles c'est <em> d'accord pour rogner les bords gauche et droite</em>, mais les bords haut et bas doivent être conservés, utilisez "<code><b>allowscale=horizontal</b></code>".                <ul>
                   <li>
-                    If the starter's aspect ratio is wider than that of the canvas, it will be scaled to fit the height of the canvas, and the left and right will be cropped.                  </li>
+                    Si le ratio d'aspect de l'image de démarrage est plus large  que celui du canevas, elle sera mise à l'échelle pour avoir la même hauteur que le canevas et gauche et droite seront rognés.                  </li>
                   <li>
-                    If the starter's aspect ratio is taller than that of the canvas, it will be scaled to fit the height of the canvas, and no cropping will occur, and the left and right edges will be smeared.                  </li>
+                    Si le ratio d'aspect de l'image de démarrage est plus haut  que celui du canevas, elle sera mise à l'échelle pour avoir la même hauteur que le canevas et il n'y aura pas de rognage,  et les bords de gauche et droite seront barbouillés.                  </li>
                 </ul>
                 <br clear="all" />
               </li><!-- allowscale=horizontal -->
@@ -778,53 +778,53 @@
                     height="115"
                     alt=""
                     align="right">
-                For starters where it's <em>alright to crop the top and bottom edges</em>, but the left and right edges must be retained, use "<code><b>allowscale=vertical</b></code>".                <ul>
+                Pour les images pour lesquelles c'est <em> d'accord pour rogner les bords haut et bas</em>, mais les bords gauche et droite doivent être conservés, utilisez "<code><b>allowscale=vertical</b></code>".                <ul>
                   <li>
-                    If the starter's aspect ratio is taller than that of the canvas, it will be scaled to fit the width of the canvas, and the top and bottom will be cropped.                  </li>
+                    Si le ratio d'aspect de l'image de démarrage est plus haut  que celui du canevas, elle sera mise à l'échelle pour avoir la même largeur que le canevas et haut et bas seront rognés.                  </li>
                   <li>
-                    If the starter's aspect ratio is wider than that of the canvas, it will be scaled to fit the width of the canvas, and no cropping will occur, and the top and bottom edges will be smeared.                  </li>
+                    Si le ratio d'aspect de l'image de démarrage est plus large  que celui du canevas, elle sera mise à l'échelle pour avoir la même largeur que le canevas et il n'y aura pas de rognage,  et les bords de haut et bas seront barbouillés.                  </li>
                 </ul>
                 <br clear="all" />
               </li><!-- allowscale=vertical -->
 
               <li><!-- allowscale=both -->
-                If it's acceptable to crop either the top and bottom or the left and right, use "<code><b>allowscale=both</b></code>". Contents from starter will always fill the canvas, regardless of how its aspect ratio compares to that of the canvas.              </li><!-- allowscale=both -->
+                Si on accepte de rogner soit le haut et le bas, soit la droite et la gauche, utilisez "<code><b>allowscale=both</b></code>". Le contenu de l'image de démarrage sera toujours en accord avec la canevas, indépendamment de son ratio d'aspect par rapport à celui du canevas.              </li><!-- allowscale=both -->
 
               <li><!-- allowscale=none -->
-                The default behavior is to not allow cropping. This may be specified explicitly with "<code><b>allowscale=none</b></code>".              </li><!-- allowscale=none -->
+                Le comportement par défaut est de ne pas faire de rognage. Ceci peut être spécifié explicitement avec "<code><b>allowscale=none</b></code>".              </li><!-- allowscale=none -->
             </ul>
           </dd><!-- allowscale -->
 
-          <dt><strong>background</strong></dt>
+          <dt><strong>arrière-plan</strong></dt>
           <dd><!-- background -->
             <p>
-              This option allows you to specify how Tux Paint should fill the rest of the canvas, when the starter does not fit in one or the other direction.  By default, as described above, Tux Paint will "smear" the pixels from the edges of the starter.  (This can be specified explicitly with "<code><b>background=smear</b></code>".)            </p>
+              Cette option vous permet de spécifier comment Tux Paint doit remplir le reste du canevas, lorsque l'image de démarrage ne s'accorde pas dans l'une ou l'autre direction. Par , comme dit auparavant,  Tux Paint "barbouillera" les bords de cette image. (Ceci peut être spécifié expkicitement avec  "<code><b>background=smear</b></code>".)            </p>
             <p>
-              You can instead specify a solid background color (e.g., white for a 'coloring-book' style starter, with "<code><b>background=#fff</b></code>").            </p>
+              Vous pouvez spécifier à la place une couleur unie en arrière-plan (par ex. pour une image de démarrage du style 'livre de coloriage', avec "<code><b>background=#fff</b></code>").            </p>
             <p>
               Les couleurs peuvent être listées en utilisant trois nombres décimaux (par exemple, "<code>255 68 136</code>") ou un 'triplet' hexadécimal de 6 ou 3 chiffres (par exemple, " <code>#ff4488</code>" ou "<code>#F48</code>").            </p>
             <p>
-              See the <a href="OPTIONS.html#colorfile">"Color Palette File" section of "Options documentation"</a> for further details.            </p>
+              Voyez la <a href="OPTIONS.html#colorfile">section "Fichier de palette couleur" section de la  "documentation Options"</a> pour plus de détails.            </p>
           </dd><!-- background -->
 
-          <dt><strong>gravity</strong></dt>
+          <dt><strong>gravité</strong></dt>
           <dd><!-- gravity -->
             <p>
-              This option allows you to specify how Tux Paint should position a starter, when it is being cropped in one or the other direction.  By default, Tux Paint will place the center of the starter within the canvas. (This can be specified explicitly with "<code><b>gravity=center</b></code>".)            </p>
+              Cette option vous permet de spécifier comment Tux Paint doit positionner une image de démarrage lorsqu'elle a été rognée dans l'une ou l'autre direction. Par défaut, placera le centre de l'image de démarrage xomme celui du canevas. (Ceci peut être spécifié explicitement avec "<code><b>gravity=center</b></code>".)            </p>
             <p>
-              For example, if the top center of the starter contains the most important content, you can specify "<code><b>gravity=top</b></code>".  Or, if the bottom right is important, specify "<code><b>gravity=bottom-right</b></code>".            </p>
+              Par exemple, si le haut de l'image de démarrage est avec le contenu le plus important, vous pouvez spécifier "<code><b>gravity=top</b></code>". Ou si le bas à droite est plus important, spécifiez "<code><b>gravity=bottom-right</b></code>".            </p>
 
             <p>
-              The available options are:              <ul>
-                <li><code><b>center</b></code> &mdash; prefer the center (the default)</li>
-                <li><code><b>top</b></code> &mdash; prefer the top center</li>
-                <li><code><b>bottom</b></code> &mdash; prefer the bottom center</li>
-                <li><code><b>left</b></code> &mdash; prefer the left center</li>
-                <li><code><b>right</b></code> &mdash; prefer the right center</li>
-                <li><code><b>top-left</b></code> &mdash; prefer the top left</li>
-                <li><code><b>top-right</b></code> &mdash; prefer the top right</li>
-                <li><code><b>bottom-left</b></code> &mdash; prefer the bottom left</li>
-                <li><code><b>bottom-right</b></code> &mdash; prefer the bottom right</li>
+              Options disponibles :              <ul>
+                <li><code><b>center</b></code> &mdash; formes à partir du centre (par défaut)</li>
+                <li><code><b>top</b></code> &mdash; formes à partir du centre en haut</li>
+                <li><code><b>bottom</b></code> &mdash; formes à partir du centre en bas</li>
+                <li><code><b>left</b></code> &mdash; préférer le centre gauche</li>
+                <li><code><b>right</b></code> &mdash; préférer le centre droit</li>
+                <li><code><b>top-left</b></code> &mdash; préférer en haut à gauche</li>
+                <li><code><b>top-right</b></code> &mdash; préférer en haut à droite</li>
+                <li><code><b>bottom-left</b></code> &mdash; préférer en bas à gauche</li>
+                <li><code><b>bottom-right</b></code> &mdash; préférer en bas à droite</li>
               </ul>
             </p>
 
@@ -833,11 +833,11 @@
                   <img src="../../html/images/gravity-center-landscape.png"
                     width="160"
                     height="72"
-                    alt="[ Landscape-shaped image of a horizon with the sun in the middle and a building on the right. ]"
-                    title="Landscape-shaped image of a horizon with the sun in the middle and a building on the right."
+                    alt="[ Une image au format paysage avec un horizon où le soleil est au milieu et une construction sur le côté droit. ]"
+                    title="Une image au format paysage avec un horizon où le soleil est au milieu et une construction sur le côté droit."
                     valign="middle" />
                   <figcaption style="font-size: smaller;">
-                    <p>Focusing on the center of a starter image stretched to fit the width of the canvas.<p/>
+                    <p>Vue sur le centre d'une image de démarrage étirée pour être en accord avec la largeur du canevas.<p/>
                   </figcaption>
                 </figure>
               </div>
@@ -846,11 +846,11 @@
                   <img src="../../html/images/gravity-center-portrait.png"
                     width="84"
                     height="160"
-                    alt="[ Portrait-shaped image of a horizon with the sun in the middle and the left side of building on the right. ]"
-                    title="Portrait-shaped image of a horizon with the sun in the middle and the left side of building on the right."
+                    alt="[ Image au format portrait avec un horizon, le soleil au milieu et le côté gauche d'une construction à droite. ]"
+                    title="Image au format portrait avec un horizon, le soleil au milieu et le côté gauche d'une construction à droite."
                     valign="middle" />
                   <figcaption style="font-size: smaller;">
-                    <p>Focusing on the center of a starter image stretched to fit the height of the canvas.<p/>
+                    <p>Vue sur le centre d'une image de démarrage étirée pour être en accord avec la hauteur du canevas.<p/>
                   </figcaption>
                 </figure>
               </div>
@@ -859,11 +859,11 @@
                   <img src="../../html/images/gravity-top-landscape.png"
                     width="160"
                     height="72"
-                    alt="[ Landscape-shaped image of the sky with the sun at the bottom and the top of building on the right. ]"
-                    title="Landscape-shaped image of the sky with the sun at the bottom and the top of building on the right."
+                    alt="[ Image au format paysage avec le ciel, le soleil en bas et le haut d'une construction sur la droite. ]"
+                    title="Image au format paysage avec le ciel, le soleil en bas et le haut d'une construction sur la droite."
                     valign="middle" />
                   <figcaption style="font-size: smaller;">
-                    <p>Focusing on the top of a starter image stretched to fit the width of the canvas.<p/>
+                    <p>Vue sur le haut d'une image de démarrage étirée pour être en accord avec la largeur du canevas.<p/>
                   </figcaption>
                 </figure>
               </div>
@@ -872,11 +872,11 @@
                   <img src="../../html/images/gravity-bottom-landscape.png"
                     width="160"
                     height="72"
-                    alt="[ Landscape-shaped image of the ground with the sun at the top. ]"
-                    title="Landscape-shaped image of the ground with the sun at the top."
+                    alt="[ Image, au format paysage, du sol avec le soleil en haut. ]"
+                    title="Image, au format paysage, du sol avec le soleil en haut."
                     valign="middle" />
                   <figcaption style="font-size: smaller;">
-                    <p>Focusing on the bottom of a starter image stretched to fit the width of the canvas.<p/>
+                    <p>Vue sur le bas d'une image de démarrage étirée pour être en accord avec la largeur du canevas.<p/>
                   </figcaption>
                 </figure>
               </div>
@@ -885,11 +885,11 @@
                   <img src="../../html/images/gravity-right-portrait.png"
                     width="84"
                     height="160"
-                    alt="[ Portrait-shaped image of a horizon with the sun on the left and a building in the center. ]"
-                    title="Portrait-shaped image of a horizon with the sun on the left and a building in the center."
+                    alt="[ Image, au format portrait, d'un horizon avec le soleil à gauche et une construction au milieu. ]"
+                    title="Image, au format portrait, d'un horizon avec le soleil à gauche et une construction au milieu."
                     valign="middle" />
                   <figcaption style="font-size: smaller;">
-                    <p>Focusing on the right of a starter image stretched to fit the height of the canvas.<p/>
+                    <p>Vue sur le droit d'une image de démarrage étirée pour être en accord avec la hauteur du canevas.<p/>
                   </figcaption>
                 </figure>
               </div>
@@ -897,7 +897,7 @@
         </dl>
 
         <p class="note">
-          <span title="Information">&#128161;</span>          <strong>Note:</strong> Templates (described below) may also have options files, and currently support all of the same options as starters.        </p>
+          <span title="Information">&#128161;</span>          <strong>Note : </strong>Les Modèles (description plus bas) peuvent eux aussi avoir des options, et ont les mêmes options que les images de démarrage.        </p>
         <br clear="all">
       </section><!-- H2: Starter Options -->
 
@@ -923,32 +923,35 @@
         À la différence des  images dessinées dans Tux Paint par les utilisateurs puis réouvertes plus tard, l'ouverture d'un «modèle» crée un nouveau dessin. Lorsque vous enregistrez, l'image «modèle» n'est pas écrasée. À la différence des «images de démarrage», il n'y a pas de «calque» immuable au-dessus du canevas. Vous pouvez dessiner sur n'importe quelle partie de celui-ci.      </p>
 
       <p>
-          Lorsque l'outil «Gomme» est utilisé sur une image basée sur ce type d'image 'modèle', plutôt que de transformer la toile en une couleur unie, telle que le blanc, il renvoie cette partie de la toile à l'image d'arrière-plan d'origine à partir de image 'modèle'.      </p>
+          Lorsque l'outil «Gomme» est utilisé sur une image basée sur ce type d'image 'modèle', plutôt que de transformer le canevas en une couleur unie, telle que le blanc, il restaure cette partie du canevas avec l'image d'arrière-plan d'origine à partir de image 'modèle'.      </p>
 
       <p>
         Les «modèles» sont simplement des fichiers image (au format PNG, JPG, SVG ou KPX (KidPix)). Aucune préparation ou conversion n'est requise.      </p>
 
       <p>
-        Pour de meilleurs résultats, les images 'modèle' doivent être de la même taille que la toile de Tux Paint . (Voir la section "Chargement d'autres images dans Tux Paint " du README pour plus de détails sur le dimensionnement.) Si ce n'est pas le cas, elles seront étirées, sans affecter la forme ("rapport hauteur / largeur"); cependant, des bavures peuvent être apparaître sur les bords.      </p>
+        Pour de meilleurs résultats, les images 'modèle' doivent être de la même taille que le canevas de Tux Paint . (Voir la section "Chargement d'autres images dans Tux Paint " du README pour plus de détails sur le dimensionnement.) Si ce n'est pas le cas, elles seront étirées, sans affecter la forme ("rapport hauteur / largeur"); cependant, des bavures peuvent être apparaître sur les bords.      </p>
 
       <p>
         Placez-les dans le répertoire "<code><b>templates</b></code>". Lorsque la boîte de dialogue «Nouveau» est accessible dans Tux Paint , les images 'modèle'  apparaîtront avec l'écran qui apparaît, suivant les différents choix de couleurs unies.      </p>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> 'Modèles' are 'attached' to saved pictures, via a small text file that has the same name as the saved file, but with "<code>.dat</code>" as the extension. This allows it to continue to affect the drawing even after Tux Paint has been quit, or another picture is loaded or a new image is created. (In other words, if you base a drawing on a image 'modèle', it will always be affected by it.)      </p>
+        <span title="Information">&#128161;</span>        <strong>Remarque  :</strong>Les 'Modèles' sont 'attachés' aux images sauvegardées, via un petit fichier texte qui a le même nom que le fichier sauvegardé, mais avec "<code>.dat</code>" comme extension. Ceci permet de continuer de s'occuper du dessin, mais après avoir quitté Tux Paint, oi bien une autre image a été chargée, ou bien une nouvelle image a été créée (En d'autres termes, si vous basez un dessin sur un image 'modèle', il sera toujours changé par lui).      </p>
       <br clear="all">
 
       <section><!-- H2: Template Options -->
         <header>
           <h2>
             <a name="template_options"
-                id="template_options">Template Options</a>
+                id="template_options">Options des images Modèle</a>
           </h2>
         </header>
 
         <p>
-          Like 'starters', a configuration file may be specified that defines how Tux Paint should behave when applying 'template' images to the canvas when they do not have identical proportions (aspect ratio). See "Starter Options", above.          (Note: Tux Paint prior to version 0.9.29 did not support template options.)        </p>
+          Tout comme <a href="#starters">'Les images de démarrage'</a>, un fichier de configuration peut être spécifié, celui-ci décrivant le comportement de Tux Paint quand on utilise des 'images de démarrage' sur un canevas qui n'a pas des proportions identiques (ratio d'aspect). Voir "<a href="#starter_options">Options des iamges de démarrage</a>" ci-dessus.          (Note : Tux Paint avant la version 0.9.29 ne supporte pas options de démarrage.)        </p>
       </section><!-- H2: Template Options -->
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        On peut aussi créer des modèles de base (sans options) à partir de dessins existants et sauvegardés avec la boîte de dialogue "<a href="README.html#using_tools_other_open">Ouvrir</a>" de Tux Paint. Ils seront placés dans le répertoire de modèles personnels de l'utilisateur.        (Note : Tux Paint avant la version 0.9.31 ne supporte pas Création de Modèle depuis la boîte de dialogue Ouvrir.)      </p>
 
     </section><!-- H1: 'Templates' -->
 
@@ -961,7 +964,7 @@
       </header>
 
       <p>
-        Tux Paint supports numerous languages, thanks to use of the "gettext" localization library. (See <a href="OPTIONS.html#languages">the "Languages" section of "Options documentation"</a> for how to change locales in Tux Paint.)      </p>
+        Tux Paint supporte de nombreux langages, grâce à l'utilisation de la bibliothèque de localisation "gettext". (Voir<a href="OPTIONS.html#languages"> la section  "Langages" de la  "documentation Options "</a> pour savoir comment changer les paramètres régionaux dans Tux Paint .)      </p>
 
       <p>
         Pour traduire Tux Paint dans une nouvelle langue, copiez le fichier de modèle de traduction, "<code>tuxpaint.pot</code>" (trouvé avec le code source de Tux Paint , dans le dossier "<code>src/po/</code>"). Renommez la copie en tant que  "<code>.po</code>", avec le nom approprié aux paramètres régionaux de votre traduction (par exemple, "<code>es.po</code>" pour l'espagnol; ou "<code>pt_BR.po</code>" pour le portugais brésilien , contre "<code>pt.po</code>" ou "<code>pt_PT.po</code>" pour le portugais parlé au Portugal).      </p>
@@ -990,7 +993,7 @@
       </p>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> It is best to always work off of the <i>latest</i> Tux Paint text catalog template ("<code>tuxpaint.pot</code>"), since new text is added, and old text is occasionally changed. The text catalog for the upcoming, unreleased version of Tux Paint can be found in Tux Paint's Git repository (see: <a href="https://tuxpaint.org/download/source/git/">https://tuxpaint.org/download/source/git/</a>), and on the Tux Paint website at <a href="https://tuxpaint.org/help/po/">https://tuxpaint.org/help/po/</a>.      </p>
+        <span title="Information">&#128161;</span>        <strong>Remarque : </strong>Il est préférable de toujours travailler avec le <i>dernier</i> modèle de catalogue de texte Tux Paint ("<code>tuxpaint.pot</code>"), car si nouveau texte est ajouté et l'ancien texte peut être parfois modifié. Le catalogue de textes de la prochaine version inédite de Tux Paint se trouve dans le référentiel Git de Tux Paint (voir : <a href="https://tuxpaint.org/download/source/git/">https://tuxpaint.org/download/source/git/</a> ), et sur le site Web de Tux Paint à <a href="https://tuxpaint.org/help/po/">https://tuxpaint.org/help/po/</a>.      </p>
 
       <p>
         Pour modifier une traduction existante, téléchargez le dernier fichier "<code>.po</code>" pour cette langue et modifiez-le comme décrit ci-dessus.      </p>
@@ -1002,7 +1005,7 @@
         Autrement, si vous avez un compte chez <a href="http://www.sourceforge.net/">SourceForge.net</a> , vous pouvez demander à être ajouté au projet "<code>tuxpaint</code>" et obtenir un accès en écriture au référentiel de code source Git afin que vous puissiez valider vos modifications directement.      </p>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> Support for new locales requires making additions to Tux Paint's source code ("<code>/src/i18n.h</code>" et "<code>/src/i18n.c</code>"), and requires updates to the <code>Makefile</code>, pour s'assurer que les fichiers "<code>.po</code>" sont compilés en fichiers "<code>.mo</code>", et utilisables pendant l'exécution.      </p>
+        <span title="Information">&#128161;</span>        <strong>Remarque :</strong> La prise en charge de nouveaux locales nécessite des ajouts au code source de Tux Paint ( "<code>/src/i18n.h</code>" et "<code>/src/i18n.c</code>"), et nécessite des mises à jour de <code>Makefile</code>, pour s'assurer que les fichiers "<code>.po</code>" sont compilés en fichiers "<code>.mo</code>", et utilisables pendant l'exécution.      </p>
     </section><!-- H1: Translations -->
 
     <section class="indent outer"><!-- H1: Alternative Input Methods -->
@@ -1057,13 +1060,13 @@
       </p>
 
       <p class="note">
-        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> Blank lines within the "<code>.im</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example above.      </p>
+        <span title="Configuration option">&#9881;</span>        <strong>Remarque</strong>Les lignes vides du fichier "<code>.im</code>" sont ignorées, aussi bien que les lignes commençant par le caractère "<code>#</code>" ( livre/dièse)-- on peut l'utiliser pour ajouter des commentaires, comme dans l'exemple ci-dessus.      </p>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> Meanings of the flags are locale-specific, and are processed by the language-specific source code in "<code>src/im.c</code>". For example, "<code>b</code>" is used in Korean to handle Batchim, which may carry over to the next character.      </p>
+        <span title="Information">&#128161;</span>        <i>Remarque :</i> Les significations des indicateurs sont spécifiques à la langue et sont traitées par le code source spécifique à la langue dans "<code>src/im.c</code>". Par exemple, "<code>b</code>" est utilisé en coréen pour gérer Batchim, qui peut être reporté au caractère suivant.      </p>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> Support for new méthodes de saisie requires making additions to Tux Paint's source code ("<code>/src/im.c</code>"), and requires updates to the <code>Makefile</code>, pour s'assurer que les fichiers "<code>.im</code>" sont disponibles pour être utilisés lors de l'exécution du programme.      </p>
+        <span title="Information">&#128161;</span>        <strong>Remarque :</strong> La prise en charge de nouveaux méthodes de saisie nécessite des ajouts au code source de Tux Paint ( "<code>/src/im.c</code>"), et nécessite des mises à jour de <code>Makefile</code>, pour s'assurer que les fichiers "<code>.im</code>" sont disponibles pour être utilisés lors de l'exécution du programme.      </p>
     </section><!-- H1: Alternative Input Methods -->
 
     <section class="indent outer"><!-- H1: On-screen Keyboard -->
@@ -1099,7 +1102,7 @@
         </blockquote>
 
         <p class="note">
-          <span title="Configuration option">&#9881;</span>          <strong>Note:</strong> Blank lines within the "<code>.layout</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example above.        </p>
+          <span title="Configuration option">&#9881;</span>          <strong>Remarque</strong>Les lignes vides du fichier "<code>.layout</code>" sont ignorées, aussi bien que les lignes commençant par le caractère "<code>#</code>" ( livre/dièse)-- on peut l'utiliser pour ajouter des commentaires, comme dans l'exemple ci-dessus.        </p>
 
         <p>
           La ligne "<code>keyboardlist</code>" décrit les dispositions vers lesquelles on bascule lorsque l'utilisateur clique sur les boutons gauche et droit du clavier. (Voir ci-dessous.)        </p>
@@ -1254,7 +1257,7 @@
           Ce fichier (qui est un fichier d'en-tête du langage de programmation <cite>C</cite> ) provient également du <cite>système X Window</cite> . Il définit les valeurs Unicode de chaque keycap (par exemple, "<code>XK_equal</code>" correspond à "<code>U+003D</code>", pour le caractère "<code>=</code>" ("<code>EQUALS SIGN</code>").        </p>
 
         <p class="note">
-          <span title="Information">&#128161;</span>          <strong>Note:</strong> This file is not compiled into Tux Paint, but is read and parsed at runtime.        </p>
+          <span title="Information">&#128161;</span>          <strong>Remarque :</strong> Ce fichier n'est pas compilé avec Tux Paint, mais il est lu et analysé durant l'exécution de celui-ci.        </p>
 
         <p>
           Il est peu probable qu'une modification de ce fichier soit requise.        </p>
@@ -1265,15 +1268,15 @@
       <header>
         <h1>
           <a name="magic_tools"
-              id="magic_tools">Magic Tools</a>
+              id="magic_tools">Outils 'Magie'</a>
         </h1>
       </header>
 
       <p>
-        Tux Paint's Magic tools are pieces of software, external to the main Tux Paint application, that are loaded as "plugins" at runtime, and interact with the program using a defined Application Programming Interface (API). The plugins that ship with Tux Paint (as well as Tux Paint itself) are written in the C programming language.      </p>
+        Les outils 'Magie" de Tux Paint sont des morceux de programmes, extérieurs aux programme principal de Tux Paint, qui sont chargés comme des "plugins" au démarrage, et interagissent avec le programme en utilisant une "Interface de Programmation d'Application" (API). Les plugins qui viennent avec Tux Paint (tout comme Tux Paint) sont écrites en langage C.      </p>
 
       <p>
-        Consult the <a href="MAGIC-API.html">Magic Tool Plugin API Documentation</a> to learn how to write your own.      </p>
+        Consultez la <a href="MAGIC-API.html">Documentation sur les outils API 'Magic'</a> pour savoir comment écrire vos API personnelles.      </p>
     </section>
 
   </body>

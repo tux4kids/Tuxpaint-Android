@@ -1,5 +1,5 @@
-.\" tuxpaint.1 - 2023.05.18
-.TH TUXPAINT 1 "mai 18, 2023" "0.9.30" "Tux Paint"
+.\" tuxpaint.1 - 2023.07.20
+.TH TUXPAINT 1 "juillet 20, 2023" "0.9.31" "Tux Paint"
 .SH NAME
 tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 
@@ -13,13 +13,13 @@ tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 .br
 [\-\-allowscreensaver]
 .br
-[\-\-WIDTHxHEIGHT]
+[\-\-\fIWIDTH\fPx\fIHEIGHT\fP]
 .br
 [\-\-native]
 .br
 [\-\-orient=portrait]
 .br
-[\-\-buttonsize SIZE | \-\-buttonsize auto]
+[\-\-buttonsize \fISIZE\fP | \-\-buttonsize auto]
 .br
 [\-\-startblank]
 .br
@@ -76,6 +76,8 @@ tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 [\-\-nolabel]
 .br
 [\-\-nobrushspacing]
+.br
+[\-\-notemplateexport]
 .br
 [\-\-newcolorslast]
 .br
@@ -147,6 +149,8 @@ tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 .br
 [\-\-alllocalefonts]
 .br
+[\-\-uifont \fIFONT NAME\fP]
+.br
 [\-\-savedir \fIRÉPERTOIRE\fP]
 .br
 [\-\-exportdir \fIRÉPERTOIRE\fP]
@@ -158,6 +162,8 @@ tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 [\-\-saveovernew]
 .br
 [\-\-nosave]
+.br
+[\-\-noerase]
 .br
 [\-\-autosave]
 .br
@@ -227,6 +233,8 @@ tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 .br
 [\-\-brushspacing]
 .br
+[\-\-templateexport]
+.br
 [\-\-newcolorsfirst]
 .br
 [\-\-dontmirrorstamps]
@@ -239,9 +247,13 @@ tuxpaint -- "Tux Paint", un programme simple pour les jeunes enfants.
 .br
 [\-\-currentlocalefont]
 .br
+[\-\-uifont=default]
+.br
 [\-\-saveoverask]
 .br
 [\-\-save]
+.br
+[\-\-erase]
 .br
 [\-\-noautosave]
 .br
@@ -296,6 +308,9 @@ Affiche une liste des options disponibles en ligne de commande.
 .TP 8
 .B \-\-copying
 Montre la licence (GNU GPL) sous laquelle Tux Paint est distribué.
+.TP 8
+.B \-\-listfonts
+Affiche une liste de polices trouvées par Pango (également disponible pour Tux Paint via --uifont).
 
 .SH OPTIONS - INTERFACE
 .l
@@ -317,7 +332,7 @@ défaut).
 En mode plein écran, utilise la résolution de l'écran par défaut.
 
 .TP 8
-.B \-\-WIDTHxHEIGHT
+.B \-\-\fIWIDTH\fPx\fIHEIGHT\fP
 Fait tourner \fITux Paint\fP dans une fenêtre de dimensions
 particulières, ou dans une résolution plein écran particulière (si
 \-\-native n'est pas utilisé). Valeur par défaut 800x600. Largeur minimum
@@ -349,10 +364,10 @@ Désactive ou active (défaut) le support pour stéréo.
 .SS INTERFACE SIZE
 .TP 8
 .B \-\-buttonsize \fISIZE\fP \-\-buttonsize auto
-Adjust the size of the buttons in \fITux Paint\fP's user interface, between
-24 and 192 pixels (48 is the default, and suitable for displays with 96 to
-120dpi pixel density). Use "auto" to have \fITux Paint\fP choose a button
-size based on \fITux Paint\fP's window/display size.
+Ajuste la taille des boutons à \fITux Paint\fP de l'interface utilisateur,
+entre 24 et 192 pixels (48 par défaut, qui convient pour des affichages de
+96 à 120 dpi). Utilisez "auto"  pour choisir une taille  de \fITux
+Paint\fP de la taille \fITux Paint\fP de l'affichage/fenêtre.
 
 .TP 8
 .B \-\-colorsrows=\fIROWS\fP
@@ -430,8 +445,8 @@ tampons ne sont pas forcément contrôlables.)
 
 .TP 8
 .B \-\-nostamprotation \-\-stamprotation
-Disable or enable (default) the rotation step when placing a stamp in the
-drawing.
+Désactive ou active (défaut) la possibilité de rotation des tampons
+quand on les place sur le dessin.
 
 .TP 8
 .B \-\-nomagiccontrols \-\-magiccontrols
@@ -442,8 +457,8 @@ tous les outils ne sont pas forcément contrôlables.)
 
 .TP 8
 .B \-\-nomagicsizes \-\-magicsizes
-Disable or enable (default) Magic size controls.  (Note: Not all Magic
-tools offer size controls.)
+Déactive ou active (par défaut) les contrôles de taille des outils
+Magie. (Note : tous les outils Magie ne bénéficie pas des ces contrôle.)
 
 .TP 8
 .B \-\-noshapecontrols \-\-shapecontrols
@@ -458,8 +473,22 @@ texte qui peut être modifié ou déplacé plus tard.
 
 .TP 8
 .B \-\-nobrushspacing \-\-brushspacing
-Disable or enable (default) the brush spacing option of the Paint and Lines
-tools, which allows you to override the default spacing of a brush.
+Déactive ou active (par défaut) l'option d'espacement des coups de
+pinceaux et des outils Lignes, ce qui vous permet d'annuler l'espacement
+des coups de pinceaux.
+
+.TP 8
+.B \-\-notemplateexport \-\-templateexport
+Désactive ou active (défaut) la création de nouveaux Modèles à partir
+des dessins sauvegardés en utilisant la boîte de dialogue Ouvrir.
+
+.TP 8
+.B \-\-noerase \-\-erase
+Cette option --noerase désactive la possibilité d'effacer des fichiers
+(des dessins sauvegardés, via la boîte de dialogue Ouvrir, et les
+modèles exportés via la boîte de dialogue Nouveau). C'est utile pour
+empêcher un utilisateur d'effacer son propre travail, ou celui des autres
+(spécialement utilisé en combinaison avec --saveovernew).
 
 .SH OPTIONS - CONTROLLING TUX PAINT
 .l
@@ -751,9 +780,9 @@ sauvegarder l'image quand vous quittez, et suppose que vous le faites.
 
 .TP 8
 .B \-\-reversesort \-\-noautosave
-The --reversesort option causes Tux Paint's Open and Slideshow dialogs to
-display the oldest images at the top of the list (normally the newest
-appear at the top, and the oldest at the bottom.
+Cette option --reversesort fait que les boîtes de dialogue Ouvrir et
+Diaporama affichent les images les plus anciennes en haut de liste
+(normalement ce sont les plus récentes en haut et les vieilles en bas).
 
 .SH OPTIONS - DATA FILES
 .l
@@ -1227,6 +1256,14 @@ fonctionne Tux Paint. Utilisez l'option "--alllocalefonts" pour charger de
 telles fontes, pour les outils Texte et Étiquette. (C'était le
 comportement par défaut pour les versions antérieures à la 0.9.21).
 
+.TP 8
+.B \-\-uifont=\fI"FONT NAME"\fP \-\-uifont=default
+Spécifie le nom d'une police ue Tux Paint essayera d'utiliser pour
+l'interface utilisateur -- étiquettes de boutons, textes pop-up,
+instructions en bas. Si rien n'est mentionné, ou bien "default' est
+spécifié, alors "DejaVu Sans" sera utilisé (C'était le comportement par
+défaut avant la version 0.9.31.)
+
 .SH OPTIONS - MISCELLANEOUS
 .l
 \fItuxpaint\fP accepte les options suivantes pour modifier son
@@ -1322,7 +1359,7 @@ l'option "--nolockfile".
 .RS
 .PP
 (Il n'y a pas de raisons d'effacer le fichier de verrouillage, car il
-contient un horodatage qui fait qu'il expirera après 30 secondes).
+contient un horodatage qui fait qu'il expirera après 30 secondes.)
 .RE
 .TP 8
 .B $XDG_CONFIG_HOME[XDG_PICTURES_DIR]/TuxPaint/

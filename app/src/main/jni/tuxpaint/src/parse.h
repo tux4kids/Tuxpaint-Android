@@ -23,6 +23,8 @@ struct cfginfo
   const char *disable_save;
   const char *disable_screensaver;
   const char *disable_stamp_controls;
+  const char *disable_template_export;
+  const char *disable_erase;
   const char *dont_do_xor;
   const char *dont_load_stamps;
   const char *no_stamp_rotation;
@@ -35,6 +37,7 @@ struct cfginfo
   const char *native_screensize;
   const char *new_colors_last;
   const char *no_button_distinction;
+  const char *tp_ui_font;
   const char *no_fancy_cursors;
   const char *no_system_fonts;
   const char *noshortcuts;

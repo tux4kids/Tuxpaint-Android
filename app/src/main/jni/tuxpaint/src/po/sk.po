@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxpaint 0.9.28\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-02 00:00-0700\n"
+"POT-Creation-Date: 2023-07-20 22:29-0700\n"
 "PO-Revision-Date: 2023-04-10 13:48+0200\n"
 "Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -237,6 +237,18 @@ msgstr ""
 "Klikni na vyplnenie oblasti tvarovaným prechodom (od vybranej farby po "
 "priesvitnosť)."
 
+#: ../fill_tools.h:75
+#, fuzzy, c-format
+#| msgid ""
+#| "Click and drag to fill an area with a linear gradient (from the chosen "
+#| "color to transparent)."
+msgid ""
+"Click and drag to fill an area with a linear gradient (from the chosen color "
+"to transparent). (Your gradient’s angle is %.0f degrees.)"
+msgstr ""
+"Klikni a ťahaj na vyplnenie oblasti lineárnym prechodom (od vybranej farby "
+"po priesvitnosť)."
+
 #. Congratulations #1
 #: ../great.h:37
 msgid "Great!"
@@ -370,14 +382,54 @@ msgid "The Stamp tool is like a set of rubber stamps or stickers"
 msgstr "Nástroj Pečiatka je ako sada gumových pečiatok alebo nálepiek"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:48
-msgid "Many Magic tools now offer size settings."
+msgid "New Magic tools: Loops, Ribbon, Smooth, and Squiggles."
 msgstr ""
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:49
-msgid "Button labels word-wrap when possible (improves legibility)."
+msgid "Eraser tool now offers fuzzy (soft-edged) erasers."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:50
+msgid ""
+"Turn saved drawings into Templates (found in the New dialog) from within Tux "
+"Paint itself (via the Open dialog). (They may subsequently be deleted from "
+"the New dialog.)"
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:51
+msgid ""
+"\"Erase\" option to remove saved drawings from the Open dialog and exported "
+"templates from the New dialog may be disabled, via \"noerase\" configuration "
+"option."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:52
+msgid ""
+"Specify the user interface font, via \"uifont\" configuration option. (List "
+"available fonts with \"--listfonts\" on the command-line.)"
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:53
+msgid ""
+"Different (default) user interface fonts are once again used for under "
+"different locales."
 msgstr ""
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:54
+msgid ""
+"Minor improvements to the selection buttons for the 'special' colors "
+"(pipette, HSV picker, and color mixer)."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:59
+msgid "Many Magic tools now offer size settings."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:60
+msgid "Button labels word-wrap when possible (improves legibility)."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:65
 msgid ""
 "Fifteen new magic tools have been added: Maze, Googly Eyes, Fur, Circles, "
 "Rays, 3D Glasses, Color Sep., Saturate, Desaturate, Remove Color, Keep "
@@ -388,24 +440,24 @@ msgstr ""
 "sýtosti, odstránenie farby, zachovanie farby, Kaleido-4, Kaleido-6, "
 "Kaleido-8 a kvitnutie."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:55
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:66
 msgid "Stamps may be rotated before being applied to the canvas."
 msgstr "Razítka môžeš pred ich odtlačením na plátno otočiť."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:56
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:67
 msgid "Shapes tool, in drag-from-corner mode, has been improved."
 msgstr "Nástroj pre tvary bol v režime ťahania z rohov vylepšený."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:57
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:68
 msgid "Fill tool now offers a shaped gradient (bevel) mode."
 msgstr "Nástroj Výplne teraz ponúka režim tvarovateľného prechodu (sklon)."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:58
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:69
 msgid "A quick Eraser mode is be accessed via keyboard shortcut."
 msgstr ""
 "Režim rýchlej gumy je teraz možné aktivovať pomocou klávesovej skratky."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:59
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:70
 msgid ""
 "The rainbow palette (HSV color picker) can now load the built-in color, or "
 "the colors from the pipette tool or color mixer."
@@ -413,7 +465,7 @@ msgstr ""
 "Dúhová paleta (výber farieb HSV) teraz môže načítať vstavanú farbu alebo "
 "farby z nástroja pipeta alebo miešača farieb."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:60
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:71
 msgid ""
 "Starter and Template images can specify how they should stretch, to avoid "
 "smearing when the canvas aspect ratio differs from that of the image."
@@ -421,15 +473,15 @@ msgstr ""
 "Úvodné obrázky a šablónu môžu špecifikovať, ako sa majú natiahnuť, aby sa "
 "zabránilo rozmazaniu, keď sa pomer strán plátna líši od pomeru strán obrázka."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:61
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:72
 msgid "The \"buttonsize\" configuration option now offers an \"auto\" setting."
 msgstr "Voľba konfigurácie „buttonsize“ teraz ponúka nastavenie „auto“."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:62
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:73
 msgid "A quick start guide has been added."
 msgstr "Bola pridaná príručka pre rýchly štart."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:67
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:78
 msgid ""
 "Tux Paint's Color palette includes a new Color Mixer option, which allows "
 "users to combine different proportions of primary colors (red, yellow, and "
@@ -441,7 +493,7 @@ msgstr ""
 "modrej) a odtieňov (biela, sivá a čierna) na vytvorenie nových farieb, "
 "podobne ako pri miešaní farieb."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:68
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:79
 msgid ""
 "The Color Picker option, which previously offered a static palette of around "
 "sixty-five thousand color choices, now supports separate hue, saturation, "
@@ -453,7 +505,7 @@ msgstr ""
 "sýtosti, a nastavenie hodnoty jasu, čo používateľom umožňuje vybrať si z "
 "viac ako šestnástich miliónov farieb."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:69
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:80
 msgid ""
 "Also, a keyboard shortcut is now available for quick access to the Color "
 "Selector — the \"pipette\" tool used for picking colors from the current "
@@ -463,7 +515,7 @@ msgstr ""
 "farby - nástroj „pipeta“, ktorý sa používa na výber farieb z aktuálneho "
 "výkresu."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:70
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:81
 msgid ""
 "The Paint and Lines tools now provide a way to adjust the spacing of "
 "brushes, allowing dotted lines or smearing effects to be made. Many brushes "
@@ -473,7 +525,7 @@ msgstr ""
 "umožňuje vytvárať bodkované čiary alebo efekty rozmazania. Mnohé štetce "
 "dostali aj lepšie predvolené hodnoty rozstupov."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:71
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:82
 msgid ""
 "Two new variations of the Zoom Magic Tool, Tile Zoom and Rush, have been "
 "added. When shrinking a drawing with Tile Zoom, it replicates the drawing "
@@ -485,7 +537,7 @@ msgstr ""
 "kresbu po celom plátne vo forme dlaždičiek, namiesto toho, aby plátno "
 "vyplnil celistvou farbou pozadia. Nástroj Zhon výsledok rozostrí."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:72
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:83
 msgid ""
 "Tux Paint's Shapes tool now offers hexagon (6-sided) and heptagon (7-sided) "
 "polygons. For shapes which can be stretched (rectangle, oval, etc.), the "
@@ -498,7 +550,7 @@ msgstr ""
 "spodnej časti zobrazuje pomer ich strán tvaru.Tiež boli doplnené informácie "
 "zobrazované pri použití niektorých ďalších nástrojov."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:73
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:84
 msgid ""
 "Keyboard shortcuts, such as [Control]+[S] to save a drawing, are now "
 "accessed with the more traditional [⌘ Command] key when using Tux Paint on "
@@ -510,7 +562,7 @@ msgstr ""
 "klávesy [⌘ Command]. Veľkosť vstavanej klávesnice Tux Paint na obrazovke "
 "bola vylepšená. Vylepšili sme tiež vzhľad používateľskej dokumentácie."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:78
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:89
 msgid ""
 "Tux Paint's Paint and Line tools now support brushes that rotate based on "
 "the angle of the stroke. This new rotation feature, as well as the older "
@@ -524,7 +576,7 @@ msgstr ""
 "tvaru štetca. Okrem toho nástroj Výplň teraz ponúka voľný režim maľovania na "
 "interaktívne vyfarbovanie v rámci ohraničenej oblasti."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:79
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:90
 msgid ""
 "Six new Magic tools have been added to Tux Paint. Panels shrinks and "
 "duplicates the drawing into a 2-by-2 grid, which is useful for making four-"
@@ -542,7 +594,7 @@ msgstr ""
 "Napokon funkcia Hladká dúha poskytuje postupnejšiu alternatívu klasického "
 "nástroja Dúha."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:80
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:91
 msgid ""
 "A number of existing Magic tools have been updated, as well. Improvements "
 "were made to Halftone, which simulates photographs on newsprint; Cartoon, "
@@ -557,7 +609,7 @@ msgstr ""
 "s Kockami, Kriedou a Rytinou, teraz ponúkajú možnosť zmeniť celý obrázok "
 "naraz!"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:81
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:92
 msgid ""
 "Finally, Magic tools are now grouped into collections of similar effects — "
 "painting, distorts, color filters, picture warps, pattern painting, "
@@ -569,7 +621,7 @@ msgstr ""
 "umelecké a dekorácie obrázkov - to uľahčuje nájdenie nástroja, ktorý "
 "potrebujete."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:86
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:97
 msgid ""
 "Tux Paint's Fill tool now offers options to fill an area with color "
 "gradients. The \"Radial\" fill creates a circular gradient centered around "
@@ -581,7 +633,7 @@ msgstr ""
 "okolo miesta kliknutia, zatiaľ čo \"Lineárna\" výplň umožňuje interaktívne "
 "vytváranie prechodov s rôznymi uhlami a veľkosťami."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:87
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:98
 msgid ""
 "New Magic tools have been added to Tux Paint: \"Pixels\" makes it easier to "
 "create retro-gaming style pixel art, \"Checkerboard\" fills the entire "
@@ -593,7 +645,7 @@ msgstr ""
 "vyplní celé plátno vzorom šachovnice a \"Klon\" umožňuje duplikovať časti "
 "obrazu pomocou ťahov štetcom."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:88
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:99
 msgid ""
 "Tux Paint's user documentation has been overhauled, making localization "
 "easier. Parties interested in helping with localization are encouraged to "
@@ -603,7 +655,7 @@ msgstr ""
 "zjednodušila jej lokalizácia. Záujemcom o pomoc s lokalizáciou sa odporúča "
 "kontaktovať tím Tux Paint."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:89
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:100
 msgid ""
 "Finally, a new pair of accessibility options have been added. The entire "
 "user interface can now be enlarged benefiting users with impaired vision, "
@@ -619,7 +671,7 @@ msgstr ""
 "usporiadania palety farieb, môže tiež pomôcť používateľom nepresných "
 "vstupných zariadení, akými sú napríklad systémy sledovania pohybu očí."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:94
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:105
 msgid ""
 "A major improvement has been made to the Shapes tool, which now provides "
 "options to choose whether shapes are drawn from the center or a corner, "
@@ -629,7 +681,7 @@ msgstr ""
 "či sa tvary budú kresliť od stredu alebo z rohu, čo uľahčuje jeho používanie "
 "v ľubovoľnej situácii."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:95
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:106
 msgid ""
 "The on-screen keyboard, an accessibility feature optionally available when "
 "using the Text and Label tools, now appears larger on bigger displays; "
@@ -640,7 +692,7 @@ msgstr ""
 "displejoch zobrazuje väčšia. To môže pomôct používateľom nepresných "
 "vstupných zariadení, akými sú napríklad systémy na sledovanie očí."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:96
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:107
 msgid ""
 "The Eraser tool adds new, smaller eraser sizes, and applies smoother, "
 "contiguous strokes when the pointer is moved quickly."
@@ -648,7 +700,7 @@ msgstr ""
 "Nástroj Guma pridáva nové, menšie veľkosti gumy a používa hladšie, súvislé "
 "ťahy pri rýchlom pohybe kurzora."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:97
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:108
 msgid ""
 "Finally, this newest version adds options to export individual drawings and "
 "GIF animations, making it easy to share pictures, cartoons, and slideshows "
@@ -658,7 +710,7 @@ msgstr ""
 "GIF animácií, čo uľahčuje zdieľanie obrázkov, komiksov a prezentácií s "
 "ostatnými."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:102
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:113
 msgid ""
 "The latest version has promoted the \"Fill\" tool, previously found under "
 "the \"Magic\" section of Tux Paint, to the main toolbar, where it's easier "
@@ -673,7 +725,7 @@ msgstr ""
 "kreslenia \"Nový\". Jednoliate farby pozadia môžete umiestniť aj na koniec "
 "tohto dialógového okna, čo umožňuje zvýraznenie šablóny obrázkov."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:103
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:114
 msgid ""
 "Tux Paint also now makes it possible to disable stereo sound, which can "
 "benefit users with a hearing impairment, or in situations where only one "
@@ -683,7 +735,7 @@ msgstr ""
 "používatelia s poruchou sluchu alebo to môže byť výhodné v situáciách, keď "
 "je k dispozícii iba jeden reproduktor."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:108
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:119
 msgid ""
 "New in this version are a \"color picker\", which allows any color within a "
 "drawing to be chosen using the pointer, and a set of three-, four-, and five-"
@@ -693,7 +745,7 @@ msgstr ""
 "vybrať ľubovoľnú farbu v rámci výkresu pomocou kurzora a sady tvarov v tvare "
 "troj-, štvor- a päťcípej hviezdy."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:109
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:120
 msgid ""
 "The latest version also incorporates a number of new translations, bringing "
 "the number of supported languages up to nearly 130: Bengali, Bodo, Dogri, "
@@ -955,7 +1007,7 @@ msgstr "Nový"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:97 ../tuxpaint.c:9520
+#: ../tools.h:97 ../tuxpaint.c:9632
 msgid "Open"
 msgstr "Otvoriť"
 
@@ -1194,274 +1246,311 @@ msgstr ""
 "otočený o %d stupňov.)"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2422
+#: ../tuxpaint.c:2447
 msgid "Do you really want to quit?"
 msgstr "Chceš naozaj skončiť?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2425
+#: ../tuxpaint.c:2450
 msgid "Yes, I’m done!"
 msgstr "Áno, už som skončil(-a)!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2428 ../tuxpaint.c:2455
+#: ../tuxpaint.c:2453 ../tuxpaint.c:2480
 msgid "No, take me back!"
 msgstr "Nie, chcem sa vrátiť!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2432
+#: ../tuxpaint.c:2457
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Ak skončíš, stratíš svoj obrázok. Mám ho uložiť?"
 
-#: ../tuxpaint.c:2433 ../tuxpaint.c:2438
+#: ../tuxpaint.c:2458 ../tuxpaint.c:2463
 msgid "Yes, save it!"
 msgstr "Áno, ulož ho!"
 
-#: ../tuxpaint.c:2434 ../tuxpaint.c:2439
+#: ../tuxpaint.c:2459 ../tuxpaint.c:2464
 msgid "No, don’t bother saving!"
 msgstr "Nie, netreba!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2437
+#: ../tuxpaint.c:2462
 msgid "Save your picture first?"
 msgstr "Chceš najskôr uložiť obrázok?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2442
+#: ../tuxpaint.c:2467
 msgid "Can’t open that picture!"
 msgstr "Tento obrázok sa nedá otvoriť!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2445 ../tuxpaint.c:2450 ../tuxpaint.c:2459 ../tuxpaint.c:2466
-#: ../tuxpaint.c:2475 ../tuxpaint.c:2480
+#: ../tuxpaint.c:2470 ../tuxpaint.c:2475 ../tuxpaint.c:2484 ../tuxpaint.c:2491
+#: ../tuxpaint.c:2502 ../tuxpaint.c:2507 ../tuxpaint.c:2515
 msgid "OK"
 msgstr "OK"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2449
+#: ../tuxpaint.c:2474
 msgid "There are no saved files!"
 msgstr "Žiadne uložené súbory tu nie sú!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2453
+#: ../tuxpaint.c:2478
 msgid "Print your picture now?"
 msgstr "Chceš si teraz svoj obrázok vytlačiť?"
 
-#: ../tuxpaint.c:2454
+#: ../tuxpaint.c:2479
 msgid "Yes, print it!"
 msgstr "Áno, vytlač ho!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2458
+#: ../tuxpaint.c:2483
 msgid "Your picture has been printed!"
 msgstr "Tvoj obrázok je vytlačený!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2462
+#: ../tuxpaint.c:2487
 msgid "Sorry! Your picture could not be printed!"
 msgstr "Prepáč. Tvoj obrázok sa nedá vytlačiť!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2465
+#: ../tuxpaint.c:2490
 msgid "You can’t print yet!"
 msgstr "Ešte nemôžeš tlačiť!"
 
-#. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2469
+#. Prompt to confirm erasing a picture in the Open dialog,
+#. or exported template from the New dialog
+#: ../tuxpaint.c:2495
 msgid "Erase this picture?"
 msgstr "Mám odstrániť tento obrázok?"
 
-#: ../tuxpaint.c:2470
+#: ../tuxpaint.c:2496
+#, fuzzy
+#| msgid "Erase this picture?"
+msgid "Erase this template?"
+msgstr "Mám odstrániť tento obrázok?"
+
+#: ../tuxpaint.c:2497
 msgid "Yes, erase it!"
 msgstr "Áno, odstráň ho!"
 
-#: ../tuxpaint.c:2471
+#: ../tuxpaint.c:2498
 msgid "No, don’t erase it!"
 msgstr "Nie, neodstraňuj ho!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2474
+#: ../tuxpaint.c:2501
 msgid "Remember to use the left mouse button!"
 msgstr "Nezabudnite, že treba stlačiť ľavé tlačidlo myši!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2478
+#: ../tuxpaint.c:2505
 msgid "Your picture has been exported!"
 msgstr "Tvoj obrázok bol exportovaný!"
 
-#: ../tuxpaint.c:2479
+#: ../tuxpaint.c:2506
 msgid "Your slideshow GIF has been exported!"
 msgstr "Tvoja GIF prezentácia bola exportovaná!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2483
+#: ../tuxpaint.c:2510
 msgid "Sorry! Your picture could not be exported!"
 msgstr "Prepáč. Tvoj obrázok sa nedá exportovať!"
 
-#: ../tuxpaint.c:2484
+#: ../tuxpaint.c:2511
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "Prepáč. Tvoja GIF prezentácia sa nedá exportovať!"
 
+#. Confirmation of successful (we hope) image-to-template conversion
+#: ../tuxpaint.c:2514
+msgid "Your picture is now available as a template in the “New“ dialog!"
+msgstr ""
+
+#. We got an error doing image-to-template conversion
+#: ../tuxpaint.c:2518
+msgid ""
+"You already turned this picture into a template. Look for it in the “New“ "
+"dialog!"
+msgstr ""
+
+#: ../tuxpaint.c:2519
+#, fuzzy
+#| msgid "Sorry! Your picture could not be printed!"
+msgid "Sorry! Your picture could not turned into a template!"
+msgstr "Prepáč. Tvoj obrázok sa nedá vytlačiť!"
+
 #. Slideshow instructions
-#: ../tuxpaint.c:2488
+#: ../tuxpaint.c:2522
 msgid "Choose the pictures you want, then click “Play”."
 msgstr ""
 "Klikni na obrázky, ktoré chceš vidieť, a potom klikni na tlačidlo „Prehrať”."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2797
+#: ../tuxpaint.c:2831
 msgid "Sound muted."
 msgstr "Zvuk je stlmený."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2802
+#: ../tuxpaint.c:2836
 msgid "Sound unmuted."
 msgstr "Zvuk nie je stlmený."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3647
+#: ../tuxpaint.c:3685
 msgid "Please wait…"
 msgstr "Počkaj, prosím…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:9523
+#: ../tuxpaint.c:9635
 msgid "Erase"
 msgstr "Guma"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:9526
+#: ../tuxpaint.c:9638
 msgid "Slides"
 msgstr "Výstava"
 
+#. Open dialog: 'Template' button, to make a template out of a drawing
+#: ../tuxpaint.c:9641
+msgid "Template"
+msgstr ""
+
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:9529
+#: ../tuxpaint.c:9644
 msgid "Export"
 msgstr "Export"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:9532
+#: ../tuxpaint.c:9647
 msgid "Back"
 msgstr "Späť"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:9535
+#: ../tuxpaint.c:9650
 msgid "Play"
 msgstr "Prehrať"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:9538
+#: ../tuxpaint.c:9653
 msgid "GIF Export"
 msgstr "Export do GIF"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:9541
+#: ../tuxpaint.c:9656
 msgid "Next"
 msgstr "Ďalej"
 
 #. Color mixer dialog: 'Clear' button, to reset the mixed color
-#: ../tuxpaint.c:9544
+#: ../tuxpaint.c:9659
 msgid "Clear"
 msgstr "Vyčistiť"
 
 #. Use the localized label string (e.g., "あぁ" in Japanese)
-#: ../tuxpaint.c:10482 ../tuxpaint.c:10485 ../tuxpaint.c:10486
+#: ../tuxpaint.c:10581 ../tuxpaint.c:10584 ../tuxpaint.c:10585
 msgid "Aa"
 msgstr "Aa"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:14378
+#: ../tuxpaint.c:14549
 msgid "Yes"
 msgstr "Áno"
 
-#: ../tuxpaint.c:14382
+#: ../tuxpaint.c:14553
 msgid "No"
 msgstr "Nie"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:15649
+#: ../tuxpaint.c:15818
 msgid "Replace the picture with your changes?"
 msgstr "Mám tieto zmeny uložiť do starého obrázka?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:15653
+#: ../tuxpaint.c:15822
 msgid "Yes, replace the old one!"
 msgstr "Áno, prepíš starý súbor!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:15657
+#: ../tuxpaint.c:15826
 msgid "No, save a new file!"
 msgstr "Nie, ulož ich do nového súboru!"
 
-#. Let user choose an image:
-#. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:16923
-msgid "Choose the picture you want, then click “Open”."
-msgstr "Vyber si obrázok, ktorý chceš, a potom klikni na „Otvoriť”."
+#: ../tuxpaint.c:17094
+msgid ""
+"Choose a picture and then click “Open”, “Export”, “Template“, or “Erase”. "
+"Click “Slides” to create a slideshow animation or “Back“ to return to your "
+"current picture."
+msgstr ""
+
+#: ../tuxpaint.c:17096
+msgid ""
+"Choose a picture and then click “Open”, “Export”, or “Erase”. Click “Slides” "
+"to create a slideshow animation or “Back“ to return to your current picture."
+msgstr ""
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:18512
+#: ../tuxpaint.c:18765
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr "Vyber aspoň 2 kresby a vytvor z nich animovaný GIF."
 
 #. Descriptions (names) of the color mixer tool's primary colors and shades
-#: ../tuxpaint.c:24507
+#: ../tuxpaint.c:24942
 msgid "red"
 msgstr "červená"
 
-#: ../tuxpaint.c:24508
+#: ../tuxpaint.c:24943
 msgid "yellow"
 msgstr "žltá"
 
-#: ../tuxpaint.c:24509
+#: ../tuxpaint.c:24944
 msgid "blue"
 msgstr "modrá"
 
-#: ../tuxpaint.c:24510
+#: ../tuxpaint.c:24945
 msgid "white"
 msgstr "biela"
 
-#: ../tuxpaint.c:24511
+#: ../tuxpaint.c:24946
 msgid "grey"
 msgstr "sivá"
 
-#: ../tuxpaint.c:24512
+#: ../tuxpaint.c:24947
 msgid "black"
 msgstr "čierna"
 
 #. Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.)
-#: ../tuxpaint.c:24517
+#: ../tuxpaint.c:24952
 #, c-format
 msgid "Your color is %1$s %2$s."
 msgstr "Tvoja farba je %1$s %2$s."
 
-#: ../tuxpaint.c:24518
+#: ../tuxpaint.c:24953
 #, c-format
 msgid "Your color is %1$s %2$s and %3$s %4$s."
 msgstr "Tvoja farba je %1$s %2$s a %3$s %4$s."
 
-#: ../tuxpaint.c:24519
+#: ../tuxpaint.c:24954
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, and %5$s %6$s."
 msgstr "Tvoja farba je %1$s %2$s, %3$s %4$s a %5$s %6$s."
 
-#: ../tuxpaint.c:24520
+#: ../tuxpaint.c:24955
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, and %7$s %8$s."
 msgstr "Tvoja farba je %1$s %2$s, %3$s %4$s, %5$s %6$s a %7$s %8$s."
 
-#: ../tuxpaint.c:24521
+#: ../tuxpaint.c:24956
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, and %9$s %10$s."
 msgstr ""
 "Tvoja farba je %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s a %9$s %10$s."
 
-#: ../tuxpaint.c:24522
+#: ../tuxpaint.c:24957
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s, and "
@@ -1471,16 +1560,16 @@ msgstr ""
 "%11$s %12$s."
 
 #. Color mixer; e.g., "Your color is entirely grey."
-#: ../tuxpaint.c:25302 ../tuxpaint.c:25307
+#: ../tuxpaint.c:25737 ../tuxpaint.c:25742
 msgid "entirely"
 msgstr "úplne"
 
 #. Add "Color Select" color:
-#: ../tuxpaint.c:28397
+#: ../tuxpaint.c:28902
 msgid "Select a color from your drawing."
 msgstr "Vyber farbu z kresby."
 
-#: ../tuxpaint.c:28408
+#: ../tuxpaint.c:28913
 msgid ""
 "Pick a color. Hues go top to bottom. Saturation/intensity goes left (pale) "
 "to right (pure). Value (lightness/darkness): grey bar."
@@ -1489,7 +1578,7 @@ msgstr ""
 "(vyblednutá) doprava (čistá). Hodnotu jasu (svetlosť/tmavosť) nastavuje šedý "
 "pruh."
 
-#: ../tuxpaint.c:28422
+#: ../tuxpaint.c:28927
 msgid ""
 "Click the primary colors (red, yellow, and blue), white (to tint), grey (to "
 "tone), and black (to shade), to mix together a new color."
@@ -1616,11 +1705,11 @@ msgstr "Kliknutím a ťahaním myši nakreslíš malé tehly."
 msgid "Click and drag to draw bricks."
 msgstr "Kliknutím a ťahaním myši nakreslíš veľké tehly."
 
-#: ../../magic/src/calligraphy.c:130
+#: ../../magic/src/calligraphy.c:131
 msgid "Calligraphy"
 msgstr "Kaligrafia"
 
-#: ../../magic/src/calligraphy.c:143
+#: ../../magic/src/calligraphy.c:144
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Kliknutím a ťahaním myši môžeš písať kaligrafickým štýlom."
 
@@ -2258,6 +2347,16 @@ msgstr "Odraz"
 msgid "Click and drag the mouse around to add a reflection to your picture."
 msgstr "Kliknutím a ťahaním myši pridáš do svojho obrázka odraz."
 
+#: ../../magic/src/ribbon.c:117
+msgid "Ribbon"
+msgstr ""
+
+#: ../../magic/src/ribbon.c:129
+#, fuzzy
+#| msgid "Click to add snow balls to your picture."
+msgid "Add a flowing ribbon to your picture."
+msgstr "Ak klikneš, pridáš do obrázka snehové gule."
+
 #: ../../magic/src/ripples.c:109
 msgid "Ripples"
 msgstr "Kruhové vlnky"
@@ -2326,6 +2425,40 @@ msgstr "Výmena"
 msgid "Click and drag to shift your picture around on the canvas."
 msgstr ""
 "Kliknutím a ťahaním myši môžeš posunúť to, čo si nakreslil(-a) na výkres."
+
+#: ../../magic/src/smooth.c:62
+#, fuzzy
+#| msgid "Smooth Rainbow"
+msgid "Smooth"
+msgstr "Hladká dúha"
+
+#: ../../magic/src/smooth.c:63
+msgid "Squiggles"
+msgstr ""
+
+#: ../../magic/src/smooth.c:64
+msgid "Loops"
+msgstr ""
+
+#: ../../magic/src/smooth.c:68
+#, fuzzy
+#| msgid "Click and drag the mouse around to draw with wet, smudgy paint."
+msgid ""
+"Click and drag the mouse around to draw in freehand; it will be smoothed "
+"when you let go."
+msgstr "Kliknutím a ťahaním myši rozmažeš obrázok mokrým štetcom."
+
+#: ../../magic/src/smooth.c:69
+#, fuzzy
+#| msgid "Click and drag the mouse around to blur the image."
+msgid "Click and drag the mouse around to draw squiggles."
+msgstr "Kliknutím a ťahaním myši zahmlíš obrázok."
+
+#: ../../magic/src/smooth.c:70
+#, fuzzy
+#| msgid "Click and drag the mouse around to draw in calligraphy."
+msgid "Click and drag the mouse around to draw loop-the-loops."
+msgstr "Kliknutím a ťahaním myši môžeš písať kaligrafickým štýlom."
 
 #: ../../magic/src/smudge.c:110
 msgid "Smudge"
@@ -2541,6 +2674,9 @@ msgstr "Kliknutím a ťahaním myši vytvoríš XOR (log. súčin) efekt"
 #: ../../magic/src/xor.c:112
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "Ak klikneš myšou, použiješ XOR (log. súčin) efekt na celý obrázok"
+
+#~ msgid "Choose the picture you want, then click “Open”."
+#~ msgstr "Vyber si obrázok, ktorý chceš, a potom klikni na „Otvoriť”."
 
 #, fuzzy
 #~| msgid "Move the mouse to rotate the shape. Click to draw it."

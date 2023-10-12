@@ -1,0 +1,3504 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Tux Paint Options Documentation    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+
+    <!-- Title -->
+    <section class="outer">
+      <header>
+        <center>
+          <h1 style="page-break-before: avoid;">
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.31          </h1>
+
+          <h2>
+            Options Documentation          </h2>
+
+          <p>
+            Copyright &copy; 2002-2023 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+
+          <p>
+            júlí 20, 2023          </p>
+        </center>
+      </header>
+
+      <table border="2"
+             cellspacing="0"
+             cellpadding="2"
+             summary="Table of Contents"
+             align="center"
+             style="page-break-inside: avoid;">
+        <tr>
+          <th>
+            Table of Contents          </th>
+        </tr>
+
+        <tr>
+          <td>
+            <ul>
+              <li><a href="#tpc">Tux Paint Config.</a></li>              <li><a href="#cfg-file">Configuration File</a></li>              <li><a href="#available">Available Options</a>                <ul>
+                  <li><a href="#video_sound">Video/Sound</a></li>                  <li><a href="#mouse_keyboard">Mouse/Keyboard</a></li>                  <li><a href="#simplification">Simplification</a></li>                  <li><a href="#languages">Languages</a></li>                  <li><a href="#printing">Printing</a></li>                  <li><a href="#saving">Saving</a></li>                  <li><a href="#data">Data</a></li>                  <li><a href="#accessibility">Accessibility</a></li>                  <li><a href="#joystick">Joystick</a></li>                </ul>
+              </li>
+              <li><a href="#overriding">Overriding System Config. Options</a></li>              <li><a href="#command_line">Command-Line Options</a>                <ul>
+                  <li><a href="#info-cmd">Command-Line Informational Options</a></li>                </ul>
+              </li>
+              <li><a href="#different_language">Choosing a Different Language</a>                <ul>
+                  <li><a href="#available_languages">Available Languages</a></li>                  <li><a href="#env_locale">Setting Your Environment's Locale</a></li>                  <li><a href="#special_fonts">Special Fonts</a></li>                </ul>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="outer"><!-- H1: Tux Paint Config. -->
+      <div class="keeptogether">
+        <header>
+          <h1 id="tpc">
+            Tux Paint Config.          </h1>
+        </header>
+
+        <p>
+          A graphical tool is available that allows you to change Tux Paint's behavior. However, if you'd rather not install and use this tool, or want a better understanding of the available options, please continue reading.        </p>
+      </div>
+    </section><!-- H1: Tux Paint Config. -->
+
+    <section class="outer"><!-- H1: Configuration File -->
+      <div class="keeptogether">
+        <header>
+          <h1 id="cfg-file">
+            Configuration File          </h1>
+        </header>
+
+        <p>
+          You can create a simple configuration file for Tux Paint, which it will read each time you start it up.        </p>
+      </div>
+
+      <p>
+        The file is simply a plain text file containing the options you want enabled:      </p>
+
+      <section class="indent"><!-- H2: Linux and Unix Users -->
+        <div class="keeptogether">
+          <header>
+            <h2>
+              Linux and Unix Users            </h2>
+          </header>
+
+          <p>
+            The file you should create is called "<code><b>.tuxpaintrc</b></code>" and it should be placed in your home directory. (a.k.a. "<code>~/.tuxpaintrc</code>" or "<code>$HOME/.tuxpaintrc</code>")          </p>
+        </div>
+
+        <section class="indent"><!-- H3: System-Wide Configuration File -->
+          <header>
+            <h3>
+              System-Wide Configuration File            </h3>
+          </header>
+
+          <p>
+            Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is normally located at:          </p>
+
+          <blockquote>
+            <code>/etc/tuxpaint/tuxpaint.conf</code>
+          </blockquote>
+        </section><!-- H3: System-Wide Configuration File -->
+      </section><!-- H2: Linux and Unix Users -->
+
+      <section class="indent"><!-- H2: macOS Users -->
+        <header>
+          <h2>
+            macOS Users          </h2>
+        </header>
+
+        <p>
+          The file you should create is called "<code><b>tuxpaint.cfg</b></code>" and it should be placed in your home folder, under the sub-folder: <code>Library/Application Support/TuxPaint</code>        </p>
+
+        <section class="indent"><!-- H3: System-Wide Configuration File -->
+          <header>
+            <h3>
+              System-Wide Configuration File            </h3>
+          </header>
+
+          <p>
+            Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is normally located at:          </p>
+
+          <blockquote>
+            <code>/Library/Application Support/TuxPaint/tuxpaint.cfg</code>
+          </blockquote>
+        </section><!-- H3: System-Wide Configuration File -->
+      </section><!-- H2: macOS Users -->
+
+      <section class="indent"><!-- H2: Windows Users -->
+        <header>
+          <h2>
+            Windows Users          </h2>
+        </header>
+
+        <p>
+          The file you should create is called "<code><b>tuxpaint.cfg</b></code>" and it should be placed in in your personal AppData folder: <code>C:\Users\username\AppData\Roaming\TuxPaint\</code>        </p>
+
+        <p>
+          You can use NotePad or WordPad to create this file. Be sure to save it as Plain Text, and make sure the filename doesn't have ".txt" at the end...        </p>
+
+        <section class="indent"><!-- H3: System-Wide Configuration File -->
+          <header>
+            <h3>
+              System-Wide Configuration File            </h3>
+          </header>
+
+          <p>
+            Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is normally located at:          </p>
+
+          <blockquote>
+            <code>C:\Program Files\Tuxpaint</code>
+          </blockquote>
+
+          </p>
+        </section><!-- H3: System-Wide Configuration File -->
+      </section><!-- H2: Windows Users -->
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        You can disable reading of this file altogether, leaving the settings as defaults (which can then be overridden by your personal config. file and/or command-line arguments) by using the command-line option "<code>--nosysconfig</code>".      </p>
+    </section><!-- H1: Configuration File -->
+
+    <section class="outer"><!-- H1: Available Options -->
+      <div class="keeptogether">
+        <header>
+          <h1 id="available">
+            Available Options          </h1>
+        </header>
+
+        <p>
+          The following settings can be set in the configuration file. (Command-line settings will override these. See the "<a href="#command_line"><i>Command-Line Options</i></a>" section, below.)        </p>
+      </div>
+
+        <header>
+    <h2 id="video_sound">Video/Sound</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Video</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>fullscreen=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Run the program in full screen mode, rather than in a window.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>fullscreen=no</code>". In both cases, may be overridden by the command-line option "<code>--windowed</code>".      </p>
+    </dd>
+
+    <dt>
+        <code><b>fullscreen=native</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Run the program in full screen mode. Additionally, assume the screen's current resolution (set by the operating system).      </p>
+    </dd>
+
+    <dt>
+      <code><b>windowsize=<i>SIZE</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Run the program at a different size (in windowed mode) or at a different screen resolution (in fullscreen mode), rather than the default (usually 800x600).      </p>
+
+      <p>
+        The <i>SIZE</i> value should be presented in pixels, in 'width-by-height' format, with an "x" (lowercase X) between the values. The size can be anything that's at least 640 wide, and at least 480 tall.      </p>
+
+      <p>
+        Some examples:      </p>
+
+      <ul>
+        <li>640x480
+        </li>
+
+        <li>1024x768
+        </li>
+
+        <li>768x1024
+        </li>
+
+        <li>1600x1200
+        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        If only one display is available, and Tux Paint is being run in windowed (not fullscreen) mode, and the chosen window size exceeds the capabilities of the display, Tux Paint will fall back to the display's dimensions.      </p>
+    </dd>
+
+    <dt>
+      <code><b>orient=portrait</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Swaps the width/height options given to Tux Paint, useful for rotating the window on portait displays, such as a tablet PC that's in tablet orientation.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>orient=landscape</code>". In both cases, may be overridden by the command-line option "<code>--orient=landscape</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>native=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        When running Tux Paint in fullscreen mode, this assumes the screen's current resolution (overriding any "<code>windowsize</code>" option), as set by the operating system.      </p>
+    </dd>
+
+    <dt>
+      <code><b>allowscreensaver=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        By default, Tux Paint prevents your system's screensaver from starting up. You can override this by using the "<code>allowscreensaver</code>" option. Note: This requires version 1.2.12 or higher of the SDL library. (You can also do this by setting the "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" environment variable on your system to "<code>1</code>".)      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>allowscreensaver=no</code>" or "<code>disablescreensaver=yes</code>". In both cases, may be overridden by the command-line option "<code>--disablescreensaver</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Sound</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>nosound=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disable sound effects. (Note: Pressing <code><b>[Alt]</b></code> + <b>[S]</b> cannot be used to reenable sounds if they were disabled using this option.)      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nosound=no</code>" or "<code>sound=yes</code>". In both cases, may be overridden by the command-line option "<code>--sound</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nostereo=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disable stereo panning support. (Useful for users with hearing impairment in one ear, or places where a single speaker or headphone is being used.)      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nostereo=no</code>" or "<code>stereo=yes</code>". In both cases, may be overridden by the command-line option "<code>--stereo</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Interface Size</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>buttonsize=<i>SIZE</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Set the pixel size of buttons in Tux Paint's user interface (overriding the default of "48"). Useful when using very high-density displays or coarse input devices, such as eye gaze trackers.      </p>
+
+      <p>
+        The <i>SIZE</i> value should be presented in pixels, and can be anything between 24 and 192, inclusive. Most buttons are square, and this will affect their width and height.      </p>
+
+      <p>
+        A value of "<code>auto</code>" may be provided, and Tux Paint will choose a suitable button size based on the size of Tux Paint's window (or fullscreen display).  (For the default screen size of 800x600, it will be the default button size: "48".)      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> If the chosen button size would cause the buttons to be too large for all required UI elements to appear under Tux Paint's chosen window size, the largest possible button size will be used. (A note will appear in <code>stderr</code>.)      </p>
+    </dd>
+
+    <dt>
+      <code><b>colorsrows=<i>ROWS</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        How many rows of color palette buttons to show; useful when using a large color palette (see "<code>colorfile</code>", above), and/or for use with coarse input devices (like eyegaze trackers).  "<code>ROWS</code>" may be between "1" (the default) and "3".      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="mouse_keyboard">Mouse/Keyboard</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Cursor</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>nofancycursors=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This disables the fancy mouse pointer shapes in Tux Paint, and uses your environment's normal mouse pointer.      </p>
+
+      <p>
+        In some enviornments, the fancy cursors cause problems. Use this option to avoid them.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nofancycursors=no</code>" or "<code>fancycursors=yes</code>". In both cases, may be overridden by the command-line option "<code>--fancycursors</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>hidecursor=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This completely hides the mouse pointer shapes in Tux Paint.      </p>
+
+      <p>
+        This is useful for touchscreen devices, such as tablet PCs.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>hidecursor=no</code>" or "<code>showcursor=yes</code>". In both cases, may be overridden by the command-line option "<code>--showcursor</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Keyboard</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>noshortcuts=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This disable keyboard shortcuts (e.g., <b>[Ctrl]-[S]</b> for save, <b>[Ctrl]-[N]</b> for a new image, etc.)      </p>
+
+      <p>
+        This is useful to prevent unwanted commands from being activated by children who aren't experienced with keyboards.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>noshortcuts=no</code>" or "<code>shortcuts=yes</code>". In both cases, may be overridden by the command-line option "<code>--shortcuts</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Mouse</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>grab=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Tux Paint will attempt to 'grab' the mouse and keyboard, so that the mouse is confined to Tux Paint's window, and nearly all keyboard input is passed directly to it.      </p>
+
+      <p>
+        This is useful to disable operating system actions that could get the user out of Tux Paint <b>[Alt]-[Tab]</b> window cycling, <b>[Ctrl]-[Escape]</b>, etc. This is especially useful in fullscreen mode.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>grab=no</code>" or "<code>dontgrab=yes</code>". In both cases, may be overridden by the command-line option "<code>--dontgrab</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nowheelmouse=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This disables support for the wheel on mice that have it. (Normally, the wheel will scroll the selector menu on the right.)      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nowheelmouse=no</code>" or "<code>wheelmouse=yes</code>". In both cases, may be overridden by the command-line option "<code>--wheelmouse</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nobuttondistinction=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Prior to Tux Paint 0.9.15, the middle and right buttons on a mouse could also be used for clicking. In version 0.9.15, it was changed so that <i>only</i> the left mouse button worked, so as to not train children to use the wrong button.      </p>
+
+      <p>
+        However, for children who have trouble with the mouse, this distinction between the two or three buttons on a mouse can be disabled (returning Tux Paint to its old behavior) by using this option.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nobuttondistinction=no</code>" or "<code>buttondistinction=yes</code>". In both cases, may be overridden by the command-line option "<code>--buttondistinction</code>".      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="simplification">Simplification</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Interface Simplification</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>simpleshapes=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disable the rotation step of the 'Shape' tool. Click, drag and release is all that will be needed to draw a shape.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>simpleshapes=no</code>" or "<code>complexshapes=yes</code>". In both cases, may be overridden by the command-line option "<code>--complexshapes</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nooutlines=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        In this mode, much simpler outlines and 'rubber-band' lines are displayed when using the <b>Lines</b>, <b>Shapes</b>, <b>Stamps</b> and <b>Eraser</b> tools.      </p>
+
+      <p>
+        This can help when Tux Paint is run on very slow computers, or displayed on a remote X-Window display.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nooutlines=no</code>" or "<code>outlines=yes</code>". In both cases, may be overridden by the command-line option "<code>--outlines</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>uppercase=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        All text will be rendered only in uppercase (e.g., "Brush" will be "BRUSH"). Useful for children who can read, but who have only learned uppercase letters so far.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>uppercase=no</code>" or "<code>mixedcase=yes</code>". In both cases, may be overridden by the command-line option "<code>--mixedcase</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Initial Stamp Size</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>stampsize=<i>SIZE</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Use this option to force Tux Paint to set the starting size of all stamps. The <code>SIZE</code> value should be between 0 (smallest) and 10 (largest). The size is relative to the available sizes of the stamp, which depends on the stamp itself, and Tux Paint's current canvas size.      </p>
+
+      <p>
+        Specify "<code>default</code>" to let Tux Paint decide (its standard behavior).      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Control Simplification</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>noquit=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disable the on-screen "Quit" button and prevent the <b>[Escape]</b> key from quitting Tux Paint.      </p>
+
+      <p>
+        Using the <code><b>[Alt]</b></code> + <code><b>[F4]</b></code> keyboard combination or clicking the window's close button (assuming you're not in fullscreen mode) still works to quit Tux Paint.      </p>
+
+      <p>
+        You can also use the following keyboard combination to quit: <b>[Shift]</b> + <b>[Control]</b> + <b>[Escape]</b>.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>noquit=no</code>" or "<code>quit=yes</code>". In both cases, may be overridden by the command-line option "<code>--quit</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nostamps=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This option tells Tux Paint to not load any rubber stamp images, which in turn ends up disabling the <b>Stamps</b> tool.      </p>
+
+      <p>
+        This can speed up Tux Paint when it first loads up, and reduce memory usage while it's running. Of course, no stamps will be available at all.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nostamps=no</code>" or "<code>stamps=yes</code>". In both cases, may be overridden by the command-line option "<code>--stamps</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nostampcontrols=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Some images in the <b>Stamps</b> tool can be mirrored, flipped, and/or have their size changed. This option disables the controls, and only provides the basic stamps.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nostampcontrols=no</code>" or "<code>stampcontrols=yes</code>". In both cases, may be overridden by the command-line option "<code>--stampcontrols</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nostamprotation=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This disables the rotation step of the <b>Stamps</b> tool, immediately placing the stamp in its regular orientation (with any flipping or mirroring applied) on the first click.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The stamp rotation feature was added to Tux Paint in version 0.9.29.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nostamprotation=no</code>" or "<code>stamprotation=yes</code>". In both cases, may be overridden by the command-line option "<code>--stamprotation</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nomagiccontrols=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Some <b>Magic</b> tools have the option of acting like a paintbrush, or affecting the entire canvas at once. This option disables the controls, and only provides the default functionality (usually paint-mode).      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nomagiccontrols=no</code>" or "<code>magiccontrols=yes</code>". In both cases, may be overridden by the command-line option "<code>--magiccontrols</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nomagicsizes=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Some <b>Magic</b> tools offer various size settings. This option disables the sizing control, and only provides the tools' default sizes. (Some plugins may offer additional variations of a Magic tool, to make a few sizes possible, e.g. "Bricks" and "Googly Eyes".)      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nomagicsizes=no</code>" or "<code>magicsizes=yes</code>". In both cases, may be overridden by the command-line option "<code>--magicsizes</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>noshapecontrols=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disable the control buttons shown when using the <b>Shapes</b> tool that allow changing how shapes are drawn — centered around the initial mouse click, or with a corner at the initial mouse click.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>noshapecontrols=no</code>" or "<code>shapecontrols=yes</code>". In both cases, may be overridden by the command-line option "<code>--shapecontrols</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nolabel=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disables the <b>Label</b> tool: the tool that allows text entry which can be edited later.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nolabel=no</code>" or "<code>label=yes</code>". In both cases, may be overridden by the command-line option "<code>--label</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nobrushspacing=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disables the <a href="README.html#brush_spacing">brush spacing</a> option of the <a href="README.html#using_tools_drawing_paint"><b>Paint</b></a> and <a href="using_tools_drawing_lines"><b>Lines</b></a> tools. The brushes' default spacings will be used.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The brush spacing option was added to Tux Paint's user interface in version 0.9.28. For more information on brush spacing, see <a href="EXTENDING.html">EXTENDING.html</a>      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nobrushspacing=no</code>" or "<code>brushspacing=yes</code>". In both cases, may be overridden by the command-line option "<code>--brushspacing</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>notemplateexport=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disables the ability to create a new <a href="README.html#using_tools_other_new">Template</a> image (based on a saved drawing) from within the <a href="README.html#using_tools_other_open"><strong>Open</strong></a> dialog.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The Template creation feature was added to Tux Paint in version 0.9.31.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>notemplateexport=no</code>" or "<code>templateexport=yes</code>". In both cases, may be overridden by the command-line option "<code>--templateexport</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>noerase=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disables the ability to erase saved drawings via the "Erase" button on the <a href="README.html#using_tools_other_open"><strong>Open</strong></a> dialog, or exported <a href="README.html#using_tools_other_new">Template</a> images (based on a saved drawing) via the "Erase" button on the <a href="README.html#using_tools_other_new">New</a> dialog. Useful to prevent users from erasing work, especially combined with the <a href="#saving"><code>--saveovernew</code></a> option.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> This option was added to Tux Paint in version 0.9.31.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>noerase=no</code>" or "<code>erase=yes</code>". In both cases, may be overridden by the command-line option "<code>--erase</code>".      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="languages">Languages</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Language</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>lang=<i>LANGUAGE</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Run Tux Paint in one of the supported languages. Possible choices for <i>LANGUAGE</i> currently include:      </p>
+
+      <blockquote>
+        <table border="1"
+               cellspacing="0"
+               cellpadding="2"
+               summary=
+               "Possible values for 'lang' language setting">
+            <tr>
+    <td><!-- lang_arg --><code>english</code></td>
+    <td><!-- lang_arg --><code>american-english</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>acholi</code></td>
+    <td><!-- lang_arg --><code>acoli</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>afrikaans</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>akan</code></td>
+    <td><!-- lang_arg --><code>twi-fante</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>albanian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>amharic</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>arabic</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>aragones</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>armenian</code></td>
+    <td><!-- lang_arg --><code>hayeren</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>assamese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>asturian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>australian-english</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>azerbaijani</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bambara</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>basque</code></td>
+    <td><!-- lang_arg --><code>euskara</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>belarusian</code></td>
+    <td><!-- lang_arg --><code>bielaruskaja</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bengali</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bodo</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bokmal</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bosnian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>brazilian-portuguese</code></td>
+    <td><!-- lang_arg --><code>portugues-brazilian</code></td>
+    <td><!-- lang_arg --><code>brazilian</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>breton</code></td>
+    <td><!-- lang_arg --><code>brezhoneg</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>british-english</code></td>
+    <td><!-- lang_arg --><code>british</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bulgarian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>canadian-english</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>catalan</code></td>
+    <td><!-- lang_arg --><code>catala</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>chinese</code></td>
+    <td><!-- lang_arg --><code>simplified-chinese</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>croatian</code></td>
+    <td><!-- lang_arg --><code>hrvatski</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>czech</code></td>
+    <td><!-- lang_arg --><code>cesky</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>danish</code></td>
+    <td><!-- lang_arg --><code>dansk</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code></code></td>
+    <td><!-- lang_arg --><code>dogri</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>dutch</code></td>
+    <td><!-- lang_arg --><code>nederlands</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>esperanto</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>estonian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>faroese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>finnish</code></td>
+    <td><!-- lang_arg --><code>suomi</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>french</code></td>
+    <td><!-- lang_arg --><code>francais</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>fula</code></td>
+    <td><!-- lang_arg --><code>fulah</code></td>
+    <td><!-- lang_arg --><code>pulaar-fulfulde</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>gaelic</code></td>
+    <td><!-- lang_arg --><code>gaidhlig</code></td>
+    <td><!-- lang_arg --><code>irish-gaelic</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>galician</code></td>
+    <td><!-- lang_arg --><code>galego</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>georgian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>german</code></td>
+    <td><!-- lang_arg --><code>deutsch</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>greek</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>gronings</code></td>
+    <td><!-- lang_arg --><code>zudelk-veenkelonioals</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>gujarati</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>hebrew</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>hindi</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>hungarian</code></td>
+    <td><!-- lang_arg --><code>magyar</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>icelandic</code></td>
+    <td><!-- lang_arg --><code>islenska</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>indonesian</code></td>
+    <td><!-- lang_arg --><code>bahasa-indonesia</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>inuktitut</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>italian</code></td>
+    <td><!-- lang_arg --><code>italiano</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>japanese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kabyle</code></td>
+    <td></td>
+    <td><!-- lang_arg --><code>kabylian</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kannada</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kashmiri-devanagari</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kashmiri-perso-arabic</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>khmer</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kiga</code></td>
+    <td><!-- lang_arg --><code>chiga</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kinyarwanda</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>klingon</code></td>
+    <td><!-- lang_arg --><code>tlhIngan</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>konkani-devanagari</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>konkani-roman</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>korean</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kurdish</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>latvian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>lithuanian</code></td>
+    <td><!-- lang_arg --><code>lietuviu</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>luganda</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>luxembourgish</code></td>
+    <td><!-- lang_arg --><code>letzebuergesch</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>macedonian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>maithili</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>malay</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>malayalam</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>manipuri-bengali</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>manipuri-meitei-mayek</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>marathi</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>mexican-spanish</code></td>
+    <td><!-- lang_arg --><code>espanol-mejicano</code></td>
+    <td><!-- lang_arg --><code>mexican</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>mongolian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>ndebele</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>nepali</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>northern-sotho</code></td>
+    <td><!-- lang_arg --><code>sesotho-sa-leboa</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>norwegian</code></td>
+    <td><!-- lang_arg --><code>nynorsk</code></td>
+    <td><!-- lang_arg --><code>norsk</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>occitan</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>odia</code></td>
+    <td><!-- lang_arg --><code>oriya</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>ojibwe</code></td>
+    <td><!-- lang_arg --><code>ojibway</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>persian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>polish</code></td>
+    <td><!-- lang_arg --><code>polski</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>portuguese</code></td>
+    <td><!-- lang_arg --><code>portugues</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>punjabi</code></td>
+    <td><!-- lang_arg --><code>panjabi</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>romanian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>russian</code></td>
+    <td><!-- lang_arg --><code>russkiy</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>sanskrit</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>santali-devanagari</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>santali-ol-chiki</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>scottish</code></td>
+    <td><!-- lang_arg --><code>ghaidhlig</code></td>
+    <td><!-- lang_arg --><code>scottish-gaelic</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>serbian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>serbian-latin</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>shuswap</code></td>
+    <td><!-- lang_arg --><code>secwepemctin</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>sindhi-devanagari</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>sindhi-perso-arabic</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>slovak</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>slovenian</code></td>
+    <td><!-- lang_arg --><code>slovensko</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>songhay</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>southafrican-english</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>spanish</code></td>
+    <td><!-- lang_arg --><code>espanol</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>sundanese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>swahili</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>swedish</code></td>
+    <td><!-- lang_arg --><code>svenska</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>tagalog</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>tamil</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>telugu</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>thai</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>tibetan</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>traditional-chinese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>turkish</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>twi</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>ukrainian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>urdu</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>venda</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>venetian</code></td>
+    <td><!-- lang_arg --><code>veneto</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>vietnamese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>walloon</code></td>
+    <td><!-- lang_arg --><code>walon</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>welsh</code></td>
+    <td><!-- lang_arg --><code>cymraeg</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>wolof</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>xhosa</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>miahuatlan-zapotec</code></td>
+    <td></td>
+    <td><!-- lang_arg --><code>zapotec</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>zulu</code></td>
+    <td></td>
+    <td><!-- lang_arg --><code>zulu</code></td>
+  </tr>
+          </table>
+      </blockquote>
+    </dd>
+
+    <dt>
+      <code><b><a name="locale"
+         id="locale">--locale LOCALE</a></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Run Tux Paint in one of the support languages. See the "<i><a href="#different_language">Choosing a Different Language</a></i>" section below for the locale strings (e.g., "<code>de_DE</code>" for German) to use.      </p>
+
+      <p>
+        (If your locale is already set, e.g. with the "<code>$LANG</code>" environment variable, this option is not necessary, since Tux Paint honors your environment's setting, if possible.)      </p>
+    </dd>
+
+    <dt>
+      <code><b>mirrorstamps=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        For stamps that can be mirrored, this option sets them to their mirrored shape by default.      </p>
+
+      <p>
+        This can be useful for people who prefer things right-to-left, rather than left-to-right.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>mirrorstamps=no</code>" or "<code>dontmirrorstamps=yes</code>". In both cases, may be overridden by the command-line option "<code>--dontmirrorstamps</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3 id="fonts">Fonts</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>sysfonts=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This option causes Tux Paint to attempt to load fonts (for use in the <b>Text</b> tool) from your operating system. Normally, Tux Paint will only load the ones that came bundled with Tux Paint.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>sysfonts=no</code>" or "<code>nosysfonts=yes</code>". In both cases, may be overridden by the command-line option "<code>--nosysfonts</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>alllocalefonts=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Prior to version 0.9.21, Tux Paint loaded all fonts in its own fonts directory, including locale-specific ones (e.g., the one for Tibetan, which had no latin characters). As of 0.9.21, the only font loaded from the locale-specific subdirectory, if any, is one matching the locale Tux Paint is running on.      </p>
+
+      <p>
+        To load all locale-specific fonts (the old behavior), set this option.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>alllocalefonts=no</code>" or "<code>currentlocalefont=yes</code>". In both cases, may be overridden by the command-line option "<code>--currentlocalefont</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>uifont=FONT NAME</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This option causes Tux Paint to attempt to load fonts (for use in the <b>Text</b> tool) from your operating system. Normally, Tux Paint will only load the ones that came bundled with Tux Paint.      </p>
+
+      <p>
+        Specify "<code>default</code>" to let Tux Paint use its default font, "DejaVu Sans" (its standard behavior).      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="printing">Printing</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Print Permissions</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>noprint=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disable the printing feature.      </p>
+    </dd>
+
+    <dt>
+        <code><b>printdelay=<i>SECONDS</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Restrict printing so that printing can occur only once every <i>SECONDS</i> seconds.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>printdelay=0</code>". In both cases, may be overridden by the command-line option "<code>--printdelay=0</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Show Printer Dialog</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>altprint=always</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This causes Tux Paint to always show the printer dialog (or, on Linux/Unix, run the "altprintcommand") when the 'Print' button is clicked. In other words, it's like clicking 'Print' while holding <code><b>[Alt]</b></code>, except you don't need to hold <code><b>[Alt]</b></code> every time.      </p>
+    </dd>
+
+    <dt>
+      <code><b>altprint=never</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This prevents Tux Paint from <i>ever</i> showing the printer dialog (or, on Linux/Unix, run the "altprintcommand") when the 'Print' button is clicked. In other words, it makes the <code><b>[Alt]</b></code> key have no effect when clicking the 'Print' button.      </p>
+    </dd>
+
+    <dt>
+      <code><b>altprint=mod</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This is the normal, default behavior. Tux Paint shows a printer dialog (or, on Linux/Unix, runs the "altprintcommand"), when the <code><b>[Alt]</b></code> key is pressed while the 'Print' button is clicked. Clicking 'Print' without holding <code><b>[Alt]</b></code> prints without showing a dialog.      </p>
+    </dd>
+
+  </dl>
+</blockquote>
+
+<h3>
+  Save Printer Configuration</h3>
+
+<blockquote>
+  <dl>
+    <dt>
+      <code><b>printcfg=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <i>(Windows and macOS only)</i>
+      </p>
+
+      <p>
+        Tux Paint will use a printer configuration file when printing. Push the <code><b>[Alt]</b></code> key while clicking the 'Print' button in Tux Paint to cause a Windows print dialog window to appear.      </p>
+
+      <p>
+        Any configuration changes made in this dialog will be saved to the file "<code>userdata/print.cfg</code>" , and used again, as long as the "printcfg" option is set.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> This only works when not running Tux Paint in fullscreen mode.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>printcfg=no</code>" or "<code>noprintcfg=yes</code>". In both cases, may be overridden by the command-line option "<code>--noprintcfg</code>".      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Print Commands</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>printcommand=<i>COMMAND</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <i>(Linux and Unix only)</i>
+      </p>
+
+      <p>
+        Use the command <i>COMMAND</i> to print a PostScript format file when the 'Print' button is clicked. If this option is not specifically not set, the default command is:      </p>
+
+      <blockquote>
+        <code>lpr</code>
+      </blockquote>
+
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <b>Note:</b> Versions of Tux Paint prior to 0.9.15 sent PNG format data to the print command (which defaulted to "<code>pngtopnm | pnmtops | lpr</code>").      </p>
+
+      <p>
+        If you set an alternative <code><b>printcommand</b></code> in the configuration file prior to version 0.9.15, you will need to change it.      </p>
+    </dd>
+
+    <dt>
+      <code><b>altprintcommand=<i>COMMAND</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <i>(Linux and Unix only)</i>
+      </p>
+
+      <p>
+        Use the command <i>COMMAND</i> to print a PostScript format file when the 'Print' button is clicked while the <code><b>[Alt]</b></code> modifier key is being held. (This is typically used for providing a print dialog, similar to when pressing <code><b>[Alt]</b></code>+'Print' in Windows and macOS.)      </p>
+
+      <p>
+        If this option is not specifically not set, the default command is KDE's graphical print dialog:      </p>
+
+      <blockquote>
+        <code>kprinter</code>
+      </blockquote>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Paper Size</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>papersize=<i>PAPERSIZE</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <i>(Platforms that use Tux Paint's internal PostScript generator — not Windows, macOS, BeOS, or Haiku.)</i>
+      </p>
+
+      <p>
+        Tell Tux Paint what size PostScript to generate. If none is specified, Tux Paint first checks your <code>$PAPER</code> environment variable, then the file <code>/etc/papersize</code>, then uses the the 'libpaper' library's default paper size.      </p>
+
+      <p>
+        Valid paper sizes include: letter, legal, tabloid, executive, note, statement, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, b0, b1, b2 b3, b4, 10x14, 11x17, halfletter, halfexecutive, halfnote, folio, quarto, ledger, archA, archB, archC, archD, archE, flsa, flse, csheet, dsheet, esheet.      </p>
+    </dd>
+
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="saving">Saving</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Save Over Earlier Work</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>saveover=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This disables the "<i>Save over the old version...?</i>" prompt when saving an existing file. With this option, the older version will always be replaced by the new version, automatically.      </p>
+    </dd>
+
+    <dt>
+      <code><b>saveover=new</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This also disables the "<i>Save over the old version...?</i>" prompt when saving an existing file. This option, however, will always save a new file, rather than overwrite the older version.      </p>
+    </dd>
+
+    <dt>
+      <code><b>saveover=ask</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <i>(This option is redundant, since this is the default.)</i>
+      When saving an existing drawing, you will be first asked whether to save over the older version or not.      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Starting Out</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>startblank=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This causes Tux Paint to display a blank canvas when it first starts up, rather than loading the last image that was being edited.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>startblank=no</code>" or "<code>startlast=yes</code>". In both cases, may be overridden by the command-line option "<code>--startlast</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>newcolorslast=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Places the blank color options in the <b>New</b> dialog at the end, so that any Starters and/or Templates are shown first.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>newcolorslast=no</code>" or "<code>newcolorsfirst=yes</code>". In both cases, may be overridden by the command-line option "<code>--newcolorsfirst</code>".      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Save and Export Directories</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>savedir=<i>DIRECTORY</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Use this option to change where Tux Paint's "<code>saved</code>" directory/folder is located, which is where Tux Paint saves and opens pictures.      </p>
+
+      <p>
+        If you do not override it, the <b><i>default</i></b> location is:      </p>
+
+      <ul>
+        <li>Linux &amp; Unix — Under a hidden directory named "<code>.tuxpaint</code>" in your home directory (aka "<code>~</code>" or "<code>$HOME</code>")<br>
+            Example: <code>/home/<i>username</i>/.tuxpaint/saved/</code>        </li>
+
+        <li>Windows — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Data</code>" folder.<br>
+            Example: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\saved\</code>          <br>
+        </li>
+
+        <li>macOS — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Support</code>" folder.<br>
+            Example: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/saved/</code>        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> When specifying a Windows drive (e.g., "<code>H:\</code>"), you must also specify a subdirectory.      </p>
+
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> Prior to version 0.9.18, Tux Paint would also use the setting or default for "<code>savedir</code>" as the place to search for personal data files (brushes, stamps, starters and fonts). As of version 0.9.18, they may be specified separately (see the "<code>datadir</code>" option, below).      </p>
+
+      <p>
+        Example: <code>savedir=Z:\tuxpaint\</code>      </p>
+    </dd>
+
+    <dt>
+      <code><b>exportdir=<i>DIRECTORY</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Use this option to change where Tux Paint exports files — single images, or animated GIF slideshows — for external use.      </p>
+
+      <p>
+        If you do not override it, the <b><i>default</i></b> location is:      </p>
+
+      <ul>
+        <li>Linux &amp; Unix — If available, wherever your desktop environment is configured for pictures to be stored, based on your XDG (X Desktop Group) configuration. (Try running the command-line "<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" to find out.)<br>
+          Typically (in an English locale), this will be a "<code>Pictures</code>" subdirectory in your home directory (i.e., "<code>$HOME/Pictures</code>" aka "<code>~/Pictures</code>").<br>
+          Tux Paint will fall back to using that typical directory, of no XDG configuration can be read, or nothing is set for "<code>XDG_PICTURES_DIR</code>".        </li>
+        <li>Windows - "My Pictures" directory for each user (normaly "c:\Users\<i>USERNAME</i>\Pictures").<br>You can directly open the folder as follows:          <ul>
+            <li>Press "[Windows]+[R]" key to open "Run ..." dialogue.</li>
+            <li>Enter "Shell:My Pictures" in the text box and push [OK].</li>
+          </ul>
+        </li>
+
+                <li>macOS — TBD! <!-- FIXME -->
+        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., "<code>~/Pictures/TuxPaint</code>") When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).      </p>
+      <p>
+        The directory itself (e.g., "<code>~/Pictures/TuxPaint</code>") will be created, if it doesn't exist.      </p>
+      <p>
+        If the <em>parent</em> directory (e.g., "<code>~/Pictures/TuxPaint</code>") also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).      </p>
+
+      <p>
+        Example: <code>exportdir=/home/penguin/TuxPaintExports</code>      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>More Saving Options</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>nosave=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This disables Tux Paint's ability to save files (and therefore disables the on-screen "Save" button). It can be used in situations where the program is only being used for fun, or in a test environment.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nosave=no</code>" or "<code>save=yes</code>". In both cases, may be overridden by the command-line option "<code>--save</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>autosave=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This prevents Tux Paint from asking whether you want to save the current picture when quitting, and assumes you do.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>autosave=no</code>" or "<code>noautosave=yes</code>". In both cases, may be overridden by the command-line option "<code>--noautosave</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>reversesort=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This reverses the sorting of the Open and Slideshow dialogs, placing the newest images at the top of the list.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>reversesort=no</code>" or "<code>noreversesort=yes</code>". In both cases, may be overridden by the command-line option "<code>--noreversesort</code>".      </p>
+    </dd>
+
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="data">Data</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Lockfile</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>nolockfile=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        By default, Tux Paint uses what's known as a 'lockfile' to prevent it from being launched more than once in 30 seconds. (This is to avoid accidentally running multiple copies; for example, by double-clicking a single-click launcher, or simply impatiently clicking the icon multiple times.)      </p>
+
+      <p>
+        To make Tux Paint ignore the lockfile, allowing it to run again, even if it was just launched less than 30 seconds ago, enable this setting in the configuration file, or run Tux Paint with the <code>--nolockfile</code> option on the command-line.      </p>
+
+      <p>
+        By default, the lockfile is stored in "<code>~/.tuxpaint/</code>" under Linux and Unix, and "<code>userdata\</code>" under Windows.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nolockfile=no</code>" or "<code>lockfile=yes</code>". In both cases, may be overridden by the command-line option "<code>--lockfile</code>".      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Data Directory</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>datadir=<i>DIRECTORY</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Use this option to change where Tux Paint looks for personal data files (brushes, stamps, starters, templates, and fonts specific to the current user).      </p>
+
+      <p>
+        Tux Paint will search for subdirectories/subfolders named "<code>brushes</code>", "<code>stamps</code>", "<code>starters</code>", "<code>templates</code>", and "<code>fonts</code>" under the specified data directory.      </p>
+
+      <p>
+        If you do not override it, the <b><i>default</i></b> location is:      </p>
+
+      <ul>
+        <li>Linux &amp; Unix — Under a hidden directory named "<code>.tuxpaint</code>" in your home directory (aka "<code>~</code>" or "<code>$HOME</code>")<br>
+            Example: <code>/home/<i>username</i>/.tuxpaint/brushes/</code>        </li>
+
+        <li>Windows — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Data</code>" folder.<br>
+            Example: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\brushes\</code>        </li>
+
+        <li>macOS — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Support</code>" folder.<br>
+            Example: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/brushes/</code>        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> Prior to version 0.9.18, Tux Paint would use the same setting or default as for "<code>savedir</code>" to search for data files. As of version 0.9.18, they may be specified separately.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> When specifying a Windows drive (e.g., "<code>H:\</code>"), you must also specify a subdirectory.      </p>
+
+      <p>
+        Example: <code>datadir=/home/johnny/tuxpaint-data/</code>      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3 id="colorfile">Color Palette File</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>colorfile=<i>FILENAME</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        You may override Tux Paint's default color palette by creating a plain ASCII text file that describes the colors you want, and pointing to that file using the "<code>colorfile</code>" option.      </p>
+
+      <p>
+        The file should list one color per line. Colors are defined in terms of their Red, Green and Blue values, each from 0 (off) to 255 (brightest). (For more information, try Wikipedia's "<a href="http://en.wikipedia.org/wiki/Rgb">RGB color model</a>" article.)      </p>
+
+      <p>
+        Colors may be listed using three decimal numbers (e.g., "<code>255 68 136</code>") or a 6- or 3-digit-long hexadecimal 'triplet' (e.g., "<code>#ff4488</code>" or "<code>#F48</code>").      </p>
+
+      <p>
+        After the color definition (on the same line) you may enter text to describe the color. Tux will display this text when the color is clicked. (For example, "<code>#FFF White as snow.</code>")      </p>
+
+      <p>
+        As an example, you can see the default colors currently used in Tux Paint in: "<a href="../../default_colors.txt"><code>default_colors.txt</code></a>".      </p>
+
+      <p>
+        NOTES: You must separate decimal values with spaces, and begin hexadecimal values with a pound/number-sign character ("<code>#</code>"). In 3-digit hexadecimal, each digit is used for both the high and low halves of the byte, so "<code>#FFF</code>" is the same as "<code>#FFFFFF</code>", not "<code>#F0F0F0</code>".      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="accessibility">Accessibility</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Mouse</h3>
+  </header>
+
+  <dl>
+    <dt>
+        <code><b>mouse-accessibility=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        In this mode, instead of clicking, dragging and releasing (e.g., to draw), you click, move, and click again to end the motion.      </p>
+          </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Keyboard</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>keyboard=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        This allows the keyboard arrow keys to be used to control the mouse pointer. (e.g., for mouseless environments, or handicapped/accessibility purposes)      </p>
+
+      <p>
+        Features:      </p>
+
+      <ul>
+        <li>Fine movement within canvas, or coarse movement if <code>Shift</code> is held.        </li>
+
+        <li>Coarse movement within tool button areas.        </li>
+
+        <li>Key controls:          <ul>
+            <li>[Left]/[Right]/[Up]/[Down], numpad <b>[1]</b> thru <b>[9]</b>: Move mouse            </li>
+
+            <li>[Space]/<b>[5]</b>: Click mouse (except when using "Text" or "Label" tools)            </li>
+
+            <li>[Insert]/<b>[F5]</b>: Click mouse (always)            </li>
+
+            <li><b>[F4]</b> jump mouse between "Tools", "Colors" and canvas areas            </li>
+
+            <li>If mouse is within "Tools" section on the left, or "Colors" section at the bottom:              <ul>
+                <li><b>[F7]</b>, <b>[F8]</b>: Move down/up between buttons, respectively (Tools section, only)                </li>
+
+                <li><b>[F11]</b>, <b>[F12]</b>: Move to previous/next button, respectively                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li>To click-and-drag, hold one of the 'click' keys (e.g., [Insert]), and use the movement keys (e.g., [Left]).          <p class="note">
+            <span title="Information">&#128161;</span>            <strong>Note:</strong> The "mouse accessibility" feature works with the keyboard mouse controls. With both options enabled, painting tools can be used to draw by pressing a 'click' key to start clicking, movement keys to move around (which will draw), and another 'click' key to end the click (stop drawing).          </p>
+        </li>
+
+        <li>A regular mouse and/or joystick may still be used (so you can, e.g., move with the mouse, and click with the keyboard, or vice-versa)        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>keyboard=no</code>" or "<code>mouse=yes</code>". In both cases, may be overridden by the command-line option "<code>--mouse</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Onscreen Keyboard</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>onscreen-keyboard=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Presents a clickable on-screen keyboard when using the <b>Text</b> and <b>Label</b> tools.      </p>
+          </dd>
+
+    <dt>
+      <code><b>onscreen-keyboard-layout=<i>LAYOUTNAME</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the initial layout for the on-screen keyboard when using the <b>Text</b> and <b>Label</b> tools.<br/>
+        Note: Using this option implies automatically <b>onscreen-keyboard=yes</b>, so setting both is redundant.      </p>
+    </dd>
+
+    <dt>
+      <code><b>onscreen-keyboard-disable-change=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Disables the possibility for changing the layout of the on-screen keyboard when using the <b>Text</b> and <b>Label</b> tools, useful for simplifying things for the small children.<br/>
+        Note: Using this option implies automatically <b>onscreen-keyboard=yes</b>, so setting both is redundant.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>onscreen-keyboard-disable-change=no</code>". In both cases, may be overridden by the command-line option "<code>--onscreen-keyboard-disable-change=no</code>".      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="joystick">Joystick</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Main Device</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>joystick-dev=<i>N</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Specify which joystick device should be used by Tux Paint. Default value is 0 (the first joystick).      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-slowness=<i>SPEED</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Sets a delay at each axis motion, allowing to slow the joystick. Allowed values are from 0 to 500. Default value is 15.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-threshold=<i>THRESHOLD</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Sets the minimum level of axis motion to start moving the pointer. Allowed values are from 0 to 32766. Default value is 3200.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-maxsteps=<i>STEPS</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+      Sets the maximum pixels the pointer will move at once. Allowed values are from 1 to 7. Default value is 7.      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Hat</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>joystick-hat-slowness=<i>SPEED</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Sets a delay at each automatic motion, allowing to slow the speed of the hat. Allowed values are from 0 to 500. Default value is 15.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-hat-timeout=<i>MILLISECONDS</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Sets the delay after wich the pointer will start moving automatically if the hat is keeped pushed. Allowed values are from 0 to 3000. Default value is 1000.      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Buttons to Disable</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>joystick-buttons-ignore=<i>BUTTON1,BUTTON2,...</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        A set of joystick button numbers, as seen by SDL, that should be ignored. Otherwise, unless they are used by one of the "<code>joystick-btn-</code>" options above, buttons will be seen as a mouse left-click.      </p>
+    </dd>
+  </dl>
+</blockquote>
+
+<h3>
+  Button Shortcuts</h3>
+
+<blockquote>
+  <dl>
+    <dt>
+      <code><b>joystick-btn-escape=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be used to generate a escape event. Useful to dismiss dialogs and quit.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-brush=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select the brush tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-stamp=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select the stamp tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-lines=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select the lines tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-shapes=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select the shapes tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-text=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select the text tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-label=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select the label tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-fill=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select the fill tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-magic=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select the magic tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-undo=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to invoke the undo tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-redo=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select redo tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-eraser=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to select eraser tool.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-new=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to launch the dialog for creating a new drawing.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-open=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to launch the dialog for opening an existing drawing.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-save=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+      Selects the joystick button number, as seen by SDL, that will be a shortcut to save the drawing.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-pgsetup=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to launch the page setup dialog for printing.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-print=<i>BUTTON NUMBER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Selects the joystick button number, as seen by SDL, that will be a shortcut to print.      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+      </section><!-- H1: Available Options -->
+
+    <section class="outer"><!-- H1: Overriding System Config. Options -->
+      <header>
+        <h1 id="overriding">
+          Overriding System Config. Options        </h1>
+      </header>
+
+      <p>
+        <i>(For Linux and Unix users)</i>
+      </p>
+
+      <p>
+        If any of the above options are set in "<code>/etc/tuxpaint/tuxpaint.config</code>", you can override them in your own "<code>~/.tuxpaintrc</code>" file.      </p>
+
+      <p>
+        For true/false options, like "<code>noprint</code>" and "<code>grab</code>", you can simply say they equal 'no' in your "<code>~/.tuxpaintrc</code>" file:      </p>
+
+      <blockquote>
+        <code>noprint=no<br>
+        uppercase=no</code>
+      </blockquote>
+
+      <p>
+        Or, you can use options similar to the command-line override options described below. For example:      </p>
+
+      <blockquote>
+        <code>print=yes<br>
+        mixedcase=yes</code>
+      </blockquote>
+    </section><!-- H1: Overriding System Config. Options -->
+
+    <section class="outer"><!-- H1: Command-Line Options -->
+      <header>
+        <h1 id="command_line">
+          Command-Line Options        </h1>
+      </header>
+
+      <p>
+        Options may also be issued on the command-line when you go to launch Tux Paint.      </p>
+      <dl>
+        <dt>
+          <code><b>--fullscreen<br>
+          --<i>WIDTH</i>x<i>HEIGHT</i><br>
+          --buttonsize=<i>SIZE</i><br>
+          --colorsrows=<i>ROWS</i><br>
+          --orient=portrait<br>
+          --native<br>
+          --allowscreensaver<br>
+          --startblank<br>
+          --nosound<br>
+          --nostereo<br>
+          --noquit<br>
+          --noprint<br>
+          --printdelay=<i>SECONDS</i><br>
+          --printcfg<br>
+          --altprintnever<br>
+          --altprintalways<br>
+          --papersize=<i>PAPERSIZE</i><br>
+          --printcommand=<i>COMMAND</i><br>
+          --altprintcommand=<i>COMMAND</i><br>
+          --nolockfile<br>
+          --simpleshapes<br>
+          --uppercase<br>
+          --grab<br>
+          --noshortcuts<br>
+          --nowheelmouse<br>
+          --nobuttondistinction<br>
+          --nofancycursors<br>
+          --hidecursor<br>
+          --nooutlines<br>
+          --nostamps<br>
+          --nostampcontrols<br>
+          --nostamprotation<br>
+          --nomagiccontrols<br>
+          --nomagicsizes<br>
+          --noshapecontrols<br>
+          --nolabel<br>
+          --nobrushspacing<br>
+          --newcolorslast<br>
+          --mouse-accessibility<br>
+          --onscreen-keyboard<br>
+          --onscreen-keyboard-layout<br>
+          --onscreen-keyboard-disable-change<br>
+          --joystick-dev<br>
+          --joystick-slowness<br>
+          --joystick-threshold<br>
+          --joystick-maxsteps<br>
+          --joystick-hat-slowness<br>
+          --joystick-hat-timeout<br>
+          --joystick-btn-escape<br>
+          --joystick-btn-brush<br>
+          --joystick-btn-stamp<br>
+          --joystick-btn-lines<br>
+          --joystick-btn-shapes<br>
+          --joystick-btn-text<br>
+          --joystick-btn-label<br>
+          --joystick-btn-magic<br>
+          --joystick-btn-undo<br>
+          --joystick-btn-redo<br>
+          --joystick-btn-eraser<br>
+          --joystick-btn-new<br>
+          --joystick-btn-open<br>
+          --joystick-btn-save<br>
+          --joystick-btn-pgsetup<br>
+          --joystick-btn-print<br>
+          --joystick-buttons-ignore<br>
+          --sysfonts<br>
+          --uifont=<i>FONT NAME</i><br>
+          --alllocalefonts<br>
+          --mirrorstamps<br>
+          --stampsize=<i>SIZE</i><br>
+          --keyboard<br>
+          --savedir <i>DIRECTORY</i><br>
+          --datadir <i>DIRECTORY</i><br>
+          --exportdir <i>DIRECTORY</i><br>
+          --saveover<br>
+          --saveovernew<br>
+          --nosave<br>
+          --autosave<br>
+          --reversesort<br>
+          --lang <i>LANGUAGE</i><br>
+          --colorfile <i>FILE</i><br></b></code>
+        </dt>
+
+        <dd>
+          <p>
+            These enable or correspond to the configuration file options described above.          </p>
+        </dd>
+
+        <dt>
+          <code><b>--windowed<br>
+          --800x600<br>
+          --orient=landscape<br>
+          --disablescreensaver<br>
+          --startlast<br>
+          --sound<br>
+          --stereo<br>
+          --quit<br>
+          --print<br>
+          --printdelay=0<br>
+          --noprintcfg<br>
+          --altprintmod<br>
+          --lockfile<br>
+          --complexshapes<br>
+          --mixedcase<br>
+          --dontgrab<br>
+          --shortcuts<br>
+          --wheelmouse<br>
+          --buttondistinction<br>
+          --fancycursors<br>
+          --showcursor<br>
+          --outlines<br>
+          --stamps<br>
+          --stampcontrols<br>
+          --stamprotation<br>
+          --magiccontrols<br>
+          --magicsizes<br>
+          --shapecontrols<br>
+          --label<br>
+          --brushspacing<br>
+          --newcolorsfirst<br>
+          --nosysfonts<br>
+          --currentlocalefont<br>
+          --uifont=default<br>
+          --dontmirrorstamps<br>
+          --stampsize=default<br>
+          --mouse<br>
+          --saveoverask<br>
+          --save<br>
+          --noautosave<br>
+          --noreversesort<br>
+          </b></code>
+        </dt>
+
+        <dd>
+          <p>
+            These options can be used to override any settings made in the configuration file. (If the option isn't set in the configuration file(s), no overriding option is necessary.)          </p>
+        </dd>
+
+        <dt>
+          <code><b>--nosysconfig</b></code>
+        </dt>
+
+        <dd>
+          <p>
+            Under Linux and Unix, this prevents the system-wide configuration file, "<code>/etc/tuxpaint/tuxpaint.conf</code>", from being read.          </p>
+
+          <p>
+            Only your own configuration file, "<code>~/.tuxpaintrc</code>", if it exists, will be used.          </p>
+        </dd>
+      </dl>
+
+      <section class="indent"><!-- H2: Command-Line Informational Options -->
+        <header>
+          <h2 id="info-cmd">
+            Command-Line Informational Options          </h2>
+        </header>
+
+        <p>
+          The following options display some informative text on the screen. Tux Paint doesn't actually start up and run afterwards, however.        </p>
+
+        <dl>
+          <dt>
+            <code><b>--version</b></code><br>
+            <code><b>--verbose-version</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Display the version number and date of the copy of Tux Paint you are running. The "--verbose-version" also lists what compile-time options were set. (See INSTALL and FAQ).            </p>
+          </dd>
+
+          <dt>
+            <code><b>--copying</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Show brief license information about copying Tux Paint.            </p>
+          </dd>
+
+          <dt>
+            <code><b>--usage</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Display the list of available command-line options.            </p>
+          </dd>
+
+          <dt>
+            <code><b>--help</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Display brief help on using Tux Paint.            </p>
+          </dd>
+
+          <dt>
+            <code><b>--lang help</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Display a list of available languages in Tux Paint.            </p>
+          </dd>
+
+          <dt>
+            <code><b>--joystick-dev list</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Display list of attached joysticks available to Tux Paint.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Command-Line Informational Options -->
+    </section><!-- H1: Command-Line Options -->
+
+    <section class="outer"><!-- H1: Choosing a Different Language -->
+      <header>
+        <h1 id="different_language">
+          Choosing a Different Language        </h1>
+      </header>
+
+      <p>
+        Tux Paint has been translated into a number of languages. To access the translations, you can use the "<code>--lang</code>" option on the command-line to set the language (e.g. "<code>--lang spanish</code>") or use the "<code>lang=</code>" setting in the configuration file (e.g., "<code>lang=spanish</code>").      </p>
+
+      <p>
+        Tux Paint also honors your environment's current locale. (You can override it on the command-line using the "<code>--locale</code>" option; see <a href="#locale">above</a>.)      </p>
+
+      <p>
+        Use the option "<code>--lang help</code>" to list the language options available.      </p>
+
+      <section class="indent"><!-- H2: Available Languages -->
+        <header>
+          <h2 id="available_languages">
+            Available Languages          </h2>
+        </header>
+
+        <table border="1"
+               cellspacing="0"
+               cellpadding="2"
+               summary=
+               "Locale values and the languages they represent.">
+          <tr>
+            <th>Locale Code</th>
+            <th>Language<br>(native name)</th>
+            <th>Language<br>(English name)</th>
+            <th>Input Method Cycle Key Combination</th>
+          </tr>
+
+            <tr>
+    <td><!-- locale_code --><code>C</code></td>
+    <td></td>
+    <td>English</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ach_UG</code></td>
+    <td>Acoli</td>
+    <td>Acholi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>af_ZA</code></td>
+    <td></td>
+    <td>Afrikaans</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ak_GH</code></td>
+    <td></td>
+    <td>Akan</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>am_ET</code></td>
+    <td></td>
+    <td>Amharic</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>an_ES</code></td>
+    <td></td>
+    <td>Aragones</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ar_SA</code></td>
+    <td></td>
+    <td>Arabic</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>as_IN</code></td>
+    <td></td>
+    <td>Assamese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ast_ES</code></td>
+    <td></td>
+    <td>Asturian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>az_AZ</code></td>
+    <td></td>
+    <td>Azerbaijani</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>bm_ML</code></td>
+    <td></td>
+    <td>Bambara</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>bn_IN</code></td>
+    <td></td>
+    <td>Bengali</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>be_BY</code></td>
+    <td>Bielaruskaja</td>
+    <td>Belarusian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>bg_BG</code></td>
+    <td></td>
+    <td>Bulgarian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>bo_CN (*)</code></td>
+    <td></td>
+    <td>Tibetan</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>br_FR</code></td>
+    <td>Brezhoneg</td>
+    <td>Breton</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>brx_IN</code></td>
+    <td></td>
+    <td>Bodo</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>bs_BA</code></td>
+    <td></td>
+    <td>Bosnian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ca_ES</code></td>
+    <td>Català</td>
+    <td>Catalan</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ca_ES@valencia</code></td>
+    <td>Valencia</td>
+    <td>Valencian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>cgg_UG</code></td>
+    <td>Chiga</td>
+    <td>Kiga</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>cs_CZ</code></td>
+    <td>Cesky</td>
+    <td>Czech</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>cy_GB</code></td>
+    <td>Cymraeg</td>
+    <td>Welsh</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>da_DK</code></td>
+    <td>Dansk</td>
+    <td>Danish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>de_DE</code></td>
+    <td>Deutsch</td>
+    <td>German</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>doi_IN</code></td>
+    <td></td>
+    <td>Dogri</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>et_EE</code></td>
+    <td></td>
+    <td>Estonian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>el_GR (*)</code></td>
+    <td></td>
+    <td>Greek</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>en_AU</code></td>
+    <td></td>
+    <td>Australian English</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>en_CA</code></td>
+    <td></td>
+    <td>Canadian English</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>en_GB</code></td>
+    <td></td>
+    <td>British English</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>en_ZA</code></td>
+    <td></td>
+    <td>South African English</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>eo</code></td>
+    <td></td>
+    <td>Esperanto</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>es_ES</code></td>
+    <td>Español</td>
+    <td>Spanish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>es_MX</code></td>
+    <td>Español-Mejicano</td>
+    <td>Mexican Spanish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>eu_ES</code></td>
+    <td>Euskara</td>
+    <td>Basque</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>fa_IR</code></td>
+    <td></td>
+    <td>Persian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ff_SN</code></td>
+    <td>Fulah</td>
+    <td>Fula</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>fi_FI</code></td>
+    <td>Suomi</td>
+    <td>Finnish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>fo_FO</code></td>
+    <td></td>
+    <td>Faroese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>fr_FR</code></td>
+    <td>Français</td>
+    <td>French</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ga_IE</code></td>
+    <td>Gàidhlig</td>
+    <td>Irish Gaelic</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>gd_GB</code></td>
+    <td>Ghaidhlig</td>
+    <td>Scottish Gaelic</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>gl_ES</code></td>
+    <td>Galego</td>
+    <td>Galician</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>gos_NL</code></td>
+    <td>Zudelk Veenkelonioals</td>
+    <td>Gronings</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>gu_IN</code></td>
+    <td></td>
+    <td>Gujarati</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>he_IL (*)</code></td>
+    <td></td>
+    <td>Hebrew</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>hi_IN (*)</code></td>
+    <td></td>
+    <td>Hindi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>hr_HR</code></td>
+    <td>Hrvatski</td>
+    <td>Croatian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>hu_HU</code></td>
+    <td>Magyar</td>
+    <td>Hungarian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>hy_AM</code></td>
+    <td>Hayeren</td>
+    <td>Armenian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>id_ID</code></td>
+    <td>Bahasa Indonesia</td>
+    <td>Indonesian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>is_IS</code></td>
+    <td>Íslenska</td>
+    <td>Icelandic</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>it_IT</code></td>
+    <td>Italiano</td>
+    <td>Italian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>iu_CA</code></td>
+    <td></td>
+    <td>Inuktitut</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ja_JP (*)</code></td>
+    <td></td>
+    <td>Japanese</td>
+    <td>right [Alt] or left [Alt]</td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ka_GE</code></td>
+    <td></td>
+    <td>Georgian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>kab</code></td>
+    <td></td>
+    <td>Kabyle</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>km_KH</code></td>
+    <td></td>
+    <td>Khmer</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>kn_IN</code></td>
+    <td></td>
+    <td>Kannada</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ko_KR (*)</code></td>
+    <td></td>
+    <td>Korean</td>
+    <td>right [Alt] or left [Alt]</td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>kok_IN</code></td>
+    <td></td>
+    <td>Konkani (Devanagari)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>kok@roman</code></td>
+    <td></td>
+    <td>Konkani (Roman)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ks_IN@devanagari</code></td>
+    <td></td>
+    <td>Kashmiri (Devanagari)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ks_IN</code></td>
+    <td></td>
+    <td>Kashmiri (Perso-Arabic)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ku_TR</code></td>
+    <td></td>
+    <td>Kurdish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>lb_LU</code></td>
+    <td>Letzebuergesch</td>
+    <td>Luxembourgish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>lg_UG</code></td>
+    <td></td>
+    <td>Luganda</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>lt_LT</code></td>
+    <td>Lietuviu</td>
+    <td>Lithuanian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>lv_LV</code></td>
+    <td></td>
+    <td>Latvian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mk_MK</code></td>
+    <td></td>
+    <td>Macedonian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mai_IN</code></td>
+    <td></td>
+    <td>Maithili</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ml_IN</code></td>
+    <td></td>
+    <td>Malayalam</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mn_MN</code></td>
+    <td></td>
+    <td>Mongolian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mni_IN</code></td>
+    <td></td>
+    <td>Manipuri (Bengali)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mni@meiteimayek</code></td>
+    <td></td>
+    <td>Manipuri (Meitei Mayek)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mr_IN</code></td>
+    <td></td>
+    <td>Marathi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ms_MY</code></td>
+    <td></td>
+    <td>Malay</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>nb_NO</code></td>
+    <td>Norsk (bokmål)</td>
+    <td>Norwegian Bokmål</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ne_NP</code></td>
+    <td>Nepali</td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>nl_NL</code></td>
+    <td></td>
+    <td>Dutch</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>nn_NO</code></td>
+    <td>Norsk (nynorsk)</td>
+    <td>Norwegian Nynorsk</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>nr_ZA</code></td>
+    <td></td>
+    <td>Ndebele</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>nso_ZA</code></td>
+    <td>Sesotho sa Leboa</td>
+    <td>Northern Sotho</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>oc_FR</code></td>
+    <td></td>
+    <td>Occitan</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>oj_CA</code></td>
+    <td>Ojibwe</td>
+    <td>Ojibway</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>pa_IN</code></td>
+    <td></td>
+    <td>Punjabi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>or_IN</code></td>
+    <td>Odia</td>
+    <td>Oriya</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>pl_PL</code></td>
+    <td>Polski</td>
+    <td>Polish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>pt_BR</code></td>
+    <td>Portugês Brazileiro</td>
+    <td>Brazilian Portuguese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>pt_PT</code></td>
+    <td>Portugês</td>
+    <td>Portuguese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ro_RO</code></td>
+    <td></td>
+    <td>Romanian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ru_RU</code></td>
+    <td>Russkiy</td>
+    <td>Russian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>rw_RW</code></td>
+    <td></td>
+    <td>Kinyarwanda</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sa_IN</code></td>
+    <td></td>
+    <td>Sanskrit</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sat_IN</code></td>
+    <td></td>
+    <td>Santali (Devanagari)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sat@olchiki</code></td>
+    <td></td>
+    <td>Santali (Ol-Chikii)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>shs_CA</code></td>
+    <td>Secwepemctin</td>
+    <td>Shuswap</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>si_LK</code></td>
+    <td></td>
+    <td>Sinhala</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sd_IN@devanagari</code></td>
+    <td></td>
+    <td>Sindhi (Devanagari)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sd_IN</code></td>
+    <td></td>
+    <td>Sindhi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sk_SK</code></td>
+    <td></td>
+    <td>Slovak</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sl_SI</code></td>
+    <td></td>
+    <td>Slovenian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>son</code></td>
+    <td></td>
+    <td>Songhay</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sq_AL</code></td>
+    <td></td>
+    <td>Albanian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sr_YU</code></td>
+    <td></td>
+    <td>Serbian (cyrillic)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sr_RS@latin</code></td>
+    <td></td>
+    <td>Serbian (latin)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>su_ID</code></td>
+    <td></td>
+    <td>Sundanese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sv_SE</code></td>
+    <td>Svenska</td>
+    <td>Swedish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sw_TZ</code></td>
+    <td></td>
+    <td>Swahili</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ta_IN (*)</code></td>
+    <td></td>
+    <td>Tamil</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>te_IN (*)</code></td>
+    <td></td>
+    <td>Telugu</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>th_TH (*)</code></td>
+    <td></td>
+    <td>Thai</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>tl_PH (*)</code></td>
+    <td></td>
+    <td>Tagalog</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>tlh</code></td>
+    <td>tlhIngan</td>
+    <td>Klingon</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>tr_TR</code></td>
+    <td></td>
+    <td>Turkish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>tw_GH</code></td>
+    <td></td>
+    <td>Twi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>uk_UA</code></td>
+    <td></td>
+    <td>Ukrainian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ur_IN</code></td>
+    <td></td>
+    <td>Urdu</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ve_ZA</code></td>
+    <td></td>
+    <td>Venda</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>vec</code></td>
+    <td>Venèto</td>
+    <td>Venetian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>vi_VN</code></td>
+    <td></td>
+    <td>Vietnamese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>wa_BE</code></td>
+    <td></td>
+    <td>Walloon</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>wo_SN</code></td>
+    <td></td>
+    <td>Wolof</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>xh_ZA</code></td>
+    <td></td>
+    <td>Xhosa</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>zh_CN (*)</code></td>
+    <td></td>
+    <td>Chinese (Simplified)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>zh_TW (*)</code></td>
+    <td></td>
+    <td>Chinese (Traditional)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>zam</code></td>
+    <td></td>
+    <td>Zapotec (Miahuatlan)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>zu_ZA</code></td>
+    <td></td>
+    <td>Zulu</td>
+    <td></td>
+  </tr>
+          </table>
+
+        <p>
+          <b>(*)</b> - These languages require their own fonts, since they are not represented using a Latin character set, like the others. See the "<a href="#special_fonts"><i>Special Fonts</i></a>" section, below.        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Note:</strong> Tux Paint provides an alternative input method for entering characters with the <b>Text</b> tool in some locales. The key comibation(s) listed can be used to cycle through the supported input methods while the <b>Text</b> tool is active.        </p>
+      </section><!-- H2: Available Languages -->
+
+      <section><!-- H2: Setting Your Environment's Locale -->
+        <header>
+          <h2 id="env_locale">
+            Setting Your Environment's Locale          </h2>
+        </header>
+
+        <p>
+          Changing your locale will affect much of your environment.        </p>
+
+        <p>
+          As stated above, along with letting you choose the language at runtime using command-line options ("<code>--lang</code>" and "<code>--locale</code>"), Tux Paint honors the global locale setting in your environment.        </p>
+
+        <p>
+          If you haven't already set your environment's locale, the following will briefly explain how:        </p>
+
+        <section class="indent"><!-- H3: Linux/Unix Users -->
+          <header>
+            <h3>Linux/Unix Users</h3>
+          </header>
+
+          <p>
+            First, be sure the locale you want to use is enabled by editing the file "<code>/etc/locale.gen</code>" on your system and then running the program "<code>locale-gen</code>" as root.          </p>
+
+          <p class="note">
+            <span title="Information">&#128161;</span>            <strong>Note:</strong> Debian users may be able to simply run the command "<code>dpkg-reconfigure locales</code>" as root to bring up a configuration dialog. Ubuntu users may be able to run "<code>sudo dpkg-reconfigure localeconf</code>" (the "localeconf" package may need to be installed first), or you may need to edit the file "<code>/var/lib/locales/supported.d/local</code>" first, and add locales they want, from the list found in "<code>/usr/share/i18n/SUPPORTED</code>".          </p>
+
+          <p>
+            Then, before running Tux Paint, set your "<code>$LANG</code>" environment variable to one of the locales listed above. (If you want all programs that can be translated to be, you may wish to place the following in your login script; e.g. "<code>~/.profile</code>", "<code>~/.bashrc</code>", "<code>~/.cshrc</code>", etc.)          </p>
+
+          <p>
+            For example, in a Bourne Shell (like BASH):          </p>
+
+          <blockquote>
+            <code>export LANG=es_ES ; \<br>
+            tuxpaint</code>
+          </blockquote>
+
+          <p>
+            And in a C Shell (like TCSH):          </p>
+
+          <blockquote>
+            <code>setenv LANG es_ES ; \<br>
+            tuxpaint</code>
+          </blockquote>
+        </section><!-- H3: Linux/Unix Users -->
+
+        <section class="indent"><!-- H3: Windows Users -->
+          <header>
+            <h3>
+              Windows Users            </h3>
+          </header>
+
+          <p>
+            Tux Paint will recognize the current locale and use the appropriate files by default. So this section is only for people trying different languages.          </p>
+
+          <p>
+            The simplest thing to do is to use the "<code>--lang</code>" switch in the shortcut (see "INSTALL"). However, by using an MSDOS Prompt window, it is also possible to issue a command like this:          </p>
+
+          <blockquote>
+            <code>set LANG=es_ES</code>
+          </blockquote>
+
+          <p>
+            ...which will set the language for the lifetime of that DOS window.          </p>
+
+          <p>
+            For something more permanent, you can set an 'environment variable' using the "System properties" dialogue as follows:          </p>
+          <ul>
+            <li>Press the "<b>[Windows]+[R]</b>" key combination to open the "Run ..." dialogue.</li>
+            <li>Enter "<code>sysdm.cpl</code>" in the text box and click the "<b>[OK]</b>" button to open the "System properties" dialogue.</li>
+            <li>Select the "Advanced" tab.</li>
+            <li>Click the "Environment Variables..." button.</li>
+            <li>Edit the value of the parameter "<code>LANG</code>" (create it, if it doesn't exists).</li>
+          </ul>
+        </section><!-- H3: Windows Users -->
+      </section><!-- H2: Setting Your Environment's Locale -->
+
+      <section class="indent"><!-- H2: Special Fonts -->
+        <header>
+          <h2 id="special_fonts">
+            Special Fonts          </h2>
+        </header>
+
+        <p>
+          Some languages require special fonts be installed. These font files (which are in TrueType format (TTF)), are much too large to include with the Tux Paint download, and are available separately. (See the table above, under the "<a href="#different_language"><i>Choosing a Different Language</i></a>" section.)        </p>
+
+        <p class="note">
+          <span title="Version variation">&#128220;</span>          <strong>Note:</strong> As of version 0.9.18, Tux Paint uses the "SDL_Pango" library, which utilizes the "Pango" library to render text in the user interface, rather than using "SDL_ttf" directly. Unless your copy of Tux Paint was built without Pango support, special fonts should <b><i>no longer be necessary</i></b>.        </p>
+
+        <p>
+          When running Tux Paint in a language that requires its own font, Tux Paint will try to load the font file from its system-wide "<code><b>fonts</b></code>" directory (under a "<code><b>locale</b></code>" subdirectory). The name of the file corresponds to the first two letters in the 'locale' code of the language (e.g., "ko" for Korean, "ja" for Japanese, "zh_tw" for Traditional Chinese).        </p>
+
+        <p>
+          For example, under Linux or Unix, when Tux Paint is run in Korean (e.g., with the option "<code>--lang korean</code>"), Tux Paint will attempt to load the following font file:        </p>
+
+        <blockquote>
+          <p>
+            <code>/usr/share/tuxpaint/fonts/locale/<b>ko.ttf</b></code>
+          </p>
+        </blockquote>
+
+        <p>
+          You can download fonts for supported languages from Tux Paint's website, <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>. (Look in the 'Fonts' section under 'Download.')        </p>
+
+        <p>
+          Under Unix and Linux, you can use the <code>Makefile</code> that comes with the font to install the font in the appropriate location.        </p>
+      </section><!-- H2: Special Fonts -->
+    </section><!-- H1: Choosing a Different Language -->
+  </body>
+</html>

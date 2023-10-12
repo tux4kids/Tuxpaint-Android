@@ -17,7 +17,7 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        バージョン 0.9.30        Frequently Asked Questions      </h1>
+        バージョン 0.9.31        Frequently Asked Questions      </h1>
 
       <p>
         Copyright &copy; 2002-2023 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
@@ -25,7 +25,7 @@
       </p>
 
       <p>
-        2023年3月16日      </p>
+        2023年7月20日      </p>
     </center>
 
     <hr size="2"
@@ -62,7 +62,7 @@
               <a href="#fullscreen">Fullscreen Mode Problems</a>
             </li>
             <li>
-              <a href="#other">Other Probelms</a>
+              <a href="#other">Other Problems</a>
             </li>
             <li>
               <a href="#contact">Help / Contact</a>
@@ -162,26 +162,6 @@
 
       <dd>
         "Low Quality Thumbnails" is probably enabled. See: "Stamp thumbnails in the Stamp Selector look bad", above.      </dd>
-
-      <dt>
-        The color picker buttons are ugly squares, not pretty buttons!      </dt>
-
-      <dd>
-        <p>
-          Tux Paint was probably compiled with the nice looking color selector buttons disabled. Run the command: "<code>tuxpaint --verbose-version</code>" from a command line. If, amongst the other output, you see the text: "Low Quality Color Selector enabled", then this is what's happening.        </p>
-
-        <p>
-          To change this, you must rebuild Tux Paint from source. Be sure to remove or comment out any line that says:        </p>
-
-        <blockquote>
-          <p>
-            <code>#define LOW_QUALITY_COLOR_SELECTOR</code>
-          </p>
-        </blockquote>
-
-        <p>
-          in the "tuxpaint.c" file in the "src" directory.        </p>
-      </dd>
 
       <dt>
         All of the text is in uppercase!      </dt>
@@ -609,7 +589,7 @@
 
     <h2>
       <a name="other" id="other">
-        Other Probelms      </a>
+        Other Problems      </a>
     </h2>
 
     <dl>
@@ -698,6 +678,28 @@
           By default, Tux Paint first looks at configuration files for options.        </p>
 
         <ul>
+
+          <li>
+            <i>Windows</i>
+            <p>
+              Under Windows, Tux Paint first examines the configuration file:            </p>
+
+            <blockquote>
+              <p>
+                <code>tuxpaint.cfg</code>
+              </p>
+            </blockquote>
+
+            <p>
+              Finally, any options sent as command-line arguments are used.            </p>
+          </li>
+
+          <li>
+            <i>macOS</i>
+            <p>
+                          </p>
+          </li>
+
           <li>
             <i>Unix and Linux</i>
             <p>
@@ -723,18 +725,9 @@
           </li>
 
           <li>
-            <i>Windows</i>
+            <i>Haiku</i>
             <p>
-              Under Windows, Tux Paint first examines the configuration file:            </p>
-
-            <blockquote>
-              <p>
-                <code>tuxpaint.cfg</code>
-              </p>
-            </blockquote>
-
-            <p>
-              Finally, any options sent as command-line arguments are used.            </p>
+                          </p>
           </li>
         </ul>
 
@@ -769,7 +762,7 @@
         </blockquote>
 
         <p>
-          Linux and Unix users can also disable the system-wide configuration file by including the following command-line argument:        </p>
+          Linux and Unix users can also disable the system-wide configuration file by including the following command-line argument:                  </p>
 
         <blockquote>
           <p>

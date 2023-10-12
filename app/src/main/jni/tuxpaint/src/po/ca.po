@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tuxpaint cvs 2009-06-21\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-02 00:00-0700\n"
-"PO-Revision-Date: 2023-03-30 23:09+0200\n"
+"POT-Creation-Date: 2023-07-20 22:29-0700\n"
+"PO-Revision-Date: 2023-07-09 12:05+0200\n"
 "Last-Translator: Pere Pujal i Carabantes <perepujal@gmail.com>\n"
 "Language-Team: Català <linux-ca@chanae.alphanet.ch>\n"
 "Language: ca\n"
@@ -273,6 +273,15 @@ msgstr ""
 "Feu clic per omplir una àrea amb un gradient que abraci la seva forma (del "
 "color triat fins el transparent)."
 
+#: ../fill_tools.h:75
+#, c-format
+msgid ""
+"Click and drag to fill an area with a linear gradient (from the chosen color "
+"to transparent). (Your gradient’s angle is %.0f degrees.)"
+msgstr ""
+"Feu clic i arrossegueu per omplir una àrea amb un gradient lineal (del color "
+"triat fins el transparent). (L'angle del gradient és de %.0f graus."
+
 #. Congratulations #1
 #: ../great.h:37
 msgid "Great!"
@@ -405,14 +414,54 @@ msgid "The Stamp tool is like a set of rubber stamps or stickers"
 msgstr "L'eina Estampa serveix per inserir imatges al dibuix"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:48
-msgid "Many Magic tools now offer size settings."
+msgid "New Magic tools: Loops, Ribbon, Smooth, and Squiggles."
 msgstr ""
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:49
-msgid "Button labels word-wrap when possible (improves legibility)."
+msgid "Eraser tool now offers fuzzy (soft-edged) erasers."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:50
+msgid ""
+"Turn saved drawings into Templates (found in the New dialog) from within Tux "
+"Paint itself (via the Open dialog). (They may subsequently be deleted from "
+"the New dialog.)"
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:51
+msgid ""
+"\"Erase\" option to remove saved drawings from the Open dialog and exported "
+"templates from the New dialog may be disabled, via \"noerase\" configuration "
+"option."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:52
+msgid ""
+"Specify the user interface font, via \"uifont\" configuration option. (List "
+"available fonts with \"--listfonts\" on the command-line.)"
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:53
+msgid ""
+"Different (default) user interface fonts are once again used for under "
+"different locales."
 msgstr ""
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:54
+msgid ""
+"Minor improvements to the selection buttons for the 'special' colors "
+"(pipette, HSV picker, and color mixer)."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:59
+msgid "Many Magic tools now offer size settings."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:60
+msgid "Button labels word-wrap when possible (improves legibility)."
+msgstr ""
+
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:65
 msgid ""
 "Fifteen new magic tools have been added: Maze, Googly Eyes, Fur, Circles, "
 "Rays, 3D Glasses, Color Sep., Saturate, Desaturate, Remove Color, Keep "
@@ -422,25 +471,25 @@ msgstr ""
 "Radis, Ulleres 3D, Separa colors, Satura, Dessatura, Treu color, Guarda "
 "color, Calidoscopi-4, Calidoscopi-6, Calidoscopi-8 i Bloom."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:55
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:66
 msgid "Stamps may be rotated before being applied to the canvas."
 msgstr "Els segells es poden girar en inserir-los al dibuix."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:56
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:67
 msgid "Shapes tool, in drag-from-corner mode, has been improved."
 msgstr "En l'ena Formes, s'ha millorat el mode d'inserir des de la vora."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:57
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:68
 msgid "Fill tool now offers a shaped gradient (bevel) mode."
 msgstr ""
 "L'eina Emplena ara ofereix un efecte de degradat que segueix la forma de "
 "l'àrea que s'emplena."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:58
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:69
 msgid "A quick Eraser mode is be accessed via keyboard shortcut."
 msgstr "Hi ha disponible una drecera de teclat que permet esborrar."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:59
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:70
 msgid ""
 "The rainbow palette (HSV color picker) can now load the built-in color, or "
 "the colors from the pipette tool or color mixer."
@@ -448,7 +497,7 @@ msgstr ""
 "El selector de colors ara pot carregar el color  actual o els colors del "
 "mesclador de colors o escollir-los del dibuix."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:60
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:71
 msgid ""
 "Starter and Template images can specify how they should stretch, to avoid "
 "smearing when the canvas aspect ratio differs from that of the image."
@@ -457,17 +506,17 @@ msgstr ""
 "en que s'han d'estirar o retallar per adaptar-se a una mida de pantalla "
 "diferent."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:61
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:72
 msgid "The \"buttonsize\" configuration option now offers an \"auto\" setting."
 msgstr ""
 "La opció de configuració \"buttonsize\" ara accepta tambe \"auto\" com a "
 "valor."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:62
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:73
 msgid "A quick start guide has been added."
 msgstr "S'ha afegit una guia d'engegada ràpida."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:67
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:78
 msgid ""
 "Tux Paint's Color palette includes a new Color Mixer option, which allows "
 "users to combine different proportions of primary colors (red, yellow, and "
@@ -479,7 +528,7 @@ msgstr ""
 "i tons(blanc, gris i negre) per crear nous colors com si es barregessin "
 "pintures."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:68
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:79
 msgid ""
 "The Color Picker option, which previously offered a static palette of around "
 "sixty-five thousand color choices, now supports separate hue, saturation, "
@@ -490,7 +539,7 @@ msgstr ""
 "seixanta-cinc mil colors ara ofereix to, saturació i valor per separat, "
 "permetent triar entre setze milions de colors."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:69
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:80
 msgid ""
 "Also, a keyboard shortcut is now available for quick access to the Color "
 "Selector — the \"pipette\" tool used for picking colors from the current "
@@ -499,7 +548,7 @@ msgstr ""
 "També s'ha afegit una drecera de teclat per accedir al selector de "
 "color(comptagotes) per agafar colors del dibuix."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:70
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:81
 msgid ""
 "The Paint and Lines tools now provide a way to adjust the spacing of "
 "brushes, allowing dotted lines or smearing effects to be made. Many brushes "
@@ -509,7 +558,7 @@ msgstr ""
 "permetent línies de punts i superposicions. També s'ha ajustat els valors "
 "per defecte de molts altres pinzells. "
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:71
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:82
 msgid ""
 "Two new variations of the Zoom Magic Tool, Tile Zoom and Rush, have been "
 "added. When shrinking a drawing with Tile Zoom, it replicates the drawing "
@@ -521,7 +570,7 @@ msgstr ""
 "en comptes de omplir la resta del dibuis amb el color de fons. Zoom lliscat "
 "desenfoca els resultats."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:72
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:83
 msgid ""
 "Tux Paint's Shapes tool now offers hexagon (6-sided) and heptagon (7-sided) "
 "polygons. For shapes which can be stretched (rectangle, oval, etc.), the "
@@ -533,7 +582,7 @@ msgstr ""
 "que es poden estirar informen a baix de la seva proporció. S'ha expandit "
 "també altres instruccions mostrades mentre es fa servir l'eina."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:73
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:84
 msgid ""
 "Keyboard shortcuts, such as [Control]+[S] to save a drawing, are now "
 "accessed with the more traditional [⌘ Command] key when using Tux Paint on "
@@ -544,7 +593,7 @@ msgstr ""
 "s'accedeixen amb [⌘ Command]. La mida del teclat de pantalla integrat s'ha "
 "millorat i la documentació s'ha millorat."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:78
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:89
 msgid ""
 "Tux Paint's Paint and Line tools now support brushes that rotate based on "
 "the angle of the stroke. This new rotation feature, as well as the older "
@@ -558,7 +607,7 @@ msgstr ""
 "l'eina Emplena ara ofereix un mode de pintat a mà alçada dintre d'una àrea "
 "confinada."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:79
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:90
 msgid ""
 "Six new Magic tools have been added to Tux Paint. Panels shrinks and "
 "duplicates the drawing into a 2-by-2 grid, which is useful for making four-"
@@ -575,7 +624,7 @@ msgstr ""
 "imatge com en una casa de miralls. Finalment, Colors suaus és una versió "
 "gradual de Colors de l'arc."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:80
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:91
 msgid ""
 "A number of existing Magic tools have been updated, as well. Improvements "
 "were made to Halftone, which simulates photographs on newsprint; Cartoon, "
@@ -589,7 +638,7 @@ msgstr ""
 "Solidifica i Semitons, així com Quadrets, Guix i Relleu ara poden alterar "
 "tota la imatge d'un cop!"
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:81
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:92
 msgid ""
 "Finally, Magic tools are now grouped into collections of similar effects — "
 "painting, distorts, color filters, picture warps, pattern painting, "
@@ -600,7 +649,7 @@ msgstr ""
 "distorsions, filtres de color, deformacions, patrons, artístic i "
 "decoracions, fent més fàcil trobar l'eina que es cerca."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:86
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:97
 msgid ""
 "Tux Paint's Fill tool now offers options to fill an area with color "
 "gradients. The \"Radial\" fill creates a circular gradient centered around "
@@ -612,7 +661,7 @@ msgstr ""
 "clic i l'emplenat \"Lineal\" permet la creació de gradients de angles i "
 "mides diferents."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:87
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:98
 msgid ""
 "New Magic tools have been added to Tux Paint: \"Pixels\" makes it easier to "
 "create retro-gaming style pixel art, \"Checkerboard\" fills the entire "
@@ -623,7 +672,7 @@ msgstr ""
 "píxel-art com els dels videojocs antics, \"Escacs\" omple el dibuix amb un "
 "tauler d'escacs, i \"Clona\" permet duplicar parts del dibuix a pinzellades."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:88
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:99
 msgid ""
 "Tux Paint's user documentation has been overhauled, making localization "
 "easier. Parties interested in helping with localization are encouraged to "
@@ -633,7 +682,7 @@ msgstr ""
 "localització. Qui vulgui ajudar en la localització està encoratjat a posar-"
 "se en contacte amb l'equip del Tux Paint."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:89
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:100
 msgid ""
 "Finally, a new pair of accessibility options have been added. The entire "
 "user interface can now be enlarged benefiting users with impaired vision, "
@@ -649,7 +698,7 @@ msgstr ""
 "qui utilitzi punters amb poca precisió, com els ratolins que es fan anar amb "
 "la mirada."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:94
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:105
 msgid ""
 "A major improvement has been made to the Shapes tool, which now provides "
 "options to choose whether shapes are drawn from the center or a corner, "
@@ -659,7 +708,7 @@ msgstr ""
 "dibuixa des del centre o des d'una cantonada, fent més senzill de fer-la "
 "servir en totes les situacions."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:95
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:106
 msgid ""
 "The on-screen keyboard, an accessibility feature optionally available when "
 "using the Text and Label tools, now appears larger on bigger displays; "
@@ -670,7 +719,7 @@ msgstr ""
 "utilitzi punters amb poca precisió, com els ratolins que es fan anar amb la "
 "mirada."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:96
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:107
 msgid ""
 "The Eraser tool adds new, smaller eraser sizes, and applies smoother, "
 "contiguous strokes when the pointer is moved quickly."
@@ -678,7 +727,7 @@ msgstr ""
 "L'eina Esborra afegeix noves gomes, més petites, i esborra més suaument quan "
 "el ratolí es mou ràpid."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:97
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:108
 msgid ""
 "Finally, this newest version adds options to export individual drawings and "
 "GIF animations, making it easy to share pictures, cartoons, and slideshows "
@@ -688,7 +737,7 @@ msgstr ""
 "individuals i animacions GIF, fent més fàcil compartir dibuixos, còmics i "
 "presentacions de diapositives amb els altres."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:102
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:113
 msgid ""
 "The latest version has promoted the \"Fill\" tool, previously found under "
 "the \"Magic\" section of Tux Paint, to the main toolbar, where it's easier "
@@ -702,7 +751,7 @@ msgstr ""
 "l'arrencada i en obrir el diàleg de dibuix \"Nou\". Els colors sòlids es "
 "poden situar al final del diàleg, enfatitzant les imatges."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:103
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:114
 msgid ""
 "Tux Paint also now makes it possible to disable stereo sound, which can "
 "benefit users with a hearing impairment, or in situations where only one "
@@ -711,7 +760,7 @@ msgstr ""
 "Ara també és possible desactivar el so estèreo, pot beneficiar ususaris amb "
 "problemes d'audició o en situacions on només hi ha disponible un sol altaveu."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:108
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:119
 msgid ""
 "New in this version are a \"color picker\", which allows any color within a "
 "drawing to be chosen using the pointer, and a set of three-, four-, and five-"
@@ -721,7 +770,7 @@ msgstr ""
 "color existent al dibuix, i estrelles de tres, quatre i cinc puntes en "
 "l'eina Formes."
 
-#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:109
+#: ../org.tuxpaint.Tuxpaint.appdata.xml.in:120
 msgid ""
 "The latest version also incorporates a number of new translations, bringing "
 "the number of supported languages up to nearly 130: Bengali, Bodo, Dogri, "
@@ -985,7 +1034,7 @@ msgstr "Nou"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:97 ../tuxpaint.c:9520
+#: ../tools.h:97 ../tuxpaint.c:9632
 msgid "Open"
 msgstr "Obre"
 
@@ -1217,273 +1266,317 @@ msgstr ""
 "en graus %d.)"
 
 #. Prompt to confirm user wishes to quit
-#: ../tuxpaint.c:2422
+#: ../tuxpaint.c:2447
 msgid "Do you really want to quit?"
 msgstr "De veres voleu sortir?"
 
 #. Quit prompt positive response (quit)
-#: ../tuxpaint.c:2425
+#: ../tuxpaint.c:2450
 msgid "Yes, I’m done!"
 msgstr "Sí, ja he acabat!"
 
 #. Quit prompt negative response (don't quit)
-#: ../tuxpaint.c:2428 ../tuxpaint.c:2455
+#: ../tuxpaint.c:2453 ../tuxpaint.c:2480
 msgid "No, take me back!"
 msgstr "No, tornem-hi!"
 
 #. Current picture is not saved; user is quitting
-#: ../tuxpaint.c:2432
+#: ../tuxpaint.c:2457
 msgid "If you quit, you’ll lose your picture! Save it?"
 msgstr "Si sortiu, perdreu el vostre dibuix! El voleu desar?"
 
-#: ../tuxpaint.c:2433 ../tuxpaint.c:2438
+#: ../tuxpaint.c:2458 ../tuxpaint.c:2463
 msgid "Yes, save it!"
 msgstr "Sí, desa'l!"
 
-#: ../tuxpaint.c:2434 ../tuxpaint.c:2439
+#: ../tuxpaint.c:2459 ../tuxpaint.c:2464
 msgid "No, don’t bother saving!"
 msgstr "No, no cal que el desis!"
 
 #. Current picture is not saved; user is opening another picture
-#: ../tuxpaint.c:2437
+#: ../tuxpaint.c:2462
 msgid "Save your picture first?"
 msgstr "Deso el vostre dibuix abans?"
 
 #. Error opening picture
-#: ../tuxpaint.c:2442
+#: ../tuxpaint.c:2467
 msgid "Can’t open that picture!"
 msgstr "No puc obrir aquest dibuix!"
 
 #. Generic dialog dismissal
-#: ../tuxpaint.c:2445 ../tuxpaint.c:2450 ../tuxpaint.c:2459 ../tuxpaint.c:2466
-#: ../tuxpaint.c:2475 ../tuxpaint.c:2480
+#: ../tuxpaint.c:2470 ../tuxpaint.c:2475 ../tuxpaint.c:2484 ../tuxpaint.c:2491
+#: ../tuxpaint.c:2502 ../tuxpaint.c:2507 ../tuxpaint.c:2515
 msgid "OK"
 msgstr "D'acord"
 
 #. Notification that 'Open' dialog has nothing to show
-#: ../tuxpaint.c:2449
+#: ../tuxpaint.c:2474
 msgid "There are no saved files!"
 msgstr "No hi ha fitxers desats!"
 
 #. Verification of print action
-#: ../tuxpaint.c:2453
+#: ../tuxpaint.c:2478
 msgid "Print your picture now?"
 msgstr "Imprimeixo ara el vostre dibuix?"
 
-#: ../tuxpaint.c:2454
+#: ../tuxpaint.c:2479
 msgid "Yes, print it!"
 msgstr "Sí, imprimeix-lo!"
 
 #. Confirmation of successful (we hope) printing
-#: ../tuxpaint.c:2458
+#: ../tuxpaint.c:2483
 msgid "Your picture has been printed!"
 msgstr "El vostre dibuix s'ha imprès!"
 
 #. We got an error printing
-#: ../tuxpaint.c:2462
+#: ../tuxpaint.c:2487
 msgid "Sorry! Your picture could not be printed!"
 msgstr "El vostre dibuix no s'ha pogut imprimir!"
 
 #. Notification that it's too soon to print again (--printdelay option is in effect)
-#: ../tuxpaint.c:2465
+#: ../tuxpaint.c:2490
 msgid "You can’t print yet!"
 msgstr "Encara no podeu imprimir!"
 
-#. Prompt to confirm erasing a picture in the Open dialog
-#: ../tuxpaint.c:2469
+#. Prompt to confirm erasing a picture in the Open dialog,
+#. or exported template from the New dialog
+#: ../tuxpaint.c:2495
 msgid "Erase this picture?"
 msgstr "Esborro aquest dibuix?"
 
-#: ../tuxpaint.c:2470
+#: ../tuxpaint.c:2496
+msgid "Erase this template?"
+msgstr "Esborro aquesta plantilla de fons?"
+
+#: ../tuxpaint.c:2497
 msgid "Yes, erase it!"
 msgstr "Sí, esborra'l!"
 
-#: ../tuxpaint.c:2471
+#: ../tuxpaint.c:2498
 msgid "No, don’t erase it!"
 msgstr "No, no l'esborris!"
 
 #. Reminder that Mouse Button 1 is the button to use in Tux Paint
-#: ../tuxpaint.c:2474
+#: ../tuxpaint.c:2501
 msgid "Remember to use the left mouse button!"
 msgstr "Recordeu de fer servir el botó esquerre!"
 
 #. Confirmation of successful (we hope) image export
-#: ../tuxpaint.c:2478
+#: ../tuxpaint.c:2505
 msgid "Your picture has been exported!"
 msgstr "S'ha exportat el vostre dibuix!"
 
-#: ../tuxpaint.c:2479
+#: ../tuxpaint.c:2506
 msgid "Your slideshow GIF has been exported!"
 msgstr "S'ha exportat la vostra animació en un fitxer GIF!"
 
 #. We got an error exporting
-#: ../tuxpaint.c:2483
+#: ../tuxpaint.c:2510
 msgid "Sorry! Your picture could not be exported!"
 msgstr "El vostre dibuix no s'ha pogut exportar!"
 
-#: ../tuxpaint.c:2484
+#: ../tuxpaint.c:2511
 msgid "Sorry! Your slideshow GIF could not be exported!"
 msgstr "La vostra animació no s'ha pogut exportar!"
 
+#. Confirmation of successful (we hope) image-to-template conversion
+#: ../tuxpaint.c:2514
+msgid "Your picture is now available as a template in the “New“ dialog!"
+msgstr ""
+"El dibuix ja hauria d'estar disponible com a plantilla de fons en el diàleg "
+"de «Nou» dibuix."
+
+#. We got an error doing image-to-template conversion
+#: ../tuxpaint.c:2518
+msgid ""
+"You already turned this picture into a template. Look for it in the “New“ "
+"dialog!"
+msgstr ""
+"Ja heu convertit aquest dibuix en una plantilla de fons. Busqueu-la en el "
+"diàleg de «Nou» dibuix."
+
+#: ../tuxpaint.c:2519
+msgid "Sorry! Your picture could not turned into a template!"
+msgstr "El vostre dibuix no s'ha pogut convertir en plantilla de fons!"
+
 #. Slideshow instructions
-#: ../tuxpaint.c:2488
+#: ../tuxpaint.c:2522
 msgid "Choose the pictures you want, then click “Play”."
 msgstr "Trieu els dibuixos que voleu, llavors feu clic a «Reproduir»."
 
 #. Sound has been muted (silenced) via keyboard shortcut
-#: ../tuxpaint.c:2797
+#: ../tuxpaint.c:2831
 msgid "Sound muted."
 msgstr "S'ha desactivat el so."
 
 #. Sound has been unmuted (unsilenced) via keyboard shortcut
-#: ../tuxpaint.c:2802
+#: ../tuxpaint.c:2836
 msgid "Sound unmuted."
 msgstr "S'ha activat el so."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3647
+#: ../tuxpaint.c:3685
 msgid "Please wait…"
 msgstr "Espereu, si us plau…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:9523
+#: ../tuxpaint.c:9635
 msgid "Erase"
 msgstr "Esborra"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:9526
+#: ../tuxpaint.c:9638
 msgid "Slides"
 msgstr "Diapositives"
 
+#. Open dialog: 'Template' button, to make a template out of a drawing
+#: ../tuxpaint.c:9641
+msgid "Template"
+msgstr "Plantilla de fons"
+
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:9529
+#: ../tuxpaint.c:9644
 msgid "Export"
 msgstr "Exporta"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:9532
+#: ../tuxpaint.c:9647
 msgid "Back"
 msgstr "Endarrere"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:9535
+#: ../tuxpaint.c:9650
 msgid "Play"
 msgstr "Reprodueix"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:9538
+#: ../tuxpaint.c:9653
 msgid "GIF Export"
 msgstr "Exporta a GIF"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:9541
+#: ../tuxpaint.c:9656
 msgid "Next"
 msgstr "Següent"
 
 #. Color mixer dialog: 'Clear' button, to reset the mixed color
-#: ../tuxpaint.c:9544
+#: ../tuxpaint.c:9659
 msgid "Clear"
 msgstr "Re-comença"
 
 #. Use the localized label string (e.g., "あぁ" in Japanese)
-#: ../tuxpaint.c:10482 ../tuxpaint.c:10485 ../tuxpaint.c:10486
+#: ../tuxpaint.c:10581 ../tuxpaint.c:10584 ../tuxpaint.c:10585
 msgid "Aa"
 msgstr "Aà"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:14378
+#: ../tuxpaint.c:14549
 msgid "Yes"
 msgstr "Sí"
 
-#: ../tuxpaint.c:14382
+#: ../tuxpaint.c:14553
 msgid "No"
 msgstr "No"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:15649
+#: ../tuxpaint.c:15818
 msgid "Replace the picture with your changes?"
 msgstr "Substitueixo el dibuix amb els vostres canvis?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:15653
+#: ../tuxpaint.c:15822
 msgid "Yes, replace the old one!"
 msgstr "Sí, substitueix l'antic!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:15657
+#: ../tuxpaint.c:15826
 msgid "No, save a new file!"
 msgstr "No, desa en un fitxer nou!"
 
-#. Let user choose an image:
-#. Instructions for 'Open' file dialog
-#: ../tuxpaint.c:16923
-msgid "Choose the picture you want, then click “Open”."
-msgstr "Trieu el dibuix que voleu, llavors feu clic en Obre."
+#: ../tuxpaint.c:17094
+msgid ""
+"Choose a picture and then click “Open”, “Export”, “Template“, or “Erase”. "
+"Click “Slides” to create a slideshow animation or “Back“ to return to your "
+"current picture."
+msgstr ""
+"Trieu un dibuix i feu clic en «Obre», «Exporta», «Plantilla de fons» o "
+"«Esborra».\n"
+"Feu clic a «Diapositives» per crear una presentació o «Endarrere» per tornar "
+"al dibuix actual."
+
+#: ../tuxpaint.c:17096
+msgid ""
+"Choose a picture and then click “Open”, “Export”, or “Erase”. Click “Slides” "
+"to create a slideshow animation or “Back“ to return to your current picture."
+msgstr ""
+"Trieu un dibuix i feu clic en «Obre», «Exporta» o «Esborra».\\n\"\n"
+"\"Feu clic a «Diapositives» per crear una presentació o «Endarrere» per "
+"tornar al dibuix actual."
 
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:18512
+#: ../tuxpaint.c:18765
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr "Seleccioneu 2 o més dibuixos per exportar-los a GIF."
 
 #. Descriptions (names) of the color mixer tool's primary colors and shades
-#: ../tuxpaint.c:24507
+#: ../tuxpaint.c:24942
 msgid "red"
 msgstr "magenta"
 
-#: ../tuxpaint.c:24508
+#: ../tuxpaint.c:24943
 msgid "yellow"
 msgstr "groc"
 
-#: ../tuxpaint.c:24509
+#: ../tuxpaint.c:24944
 msgid "blue"
 msgstr "cian"
 
-#: ../tuxpaint.c:24510
+#: ../tuxpaint.c:24945
 msgid "white"
 msgstr "blanc"
 
-#: ../tuxpaint.c:24511
+#: ../tuxpaint.c:24946
 msgid "grey"
 msgstr "gris"
 
-#: ../tuxpaint.c:24512
+#: ../tuxpaint.c:24947
 msgid "black"
 msgstr "negre"
 
 #. Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.)
-#: ../tuxpaint.c:24517
+#: ../tuxpaint.c:24952
 #, c-format
 msgid "Your color is %1$s %2$s."
 msgstr "El vostre color és %1$s %2$s."
 
-#: ../tuxpaint.c:24518
+#: ../tuxpaint.c:24953
 #, c-format
 msgid "Your color is %1$s %2$s and %3$s %4$s."
 msgstr "El vostre color és %1$s %2$s i %3$s %4$s."
 
-#: ../tuxpaint.c:24519
+#: ../tuxpaint.c:24954
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, and %5$s %6$s."
 msgstr "El vostre color és %1$s %2$s, %3$s %4$s i %5$s %6$s."
 
-#: ../tuxpaint.c:24520
+#: ../tuxpaint.c:24955
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, and %7$s %8$s."
 msgstr "El vostre color és %1$s %2$s, %3$s %4$s, %5$s %6$s i %7$s %8$s."
 
-#: ../tuxpaint.c:24521
+#: ../tuxpaint.c:24956
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, and %9$s %10$s."
 msgstr ""
 "El vostre color és %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s i %9$s %10$s."
 
-#: ../tuxpaint.c:24522
+#: ../tuxpaint.c:24957
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s, and "
@@ -1493,16 +1586,16 @@ msgstr ""
 "%11$s %12$s."
 
 #. Color mixer; e.g., "Your color is entirely grey."
-#: ../tuxpaint.c:25302 ../tuxpaint.c:25307
+#: ../tuxpaint.c:25737 ../tuxpaint.c:25742
 msgid "entirely"
 msgstr "totalment"
 
 #. Add "Color Select" color:
-#: ../tuxpaint.c:28397
+#: ../tuxpaint.c:28902
 msgid "Select a color from your drawing."
 msgstr "Seleccioneu un color del vostre dibuix."
 
-#: ../tuxpaint.c:28408
+#: ../tuxpaint.c:28913
 msgid ""
 "Pick a color. Hues go top to bottom. Saturation/intensity goes left (pale) "
 "to right (pure). Value (lightness/darkness): grey bar."
@@ -1511,7 +1604,7 @@ msgstr ""
 "saturació o intensitat, d'esquerra(pàlid) a dreta(pur), trieu el valor "
 "(lluminositat/foscor) a la barra de grisos."
 
-#: ../tuxpaint.c:28422
+#: ../tuxpaint.c:28927
 msgid ""
 "Click the primary colors (red, yellow, and blue), white (to tint), grey (to "
 "tone), and black (to shade), to mix together a new color."
@@ -1525,7 +1618,7 @@ msgstr "Programa de dibuix"
 
 #: ../tuxpaint-fullscreen.desktop.in:3
 msgid "Tux Paint (Fullscreen)"
-msgstr ""
+msgstr "Tux Paint (Pantalla completa)"
 
 #: ../../magic/src/alien.c:67
 msgid "Color Shift"
@@ -1632,16 +1725,14 @@ msgid "Click and drag to draw small bricks."
 msgstr "Feu clic i arrossegueu per dibuixar rajoles petites."
 
 #: ../../magic/src/bricks.c:156
-#, fuzzy
-#| msgid "Click and drag to draw large bricks."
 msgid "Click and drag to draw bricks."
-msgstr "Feu clic i arrossegueu per dibuixar rajoles grans."
+msgstr "Feu clic i arrossegueu per dibuixar rajoles."
 
-#: ../../magic/src/calligraphy.c:130
+#: ../../magic/src/calligraphy.c:131
 msgid "Calligraphy"
 msgstr "Cal·ligrafia"
 
-#: ../../magic/src/calligraphy.c:143
+#: ../../magic/src/calligraphy.c:144
 msgid "Click and drag the mouse around to draw in calligraphy."
 msgstr "Feu clic i arrossegueu el ratolí per fer escriptura cal·ligràfica."
 
@@ -1883,29 +1974,21 @@ msgstr ""
 msgid "Click to cover your entire picture in glass tiles."
 msgstr "Feu clic per omplir la imatge amb blocs de vidre."
 
-# Aquí, a %s hi va la traducció de "large googly eye" o "small googly eye" segons s'escaigui.
 #: ../../magic/src/googlyeyes.c:24
-#, fuzzy
-#| msgid ""
-#| "Click to place a %s, then drag and release to make it look that direction."
 msgid ""
 "Click to place a large googly eye, then drag and release to make it look "
 "that direction."
 msgstr ""
-"Feu clic per dibuixar %s, llavors arrossegueu i deixeu anar per fer que miri "
-"en aquesta direcció."
+"Feu clic per dibuixar un ull gran, llavors arrossegueu i deixeu anar per fer "
+"que miri en aquesta direcció."
 
-# Aquí, a %s hi va la traducció de "large googly eye" o "small googly eye" segons s'escaigui.
 #: ../../magic/src/googlyeyes.c:25
-#, fuzzy
-#| msgid ""
-#| "Click to place a %s, then drag and release to make it look that direction."
 msgid ""
 "Click to place a small googly eye, then drag and release to make it look "
 "that direction."
 msgstr ""
-"Feu clic per dibuixar %s, llavors arrossegueu i deixeu anar per fer que miri "
-"en aquesta direcció."
+"Feu clic per dibuixar un ull petit, llavors arrossegueu i deixeu anar per "
+"fer que miri en aquesta direcció."
 
 #: ../../magic/src/googlyeyes.c:205
 msgid "Googly Eyes"
@@ -1913,15 +1996,12 @@ msgstr "UUlls"
 
 # Aquí, a %s hi va la traducció de "large googly eye" o "small googly eye" segons s'escaigui.
 #: ../../magic/src/googlyeyes.c:222
-#, fuzzy
-#| msgid ""
-#| "Click to place a %s, then drag and release to make it look that direction."
 msgid ""
 "Click to place a googly eye, then drag and release to make it look that "
 "direction."
 msgstr ""
-"Feu clic per dibuixar %s, llavors arrossegueu i deixeu anar per fer que miri "
-"en aquesta direcció."
+"Feu clic per dibuixar un ull, llavors arrossegueu i deixeu anar per fer que "
+"miri en aquesta direcció."
 
 #: ../../magic/src/grass.c:111
 msgid "Grass"
@@ -2261,10 +2341,8 @@ msgid "Smooth Rainbow"
 msgstr "Colors suaus"
 
 #: ../../magic/src/rainbow.c:162
-#, fuzzy
-#| msgid "Rainbow"
 msgid "Rainbow Cycle"
-msgstr "Colors de l'arc"
+msgstr "Cicle de colors"
 
 #: ../../magic/src/rainbow.c:175
 msgid "You can draw in rainbow colors!"
@@ -2305,6 +2383,14 @@ msgstr "Reflexió"
 #: ../../magic/src/reflection.c:125
 msgid "Click and drag the mouse around to add a reflection to your picture."
 msgstr "Feu clic i arrossegueu el ratolí per reflectir una part del dibuix."
+
+#: ../../magic/src/ribbon.c:117
+msgid "Ribbon"
+msgstr "Cinta"
+
+#: ../../magic/src/ribbon.c:129
+msgid "Add a flowing ribbon to your picture."
+msgstr "Feu clic per afegir una cinta al dibuix."
 
 #: ../../magic/src/ripples.c:109
 msgid "Ripples"
@@ -2376,6 +2462,37 @@ msgstr "Desplaça"
 #: ../../magic/src/shift.c:124
 msgid "Click and drag to shift your picture around on the canvas."
 msgstr "Feu clic i arrossegueu el ratolí per fer desplaçar la imatge."
+
+#: ../../magic/src/smooth.c:62
+msgid "Smooth"
+msgstr "Traç suau"
+
+#: ../../magic/src/smooth.c:63
+msgid "Squiggles"
+msgstr "Espires gargot"
+
+#: ../../magic/src/smooth.c:64
+msgid "Loops"
+msgstr "Espires"
+
+#: ../../magic/src/smooth.c:68
+msgid ""
+"Click and drag the mouse around to draw in freehand; it will be smoothed "
+"when you let go."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per dibuixar lliurement, quan deixeu anar "
+"el ratolí s'arrodonirà el traç."
+
+#: ../../magic/src/smooth.c:69
+msgid "Click and drag the mouse around to draw squiggles."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per dibuixar espires amb traç irregular."
+
+#: ../../magic/src/smooth.c:70
+msgid "Click and drag the mouse around to draw loop-the-loops."
+msgstr ""
+"Feu clic i arrossegueu el ratolí per dibuixar espires com les de les "
+"llibretes d'espiral."
 
 #: ../../magic/src/smudge.c:110
 msgid "Smudge"
@@ -2541,7 +2658,7 @@ msgstr "TV"
 
 #: ../../magic/src/tv.c:119
 msgid "TV (Bright)"
-msgstr ""
+msgstr "TV (Brillant)"
 
 #: ../../magic/src/tv.c:130
 msgid ""
@@ -2596,6 +2713,9 @@ msgstr ""
 #: ../../magic/src/xor.c:112
 msgid "Click to draw a XOR effect on the whole picture"
 msgstr "Feu clic per aplicar un patró de disjunció exclusiva dels colors."
+
+#~ msgid "Choose the picture you want, then click “Open”."
+#~ msgstr "Trieu el dibuix que voleu, llavors feu clic en Obre."
 
 #~ msgid "The Magic tool is a set of special effects"
 #~ msgstr "L'eina Màgic és una col·lecció d'efectes especials"

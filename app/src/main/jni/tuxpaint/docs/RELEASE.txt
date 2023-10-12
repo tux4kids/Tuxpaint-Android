@@ -1,5 +1,5 @@
 Release checklist for Tux Paint
-Last updated 2023-05-01 -bjk
+Last updated 2023-05-29 -bjk
 
 During development
 ------------------
@@ -7,7 +7,17 @@ During development
 Make sure any new options are documented in the "OPTIONS" docs
 (now maintained in the "tuxpaint-docs" repository; see below),
 the manpage (see below), and listed in the shell completion file
-(src/tuxpaint-completion.bash), as appropriate.
+(src/tuxpaint-completion.bash), the "tuxpaint --help" output,
+and the "Command-Line Options" section of the "OPTIONS" docs,
+as appropriate.  Generally, new options should be exposed by
+"Tux Paint Config." (in the "tuxpaint-config" repository),
+and documented in its README, as well.
+
+Make sure new features are recorded in "docs/CHANGES.txt", the
+"What's New" section at the top of the current version's "README"
+docs (now maintained in the "tuxpaint-docs" repository), and
+in Tux Paint's appdata file (which is generated, with translated
+text from PO files, based on "org.tuxpaint.Tuxpaint.appdata.xml.in").
 
 
 Preparing

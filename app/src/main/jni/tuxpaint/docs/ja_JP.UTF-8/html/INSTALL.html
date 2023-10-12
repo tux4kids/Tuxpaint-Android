@@ -89,7 +89,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            バージョン 0.9.30<br/>
+            バージョン 0.9.31<br/>
             Installation Documentation          </h1>
 
           <p>
@@ -1047,7 +1047,7 @@
             ... to create the <code>TuxPaint.app</code> application bundle that can be run in-place or copied to <code>/Applications</code>.            To create the DMG file for distribution, use 'make TuxPaint.dmg'.          </p>
 
           <p>
-            Additional steps may be required when building for the Apple Silicon.  See "Building for Apple Silicon" below.          </p>
+            Additional steps are required when building a Unviersal Binary.  See "Building a Universal Binary" below.          </p>
         </section><!-- H3: How to Build -->
 
         <section class="indent"><!-- H3: Known Issues -->
@@ -1127,28 +1127,6 @@
             As of this writing, all libraries Tux Paint requires from MacPorts can be recompiled in this manner to run on macOS 10.10 Yosemite and later on Intel CPUs, and macOS 11.0 Big Sur and later on Apple Silicon.            Unfortunately, although MacPorts has the option to enable the building of universal libraries, several libraries Tux Paint require cannot be built as universal libraries so they can only be built to run natively on the hardware on which they were built. See "Building a Universal Binary" below for instructions on how to build Tux Paint as a Universal Binary.          </p>
         </section><!-- H3: Recompiling MacPorts -->
 
-        <section class="indent"><!-- H3: Building for Apple Silicon -->
-          <header>
-            <h3>
-              Building for Apple Silicon            </h3>
-          </header>
-
-          <p>macOS for Apple Silicon requires all native Apple Silicon applications be signed, even if it is signed "ad-hoc" (anonymously).  Because of this, compilers that produce native Apple Silicon applications sign all produced binaries and libraries as a part of the compilation process.<sup>*</sup>  However, the Tux Paint compilation process modifies the libraries to be modular (using <code>install_name_tool</code>) so they can be added into the application bundle, which has the unfortunate side effect of breaking the signature.  This can be addressed by signing the application bundle ad-hoc (example below) or using your own Apple Developer Identity if you have one.  The DMG file, if needed, must be created after signing the App Bundle so the DMG file is created with signed App Bundle:            <blockquote>
-              <code>
-                $ <strong>codesign</strong> -s - TuxPaint.app<br/>
-                $ <strong>make</strong> TuxPaint.dmg
-              </code>
-            </blockquote>
-            <sup>*</sup> For more information on the code signing requirements on the Apple Silicon, see <a href="https://developer.apple.com/documentation/macos-release-notes/macos-big-sur-11_0_1-universal-apps-release-notes#:~:text=New%20in%20macOS,pass%20through%20Gatekeeper">https://developer.apple.com/documentation/macos-release-notes/macos-big-sur-11_0_1-universal-apps-release-notes#:~:text=New%20in%20macOS,pass%20through%20Gatekeeper</a>.          </p>
-          <p>If you get an error that the application bundle is already signed, remove it before signing:            <blockquote>
-              <code>
-                $ <strong>codesign</strong> --remove-signature TuxPaint.app
-              </code>
-            </blockquote>
-          </p>
-          <p>If you plan to combine the Apple Silicon bundle with the Intel CPU bundle to produce the Universal bundle, the code signing must be done after they are combined.  See "Building a Universal Binary" below.          </p>
-        </section><!-- H3: Building for Apple Silicon -->
-
         <section class="indent"><!-- H3: Building a Universal Binary -->
           <header>
             <h3>
@@ -1156,10 +1134,9 @@
           </header>
 
           <p>
-            To build Tux Paint as a Universal Binary, compile Tux Paint for the Intel CPU and the Apple Silicon separately first.  Then rename the app bundle for the Intel CPU to TuxPaint-x86_64.app, and the bundle for the Apple Silicon to TuxPaint-arm64.app, copy the app bundle from the Intel machine to the Apple Silicon machine, then use the provided <code>build-universal.sh</code> script to combine the two application bundles as below.  The produced bundle must be signed (see "Building for Apple Silicon" above for more details).  The DMG file, if required, must be built after the signing:            <blockquote>
+            To build Tux Paint as a Universal Binary, compile Tux Paint for the Intel CPU and the Apple Silicon separately first.  Then rename the app bundle for the Intel CPU to TuxPaint-x86_64.app, and the bundle for the Apple Silicon to TuxPaint-arm64.app, copy the app bundle from the Intel machine to the Apple Silicon machine, then use the provided <code>build-universal.sh</code> script to combine the two application bundles as below.  The DMG file can be built afterwards:            <blockquote>
               <code>
                 $ <strong>macos/build-universal.sh</strong><br/>
-                $ <strong>codesign</strong> -s - TuxPaint.app <br/>
                 $ <strong>make</strong> TuxPaint.dmg
               </code>
             </blockquote>

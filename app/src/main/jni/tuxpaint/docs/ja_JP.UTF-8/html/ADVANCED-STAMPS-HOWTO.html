@@ -17,7 +17,7 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        バージョン 0.9.30        スタンプ作成の詳細について      </h1>
+        バージョン 0.9.31        スタンプ作成の詳細について      </h1>
 
       <p>
         Copyright &copy; 2006-2022 by Albert Cahalan ほか; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
@@ -96,7 +96,7 @@
 
       <blockquote>
         <p>
-          タックスペイントの開発者に作品を提供して公式プロジェクトへの採用を検討してもらいたい場合や、タックスペイントに独自の画像を同梱して配布したい場合には、タックスペイントが採用しているライセンスである GNU 一般公衆利用許諾 と互換性があるライセンスの画像を用いる必要があります。        </p>
+          Tux Paint の開発者に作品を提供して公式プロジェクトへの採用を検討してもらいたい場合や、Tux Paint に独自の画像を同梱して配布したい場合には、Tux Paint が採用しているライセンスである GNU 一般公衆利用許諾 と互換性があるライセンスの画像を用いる必要があります。        </p>
 
         <p>
           米国政府が制作した画像はパブリックドメインですが、米国政府がウェブ上でパプリックドメイン以外の画像を使用していることもあるので注意が必要です。<a href="http://images.google.com/">Googleの画像検索</a>で、<code>site:gov</code> または<code>site:mil</code> のいずれかを指定すると、適切な画像が多数表示されます。（注: *.mil のサイトには、軍事関係以外のコンテンツも含まれています！）        </p>
@@ -186,10 +186,10 @@
         一番上のオリジナル画像のレイヤーを表示しながら、作業用レイヤーに対して編集を加えるするように設定します。編集作業の必要に応じて画像を約400％に拡大してください（画像の各ピクセルを画面上 4x4 ピクセルのブロックとして表示し、編集することができます）      </p>
 
       <p>
-        100%不透明な部分と完全に透明な部分を選択します。色を指定することで、オブジェクトや背景をある程度正確に選択できる場合は、そのようにします。部分的に不透明にすべきピクセル（一般的にはオブジェクトの輪郭）を選択しないように、必要に応じて選択範囲を拡大、縮小、反転させます。      </p>
+        Select parts of the image that need to be 100% opaque or 0% opaque. If you can select the object or background somewhat accurately by color, do so. As needed to avoid selecting any pixels that should be partially opaque (generally at the edge of the object) you should grow, shrink, and invert the selection.      </p>
 
       <p>
-        不透明な部分を白で、透明な部分を黒で塗りつぶします。この作業は、前景／背景色のインジケータからドラッグ＆ドロップするのが最も簡単です。作業用レイヤーのマスクを編集しながら、変更されていない画像レイヤーを見ているので、見た目には何も起こらないはずですが、サムネイル画像では大きな変更が見えるかもしれません。      </p>
+        Fill the 100% opaque areas with white, and the 0% opaque areas with black. This is most easily done by drag-and-drop from the foreground/background color indicator. You should not see anything happen, because you are viewing the unmodified image layer while editing the mask of the WIP layer. Large changes might be noticable in the thumbnail.      </p>
 
       <p>
         次に、画像を拡大します。      </p>
@@ -243,13 +243,13 @@
         失敗を減らすために、マスクの中の灰色ではないピクセルだけを選択するとよいでしょう。（「マスクから色で領域選択、黒を選択、色加算モード、白を選択、反転」あるいは「すべてを選択、マスクから色で領域選択、色減算モード、黒を選択、白を選択」）この作業を行う際、選択範囲を少し広げて、選択領域を示す線を隠したくなるかもしれません。      </p>
 
       <p>
-        ここではクローンツールとブラシツールを使います。必要に応じて不透明度を変えて下さい。3x3か5x5の小さな円形のブラシを主に使います。ぼかし筆かどうかは問いません。（ぼかし筆は不透明度100％、ぼかしではないブラシは不透明度70％程度で組み合わせると良いでしょう）。あまり一般的ではない使い方ですが、半透明のオブジェクトの場合には有効です。      </p>
+        Use the clone tool and the brush tool. Vary the opacity as needed. Use small round brushes mostly, perhaps 3x3 or 5x5, fuzzy or not. (It is generally nice to pair up fuzzy brushes with 100% opacity and non-fuzzy brushes with about 70% opacity.) Unusual drawing modes can be helpful with semi-transparent objects.      </p>
 
       <p>
         最終目標は、オブジェクトの内側と外側の両方の縁取りを除去することです。内側の縁取りは、マゼンタやグリーンの上にオブジェクトを合成したときに見えるもので、明らかに除去が必要です。外側のフリンジは、画像を縮小したときに見えるようになるため、こちらも除去する必要があります。例として、鋭角なオブジェクトの輪郭にある2x2のピクセルの領域を考えてみましょう。左半分は黒で、不透明度は0％。右半分は白で、100％不透明です。つまり、黒い背景に白い物体がある状態です。Tux Paintがこれを50％（1x1ピクセルの領域）にスケーリングすると、結果はグレーの50％不透明ピクセルになりますが、正しい結果は、白の50％不透明ピクセルです。この結果を得るためには、黒いピクセルを塗り潰します。不透明度が0％であるにもかかわらず、黒いピクセルは重要です。      </p>
 
       <p>
-        タックスペイントでは、画像を非常に大きく縮小することができるため、オブジェクトの輪郭を外側に大きく広げることが重要です。オブジェクトの輪郭の部分では、非常に正確に処理する必要がありますが、輪郭から離れるにつれて、少々手を抜いても大丈夫です。十数ピクセル以上外側まで描くとちょうど良くなります。これを太くすればするだけ、Tux Paintは汚い色の縁どりを発生させずにスケールダウンすることができます。オブジェクトの端から数ピクセル以上離れた部分については、鉛筆ツール（またはドラッグ＆ドロップで適当に色を選択）を使用して、結果がきれいに縮小されるようにしてください。      </p>
+        Tux Paint では、画像を非常に大きく縮小することができるため、オブジェクトの輪郭を外側に大きく広げることが重要です。オブジェクトの輪郭の部分では、非常に正確に処理する必要がありますが、輪郭から離れるにつれて、少々手を抜いても大丈夫です。十数ピクセル以上外側まで描くとちょうど良くなります。これを太くすればするだけ、Tux Paintは汚い色の縁どりを発生させずにスケールダウンすることができます。オブジェクトの端から数ピクセル以上離れた部分については、鉛筆ツール（またはドラッグ＆ドロップで適当に色を選択）を使用して、結果がきれいに縮小されるようにしてください。      </p>
     </blockquote>
 
     <hr size="2"
@@ -262,7 +262,7 @@
 
     <blockquote>
       <p>
-        せっかくの労作も簡単にダメになることがあります。画像編集ソフトは、不透明度0％の領域のピクセルを勝手にで破棄することがあります。この現象が発生する条件は、ソフトウェアのバージョンによっても異なります。慎重を期すため、画像を直接PNGとして保存してみてください。その後、不透明度0％の部分が黒くなったり白くなったりしていないことを確認するために、もう一度画像を読み込んでみてください。ディスクスペースを節約するため（そして自分のミスを隠すため）に画像を縮小する必要がある場合、ほぼ確実に 0％の不透明部分をすべて破壊してしまうことになります。そこで、もっと良い方法があります。      </p>
+        It is very easy to ruin your hard work. Image editors can silently destroy pixels in 0% opaque areas. The conditions under which this happens may vary from version to version. If you are very trusting, you can try saving your image directly as a PNG. Be sure to read it back in again to verify that the 0% opaque areas didn't turn black or white, which would create fringes when Tux Paint scales the image down. If you need to scale your image to save space (and hide your mistakes), you are almost certain to destroy all the 0% opaque areas. So here is a better way...      </p>
 
       <h3>
         より安全な保存方法      </h3>

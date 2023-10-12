@@ -9,7 +9,7 @@
   Idea: Pere Pujal i Carabantes (https://sourceforge.net/p/tuxpaint/feature-requests/238/)
   Based on: calligraphy.c by Bill Kendrick
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2023 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -28,7 +28,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: May 16, 2023
+  Last updated: May 22, 2023
 */
 
 #include <stdio.h>
@@ -39,8 +39,46 @@
 #include "SDL_mixer.h"
 #include <math.h>
 
-static Mix_Chunk *smooth_snd;
-static int smooth_r, smooth_g, smooth_b;
+enum {
+  TOOL_SMOOTH,
+  TOOL_SQUIGGLES,
+  TOOL_LOOPS,
+  NUM_TOOLS
+};
+
+char * smooth_icon_fnames[NUM_TOOLS] = {
+  "smooth.png",
+  "squiggles.png",
+  "loops.png",
+};
+
+char * smooth_snd_fnames[NUM_TOOLS] = {
+  "smooth.ogg",
+  "squiggles.ogg",
+  "loops.ogg",
+};
+
+char * smooth_names[NUM_TOOLS] = {
+  gettext_noop("Smooth"),
+  gettext_noop("Squiggles"),
+  gettext_noop("Loops"),
+};
+
+char * smooth_descrs[NUM_TOOLS] = {
+  gettext_noop("Click and drag the mouse around to draw in freehand; it will be smoothed when you let go."),
+  gettext_noop("Click and drag the mouse around to draw squiggles."),
+  gettext_noop("Click and drag the mouse around to draw loop-the-loops."),
+};
+
+int smooth_sizes[NUM_TOOLS] = {
+  8,
+  4,
+  8,
+};
+
+static Mix_Chunk *smooth_snds[NUM_TOOLS];
+static Uint32 smooth_color;
+static int smooth_size;
 
 typedef struct
 {
@@ -49,7 +87,8 @@ typedef struct
 
 #define MAX_CTRL_POINTS 4096
 static Point2D smooth_control_points[MAX_CTRL_POINTS];
-static int num_input_points, smooth_capture;
+static int num_input_points = 0, smooth_capture = 0;
+int smooth_squiggle_angle = 0, smooth_squiggle_rad = 0;
 
 /* Local Function Prototypes */
 static Point2D smooth_PointOnCubicBezier(Point2D * cp, float t);
@@ -64,6 +103,8 @@ char *smooth_get_name(magic_api * api, int which);
 int smooth_get_group(magic_api * api, int which);
 char *smooth_get_description(magic_api * api, int which, int mode);
 static void smooth_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
+static void smooth_squiggle_linecb(void *ptr, int which,
+                                   SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y);
 void smooth_drag(magic_api * api, int which, SDL_Surface * canvas,
                       SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 void smooth_click(magic_api * api, int which, int mode,
@@ -87,9 +128,12 @@ void smooth_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
 int smooth_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
 {
   char fname[1024];
+  int i;
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/rainbow.wav", api->data_directory); // FIXME
-  smooth_snd = Mix_LoadWAV(fname);
+  for (i = 0; i < NUM_TOOLS; i++) {
+    snprintf(fname, sizeof(fname), "%ssounds/magic/%s", api->data_directory, smooth_snd_fnames[i]);
+    smooth_snds[i] = Mix_LoadWAV(fname);
+  }
 
   return (1);
 }
@@ -102,22 +146,22 @@ Uint32 smooth_api_version(void)
 // Only one tool:
 int smooth_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
 {
-  return (1);
+  return (NUM_TOOLS);
 }
 
 // Load our icon:
-SDL_Surface *smooth_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *smooth_get_icon(magic_api * api, int which)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/rainbow.png", api->data_directory); // FIXME
+  snprintf(fname, sizeof(fname), "%simages/magic/%s", api->data_directory, smooth_icon_fnames[which]);
   return (IMG_Load(fname));
 }
 
 // Return our name, localized:
-char *smooth_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *smooth_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
-  return (strdup(gettext_noop("Smooth")));
+  return (strdup(gettext(smooth_names[which])));
 }
 
 // Return our group
@@ -128,31 +172,86 @@ int smooth_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
 
 // Return our description, localized:
 char *smooth_get_description(magic_api * api ATTRIBUTE_UNUSED,
-                                  int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+                             int which, int mode ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Click and drag the mouse around to draw in freehand; it will be smoothed when you let go.")));
+  return (strdup(gettext(smooth_descrs[which])));
 }
 
 
-static void smooth_linecb(void *ptr, int which ATTRIBUTE_UNUSED,
+static void smooth_linecb(void *ptr, int which,
                           SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   SDL_Rect dest;
 
-  dest.x = x;
-  dest.y = y;
-  dest.w = 2;
-  dest.h = 2;
+  if (which == TOOL_SMOOTH) {
+    /* FIXME */
+    dest.x = x;
+    dest.y = y;
+    dest.w = smooth_size;
+    dest.h = smooth_size;
 
-  SDL_FillRect(canvas, &dest, 0);
+    SDL_FillRect(canvas, &dest, smooth_color);
+  } else if (which == TOOL_LOOPS) {
+    /* FIXME */
+    dest.x = x;
+    dest.y = y;
+    dest.w = 2;
+    dest.h = 2;
+
+    SDL_FillRect(canvas, &dest, smooth_color);
+  } else if (which == TOOL_SQUIGGLES) {
+    api->putpixel(canvas, x, y, smooth_color);
+  }
 }
 
-void smooth_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas,
-                      SDL_Surface * last ATTRIBUTE_UNUSED, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+#define LOOP_RAD_CALC (smooth_size * 10)
+
+static void smooth_squiggle_linecb(void *ptr, int which,
+                                   SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
 {
-  if (num_input_points < MAX_CTRL_POINTS) {
+  magic_api *api = (magic_api *) ptr;
+  int xx1, yy1, xx2, yy2, i;
+
+  xx2 = x + (cos(smooth_squiggle_angle * M_PI / 180.0) * smooth_squiggle_rad);
+  yy2 = y - (sin(smooth_squiggle_angle * M_PI / 180.0) * smooth_squiggle_rad);
+
+  for (i = 0; i < 3; i++) {
+    xx1 = xx2;
+    yy1 = yy2;
+
+    if (which == TOOL_LOOPS) {
+      smooth_squiggle_angle += 5;
+      smooth_squiggle_rad = LOOP_RAD_CALC;
+    } else if (which == TOOL_SQUIGGLES) {
+      smooth_squiggle_angle += (rand() % 5) + 5;
+      smooth_squiggle_rad += ((rand() % 3 * smooth_size) - smooth_size);
+      if (smooth_squiggle_rad < 5) {
+        smooth_squiggle_rad += 5;
+      } else if (smooth_squiggle_rad >= 15 * smooth_size) {
+        smooth_squiggle_rad -= ((rand() % 10) + 10);
+      }
+    }
+
+    xx2 = x + (cos(smooth_squiggle_angle * M_PI / 180.0) * smooth_squiggle_rad);
+    yy2 = y - (sin(smooth_squiggle_angle * M_PI / 180.0) * smooth_squiggle_rad);
+
+    api->line((void *)api, which, canvas, last, xx1, yy1, xx2, yy2, 1, smooth_linecb);
+  }
+
+  if (smooth_squiggle_angle >= 360) {
+    smooth_squiggle_angle -= 360;
+  }
+}
+
+void smooth_drag(magic_api * api, int which,
+                      SDL_Surface * canvas,
+                      SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+{
+  if (which == TOOL_SMOOTH) {
+    if (num_input_points >= MAX_CTRL_POINTS) {
+      return;
+    }
     smooth_capture = (smooth_capture + 1) % 4;
 
     if (smooth_capture == 1) {
@@ -160,97 +259,125 @@ void smooth_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
       smooth_control_points[num_input_points].x = x;
       smooth_control_points[num_input_points].y = y;
     }
+  }
 
+  if (which == TOOL_SMOOTH) {
     api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, smooth_linecb);
+  } else if (which == TOOL_SQUIGGLES || which == TOOL_LOOPS) {
+    api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, smooth_squiggle_linecb);
   }
 
-  if (ox > x)
-  {
-    int tmp = ox;
+  if (which == TOOL_SMOOTH) {
+    if (ox > x)
+    {
+      int tmp = ox;
 
-    ox = x;
-    x = tmp;
+      ox = x;
+      x = tmp;
+    }
+    if (oy > y)
+    {
+      int tmp = oy;
+
+      oy = y;
+      y = tmp;
+    }
+
+    // FIXME
+    update_rect->x = ox - 16;
+    update_rect->y = oy - 16;
+    update_rect->w = (x + 16) - update_rect->x;
+    update_rect->h = (y + 16) - update_rect->y;
+  } else if (which == TOOL_LOOPS) {
+    // FIXME
+    update_rect->x = 0;
+    update_rect->y = 0;
+    update_rect->w = canvas->w;
+    update_rect->h = canvas->h;
+  } else if (which == TOOL_SQUIGGLES) {
+    // FIXME
+    update_rect->x = 0;
+    update_rect->y = 0;
+    update_rect->w = canvas->w;
+    update_rect->h = canvas->h;
   }
-  if (oy > y)
-  {
-    int tmp = oy;
 
-    oy = y;
-    y = tmp;
-  }
-
-  // FIXME
-  update_rect->x = ox - 16;
-  update_rect->y = oy - 16;
-  update_rect->w = (x + 16) - update_rect->x;
-  update_rect->h = (y + 16) - update_rect->y;
-
-  api->playsound(smooth_snd, (x * 255) / canvas->w, 255); // FIXME
+  api->playsound(smooth_snds[which], (x * 255) / canvas->w, 255);
 }
 
-void smooth_click(magic_api * api ATTRIBUTE_UNUSED,
-                  int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                  SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void smooth_click(magic_api * api,
+                  int which, int mode ATTRIBUTE_UNUSED,
+                  SDL_Surface * canvas, SDL_Surface * last,
+                  int x, int y, SDL_Rect * update_rect)
 {
   num_input_points = 0;
   smooth_control_points[num_input_points].x = x;
   smooth_control_points[num_input_points].y = y;
 
   smooth_capture = 0;
-  api->playsound(smooth_snd, (x * 255) / canvas->w, 255); // FIXME
+  if (which == TOOL_SQUIGGLES) {
+    smooth_squiggle_angle = 0;
+    smooth_squiggle_rad = 0;
+    smooth_drag(api, which, canvas, last, x, y, x, y, update_rect);
+  } else if (which == TOOL_LOOPS) {
+    smooth_squiggle_angle = 0;
+    smooth_squiggle_rad = LOOP_RAD_CALC;
+    smooth_drag(api, which, canvas, last, x, y, x, y, update_rect);
+  }
 }
 
 
-void smooth_release(magic_api * api ATTRIBUTE_UNUSED,
+void smooth_release(magic_api * api,
                          int which ATTRIBUTE_UNUSED,
                          SDL_Surface * canvas,
                          SDL_Surface * last,
                          int x, int y, SDL_Rect * update_rect)
 {
-  Point2D *curve;
-  int p, i, n_points;
+  if (which == TOOL_SMOOTH) {
+    Point2D *curve;
+    int p, i, n_points;
 
-  for (p = 0; p < 4; p++) {
-    num_input_points++;
-    smooth_control_points[num_input_points].x = x;
-    smooth_control_points[num_input_points].y = y;
-  }
-
-  SDL_BlitSurface(last, NULL, canvas, NULL);
-
-  for (p = 0; p < num_input_points - 3; p += 3) {
-    n_points = smooth_dist(smooth_control_points[p + 0].x,
-                           smooth_control_points[p + 0].y,
-                           smooth_control_points[p + 1].x,
-                           smooth_control_points[p + 1].y) +
-               smooth_dist(smooth_control_points[p + 1].x,
-                           smooth_control_points[p + 1].y,
-                           smooth_control_points[p + 2].x,
-                           smooth_control_points[p + 2].y) +
-               smooth_dist(smooth_control_points[p + 2].x,
-                           smooth_control_points[p + 2].y,
-                           smooth_control_points[p + 3].x,
-                           smooth_control_points[p + 3].y);
-
-    if (n_points == 0)
-      continue;                     // No-op; not any points to plot
-
-
-    curve = (Point2D *) malloc(sizeof(Point2D) * n_points);
-
-    smooth_ComputeBezier(smooth_control_points + p, n_points, curve);
-
-    for (i = 0; i < n_points - 1; i++)
-    {
-      api->line((void *)api, which, canvas, last, curve[i].x, curve[i].y, curve[i + 1].x, curve[i + 1].y, 1, smooth_linecb);
+    for (p = 0; p < 4; p++) {
+      num_input_points++;
+      smooth_control_points[num_input_points].x = x;
+      smooth_control_points[num_input_points].y = y;
     }
 
-    free(curve);
-    api->update_progress_bar();
+    SDL_BlitSurface(last, NULL, canvas, NULL);
+
+    for (p = 0; p < num_input_points - 3; p += 3) {
+      n_points = smooth_dist(smooth_control_points[p + 0].x,
+                             smooth_control_points[p + 0].y,
+                             smooth_control_points[p + 1].x,
+                             smooth_control_points[p + 1].y) +
+                 smooth_dist(smooth_control_points[p + 1].x,
+                             smooth_control_points[p + 1].y,
+                             smooth_control_points[p + 2].x,
+                             smooth_control_points[p + 2].y) +
+                 smooth_dist(smooth_control_points[p + 2].x,
+                             smooth_control_points[p + 2].y,
+                             smooth_control_points[p + 3].x,
+                             smooth_control_points[p + 3].y);
+
+      if (n_points == 0)
+        continue;                     // No-op; not any points to plot
+
+
+      curve = (Point2D *) malloc(sizeof(Point2D) * n_points);
+
+      smooth_ComputeBezier(smooth_control_points + p, n_points, curve);
+
+      for (i = 0; i < n_points - 1; i++)
+      {
+        api->line((void *)api, which, canvas, last, curve[i].x, curve[i].y, curve[i + 1].x, curve[i + 1].y, 1, smooth_linecb);
+      }
+
+      free(curve);
+      api->update_progress_bar();
+    }
   }
 
-  api->playsound(smooth_snd, (x * 255) / canvas->w, 255); // FIXME
+  api->stopsound();
 
   update_rect->x = 0;
   update_rect->y = 0;
@@ -261,20 +388,20 @@ void smooth_release(magic_api * api ATTRIBUTE_UNUSED,
 
 void smooth_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 {
-  if (smooth_snd != NULL)
-    Mix_FreeChunk(smooth_snd);
+  int i;
+
+  for (i = 0; i < NUM_TOOLS; i++) {
+    if (smooth_snds[i] != NULL)
+      Mix_FreeChunk(smooth_snds[i]);
+  }
 }
 
-void smooth_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
+void smooth_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                           SDL_Surface * canvas,
                            SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
                            SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
-  if (smooth_r == r && smooth_g == g && smooth_b == b)
-    return;
-
-  smooth_r = r;
-  smooth_g = g;
-  smooth_b = b;
+  smooth_color = SDL_MapRGB(canvas->format, r, g, b);
 }
 
 int smooth_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
@@ -368,19 +495,19 @@ int smooth_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 }
 
 
-Uint8 smooth_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                                 int mode ATTRIBUTE_UNUSED)
+Uint8 smooth_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
-  return 0;
+  return smooth_sizes[which];
 }
 
-Uint8 smooth_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 smooth_default_size(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
-  return 0;
+  return smooth_sizes[which] / 2;
 }
 
 void smooth_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
                           SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                          Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                          Uint8 size, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
+  smooth_size = size;
 }

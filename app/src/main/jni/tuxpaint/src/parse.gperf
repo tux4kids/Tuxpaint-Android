@@ -40,6 +40,7 @@ struct cfg
 /* Prototypes of what's in tuxpaint.c: */
 void show_version(int details);
 void show_usage(int exitcode);
+void show_fonts(void);
 
 static void imm_version(void)
 {
@@ -60,6 +61,11 @@ static void imm_help(void)
 {
   show_version(0);
   show_usage(0);
+}
+
+static void imm_fonts(void)
+{
+  show_fonts();
 }
 
 static void imm_copying(void)
@@ -117,6 +123,7 @@ fancycursors,        NEGBOOL(no_fancy_cursors)
 fullscreen,          MULTI(parsertmp_fullscreen_native)
 grab,                POSBOOL(grab_input)
 help,                IMM(help)
+listfonts,           IMM(fonts)
 hidecursor,          POSBOOL(hide_cursor)
 keyboard,            POSBOOL(keymouse)
 label,               NEGBOOL(disable_label)
@@ -143,6 +150,7 @@ printdelay,          MULTI(print_delay)
 reversesort,         POSBOOL(reversesort)
 quit,                NEGBOOL(disable_quit)
 save,                NEGBOOL(disable_save)
+erase,               NEGBOOL(disable_erase)
 savedir,             MULTI(savedir)
 saveover,            POSBOOL(_promptless_save_over)
 saveoverask,         POSBOOL(_promptless_save_over_ask)
@@ -156,10 +164,12 @@ stampcontrols,       NEGBOOL(disable_stamp_controls)
 stamps,              NEGBOOL(dont_load_stamps)
 stampsize,           MULTI(stamp_size_override)
 stamprotation,       NEGBOOL(no_stamp_rotation)
+templateexport,      NEGBOOL(disable_template_export)
 startblank,          POSBOOL(start_blank)
 startlast,           NEGBOOL(start_blank)
 sysconfig,           POSBOOL(parsertmp_sysconfig)
 sysfonts,            NEGBOOL(no_system_fonts)
+uifont,              MULTI(tp_ui_font)
 uppercase,           POSBOOL(only_uppercase)
 usage,               IMM(usage)
 verbose-version,     IMM(verbose_version)

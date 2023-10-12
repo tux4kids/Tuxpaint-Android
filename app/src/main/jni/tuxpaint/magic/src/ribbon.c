@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: May 15, 2023
+  Last updated: May 23, 2023
 */
 
 #include <stdio.h>
@@ -44,6 +44,7 @@ static Uint8 ribbon_r, ribbon_g, ribbon_b;
 static Uint32 ribbon_segment_color;
 static int ribbon_x[MAX_LENGTH], ribbon_y[MAX_LENGTH];
 static int ribbon_tail = 0, ribbon_head = 0;
+static double ribbon_old_angle;
 static Mix_Chunk *ribbon_snd;
 
 int ribbon_init(magic_api * api, Uint32 disabled_features);
@@ -88,7 +89,7 @@ int ribbon_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%ssounds/magic/rainbow.wav", api->data_directory); // FIXME
+  snprintf(fname, sizeof(fname), "%ssounds/magic/ribbon.ogg", api->data_directory);
   ribbon_snd = Mix_LoadWAV(fname);
 
   return (1);
@@ -105,7 +106,7 @@ SDL_Surface *ribbon_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
-  snprintf(fname, sizeof(fname), "%simages/magic/rainbow.png", api->data_directory); // FIXME
+  snprintf(fname, sizeof(fname), "%simages/magic/ribbon.png", api->data_directory);
 
   return (IMG_Load(fname));
 }
@@ -164,11 +165,23 @@ void ribbon_drag(magic_api * api, int which, SDL_Surface * canvas,
   if (ribbon_head == ribbon_tail)
     ribbon_tail = (ribbon_tail + 1) % ribbon_max_length;
 
+
+  angle = 0.0;
+
   if (!first_click) {
+    double x_angle;
+
+    if (sqrt((x - ox) * (x - ox) + (y - oy) * (y - oy)) > 16)
+    {
+      /* Play swooshing sfx if we're moving quickly and making a big angle */
+      x_angle = (fabs(atan2((double)(y - oy), (double)(x - ox))) * 2.0);
+      if (fabs(x_angle - ribbon_old_angle) > (M_PI / 4.0))
+        api->playsound(ribbon_snd, (x * 255) / canvas->w, 255);
+      ribbon_old_angle = x_angle;
+    }
+
     pt = ribbon_tail;
-    angle = 0.0;
     do {
-      double x_angle;
       int brt;
 
       pt2 = ((pt + 1) % ribbon_max_length);
@@ -188,7 +201,6 @@ void ribbon_drag(magic_api * api, int which, SDL_Surface * canvas,
       r = max(min(ribbon_r + brt, 255), 0);
       g = max(min(ribbon_g + brt, 255), 0);
       b = max(min(ribbon_b + brt, 255), 0);
-//      b = (Uint8) (((double) ribbon_b * angle) / M_PI);
 
       ribbon_segment_color = SDL_MapRGB(canvas->format, r, g, b);
       api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, ribbon_linecb);
@@ -200,15 +212,13 @@ void ribbon_drag(magic_api * api, int which, SDL_Surface * canvas,
   update_rect->y = 0;
   update_rect->w = canvas->w;
   update_rect->h = canvas->h;
-
-  api->playsound(ribbon_snd, (x * 255) / canvas->w, 255);
 }
 
 // Affect the canvas on click:
 void ribbon_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
                    SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
-  ribbon_head = ribbon_tail = 0;
+  ribbon_head = ribbon_tail = ribbon_old_angle = 0;
   ribbon_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 

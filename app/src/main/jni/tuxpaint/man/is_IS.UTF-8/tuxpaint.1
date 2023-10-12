@@ -1,0 +1,1623 @@
+.\" tuxpaint.1 - 2023.07.20
+.TH TUXPAINT 1 "júlí 20, 2023" "0.9.31" "Tux Paint"
+.SH NAME
+tuxpaint -- "Tux Paint", a drawing program for young children.
+
+.SH SYNOPSYS
+.B tuxpaint
+[\-\-help \-\-version \-\-verbose\-version \-\-usage \-\-copying]
+
+.TP 9
+.B tuxpaint
+[\-\-fullscreen {yes|native|no}]
+.br
+[\-\-allowscreensaver]
+.br
+[\-\-\fIWIDTH\fPx\fIHEIGHT\fP]
+.br
+[\-\-native]
+.br
+[\-\-orient=portrait]
+.br
+[\-\-buttonsize \fISIZE\fP | \-\-buttonsize auto]
+.br
+[\-\-startblank]
+.br
+[\-\-nosound]
+.br
+[\-\-nostereo]
+.br
+[\-\-noquit]
+.br
+[\-\-noprint]
+.br
+[\-\-printdelay=\fISECONDS\fP]
+.br
+[\-\-printcfg]
+.br
+[\-\-altprintalways | \-\-altprintnever]
+.br
+[\-\-papersize \fIPAPERSIZE\fP | \-\-papersize help]
+.br
+[\-\-printcommand \fICOMMAND\fP]
+.br
+[\-\-altprintcommand \fICOMMAND\fP]
+.br
+[\-\-simpleshapes]
+.br
+[\-\-uppercase]
+.br
+[\-\-grab]
+.br
+[\-\-noshortcuts]
+.br
+[\-\-nowheelmouse]
+.br
+[\-\-nobuttondistinction]
+.br
+[\-\-nofancycursors]
+.br
+[\-\-hidecursor]
+.br
+[\-\-nooutlines]
+.br
+[\-\-nostamps]
+.br
+[\-\-nostampcontrols]
+.br
+[\-\-nostamprotation]
+.br
+[\-\-nomagiccontrols]
+.br
+[\-\-nomagicsizes]
+.br
+[\-\-noshapecontrols]
+.br
+[\-\-nolabel]
+.br
+[\-\-nobrushspacing]
+.br
+[\-\-notemplateexport]
+.br
+[\-\-newcolorslast]
+.br
+[\-\-mirrorstamps]
+.br
+[\-\-colorsrows=\fIROWS\fP]
+.br
+[\-\-mouse-accessibility]
+.br
+[\-\-onscreen-keyboard]
+.br
+[\-\-onscreen-keyboard-layout \fILAYOUT\fP]
+.br
+[\-\-onscreen-keyboard-disable-change]
+.br
+[\-\-joystick-dev=\fIDEVICE\fP]
+.br
+[\-\-joystick-dev=list]
+.br
+[\-\-joystick-slowness=\fISPEED\fP]
+.br
+[\-\-joystick-threshold=\fITHRESHOLD\fP]
+.br
+[\-\-joystick-maxsteps=\fISTEPS\fP]
+.br
+[\-\-joystick-hat-timeout=\fIMILLISECONDS\fP]
+.br
+[\-\-joystick-hat-slowness=\fISPEED\fP]
+.br
+[\-\-joystick-btn-escape=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-brush=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-stamp=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-lines=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-shapes=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-text=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-label=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-magic=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-undo=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-redo=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-eraser=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-new=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-open=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-save=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-pgsetup=\fIBUTTON\fP]
+.br
+[\-\-joystick-btn-print=\fIBUTTON\fP]
+.br
+[\-\-joystick-buttons-ignore=\fIBUTTON1,BUTTON2,...\fP]
+.br
+[\-\-stampsize=\fISIZE\fP]
+.br
+[\-\-keyboard]
+.br
+[\-\-nosysfonts]
+.br
+[\-\-alllocalefonts]
+.br
+[\-\-uifont \fIFONT NAME\fP]
+.br
+[\-\-savedir \fIDIR\fP]
+.br
+[\-\-exportdir \fIDIR\fP]
+.br
+[\-\-datadir \fIDIR\fP]
+.br
+[\-\-saveover]
+.br
+[\-\-saveovernew]
+.br
+[\-\-nosave]
+.br
+[\-\-noerase]
+.br
+[\-\-autosave]
+.br
+[\-\-reversesort]
+.br
+[\-\-colorfile \fIFILE\fP]
+
+.TP 9
+.B tuxpaint (defaults)
+[\-\-windowed]
+.br
+[\-\-disablescreensaver]
+.br
+[\-\-800x600]
+.br
+[\-\-orient=landscape]
+.br
+[\-\-buttonsize 48]
+.br
+[\-\-startlast]
+.br
+[\-\-sound]
+.br
+[\-\-stereo]
+.br
+[\-\-quit]
+.br
+[\-\-print]
+.br
+[\-\-printdelay=0]
+.br
+[\-\-noprintcfg]
+.br
+[\-\-altprintmod]
+.br
+[\-\-complexshapes]
+.br
+[\-\-mixedcase]
+.br
+[\-\-dontgrab]
+.br
+[\-\-shortcuts]
+.br
+[\-\-wheelmouse]
+.br
+[\-\-buttondistinction]
+.br
+[\-\-fancycursors]
+.br
+[\-\-showcursor]
+.br
+[\-\-outlines]
+.br
+[\-\-stamps]
+.br
+[\-\-stampcontrols]
+.br
+[\-\-stamprotation]
+.br
+[\-\-magiccontrols]
+.br
+[\-\-magicsizes]
+.br
+[\-\-shapecontrols]
+.br
+[\-\-label]
+.br
+[\-\-brushspacing]
+.br
+[\-\-templateexport]
+.br
+[\-\-newcolorsfirst]
+.br
+[\-\-dontmirrorstamps]
+.br
+[\-\-stampsize=default]
+.br
+[\-\-mouse]
+.br
+[\-\-sysfonts]
+.br
+[\-\-currentlocalefont]
+.br
+[\-\-uifont=default]
+.br
+[\-\-saveoverask]
+.br
+[\-\-save]
+.br
+[\-\-erase]
+.br
+[\-\-noautosave]
+.br
+[\-\-noreversesort]
+.br
+
+.TP 9
+.B tuxpaint
+[\-\-locale \fILOCALE\fP]
+
+.TP 9
+.B tuxpaint
+[\-\-lang \fILANGUAGE\fP | \-\-lang help]
+
+.TP 9
+.B tuxpaint
+[\-\-nosysconfig]
+.br
+[\-\-nolockfile]
+
+.SH DESCRIPTION
+.PP
+\fITux Paint\fP is a drawing program for young children.  It is meant to be
+easy and fun to use.  It provides a simple interface and fixed canvas size,
+and provides access to previous images using a thumbnail browser (i.e., no
+access to the underlying filesystem).
+
+Unlike popular drawing programs like "\fIThe GIMP\fP," it has a very
+limited toolset. However, it provides a much simpler interface, and has
+entertaining, child-oriented additions such as sound effects.
+
+.SH OPTIONS - INFORMATIONAL
+.l
+\fItuxpaint\fP accepts the following options to emit information about the
+program.  It then exits immediately (without opening a graphical window).
+
+.TP 8
+.B \-\-help
+Display short, helpful information about Tux Paint.
+.TP 8
+.B \-\-version
+Output the version info.
+.TP 8
+.B \-\-verbose\-version
+Output the version info and compile-time build options.
+.TP 8
+.B \-\-usage
+Display a list of all commandline options.
+.TP 8
+.B \-\-copying
+Show the license (GNU GPL) under which Tux Paint is released.
+.TP 8
+.B \-\-listfonts
+Display a list of fonts found by Pango (and so available to Tux Paint via --uifont).
+
+.SH OPTIONS - INTERFACE
+.l
+\fItuxpaint\fP accepts the following options to alter the interface.  They
+can be used along with, instead of, or to override options set in
+configuration files. (See below.)
+
+.SS VIDEO
+.TP 8
+.B \-\-fullscreen=yes \-\-fullscreen=native \-\-fullscreen=no \-\-windowed
+Run \fITux Paint\fP in full-screen mode at its default -- or a specified --
+screen resolution ("--fullscreen=yes"); or in full-screen mode at the
+system's native resolution ("--fullscreen=native"); or run in a window
+("--fullscreen=no" or "--windowed") (default).
+
+.TP 8
+.B \-\-native
+When in fullscreen mode, use the system's default screen resolution.
+
+.TP 8
+.B \-\-\fIWIDTH\fPx\fIHEIGHT\fP
+Run \fITux Paint\fP in a particularly-sized window, or at a particular
+fullscreen resolution (if \-\-native is not used).  Default is 800x600. 
+Minimum width is 640.  Minimum height is 480.  Portrait and landscape
+orientations are both supported.  (Also see \-\-orient, below.)
+
+.TP 8
+.B \-\-orient=landscape \-\-orient=portrait
+If \-\-orient=portrait is set, asks \fITux Paint\fP to swap the WIDTH and
+HEIGHT values it uses for windowed or fullscreen mode, without having to
+actually change the WIDTH and HEIGHT values in the configuration file or on
+the command-line. (This is useful on devices where the screen can be
+rotated, e.g. tablet PCs.)
+
+.TP 8
+.B \-\-allowscreensaver \-\-disablescreensaver
+Normally, \fItuxpaint\fP disables your screensaver. Use
+\-\-allowscreensaver to prevent this from happening.
+
+.SS SOUND
+.TP 8
+.B \-\-nosound \-\-sound
+Disable or enable (default) sound.
+
+.TP 8
+.B \-\-nostereo \-\-stereo
+Disable or enable (default) stereo panning support.
+
+.SS INTERFACE SIZE
+.TP 8
+.B \-\-buttonsize \fISIZE\fP \-\-buttonsize auto
+Adjust the size of the buttons in \fITux Paint\fP's user interface, between
+24 and 192 pixels (48 is the default, and suitable for displays with 96 to
+120dpi pixel density). Use "auto" to have \fITux Paint\fP choose a button
+size based on \fITux Paint\fP's window/display size.
+
+.TP 8
+.B \-\-colorsrows=\fIROWS\fP
+How many rows of color palette buttons to show; useful when using a large
+color palette, and/or for use with coarse input devices (like eyegaze
+trackers).  It can be between 1 (default) and 3.
+
+.SS INTERFACE SIMPLIFICATION
+.TP 8
+.B \-\-simpleshapes \-\-complexshapes
+Disable or enable (default) the rotation step when using the Shape tool
+within Tux Paint.  When disabled, shapes cannot be rotated; however, the
+interface is easier (click, drag, release), which can be useful for younger
+or disabled children.
+
+.TP 8
+.B \-\-nooutlines \-\-outlines
+With "--nooutlines" enabled, much simpler outlines and 'rubber-band' lines
+are displayed when using the Lines, Shapes, Stamps and Eraser tools. (This
+can help when Tux Paint is run on slower computers, or displayed on a
+remote terminal.)
+
+.TP 8
+.B \-\-uppercase \-\-mixedcase
+With "--uppercase" enabled, all text prompts and the Text and Label drawing
+tools will display only uppercase letters.  This is useful for children who
+are not yet comfortable with the lowercase characterset.  Default mode is
+mixed case.
+
+.SS INITIAL STAMP SIZE
+.TP 8
+.B \-\-stampsize=\fISIZE\fP \-\-stampsize=default
+Overrides the default size of all stamps, relative to their possible sizes
+(determined by Tux Paint, based on the dimensions of both the stamps
+themselves, and the drawing canvas).  Valid values are from 0 (smallest) to
+10 (largest).  Use "--stampsize=default" to let Tux Paint choose on a
+per-stamp basis (this is the default setting).
+
+.SS STARTING OUT
+.TP 8
+.B \-\-startblank \-\-startlast
+When you start Tux Paint, it loads the last image that was being worked on.
+ The "\-\-startblank" option disables this, so it always starts with a
+blank canvas.  The default behavior is "\-\-startlast".
+
+.TP 8
+.B \-\-newcolorslast \-\-newcolorsfirst
+List solid (blank) colors at the end, or beginning (default) of the options
+displayed when using the New tool to start a new picture.
+
+.SS CONTROL SIMPLIFICATION
+.TP 8
+.B \-\-noquit \-\-quit
+Disable or enable (default) the on-screen Quit button and [Escape] key for
+quitting Tux Paint.  Instead, use the window close button in the titlebar,
+the [Alt]+[F4] key sequence, or the [Shift]+[Control]+[Escape] key
+sequence.
+
+.TP 8
+.B \-\-nostamps \-\-stamps
+With "--nostamps" set, Rubber Stamp images are not loaded, so the Stamps
+tool will not be available.  This option can be used to reduce the time Tux
+Paint takes to load, and reduce the amount of RAM it requires.
+
+.TP 8
+.B \-\-nostampcontrols \-\-stampcontrols
+Disable or enable (default) buttons to control stamps.  Controls include
+mirror, flip, shrink and grow.  (Note: Not all stamps will be controllable
+in all ways.)
+
+.TP 8
+.B \-\-nostamprotation \-\-stamprotation
+Disable or enable (default) the rotation step when placing a stamp in the
+drawing.
+
+.TP 8
+.B \-\-nomagiccontrols \-\-magiccontrols
+Disable or enable (default) buttons to control Magic tools.  Controls
+include controlling whether a Magic tool is used like a paint brush, or if
+it affects the entire image at once.  (Note: Not all Magic tools will be
+controllable.)
+
+.TP 8
+.B \-\-nomagicsizes \-\-magicsizes
+Disable or enable (default) Magic size controls.  (Note: Not all Magic
+tools offer size controls.)
+
+.TP 8
+.B \-\-noshapecontrols \-\-shapecontrols
+Disable or enable (default) buttons to change the Shape tool's behavior --
+shapes expanding from the center, or from a corner, where the mouse is
+initially clicked.
+
+.TP 8
+.B \-\-nolabel \-\-label
+Disable or enable (default) the Label tool, which lets you create text
+which can be altered or moved later.
+
+.TP 8
+.B \-\-nobrushspacing \-\-brushspacing
+Disable or enable (default) the brush spacing option of the Paint and Lines
+tools, which allows you to override the default spacing of a brush.
+
+.TP 8
+.B \-\-notemplateexport \-\-templateexport
+Disable or enable (default) the ability to create new Templates from saved
+drawings via the Open dialog.
+
+.TP 8
+.B \-\-noerase \-\-erase
+The --noerase option disables Tux Paint's ability to erase files (saved
+drawings, via the Open dialog, and exported templates, via the New dialog).
+Useful to prevent a user from accidentally erasing their own work, or that
+of others (especially used in combination with --saveovernew).
+
+.SH OPTIONS - CONTROLLING TUX PAINT
+.l
+\fItuxpaint\fP accepts the following options to alter how you control Tux
+Paint.  They can be used along with, instead of, or to override options set
+in configuration files. (See below.)
+
+.SS CURSOR
+.TP 8
+.B \-\-nofancycursors \-\-fancycursors
+Disable or enable (default) the 'fancy' mouse pointer shapes in Tux Paint.
+While the shapes are larger, and context sensitive, some environments have
+trouble displaying the mouse pointer, and/or leave 'trails' on the screen.
+
+.TP 8
+.B \-\-hidecursor \-\-showcursor
+Completely hide, or enable (default) the mouse pointer in Tux Paint. This
+can be useful on touchscreen devices, such as tablet PCs.
+
+.SS KEYBOARD
+.TP 8
+.B \-\-noshortcuts \-\-shortcuts
+If "--noshortcuts" mode, keyboard shortcuts (e.g., [Ctrl]+[S] for Save)
+will be disabled.  Default mode is for shortcuts to be enabled.
+
+.SS MOUSE AND ACCESSIBILITY
+.TP 8
+.B \-\-grab \-\-dontgrab
+Grab the mouse and keyboard input (if possible), so that the mouse is
+confined to the Tux Paint window.  Default is to not grab.
+
+.TP 8
+.B \-\-nowheelmouse \-\-wheelmouse
+By default, the wheel (jog dial) on a mouse will be used to scroll the
+'selector' on the right of the screen.  This can be disabled, and the wheel
+completely ignored, with the "--nowheelmouse" option. This is useful for
+children who aren't yet comfortable with the mouse. Default is to support
+the wheel.
+
+.TP 8
+.B \-\-mouse-accessibility
+In this mode, instead of clicking, dragging and releasing (e.g., to draw),
+you click, move, and click again to end the motion. ("Sticky mouse
+clicks.")
+
+.TP 8
+.B \-\-keyboard \-\-mouse
+The "--keyboard" option lets the mouse pointer in Tux Paint be controlled
+with the keyboard.  The [Up], [Down], [Left], and [Right] arrow keys move
+the pointer. [Spacebar] acts as the mouse button.
+
+.TP 8
+.B \-\-nobuttondistinction \-\-buttondistinction
+By default, only mouse button #1 (typically the leftmost mouse button on
+mice with more than one button) can be used for interacting with Tux Paint.
+ With the "--nobuttondistinction" option, mouse buttons #2 (middle) and #3
+(right) can be used, as well. This is useful for children who aren't yet
+comfortable with the mouse. Default is to only recognize button #1.
+
+.SS ONSCREEN KEYBOARD
+.TP 8
+.B \-\-onscreen-keyboard
+Presents a clickable on-screen keyboard when using the Text and Label
+tools.
+
+.TP 8
+.B \-\-onscreen-keyboard-layout \fILAYOUT\fP
+Specify the default layout for the on-screen keyboard (see above).
+
+.TP 8
+.B \-\-onscreen-keyboard-disable-change
+Disables the left/right arrow buttons visible on the on-screen keyboard,
+which are used to switch between the available on-screen keyboard layouts.
+
+.SS JOYSTICK
+.TP 8
+.B \-\-joystick-dev=\fIDEVICE\fP
+Specify which joystick device should be used by Tux Paint. Default value is
+0 (the first joystick).
+
+.TP 8
+.B \-\-joystick-dev=list
+List the system's available joysticks and exit. (Does not launch Tux
+Paint.)
+
+.TP 8
+.B \-\-joystick-slowness=\fISPEED\fP
+Sets a delay at each axis motion, allowing to slow the joystick. Allowed
+values are from 0 to 500. Default value is 15.
+
+.TP 8
+.B \-\-joystick-threshold=\fITHRESHOLD\fP
+Sets the minimum level of axis motion to start moving the pointer. Allowed
+values are from 0 to 32766. Default value is 3200.
+
+.TP 8
+.B \-\-joystick-maxsteps=\fISTEPS\fP
+Sets the maximum pixels the pointer will move at once. Allowed values are
+from 1 to 7. Default value is 7.
+
+.TP 8
+.B \-\-joystick-hat-timeout=\fIMILLISECONDS\fP
+Sets the delay after wich the pointer will start moving automatically if
+the hat is keeped pushed. Allowed values are from 0 to 3000. Default value
+is 1000.
+
+.TP 8
+.B \-\-joystick-hat-slowness=\fISPEED\fP
+Sets a delay at each automatic motion, allowing to slow the speed of the
+hat. Allowed values are from 0 to 500. Default value is 15.
+
+.TP 8
+.B \-\-joystick-btn-escape=\fIBUTTON\fP
+Selects the joystick button number, as seen by SDL, that will be used to
+generate a escape event. Useful to dismiss dialogs and quit.
+
+.TP 8
+.B \-\-joystick-btn-\fICOMMAND\fP=\fIBUTTON\fP
+Selects the joystick button number, as seen by SDL, that will be a shortcut
+to various tools within Tux Paint.
+
+.PP
+.RS
+.PD 0
+.TP 2
+-
+brush | Paint
+.TP 2
+-
+stamp | Stamp
+.TP 2
+-
+lines | Lines
+.TP 2
+-
+shapes | Shapes
+.TP 2
+-
+text | Text
+.TP 2
+-
+label | Label
+.TP 2
+-
+magic | Magic
+.TP 2
+-
+undo | Undo
+.TP 2
+-
+redo | Redo
+.TP 2
+-
+eraser | Eraser
+.TP 2
+-
+new | New
+.TP 2
+-
+open | Open
+.TP 2
+-
+save | Save
+.TP 2
+-
+pgsetup | Print (dialog)
+.TP 2
+-
+print | Print (immediate)
+.RE
+.PD
+
+.TP 8
+.B \-\-joystick-buttons-ignore=\fIBUTTON1,BUTTON2,...\fP
+A set of joystick button numbers, as seen by SDL, that should be ignored.
+Otherwise, unless they are used by one of the "--joystick-btn-..." options
+above, buttons will be seen as a mouse left-click.  Comma-separated.
+
+.SH OPTIONS - PRINTING
+.l
+\fItuxpaint\fP accepts the following options to alter how Tux Paint handles
+printing.  They can be used along with, instead of, or to override options
+set in configuration files. (See below.)
+
+.SS PRINT PERMISSIONS
+.TP 8
+.B \-\-noprint \-\-print
+Disable or enable (default) the Print command within Tux Paint.
+
+.TP 8
+.B \-\-printdelay=\fISECONDS\fP \-\-printdelay=0
+Only allow printing (via the Print command) once every SECONDS seconds. 
+Default is 0 (no limitation).
+
+.SS SHOW PRINTER DIALOG
+.TP 8
+.B \-\-altprintmod \-\-altprintnever \-\-altprintalways
+These options control whether an system printer dialog appears when the
+user clicks the Print button.  By default ("--altprintmod"), pressing [Alt]
+while clicking Print will bring up a dialog (unless you're in fullscreen
+mode).  With "--altprintalways", the dialog will always appear, even if
+[Alt] is not being held.  With "--altprintnever", the dialog will never
+appear, even if [Alt] is being held.
+
+.SS SAVE PRINTER CONFIGURATION
+.TP 8
+.B \-\-printcfg \-\-noprintcfg
+(Windows and Mac OS X only.)  Enable or disable loading and saving of
+printer settings.  By default, Tux Paint will print to the default printer
+with default settings.  Pressing [Alt] while pushing the Print button will
+cause a printer dialog to appear (as long as you're not in fullscreen mode;
+see also "--altprintalways" and "--altprintnever", below.)  Unless
+"--noprintcfg" is used, your previous settings will be loaded when Tux
+Paint starts up, and setting changes will be saved for next time.
+
+.SS PRINT COMMANDS
+.TP 8
+.B \-\-printcommand \fICOMMAND\fP
+(Only when PostScript printing is used.) Have Tux Paint print via an
+alternate command, rather than lpr(1).
+
+.TP 8
+.B \-\-altprintcommand \fICOMMAND\fP
+(Only when PostScript printing is used.) Have Tux Paint print via an
+alternate command, when a dialog is expect (e.g., when holding [Alt] while
+clicking Print; see above), rather than kprinter.
+
+.SS PAPER SIZE
+.TP 8
+.B \-\-papersize \fIPAPERSIZE\fP
+(Only when PostScript printing is used.) Ask Tux Paint to generate
+PostScript of a particular paper size. Valid sizes are those supported by
+libpaper.  See papersize(5).
+
+.SH OPTIONS - SAVING
+.l
+\fItuxpaint\fP accepts the following options to alter how Tux Paint
+operates when saving or exporting drawings.  They can be used along with,
+instead of, or to override options set in configuration files. (See below.)
+
+.SS SAVE OVER EARLIER WORK
+.TP 8
+.B \-\-saveover \-\-saveovernew \-\-saveoverask
+If, when saving a picture, an older version of the file will be
+overwritten, Tux Paint will, by default, ask for confirmation: either save
+over the old file, or create a new file.  This prompt can be disabled with
+"--saveover" (which always saves over older versions of pictures) or
+"--saveovernew" (which always saves a new file). The default is to prompt
+("--saveoverask").
+
+.SS SAVE AND EXPORT DIRECTORIES
+.TP 8
+.B \-\-savedir \fIDIR\fP
+Specify where Tux Paint should save and load its drawings.
+
+.TP 8
+.B \-\-exportdir \fIDIR\fP
+Specify where Tux Paint should export drawings and animations.
+
+.SS MORE SAVING OPTIONS
+.TP 8
+.B \-\-nosave \-\-save
+The --nosave option disables Tux Paint's ability to save files. This can be
+used in situations where the program is only being used for fun, or in a
+test environment.
+
+.TP 8
+.B \-\-autosave \-\-noautosave
+The --autosave option prevents Tux Paint from asking whether you want to
+save the current picture when quitting, and assumes you do.
+
+.TP 8
+.B \-\-reversesort \-\-noautosave
+The --reversesort option causes Tux Paint's Open and Slideshow dialogs to
+display the oldest images at the top of the list (normally the newest
+appear at the top, and the oldest at the bottom.
+
+.SH OPTIONS - DATA FILES
+.l
+\fItuxpaint\fP accepts the following options to alter where Tux Paint loads
+data (stamps, brushes, etc.)  They can be used along with, instead of, or
+to override options set in configuration files. (See below.)
+
+.TP 8
+.B \-\-datadir \fIDIR\fP
+Specify where Tux Paint should look for personal data files (brushes,
+stamps, etc.).
+
+.TP 8
+.B \-\-colorfile \fIFILE\fP
+This option allows you to override the default color palette in Tux Paint
+and replace it with your own. The file should be a plain ASCII text file
+containing one color description per line. Colors may be in decimal or 6-
+or 3-digit hexadecimal, and followed by a description. (For example,
+"\fI#000 Black\fP" and "\fI255 192 64 Orange\fP".)
+
+.SH OPTIONS - LANGUAGE
+.l
+\fItuxpaint\fP accepts the following options to alter the language used by
+Tux Paint's interface, and other related settings.  They can be used along
+with, instead of, or to override options set in configuration files. (See
+below.)
+
+.l
+Various parts of Tux Paint have been translated into numerous languages.
+Tux Paint will try its best to honor your locale setting (i.e., the "LANG"
+environment variable), if possible. You can also specifically set the
+language using options on the command-line or in a configuration file.
+
+.TP 8
+.B \-\-locale \fILOCALE\fP
+Specify the language to use, based on locale name (which is typically of
+the form "language[_territory][.codeset][@modifier], where "language" is an
+ISO 639 language code, "territory" is an ISO 3166 country code, and
+"codeset" is a character set or encoding identifier like "ISO-8859-1" or
+"UTF-8".)
+.PP
+.RS
+For example, "de_DE@euro" for German, or "pt_BR" for Brazilian Portuguese.
+.RE
+
+.TP 8
+.B \-\-lang \fILANGUAGE\fP
+Specify the language to use, based on the language's name (as recognized by
+Tux Paint).  Choose one of the language names listed below:
+.PP
+.RS
+.PD 0
+.TP 2
+-
+english | american-english
+.TP 2
+-
+acholi | acoli
+.TP 2
+-
+afrikaans
+.TP 2
+-
+akan | twi-fante
+.TP 2
+-
+albanian
+.TP 2
+-
+amharic
+.TP 2
+-
+arabic
+.TP 2
+-
+aragones
+.TP 2
+-
+armenian | hayeren
+.TP 2
+-
+assamese
+.TP 2
+-
+asturian
+.TP 2
+-
+azerbaijani
+.TP 2
+-
+australian-english
+.TP 2
+-
+bambara
+.TP 2
+-
+basque | euskara
+.TP 2
+-
+belarusian | bielaruskaja
+.TP 2
+-
+bengali
+.TP 2
+-
+bodo
+.TP 2
+-
+bokmal
+.TP 2
+-
+bosnian
+.TP 2
+-
+brazilian-portuguese | portugues-brazilian | brazilian
+.TP 2
+-
+breton | brezhoneg
+.TP 2
+-
+british | british-english
+.TP 2
+-
+bulgarian
+.TP 2
+-
+canadian-english
+.TP 2
+-
+catalan | catala
+.TP 2
+-
+chinese | simplified-chinese
+.TP 2
+-
+croatian | hrvatski
+.TP 2
+-
+czech | cesky
+.TP 2
+-
+danish | dansk
+.TP 2
+-
+dogri
+.TP 2
+-
+dutch | nederlands
+.TP 2
+-
+esperanto
+.TP 2
+-
+estonian
+.TP 2
+-
+faroese
+.TP 2
+-
+finnish | suomi
+.TP 2
+-
+french | francais
+.TP 2
+-
+fula | fulah | pulaar-fulfulde
+.TP 2
+-
+gaelic | irish-gaelic | gaidhlig
+.TP 2
+-
+galician | galego
+.TP 2
+-
+georgian
+.TP 2
+-
+german | deutsch
+.TP 2
+-
+greek
+.TP 2
+-
+gronings | zudelk-veenkelonioals
+.TP 2
+-
+gujarati
+.TP 2
+-
+hebrew
+.TP 2
+-
+hindi
+.TP 2
+-
+hungarian | magyar
+.TP 2
+-
+icelandic | islenska
+.TP 2
+-
+indonesian | bahasa-indonesia
+.TP 2
+-
+inuktitut
+.TP 2
+-
+italian | italiano
+.TP 2
+-
+japanese
+.TP 2
+-
+kabyle | kabylian
+.TP 2
+-
+kannada
+.TP 2
+-
+kashmiri-devanagari
+.TP 2
+-
+kashmiri-perso-arabic
+.TP 2
+-
+kiga | chiga
+.TP 2
+-
+kinyarwanda
+.TP 2
+-
+khmer
+.TP 2
+-
+klingon | tlhIngan
+.TP 2
+-
+konkani-devanagari
+.TP 2
+-
+konkani-roman
+.TP 2
+-
+korean
+.TP 2
+-
+kurdish
+.TP 2
+-
+latvian
+.TP 2
+-
+lithuanian | lietuviu
+.TP 2
+-
+luganda
+.TP 2
+-
+luxembourgish | letzebuergesch
+.TP 2
+-
+macedonian
+.TP 2
+-
+maithili
+.TP 2
+-
+malay
+.TP 2
+-
+malayalam
+.TP 2
+-
+manipuri-bengali
+.TP 2
+-
+manipuri-meitei-mayek
+.TP 2
+-
+marathi
+.TP 2
+-
+mexican-spanish | espanol-mejicano | mexican
+.TP 2
+-
+mongolian
+.TP 2
+-
+ndebele
+.TP 2
+-
+nepali
+.TP 2
+-
+northern-sotho | sesotho-sa-leboa
+.TP 2
+-
+norwegian | nynorsk | norsk
+.TP 2
+-
+occitan
+.TP 2
+-
+odia | oriya
+.TP 2
+-
+ojibway | ojibwe
+.TP 2
+-
+persian
+.TP 2
+-
+polish | polski
+.TP 2
+-
+portuguese | portugues
+.TP 2
+-
+punjabi | panjabi
+.TP 2
+-
+romanian
+.TP 2
+-
+russian | russkiy
+.TP 2
+-
+sanskrit
+.TP 2
+-
+santali-devanagari
+.TP 2
+-
+santali-ol-chiki
+.TP 2
+-
+sardinian
+.TP 2
+-
+scottish | scottish-gaelic | ghaidhlig
+.TP 2
+-
+serbian
+.TP 2
+-
+serbian-latin
+.TP 2
+-
+shuswap | secwepemctin
+.TP 2
+-
+shuswap-devanagari
+.TP 2
+-
+sindhi-perso-arabic
+.TP 2
+-
+slovak
+.TP 2
+-
+slovenian | slovensko
+.TP 2
+-
+songhay
+.TP 2
+-
+southafrican-english
+.TP 2
+-
+spanish | espanol
+.TP 2
+-
+sundanese
+.TP 2
+-
+swahili
+.TP 2
+-
+swedish | svenska
+.TP 2
+-
+tagalog
+.TP 2
+-
+tamil
+.TP 2
+-
+telugu
+.TP 2
+-
+thai
+.TP 2
+-
+tibetan
+.TP 2
+-
+traditional-chinese
+.TP 2
+-
+turkish
+.TP 2
+-
+twi
+.TP 2
+-
+ukrainian
+.TP 2
+-
+urdu
+.TP 2
+-
+valencian
+.TP 2
+-
+venda
+.TP 2
+-
+venetian | veneto
+.TP 2
+-
+vietnamese
+.TP 2
+-
+walloon | walon
+.TP 2
+-
+welsh | cymraeg
+.TP 2
+-
+wolof
+.TP 2
+-
+xhosa
+.TP 2
+-
+zapotec | miahuatlan-zapotec
+.TP 2
+-
+zulu
+.RE
+.PD
+
+.TP 8
+.B \-\-lang help
+Display a lists of all supported languages.
+
+.TP 8
+.B \-\-mirrorstamps \-\-dontmirrorstamps
+With "--mirrorstamps" set, stamps which can be mirrored will appear
+mirrored by default.  This can be useful when used by people who prefer
+things right-to-left over left-to-right.
+
+.SS FONTS
+.TP 8
+.B \-\-nosysfonts \-\-sysfonts
+Tux Paint normally attempts to search for additional TrueType Fonts
+installed in common places on your system.  If this causes trouble, or
+you'd prefer to only make fonts installed in Tux Paint's directory
+available, use the "--nosysfonts" option to disable this feature.
+
+.TP 8
+.B \-\-alllocalefonts \-\-currentlocalefont
+Tux Paint avoids loading any fonts found in its "locale" font subdirectory,
+except any that match the current locale Tux Paint is running under. Use
+the "--alllocalefonts" option to load all such fonts, for use in the Text
+and Label tools. (This was the default behavior, prior to version 0.9.21.)
+
+.TP 8
+.B \-\-uifont=\fI"FONT NAME"\fP \-\-uifont=default
+Specify the name of a font for Tux Paint to attempt to use for its user
+interface (UI) -- button labels, dialog pop-up text, instructional text at
+the bottom. If left unspecified, or "default" is given, then "DejaVu Sans"
+will be used. (This was the default behavior, prior to version 0.9.31.)
+
+.SH OPTIONS - MISCELLANEOUS
+.l
+\fItuxpaint\fP accepts the following options to alter its behavior. They
+can be used along with, instead of, or to override options set in
+configuration files. (See below.)
+
+.TP 8
+.B \-\-nosysconfig
+With this option, Tux Paint will not attempt to read the system-wide
+configuration file (typically "/etc/tuxpaint/tuxpaint.conf" or
+"/usr/local/etc/tuxpaint/tuxpaint.conf").
+
+.TP 8
+.B \-\-nolockfile
+By default, Tux Paint uses a lockfile (stored in the user's local Tux Paint directory) which prevents it from being launched more than once in 30 seconds. (Sometimes children get too eager, or user interfaces only require one click, but users think they need to double-click.) This option makes Tux Paint ignore the current lockfile.
+
+.SH ENVIRONMENT
+.ad l
+While Tux Paint may refer to a number of environment variables indirectly
+(e.g., via SDL(3)), it directly accesses the following: (See "FILES" below,
+as well.)
+.PP
+.TP 8
+.B HOME
+to determine where picture files go when using the Save and Open commands
+within Tux Paint, to keep track of the current image, when quitting and
+restarting Tux Paint, and to get the user's configuration file.
+
+.TP 8
+.B LANG, LC_ALL, LANGUAGE, and LC_MESSAGES
+to determine language to use, if setlocale(3) refers to "LC_MESSAGES".
+
+.TP 8
+.B SDL_VIDEO_ALLOW_SCREENSAVER
+Set this environment variable to '1' to allow a screensaver to appear while
+Tux Paint is running. This can also be done via the "--allowscreensaver"
+option.
+
+.TP 8
+.B SDL_VIDEO_WINDOW_POS
+If this is NOT set, Tux Paint will set it to "center", to attempt to place
+the Tux Paint window in the center of a display. If it IS set (e.g., to
+"nopref", meaning "no preference"), Tux Paint will not override it.
+
+.SH FILES
+.TP 8
+.B [/usr/local/]/etc/tuxpaint/tuxpaint.conf
+System-wide configuration file.  It is read first (unless the
+"--nosysconfig" option was given on the command-line).
+.RS
+.PP
+(Created during installation.)
+.RE
+.TP 8
+.B $HOME/.tuxpaintrc
+User's configuration file.  It can be used to set default options (rather
+than setting them on the command-line every time), and/or to override any
+settings in the system-wide configuration file.
+.RS
+.PP
+(Not created or edited automatically; must be created manually. You can do
+this by hand, or use tuxpaint-config(1).)
+.RE
+.TP 8
+.B $HOME/.tuxpaint/saved/
+A directory of previously-saved images (and thumbnails).  Only files in
+this directory will be made available using the Open command within Tux
+Paint.  Overridden via the "--savedir" option.
+.RS
+.PP
+(Created when Save command is used.)
+.RE
+.TP 8
+.B $HOME/.tuxpaint/current_id.txt
+A reference to the image which was being edited when Tux Paint was last
+quit.  (This image is automatically loaded the next time Tux Paint is
+re-run, unless the "--startblank" option is set.)
+.RS
+.PP
+(Created when Tux Paint is Quit.)
+.RE
+.TP 8
+.B $HOME/.tuxpaint/lockfile.dat
+A lockfile that prevents Tux Paint from being launched more than once every
+30 seconds.  Disable checking the lockfile by using the "--nolockfile"
+option.
+.RS
+.PP
+(There's no reason to delete the lockfile, as it contains a timestamp
+inside which causes it to expire after 30 seconds.)
+.RE
+.TP 8
+.B $XDG_CONFIG_HOME[XDG_PICTURES_DIR]/TuxPaint/
+A directory where images and animations should be exported (via options
+found in Tux Paint's Open dialog), if the "--exportdir" option is not used
+to override it.  If "$XDG_CONFIG_HOME" is set, a configuration file
+"user-dirs.dirs" will be scanned within the directory it points to; if not,
+Tux Paint will attempt to do so within "$HOME/.config/".  If a setting
+named "XDG_PICTURES_DIR" is found, it will be used as the location to
+export images. If all else fails, then "$HOME/Pictures/" will be used.  A
+"TuxPaint" subdirectory will be created.
+.TP 8
+.B $XDG_DATA_HOME/Trash/ or $HOME/.local/share/Trash/
+A directory where images are placed when the Erase option is used from the
+Open dialog.
+
+.SH COPYRIGHT
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 2 of the License, or (at your option)
+any later version.
+
+.SH OTHER INFO
+See the documentation that comes with Tux Paint for further instructions on using the program's features.
+
+The canonical place to find Tux Paint information is at
+.nh
+https://tuxpaint.org/.
+.hy
+
+.SH AUTHORS
+Lead developer and project manager: Bill Kendrick
+.nh
+<bill@newbreedsoftware.com>.
+.hy
+
+With patches, fixes, extensions, porting, translations, documentation, and
+more from lots of people, including, but probably not limited to (see
+AUTHORS.txt and CHANGES.txt):
+
+Aki,
+Ashish Arora,
+Khalid Al Holan,
+Daniel Andersson,
+Hodorog Andrei,
+Joana Portia Antwi-Danso,
+Adorilson Bezerra de Araujo,
+Xandru Armesto,
+Ben Armstrong,
+Ravishankar Ayyakkannu,
+
+Dwayne Bailey,
+Matías Bellone,
+Martin Benjamin,
+Besnik Bleta,
+Denis Bodor,
+Rahul Borade,
+Yacine Bouklif,
+Miguel Anxo Bouzada,
+René Brandenburger,
+Herman Bruyninckx,
+Lucie Burianova,
+Laurentiu Buzdugan,
+
+Albert Cahalan,
+Pere Pujal i Carabantes,
+Hugo Carvalho,
+Felipe Castro,
+Ouychai Chaita,
+Zdenek Chalupský,
+Wei-Lun Chao,
+Jacques Chion,
+Ankit Choudary,
+Yuri Chornoivan,
+Abdoul Cisse,
+Urska Colner,
+Adam 'akanewbie' Corcoran,
+Helder Correia,
+Ricardo Cruz,
+
+Magnus Dahl,
+Laurent Dhima,
+Chandrakant Dhutadmal,
+Yavor Doganov,
+Joe Dalton,
+Tim Dickson,
+Dawa Dolma,
+Kevin Donnelly,
+Dovix,
+Korvigellou An Drouizig (Philippe),
+Serhij Dubyk,
+
+Ander Elortondo,
+Alberto Escudero-Pascual,
+
+T. Surya Fajri,
+Jamil Farzana,
+Sveinn í Felli,
+Doruk Fisek,
+Flavia Floris,
+Fòram na Gàidhlig,
+Fabian Franz,
+Derrick Frimpong,
+Martin Fuhrer,
+Fula Localization Project,
+
+Alexander Gabillondo,
+Gabriel Gazzan,
+Robert Buj Gelonch,
+Alexander Geroimenko,
+Torsten Giebl,
+Harvey Ginter,
+Solomon Gizaw,
+Robert Glowczynski,
+Chris Goerner,
+Mikel González,
+Volker Grabsch,
+The Greek Linux i18n Team,
+Edmund GRIMLEY EVANS,
+Frederico Goncalves Guimaraes,
+
+Joe Hanson,
+Sam "Criswell" Hart,
+Guy Hed,
+Farinaz Hedayat,
+Prasanta Hembram,
+Willem Heppe,
+Tedi Heriyanto,
+Pjetur G. Hjaltason,
+Knut Erik Hollund,
+Henrik Holst,
+Khaled Hosny,
+Henry House,
+Mohomodou Houssouba,
+Song Huang,
+Karl Ove Hufthammer,
+
+Roland Illig,
+Daniel Illingworth,
+Indigenas Sin Fronteras,
+Juan Irigoien,
+Students of Vocational Higher Secondary School Irimpanam,
+Ivana Rakic,
+Dmitriy Ivanov,
+
+Mogens Jaeger,
+Lis Gøthe í Jákupsstovu,
+Nedjeljko Jedvaj,
+Aleksandar Jelenak,
+Rasmus Erik Voel Jensen,
+Lauri Jesmin,
+Wang Jian,
+Amed Ç. Jiyan,
+Petri Jooste,
+Richard June,
+
+Andrej Kacian,
+Thomas Kalka,
+Jorma Karvonen,
+Yannis Kaskamanidis,
+Kazuhiko,
+Gabor Kelemen,
+Mark Kim,
+Thomas Klausner,
+Koby,
+Marcin 'Shard' Konicki,
+Ines Kovacevic,
+Mantas Kriauciunas,
+Freek de Kruijf,
+Andrzej M. Krzysztofowicz,
+Piotr Kwilinski,
+Serafeim Kyriaki,
+
+Matthew Lange,
+Fabio Lazarin,
+Niko Lewman,
+Arkadiusz Lipiec,
+Ricky Lontoc,
+Dag H. Loras,
+Burkhard Luck,
+
+Nuno Magalhães,
+Vincent Mahlangu,
+Ankit Malik,
+Neskie Manuel,
+Fred Ulisses Maranhao,
+Yannig MARCHEGAY (Kokoyaya),
+Jorge Mariano,
+Martin,
+Sergio Marques,
+Pheledi Mathibela,
+Scott McCreary,
+Marco Milanesi,
+Never Min,
+Kartik Mistry,
+Mugunth,
+Benson Muite,
+Steve Murphy,
+Samuel Murray (Groenkloof),
+
+Shumani Mercy Nehulaudzi,
+Mikkel Kirkgaard Nielsen,
+Alesis Novik,
+Nudjaree,
+Daniel Nylander,
+
+Olli,
+Sven Ollino,
+James Olweny,
+Teresa Orive,
+Gareth Owen,
+
+Quentin PAGÈS,
+Sorin Paliga,
+Yannis Papatzikos,
+Nikolay Parukhin,
+Alessandro Pasotti,
+Flavio Pastor,
+Patrick,
+George Patrick,
+Primoz Peterlin,
+Le Quang Phan,
+Henrik Pihl,
+Auk Piseth,
+Pablo Pita,
+Milan Plzik,
+Eric Poncet,
+Sergei Popov,
+John Popplewell,
+
+Adam 'foo-script' Rakowski,
+Rodrigo Perez Ramirez and Indigenas Sin Fronteras,
+Sebastian Rasmussen,
+Robert Readman,
+Leandro Regueiro,
+Samir Ribić,
+Jozef Říha,
+Simona Riva,
+Robin Rosenberg,
+Ilir Rugova,
+Jaroslav Rynik,
+
+Bert Saal,
+Ibraahiima SAAR,
+Saikumar,
+Samuel Sarpong,
+Kevin Patrick Scannell,
+Stephanie Schilling,
+Luc 'Begasus' Schrijvers,
+Kiriaki SERAFEIM,
+Pavithran Shakamuri,
+Gia Shervashidze,
+Clytie Siddall,
+Kliment Simoncev,
+Tomas Skäre,
+Sokratis Sofianopoulos,
+Khoem Sokhem,
+Geert Stams,
+Peter Sterba,
+Raivis Strogonovs,
+Luis C. Suárez,
+Sugar Labs i18n team,
+
+Tomasz 'karave' Tarach,
+Michal Terbert,
+Ignacia Tike,
+Tilo,
+Tarmo Toikkanen,
+TOYAMA Shin-ichi,
+Niall Tracey,
+Gerasim Troeglazov,
+tropikhajma,
+Florence Tushabe,
+
+Matej Urbančič,
+
+Rita Verbauskaite,
+Daniel Jose Viana,
+Charles Vidal,
+
+Darrell Walisser,
+Frank Weng,
+
+Damian Yerrick,
+
+Muhammad Najmi Ahmad Zabidi,
+臧传明,
+Eugene Zelenko,
+Martin Zhekov,
+and
+Huang Zuzhen.
+
+.SH SEE ALSO
+.BR tuxpaint-import (1),
+.BR tuxpaint-config (1),
+.BR tp-magic-config (1),
+.BR xpaint (1),
+.BR gpaint (1),
+.BR gimp (1),
+.BR kolourpaint (1),
+.BR krita (1),
+.BR gcompris (1)
+.PP
+And documentation within /usr/[local/]share/doc/tuxpaint/.

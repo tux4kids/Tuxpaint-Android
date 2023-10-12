@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            バージョン 0.9.30          </h1>
+            バージョン 0.9.31          </h1>
 
           <h2>
             各種設定について          </h2>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            2023年5月18日          </p>
+            2023年7月20日          </p>
         </center>
       </header>
 
@@ -121,7 +121,7 @@
           <td>
             <ul>
               <li><a href="#tpc">Tux Paint 設定ツール</a></li>              <li><a href="#cfg-file">設定ファイルについて</a></li>              <li><a href="#available">利用可能なオプション</a>                <ul>
-                  <li><a href="#video_sound">画面・音声</a></li>                  <li><a href="#mouse_keyboard">マウス・キーボード</a></li>                  <li><a href="#simplification">単純化</a></li>                  <li><a href="#languages">言語関連</a></li>                  <li><a href="#printing">印刷</a></li>                  <li><a href="#saving">保存</a></li>                  <li><a href="#data">データ</a></li>                  <li><a href="#accessibility">アクセシビリティ</a></li>                  <li><a href="#joystick">ジョイスティック</a></li>                </ul>
+                  <li><a href="#video_sound">画面・音声</a></li>                  <li><a href="#mouse_keyboard">マウス・キーボード</a></li>                  <li><a href="#simplification">単純化</a></li>                  <li><a href="#languages">言語関連</a></li>                  <li><a href="#printing">印刷</a></li>                  <li><a href="#saving">保存</a></li>                  <li><a href="#data">データ</a></li>                  <li><a href="#accessibility">操作方法</a></li>                  <li><a href="#joystick">ジョイスティック</a></li>                </ul>
               </li>
               <li><a href="#overriding">システム全体の設定を上書きする</a></li>              <li><a href="#command_line">コマンドラインオプション</a>                <ul>
                   <li><a href="#info-cmd">情報を表示するためのコマンドラインオプション</a></li>                </ul>
@@ -314,7 +314,7 @@
       </ul>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        利用可能なディスプレイが１つのみでタックスペイントが（フルスクリーンではなく）ウィンドウモードで実行されており、ウィンドウサイズの設定がディスプレイサイズより大きい場合、ウィンドウサイズは強制的にディスプレイサイズに合わせられます。      </p>
+        <span title="Information">&#128161;</span>        利用可能なディスプレイが１つのみで Tux Paint が（フルスクリーンではなく）ウィンドウモードで実行されており、ウィンドウサイズの設定がディスプレイサイズより大きい場合、ウィンドウサイズは強制的にディスプレイサイズに合わせられます。      </p>
     </dd>
 
     <dt>
@@ -398,7 +398,7 @@
         <i>SIZE</i> の値は24から192までのピクセル値で指定します。ほとんどのボタンは正方形となっており、この設定はボタンの幅と高さの両方に影響します。      </p>
 
       <p>
-        SIZEの値として "<code>auto</code>" を指定すると、タックスペイントのウィンドウ（またはフルスクリーンディスプレイ）のサイズに基づいて、適切なボタンサイズが選択されます。(デフォルトの画面サイズ 800x600 の場合、ボタンサイズはデフォルトの "48" になります。)      </p>
+        SIZEの値として "<code>auto</code>" を指定すると、Tux Paint のウィンドウ（またはフルスクリーンディスプレイ）のサイズに基づいて、適切なボタンサイズが選択されます。(デフォルトの画面サイズ 800x600 の場合、ボタンサイズはデフォルトの "48" になります。)      </p>
 
       <p class="note">
         <span title="Information">&#128161;</span>        <strong>注:</strong> 選択されたボタンのサイズが大きすぎて画面内に必要なすべてのインターフェースが表示しきれない場合は、できる限り大きなボタンサイズが使用されます。(その旨が<code>stderr</code>に出力されます)      </p>
@@ -489,7 +489,7 @@
 
     <dd>
       <p>
-        タックスペイントがマウスとキーボードを「独占」します。マウスカーソルがタックスペイントのウィンドウ内に限定され、ほとんどすべてのキーボード入力が直接タックスペイントに渡されます。      </p>
+        Tux Paint がマウスとキーボードを「独占」します。マウスカーソルが Tux Paint のウィンドウ内に限定され、ほとんどすべてのキーボード入力が直接 Tux Paint に渡されます。      </p>
 
       <p>
         これは、ユーザーが Tux Paint から抜け出すことができないようにするのに便利です。 <b>[Alt]-[Tab]</b> によるウィンドウの切り替えや、<b>[Ctrl]-[Escape]</b> キーによる操作が無効になります。このオプションは、特にフルスクリーンモード時に有効です。      </p>
@@ -584,7 +584,7 @@
 
     <dd>
       <p>
-        すべてのスタンプの初期の大きさを 0（最小）から 10（最大）の間で設定します。<code>SIZE</code> の値はスタンプ自体の大きさとタックスペイントのキャンバスサイズによって決まる大きさに対する相対的な指定になります。      </p>
+        すべてのスタンプの初期の大きさを 0（最小）から 10（最大）の間で設定します。<code>SIZE</code> の値はスタンプ自体の大きさと Tux Paint のキャンバスサイズによって決まる大きさに対する相対的な指定になります。      </p>
 
       <p>
         SIZE の値に <code>default</code> を指定すると、Tux Paint がスタンプの大きさを自動的に決定します。（これが標準の動作です）      </p>
@@ -704,11 +704,37 @@
 
     <dd>
       <p>
-        「ふで」ツールと「せん」ツールで、描画間隔の調整を無効にします。標準の描画間隔が用いられます。      </p>
+        <a href="README.html#using_tools_drawing_paint"><b>「ふで」ツール</b></a>と<a href="using_tools_drawing_lines"><b>Lines</b></a>「せん」ツール</b></a>で、<a href="README.html#brush_spacing">描画間隔の調整</a>を無効にします。標準の描画間隔が用いられます。      </p>
       <p class="note">
         <span title="Version variation">&#128220;</span>        <strong>注:</strong> 描画間隔調整のオプションは、バージョン 0.9.28 で追加されました。描画間隔調整についての詳細は、<a href="EXTENDING.html">EXTENDING.html</a>を参照してください。      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nobrushspacing=no</code>" または "<code>brushspacing=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--brushspacing</code>" で変更できます。      </p>
+    </dd>
+
+    <dt>
+      <code><b>notemplateexport=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <a href="README.html#using_tools_other_open"><strong>「ひらく」</strong></a>ダイアログで、保存された作品を用いて新しい<a href="README.html#using_tools_other_new">テンプレート画像</a>を作成する機能を無効にします。      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>注:</strong> テンプレート作成機能は Tux Paint バージョン 0.9.31 で追加されました。      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>notemplateexport=no</code>" または "<code>templateexport=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--templateexport</code>" で変更できます。      </p>
+    </dd>
+
+    <dt>
+      <code><b>noerase=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <a href="README.html#using_tools_other_open"><strong>「ひらく」</strong></a>ダイアログの「けす」ボタンを使って保存した作品を削除したり、<a href="README.html#using_tools_other_new"><strong>「さいしょから」</strong></a>ダイアログの「けす」ボタンを使って自作の<a href="README.html#using_tools_other_new">テンプレート画像</a>を削除する機能を無効にします。特に <a href="#saving"><code>--saveovernew</code></a> オプションと組み合わせて、意図しない操作で作品を失うのを防ぐことができます。      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>注:</strong> このオプションは Tux Paint バージョン 0.9.31 で追加されました。      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>noerase=no</code>" または "<code>erase=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--erase</code>" で変更できます。      </p>
     </dd>
   </dl>
 </section>
@@ -1407,7 +1433,7 @@
 
 <section>
   <header>
-    <h3>フォント</h3>
+    <h3 id="fonts">フォント</h3>
   </header>
 
   <dl>
@@ -1434,6 +1460,18 @@
         以前のバージョンのように全てのフォントを読み込むようにするには、このオプションを有効にします。      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>alllocalefonts=no</code>" または "<code>currentlocalefont=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--currentlocalefont</code>" で変更できます。      </p>
+    </dd>
+
+    <dt>
+      <code><b>uifont=FONT NAME</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <b>もじ</b>ツールで、オペレーティングシステムのフォントを使用します。通常では、Tux Paint はパッケージに付属するフォントだけを使用します。      </p>
+
+      <p>
+        "<code>default</code>" を指定すると、規定のフォントが使用されます。（標準の動作）      </p>
     </dd>
   </dl>
 </section>
@@ -1821,7 +1859,7 @@
 
     <dd>
       <p>
-        標準では、タックスペイントは「ロックファイル」と呼ばれるものを使用して、30秒間に1回以上起動できないようになっています。これは、シングルクリックのランチャーをダブルクリックしたり、アイコンをせわしなく何度もクリックしたりして、誤って複数回起動してしまうことを防ぐためです。      </p>
+        標準では、Tux Paint は「ロックファイル」と呼ばれるものを使用して、30秒間に1回以上起動できないようになっています。これは、シングルクリックのランチャーをダブルクリックしたり、アイコンをせわしなく何度もクリックしたりして、誤って複数回起動してしまうことを防ぐためです。      </p>
 
       <p>
         ロックファイルを無視して、起動してから30秒以内であっても再びすぐに実行できるようにするには、設定ファイルでこの設定を有効にするか、コマンドラインで <code>--nolockfile</code> オプションを指定して Tux Paint を実行してください。      </p>
@@ -1913,7 +1951,7 @@
 </section>
   </section>
     <header>
-    <h2 id="accessibility">アクセシビリティ</h2>
+    <h2 id="accessibility">操作方法</h2>
   </header>
   <section class="indent">
     <section>
@@ -1974,7 +2012,7 @@
         </li>
 
         <li>クリック＆ドラッグの操作は、クリックキーのどちらか（例えば [Insert]）を押しながら、マウス移動のキー（例えば [Left]）を押します。          <p class="note">
-            <span title="Information">&#128161;</span>            ><strong>注:</strong> "mouse-accessibility" オプションの機能は、キーボードの操作にも連動します。両方のオプションを有効にした場合、例えば線を引く場合は、「クリック」のキーを一度押してから「移動」のキーで描画し、最後にもう一度「クリック」キーを押して描画を完了します。          </p>
+            <span title="Information">&#128161;</span>            <strong>注:</strong> "mouse-accessibility" オプションの機能は、キーボードの操作にも連動します。両方のオプションを有効にした場合、例えば線を引く場合は、「クリック」のキーを一度押してから「移動」のキーで描画し、最後にもう一度「クリック」キーを押して描画を完了します。          </p>
         </li>
 
         <li>通常のマウスやジョイスティックも同時に使用することができます（例えば、マウスで移動してキーボードでクリックしたり、その逆も可能です）。        </li>
@@ -2352,8 +2390,10 @@
           --nostampcontrols<br>
           --nostamprotation<br>
           --nomagiccontrols<br>
+          --nomagicsizes<br>
           --noshapecontrols<br>
           --nolabel<br>
+          --nobrushspacing<br>
           --newcolorslast<br>
           --mouse-accessibility<br>
           --onscreen-keyboard<br>
@@ -2383,6 +2423,7 @@
           --joystick-btn-print<br>
           --joystick-buttons-ignore<br>
           --sysfonts<br>
+          --uifont=<i>FONT NAME</i><br>
           --alllocalefonts<br>
           --mirrorstamps<br>
           --stampsize=<i>SIZE</i><br>
@@ -2431,11 +2472,14 @@
           --stampcontrols<br>
           --stamprotation<br>
           --magiccontrols<br>
+          --magicsizes<br>
           --shapecontrols<br>
           --label<br>
+          --brushspacing<br>
           --newcolorsfirst<br>
           --nosysfonts<br>
           --currentlocalefont<br>
+          --uifont=default<br>
           --dontmirrorstamps<br>
           --stampsize=default<br>
           --mouse<br>

@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last modified: April 30, 2023
+  Last modified: June 29, 2023
 */
 
 #include <stdio.h>
@@ -38,9 +38,9 @@
 #endif
 
 /*
-	The following section renames global variables defined in SDL_Pango.h to avoid errors during linking.
+	The following section renames global variables defined in SDL2_Pango.h to avoid errors during linking.
 	It is okay to rename these variables because they are constants.
-	SDL_Pang.h is included by fonts.h.  
+	SDL2_Pango.h is included by fonts.h.  
 */
 #define _MATRIX_WHITE_BACK _MATRIX_WHITE_BACK2
 #define MATRIX_WHITE_BACK MATRIX_WHITE_BACK2
@@ -78,6 +78,7 @@ extern char *strcasestr(const char *haystack, const char *needle);
 #ifdef __HAIKU__
 #include <FindDirectory.h>
 #include <fs_info.h>
+#define _POSIX_PRIORITY_SCHEDULING
 #endif
 
 /* system fonts that cause TTF_OpenFont to crash */
@@ -119,12 +120,22 @@ static const char *problemFontExtensions[] = {
 SDL_Thread *font_thread;
 #endif
 
+#include "pango/pango.h"
+#include "pango/pangoft2.h"
+#if !defined(__PANGO_H__)
+#error "---------------------------------------------------"
+#error "If you installed pango from a package, be sure"
+#error "to get the development package, as well!"
+#error "(e.g., 'libpango1.0-dev.rpm')"
+#error "---------------------------------------------------"
+#endif
+
 #include "SDL2_Pango.h"
 #if !defined(SDL_PANGO_H)
 #error "---------------------------------------------------"
-#error "If you installed SDL_Pango from a package, be sure"
+#error "If you installed SDL2_Pango from a package, be sure"
 #error "to get the development package, as well!"
-#error "(e.g., 'libsdl-pango1-dev.rpm')"
+#error "(e.g., 'SDL2_Pango-2.1.5-dev.rpm')"
 #error "---------------------------------------------------"
 #endif
 
@@ -163,6 +174,34 @@ int button_label_y_nudge;
 static void reliable_read(int fd, void *buf, size_t count);
 #endif
 
+const char * PANGO_DEFAULT_FONT = "DejaVu Sans";
+const char * PANGO_DEFAULT_FONT_FALLBACK = NULL;
+
+/* Names of the fonts we include in `fonts/locale/`
+   (LANG_* codes are from `src/i18n.h`) */
+// (Try `otfinfo --info fonts/locale/*.ttf | grep "Family:"`)
+/* Note: When there's a preferred family name, and a fall-back,
+   this is generally when Tux Paint ships a 'subset' font based
+   on the strings used in the app, and we offer a separate
+   download of the full (much larger) font TTF file.
+   (https://tuxpaint.org/download/fonts/) */
+default_locale_font_t default_local_fonts[] = {
+  { LANG_AR, "ae_Nice", NULL },
+  { LANG_BO, "Tsampa Keyboard", NULL }, // NOTE: Our current translation is Wylie transliterated, not Unicode! */
+  { LANG_EL, "Thryomanes", NULL},
+  { LANG_GU, "Lohit Gujarati", NULL },
+  { LANG_HE, "Nachlieli Light", NULL },
+  { LANG_HI, "Raghindi", NULL },
+  { LANG_JA, "Noto Sans CJK JP", "GJGothicPNSubset" },
+  { LANG_KA, "TuxPaint Georgian", NULL }, /* FIXME: Upon what was this font based? Never knew -bjk 2023.06.12 */
+  { LANG_KO, "Baekmuk Gulim", NULL },
+  { LANG_TA, "TSCu_Comic", NULL },
+  { LANG_TE, "Vemana2000", NULL },
+  { LANG_TH, "Garuda", NULL },
+  { LANG_ZH_CN, "AR PL SungtiL GB", NULL },
+  { LANG_ZH_TW, "HanWangKaiMediumChuIn", "SubsetForTuxPaint" },
+  { -1, NULL, NULL },
+}; 
 
 void TuxPaint_Font_CloseFont(TuxPaint_Font * tpf)
 {
@@ -301,7 +340,7 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc, const char *ttffile
       return NULL;
     }
 
-    familyname = TTF_FontFaceFamilyName(ttf_font);      /* N.B.: I don't believe we're supposed to free() this... -bjk 2021.10.26 */
+    familyname = (char *) TTF_FontFaceFamilyName(ttf_font);      /* N.B.: I don't believe we're supposed to free() this... -bjk 2021.10.26 */
     (void)familyname;           // avoid compiler complaints if ALWAYS_LOAD_FONT_WITH_PANGO is not set, and DEBUG is not set
 
 #ifdef DEBUG
@@ -1316,7 +1355,7 @@ TuxPaint_Font *getfonthandle(int desire)
     return NULL;
   }
 
-  if (fi->filename != NULL)
+  if (fi->filename[text_state] != NULL)
   {
 #ifdef DEBUG
     printf("%s:%d - Setting 'name' to fi->filename[%d (0x%x)]\n", __FILE__, __LINE__, (int)text_state, (int)text_state);
@@ -1333,7 +1372,7 @@ TuxPaint_Font *getfonthandle(int desire)
   else
   {
 #ifdef DEBUG
-    printf("%s:%d - fi->filename is NULL\n", __FILE__, __LINE__);
+    printf("%s:%d - fi->filename[%d (0x%x) is NULL\n", __FILE__, __LINE__, (int)text_state, (int)text_state);
     fflush(stdout);
 #endif
 
@@ -1667,4 +1706,81 @@ void sdl_color_to_pango_color(SDL_Color sdl_color, SDLPango_Matrix * pango_color
   pc[3][3] = 0;
 
   memcpy(pango_color, pc, 16);
+}
+
+/**
+ * Given a font description, do the very bare minimum to
+ * have Pango library try to load it, then retrieve the description
+ * of the font that was _actually_ loaded.
+ * (e.g., "tuxpaint --uifont bookman" finds and uses "URW Bookman"
+ * on my system -bjk 2023.06.01)
+ */
+char * ask_pango_for_font(char * pangodesc)
+{
+    PangoFontMap * font_map;
+    PangoContext * context;
+    PangoFontDescription * font_desc;
+    PangoFont *font;
+    PangoFontDescription * pfd;
+    char * descr;
+
+    font_map = pango_ft2_font_map_new();
+    if (font_map == NULL)
+    {
+      fprintf(stderr, "pango_ft2_font_map_new() failed\n");
+      fflush(stderr);
+      return NULL;
+    }
+
+    context = pango_font_map_create_context(font_map);
+    if (context == NULL)
+    {
+      fprintf(stderr, "pango_font_map_create_context() failed\n");
+      fflush(stderr);
+      g_object_unref(font_map);
+      return NULL;
+    }
+
+    font_desc = pango_font_description_from_string(pangodesc);
+    if (font_desc == NULL)
+    {
+      fprintf(stderr, "pango_font_description_from_string() failed\n");
+      fflush(stderr);
+      g_object_unref(font_map);
+      g_object_unref(context);
+      return NULL;
+    }
+
+    font = pango_font_map_load_font(font_map, context, font_desc);
+    if (font == NULL)
+    {
+      fprintf(stderr, "pango_font_map_load_font() failed\n");
+      fflush(stderr);
+      g_object_unref(font_map);
+      g_object_unref(context);
+      pango_font_description_free(font_desc);
+      return NULL;
+    }
+
+    pfd = pango_font_describe(font);
+    if (pfd == NULL)
+    {
+      fprintf(stderr, "pango_font_describe() failed\n");
+      fflush(stderr);
+      g_object_unref(font_map);
+      g_object_unref(context);
+      pango_font_description_free(font_desc);
+      g_object_unref(font);
+      return NULL;
+    }
+
+    descr = strdup(pango_font_description_get_family(pfd));
+
+    g_object_unref(font_map);
+    g_object_unref(context);
+    pango_font_description_free(font_desc);
+    g_object_unref(font);
+    /* N.B. Not free'ing `pfd`: The data is owned by the instance */
+
+    return descr;
 }

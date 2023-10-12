@@ -1,14 +1,15 @@
 Summary: A drawing program for young children
 Name: tuxpaint
-Version: 0.9.30
-Release: 1
+Version: 0.9.31
+Release: 1%{?dist}
+Epoch: 1
 License: GPL
 Group: Multimedia/Graphics
 URL: https://tuxpaint.org/
-Source0: %{name}-%{version}.tar.gz
+Source0: https://downloads.sourceforge.net/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango SDL2_gfx libpaper fribidi xdg-utils libimagequant
-BuildRequires: SDL2-devel SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel SDL2_Pango-devel SDL2_gfx-devel
+Requires: SDL2 >= 2.0 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango SDL2_gfx libpaper fribidi xdg-utils libimagequant
+BuildRequires: SDL2-devel >= 2.0 SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel SDL2_Pango-devel SDL2_gfx-devel
 BuildRequires: librsvg2-devel libpaper-devel fribidi-devel gperf gettext >= 0.19.7 ImageMagick xdg-utils libimagequant-devel
 
 %description
@@ -26,7 +27,7 @@ such as sound effects.
 Summary: development files for tuxpaint plugins.
 Group: Development/Libraries
 Requires: tuxpaint = %{version}
-Requires: SDL2-devel SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel SDL2_Pango-devel
+Requires: SDL2-devel >= 2.0 SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel SDL2_Pango-devel SDL2_gfx-devel
 Requires: librsvg2-devel libpaper-devel fribidi-devel gperf
 
 %description devel
@@ -36,32 +37,17 @@ development files for tuxpaint plugins.
 %setup -q
 
 %build
-make PREFIX=%{_prefix} DOC_PREFIX=%{_docdir}/tuxpaint/en linux_ARCH_CFLAGS='-I/usr/include/imagequant -I/usr/include/freetype2'
+make PREFIX=%{_prefix} DOC_PREFIX=%{_docdir}/tuxpaint linux_ARCH_CFLAGS='-I/usr/include/imagequant -I/usr/include/freetype2'
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make ARCH_INSTALL="install-man install-importscript install-bash-completion" \
+make PACKAGE_ONLY=yes \
      PREFIX=%{_prefix} DESTDIR=$RPM_BUILD_ROOT \
      DOC_PREFIX=$RPM_BUILD_ROOT%{_docdir}/tuxpaint \
+     DEVDOC_PREFIX=$RPM_BUILD_ROOT%{_docdir}/tuxpaint/devel \
      install
 
-export XDG_DATA_DIRS=$RPM_BUILD_ROOT%{_datadir}
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/{icons/hicolor,applications,desktop-directories}
-
-xdg-icon-resource install --mode system --noupdate --size 192 data/images/icon192x192.png tux4kids-tuxpaint
-xdg-icon-resource install --mode system --noupdate --size 128 data/images/icon128x128.png tux4kids-tuxpaint
-xdg-icon-resource install --mode system --noupdate --size 96 data/images/icon96x96.png tux4kids-tuxpaint
-xdg-icon-resource install --mode system --noupdate --size 64 data/images/icon64x64.png tux4kids-tuxpaint
-xdg-icon-resource install --mode system --noupdate --size 48 data/images/icon48x48.png tux4kids-tuxpaint
-xdg-icon-resource install --mode system --noupdate --size 32 data/images/icon32x32.png tux4kids-tuxpaint
-xdg-icon-resource install --mode system --noupdate --size 22 data/images/icon22x22.png tux4kids-tuxpaint
-xdg-icon-resource install --mode system --noupdate --size 16 data/images/icon16x16.png tux4kids-tuxpaint
-
-cp src/tuxpaint.desktop ./tux4kids-tuxpaint.desktop
-xdg-desktop-menu install --mode system --noupdate tux4kids-tuxpaint.desktop
-rm ./tux4kids-tuxpaint.desktop
-
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/tuxpaint/outdated
+# Scripts in this directory force dependency on python2 and fontforge
 rm -rf $RPM_BUILD_ROOT%{_datadir}/tuxpaint/fonts/locale/zh_tw_docs
 
 %post
@@ -84,9 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/bash_completion.d/tuxpaint-completion.bash
 %{_docdir}/tuxpaint/*
 %{_datadir}/tuxpaint/*
-%{_datadir}/pixmaps/tuxpaint.*
-%{_datadir}/applications/tux4kids-tuxpaint.desktop
-%{_datadir}/icons/hicolor/*/apps/tux4kids-tuxpaint.png
+%{_datadir}/applications/tuxpaint*.desktop
+%{_datadir}/icons/hicolor/*/apps/tuxpaint.png
+%{_datadir}/metainfo/org.tuxpaint.Tuxpaint.appdata.xml
 %{_datadir}/locale/*/LC_MESSAGES/tuxpaint.mo
 %{_mandir}/man1/tuxpaint*.*
 %{_mandir}/*/man1/tuxpaint*.*
@@ -106,7 +92,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/tuxpaint/*/html/tp_magic_example.c
 
 %changelog
-* Mon Apr 04 2023 <nbs@sonic.net> -
+* Sat Jul 08 2023 <dolphin6k@wmail.plala.or.jp> -
+- Use PACKAGE_ONLY=yes for desktop icon installation
+
+* Wed Jun 07 2023 <dolphin6k@wmail.plala.or.jp> -
+- Added fullscreen launcher icon.
+
+* Sat May 20 2023 <nbs@sonic.net> -
+- Set version number 0.9.31
+
+* Tue Apr 04 2023 <nbs@sonic.net> -
 - Set version number 0.9.30
 
 * Wed Mar 22 2023 <dolphin6k@wmail.plala.or.jp>
@@ -114,7 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 
 * Fri Mar 10 2023 <dolphin6k@wmail.plala.or.jp>
 - Magic docs to go the main package
-- Magid devel docs to go the devel package
+- Magic devel docs to go the devel package
 - Excluded outdated docs.
 
 * Sun Dec 11 2022 <nbs@sonic.net> -
