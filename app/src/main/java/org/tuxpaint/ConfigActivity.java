@@ -10,9 +10,15 @@ import java.io.OutputStream;
 import java.util.Properties;
 import java.util.Locale;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.storage.StorageManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -71,7 +77,7 @@ public class ConfigActivity extends Activity {
         boolean cancel = false;
 
 	EditText savedirView = null;
-	EditText datadirView = null;
+	public EditText datadirView = null;
 	EditText exportdirView = null;
 	ToggleButton soundToggle = null;
 	ToggleButton stereoToggle = null;
@@ -92,7 +98,9 @@ public class ConfigActivity extends Activity {
     Button okButton = null;
     Button cancelButton = null;
         AssetManager mgr;
-    
+
+
+
     Resources res;
     Configuration conf;
     Locale localeback;
@@ -111,8 +119,13 @@ public class ConfigActivity extends Activity {
 		this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
 	    }
 	}
-
+	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) this.requestPermissions(new String[]{android.Manifest.permission.READ_MEDIA_IMAGES},2);
 		setContentView(R.layout.config);
+         /* License button starts the License activity */
+        Button goimportButton = (Button) this.findViewById(R.id.button_goimport);
+        goimportButton.setOnClickListener(v -> startActivity(new Intent(ConfigActivity.this, ImportData.class)));
+
+
 		load ();
 		
 		savedirView = (EditText)this.findViewById(R.id.textSavedir);
@@ -490,7 +503,7 @@ public class ConfigActivity extends Activity {
 	    e1.printStackTrace();
 	}
 
-	String externalPath = external.getAbsolutePath();
+	String externalPath = getExternalFilesDir(null).toString();
 	String externalExportPath = externalPath;
 	int foundIndex = externalExportPath.indexOf("/Android");
 	if (foundIndex > -1) {
