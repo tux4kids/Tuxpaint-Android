@@ -60,6 +60,7 @@ then
 	tar xfz tuxpaint-stamps-$stamps_version.tar.gz &&
 	cd tuxpaint-stamps-$stamps_version &&
 	../join_subdirs.sh &&
+	rm -rf tmpzip/stamps/*/*svg &&
 	cd .. &&
 	mkdir -p ../../assets && \
 	mv tmpzip/* ../../assets/ && \
