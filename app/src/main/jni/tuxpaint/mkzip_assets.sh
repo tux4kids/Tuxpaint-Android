@@ -52,6 +52,9 @@ then
 	mkdir tmpzip/data/sounds/magic && \
 	cp magic/sounds/* tmpzip/data/sounds/magic && \
 	cp -r stamps tmpzip/stamps && \
+	cd starters &&
+	for i in *svg; do ../svg_to_png_alts.sh $i && rm $i; done &&
+	cd .. &&
 	cp -r starters tmpzip/data/starters && \
 	cp -r templates tmpzip/data/templates &&\
 	mkdir tmpzip/etc && \
