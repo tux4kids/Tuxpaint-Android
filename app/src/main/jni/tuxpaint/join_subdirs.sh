@@ -4,7 +4,7 @@
 # in the root of that subdir, keeping the stamps ordered as close as possible
 # to how Tux Paint orders them.
 
-
+WORKDIR=$PWD
 mkdir -p tmpzip/stamps
 index=({000..999})
 
@@ -16,7 +16,12 @@ scandir () {
 	    # first process the files inside the dir
 	    if [ ! -d $item ]
 	    then
-#		echo file $item $dircount
+		# echo file $item $dircount
+		if (echo $item | grep -iq "svg" - )
+		then
+		    $WORKDIR/../svg_to_png_alts.sh $item
+		    cp $item "tmpzip"/$subdir/${index[$dircount]}_`basename $item .svg`.png
+		fi
 		cp $item "tmpzip"/$subdir/${index[$dircount]}_`basename $item`
 	    fi
 	done
