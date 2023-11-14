@@ -1,0 +1,12 @@
+name: Validate Fastlane
+on:
+  push:
+    branches:
+      - android
+jobs:
+  validate:
+    name: Validate Fastlane Metadata
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ashutoshgngwr/validate-fastlane-supply-metadata@v2
