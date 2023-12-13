@@ -52,19 +52,19 @@ then
 	mkdir tmpzip/data/sounds/magic && \
 	cp magic/sounds/* tmpzip/data/sounds/magic && \
 	cp -r stamps tmpzip/stamps && \
-	cd starters &&
-	for i in *svg; do ../svg_to_png_alts.sh $i && rm $i; done &&
-	cd .. &&
-	cp -r starters tmpzip/data/starters && \
+	cd starters && \
+	for i in *svg; do if [ ! -f  `basename $i .svg`.png ]; then ../svg_to_png_alts.sh $i && rm $i && convert -bordercolor transparent -border 3 `basename $i .svg`.png tmp.png && mv tmp.png `basename $i .svg`.png; fi; done && \
+	cd .. && \
+	mv starters tmpzip/data/starters && git restore starters && \
 	cp -r templates tmpzip/data/templates &&\
 	mkdir tmpzip/etc && \
 	cp src/tuxpaint.cfg-android tmpzip/etc/tuxpaint.cfg && \
-	wget -O tuxpaint-stamps-$stamps_version.tar.gz https://sourceforge.net/projects/tuxpaint/files/tuxpaint-stamps/$stampsversion/tuxpaint-stamps-$stamps_version.tar.gz/download &&
-	tar xfz tuxpaint-stamps-$stamps_version.tar.gz &&
-	cd tuxpaint-stamps-$stamps_version &&
-	../join_subdirs.sh &&
-	rm -rf tmpzip/stamps/*/*svg &&
-	cd .. &&
+	wget -O tuxpaint-stamps-$stamps_version.tar.gz https://sourceforge.net/projects/tuxpaint/files/tuxpaint-stamps/$stampsversion/tuxpaint-stamps-$stamps_version.tar.gz/download && \
+	tar xfz tuxpaint-stamps-$stamps_version.tar.gz && \
+	cd tuxpaint-stamps-$stamps_version && \
+	../join_subdirs.sh && \
+	rm -rf tmpzip/stamps/*/*svg && \
+	cd .. && \
 	mkdir -p ../../assets && \
 	mv tmpzip/* ../../assets/ && \
 	cp -r tuxpaint-stamps-$stamps_version/tmpzip/stamps/* ../../assets/stamps/ && \
