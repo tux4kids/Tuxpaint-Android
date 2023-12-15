@@ -10,19 +10,13 @@ import java.io.OutputStream;
 import java.util.Properties;
 import java.util.Locale;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.storage.StorageManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -95,6 +89,7 @@ public class ConfigActivity extends Activity {
         Spinner colorsrowsSpinner = null;
         Spinner osklayoutSpinner = null;
         ToggleButton stamprotationToggle = null;
+        Button requestrevoquebtButton = null;
     Button okButton = null;
     Button cancelButton = null;
         AssetManager mgr;
@@ -382,6 +377,15 @@ public class ConfigActivity extends Activity {
 					stamprotation = "no";
 			}
 		});
+
+	requestrevoquebtButton = (Button)this.findViewById(R.id.buttonRequestrevoquebt);
+	requestrevoquebtButton.setOnClickListener(new View.OnClickListener()  {
+			public void onClick(View buttonView) {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+					startActivity(new Intent(ConfigActivity.this, reqBTpermsActivity.class));
+				};
+			}
+	});
 
 		okButton = (Button)this.findViewById(R.id.buttonOk);
 

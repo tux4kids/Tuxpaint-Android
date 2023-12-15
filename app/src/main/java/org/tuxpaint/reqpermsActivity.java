@@ -23,7 +23,7 @@ public class reqpermsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-			this.requestPermissions(new String[]{ android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.BLUETOOTH_CONNECT }, 2);
+			this.requestPermissions(new String[]{ android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
 		} else {
 			this.requestPermissions(new String[]{ android.Manifest.permission.WRITE_EXTERNAL_STORAGE }, 2);
 		}
@@ -42,10 +42,7 @@ public class reqpermsActivity extends Activity {
     public void onRequestPermissionsResult(int requestCode,
 					   String[] permissions, int[] grantResults) {
 		if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-					&& this.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
-				finish();
-			}
+		    
 		}
     }
 

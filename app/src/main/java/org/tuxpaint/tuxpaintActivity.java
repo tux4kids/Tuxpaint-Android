@@ -26,19 +26,11 @@ public class tuxpaintActivity extends SDLActivity {
         boolean requestPermissions = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
             if (this.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions = true;
+                Intent intent = new Intent(this, reqpermsActivity.class);
+		this.startActivity(intent);
             }
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (this.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                isRequestingBluetoothPermission = true;
-                requestPermissions = true;
-            }
-        }
-        if (requestPermissions) {
-            Intent intent = new Intent(this, reqpermsActivity.class);
-            this.startActivity(intent);
-        }
+
 
         super.onCreate(savedInstanceState);
         mgr = getResources().getAssets();

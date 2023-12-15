@@ -40,11 +40,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".reqpermsActivity" />
+        <activity android:name=".reqBTpermsActivity" />
     </application> <!-- SDL asks for bluetooth in the default SDLActivity.java they provide -->
     <uses-feature android:glEsVersion="0x00020000" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /> <!-- Allow writing to external storage -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
 
 </manifest>
