@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2020 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -133,7 +133,7 @@ static BOOL _getSDLPixelFormatData(SDL_PixelFormat *pSDLPixelFormat,
 
     default:
 /*      printf("Unknown color encoding: %.4s\n", fccColorEncoding);*/
-        memset(pSDLPixelFormat, 0, sizeof(SDL_PixelFormat));
+        SDL_memset(pSDLPixelFormat, 0, sizeof(SDL_PixelFormat));
         return FALSE;
     }
 
@@ -183,7 +183,7 @@ static VOID _mouseCheck(WINDATA *pWinData)
 {
     SDL_Mouse *pSDLMouse = SDL_GetMouse();
 
-    if ((pSDLMouse->relative_mode || (pWinData->window->flags & SDL_WINDOW_INPUT_GRABBED) != 0) &&
+    if ((pSDLMouse->relative_mode || (pWinData->window->flags & SDL_WINDOW_MOUSE_GRABBED) != 0) &&
         ((pWinData->window->flags & SDL_WINDOW_INPUT_FOCUS) != 0)) {
         /* We will make a real capture in _wmMouseButton() */
     } else {
@@ -232,7 +232,7 @@ static VOID _wmMouseMove(WINDATA *pWinData, SHORT lX, SHORT lY)
 
     if (!pSDLMouse->relative_mode || pSDLMouse->relative_mode_warp) {
         if (!pSDLMouse->relative_mode && fWinActive &&
-            ((pWinData->window->flags & SDL_WINDOW_INPUT_GRABBED) != 0) &&
+            ((pWinData->window->flags & SDL_WINDOW_MOUSE_GRABBED) != 0) &&
             (WinQueryCapture(HWND_DESKTOP) == pWinData->hwnd)) {
 
             pointl.x = lX;
@@ -281,7 +281,7 @@ static VOID _wmMouseButton(WINDATA *pWinData, ULONG ulButton, BOOL fDown)
                                       SDL_BUTTON_MIDDLE };
     SDL_Mouse *pSDLMouse = SDL_GetMouse();
 
-    if ((pSDLMouse->relative_mode || ((pWinData->window->flags & SDL_WINDOW_INPUT_GRABBED) != 0)) &&
+    if ((pSDLMouse->relative_mode || ((pWinData->window->flags & SDL_WINDOW_MOUSE_GRABBED) != 0)) &&
         ((pWinData->window->flags & SDL_WINDOW_INPUT_FOCUS) != 0) &&
         (WinQueryCapture(HWND_DESKTOP) != pWinData->hwnd)) {
         /* Mouse should be captured. */
@@ -320,17 +320,22 @@ static VOID _wmChar(WINDATA *pWinData, MPARAM mp1, MPARAM mp2)
     }
 
     if ((ulFlags & KC_CHAR) != 0) {
-        CHAR    acUTF8[4];
-        LONG    lRC = StrUTF8(1, acUTF8, sizeof(acUTF8), (PSZ)&ulCharCode, 1);
-
-        SDL_SendKeyboardText((lRC > 0)? acUTF8 : (PSZ)&ulCharCode);
+#if defined(HAVE_ICONV) && defined(HAVE_ICONV_H)
+        char *utf8 = SDL_iconv_string("UTF-8", "", (char *)&ulCharCode, 1);
+        SDL_SendKeyboardText((utf8 && *utf8) ? utf8 : (char *)&ulCharCode);
+        SDL_free(utf8);
+#else
+        char utf8[4];
+        int rc = StrUTF8(1, utf8, sizeof(utf8), (char *)&ulCharCode, 1);
+        SDL_SendKeyboardText((rc > 0) ? utf8 : (char *) &ulCharCode);
+#endif
     }
 }
 
 static VOID _wmMove(WINDATA *pWinData)
 {
     SDL_DisplayMode *pSDLDisplayMode = _getDisplayModeForSDLWindow(pWinData->window);
-    POINTL  pointl = { 0 };
+    POINTL  pointl = { 0,0 };
     RECTL   rectl;
 
     WinQueryWindowRect(pWinData->hwnd, &rectl);
@@ -389,7 +394,7 @@ static MRESULT _wmDrop(WINDATA *pWinData, PDRAGINFO pDragInfo)
 {
     ULONG       ulIdx;
     PDRAGITEM   pDragItem;
-    CHAR        acFName[_MAX_PATH];
+    CHAR        acFName[CCHMAXPATH];
     PCHAR       pcFName;
 
     if (!DrgAccessDraginfo(pDragInfo))
@@ -403,7 +408,7 @@ static MRESULT _wmDrop(WINDATA *pWinData, PDRAGINFO pDragInfo)
             pDragItem->hstrSourceName != NULLHANDLE) {
             /* Get file name from the item. */
             DrgQueryStrName(pDragItem->hstrContainerName, sizeof(acFName), acFName);
-            pcFName = strchr(acFName, '\0');
+            pcFName = SDL_strchr(acFName, '\0');
             DrgQueryStrName(pDragItem->hstrSourceName,
                             sizeof(acFName) - (pcFName - acFName), pcFName);
 
@@ -428,7 +433,7 @@ static MRESULT _wmDrop(WINDATA *pWinData, PDRAGINFO pDragInfo)
     return (MRESULT)FALSE;
 }
 
-MRESULT EXPENTRY wndFrameProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
+static MRESULT EXPENTRY wndFrameProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 {
     HWND    hwndClient = WinQueryWindow(hwnd, QW_BOTTOM);
     WINDATA * pWinData = (WINDATA *)WinQueryWindowULong(hwndClient, 0);
@@ -535,7 +540,7 @@ MRESULT EXPENTRY wndFrameProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
     return pWinData->fnWndFrameProc(hwnd, msg, mp1, mp2);
 }
 
-MRESULT EXPENTRY wndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
+static MRESULT EXPENTRY wndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 {
     WINDATA *pWinData = (WINDATA *)WinQueryWindowULong(hwnd, 0);
 
@@ -589,7 +594,7 @@ MRESULT EXPENTRY wndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
             WinQueryPointerPos(HWND_DESKTOP, &pointl);
             WinMapWindowPoints(HWND_DESKTOP, pWinData->hwnd, &pointl, 1);
             SDL_SendMouseMotion(pWinData->window, 0, 0,
-                                    pointl.x, pWinData->window->h - pointl.y - 1);
+                                pointl.x, pWinData->window->h - pointl.y - 1);
         } else {
             if (SDL_GetKeyboardFocus() == pWinData->window)
                 SDL_SetKeyboardFocus(NULL);
@@ -691,7 +696,7 @@ MRESULT EXPENTRY wndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 }
 
 
-/*  SDL routnes.
+/*  SDL routines.
  *  ------------
  */
 
@@ -850,8 +855,9 @@ static int OS2_CreateWindowFrom(_THIS, SDL_Window *window, const void *data)
     if (cbText != 0)
         window->title = OS2_SysToUTF8(pszText);
 
-    if (pszText != NULL)
+    if (pszText != NULL) {
         SDL_stack_free(pszText);
+    }
 
     /* Set SDL-window flags */
     window->flags &= ~(SDL_WINDOW_SHOWN     | SDL_WINDOW_BORDERLESS |
@@ -907,6 +913,17 @@ static void OS2_DestroyWindow(_THIS, SDL_Window * window)
     debug_os2("Enter");
     if (pWinData == NULL)
         return;
+
+    if (pWinData->hrgnShape != NULLHANDLE) {
+        HPS hps = WinGetPS(pWinData->hwnd);
+        GpiDestroyRegion(hps, pWinData->hrgnShape);
+        WinReleasePS(hps);
+    }
+
+    if (window->shaper) {
+        SDL_free(window->shaper);
+        window->shaper = NULL;
+    }
 
     if (pWinData->fnUserWndProc == NULL) {
         /* Window was created by SDL (OS2_CreateWindow()),
@@ -1132,8 +1149,8 @@ static SDL_bool OS2_GetWindowWMInfo(_THIS, SDL_Window * window,
         return SDL_TRUE;
     }
 
-    SDL_SetError("Application not compiled with SDL %u.%u",
-                 SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
+    SDL_SetError("Application not compiled with SDL %u",
+                 SDL_MAJOR_VERSION);
     return SDL_FALSE;
 }
 
@@ -1147,7 +1164,7 @@ static int OS2_SetWindowHitTest(SDL_Window *window, SDL_bool enabled)
   return 0;
 }
 
-static void OS2_SetWindowGrab(_THIS, SDL_Window *window, SDL_bool grabbed)
+static void OS2_SetWindowMouseGrab(_THIS, SDL_Window *window, SDL_bool grabbed)
 {
     WINDATA *pWinData = (WINDATA *)window->driverdata;
 
@@ -1214,7 +1231,7 @@ static int OS2_SetWindowShape(SDL_WindowShaper *shaper, SDL_Surface *shape,
 {
     SDL_ShapeTree *pShapeTree;
     WINDATA       *pWinData;
-    SHAPERECTS     stShapeRects = { 0 };
+    SHAPERECTS     stShapeRects;
     HPS            hps;
 
     debug_os2("Enter");
@@ -1230,6 +1247,7 @@ static int OS2_SetWindowShape(SDL_WindowShaper *shaper, SDL_Surface *shape,
     pShapeTree = SDL_CalculateShapeTree(*shape_mode, shape);
     shaper->driverdata = pShapeTree;
 
+    SDL_zero(stShapeRects);
     stShapeRects.ulWinHeight = shaper->window->h;
     SDL_TraverseShapeTree(pShapeTree, &_combineRectRegions, &stShapeRects);
 
@@ -1343,9 +1361,9 @@ static int OS2_SetClipboardText(_THIS, const char *text)
     debug_os2("Enter");
     if (pszText == NULL)
         return -1;
-    cbText = SDL_strlen(pszText);
+    cbText = SDL_strlen(pszText) + 1;
 
-    ulRC = DosAllocSharedMem((PPVOID)&pszClipboard, 0, cbText + 1,
+    ulRC = DosAllocSharedMem((PPVOID)&pszClipboard, 0, cbText,
                               PAG_COMMIT | PAG_READ | PAG_WRITE |
                               OBJ_GIVEABLE | OBJ_GETTABLE | OBJ_TILE);
     if (ulRC != NO_ERROR) {
@@ -1354,7 +1372,7 @@ static int OS2_SetClipboardText(_THIS, const char *text)
         return -1;
     }
 
-    strcpy(pszClipboard, pszText);
+    SDL_memcpy(pszClipboard, pszText, cbText);
     SDL_free(pszText);
 
     if (!WinOpenClipbrd(pVData->hab)) {
@@ -1396,18 +1414,19 @@ static char *OS2_GetClipboardText(_THIS)
 static SDL_bool OS2_HasClipboardText(_THIS)
 {
     SDL_VideoData *pVData = (SDL_VideoData *)_this->driverdata;
-    SDL_bool   fClipboard;
+    PSZ pszClipboard;
+    SDL_bool  result;
 
     if (!WinOpenClipbrd(pVData->hab)) {
         debug_os2("WinOpenClipbrd() failed");
         return SDL_FALSE;
     }
 
-    fClipboard = ((PSZ)WinQueryClipbrdData(pVData->hab, CF_TEXT) != NULL)?
-                   SDL_TRUE : SDL_FALSE;
+    pszClipboard = (PSZ)WinQueryClipbrdData(pVData->hab, CF_TEXT);
+    result = (pszClipboard && *pszClipboard) ? SDL_TRUE : SDL_FALSE;
     WinCloseClipbrd(pVData->hab);
 
-    return fClipboard;
+    return result;
 }
 
 
@@ -1444,7 +1463,7 @@ static int OS2_VideoInit(_THIS)
         return SDL_SetError("Window class not successfully registered.");
     }
 
-    if (stricmp(_this->name, OS2DRIVER_NAME_VMAN) == 0)
+    if (SDL_strcasecmp(_this->name, OS2DRIVER_NAME_VMAN) == 0)
         pVData->pOutput = &voVMan;
     else
         pVData->pOutput = &voDive;
@@ -1562,8 +1581,14 @@ static int OS2_GetDisplayDPI(_THIS, SDL_VideoDisplay *display, float *ddpi,
 
 static void OS2_GetDisplayModes(_THIS, SDL_VideoDisplay *display)
 {
+    SDL_DisplayMode mode;
+
     debug_os2("Enter");
-    SDL_AddDisplayMode(display, &display->current_mode);
+    SDL_copyp(&mode, &display->current_mode);
+    mode.driverdata = (MODEDATA *) SDL_malloc(sizeof(MODEDATA));
+    if (!mode.driverdata) return; /* yikes.. */
+    SDL_memcpy(mode.driverdata, display->current_mode.driverdata, sizeof(MODEDATA));
+    SDL_AddDisplayMode(display, &mode);
 }
 
 static int OS2_SetDisplayMode(_THIS, SDL_VideoDisplay *display,
@@ -1579,7 +1604,7 @@ static void OS2_DeleteDevice(SDL_VideoDevice *device)
     SDL_free(device);
 }
 
-static SDL_VideoDevice *OS2_CreateDevice(int devindex)
+static SDL_VideoDevice *OS2_CreateDevice(void)
 {
     SDL_VideoDevice *device;
 
@@ -1616,7 +1641,7 @@ static SDL_VideoDevice *OS2_CreateDevice(int devindex)
     device->GetWindowWMInfo = OS2_GetWindowWMInfo;
     device->OnWindowEnter = OS2_OnWindowEnter;
     device->SetWindowHitTest = OS2_SetWindowHitTest;
-    device->SetWindowGrab = OS2_SetWindowGrab;
+    device->SetWindowMouseGrab = OS2_SetWindowMouseGrab;
     device->CreateWindowFramebuffer = OS2_CreateWindowFramebuffer;
     device->UpdateWindowFramebuffer = OS2_UpdateWindowFramebuffer;
     device->DestroyWindowFramebuffer = OS2_DestroyWindowFramebuffer;
@@ -1634,37 +1659,36 @@ static SDL_VideoDevice *OS2_CreateDevice(int devindex)
     return device;
 }
 
-static SDL_VideoDevice *OS2DIVE_CreateDevice(int devindex)
+static SDL_VideoDevice *OS2DIVE_CreateDevice(void)
 {
     VIDEOOUTPUTINFO stVOInfo;
     if (!voDive.QueryInfo(&stVOInfo)) {
         return NULL;
     }
-    return OS2_CreateDevice(devindex);
+    return OS2_CreateDevice();
 }
 
-static SDL_VideoDevice *OS2VMAN_CreateDevice(int devindex)
+static SDL_VideoDevice *OS2VMAN_CreateDevice(void)
 {
     VIDEOOUTPUTINFO stVOInfo;
     if (!voVMan.QueryInfo(&stVOInfo)) {
           return NULL;
     }
-    return OS2_CreateDevice(devindex);
+    return OS2_CreateDevice();
 }
 
 
-/* Both bootstraps for DIVE and VMAN are uing same function OS2_CreateDevice().
+/* DIVE and VMAN bootstraps both call the same OS2_CreateDevice() function.
  * Video output system will be selected in OS2_VideoInit() by driver name.  */
 VideoBootStrap OS2DIVE_bootstrap =
 {
-  OS2DRIVER_NAME_DIVE, "OS/2 video driver",
-  OS2DIVE_CreateDevice
+    OS2DRIVER_NAME_DIVE, "OS/2 video driver",
+    OS2DIVE_CreateDevice
 };
-
 VideoBootStrap OS2VMAN_bootstrap =
 {
-  OS2DRIVER_NAME_VMAN, "OS/2 video driver",
-  OS2VMAN_CreateDevice
+    OS2DRIVER_NAME_VMAN, "OS/2 video driver",
+    OS2VMAN_CreateDevice
 };
 
 #endif /* SDL_VIDEO_DRIVER_OS2 */

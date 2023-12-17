@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2020 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -30,25 +30,24 @@
 #endif
 
 #include <signal.h>
+#include <errno.h>
 
 #ifdef __LINUX__
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <sys/syscall.h>
 #include <unistd.h>
-#include <errno.h>
 
 #include "../../core/linux/SDL_dbus.h"
 #endif /* __LINUX__ */
 
-#if defined(__LINUX__) || defined(__MACOSX__) || defined(__IPHONEOS__)
+#if (defined(__LINUX__) || defined(__MACOSX__) || defined(__IPHONEOS__)) && defined(HAVE_DLOPEN)
 #include <dlfcn.h>
 #ifndef RTLD_DEFAULT
 #define RTLD_DEFAULT NULL
 #endif
 #endif
 
-#include "SDL_platform.h"
 #include "SDL_thread.h"
 #include "../SDL_thread_c.h"
 #include "../SDL_systhread.h"
@@ -69,30 +68,28 @@ static const int sig_list[] = {
 };
 #endif
 
-static void *
-RunThread(void *data)
+static void *RunThread(void *data)
 {
 #ifdef __ANDROID__
     Android_JNI_SetupThread();
 #endif
-    SDL_RunThread((SDL_Thread *) data);
+    SDL_RunThread((SDL_Thread *)data);
     return NULL;
 }
 
-#if defined(__MACOSX__) || defined(__IPHONEOS__)
+#if (defined(__MACOSX__) || defined(__IPHONEOS__)) && defined(HAVE_DLOPEN)
 static SDL_bool checked_setname = SDL_FALSE;
-static int (*ppthread_setname_np)(const char*) = NULL;
-#elif defined(__LINUX__)
+static int (*ppthread_setname_np)(const char *) = NULL;
+#elif defined(__LINUX__) && defined(HAVE_DLOPEN)
 static SDL_bool checked_setname = SDL_FALSE;
-static int (*ppthread_setname_np)(pthread_t, const char*) = NULL;
+static int (*ppthread_setname_np)(pthread_t, const char *) = NULL;
 #endif
-int
-SDL_SYS_CreateThread(SDL_Thread * thread)
+int SDL_SYS_CreateThread(SDL_Thread *thread)
 {
     pthread_attr_t type;
 
     /* do this here before any threads exist, so there's no race condition. */
-    #if defined(__MACOSX__) || defined(__IPHONEOS__) || defined(__LINUX__)
+    #if (defined(__MACOSX__) || defined(__IPHONEOS__) || defined(__LINUX__)) && defined(HAVE_DLOPEN)
     if (!checked_setname) {
         void *fn = dlsym(RTLD_DEFAULT, "pthread_setname_np");
         #if defined(__MACOSX__) || defined(__IPHONEOS__)
@@ -102,14 +99,14 @@ SDL_SYS_CreateThread(SDL_Thread * thread)
         #endif
         checked_setname = SDL_TRUE;
     }
-    #endif
+#endif
 
     /* Set the thread attributes */
     if (pthread_attr_init(&type) != 0) {
         return SDL_SetError("Couldn't initialize pthread attributes");
     }
     pthread_attr_setdetachstate(&type, PTHREAD_CREATE_JOINABLE);
-    
+
     /* Set caller-requested stack size. Otherwise: use the system default. */
     if (thread->stacksize) {
         pthread_attr_setstacksize(&type, thread->stacksize);
@@ -123,8 +120,7 @@ SDL_SYS_CreateThread(SDL_Thread * thread)
     return 0;
 }
 
-void
-SDL_SYS_SetupThread(const char *name)
+void SDL_SYS_SetupThread(const char *name)
 {
 #if !defined(__NACL__)
     int i;
@@ -132,30 +128,37 @@ SDL_SYS_SetupThread(const char *name)
 #endif /* !__NACL__ */
 
     if (name != NULL) {
-        #if defined(__MACOSX__) || defined(__IPHONEOS__) || defined(__LINUX__)
+        #if (defined(__MACOSX__) || defined(__IPHONEOS__) || defined(__LINUX__)) && defined(HAVE_DLOPEN)
         SDL_assert(checked_setname);
         if (ppthread_setname_np != NULL) {
             #if defined(__MACOSX__) || defined(__IPHONEOS__)
             ppthread_setname_np(name);
-            #elif defined(__LINUX__)
-            ppthread_setname_np(pthread_self(), name);
-            #endif
+#elif defined(__LINUX__)
+            if (ppthread_setname_np(pthread_self(), name) == ERANGE) {
+                char namebuf[16]; /* Limited to 16 char */
+                SDL_strlcpy(namebuf, name, sizeof(namebuf));
+                ppthread_setname_np(pthread_self(), namebuf);
+            }
+#endif
         }
-        #elif HAVE_PTHREAD_SETNAME_NP
-            #if defined(__NETBSD__)
-            pthread_setname_np(pthread_self(), "%s", name);
-            #else
-            pthread_setname_np(pthread_self(), name);
-            #endif
-        #elif HAVE_PTHREAD_SET_NAME_NP
-            pthread_set_name_np(pthread_self(), name);
-        #elif defined(__HAIKU__)
-            /* The docs say the thread name can't be longer than B_OS_NAME_LENGTH. */
-            char namebuf[B_OS_NAME_LENGTH];
-            SDL_snprintf(namebuf, sizeof (namebuf), "%s", name);
-            namebuf[sizeof (namebuf) - 1] = '\0';
-            rename_thread(find_thread(NULL), namebuf);
-        #endif
+#elif HAVE_PTHREAD_SETNAME_NP
+#if defined(__NETBSD__)
+        pthread_setname_np(pthread_self(), "%s", name);
+#else
+        if (pthread_setname_np(pthread_self(), name) == ERANGE) {
+            char namebuf[16]; /* Limited to 16 char */
+            SDL_strlcpy(namebuf, name, sizeof(namebuf));
+            pthread_setname_np(pthread_self(), namebuf);
+        }
+#endif
+#elif HAVE_PTHREAD_SET_NAME_NP
+        pthread_set_name_np(pthread_self(), name);
+#elif defined(__HAIKU__)
+        /* The docs say the thread name can't be longer than B_OS_NAME_LENGTH. */
+        char namebuf[B_OS_NAME_LENGTH];
+        SDL_strlcpy(namebuf, name, sizeof(namebuf));
+        rename_thread(find_thread(NULL), namebuf);
+#endif
     }
 
    /* NativeClient does not yet support signals.*/
@@ -178,27 +181,14 @@ SDL_SYS_SetupThread(const char *name)
 #endif
 }
 
-SDL_threadID
-SDL_ThreadID(void)
+SDL_threadID SDL_ThreadID(void)
 {
-    return ((SDL_threadID) pthread_self());
+    return (SDL_threadID)pthread_self();
 }
 
-#if __LINUX__
-/**
-   \brief Sets the SDL priority (not nice level) for a thread, using setpriority() if appropriate, and RealtimeKit if available.
-   Differs from SDL_LinuxSetThreadPriority in also taking the desired scheduler policy,
-   such as SCHED_OTHER or SCHED_RR.
-
-   \return 0 on success, or -1 on error.
- */
-extern DECLSPEC int SDLCALL SDL_LinuxSetThreadPriorityAndPolicy(Sint64 threadID, int sdlPriority, int schedPolicy);
-#endif
-
-int
-SDL_SYS_SetThreadPriority(SDL_ThreadPriority priority)
+int SDL_SYS_SetThreadPriority(SDL_ThreadPriority priority)
 {
-#if __NACL__ || __RISCOS__
+#if __NACL__ || __RISCOS__ || __OS2__
     /* FIXME: Setting thread priority does not seem to be supported in NACL */
     return 0;
 #else
@@ -295,14 +285,12 @@ SDL_SYS_SetThreadPriority(SDL_ThreadPriority priority)
 #endif /* #if __NACL__ || __RISCOS__ */
 }
 
-void
-SDL_SYS_WaitThread(SDL_Thread * thread)
+void SDL_SYS_WaitThread(SDL_Thread *thread)
 {
     pthread_join(thread->handle, 0);
 }
 
-void
-SDL_SYS_DetachThread(SDL_Thread * thread)
+void SDL_SYS_DetachThread(SDL_Thread *thread)
 {
     pthread_detach(thread->handle);
 }

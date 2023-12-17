@@ -1,6 +1,6 @@
 /*
   Simple DirectMedia Layer
-  Copyright (C) 1997-2020 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
   Copyright (C) 2020 Collabora Ltd.
 
   This software is provided 'as-is', without any express or implied
@@ -19,17 +19,41 @@
      misrepresented as being the original software.
   3. This notice may not be removed or altered from any source distribution.
 */
+#include "../../SDL_internal.h"
 
 #include "SDL_evdev_capabilities.h"
 
-#if HAVE_LIBUDEV_H || defined(SDL_JOYSTICK_LINUX)
+#if HAVE_LINUX_INPUT_H
+
+/* missing defines in older Linux kernel headers */
+#ifndef BTN_TRIGGER_HAPPY
+#define BTN_TRIGGER_HAPPY 0x2c0
+#endif
+#ifndef BTN_DPAD_UP
+#define BTN_DPAD_UP 0x220
+#endif
+#ifndef KEY_ALS_TOGGLE
+#define KEY_ALS_TOGGLE 0x230
+#endif
 
 extern int
-SDL_EVDEV_GuessDeviceClass(unsigned long bitmask_ev[NBITS(EV_MAX)],
-                           unsigned long bitmask_abs[NBITS(ABS_MAX)],
-                           unsigned long bitmask_key[NBITS(KEY_MAX)],
-                           unsigned long bitmask_rel[NBITS(REL_MAX)])
+SDL_EVDEV_GuessDeviceClass(const unsigned long bitmask_ev[NBITS(EV_MAX)],
+                           const unsigned long bitmask_abs[NBITS(ABS_MAX)],
+                           const unsigned long bitmask_key[NBITS(KEY_MAX)],
+                           const unsigned long bitmask_rel[NBITS(REL_MAX)])
 {
+    struct range
+    {
+        unsigned start;
+        unsigned end;
+    };
+
+    /* key code ranges above BTN_MISC (start is inclusive, stop is exclusive)*/
+    static const struct range high_key_blocks[] = {
+        { KEY_OK, BTN_DPAD_UP },
+        { KEY_ALS_TOGGLE, BTN_TRIGGER_HAPPY }
+    };
+
     int devclass = 0;
     unsigned long keyboard_mask;
 
@@ -56,7 +80,7 @@ SDL_EVDEV_GuessDeviceClass(unsigned long bitmask_ev[NBITS(EV_MAX)],
         if (test_bit(BTN_STYLUS, bitmask_key) || test_bit(BTN_TOOL_PEN, bitmask_key)) {
             ; /* ID_INPUT_TABLET */
         } else if (test_bit(BTN_TOOL_FINGER, bitmask_key) && !test_bit(BTN_TOOL_PEN, bitmask_key)) {
-            ; /* ID_INPUT_TOUCHPAD */
+            devclass |= SDL_UDEV_DEVICE_TOUCHPAD; /* ID_INPUT_TOUCHPAD */
         } else if (test_bit(BTN_MOUSE, bitmask_key)) {
             devclass |= SDL_UDEV_DEVICE_MOUSE; /* ID_INPUT_MOUSE */
         } else if (test_bit(BTN_TOUCH, bitmask_key)) {
@@ -86,13 +110,41 @@ SDL_EVDEV_GuessDeviceClass(unsigned long bitmask_ev[NBITS(EV_MAX)],
         devclass |= SDL_UDEV_DEVICE_MOUSE; /* ID_INPUT_MOUSE */
     }
 
+    if (test_bit(EV_KEY, bitmask_ev)) {
+        unsigned i;
+        unsigned long found = 0;
+
+        for (i = 0; i < BTN_MISC / BITS_PER_LONG; ++i) {
+            found |= bitmask_key[i];
+        }
+        /* If there are no keys in the lower block, check the higher blocks */
+        if (!found) {
+            unsigned block;
+            for (block = 0; block < (sizeof(high_key_blocks) / sizeof(struct range)); ++block) {
+                for (i = high_key_blocks[block].start; i < high_key_blocks[block].end; ++i) {
+                    if (test_bit(i, bitmask_key)) {
+                        found = 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (found > 0) {
+            devclass |= SDL_UDEV_DEVICE_KEYBOARD; /* ID_INPUT_KEY */
+        }
+    }
+
     /* the first 32 bits are ESC, numbers, and Q to D; if we have any of
      * those, consider it a keyboard device; do not test KEY_RESERVED, though */
     keyboard_mask = 0xFFFFFFFE;
-    if ((bitmask_key[0] & keyboard_mask) != 0)
+    if ((bitmask_key[0] & keyboard_mask) != 0) {
         devclass |= SDL_UDEV_DEVICE_KEYBOARD; /* ID_INPUT_KEYBOARD */
+    }
 
     return devclass;
 }
 
-#endif
+#endif /* HAVE_LINUX_INPUT_H */
+
+/* vi: set ts=4 sw=4 expandtab: */
