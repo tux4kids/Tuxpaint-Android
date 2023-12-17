@@ -1,12 +1,11 @@
 
 SDL_image 2.0
 
-The latest version of this library is available from:
-http://www.libsdl.org/projects/SDL_image/
+The latest version of this library is available from GitHub:
+https://github.com/libsdl-org/SDL_image/releases
 
 This is a simple library to load images of various formats as SDL surfaces.
-This library supports BMP, PNM (PPM/PGM/PBM), XPM, LBM, PCX, GIF, JPEG, PNG,
-TGA, TIFF, and simple SVG formats.
+It can load BMP, GIF, JPEG, LBM, PCX, PNG, PNM (PPM/PGM/PBM), QOI, TGA, XCF, XPM, and simple SVG format images. It can also load AVIF, JPEG-XL, TIFF, and WebP images, depending on build options (see the note below for details.)
 
 API:
 #include "SDL_image.h"
@@ -24,17 +23,16 @@ To create a surface from an XPM image included in C source, use:
 
 	SDL_Surface *IMG_ReadXPMFromArray(char **xpm);
 
-An example program 'showimage' is included, with source in showimage.c
+An example program 'showimage' is included, with source in 'examples/showimage.c'
 
-JPEG support requires the JPEG library: http://www.ijg.org/
-PNG support requires the PNG library: http://www.libpng.org/pub/png/libpng.html
-    and the Zlib library: http://www.gzip.org/zlib/
-TIFF support requires the TIFF library: ftp://ftp.sgi.com/graphics/tiff/
+Documentation is also available online at https://wiki.libsdl.org/SDL2_image
 
-If you have these libraries installed in non-standard places, you can
-try adding those paths to the configure script, e.g.
-sh ./configure CPPFLAGS="-I/somewhere/include" LDFLAGS="-L/somewhere/lib"
-If this works, you may need to add /somewhere/lib to your LD_LIBRARY_PATH
-so shared library loading works correctly.
+This library is under the zlib License, see the file "LICENSE.txt" for details.
 
-This library is under the zlib License, see the file "COPYING.txt" for details.
+Note:
+Support for AVIF, JPEG-XL, TIFF, and WebP are not included by default because of the size of the decode libraries, but you can get them by running external/download.sh
+- When building with CMake, you can enable the appropriate SDL2IMAGE_* options defined in CMakeLists.txt. SDL2IMAGE_VENDORED allows switching between system and vendored libraries.
+- When building with configure/make, you can build and install them normally and the configure script will detect and use them.
+- When building with Visual Studio, you will need to build the libraries and then add the appropriate LOAD_* preprocessor define to the Visual Studio project.
+- When building with Xcode, you can edit the config at the top of the project to enable them, and you will need to include the appropriate framework in your application.
+- For Android, you can edit the config at the top of Android.mk to enable them.

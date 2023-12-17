@@ -1,53 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\IMG.c">
+    <ClCompile Include="..\src\IMG.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_bmp.c">
+    <ClCompile Include="..\src\IMG_bmp.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_gif.c">
+    <ClCompile Include="..\src\IMG_gif.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_jpg.c">
+    <ClCompile Include="..\src\IMG_jpg.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_lbm.c">
+    <ClCompile Include="..\src\IMG_lbm.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_pcx.c">
+    <ClCompile Include="..\src\IMG_pcx.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_png.c">
+    <ClCompile Include="..\src\IMG_png.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_pnm.c">
+    <ClCompile Include="..\src\IMG_pnm.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_tga.c">
+    <ClCompile Include="..\src\IMG_tga.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_tif.c">
+    <ClCompile Include="..\src\IMG_tif.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_webp.c">
+    <ClCompile Include="..\src\IMG_webp.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_xcf.c">
+    <ClCompile Include="..\src\IMG_xcf.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_xpm.c">
+    <ClCompile Include="..\src\IMG_xpm.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_xv.c">
+    <ClCompile Include="..\src\IMG_xv.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_xxx.c">
+    <ClCompile Include="..\src\IMG_svg.c">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\IMG_WIC.c" />
-    <ClCompile Include="..\IMG_svg.c">
+    <ClCompile Include="..\src\IMG_qoi.c">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\IMG_WIC.c">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\IMG_avif.c">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\IMG_jxl.c">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\IMG_stb.c">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,7 +77,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\SDL_image.h">
+    <ClInclude Include="..\include\SDL_image.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,67 +85,5 @@
     <ResourceCompile Include="Version.rc">
       <Filter>Sources</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="external\lib\x64\LICENSE.zlib.txt">
-      <Filter>x64</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x64\LICENSE.webp.txt">
-      <Filter>x64</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x64\LICENSE.tiff.txt">
-      <Filter>x64</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x64\LICENSE.png.txt">
-      <Filter>x64</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x64\LICENSE.jpeg.txt">
-      <Filter>x64</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x64\libwebp-7.dll">
-      <Filter>x64</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x64\libtiff-5.dll">
-      <Filter>x64</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x64\libpng16-16.dll">
-      <Filter>x64</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x64\zlib1.dll">
-      <Filter>x64</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x64\libjpeg-9.dll">
-      <Filter>x64</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x86\LICENSE.zlib.txt">
-      <Filter>x86</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x86\LICENSE.webp.txt">
-      <Filter>x86</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x86\LICENSE.tiff.txt">
-      <Filter>x86</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x86\LICENSE.png.txt">
-      <Filter>x86</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x86\LICENSE.jpeg.txt">
-      <Filter>x86</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x86\libwebp-7.dll">
-      <Filter>x86</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x86\libtiff-5.dll">
-      <Filter>x86</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x86\libpng16-16.dll">
-      <Filter>x86</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x86\zlib1.dll">
-      <Filter>x86</Filter>
-    </CustomBuild>
-    <CustomBuild Include="external\lib\x86\libjpeg-9.dll">
-      <Filter>x86</Filter>
-    </CustomBuild>
   </ItemGroup>
 </Project>

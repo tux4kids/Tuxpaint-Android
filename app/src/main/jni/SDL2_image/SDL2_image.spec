@@ -1,5 +1,5 @@
 %define name SDL2_image
-%define version 2.0.5
+%define version 2.8.1
 %define release 1
 
 Summary: Simple DirectMedia Layer - Sample Image Loading Library
@@ -34,7 +34,7 @@ This library supports BMP, PPM, PCX, GIF, JPEG, PNG, and TIFF formats.
 %prep
 rm -rf ${RPM_BUILD_ROOT}
 
-%setup 
+%setup
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{prefix}
@@ -49,7 +49,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc README.txt CHANGES.txt COPYING.txt
+%doc README.txt CHANGES.txt LICENSE.txt
 %{prefix}/lib/lib*.so.*
 
 %files devel
@@ -61,7 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/pkgconfig/*.pc
 
 %changelog
-* Wed Jan 19 2000 Sam Lantinga 
+* Wed Jan 19 2000 Sam Lantinga
 - converted to get package information from configure
 * Tue Jan 18 2000 Hakan Tandogan <hakan@iconsult.com>
 - initial spec file
