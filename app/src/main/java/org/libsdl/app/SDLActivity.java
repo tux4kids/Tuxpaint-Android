@@ -488,6 +488,8 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
         if (!mHasMultiWindow) {
             resumeNativeThread();
         }
+
+	mSurface.enableSensor(Sensor.TYPE_ACCELEROMETER, false);
     }
 
     @Override
