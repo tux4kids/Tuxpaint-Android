@@ -5,7 +5,10 @@ SDL_TTF_LOCAL_PATH := $(call my-dir)
 SUPPORT_HARFBUZZ ?= true
 HARFBUZZ_LIBRARY_PATH := external/harfbuzz
 
-FREETYPE_LIBRARY_PATH := external/freetype
+# Generally SDL2_ttf will compile the freetype in external folder.
+# However, since tuxpaint has compiled another freetype as a shared library,
+# here the external freetype will be disabled.
+# FREETYPE_LIBRARY_PATH := external/freetype
 
 # Build freetype library
 ifneq ($(FREETYPE_LIBRARY_PATH),)
@@ -31,7 +34,7 @@ LOCAL_CFLAGS += -O2
 
 ifneq ($(FREETYPE_LIBRARY_PATH),)
     LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(FREETYPE_LIBRARY_PATH)/include
-    LOCAL_STATIC_LIBRARIES += freetype
+    LOCAL_STATIC_LIBRARIES += tuxpaint_freetype
 endif
 
 ifeq ($(SUPPORT_HARFBUZZ),true)
@@ -40,7 +43,7 @@ ifeq ($(SUPPORT_HARFBUZZ),true)
     LOCAL_STATIC_LIBRARIES += harfbuzz
 endif
 
-LOCAL_SHARED_LIBRARIES := SDL2
+LOCAL_SHARED_LIBRARIES := SDL2 tuxpaint_freetype
 
 LOCAL_EXPORT_C_INCLUDES += $(LOCAL_C_INCLUDES)
 
