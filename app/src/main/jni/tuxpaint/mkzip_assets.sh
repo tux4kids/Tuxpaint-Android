@@ -48,7 +48,9 @@ then
 	cp -r osk tmpzip/data/osk && \
 	rm tmpzip/data/osk/.indent.pro && \
 	mkdir tmpzip/data/images/magic && \
-	cp magic/icons/* tmpzip/data/images/magic && \
+	cd magic/icons && \
+	for icon in *png; do convert $icon PNG32:../../tmpzip/data/images/magic/$icon; done && \
+	cd ../.. && \
 	mkdir tmpzip/data/sounds/magic && \
 	cp magic/sounds/* tmpzip/data/sounds/magic && \
 	cp -r stamps tmpzip/stamps && \
