@@ -564,6 +564,8 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
                SDLActivity.handleNativeState();
            }
         }
+
+	mSurface.enableSensor(Sensor.TYPE_ACCELEROMETER, false);
     }
 
     @Override
