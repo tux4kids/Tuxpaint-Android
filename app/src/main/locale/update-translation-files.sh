@@ -1,6 +1,8 @@
 #!/bin/sh
 # Update .po files and convert to .xml translation files
-
+#
+# Note, 2023 december: If a2po doesn't work with python3, apply this pull request to android2po:
+# https://github.com/miracle2k/android2po/pull/72/commits/144dc6186974df40cf79daa465d6c644b7671651
 
 # Hack for Santali, as it doesn't work with the default generated name
 mv ../res/values-b+sat+Olck ../res/values-sat-rOlck
