@@ -3,7 +3,7 @@
 # Bill Kendrick <bill@newbreedsoftware.com>; https://tuxpaint.org/
 # Based on inkscape's completion file, by allali@univ-mlv.fr
 #
-# Last modified 2023-06-01
+# Last modified 2023-12-29
 #
 # $Id$
 
@@ -11,6 +11,10 @@
 # to how we should be doing this... -bjk 2009.09.09
 
 # FIXME: Use the source to list all of the available options -bjk 2018.12.18
+
+# FIXME: For options with specific settings (e.g., "orient" and "complexity"),
+# a way to hint to the user, and allow completion, for values after the "="
+# -bjk 2023.12.29
 
 have tuxpaint &&
 _tuxpaint()
@@ -42,6 +46,7 @@ _tuxpaint()
 			-m --mixedcase -u --uppercase \
 			--label --nolabel \
 			--brushspacing --nobrushspacing \
+			--complexity=advanced --complexity=beginner --complexity=novice \
 			--fancycursors --nofancycursors \
 			--hidecursor --showcursor \
 			--mouse --keyboard \

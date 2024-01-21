@@ -4,7 +4,7 @@
   Foam Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 20, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -42,7 +42,7 @@ static int *foam_mask, *foam_mask_tmp;
 static SDL_Surface *foam_7, *foam_5, *foam_3, *foam_1;
 
 Uint32 foam_api_version(void);
-int foam_init(magic_api * api, Uint32 disabled_features);
+int foam_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 char *foam_get_description(magic_api * api, int which, int mode);
 void foam_release(magic_api * api, int which,
                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
@@ -52,8 +52,9 @@ void foam_drag(magic_api * api, int which, SDL_Surface * canvas,
 void foam_click(magic_api * api, int which, int mode, SDL_Surface * canvas,
                 SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 SDL_Surface *foam_get_icon(magic_api * api, int which);
-char *foam_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED);
-int foam_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED);
+char *foam_get_name(magic_api * api, int which);
+int foam_get_group(magic_api * api, int which);
+int foam_get_order(int which);
 void foam_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void foam_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void foam_set_color(magic_api * api, int which, SDL_Surface * canvas,
@@ -77,7 +78,7 @@ Uint32 foam_api_version(void)
 
 
 // No setup required:
-int foam_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int foam_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
   SDL_Surface *foam_data;
@@ -87,6 +88,11 @@ int foam_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
 
   snprintf(fname, sizeof(fname), "%simages/magic/foam_data.png", api->data_directory);
   foam_data = IMG_Load(fname);
+  if (foam_data == NULL)
+  {
+    fprintf(stderr, "Cannot load %s\n", fname);
+    return (0);
+  }
 
   foam_7 = api->scale(foam_data, ((api->canvas_w / FOAM_PROP) * 4) / 4, ((api->canvas_h / FOAM_PROP) * 4) / 4, 1);
   foam_5 = api->scale(foam_data, ((api->canvas_w / FOAM_PROP) * 3) / 4, ((api->canvas_h / FOAM_PROP) * 3) / 4, 1);
@@ -94,6 +100,12 @@ int foam_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
   foam_1 = api->scale(foam_data, ((api->canvas_w / FOAM_PROP) * 1) / 4, ((api->canvas_h / FOAM_PROP) * 1) / 4, 1);
 
   SDL_FreeSurface(foam_data);
+
+  if (foam_7 == NULL || foam_5 == NULL || foam_3 == NULL || foam_1 == NULL)
+  {
+    fprintf(stderr, "Cannot scale %s\n", fname);
+    return(0);
+  }
 
   return (1);
 }
@@ -124,6 +136,12 @@ char *foam_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED
 int foam_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
+}
+
+// Return our orders
+int foam_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 1600;
 }
 
 // Return our descriptions, localized:

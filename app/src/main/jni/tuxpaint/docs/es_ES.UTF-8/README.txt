@@ -1,12 +1,12 @@
                                    Tux Paint
-                                versión 0.9.31
+                                versión 0.9.32
 
                      A simple drawing program for children
 
-        Copyright © 2002-2023 by various contributors; see AUTHORS.txt.
+        Copyright © 2002-2024 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                julio 20, 2023
+                                enero 13, 2024
 
 +-------------------------------------------------+
 |                Table of Contents                |
@@ -97,36 +97,52 @@ parts of the program in their own GPL'd software.)
 
 See COPYING.txt for the full text of the GPL license.
 
-D. What's New in Tux Paint version 0.9.31?
+D. What's New in Tux Paint version 0.9.32?
 
-Fuzzy Erasers
-    Fuzzy-edged round erasers have been added to the Eraser tool
+1-point Perspective (vanishing point) Magic tool
+    A pair of tools that allow you to set a vanishing point, and then draw
+    lines in 1-point perspective.
 
-New Magic tools
-    Loops, Ribbon, Smooth, and Squiggles
+2-point Perspective (vanishing point) Magic tool
+    A pair of tools that allow you to set two vanishing points, and then draw
+    lines in 2-point perspective.
 
-Create templates from Open dialog
-    Saved drawings can be turned into templates (used to make new drawings) via
-    a new option in the Open dialog. (This feature may be deactivated using the
-    "notemplateexport" simplification option.)
+3-point Perspective (vanishing point) Magic tool
+    A pair of tools that allow you to set three vanishing points, and then draw
+    lines in 3-point perspective.
 
-User interface font may be overridden
-    The font used for the user interface (button labels, dialog pop-ups, and
-    instructions) can be overridden from its default ("DejaVu Sans"). (See the
-    "uifont" configuration option. Use "--listfonts" to see a list of available
-    fonts.)
+Isometric Magic tool
+    A tool that draws lines in an isometric projection.
 
-File Erase may be disabled
+Dimetric Magic tool
+    A pair of tools that allow you to set an angle, and then draw lines in a
+    dimetric projection.
 
-    Controls to erase saved work — saved drawings (via the Open dialog) and
-    exported templates (via the New dialog) — can be disabled. (See the
-    "noerase" configuration option.)
+Trimetric Magic tool
+    A pair of tools that allow you to set two angles, and then draw lines in a
+    trimetric projection.
 
-"Controlling Tux Paint" documentation
+Oblique Magic tool
+    A pair of tools that allow you to set an angles, and then draw lines in an
+    oblique projection.
 
-    A brief overview of how Tux Paint can be controlled — mouse, tablet,
-    touchscreen, joystick, and keyboard — has been added to the README
-    documentation.
+Epitrochoid and Hypotrochoid Magic tools
+    Tools that create centered trochoid curved patterns.
+
+New "complexity" setting (complexity)
+
+A new setting that allows certain Magic tools to behave differently (or remove
+    their availability altogether) based on the expertise-level of the user.
+    The new "N-point Perspective" tools and "Clone" tool are affected by this
+    setting.
+Magic tools reorganized
+
+Each group of Magic tools has been reorganized to keep related tools next to
+    each other, rather than being sorted alphabetically by their (localized)
+    names.
+Font details shown when selected
+    The name and size of the selected font are shown when using the Text and
+    Label tools.
 
 
 See CHANGES.txt for the complete list of changes.
@@ -1317,23 +1333,27 @@ VII.Follow the Tux Paint project on social media
 Tux Paint maintains a presence on a variety of social media networks, where we
 post updates and artwork.
 
+  * Follow @tuxpaint.bsky.social on Bluesky
   * Join the Tux Paint page on Facebook
   * Follow @TuxPaintDevs on Instagram
   * Follow @tuxpaint@floss.social on Mastodon
   * Follow u/TuxPaintDevs on Reddit
   * Follow @TuxPaintDevs on Threads
+  * Follow @TuxPaintDevs on TikTok
   * Follow Tux Paint on Tumblr
-  * Follow @TuxPaintTweets on Twitter
+  * Subscribe to @TuxPaintOfficial on YouTube
 
 VIII. Trademark notices
 
   * "Linux" is a registered trademark of Linus Torvalds.
   * "Microsoft" and "Windows" are registered trademarks of Microsoft Corp.
   * "Apple" and "macOS" are registered trademarks of Apple Inc.
+  * "Haiku" is a registered trademark of Haiku, Inc.
   * "Facebook", "Instagram", and "Threads" are registered trademarks of Meta
     Platforms, Inc.
   * "Mastodon" is a registered trademark of Mastodon gGmbH.
   * "Reddit" is a registered trademark of Reddit, Inc.
+  * "TIK TOK" is a trademark of Bytedance Ltd.
   * "Tumblr" is a registered trademark of Tumblr, Inc.
-  * "Twitter" is a registered trademark of X Corp.
+  * "YouTube" is a registered trademark of Alphabet, Inc.
 

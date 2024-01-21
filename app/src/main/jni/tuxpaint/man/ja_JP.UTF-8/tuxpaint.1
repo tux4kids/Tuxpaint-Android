@@ -1,5 +1,5 @@
-.\" tuxpaint.1 - 2023.07.20
-.TH TUXPAINT 1 "2023年7月20日" "0.9.31" "Tux Paint"
+.\" tuxpaint.1 - 2023.12.29
+.TH TUXPAINT 1 "2023年12月29日" "0.9.32" "Tux Paint"
 .SH NAME
 tuxpaint -- "Tux Paint", a drawing program for young children.
 
@@ -76,6 +76,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-nolabel]
 .br
 [\-\-nobrushspacing]
+.br
+[\-\-complexity=\fIbeginner\fP | \-\-complexity=\fInovice\fP]
 .br
 [\-\-notemplateexport]
 .br
@@ -232,6 +234,8 @@ tuxpaint -- "Tux Paint", a drawing program for young children.
 [\-\-label]
 .br
 [\-\-brushspacing]
+.br
+[\-\-complexity=\fIadvanced\fP]
 .br
 [\-\-templateexport]
 .br
@@ -465,6 +469,11 @@ which can be altered or moved later.
 .B \-\-nobrushspacing \-\-brushspacing
 Disable or enable (default) the brush spacing option of the Paint and Lines
 tools, which allows you to override the default spacing of a brush.
+
+.TP 8
+.B \-\-complexity=advanced \-\-complexity=beginner \-\-complexity=novice
+Set the complexity (expertise) level, which affects whether certain Magic
+tools are available, or how they operate. (advanced is the default)
 
 .TP 8
 .B \-\-notemplateexport \-\-templateexport

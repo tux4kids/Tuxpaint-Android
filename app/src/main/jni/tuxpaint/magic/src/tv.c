@@ -7,7 +7,7 @@
   Credits: Adam 'foo-script' Rakowski <foo-script@o2.pl>
   and Bill Kendrick <bill@newbreedsoftware.com>
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -26,7 +26,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 22, 2023
+  Last updated: January 16, 2024
 */
 
 #include "tp_magic_api.h"
@@ -43,16 +43,22 @@ enum
   NUM_TV_TOOLS
 };
 
+int tv_orders[NUM_TV_TOOLS] = {
+  2000,
+  2001,
+};
+
 Mix_Chunk *tv_snd;
 
 Uint32 tv_api_version(void);
 void tv_set_color(magic_api * api, int which, SDL_Surface * canvas,
                   SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
-int tv_init(magic_api * api, Uint32 disabled_features);
+int tv_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int tv_get_tool_count(magic_api * api);
 SDL_Surface *tv_get_icon(magic_api * api, int which);
 char *tv_get_name(magic_api * api, int which);
 int tv_get_group(magic_api * api, int which);
+int tv_get_order(int which);
 char *tv_get_description(magic_api * api, int which, int mode);
 int tv_requires_colors(magic_api * api, int which);
 void tv_release(magic_api * api, int which,
@@ -87,7 +93,7 @@ void tv_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, 
   //get the colors from API and store it in structure
 }
 
-int tv_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int tv_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -122,6 +128,11 @@ char *tv_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int tv_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
+}
+
+int tv_get_order(int which)
+{
+  return tv_orders[which];
 }
 
 char *tv_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)

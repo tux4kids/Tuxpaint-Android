@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: May 16, 2023
+  Last updated: December 29, 2023
 */
 
 #include <stdio.h>
@@ -44,12 +44,13 @@ static int cartoon_radius = 16;
 #define OUTLINE_THRESH 48
 
 /* Local function prototypes: */
-int cartoon_init(magic_api * api, Uint32 disabled_features);
+int cartoon_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 Uint32 cartoon_api_version(void);
 int cartoon_get_tool_count(magic_api * api);
 SDL_Surface *cartoon_get_icon(magic_api * api, int which);
 char *cartoon_get_name(magic_api * api, int which);
 int cartoon_get_group(magic_api * api, int which);
+int cartoon_get_order(int which);
 char *cartoon_get_description(magic_api * api, int which, int mode);
 void cartoon_apply_colors(magic_api * api, SDL_Surface * surf, int xx, int yy);
 void cartoon_apply_outline(magic_api * api, int xx, int yy);
@@ -74,7 +75,7 @@ void cartoon_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas
 
 
 // No setup required:
-int cartoon_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int cartoon_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -115,6 +116,12 @@ char *cartoon_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
 int cartoon_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_COLOR_FILTERS;
+}
+
+// Return our orders
+int cartoon_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 600;
 }
 
 // Return our descriptions, localized:

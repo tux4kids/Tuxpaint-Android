@@ -3,7 +3,7 @@
    Applies a "bloom" effect to the image.
    (https://en.wikipedia.org/wiki/Bloom_(shader_effect))
 
-   Last updated: April 22, 2023
+   Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -42,11 +42,12 @@ Uint8 *bloom_mask = NULL;
 int bloom_scale;
 
 Uint32 bloom_api_version(void);
-int bloom_init(magic_api * api, Uint32 disabled_features);
+int bloom_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int bloom_get_tool_count(magic_api * api);
 SDL_Surface *bloom_get_icon(magic_api * api, int which);
 char *bloom_get_name(magic_api * api, int which);
 int bloom_get_group(magic_api * api, int which);
+int bloom_get_order(int which);
 char *bloom_get_description(magic_api * api, int which, int mode);
 int bloom_requires_colors(magic_api * api, int which);
 int bloom_modes(magic_api * api, int which);
@@ -76,7 +77,7 @@ Uint32 bloom_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int bloom_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int bloom_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -107,9 +108,14 @@ char *bloom_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
   return strdup(gettext("Bloom"));
 }
 
-int bloom_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED)
+int bloom_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_COLOR_FILTERS;
+}
+
+int bloom_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 900;
 }
 
 char *bloom_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2014 Richard Hughes <richard@hughsie.com> -->
 <!-- Copyright 2019-2022 Endless OS Foundation LLC -->
+<!-- Copyright 2024 Tux Paint developers -->
 <component type="desktop">
   <id>org.tuxpaint.Tuxpaint</id>
   <metadata_license>CC0-1.0</metadata_license>
@@ -21,7 +22,7 @@
       help them be creative.
     </p>
   </description>
-  <developer_name>New Breed Software et al.</developer_name>
+  <developer_name>Bill Kendrick, et al.</developer_name>
   <url type="homepage">https://tuxpaint.org/</url>
   <url type="bugtracker">https://sourceforge.net/p/tuxpaint/_list/tickets</url>
   <url type="faq">https://tuxpaint.org/docs/en/html/FAQ.html</url>
@@ -43,6 +44,17 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.9.32" date="2024-01-16">
+      <description>
+        <p>New Magic tools: 1-, 2-, and 3-Point Perspective line-drawing tools (and corresponding vanishing point editors).</p>
+        <p>New Magic tools: Isometric, Dimetric, Trimetric, and Oblique line-drawing tools (and corresponding angle editors).</p>
+        <p>New Magic tools: Epitrochoid and Hypotrochoid generators.</p>
+        <p>New configuration option, "complexity", which affects the behavior (or availability) of some Magic tools.</p>
+        <p>Magic tools reorganized (previously ordered alphabetically by localized name).</p>
+        <p>Font name and size shown when selecting fonts in Text and Label tools.</p>
+        <p>Bug-fixes and localization updates.</p>
+      </description>
+    </release>
     <release version="0.9.31" date="2023-07-20">
       <description>
         <p>New Magic tools: Loops, Ribbon, Smooth, and Squiggles.</p>
@@ -66,7 +78,7 @@
         <p>Stamps may be rotated before being applied to the canvas.</p>
         <p>Shapes tool, in drag-from-corner mode, has been improved.</p>
         <p>Fill tool now offers a shaped gradient (bevel) mode.</p>
-        <p>A quick Eraser mode is be accessed via keyboard shortcut.</p>
+        <p>A quick Eraser mode can be accessed via keyboard shortcut.</p>
         <p>The rainbow palette (HSV color picker) can now load the built-in color, or the colors from the pipette tool or color mixer.</p>
         <p>Starter and Template images can specify how they should stretch, to avoid smearing when the canvas aspect ratio differs from that of the image.</p>
         <p>The "buttonsize" configuration option now offers an "auto" setting.</p>

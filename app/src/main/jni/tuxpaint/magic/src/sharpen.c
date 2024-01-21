@@ -6,7 +6,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 19, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -71,6 +71,12 @@ const char *sharpen_icon_filenames[sharpen_NUM_TOOLS] = {
   "silhouette.png"
 };
 
+int sharpen_orders[sharpen_NUM_TOOLS] = {
+  300,
+  2,
+  302,
+};
+
 const char *sharpen_names[sharpen_NUM_TOOLS] = {
   gettext_noop("Edges"),
   gettext_noop("Sharpen"),
@@ -87,11 +93,12 @@ const char *sharpen_descs[sharpen_NUM_TOOLS][2] = {
 };
 
 Uint32 sharpen_api_version(void);
-int sharpen_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED);
+int sharpen_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int sharpen_get_tool_count(magic_api * api);
 SDL_Surface *sharpen_get_icon(magic_api * api, int which);
 char *sharpen_get_name(magic_api * api, int which);
 int sharpen_get_group(magic_api * api, int which);
+int sharpen_get_order(int which);
 char *sharpen_get_description(magic_api * api, int which, int mode);
 static int sharpen_grey(Uint8 r1, Uint8 g1, Uint8 b1);
 static void do_sharpen_pixel(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
@@ -126,7 +133,7 @@ Uint32 sharpen_api_version(void)
 
 
 // No setup required:
-int sharpen_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int sharpen_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
 
   int i;
@@ -166,6 +173,12 @@ char *sharpen_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int sharpen_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
+}
+
+// Return our order 
+int sharpen_get_order(int which)
+{
+  return sharpen_orders[which];
 }
 
 // Return our descriptions, localized:

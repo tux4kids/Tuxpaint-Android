@@ -1,6 +1,6 @@
 /* halftone.c
 
-  Last updated: April 22, 2023
+  Last updated: January 16, 2024
 */
 
 
@@ -45,11 +45,15 @@ const int groups[NUM_TOOLS] = {
   MAGIC_TYPE_DISTORTS,
 };
 
+const int orders[NUM_TOOLS] = {
+  2200,
+};
+
 const char *descs[NUM_TOOLS][2] = {
   {
    gettext_noop("Click and drag to turn your drawing into a newspaper."),
    gettext_noop("Click to turn your drawing into a newspaper."),
-   },
+  },
 };
 
 Mix_Chunk *snd_effect[NUM_TOOLS];
@@ -62,11 +66,12 @@ void halftone_drag(magic_api * api, int which, SDL_Surface * canvas,
                    SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 void halftone_line_callback(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
 Uint32 halftone_api_version(void);
-int halftone_init(magic_api * api, Uint32 disabled_features);
+int halftone_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int halftone_get_tool_count(magic_api * api);
 SDL_Surface *halftone_get_icon(magic_api * api, int which);
 char *halftone_get_name(magic_api * api, int which);
 int halftone_get_group(magic_api * api, int which);
+int halftone_get_order(int which);
 char *halftone_get_description(magic_api * api, int which, int mode);
 int halftone_requires_colors(magic_api * api, int which);
 int halftone_modes(magic_api * api, int which);
@@ -92,7 +97,7 @@ Uint32 halftone_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int halftone_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int halftone_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -139,6 +144,11 @@ char *halftone_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int halftone_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return groups[which];
+}
+
+int halftone_get_order(int which)
+{
+  return orders[which];
 }
 
 char *halftone_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)

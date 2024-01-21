@@ -3,7 +3,7 @@
 
   Draw train tracks.
 
-  Last updated: April 19, 2023
+  Last updated: January 16, 2024
 */
 #include "tp_magic_api.h"
 #include "SDL_image.h"
@@ -52,11 +52,12 @@ Uint32 rails_api_version(void);
 int rails_modes(magic_api * api, int which);
 void rails_set_color(magic_api * api, int which, SDL_Surface * canvas,
                      SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
-int rails_init(magic_api * api, Uint32 disabled_features);
+int rails_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int rails_get_tool_count(magic_api * api);
 SDL_Surface *rails_get_icon(magic_api * api, int which);
 char *rails_get_name(magic_api * api, int which);
 int rails_get_group(magic_api * api, int which);
+int rails_get_order(int which);
 char *rails_get_description(magic_api * api, int which, int mode);
 int rails_requires_colors(magic_api * api, int which);
 void rails_release(magic_api * api, int which,
@@ -102,7 +103,7 @@ void rails_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
 {
 }
 
-int rails_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int rails_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
   Uint8 i;                      //is always < 3, so Uint8 seems to be a good idea
@@ -121,6 +122,23 @@ int rails_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
   rails_three = IMG_Load(rails_images[1]);
   rails_four = IMG_Load(rails_images[2]);
   rails_corner = IMG_Load(rails_images[3]);
+
+  if (rails_one == NULL) {
+    fprintf(stderr, "Can't load image %s\n", rails_images[0]);
+    return(0);
+  }
+  if (rails_three == NULL) {
+    fprintf(stderr, "Can't load image %s\n", rails_images[1]);
+    return(0);
+  }
+  if (rails_four == NULL) {
+    fprintf(stderr, "Can't load image %s\n", rails_images[2]);
+    return(0);
+  }
+  if (rails_corner == NULL) {
+    fprintf(stderr, "Can't load image %s\n", rails_images[3]);
+    return(0);
+  }
 
   img_w = rails_one->w;
   img_h = rails_one->h;
@@ -153,6 +171,11 @@ char *rails_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
 int rails_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
+}
+
+int rails_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 2200;
 }
 
 char *rails_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)

@@ -1,12 +1,12 @@
                                    Tux Paint
-                               バージョン 0.9.31
+                               バージョン 0.9.32
 
                     子供向けのシンプルなお絵かきプログラム
 
-       Copyright © 2002-2023 by various contributors; AUTHORS.txt 参照.
+       Copyright © 2002-2024 by various contributors; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                 2023年7月20日
+                                 2024年1月13日
 
 +--------------------------------------------------+
 |                       目次                       |
@@ -95,34 +95,52 @@ Tux Paint は、オープンソースのプロジェクトで、GNUの一般公�
 
 ライセンスの全文は、COPYING.txtをお読みください。
 
-D. Tux Paint バージョン 0.9.31 での変更点
+D. Tux Paint バージョン 0.9.32 での変更点
 
-ぼかし消しゴム
-    消しゴムツールに端がぼやけた丸い消しゴムが追加されました
+1-point Perspective (vanishing point) Magic tool
+    A pair of tools that allow you to set a vanishing point, and then draw
+    lines in 1-point perspective.
 
-「まほう」ツールの追加
-    「ループ」「リボン」「なめらかなせん」「くしゃくしゃ」
+2-point Perspective (vanishing point) Magic tool
+    A pair of tools that allow you to set two vanishing points, and then draw
+    lines in 2-point perspective.
 
-独自テンプレートの作成機能
-    「ひらく」ダイアログの新しいオプションにより、保存した作品をテンプレートに
-    変換し、新規に絵を作成する際に使用ることができます。(この機能は簡略化オプ
-    ション "notemplateexport" を使用して無効にすることができます)。
+3-point Perspective (vanishing point) Magic tool
+    A pair of tools that allow you to set three vanishing points, and then draw
+    lines in 3-point perspective.
 
-ユーザーインターフェースフォントの指定
-    ボタンラベル、ポップアップダイアログ、操作ガイドなどのユーザーインターフェ
-    イスに使用されるフォントを変更することができます。("uifont"オプションを参
-    照。利用可能なフォントは"-listfonts"オプションで確認できます)
+Isometric Magic tool
+    A tool that draws lines in an isometric projection.
 
-削除の無効化
+Dimetric Magic tool
+    A pair of tools that allow you to set an angle, and then draw lines in a
+    dimetric projection.
 
-    保存した作品や自作のテンプレートを削除するボタンを無効にすることができま
-    す。(設定オプション"noerase"を参照)
+Trimetric Magic tool
+    A pair of tools that allow you to set two angles, and then draw lines in a
+    trimetric projection.
 
-Tux Paint の操作の説明を追加
+Oblique Magic tool
+    A pair of tools that allow you to set an angles, and then draw lines in an
+    oblique projection.
 
-    マウスやタブレット、タッチスクリーン、ジョイスティック、キーボードなど、各
-    種のデバイスを用いた Tux Paint の操作方法の概要が README ドキュメントに追加
-    されました。
+Epitrochoid and Hypotrochoid Magic tools
+    Tools that create centered trochoid curved patterns.
+
+New "complexity" setting (complexity)
+
+A new setting that allows certain Magic tools to behave differently (or remove
+    their availability altogether) based on the expertise-level of the user.
+    The new "N-point Perspective" tools and "Clone" tool are affected by this
+    setting.
+Magic tools reorganized
+
+Each group of Magic tools has been reorganized to keep related tools next to
+    each other, rather than being sorted alphabetically by their (localized)
+    names.
+Font details shown when selected
+    The name and size of the selected font are shown when using the Text and
+    Label tools.
 
 
 全ての変更点については、CHANGES.txt をお読みください。
@@ -1230,23 +1248,27 @@ VII.Tux Paint プロジェクトの SNS アカウント
 
 Tux Paint は様々な SNS アカウントを利用し、最新情報や作品を投稿しています。
 
+  * Follow @tuxpaint.bsky.social on Bluesky
   * Facebook で Tux Paint のページに参加する
   * Instagram で @TuxPaintDevs をフォローする
   * Mastdon で @tuxpaint@floss.socal をフォローする
   * Reddit で u/TuxPaintDevs をフォローする
   * Threads で @TuxPaintDevs をフォローする
+  * Follow @TuxPaintDevs on TikTok
   * Tumblr で Tux Paint をフォローする
-  * Twitter で @TuxPaintTweets をフォローする
+  * Subscribe to @TuxPaintOfficial on YouTube
 
 VIII. 商標について
 
   * "Linux" は Linus Torvalds の登録商標です。
   * "Microsoft" および "Windows" は、Microsoft 社の登録商標です。
   * "Apple" および "macOS" は Apple 社の登録商標です。
+  * "Haiku" is a registered trademark of Haiku, Inc.
   * "Facebook", "Instagram" および "Threads" は Meta Platforms 社の登録商標で
     す。
   * "Mastodon" は Mastodon gGmbH の登録商標です。
   * "Reddit" は、Reddit 社の登録商標です。
+  * "TIK TOK" is a trademark of Bytedance Ltd.
   * "Tumblr" は Tumblr 社の登録商標です。
-  * "Twitter" は、X 社の登録商標です。
+  * "YouTube" is a registered trademark of Alphabet, Inc.
 

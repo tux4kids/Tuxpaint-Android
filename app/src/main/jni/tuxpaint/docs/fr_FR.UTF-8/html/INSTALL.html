@@ -89,7 +89,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.31<br/>
+            version 0.9.32<br/>
             Documentation sur l'installation          </h1>
 
           <p>
@@ -1047,7 +1047,7 @@
             ... pour crée l'application <code>TuxPaint.app</code> qui peut être exécutée sur place ou copiée sur <code>/Applications</code>.            Pour créer le fichier DMG pour la distribution, faites 'make TuxPaint.dmg'.          </p>
 
           <p>
-            Additional steps are required when building a Unviersal Binary.  See "Building a Universal Binary" below.          </p>
+            Des étapes supplémentaires sont nécessaires pour construire un 'Universal Binary'.  Voyez "Construire un Universal Binary" ci-dessous.          </p>
         </section><!-- H3: How to Build -->
 
         <section class="indent"><!-- H3: Known Issues -->
@@ -1134,7 +1134,7 @@
           </header>
 
           <p>
-            To build Tux Paint as a Universal Binary, compile Tux Paint for the Intel CPU and the Apple Silicon separately first.  Then rename the app bundle for the Intel CPU to TuxPaint-x86_64.app, and the bundle for the Apple Silicon to TuxPaint-arm64.app, copy the app bundle from the Intel machine to the Apple Silicon machine, then use the provided <code>build-universal.sh</code> script to combine the two application bundles as below.  The DMG file can be built afterwards:            <blockquote>
+            Pour fabriquer Tux Paint en tant que 'Universal Binary', compilez Tux Paint pour le CPU Intel et pour le Apple Silicon, chacun séparément. Puis renommez l'ensemble pour  le CPU Intel en TuxPaint-x86_64.app et l'ensemble pour le Apple Silicon en TuxPaint-arm64.app. Copiez l'ensemble app pour Intel sur la machine Apple Silicon puis exécutez le script fourni <code>build-universal.sh</code> pour combiner les deux applications comme ci-dessous.  Le fichier DMG, s'il est demandé, doit être fabriqué après :            <blockquote>
               <code>
                 $ <strong>macos/build-universal.sh</strong><br/>
                 $ <strong>make</strong> TuxPaint.dmg

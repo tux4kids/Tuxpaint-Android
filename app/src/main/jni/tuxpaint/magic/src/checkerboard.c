@@ -7,7 +7,7 @@
   By Bill Kendrick
   Based on `blind.c` by Pere Pujal Carabantes
 
-  Copyright (c) 2021-2023
+  Copyright (c) 2021-2024
   https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 18, 2023
+  Last updated: January 16, 2024
 */
 
 #include "tp_magic_api.h"
@@ -41,11 +41,12 @@ Mix_Chunk *checkerboard_snd;
 Uint32 checkerboard_api_version(void);
 void checkerboard_set_color(magic_api * api, int which, SDL_Surface * canvas,
                             SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
-int checkerboard_init(magic_api * api, Uint32 disabled_features);
+int checkerboard_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int checkerboard_get_tool_count(magic_api * api);
 SDL_Surface *checkerboard_get_icon(magic_api * api, int which);
 char *checkerboard_get_name(magic_api * api, int which);
 int checkerboard_get_group(magic_api * api, int which);
+int checkerboard_get_order(int which);
 char *checkerboard_get_description(magic_api * api, int which, int mode);
 int checkerboard_requires_colors(magic_api * api, int which);
 void checkerboard_release(magic_api * api, int which,
@@ -85,7 +86,7 @@ void checkerboard_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUT
   checkerboard_b = b;
 }
 
-int checkerboard_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int checkerboard_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -117,6 +118,11 @@ char *checkerboard_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUT
 int checkerboard_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_DECORATIONS;
+}
+
+int checkerboard_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 200;
 }
 
 char *checkerboard_get_description(magic_api * api ATTRIBUTE_UNUSED,

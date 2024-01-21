@@ -7,7 +7,7 @@
    Inspired by "Night Sky Scene [Pen Parallax]" Scratch Project
    by -HexaScape- <https://scratch.mit.edu/users/-HexaScape->
 
-   Last updated: April 22, 2023
+   Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -31,6 +31,12 @@ char *swirl_names[NUM_SWIRL_TOOLS] = {
   gettext_noop("Circles"),
   gettext_noop("Rays"),
   gettext_noop("Fur")
+};
+
+int swirls_orders[NUM_SWIRL_TOOLS] = {
+  200, /* within MAGIC_TYPE_DISTORTS */
+  201, /* within MAGIC_TYPE_DISTORTS */
+  1800, /* within MAGIC_TYPE_PAINTING */
 };
 
 char *swirl_descriptions[NUM_SWIRL_TOOLS][2] = {
@@ -82,11 +88,12 @@ Uint32 swirl_stroke_color;
 Uint8 swirl_fur_color_r, swirl_fur_color_g, swirl_fur_color_b;
 
 Uint32 swirls_api_version(void);
-int swirls_init(magic_api * api, Uint32 disabled_features);
+int swirls_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int swirls_get_tool_count(magic_api * api);
 SDL_Surface *swirls_get_icon(magic_api * api, int which);
 char *swirls_get_name(magic_api * api, int which);
 int swirls_get_group(magic_api * api, int which);
+int swirls_get_order(int which);
 char *swirls_get_description(magic_api * api, int which, int mode);
 int swirls_requires_colors(magic_api * api, int which);
 int swirls_modes(magic_api * api, int which);
@@ -117,7 +124,7 @@ Uint32 swirls_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int swirls_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int swirls_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -151,7 +158,7 @@ char *swirls_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
   return strdup(gettext(swirl_names[which]));
 }
 
-int swirls_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int swirls_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   if (which == SWIRL_TOOL_FUR)
   {
@@ -161,6 +168,11 @@ int swirls_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
   {
     return MAGIC_TYPE_DISTORTS;
   }
+}
+
+int swirls_get_order(int which)
+{
+  return swirls_orders[which];
 }
 
 char *swirls_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)

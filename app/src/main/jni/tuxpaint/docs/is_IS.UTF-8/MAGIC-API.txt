@@ -1,12 +1,12 @@
                                    Tux Paint
-                                 útgáfa 0.9.31
+                                 útgáfa 0.9.32
 
                       Magic Tool Plugin API Documentation
 
-   Höfundarréttur © 2007-2023 eftir various contributors; sjá AUTHORS-skrá.
+   Höfundarréttur © 2007-2024 eftir various contributors; sjá AUTHORS-skrá.
                              https://tuxpaint.org/
 
-                                 17. júlí 2023
+                                1. janúar 2024
 
 +--------------------------------------------------+
 |                   Efnisyfirlit                   |
@@ -177,7 +177,7 @@ Uint32 api_version(void)
 
 
 
-int init(magic_api * api, Uint32 disabled_features)
+int init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level)
 
     The plugin should do any initialization here. Return '1' if initialization
     was successful, or '0' if not (and Tux Paint will not present any 'Magic'
@@ -200,8 +200,24 @@ int init(magic_api * api, Uint32 disabled_features)
     disabled, the plugin is able to revert back to providing two separate
     tools.)
 
-    Note: Changed most recently in Tux Paint 0.9.30; Magic API version
-    0x00000008.
+    The complexity_level variable contains the "complexity level" that Tux
+    Paint magic tools may offer — that is, the expertise level of the user. The
+    levels are defined in tp_magic_api.h:
+      + MAGIC_COMPLEXITY_NOVICE (0): Novice (--complexity=novice)
+      + MAGIC_COMPLEXITY_BEGINNER (1): Beginner (--complexity=beginner)
+      + MAGIC_COMPLEXITY_ADVANCED (2): Advanced (default) (--complexity=
+        advanced)
+    Your Magic tool(s) may wish to react differently depending on the expertise
+    level of the user, either simplifying how each tool works, or excluding one
+    or all of them entirely. (For example, the 1-, 2-, and 3-point perspective
+    toolsets are totally inactive when in "novice" mode. In "beginner" mode,
+    the drawing tools are available, but the tools to edit the vanishing point
+    positions are disabled; the default vanishing points are used. In fact, in
+    "beginner" mode, an additional 3-point perspective drawing tool appears,
+    with alternative vanishing points.)
+
+    Note: Changed most recently in Tux Paint 0.9.32; Magic API version
+    0x00000009.
 
 
 
@@ -593,7 +609,7 @@ Til upplýsingar
 
 char * tp_version
     A string containing the version of Tux Paint that's running (e.g.,
-    "0.9.31").
+    "0.9.32").
 
 int canvas_w
     int canvas_h
@@ -746,7 +762,7 @@ TP_MAGIC_API_VERSION
     compatible.
 
     Note: This version number does not correspond to Tux Paint's own release
-    number (e.g., "0.9.31"). The API will not change every time a new version
+    number (e.g., "0.9.32"). The API will not change every time a new version
     of Tux Paint is released, which means plugins compiled for earlier versions
     of Tux Paint will often run under newer versions.
 

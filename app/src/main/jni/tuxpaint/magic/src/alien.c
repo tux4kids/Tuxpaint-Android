@@ -1,12 +1,12 @@
 /*
   alien.c
 
-  alien, Modifies the colours of the image.
+  "Color Shift" aka "Alien": Modifies the colours of the image.
   Tux Paint - A simple drawing program for children.
 
   Credits: Andrew Corcoran <akanewbie@gmail.com> inspired by the Alien Map GIMP plugin
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 23, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -71,6 +71,10 @@ const int alien_groups[alien_NUM_TOOLS] = {
   MAGIC_TYPE_COLOR_FILTERS,
 };
 
+const int alien_orders[alien_NUM_TOOLS] = {
+  601,
+};
+
 const char *alien_descs[alien_NUM_TOOLS][2] = {
   {gettext_noop("Click and drag the mouse to change the colors in parts of your picture."),
    gettext_noop("Click to change the colors in your entire picture."),},
@@ -78,11 +82,12 @@ const char *alien_descs[alien_NUM_TOOLS][2] = {
 
 // Prototypes
 Uint32 alien_api_version(void);
-int alien_init(magic_api * api, Uint32 disabled_features);
+int alien_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int alien_get_tool_count(magic_api * api);
 SDL_Surface *alien_get_icon(magic_api * api, int which);
 char *alien_get_name(magic_api * api, int which);
 int alien_get_group(magic_api * api, int which);
+int alien_get_order(int which);
 char *alien_get_description(magic_api * api, int which, int mode);
 void alien_drag(magic_api * api, int which, SDL_Surface * canvas,
                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
@@ -110,7 +115,7 @@ Uint32 alien_api_version(void)
 }
 
 //Load sounds
-int alien_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int alien_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -148,6 +153,11 @@ char *alien_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int alien_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return alien_groups[which];
+}
+
+int alien_get_order(int which)
+{
+  return alien_orders[which];
 }
 
 // Return our descriptions, localized:

@@ -6,7 +6,7 @@
 
   Author: Adam 'foo-script' Rakowski ; foo-script@o2.pl
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 12, 2023
+  Last updated: January 16, 2024
 */
 
 
@@ -50,11 +50,12 @@ static int rects_w, rects_h;
 SDL_Surface *canvas_backup;
 
 Uint32 puzzle_api_version(void);
-int puzzle_init(magic_api * api, Uint32 disabled_features);
+int puzzle_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int puzzle_get_tool_count(magic_api * api);
 SDL_Surface *puzzle_get_icon(magic_api * api, int which);
 char *puzzle_get_name(magic_api * api, int which);
 int puzzle_get_group(magic_api * api, int which);
+int puzzle_get_order(int which);
 char *puzzle_get_description(magic_api * api, int which, int mode);
 void puzzle_release(magic_api * api, int which,
                     SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
@@ -82,7 +83,7 @@ Uint32 puzzle_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int puzzle_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int puzzle_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -114,6 +115,12 @@ char *puzzle_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
 int puzzle_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
+}
+
+
+int puzzle_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 102;
 }
 
 

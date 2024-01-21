@@ -4,7 +4,7 @@
   Reflection Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2021-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2021-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 19, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -51,12 +51,13 @@ enum reflection_sides
 int reflection_side_old;
 
 /* Local function prototypes: */
-int reflection_init(magic_api * api, Uint32 disabled_features);
+int reflection_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 Uint32 reflection_api_version(void);
 int reflection_get_tool_count(magic_api * api);
 SDL_Surface *reflection_get_icon(magic_api * api, int which);
 char *reflection_get_name(magic_api * api, int which);
 int reflection_get_group(magic_api * api, int which);
+int reflection_get_order(int which);
 char *reflection_get_description(magic_api * api, int which, int mode);
 void reflection_drag(magic_api * api, int which, SDL_Surface * canvas,
                      SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
@@ -80,7 +81,7 @@ void reflection_set_size(magic_api * api, int which, int mode, SDL_Surface * can
 
 
 
-int reflection_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int reflection_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -117,6 +118,11 @@ char *reflection_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_
 int reflection_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_WARPS;
+}
+
+int reflection_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 400;
 }
 
 char *reflection_get_description(magic_api * api ATTRIBUTE_UNUSED,

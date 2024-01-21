@@ -1,5 +1,5 @@
 /*
-  Last updated: April 19, 2023
+  Last updated: January 16, 2024
 */
 
 #include <time.h>               //For time()
@@ -29,11 +29,12 @@ Mix_Chunk *confetti_snd;
 Uint32 confetti_api_version(void);
 void confetti_set_color(magic_api * api, int which, SDL_Surface * canvas,
                         SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
-int confetti_init(magic_api * api, Uint32 disabled_features);
+int confetti_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int confetti_get_tool_count(magic_api * api);
 SDL_Surface *confetti_get_icon(magic_api * api, int which);
 char *confetti_get_name(magic_api * api, int which);
 int confetti_get_group(magic_api * api, int which);
+int confetti_get_order(int which);
 char *confetti_get_description(magic_api * api, int which, int mode);
 int confetti_requires_colors(magic_api * api, int which);
 void confetti_release(magic_api * api, int which,
@@ -72,7 +73,7 @@ void confetti_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
   confetti_colors.b = b;
 }
 
-int confetti_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int confetti_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -104,6 +105,11 @@ char *confetti_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
 int confetti_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
+}
+
+int confetti_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 1400;
 }
 
 char *confetti_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)

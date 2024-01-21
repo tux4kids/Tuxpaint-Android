@@ -1,5 +1,5 @@
                                    Tux Paint
-                                version 0.9.31
+                                version 0.9.32
                 Documentation sur les variables d'environnement
 
        Copyright © 2021-2023 by divers contributeurs; voir AUTHORS.txt.
@@ -72,12 +72,11 @@ LANGUAGE
 LC_ALL
 LC_MESSAGES
 
-    Spécifie la langue utilisée par Tux Paint sur l'interface utilisateur.
-    Remplacé par les options en ligne de commande "--lang" et --locale, ou bien
-    leurs équivalents dans le fichier de configuration. La variable
-    d'environnement "LANGUAGE" est utilisée (si elle est activée. Sinon,
-    "LC_ALL' est utilisé comme solution de repli. Puis "LC_MESSAGES" et enfin
-    "LANG".
+    Specify the language Tux Paint should utilize in its user interface.
+    Overridden by the "--lang" and "--locale" command-line options or their
+    configuration file counterparts. The "LANGUAGE" environment variable is
+    used, if set. If not, "LC_ALL" is used as a fallback. Then "LC_MESSAGES",
+    and finally "LANG".
 
 
 

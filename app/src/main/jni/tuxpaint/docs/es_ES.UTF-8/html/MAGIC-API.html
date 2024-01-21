@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.31          </h1>
+            version 0.9.32          </h1>
 
           <h2>
             Magic Tool Plugin API Documentation          </h2>
 
           <p>
-            Copyright &copy; 2007-2023 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2007-2024 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            julio 17, 2023          </p>
+            enero  1, 2024          </p>
         </center>
       </header>
 
@@ -281,7 +281,7 @@
                   <b>Note:</b> Called once by Tux Paint, at startup. It is called first.                </p>
               </dd>
 
-              <dt><code><b>int init(magic_api * api, Uint32 disabled_features)</b></code></dt>
+              <dt><code><b>int init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level)</b></code></dt>
               <dd>
                 <p>
                   The plugin should do any initialization here. Return '1' if initialization was successful, or '0' if not (and Tux Paint will not present any 'Magic' tools from the plugin).                </p>
@@ -296,7 +296,17 @@
                   </ul>
                   Your Magic tool(s) may wish to react differently depending on whether one or more features have been disabled. (For example, the "Brick" Magic tool always offered two tool variations: large and small. With the addition of the size feature, only one tool is necessary. However, with the size option disabled, the plugin is able to revert back to providing two separate tools.)                </p>
                 <p>
-                  <b>Note:</b> Changed most recently in Tux Paint 0.9.30; Magic API version 0x00000008.                </p>
+                  The <code>complexity_level</code> variable contains the "complexity level" that Tux Paint magic tools may offer &mdash; that is, the expertise level of the user. The levels are defined in <code>tp_magic_api.h</code>:                  <ul>
+                    <li>
+                      <code>MAGIC_COMPLEXITY_NOVICE</code> (0): Novice (<code>--complexity=novice</code>)                    </li>
+                    <li>
+                      <code>MAGIC_COMPLEXITY_BEGINNER</code> (1): Beginner (<code>--complexity=beginner</code>)                    </li>
+                    <li>
+                      <code>MAGIC_COMPLEXITY_ADVANCED</code> (2): Advanced (default) (<code>--complexity=advanced</code>)                    </li>
+                  </ul>
+                  Your Magic tool(s) may wish to react differently depending on the expertise level of the user, either simplifying how each tool works, or excluding one or all of them entirely. (For example, the 1-, 2-, and 3-point perspective toolsets are totally inactive when in "novice" mode. In "beginner" mode, the drawing tools are available, but the tools to edit the vanishing point positions are disabled; the default vanishing points are used. In fact, in "beginner" mode, an additional 3-point perspective drawing tool appears, with alternative vanishing points.)                </p>
+                <p>
+                  <b>Note:</b> Changed most recently in Tux Paint 0.9.32; Magic API version 0x00000009.                </p>
               </dd>
 
               <dt><code><b>int get_tool_count(magic_api * api)</b></code></dt>
@@ -599,7 +609,7 @@
           <dl>
             <dt><code><b>char * tp_version</b></code></dt>
             <dd>
-              A string containing the version of Tux Paint that's running (e.g., "0.9.31").            </dd>
+              A string containing the version of Tux Paint that's running (e.g., "0.9.32").            </dd>
 
             <dt>
               <code><b>int canvas_w</b></code><br/>
@@ -746,7 +756,7 @@
             <p>
               It should be referenced by your magic tool's "<code>api_version()</code>" function, to inform the running copy of Tux Paint whether or not your plugin is compatible.            </p>
             <p>
-              <b>Note:</b> This version number does not correspond to Tux Paint's own release number (e.g., "0.9.31").  The API will not change every time a new version of Tux Paint is released, which means plugins compiled for earlier versions of Tux Paint will often run under newer versions.            </p>
+              <b>Note:</b> This version number does not correspond to Tux Paint's own release number (e.g., "0.9.32").  The API will not change every time a new version of Tux Paint is released, which means plugins compiled for earlier versions of Tux Paint will often run under newer versions.            </p>
           </dd>
 
           <dt>

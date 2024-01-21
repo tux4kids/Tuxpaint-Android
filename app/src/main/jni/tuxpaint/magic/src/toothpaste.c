@@ -6,7 +6,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 12, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -71,17 +71,22 @@ const int toothpaste_groups[toothpaste_NUM_TOOLS] = {
   MAGIC_TYPE_PAINTING,
 };
 
+const int toothpaste_orders[toothpaste_NUM_TOOLS] = {
+  2400,
+};
+
 const char *toothpaste_descs[toothpaste_NUM_TOOLS] = {
   gettext_noop("Click and drag to squirt toothpaste onto your picture."),
 };
 
 
 Uint32 toothpaste_api_version(void);
-int toothpaste_init(magic_api * api, Uint32 disabled_features);
+int toothpaste_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int toothpaste_get_tool_count(magic_api * api);
 SDL_Surface *toothpaste_get_icon(magic_api * api, int which);
 char *toothpaste_get_name(magic_api * api, int which);
 int toothpaste_get_group(magic_api * api, int which);
+int toothpaste_get_order(int which);
 char *toothpaste_get_description(magic_api * api, int which, int mode);
 static void do_toothpaste(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 void toothpaste_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -110,7 +115,7 @@ Uint32 toothpaste_api_version(void)
 }
 
 
-int toothpaste_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int toothpaste_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -184,6 +189,12 @@ char *toothpaste_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int toothpaste_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return toothpaste_groups[which];
+}
+
+// Return our orders:
+int toothpaste_get_order(int which)
+{
+  return toothpaste_orders[which];
 }
 
 // Return our descriptions, localized:

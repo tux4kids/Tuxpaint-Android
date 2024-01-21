@@ -1,12 +1,12 @@
                                    Tux Paint
-                               バージョン 0.9.31
+                               バージョン 0.9.32
 
                                各種設定について
 
        Copyright © 2002-2023 by various contributors; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                 2023年7月20日
+                                2023年12月29日
 
 +------------------------------------------------------+
 |                         目次                         |
@@ -521,6 +521,39 @@ nobrushspacing=yes
     イルで "nobrushspacing=no" または "brushspacing=yes" を設定すると上書きされ
     ることがあります。また、どちらの設定も、コマンドラインオプションの
     "--brushspacing" で変更できます。
+
+
+
+complexity=COMPLEXITY
+
+    Sets the complexity (expertise) level of Tux Paint, which can either
+    disable some Magic tools, or cause them to operate differently. (For
+    example, the "Clone" tool is not available in novice mode, and the 1-, 2-,
+    and 3-point perspective tools do not allow vanishing points to be edited in
+    beginner mode.)
+
+    The COMPLEXITY value may be one of:
+
+    advanced (the default)
+        "Advanced" — For users familiar with Tux Paint and who can operate more
+        complex tools.
+
+    beginner
+        "Beginner" — For users comfortable with Tux Paint, but where complex
+        tools may cause confusion or frustration.
+
+    novice
+        "Novice" — For first-time Tux Paint users, users inexperienced with
+        computers, or those with special accessibility needs.
+
+
+    📜 Note: The complexity option was added to Tux Paint in version 0.9.32.
+    Consult the individual Magic tools' documentation.
+
+    ⚙ 注: システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファ
+    イルで "complexity=advanced" を設定すると上書きされることがあります。また、
+    どちらの設定も、コマンドラインオプションの "--complexity=advanced" で変更で
+    きます。
 
 
 

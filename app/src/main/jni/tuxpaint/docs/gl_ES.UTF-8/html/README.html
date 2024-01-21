@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            versión 0.9.31          </h1>
+            versión 0.9.32          </h1>
 
           <h3 align="center">
             Un sinxelo programa de debuxo para cativos          </h3>
 
           <p>
-            Copyright &copy; 2002-2023 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br/>
+            Copyright &copy; 2002-2024 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br/>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            20 de Xullo de 2023          </p>
+            13 de Xaneiro de 2024          </p>
         </center>
       </header>
       <table border="2"
@@ -224,27 +224,42 @@
   <section class="indent">
     <header>
       <h2>
-        D. What's New in Tux Paint version 0.9.31?      </h2>
+        D. What's New in Tux Paint version 0.9.32?      </h2>
     </header>
 
     <dl>
-  <dt>Fuzzy Erasers</dt>
-  <dd>Fuzzy-edged round erasers have been added to the Eraser tool</dd>
+  <dt>1-point Perspective (vanishing point) Magic tool</dt>
+  <dd>A pair of tools that allow you to set a vanishing point, and then draw lines in 1-point perspective.</dd>
 
-  <dt>New Magic tools</dt>
-  <dd>Loops, Ribbon, Smooth, and Squiggles</dd>
+  <dt>2-point Perspective (vanishing point) Magic tool</dt>
+  <dd>A pair of tools that allow you to set two vanishing points, and then draw lines in 2-point perspective.</dd>
 
-  <dt>Create templates from Open dialog</dt>
-  <dd>Saved drawings can be turned into templates (used to make new drawings) via a new option in the Open dialog. (This feature may be deactivated using the <a href="OPTIONS.html#simplification">"<code>notemplateexport</code>" simplification option</a>.)</dd>
+  <dt>3-point Perspective (vanishing point) Magic tool</dt>
+  <dd>A pair of tools that allow you to set three vanishing points, and then draw lines in 3-point perspective.</dd>
 
-  <dt>User interface font may be overridden</dt>
-  <dd>The font used for the user interface (button labels, dialog pop-ups, and instructions) can be overridden from its default ("DejaVu Sans"). (See the <a href="OPTIONS.html#fonts">"<code>uifont</code>" configuration option</a>. Use "<code>--listfonts</code>" to see a list of available fonts.)</dd>
+  <dt>Isometric Magic tool</dt>
+  <dd>A tool that draws lines in an isometric projection.</dd>
 
-  <dt>File Erase may be disabled</dd>
-  <dd>Controls to erase saved work &mdash; saved drawings (via the Open dialog) and exported templates (via the New dialog) &mdash; can be disabled. (See the <a href="OPTIONS.html#simplification">"<code>noerase</code>" configuration option</a>.)</dd>
+  <dt>Dimetric Magic tool</dt>
+  <dd>A pair of tools that allow you to set an angle, and then draw lines in a dimetric projection.</dd>
 
-  <dt>"Controlling Tux Paint" documentation</dd>
-  <dd>A brief overview of how Tux Paint can be controlled &mdash; mouse, tablet, touchscreen, joystick, and keyboard &mdash; has been <a href="#using_controlling">added to the README documentation</a>.</dd>
+  <dt>Trimetric Magic tool</dt>
+  <dd>A pair of tools that allow you to set two angles, and then draw lines in a trimetric projection.</dd>
+
+  <dt>Oblique Magic tool</dt>
+  <dd>A pair of tools that allow you to set an angles, and then draw lines in an oblique projection.</dd>
+
+  <dt>Epitrochoid and Hypotrochoid Magic tools</dt>
+  <dd>Tools that create centered trochoid curved patterns.</dd>
+
+  <dt>New "complexity" setting (<code>complexity</code>)</dd>
+  <dt>A new setting that allows certain Magic tools to behave differently (or remove their availability altogether) based on the expertise-level of the user. The new "N-point Perspective" tools and "Clone" tool are affected by this setting.</dt>
+
+  <dt>Magic tools reorganized</dd>
+  <dt>Each group of Magic tools has been reorganized to keep related tools next to each other, rather than being sorted alphabetically by their (localized) names.</dt>
+
+  <dt>Font details shown when selected</dt>
+  <dd>The name and size of the selected font are shown when using the Text and Label tools.</dd>
 </dl>
 
     <p>
@@ -1902,6 +1917,9 @@
     Tux Paint maintains a presence on a variety of social media networks, where we post updates and artwork.
         <ul>
       <li>
+        <a href="https://bsky.app/profile/tuxpaint.bsky.social">Follow @tuxpaint.bsky.social on Bluesky</a>
+      </li>
+      <li>
         <a href="http://www.facebook.com/TuxPaint">Join the Tux Paint page on Facebook</a>
       </li>
       <li>
@@ -1917,10 +1935,13 @@
         <a href="https://www.threads.net/@tuxpaintdevs">Follow @TuxPaintDevs on Threads</a>
       </li>
       <li>
+        <a href="https://www.tiktok.com/@tuxpaintdevs">Follow @TuxPaintDevs on TikTok</a>
+      </li>
+      <li>
         <a href="https://tuxpaint.tumblr.com/">Follow Tux Paint on Tumblr</a>
       </li>
       <li>
-        <a href="https://twitter.com/TuxPaintTweets">Follow @TuxPaintTweets on Twitter</a>
+        <a href="https://www.youtube.com/@TuxPaintOfficial">Subscribe to @TuxPaintOfficial on YouTube</a>
       </li>
     </ul>
   </p>
@@ -1935,14 +1956,16 @@
         </header>
 
         <ul>
-          <li>"Linux" is a registered trademark of Linus Torvalds.</li>
+                    <li>"Linux" is a registered trademark of Linus Torvalds.</li>
           <li>"Microsoft" and "Windows" are registered trademarks of Microsoft Corp.</li>
           <li>"Apple" and "macOS" are registered trademarks of Apple Inc.</li>
-          <li>"Facebook", "Instagram", and "Threads" are registered trademarks of Meta Platforms, Inc.</li>
+          <li>"Haiku" is a registered trademark of Haiku, Inc.</li>
+                              <li>"Facebook", "Instagram", and "Threads" are registered trademarks of Meta Platforms, Inc.</li>
           <li>"Mastodon" is a registered trademark of Mastodon gGmbH.</li>
           <li>"Reddit" is a registered trademark of Reddit, Inc.</li>
+          <li>"TIK TOK" is a trademark of Bytedance Ltd.</li>
           <li>"Tumblr" is a registered trademark of Tumblr, Inc.</li>
-          <li>"Twitter" is a registered trademark of X Corp.</li>
+          <li>"YouTube" is a registered trademark of Alphabet, Inc.</li>
         </ul>
       </section>
     </footer>

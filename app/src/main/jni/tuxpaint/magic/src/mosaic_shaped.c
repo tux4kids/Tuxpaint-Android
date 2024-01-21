@@ -11,9 +11,9 @@
   * Pere Pujal for joining all toghether
   * Caroline Ford for the text descriptions
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
-  http://tuxpaint.org/
+  https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 27, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -58,11 +58,12 @@ static void mosaic_shaped_fill(void *ptr_to_api, int which, SDL_Surface * canvas
 static void mosaic_shaped_paint(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 
 Uint32 mosaic_shaped_api_version(void);
-int mosaic_shaped_init(magic_api * api, Uint32 disabled_features);
+int mosaic_shaped_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int mosaic_shaped_get_tool_count(magic_api * api);
 SDL_Surface *mosaic_shaped_get_icon(magic_api * api, int which);
 char *mosaic_shaped_get_name(magic_api * api, int which);
 int mosaic_shaped_get_group(magic_api * api, int which);
+int mosaic_shaped_get_order(int which);
 
 char *mosaic_shaped_get_description(magic_api * api, int which, int mode);
 
@@ -109,6 +110,12 @@ enum
   TOOL_HEX,
   TOOL_IRREGULAR,
   mosaic_shaped_NUM_TOOLS
+};
+
+int magic_shaped_order[mosaic_shaped_NUM_TOOLS] = {
+  1002,
+  1001,
+  1000,
 };
 
 static Mix_Chunk *mosaic_shaped_snd_effect[mosaic_shaped_NUM_TOOLS];
@@ -164,7 +171,7 @@ Uint32 mosaic_shaped_api_version(void)
 }
 
 //Load sounds
-int mosaic_shaped_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int mosaic_shaped_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -204,6 +211,12 @@ char *mosaic_shaped_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int mosaic_shaped_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
+}
+
+// Return our order
+int mosaic_shaped_get_order(int which)
+{
+  return magic_shaped_order[which];
 }
 
 // Return our descriptions, localized:

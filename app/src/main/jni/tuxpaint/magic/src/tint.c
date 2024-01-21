@@ -10,7 +10,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -29,7 +29,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 22, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -74,6 +74,11 @@ const char *tint_names[tint_NUM_TOOLS] = {
   gettext_noop("Color & White") // It does more than this but more intuitive than threshold.
 };
 
+const int tint_orders[tint_NUM_TOOLS] = {
+  500,
+  501,
+};
+
 const char *tint_descs[tint_NUM_TOOLS][2] = {
   {gettext_noop("Click and drag the mouse around to change the color of parts of your picture."),
    gettext_noop("Click to change the color of your entire picture."),},
@@ -81,12 +86,13 @@ const char *tint_descs[tint_NUM_TOOLS][2] = {
    gettext_noop("Click to turn your entire picture into white and a color you choose.")}
 };
 
-int tint_init(magic_api * api, Uint32 disabled_features);
+int tint_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 Uint32 tint_api_version(void);
 int tint_get_tool_count(magic_api * api);
 SDL_Surface *tint_get_icon(magic_api * api, int which);
 char *tint_get_name(magic_api * api, int which);
 int tint_get_group(magic_api * api, int which);
+int tint_get_order(int which);
 char *tint_get_description(magic_api * api, int which, int mode);
 static int tint_grey(Uint8 r1, Uint8 g1, Uint8 b1);
 static void do_tint_pixel(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
@@ -117,7 +123,7 @@ Uint32 tint_api_version(void)
 }
 
 //Load sounds
-int tint_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int tint_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -154,6 +160,12 @@ char *tint_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int tint_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_COLOR_FILTERS;
+}
+
+// Return our order:
+int tint_get_order(int which)
+{
+  return tint_orders[which];
 }
 
 // Return our descriptions, localized:

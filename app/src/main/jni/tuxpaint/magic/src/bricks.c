@@ -6,7 +6,7 @@
 
   Albert Cahalan <albert@users.sf.net>
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 19, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -56,12 +56,13 @@ static int brick_size = TOOL_LARGEBRICKS;
 /* Local function prototype: */
 
 static void do_brick(magic_api * api, SDL_Surface * canvas, int x, int y, int w, int h);
-int bricks_init(magic_api * api, Uint32 disabled_features);
+int bricks_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 Uint32 bricks_api_version(void);
 int bricks_get_tool_count(magic_api * api);
 SDL_Surface *bricks_get_icon(magic_api * api, int which);
 char *bricks_get_name(magic_api * api, int which);
 int bricks_get_group(magic_api * api, int which);
+int bricks_get_order(int which);
 char *bricks_get_description(magic_api * api, int which, int mode);
 void bricks_drag(magic_api * api, int which, SDL_Surface * canvas,
                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
@@ -81,7 +82,7 @@ void bricks_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
                      SDL_Rect * update_rect);
 
 // No setup required:
-int bricks_init(magic_api * api, Uint32 disabled_features)
+int bricks_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -139,6 +140,12 @@ char *bricks_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
 int bricks_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
+}
+
+// Return our order:
+int bricks_get_order(int which)
+{
+  return 100 + which;
 }
 
 // Return our descriptions, localized:

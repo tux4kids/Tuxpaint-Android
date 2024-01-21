@@ -7,7 +7,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -26,7 +26,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 22, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -51,11 +51,12 @@ static void reset_mosaic_blured(SDL_Surface * canvas);
 
 /* Prototypes */
 Uint32 mosaic_api_version(void);
-int mosaic_init(magic_api *, Uint32);
+int mosaic_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int mosaic_get_tool_count(magic_api *);
 SDL_Surface *mosaic_get_icon(magic_api *, int);
 char *mosaic_get_name(magic_api *, int);
 int mosaic_get_group(magic_api *, int);
+int mosaic_get_order(int);
 char *mosaic_get_description(magic_api *, int, int);
 void mosaic_paint(void *, int, SDL_Surface *, SDL_Surface *, int, int);
 void mosaic_drag(magic_api *, int, SDL_Surface *, SDL_Surface *, int, int, int, int, SDL_Rect *);
@@ -106,6 +107,10 @@ const int mosaic_groups[mosaic_NUM_TOOLS] = {
   MAGIC_TYPE_DISTORTS,
 };
 
+const int mosaic_orders[mosaic_NUM_TOOLS] = {
+  1100,
+};
+
 const char *mosaic_descs[mosaic_NUM_TOOLS][2] = {
   {gettext_noop("Click and drag the mouse to add a mosaic effect to parts of your picture."),
    gettext_noop("Click to add a mosaic effect to your entire picture."),},
@@ -117,7 +122,7 @@ Uint32 mosaic_api_version(void)
 }
 
 //Load sounds
-int mosaic_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int mosaic_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
 
   int i;
@@ -156,6 +161,12 @@ char *mosaic_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int mosaic_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return mosaic_groups[which];
+}
+
+// Return our orders:
+int mosaic_get_order(int which)
+{
+  return mosaic_orders[which];
 }
 
 // Return our descriptions, localized:

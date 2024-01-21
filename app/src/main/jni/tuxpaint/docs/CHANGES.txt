@@ -2,20 +2,153 @@ CHANGES.txt for Tux Paint
 
 Tux Paint - A simple drawing program for children.
 
-Copyright (c) 2002-2023
+Copyright (c) 2002-2024
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
-2023.October.5 (0.9.32)
+2024.January.20 (0.9.32)
+  * Improvements to Magic tools:
+    ----------------------------
+    * Magic tool plugin API updates
+      + Support for complexity levels in Magic tools via the plugin API.
+        (Closes https://sourceforge.net/p/tuxpaint/feature-requests/247/)
+        - Complexity/expertise level may be set via configuration,
+          `--complexity`; values may be "advanced" (default), "beginner",
+          or "novice".
+        - Plugins' "init()" functions are sent a new `complexity_level`
+          argument.
+      + Magic tools can provide a value that allows them to be
+        sorted and grouped together (rather than always relying on the
+        localized name of the tool).
+        - WIP Updated many magic tools to take advantage of this.
+      + Note: `TP_MAGIC_API_VERSION` bumped to 0x00000009.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * "Clone" tool does not operate when Tux Paint is in "novice"
+      complexity mode.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * New Magic Tools:
+    ----------------
+    * Tools to draw with various kinds of graphical projections
+      (all placed within a new tool group):
+      + Point-projection persepctive:
+        - 1-point Perspective ("1-Point Select" & "1-Point Draw")
+          Choose a vanishing point, and then draw lines that always
+          point towards it, or are vertical or horizontal.
+        - 2-point Perspective ("2-Point Select" & "2-Point Draw")
+          Choose two vanishing points, and then draw lines that always
+          point towards them, along the horizon defined by them,
+          or perpendicular to that horizon.
+        - 3-point Perspective ("3-Point Select" & "3-Point Draw")
+          Choose three vanishing points, and then draw lines that always
+          point towards them, or along the horizon defined by the first two.
+      + Orthographic (orthogonal) projection:
+        - Isometric ("Isometric Lines")
+          Lines only go at evenly-spaced (120 degrees) angles (vertically
+          and diagonally).
+        - Dimetric ("Dimetric Select" & "Dimetric Draw")
+          Choose a single angle for both diagonals directions; lines may
+          only go diagonally at those angles, or vertically.
+        - Dimetric ("Trimetric Select" & "Trimetric Draw")
+          Choose an angle for two diagonals directions; lines may
+          only go diagonally at those angles, or vertically.
+        - Oblique ("Oblique Select" & "Oblique Draw")
+          Choose an angle for a single diagonal direction; lines may
+          only go diagonally at that one angle, vertically, or
+          horizontally.
+      + None of these tools are available when in "novice" complexity mode
+        (see above).
+      + "Select" tools (to edit vanishing points or angles) are not offered
+        when in "beginner" complexity mode.  However, in "beginner" mode:
+        - Two "3-Point Draw" tools are provided, offering both 'upwards'
+          and 'downwards' perspectives.
+        - Two "Oblqiue Draw" tools are provided, offering recedings axes
+          to both the right and the left.
+      + Code: Bill Kendrick <bill@newbreedsoftware.com>
+        (with help from Pere Pujal i Carabantes <perepujal@gmail.com>)
+      + Sounds:
+        - Select: "Gummibandloop_121.wav"
+          (https://freesound.org/people/von_Gardener/sounds/473829/)
+          Creative Commons 0 by von_Gardener
+        - Click: "Rubber Band"
+          (https://freesound.org/people/IndigoRay/sounds/241869/)
+          Creative Commons 0 by IndigoRay
+        - Release: "Elastic band c note"
+          (https://freesound.org/people/mudflea2/sounds/708182/)
+          Creative Commons 0 by mudflea2
+
+    * Epitrochoid and Hypotrochoid magic tools:
+      + Tools to draw centered trochoids; to create art similar to a
+        Spirograph or Wondergraph.  Drag left/right to adjust the
+        radius of the stator (fixed circle). Drag up/down to adjust
+        radius of the rotator (the rolling circle). Size option
+        adjusts the position of the virtual pen within (or outside)
+        the rotator.
+        - If "--nomagicsizes" is set, three versions each of
+          epitrochoid and hypotrochoid drawing tools will be made
+          available, each with differing pen positions (inside, edge,
+          and outside).
+      + Code: Bill Kendrick <bill@newbreedsoftware.com>
+        (with help from Pere Pujal i Carabantes <perepujal@gmail.com>)
+      + Sounds:
+        - Drag: "Running Gear", CC0 1.0 Universal
+          by Vurca (https://freesound.org/people/Vurca/)
+        - Epitrochoid draw "celtic_harp_c3.wav" &
+          Hypotrochoid draw "celtic_harp_c2.wav",
+          both CC0 1.0 Universal from "Celtic Harp Samples" collection
+          (https://freesound.org/people/Daphne_in_Wonderland/packs/29328/)
+          by Daphne Farazi (https://soundcloud.com/daphnefarazi)
+       + Closes https://sourceforge.net/p/tuxpaint/feature-requests/248/
+
+  * Improvements to "Text" & "Label" tools:
+    ---------------------------------------
+    * The name and size of the chosen font is shown in the instructions
+      at the bottom.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
   * Other Improvements:
     -------------------
+    * Makefile builds everything with "-O2" now, and adds "-ffast-math"
+      Bill Kendrick <bill@newbreedsoftware.com>
+
     * Simplify macOS building by signing macOS app bundle anonymously by
       default.
       Mark Kim <markuskimius@gmail.com>
 
+    * Windows build outputs Windows version (e.g., 11, 10, 8.1, etc.)
+      and architecture (captured in `stdout.txt`).
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+  * Bug Fixes:
+    ----------
+    * Corrected bug in how scroll-down arrow appeared in Stamps selector
+      when stamp controls were disabled.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Avoid potential crash when choosing rainbow palette Color Picker (HSV)
+      from "New" dialog.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Ensuring mouse pointer shape changes to hand when hovering over
+      control buttons below the scroll-down arrow in the selector area
+      (e.g., stamp controls, text styles, etc.)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Force log files on Windows (stderr.txt, stdout.txt) to go under
+      AppData.
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Avoid crash in some Magic tools if image data cannot be loaded.
+      (Foam, Fretwork, Rails)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
   * Localization Updates:
     ---------------------
-    * Bulgarian
+    * Albanian translation
+      Besnik Bleta <besnik@programeshqip.org>
+
+    * Bulgarian translation
       Note: Does an overhaul of most of the translations to replace more
       polite, plural verb forms, with singular, spoken forms.
       Vankata453 <https://sourceforge.net/u/vankata453>
@@ -26,8 +159,24 @@ https://tuxpaint.org/
     * French documentation
       Jacques Chion <jacques.chion@orange.fr>
 
+    * Japanese translation
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
     * Portuguese (Portugal) translation
       Hugo Carvalho <hugokarvalho@hotmail.com>
+
+  * Starter and Template Improvements
+    ---------------------------------
+    * Adjustments to avoid smearing/etc.
+      + Nagasaki
+      + Flower Frame (also arrange a leaf)
+      + USA Map
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+  * Ports & Building:
+    -----------------
+    * Don't pollute documentation folder ($DOC_PREFIX) with build scripts.
+      Bill Kendrick <bill@newbreedsoftware.com>
 
 2023.July.20 (0.9.31)
   * New Magic Tools:

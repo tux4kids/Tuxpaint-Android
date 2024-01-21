@@ -4,7 +4,7 @@
   Kaleidoscope Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 12, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -45,8 +45,8 @@ static int square_size = 128;
 
 enum
 {
-  KAL_UD,
   KAL_LR,
+  KAL_UD,
   KAL_BOTH,
   KAL_PATTERN,
   KAL_TILES,
@@ -54,8 +54,8 @@ enum
 };
 
 char *kal_icon_names[KAL_COUNT] = {
-  "symmetric_updown.png",
   "symmetric_leftright.png",
+  "symmetric_updown.png",
   "kalidescope.png",
   "kal_pattern.png",
   "kal_tiles.png"
@@ -64,11 +64,12 @@ char *kal_icon_names[KAL_COUNT] = {
 /* Function Declarations: */
 
 Uint32 kalidescope_api_version(void);
-int kalidescope_init(magic_api * api, Uint32 disabled_features);
+int kalidescope_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int kalidescope_get_tool_count(magic_api * api);
 SDL_Surface *kalidescope_get_icon(magic_api * api, int which);
 char *kalidescope_get_name(magic_api * api, int which);
 int kalidescope_get_group(magic_api * api, int which);
+int kalidescope_get_order(int which);
 char *kalidescope_get_description(magic_api * api, int which, int mode);
 static void do_kalidescope(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 void kalidescope_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -94,7 +95,7 @@ Uint32 kalidescope_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int kalidescope_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int kalidescope_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -124,23 +125,23 @@ char *kalidescope_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   if (which == KAL_LR)
   {
-    return (strdup(gettext_noop("Symmetric Left/Right")));
+    return (strdup(gettext("Symmetric Left/Right")));
   }
   else if (which == KAL_UD)
   {
-    return (strdup(gettext_noop("Symmetric Up/Down")));
+    return (strdup(gettext("Symmetric Up/Down")));
   }
   else if (which == KAL_PATTERN)
   {
-    return (strdup(gettext_noop("Pattern")));
+    return (strdup(gettext("Pattern")));
   }
   else if (which == KAL_TILES)
   {
-    return (strdup(gettext_noop("Tiles")));
+    return (strdup(gettext("Tiles")));
   }
   else
   {                             /* KAL_BOTH */
-    return (strdup(gettext_noop("Kaleidoscope")));
+    return (strdup(gettext("Kaleidoscope")));
   }
 }
 
@@ -148,6 +149,12 @@ char *kalidescope_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int kalidescope_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PATTERN_PAINTING;
+}
+
+// Return our order:
+int kalidescope_get_order(int which)
+{
+  return 100 + which;
 }
 
 

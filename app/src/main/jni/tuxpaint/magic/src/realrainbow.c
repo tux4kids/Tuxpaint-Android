@@ -6,8 +6,8 @@
   by Bill Kendrick <bill@newbreedsoftware.com>
   Math assistance by Jeff Newmiller <jdnewmil@dcn.davis.ca.us>
 
-  2009.04.02
-  Last updated: February 12, 2023
+  First created: 2009.04.02
+  Last updated: January 16, 2024
 
 FIXME:
 * Color/alpha art needs improvement.
@@ -32,11 +32,12 @@ void realrainbow_arc(magic_api * api, int which, SDL_Surface * canvas,
                      SDL_Surface * last, int x1, int y1, int x2, int y2, int fulldraw, SDL_Rect * update_rect);
 static void realrainbow_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 Uint32 realrainbow_api_version(void);
-int realrainbow_init(magic_api * api, Uint32 disabled_features);
+int realrainbow_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int realrainbow_get_tool_count(magic_api * api);
 SDL_Surface *realrainbow_get_icon(magic_api * api, int which);
 char *realrainbow_get_name(magic_api * api, int which);
 int realrainbow_get_group(magic_api * api, int which);
+int realrainbow_get_order(int which);
 char *realrainbow_get_description(magic_api * api, int which, int mode);
 int realrainbow_modes(magic_api * api, int which);
 int realrainbow_requires_colors(magic_api * api, int which);
@@ -62,7 +63,7 @@ Uint32 realrainbow_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int realrainbow_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int realrainbow_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -110,6 +111,11 @@ char *realrainbow_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int realrainbow_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_ARTISTIC;
+}
+
+int realrainbow_get_order(int which)
+{
+  return 300 + which;
 }
 
 char *realrainbow_get_description(magic_api * api ATTRIBUTE_UNUSED,

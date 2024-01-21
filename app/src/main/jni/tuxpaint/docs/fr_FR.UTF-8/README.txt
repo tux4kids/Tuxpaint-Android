@@ -1,12 +1,12 @@
                                    Tux Paint
-                                version 0.9.31
+                                version 0.9.32
 
                      Un programme simple pour les enfants
 
-       Copyright © 2002-2023 by divers contributeurs; voir AUTHORS.txt.
+       Copyright © 2002-2024 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               juillet 20, 2023
+                               janvier 13, 2024
 
 +-------------------------------------------------------+
 |                  Table des matières                   |
@@ -102,38 +102,52 @@ logiciel sous GPL.)
 
 Voir COPYING.txt pour le texte complet de la licence GPL.
 
-D. Qu'y a-t-il de neuf dans la version 0.9.31 de Tux Paint ?
+D. Qu'y a-t-il de neuf dans la version 0.9.32 de Tux Paint ?
 
-Gomme floue
-    Des gommes aux contours flous ont été rajoutées à l'outil Gomme
+Outil Magie avec une perspective à 1 point de fuite
+    Des outils qui permettent de créer un point de fuite, et de dessiner
+    ensuite des lignes avec une perspective à 1 point.
 
-Nouveaux outils Magie
-    Boucles, Ruban, Doux et Gribouillis
+Outil de Magie avec une perspective à 2 points de fuite
+    Des outils qui permettent de créer deux points de fuite, et de dessiner
+    ensuite des lignes avec une perspective à 2 points.
 
-Créer des modèles à partir de la boîte de dialogue Ouvrir
-    Les dessins sauvegardés peuvent être convertis en Modèles (qui sont
-    utilisés pour de nouveaux dessins) grâce à une nouvelle option dans la
-    boîte de dialogue 'Ouvrir'.( Cette possibilité peut être désactivée en
-    utilisant "notemplateexport" l'option de simplification.)
+Outil de Magie Perspective 3-point (point de fuite)
+    Un ensemble d'outils qui vous permet d'avoir trois points de fuite, et
+    pouvoir ainsi tracer des lignes avec une perspective à 3 points.
 
-La police de l'interface utilisateur peut être remplacée
-    La police utilisée pour l'interface utilisateur (étiquettes des boutons,
-    dialogues pop-up et instructions) peut être remplacée ("DejaVu Sans").(Voir
-    l'"uifont" option de configuration. Utilisez "--listfonts" pour voir la
-    liste des polices disponibles.)
+Isometric Magic tool
+    A tool that draws lines in an isometric projection.
 
-L'effacement de fichier peut être désactivé
+Dimetric Magic tool
+    A pair of tools that allow you to set an angle, and then draw lines in a
+    dimetric projection.
 
-    Les contrôles pour effacer le travail sauvegardé — dessins sauvegardés (via
-    la boîte de dialogue Ouvrir) et les modèles exportés (via la boîte de
-    dialogue Nouveau) — peuvent être désactivés. Voir l' "noerase" option de
-    configuration.)
+Trimetric Magic tool
+    A pair of tools that allow you to set two angles, and then draw lines in a
+    trimetric projection.
 
-Documentation sur "Contrôler Tux Paint"
+Oblique Magic tool
+    A pair of tools that allow you to set an angles, and then draw lines in an
+    oblique projection.
 
-    Un bref aperçu pour savoir comment Tux Paint peut être controllé — souris,
-    tablette, écran tactile, joystick et clavier — a été ajouté au document
-    README.
+Epitrochoid and Hypotrochoid Magic tools
+    Tools that create centered trochoid curved patterns.
+
+Réglage du nouveau "complexité" (complexity)
+
+Un nouveau réglage qui permet à certains outils Magie de se comporter
+    différemment (ou bien d'être supprimés) en se basant sur le niveau
+    d'expertise de l'utilisateur. Les nouveaux outils "Perspective N-point" et
+    "Clone" sont affectés via ce réglage.
+Magic tools reorganized
+
+Each group of Magic tools has been reorganized to keep related tools next to
+    each other, rather than being sorted alphabetically by their (localized)
+    names.
+Les détails de la police sont affichés lors du choix
+    Le nom et la taille de la police choisie sont montrés quand on utilise les
+    outils Texte et Étiquette.
 
 
 Voir CHANGES.txt pour la liste complète des changements.
@@ -1411,23 +1425,27 @@ VII.Suivez le projet Tux Paint sur les réseaux sociaux
 Tux Paint est présent sur de nombreux media sociaux, où nous annonçons les
 mises à jour et les oeuvres d'art.
 
+  * Suivre @tuxpaint@bsky.social sur Bluesky
   * Suivez Tux Paint sur Facebook
   * Suivre @TuxPaintDevs sur Instagram
   * Suivre @tuxpaint@floss.social sur Mastodon
   * Suivre u/TuxPaintDevs sur Reddit
   * Suivre @TuxPaintDevs sur Threads
+  * Suivre @TuxPaintDevs sur TikTok
   * Suivre Tux Paint sur Tumblr
-  * Suivre @TuxPaintTweets sur Twitter
+  * Souscrivez à @TuxPaintOfficial sur YoUTube
 
 VIII. Mentions concernant les marques déposées
 
   * "Linux" est marque déposée par Linus Torvalds.
   * "Microsoft" et "Windows" sont des marques déposées par Microsoft Corp.
   * "Apple" et "macOS" sont des marques déposées par Apple Inc.
+  * "Haiku" est une marque déposée par Haiku, Inc.
   * "Facebook" et "Instagram" sont des marques déposées par Meta Platforms,
     Inc.
   * "Mastodon" est une marque déposée par Mastodon gGmbH.
   * "Reddit" est une marque déposée par Reddit, Inc.
+  * "TIK TOK" est une marque déposée de Bytedance Ltd.
   * "Tumblr" est une marque déposée par Tumblr, Inc.
-  * "Twitter" est une marque déposée par X Corp.
+  * "YouTube" est une marque déposée de Alphabet, Inc.
 

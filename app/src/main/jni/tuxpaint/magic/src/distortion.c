@@ -4,7 +4,7 @@
   Distortion Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 22, 2023
+  Last updated: January 16, 2024
 */
 
 /* Inclusion of header files: */
@@ -55,11 +55,12 @@ static int distortion_radius = 8;
 // that are declared _before_ them.
 
 Uint32 distortion_api_version(void);
-int distortion_init(magic_api * api, Uint32 disabled_features);
+int distortion_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int distortion_get_tool_count(magic_api * api);
 SDL_Surface *distortion_get_icon(magic_api * api, int which);
 char *distortion_get_name(magic_api * api, int which);
 int distortion_get_group(magic_api * api, int which);
+int distortion_get_order(int which);
 char *distortion_get_description(magic_api * api, int which, int mode);
 int distortion_requires_colors(magic_api * api, int which);
 void distortion_shutdown(magic_api * api);
@@ -97,7 +98,7 @@ Uint32 distortion_api_version(void)
 
 // Initialization
 
-int distortion_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int distortion_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -147,6 +148,14 @@ char *distortion_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_
 int distortion_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
+}
+
+
+// Report our "Magic" tool order
+
+int distortion_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 101;
 }
 
 

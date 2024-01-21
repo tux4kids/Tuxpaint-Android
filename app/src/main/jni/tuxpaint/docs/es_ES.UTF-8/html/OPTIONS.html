@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            versi&oacute;n 0.9.31          </h1>
+            versi&oacute;n 0.9.32          </h1>
 
           <h2>
             Options Documentation          </h2>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            julio 20, 2023          </p>
+            diciembre 29, 2023          </p>
         </center>
       </header>
 
@@ -709,6 +709,29 @@
         <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The brush spacing option was added to Tux Paint's user interface in version 0.9.28. For more information on brush spacing, see <a href="EXTENDING.html">EXTENDING.html</a>      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nobrushspacing=no</code>" or "<code>brushspacing=yes</code>". In both cases, may be overridden by the command-line option "<code>--brushspacing</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>complexity=<i>COMPLEXITY</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Sets the complexity (expertise) level of Tux Paint, which can either disable some Magic tools, or cause them to operate differently. (For example, the "Clone" tool is not available in <em>novice</em> mode, and the 1-, 2-, and 3-point perspective tools do not allow vanishing points to be edited in <em>beginner</em> mode.)      </p>
+      <p>
+        The <code>COMPLEXITY</code> value may be one of:        <dl>
+          <dt><code>advanced</code> (the default)</dt>
+          <dd>"Advanced" &mdash; For users familiar with Tux Paint and who can operate more complex tools.</dd>
+          <dt><code>beginner</code></dt>
+          <dd>"Beginner" &mdash; For users comfortable with Tux Paint, but where complex tools may cause confusion or frustration.</dd>
+          <dt><code>novice</code></dt>
+          <dd>"Novice" &mdash; For first-time Tux Paint users, users inexperienced with computers, or those with special accessibility needs.</dd>
+        </dl>
+      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The complexity option was added to Tux Paint in version 0.9.32. Consult the <a href="magic-docs/html/index.html">individual Magic tools' documentation</a>.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>complexity=advanced</code>". In both cases, may be overridden by the command-line option "<code>--complexity=advanced</code>".      </p>
     </dd>
 
     <dt>

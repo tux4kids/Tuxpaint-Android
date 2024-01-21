@@ -18,6 +18,8 @@ DO NOT EDIT ME!
 #ifndef TP_MAGIC_API_H
 #define TP_MAGIC_API_H
 
+/* src/tp_magic_api.h.in last modified 2023-12-29 */
+
 #include "SDL.h"
 #include "SDL_mixer.h"
 #include "libintl.h"
@@ -184,7 +186,7 @@ typedef struct magic_api_t {
    If Tux Paint deems you compatible, it will call your 'XYZ_init()' (etc.)
    and you will be active. */
 
-#define TP_MAGIC_API_VERSION 0x00000008
+#define TP_MAGIC_API_VERSION 0x00000009
 
 #ifndef ATTRIBUTE_UNUSED
 #define ATTRIBUTE_UNUSED __attribute__ ((__unused__))
@@ -198,13 +200,33 @@ enum {
   MAGIC_TYPE_PAINTING,
   MAGIC_TYPE_PATTERN_PAINTING,
   MAGIC_TYPE_PICTURE_DECORATIONS,
+  MAGIC_TYPE_PROJECTIONS,
   MAGIC_TYPE_ARTISTIC
 };
 
 /* Magic-relevant Tux Paint features (which may be reported as disabled) */
+/* (Uint8) */
 
-#define MAGIC_FEATURE_CONTROL 0x00000001
-#define MAGIC_FEATURE_SIZE 0x00000002
+#define MAGIC_FEATURE_CONTROL 0b00000001
+#define MAGIC_FEATURE_SIZE    0b00000010
+
+/* Magic complexity level requested by the user (allowing plugins to simplify) */
+
+enum {
+  MAGIC_COMPLEXITY_NOVICE,
+  MAGIC_COMPLEXITY_BEGINNER,
+  MAGIC_COMPLEXITY_ADVANCED,
+  NUM_MAGIC_COMPLEXITY_LEVELS
+};
+
+#define MAGIC_COMPLEXITY_DEFAULT MAGIC_COMPLEXITY_ADVANCED
+
+const char * MAGIC_COMPLEXITY_LEVEL_NAMES[NUM_MAGIC_COMPLEXITY_LEVELS] = {
+  "novice",
+  "beginner",
+  "advanced",
+};
+
 
 #endif
 

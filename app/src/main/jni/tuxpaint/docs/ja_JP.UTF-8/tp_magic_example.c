@@ -1,7 +1,7 @@
 /* tp_magic_example.c
 
    An example of a "Magic" tool plugin for Tux Paint
-   4月 13, 2023
+   1月 16, 2024
 */
 
 
@@ -144,7 +144,7 @@ released, aka deallocated) when the user quits Tux Paint, when our
 example_shutdown() function is called.
 */
 
-int example_init(magic_api * api, Uint32 disabled_features)
+int example_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level)
 {
   int i;
   char filename[1024];
@@ -159,7 +159,7 @@ int example_init(magic_api * api, Uint32 disabled_features)
     "tp-magic-config --dataprefix" command would have told us when we installed
     our plugin and its data.)
     */
-    snprintf(filename, sizeof(filename), "%s/sounds/magic/%s", api->data_directory,
+    snprintf(filename, sizeof(filename), "%ssounds/magic/%s", api->data_directory,
              sound_filenames[i]);
 
     printf("Trying to load %s sound file\n", filename);
@@ -192,7 +192,8 @@ int example_get_tool_count(magic_api * api)
 /*
 Load our icons
 
-When Tux Paint is starting up and loading plugins, it asks us to provide icons for the 'Magic' tool buttons.
+When Tux Paint is starting up and loading plugins, it asks us to provide
+icons for the 'Magic' tool buttons.
 */
 SDL_Surface *example_get_icon(magic_api * api, int which)
 {
@@ -209,7 +210,7 @@ SDL_Surface *example_get_icon(magic_api * api, int which)
   We use "which" (which of our tools Tux Paint is asking about) as an index
   into the array.
   */
-  snprintf(filename, sizeof(filename), "%s/images/magic/%s",
+  snprintf(filename, sizeof(filename), "%simages/magic/%s",
            api->data_directory, icon_filenames[which]);
 
   printf("Trying to load %s icon\n", filename);
@@ -272,6 +273,20 @@ int example_get_group(magic_api * api, int which)
   into the array.
   */
   return (tool_groups[which]);
+}
+
+
+/*
+Return grouping/ordering number
+
+When Tux Paint is starting up and loading plugins, it asks us to provide a
+numeric value used for sorting 'Magic' tools within a group.  Tools will be
+ordered based on this number, and those with the same number will be sorted
+alphabetically by their localized name (see 'example_get_name').
+*/
+int *example_get_order(int which)
+{
+  return 0;
 }
 
 

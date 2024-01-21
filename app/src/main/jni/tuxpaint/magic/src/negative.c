@@ -4,7 +4,7 @@
   Negative Magic Tool Plugin
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 12, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -35,12 +35,13 @@
 static Mix_Chunk *negative_snd;
 static int negative_radius = 16;
 
-int negative_init(magic_api * api, Uint32 disabled_features);
+int negative_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 Uint32 negative_api_version(void);
 int negative_get_tool_count(magic_api * api);
 SDL_Surface *negative_get_icon(magic_api * api, int which);
 char *negative_get_name(magic_api * api, int which);
 int negative_get_group(magic_api * api, int which);
+int negative_get_order(int which);
 char *negative_get_description(magic_api * api, int which, int mode);
 static void do_negative(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 void negative_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -89,7 +90,7 @@ const char *negative_descs[negative_NUM_TOOLS][2] = {
 };
 
 
-int negative_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int negative_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -129,6 +130,12 @@ char *negative_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int negative_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_COLOR_FILTERS;
+}
+
+// Return our order:
+int negative_get_order(int which)
+{
+  return 100 + which;
 }
 
 // Return our description, localized:

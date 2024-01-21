@@ -1,15 +1,15 @@
 # Tux Paint - A simple drawing program for children.
 
-# Copyright (c) 2002-2023
+# Copyright (c) 2002-2024
 # Various contributors (see AUTHORS.txt)
 # https://tuxpaint.org/
 
-# June 14, 2002 - July 20, 2023
+# June 14, 2002 - January 14, 2024
 
 
 # The version number, for release:
 
-VER_VERSION:=0.9.31
+VER_VERSION:=0.9.32
 
 # We are always SDL2 now, so don't need "-sdl2"
 VER_FLAVOR:=""
@@ -24,7 +24,7 @@ else
   VER_DATE=$(shell date "+%Y-%m-%d")
 endif
 
-MAGIC_API_VERSION:=0x00000008
+MAGIC_API_VERSION:=0x00000009
 
 # Need to know the OS
 SYSNAME:=$(shell uname -s)
@@ -166,7 +166,7 @@ macos_BUNDLE:=./TuxPaint.app
 ios_BUNDLE:=./TuxPaint-$(SDK).app
 BUNDLE:=$($(OS)_BUNDLE)
 
-windows_ARCH_LIBS:=obj/win32_print.o obj/resource.o obj/win32_trash.o
+windows_ARCH_LIBS:=obj/win32_print.o obj/resource.o obj/win32_trash.o obj/win32_version.o
 macos_ARCH_LIBS:=src/macos_print.m obj/macos.o
 ios_ARCH_LIBS:=src/ios_print.m obj/ios.o
 beos_ARCH_LIBS:=obj/BeOS_print.o
@@ -349,8 +349,10 @@ endif
 
 # The entire set of CFLAGS:
 
-#-ffast-math
-OPTFLAGS:=-O0 -g
+FASTMATH:=-ffast-math
+
+OPTFLAGS:=-O2 -g $(FASTMATH)
+
 CFLAGS:=$(CPPFLAGS) $(OPTFLAGS) -W -Wall -fno-common -ffloat-store \
 	$(if $(filter windows,$(OS)),,$(call comptest,-fvisibility=hidden,)) \
 	-Wcast-align -Wredundant-decls \
@@ -625,7 +627,7 @@ install:	install-bin install-data install-doc \
 		echo "you can type the command 'tuxpaint' to run the program!!!"; \
 		echo; \
 		echo "For more information, see the 'tuxpaint' man page,"; \
-		echo "run 'tuxpaint --usage' or see $(DOC_PREFIX)/README.txt"; \
+		echo "run 'tuxpaint --usage' or see $(DOC_PREFIX)/[locale]/README.txt"; \
 	fi
 	@echo
 	@echo "Visit Tux Paint's home page for more information, updates"
@@ -1109,6 +1111,7 @@ install-doc:
 	@cp -R docs/* $(DOC_PREFIX)
 	@rm $(DOC_PREFIX)/Makefile # Used to generate TXT from HTML
 	@rm $(DOC_PREFIX)/RELEASE.txt # Not useful to end users
+	@rm $(DOC_PREFIX)/*.sh $(DOC_PREFIX)/*.php # Remove build scripts
 	@echo
 	@echo "...Installing English Magic tool docs..."
 	@install -d $(DOC_PREFIX)/en/magic-docs
@@ -1363,6 +1366,12 @@ obj/win32_trash.o:	src/win32_trash.c src/debug.h
 	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/win32_trash.c -o obj/win32_trash.o
 
+obj/win32_version.o:	src/win32_version.c src/debug.h
+	@echo
+	@echo "...Compiling win32 version support..."
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
+		-c src/win32_version.c -o obj/win32_version.o
+
 obj/postscript_print.o:	src/postscript_print.c \
 			src/postscript_print.h src/debug.h
 	@echo
@@ -1444,8 +1453,7 @@ beos_PLUGIN_LIBS:="$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS) $(MAGIC_SDL_CPPFLAGS)"
 linux_PLUGIN_LIBS:=
 PLUGIN_LIBS:=$($(OS)_PLUGIN_LIBS)
 
-#MAGIC_CFLAGS:=-g3 -O2 -fvisibility=hidden -fno-common -W -Wstrict-prototypes -Wmissing-prototypes -Wall $(MAGIC_SDL_CPPFLAGS) -Isrc/
-MAGIC_CFLAGS:=-g3 -O2 -fno-common -W -Wstrict-prototypes -Wmissing-prototypes -Wall $(MAGIC_SDL_CPPFLAGS) -Isrc/ $(ARCH_CFLAGS)
+MAGIC_CFLAGS:=-g3 -O2 $(FASTMATH) -fno-common -W -Wstrict-prototypes -Wmissing-prototypes -Wall $(MAGIC_SDL_CPPFLAGS) -Isrc/ $(ARCH_CFLAGS)
 SHARED_FLAGS:=-shared -fpic -lm
 
 MAGIC_C:=$(wildcard magic/src/*.c)

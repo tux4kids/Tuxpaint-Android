@@ -1,12 +1,12 @@
                                    Tux Paint
-                                version 0.9.31
+                                version 0.9.32
 
                          Documentation sur les options
 
        Copyright © 2002-2023 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               juillet 20, 2023
+                               décembre 29, 2023
 
 +--------------------------------------------------------------------+
 |                         Table des matières                         |
@@ -551,6 +551,40 @@ nobrushspacing=yes
     peut être remplacé par le fichier de configuration de l'utilisateur en
     utilisant "nobrushspacing=no" ou "brushspacing=yes". Dans les deux cas, il
     peut être remplacé avec l'option en ligne de commande "--brushspacing".
+
+
+
+complexity=COMPLEXITÉ
+
+    Règle le niveau de complexité (expertise) de Tux Paint, qui permet soit de
+    déactiver certains outils de Magie, ou de changer leur comportement. (Par
+    exemple, l'outil "Clone" n'est pas disponible en mode novice, et les outils
+    de perspective à 1,2 ou 3 points n'éditeront pas de points de fuite en mode
+    débutant.
+
+    La valeur COMPLEXITÉ peut l'une de celles-ci :
+
+    advanced (par défaut)
+        "Avancé" — Pour les utilisateurs familiers avec Tux Paint et qui
+        peuvent œuvrer avec de outils plus complexes.
+
+    beginner
+        "Débutant" — Pour les utilisateurs habitués à Tux Paint, mais les
+        outils complexes peuvent leur causer confusion ou frustration.
+
+    novice
+        "Novice" — Pour les utilisateurs qui débutent avec Tux Paint, ou bien
+        qui ont peu d'expérience des ordinateurs, ou bien encore ceux qui ont
+        besoin d'outils spéciaux pour l'accessibilité
+
+
+    📜 Note : Ll'option de complexité a été ajoutée dans la version 0.9.32 de
+    Tux Paint. Consultez la documentation individuelle des outils Magiei.
+
+    ⚙ Note : si utilisé dans un fichier de configuration pour tout le monde, il
+    peut être remplacé par le fichier de configuration de l'utilisateur en
+    utilisant "complexity=advanced". Dans les deux cas, il peut être remplacé
+    avec l'option en ligne de commande "--complexity=advanced".
 
 
 

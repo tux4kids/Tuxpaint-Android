@@ -2,9 +2,9 @@
   flower.c
 
   Flower Magic Tool Plugin
-//   Tux Paint - A simple drawing program for children.
+  Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 23, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -73,11 +73,12 @@ static void flower_drawflower(magic_api * api, SDL_Surface * canvas, int x, int 
 static Point2D flower_PointOnCubicBezier(Point2D * cp, float t);
 static void flower_ComputeBezier(Point2D * cp, int numberOfPoints, Point2D * curve);
 Uint32 flower_api_version(void);
-int flower_init(magic_api * api, Uint32 disabled_features);
+int flower_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int flower_get_tool_count(magic_api * api);
 SDL_Surface *flower_get_icon(magic_api * api, int which);
 char *flower_get_name(magic_api * api, int which);
 int flower_get_group(magic_api * api, int which);
+int flower_get_order(int which);
 char *flower_get_description(magic_api * api, int which, int mode);
 static void flower_predrag(magic_api * api, SDL_Surface * canvas, SDL_Surface * last, int ox, int oy, int x, int y);
 void flower_drag(magic_api * api, int which, SDL_Surface * canvas,
@@ -114,7 +115,7 @@ Uint32 flower_api_version(void)
 
 
 // No setup required:
-int flower_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int flower_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
   SDL_Surface *tmp_surf;
@@ -130,14 +131,14 @@ int flower_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
   tmp_surf = IMG_Load(fname);
   if (tmp_surf == NULL)
   {
-    fprintf(stderr, "Cannot load %s", fname);
+    fprintf(stderr, "Cannot load %s\n", fname);
     return (0);
   }
   h = tmp_surf->h * MAX_WIDTH / tmp_surf->w;
   flower_base_full = api->scale(tmp_surf, MAX_WIDTH, h, 1);
   if (flower_base_full == NULL)
   {
-    fprintf(stderr, "Cannot scale %s", fname);
+    fprintf(stderr, "Cannot scale %s\n", fname);
     return (0);
   }
 
@@ -145,7 +146,7 @@ int flower_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
   tmp_surf = IMG_Load(fname);
   if (tmp_surf == NULL)
   {
-    fprintf(stderr, "Cannot load %s", fname);
+    fprintf(stderr, "Cannot load %s\n", fname);
     return (0);
   }
   /* N.B.: Leaf is 1/2 as wide as base & petals */
@@ -153,7 +154,7 @@ int flower_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
   flower_leaf_full = api->scale(tmp_surf, MAX_WIDTH / 2, h, 1);
   if (flower_leaf_full == NULL)
   {
-    fprintf(stderr, "Cannot scale %s", fname);
+    fprintf(stderr, "Cannot scale %s\n", fname);
     return (0);
   }
 
@@ -161,14 +162,14 @@ int flower_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
   tmp_surf = IMG_Load(fname);
   if (tmp_surf == NULL)
   {
-    fprintf(stderr, "Cannot load %s", fname);
+    fprintf(stderr, "Cannot load %s\n", fname);
     return (0);
   }
   h = tmp_surf->h * MAX_WIDTH / tmp_surf->w;
   flower_petals_full = api->scale(tmp_surf, MAX_WIDTH, h, 1);
   if (flower_petals_full == NULL)
   {
-    fprintf(stderr, "Cannot scale %s", fname);
+    fprintf(stderr, "Cannot scale %s\n", fname);
     return (0);
   }
 
@@ -204,6 +205,12 @@ char *flower_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
 int flower_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_ARTISTIC;
+}
+
+// Return our orders:
+int flower_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 100;
 }
 
 // Return our descriptions, localized:

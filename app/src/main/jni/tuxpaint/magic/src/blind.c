@@ -6,7 +6,7 @@
 
   By Pere Pujal Carabantes
 
-  Copyright (c) 2009-2023
+  Copyright (c) 2009-2024
   https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -24,7 +24,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: May 1, 2023
+  Last updated: January 16, 2024
 */
 
 #include "tp_magic_api.h"
@@ -57,11 +57,12 @@ Mix_Chunk *blind_snd;
 Uint32 blind_api_version(void);
 void blind_set_color(magic_api * api, int which, SDL_Surface * canvas,
                      SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
-int blind_init(magic_api * api, Uint32 disabled_features);
+int blind_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int blind_get_tool_count(magic_api * api);
 SDL_Surface *blind_get_icon(magic_api * api, int which);
 char *blind_get_name(magic_api * api, int which);
 int blind_get_group(magic_api * api, int which);
+int blind_get_order(int which);
 char *blind_get_description(magic_api * api, int which, int mode);
 int blind_requires_colors(magic_api * api, int which);
 void blind_release(magic_api * api, int which,
@@ -97,7 +98,7 @@ void blind_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
   blind_b = b;
 }
 
-int blind_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int blind_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -129,6 +130,11 @@ char *blind_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
 int blind_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_DECORATIONS;
+}
+
+int blind_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 100;
 }
 
 char *blind_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)

@@ -23,7 +23,7 @@
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
-  June 14, 2002 - February 18, 2023
+  June 14, 2002 - October 14, 2023
 */
 
 
@@ -199,6 +199,11 @@ const char *const tool_tips[NUM_TOOLS] = {
 // Instructions to show when rotating stamps
 #define TIP_STAMPS_ROTATING gettext_noop("Drag the mouse to rotate the stamp. Click to draw it. (It is rotated %d degrees.)")
 
+// Text tool instructions after changing font
+#define TIP_TEXT_FONTCHANGE gettext_noop("The font is \"%1$s (%2$s)\", %3$d pixels tall. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text.")
+
+// Label tool instructions after changing font
+#define TIP_LABEL_FONTCHANGE gettext_noop("The font is \"%1$s (%2$s)\", %3$d pixels tall. Click on your drawing and you can start typing. Press [Enter] or [Tab] to complete the text. By using the selector button and clicking an existing label, you can move it, edit it, and change its text style.")
 
 /* Tool icon filenames: */
 

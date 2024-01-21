@@ -1,7 +1,7 @@
 /*
   Strings -- draws string art.
 
-  Last updated: April 19, 2023
+  Last updated: January 16, 2024
 */
 #include "tp_magic_api.h"
 #include "SDL_image.h"
@@ -60,11 +60,12 @@ int string_get_tool_count(magic_api * api);
 SDL_Surface *string_get_icon(magic_api * api, int which);
 char *string_get_name(magic_api * api, int which);
 int string_get_group(magic_api * api, int which);
+int string_get_order(int which);
 char *string_get_description(magic_api * api, int which, int mode);
 int string_requires_colors(magic_api * api, int which);
 void string_release(magic_api * api, int which,
                     SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
-int string_init(magic_api * api, Uint32 disabled_features);
+int string_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 void string_shutdown(magic_api * api);
 void string_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * snapshot);
 void string_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * snapshot);
@@ -148,6 +149,22 @@ int string_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
   return MAGIC_TYPE_ARTISTIC;
 }
 
+int string_get_order(int which)
+{
+  switch (which)
+  {
+  case STRING_TOOL_FULL_BY_OFFSET:
+    return 9000;
+    break;
+  case STRING_TOOL_TRIANGLE:
+    return 9001;
+    break;
+  default:
+    return 9002;
+  }
+}
+
+
 char *string_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   switch (which)
@@ -190,7 +207,7 @@ void string_release(magic_api * api, int which,
   }
 }
 
-int string_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int string_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 

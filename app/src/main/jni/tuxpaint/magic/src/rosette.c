@@ -6,7 +6,7 @@
 
   Credits: Adam 'foo-script' Rakowski <foo-script@o2.pl>
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 19, 2023
+  Last updated: January 16, 2024
 */
 
 // sound only plays on release
@@ -54,11 +54,12 @@ Mix_Chunk *rosette_snd;
 Uint32 rosette_api_version(void);
 void rosette_set_color(magic_api * api, int which, SDL_Surface * canvas,
                        SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
-int rosette_init(magic_api * api, Uint32 disabled_features);
+int rosette_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int rosette_get_tool_count(magic_api * api);
 SDL_Surface *rosette_get_icon(magic_api * api, int which);
 char *rosette_get_name(magic_api * api, int which);
 int rosette_get_group(magic_api * api, int which);
+int rosette_get_order(int which);
 char *rosette_get_description(magic_api * api, int which, int mode);
 int rosette_requires_colors(magic_api * api, int which);
 void rosette_release(magic_api * api, int which,
@@ -95,7 +96,7 @@ void rosette_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
   rosette_colors.b = b;
 }
 
-int rosette_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int rosette_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -133,6 +134,11 @@ char *rosette_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int rosette_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PATTERN_PAINTING;
+}
+
+int rosette_get_order(int which)
+{
+  return 200 + which;
 }
 
 char *rosette_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)

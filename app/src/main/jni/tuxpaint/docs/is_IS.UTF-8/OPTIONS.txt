@@ -1,12 +1,12 @@
                                    Tux Paint
-                                version 0.9.31
+                                version 0.9.32
 
                              Options Documentation
 
         Copyright © 2002-2023 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                 júlí 20, 2023
+                               desember 29, 2023
 
 +--------------------------------------------+
 |             Table of Contents              |
@@ -514,6 +514,38 @@ nobrushspacing=yes
     the user's configuration file using "nobrushspacing=no" or "brushspacing=
     yes". In both cases, may be overridden by the command-line option
     "--brushspacing".
+
+
+
+complexity=COMPLEXITY
+
+    Sets the complexity (expertise) level of Tux Paint, which can either
+    disable some Magic tools, or cause them to operate differently. (For
+    example, the "Clone" tool is not available in novice mode, and the 1-, 2-,
+    and 3-point perspective tools do not allow vanishing points to be edited in
+    beginner mode.)
+
+    The COMPLEXITY value may be one of:
+
+    advanced (the default)
+        "Advanced" — For users familiar with Tux Paint and who can operate more
+        complex tools.
+
+    beginner
+        "Beginner" — For users comfortable with Tux Paint, but where complex
+        tools may cause confusion or frustration.
+
+    novice
+        "Novice" — For first-time Tux Paint users, users inexperienced with
+        computers, or those with special accessibility needs.
+
+
+    📜 Note: The complexity option was added to Tux Paint in version 0.9.32.
+    Consult the individual Magic tools' documentation.
+
+    ⚙ Note: If used in a system-wide configuration file, may be overridden by
+    the user's configuration file using "complexity=advanced". In both cases,
+    may be overridden by the command-line option "--complexity=advanced".
 
 
 

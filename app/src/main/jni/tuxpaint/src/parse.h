@@ -12,6 +12,7 @@ struct cfginfo
   const char *altprintcommand;
   const char *autosave_on_quit;
   const char *colorfile;
+  const char *complexity;
   const char *datadir;
   const char *disable_label;
   const char *disable_brushspacing;

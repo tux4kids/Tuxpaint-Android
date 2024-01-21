@@ -6,7 +6,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 23, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -71,17 +71,22 @@ const int rain_groups[rain_NUM_TOOLS] = {
   MAGIC_TYPE_PAINTING,
 };
 
+const int rain_orders[rain_NUM_TOOLS] = {
+  1500,
+};
+
 const char *rain_descs[rain_NUM_TOOLS][2] = {
   {gettext_noop("Click to place a rain drop onto your picture."),
    gettext_noop("Click to cover your picture with rain drops."),},
 };
 
 Uint32 rain_api_version(void);
-int rain_init(magic_api * api, Uint32 disabled_features);
+int rain_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int rain_get_tool_count(magic_api * api);
 SDL_Surface *rain_get_icon(magic_api * api, int which);
 char *rain_get_name(magic_api * api, int which);
 int rain_get_group(magic_api * api, int which);
+int rain_get_order(int which);
 char *rain_get_description(magic_api * api, int which, int mode);
 static void do_rain_drop(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 static void rain_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
@@ -119,7 +124,7 @@ static int rain_inRainShape(double x, double y, double r)
   return 0;
 }
 
-int rain_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int rain_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
 
   int i;
@@ -159,6 +164,12 @@ char *rain_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int rain_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return rain_groups[which];
+}
+
+// Return our orders
+int rain_get_order(int which)
+{
+  return rain_orders[which];
 }
 
 // Return our descriptions, localized:

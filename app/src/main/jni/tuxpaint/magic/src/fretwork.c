@@ -1,7 +1,7 @@
 /*
   Draws fretwork
 
-  Last updated: April 19, 2023
+  Last updated: January 16, 2024
 */
 
 #include "tp_magic_api.h"
@@ -59,11 +59,12 @@ int fretwork_modes(magic_api * api, int which);
 void fretwork_set_color(magic_api * api, int which, SDL_Surface * canvas,
                         SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 static void fretwork_colorize(magic_api * api, SDL_Surface * dest, SDL_Surface * src);
-int fretwork_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED);
+int fretwork_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 int fretwork_get_tool_count(magic_api * api);
 SDL_Surface *fretwork_get_icon(magic_api * api, int which);
 char *fretwork_get_name(magic_api * api, int which);
 int fretwork_get_group(magic_api * api, int which);
+int fretwork_get_order(int which);
 char *fretwork_get_description(magic_api * api, int which, int mode);
 int fretwork_requires_colors(magic_api * api, int which);
 void fretwork_release(magic_api * api, int which,
@@ -138,7 +139,7 @@ static void fretwork_colorize(magic_api * api, SDL_Surface * dest, SDL_Surface *
 }
 
 
-int fretwork_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int fretwork_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
   Uint8 i;                      //is always < 4, so Uint8 seems to be a good idea
@@ -161,6 +162,23 @@ int fretwork_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
   fretwork_three_back = IMG_Load(fretwork_images[1]);
   fretwork_four_back = IMG_Load(fretwork_images[2]);
   fretwork_corner_back = IMG_Load(fretwork_images[3]);
+
+  if (fretwork_one == NULL || fretwork_one_back == NULL) {
+    fprintf(stderr, "Cannot load %s\n", fretwork_images[0]);
+    return(0);
+  }
+  if (fretwork_three == NULL || fretwork_three_back == NULL) {
+    fprintf(stderr, "Cannot load %s\n", fretwork_images[1]);
+    return(0);
+  }
+  if (fretwork_four == NULL || fretwork_four_back == NULL) {
+    fprintf(stderr, "Cannot load %s\n", fretwork_images[2]);
+    return(0);
+  }
+  if (fretwork_corner == NULL || fretwork_corner_back == NULL) {
+    fprintf(stderr, "Cannot load %s\n", fretwork_images[3]);
+    return(0);
+  }
 
   img_w = fretwork_one->w;
   img_h = fretwork_one->h;
@@ -188,6 +206,11 @@ SDL_Surface *fretwork_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 int fretwork_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
+}
+
+int fretwork_get_order(int which ATTRIBUTE_UNUSED)
+{
+  return 2100;
 }
 
 char *fretwork_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)

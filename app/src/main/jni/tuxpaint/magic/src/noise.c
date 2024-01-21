@@ -6,7 +6,7 @@
 
   Credits: Andrew Corcoran <akanewbie@gmail.com>
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: April 22, 2023
+  Last updated: January 16, 2024
 */
 
 #include <stdio.h>
@@ -69,16 +69,21 @@ const int noise_groups[noise_NUM_TOOLS] = {
   MAGIC_TYPE_DISTORTS,
 };
 
+const int noise_orders[noise_NUM_TOOLS] = {
+  2100,
+};
+
 const char *noise_descs[noise_NUM_TOOLS][2] = {
   {gettext_noop("Click and drag the mouse to add noise to parts of your picture."),
    gettext_noop("Click to add noise to your entire picture."),},
 };
 
 Uint32 noise_api_version(void);
-int noise_init(magic_api * api, Uint32);
+int noise_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level);
 SDL_Surface *noise_get_icon(magic_api * api, int which);
 char *noise_get_name(magic_api * api, int which);
 int noise_get_group(magic_api * api, int which);
+int noise_get_order(int which);
 char *noise_get_description(magic_api * api, int which, int mode);
 static void do_noise_pixel(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 static void do_noise_full(void *ptr, SDL_Surface * canvas, SDL_Surface * last, int which);
@@ -109,7 +114,7 @@ Uint32 noise_api_version(void)
 }
 
 //Load sounds
-int noise_init(magic_api * api, Uint32 disabled_features ATTRIBUTE_UNUSED)
+int noise_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -148,6 +153,12 @@ char *noise_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
 int noise_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
 {
   return noise_groups[which];
+}
+
+// Return our orders 
+int noise_get_order(int which)
+{
+  return noise_orders[which];
 }
 
 // Return our descriptions, localized:

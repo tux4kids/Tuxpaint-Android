@@ -3,7 +3,7 @@
 
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2023
+  Copyright (c) 2002-2024
   by various contributors; see AUTHORS.txt
   https://tuxpaint.org/
 
@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - July 19, 2023
+  June 14, 2002 - January 16, 2024
 */
 
 #include "platform.h"
@@ -390,6 +390,7 @@ typedef struct safer_dirent
 #define wcstombs(tok, wtok, size) WideCharToMultiByte(CP_UTF8,0,wtok,-1,tok,size,NULL,NULL)
 
 extern int win32_trash(const char *path);
+extern void win32_print_version(void);
 
 #undef iswprint
 int iswprint(wchar_t wc)
@@ -596,6 +597,7 @@ static void reposition_onscreen_keyboard(int y);
 
 
 int calc_magic_control_rows(void);
+int calc_stamp_control_rows(void);
 void maybe_redraw_eraser_xor(void);
 
 static void reset_stamps(int *stamp_xored_rt, int *stamp_place_x, int *stamp_place_y, int *stamp_tool_mode);
@@ -1415,8 +1417,6 @@ static int new_colors_last;
 
 static int disable_template_export;
 
-static Uint8 magic_disabled_features = 0x00000000;
-
 #ifdef NOKIA_770
 static int simple_shapes = 1;
 #else
@@ -1542,6 +1542,9 @@ extern char *GetUserImageDir(void);
 
 #include "tp_magic_api.h"
 
+static Uint8 magic_disabled_features = 0x00000000;
+static Uint8 magic_complexity_level = MAGIC_COMPLEXITY_DEFAULT;
+
 static void update_progress_bar(void);
 static void special_notify(int flags);
 
@@ -1549,17 +1552,18 @@ typedef struct magic_funcs_s
 {
   int (*get_tool_count)(magic_api *);
   int (*get_group)(magic_api *, int);
+  int (*get_order)(int);
   char *(*get_name)(magic_api *, int);
   SDL_Surface *(*get_icon)(magic_api *, int);
   char *(*get_description)(magic_api *, int, int);
   int (*requires_colors)(magic_api *, int);
-   Uint8(*accepted_sizes) (magic_api *, int, int);
-   Uint8(*default_size) (magic_api *, int, int);
+  Uint8(*accepted_sizes) (magic_api *, int, int);
+  Uint8(*default_size) (magic_api *, int, int);
   int (*modes)(magic_api *, int);
   void (*set_color)(magic_api *, int, SDL_Surface *, SDL_Surface *, Uint8, Uint8, Uint8, SDL_Rect *);
   void (*set_size)(magic_api *, int, int, SDL_Surface *, SDL_Surface *, Uint8, SDL_Rect *);
-  int (*init)(magic_api *, Uint32);
-   Uint32(*api_version) (void);
+  int (*init)(magic_api *, Uint8, Uint8);
+  Uint32(*api_version) (void);
   void (*shutdown)(magic_api *);
   void (*click)(magic_api *, int, int, SDL_Surface *, SDL_Surface *, int, int, SDL_Rect *);
   void (*drag)(magic_api *, int, SDL_Surface *, SDL_Surface *, int, int, int, int, SDL_Rect *);
@@ -1571,7 +1575,7 @@ typedef struct magic_funcs_s
 
 typedef struct magic_s
 {
-  int place;
+  int place;                    /* System-wide or local to the user? */
   int handle_idx;               /* Index to magic funcs for each magic tool (shared objs may report more than 1 tool) */
   int idx;                      /* Index to magic tools within shared objects (shared objs may report more than 1 tool) */
   int mode;                     /* Current mode (paint or fullscreen) */
@@ -1581,6 +1585,7 @@ typedef struct magic_s
   int default_size[MAX_MODES];  /* Magic tool's default size setting */
   int size[MAX_MODES];          /* Magic tool's size setting */
   int group;                    /* Which group of magic tools this lives in */
+  int order;                    /* Order within the group of magic tools (for sorting; falls back to name) */
   char *name;                   /* Name of magic tool */
   char *tip[MAX_MODES];         /* Description of magic tool, in each possible mode */
   SDL_Surface *img_icon;
@@ -4944,18 +4949,22 @@ static void mainloop(void)
             }
             else if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
             {
-              /* FIXME */
-              /* char font_tux_text[512]; */
+              char font_tux_text[1024];
+              const char * fmt_str;
 
               cur_font = cur_thing;
 
-              /* FIXME */
-              /*
-                 safe_snprintf(font_tux_text, sizeof font_tux_text, "%s (%s).",
-                 TTF_FontFaceFamilyName(getfonthandle(cur_font)),
-                 TTF_FontFaceStyleName(getfonthandle(cur_font)));
-                 draw_tux_text(TUX_GREAT, font_tux_text, 1);
-               */
+              /* Show a message about the chosen font */
+              if (cur_tool == TOOL_TEXT)
+                fmt_str = TIP_TEXT_FONTCHANGE;
+              else
+                fmt_str = TIP_LABEL_FONTCHANGE;
+
+              safe_snprintf(font_tux_text, sizeof(font_tux_text), gettext(fmt_str),
+                 TTF_FontFaceFamilyName(getfonthandle(cur_font)->ttf_font),
+                 TTF_FontFaceStyleName(getfonthandle(cur_font)->ttf_font),
+                 getfonthandle(cur_font)->height);
+              draw_tux_text(TUX_GREAT, font_tux_text, 1);
 
               if (do_draw)
                 draw_fonts();
@@ -6381,15 +6390,6 @@ static void mainloop(void)
           {
           }
 
-          /* This if/if/if block is awful -bjk 2022.01.19 */
-          if (cur_tool == TOOL_STAMP && !disable_stamp_controls)
-          {
-            if (!no_stamp_rotation)
-              control_rows = 4;
-            else
-              control_rows = 3;
-          }
-
           if (cur_tool == TOOL_LABEL)
           {
             control_rows = 1;
@@ -6401,6 +6401,8 @@ static void mainloop(void)
             control_rows = 2;
           if (cur_tool == TOOL_MAGIC)
             control_rows = calc_magic_control_rows();
+          if (cur_tool == TOOL_STAMP)
+            control_rows = calc_stamp_control_rows();
           if (cur_tool == TOOL_SHAPES && !disable_shape_controls)
             control_rows = 1;
           if ((cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES) && !disable_brushspacing)
@@ -6436,34 +6438,52 @@ static void mainloop(void)
             }
             else
             {
-              /* One of the selectors: */
-
-              /* FIXME: Also show "cursor_hand" when touching controls (stamp size, brush spacing, etc.!) (See below) -bjk 2022.01.19 */
+              /* One of the selectors or controls: */
 
               which =
                 ((event.button.y - r_ttoolopt.h -
                   img_scroll_up->h) / button_h) * 2 + (event.button.x - (WINDOW_WIDTH - r_ttoolopt.w)) / button_w;
 
-              if (which < num_things)
+              if (which + *thing_scroll < num_things)
+              {
+                /* A selectable item */
                 do_setcursor(cursor_hand);
+              }
+              else if (which >= (buttons_tall - control_rows) * 2 - 2 /* account for scroll button */)
+              {
+                /* Controls at the bottom (below scroll-down button, if any) */
+                do_setcursor(cursor_hand);
+              }
               else
+              {
+                /* Within the visible items, but nothing selectable */
                 do_setcursor(cursor_arrow);
+              }
             }
           }
           else
           {
-            /* No scroll buttons - must be a selector: */
-
-            /* FIXME: Also show "cursor_hand" when touching controls (stamp size, brush spacing, etc.!) (See above) -bjk 2022.01.19 */
+            /* No scroll buttons - must be a selector or control: */
 
             which =
               ((event.button.y - r_ttoolopt.h) / button_h) * 2 +
               (event.button.x - (WINDOW_WIDTH - r_ttoolopt.w)) / button_w;
 
-            if (which < num_things)
+            if (which + *thing_scroll < num_things)
+            {
+              /* A selectable item */
               do_setcursor(cursor_hand);
+            }
+            else if (which >= (buttons_tall - control_rows) * 2)
+            {
+              /* Controls at the bottom (below scroll-down button, if any) */
+              do_setcursor(cursor_hand);
+            }
             else
+            {
+              /* Within the visible items, but nothing selectable */
               do_setcursor(cursor_arrow);
+            }
           }
         }
         else if (HIT(r_canvas) && keyglobal == 0)
@@ -8075,6 +8095,7 @@ void show_usage(int exitcode)
           "  [--nolabel | --label]\n"
           "  [--nobrushspacing | --brushspacing]\n"
           "  [--notemplateexport | --templateexport]\n"
+          "  [--complexity=advanced | --complexity=beginner | --complexity=novice]\n"
           "  [--noerase | --erase]\n"
           "\n"
           " Languages:\n"
@@ -9287,23 +9308,23 @@ static void load_stamps(SDL_Surface * screen)
 #ifndef __ANDROID__
   load_stamp_dir(screen, DATA_PREFIX "stamps");
 #else
-    load_stamp_dir(screen, "stamps/animals");
-    load_stamp_dir(screen, "stamps/cartoon/tux");
-    load_stamp_dir(screen, "stamps/clothes");
-    load_stamp_dir(screen, "stamps/food");
-    load_stamp_dir(screen, "stamps/hobbies");
-    load_stamp_dir(screen, "stamps/household");
-    load_stamp_dir(screen, "stamps/medical");
-    load_stamp_dir(screen, "stamps/military");
-    load_stamp_dir(screen, "stamps/naturalforces");
-    load_stamp_dir(screen, "stamps/people");
-    load_stamp_dir(screen, "stamps/plants");
-    load_stamp_dir(screen, "stamps/seasonal");
-    load_stamp_dir(screen, "stamps/space");
-    load_stamp_dir(screen, "stamps/sports");
-    load_stamp_dir(screen, "stamps/symbols");
-    load_stamp_dir(screen, "stamps/town");
-    load_stamp_dir(screen, "stamps/vehicles");
+  load_stamp_dir(screen, "stamps/animals");
+  load_stamp_dir(screen, "stamps/cartoon/tux");
+  load_stamp_dir(screen, "stamps/clothes");
+  load_stamp_dir(screen, "stamps/food");
+  load_stamp_dir(screen, "stamps/hobbies");
+  load_stamp_dir(screen, "stamps/household");
+  load_stamp_dir(screen, "stamps/medical");
+  load_stamp_dir(screen, "stamps/military");
+  load_stamp_dir(screen, "stamps/naturalforces");
+  load_stamp_dir(screen, "stamps/people");
+  load_stamp_dir(screen, "stamps/plants");
+  load_stamp_dir(screen, "stamps/seasonal");
+  load_stamp_dir(screen, "stamps/space");
+  load_stamp_dir(screen, "stamps/sports");
+  load_stamp_dir(screen, "stamps/symbols");
+  load_stamp_dir(screen, "stamps/town");
+  load_stamp_dir(screen, "stamps/vehicles");
 #endif
 #ifdef __MACOS__
   load_stamp_dir(screen, "Resources/stamps");
@@ -10834,18 +10855,16 @@ static void draw_stamps(void)
   {
     if (!no_stamp_rotation)
     {
-      most =
-        (buttons_tall * gd_toolopt.cols) - gd_toolopt.cols - gd_toolopt.cols - gd_toolopt.cols - gd_toolopt.cols -
-        TOOLOFFSET;
+      most = ((buttons_tall - 4) * gd_toolopt.cols) - TOOLOFFSET;
     }
     else
     {
-      most = (buttons_tall * gd_toolopt.cols) - gd_toolopt.cols - gd_toolopt.cols - gd_toolopt.cols - TOOLOFFSET;
+      most = ((buttons_tall - 3) * gd_toolopt.cols) - TOOLOFFSET;
     }
   }
   else
   {
-    most = (buttons_tall * gd_toolopt.cols) - gd_toolopt.cols - TOOLOFFSET;
+    most = ((buttons_tall - 1) * gd_toolopt.cols) - TOOLOFFSET;
   }
 
 
@@ -10872,13 +10891,9 @@ static void draw_stamps(void)
 
 
     dest.x = WINDOW_WIDTH - r_ttoolopt.w;
-    dest.y = r_ttoolopt.h + off_y + (((most + 2) / gd_toolopt.cols + TOOLOFFSET / gd_toolopt.cols) * button_h);
+    dest.y = r_ttoolopt.h + off_y + ((((most + TOOLOFFSET) / gd_toolopt.cols) - 1) * button_h);
 
-    if (!disable_stamp_controls)
-    {
-      dest.y -= (button_h * 2);
-    }
-
+    dest.x = WINDOW_WIDTH - r_ttoolopt.w;
     if (stamp_scroll[stamp_group] < num_stamps[stamp_group] - (most - 2) - TOOLOFFSET)
     {
       SDL_BlitSurface(img_scroll_down, NULL, screen, &dest);
@@ -13821,14 +13836,16 @@ static void get_starter_template_options(char *dirname, char *img_id, starter_te
             }
             else
             {
+              short unsigned int r, g, b;
+
               DEBUG_PRINTF("Integers ('%s')\n", arg);
 
               /* Assume int form */
 
-              sscanf(arg, "%hu %hu %hu %n",
-                     (short unsigned int *)&(opts->bkgd_color[0]),
-                     (short unsigned int *)&(opts->bkgd_color[1]),
-                     (short unsigned int *)&(opts->bkgd_color[2]), &count);
+              sscanf(arg, "%hu %hu %hu %n", &r, &g, &b, &count);
+              opts->bkgd_color[0] = r;
+              opts->bkgd_color[1] = g;
+              opts->bkgd_color[2] = b;
             }
 
             DEBUG_PRINTF("Background color: %d,%d,%d\n", opts->bkgd_color[0], opts->bkgd_color[1], opts->bkgd_color[2]);
@@ -21356,7 +21373,7 @@ static SDL_Surface *load_kpx(const char *file)
  */
 static void load_magic_plugins(void)
 {
-  int res, n, i, plc;
+  int res, n, i, plc, tries;
   char *place;
   int err;
   DIR *d;
@@ -21470,6 +21487,9 @@ static void load_magic_plugins(void)
               safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_group");
               magic_funcs[num_plugin_files].get_group = SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
+              safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_order");
+              magic_funcs[num_plugin_files].get_order = SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
+
               safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_name");
               magic_funcs[num_plugin_files].get_name = SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
 
@@ -21526,6 +21546,7 @@ static void load_magic_plugins(void)
               //EP added (intptr_t) to avoid warning on x64 on all lines below
               DEBUG_PRINTF("get_tool_count = 0x%x\n", (int)(intptr_t) magic_funcs[num_plugin_files].get_tool_count);
               DEBUG_PRINTF("get_group = 0x%x\n", (int)(intptr_t) magic_funcs[num_plugin_files].get_group);
+              DEBUG_PRINTF("get_order = 0x%x\n", (int)(intptr_t) magic_funcs[num_plugin_files].get_order);
               DEBUG_PRINTF("get_name = 0x%x\n", (int)(intptr_t) magic_funcs[num_plugin_files].get_name);
               DEBUG_PRINTF("get_icon = 0x%x\n", (int)(intptr_t) magic_funcs[num_plugin_files].get_icon);
               DEBUG_PRINTF("get_description = 0x%x\n", (int)(intptr_t) magic_funcs[num_plugin_files].get_description);
@@ -21554,6 +21575,11 @@ static void load_magic_plugins(void)
               if (magic_funcs[num_plugin_files].get_group == NULL)
               {
                 fprintf(stderr, "Error: plugin %s is missing get_group\n", fname);
+                err = 1;
+              }
+              if (magic_funcs[num_plugin_files].get_order == NULL)
+              {
+                fprintf(stderr, "Error: plugin %s is missing get_order\n", fname);
                 err = 1;
               }
               if (magic_funcs[num_plugin_files].get_name == NULL)
@@ -21656,7 +21682,7 @@ static void load_magic_plugins(void)
               }
               else
               {
-                res = magic_funcs[num_plugin_files].init(magic_api_struct, magic_disabled_features);
+                res = magic_funcs[num_plugin_files].init(magic_api_struct, magic_disabled_features, magic_complexity_level);
 
                 if (res != 0)
                   n = magic_funcs[num_plugin_files].get_tool_count(magic_api_struct);
@@ -21669,7 +21695,7 @@ static void load_magic_plugins(void)
 
                 if (n == 0)
                 {
-                  fprintf(stderr, "Error: plugin %s failed to startup or reported 0 magic tools\n", fname);
+                  fprintf(stderr, "Notice: plugin %1$s failed to startup or reported 0 magic tools (Tux Paint is in complexity mode \"%2$s\")\n", fname, MAGIC_COMPLEXITY_LEVEL_NAMES[magic_complexity_level]);
                   fflush(stderr);
                   SDL_UnloadObject(magic_handle[num_plugin_files]);
                 }
@@ -21690,6 +21716,7 @@ static void load_magic_plugins(void)
                       magics[group][idx].handle_idx = num_plugin_files;
                       magics[group][idx].group = group;
                       magics[group][idx].name = magic_funcs[num_plugin_files].get_name(magic_api_struct, i);
+                      magics[group][idx].order = magic_funcs[num_plugin_files].get_order(i);
 
                       magics[group][idx].avail_modes = magic_funcs[num_plugin_files].modes(magic_api_struct, i);
 
@@ -21831,6 +21858,15 @@ static void load_magic_plugins(void)
 
   DEBUG_PRINTF("Loaded %d magic tools from %d plug-in files\n", num_magics_total, num_plugin_files);
   DEBUG_PRINTF("\n");
+
+  /* Start out with the first magic group that _has_ any tools */
+  tries = 0;
+  while (num_magics[magic_group] == 0 && tries < MAX_MAGIC_GROUPS) {
+    magic_group++;
+    if (magic_group >= MAX_MAGIC_GROUPS) {
+      magic_group = 0;
+    }
+  }
 }
 
 
@@ -21843,7 +21879,13 @@ static int magic_sort(const void *a, const void *b)
   magic_t *am = (magic_t *) a;
   magic_t *bm = (magic_t *) b;
 
-  return (strcoll(gettext(am->name), gettext(bm->name)));
+  if (am->order != bm->order) {
+    /* Different 'order's, use them */
+    return (am->order - bm->order);
+  } else {
+    /* Same 'order', use the (localized) name */
+    return (strcoll(gettext(am->name), gettext(bm->name)));
+  }
 }
 
 
@@ -24079,7 +24121,7 @@ static int do_color_picker(int prev_color)
   int color_picker_left, color_picker_top;
   int color_picker_val_left, color_picker_val_top;
   int prev_color_left, prev_color_top;
-  int pipette_left, pipette_top;
+  int picker_left, picker_top;
   int mixer_left, mixer_top;
   int back_left, back_top, done_left, done_top;
   SDL_Rect color_example_dest;
@@ -24243,7 +24285,7 @@ static int do_color_picker(int prev_color)
   prev_color_left = r_final.x + r_final.w - (img_back->w + 2) * 3;
   prev_color_top = color_picker_top + img_color_picker->h - (img_back->h + 2) * 2;
 
-  if (prev_color != -1 && prev_color < NUM_DEFAULT_COLORS)
+  if (prev_color != -1 && prev_color < NUM_COLORS)
   {
     dest.x = prev_color_left;
     dest.y = prev_color_top;
@@ -24254,20 +24296,20 @@ static int do_color_picker(int prev_color)
   }
 
 
-  /* (Pipette) */
+  /* (Picker) */
 
-  pipette_left = r_final.x + r_final.w - (img_back->w + 2) * 2;
-  pipette_top = color_picker_top + img_color_picker->h - (img_back->h + 2) * 2;
+  picker_left = r_final.x + r_final.w - (img_back->w + 2) * 2;
+  picker_top = color_picker_top + img_color_picker->h - (img_back->h + 2) * 2;
 
-  dest.x = pipette_left;
-  dest.y = pipette_top;
+  dest.x = picker_left;
+  dest.y = picker_top;
   dest.w = img_back->w;
   dest.h = img_back->h;
 
-  draw_color_grab_btn(dest, NUM_DEFAULT_COLORS);
+  draw_color_grab_btn(dest, COLOR_PICKER);
 
-  dest.x = pipette_left + (img_back->w - img_color_sel->w) / 2;
-  dest.y = pipette_top + (img_back->h - img_color_sel->h) / 2;
+  dest.x = picker_left + (img_back->w - img_color_sel->w) / 2;
+  dest.y = picker_top + (img_back->h - img_color_sel->h) / 2;
 
   SDL_BlitSurface(img_color_sel, NULL, screen, &dest);
 
@@ -24282,7 +24324,7 @@ static int do_color_picker(int prev_color)
   dest.w = img_back->w;
   dest.h = img_back->h;
 
-  draw_color_grab_btn(dest, NUM_DEFAULT_COLORS + 2);
+  draw_color_grab_btn(dest, COLOR_MIXER);
 
   dest.x = mixer_left + (img_back->w - img_color_mix->w) / 2;
   dest.y = mixer_top + (img_back->h - img_color_mix->h) / 2;
@@ -24458,11 +24500,11 @@ static int do_color_picker(int prev_color)
                   event.button.x < prev_color_left + img_back->w &&
                   event.button.y >= prev_color_top &&
                   event.button.y < prev_color_top + img_back->h &&
-                  prev_color != -1 && prev_color < NUM_DEFAULT_COLORS) ||
-                 (event.button.x >= pipette_left &&
-                  event.button.x < pipette_left + img_back->w &&
-                  event.button.y >= pipette_top &&
-                  event.button.y < pipette_top + img_back->h) ||
+                  prev_color != -1 && prev_color < NUM_COLORS) ||
+                 (event.button.x >= picker_left &&
+                  event.button.x < picker_left + img_back->w &&
+                  event.button.y >= picker_top &&
+                  event.button.y < picker_top + img_back->h) ||
                  (event.button.x >= mixer_left &&
                   event.button.x < mixer_left + img_back->w &&
                   event.button.y >= mixer_top && event.button.y < mixer_top + img_back->h))
@@ -24477,17 +24519,17 @@ static int do_color_picker(int prev_color)
             /* Switch to the chosen bucket color */
             c = prev_color;
           }
-          else if (event.button.x >= pipette_left &&
-                   event.button.x < pipette_left + img_back->w &&
-                   event.button.y >= pipette_top && event.button.y < pipette_top + img_back->h)
+          else if (event.button.x >= picker_left &&
+                   event.button.x < picker_left + img_back->w &&
+                   event.button.y >= picker_top && event.button.y < picker_top + img_back->h)
           {
-            /* Pipette */
-            c = NUM_DEFAULT_COLORS;
+            /* Picker */
+            c = COLOR_PICKER;
           }
           else
           {
             /* Mixer */
-            c = NUM_DEFAULT_COLORS + 2;
+            c = COLOR_MIXER;
           }
 
           /* Convert the chosen color to HSV & reposition crosshairs */
@@ -24619,11 +24661,11 @@ static int do_color_picker(int prev_color)
                       event.button.x < prev_color_left + img_back->w &&
                       event.button.y >= prev_color_top &&
                       event.button.y < prev_color_top + img_back->h &&
-                      prev_color != -1 && prev_color < NUM_DEFAULT_COLORS) ||
-                     (event.button.x >= pipette_left &&
-                      event.button.x < pipette_left + img_back->w &&
-                      event.button.y >= pipette_top &&
-                      event.button.y < pipette_top + img_back->h) ||
+                      prev_color != -1 && prev_color < NUM_COLORS) ||
+                     (event.button.x >= picker_left &&
+                      event.button.x < picker_left + img_back->w &&
+                      event.button.y >= picker_top &&
+                      event.button.y < picker_top + img_back->h) ||
                      (event.button.x >= mixer_left &&
                       event.button.x < mixer_left + img_back->w &&
                       event.button.y >= mixer_top && event.button.y < mixer_top + img_back->h))
@@ -28357,6 +28399,21 @@ static void setup_config(char *argv[])
         stamp_size_override = 10;
     }
   }
+  if (tmpcfg.complexity)
+  {
+    /* FIXME: Could maybe iterate the array of MAGIC_COMPLEXITY_LEVEL_NAMES[],
+       but just hard-coding for now -bjk 2023.12.29 */
+    if (!strcmp(tmpcfg.complexity, "novice")) {
+      magic_complexity_level = MAGIC_COMPLEXITY_NOVICE;
+    } else if (!strcmp(tmpcfg.complexity, "beginner")) {
+      magic_complexity_level = MAGIC_COMPLEXITY_BEGINNER;
+    } else if (!strcmp(tmpcfg.complexity, "advanced")) {
+      magic_complexity_level = MAGIC_COMPLEXITY_ADVANCED;
+    } else {
+      fprintf(stderr, "Ignoring unknown 'complexity' value \"%s\"\n", tmpcfg.complexity);
+    }
+  }
+
   /* FIXME: make this dynamic (accelerometer or OLPC XO-1 rotation button) */
   if (tmpcfg.rotate_orientation)
     rotate_orientation = !strcmp(tmpcfg.rotate_orientation, "portrait");        /* alternative is "landscape" */
@@ -29690,7 +29747,7 @@ static void setup(void)
 
   DEBUG_PRINTF("%s\n", tmp_str);
 
-  safe_snprintf(tmp_str, sizeof(tmp_str), "© 2002–2023 Bill Kendrick, et al.");
+  safe_snprintf(tmp_str, sizeof(tmp_str), "© 2002–2024 Bill Kendrick, et al.");
   tmp_surf = render_text(medium_font, tmp_str, black);
   dest.x = 10;
   dest.y = WINDOW_HEIGHT - img_progress->h - (tmp_surf->h * 2);
@@ -30050,7 +30107,7 @@ static void setup(void)
 
   /* Load magic tool plugins: */
 
-  magic_disabled_features = 0x00000000;
+  magic_disabled_features = 0b00000000;
   if (disable_magic_sizes)
   {
     magic_disabled_features |= MAGIC_FEATURE_SIZE;
@@ -30513,11 +30570,20 @@ int main(int argc, char *argv[])
 #ifndef DEBUG
   char stdout_win32[255], stderr_win32[255];
 
-  safe_snprintf(stdout_win32, 255, "%s/stdout.txt", savedir);
-  safe_snprintf(stderr_win32, 255, "%s/stderr.txt", savedir);
+  safe_snprintf(stdout_win32, 255, "%s/stdout.txt", GetDefaultSaveDir("TuxPaint"));
+  safe_snprintf(stderr_win32, 255, "%s/stderr.txt", GetDefaultSaveDir("TuxPaint"));
   freopen(stdout_win32, "w", stdout);   /* redirect stdout to a file */
   freopen(stderr_win32, "w", stderr);   /* redirect stderr to a file */
 #endif
+  printf("Tux Paint Version " VER_VERSION "");
+#ifdef WIN64
+  printf("- x86_64");
+#else
+  printf("- i686");
+#endif
+  printf(" (" VER_DATE ")\n");
+  printf("Running on ");
+  win32_print_version();
 #endif
 
 #ifdef DEBUG
@@ -30595,7 +30661,7 @@ static int trash(char *path)
 #elif defined(__APPLE__)
   return apple_trash(path);
 #else
-  char fname[MAX_PATH], trashpath[MAX_PATH], dest[MAX_PATH], infoname[MAX_PATH], bname[MAX_PATH], ext[MAX_PATH];
+  char fname[MAX_PATH], trashpath[MAX_PATH], dest[MAX_PATH], infoname[MAX_PATH], bname[MAX_PATH + 1], ext[MAX_PATH];
   char deldate[32];
   struct tm tim;
   time_t now;
@@ -32231,6 +32297,35 @@ int calc_magic_control_rows(void)
   /* Add magic size controls */
   if (!disable_magic_sizes)
     r++;
+
+  return r;
+}
+
+
+/**
+ * How many rows of controls (not actual Stamp items)
+ * are to be displayed at the bottom of the selector?
+ * (Based on whether stamp controls and/or stamp rotation are
+ * disabled)
+ *
+ * @return int
+ */
+int calc_stamp_control_rows(void)
+{
+  int r;
+
+  /* Start with group changing (left/right) buttons */
+  r = 1;
+
+  /* Add Stamp controls (one row flip/mirror, another size) */
+  if (!disable_stamp_controls)
+  {
+    r += 2;
+
+    /* Add Stamp rotation controls */
+    if (!no_stamp_rotation)
+      r++;
+  }
 
   return r;
 }

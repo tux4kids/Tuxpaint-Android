@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            バージョン 0.9.31          </h1>
+            バージョン 0.9.32          </h1>
 
           <h3 align="center">
             子供向けのシンプルなお絵かきプログラム          </h3>
 
           <p>
-            Copyright &copy; 2002-2023 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br/>
+            Copyright &copy; 2002-2024 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br/>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            2023年7月20日          </p>
+            2024年1月13日          </p>
         </center>
       </header>
       <table border="2"
@@ -224,27 +224,42 @@
   <section class="indent">
     <header>
       <h2>
-        D. Tux Paint バージョン 0.9.31 での変更点      </h2>
+        D. Tux Paint バージョン 0.9.32 での変更点      </h2>
     </header>
 
     <dl>
-  <dt>ぼかし消しゴム</dt>
-  <dd>消しゴムツールに端がぼやけた丸い消しゴムが追加されました</dd>
+  <dt>1-point Perspective (vanishing point) Magic tool</dt>
+  <dd>A pair of tools that allow you to set a vanishing point, and then draw lines in 1-point perspective.</dd>
 
-  <dt>「まほう」ツールの追加</dt>
-  <dd>「ループ」「リボン」「なめらかなせん」「くしゃくしゃ」</dd>
+  <dt>2-point Perspective (vanishing point) Magic tool</dt>
+  <dd>A pair of tools that allow you to set two vanishing points, and then draw lines in 2-point perspective.</dd>
 
-  <dt>独自テンプレートの作成機能</dt>
-  <dd>「ひらく」ダイアログの新しいオプションにより、保存した作品をテンプレートに変換し、新規に絵を作成する際に使用ることができます。(この機能は簡略化オプション "notemplateexport" を使用して無効にすることができます)。</dd>
+  <dt>3-point Perspective (vanishing point) Magic tool</dt>
+  <dd>A pair of tools that allow you to set three vanishing points, and then draw lines in 3-point perspective.</dd>
 
-  <dt>ユーザーインターフェースフォントの指定</dt>
-  <dd>ボタンラベル、ポップアップダイアログ、操作ガイドなどのユーザーインターフェイスに使用されるフォントを変更することができます。(<a href="OPTIONS.html#fonts">"<code>uifont</code>"オプション</a>を参照。利用可能なフォントは"<code>-listfonts</code>"オプションで確認できます)</dd>
+  <dt>Isometric Magic tool</dt>
+  <dd>A tool that draws lines in an isometric projection.</dd>
 
-  <dt>削除の無効化</dd>
-  <dd>保存した作品や自作のテンプレートを削除するボタンを無効にすることができます。(設定オプション<a href="OPTIONS.html#simplification">"<code>noerase</code>"</a>を参照)</dd>
+  <dt>Dimetric Magic tool</dt>
+  <dd>A pair of tools that allow you to set an angle, and then draw lines in a dimetric projection.</dd>
 
-  <dt>Tux Paint の操作の説明を追加</dd>
-  <dd>マウスやタブレット、タッチスクリーン、ジョイスティック、キーボードなど、各種のデバイスを用いた Tux Paint の操作方法の概要が <a href="#using_controlling">README ドキュメントに追加</a>されました。</dd>
+  <dt>Trimetric Magic tool</dt>
+  <dd>A pair of tools that allow you to set two angles, and then draw lines in a trimetric projection.</dd>
+
+  <dt>Oblique Magic tool</dt>
+  <dd>A pair of tools that allow you to set an angles, and then draw lines in an oblique projection.</dd>
+
+  <dt>Epitrochoid and Hypotrochoid Magic tools</dt>
+  <dd>Tools that create centered trochoid curved patterns.</dd>
+
+  <dt>New "complexity" setting (<code>complexity</code>)</dd>
+  <dt>A new setting that allows certain Magic tools to behave differently (or remove their availability altogether) based on the expertise-level of the user. The new "N-point Perspective" tools and "Clone" tool are affected by this setting.</dt>
+
+  <dt>Magic tools reorganized</dd>
+  <dt>Each group of Magic tools has been reorganized to keep related tools next to each other, rather than being sorted alphabetically by their (localized) names.</dt>
+
+  <dt>Font details shown when selected</dt>
+  <dd>The name and size of the selected font are shown when using the Text and Label tools.</dd>
 </dl>
 
     <p>
@@ -1902,6 +1917,9 @@
     Tux Paint は様々な SNS アカウントを利用し、最新情報や作品を投稿しています。
         <ul>
       <li>
+        <a href="https://bsky.app/profile/tuxpaint.bsky.social">Follow @tuxpaint.bsky.social on Bluesky</a>
+      </li>
+      <li>
         <a href="http://www.facebook.com/TuxPaint">Facebook で Tux Paint のページに参加する</a>
       </li>
       <li>
@@ -1917,10 +1935,13 @@
         <a href="https://www.threads.net/@tuxpaintdevs">Threads で @TuxPaintDevs をフォローする</a>
       </li>
       <li>
+        <a href="https://www.tiktok.com/@tuxpaintdevs">Follow @TuxPaintDevs on TikTok</a>
+      </li>
+      <li>
         <a href="https://tuxpaint.tumblr.com/">Tumblr で Tux Paint をフォローする</a>
       </li>
       <li>
-        <a href="https://twitter.com/TuxPaintTweets">Twitter で @TuxPaintTweets をフォローする</a>
+        <a href="https://www.youtube.com/@TuxPaintOfficial">Subscribe to @TuxPaintOfficial on YouTube</a>
       </li>
     </ul>
   </p>
@@ -1935,14 +1956,16 @@
         </header>
 
         <ul>
-          <li>"Linux" は Linus Torvalds の登録商標です。</li>
+                    <li>"Linux" は Linus Torvalds の登録商標です。</li>
           <li>"Microsoft" および "Windows" は、Microsoft 社の登録商標です。</li>
           <li>"Apple" および "macOS" は Apple 社の登録商標です。</li>
-          <li>"Facebook", "Instagram" および "Threads" は Meta Platforms 社の登録商標です。</li>
+          <li>"Haiku" is a registered trademark of Haiku, Inc.</li>
+                              <li>"Facebook", "Instagram" および "Threads" は Meta Platforms 社の登録商標です。</li>
           <li>"Mastodon" は Mastodon gGmbH の登録商標です。</li>
           <li>"Reddit" は、Reddit 社の登録商標です。</li>
+          <li>"TIK TOK" is a trademark of Bytedance Ltd.</li>
           <li>"Tumblr" は Tumblr 社の登録商標です。</li>
-          <li>"Twitter" は、X 社の登録商標です。</li>
+          <li>"YouTube" is a registered trademark of Alphabet, Inc.</li>
         </ul>
       </section>
     </footer>

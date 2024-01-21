@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.31          </h1>
+            version 0.9.32          </h1>
 
           <h3 align="center">
             Un programme simple pour les enfants          </h3>
 
           <p>
-            Copyright &copy; 2002-2023 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br/>
+            Copyright &copy; 2002-2024 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br/>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            juillet 20, 2023          </p>
+            janvier 13, 2024          </p>
         </center>
       </header>
       <table border="2"
@@ -224,27 +224,42 @@
   <section class="indent">
     <header>
       <h2>
-        D. Qu'y a-t-il de neuf dans la version 0.9.31 de Tux Paint ?      </h2>
+        D. Qu'y a-t-il de neuf dans la version 0.9.32 de Tux Paint ?      </h2>
     </header>
 
     <dl>
-  <dt>Gomme floue</dt>
-  <dd>Des gommes aux contours flous ont été rajoutées à l'outil Gomme</dd>
+  <dt>Outil Magie avec une perspective à 1 point de fuite</dt>
+  <dd>Des outils qui permettent de créer un point de fuite, et de dessiner ensuite des lignes avec une perspective à 1 point.</dd>
 
-  <dt>Nouveaux outils Magie</dt>
-  <dd>Boucles, Ruban, Doux et Gribouillis</dd>
+  <dt>Outil de Magie avec une perspective à 2 points de fuite</dt>
+  <dd>Des outils qui permettent de créer deux points de fuite, et de dessiner ensuite des lignes avec une perspective à 2 points.</dd>
 
-  <dt>Créer des modèles à partir de la boîte de dialogue Ouvrir</dt>
-  <dd>Les dessins sauvegardés peuvent être convertis en Modèles (qui sont utilisés pour de nouveaux dessins) grâce à une nouvelle option dans la boîte de dialogue 'Ouvrir'.( Cette possibilité peut être désactivée en utilisant <a href="OPTIONS.html#simplification">"<code>notemplateexport</code>" l'option de simplification</a>.)</dd>
+  <dt>Outil de Magie Perspective 3-point (point de fuite)</dt>
+  <dd>Un ensemble d'outils qui vous permet d'avoir trois points de fuite, et pouvoir ainsi tracer des lignes avec une perspective à 3 points.</dd>
 
-  <dt>La police de l'interface utilisateur peut être remplacée</dt>
-  <dd>La police utilisée pour l'interface utilisateur (étiquettes des boutons, dialogues pop-up et instructions) peut être remplacée ("DejaVu Sans").(Voir l'<a href="OPTIONS.html#fonts">"<code>uifont</code>" option de configuration</a>. Utilisez "<code>--listfonts</code>" pour voir la liste des polices disponibles.)</dd>
+  <dt>Isometric Magic tool</dt>
+  <dd>A tool that draws lines in an isometric projection.</dd>
 
-  <dt>L'effacement de fichier peut être désactivé</dd>
-  <dd>Les contrôles pour effacer le travail sauvegardé &mdash; dessins sauvegardés (via la boîte de dialogue Ouvrir) et les modèles exportés (via la boîte de dialogue Nouveau) &mdash; peuvent être désactivés. Voir l' <a href="OPTIONS.html#simplification">"<code>noerase</code>" option de configuration</a>.)</dd>
+  <dt>Dimetric Magic tool</dt>
+  <dd>A pair of tools that allow you to set an angle, and then draw lines in a dimetric projection.</dd>
 
-  <dt>Documentation sur "Contrôler Tux Paint"</dd>
-  <dd>Un bref aperçu pour savoir comment Tux Paint peut être controllé &mdash; souris, tablette, écran tactile, joystick et clavier &mdash; a été <a href="#using_controlling">ajouté au document  README</a>.</dd>
+  <dt>Trimetric Magic tool</dt>
+  <dd>A pair of tools that allow you to set two angles, and then draw lines in a trimetric projection.</dd>
+
+  <dt>Oblique Magic tool</dt>
+  <dd>A pair of tools that allow you to set an angles, and then draw lines in an oblique projection.</dd>
+
+  <dt>Epitrochoid and Hypotrochoid Magic tools</dt>
+  <dd>Tools that create centered trochoid curved patterns.</dd>
+
+  <dt>Réglage du nouveau "complexité" (<code>complexity</code>)</dd>
+  <dt>Un nouveau réglage qui permet à certains outils Magie de se comporter différemment (ou bien d'être supprimés) en se basant sur le niveau d'expertise de l'utilisateur. Les nouveaux outils "Perspective N-point" et "Clone" sont affectés via ce réglage.</dt>
+
+  <dt>Magic tools reorganized</dd>
+  <dt>Each group of Magic tools has been reorganized to keep related tools next to each other, rather than being sorted alphabetically by their (localized) names.</dt>
+
+  <dt>Les détails de la police sont affichés lors du choix</dt>
+  <dd>Le nom et la taille de la police choisie sont montrés quand on utilise les outils Texte et Étiquette.</dd>
 </dl>
 
     <p>
@@ -1902,6 +1917,9 @@
     Tux Paint est présent sur de nombreux media sociaux, où nous annonçons les mises à jour et les oeuvres d'art.
         <ul>
       <li>
+        <a href="https://bsky.app/profile/tuxpaint.bsky.social">Suivre @tuxpaint@bsky.social sur Bluesky</a>
+      </li>
+      <li>
         <a href="http://www.facebook.com/TuxPaint">Suivez Tux Paint sur Facebook</a>
       </li>
       <li>
@@ -1917,10 +1935,13 @@
         <a href="https://www.threads.net/@tuxpaintdevs">Suivre @TuxPaintDevs sur Threads</a>
       </li>
       <li>
+        <a href="https://www.tiktok.com/@tuxpaintdevs">Suivre @TuxPaintDevs sur TikTok</a>
+      </li>
+      <li>
         <a href="https://tuxpaint.tumblr.com/">Suivre Tux Paint sur Tumblr</a>
       </li>
       <li>
-        <a href="https://twitter.com/TuxPaintTweets">Suivre @TuxPaintTweets sur Twitter</a>
+        <a href="https://www.youtube.com/@TuxPaintOfficial">Souscrivez à  @TuxPaintOfficial sur YoUTube</a>
       </li>
     </ul>
   </p>
@@ -1935,14 +1956,16 @@
         </header>
 
         <ul>
-          <li>"Linux" est marque déposée par Linus Torvalds.</li>
+                    <li>"Linux" est marque déposée par Linus Torvalds.</li>
           <li>"Microsoft" et "Windows" sont des marques déposées par Microsoft Corp.</li>
           <li>"Apple" et "macOS" sont des marques déposées par Apple Inc.</li>
-          <li>"Facebook" et "Instagram" sont des marques déposées par Meta Platforms, Inc.</li>
+          <li>"Haiku" est une marque déposée par Haiku, Inc.</li>
+                              <li>"Facebook" et "Instagram" sont des marques déposées par Meta Platforms, Inc.</li>
           <li>"Mastodon" est une marque déposée par Mastodon gGmbH.</li>
           <li>"Reddit" est une marque déposée par Reddit, Inc.</li>
+          <li>"TIK TOK" est une marque déposée de Bytedance Ltd.</li>
           <li>"Tumblr" est une marque déposée par Tumblr, Inc.</li>
-          <li>"Twitter" est une marque déposée par X Corp.</li>
+          <li>"YouTube" est une marque déposée de Alphabet, Inc.</li>
         </ul>
       </section>
     </footer>
