@@ -17,11 +17,6 @@ scandir () {
 	    if [ ! -d $item ]
 	    then
 		# echo file $item $dircount
-		if (echo $item | grep -iq "svg" - )
-		then
-		    $WORKDIR/../svg_to_png_alts.sh $item
-		    cp $item "tmpzip"/$subdir/${index[$dircount]}_`basename $item .svg`.png
-		fi
 		cp $item "tmpzip"/$subdir/${index[$dircount]}_`basename $item`
 	    fi
 	done
