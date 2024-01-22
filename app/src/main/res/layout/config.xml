@@ -97,6 +97,25 @@
 
     </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/layoutComplexity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/viewComplexity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Complexity" />
+
+            <Spinner
+                android:id="@+id/spinnerComplexity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/complexities"/>
+        </LinearLayout>
     <LinearLayout
         android:id="@+id/layoutSound"
         android:layout_width="wrap_content"

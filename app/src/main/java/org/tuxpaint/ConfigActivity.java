@@ -40,6 +40,8 @@ public class ConfigActivity extends Activity {
         String[] buttonsizes = null;
         String[] colors_rows = null;
         String[] osklayouts = null;
+        String[] complexities = null;
+	String[] complexities_loc = null;
 	private Properties props = null;
 	private Properties propsback = null;
     String locLanguage = null;
@@ -68,11 +70,14 @@ public class ConfigActivity extends Activity {
         String lang = null;
         String osklayout = null;
         String stamprotation = null;
+        String complexity = null;
+		String complexity_loc = null;
         boolean cancel = false;
 
 	EditText savedirView = null;
 	public EditText datadirView = null;
 	EditText exportdirView = null;
+        Spinner complexitySpinner = null;
 	ToggleButton soundToggle = null;
 	ToggleButton stereoToggle = null;
 	ToggleButton autosaveToggle = null;
@@ -159,6 +164,39 @@ public class ConfigActivity extends Activity {
 			public void afterTextChanged(Editable s) {
 			}
 		});
+
+		complexities = getResources().getStringArray(R.array.complexities);
+		complexities_loc = getResources().getStringArray(R.array.complexities);
+		int indexcpx = 0;
+		for (; indexcpx != complexities.length; indexcpx++){
+		      complexities_loc[indexcpx] = complexities[indexcpx].split(",")[0];
+		}
+
+		indexcpx = 0;
+		for (; indexcpx != complexities.length; indexcpx++){      /**/
+		    if (complexities[indexcpx].split(",")[1].compareTo(complexity) == 0)
+				break;
+		}
+		if(indexcpx == complexities.length)
+		    indexcpx = 0;
+
+		complexitySpinner = (Spinner) findViewById(R.id.spinnerComplexity);
+
+		ArrayAdapter cpxadapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, complexities_loc)   ;
+		cpxadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		complexitySpinner.setAdapter(cpxadapter);
+		complexitySpinner.setSelection(indexcpx);
+		complexitySpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+					public void onItemSelected(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						complexity_loc = complexities[arg2].split(",")[0];
+						complexity = complexities[arg2].split(",")[1];
+					}
+					public void onNothingSelected(AdapterView<?> arg0) {
+					}
+                });
+
 		soundToggle = (ToggleButton)this.findViewById(R.id.toggleSound);
 		if (sound.compareTo("yes") == 0)
 			soundToggle.setChecked(true);
@@ -533,8 +571,9 @@ public class ConfigActivity extends Activity {
 	colorsrows = props.getProperty("colorsrows", "1");
 	osklayout = props.getProperty("onscreen-keyboard-layout", "SYSTEM");
 	stamprotation = props.getProperty("stamprotation", "yes");
+	complexity = props.getProperty("complexity", "advanced");
 	    	 
-	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient + " " + buttonsize + " " + colorsrows + " " + osklayout + " " + stamprotation);
+	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient + " " + buttonsize + " " + colorsrows + " " + osklayout + " " + stamprotation + " " + complexity);
     }
 
     private void save () {
@@ -559,6 +598,7 @@ public class ConfigActivity extends Activity {
 	props.put("colorsrows", colorsrows);
 	props.put("onscreen-keyboard-layout", osklayout);
 	props.put("stamprotation", stamprotation);
+	props.put("complexity", complexity);
 
 	try {
 	    OutputStream	out = new FileOutputStream(cfg);
