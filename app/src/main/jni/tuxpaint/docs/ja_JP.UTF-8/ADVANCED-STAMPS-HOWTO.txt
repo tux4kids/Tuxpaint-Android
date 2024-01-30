@@ -141,11 +141,11 @@
     (generally at the edge of the object) you should grow, shrink, and invert
     the selection.
 
-    Fill the 100% opaque areas with white, and the 0% opaque areas with black.
-    This is most easily done by drag-and-drop from the foreground/background
-    color indicator. You should not see anything happen, because you are
-    viewing the unmodified image layer while editing the mask of the WIP layer.
-    Large changes might be noticable in the thumbnail.
+    不透明な部分を白で、透明な部分を黒で塗りつぶします。この作業は、前景／背景
+    色のインジケータからドラッグ＆ドロップするのが最も簡単です。作業用レイヤー
+    のマスクを編集しながら、変更されていない画像レイヤーを見ているので、見た目
+    には何も起こらないはずですが、サムネイル画像では大きな変更が見えるかもしれ
+    ません。
 
     次に、画像を拡大します。
 
@@ -241,14 +241,14 @@
 
 Tux Paint 用の画像の保存
 
-    It is very easy to ruin your hard work. Image editors can silently destroy
-    pixels in 0% opaque areas. The conditions under which this happens may vary
-    from version to version. If you are very trusting, you can try saving your
-    image directly as a PNG. Be sure to read it back in again to verify that
-    the 0% opaque areas didn't turn black or white, which would create fringes
-    when Tux Paint scales the image down. If you need to scale your image to
-    save space (and hide your mistakes), you are almost certain to destroy all
-    the 0% opaque areas. So here is a better way...
+    せっかくの労作も簡単にダメになることがあります。画像編集ソフトは、不透明度0
+    ％の領域のピクセルを勝手にで破棄することがあります。この現象が発生する条件
+    は、ソフトウェアのバージョンによっても異なります。慎重を期すため、画像を直
+    接PNGとして保存してみてください。その後、不透明度0％の部分が黒くなったり白
+    くなったりしていないことを確認するために、もう一度画像を読み込んでみてくだ
+    さい。ディスクスペースを節約するため（そして自分のミスを隠すため）に画像を
+    縮小する必要がある場合、ほぼ確実に 0&percnt;の不透明部分をすべて破壊してし
+    まうことになります。そこで、もっと良い方法があります。
 
     より安全な保存方法
 

@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            Xaneiro  1, 2024          </p>
+            Xaneiro 29, 2024          </p>
         </center>
       </header>
 
@@ -739,10 +739,10 @@
         </dl>
       </section><!-- H2: Helper Macros in tp_magic_api.h -->
 
-      <section class="indent"><!-- H2: Constant Defintions in tp_magic_api.h -->
+      <section class="indent"><!-- H2: Constant Definitions in tp_magic_api.h -->
         <header>
           <h2 id="consts">
-            Constant Defintions in "<code>tp_magic_api.h</code>"          </h2>
+            Constant Definitions in "<code>tp_magic_api.h</code>"          </h2>
         </header>
 
         <p>
@@ -766,7 +766,7 @@
           <dd>
             These are flags for Tux Paint's "<code>special_notify()</code>" helper function.  They are described <a href="#special_notify">above</a>.          </dd>
         </dl>
-      </section><!-- H2: Constant Defintions in tp_magic_api.h -->
+      </section><!-- H2: Constant Definitions in tp_magic_api.h -->
     </section><!-- H1: Interfaces -->
 
     
@@ -1143,335 +1143,391 @@
     </section><!-- H1: Getting Help -->
 
     
-    <section class="outer"><!-- H1: Glossary -->
-      <header>
-        <h1 id="glossary">
-          Glossary        </h1>
-      </header>
-      
-      <ul>
-        <li>
-          <b>alpha:</b>
-          See "RGBA"        </li>
-        <li>
-          <b><code>&amp;</code>:</b>
-          See "ampersand"        </li>
-        <li>
-          <b>ampersand (pointers):</b>
-          "<code>&amp;</code>". A symbol in C that allows you to refer to the memory address of a variable; that is, a pointer. (For example, consider "<code>int i;</code>". Later, "<code>&amp;i</code>" refers to the memory where "<code>i</code>" is stored, not the value of "<code>i</code>" itself; it is a 'pointer to "<code>i</code>"'.)          See also: "star"        </li>
-        <li>
-          <b>ampersand (bitwise operator):</b>
-          "<code>&amp;</code>". A symbol in C that acts as a bitwise "and" operator. Only bits set in both values will be returned. For example, "<code>11 &amp; 6</code>" compares the binary values '1011' to '0110'. Only the bit in the 2's place is set, so the result is <code>2</code> ('0010').          See also: "bit"        </li>
-        <li>
-          <b>API:</b>
-           Application Programming Interface. <i>TBD</i>
-        </li>
-        <li>
-          <b>argument:</b>
-          A value sent to a function.        </li>
-        <li>
-          <b>arrow:</b>
-          "<code>-&gt;</code>". A symbol in C that references an element within a pointer to a struct.        </li>
-        <li>
-          <b>backquote:</b>
-          See "grave"        </li>
-        <li>
-          <b>backtick:</b>
-          See "grave"        </li>
-        <li>
-          <b>bit:</b>
-          "Binary digit." Bits are the basic storage unit in a computer's memory, disk, networking, etc. They represent either 0 or 1. (Compared to a decimal digit, which can be anything between 0 and 9.) Just as a series of decimal digits can represent a larger number (e.g., "1" and "5" is fifteen (15)), so can bits (e.g., "1" and "0", is two). In decimal, we go from right to left: ones place, tens place, hundreds place, thousands place, etc. In binary, it is: ones place, twos place, fours place, eights place, etc.          See also: "byte"        </li>
-        <li>
-          <b>blue:</b>
-          See "RGBA"        </li>
-        <li>
-          <b>boolean 'or':</b>
-          A mathematical operation that results in a true value if either operand is true. ("1 | 0", "0 | 1" and "1 | 1" all result in "1". "0 | 0" results in "0".)        </li>
-        <li>
-          <b><code>|</code>:</b>
-          See "boolean 'or'"        </li>
-        <li>
-          <b><code>.</code>:</b>
-          See "dot"        </li>
-        <li>
-          <b><code>`</code>:</b>
-          See "grave"        </li>
-        <li>
-          <b><code>*</code>:</b>
-          See "star"        </li>
-        <li>
-          <b>byte:</b>
-          A unit of memory made up of 8 bits. As a signed value, it can represent -128 through 127. As an unsigned value, it can represent 0 through 255. As a series of bits, for example, the byte "00001100" represents the decimal value 12.        </li>
-        <li>
-          <b>callback:</b>
-           <i>TBD</i>
-        </li>
-        <li>
-          <b>C enumeration:</b>
-          A construct in C that allows you to label numeric values (usually starting at 0 and incrementing by one). (e.g., "<code>enum { ONE, TWO, THREE };</code>"        </li>
-        <li>
-          <b>C function:</b>
-           <i>TBD</i>
-        </li>
-        <li>
-          <b>C function prototype:</b>
-           <i>TBD</i>
-        </li>
-        <li>
-          <b>C header file:</b>
-           <i>TBD</i>
-        </li>
-        <li>
-          <b>channel:</b>
-           <i>TBD</i>
-        </li>
-        <li>
-          <b>click:</b>
-          The action of pressing a button on a mouse.        </li>
-        <li>
-          <b>coordinates:</b>
-          A set of numbers corresponding to a physical position; for example, in a two-dimensional (2D) image, "X" and "Y" coordinates specify the position across (left-to-right) and down the image, respectively. In SDL, the coordinates (0,0) is the top-leftmost pixel of a surface.        </li>
-        <li>
-          <b>C pointer:</b>
-          A variable that contains the location of a piece of memory; usually used to 'point' to another variable. Since C functions can only return one value as a result, pointers are often sent to functions to allow the function to change the values of multiple variables. (For example, Tux Paint's "<code>rgbtohsv()</code>" and "<code>hsvtorgb()</code>".)        </li>
-        <li>
-          <b>C structure:</b>
-          A construct in C that allows you to declare a new variable 'type' which may contain other types within. For example, SDL's "<code>SDL_Rect</code>" contains four integer values, the coordinates of the rectangle (X,Y), and its dimensions (width and height).        </li>
-        <li>
-          <b><code>#define</code>:</b>
-          A C statement that defines a substitution that can occur later in the code. Generally used for constant values (e.g., "<code>#define RADIUS 16</code>"; all instances of "<code>RADIUS</code>" will be replaced with "<code>16</code>"), but can also be used to create macros. Typically placed within C header files.        </li>
-        <li>
-          <b>dimensions:</b>
-          The size of an object, in terms of its width (left to right) and height (top to bottom).        </li>
-        <li>
-          <b><code>.dll</code>:</b>
-          See "Shared Object"        </li>
-        <li>
-          <b>dot:</b>
-          "<code>.</code>". A symbol in C that references an element within a struct.        </li>
-        <li>
-          <b>drag:</b>
-          The action of moving a mouse while the button remains held.        </li>
-        <li>
-          <b>element:</b>
-          A variable stored within a C structure. (Example: "<code>w</code>" and "<code>h</code>" elements of SDL_Surface store the surface's width and height, respectively.)        </li>
-        <li>
-          <b><code>enum</code>:</b>
-          See "C enumeration"        </li>
-        <li>
-          <b><code>float</code>:</b>
-          See "floating point"        </li>
-        <li>
-          <b>floating point:</b>
-           <i>TBD</i>
-        </li>
-        <li>
-          <b><code>format</code>:</b>
-          An <code>SDL_Surface</code> element (a pointer to an <code>SDL_PixelFormat</code> structure) that contains information about a surface; for example, the number of bits used to represent each pixel).          See also the "<code>SDL_PixelFormat(3)</code>" <i>man page</i>)        </li>
-        <li>
-          <b><code>free()</code>:</b>
-          A C function that frees (deallocates) memory allocated by other C functions (such as "<code>strdup()</code>").        </li>
-        <li>
-          <b>function:</b>
-          See "C function"        </li>
-        <li>
-          <b><code>gcc</code>:</b>
-          The GNU C compiler, a portable Open Source compiler.          See also the "<code>gcc(1)</code>" <i>man page</i>)        </li>
-        <li>
-          <b><cite>GIMP</cite>:</b>
-          An Open Source image manipulation and paint program.        </li>
-        <li>
-          <b><cite>GNU C Compiler</cite>:</b>
-          See "gcc"        </li>
-        <li>
-          <b>grave:</b>
-          The "<code><font size=+1>`</font></code>" character; used by the BASH shell to use the output of a command as the command-line arguments to another.        </li>
-        <li>
-          <b>green:</b>
-          See "RGBA"        </li>
-        <li>
-          <b><code>-&gt;</code>:</b>
-          See "arrow"        </li>
-        <li>
-          <b><code>.h</code>:</b>
-          See "C header file"        </li>
-        <li>
-          <b>header:</b>
-          See "C header file"        </li>
-        <li>
-          <b>header file:</b>
-          See "C header file"        </li>
-        <li>
-          <b><code>HSV</code>:</b>
-           Hue, Saturation and Value. <i>TBD</i>
-        </li>
-        <li>
-          <b>hue:</b>
-          See "HSV"        </li>
-        <li>
-          <b><code>IMG_Load()</code>:</b>
-          An SDL_image function that loads an image file (e.g., a PNG) and returns it as an "<code>SDL_Surface *</code>".        </li>
-        <li>
-          <b><code>#include</code>:</b>
-          A C statement that asks the compiler to read the contents of another file (usually a header file).        </li>
-        <li>
-          <b><code>int</code>:</b>
-          See "integer"        </li>
-        <li>
-          <b>integer:</b>
-           <i>TBD</i>
-        </li>
-        <li>
-          <b><code>libSDL</code>:</b>
-          See "Simple DirectMedia Layer"        </li>
-        <li>
-          <b>linear:</b>
-           <i>TBD</i>
-        </li>
-        <li>
-          <b>macro:</b>
-          A C construct that looks similar to a C function, but is simply a #define that is expanded 'inline'. For example, if you declared the macro "<code>#define ADD(A,B) ((A)+(B))</code>", and then used it with "<code>c = ADD(1,2);</code>", that line of code would literally expand to "<code>c = ((1) + (2));</code>", or more simply, "<code>c = 1 + 2;</code>".        </li>
-        <li>
-          <b><code>magic_api</code>:</b>
-          A C structure that is passed along to a plugin's functions that exposes data and functions within the running copy of Tux Paint.        </li>
-        <li>
-          <b><code>make</code>:</b>
-          A utility that automatically determines which pieces of a larger program need to be recompiled, and issues the commands to recompile them.          See also: "Makefile"        </li>
-        <li>
-          <b><code>Makefile</code>:</b>
-          A text file used by the "make" utility; it describes the relationships among files in your program, and the commands for updating each file. (For example, to compile a human-readable source-code file into a computer-readable executable program file.)        </li>
-        <li>
-          <b>Magic tool:</b>
-          One of a number of effects or drawing tools in Tux Paint, made available via the "Magic" tool button.        </li>
-        <li>
-          <b><code>Mix_Chunk *</code>:</b>
-          (A pointer to) a C structure defined by SDL_mixer that contains a sound.        </li>
-        <li>
-          <b><code>Mix_FreeChunk()</code>:</b>
-          An SDL_mixer function that frees (deallocates) memory allocated for an SDL_mixer sound 'chunk' ("<code>Mix_Chunk *</code>").        </li>
-        <li>
-          <b><code>Mix_LoadWAV()</code>:</b>
-          An SDL_mixer function that loads a sound file (WAV, Ogg Vorbis, etc.) and returns it as a "<code>Mix_Chunk *</code>".        </li>
-        <li>
-          <b>namespace:</b>
-           <i>TBD</i>
-        </li>
-        <li>
-          <b><code>.ogg</code>:</b>
-          See "Ogg Vorbis"        </li>
-        <li>
-          <b><cite>Ogg Vorbis</cite>:</b>
-          See also: "WAV"        </li>
-        <li>
-          <b>Plugin:</b>
-           <i>TBD</i>
-        </li>
-        <li>
-          <b>.png:</b>
-          Portable Network Graphics. An extensible file format for the lossless, portable, well-compressed storage of raster images. It's the file format Tux Paint uses to save images, and for its brushes and stamps. It's an easy way to store 32bpp RGBA images (24bpp true color with full 8bpp alpha transparency), excellent for use in graphics programs like Tux Paint.          See also the "<code>png(5)</code>" <i>man page</i>)        </li>
-        <li>
-          <b>pointer:</b>
-          See "C pointer"        </li>
-        <li>
-          <b>prototype:</b>
-          See "C function prototype"        </li>
-        <li>
-          <b>red:</b>
-          See "RGBA"        </li>
-        <li>
-          <b>release:</b>
-          The action of releasing a button on a mouse.        </li>
-        <li>
-          <b><code>RGBA</code>:</b>
-           "Red, Green, Blue, Alpha." <i>TBD</i>
-        </li>
-        <li>
-          <b><code>RGB</code>:</b>
-          See "RGBA"        </li>
-        <li>
-          <b>saturation:</b>
-          See "HSV"        </li>
-        <li>
-          <b><cite>SDL</cite>:</b>
-          See "Simple DirectMedia Layer"        </li>
-        <li>
-          <b><code>SDL_FreeSurface()</code>:</b>
-          An libSDL function that frees (deallocates) memory allocated for an SDL surface ("<code>SDL_Surface *</code>").          See also the "<code>SDL_FreeSurface(3)</code>" <i>man page</i>)        </li>
-        <li>
-          <b><code>SDL_GetRGB()</code>:</b>
-          A libSDL function that, given a <code>Uint32</code> pixel value (e.g., one returned from the Tux Paint's Magic tool API helper function "<code>getpixel()</code>"), the format of the surface the pixel was taken from, and pointers to three <code>Uint8</code> variables, will place the Red, Green and Blue (RGB) values of the pixel into the three <code>Uint8</code> variables. (Example: "<code>SDL_GetRGB(getpixel(surf, x, y), surf-&gt;format, &amp;r, &amp;g, &amp;b);</code>".)          See also the "<code>SDL_GetRGB(3)</code>" <i>man page</i>)        </li>
-        <li>
-          <b><code>SDL_MapRGB()</code>:</b>
-          A libSDL function that, given the format of a surface and <code>Uint8</code> values representing Red, Green and Blue values for a pixel, returns a <code>Uint32</code> pixel value that can be placed in the surface (e.g., using Tux Paint's Magic tool API helper function "<code>putpixel()</code>"). (Example: "<code>putpixel(surf, x, y, SDL_MapRGB(surf-&gt;format, r, g, b));</code>".)          See also the "<code>SDL_MapRGB(3)</code>" <i>man page</i>)        </li>
-        <li>
-          <b><cite>SDL_image</cite>:</b>
-          A library on top of libSDL that can load various kinds of image files (e.g., PNG) and return them as an "<code>SDL_Surface *</code>".        </li>
-        <li>
-          <b><cite>SDL_mixer</cite>:</b>
-          A library on top of libSDL that can load various kinds of sound files (WAV, Ogg Vorbis, etc.) and play back multiple sounds at once (mix them).        </li>
-        <li>
-          <b><code>SDL_Rect</code>:</b>
-          A C structure defined by libSDL that represents a rectangular area. It contains elements representing the coordinates of the top left corner of the rectange (x,y) and the dimensions of the rectangle (w,h).          See also the "<code>SDL_Rect(3)</code>" <i>man page</i>)        </li>
-        <li>
-          <b><code>SDL_Surface *</code>:</b>
-          (A pointer to) a C structure defined by libSDL that contains a drawing surface.
-          See also the "<code>SDL_Surface(3)</code>" <i>man page</i>)        </li>
-        <li>
-          <b>Shared Object:</b>
-          A piece of code that's compiled separately from the main application, and loaded dynamically, at runtime.        </li>
-        <li>
-          <b><cite>Simple DirectMedia Layer</cite>:</b>
-          A programming library that allows programs portable low level access to a video framebuffer, audio output, mouse, and keyboard. (See also: <a href="http://www.libsdl.org/">http://www.libsdl.org/</a>)        </li>
-        <li>
-          <b><code>snprintf()</code>:</b>
-          A C function, related to "printf()", which takes a 'format' string and one or more additional arguments, and puts them together. "snprintf()" takes the resulting output and stores it into a string, making sure not to go beyond the string's buffer size (which must also be supplied). For example, assume a string "char str[20];" has been declared; "snprintf(str, 20, "Name: %s, Age: %d", "Bill", "32");" will store "Name: Bill, Age: 32" into 'str'.          See also the "<code>snprintf(3)</code>" <i>man page</i>)        </li>
-        <li>
-          <b><code>.so</code>:</b>
-          See "Shared Object"        </li>
-        <li>
-          <b><code>sRBG</code>:</b>
-          See "RGBA"        </li>
-        <li>
-          <b>star:</b>
-          "<code>*</code>". A symbol in C that, when used in the declaration of variables (e.g., arguments to a function), denotes that the variable is a pointer. (For example, "<code>int * p;</code>" means that "<code>p</code>" is a <i>pointer</i> to an integer.) When used next to a pointer, it 'dereferences' the variable. (For example, later "<code>*p = 50;</code>" assigns the value of 50 to the memory that "<code>p</code>" points to; it does not change the value of "<code>p</code>", which is still a pointer to an integer. In essence, it changed the integer that's being pointed to.)          See also: "ampersand"        </li>
-        <li>
-          <b><code>strdup()</code>:</b>
-          A C function that allocates enough memory to store a copy of a string, copies the string to it, and returns a "<code>char *</code>" pointer to the new copy.          See also the "<code>strdup(3)</code>" <i>man page</i>)        </li>
-        <li>
-          <b><code>struct</code>:</b>
-          See "C structure"        </li>
-        <li>
-          <b><code>tp_magic_api.h</code>:</b>
-          A header file that defines Tux Paint's Magic tool API.  Plugins must '#include' it.        </li>
-        <li>
-          <b><code>tp-magic-config</code>:</b>
-          A command-line program that provides information about the installed version of Tux Paint to plugin developers (such as what C compiler flags they should compile with, and where plugin shared objects and data files should be installed).          See also the "<code>tp-magic-config(3)</code>" <i>man page</i>)        </li>
-        <li>
-          <b><code>Uint32</code>:</b>
-          A 32-bit, unsigned integer (defined by libSDL). In other words, four bytes that can represent 0 through 4294967295. (Typically used to hold enough information to store three or four bytes representing a pixel's color; i.e., RBGA value).        </li>
-        <li>
-          <b><code>Uint8</code>:</b>
-          An 8-bit, unsigned integer (defined by libSDL). In other words, a byte that can represent 0 through 255.        </li>
-        <li>
-          <b>unsigned:</b>
-          In C, a variable that can store a numeric value can be declared as either "signed" (the default), or "unsigned". In the former case, one bit of the value is used to denote the sign of the value (either positive or negative). In the latter case, the value can only be positive, but benefits from one extra bit of storage for the number. A signed byte (8 bits), for example, can represent any number between -128 and 127. An unsigned byte can go up to 255, but it cannot go below 0. For the purposes of graphics in SDL, unsigned values should be used for RGB values, since each channel (red, green and blue) may be between 0 (off) and 255 (brightest).        </li>
-        <li>
-          <b>value:</b>
-          See "HSV"        </li>
-        <li>
-          <b>variable:</b>
-          A construct in computer programming that contains a value which can be referenced again later by referring to the variable's name, and typically changed later. For example, a variable to hold someone's age could be declared as an integer: "int a;". It can be examined later: "if (a &gt;= 18) { /* they are an adult */ } else { /* they are not an adult */ }".        </li>
-        <li>
-          <b><code>.wav</code>:</b>
-          See also: "Ogg Vorbis"        </li>
-        <li>
-          <b><code>(w,h)</code>:</b>
-          See "Dimensions"        </li>
-        <li>
-          <b><code>(x,y)</code>:</b>
-          See "Coordinates"        </li>
-      </ul>
-    </section><!-- H1: Glossary -->
+    
+<section class="outer"><!-- H1: Glossary -->
+  <header>
+    <h1 id="glossary">
+      Glossary    </h1>
+  </header>
+
+  <dl>
+          <dt><code>&amp;</code></dt>
+      <dd>
+        See "ampersand"              </dd>
+            <dt><code>*</code></dt>
+      <dd>
+        See "star"              </dd>
+            <dt><code>-&gt;</code></dt>
+      <dd>
+        See "arrow"              </dd>
+            <dt><code>.</code></dt>
+      <dd>
+        See "dot"              </dd>
+            <dt><code>`</code></dt>
+      <dd>
+        See "grave"              </dd>
+            <dt>alpha</dt>
+      <dd>
+        See "RGBA"              </dd>
+            <dt>ampersand (bitwise operator)</dt>
+      <dd>
+        "<code>&amp;</code>". A symbol in C that acts as a bitwise "and" operator. Only bits set in both values will be returned. For example, "<code>11 &amp; 6</code>" compares the binary values '1011' to '0110'. Only the bit in the 2's place is set, so the result is <code>2</code> ('0010').        <br/>
+See also: "bit"      </dd>
+            <dt>ampersand (pointers)</dt>
+      <dd>
+        "<code>&amp;</code>". A symbol in C that allows you to refer to the memory address of a variable; that is, a pointer. (For example, consider "<code>int i;</code>". Later, "<code>&amp;i</code>" refers to the memory where "<code>i</code>" is stored, not the value of "<code>i</code>" itself; it is a 'pointer to "<code>i</code>"'.)        <br/>
+See also: "star"      </dd>
+            <dt>API</dt>
+      <dd>
+        Application Programming Interface. <i>Definition not yet presented.</i>              </dd>
+            <dt>argument</dt>
+      <dd>
+        A value sent to a function.              </dd>
+            <dt>arrow</dt>
+      <dd>
+        "<code>-&gt;</code>". A symbol in C that references an element within a pointer to a struct.              </dd>
+            <dt>backquote / backtick</dt>
+      <dd>
+        See "grave"              </dd>
+            <dt>BASH</dt>
+      <dd>
+        The "Bourne Again Shell", a Unix shell and command language.              </dd>
+            <dt>bit</dt>
+      <dd>
+        "Binary digit." Bits are the basic storage unit in a computer's memory, disk, networking, etc. They represent either 0 or 1. (Compared to a decimal digit, which can be anything between 0 and 9.) Just as a series of decimal digits can represent a larger number (e.g., "1" and "5" is fifteen (15)), so can bits (e.g., "1" and "0", is two). In decimal, we go from right to left: ones place, tens place, hundreds place, thousands place, etc. In binary, it is: ones place, twos place, fours place, eights place, etc.        <br/>
+See also: "byte"      </dd>
+            <dt>blue</dt>
+      <dd>
+        See "RGBA"              </dd>
+            <dt>boolean &#039;or&#039;</dt>
+      <dd>
+        A mathematical operation that results in a true value if either operand is true. ("1 | 0", "0 | 1" and "1 | 1" all result in "1". "0 | 0" results in "0".)        <br/>
+See also: "bit"      </dd>
+            <dt>byte</dt>
+      <dd>
+        A unit of memory made up of 8 bits. As a signed value, it can represent -128 through 127. As an unsigned value, it can represent 0 through 255. As a series of bits, for example, the byte "00001100" represents the decimal value 12.        <br/>
+See also: "bit"      </dd>
+            <dt>C enumeration</dt>
+      <dd>
+        A construct in C that allows you to label numeric values (usually starting at 0 and incrementing by one). (e.g., "<code>enum { ONE, TWO, THREE };</code>"              </dd>
+            <dt>C function / C function prototype / C header file</dt>
+      <dd>
+        <i>Definition not yet presented.</i>        <br/>
+See also: "C function prototype"      </dd>
+            <dt>C pointer</dt>
+      <dd>
+        A variable that contains the location of a piece of memory; usually used to 'point' to another variable. Since C functions can only return one value as a result, pointers are often sent to functions to allow the function to change the values of multiple variables. (For example, Tux Paint's "<code>rgbtohsv()</code>" and "<code>hsvtorgb()</code>".)              </dd>
+            <dt>C structure</dt>
+      <dd>
+        A construct in C that allows you to declare a new variable 'type' which may contain other types within. For example, SDL's "<code>SDL_Rect</code>" contains four integer values, the coordinates of the rectangle (X,Y), and its dimensions (width and height).              </dd>
+            <dt>callback / channel</dt>
+      <dd>
+        <i>Definition not yet presented.</i>              </dd>
+            <dt>click</dt>
+      <dd>
+        The action of pressing a button on a mouse, tapping a touchscreen, or pressing a stylus to a tablet.        <br/>
+See also:
+<ul>
+<li>drag</li><li>release</li></ul>
+      </dd>
+            <dt>colorspace</dt>
+      <dd>
+        <i>Definition not yet presented.</i>        <br/>
+See also:
+<ul>
+<li>RGBA</li><li>HSV</li></ul>
+      </dd>
+            <dt>coordinates</dt>
+      <dd>
+        A set of numbers corresponding to a physical position; for example, in a two-dimensional (2D) image, "X" and "Y" coordinates specify the position across (left-to-right) and down the image, respectively. In SDL, the coordinates (0,0) is the top-leftmost pixel of a surface.              </dd>
+            <dt><code>#define</code></dt>
+      <dd>
+        A C statement that defines a substitution that can occur later in the code. Generally used for constant values (e.g., "<code>#define RADIUS 16</code>"; all instances of "<code>RADIUS</code>" will be replaced with "<code>16</code>"), but can also be used to create macros. Typically placed within C header files.              </dd>
+            <dt><code>dimensions</code></dt>
+      <dd>
+        The size of an object, in terms of its width (left to right) and height (top to bottom).              </dd>
+            <dt><code>.dll</code></dt>
+      <dd>
+        See "Shared Object"              </dd>
+            <dt>dot</dt>
+      <dd>
+        "<code>.</code>". A symbol in C that references an element within a struct.        <br/>
+See also:
+<ul>
+<li>C structure</li><li>arrow</li></ul>
+      </dd>
+            <dt>drag</dt>
+      <dd>
+        The action of moving a mouse while the button remains held, or moving a finger or stylus across a screen or tablet, without removing it.        <br/>
+See also:
+<ul>
+<li>click</li><li>release</li></ul>
+      </dd>
+            <dt>element</dt>
+      <dd>
+        A variable stored within a C structure. (Example: "<code>w</code>" and "<code>h</code>" elements of SDL_Surface store the surface's width and height, respectively.)        <br/>
+See also:
+<ul>
+<li>C structure</li><li>dot</li><li>arrow</li></ul>
+      </dd>
+            <dt><code>enum</code></dt>
+      <dd>
+        See "C enumeration"              </dd>
+            <dt><code>float</code></dt>
+      <dd>
+        See "floating point"              </dd>
+            <dt>floating point</dt>
+      <dd>
+        <i>Definition not yet presented.</i>        <br/>
+See also: "integer"      </dd>
+            <dt><code>format</code></dt>
+      <dd>
+        An <code>SDL_Surface</code> element (a pointer to an <code>SDL_PixelFormat</code> structure) that contains information about a surface; for example, the number of bits used to represent each pixel).<br/>Refer to the "<code>SDL_PixelFormat(3)</code>" <i>man page</i>.              </dd>
+            <dt><code>free()</code></dt>
+      <dd>
+        A C function that frees (deallocates) memory allocated by other C functions (such as "<code>strdup()</code>").<br/>Refer to the "<code>malloc(3)</code>" <i>man page</i>.              </dd>
+            <dt>function</dt>
+      <dd>
+        See "C function"              </dd>
+            <dt><code>gcc</code></dt>
+      <dd>
+        See "GNU C Compiler"              </dd>
+            <dt>GIMP</dt>
+      <dd>
+        GNU Image Manipulation Program, an Open Source image manipulation and paint program.        <br/>
+See also: "Krita"      </dd>
+            <dt>GNU C Compiler</dt>
+      <dd>
+        The GNU C compiler, a portable Open Source package for compiling and linking programs written in the C programming language.<br/>Refer to the "<code>gcc(1)</code>" <i>man page</i>.              </dd>
+            <dt>grave</dt>
+      <dd>
+        The "<code><font size=+1>`</font></code>" character; used by the BASH shell to use the output of a command as the command-line arguments to another.              </dd>
+            <dt>green</dt>
+      <dd>
+        See "RGBA"              </dd>
+            <dt><code>.h</code> / header / header file</dt>
+      <dd>
+        See "C header file"              </dd>
+            <dt>HSV</dt>
+      <dd>
+        Hue, Saturation and Value.<i>Definition not yet presented.</i>        <br/>
+See also:
+<ul>
+<li>RGBA</li><li>colorspace</li></ul>
+      </dd>
+            <dt>hue</dt>
+      <dd>
+        See "HSV"              </dd>
+            <dt><code>IMG_Load()</code></dt>
+      <dd>
+        An SDL_image function that loads an image file (e.g., a PNG) and returns it as an "<code>SDL_Surface *</code>".              </dd>
+            <dt><code>#include</code></dt>
+      <dd>
+        A C statement that asks the compiler to read the contents of another file (usually a header file).              </dd>
+            <dt><code>int</code></dt>
+      <dd>
+        See "integer"              </dd>
+            <dt>integer</dt>
+      <dd>
+        <i>Definition not yet presented.</i>        <br/>
+See also: "floating point"      </dd>
+            <dt>Krita</dt>
+      <dd>
+        An Open Source image manipulation and paint program.        <br/>
+See also: "GIMP"      </dd>
+            <dt>libSDL</dt>
+      <dd>
+        See "Simple DirectMedia Layer"              </dd>
+            <dt>linear</dt>
+      <dd>
+        <i>Definition not yet presented.</i>              </dd>
+            <dt>macro</dt>
+      <dd>
+        A C construct that looks similar to a C function, but is simply a #define that is expanded 'inline'. For example, if you declared the macro "<code>#define ADD(A,B) ((A)+(B))</code>", and then used it with "<code>c = ADD(1,2);</code>", that line of code would literally expand to "<code>c = ((1) + (2));</code>", or more simply, "<code>c = 1 + 2;</code>".              </dd>
+            <dt>Magic tool</dt>
+      <dd>
+        One of a number of effects or drawing tools in Tux Paint, made available via the "Magic" tool button.              </dd>
+            <dt><code>magic_api</code></dt>
+      <dd>
+        A C structure that is passed along to a plugin's functions that exposes data and functions within the running copy of Tux Paint.              </dd>
+            <dt><code>make</code></dt>
+      <dd>
+        A utility that automatically determines which pieces of a larger program need to be recompiled, and issues the commands to recompile them.        <br/>
+See also: "Makefile"      </dd>
+            <dt><code>Makefile</code></dt>
+      <dd>
+        A text file used by the "make" utility; it describes the relationships among files in your program, and the commands for updating each file. (For example, to compile a human-readable source-code file into a computer-readable executable program file.)              </dd>
+            <dt><code>Mix_Chunk *</code></dt>
+      <dd>
+        (A pointer to) a C structure defined by SDL_mixer that contains a sound.              </dd>
+            <dt><code>Mix_FreeChunk()</code></dt>
+      <dd>
+        An SDL_mixer function that frees (deallocates) memory allocated for an SDL_mixer sound 'chunk' ("<code>Mix_Chunk *</code>").              </dd>
+            <dt><code>Mix_LoadWAV()</code></dt>
+      <dd>
+        An SDL_mixer function that loads a sound file (WAV, Ogg Vorbis, etc.) and returns it as a "<code>Mix_Chunk *</code>".              </dd>
+            <dt>namespace</dt>
+      <dd>
+        <i>Definition not yet presented.</i>              </dd>
+            <dt><code>.ogg</code></dt>
+      <dd>
+        See "Ogg Vorbis"              </dd>
+            <dt>Ogg Vorbis / plugin</dt>
+      <dd>
+        <i>Definition not yet presented.</i>        <br/>
+See also: "WAVE"      </dd>
+            <dt><code>.png</code></dt>
+      <dd>
+        See "Portable Network Graphics"              </dd>
+            <dt>pointer</dt>
+      <dd>
+        See "C pointer"              </dd>
+            <dt>Portable Network Graphics</dt>
+      <dd>
+        Portable Network Graphics. An extensible file format for the lossless, portable, well-compressed storage of raster images. It's the file format Tux Paint uses to save images, and for its brushes and stamps. It's an easy way to store 32bpp RGBA images (24bpp true color with full 8bpp alpha transparency), excellent for use in graphics programs like Tux Paint.<br/>Refer to the "<code>png(5)</code>" <i>man page</i>.        <br/>
+See also: "Scalable Vector Graphic"      </dd>
+            <dt>prototype</dt>
+      <dd>
+        See "C function prototype"              </dd>
+            <dt>red</dt>
+      <dd>
+        See "RGBA"              </dd>
+            <dt>release</dt>
+      <dd>
+        The action of releasing a mouse button, or removing a finger or stylus from a screen or tablet.        <br/>
+See also:
+<ul>
+<li>click</li><li>drag</li></ul>
+      </dd>
+            <dt>RGB</dt>
+      <dd>
+        See "RGBA"              </dd>
+            <dt>RGBA</dt>
+      <dd>
+        Red, Green, Blue, and Alpha.<i>Definition not yet presented.</i>        <br/>
+See also:
+<ul>
+<li>HSV</li><li>colorspace</li></ul>
+      </dd>
+            <dt>saturation</dt>
+      <dd>
+        See "HSV"              </dd>
+            <dt>SDL</dt>
+      <dd>
+        See "Simple DirectMedia Layer"              </dd>
+            <dt><code>SDL_FreeSurface()</code></dt>
+      <dd>
+        A libSDL function that frees (deallocates) memory allocated for an SDL surface ("<code>SDL_Surface *</code>").              </dd>
+            <dt><code>SDL_GetRGB()</code></dt>
+      <dd>
+        A libSDL function that, given a <code>Uint32</code> pixel value (e.g., one returned from the Tux Paint's Magic tool API helper function "<code>getpixel()</code>"), the format of the surface the pixel was taken from, and pointers to three <code>Uint8</code> variables, will place the Red, Green and Blue (RGB) values of the pixel into the three <code>Uint8</code> variables. (Example: "<code>SDL_GetRGB(getpixel(surf, x, y), surf-&gt;format, &amp;r, &amp;g, &amp;b);</code>".)<br/>Refer to the "<code>SDL_GetRGB(3)</code>" <i>man page</i>.        <br/>
+See also:
+<ul>
+<li>SDL_MapRGB()</li><li>RGBA</li></ul>
+      </dd>
+            <dt><code>SDL_image</code></dt>
+      <dd>
+        A library on top of libSDL that can load various kinds of image files (e.g., PNG) and return them as an "<code>SDL_Surface *</code>".              </dd>
+            <dt><code>SDL_MapRGB()</code></dt>
+      <dd>
+        A libSDL function that, given the format of a surface and <code>Uint8</code> values representing Red, Green and Blue values for a pixel, returns a <code>Uint32</code> pixel value that can be placed in the surface (e.g., using Tux Paint's Magic tool API helper function "<code>putpixel()</code>"). (Example: "<code>putpixel(surf, x, y, SDL_MapRGB(surf-&gt;format, r, g, b));</code>".)<br/>Refer to the "<code>SDL_MapRGB(3)</code>" <i>man page</i>.        <br/>
+See also:
+<ul>
+<li>SDL_GetRGB()</li><li>RGBA</li></ul>
+      </dd>
+            <dt><code>SDL_mixer</code></dt>
+      <dd>
+        A library on top of libSDL that can load various kinds of sound files (WAV, Ogg Vorbis, etc.) and play back multiple sounds at once (mix them).              </dd>
+            <dt><code>SDL_Rect</code></dt>
+      <dd>
+        A C structure defined by libSDL that represents a rectangular area. It contains elements representing the coordinates of the top left corner of the rectange (x,y) and the dimensions of the rectangle (w,h).<br/>Refer to the "<code>SDL_Rect(3)</code>" <i>man page</i>.              </dd>
+            <dt><code>SDL_Surface *</code></dt>
+      <dd>
+        (A pointer to) a C structure defined by libSDL that contains a drawing surface.<br/>Refer to the "<code>SDL_Surface(3)</code>" <i>man page</i>.              </dd>
+            <dt>shared object</dt>
+      <dd>
+        A piece of code that's compiled separately from the main application, and loaded dynamically, at runtime.              </dd>
+            <dt>shell</dt>
+      <dd>
+        See "BASH"              </dd>
+            <dt>Simple DirectMedia Layer</dt>
+      <dd>
+        The Simple DirectMedia Layer (libSDL) is a programming library that provides portable low-level access to a video framebuffer, audio output, and mouse and keyboard input. (See: <a href="http://www.libsdl.org/">http://www.libsdl.org/</a>)              </dd>
+            <dt><code>snprintf()</code></dt>
+      <dd>
+        A C function, related to "printf()", which takes a 'format' string and one or more additional arguments, and puts them together. "snprintf()" takes the resulting output and stores it into a string, making sure not to go beyond the string's buffer size (which must also be supplied). For example, assume a string "<code>char str[20];</code>" has been declared; "<code>snprintf(str, 20, "Name: %s, Age: %d", "Bill", 32);</code>" will store "Name: Bill, Age: 32" into '<code>str</code>'.<br/>Refer to the "<code>sprintf(3)</code>" <i>man page</i>.              </dd>
+            <dt><code>.so</code></dt>
+      <dd>
+        See "shared object"              </dd>
+            <dt>sRGB</dt>
+      <dd>
+        See "RGBA"              </dd>
+            <dt>star</dt>
+      <dd>
+        "<code>*</code>". A symbol in C that, when used in the declaration of variables (e.g., arguments to a function), denotes that the variable is a pointer. (For example, "<code>int * p;</code>" means that "<code>p</code>" is a <i>pointer</i> to an integer.) When used next to a pointer, it 'dereferences' the variable. (For example, later "<code>*p = 50;</code>" assigns the value of 50 to the memory that "<code>p</code>" points to; it does not change the value of "<code>p</code>", which is still a pointer to an integer. In essence, it changed the integer that's being pointed to.)        <br/>
+See also: "ampersand"      </dd>
+            <dt><code>strdup()</code></dt>
+      <dd>
+        A C function that allocates enough memory to store a copy of a string, copies the string to it, and returns a "<code>char *</code>" pointer to the new copy.<br/>Refer to the "<code>strdup(3)</code>" <i>man page</i>.              </dd>
+            <dt><code>struct</code></dt>
+      <dd>
+        See "C structure"              </dd>
+            <dt>tap</dt>
+      <dd>
+        See "click"              </dd>
+            <dt><code>tp-magic-config</code></dt>
+      <dd>
+        A command-line program that provides information about the installed version of Tux Paint to plugin developers (such as what C compiler flags they should compile with, and where plugin shared objects and data files should be installed).<br/>Refer to the "<code>tp-magic-config(3)</code>" <i>man page</i>.              </dd>
+            <dt><code>tp_magic_api.h</code></dt>
+      <dd>
+        A header file that defines Tux Paint's Magic tool API.  Plugins must '<code>#include</code>' it.              </dd>
+            <dt><code>Uint32</code></dt>
+      <dd>
+        A 32-bit, unsigned integer (defined by libSDL). In other words, four bytes that can represent 0 through 4,294,967,295. (Typically used to hold enough information to store three or four bytes representing a pixel's color; i.e., RBGA value).        <br/>
+See also:
+<ul>
+<li>Uint8</li><li>integer</li><li>unsigned</li></ul>
+      </dd>
+            <dt><code>Uint8</code></dt>
+      <dd>
+        An 8-bit, unsigned integer (defined by libSDL). In other words, a byte that can represent 0 through 255.        <br/>
+See also:
+<ul>
+<li>Uint32</li><li>integer</li><li>unsigned</li></ul>
+      </dd>
+            <dt>unsigned</dt>
+      <dd>
+        In C, a variable that can store a numeric value can be declared as either "signed" (the default), or "unsigned". In the former case, one bit of the value is used to denote the sign of the value (either positive or negative). In the latter case, the value can only be positive, but benefits from one extra bit of storage for the number. A signed byte (8 bits), for example, can represent any number between -128 and 127. An unsigned byte can go up to 255, but it cannot go below 0. For the purposes of graphics in SDL, unsigned values should be used for RGB values, since each channel (red, green and blue) may be between 0 (off) and 255 (brightest).        <br/>
+See also:
+<ul>
+<li>Uint8</li><li>Uint32</li><li>integer</li></ul>
+      </dd>
+            <dt>value</dt>
+      <dd>
+        See "HSV"              </dd>
+            <dt>variable</dt>
+      <dd>
+        A construct in computer programming that contains a value which can be referenced again later by referring to the variable's name, and typically changed later. For example, a variable to hold someone's age could be declared as an integer: "<code>int age</code>;". It can be examined later &mdash; e.g., "<code>if (age &gt;= 18) { /* they are an adult */ } else { /* they are not an adult */ }</code>" &mdash; as well as modified later &mdash; e.g., <code>age = 32; /* set age to 32 */</code>              </dd>
+            <dt><code>(w,h)</code></dt>
+      <dd>
+        See "dimensions"              </dd>
+            <dt><code>.wav</code></dt>
+      <dd>
+        See "WAVE"              </dd>
+            <dt>WAVE</dt>
+      <dd>
+        Waveform Audio File Format (WAVE, or WAV). <i>Definition not yet presented.</i>        <br/>
+See also: "Ogg Vorbis"      </dd>
+            <dt><code>(x,y)</code></dt>
+      <dd>
+        See "coordinates"              </dd>
+            <dt><code>|</code></dt>
+      <dd>
+        See "boolean 'or'"              </dd>
+        </dl>
+
+</section><!-- H1: Glossary -->
+
 
   </body>
 </html>

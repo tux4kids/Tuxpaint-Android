@@ -526,29 +526,27 @@ nobrushspacing=yes
 
 complexity=COMPLEXITY
 
-    Sets the complexity (expertise) level of Tux Paint, which can either
-    disable some Magic tools, or cause them to operate differently. (For
-    example, the "Clone" tool is not available in novice mode, and the 1-, 2-,
-    and 3-point perspective tools do not allow vanishing points to be edited in
-    beginner mode.)
+    タックスペイントの操作の複雑さ(熟達度合い)のレベルを設定します。これによ
+    り、いくつかの「まほう」ツールが無効になったり、異なる動作をしたりします。
+    (例えば、"クローン "ツールは初心者モードでは使用できません。また、1点、2
+    点、3点透視図法ツールは中級者モードでは消失点の編集ができません)。
 
-    The COMPLEXITY value may be one of:
+    COMPLEXITY は以下の３とおりから選択できます。
 
     advanced (the default)
-        "Advanced" — For users familiar with Tux Paint and who can operate more
-        complex tools.
+        「上級者」 — Tux Paint に精通していて、複雑な操作が可能なユーザー向け。
 
     beginner
-        "Beginner" — For users comfortable with Tux Paint, but where complex
-        tools may cause confusion or frustration.
+        「中級者」 — ある程度 Tux Paint に慣れているが、複雑なツールにとまどっ
+        たり、フラストレーションを感じるユーザー向け。
 
     novice
-        "Novice" — For first-time Tux Paint users, users inexperienced with
-        computers, or those with special accessibility needs.
+        「初心者」 — 初めて Tux Paint を使うユーザーや、コンピューターの経験が
+        浅いユーザー、または、特殊な操作が必要なユーザー向け
 
 
-    📜 Note: The complexity option was added to Tux Paint in version 0.9.32.
-    Consult the individual Magic tools' documentation.
+    📜 注: 難易度のオプションは、Tux Paint バージョン 0.9.32 で導入されました。
+    詳しくは個々の「まほう」ツールのドキュメントを参照して下さい。
 
     ⚙ 注: システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファ
     イルで "complexity=advanced" を設定すると上書きされることがあります。また、

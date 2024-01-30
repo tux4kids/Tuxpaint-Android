@@ -27,7 +27,7 @@ fi
 
 if [ $RUN = true ]
 then
-    stamps_version="2024.01.21"
+    stamps_version="2024.01.29"
     stampsversion=`echo $stamps_version|sed "s/\./-/g"`
 
     if [ -d tmpzip ]
@@ -61,7 +61,7 @@ then
 	cp -r templates tmpzip/data/templates &&\
 	mkdir tmpzip/etc && \
 	cp src/tuxpaint.cfg-android tmpzip/etc/tuxpaint.cfg && \
-	wget -O tuxpaint-stamps-$stamps_version.tar.gz https://sourceforge.net/projects/tuxpaint/files/tuxpaint-stamps/2024-01-XX-beta/tuxpaint-stamps-$stamps_version.tar.gz/download && \
+	wget -O tuxpaint-stamps-$stamps_version.tar.gz https://sourceforge.net/projects/tuxpaint/files/tuxpaint-stamps/$stampsversion/tuxpaint-stamps-$stamps_version.tar.gz/download && \
 	tar xfz tuxpaint-stamps-$stamps_version.tar.gz && \
 	cd tuxpaint-stamps-$stamps_version && \
 	../join_subdirs.sh && \

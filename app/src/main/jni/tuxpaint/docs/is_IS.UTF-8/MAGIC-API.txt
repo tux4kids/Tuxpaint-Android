@@ -6,7 +6,7 @@
    Höfundarréttur © 2007-2024 eftir various contributors; sjá AUTHORS-skrá.
                              https://tuxpaint.org/
 
-                                1. janúar 2024
+                                29. janúar 2024
 
 +--------------------------------------------------+
 |                   Efnisyfirlit                   |
@@ -747,7 +747,7 @@ clamp(lo, value, hi)
 
 
 
-Constant Defintions in "tp_magic_api.h"
+Constant Definitions in "tp_magic_api.h"
 
 The following is a summary of constant values that are set (via "#define")
 within the 'Magic' tool API header file.
@@ -1068,228 +1068,505 @@ Additionally, other Tux Paint developers and users can be found on the
 
 Orðasafn
 
-  * alfa: See "RGBA"
-  * &: See "'og' merki"
-  * 'og' merki (bendlar): "&". A symbol in C that allows you to refer to the
-    memory address of a variable; that is, a pointer. (For example, consider
-    "int i;". Later, "&i" refers to the memory where "i" is stored, not the
-    value of "i" itself; it is a 'pointer to "i"'.) See also: "star"
-  * 'og' merki (bitwise operator): "&". A symbol in C that acts as a bitwise
-    "and" operator. Only bits set in both values will be returned. For example,
-    "11 & 6" compares the binary values '1011' to '0110'. Only the bit in the
-    2's place is set, so the result is 2 ('0010'). See also: "bitar"
-  * API: Application Programming Interface. TBD
-  * viðfang: A value sent to a function.
-  * arrow: "->". A symbol in C that references an element within a pointer to a
+&
+    See "'og' merki"
+
+*
+    See "star"
+
+->
+    See "arrow"
+
+.
+    See "punktur"
+
+`
+    See "grave"
+
+alfa
+    See "RGBA"
+
+API
+    Application Programming Interface. Definition not yet presented.
+
+arrow
+    "->". A symbol in C that references an element within a pointer to a
     struct.
-  * backquote: See "grave"
-  * bakslag: See "grave"
-  * bitar: "Binary digit." Bits are the basic storage unit in a computer's
-    memory, disk, networking, etc. They represent either 0 or 1. (Compared to a
-    decimal digit, which can be anything between 0 and 9.) Just as a series of
-    decimal digits can represent a larger number (e.g., "1" and "5" is fifteen
-    (15)), so can bits (e.g., "1" and "0", is two). In decimal, we go from
-    right to left: ones place, tens place, hundreds place, thousands place,
-    etc. In binary, it is: ones place, twos place, fours place, eights place,
-    etc. See also: "bæti"
-  * blátt: See "RGBA"
-  * boole gildið 'eða': A mathematical operation that results in a true value
-    if either operand is true. ("1 | 0", "0 | 1" and "1 | 1" all result in "1".
-    "0 | 0" results in "0".)
-  * |: See "boole gildið 'eða'"
-  * .: See "punktur"
-  * `: See "grave"
-  * *: See "star"
-  * bæti: A unit of memory made up of 8 bits. As a signed value, it can
-    represent -128 through 127. As an unsigned value, it can represent 0
-    through 255. As a series of bits, for example, the byte "00001100"
-    represents the decimal value 12.
-  * svörun: TBD
-  * C enumeration: A construct in C that allows you to label numeric values
-    (usually starting at 0 and incrementing by one). (e.g., "enum { ONE, TWO,
-    THREE };"
-  * C function: TBD
-  * C function prototype: TBD
-  * C header file: TBD
-  * rás: TBD
-  * smellur: The action of pressing a button on a mouse.
-  * hnit: A set of numbers corresponding to a physical position; for example,
-    in a two-dimensional (2D) image, "X" and "Y" coordinates specify the
-    position across (left-to-right) and down the image, respectively. In SDL,
-    the coordinates (0,0) is the top-leftmost pixel of a surface.
-  * C pointer: A variable that contains the location of a piece of memory;
-    usually used to 'point' to another variable. Since C functions can only
-    return one value as a result, pointers are often sent to functions to allow
-    the function to change the values of multiple variables. (For example, Tux
-    Paint's "rgbtohsv()" and "hsvtorgb()".)
-  * C structure: A construct in C that allows you to declare a new variable
-    'type' which may contain other types within. For example, SDL's "SDL_Rect"
-    contains four integer values, the coordinates of the rectangle (X,Y), and
-    its dimensions (width and height).
-  * #define: A C statement that defines a substitution that can occur later in
-    the code. Generally used for constant values (e.g., "#define RADIUS 16";
-    all instances of "RADIUS" will be replaced with "16"), but can also be used
-    to create macros. Typically placed within C header files.
-  * stærðir: The size of an object, in terms of its width (left to right) and
-    height (top to bottom).
-  * .dll: See "Shared Object"
-  * punktur: ".". A symbol in C that references an element within a struct.
-  * draga: The action of moving a mouse while the button remains held.
-  * element: A variable stored within a C structure. (Example: "w" and "h"
-    elements of SDL_Surface store the surface's width and height,
-    respectively.)
-  * enum: See "C enumeration"
-  * float: See "fleytitala"
-  * fleytitala: TBD
-  * format: An SDL_Surface element (a pointer to an SDL_PixelFormat structure)
-    that contains information about a surface; for example, the number of bits
-    used to represent each pixel). See also the "SDL_PixelFormat(3)" man page)
-  * free(): A C function that frees (deallocates) memory allocated by other C
-    functions (such as "strdup()").
-  * function: See "C function"
-  * gcc: The GNU C compiler, a portable Open Source compiler. See also the "gcc
-    (1)" man page)
-  * GIMP: An Open Source image manipulation and paint program.
-  * GNU C Compiler: See "gcc"
-  * grave: The "`" character; used by the BASH shell to use the output of a
-    command as the command-line arguments to another.
-  * grænt: See "RGBA"
-  * ->: See "arrow"
-  * .h: See "C header file"
-  * haus: See "C header file"
-  * header file: See "C header file"
-  * HSV: Hue, Saturation and Value. TBD
-  * litblær: See "HSV"
-  * IMG_Load(): An SDL_image function that loads an image file (e.g., a PNG)
-    and returns it as an "SDL_Surface *".
-  * #include: A C statement that asks the compiler to read the contents of
-    another file (usually a header file).
-  * int: See "integer"
-  * integer: TBD
-  * libSDL: See "Simple DirectMedia Layer"
-  * línulegt: TBD
-  * fjölvi: A C construct that looks similar to a C function, but is simply a #
-    define that is expanded 'inline'. For example, if you declared the macro "#
-    define ADD(A,B) ((A)+(B))", and then used it with "c = ADD(1,2);", that
-    line of code would literally expand to "c = ((1) + (2));", or more simply,
-    "c = 1 + 2;".
-  * magic_api: A C structure that is passed along to a plugin's functions that
-    exposes data and functions within the running copy of Tux Paint.
-  * make: A utility that automatically determines which pieces of a larger
-    program need to be recompiled, and issues the commands to recompile them.
+
+backquote / bakslag
+    See "grave"
+
+BASH
+    The "Bourne Again Shell", a Unix shell and command language.
+
+bitar
+    "Binary digit." Bits are the basic storage unit in a computer's memory,
+    disk, networking, etc. They represent either 0 or 1. (Compared to a decimal
+    digit, which can be anything between 0 and 9.) Just as a series of decimal
+    digits can represent a larger number (e.g., "1" and "5" is fifteen (15)),
+    so can bits (e.g., "1" and "0", is two). In decimal, we go from right to
+    left: ones place, tens place, hundreds place, thousands place, etc. In
+    binary, it is: ones place, twos place, fours place, eights place, etc.
+    See also: "bæti"
+
+blátt
+    See "RGBA"
+
+boole gildið 'eða'
+    A mathematical operation that results in a true value if either operand is
+    true. ("1 | 0", "0 | 1" and "1 | 1" all result in "1". "0 | 0" results in
+    "0".)
+    See also: "bitar"
+
+bæti
+    A unit of memory made up of 8 bits. As a signed value, it can represent
+    -128 through 127. As an unsigned value, it can represent 0 through 255. As
+    a series of bits, for example, the byte "00001100" represents the decimal
+    value 12.
+    See also: "bitar"
+
+C enumeration
+    A construct in C that allows you to label numeric values (usually starting
+    at 0 and incrementing by one). (e.g., "enum { ONE, TWO, THREE };"
+
+C function / C function prototype / C header file
+    Definition not yet presented.
+    See also: "C function prototype"
+
+C pointer
+    A variable that contains the location of a piece of memory; usually used to
+    'point' to another variable. Since C functions can only return one value as
+    a result, pointers are often sent to functions to allow the function to
+    change the values of multiple variables. (For example, Tux Paint's
+    "rgbtohsv()" and "hsvtorgb()".)
+
+C structure
+    A construct in C that allows you to declare a new variable 'type' which may
+    contain other types within. For example, SDL's "SDL_Rect" contains four
+    integer values, the coordinates of the rectangle (X,Y), and its dimensions
+    (width and height).
+
+colorspace
+    Definition not yet presented.
+    See also:
+      + RGBA
+      + HSV
+
+
+#define
+    A C statement that defines a substitution that can occur later in the code.
+    Generally used for constant values (e.g., "#define RADIUS 16"; all
+    instances of "RADIUS" will be replaced with "16"), but can also be used to
+    create macros. Typically placed within C header files.
+
+.dll
+    See "Shared Object"
+
+draga
+    The action of moving a mouse while the button remains held, or moving a
+    finger or stylus across a screen or tablet, without removing it.
+    See also:
+      + smellur
+      + sleppa
+
+
+element
+    A variable stored within a C structure. (Example: "w" and "h" elements of
+    SDL_Surface store the surface's width and height, respectively.)
+    See also:
+      + C structure
+      + punktur
+      + arrow
+
+
+enum
+    See "C enumeration"
+
+fjölvi
+    A C construct that looks similar to a C function, but is simply a #define
+    that is expanded 'inline'. For example, if you declared the macro "#define
+    ADD(A,B) ((A)+(B))", and then used it with "c = ADD(1,2);", that line of
+    code would literally expand to "c = ((1) + (2));", or more simply, "c = 1 +
+    2;".
+
+fleytitala
+    Definition not yet presented.
+    See also: "integer"
+
+float
+    See "fleytitala"
+
+format
+    An SDL_Surface element (a pointer to an SDL_PixelFormat structure) that
+    contains information about a surface; for example, the number of bits used
+    to represent each pixel).
+    Refer to the "SDL_PixelFormat(3)" man page.
+
+free()
+    A C function that frees (deallocates) memory allocated by other C functions
+    (such as "strdup()").
+    Refer to the "malloc(3)" man page.
+
+frumgerð
+    See "C function prototype"
+
+function
+    See "C function"
+
+gcc
+    See "GNU C Compiler"
+
+gildi
+    See "HSV"
+
+GIMP
+    GNU Image Manipulation Program, an Open Source image manipulation and paint
+    program.
+    See also: "Krita"
+
+GNU C Compiler
+    The GNU C compiler, a portable Open Source package for compiling and
+    linking programs written in the C programming language.
+    Refer to the "gcc(1)" man page.
+
+grave
+    The "`" character; used by the BASH shell to use the output of a command as
+    the command-line arguments to another.
+
+grænt
+    See "RGBA"
+
+.h / haus / header file
+    See "C header file"
+
+hnit
+    A set of numbers corresponding to a physical position; for example, in a
+    two-dimensional (2D) image, "X" and "Y" coordinates specify the position
+    across (left-to-right) and down the image, respectively. In SDL, the
+    coordinates (0,0) is the top-leftmost pixel of a surface.
+
+HSV
+    Hue, Saturation and Value.Definition not yet presented.
+    See also:
+      + RGBA
+      + colorspace
+
+
+IMG_Load()
+    An SDL_image function that loads an image file (e.g., a PNG) and returns it
+    as an "SDL_Surface *".
+
+#include
+    A C statement that asks the compiler to read the contents of another file
+    (usually a header file).
+
+int
+    See "integer"
+
+integer
+    Definition not yet presented.
+    See also: "fleytitala"
+
+Krita
+    An Open Source image manipulation and paint program.
+    See also: "GIMP"
+
+libSDL
+    See "Simple DirectMedia Layer"
+
+litblær
+    See "HSV"
+
+línulegt
+    Definition not yet presented.
+
+Magic tool
+    One of a number of effects or drawing tools in Tux Paint, made available
+    via the "Magic" tool button.
+
+magic_api
+    A C structure that is passed along to a plugin's functions that exposes
+    data and functions within the running copy of Tux Paint.
+
+make
+    A utility that automatically determines which pieces of a larger program
+    need to be recompiled, and issues the commands to recompile them.
     See also: "Makefile"
-  * Makefile: A text file used by the "make" utility; it describes the
-    relationships among files in your program, and the commands for updating
-    each file. (For example, to compile a human-readable source-code file into
-    a computer-readable executable program file.)
-  * Magic tool: One of a number of effects or drawing tools in Tux Paint, made
-    available via the "Magic" tool button.
-  * Mix_Chunk *: (A pointer to) a C structure defined by SDL_mixer that
-    contains a sound.
-  * Mix_FreeChunk(): An SDL_mixer function that frees (deallocates) memory
-    allocated for an SDL_mixer sound 'chunk' ("Mix_Chunk *").
-  * Mix_LoadWAV(): An SDL_mixer function that loads a sound file (WAV, Ogg
-    Vorbis, etc.) and returns it as a "Mix_Chunk *".
-  * namespace: TBD
-  * .ogg: See "Ogg Vorbis"
-  * Ogg Vorbis: See also: "WAV"
-  * Viðbót: TBD
-  * .png: Portable Network Graphics. An extensible file format for the
-    lossless, portable, well-compressed storage of raster images. It's the file
-    format Tux Paint uses to save images, and for its brushes and stamps. It's
-    an easy way to store 32bpp RGBA images (24bpp true color with full 8bpp
-    alpha transparency), excellent for use in graphics programs like Tux Paint.
-    See also the "png(5)" man page)
-  * pointer: See "C pointer"
-  * frumgerð: See "C function prototype"
-  * rautt: See "RGBA"
-  * sleppa: The action of releasing a button on a mouse.
-  * RGBA: "Red, Green, Blue, Alpha." TBD
-  * RGB: See "RGBA"
-  * saturation: See "HSV"
-  * SDL: See "Simple DirectMedia Layer"
-  * SDL_FreeSurface(): An libSDL function that frees (deallocates) memory
-    allocated for an SDL surface ("SDL_Surface *"). See also the
-    "SDL_FreeSurface(3)" man page)
-  * SDL_GetRGB(): A libSDL function that, given a Uint32 pixel value (e.g., one
-    returned from the Tux Paint's Magic tool API helper function "getpixel()"),
-    the format of the surface the pixel was taken from, and pointers to three
-    Uint8 variables, will place the Red, Green and Blue (RGB) values of the
-    pixel into the three Uint8 variables. (Example: "SDL_GetRGB(getpixel(surf,
-    x, y), surf->format, &r, &g, &b);".) See also the "SDL_GetRGB(3)" man page)
-  * SDL_MapRGB(): A libSDL function that, given the format of a surface and
-    Uint8 values representing Red, Green and Blue values for a pixel, returns a
-    Uint32 pixel value that can be placed in the surface (e.g., using Tux
-    Paint's Magic tool API helper function "putpixel()"). (Example: "putpixel
-    (surf, x, y, SDL_MapRGB(surf->format, r, g, b));".) See also the
-    "SDL_MapRGB(3)" man page)
-  * SDL_image: A library on top of libSDL that can load various kinds of image
-    files (e.g., PNG) and return them as an "SDL_Surface *".
-  * SDL_mixer: A library on top of libSDL that can load various kinds of sound
-    files (WAV, Ogg Vorbis, etc.) and play back multiple sounds at once (mix
-    them).
-  * SDL_Rect: A C structure defined by libSDL that represents a rectangular
-    area. It contains elements representing the coordinates of the top left
-    corner of the rectange (x,y) and the dimensions of the rectangle (w,h). See
-    also the "SDL_Rect(3)" man page)
-  * SDL_Surface *: (A pointer to) a C structure defined by libSDL that contains
-    a drawing surface. See also the "SDL_Surface(3)" man page)
-  * Shared Object: A piece of code that's compiled separately from the main
-    application, and loaded dynamically, at runtime.
-  * Simple DirectMedia Layer: A programming library that allows programs
-    portable low level access to a video framebuffer, audio output, mouse, and
-    keyboard. (See also: http://www.libsdl.org/)
-  * snprintf(): A C function, related to "printf()", which takes a 'format'
-    string and one or more additional arguments, and puts them together.
-    "snprintf()" takes the resulting output and stores it into a string, making
-    sure not to go beyond the string's buffer size (which must also be
-    supplied). For example, assume a string "char str[20];" has been declared;
-    "snprintf(str, 20, "Name: %s, Age: %d", "Bill", "32");" will store "Name:
-    Bill, Age: 32" into 'str'. See also the "snprintf(3)" man page)
-  * .so: See "Shared Object"
-  * sRBG: See "RGBA"
-  * star: "*". A symbol in C that, when used in the declaration of variables
-    (e.g., arguments to a function), denotes that the variable is a pointer.
-    (For example, "int * p;" means that "p" is a pointer to an integer.) When
-    used next to a pointer, it 'dereferences' the variable. (For example, later
-    "*p = 50;" assigns the value of 50 to the memory that "p" points to; it
-    does not change the value of "p", which is still a pointer to an integer.
-    In essence, it changed the integer that's being pointed to.) See also:
-    "'og' merki"
-  * strdup(): A C function that allocates enough memory to store a copy of a
-    string, copies the string to it, and returns a "char *" pointer to the new
-    copy. See also the "strdup(3)" man page)
-  * struct: See "C structure"
-  * tp_magic_api.h: A header file that defines Tux Paint's Magic tool API.
-    Plugins must '#include' it.
-  * tp-magic-config: A command-line program that provides information about the
-    installed version of Tux Paint to plugin developers (such as what C
-    compiler flags they should compile with, and where plugin shared objects
-    and data files should be installed). See also the "tp-magic-config(3)" man
-    page)
-  * Uint32: A 32-bit, unsigned integer (defined by libSDL). In other words,
-    four bytes that can represent 0 through 4294967295. (Typically used to hold
-    enough information to store three or four bytes representing a pixel's
-    color; i.e., RBGA value).
-  * Uint8: An 8-bit, unsigned integer (defined by libSDL). In other words, a
-    byte that can represent 0 through 255.
-  * óundirritað: In C, a variable that can store a numeric value can be
-    declared as either "signed" (the default), or "unsigned". In the former
-    case, one bit of the value is used to denote the sign of the value (either
-    positive or negative). In the latter case, the value can only be positive,
-    but benefits from one extra bit of storage for the number. A signed byte (8
-    bits), for example, can represent any number between -128 and 127. An
-    unsigned byte can go up to 255, but it cannot go below 0. For the purposes
-    of graphics in SDL, unsigned values should be used for RGB values, since
-    each channel (red, green and blue) may be between 0 (off) and 255
-    (brightest).
-  * gildi: See "HSV"
-  * variable: A construct in computer programming that contains a value which
-    can be referenced again later by referring to the variable's name, and
-    typically changed later. For example, a variable to hold someone's age
-    could be declared as an integer: "int a;". It can be examined later: "if (a
-    >= 18) { /* they are an adult */ } else { /* they are not an adult */ }".
-  * .wav: See also: "Ogg Vorbis"
-  * (w,h): See "Stærðir"
-  * (x,y): See "Hnit"
+
+Makefile
+    A text file used by the "make" utility; it describes the relationships
+    among files in your program, and the commands for updating each file. (For
+    example, to compile a human-readable source-code file into a
+    computer-readable executable program file.)
+
+Mix_Chunk *
+    (A pointer to) a C structure defined by SDL_mixer that contains a sound.
+
+Mix_FreeChunk()
+    An SDL_mixer function that frees (deallocates) memory allocated for an
+    SDL_mixer sound 'chunk' ("Mix_Chunk *").
+
+Mix_LoadWAV()
+    An SDL_mixer function that loads a sound file (WAV, Ogg Vorbis, etc.) and
+    returns it as a "Mix_Chunk *".
+
+namespace
+    Definition not yet presented.
+
+'og' merki (bendlar)
+    "&". A symbol in C that allows you to refer to the memory address of a
+    variable; that is, a pointer. (For example, consider "int i;". Later, "&i"
+    refers to the memory where "i" is stored, not the value of "i" itself; it
+    is a 'pointer to "i"'.)
+    See also: "star"
+
+'og' merki (bitwise operator)
+    "&". A symbol in C that acts as a bitwise "and" operator. Only bits set in
+    both values will be returned. For example, "11 & 6" compares the binary
+    values '1011' to '0110'. Only the bit in the 2's place is set, so the
+    result is 2 ('0010').
+    See also: "bitar"
+
+.ogg
+    See "Ogg Vorbis"
+
+Ogg Vorbis / plugin
+    Definition not yet presented.
+    See also: "WAVE"
+
+.png
+    See "Portable Network Graphics"
+
+pointer
+    See "C pointer"
+
+Portable Network Graphics
+    Portable Network Graphics. An extensible file format for the lossless,
+    portable, well-compressed storage of raster images. It's the file format
+    Tux Paint uses to save images, and for its brushes and stamps. It's an easy
+    way to store 32bpp RGBA images (24bpp true color with full 8bpp alpha
+    transparency), excellent for use in graphics programs like Tux Paint.
+    Refer to the "png(5)" man page.
+    See also: "Scalable Vector Graphic"
+
+punktur
+    ".". A symbol in C that references an element within a struct.
+    See also:
+      + C structure
+      + arrow
+
+
+rautt / RGB
+    See "RGBA"
+
+RGBA
+    Red, Green, Blue, and Alpha.Definition not yet presented.
+    See also:
+      + HSV
+      + colorspace
+
+
+rás
+    Definition not yet presented.
+
+saturation
+    See "HSV"
+
+SDL
+    See "Simple DirectMedia Layer"
+
+SDL_FreeSurface()
+    A libSDL function that frees (deallocates) memory allocated for an SDL
+    surface ("SDL_Surface *").
+
+SDL_GetRGB()
+    A libSDL function that, given a Uint32 pixel value (e.g., one returned from
+    the Tux Paint's Magic tool API helper function "getpixel()"), the format of
+    the surface the pixel was taken from, and pointers to three Uint8
+    variables, will place the Red, Green and Blue (RGB) values of the pixel
+    into the three Uint8 variables. (Example: "SDL_GetRGB(getpixel(surf, x, y),
+    surf->format, &r, &g, &b);".)
+    Refer to the "SDL_GetRGB(3)" man page.
+    See also:
+      + SDL_MapRGB()
+      + RGBA
+
+
+SDL_image
+    A library on top of libSDL that can load various kinds of image files
+    (e.g., PNG) and return them as an "SDL_Surface *".
+
+SDL_MapRGB()
+    A libSDL function that, given the format of a surface and Uint8 values
+    representing Red, Green and Blue values for a pixel, returns a Uint32 pixel
+    value that can be placed in the surface (e.g., using Tux Paint's Magic tool
+    API helper function "putpixel()"). (Example: "putpixel(surf, x, y,
+    SDL_MapRGB(surf->format, r, g, b));".)
+    Refer to the "SDL_MapRGB(3)" man page.
+    See also:
+      + SDL_GetRGB()
+      + RGBA
+
+
+SDL_mixer
+    A library on top of libSDL that can load various kinds of sound files (WAV,
+    Ogg Vorbis, etc.) and play back multiple sounds at once (mix them).
+
+SDL_Rect
+    A C structure defined by libSDL that represents a rectangular area. It
+    contains elements representing the coordinates of the top left corner of
+    the rectange (x,y) and the dimensions of the rectangle (w,h).
+    Refer to the "SDL_Rect(3)" man page.
+
+SDL_Surface *
+    (A pointer to) a C structure defined by libSDL that contains a drawing
+    surface.
+    Refer to the "SDL_Surface(3)" man page.
+
+shared object
+    A piece of code that's compiled separately from the main application, and
+    loaded dynamically, at runtime.
+
+shell
+    See "BASH"
+
+Simple DirectMedia Layer
+    The Simple DirectMedia Layer (libSDL) is a programming library that
+    provides portable low-level access to a video framebuffer, audio output,
+    and mouse and keyboard input. (See: http://www.libsdl.org/)
+
+sleppa
+    The action of releasing a mouse button, or removing a finger or stylus from
+    a screen or tablet.
+    See also:
+      + smellur
+      + draga
+
+
+smellur
+    The action of pressing a button on a mouse, tapping a touchscreen, or
+    pressing a stylus to a tablet.
+    See also:
+      + draga
+      + sleppa
+
+
+snprintf()
+    A C function, related to "printf()", which takes a 'format' string and one
+    or more additional arguments, and puts them together. "snprintf()" takes
+    the resulting output and stores it into a string, making sure not to go
+    beyond the string's buffer size (which must also be supplied). For example,
+    assume a string "char str[20];" has been declared; "snprintf(str, 20,
+    "Name: %s, Age: %d", "Bill", 32);" will store "Name: Bill, Age: 32" into
+    'str'.
+    Refer to the "sprintf(3)" man page.
+
+.so
+    See "shared object"
+
+sRGB
+    See "RGBA"
+
+star
+    "*". A symbol in C that, when used in the declaration of variables (e.g.,
+    arguments to a function), denotes that the variable is a pointer. (For
+    example, "int * p;" means that "p" is a pointer to an integer.) When used
+    next to a pointer, it 'dereferences' the variable. (For example, later "*p
+    = 50;" assigns the value of 50 to the memory that "p" points to; it does
+    not change the value of "p", which is still a pointer to an integer. In
+    essence, it changed the integer that's being pointed to.)
+    See also: "'og' merki"
+
+strdup()
+    A C function that allocates enough memory to store a copy of a string,
+    copies the string to it, and returns a "char *" pointer to the new copy.
+    Refer to the "strdup(3)" man page.
+
+struct
+    See "C structure"
+
+stærðir
+    The size of an object, in terms of its width (left to right) and height
+    (top to bottom).
+
+svörun
+    Definition not yet presented.
+
+tap
+    See "smellur"
+
+tp-magic-config
+    A command-line program that provides information about the installed
+    version of Tux Paint to plugin developers (such as what C compiler flags
+    they should compile with, and where plugin shared objects and data files
+    should be installed).
+    Refer to the "tp-magic-config(3)" man page.
+
+tp_magic_api.h
+    A header file that defines Tux Paint's Magic tool API. Plugins must '#
+    include' it.
+
+Uint32
+    A 32-bit, unsigned integer (defined by libSDL). In other words, four bytes
+    that can represent 0 through 4,294,967,295. (Typically used to hold enough
+    information to store three or four bytes representing a pixel's color;
+    i.e., RBGA value).
+    See also:
+      + Uint8
+      + integer
+      + unsigned
+
+
+Uint8
+    An 8-bit, unsigned integer (defined by libSDL). In other words, a byte that
+    can represent 0 through 255.
+    See also:
+      + Uint32
+      + integer
+      + unsigned
+
+
+variable
+    A construct in computer programming that contains a value which can be
+    referenced again later by referring to the variable's name, and typically
+    changed later. For example, a variable to hold someone's age could be
+    declared as an integer: "int age;". It can be examined later — e.g., "if
+    (age >= 18) { /* they are an adult */ } else { /* they are not an adult */
+    }" — as well as modified later — e.g., age = 32; /* set age to 32 */
+
+viðfang
+    A value sent to a function.
+
+(w,h)
+    See "stærðir"
+
+.wav
+    See "WAVE"
+
+WAVE
+    Waveform Audio File Format (WAVE, or WAV). Definition not yet presented.
+    See also: "Ogg Vorbis"
+
+(x,y)
+    See "hnit"
+
+|
+    See "boole gildið 'eða'"
+
+óundirritað
+    In C, a variable that can store a numeric value can be declared as either
+    "signed" (the default), or "unsigned". In the former case, one bit of the
+    value is used to denote the sign of the value (either positive or
+    negative). In the latter case, the value can only be positive, but benefits
+    from one extra bit of storage for the number. A signed byte (8 bits), for
+    example, can represent any number between -128 and 127. An unsigned byte
+    can go up to 255, but it cannot go below 0. For the purposes of graphics in
+    SDL, unsigned values should be used for RGB values, since each channel
+    (red, green and blue) may be between 0 (off) and 255 (brightest).
+    See also:
+      + Uint8
+      + Uint32
+      + integer
+
+
 

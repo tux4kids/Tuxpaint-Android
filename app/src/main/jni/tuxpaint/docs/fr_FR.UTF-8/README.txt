@@ -6,7 +6,7 @@
        Copyright © 2002-2024 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               janvier 13, 2024
+                               janvier 29, 2024
 
 +-------------------------------------------------------+
 |                  Table des matières                   |
@@ -136,15 +136,17 @@ Epitrochoid and Hypotrochoid Magic tools
 
 Réglage du nouveau "complexité" (complexity)
 
-Un nouveau réglage qui permet à certains outils Magie de se comporter
+    Un nouveau réglage qui permet à certains outils Magie de se comporter
     différemment (ou bien d'être supprimés) en se basant sur le niveau
     d'expertise de l'utilisateur. Les nouveaux outils "Perspective N-point" et
     "Clone" sont affectés via ce réglage.
+
 Magic tools reorganized
 
-Each group of Magic tools has been reorganized to keep related tools next to
-    each other, rather than being sorted alphabetically by their (localized)
+    Each group of Magic tools has been reorganized to keep related tools next
+    to each other, rather than being sorted alphabetically by their (localized)
     names.
+
 Les détails de la police sont affichés lors du choix
     Le nom et la taille de la police choisie sont montrés quand on utilise les
     outils Texte et Étiquette.

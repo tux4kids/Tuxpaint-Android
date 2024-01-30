@@ -7,7 +7,7 @@
    by Bill Kendrick <bill@newbreedsoftware.com>
    with help from Pere Pujal Carabantes
 
-   January 6, 2024 - January 17, 2024
+   January 6, 2024 - January 26, 2024
 */
 
 #include <stdio.h>
@@ -336,6 +336,7 @@ void trochoids_work(magic_api * api, int which,
   int R, r, d, LCM;
   int px, py, px2, py2;
   float a, r_ratio, size;
+  int xx, yy;
 
   which = which_to_tool[which];
 
@@ -486,8 +487,8 @@ void trochoids_work(magic_api * api, int which,
 
     api->line((void *)api, which, canvas, snapshot, px, py, px2, py2, 2, trochoids_line_callback);
 
-    for (int yy = -2; yy <= 2; yy++) {
-      for (int xx = -2; xx <= 2; xx++) {
+    for (yy = -2; yy <= 2; yy++) {
+      for (xx = -2; xx <= 2; xx++) {
         api->putpixel(canvas, px + xx, py + yy, trochoids_color);
       }
     }
@@ -507,15 +508,6 @@ void trochoids_release(magic_api * api, int which,
      otherwise it will seem like the sound only happens intermittently) */
   api->stopsound();
 
-  /* If they clicked & released with no drag,
-     ignore the (x,y) we received; we want the
-     'default' offset to get a reasonably pleasant
-     shape -- for users who tried clicking w/o dragging */
-  if (dragged == 0) {
-    x += (canvas->w / 20);
-    y += (canvas->h / 20);
-  }
-
   /* Pick which sound to play & play it */
   tool = which_to_tool[which];
   if (tool == TOOL_EPITROCHOID_SIZES ||
@@ -528,6 +520,23 @@ void trochoids_release(magic_api * api, int which,
   }
   trochoids_sound(api, snd_idx, x, y);
 
+
+  /* If they clicked & released with no drag,
+     ignore the (x,y) we received; we want the
+     'default' offset to get a reasonably pleasant
+     shape -- for users who tried clicking w/o dragging */
+  if (dragged == 0) {
+    if (tool == TOOL_EPITROCHOID_SIZES ||
+        tool == TOOL_EPITROCHOID_NOSIZES_1 ||
+        tool == TOOL_EPITROCHOID_NOSIZES_2 ||
+        tool == TOOL_EPITROCHOID_NOSIZES_3) {
+      x = trochoids_x + 50;
+      y = trochoids_y + 20;
+    } else {
+      x = trochoids_x + 70;
+      y = trochoids_y + 30;
+    }
+  }
 
   /* Draw it (no guides, this time!) */
   trochoids_work(api, which, canvas, snapshot, x, y, update_rect, 0);

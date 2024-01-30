@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Dokumentim Ndryshoresh të Mjedisit Tux Paint    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+    <center>
+      <h1>
+        <img src="../../html/images/tuxpaint-title.png"
+            width="205"
+            height="210"
+            alt="Tux Paint"><br>
+        version 0.9.32<br/>
+        Dokumentim Ndryshoresh të Mjedisit      </h1>
+
+      <p>
+        Të drejta kopjimi &copy; 2021-2023 nga kontribues të ndryshëm; shihni <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+      </p>
+
+      <p>
+         5 maj 2023      </p>
+    </center>
+
+    <hr>
+
+    <p>
+      Tux Paint-i njeh një numër ndryshoresh mjedisi, qoftë drejtpërsëdrejti, qoftë tërthorazi nga bibliotekat që përdor.    </p>
+
+    <h2>
+      Ndryshore mjedisi të lidhura me depozitim    </h2>
+    <dl>
+      <dt>
+        <code>HOME</code>
+      </dt>
+
+      <dd>
+        <p>
+          Përcakton “drejtorinë shtëpi” të përdoruesit, që përdoret për të vendosur kartela dhe drejtori të tjera të shumta. Në disa raste përdoret si pjesë e një vendndodhje rrugëdalje, kur s’janë ujdisur ndryshore të tjera mjedisi (gjetkë në këtë dokumentim). Ndonjëherë, vendndodhja për t’u përdorur mund të anashkalohet nga mundësi të dhëna në rreshtin e urdhrave, ose përmes kartelës së formësimit të Tux Paint-it. Për hollësi, shihni “MUNDËSITË”.        </p>
+
+        <p>
+          Në pak shembuj se ku përdoret “<code>$HOME</code>” përfshihen:        </p>
+
+        <ul>
+          <li>Vendndodhja e kartelës së formësimit të Tux Paint-it</li>
+          <li>Baza se ku ruan dhe ngarkon Tux Paint-i vizatimet e përdoruesve</li>
+          <li>Vendndodhja e një koleksioni privat të përdoruesit të kartelave të të dhënave &mdash; stampave, penelave, etj. &mdash; (kundrejt atyre që mund të përdoren nga krejt sistemi)</li>
+        </ul>
+      </dd>
+
+      <dt>
+        <code>XDG_CONFIG_HOME</code>
+      </dt>
+
+      <dd>
+        <p>
+          Në Linux dhe platforma të tjera ku përdoren standardet e Grupit Desktopi X, vendndodhja e kartelave të formësimeve të përdoruesit. Hollësisht, ku të gjendet “<code>user-dirs.dirs</code>”, ku “<code>XDG_PICTURES_DIR</code>” duhet përcaktuar. Përdoret për eksportim vizatimesh dhe GIF-esh të animuar. Përgjithësisht, caktohet diçka e ngjashme me “<code>$HOME/Pictures/</code>”. Në mos u përcaktoftë, Tux Paint kontrollon te drejtoria “<code>$HOME/.config/</code>”. Nëse s’gjendet dot formësimi, Tux Paint-i thjesht eksporton vizatime dhe GIF-e te “<code>$HOME</code>”.        </p>
+      </dd>
+
+      <dt>
+        <code>XDG_DATA_HOME</code>
+      </dt>
+
+      <dd>
+        <p>
+          Në Linux dhe platforma të tjera ku përdoren standardet e Grupit Desktopi X, vendndodhja e kartelave të formësimeve të përdoruesit. Hollësisht, ku të gjendet drejtoria “<code>Trash</code>”. Përdoret kur fshihen figura nga dialogu “Hap” i Tux Paint-it. Në mos u përcaktoftë, përdoret vendndodhja “<code>$HOME/.local/share/Trash/</code>”, në pastë. Nëse jo, figurat thjesht fshihen, në vend se të kalohe gjetiu.        </p>
+      </dd>
+
+      <dt>
+        <code>TEMP</code>
+      </dt>
+
+      <dd>
+        <p>
+          Përcakton vendndodhjen ku mund të krijohen kartela të përkohshme. E përdorur nga Tux Paint-i vetëm në OSe Microsoft Windows. Përdor “<code>userdata</code>”, nëse s’është ujdisur.        </p>
+    </dl>
+
+
+    <h2>
+      Ndryshore mjedisi të lidhura me gjuhët    </h2>
+    <dl>
+      <dt>
+        <code>LANG</code>
+      </dt>
+      <dt>
+        <code>LANGUAGE</code>
+      </dt>
+      <dt>
+        <code>LC_ALL</code>
+      </dt>
+      <dt>
+        <code>LC_MESSAGES</code>
+      </dt>
+
+      <dd>
+        <p>
+          Specify the language Tux Paint should utilize in its user interface. Overridden by the "<code>--lang</code>" and "<code>--locale</code>" command-line options or their configuration file counterparts. The "<code>LANGUAGE</code>" environment variable is used, if set. If not, "<code>LC_ALL</code>" is used as a fallback. Then "<code>LC_MESSAGES</code>", and finally "<code>LANG</code>".        </p>
+      </dd>
+
+    </dl>
+
+    <h2>
+      Ndryshore mjedisi të lidhura me ekranin    </h2>
+
+    <p>
+      Sa vijon janë pak nga ndryshoret e mjedisit të mbuluara nga Simple DirectMedia Layer (libSDL) &mdash; të cilat Tux Paint-i i përdorr për të shfaqur elementë grafikë, për të luajtur tinguj dhe për të marrë sinjale për miun, tastierën dhe joystick-un &mdash; dhe që mund të jenë të dobishme për për përdorues të Tux Paint-it.
+    <dl>
+      <dt>
+        <code>SDL_VIDEO_ALLOW_SCREENSAVER</code>
+      </dt>
+      <dd>
+        <p>
+          Përcakton nëse Tux Paint-i duhet të lejojë xhirimin e një kursyesi ekrani. Mund të vihet '1' (true) nga vetëm Tux Paint-i, duke dhënë mundësinë “<code>--allowscreensaver</code>” në rresht urdhrash, ose te pjesa përkatëse e kartelës së formësimit.        </p>
+      </dd>
+      <dt>
+        <code>SDL_VIDEO_WINDOW_POS</code>
+      </dt>
+      <dd>
+        <p>
+          Kërkesa ku të vendoset dritarja e Tux Paint-it dhe mund të përdoret për të përcaktuar në cilin ekrani të vendoset një Tux Paint sa krejt ekrani, në një sistem me shumë monitorë. Nëse nuk është ujdisur, ose ujdisur si “<code>nopref</code>” (që do të thotë “pa parapëlqim”), vendos Simple DirectMedia Layer (libSDL). Mund të vihet sa një koordinatë <code>X,Y</code> (p.sh., <code>200,100</code>), ose “<code>center</code>” (që do të thotë “qendër”).        </p>
+      </dd>
+
+    </dl>
+
+  </body>
+</html>
+

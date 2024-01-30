@@ -6,7 +6,7 @@
         Copyright © 2002-2024 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                             13 de Xaneiro de 2024
+                             29 de Xaneiro de 2024
 
 +--------------------------------------------------------+
 |                         Índice                         |
@@ -132,15 +132,17 @@ Epitrochoid and Hypotrochoid Magic tools
 
 New "complexity" setting (complexity)
 
-A new setting that allows certain Magic tools to behave differently (or remove
-    their availability altogether) based on the expertise-level of the user.
-    The new "N-point Perspective" tools and "Clone" tool are affected by this
-    setting.
+    A new setting that allows certain Magic tools to behave differently (or
+    remove their availability altogether) based on the expertise-level of the
+    user. The new "N-point Perspective" tools and "Clone" tool are affected by
+    this setting.
+
 Magic tools reorganized
 
-Each group of Magic tools has been reorganized to keep related tools next to
-    each other, rather than being sorted alphabetically by their (localized)
+    Each group of Magic tools has been reorganized to keep related tools next
+    to each other, rather than being sorted alphabetically by their (localized)
     names.
+
 Font details shown when selected
     The name and size of the selected font are shown when using the Text and
     Label tools.

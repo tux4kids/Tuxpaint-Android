@@ -6,7 +6,7 @@
        Copyright © 2002-2024 by various contributors; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                 2024年1月13日
+                                 2024年1月29日
 
 +--------------------------------------------------+
 |                       目次                       |
@@ -97,50 +97,44 @@ Tux Paint は、オープンソースのプロジェクトで、GNUの一般公�
 
 D. Tux Paint バージョン 0.9.32 での変更点
 
-1-point Perspective (vanishing point) Magic tool
-    A pair of tools that allow you to set a vanishing point, and then draw
-    lines in 1-point perspective.
+「まほう」ツール：１てんとうし
+    消失点を設定し、１点透視図法で線を引くことができる２つのツール。
 
-2-point Perspective (vanishing point) Magic tool
-    A pair of tools that allow you to set two vanishing points, and then draw
-    lines in 2-point perspective.
+「まほう」ツール：２てんとうし
+    ２つの消失点を設定し、２点透視図法で線を引くことができる２つのツール。
 
-3-point Perspective (vanishing point) Magic tool
-    A pair of tools that allow you to set three vanishing points, and then draw
-    lines in 3-point perspective.
+「まほう」ツール：３てんとうし
+    ３つの消失点を設定し、３点透視図法で線を引くことができる２つのツール。
 
-Isometric Magic tool
-    A tool that draws lines in an isometric projection.
+「まほう」ツール：とうかく
+    等角投影図法で線をひくツール
 
-Dimetric Magic tool
-    A pair of tools that allow you to set an angle, and then draw lines in a
-    dimetric projection.
+「まほう」ツール：２とうかく
+    角度を設定し、二等角投影図法で線を引くことができる２つのツール。
 
-Trimetric Magic tool
-    A pair of tools that allow you to set two angles, and then draw lines in a
-    trimetric projection.
+「まほう」ツール：ふとうかく
+    角度を設定し、不等角投影図法で線を引くことができる２つのツール。
 
-Oblique Magic tool
-    A pair of tools that allow you to set an angles, and then draw lines in an
-    oblique projection.
+「まほう」ツール：しゃとうえい
+    角度を設定し、斜投影図法で線を引くことができる２つのツール。
 
-Epitrochoid and Hypotrochoid Magic tools
-    Tools that create centered trochoid curved patterns.
+「まほう」ツール：エピトロコイド・ハイポトロコイド
+    トロコイド曲線のパターンを描画するツール。
 
-New "complexity" setting (complexity)
+新たな設定項目 "難易度"（complexity）
 
-A new setting that allows certain Magic tools to behave differently (or remove
-    their availability altogether) based on the expertise-level of the user.
-    The new "N-point Perspective" tools and "Clone" tool are affected by this
-    setting.
-Magic tools reorganized
+    ユーザーのレベルに応じて特定の「まほう」ツールの動作を変更したり使用できな
+    くしたりする新しい設定項目。「透視図法」ツールと「クローン」ツールは、この
+    設定の影響を受けます。
 
-Each group of Magic tools has been reorganized to keep related tools next to
-    each other, rather than being sorted alphabetically by their (localized)
-    names.
-Font details shown when selected
-    The name and size of the selected font are shown when using the Text and
-    Label tools.
+「まほう」ツールの再整理
+
+    カテゴリごとの「まほう」ツールの並び順が、関連するツールが互いに隣になるよ
+    う、再整理されました。
+
+フォントの詳細表示
+    「もじ」ツールと「ラベル」ツールで、選択されたフォントのフォント名とサイズ
+    を表示するようになりました。
 
 
 全ての変更点については、CHANGES.txt をお読みください。
@@ -1248,27 +1242,27 @@ VII.Tux Paint プロジェクトの SNS アカウント
 
 Tux Paint は様々な SNS アカウントを利用し、最新情報や作品を投稿しています。
 
-  * Follow @tuxpaint.bsky.social on Bluesky
+  * Bluesky で @tuxpaint.bsky.social をフォローする
   * Facebook で Tux Paint のページに参加する
   * Instagram で @TuxPaintDevs をフォローする
   * Mastdon で @tuxpaint@floss.socal をフォローする
   * Reddit で u/TuxPaintDevs をフォローする
   * Threads で @TuxPaintDevs をフォローする
-  * Follow @TuxPaintDevs on TikTok
+  * TikTok で @TuxPaintDevs をフォローする
   * Tumblr で Tux Paint をフォローする
-  * Subscribe to @TuxPaintOfficial on YouTube
+  * YouTubeの @TuxPaintOfficial にチャンネル登録する
 
 VIII. 商標について
 
   * "Linux" は Linus Torvalds の登録商標です。
   * "Microsoft" および "Windows" は、Microsoft 社の登録商標です。
   * "Apple" および "macOS" は Apple 社の登録商標です。
-  * "Haiku" is a registered trademark of Haiku, Inc.
+  * "Haiku" は、Haiku 社の登録商標です。
   * "Facebook", "Instagram" および "Threads" は Meta Platforms 社の登録商標で
     す。
   * "Mastodon" は Mastodon gGmbH の登録商標です。
   * "Reddit" は、Reddit 社の登録商標です。
-  * "TIK TOK" is a trademark of Bytedance Ltd.
+  * "TIK TOK" は、Bytedance 社の登録商標です。
   * "Tumblr" は Tumblr 社の登録商標です。
-  * "YouTube" is a registered trademark of Alphabet, Inc.
+  * "YouTube" は Alphabet 社の登録商標です。
 

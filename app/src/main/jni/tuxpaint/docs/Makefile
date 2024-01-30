@@ -7,14 +7,7 @@
 # Bill Kendrick
 # bill@newbreedsoftware.com
 #
-# Sept. 4, 2005 - July 16, 2023
-
-# FIXME: Japanese does not wordwrap in many cases, leading to very long
-# lines in the TXT output.  Post-processing with `fmt` doesn't look like
-# it would help, because it doesn't know how to wrap Japanese, either.
-# -bjk 2023.05.02
-# HTML2TXT_OPTIONS:=-dump -codepage utf8 -width 80
-# HTML2TXT:=links $(HTML2TXT_OPTIONS)
+# Sept. 4, 2005 - January 26, 2024
 
 HTML2TXT_OPTIONS:=-dump -cols 80 -no-graph -o pseudo_inlines=f -o display_image=f -T text/html
 HTML2TXT:=./w3m.sh $(HTML2TXT_OPTIONS)
@@ -46,6 +39,9 @@ NL_TEXTFILES:=$(patsubst nl/html/%.html,nl/%.txt,$(NL_HTMLFILES))
 RU_HTMLFILES:=$(wildcard ru/html/*.html)
 RU_TEXTFILES:=$(patsubst ru/html/%.html,ru/%.txt,$(RU_HTMLFILES))
 
+SQ_HTMLFILES:=$(wildcard sq_AL.UTF-8/html/*.html)
+SQ_TEXTFILES:=$(patsubst sq_AL.UTF-8/html/%.html,sq_AL.UTF-8/%.txt,$(SQ_HTMLFILES))
+
 ZH_CN_HTMLFILES:=$(wildcard zh_cn/html/*.html)
 ZH_CN_TEXTFILES:=$(patsubst zh_cn/html/%.html,zh_cn/%.txt,$(ZH_CN_HTMLFILES))
 
@@ -63,6 +59,7 @@ all:	$(EN_TEXTFILES) \
 	$(JA_TEXTFILES) \
 	$(NL_TEXTFILES) \
 	$(RU_TEXTFILES) \
+	$(SQ_TEXTFILES) \
 	$(ZH_CN_TEXTFILES) \
 	$(ZH_TW_TEXTFILES)
 
@@ -78,6 +75,7 @@ clean:
 	$(JA_TEXTFILES) \
 	$(NL_TEXTFILES) \
 	$(RU_TEXTFILES) \
+	$(SQ_TEXTFILES) \
 	$(ZH_CN_TEXTFILES) \
 	$(ZH_TW_TEXTFILES)
 
@@ -106,6 +104,9 @@ $(NL_TEXTFILES): nl/%.txt: nl/html/%.html
 	$(HTML2TXT) $< > $@
 
 $(RU_TEXTFILES): ru/%.txt: ru/html/%.html
+	$(HTML2TXT) $< > $@
+
+$(SQ_TEXTFILES): sq_AL.UTF-8/%.txt: sq_AL.UTF-8/html/%.html
 	$(HTML2TXT) $< > $@
 
 $(ZH_CN_TEXTFILES): zh_cn/%.txt: zh_cn/html/%.html

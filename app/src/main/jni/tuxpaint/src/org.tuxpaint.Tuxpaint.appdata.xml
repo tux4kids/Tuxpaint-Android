@@ -297,6 +297,9 @@
     <p xml:lang="bg">Децата за предоставени с празно платно и разнообразие от инструменти за рисуване, които им помагат да използват въображението си.</p>
   </description>
   <developer_name>Bill Kendrick, et al.</developer_name>
+  <developer_name xml:lang="sq">Bill Kendrick, et al.</developer_name>
+  <developer_name xml:lang="ja">Bill Kendrick, et al.</developer_name>
+  <developer_name xml:lang="ca">Bill Kendrick i altres.</developer_name>
   <url type="homepage">https://tuxpaint.org/</url>
   <url type="bugtracker">https://sourceforge.net/p/tuxpaint/_list/tickets</url>
   <url type="faq">https://tuxpaint.org/docs/en/html/FAQ.html</url>
@@ -347,7 +350,7 @@
       <caption>The Stamp tool is like a set of rubber stamps or stickers</caption>
       <caption xml:lang="zh_CN">Stamp工具就像一套橡皮图章或贴纸</caption>
       <caption xml:lang="uk">Інструмент «Штамп» працює подібно до гумового штампа або наліпок</caption>
-      <caption xml:lang="sq">Mjeti Stampë është si një grup vulash gome, ose ngjitësish</caption>
+      <caption xml:lang="sq">Mjeti Stampë është si një grup stampash gome, ose ngjitësish</caption>
       <caption xml:lang="son">Tanpoŋ goyjinaa ti sanda kawsin tanpoŋ wala denjiri margari</caption>
       <caption xml:lang="sk">Nástroj Pečiatka je ako sada gumových pečiatok alebo nálepiek</caption>
       <caption xml:lang="ru">Инструмент «Штамп» работает как набор резиновых штампов или наклеек</caption>
@@ -364,36 +367,49 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="0.9.32" date="2024-01-16">
+    <release version="0.9.32" date="2024-01-28">
       <description>
         <p>New Magic tools: 1-, 2-, and 3-Point Perspective line-drawing tools (and corresponding vanishing point editors).</p>
+        <p xml:lang="sq">Mjete Magjike të reja: mjete vizatimi vijash në Perspektivë me 1, 2 dhe 3 Qendra Projeksioni (dhe përpunues qendrash përkatëse projeksioni).</p>
         <p xml:lang="ja">「まほう」ツールの追加: 透視図法による作図ツール（「１てんとうし」「２てんとうし」「３てんとうし」）と、それぞれの消失点を設定するためのツール</p>
+        <p xml:lang="ca">Noves eines màgiques: Eines per dibuxar perspectives d'un, dos i tres punts de fuga, i les corresponents per editar-ne els punts.</p>
         <p>New Magic tools: Isometric, Dimetric, Trimetric, and Oblique line-drawing tools (and corresponding angle editors).</p>
+        <p xml:lang="sq">Mjete të reja Magjike: mjete vizatimi vijash Izometrike, Dimetrike, Trimetrike dhe Me Pjerrësi (dhe përpunues përkatës këndesh).</p>
         <p xml:lang="ja">「まほう」ツールの追加: 各種投影法による作図ツール（「とうかく」「２とうかく」「ふとうかく」「しゃとうえい」）と、それぞれの基準角を設定するためのツール</p>
+        <p xml:lang="ca">Noves eines màgiques: Eines per fer dibuixos isomètrics, dimètrics, trimètrics i oblics, i les corresponents per editar-ne els angles.</p>
         <p>New Magic tools: Epitrochoid and Hypotrochoid generators.</p>
+        <p xml:lang="sq">Mjeti i ri Magjik: Prodhues vizatimesh Epitrohoide dhe Hipotrohoide.</p>
         <p xml:lang="ja">「まほう」ツールの追加: コロイド曲線描画ツール（「エピコロイド」「ハイポコロイド」）</p>
+        <p xml:lang="ca">Noves eines màgiques: Generadors d'epitrocoides i hipotrocoides.</p>
         <p>New configuration option, "complexity", which affects the behavior (or availability) of some Magic tools.</p>
         <p xml:lang="sq">Mundësi e re formësimi, “kompleksitet”, që prek sjelljen (ose pasjen) e disa mjeteve Magjike.</p>
         <p xml:lang="ja">新規オプションとして「難易度」の設定を追加。設定したレベルに応じて「まほう」ツールの動作を変更したり、いくつかの「まほう」ツールを無効にしたりします。</p>
+        <p xml:lang="ca">Nova opció de configuració "complexity" que afecta el comportament i/o disponibilitat d'algunes eines</p>
         <p>Magic tools reorganized (previously ordered alphabetically by localized name).</p>
+        <p xml:lang="sq">Risistemim mjetesh magjike (më parë të renditura alfabetikisht sipas emrave në përkthim)</p>
+        <p xml:lang="ja">「まほう」ツールの並びを変更（これまでは、翻訳後のツール名の順に表示されていました）</p>
+        <p xml:lang="ca">Reordenació de les eines màgiques, abans eren ordenades segons l'alfabet.</p>
         <p>Font name and size shown when selecting fonts in Text and Label tools.</p>
         <p xml:lang="sq">Shfaqje emri dhe madhësie shkronjash, kur përzgjidhen shkronja në mjetet Tekst dhe Etiketë.</p>
         <p xml:lang="pt">Nome e tamanho do tipo de letra apresentados ao selecionar tipos de letra nas ferramentas Texto e Etiqueta.</p>
         <p xml:lang="ja">「もじ」ツール、「ラベル」ツールで、フォント名とフォントサイズを表示するようになりました。</p>
         <p xml:lang="fr">Le nom et la taille de la police sont indiqués lors du choix d'une police dans les outils Texte et Étiquette. </p>
+        <p xml:lang="ca">Es mostra el nom del tipus de lletra i la seva mida en les eines Texte i Etiquetes.</p>
         <p>Bug-fixes and localization updates.</p>
         <p xml:lang="sq">Ndreqje të metash dhe përditësime përkthimesh.</p>
         <p xml:lang="ja">バグ修正と翻訳の更新。</p>
+        <p xml:lang="ca">Correccions d'errors i actualitzacions de localitzacions.</p>
       </description>
     </release>
     <release version="0.9.31" date="2023-07-20">
       <description>
         <p>New Magic tools: Loops, Ribbon, Smooth, and Squiggles.</p>
-        <p xml:lang="sq">Mjete të reja Magjike: Qerthuj, Shirit, Butë dhe Shkarravina.</p>
+        <p xml:lang="sq">Mjete të reja Magjike: Qerthuj, Shirit, Lëmim dhe Shkarravina.</p>
         <p xml:lang="pt">Novas ferramentas de Magia: Laços, Fita, Suavizar e Rabiscos.</p>
         <p xml:lang="nn">Nye magiske verktøy: ringar, sløyfeband, utglatta og krusedullar.</p>
         <p xml:lang="ja">「まほう」ツールの追加: 「ループ」「リボン」「なめらかなせん」「くしゃくしゃ」</p>
         <p xml:lang="fr">Nouveaux outils Magie : Boucles, Ruban, Adoucir et Gribouillis.</p>
+        <p xml:lang="ca">Noves eines màgiques: Espires, Cinta, Traç suau, Espires gargot.</p>
         <p xml:lang="bg">Нови "магически" инструменти: Примки, Лента, Заглаждане и Извивки.</p>
         <p>Eraser tool now offers fuzzy (soft-edged) erasers.</p>
         <p xml:lang="sq">Mjeti Gomë tani ofron goma të turbullta (anë të buta).</p>
@@ -401,6 +417,7 @@
         <p xml:lang="nn">Viskelêrverktøyet har no viskelêr med mjuke kantar.</p>
         <p xml:lang="ja">周囲をぼかした消しゴムを追加しました。</p>
         <p xml:lang="fr">L'outil 'Gomme' permet maintenant de flouter (bords progressifs).</p>
+        <p xml:lang="ca">L'eina d'esborrar ara ofereix gomes suaus.</p>
         <p xml:lang="bg">Инструментът гума вече предлага мъхнати (с меки ръбове) гуми.</p>
         <p>Turn saved drawings into Templates (found in the New dialog) from within Tux Paint itself (via the Open dialog). (They may subsequently be deleted from the New dialog.)</p>
         <p xml:lang="sq">Shndërroni në Gjedhe vizatime të ruajtur (gjendet te dialogu “I ri”) që nga brenda vetë Tux Paint-it (përmes dialogut Hap). (Mundet më pas të fshihen që nga dialogu “I ri”.)</p>
@@ -408,6 +425,7 @@
         <p xml:lang="nn">Gjer lagra teikningar om til malar (viste i «Ny»-vindauget) direkte i Tux Paint (via «Opna»-vindauget). Du kan seinare sletta malane frå «Ny»-vindauget.</p>
         <p xml:lang="ja">「ひらく」ダイアログから、保存した作品をテンプレートに変換できます（「さいしょから」ダイアログに表示されます）。「さいしょかｒ」ダイアログで、あとから削除することもできます。</p>
         <p xml:lang="fr">Transforme des dessins sauvegardés en modèles (que l'on trouve dans la nouvelle boîte de dialogue). (Ils peuvent donc être effacés à partir de la nouvelle boîte de dialogue).</p>
+        <p xml:lang="ca">Des del diàleg d'Obrir es pot convertir dibuixos desats en plantilles de fons que es trobaran en el diàleg de Nou dibuix. Aquestes plantilles de fons també es podran esborrar en el diàleg d'Obrir.</p>
         <p xml:lang="bg">Превърни запазени рисунки в Шаблони (намират се в диалога "Нов") директно в "Рисуване с Тъкс" (чрез диалога "Отваряне"). (Може в последствие да бъдат изтрити от диалога "Нов".)</p>
         <p>"Erase" option to remove saved drawings from the Open dialog and exported templates from the New dialog may be disabled, via "noerase" configuration option.</p>
         <p xml:lang="sq">Mundësi “Fshije” për të hequr vizatime të ruajtura, që nga dialogu Hap dhe gjedhe të eksportuara nga dialogu “I ri” mund të çaktivizohen, përmes mundësisë “noerase” të formësimit.</p>
@@ -415,6 +433,7 @@
         <p xml:lang="nn">Knappane for å sletta lagra teikningar frå «Opna»-vindauget og eksporterte malar frå «Ny»-vindauget kan fjernast med innstillinga «noerase».</p>
         <p xml:lang="ja">"noerase" オプションにより、「ひらく」ダイアログから保存した作品を削除したり、「さいしょから」ダイアログから自作のテンプレートを削除する「けす」ボタンを無効にすることができます。</p>
         <p xml:lang="fr">L'option "Effacer" pour supprimer des dessins sauvegardés avec la boîte Ouvrir et des modèles exportés avec la boîte Nouveau peut être désactivé avec l'option "noerase".</p>
+        <p xml:lang="ca">La opció d'esborrar els fitxers desats es pot desactivar amb la opció de configuració «noerase»</p>
         <p xml:lang="bg">Опцията за "Изтриване", която премахва запазени рисунки от диалога "Отваряне" и експортирани шаблони от диалога "Нов", може да бъде деактивирана, чрез "noerase" опцията за конфигурация.</p>
         <p>Specify the user interface font, via "uifont" configuration option. (List available fonts with "--listfonts" on the command-line.)</p>
         <p xml:lang="sq">Përcaktoni shkronjat e ndërfaqes së përdoruesit, përmes mundësisë “uifont” të formësimit. (Shfaqni shkronja të mundshme me “--listfonts” te rreshti i urdhrave.)</p>
@@ -422,6 +441,7 @@
         <p xml:lang="nn">Vel skrift for brukarflata via innstillinga «uifont». (Du kan sjå ei oversikt over tilgjengelege skrifter med kommandolinje-argumentet «--listfonts».)</p>
         <p xml:lang="ja">"uifont" オプションでユーザーインターフェースのフォントを指定できます。また、"listfonts" オプションで利用可能なフォントがリストアップされます。</p>
         <p xml:lang="fr">Spécifie la fonte utilisateur, via l'option de configuration "uifont". (La liste des fontes disponibles est disponible avec l'option "--listfonts" en ligne de commande).</p>
+        <p xml:lang="ca">Es pot especificar el tipus de lletra de la interfície amb la opció de configuració «uifont». Podeu obtenir el llistat de tipus de lletra disponibles amb la opció «--listfonts» en la línia d'ordres.</p>
         <p xml:lang="bg">Избор на шрифта на потребителския интерфейс чрез "uifont" опцията за конфигурация. (Покажи наличните шрифтове чрез "--listfonts" в команден прозорец.)</p>
         <p>Different (default) user interface fonts are once again used for under different locales.</p>
         <p xml:lang="sq">Shkronja të ndryshme (parazgjedhje) ndërfaqeje përdoruesi përdoren edhe një herë, nën vendore të ndryshme.</p>
@@ -429,6 +449,7 @@
         <p xml:lang="nn">Forskjellige skrifter vert igjen (som standard) brukte for forskjellige språk.</p>
         <p xml:lang="ja">言語環境ごとの規定のユーザーインターフェースフォントが使用されます。</p>
         <p xml:lang="fr">Différentes fontes interface utilisateurs sont disponibles pour des locales différentes.</p>
+        <p xml:lang="ca">Per defecte s'empren diferents tipus de lleta per a diferents locales.</p>
         <p xml:lang="bg">Различни (по подразбиране) шрифтове на потребителския интерфейс се използват отново под различни езици.</p>
         <p>Minor improvements to the selection buttons for the 'special' colors (pipette, HSV picker, and color mixer).</p>
         <p xml:lang="sq">Përmirësime të vockla te butonat e përzgjedhjes për ngjyrat “speciale” (pipetë, zgjedhës HSV dhe përzierës ngjyrash).</p>
@@ -436,6 +457,7 @@
         <p xml:lang="nn">Mindre forbetringar i knappane for «spesialfargar» (pipetten, HSV-fargeveljaren og fargeblandaren).</p>
         <p xml:lang="ja">「スポイト」「レインボーパレット」「カラーミキサー」のボタンの表示を改善しました。</p>
         <p xml:lang="fr">De petites améliorations ont été apportées pour les couleurs 'spéciales' (pipette, sélecteur HSV et mélangeur de couleurs).</p>
+        <p xml:lang="ca">Petites millores en els botons especials de selecció de colors.</p>
         <p xml:lang="bg">Малки подобрения на бутоните за избор на "специалните" цветове (пипета, HSV селектор и цветови миксер).</p>
       </description>
     </release>
@@ -448,6 +470,7 @@
         <p xml:lang="nn">Mange magiske verktøy kjem no i ulike storleikar.</p>
         <p xml:lang="ja">「まほう」ツールの多くは、サイズが変更できるようになりました。</p>
         <p xml:lang="fr">Beaucoup d'outils Magie possèdent maintenant la possibilité de changer de taille.</p>
+        <p xml:lang="ca">Ara es pot configurar mides en moltes eines màgiques.</p>
         <p xml:lang="bg">Много инструменти за "магия" вече предлагат опции за промяна на размер.</p>
         <p>Button labels word-wrap when possible (improves legibility).</p>
         <p xml:lang="sq">Mbështjellje fjalësh te etiketa butonash, kur është e mundur (përmirëson leximin e tyre).</p>
@@ -456,6 +479,7 @@
         <p xml:lang="nn">Tekst på knappar vert no viste over fleire linjer viss mogleg (vert lettare å lesa).</p>
         <p xml:lang="ja">ボタンのラベルは可能な場合は折り返し表示されます。</p>
         <p xml:lang="fr">Retour à la ligne automatique des noms de boutons quand c'est possible (améliore la lisibilité).</p>
+        <p xml:lang="ca">Multilínia en les etiquetes dels botons(per millorar la llegibilitat)</p>
         <p xml:lang="bg">Текстът върху бутоните се пренася по редове, когато е възможно (подобрява четливостта).</p>
       </description>
     </release>
@@ -464,7 +488,7 @@
         <p>Fifteen new magic tools have been added: Maze, Googly Eyes, Fur, Circles, Rays, 3D Glasses, Color Sep., Saturate, Desaturate, Remove Color, Keep Color, Kaleido-4, Kaleido-6, Kaleido-8, and Bloom.</p>
         <p xml:lang="zh_CN">增加了15个新的魔法工具：迷宫、金鱼眼、毛皮、圆圈、射线、3D眼镜、Color Sept.、饱和、去饱和、去除颜色、保持颜色、Kaleido-4、Kaleido-6、Kaleidoc-8和Bloom。</p>
         <p xml:lang="uk">Було додано п'ятнадцять нових магічних інструментів: лабіринт, вирячені очі, хутро, кола, промені, 3D-окуляри, відокремлення кольорів, насиченість, знебарвлення, вилучення кольору, збереження кольору, калейдоскоп-4, калейдоскоп-6, калейдоскоп-8 та флуоресценція.</p>
-        <p xml:lang="sq">Janë shtuar pesëmbëdhjetë mjete të reja magjike: Labirint Maze, Googly Eyes, Gëzof, Rrathë, Rreze, Syze 3D, Ndarje Ngjyrash., Ngopje, Çngopje, Heqje Ngjyre, Mbaje Ngjyrën, Kaleido-4, Kaleido-6, Kaleido-8 dhe Çelje.</p>
+        <p xml:lang="sq">Janë shtuar pesëmbëdhjetë mjete të reja magjike: Labirint, Sy të Zgurdulluar, Gëzof, Rrathë, Rreze, Syze 3D, Ndarje Ngjyrash., Ngopje, Çngopje, Heqje Ngjyre, Mbaje Ngjyrën, Kaleido-4, Kaleido-6, Kaleido-8 dhe Çelje.</p>
         <p xml:lang="son">Kayfi goyjinay taaga woy cindi guu ka tontonandi: Ncaŋguusu, Guli moɲey, Haabu, Windirey, Waynawcindey, 3D dijey, Noone fay, Tiŋandi, Doonandi, Noone kaa, Noone gaabu, Kaleido-4, Kaleido-6, Kaleido-8 nda Boosu.</p>
         <p xml:lang="sk">Bolo pridaných pätnásť nových magických nástrojov: bludisko, vyvalené oči, kožušina, kruhy, lúče, 3D okuliare, farebná sépia, pridanie/zrušenie sýtosti, odstránenie farby, zachovanie farby, Kaleido-4, Kaleido-6, Kaleido-8 a kvitnutie.</p>
         <p xml:lang="ru">Добавлены пятнадцать новых магических инструментов: «Лабиринт», «Игрушечные глаза», «Шерсть», «Круги», «Лучи», «3D-очки», «Цветоделение», «Насыщение», «Обесцвечивание», «Удаление цвета», «Сохранение цвета», «Калейдоскоп-4», «Калейдоскоп-6», «Калейдоскоп-8» и «Свечение».</p>
@@ -523,7 +547,9 @@
         <p xml:lang="ca">L'eina Emplena ara ofereix un efecte de degradat que segueix la forma de l'àrea que s'emplena.</p>
         <p xml:lang="bg">Инструментът за запълване вече предлага режим за оформени градиенти.</p>
         <p>A quick Eraser mode can be accessed via keyboard shortcut.</p>
+        <p xml:lang="sq">Një mënyrë Gomë e shpejtë mund të përdoret përmes shkurtoreje tastiere.</p>
         <p xml:lang="ja">キーボードショートカットで素早くけしゴムが使えるようになりました。</p>
+        <p xml:lang="ca">Hi ha disponible una drecera de teclat que permet esborrar.</p>
         <p>The rainbow palette (HSV color picker) can now load the built-in color, or the colors from the pipette tool or color mixer.</p>
         <p xml:lang="zh_CN">彩虹调色板（HSV颜色选择器）现在可以加载内置的颜色，或者从移液管工具或颜色混合器加载颜色。</p>
         <p xml:lang="uk">До веселкової палітри (піпетки кольорів HSV) у новій версії можна завантажувати вбудований колір або кольори з піпетки або мікшера кольорів.</p>
@@ -607,7 +633,7 @@
         <p>The Color Picker option, which previously offered a static palette of around sixty-five thousand color choices, now supports separate hue, saturation, and value settings, allowing users to choose from over sixteen million colors.</p>
         <p xml:lang="zh_CN">“颜色选择器”选项以前提供约6.5万种颜色的静态调色板，现在支持单独的色调、饱和度和值设置，允许用户从1600多万种颜色中进行选择。</p>
         <p xml:lang="uk">Для піпетки кольорів, у якій раніше можна було вибирати колір зі статичної палітри з понад шестидесяти п'яти тисяч кольорів, у новій версії передбачено окремі параметри відтінку, насиченості та значення, що надає користувачам змогу вибрати колір з понад шістнадцяти мільйонів варіантів.</p>
-        <p xml:lang="sq">Mundësia Zgjedhës Ngjyrash, e cila më parë ofronte një paletë statike prej afërisht gjashtëdhjetepesë mijë zgjedhje ngjyrash, tani mbulon rregullime ngjyrimi, ngopjeje dhe vlere, duke i lejuar përdoruesit të zgjedhin nga mbi gjashtëmbëdhjetë milion ngjyra.</p>
+        <p xml:lang="sq">Mundësia Zgjedhës Ngjyrash, e cila më parë ofronte një paletë statike prej afërisht gjashtëdhjetepesë mijë zgjedhje ngjyrash, tani mbulon rregullime ngjyrimi, ngopjeje dhe vlere, duke i lejuar përdoruesit të zgjedhin nga mbi gjashtëmbëdhjetë milionë ngjyra.</p>
         <p xml:lang="son">Sohõ noone suubakaw jinaa kaŋ cindi ka tee noone margari jisante, kaŋ nda sanda noone-ize woydu cindi guu ga suubandi, ga hin ka biyya, komyan, nda dima kayandiyaney fay, ka too goykey ma hin ka suuba ka bisa noone milyon woy cindi iddu ra.</p>
         <p xml:lang="sk">Nástroj pre výber farby, ktorý predtým ponúkal statickú paletu s približne šesťdesiatpäťtisíc farbami, teraz podporuje samostatné nastavenie odtieňa, sýtosti, a nastavenie hodnoty jasu, čo používateľom umožňuje vybrať si z viac ako šestnástich miliónov farieb.</p>
         <p xml:lang="ru">Опция выбора цвета, ранее предоставлявшая статичную палитру из примерно шестидесяти пяти тысяч вариантов, теперь поддерживает отдельные параметры оттенка, насыщенности и значения, что позволяет пользователям выбирать из более чем шестнадцати миллионов цветов.</p>
@@ -652,7 +678,7 @@
         <p>Two new variations of the Zoom Magic Tool, Tile Zoom and Rush, have been added. When shrinking a drawing with Tile Zoom, it replicates the drawing across the canvas in tiles, rather than filling the canvas with a solid background color. The Rush tool blurs the results.</p>
         <p xml:lang="zh_CN">Zoom Magic Tool的两个新变体，Tile Zoom和Rush，已经添加。使用平铺缩放缩小图形时，它会在画布上以平铺的方式复制图形，而不是用纯色填充画布。Rush工具模糊了结果。</p>
         <p xml:lang="uk">Додано два нових варіанти інструмента магічного масштабування — плиткове масштабування та стягування. При стисканні малюнка за допомогою плиткового масштабування програма відтворює малювання на полотні плитками, а не заповнення полотна суцільним кольором тла. Інструмент «Стягування» розмиває результати.</p>
-        <p xml:lang="sq">Janë shtuar dy variante të reja të Mjetit Magjik Zoom, Tile Zoom dhe Ngutje. Kur tkurret një vizatim me Tile Zoom, e ripërsërit vizatimin si kuadrate nëpër kanavacë, në vend se të mbushet kanavaca me një ngjyrë të plotë sfondi. Mjeti Ngutje e turbullon figurën.</p>
+        <p xml:lang="sq">Janë shtuar dy variante të reja të Mjetit Magjik Zmadhim/Zvogëlim, Zvogëlim Me Kuadrate dhe Ngutje. Kur tkurret një vizatim me Zvogëlim Me Kuadrate, vizatimi riprodhohet në kanavacë në kuadrate, në vend se të mbushet kanavacë me një ngjyrë të plotë sfond. Mjeti Ngutje i turbullon figurat.</p>
         <p xml:lang="son">Kayfi beerandiyan jinaa, feraw beerandiyan jinaa nda cahãri wanoo n’ ka tonton. Nda boro ga zeeri bii kaccandi nda feraw beerandiyan jinaa, a mma biyoo filla feraw alhaali korfuroo kul bande, a si korfuroo too nda noone senda bandafaari. Cahãri goyjinaa ga hayey kokoorandi.</p>
         <p xml:lang="sk">Boli pridané dva nové varianty nástroja Čarovná lupa, Dlaždicová lupa a Zhon.Pri zmenšovaní výkresu pomocou funkcie Dlaždicová lupa, nástroj opakuje kresbu po celom plátne vo forme dlaždičiek, namiesto toho, aby plátno vyplnil celistvou farbou pozadia. Nástroj Zhon výsledok rozostrí.</p>
         <p xml:lang="ru">Добавлены два новых варианта магического инструмента «Масштабирование»: «Плиточное масштабирование» и «Рывок». Когда рисунок уменьшается с помощью «Плиточного масштабирования», он повторяется на холсте в виде плиток (не происходит заполнения холста сплошным фоновым цветом). После использования инструмента «Рывок» рисунок смазывается.</p>
@@ -812,6 +838,7 @@
         <p>Finally, a new pair of accessibility options have been added. The entire user interface can now be enlarged benefiting users with impaired vision, and making the program more suitable to very high density displays. This feature, along with a new option to re-organize the color palette, can also be helpful to users of coarse input devices, such as eye-gaze tracking systems.</p>
         <p xml:lang="zh_CN">最后，添加了一对新的可访问性选项。现在可以放大整个用户界面，使视力受损的用户受益，并使该程序更适合非常高密度的显示器。这一功能，以及重新组织调色板的新选项，也有助于使用粗略输入设备（如眼睛注视跟踪系统）的用户。</p>
         <p xml:lang="uk">Нарешті, додано двійко можливостей з доступності. У новій версії можна збільшувати увесь інтерфейс програми, що допоможе користувачам із вадами зору і зробить програму зручнішою у користуванні на дисплеях із дуже високою щільністю пікселів. Ця можливість, разом із новою можливістю переупорядковування палітри кольорів, також буде корисною для користувачів із грубими пристроями введення, зокрема системами стеження за поглядом.</p>
+        <p xml:lang="sq">Dhe së fundi, është shtuar një dyshe e re mundësish përdorimi nga persona me aftësi të kufizuara. Krejt ndërfaqja e përdoruesit tanimë mund të zmadhohet, për hir të përdoruesve me probleme të pari dhe për ta bërë programin më të përshtatshëm për ekrane me dendësi shumë të madhe pikselash. Kjo veçori, tok me një mundësi të re për të risistemuar paletën e ngjyrave, mundet të jenë gjithashtu të dobishme për përdorues me pajisje input-i jo të imët, bie fjala, sisteme ndjekjeje vështrimi.</p>
         <p xml:lang="son">Kokorante, goydoo manandiyan suubari ize hinka ka tonton. Goykaw diji timmantaa kul ga hin ka hayandi sohõ, goykey kaŋ si dii ka boori nafaa se, ka too porogaramoo ma goy ka boori nda gaayay bebbeeri dijey. Dabaroo woo, nda suubari taaga foo kaŋ nda noone margaroo ga hin ka kanandi taaga, kaŋ ga hin ka goykey faaba jinay karsey ga, sanda mookore ganayan dabarey.</p>
         <p xml:lang="sk">A nakoniec pribudlo niekoľko volieb pre lepšiu dostupnosť. Celé používateľské rozhranie je teraz možné zväčšiť, čo je výhodné pre používateľov s poruchami zraku. Program je tak vhodnejší pre displeje s vysokou hustotou zobrazenia. Táto funkcia, spolu s pridanou možnosťou zmeny usporiadania palety farieb, môže tiež pomôcť používateľom nepresných vstupných zariadení, akými sú napríklad systémy sledovania pohybu očí.</p>
         <p xml:lang="ru">Наконец, были добавлены две новые функции специальных возможностей. Теперь можно увеличить весь интерфейс пользователя, что удобно для пользователей с нарушениями зрения и упрощает работу с программой на экранах высокой плотности. Эта функция, наряду с новой опцией реорганизации цветовой палитры, также может быть полезна пользователям более грубых устройств ввода (например, систем отслеживания движений глаз).</p>
@@ -845,6 +872,7 @@
         <p>The on-screen keyboard, an accessibility feature optionally available when using the Text and Label tools, now appears larger on bigger displays; helpful for users of coarser input devices, such as eye-tracking systems.</p>
         <p xml:lang="zh_CN">屏幕键盘是使用文本和标签工具时可选的辅助功能，现在在更大的显示器上显示得更大；有助于诸如眼睛跟踪系统之类的粗略输入设备的用户。</p>
         <p xml:lang="uk">У новій версії екранна клавіатура, можливість доступності, якою можна скористатися для інструментів «Текст» і «Мітка», є більшою на більших дисплеях, що буде корисним для користувачів із грубими пристроями введення, зокрема системами стеження за поглядом.</p>
+        <p xml:lang="sq">Tastiera në ekran, një veçori përdorimi nga persona me aftësi të kufizuara, që mund të kihet kur përdoren mjetet Tekst dhe Etiketë, tani shfaqet më e madhe në ekrane më të mëdhenj; e dobishme për përdorues me pajisje input-i jo të imët, bie fjala, sisteme ndjekjeje vështrimi.</p>
         <p xml:lang="son">Diji-ga walhaa ti manandiyan dabari suubari ibaayi ra, kaŋ ga bara nda boro ga goy nda hantum nda silbay goyjinawey, a ga fatta sohõ diji beerey ga, woo ga goykey faaba nda jinay karsey ga, sanda moo-kuryan dabarey.</p>
         <p xml:lang="sk">Klávesnica na obrazovke, voliteľná funkcia pre lešiu dostupnosť, ktorá je k dispozícii pri používaní nástrojov Text a Štítok, sa teraz na väčších displejoch zobrazuje väčšia. To môže pomôct používateľom nepresných vstupných zariadení, akými sú napríklad systémy na sledovanie očí.</p>
         <p xml:lang="ru">Экранная клавиатура (функция специальных возможностей, доступная при использовании инструментов «Текст» и «Метка») теперь выглядит крупнее на больших экранах; это удобно для пользователей более грубых устройств ввода, таких как системы отслеживания движений глаз.</p>

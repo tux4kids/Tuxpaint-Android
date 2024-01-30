@@ -1,0 +1,641 @@
+                                   Tux Paint
+                     version 0.9.32 Pyetje të Bëra Rëndom
+
+ Të drejta kopjimi © 2002-2023 nga kontribues të ndryshëm; shihni AUTHORS.txt.
+                             https://tuxpaint.org/
+
+                                20 korrik 2023
+
+-------------------------------------------------------------------------------
++-------------------------------------------+
+|             Pasqyrë e Lëndës              |
+|-------------------------------------------|
+|   * Të lidhura me të vizatuarit           |
+|   * Probleme Ndërfaqeje                   |
+|   * Shtypje                               |
+|   * Ruajtje                               |
+|   * Probleme Audio                        |
+|   * Probleme me Mënyrën “Sa Krejt Ekrani” |
+|   * Probleme të Tjera                     |
+|   * Ndihmë / Lidhuni Me Ne                |
++-------------------------------------------+
+-------------------------------------------------------------------------------
+
+Të lidhura me të vizatuarit
+
+Shkronjat që shtova te Tux Paint-i shfaqin vetëm katrorë
+    Shkronjat TrueType që po përdorni mund të kenë kodim të gabuar. Nëse ka
+    kodim “të përshtatur”, mund të provoni t’i kaloni përmes FontForge (http://
+    fontforge.sourceforge.net/) për t’i shndërruar në një format ISO-8859.
+    (Dërgonani email, nëse ju duhet ndihmë me një palë shkronja speciale.)
+
+Mjeti Stampë paraqitet në gri!
+
+    Kjo do të thotë se Tux Paint-i ose s’gjeti ndonjë figurë stampë, ose iu
+    kërkua të mos i ngarkojë.
+
+    Nëse e instaluat Tux Paint-in, por nuk instaluat koleksionin më vete,
+    opsional, të “Stampave”, mbylleni Tux Paint-in dhe instalojeni tani. Duhet
+    të gjendet te i njëjti vend ku morët programin kryesor Tux Paint. (Shënim:
+    Që me versionin 0.9.14, Tux Paint-i vjen me një koleksion të vockël
+    stampash shembuj.)
+
+    Nëse s’doni të instaloni koleksionin parazgjedhje të stampave, mund të
+    krijoni tuajin. Shihni dokumentimin “Zgjerim i Tux Paint-it”, për më tepër
+    rreth krijimit të kartelave figura PNG dhe SVG, kartela përshkrimi TXT,
+    kartela zanore Ogg Vorbis, MP3 ose WAV dhe kartela tekst të dhënash DAT, të
+    cilat përbëjnë stampat.
+
+    Së fundi, nëse instaloni stampa dhe mendoni se duhen të jenë ngarkuar,
+    shihni që mundësia “nostamps” të mos jetë ujdisur. (Përmes mundësisë
+    “--nostamps” te rreshti i urdhrave të Tux Paint-it, ose te kartela
+    “nostamps=yes” e formësimeve.)
+
+    Ose ndryshojeni/hiqeni mundësinë “nostamps”, ose mund ta anashkaloni me
+    “--stamps” te rreshti i urdhrave, ose “nostamps=no” apo “stamps=yes” te një
+    kartelë formësimi.
+
+
+
+Përvijimet e stampave janë përherë drejtkëndore
+
+    Tux Paint was built with low-quality (but faster) stamp outlines.
+
+    Për ta ndryshuar këtë, duhet të rimontoni Tux Paint-in që nga burimi. Mos
+    harroni të hiqni ose të shndërroni në rresht komenti çfarëdo rreshti që
+    thotë:
+
+        #define LOW_QUALITY_STAMP_OUTLINE
+
+    te kartela “tuxpaint.c” në drejtorinë “src”.
+
+
+
+
+-------------------------------------------------------------------------------
+
+Probleme Ndërfaqeje
+
+Miniaturat e stampave te Përzgjedhës Stampash duken keq
+
+    Tux Paint was probably compiled with the faster, lower quality thumbnail
+    code enabled. Run the command: "tuxpaint --verbose-version" from a command
+    line. If, amongst the other output, you see the text: "Low Quality
+    Thumbnails enabled", then this is what's happening.
+
+    Për ta ndryshuar këtë, duhet të rimontoni Tux Paint-in që nga burimi. Mos
+    harroni të hiqni ose të shndërroni në rresht komenti çfarëdo rreshti që
+    thotë:
+
+        #define LOW_QUALITY_THUMBNAILS
+
+    te kartela “tuxpaint.c” në drejtorinë “src”.
+
+
+
+Figurat te dialogu “Hap” duke keqn
+    Ka shumë mundësi të jetë aktivizuar “Miniatura Me Cilësi të Dobët”. Shihni
+    “Miniaturat e stampave te Përzgjedhës Stampash duken keq”, më sipër.
+
+Krejt teksti është me të mëdha!
+
+    Mundësia “me të mëdha” është e aktivizuar.
+
+    Ose ndryshojeni/hiqeni mundësinë “uppercase”, ose mund ta anashkaloni me
+    “--mixedcase” te rreshti i urdhrave, ose “uppercase=no” apo “mixedcase=yes”
+    te një kartelë formësimi.
+
+Tux Paint-i është në gjuhë tjetër
+    Siguroni se rregullimi për vendoren tuaj është i saktë. Shihni “Tux Paint-i
+    s’kalon në gjuhën time”, më poshtë.
+
+Tux Paint-i s’kalon në gjuhën time
+      + Përdorues të Linux-it dhe Unix-it: Sigurohuni se vendorja gjendet në
+        kompjuter
+
+        Sigurohuni se vendorja që dëshironi është gati. Kontrolloni kartelën
+        tuaj “/etc/locale.gen”. Shihni “Dokumentim Mundësish”, për vendore që
+        përdor Tux Paint-i (veçanërisht kur përdoret mundësia “--lang”).
+
+        Shënim: Përdorue të Debian-it dhe të rrjedhur prej tij (p.sh, Ubuntu)
+        munden thjesht të xhirojnë “dpkg-reconfigure locales”, nëse vendoret
+        administrohen nga “dpkg”.
+
+      + Nëse përdorni mundësinë “--lang” te rreshti i urdhrave
+
+        Try using the "--locale" command-line option, or your operating
+        system's locale settings (e.g., the "$LANG" environment variable), and
+        please e-mail us regarding your trouble.
+
+      + Nëse përdorni mundësinë “--locale” te rreshti i urdhrave
+
+        Nëse kjo nuk bën punë, ju lutemi, na dërgoni një email lidhur me
+        problemin tuaj.
+
+      + Nëse po provoni të përdorni vendoren e Sistemit tuaj Operativ
+
+        Nëse kjo nuk bën punë, ju lutemi, na dërgoni një email lidhur me
+        problemin tuaj.
+
+      + Sigurohuni se keni shkronjat e nevojshme
+
+        Disa gjuhë përkthimesh lypin shkronjat e tyre. Kinezçja dhe koreançja,
+        për shembull, lypin të jenë të instaluara TrueType Fonts për kinezçen
+        dhe koreançen dhe të gjenden në vendin e duhur, secila.
+
+        Shkronjat e duhur për vendore të tilla mund të shkarkohen që nga sajti
+        i Tux Paint-it:
+
+            https://tuxpaint.org/download/fonts/
+
+
+
+
+-------------------------------------------------------------------------------
+
+Shtypje
+
+Tux Paint-i nuk bën shtypje, shfaq një gabim, ose shtyp shkarravina (Unix/
+    Linux)
+
+    Tux Paint-i shtyp duke krijuar një figurë PostScript të figurës dhe duke e
+    dërguar te një urdhër i jashtëm shtypjeje. Si parazgjedhje, ky urdhër është
+    mjeti “lpr” i shtypjeve.
+
+    Nëse ai program s’është i përdorshëm (për shembull, ju xhironi CUPS, Common
+    Unix Printing System, dhe nuk keni të instaluar “cups-lpr”), do t’ju duhet
+    të specifikoni një urdhër të përshtatshëm duke përdorur te kartela e
+    formësimit të Tux Paint-it mundësinë “printcommand”. (Shihni “Dokumentim
+    Mundësish”.)
+
+    Shënim: Versione të Tux Paint-it para 0.9.15-s përdornin për shtypjen një
+    tjetër urdhër parazgjedhje, “pngtopnm | pnmtops | lpr”, ngaqë Tux Paint-it
+    prodhonte format PNG, në vend se PostScript.
+
+    Nëse e keni ndryshuar “printcommand” tuaj para Tux Paint 0.9.15-s, do t’ju
+    duhet të riktheheni dhe ta ndryshoni që të pranojë PostScript.
+
+
+
+Më del mesazhi “S’mund të shtypni ende!”, kur bëhem gati të shtyp
+
+    Është e aktivizuar mundësia “vonesë shtypjeje”. Mund të shtypni vetëm një
+    herë në çdo X sekonda.
+
+    Nëse Tux Paint-in po e xhironi që nga rresht urdhrash, sigurohuni se nuk po
+    i jepni një mundësi “--printdelay=...”.
+
+    Nëse Tux Paint-in po e xhironi duke dyklikuar mbi një ikonë, shihni vetitë
+    e ikonës, për të parë se mos “--printdelay=...” gjendet si një argument
+    rreshti urdhrash.
+
+    Nëse te rresht urdhrash s’po jepet mundësi “--printdelay=...”, shihni te
+    kartela e formësimit të Tux Paint-it për një rresht ku lexohet: “printdelay
+    =...”.
+
+    Ose hiqeni atë rresht, ose si vlerë vonese vini 0 (pa vonesë), ose
+    zvogëlojeni vonesën sa një vlerë që dëshironi. (Shihni “Dokumentim
+    Mundësish”.)
+
+    Ose, mundeni thjesht ta xhironi Tux Paint-in me argumentin vijues rreshti
+    urdhrash: “--printdelay=0”, çka do të anashkalojë rregullimet e kartelës së
+    formësimit dhe do të lejojë shtypje të pakufizuar. (Pra, s’do t’ju duhet të
+    prisni mes shtypjesh.)
+
+
+
+Thjesht s’shtyp dot! Butoni është i çaktivizuar!
+
+    Mundësia “no print” është aktive.
+
+    Nëse Tux Paint-in po e xhironi që nga rresht urdhrash, sigurohuni se nuk po
+    i jepni një mundësi “--noprint”.
+
+    Nëse Tux Paint-in po e xhironi duke dyklikuar mbi një ikonë, shihni vetitë
+    e ikonës, për të parë se mos “--noprint” gjendet si një argument rreshti
+    urdhrash.
+
+    Nëse te rresht urdhrash s’po jepet mundësi “--noprint”, shihni te kartela e
+    formësimit të Tux Paint-it për një rresht ku lexohet: “noprint=yes”.
+
+    Ose hiqeni atë rresht, ose thjesht xhirojeni Tux Paint-in me argumentin
+    vijues për rresht urdhrash: “--print”, çka do të anashkalojë rregullimin
+    përkatës te kartela e formësimit.
+
+    Ose përdorni Tux Paint Config. dhe sigurohuni se “Lejo Shtypje” (nën
+    “Shtypje”) është me shenjë.
+
+
+
+
+-------------------------------------------------------------------------------
+
+Ruajtje
+
+Ku i ruan Tux Paint-i vizatimet e mia?
+
+    Hiq rastin kur i keni kërkuar Tux Paint-it që t’i ruaj në një vend të
+    caktuar (duke përdorur mundësinë “savedir”), Tux Paint-i i ruan te një
+    vendndodhje standarde në diskun tuaj vendor:
+
+    Windows Vista, Windows 8, Windows 10, Windows 11
+        Te dosja “AppData” e përdoruesit:
+        p.sh., C:\Users\Emërpërdoruesi\AppData\Roaming\TuxPaint\saved
+
+    macOS
+        Te dosja “Application Support” e përdoruesit:
+        p.sh., /Users/Emërpërdoruesi/Library/Applicaton Support/TuxPaint/saved/
+
+    Linux / Unix
+        Te drejtoria shtëpi e përdoruesit (“$HOME”), nën një nëndosje
+        “.tuxpaint”:
+        p.sh., /home/emërpërdoruesi/.tuxpaint/saved/
+
+
+    Figurat depozitohen si bitmap-e PNG, të cilat, shumica e programeve modernë
+    (përpunuesi figurash, përpunues fjalësh, shfletues, etj), duhet të jenë në
+    gjendje t’i ngarkojnë.
+
+
+
+Tux Paint-i ruan përherë përmbi figurat e mia të vjetra
+
+    Është e aktivizuar mundësia “save over”. (Kjo çaktivizon pyetjen tuaj që
+    shfaqet kur klikoni mbi “Ruaje”.)
+
+    Nëse Tux Paint-in po e xhironi që nga rresht urdhrash, sigurohuni se nuk po
+    i jepni një mundësi “--saveover”.
+
+    Nëse Tux Paint-in po e xhironi duke dyklikuar mbi një ikonë, shihni vetitë
+    e ikonës, për të parë se mos “--saveover” gjendet si një argument rreshti
+    urdhrash.
+
+    Nëse te rresht urdhrash s’po jepet mundësi “--saveover”, shihni te kartela
+    e formësimit të Tux Paint-it për një rresht ku lexohet: “saveover=yes”.
+
+    Ose hiqeni atë rresht, ose thjesht xhirojeni Tux Paint-in me argumentin
+    vijues për rresht urdhrash: “--saveoverask”, çka do të anashkalojë
+    rregullimin përkatës te kartela e formësimit.
+
+    Ose përdorni Tux Paint Config. dhe sigurohuni se “Pyet Përpara Mbishkrimi”
+    (nën “Ruajtje”) është me shenjë.
+
+    Shihni edhe “Tux Paint-i ruan përherë një figurë të re!”, më poshtë.
+
+
+
+Tux Paint-i ruan përherë një figurë të re!
+
+    Është e aktivizuar mundësia “never save over”. (Kjo çaktivizon pyetjen tuaj
+    që shfaqet kur klikoni mbi “Ruaje”.)
+
+    Nëse Tux Paint-in po e xhironi që nga rresht urdhrash, sigurohuni se nuk po
+    i jepni një mundësi “--saveovernew”.
+
+    Nëse Tux Paint-in po e xhironi duke dyklikuar mbi një ikonë, shihni vetitë
+    e ikonës, për të parë se mos “--saveovernew” gjendet si një argument
+    rreshti urdhrash.
+
+    Nëse te rresht urdhrash s’po jepet mundësi “--saveovernew”, shihni te
+    kartela e formësimit të Tux Paint-it për një rresht ku lexohet: “saveover=
+    new”.
+
+    Ose hiqeni atë rresht, ose thjesht xhirojeni Tux Paint-in me argumentin
+    vijues për rresht urdhrash: “--saveoverask”, çka do të anashkalojë
+    rregullimin përkatës te kartela e formësimit.
+
+    Ose përdorni Tux Paint Config. dhe sigurohuni se “Pyet Përpara Mbishkrimi”
+    (nën “Ruajtje”) është me shenjë.
+
+    Shihni edhe “Tux Paint-i ruan përherë përmbi figurat e mia të vjetra”, më
+    poshtë.
+
+
+
+
+-------------------------------------------------------------------------------
+
+Probleme Audio
+
+S’ka tingull!
+      + Së pari, kontrolloni të thjeshtat:
+          o A janë të lidhur dhe të ndezur altoparlantët tuaj?
+          o A është i ngritur volumi te altoparlantët tuaj?
+          o A është hapur volumi, te “përzierësi” i Sistemit tuaj Operativ?
+          o Jeni i sigurt se po përdorni një kompjuter me kartë zanore?
+          o A po xhirojnë programe të tjera që përdorin zërin? (Mund të jenë
+            duke e “bllokuar” Tux Paint-in të përdorë pajisjen tuaj të zërit)
+          o (Unix/Linux) Are you using a sound system, such as aRts, ESD or
+            GStreamer? If so, try setting the "SDL_AUDIODRIVER" environment
+            variable before running Tux Paint (e.g., "export SDL_AUDIODRIVER=
+            arts"). Or, run Tux Paint through the system's rerouter (e.g., run
+            "artsdsp tuxpaint" or "esddsp tuxpaint", instead of simply
+            "tuxpaint").
+      + A është i çaktivizuar zëri në Tux Paint?
+
+        If sound seems to work otherwise (and you're sure no other program is
+        "blocking" the sound device), then Tux Paint may be running with a "no
+        sound" option.
+
+        Nëse Tux Paint-in po e xhironi që nga rresht urdhrash, sigurohuni se
+        nuk po i jepni një mundësi “--nosound”.
+
+        Nëse Tux Paint-in po e xhironi duke dyklikuar mbi një ikonë, shihni
+        vetitë e ikonës, për të parë se mos “--nosound” gjendet si një argument
+        rreshti urdhrash.
+
+        Nëse te rresht urdhrash s’po jepet mundësi “--nosound”, shihni te
+        kartela e formësimit të Tux Paint-it për një rresht ku lexohet:
+        “nosound=yes”.
+
+        Ose hiqeni atë rresht, ose thjesht xhirojeni Tux Paint-in me argumentin
+        vijues për rresht urdhrash: “--sound”, çka do të anashkalojë
+        rregullimin përkatës te kartela e formësimit.
+
+        Ose, mundeni thjesht ta xhironi Tux Paint-in me argumentin vijues
+        rreshti urdhrash: “Aktivizoni Efekte Zanore”, çka do të anashkalojë
+        rregullimet e kartelës së formësimit dhe do të lejojë shtypje të
+        pakufizuar. (Pra, s’do t’ju duhet të prisni mes shtypjesh.)
+
+      + Qenë përkohësisht të çaktivizuar tingujt?
+
+        Even if sounds are enabled in Tux Paint, it is possible to disable and
+        re-enable them temporarily using the [Alt] + [S] key sequence. Try
+        pressing those keys to see if sounds begin working again.
+
+      + A qe montuar Tux Paint-i me mbulim zërash?
+
+        Tux Paint-i mund të jetë përpiluar me çaktivizim mbulimi zërash. Për të
+        provuar nëse mbulimi i zërave qe aktivizuar kur u përpilua Tux Paint-i,
+        xhirojeni Tux Paint-in që nga një rresht urdhrash, kështu:
+
+            tuxpaint --verbose-version
+
+        Nëse, mes hollësish të tjera, shihni “Çaktivizim zërash”, atëherë
+        versioni i Tux Paint-it që po xhironi ka tingujt të çaktivizuar.
+        Ripërpiloni Tux Paint-in dhe sigurohuni të MOS montoni “nosound”.
+        (D.m.th., mos xhironi “make nosound”) Sigurohuni se biblioteka
+        SDL_mixer dhe kryet e zhvillimit për të janë të instaluara!
+
+
+
+Tux Paint-i bën shumë zhurmë! A mund t’i mbyll zhurmat?
+
+    Po, ka një numër rrugësh për të çaktivizuar tingujt në Tux Paint:
+
+      + Press [Alt] + [S] while in Tux Paint to temporarily disable sounds.
+        (Press that key sequence again to re-enable sounds.)
+      + Xhirojeni Tux Paint-in me mundësinë “no sound”:
+          o Run "tuxpaint --nosound" from the command line or shortcut or
+            desktop icon.
+          o Edit Tux Paint's configuration file (see "Options Documentation"
+            for details) and add a line containing "nosound=yes".
+          o Ose përdorni Tux Paint Config. dhe sigurohuni se “Aktivizoni Efekte
+            Zanore” (nën “Video & Tingull”) s’ka shenjë.
+          o Alternatively, recompile Tux Paint with sound support disabled.
+            (See above, and the 'Install' documentation.
+
+
+The stereo panning of sound effects is bothersome; can sound effects be
+    monophonic?
+
+    Xhirojeni Tux Paint-in me mundësinë “no stereo”:
+
+      + Run "tuxpaint --nostereo" from the command line or shortcut or desktop
+        icon.
+      + Edit Tux Paint's configuration file (see "Options Documentation" for
+        details) and add a line containing "nostereo=yes".
+      + Ose përdorni Tux Paint Config. dhe sigurohuni se “Aktivizo Efekte
+        Stereo” (nën “Video & Tingull”) s’ka shenjë.
+
+
+Efektet zanore dëgjohen të çuditshëm
+
+    This could have to do with how SDL and SDL_mixer were initialized. (The
+    buffer size chosen.)
+
+    Please e-mail us with details about your computer system. (Operating system
+    and version, sound card, which version of Tux Paint you're running (run
+    "tuxpaint --version" to verify), and so on.)
+
+
+
+
+-------------------------------------------------------------------------------
+
+Probleme me Mënyrën “Sa Krejt Ekrani”
+
+When I run Tux Paint full-screen and [Alt] + [Tasti Tab] out, the window turns
+    black!
+    This is apparently a bug in the SDL library. Sorry.
+
+When I run Tux Paint full-screen, it has large borders around it
+
+    Linux users - Your X-Window server is probably not set with the ability to
+    switch to the desired resolution: 800×600. (or whatever resolution you have
+    Tux Paint set to run at.) (This is typically done manually under the
+    X-Window server by pressing [Tasti Kontroll] + [Alt] + [Keypad Plus (+)]
+    and [Tasti Kontroll] + [Alt] + [Keypad Minus (-)].)
+
+    For this to work, your monitor must support that resolution, and you need
+    to have it listed in your X server configuration.
+
+    Check the "Display" subsection of the "Screen" section of your XFree86 or
+    X.org configuration file (typically "/etc/X11/XF86Config-4" or "/etc/X11/
+    XF86Config", depending on the version of XFree86 you're using; 3.x or 4.x,
+    respectively, or "/etc/X11/xorg.conf" for X.org).
+
+    Add "800x600" (or whatever resolution(s) you want) to the appropriate
+    "Modes" line. (e.g., in the "Display" subsection that contains 24-bit color
+    depth ("Depth 24"), which is what Tux Paint tries to use.)
+
+        Modes "1280x1024" "1024x768" "800x600" "640x480"
+
+    Note that some Linux distributions have tools that can make these changes
+    for you. Debian users can run the command "dpkg-reconfigure
+    xserver-xfree86" as root, for example.
+
+
+
+Tux Paint keeps running in Full Screen mode - I want it windowed!
+
+    Është aktivizuar mundësia “Sa krejt ekrani”.
+
+    Nëse Tux Paint-in po e xhironi që nga rresht urdhrash, sigurohuni se nuk po
+    i jepni një mundësi “--fullscreen”.
+
+    Nëse Tux Paint-in po e xhironi duke dyklikuar mbi një ikonë, shihni vetitë
+    e ikonës, për të parë se mos “--fullscreen” gjendet si një argument rreshti
+    urdhrash.
+
+    Nëse te rresht urdhrash s’po jepet mundësi “--fullscreen”, shihni te
+    kartela e formësimit të Tux Paint-it për një rresht ku lexohet: “fullscreen
+    =yes”.
+
+    Ose hiqeni atë rresht, ose thjesht xhirojeni Tux Paint-in me argumentin
+    vijues për rresht urdhrash: “--windowed”, çka do të anashkalojë rregullimin
+    përkatës te kartela e formësimit.
+
+    Ose përdorni Tux Paint Config. dhe sigurohuni se “Sa krejt ekrani” (nën
+    “Video & Tingull”) s’ka shenjë.
+
+
+
+
+-------------------------------------------------------------------------------
+
+Probleme të Tjera
+
+Tux Paint-i nuk xhiron
+
+    If Tux Paint aborts with the message: "You're already running a copy of Tux
+    Paint!", this means it has been launched in the last 30 seconds. (On Unix/
+    Linux, this message would appear in a terminal console if you ran Tux Paint
+    from a command-line. On Windows, this message would appear in a file named
+    "stdout.txt" in the same folder where TuxPaint.exe resides (e.g., in "C:\
+    Program Files\TuxPaint").
+
+    A lockfile ("~/.tuxpaint/lockfile.dat" on Linux and Unix, "userdata\
+    lockfile.dat" on Windows) is used to make sure Tux Paint isn't run too many
+    times at once (e.g., due to a child impatiently clicking its icon more than
+    once).
+
+    Even if the lockfile exists, it contains the 'time' Tux Paint was last run.
+    If it's been more than 30 seconds, Tux Paint should run fine, and simply
+    update the lockfile with the current time.
+
+    If multiple users are sharing the directory where this file is stored
+    (e.g., on a shared network drive), then you'll need to disable this
+    feature.
+
+    To disable the lockfile, add the "--nolockfile" argument to Tux Paint's
+    command-line, or "nolockfile=yes" to the configuration file.
+
+
+
+S’mbyll dot Tux Paint-in
+
+    The "no quit" option is set. This disables the "Quit" button in Tux Paint's
+    toolbar (greying it out), and prevents Tux Paint from being exited via the
+    [Tasti Escape] key.
+
+    If Tux Paint is not in fullscreen mode, simply click the window close
+    button on Tux Paint's title bar. (i.e., the "ⓧ" at the upper right.)
+
+    If Tux Paint is in fullscreen mode, you will need to use the [Tasti Shift]
+    + [Tasti Kontroll] + [Tasti Escape] sequence on the keyboard to quit Tux
+    Paint.
+
+    (Note: with or without "no quit" set, you can always use the [Alt] + [F4]
+    combination on your keyboard to quit Tux Paint.)
+
+
+
+I don't want "no quit" mode enabled!
+
+    Nëse Tux Paint-in po e xhironi që nga rresht urdhrash, sigurohuni se nuk po
+    i jepni një mundësi “--noquit”.
+
+    Nëse Tux Paint-in po e xhironi duke dyklikuar mbi një ikonë, shihni vetitë
+    e ikonës, për të parë se mos “--noquit” gjendet si një argument rreshti
+    urdhrash.
+
+    Nëse te rresht urdhrash s’po jepet mundësi “--noquit”, shihni te kartela e
+    formësimit të Tux Paint-it për një rresht ku lexohet: “noquit=yes”.
+
+    Ose hiqeni atë rresht, ose thjesht xhirojeni Tux Paint-in me argumentin
+    vijues për rresht urdhrash: “--quit”, çka do të anashkalojë rregullimin
+    përkatës te kartela e formësimit.
+
+    Ose përdorni Tux Paint Config. dhe sigurohuni se “Çaktivizo Butonin e
+    Daljes dhe tastin [Esc]” (nën “Thjeshtim”) s’ka shenjë.
+
+
+
+Tux Paint keeps writing weird messages to the screen / to a text file
+
+    A few messages are normal, but if Tux Paint is being extremely verbose
+    (like listing the name of every rubber-stamp image it finds while loading
+    them), then it was probably compiled with debugging output turned on.
+
+    Për ta ndryshuar këtë, duhet të rimontoni Tux Paint-in që nga burimi. Mos
+    harroni të hiqni ose të shndërroni në rresht komenti çfarëdo rreshti që
+    thotë:
+
+        #define DEBUG
+
+    te kartela “tuxpaint.c” në drejtorinë “src”.
+
+
+
+Tux Paint is using options I didn't specify!
+
+    By default, Tux Paint first looks at configuration files for options.
+
+      + Windows
+
+        Under Windows, Tux Paint first examines the configuration file:
+
+            tuxpaint.cfg
+
+        Finally, any options sent as command-line arguments are used.
+
+      + macOS
+
+      + Unix dhe Linux
+
+        Under Unix and Linux, it first examines the system-wide configuration
+        file, located here:
+
+            /etc/tuxpaint/tuxpaint.conf
+
+        Mandej ekzaminon kartelën e formësimit personal të përdoruesit:
+
+            ~/.tuxpaintrc
+
+        Finally, any options sent as command-line arguments are used.
+
+      + Haiku
+
+    This means that if anything is set in a configuration file that you don't
+    want set, you'll need to either change the config. file (if you can), or
+    override the option on the command-line.
+
+    For example, on Linux and Unix, if "/etc/tuxpaint/tuxpaint.conf" includes
+    this option to disable sound...
+
+        nosound=yes
+
+    ...then you can reenable sound by either adding this option to your own
+    ".tuxpaintrc" file:
+
+        sound=yes
+
+    ose duke përdorur këtë argument rreshti urdhrash:
+
+        --sound
+
+    Linux and Unix users can also disable the system-wide configuration file by
+    including the following command-line argument:
+
+        --nosysconfig
+
+    Tux Paint will then only look at "~/.tuxpaintrc" and command-line arguments
+    to determine what options should be set.
+
+
+
+
+-------------------------------------------------------------------------------
+
+Ndihmë / Lidhuni Me Ne
+
+Any questions you don't see answered? Please let us know! You can subscribe and
+post to our "tuxpaint-users" mailing list:
+
+    https://tuxpaint.org/lists/
+
+Or, contact lead developer Bill Kendrick directly:
+
+    bill@newbreedsoftware.com
+

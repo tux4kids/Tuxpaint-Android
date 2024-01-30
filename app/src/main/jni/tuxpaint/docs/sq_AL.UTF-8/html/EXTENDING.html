@@ -1,0 +1,1283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Thellim i Tux Paint-it    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+
+    <!-- Title -->
+    <section class="outer">
+      <header>
+        <center>
+          <h1>
+            Thellim<br>
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.32          </h1>
+    
+          <p>
+            Të drejta kopjimi &copy; 2002-2024 nga kontribues të ndryshëm; shihni <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+    
+          <p>
+            26 janar 2024          </p>
+        </center>
+      </header>
+
+      <table border="2"
+             cellspacing="0"
+             cellpadding="2"
+             summary="Pasqyrë e Lëndës"
+             align="center"
+             style="page-break-inside: avoid;">
+        <tr>
+          <th>
+            Pasqyrë e Lëndës          </th>
+        </tr>
+        <tr>
+          <td>
+            <ul>
+              <li><a href="#where_files_go">Ku Venë Kartelat</a>                <ul>
+                  <li><a href="#standard_files">Kartela Standarde</a></li>                  <li><a href="#personal_files">Kartela Personale</a></li>                </ul>
+              </li>
+              <li><a href="#brushes">Penela</a>                <ul>
+                  <li><a href="#brush_options">Mundësi Penelash</a></li>                </ul>
+              </li>
+              <li><a href="#stamps">Stampa</a>                <ul>
+                  <li><a href="#stamps_images">Figura stampash</a></li>                  <li><a href="#description_text">Tekst Përshkrues për Stampat</a></li>                  <li><a href="#sound_effects">Efekte Zanore Stampash</a></li>                  <li><a href="#descriptive_sound">Tingull Përshkrues Stampash</a></li>                  <li><a href="#stamp_options">Mundësi Stampash</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Stampa të kthyera në anë tjetër dhe të pasqyruara paraprakisht</a></li>                </ul>
+              </li>
+              <li><a href="#fonts">Shkronja</a></li>              <li><a href="#starters">“Fillesa”</a>                <ul>
+                  <li><a href="#coloring_book_style">Fillesa Në Stil Libri Për Ngjyrosje</a></li>                  <li><a href="#scene_style">Fillesa Në Stil Skenash</a></li>                  <li><a href="#starter_options">Mundësi Fillesash</a></li>                </ul>
+              </li>
+              <li><a href="#templates">'Gjedhe'</a>                <ul>
+                  <li><a href="#template_options">Mundësi Gjedhesh</a></li>                </ul>
+              </li>
+              <li><a href="#translations">Përkthime</a></li>              <li><a href="#input_methods">Metoda Alternative Dhënieje</a></li>              <li><a href="#on_screen_keyboard">Tastierë Në Ekran</a></li>              <li><a href="#magic_tools">Mjete Magjike</a></li>            </ul>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="outer">
+      <p>
+        Nëse dëshironi të shtoni ose të ndryshoni gjëra të tilla si Penela, Fillesa, Vula Gome dhe lëndë tjetër të përdorur nga Tux Paint-i, mund ta bëni kollaj këtë, duke shtuar, ndryshuar, ose hequr kartelat ku kërkon për to Tux Paint-i.      </p>
+  
+      <p class="note">
+        <span title="Information">&#128161;</span>        Shënim: Që ndryshimet të hyjnë në fuqi, do të duhet të rinisni Tux Paint-in.      </p>
+    </section>
+
+    <section class="indent outer"><!-- H1: Where Files Go -->
+      <header>
+        <h1>
+          <a name="where_files_go"
+              id="where_files_go">Ku Venë Kartelat</a>
+        </h1>
+      </header>
+
+      <section class="indent"><!-- H2: Standard Files -->
+        <header>
+          <h2>
+            <a name="standard_files"
+                id="standard_files">Kartela Standarde</a>
+          </h2>
+        </header>
+
+        <p>
+          Tux Paint-i kërkon për kartelat e veta të ndryshme të të dhënave në drejtorinë e vet '<code>data</code>'.        </p>
+
+        <dl>
+          <dt><strong>Linux dhe Unix</strong></dt>
+          <dd>
+            <p>
+              Ku gjendet kjo drejtori varet nga vlera që qe caktuar për “<code>DATA_PREFIX</code>”, kur u montua Tux Paint-i. Për hollësi, shihni “Dokumentim instalimit”.            </p>
+            <p>
+              Si parazgjedhje, ama, drejtoria është:              <blockquote>
+                <code>/usr/local/share/tuxpaint/</code>
+              </blockquote>
+            </p>
+            <p>
+              Nëse e instaluat prej një pakete, ka më tepër gjasa të jetë:              <blockquote>
+                <code>/usr/share/tuxpaint/</code>
+              </blockquote>
+            </p>
+          </dd>
+
+          <dt><strong>Windows</strong></dt>
+          <dd>
+            <p>
+              Tux Paint-i kërkon për një drejtori të quajtur '<code>data</code>' në të njëjtën drejtori me të ekzekutueshmin. Kjo është një drejtori që instaluesi përdori kur instaloi Tux Paint-ni, p.sh.,:              <blockquote>
+                <code style="white-space: nowrap;">C:\Program Files\TuxPaint\data</code>
+              </blockquote>
+            </p>
+          </dd>
+
+          <dt><strong>macOS</strong></dt>
+          <dd>
+            <p>
+              Tux Paint- i i depoziton kartelat e të dhënave të veta brenda ikonës së aplikacionit “Tux Paint” (që aktualisht është një lloj i veçantë dosjeje në macOS &amp; Mac OS X para tij). Hapat vijues shpjegojnë si të merren dosjet brenda saj:            </p>
+            <ol>
+              <li>
+                Sillni përpara një menu “konteksti”, duke mbajtur të shtypur tastin <b><code>[Tasti Kontroll]</code></b> dhe duke klikuar ikonën e Tux Paint-it te <cite>Finder</cite>. (Nëse keni një mi me më tepër se një buton, mundeni thjesht të djathtasklikoni mbi ikonën.)              </li>
+              <li>
+                Te menuja që shfaqet përzgjidhni “Show Contents”. Do të shfaqet një dritare e re <cite>Finder</cite> me një dosje brenda të quajtur “Contents”.              </li>
+              <li>
+                Hapeni dosjen “Contents” dhe hapni dosjen “Resources” brenda saj.              </li>
+              <li>
+                Atje do të gjeni nëndosje të ndryshme, fjala vjen, "starters", "stamps", "brushes", etj. Shtimi i lëndës së re te këto dosje do ta bëjë atë lëndë të përdorshme nga cilido përdorues që vë në punë këtë kopje (ikonë) të Tux Paint-it.              </li>
+            </ol>
+            <p class="note">
+              <span title="Information">&#128161;</span>              <em>Shënim:</em> Nëse instaloni një version më të ri të Tux Paint-it dhe zëvendësoni, ose hidhni tej versionin e vjetër, duke ndjekur udhëzimet e mësipërme do të humbni ndryshimet e bëra, ndaj mbani kopjeruajtje të lëndës që krijoni rishtas (stampa, penela, etj.).            </p>
+            <p>
+              Tux Paint-i kërkon gjithashtu për kartela në dosjen “TuxPaint” të cilën mund ta vendosni te dosja “Application Support” e sistemit (gjendet nën "Library", në rrënjë të sistemit tuaj të kartelave):              <blockquote>
+                <code style="white-space: nowrap;">/Library/Application Support/TuxPaint/</code>
+              </blockquote>
+            </p>
+            <p>
+              Kur e përditësoni Tux Paint-in me një version të ri, lënda e kësaj dosjeje “TuxPaint” do të mbesë e njëjtë dhe do të mbesë e përdorshme nga krejt përdoruesit e Tux Paint-it.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Standard Files -->
+
+      <section class="indent"><!-- H2: Personal Files -->
+        <header>
+          <h2>
+            <a name="personal_files"
+                id="personal_files">Kartela Personale</a>
+          </h2>
+        </header>
+
+        <p>
+          Mundeni edhe të krijoni penela, stampa, “fillesa”, gjedhe dhe shkronja në drejtorinë (dosjen) tuaj të përdoruesit, ku t’i gjejë Tux Paint-i.        </p>
+
+        <dl>
+          <dt><strong>Windows</strong></dt>
+          <dd>
+            <p>
+              Dosja juaj personale Tux Paint gjedenet te “Application Data” juaj personale. Për shembull, në Windows-e më të rinj:
+              <blockquote>
+                <code style="white-space: nowrap;">C:\Dokumente dhe Rregullime\<i>(emër përdoruesi)</i>\Të dhëna Aplikacioni\TuxPaint\</code>
+              </blockquote>
+            </p>
+          </dd>
+
+          <dt><strong>macOS</strong></dt>
+          <dd>
+            <p>
+              Dosja juaj personale Tux Paint gjendet në dosjen tuaj personale “Application Support”:              <blockquote>
+                <code style= "white-space: nowrap;">/Users/<i>(emër përdoruesi)</i>/Library/Application Support/TuxPaint/</code>
+              </blockquote>
+            </p>
+          </dd>
+
+          <dt><strong>Linux dhe Unix</strong></dt>
+          <dd>
+            <p>
+              Kartelat tuaja personale Tux Paint shkojnë te një “drejtori e fshehur” që gjendet në drejtorinë shtëpi të llogarisë tuaj: “<code>$(HOME)/.tuxpaint/</code>” (e njohur edhe si “<code>~/.tuxpaint/</code>”).            </p>
+            <p>
+              Pra, nëse drejtoria juaj shtëpi është “<code>/home/tux</code>”, atëherë kartelat tuaja personale Tux Paint shkojnë te “<code>/home/tux/.tuxpaint/</code>”.            </p>
+            <p>
+              Mos harroni pikën (“<code>.</code>”) para “<code>tuxpaint</code>”!            </p>
+          </dd>
+        </dl>
+
+        <p>
+          Që të shoni penelat, stampat, “fillesat”, gjedhet dhe shkronjat tuaja, krijoni nëndrejtori nën drejtorinë tuaj personale Tux Paint të quajtuara “<code><b>brushes</b></code>”, “<code><b>stamps</b></code>”, “<code><b>starters</b></code>”, “<code><b>templates</b></code>”, “<code><b>fonts</b></code>”, përkatësisht.        </p>
+
+        <p>
+          (Për shembull, nëse krijoni një penel të quajtur “<code>flower.png</code>”, do ta vendosnit te “<code>~/.tuxpaint/brushes/</code>”, nën Linux ose Unix.)        </p>
+      </section><!-- H2: Personal Files -->
+    </section><!-- H1: Where Files Go -->
+
+    <section class="indent outer"><!-- H1: Brushes -->
+      <header>
+        <h1>
+          <a name="brushes"
+              id="brushes">Penela</a>
+        </h1>
+      </header>
+
+      <p>
+        Penelat e përdorur për të vizatuar me mjetet “Penel” dhe “Vija” në Tux Paint janë thjesht kartela figurë PNG.      </p>
+      <img src="../../html/images/brush_edit.png"
+                  width="123"
+                  height="147"
+                  alt=""
+                  align="right">
+      <p>
+        Alfa (tejdukshmëria) e figurës PNG përdoret për të përcaktuar formën e penelit, që do të thotë se forma mund të jetë e llojit “anti-aliased” dhe pjesërisht e tejdukshme!      </p>
+
+      <p>
+        Pikselat shkallë të grisë te PNG-ja e penelit do të vizatohen duke përdorur ngjyrën aktualisht të përzgjedhur në Tux Paint. Pikselat me ngjyrë do të ngjyrosen.      </p>
+
+      <section><!-- H2: Brush Options -->
+        <header>
+          <h2>
+            <a name="brush_options"
+                id="brush_options">Mundësi Penelash</a>
+          </h2>
+        </header>
+
+        <p>
+          Veç një formë grafike, penela mund t’i jepen edhe atribute të tjerë. Për ta bërë këtë, ju duhet të krijoni një 'data file' për penel.        </p>
+
+        <p>
+          Një kartelë të dhënash brush's është thjesht një kartelë teksti të thjeshtë ASCII që përmban mundësitë për brush.        </p>
+
+        <p>
+          Kartela ka të njëjtin emër me figurën PNG, por një zgjatim “<code>.dat</code>”. (p.sh., kartela e të dhënave “<code>peneli.png</code>”'s është kartela tekst “<code>peneli.dat</code>”, që gjendet në të njëjtën drejtori.)        </p>
+
+        <dl>
+          <dt><strong>Distancë Peneli</strong></dt>
+          <dd>
+            <p>
+              Që me Tux Paint version 0.9.16 tanimë mundeni të përcaktoni distancën për penelat (domethënë, sa shpesh vizatohet me ta). Si parazgjedhje, distanca do të jetë lartësia e penelit, pjesëtuar me 4.            </p>
+            <p>
+              Shtoni një rresht që përmban rreshtin “<code><b>spacing=<i>N</i></b></code>” te kartela e të dhënave të penelit, ku “<i>N</i>” është distanca që doni për penelin. (Sa më i vogël numri, aq më shpesh vizaton peneli.)            </p>
+          </dd>
+
+          <dt><strong>Penela Me Animacion</strong></dt>
+          <dd>
+            <p>
+              Që me Tux Paint version 0.9.16 tanimë mundeni të krijoni penela të animuar. Teksa përdoret peneli, vizatohet çdo kuadër i animacionit.            </p>
+            <p>
+              Vendosni çdo kuadër në një figurë të madhe PNG. Për shembull, nëse peneli juaj është 30x30 dhe keni 5 kuadro, figura duhet të jetë 150x30.            </p>
+            <p>
+              Shtoni një rresht që përmban rreshtin “<code><b>frames=<i>N</i></b></code>” te kartela e të dhënave të penelit, ku “<i>N</i>” është numri i kuadrove te peneli.            </p>
+            <p class="note">
+              <span title="Configuration option">&#9881;</span>              <b>Shënim:</b> Nëse do të donit që kuadrot të hidhen kuturu dhe jo sipas një radhe, shtoni te kartela e të dhënave të penelit edhe një rresht që përmban “<code><b>random</b></code>”.            </p>
+          </dd>
+
+          <dt><strong>Penela Me Drejtim</strong></dt>
+          <dd>
+            <p>
+              Që me Tux Paint version 0.9.16 tanimë mundeni të krijoni penela me drejtim. Teksa përdoret peneli, vizatohen forma të ndryshme, varet nga drejtimi kah shkon peneli.            </p>
+            <p>
+              Format për penelin me drejtim ndahen në një katror 3x3 te një figurë PNG. Për shembull, nëse peneli juaj është 30x30, figura duhet të jetë 90x90 dhe format e çdo drejtimi të vendosura në një rrjetë 3x3. Rajoni në qendër përdoret për mungesë lëvizjeje. Pjesa e sipërme djathtas përdoret për lëvizje që është për sipër dhe për djathtas, e me radhë.            </p>
+            <p>
+              Shtoni te kartela e të dhënave të penelit një rresht që përmban fjalën “<code><b>directional</b></code>”.            </p>
+          </dd>
+
+          <dt><strong>Penela Me Rrotullim</strong></dt>
+          <dd>
+            <p>
+              Që me Tux Paint version 0.9.27 tanimë mundeni të krijoni penela që rrotullohen. Teksa përdoret peneli, ai rrotullohet 360 gradë, varet nga drejtimi kah po shkon peneli.            </p>
+            <p>
+              Shtoni te kartela e të dhënave të penelit një rresht që përmban fjalën “<code><b>rotate</b></code>”.            </p>
+          </dd>
+
+          <dt><strong>Penela të Animuar dhe Me drejtim ose Me Rrotullim</strong></dt>
+          <dd>
+            <p>
+              Mundeni të përzieni në një penel edhe veçori peneli të animuar, edhe peneli me drejtim ose me rrotullim. Përdorni të dyja mundësitë e dëshiruara (“<code><b>frames=<i>N</i></b></code>” dhe “<code><b>directional</b></code>” ose “<code><b>rotate</b></code>”), në rreshta më vete te kartela “<code>.dat</code>” e penelit.            </p>
+            <p>
+              For directional brushes, lay the brush out so that each 3x3 set of directional shapes are laid out across a wide PNG image. For example, if the brush is 30x30 and there are 5 frames, it would be 450x90. (The leftmost 150x90 pixels of the image represent the 9 direction shapes for the first frame, for example.)            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Brush Options -->
+
+      <p>
+        Vendosini PNG-të e figurave të penelave (dhe çfarëdo kartelash tekst të dhënash) te drejtoria “<code><b>brushes</b></code>”.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Shënim</strong>: Nëse penela juaj i ri prodhon vetëm katrorë dhe drejtkëndësha të mbushur, ndodh ngaqë harruat të përdornit tejdukshmëri alfa! Për më tepër hollësi dhe ndihmëza, shihni “Dokumentim PNG-sh” në Tux Paint.      </p>
+    </section><!-- H1: Brushes -->
+
+    <section class="indent outer"><!-- H1: Stamps -->
+      <header>
+        <h1>
+          <a name="stamps"
+              id="stamps">Stampa</a>
+        </h1>
+      </header>
+
+      <p>
+        Krejt kartelat e lidhura me stampat shkojnë te drejtoria “<code><b>stamps</b></code>”. Është e dobishme të krijohen nëndrejtori dhe nën-nëndrejtori këtu, për të sistemuar stampat. (Për shembull, mund të keni një dosje “<code>festa</code>” me nëndosjet “<code>halloween</code>” dhe “<code>kërshëndella</code>”.)      </p>
+
+      <section><!-- H2: Stamp Images -->
+        <header>
+          <h2>
+            <a name="stamps_images"
+                id="stamps_images">Figura stampash</a>
+          </h2>
+        </header>
+
+        <p>
+          Vulat e Gomës në Tux Paint mund të krijohen nga një numër kartelash të ndara njëra nga tjetra. Kartela që është e domosdoshme është, sigurisht, vetë figura.        </p>
+        <img src="../../html/images/stamp_edit.png"
+                    width="128"
+                    height="147"
+                    alt=""
+                    align="right">
+        <p>
+          Që me Tux Paint version 0.9.17, Stampat mund të jenë ose figura PNG bitmap, ose figura vektoriale SVG. Mund të jenë plotësisht me ngjyra, ose shkallë të grisë. Kanali alfa (tejdukshmëria) e PNG-ve përdoret për të përcaktuar formën faktike të figurës (përndryshe, në vizatimet tuaja do të stampohej një drejtkëndësh i madh).        </p>
+
+        <p>
+          PNG-të mund të jenë të çfarëdo madhësie dhe Tux Paint (si parazgjedhje) jep një grup butonash përmasimi për ta lënë përdoruesin të zmadhojë ose zvogëlojë stampën.        </p>
+
+        <p>
+          SVG-të janë të bazuara në vektorë dhe do të ripërmasohen si duhet për madhësinë e kanavacës që po përdoret në Tux Paint.        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Shënim</strong>: Nëse Stampa me bazë PNG juaj i ri prodhon vetëm katrorë dhe drejtkëndësha të mbushur, ndodh ngaqë harruat të përdornit tejdukshmëri alfa! Për më tepër hollësi dhe ndihmëza, shihni “Dokumentim PNG-sh” në Tux Paint.        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Shënim</strong>: Nëse stampat tuaja të reja SVG duket të kenë plot hapësirë të zbrazët, sigurohuni se 'dokumenti' SVG s’është më i madh se sa forma(t) brenda tij. Nëse po qethen, sigurohuni se 'dokumenti' është aq i madh sa ta përmbajë formën(at). Për më tepër hollësi dhe ndihmëza, shihni “Dokumentim SVG”.        </p>
+
+        <p class="note">
+          <span title="Configuration option">&#9881;</span>          <b>Përdorues të Përparuar:</b> Dokumenti “Si-të e Thelluar Stampash” përshkruan në hollësi se si të krijohen figura PNG që ripërmasohen në mënyrë të përsosur, kur përdoren si stampa në Tux Paint.        </p>
+      </section><!-- H2: Stamp Images -->
+
+      <section><!-- H2: Stamp Descriptive Text -->
+        <header>
+          <h2>
+            <a name="description_text"
+                id="description_text">Tekst Përshkrues për Stampat</a>
+          </h2>
+        </header>
+
+        <p>
+          Tux Paint-i do të shfaqë tekst përshkrimi, kur përzgjidhet një stampë. Këto gjenden në kartela tekst të thjeshtë me të njëjtin emër si PNG-ja apo SVG-ja, por me një zgjatim “<code>.txt</code>” emri kartele. (p.sh., përshkrimi i “<code>stamp.png</code>” ruhet në “<code>stamp.txt</code>” në të njëjtën drejtori.)        </p>
+
+        <p>
+          Rreshti i parë i kartelës tekst do të përdoret si përshkrimi në anglishte amerikane i figurës së stampës. Duhet koduar si UTF-8.        </p>
+
+        <dl>
+          <dt><strong>Mbulim Përkthimesh</strong></dt>
+          <dd>
+            <p>
+              Te kartela tekst mund të shtohen rreshta shtesë për të dhënë përkthime të përshkrimit, që të shfaqen kur Tux Paint-i xhiron në një gjuhë tjetër (fjala vjen, shqip ose frëngjisht).            </p>
+            <p>
+              Fillimi i rreshtit duhet t’i përgjigjet kodit të gjuhës për gjuhën në fjalë (p.sh., “<code>fr</code>” për frëngjishten dhe “<code>zh_TW</code>” për kineze tradicionale), pasuar nga “<code>.utf8=</code>” dhe përshkrimi i përkthyer (Unikod, koduar si UTF-8).            </p>
+            <p>
+              <b>Për zhvillues Tux Paint-i:</b> Te drejtoria “<code>po</code>” ka programthe për shndërrim kartelash tekst në format PO (dhe anasjelltas), për përkthim të kollajtë në gjuhë të ndryshme. Ndaj s’duhet të shtoni ose ndryshoni kurrë përkthime drejt e te kartelat “<code>.txt</code>”.            </p>
+            <p>
+              Nëse s’ka përkthim për gjuhën në të cilën po xhirohet Tux Paint-i, përdoret teksti prej anglishtes amerikane.            </p>
+          </dd>
+
+          <dt><strong>Përdorues Windows-i</strong></dt>
+          <dd>
+            <p>
+              Që të përpunoni/krijoni këto kartela, përdorni <cite>NotePad</cite> ose <cite>WordPad</cite>. Sigurohuni t’i ruani si tekst të thjeshtë dhe garantoni të kenë një zgjatim “<code>.txt</code>” në fund të emrit të kartelës.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Descriptive Text -->
+
+      <section><!-- H2: Stamp Sound Effects -->
+        <header>
+          <h2>
+            <a name="sound_effects"
+                id="sound_effects">Efekte Zanore Stampash</a>
+          </h2>
+        </header>
+
+        <p>
+          Tux Paint-i mund të luajë një efekt zanor, kur përzgjidhet një stampë. Për shembull, tingulli i një rose që bën kuak-kuak, kur përzgjidhet një rosë, ose një copëz të shkurtër muzikore, kur zgjidhet një instrument muzikor.  Kartelat mund të jenë në format “WAVE ("<code>.wav</code>")” ose “OGG Vorbis ("<code>.ogg</code>")” dhe u jepet i njëjti emër me figurën PNG ose SVG. (p.sh., efekti zanor për “<code>stamp.svg</code>” është kartela zanore “<code>stamp.ogg</code>” në të njëjtën drejtori.)        </p>
+
+        <dl>
+          <dt><strong>Mbulim Përkthimesh</strong></dt>
+          <dd>
+            <p>
+              Për tinguj për gjuhë të ndryshme (ta zëmë, nëse tingulli është dikush që thotë një fjalë dhe ju doni versione të përkthyer të fjalës së thënë), krijoni gjithashtu kartela WAV ose OGG me etiketën e gjuhës te emri i kartelës, në formën: “<code>stamp_VENDORE.EXT</code>”            </p>
+            <p>
+              Efekti zanor që do të luhet kur përzgjidhet stampa që i përshoqërohet kartelës figurë “<code>stamp.png</code>” dhe kur Tux Paint-i po përdor vendoren spanjisht, do të ishte “<code>stamp_es.wav</code>”. Nën vendoren frëngjishte, do të ishte “<code>stamp_fr.wav</code>”. Nën vendoren portugalishte Brazili, “<code>stamp_pt_BR.wav</code>”.E me radhë…            </p>
+            <p>
+              Nëse nuk ngarkohet dot Efekti zanor e përkthyer, Tux Paint-i do të përpiqet të ngarkojë kartelën zanore “parazgjedhje”. (p.sh., “<code>stamp.wav</code>”)            </p>
+          </dd>
+        </dl>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Shënim</strong>: Shihni edhe mundësinë e përdorimit të tingujve përshkrues; shihni “Tingull Përshkrues Stampash”, më poshtë.        </p>
+      </section><!-- H2: Stamp Sound Effects -->
+
+      <section><!-- H2: Stamp Descriptive Sound -->
+        <header>
+          <h2>
+            <a name="descriptive_sound"
+                id="descriptive_sound">Tingull Përshkrues Stampash</a>
+          </h2>
+        </header>
+
+        <p>
+          Tux Paint-i mundet gjithashtu të luajë një tingull përshkrues, kur përzgjidhet një stampë. Për shembull, tingulli i dikujt që thotë fjalën “rosë”, kur përzgjidhet një rosë, ose emrin e një instrumenti muzikor, kur zgjidhet një i tillë.  Kartelat duhet të jenë në formatet “WAVE ("<code>.wav</code>")” ose “OGG Vorbis ("<code>.ogg</code>")” dhe u jepet i njëjti emër si figura PNG ose SVG, me “<code>_desc</code>” në fund. (p.sh., tingulli përshkrues i “<code>stamp.svg</code>” është kartela tingull “<code>stamp_desc.ogg</code>” te e njëjta drejtori.)        </p>
+
+        <dl>
+          <dt><strong>Mbulim Përkthimesh</strong></dt>
+          <dd>
+            <p>
+              Për tinguj përshkrues për gjuhë të ndryshme, krijoni gjithashtu kartela WAV ose OGG me <em>të dyja</em>, “<code>_desc</code>” <em>dhe</em> etiketën e gjuhës te emri i kartelës, në formën: “<code>stamp_desc_VENDORE.EXT</code>”            </p>
+            <p>
+              tingull përshkrues që do të luhet kur përzgjidhet stampa që i përshoqërohet kartelës figurë “<code>stamp.png</code>” dhe kur Tux Paint-i po përdor vendoren spanjisht, do të ishte “<code>stamp_desc_es.wav</code>”. Nën vendoren frëngjishte, do të ishte “<code>stamp_desc_fr.wav</code>”. Nën vendoren portugalishte Brazili, “<code>stamp_desc_pt_BR.wav</code>”.E me radhë…            </p>
+            <p>
+              Nëse nuk ngarkohet dot tingull përshkrues e përkthyer, Tux Paint-i do të përpiqet të ngarkojë kartelën zanore “parazgjedhje”. (p.sh., “<code>stamp_desc.wav</code>”)            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Descriptive Sound -->
+
+      <section><!-- H2: Stamp Options -->
+        <header>
+          <h2>
+            <a name="stamp_options"
+                id="stamp_options">Mundësi Stampash</a>
+          </h2>
+        </header>
+
+        <p>
+          Veç një formë grafike, një përshkrim në formë teksti, një efekt zanor dhe një tingull përshkrues, stampa mund t’i jepen edhe atribute të tjerë. Për ta bërë këtë, ju duhet të krijoni një 'data file' për stampë.        </p>
+
+        <p>
+          Një kartelë të dhënash stamp's është thjesht një kartelë teksti të thjeshtë ASCII që përmban mundësitë për stampë.        </p>
+
+        <p>
+          Kartela ka të njëjtin emër me figurën PNG ose SVG, por një zgjatim “<code>.dat</code>”. (p.sh., kartela e të dhënave “<code>stamp.png</code>”'s është kartela tekst “<code>stamp.dat</code>”, që gjendet në të njëjtën drejtori.)        </p>
+
+        <dl>
+          <dt><strong>Stampa të Ngjyrosura</strong></dt>
+          <dd>
+            <p>
+              Stamps can be made to be either "colorable" or "tintable."            </p>
+            <dl>
+              <dt><strong>Colorable</strong></dt>
+              <dd>
+                <p>
+                  "Colorable" stamps they work much like brushes - you pick the stamp to get the shape, and then pick the color you want it to be. (Symbol stamps, like the mathematical and musical ones, are an example.)                </p>
+                <p>
+                  Asgjë s’përdoret nga figura origjinale, hiq tejdukshmëri (nga kanali “alpha”). Stampa është tërësisht në atë ngjyrë.                </p>
+                <center>
+                  <img src="../../html/images/ex_colorable.png"
+                          width="74"
+                          height="92"
+                          alt="">
+                </center>
+                <p>
+                  Shtoni te kartela e të dhënave të stamp's një rresht që përmban fjalën “<code><b>colorable</b></code>”.                </p>
+              </dd>
+
+              <dt><strong>Tinted</strong></dt>
+              <dd>
+                <p>
+                  "Tinted" stamps are similar to "colorable" ones, except the details of the original image are kept. (To put it technically, the original image is used, but its hue is changed, based on the currently-selected color.)                </p>
+                <center>
+                  <img src="../../html/images/ex_tintable.png"
+                          width="151"
+                          height="78"
+                          alt="">
+                </center>
+                <p>
+                  Shtoni te kartela e të dhënave të stamp's një rresht që përmban fjalën “<code><b>tintable</b></code>”.                </p>
+              </dd>
+
+              <dt><strong>Mundësi Ngjyrosje:</strong></dt>
+              <dd>
+                <p>
+                  Në varësi të lëndës së stampës tuaj, mund të doni që Tux Paint-i të përdor njërën nga një numër metodash, kur e ngjyros. Shtoni një nga rreshtat vijues te kartela e të dhënave të stampës:                </p>
+                <dl>
+                  <dt>
+                    Ngjyrues normal &mdash; "<code><b>tinter=normal</b></code>" (parazgjedhja)                  </dt>
+                  <dd>
+                    Kjo është mënyra normale e ngjyrosjes. Së pari përcaktohet ngjyrimi parësor i stampës. (Për shembull, një figurë luleje me një kërcell do të ketë ngjyrën e petaleve si atë që shihet ngjyrimi parësor i figurës në përgjithësi.) Në vazhdim, lokalizohet pjesa më e ngopur e figurës. Me “ngjyruesin normal”, intervali i ngjyrimit të përdorur për të bërë këtë nis brenda ±18° të ngjyrimit parësor të gjetur në hapin 1. (Nëse s’gjendet dot një, intervali zgjerohet me 50% dhe riprovohet.)  Në fund,figura ngjyroset.  Gjithçka brenda 50% të intervalit (p.sh., ±27°) ndryshohet për të pasur ngjyrimin e ngjyrës së zgjedhur nga përdoruesi.                  </dd>
+                  <dt>
+                    Ngjyrues më i ngushtë &mdash; "<code><b>tinter=narrow</b></code>"
+                  </dt>
+                  <dd>
+                    This like the "<code>normal</code>" option described above, but starts a narrower hue range of ±6°. Anything found within 50% of the range (e.g. ±9°) is tinted. If too much of your stamp is being tinted, try this option.                  </dd>
+                  <dt>
+                    Ngjyrues “Ç’të jetë” &mdash; "<code><b>tinter=anyhue</b></code>"
+                  </dt>
+                  <dd>
+                    This remaps <em>all</em> hues in the stamp. It works similarly to the "<code>anyhue</code>" and "<code>narrow</code>" options described above, but the hue range is ±180°.                  </dd>
+                  <dt>
+                    Ngjyrues vektorial &mdash; "<code><b>tinter=vector</b></code>"
+                  </dt>
+                  <dd>
+                    This maps 'black through white' to 'black through destination'.                  </dd>
+                </dl>
+              </dd>
+            </dl>
+          </dd>
+
+          <dt><strong>Stampa të Pandryshueshme</strong></dt>
+          <dd>
+            <p>
+              Si parazgjedhje, një vulë mund të kthehet me kokëposhtë, të shfaqet si një figurë e pasqyruar, ose që të dyja. Kjo bëhet duke përdorur butonat e kontrollit nën përzgjedhësin e stampës, në pjesën e poshtë djathtas të ekranit në Tux Paint.            </p>
+            <p>
+              Ndonjëherë, s’ka kuptim që një stampë të kthehet kokëposhtë, ose të pasqyrohet, për shembull stampa shkronjash ose numrash. Ndonjëherë stampat janë simetrike, ndaj s’ka ndonjë dobi të lihet përdoruesi ta kthejë më anë tjetër.            </p>
+            <p>
+              Që të pengohet nga kthimi vertikalisht më anë tjetër i një stampe, shtoni mundësinë “<code><b>noflip</b></code>” te kartela e të dhënave të stampës.            </p>
+            <p>
+              Që të pengohet pasqyrimi horizontalisht i një stampe, shtoni mundësinë “<code><b>nomirror</b></code>” te kartela e të dhënave të stampës.            </p>
+          </dd>
+
+          <dt><strong>Madhësi Fillestare Stampe</strong></dt>
+          <dd>
+            <p>
+              Si parazgjedhje, Tux Paint-i merr të mirëqenë se stampa juaj është në përmasa të duhura për shfaqje pa ripërmasim në një kanavacë 608x472. Kjo qe madhësia fillestare e kanavacës së Tux Paint-it, dhënë nga një ekran 640x480. Tux Paint-i mandej do ta rregullojë stampën sipas madhësisë aktuale të kanavacës dhe, nëse aktivizohet, sipas kontrolleve të përdoruesit për madhësinë e stampës.            </p>
+            <p>
+              Nëse stampa juaj del shumë e madhe, ose shumë e vogël, mund të caktoni një koeficient ripërmasimi. Nëse stampa juaj do të ishte 2.5 herë më e gjerë (ose më e lartë) se sa duhej të ishte, shtoni një nga mundësitë vijuese, që përfaqësojnë të njëjtin përimtim, te kartela e të dhënave të staPas fjalës “<code>scale</code>” mund të përfshihet një shenjë barazimi, “<code>=</code>”.)            </p>
+            <ul>
+              <li>"<code><b>scale 40%</b></code>"</li>
+              <li>"<code><b>scale 5/2</b></code>"</li>
+              <li>"<code><b>scale 2.5</b></code>"</li>
+              <li>"<code><b>scale 2:5</b></code>"</li>
+            </ul>
+          </dd>
+
+          <dt><strong>Përdorues Windows-i</strong></dt>
+          <dd>
+            <p>
+              Që të përpunoni/krijoni këto kartela, përdorni <cite>NotePad</cite> ose <cite>WordPad</cite>. Sigurohuni t’i ruani si tekst të thjeshtë dhe garantoni të kenë një zgjatim “<code>.txt</code>” në fund të emrit të kartelës.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Options -->
+
+      <section><!-- H2: Pre-Mirrored and Flipped Stamps -->
+        <header>
+          <h2>
+            <a name="pre_mirroed_and_flipped_images"
+                id="pre_mirroed_and_flipped_images">Stampa të kthyera në anë tjetër dhe të pasqyruara paraprakisht</a>
+          </h2>
+        </header>
+
+        <p>
+          In some cases, you may wish to provide a pre-drawn version of a stamp's mirror-image, flipped image, or even both. For example, imagine a picture of a fire truck with the words "<cite>Fire Department</cite>" written across the side. You probably do not want that text to appear backwards when the image is flipped!        </p>
+
+        <p>
+          Për të krijuar një version me pasqyrim të një stampe që doni të përdoret në Tux Paint, në vend se të pasqyroni atë vetë, thjesht krijoni një kartelë të dytë “<code>.png</code>” ose “<code>.svg</code>” garfike me të njëjtin emër, vetëm se me “<code><b>_mirror</b></code>” para zgjatimit për emër kartele.        </p>
+
+        <p>
+          Për shembull, për stampën “<code>stamp.png</code>” do të krijonit një kartelë tjetër të quajtur “<code>stamp_mirror.png</code>”, e cila do të përdoret kur stampa pasqyrohet (në vend se të përdoret një version i dikurshëm i “<code>stamp.png</code>”).        </p>
+
+        <p>
+          As of Tux Paint 0.9.18, you may similarly provide a pre-flipped image with "<code><b>_flip</b></code>" in the name, and/or an image that is both mirrored and flipped, by naming it "<code><b>_mirror_flip</b></code>".        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Note:</strong> If the user flips and mirrors an image, and a pre-drawn "<code>_mirror_flip</code>" doesn't exist, but either "<code>_flip</code>" or "<code>_mirror</code>" does, it will be used, and mirrored or flipped, respectively.        </p>
+      </section><!-- H2: Pre-Mirrored and Flipped Stamps -->
+    </section><!-- H1: Stamps -->
+
+    <section class="indent outer"><!-- H1: Fonts -->
+      <header>
+        <h1>
+          <a name="fonts"
+              id="fonts">Shkronja</a>
+        </h1>
+      </header>
+
+      <img src="../../html/images/fontsizes.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        Shkronjat e përdorur nga Tux Paint janë TrueType Fonts (TTF).      </p>
+
+      <p>
+        Thjesht vendosini te drejtoria “<code><b>fonts</b></code>”. Tux Paint-i do ta ngarkojë llojin e shkronjave dhe do të japë katër madhësi të ndryshme te përzgjedhësi i “Shkronjave”, kur përdoren mjetet “Tekst” dhe “Etiketë”.      </p>
+    </section><!-- H1: Fonts -->
+
+    <section class="indent outer"><!-- H1: Starters -->
+      <header>
+        <h1>
+          <a name="starters"
+              id="starters">“Fillesa”</a>
+        </h1>
+      </header>
+
+      <img src="../../html/images/open_open.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        Te dialogu “I ri” shfaqen figura “Fillimi”, tok me zgjedhje ngjyrash të plota sfondi.      </p>
+
+      <p>
+        Kur përdorni një figurë “fillimi”, bëni ndryshime dhe e ruani, figura fillestare “fillesë” nuk mbishkruhet. Veç kësaj, teksa e përpunoni figurën e re, lënda e “fillesës” origjinale mund ta prekë atë.      </p>
+
+      <section><!-- H2: Coloring-Book Style Starters -->
+        <header>
+          <h2>
+            <a name="coloring_book_style"
+                id="coloring_book_style">Fillesa Në Stil Libri Për Ngjyrosje</a>
+          </h2>
+        </header>
+
+        <p>
+          Lloji më elementar i një “fillese” është i ngjashëm me një figurë në një libër ngjyrosjesh. Është përvijimi i një forme, të cilën mandej mund ta ngjyrosni dhe të shtoni në të hollësi. Në Tux Paint, teksa vizatoni, shtypni tekst, ose stamponi stampa, përvijimi mbetet “sipër” asaj që vizatoni. Mundeni të fshini pjesë të vizatimit që bëtë, por s’mundeni të fshini përvijimin.        </p>
+
+        <p>
+          Që të krijoni këtë lloj figure “fillesë”, thjesht krijoni me një program vizatimi një figurë përvijim bardhezi dhe ruajeni si një kartelë raster PNG, ose vektor SVG.  Nëse e ruani si një PNG, mundeni, nëse doni, ta vizatoni si e-zezë-dhe-e-tejdukshme, në vend se e-zezë-dhe-e-bardhë, por kjo s’është e domosdoshme (që me Tux Paint 0.9.21).        </p>
+      </section><!-- H2: Coloring-Book Style Starters -->
+
+      <section><!-- H2: Scene-Style Starters -->
+        <header>
+          <h2>
+            <a name="scene_style"
+                id="scene_style">Fillesa Në Stil Skenash</a>
+          </h2>
+        </header>
+
+        <p>
+          Tok me shtresën në stil “libri ngjyrosjesh”, mund të jepni edhe një figurë sfond më vete, si pjesë e figurës “fillesë”. Shtresa përsipër sillet po njësoj: s’mund të vizatohet sipër saj, të fshihen pjesë, apo të preken të tilla me mjetet “Magjike”. Por, te sfondi këto gjëra mund të bëhen!        </p>
+
+        <p>
+          Kur te një figurë të bazuar në këtë lloj figurë “fillesë” përdoret mjeti “Gomë”, në vend se të shndërrohet kanavaca në një ngjyrë të plotë, fjala vjen, e bardhë, ajo pjesë e kanavacës shndërrohet si qe te figura origjinale sfond nga figurë “fillesë”.        </p>
+
+        <p>
+          Duke krijuar si një mbishtresë, ashtu edhe një sfond, mundeni të krijoni një “fillesa” që simulon perspektivë. Përfytyroni një sfond që shfaq një oqean dhe një mbishtresë që është figura e një shkëmbi.Mandej mund të vizatoni (ose të “stamponi”) peshq te figura. Do të duken në oqean, por kurrë “para” shkëmbit.        </p>
+
+        <p>
+          Për të krijuar këtë lloj figure “fillesë”, thjesht krijoni një shtresë përsipër (me tejdukshmëri) dhe ruajeni si PNG. Mandej krijoni një figurë tjetër (pa tejdukshmëri) dhe ruajeni me të njëjtin emër kartele, por me zgjatimin “<code>-back</code>” (shkurtim për “background”) shtuar në fund të emrit. (p.sh., “<code>starter-back.png</code>” do të ishte figura sfond me oqeanin që i përgjigjet shtresës përsipër, ose të përparmes.)        </p>
+      </section><!-- H2: Scene-Style Starters -->
+
+      <p>
+        Për përfundimet më të mira, figura “fillesë” duhet të jetë të paktën në të njëjtën madhësi si me kanavacën e vizatimit në Tux Paint. (Për hollësi mbi madhësinë, shihni ndarjen “Ngarkim Figurash të Tjera Në Tux Paint” të dokumentimit kryesor (README).) Nëse s’janë, do të shformohem ose ripërmasohen.  Kjo bëhet pa prekur formën (“përpjesëtimet”); megjithatë, te anët mund të aplikohen ca njollosje.      </p>
+
+      <p>
+        Vendosini te drejtori “<code><b>starters</b></code>”. Kur hapet dialogu “I ri” në Tux Paint, figura “fillesë” do të duket te skena që shfaqet, pas zgjedhjesh të ndryshme ngjyrash të plota.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Shënim:</strong> “Fillesa” “u bashkëngjiten” figurave të ruajtura, përmes një kartele të vockël tekst që ka të njëjtin emër si kartela e ruajtur, por me “<code>.dat</code>” si zgjatim. Kjo e lejon të vazhdohet të preket vizatimi edhe pasi të jetë dalë nga Tux Paint-i. ose kur ngarkohet një tjetër figura, ose kur krijohet një e re. (Me fjalë të tjera, nëse e bazoni vizatimin te një figurë “fillesë”, do të ndikohet përherë prej tij.)      </p>
+
+      <section><!-- H2: Starter Options -->
+        <header>
+          <h2>
+            <a name="starter_options"
+                id="starter_options">Mundësi Fillesash</a>
+          </h2>
+        </header>
+
+        <p>
+          Veç një figurë, fillesa mund t’i jepen edhe atribute të tjerë. Për ta bërë këtë, ju duhet të krijoni një 'data file' për fillesë.          (Shënim: Tux Paint-i para versionit 0.9.29 nuk mbulonte mundësi fillesash.)        </p>
+
+        <p>
+          Një kartelë të dhënash starter's është thjesht një kartelë teksti të thjeshtë ASCII që përmban mundësitë për starter.        </p>
+
+        <p>
+          Kartela ka të njëjtin emër me figurën , por një zgjatim “<code>.dat</code>”. (p.sh., kartela e të dhënave “<code>starter.png</code>”'s është kartela tekst “<code>starter.dat</code>”, që gjendet në të njëjtën drejtori.)        </p>
+
+        <dl>
+          <dt><strong>allowscale</strong></dt>
+          <dd><!-- allowscale -->
+            <p>
+              Kur një figurë fillesë ka një tjetër përpjesëtim (gjerësi mbi lartësi) nga ajo e kanavacës së Tux Paint-it, si parazgjedhje, do të ripërmasohet për ta nxënë krejt kanavaca, pa shformuar fillesën (pa ndryshuar përpjesëtimet e saj); për shembull, një fillesë katrore në një kanavacë të orientuar për portrete do të vendoset në qendër të kanavacës.  Si parazgjedhje, Tux Paint-i atëherë do të marrë shiritin e pikselave në skajet e fillesës dhe do t’i shformojë deri te anët e kanavacës, duke e “njollosur”.            </p>
+
+            <center>
+              <img src="../../html/images/smear-wide.png"
+                      width="320"
+                      height="153"
+                      alt=""
+                      valign="middle" />
+              <img src="../../html/images/smear-tall.png"
+                      width="216"
+                      height="320"
+                      alt=""
+                      valign="middle" />
+            </center>
+
+            <p>
+              Nëse është e pranueshme që një figurë fillesë të qethet në një ose që të dyja përmasat, “<code><b>allowscale</b></code>” mund të përdoret për t’i treguar Tux Paint-it cilën sjellje të lejojë:            </p>
+            <ul>
+              <li><!-- allowscale=horizontal -->
+                <img src="../../html/images/allowscale-horizontal.png"
+                    width="108"
+                    height="160"
+                    alt=""
+                    align="right">
+                For starters where it's <em>alright to crop the majtas dhe djathtas edges</em>, but the në krye dhe në fund edges must be retained, use "<code><b>allowscale=horizontal</b></code>".                <ul>
+                  <li>
+                    Nëse përpjesëtimi i fillesës është më e gjerë se sa ai i kanavacës, do të ripërmasohet për ta nxënë lartësia e kanavacës dhe majtas dhe djathtas do të qethet.                  </li>
+                  <li>
+                    If the starter's aspect ratio is taller than that of the canvas, it will be scaled to fit the lartësia of the canvas, and no cropping will occur, and the majtas dhe djathtas edges will be smeared.                  </li>
+                </ul>
+                <br clear="all" />
+              </li><!-- allowscale=horizontal -->
+
+              <li><!-- allowscale=vertical -->
+                <img src="../../html/images/allowscale-vertical.png"
+                    width="240"
+                    height="115"
+                    alt=""
+                    align="right">
+                For starters where it's <em>alright to crop the në krye dhe në fund edges</em>, but the majtas dhe djathtas edges must be retained, use "<code><b>allowscale=vertical</b></code>".                <ul>
+                  <li>
+                    Nëse përpjesëtimi i fillesës është taller se sa ai i kanavacës, do të ripërmasohet për ta nxënë gjerësia e kanavacës dhe në krye dhe në fund do të qethet.                  </li>
+                  <li>
+                    If the starter's aspect ratio is më e gjerë than that of the canvas, it will be scaled to fit the gjerësia of the canvas, and no cropping will occur, and the në krye dhe në fund edges will be smeared.                  </li>
+                </ul>
+                <br clear="all" />
+              </li><!-- allowscale=vertical -->
+
+              <li><!-- allowscale=both -->
+                Nëse është e pranueshme të qethet te pjesa sipër dhe poshtë, ose majtas dhe djathtas, përdorni ”<code><b>allowscale=both</b></code>”. Lëndë prej fillesës do të mbushë përherë kanavacën, pavarësisht krahasimit të përpjesëtimit të saj me atë të kanavacës.              </li><!-- allowscale=both -->
+
+              <li><!-- allowscale=none -->
+                Sjella parazgjedhje është të mos lejohet qethje. Kjo mund të përcaktohet shprehimisht me “<code><b>allowscale=none</b></code>”.              </li><!-- allowscale=none -->
+            </ul>
+          </dd><!-- allowscale -->
+
+          <dt><strong>sfond</strong></dt>
+          <dd><!-- background -->
+            <p>
+              Kjo mundësi ju lejon të përcaktoni se si Tux Paint-i duhet të plotësojë pjesën e mbetur të kanavacës, kur fillesën nuk e nxë sipas njërit drejtim apo tjetrit.  Si parazgjedhje, siç përshkruhet më sipër, Tux Paint-ido të “njollosë” pikselat prej anëve të fillesës.  (Kjo mund të përcaktohet shprehimisht përmes “<code><b>background=smear</b></code>”.)            </p>
+            <p>
+              You can instead specify a solid background color (e.g., white for a 'coloring-book' style starter, with "<code><b>background=#fff</b></code>").            </p>
+            <p>
+              Colors may be listed using three decimal numbers (e.g., "<code>255 68 136</code>") or a 6- or 3-digit-long hexadecimal 'triplet' (e.g., "<code>#ff4488</code>" or "<code>#F48</code>").            </p>
+            <p>
+              Për më tepër hollësi, shihni <a href="OPTIONS.html#colorfile">ndarjen “Kartelë Palete Ngjyrash” të “Dokumentimit të mundësive”</a>.            </p>
+          </dd><!-- background -->
+
+          <dt><strong>gravity</strong></dt>
+          <dd><!-- gravity -->
+            <p>
+              Kjo mundësi ju lejon të përcaktoni si duhet ta vendosë Tux Paint-i një fillesë, kur qethet në një ose disa drejtime.  Si parazgjedhje, Tux Paint-i do të vendosë qendrën e fillesës te kanavaca. (Kjo mund të përcaktohet shprehimisht me “<code><b>gravity=center</b></code>”.)            </p>
+            <p>
+              Për shembull, nëse qendra e pjesës së sipërme përmban lëndën më të rëndësishme, mund të përcaktoni “<code><b>gravity=top</b></code>”.  Ose, nëse pjesa e poshtme djathtas është e rëndësishme, jepni “<code><b>gravity=bottom-right</b></code>”.            </p>
+
+            <p>
+              Mundësitë e gatshme janë:              <ul>
+                <li><code><b>center</b></code> &mdash; parapëlqe në qendër (parazgjedhja)</li>
+                <li><code><b>top</b></code> &mdash; parapëlqe në qendër sipër</li>
+                <li><code><b>bottom</b></code> &mdash; parapëlqe në qendër poshtë</li>
+                <li><code><b>left</b></code> &mdash; parapëlqe në qendër majtas</li>
+                <li><code><b>right</b></code> &mdash; parapëlqe në qendër djathtas</li>
+                <li><code><b>top-left</b></code> &mdash; parapëlqe majtas sipër</li>
+                <li><code><b>top-right</b></code> &mdash; parapëlqe djathtas sipër</li>
+                <li><code><b>bottom-left</b></code> &mdash; parapëlqe majtas poshtë</li>
+                <li><code><b>bottom-right</b></code> &mdash; parapëlqe djathtas poshtë</li>
+              </ul>
+            </p>
+
+                          <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-center-landscape.png"
+                    width="160"
+                    height="72"
+                    alt="[ Figurë e formuar si peizazh i një horizonti me diellin në mes dhe një ndërtesë në të djathtë. ]"
+                    title="Figurë e formuar si peizazh i një horizonti me diellin në mes dhe një ndërtesë në të djathtë."
+                    valign="middle" />
+                  <figcaption style="font-size: smaller;">
+                    <p>Focusing on the në qendër of a starter image stretched to fit the gjerësia of the canvas.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-center-portrait.png"
+                    width="84"
+                    height="160"
+                    alt="[ Figurë e formuar si portret e një horizonti me diellin në mes dhe anën e majtë të një ndërtese në të djathtë. ]"
+                    title="Figurë e formuar si portret e një horizonti me diellin në mes dhe anën e majtë të një ndërtese në të djathtë."
+                    valign="middle" />
+                  <figcaption style="font-size: smaller;">
+                    <p>Focusing on the në qendër of a starter image stretched to fit the lartësia of the canvas.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-top-landscape.png"
+                    width="160"
+                    height="72"
+                    alt="[ Figurë e formuar si peizazh e qiellit me diellin poshtë dhe majën e një ndërtese në të djathtë. ]"
+                    title="Figurë e formuar si peizazh e qiellit me diellin poshtë dhe majën e një ndërtese në të djathtë."
+                    valign="middle" />
+                  <figcaption style="font-size: smaller;">
+                    <p>Focusing on the në krye of a starter image stretched to fit the gjerësia of the canvas.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-bottom-landscape.png"
+                    width="160"
+                    height="72"
+                    alt="[ Figurë e formuar si peizazh e truallit me diellin në krye. ]"
+                    title="Figurë e formuar si peizazh e truallit me diellin në krye."
+                    valign="middle" />
+                  <figcaption style="font-size: smaller;">
+                    <p>Focusing on the në fund of a starter image stretched to fit the gjerësia of the canvas.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-right-portrait.png"
+                    width="84"
+                    height="160"
+                    alt="[ Figurë e formuar si portret e një horizonti me diellin në të majtë dhe një ndërtesë në qendër. ]"
+                    title="Figurë e formuar si portret e një horizonti me diellin në të majtë dhe një ndërtesë në qendër."
+                    valign="middle" />
+                  <figcaption style="font-size: smaller;">
+                    <p>Focusing on the djathtas of a starter image stretched to fit the lartësia of the canvas.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                        </dd><!-- gravity -->
+        </dl>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Shënim:</strong> Edhe gjedhet (të përshkruara më poshtë) mund të kenë kartela mundësish dhe aktualisht mbulojnë krejt po ato mundësi si fillesat.        </p>
+        <br clear="all">
+      </section><!-- H2: Starter Options -->
+
+    </section><!-- H1: Starters -->
+
+    <section class="indent outer"><!-- H1: 'Templates' -->
+      <header>
+        <h1>
+          <a name="templates"
+              id="templates">'Gjedhe'</a>
+        </h1>
+      </header>
+
+      <img src="../../html/images/open_open.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        Figurat “Gjedhe” shfaqen edhe te dialogu “E re”, tok me zgjedhje për sfond në ngjyrë të plotë dhe “Fillesa”. (Shënim: Tux Paint-i para versionit 0.9.22, s’e përmbante veçorinë “Gjedhe”.)      </p>
+
+      <p>
+        Ndryshe nga figura të vizatuara nga përdorues në Tux Paint dhe të hapura më vonë, hapja e një “gjedheje” krijon një figurë të re. Kur e ruani, figura “gjedhe” nuk mbishkruhet. Ndryshe nga “fillesa”, s’ka “shtresë” të pandryshueshme mbi kanavacën. Mund të vizatoni përmbi çfarëdo pjese të saj.      </p>
+
+      <p>
+          Kur te një figurë të bazuar në këtë lloj figurë “gjedhe” përdoret mjeti “Gomë”, në vend se të shndërrohet kanavaca në një ngjyrë të plotë, fjala vjen, e bardhë, ajo pjesë e kanavacës shndërrohet si qe te figura origjinale sfond nga figurë “gjedhe”.      </p>
+
+      <p>
+        “Gjedhet” janë thjesht kartela figurë (në format PNG, JPEG, SVG, ose KPX (KidPix)). S’duhet të ketë nevojë për përgatitje ose shndërrim të tyre.      </p>
+
+      <p>
+        Për përfundimet më të mira, figura “gjedhe” duhet të jetë të paktën në të njëjtën madhësi si me kanavacën e vizatimit në Tux Paint. (Për hollësi mbi madhësinë, shihni ndarjen “Ngarkim Figurash të Tjera Në Tux Paint” të dokumentimit kryesor (README).) Nëse s’janë, do të shformohem ose ripërmasohen.  Kjo bëhet pa prekur formën (“përpjesëtimet”); megjithatë, te anët mund të aplikohen ca njollosje.      </p>
+
+      <p>
+        Vendosini te drejtori “<code><b>templates</b></code>”. Kur hapet dialogu “I ri” në Tux Paint, figura “gjedhe” do të duket te skena që shfaqet, pas zgjedhjesh të ndryshme ngjyrash të plota.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Shënim:</strong> 'Gjedhe' “u bashkëngjiten” figurave të ruajtura, përmes një kartele të vockël tekst që ka të njëjtin emër si kartela e ruajtur, por me “<code>.dat</code>” si zgjatim. Kjo e lejon të vazhdohet të preket vizatimi edhe pasi të jetë dalë nga Tux Paint-i. ose kur ngarkohet një tjetër figura, ose kur krijohet një e re. (Me fjalë të tjera, nëse e bazoni vizatimin te një figurë “gjedhe”, do të ndikohet përherë prej tij.)      </p>
+      <br clear="all">
+
+      <section><!-- H2: Template Options -->
+        <header>
+          <h2>
+            <a name="template_options"
+                id="template_options">Mundësi Gjedhesh</a>
+          </h2>
+        </header>
+
+        <p>
+          Si dhe <a href="#starters">“Fillesat”</a>, mund të përcaktohet një kartelë formësimi që përcakton se si duhet të sillet Tux Paint-i, kur figura “gjedhe” aplikohen te kanavaca, kur ato s’kanë përpjesëtime identike. Shihni “<a href="#starter_options">Mundësi Fillesash</a>”, më sipër.          (Shënim: Tux Paint-i para versionit 0.9.29 nuk mbulonte mundësi fillesash.)        </p>
+      </section><!-- H2: Template Options -->
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        Është gjithashtu e mundshme të krijohen fill e nga brenda Tux Paint-it gjedhe elementare (pa mundësi), nga vizatime ekzistuese të ruajtura, që nga dialogu “<a href="README.html#using_tools_other_open">Hap</a>”. Ato do të vendosen te dosja personale e gjedheve të përdoruesit.        (Shënim: Tux Paint-i para versionit 0.9.31 nuk mbulonte Krijim gjedhesh që nga dialogu Hap.)      </p>
+
+    </section><!-- H1: 'Templates' -->
+
+    <section class="indent outer"><!-- H1: Translations -->
+      <header>
+        <h1>
+          <a name="translations"
+              id="translations">Përkthime</a>
+        </h1>
+      </header>
+
+      <p>
+        Tux Paint-i mbulon gjuhë të ndryshme, falë përdorimit të bibliotekës “gettext” të lokalizimeve. (Se si të ndryshoni gjuhët në Tux Paint, shihni <a href="OPTIONS.html#languages">ndarjen “Gjuhë” të “Dokumentim mundësish”</a>.)      </p>
+
+      <p>
+        Që të përktheni Tux Paint-in në një gjuhë të re, kopjoni kartelën gjedhe të përkthimeve, “<code>tuxpaint.pot</code>” (që gjendet në kodin burim të Tux Paint-it, në dosjen “<code>src/po/</code>”). Riemërtojeni kopjen si një kartelë “<code>.po</code>”, me një emër të përshtatshëm për vendoren në të cilën po përktheni (p.sh., “<code>es.po</code>” për spanjishten, ose “<code>pt_BR.po</code>” për portugalishte Brazili, kundrejt “<code>pt.po</code>” ose “<code>pt_PT.po</code>” për portugalishte të folur në Portugali.)      </p>
+
+      <p>
+        Hapni kartelën e krijuar rishtazi “<code>.po</code>” — mund ta përpunoni një përpunues teksti <i>të thjeshtë</i>, fjala vjen, Emacs, Pico ose VI në Linux, ose NotePad në Windows. Teksti origjinal në anglisht i përdorur në Tux Paint paraqitet në vija që fillojnë me “<code>msgid</code>”. Jepni përkthimin tuaj të secilës prej këtyre pjesëve të tekstit, te rreshtat e zbrazët “<code>msgstr</code>” fill pas rreshta përkatës “<code>msgid</code>”. (<i>Shënim:</i> Mos i hiqni thonjëzat.)      </p>
+
+      <p>
+        Shembull:
+        <blockquote>
+          <code>msgid "Smudge"<br>
+          msgstr "<u>Manchar</u>"<br>
+          <br>
+          msgid "Click and drag to draw large bricks."<br>
+          msgstr "<u>Haz clic y arrastra para dibujar ladrillos grandes.</u>"</code>
+        </blockquote>
+      </p>
+
+      <p>
+        Ekzistojnë mjete të ndryshme për të administruar katalogë përkthimesh gettext, që të mos ju duhet t’i përpunoni ata dorazi në një përpunues tekstesh. Ja disa:        <ul>
+          <li><a href="http://www.poedit.net/">Poedit</a></li>
+          <li><a href="https://wiki.gnome.org/Apps/Gtranslator">Gtranslator (GNOME Translator)</a></li>
+          <li><a href="https://virtaal.translatehouse.org/">Virtraal</a></li>
+          <li><a href="https://apps.kde.org/en/lokalize">Lokalize</a></li>
+        </ul>
+      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Shënim:</strong> Më e mira është të punohet përherë duke u bazuar në gjedhen <i>më të re</i> të katalogut të teksteve për Tux Paint-in (“<code>tuxpaint.pot</code>”), ngaqë shtohet tekst i ri dhe ndryshohet, me raste, tekst i vjetër. Katalogu i teksteve për version e ardhshëm, të pahedhur në qarkullim, të Tux Paint-ti, mund të gjendet te depoja git e Tux Paint-it (shihni: <a href="https://tuxpaint.org/download/source/git/">https://tuxpaint.org/download/source/git/</a>) dhe te sajti i Tux Paint-tit në <a href="https://tuxpaint.org/help/po/">https://tuxpaint.org/help/po/</a>.      </p>
+
+      <p>
+        Që të përpunoni një përkthim ekzistues, shkarkoni kartelën “<code>.po</code>” më të re për atë gjuhë dhe mandej përpunojeni si përshkruhet më sipër.      </p>
+
+      <p>
+        Kartela përkthimesh të reja, ose të përpunuara, mund t’ia dërgoni Bill Kendrick-ut, zhvilluesit kryesor të Tux Paint-it, te: <a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a>, ose postojini ato te lista e postimeve “tuxpaint-i18n” (shihni: <a href="https://tuxpaint.org/lists/">https://tuxpaint.org/lists/</a>).      </p>
+
+      <p>
+        Ndryshe, nëse keni një llogari në <a href="http://www.sourceforge.net/">SourceForge.net</a>, mund të kërkoni të shtoheni te projekti “<code>tuxpaint</code>” dhe të përfitoni të drejta shkrimi te depoja Git e kodit burim, që të mund të parashtroni dhe depozitoni drejtpërdrejt ndryshimet tuaja.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Shënim:</strong> Mbulimi për vendore të reja lyp bërje ndrshimesh shtesë te kodi burim (“<code>/src/i18n.h</code>” dhe “<code>/src/i18n.c</code>”) dhe lyp përditësime te <code>Makefile</code>, për të garantuar se kartelat “<code>.po</code>” janë të përpiluara në kartela “<code>.mo</code>” dhe janë të gatshme për përdorim në kohën e xhirimit.      </p>
+    </section><!-- H1: Translations -->
+
+    <section class="indent outer"><!-- H1: Alternative Input Methods -->
+      <header>
+        <h1>
+          <a name="input_methods"
+              id="input_methods">Metoda Alternative Dhënieje</a>
+        </h1>
+      </header>
+
+      <p>
+        Mjetet “Tekst” dhe “Etiketë” të Tux Paint-tit mund të ofrojnë metoda alternative dhënieje, për disa gjuhë. Për shembull, kur Tux Paint-it xhirohet me një vendore japonishteje, mund të shtypet tasti <b><code>[Alt]</code></b> djathtas për kaluar mes mënyrave latinisht, hiragana e romanizuar, katakana e romanizuar. Kjo lejon që shenja dhe fjalë të gjuhës amtare të jepen te mjetet “Tekst” dhe “Etiketë” duke shtypur një ose më tepër taste te tastiera me shenja latinishteje (p.sh., një tastierë <i>US QWERTY</i>.      </p>
+
+      <p>
+        Që të krijohet një metodë dhëniesh për një vendore të re, krijoni një kartelë tekst me një emër të bazuar te vendorja (p.sh., “<code>ja</code>” për japonishten), me “<code>.im</code>” si zgjatim (p,sh,. “<code>ja.im</code>”).      </p>
+
+      <p>
+        Kartela “<code>.im</code>” mund të ketë ndarje të shumta për përshoqërime shenjash për mënyra të ndryshme përshoqërimi shenjash. Për shembull, në një sistem shtypjeje në japonisht, shtypja e <b><code>[K]</code></b> <b><code>[A]</code></b> nënë mënyrën  hiragana prodhon një shenjë tjetër Unikod ("&#12363;") nga shtypja e <b><code>[K]</code></b> <b><code>[A]</code></b> nën mënyrën katakana ("&#12459;").      </p>
+
+      <p>
+        List the character mappings in this file, one per line. Each line should contain (separated by whitespace):      </p>
+
+      <ul>
+        <li>vlera Unikod e shenjës, në gjashtëmbëdhjetësh (mund të radhiten më shumë se një shenjë, ndarë me dy pika (“:”), duke lejuar kështu disa sekuenca të përshoqërohen me fjalë)        </li>
+
+        <li>the keycode sequence (the ASCII characters that must be entered to generate the Unicode character)        </li>
+
+        <li>a flag (or "<code>-</code>" if none)        </li>
+      </ul>
+
+      <p>
+        Start additional character mapping sections with a line containign the word "<code>section</code>".      </p>
+
+      <p>
+        Shembull:
+        <blockquote>
+          <code># Hiragana<br>
+          304B ka -<br>
+          304C ga -<br>
+          304D ki -<br>
+          304E gi -<br>
+          304D:3083 kya -<br>
+          3063:305F tta -<br>
+          <br>
+          # Katakana<br>
+          section<br>
+          30AB ka -<br>
+          30AC ga -<br>
+          30AD ki -<br>
+          30AE gi -</code>
+        </blockquote>
+      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Shënim:</strong> Rreshta të zbrazët brenda kartelës “<code>.im</code>” do të shpërfillen, siç do të ndodhë edhe me çfarëdo teksti në vijim të një shenje “<code>#</code>” (sterlinë/hash) — mund të përdoret për të terguar komente, siç shihet në shembullin më sipër.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> Meanings of the flags are locale-specific, and are processed by the language-specific source code in "<code>src/im.c</code>". For example, "<code>b</code>" is used in Korean to handle Batchim, which may carry over to the next character.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Shënim:</strong> Mbulimi për metoda dhëniesh të reja lyp bërje ndrshimesh shtesë te kodi burim ("<code>/src/im.c</code>") dhe lyp përditësime te <code>Makefile</code>, për të garantuar se kartelat “<code>.im</code>” janë të gatshme për përdorim gjatë xhirimit.      </p>
+    </section><!-- H1: Alternative Input Methods -->
+
+    <section class="indent outer"><!-- H1: On-screen Keyboard -->
+      <header>
+        <h1>
+          <a name="on_screen_keyboard"
+              id="on_screen_keyboard">Tastierë Në Ekran</a>
+        </h1>
+      </header>
+
+      <p>
+        Që me versionin 0.9.22, mjetet “Tekst” dhe “Etiketë” të Tux Paint-tit mund të paraqesin një tastierë në ekran që lejon treguesin e kursorit (përmes një miu, sistemesh ndjekjeje vështrimi, etj.) të përdoret për të futur shenja. Kartelat që përshkruajnë skemën dhe tastet e gatshme depozitohen te drejtoria “<code>osk</code>” e Tux Paint-it. Çdo skemë tastiere përcaktohet nga një numër kartelash (disa prej të cilave mund të jenë të përbashkëta për skema të ndryshme).      </p>
+      <p>
+        Si shembull, do të përdorim një tastierë QWERTY:      </p>
+      
+      <section><!-- H2: Layout overview file ("qwerty.layout") -->
+        <header>
+          <h2>
+            Kartela përmbledhje e skemës (“<code>qwerty.layout</code>”)          </h2>
+        </header>
+
+        <p>
+          Kjo është një kartelë tekst që përcakton kartelat e tjera të përdorura për të përshkruar skemën dhe përshoqërimet e tasteve.        </p>
+
+        <blockquote>
+          <p>
+            <code>layout qwerty.h_layout<br>
+            keymap us-intl-altgr-dead-keys.keymap<br>
+            composemap en_US.UTF-8_Compose<br>
+            keysymdefs keysymdef.h<br>
+            keyboardlist qwerty.layout default.layout</code>
+          </p>
+        </blockquote>
+
+        <p class="note">
+          <span title="Configuration option">&#9881;</span>          <strong>Shënim:</strong> Rreshta të zbrazët brenda kartelës “<code>.layout</code>” do të shpërfillen, siç do të ndodhë edhe me çfarëdo teksti në vijim të një shenje “<code>#</code>” (sterlinë/hash) — mund të përdoret për të terguar komente, siç shihet në shembullin më sipër.        </p>
+
+        <p>
+          Rreshti “<code>keyboardlist</code>” përshkruan te cila skema të kalohet, kur përdoruesi klikon butonat majtas dhe djathtas te tastiera. (Shihni më poshtë.)        </p>
+      </section><!-- H2: Layout overview file ("qwerty.layout") -->
+
+      <section><!-- H2: Keyboard layout file ("qwerty.h_layout") -->
+        <header>
+          <h2>
+            Kartelë skeme skeme tastiere (“<code>qwerty.h_layout</code>”)          </h2>
+        </header>
+
+        <p>
+          Kjo përshkruan se sa e madhe është tastiera (si kuadrat "width × height") dhe tregon çdo tast me kodin numerik të tastit (shihni kartelën “<code>keymap</code>” më poshtë), gjerësia sa duhet vizatuar (zakonisht “<code>1.0</code>”, për të zënë një vend te tastiera, por, në shembullin më sipër, vini re se tastet “<code>TAB</code>” dhe “<code>SPACE</code>” janë shumë më të gjerë), shenja ose teksti që duhet shfaqur mbi tastin, në varësi se cilët taste ndryshues janë shtypur (një nga : pa ndryshues, <b><code>[Tasti Shift]</code></b>, <b><code>[Tasti AltGr]</code></b> dhe <b><code>[Tasti Shift]</code></b> + <b><code>[Tasti AltGr]</code></b>) dhe, së fundi, nëse preken apo jo tastet nga tasti <b><code>[Tasti Capslock]</code></b> (përdorni “<code>1</code>”) ose tasti <b><code>[Tasti AltGr]</code></b> (grafika alternative) (përdorni “<code>2</code>”), ose fare (përdorni “<code>0</code>”).        </p>
+
+        <blockquote>
+          <p>
+            <code>WIDTH 15<br>
+            HEIGHT 5<br>
+            <br>
+            KEY 49 1.0 ` ~ ` ~ 0<br>
+            KEY 10 1.0 1 ! ¡ ¹ 0<br>
+            KEY 11 1.0 2 @ ² ˝ 0<br>
+            KEY 12 1.0 3 # · ³ 0<br>
+            KEY 13 1.0 4 $ ¤ £ 0<br>
+            KEY 14 1.0 5 % € ¸ 0<br>
+            KEY 15 1.0 6 ^ ¼ ^ 0<br>
+            ...<br>
+            KEY 21 1.0 = + × ÷ 0<br>
+            KEY 22 2.0 DELETE DELETE DELETE DELETE 0<br>
+            <br>
+            NEWLINE<br>
+            <br>
+            KEY 23 1.5 TAB TAB TAB TAB 0<br>
+            KEY 24 1.0 q Q ä Ä 1<br>
+            KEY 25 1.0 w W å Å 1<br>
+            KEY 26 1.0 e E é É 1<br>
+            KEY 27 1.0 r R ® ® 1<br>
+            ...<br>
+            <br>
+            NEWLINE<br>
+            <br>
+            # Shigjeta për majtas do ta kthejë te tastiera e mëparshme<br>
+            KEY 2 1.0 &lt;- &lt;- &lt;- &lt;- 0<br>
+            <br>
+            KEY 133 2.0 Cmp Cmp Cmp Cmp 0<br>
+            <br>
+            # The ALT or ALTGR keys are used in 'im' (input methods) to switch the input mode<br>
+            KEY 64 2.0 Alt Alt Alt Alt 0<br>
+            <br>
+            # Tasti Hapësirë<br>
+            KEY 65 7.0 SPACE SPACE SPACE SPACE 0<br>
+            <br>
+            KEY 108 2.0 AltGr AltGr AltGr AltGr 0<br>
+            <br>
+            # Shigjeta për majtas do ta kthejë te tastiera pasuese<br>
+            KEY 1 1.0 -&gt; -&gt; -&gt; -&gt; 0</code>
+          </p>
+        </blockquote>
+
+        <p>
+          Vini re këtu se tastet alfabetikë (<b><code>[Q]</code></b>, <b><code>[W]</code></b>, etj.) do të preken nga <b>[CapsLock]</b>, ndërsa taste numerikë (<b><code>[1]</code></b>, <b><code>[2]</code></b>, etj.), <b><code>[Tasti Hapësirë]</code></b>, e me radhë, nuk do të preken.        </p>
+
+        <p>
+          Kode tastesh deri te “<code>8</code>” rezervohen për përdorim të brendshëm. Ata në përdorim aktualisht përshkruhen më poshtë.        </p>
+
+        <ul>
+          <li>
+            <code>0</code> —
+                buton i zbrazët          </li>
+
+          <li>
+            <code>1</code> —
+                skema pasuese (per the layout file's "<code>keyboardlist</code>" setting)          </li>
+
+          <li>
+            <code>2</code> —
+                skema e mëparshme (per the layout file's "<code>keyboardlist</code>" setting)          </li>
+        </ul>
+      </section><!-- H2: Keyboard layout file ("qwerty.h_layout") -->
+
+      <section><!-- H2: Keymap file ("us-intl-altgr-dead-keys.keymap") -->
+        <header>
+          <h2>
+            Kartelë skeme tastiere (“<code>us-intl-altgr-dead-keys.keymap</code>”)          </h2>
+        </header>
+
+        <p>
+          This file defines which numeric keycodes (seen in the keyboard layout files, such as "<code>qwerty.h_layout</code>" described above) should be mapped to which actual characters that an application such as Tux Paint expects to receive when keys (e.g., on a real keyboard) are pressed.        </p>
+
+        <p>
+          If you're using an operating system such as <cite>Linux</cite>, which runs <cite>X-Window</cite> and has the "<code>xmodmap</code>" command-line tool available, you can run it with the ("print keymap expressions" option, "<code>-pke</code>", to generate a keymap file.        </p>
+
+        <blockquote>
+          <p>
+            <code>keycode 9 = Escape NoSymbol Escape Escape<br>
+            keycode 10 = 1 exclam exclamdown onesuperior 1 exclam 1
+            exclam NoSymbol onesuperior<br>
+            keycode 11 = 2 at twosuperior dead_doubleacute 2 at 2
+            at onehalf twosuperior<br>
+            keycode 12 = 3 numbersign periodcentered threesuperior
+            dead_macron periodcentered<br>
+            ...<br>
+            keycode 52 = z Z ae AE Arabic_hamzaonyeh asciitilde
+            guillemotright NoSymbol Greek_zeta Greek_ZETA U037D
+            U03FF<br>
+            keycode 53 = x X x X Arabic_hamza Arabic_sukun
+            guillemotleft NoSymbol Greek_chi Greek_CHI rightarrow
+            leftarrow<br>
+            keycode 54 = c C copyright cent Arabic_hamzaonwaw
+            braceright Greek_psi Greek_PSI copyright<br>
+            keycode 55 = v V v V Arabic_ra braceleft Greek_omega
+            Greek_OMEGA U03D6<br>
+            keycode 56 = b B b B UFEFB UFEF5 Greek_beta Greek_BETA
+            U03D0<br>
+            keycode 57 = n N ntilde Ntilde Arabic_alefmaksura
+            Arabic_maddaonalef Greek_nu Greek_NU U0374 U0375<br>
+            keycode 58 = m M mu mu Arabic_tehmarbuta apostrophe
+            Greek_mu Greek_MU U03FB U03FA<br>
+            keycode 59 = comma less ccedilla Ccedilla Arabic_waw
+            comma comma less guillemotleft<br>
+            keycode 60 = period greater dead_abovedot dead_caron
+            Arabic_zain period period greater guillemotright
+            periodcentered<br>
+            keycode 61 = slash question questiondown dead_hook
+            Arabic_zah Arabic_question_mark slash question<br>
+            keycode 62 = Shift_R NoSymbol Shift_R Shift_R<br>
+            ...<br></code>
+          </p>
+        </blockquote>
+      </section><!-- H2: Keymap file ("us-intl-altgr-dead-keys.keymap") -->
+
+      <section><!-- H2: Composemap file ("en_US.UTF-8_Compose") -->
+        <header>
+          <h2>
+            Composemap file ("<code>en_US.UTF-8_Compose</code>")          </h2>
+        </header>
+
+        <p>
+          This file describes single characters that can be composed by multiple inputs. For example, "<b><code>[Hartoni]</code></b>" followed by "<b><code>[A]</code></b>" and "<b><code>[E]</code></b>" can be used to create the "<code>æ</code>" character.        </p>
+
+        <p>
+          The file that comes with Tux Paint is based on the US English UTF-8 (Unicode) composemap that comes with X.Org's <cite>X Window system</cite>. The current version from the <cite>Xlib</cite> library has a web located page at <a href="https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html">https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html</a>.        </p>
+      </section><!-- H2: Composemap file ("en_US.UTF-8_Compose") -->
+
+      <section><!-- H2: Keysym definitions file ("keysymdef.h") -->
+        <header>
+          <h2>
+            Kartelë përcaktimesh simbolesh tastesh (“<code>keysymdef.h</code>”)          </h2>
+        </header>
+
+        <p>
+          This file (which is a <cite>C</cite> programming language header file) is also from the <cite>X Window System</cite>. It defines the Unicode values of each keycap (e.g., "<code>XK_equal</code>" corresponds to "<code>U+003D</code>", for the character "<code>=</code>" ("<code>EQUALS SIGN</code>").        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Shënim:</strong> Kjo kartelë nuk përpilohet brenda Tux Paint-ti vetë, lexohet dhe përtypet gjatë xhirimit të programit.        </p>
+
+        <p>
+          Ka fare pak gjasa që për këtë kartelë të duhen ndryshime.        </p>
+      </section><!-- H2: Keysym definitions file ("keysymdef.h") -->
+    </section><!-- H1: On-screen Keyboard -->
+
+    <section class="indent outer"><!-- H1: Magic Tools -->
+      <header>
+        <h1>
+          <a name="magic_tools"
+              id="magic_tools">Mjete Magjike</a>
+        </h1>
+      </header>
+
+      <p>
+        Mjetet Magjike të Tux Paint-it janë pjesë software-i, jashtë aplikacionit kryesor Tux Paint, të cilat ngarkohen si “shtojca”, kur hapet aplikacioni dhe ndërveprojnë me programin duke përdorur një Ndërfaqe Programimi Aplikacionesh (Application Programming Interface (API)) të caktuar. Shtojcat që vijnë me Tux Paint-in (si dhe vetë Tux Paint-i) janë shkruar në gjuhën C të programimit.      </p>
+
+      <p>
+        Consult the <a href="MAGIC-API.html">Magic Tool Plugin API Documentation</a> to learn how to write your own.      </p>
+    </section>
+
+  </body>
+</html>

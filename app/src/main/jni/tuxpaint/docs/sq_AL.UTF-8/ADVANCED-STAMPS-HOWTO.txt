@@ -1,0 +1,313 @@
+                                   Tux Paint
+              version 0.9.32 “Si-të” të Thelluara rreth Stampash
+
+    Të drejta kopjimi © 2006-2022 nga Albert Cahalan dhe të tjerë; shihni
+                                 AUTHORS.txt.
+                             https://tuxpaint.org/
+
+                                4 qershor 2022
+
+-------------------------------------------------------------------------------
++---------------------------------------------+
+|              Pasqyrë e Lëndës               |
+|---------------------------------------------|
+|   * Rreth kësaj “Si-të”-je                  |
+|   * Zgjedhja e figurës është kyçe           |
+|   * Përgatitni maskën                       |
+|   * Zëvendësoni thekë dhe piksela hedhurinë |
+|   * Ruajeni figurën për Tux Paint-int       |
++---------------------------------------------+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Rreth kësaj “Si-të”-je
+
+    Kjo “Si-të” merr të mirëqenë se dëshironi të krijoni një stampë Tux Paint
+    të shkëlqyer, në formatin PNG, që nga një figurë JPEG (p.sh., një foto
+    dixhitale). Ka metoda më të lehta dhe më të shpejta, që prodhojnë cilësi më
+    të ulët.
+
+    Kjo “Si -të” merr të mirëqenë se po merreni me objekte të marrtë normalë.
+    Puna me objekte gjysmë të tejdukshëm (zjarr, fletë ventilatori në lëvizje,
+    tullumbace fëmije), ose me objekte që prodhojnë dritë (zjarr, llambë,
+    diell) bëhet më mirë me programe enkas. Figurat me sfonde të përsosur
+    ngjyrash të plota bëhem gjithashtu më mirë me programe enkas, por s’janë të
+    zorshme për t’u bërë si vijon.
+
+-------------------------------------------------------------------------------
+
+Zgjedhja e figurës është kyçe
+
+    Licencë
+
+        Nëse dëshironi të parashtroni vepra te zhvilluesit e Tux Paint-it për
+        t’i marrë në shqyrtim për përfshirje te projekti zyrtar, ose nëse doni
+        të hidhni në qarkullim variantin tuaj të Tux Paint-it, paketuar me
+        punët tuaja grafike, ju duhet një pamje që është në pajtim me GNU
+        General Public License të përdorur nga Tux Paint-i.
+
+        Figura të prodhuara nga qeveria e Shteteve të Bashkuara të Amerikës
+        janë Pronësi Publike, por kini parasysh se qeveria e Shteteve të
+        Bashkuara të Amerikës ndonjëherë përdor figura të tjera në web. Kërkime
+        në figura Google përshi site:gov, ose site:mil do të sjellin plot
+        figura të përshtatshme. (Shënim: edhe sajtet *.mil përfshijnë lëndë jo
+        ushtarake!)
+
+        Figurat tuaja mund të vendosen nën Përkatësi Publike, ose nën një
+        licencë të përshtatshme, bie fjala, Creative Commons CC0 duke deklaruar
+        një gjë të tillë. (Paguani një avokat, nëse ju duket se keni nevojë për
+        këshillim ligjor.)
+
+        Për përdorim personal, çfarëdo figure që mund ta ndryshoni dhe përdorni
+        në mënyrë të ligjshme, s’duhet të jetë problem.
+
+    Madhësi dhe Orientim Figure
+
+        Ju duhet një figurë që ka një orientim të dobishëm. Perspektiva është
+        armik. Figura që shfaqin një objekt nga qoshja, janë të vështira për
+        t’i vënë në një vizatim të hijshëm. Si rregull i përgjithshëm, më të
+        mirat janë pamjet anësore telefoto. Ideali i pamundur është që, për
+        shembull, dy rrotat e një automjeti të jenë të fshehura në mënyrë të
+        përsosur pas dy të tjerave.
+
+        Rrotullimi i një figure mund ta bëjë këtë të turbullt, veçanërisht kur
+        e rrotulloni vetëm me pak gradë. Më të mirat janë figurat që s’kanë
+        nevojë për rrotullim, pas tyre vijnë figurat që duan shumë rrotullim
+        (30 deri në 60 gradë) dhe më të këqijat janë ato që duan vetëm pak
+        gradë rrotullim. Rrotullimi do ta bëjë gjithashtu më të errët një
+        figurë, ngaqë shumica e programeve të përpunimit të figurave janë shumë
+        kqe kur vjen puna te trajtimi gama. (Rrotullimi është i ligjshëm vetëm
+        për figura me gama=1.0.)
+
+        Figurat shumë të mëdha janë më dorëlëshuar ndaj gabimeve dhe, pra, më
+        të lehtë për të punuar me to. Nëse mundeni, zgjidhni një figurë me një
+        objekt që është mbi 1000 piksela në një drejtim. Këtë mund ta tkurrni
+        më vonë, për të fshehur gabimet tuaja.
+
+        Sigurohuni që figura s’është shumë me kokrriza, e errët apo e shpëlarë.
+
+        Kini mendjen te duart dhe rrotat. Nëse janë fshehur pas diçkaje, do
+        t’ju duhet të vizatoni të reja. Nëse është fshehur vetëm njëra, mund të
+        jeni në gjendje të kopjoni tjetrën, si zëvendësim.
+
+-------------------------------------------------------------------------------
+
+Përgatitni Figurën
+
+    Së pari, sigurohuni se shmangni riruajtjen e figurës si një JPEG. Kjo
+    shkakton humbje cilësie. Ka një mjet të posaçëm, të quajtur jpegtran që ju
+    lejon të kopjoni një figurë pa humbje të cilësisë së zakonshme.
+
+        jpegtran -trim -copy none -crop 512x1728+160+128 < src.jpg >
+        cropped.jpg
+
+    Silleni atë figurë te përpunuesi juaj i figurave. Nëse s’e keni qethur
+    ende, mund të zbuloni që përpunuesi juaj i figurave është shumë i ngadaltë.
+    Rrotullojeni dhe qetheni figurën sipas nevojave. Ruajeni figurën — zgjidhni
+    cilindo format të brendshëm të programit që mbulon shtresa, maska, alpha,
+    etj. Përdoruesit e GIMP-it duhet të zgjedhin “XCF” dhe ata të Adobe
+    Photoshop-it duhet të zgjedhin “PSD”, për shembull.
+
+    Nëse te përpunuesi juaj i figurave e rrotulluat apo qethët figurën, tani
+    sheshojeni. Ju duhet të keni vetëm një shtresë RGB pa maskë, ose alfa.
+
+    Hapni kutinë e dialogëve për shtresat. Përsëdyteni disa herë shtresën e
+    vetme. Nga sipër poshtë, do t’ju duhet diçka si kjo:
+
+     1. figurë e pandryshuar (nëse mundeni, mbrojeni nga shkrimi)
+     2. një figurë që do ta ndryshoni — shtresa “punë duke u bërë”
+     3. e gjelbër e plotë (nëse mundeni, mbrojeni nga shkrimi)
+     4. fuksia e plotë (nëse mundeni, mbrojeni nga shkrimi)
+     5. figurë e pandryshuar (nëse mundeni, mbrojeni nga shkrimi)
+
+    Jepini shtresës së punës që po bëhet (PQPB) një maskë fillestare të
+    papërpunuar mirë. Mund të filloni me një përzgjedhje, ose duke përdoru
+    vlerën e shkallës së grisë së shtresës PQPB. Maskën mundeni ta ktheni
+    përmbys.
+
+    Kujdes: pasi të keni maskën, s’mund ta rrotulloni, ose ripërmasimi figurën
+    si normalisht. Kjo do të shkaktonte humbje të dhënash. Do t’ju jepen
+    udhëzime speciale ripërmasimi më vonë.
+
+-------------------------------------------------------------------------------
+
+Përgatitni maskën
+
+    Get used to doing [Tasti Kontroll]-click and [Alt]-click on the thumbnail
+    images in the layers dialog. You will need this to control what you are
+    looking at and what you are editing. Sometimes you will be editing things
+    you can't see. For example, you might edit the mask of the WIP layer while
+    looking at the unmodified image. Pay attention so you don't screw up.
+    Always verify that you are editing the right thing.
+
+    Caktoni një figurë të pandryshuar si ajo që do të shihni (e sipërmja faqe
+    është më e kollajta). Caktoni maskën PDB si ajo që do të përpunoni. Në një
+    farë çasti, ndoshta jo menjëherë, duhet ta zmadhoni figurën rreth 400% (çdo
+    piksel i figurës shihet dhe përpunohet si një bllok 4x4 piksela në ekranin
+    tuaj).
+
+    Përzgjidhni pjesët e figurës që duhet të jenë 100% të marrta, ose 0% të
+    marrta. Nëse mund të përzgjidhni objektin, ose sfondin deri diku me
+    përpikëri sipas ngjyrësh, bëjeni. Siç është e nevojshme për të shmangur
+    përzgjedhje të çfarëdo pikseli që duhet të jetë pjesërisht i marrtë
+    (përgjithësisht në skajin e objektit) duhet të zmadhoni, tkurrni dhe
+    përmbysni përzgjedhjen.
+
+    Mbushini zonat 100% të marrta me të bardhë dhe zonat 0% të marrta me të
+    zezë. Kjo bëhet më lehtë me teknikën merr-dhe-vër që nga treguesi i ngjyrës
+    së përparme/të pasme. S’duhet të shihni të ndodhë ndonjë gjë, ngaqë po
+    shihni shtresën e figurës së papërpunuar, teksa po përpunoni maskën e
+    shtresës. Ndryshime të mëdha mund të jenë të dukshme te miniatura.
+
+    Tani duhet të jetë zmadhuar.
+
+    Kontrolloni punën tuaj. Fshihni shtresën e epërme të figurës së
+    pandryshuar. Shfaqni thjesht maskën, që duhet të jetë një objekt i bardhë
+    në një sfond të zi (me shumë gjasa me gri të papërpunuar anëve). Tani
+    shfaqni normalisht shtresën PDB, që maska të jetë aktive. Kjo duhet të
+    shfaqë objektin tuaj përsipër shtresës pasuese më të lartë të aktivizuar,
+    që duhet të jetë e gjelbra, ose fuksia, siç duhet për maksimumin e
+    kontrastit. Mund të doni të kaloni nga njëri te tjetri në këto sfonde, duke
+    klikuar në mënyrë të përsëritur për të aktivizuar/çaktivizuar shtresën e
+    gjelbër. Ndreqni çfarëdo problemi të dukshëm, duke përpunuar maskën, teksa
+    shihni atë.
+
+    Kthehuni te parja e shtresës së epërme të pandryshuar, teksa përpunoni
+    maskën e PDB-së. Zgjidhni penelin si mjetin tuaj të vizatimit. Si penel
+    zgjidhni një rreth të vockël të turbullt. Madhësia 5x5 është mirë për
+    shumicën e përdorimeve.
+
+    Pa ju dridhur dora, përvijoni figurën. Përdorni të zezë përreth pjesës së
+    jashtme dhe të bardhë përreth të brendshmes. Shmangni bërjen e më shumë se
+    një kalimi pa ndërruar ngjyra (pra dhe anë).
+
+    Flip views a bit, checking to see that the mask is working well. When the
+    WIP layer is composited over the green or magenta, you should see a tiny
+    bit of the original background as an ugly fringe around the edge. If this
+    fringe is missing, then you made the object mask too small. The fringe
+    consists of pixels that are neither 100% object nor 0% object. For them,
+    the mask should be neither 100% nor 0%. The fringe gets removed soon.
+
+    Shihni dhe përpunoni maskën. Përzgjidhni sipas ngjyrash, duke zgjedhur të
+    zezë ose të bardhë. Sipas shumicës së gjasave do të shihni quka që s’janë
+    tamam ngjyra e pritur. Përmbyseni përzgjedhjen, mandej ngjyrosini këto me
+    mjetin laps. Bëjeni këtë veprim për të zezën dhe për të bardhën.
+
+-------------------------------------------------------------------------------
+
+Zëvendësoni thekë dhe piksela hedhurinë
+
+    Ende duke parë maskën, përzgjidhni sipas ngjyrash. Zgjidhni të zezën.
+    Tkurreni përzgjedhjen me disa piksela, duke u kujdesur që të MOS tkurrni që
+    nga skajet e maskës (tkurrja ju ndihmo të shmangni gabime dhe t’i
+    eleminoni).
+
+    Tani çaktivizoni maskën. Shihni dhe përpunoni shtresën PDB të pamaskuar.
+    Duke përdorur mjetin e zgjedhjes së ngjyrës, zgjidhni një ngjyrë që është e
+    përdorur mesatarisht për objektin. Tërhiqeni dhe lëreni këtë ngjyrë te
+    përzgjedhja, duke hequr kështu shumicën e pikselave që s’janë të objektit.
+
+    Kjo ngjyrë e plotë do të ngjishet mirë dhe do të ndihmojë të parandalohet
+    thekë të shpifur të ngjyrosur, kur Tux Paint-i e zvogëlon figurën. Nëse
+    skaji i objektit ka ngjyra të shumta që ndryshojnë shumë njëra nga tjetra,
+    duhet ta ndani në pjesë përzgjedhjen tuaj, që të mund të ngjyrosni sfondin
+    aty pranë të jetë i ngjashëm.
+
+    Now you will paint away the existing edge fringe. Be sure that you are
+    editing and viewing the WIP image. Frequent layer visibility changes will
+    help you to see what you are doing. You are likely to use all of:
+
+      + composited over e gjelbër (mask enabled)
+      + composited over fuksia (mask enabled)
+      + origjinali (shtresë e epërme ose e poshtme)
+      + composited over origjinali (mask enabled)
+      + shtresa PDB e papërpunuar ( maska e çaktivizuar)
+
+    Për të ulur rastet e aksidenteve, mund të doni të përzgjidhni vetëm ata
+    piksela që s’janë gri te maska. (Përzgjidhni sipas ngjyrash nga maska,
+    zgjidhni të zezën, mënyra shtim, zgjidhni të bardhën, përmbyseni. Ndryshe,
+    Përzgjidhni krejt, përzgjidhni sipas ngjyrës nga maska, mënyra heqje,
+    zgjidhni të zezën, zgjidhni të bardhën.) Nëse bëni kështu, ka shumë gjasa
+    të mund të doni të zgjeroni paksa përzgjedhjen dhe/ose të fshihni vijat
+    “milingona që baresin” që shenjon përzgjedhjen.
+
+    Përdorni mjetin e klonimit dhe mjetin penel. Ndryshojeni shkallën e
+    patejdukshmërisë sipas nevojës. Përdorni kryesisht penela të vegjël të
+    rrumbullakët, ndoshta 3x3 ose 5x5, të turbullt ose jo. Përgjithësisht është
+    mirë të çiftohen penela me patejdukshmëri 100% me penela jo të turbullt me
+    rreth 70% patejdukshmëri.) Mënyra jo të zakonshme vizatimi mund të jenë të
+    dobishme me objekte gjysmë-të-tejdukshëm.
+
+    Qëllimi është të hiqen thekët e skajeve, si brenda ashtu edhe jashtë
+    objekteve. Thekët e brendshëm, të dukshëm kur objekti është hartuar
+    përsipër fuksias ose të gjelbrës, duhen hequr për arsye të kuptueshme.
+    Thekët e jashtë duhet hequr gjithashtu ngaqë do të bëhen të dukshëm kur
+    figura zvogëlohet. Si shembull, le të marrim një rajon 2x2 piksela në skaj
+    të një objekti me anë të mprehta. Gjysma e majtë është e zezë dhe 0% e
+    marrtë. Gjysma e djathtë është e bardhë dhe 100% e marrtë. Pra, kemi një
+    objekt të bardhë në një sfond të zi. Kur Tux Paint-i e zvogëlon këtë në 50%
+    (një zonë 1x1 piksel), përfundimi do të jetë një piksel gri 50% i marrtë.
+    Përfundimi i saktë do të ishte një piksel i bardhë 50% i marrtë. Për të
+    marrë këtë përfundim, do të duhej të ngjyrosnim paint away pikselat e zinj.
+    Ata kanë rëndësi, pavarësisht se janë 0% të marrtë.
+
+    Tux Paint-i mund të zvogëlojë figura sipas një koeficienti shumë të madh,
+    ndaj është e rëndësishme të zgjeroni jo pak skajin e objektit tuaj drejt
+    kahut jashtë. Mu te skaji i objektit tuaj, duhet të jeni shumë të përpiktë
+    me këtë. Teksa i largoheni për jashtë objektit, mund As you go outward away
+    from the object, you can get a bit sloppy. Është e arsyeshme të ngjyrosni
+    drejt jashtë me një duzinë pikselash, a më tepër. Sa më larg shkoni, aq më
+    mirë do të zvogëlojë Tux Paint-i pa krijuar thekë të shpifur të ngjyrosur.
+    Për zona që janë më tepër se pak piksela larg skajit të objektit, duhet të
+    përdorni mjetin laps (or sloppy select with drag-and-drop color) për të
+    garantuar se përfundimi do të ngjishet mirë.
+
+-------------------------------------------------------------------------------
+
+Ruajeni figurën për Tux Paint-int
+
+    Është shumë kollaj të rrënoni punën tuaj të vështirë. Përpunuesit e
+    figurave mund të shkatërrojnë pa u ndjerë piksela në zona 0% të marrta.
+    Kushtet nën të cilën ndodh kjo mund të jenë të ndryshme nga versioni në
+    version. Nëse keni besim në vete, mund të provoni ta ruani figurën tuaj
+    drejt e si PNG. Mos harroni për ta rihapur, për të verifikuar se zonat 0%
+    të marrta s’u shndërruan në të zeza, ose të bardha, çka do të krijonte
+    thekë, kur Tux Paint-i të ripërmasojë figurën me zvogëlim. Nëse ju duhet të
+    ripërmasoni figurën tuaj, për të kursyer vend (dhe për të fshehur gabimet
+    tuaja), të jeni thuajse i sigurt se do të shkatërroni krejt zonat 0% të
+    marrta. Ndaj, ja një mënyrë më e mirë…
+
+    Një Mënyrë Më e Parrezik për Ruajtje
+
+        Tërhiqeni maskën prej dialogut të shtresave te pjesa e papërdorur e
+        panelit (fill pas mjetit të fundit të vizatimeve). Kjo do të krijojë
+        një figurë të re të përbërë nga një shtresë që përmban të dhënat e
+        maskës. Ripërmasojeni si doni, duke mos harruar rregullimet që
+        përdorni. Shpesh, duhet të filloni me një figurë që është 700 deri në
+        1500 nga ana në anë dhe të përfundoni me një që është 300 deri në 400.
+
+        Ruajeni figurën e maskës si një kartelë NetPBM të bartshme (“.pgm”).
+        (Nëse po përdorni një hedhje të vjetër në qarkullim të GIMP-it, mund
+        t’ju duhet ta shndërroni figurën në shkallë të grisë, para se të mund
+        ta ruani.) Zgjidhni formatin më kompakt “RAW PGM”. (Shenja e dytë e
+        kartelës duhet të jetë shifra ASCII “5”, hex byte 0x35.)
+
+        Mund ta mbyllni figurën maskë.
+
+        Pasi të ktheheni te figura me shumë shtresa, përzgjidhni tani shtresën
+        PDB. Siç bëtë me maskën, tërhiqeni këtë nga dialogu i shtresave te
+        paneli. Duhet të përfitoni një figurë me një shtresë me të dhënat tuaja
+        prej PDB-së. Nëse erdhi edhe maska, hiqeni prej aty. Duhet të shihni
+        objektin dhe anët ct and the painted-away surroundings, pa miniaturë
+        maske te dialogu i shtresave. Nëse e ripërmasuat maskën, atëherë
+        përmasoni saktësisht në të njëjtën mënyrë këtë figurë. Ruajeni këtë
+        figurë si një kartelë NetPBM (“.ppm”). (Shënim: .ppm, jo .pgm.) (Nëse
+        zgjidhni formatin RAW PPM, bajtu u dytë i kartelës duhet të jetë shifra
+        ASCII “6”, hex byte 0x36.)
+
+        Tani duhet të përzieni dy kartelat në një. Bëjeni këtë me urdhrin
+        pnmtopng, kështu:
+
+            pnmtopng -force -compression 9 -alpha mask.pgm fg.ppm >
+            final-stamp.png
+

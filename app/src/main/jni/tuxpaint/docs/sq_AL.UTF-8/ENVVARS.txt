@@ -1,0 +1,108 @@
+                                   Tux Paint
+                                version 0.9.32
+                      Dokumentim Ndryshoresh të Mjedisit
+
+ Të drejta kopjimi © 2021-2023 nga kontribues të ndryshëm; shihni AUTHORS.txt.
+                             https://tuxpaint.org/
+
+                                  5 maj 2023
+
+-------------------------------------------------------------------------------
+
+Tux Paint-i njeh një numër ndryshoresh mjedisi, qoftë drejtpërsëdrejti, qoftë
+tërthorazi nga bibliotekat që përdor.
+
+Ndryshore mjedisi të lidhura me depozitim
+
+HOME
+
+    Përcakton “drejtorinë shtëpi” të përdoruesit, që përdoret për të vendosur
+    kartela dhe drejtori të tjera të shumta. Në disa raste përdoret si pjesë e
+    një vendndodhje rrugëdalje, kur s’janë ujdisur ndryshore të tjera mjedisi
+    (gjetkë në këtë dokumentim). Ndonjëherë, vendndodhja për t’u përdorur mund
+    të anashkalohet nga mundësi të dhëna në rreshtin e urdhrave, ose përmes
+    kartelës së formësimit të Tux Paint-it. Për hollësi, shihni “MUNDËSITË”.
+
+    Në pak shembuj se ku përdoret “$HOME” përfshihen:
+
+      + Vendndodhja e kartelës së formësimit të Tux Paint-it
+      + Baza se ku ruan dhe ngarkon Tux Paint-i vizatimet e përdoruesve
+      + Vendndodhja e një koleksioni privat të përdoruesit të kartelave të të
+        dhënave — stampave, penelave, etj. — (kundrejt atyre që mund të
+        përdoren nga krejt sistemi)
+
+
+XDG_CONFIG_HOME
+
+    Në Linux dhe platforma të tjera ku përdoren standardet e Grupit Desktopi X,
+    vendndodhja e kartelave të formësimeve të përdoruesit. Hollësisht, ku të
+    gjendet “user-dirs.dirs”, ku “XDG_PICTURES_DIR” duhet përcaktuar. Përdoret
+    për eksportim vizatimesh dhe GIF-esh të animuar. Përgjithësisht, caktohet
+    diçka e ngjashme me “$HOME/Pictures/”. Në mos u përcaktoftë, Tux Paint
+    kontrollon te drejtoria “$HOME/.config/”. Nëse s’gjendet dot formësimi, Tux
+    Paint-i thjesht eksporton vizatime dhe GIF-e te “$HOME”.
+
+
+
+XDG_DATA_HOME
+
+    Në Linux dhe platforma të tjera ku përdoren standardet e Grupit Desktopi X,
+    vendndodhja e kartelave të formësimeve të përdoruesit. Hollësisht, ku të
+    gjendet drejtoria “Trash”. Përdoret kur fshihen figura nga dialogu “Hap” i
+    Tux Paint-it. Në mos u përcaktoftë, përdoret vendndodhja “$HOME/.local/
+    share/Trash/”, në pastë. Nëse jo, figurat thjesht fshihen, në vend se të
+    kalohe gjetiu.
+
+
+
+TEMP
+
+    Përcakton vendndodhjen ku mund të krijohen kartela të përkohshme. E
+    përdorur nga Tux Paint-i vetëm në OSe Microsoft Windows. Përdor “userdata”,
+    nëse s’është ujdisur.
+
+Ndryshore mjedisi të lidhura me gjuhët
+
+LANG
+LANGUAGE
+LC_ALL
+LC_MESSAGES
+
+    Specify the language Tux Paint should utilize in its user interface.
+    Overridden by the "--lang" and "--locale" command-line options or their
+    configuration file counterparts. The "LANGUAGE" environment variable is
+    used, if set. If not, "LC_ALL" is used as a fallback. Then "LC_MESSAGES",
+    and finally "LANG".
+
+
+
+
+Ndryshore mjedisi të lidhura me ekranin
+
+Sa vijon janë pak nga ndryshoret e mjedisit të mbuluara nga Simple DirectMedia
+Layer (libSDL) — të cilat Tux Paint-i i përdorr për të shfaqur elementë
+grafikë, për të luajtur tinguj dhe për të marrë sinjale për miun, tastierën dhe
+joystick-un — dhe që mund të jenë të dobishme për për përdorues të Tux
+Paint-it.
+
+SDL_VIDEO_ALLOW_SCREENSAVER
+
+    Përcakton nëse Tux Paint-i duhet të lejojë xhirimin e një kursyesi ekrani.
+    Mund të vihet '1' (true) nga vetëm Tux Paint-i, duke dhënë mundësinë
+    “--allowscreensaver” në rresht urdhrash, ose te pjesa përkatëse e kartelës
+    së formësimit.
+
+
+
+SDL_VIDEO_WINDOW_POS
+
+    Kërkesa ku të vendoset dritarja e Tux Paint-it dhe mund të përdoret për të
+    përcaktuar në cilin ekrani të vendoset një Tux Paint sa krejt ekrani, në
+    një sistem me shumë monitorë. Nëse nuk është ujdisur, ose ujdisur si
+    “nopref” (që do të thotë “pa parapëlqim”), vendos Simple DirectMedia Layer
+    (libSDL). Mund të vihet sa një koordinatë X,Y (p.sh., 200,100), ose
+    “center” (që do të thotë “qendër”).
+
+
+
+

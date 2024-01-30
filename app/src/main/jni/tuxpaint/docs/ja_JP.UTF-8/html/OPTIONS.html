@@ -717,19 +717,19 @@
 
     <dd>
       <p>
-        Sets the complexity (expertise) level of Tux Paint, which can either disable some Magic tools, or cause them to operate differently. (For example, the "Clone" tool is not available in <em>novice</em> mode, and the 1-, 2-, and 3-point perspective tools do not allow vanishing points to be edited in <em>beginner</em> mode.)      </p>
+        タックスペイントの操作の複雑さ(熟達度合い)のレベルを設定します。これにより、いくつかの「まほう」ツールが無効になったり、異なる動作をしたりします。(例えば、"クローン "ツールは<em>初心者</em>モードでは使用できません。また、1点、2点、3点透視図法ツールは<em>中級者</em>モードでは消失点の編集ができません)。      </p>
       <p>
-        The <code>COMPLEXITY</code> value may be one of:        <dl>
+        <code>COMPLEXITY</code> は以下の３とおりから選択できます。        <dl>
           <dt><code>advanced</code> (the default)</dt>
-          <dd>"Advanced" &mdash; For users familiar with Tux Paint and who can operate more complex tools.</dd>
+          <dd>「上級者」 &mdash; Tux Paint に精通していて、複雑な操作が可能なユーザー向け。</dd>
           <dt><code>beginner</code></dt>
-          <dd>"Beginner" &mdash; For users comfortable with Tux Paint, but where complex tools may cause confusion or frustration.</dd>
+          <dd>「中級者」 &mdash; ある程度 Tux Paint に慣れているが、複雑なツールにとまどったり、フラストレーションを感じるユーザー向け。</dd>
           <dt><code>novice</code></dt>
-          <dd>"Novice" &mdash; For first-time Tux Paint users, users inexperienced with computers, or those with special accessibility needs.</dd>
+          <dd>「初心者」 &mdash; 初めて Tux Paint を使うユーザーや、コンピューターの経験が浅いユーザー、または、特殊な操作が必要なユーザー向け</dd>
         </dl>
       </p>
       <p class="note">
-        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> The complexity option was added to Tux Paint in version 0.9.32. Consult the <a href="magic-docs/html/index.html">individual Magic tools' documentation</a>.      </p>
+        <span title="Version variation">&#128220;</span>        <strong>注:</strong> 難易度のオプションは、Tux Paint バージョン 0.9.32 で導入されました。詳しくは <a href="magic-docs/html/index.html">個々の「まほう」ツールのドキュメント</a>を参照して下さい。      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>complexity=advanced</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--complexity=advanced</code>" で変更できます。      </p>
     </dd>
