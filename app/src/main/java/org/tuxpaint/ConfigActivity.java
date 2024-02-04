@@ -64,6 +64,7 @@ public class ConfigActivity extends Activity {
 	String print = null;
         String printdelay = null;
         String disablescreensaver = null;
+		String hidecursor = null;
         String orient = null;
         String buttonsize = null;
         String colorsrows = null;
@@ -89,6 +90,7 @@ public class ConfigActivity extends Activity {
 	ToggleButton printToggle = null;
 	Spinner printdelaySpinner = null;
         ToggleButton disablescreensaverToggle = null;
+		ToggleButton hidecursorToggle = null;
         ToggleButton orientToggle = null;
         Spinner buttonsizeSpinner = null;
         Spinner colorsrowsSpinner = null;
@@ -388,6 +390,20 @@ public class ConfigActivity extends Activity {
 			}
 		});
 
+		hidecursorToggle = (ToggleButton)this.findViewById(R.id.toggleHidecursor);
+		if (hidecursor.compareTo("yes") == 0)
+			hidecursorToggle.setChecked(true);
+		else
+			hidecursorToggle.setChecked(false);
+		hidecursorToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked)
+					hidecursor = "yes";
+				else
+					hidecursor = "no";
+			}
+		});
+
 	orientToggle = (ToggleButton)this.findViewById(R.id.toggleOrient);
 		if (orient.compareTo("landscape") == 0)
 			orientToggle.setChecked(true);
@@ -566,6 +582,7 @@ public class ConfigActivity extends Activity {
 	print = props.getProperty("print", "no");
 	printdelay = props.getProperty("printdelay", "0");
 	disablescreensaver = props.getProperty("disablescreensaver", "no");
+	hidecursor= props.getProperty("hidecursor", "yes");
 	orient = props.getProperty("orient", "landscape");
 	buttonsize = props.getProperty("buttonsize", "48");
 	colorsrows = props.getProperty("colorsrows", "1");
@@ -573,7 +590,7 @@ public class ConfigActivity extends Activity {
 	stamprotation = props.getProperty("stamprotation", "yes");
 	complexity = props.getProperty("complexity", "advanced");
 	    	 
-	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + orient + " " + buttonsize + " " + colorsrows + " " + osklayout + " " + stamprotation + " " + complexity);
+	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + hidecursor + " " + orient + " " + buttonsize + " " + colorsrows + " " + osklayout + " " + stamprotation + " " + complexity);
     }
 
     private void save () {
@@ -593,6 +610,7 @@ public class ConfigActivity extends Activity {
 	props.put("print", print);
         props.put("printdelay", printdelay);
 	props.put("disablescreensaver", disablescreensaver);
+	props.put("hidecursor", hidecursor);
 	props.put("orient", orient);
 	props.put("buttonsize", buttonsize);
 	props.put("colorsrows", colorsrows);
