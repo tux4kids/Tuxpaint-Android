@@ -124,8 +124,6 @@ public class ConfigActivity extends Activity {
 	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) this.requestPermissions(new String[]{android.Manifest.permission.READ_MEDIA_IMAGES},2);
 		setContentView(R.layout.config);
          /* License button starts the License activity */
-        Button goimportButton = (Button) this.findViewById(R.id.button_goimport);
-        goimportButton.setOnClickListener(v -> startActivity(new Intent(ConfigActivity.this, ImportData.class)));
 
 
 		load ();
