@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# To add a new translation put its po here and add/modify the proper entry in ..res/values/arrays.xml
+#
 # Update .po files and convert to .xml translation files
 #
 # Note, 2023 december: If a2po doesn't work with python3, apply this pull request to android2po:
