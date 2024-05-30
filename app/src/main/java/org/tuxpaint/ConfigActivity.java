@@ -72,7 +72,8 @@ public class ConfigActivity extends Activity {
         String osklayout = null;
         String stamprotation = null;
         String complexity = null;
-		String complexity_loc = null;
+        String complexity_loc = null;
+        String groupmagictools = null;
         boolean cancel = false;
 
 	EditText savedirView = null;
@@ -92,6 +93,7 @@ public class ConfigActivity extends Activity {
         ToggleButton disablescreensaverToggle = null;
 		ToggleButton hidecursorToggle = null;
         ToggleButton orientToggle = null;
+        ToggleButton groupmagictoolsToggle = null;
         Spinner buttonsizeSpinner = null;
         Spinner colorsrowsSpinner = null;
         Spinner osklayoutSpinner = null;
@@ -416,6 +418,20 @@ public class ConfigActivity extends Activity {
 			}
 		});
 
+	groupmagictoolsToggle = (ToggleButton)this.findViewById(R.id.toggleGroupmagictools);
+		if (groupmagictools.compareTo("yes") == 0)
+			groupmagictoolsToggle.setChecked(true);
+		else
+			groupmagictoolsToggle.setChecked(false);
+		groupmagictoolsToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked)
+					groupmagictools = "yes";
+				else
+					groupmagictools = "no";
+			}
+		});
+
 	stamprotationToggle = (ToggleButton)this.findViewById(R.id.toggleStamprotation);
 		if (stamprotation.compareTo("yes") == 0)
 			stamprotationToggle.setChecked(true);
@@ -587,8 +603,9 @@ public class ConfigActivity extends Activity {
 	osklayout = props.getProperty("onscreen-keyboard-layout", "SYSTEM");
 	stamprotation = props.getProperty("stamprotation", "yes");
 	complexity = props.getProperty("complexity", "advanced");
+	groupmagictools = props.getProperty("groupmagictools", "yes");
 	    	 
-	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + hidecursor + " " + orient + " " + buttonsize + " " + colorsrows + " " + osklayout + " " + stamprotation + " " + complexity);
+	Log.v(TAG, autosave + " " + sound + " " + stereo + " " + saveover + " " + savedir + " " + datadir + " " + exportdir + " " + lang + " " + sysfonts + " " + print + " " + printdelay + " " + disablescreensaver + " " + hidecursor + " " + orient + " " + buttonsize + " " + colorsrows + " " + osklayout + " " + stamprotation + " " + complexity + " " + groupmagictools);
     }
 
     private void save () {
@@ -615,6 +632,7 @@ public class ConfigActivity extends Activity {
 	props.put("onscreen-keyboard-layout", osklayout);
 	props.put("stamprotation", stamprotation);
 	props.put("complexity", complexity);
+	props.put("groupmagictools", groupmagictools);
 
 	try {
 	    OutputStream	out = new FileOutputStream(cfg);
@@ -655,12 +673,6 @@ public class ConfigActivity extends Activity {
 	if (!localeback.equals(myLocale))
 	    {
 		conf.locale = myLocale;
-
-		/* FIXME: Ugly hack to deal with shrink changes every time updateConfiguration/recreate is called.
-		   Unsetting android:anyDensity="false" in AndroidManifest.xml would be the right fix, but can't do it right 
-		   now as buttons in the main program would be too small on many devices. Pere - November 2020*/
-		//		conf.densityDpi=360;
-
 		res.updateConfiguration(conf, res.getDisplayMetrics());
 		recreate();
 	    }

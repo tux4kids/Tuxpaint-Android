@@ -467,7 +467,32 @@
             android:textOff="@string/Stamp_rotation_disabled" />
     </LinearLayout>
 
+
         <LinearLayout
+        android:id="@+id/layoutGroupmagictools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/viewGroupmagictools"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Groupmagictools" />
+
+        <ToggleButton
+            android:id="@+id/toggleGroupmagictools"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="@string/groupmagictools"
+            android:textOff="@string/ungroupmagictools" />
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
         android:id="@+id/layoutBTPerms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
