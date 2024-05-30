@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            versión 0.9.32          </h1>
+            versión 0.9.33          </h1>
 
           <h3 align="center">
             Un sinxelo programa de debuxo para cativos          </h3>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            29 de Xaneiro de 2024          </p>
+            29 de Abril de 2024          </p>
         </center>
       </header>
       <table border="2"
@@ -224,42 +224,28 @@
   <section class="indent">
     <header>
       <h2>
-        D. What's New in Tux Paint version 0.9.32?      </h2>
+        D. What's New in Tux Paint version 0.9.33?      </h2>
     </header>
 
     <dl>
-  <dt>1-point Perspective (vanishing point) Magic tool</dt>
-  <dd>A pair of tools that allow you to set a vanishing point, and then draw lines in 1-point perspective.</dd>
+  <dt>Transparent Erasers</dt>
+  <dd>Erasers that lightly expose more and more of the background.</dd>
 
-  <dt>2-point Perspective (vanishing point) Magic tool</dt>
-  <dd>A pair of tools that allow you to set two vanishing points, and then draw lines in 2-point perspective.</dd>
+  <dt>Dither magic tools</dt>
+  <dd>Transform parts of an image into a dithered pattern of dots.</dd>
 
-  <dt>3-point Perspective (vanishing point) Magic tool</dt>
-  <dd>A pair of tools that allow you to set three vanishing points, and then draw lines in 3-point perspective.</dd>
 
-  <dt>Isometric Magic tool</dt>
-  <dd>A tool that draws lines in an isometric projection.</dd>
+  <dt>Filled Polygon magic tool</dt>
+  <dd>Create polygons by placing three or more connected points on the canvas.</dd>
 
-  <dt>Dimetric Magic tool</dt>
-  <dd>A pair of tools that allow you to set an angle, and then draw lines in a dimetric projection.</dd>
+  <dt>3D Glasses magic tool updated</dt>
+  <dd>Different anaglyphic color separations now offered (via the 'size' controls), unless running Tux Paint in 'Novice' complexity level.</dd>
 
-  <dt>Trimetric Magic tool</dt>
-  <dd>A pair of tools that allow you to set two angles, and then draw lines in a trimetric projection.</dd>
+  <dt>Magic tool ungrouping option</dt>
+  <dd>The numerous Magic tools can be presented as a single long list (as in Tux Paint prior to 0.9.27), rather than paged groups.</dd>
 
-  <dt>Oblique Magic tool</dt>
-  <dd>A pair of tools that allow you to set an angles, and then draw lines in an oblique projection.</dd>
-
-  <dt>Epitrochoid and Hypotrochoid Magic tools</dt>
-  <dd>Tools that create centered trochoid curved patterns.</dd>
-
-  <dt>New "complexity" setting (<code>complexity</code>)</dd>
-  <dd>A new setting that allows certain Magic tools to behave differently (or remove their availability altogether) based on the expertise-level of the user. The new "N-point Perspective" tools and "Clone" tool are affected by this setting.</dd>
-
-  <dt>Magic tools reorganized</dd>
-  <dd>Each group of Magic tools has been reorganized to keep related tools next to each other, rather than being sorted alphabetically by their (localized) names.</dd>
-
-  <dt>Font details shown when selected</dt>
-  <dd>The name and size of the selected font are shown when using the Text and Label tools.</dd>
+  <dt>Brush descriptions</dt>
+  <dd>Brushes (used by Paint and Line tools) can now include descriptions that appear when the brush is selected.</dd>
 </dl>
 
     <p>
@@ -333,7 +319,7 @@
       Se está a usar a versión «portátil» (ficheiro ZIP) de Tux Paint ou se usou o «Instalador de Tux Paint», pero escolleu non ter instalados atallos, terá que facer dobre clic na icona «<code>tuxpaint.exe</code>» no cartafol «<code>Tux Paint</code>» do seu computador.    </p>
 
     <p>
-      De xeito predeterminado, o «Instalador de Tux Paint» colocará o cartafol de Tux Paint en «<code>C:\Program Files\</code>», aínda que é posíbel que o teña cambiado vostede cando executou o instalador.    </p>
+      By default, the 'Tux Paint Installer' will put Tux Paint's folder in <nobr>"<code style='background: #EEE;'>C:\Program Files\TuxPaint\</code>"</nobr>, though you may have changed this when you ran the installer.    </p>
 
     <p>
       Se usou a descarga de «ficheiro ZIP», o cartafol de Tux Paint estará onde teña extraído o contido do ficheiro ZIP.    </p>
@@ -951,6 +937,12 @@
   <p>
     A ferramenta Maxia é realmente un conxunto de ferramentas especiais. Seleccione un dos efectos «máxicos» no selector da dereita. Após, dependendo da ferramenta, pode premer e arrastrar arredor da imaxe e/ou simplemente premer na imaxe unha vez para aplicar o efecto.  </p>
 
+  <strong>The Magic Tools</strong>
+  <blockquote>
+    <p>
+      Consulte as <a href="../magic-docs/html/index.html">instrucións de cada ferramenta Máxica</a> (no cartafol «magic-docs»).    </p>
+  </blockquote>
+
   <strong>Magic Controls</strong>
   <blockquote>
     <p>
@@ -988,8 +980,8 @@
       <span title="Version variation">&#128220;</span>      This option was added starting with  Tux Paint version 0.9.30.    </p>
   </blockquote>
 
-  <p>
-    Consulte as <a href="../magic-docs/html/index.html">instrucións de cada ferramenta Máxica</a> (no cartafol «magic-docs»).  </p>
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>Note</strong>: If the "<code>ungroupmagictools</code>" option is set, Tux Paint won't split Magic tools into groups of related tools, and instead present them all as one large list. See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation.  </p>
 </dd>
             <dt id="using_tools_drawing_eraser">
   <strong>h.Ferramenta de «Goma» (de borrar)</strong>
@@ -1002,13 +994,28 @@
       alt=""
       align="right">
   <p>
-    Esta ferramenta é similar ao pincel. Onde queira que prema (ou prema e arrastre), a imaxe borrarase. (Pode ser branco, doutra cor ou a unha imaxe de fondo, dependendo da imaxe.)  </p>
+    This tool works similarly to the Paint Brush. Wherever you click (or click and drag), things you've added to your drawing will be erased, exposing the background that you chose when you started the drawing, be it a solid color, the background of a 'Starter' image, or a 'Template' image. (See <a href="#using_tools_other_new">Ferramentas dispoñíbeis &gt; Outros controis &gt; Orde «Novo»</a>.)  </p>
 
   <p>
-    A number of eraser sizes are available, with both square and round shapes. Fuzzy-edged round shapes are also available.  </p>
+    <img src="../../html/images/tool_eraser_erasers.png"
+        width="411"
+        height="192"
+        alt=""
+        align="right" />
+    A number of eraser types are available, each offering multiple sizes are available:    <ul>
+      <li>
+        Square &mdash; Square-shaped erasers that completely remove parts of your drawing.      </li>
+      <li>
+        Circle (solid) &mdash; Circle-shaped erasers that completely remove parts of your drawing.      </li>
+      <li>
+        Fuzzy-edged Circle &mdash; Circle-shaped erasers with soft edges that blend with the background.      </li>
+      <li>
+        Transparent Circle &mdash; Circle-shaped erasers that blend your drawing with the background. Release and click again to expose more and more of the background.      </li>
+    </ul>
+  </p>
 
   <p>
-    Ao mover o rato, un contorno cadrado segue o punteiro, amosando que parte da imaxe se borrará a branco.  </p>
+    As you move the mouse around, an outline follows the pointer, showing what part of the picture will be erased.  </p>
 
   <p>
     Ao borralo, reprodúcese un son de borrado «rechiante».  </p>
@@ -1073,13 +1080,15 @@
   <p>
     Ao premer no botón «Novo» iniciarase un novo debuxo. Aparecerá un diálogo no que pode escoller comezar unha nova imaxe cunha cor de fondo sólida ou usando unha imaxe «de Inicio» ou «modelo» (ver máis abaixo). Primeiro preguntaráselle se realmente quere facelo.  </p>
 
+  <p>
+    When you use the 'Eraser' tool things you've added to your drawing will be removed, exposing the background you chose when starting a new drawing. (See <a href="#using_tools_drawing_eraser">Ferramentas dispoñíbeis &gt; Ferramentas de debuxo &gt; Ferramenta de «Goma» (de borrar)</a>.)
   <p class="note">
     <span title="Keyboard shortcut">&#9000;</span>    <strong>Nota:</strong> Tamén pode premer <b><code>[Control / &#8984;]</code></b> + <code><b>[N]</b></code> no teclado para iniciar un novo debuxo.  </p>
 
   <dl>
     <dt><strong>Special Solid Background Color Choices</strong></dt>
     <dd>
-      Along with the preset solid colors, you can also choose colors using a rainbow palette or a "color mixer". These operate identically to the options found in the color palette shown below the canvas when drawing a picture. See <a href="#special_color_options">Main Screen &gt; Lower: Colors &gt; Special color options</a> for details.    </dd>
+      Along with the preset solid colors, you can also choose colors using a rainbow palette or a "color mixer". These operate identically to the options found in the color palette shown below the canvas when drawing a picture. See <a href="#special_color_options">Pantalla principal &gt; Máis abaixo: Cores &gt; Special color options</a> for details.    </dd>
 
     <dt><strong>Imaxes «de comezo» e de «modelo»</strong></dt>
     <dd>
@@ -1661,36 +1670,36 @@
   
     <p>
       Pode simplemente converter a imaxe ao formato que usa Tux Paint –PNG (Portable Network Graphics – Gráficos de Rede Portátiles)– e colocala no directorio/cartafol «<code>saved</code>» de Tux Paint. Aquí é onde se atopa (de xeito predeterminado:    </p>
-  
+
     <dl>
-      <dt>
-        <strong>Windows 10, 8, 7, Vista</strong>
-      </dt>
-  
-      <dd>
-        Dentro do cartafol «<code>AppData</code>» do usuario, p. : «<code>C:\Users\<em>nome de usuario</em>\AppData\Roaming\TuxPaint\saved\</code>».      </dd>
-  
-      <dt>
-        <strong>Windows 2000, XP</strong>
-      </dt>
-  
-      <dd>
-        Dentro do cartafol «<code>Application Data</code>» do usuario, p. : «<code>C:\Documents and Settings\<em>nome de usuario</em>\Application Data\TuxPaint\saved\</code>».      </dd>
-  
-      <dt>
-        <strong>macOS</strong>
-      </dt>
-  
-      <dd>
-        Dentro do cartafol «<code>Library</code>» do usuario, p. : «<code>/Users/<em>nome de usuario</em>/Library/Application Support/Tux Paint/saved/</code>».      </dd>
-  
-      <dt>
-        <strong>Linux/Unix</strong>
-      </dt>
-  
-      <dd>
-        Dentro dun directorio agochado «<code>.tuxpaint</code>», no seu directorio persoal («<code>$HOME</code>»), p. ex.: «<code>/home/<em>nome de usuario</em>/.tuxpaint/saved/</code>».      </dd>
-    </dl>
+  <dt>
+    <cite>Windows Vista, Windows 8, Windows 10, Windows 11</cite>
+  </dt>
+
+  <dd>
+    In the user's "AppData" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>C:\Users\nome de usuario\AppData\Roaming\TuxPaint\saved\</code>"</nobr>  </dd>
+
+  <dt>
+    <cite>macOS</cite>
+  </dt>
+
+  <dd>
+    In the user's "Application Support" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/Users/<i>nome de usuario</i>/Library/Application Support/TuxPaint/saved/</code>"</nobr>  </dd>
+
+  <dt>
+    <cite>Linux / Unix</cite>
+  </dt>
+
+  <dd>
+    In the user's "home directory" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaint/saved/</code>"</nobr>  </dd>
+
+  <dt>
+    <cite>Haiku</cite>
+  </dt>
+
+  <dd>
+    In the user's "settings" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/saved/</code>"</nobr>  </dd>
+</dl>
   
     <p class="note">
       <span title="Information">&#128161;</span>      <strong>Nota:</strong> É tamén dende este cartafol dende onde pode copiar ou abrir imaxes debuxadas en Tux Paint usando <em>outras</em> aplicacións, aínda que pode usar a opción «Exportar» do diálogo «Abrir» de Tux Paint para copialas a unha localización de acceso máis doado e seguro.    </p>
@@ -1810,6 +1819,10 @@
           <li>
             <a href="../magic-docs/html/index.html">Documentación da ferramenta «Maxia»  («<code>magic-docs</code>»)</a><br>
             Documentación para cada unha das ferramentas de «Maxia» instaladas actualmente.          </li>
+
+          <li>
+            <a href="FAQ.html">Frequently Asked Questions ("FAQs") about Tux Paint</a><br>
+            Answers to, and solutions for, some common questions about, and problems with, using Tux Paint.          </li>
         </ul>
       </dd>
 

@@ -171,7 +171,8 @@ Uint32 mosaic_shaped_api_version(void)
 }
 
 //Load sounds
-int mosaic_shaped_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int mosaic_shaped_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED,
+                       Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];

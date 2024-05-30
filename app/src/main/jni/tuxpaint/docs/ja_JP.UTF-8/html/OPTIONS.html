@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            バージョン 0.9.32          </h1>
+            バージョン 0.9.33          </h1>
 
           <h2>
             各種設定について          </h2>
 
           <p>
-            Copyright &copy; 2002-2023 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
+            Copyright &copy; 2002-2024 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            2023年12月29日          </p>
+            2024年4月29日          </p>
         </center>
       </header>
 
@@ -169,7 +169,7 @@
           </header>
 
           <p>
-            ユーザー毎の設定ファイルは、ホームディレクトリに "<code><b>.tuxpaintrc</b></code>" というファイル名で作成します。（"<code>~/.tuxpaintrc</code>" あるいは "<code>$HOME/.tuxpaintrc</code>"）          </p>
+            <nobr><code style='background: #EEE;'>/home/username/.tuxpaintrc</code></nobr>          </p>
         </div>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
@@ -182,8 +182,7 @@
             ユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）          </p>
 
           <blockquote>
-            <code>/etc/tuxpaint/tuxpaint.conf</code>
-          </blockquote>
+            <nobr><code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code></nobr>          </blockquote>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: Linux and Unix Users -->
 
@@ -194,7 +193,7 @@
         </header>
 
         <p>
-          ユーザー毎の設定ファイルは、ホームフォルダ以下のサブフォルダ <code>Library/Application Support/TuxPaint</code> 内に "<code><b>tuxpaint.cfg</b></code>" というファイル名で作成します。        </p>
+          <nobr><code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/tuxpaint.cfg</code></nobr>        </p>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
           <header>
@@ -206,8 +205,7 @@
             ユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）          </p>
 
           <blockquote>
-            <code>/Library/Application Support/TuxPaint/tuxpaint.cfg</code>
-          </blockquote>
+            <nobr><code style='background: #EEE;'>/Library/Application Support/TuxPaint/tuxpaint.cfg</code></nobr>          </blockquote>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: macOS Users -->
 
@@ -218,7 +216,7 @@
         </header>
 
         <p>
-          ユーザー毎の設定ファイルは、個人用データのフォルダ <code>C:\Users\username\AppData\Roaming\TuxPaint\</code> 内に "<code><b>tuxpaint.cfg</b></code>" というファイル名で作成します。        </p>
+          <nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
 
         <p>
           設定ファイルはメモ帳やワードパッドで作成できますが、必ずテキストファイルとして保存するよう注意して下さい。また、ファイル名に ".txt" という拡張子をつけないようにします。        </p>
@@ -232,13 +230,20 @@
           <p>
             ユーザー毎の設定ファイルが読み込まれる前に、以下の場所にある、システムの全ユーザーに適用される設定ファイルが読み込まれます。（標準では、全ての変更が無効にされています）          </p>
 
-          <blockquote>
-            <code>C:\Program Files\Tuxpaint</code>
-          </blockquote>
-
-          </p>
+          <p>
+            <nobr><code style='background: #EEE;'>C:\Program Files\TuxPaint\tuxpaint.cfg</code></nobr>          </p>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: Windows Users -->
+
+      <section class="indent"><!-- H2: Haiku Users -->
+        <header>
+          <h2>
+            Haiku Users          </h2>
+        </header>
+
+        <p>
+          <nobr><code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/tuxpaint.conf</code></nobr>        </p>
+      </section><!-- H2: Haiku Users -->
 
       <p class="note">
         <span title="Configuration option">&#9881;</span>        コマンドラインオプション "<code>--nosysconfig</code>" 用いると、システム全体の設定ファイルは無視され、ユーザー毎の設定ファイルやコマンドラインオプションによる変更のみが反映されます。      </p>
@@ -343,7 +348,7 @@
 
     <dd>
       <p>
-        標準では、Tux Paint の起動中は スクリーンセーバーが起動しない設定になっていますが、"<code>allowscreensaver</code>" オプションを指定すると、スクリーンセーバーが有効になります。これはSDLライブラリのバージョンが 1.2.12 以降の場合に有効なオプションであることに注意して下さい。（環境変数 "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" の値を "<code>1</code>" に設定しても、同様のことができます）      </p>
+        By default, Tux Paint prevents your system's screensaver from starting up. You can override this by using the "<code>allowscreensaver</code>" option. (You can also do this by setting the "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" environment variable on your system to "<code>1</code>".)      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>allowscreensaver=no</code>" または "<code>disablescreensaver=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--disablescreensaver</code>" で変更できます。      </p>
     </dd>
@@ -674,6 +679,19 @@
         <b>「まほう」</b>ツールの中には、描画のサイズや効果が及ぶ幅の大きさを変更できるものがあります。このオプションを設定するとサイズの変更を無効にして、ツールごとの標準のサイズを使用します。（この場合、「れんが」や「めだま」などいくつかのプラグインでは、異なるサイズのツールが追加されます。）      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nomagicsizes=no</code>" または "<code>magicsizes=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--magicsizes</code>" で変更できます。      </p>
+    </dd>
+
+    <dt>
+      <code><b>ungroupmagictools=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        By default, the <b>Magic</b> tools in Tux Paint are organized into groups of similar tools (e.g., all of the color, saturation, darken/lighten tools together).  This option removes the grouping, and places all of the tools in one long list.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> Magic tool groups were added in Tux Paint 0.9.27.  The option to disable grouping was added to Tux Paint in version 0.9.33.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>ungroupmagictools=no</code>" または "<code>groupmagictools=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--groupmagictools</code>" で変更できます。      </p>
     </dd>
 
     <dt>
@@ -1763,17 +1781,24 @@
       <p>
         特に設定していなければ、標準のディレクトリは次の場所にあります:      </p>
 
-      <ul>
-        <li>Linux および Unix — ユーザーのホームディレクトリ（"<code>~</code>" または "<code>$HOME</code>"）にある隠しディレクトリ "<code>.tuxpaint</code>" 以下<br>
-            例: <code>/home/<i>username</i>/.tuxpaint/saved/</code>        </li>
+      <dl>
+        <dt>Linux / Unix</dt>
+        <dd>
+          Under a hidden directory in your home directory:<br/>
+          <nobr><code style='background: #EEE;'>/home/username/.tuxpaint/saved/</code></nobr>        </dd>
 
-        <li>Windows — ユーザーごとの "<code>Application Data</code>" フォルダーにある "<code>TuxPaint</code>" フォルダー以下<br>
-            例: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\saved\</code>          <br>
-        </li>
+        <dt>Windows</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
 
-        <li>macOS — ユーザーごとの "<code>Application Support</code>" フォルダーにある "<code>TuxPaint</code>" フォルダー以下<br>
-            例: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/saved/</code>        </li>
-      </ul>
+        <dt>macOS</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/saved/</code></nobr>        </dd>
+
+        <dt>Haiku</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/saved/</code></nobr>        </dd>
+      </dl>
 
       <p class="note">
         <span title="Information">&#128161;</span>        <strong>注:</strong> Windowsのドライブ（例: "<code>H:\</code>"）を指定する際は、サブディレクトリも指定する必要があります。      </p>
@@ -1798,11 +1823,11 @@
 
       <ul>
         <li>Linux および Unix — XDG (X Desktop Group) 標準に基づく設定が利用可能な場合、個々のデスクトップ環境において画像保存用として設定されているディレクトリ（"<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" コマンドで確認できます）<br>
-          英語環境では一般的にユーザーのホームディレクトリ（"<code>$HOME/Pictures</code>" あるいは "<code>~/Pictures</code>"）以下の "<code>Pictures</code>" ディレクトリになります。（日本語環境では "画像"）<br>
-          XDGの設定が読み取れない場合や、"<code>XDG_PICTURES_DIR</code> "に何も設定されていない場合は、上記の英語環境で一般的なディレクトリ（~/Pictures）を使用します。        </li>
-        <li>Windows — 各ユーザーの "ピクチャ" ディレクトリ（通常は "C:\Users\<i>ユーザー名</i>\Pictures"）。<br>また、次のようにして、フォルダを直接開くこともできます:          <ul>
+          Typically (in an English locale), this will be a "<code>Pictures</code>" subdirectory in your home directory (i.e., <nobr>"<code style='background: #EEE;'>/home/username/Pictures</code>"</nobr>).<br>
+          Tux Paint will fall back to using that typical directory, if no XDG configuration can be read, or nothing is set for "<code>XDG_PICTURES_DIR</code>".        </li>
+        <li>Windows - <nobr>"<code style='background: #EEE;'>My Pictures</code>"</nobr> directory for each user (normaly <nobr>"<code style='background: #EEE;'>C:\Users\username\My Pictures</code>"</nobr>)<br>You can directly open the folder as follows:          <ul>
             <li>"[Windows]+[R]" キーを押して "ファイル名を指定して実行" ダイアログを開く。</li>
-            <li>テキストボックスに "Shell:My Pictures" と入力して [OK] を押す。</li>
+            <li>Enter "Shell:My Pictures" in the text box and push [OK].</li>
           </ul>
         </li>
 
@@ -1811,11 +1836,11 @@
       </ul>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>注:</strong> 標準では、サブディレクトリ "<code>TuxPaint</code>" が作成されます。（例: "<code>~/Pictures/TuxPaint</code>"）一方、"<code>--exportdir</code>" オプションを用いると、指定されたパスがそのまま使用されます（サブディレクトリ "<code>TuxPaint</code>" は作成されません）。      </p>
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures/TuxPaint</code>"</nobr>) When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).      </p>
       <p>
-        ディレクトリ（例: "<code>~/Pictures/TuxPaint</code>"）が存在しない場合は新たに作成されます。      </p>
+        The directory itself (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures/TuxPaint</code>"</nobr>) will be created, if it doesn't exist.      </p>
       <p>
-        一つ上の<em>親ディレクトリ</em>（例: "<code>~/Pictures/TuxPaint</code>"）が存在しない場合もディレクトリの作成を試みますが、それ以上の階層のディレクトリを作成することはありません。      </p>
+        If the <em>parent</em> directory (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures</code>"</nobr>) also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).      </p>
 
       <p>
         例: <code>exportdir=/home/penguin/TuxPaintExports</code>      </p>
@@ -1917,16 +1942,17 @@
       <p>
         特に設定していなければ、標準のディレクトリは次の場所にあります:      </p>
 
-      <ul>
-        <li>Linux および Unix — ユーザーのホームディレクトリ（"<code>~</code>" または "<code>$HOME</code>"）にある隠しディレクトリ "<code>.tuxpaint</code>" 以下<br>
-            例: <code>/home/<i>username</i>/.tuxpaint/brushes/</code>        </li>
+      <dl>
+        <dt>Linux / Unix</dt>
+        <dd><nobr><code style='background: #EEE;'>/home/username/.tuxpaint/</code></nobr></dd>
 
-        <li>Windows — ユーザーごとの "<code>Application Data</code>" フォルダーにある "<code>TuxPaint</code>" フォルダー以下<br>
-            例: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\brushes\</code>        </li>
+        <dt>Windows</dt>
+        <dd><nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\</code></nobr></dd>
 
-        <li>macOS — ユーザーごとの "<code>Application Support</code>" フォルダーにある "<code>TuxPaint</code>" フォルダー以下<br>
-            例: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/brushes/</code>        </li>
-      </ul>
+        <dt>macoS</dt>
+        <dd><nobr><code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/</code></nobr></dd>
+
+              </dl>
 
       <p class="note">
         <span title="Version variation">&#128220;</span>        <strong>注:</strong> バージョン 0.9.18 以前では、個人用データの検索先として "<code>savedir</code>" の指定と同じディレクトリを使用していましたが、0.9.18 以降では個別に設定できるようになりました。      </p>
@@ -2347,14 +2373,10 @@
       </header>
 
       <p>
-        <i>（Linux および Unix ユーザー向け）</i>
-      </p>
+        If any of the above options are set in a system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), you may override them in your own personal configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaintrc</code>"</nobr>)      </p>
 
       <p>
-        "<code>/etc/tuxpaint/tuxpaint.config</code>" でオプションが設定されている場合でも、ユーザー各自の "<code>~/.tuxpaintrc</code>" ファイルの設定が優先されます。      </p>
-
-      <p>
-        "<code>noprint</code>" や "<code>grab</code>" のように、真か偽で設定するオプションでは、ユーザー毎の "<code>~/.tuxpaintrc</code>" ファイルで、例えば次のように、単純に 「'no' に等しい」と設定することができます:      </p>
+        For true/false options, like "<code>noprint</code>" and "<code>grab</code>", you can simply say they equal 'no' in your personal configuration file:      </p>
 
       <blockquote>
         <code>noprint=no<br>
@@ -2380,11 +2402,12 @@
         各種オプションは、Tux Paint を起動する際のコマンドラインで指定することもできます。      </p>
       <dl>
         <dt>
-          <code><b>--fullscreen<br>
+          <code><b>--fullscreen=yes<br>
+          --fullscreen=native<br>
           --<i>WIDTH</i>x<i>HEIGHT</i><br>
+          --orient=portrait<br>
           --buttonsize=<i>SIZE</i><br>
           --colorsrows=<i>ROWS</i><br>
-          --orient=portrait<br>
           --native<br>
           --allowscreensaver<br>
           --startblank<br>
@@ -2524,10 +2547,10 @@
 
         <dd>
           <p>
-            Linux および Unix において、システム全体の設定ファイル "<code>/etc/tuxpaint/tuxpaint.conf</code>" から設定を読み込まないようにします。          </p>
+            This prevents the system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), from being read.          </p>
 
           <p>
-            ユーザーごとの設定ファイル "<code>~/.tuxpaintrc</code>" が存在すれば、このファイルのみから設定を読み込みます。          </p>
+            Only your own configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaintrc</code>"</nobr> on Linux) &mdash; if it exists &mdash; will be used.          </p>
         </dd>
       </dl>
 
@@ -2548,7 +2571,7 @@
 
           <dd>
             <p>
-              プログラムのバージョンとリリース日を表示します。"--verbose-version" オプションでは、コンパイル時のオプションも追加で表示します。（ドキュメント "Tux Paint のインストール" および "よくある質問" もごらんください。）            </p>
+              Display the version number and date of the copy of Tux Paint you are running. The "<code>--verbose-version</code>" also lists what compile-time options were set. (See <a href="INSTALL.html">INSTALL</a> and <a href="FAQ.html">FAQ</a>).            </p>
           </dd>
 
           <dt>

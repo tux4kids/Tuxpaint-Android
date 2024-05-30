@@ -89,16 +89,16 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.32<br/>
+            version 0.9.33<br/>
             Documentation sur l'installation          </h1>
 
           <p>
-            Copyright &copy; 2002-2023 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2002-2024 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            mai 13, 2023          </p>
+            avril 29, 2024          </p>
         </center>
       </header>
 
@@ -723,10 +723,7 @@
             Assurez-vous que l'onglet "Raccourci" est sélectionné dans la fenêtre qui apparaît et examinez le champ «Cible:». Vous devriez voir quelque chose comme ceci :          </p>
 
           <blockquote>
-            <code>
-              "C:\Program Files\TuxPaint\TuxPaint.exe"
-            </code>
-          </blockquote>
+            <nobr><code style='background: #EEE;'>"C:\Program Files\TuxPaint\TuxPaint.exe"</code></nobr>          </blockquote>
 
           <p>
             Vous pouvez maintenant ajouter des options de ligne de commande qui seront activées lorsque vous double-cliquez sur l'icône.          </p>
@@ -735,10 +732,7 @@
             Par exemple, pour faire fonctionner le jeu en mode plein écran, avec des formes simples (pas d'option de rotation) et en français, ajoutez les options (après 'TuxPaint.exe'), comme ceci :          </p>
 
           <blockquote>
-            <code>
-              "C:\Program Files\TuxPaint\TuxPaint.exe" -f -s --lang french
-            </code>
-          </blockquote>
+            <nobr><code style='background: #EEE;'>"C:\Program Files\TuxPaint\TuxPaint.exe" -f -s --lang french</code></nobr>          </blockquote>
 
           <p>
             (Voir «README.txt» pour une liste complète des options de ligne de commande disponibles.)          </p>
@@ -757,7 +751,7 @@
           </header>
 
           <p>
-            Si, lorsque vous double-cliquez sur le raccourci pour lancer le jeu, rien ne se passe, c'est probablement parce que certaines des options en lignes de commande sont erronées. Ouvrez un explorateuet recherchez un fichier appelé "<code>stderr.txt</code>" dans votre dossier personnel de sauvegarde de  TuxPaint, qui est normalement "C:\Users\<i>utilisateur</i>\AppData\Roaming\TuxPaint".          </p>
+            If, when you double-click on the shortcut to run Tux Paint, nothing happens, it is probably because some of these command-line options are wrong. Open an Explorer, and look for a file called "<code>stderr.txt</code>" in your personal saving folder for TuxPaint which is normaly <nobr>"<code style='background: #EEE;'>C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\</code>"</nobr>.          </p>
 
           <p>
             Il contiendra une description de ce qui n'allait pas. Habituellement, ce sera simplement dû à une casse de caractère incorrecte (majuscule 'Z' à la place de 'z' minuscule) ou un '-' (tiret) manquant (en trop).          </p>
@@ -1044,7 +1038,7 @@
                 % <strong>make</strong> install
               </code>
             </blockquote>
-            ... pour crée l'application <code>TuxPaint.app</code> qui peut être exécutée sur place ou copiée sur <code>/Applications</code>.            Pour créer le fichier DMG pour la distribution, faites 'make TuxPaint.dmg'.          </p>
+            ... pour crée l'application <code>TuxPaint.app</code> qui peut être exécutée sur place ou copiée sur <nobr><code style='background: #EEE;'>/Applications</code></nobr>.            Pour créer le fichier DMG pour la distribution, faites 'make TuxPaint.dmg'.          </p>
 
           <p>
             Des étapes supplémentaires sont nécessaires pour construire un 'Universal Binary'.  Voyez "Construire un Universal Binary" ci-dessous.          </p>
@@ -1375,7 +1369,7 @@
         </header>
 
         <p>
-          Enlevez "<code>TuxPaint.app</code>" du dossier "Applications". Les fichiers de données les fichiers de configuration, les tampons et les images sauvegardées peuvent être trouvées dans "<code style="white-space: nowrap;">/Bibliothèque/Support d'Application/Tux Paint</code>" (pour tous les utilisateurs) et "<code style="white-space: nowrap;">/Users/<i>USERNAME</i>/Library/Application Support/TuxPaint</code>" pour les utilisateurs individuels.        </p>
+          Delete "<code>TuxPaint.app</code>" from the <nobr>"<code style='background: #EEE;'>/Applications</code>"</nobr> folder. Data files, including the configuration files, stamps, and saved pictures, may be found in <nobr>"<code style='background: #EEE;'>/Library/Application Support/TuxPaint/</code>"</nobr> (all users) and <nobr>"<code style='background: #EEE;'>/Users/<i>nom d'utilisateur</i>/Library/Application Support/TuxPaint/</code>"</nobr> (individual users).        </p>
       </section><!-- H2: macOS -->
 
       <section class="indent"><!-- H2: Linux -->

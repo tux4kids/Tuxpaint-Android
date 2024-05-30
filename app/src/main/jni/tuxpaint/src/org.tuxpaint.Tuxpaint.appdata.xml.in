@@ -23,6 +23,9 @@
     </p>
   </description>
   <developer_name>Bill Kendrick, et al.</developer_name>
+  <developer id="newbreedsoftware.com">
+    <name>Bill Kendrick, et al.</name>
+  </developer>
   <url type="homepage">https://tuxpaint.org/</url>
   <url type="bugtracker">https://sourceforge.net/p/tuxpaint/_list/tickets</url>
   <url type="faq">https://tuxpaint.org/docs/en/html/FAQ.html</url>
@@ -44,6 +47,16 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.9.33" date="2024-05-19">
+      <description>
+        <p>Transparent Erasers.</p>
+        <p>Brushes support descriptions.</p>
+        <p>New Magic tools: Dither, Filled Polygon.</p>
+        <p>Updated Magic tools: 3D Glasses (now offers different anaglyph color combinations).</p>
+        <p>Magic tools may be ungrouped ("ungroupmagictools").</p>
+        <p>Localization updates.</p>
+      </description>
+    </release>
     <release version="0.9.32" date="2024-01-28">
       <description>
         <p>New Magic tools: 1-, 2-, and 3-Point Perspective line-drawing tools (and corresponding vanishing point editors).</p>
@@ -168,10 +181,12 @@
     <control>keyboard</control>
     <control>pointing</control>
     <control>touch</control>
-    <display_length compare="ge">medium</display_length>
+    <display_length compare="ge">768</display_length>
   </recommends>
   <requires>
-    <display_length compare="ge">small</display_length>
+    <display_length compare="ge">500</display_length>
+    <display_length compare="le">32000</display_length>
+    <internet>offline-only</internet>
   </requires>
   <translation type="gettext">tuxpaint</translation>
   <launchable type="desktop-id">tuxpaint.desktop</launchable>

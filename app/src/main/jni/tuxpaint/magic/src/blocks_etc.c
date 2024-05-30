@@ -152,19 +152,20 @@ int blocks_etc_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
 // Return our order
 int blocks_etc_get_order(int which)
 {
-  switch (which) {
-    case TOOL_BLOCKS:
-      return 4;
-      break;
-    case TOOL_CHALK:
-      return 5;
-      break;
-    case TOOL_DRIP:
-      return 6;
-      break;
-    default:
-      return 0;
-      break;
+  switch (which)
+  {
+  case TOOL_BLOCKS:
+    return 4;
+    break;
+  case TOOL_CHALK:
+    return 5;
+    break;
+  case TOOL_DRIP:
+    return 6;
+    break;
+  default:
+    return 0;
+    break;
   }
 }
 

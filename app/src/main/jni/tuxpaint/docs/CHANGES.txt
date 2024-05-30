@@ -6,6 +6,135 @@ Copyright (c) 2002-2024
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
+2024.May.28 (0.9.33)
+  * New Magic Tools:
+    ----------------
+    * Dither & Dither (Keep Color): Replaces all or part of a drawing
+      with dithered X-and-white pixels.  With "Dither", X is always black,
+      or the currently-selected color; with "Dither (Keep Color)", X is
+      a muted version of the original color.
+      + Code & icon Bill Kendrick <bill@newbreedsoftware.com>
+      + Sound effects based on "Orion FIll.wav", Creative Commons 0
+        by KatHakaku <https://freesound.org/people/KatHakaku/>
+
+    * Filled Polygon + Draw points to form a polygon which is filled
+      + Code & icon by Bill Kendrick <bill@newbreedsoftware.com>
+      + Scanline polygon fill routine based on public-domain code
+        by Darel Rex Finley, 2007 <https://alienryderflex.com/polygon_fill/
+      + Sound effects based on
+        - "success.wav", "success_02.wav", and "Completed.wav",
+          Creative Commons 0 by Kenneth Cooney
+          <https://freesound.org/people/Kenneth_Cooney>
+          <https://www.kennethcooney.com/>
+        - "JacobsLadderSingle2.flac", Creative Commons Attribution 4.0
+          by Eliot Lash <https://freesound.org/people/Halleck/>
+          <https://www.eliotlash.com/>
+        - "Ruler Twangs.wav", Creative Commons Attribution 3.0
+          by stinkhorn <https://freesound.org/people/stinkhorn/>
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/251/
+
+  * Magic Tool Improvements:
+    ------------------------
+    * 3D Glasses - Now offers different color separation variations
+      (via the size option): Red/Cyan, Red/Blue, Red/Green, and Magenta/Cyan.
+      (If Tux Paint is running in "Novice" complexity mode, no choices will
+      be available; it will use Red/Cyan, as before.)
+      + Idea from O'Hare The Rabbit
+      + Coding by Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to Eraser tool:
+    ----------------------------
+    * Transparent erasers
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to Paint tool:
+    ---------------------------
+    * Rotating brushes would not draw anything if you simply
+      click and release with no motion in between (unless brush
+      spacing was set to the minimum).  It will now draw the
+      default "up" direction of the brush in that situation.
+      (h/t Pere for reporting)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * New Brushes:
+    ------------
+    * Pencil & Acrylic
+      Based on brushes included with GIMP <https://www.gimp.org/>
+      Created for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Other Improvements:
+    -------------------
+    * Support for brush descriptions, including localization.
+      (Adds a new "tuxpaint-brushes.pot" & PO files.)
+      (Management scripts based on those found in `tuxpaint-stamps`.)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * New option, --ungroupmagictools, to ungroup Magic tools
+      (one big long list, rather than paginating; grouping was
+      added in Tux Paint 0.9.27)
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/229/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Make screen refresh more snappy on macOS.
+      Mark Kim <markuskimius@gmail.com>
+
+  * Ports & Building:
+    -----------------
+    * Simplify the process of building the universal bundle on the macOS by
+      automatically adding the machine suffix (-arm64 or -x86_64) when building
+      the macOS bundle.  Previously this renaming step was required to be done
+      manually to build the universal bundle.
+      Mark Kim <markuskimius@gmail.com>
+
+    * Updates to appdata metadata file for Appstream 1.0
+      (https://sourceforge.net/p/tuxpaint/tuxpaint/merge-requests/19/)
+      Will Thompson <https://sourceforge.net/u/wjjjjt/profile/>
+
+    * Don't call rsvg_handle_close(); it's deprecated, and not necessary;
+      (see https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/method.Handle.close.html;
+      h/t https://github.com/xfce-mirror/xfce4-xkb-plugin/commit/825fa1c
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Documentation updates:
+    ----------------------
+    * Troubleshooting Guide (TROUBLESHOOTING.txt) updated regarding
+      + macOS (h/t Mark Kim)
+      + Haiku (h/t Luc Schrijvers)
+      + Linux (Bill K.)
+
+    * Improved consistency of file and directory paths around the docs;
+      attempting to also ensure all major OSes Tux Paint supports
+      are covered appropriately & accurately in respect to paths.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * tp_magic_example.c - Running `indent` to keep consistent
+      formatting, and ensuring any localized variable names are
+      Transliterated to ASCII (e.g., "size" in Icelandic appears
+      as "staerd", rather than "stærð").
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Standardize style in FAQ, Env. Vars. docs, and
+      Advanced Stamps Howto, as well.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Localization Updates:
+    ---------------------
+    * Bulgarian translation
+      Vankata453 <https://sourceforge.net/u/vankata453>
+
+    * Catalan translation
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * Portuguese (Portugal) translation
+      Hugo Carvalho <hugokarvalho@hotmail.com>
+
+  * Bug Fixes:
+    ----------
+    * Attempting to prevent invalid memory access during linear gradient fill.
+      h/t Peter Link <peterlink3 on SourceForge>
+      https://sourceforge.net/p/tuxpaint/bugs/287/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
 2024.January.29 (0.9.32)
   * Improvements to Magic tools:
     ----------------------------
@@ -20,7 +149,7 @@ https://tuxpaint.org/
       + Magic tools can provide a value that allows them to be
         sorted and grouped together (rather than always relying on the
         localized name of the tool).
-        - WIP Updated many magic tools to take advantage of this.
+        - Updated many magic tools to take advantage of this.
       + Note: `TP_MAGIC_API_VERSION` bumped to 0x00000009.
       Bill Kendrick <bill@newbreedsoftware.com>
 

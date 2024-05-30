@@ -4,7 +4,7 @@
   Fill tool
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2023 by Bill Kendrick and others; see AUTHORS.txt
+  Copyright (c) 2002-2024 by Bill Kendrick and others; see AUTHORS.txt
   bill@newbreedsoftware.com
   https://tuxpaint.org/
 
@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: February 26, 2023
+  Last updated: April 18, 2024
   $Id$
 */
 
@@ -573,43 +573,46 @@ void draw_linear_gradient(SDL_Surface * canvas, SDL_Surface * last,
 
   for (yy = y_top; yy <= y_bottom; yy++)
   {
-    for (xx = x_left; xx <= x_right; xx++)
+    if (yy >= 0 && yy < canvas->h)
     {
-      if (touched[(yy * canvas->w) + xx])
+      for (xx = x_left; xx <= x_right; xx++)
       {
-        /* Get the old color, and blend it (with a distance-based ratio) with the target color */
-        old_colr = getpixels[last->format->BytesPerPixel] (last, xx, yy);
-        SDL_GetRGB(old_colr, last->format, &old_r, &old_g, &old_b);
-
-        /* (h/t David Z on StackOverflow for how to quickly compute this:
-           https://stackoverflow.com/questions/521493/creating-a-linear-gradient-in-2d-array) */
-        C = (A * xx) + (B * yy);
-
-        if (C < C1)
+        if (xx >= 0 && xx < canvas->w && touched[(yy * canvas->w) + xx])
         {
-          /* At/beyond the click spot (opposite direction of mouse); solid color */
-          ratio = 0.0;
-        }
-        else if (C >= C2)
-        {
-          /* At/beyond the mouse; completely faded out */
-          ratio = 1.0;
-        }
-        else
-        {
-          /* The actual gradient... */
-          ratio = (C - C1) / (C2 - C1);
-        }
+          /* Get the old color, and blend it (with a distance-based ratio) with the target color */
+          old_colr = getpixels[last->format->BytesPerPixel] (last, xx, yy);
+          SDL_GetRGB(old_colr, last->format, &old_r, &old_g, &old_b);
 
-        /* Apply fuzziness at any antialiased edges we detected */
-        ratio = (ratio * ((float)touched[yy * canvas->w + xx] / 255.0));
+          /* (h/t David Z on StackOverflow for how to quickly compute this:
+             https://stackoverflow.com/questions/521493/creating-a-linear-gradient-in-2d-array) */
+          C = (A * xx) + (B * yy);
 
-        new_r = (Uint8) (((float)old_r) * ratio + ((float)draw_r * (1.0 - ratio)));
-        new_g = (Uint8) (((float)old_g) * ratio + ((float)draw_g * (1.0 - ratio)));
-        new_b = (Uint8) (((float)old_b) * ratio + ((float)draw_b * (1.0 - ratio)));
+          if (C < C1)
+          {
+            /* At/beyond the click spot (opposite direction of mouse); solid color */
+            ratio = 0.0;
+          }
+          else if (C >= C2)
+          {
+            /* At/beyond the mouse; completely faded out */
+            ratio = 1.0;
+          }
+          else
+          {
+            /* The actual gradient... */
+            ratio = (C - C1) / (C2 - C1);
+          }
 
-        new_colr = SDL_MapRGB(canvas->format, new_r, new_g, new_b);
-        putpixels[canvas->format->BytesPerPixel] (canvas, xx, yy, new_colr);
+          /* Apply fuzziness at any antialiased edges we detected */
+          ratio = (ratio * ((float)touched[yy * canvas->w + xx] / 255.0));
+
+          new_r = (Uint8) (((float)old_r) * ratio + ((float)draw_r * (1.0 - ratio)));
+          new_g = (Uint8) (((float)old_g) * ratio + ((float)draw_g * (1.0 - ratio)));
+          new_b = (Uint8) (((float)old_b) * ratio + ((float)draw_b * (1.0 - ratio)));
+
+          new_colr = SDL_MapRGB(canvas->format, new_r, new_g, new_b);
+          putpixels[canvas->format->BytesPerPixel] (canvas, xx, yy, new_colr);
+        }
       }
     }
   }

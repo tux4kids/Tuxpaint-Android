@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.32          </h1>
+            version 0.9.33          </h1>
 
           <h2>
             Documentation sur les options          </h2>
 
           <p>
-            Copyright &copy; 2002-2023 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2002-2024 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            décembre 29, 2023          </p>
+            avril 29, 2024          </p>
         </center>
       </header>
 
@@ -169,7 +169,7 @@
           </header>
 
           <p>
-            Le fichier que vous devez créer s'appelle "<code><b>.tuxpaintrc</b></code>" et il doit être placé dans votre répertoire personnel. (aka "<code>~/.tuxpaintrc</code>" ou "<code>$HOME/.tuxpaintrc</code>")          </p>
+            <nobr><code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaintrc</code></nobr>          </p>
         </div>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
@@ -182,8 +182,7 @@
             Avant la lecture de ce fichier, un fichier de configuration à l'échelle du système est lu. (Par défaut, cette configuration n'a pas de paramètres activés.) Il se trouve normalement ici :          </p>
 
           <blockquote>
-            <code>/etc/tuxpaint/tuxpaint.conf</code>
-          </blockquote>
+            <nobr><code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code></nobr>          </blockquote>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: Linux and Unix Users -->
 
@@ -194,7 +193,7 @@
         </header>
 
         <p>
-          Le fichier que vous devez créer s'appelle "<code><b>tuxpaint.cfg</b></code>" et il doit être placé dans votre dossier de départ, sous le sous-dossier : <code>Library/Application Support/TuxPaint</code>        </p>
+          <nobr><code style='background: #EEE;'>/Users/<i>nom d'utilisateur</i>/Library/Application Support/TuxPaint/tuxpaint.cfg</code></nobr>        </p>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
           <header>
@@ -206,8 +205,7 @@
             Avant la lecture de ce fichier, un fichier de configuration à l'échelle du système est lu. (Par défaut, cette configuration n'a pas de paramètres activés.) Il se trouve normalement ici :          </p>
 
           <blockquote>
-            <code>/Library/Application Support/TuxPaint/tuxpaint.cfg</code>
-          </blockquote>
+            <nobr><code style='background: #EEE;'>/Library/Application Support/TuxPaint/tuxpaint.cfg</code></nobr>          </blockquote>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: macOS Users -->
 
@@ -218,7 +216,7 @@
         </header>
 
         <p>
-          Le fichier que vous devez créer s'appelle "<code><b>tuxpaint.cfg</b></code>" et doit être placé dans votre dossier personnel AppData : <code>C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\</code>        </p>
+          <nobr><code style='background: #EEE;'>C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
 
         <p>
           Vous pouvez utiliser NotePad ou WordPad pour créer ce fichier. Assurez-vous de l'enregistrer en tant que texte brut et assurez-vous que le nom de fichier ne contient pas ".txt" à la fin ...        </p>
@@ -232,13 +230,20 @@
           <p>
             Avant la lecture de ce fichier, un fichier de configuration à l'échelle du système est lu. (Par défaut, cette configuration n'a pas de paramètres activés.) Il se trouve normalement ici :          </p>
 
-          <blockquote>
-            <code>C:\Program Files\Tuxpaint</code>
-          </blockquote>
-
-          </p>
+          <p>
+            <nobr><code style='background: #EEE;'>C:\Program Files\TuxPaint\tuxpaint.cfg</code></nobr>          </p>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: Windows Users -->
+
+      <section class="indent"><!-- H2: Haiku Users -->
+        <header>
+          <h2>
+            Haiku Users          </h2>
+        </header>
+
+        <p>
+          <nobr><code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/tuxpaint.conf</code></nobr>        </p>
+      </section><!-- H2: Haiku Users -->
 
       <p class="note">
         <span title="Configuration option">&#9881;</span>        Vous pouvez désactiver complètement la lecture de ce fichier, en laissant les paramètres par défaut (qui peuvent ensuite être remplacés par votre fichier config personnel et / ou vos arguments de ligne de commande) en utilisant l'option de ligne de commande "<code>--nosysconfig</code>".      </p>
@@ -343,7 +348,7 @@
 
     <dd>
       <p>
-        Par défaut, Tux Paint empêche l'économiseur d'écran de votre système de démarrer. Vous pouvez remplacer cela en utilisant l'option "<code>allowscreensaver</code>". Remarque : Cela nécessite la version 1.2.12 ou supérieure de la bibliothèque SDL. (Vous pouvez également le faire en définissant la variable d'environnement "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" de votre système égale à "<code>1</code>".)      </p>
+        By default, Tux Paint prevents your system's screensaver from starting up. You can override this by using the "<code>allowscreensaver</code>" option. (You can also do this by setting the "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" environment variable on your system to "<code>1</code>".)      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>Note : </strong>si utilisé dans un fichier de configuration pour tout le monde, il peut être remplacé par le fichier de configuration de l'utilisateur en utilisant "<code>allowscreensaver=no</code>" ou "<code>disablescreensaver=yes</code>". Dans les deux cas, il peut être remplacé avec l'option en ligne de commande "<code>--disablescreensaver</code>".      </p>
     </dd>
@@ -674,6 +679,19 @@
         Certaibs outils <b>Magie</b> peuvent avoir plusieurs réglages de taille. Cette option annule cette possibilité et ne permet que la taille par défaut.(Quelques plugins offre des variations additionnelles en vue de réaliser quelques tailles possibles, par ex. "Briques" et "Yeux écarquillés".)      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>Note : </strong>si utilisé dans un fichier de configuration pour tout le monde, il peut être remplacé par le fichier de configuration de l'utilisateur en utilisant "<code>nomagicsizes=no</code>" ou "<code>magicsizes=yes</code>". Dans les deux cas, il peut être remplacé avec l'option en ligne de commande "<code>--magicsizes</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>ungroupmagictools=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        By default, the <b>Magic</b> tools in Tux Paint are organized into groups of similar tools (e.g., all of the color, saturation, darken/lighten tools together).  This option removes the grouping, and places all of the tools in one long list.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> Magic tool groups were added in Tux Paint 0.9.27.  The option to disable grouping was added to Tux Paint in version 0.9.33.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note : </strong>si utilisé dans un fichier de configuration pour tout le monde, il peut être remplacé par le fichier de configuration de l'utilisateur en utilisant "<code>ungroupmagictools=no</code>" ou "<code>groupmagictools=yes</code>". Dans les deux cas, il peut être remplacé avec l'option en ligne de commande "<code>--groupmagictools</code>".      </p>
     </dd>
 
     <dt>
@@ -1763,17 +1781,24 @@
       <p>
         Si vous ne le changez pas, l' emplacement par défaut est :      </p>
 
-      <ul>
-        <li>Linux &amp; Unix - Sous un répertoire caché nommé "<code>.tuxpaint</code>" dans votre répertoire personnel (aka "<code>~</code>" ou "<code>$HOME</code>")<br>
-            Exemple: <code>/home/<i>username</i>/.tuxpaint/saved/</code>        </li>
+      <dl>
+        <dt>Linux / Unix</dt>
+        <dd>
+          Under a hidden directory in your home directory:<br/>
+          <nobr><code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaint/saved/</code></nobr>        </dd>
 
-        <li>Windows - Dans un dossier nommé "<code>TuxPaint</code>" dans votre dossier "<code>Application Data</code>".<br>
-            Exemple: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\saved\</code>          <br>
-        </li>
+        <dt>Windows</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
 
-        <li>macOS - Dans un dossier nommé "<code>TuxPaint</code>" dans votre dossier "<code>Application Support</code>".<br>
-            Exemple: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/saved/</code>        </li>
-      </ul>
+        <dt>macOS</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>/Users/<i>nom d'utilisateur</i>/Library/Application Support/TuxPaint/saved/</code></nobr>        </dd>
+
+        <dt>Haiku</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/saved/</code></nobr>        </dd>
+      </dl>
 
       <p class="note">
         <span title="Information">&#128161;</span>        <strong>Note : </strong><b> Si vous spécifiez un lecteur Windows (pzr ex. "<code>H:\</code>"), vous devez spécifiez également un sous-répertoire.      </p>
@@ -1798,11 +1823,11 @@
 
       <ul>
         <li>Linux et Unix - Si disponible, quel que soit l'endroit où votre environnement de bureau est configuré pour le stockage des images, en fonction de votre configuration XDG (X Desktop Group). (Essayez d'exécuter en ligne de commande "<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" pour le savoir.)<br>
-          Typiquement (dans un environnement local anglais), ce sera  "<code>Images</code>" dans votre répertoire personnel (c'est-à-dire "<code>$HOME/Images</code>" aka "<code>~/Images</code>").<br>
-          Tux Paint utilisera ce répertoire typique, si aucune configuration XDG ne peut être lue, ou rien n'est défini pour "<code>XDG_PICTURES_DIR</code>".        </li>
-        <li>Windows - "Mes images" répertoire de chaque utilisateur (normalement "c:\Users\<i>USERNAME</i>\Pictures").<br>Vous pouvez ouvrir directement le répertoire comme ceci :          <ul>
+          Typically (in an English locale), this will be a "<code>Images</code>" subdirectory in your home directory (i.e., <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/Images</code>"</nobr>).<br>
+          Tux Paint will fall back to using that typical directory, if no XDG configuration can be read, or nothing is set for "<code>XDG_PICTURES_DIR</code>".        </li>
+        <li>Windows - <nobr>"<code style='background: #EEE;'>My Pictures</code>"</nobr> directory for each user (normaly <nobr>"<code style='background: #EEE;'>C:\Users\nom d'utilisateur\My Pictures</code>"</nobr>)<br>You can directly open the folder as follows:          <ul>
             <li>Pressez la touche "[Windows]+[R]" pour ouvrir la boîte de dialogue "Exécuter ...".</li>
-            <li>Tapez "Shell:My Pictures" dans la zone de saisie et cliquez sur OK.</li>
+            <li>Enter "Shell:My Pictures" in the text box and push [OK].</li>
           </ul>
         </li>
 
@@ -1811,11 +1836,11 @@
       </ul>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note : </strong>Quand les réglages par défaut sont utilisés, un nouveau sous-répertoire "<code>TuxPaint</code>" sera créé puis utilisé(par ex "<code>~/Images/TuxPaint</code>"). Quand l'option "<code>--exportdir</code>" est utilisée, le chemin exact qui a été spécifié sera utilisé (pas de sous-répertoire "<code>TuxPaint</code>" créé).      </p>
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/Images/TuxPaint</code>"</nobr>) When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).      </p>
       <p>
-        Le répertoire lui-même (par ex. "<code>~/Images/TuxPaint</code>") sera créé, s'il n'existe pas.      </p>
+        The directory itself (e.g., <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/Images/TuxPaint</code>"</nobr>) will be created, if it doesn't exist.      </p>
       <p>
-        Si le répertoire <em>parent</em> (par ex "<code>~/Images/TuxPaint</code>") n'existe pas non plus, Tux Paint essayera aussi de le créer (mais de répertoire plus haut que celui-là).      </p>
+        If the <em>parent</em> directory (e.g., <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/Images</code>"</nobr>) also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).      </p>
 
       <p>
         Exemple: <code>exportdir=/home/penguin/TuxPaintExports</code>      </p>
@@ -1917,16 +1942,17 @@
       <p>
         Si vous ne le changez pas, l' emplacement par défaut est :      </p>
 
-      <ul>
-        <li>Linux &amp; Unix - Sous un répertoire caché nommé "<code>.tuxpaint</code>" dans votre répertoire personnel (aka "<code>~</code>" ou "<code>$HOME</code>")<br>
-            Exemple: <code>/home/<i>username</i>/.tuxpaint/brushes/</code>        </li>
+      <dl>
+        <dt>Linux / Unix</dt>
+        <dd><nobr><code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaint/</code></nobr></dd>
 
-        <li>Windows - Dans un dossier nommé "<code>TuxPaint</code>" dans votre dossier "<code>Application Data</code>".<br>
-            Exemple: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\brushes\</code>        </li>
+        <dt>Windows</dt>
+        <dd><nobr><code style='background: #EEE;'>C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\</code></nobr></dd>
 
-        <li>macOS - Dans un dossier nommé "<code>TuxPaint</code>" dans votre dossier "<code>Application Support</code>".<br>
-            Exemple: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/brushes/</code>        </li>
-      </ul>
+        <dt>macoS</dt>
+        <dd><nobr><code style='background: #EEE;'>/Users/<i>nom d'utilisateur</i>/Library/Application Support/TuxPaint/</code></nobr></dd>
+
+              </dl>
 
       <p class="note">
         <span title="Version variation">&#128220;</span>        <strong>Note : </strong>Avant la version 0.9.18, Tux Paint utlisait les mêmes réglages que "<code>savedir</code>" pour chercher les fichiers de données. Depuis la version 0.9.18, ils peuvent être spécifiés séparément.      </p>
@@ -2347,14 +2373,10 @@
       </header>
 
       <p>
-        <i>(Pour les utilisateurs Linux et Unix)</i>
-      </p>
+        If any of the above options are set in a system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), you may override them in your own personal configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaintrc</code>"</nobr>)      </p>
 
       <p>
-        Si l'une des options ci-dessus est définie dans " <code>/etc/tuxpaint/tuxpaint.config</code>",  vous pouvez la remplacer dans votre propre fichier "<code>~/.tuxpaintrc</code> ".      </p>
-
-      <p>
-        Pour les options vrai / faux, comme "<code>noprint</code>" et "<code>grab</code>", vous pouvez simplement dire qu'elles sont égales à "no" dans votre fichier "<code>~/.tuxpaintrc</code>" :      </p>
+        For true/false options, like "<code>noprint</code>" and "<code>grab</code>", you can simply say they equal 'no' in your personal configuration file:      </p>
 
       <blockquote>
         <code>noprint=no<br>
@@ -2380,11 +2402,12 @@
         Des options peuvent également être émises sur la ligne de commande lorsque vous démarrez Tux Paint.      </p>
       <dl>
         <dt>
-          <code><b>--fullscreen<br>
+          <code><b>--fullscreen=yes<br>
+          --fullscreen=native<br>
           --<i>WIDTH</i>x<i>HEIGHT</i><br>
+          --orient=portrait<br>
           --buttonsize=<i>SIZE</i><br>
           --colorsrows=<i>ROWS</i><br>
-          --orient=portrait<br>
           --native<br>
           --allowscreensaver<br>
           --startblank<br>
@@ -2524,10 +2547,10 @@
 
         <dd>
           <p>
-            Sous Linux et Unix, cela empêche la lecture du fichier de configuration système "<code>/etc/tuxpaint/tuxpaint.conf</code>".          </p>
+            This prevents the system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), from being read.          </p>
 
           <p>
-            Seul votre propre fichier de configuration, "<code>~/.tuxpaintrc</code>", s'il existe, sera utilisé.          </p>
+            Only your own configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaintrc</code>"</nobr> on Linux) &mdash; if it exists &mdash; will be used.          </p>
         </dd>
       </dl>
 
@@ -2548,7 +2571,7 @@
 
           <dd>
             <p>
-              Affiche le numéro de version et la date de la copie de Tux Paint que vous utilisez. La "--verbose-version" répertorie également les options de compilation définies. (Voir INSTALL et FAQ.            </p>
+              Display the version number and date of the copy of Tux Paint you are running. The "<code>--verbose-version</code>" also lists what compile-time options were set. (See <a href="INSTALL.html">INSTALL</a> and <a href="FAQ.html">FAQ</a>).            </p>
           </dd>
 
           <dt>

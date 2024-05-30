@@ -5,6 +5,76 @@
       «Como facer» os selos avanzados de Tux Paint    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
@@ -17,24 +87,24 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        versión 0.9.32        «Como facer» os selos avanzados      </h1>
+        versión 0.9.33<br/>
+        «Como facer» os selos avanzados      </h1>
 
       <p>
-        Copyright &copy; 2006-2022 by Albert Cahalan e outros; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        Copyright &copy; 2006-2024 by Albert Cahalan e outros; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
       <p>
-         4 de Xuño de 2022      </p>
+        14 de Maio de 2024      </p>
     </center>
-
-    <hr size="2"
-        noshade>
 
     <table border="2"
            cellspacing="0"
            cellpadding="2"
-           summary="Índice">
+           summary="Índice"
+           align="center"
+           style="page-break-inside: avoid;">
       <tr>
         <th>
           Índice        </th>
@@ -43,28 +113,10 @@
       <tr>
         <td>
           <ul>
-            <li>
-              <a href="#about">Sobre este «Como facelo»</a>
-            </li>
-            <li>
-              <a href="#choice">A elección da imaxe é crucial</a>
-            </li>
-            <li>
-              <a href="#prepare_mask">Preparar a máscara</a>
-            </li>
-            <li>
-              <a href="#replace_fringe">Substituír a franxa e os píxeles lixo</a>
-            </li>
-            <li>
-              <a href="#save">Gardar a imaxe para Tux Paint</a>
-            </li>
-          </ul>
+            <li><a href="#about">Sobre este «Como facelo»</a></li>            <li><a href="#choice">A elección da imaxe é crucial</a></li>            <li><a href="#prepare_mask">Preparar a máscara</a></li>            <li><a href="#replace_fringe">Substituír a franxa e os píxeles lixo</a></li>            <li><a href="#save">Gardar a imaxe para Tux Paint</a></li>          </ul>
         </td>
       </tr>
     </table>
-
-    <hr size="2"
-        noshade>
 
     <hr size="2"
         noshade>
@@ -189,7 +241,7 @@
         Seleccione partes da imaxe que deben ser 100% opacas ou 0% opacas. Se pode seleccionar o obxecto ou o fondo con certa precisión por cor, fágao. Se é necesario para evitar seleccionar píxeles que deben ser parcialmente opacos (xeralmente no bordo do obxecto), debe aumentar, diminuír e inverter a selección.      </p>
 
       <p>
-        Encha as áreas 100% opacas con branco e as áreas  0% opacas con negro. Isto faise máis facilmente arrastrando e soltando dende o indicador de cor de primeiro plano/fondo. Non debería ver ocorrer nada porque está a ver a capa de imaxe sen modificar mentres edita a máscara da capa WIP. É posíbel que se poidan notar grandes cambios na miniatura.      </p>
+                Encha as áreas 100% opacas con branco e as áreas  0% opacas con negro. Isto faise máis facilmente arrastrando e soltando dende o indicador de cor de primeiro plano/fondo. Non debería ver ocorrer nada porque está a ver a capa de imaxe sen modificar mentres edita a máscara da capa WIP. É posíbel que se poidan notar grandes cambios na miniatura.      </p>
 
       <p>
         Agora debe ampliala.      </p>
@@ -262,7 +314,7 @@
 
     <blockquote>
       <p>
-        É moi doado esnaquizar un traballo arreo. Os editores de imaxes poden esnaquizar silenciosamente píxeles en áreas  0% opacas. As condicións nas que isto ocorre poden variar dunha versión a outra. Se confía moito, pode tentar gardar a súa imaxe directamente como PNG. Asegúrese de vela de novo para verificar que as áreas 0% opacas non se volveron negras ou brancas, o que crearía franxas cando Tux Paint reduza a imaxe. Se precisa escalar a súa imaxe para aforrar espazo (e agochar os seus erros), é case seguro que destruirá todas as áreas 0% opacas. Velaquí unha mellor forma...      </p>
+                É moi doado esnaquizar un traballo arreo. Os editores de imaxes poden esnaquizar silenciosamente píxeles en áreas  0% opacas. As condicións nas que isto ocorre poden variar dunha versión a outra. Se confía moito, pode tentar gardar a súa imaxe directamente como PNG. Asegúrese de vela de novo para verificar que as áreas 0% opacas non se volveron negras ou brancas, o que crearía franxas cando Tux Paint reduza a imaxe. Se precisa escalar a súa imaxe para aforrar espazo (e agochar os seus erros), é case seguro que destruirá todas as áreas 0% opacas. Velaquí unha mellor forma...      </p>
 
       <h3>
         Un xeito máis seguro de gardar      </h3>

@@ -34,9 +34,9 @@ char *swirl_names[NUM_SWIRL_TOOLS] = {
 };
 
 int swirls_orders[NUM_SWIRL_TOOLS] = {
-  200, /* within MAGIC_TYPE_DISTORTS */
-  201, /* within MAGIC_TYPE_DISTORTS */
-  1800, /* within MAGIC_TYPE_PAINTING */
+  200,                          /* within MAGIC_TYPE_DISTORTS */
+  201,                          /* within MAGIC_TYPE_DISTORTS */
+  1800,                         /* within MAGIC_TYPE_PAINTING */
 };
 
 char *swirl_descriptions[NUM_SWIRL_TOOLS][2] = {

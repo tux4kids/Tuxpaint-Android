@@ -1,6 +1,6 @@
 Troubleshooting Guide for Tux Paint
 
-Last updated: 2023.03.09
+Last updated: 2023.04.27
 
 Questions
 =========
@@ -30,11 +30,15 @@ macOS
  * The version of macOS (e.g., "macOS 13.1 Ventura")
  * The CPU type (e.g., "Intel x86_64", or "Apple Silicon M1")
  * The version of Tux Paint (e.g., 0.9.28-3)
- * Send a copy of the config file, e.g. "tuxpaint.cfg" in
-   $HOME/Library/Application Support/TuxPaint/
- * FIXME -- Current way to grab stderr/stdout output
-   (may need to describe how to get the Terminal app?)
- * FIXME -- Anything else?
+ * Send a copy of the config file(s), e.g. "tuxpaint.cfg" in
+   - /Users/<username>/Library/Application Support/TuxPaint/
+   - /Library/Application Support/TuxPaint/
+ * A debug version of Tux Paint may be available that will
+   record stderr & stdout into /tmp/tuxpaint.log; check with
+   the developers to see if one is available.
+   - /tmp is hidden in macOS, so the user will need to go to
+     [Finder] -> [Go] menu -> [Go to Folder...] menu item,
+     then type in "/tmp" into the dialog box to open up /tmp.
 
 Android
 -------
@@ -50,10 +54,23 @@ Linux
  * The Linux distro and version (e.g., Ubuntu 22.04, RHEL 9, etc.)
  * The version of Tux Paint (e.g., "0.9.28-3")
  * The source of Tux Paint -- built from source code, installed
-   from distro's software repository, direct package file download
-   (.rpm), Flatpak, etc.
- * Send a copy of the config file, e.g. ".tuxpaintrc" in $HOME
+   from your distro's software repository, installed via Flatpak,
+   installed using a direct package file download (.rpm), etc.
+ * Send a copy of the config file(s)
+   - $HOME/.tuxpaintrc
+   - [/usr/local]/etc/tuxpaint/tuxpaint.conf
  * Any output seen on a terminal when running "tuxpaint" from
-   a command-line
- * FIXME -- Anything else?
+   a command-line (the output of stdout and/or stderr)
+
+Haiku
+-----
+ * The Haiku version and CPU version (e.g., R1B4/nightly, 32bit/64bit)
+ * The version of Tux Paint (e.g., "0.9.28-3")
+ * The source of Tux Paint -- built from source code, installed
+   from distro's software repository (pkgman/HaikuDepot), direct
+   package file download (.hpkg), etc.
+ * Send a copy of the config file, e.g. ".tuxpaint.conf" in
+   /boot/home/config/settings/TuxPaint
+ * Any output seen on a terminal when running
+   "/boot/system/apps/TuxPaint/TuxPaint" from a command-line
 

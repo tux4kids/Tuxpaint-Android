@@ -58,18 +58,18 @@ char *ribbon_get_description(magic_api * api, int which, int mode);
 static void ribbon_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 
 void ribbon_drag(magic_api * api, int which, SDL_Surface * canvas,
-                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
+                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 
 void ribbon_click(magic_api * api, int which, int mode,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
+                  SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 
 void ribbon_release(magic_api * api, int which,
-                     SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
+                    SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect);
 
 
 void ribbon_shutdown(magic_api * api);
 void ribbon_set_color(magic_api * api, int which, SDL_Surface * canvas,
-                       SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
+                      SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 int ribbon_requires_colors(magic_api * api, int which);
 void ribbon_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void ribbon_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
@@ -77,7 +77,7 @@ int ribbon_modes(magic_api * api, int which);
 Uint8 ribbon_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 ribbon_default_size(magic_api * api, int which, int mode);
 void ribbon_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                      SDL_Rect * update_rect);
+                     SDL_Rect * update_rect);
 
 
 Uint32 ribbon_api_version(void)
@@ -139,12 +139,12 @@ char *ribbon_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBU
 // Do the effect:
 
 static void ribbon_linecb(void *ptr, int which ATTRIBUTE_UNUSED,
-                           SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                          SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int i;
 
-  for (i = - ribbon_radius; i < ribbon_radius; i++)
+  for (i = -ribbon_radius; i < ribbon_radius; i++)
   {
     api->putpixel(canvas, x + i, y + i, ribbon_segment_color);
     api->putpixel(canvas, x + i, y + i + 1, ribbon_segment_color);
@@ -154,7 +154,7 @@ static void ribbon_linecb(void *ptr, int which ATTRIBUTE_UNUSED,
 
 // Affect the canvas on drag:
 void ribbon_drag(magic_api * api, int which, SDL_Surface * canvas,
-                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
 {
   int pt, pt2, first_click;
   Uint8 r, g, b;
@@ -175,7 +175,8 @@ void ribbon_drag(magic_api * api, int which, SDL_Surface * canvas,
 
   angle = 0.0;
 
-  if (!first_click) {
+  if (!first_click)
+  {
     double x_angle;
 
     if (sqrt((x - ox) * (x - ox) + (y - oy) * (y - oy)) > 16)
@@ -188,7 +189,8 @@ void ribbon_drag(magic_api * api, int which, SDL_Surface * canvas,
     }
 
     pt = ribbon_tail;
-    do {
+    do
+    {
       int brt;
 
       pt2 = ((pt + 1) % ribbon_max_length);
@@ -212,7 +214,8 @@ void ribbon_drag(magic_api * api, int which, SDL_Surface * canvas,
       ribbon_segment_color = SDL_MapRGB(canvas->format, r, g, b);
       api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, ribbon_linecb);
       pt = pt2;
-    } while (((pt + 1) % ribbon_max_length) != ribbon_head);
+    }
+    while (((pt + 1) % ribbon_max_length) != ribbon_head);
   }
 
   update_rect->x = 0;
@@ -223,17 +226,17 @@ void ribbon_drag(magic_api * api, int which, SDL_Surface * canvas,
 
 // Affect the canvas on click:
 void ribbon_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+                  SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
   ribbon_head = ribbon_tail = ribbon_old_angle = 0;
   ribbon_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
 void ribbon_release(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                     SDL_Surface * last ATTRIBUTE_UNUSED,
-                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                    int which ATTRIBUTE_UNUSED,
+                    SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface * last ATTRIBUTE_UNUSED,
+                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -246,9 +249,8 @@ void ribbon_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 
 // Record the color from Tux Paint:
 void ribbon_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                       Uint8 r, Uint8 g, Uint8 b,
-                       SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+                      Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   ribbon_r = r;
   ribbon_g = g;
@@ -262,12 +264,12 @@ int ribbon_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE
 }
 
 void ribbon_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 void ribbon_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
@@ -288,8 +290,8 @@ Uint8 ribbon_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_
 }
 
 void ribbon_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
-                      SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
+                     SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   ribbon_max_length = (size * MAX_LENGTH) / NUM_LENGTH_OPTIONS;
 }

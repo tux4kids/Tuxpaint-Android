@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.32          </h1>
+            version 0.9.33          </h1>
 
           <h2>
             Options Documentation          </h2>
 
           <p>
-            Copyright &copy; 2002-2023 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2002-2024 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            December 29, 2023          </p>
+            April 29, 2024          </p>
         </center>
       </header>
 
@@ -169,7 +169,7 @@
           </header>
 
           <p>
-            The file you should create is called "<code><b>.tuxpaintrc</b></code>" and it should be placed in your home directory. (a.k.a. "<code>~/.tuxpaintrc</code>" or "<code>$HOME/.tuxpaintrc</code>")          </p>
+            <nobr><code style='background: #EEE;'>/home/username/.tuxpaintrc</code></nobr>          </p>
         </div>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
@@ -182,8 +182,7 @@
             Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is normally located at:          </p>
 
           <blockquote>
-            <code>/etc/tuxpaint/tuxpaint.conf</code>
-          </blockquote>
+            <nobr><code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code></nobr>          </blockquote>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: Linux and Unix Users -->
 
@@ -194,7 +193,7 @@
         </header>
 
         <p>
-          The file you should create is called "<code><b>tuxpaint.cfg</b></code>" and it should be placed in your home folder, under the sub-folder: <code>Library/Application Support/TuxPaint</code>        </p>
+          <nobr><code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/tuxpaint.cfg</code></nobr>        </p>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
           <header>
@@ -206,8 +205,7 @@
             Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is normally located at:          </p>
 
           <blockquote>
-            <code>/Library/Application Support/TuxPaint/tuxpaint.cfg</code>
-          </blockquote>
+            <nobr><code style='background: #EEE;'>/Library/Application Support/TuxPaint/tuxpaint.cfg</code></nobr>          </blockquote>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: macOS Users -->
 
@@ -218,7 +216,7 @@
         </header>
 
         <p>
-          The file you should create is called "<code><b>tuxpaint.cfg</b></code>" and it should be placed in in your personal AppData folder: <code>C:\Users\username\AppData\Roaming\TuxPaint\</code>        </p>
+          <nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
 
         <p>
           You can use NotePad or WordPad to create this file. Be sure to save it as Plain Text, and make sure the filename doesn't have ".txt" at the end...        </p>
@@ -232,13 +230,20 @@
           <p>
             Before this file is read, a system-wide configuration file is read. (By default, this configuration has no settings enabled.) It is normally located at:          </p>
 
-          <blockquote>
-            <code>C:\Program Files\Tuxpaint</code>
-          </blockquote>
-
-          </p>
+          <p>
+            <nobr><code style='background: #EEE;'>C:\Program Files\TuxPaint\tuxpaint.cfg</code></nobr>          </p>
         </section><!-- H3: System-Wide Configuration File -->
       </section><!-- H2: Windows Users -->
+
+      <section class="indent"><!-- H2: Haiku Users -->
+        <header>
+          <h2>
+            Haiku Users          </h2>
+        </header>
+
+        <p>
+          <nobr><code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/tuxpaint.conf</code></nobr>        </p>
+      </section><!-- H2: Haiku Users -->
 
       <p class="note">
         <span title="Configuration option">&#9881;</span>        You can disable reading of this file altogether, leaving the settings as defaults (which can then be overridden by your personal config. file and/or command-line arguments) by using the command-line option "<code>--nosysconfig</code>".      </p>
@@ -343,7 +348,7 @@
 
     <dd>
       <p>
-        By default, Tux Paint prevents your system's screensaver from starting up. You can override this by using the "<code>allowscreensaver</code>" option. Note: This requires version 1.2.12 or higher of the SDL library. (You can also do this by setting the "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" environment variable on your system to "<code>1</code>".)      </p>
+        By default, Tux Paint prevents your system's screensaver from starting up. You can override this by using the "<code>allowscreensaver</code>" option. (You can also do this by setting the "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" environment variable on your system to "<code>1</code>".)      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>allowscreensaver=no</code>" or "<code>disablescreensaver=yes</code>". In both cases, may be overridden by the command-line option "<code>--disablescreensaver</code>".      </p>
     </dd>
@@ -674,6 +679,19 @@
         Some <b>Magic</b> tools offer various size settings. This option disables the sizing control, and only provides the tools' default sizes. (Some plugins may offer additional variations of a Magic tool, to make a few sizes possible, e.g. "Bricks" and "Googly Eyes".)      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nomagicsizes=no</code>" or "<code>magicsizes=yes</code>". In both cases, may be overridden by the command-line option "<code>--magicsizes</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>ungroupmagictools=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        By default, the <b>Magic</b> tools in Tux Paint are organized into groups of similar tools (e.g., all of the color, saturation, darken/lighten tools together).  This option removes the grouping, and places all of the tools in one long list.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> Magic tool groups were added in Tux Paint 0.9.27.  The option to disable grouping was added to Tux Paint in version 0.9.33.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>ungroupmagictools=no</code>" or "<code>groupmagictools=yes</code>". In both cases, may be overridden by the command-line option "<code>--groupmagictools</code>".      </p>
     </dd>
 
     <dt>
@@ -1763,17 +1781,24 @@
       <p>
         If you do not override it, the <b><i>default</i></b> location is:      </p>
 
-      <ul>
-        <li>Linux &amp; Unix — Under a hidden directory named "<code>.tuxpaint</code>" in your home directory (aka "<code>~</code>" or "<code>$HOME</code>")<br>
-            Example: <code>/home/<i>username</i>/.tuxpaint/saved/</code>        </li>
+      <dl>
+        <dt>Linux / Unix</dt>
+        <dd>
+          Under a hidden directory in your home directory:<br/>
+          <nobr><code style='background: #EEE;'>/home/username/.tuxpaint/saved/</code></nobr>        </dd>
 
-        <li>Windows — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Data</code>" folder.<br>
-            Example: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\saved\</code>          <br>
-        </li>
+        <dt>Windows</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
 
-        <li>macOS — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Support</code>" folder.<br>
-            Example: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/saved/</code>        </li>
-      </ul>
+        <dt>macOS</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/saved/</code></nobr>        </dd>
+
+        <dt>Haiku</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/saved/</code></nobr>        </dd>
+      </dl>
 
       <p class="note">
         <span title="Information">&#128161;</span>        <strong>Note:</strong> When specifying a Windows drive (e.g., "<code>H:\</code>"), you must also specify a subdirectory.      </p>
@@ -1798,9 +1823,9 @@
 
       <ul>
         <li>Linux &amp; Unix — If available, wherever your desktop environment is configured for pictures to be stored, based on your XDG (X Desktop Group) configuration. (Try running the command-line "<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" to find out.)<br>
-          Typically (in an English locale), this will be a "<code>Pictures</code>" subdirectory in your home directory (i.e., "<code>$HOME/Pictures</code>" aka "<code>~/Pictures</code>").<br>
-          Tux Paint will fall back to using that typical directory, of no XDG configuration can be read, or nothing is set for "<code>XDG_PICTURES_DIR</code>".        </li>
-        <li>Windows - "My Pictures" directory for each user (normaly "c:\Users\<i>USERNAME</i>\Pictures").<br>You can directly open the folder as follows:          <ul>
+          Typically (in an English locale), this will be a "<code>Pictures</code>" subdirectory in your home directory (i.e., <nobr>"<code style='background: #EEE;'>/home/username/Pictures</code>"</nobr>).<br>
+          Tux Paint will fall back to using that typical directory, if no XDG configuration can be read, or nothing is set for "<code>XDG_PICTURES_DIR</code>".        </li>
+        <li>Windows - <nobr>"<code style='background: #EEE;'>My Pictures</code>"</nobr> directory for each user (normaly <nobr>"<code style='background: #EEE;'>C:\Users\username\My Pictures</code>"</nobr>)<br>You can directly open the folder as follows:          <ul>
             <li>Press "[Windows]+[R]" key to open "Run ..." dialogue.</li>
             <li>Enter "Shell:My Pictures" in the text box and push [OK].</li>
           </ul>
@@ -1811,11 +1836,11 @@
       </ul>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., "<code>~/Pictures/TuxPaint</code>") When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).      </p>
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures/TuxPaint</code>"</nobr>) When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).      </p>
       <p>
-        The directory itself (e.g., "<code>~/Pictures/TuxPaint</code>") will be created, if it doesn't exist.      </p>
+        The directory itself (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures/TuxPaint</code>"</nobr>) will be created, if it doesn't exist.      </p>
       <p>
-        If the <em>parent</em> directory (e.g., "<code>~/Pictures/TuxPaint</code>") also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).      </p>
+        If the <em>parent</em> directory (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures</code>"</nobr>) also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).      </p>
 
       <p>
         Example: <code>exportdir=/home/penguin/TuxPaintExports</code>      </p>
@@ -1917,16 +1942,17 @@
       <p>
         If you do not override it, the <b><i>default</i></b> location is:      </p>
 
-      <ul>
-        <li>Linux &amp; Unix — Under a hidden directory named "<code>.tuxpaint</code>" in your home directory (aka "<code>~</code>" or "<code>$HOME</code>")<br>
-            Example: <code>/home/<i>username</i>/.tuxpaint/brushes/</code>        </li>
+      <dl>
+        <dt>Linux / Unix</dt>
+        <dd><nobr><code style='background: #EEE;'>/home/username/.tuxpaint/</code></nobr></dd>
 
-        <li>Windows — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Data</code>" folder.<br>
-            Example: <code>C:\Documents and Settings\<i>Username</i>\Application Data\TuxPaint\brushes\</code>        </li>
+        <dt>Windows</dt>
+        <dd><nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\</code></nobr></dd>
 
-        <li>macOS — Inside a folder named "<code>TuxPaint</code>" in your "<code>Application Support</code>" folder.<br>
-            Example: <code>/Users/<i>Username</i>/Library/Application Support/TuxPaint/brushes/</code>        </li>
-      </ul>
+        <dt>macoS</dt>
+        <dd><nobr><code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/</code></nobr></dd>
+
+              </dl>
 
       <p class="note">
         <span title="Version variation">&#128220;</span>        <strong>Note:</strong> Prior to version 0.9.18, Tux Paint would use the same setting or default as for "<code>savedir</code>" to search for data files. As of version 0.9.18, they may be specified separately.      </p>
@@ -2347,14 +2373,10 @@
       </header>
 
       <p>
-        <i>(For Linux and Unix users)</i>
-      </p>
+        If any of the above options are set in a system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), you may override them in your own personal configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaintrc</code>"</nobr>)      </p>
 
       <p>
-        If any of the above options are set in "<code>/etc/tuxpaint/tuxpaint.config</code>", you can override them in your own "<code>~/.tuxpaintrc</code>" file.      </p>
-
-      <p>
-        For true/false options, like "<code>noprint</code>" and "<code>grab</code>", you can simply say they equal 'no' in your "<code>~/.tuxpaintrc</code>" file:      </p>
+        For true/false options, like "<code>noprint</code>" and "<code>grab</code>", you can simply say they equal 'no' in your personal configuration file:      </p>
 
       <blockquote>
         <code>noprint=no<br>
@@ -2380,11 +2402,12 @@
         Options may also be issued on the command-line when you go to launch Tux Paint.      </p>
       <dl>
         <dt>
-          <code><b>--fullscreen<br>
+          <code><b>--fullscreen=yes<br>
+          --fullscreen=native<br>
           --<i>WIDTH</i>x<i>HEIGHT</i><br>
+          --orient=portrait<br>
           --buttonsize=<i>SIZE</i><br>
           --colorsrows=<i>ROWS</i><br>
-          --orient=portrait<br>
           --native<br>
           --allowscreensaver<br>
           --startblank<br>
@@ -2524,10 +2547,10 @@
 
         <dd>
           <p>
-            Under Linux and Unix, this prevents the system-wide configuration file, "<code>/etc/tuxpaint/tuxpaint.conf</code>", from being read.          </p>
+            This prevents the system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), from being read.          </p>
 
           <p>
-            Only your own configuration file, "<code>~/.tuxpaintrc</code>", if it exists, will be used.          </p>
+            Only your own configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaintrc</code>"</nobr> on Linux) &mdash; if it exists &mdash; will be used.          </p>
         </dd>
       </dl>
 
@@ -2548,7 +2571,7 @@
 
           <dd>
             <p>
-              Display the version number and date of the copy of Tux Paint you are running. The "--verbose-version" also lists what compile-time options were set. (See INSTALL and FAQ).            </p>
+              Display the version number and date of the copy of Tux Paint you are running. The "<code>--verbose-version</code>" also lists what compile-time options were set. (See <a href="INSTALL.html">INSTALL</a> and <a href="FAQ.html">FAQ</a>).            </p>
           </dd>
 
           <dt>

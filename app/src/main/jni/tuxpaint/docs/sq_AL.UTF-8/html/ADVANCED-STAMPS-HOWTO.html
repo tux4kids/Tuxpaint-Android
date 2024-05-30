@@ -5,6 +5,76 @@
       “Si-të” e Thelluar për Stampa Tux Paint-i    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
@@ -17,24 +87,24 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        version 0.9.32        “Si-të” të Thelluara rreth Stampash      </h1>
+        version 0.9.33<br/>
+        “Si-të” të Thelluara rreth Stampash      </h1>
 
       <p>
-        Të drejta kopjimi &copy; 2006-2022 nga Albert Cahalan dhe të tjerë; shihni <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        Të drejta kopjimi &copy; 2006-2024 nga Albert Cahalan dhe të tjerë; shihni <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
       <p>
-         4 qershor 2022      </p>
+        14 maj 2024      </p>
     </center>
-
-    <hr size="2"
-        noshade>
 
     <table border="2"
            cellspacing="0"
            cellpadding="2"
-           summary="Pasqyrë e Lëndës">
+           summary="Pasqyrë e Lëndës"
+           align="center"
+           style="page-break-inside: avoid;">
       <tr>
         <th>
           Pasqyrë e Lëndës        </th>
@@ -43,28 +113,10 @@
       <tr>
         <td>
           <ul>
-            <li>
-              <a href="#about">Rreth kësaj “Si-të”-je</a>
-            </li>
-            <li>
-              <a href="#choice">Zgjedhja e figurës është kyçe</a>
-            </li>
-            <li>
-              <a href="#prepare_mask">Përgatitni maskën</a>
-            </li>
-            <li>
-              <a href="#replace_fringe">Zëvendësoni thekë dhe piksela hedhurinë</a>
-            </li>
-            <li>
-              <a href="#save">Ruajeni figurën për Tux Paint-int</a>
-            </li>
-          </ul>
+            <li><a href="#about">Rreth kësaj “Si-të”-je</a></li>            <li><a href="#choice">Zgjedhja e figurës është kyçe</a></li>            <li><a href="#prepare_mask">Përgatitni maskën</a></li>            <li><a href="#replace_fringe">Zëvendësoni thekë dhe piksela hedhurinë</a></li>            <li><a href="#save">Ruajeni figurën për Tux Paint-int</a></li>          </ul>
         </td>
       </tr>
     </table>
-
-    <hr size="2"
-        noshade>
 
     <hr size="2"
         noshade>
@@ -189,7 +241,7 @@
         Përzgjidhni pjesët e figurës që duhet të jenë 100% të marrta, ose 0% të marrta. Nëse mund të përzgjidhni objektin, ose sfondin deri diku me përpikëri sipas ngjyrësh, bëjeni. Siç është e nevojshme për të shmangur përzgjedhje të çfarëdo pikseli që duhet të jetë pjesërisht i marrtë (përgjithësisht në skajin e objektit) duhet të zmadhoni, tkurrni dhe përmbysni përzgjedhjen.      </p>
 
       <p>
-        Mbushini zonat 100% të marrta me të bardhë dhe zonat 0% të marrta me të zezë. Kjo bëhet më lehtë me teknikën merr-dhe-vër që nga treguesi i ngjyrës së përparme/të pasme. S’duhet të shihni të ndodhë ndonjë gjë, ngaqë po shihni shtresën e figurës së papërpunuar, teksa po përpunoni maskën e shtresës. Ndryshime të mëdha mund të jenë të dukshme te miniatura.      </p>
+                Mbushini zonat 100% të marrta me të bardhë dhe zonat 0% të marrta me të zezë. Kjo bëhet më lehtë me teknikën merr-dhe-vër që nga treguesi i ngjyrës së përparme/të pasme. S’duhet të shihni të ndodhë ndonjë gjë, ngaqë po shihni shtresën e figurës së papërpunuar, teksa po përpunoni maskën e shtresës. Ndryshime të mëdha mund të jenë të dukshme te miniatura.      </p>
 
       <p>
         Tani duhet të jetë zmadhuar.      </p>
@@ -262,7 +314,7 @@
 
     <blockquote>
       <p>
-        Është shumë kollaj të rrënoni punën tuaj të vështirë. Përpunuesit e figurave mund të shkatërrojnë pa u ndjerë piksela në zona 0% të marrta. Kushtet nën të cilën ndodh kjo mund të jenë të ndryshme nga versioni në version. Nëse keni besim në vete, mund të provoni ta ruani figurën tuaj drejt e si PNG. Mos harroni për ta rihapur, për të verifikuar se zonat 0% të marrta s’u shndërruan në të zeza, ose të bardha, çka do të krijonte thekë, kur Tux Paint-i të ripërmasojë figurën me zvogëlim. Nëse ju duhet të ripërmasoni figurën tuaj, për të kursyer vend (dhe për të fshehur gabimet tuaja), të jeni thuajse i sigurt se do të shkatërroni krejt zonat 0% të marrta. Ndaj, ja një mënyrë më e mirë…      </p>
+                Është shumë kollaj të rrënoni punën tuaj të vështirë. Përpunuesit e figurave mund të shkatërrojnë pa u ndjerë piksela në zona 0% të marrta. Kushtet nën të cilën ndodh kjo mund të jenë të ndryshme nga versioni në version. Nëse keni besim në vete, mund të provoni ta ruani figurën tuaj drejt e si PNG. Mos harroni për ta rihapur, për të verifikuar se zonat 0% të marrta s’u shndërruan në të zeza, ose të bardha, çka do të krijonte thekë, kur Tux Paint-i të ripërmasojë figurën me zvogëlim. Nëse ju duhet të ripërmasoni figurën tuaj, për të kursyer vend (dhe për të fshehur gabimet tuaja), të jeni thuajse i sigurt se do të shkatërroni krejt zonat 0% të marrta. Ndaj, ja një mënyrë më e mirë…      </p>
 
       <h3>
         Një Mënyrë Më e Parrezik për Ruajtje      </h3>

@@ -86,7 +86,8 @@ void checkerboard_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUT
   checkerboard_b = b;
 }
 
-int checkerboard_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int checkerboard_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED,
+                      Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 

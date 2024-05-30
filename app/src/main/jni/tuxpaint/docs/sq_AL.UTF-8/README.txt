@@ -1,12 +1,12 @@
                                    Tux Paint
-                                version 0.9.32
+                                version 0.9.33
 
                   Një program i thjeshtë vizatimi për fëmijë
 
  Të drejta kopjimi © 2002-2024 nga kontribues të ndryshëm; shihni AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                 29 janar 2024
+                                 29 prill 2024
 
 +---------------------------------------------------+
 |                 Pasqyrë e Lëndës                  |
@@ -97,54 +97,28 @@ parts of the program in their own GPL'd software.)
 
 See COPYING.txt for the full text of the GPL license.
 
-D. What's New in Tux Paint version 0.9.32?
+D. What's New in Tux Paint version 0.9.33?
 
-1-point Perspective (vanishing point) Magic tool
-    A pair of tools that allow you to set a vanishing point, and then draw
-    lines in 1-point perspective.
+Transparent Erasers
+    Erasers that lightly expose more and more of the background.
 
-2-point Perspective (vanishing point) Magic tool
-    A pair of tools that allow you to set two vanishing points, and then draw
-    lines in 2-point perspective.
+Dither magic tools
+    Transform parts of an image into a dithered pattern of dots.
 
-3-point Perspective (vanishing point) Magic tool
-    A pair of tools that allow you to set three vanishing points, and then draw
-    lines in 3-point perspective.
+Filled Polygon magic tool
+    Create polygons by placing three or more connected points on the canvas.
 
-Isometric Magic tool
-    A tool that draws lines in an isometric projection.
+3D Glasses magic tool updated
+    Different anaglyphic color separations now offered (via the 'size'
+    controls), unless running Tux Paint in 'Novice' complexity level.
 
-Dimetric Magic tool
-    A pair of tools that allow you to set an angle, and then draw lines in a
-    dimetric projection.
+Magic tool ungrouping option
+    The numerous Magic tools can be presented as a single long list (as in Tux
+    Paint prior to 0.9.27), rather than paged groups.
 
-Trimetric Magic tool
-    A pair of tools that allow you to set two angles, and then draw lines in a
-    trimetric projection.
-
-Oblique Magic tool
-    A pair of tools that allow you to set an angles, and then draw lines in an
-    oblique projection.
-
-Epitrochoid and Hypotrochoid Magic tools
-    Tools that create centered trochoid curved patterns.
-
-Rregullim i ri “kompleksitet” (complexity)
-
-    A new setting that allows certain Magic tools to behave differently (or
-    remove their availability altogether) based on the expertise-level of the
-    user. The new "N-point Perspective" tools and "Clone" tool are affected by
-    this setting.
-
-Magic tools reorganized
-
-    Each group of Magic tools has been reorganized to keep related tools next
-    to each other, rather than being sorted alphabetically by their (localized)
-    names.
-
-Hollësi shkronjash shfaqur kur përzgjidhen
-    Emri dhe madhësia e shkronjave të përzgjedhura shfaqen kur përdoren mjetet
-    Tekst dhe Etiketë.
+Brush descriptions
+    Brushes (used by Paint and Line tools) can now include descriptions that
+    appear when the brush is selected.
 
 
 Për listën e plotë të ndryshimeve, shihni CHANGES.txt.
@@ -181,8 +155,9 @@ the 'Tux Paint Installer,' but chose not to have shortcuts installed, you'll
 need to double-click the "tuxpaint.exe" icon in the "Tux Paint" folder on your
 computer.
 
-By default, the 'Tux Paint Installer' will put Tux Paint's folder in "C:\
-Program Files\", though you may have changed this when you ran the installer.
+By default, the 'Tux Paint Installer' will put Tux Paint's folder in 
+"C:\Program Files\TuxPaint\", though you may have changed this when you ran the
+installer.
 
 If you used the 'ZIP-file' download, Tux Paint's folder will be wherever you
 extracted the contents of the ZIP file.
@@ -637,6 +612,11 @@ g.Mjeti “Magjik” (Efekte Speciale)
     tool, you can either click and drag around the picture, and/or simply click
     the picture once, to apply the effect.
 
+    The Magic Tools
+
+
+        See the instructions for each Magic tool (in the 'magic-docs' folder).
+
     Kontrolle &Magjiku
 
 
@@ -670,21 +650,34 @@ g.Mjeti “Magjik” (Efekte Speciale)
 
         📜 This option was added starting with Tux Paint version 0.9.30.
 
-    See the instructions for each Magic tool (in the 'magic-docs' folder).
+    ⚙ Note: If the "ungroupmagictools" option is set, Tux Paint won't split
+    Magic tools into groups of related tools, and instead present them all as
+    one large list. See the "Options" documentation.
 
 
 
 h.Mjeti “Gomë”
 
-    This tool is similar to the Paint Brush. Wherever you click (or click and
-    drag), the picture will be erased. (This may be white, some other color, or
-    to a background picture, depending on the picture.)
+    This tool works similarly to the Paint Brush. Wherever you click (or click
+    and drag), things you've added to your drawing will be erased, exposing the
+    background that you chose when you started the drawing, be it a solid
+    color, the background of a 'Starter' image, or a 'Template' image. (See
+    Mjete të Mundshme > Kontrolle të Tjera > Urdhri “I ri”.)
 
-    A number of eraser sizes are available, with both square and round shapes.
-    Fuzzy-edged round shapes are also available.
+    A number of eraser types are available, each offering multiple sizes are
+    available:
+      + Square — Square-shaped erasers that completely remove parts of your
+        drawing.
+      + Circle (solid) — Circle-shaped erasers that completely remove parts of
+        your drawing.
+      + Fuzzy-edged Circle — Circle-shaped erasers with soft edges that blend
+        with the background.
+      + Transparent Circle — Circle-shaped erasers that blend your drawing with
+        the background. Release and click again to expose more and more of the
+        background.
 
-    As you move the mouse around, a square outline follows the pointer, showing
-    what part of the picture will be erased to white.
+    As you move the mouse around, an outline follows the pointer, showing what
+    part of the picture will be erased.
 
     As you erase, a 'squeaky clean' eraser wiping sound is played.
 
@@ -725,6 +718,10 @@ b.Urdhri “I ri”
     or using a 'Starter' or 'Template' image (see below). You will first be
     asked whether you really want to do this.
 
+    When you use the 'Eraser' tool things you've added to your drawing will be
+    removed, exposing the background you chose when starting a new drawing.
+    (See Mjete të Mundshme > Mjete Vizatimi > Mjeti “Gomë”.)
+
     ⌨ Note: You can also press [Tasti Kontroll / ⌘] + [N] on the keyboard to
     filloni një vizatim i ri.
 
@@ -732,8 +729,8 @@ b.Urdhri “I ri”
         Along with the preset solid colors, you can also choose colors using a
         rainbow palette or a "color mixer". These operate identically to the
         options found in the color palette shown below the canvas when drawing
-        a picture. See Main Screen > Lower: Colors > Special color options for
-        details.
+        a picture. See Skena Kryesore > Më Poshtë: Ngjyra > Special color
+        options for details.
 
     Figura “Fillesë” & Gjedhe
           o 'Starters' can behave like a page from a coloring book — a
@@ -1165,21 +1162,21 @@ You can simply convert the picture to the format Tux Paint uses — PNG (Portabl
 Network Graphic) — and place it in Tux Paint's "saved" directory/folder. Here
 is where to find it (by default):
 
-Windows 10, 8, 7, Vista
-    Brenda dosjes “AppData” të përdoruesi, p.sh.: “C:\Users\emër përdoruesi\
-    AppData\Roaming\TuxPaint\saved\”.
-
-Windows 2000, XP
-    Brenda dosjes “Application Data” të përdoruesi, p.sh.: “C:\Documents and
-    Settings\emër përdoruesi\Application Data\TuxPaint\saved\”.
+Windows Vista, Windows 8, Windows 10, Windows 11
+    In the user's "AppData" folder:
+    e.g., "C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\saved\"
 
 macOS
-    Brenda dosjes “Library” të përdoruesi, p.sh.: “/Users/emër përdoruesi/
-    Library/Application Support/Tux Paint/saved/”.
+    In the user's "Application Support" folder:
+    e.g., "/Users/emër përdoruesi/Library/Application Support/TuxPaint/saved/"
 
-Linux/Unix
-    Inside a hidden ".tuxpaint" directory, in the user's home directory
-    ("$HOME"), e.g. "/home/emër përdoruesi/.tuxpaint/saved/".
+Linux / Unix
+    In the user's "home directory" folder:
+    e.g., "/home/emër përdoruesi/.tuxpaint/saved/"
+
+Haiku
+    In the user's "settings" folder:
+    e.g., "/boot/home/config/settings/TuxPaint/saved/"
 
 
 💡 Note: It is also from this folder that you can copy or open pictures drawn in
@@ -1275,6 +1272,9 @@ Përdorim i Tux Paint-it:
         Tux Paint's configuration.
       + Dokumentim i Mjetit “Magjik” (“magic-docs”)
         Documentation for each of the currently-installed 'Magic' tools.
+      + Frequently Asked Questions ("FAQs") about Tux Paint
+        Answers to, and solutions for, some common questions about, and
+        problems with, using Tux Paint.
 
 
 Si të zgjerohet Tux Paint-i:

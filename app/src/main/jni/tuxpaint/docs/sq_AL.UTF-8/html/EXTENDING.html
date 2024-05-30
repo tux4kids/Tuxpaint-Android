@@ -92,7 +92,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.32          </h1>
+            version 0.9.33          </h1>
     
           <p>
             Të drejta kopjimi &copy; 2002-2024 nga kontribues të ndryshëm; shihni <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
@@ -100,7 +100,7 @@
           </p>
     
           <p>
-            26 janar 2024          </p>
+            29 prill 2024          </p>
         </center>
       </header>
 
@@ -121,7 +121,7 @@
                   <li><a href="#standard_files">Kartela Standarde</a></li>                  <li><a href="#personal_files">Kartela Personale</a></li>                </ul>
               </li>
               <li><a href="#brushes">Penela</a>                <ul>
-                  <li><a href="#brush_options">Mundësi Penelash</a></li>                </ul>
+                  <li><a href="#brush_description_text">Brush Descriptive Text</a></li>                  <li><a href="#brush_options">Mundësi Penelash</a></li>                </ul>
               </li>
               <li><a href="#stamps">Stampa</a>                <ul>
                   <li><a href="#stamps_images">Figura stampash</a></li>                  <li><a href="#description_text">Tekst Përshkrues për Stampat</a></li>                  <li><a href="#sound_effects">Efekte Zanore Stampash</a></li>                  <li><a href="#descriptive_sound">Tingull Përshkrues Stampash</a></li>                  <li><a href="#stamp_options">Mundësi Stampash</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Stampa të kthyera në anë tjetër dhe të pasqyruara paraprakisht</a></li>                </ul>
@@ -172,13 +172,11 @@
               Ku gjendet kjo drejtori varet nga vlera që qe caktuar për “<code>DATA_PREFIX</code>”, kur u montua Tux Paint-i. Për hollësi, shihni “Dokumentim instalimit”.            </p>
             <p>
               Si parazgjedhje, ama, drejtoria është:              <blockquote>
-                <code>/usr/local/share/tuxpaint/</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>/usr/local/share/tuxpaint/</code></nobr>              </blockquote>
             </p>
             <p>
               Nëse e instaluat prej një pakete, ka më tepër gjasa të jetë:              <blockquote>
-                <code>/usr/share/tuxpaint/</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>/usr/share/tuxpaint/</code></nobr>              </blockquote>
             </p>
           </dd>
 
@@ -186,8 +184,7 @@
           <dd>
             <p>
               Tux Paint-i kërkon për një drejtori të quajtur '<code>data</code>' në të njëjtën drejtori me të ekzekutueshmin. Kjo është një drejtori që instaluesi përdori kur instaloi Tux Paint-ni, p.sh.,:              <blockquote>
-                <code style="white-space: nowrap;">C:\Program Files\TuxPaint\data</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>C:\Program Files\TuxPaint\data</code></nobr>              </blockquote>
             </p>
           </dd>
 
@@ -208,9 +205,8 @@
             <p class="note">
               <span title="Information">&#128161;</span>              <em>Shënim:</em> Nëse instaloni një version më të ri të Tux Paint-it dhe zëvendësoni, ose hidhni tej versionin e vjetër, duke ndjekur udhëzimet e mësipërme do të humbni ndryshimet e bëra, ndaj mbani kopjeruajtje të lëndës që krijoni rishtas (stampa, penela, etj.).            </p>
             <p>
-              Tux Paint-i kërkon gjithashtu për kartela në dosjen “TuxPaint” të cilën mund ta vendosni te dosja “Application Support” e sistemit (gjendet nën "Library", në rrënjë të sistemit tuaj të kartelave):              <blockquote>
-                <code style="white-space: nowrap;">/Library/Application Support/TuxPaint/</code>
-              </blockquote>
+              Tux Paint also looks for files in a "TuxPaint" folder that you can place in your system's <nobr>"<code style='background: #EEE;'>Application Support</code>"</nobr> folder (found under <nobr>"<code style='background: #EEE;'>Library</code>"</nobr> at the root of your filesystem):              <blockquote>
+                <nobr><code style='background: #EEE;'>/Library/Application Support/TuxPaint/data/</code></nobr>              </blockquote>
             </p>
             <p>
               Kur e përditësoni Tux Paint-in me një version të ri, lënda e kësaj dosjeje “TuxPaint” do të mbesë e njëjtë dhe do të mbesë e përdorshme nga krejt përdoruesit e Tux Paint-it.            </p>
@@ -235,26 +231,22 @@
             <p>
               Dosja juaj personale Tux Paint gjedenet te “Application Data” juaj personale. Për shembull, në Windows-e më të rinj:
               <blockquote>
-                <code style="white-space: nowrap;">C:\Dokumente dhe Rregullime\<i>(emër përdoruesi)</i>\Të dhëna Aplikacioni\TuxPaint\</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\</code></nobr>              </blockquote>
             </p>
           </dd>
 
           <dt><strong>macOS</strong></dt>
           <dd>
             <p>
-              Dosja juaj personale Tux Paint gjendet në dosjen tuaj personale “Application Support”:              <blockquote>
-                <code style= "white-space: nowrap;">/Users/<i>(emër përdoruesi)</i>/Library/Application Support/TuxPaint/</code>
-              </blockquote>
+              Your personal Tux Paint folder is stored in your personal <nobr>"<code style='background: #EEE;'>Application Support</code>"</nobr> folder:              <blockquote>
+                <nobr><code style='background: #EEE;'>/Users/<i>emër përdoruesi</i>/Library/Application Support/TuxPaint/</code></nobr>              </blockquote>
             </p>
           </dd>
 
           <dt><strong>Linux dhe Unix</strong></dt>
           <dd>
             <p>
-              Kartelat tuaja personale Tux Paint shkojnë te një “drejtori e fshehur” që gjendet në drejtorinë shtëpi të llogarisë tuaj: “<code>$(HOME)/.tuxpaint/</code>” (e njohur edhe si “<code>~/.tuxpaint/</code>”).            </p>
-            <p>
-              Pra, nëse drejtoria juaj shtëpi është “<code>/home/tux</code>”, atëherë kartelat tuaja personale Tux Paint shkojnë te “<code>/home/tux/.tuxpaint/</code>”.            </p>
+              Your personal Tux Paint files go into a 'hidden directory' found in your account's home directory: <nobr>"<code style='background: #EEE;'>/home/emër përdoruesi/.tuxpaint/</code>"</nobr>.            </p>
             <p>
               Mos harroni pikën (“<code>.</code>”) para “<code>tuxpaint</code>”!            </p>
           </dd>
@@ -264,7 +256,7 @@
           Që të shoni penelat, stampat, “fillesat”, gjedhet dhe shkronjat tuaja, krijoni nëndrejtori nën drejtorinë tuaj personale Tux Paint të quajtuara “<code><b>brushes</b></code>”, “<code><b>stamps</b></code>”, “<code><b>starters</b></code>”, “<code><b>templates</b></code>”, “<code><b>fonts</b></code>”, përkatësisht.        </p>
 
         <p>
-          (Për shembull, nëse krijoni një penel të quajtur “<code>flower.png</code>”, do ta vendosnit te “<code>~/.tuxpaint/brushes/</code>”, nën Linux ose Unix.)        </p>
+          (For example, if you created a brush named <nobr>"<code style='background: #EEE;'>flower.png</code>"</nobr>, you would put it in <nobr>"<code style='background: #EEE;'>/home/emër përdoruesi/.tuxpaint/brushes/</code>"</nobr> under Linux or Unix.)        </p>
       </section><!-- H2: Personal Files -->
     </section><!-- H1: Where Files Go -->
 
@@ -277,7 +269,7 @@
       </header>
 
       <p>
-        Penelat e përdorur për të vizatuar me mjetet “Penel” dhe “Vija” në Tux Paint janë thjesht kartela figurë PNG.      </p>
+        The brushes used for drawing with the 'Paint' and 'Lines' tools in Tux Paint are simply PNG image files.      </p>
       <img src="../../html/images/brush_edit.png"
                   width="123"
                   height="147"
@@ -288,6 +280,41 @@
 
       <p>
         Pikselat shkallë të grisë te PNG-ja e penelit do të vizatohen duke përdorur ngjyrën aktualisht të përzgjedhur në Tux Paint. Pikselat me ngjyrë do të ngjyrosen.      </p>
+
+      <section><!-- H2: Brush Descriptive Text -->
+        <header>
+          <h2>
+            <a name="brush_bescription_text"
+                id="brush_description_text">Brush Descriptive Text</a>
+          </h2>
+        </header>
+
+        <p>
+          Tux Paint will display descriptive text when a brush is selected. These are placed in plain text files with the same name as the PNG, but with a "<code>.txt</code>" filename extension. (e.g., "<code>brush.png</code>"'s description is stored in "<code>brush.txt</code>" in the same directory.)        </p>
+
+        <p>
+          The first line of the text file will be used as the US English description of the brush's image. It must be encoded in UTF-8.        </p>
+
+        <dl>
+          <dt><strong>Mbulim Përkthimesh</strong></dt>
+          <dd>
+            <p>
+              Te kartela tekst mund të shtohen rreshta shtesë për të dhënë përkthime të përshkrimit, që të shfaqen kur Tux Paint-i xhiron në një gjuhë tjetër (fjala vjen, shqip ose frëngjisht).            </p>
+            <p>
+              Fillimi i rreshtit duhet t’i përgjigjet kodit të gjuhës për gjuhën në fjalë (p.sh., “<code>fr</code>” për frëngjishten dhe “<code>zh_TW</code>” për kineze tradicionale), pasuar nga “<code>.utf8=</code>” dhe përshkrimi i përkthyer (Unikod, koduar si UTF-8).            </p>
+            <p>
+              <b>Për zhvillues Tux Paint-i:</b> Te drejtoria “<code>brushes-po</code>” ka programthe për shndërrim kartelash tekst në format PO (dhe anasjelltas), për përkthim të kollajtë në gjuhë të ndryshme. Ndaj s’duhet të shtoni ose ndryshoni kurrë përkthime drejt e te kartelat “<code>.txt</code>”.            </p>
+            <p>
+              Nëse s’ka përkthim për gjuhën në të cilën po xhirohet Tux Paint-i, përdoret teksti prej anglishtes amerikane.            </p>
+          </dd>
+
+          <dt><strong>Përdorues Windows-i</strong></dt>
+          <dd>
+            <p>
+              Që të përpunoni/krijoni këto kartela, përdorni <cite>NotePad</cite> ose <cite>WordPad</cite>. Sigurohuni t’i ruani si tekst të thjeshtë dhe garantoni të kenë një zgjatim “<code>.txt</code>” në fund të emrit të kartelës.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Descriptive Text -->
 
       <section><!-- H2: Brush Options -->
         <header>
@@ -604,7 +631,7 @@
           <dt><strong>Përdorues Windows-i</strong></dt>
           <dd>
             <p>
-              Që të përpunoni/krijoni këto kartela, përdorni <cite>NotePad</cite> ose <cite>WordPad</cite>. Sigurohuni t’i ruani si tekst të thjeshtë dhe garantoni të kenë një zgjatim “<code>.txt</code>” në fund të emrit të kartelës.            </p>
+              Që të përpunoni/krijoni këto kartela, përdorni <cite>NotePad</cite> ose <cite>WordPad</cite>. Sigurohuni t’i ruani si tekst të thjeshtë dhe garantoni të kenë një zgjatim “<code>.dat</code>” në fund të emrit të kartelës.            </p>
           </dd>
         </dl>
       </section><!-- H2: Stamp Options -->
@@ -651,7 +678,7 @@
         Shkronjat e përdorur nga Tux Paint janë TrueType Fonts (TTF).      </p>
 
       <p>
-        Thjesht vendosini te drejtoria “<code><b>fonts</b></code>”. Tux Paint-i do ta ngarkojë llojin e shkronjave dhe do të japë katër madhësi të ndryshme te përzgjedhësi i “Shkronjave”, kur përdoren mjetet “Tekst” dhe “Etiketë”.      </p>
+        Simply place them in the "<code><b>fonts</b></code>" directory. When using the 'Text' and 'Label' tools, Tux Paint will present the font in the 'Letters' selector at the right, along with options to enable bold and/or italics, and change the size.      </p>
     </section><!-- H1: Fonts -->
 
     <section class="indent outer"><!-- H1: Starters -->

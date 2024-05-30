@@ -49,14 +49,15 @@
    based on locale.
 */
 
-typedef struct default_locale_font_s {
+typedef struct default_locale_font_s
+{
   int locale_id;
-  const char * font_name;
-  const char * font_name_fallback;
+  const char *font_name;
+  const char *font_name_fallback;
 } default_locale_font_t;
 
 extern default_locale_font_t default_local_fonts[];
-extern const char * PANGO_DEFAULT_FONT, * PANGO_DEFAULT_FONT_FALLBACK;
+extern const char *PANGO_DEFAULT_FONT, *PANGO_DEFAULT_FONT_FALLBACK;
 
 #include "compiler.h"
 
@@ -177,6 +178,6 @@ void sdl_color_to_pango_color(SDL_Color sdl_color, SDLPango_Matrix * pango_color
 
 int load_user_fonts(SDL_Surface * screen, SDL_Texture * texture,
                     SDL_Renderer * renderer, void *vp, const char *restrict const locale);
-char * ask_pango_for_font(char * pangodesc);
+char *ask_pango_for_font(char *pangodesc);
 
 #endif

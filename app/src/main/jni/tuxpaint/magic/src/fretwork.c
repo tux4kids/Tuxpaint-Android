@@ -163,21 +163,25 @@ int fretwork_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uin
   fretwork_four_back = IMG_Load(fretwork_images[2]);
   fretwork_corner_back = IMG_Load(fretwork_images[3]);
 
-  if (fretwork_one == NULL || fretwork_one_back == NULL) {
+  if (fretwork_one == NULL || fretwork_one_back == NULL)
+  {
     fprintf(stderr, "Cannot load %s\n", fretwork_images[0]);
-    return(0);
+    return (0);
   }
-  if (fretwork_three == NULL || fretwork_three_back == NULL) {
+  if (fretwork_three == NULL || fretwork_three_back == NULL)
+  {
     fprintf(stderr, "Cannot load %s\n", fretwork_images[1]);
-    return(0);
+    return (0);
   }
-  if (fretwork_four == NULL || fretwork_four_back == NULL) {
+  if (fretwork_four == NULL || fretwork_four_back == NULL)
+  {
     fprintf(stderr, "Cannot load %s\n", fretwork_images[2]);
-    return(0);
+    return (0);
   }
-  if (fretwork_corner == NULL || fretwork_corner_back == NULL) {
+  if (fretwork_corner == NULL || fretwork_corner_back == NULL)
+  {
     fprintf(stderr, "Cannot load %s\n", fretwork_images[3]);
-    return(0);
+    return (0);
   }
 
   img_w = fretwork_one->w;

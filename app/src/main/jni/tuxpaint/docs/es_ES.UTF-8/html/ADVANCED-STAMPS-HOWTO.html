@@ -5,6 +5,76 @@
       Tux Paint Advanced Stamps 'How-To'    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
@@ -17,24 +87,24 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        versi&oacute;n 0.9.32        Advanced Stamps 'How-To'      </h1>
+        versi&oacute;n 0.9.33<br/>
+        Advanced Stamps 'How-To'      </h1>
 
       <p>
-        Copyright &copy; 2006-2022 by Albert Cahalan and others; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        Copyright &copy; 2006-2024 by Albert Cahalan and others; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
       <p>
-        junio  4, 2022      </p>
+        mayo 14, 2024      </p>
     </center>
-
-    <hr size="2"
-        noshade>
 
     <table border="2"
            cellspacing="0"
            cellpadding="2"
-           summary="Table of Contents">
+           summary="Table of Contents"
+           align="center"
+           style="page-break-inside: avoid;">
       <tr>
         <th>
           Table of Contents        </th>
@@ -43,28 +113,10 @@
       <tr>
         <td>
           <ul>
-            <li>
-              <a href="#about">About this 'How-To'</a>
-            </li>
-            <li>
-              <a href="#choice">Image choice is crucial</a>
-            </li>
-            <li>
-              <a href="#prepare_mask">Prepare the mask</a>
-            </li>
-            <li>
-              <a href="#replace_fringe">Replace the fringe and junk pixels</a>
-            </li>
-            <li>
-              <a href="#save">Save the image for Tux Paint</a>
-            </li>
-          </ul>
+            <li><a href="#about">About this 'How-To'</a></li>            <li><a href="#choice">Image choice is crucial</a></li>            <li><a href="#prepare_mask">Prepare the mask</a></li>            <li><a href="#replace_fringe">Replace the fringe and junk pixels</a></li>            <li><a href="#save">Save the image for Tux Paint</a></li>          </ul>
         </td>
       </tr>
     </table>
-
-    <hr size="2"
-        noshade>
 
     <hr size="2"
         noshade>
@@ -189,7 +241,7 @@
         Select parts of the image that need to be 100% opaque or 0% opaque. If you can select the object or background somewhat accurately by color, do so. As needed to avoid selecting any pixels that should be partially opaque (generally at the edge of the object) you should grow, shrink, and invert the selection.      </p>
 
       <p>
-        Fill the 100% opaque areas with white, and the 0% opaque areas with black. This is most easily done by drag-and-drop from the foreground/background color indicator. You should not see anything happen, because you are viewing the unmodified image layer while editing the mask of the WIP layer. Large changes might be noticable in the thumbnail.      </p>
+                Fill the 100% opaque areas with white, and the 0% opaque areas with black. This is most easily done by drag-and-drop from the foreground/background color indicator. You should not see anything happen, because you are viewing the unmodified image layer while editing the mask of the WIP layer. Large changes might be noticable in the thumbnail.      </p>
 
       <p>
         Now you must be zoomed in.      </p>
@@ -262,7 +314,7 @@
 
     <blockquote>
       <p>
-        It is very easy to ruin your hard work. Image editors can silently destroy pixels in 0% opaque areas. The conditions under which this happens may vary from version to version. If you are very trusting, you can try saving your image directly as a PNG. Be sure to read it back in again to verify that the 0% opaque areas didn't turn black or white, which would create fringes when Tux Paint scales the image down. If you need to scale your image to save space (and hide your mistakes), you are almost certain to destroy all the 0% opaque areas. So here is a better way...      </p>
+                It is very easy to ruin your hard work. Image editors can silently destroy pixels in 0% opaque areas. The conditions under which this happens may vary from version to version. If you are very trusting, you can try saving your image directly as a PNG. Be sure to read it back in again to verify that the 0% opaque areas didn't turn black or white, which would create fringes when Tux Paint scales the image down. If you need to scale your image to save space (and hide your mistakes), you are almost certain to destroy all the 0% opaque areas. So here is a better way...      </p>
 
       <h3>
         A Safer Way to Save      </h3>

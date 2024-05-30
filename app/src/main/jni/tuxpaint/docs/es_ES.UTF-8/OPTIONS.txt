@@ -1,12 +1,12 @@
                                    Tux Paint
-                                versión 0.9.32
+                                versión 0.9.33
 
                              Options Documentation
 
-        Copyright © 2002-2023 by various contributors; see AUTHORS.txt.
+        Copyright © 2002-2024 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                              diciembre 29, 2023
+                                abril 29, 2024
 
 +--------------------------------------------+
 |             Table of Contents              |
@@ -47,8 +47,7 @@ The file is simply a plain text file containing the options you want enabled:
 
 Linux and Unix Users
 
-The file you should create is called ".tuxpaintrc" and it should be placed in
-your home directory. (a.k.a. "~/.tuxpaintrc" or "$HOME/.tuxpaintrc")
+/home/username/.tuxpaintrc
 
 System-Wide Configuration File
 
@@ -60,8 +59,7 @@ at:
 
 macOS Users
 
-The file you should create is called "tuxpaint.cfg" and it should be placed in
-your home folder, under the sub-folder: Library/Application Support/TuxPaint
+/Users/username/Library/Application Support/TuxPaint/tuxpaint.cfg
 
 System-Wide Configuration File
 
@@ -73,8 +71,7 @@ at:
 
 Windows Users
 
-The file you should create is called "tuxpaint.cfg" and it should be placed in
-in your personal AppData folder: C:\Users\username\AppData\Roaming\TuxPaint\
+C:\Users\username\AppData\Roaming\TuxPaint\tuxpaint.cfg
 
 You can use NotePad or WordPad to create this file. Be sure to save it as Plain
 Text, and make sure the filename doesn't have ".txt" at the end...
@@ -85,7 +82,11 @@ Before this file is read, a system-wide configuration file is read. (By
 default, this configuration has no settings enabled.) It is normally located
 at:
 
-    C:\Program Files\Tuxpaint
+C:\Program Files\TuxPaint\tuxpaint.cfg
+
+Haiku Users
+
+/boot/home/config/settings/TuxPaint/tuxpaint.conf
 
 ⚙ You can disable reading of this file altogether, leaving the settings as
 defaults (which can then be overridden by your personal config. file and/or
@@ -163,10 +164,9 @@ native=yes
 allowscreensaver=yes
 
     By default, Tux Paint prevents your system's screensaver from starting up.
-    You can override this by using the "allowscreensaver" option. Note: This
-    requires version 1.2.12 or higher of the SDL library. (You can also do this
-    by setting the "SDL_VIDEO_ALLOW_SCREENSAVER" environment variable on your
-    system to "1".)
+    You can override this by using the "allowscreensaver" option. (You can also
+    do this by setting the "SDL_VIDEO_ALLOW_SCREENSAVER" environment variable
+    on your system to "1".)
 
     ⚙ Note: If used in a system-wide configuration file, may be overridden by
     the user's configuration file using "allowscreensaver=no" or
@@ -475,6 +475,23 @@ nomagicsizes=yes
     ⚙ Note: If used in a system-wide configuration file, may be overridden by
     the user's configuration file using "nomagicsizes=no" or "magicsizes=yes".
     In both cases, may be overridden by the command-line option "--magicsizes".
+
+
+
+ungroupmagictools=yes
+
+    By default, the Magic tools in Tux Paint are organized into groups of
+    similar tools (e.g., all of the color, saturation, darken/lighten tools
+    together). This option removes the grouping, and places all of the tools in
+    one long list.
+
+    📜 Note: Magic tool groups were added in Tux Paint 0.9.27. The option to
+    disable grouping was added to Tux Paint in version 0.9.33.
+
+    ⚙ Note: If used in a system-wide configuration file, may be overridden by
+    the user's configuration file using "ungroupmagictools=no" or
+    "groupmagictools=yes". In both cases, may be overridden by the command-line
+    option "--groupmagictools".
 
 
 
@@ -1117,17 +1134,19 @@ Save Printer Configuration
 
         If you do not override it, the default location is:
 
-          o Linux & Unix — Under a hidden directory named ".tuxpaint" in your
-            home directory (aka "~" or "$HOME")
-            Example: /home/username/.tuxpaint/saved/
-          o Windows — Inside a folder named "TuxPaint" in your "Application
-            Data" folder.
-            Example: C:\Documents and Settings\Username\Application Data\
-            TuxPaint\saved\
-          o macOS — Inside a folder named "TuxPaint" in your "Application
-            Support" folder.
-            Example: /Users/Username/Library/Application Support/TuxPaint/saved
-            /
+        Linux / Unix
+            Under a hidden directory in your home directory:
+            /home/username/.tuxpaint/saved/
+
+        Windows
+            C:\Users\username\AppData\Roaming\TuxPaint\saved\
+
+        macOS
+            /Users/username/Library/Application Support/TuxPaint/saved/
+
+        Haiku
+            /boot/home/config/settings/TuxPaint/saved/
+
 
         💡 Note: When specifying a Windows drive (e.g., "H:\"), you must also
         specify a subdirectory.
@@ -1153,27 +1172,27 @@ Save Printer Configuration
             Group) configuration. (Try running the command-line "xdg-user-dir
             PICTURES" to find out.)
             Typically (in an English locale), this will be a "Pictures"
-            subdirectory in your home directory (i.e., "$HOME/Pictures" aka "~/
-            Pictures").
-            Tux Paint will fall back to using that typical directory, of no XDG
+            subdirectory in your home directory (i.e., 
+            "/home/username/Pictures").
+            Tux Paint will fall back to using that typical directory, if no XDG
             configuration can be read, or nothing is set for
             "XDG_PICTURES_DIR".
-          o Windows - "My Pictures" directory for each user (normaly "c:\Users\
-            USERNAME\Pictures").
+          o Windows - "My Pictures" directory for each user (normaly 
+            "C:\Users\username\My Pictures")
             You can directly open the folder as follows:
               # Press "[Windows]+[R]" key to open "Run ..." dialogue.
               # Enter "Shell:My Pictures" in the text box and push [OK].
           o macOS — TBD!
 
         💡 Note: When the defaults are used, a new "TuxPaint" subdirectory will
-        be created and used. (e.g., "~/Pictures/TuxPaint") When the
-        "--exportdir" option is used, the exact path specified will be used (no
-        "TuxPaint" subdirectory is created).
+        be created and used. (e.g., "/home/username/Pictures/TuxPaint") When
+        the "--exportdir" option is used, the exact path specified will be used
+        (no "TuxPaint" subdirectory is created).
 
-        The directory itself (e.g., "~/Pictures/TuxPaint") will be created, if
-        it doesn't exist.
+        The directory itself (e.g., "/home/username/Pictures/TuxPaint") will be
+        created, if it doesn't exist.
 
-        If the parent directory (e.g., "~/Pictures/TuxPaint") also does not
+        If the parent directory (e.g., "/home/username/Pictures") also does not
         exist, Tux Paint will attempt to create it as well (but not any
         directories higher than that).
 
@@ -1263,17 +1282,15 @@ Save Printer Configuration
 
         If you do not override it, the default location is:
 
-          o Linux & Unix — Under a hidden directory named ".tuxpaint" in your
-            home directory (aka "~" or "$HOME")
-            Example: /home/username/.tuxpaint/brushes/
-          o Windows — Inside a folder named "TuxPaint" in your "Application
-            Data" folder.
-            Example: C:\Documents and Settings\Username\Application Data\
-            TuxPaint\brushes\
-          o macOS — Inside a folder named "TuxPaint" in your "Application
-            Support" folder.
-            Example: /Users/Username/Library/Application Support/TuxPaint/
-            brushes/
+        Linux / Unix
+            /home/username/.tuxpaint/
+
+        Windows
+            C:\Users\username\AppData\Roaming\TuxPaint\
+
+        macoS
+            /Users/username/Library/Application Support/TuxPaint/
+
 
         📜 Note: Prior to version 0.9.18, Tux Paint would use the same setting
         or default as for "savedir" to search for data files. As of version
@@ -1593,13 +1610,12 @@ Button Shortcuts
 
     Overriding System Config. Options
 
-    (For Linux and Unix users)
-
-    If any of the above options are set in "/etc/tuxpaint/tuxpaint.config", you
-    can override them in your own "~/.tuxpaintrc" file.
+    If any of the above options are set in a system-wide configuration file
+    (e.g. "/etc/tuxpaint/tuxpaint.conf" on Linux), you may override them in
+    your own personal configuration file (e.g. "/home/username/.tuxpaintrc")
 
     For true/false options, like "noprint" and "grab", you can simply say they
-    equal 'no' in your "~/.tuxpaintrc" file:
+    equal 'no' in your personal configuration file:
 
         noprint=no
         uppercase=no
@@ -1615,11 +1631,12 @@ Button Shortcuts
     Options may also be issued on the command-line when you go to launch Tux
     Paint.
 
-    --fullscreen
+    --fullscreen=yes
+        --fullscreen=native
         --WIDTHxHEIGHT
+        --orient=portrait
         --buttonsize=SIZE
         --colorsrows=ROWS
-        --orient=portrait
         --native
         --allowscreensaver
         --startblank
@@ -1752,11 +1769,11 @@ Button Shortcuts
 
     --nosysconfig
 
-        Under Linux and Unix, this prevents the system-wide configuration file,
-        "/etc/tuxpaint/tuxpaint.conf", from being read.
+        This prevents the system-wide configuration file (e.g. 
+        "/etc/tuxpaint/tuxpaint.conf" on Linux), from being read.
 
-        Only your own configuration file, "~/.tuxpaintrc", if it exists, will
-        be used.
+        Only your own configuration file (e.g. "/home/username/.tuxpaintrc" on
+        Linux) — if it exists — will be used.
 
 
 

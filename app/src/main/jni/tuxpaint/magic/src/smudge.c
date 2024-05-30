@@ -126,9 +126,9 @@ int smudge_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
 int smudge_get_order(int which)
 {
   if (which == 0)
-    return 3; /* within MAGIC_TYPE_DISTORTS */
+    return 3;                   /* within MAGIC_TYPE_DISTORTS */
   else
-    return 2500; /* within MAGIC_TYPE_PAINTING */
+    return 2500;                /* within MAGIC_TYPE_PAINTING */
 }
 
 // Return our descriptions, localized:

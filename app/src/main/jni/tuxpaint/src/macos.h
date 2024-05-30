@@ -37,4 +37,15 @@ const char *apple_picturesPath(void);
 int apple_trash(const char *path);
 
 
+/*
+* It's unclear why we need this on macOS, but the SDL2 library on the Mac
+* appears to require an extra flip during a delay without which the flip does
+* occur but not until the next click or after much time passes.
+*/
+#define SDL_Delay(n) do { \
+    SDL_Flip(screen);         \
+    SDL_Delay(n);             \
+} while(0)
+
+
 #endif /* __MACOS_H__ */

@@ -1,12 +1,12 @@
                                    Tux Paint
-                  version 0.9.32 Questions fréquemment posées
+                                version 0.9.33
+                         Questions fréquemment posées
 
-       Copyright © 2002-2023 by divers contributeurs; voir AUTHORS.txt.
+       Copyright © 2002-2024 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               juillet 20, 2023
+                                 mai 14, 2024
 
--------------------------------------------------------------------------------
 +-----------------------------------+
 |        Table des matières         |
 |-----------------------------------|
@@ -247,16 +247,21 @@ Où Tux Paint enregistre-t-il mes dessins ?
     emplacement standard sur votre disque local :
 
     Windows Vista, Windows 8, Windows 10, Windows 11
-        Dans le dossier "AppData" de l'utilisateur :
-        par ex.., C:\Users\Username\AppData\Roaming\TuxPaint\saved
+        In the user's "AppData" folder:
+        e.g., "C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\saved\"
 
     macOS
-        Dans le dossier "Application Support" de l'utilisateur :
-        par ex., /Users/Username/Library/Applicaton Support/TuxPaint/saved/
+        In the user's "Application Support" folder:
+        e.g., 
+        "/Users/nom d'utilisateur/Library/Application Support/TuxPaint/saved/"
 
     Linux / Unix
-        Dans le dossier personnel de l'utilisateur ("$HOME"), dans un
-        sous-dossier ".tuxpaint"), par ex., /home/username/.tuxpaint/saved/
+        In the user's "home directory" folder:
+        e.g., "/home/nom d'utilisateur/.tuxpaint/saved/"
+
+    Haiku
+        In the user's "settings" folder:
+        e.g., "/boot/home/config/settings/TuxPaint/saved/"
 
 
     Les images sont stockées sous forme de bitmaps PNG, que la plupart des
@@ -500,6 +505,13 @@ Tux Paint continue de fonctionner en mode plein écran - je veux qu'il soit
 
 
 
+How do I access other applications when Tux Paint is running in Full Screen?
+      + Windows and Linux users, try the [Alt] + [Tab] key combination to
+        switch between applications.
+      + macOS users, switch to other applications using [Control] + [Left
+        Arrow], then back to Tux Paint using [Control] + [Right Arrow].
+
+
 
 -------------------------------------------------------------------------------
 
@@ -507,18 +519,17 @@ Autres problèmes
 
 Tux Paint ne veut pas fonctionner
 
-    Si Tux Paint échoue avec le message: "You're already running a copy of Tux
-    Paint!", cela signifie qu'il a déjà été lancé dans les 30 dernières
-    secondes. (Sous Unix / Linux, ce message devrait apparaîtrr dans une
-    console de terminal si vous exécutiez Tux Paint en ligne de commande. Sous
-    Windows, ce message apparaîtrait dans un fichier nommé "stdout.txt" dans le
-    même dossier où TuxPaint.exe réside (par exemple, dans "C:\Program Files\
-    TuxPaint").
+    If Tux Paint aborts with the message: "You're already running a copy of Tux
+    Paint!", this means it has been launched in the last 30 seconds. (On Unix/
+    Linux, this message would appear in a terminal console if you ran Tux Paint
+    from a command-line. On Windows, this message would appear in a file named
+    "stdout.txt" in the same folder where TuxPaint.exe resides (e.g., in 
+    "C:\Program Files\TuxPaint\").
 
-    Un fichier de verrouillage ("~/.tuxpaint/lockfile.dat" sous Linux et Unix,
-    "userdata\lockfile.dat" sous Windows) est utilisé pour s'assurer que Tux
-    Paint n'est pas exécuté trop de fois en même temps (par exemple, en à cause
-    d'un enfant impatient qui clique plusieurs fois sur son icône).
+    A lockfile (e.g., "/home/nom d'utilisateur/.tuxpaint/lockfile.dat" on Linux
+    and Unix, "userdata\lockfile.dat" on Windows) is used to make sure Tux
+    Paint isn't run too many times at once (e.g., due to a child impatiently
+    clicking its icon more than once).
 
     Même si le fichier de verrouillage existe, il contient l'heure de la
     dernière exécution de Tux Paint. Si cela fait plus de 30 secondes, Tux
@@ -599,16 +610,35 @@ Tux Paint utilise des options que je n'ai pas spécifiées !
 
       + Windows
 
-        Sous Windows, Tux Paint examine d'abord le fichier de configuration :
+        Under Windows, it first examines the system-wide configuration file,
+        located here:
 
-            tuxpaint.cfg
+            C:\Program Files\TuxPaint\tuxpaint.cfg
+
+        Il examine ensuite le fichier de configuration personnel de
+        l'utilisateur :
+
+            C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\tuxpaint.cfg
 
         Et finalement, toutes les options envoyées en tant qu'arguments de
         ligne de commande sont utilisées.
 
       + macOS
 
-      + Unix et Linux
+        Under macOS, it first examines the system-wide configuration file,
+        located here:
+
+            /Library/Application Support/TuxPaint/tuxpaint.cfg
+
+        Il examine ensuite le fichier de configuration personnel de
+        l'utilisateur :
+
+            /Users/nom d'utilisateur/Library/Application Support/TuxPaint/tuxpaint.cfg
+
+        Et finalement, toutes les options envoyées en tant qu'arguments de
+        ligne de commande sont utilisées.
+
+      + Linux / Unix
 
         Sous Unix et Linux, il examine d'abord le fichier de configuration à
         l'échelle du système, situé ici :
@@ -618,25 +648,32 @@ Tux Paint utilise des options que je n'ai pas spécifiées !
         Il examine ensuite le fichier de configuration personnel de
         l'utilisateur :
 
-            ~/.tuxpaintrc
+            /home/nom d'utilisateur/.tuxpaintrc
 
         Et finalement, toutes les options envoyées en tant qu'arguments de
         ligne de commande sont utilisées.
 
       + Haiku
 
+        Under Haiku, Tux Paint first examines the configuration file:
+
+            /boot/home/config/settings/TuxPaint/tuxpaint.conf
+
+        Et finalement, toutes les options envoyées en tant qu'arguments de
+        ligne de commande sont utilisées.
+
     Cela signifie que si quelque chose est défini dans un fichier de
     configuration que vous ne souhaitez pas activer, vous devrez soit modifier
     le fichier config. fichier (si vous le pouvez), ou changer l'option par le
     biais de la ligne de commande.
 
-    Par exemple, si "/etc/tuxpaint/tuxpaint.conf" inclut une option pour
-    désactiver le son ...
+    For example, on Linux and Unix, if "/etc/tuxpaint/tuxpaint.conf" includes
+    this option to disable sound...
 
         nosound=yes
 
-    ... Alors vous pouvez réactiver le son en ajoutant cette option à votre
-    propre fichier ".tuxpaintrc" :
+    ...then you can reenable sound by either adding this option to your own 
+    "/home/nom d'utilisateur/.tuxpaintrc" file:
 
         sound=yes
 
@@ -644,14 +681,12 @@ Tux Paint utilise des options que je n'ai pas spécifiées !
 
         --sound
 
-    Les utilisateurs Linux et Unix peuvent également désactiver le fichier de
-    configuration à l'échelle du système en incluant l'argument de ligne de
-    commande suivant :
+    On platforms where Tux Paint offers a system-wide configuration file, the
+    settings in that file may be skipped (so only the user configuration file
+    and other command-line arguments will be used) by including the following
+    command-line argument:
 
         --nosysconfig
-
-    Tux Paint examinera alors uniquement "~/.tuxpaintrc" et les arguments en
-    ligne de commande pour déterminer les options à activer.
 
 
 

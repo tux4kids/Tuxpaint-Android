@@ -1,11 +1,11 @@
                                     Ampliar
                                    Tux Paint
-                                versión 0.9.32
+                                versión 0.9.33
 
         Copyright © 2002-2024 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                             26 de Xaneiro de 2024
+                              29 de Abril de 2024
 
 +-------------------------------------------------------------+
 |                           Índice                            |
@@ -14,6 +14,7 @@
 |       + Ficheiros estándar                                  |
 |       + Ficheiros persoais                                  |
 |   * Pinceis                                                 |
+|       + Brush Descriptive Text                              |
 |       + Opcións de pinceis                                  |
 |   * Selos                                                   |
 |       + Imaxes de selos                                     |
@@ -98,11 +99,11 @@ macOS
     anteriores, así que garde as copias de seguridade do seu novo contido
     (selos, pinceis, etc.) .
 
-    Tux Paint tamén busca ficheiros nun cartafol «TuxPaint» que pode colocar no
-    seu sistema no cartafol «Application Support» (atópase en «Library» na raíz
-    do seu sistema de ficheiros):
+    Tux Paint also looks for files in a "TuxPaint" folder that you can place in
+    your system's "Application Support" folder (found under "Library" at the
+    root of your filesystem):
 
-        /Library/Application Support/TuxPaint/
+        /Library/Application Support/TuxPaint/data/
 
     Cando actualice a unha versión máis recente de Tux Paint, o contido deste
     cartafol «TuxPaint» seguirá sendo o mesmo e permanecerá accesíbel por todos
@@ -122,27 +123,23 @@ Windows
     O seu cartafol persoal de Tux Paint almacénase nos seus «Datos da
     aplicación» persoais. Por exemplo, nos Windows máis recentes:
 
-        C:\Documentos e axustes\(nome de usuario)\Datos da aplicación\TuxPaint\
+        C:\Users\nome de usuario\AppData\Roaming\TuxPaint\
 
 
 
 macOS
 
-    O seu cartafol persoal de Tux Paint almacénase no cartafol persoal
-    «Application Support»:
+    Your personal Tux Paint folder is stored in your personal 
+    "Application Support" folder:
 
-        /Users/(nome de usuario)/Library/Application Support/TuxPaint/
+        /Users/nome de usuario/Library/Application Support/TuxPaint/
 
 
 
 Linux e Unix
 
-    Os seus ficheiros persoais de Tux Paint van a un «directorio agochado» que
-    se atopa no directorio persoal da súa conta: «$(HOME)/.tuxpaint/» (tamén
-    coñecido como «~/.tuxpaint/»).
-
-    É dicir, se o seu directorio persoal é «/home/tux», entón os ficheiros
-    persoais de Tux Paint entrarán en «/home/tux/.tuxpaint/».
+    Your personal Tux Paint files go into a 'hidden directory' found in your
+    account's home directory: "/home/nome de usuario/.tuxpaint/".
 
     Non esqueza o punto («.») antes de «tuxpaint»!
 
@@ -154,13 +151,13 @@ tipos de letra, cree subdirectorios no seu directorio persoal de Tux Paint
 chamados «brushes», «stamps», «starters», «templates», «fonts», ,
 respectivamente.
 
-(Por exemplo, se creou un pincel chamado «flor.png», poñeríao en «~/.tuxpaint/
-brushes/» en Linux ou Unix.)
+(For example, if you created a brush named "flor.png", you would put it in 
+"/home/nome de usuario/.tuxpaint/brushes/" under Linux or Unix.)
 
 Pinceis
 
-Os pinceis empregados para debuxar coas ferramentas «Pincel» e «Liñas» en Tux
-Paint son simplemente ficheiros de imaxe PNG.
+The brushes used for drawing with the 'Paint' and 'Lines' tools in Tux Paint
+are simply PNG image files.
 
 A alfa (transparencia) da imaxe PNG úsase para determinar a forma do pincel, o
 que significa que a forma pode ser «alisado» e incluso parcialmente
@@ -168,6 +165,47 @@ transparente.
 
 Os píxeles de escala de grises no pincel PNG debuxaranse empregando a cor
 seleccionada actualmente en Tux Paint. Os píxeles de cor tinguiranse.
+
+Brush Descriptive Text
+
+Tux Paint will display descriptive text when a brush is selected. These are
+placed in plain text files with the same name as the PNG, but with a ".txt"
+filename extension. (e.g., "brush.png"'s description is stored in "brush.txt"
+in the same directory.)
+
+The first line of the text file will be used as the US English description of
+the brush's image. It must be encoded in UTF-8.
+
+Compatibilidade da localización
+
+    Pódense engadir liñas adicionais ao ficheiro de texto para fornecer
+    traducións da descrición, que se amosarán cando Tux Paint estea a
+    executarse nun idioma diferente (como o francés ou o español).
+
+    O comezo da liña debería corresponder ao código de idioma do idioma en
+    cuestión (por exemplo, «fr» para o francés e «zh_TW» para o chinés
+    tradicional), seguido de «.utf8=» e a descrición traducida (Unicode,
+    codificado en UTF-8).
+
+    Para os desenvolvedores de Tux Paint: Hai scripts no directorio
+    «brushes-po» para converter os ficheiros de texto ao formato PO (e
+    posterior) para facilitar a tradución a diferentes idiomas. Polo tanto,
+    nunca debería engadir nin cambiar traducións directamente nos ficheiros
+    «.txt».
+
+    Se non hai tradución dispoñíbel para o idioma en que se está a executar Tux
+    Paint, utilízase o texto en inglés dos EUA.
+
+
+
+Usuarios de Windows
+
+    Use NotePad ou WordPad para editar/crear estes ficheiros. Asegúrese de
+    gardalos como texto simple e asegúrese de que teñen unha extensión «.txt»
+    ao final do nome do ficheiro.
+
+
+
 
 Opcións de pinceis
 
@@ -518,7 +556,7 @@ Tamaño inicial do selo
 Usuarios de Windows
 
     Use NotePad ou WordPad para editar/crear estes ficheiros. Asegúrese de
-    gardalos como texto simple e asegúrese de que teñen unha extensión «.txt»
+    gardalos como texto simple e asegúrese de que teñen unha extensión «.dat»
     ao final do nome do ficheiro.
 
 
@@ -553,9 +591,9 @@ Tipos de letra
 
 Os tipos de letra empregados por Tux Paint son TrueType Fonts (TTF).
 
-Simplemente colóqueas no directorio «fonts». Tux Paint cargará o tipo de letra
-e fornecerá catro tamaños diferentes no selector de «Letras» cando empregue as
-ferramentas «Texto» e «Etiqueta».
+Simply place them in the "fonts" directory. When using the 'Text' and 'Label'
+tools, Tux Paint will present the font in the 'Letters' selector at the right,
+along with options to enable bold and/or italics, and change the size.
 
 «Imaxes de comezo»
 

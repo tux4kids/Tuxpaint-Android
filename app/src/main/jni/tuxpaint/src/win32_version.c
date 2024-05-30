@@ -13,39 +13,61 @@ void win32_print_version(void)
 
   Version = GetVersion();
   if (Version < 0x80000000)
-    Build = (DWORD)(HIWORD(Version));
+    Build = (DWORD) (HIWORD(Version));
 
-  if (IsWindows10OrGreater()) {
-    if (Build < 22000){
+  if (IsWindows10OrGreater())
+  {
+    if (Build < 22000)
+    {
       verStr = strdup("Windows 10");
-    }else{
+    }
+    else
+    {
       verStr = strdup("Windows 11");
     }
-  }else if (IsWindows8Point1OrGreater()){
+  }
+  else if (IsWindows8Point1OrGreater())
+  {
     verStr = strdup("Windows 8.1");
-  }else if (IsWindows8OrGreater()){
+  }
+  else if (IsWindows8OrGreater())
+  {
     verStr = strdup("Windows 8");
-  }else if (IsWindows7SP1OrGreater()){
+  }
+  else if (IsWindows7SP1OrGreater())
+  {
     verStr = strdup("Windows 7 Service Pack 1");
-  }else if (IsWindows7OrGreater()){
+  }
+  else if (IsWindows7OrGreater())
+  {
     verStr = strdup("Windows 7");
-  }else if (IsWindowsVistaSP2OrGreater()){
+  }
+  else if (IsWindowsVistaSP2OrGreater())
+  {
     verStr = strdup("Windows Vista Service Pack 2");
-  }else if (IsWindowsVistaSP1OrGreater()){
+  }
+  else if (IsWindowsVistaSP1OrGreater())
+  {
     verStr = strdup("Windows Vista Service Pack 1");
-  }else if (IsWindowsVistaOrGreater()){
+  }
+  else if (IsWindowsVistaOrGreater())
+  {
     verStr = strdup("Windows Vista");
-  }else{
+  }
+  else
+  {
     verStr = strdup("unknown");
   }
 
-  printf ("Microsoft %s", verStr);
+  printf("Microsoft %s", verStr);
 
-  if (IsWindowsServer()){
+  if (IsWindowsServer())
+  {
     printf(" Server");
   }
 
-  if (Version < 0x80000000){
+  if (Version < 0x80000000)
+  {
     printf(" (Build %d)\n", Build);
   }
 }

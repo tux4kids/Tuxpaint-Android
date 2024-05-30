@@ -5,6 +5,76 @@
       'Guide pratique' pour des tampons  de haute qualité pour Tux Paint    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
@@ -17,24 +87,24 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        version 0.9.32        'Guide pratique" pour les tampons de haute qualité      </h1>
+        version 0.9.33<br/>
+        'Guide pratique" pour les tampons de haute qualité      </h1>
 
       <p>
-        Copyright &copy; 2006-2022 by Albert Cahalan et d'autres; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        Copyright &copy; 2006-2024 by Albert Cahalan et d'autres; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
       <p>
-        juin  4, 2022      </p>
+        mai 14, 2024      </p>
     </center>
-
-    <hr size="2"
-        noshade>
 
     <table border="2"
            cellspacing="0"
            cellpadding="2"
-           summary="Table des matières">
+           summary="Table des matières"
+           align="center"
+           style="page-break-inside: avoid;">
       <tr>
         <th>
           Table des matières        </th>
@@ -43,28 +113,10 @@
       <tr>
         <td>
           <ul>
-            <li>
-              <a href="#about">À propos de ce  'guide pratique'</a>
-            </li>
-            <li>
-              <a href="#choice">Le choix de l'image est crucial</a>
-            </li>
-            <li>
-              <a href="#prepare_mask">Préparez le masque</a>
-            </li>
-            <li>
-              <a href="#replace_fringe">Remplacer la frange et les pixels indésirables</a>
-            </li>
-            <li>
-              <a href="#save">Sauvegarder l'image pour Tux Paint</a>
-            </li>
-          </ul>
+            <li><a href="#about">À propos de ce  'guide pratique'</a></li>            <li><a href="#choice">Le choix de l'image est crucial</a></li>            <li><a href="#prepare_mask">Préparez le masque</a></li>            <li><a href="#replace_fringe">Remplacer la frange et les pixels indésirables</a></li>            <li><a href="#save">Sauvegarder l'image pour Tux Paint</a></li>          </ul>
         </td>
       </tr>
     </table>
-
-    <hr size="2"
-        noshade>
 
     <hr size="2"
         noshade>
@@ -189,7 +241,7 @@
         Sélectionnez les parties de l'image devant être 100 % opaques, ou bien 0 % opaques.Si vous pouvez sélectionner l'objet ou l'arrière-plan avec une bonne précision, faites le. Si nécessaire, pour éviter de sélectionner des pixels devant être partiellement opaques (en général sur les bords de l'objet), vous devriez agrandir, réduire et inverser la sélection.      </p>
 
       <p>
-        Remplissez les zones 100 % opaques avec du blanc, et les 0 % opaques avec du noir. On le fait facilement en glissant-déposant depuis l'indicateur de couleur de premier plan. Vous ne devriez rien voir se produire, car vous voyez le calque de l'image non modifiée quand vous éditez le masque du calque WIP. Les changements importants peuvent être vus sur la vignette.      </p>
+                Remplissez les zones 100 % opaques avec du blanc, et les 0 % opaques avec du noir. On le fait facilement en glissant-déposant depuis l'indicateur de couleur de premier plan. Vous ne devriez rien voir se produire, car vous voyez le calque de l'image non modifiée quand vous éditez le masque du calque WIP. Les changements importants peuvent être vus sur la vignette.      </p>
 
       <p>
         Maintenant vous devez zoomer.      </p>
@@ -263,7 +315,7 @@ déposez cette couleur dans la sélection, supprimant ainsi la plupart des pixel
 
     <blockquote>
       <p>
-        Il est très facile de gâcher votre travail, lui qui vous a demandé beaucoup d'efforts. Les éditeurs d'images peuvent détruire silencieusement les pixels dans les zones à 0% opacité . Les conditions dans lesquelles cela se produit peuvent varier d'une version à l'autre. Si vous êtes très confiant, vous pouvez essayer d'enregistrer votre image directement au format PNG. Assurez-vous de le relire pour vérifier que les zones à 0% opacité ne deviennent ni noires ni blanches, ce qui créerait des franges lorsque Tux Paint réduira l'image. Si vous devez redimensionner votre image pour gagner de la place (et cacher vos erreurs), vous êtes presque certain de détruire toutes les zones à 0% opacité. Alors, voici une meilleure façon...      </p>
+                Il est très facile de gâcher votre travail, lui qui vous a demandé beaucoup d'efforts. Les éditeurs d'images peuvent détruire silencieusement les pixels dans les zones à 0% opacité . Les conditions dans lesquelles cela se produit peuvent varier d'une version à l'autre. Si vous êtes très confiant, vous pouvez essayer d'enregistrer votre image directement au format PNG. Assurez-vous de le relire pour vérifier que les zones à 0% opacité ne deviennent ni noires ni blanches, ce qui créerait des franges lorsque Tux Paint réduira l'image. Si vous devez redimensionner votre image pour gagner de la place (et cacher vos erreurs), vous êtes presque certain de détruire toutes les zones à 0% opacité. Alors, voici une meilleure façon...      </p>
 
       <h3>
         Une façon sûre pour sauvegarder      </h3>

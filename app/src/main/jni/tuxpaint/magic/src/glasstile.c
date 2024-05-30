@@ -78,7 +78,8 @@ static int **glasstile_hit;
 static int glasstile_hit_xsize;
 static int glasstile_hit_ysize;
 
-int glasstile_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED /* FIXME */, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int glasstile_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED /* FIXME */ ,
+                   Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 

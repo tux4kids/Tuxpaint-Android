@@ -36,7 +36,8 @@
 
 static int rainbow_radius = 16;
 
-enum {
+enum
+{
   TOOL_RAINBOW,
   TOOL_SMOOTH_RAINBOW,
   TOOL_RAINBOW_CYCLE,
@@ -158,7 +159,7 @@ char *rainbow_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
   {
     return (strdup(gettext_noop("Smooth Rainbow")));
   }
-  else /* TOOL_RAINBOW_CYCLE */
+  else                          /* TOOL_RAINBOW_CYCLE */
   {
     return (strdup(gettext_noop("Rainbow Cycle")));
   }
@@ -223,7 +224,7 @@ void rainbow_drag(magic_api * api, int which, SDL_Surface * canvas,
     rainbow_mix = 0;
     rainbow_color = (rainbow_color + 1) % NUM_RAINBOW_COLORS;
   }
-  else /* TOOL_RAINBOW_CYCLE */
+  else                          /* TOOL_RAINBOW_CYCLE */
   {
     rainbow_mix = 0;
   }
@@ -273,7 +274,8 @@ void rainbow_drag(magic_api * api, int which, SDL_Surface * canvas,
 void rainbow_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
                    SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
 {
-  if (which == TOOL_RAINBOW_CYCLE) {
+  if (which == TOOL_RAINBOW_CYCLE)
+  {
     rainbow_color = (rainbow_color + 1) % NUM_RAINBOW_COLORS;
   }
 

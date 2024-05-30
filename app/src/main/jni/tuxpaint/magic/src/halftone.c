@@ -53,7 +53,7 @@ const char *descs[NUM_TOOLS][2] = {
   {
    gettext_noop("Click and drag to turn your drawing into a newspaper."),
    gettext_noop("Click to turn your drawing into a newspaper."),
-  },
+   },
 };
 
 Mix_Chunk *snd_effect[NUM_TOOLS];

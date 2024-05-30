@@ -174,8 +174,8 @@ int button_label_y_nudge;
 static void reliable_read(int fd, void *buf, size_t count);
 #endif
 
-const char * PANGO_DEFAULT_FONT = "DejaVu Sans";
-const char * PANGO_DEFAULT_FONT_FALLBACK = NULL;
+const char *PANGO_DEFAULT_FONT = "DejaVu Sans";
+const char *PANGO_DEFAULT_FONT_FALLBACK = NULL;
 
 /* Names of the fonts we include in `fonts/locale/`
    (LANG_* codes are from `src/i18n.h`) */
@@ -186,22 +186,22 @@ const char * PANGO_DEFAULT_FONT_FALLBACK = NULL;
    download of the full (much larger) font TTF file.
    (https://tuxpaint.org/download/fonts/) */
 default_locale_font_t default_local_fonts[] = {
-  { LANG_AR, "ae_Nice", NULL },
-  { LANG_BO, "Tsampa Keyboard", NULL }, // NOTE: Our current translation is Wylie transliterated, not Unicode! */
-  { LANG_EL, "Thryomanes", NULL},
-  { LANG_GU, "Lohit Gujarati", NULL },
-  { LANG_HE, "Nachlieli Light", NULL },
-  { LANG_HI, "Raghindi", NULL },
-  { LANG_JA, "Noto Sans CJK JP", "GJGothicPNSubset" },
-  { LANG_KA, "TuxPaint Georgian", NULL }, /* FIXME: Upon what was this font based? Never knew -bjk 2023.06.12 */
-  { LANG_KO, "Baekmuk Gulim", NULL },
-  { LANG_TA, "TSCu_Comic", NULL },
-  { LANG_TE, "Vemana2000", NULL },
-  { LANG_TH, "Garuda", NULL },
-  { LANG_ZH_CN, "AR PL SungtiL GB", NULL },
-  { LANG_ZH_TW, "HanWangKaiMediumChuIn", "SubsetForTuxPaint" },
-  { -1, NULL, NULL },
-}; 
+  {LANG_AR, "ae_Nice", NULL},
+  {LANG_BO, "Tsampa Keyboard", NULL},   // NOTE: Our current translation is Wylie transliterated, not Unicode! */
+  {LANG_EL, "Thryomanes", NULL},
+  {LANG_GU, "Lohit Gujarati", NULL},
+  {LANG_HE, "Nachlieli Light", NULL},
+  {LANG_HI, "Raghindi", NULL},
+  {LANG_JA, "Noto Sans CJK JP", "GJGothicPNSubset"},
+  {LANG_KA, "TuxPaint Georgian", NULL}, /* FIXME: Upon what was this font based? Never knew -bjk 2023.06.12 */
+  {LANG_KO, "Baekmuk Gulim", NULL},
+  {LANG_TA, "TSCu_Comic", NULL},
+  {LANG_TE, "Vemana2000", NULL},
+  {LANG_TH, "Garuda", NULL},
+  {LANG_ZH_CN, "AR PL SungtiL GB", NULL},
+  {LANG_ZH_TW, "HanWangKaiMediumChuIn", "SubsetForTuxPaint"},
+  {-1, NULL, NULL},
+};
 
 void TuxPaint_Font_CloseFont(TuxPaint_Font * tpf)
 {
@@ -340,7 +340,7 @@ TuxPaint_Font *TuxPaint_Font_OpenFont(const char *pangodesc, const char *ttffile
       return NULL;
     }
 
-    familyname = (char *) TTF_FontFaceFamilyName(ttf_font);      /* N.B.: I don't believe we're supposed to free() this... -bjk 2021.10.26 */
+    familyname = (char *)TTF_FontFaceFamilyName(ttf_font);      /* N.B.: I don't believe we're supposed to free() this... -bjk 2021.10.26 */
     (void)familyname;           // avoid compiler complaints if ALWAYS_LOAD_FONT_WITH_PANGO is not set, and DEBUG is not set
 
 #ifdef DEBUG
@@ -1715,72 +1715,72 @@ void sdl_color_to_pango_color(SDL_Color sdl_color, SDLPango_Matrix * pango_color
  * (e.g., "tuxpaint --uifont bookman" finds and uses "URW Bookman"
  * on my system -bjk 2023.06.01)
  */
-char * ask_pango_for_font(char * pangodesc)
+char *ask_pango_for_font(char *pangodesc)
 {
-    PangoFontMap * font_map;
-    PangoContext * context;
-    PangoFontDescription * font_desc;
-    PangoFont *font;
-    PangoFontDescription * pfd;
-    char * descr;
+  PangoFontMap *font_map;
+  PangoContext *context;
+  PangoFontDescription *font_desc;
+  PangoFont *font;
+  PangoFontDescription *pfd;
+  char *descr;
 
-    font_map = pango_ft2_font_map_new();
-    if (font_map == NULL)
-    {
-      fprintf(stderr, "pango_ft2_font_map_new() failed\n");
-      fflush(stderr);
-      return NULL;
-    }
+  font_map = pango_ft2_font_map_new();
+  if (font_map == NULL)
+  {
+    fprintf(stderr, "pango_ft2_font_map_new() failed\n");
+    fflush(stderr);
+    return NULL;
+  }
 
-    context = pango_font_map_create_context(font_map);
-    if (context == NULL)
-    {
-      fprintf(stderr, "pango_font_map_create_context() failed\n");
-      fflush(stderr);
-      g_object_unref(font_map);
-      return NULL;
-    }
+  context = pango_font_map_create_context(font_map);
+  if (context == NULL)
+  {
+    fprintf(stderr, "pango_font_map_create_context() failed\n");
+    fflush(stderr);
+    g_object_unref(font_map);
+    return NULL;
+  }
 
-    font_desc = pango_font_description_from_string(pangodesc);
-    if (font_desc == NULL)
-    {
-      fprintf(stderr, "pango_font_description_from_string() failed\n");
-      fflush(stderr);
-      g_object_unref(font_map);
-      g_object_unref(context);
-      return NULL;
-    }
+  font_desc = pango_font_description_from_string(pangodesc);
+  if (font_desc == NULL)
+  {
+    fprintf(stderr, "pango_font_description_from_string() failed\n");
+    fflush(stderr);
+    g_object_unref(font_map);
+    g_object_unref(context);
+    return NULL;
+  }
 
-    font = pango_font_map_load_font(font_map, context, font_desc);
-    if (font == NULL)
-    {
-      fprintf(stderr, "pango_font_map_load_font() failed\n");
-      fflush(stderr);
-      g_object_unref(font_map);
-      g_object_unref(context);
-      pango_font_description_free(font_desc);
-      return NULL;
-    }
+  font = pango_font_map_load_font(font_map, context, font_desc);
+  if (font == NULL)
+  {
+    fprintf(stderr, "pango_font_map_load_font() failed\n");
+    fflush(stderr);
+    g_object_unref(font_map);
+    g_object_unref(context);
+    pango_font_description_free(font_desc);
+    return NULL;
+  }
 
-    pfd = pango_font_describe(font);
-    if (pfd == NULL)
-    {
-      fprintf(stderr, "pango_font_describe() failed\n");
-      fflush(stderr);
-      g_object_unref(font_map);
-      g_object_unref(context);
-      pango_font_description_free(font_desc);
-      g_object_unref(font);
-      return NULL;
-    }
-
-    descr = strdup(pango_font_description_get_family(pfd));
-
+  pfd = pango_font_describe(font);
+  if (pfd == NULL)
+  {
+    fprintf(stderr, "pango_font_describe() failed\n");
+    fflush(stderr);
     g_object_unref(font_map);
     g_object_unref(context);
     pango_font_description_free(font_desc);
     g_object_unref(font);
-    /* N.B. Not free'ing `pfd`: The data is owned by the instance */
+    return NULL;
+  }
 
-    return descr;
+  descr = strdup(pango_font_description_get_family(pfd));
+
+  g_object_unref(font_map);
+  g_object_unref(context);
+  pango_font_description_free(font_desc);
+  g_object_unref(font);
+  /* N.B. Not free'ing `pfd`: The data is owned by the instance */
+
+  return descr;
 }

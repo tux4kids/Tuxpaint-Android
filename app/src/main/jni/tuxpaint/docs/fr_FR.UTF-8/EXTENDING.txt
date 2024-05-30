@@ -1,11 +1,11 @@
                                    Extension
                                    Tux Paint
-                                version 0.9.32
+                                version 0.9.33
 
        Copyright © 2002-2024 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               janvier 26, 2024
+                                avril 29, 2024
 
 +-------------------------------------------------------------+
 |                     Table des matières                      |
@@ -14,6 +14,7 @@
 |       + Fichiers standards                                  |
 |       + Fichiers personnels                                 |
 |   * Pinceaux                                                |
+|       + Brush Descriptive Text                              |
 |       + Options de pinceau                                  |
 |   * Tampons                                                 |
 |       + Images des tampons                                  |
@@ -102,11 +103,11 @@ macOS
     apportées avec les instructions ci-dessus, faites donc des sauvegardes de
     votre nouveau contenu (tampons,pinceaux, etc.).
 
-    Tux Paint recherche également les fichiers dans un dossier "Tux Paint" que
-    vous pouvez placer dans votre dossier système "Application Support" (situé
-    sous "Library" à la racine de votre système de fichiers) :
+    Tux Paint also looks for files in a "TuxPaint" folder that you can place in
+    your system's "Application Support" folder (found under "Library" at the
+    root of your filesystem):
 
-        /Library/Application Support/TuxPaint/
+        /Library/Application Support/TuxPaint/data/
 
     Lorsque vous passez à une version plus récente de Tux Paint , le contenu de
     ce dossier "TuxPaint" restera à la même place et restera accessible à tous
@@ -125,28 +126,23 @@ Windows
     Votre dossier personnel Tux Paint est stocké dans votre dossier
     "Application Data". Par exemple, sur un Windows plus récent :
 
-        C:\Documents and Settings\(nom d'utilisateur)\Application Data\TuxPaint
-        \
+        C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\
 
 
 
 macOS
 
-    Votre dossier personnel Tux Paint est stocké dans votre dossier
-    «Application Support» :
+    Your personal Tux Paint folder is stored in your personal 
+    "Application Support" folder:
 
-        /Users/(nom d'utilisateur)/Library/Application Support/TuxPaint/
+        /Users/nom d'utilisateur/Library/Application Support/TuxPaint/
 
 
 
 Linux et Unix
 
-    Vos fichiers personnels Tux Paint vont dans un 'répertoire caché' que l'on
-    trouve dans votre répertoire personnel "$(HOME)/.tuxpaint/" (également
-    appelé "~/.tuxpaint/".
-
-    Autrement dit, si votre répertoire personnel est "/home/tux", alors votre
-    répertoire Tux Paint est "/home/tux/.tuxpaint/".
+    Your personal Tux Paint files go into a 'hidden directory' found in your
+    account's home directory: "/home/nom d'utilisateur/.tuxpaint/".
 
     N'oubliez pas le point (" .") avant le "tuxpaint" !
 
@@ -158,13 +154,13 @@ et des polices créez des sous-répertoires dans votre répertoire personnel Tux
 Paint nommés respectivement "brushes", "stamps", "starters", "templates", "
 fonts".
 
-(Par exemple, si vous avez créé un pinceau nommé "flower.png", vous le mettrez
-dans "~/.tuxpaint/brushes/" sous Linux ou Unix.)
+(For example, if you created a brush named "flower.png", you would put it in 
+"/home/nom d'utilisateur/.tuxpaint/brushes/" under Linux or Unix.)
 
 Pinceaux
 
-Les pinceaux utilisés pour dessiner avec les outils "Pinceau" et "Lignes" dans
-Tux Paint sont tout simplement des fichiers image PNG.
+The brushes used for drawing with the 'Paint' and 'Lines' tools in Tux Paint
+are simply PNG image files.
 
 L'alpha (transparence) de l'image PNG est utilisée pour déterminer la forme du
 pinceau, ce qui signifie que la forme peut être «anti-crénelée» et même
@@ -173,6 +169,47 @@ partiellement transparente !
 Les pixels en niveaux de gris dans le pinceau PNG seront dessinés en utilisant
 la couleur actuellement sélectionnée dans Tux Paint . Les pixels de couleur
 seront teintés.
+
+Brush Descriptive Text
+
+Tux Paint will display descriptive text when a brush is selected. These are
+placed in plain text files with the same name as the PNG, but with a ".txt"
+filename extension. (e.g., "brush.png"'s description is stored in "brush.txt"
+in the same directory.)
+
+The first line of the text file will be used as the US English description of
+the brush's image. It must be encoded in UTF-8.
+
+Support pour la régionalisation
+
+    Des lignes supplémentaires peuvent être ajoutées au fichier texte pour
+    fournir des traductions de la description, à afficher lorsque Tux Paint
+    s'exécute dans une langue différente (comme le français ou l'espagnol).
+
+    Le début de la ligne doit correspondre au code de langue de la langue en
+    question (par exemple, "fr" pour le français et "zh_TW" pour le chinois
+    traditionnel), suivi de ".utf8=" et de la description traduite (codée en
+    UTF-8).
+
+    Pour les développeurs de Tux Paint : Il y a des scripts dans le répertoire
+    "brushes-po" pour convertir les fichiers texte au format PO (et
+    inversement) pour une traduction facile vers différentes langues. Par
+    conséquent, vous ne devez jamais ajouter ni modifier directement les
+    traductions dans les fichiers ".txt".
+
+    Si aucune traduction n'est disponible pour la langue dans laquelle Tux
+    Paint est en cours d'exécution, le texte anglais américain sera utilisé.
+
+
+
+Utilisateurs de Windows
+
+    Utilisez NotePad ou WordPad pour modifier / créer ces fichiers.
+    Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont
+    une extension ".txt" à la fin du nom de fichier.
+
+
+
 
 Options de pinceau
 
@@ -534,7 +571,7 @@ Utilisateurs de Windows
 
     Utilisez NotePad ou WordPad pour modifier / créer ces fichiers.
     Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont
-    une extension ".txt" à la fin du nom de fichier.
+    une extension ".dat" à la fin du nom de fichier.
 
 
 
@@ -568,9 +605,9 @@ Polices
 
 Les fontes utilisées par Tux Paint sont des fontes True Type Fonts (TTF).
 
-Placez-les simplement dans répertoire "fonts". Tux Paint chargera la police et
-fournira quatre tailles différentes dans le sélecteur «Lettres» lors de
-l'utilisation des outils "Texte" ou "Étiquette".
+Simply place them in the "fonts" directory. When using the 'Text' and 'Label'
+tools, Tux Paint will present the font in the 'Letters' selector at the right,
+along with options to enable bold and/or italics, and change the size.
 
 'Images de démarrage'
 

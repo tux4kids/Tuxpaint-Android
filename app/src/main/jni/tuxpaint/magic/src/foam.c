@@ -104,7 +104,7 @@ int foam_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 c
   if (foam_7 == NULL || foam_5 == NULL || foam_3 == NULL || foam_1 == NULL)
   {
     fprintf(stderr, "Cannot scale %s\n", fname);
-    return(0);
+    return (0);
   }
 
   return (1);

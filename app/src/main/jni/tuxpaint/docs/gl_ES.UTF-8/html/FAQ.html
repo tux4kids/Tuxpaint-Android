@@ -5,6 +5,76 @@
       Preguntas máis frecuentes sobre Tux Paint    </title>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
   </head>
   <body bgcolor="#FFFFFF"
         text="#000000"
@@ -17,24 +87,24 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        versión 0.9.32        Preguntas máis frecuentes      </h1>
+        versión 0.9.33<br/>
+        Preguntas máis frecuentes      </h1>
 
       <p>
-        Copyright &copy; 2002-2023 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        Copyright &copy; 2002-2024 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
       <p>
-        20 de Xullo de 2023      </p>
+        14 de Maio de 2024      </p>
     </center>
-
-    <hr size="2"
-        noshade>
 
     <table border="2"
            cellspacing="0"
            cellpadding="2"
-           summary="Índice">
+           summary="Índice"
+           align="center"
+           style="page-break-inside: avoid;">
       <tr>
         <th>
           Índice        </th>
@@ -43,31 +113,7 @@
       <tr>
         <td>
           <ul>
-            <li>
-              <a href="#drawing">Relacionado co debuxo</a>
-            </li>
-            <li>
-              <a href="#interface">Problemas de interface</a>
-            </li>
-            <li>
-              <a href="#printing">Impresión</a>
-            </li>
-            <li>
-              <a href="#saving">Gardar</a>
-            </li>
-            <li>
-              <a href="#audio">Problemas de son</a>
-            </li>
-            <li>
-              <a href="#fullscreen">Problemas no modo de pantalla completa</a>
-            </li>
-            <li>
-              <a href="#other">Other Problems</a>
-            </li>
-            <li>
-              <a href="#contact">Axuda / Contacto</a>
-            </li>
-          </ul>
+            <li><a href="#drawing">Relacionado co debuxo</a></li>            <li><a href="#interface">Problemas de interface</a></li>            <li><a href="#printing">Impresión</a></li>            <li><a href="#saving">Gardar</a></li>            <li><a href="#audio">Problemas de son</a></li>            <li><a href="#fullscreen">Problemas no modo de pantalla completa</a></li>            <li><a href="#other">Other Problems</a></li>            <li><a href="#contact">Axuda / Contacto</a></li>          </ul>
         </td>
       </tr>
     </table>
@@ -312,27 +358,34 @@
           A non ser que lle solicite a Tux Paint que garde nun lugar específico (usando a opción «savedir»), Tux Paint garda nun lugar estándar na súa unidade local:        </p>
 
         <dl>
-          <dt>
-            Windows Vista, Windows 8, Windows 10, Windows 11
-          </dt>
+  <dt>
+    <cite>Windows Vista, Windows 8, Windows 10, Windows 11</cite>
+  </dt>
 
-          <dd>
-            No cartafol «AppData» do usuario:<br> p. ex.: <code>C:\Users\<i>nome de usuario</i>\AppData\Roaming\TuxPaint\saved</code>          </dd>
+  <dd>
+    In the user's "AppData" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>C:\Users\nome de usuario\AppData\Roaming\TuxPaint\saved\</code>"</nobr>  </dd>
 
-          <dt>
-            macOS
-          </dt>
+  <dt>
+    <cite>macOS</cite>
+  </dt>
 
-          <dd>
-            No cartafol «Asistencia de aplicacións» do usuario::<br> e.g., <code>/Users/<i>nome de usuario</i>/Library/Applicaton Support/TuxPaint/saved/</code>          </dd>
+  <dd>
+    In the user's "Application Support" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/Users/<i>nome de usuario</i>/Library/Application Support/TuxPaint/saved/</code>"</nobr>  </dd>
 
-          <dt>
-            Linux / Unix
-          </dt>
+  <dt>
+    <cite>Linux / Unix</cite>
+  </dt>
 
-          <dd>
-            No directorio persoal do usuario («<code>$HOME</code>»), baixo un subcartafol «.tuxpaint»:<br> e.g., <code>/home/<i>nome de usuario</i>/.tuxpaint/saved/</code>          </dd>
-        </dl>
+  <dd>
+    In the user's "home directory" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaint/saved/</code>"</nobr>  </dd>
+
+  <dt>
+    <cite>Haiku</cite>
+  </dt>
+
+  <dd>
+    In the user's "settings" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/saved/</code>"</nobr>  </dd>
+</dl>
 
         <p>
           As imaxes almacénanse como mapas de bits PNG, que a maioría dos programas modernos deberían poder cargar (editores de imaxes, procesadores de texto, navegadores web, etc.)        </p>
@@ -582,6 +635,18 @@
         <p>
           Ou use Tux Paint Config. e asegúrese de «Pantalla completa» (baixo «Vídeo e son») non está marcado.        </p>
       </dd>
+
+      <dt>
+        How do I access other applications when Tux Paint is running in Full Screen?      </dt>
+
+      <dd>
+        <ul>
+          <li>
+            Windows and Linux users, try the <b><code>[Alt]</code></b> + <b><code>[Tab]</code></b> key combination to switch between applications.          </li>
+          <li>
+            macOS users, switch to other applications using <b><code>[Control]</code></b> + <b><code>[Left Arrow]</code></b>, then back to Tux Paint using <b><code>[Control]</code></b> + <b><code>[Right Arrow]</code></b>.          </li>
+        </ul>
+      </dd>
     </dl>
 
     <hr size="2"
@@ -598,10 +663,10 @@
 
       <dd>
         <p>
-          Se Tux Paint se interrómpe coa mensaxe: «You're already running a copy of Tux Paint!», significa que foi iniciado nos últimos 30 segundos. (En Unix/Linux, esta mensaxe aparecería nunha consola de terminal se executase Tux Paint desde unha liña de ordes. En Windows, esta mensaxe aparecería nun ficheiro chamado «<code>stdout.txt</code>» no mesmo cartafol onde  reside<code>TuxPaint. exe</code> (p. ex.: en «<code>C:\Program Files\TuxPaint</code>»).        </p>
+          If Tux Paint aborts with the message: "You're already running a copy of Tux Paint!", this means it has been launched in the last 30 seconds. (On Unix/Linux, this message would appear in a terminal console if you ran Tux Paint from a command-line. On Windows, this message would appear in a file named "<code>stdout.txt</code>" in the same folder where <code>TuxPaint.exe</code> resides (e.g., in <nobr>"<code style='background: #EEE;'>C:\Program Files\TuxPaint\</code>"</nobr>).        </p>
 
         <p>
-          Un ficheiro de bloqueo («~/.tuxpaint/lockfile.dat» en Linux e Unix, «userdata\lockfile.dat» en Windows) úsase para asegurarse de que Tux Paint non se executa demasiadas veces á vez (por exemplo, porque un cativo preme impaciente na súa icona máis dunha vez) .        </p>
+          A lockfile (e.g., <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaint/lockfile.dat</code>"</nobr> on Linux and Unix, <nobr>"<code style='background: #EEE;'>userdata\lockfile.dat</code>"</nobr> on Windows) is used to make sure Tux Paint isn't run too many times at once (e.g., due to a child impatiently clicking its icon more than once).        </p>
 
         <p>
           Mesmo se o ficheiro de bloqueo existe, contén a «hora» na que se executou Tux Paint por última vez. Se pasaron máis de 30 segundos, Tux Paint debería funcionar ben e simplemente actualiza o ficheiro de bloqueo coa hora actual.        </p>
@@ -680,35 +745,13 @@
         <ul>
 
           <li>
-            <i>Windows</i>
+            <cite>Windows</cite>
             <p>
-              En Windows, Tux Paint examina primeiro o ficheiro de configuración:            </p>
+              Under Windows, it first examines the system-wide configuration file, located here:            </p>
 
             <blockquote>
               <p>
-                <code>tuxpaint.cfg</code>
-              </p>
-            </blockquote>
-
-            <p>
-              Finalmente, úsanse as opcións enviadas como argumentos da liña de ordes.            </p>
-          </li>
-
-          <li>
-            <i>macOS</i>
-            <p>
-                          </p>
-          </li>
-
-          <li>
-            <i>Unix e Linux</i>
-            <p>
-              En Unix e Linux, primeiro examine o ficheiro de configuración de todo o sistema, que se atopa aquí:            </p>
-
-            <blockquote>
-              <p>
-                <code>/etc/tuxpaint/tuxpaint.conf</code>
-              </p>
+                <nobr><code style='background: #EEE;'>C:\Program Files\TuxPaint\tuxpaint.cfg</code></nobr>              </p>
             </blockquote>
 
             <p>
@@ -716,8 +759,7 @@
 
             <blockquote>
               <p>
-                <code>~/.tuxpaintrc</code>
-              </p>
+                <nobr><code style='background: #EEE;'>C:\Users\nome de usuario\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>              </p>
             </blockquote>
 
             <p>
@@ -725,9 +767,61 @@
           </li>
 
           <li>
-            <i>Haiku</i>
+            <cite>macOS</cite>
             <p>
-                          </p>
+              Under macOS, it first examines the system-wide configuration file, located here:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>/Library/Application Support/TuxPaint/tuxpaint.cfg</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              A continuación, examina o ficheiro de configuración persoal do usuario:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>/Users/<i>nome de usuario</i>/Library/Application Support/TuxPaint/tuxpaint.cfg</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              Finalmente, úsanse as opcións enviadas como argumentos da liña de ordes.            </p>
+          </li>
+
+          <li>
+            <cite>Linux / Unix</cite>
+            <p>
+              En Unix e Linux, primeiro examine o ficheiro de configuración de todo o sistema, que se atopa aquí:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              A continuación, examina o ficheiro de configuración persoal do usuario:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>/home/nome de usuario/.tuxpaintrc</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              Finalmente, úsanse as opcións enviadas como argumentos da liña de ordes.            </p>
+          </li>
+
+          <li>
+            <cite>Haiku</cite>
+            <p>
+              Under Haiku, Tux Paint first examines the configuration file:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/tuxpaint.conf</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              Finalmente, úsanse as opcións enviadas como argumentos da liña de ordes.            </p>
           </li>
         </ul>
 
@@ -735,7 +829,7 @@
           Isto significa que se estabelece algo nun ficheiro de configuración que non quere estabelecer, terá que cambiar o ficheiro de configuración (se pode) ou anular a opción na liña de ordes.        </p>
 
         <p>
-          Por exemplo, en Linux e Unix, se «/etc/tuxpaint/tuxpaint.conf» inclúe esta opción para desactivar o son...        </p>
+          For example, on Linux and Unix, if <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> includes this option to disable sound...        </p>
 
         <blockquote>
           <p>
@@ -744,7 +838,7 @@
         </blockquote>
 
         <p>
-          ...entón pode volver activar o son engadindo esta opción ao seu propio ficheiro «.tuxpaintrc»:        </p>
+          ...then you can reenable sound by either adding this option to your own <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaintrc</code>"</nobr> file:        </p>
 
         <blockquote>
           <p>
@@ -762,16 +856,13 @@
         </blockquote>
 
         <p>
-          Os usuarios de Linux e Unix tamén poden desactivar o ficheiro de configuración de todo o sistema incluíndo o seguinte argumento da liña de ordes:                  </p>
+          On platforms where Tux Paint offers a system-wide configuration file, the settings in that file may be skipped (so only the user configuration file and other command-line arguments will be used) by including the following command-line argument:        </p>
 
         <blockquote>
           <p>
             <code>--nosysconfig</code>
           </p>
         </blockquote>
-
-        <p>
-          Tux Paint só ollará «~/.tuxpaintrc» e os argumentos da liña de ordes para determinar que opcións se deben estabelecer.        </p>
       </dd>
     </dl>
 

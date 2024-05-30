@@ -38,31 +38,31 @@ enum
 Uint8 tp_offers_sizes = 1;
 
 int num_tools[2] = {
-  6, /* when sizes not available */
-  2, /* when sizes available */
+  6,                            /* when sizes not available */
+  2,                            /* when sizes available */
 };
 
-int * which_to_tool;
+int *which_to_tool;
 
 int which_to_tool_per_size_availability[2][6] = {
   /* when sizes not available */
   {
-    TOOL_EPITROCHOID_NOSIZES_1,
-    TOOL_EPITROCHOID_NOSIZES_2,
-    TOOL_EPITROCHOID_NOSIZES_3,
-    TOOL_HYPOTROCHOID_NOSIZES_1,
-    TOOL_HYPOTROCHOID_NOSIZES_2,
-    TOOL_HYPOTROCHOID_NOSIZES_3,
-  },
+   TOOL_EPITROCHOID_NOSIZES_1,
+   TOOL_EPITROCHOID_NOSIZES_2,
+   TOOL_EPITROCHOID_NOSIZES_3,
+   TOOL_HYPOTROCHOID_NOSIZES_1,
+   TOOL_HYPOTROCHOID_NOSIZES_2,
+   TOOL_HYPOTROCHOID_NOSIZES_3,
+   },
   /* when sizes available */
   {
-    TOOL_EPITROCHOID_SIZES,
-    TOOL_HYPOTROCHOID_SIZES,
-    -1,
-    -1,
-    -1,
-    -1,
-  },
+   TOOL_EPITROCHOID_SIZES,
+   TOOL_HYPOTROCHOID_SIZES,
+   -1,
+   -1,
+   -1,
+   -1,
+   },
 };
 
 #define SIZE_WELLINSIDE 0.33
@@ -79,26 +79,27 @@ float trochoids_sizes_per_size_setting[NUM_SIZES] = {
   SIZE_OUTSIDE,
   SIZE_WELLOUTSIDE,
 };
+
 /* Default to "SIZE_EDGE" */
 #define DEFAULT_SIZE 3
 
 float trochoids_sizes_per_tool[NUM_TOOLS] = {
-  0, // N/A; size controls available
+  0,                            // N/A; size controls available
   SIZE_INSIDE,
   SIZE_EDGE,
   SIZE_WELLOUTSIDE,
-  0, // N/A; size controls available
+  0,                            // N/A; size controls available
   SIZE_INSIDE,
   SIZE_EDGE,
   SIZE_WELLOUTSIDE,
 };
 
 const char *icon_filenames[NUM_TOOLS] = {
-  "epitrochoid_edge.png", /* use "edge" variation when sizes are available */
+  "epitrochoid_edge.png",       /* use "edge" variation when sizes are available */
   "epitrochoid_inside.png",
   "epitrochoid_edge.png",
   "epitrochoid_outside.png",
-  "hypotrochoid_edge.png", /* use "edge" variation when sizes are available */
+  "hypotrochoid_edge.png",      /* use "edge" variation when sizes are available */
   "hypotrochoid_inside.png",
   "hypotrochoid_edge.png",
   "hypotrochoid_outside.png",
@@ -119,20 +120,29 @@ const char *tool_names[NUM_TOOLS] = {
 
 const char *tool_descriptions[NUM_TOOLS] = {
   /* Epitrochoids */
-  gettext_noop("Click to start drawing an epitrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling outside of it. Use the size option to change where the pen is."),
-  gettext_noop("Click to start drawing an epitrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling outside of it. Then pen is within the rolling circle."),
-  gettext_noop("Click to start drawing an epitrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling outside of it. Then pen is on the edge of the rolling circle."),
-  gettext_noop("Click to start drawing an epitrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling outside of it. Then pen is outside the rolling circle."),
+  gettext_noop
+    ("Click to start drawing an epitrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling outside of it. Use the size option to change where the pen is."),
+  gettext_noop
+    ("Click to start drawing an epitrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling outside of it. Then pen is within the rolling circle."),
+  gettext_noop
+    ("Click to start drawing an epitrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling outside of it. Then pen is on the edge of the rolling circle."),
+  gettext_noop
+    ("Click to start drawing an epitrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling outside of it. Then pen is outside the rolling circle."),
   /* Hypotrochoids */
-  gettext_noop("Click to start drawing a hypotrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling inside it. Use the size option to change where the pen is."),
-  gettext_noop("Click to start drawing a hypotrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling inside it. Then pen is within the rolling circle."),
-  gettext_noop("Click to start drawing a hypotrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling inside it. Then pen is on the edge of the rolling circle."),
-  gettext_noop("Click to start drawing a hypotrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling inside it. Then pen is outside the rolling circle."),
+  gettext_noop
+    ("Click to start drawing a hypotrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling inside it. Use the size option to change where the pen is."),
+  gettext_noop
+    ("Click to start drawing a hypotrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling inside it. Then pen is within the rolling circle."),
+  gettext_noop
+    ("Click to start drawing a hypotrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling inside it. Then pen is on the edge of the rolling circle."),
+  gettext_noop
+    ("Click to start drawing a hypotrochoid. Drag left/right to change the size of the fixed circle, and up/down to change the size of the circle rolling inside it. Then pen is outside the rolling circle."),
 };
 
 
 /* Sound effects (same for everyone) */
-enum {
+enum
+{
   SND_DRAG,
   SND_RELEASE_EPITROCHOID,
   SND_RELEASE_HYPOTROCHOID,
@@ -167,33 +177,23 @@ Uint8 trochoids_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 trochoids_default_size(magic_api * api, int which, int mode);
 void trochoids_shutdown(magic_api * api);
 void trochoids_click(magic_api * api, int which, int mode,
-                      SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-                      SDL_Rect * update_rect);
+                     SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
 void trochoids_drag(magic_api * api, int which,
-                     SDL_Surface * canvas, SDL_Surface * snapshot,
-                     int old_x, int old_y, int x, int y,
-                     SDL_Rect * update_rect);
-void trochoids_work(magic_api * api, int which,
                     SDL_Surface * canvas, SDL_Surface * snapshot,
-                    int x, int y, SDL_Rect * update_rect, int guides);
+                    int old_x, int old_y, int x, int y, SDL_Rect * update_rect);
+void trochoids_work(magic_api * api, int which,
+                    SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect, int guides);
 void trochoids_release(magic_api * api, int which,
-                        SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-                        SDL_Rect * update_rect);
+                       SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
 void trochoids_sound(magic_api * api, int snd_idx, int x, int y);
 void trochoids_set_color(magic_api * api, int which, SDL_Surface * canvas,
-                          SDL_Surface * snapshot, Uint8 r, Uint8 g, Uint8 b,
-                          SDL_Rect * update_rect);
+                         SDL_Surface * snapshot, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 void trochoids_set_size(magic_api * api, int which, int mode,
-                         SDL_Surface * canvas, SDL_Surface * last,
-                         Uint8 size, SDL_Rect * update_rect);
-void trochoids_line_callback(void *pointer, int tool, SDL_Surface * canvas,
-                              SDL_Surface * snapshot, int x, int y);
-void trochoids_xorline_callback(void *pointer, int tool, SDL_Surface * canvas,
-                                SDL_Surface * snapshot, int x, int y);
-void trochoids_switchin(magic_api * api, int which, int mode,
-                      SDL_Surface * canvas);
-void trochoids_switchout(magic_api * api, int which, int mode,
-                       SDL_Surface * canvas);
+                        SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
+void trochoids_line_callback(void *pointer, int tool, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
+void trochoids_xorline_callback(void *pointer, int tool, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
+void trochoids_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
+void trochoids_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int calc_lcm(int a, int b);
 
 
@@ -208,13 +208,17 @@ int trochoids_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_le
   int i;
   char filename[1024];
 
-  for (i = 0; i < NUM_SNDS; i++) {
+  for (i = 0; i < NUM_SNDS; i++)
+  {
     sound_effects[i] = NULL;
   }
 
-  if (disabled_features & MAGIC_FEATURE_SIZE) {
+  if (disabled_features & MAGIC_FEATURE_SIZE)
+  {
     tp_offers_sizes = 0;
-  } else {
+  }
+  else
+  {
     tp_offers_sizes = 1;
   }
 
@@ -222,8 +226,7 @@ int trochoids_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_le
 
   for (i = 0; i < NUM_SNDS; i++)
   {
-    snprintf(filename, sizeof(filename), "%ssounds/magic/%s", api->data_directory,
-             sound_filenames[i]);
+    snprintf(filename, sizeof(filename), "%ssounds/magic/%s", api->data_directory, sound_filenames[i]);
     sound_effects[i] = Mix_LoadWAV(filename);
   }
 
@@ -241,8 +244,7 @@ SDL_Surface *trochoids_get_icon(magic_api * api, int which)
 {
   char filename[1024];
 
-  snprintf(filename, sizeof(filename), "%simages/magic/%s",
-           api->data_directory, icon_filenames[which_to_tool[which]]);
+  snprintf(filename, sizeof(filename), "%simages/magic/%s", api->data_directory, icon_filenames[which_to_tool[which]]);
 
   return (IMG_Load(filename));
 }
@@ -289,8 +291,7 @@ Uint8 trochoids_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRI
 }
 
 
-Uint8 trochoids_default_size(magic_api * api ATTRIBUTE_UNUSED,
-                              int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 trochoids_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return DEFAULT_SIZE;
 }
@@ -300,8 +301,10 @@ void trochoids_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 {
   int i;
 
-  for (i = 0; i < NUM_SNDS; i++) {
-    if (sound_effects[i] != NULL) {
+  for (i = 0; i < NUM_SNDS; i++)
+  {
+    if (sound_effects[i] != NULL)
+    {
       Mix_FreeChunk(sound_effects[i]);
     }
   }
@@ -309,8 +312,7 @@ void trochoids_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 
 
 void trochoids_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y,
-                     SDL_Rect * update_rect)
+                     SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
 {
   trochoids_x = x;
   trochoids_y = y;
@@ -322,8 +324,7 @@ void trochoids_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 /* Affect the canvas on drag: */
 void trochoids_drag(magic_api * api, int which,
                     SDL_Surface * canvas, SDL_Surface * snapshot,
-                    int old_x ATTRIBUTE_UNUSED, int old_y ATTRIBUTE_UNUSED,
-                    int x, int y, SDL_Rect * update_rect)
+                    int old_x ATTRIBUTE_UNUSED, int old_y ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
 {
   dragged = 1;
   trochoids_work(api, which, canvas, snapshot, x, y, update_rect, 1);
@@ -331,8 +332,8 @@ void trochoids_drag(magic_api * api, int which,
 }
 
 void trochoids_work(magic_api * api, int which,
-                    SDL_Surface * canvas, SDL_Surface * snapshot,
-                    int x, int y, SDL_Rect * update_rect, int guides) {
+                    SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect, int guides)
+{
   int R, r, d, LCM;
   int px, py, px2, py2;
   float a, r_ratio, size;
@@ -342,7 +343,8 @@ void trochoids_work(magic_api * api, int which,
 
   /* Drag left/right to change radius of stator (fixed circle) */
   R = abs(trochoids_x - x);
-  if (R < 20) {
+  if (R < 20)
+  {
     R = 20;
   }
 
@@ -350,7 +352,8 @@ void trochoids_work(magic_api * api, int which,
 
   /* Drag down to increase radius of rotator (rolling circle) */
   r = abs(y - trochoids_y);
-  if (r < 10) {
+  if (r < 10)
+  {
     r = 10;
   }
 
@@ -358,25 +361,31 @@ void trochoids_work(magic_api * api, int which,
 
   if (which == TOOL_HYPOTROCHOID_SIZES ||
       which == TOOL_HYPOTROCHOID_NOSIZES_1 ||
-      which == TOOL_HYPOTROCHOID_NOSIZES_2 ||
-      which == TOOL_HYPOTROCHOID_NOSIZES_3) {
+      which == TOOL_HYPOTROCHOID_NOSIZES_2 || which == TOOL_HYPOTROCHOID_NOSIZES_3)
+  {
     /* Hypotrochoid */
-    if (R == r) {
+    if (R == r)
+    {
       r += 10;
     }
 
-    r_ratio = (float) (R - r) / (float) r;
-  } else {
+    r_ratio = (float)(R - r) / (float)r;
+  }
+  else
+  {
     /* Epitrochoid */
-    r_ratio = (float) (R + r) / (float) r;
+    r_ratio = (float)(R + r) / (float)r;
   }
 
   /* Size option (or use of alternate tools, if --nomagicsizes)
      determines the distance from the center of the rotator
      that the pen draws */
-  if (tp_offers_sizes) {
+  if (tp_offers_sizes)
+  {
     size = trochoids_sizes_per_size_setting[trochoids_size];
-  } else {
+  }
+  else
+  {
     size = trochoids_sizes_per_tool[which];
   }
   d = r * size;
@@ -394,19 +403,22 @@ void trochoids_work(magic_api * api, int which,
   /* Draw the lines */
   LCM = calc_lcm(r, R);
 
-  for (a = 0; a < 360.0 * (float) (LCM / R); a++) {
+  for (a = 0; a < 360.0 * (float)(LCM / R); a++)
+  {
     float a2 = (a + 1);
 
     if (which == TOOL_HYPOTROCHOID_SIZES ||
         which == TOOL_HYPOTROCHOID_NOSIZES_1 ||
-        which == TOOL_HYPOTROCHOID_NOSIZES_2 ||
-        which == TOOL_HYPOTROCHOID_NOSIZES_3) {
+        which == TOOL_HYPOTROCHOID_NOSIZES_2 || which == TOOL_HYPOTROCHOID_NOSIZES_3)
+    {
       /* Hypotrochoid */
       px = trochoids_x + (((R - r) * deg_cos(a)) + (d * deg_cos(r_ratio * a)));
       py = trochoids_y + (((R - r) * deg_sin(a)) - (d * deg_sin(r_ratio * a)));
       px2 = trochoids_x + (((R - r) * deg_cos((a2))) + (d * deg_cos(r_ratio * a2)));
       py2 = trochoids_y + (((R - r) * deg_sin((a2))) - (d * deg_sin(r_ratio * a2)));
-    } else {
+    }
+    else
+    {
       /* Epitrochoid */
       px = trochoids_x + (((R + r) * deg_cos(a)) - (d * deg_cos(r_ratio * a)));
       py = trochoids_y + (((R + r) * deg_sin(a)) - (d * deg_sin(r_ratio * a)));
@@ -414,25 +426,29 @@ void trochoids_work(magic_api * api, int which,
       py2 = trochoids_y + (((R + r) * deg_sin((a2))) - (d * deg_sin(r_ratio * a2)));
     }
 
-    api->line((void *)api, which, canvas, snapshot, px, py, px2, py2, (20 * (guides && (a >= 360.0))) + 1, trochoids_line_callback);
+    api->line((void *)api, which, canvas, snapshot, px, py, px2, py2, (20 * (guides && (a >= 360.0))) + 1,
+              trochoids_line_callback);
   }
 
-  if (guides) {
+  if (guides)
+  {
     int guide_spacing;
 
     /* When still dragging (before release), draw some "guides",
        showing the mechanism that would be used to generate the pattern */
-    rotator_anim_a = (int) (atan2(y - trochoids_y, x - trochoids_x) / M_PI * 180.0);
+    rotator_anim_a = (int)(atan2(y - trochoids_y, x - trochoids_x) / M_PI * 180.0);
 
     /* Stator (fixed circle) */
     guide_spacing = 360 / R;
-    if (guide_spacing < 2) {
+    if (guide_spacing < 2)
+    {
       guide_spacing = 2;
     }
 
-    for (a = 0; a < 360; a = a + guide_spacing) {
-      px = (int) ((float) trochoids_x + ((float) R * deg_cos(a)));
-      py = (int) ((float) trochoids_y - ((float) R * deg_sin(a)));
+    for (a = 0; a < 360; a = a + guide_spacing)
+    {
+      px = (int)((float)trochoids_x + ((float)R * deg_cos(a)));
+      py = (int)((float)trochoids_y - ((float)R * deg_sin(a)));
       api->putpixel(canvas, px, py, 0);
       api->putpixel(canvas, px + 1, py, 0xff);
       api->putpixel(canvas, px, py + 1, 0);
@@ -441,22 +457,26 @@ void trochoids_work(magic_api * api, int which,
 
     /* Rotator (rolling circle) */
     guide_spacing = 360 / r;
-    if (guide_spacing < 2) {
+    if (guide_spacing < 2)
+    {
       guide_spacing = 2;
     }
 
-    for (a = 0; a < 360; a = a + guide_spacing) {
+    for (a = 0; a < 360; a = a + guide_spacing)
+    {
       if (which == TOOL_HYPOTROCHOID_SIZES ||
           which == TOOL_HYPOTROCHOID_NOSIZES_1 ||
-          which == TOOL_HYPOTROCHOID_NOSIZES_2 ||
-          which == TOOL_HYPOTROCHOID_NOSIZES_3) {
+          which == TOOL_HYPOTROCHOID_NOSIZES_2 || which == TOOL_HYPOTROCHOID_NOSIZES_3)
+      {
         /* Hypotrochoid */
-        px = (int) ((float) trochoids_x + ((R - r) * deg_cos(rotator_anim_a)) + ((float) -r * deg_cos(a)));
-        py = (int) ((float) trochoids_y + ((R - r) * deg_sin(rotator_anim_a)) - ((float) -r * deg_sin(a)));
-      } else {
+        px = (int)((float)trochoids_x + ((R - r) * deg_cos(rotator_anim_a)) + ((float)-r * deg_cos(a)));
+        py = (int)((float)trochoids_y + ((R - r) * deg_sin(rotator_anim_a)) - ((float)-r * deg_sin(a)));
+      }
+      else
+      {
         /* Epitrochoid */
-        px = (int) ((float) trochoids_x + ((R + r) * deg_cos(rotator_anim_a)) + ((float) r * deg_cos(a)));
-        py = (int) ((float) trochoids_y + ((R + r) * deg_sin(rotator_anim_a)) - ((float) r * deg_sin(a)));
+        px = (int)((float)trochoids_x + ((R + r) * deg_cos(rotator_anim_a)) + ((float)r * deg_cos(a)));
+        py = (int)((float)trochoids_y + ((R + r) * deg_sin(rotator_anim_a)) - ((float)r * deg_sin(a)));
       }
       api->xorpixel(canvas, px, py);
       api->xorpixel(canvas, px + 1, py);
@@ -468,15 +488,17 @@ void trochoids_work(magic_api * api, int which,
     /* Pen */
     if (which == TOOL_HYPOTROCHOID_SIZES ||
         which == TOOL_HYPOTROCHOID_NOSIZES_1 ||
-        which == TOOL_HYPOTROCHOID_NOSIZES_2 ||
-        which == TOOL_HYPOTROCHOID_NOSIZES_3) {
+        which == TOOL_HYPOTROCHOID_NOSIZES_2 || which == TOOL_HYPOTROCHOID_NOSIZES_3)
+    {
       /* Hypotrochoid */
       px = trochoids_x + (((R - r) * deg_cos(rotator_anim_a)) + (d * deg_cos(360 - rotator_anim_a)));
       py = trochoids_y + (((R - r) * deg_sin(rotator_anim_a)) - (d * deg_sin(360 - rotator_anim_a)));
 
       px2 = trochoids_x + (((R - r) * deg_cos(rotator_anim_a)));
       py2 = trochoids_y + (((R - r) * deg_sin(rotator_anim_a)));
-    } else {
+    }
+    else
+    {
       /* Epitrochoid */
       px = trochoids_x + (((R + r) * deg_cos(rotator_anim_a)) - (d * deg_cos(360 - rotator_anim_a)));
       py = trochoids_y + (((R + r) * deg_sin(rotator_anim_a)) - (d * deg_sin(360 - rotator_anim_a)));
@@ -487,8 +509,10 @@ void trochoids_work(magic_api * api, int which,
 
     api->line((void *)api, which, canvas, snapshot, px, py, px2, py2, 2, trochoids_line_callback);
 
-    for (yy = -2; yy <= 2; yy++) {
-      for (xx = -2; xx <= 2; xx++) {
+    for (yy = -2; yy <= 2; yy++)
+    {
+      for (xx = -2; xx <= 2; xx++)
+      {
         api->putpixel(canvas, px + xx, py + yy, trochoids_color);
       }
     }
@@ -497,8 +521,7 @@ void trochoids_work(magic_api * api, int which,
 
 
 void trochoids_release(magic_api * api, int which,
-                        SDL_Surface * canvas, SDL_Surface * snapshot,
-                        int x, int y, SDL_Rect * update_rect)
+                       SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
 {
   int tool, snd_idx;
 
@@ -511,11 +534,12 @@ void trochoids_release(magic_api * api, int which,
   /* Pick which sound to play & play it */
   tool = which_to_tool[which];
   if (tool == TOOL_EPITROCHOID_SIZES ||
-      tool == TOOL_EPITROCHOID_NOSIZES_1 ||
-      tool == TOOL_EPITROCHOID_NOSIZES_2 ||
-      tool == TOOL_EPITROCHOID_NOSIZES_3) {
+      tool == TOOL_EPITROCHOID_NOSIZES_1 || tool == TOOL_EPITROCHOID_NOSIZES_2 || tool == TOOL_EPITROCHOID_NOSIZES_3)
+  {
     snd_idx = SND_RELEASE_EPITROCHOID;
-  } else {
+  }
+  else
+  {
     snd_idx = SND_RELEASE_HYPOTROCHOID;
   }
   trochoids_sound(api, snd_idx, x, y);
@@ -525,14 +549,16 @@ void trochoids_release(magic_api * api, int which,
      ignore the (x,y) we received; we want the
      'default' offset to get a reasonably pleasant
      shape -- for users who tried clicking w/o dragging */
-  if (dragged == 0) {
+  if (dragged == 0)
+  {
     if (tool == TOOL_EPITROCHOID_SIZES ||
-        tool == TOOL_EPITROCHOID_NOSIZES_1 ||
-        tool == TOOL_EPITROCHOID_NOSIZES_2 ||
-        tool == TOOL_EPITROCHOID_NOSIZES_3) {
+        tool == TOOL_EPITROCHOID_NOSIZES_1 || tool == TOOL_EPITROCHOID_NOSIZES_2 || tool == TOOL_EPITROCHOID_NOSIZES_3)
+    {
       x = trochoids_x + 50;
       y = trochoids_y + 20;
-    } else {
+    }
+    else
+    {
       x = trochoids_x + 70;
       y = trochoids_y + 30;
     }
@@ -546,19 +572,24 @@ void trochoids_release(magic_api * api, int which,
 /* Play a sound; volume and panning will be based
    on the size and position of the shape being generated
    by the user's UI interaction */
-void trochoids_sound(magic_api * api, int snd_idx, int x, int y) {
+void trochoids_sound(magic_api * api, int snd_idx, int x, int y)
+{
   int R, vol, pan;
 
   /* Volume based on the radii of the stator (fixed circle)
      and the rotator (rolling circle), combined; larger = louder */
   R = abs(trochoids_x - x) + abs(trochoids_y - y);
-  if (R < 20) {
+  if (R < 20)
+  {
     R = 20;
-  } else if (R > api->canvas_w) {
+  }
+  else if (R > api->canvas_w)
+  {
     R = api->canvas_w;
   }
   vol = (255 * R * 2) / api->canvas_w;
-  if (vol > 255) {
+  if (vol > 255)
+  {
     vol = 255;
   }
 
@@ -569,26 +600,24 @@ void trochoids_sound(magic_api * api, int snd_idx, int x, int y) {
 
 
 void trochoids_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                          SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                          SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                          Uint8 r, Uint8 g, Uint8 b,
-                          SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                         SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                         SDL_Surface * snapshot ATTRIBUTE_UNUSED,
+                         Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
   trochoids_color = SDL_MapRGB(canvas->format, r, g, b);
 }
 
 
 void trochoids_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                         Uint8 size, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                        SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+                        Uint8 size, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
 {
-  trochoids_size = (size - 1); /* array index is 0-based, but Tux Paint returns between 1...{accepted sizes} */
+  trochoids_size = (size - 1);  /* array index is 0-based, but Tux Paint returns between 1...{accepted sizes} */
 }
 
 
 void trochoids_line_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBUTE_UNUSED,
-                              SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                              int x, int y)
+                             SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) pointer;
 
@@ -596,8 +625,7 @@ void trochoids_line_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBUTE_
 }
 
 void trochoids_xorline_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBUTE_UNUSED,
-                                SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                                int x, int y)
+                                SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) pointer;
 
@@ -608,25 +636,30 @@ void trochoids_xorline_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBU
 }
 
 void trochoids_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                        SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
 void trochoids_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                          SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                         SDL_Surface * canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int calc_lcm(int a, int b) {
+int calc_lcm(int a, int b)
+{
   int max;
 
-  if (a > b) {
+  if (a > b)
+  {
     max = a;
-  } else {
+  }
+  else
+  {
     max = b;
   }
 
-  while ((max % a) != 0 || (max % b) != 0) {
+  while ((max % a) != 0 || (max % b) != 0)
+  {
     max++;
   }
 

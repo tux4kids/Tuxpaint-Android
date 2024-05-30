@@ -92,7 +92,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            versión 0.9.32          </h1>
+            versión 0.9.33          </h1>
     
           <p>
             Copyright &copy; 2002-2024 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
@@ -100,7 +100,7 @@
           </p>
     
           <p>
-            26 de Xaneiro de 2024          </p>
+            29 de Abril de 2024          </p>
         </center>
       </header>
 
@@ -121,7 +121,7 @@
                   <li><a href="#standard_files">Ficheiros estándar</a></li>                  <li><a href="#personal_files">Ficheiros persoais</a></li>                </ul>
               </li>
               <li><a href="#brushes">Pinceis</a>                <ul>
-                  <li><a href="#brush_options">Opcións de pinceis</a></li>                </ul>
+                  <li><a href="#brush_description_text">Brush Descriptive Text</a></li>                  <li><a href="#brush_options">Opcións de pinceis</a></li>                </ul>
               </li>
               <li><a href="#stamps">Selos</a>                <ul>
                   <li><a href="#stamps_images">Imaxes de selos</a></li>                  <li><a href="#description_text">Texto descritivo do selo</a></li>                  <li><a href="#sound_effects">Efectos de son dos selos</a></li>                  <li><a href="#descriptive_sound">Son descritivo do selo</a></li>                  <li><a href="#stamp_options">Opcións de selos</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Selos prereflectidos e invertidos</a></li>                </ul>
@@ -172,13 +172,11 @@
               Onde vai este directorio depende do valor estabelecido para «<code>DATA_PREFIX</code>» cando se construíu Tux Paint. Vexa a «Documentación de instalación» para máis detalles.            </p>
             <p>
               De xeito predeterminado, o directorio é:              <blockquote>
-                <code>/usr/local/share/tuxpaint/</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>/usr/local/share/tuxpaint/</code></nobr>              </blockquote>
             </p>
             <p>
               Se instalou dende un paquete, o máis probábel é que sexa:              <blockquote>
-                <code>/usr/share/tuxpaint/</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>/usr/share/tuxpaint/</code></nobr>              </blockquote>
             </p>
           </dd>
 
@@ -186,8 +184,7 @@
           <dd>
             <p>
               Tux Paint busca un directorio chamado «<code>data</code>» no mesmo directorio que o executábel. Este é o directorio que utilizou o instalador ao instalar Tux Paint p. ex.:              <blockquote>
-                <code style="white-space: nowrap;">C:\Program Files\TuxPaint\data</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>C:\Program Files\TuxPaint\data</code></nobr>              </blockquote>
             </p>
           </dd>
 
@@ -208,9 +205,8 @@
             <p class="note">
               <span title="Information">&#128161;</span>              <em>Nota:</em> Se instala unha versión máis recente de Tux Paint e substitúe ou desbota a versión antiga, perderá os cambios feitos seguindo as instrucións anteriores, así que garde as copias de seguridade do seu novo contido (selos, pinceis, etc.) .            </p>
             <p>
-              Tux Paint tamén busca ficheiros nun cartafol «TuxPaint» que pode colocar no seu sistema no cartafol «Application Support» (atópase en «Library» na raíz do seu sistema de ficheiros):              <blockquote>
-                <code style="white-space: nowrap;">/Library/Application Support/TuxPaint/</code>
-              </blockquote>
+              Tux Paint also looks for files in a "TuxPaint" folder that you can place in your system's <nobr>"<code style='background: #EEE;'>Application Support</code>"</nobr> folder (found under <nobr>"<code style='background: #EEE;'>Library</code>"</nobr> at the root of your filesystem):              <blockquote>
+                <nobr><code style='background: #EEE;'>/Library/Application Support/TuxPaint/data/</code></nobr>              </blockquote>
             </p>
             <p>
               Cando actualice a unha versión máis recente de Tux Paint, o contido deste cartafol «TuxPaint» seguirá sendo o mesmo e permanecerá accesíbel por todos os usuarios de Tux Paint.            </p>
@@ -235,26 +231,22 @@
             <p>
               O seu cartafol persoal de Tux Paint almacénase nos seus «Datos da aplicación» persoais. Por exemplo, nos Windows máis recentes:
               <blockquote>
-                <code style="white-space: nowrap;">C:\Documentos e axustes\<i>(nome de usuario)</i>\Datos da aplicación\TuxPaint\</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>C:\Users\nome de usuario\AppData\Roaming\TuxPaint\</code></nobr>              </blockquote>
             </p>
           </dd>
 
           <dt><strong>macOS</strong></dt>
           <dd>
             <p>
-              O seu cartafol persoal de Tux Paint almacénase no cartafol persoal «Application Support»:              <blockquote>
-                <code style= "white-space: nowrap;">/Users/<i>(nome de usuario)</i>/Library/Application Support/TuxPaint/</code>
-              </blockquote>
+              Your personal Tux Paint folder is stored in your personal <nobr>"<code style='background: #EEE;'>Application Support</code>"</nobr> folder:              <blockquote>
+                <nobr><code style='background: #EEE;'>/Users/<i>nome de usuario</i>/Library/Application Support/TuxPaint/</code></nobr>              </blockquote>
             </p>
           </dd>
 
           <dt><strong>Linux e Unix</strong></dt>
           <dd>
             <p>
-              Os seus ficheiros persoais de Tux Paint van a un «directorio agochado» que se atopa no directorio persoal da súa conta: «<code>$(HOME)/.tuxpaint/</code>» (tamén coñecido como «<code>~/.tuxpaint/</code>»).            </p>
-            <p>
-              É dicir, se o seu directorio persoal é «<code>/home/tux</code>», entón os ficheiros persoais de Tux Paint entrarán en «<code>/home/tux/.tuxpaint/</code>».            </p>
+              Your personal Tux Paint files go into a 'hidden directory' found in your account's home directory: <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaint/</code>"</nobr>.            </p>
             <p>
               Non esqueza o punto («<code>.</code>») antes de «<code>tuxpaint</code>»!            </p>
           </dd>
@@ -264,7 +256,7 @@
           Para engadir os seus propios pinceis, selos, «imaxes de comezo», modelos e tipos de letra, cree subdirectorios no seu directorio persoal de Tux Paint chamados «<code><b>brushes</b></code>», «<code><b>stamps</b></code>», «<code><b>starters</b></code>», «<code><b>templates</b></code>», «<code><b>fonts</b></code>», , respectivamente.        </p>
 
         <p>
-          (Por exemplo, se creou un pincel chamado «<code>flor.png</code>», poñeríao en «<code>~/.tuxpaint/brushes/</code>» en Linux ou Unix.)        </p>
+          (For example, if you created a brush named <nobr>"<code style='background: #EEE;'>flor.png</code>"</nobr>, you would put it in <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaint/brushes/</code>"</nobr> under Linux or Unix.)        </p>
       </section><!-- H2: Personal Files -->
     </section><!-- H1: Where Files Go -->
 
@@ -277,7 +269,7 @@
       </header>
 
       <p>
-        Os pinceis empregados para debuxar coas ferramentas «Pincel» e «Liñas» en Tux Paint son simplemente ficheiros de imaxe PNG.      </p>
+        The brushes used for drawing with the 'Paint' and 'Lines' tools in Tux Paint are simply PNG image files.      </p>
       <img src="../../html/images/brush_edit.png"
                   width="123"
                   height="147"
@@ -288,6 +280,41 @@
 
       <p>
         Os píxeles de escala de grises no pincel PNG debuxaranse empregando a cor seleccionada actualmente en Tux Paint. Os píxeles de cor tinguiranse.      </p>
+
+      <section><!-- H2: Brush Descriptive Text -->
+        <header>
+          <h2>
+            <a name="brush_bescription_text"
+                id="brush_description_text">Brush Descriptive Text</a>
+          </h2>
+        </header>
+
+        <p>
+          Tux Paint will display descriptive text when a brush is selected. These are placed in plain text files with the same name as the PNG, but with a "<code>.txt</code>" filename extension. (e.g., "<code>brush.png</code>"'s description is stored in "<code>brush.txt</code>" in the same directory.)        </p>
+
+        <p>
+          The first line of the text file will be used as the US English description of the brush's image. It must be encoded in UTF-8.        </p>
+
+        <dl>
+          <dt><strong>Compatibilidade da localización</strong></dt>
+          <dd>
+            <p>
+              Pódense engadir liñas adicionais ao ficheiro de texto para fornecer traducións da descrición, que se amosarán cando Tux Paint estea a executarse nun idioma diferente (como o francés ou o español).            </p>
+            <p>
+              O comezo da liña debería corresponder ao código de idioma do idioma en cuestión (por exemplo, «<code>fr</code>» para o francés e «<code>zh_TW</code>» para o chinés tradicional), seguido de «<code>.utf8=</code>» e a descrición traducida (Unicode, codificado en UTF-8).            </p>
+            <p>
+              <b>Para os desenvolvedores de Tux Paint:</b> Hai scripts no directorio «<code>brushes-po</code>» para converter os ficheiros de texto ao formato PO (e posterior) para facilitar a tradución a diferentes idiomas. Polo tanto, nunca debería engadir nin cambiar traducións directamente nos ficheiros «<code>.txt</code>».            </p>
+            <p>
+              Se non hai tradución dispoñíbel para o idioma en que se está a executar Tux Paint, utilízase o texto en inglés dos EUA.            </p>
+          </dd>
+
+          <dt><strong>Usuarios de Windows</strong></dt>
+          <dd>
+            <p>
+              Use <cite>NotePad</cite> ou <cite>WordPad</cite> para editar/crear estes ficheiros. Asegúrese de gardalos como texto simple e asegúrese de que teñen unha extensión «<code>.txt</code>» ao final do nome do ficheiro.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Descriptive Text -->
 
       <section><!-- H2: Brush Options -->
         <header>
@@ -604,7 +631,7 @@
           <dt><strong>Usuarios de Windows</strong></dt>
           <dd>
             <p>
-              Use <cite>NotePad</cite> ou <cite>WordPad</cite> para editar/crear estes ficheiros. Asegúrese de gardalos como texto simple e asegúrese de que teñen unha extensión «<code>.txt</code>» ao final do nome do ficheiro.            </p>
+              Use <cite>NotePad</cite> ou <cite>WordPad</cite> para editar/crear estes ficheiros. Asegúrese de gardalos como texto simple e asegúrese de que teñen unha extensión «<code>.dat</code>» ao final do nome do ficheiro.            </p>
           </dd>
         </dl>
       </section><!-- H2: Stamp Options -->
@@ -651,7 +678,7 @@
         Os tipos de letra empregados por Tux Paint son TrueType Fonts (TTF).      </p>
 
       <p>
-        Simplemente colóqueas no directorio «<code><b>fonts</b></code>». Tux Paint cargará o tipo de letra e fornecerá catro tamaños diferentes no selector de «Letras» cando empregue as ferramentas «Texto» e «Etiqueta».      </p>
+        Simply place them in the "<code><b>fonts</b></code>" directory. When using the 'Text' and 'Label' tools, Tux Paint will present the font in the 'Letters' selector at the right, along with options to enable bold and/or italics, and change the size.      </p>
     </section><!-- H1: Fonts -->
 
     <section class="indent outer"><!-- H1: Starters -->

@@ -1,11 +1,11 @@
                                     Thellim
                                    Tux Paint
-                                version 0.9.32
+                                version 0.9.33
 
  Të drejta kopjimi © 2002-2024 nga kontribues të ndryshëm; shihni AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                 26 janar 2024
+                                 29 prill 2024
 
 +------------------------------------------------------------------------+
 |                            Pasqyrë e Lëndës                            |
@@ -14,6 +14,7 @@
 |       + Kartela Standarde                                              |
 |       + Kartela Personale                                              |
 |   * Penela                                                             |
+|       + Brush Descriptive Text                                         |
 |       + Mundësi Penelash                                               |
 |   * Stampa                                                             |
 |       + Figura stampash                                                |
@@ -97,11 +98,11 @@ macOS
     mësipërme do të humbni ndryshimet e bëra, ndaj mbani kopjeruajtje të lëndës
     që krijoni rishtas (stampa, penela, etj.).
 
-    Tux Paint-i kërkon gjithashtu për kartela në dosjen “TuxPaint” të cilën
-    mund ta vendosni te dosja “Application Support” e sistemit (gjendet nën
-    "Library", në rrënjë të sistemit tuaj të kartelave):
+    Tux Paint also looks for files in a "TuxPaint" folder that you can place in
+    your system's "Application Support" folder (found under "Library" at the
+    root of your filesystem):
 
-        /Library/Application Support/TuxPaint/
+        /Library/Application Support/TuxPaint/data/
 
     Kur e përditësoni Tux Paint-in me një version të ri, lënda e kësaj dosjeje
     “TuxPaint” do të mbesë e njëjtë dhe do të mbesë e përdorshme nga krejt
@@ -120,28 +121,23 @@ Windows
     Dosja juaj personale Tux Paint gjedenet te “Application Data” juaj
     personale. Për shembull, në Windows-e më të rinj:
 
-        C:\Dokumente dhe Rregullime\(emër përdoruesi)\Të dhëna Aplikacioni\
-        TuxPaint\
+        C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\
 
 
 
 macOS
 
-    Dosja juaj personale Tux Paint gjendet në dosjen tuaj personale
-    “Application Support”:
+    Your personal Tux Paint folder is stored in your personal 
+    "Application Support" folder:
 
-        /Users/(emër përdoruesi)/Library/Application Support/TuxPaint/
+        /Users/emër përdoruesi/Library/Application Support/TuxPaint/
 
 
 
 Linux dhe Unix
 
-    Kartelat tuaja personale Tux Paint shkojnë te një “drejtori e fshehur” që
-    gjendet në drejtorinë shtëpi të llogarisë tuaj: “$(HOME)/.tuxpaint/” (e
-    njohur edhe si “~/.tuxpaint/”).
-
-    Pra, nëse drejtoria juaj shtëpi është “/home/tux”, atëherë kartelat tuaja
-    personale Tux Paint shkojnë te “/home/tux/.tuxpaint/”.
+    Your personal Tux Paint files go into a 'hidden directory' found in your
+    account's home directory: "/home/emër përdoruesi/.tuxpaint/".
 
     Mos harroni pikën (“.”) para “tuxpaint”!
 
@@ -152,13 +148,13 @@ Që të shoni penelat, stampat, “fillesat”, gjedhet dhe shkronjat tuaja, kri
 nëndrejtori nën drejtorinë tuaj personale Tux Paint të quajtuara “brushes”, “
 stamps”, “starters”, “templates”, “fonts”, përkatësisht.
 
-(Për shembull, nëse krijoni një penel të quajtur “flower.png”, do ta vendosnit
-te “~/.tuxpaint/brushes/”, nën Linux ose Unix.)
+(For example, if you created a brush named "flower.png", you would put it in 
+"/home/emër përdoruesi/.tuxpaint/brushes/" under Linux or Unix.)
 
 Penela
 
-Penelat e përdorur për të vizatuar me mjetet “Penel” dhe “Vija” në Tux Paint
-janë thjesht kartela figurë PNG.
+The brushes used for drawing with the 'Paint' and 'Lines' tools in Tux Paint
+are simply PNG image files.
 
 Alfa (tejdukshmëria) e figurës PNG përdoret për të përcaktuar formën e penelit,
 që do të thotë se forma mund të jetë e llojit “anti-aliased” dhe pjesërisht e
@@ -167,6 +163,45 @@ tejdukshme!
 Pikselat shkallë të grisë te PNG-ja e penelit do të vizatohen duke përdorur
 ngjyrën aktualisht të përzgjedhur në Tux Paint. Pikselat me ngjyrë do të
 ngjyrosen.
+
+Brush Descriptive Text
+
+Tux Paint will display descriptive text when a brush is selected. These are
+placed in plain text files with the same name as the PNG, but with a ".txt"
+filename extension. (e.g., "brush.png"'s description is stored in "brush.txt"
+in the same directory.)
+
+The first line of the text file will be used as the US English description of
+the brush's image. It must be encoded in UTF-8.
+
+Mbulim Përkthimesh
+
+    Te kartela tekst mund të shtohen rreshta shtesë për të dhënë përkthime të
+    përshkrimit, që të shfaqen kur Tux Paint-i xhiron në një gjuhë tjetër
+    (fjala vjen, shqip ose frëngjisht).
+
+    Fillimi i rreshtit duhet t’i përgjigjet kodit të gjuhës për gjuhën në fjalë
+    (p.sh., “fr” për frëngjishten dhe “zh_TW” për kineze tradicionale), pasuar
+    nga “.utf8=” dhe përshkrimi i përkthyer (Unikod, koduar si UTF-8).
+
+    Për zhvillues Tux Paint-i: Te drejtoria “brushes-po” ka programthe për
+    shndërrim kartelash tekst në format PO (dhe anasjelltas), për përkthim të
+    kollajtë në gjuhë të ndryshme. Ndaj s’duhet të shtoni ose ndryshoni kurrë
+    përkthime drejt e te kartelat “.txt”.
+
+    Nëse s’ka përkthim për gjuhën në të cilën po xhirohet Tux Paint-i, përdoret
+    teksti prej anglishtes amerikane.
+
+
+
+Përdorues Windows-i
+
+    Që të përpunoni/krijoni këto kartela, përdorni NotePad ose WordPad.
+    Sigurohuni t’i ruani si tekst të thjeshtë dhe garantoni të kenë një zgjatim
+    “.txt” në fund të emrit të kartelës.
+
+
+
 
 Mundësi Penelash
 
@@ -523,7 +558,7 @@ Përdorues Windows-i
 
     Që të përpunoni/krijoni këto kartela, përdorni NotePad ose WordPad.
     Sigurohuni t’i ruani si tekst të thjeshtë dhe garantoni të kenë një zgjatim
-    “.txt” në fund të emrit të kartelës.
+    “.dat” në fund të emrit të kartelës.
 
 
 
@@ -556,9 +591,9 @@ Shkronja
 
 Shkronjat e përdorur nga Tux Paint janë TrueType Fonts (TTF).
 
-Thjesht vendosini te drejtoria “fonts”. Tux Paint-i do ta ngarkojë llojin e
-shkronjave dhe do të japë katër madhësi të ndryshme te përzgjedhësi i
-“Shkronjave”, kur përdoren mjetet “Tekst” dhe “Etiketë”.
+Simply place them in the "fonts" directory. When using the 'Text' and 'Label'
+tools, Tux Paint will present the font in the 'Letters' selector at the right,
+along with options to enable bold and/or italics, and change the size.
 
 “Fillesa”
 

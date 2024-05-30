@@ -1,12 +1,12 @@
                                    Tux Paint
-                   versión 0.9.32 Preguntas máis frecuentes
+                                versión 0.9.33
+                           Preguntas máis frecuentes
 
-        Copyright © 2002-2023 by varios colaboradores; see AUTHORS.txt.
+        Copyright © 2002-2024 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                              20 de Xullo de 2023
+                              14 de Maio de 2024
 
--------------------------------------------------------------------------------
 +--------------------------------------------+
 |                   Índice                   |
 |--------------------------------------------|
@@ -237,17 +237,21 @@ Onde garda Tux Paint os meus debuxos?
     unidade local:
 
     Windows Vista, Windows 8, Windows 10, Windows 11
-        No cartafol «AppData» do usuario:
-        p. ex.: C:\Users\nome de usuario\AppData\Roaming\TuxPaint\saved
+        In the user's "AppData" folder:
+        e.g., "C:\Users\nome de usuario\AppData\Roaming\TuxPaint\saved\"
 
     macOS
-        No cartafol «Asistencia de aplicacións» do usuario::
-        e.g., /Users/nome de usuario/Library/Applicaton Support/TuxPaint/saved/
+        In the user's "Application Support" folder:
+        e.g., 
+        "/Users/nome de usuario/Library/Application Support/TuxPaint/saved/"
 
     Linux / Unix
-        No directorio persoal do usuario («$HOME»), baixo un subcartafol
-        «.tuxpaint»:
-        e.g., /home/nome de usuario/.tuxpaint/saved/
+        In the user's "home directory" folder:
+        e.g., "/home/nome de usuario/.tuxpaint/saved/"
+
+    Haiku
+        In the user's "settings" folder:
+        e.g., "/boot/home/config/settings/TuxPaint/saved/"
 
 
     As imaxes almacénanse como mapas de bits PNG, que a maioría dos programas
@@ -480,6 +484,13 @@ Tux Paint segue a funcionar en modo de pantalla completa e quéroo na xanela.
 
 
 
+How do I access other applications when Tux Paint is running in Full Screen?
+      + Windows and Linux users, try the [Alt] + [Tab] key combination to
+        switch between applications.
+      + macOS users, switch to other applications using [Control] + [Left
+        Arrow], then back to Tux Paint using [Control] + [Right Arrow].
+
+
 
 -------------------------------------------------------------------------------
 
@@ -487,17 +498,17 @@ Other Problems
 
 Tux Paint non funciona
 
-    Se Tux Paint se interrómpe coa mensaxe: «You're already running a copy of
-    Tux Paint!», significa que foi iniciado nos últimos 30 segundos. (En Unix/
-    Linux, esta mensaxe aparecería nunha consola de terminal se executase Tux
-    Paint desde unha liña de ordes. En Windows, esta mensaxe aparecería nun
-    ficheiro chamado «stdout.txt» no mesmo cartafol onde resideTuxPaint. exe
-    (p. ex.: en «C:\Program Files\TuxPaint»).
+    If Tux Paint aborts with the message: "You're already running a copy of Tux
+    Paint!", this means it has been launched in the last 30 seconds. (On Unix/
+    Linux, this message would appear in a terminal console if you ran Tux Paint
+    from a command-line. On Windows, this message would appear in a file named
+    "stdout.txt" in the same folder where TuxPaint.exe resides (e.g., in 
+    "C:\Program Files\TuxPaint\").
 
-    Un ficheiro de bloqueo («~/.tuxpaint/lockfile.dat» en Linux e Unix,
-    «userdata\lockfile.dat» en Windows) úsase para asegurarse de que Tux Paint
-    non se executa demasiadas veces á vez (por exemplo, porque un cativo preme
-    impaciente na súa icona máis dunha vez) .
+    A lockfile (e.g., "/home/nome de usuario/.tuxpaint/lockfile.dat" on Linux
+    and Unix, "userdata\lockfile.dat" on Windows) is used to make sure Tux
+    Paint isn't run too many times at once (e.g., due to a child impatiently
+    clicking its icon more than once).
 
     Mesmo se o ficheiro de bloqueo existe, contén a «hora» na que se executou
     Tux Paint por última vez. Se pasaron máis de 30 segundos, Tux Paint debería
@@ -577,16 +588,33 @@ Tux Paint está a usar opcións que non especifiquei.
 
       + Windows
 
-        En Windows, Tux Paint examina primeiro o ficheiro de configuración:
+        Under Windows, it first examines the system-wide configuration file,
+        located here:
 
-            tuxpaint.cfg
+            C:\Program Files\TuxPaint\tuxpaint.cfg
+
+        A continuación, examina o ficheiro de configuración persoal do usuario:
+
+            C:\Users\nome de usuario\AppData\Roaming\TuxPaint\tuxpaint.cfg
 
         Finalmente, úsanse as opcións enviadas como argumentos da liña de
         ordes.
 
       + macOS
 
-      + Unix e Linux
+        Under macOS, it first examines the system-wide configuration file,
+        located here:
+
+            /Library/Application Support/TuxPaint/tuxpaint.cfg
+
+        A continuación, examina o ficheiro de configuración persoal do usuario:
+
+            /Users/nome de usuario/Library/Application Support/TuxPaint/tuxpaint.cfg
+
+        Finalmente, úsanse as opcións enviadas como argumentos da liña de
+        ordes.
+
+      + Linux / Unix
 
         En Unix e Linux, primeiro examine o ficheiro de configuración de todo o
         sistema, que se atopa aquí:
@@ -595,24 +623,31 @@ Tux Paint está a usar opcións que non especifiquei.
 
         A continuación, examina o ficheiro de configuración persoal do usuario:
 
-            ~/.tuxpaintrc
+            /home/nome de usuario/.tuxpaintrc
 
         Finalmente, úsanse as opcións enviadas como argumentos da liña de
         ordes.
 
       + Haiku
 
+        Under Haiku, Tux Paint first examines the configuration file:
+
+            /boot/home/config/settings/TuxPaint/tuxpaint.conf
+
+        Finalmente, úsanse as opcións enviadas como argumentos da liña de
+        ordes.
+
     Isto significa que se estabelece algo nun ficheiro de configuración que non
     quere estabelecer, terá que cambiar o ficheiro de configuración (se pode)
     ou anular a opción na liña de ordes.
 
-    Por exemplo, en Linux e Unix, se «/etc/tuxpaint/tuxpaint.conf» inclúe esta
-    opción para desactivar o son...
+    For example, on Linux and Unix, if "/etc/tuxpaint/tuxpaint.conf" includes
+    this option to disable sound...
 
         nosound=yes
 
-    ...entón pode volver activar o son engadindo esta opción ao seu propio
-    ficheiro «.tuxpaintrc»:
+    ...then you can reenable sound by either adding this option to your own 
+    "/home/nome de usuario/.tuxpaintrc" file:
 
         sound=yes
 
@@ -620,14 +655,12 @@ Tux Paint está a usar opcións que non especifiquei.
 
         --sound
 
-    Os usuarios de Linux e Unix tamén poden desactivar o ficheiro de
-    configuración de todo o sistema incluíndo o seguinte argumento da liña de
-    ordes:
+    On platforms where Tux Paint offers a system-wide configuration file, the
+    settings in that file may be skipped (so only the user configuration file
+    and other command-line arguments will be used) by including the following
+    command-line argument:
 
         --nosysconfig
-
-    Tux Paint só ollará «~/.tuxpaintrc» e os argumentos da liña de ordes para
-    determinar que opcións se deben estabelecer.
 
 
 

@@ -1,5 +1,5 @@
-.\" tuxpaint.1 - 2024.01.27
-.TH TUXPAINT 1 "27 janar 2024" "0.9.32" "Tux Paint"
+.\" tuxpaint.1 - 2024.04.10
+.TH TUXPAINT 1 "10 prill 2024" "0.9.33" "Tux Paint"
 .SH EMËR
 tuxpaint -- “Tux Paint”, një program vizatimi për fëmijë të vegjël.
 
@@ -70,6 +70,8 @@ tuxpaint -- “Tux Paint”, një program vizatimi për fëmijë të vegjël.
 [\-\-nomagiccontrols]
 .br
 [\-\-nomagicsizes]
+.br
+[\-\-ungroupmagictools]
 .br
 [\-\-noshapecontrols]
 .br
@@ -228,6 +230,8 @@ tuxpaint -- “Tux Paint”, një program vizatimi për fëmijë të vegjël.
 [\-\-magiccontrols]
 .br
 [\-\-magicsizes]
+.br
+[\-\-groupmagictools]
 .br
 [\-\-shapecontrols]
 .br
@@ -453,6 +457,10 @@ controllable.)
 .B \-\-nomagicsizes \-\-magicsizes
 Disable or enable (default) Magic size controls.  (Note: Not all Magic
 tools offer size controls.)
+
+.TP 8
+.B \-\-ungroupmagictools \-\-groupmagictools
+Disable or enable (default) grouping of Magic tools.
 
 .TP 8
 .B \-\-noshapecontrols \-\-shapecontrols

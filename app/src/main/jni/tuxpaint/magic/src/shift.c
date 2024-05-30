@@ -122,7 +122,7 @@ int shift_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED
 // Return our order
 int shift_get_order(int which ATTRIBUTE_UNUSED)
 {
-  return 200; 
+  return 200;
 }
 
 // Return our descriptions, localized:

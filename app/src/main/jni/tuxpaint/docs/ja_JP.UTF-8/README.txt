@@ -1,12 +1,12 @@
                                    Tux Paint
-                               バージョン 0.9.32
+                               バージョン 0.9.33
 
                     子供向けのシンプルなお絵かきプログラム
 
        Copyright © 2002-2024 by various contributors; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                 2024年1月29日
+                                 2024年4月29日
 
 +--------------------------------------------------+
 |                       目次                       |
@@ -95,46 +95,28 @@ Tux Paint は、オープンソースのプロジェクトで、GNUの一般公�
 
 ライセンスの全文は、COPYING.txtをお読みください。
 
-D. Tux Paint バージョン 0.9.32 での変更点
+D. Tux Paint バージョン 0.9.33 での変更点
 
-「まほう」ツール：１てんとうし
-    消失点を設定し、１点透視図法で線を引くことができる２つのツール。
+Transparent Erasers
+    Erasers that lightly expose more and more of the background.
 
-「まほう」ツール：２てんとうし
-    ２つの消失点を設定し、２点透視図法で線を引くことができる２つのツール。
+Dither magic tools
+    Transform parts of an image into a dithered pattern of dots.
 
-「まほう」ツール：３てんとうし
-    ３つの消失点を設定し、３点透視図法で線を引くことができる２つのツール。
+Filled Polygon magic tool
+    Create polygons by placing three or more connected points on the canvas.
 
-「まほう」ツール：とうかく
-    等角投影図法で線をひくツール
+3D Glasses magic tool updated
+    Different anaglyphic color separations now offered (via the 'size'
+    controls), unless running Tux Paint in 'Novice' complexity level.
 
-「まほう」ツール：２とうかく
-    角度を設定し、二等角投影図法で線を引くことができる２つのツール。
+Magic tool ungrouping option
+    The numerous Magic tools can be presented as a single long list (as in Tux
+    Paint prior to 0.9.27), rather than paged groups.
 
-「まほう」ツール：ふとうかく
-    角度を設定し、不等角投影図法で線を引くことができる２つのツール。
-
-「まほう」ツール：しゃとうえい
-    角度を設定し、斜投影図法で線を引くことができる２つのツール。
-
-「まほう」ツール：エピトロコイド・ハイポトロコイド
-    トロコイド曲線のパターンを描画するツール。
-
-新たな設定項目 "難易度"（complexity）
-
-    ユーザーのレベルに応じて特定の「まほう」ツールの動作を変更したり使用できな
-    くしたりする新しい設定項目。「透視図法」ツールと「クローン」ツールは、この
-    設定の影響を受けます。
-
-「まほう」ツールの再整理
-
-    カテゴリごとの「まほう」ツールの並び順が、関連するツールが互いに隣になるよ
-    う、再整理されました。
-
-フォントの詳細表示
-    「もじ」ツールと「ラベル」ツールで、選択されたフォントのフォント名とサイズ
-    を表示するようになりました。
+Brush descriptions
+    Brushes (used by Paint and Line tools) can now include descriptions that
+    appear when the brush is selected.
 
 
 全ての変更点については、CHANGES.txt をお読みください。
@@ -167,8 +149,9 @@ KDE あるいは GNOME のメニューの「グラフィックス」以下に、
 合や、インストーラーでショートカットを作成しなかった場合は、"Tux Paint"のフォル
 ダにある "tuxpaint.exe" のアイコンをダブルクリックします。
 
-インストーラーを用いた場合、「Tux Paint」のフォルダは、通常、"C:\Program Files\
-" に配置されます。（インストール時に、これを変更することもできます）
+By default, the 'Tux Paint Installer' will put Tux Paint's folder in 
+"C:\Program Files\TuxPaint\", though you may have changed this when you ran the
+installer.
 
 ZIP ファイルを用いた場合、「Tux Paint」のフォルダは、任意の場所に配置できます。
 
@@ -575,6 +558,12 @@ g.「まほう」ツール（特殊効果）
     「まほう」の効果を選択することができます。効果を適用する方法は、クリック＋
     ドラッグ、単なるクリックなど、ツールごとに様々です。
 
+    The Magic Tools
+
+
+        「magic-docs」フォルダ内のドキュメント「まほう」ツールの一覧もお読みく
+        ださい。
+
     「まほう」効果の制御
 
 
@@ -607,22 +596,34 @@ g.「まほう」ツール（特殊効果）
 
         📜 このオプションは、バージョン 0.9.30 以降で追加されました。
 
-    「magic-docs」フォルダ内のドキュメント「まほう」ツールの一覧もお読みくださ
-    い。
+    ⚙ Note: If the "ungroupmagictools" option is set, Tux Paint won't split
+    Magic tools into groups of related tools, and instead present them all as
+    one large list. See the "Options" documentation.
 
 
 
 h.けしゴム
 
-    このツールは「ふで」ツールに似ています。クリック（または、クリック＋ドラッ
-    グ）をした部分が消されます。（消した部分は、白あるいはその他の色、また、レ
-    イヤーキャンバスなど、絵によって異なる状態に戻ります。）
+    This tool works similarly to the Paint Brush. Wherever you click (or click
+    and drag), things you've added to your drawing will be erased, exposing the
+    background that you chose when you started the drawing, be it a solid
+    color, the background of a 'Starter' image, or a 'Template' image. (See 各
+    種のツール > そのほかの操作 > 「さいしょから」.)
 
-    いくつもの大きさの正方形と円形の消しゴムがあります。端がぼやけた円形の消し
-    ゴムも用意されています。
+    A number of eraser types are available, each offering multiple sizes are
+    available:
+      + Square — Square-shaped erasers that completely remove parts of your
+        drawing.
+      + Circle (solid) — Circle-shaped erasers that completely remove parts of
+        your drawing.
+      + Fuzzy-edged Circle — Circle-shaped erasers with soft edges that blend
+        with the background.
+      + Transparent Circle — Circle-shaped erasers that blend your drawing with
+        the background. Release and click again to expose more and more of the
+        background.
 
-    正方形の輪郭がマウスカーソルの位置に表示され、絵のどの部分が消されるかを示
-    します。
+    As you move the mouse around, an outline follows the pointer, showing what
+    part of the picture will be erased.
 
     消している間、「キュッキュッ」と擦って消す効果音が流れます。
 
@@ -658,14 +659,18 @@ b.「さいしょから」
     「さいしょから」のボタンを押すと、新規に絵を描き始めることができます。ダイ
     アログ画面が表示され、キャンバスの背景色やレイヤー画像（後述）を選べます。
 
+    When you use the 'Eraser' tool things you've added to your drawing will be
+    removed, exposing the background you chose when starting a new drawing.
+    (See 各種のツール > 描画ツール > けしゴム.)
+
     ⌨ 注: キーボードで [Control / ⌘] + [N] を押しても新規作成ができます。
 
     単色のキャンバス
-        あらかじめ用意されている背景色のほか、レインボーパレットやカラーミキ
-        サーで色を選択することができます。これらは、絵を描くときにキャンバスの
-        下に表示されるカラーパレットにあるオプションと同じように操作します。詳
-        細はメインの画面 > 下部: カラーパレット「いろ」 > 色に関する特別なオプ
-        ションを参照。
+        Along with the preset solid colors, you can also choose colors using a
+        rainbow palette or a "color mixer". These operate identically to the
+        options found in the color palette shown below the canvas when drawing
+        a picture. See メインの画面 > 下部: カラーパレット「いろ」 > Special
+        color options for details.
 
     レイヤー画像
           o レイヤー画像には、塗り絵のページのようなもの（白黒の線で描かれ、色
@@ -1074,21 +1079,21 @@ Tux Paint の「ひらく」ダイアログでは、Tux Paint で作成した画
 換して、Tux Paint で作成した画像が保存されている "saved" フォルダにコピーしま
 す。（標準では以下のフォルダ）:
 
-Windows 10, 8, 7, Vista
-    各ユーザーの "AppData" フォルダ。例: "C:\Users\username\AppData\Roaming\
-    TuxPaint\saved\"。
-
-Windows 2000, XP
-    各ユーザーの "Application Data" フォルダ。例: "C:\Documents and Settings\
-    username\Application Data\TuxPaint\saved\"。
+Windows Vista, Windows 8, Windows 10, Windows 11
+    In the user's "AppData" folder:
+    e.g., "C:\Users\username\AppData\Roaming\TuxPaint\saved\"
 
 macOS
-    各ユーザーの "Library" フォルダ。例: "/Users/username/Library/Application
-    Support/Tux Paint/saved/"。
+    In the user's "Application Support" folder:
+    e.g., "/Users/username/Library/Application Support/TuxPaint/saved/"
 
-Linux/Unix
-    各ユーザーのホームディレクトリ("$HOME")の隠しディレクトリ ".tuxpaint" 以下
-    ― 例: "/home/username/.tuxpaint/saved/"。
+Linux / Unix
+    In the user's "home directory" folder:
+    e.g., "/home/username/.tuxpaint/saved/"
+
+Haiku
+    In the user's "settings" folder:
+    e.g., "/boot/home/config/settings/TuxPaint/saved/"
 
 
 💡 注: Tux Paint で作成した画像を他のアプリケーションを使って開く場合も、これら
@@ -1178,6 +1183,9 @@ Tux Paint の使用:
         Config を使用したくない人向け。
       + 「まほう」ツールに関するドキュメント ("magic-docs")
         インストールされている、それぞれの「まほう」ツールに関する説明。
+      + Frequently Asked Questions ("FAQs") about Tux Paint
+        Answers to, and solutions for, some common questions about, and
+        problems with, using Tux Paint.
 
 
 Tux Paint の拡張:

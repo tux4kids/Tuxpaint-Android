@@ -236,16 +236,12 @@ void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture,
             charset_works(font, /* digits (e.g., '0', '1' and '7') */ gettext("017")
             );
 
-          user_font_styles[num_font_styles]->score +=
-            charset_works(font, /* distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero)) */
-                          gettext("O0")
-            );
+          user_font_styles[num_font_styles]->score += charset_works(font,       /* distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero)) */
+                                                                    gettext("O0"));
 
-          user_font_styles[num_font_styles]->score +=
-            charset_works(font,
-                          /* distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye)) */
-                          gettext("1Il|")
-            );
+          user_font_styles[num_font_styles]->score += charset_works(font,
+                                                                    /* distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye)) */
+                                                                    gettext("1Il|"));
 
           // Translation spares
 

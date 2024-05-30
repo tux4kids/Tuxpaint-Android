@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            バージョン 0.9.32          </h1>
+            バージョン 0.9.33          </h1>
 
           <h3 align="center">
             子供向けのシンプルなお絵かきプログラム          </h3>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            2024年1月29日          </p>
+            2024年4月29日          </p>
         </center>
       </header>
       <table border="2"
@@ -224,42 +224,28 @@
   <section class="indent">
     <header>
       <h2>
-        D. Tux Paint バージョン 0.9.32 での変更点      </h2>
+        D. Tux Paint バージョン 0.9.33 での変更点      </h2>
     </header>
 
     <dl>
-  <dt>「まほう」ツール：１てんとうし</dt>
-  <dd>消失点を設定し、１点透視図法で線を引くことができる２つのツール。</dd>
+  <dt>Transparent Erasers</dt>
+  <dd>Erasers that lightly expose more and more of the background.</dd>
 
-  <dt>「まほう」ツール：２てんとうし</dt>
-  <dd>２つの消失点を設定し、２点透視図法で線を引くことができる２つのツール。</dd>
+  <dt>Dither magic tools</dt>
+  <dd>Transform parts of an image into a dithered pattern of dots.</dd>
 
-  <dt>「まほう」ツール：３てんとうし</dt>
-  <dd>３つの消失点を設定し、３点透視図法で線を引くことができる２つのツール。</dd>
 
-  <dt>「まほう」ツール：とうかく</dt>
-  <dd>等角投影図法で線をひくツール</dd>
+  <dt>Filled Polygon magic tool</dt>
+  <dd>Create polygons by placing three or more connected points on the canvas.</dd>
 
-  <dt>「まほう」ツール：２とうかく</dt>
-  <dd>角度を設定し、二等角投影図法で線を引くことができる２つのツール。</dd>
+  <dt>3D Glasses magic tool updated</dt>
+  <dd>Different anaglyphic color separations now offered (via the 'size' controls), unless running Tux Paint in 'Novice' complexity level.</dd>
 
-  <dt>「まほう」ツール：ふとうかく</dt>
-  <dd>角度を設定し、不等角投影図法で線を引くことができる２つのツール。</dd>
+  <dt>Magic tool ungrouping option</dt>
+  <dd>The numerous Magic tools can be presented as a single long list (as in Tux Paint prior to 0.9.27), rather than paged groups.</dd>
 
-  <dt>「まほう」ツール：しゃとうえい</dt>
-  <dd>角度を設定し、斜投影図法で線を引くことができる２つのツール。</dd>
-
-  <dt>「まほう」ツール：エピトロコイド・ハイポトロコイド</dt>
-  <dd>トロコイド曲線のパターンを描画するツール。</dd>
-
-  <dt>新たな設定項目 "難易度"（<code>complexity</code>）</dd>
-  <dd>ユーザーのレベルに応じて特定の「まほう」ツールの動作を変更したり使用できなくしたりする新しい設定項目。「透視図法」ツールと「クローン」ツールは、この設定の影響を受けます。</dd>
-
-  <dt>「まほう」ツールの再整理</dd>
-  <dd>カテゴリごとの「まほう」ツールの並び順が、関連するツールが互いに隣になるよう、再整理されました。</dd>
-
-  <dt>フォントの詳細表示</dt>
-  <dd>「もじ」ツールと「ラベル」ツールで、選択されたフォントのフォント名とサイズを表示するようになりました。</dd>
+  <dt>Brush descriptions</dt>
+  <dd>Brushes (used by Paint and Line tools) can now include descriptions that appear when the brush is selected.</dd>
 </dl>
 
     <p>
@@ -333,7 +319,7 @@
       ポータブル版（ZIPファイル版）をダウンロードして Tux Paint をインストールした場合や、インストーラーでショートカットを作成しなかった場合は、"<code>Tux Paint</code>"のフォルダにある "<code>tuxpaint.exe</code>" のアイコンをダブルクリックします。    </p>
 
     <p>
-      インストーラーを用いた場合、「Tux Paint」のフォルダは、通常、"C:\Program Files\" に配置されます。（インストール時に、これを変更することもできます）    </p>
+      By default, the 'Tux Paint Installer' will put Tux Paint's folder in <nobr>"<code style='background: #EEE;'>C:\Program Files\TuxPaint\</code>"</nobr>, though you may have changed this when you ran the installer.    </p>
 
     <p>
       ZIP ファイルを用いた場合、「Tux Paint」のフォルダは、任意の場所に配置できます。    </p>
@@ -951,6 +937,12 @@
   <p>
     「まほう」ツールは、様々な特殊なツールを集めたものです。右側のセレクタで、「まほう」の効果を選択することができます。効果を適用する方法は、クリック＋ドラッグ、単なるクリックなど、ツールごとに様々です。  </p>
 
+  <strong>The Magic Tools</strong>
+  <blockquote>
+    <p>
+      「magic-docs」フォルダ内のドキュメント<a href="../magic-docs/html/index.html">「まほう」ツールの一覧</a>もお読みください。    </p>
+  </blockquote>
+
   <strong>「まほう」効果の制御</strong>
   <blockquote>
     <p>
@@ -988,8 +980,8 @@
       <span title="Version variation">&#128220;</span>      このオプションは、バージョン 0.9.30 以降で追加されました。    </p>
   </blockquote>
 
-  <p>
-    「magic-docs」フォルダ内のドキュメント<a href="../magic-docs/html/index.html">「まほう」ツールの一覧</a>もお読みください。  </p>
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>Note</strong>: If the "<code>ungroupmagictools</code>" option is set, Tux Paint won't split Magic tools into groups of related tools, and instead present them all as one large list. See the "<a href="OPTIONS.html"><em>Options</em></a>" documentation.  </p>
 </dd>
             <dt id="using_tools_drawing_eraser">
   <strong>h.けしゴム</strong>
@@ -1002,13 +994,28 @@
       alt=""
       align="right">
   <p>
-    このツールは「ふで」ツールに似ています。クリック（または、クリック＋ドラッグ）をした部分が消されます。（消した部分は、白あるいはその他の色、また、レイヤーキャンバスなど、絵によって異なる状態に戻ります。）  </p>
+    This tool works similarly to the Paint Brush. Wherever you click (or click and drag), things you've added to your drawing will be erased, exposing the background that you chose when you started the drawing, be it a solid color, the background of a 'Starter' image, or a 'Template' image. (See <a href="#using_tools_other_new">各種のツール &gt; そのほかの操作 &gt; 「さいしょから」</a>.)  </p>
 
   <p>
-    いくつもの大きさの正方形と円形の消しゴムがあります。端がぼやけた円形の消しゴムも用意されています。  </p>
+    <img src="../../html/images/tool_eraser_erasers.png"
+        width="411"
+        height="192"
+        alt=""
+        align="right" />
+    A number of eraser types are available, each offering multiple sizes are available:    <ul>
+      <li>
+        Square &mdash; Square-shaped erasers that completely remove parts of your drawing.      </li>
+      <li>
+        Circle (solid) &mdash; Circle-shaped erasers that completely remove parts of your drawing.      </li>
+      <li>
+        Fuzzy-edged Circle &mdash; Circle-shaped erasers with soft edges that blend with the background.      </li>
+      <li>
+        Transparent Circle &mdash; Circle-shaped erasers that blend your drawing with the background. Release and click again to expose more and more of the background.      </li>
+    </ul>
+  </p>
 
   <p>
-    正方形の輪郭がマウスカーソルの位置に表示され、絵のどの部分が消されるかを示します。  </p>
+    As you move the mouse around, an outline follows the pointer, showing what part of the picture will be erased.  </p>
 
   <p>
     消している間、「キュッキュッ」と擦って消す効果音が流れます。  </p>
@@ -1073,13 +1080,15 @@
   <p>
     「さいしょから」のボタンを押すと、新規に絵を描き始めることができます。ダイアログ画面が表示され、キャンバスの背景色やレイヤー画像（後述）を選べます。  </p>
 
+  <p>
+    When you use the 'Eraser' tool things you've added to your drawing will be removed, exposing the background you chose when starting a new drawing. (See <a href="#using_tools_drawing_eraser">各種のツール &gt; 描画ツール &gt; けしゴム</a>.)
   <p class="note">
     <span title="Keyboard shortcut">&#9000;</span>    <strong>注:</strong> キーボードで <b><code>[Control / &#8984;]</code></b> + <code><b>[N]</b></code> を押しても新規作成ができます。  </p>
 
   <dl>
     <dt><strong>単色のキャンバス</strong></dt>
     <dd>
-      あらかじめ用意されている背景色のほか、レインボーパレットやカラーミキサーで色を選択することができます。これらは、絵を描くときにキャンバスの下に表示されるカラーパレットにあるオプションと同じように操作します。詳細は <a href="#special_color_options">メインの画面 &gt; 下部: カラーパレット「いろ」 &gt; 色に関する特別なオプション</a> を参照。    </dd>
+      Along with the preset solid colors, you can also choose colors using a rainbow palette or a "color mixer". These operate identically to the options found in the color palette shown below the canvas when drawing a picture. See <a href="#special_color_options">メインの画面 &gt; 下部: カラーパレット「いろ」 &gt; Special color options</a> for details.    </dd>
 
     <dt><strong>レイヤー画像</strong></dt>
     <dd>
@@ -1661,36 +1670,36 @@
   
     <p>
       そのための方法は簡単で、画像ファイルを PNG (Portable Network Graphic) 形式に変換して、Tux Paint で作成した画像が保存されている "<code>saved</code>" フォルダにコピーします。（標準では以下のフォルダ）:    </p>
-  
+
     <dl>
-      <dt>
-        <strong>Windows 10, 8, 7, Vista</strong>
-      </dt>
-  
-      <dd>
-        各ユーザーの "<code>AppData</code>" フォルダ。例: "<code>C:\Users\<em>username</em>\AppData\Roaming\TuxPaint\saved\</code>"。      </dd>
-  
-      <dt>
-        <strong>Windows 2000, XP</strong>
-      </dt>
-  
-      <dd>
-        各ユーザーの "<code>Application Data</code>" フォルダ。例: "<code>C:\Documents and Settings\<em>username</em>\Application Data\TuxPaint\saved\</code>"。      </dd>
-  
-      <dt>
-        <strong>macOS</strong>
-      </dt>
-  
-      <dd>
-        各ユーザーの "<code>Library</code>" フォルダ。例: "<code>/Users/<em>username</em>/Library/Application Support/Tux Paint/saved/</code>"。      </dd>
-  
-      <dt>
-        <strong>Linux/Unix</strong>
-      </dt>
-  
-      <dd>
-        各ユーザーのホームディレクトリ("<code>$HOME</code>")の隠しディレクトリ "<code>.tuxpaint</code>" 以下 ― 例: "<code>/home/<em>username</em>/.tuxpaint/saved/</code>"。      </dd>
-    </dl>
+  <dt>
+    <cite>Windows Vista, Windows 8, Windows 10, Windows 11</cite>
+  </dt>
+
+  <dd>
+    In the user's "AppData" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\saved\</code>"</nobr>  </dd>
+
+  <dt>
+    <cite>macOS</cite>
+  </dt>
+
+  <dd>
+    In the user's "Application Support" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/saved/</code>"</nobr>  </dd>
+
+  <dt>
+    <cite>Linux / Unix</cite>
+  </dt>
+
+  <dd>
+    In the user's "home directory" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaint/saved/</code>"</nobr>  </dd>
+
+  <dt>
+    <cite>Haiku</cite>
+  </dt>
+
+  <dd>
+    In the user's "settings" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/saved/</code>"</nobr>  </dd>
+</dl>
   
     <p class="note">
       <span title="Information">&#128161;</span>      <strong>注:</strong> Tux Paint で作成した画像を<em>他のアプリケーションを使って</em>開く場合も、これらのフォルダからになります。しかしながら、「ひらく」ダイアログの「かきだす」の機能を使えば、Tux Paint で作成した画像を、もっと簡単で安全にアクセスできるフォルダにコピーすることができます。    </p>
@@ -1810,6 +1819,10 @@
           <li>
             <a href="../magic-docs/html/index.html">「まほう」ツールに関するドキュメント ("<code>magic-docs</code>")</a><br>
             インストールされている、それぞれの「まほう」ツールに関する説明。          </li>
+
+          <li>
+            <a href="FAQ.html">Frequently Asked Questions ("FAQs") about Tux Paint</a><br>
+            Answers to, and solutions for, some common questions about, and problems with, using Tux Paint.          </li>
         </ul>
       </dd>
 

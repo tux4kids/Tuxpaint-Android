@@ -92,7 +92,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.32          </h1>
+            version 0.9.33          </h1>
     
           <p>
             Copyright &copy; 2002-2024 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
@@ -100,7 +100,7 @@
           </p>
     
           <p>
-            janvier 26, 2024          </p>
+            avril 29, 2024          </p>
         </center>
       </header>
 
@@ -121,7 +121,7 @@
                   <li><a href="#standard_files">Fichiers standards</a></li>                  <li><a href="#personal_files">Fichiers personnels</a></li>                </ul>
               </li>
               <li><a href="#brushes">Pinceaux</a>                <ul>
-                  <li><a href="#brush_options">Options de pinceau</a></li>                </ul>
+                  <li><a href="#brush_description_text">Brush Descriptive Text</a></li>                  <li><a href="#brush_options">Options de pinceau</a></li>                </ul>
               </li>
               <li><a href="#stamps">Tampons</a>                <ul>
                   <li><a href="#stamps_images">Images des tampons</a></li>                  <li><a href="#description_text">Texte de description des tampons</a></li>                  <li><a href="#sound_effects">Effets sonores des tampons</a></li>                  <li><a href="#descriptive_sound">Son descriptif du tampon</a></li>                  <li><a href="#stamp_options">Options des tampons</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Mise en miroir et retournement</a></li>                </ul>
@@ -172,13 +172,11 @@
               L'emplacement de ce répertoire dépend de la valeur définie pour "<code>DATA_PREFIX</code>" lors de la construction de Tux Paint . Voir INSTALL. pour plus de détails.            </p>
             <p>
               Par défaut, ce répertoire est :              <blockquote>
-                <code>/usr/local/share/tuxpaint/</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>/usr/local/share/tuxpaint/</code></nobr>              </blockquote>
             </p>
             <p>
               Si vous l'avez installé à partir d'un paquetage, c'est plutôt :              <blockquote>
-                <code>/usr/share/tuxpaint/</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>/usr/share/tuxpaint/</code></nobr>              </blockquote>
             </p>
           </dd>
 
@@ -186,8 +184,7 @@
           <dd>
             <p>
               Tux Paint recherche un répertoire appelé 'data' dans le même répertoire que l'exécutable. C'est le répertoire que l'installateur a utilisé lors de l'installation de Tux Paint, par exemple :              <blockquote>
-                <code style="white-space: nowrap;">C:\Program Files\TuxPaint\data</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>C:\Program Files\TuxPaint\data</code></nobr>              </blockquote>
             </p>
           </dd>
 
@@ -208,9 +205,8 @@
             <p class="note">
               <span title="Information">&#128161;</span>              <em>Remarque :</em> Si vous installez une version plus récente de Tux Paint et remplacez ou supprimez l'ancienne version, vous perdrez les modifications apportées avec les instructions ci-dessus, faites donc des sauvegardes de votre nouveau contenu (tampons,pinceaux, etc.).            </p>
             <p>
-              Tux Paint recherche également les fichiers dans un dossier "Tux Paint" que vous pouvez placer dans votre dossier système "Application Support" (situé sous "Library" à la racine de votre système de fichiers) :              <blockquote>
-                <code style="white-space: nowrap;">/Library/Application Support/TuxPaint/</code>
-              </blockquote>
+              Tux Paint also looks for files in a "TuxPaint" folder that you can place in your system's <nobr>"<code style='background: #EEE;'>Application Support</code>"</nobr> folder (found under <nobr>"<code style='background: #EEE;'>Library</code>"</nobr> at the root of your filesystem):              <blockquote>
+                <nobr><code style='background: #EEE;'>/Library/Application Support/TuxPaint/data/</code></nobr>              </blockquote>
             </p>
             <p>
               Lorsque vous passez à une version plus récente de Tux Paint , le contenu de ce dossier "TuxPaint" restera à la même place et restera accessible à tous les utilisateurs de Tux Paint .            </p>
@@ -235,26 +231,22 @@
             <p>
               Votre dossier personnel Tux Paint est stocké dans votre dossier "Application Data". Par exemple, sur un Windows plus récent :
               <blockquote>
-                <code style="white-space: nowrap;">C:\Documents and Settings\<i>(nom d'utilisateur)</i>\Application Data\TuxPaint\</code>
-              </blockquote>
+                <nobr><code style='background: #EEE;'>C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\</code></nobr>              </blockquote>
             </p>
           </dd>
 
           <dt><strong>macOS</strong></dt>
           <dd>
             <p>
-              Votre dossier personnel Tux Paint est stocké dans votre dossier «Application Support» :              <blockquote>
-                <code style= "white-space: nowrap;">/Users/<i>(nom d'utilisateur)</i>/Library/Application Support/TuxPaint/</code>
-              </blockquote>
+              Your personal Tux Paint folder is stored in your personal <nobr>"<code style='background: #EEE;'>Application Support</code>"</nobr> folder:              <blockquote>
+                <nobr><code style='background: #EEE;'>/Users/<i>nom d'utilisateur</i>/Library/Application Support/TuxPaint/</code></nobr>              </blockquote>
             </p>
           </dd>
 
           <dt><strong>Linux et Unix</strong></dt>
           <dd>
             <p>
-              Vos fichiers personnels Tux Paint vont dans un 'répertoire caché' que l'on trouve dans votre répertoire personnel "<code>$(HOME)/.tuxpaint/</code>" (également appelé "<code>~/.tuxpaint/</code>".            </p>
-            <p>
-              Autrement dit, si votre répertoire personnel est "<code>/home/tux</code>", alors votre répertoire Tux Paint est "<code>/home/tux/.tuxpaint/</code>".            </p>
+              Your personal Tux Paint files go into a 'hidden directory' found in your account's home directory: <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaint/</code>"</nobr>.            </p>
             <p>
               N'oubliez pas le point (" <code>.</code>") avant le "<code>tuxpaint</code>" !            </p>
           </dd>
@@ -264,7 +256,7 @@
           Pour ajouter des pinceaux, des tampons, des 'images de démarrage',des modèles et des polices créez des sous-répertoires dans votre répertoire personnel Tux Paint nommés respectivement "<code><b>brushes</b></code>", "<code><b>stamps</b></code>", "<code><b>starters</b></code>", "<code><b>templates</b></code>", "<code><b>fonts</b></code>".        </p>
 
         <p>
-          (Par exemple, si vous avez créé un pinceau nommé "<code>flower.png</code>", vous le mettrez dans "<code>~/.tuxpaint/brushes/</code>" sous Linux ou Unix.)        </p>
+          (For example, if you created a brush named <nobr>"<code style='background: #EEE;'>flower.png</code>"</nobr>, you would put it in <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaint/brushes/</code>"</nobr> under Linux or Unix.)        </p>
       </section><!-- H2: Personal Files -->
     </section><!-- H1: Where Files Go -->
 
@@ -277,7 +269,7 @@
       </header>
 
       <p>
-        Les pinceaux utilisés pour dessiner avec les outils "Pinceau" et "Lignes" dans Tux Paint sont tout simplement des fichiers image PNG.      </p>
+        The brushes used for drawing with the 'Paint' and 'Lines' tools in Tux Paint are simply PNG image files.      </p>
       <img src="../../html/images/brush_edit.png"
                   width="123"
                   height="147"
@@ -288,6 +280,41 @@
 
       <p>
         Les pixels en niveaux de gris dans le pinceau PNG seront dessinés en utilisant la couleur actuellement sélectionnée dans Tux Paint . Les pixels de couleur seront teintés.      </p>
+
+      <section><!-- H2: Brush Descriptive Text -->
+        <header>
+          <h2>
+            <a name="brush_bescription_text"
+                id="brush_description_text">Brush Descriptive Text</a>
+          </h2>
+        </header>
+
+        <p>
+          Tux Paint will display descriptive text when a brush is selected. These are placed in plain text files with the same name as the PNG, but with a "<code>.txt</code>" filename extension. (e.g., "<code>brush.png</code>"'s description is stored in "<code>brush.txt</code>" in the same directory.)        </p>
+
+        <p>
+          The first line of the text file will be used as the US English description of the brush's image. It must be encoded in UTF-8.        </p>
+
+        <dl>
+          <dt><strong>Support pour la régionalisation</strong></dt>
+          <dd>
+            <p>
+              Des lignes supplémentaires peuvent être ajoutées au fichier texte pour fournir des traductions de la description, à afficher lorsque Tux Paint s'exécute dans une langue différente (comme le français ou l'espagnol).            </p>
+            <p>
+              Le début de la ligne doit correspondre au code de langue de la langue en question (par exemple, "<code>fr</code>" pour le français et "<code>zh_TW</code>" pour le chinois traditionnel), suivi de "<code>.utf8=</code>" et de la description traduite (codée en UTF-8).            </p>
+            <p>
+              <b>Pour les développeurs de Tux Paint :</b> Il y a des scripts dans le répertoire "<code>brushes-po</code>" pour convertir les fichiers texte au format PO (et inversement) pour une traduction facile vers différentes langues. Par conséquent, vous ne devez jamais ajouter ni modifier directement les traductions dans les fichiers "<code>.txt</code>".            </p>
+            <p>
+              Si aucune traduction n'est disponible pour la langue dans laquelle Tux Paint est en cours d'exécution, le texte anglais américain sera utilisé.            </p>
+          </dd>
+
+          <dt><strong>Utilisateurs de Windows</strong></dt>
+          <dd>
+            <p>
+              Utilisez <cite>NotePad</cite> ou <cite>WordPad</cite> pour modifier / créer ces fichiers. Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont une extension "<code>.txt</code>" à la fin du nom de fichier.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Descriptive Text -->
 
       <section><!-- H2: Brush Options -->
         <header>
@@ -604,7 +631,7 @@
           <dt><strong>Utilisateurs de Windows</strong></dt>
           <dd>
             <p>
-              Utilisez <cite>NotePad</cite> ou <cite>WordPad</cite> pour modifier / créer ces fichiers. Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont une extension "<code>.txt</code>" à la fin du nom de fichier.            </p>
+              Utilisez <cite>NotePad</cite> ou <cite>WordPad</cite> pour modifier / créer ces fichiers. Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont une extension "<code>.dat</code>" à la fin du nom de fichier.            </p>
           </dd>
         </dl>
       </section><!-- H2: Stamp Options -->
@@ -651,7 +678,7 @@
         Les fontes utilisées par Tux Paint sont des fontes True Type Fonts (TTF).      </p>
 
       <p>
-        Placez-les simplement dans répertoire "<code><b>fonts</b></code>". Tux Paint chargera la police et fournira quatre tailles différentes dans le sélecteur «Lettres» lors de l'utilisation des outils "Texte" ou "Étiquette".      </p>
+        Simply place them in the "<code><b>fonts</b></code>" directory. When using the 'Text' and 'Label' tools, Tux Paint will present the font in the 'Letters' selector at the right, along with options to enable bold and/or italics, and change the size.      </p>
     </section><!-- H1: Fonts -->
 
     <section class="indent outer"><!-- H1: Starters -->
