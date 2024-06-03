@@ -96,7 +96,7 @@
       </p>
 
       <p>
-        May 14, 2024      </p>
+        June  2, 2024      </p>
     </center>
 
     <table border="2"
@@ -235,10 +235,10 @@
         Get used to doing <b>[Control]</b>-click and <b>[Alt]</b>-click on the thumbnail images in the layers dialog. You will need this to control what you are looking at and what you are editing. Sometimes you will be editing things you can't see. For example, you might edit the mask of the WIP layer while looking at the unmodified image. Pay attention so you don't screw up. Always verify that you are editing the right thing.      </p>
 
       <p>
-        Set an unmodified image as what you will view (the top one is easiest). Set the WIP mask as what you will edit. At some point, perhaps not immediately, you should magnify the image to about 400% (each pixel of the image is seen and edited as a 4x4 block of pixels on your screen).      </p>
+                Set an unmodified image as what you will view (the top one is easiest). Set the WIP mask as what you will edit. At some point, perhaps not immediately, you should magnify the image to about 400% (each pixel of the image is seen and edited as a 4x4 block of pixels on your screen).      </p>
 
       <p>
-        Select parts of the image that need to be 100% opaque or 0% opaque. If you can select the object or background somewhat accurately by color, do so. As needed to avoid selecting any pixels that should be partially opaque (generally at the edge of the object) you should grow, shrink, and invert the selection.      </p>
+                Select parts of the image that need to be 100% opaque or 0% opaque. If you can select the object or background somewhat accurately by color, do so. As needed to avoid selecting any pixels that should be partially opaque (generally at the edge of the object) you should grow, shrink, and invert the selection.      </p>
 
       <p>
                 Fill the 100% opaque areas with white, and the 0% opaque areas with black. This is most easily done by drag-and-drop from the foreground/background color indicator. You should not see anything happen, because you are viewing the unmodified image layer while editing the mask of the WIP layer. Large changes might be noticable in the thumbnail.      </p>
@@ -256,7 +256,7 @@
         With a steady hand, trace around the image. Use black around the outside, and white around the inside. Avoid making more than one pass without switching colors (and thus sides).      </p>
 
       <p>
-        Flip views a bit, checking to see that the mask is working well. When the WIP layer is composited over the green or magenta, you should see a tiny bit of the original background as an ugly fringe around the edge. If this fringe is missing, then you made the object mask too small. The fringe consists of pixels that are neither 100% object nor 0% object. For them, the mask should be neither 100% nor 0%. The fringe gets removed soon.      </p>
+                Flip views a bit, checking to see that the mask is working well. When the WIP layer is composited over the green or magenta, you should see a tiny bit of the original background as an ugly fringe around the edge. If this fringe is missing, then you made the object mask too small. The fringe consists of pixels that are neither 100% object nor 0% object. For them, the mask should be neither 100% nor 0%. The fringe gets removed soon.      </p>
 
       <p>
         View and edit the mask. Select by color, choosing either black or white. Most likely you will see unselected specks that are not quite the expected color. Invert the selection, then paint these away using the pencil tool. Do this operation for both white and black.      </p>
@@ -295,10 +295,10 @@
         To reduce accidents, you may wish to select only those pixels that are not grey in the mask. (Select by color from the mask, choose black, add mode, choose white, invert. Alternately: Select all, select by color from the mask, subtract mode, choose black, choose white.) If you do this, you'll probably want to expand the selection a bit and/or hide the "crawling ants" line that marks the selection.      </p>
 
       <p>
-        Use the clone tool and the brush tool. Vary the opacity as needed. Use small round brushes mostly, perhaps 3x3 or 5x5, fuzzy or not. (It is generally nice to pair up fuzzy brushes with 100% opacity and non-fuzzy brushes with about 70% opacity.) Unusual drawing modes can be helpful with semi-transparent objects.      </p>
+                Use the clone tool and the brush tool. Vary the opacity as needed. Use small round brushes mostly, perhaps 3x3 or 5x5, fuzzy or not. (It is generally nice to pair up fuzzy brushes with 100% opacity and non-fuzzy brushes with about 70% opacity.) Unusual drawing modes can be helpful with semi-transparent objects.      </p>
 
       <p>
-        The goal is to remove the edge fringe, both inside and outside of the object. The inside fringe, visible when the object is composited over magenta or green, must be removed for obvious reasons. The outside fringe must also be removed because it will become visible when the image is scaled down. As an example, consider a 2x2 region of pixels at the edge of a sharp-edged object. The left half is black and 0% opaque. The right half is white and 100% opaque. That is, we have a white object on a black background. When Tux Paint scales this to 50% (a 1x1 pixel area), the result will be a grey 50% opaque pixel. The correct result would be a white 50% opaque pixel. To get this result, we would paint away the black pixels. They matter, despite being 0% opaque.      </p>
+                The goal is to remove the edge fringe, both inside and outside of the object. The inside fringe, visible when the object is composited over magenta or green, must be removed for obvious reasons. The outside fringe must also be removed because it will become visible when the image is scaled down. As an example, consider a 2x2 region of pixels at the edge of a sharp-edged object. The left half is black and 0% opaque. The right half is white and 100% opaque. That is, we have a white object on a black background. When Tux Paint scales this to 50% (a 1x1 pixel area), the result will be a grey 50% opaque pixel. The correct result would be a white 50% opaque pixel. To get this result, we would paint away the black pixels. They matter, despite being 0% opaque.      </p>
 
       <p>
         Tux Paint can scale images down by a very large factor, so it is important to extend the edge of your object outward by a great deal. Right at the edge of your object, you should be very accurate about this. As you go outward away from the object, you can get a bit sloppy. It is reasonable to paint outward by a dozen pixels or more. The farther you go, the more Tux Paint can scale down without creating ugly color fringes. For areas that are more than a few pixels away from the object edge, you should use the pencil tool (or sloppy select with drag-and-drop color) to ensure that the result will compress well.      </p>

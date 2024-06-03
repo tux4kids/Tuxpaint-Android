@@ -224,7 +224,7 @@ Where does Tux Paint save my drawings?
     "savedir" option), Tux Paint saves into a standard location on your local
     drive:
 
-    Windows Vista, Windows 8, Windows 10, Windows 11
+    Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
         In the user's "AppData" folder:
         e.g., "C:\Users\username\AppData\Roaming\TuxPaint\saved\"
 
@@ -446,18 +446,19 @@ Tux Paint keeps running in Full Screen mode - I want it windowed!
     The "fullscreen" option is set.
 
     If you're running Tux Paint from a command-line, make sure you're not
-    giving it a "--fullscreen" option.
+    giving it a "--fullscreen=..." option.
 
     If you're running Tux Paint by double-clicking an icon, check the
-    properties of the icon to see if "--fullscreen" is listed as a command-line
-    argument.
+    properties of the icon to see if "--fullscreen=yes" or "--fullscreen=
+    native" is listed as a command-line argument.
 
-    If a "--fullscreen" option isn't being sent on the command line, check Tux
-    Paint's configuration file for a line reading: "fullscreen=yes".
+    If "--fullscreen=yes" or "--fullscreen=native" options aren't being sent on
+    the command line, check Tux Paint's configuration file for a line reading:
+    "fullscreen=yes" or "fullscreen=native".
 
     Either remove that line, or simply run Tux Paint with the command-line
-    argument: "--windowed", which will override the configuration file's
-    setting.
+    argument: "--windowed" or "--fullscreen=no", which will override the
+    configuration file's setting.
 
     Or use Tux Paint Config. and make sure "Fullscreen" (under "Video & Sound")
     is not checked.

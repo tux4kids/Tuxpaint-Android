@@ -48,7 +48,7 @@ Tux Paint の動作をカスタマイズするには、グラフィカルな操�
 
 Linux 及び Unix のユーザー
 
-/home/username/.tuxpaintrc
+/home/ユーザー名/.tuxpaintrc
 
 システム全体の設定ファイル
 
@@ -60,7 +60,7 @@ Linux 及び Unix のユーザー
 
 macOS のユーザー
 
-/Users/username/Library/Application Support/TuxPaint/tuxpaint.cfg
+/Users/ユーザー名/Library/Application Support/TuxPaint/tuxpaint.cfg
 
 システム全体の設定ファイル
 
@@ -72,7 +72,7 @@ macOS のユーザー
 
 Windows のユーザー
 
-C:\Users\username\AppData\Roaming\TuxPaint\tuxpaint.cfg
+C:\Users\ユーザー名\AppData\Roaming\TuxPaint\tuxpaint.cfg
 
 設定ファイルはメモ帳やワードパッドで作成できますが、必ずテキストファイルとして
 保存するよう注意して下さい。また、ファイル名に ".txt" という拡張子をつけないよ
@@ -86,7 +86,7 @@ C:\Users\username\AppData\Roaming\TuxPaint\tuxpaint.cfg
 
 C:\Program Files\TuxPaint\tuxpaint.cfg
 
-Haiku Users
+Haiku のユーザー
 
 /boot/home/config/settings/TuxPaint/tuxpaint.conf
 
@@ -166,10 +166,10 @@ native=yes
 
 allowscreensaver=yes
 
-    By default, Tux Paint prevents your system's screensaver from starting up.
-    You can override this by using the "allowscreensaver" option. (You can also
-    do this by setting the "SDL_VIDEO_ALLOW_SCREENSAVER" environment variable
-    on your system to "1".)
+    標準では、Tux Paint の起動中はスクリーンセーバーが起動しない設定になってい
+    ますが、"allowscreensaver" オプションを指定すると、スクリーンセーバーが有効
+    になります。（環境変数 "SDL_VIDEO_ALLOW_SCREENSAVER" の値を "1" に設定して
+    も、同様のことができます）
 
     ⚙ 注: システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファ
     イルで "allowscreensaver=no" または "disablescreensaver=yes" を設定すると上
@@ -487,13 +487,13 @@ nomagicsizes=yes
 
 ungroupmagictools=yes
 
-    By default, the Magic tools in Tux Paint are organized into groups of
-    similar tools (e.g., all of the color, saturation, darken/lighten tools
-    together). This option removes the grouping, and places all of the tools in
-    one long list.
+    デフォルトでは、タックスペイントの「まほう」ツールは、似たようなツールのグ
+    ループにまとめられています（例えば、色、彩度、暗転/明転ツールはすべて一まと
+    まりです）。このオプションはグループ化を解除し、すべてのツールを1つの長いリ
+    ストにまとめます。
 
-    📜 Note: Magic tool groups were added in Tux Paint 0.9.27. The option to
-    disable grouping was added to Tux Paint in version 0.9.33.
+    📜 注: 「まほう」ツールのグループ化は、バージョン 0.9.27 で導入され、バー
+    ジョン 0.9.33 で、これを無効にするオプションが追加されました。
 
     ⚙ 注: システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファ
     イルで "ungroupmagictools=no" または "groupmagictools=yes" を設定すると上書
@@ -1128,14 +1128,14 @@ altprint=mod
         特に設定していなければ、標準のディレクトリは次の場所にあります:
 
         Linux / Unix
-            Under a hidden directory in your home directory:
-            /home/username/.tuxpaint/saved/
+            各ユーザーのホームディレクトリ以下の隠しディレクトリ:
+            /home/ユーザー名/.tuxpaint/saved/
 
         Windows
-            C:\Users\username\AppData\Roaming\TuxPaint\saved\
+            C:\Users\ユーザー名\AppData\Roaming\TuxPaint\saved\
 
         macOS
-            /Users/username/Library/Application Support/TuxPaint/saved/
+            /Users/ユーザー名/Library/Application Support/TuxPaint/saved/
 
         Haiku
             /boot/home/config/settings/TuxPaint/saved/
@@ -1165,31 +1165,30 @@ altprint=mod
           o Linux および Unix — XDG (X Desktop Group) 標準に基づく設定が利用可
             能な場合、個々のデスクトップ環境において画像保存用として設定されて
             いるディレクトリ（"xdg-user-dir PICTURES" コマンドで確認できます）
-            Typically (in an English locale), this will be a "Pictures"
-            subdirectory in your home directory (i.e., 
-            "/home/username/Pictures").
-            Tux Paint will fall back to using that typical directory, if no XDG
-            configuration can be read, or nothing is set for
-            "XDG_PICTURES_DIR".
-          o Windows - "My Pictures" directory for each user (normaly 
-            "C:\Users\username\My Pictures")
-            You can directly open the folder as follows:
+            英語環境では一般的にユーザーのホームディレクトリ以下の "Pictures" 
+            ディレクトリ（"/home/ユーザー名/Pictures"）になります。（日本語環境
+            では "画像"）
+            XDGの設定が読み取れない場合や、"XDG_PICTURES_DIR "に何も設定されて
+            いない場合は、上記の一般的なディレクトリを使用します。
+          o Windows — 各ユーザーの ""My Pictures"" ディレクトリ（通常は 
+            "C:\Users\ユーザー名\My Pictures"）。
+            また、次のようにして、フォルダを直接開くこともできます:
               # "[Windows]+[R]" キーを押して "ファイル名を指定して実行" ダイア
                 ログを開く。
-              # Enter "Shell:My Pictures" in the text box and push [OK].
+              # テキストボックスに "Shell:My Pictures" と入力して [OK] を押す。
           o macOS — TBD!
 
-        💡 Note: When the defaults are used, a new "TuxPaint" subdirectory will
-        be created and used. (e.g., "/home/username/Pictures/TuxPaint") When
-        the "--exportdir" option is used, the exact path specified will be used
-        (no "TuxPaint" subdirectory is created).
+        💡 注: 標準では、サブディレクトリ "TuxPaint" が作成されます。（例: "
+        "/home/ユーザー名/Pictures/TuxPaint""）一方、"--exportdir" オプションを
+        用いると、指定されたパスがそのまま使用されます（サブディレクトリ
+        "TuxPaint" は作成されません）。
 
-        The directory itself (e.g., "/home/username/Pictures/TuxPaint") will be
-        created, if it doesn't exist.
+        ディレクトリ（例: "/home/ユーザー名/Pictures/TuxPaint"）が存在しない場
+        合は新たに作成されます。
 
-        If the parent directory (e.g., "/home/username/Pictures") also does not
-        exist, Tux Paint will attempt to create it as well (but not any
-        directories higher than that).
+        一つ上の親ディレクトリ（例: "/home/ユーザー名/Pictures"）が存在しない場
+        合もディレクトリの作成を試みますが、それ以上の階層のディレクトリを作成
+        することはありません。
 
         例: exportdir=/home/penguin/TuxPaintExports
 
@@ -1275,13 +1274,13 @@ altprint=mod
         特に設定していなければ、標準のディレクトリは次の場所にあります:
 
         Linux / Unix
-            /home/username/.tuxpaint/
+            /home/ユーザー名/.tuxpaint/
 
         Windows
-            C:\Users\username\AppData\Roaming\TuxPaint\
+            C:\Users\ユーザー名\AppData\Roaming\TuxPaint\
 
         macoS
-            /Users/username/Library/Application Support/TuxPaint/
+            /Users/ユーザー名/Library/Application Support/TuxPaint/
 
 
         📜 注: バージョン 0.9.18 以前では、個人用データの検索先として "savedir"
@@ -1603,12 +1602,12 @@ altprint=mod
 
     システム全体の設定を上書きする
 
-    If any of the above options are set in a system-wide configuration file
-    (e.g. "/etc/tuxpaint/tuxpaint.conf" on Linux), you may override them in
-    your own personal configuration file (e.g. "/home/username/.tuxpaintrc")
+    上記のオプションがシステム全体の設定ファイル（例: Linuxの場合 
+    "/etc/tuxpaint/tuxpaint.conf"）で設定されている場合、個人用の設定ファイル
+    （例: "/home/ユーザー名/.tuxpaintrc"）で上書きすることができます。
 
-    For true/false options, like "noprint" and "grab", you can simply say they
-    equal 'no' in your personal configuration file:
+    "noprint" や "grab" のような、Yes か No のオプションの場合は、個人用設定
+    ファイルで 'no' と指定するだけで大丈夫です。
 
         noprint=no
         uppercase=no
@@ -1762,11 +1761,12 @@ altprint=mod
 
     --nosysconfig
 
-        This prevents the system-wide configuration file (e.g. 
-        "/etc/tuxpaint/tuxpaint.conf" on Linux), from being read.
+        これにより、システム全体の設定ファイル（例: Linuxでは 
+        "/etc/tuxpaint/tuxpaint.conf"）が読み込まれなくなります。
 
-        Only your own configuration file (e.g. "/home/username/.tuxpaintrc" on
-        Linux) — if it exists — will be used.
+        ユーザーごとの設定ファイル（例: Linux では 
+        "/home/ユーザー名/.tuxpaintrc"）が存在すれば、このファイルのみから設定
+        を読み込みます。
 
 
 
@@ -1779,9 +1779,9 @@ altprint=mod
     --version
         --verbose-version
 
-        Display the version number and date of the copy of Tux Paint you are
-        running. The "--verbose-version" also lists what compile-time options
-        were set. (See INSTALL and FAQ).
+        プログラムのバージョンとリリース日を表示します。"--verbose-version" オ
+        プションでは、コンパイル時のオプションも追加で表示します。（ドキュメン
+        ト "Tux Paint のインストール" および "よくある質問"もごらんください。）
 
 
 

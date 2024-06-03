@@ -6,7 +6,7 @@
         Copyright © 2002-2024 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                April 29, 2024
+                                 June 2, 2024
 
 +-------------------------------------------------+
 |                Table of Contents                |
@@ -120,6 +120,13 @@ Brush descriptions
     Brushes (used by Paint and Line tools) can now include descriptions that
     appear when the brush is selected.
 
+New brushes
+    New brushes for the Paint and Lines tools: Acrylic, Pencil, and Fluff
+    brushes.
+Exported filenames shown
+    When exporting a drawing (Open>Export) or a slideshow (Open>Slideshow>
+    Export GIF), the name of the file is displayed and also placed in the copy/
+    paste clipboard.
 
 See CHANGES.txt for the complete list of changes.
 
@@ -1157,7 +1164,7 @@ You can simply convert the picture to the format Tux Paint uses — PNG (Portabl
 Network Graphic) — and place it in Tux Paint's "saved" directory/folder. Here
 is where to find it (by default):
 
-Windows Vista, Windows 8, Windows 10, Windows 11
+Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
     In the user's "AppData" folder:
     e.g., "C:\Users\username\AppData\Roaming\TuxPaint\saved\"
 

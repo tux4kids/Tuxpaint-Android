@@ -236,7 +236,7 @@ Onde garda Tux Paint os meus debuxos?
     (usando a opción «savedir»), Tux Paint garda nun lugar estándar na súa
     unidade local:
 
-    Windows Vista, Windows 8, Windows 10, Windows 11
+    Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
         In the user's "AppData" folder:
         e.g., "C:\Users\nome de usuario\AppData\Roaming\TuxPaint\saved\"
 
@@ -466,18 +466,19 @@ Tux Paint segue a funcionar en modo de pantalla completa e quéroo na xanela.
     A opción «pantalla completa» está estabelecida.
 
     Se está a executar Tux Paint dende unha liña de ordes, asegúrese de que non
-    está a pasarlle a opción «--fullscreen».
+    está a pasarlle a opción «--fullscreen=...».
 
-    Se está a executar Tux Paint facendo dobre clic nunha icona, comprobe as
-    propiedades da icona para ver se «--fullscreen» aparece como un argumento
-    da liña de ordes.
+    If you're running Tux Paint by double-clicking an icon, check the
+    properties of the icon to see if "--fullscreen=yes" or "--fullscreen=
+    native" is listed as a command-line argument.
 
-    Se non se está a enviar a opción «--fullscreen» na liña de ordes, comprobe
-    o ficheiro de configuración de Tux Paint para ver se hai unha liña que
-    diga: «fullscreen=yes».
+    If "--fullscreen=yes" or "--fullscreen=native" options aren't being sent on
+    the command line, check Tux Paint's configuration file for a line reading:
+    "fullscreen=yes" or "fullscreen=native".
 
-    Retire esa liña ou simplemente execute Tux Paint co argumento da liña de
-    ordes «--windowed», que anulará o axuste do ficheiro de configuración.
+    Either remove that line, or simply run Tux Paint with the command-line
+    argument: "--windowed" or "--fullscreen=no", which will override the
+    configuration file's setting.
 
     Ou use Tux Paint Config. e asegúrese de «Pantalla completa» (baixo «Vídeo e
     son») non está marcado.

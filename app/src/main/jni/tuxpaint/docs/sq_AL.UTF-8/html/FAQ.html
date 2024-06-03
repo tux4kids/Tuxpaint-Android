@@ -359,7 +359,7 @@
 
         <dl>
   <dt>
-    <cite>Windows Vista, Windows 8, Windows 10, Windows 11</cite>
+    <cite>Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11</cite>
   </dt>
 
   <dd>
@@ -621,16 +621,16 @@
           Është aktivizuar mundësia “Sa krejt ekrani”.        </p>
 
         <p>
-          Nëse Tux Paint-in po e xhironi që nga rresht urdhrash, sigurohuni se nuk po i jepni një mundësi “<code>--fullscreen</code>”.        </p>
+          Nëse Tux Paint-in po e xhironi që nga rresht urdhrash, sigurohuni se nuk po i jepni një mundësi “<code>--fullscreen=...</code>”.        </p>
 
         <p>
-          Nëse Tux Paint-in po e xhironi duke dyklikuar mbi një ikonë, shihni vetitë e ikonës, për të parë se mos “<code>--fullscreen</code>” gjendet si një argument rreshti urdhrash.        </p>
+          If you're running Tux Paint by double-clicking an icon, check the properties of the icon to see if "<code>--fullscreen=yes</code>" or "<code>--fullscreen=native</code>" is listed as a command-line argument.        </p>
 
         <p>
-          Nëse te rresht urdhrash s’po jepet mundësi “<code>--fullscreen</code>”, shihni te kartela e formësimit të Tux Paint-it për një rresht ku lexohet: “<code>fullscreen=yes</code>”.        </p>
+          If "<code>--fullscreen=yes</code>" or "<code>--fullscreen=native</code>" options aren't being sent on the command line, check Tux Paint's configuration file for a line reading: "<code>fullscreen=yes</code>" or "<code>fullscreen=native</code>".        </p>
 
         <p>
-          Ose hiqeni atë rresht, ose thjesht xhirojeni Tux Paint-in me argumentin vijues për rresht urdhrash: “<code>--windowed</code>”, çka do të anashkalojë rregullimin përkatës te kartela e formësimit.        </p>
+          Either remove that line, or simply run Tux Paint with the command-line argument: "<code>--windowed</code>" or "<code>--fullscreen=no</code>", which will override the configuration file's setting.        </p>
 
         <p>
           Ose përdorni Tux Paint Config. dhe sigurohuni se “Sa krejt ekrani” (nën “Video &amp; Tingull”) s’ka shenjë.        </p>

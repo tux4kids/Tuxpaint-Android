@@ -5,7 +5,7 @@
         Copyright © 2006-2024 by Albert Cahalan ほか; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                 2024年5月14日
+                                 2024年6月 2日
 
 +----------------------------------+
 |               目次               |
@@ -134,11 +134,10 @@
     ください（画像の各ピクセルを画面上 4x4 ピクセルのブロックとして表示し、編集
     することができます）
 
-    Select parts of the image that need to be 100% opaque or 0% opaque. If you
-    can select the object or background somewhat accurately by color, do so. As
-    needed to avoid selecting any pixels that should be partially opaque
-    (generally at the edge of the object) you should grow, shrink, and invert
-    the selection.
+    完全に不透明、または完全に透明にする必要がある部分を選択します。色を指定す
+    ることで、オブジェクトや背景をある程度正確に選択できる場合は、そのようにし
+    ます。部分的に不透明にすべきピクセル（一般的にはオブジェクトの輪郭）を選択
+    しないように、必要に応じて選択範囲を拡大、縮小、反転させます。
 
     不透明な部分を白で、透明な部分を黒で塗りつぶします。この作業は、前景／背景
     色のインジケータからドラッグ＆ドロップするのが最も簡単です。作業用レイヤー
@@ -210,11 +209,11 @@
     択、白を選択」）この作業を行う際、選択範囲を少し広げて、選択領域を示す線を
     隠したくなるかもしれません。
 
-    Use the clone tool and the brush tool. Vary the opacity as needed. Use
-    small round brushes mostly, perhaps 3x3 or 5x5, fuzzy or not. (It is
-    generally nice to pair up fuzzy brushes with 100% opacity and non-fuzzy
-    brushes with about 70% opacity.) Unusual drawing modes can be helpful with
-    semi-transparent objects.
+    ここではクローンツールとブラシツールを使います。必要に応じて不透明度を変え
+    て下さい。3x3か5x5の小さな円形のブラシを主に使います。ぼかし筆かどうかは問
+    いません。（ぼかし筆は不透明度100&percent;、ぼかしではないブラシは不透明度
+    70&percnt;程度で組み合わせると良いでしょう）。あまり一般的ではない使い方で
+    すが、半透明のオブジェクトの場合には有効です。
 
     最終目標は、オブジェクトの内側と外側の両方の縁取りを除去することです。内側
     の縁取りは、マゼンタやグリーンの上にオブジェクトを合成したときに見えるもの

@@ -18,7 +18,7 @@ DO NOT EDIT ME!
 #ifndef TP_MAGIC_API_H
 #define TP_MAGIC_API_H
 
-/* src/tp_magic_api.h.in last modified 2023-12-29 */
+/* src/tp_magic_api.h.in last modified 2024-06-01 */
 
 #include "SDL.h"
 #include "SDL_mixer.h"
@@ -178,6 +178,11 @@ typedef struct magic_api_t {
      clicked; useful for not applying the same effect from 'last' to 'canvas'
      more than once per click-and-drag sequence */
   Uint8 (*touched)(int, int);
+
+  /* Retracts the last undo buffer record; useful if a Magic tool has
+     drawn something "temporary" (such as guides) onto the canvas during
+     a previous click event. */
+  void (*retract_undo)(void);
 } magic_api;
 
 
@@ -186,7 +191,7 @@ typedef struct magic_api_t {
    If Tux Paint deems you compatible, it will call your 'XYZ_init()' (etc.)
    and you will be active. */
 
-#define TP_MAGIC_API_VERSION 0x00000009
+#define TP_MAGIC_API_VERSION 0x0000000A
 
 #ifndef ATTRIBUTE_UNUSED
 #define ATTRIBUTE_UNUSED __attribute__ ((__unused__))

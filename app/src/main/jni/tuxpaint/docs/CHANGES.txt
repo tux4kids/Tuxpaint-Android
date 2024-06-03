@@ -6,7 +6,7 @@ Copyright (c) 2002-2024
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
-2024.May.28 (0.9.33)
+2024.June.2 (0.9.33)
   * New Magic Tools:
     ----------------
     * Dither & Dither (Keep Color): Replaces all or part of a drawing
@@ -42,6 +42,12 @@ https://tuxpaint.org/
       + Idea from O'Hare The Rabbit
       + Coding by Bill Kendrick <bill@newbreedsoftware.com>
 
+    * Ability for Magic tools to retract an undo buffer snapshot
+      (`api->retract_undo()`).
+      + Used by new Filled Polygon magic tool.
+      + Note: `TP_MAGIC_API_VERSION` bumped to 0x0000000A.
+      + Bill Kendrick <bill@newbreedsoftware.com>
+
   * Improvements to Eraser tool:
     ----------------------------
     * Transparent erasers
@@ -62,6 +68,9 @@ https://tuxpaint.org/
       Based on brushes included with GIMP <https://www.gimp.org/>
       Created for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>
 
+    * Fluff
+      Bill Kendrick <bill@newbreedsoftware.com>
+
   * Other Improvements:
     -------------------
     * Support for brush descriptions, including localization.
@@ -73,6 +82,21 @@ https://tuxpaint.org/
       (one big long list, rather than paginating; grouping was
       added in Tux Paint 0.9.27)
       Closes https://sourceforge.net/p/tuxpaint/feature-requests/229/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Button labels word-wrap on hyphens/dashes ("-"), and
+      can word-wrap (and add a hyphen) when soft-hyphens are used.
+      Closes https://sourceforge.net/p/tuxpaint/bugs/288/
+      (h/t Karl Ove Hufthammer for suggesting)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Name of exported picture is shown, and placed in clipboard
+      (copy/paste buffer) after exporting a drawing (via Open dialog)
+      or animated GIF (via Open->Slideshow).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Removed unnecessary (and now unhelpful) button label text
+      vertical position nudging (had only been used by Khmer locale).
       Bill Kendrick <bill@newbreedsoftware.com>
 
     * Make screen refresh more snappy on macOS.
@@ -93,6 +117,10 @@ https://tuxpaint.org/
     * Don't call rsvg_handle_close(); it's deprecated, and not necessary;
       (see https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/method.Handle.close.html;
       h/t https://github.com/xfce-mirror/xfce4-xkb-plugin/commit/825fa1c
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Removed unused `need_right_to_left_word` internal flags and `textdir()`.
+      Closes https://sourceforge.net/p/tuxpaint/tasks/33/
       Bill Kendrick <bill@newbreedsoftware.com>
 
   * Documentation updates:
@@ -117,6 +145,13 @@ https://tuxpaint.org/
       Advanced Stamps Howto, as well.
       Bill Kendrick <bill@newbreedsoftware.com>
 
+    * Correct places where we still said `--fullscreen`
+      (stand-alone, with no "yes", "no", or "native" argument)
+      was allowed.
+      Closes https://sourceforge.net/p/tuxpaint/bugs/289/
+      (h/t Karl Ove Hufthammer for reporting)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
   * Localization Updates:
     ---------------------
     * Bulgarian translation
@@ -124,6 +159,18 @@ https://tuxpaint.org/
 
     * Catalan translation
       Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * French translation
+      Jacques Chion <jacques.chion@orange.fr>
+
+    * Japanese translation
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Japanese documentation
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Norwegian Nynorsk translation
+      Karl Ove Hufthammer <karl@huftis.org>
 
     * Portuguese (Portugal) translation
       Hugo Carvalho <hugokarvalho@hotmail.com>

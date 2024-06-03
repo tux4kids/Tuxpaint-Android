@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - May 25, 2024
+  June 14, 2002 - June 2, 2024
 */
 
 #include "platform.h"
@@ -1573,6 +1573,7 @@ typedef struct magic_funcs_s
   void (*release)(magic_api *, int, SDL_Surface *, SDL_Surface *, int, int, SDL_Rect *);
   void (*switchin)(magic_api *, int, int, SDL_Surface *, SDL_Surface *);
   void (*switchout)(magic_api *, int, int, SDL_Surface *, SDL_Surface *);
+  void (*retract_undo)(void);
 } magic_funcs_t;
 
 
@@ -2219,7 +2220,7 @@ static int do_slideshow(void);
 static void play_slideshow(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed);
 static void draw_selection_digits(int right, int bottom, int n);
 
-static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed);
+static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed, char **dest_fname);
 int export_gif_monitor_events(void);
 
 /* Locations where export_pict() can save */
@@ -2240,7 +2241,7 @@ enum
   EXPORT_ERR_ALREADY_EXPORTED   /* Exported template appears to already exist */
 };
 
-static int export_pict(char *fname, int where, char *orig_fname);
+static int export_pict(char *fname, int where, char *orig_fname, char **dest_fname);
 static char *get_export_filepath(const char *ext);
 void get_img_dimensions(char *fpath, int *widht, int *height);
 uLong get_img_crc(char *fpath);
@@ -2259,7 +2260,6 @@ static void strip_quotes(char *buf);
 static void do_render_cur_text(int do_blit);
 static char *uppercase(const char *restrict const str);
 static wchar_t *uppercase_w(const wchar_t *restrict const str);
-static char *textdir(const char *const str);
 static SDL_Surface *do_render_button_label(const char *const label);
 
 #if 0
@@ -2304,6 +2304,7 @@ static SDL_Surface *magic_scale(SDL_Surface * surf, int w, int h, int aspect);
 static SDL_Surface *magic_rotate_scale(SDL_Surface * surf, int r, int w);
 static void reset_touched(void);
 static Uint8 magic_touched(int x, int y);
+static void magic_retract_undo(void);
 
 static void magic_switchin(SDL_Surface * last);
 static void magic_switchout(SDL_Surface * last);
@@ -2521,8 +2522,8 @@ static void do_wait(int counter)
 #define PROMPT_TIP_LEFTCLICK_YES gettext_noop("OK")
 
 /* Confirmation of successful (we hope) image export */
-#define PROMPT_PICT_EXPORT_TXT gettext_noop("Your picture has been exported!")
-#define PROMPT_GIF_EXPORT_TXT gettext_noop("Your slideshow GIF has been exported!")
+#define PROMPT_PICT_EXPORT_TXT gettext_noop("Your picture has been exported to \"%s\"!")
+#define PROMPT_GIF_EXPORT_TXT gettext_noop("Your slideshow GIF has been exported to \"%s\"!")
 #define PROMPT_EXPORT_YES gettext_noop("OK")
 
 /* We got an error exporting */
@@ -5442,18 +5443,7 @@ static void mainloop(void)
 
                 /* Start doing magic! */
 
-                /* These switchout/in are here for Magic tools that abuse the canvas
-                   by drawing widgets on them; you don't want the widgets recorded as part
-                   of the canvas in the undo buffer!
-                   HOWEVER, as Pere noted in 2010.March, this causes many 'normal' Magic
-                   tools to not work right, because they lose their record of the 'original'
-                   canvas, before the user started using the tool (e.g., Rails, Perspective, Zoom).
-                   FIXME: Some in-between solution is needed (a 'clean up the canvas'/'dirty the canvas'
-                   pair of functions for the widgety abusers?) -bjk 2010.03.22 */
-
-                /* magic_switchout(canvas); *//* <-- FIXME: I dislike this -bjk 2009.10.13 */
                 rec_undo_buffer();
-                /* magic_switchin(canvas); *//* <-- FIXME: I dislike this -bjk 2009.10.13 */
 
                 if (cur_undo > 0)
                   undo_ctr = cur_undo - 1;
@@ -8118,13 +8108,14 @@ void show_usage(int exitcode)
           "  [--nosysconfig]\n"
           "\n"
           " Video/Sound:\n"
-          "  [--windowed | --fullscreen]\n"
+          "  [--fullscreen=yes | --fullscreen=native | --fullscreen=no]\n"
+          "  [--windowed]\n"
           "  [--WIDTHxHEIGHT | --native]\n"
           "  [--orient=landscape | --orient=portrait]\n"
           "  [--disablescreensaver | --allowscreensaver ]\n"
           "  [--sound | --nosound]\n"
           "  [--stereo | --nostereo]\n"
-          "  [--buttonsize=N] (24-192; default=48) | [--buttonsize=auto]\n"
+          "  [--buttonsize=N (24-192; default=48) | --buttonsize=auto]\n"
           "  [--colorsrows=N] (1-3; default=1)\n"
           "  [--colorfile FILE]\n"
           "\n"
@@ -9529,6 +9520,16 @@ static void signal_handler(int sig)
 }
 #endif
 
+
+/* If the label text is greater than or equal to (>=) the button's
+   width times this multiplier, we'll attempt to word-wrap the text */
+#define BUTTON_LABEL_WRAP_THRESHOLD_MULT 1.3
+
+/* If the label text got word-wrapped (ends up on more than
+   1 line, via introduction of '\n'), we'll give it slightly
+   more height */
+#define BUTTON_LABEL_MULTILINE_HEIGHT_MULT 1.2
+
 /**
  * FIXME
  */
@@ -9540,10 +9541,9 @@ static SDL_Surface *do_render_button_label(const char *const label)
   TuxPaint_Font *myfont;
   int want_h;
   float height_mult;
-  char *td_str = textdir(gettext(label));
-  char *upstr = uppercase(td_str);
+  char *upstr;
 
-  free(td_str);
+  upstr = uppercase(gettext(label));
 
   DEBUG_PRINTF("do_render_button_label(\"%s\")\n", label);
   if (button_w <= ORIGINAL_BUTTON_SIZE)
@@ -9577,13 +9577,15 @@ static SDL_Surface *do_render_button_label(const char *const label)
 
   height_mult = 1.0;
 
-  if (tmp_surf1->w >= button_w * 1.5)
+  /* If very wide, try to wrap on a space (near the end) */
+  if (tmp_surf1->w >= button_w * BUTTON_LABEL_WRAP_THRESHOLD_MULT)
   {
+    int i, found = -1, wrapped = 0;
+
     DEBUG_PRINTF("'%s' is very wide (%d) compared to button size (%d)\n", upstr, tmp_surf1->w, button_w);
+
     if (strstr(upstr, " ") != NULL)
     {
-      int i, found = -1;
-
       for (i = (strlen(upstr) * 3 / 4); i >= 0 && found == -1; i--)
       {
         if (upstr[i] == ' ')
@@ -9595,11 +9597,114 @@ static SDL_Surface *do_render_button_label(const char *const label)
       if (found != -1)
       {
         upstr[found] = '\n';
+        wrapped = 1;
+      }
 
+      if (wrapped)
+      {
         SDL_FreeSurface(tmp_surf1);
         tmp_surf1 = render_text(myfont, upstr, black);
 
-        height_mult = 1.5;
+        height_mult = BUTTON_LABEL_MULTILINE_HEIGHT_MULT;
+      }
+    }
+  }
+
+  /* If STILL very wide, try to wrap on visible hyphen/dash */
+  if (tmp_surf1->w >= button_w * BUTTON_LABEL_WRAP_THRESHOLD_MULT)
+  {
+    int i, found = -1, wrapped = 0;
+    char *broken_str;
+
+    DEBUG_PRINTF("'%s' is STILL very wide (%d) compared to button size (%d)\n", upstr, tmp_surf1->w, button_w);
+
+    /* Try to wrap on a visible hyphen/dash */
+    if (strstr(upstr, "-") != NULL)
+    {
+      for (i = (strlen(upstr) - 1); i >= 0 && found == -1; i--)
+      {
+        if (upstr[i] == '-')
+        {
+          found = i;
+        }
+      }
+
+      if (found != -1)
+      {
+        broken_str = alloca(sizeof(wchar_t) * strlen(upstr) + 2);
+        if (broken_str != NULL)
+        {
+          for (i = 0; i <= found; i++)
+          {
+            broken_str[i] = upstr[i];
+          }
+          broken_str[i] = '\n';
+          for (i = found + 1; i < (int)strlen(upstr); i++)
+          {
+            broken_str[i + 1] = upstr[i];
+          }
+          broken_str[i + 1] = '\0';
+
+          wrapped = 1;
+          free(upstr);
+          upstr = strdup(broken_str);
+        }
+      }
+
+      if (wrapped)
+      {
+        SDL_FreeSurface(tmp_surf1);
+        tmp_surf1 = render_text(myfont, upstr, black);
+
+        height_mult = BUTTON_LABEL_MULTILINE_HEIGHT_MULT;
+      }
+    }
+  }
+
+  /* If STILL very wide, try to wrap on invisible soft hyphen */
+  if (tmp_surf1->w >= button_w * BUTTON_LABEL_WRAP_THRESHOLD_MULT)
+  {
+    int i, found = -1, wrapped = 0;
+    char *broken_str;
+
+    DEBUG_PRINTF("'%s' is STILL very wide (%d) compared to button size (%d)\n", upstr, tmp_surf1->w, button_w);
+
+    /* Try to wrap on an invisible soft hyphen */
+    if (strstr(upstr, "\302\255") != NULL)
+    {
+      /* (This also _introduces_ a visible hyphen;
+         basically we replace the two-byte UTF-8 sequence
+         with ASCII '-' and '\n') */
+      found = (int)(strstr(upstr, "\302\255") - upstr);
+
+      DEBUG_PRINTF("\"%s\" has a soft hypen at %d\n", upstr, found);
+
+      broken_str = alloca(sizeof(wchar_t) * strlen(upstr) + 3);
+      if (broken_str != NULL)
+      {
+        for (i = 0; i < found; i++)
+        {
+          broken_str[i] = upstr[i];
+        }
+        broken_str[found] = '-';
+        broken_str[found + 1] = '\n';
+        for (i = found + 2; i < (int)strlen(upstr); i++)
+        {
+          broken_str[i] = upstr[i];
+        }
+        broken_str[i] = '\0';
+
+        wrapped = 1;
+        free(upstr);
+        upstr = strdup(broken_str);
+      }
+
+      if (wrapped)
+      {
+        SDL_FreeSurface(tmp_surf1);
+        tmp_surf1 = render_text(myfont, upstr, black);
+
+        height_mult = BUTTON_LABEL_MULTILINE_HEIGHT_MULT;
       }
     }
   }
@@ -9619,7 +9724,7 @@ static SDL_Surface *do_render_button_label(const char *const label)
 
   DEBUG_PRINTF("Rendered as: %d x %d\n", tmp_surf->w, tmp_surf->h);
 
-  want_h = (int)(18 * button_scale + button_label_y_nudge) * height_mult;
+  want_h = (int)(18 * button_scale) * height_mult;
 
   DEBUG_PRINTF("  button_w = %d -- min w = %d\n", button_w, min(button_w, tmp_surf->w));
   DEBUG_PRINTF("  want_h   = %d -- min h = %d\n", want_h, min(want_h, tmp_surf->h));
@@ -10053,7 +10158,7 @@ static void draw_toolbar(void)
       dest.y =
         ((i / 2) * button_h) + r_ttools.h +
         (2 * button_w) / ORIGINAL_BUTTON_SIZE +
-        (((44 + button_label_y_nudge) * button_w) / ORIGINAL_BUTTON_SIZE - img_tool_names[tool]->h) + off_y;
+        ((46 * button_w) / ORIGINAL_BUTTON_SIZE - img_tool_names[tool]->h) + off_y;
 
       SDL_BlitSurface(img_tool_names[tool], NULL, screen, &dest);
     }
@@ -13307,7 +13412,6 @@ static char *loaddesc(const char *const fname, Uint8 * locale_text)
 
                 need_own_font = wished_langs[i].need_own_font;
                 need_right_to_left = wished_langs[i].need_right_to_left;
-                need_right_to_left_word = wished_langs[i].need_right_to_left_word;
 
                 found = 1;
 
@@ -14677,7 +14781,7 @@ static int do_prompt_image_flash_snd(const char *const text,
   SDL_Color black = { 0, 0, 0, 0 };
   SDLKey key;
   SDLKey key_y, key_n;
-  char *keystr;
+  const char *keystr;
   SDL_Surface *backup;
 
 #ifndef NO_PROMPT_SHADOWS
@@ -14712,13 +14816,11 @@ static int do_prompt_image_flash_snd(const char *const text,
 
   /* Admittedly stupid way of determining which keys can be used for
      positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English) */
-  keystr = textdir(gettext("Yes"));
+  keystr = gettext("Yes");
   key_y = tolower(keystr[0]);
-  free(keystr);
 
-  keystr = textdir(gettext("No"));
+  keystr = gettext("No");
   key_n = tolower(keystr[0]);
-  free(keystr);
 
 
   do_setcursor(cursor_arrow);
@@ -17266,20 +17368,20 @@ static int do_open(void)
       /* Let user choose an image: */
 
       /* Instructions for 'Open' file dialog */
-      char *instructions;
+      const char *instructions;
       int num_left_buttons;
 
       if (!disable_template_export)
       {
         instructions =
-          textdir(gettext_noop
-                  ("Choose a picture and then click “Open”, “Export”, “Template“, or “Erase”. Click “Slides” to create a slideshow animation or “Back“ to return to your current picture."));
+          gettext_noop
+                  ("Choose a picture and then click “Open”, “Export”, “Template“, or “Erase”. Click “Slides” to create a slideshow animation or “Back“ to return to your current picture.");
       }
       else
       {
         instructions =
-          textdir(gettext_noop
-                  ("Choose a picture and then click “Open”, “Export”, or “Erase”. Click “Slides” to create a slideshow animation or “Back“ to return to your current picture."));
+          gettext_noop
+                  ("Choose a picture and then click “Open”, “Export”, or “Erase”. Click “Slides” to create a slideshow animation or “Back“ to return to your current picture.");
       }
 
       draw_tux_text(TUX_BORED, instructions, 1);
@@ -18029,18 +18131,44 @@ static int do_open(void)
         if (want_export)
         {
           int res;
+          char * dest_fname;
 
           want_export = 0;
 
           safe_snprintf(fname, sizeof(fname), "saved/%s%s", d_names[which], d_exts[which]);
           rfname = get_fname(fname, DIR_SAVE);
-          res = export_pict(rfname, EXPORT_LOC_PICTURES, NULL);
+          res = export_pict(rfname, EXPORT_LOC_PICTURES, NULL, &dest_fname);
 
           if (res == EXPORT_SUCCESS)
-            do_prompt_snd(PROMPT_PICT_EXPORT_TXT, PROMPT_EXPORT_YES, "", SND_TUXOK, screen->w / 2, screen->h / 2);
+          {
+            int n;
+            char * msg;
+
+            if (dest_fname != NULL)
+            {
+              n = asprintf(&msg, PROMPT_PICT_EXPORT_TXT, dest_fname);
+              free(dest_fname);
+            }
+            else
+            {
+              n = asprintf(&msg, PROMPT_PICT_EXPORT_TXT, "???");
+            }
+
+            if (n != -1)
+            {
+              do_prompt_snd(msg, PROMPT_EXPORT_YES, "", SND_TUXOK, screen->w / 2, screen->h / 2);
+              free(msg);
+            }
+            else
+            {
+              do_prompt_snd(PROMPT_PICT_EXPORT_TXT, PROMPT_EXPORT_YES, "", SND_TUXOK, screen->w / 2, screen->h / 2);
+            }
+          }
           else
+          {
             do_prompt_snd(PROMPT_PICT_EXPORT_FAILED_TXT, PROMPT_EXPORT_YES,
                           "", SND_YOUCANNOT, screen->w / 2, screen->h / 2);
+          }
 
           draw_tux_text(TUX_BORED, instructions, 1);
           update_list = 1;
@@ -18054,7 +18182,7 @@ static int do_open(void)
 
           safe_snprintf(fname, sizeof(fname), "saved/%s%s", d_names[which], d_exts[which]);
           rfname = get_fname(fname, DIR_SAVE);
-          res = export_pict(rfname, EXPORT_LOC_TEMPLATES, d_names[which]);
+          res = export_pict(rfname, EXPORT_LOC_TEMPLATES, d_names[which], NULL);
 
           if (res == EXPORT_SUCCESS)
             do_prompt_snd(PROMPT_PICT_TEMPLATE_TXT, PROMPT_TEMPLATE_YES, "", SND_TUXOK, screen->w / 2, screen->h / 2);
@@ -18193,8 +18321,6 @@ static int do_open(void)
 
 
       update_canvas(0, 0, WINDOW_WIDTH - r_ttoolopt.w - r_ttools.w, button_h * buttons_tall + r_ttools.h);
-
-      free(instructions);
     }
 
 
@@ -18254,7 +18380,7 @@ static int do_slideshow(void)
   SDL_Rect dest;
   SDL_Event event;
   SDLKey key;
-  char *freeme, *instructions;
+  char *instructions;
   int speeds;
   float x_per, y_per;
   int xx, yy;
@@ -18506,7 +18632,7 @@ static int do_slideshow(void)
   /* Let user choose images: */
 
   /* Instructions for Slideshow file dialog */
-  instructions = textdir(TUX_TIP_SLIDESHOW);
+  instructions = strdup(TUX_TIP_SLIDESHOW);
   draw_tux_text(TUX_BORED, instructions, 1);
 
   /* Focus us around the newest images, as it's highly likely the
@@ -18894,9 +19020,7 @@ static int do_slideshow(void)
           draw_none();
 
           /* Instructions for Slideshow file dialog */
-          freeme = textdir(TUX_TIP_SLIDESHOW);
-          draw_tux_text(TUX_BORED, freeme, 1);
-          free(freeme);
+          draw_tux_text(TUX_BORED, TUX_TIP_SLIDESHOW, 1);
 
           SDL_Flip(screen);
 
@@ -18947,15 +19071,15 @@ static int do_slideshow(void)
             /* None selected? Too dangerous to automatically select all (like we do for slideshow playback).
                Only 1 selected?  No point in saving as GIF.
              */
-            freeme = textdir(gettext_noop("Select 2 or more drawings to turn into an animated GIF."));
-            draw_tux_text(TUX_BORED, freeme, 1);
-            free(freeme);
+            draw_tux_text(TUX_BORED, gettext_noop("Select 2 or more drawings to turn into an animated GIF."), 1);
 
             control_drawtext_timer(2000, instructions, 0);      /* N.B. It will draw instructions, regardless */
           }
           else
           {
-            export_successful = export_gif(selected, num_selected, dirname, d_names, d_exts, speed);
+            char * dest_fname;
+
+            export_successful = export_gif(selected, num_selected, dirname, d_names, d_exts, speed, &dest_fname);
 
             /* Redraw entire screen, after export: */
             SDL_FillRect(screen, NULL, SDL_MapRGB(canvas->format, 255, 255, 255));
@@ -18965,14 +19089,35 @@ static int do_slideshow(void)
 
             /* Show a message depending on success */
             if (export_successful)
-              do_prompt_snd(PROMPT_GIF_EXPORT_TXT, PROMPT_EXPORT_YES, "", SND_TUXOK, screen->w / 2, screen->h / 2);
+            {
+              int n;
+              char * msg;
+
+              if (dest_fname != NULL)
+              {
+                n = asprintf(&msg, PROMPT_GIF_EXPORT_TXT, dest_fname);
+                free(dest_fname);
+              }
+              else
+              {
+                n = asprintf(&msg, PROMPT_GIF_EXPORT_TXT, "???");
+              }
+
+              if (n != -1)
+              {
+                do_prompt_snd(msg, PROMPT_EXPORT_YES, "", SND_TUXOK, screen->w / 2, screen->h / 2);
+                free(msg);
+              }
+              else
+              {
+                do_prompt_snd(PROMPT_GIF_EXPORT_TXT, PROMPT_EXPORT_YES, "", SND_TUXOK, screen->w / 2, screen->h / 2);
+              }
+            }
             else
               do_prompt_snd(PROMPT_GIF_EXPORT_FAILED_TXT, PROMPT_EXPORT_YES,
                             "", SND_YOUCANNOT, screen->w / 2, screen->h / 2);
 
-            freeme = textdir(TUX_TIP_SLIDESHOW);
-            draw_tux_text(TUX_BORED, freeme, 1);
-            free(freeme);
+            draw_tux_text(TUX_BORED, TUX_TIP_SLIDESHOW, 1);
 
             SDL_Flip(screen);
 
@@ -20258,71 +20403,6 @@ static wchar_t *uppercase_w(const wchar_t *restrict const str)
 /**
  * FIXME
  */
-/* Return string in right-to-left mode, if necessary: */
-static char *textdir(const char *const str)
-{
-  unsigned char *dstr;
-  unsigned i, j;
-  unsigned char c1, c2, c3, c4;
-
-  DEBUG_PRINTF("ORIG_DIR: %s\n", str);
-
-  dstr = malloc(strlen(str) + 5);
-
-  if (need_right_to_left_word)
-  {
-    dstr[strlen(str)] = '\0';
-
-    for (i = 0; i < strlen(str); i++)
-    {
-      j = (strlen(str) - i - 1);
-
-      c1 = (unsigned char)str[i + 0];
-      c2 = (unsigned char)str[i + 1];
-      c3 = (unsigned char)str[i + 2];
-      c4 = (unsigned char)str[i + 3];
-
-      if (c1 < 128)             /* 0xxx xxxx - 1 byte */
-      {
-        dstr[j] = str[i];
-      }
-      else if ((c1 & 0xE0) == 0xC0)     /* 110x xxxx - 2 bytes */
-      {
-        dstr[j - 1] = c1;
-        dstr[j - 0] = c2;
-        i = i + 1;
-      }
-      else if ((c1 & 0xF0) == 0xE0)     /* 1110 xxxx - 3 bytes */
-      {
-        dstr[j - 2] = c1;
-        dstr[j - 1] = c2;
-        dstr[j - 0] = c3;
-        i = i + 2;
-      }
-      else                      /* 1111 0xxx - 4 bytes */
-      {
-        dstr[j - 3] = c1;
-        dstr[j - 2] = c2;
-        dstr[j - 1] = c3;
-        dstr[j - 0] = c4;
-        i = i + 3;
-      }
-    }
-  }
-  else
-  {
-    strcpy((char *)dstr, str);  /* safe; malloc'd to a sufficient size */
-  }
-
-  DEBUG_PRINTF("L2R_DIR: %s\n", dstr);
-
-  return ((char *)dstr);
-}
-
-
-/**
- * FIXME
- */
 /* Scroll Timer for Tools */
 static Uint32 scrolltimer_selector_callback(Uint32 interval, void *param)
 {
@@ -21600,7 +21680,7 @@ static void load_magic_plugins(void)
       magic_api_struct->scale = magic_scale;
       magic_api_struct->rotate_scale = magic_rotate_scale;
       magic_api_struct->touched = magic_touched;
-
+      magic_api_struct->retract_undo = magic_retract_undo;
 
       do
       {
@@ -23774,6 +23854,20 @@ static Uint8 magic_touched(int x, int y)
 
   return (res);
 }
+
+/**
+ * Removes the latest undo recorded
+ */
+void magic_retract_undo(void)
+{
+  if (cur_undo > 0)
+    cur_undo--;
+  else
+    cur_undo = NUM_UNDO_BUFS - 1;
+
+  newest_undo = cur_undo;
+}
+
 
 /**
  * Allow the user to select a color from one of the
@@ -28373,7 +28467,8 @@ static void setup_config(char *argv[])
     tmpcfg.parsertmp_lang = NULL;
   if (tmpcfg.parsertmp_locale == PARSE_CLOBBER)
     tmpcfg.parsertmp_locale = NULL;
-  button_label_y_nudge = setup_i18n(tmpcfg.parsertmp_lang, tmpcfg.parsertmp_locale, &num_wished_langs);
+
+  setup_i18n(tmpcfg.parsertmp_lang, tmpcfg.parsertmp_locale, &num_wished_langs);
 
   /* Determine the referred font for the current locale */
   PANGO_DEFAULT_FONT_FALLBACK = NULL;
@@ -30375,12 +30470,11 @@ static void setup(void)
     if (strlen(title_names[i]) > 0)
     {
       TuxPaint_Font *myfont = large_font;
-      char *td_str = textdir(gettext(title_names[i]));
+      char *loc_str = gettext(title_names[i]);
 
       if (need_own_font && strcmp(gettext(title_names[i]), title_names[i]))
         myfont = locale_font;
-      upstr = uppercase(td_str);
-      free(td_str);
+      upstr = uppercase(loc_str);
       tmp_surf = render_text(myfont, upstr, black);
       free(upstr);
       img_title_names[i] = thumbnail(tmp_surf, min((int)(84 * button_scale), tmp_surf->w), tmp_surf->h, 0);
@@ -31617,7 +31711,7 @@ char *get_xdg_user_dir(const char *dir_type, const char *fallback)
  * @param int speed -- how fast to play the slideshow (0 and 1 both = slowest, 10 = fasted)
  * @return int -- 0 if export failed or was aborted, 1 if successful
  */
-static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed)
+static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed, char **dest_fname)
 {
   char *tmp_starter_id, *tmp_template_id, *tmp_file_id;
   int tmp_starter_mirrored, tmp_starter_flipped, tmp_starter_personal;
@@ -31634,6 +31728,8 @@ static int export_gif(int *selected, int num_selected, char *dirname, char **d_n
   liq_attr *liq_handle;
   liq_image *input_image;
   liq_result *quantization_result;
+
+  *dest_fname = NULL;
 
 #if LIQ_VERSION >= 20800
   liq_error qtiz_status;
@@ -31659,6 +31755,8 @@ static int export_gif(int *selected, int num_selected, char *dirname, char **d_n
     /* Can't create export dir! Abort! */
     return SDL_FALSE;
   }
+
+  *dest_fname = strdup(gif_fname);
 
   /* For now, always saving GIF using the size of Tux Paint's window,
      which is how images appear in the slide show */
@@ -31832,6 +31930,11 @@ static int export_gif(int *selected, int num_selected, char *dirname, char **d_n
   free(gif_fname);
 
   /* Success if we didn't have an error, and user didn't abort */
+  if (!done && *dest_fname != NULL)
+  {
+    SDL_SetClipboardText(*dest_fname);
+  }
+
   return (!done);
 }
 
@@ -31890,7 +31993,7 @@ int export_gif_monitor_events(void)
  *  + unused by EXPORT_LOC_PICTURES (just send NULL)
  * @return EXPORT_SUCCESS on success, or one of the EXPORT_ERR_... values on failure
  */
-static int export_pict(char *fname, int where, char *orig_fname)
+static int export_pict(char *fname, int where, char *orig_fname, char ** dest_fname)
 {
   FILE *fi, *fo;
   size_t len;
@@ -32069,6 +32172,11 @@ static int export_pict(char *fname, int where, char *orig_fname)
     free(dir);
   }
 
+  if (dest_fname != NULL)
+  {
+    *dest_fname = NULL;
+  }
+
   if (pict_fname == NULL)
   {
     fclose(fi);
@@ -32098,6 +32206,12 @@ static int export_pict(char *fname, int where, char *orig_fname)
 
   fclose(fi);
   fclose(fo);
+
+  if (dest_fname != NULL)
+  {
+    *dest_fname = strdup(pict_fname);
+    SDL_SetClipboardText(pict_fname);
+  }
 
   free(pict_fname);
 

@@ -6,7 +6,7 @@
         Copyright © 2007-2024 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                 1月 29, 2024
+                                  6月 1, 2024
 
 +--------------------------------------------------+
 |                Table of Contents                 |
@@ -691,6 +691,33 @@ void special_notify(int flag)
         Similar to SPECIAL_FLIP, but for magic tools that mirror the contents
         of the canvas horizontally.
 
+
+
+
+void retract_undo(void)
+
+    Each time the user clicks in the canvas while using your Magic tool, a new
+    snapshot of the canvas is added to the "Undo" history. This allows the user
+    to click "Undo" to return the image to the state it was in just before they
+    clicked with your Magic tool. They may click "Redo" to bring the change
+    back.
+
+    However, some more sophisticated Magic tools require one or more steps to
+    take place before the final "effect" is reached. For example, "Filled
+    Polygon" requires placing at least three connected points, then connecting
+    the first and last point together, to create a shape that gets added to the
+    canvas. In the meantime, an interactive preview of the shape — an outline
+    with large dots representing each point — is drawn onto the canvas. (The
+    points may be moved, or even removed, prior to finishing the shape.)
+
+    The retract_undo() API function may be used by a Magic tool to tell it to
+    discard the "Undo" snapshot it just took, as a way to prevent previews
+    shown during multi-step actions from appearing on the canvas when using the
+    "Undo" and "Redo" commands.
+
+    💡 This is an advanced feature.
+
+    Note: Added to Tux Paint 0.9.33; Magic API version 0x0000000A.
 
 
 

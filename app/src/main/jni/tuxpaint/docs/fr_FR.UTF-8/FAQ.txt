@@ -246,7 +246,7 @@ Où Tux Paint enregistre-t-il mes dessins ?
     spécifique (en utilisant l'option 'savedir'), Tux Paint enregistre dans un
     emplacement standard sur votre disque local :
 
-    Windows Vista, Windows 8, Windows 10, Windows 11
+    Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
         In the user's "AppData" folder:
         e.g., "C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\saved\"
 
@@ -486,19 +486,19 @@ Tux Paint continue de fonctionner en mode plein écran - je veux qu'il soit
     L'option "plein écran" est définie.
 
     Si vous exécutez Tux Paint à partir d'une ligne de commande, assurez-vous
-    de ne pas lui donner l'option "--fullscreen".
+    de ne pas lui donner l'option "--fullscreen=...".
 
-    Si vous exécutez Tux Paint en double-cliquant sur une icône, vérifiez les
-    propriétés de l'icône pour voir si "--fullscreen" est répertorié comme
-    argument de ligne de commande.
+    If you're running Tux Paint by double-clicking an icon, check the
+    properties of the icon to see if "--fullscreen=yes" or "--fullscreen=
+    native" is listed as a command-line argument.
 
-    Si une option "--fullscreen" n'est pas mise sur la ligne de commande,
-    vérifiez si le fichier de configuration de Tux Paint possède une ligne
-    comportant : "fullscreen=yes.".
+    If "--fullscreen=yes" or "--fullscreen=native" options aren't being sent on
+    the command line, check Tux Paint's configuration file for a line reading:
+    "fullscreen=yes" or "fullscreen=native".
 
-    Supprimez cette ligne ou exécutez simplement Tux Paint avec l'argument de
-    ligne de commande : "--windowed", qui remplacera le paramètre du fichier de
-    configuration.
+    Either remove that line, or simply run Tux Paint with the command-line
+    argument: "--windowed" or "--fullscreen=no", which will override the
+    configuration file's setting.
 
     Ou utilisez Tux Paint Config. et assurez-vous que "Plein écran" (sous
     "Vidéo et son") n'est pas coché.

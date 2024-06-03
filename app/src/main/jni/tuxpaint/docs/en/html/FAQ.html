@@ -359,7 +359,7 @@
 
         <dl>
   <dt>
-    <cite>Windows Vista, Windows 8, Windows 10, Windows 11</cite>
+    <cite>Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11</cite>
   </dt>
 
   <dd>
@@ -621,16 +621,16 @@
           The "fullscreen" option is set.        </p>
 
         <p>
-          If you're running Tux Paint from a command-line, make sure you're not giving it a "<code>--fullscreen</code>" option.        </p>
+          If you're running Tux Paint from a command-line, make sure you're not giving it a "<code>--fullscreen=...</code>" option.        </p>
 
         <p>
-          If you're running Tux Paint by double-clicking an icon, check the properties of the icon to see if "<code>--fullscreen</code>" is listed as a command-line argument.        </p>
+          If you're running Tux Paint by double-clicking an icon, check the properties of the icon to see if "<code>--fullscreen=yes</code>" or "<code>--fullscreen=native</code>" is listed as a command-line argument.        </p>
 
         <p>
-          If a "<code>--fullscreen</code>" option isn't being sent on the command line, check Tux Paint's configuration file for a line reading: "<code>fullscreen=yes</code>".        </p>
+          If "<code>--fullscreen=yes</code>" or "<code>--fullscreen=native</code>" options aren't being sent on the command line, check Tux Paint's configuration file for a line reading: "<code>fullscreen=yes</code>" or "<code>fullscreen=native</code>".        </p>
 
         <p>
-          Either remove that line, or simply run Tux Paint with the command-line argument: "<code>--windowed</code>", which will override the configuration file's setting.        </p>
+          Either remove that line, or simply run Tux Paint with the command-line argument: "<code>--windowed</code>" or "<code>--fullscreen=no</code>", which will override the configuration file's setting.        </p>
 
         <p>
           Or use Tux Paint Config. and make sure "Fullscreen" (under "Video &amp; Sound") is not checked.        </p>

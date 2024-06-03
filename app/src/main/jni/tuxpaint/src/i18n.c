@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - April 30, 2023
+  June 14, 2002 - June 2, 2024
 */
 
 #include <stdio.h>
@@ -254,22 +254,8 @@ static int lang_use_right_to_left[] = {
   -1
 };
 
-/* FIXME: Remove! (We now require SDL_Pango all the time, so this is unnecessary -bjk 2023.04.30) */
-static int lang_use_right_to_left_word[] = {
-  -1
-};
-
-/* Languages which require a vertical 'nudge' in
- * text rendering, and by how much? */
-static int lang_y_nudge[][2] = {
-  {LANG_KM, 4},
-  {-1, -1}
-};
-
-
 int need_own_font;
 int need_right_to_left;
-int need_right_to_left_word;
 const char *lang_prefix, *short_lang_prefix;
 
 w_langs wished_langs[255];
@@ -1079,9 +1065,8 @@ void mysetenv(const char *name, const char *value)
  * @return The Y-nudge value for font rendering in the language.
  */
 
-static int set_current_language(const char *restrict loc, int *ptr_num_wished_langs)
+static void set_current_language(const char *restrict loc, int *ptr_num_wished_langs)
 {
-  int i;
   int j = 0;
   char *oldloc;
   char *env_language;
@@ -1236,17 +1221,6 @@ static int set_current_language(const char *restrict loc, int *ptr_num_wished_la
       wished_langs[j].lang_prefix = lang_prefixes[langint];
       wished_langs[j].need_own_font = search_int_array(langint, lang_use_own_font);
       wished_langs[j].need_right_to_left = search_int_array(langint, lang_use_right_to_left);
-      wished_langs[j].need_right_to_left_word = search_int_array(langint, lang_use_right_to_left_word);
-      for (i = 0; lang_y_nudge[i][0] != -1; i++)
-      {
-        // printf("lang_y_nudge[%d][0] = %d\n", i, lang_y_nudge[i][0]);
-        if (lang_y_nudge[i][0] == langint)
-        {
-          wished_langs[j].lang_y_nudge = lang_y_nudge[i][1];
-          break;
-        }
-      }
-
 
       j++;
       env_language_lang = strtok(NULL, ":");
@@ -1266,11 +1240,10 @@ static int set_current_language(const char *restrict loc, int *ptr_num_wished_la
 
   need_own_font = wished_langs[0].need_own_font;
   need_right_to_left = wished_langs[0].need_right_to_left;
-  need_right_to_left_word = wished_langs[0].need_right_to_left_word;
 
 #ifdef DEBUG
-  fprintf(stderr, "DEBUG: Language is %s (%d) %s/%s\n",
-          lang_prefix, langint, need_right_to_left ? "(RTL)" : "", need_right_to_left_word ? "(RTL words)" : "");
+  fprintf(stderr, "DEBUG: Language is %s (%d) %s\n",
+          lang_prefix, langint, need_right_to_left ? "(RTL)" : "");
   fflush(stderr);
 #endif
 
@@ -1279,8 +1252,6 @@ static int set_current_language(const char *restrict loc, int *ptr_num_wished_la
   DEBUG_PRINTF("lang_prefixes[%d] is \"%s\"\n", get_current_language(), lang_prefixes[get_current_language()]);
 
   *ptr_num_wished_langs = num_wished_langs;
-
-  return wished_langs[0].lang_y_nudge;
 }
 
 
@@ -1295,7 +1266,7 @@ static int set_current_language(const char *restrict loc, int *ptr_num_wished_la
  * @param int * a place to return the number of languages we want to use, when scanning stamp descriptions 
  * @return Y-nudge
  */
-int setup_i18n(const char *restrict lang, const char *restrict locale, int *num_wished_langs)
+void setup_i18n(const char *restrict lang, const char *restrict locale, int *num_wished_langs)
 {
   DEBUG_PRINTF("lang %p, locale %p\n", lang, locale);
   DEBUG_PRINTF("lang \"%s\", locale \"%s\"\n", lang, locale);
@@ -1327,5 +1298,6 @@ int setup_i18n(const char *restrict lang, const char *restrict locale, int *num_
 
   if (locale == NULL)
     locale = "";
-  return set_current_language(locale, num_wished_langs);
+
+  set_current_language(locale, num_wished_langs);
 }

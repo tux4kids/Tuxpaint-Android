@@ -7,7 +7,7 @@
    Scanline polygon fill routine based on public-domain code
    by Darel Rex Finley, 2007 <https://alienryderflex.com/polygon_fill/>
 
-   Last updated: May 28, 2024
+   Last updated: June 1, 2024
 */
 
 
@@ -18,6 +18,9 @@
 #include "tp_magic_api.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
+
+// #define DEBUG
+
 
 enum
 {
@@ -31,14 +34,15 @@ char *polyfill_names[NUM_TOOLS] = {
 
 char *polyfill_descr[NUM_TOOLS] = {
   gettext_noop
-    ("Click multiple times in your picture to create a filled polygon. You may drag control points to alter the shape. Click the first point to complete the shape."),
+    ("Click multiple times in your picture to create a filled polygon. You may drag points to alter the shape. Drag adjacent points together to merge them. Connect the first and last points to complete the shape."),
 };
 
 char *polyfill_icon_filenames[NUM_TOOLS] = {
   "polyfill.png",
 };
 
-enum {
+enum
+{
   SND_PLACE,
   SND_MOVE,
   SND_REMOVE,
@@ -57,11 +61,11 @@ char *polyfill_snd_filenames[NUM_SOUNDS] = {
 
 #define SNAP_SIZE 16
 
-#define MAX_PTS 17
+#define MAX_PTS 100
 
 SDL_Surface *polyfill_snapshot = NULL;
-int polyfill_pt_x[MAX_PTS];
-int polyfill_pt_y[MAX_PTS];
+int polyfill_pt_x[MAX_PTS + 1];
+int polyfill_pt_y[MAX_PTS + 1];
 int polyfill_num_pts = 0;
 int polyfill_editing = MAX_PTS;
 int polyfill_dragged = 0;
@@ -222,7 +226,7 @@ polyfill_click(magic_api * api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_U
   polyfill_dragged = 0;
 
 #ifdef DEBUG
-  printf("Click.  num_pts = %d\n", polyfill_num_pts);
+  printf("\nClick.  num_pts = %d\n", polyfill_num_pts);
 #endif
 
   /* See if we're clicking a pre-existing point, to edit it? */
@@ -242,6 +246,7 @@ polyfill_click(magic_api * api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_U
 #endif
 
     polyfill_draw_preview(api, canvas, 1);
+
     return;
   }
 
@@ -263,7 +268,14 @@ polyfill_click(magic_api * api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_U
   }
   else
   {
-    /* Out of points! */
+    /* Out of points! Move the last one to the new position */
+    polyfill_pt_x[polyfill_num_pts - 1] = x;
+    polyfill_pt_y[polyfill_num_pts - 1] = y;
+    polyfill_editing = polyfill_num_pts - 1;
+
+    polyfill_drag(api, which, canvas, snapshot, x, y, x, y, update_rect);
+    api->playsound(snd_effects[SND_PLACE], (x * 255) / canvas->w, 255);
+
 #ifdef DEBUG
     printf("Out of space for new points!\n");
 #endif
@@ -289,22 +301,24 @@ polyfill_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
   if (polyfill_editing == polyfill_num_pts - 1 &&
       polyfill_num_pts >= 3 &&
       x >= polyfill_pt_x[0] - SNAP_SIZE &&
-      x <= polyfill_pt_x[0] + SNAP_SIZE &&
-      y >= polyfill_pt_y[0] - SNAP_SIZE &&
-      y <= polyfill_pt_y[0] + SNAP_SIZE) {
+      x <= polyfill_pt_x[0] + SNAP_SIZE && y >= polyfill_pt_y[0] - SNAP_SIZE && y <= polyfill_pt_y[0] + SNAP_SIZE)
+  {
     /* If placing/moving the final (red) point, and it's
        near the initial (green) point, play an electrostatic sound */
     api->playsound(snd_effects[SND_NEARBY], (x * 255) / canvas->w, 255);
-  } else if (polyfill_editing == 0 && 
-      polyfill_num_pts >= 3 &&
-      x >= polyfill_pt_x[polyfill_num_pts - 1] - SNAP_SIZE &&
-      x <= polyfill_pt_x[polyfill_num_pts - 1] + SNAP_SIZE &&
-      y >= polyfill_pt_y[polyfill_num_pts - 1] - SNAP_SIZE &&
-      y <= polyfill_pt_y[polyfill_num_pts - 1] + SNAP_SIZE) {
+  }
+  else if (polyfill_editing == 0 &&
+           polyfill_num_pts >= 3 &&
+           x >= polyfill_pt_x[polyfill_num_pts - 1] - SNAP_SIZE &&
+           x <= polyfill_pt_x[polyfill_num_pts - 1] + SNAP_SIZE &&
+           y >= polyfill_pt_y[polyfill_num_pts - 1] - SNAP_SIZE && y <= polyfill_pt_y[polyfill_num_pts - 1] + SNAP_SIZE)
+  {
     /* If moving the initial (green) point, and it's
        near the final (red) point, also play an electrostatic sound */
     api->playsound(snd_effects[SND_NEARBY], (x * 255) / canvas->w, 255);
-  } else {
+  }
+  else
+  {
     /* Otherwise, play the normal "moving a point" sound */
     api->playsound(snd_effects[SND_MOVE], (x * 255) / canvas->w, 255);
   }
@@ -387,7 +401,7 @@ polyfill_release(magic_api * api, int which ATTRIBUTE_UNUSED,
   /* If they simply clicked the first point (without
      drawing to move it), and there are enough points, consider
      it a final placement of a new point! */
-  if (polyfill_editing == 0 && polyfill_dragged == 0 && polyfill_num_pts > 2 && polyfill_num_pts < MAX_PTS)
+  if (polyfill_editing == 0 && polyfill_dragged == 0 && polyfill_num_pts > 2 && polyfill_num_pts <= MAX_PTS)
   {
 #ifdef DEBUG
     printf("Clicked first point to end polygon!\n");
@@ -400,7 +414,7 @@ polyfill_release(magic_api * api, int which ATTRIBUTE_UNUSED,
   }
 
   /* Moved (or placed) the final spot at the beginning? */
-  if (polyfill_num_pts > 2 &&
+  if (polyfill_num_pts > 3 &&
       ((polyfill_editing == polyfill_num_pts - 1 &&
         abs(x - polyfill_pt_x[0]) <= SNAP_SIZE &&
         abs(y - polyfill_pt_y[0]) <= SNAP_SIZE) ||
@@ -432,9 +446,15 @@ polyfill_release(magic_api * api, int which ATTRIBUTE_UNUSED,
 
     /* Update snapshot ahead of next polygon */
     SDL_BlitSurface(canvas, NULL, polyfill_snapshot, NULL);
- 
-    /* Play "finish" sound effect */ 
-    api->playsound(snd_effects[SND_FINISH], 128 /* TODO could be clever and determine midpoint of polygon */, 255);
+
+    /* Play "finish" sound effect */
+    api->playsound(snd_effects[SND_FINISH], 128 /* TODO could be clever and determine midpoint of polygon */ , 255);
+
+#ifdef DEBUG
+    printf("Retract the undo we just took (ahead of finishing polygon)!\n");
+#endif
+    api->retract_undo();
+    SDL_BlitSurface(canvas, NULL, snapshot, NULL);
   }
   else
   {
@@ -474,7 +494,7 @@ polyfill_release(magic_api * api, int which ATTRIBUTE_UNUSED,
         }
         polyfill_num_pts--;
 
-        /* Play "remove" sound effect */ 
+        /* Play "remove" sound effect */
         api->playsound(snd_effects[SND_REMOVE], (x * 255) / canvas->w, 255);
       }
     }
@@ -486,6 +506,16 @@ polyfill_release(magic_api * api, int which ATTRIBUTE_UNUSED,
   update_rect->y = 0;
   update_rect->w = canvas->w;
   update_rect->h = canvas->h;
+
+  /* Unless we just started a new polygon, don't let
+     Tux Paint take more undo snapshots */
+  if (polyfill_num_pts > 1)
+  {
+#ifdef DEBUG
+    printf("Retract the undo we just took!\n");
+#endif
+    api->retract_undo();
+  }
 }
 
 void polyfill_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,
@@ -548,6 +578,14 @@ void polyfill_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
 void polyfill_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
                         SDL_Surface * canvas)
 {
+  if (polyfill_num_pts > 0)
+  {
+#ifdef DEBUG
+    printf("Retract the undo we just took (on our way out)!\n");
+#endif
+    api->retract_undo();
+  }
+
   polyfill_num_pts = 0;
   polyfill_editing = MAX_PTS;
   polyfill_active = 0;

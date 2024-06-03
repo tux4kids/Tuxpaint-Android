@@ -224,17 +224,17 @@ Where does Tux Paint save my drawings?
     "savedir" option), Tux Paint saves into a standard location on your local
     drive:
 
-    Windows Vista, Windows 8, Windows 10, Windows 11
+    Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
         In the user's "AppData" folder:
-        e.g., "C:\Users\username\AppData\Roaming\TuxPaint\saved\"
+        e.g., "C:\Users\ユーザー名\AppData\Roaming\TuxPaint\saved\"
 
     macOS
         In the user's "Application Support" folder:
-        e.g., "/Users/username/Library/Application Support/TuxPaint/saved/"
+        e.g., "/Users/ユーザー名/Library/Application Support/TuxPaint/saved/"
 
     Linux / Unix
         In the user's "home directory" folder:
-        e.g., "/home/username/.tuxpaint/saved/"
+        e.g., "/home/ユーザー名/.tuxpaint/saved/"
 
     Haiku
         In the user's "settings" folder:
@@ -446,18 +446,19 @@ Tux Paint keeps running in Full Screen mode - I want it windowed!
     The "fullscreen" option is set.
 
     If you're running Tux Paint from a command-line, make sure you're not
-    giving it a "--fullscreen" option.
+    giving it a "--fullscreen=..." option.
 
     If you're running Tux Paint by double-clicking an icon, check the
-    properties of the icon to see if "--fullscreen" is listed as a command-line
-    argument.
+    properties of the icon to see if "--fullscreen=yes" or "--fullscreen=
+    native" is listed as a command-line argument.
 
-    If a "--fullscreen" option isn't being sent on the command line, check Tux
-    Paint's configuration file for a line reading: "fullscreen=yes".
+    If "--fullscreen=yes" or "--fullscreen=native" options aren't being sent on
+    the command line, check Tux Paint's configuration file for a line reading:
+    "fullscreen=yes" or "fullscreen=native".
 
     Either remove that line, or simply run Tux Paint with the command-line
-    argument: "--windowed", which will override the configuration file's
-    setting.
+    argument: "--windowed" or "--fullscreen=no", which will override the
+    configuration file's setting.
 
     Or use Tux Paint Config. and make sure "Fullscreen" (under "Video & Sound")
     is not checked.
@@ -467,8 +468,8 @@ Tux Paint keeps running in Full Screen mode - I want it windowed!
 How do I access other applications when Tux Paint is running in Full Screen?
       + Windows and Linux users, try the [Alt] + [Tab] key combination to
         switch between applications.
-      + macOS users, switch to other applications using [Control] + [Left
-        Arrow], then back to Tux Paint using [Control] + [Right Arrow].
+      + macOS users, switch to other applications using [Control] + [左矢印],
+        then back to Tux Paint using [Control] + [右矢印].
 
 
 
@@ -485,7 +486,7 @@ Tux Paint won't run
     "stdout.txt" in the same folder where TuxPaint.exe resides (e.g., in 
     "C:\Program Files\TuxPaint\").
 
-    A lockfile (e.g., "/home/username/.tuxpaint/lockfile.dat" on Linux and
+    A lockfile (e.g., "/home/ユーザー名/.tuxpaint/lockfile.dat" on Linux and
     Unix, "userdata\lockfile.dat" on Windows) is used to make sure Tux Paint
     isn't run too many times at once (e.g., due to a child impatiently clicking
     its icon more than once).
@@ -568,7 +569,7 @@ Tux Paint is using options I didn't specify!
 
         It then examines the user's personal configuration file:
 
-            C:\Users\username\AppData\Roaming\TuxPaint\tuxpaint.cfg
+            C:\Users\ユーザー名\AppData\Roaming\TuxPaint\tuxpaint.cfg
 
         Finally, any options sent as command-line arguments are used.
 
@@ -581,7 +582,7 @@ Tux Paint is using options I didn't specify!
 
         It then examines the user's personal configuration file:
 
-            /Users/username/Library/Application Support/TuxPaint/tuxpaint.cfg
+            /Users/ユーザー名/Library/Application Support/TuxPaint/tuxpaint.cfg
 
         Finally, any options sent as command-line arguments are used.
 
@@ -594,7 +595,7 @@ Tux Paint is using options I didn't specify!
 
         It then examines the user's personal configuration file:
 
-            /home/username/.tuxpaintrc
+            /home/ユーザー名/.tuxpaintrc
 
         Finally, any options sent as command-line arguments are used.
 
@@ -616,7 +617,7 @@ Tux Paint is using options I didn't specify!
         nosound=yes
 
     ...then you can reenable sound by either adding this option to your own 
-    "/home/username/.tuxpaintrc" file:
+    "/home/ユーザー名/.tuxpaintrc" file:
 
         sound=yes
 

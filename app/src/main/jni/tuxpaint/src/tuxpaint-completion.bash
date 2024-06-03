@@ -3,7 +3,7 @@
 # Bill Kendrick <bill@newbreedsoftware.com>; https://tuxpaint.org/
 # Based on inkscape's completion file, by allali@univ-mlv.fr
 #
-# Last modified 2024-04-10
+# Last modified 2024-06-02
 #
 # $Id$
 
@@ -31,8 +31,9 @@ _tuxpaint()
 			-c --copying \
 			-u --usage \
 			--listfonts \
-			-w --windowed -f --fullscreen \
-			--native \
+			-f=yes --fullscreen=yes \
+			--fullscreen=native --native \
+			-w --windowed -f=no --fullscreen=no \
 			--disablescreensaver --allowscreensaver \
 			--orient=landscape --orient=portrait \
 			--buttonsize --buttonsize=48 --buttonsize=auto \

@@ -169,7 +169,7 @@
           </header>
 
           <p>
-            <nobr><code style='background: #EEE;'>/home/username/.tuxpaintrc</code></nobr>          </p>
+            <nobr><code style='background: #EEE;'>/home/ユーザー名/.tuxpaintrc</code></nobr>          </p>
         </div>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
@@ -193,7 +193,7 @@
         </header>
 
         <p>
-          <nobr><code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/tuxpaint.cfg</code></nobr>        </p>
+          <nobr><code style='background: #EEE;'>/Users/<i>ユーザー名</i>/Library/Application Support/TuxPaint/tuxpaint.cfg</code></nobr>        </p>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
           <header>
@@ -216,7 +216,7 @@
         </header>
 
         <p>
-          <nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
+          <nobr><code style='background: #EEE;'>C:\Users\ユーザー名\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
 
         <p>
           設定ファイルはメモ帳やワードパッドで作成できますが、必ずテキストファイルとして保存するよう注意して下さい。また、ファイル名に ".txt" という拡張子をつけないようにします。        </p>
@@ -238,7 +238,7 @@
       <section class="indent"><!-- H2: Haiku Users -->
         <header>
           <h2>
-            Haiku Users          </h2>
+            Haiku のユーザー          </h2>
         </header>
 
         <p>
@@ -348,7 +348,7 @@
 
     <dd>
       <p>
-        By default, Tux Paint prevents your system's screensaver from starting up. You can override this by using the "<code>allowscreensaver</code>" option. (You can also do this by setting the "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" environment variable on your system to "<code>1</code>".)      </p>
+        標準では、Tux Paint の起動中は スクリーンセーバーが起動しない設定になっていますが、"<code>allowscreensaver</code>" オプションを指定すると、スクリーンセーバーが有効になります。（環境変数 "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" の値を "<code>1</code>" に設定しても、同様のことができます）      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>allowscreensaver=no</code>" または "<code>disablescreensaver=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--disablescreensaver</code>" で変更できます。      </p>
     </dd>
@@ -687,9 +687,9 @@
 
     <dd>
       <p>
-        By default, the <b>Magic</b> tools in Tux Paint are organized into groups of similar tools (e.g., all of the color, saturation, darken/lighten tools together).  This option removes the grouping, and places all of the tools in one long list.      </p>
+        デフォルトでは、タックスペイントの<b>「まほう」</b>ツールは、似たようなツールのグループにまとめられています（例えば、色、彩度、暗転/明転ツールはすべて一まとまりです）。このオプションはグループ化を解除し、すべてのツールを1つの長いリストにまとめます。      </p>
       <p class="note">
-        <span title="Version variation">&#128220;</span>        <strong>Note:</strong> Magic tool groups were added in Tux Paint 0.9.27.  The option to disable grouping was added to Tux Paint in version 0.9.33.      </p>
+        <span title="Version variation">&#128220;</span>        <strong>注:</strong> 「まほう」ツールのグループ化は、バージョン 0.9.27 で導入され、バージョン 0.9.33 で、これを無効にするオプションが追加されました。      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>ungroupmagictools=no</code>" または "<code>groupmagictools=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--groupmagictools</code>" で変更できます。      </p>
     </dd>
@@ -1784,16 +1784,16 @@
       <dl>
         <dt>Linux / Unix</dt>
         <dd>
-          Under a hidden directory in your home directory:<br/>
-          <nobr><code style='background: #EEE;'>/home/username/.tuxpaint/saved/</code></nobr>        </dd>
+          各ユーザーのホームディレクトリ以下の隠しディレクトリ:<br/>
+          <nobr><code style='background: #EEE;'>/home/ユーザー名/.tuxpaint/saved/</code></nobr>        </dd>
 
         <dt>Windows</dt>
         <dd>
-          <nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
+          <nobr><code style='background: #EEE;'>C:\Users\ユーザー名\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
 
         <dt>macOS</dt>
         <dd>
-          <nobr><code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/saved/</code></nobr>        </dd>
+          <nobr><code style='background: #EEE;'>/Users/<i>ユーザー名</i>/Library/Application Support/TuxPaint/saved/</code></nobr>        </dd>
 
         <dt>Haiku</dt>
         <dd>
@@ -1823,11 +1823,11 @@
 
       <ul>
         <li>Linux および Unix — XDG (X Desktop Group) 標準に基づく設定が利用可能な場合、個々のデスクトップ環境において画像保存用として設定されているディレクトリ（"<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" コマンドで確認できます）<br>
-          Typically (in an English locale), this will be a "<code>Pictures</code>" subdirectory in your home directory (i.e., <nobr>"<code style='background: #EEE;'>/home/username/Pictures</code>"</nobr>).<br>
-          Tux Paint will fall back to using that typical directory, if no XDG configuration can be read, or nothing is set for "<code>XDG_PICTURES_DIR</code>".        </li>
-        <li>Windows - <nobr>"<code style='background: #EEE;'>My Pictures</code>"</nobr> directory for each user (normaly <nobr>"<code style='background: #EEE;'>C:\Users\username\My Pictures</code>"</nobr>)<br>You can directly open the folder as follows:          <ul>
+          英語環境では一般的にユーザーのホームディレクトリ以下の "<code>Pictures</code>" ディレクトリ（<nobr>"<code style='background: #EEE;'>/home/ユーザー名/Pictures</code>"</nobr>）になります。（日本語環境では "画像"）<br>
+          XDGの設定が読み取れない場合や、"<code>XDG_PICTURES_DIR</code> "に何も設定されていない場合は、上記の一般的なディレクトリを使用します。        </li>
+        <li>Windows — 各ユーザーの "<nobr>"<code style='background: #EEE;'>My Pictures</code>"</nobr>" ディレクトリ（通常は <nobr>"<code style='background: #EEE;'>C:\Users\ユーザー名\My Pictures</code>"</nobr>）。<br>また、次のようにして、フォルダを直接開くこともできます:          <ul>
             <li>"[Windows]+[R]" キーを押して "ファイル名を指定して実行" ダイアログを開く。</li>
-            <li>Enter "Shell:My Pictures" in the text box and push [OK].</li>
+            <li>テキストボックスに "Shell:My Pictures" と入力して [OK] を押す。</li>
           </ul>
         </li>
 
@@ -1836,11 +1836,11 @@
       </ul>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures/TuxPaint</code>"</nobr>) When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).      </p>
+        <span title="Information">&#128161;</span>        <strong>注:</strong> 標準では、サブディレクトリ "<code>TuxPaint</code>" が作成されます。（例: "<nobr>"<code style='background: #EEE;'>/home/ユーザー名/Pictures/TuxPaint</code>"</nobr>"）一方、"<code>--exportdir</code>" オプションを用いると、指定されたパスがそのまま使用されます（サブディレクトリ "<code>TuxPaint</code>" は作成されません）。      </p>
       <p>
-        The directory itself (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures/TuxPaint</code>"</nobr>) will be created, if it doesn't exist.      </p>
+        ディレクトリ（例: <nobr>"<code style='background: #EEE;'>/home/ユーザー名/Pictures/TuxPaint</code>"</nobr>）が存在しない場合は新たに作成されます。      </p>
       <p>
-        If the <em>parent</em> directory (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures</code>"</nobr>) also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).      </p>
+        一つ上の<em>親ディレクトリ</em>（例: <nobr>"<code style='background: #EEE;'>/home/ユーザー名/Pictures</code>"</nobr>）が存在しない場合もディレクトリの作成を試みますが、それ以上の階層のディレクトリを作成することはありません。      </p>
 
       <p>
         例: <code>exportdir=/home/penguin/TuxPaintExports</code>      </p>
@@ -1944,13 +1944,13 @@
 
       <dl>
         <dt>Linux / Unix</dt>
-        <dd><nobr><code style='background: #EEE;'>/home/username/.tuxpaint/</code></nobr></dd>
+        <dd><nobr><code style='background: #EEE;'>/home/ユーザー名/.tuxpaint/</code></nobr></dd>
 
         <dt>Windows</dt>
-        <dd><nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\</code></nobr></dd>
+        <dd><nobr><code style='background: #EEE;'>C:\Users\ユーザー名\AppData\Roaming\TuxPaint\</code></nobr></dd>
 
         <dt>macoS</dt>
-        <dd><nobr><code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/</code></nobr></dd>
+        <dd><nobr><code style='background: #EEE;'>/Users/<i>ユーザー名</i>/Library/Application Support/TuxPaint/</code></nobr></dd>
 
               </dl>
 
@@ -2373,10 +2373,10 @@
       </header>
 
       <p>
-        If any of the above options are set in a system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), you may override them in your own personal configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaintrc</code>"</nobr>)      </p>
+        上記のオプションがシステム全体の設定ファイル（例: Linuxの場合 <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr>）で設定されている場合、個人用の設定ファイル（例: <nobr>"<code style='background: #EEE;'>/home/ユーザー名/.tuxpaintrc</code>"</nobr>）で上書きすることができます。      </p>
 
       <p>
-        For true/false options, like "<code>noprint</code>" and "<code>grab</code>", you can simply say they equal 'no' in your personal configuration file:      </p>
+        "<code>noprint</code>" や "<code>grab</code>" のような、Yes か No のオプションの場合は、個人用設定ファイルで 'no' と指定するだけで大丈夫です。      </p>
 
       <blockquote>
         <code>noprint=no<br>
@@ -2547,10 +2547,10 @@
 
         <dd>
           <p>
-            This prevents the system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), from being read.          </p>
+            これにより、システム全体の設定ファイル（例: Linuxでは <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr>）が読み込まれなくなります。          </p>
 
           <p>
-            Only your own configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaintrc</code>"</nobr> on Linux) &mdash; if it exists &mdash; will be used.          </p>
+            ユーザーごとの設定ファイル（例: Linux では <nobr>"<code style='background: #EEE;'>/home/ユーザー名/.tuxpaintrc</code>"</nobr>）が存在すれば、このファイルのみから設定を読み込みます。          </p>
         </dd>
       </dl>
 
@@ -2571,7 +2571,7 @@
 
           <dd>
             <p>
-              Display the version number and date of the copy of Tux Paint you are running. The "<code>--verbose-version</code>" also lists what compile-time options were set. (See <a href="INSTALL.html">INSTALL</a> and <a href="FAQ.html">FAQ</a>).            </p>
+              プログラムのバージョンとリリース日を表示します。"<code>--verbose-version</code>" オプションでは、コンパイル時のオプションも追加で表示します。（ドキュメント <a href="INSTALL.html">"Tux Paint のインストール"</a> および <a href="FAQ.html">"よくある質問"</a>もごらんください。）            </p>
           </dd>
 
           <dt>

@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            janvier 29, 2024          </p>
+            juin  1, 2024          </p>
         </center>
       </header>
 
@@ -677,6 +677,20 @@
                 <dd>
                   Similar to <code>SPECIAL_FLIP</code>, but for magic tools that mirror the contents of the canvas horizontally.                </dd>
               </dl>
+            </dd>
+
+            <dt id="retract_undo"><code><b>void retract_undo(void)</b></code></dt>
+            <dd>
+              <p>
+                Each time the user clicks in the canvas while using your Magic tool, a new snapshot of the canvas is added to the "Undo" history. This allows the user to click "Undo" to return the image to the state it was in just before they clicked with your Magic tool. They may click "Redo" to bring the change back.              </p>
+              <p>
+                However, some more sophisticated Magic tools require one or more steps to take place before the final "effect" is reached.  For example, "Filled Polygon" requires placing at least three connected points, then connecting the first and last point together, to create a shape that gets added to the canvas. In the meantime, an interactive preview of the shape &mdash; an outline with large dots representing each point &mdash; is drawn onto the canvas. (The points may be moved, or even removed, prior to finishing the shape.)              </p>
+              <p>
+                The <code>retract_undo()</code> API function may be used by a Magic tool to tell it to discard the "Undo" snapshot it just took, as a way to prevent previews shown during multi-step actions from appearing on the canvas when using the "Undo" and "Redo" commands.              </p>
+              <p class="note">
+                <span title="Information">&#128161;</span>                This is an advanced feature.              </p>
+              <p>
+                <b>Note:</b> Added to Tux Paint 0.9.33; Magic API version 0x0000000A.              </p>
             </dd>
           </dl>
         </section><!-- H3: Tux Paint System Calls -->

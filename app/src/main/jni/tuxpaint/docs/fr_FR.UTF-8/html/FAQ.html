@@ -359,7 +359,7 @@
 
         <dl>
   <dt>
-    <cite>Windows Vista, Windows 8, Windows 10, Windows 11</cite>
+    <cite>Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11</cite>
   </dt>
 
   <dd>
@@ -622,16 +622,16 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
           L'option "plein écran" est définie.        </p>
 
         <p>
-          Si vous exécutez Tux Paint à partir d'une ligne de commande, assurez-vous de ne pas lui donner l'option "<code>--fullscreen</code>".        </p>
+          Si vous exécutez Tux Paint à partir d'une ligne de commande, assurez-vous de ne pas lui donner l'option "<code>--fullscreen=...</code>".        </p>
 
         <p>
-          Si vous exécutez Tux Paint en double-cliquant sur une icône, vérifiez les propriétés de l'icône pour voir si "<code>--fullscreen</code>" est répertorié comme argument de ligne de commande.        </p>
+          If you're running Tux Paint by double-clicking an icon, check the properties of the icon to see if "<code>--fullscreen=yes</code>" or "<code>--fullscreen=native</code>" is listed as a command-line argument.        </p>
 
         <p>
-          Si une option "<code>--fullscreen</code>" n'est pas mise sur la ligne de commande, vérifiez si le fichier de configuration de Tux Paint possède une ligne comportant : "<code>fullscreen=yes</code>.".        </p>
+          If "<code>--fullscreen=yes</code>" or "<code>--fullscreen=native</code>" options aren't being sent on the command line, check Tux Paint's configuration file for a line reading: "<code>fullscreen=yes</code>" or "<code>fullscreen=native</code>".        </p>
 
         <p>
-          Supprimez cette ligne ou exécutez simplement Tux Paint avec l'argument de ligne de commande : "<code>--windowed</code>", qui remplacera le paramètre du fichier de configuration.        </p>
+          Either remove that line, or simply run Tux Paint with the command-line argument: "<code>--windowed</code>" or "<code>--fullscreen=no</code>", which will override the configuration file's setting.        </p>
 
         <p>
           Ou utilisez Tux Paint Config. et assurez-vous que "Plein écran" (sous "Vidéo et son") n'est pas coché.        </p>

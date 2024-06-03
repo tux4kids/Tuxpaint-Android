@@ -238,7 +238,7 @@ Ku i ruan Tux Paint-i vizatimet e mia?
     caktuar (duke përdorur mundësinë “savedir”), Tux Paint-i i ruan te një
     vendndodhje standarde në diskun tuaj vendor:
 
-    Windows Vista, Windows 8, Windows 10, Windows 11
+    Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
         In the user's "AppData" folder:
         e.g., "C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\saved\"
 
@@ -466,19 +466,19 @@ Tux Paint keeps running in Full Screen mode - I want it windowed!
     Është aktivizuar mundësia “Sa krejt ekrani”.
 
     Nëse Tux Paint-in po e xhironi që nga rresht urdhrash, sigurohuni se nuk po
-    i jepni një mundësi “--fullscreen”.
+    i jepni një mundësi “--fullscreen=...”.
 
-    Nëse Tux Paint-in po e xhironi duke dyklikuar mbi një ikonë, shihni vetitë
-    e ikonës, për të parë se mos “--fullscreen” gjendet si një argument rreshti
-    urdhrash.
+    If you're running Tux Paint by double-clicking an icon, check the
+    properties of the icon to see if "--fullscreen=yes" or "--fullscreen=
+    native" is listed as a command-line argument.
 
-    Nëse te rresht urdhrash s’po jepet mundësi “--fullscreen”, shihni te
-    kartela e formësimit të Tux Paint-it për një rresht ku lexohet: “fullscreen
-    =yes”.
+    If "--fullscreen=yes" or "--fullscreen=native" options aren't being sent on
+    the command line, check Tux Paint's configuration file for a line reading:
+    "fullscreen=yes" or "fullscreen=native".
 
-    Ose hiqeni atë rresht, ose thjesht xhirojeni Tux Paint-in me argumentin
-    vijues për rresht urdhrash: “--windowed”, çka do të anashkalojë rregullimin
-    përkatës te kartela e formësimit.
+    Either remove that line, or simply run Tux Paint with the command-line
+    argument: "--windowed" or "--fullscreen=no", which will override the
+    configuration file's setting.
 
     Ose përdorni Tux Paint Config. dhe sigurohuni se “Sa krejt ekrani” (nën
     “Video & Tingull”) s’ka shenjë.

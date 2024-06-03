@@ -6,7 +6,7 @@
  Të drejta kopjimi © 2002-2024 nga kontribues të ndryshëm; shihni AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                 29 prill 2024
+                                2 qershor 2024
 
 +---------------------------------------------------+
 |                 Pasqyrë e Lëndës                  |
@@ -120,6 +120,13 @@ Brush descriptions
     Brushes (used by Paint and Line tools) can now include descriptions that
     appear when the brush is selected.
 
+New brushes
+    New brushes for the Paint and Lines tools: Acrylic, Pencil, and Fluff
+    brushes.
+Exported filenames shown
+    When exporting a drawing (Open>Export) or a slideshow (Open>Slideshow>
+    Export GIF), the name of the file is displayed and also placed in the copy/
+    paste clipboard.
 
 Për listën e plotë të ndryshimeve, shihni CHANGES.txt.
 
@@ -1162,7 +1169,7 @@ You can simply convert the picture to the format Tux Paint uses — PNG (Portabl
 Network Graphic) — and place it in Tux Paint's "saved" directory/folder. Here
 is where to find it (by default):
 
-Windows Vista, Windows 8, Windows 10, Windows 11
+Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
     In the user's "AppData" folder:
     e.g., "C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\saved\"
 
