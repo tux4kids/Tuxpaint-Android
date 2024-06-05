@@ -56,6 +56,21 @@
     </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutExportwarn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/viewExportwarn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Export_warn" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/layoutExportdir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
