@@ -6,7 +6,7 @@
  Të drejta kopjimi © 2002-2024 nga kontribues të ndryshëm; shihni AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                2 qershor 2024
+                                 6 korrik 2024
 
 +---------------------------------------------------+
 |                 Pasqyrë e Lëndës                  |
@@ -127,6 +127,9 @@ Exported filenames shown
     When exporting a drawing (Open>Export) or a slideshow (Open>Slideshow>
     Export GIF), the name of the file is displayed and also placed in the copy/
     paste clipboard.
+Trash can support in Haiku
+    The Haiku port of Tux Paint now also places erased drawings (Open>Erase)
+    into the desktop trash can, rather than deleting the files completely.
 
 Për listën e plotë të ndryshimeve, shihni CHANGES.txt.
 
@@ -1169,7 +1172,7 @@ You can simply convert the picture to the format Tux Paint uses — PNG (Portabl
 Network Graphic) — and place it in Tux Paint's "saved" directory/folder. Here
 is where to find it (by default):
 
-Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
+Windows Windows 7, Windows 8, Windows 10, Windows 11
     In the user's "AppData" folder:
     e.g., "C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\saved\"
 

@@ -5,7 +5,7 @@
  Të drejta kopjimi © 2002-2024 nga kontribues të ndryshëm; shihni AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                  14 maj 2024
+                                 6 korrik 2024
 
 +-------------------------------------------+
 |             Pasqyrë e Lëndës              |
@@ -238,7 +238,7 @@ Ku i ruan Tux Paint-i vizatimet e mia?
     caktuar (duke përdorur mundësinë “savedir”), Tux Paint-i i ruan te një
     vendndodhje standarde në diskun tuaj vendor:
 
-    Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
+    Windows Windows 7, Windows 8, Windows 10, Windows 11
         In the user's "AppData" folder:
         e.g., "C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\saved\"
 
@@ -522,6 +522,29 @@ Tux Paint-i nuk xhiron
 
     To disable the lockfile, add the "--nolockfile" argument to Tux Paint's
     command-line, or "nolockfile=yes" to the configuration file.
+
+
+
+Tux Paint launches very slowly
+
+    The first time Tux Paint is launched (for a particular user), it may take a
+    minute or more to respond. The font system used by Tux Paint (FontConfig,
+    via Pango) is creating a 'cache' of information about the fonts on your
+    system. Subsequent launches of Tux Paint should be fast.
+
+    While the font cache is generated behind the scenes, Tux Paint should
+    remain interactive (showing an animated 'please wait' animation) as this
+    process runs.
+
+    If this delay persists or reoccurs, it could be that the cache is being
+    deleted — for example, in an environment (such as a school computer lab)
+    where a system is returned into a default state when a user finishes using
+    the program. Some versions of Tux Paint ship with a file, "fonts.conf" (
+    documented at freedesktop.org), which can be modified to have FontConfig
+    store the file elsewhere, e.g.:
+
+        <cachedir>C:\Documents and Settings\All Users\Application Data\
+        fontconfig\cache</cachedir>
 
 
 

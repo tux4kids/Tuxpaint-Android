@@ -4,12 +4,14 @@
 # Various contributors (see AUTHORS.txt)
 # https://tuxpaint.org/
 
-# June 14, 2002 - June 1, 2024
+# June 14, 2002 - July 6, 2024
 
 
 # The version number, for release:
+# (append "-rc#", e.g. "-rc1", when making release candidates
+# for beta testing)
 
-VER_VERSION:=0.9.33
+VER_VERSION:=0.9.33-rc1
 
 # We are always SDL2 now, so don't need "-sdl2"
 VER_FLAVOR:=""
@@ -60,8 +62,13 @@ else
             STDC_LIB:=-lstdc++.r4
           endif
         else
-          OS:=linux
-          GPERF:=/usr/bin/gperf
+          ifeq ($(SYSNAME),OS/2)
+            OS:=os2
+            GPERF:=/@unixroot/usr/bin/gperf.exe
+          else
+            OS:=linux
+            GPERF:=/usr/bin/gperf
+          endif
         endif
       endif
     endif
@@ -150,6 +157,7 @@ macos_RAD_CMD:=[[ ! -d Resources/share ]] && mkdir -p Resources/share && ln -s .
 RAD_CMD:=$($(OS)_RAD_CMD)
 
 windows_SO_TYPE:=dll
+os2_SO_TYPE:=dll
 macos_SO_TYPE:=dylib
 ios_SO_TYPE:=dylib
 beos_SO_TYPE:=so
@@ -160,6 +168,7 @@ windows_LIBMINGW:=-L/usr/local/lib -lmingw32
 LIBMINGW:=$($(OS)_LIBMINGW)
 
 windows_EXE_EXT:=.exe
+os2_EXE_EXT:=.exe
 EXE_EXT:=$($(OS)_EXE_EXT)
 
 macos_BUNDLE:=./TuxPaint-$(ARCHS).app
@@ -167,13 +176,15 @@ ios_BUNDLE:=./TuxPaint-$(SDK).app
 BUNDLE:=$($(OS)_BUNDLE)
 
 windows_ARCH_LIBS:=obj/win32_print.o obj/resource.o obj/win32_trash.o obj/win32_version.o
+os2_ARCH_LIBS:=obj/postscript_print.o
 macos_ARCH_LIBS:=src/macos_print.m obj/macos.o
 ios_ARCH_LIBS:=src/ios_print.m obj/ios.o
-beos_ARCH_LIBS:=obj/BeOS_print.o
+beos_ARCH_LIBS:=obj/BeOS_print.o obj/haiku_trash.o
 linux_ARCH_LIBS:=obj/postscript_print.o
 ARCH_LIBS:=$($(OS)_ARCH_LIBS)
 
 windows_ARCH_CFLAGS:=
+os2_ARCH_CFLAGS:=
 macos_ARCH_CFLAGS:=-isysroot $(SDKROOT) -I$(SDKROOT)/usr/include -I$(HOSTROOT)/include -mmacosx-version-min=$(MINVER) -arch $(subst $() $(), -arch ,$(ARCHS)) -w -headerpad_max_install_names -DHAVE_STRCASESTR
 ios_ARCH_CFLAGS:=-isysroot $(SDKROOT) -I$(SDKROOT)/usr/include -I$(HOSTROOT)/include $(MINVEROPT) -arch $(subst $() $(), -arch ,$(ARCHS)) -w -fPIC -DHAVE_STRCASESTR -DUNLINK_ONLY
 beos_ARCH_CFLAGS:=
@@ -181,6 +192,7 @@ linux_ARCH_CFLAGS:=
 ARCH_CFLAGS:=$($(OS)_ARCH_CFLAGS)
 
 windows_ARCH_LDFLAGS:=
+os2_ARCH_LDFLAGS:=-Zomf -Zmap -Zargs-wild -D__ST_MT_ERRNO__
 macos_ARCH_LDFLAGS:=-isysroot $(SDKROOT) -L$(HOSTROOT)/lib -mmacosx-version-min=$(MINVER) -arch $(subst $() $(), -arch ,$(ARCHS))
 ios_ARCH_LDFLAGS:=-isysroot $(SDKROOT) -L$(HOSTROOT)/lib $(MINVEROPT) -arch $(subst $() $(), -arch ,$(ARCHS))
 beos_ARCH_LDFLAGS:=
@@ -188,7 +200,11 @@ linux_ARCH_LDFLAGS:=
 ARCH_LDFLAGS:=$($(OS)_ARCH_LDFLAGS)
 LDFLAGS:=$(ARCH_LDFLAGS)
 
-PAPER_LIB:=$(call linktest,,-lpaper,)
+ifeq ($(OS), os2)
+  PAPER_LIB:=$(call linktest,,-lpaper_dll,)
+else
+  PAPER_LIB:=$(call linktest,,-lpaper,)
+endif
 PNG:=$(call linktest,libpng,-lpng,)
 PNG:=$(if $(PNG),$(PNG),$(call linktest,,-lpng12,))
 
@@ -196,6 +212,7 @@ FRIBIDI_LIB:=$(shell $(PKG_CONFIG) --libs fribidi)
 FRIBIDI_CFLAGS:=$(shell $(PKG_CONFIG) --cflags fribidi)
 
 windows_ARCH_LINKS:=-lgdi32 -lcomdlg32 $(PNG) -lz -lwinspool -lshlwapi $(FRIBIDI_LIB) -liconv -limagequant -mwindows
+os2_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
 macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant -lSDLmain -Wl,-framework,AppKit -Wl,-framework,Cocoa $(shell $(PKG_CONFIG) --libs pangoft2)
 ios_ARCH_LINKS=$(FRIBIDI_LIB) -limagequant -ljpeg -lbz2 $(shell $(PKG_CONFIG) --libs freetype2 libtiff-4 libwebp libffi harfbuzz libmpg123 ogg vorbisenc vorbisidec libxml-2.0 pangoft2 libpcre)
 beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(PAPER_LIB) $(STDC_LIB) -limagequant
@@ -203,6 +220,7 @@ linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
 ARCH_LINKS:=$($(OS)_ARCH_LINKS)
 
 windows_ARCH_HEADERS:=src/win32_print.h
+os2_ARCH_HEADERS:=
 macos_ARCH_HEADERS:=src/macos.h
 beos_ARCH_HEADERS:=src/BeOS_print.h
 linux_ARCH_HEADERS:=
@@ -211,6 +229,7 @@ ARCH_HEADERS:=$($(OS)_ARCH_HEADERS)
 # Where things will go when ultimately installed:
 # For macOS and iOS, the prefix is relative to DESTDIR.
 windows_PREFIX:=/usr/local
+os2_PREFIX:=c:/extras/tuxpaint
 macos_PREFIX:=Resources
 ios_PREFIX:=.
 linux_PREFIX:=/usr/local
@@ -756,6 +775,7 @@ uninstall:	uninstall-i18n
 	-rm $(MAN_PREFIX)/*/man1/tp-magic-config.1.gz
 	-rm -f -r $(CONFDIR)
 	-rm $(COMPLETIONDIR)/tuxpaint-completion.bash
+	-rm $(COMPLETIONDIR)/010_tuxpaint-completion.bash
 	-rm -r $(MAGIC_PREFIX)
 	-rm -r $(INCLUDE_PREFIX)/tuxpaint
 	-rm $(BIN_PREFIX)/tp-magic-config
@@ -798,13 +818,18 @@ install-default-config:
 	@chmod 644 $(CONFDIR)/tuxpaint.conf
 
 # Install BASH completion file:
+# (Per https://sourceforge.net/p/tuxpaint/bugs/290/ naming
+# in such a way that buggy bash-completion won't end up
+# looking at our file before "000_bash_completion_compat.bash"
+# under certain locales, due to different sorting / LC_COLLATE,
+# and hence `have` being unavailable.)
 .PHONY: install-bash-completion
 install-bash-completion:
 	@echo
 	@echo "...Installing BASH completion file..."
 	@install -d $(COMPLETIONDIR)
-	@cp src/tuxpaint-completion.bash $(COMPLETIONDIR)
-	@chmod 644 $(COMPLETIONDIR)/tuxpaint-completion.bash
+	@cp src/tuxpaint-completion.bash $(COMPLETIONDIR)/010_tuxpaint-completion.bash
+	@chmod 644 $(COMPLETIONDIR)/010_tuxpaint-completion.bash
 
 
 # Install example stamps
@@ -1354,6 +1379,12 @@ obj/BeOS_print.o:	src/BeOS_print.cpp src/BeOS_print.h
 	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/BeOS_print.cpp -o obj/BeOS_print.o
 
+obj/haiku_trash.o:	src/haiku_trash.cpp src/debug.h
+	@echo
+	@echo "...Compiling Haiku trash support..."
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
+		-c src/haiku_trash.cpp -o obj/haiku_trash.o
+
 obj/win32_print.o:	src/win32_print.c src/win32_print.h src/debug.h
 	@echo
 	@echo "...Compiling win32 print support..."
@@ -1433,6 +1464,7 @@ MAGIC_SDL_CPPFLAGS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --cflags)
 
 # FIXME: Expose SDL_rotozoom to Magic API? -bjk 2021.09.06
 windows_MAGIC_SDL_LIBS:=-L/usr/local/lib $(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
+os2_MAGIC_SDL_LIBS:=-L/@unixroot/usr/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
 macos_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
 ios_MAGIC_SDL_LIBS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
 beos_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
@@ -1440,6 +1472,7 @@ linux_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --lib
 MAGIC_SDL_LIBS:=$($(OS)_MAGIC_SDL_LIBS)
 
 windows_MAGIC_ARCH_LINKS=-lintl $(PNG)
+os2_MAGIC_ARCH_LINKS=-lint_dll $(PNG)
 macos_MAGIC_ARCH_LINKS=-lintl $(PNG)
 ios_MAGIC_ARCH_LINKS=-lintl -ljpeg $(PNG) $(shell $(PKG_CONFIG) --libs libtiff-4 libwebp libmpg123 ogg vorbisenc vorbisidec)
 beos_MAGIC_ARCH_LINKS:=-lintl $(PNG)
@@ -1447,6 +1480,7 @@ linux_MAGIC_ARCH_LINKS:=-lintl $(PNG)
 MAGIC_ARCH_LINKS:=$($(OS)_MAGIC_ARCH_LINKS)
 
 windows_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
+os2_PLUGIN_LIBS:=-lsdl2 -lsdl2_mixer -lSDL2_image
 macos_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
 ios_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
 beos_PLUGIN_LIBS:="$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS) $(MAGIC_SDL_CPPFLAGS)"

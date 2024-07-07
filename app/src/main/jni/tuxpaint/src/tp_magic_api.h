@@ -27,6 +27,12 @@ DO NOT EDIT ME!
 #define gettext_noop(String) String
 #endif
 
+#ifdef __OS2__
+#  define TX_EXTERN __declspec(dllexport)
+#else
+#  define TX_EXTERN
+#endif
+
 /* min() and max() variable comparisons: */
 
 #ifdef __GNUC__

@@ -1242,8 +1242,7 @@ static void set_current_language(const char *restrict loc, int *ptr_num_wished_l
   need_right_to_left = wished_langs[0].need_right_to_left;
 
 #ifdef DEBUG
-  fprintf(stderr, "DEBUG: Language is %s (%d) %s\n",
-          lang_prefix, langint, need_right_to_left ? "(RTL)" : "");
+  fprintf(stderr, "DEBUG: Language is %s (%d) %s\n", lang_prefix, langint, need_right_to_left ? "(RTL)" : "");
   fflush(stderr);
 #endif
 

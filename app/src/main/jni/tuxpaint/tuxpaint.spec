@@ -67,7 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %defattr(644,root,root,755)
 %config(noreplace) %{_sysconfdir}/tuxpaint/tuxpaint.conf
-%{_sysconfdir}/bash_completion.d/tuxpaint-completion.bash
+%{_sysconfdir}/bash_completion.d/010_tuxpaint-completion.bash
 %{_docdir}/tuxpaint/*
 %{_datadir}/tuxpaint/*
 %{_datadir}/applications/tuxpaint*.desktop

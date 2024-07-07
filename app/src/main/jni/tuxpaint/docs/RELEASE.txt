@@ -1,5 +1,5 @@
 Release checklist for Tux Paint
-Last updated 2023-05-29 -bjk
+Last updated 2024-07-06 -bjk
 
 During development
 ------------------
@@ -57,14 +57,25 @@ a .tar.gz source tarball, and making the tarball available for download.
      * Update What's New section in doc-src/README/README-whatsnew.php
        (things worth mentioning in the press release on the website)
 
-     Here, be sure to run "make" in "docs/", to produce plaintext
-     alternatives of the HTML files.
+     There, run "make" to generate the HTML (and some other) files based
+     on the PHP sources.  Then run "./copy-html-to-tuxpaint.sh" to copy
+     the resulting files to the directory containing a checkout of the
+     "tuxpaint" repo.
 
-     * docs/en/html/README.html
-     * docs/en/html/FAQ.html
-     * docs/en/html/OPTIONS.html
-     * docs/en/html/EXTENDING.html
+     Here, be sure to run "make" in "docs/", to produce plaintext
+     alternatives of the docs that are available as HTML.
+     e.g. (for English):
+
      * docs/en/html/ADVANCED-STAMPS-HOWTO.html
+     * docs/en/html/ENVARS.html
+     * docs/en/html/EXTENDING.html
+     * docs/en/html/FAQ.html
+     * docs/en/html/INSTALL.html
+     * docs/en/html/OPTIONS.html
+     * docs/en/html/PNG.html
+     * docs/en/html/README.html
+     * docs/en/html/SIGNALS.html
+     * docs/en/html/SVG.html
 
    * Manual page (manpage)
 
@@ -73,6 +84,8 @@ a .tar.gz source tarball, and making the tarball available for download.
      * man/tuxpaint.1
 
  * Rebuild 'tuxpaint.desktop' by running "update-po.sh" in "src/po/"
+
+ * Rebuild "data/brushes/*.txt" by running "createtxt.sh" in "brushes-po/"
 
  * Don't forget to commit the changes!  (git add ... / git commit / git push)
 
@@ -138,42 +151,30 @@ Website updates
 
 Announcements
 -------------
- * Managed by Tux Paint
+ * Tux Paint website
+   - Site: https://tuxpaint.org/
 
-   + Tux Paint website
-     - Site: https://tuxpaint.org/
-     - Submissions: [add announcement to /latest/]
+ * Tux Paint project social media accounts
+   (currently, managed by Bill Kendrick)
 
-   + Tux Paint on Facebook
-     - Site: https://www.facebook.com/TuxPaint
-     - Submissions: [currently managed by Bill K.]
-
-   + Tux Paint on Twitter
-     - Site: https://www.facebook.com/TuxPaint
-     - Submissions: [currently managed by Bill K.]
-
-   + Tux Paint on Tumblr
-     - Site: https://www.tumblr.com/blog/tuxpaint
-     - Submissions: [currently managed by Bill K.]
-
-   + Tux Paint on Reddit
-     - https://www.reddit.com/user/TuxPaintDevs
-     - Submissions: [currently managed by Bill K.]
-
-   + Tux Paint on Mastodon
-     - https://floss.social/@tuxpaint
-     - Submissions: [currently managed by Bill K.]
-
-   + Tux Paint on Instagram
-     - https://www.instagram.com/tuxpaintdevs/
-     - Submissions: [currently managed by Bill K.]
+   + BlueSky - https://bsky.app/profile/tuxpaint.bsky.social
+   + Cara - https://cara.app/tuxpaint
+   + Facebook - https://www.facebook.com/TuxPaint
+   + Instagram - https://www.instagram.com/tuxpaintdevs/
+   + Mastodon - https://floss.social/@tuxpaint
+   + Reddit - https://www.reddit.com/user/TuxPaintDevs
+   + Threads - https://www.threads.net/@tuxpaintdevs
+   + TikTok - https://www.tiktok.com/@tuxpaintdevs
+   + Tumblr - https://www.tumblr.com/blog/tuxpaint
+   + X (née Twitter) - https://x.com/TuxPaintTweets
+   + YouTubr - https://www.youtube.com/@TuxPaintOfficial
 
  * News sites & magazines
 
    + Linux Today
      - Site: https://www.linuxtoday.com/
      - Twitter: https://twitter.com/linuxtoday
-     - Submissions: https://www.linuxtoday.com/contribute.html
+     - Submissions: https://www.linuxtoday.com/contribute-to-linuxtoday/
 
    + 9to5Linux
      - Site: https://9to5linux.com/
@@ -183,7 +184,7 @@ Announcements
    + Fossbytes
      - Site: https://fossbytes.com/
      - Twitter: https://twitter.com/Fossbytes14
-     - Submissions: admin [at] fossbytes.com
+     - Submissions: enquiry@fossbytes.com
 
    + EdTech K12 Magazine
      - Site: https://edtechmagazine.com/k12/

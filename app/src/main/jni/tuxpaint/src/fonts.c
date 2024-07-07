@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last modified: June 29, 2023
+  Last modified: June 6, 2024
 */
 
 #include <stdio.h>
@@ -101,7 +101,7 @@ static const char *problemFontExtensions[] = {
 #include <sys/poll.h>
 #include <sys/wait.h>
 
-#ifdef _POSIX_PRIORITY_SCHEDULING
+#if defined(_POSIX_PRIORITY_SCHEDULING) && !defined(__OS2__)
 #include <sched.h>
 #else
 #define sched_yield()

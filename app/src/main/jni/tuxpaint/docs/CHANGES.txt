@@ -6,7 +6,7 @@ Copyright (c) 2002-2024
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
-2024.June.2 (0.9.33)
+2024.July.6 (0.9.33)
   * New Magic Tools:
     ----------------
     * Dither & Dither (Keep Color): Replaces all or part of a drawing
@@ -95,12 +95,28 @@ https://tuxpaint.org/
       or animated GIF (via Open->Slideshow).
       Bill Kendrick <bill@newbreedsoftware.com>
 
+    * Add Trash support when using Erase option in Open dialog
+      on Haiku.
+      h/t Jérôme Duval <https://github.com/korli> for pointing us to this
+      (see https://github.com/haikuports/haikuports/issues/10568)
+      Code used is copyright (c) 2004, Francois Revol <revol@free.fr>,
+      provided under the MIT licence.
+
     * Removed unnecessary (and now unhelpful) button label text
       vertical position nudging (had only been used by Khmer locale).
       Bill Kendrick <bill@newbreedsoftware.com>
 
     * Make screen refresh more snappy on macOS.
       Mark Kim <markuskimius@gmail.com>
+
+    * Replace `have` with `_have` in Tux Paint's BASH completion script,
+      and rename as `010_tuxpaint-completion.bash` when installing, to
+      ensure `have` exists via `000_bash_completion_compat.bash`; under
+      some locales (LC_COLLATE), that could get ran _after_ Tux Paint's,
+      due to this bug: https://github.com/scop/bash-completion/issues/1207)
+      Closes https://sourceforge.net/p/tuxpaint/bugs/290/
+      (h/t Jozef Riha for reporting)
+      Bill Kendrick <bill@newbreedsoftware.com>
 
   * Ports & Building:
     -----------------
@@ -110,6 +126,17 @@ https://tuxpaint.org/
       manually to build the universal bundle.
       Mark Kim <markuskimius@gmail.com>
 
+    * Changes to support building for OS/2
+      + Makefile updates to support building for OS/2
+      + Added "__declspec(dllexport)" (via new "TX_EXTERN" #define'd in
+        `tp_magic_api.h`) to public function definitions in Magic tools
+      + Renamed "Mirror/Flip" Magic tool source file to have shorter filename
+        (`mirror_flip.c` -> `mirror_f.c`)
+      + TODO: Other Magic tools need these modifications.
+        https://sourceforge.net/p/tuxpaint/feature-requests/233/
+      Elbert Pol <tellie@elbertpol.nl>
+      with support from Bill Kendrick
+
     * Updates to appdata metadata file for Appstream 1.0
       (https://sourceforge.net/p/tuxpaint/tuxpaint/merge-requests/19/)
       Will Thompson <https://sourceforge.net/u/wjjjjt/profile/>
@@ -117,6 +144,7 @@ https://tuxpaint.org/
     * Don't call rsvg_handle_close(); it's deprecated, and not necessary;
       (see https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/method.Handle.close.html;
       h/t https://github.com/xfce-mirror/xfce4-xkb-plugin/commit/825fa1c
+      Closes https://sourceforge.net/p/tuxpaint/bugs/278/
       Bill Kendrick <bill@newbreedsoftware.com>
 
     * Removed unused `need_right_to_left_word` internal flags and `textdir()`.
@@ -174,6 +202,10 @@ https://tuxpaint.org/
 
     * Portuguese (Portugal) translation
       Hugo Carvalho <hugokarvalho@hotmail.com>
+
+    * Russian translation
+      Alevtina Karashokova
+      https://sourceforge.net/u/alev-karash/profile/
 
   * Bug Fixes:
     ----------

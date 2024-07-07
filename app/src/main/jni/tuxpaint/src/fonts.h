@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: June 13, 2023
+  Last updated: June 6, 2024
 */
 
 #ifndef FONTS_H
@@ -28,10 +28,7 @@
 // plan to rip this out as soon as it is considered stable
 //#define THREADED_FONTS
 #define FORKED_FONTS
-#if defined(WIN32) || defined(__BEOS__)
-#undef FORKED_FONTS
-#endif
-#ifdef __ANDROID__
+#if defined(WIN32) || defined(__BEOS__) || defined (__OS2__) || defined(__ANDROID__)
 #undef FORKED_FONTS
 #endif
 

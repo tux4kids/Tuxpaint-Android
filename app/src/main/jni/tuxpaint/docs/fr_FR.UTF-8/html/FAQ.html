@@ -96,7 +96,7 @@
       </p>
 
       <p>
-        mai 14, 2024      </p>
+        juillet  6, 2024      </p>
     </center>
 
     <table border="2"
@@ -359,7 +359,7 @@
 
         <dl>
   <dt>
-    <cite>Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11</cite>
+    <cite>Windows Windows 7, Windows 8, Windows 10, Windows 11</cite>
   </dt>
 
   <dd>
@@ -677,6 +677,23 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
 
         <p>
           Pour désactiver le fichier de verrouillage, ajoutez l'argument "<code>--nolockfile</code>" à la ligne de commande de Tux Paint, ou "<code>nolockfile=yes</code>" au fichier de configuration.        </p>
+      </dd>
+
+      <dt>
+        Tux Paint launches very slowly      </dt>
+
+      <dd>
+        <p>
+          The first time Tux Paint is launched (for a particular user), it may take a minute or more to respond. The font system used by Tux Paint (FontConfig, via Pango) is creating a 'cache' of information about the fonts on your system. Subsequent launches of Tux Paint should be fast.        </p>
+
+        <p>
+          While the font cache is generated behind the scenes, Tux Paint should remain interactive (showing an animated 'please wait' animation) as this process runs.        </p>
+
+        <p>
+          If this delay persists or reoccurs, it could be that the cache is being deleted &mdash; for example, in an environment  (such as a school computer lab) where a system is returned into a default state when a user finishes using the program. Some versions of Tux Paint ship with a file, <nobr>"<code style='background: #EEE;'>fonts.conf</code>"</nobr> (<a href="https://fontconfig.pages.freedesktop.org/fontconfig/fontconfig-user.html">documented at freedesktop.org</a>), which can be modified to have FontConfig store the file elsewhere, e.g.:          <blockquote>
+            <code>&lt;cachedir&gt;C:\Documents and Settings\All Users\Application Data\fontconfig\cache&lt;/cachedir&gt;</code>
+          </blockquote>
+        </p>
       </dd>
 
       <dt>

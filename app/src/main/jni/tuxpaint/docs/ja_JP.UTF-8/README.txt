@@ -6,7 +6,7 @@
        Copyright © 2002-2024 by various contributors; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                 2024年6月 2日
+                                 2024年7月 6日
 
 +--------------------------------------------------+
 |                       目次                       |
@@ -118,13 +118,15 @@ D. Tux Paint バージョン 0.9.33 での変更点
     個々のブラシ（「ふで」ツールと「せん」ツールで使用）を選択したときに説明を
     表示させることができるようになりました。
 
-New brushes
-    New brushes for the Paint and Lines tools: Acrylic, Pencil, and Fluff
-    brushes.
-Exported filenames shown
-    When exporting a drawing (Open>Export) or a slideshow (Open>Slideshow>
-    Export GIF), the name of the file is displayed and also placed in the copy/
-    paste clipboard.
+ブラシの追加
+    アクリル絵の具、鉛筆、毛羽立ったブラシ
+書き出し先ファイル名
+    作品(「ひらく」>「かきだす」)、またはスライドショー(「ひらく」>「スライド」
+    >「かきだす」)を書き出すと、ファイル名が表示され、クリップボードに入りま
+    す。
+Haikuでゴミ箱に対応
+    Haiku 版 Tux Paint では、ファイルを完全に削除するのではなく、削除した作品
+    （「ひらく」>「けす」）をデスクトップのゴミ箱に入れるようになりました。
 
 全ての変更点については、CHANGES.txt をお読みください。
 
@@ -1080,7 +1082,7 @@ Tux Paint の「ひらく」ダイアログでは、Tux Paint で作成した画
 換して、Tux Paint で作成した画像が保存されている "saved" フォルダにコピーしま
 す。（標準では以下のフォルダ）:
 
-Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
+Windows Windows 7, Windows 8, Windows 10, Windows 11
     In the user's "AppData" folder:
     e.g., "C:\Users\ユーザー名\AppData\Roaming\TuxPaint\saved\"
 

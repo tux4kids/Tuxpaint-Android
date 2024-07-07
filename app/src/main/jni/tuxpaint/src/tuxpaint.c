@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - June 2, 2024
+  June 14, 2002 - June 7, 2024
 */
 
 #include "platform.h"
@@ -330,6 +330,8 @@ typedef struct safer_dirent
   unsigned short d_reclen;
   char d_name[FILENAME_MAX];
 } safer_dirent;
+
+extern status_t haiku_trash(const char *f);
 
 #define dirent safer_dirent
 
@@ -652,7 +654,7 @@ int TP_EventFilter(void *data, EVENT_FILTER_EVENT_TYPE * event);
 /* #define fmemopen_alternative *//* Uncomment this to test the fmemopen alternative in systems were fmemopen exists */
 /* *INDENT-ON* */
 
-#if defined (WIN32) || defined (__APPLE__) || defined(__NetBSD__) || defined(__sun) || defined(__ANDROID__)     /* MINGW/MSYS, NetBSD, and MacOSX need it, at least for now */
+#if defined (WIN32) || defined (__APPLE__) || defined(__NetBSD__) || defined(__sun) || defined(__OS2__) || defined(__ANDROID__) /* MINGW/MSYS, NetBSD, and MacOSX need it, at least for now */
 #define fmemopen_alternative
 #endif
 
@@ -2220,7 +2222,8 @@ static int do_slideshow(void);
 static void play_slideshow(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed);
 static void draw_selection_digits(int right, int bottom, int n);
 
-static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed, char **dest_fname);
+static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed,
+                      char **dest_fname);
 int export_gif_monitor_events(void);
 
 /* Locations where export_pict() can save */
@@ -8029,6 +8032,8 @@ void show_version(int details)
   printf("  Built for Maemo  (NOKIA_770)\n");
 #elif OLPC_XO
   printf("  Built for XO  (OLPC_XO)\n");
+#elif OS2
+  printf("  Built for OS2  (OS2)\n");
 #elif __ANDROID__
   printf("  Built for Android  (__ANDROID__)\n");
 #else
@@ -17375,13 +17380,13 @@ static int do_open(void)
       {
         instructions =
           gettext_noop
-                  ("Choose a picture and then click “Open”, “Export”, “Template“, or “Erase”. Click “Slides” to create a slideshow animation or “Back“ to return to your current picture.");
+          ("Choose a picture and then click “Open”, “Export”, “Template“, or “Erase”. Click “Slides” to create a slideshow animation or “Back“ to return to your current picture.");
       }
       else
       {
         instructions =
           gettext_noop
-                  ("Choose a picture and then click “Open”, “Export”, or “Erase”. Click “Slides” to create a slideshow animation or “Back“ to return to your current picture.");
+          ("Choose a picture and then click “Open”, “Export”, or “Erase”. Click “Slides” to create a slideshow animation or “Back“ to return to your current picture.");
       }
 
       draw_tux_text(TUX_BORED, instructions, 1);
@@ -18131,7 +18136,7 @@ static int do_open(void)
         if (want_export)
         {
           int res;
-          char * dest_fname;
+          char *dest_fname;
 
           want_export = 0;
 
@@ -18142,7 +18147,7 @@ static int do_open(void)
           if (res == EXPORT_SUCCESS)
           {
             int n;
-            char * msg;
+            char *msg;
 
             if (dest_fname != NULL)
             {
@@ -19077,7 +19082,7 @@ static int do_slideshow(void)
           }
           else
           {
-            char * dest_fname;
+            char *dest_fname;
 
             export_successful = export_gif(selected, num_selected, dirname, d_names, d_exts, speed, &dest_fname);
 
@@ -19091,7 +19096,7 @@ static int do_slideshow(void)
             if (export_successful)
             {
               int n;
-              char * msg;
+              char *msg;
 
               if (dest_fname != NULL)
               {
@@ -30960,6 +30965,8 @@ static int trash(char *path)
   return win32_trash(path);
 #elif defined(__APPLE__)
   return apple_trash(path);
+#elif defined __BEOS__ || defined __HAIKU__
+  return haiku_trash(path);
 #else
   char fname[MAX_PATH], trashpath[MAX_PATH], dest[MAX_PATH], infoname[MAX_PATH], bname[MAX_PATH + 1], ext[MAX_PATH];
   char deldate[32];
@@ -31711,7 +31718,8 @@ char *get_xdg_user_dir(const char *dir_type, const char *fallback)
  * @param int speed -- how fast to play the slideshow (0 and 1 both = slowest, 10 = fasted)
  * @return int -- 0 if export failed or was aborted, 1 if successful
  */
-static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed, char **dest_fname)
+static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed,
+                      char **dest_fname)
 {
   char *tmp_starter_id, *tmp_template_id, *tmp_file_id;
   int tmp_starter_mirrored, tmp_starter_flipped, tmp_starter_personal;
@@ -31993,7 +32001,7 @@ int export_gif_monitor_events(void)
  *  + unused by EXPORT_LOC_PICTURES (just send NULL)
  * @return EXPORT_SUCCESS on success, or one of the EXPORT_ERR_... values on failure
  */
-static int export_pict(char *fname, int where, char *orig_fname, char ** dest_fname)
+static int export_pict(char *fname, int where, char *orig_fname, char **dest_fname)
 {
   FILE *fi, *fo;
   size_t len;

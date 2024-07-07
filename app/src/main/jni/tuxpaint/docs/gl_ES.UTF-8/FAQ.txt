@@ -5,7 +5,7 @@
         Copyright © 2002-2024 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                              14 de Maio de 2024
+                              6 de Xullo de 2024
 
 +--------------------------------------------+
 |                   Índice                   |
@@ -236,7 +236,7 @@ Onde garda Tux Paint os meus debuxos?
     (usando a opción «savedir»), Tux Paint garda nun lugar estándar na súa
     unidade local:
 
-    Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11
+    Windows Windows 7, Windows 8, Windows 10, Windows 11
         In the user's "AppData" folder:
         e.g., "C:\Users\nome de usuario\AppData\Roaming\TuxPaint\saved\"
 
@@ -523,6 +523,29 @@ Tux Paint non funciona
     Para desactivar o ficheiro de bloqueo, engada o argumento «--nolockfile» á
     liña de ordes de Tux Paint ou «nolockfile=yes» ao ficheiro de
     configuración.
+
+
+
+Tux Paint launches very slowly
+
+    The first time Tux Paint is launched (for a particular user), it may take a
+    minute or more to respond. The font system used by Tux Paint (FontConfig,
+    via Pango) is creating a 'cache' of information about the fonts on your
+    system. Subsequent launches of Tux Paint should be fast.
+
+    While the font cache is generated behind the scenes, Tux Paint should
+    remain interactive (showing an animated 'please wait' animation) as this
+    process runs.
+
+    If this delay persists or reoccurs, it could be that the cache is being
+    deleted — for example, in an environment (such as a school computer lab)
+    where a system is returned into a default state when a user finishes using
+    the program. Some versions of Tux Paint ship with a file, "fonts.conf" (
+    documented at freedesktop.org), which can be modified to have FontConfig
+    store the file elsewhere, e.g.:
+
+        <cachedir>C:\Documents and Settings\All Users\Application Data\
+        fontconfig\cache</cachedir>
 
 
 

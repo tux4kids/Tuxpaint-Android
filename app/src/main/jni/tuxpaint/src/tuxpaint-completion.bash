@@ -3,7 +3,7 @@
 # Bill Kendrick <bill@newbreedsoftware.com>; https://tuxpaint.org/
 # Based on inkscape's completion file, by allali@univ-mlv.fr
 #
-# Last modified 2024-06-02
+# Last modified 2024-06-11
 #
 # $Id$
 
@@ -16,7 +16,7 @@
 # a way to hint to the user, and allow completion, for values after the "="
 # -bjk 2023.12.29
 
-have tuxpaint &&
+_have tuxpaint &&
 _tuxpaint()
 {
         local cur
@@ -126,4 +126,4 @@ _tuxpaint()
         fi
 
 }
-[ "${have:-}" ] && complete -F _tuxpaint $filenames tuxpaint
+complete -F _tuxpaint $filenames tuxpaint
