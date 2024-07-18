@@ -27,7 +27,7 @@ fi
 
 if [ $RUN = true ]
 then
-    stamps_version="2024.01.29"
+    stamps_version="2024.07.17"
     stampsversion=`echo $stamps_version|sed "s/\./-/g"`
 
     if [ -d tmpzip ]
