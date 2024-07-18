@@ -4,14 +4,14 @@
 # Various contributors (see AUTHORS.txt)
 # https://tuxpaint.org/
 
-# June 14, 2002 - July 6, 2024
+# June 14, 2002 - July 8, 2024
 
 
 # The version number, for release:
 # (append "-rc#", e.g. "-rc1", when making release candidates
 # for beta testing)
 
-VER_VERSION:=0.9.33-rc1
+VER_VERSION:=0.9.33
 
 # We are always SDL2 now, so don't need "-sdl2"
 VER_FLAVOR:=""
@@ -310,7 +310,7 @@ CURSOR_SHAPES:=LARGE
 SDL_LIBS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs)
 SDL_LIBS+=$(call linktest,SDL2_image,-lSDL2_image,$(SDL_LIBS))
 SDL_LIBS+=$(call linktest,SDL2_ttf,-lSDL2_ttf,$(SDL_LIBS))
-SDL_LIBS+=$(call linktest,SDL2_gfx,-lSDL2_gfx,$(SDL_LIBS))
+SDL_LIBS+=$(shell $(PKG_CONFIG) SDL2_gfx --libs)
 SDL_LIBS+=$(call linktest,zlib,-lz,)
 SDL_LIBS+=$(call linktest,libpng,$(PNG),)
 
@@ -330,7 +330,7 @@ PANGO_CFLAGS:=$(shell $(PKG_CONFIG) --cflags pango)
 SDL_LIBS+=$(SDL_MIXER_LIB) $(SDL2_PANGO_LIB) $(PANGO_LIB)
 
 SDL_CFLAGS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --cflags)
-
+SDL_CFLAGS+=$(shell $(PKG_CONFIG) SDL2_gfx --cflags)
 
 # New one: -lrsvg-2 -lcairo
 # Old one: -lcairo -lsvg -lsvg-cairo
