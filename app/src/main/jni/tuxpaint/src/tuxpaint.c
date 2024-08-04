@@ -16272,6 +16272,7 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
 
 
   if (autosave)
+    undo_tmp_applied_text();
     /* No more process needed */
     return 1;
 
