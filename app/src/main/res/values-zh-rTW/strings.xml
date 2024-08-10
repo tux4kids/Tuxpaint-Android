@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Remove the following 3 lines to translate -->
+    <string name="app_name" translatable="false">Tux Paint</string>
+    <string name="app_config" translatable="false">Tux Paint Config</string>
+    <string name="app_contact" translatable="false">tuxpaint-devel@lists.sourceforge.net</string>
+
+    <!-- Data and save directories -->
+    <string name="Data_dir">資料夾位置</string>
+    <string name="Save_dir">儲存位置</string>
+    <string name="Export_warn">除非您已正確備份或匯出圖畫，否則移除 Tux Paint 時可能會遺失您的圖畫。</string>
+    <string name="Export_dir">匯出位置</string>
+
+    <!-- Locale selector, next to this string appears the current selected locale -->
+    <string name="Language">語言</string>
+
+    <!-- Enable sound and the 2 possible states it takes -->
+    <string name="Enable_sound">音效</string>
+    <string name="sound_enabled">開啟音效</string>
+    <string name="sound_disabled">關閉音效</string>
+
+    <!-- Enable stereo and the 2 possible states it takes -->
+    <string name="Enable_stereo">立體聲</string>
+    <string name="stereo_enabled">開啟立體聲</string>
+    <string name="stereo_disabled">關閉立體聲</string>
+
+    <!-- Enable autosave and the 2 possible states it takes -->
+    <string name="Enable_autosave">離開時自動儲存</string>
+    <string name="autosave_enabled">離開時自動儲存</string>
+    <string name="autosave_disabled">離開時不自動儲存</string>
+
+    <!-- Enable startblank and the 2 possible values it takes -->
+    <string name="Enable_startblank">開啟空白畫布</string>
+    <string name="startblanktoggle_true">開始時使用空白畫布</string>
+    <string name="startblanktoggle_false">開始時使用上次的繪圖</string>
+
+    <!-- Enable newcolorsfirst and the 2 possible values it takes -->
+    <string name="Enable_newcolorsfirst">「新增」對話框順序</string>
+    <string name="newcolorsfirsttoggle_true">顏色置頂</string>
+    <string name="newcolorsfirsttoggle_false">起始圖案和範本圖案置頂</string>
+
+
+    <!-- How to save: ask the user if in new draw or replacing the old
+	 Allways replace the old draw
+	 Allways save as a new draw
+         The 4 strings will display at the same time in a single row -->
+    <string name="Save_approach">儲存方式</string>
+    <string name="Ask">詢問</string>
+    <string name="Replace">覆蓋</string>
+    <string name="New">新增</string>
+
+    <!-- Enable system fonts -->
+    <string name="Allow_sysfonts">系統字型</string>
+    <string name="sysfonts_enabled">允許使用系統字型</string>
+    <string name="sysfonts_disabled">不使用系統字型</string>
+
+    <!-- Printing and states -->
+    <string name="Allow_printing">列印</string>
+    <string name="print_enabled">允許列印</string>
+    <string name="print_disabled">不允許列印</string>
+
+    <string name="Print_delay">列印延遲（秒）</string>
+
+    <!-- Screensaver and states -->
+    <string name="Disable_screen_saver">螢幕保護程式</string>
+    <string name="screensaver_disabled">保持螢幕開啟</string>
+    <string name="screensaver_enabled">允許 Android 關閉螢幕</string>
+
+    <!-- Orientation and states -->
+    <string name="Orient">畫面方向</string>
+    <string name="orient_portrait">直向</string>
+    <string name="orient_landscape">橫向</string>
+
+    <!-- Size of the buttons in the Tux Paint program -->
+    <string name="Button_size">按鈕大小</string>
+
+    <!-- Number of rows for the buttons color palette -->
+    <string name="Colors_rows">調色盤按鈕列數</string>
+
+    <!-- What OnScreen keyboard layout to use -->
+    <string name="Osk_layout">螢幕鍵盤配置</string>
+
+    <!-- Stamp rotation -->
+    <string name="Stamp_rotation">圖章旋轉</string>
+    <string name="Stamp_rotation_enabled">允許旋轉圖章</string>
+    <string name="Stamp_rotation_disabled">不允許旋轉圖章</string>
+
+    <!-- Ok and Cancel buttons -->
+    <string name="ok">儲存並離開</string>
+    <string name="cancel">放棄變更</string>
+
+    <!-- Request for permissions text and button -->
+    <string name="Request_motivation">Tux Paint 需要儲存空間權限才能儲存您的圖畫。</string>
+    <string name="Request_btmotivation">Tux Paint 需要藍牙權限才能與某些外部裝置正常運作。請注意，若要撤銷藍牙權限或允許先前被拒絕的權限，您可能需要在 Android 設定中進行操作。</string>
+    <string name="request_understood">我明白了</string>
+    <string name="document_choose">選擇包含 Tux Paint 資料的 zip 檔案</string>
+    <string name="Button_select">選擇</string>
+    <string name="textselect">請選擇要匯入資料的檔案。</string>
+    <string name="title_activity_import_data">匯入資料</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">下一步</string>
+    <string name="previous">上一步</string>
+
+
+    <string name="Selected_file">已選擇的檔案</string>
+    <string name="none">無</string>
+    <string name="destination">目的地</string>
+    <string name="proceed">繼續</string>
+    <string name="back_from_import">返回</string>
+    <string name="please_select">請選擇包含要匯入資料的 Zip 檔案。</string>
+    <string name="Files_installed">檔案已成功安裝</string>
+    <string name="Files_notinstalled">發生錯誤，檔案未安裝。</string>
+    <string name="BTPerms">藍牙</string>
+    <string name="BlueTooth_allowed">允許存取藍牙</string>
+    <string name="BlueTooth_denied">Tux Paint 無法存取藍牙</string>
+    <string name="requestrevoquebt">藍牙資訊</string>
+    <string name="Complexity">複雜度</string>
+    <string name="Hide_Cursor">游標</string>
+    <string name="cursor_hide">隱藏游標</string>
+    <string name="cursor_show">顯示游標</string>
+    <string name="Groupmagictools">魔法工具分組</string>
+    <string name="groupmagictools">將魔法工具分成幾個類別</string>
+    <string name="ungroupmagictools">將所有魔法工具放在一起</string>
+
+
+</resources>
