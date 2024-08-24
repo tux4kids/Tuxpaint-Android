@@ -359,6 +359,7 @@ extern status_t haiku_trash(const char *f);
 #define AUTOSAVE_GOING_BACKGROUND
 #include "android_print.h"
 #include "android_assets.h"
+int entered_background = 0;
 
 #else
 
@@ -2739,6 +2740,7 @@ static void mainloop(void)
         {
           do_save(cur_tool, 0, 1);
           save_current();
+          entered_background = 1;
         }
       }
       else if (event.type == SDL_APP_DIDENTERFOREGROUND)
@@ -2754,6 +2756,7 @@ static void mainloop(void)
           free(fname);
         }
         redraw_tux_text();
+        entered_background = 0;
       }
 #endif
       else if (event.type == SDL_WINDOWEVENT)
@@ -14811,6 +14814,14 @@ static int do_prompt_image_flash_snd(const char *const text,
     printf("Prompt without sound\n");
     fflush(stdout);
   }
+#endif
+
+#ifdef AUTOSAVE_GOING_BACKGROUND
+  /* If we are already in background, and Android wants to recover resources, it will call for quitting.
+     However, Android will not allow user interaction anymore.
+     Since the drawing is already (auto)saved, it is safe to quit here */
+  if (entered_background)
+    cleanup();
 #endif
 
   val_x = val_y = motioner = 0;
