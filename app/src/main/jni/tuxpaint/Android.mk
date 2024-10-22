@@ -96,9 +96,9 @@ MAGIC_NAMES := $(patsubst %.c, %, $(notdir $(MAGIC_FILES)))
 $(foreach _magic, $(MAGIC_NAMES),\
     $(eval include $(CLEAR_VARS))\
     $(eval LOCAL_MODULE := $(_magic))\
-    $(eval LOCAL_C_INCLUDES := $(LOCAL_PATH)/src)\
+    $(eval LOCAL_C_INCLUDES := $(LOCAL_PATH)/src  $(LOCAL_PATH)/../SDL2_gfx-1.0.4/)\
     $(eval MAGIC_CFLAGS:=-g3 -O2 -fno-common -W -Wstrict-prototypes -Wmissing-prototypes -Wall)\
     $(eval LOCAL_SRC_FILES := magic/src/$(_magic).c)\
-    $(eval LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf tuxpaint_intl)\
+    $(eval LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf tuxpaint_intl SDL2_gfx)\
     $(eval include $(BUILD_SHARED_LIBRARY))\
 )
