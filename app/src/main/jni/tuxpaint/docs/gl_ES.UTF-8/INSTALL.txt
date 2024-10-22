@@ -1,5 +1,5 @@
                                    Tux Paint
-                                versión 0.9.33
+                                versión 0.9.34
                          Documentación da instalación
 
         Copyright © 2002-2024 by varios colaboradores; see AUTHORS.txt.
@@ -28,7 +28,7 @@
 
 Requirements
 
-Simple DirectMedia Layer library (libSDL)
+               ### Simple DirectMedia Layer library (libSDL) ###
 
 Tux Paint require a «Simple DirectMedia Layer Library (libSDL)», unha
 biblioteca de programación multimedia de código aberto dispoñíbel baixo a
@@ -58,13 +58,13 @@ mantemento de paquetes como «apt» de Debian).
 development versions of the packages. (For example, install both
 "SDL2-2.24.0.rpm" and "SDL2-devel-2.24.0.rpm".)
 
-Outras bibliotecas
+## Outras bibliotecas ##
 
 Tux Paint tamén aproveita outras bibliotecas libres con licenza LGPL. En Linux,
 do mesmo xeito que SDL, deberían estar xa instaladas ou estar dispoñíbeis para
 a súa instalación como parte da súa distribución de Linux.
 
-libPNG
+→ libPNG ←
 
     Tux Paint utiliza o formato PNG (Portable Network Graphics – Gráficos de
     Rede Portátiles) para os seus ficheiros de datos. A imaxe SDL requirirá a
@@ -73,8 +73,8 @@ libPNG
     http://www.libpng.org/pub/png/libpng.html
 
 
-
-gettext
+     
+→ gettext ←
 
     Tux Paint utiliza a configuración local do sistema xunto coa biblioteca
     «gettext» para admitir varios idiomas (p. ex., o español). Necesitará ter a
@@ -83,8 +83,8 @@ gettext
     http://www.gnu.org/software/gettext/
 
 
-
-libpaper (Só Linux/Unix)
+     
+→ libpaper (Só Linux/Unix) ←
 
     A partir de Tux Paint 0.9.17, Tux Paint pode determinar o tamaño de papel
     predeterminado do seu sistema (p. ex.: A4 ou Carta), ou pódeselle indicar
@@ -93,8 +93,8 @@ libpaper (Só Linux/Unix)
     https://github.com/naota/libpaper
 
 
-
-FriBiDi
+     
+→ FriBiDi ←
 
     As ferramentas «Texto» e «Etiqueta» de Tux Paint admiten linguaxes
     bidireccionais grazas á biblioteca «FriBiDi».
@@ -102,32 +102,31 @@ FriBiDi
     http://fribidi.org/
 
 
-
-Compatibilidade de SVG
+     
+→ Compatibilidade de SVG ←
 
     A partir de Tux Paint 0.9.17, Tux Paint pode cargar imaxes SVG (Scalable
     Vector Graphics — Gráficos Vectoriais Escalábeis) como selos. Admítense
     dous conxuntos de bibliotecas e pódese desactivar completamente a
     compatibilidade SVG (a través de «make SVG_LIB:=»)
 
-    librsvg-2 & libCairo2 (bibliotecas máis recentes)
-          o libRSVG 2: http://librsvg.sourceforge.net/
-          o Cairo 2: http://www.cairographics.org/
-          o Estes tamén dependen do seguinte:
-              # GdkPixbuf & GLib: http://www.gtk.org/
-              # Pango: http://www.pango.org/
+    → librsvg-2 & libCairo2 (bibliotecas máis recentes) ←
+          @ libRSVG 2: http://librsvg.sourceforge.net/
+          @ Cairo 2: http://www.cairographics.org/
+          @ Estes tamén dependen do seguinte:
+              - GdkPixbuf & GLib: http://www.gtk.org/
+              - Pango: http://www.pango.org/
 
+         
+    → Bibliotecas SVG máis antigas ←
+          @ libcairo1, libsvg1, & libsvg-cairo1: http://www.cairographics.org/
+          @ Estes tamén dependen do seguinte:
+              - libxml2: https://gitlab.gnome.org/GNOME/libxml2
 
-    Bibliotecas SVG máis antigas
-          o libcairo1, libsvg1, & libsvg-cairo1: http://www.cairographics.org/
-          o Estes tamén dependen do seguinte:
-              # libxml2: https://gitlab.gnome.org/GNOME/libxml2
+         
 
-
-
-
-
-Función de exportación de GIF animado
+     
+→ Función de exportación de GIF animado ←
 
     Para a compatibilidade da exportación de GIF animados (presentacións de
     diapositivas), é necesaria a biblioteca «libimagequant» (do proxecto
@@ -136,8 +135,8 @@ Función de exportación de GIF animado
     https://github.com/ImageOptim/libimagequant
 
 
-
-Ferramentas NetPBM (opcional) Xa non se usa, de xeito predeterminado
+     
+→ Ferramentas NetPBM (opcional) Xa non se usa, de xeito predeterminado ←
 
     📜 En Linux e Unix, as versións anteriores de Tux Paint utilizaban as
     ferramentas NetPBM para axudar á impresión. (Tux Paint xera un PNG e
@@ -147,7 +146,7 @@ Ferramentas NetPBM (opcional) Xa non se usa, de xeito predeterminado
     http://netpbm.sourceforge.net/
 
 
-
+     
 
 Compiling and Installation
 
@@ -157,11 +156,11 @@ está dispoñíbel libremente.
 
     -----------------------------------------------------------------------
 
-Windows
+                                ### Windows ###
 
 10 de Xullo de 2022 Shin-ichi TOYAMA <dolphin6k@wmail.plala.or.jp>
 
-Compiling Set-Up
+## Compiling Set-Up ##
 
 A partir de febreiro de 2005 (comezando con Tux Paint 0.9.15), o «Makefile»
 inclúe compatibilidade para construír nun sistema Windows usando MinGW/MSYS (
@@ -171,7 +170,7 @@ Many tools and libraries are required to build Tux Paint. The package
 management system "pacman" helps you install them automatically solving
 complicated dependencies.
 
-MYSYS2
+# MYSYS2 #
 
 Download the latest MSYS2 environment from https://www.msys2.org/ and install
 it where you'd like (the default is "C:\msys64")
@@ -199,7 +198,7 @@ environment.
 
           -----------------------------------------------------------
 
-MinGW 64bit (x86_64) compiler and tools
+# MinGW 64bit (x86_64) compiler and tools #
 
 Within the MSYS2 shell, run the following command to install 64bit compiler and
 basic development tools:
@@ -210,7 +209,7 @@ basic development tools:
 Link Library (.dll) files they depends on. Tux Paint's packaging process for
 binary distribution uses it to find required .dll files.
 
-64bit (x86_64) dependency libraries for Tux Paint and Tux Paint Config
+# 64bit (x86_64) dependency libraries for Tux Paint and Tux Paint Config #
 
 You can install tools and libraries required for compiling Tux Paint and Tux
 Paint Config on MSYS2/MINGW using "pacman" except for SDL2_Pango and
@@ -224,7 +223,7 @@ installing it if you are only building "Tux Paint".
 
 💡 Note: Close the shell before proceeding to the remaining process.
 
-Install SDL2_Pango and libunibreak on the 64bit environment
+# Install SDL2_Pango and libunibreak on the 64bit environment #
 
 SDL2_Pango and libunibreak should be installed manually.
 
@@ -256,7 +255,7 @@ ImageMagick" section if you need only a 64bit build environment.
 
           -----------------------------------------------------------
 
-MinGW 32bit (i686) compiler and tools
+# MinGW 32bit (i686) compiler and tools #
 
 Within the MSYS2 shell, run the following command to install 32bit compiler and
 basic development tools:
@@ -267,7 +266,7 @@ basic development tools:
 Link Library (.dll) files they depends on. Tux Paint's packaging process for
 binary distribution uses it to find required .dll files.
 
-32bit (i686) dependency libraries for Tux Paint and Tux Paint Config
+# 32bit (i686) dependency libraries for Tux Paint and Tux Paint Config #
 
 You can install tools and libraries required for compiling Tux Paint and Tux
 Paint Config on MSYS2/MINGW using "pacman" except for SDL2_Pango and
@@ -281,7 +280,7 @@ installing it if you are only building "Tux Paint".
 
 💡 Note: Close the shell before proceeding to the remaining process.
 
-Install SDL2_Pango and libunibreak on the 32bit environment
+# Install SDL2_Pango and libunibreak on the 32bit environment #
 
 SDL2_Pango and libunibreak should be installed manually.
 
@@ -308,7 +307,7 @@ You can fetch the source code from the git repositry and compile it as follows.
     $ cd libunibreak
     $ ./augogen.sh --prefix=/mingw32 && make && make install
 
-ImageMagick
+## ImageMagick ##
 
 ImageMagick is a compilation of command line tools to create, edit, compose, or
 convert bitmap images supporting quite a large number of image formats. Tux
@@ -330,7 +329,7 @@ your "PATH" environment variable. For example:
 You can make this permanent by adding the above to your the BASH shell
 configuration file, "~/.bash_profile".
 
-Tux Paint & Tux Paint Config.
+## Tux Paint & Tux Paint Config. ##
 
 You can compile 64-bit binaries using "MSYS2 64bit" shell, and 32-bit binaries
 using "MSYS2 32bit" shell, respectively.
@@ -340,7 +339,7 @@ using "MSYS2 32bit" shell, respectively.
   * Select "MSYS2 64bit" → "MSYS2 MinGW 32-bit" from the "Start Menu" to open
     the 32bit shell.
 
-Tux Paint Config.
+# Tux Paint Config. #
 
 "Tux Paint Config" is a useful graphical tool for tweaking Tux Paint's
 behavior. You have to build this component before compiling Tux Paint if you
@@ -368,7 +367,7 @@ Now you can build Tux Paint Config. as follows:
     $ cd tuxpaint-config
     $ make win32
 
-Tux Paint
+# Tux Paint #
 
 You can use either (a) a stable tar-ball release, or (b) the developing source
 tree.
@@ -396,7 +395,7 @@ collected in the directory for binary distribution "bdist" directory under
 "win32". You can start them by double-clicking their executable (.exe) files in
 the "bdist" directory.
 
-Building the Tux Paint Windows Installer
+## Building the Tux Paint Windows Installer ##
 
 Inno Setup is used to build executable installer for Tux Paint. Therefore you
 have to install it in the first place.
@@ -418,7 +417,7 @@ Then, you can easily build an executable installer by right-clicking on the
 list. It will run for a while, and eventually you will find a "tuxpaint-X.Y.Z
 -windows-<arch>-installer.exe" file in the same directory.
 
-Running the Tux Paint Windows Installer
+## Running the Tux Paint Windows Installer ##
 
 Faga dobre clic no executábel do instalador de Tux Paint (ficheiro .EXE) e siga
 as instrucións.
@@ -436,7 +435,7 @@ lugar diferente.
 
 Neste punto, pode premer en «Instalar» para instalar Tux Paint.
 
-Changing the Settings Using the Shortcut
+## Changing the Settings Using the Shortcut ##
 
 Para cambiar os axustes do programa, prema co botón dereito no atallo de
 TuxPaint e seleccione «Propiedades» (na parte inferior).
@@ -464,7 +463,7 @@ botón «Aplicar»).
 
 Cando teña rematado, prema en «Aceptar».
 
-If Something Goes Wrong
+## If Something Goes Wrong ##
 
 If, when you double-click on the shortcut to run Tux Paint, nothing happens, it
 is probably because some of these command-line options are wrong. Open an
@@ -478,9 +477,9 @@ e minúsculas incorrectas (maiúsculas «Z» no canto de minúsculas «z») ou a
 
     -----------------------------------------------------------------------
 
-Linux/Unix
+                              ### Linux/Unix ###
 
-Compilación:
+## Compilación: ##
 
 💡 Note: Tux Paint does not use autoconf/automake, so there is no "./configure"
 script to run. Compiling should be straight-forward though, assuming everything
@@ -491,8 +490,8 @@ orde dende un indicador do sistema (p. ex.: «$»):
 
     $ make
 
-Desactivar a compatibilidade de «SVG» (e, polo tanto, as dependencias de
-«Cairo, libSVG, e svg-cairo»:
+## Desactivar a compatibilidade de «SVG» (e, polo tanto, as dependencias de
+«Cairo, libSVG, e svg-cairo»: ##
 
 Para desactivar a compatibilidade con SVG (por exemplo, se o seu sistema non é
 compatíbel coa biblioteca de Cairo ou outras dependencias relacionadas co SVG),
@@ -500,7 +499,7 @@ pode executar «make» engadindo «SVG_LIB= SVG_CFLAGS= NOSVGFLAG=NOSVG»:
 
     $ make SVG_LIB= SVG_CFLAGS=
 
-Disabling Sound at Compile-time
+## Disabling Sound at Compile-time ##
 
 Se non te unha tarxeta de son ou prefire construír o programa sen asistencia de
 son (e polo tanto sen a dependencia SDL_mixer), pode executar «make» con
@@ -508,12 +507,12 @@ son (e polo tanto sen a dependencia SDL_mixer), pode executar «make» con
 
     $ make SDL_MIXER_LIB=
 
-Other options
+## Other options ##
 
 Outras opcións (p. ex.: rutas de instalación) poden ser anuladas; véxaas en
 «Makefile» para máis detalles.
 
-If you get errors
+## If you get errors ##
 
 Se recibe algún erro durante o tempo de compilación, asegúrese de ter
 instaladas as bibliotecas axeitadas (ver máis arriba). Se está a empregar
@@ -522,7 +521,7 @@ Debian), asegúrese de obter tamén os correspondentes paquetes «-dev» ou
 «-devel», se non, non poderá compilar Tux Paint (e outros programas) dende o
 código fonte.
 
-Installng
+## Installng ##
 
 Supoñendo que non se produciron erros graves, agora pode instalar o programa
 para que os usuarios do sistema poidan executalo. De xeito predeterminado, isto
@@ -550,7 +549,7 @@ Linux):
 local/bin/". The data files (images, sounds, etc.) are placed in "/usr/local/
 share/tuxpaint/".
 
-Cambiar onde van as cousas
+# Cambiar onde van as cousas #
 
 Pode cambiar onde irán as cousas axustando as variábeis de «Makefile» na liña
 de ordes. «DESTDIR» úsase para colocar a saída nunha área de espera para a
@@ -559,49 +558,49 @@ e, de xeito predeterminado, está estabelecido en «/usr/local».
 
 Outras variábeis son:
 
-BIN_PREFIX
+→ BIN_PREFIX ←
     Onde se instalará o binario «tuxpaint». (Estabelécese como «$(PREFIX)/
     bin»como predeterminado, p. ex.: «/usr/local/bin»)
-
-DATA_PREFIX
+     
+→ DATA_PREFIX ←
     Onde irán os ficheiros de datos (son, gráficos, pinceis, selos, tipos de
     letra) e onde os buscará Tux Paint cando se execute. (Estabelecer en «$
     (PREFIX)/share/tuxpaint»)
-
-DOC_PREFIX
+     
+→ DOC_PREFIX ←
     Onde irán os ficheiros de texto da documentación (o directorio «docs»).
     (Estabelecer como «$(PREFIX)/share/doc/tuxpaint»)
-
-MAN_PREFIX
+     
+→ MAN_PREFIX ←
     Onde irá a páxina do manual de Tux Paint. (Estabelecer como «$(PREFIX)/
     share/man»)
-
-ICON_PREFIX — $(PREFIX)/share/pixmaps
-X11_ICON_PREFIX — $(PREFIX)/X11R6/include/X11/pixmaps
-GNOME_PREFIX — $(PREFIX)/share/gnome/apps/Graphics
-KDE_PREFIX — $(PREFIX)/share/applnk/Graphics
+     
+→ ICON_PREFIX — $(PREFIX)/share/pixmaps ←
+→ X11_ICON_PREFIX — $(PREFIX)/X11R6/include/X11/pixmaps ←
+→ GNOME_PREFIX — $(PREFIX)/share/gnome/apps/Graphics ←
+→ KDE_PREFIX — $(PREFIX)/share/applnk/Graphics ←
     Onde irán as iconas e os lanzadores (para GNOME e KDE).
-
-LOCALE_PREFIX
+     
+→ LOCALE_PREFIX ←
     Onde irán os ficheiros de tradución para Tux Paint e onde os buscará Tux
     Paint. (Estabelécese en «$(PREFIX)/share/locale/») (A localización final
     dun ficheiro de tradución estará no directorio da configuración local (por
     exemplo, «es» para o español), dentro do subdirectorio «LC_MESSAGES»).
-
+     
 
 💡 Note: This list is out of date. See "Makefile" and "Makefile-i18n" for a
 complete list.
 
     -----------------------------------------------------------------------
 
-macOS
+                                 ### macOS ###
 
 5 de Xuño de 2022 Mark Kim <markuskimius@gmail.com>
 
 Starting with Tux Paint 0.9.23, Tux Paint for macOS is built as though it were
 a Linux application.
 
-Prerequisites
+## Prerequisites ##
 
 Although Tux Paint is built without the Xcode IDE, Xcode itself is still
 required to build Tux Paint. Download it from the App Store, and launch it once
@@ -637,7 +636,7 @@ of Tux Paint.
 
 ^* Not available from MacPorts as of this writing, see below.
 
-libimagequant
+# libimagequant #
 
 libimagequant is not available from MacPorts as of this writing. It can be
 installed from the source code as follows. It should be installed to /opt/local
@@ -649,7 +648,7 @@ installed from the source code as follows. It should be installed to /opt/local
     $ cargo build --release # Must use cargo from MacPorts
     $ sudo make PREFIX=/opt/local install
 
-sdl2_pango
+# sdl2_pango #
 
 sdl2_pango is not available from MacPorts as of this writing. It can be
 installed from the source code as follows. It should be installed to /opt/local
@@ -663,7 +662,7 @@ WARNING: Having any UNIX-like toolset installed on your Mac besides MacPorts
 and Xcode, such as Fink or Brew, will prevent your app bundle from being
 portable. Be sure Fink and Brew are not accessible from your build environment.
 
-How to Build
+## How to Build ##
 
 Simply, run:
 
@@ -677,7 +676,7 @@ TuxPaint.dmg'.
 Additional steps are required when building a Unviersal Binary. See "Building a
 Universal Binary" below.
 
-Known Issues
+## Known Issues ##
 
   * A macOS binary built on a specific version of macOS only runs on that
     version of macOS or later. To ensure Tux Paint can run on the oldest
@@ -694,7 +693,7 @@ Known Issues
     (from MacPorts) need to be recompiled. See "Recompiling MacPorts" below for
     the instructions.
 
-Old Versions of macOS
+## Old Versions of macOS ##
 
 Some old versions of macOS can be downloaded from Apple's support page: https:/
 /support.apple.com/en-us/HT211683
@@ -734,7 +733,7 @@ the Xcode command line tools (do not run "xcode-select --install") but
 otherwise build Tux Paint using the same steps described in the earlier part of
 this document.
 
-Recompiling MacPorts
+## Recompiling MacPorts ##
 
 To recompile MacPorts to be usable on older versions of macOS, set the
 following options in /opt/local/etc/macports/macports.conf:
@@ -758,7 +757,7 @@ they can only be built to run natively on the hardware on which they were
 built. See "Building a Universal Binary" below for instructions on how to build
 Tux Paint as a Universal Binary.
 
-Building a Universal Binary
+## Building a Universal Binary ##
 
 To build Tux Paint as a Universal Binary, compile Tux Paint for the Intel CPU
 and the Apple Silicon separately first. Then rename the app bundle for the
@@ -772,7 +771,7 @@ two application bundles as below. The DMG file can be built afterwards:
 
     -----------------------------------------------------------------------
 
-Android
+                                ### Android ###
 
 29 de Marzo de 2023 Pere Pujal i Carabantes <perepujal@gmail.com> (Edited by
 Bill Kendrick)
@@ -781,7 +780,7 @@ As of March 2023, the Android build of Tux Paint is maintained in a separate
 code repository at GitHub: https://github.com/tux4kids/Tuxpaint-Android.
 Detailed instructions are there; this acts as an overview.
 
-Prerequisites
+## Prerequisites ##
 
 You will need recent versions of:
 
@@ -806,7 +805,7 @@ one another, and the script in the directory containing both.
 Fill the app/src/main/assets directory by running cd app/src/main/jni/tuxpaint
 && ./mkzip_assets.sh
 
-Building
+## Building ##
 
 The Gradle build generates some variants: PlayStore, debugPlayStore,
 offPlayStore and debugoffPlayStore. You must sign the non-debug ones to be able
@@ -835,36 +834,37 @@ the makebuildserver tool they provide, then, from the root of fdroiddata, run
 
     -----------------------------------------------------------------------
 
-Haiku
+                                 ### Haiku ###
 
 7 de Maio de 2023 Luc Schrijvers <begasus@gmail.com> (Edited by Bill Kendrick)
 
-Prerequisites
+## Prerequisites ##
 
 Install the required develop packages in Terminal:
 
-32-bit:
+→ 32-bit: ←
     pkgman install xcairo_x86_devel fribidi_x86_devel gdk_pixbuf_x86_devel
     libiconv_x86_devel libimagequant_x86_devel gettext_x86_libintl
     libpaper_x86_devel pango_x86_devel libpng16_x86_devel librsvg_x86_devel
     libsdl2_x86_devel sdl2_image_x86_devel sdl2_gfx_x86_devel
     sdl2_mixer_x86_devel sdl2_pango_x86_devel sdl2_ttf_x86_devel zlib_x86_devel
-
-64-bit:
+     
+→ 64-bit: ←
     pkgman install xcairo_devel fribidi_devel gdk_pixbuf_devel libiconv_devel
     libimagequant_devel gettext_libintl libpaper_devel pango_devel
     libpng16_devel librsvg_devel libsdl2_devel sdl2_image_devel sdl2_gfx_devel
     sdl2_mixer_devel sdl2_pango_devel sdl2_ttf_devel zlib_devel
-
+     
+←
 
 For 32-bit you need to switch to the new compiler (currently gcc 11.2.0) with
 setarch x86
 
-Building
+## Building ##
 
 make PREFIX=/boot/home/config/non-packaged
 
-Tux Paint Stamps
+## Tux Paint Stamps ##
 
 make install-all DATA_PREFIX=/boot/home/config/non-packaged/share/tuxpaint/
 
@@ -877,9 +877,9 @@ setting "DEBUG" (and, if verbose logging is wanted, "VERBOSE") #defines in "src
 
 Uninstalling Tux Paint
 
-Windows
+                                ### Windows ###
 
-Uso do desinstalador
+## Uso do desinstalador ##
 
 Se instalou os atallos do menú Inicio (o predeterminado), vaia ao cartafol
 TuxPaint e seleccione «Desinstalar». Amosarase unha caixa que confirmará que
@@ -888,12 +888,12 @@ permanentemente Tux Paint, prema no botón «Desinstalar».
 
 Cando remate, prema no botón pechar.
 
-Usar o Panel de control
+## Usar o Panel de control ##
 
 Tamén é posíbel usar a entrada «TuxPaint (só eliminar)« na sección Engadir/
 Eliminar programas do Panel de control.
 
-macOS
+                                 ### macOS ###
 
 Delete "TuxPaint.app" from the "/Applications" folder. Data files, including
 the configuration files, stamps, and saved pictures, may be found in 
@@ -901,7 +901,7 @@ the configuration files, stamps, and saved pictures, may be found in
 "/Users/nome de usuario/Library/Application Support/TuxPaint/" (individual
 users).
 
-Linux
+                                 ### Linux ###
 
 Within the Tux Paint source directory (where you compiled Tux Paint), you can
 use the "make uninstall" target to uninstall Tux Paint. By default, this must

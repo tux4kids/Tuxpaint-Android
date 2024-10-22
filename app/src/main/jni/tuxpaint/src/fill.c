@@ -203,7 +203,7 @@ void cleanup_queue(void)
 
 
 /* Returns how similar colors 'c1' and 'c2' are */
-double colors_close(SDL_Surface * canvas, Uint32 c1, Uint32 c2)
+double colors_close(SDL_Surface *canvas, Uint32 c1, Uint32 c2)
 {
   Uint8 r1, g1, b1, r2, g2, b2;
 
@@ -236,7 +236,7 @@ double colors_close(SDL_Surface * canvas, Uint32 c1, Uint32 c2)
   }
 }
 
-int would_flood_fill(SDL_Surface * canvas, Uint32 cur_colr, Uint32 old_colr)
+int would_flood_fill(SDL_Surface *canvas, Uint32 cur_colr, Uint32 old_colr)
 {
   if (colors_close(canvas, cur_colr, old_colr) < COLOR_MATCH_NARROW)
   {
@@ -248,16 +248,16 @@ int would_flood_fill(SDL_Surface * canvas, Uint32 cur_colr, Uint32 old_colr)
   }
 }
 
-void do_flood_fill(SDL_Surface * screen, SDL_Texture * texture,
-                   SDL_Renderer * renderer, SDL_Surface * last,
-                   SDL_Surface * canvas, int x, int y, Uint32 cur_colr,
-                   Uint32 old_colr, int *x1, int *y1, int *x2, int *y2, Uint8 * touched)
+void do_flood_fill(SDL_Surface *screen, SDL_Texture *texture,
+                   SDL_Renderer *renderer, SDL_Surface *last,
+                   SDL_Surface *canvas, int x, int y, Uint32 cur_colr,
+                   Uint32 old_colr, int *x1, int *y1, int *x2, int *y2, Uint8 *touched)
 {
   simulate_flood_fill(screen, texture, renderer, last, canvas, x, y, cur_colr, old_colr, x1, y1, x2, y2, touched);
 }
 
 
-Uint32 blend(SDL_Surface * canvas, Uint32 draw_colr, Uint32 old_colr, double pct)
+Uint32 blend(SDL_Surface *canvas, Uint32 draw_colr, Uint32 old_colr, double pct)
 {
   Uint8 old_r, old_g, old_b, draw_r, draw_g, draw_b, new_r, new_g, new_b;
 
@@ -272,11 +272,11 @@ Uint32 blend(SDL_Surface * canvas, Uint32 draw_colr, Uint32 old_colr, double pct
   return SDL_MapRGB(canvas->format, new_r, new_g, new_b);
 }
 
-void simulate_flood_fill(SDL_Surface * screen, SDL_Texture * texture,
-                         SDL_Renderer * renderer, SDL_Surface * last,
-                         SDL_Surface * canvas, int x, int y, Uint32 cur_colr,
+void simulate_flood_fill(SDL_Surface *screen, SDL_Texture *texture,
+                         SDL_Renderer *renderer, SDL_Surface *last,
+                         SDL_Surface *canvas, int x, int y, Uint32 cur_colr,
                          Uint32 old_colr, int *extent_x1, int *extent_y1,
-                         int *extent_x2, int *extent_y2, Uint8 * touched)
+                         int *extent_x2, int *extent_y2, Uint8 *touched)
 {
   int y_outside;
 
@@ -310,8 +310,8 @@ void simulate_flood_fill(SDL_Surface * screen, SDL_Texture * texture,
   *extent_y2 = global_extent_y2;
 }
 
-void simulate_flood_fill_outside_check(SDL_Surface * screen,
-                                       SDL_Texture * texture, SDL_Renderer * renderer, int x, int y, int y_outside)
+void simulate_flood_fill_outside_check(SDL_Surface *screen,
+                                       SDL_Texture *texture, SDL_Renderer *renderer, int x, int y, int y_outside)
 {
   int fillL, fillR, narrowFillL, narrowFillR, i, outside, just_queued;
   double in_line, closeness;
@@ -553,9 +553,9 @@ void simulate_flood_fill_outside_check(SDL_Surface * screen,
 }
 
 
-void draw_linear_gradient(SDL_Surface * canvas, SDL_Surface * last,
+void draw_linear_gradient(SDL_Surface *canvas, SDL_Surface *last,
                           int x_left, int y_top, int x_right, int y_bottom,
-                          int x1, int y1, int x2, int y2, Uint32 draw_color, Uint8 * touched)
+                          int x1, int y1, int x2, int y2, Uint32 draw_color, Uint8 *touched)
 {
   Uint32 old_colr, new_colr;
   int xx, yy;
@@ -618,7 +618,7 @@ void draw_linear_gradient(SDL_Surface * canvas, SDL_Surface * last,
   }
 }
 
-void draw_brush_fill_single(SDL_Surface * canvas, int x, int y, Uint32 draw_color, Uint8 * touched)
+void draw_brush_fill_single(SDL_Surface *canvas, int x, int y, Uint32 draw_color, Uint8 *touched)
 {
   int xx, yy;
   int pix;
@@ -640,11 +640,11 @@ void draw_brush_fill_single(SDL_Surface * canvas, int x, int y, Uint32 draw_colo
   }
 }
 
-void draw_brush_fill(SDL_Surface * canvas,
+void draw_brush_fill(SDL_Surface *canvas,
                      int x_left ATTRIBUTE_UNUSED, int y_top ATTRIBUTE_UNUSED,
                      int x_right ATTRIBUTE_UNUSED,
                      int y_bottom ATTRIBUTE_UNUSED, int x1, int y1, int x2,
-                     int y2, Uint32 draw_color, Uint8 * touched, int *up_x1, int *up_y1, int *up_x2, int *up_y2)
+                     int y2, Uint32 draw_color, Uint8 *touched, int *up_x1, int *up_y1, int *up_x2, int *up_y2)
 {
   int dx, dy;
   int y;
@@ -722,8 +722,8 @@ void draw_brush_fill(SDL_Surface * canvas,
   *up_y2 = orig_y2 + 16;
 }
 
-void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top,
-                          int x_right, int y_bottom, int x, int y, Uint32 draw_color, Uint8 * touched)
+void draw_radial_gradient(SDL_Surface *canvas, int x_left, int y_top,
+                          int x_right, int y_bottom, int x, int y, Uint32 draw_color, Uint8 *touched)
 {
   Uint32 old_colr, new_colr;
   int xx, yy;
@@ -788,7 +788,7 @@ void draw_radial_gradient(SDL_Surface * canvas, int x_left, int y_top,
    Converted to C for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>, 2023
 */
 
-void sdf_pt_get(sdf_grid * g, int x, int y, sdf_point * p)
+void sdf_pt_get(sdf_grid *g, int x, int y, sdf_point *p)
 {
   if (x >= 0 && x < g->w && y >= 0 && y < g->h)
   {
@@ -800,7 +800,7 @@ void sdf_pt_get(sdf_grid * g, int x, int y, sdf_point * p)
   }
 }
 
-void sdf_pt_put(sdf_grid * g, int x, int y, sdf_point p)
+void sdf_pt_put(sdf_grid *g, int x, int y, sdf_point p)
 {
   memcpy(&(g->grid[y][x]), &p, sizeof(sdf_point));
 }
@@ -810,7 +810,7 @@ int sdf_distsq(sdf_point p)
   return ((p.dx * p.dx) + (p.dy * p.dy));
 }
 
-void sdf_compare(sdf_grid * g, sdf_point * p, int x, int y, int offsetx, int offsety)
+void sdf_compare(sdf_grid *g, sdf_point *p, int x, int y, int offsetx, int offsety)
 {
   sdf_point other;
 
@@ -825,7 +825,7 @@ void sdf_compare(sdf_grid * g, sdf_point * p, int x, int y, int offsetx, int off
   }
 }
 
-int malloc_sdf_grid(sdf_grid * g, int w, int h)
+int malloc_sdf_grid(sdf_grid *g, int w, int h)
 {
   int i, abort;
 
@@ -864,7 +864,7 @@ int malloc_sdf_grid(sdf_grid * g, int w, int h)
   return 1;
 }
 
-void free_sdf_grid(sdf_grid * g)
+void free_sdf_grid(sdf_grid *g)
 {
   int i;
 
@@ -879,7 +879,7 @@ void free_sdf_grid(sdf_grid * g)
 }
 
 
-void sdf_fill_bitmask_to_sdf_grids(Uint8 * bitmask, int w, int h, sdf_grid * g1, sdf_grid * g2)
+void sdf_fill_bitmask_to_sdf_grids(Uint8 *bitmask, int w, int h, sdf_grid *g1, sdf_grid *g2)
 {
   int x, y;
 
@@ -902,7 +902,7 @@ void sdf_fill_bitmask_to_sdf_grids(Uint8 * bitmask, int w, int h, sdf_grid * g1,
 }
 
 
-void sdf_generate(sdf_grid * g)
+void sdf_generate(sdf_grid *g)
 {
   int x, y;
   sdf_point p;
@@ -953,7 +953,7 @@ void sdf_generate(sdf_grid * g)
 /* End of Signed Distance Field functions ------------------------------- */
 
 
-void draw_shaped_gradient(SDL_Surface * canvas, Uint32 draw_color, Uint8 * touched)
+void draw_shaped_gradient(SDL_Surface *canvas, Uint32 draw_color, Uint8 *touched)
 {
   Uint32 old_colr, new_colr;
   int xx, yy;

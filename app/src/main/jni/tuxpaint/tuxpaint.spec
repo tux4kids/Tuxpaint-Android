@@ -1,6 +1,6 @@
 Summary: A drawing program for young children
 Name: tuxpaint
-Version: 0.9.33
+Version: 0.9.34
 Release: 1%{?dist}
 Epoch: 1
 License: GPL
@@ -92,6 +92,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/tuxpaint/*/html/tp_magic_example.c
 
 %changelog
+* Fri Jul 26 2024 <nbs@sonic.net> -
+- Set version number 0.9.34
+
 * Thu Feb 29 2024 <nbs@sonic.net> -
 - Set version number 0.9.33
 

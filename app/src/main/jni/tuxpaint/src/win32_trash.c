@@ -4,7 +4,7 @@
 int MoveFileToRecycleBin(const TCHAR * fullPathName);
 int win32_trash(const char *path);
 
-int MoveFileToRecycleBin(const TCHAR * fullPathName)
+int MoveFileToRecycleBin(const TCHAR *fullPathName)
 {
   SHFILEOPSTRUCT fileOp;
   const TCHAR *src = fullPathName;

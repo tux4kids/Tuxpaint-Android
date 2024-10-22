@@ -61,7 +61,7 @@ static Node *new_trie(int degree, int *nkeys)
   return root;
 }
 
-static void del_trie(Node * root, int degree)
+static void del_trie(Node *root, int degree)
 {
   int i;
 
@@ -77,7 +77,7 @@ static void put_loop(ge_GIF * gif, uint16_t loop);
 #define OR_ABORT if (res == -1) { fprintf(stderr, "Cannot write to GIF\n"); return(NULL); }
 #define OR_ABORT2 if (res == -1) { fprintf(stderr, "Cannot write to GIF\n"); return; }
 
-ge_GIF *ge_new_gif(const char *fname, uint16_t width, uint16_t height, uint8_t * palette, int depth, int loop)
+ge_GIF *ge_new_gif(const char *fname, uint16_t width, uint16_t height, uint8_t *palette, int depth, int loop)
 {
   int i, r, g, b, v;
   ssize_t res;
@@ -158,7 +158,7 @@ no_gif:
   return NULL;
 }
 
-static void put_loop(ge_GIF * gif, uint16_t loop)
+static void put_loop(ge_GIF *gif, uint16_t loop)
 {
   ssize_t res;
 
@@ -181,7 +181,7 @@ static void put_loop(ge_GIF * gif, uint16_t loop)
 /* Add packed key to buffer, updating offset and partial.
  *   gif->offset holds position to put next *bit*
  *   gif->partial holds bits to include in next byte */
-static void put_key(ge_GIF * gif, uint16_t key, int key_size)
+static void put_key(ge_GIF *gif, uint16_t key, int key_size)
 {
   int byte_offset, bit_offset, bits_to_write;
   ssize_t res;
@@ -207,7 +207,7 @@ static void put_key(ge_GIF * gif, uint16_t key, int key_size)
   gif->offset = (gif->offset + key_size) % (0xFF * 8);
 }
 
-static void end_key(ge_GIF * gif)
+static void end_key(ge_GIF *gif)
 {
   int byte_offset;
   ssize_t res;
@@ -227,7 +227,7 @@ static void end_key(ge_GIF * gif)
   gif->offset = gif->partial = 0;
 }
 
-static void put_image(ge_GIF * gif, uint16_t w, uint16_t h, uint16_t x, uint16_t y)
+static void put_image(ge_GIF *gif, uint16_t w, uint16_t h, uint16_t x, uint16_t y)
 {
   int nkeys, key_size, i, j;
   Node *node, *child, *root;
@@ -288,7 +288,7 @@ static void put_image(ge_GIF * gif, uint16_t w, uint16_t h, uint16_t x, uint16_t
   del_trie(root, degree);
 }
 
-static int get_bbox(ge_GIF * gif, uint16_t * w, uint16_t * h, uint16_t * x, uint16_t * y)
+static int get_bbox(ge_GIF *gif, uint16_t *w, uint16_t *h, uint16_t *x, uint16_t *y)
 {
   int i, j, k;
   int left, right, top, bottom;
@@ -337,7 +337,7 @@ static int get_bbox(ge_GIF * gif, uint16_t * w, uint16_t * h, uint16_t * x, uint
  * a minimum of `delay` == 6. If `delay` == 0, no delay information  will be stored
  * for the frame. This can be used when creating still (single-frame) GIF images.
  */
-static void set_delay(ge_GIF * gif, uint16_t d)
+static void set_delay(ge_GIF *gif, uint16_t d)
 {
   ssize_t res;
 
@@ -351,7 +351,7 @@ static void set_delay(ge_GIF * gif, uint16_t d)
   OR_ABORT2;
 }
 
-void ge_add_frame(ge_GIF * gif, uint16_t delay)
+void ge_add_frame(ge_GIF *gif, uint16_t delay)
 {
   uint16_t w, h, x, y;
   uint8_t *tmp;
@@ -377,7 +377,7 @@ void ge_add_frame(ge_GIF * gif, uint16_t delay)
   gif->frame = tmp;
 }
 
-void ge_close_gif(ge_GIF * gif)
+void ge_close_gif(ge_GIF *gif)
 {
   ssize_t res;
 

@@ -1,12 +1,12 @@
                                    Tux Paint
-                                version 0.9.33
+                                version 0.9.34
 
-                  Një program i thjeshtë vizatimi për fëmijë
+               ## Një program i thjeshtë vizatimi për fëmijë ##
 
  Të drejta kopjimi © 2002-2024 nga kontribues të ndryshëm; shihni AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                17 korrik 2024
+                                 21 tetor 2024
 
 +---------------------------------------------------+
 |                 Pasqyrë e Lëndës                  |
@@ -44,7 +44,7 @@
 
 I. Mbi Tux Paint-in
 
-A. Ç’është “Tux Paint”?
+                        ### A. Ç’është “Tux Paint”? ###
 
 Tux Paint is a free drawing program designed for young children (kids ages 3
 and up). It has a simple, easy-to-use interface, fun sound effects, and an
@@ -52,43 +52,43 @@ encouraging cartoon mascot who helps guide children as they use the program. It
 provides a blank canvas and a variety of drawing tools to help your child be
 creative.
 
-B. Objektiva
+                             ### B. Objektiva ###
 
-I lehtë dhe Zbavitës
+→ I lehtë dhe Zbavitës ←
     Tux Paint is meant to be a simple drawing program for young children. It is
     not meant as a general-purpose drawing tool. It is meant to be fun and easy
     to use. Sound effects and a cartoon character help let the user know what's
     going on, and keeps them entertained. There are also extra-large
     cartoon-style mouse pointer shapes.
-
-I zgjerueshëm
+     
+→ I zgjerueshëm ←
     Tux Paint is extensible. Brushes and 'rubber stamp' shapes can be dropped
     in and pulled out. For example, a teacher can drop in a collection of
     animal shapes and ask their students to draw an ecosystem. Each shape can
     have a sound which is played, and textual facts which are displayed, when
     the child selects the shape.
-
-Bartje Në Platforma të Tjera
+     
+→ Bartje Në Platforma të Tjera ←
     Tux Paint is portable among various computer platforms: Windows, Macintosh,
     Linux, etc. The interface looks the same among them all. Tux Paint runs
     suitably well on older systems, and can be built to run better on slow
     systems.
-
-Thjeshtësi
+     
+→ Thjeshtësi ←
     There is no direct access to the computer's underlying intricacies. The
     current image is kept when the program quits, and reappears when it is
     restarted. Saving images requires no need to create filenames or use the
     keyboard. Opening an image is done by selecting it from a collection of
     thumbnails. Access to other files on the computer is restricted.
-
-Përdorim Nga Persona Me Aftësi të Kufizuara
+     
+→ Përdorim Nga Persona Me Aftësi të Kufizuara ←
     Tux Paint offers a number of accessibility options, including increasing
     the size of control buttons, changing the UI font, options to control the
     cursor (mouse pointer) using the keyboard or other input devices (joystick,
     gamepad, etc.), an on-screen keyboard, and "stick" mouse clicks.
+     
 
-
-C. Licencë
+                              ### C. Licencë ###
 
 Tux Paint is an Open Source project, Free Software released under the GNU
 General Public License (GPL). It is free, and the 'source code' behind the
@@ -97,47 +97,76 @@ parts of the program in their own GPL'd software.)
 
 See COPYING.txt for the full text of the GPL license.
 
-D. What's New in Tux Paint version 0.9.33?
+              ### D. What's New in Tux Paint version 0.9.34? ###
 
-Transparent Erasers
-    Erasers that lightly expose more and more of the background.
-
-Dither magic tools
-    Transform parts of an image into a dithered pattern of dots.
-
-Filled Polygon magic tool
-    Create polygons by placing three or more connected points on the canvas.
-
-3D Glasses magic tool updated
-    Different anaglyphic color separations now offered (via the 'size'
-    controls), unless running Tux Paint in 'Novice' complexity level.
-
-Magic tool ungrouping option
-    The numerous Magic tools can be presented as a single long list (as in Tux
-    Paint prior to 0.9.27), rather than paged groups.
-
-Brush descriptions
-    Brushes (used by Paint and Line tools) can now include descriptions that
-    appear when the brush is selected.
-
-New brushes
-    New brushes for the Paint and Lines tools: Acrylic, Pencil, and Fluff
-    brushes.
-Exported filenames shown
-    When exporting a drawing (Open>Export) or a slideshow (Open>Slideshow>
-    Export GIF), the name of the file is displayed and also placed in the copy/
-    paste clipboard.
-Trash can support in Haiku
-    The Haiku port of Tux Paint now also places erased drawings (Open>Erase)
-    into the desktop trash can, rather than deleting the files completely.
+→ "Eraser" Fill mode ←
+    A flood fill option that fills the canvas with the background color, or
+    template or starter background, upon which the drawing was based.
+     
+→ New brushes ←
+    New brushes for the Paint and Lines tools: "Fluff (gradient)", "Graphite",
+    "Impasto", "Paint splats", "Smoke", "Spines", "Water (still)", and
+    "Watercolor splotches".
+     
+→ New brush option ←
+    Brushes may be given a "chaotic" setting, causing them to rotate
+    continuously while drawing with them.
+     
+→ New templates ←
+    "Clouds from an airplane" and "Lough Leane".
+     
+→ New Magic tool: Comic dots ←
+    Draws a repeating dot pattern, simulating the "Ben Day process" used in
+    early comic books.
+     
+→ New Magic tool: Rotate ←
+    Rotates the drawing.
+     
+→ New Magic tool: Fractal ←
+    A set of tools that recursively repeat what you draw, scaling and/or
+    rotating it as they repeat.
+     
+→ New Magic tool: ASCII Typewriter ←
+    Transform your picture into "ASCII art", typewriter-style.
+     
+→ New Magic tool: ASCII Computer ←
+    Transform your picture into "ASCII art", computer-style.
+     
+→ New Magic tool: ASCII Color Computer ←
+    Transform your picture into colored computer "ASCII art".
+     
+→ New Magic tool: Crescent ←
+    Draw one of various crescent shapes at a chosen angle.
+     
+→ New Magic tool: Spiral ←
+    Draw spirals.
+     
+→ New Magic tool: Spiral Square ←
+    Draw square spirals.
+     
+→ New Magic tool: Concentric Circle ←
+    Draw concentric circles.
+     
+→ New Magic tool: Concentric Square ←
+    Draw concentric squares.
+     
+→ New Magic tool: Tessellation Pointy ←
+    Draw repeating tessellation patterns with pointy-topped hexagons.
+     
+→ New Magic tool: Tessellation Flat ←
+    Draw repeating tessellation patterns with flat-topped hexagons.
+     
+→ Magic API Updates ←
+    Sound pause and resume functions added.
+     
 
 Për listën e plotë të ndryshimeve, shihni CHANGES.txt.
 
 II. Përdorim i Tux Paint-it
 
-A. Nisja e Tux Paint-it
+                        ### A. Nisja e Tux Paint-it ###
 
-1. Përdorues të Linux-it/Unix-it
+## 1. Përdorues të Linux-it/Unix-it ##
 
 Tux Paint should have placed a launcher icon in your KDE and/or GNOME menus,
 under 'Graphics.'
@@ -148,7 +177,7 @@ Alternatively, you can run the following command at a shell prompt (e.g., "$"):
 
 If any errors occur, they will be displayed on the terminal (to STDERR).
 
-2. Përdorues Windows-i
+## 2. Përdorues Windows-i ##
 
 [Ikonë Tux Paint-i]
      Tux Paint
@@ -172,13 +201,14 @@ installer.
 If you used the 'ZIP-file' download, Tux Paint's folder will be wherever you
 extracted the contents of the ZIP file.
 
-3. Përdorues të MacOS-it
+## 3. Përdorues të MacOS-it ##
 
 Thjesht dyklikoni mbi ikonën “Tux Paint”.
 
 [Title screen]
+ 
 
-B. Title Screen
+                            ### B. Title Screen ###
 
 When Tux Paint first loads, a title/credits screen will appear.
 
@@ -186,20 +216,22 @@ Once loading is complete, press a key or click or tap in the Tux Paint window
 to continue. (Or, after about 5 seconds, the title screen will go away
 automatically.)
 
-C. Skena Kryesore
+                           ### C. Skena Kryesore ###
 
 The main screen is divided into the following sections:
 
 [Tools: Paint, Stamp, Lines, Shapes, Text, Magic, Label, Undo, Redo, Eraser,
-    New, Open, Save, Print, Quit]
-Në Anën e Majtë: Panle
+New, Open, Save, Print, Quit]
+ 
+→ Në Anën e Majtë: Panle ←
 
     The toolbar contains the drawing and editing controls.
 
 
-
-    [Kanavacë]
-Në Mes: Kanavacë Vizatimi
+     
+[Kanavacë]
+ 
+→ Në Mes: Kanavacë Vizatimi ←
 
     The largest part of the screen, in the center, is the drawing canvas. This
     is, obviously, where you draw!
@@ -210,9 +242,10 @@ Në Mes: Kanavacë Vizatimi
     more details.
 
 
-
-    [Selectors - Brushes, Letters, Shapes, Stamps]
-Në Anën e Djathtë: Përzgjedhës
+     
+[Selectors - Brushes, Letters, Shapes, Stamps]
+ 
+→ Në Anën e Djathtë: Përzgjedhës ←
 
     Depending on the current tool, the selector shows different things. e.g.,
     when the Paint Brush or Line tool is selected, it shows the various brushes
@@ -221,10 +254,11 @@ Në Anën e Djathtë: Përzgjedhës
     various fonts.
 
 
-
-    [Colors - Black, White, Red, Pink, Orange, Yellow, Green, Cyan, Blue,
-    Purple, Brown, Grey]
-Më Poshtë: Ngjyra
+     
+[Colors - Black, White, Red, Pink, Orange, Yellow, Green, Cyan, Blue, Purple,
+Brown, Grey]
+ 
+→ Më Poshtë: Ngjyra ←
 
     When the active tool supports colors, a palette of colors choices will be
     shown near the bottom of the screen. Click one to choose a color, and it
@@ -233,12 +267,12 @@ Më Poshtë: Ngjyra
     as the color to use when flood-filling an area of the picture.)
 
     On the far right are three special color options:
-      + Zgjedhës Ngjyrash
+      o Zgjedhës Ngjyrash
         The "color picker" (which has an outline of an eye-dropper) allows you
         to pick a color found within your drawing.
         (A shortcut key is available to access this feature quickly; see
         below.)
-      + Paletë Ylberi
+      o Paletë Ylberi
         The rainbow palette allows you to pick any color by choosing the hue,
         saturation, and value of the color you want. A box on the left displays
         hundreds of hues — from red at the top through to violet at the bottom
@@ -249,10 +283,10 @@ Më Poshtë: Ngjyra
         Click the green checkbox button to select the color, or the "Back"
         button to dismiss the pop-up without picking a new color.
         You may also set this tool's color to that of other color choices:
-          o Whichever built-in color is selected, if any
-          o Ngjyra e tanishme e Zgjedhësit të Ngjyrave
-          o Ngjyra e tanishme e Përzierësit të Ngjyrave
-      + Përzierës Ngjyrash
+          # Whichever built-in color is selected, if any
+          # Ngjyra e tanishme e Zgjedhësit të Ngjyrave
+          # Ngjyra e tanishme e Përzierësit të Ngjyrave
+      o Përzierës Ngjyrash
         The "color mixer" (which has silhouette of a paint palette) allows you
         to create colors by blending primary additive colors — red, yellow, and
         blue — along with white (to "tint"), grey (to "tone"), and black (to
@@ -280,23 +314,24 @@ Më Poshtë: Ngjyra
     documentation.
 
 
-
-    (Shembull ndihmëze: “Zgjidhni një formë. Klikoni që të zgjidhni qendrën,
-    tërhiqeni, mandej lëreni, kur të ketë madhësinë që doni. Lëvizni përreth që
-    ta rrotulloni dhe klikoni që të vizatohet.”)
-Në Fund: Zonë Ndihme
+     
+(Shembull ndihmëze: “Zgjidhni një formë. Klikoni që të zgjidhni qendrën,
+tërhiqeni, mandej lëreni, kur të ketë madhësinë që doni. Lëvizni përreth që ta
+rrotulloni dhe klikoni që të vizatohet.”)
+ 
+→ Në Fund: Zonë Ndihme ←
 
     At the very bottom of the screen, Tux, the Linux Penguin, provides tips and
     other information while you use Tux Paint.
 
 
+     
 
+                         ### D. Mjete të Mundshme ###
 
-D. Mjete të Mundshme
+## 1. Mjete Vizatimi ##
 
-1. Mjete Vizatimi
-
-a. Mjeti “Ngjyrosni” (Penel)
+a. Mjeti “Ngjyrosni” (Penel) ←
 
     The Paint Brush tool lets you draw freehand, using various brushes (chosen
     in the Selector on the right) and colors (chosen in the Color palette
@@ -338,8 +373,8 @@ a. Mjeti “Ngjyrosni” (Penel)
         the brush spacing controls. See the "Options" documentation.
 
 
-
-b.Mjeti “Stampë” (Vula Gome)
+     
+b.Mjeti “Stampë” (Vula Gome) ←
 
     The Stamp tool is like a set of rubber stamps or stickers. It lets you
     paste pre-drawn or photographic images (like a picture of a horse, or a
@@ -349,12 +384,12 @@ b.Mjeti “Stampë” (Vula Gome)
     showing where the stamp will be placed, and how big it will be. Click on
     the canvas where you wish to place the stamp.
 
-    Kategori Stampash
+    → Kategori Stampash ←
         There can be numerous categories of stamps (e.g., animals, plants,
         outer space, vehicles, people, etc.). Use the Left and Right arrows
         near the bottom of the Selector to cycle through the collections.
-
-    Rrotullim Stampash
+         
+    → Rrotullim Stampash ←
 
         Using the rotation toggle button near the bottom right, you can enable
         a rotation step when placing stamps. Once you've placed the stamp,
@@ -371,19 +406,19 @@ b.Mjeti “Stampë” (Vula Gome)
         0.9.29.
 
 
-
-    Kontrolle Stampe
+         
+    → Kontrolle Stampe ←
 
         Prior to 'stamping' an image onto your drawing, various effects can
         sometimes be applied (depending on the stamp):
 
-          o Some stamps can be colored or tinted. If the color palette below
+          @ Some stamps can be colored or tinted. If the color palette below
             the canvas is activated, you can click the colors to change the
             tint or color of the stamp before placing it in the picture.
-          o Stamps can be shrunk and expanded, by clicking within the
+          @ Stamps can be shrunk and expanded, by clicking within the
             triangular-shaped series of bars at the bottom right; the larger
             the bar, the larger the stamp will appear in your picture.
-          o Many stamps may be flipped vertically, or displayed as a
+          @ Many stamps may be flipped vertically, or displayed as a
             mirror-image, using the control buttons at the bottom right.
 
         ⚙ Note: If the "nostampcontrols" option is set, Tux Paint won't display
@@ -391,8 +426,8 @@ b.Mjeti “Stampë” (Vula Gome)
         Options" documentation.
 
 
-
-    Tinguj Stampe
+         
+    → Tinguj Stampe ←
 
         Different stamps can have different sound effects and/or descriptive
         (spoken) sounds. Buttons in the Help Area at the lower left (near Tux,
@@ -400,11 +435,10 @@ b.Mjeti “Stampë” (Vula Gome)
         descriptive sounds for the currently-selected stamp.
 
 
+         
 
-
-
-
-c.Mjeti “Vija”
+     
+c.Mjeti “Vija” ←
 
     This tool lets you draw straight lines using the various brushes and colors
     you normally use with the Paint Brush.
@@ -429,8 +463,8 @@ c.Mjeti “Vija”
     to learn more.
 
 
-
-d.Mjeti “Forma”
+     
+d.Mjeti “Forma” ←
 
     This tool lets you draw some simple filled, and un-filled shapes.
 
@@ -438,15 +472,15 @@ d.Mjeti “Forma”
 
     Use the options at the bottom right to choose the shape tool's behavior:
 
-    Forma që nga qendra
+    → Forma që nga qendra ←
         The shape will expand from where you initially clicked, and will be
         centered around that position.
 
         📜 This was Tux Paint's only behavior through version 0.9.24.)
 
 
-
-    Forma që nga cepi
+         
+    → Forma që nga cepi ←
         The shape will extend with one corner starting from where you initially
         clicked. This is the default method of most other traditional drawing
         software.
@@ -454,7 +488,7 @@ d.Mjeti “Forma”
         📜 This option was added starting with Tux Paint version 0.9.25.
 
 
-
+         
 
     ⚙ Note: If shape controls are disabled (e.g., with the "noshapecontrols"
     option), the controls will not be presented, and the "shapes from center"
@@ -472,7 +506,7 @@ d.Mjeti “Forma”
 
     Let go of the mouse when you're done stretching.
 
-    Mënyra Forma Normale
+    → Mënyra Forma Normale ←
 
         Now you can move the mouse around the canvas to rotate the shape. The
         angle your shape is rotated will be shown at the bottom, in degrees
@@ -482,8 +516,8 @@ d.Mjeti “Forma”
         color.
 
 
-
-    Mënyra Forma të Thjeshta
+         
+    → Mënyra Forma të Thjeshta ←
         If the "simple shapes" option is enabled, the shape will be drawn on
         the canvas when you let go of the mouse button. (There's no rotation
         step.)
@@ -492,11 +526,10 @@ d.Mjeti “Forma”
         thjeshta" ("simpleshapes") option.
 
 
+         
 
-
-
-
-e.Mjete “Tekst” dhe “Etiketa”
+     
+e.Mjete “Tekst” dhe “Etiketa” ←
 
     Choose a font (from the 'Letters' available on the right) and a color (from
     the color palette near the bottom). You may also apply a bold, and/or an
@@ -517,7 +550,7 @@ e.Mjete “Tekst” dhe “Etiketa”
     causes the current line of text to move to that location (where you can
     continue editing it).
 
-    “Tekst” krahasuar me “Etiketë”
+    → “Tekst” krahasuar me “Etiketë” ←
 
         The Text tool is the original text-entry tool in Tux Paint. Text
         entered using this tool can't be modified or moved later, since it
@@ -552,8 +585,8 @@ e.Mjete “Tekst” dhe “Etiketa”
         option).
 
 
-
-    Futje Shenjash Ndërkombëtare
+         
+    → Futje Shenjash Ndërkombëtare ←
 
         Tux Paint allows inputting characters in different languages. Most
         Latin characters (A-Z, ñ, è, etc.) can by entered directly. Some
@@ -568,20 +601,20 @@ e.Mjete “Tekst” dhe “Etiketa”
         Currently supported locales, the input methods available, and the key
         to toggle or cycle modes, are listed below.
 
-          o Japonisht — Hiragana të romanizuara dhe Katakana të romanizuara —
+          @ Japonisht — Hiragana të romanizuara dhe Katakana të romanizuara —
             tasti [Alt] i djathtë or tasti [Alt] i majtë
-          o Korean — Hangul 2-Bul — tasti [Alt] i djathtë or tasti [Alt] i
+          @ Korean — Hangul 2-Bul — tasti [Alt] i djathtë or tasti [Alt] i
             majtë
-          o Traditional Chinese — tasti [Alt] i djathtë ose tasti [Alt] i majtë
-          o Tajlandeze — tasti [Alt] i djathtë
+          @ Traditional Chinese — tasti [Alt] i djathtë ose tasti [Alt] i majtë
+          @ Tajlandeze — tasti [Alt] i djathtë
 
         💡 Note: Many fonts do not include all characters for all languages, so
         sometimes you'll need to change fonts to see the characters you're
         trying to type.
 
 
-
-    Tastierë Në Ekran
+         
+    → Tastierë Në Ekran ←
 
         An optional on-screen keyboard is available for the Text and Label
         tools, which can provide a variety of layouts and character composition
@@ -591,31 +624,34 @@ e.Mjete “Tekst” dhe “Etiketa”
         information.
 
 
+         
 
-
-
-
-f.Mjeti “Mbushje”
+     
+f.Mjeti “Mbushje” ←
 
     The 'Fill' tool 'flood-fills' a contiguous area of your drawing with a
     color of your choice. Three fill options are offered:
-      + Solid — click once to fill an area with a solid color.
-      + Brush — click and drag to fill an area with a solid color using
+      o Solid — click once to fill an area with a solid color.
+      o Brush — click and drag to fill an area with a solid color using
         freehand painting.
-      + Linear — click and then drag to fill the area with color that fades
+      o Linear — click and then drag to fill the area with color that fades
         away (a gradient) towards where you drag the mouse.
-      + Radial — click once to fill an area with a color that fades away (a
+      o Radial — click once to fill an area with a color that fades away (a
         gradient) radially, centered on where you clicked.
-      + Shaped — click once to fill an area with a color that fades away (a
+      o Shaped — click once to fill an area with a color that fades away (a
         gradient), following the contours of the shape you're filling.
+      o Eraser — click once to erase an area, exposing the solid color
+        background, or starter or template background image, upon which the
+        drawing was based. (See Mjete të Mundshme > Mjete Vizatimi > Mjeti
+        “Gomë” and Kontrolle të Tjera > Figura “Fillesë” & Gjedhe.)
 
     📜 Note: Prior to Tux Paint 0.9.24, "Fill" was a Magic tool (see below).
     Prior to Tux Paint 0.9.26, the "Fill" tool only offered the 'Solid' method
     of filling. 'Shaped' fill was introduced in Tux Paint 0.9.29.
 
 
-
-g.Mjeti “Magjik” (Efekte Speciale)
+     
+g.Mjeti “Magjik” (Efekte Speciale) ←
 
     The Magic tool is actually a set of special tools. Select one of the
     'magic' effects from the selector on the right. Then, depending on the
@@ -665,8 +701,8 @@ g.Mjeti “Magjik” (Efekte Speciale)
     one large list. See the "Options" documentation.
 
 
-
-h.Mjeti “Gomë”
+     
+h.Mjeti “Gomë” ←
 
     This tool works similarly to the Paint Brush. Wherever you click (or click
     and drag), things you've added to your drawing will be erased, exposing the
@@ -676,13 +712,13 @@ h.Mjeti “Gomë”
 
     A number of eraser types are available, each offering multiple sizes are
     available:
-      + Square — Square-shaped erasers that completely remove parts of your
+      o Square — Square-shaped erasers that completely remove parts of your
         drawing.
-      + Circle (solid) — Circle-shaped erasers that completely remove parts of
+      o Circle (solid) — Circle-shaped erasers that completely remove parts of
         your drawing.
-      + Fuzzy-edged Circle — Circle-shaped erasers with soft edges that blend
+      o Fuzzy-edged Circle — Circle-shaped erasers with soft edges that blend
         with the background.
-      + Transparent Circle — Circle-shaped erasers that blend your drawing with
+      o Transparent Circle — Circle-shaped erasers that blend your drawing with
         the background. Release and click again to expose more and more of the
         background.
 
@@ -698,11 +734,11 @@ h.Mjeti “Gomë”
     currently-selected tool.
 
 
+     
 
+## 2. Kontrolle të Tjera ##
 
-2. Kontrolle të Tjera
-
-a.Urdhrat “Ribëje” dhe “Zhbëje”
+a.Urdhrat “Ribëje” dhe “Zhbëje” ←
 
     Clicking the "Undo" button will undo (revert) the last drawing action. You
     can even undo more than once!
@@ -720,8 +756,8 @@ a.Urdhrat “Ribëje” dhe “Zhbëje”
     Ribëje.
 
 
-
-b.Urdhri “I ri”
+     
+b.Urdhri “I ri” ←
 
     Clicking the 'New' button will start a new drawing. A dialog will appear
     where you may choose to start a new picture using a solid background color,
@@ -735,25 +771,29 @@ b.Urdhri “I ri”
     ⌨ Note: You can also press [Tasti Kontroll / ⌘] + [N] on the keyboard to
     filloni një vizatim i ri.
 
-    Special Solid Background Color Choices
+    → Special Solid Background Color Choices ←
         Along with the preset solid colors, you can also choose colors using a
         rainbow palette or a "color mixer". These operate identically to the
         options found in the color palette shown below the canvas when drawing
         a picture. See Skena Kryesore > Më Poshtë: Ngjyra > Special color
         options for details.
-
-    Figura “Fillesë” & Gjedhe
-          o 'Starters' can behave like a page from a coloring book — a
+         
+    Figura “Fillesë” & Gjedhe ←
+          @ 'Starters' can behave like a page from a coloring book — a
             black-and-white outline of a picture, which you can then color in,
             and the black outline remains intact — or like a 3D photograph,
             where you draw in between a foreground and background layer.
-          o 'Templates' are similar, but simply provide a background drawing to
+          @ 'Templates' are similar, but simply provide a background drawing to
             work off of. Unlike 'Starters', there is no layer that remains in
             the foreground of anything you draw in the picture.
 
-        When using the 'Eraser' tool, the original image from the 'Starter' or
-        'Template' will reappear. The 'Flip' and 'Mirror' Magic tools affect
-        the orientation of the 'Starter' or 'Template', as well.
+        When using the 'Eraser' tool or the 'Eraser' mode of the 'Fill' tool,
+        the original image from the 'Starter' or 'Template' will reappear. (See
+        Mjete të Mundshme > Mjete Vizatimi > Mjeti “Gomë” and Mjeti “Mbushje”.)
+
+        The 'Flip' and 'Mirror' Magic tools affect the orientation of the
+        'Starter' or 'Template', as well. (See Mjete të Mundshme > Mjeti
+        “Magjik” (Efekte Speciale) > Ktheje në anë tjetër and Pasqyroje.)
 
         When you load a 'Starter' or 'Template', draw on it, and then click
         'Save,' it creates a new picture file — it doesn't overwrite the
@@ -768,8 +808,8 @@ b.Urdhri “I ri”
         within Tux Paint, from the 'Open' dialog. See "Open", below.
 
 
-
-    Fshirje Figurash Gjedhe të Eksportuara
+         
+    → Fshirje Figurash Gjedhe të Eksportuara ←
 
         If you've selected a Template in your personal templates folder, and it
         was created from within Tux Paint (using the "Template" button in the
@@ -785,21 +825,21 @@ b.Urdhri “I ri”
         ⚙ Note: The 'Erase' button may be disabled, via the "noerase" option.
 
 
-
+         
 
     ⚙ Note: The solid colors can be placed at the end of the 'New' dialog
     (below the Starters and Templates), via the "newcolorslast" option.
 
 
-
-c.Urdhri “Hape”
+     
+c.Urdhri “Hape” ←
 
     This shows you a list of all of the pictures you've saved. If there are
     more than can fit on the screen, use the up and down arrows at the top and
     bottom of the list to scroll through the list of pictures.
 
     Klikoni mbi një foto për ta përzgjedhur dhe mandej…
-      + Click the green 'Open' button at the lower left of the list to load the
+      o Click the green 'Open' button at the lower left of the list to load the
         selected picture. You will then be able to edit it.
 
         (Alternatively, you can double-click a picture's icon to load it.)
@@ -808,7 +848,7 @@ c.Urdhri “Hape”
         saved, you will be prompted as to whether you want to save it or not.
         (See "Save," below.)
 
-      + Click the brown 'Erase' (trash can) button at the lower right of the
+      o Click the brown 'Erase' (trash can) button at the lower right of the
         list to erase the selected picture. (You will be asked to confirm.)
 
         📜 Note: On Linux (as of version 0.9.22), Windows (as of version
@@ -818,15 +858,15 @@ c.Urdhri “Hape”
 
         ⚙ Note: The 'Erase' button may be disabled, via the "noerase" option.
 
-      + Click the 'Export' button near the lower right to export the selected
+      o Click the 'Export' button near the lower right to export the selected
         picture to your export folder. (e.g., "~/Pictures/TuxPaint/")
 
     Prej skenës “Hap” mundeni edhe të:
-      + Klikon butonin blu “Diapozitiva” (projektor diapozitivash) poshtë
+      o Klikon butonin blu “Diapozitiva” (projektor diapozitivash) poshtë
         majtas, për të kaluar nën mënyrën “shfaqje diapozitivash”. Për hollësi,
         shihni “Diapozitiva”,.
 
-      + Klikoni butonin blu “Gjedhe” poshtë majtas, për ta shndërruar në një
+      o Klikoni butonin blu “Gjedhe” poshtë majtas, për ta shndërruar në një
         gjedhe të re figurën e përzgjedhur, e cila mund të përdoret si bazë për
         vizatime të reja.
 
@@ -838,15 +878,15 @@ c.Urdhri “Hape”
         "Disable 'Make Template'" in Tux Paint Config. or running Tux Paint
         with the "notemplateexport" option).
 
-      + Click the red 'Back' arrow button at the lower right of the list to
+      o Click the red 'Back' arrow button at the lower right of the list to
         cancel and return to the picture you were drawing.
 
     ⌨ Note: You can also press [Tasti Kontroll / ⌘] + [O] on the keyboard to
     hapni dialogun “Hap”.
 
 
-
-d.Urdhri “Ruaje”
+     
+d.Urdhri “Ruaje” ←
 
     Kjo bën ruajtjen e fotos tuaj të tanishme.
 
@@ -867,8 +907,8 @@ d.Urdhri “Ruaje”
     save.
 
 
-
-e.Urdhri “Shtype”
+     
+e.Urdhri “Shtype” ←
 
     Klikoni këtë buton dhe fotoja juaj do të shtypet!
 
@@ -877,7 +917,7 @@ e.Urdhri “Shtype”
     this may not work if you're running Tux Paint in fullscreen mode. See
     below.
 
-    Çaktivizim Shtypjesh
+    → Çaktivizim Shtypjesh ←
 
         The "noprint" option can be set, which will disable Tux Paint's 'Print'
         button.
@@ -885,8 +925,8 @@ e.Urdhri “Shtype”
         ⚙ See the "Options" documentation.
 
 
-
-    Kufizim Shtypjesh
+         
+    → Kufizim Shtypjesh ←
 
         The "printdelay" option can be set, which will only allow occasional
         printing — once every so many seconds, as configured by you.
@@ -897,8 +937,8 @@ e.Urdhri “Shtype”
         ⚙ See the "Options" documentation.
 
 
-
-    Urdhra Shtypjeje
+         
+    → Urdhra Shtypjeje ←
 
         (Vetëm në Linux dhe Unix)
 
@@ -924,8 +964,8 @@ e.Urdhri “Shtype”
         ⚙ See the "Options" documentation.
 
 
-
-    Rregullime Shtypësi
+         
+    → Rregullime Shtypësi ←
 
         (Windows dhe macOS)
 
@@ -947,8 +987,8 @@ e.Urdhri “Shtype”
         ⚙ See the "Options" documentation.
 
 
-
-    Mundësi Dialogu Shtypësi
+         
+    → Mundësi Dialogu Shtypësi ←
 
         By default, Tux Paint only shows the printer dialog (or, on Linux/Unix,
         runs the "altprintcommand"; e.g., "kprinter" instead of "lpr") if the
@@ -963,17 +1003,16 @@ e.Urdhri “Shtype”
         ⚙ See the "Options" documentation.
 
 
+         
 
-
-
-
-f.Urdhri “Diapozitiva” (nën “Hape”)
+     
+f.Urdhri “Diapozitiva” (nën “Hape”) ←
 
     The 'Slides' button is available in the 'Open' dialog. It can be used to
     play a simple animation within Tux Paint, or a slideshow of pictures. It
     can also export an animated GIF based on the chosen images.
 
-    Zgjedhje fotosh
+    → Zgjedhje fotosh ←
 
         When you enter the 'Slides' section of Tux Paint, it displays a list of
         your saved files, just like the 'Open' dialog.
@@ -987,8 +1026,8 @@ f.Urdhri “Diapozitiva” (nën “Hape”)
         list.
 
 
-
-    Caktoni shpejtësi luajtjeje
+         
+    → Caktoni shpejtësi luajtjeje ←
 
         A sliding scale at the lower left of the screen (next to the 'Play'
         button) can be used to adjust the speed of the slideshow or animated
@@ -1001,8 +1040,8 @@ f.Urdhri “Diapozitiva” (nën “Hape”)
         does not apply to an exported animated GIF.)
 
 
-
-    Luajtje në Tux Paint
+         
+    → Luajtje në Tux Paint ←
 
         To play a slideshow within Tux Paint, click the 'Play' button.
 
@@ -1018,8 +1057,8 @@ f.Urdhri “Diapozitiva” (nën “Hape”)
         exit the slideshow and return to the slideshow image selection screen.
 
 
-
-    Eksportim i një Gif-i të animuar
+         
+    → Eksportim i një Gif-i të animuar ←
 
         Click the 'GIF Export' button near the lower right to have Tux Paint
         generate an animated GIF file based on the selected images.
@@ -1033,14 +1072,14 @@ f.Urdhri “Diapozitiva” (nën “Hape”)
         process, and return you to the 'Slideshow' dialog.
 
 
-
+         
 
     Click 'Back' in the slideshow image selection screen to return to the
     'Open' dialog.
 
 
-
-g.Urdhëri “Dil”
+     
+g.Urdhëri “Dil” ←
 
     Clicking the 'Quit' button, closing the Tux Paint window, or pushing the
     [Tasti Escape] key will quit Tux Paint.
@@ -1067,8 +1106,8 @@ g.Urdhëri “Dil”
     ⚙ See the "Options" documentation.
 
 
-
-h.Heqje Tingujsh
+     
+h.Heqje Tingujsh ←
 
     There is no on-screen control button at this time, but by using the [Alt] +
     [S] keyboard sequence, sound effects can be disabled and re-enabled (muted
@@ -1081,11 +1120,11 @@ h.Heqje Tingujsh
     ⚙ See the "Options" documentation.
 
 
+     
 
+                     ### E. Kontrollim i Tux Paint-it ###
 
-E. Kontrollim i Tux Paint-it
-
-1. Përdorim i një Miu ose Trackball-i
+## 1. Përdorim i një Miu ose Trackball-i ##
 
 Tux Paint's main mode of operation is via any device that appears to your
 operating system as a mouse, including standard mice, trackballs, and
@@ -1101,7 +1140,7 @@ button(s), a pop-up dialog will eventually appear reminding them that only one
 button is recognized Tux Paint. However, you may configure Tux Paint to accept
 any button as input (see the Options documentation).
 
-a. Rrëshqitje
+# a. Rrëshqitje #
 
 Many input devices offer a way to quickly scroll within applications — many
 mice have a scroll wheel, trackballs have scroll rings, and trackpads recognize
@@ -1114,7 +1153,7 @@ Tux Paint will also automatically scroll if you click and hold the mouse down
 on an scroll button — the "up" and "down" arrow buttons that appear above and
 below scrolling lists.
 
-b. Përdorim Miu Nga Persona Me Aftësi të Kufizuar
+# b. Përdorim Miu Nga Persona Me Aftësi të Kufizuar #
 
 Other devices that appear as a mouse can be used to control Tux Paint. For
 example:
@@ -1127,7 +1166,7 @@ Tux Paint offers a "sticky mouse click" accessibility setting, where a single
 click begins a click-and-drag operation, and a subsequent click ends it. (See
 the Options documentation.)
 
-2. Përdorim i një Tableti, ose Ekrani Me Prekje
+## 2. Përdorim i një Tableti, ose Ekrani Me Prekje ##
 
 As noted above, Tux Paint recognizes any device that appears as a mouse. This
 means drawing tablets and touchscreens may be used. However, these devices
@@ -1139,7 +1178,7 @@ Some examples:
   * Majë gome
   * Gjeste multi-touch
 
-3. Përdorimi i një Pajisjeje të Ngashme me një “Joystick”
+## 3. Përdorimi i një Pajisjeje të Ngashme me një “Joystick” ##
 
 Tux Paint may be configured to recognize input from any game controller that
 appears to your operating system as a joystick. That even includes modern game
@@ -1153,7 +1192,7 @@ to different Tux Paint controls (e.g., acting as the [Tasti Escape] key,
 switching to the Paint tool, invoking Undo and Redo operations, etc.). See the
 Options documentation for more details.
 
-4. Përdorim i Tastierës
+## 4. Përdorim i Tastierës ##
 
 Tux Paint offers an option to allow the keyboard to be used to control the
 mouse pointer. This includes motion and clicking, as well as shortcuts to
@@ -1162,7 +1201,7 @@ documentation for more details.
 
 III. Ngarkim Figurash të Tjera në Tux Paint
 
-A. Përmbledhje
+                            ### A. Përmbledhje ###
 
 Tux Paint's 'Open' dialog only displays pictures you created with Tux Paint. So
 what do you do if you want to load some other drawinng or even a photograph
@@ -1172,29 +1211,29 @@ You can simply convert the picture to the format Tux Paint uses — PNG (Portabl
 Network Graphic) — and place it in Tux Paint's "saved" directory/folder. Here
 is where to find it (by default):
 
-Windows Windows 7, Windows 8, Windows 10, Windows 11
+→ Windows Windows 7, Windows 8, Windows 10, Windows 11 ←
     In the user's "AppData" folder:
     e.g., "C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\saved\"
-
-macOS
+     
+→ macOS ←
     In the user's "Application Support" folder:
     e.g., "/Users/emër përdoruesi/Library/Application Support/TuxPaint/saved/"
-
-Linux / Unix
+     
+→ Linux / Unix ←
     In the user's "home directory" folder:
     e.g., "/home/emër përdoruesi/.tuxpaint/saved/"
-
-Haiku
+     
+→ Haiku ←
     In the user's "settings" folder:
     e.g., "/boot/home/config/settings/TuxPaint/saved/"
-
+     
 
 💡 Note: It is also from this folder that you can copy or open pictures drawn in
 Tux Paint using other applications, though the 'Export' option from Tux Paint's
 'Open' dialog can be used to copy them to a location that's easier and safer to
 access.
 
-B. Përdorim i programthit të importimit, “tuxpaint-import”
+      ### B. Përdorim i programthit të importimit, “tuxpaint-import” ###
 
 Linux and Unix users can use the "tuxpaint-import" shell script which gets
 installed when you install Tux Paint. It uses some NetPBM tools to convert the
@@ -1225,7 +1264,7 @@ following two lines are output from the program while it's working.
 Now you can load Tux Paint, and a version of that original picture will be
 available under the 'Open' dialog. Just double-click its icon!
 
-C. Importim Fotosh Dorazi
+                       ### C. Importim Fotosh Dorazi ###
 
 Windows, macOS, and Haiku users who wish to import arbitrary images into Tux
 Paint must do so via a manual process.
@@ -1243,7 +1282,7 @@ Paint's canvas size. This size depends on the size of the Tux Paint window, or
 resolution at which Tux Paint is run, if in fullscreen. (Note: The default
 resolution is 800x600.) See "Llogaritje Përmasash Figure", below.
 
-1. Emërtim i Kartelës
+## 1. Emërtim i Kartelës ##
 
 Save the picture in PNG format. It is highly recommended that you name the
 filename using the current date and time, since that's the convention Tux Paint
@@ -1262,7 +1301,7 @@ Example: "20210731110500.png", for July 31, 2021 at 11:05am.
 
 Place this PNG file in your Tux Paint "saved" directory/folder. (See above.)
 
-2. Llogaritje Përmasash Figure
+## 2. Llogaritje Përmasash Figure ##
 
 This part of the documentation needs to be rewritten, since the new
 "buttonsize" option was added. For now, try drawing and saving an image within
@@ -1275,48 +1314,48 @@ IV.Lexim i Mëtejshëm
 Other documentation included with Tux Paint (found in the "docs" folder/
 directory) includes:
 
-Përdorim i Tux Paint-it:
-      + OPTIONS.html
+→ Përdorim i Tux Paint-it: ←
+      o OPTIONS.html
         Detailed instructions on command-line and configuration-file options,
         for those who don't want to use the Tux Paint Config. tool to manage
         Tux Paint's configuration.
-      + Dokumentim i Mjetit “Magjik” (“magic-docs”)
+      o Dokumentim i Mjetit “Magjik” (“magic-docs”)
         Documentation for each of the currently-installed 'Magic' tools.
-      + Frequently Asked Questions ("FAQs") about Tux Paint
+      o Frequently Asked Questions ("FAQs") about Tux Paint
         Answers to, and solutions for, some common questions about, and
         problems with, using Tux Paint.
 
-
-Si të zgjerohet Tux Paint-i:
-      + EXTENDING.html
+     
+→ Si të zgjerohet Tux Paint-i: ←
+      o EXTENDING.html
         Detailed instructions on extending Tux Paint: creating brushes, stamps,
         starters, and templates; adding fonts; and creating new on-screen
         keyboard layouts and input methods.
-      + PNG.html
+      o PNG.html
         Notes on creating PNG format bitmapped (raster) images for use in Tux
         Paint.
-      + SVG.html
+      o SVG.html
         Notes on creating SVG format vector images for use in Tux Paint.
 
-
-Hollësi teknike:
-      + INSTALL.html
+     
+→ Hollësi teknike: ←
+      o INSTALL.html
         Instructions for compiling and installing Tux Paint, when applicable.
-      + SIGNALS.html
+      o SIGNALS.html
         Information about the POSIX signals that Tux Paint responds to.
-      + MAGIC-API.html
+      o MAGIC-API.html
         Creating new Magic tools using Tux Paint's plugin API.
 
-
-Historik zhvillimi dhe licencë:
-      + AUTHORS.txt
+     
+→ Historik zhvillimi dhe licencë: ←
+      o AUTHORS.txt
         Listë e autorëve dhe kontribuesve.
-      + CHANGES.txt
+      o CHANGES.txt
         Summary of what has changed between releases of Tux Paint.
-      + COPYING.txt
+      o COPYING.txt
         Tux Paint's software license, the GNU General Public License (GPL)
 
-
+     
 
 V.Si të Merret Ndihmë
 

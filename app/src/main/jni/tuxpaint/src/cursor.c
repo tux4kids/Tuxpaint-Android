@@ -54,7 +54,7 @@ int no_fancy_cursors;
  *
  * @param c The cursor shape to use.
  */
-void do_setcursor(SDL_Cursor * c)
+void do_setcursor(SDL_Cursor *c)
 {
   /* Shut GCC up over the fact that the XBMs are #included within cursor.h
      but used in tuxpaint.c (and not cursor.c) */
@@ -93,7 +93,7 @@ void do_setcursor(SDL_Cursor * c)
  *
  * @param cursor Pointer to a cursor to free; will be set to point to NULL afterwards.
  */
-void free_cursor(SDL_Cursor ** cursor)
+void free_cursor(SDL_Cursor **cursor)
 {
   if (*cursor)
   {

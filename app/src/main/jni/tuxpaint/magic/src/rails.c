@@ -3,7 +3,7 @@
 
   Draw train tracks.
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 #include "tp_magic_api.h"
 #include "SDL_image.h"
@@ -91,19 +91,19 @@ Uint32 rails_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int rails_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rails_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
-void rails_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+void rails_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
                      Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                     SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-int rails_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int rails_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
   Uint8 i;                      //is always < 3, so Uint8 seems to be a good idea
@@ -153,12 +153,12 @@ int rails_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 
   return (1);
 }
 
-int rails_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int rails_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-SDL_Surface *rails_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *rails_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -167,12 +167,12 @@ SDL_Surface *rails_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *rails_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *rails_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext_noop("Rails"));
+  return strdup(gettext("Rails"));
 }
 
-int rails_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rails_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
@@ -182,25 +182,25 @@ int rails_get_order(int which ATTRIBUTE_UNUSED)
   return 2200;
 }
 
-char *rails_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *rails_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext_noop("Click and drag to draw train track rails on your picture."));
+  return strdup(gettext("Click and drag to draw train track rails on your picture."));
 }
 
-int rails_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rails_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void rails_release(magic_api * api ATTRIBUTE_UNUSED,
+void rails_release(magic_api *api ATTRIBUTE_UNUSED,
                    int which ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                   SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                   int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                   SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                   int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-void rails_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void rails_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   Uint8 i;
 
@@ -219,8 +219,8 @@ void rails_shutdown(magic_api * api ATTRIBUTE_UNUSED)
     free(rails_status_of_segments);
 }
 
-void rails_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+void rails_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   //we've to compute the quantity of segments in each direction
 
@@ -236,8 +236,8 @@ void rails_switchin(magic_api * api ATTRIBUTE_UNUSED,
   rails_status_of_segments = (Uint8 *) calloc(rails_segments_x * rails_segments_y + 1, sizeof(Uint8));
 }
 
-void rails_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void rails_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
   if (rails_status_of_segments != NULL)
   {
@@ -273,13 +273,13 @@ inline unsigned int rails_get_segment(int x, int y)
 
 }
 
-inline void rails_extract_coords_from_segment(unsigned int segment, POINT_TYPE * x, POINT_TYPE * y)
+inline void rails_extract_coords_from_segment(unsigned int segment, POINT_TYPE *x, POINT_TYPE *y)
 {                               //extracts the coords of the beginning and the segment
   *x = ((segment % rails_segments_x) - 1) * img_w;      //useful to set update_rect as small as possible
   *y = (int)(segment / rails_segments_x) * img_h;
 }
 
-static void rails_flip(void *ptr, SDL_Surface * dest, SDL_Surface * src)
+static void rails_flip(void *ptr, SDL_Surface *dest, SDL_Surface *src)
 {
   magic_api *api = (magic_api *) ptr;
   POINT_TYPE x, y;
@@ -289,7 +289,7 @@ static void rails_flip(void *ptr, SDL_Surface * dest, SDL_Surface * src)
       api->putpixel(dest, x, y, api->getpixel(src, x, src->h - y - 1));
 }
 
-static void rails_flip_flop(void *ptr, SDL_Surface * dest, SDL_Surface * src)
+static void rails_flip_flop(void *ptr, SDL_Surface *dest, SDL_Surface *src)
 {
   magic_api *api = (magic_api *) ptr;
   POINT_TYPE x, y;
@@ -299,7 +299,7 @@ static void rails_flip_flop(void *ptr, SDL_Surface * dest, SDL_Surface * src)
       api->putpixel(dest, x, y, api->getpixel(src, y, x));
 }
 
-static void rails_rotate(void *ptr, SDL_Surface * dest, SDL_Surface * src, unsigned int direction)
+static void rails_rotate(void *ptr, SDL_Surface *dest, SDL_Surface *src, unsigned int direction)
 //src and dest must have same size
 {
   magic_api *api = (magic_api *) ptr;
@@ -320,8 +320,8 @@ static void rails_rotate(void *ptr, SDL_Surface * dest, SDL_Surface * src, unsig
 
 }
 
-void rails_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                 SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void rails_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                 SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   rails_segment_modified_last = 0;
   rails_drag(api, which, canvas, snapshot, x, y, x, y, update_rect);
@@ -445,8 +445,8 @@ static Uint8 rails_select_image(Uint16 segment)
 }
 
 static void rails_draw(void *ptr, int which ATTRIBUTE_UNUSED,
-                       ATTRIBUTE_UNUSED SDL_Surface * canvas,
-                       SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y ATTRIBUTE_UNUSED, unsigned int segment)
+                       ATTRIBUTE_UNUSED SDL_Surface *canvas,
+                       SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y ATTRIBUTE_UNUSED, unsigned int segment)
 {
   magic_api *api = (magic_api *) ptr;
   SDL_Surface *result, *temp;
@@ -551,7 +551,7 @@ static void rails_draw(void *ptr, int which ATTRIBUTE_UNUSED,
   api->playsound(rails_snd, (x * 255) / canvas->w, 255);
 }
 
-static void rails_draw_wrapper(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
+static void rails_draw_wrapper(void *ptr, int which, SDL_Surface *canvas, SDL_Surface *last, int x, int y)
 {
   rails_segment_modified = rails_get_segment(x, y);
 
@@ -575,8 +575,8 @@ static void rails_draw_wrapper(void *ptr, int which, SDL_Surface * canvas, SDL_S
     rails_segment_modified_last = rails_segment_modified;
 }
 
-void rails_drag(magic_api * api, int which, SDL_Surface * canvas,
-                SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void rails_drag(magic_api *api, int which, SDL_Surface *canvas,
+                SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   int start_x, end_x, start_y, end_y, segment_start, segment_end, w, h;
 
@@ -608,18 +608,18 @@ void rails_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 
-Uint8 rails_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 rails_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 rails_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 rails_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void rails_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                    Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void rails_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                    Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

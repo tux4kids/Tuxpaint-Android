@@ -81,7 +81,7 @@ Uint32 maze_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int maze_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int maze_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -91,13 +91,13 @@ int maze_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 c
   return (1);
 }
 
-int maze_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int maze_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (1);
 }
 
 
-SDL_Surface *maze_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *maze_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -106,12 +106,12 @@ SDL_Surface *maze_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *maze_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *maze_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext("Maze"));
 }
 
-int maze_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int maze_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
@@ -121,7 +121,7 @@ int maze_get_order(int which ATTRIBUTE_UNUSED)
   return 2000;
 }
 
-char *maze_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+char *maze_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
     return (gettext("Click and drag to paint a maze on your picture."));
@@ -129,17 +129,17 @@ char *maze_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE
     return (gettext("Click to turn your entire picture into a maze."));
 }
 
-int maze_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int maze_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-int maze_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int maze_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MODE_PAINT | MODE_FULLSCREEN;
 }
 
-void maze_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void maze_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (snd_effect != NULL)
     Mix_FreeChunk(snd_effect);
@@ -169,8 +169,8 @@ int check_arrays(void)
 }
 
 void
-maze_click(magic_api * api, int which, int mode,
-           SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+maze_click(magic_api *api, int which, int mode,
+           SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   if (!check_arrays())
     return;
@@ -213,9 +213,8 @@ maze_click(magic_api * api, int which, int mode,
 
 
 void
-maze_drag(magic_api * api ATTRIBUTE_UNUSED, int which, SDL_Surface * canvas,
-          SDL_Surface * snapshot, int ox ATTRIBUTE_UNUSED,
-          int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+maze_drag(magic_api *api ATTRIBUTE_UNUSED, int which, SDL_Surface *canvas,
+          SDL_Surface *snapshot, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   if (!check_arrays())
     return;
@@ -229,9 +228,9 @@ maze_drag(magic_api * api ATTRIBUTE_UNUSED, int which, SDL_Surface * canvas,
 }
 
 
-void maze_release(magic_api * api, int which ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                  int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect)
+void maze_release(magic_api *api, int which ATTRIBUTE_UNUSED,
+                  SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                  int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect)
 {
   if (snd_effect != NULL)
     api->stopsound();
@@ -253,7 +252,7 @@ void maze_release(magic_api * api, int which ATTRIBUTE_UNUSED,
 #define STATE_KEEPGOING 1
 #define STATE_PICKDIR 2
 
-void maze_render(magic_api * api, SDL_Surface * canvas)
+void maze_render(magic_api *api, SDL_Surface *canvas)
 {
   int x, y, nx, ny, btwn_nx, btwn_ny, state, dir, old_dir, s;
   Uint32 iter;
@@ -360,9 +359,9 @@ void maze_render(magic_api * api, SDL_Surface * canvas)
 }
 
 
-void maze_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                    SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void maze_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
+                    SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   maze_r = r;
   maze_g = g;
@@ -371,7 +370,7 @@ void maze_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED
 
 
 void maze_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
-                             SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                             SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int xx, yy, idx;
@@ -406,8 +405,8 @@ void maze_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
   }
 }
 
-void maze_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+void maze_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   if (maze_array == NULL)
   {
@@ -476,13 +475,13 @@ void maze_switchin(magic_api * api ATTRIBUTE_UNUSED,
     SDL_BlitSurface(canvas, NULL, maze_snapshot, NULL);
 }
 
-void maze_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void maze_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
   zero_maze_arrays(canvas);
 }
 
-void zero_maze_arrays(SDL_Surface * canvas)
+void zero_maze_arrays(SDL_Surface *canvas)
 {
   num_maze_starts = 0;
 
@@ -499,7 +498,7 @@ void zero_maze_arrays(SDL_Surface * canvas)
     memset(maze_color, 0, (sizeof(Uint32) * (canvas->w * canvas->h)));
 }
 
-void draw_hall(SDL_Surface * canvas, int x, int y)
+void draw_hall(SDL_Surface *canvas, int x, int y)
 {
   int xx, yy;
 
@@ -526,7 +525,7 @@ void maze_add_start(void)
   num_maze_starts++;
 }
 
-void maze_collapse_contiguous(SDL_Surface * canvas)
+void maze_collapse_contiguous(SDL_Surface *canvas)
 {
   int i, x, y, touching, idx;
 
@@ -579,18 +578,18 @@ void maze_collapse_contiguous(SDL_Surface * canvas)
   }
 }
 
-Uint8 maze_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 maze_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 maze_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 maze_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void maze_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                   Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void maze_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                   Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

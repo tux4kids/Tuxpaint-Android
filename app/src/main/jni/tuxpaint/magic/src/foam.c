@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -78,7 +78,7 @@ Uint32 foam_api_version(void)
 
 
 // No setup required:
-int foam_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int foam_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
   SDL_Surface *foam_data;
@@ -111,13 +111,13 @@ int foam_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 c
 }
 
 // We have multiple tools:
-int foam_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int foam_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (1);
 }
 
 // Load our icons:
-SDL_Surface *foam_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *foam_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -127,13 +127,13 @@ SDL_Surface *foam_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 }
 
 // Return our names, localized:
-char *foam_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *foam_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Foam")));
+  return (strdup(gettext("Foam")));
 }
 
 // Return our groups
-int foam_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int foam_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
@@ -145,15 +145,15 @@ int foam_get_order(int which ATTRIBUTE_UNUSED)
 }
 
 // Return our descriptions, localized:
-char *foam_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *foam_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Click and drag the mouse to cover an area with foamy bubbles.")));
+  return (strdup(gettext("Click and drag the mouse to cover an area with foamy bubbles.")));
 }
 
 // Do the effect:
 
 static void do_foam(void *ptr, int which ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int xx, yy, nx, ny;
@@ -179,8 +179,8 @@ static void do_foam(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 // Affect the canvas on drag:
-void foam_drag(magic_api * api, int which, SDL_Surface * canvas,
-               SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void foam_drag(magic_api *api, int which, SDL_Surface *canvas,
+               SDL_Surface *last, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_foam);
 
@@ -212,9 +212,9 @@ void foam_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void foam_click(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas,
-                SDL_Surface * last, int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect)
+void foam_click(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                SDL_Surface *last, int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect)
 {
   int i;
 
@@ -256,15 +256,15 @@ static int foam_mask_test(int r, int x, int y)
 }
 
 // Affect the canvas on release:
-void foam_release(magic_api * api ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED,
-                  int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,
-                  SDL_Surface * last, int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect)
+void foam_release(magic_api *api ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED,
+                  int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                  SDL_Surface *last, int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect)
 {
   api->stopsound();
   foam_release_worker(canvas, last, update_rect);
 }
 
-void foam_release_worker(SDL_Surface * canvas, SDL_Surface * last, SDL_Rect * update_rect)
+void foam_release_worker(SDL_Surface *canvas, SDL_Surface *last, SDL_Rect *update_rect)
 {
   int xx, yy;
   int changes, max_iters;
@@ -442,7 +442,7 @@ void foam_release_worker(SDL_Surface * canvas, SDL_Surface * last, SDL_Rect * up
 }
 
 // No setup happened:
-void foam_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void foam_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (foam_snd != NULL)
     Mix_FreeChunk(foam_snd);
@@ -461,9 +461,9 @@ void foam_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void foam_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                    SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void foam_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
+                    SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   foam_r = r;
   foam_g = g;
@@ -471,39 +471,39 @@ void foam_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED
 }
 
 // Use colors:
-int foam_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int foam_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;                     /* FIXME: Would be nice to tint the bubbles */
 }
 
-void foam_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void foam_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void foam_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void foam_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int foam_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int foam_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
 
-Uint8 foam_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 foam_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 foam_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 foam_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void foam_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                   Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void foam_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                   Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

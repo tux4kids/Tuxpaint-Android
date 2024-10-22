@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -81,7 +81,7 @@ Uint32 shift_api_version(void)
 
 
 // No setup required:
-int shift_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int shift_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -92,13 +92,13 @@ int shift_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 
 }
 
 // We have multiple tools:
-int shift_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int shift_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (1);
 }
 
 // Load our icons:
-SDL_Surface *shift_get_icon(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+SDL_Surface *shift_get_icon(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -108,13 +108,13 @@ SDL_Surface *shift_get_icon(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUT
 }
 
 // Return our names, localized:
-char *shift_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *shift_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Shift")));
+  return (strdup(gettext("Shift")));
 }
 
 // Return our group
-int shift_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int shift_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_WARPS;
 }
@@ -126,15 +126,15 @@ int shift_get_order(int which ATTRIBUTE_UNUSED)
 }
 
 // Return our descriptions, localized:
-char *shift_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *shift_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Click and drag to shift your picture around on the canvas.")));
+  return (strdup(gettext("Click and drag to shift your picture around on the canvas.")));
 }
 
 
 // Affect the canvas on drag:
-void shift_drag(magic_api * api, int which, SDL_Surface * canvas,
-                SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void shift_drag(magic_api *api, int which, SDL_Surface *canvas,
+                SDL_Surface *last, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   if (ox == x && oy == y)
     return;                     /* No-op */
@@ -142,10 +142,10 @@ void shift_drag(magic_api * api, int which, SDL_Surface * canvas,
   shift_doit(api, which, canvas, last, ox, oy, x, y, update_rect, 1);
 }
 
-static void shift_doit(magic_api * api ATTRIBUTE_UNUSED,
-                       int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,
-                       SDL_Surface * last, int ox ATTRIBUTE_UNUSED,
-                       int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect, int crosshairs)
+static void shift_doit(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                       SDL_Surface *last, int ox ATTRIBUTE_UNUSED,
+                       int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect, int crosshairs)
 {
   SDL_Rect dest;
   int dx, dy;
@@ -305,8 +305,8 @@ static void shift_doit(magic_api * api ATTRIBUTE_UNUSED,
 }
 
 // Affect the canvas on click:
-void shift_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                 SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void shift_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                 SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   shift_x = x;
   shift_y = y;
@@ -315,8 +315,8 @@ void shift_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 }
 
 // Affect the canvas on release:
-void shift_release(magic_api * api, int which,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void shift_release(magic_api *api, int which,
+                   SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   shift_doit(api, which, canvas, last, x, y, x, y, update_rect, 0);
   api->stopsound();
@@ -324,54 +324,54 @@ void shift_release(magic_api * api, int which,
 
 
 // No setup happened:
-void shift_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void shift_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (shift_snd != NULL)
     Mix_FreeChunk(shift_snd);
 }
 
 // Record the color from Tux Paint:
-void shift_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+void shift_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
                      Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                     SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // Use colors:
-int shift_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int shift_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void shift_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void shift_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void shift_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void shift_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int shift_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int shift_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT_WITH_PREVIEW);
 }
 
 
-Uint8 shift_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 shift_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 shift_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 shift_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void shift_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                    Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void shift_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                    Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

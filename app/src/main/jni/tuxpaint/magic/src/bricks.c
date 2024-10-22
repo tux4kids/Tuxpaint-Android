@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -82,7 +82,7 @@ void bricks_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
                      SDL_Rect * update_rect);
 
 // No setup required:
-int bricks_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int bricks_init(magic_api *api, Uint8 disabled_features, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -103,7 +103,7 @@ Uint32 bricks_api_version(void)
 }
 
 // We have multiple tools:
-int bricks_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int bricks_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (brick_two_tools)
     return (NUM_TOOLS);
@@ -112,7 +112,7 @@ int bricks_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Load our icons:
-SDL_Surface *bricks_get_icon(magic_api * api, int which)
+SDL_Surface *bricks_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -129,15 +129,15 @@ SDL_Surface *bricks_get_icon(magic_api * api, int which)
 }
 
 // Return our names, localized:
-char *bricks_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *bricks_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   /* Both are named "Bricks", at the moment: */
 
-  return (strdup(gettext_noop("Bricks")));
+  return (strdup(gettext("Bricks")));
 }
 
 // Return our group (both the same):
-int bricks_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int bricks_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
@@ -149,18 +149,18 @@ int bricks_get_order(int which)
 }
 
 // Return our descriptions, localized:
-char *bricks_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *bricks_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   if (brick_two_tools)
   {
     if (which == TOOL_LARGEBRICKS)
-      return (strdup(gettext_noop("Click and drag to draw large bricks.")));
+      return (strdup(gettext("Click and drag to draw large bricks.")));
     else if (which == TOOL_SMALLBRICKS)
-      return (strdup(gettext_noop("Click and drag to draw small bricks.")));
+      return (strdup(gettext("Click and drag to draw small bricks.")));
   }
   else
   {
-    return (strdup(gettext_noop("Click and drag to draw bricks.")));
+    return (strdup(gettext("Click and drag to draw bricks.")));
   }
 
   return (NULL);
@@ -168,7 +168,7 @@ char *bricks_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mo
 
 // Do the effect:
 
-static void do_bricks(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+static void do_bricks(void *ptr, int which, SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -255,8 +255,8 @@ static void do_bricks(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * 
 }
 
 // Affect the canvas on drag:
-void bricks_drag(magic_api * api, int which, SDL_Surface * canvas,
-                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void bricks_drag(magic_api *api, int which, SDL_Surface *canvas,
+                 SDL_Surface *last, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_bricks);
 
@@ -286,31 +286,31 @@ void bricks_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void bricks_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void bricks_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                  SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   bricks_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void bricks_release(magic_api * api ATTRIBUTE_UNUSED,
+void bricks_release(magic_api *api ATTRIBUTE_UNUSED,
                     int which ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface * last ATTRIBUTE_UNUSED,
-                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED,
+                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // No setup happened:
-void bricks_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void bricks_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (brick_snd != NULL)
     Mix_FreeChunk(brick_snd);
 }
 
 // Record the color from Tux Paint:
-void bricks_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
-                      Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void bricks_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                      Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   bricks_r = r;
   bricks_g = g;
@@ -318,12 +318,12 @@ void bricks_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
 }
 
 // Use colors:
-int bricks_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int bricks_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-static void do_brick(magic_api * api, SDL_Surface * canvas, int x, int y, int w, int h)
+static void do_brick(magic_api *api, SDL_Surface *canvas, int x, int y, int w, int h)
 {
   SDL_Rect dest;
 
@@ -352,35 +352,35 @@ static void do_brick(magic_api * api, SDL_Surface * canvas, int x, int y, int w,
   api->playsound(brick_snd, (x * 255) / canvas->w, 255);
 }
 
-void bricks_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void bricks_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void bricks_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void bricks_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int bricks_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int bricks_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
 
-Uint8 bricks_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 bricks_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 2;
 }
 
-Uint8 bricks_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 bricks_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 2;
 }
 
-void bricks_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
-                     SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void bricks_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
+                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   if (size == 1)
   {

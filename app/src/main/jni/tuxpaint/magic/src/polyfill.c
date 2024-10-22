@@ -120,7 +120,7 @@ Uint32 polyfill_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int polyfill_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int polyfill_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char filename[1024];
@@ -135,12 +135,12 @@ int polyfill_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uin
 }
 
 
-int polyfill_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int polyfill_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return NUM_TOOLS;
 }
 
-SDL_Surface *polyfill_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *polyfill_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char filename[1024];
 
@@ -150,13 +150,13 @@ SDL_Surface *polyfill_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 }
 
 
-char *polyfill_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *polyfill_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   return strdup(gettext(polyfill_names[which]));
 }
 
 
-int polyfill_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int polyfill_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_ARTISTIC;
 }
@@ -168,37 +168,37 @@ int polyfill_get_order(int which)
 }
 
 
-char *polyfill_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *polyfill_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   return strdup(gettext(polyfill_descr[which]));
 }
 
 
-int polyfill_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int polyfill_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
 
-int polyfill_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int polyfill_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MODE_PAINT;
 }
 
 
-Uint8 polyfill_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 polyfill_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
 
-Uint8 polyfill_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 polyfill_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
 
-void polyfill_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void polyfill_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   int i;
 
@@ -218,8 +218,8 @@ void polyfill_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 void
-polyfill_click(magic_api * api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-               SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+polyfill_click(magic_api *api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+               SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   int i;
 
@@ -284,9 +284,9 @@ polyfill_click(magic_api * api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_U
 
 
 void
-polyfill_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
-              SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int old_x ATTRIBUTE_UNUSED,
-              int old_y ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+polyfill_drag(magic_api *api, int which ATTRIBUTE_UNUSED,
+              SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int old_x ATTRIBUTE_UNUSED,
+              int old_y ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   polyfill_dragged = 1;
 
@@ -329,7 +329,7 @@ polyfill_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
   update_rect->h = canvas->h;
 }
 
-void polyfill_draw_preview(magic_api * api, SDL_Surface * canvas, int show_handles)
+void polyfill_draw_preview(magic_api *api, SDL_Surface *canvas, int show_handles)
 {
   int i, xx, yy;
   SDL_Rect dest;
@@ -382,9 +382,9 @@ void polyfill_draw_preview(magic_api * api, SDL_Surface * canvas, int show_handl
 }
 
 void
-polyfill_release(magic_api * api, int which ATTRIBUTE_UNUSED,
-                 SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y,
-                 SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+polyfill_release(magic_api *api, int which ATTRIBUTE_UNUSED,
+                 SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y,
+                 SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   int i;
 
@@ -518,8 +518,8 @@ polyfill_release(magic_api * api, int which ATTRIBUTE_UNUSED,
   }
 }
 
-void polyfill_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,
-                        SDL_Surface * snapshot ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
+void polyfill_set_color(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                        SDL_Surface *snapshot ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect)
 {
   polyfill_color = SDL_MapRGB(canvas->format, r, g, b);
 
@@ -533,15 +533,15 @@ void polyfill_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface
   }
 }
 
-void polyfill_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void polyfill_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 
-void polyfill_line_callback(void *pointer ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,
-                            SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+void polyfill_line_callback(void *pointer ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                            SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   SDL_Rect dest;
 
@@ -554,8 +554,8 @@ void polyfill_line_callback(void *pointer ATTRIBUTE_UNUSED, int which ATTRIBUTE_
 }
 
 
-void polyfill_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas)
+void polyfill_switchin(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas)
 {
   polyfill_color_red = SDL_MapRGB(canvas->format, 255, 0, 0);
   polyfill_color_green = SDL_MapRGB(canvas->format, 0, 255, 0);
@@ -575,8 +575,8 @@ void polyfill_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
   polyfill_active = 1;
 }
 
-void polyfill_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas)
+void polyfill_switchout(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas)
 {
   if (polyfill_num_pts > 0)
   {
@@ -599,7 +599,7 @@ void polyfill_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
 /* Based on public-domain code by Darel Rex Finley, 2007
    https://alienryderflex.com/polygon_fill/
 */
-void polyfill_draw_final(SDL_Surface * canvas)
+void polyfill_draw_final(SDL_Surface *canvas)
 {
   int i, j, ymin, ymax, y, nodes, swap;
   int nodeX[256];

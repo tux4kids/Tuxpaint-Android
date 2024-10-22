@@ -124,7 +124,7 @@ Uint32 swirls_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int swirls_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int swirls_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -138,13 +138,13 @@ int swirls_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8
   return (1);
 }
 
-int swirls_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int swirls_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (NUM_SWIRL_TOOLS);
 }
 
 
-SDL_Surface *swirls_get_icon(magic_api * api, int which)
+SDL_Surface *swirls_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -153,12 +153,12 @@ SDL_Surface *swirls_get_icon(magic_api * api, int which)
   return (IMG_Load(fname));
 }
 
-char *swirls_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *swirls_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   return strdup(gettext(swirl_names[which]));
 }
 
-int swirls_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
+int swirls_get_group(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   if (which == SWIRL_TOOL_FUR)
   {
@@ -175,12 +175,12 @@ int swirls_get_order(int which)
   return swirls_orders[which];
 }
 
-char *swirls_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
+char *swirls_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode)
 {
   return strdup(gettext(swirl_descriptions[which][mode - 1]));
 }
 
-int swirls_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which)
+int swirls_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   if (which == SWIRL_TOOL_FUR)
   {
@@ -192,7 +192,7 @@ int swirls_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which)
   }
 }
 
-int swirls_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int swirls_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   if (which == SWIRL_TOOL_FUR)
   {
@@ -204,7 +204,7 @@ int swirls_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
   }
 }
 
-void swirls_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void swirls_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   int i;
 
@@ -216,8 +216,8 @@ void swirls_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 void
-swirls_click(magic_api * api, int which, int mode,
-             SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+swirls_click(magic_api *api, int which, int mode,
+             SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   if (snd_effects[which] != NULL)
     api->stopsound();
@@ -256,8 +256,8 @@ swirls_click(magic_api * api, int which, int mode,
 
 
 void
-swirls_drag(magic_api * api ATTRIBUTE_UNUSED, int which, SDL_Surface * canvas,
-            SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+swirls_drag(magic_api *api ATTRIBUTE_UNUSED, int which, SDL_Surface *canvas,
+            SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   if (which == SWIRL_TOOL_FUR)
   {
@@ -276,20 +276,20 @@ swirls_drag(magic_api * api ATTRIBUTE_UNUSED, int which, SDL_Surface * canvas,
 }
 
 
-void swirls_release(magic_api * api, int which,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void swirls_release(magic_api *api, int which,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   if (snd_effects[which] != NULL && which != SWIRL_TOOL_FUR)
     api->stopsound();
 }
 
 
-void swirls_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                      SDL_Surface * last ATTRIBUTE_UNUSED,
-                      Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void swirls_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *last ATTRIBUTE_UNUSED,
+                      Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   swirl_fur_color_r = r;
   swirl_fur_color_g = g;
@@ -298,7 +298,7 @@ void swirls_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
 
 
 void swirls_line_callback_drag(void *ptr, int which,
-                               SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                               SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   int i, ang_deg, radius, nx, ny;
   double ang_rad;
@@ -320,7 +320,7 @@ void swirls_line_callback_drag(void *ptr, int which,
   }
 }
 
-void swirls_draw_stroke(magic_api * api, int which, SDL_Surface * canvas, int x, int y)
+void swirls_draw_stroke(magic_api *api, int which, SDL_Surface *canvas, int x, int y)
 {
   int x1, y1, x2, y2, len;
   double a;
@@ -393,7 +393,7 @@ void swirls_draw_stroke(magic_api * api, int which, SDL_Surface * canvas, int x,
 
 
 void swirls_line_callback_draw_stroke(void *ptr, int which,
-                                      SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                                      SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -416,8 +416,8 @@ void swirls_line_callback_draw_stroke(void *ptr, int which,
 }
 
 
-void swirls_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+void swirls_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   if (swirls_snapshot == NULL)
     swirls_snapshot = SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
@@ -428,8 +428,8 @@ void swirls_switchin(magic_api * api ATTRIBUTE_UNUSED,
     SDL_BlitSurface(canvas, NULL, swirls_snapshot, NULL);
 }
 
-void swirls_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void swirls_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
@@ -439,7 +439,7 @@ double get_angle(int x, int y, int target_x, int target_y)
 }
 
 
-Uint8 swirls_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 swirls_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   /* TODO - We could offer different radiuses for "Circles and Rays",
    * and perhaps some different functionality for "Fur", based on size.
@@ -447,13 +447,13 @@ Uint8 swirls_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUT
   return 0;
 }
 
-Uint8 swirls_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 swirls_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void swirls_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                     Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void swirls_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                     Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

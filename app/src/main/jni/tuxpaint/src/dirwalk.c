@@ -79,10 +79,10 @@ extern char *strcasestr(const char *haystack, const char *needle);
  * @param screen Screen surface, for animating progress bar.
  * FIXME
  */
-void loadfont_callback(SDL_Surface * screen, SDL_Texture * texture,
-                       SDL_Renderer * renderer,
+void loadfont_callback(SDL_Surface *screen, SDL_Texture *texture,
+                       SDL_Renderer *renderer,
                        const char *restrict const dir, unsigned dirlen,
-                       tp_ftw_str * files, unsigned i, const char *restrict const locale)
+                       tp_ftw_str *files, unsigned i, const char *restrict const locale)
 {
   dirlen = dirlen;
 
@@ -319,14 +319,14 @@ int compare_ftw_str(const void *v1, const void *v2)
  * @param fn Callback function to invoke
  * @param locale Locale, to pass to callback function when applicable (i.e., for fonts), else NULL
  */
-void tp_ftw(SDL_Surface * screen, SDL_Texture * texture,
-            SDL_Renderer * renderer, char *restrict const dir,
-            unsigned dirlen, int rsrc, void (*fn)(SDL_Surface * screen,
-                                                  SDL_Texture * texture,
-                                                  SDL_Renderer * renderer,
+void tp_ftw(SDL_Surface *screen, SDL_Texture *texture,
+            SDL_Renderer *renderer, char *restrict const dir,
+            unsigned dirlen, int rsrc, void (*fn)(SDL_Surface *screen,
+                                                  SDL_Texture *texture,
+                                                  SDL_Renderer *renderer,
                                                   const char *restrict const
                                                   dir, unsigned dirlen,
-                                                  tp_ftw_str * files,
+                                                  tp_ftw_str *files,
                                                   unsigned count,
                                                   const char *restrict const locale), const char *restrict const locale)
 {

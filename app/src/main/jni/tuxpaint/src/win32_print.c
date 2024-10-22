@@ -40,7 +40,7 @@ static HDC hDCprinter = NULL;
 /**
  * FIXME
  */
-static SDL_Surface *make24bitDIB(SDL_Surface * surf)
+static SDL_Surface *make24bitDIB(SDL_Surface *surf)
 {
   SDL_PixelFormat pixfmt;
   SDL_Surface *surf24;
@@ -318,7 +318,7 @@ int IsPrinterAvailable(void)
 /**
  * FIXME
  */
-const char *SurfacePrint(SDL_Window * window, SDL_Surface * surf, const char *printcfg, int showdialog)
+const char *SurfacePrint(SDL_Window *window, SDL_Surface *surf, const char *printcfg, int showdialog)
 {
   const char *res = NULL;
   HWND hWnd;

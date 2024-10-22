@@ -203,7 +203,7 @@ default_locale_font_t default_local_fonts[] = {
   {-1, NULL, NULL},
 };
 
-void TuxPaint_Font_CloseFont(TuxPaint_Font * tpf)
+void TuxPaint_Font_CloseFont(TuxPaint_Font *tpf)
 {
 #ifdef DEBUG
   printf("%s:%d - TuxPaint_Font_CloseFont step 1 (%p)\n", __FILE__, __LINE__, tpf);
@@ -469,7 +469,7 @@ static void reliable_read(int fd, void *buf, size_t count)
 
 #endif
 
-static void groupfonts_range(style_info ** base, int count)
+static void groupfonts_range(style_info **base, int count)
 {
   int boldcounts[4] = { 0, 0, 0, 0 };
   int boldmap[4] = { -1, -1, -1, -1 };
@@ -695,7 +695,7 @@ static int compar_fontscore(const void *v1, const void *v2)
 //
 // Cooper: Light, Medium, Light Bold, Black
 // HoeflerText: (nil), Black
-static void parse_font_style(style_info * si)
+static void parse_font_style(style_info *si)
 {
   int have_light = 0;
   int have_demi = 0;
@@ -842,7 +842,7 @@ static void parse_font_style(style_info * si)
 }
 
 
-static void dupe_markdown_range(family_info ** base, int count)
+static void dupe_markdown_range(family_info **base, int count)
 {
   int bestscore = -999;
   int bestslot = 0;
@@ -960,9 +960,9 @@ static void groupfonts(void)
 }
 
 
-static void loadfonts_locale_filter(SDL_Surface * screen,
-                                    SDL_Texture * texture,
-                                    SDL_Renderer * renderer, const char *const dir, const char *restrict const locale)
+static void loadfonts_locale_filter(SDL_Surface *screen,
+                                    SDL_Texture *texture,
+                                    SDL_Renderer *renderer, const char *const dir, const char *restrict const locale)
 {
   char buf[TP_FTW_PATHSIZE];
   unsigned dirlen = strlen(dir);
@@ -973,14 +973,14 @@ static void loadfonts_locale_filter(SDL_Surface * screen,
   tp_ftw(screen, texture, renderer, buf, dirlen, 1, loadfont_callback, locale);
 }
 
-static void loadfonts(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer, const char *const dir)
+static void loadfonts(SDL_Surface *screen, SDL_Texture *texture, SDL_Renderer *renderer, const char *const dir)
 {
   loadfonts_locale_filter(screen, texture, renderer, dir, NULL);
 }
 
 
-/* static */ int load_user_fonts(SDL_Surface * screen, SDL_Texture * texture,
-                                 SDL_Renderer * renderer, void *vp, const char *restrict const locale)
+/* static */ int load_user_fonts(SDL_Surface *screen, SDL_Texture *texture,
+                                 SDL_Renderer *renderer, void *vp, const char *restrict const locale)
 {
   char *homedirdir;
 
@@ -1078,8 +1078,8 @@ static void loadfonts(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer 
 
 #ifdef FORKED_FONTS
 
-void run_font_scanner(SDL_Surface * screen, SDL_Texture * texture,
-                      SDL_Renderer * renderer, const char *restrict const locale)
+void run_font_scanner(SDL_Surface *screen, SDL_Texture *texture,
+                      SDL_Renderer *renderer, const char *restrict const locale)
 {
   int sv[2];
   int size, i;
@@ -1214,7 +1214,7 @@ void run_font_scanner(SDL_Surface * screen, SDL_Texture * texture,
 }
 
 
-void receive_some_font_info(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer)
+void receive_some_font_info(SDL_Surface *screen, SDL_Texture *texture, SDL_Renderer *renderer)
 {
   char *buf = NULL;
   unsigned buf_size = 0;
@@ -1466,7 +1466,7 @@ TuxPaint_Font *getfonthandle(int desire)
 static int was_bad_font;
 
 // see if two font surfaces are the same
-static int do_surfcmp(const SDL_Surface * const *const v1, const SDL_Surface * const *const v2)
+static int do_surfcmp(const SDL_Surface *const *const v1, const SDL_Surface *const *const v2)
 {
   const SDL_Surface *const s1 = *v1;
   const SDL_Surface *const s2 = *v2;
@@ -1544,7 +1544,7 @@ static int surfcmp(const void *s1, const void *s2)
 }
 
 // check if the characters will render distinctly
-int charset_works(TuxPaint_Font * font, const char *s)
+int charset_works(TuxPaint_Font *font, const char *s)
 {
   SDL_Color black = { 0, 0, 0, 0 };
   SDLPango_Matrix pango_color;
@@ -1608,7 +1608,7 @@ out:
   return ret;
 }
 
-int TuxPaint_Font_FontHeight(TuxPaint_Font * tpf)
+int TuxPaint_Font_FontHeight(TuxPaint_Font *tpf)
 {
   if (tpf == NULL)
   {
@@ -1622,7 +1622,7 @@ int TuxPaint_Font_FontHeight(TuxPaint_Font * tpf)
   return (tpf->height);
 }
 
-const char *TuxPaint_Font_FontFaceFamilyName(TuxPaint_Font * tpf)
+const char *TuxPaint_Font_FontFaceFamilyName(TuxPaint_Font *tpf)
 {
   if (tpf == NULL)
   {
@@ -1651,7 +1651,7 @@ const char *TuxPaint_Font_FontFaceFamilyName(TuxPaint_Font * tpf)
   return ("");
 }
 
-const char *TuxPaint_Font_FontFaceStyleName(TuxPaint_Font * tpf)
+const char *TuxPaint_Font_FontFaceStyleName(TuxPaint_Font *tpf)
 {
   if (tpf == NULL)
   {
@@ -1681,7 +1681,7 @@ const char *TuxPaint_Font_FontFaceStyleName(TuxPaint_Font * tpf)
 }
 
 
-void sdl_color_to_pango_color(SDL_Color sdl_color, SDLPango_Matrix * pango_color)
+void sdl_color_to_pango_color(SDL_Color sdl_color, SDLPango_Matrix *pango_color)
 {
   Uint8 pc[4][4];
 

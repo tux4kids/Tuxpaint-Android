@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <math.h>
@@ -76,14 +76,14 @@ Uint32 fisheye_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void fisheye_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+void fisheye_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
                        Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                       SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                       SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-int fisheye_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int fisheye_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -93,12 +93,12 @@ int fisheye_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint
   return (1);
 }
 
-int fisheye_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int fisheye_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-SDL_Surface *fisheye_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *fisheye_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -107,12 +107,12 @@ SDL_Surface *fisheye_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *fisheye_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *fisheye_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext_noop("Fisheye"));
+  return strdup(gettext("Fisheye"));
 }
 
-int fisheye_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int fisheye_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
 }
@@ -122,34 +122,34 @@ int fisheye_get_order(int which ATTRIBUTE_UNUSED)
   return 400;
 }
 
-char *fisheye_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *fisheye_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext_noop("Click on part of your picture to create a fisheye effect."));
+  return strdup(gettext("Click on part of your picture to create a fisheye effect."));
 }
 
-int fisheye_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int fisheye_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void fisheye_release(magic_api * api ATTRIBUTE_UNUSED,
+void fisheye_release(magic_api *api ATTRIBUTE_UNUSED,
                      int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                     SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 
 }
 
-void fisheye_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void fisheye_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   Mix_FreeChunk(fisheye_snd);
 }
 
 // do-fisheye
 
-void fisheye_draw(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,
-                  SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+void fisheye_draw(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                  SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   SDL_Surface *oryg, *temp_src = NULL, *temp_dest = NULL, *output;
@@ -283,8 +283,8 @@ void fisheye_draw(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,
   api->playsound(fisheye_snd, (x * 255) / canvas->w, 255);
 }
 
-void fisheye_drag(magic_api * api, int which, SDL_Surface * canvas,
-                  SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void fisheye_drag(magic_api *api, int which, SDL_Surface *canvas,
+                  SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
 
   api->line(api, which, canvas, snapshot, ox, oy, x, y, 1, fisheye_draw);
@@ -294,45 +294,45 @@ void fisheye_drag(magic_api * api, int which, SDL_Surface * canvas,
   update_rect->h = max(oy, y) - update_rect->y + (fisheye_radius / 2);
 }
 
-void fisheye_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void fisheye_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   last_x = -fisheye_radius;     /* A value that will be beyond any clicked position */
   last_y = -fisheye_radius;
   fisheye_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void fisheye_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void fisheye_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 
 }
 
-void fisheye_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void fisheye_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 
 }
 
-int fisheye_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int fisheye_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
 
-Uint8 fisheye_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 fisheye_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 5;                     // FIXME
 }
 
-Uint8 fisheye_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 fisheye_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 2;                     // FIXME
 }
 
-void fisheye_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
-                      SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void fisheye_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
+                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   fisheye_radius = size * 40;
 }

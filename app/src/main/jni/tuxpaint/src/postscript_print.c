@@ -77,8 +77,7 @@ static int f2dec(float f)
 }
 
 /* Actually save the PostScript data to the file stream: */
-int do_ps_save(FILE * fi,
-               const char *restrict const fname, SDL_Surface * surf, const char *restrict pprsize, int is_pipe)
+int do_ps_save(FILE *fi, const char *restrict const fname, SDL_Surface *surf, const char *restrict pprsize, int is_pipe)
 {
   const struct paper *ppr;
   int img_w = surf->w;

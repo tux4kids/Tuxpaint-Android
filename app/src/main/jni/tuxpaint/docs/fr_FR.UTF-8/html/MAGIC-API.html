@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.33          </h1>
+            version 0.9.34          </h1>
 
           <h2>
             Magic Tool Plugin API Documentation          </h2>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            juin  1, 2024          </p>
+            septembre 17, 2024          </p>
         </center>
       </header>
 
@@ -128,7 +128,7 @@
                     </ul>
                   </li>
                   <li><a href="#tpfuncs">Tux Paint Functions and Data</a>                    <ul>
-                      <li><a href="#pixel_manip">Pixel Manipulations</a></li>                      <li><a href="#helper_funcs">Helper Functions</a></li>                      <li><a href="#informational">Informational</a></li>                      <li><a href="#syscalls">Tux Paint System Calls</a></li>                      <li><a href="#color_convs">Color Conversions</a></li>                    </ul>
+                      <li><a href="#pixel_manip">Pixel Manipulations</a></li>                      <li><a href="#helper_funcs">Helper Functions</a></li>                      <li><a href="#informational">Informational</a></li>                      <li><a href="#sound">Sound Functions</a></li>                      <li><a href="#syscalls">Tux Paint System Calls</a></li>                      <li><a href="#color_convs">Color Conversions</a></li>                    </ul>
                   </li>
                   <li><a href="#macros">Helper Macros in "tp_magic_api.h"</a></li>                  <li><a href="#consts">Constant Definitions in "tp_magic_api.h"</a></li>                </ul>
               </li>
@@ -609,7 +609,7 @@
           <dl>
             <dt><code><b>char * tp_version</b></code></dt>
             <dd>
-              A string containing the version of Tux Paint that's running (e.g., "0.9.33").            </dd>
+              A string containing the version of Tux Paint that's running (e.g., "0.9.34").            </dd>
 
             <dt>
               <code><b>int canvas_w</b></code><br/>
@@ -636,17 +636,13 @@
           </dl>
         </section><!-- H3: Informational -->
 
-        <section class="indent"><!-- H3: Tux Paint System Calls -->
+        <section class="indent"><!-- H3: Sound Functions -->
           <header>
-            <h3 id="syscalls">
-              Tux Paint System Calls            </h3>
+            <h3 id="sound">
+              Sound Functions            </h3>
           </header>
 
           <dl>
-            <dt><code><b>void update_progress_bar(void)</b></code></dt>
-            <dd>
-              Asks Tux Paint to animate and draw one frame of its progress bar (at the bottom of the screen).  Useful for routines that may take a long time, to provide feedback to the user that Tux Paint has not crashed or frozen.            </dd>
-
             <dt><code><b>void playsound(Mix_Chunk * snd, int pan, int dist)</b></code></dt>
             <dd>
               <p>
@@ -662,6 +658,43 @@
             <dt><code><b>void stopsound(void)</b></code></dt>
             <dd>
               This function stops playing a sound played by <code>playsound()</code>. It is useful to silence effects when the user stops using the tool (in your '<code>release</code>' function).            </dd>
+
+            <dt><code><b>int playingsound(void)</b></code></dt>
+            <dd>
+              <p>
+                Call this function to determine whether a magic tool sound effect is still currently playing. Can be used by magic tools that pause and unpause their sounds (see below) to determine whether it's time to start a new sound &mdash; call <code>playsound()</code> instead of <code>unpausesound()</code>.                A '1' is returned if a sound is playing; '0' otherwise.              </p>
+              <p>
+                <b>Note:</b> Added to Tux Paint 0.9.34; Magic API version 0x0000000B.              </p>
+            </dd>
+
+            <dt><code><b>void pausesound(void)</b></code></dt>
+            <dd>
+              <p>
+                Pauses the magic tool sound effect; it may be unpaused to resume playing. Useful when a magic tool sound is very long; avoid repeatedly playing just a short clip of the beginning when the user draws small strokes by starting (<code>playsound()</code>) and stopping (<code>stopsound()</code>) the sound. Use <code>playingsound()</code> to determine whether you can unpause or must play from the start.              </p>
+              <p>
+                <b>Note:</b> Added to Tux Paint 0.9.34; Magic API version 0x0000000B.              </p>
+            </dd>
+
+            <dt><code><b>void unpausesound(void)</b></code></dt>
+            <dd>
+              <p>
+                Resumes a paused magic tool sound effect, if one was playing.              </p>
+              <p>
+                <b>Note:</b> Added to Tux Paint 0.9.34; Magic API version 0x0000000B.              </p>
+            </dd>
+          </dl>
+        </section><!-- H3: Sound Functions -->
+
+        <section class="indent"><!-- H3: Tux Paint System Calls -->
+          <header>
+            <h3 id="syscalls">
+              Tux Paint System Calls            </h3>
+          </header>
+
+          <dl>
+            <dt><code><b>void update_progress_bar(void)</b></code></dt>
+            <dd>
+              Asks Tux Paint to animate and draw one frame of its progress bar (at the bottom of the screen).  Useful for routines that may take a long time, to provide feedback to the user that Tux Paint has not crashed or frozen.            </dd>
 
             <dt id="special_notify"><code><b>void special_notify(int flag)</b></code></dt>
             <dd>
@@ -770,7 +803,7 @@
             <p>
               It should be referenced by your magic tool's "<code>api_version()</code>" function, to inform the running copy of Tux Paint whether or not your plugin is compatible.            </p>
             <p>
-              <b>Note:</b> This version number does not correspond to Tux Paint's own release number (e.g., "0.9.33").  The API will not change every time a new version of Tux Paint is released, which means plugins compiled for earlier versions of Tux Paint will often run under newer versions.            </p>
+              <b>Note:</b> This version number does not correspond to Tux Paint's own release number (e.g., "0.9.34").  The API will not change every time a new version of Tux Paint is released, which means plugins compiled for earlier versions of Tux Paint will often run under newer versions.            </p>
           </dd>
 
           <dt>

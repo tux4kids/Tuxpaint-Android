@@ -84,7 +84,7 @@ Uint32 kaleidox_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int kaleidox_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int kaleidox_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -98,13 +98,13 @@ int kaleidox_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uin
   return (1);
 }
 
-int kaleidox_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int kaleidox_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (NUM_TOOLS);
 }
 
 
-SDL_Surface *kaleidox_get_icon(magic_api * api, int which)
+SDL_Surface *kaleidox_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -113,12 +113,12 @@ SDL_Surface *kaleidox_get_icon(magic_api * api, int which)
   return (IMG_Load(fname));
 }
 
-char *kaleidox_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *kaleidox_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   return strdup(gettext(kaleidox_names[which]));
 }
 
-int kaleidox_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int kaleidox_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_WARPS;
 }
@@ -128,22 +128,22 @@ int kaleidox_get_order(int which)
   return 800 + which;
 }
 
-char *kaleidox_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *kaleidox_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   return strdup(gettext(kaleidox_descrs[which]));
 }
 
-int kaleidox_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int kaleidox_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-int kaleidox_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int kaleidox_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MODE_PAINT_WITH_PREVIEW;
 }
 
-void kaleidox_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void kaleidox_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   int i;
 
@@ -155,8 +155,8 @@ void kaleidox_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 void
-kaleidox_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-               SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+kaleidox_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+               SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   api->stopsound();
 
@@ -193,9 +193,9 @@ int mirror(int n, int max, int flip)
 }
 
 void
-kaleidox_drag(magic_api * api, int which, SDL_Surface * canvas,
-              SDL_Surface * snapshot, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
-              int x, int y, SDL_Rect * update_rect)
+kaleidox_drag(magic_api *api, int which, SDL_Surface *canvas,
+              SDL_Surface *snapshot, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
+              int x, int y, SDL_Rect *update_rect)
 {
   if (snd_effects[which] != NULL)
   {
@@ -210,8 +210,7 @@ kaleidox_drag(magic_api * api, int which, SDL_Surface * canvas,
   update_rect->h = canvas->h;
 }
 
-void kaleidox_render(magic_api * api, int which, SDL_Surface * canvas,
-                     SDL_Surface * snapshot, int x, int y, int preview)
+void kaleidox_render(magic_api *api, int which, SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, int preview)
 {
   int off_x, off_y, sides, max_radius;
   float angle, angle_offset;
@@ -306,8 +305,8 @@ void kaleidox_render(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 
-void kaleidox_release(magic_api * api, int which,
-                      SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void kaleidox_release(magic_api *api, int which,
+                      SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   kaleidox_render(api, which, canvas, snapshot, x, y, 0);
 
@@ -320,26 +319,26 @@ void kaleidox_release(magic_api * api, int which,
 }
 
 
-void kaleidox_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                        SDL_Surface * last ATTRIBUTE_UNUSED,
+void kaleidox_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                        SDL_Surface *last ATTRIBUTE_UNUSED,
                         Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                        SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                        SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 
-void kaleidox_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void kaleidox_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void kaleidox_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void kaleidox_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-Uint8 kaleidox_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 kaleidox_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   /* I considered having this plugin collapse down to one tool
    * with multiple sizes, but decided to leave it as three separate
@@ -347,13 +346,13 @@ Uint8 kaleidox_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIB
   return 0;
 }
 
-Uint8 kaleidox_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 kaleidox_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void kaleidox_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void kaleidox_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

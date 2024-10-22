@@ -1,7 +1,7 @@
 /*
   Draws fretwork
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include "tp_magic_api.h"
@@ -97,14 +97,14 @@ Uint32 fretwork_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int fretwork_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int fretwork_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
 }
 
-void fretwork_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                        SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                        SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void fretwork_set_color(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                        SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
+                        SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   fretwork_r = r;
   fretwork_g = g;
@@ -116,7 +116,7 @@ void fretwork_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface
 }
 
 /* Adapted from flower.c */
-static void fretwork_colorize(magic_api * api, SDL_Surface * dest, SDL_Surface * src)
+static void fretwork_colorize(magic_api *api, SDL_Surface *dest, SDL_Surface *src)
 {
   int x, y;
   Uint8 r, g, b, a;
@@ -139,7 +139,7 @@ static void fretwork_colorize(magic_api * api, SDL_Surface * dest, SDL_Surface *
 }
 
 
-int fretwork_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int fretwork_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
   Uint8 i;                      //is always < 4, so Uint8 seems to be a good idea
@@ -193,12 +193,12 @@ int fretwork_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uin
   return (1);
 }
 
-int fretwork_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int fretwork_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-SDL_Surface *fretwork_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *fretwork_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -207,7 +207,7 @@ SDL_Surface *fretwork_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-int fretwork_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int fretwork_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
@@ -217,33 +217,33 @@ int fretwork_get_order(int which ATTRIBUTE_UNUSED)
   return 2100;
 }
 
-char *fretwork_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *fretwork_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext_noop("Fretwork"));
+  return strdup(gettext("Fretwork"));
 }
 
-char *fretwork_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+char *fretwork_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
-    return strdup(gettext_noop("Click and drag to draw repetitive patterns."));
+    return strdup(gettext("Click and drag to draw repetitive patterns."));
   else
-    return strdup(gettext_noop("Click to surround your picture with repetitive patterns."));
+    return strdup(gettext("Click to surround your picture with repetitive patterns."));
 }
 
-int fretwork_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int fretwork_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-void fretwork_release(magic_api * api ATTRIBUTE_UNUSED,
+void fretwork_release(magic_api *api ATTRIBUTE_UNUSED,
                       int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                      SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                      int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                      int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-void fretwork_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void fretwork_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   Uint8 i;
 
@@ -266,9 +266,9 @@ void fretwork_shutdown(magic_api * api ATTRIBUTE_UNUSED)
     free(fretwork_status_of_segments);
 }
 
-void fretwork_switchin(magic_api * api ATTRIBUTE_UNUSED,
+void fretwork_switchin(magic_api *api ATTRIBUTE_UNUSED,
                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED)
+                       SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED)
 {
   //we've to compute the quantity of segments in each direction
 
@@ -285,9 +285,9 @@ void fretwork_switchin(magic_api * api ATTRIBUTE_UNUSED,
 }
 
 
-void fretwork_switchout(magic_api * api ATTRIBUTE_UNUSED,
+void fretwork_switchout(magic_api *api ATTRIBUTE_UNUSED,
                         int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * snapshot ATTRIBUTE_UNUSED)
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *snapshot ATTRIBUTE_UNUSED)
 {
   free(fretwork_status_of_segments);
   fretwork_status_of_segments = NULL;
@@ -319,7 +319,7 @@ inline unsigned int fretwork_get_segment(int x, int y)
   return (yy - 1) * fretwork_segments_x + xx;
 }
 
-inline void fretwork_extract_coords_from_segment(unsigned int segment, POINT_TYPE * x, POINT_TYPE * y)
+inline void fretwork_extract_coords_from_segment(unsigned int segment, POINT_TYPE *x, POINT_TYPE *y)
 {
   *x = ((segment % fretwork_segments_x) - 1) * img_w;   //useful to set update_rect as small as possible
   *y = (int)(segment / fretwork_segments_x) * img_h;
@@ -336,7 +336,7 @@ inline void fretwork_extract_coords_from_segment(unsigned int segment, POINT_TYP
 /*       api->putpixel(dest, x, y, api->getpixel(src, x, src->h-y)); */
 /* } */
 
-static void fretwork_flip_flop(void *ptr, SDL_Surface * dest, SDL_Surface * src)
+static void fretwork_flip_flop(void *ptr, SDL_Surface *dest, SDL_Surface *src)
 {
   magic_api *api = (magic_api *) ptr;
   POINT_TYPE x, y;
@@ -346,7 +346,7 @@ static void fretwork_flip_flop(void *ptr, SDL_Surface * dest, SDL_Surface * src)
       api->putpixel(dest, dest->w - 1 - x, dest->h - 1 - y, api->getpixel(src, x, y));
 }
 
-static void fretwork_rotate(void *ptr, SDL_Surface * dest, SDL_Surface * src, _Bool direction)
+static void fretwork_rotate(void *ptr, SDL_Surface *dest, SDL_Surface *src, _Bool direction)
      //src and dest must have same size
 {
   magic_api *api = (magic_api *) ptr;
@@ -368,8 +368,8 @@ static void fretwork_rotate(void *ptr, SDL_Surface * dest, SDL_Surface * src, _B
 }
 
 
-void fretwork_click(magic_api * api, int which, int mode,
-                    SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void fretwork_click(magic_api *api, int which, int mode,
+                    SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   int left_x, right_x, top_y, bottom_y;
 
@@ -520,8 +520,8 @@ static Uint8 fretwork_select_image(Uint16 segment)
 
 
 static void fretwork_draw(void *ptr, int which ATTRIBUTE_UNUSED,
-                          SDL_Surface * canvas,
-                          SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y ATTRIBUTE_UNUSED, unsigned int segment)
+                          SDL_Surface *canvas,
+                          SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y ATTRIBUTE_UNUSED, unsigned int segment)
 {
   magic_api *api = (magic_api *) ptr;
   SDL_Surface *result, *temp;
@@ -624,7 +624,7 @@ static void fretwork_draw(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 
-static void fretwork_draw_wrapper(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
+static void fretwork_draw_wrapper(void *ptr, int which, SDL_Surface *canvas, SDL_Surface *last, int x, int y)
 {
   fretwork_segment_modified = fretwork_get_segment(x, y);
 
@@ -649,8 +649,8 @@ static void fretwork_draw_wrapper(void *ptr, int which, SDL_Surface * canvas, SD
   fretwork_segment_modified_last = fretwork_segment_modified;
 }
 
-void fretwork_drag(magic_api * api, int which,
-                   SDL_Surface * canvas, SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void fretwork_drag(magic_api *api, int which,
+                   SDL_Surface *canvas, SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   int start_x, end_x, start_y, end_y, segment_start, segment_end, w, h;
 
@@ -678,18 +678,18 @@ void fretwork_drag(magic_api * api, int which,
   }
 }
 
-Uint8 fretwork_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 fretwork_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 fretwork_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 fretwork_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void fretwork_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void fretwork_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

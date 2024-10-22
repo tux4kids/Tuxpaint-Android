@@ -25,7 +25,7 @@
 
   FIXME: If --nomagicsizes set, offer at least a couple size variations. -bjk 2024.01.16
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -80,7 +80,7 @@ void pixels_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
 
 
 // No setup required:
-int pixels_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int pixels_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -96,13 +96,13 @@ Uint32 pixels_api_version(void)
 }
 
 // We have multiple tools:
-int pixels_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int pixels_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (NUM_TOOLS);
 }
 
 // Load our icons:
-SDL_Surface *pixels_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *pixels_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -112,13 +112,13 @@ SDL_Surface *pixels_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 }
 
 // Return our names, localized:
-char *pixels_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *pixels_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Pixels")));
+  return (strdup(gettext("Pixels")));
 }
 
 // Return our group (both the same):
-int pixels_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int pixels_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
@@ -130,9 +130,9 @@ int pixels_get_order(int which ATTRIBUTE_UNUSED)
 }
 
 // Return our descriptions, localized:
-char *pixels_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *pixels_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Click and drag to draw large pixels.")));
+  return (strdup(gettext("Click and drag to draw large pixels.")));
 
   return (NULL);
 }
@@ -140,7 +140,7 @@ char *pixels_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBU
 // Do the effect:
 
 static void do_pixels(void *ptr ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                      SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   SDL_Rect dest;
 
@@ -153,8 +153,8 @@ static void do_pixels(void *ptr ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
 }
 
 // Affect the canvas on drag:
-void pixels_drag(magic_api * api, int which, SDL_Surface * canvas,
-                 SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void pixels_drag(magic_api *api, int which, SDL_Surface *canvas,
+                 SDL_Surface *last, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_pixels);
 
@@ -187,31 +187,31 @@ void pixels_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void pixels_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void pixels_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                  SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   pixels_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void pixels_release(magic_api * api, int which ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface * last ATTRIBUTE_UNUSED,
-                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void pixels_release(magic_api *api, int which ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED,
+                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   api->stopsound();
 }
 
 // No setup happened:
-void pixels_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void pixels_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (pixel_snd != NULL)
     Mix_FreeChunk(pixel_snd);
 }
 
 // Record the color from Tux Paint:
-void pixels_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
-                      Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void pixels_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                      Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   pixels_r = r;
   pixels_g = g;
@@ -219,40 +219,40 @@ void pixels_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
 }
 
 // Use colors:
-int pixels_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int pixels_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-void pixels_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void pixels_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void pixels_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void pixels_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int pixels_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int pixels_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
 
-Uint8 pixels_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 pixels_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 4;
 }
 
-Uint8 pixels_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 pixels_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-void pixels_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
-                     SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void pixels_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
+                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   int canv_area_scale;
 

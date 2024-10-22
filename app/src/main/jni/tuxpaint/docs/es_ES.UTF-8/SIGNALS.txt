@@ -1,5 +1,5 @@
                                    Tux Paint
-                                versión 0.9.33
+                                versión 0.9.34
                              Signals Documentation
 
         Copyright © 2019-2022 by various contributors; see AUTHORS.txt.
@@ -10,7 +10,7 @@
 Tux Paint responds to the following signals (which can be sent to the program's
 process via `kill` or `killall`, for example).
 
-SIGTERM (also, [Control] + [C] from a terminal running `tuxpaint`)
+→ SIGTERM (also, [Control] + [C] from a terminal running `tuxpaint`) ←
 
     Tux Paint responds as if the "Quit" button were pressed, or the desktop
     environment was told to close Tux Paint (e.g., by clicking a window close
@@ -32,8 +32,8 @@ SIGTERM (also, [Control] + [C] from a terminal running `tuxpaint`)
     the [Esc] was key pressed.
 
 
-
-SIGUSR1 & SIGUSR2
+     
+→ SIGUSR1 & SIGUSR2 ←
 
     Tux Paint responds by setting its auto-save option (as if it had been
     launched with "--autosave"), as well as either the option to always save
@@ -53,5 +53,5 @@ SIGUSR1 & SIGUSR2
     completely.
 
 
-
+     
 

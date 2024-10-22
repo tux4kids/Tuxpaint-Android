@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 
   TODO:
    * Support sizes (for snowflakes, we'll need a new set of bitmap PNGs!) -bjk 2023.04.22
@@ -117,7 +117,7 @@ Uint32 snow_api_version(void)
 }
 
 //Load sounds
-int snow_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int snow_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
 
   int i;
@@ -147,13 +147,13 @@ int snow_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 c
   return (1);
 }
 
-int snow_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int snow_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (snow_NUM_TOOLS);
 }
 
 // Load our icons:
-SDL_Surface *snow_get_icon(magic_api * api, int which)
+SDL_Surface *snow_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -162,12 +162,12 @@ SDL_Surface *snow_get_icon(magic_api * api, int which)
 }
 
 // Return our names, localized:
-char *snow_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *snow_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
-  return (strdup(gettext_noop(snow_names[which])));
+  return (strdup(gettext(snow_names[which])));
 }
 
-int snow_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int snow_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_DECORATIONS;        /* Because we affect the whole image, and not just around the mouse */
 }
@@ -178,13 +178,13 @@ int snow_get_order(int which)
 }
 
 // Return our descriptions, localized:
-char *snow_get_description(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *snow_get_description(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
-  return (strdup(gettext_noop(snow_descs[which])));
+  return (strdup(gettext(snow_descs[which])));
 }
 
 // Do the effect:
-static void do_snow(void *ptr, SDL_Surface * canvas, SDL_Surface * last, int which, int snowAmount)
+static void do_snow(void *ptr, SDL_Surface *canvas, SDL_Surface *last, int which, int snowAmount)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -227,19 +227,19 @@ static void do_snow(void *ptr, SDL_Surface * canvas, SDL_Surface * last, int whi
 }
 
 // Affect the canvas on drag:
-void snow_drag(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-               SDL_Surface * canvas ATTRIBUTE_UNUSED,
-               SDL_Surface * last ATTRIBUTE_UNUSED, int ox ATTRIBUTE_UNUSED,
+void snow_drag(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+               SDL_Surface *canvas ATTRIBUTE_UNUSED,
+               SDL_Surface *last ATTRIBUTE_UNUSED, int ox ATTRIBUTE_UNUSED,
                int oy ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
-               int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+               int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   // No-op
 }
 
 // Affect the canvas on click:
-void snow_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                SDL_Surface * canvas, SDL_Surface * last,
-                int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect)
+void snow_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                SDL_Surface *canvas, SDL_Surface *last,
+                int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect)
 {
   update_rect->x = 0;
   update_rect->y = 0;
@@ -251,16 +251,16 @@ void snow_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 }
 
 // Affect the canvas on release:
-void snow_release(magic_api * api ATTRIBUTE_UNUSED,
+void snow_release(magic_api *api ATTRIBUTE_UNUSED,
                   int which ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                  SDL_Surface * last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
-                  int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                  SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                  SDL_Surface *last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
+                  int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // No setup happened:
-void snow_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void snow_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   //Clean up sounds
   int i;
@@ -283,47 +283,47 @@ void snow_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void snow_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
-                    Uint8 b ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void snow_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                    Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // Use colors:
-int snow_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int snow_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void snow_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void snow_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void snow_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void snow_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int snow_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int snow_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_FULLSCREEN);
 }
 
 
-Uint8 snow_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 snow_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   /* FIXME: Support sizes */
   return 0;
 }
 
-Uint8 snow_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 snow_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void snow_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                   Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void snow_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                   Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

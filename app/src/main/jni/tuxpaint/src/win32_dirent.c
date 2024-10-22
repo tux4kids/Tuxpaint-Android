@@ -66,7 +66,7 @@ DIR *opendir(const char *pSpec)
  *
  * @param pDir Opened directory to close.
  */
-void closedir(DIR * pDir)
+void closedir(DIR *pDir)
 {
   assert(pDir != NULL);
   free(pDir);

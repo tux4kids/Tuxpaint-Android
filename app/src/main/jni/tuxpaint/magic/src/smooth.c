@@ -127,7 +127,7 @@ void smooth_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
 
 
 
-int smooth_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int smooth_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
   int i;
@@ -147,13 +147,13 @@ Uint32 smooth_api_version(void)
 }
 
 // Only one tool:
-int smooth_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int smooth_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (NUM_TOOLS);
 }
 
 // Load our icon:
-SDL_Surface *smooth_get_icon(magic_api * api, int which)
+SDL_Surface *smooth_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -162,13 +162,13 @@ SDL_Surface *smooth_get_icon(magic_api * api, int which)
 }
 
 // Return our name, localized:
-char *smooth_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *smooth_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   return (strdup(gettext(smooth_names[which])));
 }
 
 // Return our group
-int smooth_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int smooth_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
@@ -180,13 +180,13 @@ int smooth_get_order(int which)
 }
 
 // Return our description, localized:
-char *smooth_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *smooth_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext(smooth_descrs[which])));
 }
 
 
-static void smooth_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+static void smooth_linecb(void *ptr, int which, SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   SDL_Rect dest;
@@ -220,7 +220,7 @@ static void smooth_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surfac
 #define LOOP_RAD_CALC (smooth_size * 10)
 
 static void smooth_squiggle_linecb(void *ptr, int which,
-                                   SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                                   SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int xx1, yy1, xx2, yy2, i;
@@ -264,8 +264,8 @@ static void smooth_squiggle_linecb(void *ptr, int which,
   }
 }
 
-void smooth_drag(magic_api * api, int which,
-                 SDL_Surface * canvas, SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void smooth_drag(magic_api *api, int which,
+                 SDL_Surface *canvas, SDL_Surface *last, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   if (which == TOOL_SMOOTH)
   {
@@ -335,9 +335,9 @@ void smooth_drag(magic_api * api, int which,
   api->playsound(smooth_snds[which], (x * 255) / canvas->w, 255);
 }
 
-void smooth_click(magic_api * api,
+void smooth_click(magic_api *api,
                   int which, int mode ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+                  SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   num_input_points = 0;
   smooth_control_points[num_input_points].x = x;
@@ -359,9 +359,9 @@ void smooth_click(magic_api * api,
 }
 
 
-void smooth_release(magic_api * api,
+void smooth_release(magic_api *api,
                     int which ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+                    SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   if (which == TOOL_SMOOTH)
   {
@@ -418,7 +418,7 @@ void smooth_release(magic_api * api,
 }
 
 
-void smooth_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void smooth_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   int i;
 
@@ -429,15 +429,15 @@ void smooth_shutdown(magic_api * api ATTRIBUTE_UNUSED)
   }
 }
 
-void smooth_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas,
-                      SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                      SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void smooth_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas,
+                      SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
+                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   smooth_color = SDL_MapRGB(canvas->format, r, g, b);
 }
 
-int smooth_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int smooth_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
@@ -456,7 +456,7 @@ cp[3] is the end point, or P3 in the above diagram
 t is the parameter value, 0 <= t <= 1
 */
 
-static Point2D smooth_PointOnCubicBezier(Point2D * cp, float t)
+static Point2D smooth_PointOnCubicBezier(Point2D *cp, float t)
 {
   float ax, bx, cx;
   float ay, by, cy;
@@ -492,7 +492,7 @@ static Point2D smooth_PointOnCubicBezier(Point2D * cp, float t)
  <sizeof(Point2D) numberOfPoints>
 */
 
-static void smooth_ComputeBezier(Point2D * cp, int numberOfPoints, Point2D * curve)
+static void smooth_ComputeBezier(Point2D *cp, int numberOfPoints, Point2D *curve)
 {
   float dt;
   int i;
@@ -512,35 +512,35 @@ static float smooth_dist(float x1, float y1, float x2, float y2)
   return d;
 }
 
-void smooth_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void smooth_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void smooth_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void smooth_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int smooth_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int smooth_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
 
-Uint8 smooth_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+Uint8 smooth_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   return smooth_sizes[which];
 }
 
-Uint8 smooth_default_size(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+Uint8 smooth_default_size(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   return smooth_sizes[which] / 2;
 }
 
-void smooth_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                     Uint8 size, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void smooth_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                     Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   smooth_size = size;
 }

@@ -144,7 +144,7 @@ released, aka deallocated) when the user quits Tux Paint, when our
 example_shutdown() function is called.
 */
 
-int example_init(magic_api * api, Uint8 disabled_features,
+int example_init(magic_api *api, Uint8 disabled_features,
                  Uint8 complexity_level)
 {
   int i;
@@ -184,7 +184,7 @@ above!)
 When Tux Paint is starting up and loading plugins, it will call some of the
 following setup functions once for each tool we report.
 */
-int example_get_tool_count(magic_api * api)
+int example_get_tool_count(magic_api *api)
 {
   return (NUM_TOOLS);
 }
@@ -196,7 +196,7 @@ Load our icons
 When Tux Paint is starting up and loading plugins, it asks us to provide
 icons for the 'Magic' tool buttons.
 */
-SDL_Surface *example_get_icon(magic_api * api, int which)
+SDL_Surface *example_get_icon(magic_api *api, int which)
 {
   char filename[1024];
 
@@ -228,7 +228,7 @@ Report our 'Magic' tool names
 When Tux Paint is starting up and loading plugins, it asks us to provide
 names (labels) for the 'Magic' tool buttons.
 */
-char *example_get_name(magic_api * api, int which)
+char *example_get_name(magic_api *api, int which)
 {
   const char *our_name_english;
   const char *our_name_localized;
@@ -265,7 +265,7 @@ Report our 'Magic' tool groups
 When Tux Paint is starting up and loading plugins, it asks us to specify
 where the tool should be grouped.
 */
-int example_get_group(magic_api * api, int which)
+int example_get_group(magic_api *api, int which)
 {
   /*
      Return our group, found in the "tool_groups[]" array.
@@ -297,7 +297,7 @@ Report our 'Magic' tool descriptions
 When Tux Paint is starting up and loading plugins, it asks us to provide
 descriptions of each 'Magic' tool.
 */
-char *example_get_description(magic_api * api, int which, int hamur)
+char *example_get_description(magic_api *api, int which, int hamur)
 {
   const char *our_desc_english;
   const char *our_desc_localized;
@@ -332,7 +332,7 @@ char *example_get_description(magic_api * api, int which, int hamur)
 
 // Report whether we accept colors
 
-int example_requires_colors(magic_api * api, int which)
+int example_requires_colors(magic_api *api, int which)
 {
   if (which == TOOL_ONE)
     return 1;
@@ -343,7 +343,7 @@ int example_requires_colors(magic_api * api, int which)
 
 // Report what modes we work in
 
-int example_modes(magic_api * api, int which)
+int example_modes(magic_api *api, int which)
 {
   /*
      Both of our tools are painted (neither affect the full-screen), so we're
@@ -356,7 +356,7 @@ int example_modes(magic_api * api, int which)
 
 // Report whether the tools offer sizing options
 
-Uint8 example_accepted_sizes(magic_api * api, int which, int hamur)
+Uint8 example_accepted_sizes(magic_api *api, int which, int hamur)
 {
   if (which == TOOL_ONE)
     return 1;
@@ -367,7 +367,7 @@ Uint8 example_accepted_sizes(magic_api * api, int which, int hamur)
 
 // Return our default sizing option
 
-Uint8 example_default_size(magic_api * api, int which, int hamur)
+Uint8 example_default_size(magic_api *api, int which, int hamur)
 {
   return 1;
 }
@@ -381,7 +381,7 @@ up' after themselves.  We, for example, loaded some sound effects at
 startup (in our example_init() function), so we should free the memory used
 by them now.
 */
-void example_shutdown(magic_api * api)
+void example_shutdown(magic_api *api)
 {
   int i;
 
@@ -400,9 +400,9 @@ void example_shutdown(magic_api * api)
 /* Affect the canvas on click: */
 
 void
-example_click(magic_api * api, int which, int hamur,
-              SDL_Surface * canvas, SDL_Surface * skjamynd, int x, int y,
-              SDL_Rect * update_rect)
+example_click(magic_api *api, int which, int hamur,
+              SDL_Surface *canvas, SDL_Surface *skjamynd, int x, int y,
+              SDL_Rect *update_rect)
 {
   /*
      In our case, a single click (which is also the start of a drag!) is
@@ -419,9 +419,9 @@ example_click(magic_api * api, int which, int hamur,
 
 /* Affect the canvas on drag: */
 void
-example_drag(magic_api * api, int which,
-             SDL_Surface * canvas, SDL_Surface * skjamynd,
-             int old_x, int old_y, int x, int y, SDL_Rect * update_rect)
+example_drag(magic_api *api, int which,
+             SDL_Surface *canvas, SDL_Surface *skjamynd,
+             int old_x, int old_y, int x, int y, SDL_Rect *update_rect)
 {
   /*
      Call Tux Paint's "line()" (line-traversing) function.
@@ -504,9 +504,9 @@ example_drag(magic_api * api, int which,
 /* Affect the canvas on release: */
 
 void
-example_release(magic_api * api, int which,
-                SDL_Surface * canvas, SDL_Surface * skjamynd, int x, int y,
-                SDL_Rect * update_rect)
+example_release(magic_api *api, int which,
+                SDL_Surface *canvas, SDL_Surface *skjamynd, int x, int y,
+                SDL_Rect *update_rect)
 {
   /*
      Neither of our effects do anything special when the mouse is released
@@ -527,9 +527,9 @@ changes their chosen, we'll be informed of that as well.
 The color comes in as RGB (red, green, and blue) values from 0 (darkest) to
 255 (brightest).
 */
-void example_set_color(magic_api * api, int which, SDL_Surface * canvas,
-                       SDL_Surface * skjamynd, Uint8 r, Uint8 g, Uint8 b,
-                       SDL_Rect * update_rect)
+void example_set_color(magic_api *api, int which, SDL_Surface *canvas,
+                       SDL_Surface *skjamynd, Uint8 r, Uint8 g, Uint8 b,
+                       SDL_Rect *update_rect)
 {
   /*
      We simply store the RGB values in the global variables we declared at
@@ -554,9 +554,9 @@ that as well.
 The size comes in as an unsigned integer (Uint8) between 1 and the value
 returned by our example_accepted_sizes() function during setup.
 */
-void example_set_size(magic_api * api, int which, int mode,
-                      SDL_Surface * canvas, SDL_Surface * skjamynd,
-                      Uint8 staerd, SDL_Rect * update_rect)
+void example_set_size(magic_api *api, int which, int mode,
+                      SDL_Surface *canvas, SDL_Surface *skjamynd,
+                      Uint8 staerd, SDL_Rect *update_rect)
 {
   /*
      Store the new size into the global variable we declared at the top of
@@ -584,8 +584,8 @@ the mouse's previous and current position, as it's being dragged.
 Our callback pays attention to 'which' to determine which of our plugin's
 tools is currently selected.
 */
-void example_line_callback(void *pointer, int which, SDL_Surface * canvas,
-                           SDL_Surface * skjamynd, int x, int y)
+void example_line_callback(void *pointer, int which, SDL_Surface *canvas,
+                           SDL_Surface *skjamynd, int x, int y)
 {
   /*
      For technical reasons, we can't accept a pointer to the Tux Paint API's
@@ -670,8 +670,8 @@ call to 'example_switchout()', below, for the old mode).
 Our example doesn't do anything when we switch to, or away from, our Magic
 tools, so we just do nothing here.
 */
-void example_switchin(magic_api * api, int which, int hamur,
-                      SDL_Surface * canvas)
+void example_switchin(magic_api *api, int which, int hamur,
+                      SDL_Surface *canvas)
 {
 }
 
@@ -694,7 +694,7 @@ call to 'example_switchin()', above, for the new mode).
 Our example doesn't do anything when we switch to, or away from, our Magic
 tools, so we just do nothing here.
 */
-void example_switchout(magic_api * api, int which, int hamur,
-                       SDL_Surface * canvas)
+void example_switchout(magic_api *api, int which, int hamur,
+                       SDL_Surface *canvas)
 {
 }

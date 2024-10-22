@@ -61,7 +61,7 @@ Uint32 rivulet_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int rivulet_init(magic_api * api)
+int rivulet_init(magic_api *api)
 {
   char fname[1024];
 
@@ -107,13 +107,13 @@ int rivulet_init(magic_api * api)
   return (1);
 }
 
-int rivulet_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int rivulet_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (1);
 }
 
 
-SDL_Surface *rivulet_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *rivulet_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -122,32 +122,32 @@ SDL_Surface *rivulet_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *rivulet_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *rivulet_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext("Rivulet"));
 }
 
-int rivulet_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rivulet_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
 }
 
-char *rivulet_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *rivulet_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return (gettext("Click and drag downward to add water rivulets to your drawing"));
 }
 
-int rivulet_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rivulet_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-int rivulet_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rivulet_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MODE_PAINT;
 }
 
-void rivulet_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void rivulet_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (snd_effect != NULL)
     Mix_FreeChunk(snd_effect);
@@ -176,8 +176,8 @@ void rivulet_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 
 
 void
-rivulet_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-              SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+rivulet_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+              SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   riv_x = x;
   riv_y = y - 1;
@@ -196,9 +196,9 @@ rivulet_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 
 
 void
-rivulet_drag(magic_api * api ATTRIBUTE_UNUSED, int which, SDL_Surface * canvas,
-             SDL_Surface * snapshot, int ox ATTRIBUTE_UNUSED,
-             int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+rivulet_drag(magic_api *api ATTRIBUTE_UNUSED, int which, SDL_Surface *canvas,
+             SDL_Surface *snapshot, int ox ATTRIBUTE_UNUSED,
+             int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   int old_riv_x, old_riv_y;
 
@@ -231,8 +231,8 @@ rivulet_drag(magic_api * api ATTRIBUTE_UNUSED, int which, SDL_Surface * canvas,
 }
 
 
-void rivulet_release(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y,  /* ignored and reused in a for-loop */
-                     SDL_Rect * update_rect)
+void rivulet_release(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y,     /* ignored and reused in a for-loop */
+                     SDL_Rect *update_rect)
 {
   int src_x, src_y, idx;
   double radius, angle_deg, angle_rad;
@@ -311,14 +311,14 @@ void rivulet_release(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * 
 }
 
 
-void rivulet_set_color(magic_api * api, int which, SDL_Surface * canvas,
-                       SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
+void rivulet_set_color(magic_api *api, int which, SDL_Surface *canvas,
+                       SDL_Surface *last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect)
 {
 }
 
 
 void rivulet_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
-                                SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                                SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api;
   SDL_Rect dest;
@@ -395,8 +395,8 @@ void rivulet_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
   }
 }
 
-void rivulet_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+void rivulet_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   if (riv_radii == NULL)
   {
@@ -442,13 +442,13 @@ void rivulet_switchin(magic_api * api ATTRIBUTE_UNUSED,
     SDL_BlitSurface(canvas, NULL, rivulet_snapshot, NULL);
 }
 
-void rivulet_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void rivulet_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
   zero_riv_arrays(canvas);
 }
 
-void zero_riv_arrays(SDL_Surface * canvas)
+void zero_riv_arrays(SDL_Surface *canvas)
 {
   if (riv_radii != NULL)
     memset(riv_radii, 0, (canvas->w * canvas->h));

@@ -1,11 +1,11 @@
                                    Extension
                                    Tux Paint
-                                version 0.9.33
+                                version 0.9.34
 
        Copyright © 2002-2024 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                avril 29, 2024
+                               octobre 10, 2024
 
 +-------------------------------------------------------------+
 |                     Table des matières                      |
@@ -46,12 +46,12 @@ prennent effet.
 
 Où vont les fichiers
 
-Fichiers standards
+                          ### Fichiers standards ###
 
 Tux Paint recherche ses différents fichiers de données dans son répertoire
 'data'.
 
-Linux et Unix
+→ Linux et Unix ←
 
     L'emplacement de ce répertoire dépend de la valeur définie pour
     "DATA_PREFIX" lors de la construction de Tux Paint . Voir INSTALL. pour
@@ -66,8 +66,8 @@ Linux et Unix
         /usr/share/tuxpaint/
 
 
-
-Windows
+     
+→ Windows ←
 
     Tux Paint recherche un répertoire appelé 'data' dans le même répertoire que
     l'exécutable. C'est le répertoire que l'installateur a utilisé lors de
@@ -76,8 +76,8 @@ Windows
         C:\Program Files\TuxPaint\data
 
 
-
-macOS
+     
+→ macOS ←
 
     Tux Paint stocke ses fichiers de données dans l'icône de l'application "Tux
     Paint" (qui est en fait un type spécial de dossier sur macOS & Mac OS X
@@ -114,14 +114,14 @@ macOS
     les utilisateurs de Tux Paint .
 
 
+     
 
-
-Fichiers personnels
+                          ### Fichiers personnels ###
 
 Vous pouvez également créer des pinceaux, des images de démarrage, des modèles
 et des polices dans votre propre répertoire où Tux Paint les retrouvera.
 
-Windows
+→ Windows ←
 
     Votre dossier personnel Tux Paint est stocké dans votre dossier
     "Application Data". Par exemple, sur un Windows plus récent :
@@ -129,8 +129,8 @@ Windows
         C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\
 
 
-
-macOS
+     
+→ macOS ←
 
     Your personal Tux Paint folder is stored in your personal 
     "Application Support" folder:
@@ -138,8 +138,8 @@ macOS
         /Users/nom d'utilisateur/Library/Application Support/TuxPaint/
 
 
-
-Linux et Unix
+     
+→ Linux et Unix ←
 
     Your personal Tux Paint files go into a 'hidden directory' found in your
     account's home directory: "/home/nom d'utilisateur/.tuxpaint/".
@@ -147,7 +147,7 @@ Linux et Unix
     N'oubliez pas le point (" .") avant le "tuxpaint" !
 
 
-
+     
 
 Pour ajouter des pinceaux, des tampons, des 'images de démarrage',des modèles
 et des polices créez des sous-répertoires dans votre répertoire personnel Tux
@@ -170,7 +170,7 @@ Les pixels en niveaux de gris dans le pinceau PNG seront dessinés en utilisant
 la couleur actuellement sélectionnée dans Tux Paint . Les pixels de couleur
 seront teintés.
 
-Brush Descriptive Text
+                        ### Brush Descriptive Text ###
 
 Tux Paint will display descriptive text when a brush is selected. These are
 placed in plain text files with the same name as the PNG, but with a ".txt"
@@ -180,7 +180,7 @@ in the same directory.)
 The first line of the text file will be used as the US English description of
 the brush's image. It must be encoded in UTF-8.
 
-Support pour la régionalisation
+→ Support pour la régionalisation ←
 
     Des lignes supplémentaires peuvent être ajoutées au fichier texte pour
     fournir des traductions de la description, à afficher lorsque Tux Paint
@@ -201,17 +201,17 @@ Support pour la régionalisation
     Paint est en cours d'exécution, le texte anglais américain sera utilisé.
 
 
-
-Utilisateurs de Windows
+     
+→ Utilisateurs de Windows ←
 
     Utilisez NotePad ou WordPad pour modifier / créer ces fichiers.
     Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont
     une extension ".txt" à la fin du nom de fichier.
 
 
+     
 
-
-Options de pinceau
+                          ### Options de pinceau ###
 
 Outre une une forme graphique, les pinceaux peuvent également recevoir d'autres
 attributs. Pour ce faire, vous devez créer un «fichier de données» pour brosse.
@@ -223,7 +223,7 @@ Le fichier porte le même nom que l'image PNG , mais une extension ".dat". (par
 exemple, le fichier de données "brosse.png" est le fichier texte "brosse.dat"
 qui se trouve dans le même répertoire.)
 
-Espacement des pinceaux
+→ Espacement des pinceaux ←
 
     Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais spécifier
     l'espacement des coups de pinceaux (c'est-à-dire la fréquence à laquelle
@@ -235,8 +235,8 @@ Espacement des pinceaux
     le nombre est bas, plus le pinceau est dessiné souvent.)
 
 
-
-Pinceaux animés
+     
+→ Pinceaux animés ←
 
     Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais créer des
     pinceaux animés. Au fur et à mesure que le pinceau est utilisé, chaque
@@ -253,8 +253,8 @@ Pinceaux animés
     random" au fichier de données du pinceau.
 
 
-
-Pinceaux directionnels
+     
+→ Pinceaux directionnels ←
 
     Depuis la version 0.9.16 de Tux Paint , vous pouvez désormais créer des
     pinceaux orientables. Au fur et à mesure que le pinceau est utilisé,
@@ -270,8 +270,8 @@ Pinceaux directionnels
     brosse.
 
 
-
-Pinceaux tournants
+     
+→ Pinceaux tournants ←
 
     Depuis la version 0.9.27 de Tux Paint , vous pouvez désormais créer des
     pinceaux tournants. Au fur et à mesure que le pinceau est utilisé, il
@@ -280,12 +280,22 @@ Pinceaux tournants
     Ajoute une ligne contenant le mot "rotate" au fichier de données brosse.
 
 
+     
+→ Chaotic Brushes ←
 
-Pinceaux animés orientables ou tournants
+    As of Tux Paint version 0.9.34, brushes can be configured to continuously
+    pick random directions as you draw with them.
 
-    Vous pouvez mélanger animation et orientation (ou rotation) dans un même
-    pinceau. Utilisez les deux options ("frames=N" et "directional" ou "rotate)
-    en deux lignes séparées dans le fichier ".dat" qui concerne le pinceau.
+    Ajoute une ligne contenant le mot "chaotic" au fichier de données brosse.
+
+
+     
+→ Animated Directional, Rotating, or Chaotic Brushes ←
+
+    You may mix both animated and either directional, rotating, or chaotic
+    features into one brush. Use both options desired ("frames=N" and "
+    directional", "rotate", or "chaotic"), in separate lines in the brush's
+    ".dat" file.
 
     Pour les pinceaux directionnels, disposez le pinceau de manière à ce que
     chaque ensemble 3x3 de formes orientables soit disposé sur une grande image
@@ -294,7 +304,7 @@ Pinceaux animés orientables ou tournants
     formes de direction pour la première image, par exemple).
 
 
-
+     
 
 Placez les PNG de l'image du pinceau (et tous les fichiers texte de données)
 dans le répertoire "brushes".
@@ -311,7 +321,7 @@ utile de créer des sous-sous-répertoires pour organiser les tampons. (Par
 exemple, vous pouvez avoir un dossier "holidays" avec "halloween" et
 "christmas" comme sous-dossiers.)
 
-Images des tampons
+                          ### Images des tampons ###
 
 Les tampons en caoutchouc dans Tux Paint peuvent être constitués d'un certain
 nombre de fichiers séparés. Le seul fichier requis est, bien entendu, l'image
@@ -346,7 +356,7 @@ documentation " SVG" pour plus d'informations et de conseils.
 créer des images PNG qui seront parfaitement mises à l'échelle lorsqu'elles
 seront utilisées comme tampons dans Tux Paint .
 
-Texte de description des tampons
+                   ### Texte de description des tampons ###
 
 Tux Paint affichera un texte descriptif quand un tampon est sélectionné. Le
 texte est mis dans fichier (avec texte simple) ayant le même nom que le PNG ou
@@ -356,7 +366,7 @@ description est "stamp.txt" est placée dans le même répertoire).
 La première ligne du fichier texte sera utilisée comme description de l'image
 du tampon, en anglais américain. Il doit être encodé en UTF-8.
 
-Support pour la régionalisation
+→ Support pour la régionalisation ←
 
     Des lignes supplémentaires peuvent être ajoutées au fichier texte pour
     fournir des traductions de la description, à afficher lorsque Tux Paint
@@ -377,17 +387,17 @@ Support pour la régionalisation
     Paint est en cours d'exécution, le texte anglais américain sera utilisé.
 
 
-
-Utilisateurs de Windows
+     
+→ Utilisateurs de Windows ←
 
     Utilisez NotePad ou WordPad pour modifier / créer ces fichiers.
     Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont
     une extension ".txt" à la fin du nom de fichier.
 
 
+     
 
-
-Effets sonores des tampons
+                      ### Effets sonores des tampons ###
 
 Tux Paint peut jouer un effet sonore quand un tampon est choisi. Par exemple,
 le son d'un canard faisant coin-coin, ou un bref morceau de musique quand un
@@ -396,7 +406,7 @@ OGG Vorbis (".ogg"), et porter le même nom que l'image PNG ou SVG.( par ex.,
 l'effet sonore "stamp.ogg" est le son du fichier "stamp.svg" qui est dans le
 même répertoire).
 
-Support pour la régionalisation
+→ Support pour la régionalisation ←
 
     Pour les sons de différentes locales (par exemple, si le son est quelqu'un
     qui dit un mot, et que vous voulez des versions traduites du mot prononcé),
@@ -412,12 +422,12 @@ Support pour la régionalisation
     charger le fichier son «par défaut». (par exemple, "stamp.wav")
 
 
-
+     
 
 💡 Remarque : Pensez à utiliser les descriptions sonores; voir 'Son descriptif
 du tampon' ci-dessous.
 
-Son descriptif du tampon
+                       ### Son descriptif du tampon ###
 
 Tux Paint peut également émettre une description sonore quand on choisit un
 tampon. Par ex., une personne disant le mot "canard" quand on choisit un
@@ -427,7 +437,7 @@ le même nom que l'image PNG ou SVG, avec "_desc" à la fin (par ex., le son
 descritid de "stamp.svg" est le fichier son "stamp_desc.ogg" dans le même
 répertoire).
 
-Support pour la régionalisation
+→ Support pour la régionalisation ←
 
     Pour les descriptions sonores dans différentes langues, créez également des
     fichiers WAV ou OGG avec à la fois "_desc" et le libellé des paramètres
@@ -443,9 +453,9 @@ Support pour la régionalisation
     de charger le fichier son «par défaut». (par exemple, "stamp_desc.wav")
 
 
+     
 
-
-Options des tampons
+                          ### Options des tampons ###
 
 Outre une une forme graphique, un texte de description, un effet sonore et une
 description orale, les tampons peuvent également recevoir d'autres attributs.
@@ -458,11 +468,11 @@ Le fichier porte le même nom que l'image PNG ou SVG , mais une extension
 ".dat". (par exemple, le fichier de données "stamp.png" est le fichier texte
 "stamp.dat" qui se trouve dans le même répertoire.)
 
-Tampons colorés
+→ Tampons colorés ←
 
     Les tampons peuvent être soit "colorables" soit '"teintables"
 
-    Colorable
+    → Colorable ←
 
         Les tampons "colorables" fonctionnent comme des pinceaux - vous
         choisissez le tampon pour obtenir la forme, puis choisissez la couleur
@@ -476,8 +486,8 @@ Tampons colorés
         tampon.
 
 
-
-    Teinté
+         
+    → Teinté ←
 
         Les tampons «teintés» sont similaires aux tampons «colorables», sauf
         que les détails de l'image originale sont conservés. (Pour le dire
@@ -488,14 +498,14 @@ Tampons colorés
         tampon.
 
 
-
-    Options de teinture :
+         
+    → Options de teinture : ←
 
         En fonction du contenu de votre tampon, vous souhaiterez peut-être que
         Tux Paint utilise l'une des nombreuses méthodes pour le teinter.
         Ajoutez l'une des lignes suivantes au fichier de données du tampon :
 
-        Coloriage normal — "tinter=normal" (par défaut)
+        → Coloriage normal — "tinter=normal" (par défaut) ←
             C'est le mode normal de teinture. Tout d'abord, la teinte primaire
             du tampon est déterminée. (Par exemple, l'image d'une fleur avec sa
             tige aura la couleur des pétales considérée comme teinte primaire
@@ -506,28 +516,26 @@ Tampons colorés
             ce sera dans une étendue de 50 %, puis on réessaie). Tout ce qui
             est à l'intérieur de l'étendue de 50 % (par ex. ±27°) est modifié
             pour avoir la teinte de la couleur choisie par l'utilisateur.
-
-        Coloriage étroit — "tinter=narrow"
+             
+        → Coloriage étroit — "tinter=narrow" ←
             C'est comme l'option "normal" décrite plus haut, mais avec une
             étendue de teinte plus faible de ±6°. Tout ce qui est trouvé dans
             l'étendue (par ex. ±9°) est teinté. Si une trop grande partie de
             vitre image est teintée, essayez cette option.
-
-        Coloriage 'toutes tonalités' — "tinter=anyhue"
+             
+        → Coloriage 'toutes tonalités' — "tinter=anyhue" ←
             Cela rempappe toutes les teintes du tampon. C'est pareil que les
             options "anyhue" et "narrow" décrites auparavant, mais l'étendu de
             teinte est ±180°.
-
-        Coloriage vectoriel — "tinter=vector"
+             
+        → Coloriage vectoriel — "tinter=vector" ←
             Cela mappe «noir à blanc» à «noir à destination».
+             
 
+         
 
-
-
-
-
-
-Tampons inaltérables
+     
+→ Tampons inaltérables ←
 
     Par défaut, un tampon peut être retourné, affiché comme une image miroir,
     ou les deux. Cela se fait à l'aide des boutons de commande sous le
@@ -545,8 +553,8 @@ Tampons inaltérables
     une ligne contenant le mot «nomirror» au fichier de données du tampon.
 
 
-
-Taille initiale du tampon
+     
+→ Taille initiale du tampon ←
 
     Par défaut, Tux Paint suppose que votre tampon est dimensionné de manière
     appropriée pour un affichage non mis à l'échelle sur un canevas de 608x472.
@@ -561,22 +569,22 @@ Taille initiale du tampon
     réglage, à votre fichier de données du tampon.(Un signe égal,"=", peut être
     ajouté après le mot "scale".)
 
-      + "scale 40%"
-      + "scale 5/2"
-      + "scale 2.5"
-      + "scale 2:5"
+      o "scale 40%"
+      o "scale 5/2"
+      o "scale 2.5"
+      o "scale 2:5"
 
-
-Utilisateurs de Windows
+     
+→ Utilisateurs de Windows ←
 
     Utilisez NotePad ou WordPad pour modifier / créer ces fichiers.
     Assurez-vous de les enregistrer en texte brut et assurez-vous qu'ils ont
     une extension ".dat" à la fin du nom de fichier.
 
 
+     
 
-
-Mise en miroir et retournement
+                    ### Mise en miroir et retournement ###
 
 Dans certains cas, vous souhaiterez peut-être fournir une version pré-dessinée
 de l'image miroir, de l'image inversée ou même des deux d'un tampon. Par
@@ -619,7 +627,7 @@ sauvegardez, l'image d'origine n'est pas écrasée. De plus, quand vous éditez
 votre nouvelle image, les contenus de 'l'image de démarrage' initiale peuvent
 l'affecter.
 
-Images de démarrage avec style 'livre de coloriage'
+          ### Images de démarrage avec style 'livre de coloriage' ###
 
 Le type le plus élémentaire "d'image de démarrage" est similaire à une image
 dans un livre de coloriage. C'est le contour d'une forme que vous pouvez
@@ -634,7 +642,7 @@ fichier PNG ou SVG. Si vous sauvegardez en PNG, vous pouvez optionellement
 rendre l'image noire et transparente, plutôt que noire et blanche, mais ceci
 (depuis Tux Paint 0.9.21) n'est pas requis.
 
-Images de démarrage avec 'style scénique'
+               ### Images de démarrage avec 'style scénique' ###
 
 En plus de la superposition de style `` livre de coloriage '', vous pouvez
 également fournir une image d'arrière-plan séparée dans le cadre d'une "image
@@ -678,7 +686,7 @@ mais après avoir quitté Tux Paint, oi bien une autre image a été chargée, o
 bien une nouvelle image a été créée (En d'autres termes, si vous basez un
 dessin sur un image de démarrage, il sera toujours changé par lui).
 
-Options d'image de démarrage
+                     ### Options d'image de démarrage ###
 
 Outre une une image, les 'Images de démarrage' peuvent également recevoir
 d'autres attributs. Pour ce faire, vous devez créer un «fichier de données»
@@ -692,7 +700,7 @@ Le fichier porte le même nom que l'image , mais une extension ".dat". (par
 exemple, le fichier de données "starter.png" est le fichier texte "starter.dat"
 qui se trouve dans le même répertoire.)
 
-allowscale
+→ allowscale ←
 
     Quand une image de démarrage a un ratio d'aspect (proportion largeur/
     hauteur) différent de celui du canevas de Tux Paint, elle sera dimensionnée
@@ -706,37 +714,37 @@ allowscale
     allowscale" peut être utilisé pour dire à Tux Paint quel comportement est
     permis :
 
-      + Pour les images pour lesquelles c'est d'accord pour rogner les bords
+      o Pour les images pour lesquelles c'est d'accord pour rogner les bords
         gauche et droite, mais les bords haut et bas doivent être conservés,
         utilisez "allowscale=horizontal".
-          o Si le ratio d'aspect de l'image de démarrage est plus large que
+          # Si le ratio d'aspect de l'image de démarrage est plus large que
             celui du canevas, elle sera mise à l'échelle pour avoir la même
             hauteur que le canevas et gauche et droite seront rognés.
-          o Si le ratio d'aspect de l'image de démarrage est plus haut que
+          # Si le ratio d'aspect de l'image de démarrage est plus haut que
             celui du canevas, elle sera mise à l'échelle pour avoir la même
             hauteur que le canevas et il n'y aura pas de rognage, et les bords
             de gauche et droite seront barbouillés.
 
-      + Pour les images pour lesquelles c'est d'accord pour rogner les bords
+      o Pour les images pour lesquelles c'est d'accord pour rogner les bords
         haut et bas, mais les bords gauche et droite doivent être conservés,
         utilisez "allowscale=vertical".
-          o Si le ratio d'aspect de l'image de démarrage est plus haut que
+          # Si le ratio d'aspect de l'image de démarrage est plus haut que
             celui du canevas, elle sera mise à l'échelle pour avoir la même
             largeur que le canevas et haut et bas seront rognés.
-          o Si le ratio d'aspect de l'image de démarrage est plus large que
+          # Si le ratio d'aspect de l'image de démarrage est plus large que
             celui du canevas, elle sera mise à l'échelle pour avoir la même
             largeur que le canevas et il n'y aura pas de rognage, et les bords
             de haut et bas seront barbouillés.
 
-      + Si on accepte de rogner soit le haut et le bas, soit la droite et la
+      o Si on accepte de rogner soit le haut et le bas, soit la droite et la
         gauche, utilisez "allowscale=both". Le contenu de l'image de démarrage
         sera toujours en accord avec la canevas, indépendamment de son ratio
         d'aspect par rapport à celui du canevas.
-      + Le comportement par défaut est de ne pas faire de rognage. Ceci peut
+      o Le comportement par défaut est de ne pas faire de rognage. Ceci peut
         être spécifié explicitement avec "allowscale=none".
 
-
-arrière-plan
+     
+→ arrière-plan ←
 
     Cette option vous permet de spécifier comment Tux Paint doit remplir le
     reste du canevas, lorsque l'image de démarrage ne s'accorde pas dans l'une
@@ -756,8 +764,8 @@ arrière-plan
     Options" pour plus de détails.
 
 
-
-gravité
+     
+→ gravité ←
 
     Cette option vous permet de spécifier comment Tux Paint doit positionner
     une image de démarrage lorsqu'elle a été rognée dans l'une ou l'autre
@@ -770,18 +778,19 @@ gravité
     plus important, spécifiez "gravity=bottom-right".
 
     Options disponibles :
-      + center — formes à partir du centre (par défaut)
-      + top — formes à partir du centre en haut
-      + bottom — formes à partir du centre en bas
-      + left — préférer le centre gauche
-      + right — préférer le centre droit
-      + top-left — préférer en haut à gauche
-      + top-right — préférer en haut à droite
-      + bottom-left — préférer en bas à gauche
-      + bottom-right — préférer en bas à droite
+      o center — formes à partir du centre (par défaut)
+      o top — formes à partir du centre en haut
+      o bottom — formes à partir du centre en bas
+      o left — préférer le centre gauche
+      o right — préférer le centre droit
+      o top-left — préférer en haut à gauche
+      o top-right — préférer en haut à droite
+      o bottom-left — préférer en bas à gauche
+      o bottom-right — préférer en bas à droite
 
     [ Une image au format paysage avec un horizon où le soleil est au milieu et
     une construction sur le côté droit. ]
+     
 
     Vue sur le centre d'une image de démarrage étirée pour être en accord avec
     la largeur du canevas.
@@ -789,6 +798,7 @@ gravité
 
     [ Image au format portrait avec un horizon, le soleil au milieu et le côté
     gauche d'une construction à droite. ]
+     
 
     Vue sur le centre d'une image de démarrage étirée pour être en accord avec
     la hauteur du canevas.
@@ -796,12 +806,14 @@ gravité
 
     [ Image au format paysage avec le ciel, le soleil en bas et le haut d'une
     construction sur la droite. ]
+     
 
     Vue sur le haut d'une image de démarrage étirée pour être en accord avec la
     largeur du canevas.
 
 
     [ Image, au format paysage, du sol avec le soleil en haut. ]
+     
 
     Vue sur le bas d'une image de démarrage étirée pour être en accord avec la
     largeur du canevas.
@@ -809,13 +821,14 @@ gravité
 
     [ Image, au format portrait, d'un horizon avec le soleil à gauche et une
     construction au milieu. ]
+     
 
     Vue sur le droit d'une image de démarrage étirée pour être en accord avec
     la hauteur du canevas.
 
 
 
-
+     
 
 💡 Note : Les Modèles (description plus bas) peuvent eux aussi avoir des
 options, et ont les mêmes options que les images de démarrage.
@@ -860,7 +873,7 @@ nouvelle image a été créée (En d'autres termes, si vous basez un dessin sur 
 image 'modèle', il sera toujours changé par lui).
 
 
-Options des images Modèle
+                       ### Options des images Modèle ###
 
 Tout comme 'Les images de démarrage', un fichier de configuration peut être
 spécifié, celui-ci décrivant le comportement de Tux Paint quand on utilise des
@@ -1012,7 +1025,7 @@ par différentes dispositions).
 
 Nous utiliserons le clavier QWERTY comme exemple :
 
-Fichier d'aperçu de la disposition ("qwerty.layout")
+         ### Fichier d'aperçu de la disposition ("qwerty.layout") ###
 
 Il s'agit d'un fichier texte qui spécifie les autres fichiers utilisés pour
 décrire l'agencement et la disposition des touches.
@@ -1031,7 +1044,7 @@ La ligne "keyboardlist" décrit les dispositions vers lesquelles on bascule
 lorsque l'utilisateur clique sur les boutons gauche et droit du clavier. (Voir
 ci-dessous.)
 
-Fichier de disposition du clavier (qwerty.h_layout")
+         ### Fichier de disposition du clavier (qwerty.h_layout") ###
 
 Ceci décrit la taille du clavier (sous forme de grille L × H), et répertorie
 chaque touche avec son code numérique (voir le fichier "keymap", ci-dessous),
@@ -1099,7 +1112,7 @@ utilisés sont décrits ci-dessous.
   * 2 — disposition précédente (pour le réglage "keyboardlist" du fichier
     d'agencement)
 
-Fichier keymap ("us-intl-altgr-dead-keys.keymap")
+           ### Fichier keymap ("us-intl-altgr-dead-keys.keymap") ###
 
 Ce fichier définit quels codes de touches numériques (vus dans les fichiers de
 disposition du clavier, tels que "qwerty.h_layout" décrits ci-dessus) doivent
@@ -1140,7 +1153,7 @@ fichier keymap.
     keycode 62 = Shift_R NoSymbol Shift_R Shift_R
     ...
 
-Fichier Composemap ("en_US.UTF-8_Compose")
+              ### Fichier Composemap ("en_US.UTF-8_Compose") ###
 
 Ce fichier décrit les caractères qui peuvent être composés avec plusieurs
 entrées. Par exemple, "[Compose]" suivi de "[A] " et "[E]" peut être utilisé
@@ -1151,7 +1164,7 @@ UTF-8 (Unicode) fourni avec le système X Window de X.Org . La version actuelle
 de la bibliothèque Xlib se trouve sur la page Web à l' adresse https://
 www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html.
 
-Fichier de définitions des Keysim ("keysymdef.h")
+           ### Fichier de définitions des Keysim ("keysymdef.h") ###
 
 Ce fichier (qui est un fichier d'en-tête du langage de programmation C )
 provient également du système X Window . Il définit les valeurs Unicode de

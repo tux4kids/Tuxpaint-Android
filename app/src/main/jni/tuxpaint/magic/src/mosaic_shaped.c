@@ -30,7 +30,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -171,7 +171,7 @@ Uint32 mosaic_shaped_api_version(void)
 }
 
 //Load sounds
-int mosaic_shaped_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED,
+int mosaic_shaped_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED,
                        Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
@@ -188,13 +188,13 @@ int mosaic_shaped_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED
   return (1);
 }
 
-int mosaic_shaped_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int mosaic_shaped_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (mosaic_shaped_NUM_TOOLS);
 }
 
 // Load our icons:
-SDL_Surface *mosaic_shaped_get_icon(magic_api * api, int which)
+SDL_Surface *mosaic_shaped_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -203,13 +203,13 @@ SDL_Surface *mosaic_shaped_get_icon(magic_api * api, int which)
 }
 
 // Return our names, localized:
-char *mosaic_shaped_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *mosaic_shaped_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
-  return (strdup(gettext_noop(mosaic_shaped_names[which])));
+  return (strdup(gettext(mosaic_shaped_names[which])));
 }
 
 // Return our groups (all the same!)
-int mosaic_shaped_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int mosaic_shaped_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
 }
@@ -221,9 +221,9 @@ int mosaic_shaped_get_order(int which)
 }
 
 // Return our descriptions, localized:
-char *mosaic_shaped_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
+char *mosaic_shaped_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode)
 {
-  return (strdup(gettext_noop(mosaic_shaped_descs[which][mode - 1])));
+  return (strdup(gettext(mosaic_shaped_descs[which][mode - 1])));
 }
 
 //Calculates the grey scale value for a rgb pixel
@@ -233,9 +233,9 @@ static int mosaic_shaped_grey(Uint8 r1, Uint8 g1, Uint8 b1)
 }
 
 // Do the effect for the full image
-static void do_mosaic_shaped_full(void *ptr, SDL_Surface * canvas,
-                                  SDL_Surface * last ATTRIBUTE_UNUSED,
-                                  int which ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+static void do_mosaic_shaped_full(void *ptr, SDL_Surface *canvas,
+                                  SDL_Surface *last ATTRIBUTE_UNUSED,
+                                  int which ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   int i, j, size;
   Uint32 mosaic_shaped_color;
@@ -279,7 +279,7 @@ static void do_mosaic_shaped_full(void *ptr, SDL_Surface * canvas,
 
 /* Fills a tesera */
 static void mosaic_shaped_fill(void *ptr_to_api, int which ATTRIBUTE_UNUSED,
-                               SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                               SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   Uint32 mosaic_shaped_color;
   int size;
@@ -314,8 +314,8 @@ static void mosaic_shaped_fill(void *ptr_to_api, int which ATTRIBUTE_UNUSED,
 }
 
 // Affect the canvas on drag:
-void mosaic_shaped_drag(magic_api * api, int which, SDL_Surface * canvas,
-                        SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void mosaic_shaped_drag(magic_api *api, int which, SDL_Surface *canvas,
+                        SDL_Surface *last, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   api->line(api, which, canvas, last, ox, oy, x, y, 1, mosaic_shaped_fill);
   update_rect->x = min(ox, x) - mosaic_shaped_pattern->w;
@@ -326,8 +326,8 @@ void mosaic_shaped_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void mosaic_shaped_click(magic_api * api, int which, int mode,
-                         SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void mosaic_shaped_click(magic_api *api, int which, int mode,
+                         SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   if (mode == MODE_FULLSCREEN)
   {
@@ -345,16 +345,16 @@ void mosaic_shaped_click(magic_api * api, int which, int mode,
 }
 
 // Affect the canvas on release:
-void mosaic_shaped_release(magic_api * api ATTRIBUTE_UNUSED,
+void mosaic_shaped_release(magic_api *api ATTRIBUTE_UNUSED,
                            int which ATTRIBUTE_UNUSED,
-                           SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                           SDL_Surface * last ATTRIBUTE_UNUSED,
-                           int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                           SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                           SDL_Surface *last ATTRIBUTE_UNUSED,
+                           int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // No setup happened:
-void mosaic_shaped_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void mosaic_shaped_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   //Clean up sounds
   int i;
@@ -369,9 +369,9 @@ void mosaic_shaped_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void mosaic_shaped_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                             SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r,
-                             Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void mosaic_shaped_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                             SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r,
+                             Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   mosaic_shaped_r = r;
   mosaic_shaped_g = g;
@@ -379,14 +379,14 @@ void mosaic_shaped_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBU
 }
 
 // Use colors:
-int mosaic_shaped_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int mosaic_shaped_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
 //Sharpen a pixel
 static void mosaic_shaped_sharpen_pixel(void *ptr,
-                                        SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last, int x, int y)
+                                        SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   Uint8 r1, g1, b1;
@@ -430,7 +430,7 @@ static void mosaic_shaped_sharpen_pixel(void *ptr,
 
 
 
-void mosaic_shaped_switchin(magic_api * api, int which, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+void mosaic_shaped_switchin(magic_api *api, int which, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   int y, x;
   int i, j;
@@ -656,9 +656,9 @@ void mosaic_shaped_switchin(magic_api * api, int which, int mode ATTRIBUTE_UNUSE
   reset_counter(canvas, mosaic_shaped_done);
 }
 
-void mosaic_shaped_switchout(magic_api * api ATTRIBUTE_UNUSED,
+void mosaic_shaped_switchout(magic_api *api ATTRIBUTE_UNUSED,
                              int which ATTRIBUTE_UNUSED,
-                             int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                             int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
   SDL_FreeSurface(canvas_shaped);
   SDL_FreeSurface(canvas_back);
@@ -666,12 +666,12 @@ void mosaic_shaped_switchout(magic_api * api ATTRIBUTE_UNUSED,
   free(mosaic_shaped_counted);
 }
 
-int mosaic_shaped_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int mosaic_shaped_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
 }
 
-void reset_counter(SDL_Surface * canvas, Uint8 * counter)
+void reset_counter(SDL_Surface *canvas, Uint8 *counter)
 {
   int i, j;
 
@@ -685,7 +685,7 @@ void reset_counter(SDL_Surface * canvas, Uint8 * counter)
 
 int scan_fill_count;
 
-int scan_fill(magic_api * api, SDL_Surface * canvas, SDL_Surface * srfc,
+int scan_fill(magic_api *api, SDL_Surface *canvas, SDL_Surface *srfc,
               int x, int y, int fill_edge, int fill_tile, int size, Uint32 color)
 {
   int leftx, rightx;
@@ -775,7 +775,7 @@ int scan_fill(magic_api * api, SDL_Surface * canvas, SDL_Surface * srfc,
 }
 
 
-void fill_square(magic_api * api, SDL_Surface * canvas, int x, int y, int size, Uint32 color)
+void fill_square(magic_api *api, SDL_Surface *canvas, int x, int y, int size, Uint32 color)
 {
   int i, j;
 
@@ -786,7 +786,7 @@ void fill_square(magic_api * api, SDL_Surface * canvas, int x, int y, int size, 
     }
 }
 
-void deform(magic_api * api, SDL_Surface * srfc)
+void deform(magic_api *api, SDL_Surface *srfc)
 {
   int i, j;
 
@@ -805,7 +805,7 @@ void deform(magic_api * api, SDL_Surface * srfc)
 
 /* Paints a 2 pixel square with black and  shadows around 3 more pixels */
 static void mosaic_shaped_paint(void *ptr, int which ATTRIBUTE_UNUSED,
-                                SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                                SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int radius, shadow;
@@ -860,20 +860,19 @@ static void mosaic_shaped_paint(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 
-Uint8 mosaic_shaped_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+Uint8 mosaic_shaped_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
                                    int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 mosaic_shaped_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                                 int mode ATTRIBUTE_UNUSED)
+Uint8 mosaic_shaped_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void mosaic_shaped_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                            SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                            Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void mosaic_shaped_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                            SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                            Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

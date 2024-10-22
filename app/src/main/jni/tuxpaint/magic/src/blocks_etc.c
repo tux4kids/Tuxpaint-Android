@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -81,7 +81,7 @@ void blocks_etc_set_size(magic_api * api, int which, int mode, SDL_Surface * can
 
 
 
-int blocks_etc_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int blocks_etc_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -104,13 +104,13 @@ Uint32 blocks_etc_api_version(void)
 
 
 // We have multiple tools:
-int blocks_etc_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int blocks_etc_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (NUM_TOOLS);
 }
 
 // Load our icons:
-SDL_Surface *blocks_etc_get_icon(magic_api * api, int which)
+SDL_Surface *blocks_etc_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -131,20 +131,20 @@ SDL_Surface *blocks_etc_get_icon(magic_api * api, int which)
 }
 
 // Return our names, localized:
-char *blocks_etc_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *blocks_etc_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   if (which == TOOL_BLOCKS)
-    return (strdup(gettext_noop("Blocks")));
+    return (strdup(gettext("Blocks")));
   else if (which == TOOL_CHALK)
-    return (strdup(gettext_noop("Chalk")));
+    return (strdup(gettext("Chalk")));
   else if (which == TOOL_DRIP)
-    return (strdup(gettext_noop("Drip")));
+    return (strdup(gettext("Drip")));
 
   return (NULL);
 }
 
 // Return our group (all the same):
-int blocks_etc_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int blocks_etc_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
 }
@@ -170,39 +170,39 @@ int blocks_etc_get_order(int which)
 }
 
 // Return our descriptions, localized:
-char *blocks_etc_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
+char *blocks_etc_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode)
 {
   if (which == TOOL_BLOCKS)
   {
     if (mode == MODE_PAINT)
     {
-      return (strdup(gettext_noop("Click and drag the mouse around to make the picture blocky.")));
+      return (strdup(gettext("Click and drag the mouse around to make the picture blocky.")));
     }
     else
     {
-      return (strdup(gettext_noop("Click to make the entire picture blocky.")));
+      return (strdup(gettext("Click to make the entire picture blocky.")));
     }
   }
   else if (which == TOOL_CHALK)
   {
     if (mode == MODE_PAINT)
     {
-      return (strdup(gettext_noop("Click and drag the mouse around to turn the picture into a chalk drawing.")));
+      return (strdup(gettext("Click and drag the mouse around to turn the picture into a chalk drawing.")));
     }
     else
     {
-      return (strdup(gettext_noop("Click to turn the entire picture into a chalk drawing.")));
+      return (strdup(gettext("Click to turn the entire picture into a chalk drawing.")));
     }
   }
   else if (which == TOOL_DRIP)
   {
     if (mode == MODE_PAINT)
     {
-      return (strdup(gettext_noop("Click and drag the mouse around to make the picture drip.")));
+      return (strdup(gettext("Click and drag the mouse around to make the picture drip.")));
     }
     else
     {
-      return (strdup(gettext_noop("Click to make the entire picture drip.")));
+      return (strdup(gettext("Click to make the entire picture drip.")));
     }
   }
 
@@ -211,7 +211,7 @@ char *blocks_etc_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, in
 
 // Do the effect:
 
-static void blocks_etc_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
+static void blocks_etc_linecb(void *ptr, int which, SDL_Surface *canvas, SDL_Surface *last, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int xx, yy;
@@ -321,8 +321,8 @@ static void blocks_etc_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Su
 }
 
 // Affect the canvas on drag:
-void blocks_etc_drag(magic_api * api, int which, SDL_Surface * canvas,
-                     SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void blocks_etc_drag(magic_api *api, int which, SDL_Surface *canvas,
+                     SDL_Surface *last, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, blocks_etc_linecb);
 
@@ -350,8 +350,8 @@ void blocks_etc_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void blocks_etc_click(magic_api * api, int which, int mode,
-                      SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void blocks_etc_click(magic_api *api, int which, int mode,
+                      SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   if (mode == MODE_PAINT)
   {
@@ -400,16 +400,16 @@ void blocks_etc_click(magic_api * api, int which, int mode,
 }
 
 // Affect the canvas on release:
-void blocks_etc_release(magic_api * api ATTRIBUTE_UNUSED,
+void blocks_etc_release(magic_api *api ATTRIBUTE_UNUSED,
                         int which ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                        SDL_Surface * last ATTRIBUTE_UNUSED,
-                        int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                        SDL_Surface *last ATTRIBUTE_UNUSED,
+                        int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // No setup happened:
-void blocks_etc_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void blocks_etc_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (snd_effect[0] != NULL)
     Mix_FreeChunk(snd_effect[0]);
@@ -419,41 +419,41 @@ void blocks_etc_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void blocks_etc_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                          SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+void blocks_etc_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
                           Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                          SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                          SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // Use colors:
-int blocks_etc_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int blocks_etc_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void blocks_etc_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                         int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void blocks_etc_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void blocks_etc_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                          int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void blocks_etc_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int blocks_etc_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int blocks_etc_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
 }
 
 
-Uint8 blocks_etc_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 blocks_etc_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 4;
 }
 
-Uint8 blocks_etc_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 blocks_etc_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   if (which == TOOL_BLOCKS)
     return 1;
@@ -461,9 +461,9 @@ Uint8 blocks_etc_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIB
     return 2;
 }
 
-void blocks_etc_set_size(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
-                         SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void blocks_etc_set_size(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED,
+                         SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
+                         SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   if (which == TOOL_BLOCKS)
     EFFECT_REZ = size * 4;

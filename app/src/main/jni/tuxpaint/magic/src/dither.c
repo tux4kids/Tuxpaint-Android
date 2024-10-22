@@ -106,7 +106,7 @@ Uint32 dither_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int dither_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int dither_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char filename[1024];
@@ -126,12 +126,12 @@ int dither_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8
 }
 
 
-int dither_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int dither_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return NUM_TOOLS;
 }
 
-SDL_Surface *dither_get_icon(magic_api * api, int which)
+SDL_Surface *dither_get_icon(magic_api *api, int which)
 {
   char filename[1024];
 
@@ -141,13 +141,13 @@ SDL_Surface *dither_get_icon(magic_api * api, int which)
 }
 
 
-char *dither_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *dither_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   return strdup(gettext(dither_names[which]));
 }
 
 
-int dither_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int dither_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_COLOR_FILTERS;
 }
@@ -159,7 +159,7 @@ int dither_get_order(int which)
 }
 
 
-char *dither_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
+char *dither_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode)
 {
   if (mode == MODE_PAINT)
   {
@@ -172,7 +172,7 @@ char *dither_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mo
 }
 
 
-int dither_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which)
+int dither_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   if (which == TOOL_DITHER_VIA_COLOR)
     return 1;
@@ -181,25 +181,25 @@ int dither_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which)
 }
 
 
-int dither_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int dither_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MODE_PAINT | MODE_FULLSCREEN;
 }
 
 
-Uint8 dither_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 dither_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return DITHER_SIZE_COUNT;
 }
 
 
-Uint8 dither_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 dither_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return DITHER_SIZE_DEFAULT;
 }
 
 
-void dither_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void dither_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   int i;
 
@@ -223,8 +223,8 @@ void dither_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 void
-dither_click(magic_api * api, int which, int mode,
-             SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+dither_click(magic_api *api, int which, int mode,
+             SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   int xx, yy;
   Uint8 r, g, b;
@@ -268,8 +268,8 @@ dither_click(magic_api * api, int which, int mode,
 
 
 void
-dither_drag(magic_api * api, int which,
-            SDL_Surface * canvas, SDL_Surface * snapshot, int old_x, int old_y, int x, int y, SDL_Rect * update_rect)
+dither_drag(magic_api *api, int which,
+            SDL_Surface *canvas, SDL_Surface *snapshot, int old_x, int old_y, int x, int y, SDL_Rect *update_rect)
 {
   int dither_size;
 
@@ -314,8 +314,8 @@ dither_drag(magic_api * api, int which,
 int dither_x_pos[6] = { 1, 2, -1, 0, 1, 0 };
 int dither_y_pos[6] = { 0, 0, 1, 1, 1, 2 };
 
-void dither_release(magic_api * api, int which,
-                    SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void dither_release(magic_api *api, int which,
+                    SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   Uint8 r, g, b;
   float val, err, h, s, v;
@@ -384,9 +384,9 @@ void dither_release(magic_api * api, int which,
   }
 }
 
-void dither_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                      Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void dither_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                      Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   if (r <= 240 || g <= 240 || b <= 240)
   {
@@ -399,15 +399,15 @@ void dither_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
   }
 }
 
-void dither_set_size(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                     Uint8 size, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void dither_set_size(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                     Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   dither_sizes[which] = size * DITHER_SIZE_SCALE;
 }
 
 
-void dither_line_callback(void *pointer, int which, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y)
+void dither_line_callback(void *pointer, int which, SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y)
 {
   magic_api *api = (magic_api *) pointer;
   int xx, yy, dither_size;
@@ -445,8 +445,8 @@ void dither_line_callback(void *pointer, int which, SDL_Surface * canvas, SDL_Su
 }
 
 
-void dither_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas)
+void dither_switchin(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas)
 {
   if (dither_touched == NULL)
   {
@@ -461,7 +461,7 @@ void dither_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
   dither_black = SDL_MapRGB(canvas->format, 0, 0, 0);
 }
 
-void dither_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void dither_switchout(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }

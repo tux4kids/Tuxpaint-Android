@@ -6,6 +6,229 @@ Copyright (c) 2002-2024
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
+2024.October.21 (0.9.34)
+  * New Magic Tools:
+    ----------------
+    * "Comic Dots", draws repeating dots (using a multiply blend)
+      to simulate the "Ben Day process" of coloring/shading.
+      + Code & icon Bill Kendrick <bill@newbreedsoftware.com>
+      + Sound effect based on "superhero theme",
+        Creative Commons Attribution 4.0 by Luis Humanoide
+        <https://freesound.org/people/humanoide9000/>
+      + Closes https://sourceforge.net/p/tuxpaint/feature-requests/257/
+
+    * "Rotate", rotate's the entire image on the canvas.
+      + Code & icon Bill Kendrick <bill@newbreedsoftware.com>
+      + Sound effects based on "Rotating tank turret planetary electric motor"
+        Creative Commons 0 by lorefold
+        <https://freesound.org/people/lorefold/>
+
+    * "Fractal", a set of freehand drawing tools that
+      recursively draw variations of the strokes
+      + Bill Kendrick <bill@newbreedsoftware.com>
+      + Sound effect "100_Glitch808"
+        Creative Commons 0 by DigitalUnderglow
+        <https://freesound.org/people/DigitalUnderglow/>
+      + Closes https://sourceforge.net/p/tuxpaint/feature-requests/260/
+
+    * "ASCII Typewriter", "ASCII Computer", & "ASCII Color Computer":
+      turn your drawing into ASCII art.
+      + Code & icons by Bill Kendrick <bill@newbreedsoftware.com>
+      + Computer font: IBM CGA Adapter
+        taken from "Typography in 16-bits: System fonts"
+        <https://damieng.com/blog/2011/03/27/typography-in-16-bits-system-fonts/>
+        by Damien Guard
+      + Typewriter font based on: "Patrician"
+        <https://site.xavier.edu/polt/typewriters/patrician.html>
+        Creative Commons CC0 1.0 Universal
+        by Richard Polt (based on a 1959 Royal FP typewriter)
+        And using a subset of characters taken from
+        "Character representation of grey scale images"
+        <https://paulbourke.net/dataformats/asciiart/>
+        by Paul Bourke
+      + Typewriter sound effect "Typewriter snippet 03"
+        <https://freesound.org/people/cabled_mess/sounds/360601/>
+        Creative Commons CC0 1.0 Universal by Sebastian
+        <https://freesound.org/people/cabled_mess/>
+      + Computer sound effect based on "modem_dial.wav"
+        <https://freesound.org/people/0ktober/sounds/188828/>
+        Creative Commons CC0 1.0 Universal by 0ktober
+        <https://freesound.org/people/0ktober/>
+
+    * "Crescent": Draw various sorts of crescent shapes
+      + Code by Bill Kendrick <bill@newbreedsoftware.com>
+      + Sound effect based on "Barred Owl Calling"
+        <https://freesound.org/people/danielmcadams/sounds/486390/>
+        Creative Commons CC0 1.0 Universal by Daniel McAdams
+        <https://freesound.org/people/danielmcadams/>
+      + Closes https://sourceforge.net/p/tuxpaint/feature-requests/262/
+
+    * "Spray Paint": Draws a fine spray of pixels, simulating
+      spray paint or an airbrush
+      + Code by Bill Kendrick <bill@newbreedsoftware.com>
+      + Icon based on "Hand Spray Paint - Red"
+        <https://openclipart.org/detail/324451/hand-spray-paint-red>
+        Creative Commons Zero 1.0 Public Domain License by "j4p4n"
+        <https://openclipart.org/artist/j4p4n>
+      + Can shake sound effected by Leng Siakkhasone
+        (from "Mad Bomber" GPLv2)
+      + Spray sound effect based on "spray can.WAV"
+        <https://freesound.org/people/rpew1/sounds/108483/>
+        Creative Commons CC0 1.0 Universal by "rpew1"
+        <https://freesound.org/people/rpew1/>
+
+    * "Spiral" and "Square Spiral": Draw spiral shapes.
+      + Code by Bill Kendrick <bill@newbreedsoftware.com>
+      + Sound effects based on "Wobble Slicer E3.wav"
+        <https://freesound.org/people/LukeSharples/sounds/145631>
+        Creative Commons Attribution 4.0 (CC BY 4.0) by Luke Sharples
+        <https://freesound.org/people/LukeSharples/>
+      + Closes https://sourceforge.net/p/tuxpaint/feature-requests/261/
+
+    * "Concentric Circle" and "Concentric Square": Draw concentric shapes.
+      + Code by Bill Kendrick <bill@newbreedsoftware.com>
+      + "Concentric Square" sound effect based on "Brush_Baião12.wav"
+        <https://freesound.org/people/justinrobert/sounds/74371/>
+        Creative Commons CC0 1.0 Universal by Justin Robert
+        <https://freesound.org/people/justinrobert/>
+      + "Concentric Square" sound effect: "ride rythym.wav"
+        <https://freesound.org/people/THE_bizniss/sounds/39453/>
+        Creative Commons Attribution 3.0 (CC BY 3.0) by "THE_bizniss"
+        <https://freesound.org/people/THE_bizniss/>
+
+    * "Tessellation Pointy" & "Tessellation Flat", a pair of tools
+      to draw a repeating hexagon tessellation pattern
+      + Code by Bill Kendrick <bill@newbreedsoftware.com>
+      + "Tessellation" sound effect based on "TIME_Vocal Harmony.mp3"
+        <https://freesound.org/people/GrowingUp/sounds/350128/>
+        Creative Commons CC0 1.0 Universal by Chris B. "Growing Up"
+        <https://freesound.org/people/GrowingUp/>
+
+  * Magic Tool Improvements:
+    ------------------------
+    * Sound pause/resume functions added to API
+      (`playingsound()`, `pausesound()`, and `unpausesound()`).
+      + Used by new "Comic Docs" magic tool.
+      + Note: `TP_MAGIC_API_VERSION` bumped to 0x0000000B.
+      + Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to Fill tool:
+    --------------------------
+    * New "Eraser" flood fill mode, to expose the background
+      (solid color, or template or starter background).
+      Bill Kendrick <bill@newbreedsoftware.com>
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/258/
+
+  * New Brushes:
+    ------------
+    * Fluff (gradient variation)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Graphite
+      Based on "Graphite Grain" from Krita <https://krita.org/>
+      Prepared for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>
+
+    * "Impasto"
+      Based on "memileo_360light-PHOTO-E_03-random"
+      from the "Memileo Impasto Brushes" bundle for Krita
+      <https://krita-artists.org/t/memileo-impasto-brushes/92952>
+      Creative Commons Attribution-Sharealike 4.0 International (CC-BY-SA)
+      by Emil Maselli <https://krita-artists.org/u/emilm/>.
+      Prepated for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Paint Splats
+      Based on "Paint Splats" from Krita <https://krita.org/>
+      Prepared for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Smoke
+      Based on "Smoke" from Krita <https://krita.org/>
+      Prepared for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Spines
+      Based on "Spines" from Krita <https://krita.org/>
+      Prepared for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Water (still)
+      Based on "Water Still" from Krita <https://krita.org/>
+      Prepared for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Watercolor splotches
+      Based on "Watercolor Texture" from Krita <https://krita.org/>
+      Prepared for Tux Paint by Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Improvements to Paint and Line tools:
+    -------------------------------------
+    * Support for a new "chaotic" style of brush; a random direction
+      is chosen each time it is blitted. (Used by "Watercolor splotches"
+      for example.)
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * New Templates:
+    --------------
+    * Clouds from an airplane
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Lough Leane
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Localization Updates:
+    ---------------------
+    * Catalan translation
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * French translation
+      Jacques Chion <jacques.chion@orange.fr>
+
+    * Japanese translation
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+    * Portuguese (Portugal) translation
+      Hugo Carvalho <hugokarvalho@hotmail.com>
+
+    * Vietnamese translation
+      Cas Pascal <casboi86@gmail.com>
+
+  * Documentation updates:
+    ----------------------
+    * Nicer formatting of the plain text variation of documentation.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Bug Fixes:
+    ----------
+    * Eraser choices turned from black to white when a prompt appeared.
+      h/t Pere for reporting
+      Closes https://sourceforge.net/p/tuxpaint/bugs/292/
+
+    * On Android, quitting Tux Paint while it's in the background and the
+      current image has been autosaved would invoke the "Are you sure?"
+      prompt (and corresponding sound effect), which could not be interacted
+      with by the user.  Avoiding this.
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * Sometimes Stamp spoken description sounds would not play
+      after sound effects finished.
+      Closes https://sourceforge.net/p/tuxpaint/bugs/293
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * Being more consistent with use of `gettext()` vs `gettext_noop()`
+      in Magic tools (for names & descriptions / tool-tips).
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Rotated brushes were positioned incorrectly. Mended.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Rotated multi-frame brushes would bleed black in any
+      transparent areas (e.g., soft edges would be black halos). Mended.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Other Improvements:
+    -------------------
+    * The macOS build now links against SDL2_gfx. Previously SDL2_gfx was
+      required to install SDL2_image but Tux Paint did not require linking
+      against it. The transaparent rotation feature added to 0.9.34 requires
+      linking against SDL2_gfx.
+      Mark Kim <markuskimius@gmail.com>
+
 2024.July.17 (0.9.33)
   * New Magic Tools:
     ----------------
@@ -1644,7 +1867,7 @@ https://tuxpaint.org/
       + Note: This adds a dependency on "SDL_gfx" library
         (Homepage: https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/
         SourceForge project page: https://sourceforge.net/projects/sdlgfx/)
-        as this feature use it's "rotozoomSurface()" and "SDL_gfxBlitRGBA()".
+        as this feature use its "rotozoomSurface()" and "SDL_gfxBlitRGBA()".
       (Closes https://sourceforge.net/p/tuxpaint/feature-requests/122/)
 
     * Replaced the "arrow_compass_points" brush with a single

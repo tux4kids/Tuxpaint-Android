@@ -1,7 +1,7 @@
 /*
   get_fname.c
 
-  Copyright (c) 2009 - 2022
+  Copyright (c) 2009 - 2024
   https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: December 11, 2022
+  Last updated: October 20, 2024
 
   $Id$
 */
@@ -103,6 +103,11 @@ char *get_fname(const char *const name, int kind)
   else if (kind == DIR_EXPORT || kind == DIR_EXPORT_PARENT)
   {
     dir = exportdir;
+  }
+  else
+  {
+    /* Last resort! */
+    dir = "";
   }
 
   snprintf(f, sizeof(f), "%s%c%s", dir, (*name) ? '/' : '\0',   /* Some mkdir()'s don't like trailing slashes */

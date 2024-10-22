@@ -73,7 +73,7 @@ static void print_composemap(osk_composenode * composemap, char *sp);
 #define wcstombs(tok, wtok, size) WideCharToMultiByte(CP_UTF8,0,wtok,-1,tok,size,NULL,NULL)
 #endif
 
-static SDL_Surface *SDL_DisplayFormatAlpha(SDL_Surface * surface)
+static SDL_Surface *SDL_DisplayFormatAlpha(SDL_Surface *surface)
 {
   SDL_Surface *tmp;
 
@@ -81,16 +81,16 @@ static SDL_Surface *SDL_DisplayFormatAlpha(SDL_Surface * surface)
   return (tmp);
 }
 
-struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
-                                SDL_Surface * BLANK_button_up,
-                                SDL_Surface * BLANK_button_down,
-                                SDL_Surface * BLANK_button_off,
-                                SDL_Surface * BLANK_button_nav,
-                                SDL_Surface * BLANK_button_hold,
-                                SDL_Surface * BLANK_oskdel,
-                                SDL_Surface * BLANK_osktab,
-                                SDL_Surface * BLANK_oskenter,
-                                SDL_Surface * BLANK_oskcapslock, SDL_Surface * BLANK_oskshift, int disable_change)
+struct osk_keyboard *osk_create(char *layout_name, SDL_Surface *canvas,
+                                SDL_Surface *BLANK_button_up,
+                                SDL_Surface *BLANK_button_down,
+                                SDL_Surface *BLANK_button_off,
+                                SDL_Surface *BLANK_button_nav,
+                                SDL_Surface *BLANK_button_hold,
+                                SDL_Surface *BLANK_oskdel,
+                                SDL_Surface *BLANK_osktab,
+                                SDL_Surface *BLANK_oskenter,
+                                SDL_Surface *BLANK_oskcapslock, SDL_Surface *BLANK_oskshift, int disable_change)
 {
   SDL_Surface *surface;
   SDL_Surface *button_up, *button_down;
@@ -252,7 +252,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
   return keyboard;
 }
 
-static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layout_name)
+static struct osk_layout *load_layout(on_screen_keyboard *keyboard, char *layout_name)
 {
   FILE *fi;
   int hlayout_loaded;
@@ -381,7 +381,7 @@ static struct osk_layout *load_layout(on_screen_keyboard * keyboard, char *layou
 /* A hlayout contains the definitions of the keyboard as seen in the screen.
    Things like the number of rows of the keyboard, the font used to render the keys,
    the width of the keys, and a code that matches each key like in real hardware keyboards */
-void load_hlayout(osk_layout * layout, char *hlayout_name)
+void load_hlayout(osk_layout *layout, char *hlayout_name)
 {
   int width, height;
   int key_number, line_number;
@@ -578,7 +578,7 @@ void load_hlayout(osk_layout * layout, char *hlayout_name)
 
 
 /* A keymap contains the keysyms (X keysym mnemonics) associated to each keycode in the hlayout.*/
-void load_keymap(osk_layout * layout, char *keymap_name)
+void load_keymap(osk_layout *layout, char *keymap_name)
 {
   int i, keycode, readed;
   char *filename;
@@ -678,7 +678,7 @@ void load_keymap(osk_layout * layout, char *keymap_name)
 }
 
 /* Scans a line of keysyms and result and classifies them. */
-static void gettokens(char *line, char *delim, char **pointer, osk_composenode * composenode, osk_layout * layout)
+static void gettokens(char *line, char *delim, char **pointer, osk_composenode *composenode, osk_layout *layout)
 {
   int i;
   char *tok;
@@ -766,7 +766,7 @@ static void gettokens(char *line, char *delim, char **pointer, osk_composenode *
 /* A compose map contains the sequences of keysyms (X keysym mnemonics) needed to generate another keysym.
    The last in the sequence is the result, the others will be searched in the order they appear. 
    They will be classified in a multiway tree.*/
-static void load_composemap(osk_layout * layout, char *composemap_name)
+static void load_composemap(osk_layout *layout, char *composemap_name)
 {
   char *filename;
   char **pointer;
@@ -822,7 +822,7 @@ static void load_composemap(osk_layout * layout, char *composemap_name)
 }
 
 #ifdef DEBUG_OSK_COMPOSEMAP
-static void print_composemap(osk_composenode * composemap, char *sp)
+static void print_composemap(osk_composenode *composemap, char *sp)
 {
   int i;
   char *space;
@@ -875,7 +875,7 @@ static void print_composemap(osk_composenode * composemap, char *sp)
 
 /* This parses the contents of keysymdef.h from the source of xorg.
    Therefore, if somebody wants to provide custom keysymdefs, he has to follow its syntax. */
-static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name)
+static void load_keysymdefs(osk_layout *layout, char *keysymdefs_name)
 {
   int i;
   char *filename;
@@ -943,7 +943,7 @@ static void load_keysymdefs(osk_layout * layout, char *keysymdefs_name)
 /* } */
 
 /* Returns the x keysym corresponding to a mnemonic string */
-static int mnemo2keysym(char *mnemo, on_screen_keyboard * keyboard)
+static int mnemo2keysym(char *mnemo, on_screen_keyboard *keyboard)
 {
   unsigned int i;
 
@@ -966,7 +966,7 @@ static int mnemo2keysym(char *mnemo, on_screen_keyboard * keyboard)
 }
 
 /* Returns the unicode value of a x keysym if any, otherwise returns 0 */
-static int keysym2unicode(int keysym, on_screen_keyboard * keyboard)
+static int keysym2unicode(int keysym, on_screen_keyboard *keyboard)
 {
   unsigned int i;
 
@@ -997,7 +997,7 @@ static int keysym2unicode(int keysym, on_screen_keyboard * keyboard)
 
 
 /* Searches in the tree for composing stuff */
-static void get_composed_keysym(on_screen_keyboard * keyboard, osk_composenode * composenode, wchar_t *keysym)
+static void get_composed_keysym(on_screen_keyboard *keyboard, osk_composenode *composenode, wchar_t *keysym)
 {
   int i;
 
@@ -1102,7 +1102,7 @@ static int is_blank_or_comment(char *line)
 
 /* FIXME: Is it safe to supose that if a font is loaded at one size, it will be loaded at any size? */
 /* FIXME: starting a layout with one font causes all other layouts be in that font */
-static void keybd_prepare(on_screen_keyboard * keyboard)
+static void keybd_prepare(on_screen_keyboard *keyboard)
 {
   char *fontname;
   int font_height;
@@ -1178,7 +1178,7 @@ static void keybd_prepare(on_screen_keyboard * keyboard)
 }
 
 
-static void apply_surface(int x, int y, SDL_Surface * source, SDL_Surface * destination, SDL_Rect * clip)
+static void apply_surface(int x, int y, SDL_Surface *source, SDL_Surface *destination, SDL_Rect *clip)
 {
   SDL_Rect offset;
 
@@ -1214,7 +1214,7 @@ static void apply_surface(int x, int y, SDL_Surface * source, SDL_Surface * dest
 /* } */
 
 /* Stretches a button from the middle, keeping the extrems intact */
-static SDL_Surface *stretch_surface(SDL_Surface * orig, int width)
+static SDL_Surface *stretch_surface(SDL_Surface *orig, int width)
 {
   int i;
   SDL_Surface *dest;
@@ -1271,7 +1271,7 @@ static SDL_Surface *stretch_surface(SDL_Surface * orig, int width)
 }
 
 /* Draws the keyboard surface */
-static void draw_keyboard(on_screen_keyboard * keyboard)
+static void draw_keyboard(on_screen_keyboard *keyboard)
 {
   int i, j;
   int key_height, accumulated_width, accumulated_height;
@@ -1307,7 +1307,7 @@ static void draw_keyboard(on_screen_keyboard * keyboard)
   /* draw_key(keyboard->keymodifiers.dead, keyboard, 0); */
 }
 
-static void draw_key(osk_key key, on_screen_keyboard * keyboard, int hot)
+static void draw_key(osk_key key, on_screen_keyboard *keyboard, int hot)
 {
   char *text;
   SDL_Surface *skey;
@@ -1352,7 +1352,7 @@ static void draw_key(osk_key key, on_screen_keyboard * keyboard, int hot)
 
 
 /* FIXME: TODO draw top and bottom_right (altgr) labels */
-static void label_key(osk_key key, on_screen_keyboard * keyboard)
+static void label_key(osk_key key, on_screen_keyboard *keyboard)
 {
   SDL_Surface *messager;
   int modstate;
@@ -1455,7 +1455,7 @@ static void label_key(osk_key key, on_screen_keyboard * keyboard)
 }
 
 /* Searches the key corresponding to coordinates */
-static osk_key *find_key(on_screen_keyboard * keyboard, int x, int y)
+static osk_key *find_key(on_screen_keyboard *keyboard, int x, int y)
 {
   int i, j;
   osk_key *key;
@@ -1478,7 +1478,7 @@ static osk_key *find_key(on_screen_keyboard * keyboard, int x, int y)
 
 /* Copies orig to dest or sets dest to defaults if orig is NULL.
    if firstime is setted, don't frees the strings as there aren't. */
-static void set_key(osk_key * orig, osk_key * dest, int firsttime)
+static void set_key(osk_key *orig, osk_key *dest, int firsttime)
 {
   if (orig == NULL)
   {
@@ -1522,7 +1522,7 @@ static void set_key(osk_key * orig, osk_key * dest, int firsttime)
   }
 }
 
-static char *find_keysym(osk_key key, on_screen_keyboard * keyboard)
+static char *find_keysym(osk_key key, on_screen_keyboard *keyboard)
 {
   int keycode;
   char *keysym;
@@ -1594,7 +1594,7 @@ static char *find_keysym(osk_key key, on_screen_keyboard * keyboard)
 }
 
 /* We lose the SDL ModState by leaving and entering the tuxpaint window, so using a custom state */
-static int handle_keymods(char *keysym, osk_key * key, on_screen_keyboard * keyboard)
+static int handle_keymods(char *keysym, osk_key *key, on_screen_keyboard *keyboard)
 {
   SDL_Keymod mod;
   SDL_Event ev;
@@ -1683,7 +1683,7 @@ static int handle_keymods(char *keysym, osk_key * key, on_screen_keyboard * keyb
 
 /* set_dead_sticks and clear_dead_sticks deals with the persistence of
    the keys that are still affecting other key presses. */
-static void set_dead_sticks(osk_key * key, on_screen_keyboard * keyboard)
+static void set_dead_sticks(osk_key *key, on_screen_keyboard *keyboard)
 {
   key->stick = 1;
   if (!keyboard->kmdf.dead)
@@ -1696,7 +1696,7 @@ static void set_dead_sticks(osk_key * key, on_screen_keyboard * keyboard)
     keyboard->kmdf.dead4 = key;
 }
 
-static void clear_dead_sticks(on_screen_keyboard * keyboard)
+static void clear_dead_sticks(on_screen_keyboard *keyboard)
 {
   if (keyboard->kmdf.dead)
   {
@@ -1720,7 +1720,7 @@ static void clear_dead_sticks(on_screen_keyboard * keyboard)
   }
 }
 
-struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
+struct osk_keyboard *osk_clicked(on_screen_keyboard *keyboard, int x, int y)
 {
   int i;
   osk_key *key;
@@ -1956,7 +1956,7 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard * keyboard, int x, int y)
   return (keyboard);
 }
 
-void osk_released(on_screen_keyboard * keyboard)
+void osk_released(on_screen_keyboard *keyboard)
 {
   osk_key *key;
 
@@ -1971,7 +1971,7 @@ void osk_released(on_screen_keyboard * keyboard)
 }
 
 
-static void free_keymap(osk_keymap * keymap)
+static void free_keymap(osk_keymap *keymap)
 {
   int i;
 
@@ -1989,7 +1989,7 @@ static void free_keymap(osk_keymap * keymap)
   free(keymap);
 }
 
-static void free_composemap(osk_composenode * composenode)
+static void free_composemap(osk_composenode *composenode)
 {
   int i;
 
@@ -2007,7 +2007,7 @@ static void free_composemap(osk_composenode * composenode)
     free(composenode->keysym);
 }
 
-static void free_keysymdefs(keysymdefs * ksd, int size)
+static void free_keysymdefs(keysymdefs *ksd, int size)
 {
   int i;
 
@@ -2015,7 +2015,7 @@ static void free_keysymdefs(keysymdefs * ksd, int size)
     free(ksd[i].mnemo);
 }
 
-static void free_keys(osk_layout * layout)
+static void free_keys(osk_layout *layout)
 {
   int i, j;
 
@@ -2038,7 +2038,7 @@ static void free_keys(osk_layout * layout)
   free(layout->keys);
 }
 
-static void free_layout(osk_layout * layout)
+static void free_layout(osk_layout *layout)
 {
   if (layout->name != NULL)
     free(layout->name);
@@ -2054,7 +2054,7 @@ static void free_layout(osk_layout * layout)
   free(layout);
 }
 
-void osk_free(on_screen_keyboard * keyboard)
+void osk_free(on_screen_keyboard *keyboard)
 {
   free(keyboard->name);
   free_layout(keyboard->layout);

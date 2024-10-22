@@ -92,7 +92,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.33          </h1>
+            version 0.9.34          </h1>
     
           <p>
             Copyright &copy; 2002-2024 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
@@ -100,7 +100,7 @@
           </p>
     
           <p>
-            avril 29, 2024          </p>
+            octobre 10, 2024          </p>
         </center>
       </header>
 
@@ -372,10 +372,18 @@
               Ajoute une ligne contenant le mot "<code><b>rotate</b></code>" au fichier de données brosse.            </p>
           </dd>
 
-          <dt><strong>Pinceaux animés orientables ou tournants</strong></dt>
+          <dt><strong>Chaotic Brushes</strong></dt>
           <dd>
             <p>
-              Vous pouvez mélanger animation et orientation  (ou rotation) dans un même pinceau. Utilisez les deux options ("<code><b>frames=<i>N</i></b></code>" et "<code><b>directional</b></code>" ou "<code><b>rotate</b></code>) en deux lignes séparées dans le fichier "<code>.dat</code>" qui concerne le pinceau.            </p>
+              As of Tux Paint version 0.9.34, brushes can be configured to continuously pick random directions as you draw with them.            </p>
+            <p>
+              Ajoute une ligne contenant le mot "<code><b>chaotic</b></code>" au fichier de données brosse.            </p>
+          </dd>
+
+          <dt><strong>Animated Directional, Rotating, or Chaotic Brushes</strong></dt>
+          <dd>
+            <p>
+              You may mix both animated and either directional, rotating, or chaotic features into one brush. Use both options desired ("<code><b>frames=<i>N</i></b></code>" and "<code><b>directional</b></code>", "<code><b>rotate</b></code>", or "<code><b>chaotic</b></code>"), in separate lines in the brush's "<code>.dat</code>" file.            </p>
             <p>
               Pour les pinceaux directionnels, disposez le pinceau de manière à ce que chaque ensemble 3x3 de formes orientables soit disposé sur une grande image PNG. Par exemple, si le pinceau mesure 30x30 et qu'il y a 5 cadres, ce sera 450x90. (Les 150x90 pixels les plus à gauche de l'image représentent les 9 formes de direction pour la première image, par exemple).            </p>
           </dd>
@@ -863,6 +871,7 @@
                     alt="[ Une image au format paysage avec un horizon où le soleil est au milieu et une construction sur le côté droit. ]"
                     title="Une image au format paysage avec un horizon où le soleil est au milieu et une construction sur le côté droit."
                     valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
                   <figcaption style="font-size: smaller;">
                     <p>Vue sur le centre d'une image de démarrage étirée pour être en accord avec la largeur du canevas.<p/>
                   </figcaption>
@@ -876,6 +885,7 @@
                     alt="[ Image au format portrait avec un horizon, le soleil au milieu et le côté gauche d'une construction à droite. ]"
                     title="Image au format portrait avec un horizon, le soleil au milieu et le côté gauche d'une construction à droite."
                     valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
                   <figcaption style="font-size: smaller;">
                     <p>Vue sur le centre d'une image de démarrage étirée pour être en accord avec la hauteur du canevas.<p/>
                   </figcaption>
@@ -889,6 +899,7 @@
                     alt="[ Image au format paysage avec le ciel, le soleil en bas et le haut d'une construction sur la droite. ]"
                     title="Image au format paysage avec le ciel, le soleil en bas et le haut d'une construction sur la droite."
                     valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
                   <figcaption style="font-size: smaller;">
                     <p>Vue sur le haut d'une image de démarrage étirée pour être en accord avec la largeur du canevas.<p/>
                   </figcaption>
@@ -902,6 +913,7 @@
                     alt="[ Image, au format paysage, du sol avec le soleil en haut. ]"
                     title="Image, au format paysage, du sol avec le soleil en haut."
                     valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
                   <figcaption style="font-size: smaller;">
                     <p>Vue sur le bas d'une image de démarrage étirée pour être en accord avec la largeur du canevas.<p/>
                   </figcaption>
@@ -915,6 +927,7 @@
                     alt="[ Image, au format portrait, d'un horizon avec le soleil à gauche et une construction au milieu. ]"
                     title="Image, au format portrait, d'un horizon avec le soleil à gauche et une construction au milieu."
                     valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
                   <figcaption style="font-size: smaller;">
                     <p>Vue sur le droit d'une image de démarrage étirée pour être en accord avec la hauteur du canevas.<p/>
                   </figcaption>

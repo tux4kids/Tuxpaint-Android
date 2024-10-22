@@ -32,7 +32,7 @@
 #include "debug.h"
 
 /* Draw a single pixel into the surface: */
-static void putpixel8(SDL_Surface * surface, int x, int y, Uint32 pixel)
+static void putpixel8(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
   Uint8 *p;
 
@@ -53,7 +53,7 @@ static void putpixel8(SDL_Surface * surface, int x, int y, Uint32 pixel)
 }
 
 /* Draw a single pixel into the surface: */
-static void putpixel16(SDL_Surface * surface, int x, int y, Uint32 pixel)
+static void putpixel16(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
   Uint8 *p;
 
@@ -74,7 +74,7 @@ static void putpixel16(SDL_Surface * surface, int x, int y, Uint32 pixel)
 }
 
 /* Draw a single pixel into the surface: */
-static void putpixel24(SDL_Surface * surface, int x, int y, Uint32 pixel)
+static void putpixel24(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
   Uint8 *p;
 
@@ -107,7 +107,7 @@ static void putpixel24(SDL_Surface * surface, int x, int y, Uint32 pixel)
 }
 
 /* Draw a single pixel into the surface: */
-static void putpixel32(SDL_Surface * surface, int x, int y, Uint32 pixel)
+static void putpixel32(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
   Uint8 *p;
 
@@ -128,7 +128,7 @@ static void putpixel32(SDL_Surface * surface, int x, int y, Uint32 pixel)
 }
 
 /* Get a pixel: */
-static Uint32 getpixel8(SDL_Surface * surface, int x, int y)
+static Uint32 getpixel8(SDL_Surface *surface, int x, int y)
 {
   Uint8 *p;
 
@@ -154,7 +154,7 @@ static Uint32 getpixel8(SDL_Surface * surface, int x, int y)
 }
 
 /* Get a pixel: */
-static Uint32 getpixel16(SDL_Surface * surface, int x, int y)
+static Uint32 getpixel16(SDL_Surface *surface, int x, int y)
 {
   Uint8 *p;
 
@@ -180,7 +180,7 @@ static Uint32 getpixel16(SDL_Surface * surface, int x, int y)
 }
 
 /* Get a pixel: */
-static Uint32 getpixel24(SDL_Surface * surface, int x, int y)
+static Uint32 getpixel24(SDL_Surface *surface, int x, int y)
 {
   Uint8 *p;
   Uint32 pixel;
@@ -214,7 +214,7 @@ static Uint32 getpixel24(SDL_Surface * surface, int x, int y)
 }
 
 /* Get a pixel: */
-static Uint32 getpixel32(SDL_Surface * surface, int x, int y)
+static Uint32 getpixel32(SDL_Surface *surface, int x, int y)
 {
   Uint8 *p;
 

@@ -203,7 +203,7 @@ Uint32 trochoids_api_version(void)
 }
 
 
-int trochoids_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int trochoids_init(magic_api *api, Uint8 disabled_features, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char filename[1024];
@@ -234,13 +234,13 @@ int trochoids_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_le
 }
 
 
-int trochoids_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int trochoids_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (num_tools[tp_offers_sizes]);
 }
 
 
-SDL_Surface *trochoids_get_icon(magic_api * api, int which)
+SDL_Surface *trochoids_get_icon(magic_api *api, int which)
 {
   char filename[1024];
 
@@ -250,13 +250,13 @@ SDL_Surface *trochoids_get_icon(magic_api * api, int which)
 }
 
 
-char *trochoids_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *trochoids_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   return (strdup(gettext(tool_names[which_to_tool[which]])));
 }
 
 
-int trochoids_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int trochoids_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MAGIC_TYPE_ARTISTIC);
 }
@@ -268,36 +268,36 @@ int trochoids_get_order(int which)
 }
 
 
-char *trochoids_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *trochoids_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   return (strdup(gettext(tool_descriptions[which_to_tool[which]])));
 }
 
 
-int trochoids_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int trochoids_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
 
-int trochoids_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int trochoids_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MODE_PAINT;
 }
 
-Uint8 trochoids_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 trochoids_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return NUM_SIZES;
 }
 
 
-Uint8 trochoids_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 trochoids_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return DEFAULT_SIZE;
 }
 
 
-void trochoids_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void trochoids_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   int i;
 
@@ -311,8 +311,8 @@ void trochoids_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 
-void trochoids_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void trochoids_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   trochoids_x = x;
   trochoids_y = y;
@@ -322,17 +322,17 @@ void trochoids_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 
 
 /* Affect the canvas on drag: */
-void trochoids_drag(magic_api * api, int which,
-                    SDL_Surface * canvas, SDL_Surface * snapshot,
-                    int old_x ATTRIBUTE_UNUSED, int old_y ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+void trochoids_drag(magic_api *api, int which,
+                    SDL_Surface *canvas, SDL_Surface *snapshot,
+                    int old_x ATTRIBUTE_UNUSED, int old_y ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   dragged = 1;
   trochoids_work(api, which, canvas, snapshot, x, y, update_rect, 1);
   trochoids_sound(api, SND_DRAG, x, y);
 }
 
-void trochoids_work(magic_api * api, int which,
-                    SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect, int guides)
+void trochoids_work(magic_api *api, int which,
+                    SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect, int guides)
 {
   int R, r, d, LCM;
   int px, py, px2, py2;
@@ -520,8 +520,8 @@ void trochoids_work(magic_api * api, int which,
 }
 
 
-void trochoids_release(magic_api * api, int which,
-                       SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void trochoids_release(magic_api *api, int which,
+                       SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   int tool, snd_idx;
 
@@ -572,7 +572,7 @@ void trochoids_release(magic_api * api, int which,
 /* Play a sound; volume and panning will be based
    on the size and position of the shape being generated
    by the user's UI interaction */
-void trochoids_sound(magic_api * api, int snd_idx, int x, int y)
+void trochoids_sound(magic_api *api, int snd_idx, int x, int y)
 {
   int R, vol, pan;
 
@@ -599,25 +599,25 @@ void trochoids_sound(magic_api * api, int snd_idx, int x, int y)
 }
 
 
-void trochoids_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                         SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                         Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void trochoids_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                         SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                         SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                         Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   trochoids_color = SDL_MapRGB(canvas->format, r, g, b);
 }
 
 
-void trochoids_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                        Uint8 size, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void trochoids_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                        Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   trochoids_size = (size - 1);  /* array index is 0-based, but Tux Paint returns between 1...{accepted sizes} */
 }
 
 
 void trochoids_line_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBUTE_UNUSED,
-                             SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                             SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) pointer;
 
@@ -625,7 +625,7 @@ void trochoids_line_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBUTE_
 }
 
 void trochoids_xorline_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBUTE_UNUSED,
-                                SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                                SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) pointer;
 
@@ -635,13 +635,13 @@ void trochoids_xorline_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBU
   api->xorpixel(canvas, x + 1, y + 1);
 }
 
-void trochoids_switchin(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void trochoids_switchin(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void trochoids_switchout(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void trochoids_switchout(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                         SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 

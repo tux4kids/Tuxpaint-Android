@@ -144,6 +144,16 @@ typedef struct magic_api_t {
      loudest) */
   void (*playsound)(Mix_Chunk *, int, int);
 
+  /* Asks Tux Paint whether a sound is currently being played (by 'playsound()') */
+  int (*playingsound)(void);
+
+  /* Asks Tux Paint to pause the sound being played by 'playsound()' */
+  void (*pausesound)(void);
+
+  /* Asks Tux Paint to resume (unpause) the sound being played by
+     'playsound()' (if any) */
+  void (*unpausesound)(void);
+
   /* Asks Tux Paint to stop playing the sound played by 'playsound()' */
   void (*stopsound)(void);
 
@@ -197,7 +207,7 @@ typedef struct magic_api_t {
    If Tux Paint deems you compatible, it will call your 'XYZ_init()' (etc.)
    and you will be active. */
 
-#define TP_MAGIC_API_VERSION 0x0000000A
+#define TP_MAGIC_API_VERSION 0x0000000B
 
 #ifndef ATTRIBUTE_UNUSED
 #define ATTRIBUTE_UNUSED __attribute__ ((__unused__))

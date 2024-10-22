@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            バージョン 0.9.33          </h1>
+            バージョン 0.9.34          </h1>
 
           <h3 align="center">
             子供向けのシンプルなお絵かきプログラム          </h3>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            2024年7月17日          </p>
+            2024年10月21日          </p>
         </center>
       </header>
       <table border="2"
@@ -224,36 +224,63 @@
   <section class="indent">
     <header>
       <h2>
-        D. Tux Paint バージョン 0.9.33 での変更点      </h2>
+        D. Tux Paint バージョン 0.9.34 での変更点      </h2>
     </header>
 
     <dl>
-  <dt>透明な消しゴム</dt>
-  <dd>徐々に背景が表れてくる消しゴム</dd>
-
-  <dt>「まほう」ツール：「ディザ」</dt>
-  <dd>画像の一部をドットのディザパターンに変換する。</dd>
-
-  <dt>「まほう」ツール：「たかっけい」</dt>
-  <dd>キャンバス上に3つ以上の点をつないで多角形を作成します。</dd>
-
-  <dt>「りったいめがね」ツールの機能追加</dt>
-  <dd>「サイズ」コントロールで、アナグリフの色の組み合わせを選べるようになりました。（「初心者」モードを除く）</dd>
-
-  <dt>「まほう」ツールをグループ化しないオプション</dt>
-  <dd>多数の「まほう」ツールを（バージョン 0.9.27 までと同様に）グループに分けずに1つの長いリストとして表示されるようにできます。</dd>
-
-  <dt>ブラシの説明文</dt>
-  <dd>個々のブラシ（「ふで」ツールと「せん」ツールで使用）を選択したときに説明を表示させることができるようになりました。</dd>
+  <dt>"Eraser" Fill mode</dt>
+  <dd>A flood fill option that fills the canvas with the background color, or template or starter background, upon which the drawing was based.</dd>
 
   <dt>ブラシの追加</dt>
-  <dd>アクリル絵の具、鉛筆、毛羽立ったブラシ</dt>
+  <dd>New brushes for the Paint and Lines tools: "Fluff (gradient)", "Graphite", "Impasto", "Paint splats", "Smoke", "Spines", "Water (still)", and "Watercolor splotches".</dd>
 
-  <dt>書き出し先ファイル名</dt>
-  <dd>作品(「ひらく」&gt;「かきだす」)、またはスライドショー(「ひらく」&gt;「スライド」&gt;「かきだす」)を書き出すと、ファイル名が表示され、クリップボードに入ります。</dt>
+  <dt>New brush option</dt>
+  <dd>Brushes may be given a "chaotic" setting, causing them to rotate continuously while drawing with them.</dd>
 
-  <dt>Haikuでゴミ箱に対応</dt>
-  <dd>Haiku 版 Tux Paint では、ファイルを完全に削除するのではなく、削除した作品（「ひらく」&gt;「けす」）をデスクトップのゴミ箱に入れるようになりました。</dt>
+  <dt>New templates</dt>
+  <dd>"Clouds from an airplane" and "Lough Leane".</dd>
+
+  <dt>New Magic tool: Comic dots</dt>
+  <dd>Draws a repeating dot pattern, simulating the "Ben Day process" used in early comic books.</dd>
+
+  <dt>New Magic tool: Rotate</dt>
+  <dd>Rotates the drawing.</dd>
+
+  <dt>New Magic tool: Fractal</dt>
+  <dd>A set of tools that recursively repeat what you draw, scaling and/or rotating it as they repeat.</dd>
+
+  <dt>New Magic tool: ASCII Typewriter</dt>
+  <dd>Transform your picture into "ASCII art", typewriter-style.</dd>
+
+  <dt>New Magic tool: ASCII Computer</dt>
+  <dd>Transform your picture into "ASCII art", computer-style.</dd>
+
+  <dt>New Magic tool: ASCII Color Computer</dt>
+  <dd>Transform your picture into colored computer "ASCII art".</dd>
+
+  <dt>New Magic tool: Crescent</dt>
+  <dd>Draw one of various crescent shapes at a chosen angle.</dd>
+
+  <dt>New Magic tool: Spiral</dt>
+  <dd>Draw spirals.</dd>
+
+  <dt>New Magic tool: Spiral Square</dt>
+  <dd>Draw square spirals.</dd>
+
+  <dt>New Magic tool: Concentric Circle</dt>
+  <dd>Draw concentric circles.</dd>
+
+  <dt>New Magic tool: Concentric Square</dt>
+  <dd>Draw concentric squares.</dd>
+
+  <dt>New Magic tool: Tessellation Pointy</dt>
+  <dd>Draw repeating tessellation patterns with pointy-topped hexagons.</dd>
+
+  <dt>New Magic tool: Tessellation Flat</dt>
+  <dd>Draw repeating tessellation patterns with flat-topped hexagons.</dd>
+
+  <dt>Magic API Updates</dt>
+  <dd>Sound pause and resume functions added.</dd>
 </dl>
 
     <p>
@@ -351,6 +378,7 @@
            width="324"
            height="254"
            alt="[起動画面]">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
       <h2 id="using_title">
         B. 起動画面      </h2>
@@ -385,6 +413,7 @@
            height="254"
            alt=
            "[どうぐ: ふで, はんこ, せん, かたち, もじ, まほう, ラベル, とりけし, やりなおし, けしゴム, さいしょから, ひらく, セーブ, いんさつ, やめる]">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
       <dt>
         <strong>左側: ツールバー「どうぐ」</strong>
@@ -404,6 +433,7 @@
            width="324"
            height="254"
            alt="[描画キャンバス]">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
 
       <dt>
@@ -428,6 +458,7 @@
            height="254"
            alt=
            "[セレクタ - ふで、もじ、かたち、はんこ]">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
 
       <dt>
@@ -449,6 +480,7 @@
            height="254"
            alt=
            "[いろ - いろ - くろ、しろ、あか、ぴんく、おれんじ、きいろ、みどり、みずいろ、あお、むらさき、ちゃいろ、はいいろ]">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
 
       <dt>
@@ -459,13 +491,14 @@
         <p>
           使用中のツールが色をサポートしている場合、画面の下部付近に色の選択肢がパレットで表示されます。このパレットをクリックして色を選択すると、その色がツールで使用されます。(例えば、「ふで」ツールでは選択したブラシで描く色として、「ぬる」ツールでは画像の領域を塗りつぶす色として使用します)。        </p>
 
-        <div class="screenshot-right-after"></div>
+        <div class="screenshot-right-after">
+          <img src="../../html/images/colors_special.png"
+              width="105"
+              height="48"
+              alt=""
+              align="right">
+        </div>
 
-        <img src="../../html/images/colors_special.png"
-            width="105"
-            height="48"
-            alt=""
-            align="right">
         <p id="special_color_options">
           右端には色に関する3つの特別なオプションがあります。          <ul>
             <li>
@@ -517,6 +550,7 @@
            height="254"
            alt=
            "(「かたち」ツールの使い方を説明している例)">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
 
       <dt>
@@ -926,6 +960,7 @@
       <li><strong>せんけい</strong> &mdash; 領域をクリックしてからドラッグすると、ドラッグした方向に向かって色が薄くなるようにグラデーションをつけて塗りつぶします。</li>
       <li><strong>ほうしゃ</strong> &mdash; クリックした場所を中心に周りに向かって放射状に色が薄くなるようにグラデーションをつけて塗りつぶします。</li>
       <li><strong>あわせる</strong> &mdash; クリックした領域の輪郭に合わせて色が薄くなるようにグラデーションをつけて塗りつぶします。</li>
+      <li><strong>Eraser</strong> &mdash; click once to erase an area, exposing the solid color background, or starter or template background image, upon which the drawing was based. (See <a href="#using_tools_drawing_eraser">各種のツール &gt; 描画ツール &gt; けしゴム</a> and <a href="#new-starter-template">そのほかの操作 &gt; レイヤー画像</a>.)</li>
     </ul>
   </p>
 
@@ -1086,7 +1121,7 @@
       alt=""
       align="right">
   <p>
-    「さいしょから」のボタンを押すと、新規に絵を描き始めることができます。ダイアログ画面が表示され、キャンバスの背景色やレイヤー画像（後述）を選べます。  </p>
+    Clicking the 'New' button will start a new drawing. A dialog will appear where you may choose to start a new picture using a solid background color, or using a 'Starter' or 'Template' image (<a href="#new-starter-template">see below</a>). You will first be asked whether you really want to do this.  </p>
 
   <p>
     「けしゴム」ツールを使うと、描画した部分が消去され、最初に選択した背景が露出します。 (<a href="#using_tools_drawing_eraser">各種のツール &gt; 描画ツール &gt; けしゴム</a>もご確認ください。)
@@ -1098,7 +1133,7 @@
     <dd>
       あらかじめ用意されている背景色のほか、レインボーパレットやカラーミキサーで色を選択することができます。これらは、絵を描くときにキャンバスの下に表示されるカラーパレットにあるオプションと同じように操作します。詳細は <a href="#special_color_options">メインの画面 &gt; 下部: カラーパレット「いろ」 &gt; 色に関する特別なオプション</a> を参照。    </dd>
 
-    <dt><strong>レイヤー画像</strong></dt>
+    <dt id="new-starter-template"><strong>レイヤー画像</strong></dt>
     <dd>
       <ul>
         <li>レイヤー画像には、塗り絵のページのようなもの（白黒の線で描かれ、色を塗ることができる）や、前景レイヤーと背景レイヤーに挟まれた部分に絵を描ける３Ｄ画像のようなものがあります。</li>
@@ -1106,7 +1141,10 @@
       </ul>
 
       <p>
-        「消しゴム」ツールを使用すると、元のレイヤー画像が消されずに残ります。また、マジックツールの「反転」と「ミラー」は、レイヤー画像も反転させます。      </p>
+        When using the 'Eraser' tool or the 'Eraser' mode of the 'Fill' tool, the original image from the 'Starter' or 'Template' will reappear.  (See <a href="#using_tools_drawing_eraser">各種のツール &gt; 描画ツール &gt; けしゴム</a> and <a href="#using_tools_drawing_fill">「ぬる」ツール</a>.)      </p>
+
+      <p>
+        The 'Flip' and 'Mirror' Magic tools affect the orientation of the 'Starter' or 'Template', as well. (See <a href="../magic-docs/html/flip.html">各種のツール &gt; 「まほう」ツール（特殊効果） &gt; Flip</a> and <a href="../magic-docs/html/mirror.html">Mirror</a>.)      </p>
 
       <p>
         レイヤー画像は、その上に絵を描いて保存すると新しい絵として保存され、元々のレイヤー画像自体は上書きされないので、後で（「さいしょから」ダイアログからアクセスして）何度でも使うことができます。      </p>

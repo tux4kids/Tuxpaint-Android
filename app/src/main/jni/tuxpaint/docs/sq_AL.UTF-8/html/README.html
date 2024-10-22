@@ -91,7 +91,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.33          </h1>
+            version 0.9.34          </h1>
 
           <h3 align="center">
             Një program i thjeshtë vizatimi për fëmijë          </h3>
@@ -102,7 +102,7 @@
           </p>
 
           <p>
-            17 korrik 2024          </p>
+            21 tetor 2024          </p>
         </center>
       </header>
       <table border="2"
@@ -224,36 +224,63 @@
   <section class="indent">
     <header>
       <h2>
-        D. What's New in Tux Paint version 0.9.33?      </h2>
+        D. What's New in Tux Paint version 0.9.34?      </h2>
     </header>
 
     <dl>
-  <dt>Transparent Erasers</dt>
-  <dd>Erasers that lightly expose more and more of the background.</dd>
-
-  <dt>Dither magic tools</dt>
-  <dd>Transform parts of an image into a dithered pattern of dots.</dd>
-
-  <dt>Filled Polygon magic tool</dt>
-  <dd>Create polygons by placing three or more connected points on the canvas.</dd>
-
-  <dt>3D Glasses magic tool updated</dt>
-  <dd>Different anaglyphic color separations now offered (via the 'size' controls), unless running Tux Paint in 'Novice' complexity level.</dd>
-
-  <dt>Magic tool ungrouping option</dt>
-  <dd>The numerous Magic tools can be presented as a single long list (as in Tux Paint prior to 0.9.27), rather than paged groups.</dd>
-
-  <dt>Brush descriptions</dt>
-  <dd>Brushes (used by Paint and Line tools) can now include descriptions that appear when the brush is selected.</dd>
+  <dt>"Eraser" Fill mode</dt>
+  <dd>A flood fill option that fills the canvas with the background color, or template or starter background, upon which the drawing was based.</dd>
 
   <dt>New brushes</dt>
-  <dd>New brushes for the Paint and Lines tools: Acrylic, Pencil, and Fluff brushes.</dt>
+  <dd>New brushes for the Paint and Lines tools: "Fluff (gradient)", "Graphite", "Impasto", "Paint splats", "Smoke", "Spines", "Water (still)", and "Watercolor splotches".</dd>
 
-  <dt>Exported filenames shown</dt>
-  <dd>When exporting a drawing (Open&gt;Export) or a slideshow (Open&gt;Slideshow&gt;Export GIF), the name of the file is displayed and also placed in the copy/paste clipboard.</dt>
+  <dt>New brush option</dt>
+  <dd>Brushes may be given a "chaotic" setting, causing them to rotate continuously while drawing with them.</dd>
 
-  <dt>Trash can support in Haiku</dt>
-  <dd>The Haiku port of Tux Paint now also places erased drawings (Open&gt;Erase) into the desktop trash can, rather than deleting the files completely.</dt>
+  <dt>New templates</dt>
+  <dd>"Clouds from an airplane" and "Lough Leane".</dd>
+
+  <dt>New Magic tool: Comic dots</dt>
+  <dd>Draws a repeating dot pattern, simulating the "Ben Day process" used in early comic books.</dd>
+
+  <dt>New Magic tool: Rotate</dt>
+  <dd>Rotates the drawing.</dd>
+
+  <dt>New Magic tool: Fractal</dt>
+  <dd>A set of tools that recursively repeat what you draw, scaling and/or rotating it as they repeat.</dd>
+
+  <dt>New Magic tool: ASCII Typewriter</dt>
+  <dd>Transform your picture into "ASCII art", typewriter-style.</dd>
+
+  <dt>New Magic tool: ASCII Computer</dt>
+  <dd>Transform your picture into "ASCII art", computer-style.</dd>
+
+  <dt>New Magic tool: ASCII Color Computer</dt>
+  <dd>Transform your picture into colored computer "ASCII art".</dd>
+
+  <dt>New Magic tool: Crescent</dt>
+  <dd>Draw one of various crescent shapes at a chosen angle.</dd>
+
+  <dt>New Magic tool: Spiral</dt>
+  <dd>Draw spirals.</dd>
+
+  <dt>New Magic tool: Spiral Square</dt>
+  <dd>Draw square spirals.</dd>
+
+  <dt>New Magic tool: Concentric Circle</dt>
+  <dd>Draw concentric circles.</dd>
+
+  <dt>New Magic tool: Concentric Square</dt>
+  <dd>Draw concentric squares.</dd>
+
+  <dt>New Magic tool: Tessellation Pointy</dt>
+  <dd>Draw repeating tessellation patterns with pointy-topped hexagons.</dd>
+
+  <dt>New Magic tool: Tessellation Flat</dt>
+  <dd>Draw repeating tessellation patterns with flat-topped hexagons.</dd>
+
+  <dt>Magic API Updates</dt>
+  <dd>Sound pause and resume functions added.</dd>
 </dl>
 
     <p>
@@ -351,6 +378,7 @@
            width="324"
            height="254"
            alt="[Title screen]">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
       <h2 id="using_title">
         B. Title Screen      </h2>
@@ -385,6 +413,7 @@
            height="254"
            alt=
            "[Tools: Paint, Stamp, Lines, Shapes, Text, Magic, Label, Undo, Redo, Eraser, New, Open, Save, Print, Quit]">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
       <dt>
         <strong>Në Anën e Majtë: Panle</strong>
@@ -404,6 +433,7 @@
            width="324"
            height="254"
            alt="[Kanavacë]">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
 
       <dt>
@@ -428,6 +458,7 @@
            height="254"
            alt=
            "[Selectors - Brushes, Letters, Shapes, Stamps]">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
 
       <dt>
@@ -449,6 +480,7 @@
            height="254"
            alt=
            "[Colors - Black, White, Red, Pink, Orange, Yellow, Green, Cyan, Blue, Purple, Brown, Grey]">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
 
       <dt>
@@ -459,13 +491,14 @@
         <p>
           When the active tool supports colors, a palette of colors choices will be shown near the bottom of the screen. Click one to choose a color, and it will be used by the active tool. (For example, the "Paint" tool will use it as the color to draw with the chosen brush, and the "Fill" tool will use it as the color to use when flood-filling an area of the picture.)        </p>
 
-        <div class="screenshot-right-after"></div>
+        <div class="screenshot-right-after">
+          <img src="../../html/images/colors_special.png"
+              width="105"
+              height="48"
+              alt=""
+              align="right">
+        </div>
 
-        <img src="../../html/images/colors_special.png"
-            width="105"
-            height="48"
-            alt=""
-            align="right">
         <p id="special_color_options">
           On the far right are three special color options:          <ul>
             <li>
@@ -517,6 +550,7 @@
            height="254"
            alt=
            "(Shembull ndihmëze: “Zgjidhni një formë. Klikoni që të zgjidhni qendrën, tërhiqeni, mandej lëreni, kur të ketë madhësinë që doni. Lëvizni përreth që ta rrotulloni dhe klikoni që të vizatohet.”)">
+        <span style="display: none;"><br/>&nbsp;</span>
       </div>
 
       <dt>
@@ -926,6 +960,7 @@
       <li><strong>Linear</strong> &mdash; click and then drag to fill the area with color that fades away (a gradient) towards where you drag the mouse.</li>
       <li><strong>Radial</strong> &mdash; click once to fill an area with a color that fades away (a gradient) radially, centered on where you clicked.</li>
       <li><strong>Shaped</strong> &mdash; click once to fill an area with a color that fades away (a gradient), following the contours of the shape you're filling.</li>
+      <li><strong>Eraser</strong> &mdash; click once to erase an area, exposing the solid color background, or starter or template background image, upon which the drawing was based. (See <a href="#using_tools_drawing_eraser">Mjete të Mundshme &gt; Mjete Vizatimi &gt; Mjeti “Gomë”</a> and <a href="#new-starter-template">Kontrolle të Tjera &gt; Figura “Fillesë” &amp; Gjedhe</a>.)</li>
     </ul>
   </p>
 
@@ -1086,7 +1121,7 @@
       alt=""
       align="right">
   <p>
-    Clicking the 'New' button will start a new drawing. A dialog will appear where you may choose to start a new picture using a solid background color, or using a 'Starter' or 'Template' image (see below). You will first be asked whether you really want to do this.  </p>
+    Clicking the 'New' button will start a new drawing. A dialog will appear where you may choose to start a new picture using a solid background color, or using a 'Starter' or 'Template' image (<a href="#new-starter-template">see below</a>). You will first be asked whether you really want to do this.  </p>
 
   <p>
     When you use the 'Eraser' tool things you've added to your drawing will be removed, exposing the background you chose when starting a new drawing. (See <a href="#using_tools_drawing_eraser">Mjete të Mundshme &gt; Mjete Vizatimi &gt; Mjeti “Gomë”</a>.)
@@ -1098,7 +1133,7 @@
     <dd>
       Along with the preset solid colors, you can also choose colors using a rainbow palette or a "color mixer". These operate identically to the options found in the color palette shown below the canvas when drawing a picture. See <a href="#special_color_options">Skena Kryesore &gt; Më Poshtë: Ngjyra &gt; Special color options</a> for details.    </dd>
 
-    <dt><strong>Figura “Fillesë” &amp; Gjedhe</strong></dt>
+    <dt id="new-starter-template"><strong>Figura “Fillesë” &amp; Gjedhe</strong></dt>
     <dd>
       <ul>
         <li>'Starters' can behave like a page from a coloring book — a black-and-white outline of a picture, which you can then color in, and the black outline remains intact — or like a 3D photograph, where you draw in between a foreground and background layer.</li>
@@ -1106,7 +1141,10 @@
       </ul>
 
       <p>
-        When using the 'Eraser' tool, the original image from the 'Starter' or 'Template' will reappear. The 'Flip' and 'Mirror' Magic tools affect the orientation of the 'Starter' or 'Template', as well.      </p>
+        When using the 'Eraser' tool or the 'Eraser' mode of the 'Fill' tool, the original image from the 'Starter' or 'Template' will reappear.  (See <a href="#using_tools_drawing_eraser">Mjete të Mundshme &gt; Mjete Vizatimi &gt; Mjeti “Gomë”</a> and <a href="#using_tools_drawing_fill">Mjeti “Mbushje”</a>.)      </p>
+
+      <p>
+        The 'Flip' and 'Mirror' Magic tools affect the orientation of the 'Starter' or 'Template', as well. (See <a href="../magic-docs/html/flip.html">Mjete të Mundshme &gt; Mjeti “Magjik” (Efekte Speciale) &gt; Ktheje në anë tjetër</a> and <a href="../magic-docs/html/mirror.html">Pasqyroje</a>.)      </p>
 
       <p>
         When you load a 'Starter' or 'Template', draw on it, and then click 'Save,' it creates a new picture file — it doesn't overwrite the original, so you can use it again later (by accessing it from the 'New' dialog).      </p>

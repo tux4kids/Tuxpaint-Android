@@ -49,7 +49,7 @@ int IsPrinterAvailable(void)
 // This function is based on 
 // (1) convert surface to Java BitMap object
 // (2) call Java PrintHelper to do print job.
-const char *SurfacePrint(SDL_Surface * surface)
+const char *SurfacePrint(SDL_Surface *surface)
 {
   JNIEnv *mEnv = Android_JNI_GetEnv();
   jclass mBitmapClass = (*mEnv)->FindClass(mEnv, "android/graphics/Bitmap");

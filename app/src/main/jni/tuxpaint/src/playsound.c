@@ -49,7 +49,7 @@ static int old_sound[4] = { -1, -1, -1, -1 };
  *   (low values, near the top of the window, are quieter), or
  *   SNDDIST_NEAR for full volume
  */
-void playsound(SDL_Surface * screen, int chan, int s, int override, int x, int y)
+void playsound(SDL_Surface *screen, int chan, int s, int override, int x, int y)
 {
 #ifndef NOSOUND
   int left, dist;

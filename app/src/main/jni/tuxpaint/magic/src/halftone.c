@@ -1,6 +1,6 @@
 /* halftone.c
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 
@@ -97,7 +97,7 @@ Uint32 halftone_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int halftone_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int halftone_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -116,12 +116,12 @@ int halftone_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uin
   return (1);
 }
 
-int halftone_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int halftone_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (NUM_TOOLS);
 }
 
-SDL_Surface *halftone_get_icon(magic_api * api, int which)
+SDL_Surface *halftone_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -130,18 +130,18 @@ SDL_Surface *halftone_get_icon(magic_api * api, int which)
   return (IMG_Load(fname));
 }
 
-char *halftone_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *halftone_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   const char *our_name_english;
   const char *our_name_localized;
 
   our_name_english = names[which];
-  our_name_localized = gettext_noop(our_name_english);
+  our_name_localized = gettext(our_name_english);
 
   return (strdup(our_name_localized));
 }
 
-int halftone_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
+int halftone_get_group(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   return groups[which];
 }
@@ -151,7 +151,7 @@ int halftone_get_order(int which)
   return orders[which];
 }
 
-char *halftone_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
+char *halftone_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode)
 {
   const char *our_desc_english;
   const char *our_desc_localized;
@@ -162,17 +162,17 @@ char *halftone_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int 
   return (strdup(our_desc_localized));
 }
 
-int halftone_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int halftone_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-int halftone_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int halftone_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
 }
 
-void halftone_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void halftone_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   int i;
 
@@ -188,8 +188,8 @@ void halftone_shutdown(magic_api * api ATTRIBUTE_UNUSED)
   SDL_FreeSurface(square);
 }
 
-void halftone_click(magic_api * api, int which, int mode,
-                    SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void halftone_click(magic_api *api, int which, int mode,
+                    SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   int full_x, full_y;
 
@@ -214,8 +214,8 @@ void halftone_click(magic_api * api, int which, int mode,
   }
 }
 
-void halftone_drag(magic_api * api, int which, SDL_Surface * canvas,
-                   SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void halftone_drag(magic_api *api, int which, SDL_Surface *canvas,
+                   SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   api->line((void *)api, which, canvas, snapshot, ox, oy, x, y, 4, halftone_line_callback);
 
@@ -271,24 +271,24 @@ int chan_angles[NUM_CHANS] = {
   45                            /* Black */
 };
 
-void halftone_release(magic_api * api ATTRIBUTE_UNUSED,
+void halftone_release(magic_api *api ATTRIBUTE_UNUSED,
                       int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                      SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                      int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                      int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-void halftone_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+void halftone_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
                         Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                        SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                        SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 
 void halftone_line_callback(void *ptr, int which ATTRIBUTE_UNUSED,
-                            SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                            SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   Uint8 r, g, b, or, og, ob;
   Uint32 total_r, total_g, total_b;
@@ -381,7 +381,7 @@ void halftone_line_callback(void *ptr, int which ATTRIBUTE_UNUSED,
   SDL_BlitSurface(square, NULL, canvas, &dest);
 }
 
-void halftone_switchin(magic_api * api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+void halftone_switchin(magic_api *api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   if (canvas_backup == NULL)
   {
@@ -402,8 +402,8 @@ void halftone_switchin(magic_api * api, int which ATTRIBUTE_UNUSED, int mode ATT
   SDL_BlitSurface(canvas, NULL, canvas_backup, NULL);
 }
 
-void halftone_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void halftone_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
@@ -443,18 +443,18 @@ void halftone_rgb2cmyk(Uint8 r, Uint8 g, Uint8 b, float cmyk[])
 }
 
 
-Uint8 halftone_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 halftone_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;                     // No size support at this time
 }
 
-Uint8 halftone_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 halftone_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;                     // No size support at this time
 }
 
-void halftone_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void halftone_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

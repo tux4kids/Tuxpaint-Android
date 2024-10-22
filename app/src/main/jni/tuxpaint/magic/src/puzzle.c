@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 
@@ -83,7 +83,7 @@ Uint32 puzzle_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int puzzle_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int puzzle_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -93,12 +93,12 @@ int puzzle_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8
   return 1;
 }
 
-int puzzle_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int puzzle_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-SDL_Surface *puzzle_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *puzzle_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -107,12 +107,12 @@ SDL_Surface *puzzle_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *puzzle_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *puzzle_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Puzzle")));
+  return (strdup(gettext("Puzzle")));
 }
 
-int puzzle_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int puzzle_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_DISTORTS;
 }
@@ -124,35 +124,35 @@ int puzzle_get_order(int which ATTRIBUTE_UNUSED)
 }
 
 
-char *puzzle_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+char *puzzle_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
-    return strdup(gettext_noop("Click the part of your picture where would you like a puzzle."));
-  return strdup(gettext_noop("Click to make a puzzle in fullscreen mode."));
+    return strdup(gettext("Click the part of your picture where would you like a puzzle."));
+  return strdup(gettext("Click to make a puzzle in fullscreen mode."));
 }
 
-void puzzle_release(magic_api * api ATTRIBUTE_UNUSED,
+void puzzle_release(magic_api *api ATTRIBUTE_UNUSED,
                     int which ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface * last ATTRIBUTE_UNUSED,
-                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED,
+                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-void puzzle_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void puzzle_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (puzzle_snd != NULL)
     Mix_FreeChunk(puzzle_snd);
 }
 
-void puzzle_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+void puzzle_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
                       Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                      SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-int puzzle_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int puzzle_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
@@ -164,8 +164,8 @@ int gcd(int a, int b)           //greatest common divisor
   return gcd(b, a % b);
 }
 
-void puzzle_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+void puzzle_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   puzzle_gcd = RATIO * gcd(canvas->w, canvas->h);
   rects_w = (unsigned int)canvas->w / puzzle_gcd;
@@ -176,20 +176,20 @@ void puzzle_switchin(magic_api * api ATTRIBUTE_UNUSED,
                          canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 }
 
-void puzzle_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void puzzle_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
   SDL_FreeSurface(canvas_backup);
   canvas_backup = NULL;
 }
 
-int puzzle_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int puzzle_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
 static void puzzle_draw(void *ptr, int which_tool ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                        SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
 
 
@@ -247,9 +247,9 @@ static void puzzle_draw(void *ptr, int which_tool ATTRIBUTE_UNUSED,
   }
 }
 
-void puzzle_drag(magic_api * api, int which, SDL_Surface * canvas,
-                 SDL_Surface * last, int ox ATTRIBUTE_UNUSED,
-                 int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+void puzzle_drag(magic_api *api, int which, SDL_Surface *canvas,
+                 SDL_Surface *last, int ox ATTRIBUTE_UNUSED,
+                 int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   puzzle_draw(api, which, canvas, last, x - puzzle_gcd / 2, y - puzzle_gcd / 2);
 
@@ -264,25 +264,25 @@ void puzzle_drag(magic_api * api, int which, SDL_Surface * canvas,
   update_rect->w = canvas->w;
 }
 
-void puzzle_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void puzzle_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                  SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   puzzle_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
 
-Uint8 puzzle_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 puzzle_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 10;
 }
 
-Uint8 puzzle_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 puzzle_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 4;
 }
 
-void puzzle_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED,
-                     Uint8 size, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void puzzle_set_size(magic_api *api, int which, int mode, SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED,
+                     Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   RATIO = size + 1;
   puzzle_switchin(api, which, mode, canvas);

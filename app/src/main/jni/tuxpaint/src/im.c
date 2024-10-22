@@ -286,7 +286,7 @@ static int swk_compare(const void *swk1, const void *swk2)
 /**
 * Initialize the State Machine.
 */
-static int sm_init(STATE_MACHINE * sm)
+static int sm_init(STATE_MACHINE *sm)
 {
   memset(sm, 0, sizeof(STATE_MACHINE));
 
@@ -305,7 +305,7 @@ static int sm_init(STATE_MACHINE * sm)
 /**
 * Free the State Machine resources.
 */
-static void sm_free(STATE_MACHINE * sm)
+static void sm_free(STATE_MACHINE *sm)
 {
   if (sm->next)
   {
@@ -331,7 +331,7 @@ static void sm_free(STATE_MACHINE * sm)
 /**
 * Double the storage space of the possible transition states.
 */
-static int sm_dblspace(STATE_MACHINE * sm)
+static int sm_dblspace(STATE_MACHINE *sm)
 {
   size_t newsize = sm->next_maxsize * 2;
   SM_WITH_KEY *next = realloc(sm->next, sizeof(SM_WITH_KEY) * newsize);
@@ -353,7 +353,7 @@ static int sm_dblspace(STATE_MACHINE * sm)
 * Return NULL if none is found.  The search is done only at 1 level, and does
 * not recurse deep.
 */
-static STATE_MACHINE *sm_search_shallow(STATE_MACHINE * sm, char key)
+static STATE_MACHINE *sm_search_shallow(STATE_MACHINE *sm, char key)
 {
   SM_WITH_KEY smk = { key, NULL };
   SM_WITH_KEY *smk_found;
@@ -379,8 +379,8 @@ static STATE_MACHINE *sm_search_shallow(STATE_MACHINE * sm, char key)
 *
 * @return         Found unicode character sequence output of the last state.
 */
-static const wchar_t *sm_search(STATE_MACHINE * start, wchar_t *key,
-                                int *matched, STATE_MACHINE ** penult, STATE_MACHINE ** end)
+static const wchar_t *sm_search(STATE_MACHINE *start, wchar_t *key,
+                                int *matched, STATE_MACHINE **penult, STATE_MACHINE **end)
 {
   STATE_MACHINE *sm = sm_search_shallow(start, (char)*key);
   const wchar_t *unicode;
@@ -407,7 +407,7 @@ static const wchar_t *sm_search(STATE_MACHINE * start, wchar_t *key,
 * Sort the state machine's transition keys so it can be binary-searched.
 * The sort is done only at 1 level, and does not recurse deep.
 */
-static void sm_sort_shallow(STATE_MACHINE * sm)
+static void sm_sort_shallow(STATE_MACHINE *sm)
 {
   qsort(sm->next, sm->next_size, sizeof(SM_WITH_KEY), swk_compare);
 }
@@ -416,7 +416,7 @@ static void sm_sort_shallow(STATE_MACHINE * sm)
 /**
 * Add a single sequence-to-unicode path to the state machine.
 */
-static int sm_add(STATE_MACHINE * sm, char *seq, const wchar_t *unicode, char flag)
+static int sm_add(STATE_MACHINE *sm, char *seq, const wchar_t *unicode, char flag)
 {
   STATE_MACHINE *sm_found = sm_search_shallow(sm, seq[0]);
 
@@ -486,7 +486,7 @@ static int sm_add(STATE_MACHINE * sm, char *seq, const wchar_t *unicode, char fl
 /**
 * Initialize the character map table.
 */
-static int charmap_init(CHARMAP * cm)
+static int charmap_init(CHARMAP *cm)
 {
   int error_code = 0;
   int i = 0;
@@ -513,7 +513,7 @@ static int charmap_init(CHARMAP * cm)
 *
 * @return        0 if no error, 1 if error.
 */
-static int charmap_add(CHARMAP * cm, int section, char *seq, const wchar_t *unicode, char *flag)
+static int charmap_add(CHARMAP *cm, int section, char *seq, const wchar_t *unicode, char *flag)
 {
   if (section >= MAX_SECTIONS)
   {
@@ -538,7 +538,7 @@ static int charmap_add(CHARMAP * cm, int section, char *seq, const wchar_t *unic
 * @param path   The path of the file to load.
 * @return       Zero if the file is loaded fine, nonzero otherwise.
 */
-static int charmap_load(CHARMAP * cm, const char *path)
+static int charmap_load(CHARMAP *cm, const char *path)
 {
   FILE *is = NULL;
   int section = 0;
@@ -651,7 +651,7 @@ static int charmap_load(CHARMAP * cm, const char *path)
 /**
 * Free the resources used by a character map.
 */
-static void charmap_free(CHARMAP * cm)
+static void charmap_free(CHARMAP *cm)
 {
   int i;
 
@@ -667,7 +667,7 @@ static void charmap_free(CHARMAP * cm)
 /**
 * Search for a matching character string in the character map.
 */
-static const wchar_t *charmap_search(CHARMAP * cm, wchar_t *s)
+static const wchar_t *charmap_search(CHARMAP *cm, wchar_t *s)
 {
   STATE_MACHINE *start;
   const wchar_t *unicode;
@@ -725,7 +725,7 @@ static const wchar_t *charmap_search(CHARMAP * cm, wchar_t *s)
 *
 * @see im_read
 */
-static int im_event_c(IM_DATA * im, SDL_Event event)
+static int im_event_c(IM_DATA *im, SDL_Event event)
 {
   SDL_Keysym ks = event.key.keysym;
 
@@ -783,7 +783,7 @@ static int im_event_c(IM_DATA * im, SDL_Event event)
 * @see im_event_c()
 * @see im_event_fns
 */
-int im_read(IM_DATA * im, SDL_Event event)
+int im_read(IM_DATA *im, SDL_Event event)
 {
   IM_EVENT_FN im_event_fp = NULL;
   int redraw = 0;
@@ -838,7 +838,7 @@ int im_read(IM_DATA * im, SDL_Event event)
 * Generic event handler that calls the appropriate language handler.
 * im->request should have the event ID.
 */
-static void im_event(IM_DATA * im)
+static void im_event(IM_DATA *im)
 {
   SDL_Event event;
 
@@ -852,7 +852,7 @@ static void im_event(IM_DATA * im)
 /**
 * Make an event request and call the event handler.
 */
-static void im_request(IM_DATA * im, int request)
+static void im_request(IM_DATA *im, int request)
 {
   im->request = request;
   im_event(im);
@@ -866,13 +866,13 @@ static void im_request(IM_DATA * im, int request)
 /**
 * Free any allocated resources.
 */
-static void im_free(IM_DATA * im)
+static void im_free(IM_DATA *im)
 {
   im_request(im, IM_REQ_FREE);
 }
 
 
-void im_softreset(IM_DATA * im)
+void im_softreset(IM_DATA *im)
 {
   im->s[0] = L'\0';
   im->buf[0] = L'\0';
@@ -881,7 +881,7 @@ void im_softreset(IM_DATA * im)
 }
 
 
-static void im_fullreset(IM_DATA * im)
+static void im_fullreset(IM_DATA *im)
 {
   im->s[0] = L'\0';
   im->buf[0] = L'\0';
@@ -936,7 +936,7 @@ static void im_fullreset(IM_DATA * im)
 *
 * @see im_read
 */
-static int im_event_zh_tw(IM_DATA * im, SDL_Event event)
+static int im_event_zh_tw(IM_DATA *im, SDL_Event event)
 {
   SDL_Keysym ks = event.key.keysym;
   static const char *lang_file = IMDIR "zh_tw.im";
@@ -1159,7 +1159,7 @@ static int im_event_zh_tw(IM_DATA * im, SDL_Event event)
 *
 * @see im_read
 */
-static int im_event_th(IM_DATA * im, SDL_Event event)
+static int im_event_th(IM_DATA *im, SDL_Event event)
 {
   SDL_Keysym ks = event.key.keysym;
   static const char *lang_file = IMDIR "th.im";
@@ -1379,7 +1379,7 @@ static int im_event_th(IM_DATA * im, SDL_Event event)
 *
 * @see im_read
 */
-static int im_event_ja(IM_DATA * im, SDL_Event event)
+static int im_event_ja(IM_DATA *im, SDL_Event event)
 {
   SDL_Keysym ks = event.key.keysym;
   static const char *lang_file = IMDIR "ja.im";
@@ -1605,7 +1605,7 @@ static int im_event_ja(IM_DATA * im, SDL_Event event)
 *
 * @see im_event_ko
 */
-static int im_event_ko_isvowel(CHARMAP * cm, wchar_t c)
+static int im_event_ko_isvowel(CHARMAP *cm, wchar_t c)
 {
   STATE_MACHINE *start, *next;
   const wchar_t *unicode;
@@ -1629,7 +1629,7 @@ static int im_event_ko_isvowel(CHARMAP * cm, wchar_t c)
 *
 * @see im_read
 */
-static int im_event_ko(IM_DATA * im, SDL_Event event)
+static int im_event_ko(IM_DATA *im, SDL_Event event)
 {
   SDL_Keysym ks = event.key.keysym;
   static const char *lang_file = IMDIR "ko.im";
@@ -1909,7 +1909,7 @@ static int im_event_ko(IM_DATA * im, SDL_Event event)
 * @param im    IM_DATA structure to initialize.
 * @param lang  LANG_* defined constant to initialize the structure with.
 */
-void im_init(IM_DATA * im, int lang)
+void im_init(IM_DATA *im, int lang)
 {
   /* Free already allocated resources if initialized before */
   if (im_initialized)

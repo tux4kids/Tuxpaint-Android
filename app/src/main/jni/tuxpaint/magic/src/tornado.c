@@ -27,7 +27,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -109,7 +109,7 @@ Uint32 tornado_api_version(void)
 
 
 // No setup required:
-int tornado_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int tornado_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -132,13 +132,13 @@ int tornado_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint
 }
 
 // We have multiple tools:
-int tornado_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int tornado_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (1);
 }
 
 // Load our icons:
-SDL_Surface *tornado_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *tornado_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -148,13 +148,13 @@ SDL_Surface *tornado_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 }
 
 // Return our names, localized:
-char *tornado_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *tornado_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Tornado")));
+  return (strdup(gettext("Tornado")));
 }
 
 // Return our groups:
-int tornado_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int tornado_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_ARTISTIC;
 }
@@ -166,15 +166,15 @@ int tornado_get_order(int which ATTRIBUTE_UNUSED)
 }
 
 // Return our descriptions, localized:
-char *tornado_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *tornado_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Click and drag to draw a tornado funnel on your picture.")));
+  return (strdup(gettext("Click and drag to draw a tornado funnel on your picture.")));
 }
 
 // Affect the canvas on drag:
-static void tornado_predrag(magic_api * api ATTRIBUTE_UNUSED,
-                            SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                            SDL_Surface * last ATTRIBUTE_UNUSED, int ox, int oy, int x, int y)
+static void tornado_predrag(magic_api *api ATTRIBUTE_UNUSED,
+                            SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                            SDL_Surface *last ATTRIBUTE_UNUSED, int ox, int oy, int x, int y)
 {
   if (x < tornado_min_x)
     tornado_min_x = x;
@@ -207,8 +207,8 @@ static void tornado_predrag(magic_api * api ATTRIBUTE_UNUSED,
   }
 }
 
-void tornado_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void tornado_drag(magic_api *api, int which ATTRIBUTE_UNUSED,
+                  SDL_Surface *canvas, SDL_Surface *last, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   tornado_predrag(api, canvas, last, ox, oy, x, y);
 
@@ -232,8 +232,8 @@ void tornado_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
 }
 
 // Affect the canvas on click:
-void tornado_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void tornado_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   tornado_min_x = x;
   tornado_max_x = x;
@@ -251,8 +251,8 @@ void tornado_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 }
 
 // Affect the canvas on release:
-void tornado_release(magic_api * api, int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void tornado_release(magic_api *api, int which ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   /* Don't let tornado be too low compared to base: */
 
@@ -288,7 +288,7 @@ void tornado_release(magic_api * api, int which ATTRIBUTE_UNUSED,
 }
 
 
-static void tornado_drawtornado(magic_api * api, SDL_Surface * canvas, int x, int y)
+static void tornado_drawtornado(magic_api *api, SDL_Surface *canvas, int x, int y)
 {
   SDL_Surface *aux_surf;
   SDL_Rect dest;
@@ -301,7 +301,7 @@ static void tornado_drawtornado(magic_api * api, SDL_Surface * canvas, int x, in
   SDL_FreeSurface(aux_surf);
 }
 
-static void tornado_drawbase(magic_api * api ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+static void tornado_drawbase(magic_api *api ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   SDL_Rect dest;
 
@@ -311,7 +311,7 @@ static void tornado_drawbase(magic_api * api ATTRIBUTE_UNUSED, SDL_Surface * can
   SDL_BlitSurface(tornado_base, NULL, canvas, &dest);
 }
 
-static Uint32 tornado_mess(Uint32 pixel, SDL_Surface * canvas)
+static Uint32 tornado_mess(Uint32 pixel, SDL_Surface *canvas)
 {
   Uint8 r, g, b, a;
   float f = (float)rand() * 255 / RAND_MAX;
@@ -322,8 +322,8 @@ static Uint32 tornado_mess(Uint32 pixel, SDL_Surface * canvas)
                       (tornado_g + g + (Uint8) f * 2) / 4, (tornado_b + b + (Uint8) f * 2) / 4, a));
 }
 
-static void tornado_drawstalk(magic_api * api, SDL_Surface * canvas,
-                              SDL_Surface * last, int top_x, int top_y,
+static void tornado_drawstalk(magic_api *api, SDL_Surface *canvas,
+                              SDL_Surface *last, int top_x, int top_y,
                               int minx, int maxx, int bottom_x, int bottom_y, int final)
 {
   Point2D control_points[4];
@@ -429,7 +429,7 @@ static void tornado_drawstalk(magic_api * api, SDL_Surface * canvas,
   free(curve);
 }
 
-void tornado_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void tornado_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
 /*
   if (tornado_click_snd != NULL)
@@ -448,9 +448,9 @@ void tornado_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void tornado_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                       SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                       SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void tornado_set_color(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
+                       SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   tornado_r = r;
   tornado_g = g;
@@ -460,7 +460,7 @@ void tornado_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface 
 }
 
 // Use colors:
-int tornado_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int tornado_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
@@ -480,7 +480,7 @@ cp[3] is the end point, or P3 in the above diagram
 t is the parameter value, 0 <= t <= 1
 */
 
-static Point2D tornado_PointOnCubicBezier(Point2D * cp, float t)
+static Point2D tornado_PointOnCubicBezier(Point2D *cp, float t)
 {
   float ax, bx, cx;
   float ay, by, cy;
@@ -515,7 +515,7 @@ static Point2D tornado_PointOnCubicBezier(Point2D * cp, float t)
  <sizeof(Point2D) numberOfPoints>
 */
 
-static void tornado_ComputeBezier(Point2D * cp, int numberOfPoints, Point2D * curve)
+static void tornado_ComputeBezier(Point2D *cp, int numberOfPoints, Point2D *curve)
 {
   float dt;
   int i;
@@ -527,7 +527,7 @@ static void tornado_ComputeBezier(Point2D * cp, int numberOfPoints, Point2D * cu
 }
 
 
-static void tornado_colorize_cloud(magic_api * api)
+static void tornado_colorize_cloud(magic_api *api)
 {
   Uint32 amask;
   int x, y;
@@ -569,35 +569,35 @@ static void tornado_colorize_cloud(magic_api * api)
   SDL_UnlockSurface(tornado_cloud);
 }
 
-void tornado_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void tornado_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void tornado_switchout(magic_api * api, int which ATTRIBUTE_UNUSED,
-                       int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void tornado_switchout(magic_api *api, int which ATTRIBUTE_UNUSED,
+                       int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
   api->stopsound();
 }
 
-int tornado_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int tornado_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT_WITH_PREVIEW);
 }
 
 
-Uint8 tornado_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 tornado_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 tornado_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 tornado_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void tornado_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                      Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void tornado_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                      Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

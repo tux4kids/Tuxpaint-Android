@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -71,7 +71,7 @@ Uint32 xor_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int xor_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int xor_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -81,12 +81,12 @@ int xor_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 co
   return (1);
 }
 
-int xor_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int xor_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (1);
 }
 
-SDL_Surface *xor_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *xor_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -95,12 +95,12 @@ SDL_Surface *xor_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *xor_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *xor_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Xor Colors")));
+  return (strdup(gettext("Xor Colors")));
 }
 
-int xor_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int xor_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_COLOR_FILTERS;
 }
@@ -110,16 +110,16 @@ int xor_get_order(int which ATTRIBUTE_UNUSED)
   return 800;
 }
 
-char *xor_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+char *xor_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
-    return (strdup(gettext_noop("Click and drag to draw an \"Exclusive Or\" (XOR) effect")));
+    return (strdup(gettext("Click and drag to draw an \"Exclusive Or\" (XOR) effect")));
   else
-    return (strdup(gettext_noop("Click to apply an \"Exclusive Or\" (XOR) effect on the whole picture")));
+    return (strdup(gettext("Click to apply an \"Exclusive Or\" (XOR) effect on the whole picture")));
 }
 
 static void do_xor(void *ptr, int which ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                   SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   Uint8 r, g, b, xor;
@@ -138,7 +138,7 @@ static void do_xor(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 static void do_xor_circle(void *ptr, int which ATTRIBUTE_UNUSED,
-                          SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                          SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int xx, yy;
@@ -156,8 +156,8 @@ static void do_xor_circle(void *ptr, int which ATTRIBUTE_UNUSED,
   }
 }
 
-void xor_drag(magic_api * api, int which, SDL_Surface * canvas,
-              SDL_Surface * last ATTRIBUTE_UNUSED, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void xor_drag(magic_api *api, int which, SDL_Surface *canvas,
+              SDL_Surface *last ATTRIBUTE_UNUSED, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_xor_circle);
 
@@ -184,8 +184,8 @@ void xor_drag(magic_api * api, int which, SDL_Surface * canvas,
   api->playsound(xor_snd, (x * 255) / canvas->w, 255);
 }
 
-void xor_click(magic_api * api, int which, int mode,
-               SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+void xor_click(magic_api *api, int which, int mode,
+               SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   if (mode == MODE_PAINT)
     xor_drag(api, which, canvas, last, x, y, x, y, update_rect);
@@ -205,47 +205,47 @@ void xor_click(magic_api * api, int which, int mode,
   }
 }
 
-void xor_release(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                 SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                 SDL_Surface * last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
-                 int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void xor_release(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                 SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                 SDL_Surface *last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
+                 int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-void xor_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void xor_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (xor_snd != NULL)
     Mix_FreeChunk(xor_snd);
 }
 
-void xor_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                   SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
-                   Uint8 b ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void xor_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                   SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                   Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-int xor_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int xor_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void xor_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                  int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void xor_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                  int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void xor_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void xor_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int xor_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int xor_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
 }
 
 
-Uint8 xor_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+Uint8 xor_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
     return 8;
@@ -253,14 +253,14 @@ Uint8 xor_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
     return 0;
 }
 
-Uint8 xor_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 xor_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 4;
 }
 
-void xor_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                  Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void xor_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                  SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                  Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   xor_radius = size * 4;
 }

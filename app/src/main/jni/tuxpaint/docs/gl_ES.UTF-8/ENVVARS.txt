@@ -1,5 +1,5 @@
                                    Tux Paint
-                                versión 0.9.33
+                                versión 0.9.34
                     Documentación de variábeis de contorno
 
         Copyright © 2021-2024 by varios colaboradores; see AUTHORS.txt.
@@ -12,9 +12,9 @@
 Tux Paint comprende unha serie de variábeis de contorno, ben directamente ou
 indirectamente polas bibliotecas que emprega.
 
-Variábeis de contorno relacionadas co almacenamento
+          ### Variábeis de contorno relacionadas co almacenamento ###
 
-HOME
+→ HOME ←
 
     Especifica o «directorio persoal» do usuario, que se usa para localizar
     outros ficheiros ou directorios. Nalgúns casos, úsase como parte dunha
@@ -26,13 +26,13 @@ HOME
 
     Algúns exemplos de onde se usa «$HOME» inclúen:
 
-      + A localización do ficheiro de configuración de Tux Paint
-      + A base de onde Tux Paint garda e carga os debuxos dos usuarios
-      + A localización da colección privada de ficheiros de datos dun usuario —
+      o A localización do ficheiro de configuración de Tux Paint
+      o A base de onde Tux Paint garda e carga os debuxos dos usuarios
+      o A localización da colección privada de ficheiros de datos dun usuario —
         selos, pinceis, etc. — (fronte aos dispoñíbeis no sistema)
 
-
-XDG_CONFIG_HOME
+     
+→ XDG_CONFIG_HOME ←
 
     On Linux and other platforms where the X Desktop Group standards are used,
     the location of the user's configuration files. Specifically, where to find
@@ -43,8 +43,8 @@ XDG_CONFIG_HOME
     exports drawings and GIFs to "$HOME".
 
 
-
-XDG_DATA_HOME
+     
+→ XDG_DATA_HOME ←
 
     On Linux and other platforms where the X Desktop Group standards are used,
     the location of the user's data directories. Specifically, where to find
@@ -54,19 +54,19 @@ XDG_DATA_HOME
     anywhere.
 
 
-
-TEMP
+     
+→ TEMP ←
 
     Especifica a localización onde se poden crear ficheiros temporais. Só o usa
     Tux Paint nos sistemas operativos Microsoft Windows. Emprega «userdata» se
     non se define.
 
-Variábeis de contorno relacionadas co idioma
+             ### Variábeis de contorno relacionadas co idioma ###
 
-LANG
-LANGUAGE
-LC_ALL
-LC_MESSAGES
+→ LANG ←
+→ LANGUAGE ←
+→ LC_ALL ←
+→ LC_MESSAGES ←
 
     Specify the language Tux Paint should utilize in its user interface.
     Overridden by the "--lang" and "--locale" command-line options or their
@@ -75,16 +75,15 @@ LC_MESSAGES
     and finally "LANG".
 
 
+     
 
-
-Variábeisbles de contorno relacionadas co que se amosa
+        ### Variábeisbles de contorno relacionadas co que se amosa ###
 
 A seguir amósanse algunhas das variábeis de contorno compatíbeis con Simple
 DirectMedia Layer (libSDL) — que Tux Paint utiliza para amosar gráficos,
 reproducir sons e recibir entrada do rato, teclado e joystick — e que poden ser
 útiles para os usuarios de Tux Paint.
-
-SDL_VIDEO_ALLOW_SCREENSAVER
+→ SDL_VIDEO_ALLOW_SCREENSAVER ←
 
     Especifica se Tux Paint debería permitir a execución dun protector de
     pantalla. Pode ser definido como «1» (verdadeiro) polo propio Tux Paint
@@ -92,8 +91,8 @@ SDL_VIDEO_ALLOW_SCREENSAVER
     no ficheiro de configuración.
 
 
-
-SDL_VIDEO_WINDOW_POS
+     
+→ SDL_VIDEO_WINDOW_POS ←
 
     Requests where to position Tux Paint's window, and can be used to specify
     what display to place a fullscreen Tux Paint in a multi-monitor
@@ -102,5 +101,4 @@ SDL_VIDEO_WINDOW_POS
     (e.g. 200,100), or "center" (meaning "center").
 
 
-
-
+     

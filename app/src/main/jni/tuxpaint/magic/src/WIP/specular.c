@@ -39,7 +39,7 @@ Uint32 specular_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int specular_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level)
+int specular_init(magic_api *api, Uint8 disabled_features, Uint8 complexity_level)
 {
   int i;
   char filename[1024];
@@ -51,12 +51,12 @@ int specular_init(magic_api * api, Uint8 disabled_features, Uint8 complexity_lev
 }
 
 
-int specular_get_tool_count(magic_api * api)
+int specular_get_tool_count(magic_api *api)
 {
   return (1);
 }
 
-SDL_Surface *specular_get_icon(magic_api * api, int which)
+SDL_Surface *specular_get_icon(magic_api *api, int which)
 {
   char filename[1024];
 
@@ -66,13 +66,13 @@ SDL_Surface *specular_get_icon(magic_api * api, int which)
 }
 
 
-char *specular_get_name(magic_api * api, int which)
+char *specular_get_name(magic_api *api, int which)
 {
   return strdup(gettext("Specular Reflection"));
 }
 
 
-int specular_get_group(magic_api * api, int which)
+int specular_get_group(magic_api *api, int which)
 {
   return MAGIC_TYPE_PAINTING;
 }
@@ -84,7 +84,7 @@ int specular_get_order(int which)
 }
 
 
-char *specular_get_description(magic_api * api, int which, int mode)
+char *specular_get_description(magic_api *api, int which, int mode)
 {
   return
     strdup(gettext
@@ -92,31 +92,31 @@ char *specular_get_description(magic_api * api, int which, int mode)
 }
 
 
-int specular_requires_colors(magic_api * api, int which)
+int specular_requires_colors(magic_api *api, int which)
 {
   return 0;
 }
 
 
-int specular_modes(magic_api * api, int which)
+int specular_modes(magic_api *api, int which)
 {
   return MODE_PAINT;
 }
 
 
-Uint8 specular_accepted_sizes(magic_api * api, int which, int mode)
+Uint8 specular_accepted_sizes(magic_api *api, int which, int mode)
 {
   return 4;
 }
 
 
-Uint8 specular_default_size(magic_api * api, int which, int mode)
+Uint8 specular_default_size(magic_api *api, int which, int mode)
 {
   return 2;
 }
 
 
-void specular_shutdown(magic_api * api)
+void specular_shutdown(magic_api *api)
 {
   if (snd_effect != NULL)
   {
@@ -126,16 +126,16 @@ void specular_shutdown(magic_api * api)
 
 
 void
-specular_click(magic_api * api, int which, int mode,
-               SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+specular_click(magic_api *api, int which, int mode,
+               SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   specular_drag(api, which, canvas, snapshot, x, y, x, y, update_rect);
 }
 
 
 void
-specular_drag(magic_api * api, int which,
-              SDL_Surface * canvas, SDL_Surface * snapshot, int old_x, int old_y, int x, int y, SDL_Rect * update_rect)
+specular_drag(magic_api *api, int which,
+              SDL_Surface *canvas, SDL_Surface *snapshot, int old_x, int old_y, int x, int y, SDL_Rect *update_rect)
 {
   SDL_LockSurface(snapshot);
   SDL_LockSurface(canvas);
@@ -169,24 +169,24 @@ specular_drag(magic_api * api, int which,
 }
 
 void
-specular_release(magic_api * api, int which,
-                 SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+specular_release(magic_api *api, int which,
+                 SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
 }
 
-void specular_set_color(magic_api * api, int which, SDL_Surface * canvas, SDL_Surface * snapshot, Uint8 r, Uint8 g,
-                        Uint8 b, SDL_Rect * update_rect)
+void specular_set_color(magic_api *api, int which, SDL_Surface *canvas, SDL_Surface *snapshot, Uint8 r, Uint8 g,
+                        Uint8 b, SDL_Rect *update_rect)
 {
 }
 
-void specular_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * snapshot, Uint8 size,
-                       SDL_Rect * update_rect)
+void specular_set_size(magic_api *api, int which, int mode, SDL_Surface *canvas, SDL_Surface *snapshot, Uint8 size,
+                       SDL_Rect *update_rect)
 {
   specular_size = size * 16;
 }
 
 
-void specular_line_callback(void *pointer, int which, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y)
+void specular_line_callback(void *pointer, int which, SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y)
 {
   magic_api *api = (magic_api *) pointer;
   int xx, yy, ysrc;
@@ -214,10 +214,10 @@ void specular_line_callback(void *pointer, int which, SDL_Surface * canvas, SDL_
   }
 }
 
-void specular_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas)
+void specular_switchin(magic_api *api, int which, int mode, SDL_Surface *canvas)
 {
 }
 
-void specular_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas)
+void specular_switchout(magic_api *api, int which, int mode, SDL_Surface *canvas)
 {
 }

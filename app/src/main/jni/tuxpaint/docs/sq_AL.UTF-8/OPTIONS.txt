@@ -1,7 +1,7 @@
                                    Tux Paint
-                                version 0.9.33
+                                version 0.9.34
 
-                             Dokumentim Mundësish
+                         ### Dokumentim Mundësish ###
 
  Të drejta kopjimi © 2002-2024 nga kontribues të ndryshëm; shihni AUTHORS.txt.
                              https://tuxpaint.org/
@@ -45,11 +45,11 @@ each time you start it up.
 
 The file is simply a plain text file containing the options you want enabled:
 
-Përdorues Linux-esh dhe Unix-esh
+                   ### Përdorues Linux-esh dhe Unix-esh ###
 
 /home/emër përdoruesi/.tuxpaintrc
 
-Kartelë Formësimi Për Mbarë Sistemin
+## Kartelë Formësimi Për Mbarë Sistemin ##
 
 Before this file is read, a system-wide configuration file is read. (By
 default, this configuration has no settings enabled.) It is normally located
@@ -57,11 +57,11 @@ at:
 
     /etc/tuxpaint/tuxpaint.conf
 
-Përdorues të MacOS-it
+                         ### Përdorues të MacOS-it ###
 
 /Users/emër përdoruesi/Library/Application Support/TuxPaint/tuxpaint.cfg
 
-Kartelë Formësimi Për Mbarë Sistemin
+## Kartelë Formësimi Për Mbarë Sistemin ##
 
 Before this file is read, a system-wide configuration file is read. (By
 default, this configuration has no settings enabled.) It is normally located
@@ -69,14 +69,14 @@ at:
 
     /Library/Application Support/TuxPaint/tuxpaint.cfg
 
-Përdorues Windows-i
+                          ### Përdorues Windows-i ###
 
 C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\tuxpaint.cfg
 
 You can use NotePad or WordPad to create this file. Be sure to save it as Plain
 Text, and make sure the filename doesn't have ".txt" at the end...
 
-Kartelë Formësimi Për Mbarë Sistemin
+## Kartelë Formësimi Për Mbarë Sistemin ##
 
 Before this file is read, a system-wide configuration file is read. (By
 default, this configuration has no settings enabled.) It is normally located
@@ -84,7 +84,7 @@ at:
 
 C:\Program Files\TuxPaint\tuxpaint.cfg
 
-Haiku Users
+                              ### Haiku Users ###
 
 /boot/home/config/settings/TuxPaint/tuxpaint.conf
 
@@ -97,11 +97,11 @@ Mundësi të Gatshme
 The following settings can be set in the configuration file. (Command-line
 settings will override these. See the "Command-Line Options" section, below.)
 
-Video/Tingull
+                             ### Video/Tingull ###
 
-Video
+## Video ##
 
-fullscreen=yes
+→ fullscreen=yes ←
 
     Run the program in full screen mode, rather than in a window.
 
@@ -110,15 +110,15 @@ fullscreen=yes
     overridden by the command-line option "--windowed".
 
 
-
-fullscreen=native
+     
+→ fullscreen=native ←
 
     Run the program in full screen mode. Additionally, assume the screen's
     current resolution (set by the operating system).
 
 
-
-windowsize=MADHËSI
+     
+→ windowsize=MADHËSI ←
 
     Run the program at a different size (in windowed mode) or at a different
     screen resolution (in fullscreen mode), rather than the default (usually
@@ -130,18 +130,18 @@ windowsize=MADHËSI
 
     Disa shembuj:
 
-      + 640x480
-      + 1024x768
-      + 768x1024
-      + 1600x1200
+      o 640x480
+      o 1024x768
+      o 768x1024
+      o 1600x1200
 
     💡 If only one display is available, and Tux Paint is being run in windowed
     (not fullscreen) mode, and the chosen window size exceeds the capabilities
     of the display, Tux Paint will fall back to the display's dimensions.
 
 
-
-orient=portrait
+     
+→ orient=portrait ←
 
     Swaps the width/height options given to Tux Paint, useful for rotating the
     window on portait displays, such as a tablet PC that's in tablet
@@ -152,16 +152,16 @@ orient=portrait
     be overridden by the command-line option "--orient=landscape".
 
 
-
-native=yes
+     
+→ native=yes ←
 
     When running Tux Paint in fullscreen mode, this assumes the screen's
     current resolution (overriding any "windowsize" option), as set by the
     operating system.
 
 
-
-allowscreensaver=yes
+     
+→ allowscreensaver=yes ←
 
     By default, Tux Paint prevents your system's screensaver from starting up.
     You can override this by using the "allowscreensaver" option. (You can also
@@ -174,11 +174,11 @@ allowscreensaver=yes
     command-line option "--disablescreensaver".
 
 
+     
 
+## Tingull ##
 
-Tingull
-
-nosound=yes
+→ nosound=yes ←
 
     Disable sound effects. (Note: Pressing [Alt] + [S] cannot be used to
     reenable sounds if they were disabled using this option.)
@@ -188,8 +188,8 @@ nosound=yes
     cases, may be overridden by the command-line option "--sound".
 
 
-
-nostereo=yes
+     
+→ nostereo=yes ←
 
     Disable stereo panning support. (Useful for users with hearing impairment
     in one ear, or places where a single speaker or headphone is being used.)
@@ -199,11 +199,11 @@ nostereo=yes
     cases, may be overridden by the command-line option "--stereo".
 
 
+     
 
+## Madhësi Ndërfaqeje ##
 
-Madhësi Ndërfaqeje
-
-buttonsize=MADHËSI
+→ buttonsize=MADHËSI ←
 
     Set the pixel size of buttons in Tux Paint's user interface (overriding the
     default of "48"). Useful when using very high-density displays or coarse
@@ -224,8 +224,8 @@ buttonsize=MADHËSI
     stderr.)
 
 
-
-colorsrows=RRESHTA
+     
+→ colorsrows=RRESHTA ←
 
     How many rows of color palette buttons to show; useful when using a large
     color palette (see "colorfile", above), and/or for use with coarse input
@@ -233,13 +233,13 @@ colorsrows=RRESHTA
     and "3".
 
 
+     
 
+                              ### Mi/Tastierë ###
 
-Mi/Tastierë
+## Kursor ##
 
-Kursor
-
-nofancycursors=yes
+→ nofancycursors=yes ←
 
     This disables the fancy mouse pointer shapes in Tux Paint, and uses your
     environment's normal mouse pointer.
@@ -253,8 +253,8 @@ nofancycursors=yes
     "--fancycursors".
 
 
-
-hidecursor=yes
+     
+→ hidecursor=yes ←
 
     This completely hides the mouse pointer shapes in Tux Paint.
 
@@ -265,11 +265,11 @@ hidecursor=yes
     both cases, may be overridden by the command-line option "--showcursor".
 
 
+     
 
+## Tastierë ##
 
-Tastierë
-
-noshortcuts=yes
+→ noshortcuts=yes ←
 
     This disable keyboard shortcuts (e.g., [Ctrl]-[S] for save, [Ctrl]-[N] for
     a new image, etc.)
@@ -282,11 +282,11 @@ noshortcuts=yes
     both cases, may be overridden by the command-line option "--shortcuts".
 
 
+     
 
+## Mi ##
 
-Mi
-
-grab=yes
+→ grab=yes ←
 
     Tux Paint will attempt to 'grab' the mouse and keyboard, so that the mouse
     is confined to Tux Paint's window, and nearly all keyboard input is passed
@@ -301,8 +301,8 @@ grab=yes
     cases, may be overridden by the command-line option "--dontgrab".
 
 
-
-nowheelmouse=yes
+     
+→ nowheelmouse=yes ←
 
     This disables support for the wheel on mice that have it. (Normally, the
     wheel will scroll the selector menu on the right.)
@@ -312,8 +312,8 @@ nowheelmouse=yes
     In both cases, may be overridden by the command-line option "--wheelmouse".
 
 
-
-nobuttondistinction=yes
+     
+→ nobuttondistinction=yes ←
 
     Prior to Tux Paint 0.9.15, the middle and right buttons on a mouse could
     also be used for clicking. In version 0.9.15, it was changed so that only
@@ -330,13 +330,13 @@ nobuttondistinction=yes
     command-line option "--buttondistinction".
 
 
+     
 
+                               ### Thjeshtim ###
 
-Thjeshtim
+## Thjeshtim Ndërfaqeje ##
 
-Thjeshtim Ndërfaqeje
-
-simpleshapes=yes
+→ simpleshapes=yes ←
 
     Disable the rotation step of the 'Shape' tool. Click, drag and release is
     all that will be needed to draw a shape.
@@ -347,8 +347,8 @@ simpleshapes=yes
     "--complexshapes".
 
 
-
-nooutlines=yes
+     
+→ nooutlines=yes ←
 
     In this mode, much simpler outlines and 'rubber-band' lines are displayed
     when using the Lines, Shapes, Stamps and Eraser tools.
@@ -361,8 +361,8 @@ nooutlines=yes
     both cases, may be overridden by the command-line option "--outlines".
 
 
-
-uppercase=yes
+     
+→ uppercase=yes ←
 
     All text will be rendered only in uppercase (e.g., "Brush" will be
     "BRUSH"). Useful for children who can read, but who have only learned
@@ -373,11 +373,11 @@ uppercase=yes
     both cases, may be overridden by the command-line option "--mixedcase".
 
 
+     
 
+## Madhësi Fillestare Stampe ##
 
-Madhësi Fillestare Stampe
-
-stampsize=MADHËSI
+→ stampsize=MADHËSI ←
 
     Use this option to force Tux Paint to set the starting size of all stamps.
     The MADHËSI value should be between 0 (smallest) and 10 (largest). The size
@@ -387,11 +387,11 @@ stampsize=MADHËSI
     Specify "default" to let Tux Paint decide (its standard behavior).
 
 
+     
 
+## Thjeshtim Kontrolli ##
 
-Thjeshtim Kontrolli
-
-noquit=yes
+→ noquit=yes ←
 
     Disable the on-screen "Quit" button and prevent the [Tasti Escape] key from
     quitting Tux Paint.
@@ -408,8 +408,8 @@ noquit=yes
     cases, may be overridden by the command-line option "--quit".
 
 
-
-nostamps=yes
+     
+→ nostamps=yes ←
 
     This option tells Tux Paint to not load any rubber stamp images, which in
     turn ends up disabling the Stamps tool.
@@ -422,8 +422,8 @@ nostamps=yes
     cases, may be overridden by the command-line option "--stamps".
 
 
-
-nostampcontrols=yes
+     
+→ nostampcontrols=yes ←
 
     Some images in the Stamps tool can be mirrored, flipped, and/or have their
     size changed. This option disables the controls, and only provides the
@@ -435,8 +435,8 @@ nostampcontrols=yes
     "--stampcontrols".
 
 
-
-nostamprotation=yes
+     
+→ nostamprotation=yes ←
 
     This disables the rotation step of the Stamps tool, immediately placing the
     stamp in its regular orientation (with any flipping or mirroring applied)
@@ -451,8 +451,8 @@ nostamprotation=yes
     "--stamprotation".
 
 
-
-nomagiccontrols=yes
+     
+→ nomagiccontrols=yes ←
 
     Some Magic tools have the option of acting like a paintbrush, or affecting
     the entire canvas at once. This option disables the controls, and only
@@ -464,8 +464,8 @@ nomagiccontrols=yes
     "--magiccontrols".
 
 
-
-nomagicsizes=yes
+     
+→ nomagicsizes=yes ←
 
     Some Magic tools offer various size settings. This option disables the
     sizing control, and only provides the tools' default sizes. (Some plugins
@@ -477,8 +477,8 @@ nomagicsizes=yes
     In both cases, may be overridden by the command-line option "--magicsizes".
 
 
-
-ungroupmagictools=yes
+     
+→ ungroupmagictools=yes ←
 
     By default, the Magic tools in Tux Paint are organized into groups of
     similar tools (e.g., all of the color, saturation, darken/lighten tools
@@ -494,8 +494,8 @@ ungroupmagictools=yes
     option "--groupmagictools".
 
 
-
-noshapecontrols=yes
+     
+→ noshapecontrols=yes ←
 
     Disable the control buttons shown when using the Shapes tool that allow
     changing how shapes are drawn — centered around the initial mouse click, or
@@ -507,8 +507,8 @@ noshapecontrols=yes
     "--shapecontrols".
 
 
-
-nolabel=yes
+     
+→ nolabel=yes ←
 
     Disables the Label tool: the tool that allows text entry which can be
     edited later.
@@ -518,8 +518,8 @@ nolabel=yes
     cases, may be overridden by the command-line option "--label".
 
 
-
-nobrushspacing=yes
+     
+→ nobrushspacing=yes ←
 
     Disables the brush spacing option of the Paint and Lines tools. The
     brushes' default spacings will be used.
@@ -533,8 +533,8 @@ nobrushspacing=yes
     "--brushspacing".
 
 
-
-complexity=KOMPLEKSITET
+     
+→ complexity=KOMPLEKSITET ←
 
     Sets the complexity (expertise) level of Tux Paint, which can either
     disable some Magic tools, or cause them to operate differently. (For
@@ -543,19 +543,18 @@ complexity=KOMPLEKSITET
     beginner mode.)
 
     Vlera e KOMPLEKSITET mund të jetë një nga:
-
-    advanced (parazgjedhja)
+    → advanced (parazgjedhja) ←
         "Advanced" — For users familiar with Tux Paint and who can operate more
         complex tools.
-
-    beginner
+         
+    → beginner ←
         "Beginner" — For users comfortable with Tux Paint, but where complex
         tools may cause confusion or frustration.
-
-    novice
+         
+    → novice ←
         "Novice" — For first-time Tux Paint users, users inexperienced with
         computers, or those with special accessibility needs.
-
+         
 
     📜 Note: The complexity option was added to Tux Paint in version 0.9.32.
     Consult the individual Magic tools' documentation.
@@ -565,8 +564,8 @@ complexity=KOMPLEKSITET
     may be overridden by the command-line option "--complexity=advanced".
 
 
-
-notemplateexport=yes
+     
+→ notemplateexport=yes ←
 
     Disables the ability to create a new Template image (based on a saved
     drawing) from within the Open dialog.
@@ -580,8 +579,8 @@ notemplateexport=yes
     option "--templateexport".
 
 
-
-noerase=yes
+     
+→ noerase=yes ←
 
     Disables the ability to erase saved drawings via the "Erase" button on the
     Open dialog, or exported Template images (based on a saved drawing) via the
@@ -595,13 +594,13 @@ noerase=yes
     cases, may be overridden by the command-line option "--erase".
 
 
+     
 
+                                 ### Gjuhë ###
 
-Gjuhë
+## Gjuhë ##
 
-Gjuhë
-
-lang=GJUHË
+→ lang=GJUHË ←
 
     Run Tux Paint in one of the supported languages. Possible choices for
     LANGUAGE currently include:
@@ -863,8 +862,8 @@ lang=GJUHË
         +-----------------------------------------------------------------+
 
 
-
---locale VENDORE
+     
+→ --locale VENDORE ←
 
     Run Tux Paint in one of the support languages. See the "Choosing a
     Different Language" section below for the locale strings (e.g., "de_DE" for
@@ -875,8 +874,8 @@ lang=GJUHË
     setting, if possible.)
 
 
-
-mirrorstamps=yes
+     
+→ mirrorstamps=yes ←
 
     For stamps that can be mirrored, this option sets them to their mirrored
     shape by default.
@@ -890,11 +889,11 @@ mirrorstamps=yes
     "--dontmirrorstamps".
 
 
+     
 
+## Shkronja ##
 
-Shkronja
-
-sysfonts=yes
+→ sysfonts=yes ←
 
     This option causes Tux Paint to attempt to load fonts (for use in the Text
     tool) from your operating system. Normally, Tux Paint will only load the
@@ -905,8 +904,8 @@ sysfonts=yes
     both cases, may be overridden by the command-line option "--nosysfonts".
 
 
-
-alllocalefonts=yes
+     
+→ alllocalefonts=yes ←
 
     Prior to version 0.9.21, Tux Paint loaded all fonts in its own fonts
     directory, including locale-specific ones (e.g., the one for Tibetan, which
@@ -922,8 +921,8 @@ alllocalefonts=yes
     command-line option "--currentlocalefont".
 
 
-
-uifont=EMËR LLOJI SHKRONJASH
+     
+→ uifont=EMËR LLOJI SHKRONJASH ←
 
     This option causes Tux Paint to attempt to load fonts (for use in the Text
     tool) from your operating system. Normally, Tux Paint will only load the
@@ -933,19 +932,19 @@ uifont=EMËR LLOJI SHKRONJASH
     standard behavior).
 
 
+     
 
+                                ### Shtypje ###
 
-Shtypje
+## Leje Shtypjeje ##
 
-Leje Shtypjeje
-
-noprint=yes
+→ noprint=yes ←
 
     Çaktivizoni veçorinë e shtypjeve.
 
 
-
-printdelay=SEKONDA
+     
+→ printdelay=SEKONDA ←
 
     Restrict printing so that printing can occur only once every SEKONDA
     seconds.
@@ -955,11 +954,11 @@ printdelay=SEKONDA
     overridden by the command-line option "--printdelay=0".
 
 
+     
 
+## Shfaq Dialog Shtypësi ##
 
-Shfaq Dialog Shtypësi
-
-altprint=always
+→ altprint=always ←
 
     This causes Tux Paint to always show the printer dialog (or, on Linux/Unix,
     run the "altprintcommand") when the 'Print' button is clicked. In other
@@ -967,8 +966,8 @@ altprint=always
     need to hold [Alt] every time.
 
 
-
-altprint=never
+     
+→ altprint=never ←
 
     This prevents Tux Paint from ever showing the printer dialog (or, on Linux/
     Unix, run the "altprintcommand") when the 'Print' button is clicked. In
@@ -976,8 +975,8 @@ altprint=never
     'Print' button.
 
 
-
-altprint=mod
+     
+→ altprint=mod ←
 
     This is the normal, default behavior. Tux Paint shows a printer dialog (or,
     on Linux/Unix, runs the "altprintcommand"), when the [Alt] key is pressed
@@ -985,11 +984,11 @@ altprint=mod
     prints without showing a dialog.
 
 
+     
 
+## Ruaje Formësimin e Shtypësit ##
 
-Ruaje Formësimin e Shtypësit
-
-    printcfg=yes
+    → printcfg=yes ←
 
         (Vetëm në Windows dhe macOS)
 
@@ -1009,11 +1008,11 @@ Ruaje Formësimin e Shtypësit
         "--noprintcfg".
 
 
+         
+   
+    ## Urdhra Shtypjeje ##
 
-
-    Urdhra Shtypjeje
-
-    printcommand=URDHËR
+    → printcommand=URDHËR ←
 
         (Vetëm në Linux dhe Unix)
 
@@ -1030,8 +1029,8 @@ Ruaje Formësimin e Shtypësit
         to version 0.9.15, you will need to change it.
 
 
-
-    altprintcommand=URDHËR
+         
+    → altprintcommand=URDHËR ←
 
         (Vetëm në Linux dhe Unix)
 
@@ -1046,11 +1045,11 @@ Ruaje Formësimin e Shtypësit
             kprinter
 
 
+         
+   
+    ## Madhësi Letre ##
 
-
-    Madhësi Letre
-
-    papersize=MADHËSI LETRE
+    → papersize=MADHËSI LETRE ←
 
         (Platforms that use Tux Paint's internal PostScript generator — not
         Windows, macOS, BeOS, or Haiku.)
@@ -1067,40 +1066,40 @@ Ruaje Formësimin e Shtypësit
         esheet.
 
 
+         
+   
+                                  ### Ruajtje ###
 
+    ## Ruaje Përsipër Punës së Mëparshme ##
 
-    Ruajtje
-
-    Ruaje Përsipër Punës së Mëparshme
-
-    saveover=yes
+    → saveover=yes ←
 
         This disables the "Save over the old version...?" prompt when saving an
         existing file. With this option, the older version will always be
         replaced by the new version, automatically.
 
 
-
-    saveover=new
+         
+    → saveover=new ←
 
         This also disables the "Save over the old version...?" prompt when
         saving an existing file. This option, however, will always save a new
         file, rather than overwrite the older version.
 
 
-
-    saveover=ask
+         
+    → saveover=ask ←
 
         (Kjo mundësi është përsëritje e panevojshme, ngaqë kjo është
         parazgjedhja.) When saving an existing drawing, you will be first asked
         whether to save over the older version or not.
 
 
+         
+   
+    ## Fillimi ##
 
-
-    Fillimi
-
-    startblank=yes
+    → startblank=yes ←
 
         This causes Tux Paint to display a blank canvas when it first starts
         up, rather than loading the last image that was being edited.
@@ -1111,8 +1110,8 @@ Ruaje Formësimin e Shtypësit
         "--startlast".
 
 
-
-    newcolorslast=yes
+         
+    → newcolorslast=yes ←
 
         Places the blank color options in the New dialog at the end, so that
         any Starters and/or Templates are shown first.
@@ -1123,30 +1122,30 @@ Ruaje Formësimin e Shtypësit
         command-line option "--newcolorsfirst".
 
 
+         
+   
+    ## Drejtori Ruajtjesh dhe Eksportimesh ##
 
-
-    Drejtori Ruajtjesh dhe Eksportimesh
-
-    savedir=DREJTORI
+    → savedir=DREJTORI ←
 
         Use this option to change where Tux Paint's "saved" directory/folder is
         located, which is where Tux Paint saves and opens pictures.
 
         If you do not override it, the default location is:
 
-        Linux / Unix
+        → Linux / Unix ←
             Under a hidden directory in your home directory:
             /home/emër përdoruesi/.tuxpaint/saved/
-
-        Windows
+             
+        → Windows ←
             C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\saved\
-
-        macOS
+             
+        → macOS ←
             /Users/emër përdoruesi/Library/Application Support/TuxPaint/saved/
-
-        Haiku
+             
+        → Haiku ←
             /boot/home/config/settings/TuxPaint/saved/
-
+             
 
         💡 Note: When specifying a Windows drive (e.g., "H:\"), you must also
         specify a subdirectory.
@@ -1159,15 +1158,15 @@ Ruaje Formësimin e Shtypësit
         Shembull: savedir=Z:\tuxpaint\
 
 
-
-    exportdir=DREJTORI
+         
+    → exportdir=DREJTORI ←
 
         Use this option to change where Tux Paint exports files — single
         images, or animated GIF slideshows — for external use.
 
         If you do not override it, the default location is:
 
-          o Linux & Unix — If available, wherever your desktop environment is
+          # Linux & Unix — If available, wherever your desktop environment is
             configured for pictures to be stored, based on your XDG (X Desktop
             Group) configuration. (Try running the command-line "xdg-user-dir
             PICTURES" to find out.)
@@ -1177,12 +1176,12 @@ Ruaje Formësimin e Shtypësit
             Tux Paint will fall back to using that typical directory, if no XDG
             configuration can be read, or nothing is set for
             "XDG_PICTURES_DIR".
-          o Windows - "My Pictures" directory for each user (normaly 
+          # Windows - "My Pictures" directory for each user (normaly 
             "C:\Users\emër përdoruesi\My Pictures")
             You can directly open the folder as follows:
-              # Shtypni “[Windows]+[R]”" që të hapet dialogu “Xhironi …”.
-              # Enter "Shell:My Pictures" in the text box and push [OK].
-          o macOS — TBD!
+              @ Shtypni “[Windows]+[R]”" që të hapet dialogu “Xhironi …”.
+              @ Enter "Shell:My Pictures" in the text box and push [OK].
+          # macOS — TBD!
 
         💡 Note: When the defaults are used, a new "TuxPaint" subdirectory will
         be created and used. (e.g., "/home/emër përdoruesi/Foto/TuxPaint") When
@@ -1199,11 +1198,11 @@ Ruaje Formësimin e Shtypësit
         Shembull: exportdir=/home/penguin/TuxPaintExports
 
 
+         
+   
+    ## Më Tepër Mundësi Ruajtjesh ##
 
-
-    Më Tepër Mundësi Ruajtjesh
-
-    nosave=yes
+    → nosave=yes ←
 
         This disables Tux Paint's ability to save files (and therefore disables
         the on-screen "Save" button). It can be used in situations where the
@@ -1214,8 +1213,8 @@ Ruaje Formësimin e Shtypësit
         both cases, may be overridden by the command-line option "--save".
 
 
-
-    autosave=yes
+         
+    → autosave=yes ←
 
         This prevents Tux Paint from asking whether you want to save the
         current picture when quitting, and assumes you do.
@@ -1226,8 +1225,8 @@ Ruaje Formësimin e Shtypësit
         "--noautosave".
 
 
-
-    reversesort=yes
+         
+    → reversesort=yes ←
 
         This reverses the sorting of the Open and Slideshow dialogs, placing
         the newest images at the top of the list.
@@ -1238,13 +1237,13 @@ Ruaje Formësimin e Shtypësit
         command-line option "--noreversesort".
 
 
+         
+   
+                                 ### Të dhëna ###
 
+    ## Lockfile ##
 
-    Të dhëna
-
-    Lockfile
-
-    nolockfile=yes
+    → nolockfile=yes ←
 
         By default, Tux Paint uses what's known as a 'lockfile' to prevent it
         from being launched more than once in 30 seconds. (This is to avoid
@@ -1266,11 +1265,11 @@ Ruaje Formësimin e Shtypësit
         "--lockfile".
 
 
+         
+   
+    ## Drejtori të Dhënash ##
 
-
-    Drejtori të Dhënash
-
-    datadir=DREJTORI
+    → datadir=DREJTORI ←
 
         Use this option to change where Tux Paint looks for personal data files
         (brushes, stamps, starters, templates, and fonts specific to the
@@ -1282,15 +1281,15 @@ Ruaje Formësimin e Shtypësit
 
         If you do not override it, the default location is:
 
-        Linux / Unix
+        → Linux / Unix ←
             /home/emër përdoruesi/.tuxpaint/
-
-        Windows
+             
+        → Windows ←
             C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\
-
-        macoS
+             
+        → macoS ←
             /Users/emër përdoruesi/Library/Application Support/TuxPaint/
-
+             
 
         📜 Note: Prior to version 0.9.18, Tux Paint would use the same setting
         or default as for "savedir" to search for data files. As of version
@@ -1302,11 +1301,11 @@ Ruaje Formësimin e Shtypësit
         Shembull: datadir=/home/johnny/tuxpaint-data/
 
 
+         
+   
+    ## Kartelë Palete Ngjyrash ##
 
-
-    Kartelë Palete Ngjyrash
-
-    colorfile=EMËR KARTELE
+    → colorfile=EMËR KARTELE ←
 
         You may override Tux Paint's default color palette by creating a plain
         ASCII text file that describes the colors you want, and pointing to
@@ -1333,24 +1332,24 @@ Ruaje Formësimin e Shtypësit
         byte, so "#FFF" is the same as "#FFFFFF", not "#F0F0F0".
 
 
+         
+   
+                ### Përdorim Nga Persona Me Aftësi të Kufizuara ###
 
+    ## Mi ##
 
-    Përdorim Nga Persona Me Aftësi të Kufizuara
-
-    Mi
-
-    mouse-accessibility=yes
+    → mouse-accessibility=yes ←
 
         Nën këtë mënyrë, në vend të klikimit, tërheqjes dhe lënies (p.sh., për
         të vizatuar), ju klikoni, lëvizni dhe klikoni sërish në fund të
         lëvizjes.
 
 
+         
+   
+    ## Tastierë ##
 
-
-    Tastierë
-
-    keyboard=yes
+    → keyboard=yes ←
 
         Kjo lejon të përdoren tastet shigjetë të tastierës për të kontrolluar
         lëvizjen e treguesit të miut (p.sh., për mjedise pa mi, ose për raste
@@ -1358,20 +1357,20 @@ Ruaje Formësimin e Shtypësit
 
         Veçori:
 
-          o Fine movement within canvas, or coarse movement if Shift is held.
-          o Coarse movement within tool button areas.
-          o Kontrolle me taste:
-              # [Left]/[Right]/[Up]/[Down], numpad [1] thru [9]: Move mouse
-              # [Space]/[5]: Click mouse (except when using "Text" or "Label"
+          # Fine movement within canvas, or coarse movement if Shift is held.
+          # Coarse movement within tool button areas.
+          # Kontrolle me taste:
+              @ [Left]/[Right]/[Up]/[Down], numpad [1] thru [9]: Move mouse
+              @ [Space]/[5]: Click mouse (except when using "Text" or "Label"
                 tools)
-              # [Insert]/[F5]: Klikoni me mi (përherë)
-              # [F4] jump mouse between "Tools", "Colors" and canvas areas
-              # If mouse is within "Tools" section on the left, or "Colors"
+              @ [Insert]/[F5]: Klikoni me mi (përherë)
+              @ [F4] jump mouse between "Tools", "Colors" and canvas areas
+              @ If mouse is within "Tools" section on the left, or "Colors"
                 section at the bottom:
-                  @ [F7], [F8]: Move down/up between buttons, respectively
+                  - [F7], [F8]: Move down/up between buttons, respectively
                     (Tools section, only)
-                  @ [F11], [F12]: Move to previous/next button, respectively
-          o To click-and-drag, hold one of the 'click' keys (e.g., [Insert]),
+                  - [F11], [F12]: Move to previous/next button, respectively
+          # To click-and-drag, hold one of the 'click' keys (e.g., [Insert]),
             and use the movement keys (e.g., [Left]).
 
             💡 Note: The "mouse accessibility" feature works with the keyboard
@@ -1380,7 +1379,7 @@ Ruaje Formësimin e Shtypësit
             keys to move around (which will draw), and another 'click' key to
             end the click (stop drawing).
 
-          o A regular mouse and/or joystick may still be used (so you can,
+          # A regular mouse and/or joystick may still be used (so you can,
             e.g., move with the mouse, and click with the keyboard, or
             vice-versa)
 
@@ -1389,18 +1388,18 @@ Ruaje Formësimin e Shtypësit
         both cases, may be overridden by the command-line option "--mouse".
 
 
+         
+   
+    ## Tastierë Në Ekran ##
 
-
-    Tastierë Në Ekran
-
-    onscreen-keyboard=yes
+    → onscreen-keyboard=yes ←
 
         Presents a clickable on-screen keyboard when using the Text and Label
         tools.
 
 
-
-    onscreen-keyboard-layout=LAYOUTNAME
+         
+    → onscreen-keyboard-layout=LAYOUTNAME ←
 
         Selects the initial layout for the on-screen keyboard when using the
         Text and Label tools.
@@ -1408,8 +1407,8 @@ Ruaje Formësimin e Shtypësit
         setting both is redundant.
 
 
-
-    onscreen-keyboard-disable-change=yes
+         
+    → onscreen-keyboard-disable-change=yes ←
 
         Disables the possibility for changing the layout of the on-screen
         keyboard when using the Text and Label tools, useful for simplifying
@@ -1423,192 +1422,192 @@ Ruaje Formësimin e Shtypësit
         by the command-line option "--onscreen-keyboard-disable-change=no".
 
 
+         
+   
+                                 ### Joystick ###
 
+    ## Pajisja Kryesore ##
 
-    Joystick
-
-    Pajisja Kryesore
-
-    joystick-dev=N
+    → joystick-dev=N ←
 
         Specify which joystick device should be used by Tux Paint. Default
         value is 0 (the first joystick).
 
 
-
-    joystick-slowness=SHPEJTËSI
+         
+    → joystick-slowness=SHPEJTËSI ←
 
         Sets a delay at each axis motion, allowing to slow the joystick.
         Allowed values are from 0 to 500. Default value is 15.
 
 
-
-    joystick-threshold=PRAG
+         
+    → joystick-threshold=PRAG ←
 
         Sets the minimum level of axis motion to start moving the pointer.
         Allowed values are from 0 to 32766. Default value is 3200.
 
 
-
-    joystick-maxsteps=HAPA
+         
+    → joystick-maxsteps=HAPA ←
 
         Sets the maximum pixels the pointer will move at once. Allowed values
         are from 1 to 7. Default value is 7.
 
 
+         
+   
+    ## Kapë ##
 
-
-    Kapë
-
-    joystick-hat-slowness=SHPEJTËSI
+    → joystick-hat-slowness=SHPEJTËSI ←
 
         Sets a delay at each automatic motion, allowing to slow the speed of
         the hat. Allowed values are from 0 to 500. Default value is 15.
 
 
-
-    joystick-hat-timeout=MILISEKONDA
+         
+    → joystick-hat-timeout=MILISEKONDA ←
 
         Sets the delay after wich the pointer will start moving automatically
         if the hat is keeped pushed. Allowed values are from 0 to 3000. Default
         value is 1000.
 
 
+         
+   
+    ## Butona për T’u Çaktivizuar ##
 
-
-    Butona për T’u Çaktivizuar
-
-    joystick-buttons-ignore=BUTTON1,BUTTON2,...
+    → joystick-buttons-ignore=BUTTON1,BUTTON2,... ←
 
         A set of joystick button numbers, as seen by SDL, that should be
         ignored. Otherwise, unless they are used by one of the "joystick-btn-"
         options above, buttons will be seen as a mouse left-click.
 
 
+         
 
+## Shkurtore butonash ##
 
-Shkurtore butonash
-
-    joystick-btn-escape=NUMËR BUTONI
+    → joystick-btn-escape=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be used
         to generate a escape event. Useful to dismiss dialogs and quit.
 
 
-
-    joystick-btn-brush=NUMËR BUTONI
+         
+    → joystick-btn-brush=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to përzgjidhni mjetin penela.
 
 
-
-    joystick-btn-stamp=NUMËR BUTONI
+         
+    → joystick-btn-stamp=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to përzgjidhni mjetin stampa.
 
 
-
-    joystick-btn-lines=NUMËR BUTONI
+         
+    → joystick-btn-lines=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to përzgjidhni mjetin për vija.
 
 
-
-    joystick-btn-shapes=NUMËR BUTONI
+         
+    → joystick-btn-shapes=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to përzgjidhni mjetin për forma.
 
 
-
-    joystick-btn-text=NUMËR BUTONI
+         
+    → joystick-btn-text=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to përzgjidhni mjetin për tekst.
 
 
-
-    joystick-btn-label=NUMËR BUTONI
+         
+    → joystick-btn-label=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to përzgjidhni mjetin për etiketa.
 
 
-
-    joystick-btn-fill=NUMËR BUTONI
+         
+    → joystick-btn-fill=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to përzgjidhni mjetin “Mbushje”.
 
 
-
-    joystick-btn-magic=NUMËR BUTONI
+         
+    → joystick-btn-magic=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to përzgjidhni mjetin magjik.
 
 
-
-    joystick-btn-undo=NUMËR BUTONI
+         
+    → joystick-btn-undo=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to thirrni mjetin zhbëje.
 
 
-
-    joystick-btn-redo=NUMËR BUTONI
+         
+    → joystick-btn-redo=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to select mjeti i ribërjeve.
 
 
-
-    joystick-btn-eraser=NUMËR BUTONI
+         
+    → joystick-btn-eraser=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to select mjeti gomë.
 
 
-
-    joystick-btn-new=NUMËR BUTONI
+         
+    → joystick-btn-new=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to launch the dialog for creating a new drawing.
 
 
-
-    joystick-btn-open=NUMËR BUTONI
+         
+    → joystick-btn-open=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to launch the dialog for opening an existing drawing.
 
 
-
-    joystick-btn-save=NUMËR BUTONI
+         
+    → joystick-btn-save=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to ruajeni vizatimin.
 
 
-
-    joystick-btn-pgsetup=NUMËR BUTONI
+         
+    → joystick-btn-pgsetup=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to nis dialogun e ujdisjes së faqes për shtypje.
 
 
-
-    joystick-btn-print=NUMËR BUTONI
+         
+    → joystick-btn-print=NUMËR BUTONI ←
 
         Selects the joystick button number, as seen by SDL, that will be a
         shortcut to shtype.
 
 
-
-
+         
+   
     Anashkalim Mundësish të Formësimit të Ssistemit
 
     If any of the above options are set in a system-wide configuration file
@@ -1633,143 +1632,145 @@ Shkurtore butonash
     Options may also be issued on the command-line when you go to launch Tux
     Paint.
 
-    --fullscreen=yes
-        --fullscreen=native
-        --GJERËSIxLARTËSI
-        --orient=portrait
-        --buttonsize=MADHËSI
-        --colorsrows=RRESHTA
-        --native
-        --allowscreensaver
-        --startblank
-        --nosound
-        --nostereo
-        --noquit
-        --noprint
-        --printdelay=SEKONDA
-        --printcfg
-        --altprintnever
-        --altprintalways
-        --papersize=MADHËSI LETRE
-        --printcommand=URDHËR
-        --altprintcommand=URDHËR
-        --nolockfile
-        --simpleshapes
-        --uppercase
-        --grab
-        --noshortcuts
-        --nowheelmouse
-        --nobuttondistinction
-        --nofancycursors
-        --hidecursor
-        --nooutlines
-        --nostamps
-        --nostampcontrols
-        --nostamprotation
-        --nomagiccontrols
-        --nomagicsizes
-        --noshapecontrols
-        --nolabel
-        --nobrushspacing
-        --newcolorslast
-        --mouse-accessibility
-        --onscreen-keyboard
-        --onscreen-keyboard-layout
-        --onscreen-keyboard-disable-change
-        --joystick-dev
-        --joystick-slowness
-        --joystick-threshold
-        --joystick-maxsteps
-        --joystick-hat-slowness
-        --joystick-hat-timeout
-        --joystick-btn-escape
-        --joystick-btn-brush
-        --joystick-btn-stamp
-        --joystick-btn-lines
-        --joystick-btn-shapes
-        --joystick-btn-text
-        --joystick-btn-label
-        --joystick-btn-magic
-        --joystick-btn-undo
-        --joystick-btn-redo
-        --joystick-btn-eraser
-        --joystick-btn-new
-        --joystick-btn-open
-        --joystick-btn-save
-        --joystick-btn-pgsetup
-        --joystick-btn-print
-        --joystick-buttons-ignore
-        --sysfonts
-        --uifont=EMËR LLOJI SHKRONJASH
-        --alllocalefonts
-        --mirrorstamps
-        --stampsize=MADHËSI
-        --keyboard
-        --savedir DREJTORI
-        --datadir DREJTORI
-        --exportdir DREJTORI
-        --saveover
-        --saveovernew
-        --nosave
-        --autosave
-        --reversesort
-        --lang GJUHË
-        --colorfile KARTELË
+    → --fullscreen=yes
+    --fullscreen=native
+    --GJERËSIxLARTËSI
+    --orient=portrait
+    --buttonsize=MADHËSI
+    --colorsrows=RRESHTA
+    --native
+    --allowscreensaver
+    --startblank
+    --nosound
+    --nostereo
+    --noquit
+    --noprint
+    --printdelay=SEKONDA
+    --printcfg
+    --altprintnever
+    --altprintalways
+    --papersize=MADHËSI LETRE
+    --printcommand=URDHËR
+    --altprintcommand=URDHËR
+    --nolockfile
+    --simpleshapes
+    --uppercase
+    --grab
+    --noshortcuts
+    --nowheelmouse
+    --nobuttondistinction
+    --nofancycursors
+    --hidecursor
+    --nooutlines
+    --nostamps
+    --nostampcontrols
+    --nostamprotation
+    --nomagiccontrols
+    --nomagicsizes
+    --noshapecontrols
+    --nolabel
+    --nobrushspacing
+    --newcolorslast
+    --mouse-accessibility
+    --onscreen-keyboard
+    --onscreen-keyboard-layout
+    --onscreen-keyboard-disable-change
+    --joystick-dev
+    --joystick-slowness
+    --joystick-threshold
+    --joystick-maxsteps
+    --joystick-hat-slowness
+    --joystick-hat-timeout
+    --joystick-btn-escape
+    --joystick-btn-brush
+    --joystick-btn-stamp
+    --joystick-btn-lines
+    --joystick-btn-shapes
+    --joystick-btn-text
+    --joystick-btn-label
+    --joystick-btn-magic
+    --joystick-btn-undo
+    --joystick-btn-redo
+    --joystick-btn-eraser
+    --joystick-btn-new
+    --joystick-btn-open
+    --joystick-btn-save
+    --joystick-btn-pgsetup
+    --joystick-btn-print
+    --joystick-buttons-ignore
+    --sysfonts
+    --uifont=EMËR LLOJI SHKRONJASH
+    --alllocalefonts
+    --mirrorstamps
+    --stampsize=MADHËSI
+    --keyboard
+    --savedir DREJTORI
+    --datadir DREJTORI
+    --exportdir DREJTORI
+    --saveover
+    --saveovernew
+    --nosave
+    --autosave
+    --reversesort
+    --lang GJUHË
+    --colorfile KARTELË
+    ←
 
         These enable or correspond to the configuration file options described
         above.
 
 
-
-    --windowed
-        --800x600
-        --orient=landscape
-        --disablescreensaver
-        --startlast
-        --sound
-        --stereo
-        --quit
-        --print
-        --printdelay=0
-        --noprintcfg
-        --altprintmod
-        --lockfile
-        --complexshapes
-        --mixedcase
-        --dontgrab
-        --shortcuts
-        --wheelmouse
-        --buttondistinction
-        --fancycursors
-        --showcursor
-        --outlines
-        --stamps
-        --stampcontrols
-        --stamprotation
-        --magiccontrols
-        --magicsizes
-        --shapecontrols
-        --label
-        --brushspacing
-        --newcolorsfirst
-        --nosysfonts
-        --currentlocalefont
-        --uifont=default
-        --dontmirrorstamps
-        --stampsize=default
-        --mouse
-        --saveoverask
-        --save
-        --noautosave
-        --noreversesort
+         
+    → --windowed
+    --800x600
+    --orient=landscape
+    --disablescreensaver
+    --startlast
+    --sound
+    --stereo
+    --quit
+    --print
+    --printdelay=0
+    --noprintcfg
+    --altprintmod
+    --lockfile
+    --complexshapes
+    --mixedcase
+    --dontgrab
+    --shortcuts
+    --wheelmouse
+    --buttondistinction
+    --fancycursors
+    --showcursor
+    --outlines
+    --stamps
+    --stampcontrols
+    --stamprotation
+    --magiccontrols
+    --magicsizes
+    --shapecontrols
+    --label
+    --brushspacing
+    --newcolorsfirst
+    --nosysfonts
+    --currentlocalefont
+    --uifont=default
+    --dontmirrorstamps
+    --stampsize=default
+    --mouse
+    --saveoverask
+    --save
+    --noautosave
+    --noreversesort
+    ←
 
         These options can be used to override any settings made in the
         configuration file. (If the option isn't set in the configuration file
         (s), no overriding option is necessary.)
 
 
-
-    --nosysconfig
+         
+    → --nosysconfig ←
 
         This prevents the system-wide configuration file (e.g. 
         "/etc/tuxpaint/tuxpaint.conf" on Linux), from being read.
@@ -1779,53 +1780,53 @@ Shkurtore butonash
         used.
 
 
-
-
-    Mundësi Informative Për Rresht Urdhrash
+         
+   
+                  ### Mundësi Informative Për Rresht Urdhrash ###
 
     The following options display some informative text on the screen. Tux
     Paint doesn't actually start up and run afterwards, however.
 
-    --version
-        --verbose-version
+    → --version
+    --verbose-version ←
 
         Display the version number and date of the copy of Tux Paint you are
         running. The "--verbose-version" also lists what compile-time options
         were set. (See INSTALL and FAQ).
 
 
-
-    --copying
+         
+    → --copying ←
 
         Show brief license information about copying Tux Paint.
 
 
-
-    --usage
+         
+    → --usage ←
 
         Display the list of available command-line options.
 
 
-
-    --help
+         
+    → --help ←
 
         Display brief help on using Tux Paint.
 
 
-
-    --lang help
+         
+    → --lang help ←
 
         Display a list of available languages in Tux Paint.
 
 
-
-    --joystick-dev list
+         
+    → --joystick-dev list ←
 
         Display list of attached joysticks available to Tux Paint.
 
 
-
-
+         
+   
     Zgjedhja e një Gjuhe Tjetër
 
     Tux Paint has been translated into a number of languages. To access the
@@ -1838,7 +1839,7 @@ Shkurtore butonash
 
     Use the option "--lang help" to list the language options available.
 
-    Gjuhë të Gatshme
+                             ### Gjuhë të Gatshme ###
 
     +-------------------------------------------------------------------------+
     |                  |      Gjuhë       |     Gjuhë      |   Input Method   |
@@ -2139,7 +2140,7 @@ Shkurtore butonash
     can be used to cycle through the supported input methods while the Text
     tool is active.
 
-    Ujdisje e Vendore së Mjedisit Tuaj
+                    ### Ujdisje e Vendore së Mjedisit Tuaj ###
 
     Changing your locale will affect much of your environment.
 
@@ -2150,7 +2151,7 @@ Shkurtore butonash
     If you haven't already set your environment's locale, the following will
     briefly explain how:
 
-    Përdorues të Linux-it/Unix-it
+    ## Përdorues të Linux-it/Unix-it ##
 
     First, be sure the locale you want to use is enabled by editing the file "/
     etc/locale.gen" on your system and then running the program "locale-gen" as
@@ -2178,7 +2179,7 @@ Shkurtore butonash
         setenv LANG es_ES ; \
         tuxpaint
 
-    Përdorues Windows-i
+    ## Përdorues Windows-i ##
 
     Tux Paint will recognize the current locale and use the appropriate files
     by default. So this section is only for people trying different languages.
@@ -2203,7 +2204,7 @@ Shkurtore butonash
       + Edit the value of the parameter "LANG" (create it, if it doesn't
         exists).
    
-    Shkronja Speciale
+                             ### Shkronja Speciale ###
 
     Some languages require special fonts be installed. These font files (which
     are in TrueType format (TTF)), are much too large to include with the Tux

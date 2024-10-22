@@ -1,7 +1,7 @@
 /*
   Strings -- draws string art.
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 #include "tp_magic_api.h"
 #include "SDL_image.h"
@@ -84,7 +84,7 @@ Uint32 string_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int string_modes(magic_api * api ATTRIBUTE_UNUSED, int which)
+int string_modes(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   if (which == STRING_TOOL_FULL_BY_OFFSET)
     return (MODE_PAINT);
@@ -92,9 +92,9 @@ int string_modes(magic_api * api ATTRIBUTE_UNUSED, int which)
     return (MODE_PAINT_WITH_PREVIEW);
 }
 
-void string_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
-                      Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void string_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                      Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   string_r = r;
   string_g = g;
@@ -103,12 +103,12 @@ void string_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
 
 
 
-int string_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int string_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return STRING_NUMTOOLS;
 }
 
-SDL_Surface *string_get_icon(magic_api * api, int which)
+SDL_Surface *string_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -129,22 +129,22 @@ SDL_Surface *string_get_icon(magic_api * api, int which)
 }
 
 
-char *string_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *string_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   switch (which)
   {
   case STRING_TOOL_FULL_BY_OFFSET:
-    return strdup(gettext_noop("String edges"));
+    return strdup(gettext("String edges"));
     break;
   case STRING_TOOL_TRIANGLE:
-    return strdup(gettext_noop("String corner"));
+    return strdup(gettext("String corner"));
     break;
   default:
-    return strdup(gettext_noop("String 'V'"));
+    return strdup(gettext("String 'V'"));
   }
 }
 
-int string_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int string_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_ARTISTIC;
 }
@@ -165,30 +165,30 @@ int string_get_order(int which)
 }
 
 
-char *string_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *string_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   switch (which)
   {
   case STRING_TOOL_FULL_BY_OFFSET:
     return
-      strdup(gettext_noop
+      strdup(gettext
              ("Click and drag to draw string art. Drag top-bottom to draw less or more lines, left or right to make a bigger hole."));
     break;
   case STRING_TOOL_TRIANGLE:
-    return strdup(gettext_noop("Click and drag to draw arrows made of string art."));
+    return strdup(gettext("Click and drag to draw arrows made of string art."));
     break;
   default:
-    return strdup(gettext_noop("Draw string art arrows with free angles."));
+    return strdup(gettext("Draw string art arrows with free angles."));
   }
 }
 
-int string_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int string_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-void string_release(magic_api * api, int which,
-                    SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void string_release(magic_api *api, int which,
+                    SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   int dx, dy;
 
@@ -207,7 +207,7 @@ void string_release(magic_api * api, int which,
   }
 }
 
-int string_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int string_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -223,7 +223,7 @@ int string_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8
   return (1);
 }
 
-void string_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void string_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   int i = 0;
 
@@ -238,9 +238,9 @@ void string_shutdown(magic_api * api ATTRIBUTE_UNUSED)
   }
 }
 
-void string_switchin(magic_api * api ATTRIBUTE_UNUSED,
+void string_switchin(magic_api *api ATTRIBUTE_UNUSED,
                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED)
+                     SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED)
 {
   canvas_backup =
     SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
@@ -248,9 +248,9 @@ void string_switchin(magic_api * api ATTRIBUTE_UNUSED,
                          canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 }
 
-void string_switchout(magic_api * api ATTRIBUTE_UNUSED,
+void string_switchout(magic_api *api ATTRIBUTE_UNUSED,
                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * snapshot ATTRIBUTE_UNUSED)
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *snapshot ATTRIBUTE_UNUSED)
 {
   SDL_FreeSurface(canvas_backup);
   canvas_backup = NULL;
@@ -260,7 +260,7 @@ void string_switchout(magic_api * api ATTRIBUTE_UNUSED,
 
 
 void string_callback(void *ptr, int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                     SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -268,7 +268,7 @@ void string_callback(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 void string_callback_xor(void *ptr, int which ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                         SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -276,8 +276,8 @@ void string_callback_xor(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 
-void string_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void string_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                  SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   SDL_BlitSurface(canvas, NULL, canvas_backup, NULL);
 
@@ -289,8 +289,8 @@ void string_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 }
 
 static void string_draw_full_by_offset(void *ptr, int which ATTRIBUTE_UNUSED,
-                                       SDL_Surface * canvas,
-                                       SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+                                       SDL_Surface *canvas,
+                                       SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   magic_api *api = (magic_api *) ptr;
   int u;
@@ -388,9 +388,9 @@ void compute_middle(int start_point, int end_point, int vertex, int *middle)
   *middle = min(*middle, vertex) + (max(*middle, vertex) - min(*middle, vertex)) / 2;
 }
 
-void string_draw_triangle_preview(magic_api * api, int which,
-                                  SDL_Surface * canvas,
-                                  SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void string_draw_triangle_preview(magic_api *api, int which,
+                                  SDL_Surface *canvas,
+                                  SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   int middle_x, middle_y;
 
@@ -411,9 +411,9 @@ void string_draw_triangle_preview(magic_api * api, int which,
   api->line((void *)api, which, canvas, snapshot, string_ox, y, middle_x, middle_y, 1, string_callback_xor);
 }
 
-void string_draw_angle_preview(magic_api * api, int which,
-                               SDL_Surface * canvas, SDL_Surface * snapshot,
-                               int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+void string_draw_angle_preview(magic_api *api, int which,
+                               SDL_Surface *canvas, SDL_Surface *snapshot,
+                               int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   int middle_x, middle_y;
   int dx, dy;
@@ -444,10 +444,10 @@ void string_draw_angle_preview(magic_api * api, int which,
   api->line((void *)api, which, canvas, snapshot, x, y, middle_x, middle_y, 1, string_callback_xor);
 }
 
-void string_draw_angle(magic_api * api, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas,
-                       SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                       int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+void string_draw_angle(magic_api *api, int which ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas,
+                       SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                       int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   float first_arm_step_x, first_arm_step_y, second_arm_step_x, second_arm_step_y;
   int i;
@@ -480,9 +480,9 @@ void string_draw_angle(magic_api * api, int which ATTRIBUTE_UNUSED,
   }
 }
 
-void string_draw_triangle(magic_api * api, int which ATTRIBUTE_UNUSED,
-                          SDL_Surface * canvas, SDL_Surface * snapshot,
-                          int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void string_draw_triangle(magic_api *api, int which ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas, SDL_Surface *snapshot,
+                          int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   SDL_BlitSurface(canvas_backup, 0, canvas, 0);
   scale_coords(&ox, &oy, &x, &y);
@@ -496,9 +496,9 @@ void string_draw_triangle(magic_api * api, int which ATTRIBUTE_UNUSED,
   string_draw_angle((void *)api, which, canvas, snapshot, string_ox, string_oy, x, y, update_rect);
 }
 
-void string_draw_wrapper(magic_api * api, int which,
-                         SDL_Surface * canvas, SDL_Surface * snapshot, int ox,
-                         int oy, int x, int y, SDL_Rect * update_rect)
+void string_draw_wrapper(magic_api *api, int which,
+                         SDL_Surface *canvas, SDL_Surface *snapshot, int ox,
+                         int oy, int x, int y, SDL_Rect *update_rect)
 {
   if (which == STRING_TOOL_FULL_BY_OFFSET)
     string_draw_full_by_offset((void *)api, which, canvas, snapshot, x, y, update_rect);
@@ -526,8 +526,8 @@ void string_set_vertex(int x, int y)
     string_vertex_done = 1;
 }
 
-void string_drag(magic_api * api, int which,
-                 SDL_Surface * canvas, SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void string_drag(magic_api *api, int which,
+                 SDL_Surface *canvas, SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   if ((x < canvas->w) && (y < canvas->h) && (ox < canvas->w)
       && (oy < canvas->h) && ((signed)x > 0) && ((signed)y > 0) && ((signed)ox > 0) && ((signed)oy > 0))
@@ -541,18 +541,18 @@ void string_drag(magic_api * api, int which,
 
 
 
-Uint8 string_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 string_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 string_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 string_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void string_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                     Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void string_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                     Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

@@ -1,5 +1,5 @@
                                    Tux Paint
-                                version 0.9.33
+                                version 0.9.34
                            Advanced Stamps 'How-To'
 
      Copyright © 2006-2024 by Albert Cahalan and others; see AUTHORS.txt.
@@ -18,7 +18,7 @@
 +----------------------------------------+
 -------------------------------------------------------------------------------
 
-About this 'How-To'
+                          ### About this 'How-To' ###
 
     This 'How-To' assumes that you want to make an excellent Tux Paint stamp,
     in PNG bitmapped format, from a JPEG image (e.g., a digital photograph).
@@ -32,9 +32,9 @@ About this 'How-To'
 
 -------------------------------------------------------------------------------
 
-Image choice is crucial
+                        ### Image choice is crucial ###
 
-    License
+    ## License ##
 
         If you wish to submit artwork to the Tux Paint developers for
         consideration for inclusion in the official project, or if you wish to
@@ -55,7 +55,7 @@ Image choice is crucial
         For personal use, any image you can legitimately modify and use for
         your own personal use should be fine.
 
-    Image Size and Orientation
+    ## Image Size and Orientation ##
 
         You need an image that has a useful orientation. Perspective is an
         enemy. Images that show an object from the corner are difficult to fit
@@ -82,7 +82,7 @@ Image choice is crucial
 
 -------------------------------------------------------------------------------
 
-Prepare the image
+                           ### Prepare the image ###
 
     First of all, be sure to avoid re-saving the image as a JPEG. This causes
     quality loss. There is a special tool called jpegtran that lets you crop an
@@ -119,7 +119,7 @@ Prepare the image
 
 -------------------------------------------------------------------------------
 
-Prepare the mask
+                           ### Prepare the mask ###
 
     Get used to doing [Control]-click and [Alt]-click on the thumbnail images
     in the layers dialog. You will need this to control what you are looking at
@@ -178,7 +178,7 @@ Prepare the mask
 
 -------------------------------------------------------------------------------
 
-Replace the fringe and junk pixels
+                  ### Replace the fringe and junk pixels ###
 
     Still viewing the mask, select by color. Choose black. Shrink the selection
     by several pixels, being sure to NOT shrink from the edges of the mask (the
@@ -240,7 +240,7 @@ Replace the fringe and junk pixels
 
 -------------------------------------------------------------------------------
 
-Save the image for Tux Paint
+                     ### Save the image for Tux Paint ###
 
     It is very easy to ruin your hard work. Image editors can silently destroy
     pixels in 0% opaque areas. The conditions under which this happens may vary
@@ -251,7 +251,7 @@ Save the image for Tux Paint
     save space (and hide your mistakes), you are almost certain to destroy all
     the 0% opaque areas. So here is a better way...
 
-    A Safer Way to Save
+    ## A Safer Way to Save ##
 
         Drag the mask from the layers dialog to the unused portion of the
         toolbar (right after the last drawing tool). This will create a new

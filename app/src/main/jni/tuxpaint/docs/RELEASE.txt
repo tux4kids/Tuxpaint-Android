@@ -1,5 +1,7 @@
 Release checklist for Tux Paint
-Last updated 2024-07-06 -bjk
+
+Last updated 2024-10-18
+Bill Kendrick <bill@newbreedsoftware.com>
 
 During development
 ------------------
@@ -18,6 +20,9 @@ Make sure new features are recorded in "docs/CHANGES.txt", the
 docs (now maintained in the "tuxpaint-docs" repository), and
 in Tux Paint's appdata file (which is generated, with translated
 text from PO files, based on "org.tuxpaint.Tuxpaint.appdata.xml.in").
+
+When appropriate, they can be added to the "Features" page of
+the website (maintained in the "tuxpaint-website" repository).
 
 
 Preparing
@@ -77,6 +82,9 @@ a .tar.gz source tarball, and making the tarball available for download.
      * docs/en/html/SIGNALS.html
      * docs/en/html/SVG.html
 
+     And also run "make" in "magic/magic-docs/", to produce plaintext
+     alternatives for the various magic tools.
+
    * Manual page (manpage)
 
      NOTE: Also maintained in "tuxpaint-docs" now; see above.
@@ -101,6 +109,21 @@ Time to release:
    $ git push origin tuxpaint-0_9_25-2020-12-27 # or --tags
    $ make release
 
+   * About release candidates (beta versions):
+
+     Prior to a final release, we typically make
+     "release candidates" (rc) for the purpose of both
+     (a) having port maintainers exercise their build development,
+     and report back any problems -- once mended, additional "rc"s
+     can be rolled; and (b) providing beta builds for end-users
+     to try out (with the understanding that things may be
+     unstable).
+
+     Set the `VER_VERSION` in the Makefile to denote the release
+     candidate (e.g., "0.9.34-rc1").  Commit, and follow the steps
+     above for making a release.  Use a tag includes mentions the
+     release candidate, e.g. "tuxpaint-0_9_34-rc1-2024-10-16".
+
  * Upload each project's ".tar.gz" file from their "build/" subdirs
    to ftp.tuxpaint.org.
 
@@ -120,6 +143,7 @@ Time to release:
  * At SourceForge, go to "Files" and use "Add Folder" under each project
    to create new release file subdirectories.  (e.g., "0.9.25" under
    https://sourceforge.net/projects/tuxpaint/files/tuxpaint/)
+   [Or, you can just use `mkdir` command in the `sftp` client, below.]
 
  * Upload the files!  Either from local copies, via a web browser,
    or by SCP, Rsync, or SFTP (see
@@ -143,11 +167,27 @@ Time to release:
 
 Website updates
 ---------------
+ * Link to the downloads on the various pages under
+   https://tuxpaint.org/download/
+   + If a release candidate, post to the "beta" pages and
+     link to them, and activate the main
+     https://tuxpaint.org/beta/ page, too
+   + If a final release, shut off the "beta" pages, if any
+     are active
+   + For some 3rd party software repositories
+     (e.g. Flathub for Linux Flatpak, Haiku Depot, etc.),
+     you will need to pay attention to when the new release
+     lands, over the coming days/weeks.
+
  * List new features on https://tuxpaint.org/features/
 
  * Add any new requirements to https://tuxpaint.org/requirements/
 
  * Create a press release under https://tuxpaint.org/latest/
+
+ * Copy the docs from the release (README, FAQ, etc.) onto the
+   website so users can find it online at https://tuxpaint.org/docs/
+   (use the `sync_docs.sh` script)
 
 Announcements
 -------------

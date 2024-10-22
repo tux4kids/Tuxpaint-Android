@@ -127,6 +127,16 @@ typedef struct magic_api_t {
      loudest) */
   void (*playsound)(Mix_Chunk *, int, int);
 
+  /* Asks Tux Paint whether a sound is currently being played (by 'playsound()') */
+  int (*playingsound)(void);
+
+  /* Asks Tux Paint to pause the sound being played by 'playsound()' */
+  void (*pausesound)(void);
+
+  /* Asks Tux Paint to resume (unpause) the sound being played by
+     'playsound()' (if any) */
+  void (*unpausesound)(void);
+
   /* Asks Tux Paint to stop playing the sound played by 'playsound()' */
   void (*stopsound)(void);
 

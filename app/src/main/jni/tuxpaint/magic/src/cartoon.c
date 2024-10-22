@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: December 29, 2023
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -75,7 +75,7 @@ void cartoon_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas
 
 
 // No setup required:
-int cartoon_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int cartoon_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -91,13 +91,13 @@ Uint32 cartoon_api_version(void)
 }
 
 // We have multiple tools:
-int cartoon_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int cartoon_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (1);
 }
 
 // Load our icons:
-SDL_Surface *cartoon_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *cartoon_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -107,13 +107,13 @@ SDL_Surface *cartoon_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
 }
 
 // Return our names, localized:
-char *cartoon_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *cartoon_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Cartoon")));
+  return (strdup(gettext("Cartoon")));
 }
 
 // Return our groups
-int cartoon_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int cartoon_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_COLOR_FILTERS;
 }
@@ -125,21 +125,21 @@ int cartoon_get_order(int which ATTRIBUTE_UNUSED)
 }
 
 // Return our descriptions, localized:
-char *cartoon_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+char *cartoon_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
   {
-    return (strdup(gettext_noop("Click and drag the mouse around to turn the picture into a cartoon.")));
+    return (strdup(gettext("Click and drag the mouse around to turn the picture into a cartoon.")));
   }
   else
   {
-    return (strdup(gettext_noop("Click to turn the entire picture into a cartoon.")));
+    return (strdup(gettext("Click to turn the entire picture into a cartoon.")));
   }
 }
 
 // Do the effect:
 
-void cartoon_apply_colors(magic_api * api, SDL_Surface * surf, int xx, int yy)
+void cartoon_apply_colors(magic_api *api, SDL_Surface *surf, int xx, int yy)
 {
   Uint8 r, g, b;
   float hue, sat, val;
@@ -165,7 +165,7 @@ void cartoon_apply_colors(magic_api * api, SDL_Surface * surf, int xx, int yy)
 }
 
 
-void cartoon_apply_outline(magic_api * api, int xx, int yy)
+void cartoon_apply_outline(magic_api *api, int xx, int yy)
 {
   Uint8 r, g, b;
   Uint8 r1, g1, b1, r2, g2, b2;
@@ -189,7 +189,7 @@ void cartoon_apply_outline(magic_api * api, int xx, int yy)
 
 
 static void do_cartoon(void *ptr, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                       SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   int xx, yy;
@@ -207,8 +207,8 @@ static void do_cartoon(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 // Affect the canvas on drag:
-void cartoon_drag(magic_api * api, int which, SDL_Surface * canvas,
-                  SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void cartoon_drag(magic_api *api, int which, SDL_Surface *canvas,
+                  SDL_Surface *last, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, do_cartoon);
 
@@ -236,8 +236,8 @@ void cartoon_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void cartoon_click(magic_api * api, int which, int mode,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void cartoon_click(magic_api *api, int which, int mode,
+                   SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   int effect_x, effect_y;
 
@@ -283,37 +283,37 @@ void cartoon_click(magic_api * api, int which, int mode,
 }
 
 // Affect the canvas on release:
-void cartoon_release(magic_api * api ATTRIBUTE_UNUSED,
+void cartoon_release(magic_api *api ATTRIBUTE_UNUSED,
                      int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                     SDL_Surface * last ATTRIBUTE_UNUSED,
-                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED,
+                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // No setup happened:
-void cartoon_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void cartoon_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (cartoon_snd != NULL)
     Mix_FreeChunk(cartoon_snd);
 }
 
 // Record the color from Tux Paint:
-void cartoon_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+void cartoon_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
                        Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                       SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                       SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // Use colors:
-int cartoon_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int cartoon_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void cartoon_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+void cartoon_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   Uint32 amask;
 
@@ -326,20 +326,20 @@ void cartoon_switchin(magic_api * api ATTRIBUTE_UNUSED,
                                      canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, amask);
 }
 
-void cartoon_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void cartoon_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
   if (result_surf != NULL)
     SDL_FreeSurface(result_surf);
 }
 
-int cartoon_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int cartoon_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
 }
 
 
-Uint8 cartoon_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+Uint8 cartoon_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
     return 8;
@@ -347,14 +347,14 @@ Uint8 cartoon_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBU
     return 0;
 }
 
-Uint8 cartoon_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 cartoon_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 4;
 }
 
-void cartoon_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
-                      SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void cartoon_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
+                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   cartoon_radius = size * 4;
 }

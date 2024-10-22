@@ -4,14 +4,14 @@
 # Various contributors (see AUTHORS.txt)
 # https://tuxpaint.org/
 
-# June 14, 2002 - July 8, 2024
+# June 14, 2002 - October 16, 2024
 
 
 # The version number, for release:
 # (append "-rc#", e.g. "-rc1", when making release candidates
 # for beta testing)
 
-VER_VERSION:=0.9.33
+VER_VERSION:=0.9.34-rc1
 
 # We are always SDL2 now, so don't need "-sdl2"
 VER_FLAVOR:=""
@@ -26,7 +26,7 @@ else
   VER_DATE=$(shell date "+%Y-%m-%d")
 endif
 
-MAGIC_API_VERSION:=0x0000000A
+MAGIC_API_VERSION:=0x0000000B
 
 # Need to know the OS
 SYSNAME:=$(shell uname -s)
@@ -1345,7 +1345,7 @@ obj/playsound.o:	src/playsound.c src/playsound.h \
 	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/playsound.c -o obj/playsound.o
 
-obj/fill.o:	src/fill.c src/fill.h \
+obj/fill.o:	src/fill.c src/fill.h src/fill_tools.h \
 		src/rgblinear.h src/playsound.h src/pixels.h
 	@echo
 	@echo "...Compiling flood fill tool..."
@@ -1463,10 +1463,10 @@ obj:
 MAGIC_SDL_CPPFLAGS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --cflags)
 
 # FIXME: Expose SDL_rotozoom to Magic API? -bjk 2021.09.06
-windows_MAGIC_SDL_LIBS:=-L/usr/local/lib $(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
+windows_MAGIC_SDL_LIBS:=-L/usr/local/lib $(LIBMINGW) $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB) -lSDL2_gfx
 os2_MAGIC_SDL_LIBS:=-L/@unixroot/usr/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
-macos_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
-ios_MAGIC_SDL_LIBS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
+macos_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB) -lSDL2_gfx
+ios_MAGIC_SDL_LIBS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB) -lSDL2_gfx
 beos_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
 linux_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
 MAGIC_SDL_LIBS:=$($(OS)_MAGIC_SDL_LIBS)

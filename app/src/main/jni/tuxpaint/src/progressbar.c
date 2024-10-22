@@ -39,7 +39,7 @@ int progress_bar_disabled, prog_bar_ctr;
  *
  * @param screen Screen surface
  */
-void show_progress_bar_(SDL_Surface * screen, SDL_Texture * texture, SDL_Renderer * renderer)
+void show_progress_bar_(SDL_Surface *screen, SDL_Texture *texture, SDL_Renderer *renderer)
 {
   SDL_Rect dest, src, r;
   int x;

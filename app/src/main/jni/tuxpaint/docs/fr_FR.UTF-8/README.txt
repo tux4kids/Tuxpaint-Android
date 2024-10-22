@@ -1,12 +1,12 @@
                                    Tux Paint
-                                version 0.9.33
+                                version 0.9.34
 
-                     Un programme simple pour les enfants
+                  ## Un programme simple pour les enfants ##
 
        Copyright © 2002-2024 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               juillet 17, 2024
+                               octobre 21, 2024
 
 +-------------------------------------------------------+
 |                  Table des matières                   |
@@ -44,7 +44,7 @@
 
 I. À propos de Tux Paint
 
-A. Qu'est-ce que "Tux Paint" ?
+                    ### A. Qu'est-ce que "Tux Paint" ? ###
 
 Tux Paint est un programme de dessin gratuit conçu pour les jeunes enfants
 (enfants de 3 ans et plus). Il possède une interface simple et facile à
@@ -53,46 +53,46 @@ encourager et guider les enfants lorsqu'ils utilisent le programme. Sont
 fournis un canevas vierge et un ensemble d'outils de dessin pour aider votre
 enfant à être créatif.
 
-B. Objectifs
+                             ### B. Objectifs ###
 
-Facile et amusant
+→ Facile et amusant ←
     Tux Paint se veut un simple programme de dessin pour les jeunes enfants. Il
     ne s'agit pas d'un programme de dessin à usage général. Il se veut amusant
     et facile à utiliser. Les effets sonores et un personnage de dessin animé
     permettent à l'utilisateur de savoir ce qui se passe tout en le
     divertissant. Il existe également des pointeurs de souris, de style dessin
     animé, extra-larges.
-
-Flexibilité
+     
+→ Flexibilité ←
     Tux Paint est extensible. Les brosses et les formes de "tampon en
     caoutchouc" peuvent être déposées et retirées. Par exemple, un enseignant
     peut apporter une collection de formes animales et demander à ses élèves de
     dessiner un écosystème. Chaque forme peut avoir un son qui l'accompagne et
     un texte est affiché lorsque l'enfant sélectionne la forme.
-
-Portabilité
+     
+→ Portabilité ←
     Tux Paint est portable sur diverses plates-formes informatiques: Windows,
     Macintosh, Linux, etc. L'interface est la même sur toutes. Tux Paint
     fonctionne correctement sur les systèmes plus anciens (comme un Pentium
     133), et peut être modifié pour mieux fonctionner sur des systèmes lents.
-
-Simplicité
+     
+→ Simplicité ←
     Il n'y a pas d'accès direct à la complexité sous-jacente de l'ordinateur.
     L'image en cours est conservée lorsque le programme se ferme et réapparaît
     au redémarrage. L'enregistrement d'images ne nécessite pas la création de
     noms de fichiers ou l'utilisation du clavier. L'ouverture d'une image se
     fait en la sélectionnant dans une collection de vignettes. L'accès à
     d'autres fichiers sur l'ordinateur est restreint.
-
-Accessibilité
+     
+→ Accessibilité ←
     Tux Paint offre un grand nombre d'options pour l'accessibilité, comprenant
     l'augmentation de la taille des boutons de contrôle, le changement des
     fontes utilisateur, des options pour contrôler le pointeur de souris en
     utilisant le clavier ou d'autres dispostifs d'entrée (joystick, manette de
     jeu, etc ..), un clavier virtuel, et des clics de souris "collants".
+     
 
-
-C. Licence
+                              ### C. Licence ###
 
 Tux Paint est un projet Open Source, un logiciel libre publié sous la licence
 publique générale GNU (GPL). Il est gratuit et le «code source» du programme
@@ -102,47 +102,76 @@ logiciel sous GPL.)
 
 Voir COPYING.txt pour le texte complet de la licence GPL.
 
-D. Qu'y a-t-il de neuf dans la version 0.9.33 de Tux Paint ?
+     ### D. Qu'y a-t-il de neuf dans la version 0.9.34 de Tux Paint ? ###
 
-Transparent Erasers
-    Erasers that lightly expose more and more of the background.
-
-Dither magic tools
-    Transform parts of an image into a dithered pattern of dots.
-
-Filled Polygon magic tool
-    Create polygons by placing three or more connected points on the canvas.
-
-3D Glasses magic tool updated
-    Different anaglyphic color separations now offered (via the 'size'
-    controls), unless running Tux Paint in 'Novice' complexity level.
-
-Magic tool ungrouping option
-    The numerous Magic tools can be presented as a single long list (as in Tux
-    Paint prior to 0.9.27), rather than paged groups.
-
-Brush descriptions
-    Brushes (used by Paint and Line tools) can now include descriptions that
-    appear when the brush is selected.
-
-New brushes
-    New brushes for the Paint and Lines tools: Acrylic, Pencil, and Fluff
-    brushes.
-Exported filenames shown
-    When exporting a drawing (Open>Export) or a slideshow (Open>Slideshow>
-    Export GIF), the name of the file is displayed and also placed in the copy/
-    paste clipboard.
-Trash can support in Haiku
-    The Haiku port of Tux Paint now also places erased drawings (Open>Erase)
-    into the desktop trash can, rather than deleting the files completely.
+→ "Eraser" Fill mode ←
+    A flood fill option that fills the canvas with the background color, or
+    template or starter background, upon which the drawing was based.
+     
+→ New brushes ←
+    New brushes for the Paint and Lines tools: "Fluff (gradient)", "Graphite",
+    "Impasto", "Paint splats", "Smoke", "Spines", "Water (still)", and
+    "Watercolor splotches".
+     
+→ New brush option ←
+    Brushes may be given a "chaotic" setting, causing them to rotate
+    continuously while drawing with them.
+     
+→ New templates ←
+    "Clouds from an airplane" and "Lough Leane".
+     
+→ New Magic tool: Comic dots ←
+    Draws a repeating dot pattern, simulating the "Ben Day process" used in
+    early comic books.
+     
+→ New Magic tool: Rotate ←
+    Rotates the drawing.
+     
+→ New Magic tool: Fractal ←
+    A set of tools that recursively repeat what you draw, scaling and/or
+    rotating it as they repeat.
+     
+→ New Magic tool: ASCII Typewriter ←
+    Transform your picture into "ASCII art", typewriter-style.
+     
+→ New Magic tool: ASCII Computer ←
+    Transform your picture into "ASCII art", computer-style.
+     
+→ New Magic tool: ASCII Color Computer ←
+    Transform your picture into colored computer "ASCII art".
+     
+→ New Magic tool: Crescent ←
+    Draw one of various crescent shapes at a chosen angle.
+     
+→ New Magic tool: Spiral ←
+    Draw spirals.
+     
+→ New Magic tool: Spiral Square ←
+    Draw square spirals.
+     
+→ New Magic tool: Concentric Circle ←
+    Draw concentric circles.
+     
+→ New Magic tool: Concentric Square ←
+    Draw concentric squares.
+     
+→ New Magic tool: Tessellation Pointy ←
+    Draw repeating tessellation patterns with pointy-topped hexagons.
+     
+→ New Magic tool: Tessellation Flat ←
+    Draw repeating tessellation patterns with flat-topped hexagons.
+     
+→ Magic API Updates ←
+    Sound pause and resume functions added.
+     
 
 Voir CHANGES.txt pour la liste complète des changements.
 
 II. Utiliser Tux Paint
 
-A. Lancement de Tux Paint
+                       ### A. Lancement de Tux Paint ###
 
-1. Utilisateurs de Linux/Unix
+## 1. Utilisateurs de Linux/Unix ##
 
 Tux Paint devrait avoir mis une icône de lanceur dans vos menus KDE et/ou
 GNOME, sous «Graphiques».
@@ -155,7 +184,7 @@ exemple, "$") :
 Si des erreurs se produisent, elles seront affichées sur le terminal
 ("stderr").
 
-2. Utilisateurs de Windows
+## 2. Utilisateurs de Windows ##
 
 [Icône pour Tux Paint]
       Tux Paint
@@ -179,13 +208,14 @@ installer.
 Si vous avez utilisé le téléchargement de 'ZIP-file', le dossier de Tux Paint
 sera là où vous l'avez placé lorsque vous avez décompressé le fichier ZIP.
 
-3. Utilisateurs de macOS
+## 3. Utilisateurs de macOS ##
 
 Double-cliquez simplement sur l'icône "Tux Paint".
 
 [Écran-titre]
+ 
 
-B. Écran titre
+                            ### B. Écran titre ###
 
 Lors du premier chargement de Tux Paint, un écran avec titre et crédits
 apparaîtra.
@@ -194,20 +224,22 @@ Une fois le chargement terminé, appuyez sur une touche ou cliquez sur la souris
 pour continuer. (Ou, après environ 30 secondes, l'écran-titre disparaîtra
 automatiquement.)
 
-C. Écran principal
+                          ### C. Écran principal ###
 
 L'écran principal est divisé en plusieurs sections :
 
 [Outils : Peindre, Tampon, Lignes, Formes, Texte, Magie, Étiquette, Défaire,
-    Refaire, Gomme, Nouveau, Ouvrir, Sauvegarder, Imprimer, Quitter]
-Côté gauche : la barre d'outils
+Refaire, Gomme, Nouveau, Ouvrir, Sauvegarder, Imprimer, Quitter]
+ 
+→ Côté gauche : la barre d'outils ←
 
     La barre d'outils contient les commandes pour dessiner et éditer.
 
 
-
-    [Toile]
-Milieu : Toile pour Dessiner
+     
+[Toile]
+ 
+→ Milieu : Toile pour Dessiner ←
 
     La plus grande partie de l'écran, au centre, est le canevas pour dessiner.
     C'est évidemment là que vous dessinerez !
@@ -218,9 +250,10 @@ Milieu : Toile pour Dessiner
     documentation OPTIONS pour plus de détails.
 
 
-
-    [Sélecteurs - Pinceaux, Lettres, Formes, Tampons]
-Côté droit : sélecteur
+     
+[Sélecteurs - Pinceaux, Lettres, Formes, Tampons]
+ 
+→ Côté droit : sélecteur ←
 
     En fonction de l'outil en cours d'utilisation, le sélecteur affiche
     différentes choses. Par exemple, lorsque l'outil Pinceau est sélectionné,
@@ -229,10 +262,11 @@ Côté droit : sélecteur
     pouvez utiliser.
 
 
-
-    [Couleurs - Noir, Blanc, Rouge, Rose, Orange, Jaune, Vert, Cyan, Bleu,
-    Pourpre, Brun, Gris]
-En bas : couleurs
+     
+[Couleurs - Noir, Blanc, Rouge, Rose, Orange, Jaune, Vert, Cyan, Bleu, Pourpre,
+Brun, Gris]
+ 
+→ En bas : couleurs ←
 
     Quand l'outil en cours utilise des couleurs, une palette pour choisir des
     couleurs se trouve en bas de l'écran. Cliquez sur une pour choisir une
@@ -243,12 +277,12 @@ En bas : couleurs
 
     Tout à fait à droite se trouvent trois options spéciales pour les couleurs
     :
-      + Sélecteur de couleur
+      o Sélecteur de couleur
         Le "sélecteur de couleurs" (qui ressemble à un compte-gouttes) vous
         permet de choisir une couleur trouvée dans votre dessin.
         (Un raccourci clavier est disponible pour accéder à cet effet
         rapidement; voir ci-dessous)
-      + Palette de l'Arc-en-ciel
+      o Palette de l'Arc-en-ciel
         La palette de l'arc-en-ciel vous permet de prendre n'importe quelle
         couleur en choisissant la teinte, la saturation et la valeur de la
         couleur désirée. Une boîte sur le côté gauche montre des centaines de
@@ -260,10 +294,10 @@ En bas : couleurs
         bouton "Retour" pour abandonner sans prendre de nouvelle couleur.
         Vous pouvez aussi régler la couleur de cet outil avec une autre que
         l'on choisit :
-          o Peu importe la couleur intégrée choisie, si il y an a une
-          o Couleur actuelle du Sélecteur de couleur
-          o Couleur actuelle du mélangeur de couleurs
-      + Mélangeur de couleurs
+          # Peu importe la couleur intégrée choisie, si il y an a une
+          # Couleur actuelle du Sélecteur de couleur
+          # Couleur actuelle du mélangeur de couleurs
+      o Mélangeur de couleurs
         Le "mélangeur de couleur" (qui ressemble à une palette de peintre) vous
         permet de créer des couleurs en mélangeant des couleurs primaires —
         rouge, jaune et bleu — en même temps que du blanc (pour "tinter"), gris
@@ -293,23 +327,24 @@ En bas : couleurs
     Options" .
 
 
-
-    (Par exemple : Choisis une forme. Clique pour démarrer le dessin , fais
-    glisser et continue jusqu'à la taille désirée. Déplace-toi pour la faire
-    tourner, et clique pour dessiner.)
-En bas : zone d'aide
+     
+(Par exemple : Choisis une forme. Clique pour démarrer le dessin , fais glisser
+et continue jusqu'à la taille désirée. Déplace-toi pour la faire tourner, et
+clique pour dessiner.)
+ 
+→ En bas : zone d'aide ←
 
     Tout en bas de l'écran, Tux, le pingouin Linux, fournit des conseils et
     d'autres informations pendant que vous dessinez.
 
 
+     
 
+                         ### D. Outils disponibles ###
 
-D. Outils disponibles
+## 1. Outils de dessin ##
 
-1. Outils de dessin
-
-a. Outil "Peinture" (pinceau)
+a. Outil "Peinture" (pinceau) ←
 
     L'outil Pinceau vous permet de dessiner à main levée, en utilisant
     différents pinceaux (choisis dans le sélecteur à droite) et couleurs
@@ -356,8 +391,8 @@ a. Outil "Peinture" (pinceau)
         documentation "Options".
 
 
-
-b.Outil "Tampon" (tampon de caoutchouc)
+     
+b.Outil "Tampon" (tampon de caoutchouc) ←
 
     L'outil Tampon montre un ensemble de tampons en caoutchouc ou
     d'autocollants. Il vous permet de coller des images pré-dessinées ou
@@ -368,13 +403,13 @@ b.Outil "Tampon" (tampon de caoutchouc)
     indiquant où le tampon sera placé, ainsi que sa taille. Cliquez sur le
     canevas à l'endroit où vous voulez placer le tampon.
 
-    Catégories de tampons
+    → Catégories de tampons ←
         Il peut y avoir de nombreuses catégories de timbres (par ex. animaux,
         plantes, espace extra-atmosphérique, véhicules, personnes, etc.).
         Utilisez les flèches gauche et droite pour parcourir les différentes
         collections.
-
-    Rotation des tampons
+         
+    → Rotation des tampons ←
 
         En utilisant le bouton de rotation en bas à droite, vous pouvez
         effectuer une rotation quand vous placez un tampon. Une fois le tampon
@@ -391,21 +426,21 @@ b.Outil "Tampon" (tampon de caoutchouc)
         Tux Paint avec la version 0.9.29.
 
 
-
-    Contrôles des tampons
+         
+    → Contrôles des tampons ←
 
         Avant de `` tamponner '' une image sur votre dessin, différents effets
         peuvent parfois être appliqués (en fonction du tampon) :
 
-          o Certains tampons peuvent être colorés ou teintés. Si la palette de
+          @ Certains tampons peuvent être colorés ou teintés. Si la palette de
             couleurs sous le canevas est activée, vous pouvez cliquer sur les
             couleurs pour changer la teinte ou la couleur du tampon avant de le
             placer dans le dessin.
-          o Les tampons peuvent être rétrécis et agrandis, en cliquant dans
+          @ Les tampons peuvent être rétrécis et agrandis, en cliquant dans
             l'ensemble de barres (de forme triangulaire) en bas à droite; plus
             la barre est grande, plus le tampon apparaîtra grand sur votre
             dessin.
-          o De nombreux tampons peuvent être retournés verticalement ou
+          @ De nombreux tampons peuvent être retournés verticalement ou
             affichés sous forme d'image miroir à l'aide des boutons de commande
             en bas à droite.
 
@@ -414,8 +449,8 @@ b.Outil "Tampon" (tampon de caoutchouc)
         Agrandir pour les tampons. Voir la documentation "Options".
 
 
-
-    Effets sonores des tampons
+         
+    → Effets sonores des tampons ←
 
         Les tampons peuvent avoir un effet sonore et / ou une description orale
         (parlés). Les boutons en bas à gauche (près de Tux, le pingouin Linux)
@@ -423,11 +458,10 @@ b.Outil "Tampon" (tampon de caoutchouc)
         tampon actuellement sélectionné.
 
 
+         
 
-
-
-
-c.Outil "Lignes"
+     
+c.Outil "Lignes" ←
 
     Cet outil vous permet de dessiner des lignes droites à l'aide des
     différents pinceaux et couleurs que vous utilisez habituellement.
@@ -453,8 +487,8 @@ c.Outil "Lignes"
     du pinceau, ci-dessus pour en savoir plus.
 
 
-
-d.Outil "Formes"
+     
+d.Outil "Formes" ←
 
     Cet outil vous permet de dessiner des formes simples remplies ou non
     remplies.
@@ -465,15 +499,15 @@ d.Outil "Formes"
     Utilisez les options en bas à droite pour choisir le comportement de
     l'outil :
 
-    Formes à partir du centre
+    → Formes à partir du centre ←
         La forme se développe à partir de l'endroit où vous avez cliqué
         initialement et sera centrée autour de cette position.
 
         📜 C'était le seul comportement de Tux Paint jusqu'à la version 0.9.24.
 
 
-
-    Formes à partir d'un coin
+         
+    → Formes à partir d'un coin ←
         La forme se développe à partir d'un coin depuis l'endroit où vous avez
         cliqué initialement. Il s'agit de la méthode par défaut de la plupart
         des autres logiciels de dessin traditionnels.
@@ -482,7 +516,7 @@ d.Outil "Formes"
         Paint.
 
 
-
+         
 
     ⚙ Remarque : si les contrôles de forme sont désactivés (par exemple, avec
     l'option "noshapecontrols"), il n'y aura pas de contrôle et la méthode
@@ -501,7 +535,7 @@ d.Outil "Formes"
 
     Relâchez la souris lorsque vous avez terminé l'étirement.
 
-    Mode normal
+    → Mode normal ←
 
         Maintenant vous pouvez bouger la souris autour du canevas pour faire
         tourner la forme. L'angle de rotation est indiqué en bas, en degrés
@@ -511,8 +545,8 @@ d.Outil "Formes"
         avec la couleur en cours.
 
 
-
-    Mode de Formes Simples
+         
+    → Mode de Formes Simples ←
         Si l'option "formes simples" est activée, la forme sera dessinée sur le
         canevas lorsque vous relâcherez le bouton de la souris. (Il n'y a pas
         de rotation.)
@@ -521,11 +555,10 @@ d.Outil "Formes"
         formes simples" ("simpleshapes").
 
 
+         
 
-
-
-
-e.Outils "Texte" et "Étiquette"
+     
+e.Outils "Texte" et "Étiquette" ←
 
     Choisissez une police (parmi les «Lettres» disponibles sur la droite) et
     une couleur (dans la palette de couleurs en bas). Vous pouvez aussi
@@ -546,7 +579,7 @@ e.Outils "Texte" et "Étiquette"
     active entraîne le déplacement de la ligne de texte actuelle vers cet
     emplacement (et vous pouvez continuer à la modifier).
 
-    "Texte" par rapport à "Étiquette"
+    → "Texte" par rapport à "Étiquette" ←
 
         L' outil Texte est l'outil de saisie de texte original de Tux Paint. Le
         texte saisi à l'aide de cet outil ne peut pas être modifié ou déplacé
@@ -583,8 +616,8 @@ e.Outils "Texte" et "Étiquette"
         Tux Paint en ligne de commande avec l'option "nolabel").
 
 
-
-    Saisie de caractères internationaux
+         
+    → Saisie de caractères internationaux ←
 
         Tux Paint permet de saisir des caractères dans différentes langues. La
         plupart des caractères latins ( A - Z , ñ , è , etc...) peuvent être
@@ -600,19 +633,19 @@ e.Outils "Texte" et "Étiquette"
         Les locales supportées, les méthodes d'entrée disponibles et la touche
         pour basculer de mode sont listées ci-dessous.
 
-          o Japonais -- Hiragana et Katakana romanisés — touche [Alt] droite ou
+          @ Japonais -- Hiragana et Katakana romanisés — touche [Alt] droite ou
             touche [Alt] gauche
-          o Korean — Hangul 2-Bul — touche [Alt] droite or touche [Alt] gauche
-          o Chinois traditionnel — touche [Alt] droite or touche [Alt] gauche
-          o Thai — touche [Alt] droite
+          @ Korean — Hangul 2-Bul — touche [Alt] droite or touche [Alt] gauche
+          @ Chinois traditionnel — touche [Alt] droite or touche [Alt] gauche
+          @ Thai — touche [Alt] droite
 
         💡 Note : de nombreuses polices n'incluent pas tous les caractères pour
         toutes les langues, vous devriez donc parfois changer de police pour
         voir les caractères que vous essayez de saisir.
 
 
-
-    Clavier virtuel sur écran
+         
+    → Clavier virtuel sur écran ←
 
         Un clavier virtuel sur écran (optionnel) est disponible pour les outils
         "Texte" et "Étiquette", qui peut présenter une palette de dispositions
@@ -622,24 +655,28 @@ e.Outils "Texte" et "Étiquette"
         d'informations.
 
 
+         
 
-
-
-
-f.Outil "Remplir"
+     
+f.Outil "Remplir" ←
 
     L'outil «Remplir» «remplit» une zone contiguë de votre dessin avec une
     couleur unie de votre choix. Trois options de remplissage sont offertes :
-      + Uni — cliquez une fois pour remplir une zone avec une couleur unie.
-      + Pinceau — cliquez et glissez pour remplir une zone avec une couleur
+      o Uni — cliquez une fois pour remplir une zone avec une couleur unie.
+      o Pinceau — cliquez et glissez pour remplir une zone avec une couleur
         unie, lorsque l'on fait de la peinture à main levée.
-      + Linéaire—cliquez et faites glisser pour remplir une zone avec une
+      o Linéaire—cliquez et faites glisser pour remplir une zone avec une
         couleur qui s'atténue au fur et à mesure dans la direction où vous
         déplacez la souris.
-      + Radial—cliquez une fois pour remplir une zone avec une couleur qui
+      o Radial—cliquez une fois pour remplir une zone avec une couleur qui
         s'atténue graduellement, à partir de l'endroit où vous avez cliqué.
-      + Radial—cliquez une fois pour remplir une zone avec une couleur qui
+      o Radial—cliquez une fois pour remplir une zone avec une couleur qui
         s'atténue graduellement, à partir de l'endroit où vous avez cliqué.
+      o Eraser — click once to erase an area, exposing the solid color
+        background, or starter or template background image, upon which the
+        drawing was based. (See Outils disponibles > Outils de dessin > Outil
+        "Gomme" and Autres contrôles > Images de "Démarrage" et images "Modèle"
+        .)
 
     📜 Note : Avant Tux Paint 0.9.24, "Remplir" était un outil "magique" (voir
     ci-dessous). Avant Tux Paint 0.9.26, l'outil "Remplir" n'offrait que la
@@ -647,8 +684,8 @@ f.Outil "Remplir"
     dans la version 0.9.29 de Tux Paint.
 
 
-
-g.Outil "Magie" (Effets spéciaux)
+     
+g.Outil "Magie" (Effets spéciaux) ←
 
     L'outil «Magie» est en fait un ensemble d'outils spéciaux. Sélectionnez
     l'un des effets «magiques» dans le sélecteur de droite. Ensuite, selon
@@ -703,8 +740,8 @@ g.Outil "Magie" (Effets spéciaux)
     one large list. See the "Options" documentation.
 
 
-
-h.Outil "Gomme"
+     
+h.Outil "Gomme" ←
 
     This tool works similarly to the Paint Brush. Wherever you click (or click
     and drag), things you've added to your drawing will be erased, exposing the
@@ -714,13 +751,13 @@ h.Outil "Gomme"
 
     A number of eraser types are available, each offering multiple sizes are
     available:
-      + Square — Square-shaped erasers that completely remove parts of your
+      o Square — Square-shaped erasers that completely remove parts of your
         drawing.
-      + Circle (solid) — Circle-shaped erasers that completely remove parts of
+      o Circle (solid) — Circle-shaped erasers that completely remove parts of
         your drawing.
-      + Fuzzy-edged Circle — Circle-shaped erasers with soft edges that blend
+      o Fuzzy-edged Circle — Circle-shaped erasers with soft edges that blend
         with the background.
-      + Transparent Circle — Circle-shaped erasers that blend your drawing with
+      o Transparent Circle — Circle-shaped erasers that blend your drawing with
         the background. Release and click again to expose more and more of the
         background.
 
@@ -736,11 +773,11 @@ h.Outil "Gomme"
     sélectionné.
 
 
+     
 
+## 2. Autres contrôles ##
 
-2. Autres contrôles
-
-a.Commandes "Défaire" et "Refaire"
+a.Commandes "Défaire" et "Refaire" ←
 
     Cliquer sur le bouton "Défaire" annulera la dernière action. Vous pouvez
     même annuler plus d'une fois !
@@ -758,14 +795,13 @@ a.Commandes "Défaire" et "Refaire"
     clavier pour Refaire.
 
 
+     
+b.Commande "Nouveau" ←
 
-b.Commande "Nouveau"
-
-    Cliquez sur le bouton "Nouveau" pour démarrer un nouveau dessin. Une boîte
-    de dialogue apparaîtra, avec laquelle vous pouvez choisir de commencer une
-    nouvelle image en utilisant une couleur d'arrière-plan unie, ou en
-    utilisant une image 'Starter' ou 'Template' (voir ci-dessous). On vous
-    demandera d'abord si vous voulez vraiment faire cela.
+    Clicking the 'New' button will start a new drawing. A dialog will appear
+    where you may choose to start a new picture using a solid background color,
+    or using a 'Starter' or 'Template' image (see below). You will first be
+    asked whether you really want to do this.
 
     When you use the 'Eraser' tool things you've added to your drawing will be
     removed, exposing the background you chose when starting a new drawing.
@@ -774,28 +810,32 @@ b.Commande "Nouveau"
     ⌨ Remarque : vous pouvez également appuyer [Control / ⌘] + [N] sur le
     clavier pour commencer un nouveau dessin.
 
-    Choix de couleurs unies en arrière plan
+    → Choix de couleurs unies en arrière plan ←
         Along with the preset solid colors, you can also choose colors using a
         rainbow palette or a "color mixer". These operate identically to the
         options found in the color palette shown below the canvas when drawing
         a picture. See Écran principal > En bas : couleurs > Special color
         options for details.
-
-    Images de "Démarrage" et images "Modèle"
-          o Les "Images de démarrage" se comportent comme une page d'un livre
+         
+    Images de "Démarrage" et images "Modèle" ←
+          @ Les "Images de démarrage" se comportent comme une page d'un livre
             de coloriage - un contour noir et blanc d'une image, que vous
             pouvez ensuite colorier, et le contour noir reste intact - ou comme
             une photographie 3D, où vous dessinez entre une couche de premier
             plan et une d'arrière-plan.
-          o Les "Images modèle" sont semblables, mais fournissent simplement un
+          @ Les "Images modèle" sont semblables, mais fournissent simplement un
             dessin d'arrière-plan sur lequel travailler. Contrairement aux
             «Images de démarrage», rien de ce que vous dessinerez ne restera au
             premier plan.
 
-        Lorsque vous utiliserez l'outil «Gomme», l'image d'origine du
-        «Démarrage» ou du «Modèle» réapparaîtra. Les outils magiques
-        "Retourner" et "Miroir" affecteront aussi bien l'orientation de
-        "l'image de démarrage" que celle de "l'image Modèle".
+        When using the 'Eraser' tool or the 'Eraser' mode of the 'Fill' tool,
+        the original image from the 'Starter' or 'Template' will reappear. (See
+        Outils disponibles > Outils de dessin > Outil "Gomme" and Outil
+        "Remplir".)
+
+        The 'Flip' and 'Mirror' Magic tools affect the orientation of the
+        'Starter' or 'Template', as well. (See Outils disponibles > Outil
+        "Magie" (Effets spéciaux) > Renverser and Miroir.)
 
         Lorsque vous chargez une 'Image modèle' ou 'image modèle', dessinez
         dessus, puis cliquez sur 'Sauvegarder', cela crée un nouveau fichier
@@ -812,8 +852,8 @@ b.Commande "Nouveau"
         Voir "Ouvrir", ci-dessous.
 
 
-
-    Effacement des images Modèles exportées
+         
+    → Effacement des images Modèles exportées ←
 
         Si vous avez sélectionner une Image Modèle dans votre répertoire
         personnel, et qu'il a été créé à partir de Tux Paint (en utilisant le
@@ -830,15 +870,15 @@ b.Commande "Nouveau"
         "noerase".
 
 
-
+         
 
     ⚙ Note : Les couleurs unies peuvent être placées à la fin de la boîte de
     dialogue 'Nouveau' (dessous les Images de démarrage et Modèles), via
     l'option "newcolorslast".
 
 
-
-c.Commande "Ouvrir"
+     
+c.Commande "Ouvrir" ←
 
     Cela vous montre une liste de toutes les images que vous avez enregistrées.
     S'il y en a plus que ce que peut contenir l'écran, utilisez les flèches
@@ -846,7 +886,7 @@ c.Commande "Ouvrir"
     des images.
 
     Cliquez sur une image pour la sélectionner, puis ...
-      + Cliquez sur le bouton vert "Ouvrir" en bas à gauche de la liste pour
+      o Cliquez sur le bouton vert "Ouvrir" en bas à gauche de la liste pour
         charger l'image sélectionnée. Vous pourrez alors l'éditer.
 
         (Vous pouvez également double-cliquer sur l'icône d'une image pour la
@@ -856,7 +896,7 @@ c.Commande "Ouvrir"
         n'a pas été enregistré, il vous sera demandé si vous souhaitez
         l'enregistrer ou non. (Voir "Sauvegarder," ci-dessous.)
 
-      + Cliquez sur le bouton marron "Effacer" (poubelle) en bas à droite de la
+      o Cliquez sur le bouton marron "Effacer" (poubelle) en bas à droite de la
         liste pour effacer l'image sélectionnée. (Il vous sera demandé de
         confirmer.)
 
@@ -868,16 +908,16 @@ c.Commande "Ouvrir"
         ⚙ Note :: Le bouton 'Effacer' peut être désactivé via l'option
         "noerase".
 
-      + Cliquez sur le bouton 'Exporter' près du coin inférieur droit pour
+      o Cliquez sur le bouton 'Exporter' près du coin inférieur droit pour
         exporter l'image vers votre dossier d'exportation. (par ex. "~/Pictures
         /TuxPaint/")
 
     Depuis l'écran "Ouvrir" vous pouvez aussi :
-      + Cliquez sur le bouton bleu "Diapositives" (projecteur de diapositives)
+      o Cliquez sur le bouton bleu "Diapositives" (projecteur de diapositives)
         en bas à gauche pour passer en mode diaporama. Voir "Diaporama",
         ci-dessous, pour les détails.
 
-      + Cliquez sur le bouton bleu 'Modèle' en bas à gauche pour convertir
+      o Cliquez sur le bouton bleu 'Modèle' en bas à gauche pour convertir
         l'image sélectionnée en nouveau Modèle, qui pourra vous servir de base
         pour de nouveaux dessins.
 
@@ -889,7 +929,7 @@ c.Commande "Ouvrir"
         choisissant "Désactiver 'Fabriquer un Modèle' dans Tux Paint Config. ou
         en lançant em>Tux Paint avec l'option "notemplateexport").
 
-      + Ou cliquez sur le bouton fléché rouge «Retour» en bas à droite de la
+      o Ou cliquez sur le bouton fléché rouge «Retour» en bas à droite de la
         liste pour annuler et revenir à l'image que vous étiez en train de
         dessiner.
 
@@ -897,8 +937,8 @@ c.Commande "Ouvrir"
     clavier pour afficher la boîte de dialogue "Ouvrir".
 
 
-
-d.Commande "Sauvegarder"
+     
+d.Commande "Sauvegarder" ←
 
     Pour sauvegarder votre image en cours.
 
@@ -923,8 +963,8 @@ d.Commande "Sauvegarder"
     clavier pour sauvegarde.
 
 
-
-e.Commande "Imprimer"
+     
+e.Commande "Imprimer" ←
 
     Cliquez sur ce bouton et votre image sera imprimée !
 
@@ -934,7 +974,7 @@ e.Commande "Imprimer"
     pas fonctionner si vous exécutez Tux Paint en mode plein écran. Voir
     ci-dessous.
 
-    Désactivation de l'impression
+    → Désactivation de l'impression ←
 
         On peut définir une option "noprint", ce qui entraînera la
         désactivation du bouton "Imprimer".
@@ -942,8 +982,8 @@ e.Commande "Imprimer"
         ⚙ Voir la documentation sur "Options".
 
 
-
-    Restreindre l'impression
+         
+    → Restreindre l'impression ←
 
         Si l'option "printdelay" a été utilisée, vous ne pouvez imprimer —
         qu'une fois toutes les x secondes, tel que vous l'avez défini.
@@ -954,8 +994,8 @@ e.Commande "Imprimer"
         ⚙ Voir la documentation sur "Options".
 
 
-
-    Commandes d'impression
+         
+    → Commandes d'impression ←
 
         (Linux et Unix uniquement)
 
@@ -980,8 +1020,8 @@ e.Commande "Imprimer"
         ⚙ Voir la documentation sur "Options".
 
 
-
-    Réglages pour l'impression
+         
+    → Réglages pour l'impression ←
 
         (Windows et macOS)
 
@@ -1004,8 +1044,8 @@ e.Commande "Imprimer"
         ⚙ Voir la documentation sur "Options".
 
 
-
-    Options de la boîte de dialogue de l'imprimante
+         
+    → Options de la boîte de dialogue de l'imprimante ←
 
         Par défaut, Tux Paint affiche uniquement la boîte de dialogue de
         l'imprimante (ou, sous Linux / Unix, exécute "altprintcommand", par
@@ -1022,18 +1062,17 @@ e.Commande "Imprimer"
         ⚙ Voir la documentation sur "Options".
 
 
+         
 
-
-
-
-f.Commande "Diapos" (sous "Ouvrir")
+     
+f.Commande "Diapos" (sous "Ouvrir") ←
 
     Le bouton "Diapositives" est disponible dans la boîte de dialogue "Ouvrir".
     Il peut être utilisé pour lire une simple animation dans Tux Paint, ou un
     diaporama. Il peut également exporter un GIF animé basé sur les images
     choisies.
 
-    Choisir des images
+    → Choisir des images ←
 
         Lorsque vous entrez dans la section "Diapos" de Tux Paint, il affiche
         une liste de vos fichiers enregistrés, tout comme la boîte de dialogue
@@ -1048,8 +1087,8 @@ f.Commande "Diapos" (sous "Ouvrir")
         souhaitez l'ajouter à la fin de la liste.
 
 
-
-    Régler la vitesse de lecture
+         
+    → Régler la vitesse de lecture ←
 
         Une échelle mobile en bas à gauche de l'écran (à côté du bouton
         "Lecture") peut être utilisée pour régler la vitesse du diaporama ou du
@@ -1064,8 +1103,8 @@ f.Commande "Diapos" (sous "Ouvrir")
         exporté.)
 
 
-
-    Lecture dans Tux Paint
+         
+    → Lecture dans Tux Paint ←
 
         Pour démarrer un diaporama dans Tux Paint, cliquez sur le bouton
         'Jouer'.
@@ -1083,8 +1122,8 @@ f.Commande "Diapos" (sous "Ouvrir")
         d'image du diaporama.
 
 
-
-    Exporter un GIF animé
+         
+    → Exporter un GIF animé ←
 
         Cliquez sur le bouton "Exporter GIF" en bas à droite pour que Tux Paint
         génère un fichier GIF animé basé sur les images sélectionnées.
@@ -1098,14 +1137,14 @@ f.Commande "Diapos" (sous "Ouvrir")
         vous ramènera à la boîte de dialogue "Diaporama".
 
 
-
+         
 
     Cliquez sur "Retour" dans l'écran de sélection d'image du diaporama pour
     revenir à la boîte de dialogue "Ouvrir".
 
 
-
-g.Commande "Quitter"
+     
+g.Commande "Quitter" ←
 
     Cliquez sur le bouton "Quitter", fermez la fenêtre de Tux Paint ou appuyez
     sur la touche [Escape] pour quitter Tux Paint.
@@ -1135,8 +1174,8 @@ g.Commande "Quitter"
     ⚙ Voir la documentation sur "Options".
 
 
-
-h.Coupure du son
+     
+h.Coupure du son ←
 
     Il n'y a pas de bouton de commande à l'écran pour le moment, mais en
     appuyant sur les touches [Alt] + [S] , les effets sonores peuvent être
@@ -1150,11 +1189,11 @@ h.Coupure du son
     ⚙ Voir la documentation sur "Options".
 
 
+     
 
+                       ### E. Contrôle de Tux Paint ###
 
-E. Contrôle de Tux Paint
-
-1. Utiliser une Souris ou une Boule de pointage
+## 1. Utiliser une Souris ou une Boule de pointage ##
 
 Le mode principal de travail pour Tux Paint est avec tout dispositif reconnu
 par votre système d'exploitation tel que la souris, soit standard, soit boule
@@ -1172,7 +1211,7 @@ Paint ne reconnaît qu'un seul bouton. Cependant vous pouvez configurer Tux
 Paint pour accepter un autre bouton comme entrée (voir la Options
 documentation).
 
-a. Défilement
+# a. Défilement #
 
 Beaucoup de dispositifs d'entrée offre un moyen d'effectuer un défilement
 rapide — beaucoup de souris ont une roulette de défilement, les boules de
@@ -1186,7 +1225,7 @@ Vous pouvez avoir un défilement automatique en cliquant et en maintenant
 enfoncé sur un bouton de défilement — les flèches "haut" et "bas" apparaissant
 au-dessus et en-dessous de la liste.
 
-b. Accessibilité de la souris
+# b. Accessibilité de la souris #
 
 Yous dispositf ressemblant à une souris peut être utilisé pour contrôler Tux
 Paint. Par exemple :
@@ -1199,7 +1238,7 @@ Tux Paint possède un réglage d'accessibilité "clic collant", où un simple cl
 permet de faire "cliquer et glisser", et autre clic l'arrête. ( (Voir la
 Options documentation.)
 
-2. Utiliser une Tablette ou un Écran tactile
+## 2. Utiliser une Tablette ou un Écran tactile ##
 
 Comme indiqué précédemment, Tux Paint reconnaît tout dispositif ressemblant à
 une souris. Ce qui veut dire que les tablettes graphiques et les écrans
@@ -1212,7 +1251,7 @@ Paint. Quelques examples :
   * Conseil pour la Gomme
   * Gestes avec plusieurs doigts
 
-3. Utiliser un dispositif de type joystick
+## 3. Utiliser un dispositif de type joystick ##
 
 Tux Paint peut être configuré pour reconnaître l'entrée de tout contrôleur de
 jeu qui apparaît dans votre système dexploitation tel qu'un joystick. Ceci
@@ -1227,7 +1266,7 @@ différents contrôles de Tux Paint (par ex. pour actionner la touche [Escape],
 pour invoquer les opérations Faire et Défaire, etc ...). Voir la documentation
 pour plus de détails Options .
 
-4. Utiliser le clavier
+## 4. Utiliser le clavier ##
 
 Tux Paint fournit une option pour permettre d'utiliser le clavier pour
 contrôler le pointeur de souris. Cela inclut le mouvement et le clic, aussi
@@ -1236,7 +1275,7 @@ parties de l'interface. Voir la documentation pour plus de détails Options.
 
 III. Chargement d'autres images dans Tux Paint
 
-A. Aperçu
+                               ### A. Aperçu ###
 
 Étant donné que la boîte de dialogue «Ouvrir» de Tux Paint n'affiche que les
 images que vous avez créées avec Tux Paint, que se passe-t-il si vous souhaitez
@@ -1247,30 +1286,30 @@ Pour ce faire, il vous suffit de convertir l'image dans le format utilisé par
 Tux Paint, qui est —PNG (Portable Network Graphic), et de la placer dans le
 répertoire "saved" de Tux Paint. C'est là où on les trouve (par défaut) :
 
-Windows Windows 7, Windows 8, Windows 10, Windows 11
+→ Windows Windows 7, Windows 8, Windows 10, Windows 11 ←
     In the user's "AppData" folder:
     e.g., "C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\saved\"
-
-macOS
+     
+→ macOS ←
     In the user's "Application Support" folder:
     e.g., 
     "/Users/nom d'utilisateur/Library/Application Support/TuxPaint/saved/"
-
-Linux / Unix
+     
+→ Linux / Unix ←
     In the user's "home directory" folder:
     e.g., "/home/nom d'utilisateur/.tuxpaint/saved/"
-
-Haiku
+     
+→ Haiku ←
     In the user's "settings" folder:
     e.g., "/boot/home/config/settings/TuxPaint/saved/"
-
+     
 
 💡 Remarque : C'est également à partir de ce dossier que vous pouvez copier ou
 ouvrir des images dessinées dans Tux Paint à l'aide d'autres applications,
 ainsi l'option 'Export' de la boîte de dialogue 'Ouvrir' de Tux Paint peut être
 utilisée pour les copier dans un endroit plus facile d'accès plus sûr.
 
-B. Utilisation du script d'importation "tuxpaint-import"
+       ### B. Utilisation du script d'importation "tuxpaint-import" ###
 
 Les utilisateurs Linux et Unix peuvent utiliser script shell "tuxpaint-import"
 qui s'installe lorsque vous installez Tux Paint. Il utilise certains outils
@@ -1307,7 +1346,7 @@ Vous pouvez maintenant charger Tux Paint, et une version de cette image
 originale sera disponible dans la boîte de dialogue «Ouvrir». Double-cliquez
 simplement sur son icône !
 
-C. Importer des images manuellement
+                  ### C. Importer des images manuellement ###
 
 Les utilisateurs de Windows, macOS et Haiku désirant importer des images dans
 Tux Paint doivent le faire manuellement.
@@ -1326,7 +1365,7 @@ taille de la fenêtre Tux Paint, ou de la résolution à laquelle Tux Paint est
 exécuté, si il est en plein écran. (Remarque : la résolution par défaut est de
 800x600.) Voir "Calculer les dimensions des images" ci-dessous.
 
-1. Nom du fichier
+## 1. Nom du fichier ##
 
 Sauvegarder l'image au format PNG. Il est fortement recommandé que vous nommiez
 le fichier en utilisant la date et l'heure courante, puisque c'est ce que Tux
@@ -1345,7 +1384,7 @@ Exemple: "20210731110500.png",pour le 31 juillet 2021 à 11:05 du matin.
 
 Mettez cd fichier PNG dans votre répertoire Tux Paint "saved". (Voir ci-dessus)
 
-2. Calculer les dimensions des images
+## 2. Calculer les dimensions des images ##
 
 Cette partie de documentation doit être réécrite puisque la nouvelle option
 "buttonsize" a été ajoutée. Pour l'heure, essayer de dessiner et de sauvegarder
@@ -1358,49 +1397,49 @@ IV.Lectures complémentaires
 Les autres documents inclus avec Tux Paint (dans le répertoire "docs") incluent
 :
 
-Utiliser Tux Paint :
-      + OPTIONS.html
+→ Utiliser Tux Paint : ←
+      o OPTIONS.html
         Instructions détaillées sur les options en ligne de commande et les
         fichiers de configuration, pour ceux qui ne veulent pas utiliser
         l'outil Tux Paint Config.
-      + Documentation sur l'outil 'Magie' ("magic-docs")
+      o Documentation sur l'outil 'Magie' ("magic-docs")
         Documentation pour chacun des outils "Magic" actuellement installés.
-      + Frequently Asked Questions ("FAQs") about Tux Paint
+      o Frequently Asked Questions ("FAQs") about Tux Paint
         Answers to, and solutions for, some common questions about, and
         problems with, using Tux Paint.
 
-
-Extensions pour Tux Paint :
-      + EXTENDING.html
+     
+→ Extensions pour Tux Paint : ←
+      o EXTENDING.html
         Des instructions détaillées sur la création de pinceaux, de tampons,
         d'images de démarrage et de modèles; et l'ajout de polices; et créer un
         nouveau clavier virtuel et des méthodes de saisie.
-      + PNG.html
+      o PNG.html
         Remarques sur la création d'images bitmap au format PNG à utiliser dans
         Tux Paint.
-      + SVG.html
+      o SVG.html
         Remarques sur la création d'images vectorielles au format SVG à
         utiliser dans Tux Paint.
 
-
-Information technique :
-      + INSTALL.html
+     
+→ Information technique : ←
+      o INSTALL.html
         Instructions pour compiler et installer Tux Paint, le cas échéant.
-      + SIGNALS.html
+      o SIGNALS.html
         Informations sur les signaux POSIX auxquels répond Tux Paint.
-      + MAGIC-API.html
+      o MAGIC-API.html
         Créer de nouveaux outils Magie avec le plugin API de Tux Paint.
 
-
-Historique du développement et licence :
-      + AUTHORS.txt
+     
+→ Historique du développement et licence : ←
+      o AUTHORS.txt
         Liste des auteurs et contributeurs.
-      + CHANGES.txt
+      o CHANGES.txt
         Résumé des changements entre chaque version de Tux Paint.
-      + COPYING.txt
+      o COPYING.txt
         Licence du programme Tux Paint, la GNU General Public License (GPL)
 
-
+     
 
 V.Comment obtenir de l'aide
 

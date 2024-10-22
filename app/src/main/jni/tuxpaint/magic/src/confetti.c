@@ -1,5 +1,5 @@
 /*
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <time.h>               //For time()
@@ -63,9 +63,9 @@ Uint32 confetti_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void confetti_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
-                        Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void confetti_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                        Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   //get the colors from API and store it in structure
   confetti_colors.r = r;
@@ -73,7 +73,7 @@ void confetti_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
   confetti_colors.b = b;
 }
 
-int confetti_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int confetti_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -83,12 +83,12 @@ int confetti_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uin
   return (1);
 }
 
-int confetti_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int confetti_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-SDL_Surface *confetti_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *confetti_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -97,12 +97,12 @@ SDL_Surface *confetti_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *confetti_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *confetti_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext_noop("Confetti"));
+  return strdup(gettext("Confetti"));
 }
 
-int confetti_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int confetti_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PAINTING;
 }
@@ -112,26 +112,26 @@ int confetti_get_order(int which ATTRIBUTE_UNUSED)
   return 1400;
 }
 
-char *confetti_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *confetti_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext_noop("Click to throw confetti!"));
+  return strdup(gettext("Click to throw confetti!"));
 }
 
-int confetti_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int confetti_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-void confetti_release(magic_api * api ATTRIBUTE_UNUSED,
+void confetti_release(magic_api *api ATTRIBUTE_UNUSED,
                       int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                      SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                      int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                      int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 
 }
 
-void confetti_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void confetti_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   Mix_FreeChunk(confetti_snd);
 }
@@ -157,7 +157,7 @@ inline char confetti_get_lesser(const char what1, const char what2)
 
 // Interactivity functions
 
-Uint32 confetti_get_new_color(void *ptr, SDL_Surface * canvas)  //this function creates new color very similar to the one choosen
+Uint32 confetti_get_new_color(void *ptr, SDL_Surface *canvas)   //this function creates new color very similar to the one choosen
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -179,7 +179,7 @@ Uint32 confetti_get_new_color(void *ptr, SDL_Surface * canvas)  //this function 
 
 
 static void confetti_circle(void *ptr, int which ATTRIBUTE_UNUSED,
-                            SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                            SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -194,8 +194,8 @@ static void confetti_circle(void *ptr, int which ATTRIBUTE_UNUSED,
         api->putpixel(canvas, xx, yy, color);
 }
 
-void confetti_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void confetti_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   unsigned char i;
   char min_x = 0, max_x = 0, min_y = 0, max_y = 0;
@@ -230,8 +230,8 @@ void confetti_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
   api->playsound(confetti_snd, (x * 255) / canvas->w, 255);
 }
 
-void confetti_drag(magic_api * api, int which, SDL_Surface * canvas,
-                   SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void confetti_drag(magic_api *api, int which, SDL_Surface *canvas,
+                   SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   int temp;
 
@@ -251,35 +251,35 @@ void confetti_drag(magic_api * api, int which, SDL_Surface * canvas,
   confetti_click(api, which, MODE_PAINT, canvas, snapshot, x, y, update_rect);
 }
 
-void confetti_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void confetti_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void confetti_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void confetti_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int confetti_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int confetti_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
 
-Uint8 confetti_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 confetti_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 8;
 }
 
-Uint8 confetti_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 confetti_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 2;
 }
 
-void confetti_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void confetti_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   CONFETTI_BRUSH_SIZE = size * 4;
 }

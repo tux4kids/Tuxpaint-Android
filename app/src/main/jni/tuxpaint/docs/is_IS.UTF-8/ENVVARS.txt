@@ -1,5 +1,5 @@
                                    Tux Paint
-                                version 0.9.33
+                                version 0.9.34
                       Environment Variables Documentation
 
         Copyright © 2021-2024 by various contributors; see AUTHORS.txt.
@@ -12,9 +12,9 @@
 Tux Paint understands a number of environment variables, either directly, or
 indirectly by the libraries that it utilizes.
 
-Storage-related environment variables
+                 ### Storage-related environment variables ###
 
-HOME
+→ HOME ←
 
     Specifies the user's "home directory", which is used to locate numerous
     other files or directories. In some cases, it is utilized as part of a
@@ -25,13 +25,13 @@ HOME
 
     A few examples of where "$HOME" is used include:
 
-      + The location of Tux Paint's configuration file
-      + The basis of where Tux Paint saves and loads users' drawings
-      + The location of a user's private collection of data files — stamps,
+      o The location of Tux Paint's configuration file
+      o The basis of where Tux Paint saves and loads users' drawings
+      o The location of a user's private collection of data files — stamps,
         brushes, etc. — (versus those available system wide)
 
-
-XDG_CONFIG_HOME
+     
+→ XDG_CONFIG_HOME ←
 
     On Linux and other platforms where the X Desktop Group standards are used,
     the location of the user's configuration files. Specifically, where to find
@@ -42,8 +42,8 @@ XDG_CONFIG_HOME
     exports drawings and GIFs to "$HOME".
 
 
-
-XDG_DATA_HOME
+     
+→ XDG_DATA_HOME ←
 
     On Linux and other platforms where the X Desktop Group standards are used,
     the location of the user's data directories. Specifically, where to find
@@ -53,18 +53,18 @@ XDG_DATA_HOME
     anywhere.
 
 
-
-TEMP
+     
+→ TEMP ←
 
     Specifies the location where temporary files may be created. Only used by
     Tux Paint on Microsoft Windows OSes. Uses "userdata" if not set.
 
-Language-related environment variables
+                ### Language-related environment variables ###
 
-LANG
-LANGUAGE
-LC_ALL
-LC_MESSAGES
+→ LANG ←
+→ LANGUAGE ←
+→ LC_ALL ←
+→ LC_MESSAGES ←
 
     Specify the language Tux Paint should utilize in its user interface.
     Overridden by the "--lang" and "--locale" command-line options or their
@@ -73,24 +73,23 @@ LC_MESSAGES
     and finally "LANG".
 
 
+     
 
-
-Display-related environment variables
+                 ### Display-related environment variables ###
 
 The following are a few of the environment variables supported by Simple
 DirectMedia Layer (libSDL) — which Tux Paint utilizes for displaying graphics,
 playing sounds, and receiving mouse, keyboard, and joystick input — and which
 may be useful to users of Tux Paint.
-
-SDL_VIDEO_ALLOW_SCREENSAVER
+→ SDL_VIDEO_ALLOW_SCREENSAVER ←
 
     Specifies whether Tux Paint should allow a screensaver to run. Can be set
     to '1' (true) by Tux Paint itself by issuing the command-line option
     "--allowscreensaver" or its configuration file counterpart.
 
 
-
-SDL_VIDEO_WINDOW_POS
+     
+→ SDL_VIDEO_WINDOW_POS ←
 
     Requests where to position Tux Paint's window, and can be used to specify
     what display to place a fullscreen Tux Paint in a multi-monitor
@@ -99,5 +98,4 @@ SDL_VIDEO_WINDOW_POS
     (e.g. 200,100), or "center" (meaning "center").
 
 
-
-
+     

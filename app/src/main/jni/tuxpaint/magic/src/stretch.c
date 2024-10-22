@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include "tp_magic_api.h"
@@ -83,14 +83,14 @@ Uint32 stretch_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void stretch_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+void stretch_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
                        Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                       SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                       SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-int stretch_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int stretch_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -100,12 +100,12 @@ int stretch_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint
   return (1);
 }
 
-int stretch_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int stretch_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return STRETCH_NUMTOOLS;
 }
 
-SDL_Surface *stretch_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *stretch_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -114,12 +114,12 @@ SDL_Surface *stretch_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *stretch_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *stretch_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext_noop("Stretch"));
+  return strdup(gettext("Stretch"));
 }
 
-int stretch_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int stretch_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_WARPS;
 }
@@ -129,34 +129,34 @@ int stretch_get_order(int which ATTRIBUTE_UNUSED)
   return 500;
 }
 
-char *stretch_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *stretch_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext_noop("Click and drag to stretch part of your picture vertically or horizontally."));
+  return strdup(gettext("Click and drag to stretch part of your picture vertically or horizontally."));
 }
 
-int stretch_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int stretch_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void stretch_release(magic_api * api ATTRIBUTE_UNUSED,
+void stretch_release(magic_api *api ATTRIBUTE_UNUSED,
                      int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                     SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-void stretch_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void stretch_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   Mix_FreeChunk(stretch_snd);
 }
 
 // Interactivity functions
 
-void stretch_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * snapshot,
-                  int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+void stretch_drag(magic_api *api, int which ATTRIBUTE_UNUSED,
+                  SDL_Surface *canvas, SDL_Surface *snapshot,
+                  int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   SDL_Rect src, dest;
   float xx, yy;
@@ -257,8 +257,8 @@ void stretch_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
   update_rect->h = canvas->h;
 }
 
-void stretch_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void stretch_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   if (y < canvas->h / 2)
   {
@@ -285,36 +285,36 @@ void stretch_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
   stretch_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void stretch_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void stretch_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 
 }
 
-void stretch_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void stretch_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 
 }
 
-int stretch_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int stretch_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
 
-Uint8 stretch_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 stretch_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 stretch_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 stretch_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void stretch_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                      Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void stretch_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                      Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

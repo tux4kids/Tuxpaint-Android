@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 // sound only plays on release
@@ -86,9 +86,9 @@ Uint32 rosette_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void rosette_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
-                       Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void rosette_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                       Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   //get the colors from API and store it in structure
   rosette_colors.r = r;
@@ -96,7 +96,7 @@ void rosette_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
   rosette_colors.b = b;
 }
 
-int rosette_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int rosette_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -106,12 +106,12 @@ int rosette_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint
   return (1);
 }
 
-int rosette_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int rosette_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return 2;
 }
 
-SDL_Surface *rosette_get_icon(magic_api * api, int which)
+SDL_Surface *rosette_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -123,15 +123,15 @@ SDL_Surface *rosette_get_icon(magic_api * api, int which)
   return (IMG_Load(fname));
 }
 
-char *rosette_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *rosette_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   if (!which)
-    return strdup(gettext_noop("Rosette"));
+    return strdup(gettext("Rosette"));
   else
-    return strdup(gettext_noop("Picasso"));
+    return strdup(gettext("Picasso"));
 }
 
-int rosette_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rosette_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PATTERN_PAINTING;
 }
@@ -141,28 +141,28 @@ int rosette_get_order(int which)
   return 200 + which;
 }
 
-char *rosette_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *rosette_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   if (!which)
-    return strdup(gettext_noop("Click and start drawing your rosette."));       //just k'scope with 3 bits?  
+    return strdup(gettext("Click and start drawing your rosette."));    //just k'scope with 3 bits?  
   else
-    return strdup(gettext_noop("You can draw just like Picasso!"));     //what is this actually doing?
+    return strdup(gettext("You can draw just like Picasso!"));  //what is this actually doing?
 }
 
-int rosette_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rosette_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-void rosette_release(magic_api * api ATTRIBUTE_UNUSED,
+void rosette_release(magic_api *api ATTRIBUTE_UNUSED,
                      int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                     SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-void rosette_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void rosette_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   Mix_FreeChunk(rosette_snd);
 }
@@ -170,7 +170,7 @@ void rosette_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 // Interactivity functions
 
 void rosette_circle(void *ptr, int which ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                    SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -183,7 +183,7 @@ void rosette_circle(void *ptr, int which ATTRIBUTE_UNUSED,
 
 }
 
-void rosette_draw(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y)
+void rosette_draw(void *ptr, int which, SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -232,8 +232,8 @@ void rosette_draw(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * snap
   rosette_circle(api, which, canvas, snapshot, (-1) * (x2 - xmid), y2 + ymid);
 }
 
-void rosette_drag(magic_api * api, int which, SDL_Surface * canvas,
-                  SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void rosette_drag(magic_api *api, int which, SDL_Surface *canvas,
+                  SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   api->line((void *)api, which, canvas, snapshot, ox, oy, x, y, 1, rosette_draw);
   api->playsound(rosette_snd, (x * 255) / canvas->w, 255);
@@ -243,44 +243,44 @@ void rosette_drag(magic_api * api, int which, SDL_Surface * canvas,
   update_rect->h = canvas->h;
 }
 
-void rosette_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void rosette_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   rosette_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void rosette_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void rosette_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
   xmid = canvas->w / 2;
   ymid = canvas->h / 2;
 }
 
-void rosette_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void rosette_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 
 }
 
-int rosette_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rosette_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
 
-Uint8 rosette_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 rosette_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 4;
 }
 
-Uint8 rosette_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 rosette_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-void rosette_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
-                      SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void rosette_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
+                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   ROSETTE_R = (size + 2) * 2;
 }

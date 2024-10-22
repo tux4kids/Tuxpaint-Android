@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -124,7 +124,7 @@ static int rain_inRainShape(double x, double y, double r)
   return 0;
 }
 
-int rain_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int rain_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
 
   int i;
@@ -140,13 +140,13 @@ int rain_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 c
   return (1);
 }
 
-int rain_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int rain_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (rain_NUM_TOOLS);
 }
 
 // Load our icons:
-SDL_Surface *rain_get_icon(magic_api * api, int which)
+SDL_Surface *rain_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -155,13 +155,13 @@ SDL_Surface *rain_get_icon(magic_api * api, int which)
 }
 
 // Return our names, localized:
-char *rain_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *rain_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
-  return (strdup(gettext_noop(rain_names[which])));
+  return (strdup(gettext(rain_names[which])));
 }
 
 // Return our groups
-int rain_get_group(magic_api * api ATTRIBUTE_UNUSED, int which)
+int rain_get_group(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   return rain_groups[which];
 }
@@ -173,14 +173,14 @@ int rain_get_order(int which)
 }
 
 // Return our descriptions, localized:
-char *rain_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode)
+char *rain_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode)
 {
-  return (strdup(gettext_noop(rain_descs[which][mode - 1])));
+  return (strdup(gettext(rain_descs[which][mode - 1])));
 }
 
 // Do the effect:
 static void do_rain_drop(void *ptr, int which ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas, SDL_Surface * last ATTRIBUTE_UNUSED, int x, int y)
+                         SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
@@ -204,7 +204,7 @@ static void do_rain_drop(void *ptr, int which ATTRIBUTE_UNUSED,
 
 }
 
-static void rain_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y)
+static void rain_linecb(void *ptr, int which, SDL_Surface *canvas, SDL_Surface *last, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
   SDL_Rect rect;
@@ -217,8 +217,8 @@ static void rain_linecb(void *ptr, int which, SDL_Surface * canvas, SDL_Surface 
 }
 
 // Affect the canvas on drag:
-void rain_drag(magic_api * api, int which, SDL_Surface * canvas,
-               SDL_Surface * last, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void rain_drag(magic_api *api, int which, SDL_Surface *canvas,
+               SDL_Surface *last, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   api->line((void *)api, which, canvas, last, ox, oy, x, y, 1, rain_linecb);
 
@@ -244,8 +244,8 @@ void rain_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void rain_click(magic_api * api, int which, int mode,
-                SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void rain_click(magic_api *api, int which, int mode,
+                SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
 
   if (mode == MODE_PAINT)
@@ -279,16 +279,16 @@ void rain_click(magic_api * api, int which, int mode,
 }
 
 // Affect the canvas on release:
-void rain_release(magic_api * api ATTRIBUTE_UNUSED,
+void rain_release(magic_api *api ATTRIBUTE_UNUSED,
                   int which ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                  SDL_Surface * last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
-                  int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                  SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                  SDL_Surface *last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
+                  int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // No setup happened:
-void rain_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void rain_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   //Clean up sounds
   int i;
@@ -303,49 +303,49 @@ void rain_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void rain_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
-                    Uint8 b ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void rain_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                    Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // Use colors:
-int rain_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rain_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
 
-void rain_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void rain_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void rain_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void rain_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int rain_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int rain_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_FULLSCREEN | MODE_PAINT);
 }
 
 
-Uint8 rain_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 rain_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   /* Size affects both fullscreen and paint mode, in Rain tool! */
   return 4;
 }
 
-Uint8 rain_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 rain_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 2;
 }
 
-void rain_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
-                   SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void rain_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
+                   SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   rain_SIZE = size * 15;
   rain_AMOUNT = 400 / size;

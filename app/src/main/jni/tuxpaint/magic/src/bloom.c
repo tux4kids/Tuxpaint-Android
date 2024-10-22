@@ -77,7 +77,7 @@ Uint32 bloom_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int bloom_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int bloom_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -89,12 +89,12 @@ int bloom_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 
   return (1);
 }
 
-int bloom_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int bloom_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (1);
 }
 
-SDL_Surface *bloom_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *bloom_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -103,12 +103,12 @@ SDL_Surface *bloom_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *bloom_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *bloom_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext("Bloom"));
 }
 
-int bloom_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int bloom_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_COLOR_FILTERS;
 }
@@ -118,7 +118,7 @@ int bloom_get_order(int which ATTRIBUTE_UNUSED)
   return 900;
 }
 
-char *bloom_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+char *bloom_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
   {
@@ -130,17 +130,17 @@ char *bloom_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUT
   }
 }
 
-int bloom_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int bloom_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;                     /* TODO: Maybe some day? */
 }
 
-int bloom_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED)
+int bloom_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT | MODE_FULLSCREEN);
 }
 
-void bloom_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void bloom_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (snd_effects != NULL)
   {
@@ -156,8 +156,8 @@ void bloom_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 void
-bloom_click(magic_api * api, int which, int mode,
-            SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+bloom_click(magic_api *api, int which, int mode,
+            SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   if (bloom_mask == NULL)
     return;
@@ -189,8 +189,8 @@ bloom_click(magic_api * api, int which, int mode,
 
 
 void
-bloom_drag(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas,
-           SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+bloom_drag(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+           SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   if (bloom_mask == NULL)
     return;
@@ -206,9 +206,9 @@ bloom_drag(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Sur
 }
 
 
-void bloom_release(magic_api * api, int which ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas,
-                   SDL_Surface * snapshot, int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect)
+void bloom_release(magic_api *api, int which ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas,
+                   SDL_Surface *snapshot, int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect)
 {
   if (bloom_mask == NULL)
     return;
@@ -224,7 +224,7 @@ void bloom_release(magic_api * api, int which ATTRIBUTE_UNUSED,
   update_rect->h = canvas->h;
 }
 
-void bloom_apply_effect(magic_api * api, SDL_Surface * canvas, SDL_Surface * snapshot)
+void bloom_apply_effect(magic_api *api, SDL_Surface *canvas, SDL_Surface *snapshot)
 {
   int sample, offset, offset_flip, x, y, xx, yy;
   Uint8 r, g, b;
@@ -323,18 +323,18 @@ void bloom_apply_effect(magic_api * api, SDL_Surface * canvas, SDL_Surface * sna
 }
 
 
-void bloom_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                     SDL_Surface * last ATTRIBUTE_UNUSED,
+void bloom_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED,
                      Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                     SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   /* TODO: Maybe some day? */
 }
 
 
 void bloom_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
-                              SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                              SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   int xrad, yrad, xx, yy, chg, n;
   magic_api *api = (magic_api *) ptr;
@@ -374,8 +374,8 @@ void bloom_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
 }
 
 
-void bloom_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED, int mode, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void bloom_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED, int mode, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
   if (bloom_mask == NULL)
     bloom_mask = (Uint8 *) malloc(sizeof(Uint8) * canvas->w * canvas->h);
@@ -384,9 +384,9 @@ void bloom_switchin(magic_api * api ATTRIBUTE_UNUSED,
     bloom_set_size(api, which, mode, NULL, NULL, bloom_default_size(api, which, mode), NULL);
 }
 
-void bloom_switchout(magic_api * api ATTRIBUTE_UNUSED,
+void bloom_switchout(magic_api *api ATTRIBUTE_UNUSED,
                      int which ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED,
-                     int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+                     int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
@@ -401,7 +401,7 @@ float change_luminance(float c_in, float l_in, float l_out)
 }
 
 
-Uint8 bloom_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
+Uint8 bloom_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode)
 {
   if (mode == MODE_PAINT)
     return 4;
@@ -409,14 +409,14 @@ Uint8 bloom_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE
     return 0;
 }
 
-Uint8 bloom_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 bloom_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 2;
 }
 
-void bloom_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 size,
-                    SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void bloom_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
+                    SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   BLOOM_PAINT_RADIUS = size * 12;
   BLOOM_SPIKE_LENGTH = sqrt(BLOOM_PAINT_RADIUS + 1);

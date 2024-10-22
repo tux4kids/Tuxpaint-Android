@@ -24,7 +24,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include "tp_magic_api.h"
@@ -88,9 +88,9 @@ Uint32 blind_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void blind_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
-                     Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void blind_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                     Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   //get the colors from API and store it in structure
   blind_r = r;
@@ -98,7 +98,7 @@ void blind_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
   blind_b = b;
 }
 
-int blind_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int blind_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -108,12 +108,12 @@ int blind_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 
   return (1);
 }
 
-int blind_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int blind_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return BLIND_NUMTOOLS;
 }
 
-SDL_Surface *blind_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *blind_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -122,12 +122,12 @@ SDL_Surface *blind_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *blind_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *blind_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return strdup(gettext_noop("Blind"));
+  return strdup(gettext("Blind"));
 }
 
-int blind_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int blind_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_DECORATIONS;
 }
@@ -137,27 +137,27 @@ int blind_get_order(int which ATTRIBUTE_UNUSED)
   return 100;
 }
 
-char *blind_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *blind_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return
-    strdup(gettext_noop
+    strdup(gettext
            ("Click towards the edge of your picture to pull window blinds over it. Move perpendicularly to open or close the blinds."));
 }
 
-int blind_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int blind_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-void blind_release(magic_api * api ATTRIBUTE_UNUSED,
+void blind_release(magic_api *api ATTRIBUTE_UNUSED,
                    int which ATTRIBUTE_UNUSED,
-                   SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                   SDL_Surface * snapshot ATTRIBUTE_UNUSED,
-                   int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                   SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                   int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-void blind_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void blind_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   Mix_FreeChunk(blind_snd);
 }
@@ -165,7 +165,7 @@ void blind_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 // Interactivity functions
 
 void blind_paint_blind(void *ptr_to_api, int which_tool ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                       SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr_to_api;
 
@@ -184,8 +184,8 @@ void blind_paint_blind(void *ptr_to_api, int which_tool ATTRIBUTE_UNUSED,
 }
 
 */
-void blind_drag(magic_api * api, int which, SDL_Surface * canvas,
-                SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect)
+void blind_drag(magic_api *api, int which, SDL_Surface *canvas,
+                SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   int opaque;
 
@@ -291,8 +291,8 @@ void blind_drag(magic_api * api, int which, SDL_Surface * canvas,
   }
 }
 
-void blind_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                 SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void blind_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                 SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   if (y < canvas->h / 2)
 
@@ -317,35 +317,35 @@ void blind_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
   blind_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void blind_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void blind_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 
 }
 
-void blind_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void blind_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 
 }
 
-int blind_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int blind_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return (MODE_PAINT);
 }
 
-Uint8 blind_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 blind_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 blind_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 blind_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void blind_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                    Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void blind_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                    Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

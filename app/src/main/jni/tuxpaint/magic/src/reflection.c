@@ -23,7 +23,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -81,7 +81,7 @@ void reflection_set_size(magic_api * api, int which, int mode, SDL_Surface * can
 
 
 
-int reflection_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int reflection_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -96,12 +96,12 @@ Uint32 reflection_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int reflection_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int reflection_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (1);
 }
 
-SDL_Surface *reflection_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *reflection_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -110,12 +110,12 @@ SDL_Surface *reflection_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *reflection_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *reflection_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Reflection")));
+  return (strdup(gettext("Reflection")));
 }
 
-int reflection_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int reflection_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_WARPS;
 }
@@ -125,21 +125,20 @@ int reflection_get_order(int which ATTRIBUTE_UNUSED)
   return 400;
 }
 
-char *reflection_get_description(magic_api * api ATTRIBUTE_UNUSED,
-                                 int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *reflection_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop("Click and drag the mouse around to add a reflection to your picture.")));
+  return (strdup(gettext("Click and drag the mouse around to add a reflection to your picture.")));
 }
 
-void reflection_drag(magic_api * api, int which ATTRIBUTE_UNUSED,
-                     SDL_Surface * canvas, SDL_Surface * last,
-                     int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+void reflection_drag(magic_api *api, int which ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas, SDL_Surface *last,
+                     int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   do_reflection(api, canvas, last, x, y, update_rect, 1);
 }
 
-void do_reflection(magic_api * api, SDL_Surface * canvas,
-                   SDL_Surface * last, int x, int y, SDL_Rect * update_rect, int show_origin)
+void do_reflection(magic_api *api, SDL_Surface *canvas,
+                   SDL_Surface *last, int x, int y, SDL_Rect *update_rect, int show_origin)
 {
   float scale;
   int xx, yy;
@@ -355,8 +354,8 @@ void do_reflection(magic_api * api, SDL_Surface * canvas,
   api->playsound(reflection_snd, (x * 255) / canvas->w, (y * 255) / canvas->h);
 }
 
-void reflection_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void reflection_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   if (x <= 0)
     x = 1;
@@ -375,60 +374,60 @@ void reflection_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
   reflection_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void reflection_release(magic_api * api, int which ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void reflection_release(magic_api *api, int which ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   do_reflection(api, canvas, last, x, y, update_rect, 0);
 }
 
-void reflection_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void reflection_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (reflection_snd != NULL)
     Mix_FreeChunk(reflection_snd);
 }
 
-void reflection_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                          SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+void reflection_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
                           Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                          SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+                          SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
-int reflection_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int reflection_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void reflection_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                         int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+void reflection_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   reflection_x1 = canvas->w / 2;
   reflection_y1 = canvas->h / 2;
 }
 
-void reflection_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                          int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void reflection_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-int reflection_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int reflection_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MODE_PAINT;
 }
 
 
-Uint8 reflection_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 reflection_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 reflection_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 reflection_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void reflection_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                         Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void reflection_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                         SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                         Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

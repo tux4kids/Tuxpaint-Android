@@ -32,7 +32,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last updated: January 16, 2024
+  Last updated: October 7, 2024
 */
 
 #include <stdio.h>
@@ -196,7 +196,7 @@ Uint32 perspective_api_version(void)
 }
 
 //Load sounds
-int perspective_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int perspective_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   int i;
   char fname[1024];
@@ -209,13 +209,13 @@ int perspective_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, 
   return (1);
 }
 
-int perspective_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int perspective_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (perspective_NUM_TOOLS);
 }
 
 // Load our icons:
-SDL_Surface *perspective_get_icon(magic_api * api, int which)
+SDL_Surface *perspective_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -224,13 +224,13 @@ SDL_Surface *perspective_get_icon(magic_api * api, int which)
 }
 
 // Return our names, localized:
-char *perspective_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *perspective_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
-  return (strdup(gettext_noop(perspective_names[which])));
+  return (strdup(gettext(perspective_names[which])));
 }
 
 // Return our group (the same):
-int perspective_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int perspective_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_PICTURE_WARPS;
 }
@@ -242,16 +242,16 @@ int perspective_get_order(int which)
 }
 
 // Return our descriptions, localized:
-char *perspective_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *perspective_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
-  return (strdup(gettext_noop(perspective_descs[which])));
+  return (strdup(gettext(perspective_descs[which])));
 }
 
 
 // Affect the canvas on drag:
-void perspective_drag(magic_api * api, int which, SDL_Surface * canvas,
-                      SDL_Surface * last, int ox ATTRIBUTE_UNUSED,
-                      int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+void perspective_drag(magic_api *api, int which, SDL_Surface *canvas,
+                      SDL_Surface *last, int ox ATTRIBUTE_UNUSED,
+                      int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   if (canvas_back == NULL)
     return;
@@ -372,8 +372,8 @@ void perspective_drag(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Affect the canvas on click:
-void perspective_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void perspective_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   click_x = x;
   click_y = y;
@@ -472,8 +472,8 @@ void perspective_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 }
 
 // Affect the canvas on release:
-void perspective_release(magic_api * api, int which,
-                         SDL_Surface * canvas, SDL_Surface * last, int x, int y, SDL_Rect * update_rect)
+void perspective_release(magic_api *api, int which,
+                         SDL_Surface *canvas, SDL_Surface *last, int x, int y, SDL_Rect *update_rect)
 {
   if (canvas_back == NULL)
     return;
@@ -674,10 +674,10 @@ void perspective_release(magic_api * api, int which,
   }
 }
 
-void perspective_preview(magic_api * api, int which,
-                         SDL_Surface * canvas,
-                         SDL_Surface * last ATTRIBUTE_UNUSED,
-                         int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect * update_rect, float step)
+void perspective_preview(magic_api *api, int which,
+                         SDL_Surface *canvas,
+                         SDL_Surface *last ATTRIBUTE_UNUSED,
+                         int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect, float step)
 {
   float i, j;
   float ax, ay, bx, by, dx, dy;
@@ -762,7 +762,7 @@ void perspective_preview(magic_api * api, int which,
   }
 }
 
-void perspective_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void perspective_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   //Clean up sounds
   int i;
@@ -777,8 +777,8 @@ void perspective_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void perspective_set_color(magic_api * api, int which, SDL_Surface * canvas,
-                           SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect)
+void perspective_set_color(magic_api *api, int which, SDL_Surface *canvas,
+                           SDL_Surface *last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect)
 {
   if (r != perspective_r || g != perspective_g || b != perspective_b)
   {
@@ -791,15 +791,15 @@ void perspective_set_color(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 // Use colors:
-int perspective_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which)
+int perspective_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   if (which == TOOL_PANELS || which == TOOL_TILEZOOM || which == TOOL_RUSH)
     return 0;
   return 1;
 }
 
-void perspective_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                          int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas)
+void perspective_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   Uint32 amask;
 
@@ -836,8 +836,8 @@ void perspective_switchin(magic_api * api ATTRIBUTE_UNUSED,
   SDL_BlitSurface(canvas, NULL, canvas_back, NULL);
 }
 
-void perspective_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                           int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void perspective_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                           int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
   if (canvas_back != NULL)
   {
@@ -846,7 +846,7 @@ void perspective_switchout(magic_api * api ATTRIBUTE_UNUSED,
   }
 }
 
-int perspective_modes(magic_api * api ATTRIBUTE_UNUSED, int which)
+int perspective_modes(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   if (which == TOOL_PANELS)
   {
@@ -859,7 +859,7 @@ int perspective_modes(magic_api * api ATTRIBUTE_UNUSED, int which)
 }
 
 void perspective_line(void *ptr_to_api, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                      SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr_to_api;
 
@@ -873,19 +873,18 @@ void perspective_line(void *ptr_to_api, int which ATTRIBUTE_UNUSED,
 }
 
 
-Uint8 perspective_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                                 int mode ATTRIBUTE_UNUSED)
+Uint8 perspective_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-Uint8 perspective_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 perspective_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void perspective_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                          SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                          Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void perspective_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                          Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

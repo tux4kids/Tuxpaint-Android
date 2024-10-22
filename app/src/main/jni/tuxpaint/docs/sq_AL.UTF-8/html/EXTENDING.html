@@ -92,7 +92,7 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.33          </h1>
+            version 0.9.34          </h1>
     
           <p>
             Të drejta kopjimi &copy; 2002-2024 nga kontribues të ndryshëm; shihni <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
@@ -100,7 +100,7 @@
           </p>
     
           <p>
-            29 prill 2024          </p>
+            10 tetor 2024          </p>
         </center>
       </header>
 
@@ -372,10 +372,18 @@
               Shtoni te kartela e të dhënave të penelit një rresht që përmban fjalën “<code><b>rotate</b></code>”.            </p>
           </dd>
 
-          <dt><strong>Penela të Animuar dhe Me drejtim ose Me Rrotullim</strong></dt>
+          <dt><strong>Chaotic Brushes</strong></dt>
           <dd>
             <p>
-              Mundeni të përzieni në një penel edhe veçori peneli të animuar, edhe peneli me drejtim ose me rrotullim. Përdorni të dyja mundësitë e dëshiruara (“<code><b>frames=<i>N</i></b></code>” dhe “<code><b>directional</b></code>” ose “<code><b>rotate</b></code>”), në rreshta më vete te kartela “<code>.dat</code>” e penelit.            </p>
+              As of Tux Paint version 0.9.34, brushes can be configured to continuously pick random directions as you draw with them.            </p>
+            <p>
+              Shtoni te kartela e të dhënave të penelit një rresht që përmban fjalën “<code><b>chaotic</b></code>”.            </p>
+          </dd>
+
+          <dt><strong>Animated Directional, Rotating, or Chaotic Brushes</strong></dt>
+          <dd>
+            <p>
+              You may mix both animated and either directional, rotating, or chaotic features into one brush. Use both options desired ("<code><b>frames=<i>N</i></b></code>" and "<code><b>directional</b></code>", "<code><b>rotate</b></code>", or "<code><b>chaotic</b></code>"), in separate lines in the brush's "<code>.dat</code>" file.            </p>
             <p>
               For directional brushes, lay the brush out so that each 3x3 set of directional shapes are laid out across a wide PNG image. For example, if the brush is 30x30 and there are 5 frames, it would be 450x90. (The leftmost 150x90 pixels of the image represent the 9 direction shapes for the first frame, for example.)            </p>
           </dd>
@@ -863,6 +871,7 @@
                     alt="[ Figurë e formuar si peizazh i një horizonti me diellin në mes dhe një ndërtesë në të djathtë. ]"
                     title="Figurë e formuar si peizazh i një horizonti me diellin në mes dhe një ndërtesë në të djathtë."
                     valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
                   <figcaption style="font-size: smaller;">
                     <p>Focusing on the në qendër of a starter image stretched to fit the gjerësia of the canvas.<p/>
                   </figcaption>
@@ -876,6 +885,7 @@
                     alt="[ Figurë e formuar si portret e një horizonti me diellin në mes dhe anën e majtë të një ndërtese në të djathtë. ]"
                     title="Figurë e formuar si portret e një horizonti me diellin në mes dhe anën e majtë të një ndërtese në të djathtë."
                     valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
                   <figcaption style="font-size: smaller;">
                     <p>Focusing on the në qendër of a starter image stretched to fit the lartësia of the canvas.<p/>
                   </figcaption>
@@ -889,6 +899,7 @@
                     alt="[ Figurë e formuar si peizazh e qiellit me diellin poshtë dhe majën e një ndërtese në të djathtë. ]"
                     title="Figurë e formuar si peizazh e qiellit me diellin poshtë dhe majën e një ndërtese në të djathtë."
                     valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
                   <figcaption style="font-size: smaller;">
                     <p>Focusing on the në krye of a starter image stretched to fit the gjerësia of the canvas.<p/>
                   </figcaption>
@@ -902,6 +913,7 @@
                     alt="[ Figurë e formuar si peizazh e truallit me diellin në krye. ]"
                     title="Figurë e formuar si peizazh e truallit me diellin në krye."
                     valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
                   <figcaption style="font-size: smaller;">
                     <p>Focusing on the në fund of a starter image stretched to fit the gjerësia of the canvas.<p/>
                   </figcaption>
@@ -915,6 +927,7 @@
                     alt="[ Figurë e formuar si portret e një horizonti me diellin në të majtë dhe një ndërtesë në qendër. ]"
                     title="Figurë e formuar si portret e një horizonti me diellin në të majtë dhe një ndërtesë në qendër."
                     valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
                   <figcaption style="font-size: smaller;">
                     <p>Focusing on the djathtas of a starter image stretched to fit the lartësia of the canvas.<p/>
                   </figcaption>

@@ -615,7 +615,7 @@ static void show_lang_usage(int exitcode)
  * @param f File descriptor to write to (e.g., STDOUT or STDERR)
  * @param prg Program name (e.g., "tuxpaint" or "tuxpaint.exe")
  */
-static void show_locale_usage(FILE * f, const char *const prg)
+static void show_locale_usage(FILE *f, const char *const prg)
 {
   /* FIXME: Add accented characters to the descriptions */
   fprintf(f,

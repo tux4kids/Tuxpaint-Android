@@ -55,7 +55,7 @@ Uint32 lightning_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int lightning_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
+int lightning_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -65,13 +65,13 @@ int lightning_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Ui
   return (1);
 }
 
-int lightning_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int lightning_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (1);
 }
 
 
-SDL_Surface *lightning_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
+SDL_Surface *lightning_get_icon(magic_api *api, int which ATTRIBUTE_UNUSED)
 {
   char fname[1024];
 
@@ -80,12 +80,12 @@ SDL_Surface *lightning_get_icon(magic_api * api, int which ATTRIBUTE_UNUSED)
   return (IMG_Load(fname));
 }
 
-char *lightning_get_name(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+char *lightning_get_name(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return strdup(gettext("Lightning"));
 }
 
-int lightning_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int lightning_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_ARTISTIC;
 }
@@ -95,22 +95,22 @@ int lightning_get_order(int which ATTRIBUTE_UNUSED)
   return 400;
 }
 
-char *lightning_get_description(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+char *lightning_get_description(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return strdup(gettext("Click, drag, and release to draw a lightning bolt between two points."));
 }
 
-int lightning_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int lightning_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return 1;
 }
 
-int lightning_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int lightning_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MODE_PAINT;
 }
 
-void lightning_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void lightning_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   if (snd_effect != NULL)
     Mix_FreeChunk(snd_effect);
@@ -118,8 +118,8 @@ void lightning_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 
 
 void
-lightning_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-                SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+lightning_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+                SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   sx = x;
   sy = y;
@@ -128,9 +128,9 @@ lightning_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 
 
 void
-lightning_drag(magic_api * api, int which, SDL_Surface * canvas,
-               SDL_Surface * snapshot, int ox ATTRIBUTE_UNUSED,
-               int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect * update_rect)
+lightning_drag(magic_api *api, int which, SDL_Surface *canvas,
+               SDL_Surface *snapshot, int ox ATTRIBUTE_UNUSED,
+               int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   /* FIXME: This could be made more efficient
      (only blit and update between (sx,sy) and (x,y), though
@@ -148,8 +148,8 @@ lightning_drag(magic_api * api, int which, SDL_Surface * canvas,
 
 
 void
-lightning_release(magic_api * api, int which ATTRIBUTE_UNUSED,
-                  SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+lightning_release(magic_api *api, int which ATTRIBUTE_UNUSED,
+                  SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   float a, b, len, angle;
   int thickness;
@@ -192,8 +192,8 @@ lightning_release(magic_api * api, int which ATTRIBUTE_UNUSED,
   lightning_draw_bolt((void *)api, canvas, snapshot, (float)sx, (float)sy, angle, len, thickness);
 }
 
-void lightning_draw_bolt(void *ptr, SDL_Surface * canvas,
-                         SDL_Surface * snapshot, float sx, float sy, float angle, float len, int thickness)
+void lightning_draw_bolt(void *ptr, SDL_Surface *canvas,
+                         SDL_Surface *snapshot, float sx, float sy, float angle, float len, int thickness)
 {
   magic_api *api = (magic_api *) ptr;
   float i;
@@ -283,44 +283,44 @@ void lightning_draw_bolt(void *ptr, SDL_Surface * canvas,
 }
 
 
-void lightning_set_color(magic_api * api, int which ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                         SDL_Surface * last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                         SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void lightning_set_color(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                         SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
+                         SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   api->rgbtohsv(r, g, b, &lightning_h, &lightning_s, &lightning_v);
 }
 
 
 void lightning_line_callback_drag(void *ptr, int which ATTRIBUTE_UNUSED,
-                                  SDL_Surface * canvas, SDL_Surface * snapshot ATTRIBUTE_UNUSED, int x, int y)
+                                  SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) ptr;
 
   api->xorpixel(canvas, x, y);
 }
 
-void lightning_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void lightning_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void lightning_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                         int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void lightning_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-Uint8 lightning_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
-{
-  return 0;
-}
-
-Uint8 lightning_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 lightning_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
 
-void lightning_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                        Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+Uint8 lightning_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+{
+  return 0;
+}
+
+void lightning_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                        Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

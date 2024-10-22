@@ -108,7 +108,7 @@ Uint32 colorsep_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-int colorsep_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level)
+int colorsep_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level)
 {
   int i;
   char fname[1024];
@@ -124,13 +124,13 @@ int colorsep_init(magic_api * api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uin
   return (1);
 }
 
-int colorsep_get_tool_count(magic_api * api ATTRIBUTE_UNUSED)
+int colorsep_get_tool_count(magic_api *api ATTRIBUTE_UNUSED)
 {
   return (NUM_TOOLS);
 }
 
 
-SDL_Surface *colorsep_get_icon(magic_api * api, int which)
+SDL_Surface *colorsep_get_icon(magic_api *api, int which)
 {
   char fname[1024];
 
@@ -139,12 +139,12 @@ SDL_Surface *colorsep_get_icon(magic_api * api, int which)
   return (IMG_Load(fname));
 }
 
-char *colorsep_get_name(magic_api * api ATTRIBUTE_UNUSED, int which)
+char *colorsep_get_name(magic_api *api ATTRIBUTE_UNUSED, int which)
 {
   return strdup(gettext(colorsep_names[which]));
 }
 
-int colorsep_get_group(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int colorsep_get_group(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MAGIC_TYPE_COLOR_FILTERS;
 }
@@ -154,7 +154,7 @@ int colorsep_get_order(int which)
   return 700 + which;
 }
 
-char *colorsep_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+char *colorsep_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   if (which == COLORSEP_TOOL_3DGLASSES && colorsep_complexity == MAGIC_COMPLEXITY_NOVICE)
   {
@@ -166,7 +166,7 @@ char *colorsep_get_description(magic_api * api ATTRIBUTE_UNUSED, int which, int 
   }
 }
 
-int colorsep_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int colorsep_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   if (which == COLORSEP_TOOL_COLORSEP)
     return 1;
@@ -174,12 +174,12 @@ int colorsep_requires_colors(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBU
     return 0;
 }
 
-int colorsep_modes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
+int colorsep_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
 {
   return MODE_PAINT;
 }
 
-void colorsep_shutdown(magic_api * api ATTRIBUTE_UNUSED)
+void colorsep_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 {
   int i;
 
@@ -191,8 +191,8 @@ void colorsep_shutdown(magic_api * api ATTRIBUTE_UNUSED)
 }
 
 void
-colorsep_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
-               SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+colorsep_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
+               SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   api->stopsound();
 
@@ -205,9 +205,9 @@ colorsep_click(magic_api * api, int which, int mode ATTRIBUTE_UNUSED,
 
 
 void
-colorsep_drag(magic_api * api, int which, SDL_Surface * canvas,
-              SDL_Surface * snapshot, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
-              int x, int y, SDL_Rect * update_rect)
+colorsep_drag(magic_api *api, int which, SDL_Surface *canvas,
+              SDL_Surface *snapshot, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
+              int x, int y, SDL_Rect *update_rect)
 {
   int offset_x, offset_y;
 
@@ -231,8 +231,8 @@ colorsep_drag(magic_api * api, int which, SDL_Surface * canvas,
   update_rect->h = canvas->h;
 }
 
-void colorsep_apply(magic_api * api, int which, SDL_Surface * canvas,
-                    SDL_Surface * snapshot, int offset_x, int offset_y, int preview)
+void colorsep_apply(magic_api *api, int which, SDL_Surface *canvas,
+                    SDL_Surface *snapshot, int offset_x, int offset_y, int preview)
 {
   int xx, yy, step;
   Uint8 r1, g1, b1, r2, g2, b2, r, g, b;
@@ -352,8 +352,8 @@ void colorsep_apply(magic_api * api, int which, SDL_Surface * canvas,
 }
 
 
-void colorsep_release(magic_api * api, int which,
-                      SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect)
+void colorsep_release(magic_api *api, int which,
+                      SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   int offset_x, offset_y;
 
@@ -375,10 +375,10 @@ void colorsep_release(magic_api * api, int which,
 }
 
 
-void colorsep_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                        SDL_Surface * canvas ATTRIBUTE_UNUSED,
-                        SDL_Surface * last ATTRIBUTE_UNUSED,
-                        Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void colorsep_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                        SDL_Surface *last ATTRIBUTE_UNUSED,
+                        Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   colorsep_r_pct = (float)r / 255.0;
   colorsep_g_pct = (float)g / 255.0;
@@ -393,17 +393,17 @@ void colorsep_set_color(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
 }
 
 
-void colorsep_switchin(magic_api * api ATTRIBUTE_UNUSED,
-                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void colorsep_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void colorsep_switchout(magic_api * api ATTRIBUTE_UNUSED,
-                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface * canvas ATTRIBUTE_UNUSED)
+void colorsep_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-Uint8 colorsep_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
+Uint8 colorsep_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which, int mode ATTRIBUTE_UNUSED)
 {
   if (which == COLORSEP_TOOL_3DGLASSES && colorsep_complexity > MAGIC_COMPLEXITY_NOVICE)
   {
@@ -419,15 +419,15 @@ Uint8 colorsep_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which, int m
   }
 }
 
-Uint8 colorsep_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
+Uint8 colorsep_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return COLORSEP_3DGLASS_VARIATION_RED_CYAN + 1;
 }
 
 
-void colorsep_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
-                       Uint8 size, SDL_Rect * update_rect ATTRIBUTE_UNUSED)
+void colorsep_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+                       Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   colorsep_3dglass_variation = (size - 1);
 }
