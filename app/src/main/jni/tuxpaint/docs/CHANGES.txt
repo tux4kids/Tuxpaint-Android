@@ -6,7 +6,7 @@ Copyright (c) 2002-2024
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
 
-2024.October.21 (0.9.34)
+2024.October.23 (0.9.34)
   * New Magic Tools:
     ----------------
     * "Comic Dots", draws repeating dots (using a multiply blend)
@@ -220,6 +220,12 @@ https://tuxpaint.org/
     * Rotated multi-frame brushes would bleed black in any
       transparent areas (e.g., soft edges would be black halos). Mended.
       Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Hitting [Ctrl]-[R] or [Ctrl]-[Z] would invoke switch-out
+      and switch-back-in of Magic tools, even when no action occured.
+      h/t Miyagi Andel for reporting
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+      Closes https://sourceforge.net/p/tuxpaint/bugs/294/
 
   * Other Improvements:
     -------------------

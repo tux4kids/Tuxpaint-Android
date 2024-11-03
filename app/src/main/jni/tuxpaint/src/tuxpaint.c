@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - October 20, 2024
+  June 14, 2002 - October 23, 2024
 */
 
 #include "platform.h"
@@ -2892,10 +2892,10 @@ static void mainloop(void)
           /* Ctrl-Z - Undo */
           /* (As long as we're not in the middle of something!!!) */
 
-          magic_switchout(canvas);
-
           if (tool_avail[TOOL_UNDO])
           {
+            magic_switchout(canvas);
+
             if (cursor_x != -1 && cursor_y != -1)
             {
               hide_blinking_cursor();
@@ -2930,18 +2930,18 @@ static void mainloop(void)
             update_screen_rect(&r_tools);
             shape_tool_mode = SHAPE_TOOL_MODE_DONE;
             maybe_redraw_eraser_xor();
-          }
 
-          magic_switchin(canvas);
+            magic_switchin(canvas);
+          }
         }
         else if (key == SDLK_r && (mod & KMOD_CTRL) && !noshortcuts)
         {
           /* Ctrl-R - Redo */
 
-          magic_switchout(canvas);
-
           if (tool_avail[TOOL_REDO])
           {
+            magic_switchout(canvas);
+
             if (cur_tool == TOOL_STAMP)
               reset_stamps(&stamp_xored_rt, &stamp_place_x, &stamp_place_y, &stamp_tool_mode);
             hide_blinking_cursor();
@@ -2949,9 +2949,9 @@ static void mainloop(void)
             update_screen_rect(&r_tools);
             shape_tool_mode = SHAPE_TOOL_MODE_DONE;
             maybe_redraw_eraser_xor();
-          }
 
-          magic_switchin(canvas);
+            magic_switchin(canvas);
+          }
         }
         else if (key == SDLK_o && (mod & KMOD_CTRL) && !noshortcuts)
         {

@@ -6,7 +6,7 @@
         Copyright © 2002-2024 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                             21 de Outubro de 2024
+                             25 de Outubro de 2024
 
 +--------------------------------------------------------+
 |                         Índice                         |
