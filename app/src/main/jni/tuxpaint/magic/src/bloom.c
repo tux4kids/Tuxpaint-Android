@@ -34,7 +34,8 @@ static int BLOOM_SPIKE_LENGTH = 5;
  * so they all SUM() to approx. 1.0000 */
 #define NUM_SAMPLE_WEIGHTS 13
 float sample_weights[NUM_SAMPLE_WEIGHTS] = {
-  0.0449, 0.0627, 0.0752, 0.0842, 0.0904, 0.0940, 0.0952, 0.0940, 0.0904, 0.0842, 0.0752, 0.0627, 0.0449
+  0.0449, 0.0627, 0.0752, 0.0842, 0.0904, 0.0940, 0.0952, 0.0940, 0.0904,
+  0.0842, 0.0752, 0.0627, 0.0449
 };
 
 Mix_Chunk *snd_effects = NULL;
@@ -68,8 +69,8 @@ float luminance(float r, float g, float b);
 float change_luminance(float c_in, float l_in, float l_out);
 Uint8 bloom_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 bloom_default_size(magic_api * api, int which, int mode);
-void bloom_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                    SDL_Rect * update_rect);
+void bloom_set_size(magic_api * api, int which, int mode,
+                    SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 bloom_api_version(void)
@@ -189,8 +190,8 @@ bloom_click(magic_api *api, int which, int mode,
 
 
 void
-bloom_drag(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
-           SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
+bloom_drag(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+           SDL_Surface *canvas, SDL_Surface *snapshot, int ox, int oy, int x, int y, SDL_Rect *update_rect)
 {
   if (bloom_mask == NULL)
     return;
@@ -323,11 +324,12 @@ void bloom_apply_effect(magic_api *api, SDL_Surface *canvas, SDL_Surface *snapsh
 }
 
 
-void bloom_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED,
+void bloom_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED ATTRIBUTE_UNUSED,
                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
                      SDL_Surface *last ATTRIBUTE_UNUSED,
-                     Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+                     Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                     Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   /* TODO: Maybe some day? */
 }
@@ -414,9 +416,10 @@ Uint8 bloom_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
   return 2;
 }
 
-void bloom_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                    SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void bloom_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   BLOOM_PAINT_RADIUS = size * 12;
   BLOOM_SPIKE_LENGTH = sqrt(BLOOM_PAINT_RADIUS + 1);

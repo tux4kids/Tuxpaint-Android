@@ -75,8 +75,8 @@ void puzzle_click(magic_api * api, int which, int mode,
 int gcd(int a, int b);
 Uint8 puzzle_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 puzzle_default_size(magic_api * api, int which, int mode);
-void puzzle_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                     SDL_Rect * update_rect);
+void puzzle_set_size(magic_api * api, int which, int mode,
+                     SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 Uint32 puzzle_api_version(void)
 {
@@ -145,10 +145,12 @@ void puzzle_shutdown(magic_api *api ATTRIBUTE_UNUSED)
     Mix_FreeChunk(puzzle_snd);
 }
 
-void puzzle_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                      Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void puzzle_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *last ATTRIBUTE_UNUSED,
+                      Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                      Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -281,8 +283,8 @@ Uint8 puzzle_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
   return 4;
 }
 
-void puzzle_set_size(magic_api *api, int which, int mode, SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED,
-                     Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void puzzle_set_size(magic_api *api, int which, int mode, SDL_Surface *canvas,
+                     SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   RATIO = size + 1;
   puzzle_switchin(api, which, mode, canvas);

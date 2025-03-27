@@ -91,8 +91,8 @@ void perspective_line(void *ptr_to_api, int which, SDL_Surface * canvas, SDL_Sur
 
 Uint8 perspective_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 perspective_default_size(magic_api * api, int which, int mode);
-void perspective_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                          SDL_Rect * update_rect);
+void perspective_set_size(magic_api * api, int which, int mode,
+                          SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 
@@ -883,8 +883,11 @@ Uint8 perspective_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIB
   return 0;
 }
 
-void perspective_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                          SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void perspective_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED,
+                          int mode ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                          SDL_Surface *last ATTRIBUTE_UNUSED,
                           Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

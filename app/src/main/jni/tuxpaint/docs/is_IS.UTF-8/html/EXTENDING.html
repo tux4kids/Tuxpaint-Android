@@ -92,15 +92,15 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.34          </h1>
+            version 0.9.35          </h1>
     
           <p>
-            Copyright &copy; 2002-2024 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2002-2025 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
     
           <p>
-            október 10, 2024          </p>
+            janúar 12, 2025          </p>
         </center>
       </header>
 
@@ -231,7 +231,7 @@
             <p>
               Your personal Tux Paint folder is stored in your personal "Application Data". For example, on newer Windows:
               <blockquote>
-                <nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\</code></nobr>              </blockquote>
+                <nobr><code style='background: #EEE;'>C:\Users\<i>username</i>\AppData\Roaming\TuxPaint\</code></nobr>              </blockquote>
             </p>
           </dd>
 
@@ -246,7 +246,7 @@
           <dt><strong>Linux and Unix</strong></dt>
           <dd>
             <p>
-              Your personal Tux Paint files go into a 'hidden directory' found in your account's home directory: <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaint/</code>"</nobr>.            </p>
+              Your personal Tux Paint files go into a 'hidden directory' found in your account's home directory: <nobr>"<code style='background: #EEE;'>/home/<i>username</i>/.tuxpaint/</code>"</nobr>.            </p>
             <p>
               Don't forget the period ("<code>.</code>") before the "<code>tuxpaint</code>"!            </p>
           </dd>
@@ -256,7 +256,7 @@
           To add your own brushes, stamps, 'starters,' templates, and fonts, create subdirectories under your personal Tux Paint directory named "<code><b>brushes</b></code>", "<code><b>stamps</b></code>", "<code><b>starters</b></code>", "<code><b>templates</b></code>", "<code><b>fonts</b></code>", respectively.        </p>
 
         <p>
-          (For example, if you created a brush named <nobr>"<code style='background: #EEE;'>flower.png</code>"</nobr>, you would put it in <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaint/brushes/</code>"</nobr> under Linux or Unix.)        </p>
+          (For example, if you created a brush named <nobr>"<code style='background: #EEE;'>flower.png</code>"</nobr>, you would put it in <nobr>"<code style='background: #EEE;'>/home/<i>username</i>/.tuxpaint/brushes/</code>"</nobr> under Linux or Unix.)        </p>
       </section><!-- H2: Personal Files -->
     </section><!-- H1: Where Files Go -->
 
@@ -337,7 +337,7 @@
           <dt><strong>Brush Spacing</strong></dt>
           <dd>
             <p>
-              As of Tux Paint version 0.9.16, you can now specify the spacing for brushes (that is, how often they are drawn). By default, the spacing will be the brush's height, divided by 4.            </p>
+              You may specify the spacing for brushes &mdash; that is, how frequently they are drawn across the length of a line or stroke. By default, the spacing will be the brush's height, divided by 4.            </p>
             <p>
               Add a line containing the line "<code><b>spacing=<i>N</i></b></code>" to the brush's data file, where "<i>N</i>" is the spacing you want for the brush. (The lower the number, the more often the brush is drawn.)            </p>
           </dd>
@@ -345,9 +345,9 @@
           <dt><strong>Animated Brushes</strong></dt>
           <dd>
             <p>
-              As of Tux Paint version 0.9.16, you may now create animated brushes. As the brush is used, each frame of the animation is drawn.            </p>
+              Brushes may be animated. As the brush is used, each frame of the animation is drawn in sequence.            </p>
             <p>
-              Lay each frame out across a wide PNG image. For example, if your brush is 30x30 and you have 5 frames, the image should be 150x30.            </p>
+              Lay each frame out across a wide PNG image. For example, if the brush is 30x30 and there are 5 frames, the image should be 150x30.            </p>
             <p>
               Add a line containing the line "<code><b>frames=<i>N</i></b></code>" to the brush's data file, where "<i>N</i>" is the number of frames in the brush.            </p>
             <p class="note">
@@ -357,9 +357,9 @@
           <dt><strong>Directional Brushes</strong></dt>
           <dd>
             <p>
-              As of Tux Paint version 0.9.16, you may now create directional brushes. As the brush is used, different shapes are drawn, depending on the direction the brush is going.            </p>
+              Brushes may be configured to draw a different shape based on the direction of the line or brush stroke.  Different shapes will be drawn depending on which of the eight compass directions the brush is moving &mdash; up (aka North), up/right (aka Northeast), right (aka East), down/right (aka Southeast), etc.).  A ninth "center" shape is used when there's no motion (e.g., simply clicking/tapping and releasing the "Paint" tool, without dragging).            </p>
             <p>
-              The directional shapes are divided into a 3x3 square in a PNG image. For example, if your brush is 30x30, the image should be 90x90, and each of the direction's shapes placed in a 3x3 grid. The center region is used for no motion. The top right is used for motion that's both up, and to the right. And so on.            </p>
+              The directional shapes are divided into a 3x3 square in a PNG image. For example, if your brush is 30x30, the image should be 90x90, and each of the direction's shapes placed in a 3x3 grid.            </p>
             <p>
               Add a line containing the word "<code><b>directional</b></code>" to the brush's data file.            </p>
           </dd>
@@ -367,7 +367,7 @@
           <dt><strong>Rotating Brushes</strong></dt>
           <dd>
             <p>
-              As of Tux Paint version 0.9.27, you may now create rotating brushes. As the brush is used, it is rotated 360 degrees, depending on the direction the brush is going.            </p>
+              Brushes may be configured to rotate based on the angle of the line or brush stroke. (Unlike Directional Brushes, described above, only a single brush shape may be provided.            </p>
             <p>
               Add a line containing the word "<code><b>rotate</b></code>" to the brush's data file.            </p>
           </dd>
@@ -375,7 +375,7 @@
           <dt><strong>Chaotic Brushes</strong></dt>
           <dd>
             <p>
-              As of Tux Paint version 0.9.34, brushes can be configured to continuously pick random directions as you draw with them.            </p>
+              Brushes may be configured to continuously choose a random direction as you draw with them.            </p>
             <p>
               Add a line containing the word "<code><b>chaotic</b></code>" to the brush's data file.            </p>
           </dd>
@@ -424,7 +424,7 @@
                     alt=""
                     align="right">
         <p>
-          As of Tux Paint version 0.9.17, Stamps may be either PNG bitmap images or SVG vector images. They can be full-color or greyscale. The alpha (transparency) channel of PNGs is used to determine the actual shape of the picture (otherwise you'll stamp a large rectangle on your drawings).        </p>
+          Stamps may be either PNG bitmap images or SVG vector images. They can be full-color or greyscale. The alpha (transparency) channel of PNGs is used to determine the actual shape of the picture (otherwise you'll stamp a large rectangle on your drawings).        </p>
 
         <p>
           PNGs can be any size, and Tux Paint (by default) provides a set of sizing buttons to let the user scale the stamp up (larger) and down (smaller).        </p>
@@ -662,7 +662,7 @@
           For example, for the stamp "<code>stamp.png</code>" you would create another file named "<code>stamp_mirror.png</code>", which will be used when the stamp is mirrored (rather than using a backwards version of "<code>stamp.png</code>").        </p>
 
         <p>
-          As of Tux Paint 0.9.18, you may similarly provide a pre-flipped image with "<code><b>_flip</b></code>" in the name, and/or an image that is both mirrored and flipped, by naming it "<code><b>_mirror_flip</b></code>".        </p>
+          You may also provide a pre-flipped image with "<code><b>_flip</b></code>" in the name, and/or an image that is both mirrored <em>and</em> flipped, by naming it "<code><b>_mirror_flip</b></code>".        </p>
 
         <p class="note">
           <span title="Information">&#128161;</span>          <strong>Note:</strong> If the user flips and mirrors an image, and a pre-drawn "<code>_mirror_flip</code>" doesn't exist, but either "<code>_flip</code>" or "<code>_mirror</code>" does, it will be used, and mirrored or flipped, respectively.        </p>
@@ -720,7 +720,7 @@
           The most basic kind of 'starter' is similar to a picture in a coloring book. It's an outline of a shape which you can then color in and add details to. In Tux Paint, as you draw, type text, or stamp stamps, the outline remains 'above' what you draw. You can erase the parts of the drawing you made, but you can't erase the outline.        </p>
 
         <p>
-          To create this kind of 'starter' image, simply create an outlined black and white picture in a paint program, and save it as a raster PNG file, or vector SVG.  If saving as a PNG, you may optionally render the image as black-and-transparent, rather than black-and-white, but (as of Tux Paint 0.9.21) this is not required.        </p>
+          To create this kind of 'starter' image, simply create an outlined black and white picture in a paint program, and save it as a raster PNG file, or vector SVG.  If saving as a PNG, you may optionally render the image as black-and-transparent, rather than black-and-white, although this is not required.        </p>
       </section><!-- H2: Coloring-Book Style Starters -->
 
       <section><!-- H2: Scene-Style Starters -->
@@ -957,7 +957,7 @@
                   alt=""
                   align="right">
       <p>
-        'Template' images also appear in the 'New' dialog, along with solid color background choices and 'Starters'. (Note: Tux Paint prior to version 0.9.22 did not have the 'Template' feature.)      </p>
+        'Template' images also appear in the 'New' dialog, along with solid color background choices and 'Starters'.      </p>
 
       <p>
         Unlike pictures drawn in Tux Paint by users and then opened later, opening a 'template' creates a new drawing. When you save, the 'template' image is not overwritten. Unlike 'starters', there is no immutable 'layer' above the canvas. You may draw over any part of it.      </p>
@@ -1118,7 +1118,7 @@
       </header>
 
       <p>
-        As of version 0.9.22, Tux Paint's 'Text' and 'Label' tools can present an on-screen keyboard that allows the pointer (via a mouse, eye-tracking systems, etc.) to be used to input characters. Files that describe the layout and available keys are stored in Tux Paint "<code>osk</code>" directory. Each keyboard layout is defined by a number of files (some of which may be shared by different layouts).      </p>
+        Tux Paint's 'Text' and 'Label' tools can present an on-screen keyboard that allows the pointer (via a mouse, touch screen, eye-tracking systems, etc.) to be used to input characters. Files that describe the layout and available keys are stored in Tux Paint "<code>osk</code>" directory. Each keyboard layout is defined by a number of files (some of which may be shared by different layouts).      </p>
       <p>
         We'll use the QWERTY keyboard as an example:      </p>
       
@@ -1142,7 +1142,7 @@
         </blockquote>
 
         <p class="note">
-          <span title="Configuration option">&#9881;</span>          <strong>Note:</strong> Blank lines within the "<code>.layout</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example above.        </p>
+          <span title="Configuration option">&#9881;</span>          <strong>Note:</strong> Blank lines within the "<code>.layout</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example below.        </p>
 
         <p>
           The "<code>keyboardlist</code>" line describes which layouts to switch to, when the user clicks the left and right buttons on the keyboard. (See below.)        </p>
@@ -1156,6 +1156,9 @@
 
         <p>
           This describes how big the keyboard is (as a "width × height" grid), and lists each key with its numeric keycode (see the "<code>keymap</code>" file, below), the width it should be drawn at (typically "<code>1.0</code>", to take one space on the keyboard, but in the example below, notice the "<code>TAB</code>" and "<code>SPACE</code>" keys are much wider), the character or text to display on the key, depending on which modifier keys have been pressed (one each for: no modifiers, <b><code>[Shift]</code></b>, <b><code>[AltGr]</code></b>, and <b><code>[Shift]</code></b> + <b><code>[AltGr]</code></b>), and finally whether or not the key is affected by the <b><code>[CapsLock]</code></b> key (use "<code>1</code>") or <b><code>[AltGr]</code></b> (alternate graphics) key (use "<code>2</code>"), or not at all (use "<code>0</code>").        </p>
+
+        <p>
+          The "<code>NEWLINE</code>" keyword is used to indicate the end of one row of the keyboard, and thus subsequent key layout descriptions will be beginning on a new row.        </p>
 
         <blockquote>
           <p>
@@ -1193,9 +1196,13 @@
             KEY 64 2.0 Alt Alt Alt Alt 0<br>
             <br>
             # Space<br>
-            KEY 65 7.0 SPACE SPACE SPACE SPACE 0<br>
+            KEY 65 5.0 SPACE SPACE SPACE SPACE 0<br>
             <br>
+            # AltGr<br>
             KEY 108 2.0 AltGr AltGr AltGr AltGr 0<br>
+            <br>
+            # Paste<br>
+            KEY 143 2.0 Paste Paste Paste Paste 0<br>
             <br>
             # Arrow to right will change to the next keyboard<br>
             KEY 1 1.0 -&gt; -&gt; -&gt; -&gt; 0</code>
@@ -1221,6 +1228,10 @@
             <code>2</code> —
                 previous layout (per the layout file's "<code>keyboardlist</code>" setting)          </li>
         </ul>
+
+        <p class="note">
+          <span title="Version variation">&#128220;</span>          Starting with Tux Paint 0.9.35, the <code>XF86Paste</code> keysym (value 143) can be used to initiate a copy/paste clipboard buffer "paste" event. See the "Paste" key in the keyboard layout files. (Pasting via a physical keyboard is initiated using the <code>[Control]</code> + <code>[V]</code> key combination.        </p>
+
       </section><!-- H2: Keyboard layout file ("qwerty.h_layout") -->
 
       <section><!-- H2: Keymap file ("us-intl-altgr-dead-keys.keymap") -->

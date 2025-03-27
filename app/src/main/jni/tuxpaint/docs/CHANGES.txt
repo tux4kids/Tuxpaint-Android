@@ -2,9 +2,99 @@ CHANGES.txt for Tux Paint
 
 Tux Paint - A simple drawing program for children.
 
-Copyright (c) 2002-2024
+Copyright (c) 2002-2025
 Various contributors (see below, and AUTHORS.txt)
 https://tuxpaint.org/
+
+2025.March.26 (0.9.35)
+  * New Magic Tools:
+    ----------------
+    + Heart, Sparkle, and Star emitters
+      Click and drag to leave a short trail of shapes.
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/266/
+      - Code: Bill Kendrick <bill@newbreedsoftware.com>
+      - Heart sound effect: "Happy Retro Upwards Jingle", CC0 by
+        IndyTheCringeMaster <https://freesound.org/people/IndyTheCringeMaster/>
+      - Sparkles sound effect: based on "PluckArp", CC0 by gmortizwavs
+        <https://freesound.org/people/gmortizwavs/>
+      - Stars sound effect: based on "space-chimes-2-04.wav",
+        Creative Commons Attribution 4.0 by gamebalance
+        <https://freesound.org/people/gamebalance/>
+
+  * Text & Label Tool Improvements:
+    -------------------------------
+    + It is now possible to paste text from the copy/paste clipboard
+      into Tux Paint.  If text goes beyond the right of the canvas,
+      the text is word-wrapped at the previous space (' ') or dash ('-'),
+      if any, and a new line is created.  If text goes beyond the bottom
+      of the canvas, the text is truncated there.
+      Closes https://sourceforge.net/p/tuxpaint/feature-requests/95/
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    + Checking for fonts in any locations specified by "<dir>"
+      entries found in system-wide and user-level FontConfig config files.
+      This allows more fonts, and user-specific fonts, to be found & loaded.
+      - It looks for:
+        - `./etc/fonts/fonts.conf` (ships with Tux Paint) (Windows)
+        - `$FONTCONFIG_PATH/fonts.conf` (macOS/iOS, Linux/Unix)
+          - or `/etc/fonts/fonts.conf` (Linux/Unix)
+        - `$XDG_CONFIG_HOME/fontconfig/fonts.conf` (Linux/Unix)
+          - or `$HOME/.config/fontconfig/fonts.conf`
+        - `/boot/system/settings/fonts/fonts.conf` (Haiku)
+      - Note: This adds a build dependency on `libxml-2.0`.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      h/t Mark Kim, Luc Schrijvers, & Shin-ichi TOYAMA
+
+    + Tux Paint on Windows loads user fonts.
+      (from e.g., `C:\Users\<username>\AppData\Local\Microsoft\Windows\Fonts`)
+      TOYAMA Shin-ichi <dolphin6k@wmail.plala.or.jp>
+
+  * Other Improvements:
+    -------------------
+    + Improved color picker: better behavior when clicking/tapping and
+      dragging hue/saturation box and value slider.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    + Less warning noise to stdout (e.g., don't complain about inability
+      to load SVGs that don't exist; check whether they exist, first).
+      h/t Thomas Klausner for mentioning it.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+  * Documentation updates:
+    ----------------------
+    * More complete description of Text & Label tools' on-screen keyboard
+      in README documentation.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Cleaned up docs a bit, by removing notes about differences in
+      some very old versions of Tux Paint.
+      Bill Kendrick <bill@newbreedsoftware.com>
+
+    * Mentioned Windows installer EXE "/SILENT" and "/VERYSILENT"
+      in INSTALL and FAQ docs.
+      Bill Kendrick <bill@newbreedsoftware.com>
+      h/t TOYAMA Shin-ichi & Jannie E.
+
+  * Localization Updates:
+    ---------------------
+    * Catalan translation
+      Pere Pujal i Carabantes <perepujal@gmail.com>
+
+    * French translation
+      Jacques Chion <jacques.chion@orange.fr>
+
+    * German translation
+      Holger Wansing <hwansing@mailbox.org>
+      (via bugs.debian.org; h/t Jonathan Carter for pointing them out)
+
+  * Ports & Building:
+    -----------------
+    + Don't use Linux-specific invocation of "install"; use "mkdir" & "cp"
+      Thomas Klausner <wiz@netbsd.org>
+
+    + Specific build settings for NetBSD
+      Bill Kendrick <bill@newbreedsoftware.com>
+      & Thomas Klausner <wiz@netbsd.org>
 
 2024.October.23 (0.9.34)
   * New Magic Tools:

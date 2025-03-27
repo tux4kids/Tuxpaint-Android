@@ -178,13 +178,12 @@ Uint8 trochoids_default_size(magic_api * api, int which, int mode);
 void trochoids_shutdown(magic_api * api);
 void trochoids_click(magic_api * api, int which, int mode,
                      SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
-void trochoids_drag(magic_api * api, int which,
-                    SDL_Surface * canvas, SDL_Surface * snapshot,
-                    int old_x, int old_y, int x, int y, SDL_Rect * update_rect);
-void trochoids_work(magic_api * api, int which,
-                    SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect, int guides);
-void trochoids_release(magic_api * api, int which,
-                       SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
+void trochoids_drag(magic_api * api, int which, SDL_Surface * canvas,
+                    SDL_Surface * snapshot, int old_x, int old_y, int x, int y, SDL_Rect * update_rect);
+void trochoids_work(magic_api * api, int which, SDL_Surface * canvas,
+                    SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect, int guides);
+void trochoids_release(magic_api * api, int which, SDL_Surface * canvas,
+                       SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
 void trochoids_sound(magic_api * api, int snd_idx, int x, int y);
 void trochoids_set_color(magic_api * api, int which, SDL_Surface * canvas,
                          SDL_Surface * snapshot, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
@@ -426,8 +425,8 @@ void trochoids_work(magic_api *api, int which,
       py2 = trochoids_y + (((R + r) * deg_sin((a2))) - (d * deg_sin(r_ratio * a2)));
     }
 
-    api->line((void *)api, which, canvas, snapshot, px, py, px2, py2, (20 * (guides && (a >= 360.0))) + 1,
-              trochoids_line_callback);
+    api->line((void *)api, which, canvas, snapshot, px, py, px2, py2,
+              (20 * (guides && (a >= 360.0))) + 1, trochoids_line_callback);
   }
 
   if (guides)
@@ -599,32 +598,36 @@ void trochoids_sound(magic_api *api, int snd_idx, int x, int y)
 }
 
 
-void trochoids_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+void trochoids_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED,
                          SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                         SDL_Surface *snapshot ATTRIBUTE_UNUSED,
-                         Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+                         SDL_Surface *snapshot ATTRIBUTE_UNUSED, Uint8 r,
+                         Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   trochoids_color = SDL_MapRGB(canvas->format, r, g, b);
 }
 
 
-void trochoids_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                        Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void trochoids_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                        SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   trochoids_size = (size - 1);  /* array index is 0-based, but Tux Paint returns between 1...{accepted sizes} */
 }
 
 
-void trochoids_line_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBUTE_UNUSED,
-                             SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
+void trochoids_line_callback(void *pointer ATTRIBUTE_UNUSED,
+                             int tool ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                             SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) pointer;
 
   api->putpixel(canvas, x, y, trochoids_color);
 }
 
-void trochoids_xorline_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBUTE_UNUSED,
+void trochoids_xorline_callback(void *pointer ATTRIBUTE_UNUSED,
+                                int tool ATTRIBUTE_UNUSED,
                                 SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) pointer;
@@ -635,13 +638,13 @@ void trochoids_xorline_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBU
   api->xorpixel(canvas, x + 1, y + 1);
 }
 
-void trochoids_switchin(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface *canvas ATTRIBUTE_UNUSED)
+void trochoids_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 
-void trochoids_switchout(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface *canvas ATTRIBUTE_UNUSED)
+void trochoids_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED)
 {
 }
 

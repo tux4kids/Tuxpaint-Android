@@ -1,7 +1,7 @@
 /*
   onscreen_keyboard.c
 
-  Copyright (c) 2011-2023
+  Copyright (c) 2011-2024
   https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last modified: March 23, 2023
+  Last modified: December 25, 2024
 */
 
 #include "debug.h"
@@ -90,14 +90,15 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface *canvas,
                                 SDL_Surface *BLANK_oskdel,
                                 SDL_Surface *BLANK_osktab,
                                 SDL_Surface *BLANK_oskenter,
-                                SDL_Surface *BLANK_oskcapslock, SDL_Surface *BLANK_oskshift, int disable_change)
+                                SDL_Surface *BLANK_oskcapslock,
+                                SDL_Surface *BLANK_oskshift, SDL_Surface *BLANK_oskpaste, int disable_change)
 {
   SDL_Surface *surface;
   SDL_Surface *button_up, *button_down;
   SDL_Surface *button_off, *button_nav;
   SDL_Surface *button_hold;
   SDL_Surface *oskdel, *osktab, *oskenter;
-  SDL_Surface *oskcapslock, *oskshift;
+  SDL_Surface *oskcapslock, *oskshift, *oskpaste;
   osk_layout *layout;
   on_screen_keyboard *keyboard;
   int layout_avail_width, layout_avail_height;
@@ -171,6 +172,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface *canvas,
     oskenter = zoomSurface(BLANK_oskenter, scale_w, scale_h, 1);
     oskcapslock = zoomSurface(BLANK_oskcapslock, scale_w, scale_h, 1);
     oskshift = zoomSurface(BLANK_oskshift, scale_w, scale_h, 1);
+    oskpaste = zoomSurface(BLANK_oskpaste, scale_w, scale_h, 1);
   }
   else
   {
@@ -184,6 +186,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface *canvas,
     oskenter = SDL_DisplayFormatAlpha(BLANK_oskenter);
     oskcapslock = SDL_DisplayFormatAlpha(BLANK_oskcapslock);
     oskshift = SDL_DisplayFormatAlpha(BLANK_oskshift);
+    oskpaste = SDL_DisplayFormatAlpha(BLANK_oskpaste);
   }
 
   surface = SDL_CreateRGBSurface(canvas->flags,
@@ -214,6 +217,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface *canvas,
   keyboard->oskenter = oskenter;
   keyboard->oskcapslock = oskcapslock;
   keyboard->oskshift = oskshift;
+  keyboard->oskpaste = oskpaste;
   keyboard->composing = layout->composemap;
   keyboard->composed = NULL;
   keyboard->last_key_pressed = NULL;
@@ -241,6 +245,7 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface *canvas,
   keyboard->BLANK_oskenter = BLANK_oskenter;
   keyboard->BLANK_oskcapslock = BLANK_oskcapslock;
   keyboard->BLANK_oskshift = BLANK_oskshift;
+  keyboard->BLANK_oskpaste = BLANK_oskpaste;
 
   SDL_FillRect(surface, NULL,
                SDL_MapRGB(surface->format, keyboard->layout->bgcolor.r,
@@ -1444,6 +1449,11 @@ static void label_key(osk_key key, on_screen_keyboard *keyboard)
     apply_surface(key.x, key.y, keyboard->oskshift, keyboard->surface, NULL);
   }
 
+  else if (strncmp("PASTE", text, 5) == 0)
+  {
+    apply_surface(key.x, key.y, keyboard->oskpaste, keyboard->surface, NULL);
+  }
+
   else if (strncmp("SPACE", text, 5) != 0 && strncmp("NULL", text, 4) != 0)
   {
     messager = TTF_RenderUTF8_Blended(keyboard->osk_fonty, text, keyboard->layout->fgcolor);
@@ -1811,7 +1821,7 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard *keyboard, int x, int y)
                    keyboard->BLANK_button_hold,
                    keyboard->BLANK_oskdel, keyboard->BLANK_osktab,
                    keyboard->BLANK_oskenter, keyboard->BLANK_oskcapslock,
-                   keyboard->BLANK_oskshift, keyboard->disable_change);
+                   keyboard->BLANK_oskshift, keyboard->BLANK_oskshift, keyboard->disable_change);
 
       free(aux_list_ptr);
 
@@ -1885,6 +1895,11 @@ struct osk_keyboard *osk_clicked(on_screen_keyboard *keyboard, int x, int y)
         event.key.keysym.sym = SDLK_BACKSPACE;
         event.text.text[0] = '\b';
         event.text.text[1] = '\0';
+      }
+      else if (wcsncmp(L"XF86Paste", ks, 9) == 0)
+      {
+        event.key.keysym.sym = SDLK_PASTE;
+        event.text.text[0] = '\0';      // FIXME: Is this okay? -bjk 2024.12.25
       }
       else if (wcsncmp(L"NoSymbol", ks, 8) == 0)
       {

@@ -46,8 +46,8 @@ void lightning_switchin(magic_api * api, int which, int mode, SDL_Surface * canv
 void lightning_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 Uint8 lightning_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 lightning_default_size(magic_api * api, int which, int mode);
-void lightning_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                        SDL_Rect * update_rect);
+void lightning_set_size(magic_api * api, int which, int mode,
+                        SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 lightning_api_version(void)
@@ -283,9 +283,10 @@ void lightning_draw_bolt(void *ptr, SDL_Surface *canvas,
 }
 
 
-void lightning_set_color(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                         SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                         SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void lightning_set_color(magic_api *api, int which ATTRIBUTE_UNUSED,
+                         SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                         SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                         Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   api->rgbtohsv(r, g, b, &lightning_h, &lightning_s, &lightning_v);
 }
@@ -319,8 +320,10 @@ Uint8 lightning_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUT
   return 0;
 }
 
-void lightning_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void lightning_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                        SDL_Surface *last ATTRIBUTE_UNUSED,
                         Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

@@ -87,16 +87,16 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        version 0.9.34<br/>
+        version 0.9.35<br/>
         Questions fréquemment posées      </h1>
 
       <p>
-        Copyright &copy; 2002-2024 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        Copyright &copy; 2002-2025 by divers contributeurs; voir <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
       <p>
-        juillet 17, 2024      </p>
+        janvier 23, 2025      </p>
     </center>
 
     <table border="2"
@@ -141,7 +141,7 @@
           Cela signifie que Tux Paint n'a pas pu trouver d'images de tampons ou a été invité à ne pas les charger.        </p>
 
         <p>
-          Si vous avez installé Tux Paint, mais que vous n'avez pas installé la collection optionnelle "Stamps" séparée, quittez Tux Paint et installez-le maintenant. Il devrait être disponible à partir du même endroit où vous avez obtenu le programme principal de Tux Paint. <i>(Remarque: à partir de la version 0.9.14, Tux Paint est livré avec une petite collection d'exemples de tampons.)</i>        </p>
+          If you installed Tux Paint, but did not install the separate, optional "Stamps" collection, quit Tux Paint and install it now. It should be available from the same place you got the main Tux Paint program. <i>(Note: Tux Paint ships with a very small collection of example stamps.)</i>        </p>
 
         <p>
           Si vous ne souhaitez pas installer la collection de tampons par défaut, vous pouvez simplement créer la vôtre. Consultez la documentation "Extending Tux Paint" pour en savoir plus sur la création de fichiers image PNG et SVG, de fichiers de description de texte TXT, de fichiers audio Ogg Vorbis, MP3 ou WAV et de fichiers de données texte DAT qui composent les tampons.        </p>
@@ -286,12 +286,6 @@
 
         <p>
           Si ce programme n'est pas disponible (par exemple, vous utilisez CUPS, le système d'impression commun Unix, et n'avez pas installé "<code>cups-lpr</code>"), vous devrez spécifier une commande appropriée en utilisant l'option "<code>printcommand</code>" dans le fichier de configuration de Tux Paint. (Voir la documentation OPTIONS .)        </p>
-
-        <p>
-          <i>Remarque :</i> les versions de Tux Paint antérieures à 0.9.15 utilisaient une commande par défaut différente pour l'impression, "<code>pngtopnm | pnmtops | lpr</code>", avec le format de sortie PNG, plutôt que PostScript.        </p>
-
-        <p>
-          Si vous avez changé votre option "printcommand" avant Tux Paint 0.9.15, vous devrez revenir en arrière et la modifier pour pouvoir accepter PostScript.        </p>
       </dd>
 
       <dt>
@@ -359,11 +353,17 @@
 
         <dl>
   <dt>
-    <cite>Windows Windows 7, Windows 8, Windows 10, Windows 11</cite>
+    <cite>Windows Windows 8, Windows 10, Windows 11</cite>
   </dt>
 
   <dd>
-    In the user's "AppData" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\saved\</code>"</nobr>  </dd>
+    In the user's "AppData" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>C:\Users\<i>nom d'utilisateur</i>\AppData\Roaming\TuxPaint\saved\</code>"</nobr>    <br/>
+    <br/>
+    (Note: The "<nobr><code style='background: #EEE;'>AppData</code></nobr>" folder is hidden (not visible) by default. You can enter the path manually in the location bar of your file browser (e.g., <cite>File Explorer</cite>).)    <br/>
+    <br/>
+    You can use the <nobr><code style='background: #EEE;'>%APPDATA%</code></nobr> variable as a shorthand, i.e. <nobr>"<code style='background: #EEE;'>%APPDATA%\Tuxpaint\Saved</code>"</nobr>.    <br/>
+    <br/>
+    You can use the <b><code>[&#8862; (Windows)]</code></b> + <b><code>[R]</code></b> key combination to bring up the <cite>Run</cite> command window, and then type the path and hit <b><code>[Enter / Return]</code></b>.  </dd>
 
   <dt>
     <cite>macOS</cite>
@@ -377,7 +377,11 @@
   </dt>
 
   <dd>
-    In the user's "home directory" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaint/saved/</code>"</nobr>  </dd>
+    In the user's "home directory" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/home/<i>nom d'utilisateur</i>/.tuxpaint/saved/</code>"</nobr>    <br/>
+    <br/>
+    (Note: The ".tuxpaint" folder is hidden (not visible) by default. You can enter the path manually in the location bar of your file browser (e.g., <cite>GNOME Files</cite> or <cite>Dolphin</cite>).)    <br/>
+    <br/>
+    You can use the <nobr><code style='background: #EEE;'>$HOME</code></nobr> variable as a shorthand, i.e. <nobr>"<code style='background: #EEE;'>$HOME/.tuxpaint/saved</code>"</nobr>.  </dd>
 
   <dt>
     <cite>Haiku</cite>
@@ -538,7 +542,7 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
                   Ou utilisez Tux Paint Config. et assurez-vous que "Activez les effets sonores" (sous "Vidéo et son") n'est pas coché.              </li>
 
               <li>
-                  Autrement, recompilez Tux Paint avec la prise en charge du son désactivée. (Voir ci-dessus et la documentation 'install' .)              </li>
+                  Alternatively, recompile Tux Paint with sound support disabled. (See above, and the 'Install' documentation.)              </li>
             </ul>
           </li>
         </ul>
@@ -667,7 +671,7 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
           If Tux Paint aborts with the message: "You're already running a copy of Tux Paint!", this means it has been launched in the last 30 seconds. (On Unix/Linux, this message would appear in a terminal console if you ran Tux Paint from a command-line. On Windows, this message would appear in a file named "<code>stdout.txt</code>" in the same folder where <code>TuxPaint.exe</code> resides (e.g., in <nobr>"<code style='background: #EEE;'>C:\Program Files\TuxPaint\</code>"</nobr>).        </p>
 
         <p>
-          A lockfile (e.g., <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaint/lockfile.dat</code>"</nobr> on Linux and Unix, <nobr>"<code style='background: #EEE;'>userdata\lockfile.dat</code>"</nobr> on Windows) is used to make sure Tux Paint isn't run too many times at once (e.g., due to a child impatiently clicking its icon more than once).        </p>
+          A lockfile (e.g., <nobr>"<code style='background: #EEE;'>/home/<i>nom d'utilisateur</i>/.tuxpaint/lockfile.dat</code>"</nobr> on Linux and Unix, <nobr>"<code style='background: #EEE;'>userdata\lockfile.dat</code>"</nobr> on Windows) is used to make sure Tux Paint isn't run too many times at once (e.g., due to a child impatiently clicking its icon more than once).        </p>
 
         <p>
           Même si le fichier de verrouillage existe, il contient l'heure de la dernière exécution de Tux Paint. Si cela fait plus de 30 secondes, Tux Paint devrait fonctionner correctement et simplement mettre à jour le fichier de verrouillage avec l'heure courante.        </p>
@@ -777,7 +781,7 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
 
             <blockquote>
               <p>
-                <nobr><code style='background: #EEE;'>C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>              </p>
+                <nobr><code style='background: #EEE;'>C:\Users\<i>nom d'utilisateur</i>\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>              </p>
             </blockquote>
 
             <p>
@@ -821,7 +825,7 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
 
             <blockquote>
               <p>
-                <nobr><code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaintrc</code></nobr>              </p>
+                <nobr><code style='background: #EEE;'>/home/<i>nom d'utilisateur</i>/.tuxpaintrc</code></nobr>              </p>
             </blockquote>
 
             <p>
@@ -856,7 +860,7 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
         </blockquote>
 
         <p>
-          ...then you can reenable sound by either adding this option to your own <nobr>"<code style='background: #EEE;'>/home/nom d'utilisateur/.tuxpaintrc</code>"</nobr> file:        </p>
+          ...then you can reenable sound by either adding this option to your own <nobr>"<code style='background: #EEE;'>/home/<i>nom d'utilisateur</i>/.tuxpaintrc</code>"</nobr> file:        </p>
 
         <blockquote>
           <p>
@@ -882,6 +886,13 @@ cible "nosound". (c'est-à-dire, ne lancez pas "<code>make nosound</code>") Assu
           </p>
         </blockquote>
       </dd>
+
+      <dt>
+        I need to deploy Tux Paint on many Windows systems at once      </dt>
+
+      <dd>
+        The installers for both Tux Paint (plus Tux Paint Config.) (<code>tuxpaint-X.Y.Z-windows-ARCH-installer.exe</code>) and Tux Paint Stamps (<code>tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe</code>) accept the command-line options "<code>/SILENT</code>" ("silent") or "<code>/VERYSILENT</code>" ("very silent") which can be used to install and uninstall their component without use of an interactive set-up window.  This can be useful for automating installation on a collection of PCs, for example using Microsoft <cite>Intune</cite> cloud-based endpoint management solution (see <a href="https://learn.microsoft.com/mem/intune/">https://learn.microsoft.com/mem/intune/</a>).      </dd>
+
     </dl>
 
     <hr size="2"

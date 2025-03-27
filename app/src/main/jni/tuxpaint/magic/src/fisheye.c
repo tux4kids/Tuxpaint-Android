@@ -62,8 +62,8 @@ void fisheye_switchout(magic_api * api, int which, int mode, SDL_Surface * canva
 int fisheye_modes(magic_api * api, int which);
 Uint8 fisheye_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 fisheye_default_size(magic_api * api, int which, int mode);
-void fisheye_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                      SDL_Rect * update_rect);
+void fisheye_set_size(magic_api * api, int which, int mode,
+                      SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 //                              Housekeeping functions
@@ -76,10 +76,12 @@ Uint32 fisheye_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void fisheye_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                       Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                       SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void fisheye_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface *last ATTRIBUTE_UNUSED,
+                       Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                       Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -164,12 +166,14 @@ void fisheye_draw(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
   last_y = y;
 
   oryg =
-    SDL_CreateRGBSurface(SDL_SWSURFACE, fisheye_radius, fisheye_radius, canvas->format->BitsPerPixel,
-                         canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
+    SDL_CreateRGBSurface(SDL_SWSURFACE, fisheye_radius, fisheye_radius,
+                         canvas->format->BitsPerPixel, canvas->format->Rmask,
+                         canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
   output =
-    SDL_CreateRGBSurface(SDL_SWSURFACE, fisheye_radius, fisheye_radius, canvas->format->BitsPerPixel,
-                         canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
+    SDL_CreateRGBSurface(SDL_SWSURFACE, fisheye_radius, fisheye_radius,
+                         canvas->format->BitsPerPixel, canvas->format->Rmask,
+                         canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
   rect.x = x - (fisheye_radius / 2);
   rect.y = y - (fisheye_radius / 2);
@@ -181,7 +185,8 @@ void fisheye_draw(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
   for (i = 0; i < fisheye_radius / 2; i++)
   {
     temp_src =
-      SDL_CreateRGBSurface(SDL_SWSURFACE, 1, fisheye_radius, canvas->format->BitsPerPixel,
+      SDL_CreateRGBSurface(SDL_SWSURFACE, 1, fisheye_radius,
+                           canvas->format->BitsPerPixel,
                            canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
     //let's take a smooth bar of scaled bitmap and copy it to temp
@@ -221,7 +226,8 @@ void fisheye_draw(void *ptr, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
   for (i = 0; i < fisheye_radius / 2; i++)
   {
     temp_src =
-      SDL_CreateRGBSurface(SDL_SWSURFACE, fisheye_radius, 1, canvas->format->BitsPerPixel,
+      SDL_CreateRGBSurface(SDL_SWSURFACE, fisheye_radius, 1,
+                           canvas->format->BitsPerPixel,
                            canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
     temp_dest =
@@ -330,9 +336,10 @@ Uint8 fisheye_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_
   return 2;                     // FIXME
 }
 
-void fisheye_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void fisheye_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   fisheye_radius = size * 40;
 }

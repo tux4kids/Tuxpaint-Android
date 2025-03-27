@@ -105,8 +105,8 @@ int toothpaste_modes(magic_api * api, int which);
 int toothpaste_setup_weights(magic_api * api);
 Uint8 toothpaste_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 toothpaste_default_size(magic_api * api, int which, int mode);
-void toothpaste_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                         SDL_Rect * update_rect);
+void toothpaste_set_size(magic_api * api, int which, int mode,
+                         SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 toothpaste_api_version(void)
@@ -291,9 +291,11 @@ void toothpaste_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void toothpaste_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                          SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
-                          Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void toothpaste_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                          SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r,
+                          Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   toothpaste_r = r;
   toothpaste_g = g;
@@ -333,9 +335,10 @@ Uint8 toothpaste_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBU
   return 2;
 }
 
-void toothpaste_set_size(magic_api *api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                         SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void toothpaste_set_size(magic_api *api, int which ATTRIBUTE_UNUSED,
+                         int mode ATTRIBUTE_UNUSED,
+                         SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                         SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   toothpaste_RADIUS = size * 5;
   toothpaste_setup_weights(api);

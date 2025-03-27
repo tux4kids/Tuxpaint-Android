@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            versión 0.9.34          </h1>
+            versión 0.9.35          </h1>
 
           <h2>
             Documentación de opcións          </h2>
 
           <p>
-            Copyright &copy; 2002-2024 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2002-2025 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            29 de Abril de 2024          </p>
+            12 de Xaneiro de 2025          </p>
         </center>
       </header>
 
@@ -169,7 +169,7 @@
           </header>
 
           <p>
-            <nobr><code style='background: #EEE;'>/home/nome de usuario/.tuxpaintrc</code></nobr>          </p>
+            <nobr><code style='background: #EEE;'>/home/<i>nome de usuario</i>/.tuxpaintrc</code></nobr>          </p>
         </div>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
@@ -216,7 +216,7 @@
         </header>
 
         <p>
-          <nobr><code style='background: #EEE;'>C:\Users\nome de usuario\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
+          <nobr><code style='background: #EEE;'>C:\Users\<i>nome de usuario</i>\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
 
         <p>
           Pode usar NotePad ou WordPad para crear este ficheiro. Asegúrese de gardalo como texto simple e asegúrese de que o nome do ficheiro non teña «.txt» ao final...        </p>
@@ -519,10 +519,7 @@
 
     <dd>
       <p>
-        Antes do Tux Paint 0.9.15, tamén se podían empregar os botóns medio e dereito do rato para premer. Na versión 0.9.15, cambiouse para que <i>só</i> funcionase o botón esquerdo do rato para non adestrar aos cativos a usar o botón incorrecto.      </p>
-
-      <p>
-        Porén, para os cativos que teñen problemas co rato, pódese desactivar esta distinción entre os dous ou tres botóns do rato (devolvendo Tux Paint ao seu antigo comportamento) usando esta opción.      </p>
+        For children who have trouble with the mouse, this distinction between the two or three buttons on a mouse may be disabled by using this option.      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nobuttondistinction=no</code>" or "<code>buttondistinction=yes</code>". In both cases, may be overridden by the command-line option "<code>--buttondistinction</code>".      </p>
     </dd>
@@ -1637,12 +1634,6 @@
       <blockquote>
         <code>lpr</code>
       </blockquote>
-
-      <p class="note">
-        <span title="Version variation">&#128220;</span>        <b>Nota:</b> As versións de Tux Paint anteriores ao 0.9.15 enviaban datos en formato PNG á orde de impresión (de xeito predeterminado era «<code>pngtopnm | pnmtops | lpr</code>»).      </p>
-
-      <p>
-        Se estabeleceu unha alternativa <code><b>printcommand</b></code> no ficheiro de configuración antes da versión 0.9.15, terá que cambiala.      </p>
     </dd>
 
     <dt>
@@ -1785,11 +1776,11 @@
         <dt>Linux / Unix</dt>
         <dd>
           Under a hidden directory in your home directory:<br/>
-          <nobr><code style='background: #EEE;'>/home/nome de usuario/.tuxpaint/saved/</code></nobr>        </dd>
+          <nobr><code style='background: #EEE;'>/home/<i>nome de usuario</i>/.tuxpaint/saved/</code></nobr>        </dd>
 
         <dt>Windows</dt>
         <dd>
-          <nobr><code style='background: #EEE;'>C:\Users\nome de usuario\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
+          <nobr><code style='background: #EEE;'>C:\Users\<i>nome de usuario</i>\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
 
         <dt>macOS</dt>
         <dd>
@@ -1823,7 +1814,7 @@
 
       <ul>
         <li>Linux e Unix: se está dispoñíbel, onde queira que o seu contorno de escritorio estea configurado para que se almacenen imaxes, en función da configuración XDG (X Desktop Group). (Probe a executar a liña de ordes «<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>» para descubrilo.)<br>
-          Typically (in an English locale), this will be a "<code>Imaxes</code>" subdirectory in your home directory (i.e., <nobr>"<code style='background: #EEE;'>/home/nome de usuario/Imaxes</code>"</nobr>).<br>
+          Typically (in an English locale), this will be a "<code>Imaxes</code>" subdirectory in your home directory (i.e., <nobr>"<code style='background: #EEE;'>/home/<i>nome de usuario</i>/Imaxes</code>"</nobr>).<br>
           Tux Paint will fall back to using that typical directory, if no XDG configuration can be read, or nothing is set for "<code>XDG_PICTURES_DIR</code>".        </li>
         <li>Windows - <nobr>"<code style='background: #EEE;'>My Pictures</code>"</nobr> directory for each user (normaly <nobr>"<code style='background: #EEE;'>C:\Users\nome de usuario\My Pictures</code>"</nobr>)<br>You can directly open the folder as follows:          <ul>
             <li>Prema a tecla «[Windows]+[R]» para abrir o diálogo «Executar...».</li>
@@ -1836,11 +1827,11 @@
       </ul>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., <nobr>"<code style='background: #EEE;'>/home/nome de usuario/Imaxes/TuxPaint</code>"</nobr>) When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).      </p>
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., <nobr>"<code style='background: #EEE;'>/home/<i>nome de usuario</i>/Imaxes/TuxPaint</code>"</nobr>) When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).      </p>
       <p>
-        The directory itself (e.g., <nobr>"<code style='background: #EEE;'>/home/nome de usuario/Imaxes/TuxPaint</code>"</nobr>) will be created, if it doesn't exist.      </p>
+        The directory itself (e.g., <nobr>"<code style='background: #EEE;'>/home/<i>nome de usuario</i>/Imaxes/TuxPaint</code>"</nobr>) will be created, if it doesn't exist.      </p>
       <p>
-        If the <em>parent</em> directory (e.g., <nobr>"<code style='background: #EEE;'>/home/nome de usuario/Imaxes</code>"</nobr>) also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).      </p>
+        If the <em>parent</em> directory (e.g., <nobr>"<code style='background: #EEE;'>/home/<i>nome de usuario</i>/Imaxes</code>"</nobr>) also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).      </p>
 
       <p>
         Exemplo: <code>exportdir=/home/penguin/TuxPaintExports</code>      </p>
@@ -1944,10 +1935,10 @@
 
       <dl>
         <dt>Linux / Unix</dt>
-        <dd><nobr><code style='background: #EEE;'>/home/nome de usuario/.tuxpaint/</code></nobr></dd>
+        <dd><nobr><code style='background: #EEE;'>/home/<i>nome de usuario</i>/.tuxpaint/</code></nobr></dd>
 
         <dt>Windows</dt>
-        <dd><nobr><code style='background: #EEE;'>C:\Users\nome de usuario\AppData\Roaming\TuxPaint\</code></nobr></dd>
+        <dd><nobr><code style='background: #EEE;'>C:\Users\<i>nome de usuario</i>\AppData\Roaming\TuxPaint\</code></nobr></dd>
 
         <dt>macoS</dt>
         <dd><nobr><code style='background: #EEE;'>/Users/<i>nome de usuario</i>/Library/Application Support/TuxPaint/</code></nobr></dd>
@@ -2373,7 +2364,7 @@
       </header>
 
       <p>
-        If any of the above options are set in a system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), you may override them in your own personal configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaintrc</code>"</nobr>)      </p>
+        If any of the above options are set in a system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), you may override them in your own personal configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/<i>nome de usuario</i>/.tuxpaintrc</code>"</nobr>)      </p>
 
       <p>
         For true/false options, like "<code>noprint</code>" and "<code>grab</code>", you can simply say they equal 'no' in your personal configuration file:      </p>
@@ -2550,7 +2541,7 @@
             This prevents the system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), from being read.          </p>
 
           <p>
-            Only your own configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaintrc</code>"</nobr> on Linux) &mdash; if it exists &mdash; will be used.          </p>
+            Only your own configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/<i>nome de usuario</i>/.tuxpaintrc</code>"</nobr> on Linux) &mdash; if it exists &mdash; will be used.          </p>
         </dd>
       </dl>
 

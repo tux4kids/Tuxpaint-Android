@@ -67,8 +67,8 @@ void crescent_switchout(magic_api * api, int which, int mode, SDL_Surface * canv
 int crescent_modes(magic_api * api, int which);
 Uint8 crescent_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 crescent_default_size(magic_api * api, int which, int mode);
-void crescent_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                       SDL_Rect * update_rect);
+void crescent_set_size(magic_api * api, int which, int mode,
+                       SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 void do_crescent(magic_api * api, SDL_Surface * canvas, int x, int y, SDL_Rect * update_rect, int final);
 
@@ -194,9 +194,9 @@ void do_crescent(magic_api *api, SDL_Surface *canvas, int x, int y, SDL_Rect *up
   update_rect->h = canvas->h;
 }
 
-void crescent_drag(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
-                   SDL_Surface *last, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
-                   int x, int y, SDL_Rect *update_rect)
+void crescent_drag(magic_api *api, int which ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas, SDL_Surface *last,
+                   int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   SDL_BlitSurface(last, NULL, canvas, NULL);    // FIXME
 
@@ -205,8 +205,9 @@ void crescent_drag(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canv
   api->playsound(crescent_snd, (x * 255) / canvas->w, 255);
 }
 
-void crescent_click(magic_api *api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
+void crescent_click(magic_api *api, int which ATTRIBUTE_UNUSED,
+                    int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   crescent_cx = x;
   crescent_cy = y;
@@ -216,8 +217,9 @@ void crescent_click(magic_api *api, int which ATTRIBUTE_UNUSED, int mode ATTRIBU
   api->playsound(crescent_snd, (x * 255) / canvas->w, 255);
 }
 
-void crescent_release(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
+void crescent_release(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                      SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   do_crescent(api, canvas, x, y, update_rect, 1);
 }
@@ -228,7 +230,8 @@ void crescent_shutdown(magic_api *api ATTRIBUTE_UNUSED)
     Mix_FreeChunk(crescent_snd);
 }
 
-void crescent_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+void crescent_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
                         SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
                         Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
@@ -266,8 +269,10 @@ Uint8 crescent_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE
   return DEFAULT_SIZE;
 }
 
-void crescent_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void crescent_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface *last ATTRIBUTE_UNUSED,
                        Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   crescent_neg_size = size;

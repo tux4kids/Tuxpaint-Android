@@ -1,12 +1,12 @@
                                    Tux Paint
-                                version 0.9.34
+                                version 0.9.35
 
                          ### Options Documentation ###
 
-        Copyright © 2002-2024 by various contributors; see AUTHORS.txt.
+        Copyright © 2002-2025 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                apríl 29, 2024
+                                janúar 12, 2025
 
 +--------------------------------------------+
 |             Table of Contents              |
@@ -315,14 +315,8 @@ settings will override these. See the "Command-Line Options" section, below.)
      
 → nobuttondistinction=yes ←
 
-    Prior to Tux Paint 0.9.15, the middle and right buttons on a mouse could
-    also be used for clicking. In version 0.9.15, it was changed so that only
-    the left mouse button worked, so as to not train children to use the wrong
-    button.
-
-    However, for children who have trouble with the mouse, this distinction
-    between the two or three buttons on a mouse can be disabled (returning Tux
-    Paint to its old behavior) by using this option.
+    For children who have trouble with the mouse, this distinction between the
+    two or three buttons on a mouse may be disabled by using this option.
 
     ⚙ Note: If used in a system-wide configuration file, may be overridden by
     the user's configuration file using "nobuttondistinction=no" or
@@ -1021,12 +1015,6 @@ settings will override these. See the "Command-Line Options" section, below.)
         the default command is:
 
             lpr
-
-        📜 Note: Versions of Tux Paint prior to 0.9.15 sent PNG format data to
-        the print command (which defaulted to "pngtopnm | pnmtops | lpr").
-
-        If you set an alternative printcommand in the configuration file prior
-        to version 0.9.15, you will need to change it.
 
 
          

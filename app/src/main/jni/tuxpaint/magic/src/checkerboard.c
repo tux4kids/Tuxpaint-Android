@@ -61,12 +61,15 @@ void checkerboard_click(magic_api * api, int which, int mode,
 void checkerboard_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void checkerboard_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int checkerboard_modes(magic_api * api, int which);
-Uint8 checkerboard_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                                  int mode ATTRIBUTE_UNUSED);
-Uint8 checkerboard_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                                int mode ATTRIBUTE_UNUSED);
-void checkerboard_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                           SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+Uint8 checkerboard_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED,
+                                  int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED);
+Uint8 checkerboard_default_size(magic_api * api ATTRIBUTE_UNUSED,
+                                int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED);
+void checkerboard_set_size(magic_api * api ATTRIBUTE_UNUSED,
+                           int which ATTRIBUTE_UNUSED,
+                           int mode ATTRIBUTE_UNUSED,
+                           SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                           SDL_Surface * last ATTRIBUTE_UNUSED,
                            Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED);
 
 //                              Housekeeping functions
@@ -76,8 +79,10 @@ Uint32 checkerboard_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void checkerboard_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                            SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r,
+void checkerboard_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                            int which ATTRIBUTE_UNUSED,
+                            SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                            SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r,
                             Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   //get the colors from API and store it in structure
@@ -279,8 +284,8 @@ int checkerboard_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
   return (MODE_PAINT);
 }
 
-Uint8 checkerboard_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                                  int mode ATTRIBUTE_UNUSED)
+Uint8 checkerboard_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED,
+                                  int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED)
 {
   return 0;
 }
@@ -290,8 +295,11 @@ Uint8 checkerboard_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRI
   return 0;
 }
 
-void checkerboard_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                           SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void checkerboard_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                           int which ATTRIBUTE_UNUSED,
+                           int mode ATTRIBUTE_UNUSED,
+                           SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                           SDL_Surface *last ATTRIBUTE_UNUSED,
                            Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

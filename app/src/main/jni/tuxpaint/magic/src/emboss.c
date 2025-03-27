@@ -65,8 +65,8 @@ void emboss_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas
 int emboss_modes(magic_api * api, int which);
 Uint8 emboss_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 emboss_default_size(magic_api * api, int which, int mode);
-void emboss_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                     SDL_Rect * update_rect);
+void emboss_set_size(magic_api * api, int which, int mode,
+                     SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 emboss_api_version(void)
@@ -259,10 +259,12 @@ void emboss_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void emboss_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                      Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void emboss_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *last ATTRIBUTE_UNUSED,
+                      Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                      Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -301,9 +303,10 @@ Uint8 emboss_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
   return 4;
 }
 
-void emboss_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void emboss_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   emboss_radius = size * 4;
 }

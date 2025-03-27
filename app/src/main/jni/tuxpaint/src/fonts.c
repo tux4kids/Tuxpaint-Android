@@ -1,7 +1,7 @@
 /*
   fonts.c
 
-  Copyright (c) 2009-2023
+  Copyright (c) 2009-2025
   https://tuxpaint.org/
 
   This program is free software; you can redistribute it and/or modify
@@ -19,7 +19,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  Last modified: June 6, 2024
+  Last modified: February 22, 2025
 */
 
 #include <stdio.h>
@@ -30,6 +30,8 @@
 #include <stdlib.h>
 #include <locale.h>
 
+#include <libgen.h>             /* for dirname() */
+
 #include <errno.h>
 
 #include <libintl.h>
@@ -37,10 +39,35 @@
 #define gettext_noop(String) String
 #endif
 
+#include <libxml/xmlmemory.h>
+#include <libxml/parser.h>
+
+/* On Linux, we can use 'wordexp()' to expand env. vars. in settings
+   pulled from config. files */
+#ifdef __linux__
+
+/* However, Android has __linux__ macro but does not support 'wordexp()'*/
+#ifndef __ANDROID__
+#include <wordexp.h>
+#endif
+
+#endif
+
+
+/* Enums representing the "prefix" attributes Tux Paint understands
+   in "fonts.conf" `<dir>` tags */
+enum
+{
+  FC_PREFIX_NONE,               /* if none, "default", or "cwd" */
+  FC_PREFIX_XDG,                /* if "xdg", use $XDG_DATA_HOME */
+  FC_PREFIX_RELATIVE,           /* if "relative", relative to the "fonts.conf" where the `<dir>` tag exists */
+};
+
+
 /*
 	The following section renames global variables defined in SDL2_Pango.h to avoid errors during linking.
 	It is okay to rename these variables because they are constants.
-	SDL2_Pango.h is included by fonts.h.  
+	SDL2_Pango.h is included by fonts.h.
 */
 #define _MATRIX_WHITE_BACK _MATRIX_WHITE_BACK2
 #define MATRIX_WHITE_BACK MATRIX_WHITE_BACK2
@@ -170,9 +197,14 @@ unsigned text_size = 4;         // initial text size
 
 int button_label_y_nudge;
 
+/* Local function prototypes: */
+
+char **malloc_fontconfig_config_paths(int num_to_malloc, int *num_actually_mallocd);
+
 #ifdef FORKED_FONTS
 static void reliable_read(int fd, void *buf, size_t count);
 #endif
+
 
 const char *PANGO_DEFAULT_FONT = "DejaVu Sans";
 const char *PANGO_DEFAULT_FONT_FALLBACK = NULL;
@@ -979,10 +1011,38 @@ static void loadfonts(SDL_Surface *screen, SDL_Texture *texture, SDL_Renderer *r
 }
 
 
+/**
+ * Attempts to allocate space for a char * array to hold
+ * a set of fontconfig config file paths for load_user_fonts() to
+ * iterate over.
+ *
+ * If unsuccessful, returns NULL and sets num_actually_mallocd to 0.
+ *
+ * @param int num_to_malloc -- how big the char * array should be
+ * @param int * num_actually_mallocd -- pointer that will hold how many got
+ *   allocated; either the same value as num_to_malloc, or 0 if failure
+ * @return char * * | NULL -- pointer to the char * array, or NULL if malloc failed
+ */
+char **malloc_fontconfig_config_paths(int num_to_malloc, int *num_actually_mallocd)
+{
+  char **buf;
+
+  buf = (char * *)malloc(sizeof(char *) * num_to_malloc);
+  if (buf == NULL)
+    *num_actually_mallocd = 0;
+  else
+    *num_actually_mallocd = num_to_malloc;
+
+  return buf;
+}
+
 /* static */ int load_user_fonts(SDL_Surface *screen, SDL_Texture *texture,
                                  SDL_Renderer *renderer, void *vp, const char *restrict const locale)
 {
   char *homedirdir;
+  char **fontconfig_config_paths;
+  int num_fontconfig_config_paths = 0;
+  int i;
 
   (void)vp;                     // junk passed by threading library
 
@@ -991,14 +1051,24 @@ static void loadfonts(SDL_Surface *screen, SDL_Texture *texture, SDL_Renderer *r
   if (!no_system_fonts)
   {
 #ifdef WIN32
+    /* Windows: Look for fonts in the system font dir (as defined by Windows registry) */
     homedirdir = GetSystemFontDir();
     loadfonts(screen, texture, renderer, homedirdir);
+
+    /* Windows: Look for fonts in the user font dir (as defined by Windows registry) */
+    homedirdir = GetUserFontDir();
+    if (homedirdir != NULL)
+    {
+      loadfonts(screen, texture, renderer, homedirdir);
+    }
     free(homedirdir);
 #elif defined(__BEOS__)
+    /* BeOS: Look for fonts in various places */
     loadfonts(screen, texture, renderer, "/boot/home/config/font/ttffonts");
     loadfonts(screen, texture, renderer, "/usr/share/fonts");
     loadfonts(screen, texture, renderer, "/usr/X11R6/lib/X11/fonts");
 #elif defined(__HAIKU__)
+    /* Haiku: Look for fonts in various places, via "find_directory()" */
     dev_t volume = dev_for_path("/boot");
     char buffer[B_PATH_NAME_LENGTH + B_FILE_NAME_LENGTH];
     status_t result;
@@ -1012,19 +1082,24 @@ static void loadfonts(SDL_Surface *screen, SDL_Texture *texture, SDL_Renderer *r
     result = find_directory(B_USER_NONPACKAGED_FONTS_DIRECTORY, volume, false, buffer, sizeof(buffer));
     loadfonts(screen, texture, renderer, buffer);
 #elif defined(__APPLE__)
+    /* Apple: Look for fonts in various system locations and HOME */
     loadfonts(screen, texture, renderer, "/System/Library/Fonts");
     loadfonts(screen, texture, renderer, "/Library/Fonts");
     loadfonts(screen, texture, renderer, apple_fontsPath());
     loadfonts(screen, texture, renderer, "/usr/share/fonts");
     loadfonts(screen, texture, renderer, "/usr/X11R6/lib/X11/fonts");
 #elif defined(__ANDROID__)
+    /* Android: Look for fonts inside Tux Paint */
     loadfonts(screen, texture, renderer, "data/fonts");
+    /* Android: Look for fonts in a system folder */
     loadfonts(screen, texture, renderer, "/system/fonts");
 #elif defined(__sun__)
+    /* SunOS: Look for fonts in various system folders */
     loadfonts(screen, texture, renderer, "/usr/openwin/lib/X11/fonts");
     loadfonts(screen, texture, renderer, "/usr/share/fonts");
     loadfonts(screen, texture, renderer, "/usr/X11R6/lib/X11/fonts");
 #else
+    /* Others [e.g. Linux]: Look for fonts in various system folders */
     loadfonts(screen, texture, renderer, "/usr/share/feh/fonts");
     loadfonts(screen, texture, renderer, "/usr/share/fonts");
     loadfonts(screen, texture, renderer, "/usr/X11R6/lib/X11/fonts");
@@ -1035,8 +1110,253 @@ static void loadfonts(SDL_Surface *screen, SDL_Texture *texture, SDL_Renderer *r
     loadfonts(screen, texture, renderer, "/usr/share/vlc/skins2/fonts");
     loadfonts(screen, texture, renderer, "/usr/share/xplanet/fonts");
 #endif
+
+
+    /* See what dirs fontconfig configuration files point to,
+       and try loading fonts from those locations */
+
+#if defined(__APPLE__)
+    fontconfig_config_paths = malloc_fontconfig_config_paths(1, &num_fontconfig_config_paths);
+    if (fontconfig_config_paths != NULL)
+    {
+      /* Apple: Look for fonts.conf in $FONTCONFIG_PATH */
+      fontconfig_config_paths[0] = malloc(1024);
+      snprintf(fontconfig_config_paths[0], 1024, "%s/fonts.conf", getenv("FONTCONFIG_PATH"));
+
+      /* FIXME: Apple: Look for the fonts.conf that we ship with Tux Paint for macOS */
+    }
+#elif defined(__HAIKU__)
+    fontconfig_config_paths = malloc_fontconfig_config_paths(1, &num_fontconfig_config_paths);
+    if (fontconfig_config_paths != NULL)
+    {
+      /* Haiku: Look for fonts.conf in a known system directory */
+      fontconfig_config_paths[0] = malloc(1024);
+      snprintf(fontconfig_config_paths[0], 1024, "/boot/system/settings/fonts/fonts.conf");
+    }
+#elif defined(WIN32)
+    fontconfig_config_paths = malloc_fontconfig_config_paths(1 /* FIXME */ ,
+                                                             &num_fontconfig_config_paths);
+    if (fontconfig_config_paths != NULL)
+    {
+      /* FIXME: Windows: Look for fonts.conf ??? in some system directory/ies ??? */
+
+      /* Windows: Look for the fonts.conf that we ship with Tux Paint for Windows */
+      fontconfig_config_paths[0 /* FIXME */ ] = malloc(1024);
+      snprintf(fontconfig_config_paths[0 /* FIXME */ ], 1024,
+               "etc/fonts/fonts.conf");
+    }
+#else
+    /* Others [e.g. Linux]: Look for fonts.conf in $FONTCONFIG_PATH (fallback to "/etc/fonts")
+       and $XDG_CONFIG_HOME (fallback to "$HOME/.config") */
+    fontconfig_config_paths = malloc_fontconfig_config_paths(2, &num_fontconfig_config_paths);
+    if (fontconfig_config_paths != NULL)
+    {
+      char *config_home;
+
+      /* System-wide fonts.conf */
+      if (getenv("FONTCONFIG_PATH") != NULL)
+      {
+        fontconfig_config_paths[0] = malloc(1024);
+        snprintf(fontconfig_config_paths[0], 1024, "%s/fonts.conf", getenv("FONTCONFIG_PATH"));
+      }
+      else
+      {
+        fontconfig_config_paths[0] = strdup("/etc/fonts/fonts.conf");
+      }
+
+      /* User font.conf */
+      config_home = NULL;
+      if (getenv("XDG_CONFIG_HOME") != NULL)
+      {
+        config_home = strdup(getenv("XDG_CONFIG_HOME"));
+      }
+      else
+      {
+#ifdef DEBUG
+        fprintf(stderr, "XDG_CONFIG_HOME not set, checking $HOME/.config/\n");
+#endif
+        if (getenv("HOME") != NULL)
+        {
+          config_home = malloc(1024);
+          snprintf(config_home, 1024, "%s/.config", getenv("HOME"));
+        }
+        else
+        {
+#ifdef DEBUG
+          fprintf(stderr, "No HOME, either?! Returing fallback in current directory\n");
+#endif
+        }
+      }
+
+      if (config_home != NULL)
+      {
+        fontconfig_config_paths[1] = malloc(1024);
+        snprintf(fontconfig_config_paths[1], 1024, "%s/fontconfig/fonts.conf", config_home);
+        free(config_home);
+      }
+      else
+      {
+        fontconfig_config_paths[1] = NULL;
+        num_fontconfig_config_paths--;
+      }
+    }
+#endif
+
+
+    /* Read and parse each fonts.conf file... */
+
+    for (i = 0; i < num_fontconfig_config_paths; i++)
+    {
+      xmlDocPtr doc;
+
+      doc = xmlReadFile(fontconfig_config_paths[i], NULL, 0);
+      if (doc == NULL)
+      {
+        fprintf(stderr, "Error: Failed to parse fontconfig configuration file '%s'\n", fontconfig_config_paths[i]);
+      }
+      else
+      {
+        xmlNodePtr cur;
+
+        cur = xmlDocGetRootElement(doc);
+        if (cur == NULL)
+        {
+          fprintf(stderr,
+                  "Error: Failed to parse empty fontconfig configuration file '%s'\n", fontconfig_config_paths[i]);
+        }
+        else
+        {
+          if (xmlStrcmp(cur->name, (const xmlChar *)"fontconfig"))
+          {
+            fprintf(stderr, "Error: Not a fontconfig configuration file: '%s'\n", fontconfig_config_paths[i]);
+          }
+          else
+          {
+            cur = cur->xmlChildrenNode;
+            while (cur != NULL)
+            {
+              if (xmlStrcmp(cur->name, (const xmlChar *)"dir") == 0)
+              {
+                xmlChar *path, *prefix;
+                char *path_str;
+                char prefix_path[1024];
+                int fontconfig_prefix = FC_PREFIX_NONE;
+
+                /* Check for a "<dir prefix...>" attribute
+                   (see https://www.freedesktop.org/software/fontconfig/fontconfig-user.html) */
+                prefix = xmlGetProp(cur, (const xmlChar *)"prefix");
+                if (prefix != NULL)
+                {
+                  if (xmlStrcmp(prefix, (const xmlChar *)"xdg") == 0)
+                    fontconfig_prefix = FC_PREFIX_XDG;
+                  else if (xmlStrcmp(prefix, (const xmlChar *)"relative") == 0)
+                    fontconfig_prefix = FC_PREFIX_RELATIVE;
+
+                  xmlFree(prefix);
+                }
+
+                /* Note: As we already look for both system and user fonts on Windows,
+                   we'll just ignore "WINDOWSUSERFONTDIR" and "WINDOWSFONTDIR" magic paths;
+                   also ignoring "APPSHAREFONTDIR" and "CUSTOMFONTDIR".
+                   See https://gitlab.freedesktop.org/fontconfig/fontconfig/-/blob/main/src/fcxml.c */
+
+                path = xmlNodeGetContent(cur);
+                if (path != NULL)
+                {
+                  path_str = strdup((char *)path
+                                    /* FIXME: is this cast safe? -bjk 2024.12.29 */ );
+#ifdef __linux__
+#ifndef __ANDROID__
+                  wordexp_t result;
+
+                  wordexp(path_str, &result, 0);
+                  if (result.we_wordv == NULL)
+                  {
+                    fprintf(stderr,
+                            "Error: Shell expansion of '%s' on line %d of '%s' failed!\n",
+                            path_str, cur->line, fontconfig_config_paths[i]);
+                  }
+                  else
+                  {
+                    DEBUG_PRINTF("wordexp result.we_wordv of '%s' was '%s'\n", path_str, result.we_wordv[0]);
+                    free(path_str);
+                    path_str = strdup(result.we_wordv[0]);
+                    wordfree(&result);
+                  }
+#endif
+#endif
+
+                  /* Apply any "prefix" attribute of the <dir> tag: */
+
+                  prefix_path[0] = '\0';
+                  if (fontconfig_prefix == FC_PREFIX_XDG)
+                  {
+                    /* FIXME: Use xdg function */
+                    if (getenv("XDG_DATA_HOME") != NULL)
+                    {
+                      snprintf(prefix_path, sizeof(prefix_path), "%s/", getenv("XDG_DATA_HOME"));
+                    }
+                    else if (getenv("HOME") != NULL)
+                    {
+                      snprintf(prefix_path, sizeof(prefix_path), "%s/.local/share/", getenv("HOME"));
+                    }
+                  }
+                  else if (fontconfig_prefix == FC_PREFIX_RELATIVE)
+                  {
+                    char *fc_cfg_path_copy, *dname;
+
+                    fc_cfg_path_copy = strdup(fontconfig_config_paths[i]);
+                    dname = dirname(fc_cfg_path_copy);
+                    snprintf(prefix_path, sizeof(prefix_path), "%s/", dname);
+                    free(fc_cfg_path_copy);
+                    /* Per dirname(3):
+                       These functions may return pointers to statically
+                       allocated memory which may be overwritten by
+                       subsequent calls. Alternatively, they may return a
+                       pointer to some part of path, so that the string
+                       referred to by path should not be modified or
+                       freed until the pointer returned by the function
+                       is no longer required.
+                     */
+                  }
+
+                  if (prefix_path[0] != '\0')
+                  {
+                    char *tmp_str;
+                    size_t len;
+
+                    len = strlen(path_str) + strlen(prefix_path) + 1;
+                    tmp_str = (char *)malloc(sizeof(char *) * len);
+                    if (tmp_str != NULL)
+                    {
+                      snprintf(tmp_str, len, "%s%s", prefix_path, path_str);
+                      free(path_str);
+                      path_str = tmp_str;
+                    }
+                  }
+
+                  /* Try to load fonts from the location found in the fonts.conf's <dir> tag */
+                  loadfonts(screen, texture, renderer, (char *)path_str);
+                  free(path_str);
+                  xmlFree(path);
+                }
+              }
+              cur = cur->next;
+            }
+          }
+        }
+
+        xmlFreeDoc(doc);
+      }
+
+      free(fontconfig_config_paths[i]);
+    }
+
+    if (fontconfig_config_paths != NULL)
+      free(fontconfig_config_paths);
   }
 
+  /* Load fonts that came packaged with Tux Paint */
   homedirdir = get_fname("fonts", DIR_DATA);
   loadfonts(screen, texture, renderer, homedirdir);
   free(homedirdir);
@@ -1056,6 +1376,9 @@ static void loadfonts(SDL_Surface *screen, SDL_Texture *texture, SDL_Renderer *r
     free(homedirdir);
   }
 #endif
+
+
+  /* Group the fonts... */
 
 #ifdef DEBUG
   printf("%s:%d - Grouping %d fonts...\n", __FILE__, __LINE__, num_font_styles);

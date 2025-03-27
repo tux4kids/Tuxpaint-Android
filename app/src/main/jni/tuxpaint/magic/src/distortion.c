@@ -83,8 +83,8 @@ static void distortion_line_callback(void *ptr, int which, SDL_Surface * canvas,
 
 Uint8 distortion_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 distortion_default_size(magic_api * api, int which, int mode);
-void distortion_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                         SDL_Rect * update_rect);
+void distortion_set_size(magic_api * api, int which, int mode,
+                         SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 /* Setup Functions: */
@@ -240,10 +240,12 @@ void distortion_release(magic_api *api ATTRIBUTE_UNUSED,
 }
 
 
-void distortion_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                          SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                          Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                          SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void distortion_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                          SDL_Surface *last ATTRIBUTE_UNUSED,
+                          Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                          Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -299,9 +301,11 @@ Uint8 distortion_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBU
   return 2;
 }
 
-void distortion_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                         SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void distortion_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED,
+                         int mode ATTRIBUTE_UNUSED,
+                         SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                         SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   distortion_radius = size * 4;
 }

@@ -1,17 +1,17 @@
 # Tux Paint - A simple drawing program for children.
 
-# Copyright (c) 2002-2024
+# Copyright (c) 2002-2025
 # Various contributors (see AUTHORS.txt)
 # https://tuxpaint.org/
 
-# June 14, 2002 - October 16, 2024
+# June 14, 2002 - January 3, 2025
 
 
 # The version number, for release:
 # (append "-rc#", e.g. "-rc1", when making release candidates
 # for beta testing)
 
-VER_VERSION:=0.9.34-rc1
+VER_VERSION:=0.9.35
 
 # We are always SDL2 now, so don't need "-sdl2"
 VER_FLAVOR:=""
@@ -66,14 +66,22 @@ else
             OS:=os2
             GPERF:=/@unixroot/usr/bin/gperf.exe
           else
-            OS:=linux
-            GPERF:=/usr/bin/gperf
+            ifeq ($(SYSNAME),NetBSD)
+              OS:=netbsd
+              GPERF:=/usr/bin/gperf
+            else
+              OS:=linux
+              GPERF:=/usr/bin/gperf
+            endif
           endif
         endif
       endif
     endif
   endif
 endif
+
+# FIXME: ^ Support NetBSD a recognized OS
+
 
 # CROSS COMPILATION OVERRIDES
 #
@@ -162,6 +170,7 @@ macos_SO_TYPE:=dylib
 ios_SO_TYPE:=dylib
 beos_SO_TYPE:=so
 linux_SO_TYPE:=so
+netbsd_SO_TYPE:=so
 SO_TYPE:=$($(OS)_SO_TYPE)
 
 windows_LIBMINGW:=-L/usr/local/lib -lmingw32
@@ -181,6 +190,7 @@ macos_ARCH_LIBS:=src/macos_print.m obj/macos.o
 ios_ARCH_LIBS:=src/ios_print.m obj/ios.o
 beos_ARCH_LIBS:=obj/BeOS_print.o obj/haiku_trash.o
 linux_ARCH_LIBS:=obj/postscript_print.o
+netbsd_ARCH_LIBS:=obj/postscript_print.o
 ARCH_LIBS:=$($(OS)_ARCH_LIBS)
 
 windows_ARCH_CFLAGS:=
@@ -189,6 +199,7 @@ macos_ARCH_CFLAGS:=-isysroot $(SDKROOT) -I$(SDKROOT)/usr/include -I$(HOSTROOT)/i
 ios_ARCH_CFLAGS:=-isysroot $(SDKROOT) -I$(SDKROOT)/usr/include -I$(HOSTROOT)/include $(MINVEROPT) -arch $(subst $() $(), -arch ,$(ARCHS)) -w -fPIC -DHAVE_STRCASESTR -DUNLINK_ONLY
 beos_ARCH_CFLAGS:=
 linux_ARCH_CFLAGS:=
+netbsd_ARCH_CFLAGS:=-DHAVE_STRCASESTR
 ARCH_CFLAGS:=$($(OS)_ARCH_CFLAGS)
 
 windows_ARCH_LDFLAGS:=
@@ -197,7 +208,9 @@ macos_ARCH_LDFLAGS:=-isysroot $(SDKROOT) -L$(HOSTROOT)/lib -mmacosx-version-min=
 ios_ARCH_LDFLAGS:=-isysroot $(SDKROOT) -L$(HOSTROOT)/lib $(MINVEROPT) -arch $(subst $() $(), -arch ,$(ARCHS))
 beos_ARCH_LDFLAGS:=
 linux_ARCH_LDFLAGS:=
+netbsd_ARCH_LDFLAGS:=
 ARCH_LDFLAGS:=$($(OS)_ARCH_LDFLAGS)
+
 LDFLAGS:=$(ARCH_LDFLAGS)
 
 ifeq ($(OS), os2)
@@ -211,12 +224,16 @@ PNG:=$(if $(PNG),$(PNG),$(call linktest,,-lpng12,))
 FRIBIDI_LIB:=$(shell $(PKG_CONFIG) --libs fribidi)
 FRIBIDI_CFLAGS:=$(shell $(PKG_CONFIG) --cflags fribidi)
 
-windows_ARCH_LINKS:=-lgdi32 -lcomdlg32 $(PNG) -lz -lwinspool -lshlwapi $(FRIBIDI_LIB) -liconv -limagequant -mwindows
-os2_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
-macos_ARCH_LINKS:=$(FRIBIDI_LIB) -limagequant -lSDLmain -Wl,-framework,AppKit -Wl,-framework,Cocoa $(shell $(PKG_CONFIG) --libs pangoft2)
-ios_ARCH_LINKS=$(FRIBIDI_LIB) -limagequant -ljpeg -lbz2 $(shell $(PKG_CONFIG) --libs freetype2 libtiff-4 libwebp libffi harfbuzz libmpg123 ogg vorbisenc vorbisidec libxml-2.0 pangoft2 libpcre)
-beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(PAPER_LIB) $(STDC_LIB) -limagequant
-linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) -limagequant
+LIBXML_LIB:=$(shell $(PKG_CONFIG) --libs libxml-2.0)
+LIBXML_CFLAGS:=$(shell $(PKG_CONFIG) --cflags libxml-2.0)
+
+windows_ARCH_LINKS:=-lgdi32 -lcomdlg32 $(PNG) -lz -lwinspool -lshlwapi $(FRIBIDI_LIB) $(LIBXML_LIB) -liconv -limagequant -mwindows
+os2_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) $(LIBXML_LIB) -limagequant
+macos_ARCH_LINKS:=$(FRIBIDI_LIB) $(LIBXML_LIB) -limagequant -lSDLmain -Wl,-framework,AppKit -Wl,-framework,Cocoa $(shell $(PKG_CONFIG) --libs pangoft2)
+ios_ARCH_LINKS=$(FRIBIDI_LIB) $(LIBXML_LIB) -limagequant -ljpeg -lbz2 $(shell $(PKG_CONFIG) --libs freetype2 libtiff-4 libwebp libffi harfbuzz libmpg123 ogg vorbisenc vorbisidec libxml-2.0 pangoft2 libpcre)
+beos_ARCH_LINKS:=-lintl $(PNG) -lz -lbe -lnetwork -liconv $(FRIBIDI_LIB) $(LIBXML_LIB) $(PAPER_LIB) $(STDC_LIB) -limagequant
+linux_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) $(LIBXML_LIB) -limagequant
+netbsd_ARCH_LINKS:=$(PAPER_LIB) $(FRIBIDI_LIB) $(LIBXML_LIB) -limagequant
 ARCH_LINKS:=$($(OS)_ARCH_LINKS)
 
 windows_ARCH_HEADERS:=src/win32_print.h
@@ -224,6 +241,7 @@ os2_ARCH_HEADERS:=
 macos_ARCH_HEADERS:=src/macos.h
 beos_ARCH_HEADERS:=src/BeOS_print.h
 linux_ARCH_HEADERS:=
+netbsd_ARCH_HEADERS:=
 ARCH_HEADERS:=$($(OS)_ARCH_HEADERS)
 
 # Where things will go when ultimately installed:
@@ -233,6 +251,7 @@ os2_PREFIX:=c:/extras/tuxpaint
 macos_PREFIX:=Resources
 ios_PREFIX:=.
 linux_PREFIX:=/usr/local
+netbsd_PREFIX:=/usr/local
 PREFIX:=$($(OS)_PREFIX)
 
 # Root directory to place files when creating packages.
@@ -348,7 +367,11 @@ OLDSVGFLAG:=$(if $(filter -lsvg-cairo,$(SVG_LIB)),-DOLD_SVG,)
 
 PNG_CFLAGS:=$(shell $(PKG_CONFIG) libpng --cflags)
 
-CONVERT:=./convert-wrapper.sh
+ifeq ($(findstring MINGW, $(SYSNAME)),MINGW)
+  CONVERT:=magick convert
+else
+  CONVERT:=./convert-wrapper.sh
+endif
 
 ifeq ($(hack),1)
 hack:
@@ -1004,7 +1027,8 @@ install-pkgxdg: src/tuxpaint.desktop src/tuxpaint-fullscreen.desktop src/org.tux
 	cp -a data/images/icon96x96.png $(NEWICON_PREFIX)/96x96/apps/tuxpaint.png
 	cp -a data/images/icon128x128.png $(NEWICON_PREFIX)/128x128/apps/tuxpaint.png
 	cp -a data/images/icon192x192.png $(NEWICON_PREFIX)/192x192/apps/tuxpaint.png
-	install --mode=0644 -Dt $(METAINFO_PREFIX) src/org.tuxpaint.Tuxpaint.appdata.xml
+	cp -a src/org.tuxpaint.Tuxpaint.appdata.xml $(METAINFO_PREFIX)
+	# ^ Instead of: install --mode=0644 -Dt $(METAINFO_PREFIX) src/org.tuxpaint.Tuxpaint.appdata.xml
 
 .PHONY: install-xdg
 install-xdg: src/tuxpaint.desktop src/tuxpaint-fullscreen.desktop src/org.tuxpaint.Tuxpaint.appdata.xml
@@ -1039,7 +1063,9 @@ install-xdg: src/tuxpaint.desktop src/tuxpaint-fullscreen.desktop src/org.tuxpai
 	@if [ "x$(shell which update-desktop-database)" != "x" ]; then \
 	  update-desktop-database ; \
 	fi
-	install --mode=0644 -Dt $(METAINFO_PREFIX) src/org.tuxpaint.Tuxpaint.appdata.xml
+	mkdir -p $(METAINFO_PREFIX)
+	cp -a src/org.tuxpaint.Tuxpaint.appdata.xml $(METAINFO_PREFIX)
+	# ^ Instead of: install --mode=0644 -Dt $(METAINFO_PREFIX) src/org.tuxpaint.Tuxpaint.appdata.xml
 #do package path related stuff, ie use destdir
 
 # Install the PNG icon (for KDE desktop, etc.)
@@ -1227,7 +1253,7 @@ tuxpaint:	obj/tuxpaint.o obj/i18n.o obj/im.o obj/cursor.o obj/pixels.o \
 		$(ARCH_LIBS)
 	@echo
 	@echo "...Linking Tux Paint..."
-	$(CC) $(CFLAGS) $(LDFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(DEFS) $(ARCH_DEFS) \
+	$(CC) $(CFLAGS) $(LDFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(LIBXML_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-o tuxpaint $^ \
 		$(SDL_LIBS) $(SVG_LIB) $(ARCH_LINKS) -lm
 	@$(RAD_CMD)
@@ -1263,7 +1289,7 @@ obj/tuxpaint.o:	src/tuxpaint.c \
 		$(ARCH_HEADERS)
 	@echo
 	@echo "...Compiling Tux Paint from source..."
-	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(SVG_CFLAGS) $(MOUSE_CFLAGS) $(DEFS) $(ARCH_DEFS) \
+	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(FRIBIDI_CFLAGS) $(LIBXML_CFLAGS) $(SVG_CFLAGS) $(MOUSE_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/tuxpaint.c -o obj/tuxpaint.o
 
 # Broke gperf|sed up into two steps so that it will fail properly if gperf is not installed; there's probably a more elegant solution -bjk 2009.11.20
@@ -1310,7 +1336,7 @@ obj/fonts.o:	src/fonts.c src/fonts.h src/dirwalk.h src/progressbar.h \
 		src/get_fname.h src/debug.h
 	@echo
 	@echo "...Compiling font support..."
-	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
+	$(CC) $(CFLAGS) $(LIBXML_CFLAGS) $(DEBUG_FLAGS) $(SDL_CFLAGS) $(DEFS) $(ARCH_DEFS) \
 		-c src/fonts.c -o obj/fonts.o
 
 obj/dirwalk.o:	src/dirwalk.c src/dirwalk.h src/progressbar.h src/fonts.h \
@@ -1469,6 +1495,7 @@ macos_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --lib
 ios_MAGIC_SDL_LIBS:=$(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB) -lSDL2_gfx
 beos_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
 linux_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
+netbsd_MAGIC_SDL_LIBS:=-L/usr/local/lib $(shell $(PKG_CONFIG) $(SDL_PCNAME) --libs) -lSDL2_image -lSDL2_ttf $(SDL_MIXER_LIB)
 MAGIC_SDL_LIBS:=$($(OS)_MAGIC_SDL_LIBS)
 
 windows_MAGIC_ARCH_LINKS=-lintl $(PNG)
@@ -1477,6 +1504,7 @@ macos_MAGIC_ARCH_LINKS=-lintl $(PNG)
 ios_MAGIC_ARCH_LINKS=-lintl -ljpeg $(PNG) $(shell $(PKG_CONFIG) --libs libtiff-4 libwebp libmpg123 ogg vorbisenc vorbisidec)
 beos_MAGIC_ARCH_LINKS:=-lintl $(PNG)
 linux_MAGIC_ARCH_LINKS:=-lintl $(PNG)
+netbsd_MAGIC_ARCH_LINKS:=-lintl $(PNG)
 MAGIC_ARCH_LINKS:=$($(OS)_MAGIC_ARCH_LINKS)
 
 windows_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
@@ -1485,6 +1513,7 @@ macos_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
 ios_PLUGIN_LIBS:=$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS)
 beos_PLUGIN_LIBS:="$(MAGIC_SDL_LIBS) $(MAGIC_ARCH_LINKS) $(MAGIC_SDL_CPPFLAGS)"
 linux_PLUGIN_LIBS:=
+netbsd_PLUGIN_LIBS:=
 PLUGIN_LIBS:=$($(OS)_PLUGIN_LIBS)
 
 MAGIC_CFLAGS:=-g3 -O2 $(FASTMATH) -fno-common -W -Wstrict-prototypes -Wmissing-prototypes -Wall $(MAGIC_SDL_CPPFLAGS) -Isrc/ $(ARCH_CFLAGS)

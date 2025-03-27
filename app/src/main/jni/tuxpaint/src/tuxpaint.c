@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - October 23, 2024
+  June 14, 2002 - December 25, 2024
 */
 
 #include "platform.h"
@@ -863,8 +863,8 @@ static void set_max_buttonscale(void)
   max_h = (float)WINDOW_HEIGHT / (40 + (6 * 48) + (gd_colors.rows * 48) + 56);
 
   button_scale = min(max_w, max_h);
-  fprintf(stderr, "Will use a button size of %d (scale = %f)\n", (int)(button_scale * ORIGINAL_BUTTON_SIZE),
-          button_scale);
+  fprintf(stderr, "Info: Will use a button size of %d (scale = %f)\n",
+          (int)(button_scale * ORIGINAL_BUTTON_SIZE), button_scale);
 }
 
 /**
@@ -920,7 +920,7 @@ static void setup_normal_screen_layout(void)
   if (buttons_tall < 5)
   {
     fprintf(stderr,
-            "Button size '%d' with window size '%dx%d' is not reasonable (not tall enough).\n",
+            "Warning: Button size '%d' with window size '%dx%d' is not reasonable (not tall enough).\n",
             button_w, WINDOW_WIDTH, WINDOW_HEIGHT);
     set_max_buttonscale();
     setup_normal_screen_layout();
@@ -929,7 +929,7 @@ static void setup_normal_screen_layout(void)
   if (r_canvas.w < button_w * 9)
   {
     fprintf(stderr,
-            "Button size '%d' with window size '%dx%d' is not reasonable (not wide enough).\n",
+            "Warning: Button size '%d' with window size '%dx%d' is not reasonable (not wide enough).\n",
             button_w, WINDOW_WIDTH, WINDOW_HEIGHT);
     set_max_buttonscale();
     setup_normal_screen_layout();
@@ -1213,8 +1213,8 @@ static int grid_hit_gd(const SDL_Rect *const r, unsigned x, unsigned y, grid_dim
   unsigned col = (x - r->x) / item_w;
   unsigned row = (y - r->y) / item_h;
 
-  DEBUG_PRINTF("%d,%d resolves to %d,%d in a %dx%d grid, index is %d\n", x, y, col,
-               row, gd->cols, gd->rows, col + row * gd->cols);
+  DEBUG_PRINTF("%d,%d resolves to %d,%d in a %dx%d grid, index is %d\n", x, y,
+               col, row, gd->cols, gd->rows, col + row * gd->cols);
   if (col >= gd->cols || row >= gd->rows)
     return -1;
   return col + row * gd->cols;
@@ -1700,7 +1700,7 @@ static SDL_Surface *img_title_on, *img_title_off, *img_title_large_on, *img_titl
 static SDL_Surface *img_title_names[NUM_TITLES];
 static SDL_Surface *img_tools[NUM_TOOLS], *img_tool_names[NUM_TOOLS];
 
-static SDL_Surface *img_oskdel, *img_osktab, *img_oskenter, *img_oskcapslock, *img_oskshift;
+static SDL_Surface *img_oskdel, *img_osktab, *img_oskenter, *img_oskcapslock, *img_oskshift, *img_oskpaste;
 static SDL_Surface *thumbnail(SDL_Surface * src, int max_x, int max_y, int keep_aspect);
 static SDL_Surface *thumbnail2(SDL_Surface * src, int max_x, int max_y, int keep_aspect, int keep_alpha);
 
@@ -1725,7 +1725,7 @@ static SDL_Surface *render_text(TuxPaint_Font *restrict font, const char *restri
 
   if (font == NULL)
   {
-    fprintf(stderr, "render_text() received a NULL font!\n");
+    fprintf(stderr, "Warning: render_text() received a NULL font!\n");
     fflush(stdout);
     return NULL;
   }
@@ -1948,8 +1948,9 @@ static Uint8 *brushes_descr_localized = NULL;
 static SDL_Surface *img_shapes[NUM_SHAPES], *img_shape_names[NUM_SHAPES];
 static SDL_Surface *img_fills[NUM_FILLS], *img_fill_names[NUM_FILLS];
 static SDL_Surface *img_openlabels_open, *img_openlabels_erase,
-  *img_openlabels_slideshow, *img_openlabels_back, *img_openlabels_play, *img_openlabels_template,
-  *img_openlabels_gif_export, *img_openlabels_pict_export, *img_openlabels_next, *img_mixerlabel_clear;
+  *img_openlabels_slideshow, *img_openlabels_back, *img_openlabels_play,
+  *img_openlabels_template, *img_openlabels_gif_export,
+  *img_openlabels_pict_export, *img_openlabels_next, *img_mixerlabel_clear;
 
 static SDL_Surface *img_tux[NUM_TIP_TUX];
 
@@ -2110,6 +2111,7 @@ static void rect_xor(int x1, int y1, int x2, int y2);
 static void circle_xor(int x, int y, int sz);
 static void draw_blinking_cursor(void);
 static void hide_blinking_cursor(void);
+static int text_label_tool_enter(int font_height);
 
 static void reset_brush_counter(int force);
 
@@ -2224,8 +2226,8 @@ static int do_slideshow(void);
 static void play_slideshow(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed);
 static void draw_selection_digits(int right, int bottom, int n);
 
-static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed,
-                      char **dest_fname);
+static int export_gif(int *selected, int num_selected, char *dirname,
+                      char **d_names, char **d_exts, int speed, char **dest_fname);
 int export_gif_monitor_events(void);
 
 /* Locations where export_pict() can save */
@@ -2262,7 +2264,7 @@ static void print_image(void);
 static void do_print(void);
 static void strip_trailing_whitespace(char *buf);
 static void strip_quotes(char *buf);
-static void do_render_cur_text(int do_blit);
+static int do_render_cur_text(int do_blit);
 static char *uppercase(const char *restrict const str);
 static wchar_t *uppercase_w(const wchar_t *restrict const str);
 static SDL_Surface *do_render_button_label(const char *const label);
@@ -2822,7 +2824,6 @@ static void mainloop(void)
         /* handle_keymouse_buttons will move one button at a time */
         handle_keymouse_buttons(key, &whicht, &whichc, real_r_tools);
 
-
         if ((key == SDLK_ESCAPE || key == SDLK_AC_BACK) && !disable_quit)
         {
           magic_switchout(canvas);
@@ -2886,7 +2887,8 @@ static void mainloop(void)
             magic_switchin(canvas);
         }
 #endif
-        else if (key == SDLK_z && (mod & KMOD_CTRL) && !noshortcuts && !button_down && !emulate_button_pressed
+        else if (key == SDLK_z && (mod & KMOD_CTRL) && !noshortcuts
+                 && !button_down && !emulate_button_pressed
                  && stamp_tool_mode != STAMP_TOOL_MODE_ROTATE && shape_tool_mode != SHAPE_TOOL_MODE_ROTATE)
         {
           /* Ctrl-Z - Undo */
@@ -3155,6 +3157,87 @@ static void mainloop(void)
             update_screen_rect(&r_tools);
           }
         }
+        else if (((key == SDLK_v && (mod & KMOD_CTRL)) && !noshortcuts) || key == SDLK_PASTE)
+        {
+          /* Ctrl-V - Paste */
+          if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
+          {
+            char *pasted_txt;
+
+            if (SDL_HasClipboardText())
+            {
+              pasted_txt = SDL_GetClipboardText();
+              if (pasted_txt != NULL /* it shouldn't be */ )
+              {
+                if (pasted_txt[0] != '\0')
+                {
+                  int n;
+                  wchar_t *tmp;
+
+                  DEBUG_PRINTF("Pasting: %s\n", pasted_txt);
+
+                  n = strlen(pasted_txt) + 1;
+                  tmp = alloca(sizeof(wchar_t) * n);
+
+                  if (tmp != NULL)
+                  {
+                    int exceeded;
+
+                    mbstowcs(tmp, pasted_txt, n);       /* at most n wchar_t written */
+                    exceeded = 0;
+                    for (int i = 0; tmp[i] != '\0' && !exceeded; i++)
+                    {
+                      if (tmp[i] == '\n')
+                      {
+                        exceeded = text_label_tool_enter(TuxPaint_Font_FontHeight(getfonthandle(cur_font)));
+                      }
+                      else
+                      {
+                        int txt_width;
+
+                        texttool_str[texttool_len++] = tmp[i];
+                        playsound(screen, 0, SND_KEYCLICK, 0, SNDPOS_CENTER, SNDDIST_NEAR);
+                        txt_width = do_render_cur_text(0);
+                        if (cursor_x + txt_width > canvas->w && texttool_len > 1)
+                        {
+                          int best, j, rewind;
+
+                          best = -1;
+
+                          for (j = texttool_len - 1; j >= 0 && best == -1; j--)
+                          {
+                            if (texttool_str[j] == ' ')
+                            {
+                              best = j + 1;     /* +1 to eat the space */
+                            }
+                            else if (texttool_str[j] == '-')
+                            {   /* FIXME: Also en-dash, em-dash, others? -bjk 2024.12.25 */
+                              best = j;
+                            }
+                          }
+
+                          if (best == -1)
+                          {
+                            best = texttool_len - 1;
+                          }
+
+                          rewind = texttool_len - best;
+
+                          texttool_str[best] = '\0';
+                          txt_width = do_render_cur_text(0);
+                          exceeded = text_label_tool_enter(TuxPaint_Font_FontHeight(getfonthandle(cur_font)));
+                          i = i - rewind;
+                        }
+                        SDL_Delay(10);
+                      }
+                    }
+                  }
+                }
+                SDL_free(pasted_txt);
+              }
+            }
+          }
+        }
         else if (event.type == SDL_TEXTINPUT ||
                  (event.type == SDL_KEYDOWN &&
                   (event.key.keysym.sym == SDLK_BACKSPACE ||
@@ -3162,7 +3245,7 @@ static void mainloop(void)
                    || event.key.keysym.sym == SDLK_TAB
                    || event.key.keysym.sym == SDLK_LALT || event.key.keysym.sym == SDLK_RALT)))
         {
-          /* Handle key in text tool: */
+          /* Handle special keys key in text tool: */
 
           if (((cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
                && cursor_x != -1 && cursor_y != -1) || (cur_tool == TOOL_LABEL
@@ -3263,38 +3346,7 @@ static void mainloop(void)
                 {
                   /* [Enter] to finish entering text */
 
-                  rec_undo_buffer();
-                  do_render_cur_text(1);
-                  label_node_to_edit = NULL;
-                  texttool_len = 0;
-                  cursor_textwidth = 0;
-                  if (cur_tool == TOOL_LABEL)
-                  {
-                    draw_fonts();
-                    update_screen_rect(&r_toolopt);
-                  }
-
-                  if (been_saved)
-                  {
-                    been_saved = 0;
-
-                    if (!disable_save)
-                      tool_avail[TOOL_SAVE] = 1;
-
-                    draw_toolbar();
-                    update_screen_rect(&r_tools);
-                  }
-
-
-                  cursor_x = cursor_left;
-                  cursor_y = min(cursor_y + font_height, canvas->h - font_height);
-
-                  /* Reposition the on-screen keyboard if we begin typing over it */
-                  update_canvas_ex(kbd_rect.x, kbd_rect.y, kbd_rect.x + kbd_rect.w, kbd_rect.y + kbd_rect.h, 0);
-                  update_screen_rect(&kbd_rect);
-                  reposition_onscreen_keyboard(cursor_y);
-
-                  playsound(screen, 0, SND_RETURN, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
+                  text_label_tool_enter(font_height);
                 }
                 else if (cur_tool == TOOL_LABEL && label_node_to_edit)
                 {
@@ -3690,18 +3742,18 @@ static void mainloop(void)
                                    img_btn_up, img_btn_down, img_btn_off,
                                    img_btn_nav, img_btn_hold,
                                    img_oskdel, img_osktab, img_oskenter,
-                                   img_oskcapslock, img_oskshift, onscreen_keyboard_disable_change);
+                                   img_oskcapslock, img_oskshift, img_oskpaste, onscreen_keyboard_disable_change);
                     else
                       kbd =
                         osk_create(strdup("default.layout"), canvas,
                                    img_btn_up, img_btn_down, img_btn_off,
                                    img_btn_nav, img_btn_hold,
                                    img_oskdel, img_osktab, img_oskenter,
-                                   img_oskcapslock, img_oskshift, onscreen_keyboard_disable_change);
+                                   img_oskcapslock, img_oskshift, img_oskpaste, onscreen_keyboard_disable_change);
                   }
 
                   if (kbd == NULL)
-                    fprintf(stderr, "kbd = NULL\n");
+                    fprintf(stderr, "Warning: kbd = NULL\n");
                   else
                     reposition_onscreen_keyboard(0);
                 }
@@ -4444,10 +4496,12 @@ static void mainloop(void)
 
                     if (magics[grp][cur].sizes[magic_modeint(magics[grp][cur].mode)])
                     {
-                      DEBUG_PRINTF("group %d thing %d in mode %04x (%d) has %d sizes; size is %d\n", grp, cur,
-                                   magics[grp][cur].mode, magic_modeint(magics[grp][cur].mode),
-                                   magics[grp][cur].sizes[magic_modeint(magics[grp][cur].mode)],
-                                   magics[grp][cur].size[magic_modeint(magics[grp][cur].mode)]);
+                      DEBUG_PRINTF
+                        ("group %d thing %d in mode %04x (%d) has %d sizes; size is %d\n",
+                         grp, cur, magics[grp][cur].mode,
+                         magic_modeint(magics[grp][cur].mode),
+                         magics[grp][cur].sizes[magic_modeint(magics[grp][cur].mode)],
+                         magics[grp][cur].size[magic_modeint(magics[grp][cur].mode)]);
                       magic_set_size();
                     }
                   }
@@ -4464,8 +4518,8 @@ static void mainloop(void)
                       old_size = magics[grp][cur].size[mode];
 
                       new_size =
-                        ((magics[grp][cur].sizes[mode] * (event.button.x - (WINDOW_WIDTH - r_ttoolopt.w))) /
-                         r_ttoolopt.w) + 1;
+                        ((magics[grp][cur].sizes[mode] *
+                          (event.button.x - (WINDOW_WIDTH - r_ttoolopt.w))) / r_ttoolopt.w) + 1;
 
                       if (new_size != old_size)
                       {
@@ -4816,8 +4870,8 @@ static void mainloop(void)
                   if (prev_new_size < brushes_spacing_default[cur_brush] &&
                       next_new_size > brushes_spacing_default[cur_brush])
                   {
-                    DEBUG_PRINTF("Nudging %d brush spacing to my default: %d\n", new_size,
-                                 brushes_spacing_default[cur_brush]);
+                    DEBUG_PRINTF
+                      ("Nudging %d brush spacing to my default: %d\n", new_size, brushes_spacing_default[cur_brush]);
                     new_size = brushes_spacing_default[cur_brush];
                   }
                 }
@@ -4997,7 +5051,8 @@ static void mainloop(void)
               else
                 fmt_str = TIP_LABEL_FONTCHANGE;
 
-              safe_snprintf(font_tux_text, sizeof(font_tux_text), gettext(fmt_str),
+              safe_snprintf(font_tux_text, sizeof(font_tux_text),
+                            gettext(fmt_str),
                             TTF_FontFaceFamilyName(getfonthandle(cur_font)->ttf_font),
                             TTF_FontFaceStyleName(getfonthandle(cur_font)->ttf_font), getfonthandle(cur_font)->height);
               draw_tux_text(TUX_GREAT, font_tux_text, 1);
@@ -5310,9 +5365,10 @@ static void mainloop(void)
                (as long as we're not involved in anything else within
                this main loop!) */
 
-            if ((cur_tool != TOOL_SHAPES || shape_mode == SHAPE_TOOL_MODE_DONE) &&
-                (cur_tool != TOOL_STAMP || stamp_tool_mode == STAMP_TOOL_MODE_PLACE) &&
-                cur_tool != TOOL_TEXT && cur_tool != TOOL_LABEL)
+            if ((cur_tool != TOOL_SHAPES
+                 || shape_mode == SHAPE_TOOL_MODE_DONE)
+                && (cur_tool != TOOL_STAMP
+                    || stamp_tool_mode == STAMP_TOOL_MODE_PLACE) && cur_tool != TOOL_TEXT && cur_tool != TOOL_LABEL)
             {
               /* Jump into quick eraser loop */
               do_quick_eraser();
@@ -5523,8 +5579,8 @@ static void mainloop(void)
               else
               {
                 draw_color = SDL_MapRGB(canvas->format,
-                                        color_hexes[cur_color][0], color_hexes[cur_color][1],
-                                        color_hexes[cur_color][2]);
+                                        color_hexes[cur_color][0],
+                                        color_hexes[cur_color][1], color_hexes[cur_color][2]);
               }
 
               would_fill = would_flood_fill(canvas, draw_color, canv_color);
@@ -6237,8 +6293,8 @@ static void mainloop(void)
                                                               shape_current_x)
                          + (shape_start_y - shape_current_y) * (shape_start_y - shape_current_y));
 
-                  SDL_WarpMouse(shape_ctr_x + (shape_current_x - shape_ctr_x) * 1.05 + r_canvas.x,
-                                shape_ctr_y + r_canvas.y);
+                  SDL_WarpMouse(shape_ctr_x +
+                                (shape_current_x - shape_ctr_x) * 1.05 + r_canvas.x, shape_ctr_y + r_canvas.y);
                   do_setcursor(cursor_rotate);
 
 
@@ -6722,9 +6778,9 @@ static void mainloop(void)
 
             magic_funcs[magics[magic_group]
                         [cur_magic[magic_group]].handle_idx].drag(magic_api_struct,
-                                                                  magics[magic_group][cur_magic
-                                                                                      [magic_group]].idx, canvas, last,
-                                                                  old_x, old_y, new_x, new_y, &update_rect);
+                                                                  magics[magic_group][cur_magic[magic_group]].idx,
+                                                                  canvas, last, old_x, old_y, new_x, new_y,
+                                                                  &update_rect);
 
             update_canvas(update_rect.x, update_rect.y, update_rect.x + update_rect.w, update_rect.y + update_rect.h);
           }
@@ -6869,9 +6925,13 @@ static void mainloop(void)
                 /* The half of maximum size the stamp could have when rotating. */
                 int half_bigbox =
                   sqrt((CUR_STAMP_W + 1) * (CUR_STAMP_W + 1) + (CUR_STAMP_H + 1) * (CUR_STAMP_H + 1)) / 2;
-                update_screen(min(min(new_x, old_x), stamp_place_x - half_bigbox) + r_canvas.x,
-                              min(min(new_y, old_y), stamp_place_y - half_bigbox) + r_canvas.y,
-                              max(max(new_x, old_x), stamp_place_x + half_bigbox) + r_canvas.x,
+                update_screen(min
+                              (min(new_x, old_x),
+                               stamp_place_x - half_bigbox) + r_canvas.x,
+                              min(min(new_y, old_y),
+                                  stamp_place_y - half_bigbox) + r_canvas.y,
+                              max(max(new_x, old_x),
+                                  stamp_place_x + half_bigbox) + r_canvas.x,
                               max(max(new_y, old_y), stamp_place_y + half_bigbox) + r_canvas.y);
 #else
                 /* FIXME: Be smarter about this */
@@ -6971,8 +7031,8 @@ static void mainloop(void)
                                                                             r_ttoolopt.w))) / r_toolopt.w) +
               MIN_STAMP_SIZE;
 
-            DEBUG_PRINTF("Old size = %d, Chose %0.4f, New size =%d\n", old_size, choice,
-                         stamp_data[stamp_group][cur_stamp[stamp_group]]->size);
+            DEBUG_PRINTF("Old size = %d, Chose %0.4f, New size =%d\n",
+                         old_size, choice, stamp_data[stamp_group][cur_stamp[stamp_group]]->size);
 
             if (stamp_data[stamp_group][cur_stamp[stamp_group]]->size != old_size)
             {
@@ -7397,8 +7457,8 @@ static void blit_brush(int x, int y, int direction, double rotation, int *w, int
           /* Ensure any semi-transparent areas or edges match the same color as we're painting
              (and not cause a black halo; see https://sourceforge.net/p/tuxpaint/bugs/259/ -bjk 2024.10.11) */
           SDL_FillRect(brush_frame_surf, NULL,
-                       SDL_MapRGBA(brush_frame_surf->format, color_hexes[cur_color][0], color_hexes[cur_color][1],
-                                   color_hexes[cur_color][2], 0));
+                       SDL_MapRGBA(brush_frame_surf->format,
+                                   color_hexes[cur_color][0], color_hexes[cur_color][1], color_hexes[cur_color][2], 0));
 
           /* 2021/09/28 SDL(2)_gfxBlitRGBA() is not available in the SDL2_gfx library, using plain SDL_BlitSurface() instead. Pere
              SDL_gfxBlitRGBA(img_cur_brush, &src, brush_frame_surf, NULL); */
@@ -8293,7 +8353,8 @@ void show_fonts(void)
     fprintf(stderr, "Unable to add font dir %s\n", locale_fontdir);
   }
 
-  FcDirCacheRead((const FcChar8 *)locale_fontdir, FcTrue /* force */ , FcConfigGetCurrent());
+  FcDirCacheRead((const FcChar8 *)locale_fontdir, FcTrue /* force */ ,
+                 FcConfigGetCurrent());
   FcDirCacheRescan((const FcChar8 *)locale_fontdir, FcConfigGetCurrent());
 
   generate_fontconfig_cache_real();
@@ -8370,7 +8431,8 @@ static unsigned compute_default_scale_factor(double ratio)
  */
 static void loadbrush_callback(SDL_Surface *screen,
                                __attribute__((unused)) SDL_Texture *texture,
-                               __attribute__((unused)) SDL_Renderer *renderer, const char *restrict const dir,
+                               __attribute__((unused)) SDL_Renderer *renderer,
+                               const char *restrict const dir,
                                unsigned dirlen, tp_ftw_str *files, unsigned i, const char *restrict const locale)
 {
   FILE *fi;
@@ -8413,8 +8475,9 @@ static void loadbrush_callback(SDL_Surface *screen,
 
       /* Load brush description, if any: */
       brushes_descr[num_brushes] = loaddesc(fname, &(brushes_descr_localized[num_brushes]));
-      DEBUG_PRINTF("%s: %s (%d)\n", fname, (brushes_descr[num_brushes] != NULL ? brushes_descr[num_brushes] : "NULL"),
-                   brushes_descr_localized[num_brushes]);
+      DEBUG_PRINTF("%s: %s (%d)\n", fname,
+                   (brushes_descr[num_brushes] !=
+                    NULL ? brushes_descr[num_brushes] : "NULL"), brushes_descr_localized[num_brushes]);
 
       /* Load brush metadata, if any: */
 
@@ -9283,7 +9346,8 @@ static void get_stamp_thumb(stamp_type *sd, int process_sound)
  */
 static void loadstamp_callback(SDL_Surface *screen,
                                __attribute__((unused)) SDL_Texture *texture,
-                               __attribute__((unused)) SDL_Renderer *renderer, const char *restrict const dir,
+                               __attribute__((unused)) SDL_Renderer *renderer,
+                               const char *restrict const dir,
                                unsigned dirlen, tp_ftw_str *files, unsigned i, const char *restrict const locale)
 {
   (void)locale;
@@ -10413,8 +10477,9 @@ static void draw_magic(void)
     //  (r_ttoolopt.h +
     //   ((most / gd_toolopt.cols +
     //     (TOOLOFFSET + 2) / gd_toolopt.cols) * button_h) + (button_h - img_magic_paint->h) / 2);
-    dest.y = (button_h * buttons_tall + r_ttools.h) - button_h * (disable_magic_sizes ? 1 : 2) +
-      ((button_h - img_magic_paint->h) / 2);
+    dest.y =
+      (button_h * buttons_tall + r_ttools.h) -
+      button_h * (disable_magic_sizes ? 1 : 2) + ((button_h - img_magic_paint->h) / 2);
 
     SDL_BlitSurface(img_magic_paint, NULL, screen, &dest);
 
@@ -10439,8 +10504,9 @@ static void draw_magic(void)
     //  (r_ttoolopt.h +
     //   ((most / gd_toolopt.cols +
     //     (TOOLOFFSET + 2) / gd_toolopt.cols) * button_h) + (button_h - img_magic_fullscreen->h) / 2);
-    dest.y = (button_h * buttons_tall + r_ttools.h) - button_h * (disable_magic_sizes ? 1 : 2) +
-      ((button_h - img_magic_fullscreen->h) / 2);
+    dest.y =
+      (button_h * buttons_tall + r_ttools.h) -
+      button_h * (disable_magic_sizes ? 1 : 2) + ((button_h - img_magic_fullscreen->h) / 2);
 
     SDL_BlitSurface(img_magic_fullscreen, NULL, screen, &dest);
   }
@@ -12716,8 +12782,8 @@ static void do_eraser(int x, int y, int update)
         if (sq <= sz / 2)
         {
           if (img_starter_bkgd != NULL)
-            SDL_GetRGB(getpixel_bkgd(img_starter_bkgd, x + xx, y + yy), img_starter_bkgd->format, &r_erase, &g_erase,
-                       &b_erase);
+            SDL_GetRGB(getpixel_bkgd(img_starter_bkgd, x + xx, y + yy),
+                       img_starter_bkgd->format, &r_erase, &g_erase, &b_erase);
 
           if (eraser_type == ERASER_TYPE_CIRCLE_FUZZY)
           {
@@ -12730,8 +12796,8 @@ static void do_eraser(int x, int y, int update)
           else
           {
             /* Transparent */
-            SDL_GetRGB(getpixels[last->format->BytesPerPixel] (last, x + xx, y + yy),
-                       last->format, &r_canvas, &g_canvas, &b_canvas);
+            SDL_GetRGB(getpixels[last->format->BytesPerPixel]
+                       (last, x + xx, y + yy), last->format, &r_canvas, &g_canvas, &b_canvas);
 
             canvas_pct = 0.75;
             erase_pct = 0.25;
@@ -13797,10 +13863,15 @@ static void autoscale_copy_smear_free(SDL_Surface *src, SDL_Surface *dst,
  * @param int SDCALL(*blit) -- function for blitting; "NondefectiveBlit" or "SDL_BlitSurface"
  * @param starter_template_options_t opts -- options (loaded from ".dat" file) describing strategies to take
  */
-static void autoscale_copy_scale_or_smear_free(SDL_Surface *src, SDL_Surface *dst,
-                                               int SDLCALL(*blit) (SDL_Surface *src,
-                                                                   const SDL_Rect *srcrect,
-                                                                   SDL_Surface *dst,
+static void autoscale_copy_scale_or_smear_free(SDL_Surface *src,
+                                               SDL_Surface *dst,
+                                               int SDLCALL(*blit) (SDL_Surface
+                                                                   *src,
+                                                                   const
+                                                                   SDL_Rect
+                                                                   *srcrect,
+                                                                   SDL_Surface
+                                                                   *dst,
                                                                    SDL_Rect *dstrect), starter_template_options_t opts)
 {
   int new_w, new_h;
@@ -13814,8 +13885,9 @@ static void autoscale_copy_scale_or_smear_free(SDL_Surface *src, SDL_Surface *ds
 
   if (src_aspect > dst_aspect)
   {
-    DEBUG_PRINTF("Image (%d x %d) is of a wider aspect (%0.5f) than canvas (%d x %d) (%0.5f)\n", src->w, src->h,
-                 src_aspect, dst->w, dst->h, dst_aspect);
+    DEBUG_PRINTF
+      ("Image (%d x %d) is of a wider aspect (%0.5f) than canvas (%d x %d) (%0.5f)\n",
+       src->w, src->h, src_aspect, dst->w, dst->h, dst_aspect);
     if (opts.scale_mode == STARTER_TEMPLATE_SCALE_MODE_HORIZ || opts.scale_mode == STARTER_TEMPLATE_SCALE_MODE_BOTH)
     {
       new_h = dst->h;
@@ -13825,8 +13897,9 @@ static void autoscale_copy_scale_or_smear_free(SDL_Surface *src, SDL_Surface *ds
   }
   else if (src_aspect < dst_aspect)
   {
-    DEBUG_PRINTF("Image (%d x %d) is of a taller aspect (%0.5f) than canvas (%d x %d) (%0.5f)\n", src->w, src->h,
-                 src_aspect, dst->w, dst->h, dst_aspect);
+    DEBUG_PRINTF
+      ("Image (%d x %d) is of a taller aspect (%0.5f) than canvas (%d x %d) (%0.5f)\n",
+       src->w, src->h, src_aspect, dst->w, dst->h, dst_aspect);
     if (opts.scale_mode == STARTER_TEMPLATE_SCALE_MODE_VERT || opts.scale_mode == STARTER_TEMPLATE_SCALE_MODE_BOTH)
     {
       new_w = dst->w;
@@ -13836,8 +13909,8 @@ static void autoscale_copy_scale_or_smear_free(SDL_Surface *src, SDL_Surface *ds
   }
   else
   {
-    DEBUG_PRINTF("Image (%d x %d) is the same aspect as canvas (%d x %d) (%0.05f)\n", src->w, src->h, dst->w, dst->h,
-                 src_aspect);
+    DEBUG_PRINTF
+      ("Image (%d x %d) is the same aspect as canvas (%d x %d) (%0.05f)\n", src->w, src->h, dst->w, dst->h, src_aspect);
   }
 
 
@@ -13851,7 +13924,8 @@ static void autoscale_copy_scale_or_smear_free(SDL_Surface *src, SDL_Surface *ds
 
     DEBUG_PRINTF("Scaling from %d x %d to %d x %d\n", src->w, src->h, new_w, new_h);
 
-    scaled = thumbnail2(src, new_w, new_h, 0 /* keep aspect */ , 1 /* keep alpha */ );
+    scaled = thumbnail2(src, new_w, new_h, 0 /* keep aspect */ ,
+                        1 /* keep alpha */ );
     if (scaled == NULL)
     {
       fprintf(stderr, "Failed to scale an image!\n");
@@ -13901,8 +13975,9 @@ static void autoscale_copy_scale_or_smear_free(SDL_Surface *src, SDL_Surface *ds
     src_rect.w = scaled->w;
     src_rect.h = scaled->h;
 
-    DEBUG_PRINTF("Blitting scaled image (%d x %d) into new 'src' image (%d x %d) at (%d,%d) %d x %d\n",
-                 scaled->w, scaled->h, src->w, src->h, src_rect.x, src_rect.y, src_rect.w, src_rect.h);
+    DEBUG_PRINTF
+      ("Blitting scaled image (%d x %d) into new 'src' image (%d x %d) at (%d,%d) %d x %d\n",
+       scaled->w, scaled->h, src->w, src->h, src_rect.x, src_rect.y, src_rect.w, src_rect.h);
 
     SDL_BlitSurface(scaled, &src_rect, src, NULL);
   }
@@ -14282,9 +14357,16 @@ static SDL_Surface *load_starter_helper(char *path_and_basename,
   char fname[256];
   SDL_Surface *surf;
   unsigned int i;
+  struct stat stat_buf;
 
   ext = strdup(extension);
   safe_snprintf(fname, sizeof(fname), "%s.%s", path_and_basename, ext);
+
+  if (stat(fname, &stat_buf) != 0)
+  {
+    /* File by that name doesn't exist; give up now */
+    return NULL;
+  }
 
   surf = (*load_func) (fname);
 
@@ -15517,6 +15599,7 @@ static void cleanup(void)
     free_surface(&img_oskenter);
     free_surface(&img_oskcapslock);
     free_surface(&img_oskshift);
+    free_surface(&img_oskpaste);
 
     if (kbd)
       osk_free(kbd);
@@ -18005,7 +18088,8 @@ static int do_open(void)
 
               do_setcursor(cursor_down);
             }
-            else if (event.button.y >= (button_h * buttons_tall + r_ttools.h) - button_h
+            else if (event.button.y >=
+                     (button_h * buttons_tall + r_ttools.h) - button_h
                      && event.button.y < (button_h * buttons_tall + r_ttools.h))
             {
               if (event.button.x >= r_ttools.w && event.button.x < r_ttools.w + (button_w * num_left_buttons))
@@ -18013,19 +18097,21 @@ static int do_open(void)
                 /* One of the command buttons on the left: Open, Slides, Template [maybe] */
                 do_setcursor(cursor_hand);
               }
-              else if (event.button.x >= (WINDOW_WIDTH - r_ttoolopt.w - button_w)
-                       && event.button.x < (WINDOW_WIDTH - r_ttoolopt.w))
+              else if (event.button.x >=
+                       (WINDOW_WIDTH - r_ttoolopt.w - button_w) && event.button.x < (WINDOW_WIDTH - r_ttoolopt.w))
               {
                 /* Command button on the right: Back */
                 do_setcursor(cursor_hand);
               }
-              else if (event.button.x >= (WINDOW_WIDTH - r_ttoolopt.w - button_w * 2)
+              else if (event.button.x >=
+                       (WINDOW_WIDTH - r_ttoolopt.w - button_w * 2)
                        && event.button.x < (WINDOW_WIDTH - r_ttoolopt.w - button_w) && !disable_erase)
               {
                 /* Command button on the right: Erase [maybe] */
                 do_setcursor(cursor_hand);
               }
-              else if (event.button.x >= (WINDOW_WIDTH - r_ttoolopt.w - button_w * 3)
+              else if (event.button.x >=
+                       (WINDOW_WIDTH - r_ttoolopt.w - button_w * 3)
                        && event.button.x < (WINDOW_WIDTH - r_ttoolopt.w - button_w * 2))
               {
                 /* Command button on the right: Export */
@@ -18269,11 +18355,11 @@ static int do_open(void)
           if (res == EXPORT_SUCCESS)
             do_prompt_snd(PROMPT_PICT_TEMPLATE_TXT, PROMPT_TEMPLATE_YES, "", SND_TUXOK, screen->w / 2, screen->h / 2);
           else if (res == EXPORT_ERR_ALREADY_EXPORTED)
-            do_prompt_snd(PROMPT_PICT_TEMPLATE_EXISTS_TXT, PROMPT_TEMPLATE_YES,
-                          "", SND_YOUCANNOT, screen->w / 2, screen->h / 2);
+            do_prompt_snd(PROMPT_PICT_TEMPLATE_EXISTS_TXT,
+                          PROMPT_TEMPLATE_YES, "", SND_YOUCANNOT, screen->w / 2, screen->h / 2);
           else
-            do_prompt_snd(PROMPT_PICT_TEMPLATE_FAILED_TXT, PROMPT_TEMPLATE_YES,
-                          "", SND_YOUCANNOT, screen->w / 2, screen->h / 2);
+            do_prompt_snd(PROMPT_PICT_TEMPLATE_FAILED_TXT,
+                          PROMPT_TEMPLATE_YES, "", SND_YOUCANNOT, screen->w / 2, screen->h / 2);
 
           draw_tux_text(TUX_BORED, instructions, 1);
           update_list = 1;
@@ -20200,9 +20286,9 @@ void do_print(void)
 /**
  * FIXME
  */
-static void do_render_cur_text(int do_blit)
+static int do_render_cur_text(int do_blit)
 {
-  int w, h;
+  int w, h, txt_width;
 
   SDL_Color color = { color_hexes[cur_color][0],
     color_hexes[cur_color][1],
@@ -20295,8 +20381,7 @@ static void do_render_cur_text(int do_blit)
     }
     /* FIXME: Is this SDL_Flip() still needed? Pere 2011.06.28 */
     SDL_Flip(screen);
-    return;
-
+    return 0;
   }
 
 
@@ -20416,11 +20501,14 @@ static void do_render_cur_text(int do_blit)
   free(str);
 
   if (tmp_surf != NULL)
+  {
+    txt_width = tmp_surf->w;
     SDL_FreeSurface(tmp_surf);
-/*   if (tmp_label != NULL) */
-  /*    SDL_FreeSurface(tmp_label); */
-  // SDL_Delay(5000);
+  }
+  else
+    txt_width = 0;
 
+  return txt_width;
 }
 
 
@@ -21144,7 +21232,12 @@ static void flip_starter(void)
 
 
 /**
- * FIXME
+ * Returns whether a button click is valid, based on the
+ * "no button distinction" setting.
+ *
+ * @param Uint8 button -- the button clicked (we check for 1, 2, or 3)
+ * @return int -- 1/true if the button is recognized, else 0/false
+ *   (2 & 3 are only valid if "no button distiction" is enabled)
  */
 static int valid_click(Uint8 button)
 {
@@ -21156,10 +21249,17 @@ static int valid_click(Uint8 button)
 
 
 /**
- * FIXME
+ * Returns whether a point is within a circle.
+ *
+ * @param int x -- x position relative to center of circle
+ * @param int y -- y position [ditto]
+ * @param int rad -- radius of circle
+ * @return int -- 1/true if (x,y) is within the circle, else 0/false
  */
 static int in_circle_rad(int x, int y, int rad)
 {
+  if (abs(x) > rad || abs(y) > rad)     // short circuit to avoid unnecessary math
+    return (0);
   if ((x * x) + (y * y) - (rad * rad) < 0)
     return (1);
   else
@@ -21353,9 +21453,11 @@ static SDL_Surface *_load_svg(const char *file)
   rsvg_handle = rsvg_handle_new_from_file(file, &gerr);
   if (rsvg_handle == NULL)
   {
-    fprintf(stderr, "rsvg_handle_new_from_file(%s) failed\n", file);
+    fprintf(stderr, "rsvg_handle_new_from_file(%s) failed: %s\n", file, gerr->message);
+    free(gerr);
     return (NULL);
   }
+  free(gerr);
 
 /* rsvg_handle_get_dimensions() is deprecated since since version 2.52,
    but we currently support some platforms where it's not yet available
@@ -21632,6 +21734,14 @@ static SDL_Surface *myIMG_Load_RWops(const char *file)
    otherwise call SDL_Image lib's IMG_Load() (for PNGs, JPEGs, BMPs, etc.) */
 static SDL_Surface *myIMG_Load(const char *file)
 {
+  struct stat stat_buf;
+
+  if (stat(file, &stat_buf) != 0)
+  {
+    /* File by that name doesn't exist; give up now */
+    return NULL;
+  }
+
   if (strlen(file) > 4 && strcasecmp(file + strlen(file) - 4, ".kpx") == 0)
   {
     return (load_kpx(file));
@@ -22049,8 +22159,9 @@ static void load_magic_plugins(void)
                         if (magics[group][j].order == magics[group][idx].order)
                         {
                           fprintf(stderr,
-                                  "Warning: In group %d, tool %d (%s) has the same order (%d) as tool %d (%s)\n", group,
-                                  idx, magics[group][idx].name, magics[group][j].order, j, magics[group][j].name);
+                                  "Warning: In group %d, tool %d (%s) has the same order (%d) as tool %d (%s)\n",
+                                  group, idx, magics[group][idx].name,
+                                  magics[group][j].order, j, magics[group][j].name);
                         }
                       }
 
@@ -22075,8 +22186,8 @@ static void load_magic_plugins(void)
                               magic_funcs[num_plugin_files].get_description(magic_api_struct, i, MODE_ONECLICK);
                           else if (magics[group][idx].avail_modes & MODE_PAINT_WITH_PREVIEW)
                             magics[group][idx].tip[j] =
-                              magic_funcs[num_plugin_files].get_description
-                              (magic_api_struct, i, MODE_PAINT_WITH_PREVIEW);
+                              magic_funcs[num_plugin_files].get_description(magic_api_struct, i,
+                                                                            MODE_PAINT_WITH_PREVIEW);
                         }
                       }
 
@@ -22116,13 +22227,13 @@ static void load_magic_plugins(void)
                           {
                             magics[group][idx].default_size[j] =
                               magic_funcs[num_plugin_files].default_size(magic_api_struct, i, mode_bit);
-                            if (magics[group][idx].default_size[j] < 1 ||
-                                magics[group][idx].default_size[j] > magics[group][idx].sizes[j])
+                            if (magics[group][idx].default_size[j] < 1
+                                || magics[group][idx].default_size[j] > magics[group][idx].sizes[j])
                             {
                               fprintf(stderr,
                                       "Warning: plugin %s tool # %d for %d mode (%x) default size (%d) out of range (1-%d)\n",
-                                      fname, i, j, mode_bit, magics[group][idx].default_size[j],
-                                      magics[group][idx].sizes[j]);
+                                      fname, i, j, mode_bit,
+                                      magics[group][idx].default_size[j], magics[group][idx].sizes[j]);
                               magics[group][idx].default_size[j] = 1;
                             }
                             magics[group][idx].size[j] = magics[group][idx].default_size[j];
@@ -22155,7 +22266,8 @@ static void load_magic_plugins(void)
 
                         if (num_magics[group] >= MAX_MAGICS_PER_GROUP)
                         {
-                          fprintf(stderr, "Error: exceeded maximum number of Magic tools (%d) in group %d!\n",
+                          fprintf(stderr,
+                                  "Error: exceeded maximum number of Magic tools (%d) in group %d!\n",
                                   MAX_MAGICS_PER_GROUP, group);
                           num_magics[group]--;  // FIXME: Do something better than just this! -bjk 2024.04.08
                         }
@@ -23369,9 +23481,11 @@ static int do_new_dialog(void)
           done = 1;
           playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
         }
-        else if (erasable && event.button.x >= (WINDOW_WIDTH - r_ttoolopt.w - button_w * 2) &&
-                 event.button.x < (WINDOW_WIDTH - r_ttoolopt.w - button_w) &&
-                 event.button.y >=
+        else if (erasable
+                 && event.button.x >=
+                 (WINDOW_WIDTH - r_ttoolopt.w - button_w * 2)
+                 && event.button.x < (WINDOW_WIDTH - r_ttoolopt.w - button_w)
+                 && event.button.y >=
                  (button_h * buttons_tall + r_ttools.h) - button_h
                  && event.button.y < (button_h * buttons_tall + r_ttools.h))
         {
@@ -23531,7 +23645,9 @@ static int do_new_dialog(void)
         else
           if (((event.button.x >= r_ttools.w
                 && event.button.x < r_ttools.w + button_w)
-               || (event.button.x >= (WINDOW_WIDTH - r_ttoolopt.w - button_w * (erasable ? 2 : 1))
+               || (event.button.x >=
+                   (WINDOW_WIDTH - r_ttoolopt.w -
+                    button_w * (erasable ? 2 : 1))
                    && event.button.x < (WINDOW_WIDTH - r_ttoolopt.w)
                    && d_places[which] != PLACE_STARTERS_DIR
                    && d_places[which] != PLACE_PERSONAL_STARTERS_DIR))
@@ -24808,7 +24924,8 @@ static int do_color_picker(int prev_color)
           done = 1;
         }
       }
-      else if (event.type == SDL_MOUSEBUTTONUP && valid_click(event.button.button))
+      else
+        if ((event.type == SDL_MOUSEBUTTONUP || event.type == SDL_MOUSEBUTTONDOWN) && valid_click(event.button.button))
       {
         if (event.button.x >= color_picker_left &&
             event.button.x < color_picker_left + img_color_picker->w &&
@@ -24966,7 +25083,17 @@ static int do_color_picker(int prev_color)
 
           /* Re-render the palette with the new value */
           render_color_picker_palette();
-          color_picker_v = tmp_color_picker_v;
+          if (valid_click(event.button.button))
+          {
+            /* Click+dragging in value picker? */
+            /* Redraw hue/sat palette, and val slider, and redraw crosshairs */
+            draw_color_picker_palette_and_values(color_picker_left,
+                                                 color_picker_top, color_picker_val_left, color_picker_val_top);
+          }
+          else
+          {
+            color_picker_v = tmp_color_picker_v;
+          }
 
           /* Show a big solid example of the color: */
 
@@ -24976,14 +25103,23 @@ static int do_color_picker(int prev_color)
           SDL_GetRGB(getpixel_img_color_picker
                      (img_color_picker, color_picker_x, color_picker_y), img_color_picker->format, &r, &g, &b);
 
-          dest.x = color_example_dest.x + color_example_dest.w / 4;
-          dest.y = color_example_dest.y + color_example_dest.h / 4;
-          dest.w = color_example_dest.w / 2;
-          dest.h = color_example_dest.h / 2;
-
-          SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
-
-          SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+          if (valid_click(event.button.button))
+          {
+            /* Click+drag? Fill whole box */
+            SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, r, g, b));
+            SDL_UpdateRect(screen, color_example_dest.x, color_example_dest.y,
+                           color_example_dest.w, color_example_dest.h);
+          }
+          else
+          {
+            /* Just hovering? Fill interior box */
+            dest.x = color_example_dest.x + color_example_dest.w / 4;
+            dest.y = color_example_dest.y + color_example_dest.h / 4;
+            dest.w = color_example_dest.w / 2;
+            dest.h = color_example_dest.h / 2;
+            SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
+            SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+          }
 
 
           /* Redraw hue/sat palette, and val slider, and redraw crosshairs */
@@ -25018,14 +25154,45 @@ static int do_color_picker(int prev_color)
 
             SDL_GetRGB(getpixel_img_color_picker(img_color_picker, x, y), img_color_picker->format, &r, &g, &b);
 
-            dest.x = color_example_dest.x + color_example_dest.w / 4;
-            dest.y = color_example_dest.y + color_example_dest.h / 4;
-            dest.w = color_example_dest.w / 2;
-            dest.h = color_example_dest.h / 2;
+            if (valid_click(event.button.button))
+            {
+              /* Click+drag? Fill whole box */
+              SDL_FillRect(screen, &color_example_dest, SDL_MapRGB(screen->format, r, g, b));
+              SDL_UpdateRect(screen, color_example_dest.x,
+                             color_example_dest.y, color_example_dest.w, color_example_dest.h);
+            }
+            else
+            {
+              /* Just hovering? Fill interior box */
+              dest.x = color_example_dest.x + color_example_dest.w / 4;
+              dest.y = color_example_dest.y + color_example_dest.h / 4;
+              dest.w = color_example_dest.w / 2;
+              dest.h = color_example_dest.h / 2;
+              SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
+              SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+            }
 
-            SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
+            if (valid_click(event.button.button))
+            {
+              /* Click+dragging in the color picker? Pick the color and move the crosshair */
+              x = event.button.x - color_picker_left;
+              y = event.button.y - color_picker_top;
 
-            SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+              color_picker_x = x;
+              color_picker_y = y;
+
+              dest.x = color_picker_left;
+              dest.y = color_picker_top;
+              SDL_BlitSurface(img_color_picker, NULL, screen, &dest);
+
+              draw_color_picker_crosshairs(color_picker_left,
+                                           color_picker_top, color_picker_val_left, color_picker_val_top);
+              dest.x = color_picker_left;
+              dest.y = color_picker_top;
+              dest.w = img_color_picker->w;
+              dest.h = img_color_picker->w;
+              SDL_UpdateRect(screen, dest.x, dest.y, dest.w, dest.h);
+            }
           }
           else
           {
@@ -26463,7 +26630,8 @@ static void magic_set_size()
 
   last = undo_bufs[undo_ctr];
 
-  DEBUG_PRINTF("set_size for mode %04x (%d) being set to %d\n", magics[magic_group][cur_magic[magic_group]].mode,
+  DEBUG_PRINTF("set_size for mode %04x (%d) being set to %d\n",
+               magics[magic_group][cur_magic[magic_group]].mode,
                magic_modeint(magics[magic_group][cur_magic[magic_group]].mode),
                magics[magic_group][cur_magic[magic_group]].size[magic_modeint
                                                                 (magics[magic_group][cur_magic[magic_group]].mode)]);
@@ -28601,7 +28769,8 @@ static void setup_config(char *argv[])
   {
     if (strcmp(tmpcfg.tp_ui_font, "default") == 0)
     {
-      printf /*DEBUG_PRINTF */ ("Requested default UI font, \"%s\"\n", PANGO_DEFAULT_FONT);
+      printf /*DEBUG_PRINTF */ ("Info: Requested default UI font, \"%s\"\n",
+                                PANGO_DEFAULT_FONT);
       tp_ui_font = strdup(PANGO_DEFAULT_FONT);
       if (PANGO_DEFAULT_FONT_FALLBACK != NULL)
       {
@@ -28611,12 +28780,14 @@ static void setup_config(char *argv[])
     else
     {
       tp_ui_font = strdup(tmpcfg.tp_ui_font);
-      printf /*DEBUG_PRINTF */ ("Requested UI font described by \"%s\"\n", tp_ui_font);
+      printf                    /*DEBUG_PRINTF */
+        ("Info: Requested UI font described by \"%s\"\n", tp_ui_font);
     }
   }
   else
   {
-    printf /*DEBUG_PRINTF */ ("Requested default UI font, \"%s\"\n", PANGO_DEFAULT_FONT);
+    printf /*DEBUG_PRINTF */ ("Info: Requested default UI font, \"%s\"\n",
+                              PANGO_DEFAULT_FONT);
     tp_ui_font = strdup(PANGO_DEFAULT_FONT);
     if (PANGO_DEFAULT_FONT_FALLBACK != NULL)
     {
@@ -28637,7 +28808,8 @@ static void setup_config(char *argv[])
   /* FIXME: Unclear whether this is necessary? -bjk 2023.06.12 */
   DEBUG_PRINTF("Rescanning fonts...");
   fflush(stdout);
-  FcDirCacheRead((const FcChar8 *)locale_fontdir, FcTrue /* force */ , FcConfigGetCurrent());
+  FcDirCacheRead((const FcChar8 *)locale_fontdir, FcTrue /* force */ ,
+                 FcConfigGetCurrent());
   FcDirCacheRescan((const FcChar8 *)locale_fontdir, FcConfigGetCurrent());
   DEBUG_PRINTF("done\n");
 
@@ -28666,19 +28838,20 @@ static void setup_config(char *argv[])
       tp_ui_font = strdup(tp_ui_font_fallback);
       tp_ui_font_fallback = NULL;
 
-      printf /*DEBUG_PRINTF */ ("Requested fallback default UI font, \"%s\"\n", tp_ui_font);
+      printf                    /*DEBUG_PRINTF */
+        ("Info: Requested fallback default UI font, \"%s\"\n", tp_ui_font);
       tmp_str = ask_pango_for_font(tp_ui_font);
     }
   }
 
   if (tmp_str != NULL)
   {
-    printf("Actual UI font will be \"%s\"\n", tmp_str);
+    printf("Info: Actual UI font will be \"%s\"\n", tmp_str);
     free(tmp_str);
   }
   else
   {
-    printf("Error asking pango for actual font!\n");
+    printf("Error: Problem asking pango for actual font!\n");
   }
 
   /* FIXME: most of this is not required before starting the font scanner */
@@ -28776,8 +28949,8 @@ static void setup_config(char *argv[])
         exit(1);
       }
       button_scale = (float)strtof(tmpcfg.button_size, NULL) / (float)ORIGINAL_BUTTON_SIZE;
-      DEBUG_PRINTF("Button size %s requested = %d (scale = %f)\n", tmpcfg.button_size,
-                   (int)(button_scale * ORIGINAL_BUTTON_SIZE), button_scale);
+      DEBUG_PRINTF("Button size %s requested = %d (scale = %f)\n",
+                   tmpcfg.button_size, (int)(button_scale * ORIGINAL_BUTTON_SIZE), button_scale);
     }
   }
   else
@@ -29661,7 +29834,7 @@ static void setup(void)
   joystick = SDL_JoystickOpen(joystick_dev);
   if (joystick == NULL)
   {
-    fprintf(stderr, "Could not open joystick device %d: %s\n", joystick_dev, SDL_GetError());
+    fprintf(stderr, "Info: Could not open joystick device %d: %s\n", joystick_dev, SDL_GetError());
   }
   else
   {
@@ -29806,13 +29979,15 @@ static void setup(void)
       SDL_CreateWindow("Tux Paint", win_x, win_y,
                        WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_HWSURFACE);
     if (window_screen == NULL)
-      printf("window_screen = NULL 1\n");
+      printf("Warning: Cannot open fullscreen with hardware surface\n");
 
 #else
     window_screen = SDL_CreateWindow(NULL, win_x, win_y, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_FULLSCREEN_DESKTOP);
     if (window_screen == NULL)
-      printf("window_screen = NULL 2\n");
+      printf("Warning: Cannot open fullscreen with software surface\n");
 #endif
+
+    /* FIXME: Check window_screen for being NULL, and abort?! (Also see below) -bjk 2024.12.20 */
 
     renderer = SDL_CreateRenderer(window_screen, -1, 0);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
@@ -29940,6 +30115,8 @@ static void setup(void)
           if (mode.w >= WINDOW_WIDTH && mode.h >= WINDOW_HEIGHT)
           {
             /* Found a display capable of the chosen window size */
+            max_scrn_w = mode.w;
+            max_scrn_h = mode.h;
           }
           else
           {
@@ -29961,13 +30138,16 @@ static void setup(void)
       /* Only found one display, and window size is larger? Use that window size */
       if (WINDOW_WIDTH > max_scrn_w)
       {
-        fprintf(stderr, "Asked for window width (%d) larger than max screen width (%d)\n", WINDOW_WIDTH, max_scrn_w);
+        fprintf(stderr,
+                "Warning: Asked for window width (%d) larger than max screen width (%d)\n", WINDOW_WIDTH, max_scrn_w);
         WINDOW_WIDTH = max_scrn_w;
       }
 
       if (WINDOW_HEIGHT > max_scrn_h)
       {
-        fprintf(stderr, "Asked for window height (%d) larger than max screen height (%d)\n", WINDOW_HEIGHT, max_scrn_h);
+        fprintf(stderr,
+                "Warning: Asked for window height (%d) larger than max screen height (%d)\n",
+                WINDOW_HEIGHT, max_scrn_h);
         WINDOW_HEIGHT = max_scrn_h;
       }
     }
@@ -29977,13 +30157,14 @@ static void setup(void)
 #ifdef USE_HWSURFACE
     window_screen = SDL_CreateWindow("Tux Paint", win_x, win_y, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_HWSURFACE);
     if (window_screen == NULL)
-      printf("window_screen = NULL 3\n");
+      printf("Warning: Could not create a window with a hardware surface\n");
 #else
     window_screen = SDL_CreateWindow("Tux Paint", win_x, win_y, WINDOW_WIDTH, WINDOW_HEIGHT, 0 /* no flags */ );
     if (window_screen == NULL)
-      printf("window_screen = NULL 4\n");
+      printf("Warning: Could not create a window with a software surface\n");
 #endif
 
+    /* FIXME: Check window_screen for being NULL, and abort?! (Also see above) -bjk 2024.12.20 */
 
     /* Note: Seems that this depends on the compliance by the window manager.
        Currently this doesn't work under Fvwm */
@@ -30427,6 +30608,7 @@ static void setup(void)
     img_oskenter = loadimagerb(DATA_PREFIX "images/ui/osk_enter.png");
     img_oskcapslock = loadimagerb(DATA_PREFIX "images/ui/osk_capslock.png");
     img_oskshift = loadimagerb(DATA_PREFIX "images/ui/osk_shift.png");
+    img_oskpaste = loadimagerb(DATA_PREFIX "images/ui/osk_shift.png");  // FIXME
 
     if (onscreen_keyboard_layout)
     {
@@ -30439,7 +30621,7 @@ static void setup(void)
                      img_btn_up, img_btn_down, img_btn_off,
                      img_btn_nav, img_btn_hold,
                      img_oskdel, img_osktab, img_oskenter,
-                     img_oskcapslock, img_oskshift, onscreen_keyboard_disable_change);
+                     img_oskcapslock, img_oskshift, img_oskpaste, onscreen_keyboard_disable_change);
     }
     else
     {
@@ -30448,7 +30630,7 @@ static void setup(void)
                    img_btn_up, img_btn_down, img_btn_off,
                    img_btn_nav, img_btn_hold,
                    img_oskdel, img_osktab, img_oskenter,
-                   img_oskcapslock, img_oskshift, onscreen_keyboard_disable_change);
+                   img_oskcapslock, img_oskshift, img_oskpaste, onscreen_keyboard_disable_change);
     }
   }
 
@@ -30680,11 +30862,9 @@ static void setup(void)
                                                                           SDL_MapRGB(img_color_btns
                                                                                      [i + NUM_COLORS]->format,
                                                                                      linear_to_sRGB(rh * aa +
-                                                                                                    rd * (1.0 -
-                                                                                                          aa)),
+                                                                                                    rd * (1.0 - aa)),
                                                                                      linear_to_sRGB(gh * aa +
-                                                                                                    gd * (1.0 -
-                                                                                                          aa)),
+                                                                                                    gd * (1.0 - aa)),
                                                                                      linear_to_sRGB(bh * aa +
                                                                                                     bd * (1.0 - aa))));
       }
@@ -30967,11 +31147,17 @@ int main(int argc, char *argv[])
 #endif
 
 #if defined(__MACOS__)
-  /* Pango uses Fontconfig which requires /opt/local/etc/fonts/fonts.conf. This
-   * file may not exist on the runtime system, however, so we copy the file
-   * into our app bundle at compile time, and tell Fontconfig here to look for
-   * the file within the app bundle. */
+  /* Pango uses Fontconfig which requires fonts.conf.  By default, Fontconfig
+   * searches for this file in a global path (e.g., /opt/local/etc/fonts if
+   * using the MacPorts port of Fontconfig) which does not exist on a vanilla
+   * macOS install.  As a workaround, the macOS port of Tux Paint provides its
+   * own copy, and tells Fontconfig to look inside the Tux Paint app bundle for
+   * this file by setting the FONTCONFIG_PATH environment variable here.
+   */
   putenv((char *)"FONTCONFIG_PATH=Resources/etc");
+#elif defined(__IOS__)
+  /* Same with iOS */
+  putenv((char *)"FONTCONFIG_PATH=etc");
 #endif
 
   chdir_to_binary(argv[0]);
@@ -31824,8 +32010,8 @@ char *get_xdg_user_dir(const char *dir_type, const char *fallback)
  * @param int speed -- how fast to play the slideshow (0 and 1 both = slowest, 10 = fasted)
  * @return int -- 0 if export failed or was aborted, 1 if successful
  */
-static int export_gif(int *selected, int num_selected, char *dirname, char **d_names, char **d_exts, int speed,
-                      char **dest_fname)
+static int export_gif(int *selected, int num_selected, char *dirname,
+                      char **d_names, char **d_exts, int speed, char **dest_fname)
 {
   char *tmp_starter_id, *tmp_template_id, *tmp_file_id;
   int tmp_starter_mirrored, tmp_starter_flipped, tmp_starter_personal;
@@ -32246,14 +32432,16 @@ static int export_pict(char *fname, int where, char *orig_fname, char **dest_fna
                   }
                   else
                   {
-                    DEBUG_PRINTF("  ...but dimensions differ (template = %d x %d, saved file is now %d x %d)\n",
-                                 templ_w, templ_h, orig_w, orig_h);
+                    DEBUG_PRINTF
+                      ("  ...but dimensions differ (template = %d x %d, saved file is now %d x %d)\n",
+                       templ_w, templ_h, orig_w, orig_h);
                   }
                 }
                 else
                 {
-                  DEBUG_PRINTF("  ...but file sizes differ (template = %ld bytes, saved file is now %ld bytes\n",
-                               sbuf_test.st_size, sbuf_orig.st_size);
+                  DEBUG_PRINTF
+                    ("  ...but file sizes differ (template = %ld bytes, saved file is now %ld bytes\n",
+                     sbuf_test.st_size, sbuf_orig.st_size);
                 }
               }
               else
@@ -32805,4 +32993,68 @@ void maybe_redraw_eraser_xor(void)
                     mx + sz / 2 + r_canvas.x, my + sz / 2 + r_canvas.y);
     }
   }
+}
+
+/**
+ * Record an undo buffer snapshot, blit the current line of Text or Label
+ * tool text onto the canvas, play the "carriage return" sound effect,
+ * position the cursor down a line (or to the very bottom of the canvas),
+ * and mark the current drawing as "unsaved".
+ *
+ * This happens when the user presses the [Enter]/[Return] key on
+ * a physical keyboard, clicks it in the on-screen keyboard, or
+ * a carriage return is part of some pasted clipboard text.
+ *
+ * If the cursor would surpass the bottom of the screen
+ * (based on `font_height`), then this function returns true/1,
+ * indicating the situation; this is used when the carriage return
+ * occurs due to clipboard text being pasted, so that process can
+ * be aborted.
+ *
+ * @param int font_height -- [line] height of the current font
+ * @return int -- whether or not the cursor would be too far
+ *   down the canvas' height
+ */
+static int text_label_tool_enter(int font_height)
+{
+  int exceeded;
+
+  rec_undo_buffer();
+  do_render_cur_text(1);
+  label_node_to_edit = NULL;
+  texttool_len = 0;
+  cursor_textwidth = 0;
+  if (cur_tool == TOOL_LABEL)
+  {
+    draw_fonts();
+    update_screen_rect(&r_toolopt);
+  }
+
+  if (been_saved)
+  {
+    been_saved = 0;
+
+    if (!disable_save)
+      tool_avail[TOOL_SAVE] = 1;
+
+    draw_toolbar();
+    update_screen_rect(&r_tools);
+  }
+
+
+  cursor_x = cursor_left;
+
+  exceeded = 0;
+  if (cursor_y + font_height >= canvas->h)
+    exceeded = 1;
+  cursor_y = min(cursor_y + font_height, canvas->h - font_height);
+
+  /* Reposition the on-screen keyboard if we begin typing over it */
+  update_canvas_ex(kbd_rect.x, kbd_rect.y, kbd_rect.x + kbd_rect.w, kbd_rect.y + kbd_rect.h, 0);
+  update_screen_rect(&kbd_rect);
+  reposition_onscreen_keyboard(cursor_y);
+
+  playsound(screen, 0, SND_RETURN, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
+
+  return exceeded;
 }

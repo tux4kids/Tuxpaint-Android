@@ -63,8 +63,8 @@ void spraypaint_switchout(magic_api * api, int which, int mode, SDL_Surface * ca
 int spraypaint_modes(magic_api * api, int which);
 Uint8 spraypaint_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 spraypaint_default_size(magic_api * api, int which, int mode);
-void spraypaint_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                         SDL_Rect * update_rect);
+void spraypaint_set_size(magic_api * api, int which, int mode,
+                         SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 spraypaint_api_version(void)
@@ -194,10 +194,11 @@ void spraypaint_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
   spraypaint_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void spraypaint_release(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+void spraypaint_release(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED,
                         SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                        SDL_Surface *last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
-                        int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+                        SDL_Surface *last ATTRIBUTE_UNUSED,
+                        int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   api->stopsound();
   if (spraypaint_cnt >= 1000)
@@ -215,9 +216,11 @@ void spraypaint_shutdown(magic_api *api ATTRIBUTE_UNUSED)
     Mix_FreeChunk(spraypaint_snd_shake);
 }
 
-void spraypaint_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                          SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
-                          Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void spraypaint_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                          SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r,
+                          Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   spraypaint_r = r;
   spraypaint_g = g;
@@ -256,8 +259,11 @@ Uint8 spraypaint_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBU
   return 4;
 }
 
-void spraypaint_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void spraypaint_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED,
+                         int mode ATTRIBUTE_UNUSED,
+                         SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                         SDL_Surface *last ATTRIBUTE_UNUSED,
                          Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   spraypaint_radius = size * 8;

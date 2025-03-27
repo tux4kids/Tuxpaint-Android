@@ -320,19 +320,18 @@ void n_pt_persp_shutdown(magic_api * api);
 void n_pt_persp_click(magic_api * api, int which, int mode,
                       SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
 void n_pt_persp_vanish_pt_moved(magic_api * api, int which, SDL_Surface * canvas, SDL_Rect * update_rect);
-void n_pt_persp_drag(magic_api * api, int which,
-                     SDL_Surface * canvas, SDL_Surface * snapshot,
-                     int old_x, int old_y, int x, int y, SDL_Rect * update_rect);
+void n_pt_persp_drag(magic_api * api, int which, SDL_Surface * canvas,
+                     SDL_Surface * snapshot, int old_x, int old_y, int x, int y, SDL_Rect * update_rect);
 void n_pt_persp_work(magic_api * api, int tool, SDL_Surface * canvas, int x, int y, SDL_Rect * update_rect, int xor);
-void n_pt_persp_release(magic_api * api, int which,
-                        SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
+void n_pt_persp_release(magic_api * api, int which, SDL_Surface * canvas,
+                        SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
 void n_pt_persp_set_color(magic_api * api, int which, SDL_Surface * canvas,
                           SDL_Surface * snapshot, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
 void n_pt_persp_set_size(magic_api * api, int which, int mode,
                          SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 void n_pt_persp_line_xor_callback(void *pointer, int tool, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
-void n_pt_persp_line_xor_thick_callback(void *pointer, int tool, SDL_Surface * canvas,
-                                        SDL_Surface * snapshot, int x, int y);
+void n_pt_persp_line_xor_thick_callback(void *pointer, int tool,
+                                        SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
 void n_pt_persp_line_callback(void *pointer, int tool, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
 void n_pt_persp_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void n_pt_persp_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
@@ -525,9 +524,10 @@ int n_pt_persp_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which)
 
   which = which_to_tool[which];
 
-  if (which == TOOL_1PT_DRAW || which == TOOL_2PT_DRAW || which == TOOL_3PT_DRAW || which == TOOL_3PT_DRAW_ALT ||
-      which == TOOL_ISO_DRAW || which == TOOL_DIM_DRAW || which == TOOL_TRI_DRAW ||
-      which == TOOL_OBLQ_DRAW || which == TOOL_OBLQ_DRAW_ALT)
+  if (which == TOOL_1PT_DRAW || which == TOOL_2PT_DRAW
+      || which == TOOL_3PT_DRAW || which == TOOL_3PT_DRAW_ALT
+      || which == TOOL_ISO_DRAW || which == TOOL_DIM_DRAW
+      || which == TOOL_TRI_DRAW || which == TOOL_OBLQ_DRAW || which == TOOL_OBLQ_DRAW_ALT)
     return 1;
   else
     return 0;
@@ -549,9 +549,10 @@ Uint8 n_pt_persp_accepted_sizes(magic_api *api ATTRIBUTE_UNUSED, int which, int 
 
   which = which_to_tool[which];
 
-  if (which == TOOL_1PT_DRAW || which == TOOL_2PT_DRAW || which == TOOL_3PT_DRAW || which == TOOL_3PT_DRAW_ALT ||
-      which == TOOL_ISO_DRAW || which == TOOL_DIM_DRAW || which == TOOL_TRI_DRAW ||
-      which == TOOL_OBLQ_DRAW || which == TOOL_OBLQ_DRAW_ALT)
+  if (which == TOOL_1PT_DRAW || which == TOOL_2PT_DRAW
+      || which == TOOL_3PT_DRAW || which == TOOL_3PT_DRAW_ALT
+      || which == TOOL_ISO_DRAW || which == TOOL_DIM_DRAW
+      || which == TOOL_TRI_DRAW || which == TOOL_OBLQ_DRAW || which == TOOL_OBLQ_DRAW_ALT)
   {
     return 4;
   }
@@ -804,7 +805,8 @@ void n_pt_persp_vanish_pt_moved(magic_api *api, int which, SDL_Surface *canvas, 
 
 /* Affect the canvas on drag: */
 void n_pt_persp_drag(magic_api *api, int which,
-                     SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas,
+                     SDL_Surface *snapshot ATTRIBUTE_UNUSED,
                      int old_x ATTRIBUTE_UNUSED, int old_y ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   int i, x1, y1, x2, y2;
@@ -955,8 +957,8 @@ void n_pt_persp_drag(magic_api *api, int which,
       }
     }
   }
-  else if (which == TOOL_ISO_DRAW || which == TOOL_DIM_DRAW || which == TOOL_TRI_DRAW ||
-           which == TOOL_OBLQ_DRAW || which == TOOL_OBLQ_DRAW_ALT)
+  else if (which == TOOL_ISO_DRAW || which == TOOL_DIM_DRAW
+           || which == TOOL_TRI_DRAW || which == TOOL_OBLQ_DRAW || which == TOOL_OBLQ_DRAW_ALT)
   {
     int guide_len;
 
@@ -987,18 +989,21 @@ void n_pt_persp_drag(magic_api *api, int which,
                 x - cosf(dim_ang) * guide_len, y + sinf(dim_ang) * guide_len,
                 x + cosf(dim_ang) * guide_len, y - sinf(dim_ang) * guide_len, 6, n_pt_persp_line_xor_callback);
       api->line((void *)api, which, canvas, NULL,
-                x - cosf(M_PI - dim_ang) * guide_len, y + sinf(M_PI - dim_ang) * guide_len,
-                x + cosf(M_PI - dim_ang) * guide_len, y - sinf(M_PI - dim_ang) * guide_len,
-                6, n_pt_persp_line_xor_callback);
+                x - cosf(M_PI - dim_ang) * guide_len,
+                y + sinf(M_PI - dim_ang) * guide_len,
+                x + cosf(M_PI - dim_ang) * guide_len,
+                y - sinf(M_PI - dim_ang) * guide_len, 6, n_pt_persp_line_xor_callback);
     }
     else if (which == TOOL_TRI_DRAW)
     {
       /* Trimetric */
       api->line((void *)api, which, canvas, NULL,
-                x - cosf(tri_ang[0]) * guide_len, y + sinf(tri_ang[0]) * guide_len,
+                x - cosf(tri_ang[0]) * guide_len,
+                y + sinf(tri_ang[0]) * guide_len,
                 x + cosf(tri_ang[0]) * guide_len, y - sinf(tri_ang[0]) * guide_len, 6, n_pt_persp_line_xor_callback);
       api->line((void *)api, which, canvas, NULL,
-                x - cosf(tri_ang[1]) * guide_len, y + sinf(tri_ang[1]) * guide_len,
+                x - cosf(tri_ang[1]) * guide_len,
+                y + sinf(tri_ang[1]) * guide_len,
                 x + cosf(tri_ang[1]) * guide_len, y - sinf(tri_ang[1]) * guide_len, 6, n_pt_persp_line_xor_callback);
     }
     else if (which == TOOL_OBLQ_DRAW || which == TOOL_OBLQ_DRAW_ALT)
@@ -1287,8 +1292,8 @@ void n_pt_persp_work(magic_api *api, int tool, SDL_Surface *canvas, int x, int y
       y2 = y;
     }
   }
-  else if (tool == TOOL_ISO_DRAW || tool == TOOL_DIM_DRAW || tool == TOOL_TRI_DRAW ||
-           tool == TOOL_OBLQ_DRAW || tool == TOOL_OBLQ_DRAW_ALT)
+  else if (tool == TOOL_ISO_DRAW || tool == TOOL_DIM_DRAW
+           || tool == TOOL_TRI_DRAW || tool == TOOL_OBLQ_DRAW || tool == TOOL_OBLQ_DRAW_ALT)
   {
     float valid_angles[6];
     float ang;
@@ -1456,8 +1461,8 @@ void n_pt_persp_work(magic_api *api, int tool, SDL_Surface *canvas, int x, int y
 
 
 void n_pt_persp_release(magic_api *api, int which,
-                        SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED,
-                        int x, int y, SDL_Rect *update_rect)
+                        SDL_Surface *canvas,
+                        SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
 #ifdef DEBUG
   printf("\nn_pt_persp_release\n");
@@ -1514,10 +1519,11 @@ void n_pt_persp_release(magic_api *api, int which,
 }
 
 
-void n_pt_persp_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+void n_pt_persp_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED,
                           SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                          SDL_Surface *snapshot ATTRIBUTE_UNUSED,
-                          Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+                          SDL_Surface *snapshot ATTRIBUTE_UNUSED, Uint8 r,
+                          Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   n_pt_persp_r = r;
   n_pt_persp_g = g;
@@ -1525,16 +1531,18 @@ void n_pt_persp_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
 }
 
 
-void n_pt_persp_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                         Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void n_pt_persp_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED,
+                         int mode ATTRIBUTE_UNUSED,
+                         SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                         SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   n_pt_persp_size = ((size - 1) * 2) + 1;
 }
 
 
-void n_pt_persp_line_xor_callback(void *pointer, int tool ATTRIBUTE_UNUSED, SDL_Surface *canvas,
-                                  SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
+void n_pt_persp_line_xor_callback(void *pointer, int tool ATTRIBUTE_UNUSED,
+                                  SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) pointer;
 
@@ -1542,8 +1550,9 @@ void n_pt_persp_line_xor_callback(void *pointer, int tool ATTRIBUTE_UNUSED, SDL_
   api->xorpixel(canvas, x + 1, y + 1);
 }
 
-void n_pt_persp_line_xor_thick_callback(void *pointer, int tool ATTRIBUTE_UNUSED, SDL_Surface *canvas,
-                                        SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
+void n_pt_persp_line_xor_thick_callback(void *pointer,
+                                        int tool ATTRIBUTE_UNUSED,
+                                        SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   int i, j;
 
@@ -1561,8 +1570,9 @@ void n_pt_persp_line_xor_thick_callback(void *pointer, int tool ATTRIBUTE_UNUSED
   }
 }
 
-void n_pt_persp_line_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBUTE_UNUSED,
-                              SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
+void n_pt_persp_line_callback(void *pointer ATTRIBUTE_UNUSED,
+                              int tool ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                              SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   SDL_Rect r;
 
@@ -1584,8 +1594,8 @@ void n_pt_persp_switchin(magic_api *api, int which, int mode ATTRIBUTE_UNUSED, S
 
   which = which_to_tool[which];
 
-  if (which == TOOL_1PT_SELECT || which == TOOL_2PT_SELECT || which == TOOL_3PT_SELECT ||
-      which == TOOL_DIM_SELECT || which == TOOL_TRI_SELECT || which == TOOL_OBLQ_SELECT)
+  if (which == TOOL_1PT_SELECT || which == TOOL_2PT_SELECT
+      || which == TOOL_3PT_SELECT || which == TOOL_DIM_SELECT || which == TOOL_TRI_SELECT || which == TOOL_OBLQ_SELECT)
   {
     SDL_BlitSurface(canvas, NULL, n_pt_persp_snapshot, NULL);
 
@@ -1603,8 +1613,8 @@ void n_pt_persp_switchout(magic_api *api ATTRIBUTE_UNUSED, int which, int mode A
 
   which = which_to_tool[which];
 
-  if (which == TOOL_1PT_SELECT || which == TOOL_2PT_SELECT || which == TOOL_3PT_SELECT ||
-      which == TOOL_DIM_SELECT || which == TOOL_TRI_SELECT || which == TOOL_OBLQ_SELECT)
+  if (which == TOOL_1PT_SELECT || which == TOOL_2PT_SELECT
+      || which == TOOL_3PT_SELECT || which == TOOL_DIM_SELECT || which == TOOL_TRI_SELECT || which == TOOL_OBLQ_SELECT)
   {
     SDL_BlitSurface(n_pt_persp_snapshot, NULL, canvas, NULL);
   }
@@ -1788,9 +1798,8 @@ void n_pt_persp_draw_points(magic_api *api, int tool, SDL_Surface *canvas)
     api->line((void *)api, tool, canvas, NULL,
               canvas->w / 2 - x1, canvas->h / 2 - y1,
               canvas->w / 2 + x1, canvas->h / 2 + y1, 12, n_pt_persp_line_xor_callback);
-    api->line((void *)api, tool, canvas, NULL,
-              canvas->w / 2 - x1, canvas->h / 2 + y1,
-              canvas->w / 2 + x1, canvas->h / 2 - y1, 12, n_pt_persp_line_xor_callback);
+    api->line((void *)api, tool, canvas, NULL, canvas->w / 2 - x1,
+              canvas->h / 2 + y1, canvas->w / 2 + x1, canvas->h / 2 - y1, 12, n_pt_persp_line_xor_callback);
   }
   else if (tool == TOOL_DIM_SELECT)
   {
@@ -1806,9 +1815,8 @@ void n_pt_persp_draw_points(magic_api *api, int tool, SDL_Surface *canvas)
     api->line((void *)api, tool, canvas, NULL,
               canvas->w / 2 - x1, canvas->h / 2 - y1,
               canvas->w / 2 + x1, canvas->h / 2 + y1, 12, n_pt_persp_line_xor_thick_callback);
-    api->line((void *)api, tool, canvas, NULL,
-              canvas->w / 2 - x1, canvas->h / 2 + y1,
-              canvas->w / 2 + x1, canvas->h / 2 - y1, 12, n_pt_persp_line_xor_thick_callback);
+    api->line((void *)api, tool, canvas, NULL, canvas->w / 2 - x1,
+              canvas->h / 2 + y1, canvas->w / 2 + x1, canvas->h / 2 - y1, 12, n_pt_persp_line_xor_thick_callback);
   }
   else if (tool == TOOL_TRI_SELECT)
   {

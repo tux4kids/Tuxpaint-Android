@@ -63,8 +63,8 @@ void waves_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas)
 int waves_modes(magic_api * api, int which);
 Uint8 waves_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 waves_default_size(magic_api * api, int which, int mode);
-void waves_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                    SDL_Rect * update_rect);
+void waves_set_size(magic_api * api, int which, int mode,
+                    SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 Uint32 waves_api_version(void)
 {
@@ -225,10 +225,12 @@ void waves_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void waves_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                     Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void waves_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED,
+                     Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                     Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -264,8 +266,10 @@ Uint8 waves_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
   return 0;
 }
 
-void waves_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void waves_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED,
                     Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

@@ -1,11 +1,11 @@
                                     Thellim
                                    Tux Paint
-                                version 0.9.34
+                                version 0.9.35
 
- Të drejta kopjimi © 2002-2024 nga kontribues të ndryshëm; shihni AUTHORS.txt.
+ Të drejta kopjimi © 2002-2025 nga kontribues të ndryshëm; shihni AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                 10 tetor 2024
+                                 12 janar 2025
 
 +------------------------------------------------------------------------+
 |                            Pasqyrë e Lëndës                            |
@@ -217,9 +217,9 @@ gjendet në të njëjtën drejtori.)
 
 → Distancë Peneli ←
 
-    Që me Tux Paint version 0.9.16 tanimë mundeni të përcaktoni distancën për
-    penelat (domethënë, sa shpesh vizatohet me ta). Si parazgjedhje, distanca
-    do të jetë lartësia e penelit, pjesëtuar me 4.
+    You may specify the spacing for brushes — that is, how frequently they are
+    drawn across the length of a line or stroke. By default, the spacing will
+    be the brush's height, divided by 4.
 
     Shtoni një rresht që përmban rreshtin “spacing=N” te kartela e të dhënave
     të penelit, ku “N” është distanca që doni për penelin. (Sa më i vogël
@@ -229,11 +229,11 @@ gjendet në të njëjtën drejtori.)
      
 → Penela Me Animacion ←
 
-    Që me Tux Paint version 0.9.16 tanimë mundeni të krijoni penela të animuar.
-    Teksa përdoret peneli, vizatohet çdo kuadër i animacionit.
+    Brushes may be animated. As the brush is used, each frame of the animation
+    is drawn in sequence.
 
-    Vendosni çdo kuadër në një figurë të madhe PNG. Për shembull, nëse peneli
-    juaj është 30x30 dhe keni 5 kuadro, figura duhet të jetë 150x30.
+    Lay each frame out across a wide PNG image. For example, if the brush is
+    30x30 and there are 5 frames, the image should be 150x30.
 
     Shtoni një rresht që përmban rreshtin “frames=N” te kartela e të dhënave të
     penelit, ku “N” është numri i kuadrove te peneli.
@@ -246,15 +246,16 @@ gjendet në të njëjtën drejtori.)
      
 → Penela Me Drejtim ←
 
-    Që me Tux Paint version 0.9.16 tanimë mundeni të krijoni penela me drejtim.
-    Teksa përdoret peneli, vizatohen forma të ndryshme, varet nga drejtimi kah
-    shkon peneli.
+    Brushes may be configured to draw a different shape based on the direction
+    of the line or brush stroke. Different shapes will be drawn depending on
+    which of the eight compass directions the brush is moving — up (aka North),
+    up/right (aka Northeast), right (aka East), down/right (aka Southeast),
+    etc.). A ninth "center" shape is used when there's no motion (e.g., simply
+    clicking/tapping and releasing the "Paint" tool, without dragging).
 
-    Format për penelin me drejtim ndahen në një katror 3x3 te një figurë PNG.
-    Për shembull, nëse peneli juaj është 30x30, figura duhet të jetë 90x90 dhe
-    format e çdo drejtimi të vendosura në një rrjetë 3x3. Rajoni në qendër
-    përdoret për mungesë lëvizjeje. Pjesa e sipërme djathtas përdoret për
-    lëvizje që është për sipër dhe për djathtas, e me radhë.
+    The directional shapes are divided into a 3x3 square in a PNG image. For
+    example, if your brush is 30x30, the image should be 90x90, and each of the
+    direction's shapes placed in a 3x3 grid.
 
     Shtoni te kartela e të dhënave të penelit një rresht që përmban fjalën “
     directional”.
@@ -263,9 +264,9 @@ gjendet në të njëjtën drejtori.)
      
 → Penela Me Rrotullim ←
 
-    Që me Tux Paint version 0.9.27 tanimë mundeni të krijoni penela që
-    rrotullohen. Teksa përdoret peneli, ai rrotullohet 360 gradë, varet nga
-    drejtimi kah po shkon peneli.
+    Brushes may be configured to rotate based on the angle of the line or brush
+    stroke. (Unlike Directional Brushes, described above, only a single brush
+    shape may be provided.
 
     Shtoni te kartela e të dhënave të penelit një rresht që përmban fjalën “
     rotate”.
@@ -274,8 +275,8 @@ gjendet në të njëjtën drejtori.)
      
 → Chaotic Brushes ←
 
-    As of Tux Paint version 0.9.34, brushes can be configured to continuously
-    pick random directions as you draw with them.
+    Brushes may be configured to continuously choose a random direction as you
+    draw with them.
 
     Shtoni te kartela e të dhënave të penelit një rresht që përmban fjalën “
     chaotic”.
@@ -317,11 +318,10 @@ dhe “kërshëndella”.)
 Vulat e Gomës në Tux Paint mund të krijohen nga një numër kartelash të ndara
 njëra nga tjetra. Kartela që është e domosdoshme është, sigurisht, vetë figura.
 
-Që me Tux Paint version 0.9.17, Stampat mund të jenë ose figura PNG bitmap, ose
-figura vektoriale SVG. Mund të jenë plotësisht me ngjyra, ose shkallë të grisë.
-Kanali alfa (tejdukshmëria) e PNG-ve përdoret për të përcaktuar formën faktike
-të figurës (përndryshe, në vizatimet tuaja do të stampohej një drejtkëndësh i
-madh).
+Stamps may be either PNG bitmap images or SVG vector images. They can be
+full-color or greyscale. The alpha (transparency) channel of PNGs is used to
+determine the actual shape of the picture (otherwise you'll stamp a large
+rectangle on your drawings).
 
 PNG-të mund të jenë të çfarëdo madhësie dhe Tux Paint (si parazgjedhje) jep një
 grup butonash përmasimi për ta lënë përdoruesin të zmadhojë ose zvogëlojë
@@ -587,9 +587,8 @@ Për shembull, për stampën “stamp.png” do të krijonit një kartelë tjet�
 quajtur “stamp_mirror.png”, e cila do të përdoret kur stampa pasqyrohet (në
 vend se të përdoret një version i dikurshëm i “stamp.png”).
 
-As of Tux Paint 0.9.18, you may similarly provide a pre-flipped image with "
-_flip" in the name, and/or an image that is both mirrored and flipped, by
-naming it "_mirror_flip".
+You may also provide a pre-flipped image with "_flip" in the name, and/or an
+image that is both mirrored and flipped, by naming it "_mirror_flip".
 
 💡 Note: If the user flips and mirrors an image, and a pre-drawn "_mirror_flip"
 doesn't exist, but either "_flip" or "_mirror" does, it will be used, and
@@ -620,11 +619,11 @@ të shtoni në të hollësi. Në Tux Paint, teksa vizatoni, shtypni tekst, ose
 stamponi stampa, përvijimi mbetet “sipër” asaj që vizatoni. Mundeni të fshini
 pjesë të vizatimit që bëtë, por s’mundeni të fshini përvijimin.
 
-Që të krijoni këtë lloj figure “fillesë”, thjesht krijoni me një program
-vizatimi një figurë përvijim bardhezi dhe ruajeni si një kartelë raster PNG,
-ose vektor SVG. Nëse e ruani si një PNG, mundeni, nëse doni, ta vizatoni si
-e-zezë-dhe-e-tejdukshme, në vend se e-zezë-dhe-e-bardhë, por kjo s’është e
-domosdoshme (që me Tux Paint 0.9.21).
+To create this kind of 'starter' image, simply create an outlined black and
+white picture in a paint program, and save it as a raster PNG file, or vector
+SVG. If saving as a PNG, you may optionally render the image as
+black-and-transparent, rather than black-and-white, although this is not
+required.
 
                         ### Fillesa Në Stil Skenash ###
 
@@ -813,9 +812,8 @@ mundësish dhe aktualisht mbulojnë krejt po ato mundësi si fillesat.
 
 'Gjedhe'
 
-Figurat “Gjedhe” shfaqen edhe te dialogu “E re”, tok me zgjedhje për sfond në
-ngjyrë të plotë dhe “Fillesa”. (Shënim: Tux Paint-i para versionit 0.9.22, s’e
-përmbante veçorinë “Gjedhe”.)
+'Template' images also appear in the 'New' dialog, along with solid color
+background choices and 'Starters'.
 
 Ndryshe nga figura të vizatuara nga përdorues në Tux Paint dhe të hapura më
 vonë, hapja e një “gjedheje” krijon një figurë të re. Kur e ruani, figura
@@ -985,12 +983,11 @@ kartelat “.im” janë të gatshme për përdorim gjatë xhirimit.
 
 Tastierë Në Ekran
 
-Që me versionin 0.9.22, mjetet “Tekst” dhe “Etiketë” të Tux Paint-tit mund të
-paraqesin një tastierë në ekran që lejon treguesin e kursorit (përmes një miu,
-sistemesh ndjekjeje vështrimi, etj.) të përdoret për të futur shenja. Kartelat
-që përshkruajnë skemën dhe tastet e gatshme depozitohen te drejtoria “osk” e
-Tux Paint-it. Çdo skemë tastiere përcaktohet nga një numër kartelash (disa prej
-të cilave mund të jenë të përbashkëta për skema të ndryshme).
+Tux Paint's 'Text' and 'Label' tools can present an on-screen keyboard that
+allows the pointer (via a mouse, touch screen, eye-tracking systems, etc.) to
+be used to input characters. Files that describe the layout and available keys
+are stored in Tux Paint "osk" directory. Each keyboard layout is defined by a
+number of files (some of which may be shared by different layouts).
 
 Si shembull, do të përdorim një tastierë QWERTY:
 
@@ -1005,9 +1002,9 @@ përshkruar skemën dhe përshoqërimet e tasteve.
     keysymdefs keysymdef.h
     keyboardlist qwerty.layout default.layout
 
-⚙ Shënim: Rreshta të zbrazët brenda kartelës “.layout” do të shpërfillen, siç
-do të ndodhë edhe me çfarëdo teksti në vijim të një shenje “#” (sterlinë/hash)
-— mund të përdoret për të terguar komente, siç shihet në shembullin më sipër.
+⚙ Note: Blank lines within the ".layout" file will be ignored, as will any text
+following a "#" (pound/hash) character — it can be used to denote comments, as
+seen in the example below.
 
 Rreshti “keyboardlist” përshkruan te cila skema të kalohet, kur përdoruesi
 klikon butonat majtas dhe djathtas te tastiera. (Shihni më poshtë.)
@@ -1023,6 +1020,9 @@ cilët taste ndryshues janë shtypur (një nga : pa ndryshues, [Tasti Shift],
 [Tasti AltGr] dhe [Tasti Shift] + [Tasti AltGr]) dhe, së fundi, nëse preken apo
 jo tastet nga tasti [Tasti Capslock] (përdorni “1”) ose tasti [Tasti AltGr]
 (grafika alternative) (përdorni “2”), ose fare (përdorni “0”).
+
+The "NEWLINE" keyword is used to indicate the end of one row of the keyboard,
+and thus subsequent key layout descriptions will be beginning on a new row.
 
     WIDTH 15
     HEIGHT 5
@@ -1059,9 +1059,13 @@ jo tastet nga tasti [Tasti Capslock] (përdorni “1”) ose tasti [Tasti AltGr]
     KEY 64 2.0 Alt Alt Alt Alt 0
 
     # Tasti Hapësirë
-    KEY 65 7.0 SPACE SPACE SPACE SPACE 0
+    KEY 65 5.0 SPACE SPACE SPACE SPACE 0
 
+    # AltGr
     KEY 108 2.0 AltGr AltGr AltGr AltGr 0
+
+    # Paste
+    KEY 143 2.0 Paste Paste Paste Paste 0
 
     # Shigjeta për majtas do ta kthejë te tastiera pasuese
     KEY 1 1.0 -> -> -> -> 0
@@ -1076,6 +1080,11 @@ aktualisht përshkruhen më poshtë.
   * 0 — buton i zbrazët
   * 1 — skema pasuese (per the layout file's "keyboardlist" setting)
   * 2 — skema e mëparshme (per the layout file's "keyboardlist" setting)
+
+📜 Starting with Tux Paint 0.9.35, the XF86Paste keysym (value 143) can be used
+to initiate a copy/paste clipboard buffer "paste" event. See the "Paste" key in
+the keyboard layout files. (Pasting via a physical keyboard is initiated using
+the [Control] + [V] key combination.
 
        ### Kartelë skeme tastiere (“us-intl-altgr-dead-keys.keymap”) ###
 

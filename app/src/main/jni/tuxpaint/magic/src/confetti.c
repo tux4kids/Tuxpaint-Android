@@ -55,16 +55,18 @@ void confetti_drag(magic_api * api, int which, SDL_Surface * canvas,
                    SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 Uint8 confetti_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 confetti_default_size(magic_api * api, int which, int mode);
-void confetti_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                       SDL_Rect * update_rect);
+void confetti_set_size(magic_api * api, int which, int mode,
+                       SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 Uint32 confetti_api_version(void)
 {
   return (TP_MAGIC_API_VERSION);
 }
 
-void confetti_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                        SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+void confetti_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                        SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
                         Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   //get the colors from API and store it in structure
@@ -277,8 +279,10 @@ Uint8 confetti_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE
   return 2;
 }
 
-void confetti_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void confetti_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface *last ATTRIBUTE_UNUSED,
                        Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   CONFETTI_BRUSH_SIZE = size * 4;

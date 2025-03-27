@@ -126,8 +126,8 @@ void ascii_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas)
 int ascii_modes(magic_api * api, int which);
 Uint8 ascii_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 ascii_default_size(magic_api * api, int which, int mode);
-void ascii_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                    SDL_Rect * update_rect);
+void ascii_set_size(magic_api * api, int which, int mode,
+                    SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 void do_ascii_effect(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * last, int x, int y);
 int get_best_char(int which, int brightness);
 int get_bright(magic_api * api, int r, int g, int b);
@@ -252,8 +252,8 @@ int ascii_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 c
     /* Calculate the intensity of each character */
     area = ascii_char_maxwidth[i] * ascii_bitmap[i]->h;
 
-    DEBUG_PRINTF("%s max char width is %d -- * %d = area %d\n", fname, ascii_char_maxwidth[i], ascii_bitmap[i]->h,
-                 area);
+    DEBUG_PRINTF("%s max char width is %d -- * %d = area %d\n", fname,
+                 ascii_char_maxwidth[i], ascii_bitmap[i]->h, area);
 
     for (j = 0; j < num_chars; j++)
     {
@@ -341,11 +341,14 @@ char *ascii_get_description(magic_api *api ATTRIBUTE_UNUSED, int which, int mode
   char tmp[1024];
 
   if (mode == MODE_PAINT)
-    snprintf(tmp, sizeof(tmp), gettext("Click and drag to transform parts of your drawing to ASCII art (%s style)."),
+    snprintf(tmp, sizeof(tmp),
+             gettext
+             ("Click and drag to transform parts of your drawing to ASCII art (%s style)."),
              gettext(ascii_tool_names[which]));
   else
-    snprintf(tmp, sizeof(tmp), gettext("Click to transform your entire drawing to ASCII art (%s style)."),
-             gettext(ascii_tool_names[which]));
+    snprintf(tmp, sizeof(tmp),
+             gettext
+             ("Click to transform your entire drawing to ASCII art (%s style)."), gettext(ascii_tool_names[which]));
 
   return (strdup(tmp));
 }
@@ -398,7 +401,8 @@ void ascii_click(magic_api *api, int which, int mode,
   }
 }
 
-void ascii_release(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+void ascii_release(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED,
                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
                    SDL_Surface *last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
                    int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
@@ -425,9 +429,11 @@ void ascii_shutdown(magic_api *api ATTRIBUTE_UNUSED)
   }
 }
 
-void ascii_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                     SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void ascii_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                     Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   /* If the bitmap's "clear" color, choose the opposite! */
   if (abs(r - ascii_clear_r[which]) < 8 && abs(g - ascii_clear_g[which]) < 8 && abs(b - ascii_clear_b[which]) < 8)
@@ -455,7 +461,8 @@ void ascii_switchin(magic_api *api ATTRIBUTE_UNUSED,
 {
   if (ascii_snapshot == NULL)
     ascii_snapshot = SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
-                                          canvas->format->BitsPerPixel, canvas->format->Rmask,
+                                          canvas->format->BitsPerPixel,
+                                          canvas->format->Rmask,
                                           canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
   if (ascii_snapshot != NULL)
@@ -495,9 +502,10 @@ Uint8 ascii_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
     return 0;
 }
 
-void ascii_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                    Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void ascii_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   ascii_size = size;
 }

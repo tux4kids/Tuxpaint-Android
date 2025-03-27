@@ -105,8 +105,8 @@ void rain_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int rain_modes(magic_api * api, int which);
 Uint8 rain_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 rain_default_size(magic_api * api, int which, int mode);
-void rain_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                   SDL_Rect * update_rect);
+void rain_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
+                   SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 rain_api_version(void)
@@ -303,8 +303,11 @@ void rain_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void rain_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+void rain_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED,
+                    Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
                     Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
@@ -343,9 +346,10 @@ Uint8 rain_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
   return 2;
 }
 
-void rain_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                   SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void rain_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                   SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   rain_SIZE = size * 15;
   rain_AMOUNT = 400 / size;

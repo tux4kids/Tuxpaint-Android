@@ -1,11 +1,11 @@
                                    Extending
                                    Tux Paint
-                                version 0.9.34
+                                version 0.9.35
 
-        Copyright © 2002-2024 by various contributors; see AUTHORS.txt.
+        Copyright © 2002-2025 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               October 10, 2024
+                               January 12, 2025
 
 +-----------------------------------------+
 |            Table of Contents            |
@@ -214,9 +214,9 @@ directory.)
 
 → Brush Spacing ←
 
-    As of Tux Paint version 0.9.16, you can now specify the spacing for brushes
-    (that is, how often they are drawn). By default, the spacing will be the
-    brush's height, divided by 4.
+    You may specify the spacing for brushes — that is, how frequently they are
+    drawn across the length of a line or stroke. By default, the spacing will
+    be the brush's height, divided by 4.
 
     Add a line containing the line "spacing=N" to the brush's data file, where
     "N" is the spacing you want for the brush. (The lower the number, the more
@@ -226,11 +226,11 @@ directory.)
      
 → Animated Brushes ←
 
-    As of Tux Paint version 0.9.16, you may now create animated brushes. As the
-    brush is used, each frame of the animation is drawn.
+    Brushes may be animated. As the brush is used, each frame of the animation
+    is drawn in sequence.
 
-    Lay each frame out across a wide PNG image. For example, if your brush is
-    30x30 and you have 5 frames, the image should be 150x30.
+    Lay each frame out across a wide PNG image. For example, if the brush is
+    30x30 and there are 5 frames, the image should be 150x30.
 
     Add a line containing the line "frames=N" to the brush's data file, where "
     N" is the number of frames in the brush.
@@ -242,15 +242,16 @@ directory.)
      
 → Directional Brushes ←
 
-    As of Tux Paint version 0.9.16, you may now create directional brushes. As
-    the brush is used, different shapes are drawn, depending on the direction
-    the brush is going.
+    Brushes may be configured to draw a different shape based on the direction
+    of the line or brush stroke. Different shapes will be drawn depending on
+    which of the eight compass directions the brush is moving — up (aka North),
+    up/right (aka Northeast), right (aka East), down/right (aka Southeast),
+    etc.). A ninth "center" shape is used when there's no motion (e.g., simply
+    clicking/tapping and releasing the "Paint" tool, without dragging).
 
     The directional shapes are divided into a 3x3 square in a PNG image. For
     example, if your brush is 30x30, the image should be 90x90, and each of the
-    direction's shapes placed in a 3x3 grid. The center region is used for no
-    motion. The top right is used for motion that's both up, and to the right.
-    And so on.
+    direction's shapes placed in a 3x3 grid.
 
     Add a line containing the word "directional" to the brush's data file.
 
@@ -258,9 +259,9 @@ directory.)
      
 → Rotating Brushes ←
 
-    As of Tux Paint version 0.9.27, you may now create rotating brushes. As the
-    brush is used, it is rotated 360 degrees, depending on the direction the
-    brush is going.
+    Brushes may be configured to rotate based on the angle of the line or brush
+    stroke. (Unlike Directional Brushes, described above, only a single brush
+    shape may be provided.
 
     Add a line containing the word "rotate" to the brush's data file.
 
@@ -268,8 +269,8 @@ directory.)
      
 → Chaotic Brushes ←
 
-    As of Tux Paint version 0.9.34, brushes can be configured to continuously
-    pick random directions as you draw with them.
+    Brushes may be configured to continuously choose a random direction as you
+    draw with them.
 
     Add a line containing the word "chaotic" to the brush's data file.
 
@@ -310,10 +311,10 @@ sub-folders.)
 Rubber Stamps in Tux Paint can be made up of a number of separate files. The
 one file that is required is, of course, the picture itself.
 
-As of Tux Paint version 0.9.17, Stamps may be either PNG bitmap images or SVG
-vector images. They can be full-color or greyscale. The alpha (transparency)
-channel of PNGs is used to determine the actual shape of the picture (otherwise
-you'll stamp a large rectangle on your drawings).
+Stamps may be either PNG bitmap images or SVG vector images. They can be
+full-color or greyscale. The alpha (transparency) channel of PNGs is used to
+determine the actual shape of the picture (otherwise you'll stamp a large
+rectangle on your drawings).
 
 PNGs can be any size, and Tux Paint (by default) provides a set of sizing
 buttons to let the user scale the stamp up (larger) and down (smaller).
@@ -571,9 +572,8 @@ For example, for the stamp "stamp.png" you would create another file named
 "stamp_mirror.png", which will be used when the stamp is mirrored (rather than
 using a backwards version of "stamp.png").
 
-As of Tux Paint 0.9.18, you may similarly provide a pre-flipped image with "
-_flip" in the name, and/or an image that is both mirrored and flipped, by
-naming it "_mirror_flip".
+You may also provide a pre-flipped image with "_flip" in the name, and/or an
+image that is both mirrored and flipped, by naming it "_mirror_flip".
 
 💡 Note: If the user flips and mirrors an image, and a pre-drawn "_mirror_flip"
 doesn't exist, but either "_flip" or "_mirror" does, it will be used, and
@@ -607,8 +607,8 @@ erase the outline.
 To create this kind of 'starter' image, simply create an outlined black and
 white picture in a paint program, and save it as a raster PNG file, or vector
 SVG. If saving as a PNG, you may optionally render the image as
-black-and-transparent, rather than black-and-white, but (as of Tux Paint
-0.9.21) this is not required.
+black-and-transparent, rather than black-and-white, although this is not
+required.
 
                          ### Scene-Style Starters ###
 
@@ -792,8 +792,7 @@ support all of the same options as starters.
 'Templates'
 
 'Template' images also appear in the 'New' dialog, along with solid color
-background choices and 'Starters'. (Note: Tux Paint prior to version 0.9.22 did
-not have the 'Template' feature.)
+background choices and 'Starters'.
 
 Unlike pictures drawn in Tux Paint by users and then opened later, opening a
 'template' creates a new drawing. When you save, the 'template' image is not
@@ -957,12 +956,11 @@ source code ("/src/im.c"), and requires updates to the Makefile, to ensure the
 
 On-screen Keyboard
 
-As of version 0.9.22, Tux Paint's 'Text' and 'Label' tools can present an
-on-screen keyboard that allows the pointer (via a mouse, eye-tracking systems,
-etc.) to be used to input characters. Files that describe the layout and
-available keys are stored in Tux Paint "osk" directory. Each keyboard layout is
-defined by a number of files (some of which may be shared by different
-layouts).
+Tux Paint's 'Text' and 'Label' tools can present an on-screen keyboard that
+allows the pointer (via a mouse, touch screen, eye-tracking systems, etc.) to
+be used to input characters. Files that describe the layout and available keys
+are stored in Tux Paint "osk" directory. Each keyboard layout is defined by a
+number of files (some of which may be shared by different layouts).
 
 We'll use the QWERTY keyboard as an example:
 
@@ -979,7 +977,7 @@ and key mappings.
 
 ⚙ Note: Blank lines within the ".layout" file will be ignored, as will any text
 following a "#" (pound/hash) character — it can be used to denote comments, as
-seen in the example above.
+seen in the example below.
 
 The "keyboardlist" line describes which layouts to switch to, when the user
 clicks the left and right buttons on the keyboard. (See below.)
@@ -995,6 +993,9 @@ been pressed (one each for: no modifiers, [Shift], [AltGr], and [Shift] +
 [AltGr]), and finally whether or not the key is affected by the [CapsLock] key
 (use "1") or [AltGr] (alternate graphics) key (use "2"), or not at all (use
 "0").
+
+The "NEWLINE" keyword is used to indicate the end of one row of the keyboard,
+and thus subsequent key layout descriptions will be beginning on a new row.
 
     WIDTH 15
     HEIGHT 5
@@ -1031,9 +1032,13 @@ been pressed (one each for: no modifiers, [Shift], [AltGr], and [Shift] +
     KEY 64 2.0 Alt Alt Alt Alt 0
 
     # Space
-    KEY 65 7.0 SPACE SPACE SPACE SPACE 0
+    KEY 65 5.0 SPACE SPACE SPACE SPACE 0
 
+    # AltGr
     KEY 108 2.0 AltGr AltGr AltGr AltGr 0
+
+    # Paste
+    KEY 143 2.0 Paste Paste Paste Paste 0
 
     # Arrow to right will change to the next keyboard
     KEY 1 1.0 -> -> -> -> 0
@@ -1047,6 +1052,11 @@ described below.
   * 0 — empty button
   * 1 — next layout (per the layout file's "keyboardlist" setting)
   * 2 — previous layout (per the layout file's "keyboardlist" setting)
+
+📜 Starting with Tux Paint 0.9.35, the XF86Paste keysym (value 143) can be used
+to initiate a copy/paste clipboard buffer "paste" event. See the "Paste" key in
+the keyboard layout files. (Pasting via a physical keyboard is initiated using
+the [Control] + [V] key combination.
 
             ### Keymap file ("us-intl-altgr-dead-keys.keymap") ###
 

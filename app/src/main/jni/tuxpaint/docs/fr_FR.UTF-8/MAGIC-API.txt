@@ -1,12 +1,12 @@
                                    Tux Paint
-                                version 0.9.34
+                                version 0.9.35
 
                   ### Magic Tool Plugin API Documentation ###
 
-        Copyright © 2007-2024 by various contributors; see AUTHORS.txt.
+        Copyright © 2007-2025 by various contributors; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                              septembre 17, 2024
+                               janvier 12, 2025
 
 +--------------------------------------------------+
 |                Table of Contents                 |
@@ -43,9 +43,8 @@
 
 Overview
 
-Beginning with version 0.9.18, Tux Paint's 'Magic' tools were converted from
-routines that lived within the application itself, to a set of 'plugins' that
-are loaded when Tux Paint starts up.
+Tux Paint's 'Magic' tools come as a set of 'plugins' which are loaded when Tux
+Paint starts up.
 
 This division allows more rapid development of 'Magic' tools, and allows
 programmers to create and test new tools without needing to integrate them
@@ -612,7 +611,7 @@ Plugin Functions," above.)
 
     → char * tp_version ←
         A string containing the version of Tux Paint that's running (e.g.,
-        "0.9.34").
+        "0.9.35").
          
     → int canvas_w
     int canvas_h ←
@@ -832,7 +831,7 @@ Plugin Functions," above.)
         compatible.
 
         Note: This version number does not correspond to Tux Paint's own
-        release number (e.g., "0.9.34"). The API will not change every time a
+        release number (e.g., "0.9.35"). The API will not change every time a
         new version of Tux Paint is released, which means plugins compiled for
         earlier versions of Tux Paint will often run under newer versions.
 

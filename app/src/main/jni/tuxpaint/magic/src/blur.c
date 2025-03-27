@@ -306,16 +306,20 @@ void blur_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void blur_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+void blur_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED,
+                    Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
                     Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 // Record the size from Tux Paint:
-void blur_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                   Uint8 sz, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void blur_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                   SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 sz, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   blur_RADIUS = sz * 4;
 }

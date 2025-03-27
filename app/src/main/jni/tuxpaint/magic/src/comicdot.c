@@ -71,8 +71,8 @@ void comicdot_switchout(magic_api * api, int which, int mode, SDL_Surface * canv
 int comicdot_modes(magic_api * api, int which);
 Uint8 comicdot_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 comicdot_default_size(magic_api * api, int which, int mode);
-void comicdot_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                       SDL_Rect * update_rect);
+void comicdot_set_size(magic_api * api, int which, int mode,
+                       SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 Uint32 comicdot_api_version(void)
 {
@@ -256,10 +256,11 @@ void comicdot_click(magic_api *api, int which, int mode,
   }
 }
 
-void comicdot_release(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+void comicdot_release(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED,
                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                      SDL_Surface *last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
-                      int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+                      SDL_Surface *last ATTRIBUTE_UNUSED,
+                      int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   api->pausesound();
 }
@@ -281,8 +282,10 @@ void comicdot_shutdown(magic_api *api ATTRIBUTE_UNUSED)
   }
 }
 
-void comicdot_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                        SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+void comicdot_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                        SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
                         Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   comicdot_r = r;
@@ -325,8 +328,10 @@ Uint8 comicdot_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE
   return 4;
 }
 
-void comicdot_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void comicdot_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface *last ATTRIBUTE_UNUSED,
                        Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   comicdot_radius = size * 4;

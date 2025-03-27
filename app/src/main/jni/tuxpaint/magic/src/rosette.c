@@ -77,8 +77,8 @@ int rosette_modes(magic_api * api, int which);
 void rosette_circle(void *ptr, int which, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
 Uint8 rosette_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 rosette_default_size(magic_api * api, int which, int mode);
-void rosette_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                      SDL_Rect * update_rect);
+void rosette_set_size(magic_api * api, int which, int mode,
+                      SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 rosette_api_version(void)
@@ -86,8 +86,10 @@ Uint32 rosette_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void rosette_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+void rosette_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
                        Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   //get the colors from API and store it in structure
@@ -278,9 +280,10 @@ Uint8 rosette_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_
   return 1;
 }
 
-void rosette_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void rosette_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   ROSETTE_R = (size + 2) * 2;
 }

@@ -434,9 +434,10 @@ void rivulet_switchin(magic_api *api ATTRIBUTE_UNUSED,
   zero_riv_arrays(canvas);
 
   if (rivulet_snapshot == NULL)
-    rivulet_snapshot = SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
-                                            canvas->format->BitsPerPixel, canvas->format->Rmask,
-                                            canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
+    rivulet_snapshot =
+      SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
+                           canvas->format->BitsPerPixel,
+                           canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
   if (rivulet_snapshot != NULL)
     SDL_BlitSurface(canvas, NULL, rivulet_snapshot, NULL);

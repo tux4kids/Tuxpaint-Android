@@ -1,3 +1,8 @@
+/*
+  Header for Tux Paint's on-screen keyboard.
+  Last modified: 2024-12-20
+*/
+
 #include "wchar.h"
 #include "stdio.h"
 #include "SDL.h"
@@ -117,6 +122,7 @@ typedef struct osk_keyboard
   SDL_Surface *oskenter;        /* Return hook/arrow */
   SDL_Surface *oskcapslock;     /* CapsLock */
   SDL_Surface *oskshift;        /* Shift */
+  SDL_Surface *oskpaste;        /* paste */
   int changed;                  /* If the surface has been modified (painted)  */
   SDL_Rect rect;                /* The rectangle that has changed */
   int recreated;                /* If the surface has been deleted and newly created */
@@ -145,6 +151,7 @@ typedef struct osk_keyboard
   SDL_Surface *BLANK_oskenter;
   SDL_Surface *BLANK_oskcapslock;
   SDL_Surface *BLANK_oskshift;
+  SDL_Surface *BLANK_oskpaste;
 } on_screen_keyboard;
 
 struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
@@ -156,7 +163,8 @@ struct osk_keyboard *osk_create(char *layout_name, SDL_Surface * canvas,
                                 SDL_Surface * BLANK_oskdel,
                                 SDL_Surface * BLANK_osktab,
                                 SDL_Surface * BLANK_oskenter,
-                                SDL_Surface * BLANK_oskcapslock, SDL_Surface * BLANK_oskshift, int disable_change);
+                                SDL_Surface * BLANK_oskcapslock,
+                                SDL_Surface * BLANK_oskshift, SDL_Surface * BLANK_oskpaste, int disable_change);
 
 struct osk_layout *osk_load_layout(char *layout_name);
 

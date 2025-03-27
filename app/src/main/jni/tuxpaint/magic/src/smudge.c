@@ -66,8 +66,8 @@ int smudge_modes(magic_api * api, int which);
 int smudge_get_tool_count(magic_api * api);
 Uint8 smudge_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 smudge_default_size(magic_api * api, int which, int mode);
-void smudge_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                     SDL_Rect * update_rect);
+void smudge_set_size(magic_api * api, int which, int mode,
+                     SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 int smudge_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
@@ -249,8 +249,10 @@ void smudge_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void smudge_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+void smudge_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
                       Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   smudge_r = r;
@@ -294,9 +296,10 @@ Uint8 smudge_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
   return 4;
 }
 
-void smudge_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void smudge_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   smudge_radius = size * 4;
 }

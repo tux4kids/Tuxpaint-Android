@@ -1,11 +1,11 @@
                                     Ampliar
                                    Tux Paint
-                                versión 0.9.34
+                                versión 0.9.35
 
-        Copyright © 2002-2024 by varios colaboradores; see AUTHORS.txt.
+        Copyright © 2002-2025 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                             10 de Outubro de 2024
+                             12 de Xaneiro de 2025
 
 +-------------------------------------------------------------+
 |                           Índice                            |
@@ -221,9 +221,9 @@ que se atopa no mesmo directorio.)
 
 → Espazado do pincel ←
 
-    A partir da versión 0.9.16 de Tux Paint, agora pode especificar o espazado
-    para os pinceis (é dicir, a frecuencia coa que se debuxan). De xeito
-    predeterminado, o espazado será a altura do pincel, dividido por 4.
+    You may specify the spacing for brushes — that is, how frequently they are
+    drawn across the length of a line or stroke. By default, the spacing will
+    be the brush's height, divided by 4.
 
     Engada unha liña que conteña a liña «spacing=N» ao ficheiro de datos do
     pincel, onde «N» é o espazado que quere para o pincel. (Canto menor sexa o
@@ -233,11 +233,11 @@ que se atopa no mesmo directorio.)
      
 → Pinceis animados ←
 
-    A partir da versión 0.9.16 de Tux Paint, pode crear pinceis animados. A
-    medida que se usa o pincel, debúxase cada cadro da animación.
+    Brushes may be animated. As the brush is used, each frame of the animation
+    is drawn in sequence.
 
-    Coloca cada cadro nunha ampla imaxe PNG. Por exemplo, se o pincel ten 30x30
-    e ten 5 fotogramas, a imaxe debería ser 150x30.
+    Lay each frame out across a wide PNG image. For example, if the brush is
+    30x30 and there are 5 frames, the image should be 150x30.
 
     Engada unha liña que conteña a liña «frames=N» ao ficheiro de datos do
     pincel, onde «N» é o número de fotogramas do pincel.
@@ -249,15 +249,16 @@ que se atopa no mesmo directorio.)
      
 → Pinceis direccionais ←
 
-    A partir da versión 0.9.16 de Tux Paint, pode crear pinceis direccionais. A
-    medida que se usa o pincel, debúxanse diferentes formas, dependendo da
-    dirección na que vaia.
+    Brushes may be configured to draw a different shape based on the direction
+    of the line or brush stroke. Different shapes will be drawn depending on
+    which of the eight compass directions the brush is moving — up (aka North),
+    up/right (aka Northeast), right (aka East), down/right (aka Southeast),
+    etc.). A ninth "center" shape is used when there's no motion (e.g., simply
+    clicking/tapping and releasing the "Paint" tool, without dragging).
 
-    As formas direccionais divídense nun cadrado de 3x3 nunha imaxe PNG. Por
-    exemplo, se o pincel ten 30x30, a imaxe debería ser 90x90 e cada unha das
-    formas da dirección colocadas nunha grade 3x3. A rexión central úsase sen
-    movemento. A parte superior dereita úsase para o movemento cara arriba e á
-    dereita. E así sucesivamente.
+    The directional shapes are divided into a 3x3 square in a PNG image. For
+    example, if your brush is 30x30, the image should be 90x90, and each of the
+    direction's shapes placed in a 3x3 grid.
 
     Engada unha liña que conteña a palabra «directional» ao ficheiro de datos
     debrush's.
@@ -266,9 +267,9 @@ que se atopa no mesmo directorio.)
      
 → Rotating Brushes ←
 
-    As of Tux Paint version 0.9.27, you may now create rotating brushes. As the
-    brush is used, it is rotated 360 degrees, depending on the direction the
-    brush is going.
+    Brushes may be configured to rotate based on the angle of the line or brush
+    stroke. (Unlike Directional Brushes, described above, only a single brush
+    shape may be provided.
 
     Engada unha liña que conteña a palabra «rotate» ao ficheiro de datos
     debrush's.
@@ -277,8 +278,8 @@ que se atopa no mesmo directorio.)
      
 → Chaotic Brushes ←
 
-    As of Tux Paint version 0.9.34, brushes can be configured to continuously
-    pick random directions as you draw with them.
+    Brushes may be configured to continuously choose a random direction as you
+    draw with them.
 
     Engada unha liña que conteña a palabra «chaotic» ao ficheiro de datos
     debrush's.
@@ -320,10 +321,10 @@ exemplo, pode ter un cartafol «vacacións» con subcartafoles «samaín» e
 Os selos de caucho en Tux Paint poden estar formados por varios ficheiros
 separados. O único ficheiro necesario é, por suposto, a imaxe en si.
 
-A partir da versión 0.9.17 de Tux Paint, os selos poden ser imaxes de mapa de
-bits PNG ou imaxes vectoriais SVG. Poden ser a toda cor ou en escala de grises.
-A canle alfa (transparencia) dos PNG utilízase para determinar a forma real da
-imaxe (se non, marcará un rectángulo grande nos seus debuxos).
+Stamps may be either PNG bitmap images or SVG vector images. They can be
+full-color or greyscale. The alpha (transparency) channel of PNGs is used to
+determine the actual shape of the picture (otherwise you'll stamp a large
+rectangle on your drawings).
 
 Os PNG poden ter calquera tamaño e Tux Paint (de xeito predeterminado) ofrece
 un conxunto de botóns de tamaño para que o usuario poida escalar o selo cara
@@ -588,9 +589,8 @@ Por exemplo, para o selo «selo.png» crearíase outro ficheiro chamado
 «selo_mirror.png», que se usará cando o selo se reflicta (no canto de usar unha
 versión ao revés de «selo.png».
 
-A partir de Tux Paint 0.9.18, de xeito similar pode fornecer unha imaxe
-previamente invertida con «_flip» no nome e/ou unha imaxe que se reflicta e
-inverta, denominándoa «_mirror_flip».
+You may also provide a pre-flipped image with "_flip" in the name, and/or an
+image that is both mirrored and flipped, by naming it "_mirror_flip".
 
 💡 Note: If the user flips and mirrors an image, and a pre-drawn "_mirror_flip"
 doesn't exist, but either "_flip" or "_mirror" does, it will be used, and
@@ -621,11 +621,11 @@ detalles. En Tux Paint, mentre debuxa, escribe texto ou estampa selos, o
 contorno segue «por riba» do que debuxa. Pode borrar as partes do debuxo que
 fixo, mais non pode borrar o contorno.
 
-Para crear este tipo de imaxe «de inicio», simplemente cree unha imaxe en
-branco e negro nun programa de pintura e gárdea como ficheiro PNG rasterizado
-ou SVG vectorial. Se o garda como PNG, opcionalmente pode renderizar a imaxe en
-negro e transparente no canto de en branco e negro, mais (a partir do Tux Paint
-0.9.21) isto non é necesario.
+To create this kind of 'starter' image, simply create an outlined black and
+white picture in a paint program, and save it as a raster PNG file, or vector
+SVG. If saving as a PNG, you may optionally render the image as
+black-and-transparent, rather than black-and-white, although this is not
+required.
 
                ### Imaxes «de comezo» ao estilo dunha escena ###
 
@@ -811,9 +811,8 @@ support all of the same options as starters.
 
 «Modelos»
 
-As imaxes «modelo» tamén aparecen no diálogo «Novo», xunto coas opcións de
-fondo de cor sólida e «imaxes de comezo». (Nota: Tux Paint antes da versión
-0.9.22 non tiña a función «Modelo»).
+'Template' images also appear in the 'New' dialog, along with solid color
+background choices and 'Starters'.
 
 A diferenza das imaxes debuxadas en Tux Paint polos usuarios e abertas despois,
 a apertura dun «modelo» crea un novo debuxo. Cando garda, a imaxe «modelo» non
@@ -981,13 +980,11 @@ de execución.
 
 Teclado en pantalla
 
-A partir da versión 0.9.22, as ferramentas «Texto» e «Etiqueta» de Tux Paint
-poden presentar un teclado en pantalla que permite utilizar o punteiro
-(mediante un rato, sistemas de seguimento de ollos, etc.) para introducir
-caracteres. Os ficheiros que describen o deseño e as claves dispoñíbeis
-almacénanse no directorio «osk» de Tux Paint. Cada deseño de teclado está
-definido por varios ficheiros (algúns dos cales poden ser compartidos por
-diferentes deseños).
+Tux Paint's 'Text' and 'Label' tools can present an on-screen keyboard that
+allows the pointer (via a mouse, touch screen, eye-tracking systems, etc.) to
+be used to input characters. Files that describe the layout and available keys
+are stored in Tux Paint "osk" directory. Each keyboard layout is defined by a
+number of files (some of which may be shared by different layouts).
 
 Usaremos o teclado QWERTY como exemplo:
 
@@ -1004,7 +1001,7 @@ describir a disposición e as asignacións de teclas.
 
 ⚙ Note: Blank lines within the ".layout" file will be ignored, as will any text
 following a "#" (pound/hash) character — it can be used to denote comments, as
-seen in the example above.
+seen in the example below.
 
 A liña «keyboardlist» describe a que esquemas cambiar, cando o usuario preme
 nos botóns esquerdo e dereito do teclado. (Ver máis abaixo.)
@@ -1020,6 +1017,9 @@ dependendo das teclas modificadoras premido (unha para cada unha: sen
 modificadores,[Maiúsculas],[AltGr] e [Maiúsculas] + [AltGr]) e, finalmente, se
 a tecla está afectada ou non pola tecla [BloqMaiús] (use «1») ou a tecla
 [AltGr] (gráficos alternativos) ( use «2»), ou non (use «0»).
+
+The "NEWLINE" keyword is used to indicate the end of one row of the keyboard,
+and thus subsequent key layout descriptions will be beginning on a new row.
 
     WIDTH 15
     HEIGHT 5
@@ -1056,9 +1056,13 @@ a tecla está afectada ou non pola tecla [BloqMaiús] (use «1») ou a tecla
     KEY 64 2.0 Alt Alt Alt Alt 0
 
     # Espazo
-    KEY 65 7.0 SPACE SPACE SPACE SPACE 0
+    KEY 65 5.0 SPACE SPACE SPACE SPACE 0
 
+    # AltGr
     KEY 108 2.0 AltGr AltGr AltGr AltGr 0
+
+    # Paste
+    KEY 143 2.0 Paste Paste Paste Paste 0
 
     # A frecha cara á dereita cambiará ao seguinte teclado
     KEY 1 1.0 -> -> -> -> 0
@@ -1075,6 +1079,11 @@ actualmente descríbense a continuación.
     disposición)
   * 2 — disposición anterior (segundo o axuste «keyboardlist» do ficheiro de
     disposición)
+
+📜 Starting with Tux Paint 0.9.35, the XF86Paste keysym (value 143) can be used
+to initiate a copy/paste clipboard buffer "paste" event. See the "Paste" key in
+the keyboard layout files. (Pasting via a physical keyboard is initiated using
+the [Control] + [V] key combination.
 
     ### Ficheiro do mapa do teclado («us-intl-altgr-dead-keys.keymap») ###
 

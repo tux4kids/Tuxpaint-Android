@@ -100,8 +100,8 @@ void warp_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int warp_modes(magic_api * api, int which);
 Uint8 warp_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 warp_default_size(magic_api * api, int which, int mode);
-void warp_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                   SDL_Rect * update_rect);
+void warp_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
+                   SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 warp_api_version(void)
@@ -286,10 +286,12 @@ void warp_shutdown(magic_api *api ATTRIBUTE_UNUSED)
   }
 }
 
-void warp_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                    Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                    SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void warp_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED,
+                    Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                    Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -376,9 +378,10 @@ Uint8 warp_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
   return (NUM_WARP_SIZES / 2);
 }
 
-void warp_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                   SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void warp_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                   SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   warp_radius = (size * MAX_WARP_RADIUS) / NUM_WARP_SIZES;
 }

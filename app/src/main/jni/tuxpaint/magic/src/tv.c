@@ -75,8 +75,8 @@ void tv_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int tv_modes(magic_api * api, int which);
 Uint8 tv_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 tv_default_size(magic_api * api, int which, int mode);
-void tv_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                 SDL_Rect * update_rect);
+void tv_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
+                 SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 //                              Housekeeping functions
@@ -86,8 +86,10 @@ Uint32 tv_api_version(void)
   return (TP_MAGIC_API_VERSION);
 }
 
-void tv_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                  SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+void tv_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                  SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                  SDL_Surface *last ATTRIBUTE_UNUSED,
+                  Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
                   Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   //get the colors from API and store it in structure
@@ -309,9 +311,10 @@ Uint8 tv_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSE
   return 4;
 }
 
-void tv_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                 SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                 SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void tv_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+                 int mode ATTRIBUTE_UNUSED,
+                 SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                 SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   tv_radius = size * 4;
 }

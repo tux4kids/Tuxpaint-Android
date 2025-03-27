@@ -75,8 +75,8 @@ void pixels_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas
 int pixels_modes(magic_api * api, int which);
 Uint8 pixels_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 pixels_default_size(magic_api * api, int which, int mode);
-void pixels_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                     SDL_Rect * update_rect);
+void pixels_set_size(magic_api * api, int which, int mode,
+                     SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 // No setup required:
@@ -209,8 +209,10 @@ void pixels_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void pixels_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+void pixels_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
                       Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   pixels_r = r;
@@ -250,9 +252,10 @@ Uint8 pixels_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
   return 1;
 }
 
-void pixels_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void pixels_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED,
+                     Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   int canv_area_scale;
 

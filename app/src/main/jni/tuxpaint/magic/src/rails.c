@@ -83,8 +83,8 @@ void rails_drag(magic_api * api, int which, SDL_Surface * canvas,
                 SDL_Surface * snapshot, int ox, int oy, int x, int y, SDL_Rect * update_rect);
 Uint8 rails_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 rails_default_size(magic_api * api, int which, int mode);
-void rails_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                    SDL_Rect * update_rect);
+void rails_set_size(magic_api * api, int which, int mode,
+                    SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 Uint32 rails_api_version(void)
 {
@@ -96,10 +96,12 @@ int rails_modes(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED)
   return (MODE_PAINT);
 }
 
-void rails_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                     Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void rails_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED,
+                     Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                     Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -618,8 +620,10 @@ Uint8 rails_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
   return 0;
 }
 
-void rails_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void rails_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED,
                     Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

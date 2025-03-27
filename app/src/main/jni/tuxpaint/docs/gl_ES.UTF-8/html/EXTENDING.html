@@ -92,15 +92,15 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            versión 0.9.34          </h1>
+            versión 0.9.35          </h1>
     
           <p>
-            Copyright &copy; 2002-2024 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2002-2025 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
     
           <p>
-            10 de Outubro de 2024          </p>
+            12 de Xaneiro de 2025          </p>
         </center>
       </header>
 
@@ -231,7 +231,7 @@
             <p>
               O seu cartafol persoal de Tux Paint almacénase nos seus «Datos da aplicación» persoais. Por exemplo, nos Windows máis recentes:
               <blockquote>
-                <nobr><code style='background: #EEE;'>C:\Users\nome de usuario\AppData\Roaming\TuxPaint\</code></nobr>              </blockquote>
+                <nobr><code style='background: #EEE;'>C:\Users\<i>nome de usuario</i>\AppData\Roaming\TuxPaint\</code></nobr>              </blockquote>
             </p>
           </dd>
 
@@ -246,7 +246,7 @@
           <dt><strong>Linux e Unix</strong></dt>
           <dd>
             <p>
-              Your personal Tux Paint files go into a 'hidden directory' found in your account's home directory: <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaint/</code>"</nobr>.            </p>
+              Your personal Tux Paint files go into a 'hidden directory' found in your account's home directory: <nobr>"<code style='background: #EEE;'>/home/<i>nome de usuario</i>/.tuxpaint/</code>"</nobr>.            </p>
             <p>
               Non esqueza o punto («<code>.</code>») antes de «<code>tuxpaint</code>»!            </p>
           </dd>
@@ -256,7 +256,7 @@
           Para engadir os seus propios pinceis, selos, «imaxes de comezo», modelos e tipos de letra, cree subdirectorios no seu directorio persoal de Tux Paint chamados «<code><b>brushes</b></code>», «<code><b>stamps</b></code>», «<code><b>starters</b></code>», «<code><b>templates</b></code>», «<code><b>fonts</b></code>», , respectivamente.        </p>
 
         <p>
-          (For example, if you created a brush named <nobr>"<code style='background: #EEE;'>flor.png</code>"</nobr>, you would put it in <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaint/brushes/</code>"</nobr> under Linux or Unix.)        </p>
+          (For example, if you created a brush named <nobr>"<code style='background: #EEE;'>flor.png</code>"</nobr>, you would put it in <nobr>"<code style='background: #EEE;'>/home/<i>nome de usuario</i>/.tuxpaint/brushes/</code>"</nobr> under Linux or Unix.)        </p>
       </section><!-- H2: Personal Files -->
     </section><!-- H1: Where Files Go -->
 
@@ -337,7 +337,7 @@
           <dt><strong>Espazado do pincel</strong></dt>
           <dd>
             <p>
-              A partir da versión 0.9.16 de Tux Paint, agora pode especificar o espazado para os pinceis (é dicir, a frecuencia coa que se debuxan). De xeito predeterminado, o espazado será a altura do pincel, dividido por 4.            </p>
+              You may specify the spacing for brushes &mdash; that is, how frequently they are drawn across the length of a line or stroke. By default, the spacing will be the brush's height, divided by 4.            </p>
             <p>
               Engada unha liña que conteña a liña «<code><b>spacing=<i>N</i></b></code>» ao ficheiro de datos do pincel, onde «<i>N</i>» é o espazado que quere para o pincel. (Canto menor sexa o número, máis veces se debuxa o pincel.)            </p>
           </dd>
@@ -345,9 +345,9 @@
           <dt><strong>Pinceis animados</strong></dt>
           <dd>
             <p>
-              A partir da versión 0.9.16 de Tux Paint, pode crear pinceis animados. A medida que se usa o pincel, debúxase cada cadro da animación.            </p>
+              Brushes may be animated. As the brush is used, each frame of the animation is drawn in sequence.            </p>
             <p>
-              Coloca cada cadro nunha ampla imaxe PNG. Por exemplo, se o pincel ten 30x30 e ten 5 fotogramas, a imaxe debería ser 150x30.            </p>
+              Lay each frame out across a wide PNG image. For example, if the brush is 30x30 and there are 5 frames, the image should be 150x30.            </p>
             <p>
               Engada unha liña que conteña a liña «<code><b>frames=<i>N</i></b></code>» ao ficheiro de datos do pincel, onde «<i>N</i>» é o número de fotogramas do pincel.            </p>
             <p class="note">
@@ -357,9 +357,9 @@
           <dt><strong>Pinceis direccionais</strong></dt>
           <dd>
             <p>
-              A partir da versión 0.9.16 de Tux Paint, pode crear pinceis direccionais. A medida que se usa o pincel, debúxanse diferentes formas, dependendo da dirección na que vaia.            </p>
+              Brushes may be configured to draw a different shape based on the direction of the line or brush stroke.  Different shapes will be drawn depending on which of the eight compass directions the brush is moving &mdash; up (aka North), up/right (aka Northeast), right (aka East), down/right (aka Southeast), etc.).  A ninth "center" shape is used when there's no motion (e.g., simply clicking/tapping and releasing the "Paint" tool, without dragging).            </p>
             <p>
-              As formas direccionais divídense nun cadrado de 3x3 nunha imaxe PNG. Por exemplo, se o pincel ten 30x30, a imaxe debería ser 90x90 e cada unha das formas da dirección colocadas nunha grade 3x3. A rexión central úsase sen movemento. A parte superior dereita úsase para o movemento cara arriba e á dereita. E así sucesivamente.            </p>
+              The directional shapes are divided into a 3x3 square in a PNG image. For example, if your brush is 30x30, the image should be 90x90, and each of the direction's shapes placed in a 3x3 grid.            </p>
             <p>
               Engada unha liña que conteña a palabra «<code><b>directional</b></code>» ao ficheiro de datos debrush's.            </p>
           </dd>
@@ -367,7 +367,7 @@
           <dt><strong>Rotating Brushes</strong></dt>
           <dd>
             <p>
-              As of Tux Paint version 0.9.27, you may now create rotating brushes. As the brush is used, it is rotated 360 degrees, depending on the direction the brush is going.            </p>
+              Brushes may be configured to rotate based on the angle of the line or brush stroke. (Unlike Directional Brushes, described above, only a single brush shape may be provided.            </p>
             <p>
               Engada unha liña que conteña a palabra «<code><b>rotate</b></code>» ao ficheiro de datos debrush's.            </p>
           </dd>
@@ -375,7 +375,7 @@
           <dt><strong>Chaotic Brushes</strong></dt>
           <dd>
             <p>
-              As of Tux Paint version 0.9.34, brushes can be configured to continuously pick random directions as you draw with them.            </p>
+              Brushes may be configured to continuously choose a random direction as you draw with them.            </p>
             <p>
               Engada unha liña que conteña a palabra «<code><b>chaotic</b></code>» ao ficheiro de datos debrush's.            </p>
           </dd>
@@ -424,7 +424,7 @@
                     alt=""
                     align="right">
         <p>
-          A partir da versión 0.9.17 de Tux Paint, os selos poden ser imaxes de mapa de bits PNG ou imaxes vectoriais SVG. Poden ser a toda cor ou en escala de grises. A canle alfa (transparencia) dos PNG utilízase para determinar a forma real da imaxe (se non, marcará un rectángulo grande nos seus debuxos).        </p>
+          Stamps may be either PNG bitmap images or SVG vector images. They can be full-color or greyscale. The alpha (transparency) channel of PNGs is used to determine the actual shape of the picture (otherwise you'll stamp a large rectangle on your drawings).        </p>
 
         <p>
           Os PNG poden ter calquera tamaño e Tux Paint (de xeito predeterminado) ofrece un conxunto de botóns de tamaño para que o usuario poida escalar o selo cara arriba (máis grande) e cara abaixo (máis pequeno).        </p>
@@ -662,7 +662,7 @@
           Por exemplo, para o selo «<code>selo.png</code>» crearíase outro ficheiro chamado «<code>selo_mirror.png</code>», que se usará cando o selo se reflicta (no canto de  usar unha versión ao revés de «<code>selo.png</code>».        </p>
 
         <p>
-          A partir de Tux Paint 0.9.18, de xeito similar pode fornecer unha imaxe previamente invertida con «<code><b>_flip</b></code>» no nome e/ou unha imaxe que se reflicta e inverta, denominándoa «<code><b>_mirror_flip</b></code>».        </p>
+          You may also provide a pre-flipped image with "<code><b>_flip</b></code>" in the name, and/or an image that is both mirrored <em>and</em> flipped, by naming it "<code><b>_mirror_flip</b></code>".        </p>
 
         <p class="note">
           <span title="Information">&#128161;</span>          <strong>Note:</strong> If the user flips and mirrors an image, and a pre-drawn "<code>_mirror_flip</code>" doesn't exist, but either "<code>_flip</code>" or "<code>_mirror</code>" does, it will be used, and mirrored or flipped, respectively.        </p>
@@ -720,7 +720,7 @@
           O tipo máis básico de imaxe «de inicio» é semellante a unha imaxe dun libro para colorar. É un esquema dunha forma que logo pode colorar e engadir detalles. En Tux Paint, mentre debuxa, escribe texto ou estampa selos, o contorno segue «por riba» do que debuxa. Pode borrar as partes do debuxo que fixo, mais non pode borrar o contorno.        </p>
 
         <p>
-          Para crear este tipo de imaxe «de inicio», simplemente cree unha imaxe en branco e negro nun programa de pintura e gárdea como ficheiro PNG rasterizado ou SVG vectorial. Se o garda como PNG, opcionalmente pode renderizar a imaxe en negro e transparente no canto de en branco e negro, mais (a partir do Tux Paint 0.9.21) isto non é necesario.        </p>
+          To create this kind of 'starter' image, simply create an outlined black and white picture in a paint program, and save it as a raster PNG file, or vector SVG.  If saving as a PNG, you may optionally render the image as black-and-transparent, rather than black-and-white, although this is not required.        </p>
       </section><!-- H2: Coloring-Book Style Starters -->
 
       <section><!-- H2: Scene-Style Starters -->
@@ -957,7 +957,7 @@
                   alt=""
                   align="right">
       <p>
-        As imaxes «modelo» tamén aparecen no diálogo «Novo», xunto coas opcións de fondo de cor sólida e «imaxes de comezo». (Nota: Tux Paint antes da versión 0.9.22 non tiña a función «Modelo»).      </p>
+        'Template' images also appear in the 'New' dialog, along with solid color background choices and 'Starters'.      </p>
 
       <p>
         A diferenza das imaxes debuxadas en Tux Paint polos usuarios e abertas despois, a apertura dun «modelo» crea un novo debuxo. Cando garda, a imaxe «modelo» non se sobreescribe. A diferenza das «imaxes de comezo», non hai unha «capa» inmutábel por riba do lenzo. Pode debuxar sobre calquera parte del.      </p>
@@ -1118,7 +1118,7 @@
       </header>
 
       <p>
-        A partir da versión 0.9.22, as ferramentas «Texto» e «Etiqueta» de Tux Paint poden presentar un teclado en pantalla que permite utilizar o punteiro (mediante un rato, sistemas de seguimento de ollos, etc.) para introducir caracteres. Os ficheiros que describen o deseño e as claves dispoñíbeis almacénanse no directorio «<code>osk</code>» de Tux Paint. Cada deseño de teclado está definido por varios ficheiros (algúns dos cales poden ser compartidos por diferentes deseños).      </p>
+        Tux Paint's 'Text' and 'Label' tools can present an on-screen keyboard that allows the pointer (via a mouse, touch screen, eye-tracking systems, etc.) to be used to input characters. Files that describe the layout and available keys are stored in Tux Paint "<code>osk</code>" directory. Each keyboard layout is defined by a number of files (some of which may be shared by different layouts).      </p>
       <p>
         Usaremos o teclado QWERTY como exemplo:      </p>
       
@@ -1142,7 +1142,7 @@
         </blockquote>
 
         <p class="note">
-          <span title="Configuration option">&#9881;</span>          <strong>Note:</strong> Blank lines within the "<code>.layout</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example above.        </p>
+          <span title="Configuration option">&#9881;</span>          <strong>Note:</strong> Blank lines within the "<code>.layout</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example below.        </p>
 
         <p>
           A liña «<code>keyboardlist</code>» describe a que esquemas cambiar, cando o usuario preme nos botóns esquerdo e dereito do teclado. (Ver máis abaixo.)        </p>
@@ -1156,6 +1156,9 @@
 
         <p>
           Isto describe o tamaño do teclado (como unha reixa de «largo × alto») e lista cada tecla co seu código numérico (ver o ficheiro «<code>keymap</code>», máis abaixo), o largo no que debería debuxarse ​​(normalmente «<code>1.0</code>», para ocupar un espazo no teclado, pero no seguinte exemplo, teña en conta que as teclas «<code>TAB</code>» e «<code>SPACE</code>» son moito máis largas), o carácter ou o texto que se amosará na tecla, dependendo das teclas modificadoras premido (unha para cada unha: sen modificadores,<b><code>[Maiúsculas]</code></b>,<b><code>[AltGr]</code></b> e <b><code>[Maiúsculas]</code></b> + <b><code>[AltGr]</code></b>) e, finalmente, se a tecla está afectada ou non pola tecla <b><code>[BloqMaiús]</code></b> (use «<code>1</code>») ou a tecla <b><code>[AltGr]</code></b> (gráficos alternativos) ( use «<code>2</code>»), ou non (use «<code>0</code>»).        </p>
+
+        <p>
+          The "<code>NEWLINE</code>" keyword is used to indicate the end of one row of the keyboard, and thus subsequent key layout descriptions will be beginning on a new row.        </p>
 
         <blockquote>
           <p>
@@ -1193,9 +1196,13 @@
             KEY 64 2.0 Alt Alt Alt Alt 0<br>
             <br>
             # Espazo<br>
-            KEY 65 7.0 SPACE SPACE SPACE SPACE 0<br>
+            KEY 65 5.0 SPACE SPACE SPACE SPACE 0<br>
             <br>
+            # AltGr<br>
             KEY 108 2.0 AltGr AltGr AltGr AltGr 0<br>
+            <br>
+            # Paste<br>
+            KEY 143 2.0 Paste Paste Paste Paste 0<br>
             <br>
             # A frecha cara á dereita cambiará ao seguinte teclado<br>
             KEY 1 1.0 -&gt; -&gt; -&gt; -&gt; 0</code>
@@ -1221,6 +1228,10 @@
             <code>2</code> —
                 disposición anterior (segundo o axuste «<code>keyboardlist</code>» do ficheiro de disposición)          </li>
         </ul>
+
+        <p class="note">
+          <span title="Version variation">&#128220;</span>          Starting with Tux Paint 0.9.35, the <code>XF86Paste</code> keysym (value 143) can be used to initiate a copy/paste clipboard buffer "paste" event. See the "Paste" key in the keyboard layout files. (Pasting via a physical keyboard is initiated using the <code>[Control]</code> + <code>[V]</code> key combination.        </p>
+
       </section><!-- H2: Keyboard layout file ("qwerty.h_layout") -->
 
       <section><!-- H2: Keymap file ("us-intl-altgr-dead-keys.keymap") -->

@@ -1,11 +1,11 @@
                                    Tux Paint
-                                versión 0.9.34
+                                versión 0.9.35
                            Preguntas máis frecuentes
 
-        Copyright © 2002-2024 by varios colaboradores; see AUTHORS.txt.
+        Copyright © 2002-2025 by varios colaboradores; see AUTHORS.txt.
                              https://tuxpaint.org/
 
-                              17 de Xullo de 2024
+                             23 de Xaneiro de 2025
 
 +--------------------------------------------+
 |                   Índice                   |
@@ -35,11 +35,10 @@
     Isto significa que Tux Paint non atopou ningunha imaxe de selo ou se lle
     pediu que non as cargase.
 
-    Se instalou Tux Paint, pero non instalou a colección opcional separada de
-    «Selos», saia de Tux Paint e instálea agora. Debe estar dispoñíbel no mesmo
-    lugar no que obtivo o programa principal de Tux Paint. (Nota: A partir da
-    versión 0.9.14, Tux Paint inclúe unha pequena colección de selos de
-    exemplo.)
+    If you installed Tux Paint, but did not install the separate, optional
+    "Stamps" collection, quit Tux Paint and install it now. It should be
+    available from the same place you got the main Tux Paint program. (Note:
+    Tux Paint ships with a very small collection of example stamps.)
 
     Se non quere instalar a colección predeterminada de selos, pode crear os
     seu.s Vexa a documentación «Ampliar Tux Paint» para obter máis información
@@ -168,13 +167,6 @@
     especificar unha orde apropiada usando a opción «printcommand» no ficheiro
     de configuración de Tux Paint. (Vexa a «Documentación de opcións».)
 
-    Nota: As versións de Tux Paint anteriores ao 0.9.15 usaban unha orde
-    predeterminada diferente para imprimir, «pngtopnm | pnmtops | lpr», como
-    formato PNG de saída de Tux PaintNG, no canto de PostScript.
-
-    Se xa cambiara a súa opción «printcommand» antes de Tux Paint 0.9.15, terá
-    que volver atras e modificala para que acepte PostScript.
-
 
      
 → Recibo a mensaxe «Aínda non pode imprimir» cando vou imprimir ←
@@ -236,9 +228,19 @@
     (usando a opción «savedir»), Tux Paint garda nun lugar estándar na súa
     unidade local:
 
-    → Windows Windows 7, Windows 8, Windows 10, Windows 11 ←
+    → Windows Windows 8, Windows 10, Windows 11 ←
         In the user's "AppData" folder:
         e.g., "C:\Users\nome de usuario\AppData\Roaming\TuxPaint\saved\"
+
+        (Note: The "AppData" folder is hidden (not visible) by default. You can
+        enter the path manually in the location bar of your file browser (e.g.,
+        File Explorer).)
+
+        You can use the %APPDATA% variable as a shorthand, i.e. 
+        "%APPDATA%\Tuxpaint\Saved".
+
+        You can use the [⊞ (Windows)] + [R] key combination to bring up the Run
+        command window, and then type the path and hit [Enter / Return].
          
     → macOS ←
         In the user's "Application Support" folder:
@@ -248,6 +250,13 @@
     → Linux / Unix ←
         In the user's "home directory" folder:
         e.g., "/home/nome de usuario/.tuxpaint/saved/"
+
+        (Note: The ".tuxpaint" folder is hidden (not visible) by default. You
+        can enter the path manually in the location bar of your file browser
+        (e.g., GNOME Files or Dolphin).)
+
+        You can use the $HOME variable as a shorthand, i.e. 
+        "$HOME/.tuxpaint/saved".
          
     → Haiku ←
         In the user's "settings" folder:
@@ -395,8 +404,8 @@
             liña que conteña «nosound=yes».
           # Ou use Tux Paint Config. e asegúrese de «Activar os efectos de son»
             (baixo «Vídeo e son») non está marcado.
-          # Como alternativa, recompile Tux Paint coa compatibilidade de son
-            desactivada. (Vexa máis arriba e a documentación «Instalar».
+          # Alternatively, recompile Tux Paint with sound support disabled.
+            (See above, and the 'Install' documentation.)
 
      
 → A panorámica estéreo dos efectos de son é molesta; os efectos de son poden
@@ -690,6 +699,16 @@ texto ←
         --nosysconfig
 
 
+     
+→ I need to deploy Tux Paint on many Windows systems at once ←
+    The installers for both Tux Paint (plus Tux Paint Config.)
+    (tuxpaint-X.Y.Z-windows-ARCH-installer.exe) and Tux Paint Stamps
+    (tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe) accept the command-line
+    options "/SILENT" ("silent") or "/VERYSILENT" ("very silent") which can be
+    used to install and uninstall their component without use of an interactive
+    set-up window. This can be useful for automating installation on a
+    collection of PCs, for example using Microsoft Intune cloud-based endpoint
+    management solution (see https://learn.microsoft.com/mem/intune/).
      
 
 -------------------------------------------------------------------------------

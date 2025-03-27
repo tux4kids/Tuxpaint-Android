@@ -107,8 +107,8 @@ void snow_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 int snow_modes(magic_api * api, int which);
 Uint8 snow_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 snow_default_size(magic_api * api, int which, int mode);
-void snow_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                   SDL_Rect * update_rect);
+void snow_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
+                   SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 snow_api_version(void)
@@ -283,8 +283,11 @@ void snow_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void snow_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+void snow_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED,
+                    Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
                     Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
@@ -322,8 +325,10 @@ Uint8 snow_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
   return 0;
 }
 
-void snow_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void snow_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                   SDL_Surface *last ATTRIBUTE_UNUSED,
                    Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

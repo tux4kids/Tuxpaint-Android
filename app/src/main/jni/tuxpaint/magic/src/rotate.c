@@ -65,8 +65,8 @@ void rotate_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas
 int rotate_modes(magic_api * api, int which);
 Uint8 rotate_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 rotate_default_size(magic_api * api, int which, int mode);
-void rotate_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                     SDL_Rect * update_rect);
+void rotate_set_size(magic_api * api, int which, int mode,
+                     SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 float do_rotate(SDL_Surface * canvas, int x, int y, int smoothing_flag);
 void rotate_xorline_callback(void *pointer, int tool, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
 
@@ -158,17 +158,18 @@ float do_rotate(SDL_Surface *canvas, int x, int y, int smoothing_flag)
   return angle_rad;
 }
 
-void rotate_xorline_callback(void *pointer ATTRIBUTE_UNUSED, int tool ATTRIBUTE_UNUSED,
-                             SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
+void rotate_xorline_callback(void *pointer ATTRIBUTE_UNUSED,
+                             int tool ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                             SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   magic_api *api = (magic_api *) pointer;
 
   api->xorpixel(canvas, x, y);
 }
 
-void rotate_drag(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
-                 SDL_Surface *last, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
-                 int x, int y, SDL_Rect *update_rect)
+void rotate_drag(magic_api *api, int which ATTRIBUTE_UNUSED,
+                 SDL_Surface *canvas, SDL_Surface *last,
+                 int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   float ang;
   int xx, yy;
@@ -215,8 +216,9 @@ void rotate_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
   rotate_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void rotate_release(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                    SDL_Surface *canvas, SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
+void rotate_release(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   /* Final rotation work; and now, record the final angle
    * we landed at, so we can reuse it -- both for stacking up
@@ -250,7 +252,8 @@ void rotate_shutdown(magic_api *api ATTRIBUTE_UNUSED)
   }
 }
 
-void rotate_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+void rotate_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
                       SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect)
 {
   /* Record the new color */
@@ -279,9 +282,10 @@ void rotate_switchin(magic_api *api ATTRIBUTE_UNUSED,
                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   if (rotate_snapshot == NULL)
-    rotate_snapshot = SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
-                                           canvas->format->BitsPerPixel, canvas->format->Rmask,
-                                           canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
+    rotate_snapshot =
+      SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
+                           canvas->format->BitsPerPixel,
+                           canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
   if (rotate_snapshot != NULL)
   {
@@ -322,8 +326,10 @@ Uint8 rotate_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
   return 0;
 }
 
-void rotate_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void rotate_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED,
                      Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

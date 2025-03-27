@@ -89,16 +89,16 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            バージョン 0.9.34<br/>
+            バージョン 0.9.35<br/>
             Installation Documentation          </h1>
 
           <p>
-            Copyright &copy; 2002-2024 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
+            Copyright &copy; 2002-2025 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            2024年4月29日          </p>
+            2025年1月23日          </p>
         </center>
       </header>
 
@@ -206,7 +206,7 @@
           <dt><strong>libpaper (Linux/Unix only)</strong></dt>
           <dd>
             <p>
-              As of Tux Paint 0.9.17, Tux Paint can determine your system's default paper size (e.g., A4 or Letter), or can be told to use a particular paper size, thanks to "libpaper".            </p>
+              Tux Paint can determine your system's default paper size (e.g., A4 or Letter), or can be told to use a particular paper size, thanks to "libpaper".            </p>
 
             <p>
               <a href="https://github.com/naota/libpaper">https://github.com/naota/libpaper</a>
@@ -226,7 +226,7 @@
           <dt><strong>SVG graphics support</strong></dt>
           <dd>
             <p>
-              As of Tux Paint 0.9.17, Tux Paint can load SVG (Scalable Vector Graphics) images as stamps. Two sets of libraries are supported, and SVG support can be completely disabled (via "<code style="white-space: nowrap;">make SVG_LIB:=</code>")            </p>
+              Tux Paint can load SVG (Scalable Vector Graphics) images as stamps. Two sets of libraries are supported, and SVG support can be completely disabled (via "<code style="white-space: nowrap;">make SVG_LIB:=</code>")            </p>
 
             <dl>
               <dt>librsvg-2 &amp; libCairo2 (newer libraries)</dt>
@@ -311,7 +311,7 @@
           </header>
 
           <p>
-            As of February 2005 (starting with Tux Paint 0.9.15), the "<code>Makefile</code>" includes support for building on a Windows system using MinGW/MSYS (<a href="https://sourceforge.net/projects/msys2/">https://sourceforge.net/projects/msys2/</a>).          </p>
+            The "<code>Makefile</code>" includes support for building on a Windows system using MinGW/MSYS (<a href="https://sourceforge.net/projects/msys2/">https://sourceforge.net/projects/msys2/</a>).          </p>
 
           <p>
             Many tools and libraries are required to build Tux Paint. The package management system "<code>pacman</code>" helps you install them automatically solving complicated dependencies.          </p>
@@ -708,6 +708,9 @@
 
           <p>
             At this point, you can click 'Install' to install Tux Paint!          </p>
+
+          <p class="note">
+            <span title="Information">&#128161;</span>            The installers for both Tux Paint (plus Tux Paint Config.) (<code>tuxpaint-X.Y.Z-windows-ARCH-installer.exe</code>) and Tux Paint Stamps (<code>tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe</code>) accept the command-line options "<code>/SILENT</code>" ("silent") or "<code>/VERYSILENT</code>" ("very silent") which can be used to install and uninstall their component without use of an interactive set-up window.  This can be useful for automating installation on a collection of PCs, for example using Microsoft <cite>Intune</cite> cloud-based endpoint management solution (see <a href="https://learn.microsoft.com/mem/intune/">https://learn.microsoft.com/mem/intune/</a>).          </p>
         </section><!-- H3: Running the Tux Paint Windows Installer -->
 
         <section class="indent"><!-- H3: Changing the Settings Using the Shortcut -->
@@ -751,7 +754,7 @@
           </header>
 
           <p>
-            If, when you double-click on the shortcut to run Tux Paint, nothing happens, it is probably because some of these command-line options are wrong. Open an Explorer, and look for a file called "<code>stderr.txt</code>" in your personal saving folder for TuxPaint which is normaly <nobr>"<code style='background: #EEE;'>C:\Users\ユーザー名\AppData\Roaming\TuxPaint\</code>"</nobr>.          </p>
+            If, when you double-click on the shortcut to run Tux Paint, nothing happens, it is probably because some of these command-line options are wrong. Open an Explorer, and look for a file called "<code>stderr.txt</code>" in your personal saving folder for TuxPaint which is normaly <nobr>"<code style='background: #EEE;'>C:\Users\<i>ユーザー名</i>\AppData\Roaming\TuxPaint\</code>"</nobr>.          </p>
 
           <p>
             It will contain a description of what was wrong. Usually it will just be due to incorrect character-case (capital 'Z' instead of lowercase 'z') or a missing (or extra) '-' (dash).          </p>
@@ -1015,6 +1018,7 @@
                 <code>
                   $ <strong>git</strong> clone https://github.com/markuskimius/SDL2_Pango.git<br/>
                   $ <strong>cd</strong> SDL2_Pango<br/>
+                  $ <strong>export MACOSX_DEPLOYMENT_TARGET=11.0</strong>  <em># on Apple Silicon CPU; use "10.10" on Intel CPU</em><br/>
                   $ <strong>./configure</strong> --prefix=/opt/local &amp;&amp; make &amp;&amp; sudo make install
                 </code>
               </blockquote>

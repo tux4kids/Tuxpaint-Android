@@ -51,8 +51,8 @@ int googlyeyes_get_order(int which);
 char *googlyeyes_get_description(magic_api * api, int which, int mode);
 int googlyeyes_requires_colors(magic_api * api, int which);
 int googlyeyes_modes(magic_api * api, int which);
-Uint8 googlyeyes_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                                int mode ATTRIBUTE_UNUSED);
+Uint8 googlyeyes_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED,
+                                int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED);
 Uint8 googlyeyes_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED);
 void googlyeyes_shutdown(magic_api * api);
 void googlyeyes_click(magic_api * api, int which, int mode,
@@ -146,8 +146,8 @@ int googlyeyes_init(magic_api *api, Uint8 disabled_features, Uint8 complexity_le
     }
 
     googlyeyes_img_bkgd[i] = api->scale(googlyeyes_img_bkgd[0],
-                                        (googlyeyes_img_bkgd[0]->w * size) / 100,
-                                        (googlyeyes_img_bkgd[0]->h * size) / 100, 1);
+                                        (googlyeyes_img_bkgd[0]->w * size) /
+                                        100, (googlyeyes_img_bkgd[0]->h * size) / 100, 1);
 
     if (googlyeyes_img_bkgd[i] == NULL)
     {
@@ -156,8 +156,8 @@ int googlyeyes_init(magic_api *api, Uint8 disabled_features, Uint8 complexity_le
     }
 
     googlyeyes_img_pupil[i] = api->scale(googlyeyes_img_pupil[0],
-                                         (googlyeyes_img_pupil[0]->w * size) / 100,
-                                         (googlyeyes_img_pupil[0]->h * size) / 100, 1);
+                                         (googlyeyes_img_pupil[0]->w * size) /
+                                         100, (googlyeyes_img_pupil[0]->h * size) / 100, 1);
 
     if (googlyeyes_img_pupil[i] == NULL)
     {
@@ -311,9 +311,9 @@ googlyeyes_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
 
 
 void
-googlyeyes_drag(magic_api *api ATTRIBUTE_UNUSED, int which, SDL_Surface *canvas,
-                SDL_Surface *snapshot, int ox ATTRIBUTE_UNUSED,
-                int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
+googlyeyes_drag(magic_api *api ATTRIBUTE_UNUSED, int which,
+                SDL_Surface *canvas, SDL_Surface *snapshot,
+                int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   SDL_Rect dest;
   int max_radius;
@@ -375,24 +375,30 @@ googlyeyes_drag(magic_api *api ATTRIBUTE_UNUSED, int which, SDL_Surface *canvas,
 
 
 void
-googlyeyes_release(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+googlyeyes_release(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                   SDL_Surface *snapshot ATTRIBUTE_UNUSED,
                    int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 
-void googlyeyes_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                          SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                          Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                          SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void googlyeyes_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                          SDL_Surface *last ATTRIBUTE_UNUSED,
+                          Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                          Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 
-void googlyeyes_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                         SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                         Uint8 sz, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void googlyeyes_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                         int which ATTRIBUTE_UNUSED,
+                         int mode ATTRIBUTE_UNUSED,
+                         SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                         SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 sz, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   googlyeyes_size = (NUM_SCALEABLE_SIZES - sz) + 1;
 }

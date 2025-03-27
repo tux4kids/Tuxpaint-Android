@@ -112,8 +112,8 @@ void spiral_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas
 int spiral_modes(magic_api * api, int which);
 Uint8 spiral_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 spiral_default_size(magic_api * api, int which, int mode);
-void spiral_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                     SDL_Rect * update_rect);
+void spiral_set_size(magic_api * api, int which, int mode,
+                     SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 void do_spiral(magic_api * api, int which, SDL_Surface * canvas,
                SDL_Surface * last, int x, int y, SDL_Rect * update_rect, int final);
@@ -324,12 +324,12 @@ void do_spiral(magic_api *api, int which, SDL_Surface *canvas,
     {
       api->line((void *)api, which, canvas, NULL,
                 spiral_cx - i, spiral_cy - i, spiral_cx + i, spiral_cy - i, 1, do_spiral_render);
-      api->line((void *)api, which, canvas, NULL,
-                spiral_cx + i, spiral_cy - i, spiral_cx + i, spiral_cy + i, 1, do_spiral_render);
-      api->line((void *)api, which, canvas, NULL,
-                spiral_cx + i, spiral_cy + i, spiral_cx - i, spiral_cy + i, 1, do_spiral_render);
-      api->line((void *)api, which, canvas, NULL,
-                spiral_cx - i, spiral_cy + i, spiral_cx - i, spiral_cy - i, 1, do_spiral_render);
+      api->line((void *)api, which, canvas, NULL, spiral_cx + i,
+                spiral_cy - i, spiral_cx + i, spiral_cy + i, 1, do_spiral_render);
+      api->line((void *)api, which, canvas, NULL, spiral_cx + i,
+                spiral_cy + i, spiral_cx - i, spiral_cy + i, 1, do_spiral_render);
+      api->line((void *)api, which, canvas, NULL, spiral_cx - i,
+                spiral_cy + i, spiral_cx - i, spiral_cy - i, 1, do_spiral_render);
     }
   }
 
@@ -349,8 +349,8 @@ void do_spiral(magic_api *api, int which, SDL_Surface *canvas,
 }
 
 void spiral_drag(magic_api *api, int which, SDL_Surface *canvas,
-                 SDL_Surface *last, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED, int x, int y,
-                 SDL_Rect *update_rect)
+                 SDL_Surface *last, int ox ATTRIBUTE_UNUSED,
+                 int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   spiral_has_dragged = 1;
   do_spiral(api, which, canvas, last, x, y, update_rect, 0);
@@ -389,9 +389,10 @@ void spiral_shutdown(magic_api *api ATTRIBUTE_UNUSED)
       Mix_FreeChunk(spiral_snd[i]);
 }
 
-void spiral_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
-                      SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void spiral_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+                      SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                      Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   spiral_color = SDL_MapRGB(canvas->format, r, g, b);
 }
@@ -427,8 +428,10 @@ Uint8 spiral_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
   return 4;
 }
 
-void spiral_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void spiral_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED,
                      Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   spiral_thickness = size;

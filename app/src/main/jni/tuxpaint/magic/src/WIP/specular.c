@@ -174,13 +174,13 @@ specular_release(magic_api *api, int which,
 {
 }
 
-void specular_set_color(magic_api *api, int which, SDL_Surface *canvas, SDL_Surface *snapshot, Uint8 r, Uint8 g,
-                        Uint8 b, SDL_Rect *update_rect)
+void specular_set_color(magic_api *api, int which, SDL_Surface *canvas,
+                        SDL_Surface *snapshot, Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect)
 {
 }
 
-void specular_set_size(magic_api *api, int which, int mode, SDL_Surface *canvas, SDL_Surface *snapshot, Uint8 size,
-                       SDL_Rect *update_rect)
+void specular_set_size(magic_api *api, int which, int mode,
+                       SDL_Surface *canvas, SDL_Surface *snapshot, Uint8 size, SDL_Rect *update_rect)
 {
   specular_size = size * 16;
 }

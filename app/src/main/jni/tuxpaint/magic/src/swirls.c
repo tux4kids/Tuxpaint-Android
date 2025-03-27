@@ -115,8 +115,8 @@ void swirls_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas
 double get_angle(int x, int y, int target_x, int target_y);
 Uint8 swirls_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 swirls_default_size(magic_api * api, int which, int mode);
-void swirls_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                     SDL_Rect * update_rect);
+void swirls_set_size(magic_api * api, int which, int mode,
+                     SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 swirls_api_version(void)
@@ -286,10 +286,11 @@ void swirls_release(magic_api *api, int which,
 }
 
 
-void swirls_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+void swirls_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED,
                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                      SDL_Surface *last ATTRIBUTE_UNUSED,
-                      Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+                      SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                      Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   swirl_fur_color_r = r;
   swirl_fur_color_g = g;
@@ -420,9 +421,10 @@ void swirls_switchin(magic_api *api ATTRIBUTE_UNUSED,
                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   if (swirls_snapshot == NULL)
-    swirls_snapshot = SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
-                                           canvas->format->BitsPerPixel, canvas->format->Rmask,
-                                           canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
+    swirls_snapshot =
+      SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
+                           canvas->format->BitsPerPixel,
+                           canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
   if (swirls_snapshot != NULL)
     SDL_BlitSurface(canvas, NULL, swirls_snapshot, NULL);
@@ -452,8 +454,10 @@ Uint8 swirls_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
   return 0;
 }
 
-void swirls_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void swirls_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED,
                      Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

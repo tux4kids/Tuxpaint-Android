@@ -278,9 +278,11 @@ int kalidescope_requires_colors(magic_api *api ATTRIBUTE_UNUSED, int which ATTRI
 }
 
 // Record the color from Tux Paint:
-void kalidescope_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                           SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
-                           Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void kalidescope_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                           int which ATTRIBUTE_UNUSED,
+                           SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                           SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r,
+                           Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   kalidescope_r = r;
   kalidescope_g = g;
@@ -299,9 +301,11 @@ Uint8 kalidescope_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIB
 }
 
 // Record the size from Tux Paint:
-void kalidescope_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                          SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                          Uint8 sz, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void kalidescope_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED,
+                          int mode ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                          SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 sz, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   kalidescope_sz = (sz * 2);
 }

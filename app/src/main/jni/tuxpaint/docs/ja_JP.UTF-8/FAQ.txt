@@ -1,11 +1,11 @@
                                    Tux Paint
-                               バージョン 0.9.34
+                               バージョン 0.9.35
                           Frequently Asked Questions
 
-       Copyright © 2002-2024 by various contributors; AUTHORS.txt 参照.
+       Copyright © 2002-2025 by various contributors; AUTHORS.txt 参照.
                              https://tuxpaint.org/
 
-                                 2024年7月17日
+                                 2025年1月23日
 
 +------------------------------+
 |             目次             |
@@ -36,9 +36,8 @@
 
     If you installed Tux Paint, but did not install the separate, optional
     "Stamps" collection, quit Tux Paint and install it now. It should be
-    available from the same place you got the main Tux Paint program. (Note: As
-    of version 0.9.14, Tux Paint comes with a small collection of example
-    stamps.)
+    available from the same place you got the main Tux Paint program. (Note:
+    Tux Paint ships with a very small collection of example stamps.)
 
     If you don't want to install the default collection of stamps, you can just
     create your own. See the "Extending Tux Paint" documentation for more on
@@ -159,13 +158,6 @@
     will need to specify an appropriate command using the "printcommand" option
     in Tux Paint's configuration file. (See the "Options Documentation".)
 
-    Note: Versions of Tux Paint prior to 0.9.15 used a different default
-    command for printing, "pngtopnm | pnmtops | lpr", as Tux Paint output PNG
-    format, rather than PostScript.
-
-    If you had changed your "printcommand" option prior to Tux Paint 0.9.15,
-    you will need to go back and alter it to accept PostScript.
-
 
      
 → I get the message "You can't print yet!" when I go to print ←
@@ -224,9 +216,19 @@
     "savedir" option), Tux Paint saves into a standard location on your local
     drive:
 
-    → Windows Windows 7, Windows 8, Windows 10, Windows 11 ←
+    → Windows Windows 8, Windows 10, Windows 11 ←
         In the user's "AppData" folder:
         e.g., "C:\Users\ユーザー名\AppData\Roaming\TuxPaint\saved\"
+
+        (Note: The "AppData" folder is hidden (not visible) by default. You can
+        enter the path manually in the location bar of your file browser (e.g.,
+        File Explorer).)
+
+        You can use the %APPDATA% variable as a shorthand, i.e. 
+        "%APPDATA%\Tuxpaint\Saved".
+
+        You can use the [⊞ (Windows)] + [R] key combination to bring up the Run
+        command window, and then type the path and hit [Enter / Return].
          
     → macOS ←
         In the user's "Application Support" folder:
@@ -235,6 +237,13 @@
     → Linux / Unix ←
         In the user's "home directory" folder:
         e.g., "/home/ユーザー名/.tuxpaint/saved/"
+
+        (Note: The ".tuxpaint" folder is hidden (not visible) by default. You
+        can enter the path manually in the location bar of your file browser
+        (e.g., GNOME Files or Dolphin).)
+
+        You can use the $HOME variable as a shorthand, i.e. 
+        "$HOME/.tuxpaint/saved".
          
     → Haiku ←
         In the user's "settings" folder:
@@ -378,7 +387,7 @@
           # Or use Tux Paint Config. and make sure "Enable Sound Effects"
             (under "Video & Sound") is not checked.
           # Alternatively, recompile Tux Paint with sound support disabled.
-            (See above, and the 'Install' documentation.
+            (See above, and the 'Install' documentation.)
 
      
 → The stereo panning of sound effects is bothersome; can sound effects be
@@ -658,6 +667,16 @@ black! ←
         --nosysconfig
 
 
+     
+→ I need to deploy Tux Paint on many Windows systems at once ←
+    The installers for both Tux Paint (plus Tux Paint Config.)
+    (tuxpaint-X.Y.Z-windows-ARCH-installer.exe) and Tux Paint Stamps
+    (tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe) accept the command-line
+    options "/SILENT" ("silent") or "/VERYSILENT" ("very silent") which can be
+    used to install and uninstall their component without use of an interactive
+    set-up window. This can be useful for automating installation on a
+    collection of PCs, for example using Microsoft Intune cloud-based endpoint
+    management solution (see https://learn.microsoft.com/mem/intune/).
      
 
 -------------------------------------------------------------------------------

@@ -1,12 +1,12 @@
                                    Tux Paint
-                                version 0.9.34
+                                version 0.9.35
 
                      ### Documentation sur les options ###
 
-       Copyright © 2002-2024 by divers contributeurs; voir AUTHORS.txt.
+       Copyright © 2002-2025 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                avril 29, 2024
+                               janvier 12, 2025
 
 +--------------------------------------------------------------------+
 |                         Table des matières                         |
@@ -334,15 +334,8 @@ section "Options de ligne de commande " ci-dessous.)
      
 → nobuttondistinction=yes ←
 
-    Avant Tux Paint 0.9.15, les boutons du milieu et de droite d'une souris
-    pouvaient également être utilisés pour cliquer. Dans la version 0.9.15,
-    cela a été modifié afin que seul le bouton gauche de la souris fonctionne,
-    pour de ne pas habituer les enfants à utiliser un mauvais bouton.
-
-    Cependant, pour les enfants qui ont des problèmes avec la souris, cette
-    distinction entre les deux ou trois boutons d'une souris peut être
-    désactivée (ramenant Tux Paint à son ancien comportement) grâce à cette
-    option.
+    For children who have trouble with the mouse, this distinction between the
+    two or three buttons on a mouse may be disabled by using this option.
 
     ⚙ Note : si utilisé dans un fichier de configuration pour tout le monde, il
     peut être remplacé par le fichier de configuration de l'utilisateur en
@@ -1073,13 +1066,6 @@ section "Options de ligne de commande " ci-dessous.)
         option n'est pas spécifiquement définie, la commande par défaut est :
 
             lpr
-
-        📜 Remarque : les versions de Tux Paint antérieures à 0.9.15 envoyaient
-        des données au format PNG à la commande d'impression (qui par défaut
-        était "pngtopnm | pnmtops | lpr").
-
-        Si vous définissez une autre commande printcommand dans le fichier de
-        configuration avant la version 0.9.15, vous devrez la modifier.
 
 
          

@@ -141,8 +141,8 @@ void fade_darken_switchout(magic_api * api, int which, int mode, SDL_Surface * c
 int fade_darken_modes(magic_api * api, int which);
 Uint8 fade_darken_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 fade_darken_default_size(magic_api * api, int which, int mode);
-void fade_darken_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                          SDL_Rect * update_rect);
+void fade_darken_set_size(magic_api * api, int which, int mode,
+                          SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 int fade_darken_init(magic_api *api, Uint8 disabled_features ATTRIBUTE_UNUSED, Uint8 complexity_level ATTRIBUTE_UNUSED)
@@ -366,9 +366,10 @@ void fade_darken_shutdown(magic_api *api ATTRIBUTE_UNUSED)
     Mix_FreeChunk(snd_effects[1]);
 }
 
-void fade_darken_set_color(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                           SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                           SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void fade_darken_set_color(magic_api *api, int which ATTRIBUTE_UNUSED,
+                           SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                           SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r,
+                           Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   float tmp;
 
@@ -413,9 +414,11 @@ Uint8 fade_darken_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIB
   return 4;
 }
 
-void fade_darken_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                          SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                          SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void fade_darken_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                          int which ATTRIBUTE_UNUSED,
+                          int mode ATTRIBUTE_UNUSED,
+                          SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                          SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   fade_darken_radius = size * 4;
 }

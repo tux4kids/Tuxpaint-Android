@@ -98,8 +98,10 @@ void colorsep_switchin(magic_api * api, int which, int mode, SDL_Surface * canva
 void colorsep_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 Uint8 colorsep_accepted_sizes(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED);
 Uint8 colorsep_default_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED);
-void colorsep_set_size(magic_api * api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface * canvas ATTRIBUTE_UNUSED, SDL_Surface * last ATTRIBUTE_UNUSED,
+void colorsep_set_size(magic_api * api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface * canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface * last ATTRIBUTE_UNUSED,
                        Uint8 size ATTRIBUTE_UNUSED, SDL_Rect * update_rect ATTRIBUTE_UNUSED);
 
 
@@ -206,8 +208,8 @@ colorsep_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
 
 void
 colorsep_drag(magic_api *api, int which, SDL_Surface *canvas,
-              SDL_Surface *snapshot, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
-              int x, int y, SDL_Rect *update_rect)
+              SDL_Surface *snapshot, int ox ATTRIBUTE_UNUSED,
+              int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   int offset_x, offset_y;
 
@@ -375,10 +377,11 @@ void colorsep_release(magic_api *api, int which,
 }
 
 
-void colorsep_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+void colorsep_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED,
                         SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                        SDL_Surface *last ATTRIBUTE_UNUSED,
-                        Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+                        SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                        Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   colorsep_r_pct = (float)r / 255.0;
   colorsep_g_pct = (float)g / 255.0;
@@ -425,9 +428,10 @@ Uint8 colorsep_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE
 }
 
 
-void colorsep_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
-                       Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void colorsep_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   colorsep_3dglass_variation = (size - 1);
 }

@@ -73,8 +73,8 @@ void tessell_switchout(magic_api * api, int which, int mode, SDL_Surface * canva
 int tessell_modes(magic_api * api, int which);
 Uint8 tessell_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 tessell_default_size(magic_api * api, int which, int mode);
-void tessell_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                      SDL_Rect * update_rect);
+void tessell_set_size(magic_api * api, int which, int mode,
+                      SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 tessell_api_version(void)
@@ -193,10 +193,11 @@ void tessell_click(magic_api *api, int which, int mode ATTRIBUTE_UNUSED,
   tessell_drag(api, which, canvas, last, x, y, x, y, update_rect);
 }
 
-void tessell_release(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+void tessell_release(magic_api *api ATTRIBUTE_UNUSED,
+                     int which ATTRIBUTE_UNUSED,
                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                     SDL_Surface *last ATTRIBUTE_UNUSED, int x ATTRIBUTE_UNUSED,
-                     int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+                     SDL_Surface *last ATTRIBUTE_UNUSED,
+                     int x ATTRIBUTE_UNUSED, int y ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -206,8 +207,10 @@ void tessell_shutdown(magic_api *api ATTRIBUTE_UNUSED)
     Mix_FreeChunk(tessell_snd);
 }
 
-void tessell_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
-                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+void tessell_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
                        Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   tessell_color = SDL_MapRGB(canvas->format, r, g, b);
@@ -260,8 +263,10 @@ Uint8 tessell_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_
   return 2;
 }
 
-void tessell_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                      SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void tessell_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                      int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *last ATTRIBUTE_UNUSED,
                       Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   tessell_radius = size;

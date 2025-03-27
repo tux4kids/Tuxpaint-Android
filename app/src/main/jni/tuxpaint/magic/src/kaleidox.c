@@ -75,8 +75,8 @@ void kaleidox_switchout(magic_api * api, int which, int mode, SDL_Surface * canv
 int mirror(int n, int max, int flip);
 Uint8 kaleidox_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 kaleidox_default_size(magic_api * api, int which, int mode);
-void kaleidox_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                       SDL_Rect * update_rect);
+void kaleidox_set_size(magic_api * api, int which, int mode,
+                       SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 kaleidox_api_version(void)
@@ -194,8 +194,8 @@ int mirror(int n, int max, int flip)
 
 void
 kaleidox_drag(magic_api *api, int which, SDL_Surface *canvas,
-              SDL_Surface *snapshot, int ox ATTRIBUTE_UNUSED, int oy ATTRIBUTE_UNUSED,
-              int x, int y, SDL_Rect *update_rect)
+              SDL_Surface *snapshot, int ox ATTRIBUTE_UNUSED,
+              int oy ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   if (snd_effects[which] != NULL)
   {
@@ -319,11 +319,12 @@ void kaleidox_release(magic_api *api, int which,
 }
 
 
-void kaleidox_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED,
+void kaleidox_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED,
                         SDL_Surface *canvas ATTRIBUTE_UNUSED,
                         SDL_Surface *last ATTRIBUTE_UNUSED,
-                        Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED, Uint8 b ATTRIBUTE_UNUSED,
-                        SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+                        Uint8 r ATTRIBUTE_UNUSED, Uint8 g ATTRIBUTE_UNUSED,
+                        Uint8 b ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
@@ -351,8 +352,10 @@ Uint8 kaleidox_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE
   return 0;
 }
 
-void kaleidox_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void kaleidox_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface *last ATTRIBUTE_UNUSED,
                        Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

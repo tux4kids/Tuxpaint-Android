@@ -1,11 +1,11 @@
                                    Tux Paint
-                                version 0.9.34
+                                version 0.9.35
                              Pyetje të Bëra Rëndom
 
- Të drejta kopjimi © 2002-2024 nga kontribues të ndryshëm; shihni AUTHORS.txt.
+ Të drejta kopjimi © 2002-2025 nga kontribues të ndryshëm; shihni AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                17 korrik 2024
+                                 23 janar 2025
 
 +-------------------------------------------+
 |             Pasqyrë e Lëndës              |
@@ -34,11 +34,10 @@
     Kjo do të thotë se Tux Paint-i ose s’gjeti ndonjë figurë stampë, ose iu
     kërkua të mos i ngarkojë.
 
-    Nëse e instaluat Tux Paint-in, por nuk instaluat koleksionin më vete,
-    opsional, të “Stampave”, mbylleni Tux Paint-in dhe instalojeni tani. Duhet
-    të gjendet te i njëjti vend ku morët programin kryesor Tux Paint. (Shënim:
-    Që me versionin 0.9.14, Tux Paint-i vjen me një koleksion të vockël
-    stampash shembuj.)
+    If you installed Tux Paint, but did not install the separate, optional
+    "Stamps" collection, quit Tux Paint and install it now. It should be
+    available from the same place you got the main Tux Paint program. (Note:
+    Tux Paint ships with a very small collection of example stamps.)
 
     Nëse s’doni të instaloni koleksionin parazgjedhje të stampave, mund të
     krijoni tuajin. Shihni dokumentimin “Zgjerim i Tux Paint-it”, për më tepër
@@ -168,13 +167,6 @@ Linux) ←
     formësimit të Tux Paint-it mundësinë “printcommand”. (Shihni “Dokumentim
     Mundësish”.)
 
-    Shënim: Versione të Tux Paint-it para 0.9.15-s përdornin për shtypjen një
-    tjetër urdhër parazgjedhje, “pngtopnm | pnmtops | lpr”, ngaqë Tux Paint-it
-    prodhonte format PNG, në vend se PostScript.
-
-    Nëse e keni ndryshuar “printcommand” tuaj para Tux Paint 0.9.15-s, do t’ju
-    duhet të riktheheni dhe ta ndryshoni që të pranojë PostScript.
-
 
      
 → Më del mesazhi “S’mund të shtypni ende!”, kur bëhem gati të shtyp ←
@@ -238,9 +230,19 @@ Linux) ←
     caktuar (duke përdorur mundësinë “savedir”), Tux Paint-i i ruan te një
     vendndodhje standarde në diskun tuaj vendor:
 
-    → Windows Windows 7, Windows 8, Windows 10, Windows 11 ←
+    → Windows Windows 8, Windows 10, Windows 11 ←
         In the user's "AppData" folder:
         e.g., "C:\Users\emër përdoruesi\AppData\Roaming\TuxPaint\saved\"
+
+        (Note: The "AppData" folder is hidden (not visible) by default. You can
+        enter the path manually in the location bar of your file browser (e.g.,
+        File Explorer).)
+
+        You can use the %APPDATA% variable as a shorthand, i.e. 
+        "%APPDATA%\Tuxpaint\Saved".
+
+        You can use the [⊞ (Windows)] + [R] key combination to bring up the Run
+        command window, and then type the path and hit [Enter / Return].
          
     → macOS ←
         In the user's "Application Support" folder:
@@ -250,6 +252,13 @@ Linux) ←
     → Linux / Unix ←
         In the user's "home directory" folder:
         e.g., "/home/emër përdoruesi/.tuxpaint/saved/"
+
+        (Note: The ".tuxpaint" folder is hidden (not visible) by default. You
+        can enter the path manually in the location bar of your file browser
+        (e.g., GNOME Files or Dolphin).)
+
+        You can use the $HOME variable as a shorthand, i.e. 
+        "$HOME/.tuxpaint/saved".
          
     → Haiku ←
         In the user's "settings" folder:
@@ -397,7 +406,7 @@ Linux) ←
           # Ose përdorni Tux Paint Config. dhe sigurohuni se “Aktivizoni Efekte
             Zanore” (nën “Video & Tingull”) s’ka shenjë.
           # Alternatively, recompile Tux Paint with sound support disabled.
-            (See above, and the 'Install' documentation.
+            (See above, and the 'Install' documentation.)
 
      
 → The stereo panning of sound effects is bothersome; can sound effects be
@@ -681,6 +690,16 @@ turns black! ←
         --nosysconfig
 
 
+     
+→ I need to deploy Tux Paint on many Windows systems at once ←
+    The installers for both Tux Paint (plus Tux Paint Config.)
+    (tuxpaint-X.Y.Z-windows-ARCH-installer.exe) and Tux Paint Stamps
+    (tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe) accept the command-line
+    options "/SILENT" ("silent") or "/VERYSILENT" ("very silent") which can be
+    used to install and uninstall their component without use of an interactive
+    set-up window. This can be useful for automating installation on a
+    collection of PCs, for example using Microsoft Intune cloud-based endpoint
+    management solution (see https://learn.microsoft.com/mem/intune/).
      
 
 -------------------------------------------------------------------------------

@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            バージョン 0.9.34          </h1>
+            バージョン 0.9.35          </h1>
 
           <h2>
             各種設定について          </h2>
 
           <p>
-            Copyright &copy; 2002-2024 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
+            Copyright &copy; 2002-2025 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            2024年4月29日          </p>
+            2025年1月12日          </p>
         </center>
       </header>
 
@@ -169,7 +169,7 @@
           </header>
 
           <p>
-            <nobr><code style='background: #EEE;'>/home/ユーザー名/.tuxpaintrc</code></nobr>          </p>
+            <nobr><code style='background: #EEE;'>/home/<i>ユーザー名</i>/.tuxpaintrc</code></nobr>          </p>
         </div>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
@@ -216,7 +216,7 @@
         </header>
 
         <p>
-          <nobr><code style='background: #EEE;'>C:\Users\ユーザー名\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
+          <nobr><code style='background: #EEE;'>C:\Users\<i>ユーザー名</i>\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
 
         <p>
           設定ファイルはメモ帳やワードパッドで作成できますが、必ずテキストファイルとして保存するよう注意して下さい。また、ファイル名に ".txt" という拡張子をつけないようにします。        </p>
@@ -519,10 +519,7 @@
 
     <dd>
       <p>
-        Tux Paint 0.9.15 以前では、マウスの中ボタンと右ボタンでもクリックが可能でしたが、バージョン0.9.15からは、子供たちが間違ったボタン押さないように、マウスの左ボタンだけが使えるように変更しました。      </p>
-
-      <p>
-        マウス操作が苦手なお子さんの場合、このオプションを使用することで、マウスの2つまたは3つのボタンの区別を無効にすることができます。      </p>
+        For children who have trouble with the mouse, this distinction between the two or three buttons on a mouse may be disabled by using this option.      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>注:</strong> システム全体の設定ファイルで設定されている場合は、ユーザーの設定ファイルで "<code>nobuttondistinction=no</code>" または "<code>buttondistinction=yes</code>" を設定すると上書きされることがあります。また、どちらの設定も、コマンドラインオプションの "<code>--buttondistinction</code>" で変更できます。      </p>
     </dd>
@@ -1637,12 +1634,6 @@
       <blockquote>
         <code>lpr</code>
       </blockquote>
-
-      <p class="note">
-        <span title="Version variation">&#128220;</span>        <b>注:</b> バージョン 0.9.15 より前までは、印刷コマンド（標準では "<code>pngtopnm | pnmtops | lpr</code>"）に PNG 形式のデータを送信していました。      </p>
-
-      <p>
-        このため、バージョン 0.9.15 以前で <code><b>printcommand</b></code> を lpr 以外に設定していた場合は、この設定を変更する必要があります。      </p>
     </dd>
 
     <dt>
@@ -1785,11 +1776,11 @@
         <dt>Linux / Unix</dt>
         <dd>
           各ユーザーのホームディレクトリ以下の隠しディレクトリ:<br/>
-          <nobr><code style='background: #EEE;'>/home/ユーザー名/.tuxpaint/saved/</code></nobr>        </dd>
+          <nobr><code style='background: #EEE;'>/home/<i>ユーザー名</i>/.tuxpaint/saved/</code></nobr>        </dd>
 
         <dt>Windows</dt>
         <dd>
-          <nobr><code style='background: #EEE;'>C:\Users\ユーザー名\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
+          <nobr><code style='background: #EEE;'>C:\Users\<i>ユーザー名</i>\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
 
         <dt>macOS</dt>
         <dd>
@@ -1823,7 +1814,7 @@
 
       <ul>
         <li>Linux および Unix — XDG (X Desktop Group) 標準に基づく設定が利用可能な場合、個々のデスクトップ環境において画像保存用として設定されているディレクトリ（"<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" コマンドで確認できます）<br>
-          英語環境では一般的にユーザーのホームディレクトリ以下の "<code>Pictures</code>" ディレクトリ（<nobr>"<code style='background: #EEE;'>/home/ユーザー名/Pictures</code>"</nobr>）になります。（日本語環境では "画像"）<br>
+          英語環境では一般的にユーザーのホームディレクトリ以下の "<code>Pictures</code>" ディレクトリ（<nobr>"<code style='background: #EEE;'>/home/<i>ユーザー名</i>/Pictures</code>"</nobr>）になります。（日本語環境では "画像"）<br>
           XDGの設定が読み取れない場合や、"<code>XDG_PICTURES_DIR</code> "に何も設定されていない場合は、上記の一般的なディレクトリを使用します。        </li>
         <li>Windows — 各ユーザーの "<nobr>"<code style='background: #EEE;'>My Pictures</code>"</nobr>" ディレクトリ（通常は <nobr>"<code style='background: #EEE;'>C:\Users\ユーザー名\My Pictures</code>"</nobr>）。<br>また、次のようにして、フォルダを直接開くこともできます:          <ul>
             <li>"[Windows]+[R]" キーを押して "ファイル名を指定して実行" ダイアログを開く。</li>
@@ -1836,11 +1827,11 @@
       </ul>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>注:</strong> 標準では、サブディレクトリ "<code>TuxPaint</code>" が作成されます。（例: "<nobr>"<code style='background: #EEE;'>/home/ユーザー名/Pictures/TuxPaint</code>"</nobr>"）一方、"<code>--exportdir</code>" オプションを用いると、指定されたパスがそのまま使用されます（サブディレクトリ "<code>TuxPaint</code>" は作成されません）。      </p>
+        <span title="Information">&#128161;</span>        <strong>注:</strong> 標準では、サブディレクトリ "<code>TuxPaint</code>" が作成されます。（例: "<nobr>"<code style='background: #EEE;'>/home/<i>ユーザー名</i>/Pictures/TuxPaint</code>"</nobr>"）一方、"<code>--exportdir</code>" オプションを用いると、指定されたパスがそのまま使用されます（サブディレクトリ "<code>TuxPaint</code>" は作成されません）。      </p>
       <p>
-        ディレクトリ（例: <nobr>"<code style='background: #EEE;'>/home/ユーザー名/Pictures/TuxPaint</code>"</nobr>）が存在しない場合は新たに作成されます。      </p>
+        ディレクトリ（例: <nobr>"<code style='background: #EEE;'>/home/<i>ユーザー名</i>/Pictures/TuxPaint</code>"</nobr>）が存在しない場合は新たに作成されます。      </p>
       <p>
-        一つ上の<em>親ディレクトリ</em>（例: <nobr>"<code style='background: #EEE;'>/home/ユーザー名/Pictures</code>"</nobr>）が存在しない場合もディレクトリの作成を試みますが、それ以上の階層のディレクトリを作成することはありません。      </p>
+        一つ上の<em>親ディレクトリ</em>（例: <nobr>"<code style='background: #EEE;'>/home/<i>ユーザー名</i>/Pictures</code>"</nobr>）が存在しない場合もディレクトリの作成を試みますが、それ以上の階層のディレクトリを作成することはありません。      </p>
 
       <p>
         例: <code>exportdir=/home/penguin/TuxPaintExports</code>      </p>
@@ -1944,10 +1935,10 @@
 
       <dl>
         <dt>Linux / Unix</dt>
-        <dd><nobr><code style='background: #EEE;'>/home/ユーザー名/.tuxpaint/</code></nobr></dd>
+        <dd><nobr><code style='background: #EEE;'>/home/<i>ユーザー名</i>/.tuxpaint/</code></nobr></dd>
 
         <dt>Windows</dt>
-        <dd><nobr><code style='background: #EEE;'>C:\Users\ユーザー名\AppData\Roaming\TuxPaint\</code></nobr></dd>
+        <dd><nobr><code style='background: #EEE;'>C:\Users\<i>ユーザー名</i>\AppData\Roaming\TuxPaint\</code></nobr></dd>
 
         <dt>macoS</dt>
         <dd><nobr><code style='background: #EEE;'>/Users/<i>ユーザー名</i>/Library/Application Support/TuxPaint/</code></nobr></dd>
@@ -2373,7 +2364,7 @@
       </header>
 
       <p>
-        上記のオプションがシステム全体の設定ファイル（例: Linuxの場合 <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr>）で設定されている場合、個人用の設定ファイル（例: <nobr>"<code style='background: #EEE;'>/home/ユーザー名/.tuxpaintrc</code>"</nobr>）で上書きすることができます。      </p>
+        上記のオプションがシステム全体の設定ファイル（例: Linuxの場合 <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr>）で設定されている場合、個人用の設定ファイル（例: <nobr>"<code style='background: #EEE;'>/home/<i>ユーザー名</i>/.tuxpaintrc</code>"</nobr>）で上書きすることができます。      </p>
 
       <p>
         "<code>noprint</code>" や "<code>grab</code>" のような、Yes か No のオプションの場合は、個人用設定ファイルで 'no' と指定するだけで大丈夫です。      </p>
@@ -2550,7 +2541,7 @@
             これにより、システム全体の設定ファイル（例: Linuxでは <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr>）が読み込まれなくなります。          </p>
 
           <p>
-            ユーザーごとの設定ファイル（例: Linux では <nobr>"<code style='background: #EEE;'>/home/ユーザー名/.tuxpaintrc</code>"</nobr>）が存在すれば、このファイルのみから設定を読み込みます。          </p>
+            ユーザーごとの設定ファイル（例: Linux では <nobr>"<code style='background: #EEE;'>/home/<i>ユーザー名</i>/.tuxpaintrc</code>"</nobr>）が存在すれば、このファイルのみから設定を読み込みます。          </p>
         </dd>
       </dl>
 

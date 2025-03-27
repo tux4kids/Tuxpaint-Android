@@ -1,11 +1,11 @@
                                    Tux Paint
-                                version 0.9.34
+                                version 0.9.35
                        Documentation sur l'installation
 
-       Copyright © 2002-2024 by divers contributeurs; voir AUTHORS.txt.
+       Copyright © 2002-2025 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                                avril 29, 2024
+                               janvier 23, 2025
 
 +-------------------------------------------------------+
 |                  Table des matières                   |
@@ -88,9 +88,9 @@ installées, soit facilement disponibles avec votre distribution Linux.
      
 → libpaper (Linux/Unix uniquement) ←
 
-    Depuis Tux Paint 0.9.17, Tux Paint peut déterminer le format de papier par
-    défaut (par exemple, A4 ou Lettre), ou peut être invité à utiliser un
-    format particulier, ceci grâce à libpaper.
+    Tux Paint can determine your system's default paper size (e.g., A4 or
+    Letter), or can be told to use a particular paper size, thanks to
+    "libpaper".
 
     https://github.com/naota/libpaper
 
@@ -107,10 +107,9 @@ installées, soit facilement disponibles avec votre distribution Linux.
      
 → Support des graphismes SVG ←
 
-    À partir de Tux Paint 0.9.17, Tux Paint peut prendre en charge les images
-    SVG (Scalable Vector Graphics) pour les tampons. Deux ensembles de
-    bibliothèques sont pris en charge et le support SVG peut être complètement
-    désactivé (via "make SVG_LIB:==")
+    Tux Paint can load SVG (Scalable Vector Graphics) images as stamps. Two
+    sets of libraries are supported, and SVG support can be completely disabled
+    (via "make SVG_LIB:=")
 
     → librsvg-2 & libCairo2 (nouvelles bibliothèques) ←
           @ libRSVG 2: http://librsvg.sourceforge.net/
@@ -163,8 +162,7 @@ juillet 10, 2022 Shin-ichi TOYAMA <dolphin6k@wmail.plala.or.jp>
 
 ## Réglages pour compilation ##
 
-Depuis février 2005 (à partir de Tux Paint 0.9.15), le "Makefile" inclut la
-prise en charge de la construction sur un système Windows à l'aide de MinGW/
+The "Makefile" includes support for building on a Windows system using MinGW/
 MSYS (https://sourceforge.net/projects/msys2/).
 
 Beaucoup d'outils et de bibliothèques sont nécessaires pour élaborer Tux Paint.
@@ -450,6 +448,15 @@ choisissez un autre emplacement.
 
 À ce stade, vous pouvez cliquer sur «Installer» pour installer Tux Paint !
 
+💡 The installers for both Tux Paint (plus Tux Paint Config.)
+(tuxpaint-X.Y.Z-windows-ARCH-installer.exe) and Tux Paint Stamps
+(tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe) accept the command-line
+options "/SILENT" ("silent") or "/VERYSILENT" ("very silent") which can be used
+to install and uninstall their component without use of an interactive set-up
+window. This can be useful for automating installation on a collection of PCs,
+for example using Microsoft Intune cloud-based endpoint management solution
+(see https://learn.microsoft.com/mem/intune/).
+
 ## Modification des paramètres à l'aide du raccourci ##
 
 Pour modifier les paramètres du programme, cliquez avec le bouton droit sur le
@@ -673,6 +680,8 @@ TuxPaint.dmg.
 
     $ git clone https://github.com/markuskimius/SDL2_Pango.git
     $ cd SDL2_Pango
+    $ export MACOSX_DEPLOYMENT_TARGET=11.0 # on Apple Silicon CPU; use "10.10"
+    on Intel CPU
     $ ./configure --prefix=/opt/local && make && sudo make install
 
 ATTENTION :Posséder des outils Unix à côté de MacPorts et Xcode, tels que Fink

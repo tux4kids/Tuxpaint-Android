@@ -92,20 +92,17 @@ void polyfill_shutdown(magic_api * api);
 void
 polyfill_click(magic_api * api, int which, int mode,
                SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
-void
-polyfill_drag(magic_api * api, int which,
-              SDL_Surface * canvas, SDL_Surface * snapshot, int old_x, int old_y, int x, int y, SDL_Rect * update_rect);
-void
-polyfill_release(magic_api * api, int which,
-                 SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
-void polyfill_set_color(magic_api * api, int which, SDL_Surface * canvas, SDL_Surface * snapshot, Uint8 r, Uint8 g,
-                        Uint8 b, SDL_Rect * update_rect);
-void polyfill_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * snapshot, Uint8 size,
-                       SDL_Rect * update_rect);
+void polyfill_drag(magic_api * api, int which, SDL_Surface * canvas,
+                   SDL_Surface * snapshot, int old_x, int old_y, int x, int y, SDL_Rect * update_rect);
+void polyfill_release(magic_api * api, int which, SDL_Surface * canvas,
+                      SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
+void polyfill_set_color(magic_api * api, int which, SDL_Surface * canvas,
+                        SDL_Surface * snapshot, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect);
+void polyfill_set_size(magic_api * api, int which, int mode,
+                       SDL_Surface * canvas, SDL_Surface * snapshot, Uint8 size, SDL_Rect * update_rect);
 void polyfill_line_callback(void *pointer, int which, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
-void
-polyfill_release(magic_api * api, int which,
-                 SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
+void polyfill_release(magic_api * api, int which, SDL_Surface * canvas,
+                      SDL_Surface * snapshot, int x, int y, SDL_Rect * update_rect);
 void polyfill_switchin(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void polyfill_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 void polyfill_draw_preview(magic_api * api, SDL_Surface * canvas, int show_handles);
@@ -218,8 +215,9 @@ void polyfill_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 void
-polyfill_click(magic_api *api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-               SDL_Surface *canvas, SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
+polyfill_click(magic_api *api, int which ATTRIBUTE_UNUSED,
+               int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+               SDL_Surface *snapshot, int x, int y, SDL_Rect *update_rect)
 {
   int i;
 
@@ -285,8 +283,8 @@ polyfill_click(magic_api *api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UN
 
 void
 polyfill_drag(magic_api *api, int which ATTRIBUTE_UNUSED,
-              SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int old_x ATTRIBUTE_UNUSED,
-              int old_y ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
+              SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+              int old_x ATTRIBUTE_UNUSED, int old_y ATTRIBUTE_UNUSED, int x, int y, SDL_Rect *update_rect)
 {
   polyfill_dragged = 1;
 
@@ -383,8 +381,8 @@ void polyfill_draw_preview(magic_api *api, SDL_Surface *canvas, int show_handles
 
 void
 polyfill_release(magic_api *api, int which ATTRIBUTE_UNUSED,
-                 SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y,
-                 SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+                 SDL_Surface *canvas, SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+                 int x, int y, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   int i;
 
@@ -448,7 +446,9 @@ polyfill_release(magic_api *api, int which ATTRIBUTE_UNUSED,
     SDL_BlitSurface(canvas, NULL, polyfill_snapshot, NULL);
 
     /* Play "finish" sound effect */
-    api->playsound(snd_effects[SND_FINISH], 128 /* TODO could be clever and determine midpoint of polygon */ , 255);
+    api->playsound(snd_effects[SND_FINISH], 128
+                   /* TODO could be clever and determine midpoint of polygon */
+                   , 255);
 
 #ifdef DEBUG
     printf("Retract the undo we just took (ahead of finishing polygon)!\n");
@@ -518,7 +518,8 @@ polyfill_release(magic_api *api, int which ATTRIBUTE_UNUSED,
   }
 }
 
-void polyfill_set_color(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+void polyfill_set_color(magic_api *api, int which ATTRIBUTE_UNUSED,
+                        SDL_Surface *canvas,
                         SDL_Surface *snapshot ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b, SDL_Rect *update_rect)
 {
   polyfill_color = SDL_MapRGB(canvas->format, r, g, b);
@@ -533,14 +534,17 @@ void polyfill_set_color(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface 
   }
 }
 
-void polyfill_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *snapshot ATTRIBUTE_UNUSED,
+void polyfill_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                       SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                       SDL_Surface *snapshot ATTRIBUTE_UNUSED,
                        Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }
 
 
-void polyfill_line_callback(void *pointer ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
+void polyfill_line_callback(void *pointer ATTRIBUTE_UNUSED,
+                            int which ATTRIBUTE_UNUSED, SDL_Surface *canvas,
                             SDL_Surface *snapshot ATTRIBUTE_UNUSED, int x, int y)
 {
   SDL_Rect dest;
@@ -554,17 +558,18 @@ void polyfill_line_callback(void *pointer ATTRIBUTE_UNUSED, int which ATTRIBUTE_
 }
 
 
-void polyfill_switchin(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                       SDL_Surface *canvas)
+void polyfill_switchin(magic_api *api ATTRIBUTE_UNUSED,
+                       int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   polyfill_color_red = SDL_MapRGB(canvas->format, 255, 0, 0);
   polyfill_color_green = SDL_MapRGB(canvas->format, 0, 255, 0);
 
   if (polyfill_snapshot == NULL)
   {
-    polyfill_snapshot = SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
-                                             canvas->format->BitsPerPixel, canvas->format->Rmask,
-                                             canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
+    polyfill_snapshot =
+      SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
+                           canvas->format->BitsPerPixel,
+                           canvas->format->Rmask, canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
   }
 
   if (polyfill_snapshot != NULL)
@@ -575,8 +580,8 @@ void polyfill_switchin(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUS
   polyfill_active = 1;
 }
 
-void polyfill_switchout(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                        SDL_Surface *canvas)
+void polyfill_switchout(magic_api *api ATTRIBUTE_UNUSED,
+                        int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED, SDL_Surface *canvas)
 {
   if (polyfill_num_pts > 0)
   {

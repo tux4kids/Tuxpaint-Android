@@ -103,8 +103,8 @@ void flower_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas
 int flower_modes(magic_api * api, int which);
 Uint8 flower_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 flower_default_size(magic_api * api, int which, int mode);
-void flower_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                     SDL_Rect * update_rect);
+void flower_set_size(magic_api * api, int which, int mode,
+                     SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 
@@ -435,8 +435,8 @@ static void flower_drawstalk(magic_api *api ATTRIBUTE_UNUSED,
 
     /* When we're done (final render), we can add some random leaves: */
 
-    if (final && i > flower_petals->h && i < n_points - flower_base->h && (i % (flower_leaf->h / 2)) == 0
-        && (rand() % 5) > 0)
+    if (final && i > flower_petals->h && i < n_points - flower_base->h
+        && (i % (flower_leaf->h / 2)) == 0 && (rand() % 5) > 0)
     {
       int cx, cy;
 
@@ -567,9 +567,10 @@ void flower_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void flower_set_color(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                      SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                      SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void flower_set_color(magic_api *api, int which ATTRIBUTE_UNUSED,
+                      SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                      SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                      Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   flower_r = r;
   flower_g = g;
@@ -720,9 +721,10 @@ Uint8 flower_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_U
   return DEFAULT_SIZE;
 }
 
-void flower_set_size(magic_api *api, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                     SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void flower_set_size(magic_api *api, int which ATTRIBUTE_UNUSED,
+                     int mode ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   int scale, width, height;
 

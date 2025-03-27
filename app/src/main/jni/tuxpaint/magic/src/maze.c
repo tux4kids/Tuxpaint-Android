@@ -72,8 +72,8 @@ int check_arrays(void);
 void maze_collapse_contiguous(SDL_Surface * canvas);
 Uint8 maze_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 maze_default_size(magic_api * api, int which, int mode);
-void maze_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                   SDL_Rect * update_rect);
+void maze_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
+                   SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 maze_api_version(void)
@@ -359,9 +359,11 @@ void maze_render(magic_api *api, SDL_Surface *canvas)
 }
 
 
-void maze_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                    SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void maze_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                    Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   maze_r = r;
   maze_g = g;
@@ -468,7 +470,8 @@ void maze_switchin(magic_api *api ATTRIBUTE_UNUSED,
 
   if (maze_snapshot == NULL)
     maze_snapshot = SDL_CreateRGBSurface(SDL_SWSURFACE, canvas->w, canvas->h,
-                                         canvas->format->BitsPerPixel, canvas->format->Rmask,
+                                         canvas->format->BitsPerPixel,
+                                         canvas->format->Rmask,
                                          canvas->format->Gmask, canvas->format->Bmask, canvas->format->Amask);
 
   if (maze_snapshot != NULL)
@@ -588,8 +591,10 @@ Uint8 maze_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
   return 0;
 }
 
-void maze_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void maze_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                   SDL_Surface *last ATTRIBUTE_UNUSED,
                    Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

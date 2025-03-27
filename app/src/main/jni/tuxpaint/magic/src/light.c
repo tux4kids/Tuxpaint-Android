@@ -67,8 +67,8 @@ void light_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas)
 int light_modes(magic_api * api, int which);
 Uint8 light_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 light_default_size(magic_api * api, int which, int mode);
-void light_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                    SDL_Rect * update_rect);
+void light_set_size(magic_api * api, int which, int mode,
+                    SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 
 Uint32 light_api_version(void)
@@ -247,9 +247,10 @@ void light_shutdown(magic_api *api ATTRIBUTE_UNUSED)
 }
 
 // Record the color from Tux Paint:
-void light_set_color(magic_api *api, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                     SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                     SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void light_set_color(magic_api *api, int which ATTRIBUTE_UNUSED,
+                     SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                     SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                     Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   api->rgbtohsv(r, g, b, &light_h, &light_s, &light_v);
 }
@@ -286,9 +287,10 @@ Uint8 light_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UN
   return 2;
 }
 
-void light_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                    SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size,
-                    SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void light_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 size, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   light_radius = size * 4;
 }

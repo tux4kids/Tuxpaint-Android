@@ -599,6 +599,28 @@ char *GetSystemFontDir(void)
 }
 
 /**
+ *
+ * Returns heap string containing user font directory.
+ * (e.g. 'C:\Users\<username>\AppData\Local\Microsoft\Windows\Fonts')
+ *
+ * @return user font dir
+ */
+char *GetUserFontDir(void)
+{
+  char path[MAX_PATH];
+  const char *key = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders";
+  const char *option = "Local AppData";
+  HRESULT hr = S_OK;
+
+  if (SUCCEEDED(hr = ReadRegistry(key, option, path, sizeof(path))))
+  {
+    strcat(path, "\\Microsoft\\Windows\\Fonts");
+    return strdup(path);
+  }
+  return NULL;
+}
+
+/**
  * 
  * Returns heap string containing user's image directory.
  *

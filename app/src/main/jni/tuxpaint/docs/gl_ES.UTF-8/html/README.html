@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            versión 0.9.34          </h1>
+            versión 0.9.35          </h1>
 
           <h3 align="center">
             Un sinxelo programa de debuxo para cativos          </h3>
 
           <p>
-            Copyright &copy; 2002-2024 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br/>
+            Copyright &copy; 2002-2025 by varios colaboradores; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br/>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            25 de Outubro de 2024          </p>
+            24 de Marzo de 2025          </p>
         </center>
       </header>
       <table border="2"
@@ -224,63 +224,24 @@
   <section class="indent">
     <header>
       <h2>
-        D. What's New in Tux Paint version 0.9.34?      </h2>
+        D. What's New in Tux Paint version 0.9.35?      </h2>
     </header>
 
     <dl>
-  <dt>"Eraser" Fill mode</dt>
-  <dd>A flood fill option that fills the canvas with the background color, or template or starter background, upon which the drawing was based.</dd>
+  <dt>Improved color picker</dt>
+  <dd>Better behavior when clicking/tapping and dragging hue/saturation box and value slider.</dd>
 
-  <dt>New brushes</dt>
-  <dd>New brushes for the Paint and Lines tools: "Fluff (gradient)", "Graphite", "Impasto", "Paint splats", "Smoke", "Spines", "Water (still)", and "Watercolor splotches".</dd>
+  <dt>Text clipboard paste support</dt>
+  <dd>The "Text" and "Label" tools support pasting the copy/paste clipboard.</dd>
 
-  <dt>New brush option</dt>
-  <dd>Brushes may be given a "chaotic" setting, causing them to rotate continuously while drawing with them.</dd>
+  <dt>"Hearts" Magic tool</dt>
+  <dd>Draw a trail of floating hearts.</dt>
 
-  <dt>New templates</dt>
-  <dd>"Clouds from an airplane" and "Lough Leane".</dd>
+  <dt>"Sparkles" Magic tool</dt>
+  <dd>Draw a trail of falling sparkles.</dt>
 
-  <dt>New Magic tool: Comic dots</dt>
-  <dd>Draws a repeating dot pattern, simulating the "Ben Day process" used in early comic books.</dd>
-
-  <dt>New Magic tool: Rotate</dt>
-  <dd>Rotates the drawing.</dd>
-
-  <dt>New Magic tool: Fractal</dt>
-  <dd>A set of tools that recursively repeat what you draw, scaling and/or rotating it as they repeat.</dd>
-
-  <dt>New Magic tool: ASCII Typewriter</dt>
-  <dd>Transform your picture into "ASCII art", typewriter-style.</dd>
-
-  <dt>New Magic tool: ASCII Computer</dt>
-  <dd>Transform your picture into "ASCII art", computer-style.</dd>
-
-  <dt>New Magic tool: ASCII Color Computer</dt>
-  <dd>Transform your picture into colored computer "ASCII art".</dd>
-
-  <dt>New Magic tool: Crescent</dt>
-  <dd>Draw one of various crescent shapes at a chosen angle.</dd>
-
-  <dt>New Magic tool: Spiral</dt>
-  <dd>Draw spirals.</dd>
-
-  <dt>New Magic tool: Spiral Square</dt>
-  <dd>Draw square spirals.</dd>
-
-  <dt>New Magic tool: Concentric Circle</dt>
-  <dd>Draw concentric circles.</dd>
-
-  <dt>New Magic tool: Concentric Square</dt>
-  <dd>Draw concentric squares.</dd>
-
-  <dt>New Magic tool: Tessellation Pointy</dt>
-  <dd>Draw repeating tessellation patterns with pointy-topped hexagons.</dd>
-
-  <dt>New Magic tool: Tessellation Flat</dt>
-  <dd>Draw repeating tessellation patterns with flat-topped hexagons.</dd>
-
-  <dt>Magic API Updates</dt>
-  <dd>Sound pause and resume functions added.</dd>
+  <dt>"Stars" Magic tool</dt>
+  <dd>Draw a trail of stars.</dt>
 </dl>
 
     <p>
@@ -871,6 +832,9 @@
     Como alternativa, prema <strong><code>[Tab]</code></strong> e o texto será debuxado na imaxe, mais o cursor moverase á dereita do texto, no canto  de baixar unha liña e á esquerda. (Isto pode ser útil para crear unha liña de texto con cores, tipos de letra, estilos e tamaños mesturados.)  </p>
 
   <p>
+    Text from the clipboard (copy/paste buffer) can be inserted with the "Text" and "Label" tools by pressing the <strong><code>[Control]</code> + <code>[V]</code></strong> key combination on a physical keyboard, or clicking the "<strong>Paste</strong>" button in Tux Paint's on-screen keyboard.  If the text would exceed the right edge of the canvas, it will wrap to a new line of text (going back to the previous space or dash ('-') if possible).  If the text hits the bottom of the canvas, the pasting will abort, truncating the text.  </p>
+
+  <p>
     Ao premer noutro lugar da imaxe mentres a entrada de texto aínda está activa, a liña de texto actual moverase a esa posición (onde pode continuar editándoa).  </p>
 
   <div class="screenshot-center">
@@ -900,6 +864,9 @@
 
       <p class="note">
         <span title="Configuration option">&#9881;</span>        A ferramenta <strong>Etiqueta</strong> pódese desactivar (p. ex.: seleccionando «Desactivar a ferramenta "Etiqueta"» en <em>Tux Paint Config.</em> ou executando <em>Tux Paint</em> coa opción «<code>nolabel</code>»).      </p>
+
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        The ability to paste text from the clipboard was added in Tux Paint 0.9.35      </p>
     </dd>
 
     <dt>
@@ -937,7 +904,23 @@
 
     <dd>
       <p>
-        An optional on-screen keyboard is available for the Text and Label tools, which can provide a variety of layouts and character composition (e.g., composing "a" and "e" into "æ").      </p>
+        An optional on-screen keyboard is available for the Text and Label tools, which can provide a variety of layouts and character composition (e.g., composing "a" and "e" into "æ").  Run Tux Paint with the "<code>--onscreen-keyboard</code>" option, or enable that setting in Tux Paint's configuration file, to enable it.  Multiple layouts are offered (currently "QWERTY" and "ABC"), which the user can switch between.  Additional configuration options allow specifying a default layout, as well as preventing the layout from being changed.      </p>
+
+      <p>
+        The on-screen keyboard appears at the bottom or top of the Tux Paint window, obscuring part of the canvas, depending on where the text insertion cursor is placed.  Along with alphabetic, numeric, and some punctuation keys, the keyboard provides:        <ul>
+          <li>A "Backspace" key (&#8656;) to remove the previous character</li>
+          <li>A "Carriage Return" ("Return"/"Enter") key (&#9166;) to end the current input and begin a new one on the following line (below and to the left)</li>
+          <li>A "Tab" key (&#8660;) to end the current input and begin a new one at the current cursor position</li>
+          <li>A "Shift" key (&#8657;) to shift alphabetic keys from lowercase to uppercase, access more punctuation, etc.</li>
+          <li>A "Caps Lock" key (&#10514;) to toggle permanent shifting of alphabetic keys from lowercase to uppercase (click it again to disable caps lock)</li>
+          <li>A "Compose" key ("Cmp"), to initiate character composition (e.g., click "Cmp", "a", "e" to produce an "æ" character)</li>
+          <li>An "Alternate Graphics" key ("AltGr") to access additional characters (e.g., "¿", "ß", etc.)</li>
+          <li>An "Alternate" key ("Alt")</li>
+          <li>A "Paste" key to paste the current clipboard's text into the Text or Label tool</li>
+          <li>Left and right arrows (&larr; &amp; &rarr;) to access different on-screen keyboard layouts</li>
+        </ul>
+      </p>
+
       <p class="note">
         <span title="Configuration option">&#9881;</span>        See the "<a href="OPTIONS.html"><em>Options</em></a>" and "<a href="EXTENDING.html"><em>Extending Tux Paint</em></a>" documentation for more information.      </p>
     </dd>
@@ -1719,11 +1702,17 @@
 
     <dl>
   <dt>
-    <cite>Windows Windows 7, Windows 8, Windows 10, Windows 11</cite>
+    <cite>Windows Windows 8, Windows 10, Windows 11</cite>
   </dt>
 
   <dd>
-    In the user's "AppData" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>C:\Users\nome de usuario\AppData\Roaming\TuxPaint\saved\</code>"</nobr>  </dd>
+    In the user's "AppData" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>C:\Users\<i>nome de usuario</i>\AppData\Roaming\TuxPaint\saved\</code>"</nobr>    <br/>
+    <br/>
+    (Note: The "<nobr><code style='background: #EEE;'>AppData</code></nobr>" folder is hidden (not visible) by default. You can enter the path manually in the location bar of your file browser (e.g., <cite>File Explorer</cite>).)    <br/>
+    <br/>
+    You can use the <nobr><code style='background: #EEE;'>%APPDATA%</code></nobr> variable as a shorthand, i.e. <nobr>"<code style='background: #EEE;'>%APPDATA%\Tuxpaint\Saved</code>"</nobr>.    <br/>
+    <br/>
+    You can use the <b><code>[&#8862; (Windows)]</code></b> + <b><code>[R]</code></b> key combination to bring up the <cite>Run</cite> command window, and then type the path and hit <b><code>[Enter / Return]</code></b>.  </dd>
 
   <dt>
     <cite>macOS</cite>
@@ -1737,7 +1726,11 @@
   </dt>
 
   <dd>
-    In the user's "home directory" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/home/nome de usuario/.tuxpaint/saved/</code>"</nobr>  </dd>
+    In the user's "home directory" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/home/<i>nome de usuario</i>/.tuxpaint/saved/</code>"</nobr>    <br/>
+    <br/>
+    (Note: The ".tuxpaint" folder is hidden (not visible) by default. You can enter the path manually in the location bar of your file browser (e.g., <cite>GNOME Files</cite> or <cite>Dolphin</cite>).)    <br/>
+    <br/>
+    You can use the <nobr><code style='background: #EEE;'>$HOME</code></nobr> variable as a shorthand, i.e. <nobr>"<code style='background: #EEE;'>$HOME/.tuxpaint/saved</code>"</nobr>.  </dd>
 
   <dt>
     <cite>Haiku</cite>

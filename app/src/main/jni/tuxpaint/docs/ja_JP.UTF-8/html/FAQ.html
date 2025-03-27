@@ -87,16 +87,16 @@
             width="205"
             height="210"
             alt="Tux Paint"><br>
-        バージョン 0.9.34<br/>
+        バージョン 0.9.35<br/>
         Frequently Asked Questions      </h1>
 
       <p>
-        Copyright &copy; 2002-2024 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
+        Copyright &copy; 2002-2025 by various contributors; <a href="../../AUTHORS.txt">AUTHORS.txt</a> 参照.<br>
         <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
       </p>
 
       <p>
-        2024年7月17日      </p>
+        2025年1月23日      </p>
     </center>
 
     <table border="2"
@@ -141,7 +141,7 @@
           This means that Tux Paint either couldn't find any stamp images, or was asked not to load them.        </p>
 
         <p>
-          If you installed Tux Paint, but did not install the separate, optional "Stamps" collection, quit Tux Paint and install it now. It should be available from the same place you got the main Tux Paint program. <i>(Note: As of version 0.9.14, Tux Paint comes with a small collection of example stamps.)</i>        </p>
+          If you installed Tux Paint, but did not install the separate, optional "Stamps" collection, quit Tux Paint and install it now. It should be available from the same place you got the main Tux Paint program. <i>(Note: Tux Paint ships with a very small collection of example stamps.)</i>        </p>
 
         <p>
           If you don't want to install the default collection of stamps, you can just create your own. See the "Extending Tux Paint" documentation for more on creating PNG and SVG image files, TXT text description files, Ogg Vorbis, MP3 or WAV sound files, and DAT text data files that make up stamps.        </p>
@@ -286,12 +286,6 @@
 
         <p>
           If that program is not available (for example, you're using CUPS, the Common Unix Printing System, and do not have "<code>cups-lpr</code>" installed), you will need to specify an appropriate command using the "<code>printcommand</code>" option in Tux Paint's configuration file. (See the "Options Documentation".)        </p>
-
-        <p>
-          <i>Note:</i> Versions of Tux Paint prior to 0.9.15 used a different default command for printing, "<code>pngtopnm | pnmtops | lpr</code>", as Tux Paint output PNG format, rather than PostScript.        </p>
-
-        <p>
-          If you had changed your "printcommand" option prior to Tux Paint 0.9.15, you will need to go back and alter it to accept PostScript.        </p>
       </dd>
 
       <dt>
@@ -359,11 +353,17 @@
 
         <dl>
   <dt>
-    <cite>Windows Windows 7, Windows 8, Windows 10, Windows 11</cite>
+    <cite>Windows Windows 8, Windows 10, Windows 11</cite>
   </dt>
 
   <dd>
-    In the user's "AppData" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>C:\Users\ユーザー名\AppData\Roaming\TuxPaint\saved\</code>"</nobr>  </dd>
+    In the user's "AppData" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>C:\Users\<i>ユーザー名</i>\AppData\Roaming\TuxPaint\saved\</code>"</nobr>    <br/>
+    <br/>
+    (Note: The "<nobr><code style='background: #EEE;'>AppData</code></nobr>" folder is hidden (not visible) by default. You can enter the path manually in the location bar of your file browser (e.g., <cite>File Explorer</cite>).)    <br/>
+    <br/>
+    You can use the <nobr><code style='background: #EEE;'>%APPDATA%</code></nobr> variable as a shorthand, i.e. <nobr>"<code style='background: #EEE;'>%APPDATA%\Tuxpaint\Saved</code>"</nobr>.    <br/>
+    <br/>
+    You can use the <b><code>[&#8862; (Windows)]</code></b> + <b><code>[R]</code></b> key combination to bring up the <cite>Run</cite> command window, and then type the path and hit <b><code>[Enter / Return]</code></b>.  </dd>
 
   <dt>
     <cite>macOS</cite>
@@ -377,7 +377,11 @@
   </dt>
 
   <dd>
-    In the user's "home directory" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/home/ユーザー名/.tuxpaint/saved/</code>"</nobr>  </dd>
+    In the user's "home directory" folder:<br> e.g., <nobr>"<code style='background: #EEE;'>/home/<i>ユーザー名</i>/.tuxpaint/saved/</code>"</nobr>    <br/>
+    <br/>
+    (Note: The ".tuxpaint" folder is hidden (not visible) by default. You can enter the path manually in the location bar of your file browser (e.g., <cite>GNOME Files</cite> or <cite>Dolphin</cite>).)    <br/>
+    <br/>
+    You can use the <nobr><code style='background: #EEE;'>$HOME</code></nobr> variable as a shorthand, i.e. <nobr>"<code style='background: #EEE;'>$HOME/.tuxpaint/saved</code>"</nobr>.  </dd>
 
   <dt>
     <cite>Haiku</cite>
@@ -537,7 +541,7 @@
                   Or use Tux Paint Config. and make sure "Enable Sound Effects" (under "Video &amp; Sound") is not checked.              </li>
 
               <li>
-                  Alternatively, recompile Tux Paint with sound support disabled. (See above, and the 'Install' documentation.              </li>
+                  Alternatively, recompile Tux Paint with sound support disabled. (See above, and the 'Install' documentation.)              </li>
             </ul>
           </li>
         </ul>
@@ -666,7 +670,7 @@
           If Tux Paint aborts with the message: "You're already running a copy of Tux Paint!", this means it has been launched in the last 30 seconds. (On Unix/Linux, this message would appear in a terminal console if you ran Tux Paint from a command-line. On Windows, this message would appear in a file named "<code>stdout.txt</code>" in the same folder where <code>TuxPaint.exe</code> resides (e.g., in <nobr>"<code style='background: #EEE;'>C:\Program Files\TuxPaint\</code>"</nobr>).        </p>
 
         <p>
-          A lockfile (e.g., <nobr>"<code style='background: #EEE;'>/home/ユーザー名/.tuxpaint/lockfile.dat</code>"</nobr> on Linux and Unix, <nobr>"<code style='background: #EEE;'>userdata\lockfile.dat</code>"</nobr> on Windows) is used to make sure Tux Paint isn't run too many times at once (e.g., due to a child impatiently clicking its icon more than once).        </p>
+          A lockfile (e.g., <nobr>"<code style='background: #EEE;'>/home/<i>ユーザー名</i>/.tuxpaint/lockfile.dat</code>"</nobr> on Linux and Unix, <nobr>"<code style='background: #EEE;'>userdata\lockfile.dat</code>"</nobr> on Windows) is used to make sure Tux Paint isn't run too many times at once (e.g., due to a child impatiently clicking its icon more than once).        </p>
 
         <p>
           Even if the lockfile exists, it contains the 'time' Tux Paint was last run. If it's been more than 30 seconds, Tux Paint should run fine, and simply update the lockfile with the current time.        </p>
@@ -776,7 +780,7 @@
 
             <blockquote>
               <p>
-                <nobr><code style='background: #EEE;'>C:\Users\ユーザー名\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>              </p>
+                <nobr><code style='background: #EEE;'>C:\Users\<i>ユーザー名</i>\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>              </p>
             </blockquote>
 
             <p>
@@ -820,7 +824,7 @@
 
             <blockquote>
               <p>
-                <nobr><code style='background: #EEE;'>/home/ユーザー名/.tuxpaintrc</code></nobr>              </p>
+                <nobr><code style='background: #EEE;'>/home/<i>ユーザー名</i>/.tuxpaintrc</code></nobr>              </p>
             </blockquote>
 
             <p>
@@ -855,7 +859,7 @@
         </blockquote>
 
         <p>
-          ...then you can reenable sound by either adding this option to your own <nobr>"<code style='background: #EEE;'>/home/ユーザー名/.tuxpaintrc</code>"</nobr> file:        </p>
+          ...then you can reenable sound by either adding this option to your own <nobr>"<code style='background: #EEE;'>/home/<i>ユーザー名</i>/.tuxpaintrc</code>"</nobr> file:        </p>
 
         <blockquote>
           <p>
@@ -881,6 +885,13 @@
           </p>
         </blockquote>
       </dd>
+
+      <dt>
+        I need to deploy Tux Paint on many Windows systems at once      </dt>
+
+      <dd>
+        The installers for both Tux Paint (plus Tux Paint Config.) (<code>tuxpaint-X.Y.Z-windows-ARCH-installer.exe</code>) and Tux Paint Stamps (<code>tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe</code>) accept the command-line options "<code>/SILENT</code>" ("silent") or "<code>/VERYSILENT</code>" ("very silent") which can be used to install and uninstall their component without use of an interactive set-up window.  This can be useful for automating installation on a collection of PCs, for example using Microsoft <cite>Intune</cite> cloud-based endpoint management solution (see <a href="https://learn.microsoft.com/mem/intune/">https://learn.microsoft.com/mem/intune/</a>).      </dd>
+
     </dl>
 
     <hr size="2"

@@ -69,17 +69,19 @@ inline Uint8 fold_what_corner(int x, int y, SDL_Surface * canvas);
 void fold_switchout(magic_api * api, int which, int mode, SDL_Surface * canvas);
 Uint8 fold_accepted_sizes(magic_api * api, int which, int mode);
 Uint8 fold_default_size(magic_api * api, int which, int mode);
-void fold_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size,
-                   SDL_Rect * update_rect);
+void fold_set_size(magic_api * api, int which, int mode, SDL_Surface * canvas,
+                   SDL_Surface * last, Uint8 size, SDL_Rect * update_rect);
 
 Uint32 fold_api_version(void)
 {
   return (TP_MAGIC_API_VERSION);
 }
 
-void fold_set_color(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, SDL_Surface *canvas ATTRIBUTE_UNUSED,
-                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g, Uint8 b,
-                    SDL_Rect *update_rect ATTRIBUTE_UNUSED)
+void fold_set_color(magic_api *api ATTRIBUTE_UNUSED,
+                    int which ATTRIBUTE_UNUSED,
+                    SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                    SDL_Surface *last ATTRIBUTE_UNUSED, Uint8 r, Uint8 g,
+                    Uint8 b, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
   //get the colors from API and store it in structure
   fold_r = r;
@@ -582,8 +584,10 @@ Uint8 fold_default_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNU
   return 0;
 }
 
-void fold_set_size(magic_api *api ATTRIBUTE_UNUSED, int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
-                   SDL_Surface *canvas ATTRIBUTE_UNUSED, SDL_Surface *last ATTRIBUTE_UNUSED,
+void fold_set_size(magic_api *api ATTRIBUTE_UNUSED,
+                   int which ATTRIBUTE_UNUSED, int mode ATTRIBUTE_UNUSED,
+                   SDL_Surface *canvas ATTRIBUTE_UNUSED,
+                   SDL_Surface *last ATTRIBUTE_UNUSED,
                    Uint8 size ATTRIBUTE_UNUSED, SDL_Rect *update_rect ATTRIBUTE_UNUSED)
 {
 }

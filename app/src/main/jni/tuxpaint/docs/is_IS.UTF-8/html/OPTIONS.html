@@ -91,18 +91,18 @@
                 width="205"
                 height="210"
                 alt="Tux Paint"><br>
-            version 0.9.34          </h1>
+            version 0.9.35          </h1>
 
           <h2>
             Options Documentation          </h2>
 
           <p>
-            Copyright &copy; 2002-2024 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            Copyright &copy; 2002-2025 by various contributors; see <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
             <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
           </p>
 
           <p>
-            apríl 29, 2024          </p>
+            janúar 12, 2025          </p>
         </center>
       </header>
 
@@ -169,7 +169,7 @@
           </header>
 
           <p>
-            <nobr><code style='background: #EEE;'>/home/username/.tuxpaintrc</code></nobr>          </p>
+            <nobr><code style='background: #EEE;'>/home/<i>username</i>/.tuxpaintrc</code></nobr>          </p>
         </div>
 
         <section class="indent"><!-- H3: System-Wide Configuration File -->
@@ -216,7 +216,7 @@
         </header>
 
         <p>
-          <nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
+          <nobr><code style='background: #EEE;'>C:\Users\<i>username</i>\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
 
         <p>
           You can use NotePad or WordPad to create this file. Be sure to save it as Plain Text, and make sure the filename doesn't have ".txt" at the end...        </p>
@@ -519,10 +519,7 @@
 
     <dd>
       <p>
-        Prior to Tux Paint 0.9.15, the middle and right buttons on a mouse could also be used for clicking. In version 0.9.15, it was changed so that <i>only</i> the left mouse button worked, so as to not train children to use the wrong button.      </p>
-
-      <p>
-        However, for children who have trouble with the mouse, this distinction between the two or three buttons on a mouse can be disabled (returning Tux Paint to its old behavior) by using this option.      </p>
+        For children who have trouble with the mouse, this distinction between the two or three buttons on a mouse may be disabled by using this option.      </p>
       <p class="note">
         <span title="Configuration option">&#9881;</span>        <strong>Note:</strong> If used in a system-wide configuration file, may be overridden by the user's configuration file using "<code>nobuttondistinction=no</code>" or "<code>buttondistinction=yes</code>". In both cases, may be overridden by the command-line option "<code>--buttondistinction</code>".      </p>
     </dd>
@@ -1637,12 +1634,6 @@
       <blockquote>
         <code>lpr</code>
       </blockquote>
-
-      <p class="note">
-        <span title="Version variation">&#128220;</span>        <b>Note:</b> Versions of Tux Paint prior to 0.9.15 sent PNG format data to the print command (which defaulted to "<code>pngtopnm | pnmtops | lpr</code>").      </p>
-
-      <p>
-        If you set an alternative <code><b>printcommand</b></code> in the configuration file prior to version 0.9.15, you will need to change it.      </p>
     </dd>
 
     <dt>
@@ -1785,11 +1776,11 @@
         <dt>Linux / Unix</dt>
         <dd>
           Under a hidden directory in your home directory:<br/>
-          <nobr><code style='background: #EEE;'>/home/username/.tuxpaint/saved/</code></nobr>        </dd>
+          <nobr><code style='background: #EEE;'>/home/<i>username</i>/.tuxpaint/saved/</code></nobr>        </dd>
 
         <dt>Windows</dt>
         <dd>
-          <nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
+          <nobr><code style='background: #EEE;'>C:\Users\<i>username</i>\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
 
         <dt>macOS</dt>
         <dd>
@@ -1823,7 +1814,7 @@
 
       <ul>
         <li>Linux &amp; Unix — If available, wherever your desktop environment is configured for pictures to be stored, based on your XDG (X Desktop Group) configuration. (Try running the command-line "<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" to find out.)<br>
-          Typically (in an English locale), this will be a "<code>Pictures</code>" subdirectory in your home directory (i.e., <nobr>"<code style='background: #EEE;'>/home/username/Pictures</code>"</nobr>).<br>
+          Typically (in an English locale), this will be a "<code>Pictures</code>" subdirectory in your home directory (i.e., <nobr>"<code style='background: #EEE;'>/home/<i>username</i>/Pictures</code>"</nobr>).<br>
           Tux Paint will fall back to using that typical directory, if no XDG configuration can be read, or nothing is set for "<code>XDG_PICTURES_DIR</code>".        </li>
         <li>Windows - <nobr>"<code style='background: #EEE;'>My Pictures</code>"</nobr> directory for each user (normaly <nobr>"<code style='background: #EEE;'>C:\Users\username\My Pictures</code>"</nobr>)<br>You can directly open the folder as follows:          <ul>
             <li>Press "[Windows]+[R]" key to open "Run ..." dialogue.</li>
@@ -1836,11 +1827,11 @@
       </ul>
 
       <p class="note">
-        <span title="Information">&#128161;</span>        <strong>Note:</strong> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures/TuxPaint</code>"</nobr>) When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).      </p>
+        <span title="Information">&#128161;</span>        <strong>Note:</strong> When the defaults are used, a new "<code>TuxPaint</code>" subdirectory will be created and used. (e.g., <nobr>"<code style='background: #EEE;'>/home/<i>username</i>/Pictures/TuxPaint</code>"</nobr>) When the "<code>--exportdir</code>" option is used, the exact path specified will be used (no "<code>TuxPaint</code>" subdirectory is created).      </p>
       <p>
-        The directory itself (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures/TuxPaint</code>"</nobr>) will be created, if it doesn't exist.      </p>
+        The directory itself (e.g., <nobr>"<code style='background: #EEE;'>/home/<i>username</i>/Pictures/TuxPaint</code>"</nobr>) will be created, if it doesn't exist.      </p>
       <p>
-        If the <em>parent</em> directory (e.g., <nobr>"<code style='background: #EEE;'>/home/username/Pictures</code>"</nobr>) also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).      </p>
+        If the <em>parent</em> directory (e.g., <nobr>"<code style='background: #EEE;'>/home/<i>username</i>/Pictures</code>"</nobr>) also does not exist, Tux Paint will attempt to create it as well (but not any directories higher than that).      </p>
 
       <p>
         Example: <code>exportdir=/home/penguin/TuxPaintExports</code>      </p>
@@ -1944,10 +1935,10 @@
 
       <dl>
         <dt>Linux / Unix</dt>
-        <dd><nobr><code style='background: #EEE;'>/home/username/.tuxpaint/</code></nobr></dd>
+        <dd><nobr><code style='background: #EEE;'>/home/<i>username</i>/.tuxpaint/</code></nobr></dd>
 
         <dt>Windows</dt>
-        <dd><nobr><code style='background: #EEE;'>C:\Users\username\AppData\Roaming\TuxPaint\</code></nobr></dd>
+        <dd><nobr><code style='background: #EEE;'>C:\Users\<i>username</i>\AppData\Roaming\TuxPaint\</code></nobr></dd>
 
         <dt>macoS</dt>
         <dd><nobr><code style='background: #EEE;'>/Users/<i>username</i>/Library/Application Support/TuxPaint/</code></nobr></dd>
@@ -2373,7 +2364,7 @@
       </header>
 
       <p>
-        If any of the above options are set in a system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), you may override them in your own personal configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaintrc</code>"</nobr>)      </p>
+        If any of the above options are set in a system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), you may override them in your own personal configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/<i>username</i>/.tuxpaintrc</code>"</nobr>)      </p>
 
       <p>
         For true/false options, like "<code>noprint</code>" and "<code>grab</code>", you can simply say they equal 'no' in your personal configuration file:      </p>
@@ -2550,7 +2541,7 @@
             This prevents the system-wide configuration file (e.g. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> on Linux), from being read.          </p>
 
           <p>
-            Only your own configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/username/.tuxpaintrc</code>"</nobr> on Linux) &mdash; if it exists &mdash; will be used.          </p>
+            Only your own configuration file (e.g. <nobr>"<code style='background: #EEE;'>/home/<i>username</i>/.tuxpaintrc</code>"</nobr> on Linux) &mdash; if it exists &mdash; will be used.          </p>
         </dd>
       </dl>
 
