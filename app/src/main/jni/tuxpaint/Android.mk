@@ -86,7 +86,7 @@ LOCAL_LDLIBS := \
 	-lz -llog -lGLESv1_CM -lGLESv2 -landroid \
 	$(NULL)
 
-LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango tuxpaint_intl tuxpaint_fribidi tuxpaint_png tuxpaint_rsvg tuxpaint_cairo tp_android_assets_fopen libimagequant SDL2_gfx tuxpaint_pango tuxpaint_fontconfig tuxpaint_glib
+LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango tuxpaint_intl tuxpaint_fribidi tuxpaint_png tuxpaint_rsvg tuxpaint_cairo tp_android_assets_fopen libimagequant SDL2_gfx tuxpaint_pango tuxpaint_fontconfig tuxpaint_glib tuxpaint_xml2
 
 include $(BUILD_SHARED_LIBRARY)
 

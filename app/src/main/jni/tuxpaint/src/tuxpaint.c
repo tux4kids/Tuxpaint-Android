@@ -3,7 +3,7 @@
 
   Tux Paint - A simple drawing program for children.
 
-  Copyright (c) 2002-2024
+  Copyright (c) 2002-2025
   by various contributors; see AUTHORS.txt
   https://tuxpaint.org/
 
@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - December 25, 2024
+  June 14, 2002 - March 27, 2025
 */
 
 #include "platform.h"
@@ -276,16 +276,15 @@ char *strcasestr(const char *haystack, const char *needle)
 #include <fs_info.h>
 #endif
 
-#if defined __BEOS__ || defined __HAIKU__ || defined __APPLE__ || defined __ANDROID__
 #include <wchar.h>
+#include <wctype.h>
+
+#if defined __BEOS__ || defined __HAIKU__ || defined __APPLE__ || defined __ANDROID__
 #include <stdbool.h>
 #ifndef __HAIKU__
 #define FALSE false
 #define TRUE true
 #endif
-#else
-#include <wchar.h>
-#include <wctype.h>
 #endif
 
 #include <libintl.h>
@@ -14357,16 +14356,20 @@ static SDL_Surface *load_starter_helper(char *path_and_basename,
   char fname[256];
   SDL_Surface *surf;
   unsigned int i;
+#ifndef __ANDROID__
   struct stat stat_buf;
+#endif
 
   ext = strdup(extension);
   safe_snprintf(fname, sizeof(fname), "%s.%s", path_and_basename, ext);
 
+#ifndef __ANDROID__
   if (stat(fname, &stat_buf) != 0)
   {
     /* File by that name doesn't exist; give up now */
     return NULL;
   }
+#endif
 
   surf = (*load_func) (fname);
 
@@ -21734,6 +21737,7 @@ static SDL_Surface *myIMG_Load_RWops(const char *file)
    otherwise call SDL_Image lib's IMG_Load() (for PNGs, JPEGs, BMPs, etc.) */
 static SDL_Surface *myIMG_Load(const char *file)
 {
+#ifndef __ANDROID__
   struct stat stat_buf;
 
   if (stat(file, &stat_buf) != 0)
@@ -21741,6 +21745,7 @@ static SDL_Surface *myIMG_Load(const char *file)
     /* File by that name doesn't exist; give up now */
     return NULL;
   }
+#endif
 
   if (strlen(file) > 4 && strcasecmp(file + strlen(file) - 4, ".kpx") == 0)
   {
