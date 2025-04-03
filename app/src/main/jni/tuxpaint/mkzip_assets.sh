@@ -27,12 +27,13 @@ fi
 
 if [ $RUN = true ]
 then
-    stamps_version="2024.10.25"
+    stamps_version="2025.03.31"
     stampsversion=`echo $stamps_version|sed "s/\./-/g"`
 
     # The above sed line doesn't play fine with betas
     # https://sourceforge.net/projects/tuxpaint/files/tuxpaint-stamps/2024-10-XX-beta/tuxpaint-stamps-2024.10.16.tar.gz/download
-#    stampsversion="2024-10-XX-beta"
+    #https://sourceforge.net/projects/tuxpaint/files/tuxpaint-stamps/2025-04-XX-beta/tuxpaint-stamps-2025.03.31.tar.gz/download
+    stampsversion="2025-04-XX-beta"
 
     if [ -d tmpzip ]
     then
